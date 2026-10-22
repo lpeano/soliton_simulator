@@ -1,0 +1,428 @@
+[TIMBRO] _universalita_massa.py  sha1-BYTE 94ebb415  committato e pulito
+====================================================================================================
+LA PROVA DEL PRINCIPIO DI EQUIVALENZA: L'UNIVERSALITA' DELLA MASSA AL VARIARE DI cs (attraverso s)
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7; i blob nel repo: soliton_simulator.py {'sha1-BYTE': 'b8c21049', 'git': 'e96ca41a'}; csv/_massa_vicino_al_cono.py {'sha1-BYTE': '5842f83a', 'git': 'e9581a29'}; csv/_universalita_massa.py {'sha1-BYTE': '94ebb415', 'git': 'c26bff01'}
+  il tetto Dt <= pi; fit <= 0.05; s (0.5, 0.6, 0.7, 0.8, 0.9, 0.95, 0.99, 1.0); eps (0.0, 0.25, 0.5, 0.75, 1.0); lati (32, 64); la soglia di LETTURA di V 0.001
+----------------------------------------------------------------------------------------------------
+### I CRITERI SUI DATI SINTETICI (lo stesso stimatore di V)
+  DEVE FALLIRE: Delta_1 = (1 - s), Delta_2 = 0.339 -> V oltre 0.001, e per V (un numer PASSA   V = 2.564102564102564
+  PUO' FALLIRE: Delta_1 = 2 (1 - s), Delta_2 = 3 (1 - s) -> V < 1e-12                  PASSA   V = 0.0 (s < 1: a s = 1 il gap e' nullo)
+----------------------------------------------------------------------------------------------------
+### LA MISURA: i salti validi e INVALIDI, e l'orologio di luce
+  lato 32 eps 0    s 0.5  : 1 validi distinti Dt ['0.68402']; 0 INVALIDI; orologio di luce 0.073289 per tick
+  lato 32 eps 0    s 0.6  : 1 validi distinti Dt ['0.70798']; 0 INVALIDI; orologio di luce 0.099345 per tick
+  lato 32 eps 0    s 0.7  : 1 validi distinti Dt ['0.65448']; 0 INVALIDI; orologio di luce 0.137302 per tick
+  lato 32 eps 0    s 0.8  : 1 validi distinti Dt ['0.51093']; 0 INVALIDI; orologio di luce 0.199404 per tick
+  lato 32 eps 0    s 0.9  : 1 validi distinti Dt ['0.28248']; 0 INVALIDI; orologio di luce 0.315559 per tick
+  lato 32 eps 0    s 0.95 : 1 validi distinti Dt ['0.14475']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 32 eps 0    s 0.99 : 1 validi distinti Dt ['0.02729']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 32 eps 0    s 1    : 2 validi distinti Dt ['0.00000', '0.00000']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 32 eps 0.25 s 0.5  : 1 validi distinti Dt ['0.68053']; 2 INVALIDI (Dt > pi 261, Dt > pi 266); orologio di luce 0.073289 per tick
+  lato 32 eps 0.25 s 0.6  : 1 validi distinti Dt ['0.70579']; 2 INVALIDI (Dt > pi 277, Dt > pi 333); orologio di luce 0.099345 per tick
+  lato 32 eps 0.25 s 0.7  : 1 validi distinti Dt ['0.65620']; 2 INVALIDI (Dt > pi 465, Dt > pi 477); orologio di luce 0.137302 per tick
+  lato 32 eps 0.25 s 0.8  : 1 validi distinti Dt ['0.52374']; 2 INVALIDI (Dt > pi 9.63, Dt > pi 9.62); orologio di luce 0.199404 per tick
+  lato 32 eps 0.25 s 0.9  : 2 validi distinti Dt ['0.33153', '0.58129']; 0 INVALIDI; orologio di luce 0.315559 per tick
+  lato 32 eps 0.25 s 0.95 : 2 validi distinti Dt ['0.24347', '0.34166']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 32 eps 0.25 s 0.99 : 2 validi distinti Dt ['0.20450', '0.26952']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 32 eps 0.25 s 1    : 2 validi distinti Dt ['0.20116', '0.26455']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 32 eps 0.5  s 0.5  : 1 validi distinti Dt ['0.67011']; 2 INVALIDI (Dt > pi 262, Dt > pi 322); orologio di luce 0.073289 per tick
+  lato 32 eps 0.5  s 0.6  : 1 validi distinti Dt ['0.69907']; 2 INVALIDI (Dt > pi 320, Dt > pi 270); orologio di luce 0.099345 per tick
+  lato 32 eps 0.5  s 0.7  : 1 validi distinti Dt ['0.66039']; 2 INVALIDI (Dt > pi 422, Dt > pi 495); orologio di luce 0.137302 per tick
+  lato 32 eps 0.5  s 0.8  : 1 validi distinti Dt ['0.55562']; 2 INVALIDI (Dt > pi 533, Dt > pi 655); orologio di luce 0.199404 per tick
+  lato 32 eps 0.5  s 0.9  : 1 validi distinti Dt ['0.42409']; 2 INVALIDI (Dt > pi 4.67, Dt > pi 4.67); orologio di luce 0.315559 per tick
+  lato 32 eps 0.5  s 0.95 : 3 validi distinti Dt ['0.01509', '0.37247', '1.00771']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 32 eps 0.5  s 0.99 : 3 validi distinti Dt ['0.01764', '0.34414', '0.70808']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 32 eps 0.5  s 1    : 3 validi distinti Dt ['0.01829', '0.33864', '0.67324']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 32 eps 0.75 s 0.5  : 1 validi distinti Dt ['0.65293']; 2 INVALIDI (Dt > pi 280, Dt > pi 257); orologio di luce 0.073289 per tick
+  lato 32 eps 0.75 s 0.6  : 1 validi distinti Dt ['0.68732']; 2 INVALIDI (Dt > pi 267, Dt > pi 267); orologio di luce 0.099345 per tick
+  lato 32 eps 0.75 s 0.7  : 2 validi distinti Dt ['0.02721', '0.66446']; 2 INVALIDI (Dt > pi 284, Dt > pi 326); orologio di luce 0.137302 per tick
+  lato 32 eps 0.75 s 0.8  : 2 validi distinti Dt ['0.04655', '0.59350']; 2 INVALIDI (Dt > pi 349, Dt > pi 337); orologio di luce 0.199404 per tick
+  lato 32 eps 0.75 s 0.9  : 2 validi distinti Dt ['0.06675', '0.50962']; 2 INVALIDI (Dt > pi 527, Dt > pi 373); orologio di luce 0.315559 per tick
+  lato 32 eps 0.75 s 0.95 : 2 validi distinti Dt ['0.07590', '0.47451']; 4 INVALIDI (Dt > pi 87.8, Dt > pi 5.06, Dt > pi 87.8, Dt > pi 5.06); orologio di luce 0.412471 per tick
+  lato 32 eps 0.75 s 0.99 : 3 validi distinti Dt ['0.08262', '0.45087', '1.53193']; 2 INVALIDI (Dt > pi 99.9, Dt > pi 104); orologio di luce 0.517490 per tick
+  lato 32 eps 0.75 s 1    : 3 validi distinti Dt ['0.08422', '0.44549', '1.32983']; 2 INVALIDI (Dt > pi 79.2, Dt > pi 74.3); orologio di luce 0.548028 per tick
+  lato 32 eps 1    s 0.5  : 1 validi distinti Dt ['0.62926']; 2 INVALIDI (Dt > pi 193, Dt > pi 227); orologio di luce 0.073289 per tick
+  lato 32 eps 1    s 0.6  : 1 validi distinti Dt ['0.66981']; 2 INVALIDI (Dt > pi 252, Dt > pi 250); orologio di luce 0.099345 per tick
+  lato 32 eps 1    s 0.7  : 2 validi distinti Dt ['0.07768', '0.66514']; 2 INVALIDI (Dt > pi 258, Dt > pi 258); orologio di luce 0.137302 per tick
+  lato 32 eps 1    s 0.8  : 2 validi distinti Dt ['0.12611', '0.62733']; 4 INVALIDI (Dt > pi 66.8, Dt > pi 171, Dt > pi 73.2, Dt > pi 141); orologio di luce 0.199404 per tick
+  lato 32 eps 1    s 0.9  : 2 validi distinti Dt ['0.17031', '0.58073']; 4 INVALIDI (Dt > pi 111, Dt > pi 156, Dt > pi 82.2, Dt > pi 158); orologio di luce 0.315559 per tick
+  lato 32 eps 1    s 0.95 : 2 validi distinti Dt ['0.18839', '0.56004']; 4 INVALIDI (Dt > pi 133, Dt > pi 62.5, Dt > pi 130, Dt > pi 64.2); orologio di luce 0.412471 per tick
+  lato 32 eps 1    s 0.99 : 2 validi distinti Dt ['0.20095', '0.54564']; 2 INVALIDI (Dt > pi 132, Dt > pi 152); orologio di luce 0.517490 per tick
+  lato 32 eps 1    s 1    : 2 validi distinti Dt ['0.20386', '0.54235']; 2 INVALIDI (Dt > pi 149, Dt > pi 142); orologio di luce 0.548028 per tick
+  lato 64 eps 0    s 0.5  : 1 validi distinti Dt ['0.68578']; 0 INVALIDI; orologio di luce 0.073289 per tick
+  lato 64 eps 0    s 0.6  : 1 validi distinti Dt ['0.70982']; 0 INVALIDI; orologio di luce 0.099345 per tick
+  lato 64 eps 0    s 0.7  : 1 validi distinti Dt ['0.65627']; 0 INVALIDI; orologio di luce 0.137302 per tick
+  lato 64 eps 0    s 0.8  : 1 validi distinti Dt ['0.51252']; 0 INVALIDI; orologio di luce 0.199404 per tick
+  lato 64 eps 0    s 0.9  : 1 validi distinti Dt ['0.28362']; 0 INVALIDI; orologio di luce 0.315559 per tick
+  lato 64 eps 0    s 0.95 : 1 validi distinti Dt ['0.14543']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 64 eps 0    s 0.99 : 1 validi distinti Dt ['0.02800']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 64 eps 0    s 1    : 2 validi distinti Dt ['0.00000', '0.00000']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 64 eps 0.25 s 0.5  : 1 validi distinti Dt ['0.68228']; 2 INVALIDI (Dt > pi 280, Dt > pi 273); orologio di luce 0.073289 per tick
+  lato 64 eps 0.25 s 0.6  : 1 validi distinti Dt ['0.70763']; 2 INVALIDI (Dt > pi 275, Dt > pi 351); orologio di luce 0.099345 per tick
+  lato 64 eps 0.25 s 0.7  : 1 validi distinti Dt ['0.65798']; 2 INVALIDI (Dt > pi 563, Dt > pi 408); orologio di luce 0.137302 per tick
+  lato 64 eps 0.25 s 0.8  : 1 validi distinti Dt ['0.52533']; 2 INVALIDI (Dt > pi 50, Dt > pi 51); orologio di luce 0.199404 per tick
+  lato 64 eps 0.25 s 0.9  : 2 validi distinti Dt ['0.33275', '0.60212']; 0 INVALIDI; orologio di luce 0.315559 per tick
+  lato 64 eps 0.25 s 0.95 : 2 validi distinti Dt ['0.24442', '0.34666']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 64 eps 0.25 s 0.99 : 2 validi distinti Dt ['0.20518', '0.27166']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 64 eps 0.25 s 1    : 2 validi distinti Dt ['0.20175', '0.26642']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 64 eps 0.5  s 0.5  : 1 validi distinti Dt ['0.67184']; 2 INVALIDI (Dt > pi 318, Dt > pi 270); orologio di luce 0.073289 per tick
+  lato 64 eps 0.5  s 0.6  : 1 validi distinti Dt ['0.70088']; 2 INVALIDI (Dt > pi 374, Dt > pi 334); orologio di luce 0.099345 per tick
+  lato 64 eps 0.5  s 0.7  : 1 validi distinti Dt ['0.66215']; 2 INVALIDI (Dt > pi 523, Dt > pi 545); orologio di luce 0.137302 per tick
+  lato 64 eps 0.5  s 0.8  : 1 validi distinti Dt ['0.55720']; 2 INVALIDI (Dt > pi 542, Dt > pi 730); orologio di luce 0.199404 per tick
+  lato 64 eps 0.5  s 0.9  : 2 validi distinti Dt ['0.01317', '0.42535']; 2 INVALIDI (Dt > pi 5.62, Dt > pi 5.62); orologio di luce 0.315559 per tick
+  lato 64 eps 0.5  s 0.95 : 3 validi distinti Dt ['0.01628', '0.37347', '1.03247']; 0 INVALIDI; orologio di luce 0.412471 per tick
+  lato 64 eps 0.5  s 0.99 : 3 validi distinti Dt ['0.01888', '0.34483', '0.71622']; 0 INVALIDI; orologio di luce 0.517490 per tick
+  lato 64 eps 0.5  s 1    : 3 validi distinti Dt ['0.01954', '0.33924', '0.67992']; 0 INVALIDI; orologio di luce 0.548028 per tick
+  lato 64 eps 0.75 s 0.5  : 1 validi distinti Dt ['0.65463']; 2 INVALIDI (Dt > pi 307, Dt > pi 238); orologio di luce 0.073289 per tick
+  lato 64 eps 0.75 s 0.6  : 1 validi distinti Dt ['0.68909']; 2 INVALIDI (Dt > pi 283, Dt > pi 365); orologio di luce 0.099345 per tick
+  lato 64 eps 0.75 s 0.7  : 2 validi distinti Dt ['0.02883', '0.66619']; 2 INVALIDI (Dt > pi 319, Dt > pi 309); orologio di luce 0.137302 per tick
+  lato 64 eps 0.75 s 0.8  : 2 validi distinti Dt ['0.04870', '0.59504']; 2 INVALIDI (Dt > pi 297, Dt > pi 412); orologio di luce 0.199404 per tick
+  lato 64 eps 0.75 s 0.9  : 2 validi distinti Dt ['0.06906', '0.51083']; 4 INVALIDI (Dt > pi 72.1, Dt > pi 409, Dt > pi 68.7, Dt > pi 522); orologio di luce 0.315559 per tick
+  lato 64 eps 0.75 s 0.95 : 2 validi distinti Dt ['0.07817', '0.47548']; 4 INVALIDI (Dt > pi 83.7, Dt > pi 5.41, Dt > pi 91.3, Dt > pi 5.41); orologio di luce 0.412471 per tick
+  lato 64 eps 0.75 s 0.99 : 4 validi distinti Dt ['0.08483', '0.45160', '1.55537', '1.55537']; 2 INVALIDI (Dt > pi 99.7, Dt > pi 115); orologio di luce 0.517490 per tick
+  lato 64 eps 0.75 s 1    : 4 validi distinti Dt ['0.08641', '0.44616', '1.34652', '1.34652']; 2 INVALIDI (Dt > pi 108, Dt > pi 107); orologio di luce 0.548028 per tick
+  lato 64 eps 1    s 0.5  : 1 validi distinti Dt ['0.63090']; 2 INVALIDI (Dt > pi 262, Dt > pi 208); orologio di luce 0.073289 per tick
+  lato 64 eps 1    s 0.6  : 2 validi distinti Dt ['0.04047', '0.67153']; 2 INVALIDI (Dt > pi 263, Dt > pi 240); orologio di luce 0.099345 per tick
+  lato 64 eps 1    s 0.7  : 2 validi distinti Dt ['0.07959', '0.66680']; 2 INVALIDI (Dt > pi 193, Dt > pi 300); orologio di luce 0.137302 per tick
+  lato 64 eps 1    s 0.8  : 2 validi distinti Dt ['0.12832', '0.62878']; 4 INVALIDI (Dt > pi 76.9, Dt > pi 255, Dt > pi 78.4, Dt > pi 251); orologio di luce 0.199404 per tick
+  lato 64 eps 1    s 0.9  : 2 validi distinti Dt ['0.17244', '0.58183']; 4 INVALIDI (Dt > pi 133, Dt > pi 149, Dt > pi 114, Dt > pi 195); orologio di luce 0.315559 per tick
+  lato 64 eps 1    s 0.95 : 2 validi distinti Dt ['0.19038', '0.56093']; 4 INVALIDI (Dt > pi 131, Dt > pi 66.3, Dt > pi 134, Dt > pi 68.3); orologio di luce 0.412471 per tick
+  lato 64 eps 1    s 0.99 : 4 validi distinti Dt ['0.20283', '0.54634', '1.05653', '1.05653']; 2 INVALIDI (Dt > pi 133, Dt > pi 143); orologio di luce 0.517490 per tick
+  lato 64 eps 1    s 1    : 2 validi distinti Dt ['0.20571', '0.54301']; 2 INVALIDI (Dt > pi 149, Dt > pi 156); orologio di luce 0.548028 per tick
+----------------------------------------------------------------------------------------------------
+### LE SPECIE (le catene in s) E Delta = Dt/dtau, per tempo proprio
+  lato 32 eps 0 catena 0    : s 0.5 1.36804  s 0.6 1.17996  s 0.7 0.93497  s 0.8 0.63866  s 0.9 0.31387  s 0.95 0.15237
+  lato 32 eps 0 catena 1    : s 0.99 0.02757
+  lato 32 eps 0 catena 2    : s 1 0.00000
+  lato 32 eps 0 catena 3    : s 1 0.00000
+  lato 32 eps 0.25 catena 0 : s 0.5 1.36106  s 0.6 1.17632  s 0.7 0.93743  s 0.8 0.65467  s 0.9 0.64588
+  lato 32 eps 0.25 catena 1 : s 0.9 0.36837  s 0.95 0.35964  s 0.99 0.20657  s 1 0.20116
+  lato 32 eps 0.25 catena 2 : s 0.95 0.25629  s 0.99 0.27225  s 1 0.26455
+  lato 32 eps 0.5 catena 0  : s 0.5 1.34022  s 0.6 1.16511  s 0.7 0.94341  s 0.8 0.69452  s 0.9 0.47121  s 0.95 0.39207  s 0.99 0.34761  s 1 0.33864
+  lato 32 eps 0.5 catena 1  : s 0.95 0.01588  s 0.99 0.01782  s 1 0.01829
+  lato 32 eps 0.5 catena 2  : s 0.95 1.06075  s 0.99 0.71524  s 1 0.67324
+  lato 32 eps 0.75 catena 0 : s 0.5 1.30586  s 0.6 1.14553  s 0.7 0.94923  s 0.8 0.74188  s 0.9 0.56624  s 0.95 0.49949  s 0.99 0.45542  s 1 0.44549
+  lato 32 eps 0.75 catena 1 : s 0.7 0.03888  s 0.8 0.05819  s 0.9 0.07416  s 0.95 0.07990  s 0.99 0.08346  s 1 0.08422
+  lato 32 eps 0.75 catena 2 : s 0.99 1.54740  s 1 1.32983
+  lato 32 eps 1 catena 0    : s 0.5 1.25852  s 0.6 1.11635  s 0.7 0.95020  s 0.8 0.78416  s 0.9 0.64525  s 0.95 0.58952  s 0.99 0.55115  s 1 0.54235
+  lato 32 eps 1 catena 1    : s 0.7 0.11097  s 0.8 0.15763  s 0.9 0.18924  s 0.95 0.19830  s 0.99 0.20298  s 1 0.20386
+  lato 64 eps 0 catena 0    : s 0.5 1.37156  s 0.6 1.18303  s 0.7 0.93752  s 0.8 0.64064  s 0.9 0.31514  s 0.95 0.15308
+  lato 64 eps 0 catena 1    : s 0.99 0.02828
+  lato 64 eps 0 catena 2    : s 1 0.00000
+  lato 64 eps 0 catena 3    : s 1 0.00000
+  lato 64 eps 0.25 catena 0 : s 0.5 1.36456  s 0.6 1.17938  s 0.7 0.93998  s 0.8 0.65666  s 0.9 0.66902
+  lato 64 eps 0.25 catena 1 : s 0.9 0.36972  s 0.95 0.36490  s 0.99 0.20725  s 1 0.20175
+  lato 64 eps 0.25 catena 2 : s 0.95 0.25729  s 0.99 0.27441  s 1 0.26642
+  lato 64 eps 0.5 catena 0  : s 0.5 1.34368  s 0.6 1.16814  s 0.7 0.94593  s 0.8 0.69650  s 0.9 0.47261  s 0.95 0.39312  s 0.99 0.34832  s 1 0.33924
+  lato 64 eps 0.5 catena 1  : s 0.9 0.01464  s 0.95 0.01713  s 0.99 0.01907  s 1 0.01954
+  lato 64 eps 0.5 catena 2  : s 0.95 1.08681  s 0.99 0.72345  s 1 0.67992
+  lato 64 eps 0.75 catena 0 : s 0.5 1.30926  s 0.6 1.14849  s 0.7 0.95170  s 0.8 0.74380  s 0.9 0.56758  s 0.95 0.50051  s 0.99 0.45616  s 1 0.44616
+  lato 64 eps 0.75 catena 1 : s 0.7 0.04119  s 0.8 0.06087  s 0.9 0.07673  s 0.95 0.08229  s 0.99 0.08569  s 1 0.08641
+  lato 64 eps 0.75 catena 2 : s 0.99 1.57108  s 1 1.34652
+  lato 64 eps 0.75 catena 3 : s 0.99 1.57108  s 1 1.34652
+  lato 64 eps 1 catena 0    : s 0.5 1.26180  s 0.6 1.11921  s 0.7 0.95257  s 0.8 0.78598  s 0.9 0.64648  s 0.95 0.59045  s 0.99 0.55186  s 1 0.54301
+  lato 64 eps 1 catena 1    : s 0.6 0.06745  s 0.7 0.11370  s 0.8 0.16040  s 0.9 0.19160  s 0.95 0.20040  s 0.99 0.20488  s 1 0.20571
+  lato 64 eps 1 catena 2    : s 0.99 1.06720
+  lato 64 eps 1 catena 3    : s 0.99 1.06721
+### IL POSITIVO: ogni specie contro se stessa, R = 1 al bit
+  lato 32: ogni specie contro se stessa, R = 1 AL BIT a ogni s                         PASSA   15 specie
+  lato 64: ogni specie contro se stessa, R = 1 AL BIT a ogni s                         PASSA   18 specie
+### LA TABELLA DEI V_ij (soglia di lettura 0.001: sotto universale entro la misura, sopra dipendente dalla specie)
+  lato 32  eps 0 catena 0     / eps 0 catena 1      su 0 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0 catena 2      su 0 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0 catena 3      su 0 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0.25 catena 0   su 5 s: V 5.8112e-01  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 0.25 catena 1   su 2 s: V 6.7158e-01  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0.5 catena 0    su 6 s: V 7.5872e-01  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 0.75 catena 0   su 6 s: V 9.3152e-01  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 0.75 catena 1   su 4 s: V 2.1516e+00  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 0.75 catena 2   su 0 s: V non leggibile  
+  lato 32  eps 0 catena 0     / eps 1 catena 0      su 6 s: V 1.0606e+00  (sopra 1e-3)
+  lato 32  eps 0 catena 0     / eps 1 catena 1      su 4 s: V 2.0550e+00  (sopra 1e-3)
+  lato 32  eps 0 catena 1     / eps 0 catena 2      su 0 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0 catena 3      su 0 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 1     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0 catena 3      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 2     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 32  eps 0 catena 3     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 0.25 catena 2   su 0 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 0.5 catena 0    su 5 s: V 4.0140e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 0  / eps 0.5 catena 1    su 0 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 0.5 catena 2    su 0 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 0.75 catena 0   su 5 s: V 2.5414e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 0  / eps 0.75 catena 1   su 3 s: V 1.0485e+00  (sopra 1e-3)
+  lato 32  eps 0.25 catena 0  / eps 0.75 catena 2   su 0 s: V non leggibile  
+  lato 32  eps 0.25 catena 0  / eps 1 catena 0      su 5 s: V 2.4872e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 0  / eps 1 catena 1      su 3 s: V 9.4312e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.25 catena 2   su 3 s: V 6.6165e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.5 catena 0    su 4 s: V 4.4787e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.5 catena 1    su 3 s: V 7.7220e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.5 catena 2    su 3 s: V 1.6264e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.75 catena 0   su 4 s: V 4.7191e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.75 catena 1   su 4 s: V 7.1965e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 0.75 catena 2   su 2 s: V 1.2483e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 1 catena 0      su 4 s: V 4.9654e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 1  / eps 1 catena 1      su 4 s: V 6.6601e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.5 catena 0    su 3 s: V 1.7516e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.5 catena 1    su 3 s: V 1.0921e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.5 catena 2    su 3 s: V 4.4725e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.75 catena 0   su 3 s: V 1.4904e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.75 catena 1   su 3 s: V 3.7737e-02  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 0.75 catena 2   su 2 s: V 1.2272e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 1 catena 0      su 3 s: V 1.2542e-01  (sopra 1e-3)
+  lato 32  eps 0.25 catena 2  / eps 1 catena 1      su 3 s: V 3.7257e-02  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 0.5 catena 1    su 3 s: V 2.9507e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 0.5 catena 2    su 3 s: V 2.9454e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 0.75 catena 0   su 8 s: V 2.9930e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 0.75 catena 1   su 6 s: V 2.1828e+00  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 0.75 catena 2   su 2 s: V 1.2521e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 1 catena 0      su 8 s: V 5.3095e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 0   / eps 1 catena 1      su 6 s: V 1.9780e+00  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 0.5 catena 2    su 3 s: V 5.4553e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 0.75 catena 0   su 3 s: V 2.4795e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 0.75 catena 1   su 3 s: V 8.7501e-02  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 0.75 catena 2   su 2 s: V 1.7731e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 1 catena 0      su 3 s: V 2.1869e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 1   / eps 1 catena 1      su 3 s: V 1.1201e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 2   / eps 0.75 catena 0   su 3 s: V 3.5297e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 2   / eps 0.75 catena 1   su 3 s: V 5.3110e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 2   / eps 0.75 catena 2   su 2 s: V 9.0951e-02  (sopra 1e-3)
+  lato 32  eps 0.5 catena 2   / eps 1 catena 0      su 3 s: V 3.8588e-01  (sopra 1e-3)
+  lato 32  eps 0.5 catena 2   / eps 1 catena 1      su 3 s: V 5.0431e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 0  / eps 0.75 catena 1   su 6 s: V 1.8570e+00  (sopra 1e-3)
+  lato 32  eps 0.75 catena 0  / eps 0.75 catena 2   su 2 s: V 1.2930e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 0  / eps 1 catena 0      su 8 s: V 2.3435e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 0  / eps 1 catena 1      su 6 s: V 1.6470e+00  (sopra 1e-3)
+  lato 32  eps 0.75 catena 1  / eps 0.75 catena 2   su 2 s: V 1.6029e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 1  / eps 1 catena 0      su 6 s: V 1.0207e+00  (sopra 1e-3)
+  lato 32  eps 0.75 catena 1  / eps 1 catena 1      su 6 s: V 1.6114e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 2  / eps 1 catena 0      su 2 s: V 1.3523e-01  (sopra 1e-3)
+  lato 32  eps 0.75 catena 2  / eps 1 catena 1      su 2 s: V 1.5553e-01  (sopra 1e-3)
+  lato 32  eps 1 catena 0     / eps 1 catena 1      su 6 s: V 1.3999e+00  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0 catena 1      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0.25 catena 0   su 5 s: V 5.9979e-01  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.25 catena 1   su 2 s: V 6.8063e-01  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0.5 catena 0    su 6 s: V 7.5751e-01  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.5 catena 1    su 2 s: V 8.2686e-01  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0.75 catena 0   su 6 s: V 9.3003e-01  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.75 catena 1   su 4 s: V 2.1299e+00  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 0.75 catena 2   su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 0.75 catena 3   su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 1 catena 0      su 6 s: V 1.0589e+00  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 1 catena 1      su 5 s: V 2.6059e+00  (sopra 1e-3)
+  lato 64  eps 0 catena 0     / eps 1 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 0     / eps 1 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 0.75 catena 3   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 1     / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 0.75 catena 3   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 1 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 2     / eps 1 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.25 catena 0   su 0 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.25 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.5 catena 0    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.5 catena 2    su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.75 catena 0   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.75 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.75 catena 2   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 0.75 catena 3   su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 1 catena 0      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 1 catena 1      su 1 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 1 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0 catena 3     / eps 1 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.25 catena 1   su 1 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.25 catena 2   su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.5 catena 0    su 5 s: V 4.3962e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 0  / eps 0.5 catena 1    su 1 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.5 catena 2    su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.75 catena 0   su 5 s: V 2.8903e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 0  / eps 0.75 catena 1   su 3 s: V 9.9951e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 0  / eps 0.75 catena 2   su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 0.75 catena 3   su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 1 catena 0      su 5 s: V 2.4636e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 0  / eps 1 catena 1      su 4 s: V 1.6790e+00  (sopra 1e-3)
+  lato 64  eps 0.25 catena 0  / eps 1 catena 2      su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 0  / eps 1 catena 3      su 0 s: V non leggibile  
+  lato 64  eps 0.25 catena 1  / eps 0.25 catena 2   su 3 s: V 6.7865e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.5 catena 0    su 4 s: V 4.5996e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.5 catena 1    su 4 s: V 8.8171e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.5 catena 2    su 3 s: V 1.6086e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.75 catena 0   su 4 s: V 4.8426e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.75 catena 1   su 4 s: V 7.0927e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.75 catena 2   su 2 s: V 1.2716e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 0.75 catena 3   su 2 s: V 1.2716e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 1 catena 0      su 4 s: V 5.0895e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 1 catena 1      su 4 s: V 6.6091e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 1  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.25 catena 1  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.25 catena 2  / eps 0.5 catena 0    su 3 s: V 1.7958e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.5 catena 1    su 3 s: V 9.6324e-02  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.5 catena 2    su 3 s: V 4.6170e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.75 catena 0   su 3 s: V 1.5327e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.75 catena 1   su 3 s: V 3.7980e-02  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.75 catena 2   su 2 s: V 1.2455e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 0.75 catena 3   su 2 s: V 1.2455e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 1 catena 0      su 3 s: V 1.2960e-01  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 1 catena 1      su 3 s: V 4.2508e-02  (sopra 1e-3)
+  lato 64  eps 0.25 catena 2  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.25 catena 2  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 0   / eps 0.5 catena 1    su 4 s: V 6.5715e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 0.5 catena 2    su 3 s: V 3.0673e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 0.75 catena 0   su 8 s: V 2.9899e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 0.75 catena 1   su 6 s: V 2.1419e+00  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 0.75 catena 2   su 2 s: V 1.2766e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 0.75 catena 3   su 2 s: V 1.2767e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 1 catena 0      su 8 s: V 5.3026e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 1 catena 1      su 7 s: V 2.9050e+00  (sopra 1e-3)
+  lato 64  eps 0.5 catena 0   / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 0   / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 1   / eps 0.5 catena 2    su 3 s: V 5.4928e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 0.75 catena 0   su 4 s: V 4.9465e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 0.75 catena 1   su 4 s: V 1.6694e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 0.75 catena 2   su 2 s: V 1.7820e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 0.75 catena 3   su 2 s: V 1.7820e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 1 catena 0      su 4 s: V 4.3680e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 1 catena 1      su 4 s: V 2.1255e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 1   / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 1   / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 2   / eps 0.75 catena 0   su 3 s: V 3.6781e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 0.75 catena 1   su 3 s: V 5.4257e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 0.75 catena 2   su 2 s: V 9.2110e-02  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 0.75 catena 3   su 2 s: V 9.2112e-02  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 1 catena 0      su 3 s: V 4.0092e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 1 catena 1      su 3 s: V 5.1827e-01  (sopra 1e-3)
+  lato 64  eps 0.5 catena 2   / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.5 catena 2   / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 0  / eps 0.75 catena 1   su 6 s: V 1.8157e+00  (sopra 1e-3)
+  lato 64  eps 0.75 catena 0  / eps 0.75 catena 2   su 2 s: V 1.3188e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 0  / eps 0.75 catena 3   su 2 s: V 1.3188e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 0  / eps 1 catena 0      su 8 s: V 2.3400e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 0  / eps 1 catena 1      su 7 s: V 2.6074e+00  (sopra 1e-3)
+  lato 64  eps 0.75 catena 0  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 0  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 1  / eps 0.75 catena 2   su 2 s: V 1.6227e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 1  / eps 0.75 catena 3   su 2 s: V 1.6227e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 1  / eps 1 catena 0      su 6 s: V 1.0032e+00  (sopra 1e-3)
+  lato 64  eps 0.75 catena 1  / eps 1 catena 1      su 6 s: V 1.4507e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 1  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 1  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 2  / eps 0.75 catena 3   su 2 s: V 2.7572e-06  (sotto 1e-3)
+  lato 64  eps 0.75 catena 2  / eps 1 catena 0      su 2 s: V 1.3785e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 2  / eps 1 catena 1      su 2 s: V 1.5795e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 2  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 2  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 3  / eps 1 catena 0      su 2 s: V 1.3786e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 3  / eps 1 catena 1      su 2 s: V 1.5795e-01  (sopra 1e-3)
+  lato 64  eps 0.75 catena 3  / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 0.75 catena 3  / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 1 catena 0     / eps 1 catena 1      su 7 s: V 2.3523e+00  (sopra 1e-3)
+  lato 64  eps 1 catena 0     / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 1 catena 0     / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 1 catena 1     / eps 1 catena 2      su 1 s: V non leggibile  
+  lato 64  eps 1 catena 1     / eps 1 catena 3      su 1 s: V non leggibile  
+  lato 64  eps 1 catena 2     / eps 1 catena 3      su 1 s: V non leggibile  
+### L'OROLOGIO LOCALE: Delta per tick / la frequenza per tick del ramo di luce a k = pi/4
+  lato 32 eps 0 catena 0    : rapporti ['9.3332', '7.1265', '4.7667', '2.5623', '0.8952', '0.3509'] -> V 2.1527e+00
+  lato 32 eps 0 catena 1    : rapporti ['0.0527'] -> V non leggibile
+  lato 32 eps 0 catena 2    : rapporti ['0.0000'] -> V non leggibile
+  lato 32 eps 0 catena 3    : rapporti ['0.0000'] -> V non leggibile
+  lato 32 eps 0.25 catena 0 : rapporti ['9.2856', '7.1045', '4.7792', '2.6265', '1.8421'] -> V 1.4516e+00
+  lato 32 eps 0.25 catena 1 : rapporti ['1.0506', '0.8283', '0.3952', '0.3671'] -> V 1.0352e+00
+  lato 32 eps 0.25 catena 2 : rapporti ['0.5903', '0.5208', '0.4827'] -> V 2.0241e-01
+  lato 32 eps 0.5 catena 0  : rapporti ['9.1434', '7.0368', '4.8097', '2.7864', '1.3439', '0.9030', '0.6650', '0.6179'] -> V 2.4977e+00
+  lato 32 eps 0.5 catena 1  : rapporti ['0.0366', '0.0341', '0.0334'] -> V 9.2565e-02
+  lato 32 eps 0.5 catena 2  : rapporti ['2.4431', '1.3683', '1.2285'] -> V 7.2301e-01
+  lato 32 eps 0.75 catena 0 : rapporti ['8.9090', '6.9185', '4.8394', '2.9764', '1.6150', '1.1504', '0.8713', '0.8129'] -> V 2.3055e+00
+  lato 32 eps 0.75 catena 1 : rapporti ['0.1982', '0.2335', '0.2115', '0.1840', '0.1597', '0.1537'] -> V 4.1966e-01
+  lato 32 eps 0.75 catena 2 : rapporti ['2.9603', '2.4266'] -> V 1.9816e-01
+  lato 32 eps 1 catena 0    : rapporti ['8.5860', '6.7423', '4.8444', '3.1460', '1.8403', '1.3578', '1.0544', '0.9896'] -> V 2.1278e+00
+  lato 32 eps 1 catena 1    : rapporti ['0.5658', '0.6324', '0.5397', '0.4567', '0.3883', '0.3720'] -> V 5.2881e-01
+  lato 64 eps 0 catena 0    : rapporti ['9.3572', '7.1450', '4.7797', '2.5702', '0.8988', '0.3526'] -> V 2.1522e+00
+  lato 64 eps 0 catena 1    : rapporti ['0.0541'] -> V non leggibile
+  lato 64 eps 0 catena 2    : rapporti ['0.0000'] -> V non leggibile
+  lato 64 eps 0 catena 3    : rapporti ['0.0000'] -> V non leggibile
+  lato 64 eps 0.25 catena 0 : rapporti ['9.3095', '7.1230', '4.7922', '2.6345', '1.9081'] -> V 1.4362e+00
+  lato 64 eps 0.25 catena 1 : rapporti ['1.0545', '0.8404', '0.3965', '0.3681'] -> V 1.0322e+00
+  lato 64 eps 0.25 catena 2 : rapporti ['0.5926', '0.5250', '0.4861'] -> V 1.9910e-01
+  lato 64 eps 0.5 catena 0  : rapporti ['9.1670', '7.0551', '4.8226', '2.7943', '1.3479', '0.9054', '0.6664', '0.6190'] -> V 2.4978e+00
+  lato 64 eps 0.5 catena 1  : rapporti ['0.0417', '0.0395', '0.0365', '0.0357'] -> V 1.5888e-01
+  lato 64 eps 0.5 catena 2  : rapporti ['2.5031', '1.3840', '1.2407'] -> V 7.3861e-01
+  lato 64 eps 0.75 catena 0 : rapporti ['8.9322', '6.9364', '4.8520', '2.9841', '1.6188', '1.1528', '0.8727', '0.8141'] -> V 2.3060e+00
+  lato 64 eps 0.75 catena 1 : rapporti ['0.2100', '0.2442', '0.2188', '0.1895', '0.1639', '0.1577'] -> V 4.3851e-01
+  lato 64 eps 0.75 catena 2 : rapporti ['3.0056', '2.4570'] -> V 2.0085e-01
+  lato 64 eps 0.75 catena 3 : rapporti ['3.0056', '2.4570'] -> V 2.0085e-01
+  lato 64 eps 1 catena 0    : rapporti ['8.6084', '6.7596', '4.8565', '3.1533', '1.8438', '1.3599', '1.0557', '0.9908'] -> V 2.1287e+00
+  lato 64 eps 1 catena 1    : rapporti ['0.4074', '0.5797', '0.6435', '0.5465', '0.4616', '0.3920', '0.3754'] -> V 5.5112e-01
+  lato 64 eps 1 catena 2    : rapporti ['2.0416'] -> V non leggibile
+  lato 64 eps 1 catena 3    : rapporti ['2.0417'] -> V non leggibile
+### LE TAGLIE: |Delta(32) - Delta(64)|/Delta < 0.01 per ogni valore valido
+  LE TAGLIE: per ogni valore valido accoppiato, entro 0.01                             ### FALLISCE   il peggiore 3.7746e-01 su 65 valori
+====================================================================================================
+L'UNIVERSALITA' DELLA MASSA: 4 su 5 controlli   ### CI SONO BUCHI  (il verdetto di fisica e' la tabella dei V_ij)
+====================================================================================================
