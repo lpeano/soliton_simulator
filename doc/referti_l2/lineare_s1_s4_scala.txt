@@ -1,0 +1,27 @@
+[TIMBRO] _lineare_s1_s4.py  sha1-BYTE dc166098  committato e pulito
+====================================================================================================
+DECISIONE-LINEARE: IL CONFRONTO FRA S1 E S4 (in memoria; nessuna forma scelta) -- --parte scala
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); il quadrato; base proiettata; la NORMA, seconda meta'; N dtau 400 (i controlli a 100)
+----------------------------------------------------------------------------------------------------
+  R2 S1 x 0.1 lato 32 eps 1e-07 N dtau 400     max 0.00570 a (1, 0) (k ['0.0000', '0.0625'] pi); ultimo quarto 0.00537 (scarto 0.058); uniformita' 0.5 ulp; 613 s
+  R2 S1 x 0.1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   0.5 ulp
+  R2 S1 x 0.1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.058
+  R2 S1 x 0.1 lato 64 eps 1e-07 N dtau 400     max 0.00576 a (0, 62) (k ['0.0000', '0.0625'] pi); ultimo quarto 0.00547 (scarto 0.050); uniformita' 0.5 ulp; 4792 s
+  R2 S1 x 0.1 lato 64 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   0.5 ulp
+  R2 S1 x 0.1 lato 64 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.050
+  S1: la linearita', 1e-7 contro 1e-6 (lato 32)                                      PASSA   5.810e-08 contro 5.696e-06
+  ### S1: k lato 32 [0.0, 0.0625], lato 64 [0.0, 0.0625] (in pi) -> (a) FISSO IN ARCHI -> artefatto del reticolo
+  S1: gamma alle due taglie entro 0.1 nel tempo fisico                               PASSA   0.00570 contro 0.00576, 0.011
+  R2 S4 x 0.1 lato 32 eps 1e-07 N dtau 400     max 0.29705 a (0, 7) (k ['0.0000', '0.4375'] pi); ultimo quarto 0.29705 (scarto 0.000); uniformita' 2.1 ulp; 674 s
+  R2 S4 x 0.1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   2.1 ulp
+  R2 S4 x 0.1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+  R2 S4 x 0.1 lato 64 eps 1e-07 N dtau 400     max 0.30014 a (14, 0) (k ['0.0000', '0.4375'] pi); ultimo quarto 0.30014 (scarto 0.000); uniformita' 1.3 ulp; 5294 s
+  R2 S4 x 0.1 lato 64 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   1.3 ulp
+  R2 S4 x 0.1 lato 64 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+  S4: la linearita', 1e-7 contro 1e-6 (lato 32)                                      PASSA   5.513e-07 contro 2.971e-04
+  ### S4: k lato 32 [0.0, 0.4375], lato 64 [0.0, 0.4375] (in pi) -> (a) FISSO IN ARCHI -> artefatto del reticolo
+  S4: gamma alle due taglie entro 0.1 nel tempo fisico                               PASSA   0.29705 contro 0.30014, 0.010
+====================================================================================================
+LA PARTE scala: 12 su 12 controlli   ### TUTTI PASSATI
+====================================================================================================
