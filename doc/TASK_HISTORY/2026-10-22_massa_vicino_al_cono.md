@@ -44,6 +44,17 @@
 - ### **CONTA SOLO `s`** se le fasi per tick ### **coincidono entro `1e-10` per ogni coppia** della misura `2`: ### **allora la massa dipende da `cs` attraverso `s`.**
 - ### **Le stesse letture a lato `32` e `64`** *(entro `1%`)*.
 
+### ⚖️ **ANNOTAZIONE: L'AGGIUNTA DI LUCA DELLE `21:30`** *(prima dei numeri; si annota)*
+
+- ### **In TUTTE le misure `Delta` e `c` in TRE unita', dichiarate:** ### **per tick**, ### **per unita' di tempo COORDINATO** *(diviso `dtau`)*, ### **per unita' di
+  TEMPO PROPRIO** *(diviso `cs dtau`)*. ### *(Nella misura `1` `cs` e' spento, cioe' `1`: coordinato e proprio coincidono.)*
+- ### **LA LETTURA IN PIU' della misura `2`, fissata da Luca:** ### **MASSA INVARIANTE LOCALMENTE** se `Delta` per unita' di tempo PROPRIO ### **e' la stessa
+  nelle due meta' di ogni coppia** *(entro l'`1%`)*; ### **altrimenti la massa dipende dal posto anche per l'osservatore locale** *(il principio di equivalenza e'
+  in gioco)*, e lo si scrive.
+- ### ⚠ **CHE COSA NE SO PRIMA** *(una prova a vuoto in memoria della coppia `(0.5, 1)` contro `(1, 0.5)`: le fasi per tick coincidono, scarto `0.0`)*: ### **se
+  le fasi per tick coincidono, `Delta` per tempo proprio** *(fase per tick diviso `s`)* ### **coincide PER COSTRUZIONE**, ### **e `Delta` per tempo coordinato
+  differisce di `cs`.** ### **Lo scrivo prima: la lettura «invariante localmente» seguira' da «conta solo `s`».**
+
 ## 4. TODO
 
 1. Questo task history, ### **committato DA SOLO.**
