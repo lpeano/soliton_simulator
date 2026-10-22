@@ -70,6 +70,20 @@
 > sulla densita'. Limiti di densita' veri (un quanto per cella in basso, il tetto di Pauli di
 > `2d` quanti per nodo in alto) appartengono a `L6`.»*
 
+### ⭐⭐ **LA DECISIONE SU `L1`** *(Luca, `2026-10-22`, `19:57`; la risposta alla domanda del `2026-10-20` «automa al passo di Planck, o limite continuo?»; la voce `[[DECISIONE-L1-NATURA-A-SIMULATORE-B]]`)*
+
+> *«LA NATURA E' (A), IL SIMULATORE E' (B). (A) per la natura: lo spaziotempo vero puo' essere un automa discreto alla scala di Planck. (B) per il simulatore: la sua griglia e' un CAMPIONAMENTO GROSSOLANO di quell'automa (la visione di Luca del 2026-10-20). Quindi una scala che resta FISSA IN ARCHI raffinando e' un ARTEFATTO; e' fisico solo cio' che CONVERGE raffinando. Serve un DIZIONARIO fra automa e campione: come i parametri (eps compresa) scalano col passo della griglia.»*
+
+- **Le ragioni** *(Luca)*: ### **e' coerente con la visione del `2026-10-20`**; ### **`(B)` da' un criterio VERIFICABILE** *(la convergenza)*, e i
+  fenomeni da confrontare con la natura vivono a scale molto piu' grandi di un arco; ### **`(A)` per il simulatore trasformerebbe ogni artefatto del
+  reticolo in «fisica alla scala di Planck», non distinguibile da un difetto.**
+- **La condizione di revisione:** ### **se un dizionario coerente NON esiste** *(se gli artefatti fissi in archi non si possono eliminare con nessuna
+  regola di scala derivata)*, ### **la decisione si riapre e `(A)` torna la lettura onesta per il simulatore.** ### **Il primo test era «la moneta e'
+  la massa?»: FATTO** *(`e133316a`, `238b3599`)*: ### **`eps` NON e' la massa**, e il dizionario non si trova li'; ### **il prossimo e' lo spostamento
+  parziale** *(in coda)*.
+- **Le conseguenze:** ### **le letture «fisso in archi = artefatto»** *(lo stato finale `6f297d71`, `S1`/`S4` `cb846b2a`, i `32` archi `82b40ca1`)* ### **sono
+  confermate come tali**; ### **la regola di scala di oggi RESTA finche' il dizionario non e' trovato**; ### **nessun referto si riscrive.**
+
 ### `L2` — **LA MATERIA MODIFICA IL VUOTO, e quindi LA FORMA DI `cs`** — *la «gravita'» del modello*
 
 | | |
