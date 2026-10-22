@@ -1,0 +1,44 @@
+[TIMBRO] _massa_spostamento.py  sha1-BYTE 8800de86  committato e pulito
+====================================================================================================
+DA DOVE VIENE LA MASSA DELLA CAMMINATA? Delta e c in funzione di s = dtau (cs spento), a griglia fissa
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); la camminata sola esatta; i rami dispersivi della materia; il fit sqrt(Delta^2 + v^2 k^2) - Delta fino a 0.25 pi
+----------------------------------------------------------------------------------------------------
+  lato 32 eps 0.5  s = dtau 0.03125 : c(82b40ca1) 0.3849; materia 4 rami: Delta 1.67563, v 0.80654, c 0.38468, v_g(2)/v_g(1) 1.976, fit 0.000
+  lato 32 eps 0.5  s = dtau 0.0625  : c(82b40ca1) 0.3858; materia 4 rami: Delta 1.74191, v 0.82209, c 0.38476, v_g(2)/v_g(1) 1.978, fit 0.000
+  lato 32 eps 0.5  s = dtau 0.125   : c(82b40ca1) 0.3894; materia 4 rami: Delta 2.15813, v 0.90822, c 0.38510, v_g(2)/v_g(1) 1.984, fit 0.001
+  lato 32 eps 0.5  s = dtau 0.25    : c(82b40ca1) 0.4046; materia 4 rami: Delta 261.65557, v 7.41455, c 0.38702, v_g(2)/v_g(1) 2.013, fit 0.005
+C:\Users\lpeano\soliton_simulator\csv\_moneta_massa.py:86: OptimizeWarning: Covariance of the parameters could not be estimated
+  (D, v), _ = curve_fit(f, kk, z, p0=(1.0, 1.0), maxfev=20000)
+  lato 32 eps 0.5  s = dtau 0.5     : c(82b40ca1) 20.3687; materia 8 rami: Delta 0.00000, v 5.23467, c 40.57262, v_g(2)/v_g(1) 0.015, fit 0.742
+  lato 32 eps 0.5  s = dtau 1       : c(82b40ca1) 1.0436; materia 6 rami: Delta 0.33864, v 0.62902, c 0.64781, v_g(2)/v_g(1) 1.760, fit 0.023
+  lato 32 eps 0    s = dtau 0.03125 : c(82b40ca1) 0.3898; materia 4 rami: Delta 1.70144, v 0.81815, c 0.38985, v_g(2)/v_g(1) 1.976, fit 0.000
+  lato 32 eps 0    s = dtau 0.0625  : c(82b40ca1) 0.3908; materia 4 rami: Delta 1.69833, v 0.81840, c 0.39078, v_g(2)/v_g(1) 1.975, fit 0.000
+  lato 32 eps 0    s = dtau 0.125   : c(82b40ca1) 0.3946; materia 4 rami: Delta 1.68570, v 0.81934, c 0.39455, v_g(2)/v_g(1) 1.975, fit 0.000
+  lato 32 eps 0    s = dtau 0.25    : c(82b40ca1) 0.4105; materia 4 rami: Delta 1.63205, v 0.82265, c 0.41055, v_g(2)/v_g(1) 1.973, fit 0.000
+  lato 32 eps 0    s = dtau 0.5     : c(82b40ca1) 0.4936; materia 6 rami: Delta 1.36804, v 1.78779, c 20.37183, v_g(2)/v_g(1) 1.007, fit 1.000
+  lato 32 eps 0    s = dtau 1       : c(82b40ca1) 3.5896; materia 6 rami: Delta 0.00000, v 0.70028, c 3.58962, v_g(2)/v_g(1) 0.993, fit 111344918780922613937221898175781382043149961956030590601400739295568761948642843269280289005343185041563271668529664047716156493062865841791890184881645531316988682646288732627529498111274905888415588560035665439364151652226748641945293505448355617264113816179087093444640768.000
+  lato 64 eps 0.5  s = dtau 0.03125 : c(82b40ca1) 0.3873; materia 4 rami: Delta 1.68105, v 0.80783, c 0.38693, v_g(2)/v_g(1) 1.994, fit 0.000
+  lato 64 eps 0.5  s = dtau 0.0625  : c(82b40ca1) 0.3882; materia 4 rami: Delta 1.75108, v 0.82419, c 0.38664, v_g(2)/v_g(1) 1.995, fit 0.000
+  lato 64 eps 0.5  s = dtau 0.125   : c(82b40ca1) 0.3919; materia 4 rami: Delta 2.20217, v 0.91654, c 0.38556, v_g(2)/v_g(1) 2.000, fit 0.001
+  lato 64 eps 0.5  s = dtau 0.25    : c(82b40ca1) 0.4074; materia 4 rami: Delta 236.57855, v 7.06859, c 0.38223, v_g(2)/v_g(1) 2.019, fit 0.005
+  lato 64 eps 0.5  s = dtau 0.5     : c(82b40ca1) 2.9941; materia 8 rami: Delta 0.00000, v 5.74115, c 162.82319, v_g(2)/v_g(1) 0.003, fit 0.859
+  lato 64 eps 0.5  s = dtau 1       : c(82b40ca1) 1.1296; materia 6 rami: Delta 0.33924, v 0.62949, c 0.66108, v_g(2)/v_g(1) 1.916, fit 0.023
+  lato 64 eps 0    s = dtau 0.03125 : c(82b40ca1) 0.3922; materia 4 rami: Delta 1.70591, v 0.81922, c 0.39222, v_g(2)/v_g(1) 1.994, fit 0.000
+  lato 64 eps 0    s = dtau 0.0625  : c(82b40ca1) 0.3932; materia 4 rami: Delta 1.70280, v 0.81946, c 0.39317, v_g(2)/v_g(1) 1.994, fit 0.000
+  lato 64 eps 0    s = dtau 0.125   : c(82b40ca1) 0.3970; materia 4 rami: Delta 1.69012, v 0.82040, c 0.39701, v_g(2)/v_g(1) 1.994, fit 0.000
+  lato 64 eps 0    s = dtau 0.25    : c(82b40ca1) 0.4133; materia 4 rami: Delta 1.63630, v 0.82371, c 0.41330, v_g(2)/v_g(1) 1.993, fit 0.000
+  lato 64 eps 0    s = dtau 0.5     : c(82b40ca1) 81.7365; materia 8 rami: Delta 0.68578, v 0.82870, c 0.24920, v_g(2)/v_g(1) 0.500, fit 133719964192479310098050168039062648014138862026736558455531300181175059814196711011435807486428336280934010026251982104250990855852876095600462915348948744150772669252397968802123054610067069973541399284954502976846945588170983203411703059655910584811005263750805216821248.000
+  lato 64 eps 0    s = dtau 1       : c(82b40ca1) 7.1967; materia 6 rami: Delta 0.00000, v 0.70023, c 7.19674, v_g(2)/v_g(1) 0.998, fit 133719964192479310098050168039062648014138862026736558455531300181175059814196711011435807486428336280934010026251982104250990855852876095600462915348948744150772669252397968802123054610067069973541399284954502976846945588170983203411703059655910584811005263750805216821248.000
+----------------------------------------------------------------------------------------------------
+  DEVE RIUSCIRE: lato 32 eps 0.5 dtau 0.125, la c di 82b40ca1 entro 1e-4             PASSA   0.38943 contro 0.3894
+  DEVE RIUSCIRE: lato 64 eps 0.5 dtau 0.125, la c di 82b40ca1 entro 1e-4             ### FALLISCE   0.39189 contro 0.3882
+### LE LETTURE (a eps 0)
+  lato 32: Delta su tutti gli s ['1.701', '1.698', '1.686', '1.632', '1.368', '0.000'] (scarto 1.263); c ['0.3898', '0.3908', '0.3946', '0.4105', '20.3718', '3.5896'] (scarto 4.693); a s piccolo Delta 0.009 c 0.012; a s = 1 v_g(2)/v_g(1) 0.993 -> LINEARE; il salto c'e' per s < 1? True -> ### S E' LA MASSA (secondo la previsione: costanti a s piccolo, lineare a s = 1)
+  lato 64: Delta su tutti gli s ['1.706', '1.703', '1.690', '1.636', '0.686', '0.000'] (scarto 1.379); c ['0.3922', '0.3932', '0.3970', '0.4133', '0.2492', '7.1967'] (scarto 4.610); a s piccolo Delta 0.009 c 0.012; a s = 1 v_g(2)/v_g(1) 0.998 -> LINEARE; il salto c'e' per s < 1? True -> ### S E' LA MASSA (secondo la previsione: costanti a s piccolo, lineare a s = 1)
+### IL CONTO DI DIMENSIONI, COI NUMERI
+  lato 32, eps 0.5: c per unita' di tempo a dtau 0.03125/0.0625/0.125: ['0.3847', '0.3848', '0.3851']; v: ['0.8065', '0.8221', '0.9082']
+  lato 64, eps 0.5: c per unita' di tempo a dtau 0.03125/0.0625/0.125: ['0.3869', '0.3866', '0.3856']; v: ['0.8078', '0.8242', '0.9165']
+====================================================================================================
+LA MASSA DALLO SPOSTAMENTO: 1 su 2 controlli   ### CI SONO BUCHI
+====================================================================================================
