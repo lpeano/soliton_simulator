@@ -1,0 +1,84 @@
+[TIMBRO] _screening_forme_s3.py  sha1-BYTE 80ffe96c  committato e pulito
+====================================================================================================
+LO SCREENING DELLE QUATTRO FORME CANDIDATE DI S3 (in memoria; nessuna forma scelta)
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); R2: S3 sola, cs spento, lato 32, dtau 0.125, eps 0.5, base proiettata, N dtau 100, la norma, seconda meta'; Q e T (SE); x (0.1, 0.0001)
+  le forme da primo_ordine/_deriva_forme_l2.py; materia_vuoto.pezzi sostituita in memoria; differenze finite passo 2e-05, tolleranza 1e-08
+----------------------------------------------------------------------------------------------------
+### 1. L'ACCOPPIAMENTO: dal codice (differenze finite di alpha) contro la mano
+  S1 x 0.0001: rho dalpha/drho                                                       PASSA   codice 1.9999999600e-08  mano 1.9999999600e-08  relativo 2.99e-12
+  S1 x 0.01  : rho dalpha/drho                                                       PASSA   codice 1.9996000600e-04  mano 1.9996000600e-04  relativo 1.94e-12
+  S1 x 0.1   : rho dalpha/drho                                                       PASSA   codice 1.9605920988e-02  mano 1.9605920988e-02  relativo 1.32e-11
+  S1 x 1     : rho dalpha/drho                                                       PASSA   codice 5.0000000000e-01  mano 5.0000000000e-01  relativo 4.55e-12
+  S2 x 0.0001: rho dalpha/drho                                                       PASSA   codice 1.0000000001e+00  mano 1.0000000000e+00  relativo 1.40e-10
+  S2 x 0.01  : rho dalpha/drho                                                       PASSA   codice 1.0000000001e+00  mano 1.0000000000e+00  relativo 1.18e-10
+  S2 x 0.1   : rho dalpha/drho                                                       PASSA   codice 1.0000000001e+00  mano 1.0000000000e+00  relativo 1.29e-10
+  S2 x 1     : rho dalpha/drho                                                       PASSA   codice 1.0000000001e+00  mano 1.0000000000e+00  relativo 1.29e-10
+  S3 x 0.0001: rho dalpha/drho                                                       PASSA   codice 9.9980003014e-01  mano 9.9980003000e-01  relativo 1.48e-10
+  S3 x 0.01  : rho dalpha/drho                                                       PASSA   codice 9.8029604955e-01  mano 9.8029604941e-01  relativo 1.42e-10
+  S3 x 0.1   : rho dalpha/drho                                                       PASSA   codice 8.2644628113e-01  mano 8.2644628099e-01  relativo 1.70e-10
+  S3 x 1     : rho dalpha/drho                                                       PASSA   codice 2.5000000009e-01  mano 2.5000000000e-01  relativo 3.78e-10
+  S4 x 0.0001: rho dalpha/drho                                                       PASSA   codice 1.1300989133e-02  mano 1.1300989146e-02  relativo 1.15e-09
+  S4 x 0.01  : rho dalpha/drho                                                       PASSA   codice 1.9218209060e-01  mano 1.9218209058e-01  relativo 6.66e-11
+  S4 x 0.1   : rho dalpha/drho                                                       PASSA   codice 6.0955243705e-01  mano 6.0955243703e-01  relativo 3.10e-11
+  S4 x 1     : rho dalpha/drho                                                       PASSA   codice 1.0000000001e+00  mano 1.0000000000e+00  relativo 1.13e-10
+----------------------------------------------------------------------------------------------------
+### 2. LA CAMMINATA SOLA (non dipende dalla forma)
+  Q: la camminata sola ESATTA, N dtau 100, <= N*64 ulp                               PASSA   2.101e-13
+  T: la camminata sola ESATTA, N dtau 100, <= N*64 ulp                               PASSA   2.782e-13
+----------------------------------------------------------------------------------------------------
+### 3. I BRACCI R2 (S3 prima: i controlli che ripetono la cosa giusta)
+  S3 Q x 0.1   : max gamma 0.4018 a (0, 8); uniformita' 1.1 ulp; 217 s
+  S3 Q x 0.1: la base <= 1000 ulp                                                    PASSA   1.1 ulp
+  DEVE RIUSCIRE: S3 Q x 0.1 ridà il referto committato AL BIT                        PASSA   594417f6
+  S3 Q x 0.0001: max gamma 0.4828 a (16, 16); uniformita' 0.0 ulp; 219 s
+  S3 Q x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  DEVE RIUSCIRE: S3 Q x 0.0001 ridà il referto committato AL BIT                     PASSA   07083f09
+  S3 T x 0.1   : max gamma 0.3768 a (1, 25); uniformita' 1.1 ulp; 450 s
+  S3 T x 0.1: la base <= 1000 ulp                                                    PASSA   1.1 ulp
+  DEVE RIUSCIRE: S3 T x 0.1 ridà il referto committato AL BIT                        PASSA   bb0ef057
+  S3 T x 0.0001: max gamma 0.3630 a (1, 6); uniformita' 0.0 ulp; 421 s
+  S3 T x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S3 Q x 0.1: la linearita', 1e-7 contro 1e-6                                        PASSA   1.340e-07 contro 4.018e-04
+  S1 Q x 0.1   : max gamma 0.0048 a (0, 1); uniformita' 0.4 ulp; 184 s
+  S1 Q x 0.1: la base <= 1000 ulp                                                    PASSA   0.4 ulp
+  S1 Q x 0.0001: max gamma 0.0000 a (0, 0); uniformita' 0.0 ulp; 175 s
+  S1 Q x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S1 T x 0.1   : max gamma 0.0037 a (0, 1); uniformita' 0.5 ulp; 385 s
+  S1 T x 0.1: la base <= 1000 ulp                                                    PASSA   0.5 ulp
+  S1 T x 0.0001: max gamma 0.0000 a (11, 11); uniformita' 0.0 ulp; 355 s
+  S1 T x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S1 Q x 0.1: la linearita', 1e-7 contro 1e-6                                        PASSA   1.690e-08 contro 4.832e-06
+  S2 Q x 0.1   : max gamma 0.4865 a (0, 9); uniformita' 0.6 ulp; 155 s
+  S2 Q x 0.1: la base <= 1000 ulp                                                    PASSA   0.6 ulp
+  S2 Q x 0.0001: max gamma 0.4829 a (16, 16); uniformita' 0.0 ulp; 192 s
+  S2 Q x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S2 T x 0.1   : max gamma 0.4512 a (7, 0); uniformita' 1.3 ulp; 384 s
+  S2 T x 0.1: la base <= 1000 ulp                                                    PASSA   1.3 ulp
+  S2 T x 0.0001: max gamma 0.3631 a (6, 25); uniformita' 0.0 ulp; 362 s
+  S2 T x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S2 Q x 0.1: la linearita', 1e-7 contro 1e-6                                        PASSA   2.452e-07 contro 4.865e-04
+  S4 Q x 0.1   : max gamma 0.2971 a (0, 7); uniformita' 0.8 ulp; 183 s
+  S4 Q x 0.1: la base <= 1000 ulp                                                    PASSA   0.8 ulp
+  S4 Q x 0.0001: max gamma 0.0014 a (1, 0); uniformita' 0.0 ulp; 176 s
+  S4 Q x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S4 T x 0.1   : max gamma 0.2831 a (5, 1); uniformita' 2.1 ulp; 372 s
+  S4 T x 0.1: la base <= 1000 ulp                                                    PASSA   2.1 ulp
+  S4 T x 0.0001: max gamma 0.0010 a (0, 0); uniformita' 0.0 ulp; 352 s
+  S4 T x 0.0001: la base <= 1000 ulp                                                 PASSA   0.0 ulp
+  S4 Q x 0.1: la linearita', 1e-7 contro 1e-6                                        PASSA   2.557e-07 contro 2.971e-04
+----------------------------------------------------------------------------------------------------
+### 4. LE LETTURE E LA TABELLA
+  forma  acc. rho->0     gamma Q 0.1  (rapp.)   gamma T 0.1  (rapp.)   Q 1e-4    T 1e-4    stabile Q/T   stabile a poca materia Q/T
+  S1     -> 0 (x^2)      0.0048      (0.012)   0.0037      (0.010)   0.0000    0.0000    no/no          SI'/SI'
+         dove: Q 0.1 [0, 1], T 0.1 [0, 1, 'interno'], Q 1e-4 [0, 0], T 1e-4 [11, 11, 'K']
+  S2     1 (costante)    0.4865      (1.211)   0.4512      (1.197)   0.4829    0.3631    no/no          no/no
+         dove: Q 0.1 [0, 9], T 0.1 [7, 0, 'interno'], Q 1e-4 [16, 16], T 1e-4 [6, 25, 'interno']
+  S3     -> 1            0.4018      (1.000)   0.3768      (1.000)   0.4828    0.3630    no/no          no/no
+         dove: Q 0.1 [0, 8], T 0.1 [1, 25, 'interno'], Q 1e-4 [16, 16], T 1e-4 [1, 6, 'interno']
+  S4     -> 0 (x^0.64)   0.2971      (0.739)   0.2831      (0.751)   0.0014    0.0010    no/no          SI'/SI'
+         dove: Q 0.1 [0, 7], T 0.1 [5, 1, 'interno'], Q 1e-4 [1, 0], T 1e-4 [0, 0, 'centro']
+  ### IL LEGAME (le forme con accoppiamento -> 0 sono quelle stabili a poca materia): TIENE (stabili a poca materia: ['S1', 'S4']; accoppiamento -> 0: ['S1', 'S4'])
+====================================================================================================
+LO SCREENING: 41 su 41 controlli   ### TUTTI PASSATI
+====================================================================================================

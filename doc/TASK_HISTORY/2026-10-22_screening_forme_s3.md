@@ -69,6 +69,8 @@ al posto di `rho`)*.
 - ### **IL LEGAME:** ### **credo che TENGA**: ### **le forme con accoppiamento `-> 0`** *(`S1`, `S4`)* ### **sono quelle stabili a poca
   materia**, ### **`S2` e `S3` no.**
 
+### ⚠ **ANNOTAZIONE DOPO I NUMERI** *(referto `doc/referti_l2/screening_forme_s3.txt`)*: ### **il VERSO delle previsioni tiene, due NUMERI no.** ### **`S2`** «come `S3`»: ### **peggio**, `1.21` di `S3`. ### **`S1` a `x 0.1`** «fra `0.02` e `0.2`»: ### **`0.0048`, SOTTO la forchetta.** ### **`S4` a `x 0.1`** «`~0.38`»: ### **`0.297`.** ### **Stabili a poca materia `S1` e `S4`, e il legame TIENE**, come previsto.
+
 ## 4. I CONTROLLI E LE LETTURE *(copiati dal mandato)*
 
 - ### **LA SOSTITUZIONE:** ### **`materia_vuoto.pezzi`** *(la funzione che `materia_vuoto.applica` chiama per `(alpha, beta)`)*
