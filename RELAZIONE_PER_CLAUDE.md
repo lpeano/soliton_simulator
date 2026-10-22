@@ -20345,3 +20345,11 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **SULLA VOCE `LINEARE`** *(il regime di poca materia)*: ### **il motivo `(a)` della forma** *(«LINEARE per poca materia, pendenza statica `1.11`»)* ### **e' una proprieta' STATICA di `N`** *(`N ~ rho ln(rho/Lambda)` vicino a zero)*; ### **dinamicamente l'autofase di `psi` NON e' piccola con poca materia: e' MASSIMA** *(`rho d alpha/d rho -> 1`)*. ### **Quindi «lineare per poca materia» nel senso statico NON vuol dire «stabile per poca materia».** ### **Questo e' cio' che le misure dicono; che cosa farne e' di Luca.**
 
 ### 📌 **LA CODA:** ### **passa al mandato dello STATO FINALE** *(`02:22`)*.
+
+### 🧪 **STATO FINALE, BRACCIO R2Q** *(`S3` sola sul quadrato; referto `doc/referti_l2/stato_finale_R2Q.txt` e `.jsonl`, strumento `csv/_stato_finale.py` blob sha1-BYTE `e75c5a18`, committato e pulito; task history `2026-10-22_stato_finale.md`)*
+
+- ### **Le quattro corse arrivano a `tau = 250`** *(2000 e 4000 tick)*: ### **nessuna si ferma**, cono `0.125` e `0.0625`, nessun avviso.
+- ### **L'ultimo terzo:** lunghe `0.18`-`0.21`, ### **banda `0.49`-`0.51`**, reticolo `0.28`-`0.32`; ### **`max rho/<rho>` `5.3`-`5.4` a lato `32`, `6.6` a lato `64`**. ### **NON DEGENERA** *(il reticolo sotto il `50%`)*. ### **SATURA in `2` corse su `4`** *(le altre due appena oltre il `10%`: `0.18` e `0.11` sulla fascia reticolo, `0.13` sulle onde lunghe)*.
+- ### **LA PROVA CHE DECIDE: `L_g` `2.376` a lato `32`, `2.382` a lato `64`, rapporto `1.003` -> `(a)` FISSA IN ARCHI -> ARTEFATTO DEL RETICOLO.**
+- ### ⚠ **IL CONTROLLO DI SCALA, che la lettura fissata non aveva:** ### **per un campo di rumore bianco su `4` vicini la frazione di massimi locali e' `1/5`**, cioe' ### **`L_g = sqrt5 = 2.24`**: ### **il `2.38` misurato e' VICINO AL PAVIMENTO DEL RUMORE**, quindi `L_g` da sola ### **e' una misura debole.** ### **Ma la lunghezza spettrale dice la stessa cosa, indipendente:** ### **`3.39`/`3.29` a lato `32`, `3.42`/`3.34` a lato `64`** -- ### **fissa in archi anche lei.**
+- ### **LA CONSERVAZIONE:** le norme al ### **`1e-13`**; ### **`G` deriva di `1.02e-2` a lato `32` e `2.53e-3` a lato `64`: rapporto `4.03`** -- ### **come vuole il secondo ordine** *(`dtau` dimezzato)*, ### **anche se le due taglie non sono lo stesso sistema.**

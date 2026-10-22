@@ -1,0 +1,27 @@
+[TIMBRO] _stato_finale.py  sha1-BYTE e75c5a18  committato e pulito
+====================================================================================================
+LO STATO FINALE, braccio R2Q: R2 sul QUADRATO
+====================================================================================================
+  la materia uniforme x 0.1, vuoto 1; cs SPENTO; il passo 14 pezzi, impronta 2e7f795d2a52fbe7
+  taglie ((32, 0.125), (64, 0.0625)); semi (1, 2); rumore 1e-10 relativo; tau fine 250 (tempo proprio); osservabili a ogni unita'
+  fasce: lunghe |k| < 0.25 pi, reticolo r(k) >= 0.75, banda il resto; L_g = sqrt(n / massimi locali) in archi
+----------------------------------------------------------------------------------------------------
+  R2Q lato 32 dtau 0.125 seme 1: 2000 tick, tau 250.00, 8 s
+      ultimo terzo: lunghe 0.199  banda 0.488  reticolo 0.313;  max rho/<rho> 5.258;  massimi 183.5;  L_g 2.364 archi;  L_spettro 3.385
+      cambio fra le due meta': lunghe 0.134  banda 0.048  reticolo 0.183  max_rel 0.136  n_max 0.007  L_g 0.003  -> NON SATURA;  non degenera
+      conservazione (massimo scarto relativo): norma psi 1.18e-13  norma phi 4.77e-15  G 1.02e-02;  cono s max 0.1250;  avvisi del punto fisso 0
+  R2Q lato 32 dtau 0.125 seme 2: 2000 tick, tau 250.00, 7 s
+      ultimo terzo: lunghe 0.183  banda 0.497  reticolo 0.320;  max rho/<rho> 5.413;  massimi 179.8;  L_g 2.388 archi;  L_spettro 3.289
+      cambio fra le due meta': lunghe 0.063  banda 0.005  reticolo 0.029  max_rel 0.084  n_max 0.002  L_g 0.001  -> SATURA;  non degenera
+      conservazione (massimo scarto relativo): norma psi 1.19e-13  norma phi 4.44e-15  G 1.02e-02;  cono s max 0.1250;  avvisi del punto fisso 0
+  R2Q lato 64 dtau 0.0625 seme 1: 4000 tick, tau 250.00, 43 s
+      ultimo terzo: lunghe 0.208  banda 0.508  reticolo 0.284;  max rho/<rho> 6.592;  massimi 722.0;  L_g 2.382 archi;  L_spettro 3.419
+      cambio fra le due meta': lunghe 0.056  banda 0.014  reticolo 0.070  max_rel 0.099  n_max 0.004  L_g 0.002  -> SATURA;  non degenera
+      conservazione (massimo scarto relativo): norma psi 7.31e-14  norma phi 1.53e-14  G 2.53e-03;  cono s max 0.0625;  avvisi del punto fisso 0
+  R2Q lato 64 dtau 0.0625 seme 2: 4000 tick, tau 250.00, 43 s
+      ultimo terzo: lunghe 0.193  banda 0.512  reticolo 0.294;  max rho/<rho> 6.609;  massimi 721.7;  L_g 2.383 archi;  L_spettro 3.341
+      cambio fra le due meta': lunghe 0.041  banda 0.046  reticolo 0.114  max_rel 0.092  n_max 0.023  L_g 0.011  -> NON SATURA;  non degenera
+      conservazione (massimo scarto relativo): norma psi 7.37e-14  norma phi 1.60e-14  G 2.53e-03;  cono s max 0.0625;  avvisi del punto fisso 0
+----------------------------------------------------------------------------------------------------
+  ### LA PROVA CHE DECIDE: L_g lato 32 2.376, lato 64 2.382 archi; rapporto 1.003 -> (a) FISSA IN ARCHI -> ARTEFATTO DEL RETICOLO
+====================================================================================================
