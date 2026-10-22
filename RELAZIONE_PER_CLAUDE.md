@@ -20414,3 +20414,22 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 🧪 **DECISIONE-LINEARE, PARTE CONTROLLI: `13` SU `13`** *(mandato di Luca delle `12:39`; task history `2026-10-22_lineare_s1_s4.md`; referto `doc/referti_l2/lineare_s1_s4_controlli.txt` e `.jsonl`, strumento `csv/_lineare_s1_s4.py` blob sha1-BYTE `dc166098`, committato e pulito)*: ### **`S3` ridà `594417f6` `R2` e `R1` AL BIT** *(`10` campi ciascuno)*; ### **l'accoppiamento di `S1` e `S4` dal codice = la mano a `x` `0.01`-`3`** *(il peggiore `5.7e-10`)*; la camminata sola esatta. ### **La voce e' `[[DECISIONE-LINEARE]]`** *(fatta nascere: `LINEARE` non esisteva nell'indice, e da solo non e' un ID valido)*. ### **Le parti `scala`, `materia`, `cs` seguono, una alla volta.**
 
 ### ⏱️ **CONTROLLO DELLA MACCHINA DELLE `15:11`** *(Luca; risposto alle `15:14`)*: ### **due processi, tutti e due VIVI, nessuno fermo:** ### **`22988` `python csv/_stato_finale.py --braccio R1T`, dalle `07:56:22`, `26123` s di CPU** *(un core)*: ### **lato `64` seme `1` FATTO alle `13:01`** *(`14670` tick in `14651` s: `1.00` s per tick, non `0.70` come stimavo -- l'errore di stima e' mio, e ci sono state due prove in parallelo)*, ### **seme `2` in corso dalle `13:01`: fine stimata verso le `17:05`**; ### **`16736` `python csv/_lineare_s1_s4.py --parte scala`, dalle `13:10:22`, `7379` s di CPU**: ### **`S1` FATTO** *(lato `32` `613` s, lato `64` `4792` s, la linearita')*, ### **`S4` lato `32` fatto, lato `64` in corso dal `~14:49`: fine della parte verso le `16:35`** *(stimata dai `4792` s di `S1` a lato `64`)*. ### **Niente di finito e non committato** *(le parti finite sono a `e345cd8f`)*; ### **niente si e' fermato.** ### **E un numero gia' scritto nel referto parziale:** ### **`S1`, il massimo a `k = 0.0625 pi` a lato `32` E a lato `64` -> `(a)` FISSO IN ARCHI** *(`gamma` `0.00570` e `0.00576`)* -- ### **il commento si fa a parte finita.**
+
+### 🧪 **STATO FINALE, BRACCIO R1T** *(`cs` + fase sui triangoli, `SN`; referto `doc/referti_l2/stato_finale_R1T.txt` e `.jsonl`, strumento `csv/_stato_finale.py` blob sha1-BYTE `e75c5a18`, committato e pulito)*
+
+- ### **Le quattro corse a `tau = 250`** *(`7272`, `7404`, `14670`, `14569` tick; lato `64` a `~0.9`-`1.0` s per tick)*: ### **nessuna si ferma**, nessun avviso, cono `0.059`.
+- ### **L'ultimo terzo:** banda `0.58`-`0.59`, ### **reticolo `0.37`-`0.39`** *(NON DEGENERA)*; `max rho/<rho>` `3.0`-`4.5`; ### **SATURA in `1` corsa su `4`** *(l'altezza dei grumi cresce: `+19%`, `+8%`, `+10%`)*.
+- ### **LA PROVA: `L_g` `2.727` a lato `32`, `2.730` a lato `64`, rapporto `1.001` -> `(a)` FISSA IN ARCHI.** La lunghezza spettrale `2.59`-`2.60` a tutte e due le taglie. ### **`G`: `2.5e-3` e `6.3e-4`, rapporto `4.0`.**
+
+### 🧭 **LO STATO FINALE, LA SINTESI** *(`doc/referti_l2/stato_finale.txt` e `.jsonl`, da `python csv/_stato_finale.py --sintesi`)* ### **E LA RISPOSTA ALLA DOMANDA DEL PUNTO `0`**
+
+| braccio | reticolo *(ultimo terzo)* | DEGENERA | SATURA | `L_g` `32` -> `64` | la prova |
+|---|---|---|---|---|---|
+| `R2Q` | `0.28`-`0.32` | no | `2` su `4` | `2.376` -> `2.382` | `(a)` |
+| `R1Q` | `0.41`-`0.45` | no | `1` su `4` | `2.276` -> `2.271` | `(a)` |
+| `R2T` | `0.23`-`0.24` | no | `2` su `4` | `2.860` -> `2.867` | `(a)` |
+| `R1T` | `0.37`-`0.39` | no | `1` su `4` | `2.727` -> `2.730` | `(a)` |
+
+- ### **LA DOMANDA:** «l'instabilita' e' la strada verso un equilibrio dinamico *(la materia che si raggruppa)*, o un difetto che degenera alla scala del reticolo?» ### **LA RISPOSTA DELLE LETTURE FISSATE:** ### **NESSUN braccio DEGENERA** *(la fascia reticolo sempre sotto il `50%`, nessuna corsa si ferma)*, ### **ma in TUTTI E QUATTRO la taglia dei grumi e' FISSA IN ARCHI** *(rapporti `0.998`-`1.003`, la lunghezza spettrale anche lei)*: ### **la materia SI RAGGRUPPA, ma alla scala del RETICOLO** -- ### **un artefatto del reticolo che NON degenera**, ### **non un equilibrio a una scala fisica.** ### **E la saturazione e' a meta': lo spettro si ferma, l'altezza dei grumi in `R1` continua a crescere.**
+- ### ⚠ **IL LIMITE, scritto per ogni braccio:** ### **`L_g` e' vicina al pavimento del rumore** *(`sqrt5 = 2.24` su `4` vicini, `sqrt7 = 2.65` su `6`)*; ### **la conferma indipendente e' la lunghezza spettrale, fissa in archi in tutti e quattro.**
+- ### **LA CONSERVAZIONE:** le norme al `1e-13`; ### **`G` deriva al secondo ordine** *(rapporto `~4` fra le taglie in tutti i bracci)*.
