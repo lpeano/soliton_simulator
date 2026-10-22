@@ -1,0 +1,17 @@
+[TIMBRO] _moneta_massa.py  sha1-BYTE c114245d  committato e pulito
+====================================================================================================
+LA MONETA E' LA MASSA? -- misura 2
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); eps SOLO nella scena
+----------------------------------------------------------------------------------------------------
+  eps 0.25  (eps dtau 0.03125): gamma 0.00710 a (1, 0), k misurato 0.0625 pi, previsto sqrt(2 gamma/c) 0.0605 pi (c 0.3933), scarto +0.03 passi; uniformita' 0.5 ulp; 506 s
+  eps 0.25: la base <= 1000 ulp                                                      PASSA   0.5 ulp
+  eps 0.5   (eps dtau 0.06250): gamma 0.00570 a (1, 0), k misurato 0.0625 pi, previsto sqrt(2 gamma/c) 0.0544 pi (c 0.3894), scarto +0.13 passi; uniformita' 0.5 ulp; 496 s
+  eps 0.5: la base <= 1000 ulp                                                       PASSA   0.5 ulp
+  DEVE RIUSCIRE: eps 0.5 ridà S1 lato 32 di cb846b2a AL BIT                          PASSA   la mappa intera
+  eps 1     (eps dtau 0.12500): gamma 0.00768 a (0, 1), k misurato 0.0625 pi, previsto sqrt(2 gamma/c) 0.0644 pi (c 0.3751), scarto -0.03 passi; uniformita' 0.5 ulp; 490 s
+  eps 1: la base <= 1000 ulp                                                         PASSA   0.5 ulp
+  ### LA LUNGHEZZA SEGUE c? SI' (entro 1 passo per tutti e tre gli eps)
+====================================================================================================
+LA MISURA 2: 4 su 4 controlli   ### TUTTI PASSATI
+====================================================================================================

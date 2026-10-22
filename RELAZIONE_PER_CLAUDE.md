@@ -20503,3 +20503,15 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **CHE COSA DICE:** ### **la «massa» dei rami a onde lunghe c'e' anche SENZA moneta** *(`Delta` `1.69`)*, ### **e la curvatura `c` cambia di meno del `17%` su `eps` da `0` a `2`**: ### **la curvatura che fa i `32` archi NON viene dalla moneta.** ### **Da dove venga non lo so**: ### **l'ipotesi piu' ovvia e' il GROVER** *(il flusso `pi s` sulle direzioni, che mescola le estremita')* -- ### **NON verificata.**
 - ### **LA MIA PREVISIONE** *(PARZIALE: a `eps = 0` non del tutto senza massa)* ### **era nel verso giusto**, ### **ma non prevedeva che `eps` contasse cosi' poco.**
 - ### **La misura `2` segue** *(`S1` a tre `eps`)*.
+
+### 🧪 **LA MONETA E' LA MASSA? MISURA 2: LA LUNGHEZZA SEGUE `c` -- MA LA PROVA E' DEBOLE: I TRE `k` PREVISTI CADONO VICINO ALLO STESSO PUNTO DI GRIGLIA** *(referto `doc/referti_l2/moneta_massa_2.txt` e `.jsonl`, strumento `csv/_moneta_massa.py` blob sha1-BYTE `c114245d`; il referto del mandato e' DIVISO in `_1` e `_2`, una misura per commit come il mandato chiede)*
+
+- ### **`S1`, `R2`, `x 0.1`, lato `32`, `N dtau 400`:** ### **`eps dtau 0.03125`: `gamma` `0.00710`, `k` `0.0625 pi`, previsto `0.0605`**; ### **`0.0625` *(oggi)*: `0.00570`, previsto `0.0544`** *(AL BIT con `cb846b2a`)*; ### **`0.125`: `0.00768`, previsto `0.0644`.** ### **Entro `1` passo tutti e tre -> LA LUNGHEZZA SEGUE `c`.**
+- ### ⚠ **IL LIMITE, scritto:** ### **`c` cambia poco con `eps`** *(misura `1`)*, ### **e i tre `k` previsti** *(`0.054`-`0.064 pi`)* ### **stanno tutti vicino a `0.0625 pi`, il `k` minimo a lato `32`**: ### **la prova passa, ma distingue poco.**
+
+### 🧭 **LA MONETA E' LA MASSA? LA CONSEGUENZA DEL PUNTO `4`, SCRITTA E NON ADOTTATA**
+- ### **Il punto `4` chiedeva: «SE `eps` e' la massa», quale regola per `eps` terrebbe fissa la dispersione fisica.** ### **`eps` NON e' la massa** *(misura `1`)*: ### **la regola alla D'Ariano-Perinotti** *(la massa nella moneta, `m a -> 0` nel limite continuo: `eps dtau -> 0` raffinando)* ### **NON fissa la curvatura qui**, ### **perche' la curvatura c'e' anche a `eps = 0`** *(`c` `0.3946`, `Delta` `1.69`)*. ### **Scalare `eps` col passo cambierebbe `c` di meno del `17%`** *(`0.395` -> `0.329` su `eps` `0`-`2`)*.
+- ### **Che cosa cambierebbe nei referti di `L2`: NIENTE** *(nessuna regola cambiata, nessun referto riscritto)*.
+- ### **Dove guardare dopo** *(non mio da decidere)*: ### **la massa a `eps = 0` viene da altro** -- ### **il mandato delle `20:03`** *(lo spostamento parziale `s`, o il Grover)* ### **e' in coda.**
+
+### ❓ **LA DOMANDA PER LUCA:** ### **la regola di scala per `eps`** *(oggi `eps` fisso raffinando)*: ### **resta com'e', visto che `eps` non e' la massa e conta poco su `c`, o aspetta il risultato dello spostamento parziale** *(in coda)*? *(Criterio di chiusura: una tua decisione registrata.)*
