@@ -1,0 +1,33 @@
+[TIMBRO] _lineare_s1_s4.py  sha1-BYTE dc166098  committato e pulito
+====================================================================================================
+DECISIONE-LINEARE: IL CONFRONTO FRA S1 E S4 (in memoria; nessuna forma scelta) -- --parte materia
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); il quadrato; base proiettata; la NORMA, seconda meta'; N dtau 400 (i controlli a 100)
+----------------------------------------------------------------------------------------------------
+  R2 S1 x 0.01 lato 32 eps 1e-07 N dtau 400    max 0.00000 a (0, 0) (k ['0.0000', '0.0000'] pi); ultimo quarto 0.00000 (scarto 0.167); uniformita' 0.2 ulp; 514 s
+  R2 S1 x 0.01 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                     PASSA   0.2 ulp
+  R2 S1 x 0.01 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo ### FALLISCE   0.167
+  R2 S1 x 0.3 lato 32 eps 1e-07 N dtau 400     max 0.10500 a (0, 4) (k ['0.0000', '0.2500'] pi); ultimo quarto 0.10500 (scarto 0.000); uniformita' 0.9 ulp; 530 s
+  R2 S1 x 0.3 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   0.9 ulp
+  R2 S1 x 0.3 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+  R2 S1 x 1 lato 32 eps 1e-07 N dtau 400       max 0.65291 a (0, 10) (k ['0.0000', '0.6250'] pi); ultimo quarto 0.65291 (scarto 0.000); uniformita' 2.7 ulp; 551 s
+  R2 S1 x 1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                        PASSA   2.7 ulp
+  R2 S1 x 1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo qu PASSA   0.000
+  R2 S1 x 3 lato 32 eps 1e-07 N dtau 400       max 0.56939 a (0, 9) (k ['0.0000', '0.5625'] pi); ultimo quarto 0.56939 (scarto 0.000); uniformita' 3.2 ulp; 544 s
+  R2 S1 x 3 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                        PASSA   3.2 ulp
+  R2 S1 x 3 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo qu PASSA   0.000
+  R2 S4 x 0.01 lato 32 eps 1e-07 N dtau 400    max 0.07887 a (0, 4) (k ['0.0000', '0.2500'] pi); ultimo quarto 0.07887 (scarto 0.000); uniformita' 1.1 ulp; 551 s
+  R2 S4 x 0.01 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                     PASSA   1.1 ulp
+  R2 S4 x 0.01 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo PASSA   0.000
+  R2 S4 x 0.3 lato 32 eps 1e-07 N dtau 400     max 0.58041 a (10, 0) (k ['0.0000', '0.6250'] pi); ultimo quarto 0.58041 (scarto 0.000); uniformita' 2.1 ulp; 586 s
+  R2 S4 x 0.3 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                      PASSA   2.1 ulp
+  R2 S4 x 0.3 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo  PASSA   0.000
+  R2 S4 x 1 lato 32 eps 1e-07 N dtau 400       max 1.22888 a (16, 0) (k ['0.0000', '1.0000'] pi); ultimo quarto 1.22888 (scarto 0.000); uniformita' 2.7 ulp; 598 s
+  R2 S4 x 1 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                        PASSA   2.7 ulp
+  R2 S4 x 1 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo qu PASSA   0.000
+  R2 S4 x 3 lato 32 eps 1e-07 N dtau 400       max 2.69646 a (16, 16) (k ['1.0000', '1.0000'] pi); ultimo quarto 2.69647 (scarto 0.000); uniformita' 11.1 ulp; 611 s
+  R2 S4 x 3 lato 32 eps 1e-07 N dtau 400: la base <= 1000 ulp                        PASSA   11.1 ulp
+  R2 S4 x 3 lato 32 eps 1e-07 N dtau 400: asintotico, seconda meta' contro ultimo qu PASSA   0.000
+====================================================================================================
+LA PARTE materia: 15 su 16 controlli   ### CI SONO BUCHI
+====================================================================================================

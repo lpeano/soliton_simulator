@@ -20439,3 +20439,22 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **`S1`** *(`R2`, `x 0.1`, `N dtau 400`)*: ### **il massimo a `k = 0.0625 pi` a lato `32` E a lato `64`** *(`(1, 0)` e `(0, 62)` ripiegati)* -> ### **`(a)` FISSO IN ARCHI**; ### **`gamma` `0.00570` e `0.00576`** *(entro l'`1.1%`)*; asintotico *(`0.058`, `0.050`)*; la linearita' `5.8e-08` contro `5.7e-06`. ### ⚠ **A lato `32` quel `k` e' il PIU' PICCOLO del toro; a lato `64` NO** *(il minimo e' `0.03125 pi`)*: ### **la lettura `(b*)` della scatola NON si applica** -- ### **il massimo NON segue la scatola: resta a `32` archi di lunghezza d'onda.**
 - ### **`S4`**: ### **il massimo a `k = 0.4375 pi` a tutte e due le taglie** *(`(0, 7)` e `(14, 0)`)* -> ### **`(a)` FISSO IN ARCHI**; ### **`gamma` `0.29705` e `0.30014`** *(entro l'`1.0%`)*; asintotico; la linearita' `5.5e-07` contro `3.0e-04`.
 - ### **LA LETTURA FISSATA:** ### **per tutte e due le forme l'instabilita' che resta a `x 0.1` e' un ARTEFATTO DEL RETICOLO** *(fissa in archi)*, ### **non una scala fisica.** ### **La mia previsione per `S1`** *(il `k` minimo a tutte e due le taglie, quindi `(b*)`)* ### **e' CADUTA**: a lato `64` il massimo ### **non** e' al `k` minimo.
+
+### 🧪 **DECISIONE-LINEARE, PARTE MATERIA: `15` SU `16` -- UN CONTROLLO FALLISCE, ED E' IL CRITERIO SU UN `gamma` QUASI NULLO** *(referto `doc/referti_l2/lineare_s1_s4_materia.txt` e `.jsonl`, strumento `csv/_lineare_s1_s4.py` blob sha1-BYTE `dc166098`, committato e pulito)*
+
+| forma | `x` | `gamma` max | dove | `k` *(pi)* |
+|---|---|---|---|---|
+| `S1` | `0.01` | `2.0e-6` | `(0, 0)` | `0` |
+| `S1` | `0.1` *(parte scala)* | `0.00570` | `(1, 0)` | `0.0625` |
+| `S1` | `0.3` | `0.10500` | `(0, 4)` | `0.25` |
+| `S1` | `1` | `0.65291` | `(0, 10)` | `0.625` |
+| `S1` | `3` | `0.56939` | `(0, 9)` | `0.5625` |
+| `S4` | `0.01` | `0.07887` | `(0, 4)` | `0.25` |
+| `S4` | `0.1` *(parte scala)* | `0.29705` | `(0, 7)` | `0.4375` |
+| `S4` | `0.3` | `0.58041` | `(10, 0)` | `0.625` |
+| `S4` | `1` | `1.22888` | `(16, 0)` | `1.0` |
+| `S4` | `3` | `2.69646` | `(16, 16)` | `(1, 1)` |
+
+- ### **CHE COSA DICE:** ### **tutte e due le forme sono stabili o quasi a poca materia, e FORTEMENTE INSTABILI a molta materia** *(`S1` `0.65` a `x 1`, `S4` `1.23` a `x 1` e `2.70` a `x 3`, piu' del `0.40` di `S3` di oggi)*; ### **il massimo si sposta verso `k` grandi con `x`** *(`S4` a `x 3` sta a `(pi, pi)`, il modo alternato)*. ### **La mia previsione** *(«`gamma` cresce fino a `x ~ 1` e cala a `x 3`; `S4` sopra `S1`»)*: ### **vera per `S1`, FALSA per `S4`** *(a `x 3` cresce ancora)*.
+- ### ⛔ **IL CONTROLLO CHE FALLISCE:** ### **«asintotico, seconda meta' contro ultimo quarto entro `10%`» per `S1` a `x 0.01`: `0.167`.** ### **Il perche', dai numeri:** il massimo e' ### **`2.04e-6` a `k = 0`** *(il transitorio di `k = 0` gia' noto)*, l'ultimo quarto ### **`2.38e-6`**: ### **una differenza di `3.4e-7` su un valore `200` volte sotto la soglia di stabile** *(`4.07e-4`)*. ### **Il criterio RELATIVO degenera su un `gamma` quasi nullo**; ### **nessuna lettura cambia** *(stabile in tutti e due i casi)*. ### **NON l'ho cambiato:** era fissato prima dei numeri, e ### **la correzione** *(un criterio assoluto sotto la soglia di stabile)* ### **e' una decisione tua.** ### **Le altre `7` asintoticita' passano** *(scarto `0.000`)*.
+- ### 📌 **La coda continua senza decisioni prese al tuo posto** *(`L-DOPO-STOP`)*: ### **la parte `cs`, poi il documento sui `32` archi.**
