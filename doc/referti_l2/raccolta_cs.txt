@@ -1,0 +1,133 @@
+[TIMBRO] _raccolta_cs.py  sha1-BYTE 6291d102  committato e pulito
+====================================================================================================
+LA RACCOLTA SU cs E Lambda_c (il metodo del task history 2026-10-22_raccolta_cs.md)
+====================================================================================================
+### A. LE VOCI: 39 per ID, titolo o leggi; 24 SOLO nella descrizione
+  -- era 2: 19
+  CANALE-CS-SECONDA-SORGENTE                       FRONTE     AGENDA    creata 2026-10-22  | IL CANALE DI cs: LA SECONDA SORGENTE DELL-INSTABILITA- DELLA MATERIA UNIFORME
+  CS-LOCALE-DAL-VUOTO                              DECISIONE  AGENDA    creata 2026-10-11  | il tempo proprio e la velocita- locale della luce vengono dal VUOTO, non dalla materia del nodo
+  DECISIONE-TICK-OROLOGIO-MASSIMO                  DECISIONE  AGENDA    creata 2026-10-13  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo
+  DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE       DECISIONE  AGENDA    creata 2026-10-17  | la scheda di Lambda_c non si genera dalla tabella: lo schema pretende valore E origine
+  DOMANDA-IL-LIMITE-DELLA-LUCE-SI-RAGGIUNGE        DECISIONE  CHIUSA    creata 2026-10-13  | il limite omega*dtau = pi si raggiunge? E che cosa limita cs, se niente lo limita?
+  DOMANDA-IL-VALORE-DI-LAMBDA-C                    DECISIONE  AGENDA    creata 2026-10-16  | il valore di Lambda_c: parametro dichiarato, memoria di nascita, o altro
+  DOMANDA-LA-FORMA-DI-CS-CHE-SATURA                DECISIONE  AGENDA    creata 2026-10-13  | la forma di cs dal vuoto che satura: la scala Lambda_0 non esiste in tabella
+  DOMANDA-LA-FORMA-DI-CS-DAL-VUOTO                 DECISIONE  SUPERATA  creata 2026-10-13  | la forma di f in cs_k = f'(pi_k): il posto A1 della carta, dichiarato aperto
+  DOMANDA-LA-MITOSI-CREA-VUOTO                     DECISIONE  AGENDA    creata 2026-10-18  | la mitosi CREA vuoto? a densita costante V cresce, e oggi V si conserva esattamente
+  DOMANDA-LO-STATO-CONTIENE-IL-PASSATO             DECISIONE  AGENDA    creata 2026-10-19  | lo stato contiene il passato? una memoria al posto dei punti fissi di cs, scelta per il modello
+  DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO            DECISIONE  AGENDA    creata 2026-10-11  | pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia
+  DOMANDA-QUALE-FORMA-FISSA-CS                     DECISIONE  AGENDA    creata 2026-10-11  | quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti
+  DOMANDA-QUALE-INVARIANTE-CON-CS                  DECISIONE  AGENDA    creata 2026-10-17  | con cs non uniforme H_tot non e conservato: quale quantita deve conservare il passo?
+  DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO  DECISIONE  CHIUSA    creata 2026-10-17  | Lambda = 0 da cs = 0, e l-assert del cono lo rifiuta: orologio fermo o stato non fisico
+  INVARIANZA-LOCALE-CS                             FRONTE     AGENDA    creata 2026-10-08  | ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferimento esterno
+  MISURA-ARCO-E-COINCIDENZA                        MISURA     AGENDA    creata 2026-10-11  | nei tick asincroni la frequenza dell-arco e- una COINCIDENZA, non il minimo dei cs
+  MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA           MISURA     AGENDA    creata 2026-10-11  | a queste taglie il cs locale non produce nessun effetto misurabile sulla materia
+  MISURA-INVARIANZA-LOCALE-V4                      MISURA     AGENDA    creata 2026-10-11  | l-invarianza locale della luce: misurata SOLO a cs UNIFORME, e la- i tick asincroni la rispettano
+  TEMPO-PROPRIO-LOCALE                             STANDARD   CHIUSA    creata 2026-10-10  | in TUTTI gli step si usa il tempo proprio LOCALE del nodo, e anche la cs LOCALE
+  -- era 1: 20
+  B6-TURBO                                         MISURA     CHIUSA    creata 2026-10-08  | TURBO VALE SEMPRE ⏳[EPOCA 1 · MISURA] | Esito B del turbo — con cs al 5 % di CSM lo Step 2 non...
+  C23                                              MISURA     CHIUSA    creata 2026-10-08  | C23 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | IL FATTORE (CSM/cs)^2 NON E' 1 SULLA CODA a 500...
+  C4                                               MISURA     CHIUSA    creata 2026-10-08  | C4 VALE SEMPRE ⏳[EPOCA 1 · CODICE] | inerzia = T² — chiude il buco dimensionale; esponente cs^−2...
+  C5                                               MISURA     CHIUSA    creata 2026-10-08  | C5 🟨VALE PER QUELLA SCENA ⏳[EPOCA 1 · MISURA] | tauluce = d/cs e' PIATTO ⇒ la sostituzione rompe la…
+  COMPONENTI:A1                                    CURA       CHIUSA    creata 2026-10-08  | A1. STEP2OROLOGIO — aggancio OROLOGIO ↔ METRICA · omegaclk = (cs/CSM)²
+  COMPONENTI:A5                                    CRITERIO   SOSPESA   creata 2026-10-08  | d/cs è il tempo causale
+  COMPONENTI:B10                                   CRITERIO   SOSPESA   creata 2026-10-08  | --tau-luce | SÌ — d/cs, lo stesso tau già cablato nello Strato 1, coefficiente 1 | NO — criterio...
+  COMPONENTI:B11                                   CRITERIO   SOSPESA   creata 2026-10-08  | --cs-dinamico | sì (cs = CSM/(1+GAMMA√I), stesso GAMMA di G(rho)) | A/B storico; nessun...
+  COMPONENTI:B8                                    CRITERIO   SOSPESA   creata 2026-10-08  | --fork-su2-mem | sì — tau = d/cs, «nessun numero nuovo, d e cs esistono già» | 23/23 PASS, S7...
+  COMPONENTI:B9                                    CRITERIO   SOSPESA   creata 2026-10-08  | --step2-orologio | SÌ — orologio di Compton omega ∝ cs²; «fisica NECESSARIA e derivata: zero...
+  COMPONENTI:D1                                    CURA       CHIUSA    creata 2026-10-08  | csnodoprev esteso alla mitosi — il figlio eredita cs dal padre, come le altre sei cache |...
+  COMPONENTI:S2                                    CRITERIO   SOSPESA   creata 2026-10-08  | riduzione al limite sul blob ATTUALE: ON (cs=CSM) vs OFF byte-identico | 0.000e+00 con nodi 2924...
+  COMPONENTI:S3b                                   MISURA     CHIUSA    creata 2026-10-08  | l'orologio rallenta dove cs è basso | 0.0100 volte a cs = 0.1·CSM
+  COMPONENTI:S3c                                   MISURA     CHIUSA    creata 2026-10-08  | a cs = CSM il fattore è 1 esatto | 1.000000000000000
+  CRESCITA-DOPO-Z43                                MISURA     SOSPESA   creata 2026-10-08  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi
+  CS-LAMBDA-GLOBALE                                DIFETTO    SOSPESA   creata 2026-10-08  | _cs_nodo non e del tutto locale: il pavimento usa _Lam = mean(|psi|^2) su TUTTA la rete
+  D32                                              DIFETTO    CHIUSA    creata 2026-10-08  | I TEMPI PROPRI DICHIARATI SONO TRE, E SONO TRE GRANDEZZE DIVERSE: r, taupp e d/cs. corr(r...
+  RAMPA-2                                          DIFETTO    SOSPESA   creata 2026-10-08  | APERTA il 2026-09-25 (richiesta di Luca) | AL PASSO 0 TUTTI LEGGONO cs = CSM. La cache...
+  Z39                                              FRONTE     SOSPESA   creata 2026-10-08  | Z39 DA RIVERIFICARE ⏳[EPOCA 1 · MISURA] | UN FATTO STABILE DI CLAUDE.md E' CADUTO: cs E' VIVO....
+  Z84                                              FRONTE     SOSPESA   creata 2026-10-08  | Z84 VALE SEMPRE ⏳[EPOCA 1 · MISURA] | E' cs^2lap CHE ALLUNGA L'ARCO — la TENSIONE DEI VICINI...
+  -- solo nella descrizione (gli ID): ARCHI-OLTRE-4PI, C13, CARTA-FISICA-SIMULATORE, DECISIONE-LINEARE, DECISIONE-STRADA-B-FLUSSI, DECISIONE-VUOTO-MEDIATORE, DIFETTO-TRE-MISURE-FUORI-DALLA-SUITE, DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA, DOMANDA-GUSCIO-E-INTERFERENZA, DOMANDA-IL-V4-ENTRA-NELL-ERA-2, DOMANDA-LA-GERARCHIA-GRAVITA-EM, DOMANDA-OMEGA-E-UNITA-O-COSTANTE, DOMANDA-PRIMA-LEGARE-POI-MISURARE, DOMANDA-QUALE-TEMPO-PROPRIO-USA-L-ARCO, DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA, GRAVITA-POTENZIALE, GRIGLIA-A-TRIANGOLI, L5-ASIMMETRIA-NELLA-LEGGE, MAPPA-DIPENDENZE, MISURA-ANTIMATERIA-PIEGA-DIVERSO, MISURA-C-ESATTA-OPPURE-LOCALITA, MITOSI-ASSORBITORE, SCHERMATURA-LEGGE-REVISIONE, SPIN-LEGATO-AL-MOTO
+### B. I NODI DI DECISIONE: 1 su 14 -- DEC-QC-CONSERVATA
+### C. LE SEZIONI DELLA MAPPA: 24
+  riga   87  ### `L2` — **LA MATERIA MODIFICA IL VUOTO, e quindi LA FORMA DI `cs`** — *la «gravita'» del modello*
+  riga  759  ### ⛔ **APERTA `2`: LA FORMA DI `cs(Lambda)`** — come la velocita' locale della luce
+  riga  795  ## 19. 📌 `L2`/`L4` — **`Lambda_c` E LA COSTANTE DI STRUTTURA FINE** — *una domanda di
+  riga  802  ### ⭐ **LA DOMANDA, di Luca:** *«`Lambda_c` c'entra con la costante di struttura fine?»*
+  riga  803  ### **La voce e' `[[DOMANDA-IL-VALORE-DI-LAMBDA-C]]`** — aperta adesso, perche' la
+  riga  804  ### **forma** di `cs` e' decisa *(`cs_k = Lambda_k/(Lambda_k + Lambda_c)`)* e il
+  riga  805  ### **valore** di `Lambda_c` ### **no.**
+  riga  821  ### **Livello: si decide DOPO `L4`**, e resta collegata alla scelta di `Lambda_c` *(`L2`)*.
+  riga  823  ## 20. ⛔⛔ `L2` — **`Lambda_c`: LE TRE STRADE, E PERCHE' DUE SONO SCARTATE**
+  riga  851  ### 📌 **E NELLE MISURE DI `D4` IL RAPPORTO `Lambda_c/Lambda_medio` E' SOLO UN'ETICHETTA:**
+  riga  856  ### ⭐ **E UNA QUARTA STRADA, SOTTO `L6`: <<LA STRADA QUANTISTICA PER `Lambda_c`>>**
+  riga  878  ### 📌 **E il motivo e' lo stesso:** un nodo con `Lambda = 0` avrebbe `cs = 0`, e con lui
+  riga  893  ### ✅ **Quindi il pesaggio e' COERENTE col modo in cui il passo usa `cs`, e cio' che
+  riga  969  ### `(a)` ### **`lambda_c` resta UN NUMERO PURO:** per la simmetria di scala
+  riga  973  ### `(b)` ### **SE `Lambda_c` DIPENDESSE DALLO STATO DURANTE LA CORSA** *(vuoto, vicini,
+  riga  979  ### `4)` ### **E UNA NOTA CHE CHIUDE UNA STRADA:** far dipendere `Lambda_c` da `cs`
+  riga 1014  ### ⚠ **E anche se il modo a `k = pi` resta COESO con `cs` dinamico o si disperde.**
+  riga 1017  ### **accendere la forma** *(`lambda_c`, dal `2026-10-18`)*, e `C4` l'ha gia' usato --
+  riga 1189  ### **sta li' dentro.** ### **Con la memoria servirebbe anche il peso** *(o `cs`)*
+  riga 1215  ### **`cs` al CENTRO del palindromo** *(`D2`)* ### **esiste e costa** -- misurato,
+  riga 1229  ### ⛔ **OSSERVAZIONE DEL `2026-10-19`, SENZA CURE E SENZA SCELTE: IL PUNTO FISSO DI `cs` NON CONVERGE A TAGLIA `32` E `Lambda_c/Lambda_medio = 0.01`, 
+  riga 1237  ### 📌 **LA LETTURA DEL GUARDIANO, scritta come tale:** *e' l'ITERAZIONE SEMPLICE a non convergere dove `Lambda` scende sotto `Lambda_c` (`cs` ripido);
+  riga 1239  ### 📌 **LA LETTURA DEL GUARDIANO, scritta come tale** *(`2026-10-19`, `12:36`; ### **una lettura, non una misura**)*: la matrice del passo `C` *(`e989
+  riga 1252  ### ⛔ **QUESTO CORREGGE IL NUMERO DELL'INIZIO DELLA SEZIONE**, che parlava di punti fissi *«`cs` al centro e il peso d'arco al punto medio»*: ### **qu
+### D. I TASK HISTORY: 54
+  2026-09-18_assiomi-A9-A10.md                         # TASK HISTORY — **completare `doc/ASSIOMI.md`: A9 e A10.** Sola documentazione
+  2026-09-18_frequenza-riferimento.md                  # TASK HISTORY — **la frequenza di riferimento: prima il numero, poi la legge**
+  2026-09-18_gauge-vuoto-r.md                          # TASK HISTORY — **allineare `r` al gauge del vuoto. E un'obiezione alla premessa del §0**
+  2026-09-18_mediana-in-ritmo.md                       # TASK HISTORY — **la mediana in `ritmo()`: normalizzazione o GAUGE del tempo?**
+  2026-09-18_sigillo-tau-luce.md                       # TASK HISTORY — **il sigillo di `--tau-luce`: TRE FAIL, TRE NATURE DIVERSE, e nessuno dice «la legge è sbagliata»**
+  2026-09-19_passo198.md                               # TASK HISTORY — **il passo 198: evento FISICO o ECCEZIONE NUMERICA?**
+  2026-09-19_tre-cricchetti.md                         # TASK HISTORY — **i tre cricchetti, misurati sui 45 snapshot**
+  2026-09-21_perche-d-si-allunga.md                    # 2026-09-21 — **PERCHE' UN ARCO SI ALLUNGA 150 VOLTE?** `TRACCIA_VD`
+  2026-09-25_rampa1-eta-infinita.md                    # `RAMPA-1` — IL VUOTO DATO HA ETÀ INFINITA (strada (3), decisione di Luca)
+  2026-10-05_z43-cura1-orologio-r-una-volta.md         # `Z43` PARTE A — **CURA (1): `r` VA UNA VOLTA SOLA, NELLA FREQUENZA NO**
+  2026-10-05_z43-cura2-r-da-cs.md                      # `Z43` PARTE B — **CURA (2): `r = cs_nodo_prev / CS_M`, e `r` NON LEGGE PIU' LA FASE**
+  2026-10-05_z43-definizione-tempo-proprio-misura.md   # `Z43`, passo (1) — **LA DEFINIZIONE DEL TEMPO PROPRIO `r`: LA MISURA**
+  2026-10-05_z43-due-cure-tempo-proprio.md             # `Z43` — **LE DUE CURE DEL TEMPO PROPRIO**, decise da Luca il 2026-10-05
+  2026-10-06_bperm-fisso.md                            # `Bperm-fisso` — **la permutazione ripescata SOLO quando `len(avv)` cambia**
+  2026-10-06_tors-w8-cura.md                           # `TORS-W8-AVVOLGIMENTO` — **LA CURA**: la fase si avvolge col suo periodo, il dipolo no
+  2026-10-09_indice_v3_chiusura_segnali.md             # INDICE `v3`: **la chiusura dei `103` segnali dei presidi**
+  2026-10-11_camminata_v4_cs_locale.md                 # IL `v4` — **`cs` LOCALE DAL VUOTO, IN TUTTE LE LEGGI** *(mandato di Luca, `2026-10-11`, terza versione)*
+  2026-10-13_vuoto_mediatore.md                        # LA STRADA `(A)`: **IL VUOTO COME MEDIATORE** — derivazione, senza codice
+  2026-10-17_D3_l1_resta_chiuso_con_cs.md              # `D3` — **`L1` RESTA CHIUSO CON `cs` DINAMICO**
+  2026-10-17_D_cs_lambda_nel_motore.md                 # PUNTO `D` — **LA FORMA DI `cs(Lambda)`: L'ATTUAZIONE, senza scegliere `Lambda_c`**
+  2026-10-17_Hw_energia_pesata_che_separa_le_strade.md # `H_w` — **LA MISURA CHE SEPARA LE STRADE DI `DOMANDA-QUALE-INVARIANTE-CON-CS`**
+  2026-10-18_fase_vuoto_la_strada_d.md                 # `CAMM-FASE-VUOTO` — **LA FASE SUL VUOTO CHE NASCE DA `G`** *(la strada `(d)`)*
+  2026-10-18_g_dello_stato.md                          # `G` DELLO STATO — **il primo ordine era NELL'OSSERVABILE, non nello schema**
+  2026-10-18_memoria_e_punti_fissi.md                  # LA MEMORIA PER *TUTTI* I PUNTI FISSI, E LA MATRICE DAL CODICE
+  2026-10-18_punto_medio_per_pezzo.md                  # IL PUNTO MEDIO **PER PEZZO** — *il secondo ordine di `G`, e NON una legge nuova*
+  2026-10-19_D4_verso_e_profilo.md                     # `D4` — IL VERSO E IL PROFILO DI `cs`, COI TRE RAPPORTI
+  2026-10-19_instabilita_vuoto.md                      # IL TEST DI INSTABILITA' DEL VUOTO UNIFORME
+  2026-10-19_jeans_del_modello.md                      # IL TEST DI JEANS DEL MODELLO, CON MATERIA UNIFORME DINAMICA
+  2026-10-19_rimozione_punto_medio.md                  # LA RIMOZIONE DEL RAMO DEL PUNTO MEDIO PER PEZZO
+  2026-10-19_tolleranza_omega.md                       # LA TOLLERANZA DEL PUNTO FISSO DI `Omega`: LA SCALA DEI DATI, NON `|Omega|`
+  2026-10-20_base_proiettata.md                        # L'INTERVALLO LUNGO CON LA BASE PROIETTATA E GAMMA COME PENDENZA
+  2026-10-20_controllo_passo_materia_uniforme.md       # DUE CONTROLLI DEL PASSO SULLA MATERIA UNIFORME, PRIMA DI QUALUNQUE INTERPRETAZIONE
+  2026-10-20_cure_candidate_s3.md                      # IL DOCUMENTO DELLE CURE CANDIDATE PER L'INSTABILITA' DI `S3` — NESSUNA SCELTA
+  2026-10-20_instabilita_a_dtau_piccolo.md             # L'INSTABILITA' DELLA MATERIA UNIFORME, RIFATTA A `dtau 0.125`
+  2026-10-20_raffinamento.md                           # LA PROVA DI RAFFINAMENTO SULL'INSTABILITA' DELLA MATERIA UNIFORME
+  2026-10-20_stabilita_intervallo_lungo.md             # L'ANALISI DI STABILITA' LINEARE SU UN INTERVALLO LUNGO, A LATI PARI
+  2026-10-20_stabilita_lineare.md                      # L'ANALISI DI STABILITA' LINEARE ESATTA DELLO STATO DI MATERIA UNIFORME
+  2026-10-21_d0_risonanza.md                           # `D0`: LA BANDA DI `S3` E' UNA RISONANZA FRA LA CAMMINATA E IL RITMO DI `S3`?
+  2026-10-21_moneta_gruppo_finito.md                   # LA MONETA NEL GRUPPO FINITO (`eps dtau = pi/2`): CHE COSA FA ALL'INSTABILITA' DI `S3`
+  2026-10-21_progetto_triangoli.md                     # IL PROGETTO DELLA GRIGLIA A TRIANGOLI SUL TORO, PENSATO PER LA FCC IN 3D *(su carta)*
+  2026-10-21_regressione_d0.md                         # LA REGRESSIONE DEL COLLAUDO `D0`: IL PUNTO FISSO DI `Omega` NON CONVERGE, DA `7395cd9a`
+  2026-10-21_s3_ripensata.md                           # IL DOCUMENTO «`S3` RIPENSATA»: PERCHE' LA BANDA SOPRAVVIVE ALLA GEOMETRIA, E CHE COSA SI PUO' CAMBIARE
+  2026-10-21_triangoli_gradino1.md                     # TRIANGOLI, PRIMO GRADINO: LA SCENA A 6 VICINI E LA CAMMINATA SOLA, VERIFICATE
+  2026-10-21_triangoli_gradino2.md                     # TRIANGOLI, GRADINO 2: `S3` E LA CAMMINATA SUL TORO TRIANGOLARE, E LA SUA STABILITA' LINEARE (`R2`)
+  2026-10-21_triangoli_r1.md                           # TRIANGOLI, GRADINO 2-BIS: `R1` *(`cs` + `CAMM-FASE-VUOTO`)* SUL TORO TRIANGOLARE
+  2026-10-22_lineare_s1_s4.md                          # `LINEARE` RIAPERTA COL CRITERIO «ACCOPPIAMENTO -> 0 A POCA MATERIA»: IL CONFRONTO FRA `S1` E `S4`
+  2026-10-22_massa_spostamento.md                      # DA DOVE VIENE LA MASSA DELLA CAMMINATA? IL SALTO E LA CURVATURA IN FUNZIONE DELLO SPOSTAMENTO PARZIALE `s`
+  2026-10-22_moneta_massa.md                           # LA MONETA E' LA MASSA? LA CURVATURA `c` DELLA CAMMINATA A ONDE LUNGHE IN FUNZIONE DI `eps`
+  2026-10-22_origine_32_archi.md                       # DA DOVE NASCE LA LUNGHEZZA DI `32` ARCHI DELL'INSTABILITA' DI `S1` *(su carta, nessuna corsa nuova, nessuna scelta)*
+  2026-10-22_prova_grover.md                           # LA PROVA DI GROVER: LA STESSA `S3` CON UNA MONETA DI MESCOLAMENTO SENZA BANDE PIATTE (FOURIER)
+  2026-10-22_raccolta_cs.md                            # IL DOCUMENTO DI RACCOLTA SU `cs` E `Lambda_c`: CHE COSA E' GIA' STATO CHIESTO, DECISO E LASCIATO APERTO
+  2026-10-22_s3_due_misure.md                          # DUE MISURE SU `S3`, NESSUNA FISICA NUOVA: `(1)` `S-E`, IL MODO CHE CRESCE SUI RAMI; `(2)` LA MATERIA DILUITA
+  2026-10-22_screening_forme_s3.md                     # LO SCREENING DELLE FORME CANDIDATE DI `S3` *(nessuna forma nuova, nessuna scelta)*
+  2026-10-22_stato_finale.md                           # LO STATO FINALE: DOVE VA LA MATERIA UNIFORME DOPO L'INSTABILITA'
+### E. I REFERTI (per nome): 8 -- ciclo_cs.txt, cs_al_centro.txt, cs_l1_d3.txt, cs_l1_d3_con_la_fase.txt, lineare_s1_s4_cs.txt, raccolta_cs.txt, statica_strada_d_c4.txt, strada_d_c1_c2_c5.txt
+### F. LE LEGGI: CAMM-FASE-VUOTO in tabella? True; le leggi la cui scheda la cita: nessuna
+====================================================================================================
+LA RACCOLTA: A 39 (+24 solo descrizione), B 1, C 24, D 54, E 8
+====================================================================================================
