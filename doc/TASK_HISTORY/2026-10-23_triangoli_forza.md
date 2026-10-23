@@ -112,6 +112,24 @@ qui: questo task history *(che progetta anche la parte `0`)*; la parte `0`; lo s
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE: le tabelle.** ### **A parte: la lettura in tre righe; una riga sul fattore `2.26`; una riga su che cosa vuol dire per la scelta della
   convenzione dello zero** *(informazione per Luca, non una scelta)*.
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto in memoria** *(ridotta: `s` in `(0.1, 0.3, 0.5)`, `Lx 96`,
+`eps_C 0.5`; il `txt` negli appunti)* ### **ha mostrato due difetti del MIO METODO, corretti prima della corsa:**
+- ### **(a) IL TORO `B` NON E' FERMO, e per una ragione di FISICA:** ### **a `eta 0` il pacchetto deriva** *(`v0 = +-2e-3` sulle due bande, `a = -+2.6e-6 +- 4e-8` a `s0 0.1`)* ### **e lo
+  specchio e' asimmetrico fino al `17%`.** ### **La causa, verificata sullo spettro:** ### **lungo `(1, 1)` in `theta`** *(la direzione `Gamma-K`, quella del toro `B`)* ### **`omega(K + q) != omega(K -
+  q)`** *(`0.1578270` contro `0.1580277` al primo passo, `eps 0, s 0.1`)*, ### **lungo `(1, 0)`** *(il toro `A`)* ### **sono uguali al bit**: ### **`K` ha la simmetria `C3`, non l'inversione, e il
+  termine cubico** *(la deformazione trigonale)* ### **da' una velocita' media `~ <q^2>` a un pacchetto gaussiano lungo `Gamma-K`.** ### **LA CORREZIONE:** ### **`(1)` ogni corsa a `eta != 0` si
+  legge anche DIFFERENZIALE, `x(eta) - x(0)` dalla stessa partenza** *(toglie la deriva libera)*; ### **`(2)` il nullo e lo specchio DEVE-PASSARE restano sul toro `A`** *(la corsa del mandato:
+  «per ogni `(eps, s0, banda)`»; il toro `B` l'avevo aggiunto io alla portata, e lo tolgo dichiarandolo)*; ### **`(3)` il toro `B` si LEGGE** *(la deriva, il grezzo, il differenziale e il suo
+  specchio)*, ### **e l'isotropia si confronta col differenziale su tutti e due i tori.** ### **Sul toro `A` la curvatura e' isotropa e il cubico non entra: e' l'unico dei due dove il pacchetto e'
+  davvero fermo.**
+- ### **(b) IL FRONTE A `s 0.5` girava intorno al toro** *(a `64` di lato: `v_fronte` NEGATIVA)*: ### **il toro del fronte e' `192`** *(non `128`)*, ### **e un controllo DI SERVIZIO pretende che
+  il fronte resti dentro il cerchio inscritto** *(`0.9 x L sqrt3/4`)*.
+- ### **(c) LO SPECCHIO SUL TORO `A` a `eta 1e-3, s0 0.5` e' asimmetrico del `6%`** *(`+9.65e-6` contro `-9.07e-6`, banda `1`, `Lx 96`)*: ### **la deriva a `eta 0`, sotto il rumore,
+  pesa su un segnale dieci volte piu' piccolo.** ### **IL CRITERIO NON SI CAMBIA:** ### **prevedo che quel DEVE-PASSARE FALLISCA, e se fallisce mi FERMO.** ### **Lo strumento stampa anche lo
+  specchio DIFFERENZIALE** *(una lettura, non un controllo)*.
+- ### **I NUMERI VISTI** *(non li uso; le previsioni restano)*: ### **`v_max/s` `0.600`, `0.612`, `0.635`** *(`eps 0`)*; ### **`v_fit/s ~ 0.52`**; ### **`a_H/a_RG` simmetrico con `v_max`: `+1.70`,
+  `+1.49`, `+1.11`** *(`s 0.1, 0.3, 0.5`)*; ### **`lambda*_RG - 1/2 ~ s^2.0 eps^1.4`** *(un solo `eps` nella prova: `q` non e' misurato)*.
+
 ## 7. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
