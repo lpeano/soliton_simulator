@@ -66,6 +66,17 @@
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE: le tabelle.** ### **A parte: la lettura in tre righe; dove sta la fisica di bassa energia sui triangoli; quali risultati del quadrato hanno un
   corrispondente qui e quali no.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto in memoria** *(`eps 0` e `0.5`, `s 0.3`; il `jsonl` negli appunti)*
+### **ha mostrato tre cose del MIO METODO, corrette prima della corsa, e dei numeri che dichiaro:**
+- ### **(a) LA DERIVATA MISTA:** ### **col solo stencil `+-1` sulla diagonale** *(secondo ordine)* ### **la curvatura a `K` usciva anisotropa dell'`1.5%`**; ### **ora `h12` viene dalla derivata seconda
+  lungo `(1, 1)` col Richardson** *(quarto ordine)*, ### **e «isotropa» vuol dire entro `1e-3` relativo** *(l'errore numerico `O(k_1^4)`; la previsione resta: isotropa ESATTAMENTE per simmetria)*.
+- ### **(b) UNA BANDA PIATTA al punto del salto** *(a `eps 0.5` il salto minimo e' a `Gamma`, `0.013`, fra il livello spaccato dalla moneta e uno PIATTO li': curvatura `0`, `v 0`, e un `a_H/a_RG ~
+  1e31`)*: ### **si scrive «PIATTA» e Hamilton non si calcola** *(come in `9fbfede3`)*; ### **`lambda*` solo per coppie non piatte.**
+- ### **(c) A `Gamma`, `K`, `K'` UNA BANDA VERA E' ISOTROPA** *(fissi per `120` gradi)*: ### **se la curvatura misurata li' non lo e' oltre `1e-3`, la tracciatura ai vicini ha cambiato banda**
+  *(a `eps 0.5, Gamma`: `8.3e-2`, e `v = 6.1`, fra livelli lontani `0.013`)*: ### **si scrive «NON AFFIDABILE» e Hamilton non si calcola.**
+- ### **I NUMERI VISTI** *(non li uso; le previsioni restano)*: ### **`eps 0, s 0.3`: la coppia a `K`, salto `0.916`, `lambda* = 0.50000000`, simmetrica `a_H/a_RG = +2.03` sulle due bande** *(verso
+  `cs` BASSO)*; ### **oggi `+6.47` e `-2.41`**; ### **`delta`: esponente `2.12`-`2.14` contro `s`**; ### **un pezzo solo `4.3e-15`**; ### **`60` gradi `2.0e-15`.**
+
 ## 6. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
