@@ -20630,3 +20630,12 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **PER `S1` CONTRO `S4`** *(informazione)*: ### **`S1` l'unico uniforme stabile ma lega solo a `N 100`; `S4` lega da `N 10` e la sua `D` varia con `N` meno di `S3`; nessuna ha `D = 0`.**
 
 ### ❓ **LA DOMANDA PER LUCA:** ### **quale `2 pi k` e' la frequenza a riposo di un oggetto** *(cioe' quale convenzione dello zero, o la fase continua)*. *(Criterio di chiusura: una tua decisione registrata.)*
+
+### 🧪 **LA SCALA E LO ZERO: A `eps 0` I RAMI OBBEDISCONO CON LA FASE CONTINUA (`|D| <= 4.2e-10`) -- LA VIOLAZIONE VA COME `s^2` (IL PALINDROMO), NON `s` -- IL SOLITONE CON `c = c0 s` OBBEDISCE AL BIT -- EINSTEIN `Q ~ 1` SOLO CON LO ZERO A META'** *(mandato di Luca del `2026-10-23`, errore del guardiano n.46; task history `2026-10-23_scala_e_zero.md`, sez. `5`; referto `doc/referti_l2/scala_e_zero.txt` e `.jsonl`; strumento `csv/_scala_e_zero.py` sha1-BYTE `0629c68e`, `53f06cff`)*
+
+- ### **`6` controlli su `8`:** ### **un pezzo solo `delta <= 4.3e-15`: PASSA**; ### **`c = c0 s` `|D| <= 2.0e-8`: PASSA**; ### **`delta(0.99) = 0.954`: il deve-fallire FALLISCE**; ### ⚠ **l'esponente di `delta` `1.70`-`1.72` (contro `s - 0.02`), `2.12`-`2.14` (contro `s`): il puo'-fallire FALLISCE** *(il palindromo cancella i termini dispari di BCH: `O(s^2)`)*; ### ⚠ **`(iii)` `Q` `1.096`, `1.046`, `0.680` a `s 0.9`, `0.95`, `0.99`: FALLISCE a `0.99`, dove `Q` dipende dal lato.**
+- ### **LA FASE CONTINUA DA `s` PICCOLO** *(cammino fine, `215` punti)*: ### **a `eps 0` `E0 = 0` e `-2 pi`, `|D| <= 4.2e-10`**: ### **il `D = -2 pi/s^2` di `c4efc937` sul ramo alto era la fase riportata in `(-pi, pi]`.** ### **A `eps > 0` `|D|` fino a `~3`.**
+- ### **IL SOLITONE:** ### **con `c = c0 s` obbedisce al bit; la violazione di `c4efc937` e' TUTTA nel moto** *(`c(s)` misurato non e' proporzionale a `s`)*.
+- ### **EINSTEIN:** ### **solo lo zero a meta' da' `Q ~ 1`** *(`s 0.9`-`0.95`, `eps 0`)*; ### **a `eps > 0` non c'e' nessuna coppia** *(`0` su `54` righe)*.
+- ### **PER LA REGOLA DI SCALA** *(informazione)*: ### **`s -> 0` la violazione si spegne come `s^2`; `s` fisso la lascia fissa; `s -> 1` d'ordine `1`.**
+- ### **PER «QUALE `2 pi k`»** *(la diagnosi)*: ### **la fase continua da' `D = 0` ma non Einstein; lo zero a meta' da' Einstein ma non esiste a `eps > 0`.** ### **La domanda resta APERTA.**
