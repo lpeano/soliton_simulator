@@ -241,3 +241,46 @@ moneta da' una particella vera, e la sua previsione di Hamilton nella simmetrica
 
 ### **LA TENSIONE LARGHEZZA / PRINCIPIO DI EQUIVALENZA** *(per Luca)*: ### **per `S3` e `S4` l'ipotesi `(2)` del guardiano regge** *(larghi solo a `s >= 0.7`-`0.99`, dove `05055fc6` misura la
 violazione d'ordine `1`)*; ### **per `S1` NO: e' largo gia' a `s 0.3`, con `mu > 0`** *(la sua non linearita' a poca materia e' debole, `x^2`)*.
+
+## 7. LA PARTE C.3 -- LA DINAMICA DEI SOLITONI LARGHI *(scritta PRIMA del suo codice, dopo il referto `9a6955f3`)*
+
+> ### ⛔ **GRIGLIA QUADRATA -- non eseguita (DECISIONE-SOLO-TRIANGOLI)** *(decisione di Luca del `2026-10-23`, `16:14`: si lavora SOLO sui triangoli; questa parte resta scritta, lo strumento committato, e NON si corre)*.
+
+### IL METODO
+
+- ### **I PUNTI** *(da `6.5`: il primo `s` con uno stato legato largo `>= 4` archi, le due norme piu' piccole se ci sono)*: ### **`S1` a `s 0.3`, `N 1e5` e `1e6`; `S4` a `s 0.7`, `N 1e7`** *(una sola)*; ### **`S3` a
+  `s 0.99`, `N 1e3` e `1e4`.** ### ⚠ **`S3` a `s 0.99` e' oltre `0.9`: li' il principio di equivalenza e' gia' violato d'ordine `1`** *(`05055fc6`)* ### **e si legge SOLO IL VERSO.**
+- ### **LA SCENA:** ### **la camminata INTERA** *(`salta = ()`, la forma con `_screening_forme_s3.forma`)*, ### **`eps 0`, le DUE convenzioni**, ### **il toro `Lx x Ly = 256 x 64`** *(`Ly` piu' di
+  otto larghezze per il piu' largo, `7.5` archi)*, ### **`dtau = 1`, `mot.cs` uniforme `s` o il profilo, `lambda_c = None`**, ### **il vuoto `phi = VUOTO = 1` per estremita'** *(`Lambda0 = 4`: il livello
+  `1` di `c4efc937`)*.
+- ### **LO STATO INIZIALE:** ### **il profilo `u(r)` di `_gravita_collettiva.profilo`** *(la scatola in archi di `C.1`, alla larghezza trovata)*, ### **la densita' per nodo `u(r)^2` sul vettore del ramo a
+  curvatura `-` a `k = 0`** *(`_forza_da_cs.spazio_del_ramo`)*, ### **a `(Lx/4, Ly/2)`, fermo, la norma riportata a `N`.** ### ⚠ **Il profilo e' un PUNTO DI PARTENZA** *(dall'inviluppo approssimato),
+  non uno stato fermo dell'automa.*
+- ### **L'ASSESTAMENTO:** ### **`T0 = max(10 * 2 pi/|mu|, 64)` tick a `cs` uniforme** *(il periodo dal `mu` di `C.1`)*; ### **la norma EMESSA = la frazione della norma della materia oltre `3 w0` dal
+  baricentro, alla fine di `T0`.**
+- ### **LA TENUTA:** ### **dallo stato assestato, `T = Lx/4 = 64` tick a `cs` uniforme**: ### **la larghezza** *(rms attorno al baricentro, immagine minima)* ### **entro il `10%` di quella all'inizio
+  della tenuta a ogni tick**, ### **il baricentro fermo** *(`|a| <= 2 sigma_a`, il fit di `_forza_da_cs` sulla stessa finestra)*. ### **Se non tiene: un RISULTATO** *(«NON TIENE» col tick)*, ### **e
+  la forza li' non si misura.**
+- ### **LA FORZA:** ### **dallo stato ASSESTATO, il profilo `cs(x) = s (1 + eta cos(2 pi x/Lx))`, `eta` in `(1e-3, -1e-3, 1e-2, -1e-2)`**, ### **il baricentro circolare in `x` per `T = 64` tick, la
+  finestra `|<x> - x0| < Lx/32`, il fit `x0 + v0 t + a t^2/2`**, ### **`a_RG = -v^2 (ds/dx)/s`** *(`v` del ramo a `k = 0`)*, ### **`a_mis/a_RG`, il verso.**
+- ### **LA SCOMPOSIZIONE:** ### **`E_ramo = omega0/s`** *(oggi `0`, simmetrica `+pi`)* ### **e `E_legame = mu/s`** *(di `C.1`)*: ### **quale domina in modulo.**
+
+### LE PREVISIONI *(prima dei numeri)*
+
+- ### **Hamilton per il solitone fermo** *(la sez. `3-bis` di `2026-10-23_segno_gravita.md`)*: ### **`a/a_RG = s (omega''/v^2)(d omega0/ds + d mu/ds)`**, ### **col ramo a curvatura `-`.**
+- ### **`S1` e `S4`: `mu > 0`** *(`+0.30`, `+2.7` circa)*: ### **oggi `d mu/ds > 0` con `omega'' < 0` -> verso `cs` ALTO; simmetrica `pi + d mu/ds > 0` -> verso `cs` ALTO.** ### **`S3` a `s 0.99`:
+  `mu < 0`** *(`-0.63`, `-0.07`)*: ### **oggi verso `cs` BASSO se `d mu/ds < 0`; simmetrica verso `cs` ALTO** *(il legame non supera `pi`)*.
+- ### **E la tenuta: NON LA SO** *(il profilo non e' uno stato dell'automa; il vuoto reagisce)*.
+
+### I CRITERI *(dal mandato, fissati ora)*
+
+- ### **DEVE PASSARE:** ### **a `cs` uniforme, `|a|` sotto il rumore del fit** *(la tenuta)*.
+- ### **DEVE PASSARE:** ### **il profilo specchiato** *(`eta -> -eta`)*: ### **`a` cambia segno, `|a|` uguale entro il `5%`.**
+- ### **PUO' FALLIRE:** ### **almeno un solitone `S3` o `S4` con lo zero simmetrico e `a_mis/a_RG > 0`.**
+- ### **IL VERDETTO DI FISICA:** ### **il verso e `a_mis/a_RG` per forma, norma, convenzione; il confronto fra le due norme della stessa forma.**
+
+### 📝 **ANNOTAZIONE 2** *(prima della corsa di `C.3`, nel commit del suo strumento)*: ### **la prova a vuoto in memoria** *(il primo punto, `S1 s 0.3 N 1e5`, con `T0 = 4` e `8` tick di misura; il `jsonl`
+negli appunti)* ### **ha mostrato che la DERIVA PROPRIA del solitone** *(`a ~ -1.2e-4` a ogni `eta`, anche col segno di `eta` rovesciato)* ### **sta molto sopra la forza attesa** *(`a_RG ~ 1.5e-6` a `eta
+1e-3`)* ### **-- con `8` tick; nella corsa vera il fit ha `64` tick e l'assestamento `~210`.** ### **AGGIUNGO, prima della corsa, la stima che separa le due:** ### **la parte ANTISIMMETRICA in `eta`,
+`(a(+eta) - a(-eta))/2`, e' la forza; quella SIMMETRICA e' la deriva propria.** ### **Il criterio dello specchio resta com'era** *(e se la deriva domina, fallira': lo leggo come la misura dice)*.
+### **I numeri della prova a vuoto non li uso.** ### **E la tenuta, con `8` tick, vi passava** *(larghezza entro `1.3%`)*.
