@@ -246,6 +246,34 @@ def committata(p):
     return t and d
 
 
+def pacchetto(x, x0, W, e, fase):
+    """### Il pacchetto `e * gaussiana` in `x`, a `x0`, largo `W`, con la fase per nodo `fase` *(o `None`)*, normalizzato: `(n, len(e))`.
+    ### **Uscito da `corsa()` perche' la corsa sui triangoli lo IMPORTI** *(`csv/_triangoli_forza.py`)*: ### **le stesse operazioni, nello stesso ordine.**"""
+    G = np.exp(-(x - x0) ** 2 / (2.0 * W * W))
+    cel = G[:, None] * e[None, :]
+    if fase is not None:
+        cel = cel * np.exp(1j * fase)[:, None]
+    cel /= np.sqrt(np.sum(np.abs(cel) ** 2))
+    return cel
+
+
+def norma_fuori(p, Q, tot):
+    """### La norma FUORI dallo spazio `Q` *(le colonne)*: `p` le celle `(n, len)`, `tot` la norma intera."""
+    inn = float(np.sum(np.abs(p @ Q.conj()) ** 2))
+    return 1.0 - inn / tot
+
+
+def fit_moto(tt, xx):
+    """### Il fit `x0 + v0 t + a t^2/2`: `a`, `sigma_a`, `v0`, `x0_fit`, il residuo massimo."""
+    X = np.stack([np.ones_like(tt), tt, 0.5 * tt * tt], axis=1)
+    coef, *_ = np.linalg.lstsq(X, xx, rcond=None)
+    res = xx - X @ coef
+    var = float(res @ res) / (len(tt) - 3)
+    cov = var * np.linalg.inv(X.T @ X)
+    return dict(a=float(coef[2]), sigma_a=float(np.sqrt(max(cov[2, 2], 0.0))), v0=float(coef[1]), x0_fit=float(coef[0]),
+                residuo_max=float(np.max(np.abs(res))))
+
+
 def corsa(Lx, eps, s0, eta, Q):
     """### Il pacchetto `e * gaussiana` a `Lx/4`, fermo; la camminata sola; il baricentro circolare, la norma fuori, a ogni tick."""
     import _stabilita_lineare as SL
@@ -263,13 +291,9 @@ def corsa(Lx, eps, s0, eta, Q):
         st[k][...] = 0
     x0 = Lx / 4.0
     W = Lx / 16.0
-    e = Q[:, 0]
-    G = np.exp(-(x - x0) ** 2 / (2.0 * W * W))
-    cel = G[:, None] * e[None, :]
-    if PORTANTE is not None:
-        # ### la PORTANTE `e^{i k.x}` del modo a `k`: ### **`A(k)` e' la trasformata con `e^{-i k x}`**, quindi lo stato di Bloch e' `e^{+i k x} u_k`
-        cel = cel * np.exp(1j * (PORTANTE[0] * x + PORTANTE[1] * (np.arange(n) % LY)))[:, None]
-    cel /= np.sqrt(np.sum(np.abs(cel) ** 2))
+    # ### la PORTANTE `e^{i k.x}` del modo a `k`: ### **`A(k)` e' la trasformata con `e^{-i k x}`**, quindi lo stato di Bloch e' `e^{+i k x} u_k`
+    fase_k = None if PORTANTE is None else PORTANTE[0] * x + PORTANTE[1] * (np.arange(n) % LY)
+    cel = pacchetto(x, x0, W, Q[:, 0], fase_k)
     st["psi_h"][...] = cel.reshape(st["psi_h"].shape)
     fase = np.exp(2j * np.pi * x / Lx)
     Tmax = Lx // 4
@@ -286,23 +310,16 @@ def corsa(Lx, eps, s0, eta, Q):
         dx = ((Lx / (2.0 * np.pi) * np.angle(np.sum(w * fase))) - x0 + Lx / 2.0) % Lx - Lx / 2.0
         if abs(dx) >= Lx / 32.0:
             break
-        inn = float(np.sum(np.abs(p @ Q.conj()) ** 2))
         tt.append(t)
         xx.append(float(dx))
-        fuori.append(1.0 - inn / tot)
+        fuori.append(norma_fuori(p, Q, tot))
     tt, xx = np.array(tt, dtype=float), np.array(xx)
     r = {"Lx": Lx, "eps": eps, "s0": s0, "eta": eta, "punti": len(tt), "W": W, "Tmax": Tmax,
          "fuori_max": float(max(fuori)) if fuori else None, "spostamento_finale": float(xx[-1]) if len(xx) else None}
     if len(tt) < MIN_PUNTI:
         r.update(a=None, sigma_a=None, v0=None, leggibile=False, perche="meno di %d punti" % MIN_PUNTI)
         return r
-    X = np.stack([np.ones_like(tt), tt, 0.5 * tt * tt], axis=1)
-    coef, *_ = np.linalg.lstsq(X, xx, rcond=None)
-    res = xx - X @ coef
-    var = float(res @ res) / (len(tt) - 3)
-    cov = var * np.linalg.inv(X.T @ X)
-    r.update(a=float(coef[2]), sigma_a=float(np.sqrt(max(cov[2, 2], 0.0))), v0=float(coef[1]), x0_fit=float(coef[0]),
-             residuo_max=float(np.max(np.abs(res))))
+    r.update(fit_moto(tt, xx))
     leg = r["fuori_max"] <= NORMA_FUORI
     r.update(leggibile=leg, perche="" if leg else "norma fuori %.3f > %g" % (r["fuori_max"], NORMA_FUORI))
     return r

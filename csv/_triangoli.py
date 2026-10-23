@@ -105,13 +105,19 @@ def versori(m, direzioni):
 
 
 def scena(griglia, lato, dtau, x):
-    """### `(inc, mot, st, par)`: la materia uniforme allineata, il vuoto uniforme, `U = I`."""
+    """### `(inc, mot, st, par)`: la materia uniforme allineata, il vuoto uniforme, `U = I`, ### **sul toro `lato x lato`** *(`scena_toro` a lati uguali)*."""
+    return scena_toro(griglia, (lato, lato), dtau, x)
+
+
+def scena_toro(griglia, lati, dtau, x):
+    """### La scena su un toro con ### **lati DIVERSI lungo i due spostamenti di base** *(`lati = (L1, L2)`, via `toro_spostamenti`)*: ### **a lati uguali e' la
+    `scena` di prima AL BIT** *(il controllo di servizio sta in `csv/_triangoli_forza.py`)*. ### **`dtau` scalare o per nodo.**"""
     import incidenza as IN
     import motore as MO
     import scena_l2 as SC
     import stato as ST
     spost, direz = griglia
-    ii, jj, nn = toro_spostamenti((lato, lato), spost)
+    ii, jj, nn = toro_spostamenti(lati, spost)
     inc = IN.Incidenza(np.asarray(ii, dtype=IN.INDICE), np.asarray(jj, dtype=IN.INDICE), nn,
                        capacita=len(ii))
     nv = versori(inc.m, direz)
@@ -121,7 +127,7 @@ def scena(griglia, lato, dtau, x):
     st = ST.nuovo(nn, inc.m)
     st["phi_h"][...] = VUOTO
     st["psi_h"][...] = float(np.sqrt(x)) * SC.spinore_allineato(nv)
-    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.broadcast_to(np.asarray(dtau, dtype=float), (nn,)).copy(), "numpy")
     return inc, mot, st, {"eps": EPS_MONETA}
 
 
@@ -172,11 +178,18 @@ def fasi(A):
 
 
 def scarto_c6(A):
-    """### Lo scarto massimo fra le fasi per tick a `k` e a `k` ruotato (scala `pi`)."""
-    f, g = fasi(A), fasi(ruota60(A))
-    # ### le fasi stanno in `(-pi, pi]`: si confronta il residuo avvolto
-    r = np.angle(np.exp(1j * (f - g)))
-    return float(np.max(np.abs(r)))
+    """### Lo scarto massimo fra le fasi per tick a `k` e a `k` ruotato (scala `pi`), ### **confrontate SUL CERCHIO.**
+
+    ### ⛔ **LA CORREZIONE del difetto di `1e2437a9`:** ### **prima le fasi si ORDINAVANO, e un autovalore a `-1` esatto** *(fase `+-pi`)* ### **cambiava posto fra `-pi`
+    e `+pi`: `3.14` invece di `~1e-15`.** ### **Ora gli autovalori a `k` e a `k` ruotato si accoppiano con l'assegnamento ungherese sulla distanza nel piano complesso**, ### **e lo
+    scarto e' la fase relativa della coppia, avvolta** *(la stessa scala di prima: dove l'ordinamento accoppiava giusto, lo stesso numero entro l'arrotondamento, `<= 1e-14`)*."""
+    from scipy.optimize import linear_sum_assignment
+    la, lb = np.linalg.eigvals(A), np.linalg.eigvals(ruota60(A))
+    peg = 0.0
+    for i in np.ndindex(la.shape[:-1]):
+        r, c = linear_sum_assignment(np.abs(la[i][:, None] - lb[i][None, :]))
+        peg = max(peg, float(np.max(np.abs(np.angle(la[i][r] * np.conj(lb[i][c]))))))
+    return peg
 
 
 # =====================================================================================
