@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # IL VERSO E L'INTENSITA' DELLA FORZA DA `cs`: UN PACCHETTO DI MATERIA IN UN GRADIENTE DI `cs`
 
 > **Il mandato:** di Luca, dopo `44d4963d`. ### **Una MISURA, non sceglie niente.** ### **`cs` per nodo SOLO nella scena, in memoria** *(`mot.cs` come array,

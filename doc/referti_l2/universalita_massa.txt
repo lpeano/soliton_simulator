@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _universalita_massa.py  sha1-BYTE 94ebb415  committato e pulito
 ====================================================================================================
 LA PROVA DEL PRINCIPIO DI EQUIVALENZA: L'UNIVERSALITA' DELLA MASSA AL VARIARE DI cs (attraverso s)

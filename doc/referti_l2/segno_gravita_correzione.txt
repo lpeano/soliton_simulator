@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _segno_gravita.py  sha1-BYTE 20a0da41  committato e pulito
 IL SEGNO DELLA GRAVITA' -- LA PROVA DELLA CORREZIONE DEL RAMO (eps 0.5, s0 0.1); la configurazione: S0_LIM (0.05, 0.1, 0.2, 0.3, 0.4, 0.5); LX_B (256, 512)
 ### LA CORREZIONE DEL RAMO DI eps 0.5 A s0 0.1

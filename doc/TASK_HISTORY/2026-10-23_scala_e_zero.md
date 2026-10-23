@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # LA SCALA E LO ZERO: IL PRINCIPIO DI EQUIVALENZA A `s` PICCOLO, IL SOLITONE CON `c` PROPORZIONALE A `s`, LA RELAZIONE DI EINSTEIN COME DIAGNOSI DELLA CONVENZIONE DELLO ZERO
 
 > **Il mandato:** di Luca, dopo `c4efc937`. ### **Una MISURA su spettri a `cs` uniforme e sul risolutore radiale, in memoria: non sceglie niente.** ### **`leggi.yaml`, l'impronta

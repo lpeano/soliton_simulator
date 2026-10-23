@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _gravita_collettiva.py  sha1-BYTE 9c34fb6a  committato e pulito
 ====================================================================================================
 LA GRAVITA' COLLETTIVA SULLA CARTA: la frequenza a riposo della materia legata al variare di s (S1, S3, S4)

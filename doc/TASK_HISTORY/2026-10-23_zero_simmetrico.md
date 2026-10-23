@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # LO ZERO SIMMETRICO IN MEMORIA: LA FORZA, EINSTEIN E L'UNIVERSALITA' COI PEZZI PARZIALI A GENERATORE SIMMETRICO
 
 > **Il mandato:** di Luca, dopo `05055fc6`. ### **Una MISURA in memoria: non cambia il nucleo, non sceglie la convenzione** *(la scelta e' di Luca)*. ### **`leggi.yaml`, l'impronta

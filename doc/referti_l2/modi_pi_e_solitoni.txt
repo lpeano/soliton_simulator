@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _modi_pi_e_solitoni.py  sha1-BYTE 1ed7c073  committato e pulito
 ====================================================================================================
 I MODI A k = pi E I SOLITONI LARGHI: dove sta la fisica a bassa energia, e i solitoni larghi

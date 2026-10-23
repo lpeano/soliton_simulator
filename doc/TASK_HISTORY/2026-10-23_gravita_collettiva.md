@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # LA GRAVITA' COLLETTIVA SULLA CARTA: LA FREQUENZA A RIPOSO DELLA MATERIA LEGATA AL VARIARE DI `s` (`S1`, `S3`, `S4`)
 
 > **Il mandato:** di Luca, dopo `682e15ef`. ### **Una MISURA su spettri e stati stazionari: nessuna dinamica lunga, non sceglie niente.** ### **`dtau`, `eps`, `cs` e la forma

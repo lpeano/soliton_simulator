@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 142 |
+| `FISICA` | `2` | 143 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -274,6 +274,7 @@
 | `DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serv |
 | `DECISIONE-LINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | LINEARE, il regime di poca materia di S3: l-accoppiamento rho dalpha/drho deve a |
 | `DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | M-B2 si legge sulla PENDENZA complessiva, non sui rapporti singoli |
+| `DECISIONE-SOLO-TRIANGOLI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | SOLO TRIANGOLI: la fisica si misura sui triangoli; il quadrato solo come control |
 | `DECISIONE-STRADA-B-FLUSSI` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | strada (B): Grover e spostamento diventano FLUSSI, e l angolo pi e la velocita d |
 | `DECISIONE-TICK-OROLOGIO-MASSIMO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo |
 | `DECISIONE-VUOLE-UN-CAMPO` | STANDARD | METODO | ENTRAMBE | ### **APERTA** |  | una decisione che serve a un programma vuole un CAMPO, non una frase nel titolo |

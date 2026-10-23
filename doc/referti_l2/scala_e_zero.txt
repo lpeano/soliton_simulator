@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _scala_e_zero.py  sha1-BYTE 0629c68e  committato e pulito
 ====================================================================================================
 LA SCALA E LO ZERO: il principio di equivalenza a s piccolo, il solitone con c proporzionale a s, la relazione di Einstein nelle tre convenzioni

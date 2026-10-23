@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _forza_da_cs.py  sha1-BYTE e8789ea9  committato e pulito
 ====================================================================================================
 IL VERSO E L'INTENSITA' DELLA FORZA DA cs -- PARTE B

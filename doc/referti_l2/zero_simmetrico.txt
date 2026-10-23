@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _zero_simmetrico.py  sha1-BYTE b400d76e  committato e pulito
 ====================================================================================================
 LO ZERO SIMMETRICO IN MEMORIA: la forza, Einstein e l'universalita' coi pezzi parziali a generatore simmetrico

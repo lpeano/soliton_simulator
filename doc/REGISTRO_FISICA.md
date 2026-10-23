@@ -46,6 +46,10 @@ che rifiuta un commit a `soliton_simulator.py` che non tocchi il registro, salvo
 
 **⚠ IL LIMITE, dichiarato invece che nascosto:** **non distingue una modifica di LEGGE da una di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due versioni, e **un commento che descrive una legge è parte della legge** *(i commenti stale sono un difetto documentato di questo repo)*. **Quindi è più severo del necessario**, e le modifiche davvero non fisiche passano per `[SENZA-FISICA: <motivo>]`.
 
+## ⛔ **LA DECISIONE DEL 2026-10-23: SOLO TRIANGOLI** *([[DECISIONE-SOLO-TRIANGOLI]])*
+
+**Di Luca, il `2026-10-23` alle `16:14`, alla lettera:** «smettiamo di lavorare sui quadrati, voglio lavorare solo sui triangoli». ### **Ogni misura di fisica si fa sulla griglia a TRIANGOLI** *(grado `6`, NON bipartita: `csv/_triangoli.py`)*; ### **il quadrato SOLO come controllo di servizio ESPLICITO, mai come risultato.** ### **I risultati del quadrato dal `44d4963d` al `9a6955f3`** *(universalita', forza da `cs`, gravita' collettiva, scala e zero, zero simmetrico, segno della gravita', modi a `k = pi`)* ### **sono marcati «GRIGLIA QUADRATA -- risultato da rifare sui triangoli»**; ### **si trasferiscono in linea di principio, DA RIVERIFICARE:** il legame alla relativita' generale al bit (`D = 0`), il passo `exp(-i s H)`, lo zero universale `lambda* = 1/2`, la violazione `O(s^2)` dal palindromo; ### **NON si trasferiscono:** la posizione dei modi leggeri *(`k = 0`, `(pi, pi)`, le selle a `(pi, 0)`, il punto di Dirac)*.
+
 ## ⛔ **LA DECISIONE DEL 2026-10-08: `A16`, E LA RISCRITTURA AL PRIMO ORDINE**
 
 > ### **Decisione di Luca.** L'assioma sta in `doc/ASSIOMI.md` *(`A16`, in testa)*, il piano in

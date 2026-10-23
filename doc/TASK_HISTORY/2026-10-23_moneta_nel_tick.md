@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # LA MONETA DENTRO IL TICK -- SOLO IL PROGETTO, SULLA CARTA
 
 > **Il mandato:** di Luca, in coda dopo la forza da `cs` *(`557d94d6`)*. ### **NESSUN CODICE, NESSUN FILE DEL NUCLEO.** ### **L'ipotesi di Luca, da provare e NON decisa:**

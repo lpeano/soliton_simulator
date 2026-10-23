@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # LA PROVA DEL PRINCIPIO DI EQUIVALENZA: L'UNIVERSALITA' DELLA MASSA AL VARIARE DI `cs`
 
 > **Il mandato:** di Luca, dopo `51f45268`. ### **Una MISURA, non sceglie niente.** ### **`dtau`, `eps` e `cs` SOLO nella scena, in memoria**; `leggi.yaml`, l'impronta

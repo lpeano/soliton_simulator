@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # IL SEGNO DELLA GRAVITA' DEI RAMI: IL LIMITE A `s` PICCOLO, L'UNICITA' DELLO ZERO UNIVERSALE, ENERGIA CONTRO INERZIA
 
 > **Il mandato:** di Luca, dopo `6e022419`. ### **Solo misure, in memoria: non sceglie niente.** ### **`leggi.yaml`, l'impronta `2e7f795d2a52fbe7`, la convenzione nel repo e il nucleo intatti;

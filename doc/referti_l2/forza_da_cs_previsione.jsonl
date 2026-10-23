@@ -1,3 +1,4 @@
+{"tipo": "marca", "griglia": "QUADRATA", "nota": "GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)"}
 {"tipo": "testata", "blobs": {"soliton_simulator.py": {"sha1-BYTE": "b8c21049", "git": "e96ca41a"}, "csv/_massa_vicino_al_cono.py": {"sha1-BYTE": "5842f83a", "git": "e9581a29"}, "csv/_universalita_massa.py": {"sha1-BYTE": "94ebb415", "git": "c26bff01"}, "csv/_forza_da_cs.py": {"sha1-BYTE": "e8789ea9", "git": "d4f0ced0"}}}
 {"tipo": "catena0", "eps": 0.0, "Dt": {"0.5": 0.6857804827458733, "0.6": 0.7098199004889264, "0.7": 0.6562661177994844, "0.8": 0.5125158306048252, "0.9": 0.28362306149343763, "0.95": 0.1454306890792814}}
 {"nome": "basso", "omega0": 0.0, "Dt": 0.40744068619837337, "v": 0.6533182483914256, "segno": -1.0, "segni_concordi": true, "copie": 2, "omega1": [-0.004989851830851766, -0.004989851830851766], "rami": [2, 4], "tipo": "spettro", "s": 0.85, "eps": 0.0, "fuori_diagonale": 0.0}

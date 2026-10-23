@@ -1,3 +1,5 @@
+> ### ⛔ **GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)**
+
 # I MODI A `k = pi` E I SOLITONI LARGHI: DOVE STA LA FISICA A BASSA ENERGIA, E SE UN SOLITONE CADE NEL VERSO GIUSTO
 
 > **Il mandato:** di Luca, dopo `e31366ec`. ### **Solo misure, in memoria; zero simmetrico** *(`lambda = 1/2`)* ### **dove non detto altro.** ### **`leggi.yaml`, l'impronta `2e7f795d2a52fbe7`,

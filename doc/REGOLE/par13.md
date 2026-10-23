@@ -43,3 +43,7 @@ non puo' far sembrare vero un risultato.**
 passare una legge e' LA MANOPOLA che `A1` vieta** — ed e' successo: `P-MOD` mi ha
 impedito di alzare il tetto delle righe di un file il `2026-10-10`, e ### **alzarlo era la
 cosa piu' facile del mondo.**
+
+## SOLO TRIANGOLI *(DECISIONE-SOLO-TRIANGOLI, Luca, 2026-10-23, 16:14)*
+
+**Le parole di Luca:** «smettiamo di lavorare sui quadrati, voglio lavorare solo sui triangoli». **Perche' sta qui:** e' una regola di lavoro dell'era `2` *(su quale griglia si misura la fisica)*. **Il motivo:** i mandati del `2026-10-22`/`23` misuravano sul quadrato *(«stessa griglia di `51f45268`»)*, e la frase «`_triangoli.scena` fa solo il toro quadrato» *(`cbc1114f`)* era stata accettata senza verificarla *(errore del guardiano n.53)*: `csv/_triangoli.py` ha la scena a triangoli, `matrice_tick`, `ruota60`, `bipartito`. **Come si applica:** una misura sul quadrato si scrive come CONTROLLO DI SERVIZIO, dichiarato tale; un risultato di fisica sul quadrato non e' un risultato. **I referti del quadrato** dal `44d4963d` al `9a6955f3` portano in testa «GRIGLIA QUADRATA -- risultato da rifare sui triangoli».

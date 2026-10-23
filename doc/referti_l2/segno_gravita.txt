@@ -1,3 +1,4 @@
+### GRIGLIA QUADRATA -- risultato da rifare sui triangoli (DECISIONE-SOLO-TRIANGOLI)
 [TIMBRO] _segno_gravita.py  sha1-BYTE 2a763b39  committato e pulito
 ====================================================================================================
 IL SEGNO DELLA GRAVITA' DEI RAMI: il limite a s piccolo, l'unicita' dello zero universale, energia contro inerzia

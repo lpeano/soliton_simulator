@@ -343,4 +343,7 @@ incoerenti, una simmetria dichiarata e non vera, un grafo non valido, un `defaul
 firma, un id corto: ### **non sono avvisi, sono rifiuti** -- e la cura e' **cambiare la
 tabella**, non aggirare il controllo.
 
+### ⛔ **SOLO TRIANGOLI** *([[DECISIONE-SOLO-TRIANGOLI]], Luca, `2026-10-23`)*: **ogni misura di fisica si fa sulla griglia a TRIANGOLI**; il quadrato
+**solo come controllo di servizio ESPLICITO, mai come risultato.**
+
 > **IL DETTAGLIO:** **`doc/REGOLE/par13.md`**.
