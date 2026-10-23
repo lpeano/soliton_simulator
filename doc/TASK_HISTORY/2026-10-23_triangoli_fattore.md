@@ -93,6 +93,12 @@ tolta la larghezza** *(visto in memoria; se la corsa lo smentisce, lo scrivo)*.
 - ### **IL VERDETTO DI FISICA: le tabelle dei tre fattori, il loro limite, il confronto brusco/graduale.** ### **A parte: tre righe di lettura; una sull'impulso iniziale; una su quale fattore porta il
   `1.63`-`1.68`; una sulla «velocita' della luce»** *(informazione per Luca, non una scelta)*.
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa, nel commit dello strumento)*: ### **la prova a vuoto ridotta** *(`Lx 48`, `eps 0`, `s0 0.5`; `s` in `(0.05, 0.1, 0.3)`; il `txt` negli
+appunti)* ### **ha trovato UN mio difetto, corretto nel commit della correzione:** ### **in `frazioni()` la riga della striscia sul toro `A` e' `LY/3`, non `2 LY/3`** *(le frazioni uscivano tutte
+«resto»)*. ### **E due cose che non sono difetti, e le dichiaro:** ### **`(a)` il toro `B` a `Lx 48` ha `W = 3`: la deformazione trigonale cresce come `1/W^2`** *(`v0 = 8e-2`)*: ### **la corsa e' a
+`Lx 96`, come in memoria**; ### **`(b)` il tremolio del pacchetto di `cbcb99c7` ha il periodo del BATTIMENTO col livello piatto** *(`8.8` contro `2 pi/delta_min = 8.7`)*, ### **non quello della coppia**
+*(`2 pi/salto = 4.3`)*. ### **I NUMERI VISTI** *(non li uso; le previsioni restano)*: ### **`R_t = 0.998`, `Q_b = 1.0002`, `v_b/v_max = 1.31`, `F(v_b) = 0.999` a `s 0.05`; l'identita' `4.3e-16`.**
+
 ## 6. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
