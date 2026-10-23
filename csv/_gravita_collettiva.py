@@ -40,7 +40,8 @@ TOLL_UNO_2 = 1e-6
 EPS_REL = 1e-7
 SOGLIA_STABILE = 1e-3 * 0.4018  # _lineare_s1_s4: 1e-3 del massimo di riferimento R2 (decisione delle 18:09)
 S_CONTROLLO = 0.9              # c del ramo basso a eps 0, s 0.9: il controllo che puo' fallire
-R_SIGMA, DR_SIGMA = 12.0, 1.0 / 40.0   # la griglia radiale in unita' di sigma_rif = sqrt(|c|/s); R tale che la coda gaussiana resti rappresentabile
+R_SIGMA, DR_SIGMA = 12.0, 1.0 / 640.0   # dr: il primo dimezzamento con errore < 1e-6 sulla gaussiana esatta (ordine 2 misurato, annotazione 3)
+# ### (era 1/40)   # la griglia radiale in unita' di sigma_rif = sqrt(|c|/s); R tale che la coda gaussiana resti rappresentabile
 MAX_IT = 20000
 JSONL = os.path.join(RADICE, "doc", "referti_l2", "gravita_collettiva.jsonl")
 NON_DEFINITI = set()

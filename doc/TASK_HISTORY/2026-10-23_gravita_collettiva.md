@@ -138,6 +138,18 @@ DEFINITO»)* ### **e non si misura**, ne' al livello `1` ne' al `2`; ### **(2) i
 *(il fit e' rumoroso fino a `~1e-6` fra due copie; nessun caso l'aveva ancora rotto, ma e' la grandezza sbagliata)*. ### **Nessun criterio cambia**; ### **la previsione «a `eps 0, s 1`
 non ce n'e'» era giusta nella fisica, e la definizione numerica la contava.**
 
+### 📝 **ANNOTAZIONE 3** *(prima della terza corsa)*: ### **la prova a vuoto dell'intero programma** *(griglia ridotta, il `jsonl` negli appunti)* ### **ha mostrato che il mio
+controllo DI SERVIZIO del risolutore FALLISCE con `dr = sigma/40`**: ### **`mu` sbaglia di `9.4e-5` relativo contro la gaussiana esatta** *(la tolleranza fissata e' `1e-6`)*.
+### **L'errore e' di DISCRETIZZAZIONE, di ordine `2` misurato** *(in memoria, `c -0.8, s 0.9, N 10`)*:
+
+| `dr` | `sigma/40` | `sigma/80` | `sigma/160` | `sigma/320` | `sigma/640` |
+|---|---|---|---|---|---|
+| errore relativo di `mu` | `9.4e-5` | `2.3e-5` | `5.9e-6` | `1.5e-6` | `3.7e-7` |
+
+### **`dr = sigma/640`: il PRIMO dimezzamento sotto `1e-6`** *(una regola, non una taratura; costa `0.01` s per stato)*. ### **La tolleranza NON cambia.** ### **Visto anche, e scritto
+prima della corsa:** ### **il «deve passare» incontrera' `S4` a `x = 1`, dove `alpha = 0`** *(la fase non lineare si annulla: la sua pendenza logaritmica non esiste)*: ### **fallira' li',
+e il criterio resta.**
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
