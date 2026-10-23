@@ -356,15 +356,25 @@ def convenzione_dello_zero():
 #   LIVELLO 2 -- IL SOLITONE EFFICACE
 # =====================================================================================
 def solitone(forma, c, s, N, lam0):
-    """### `mu u = -c lap u + s alpha(u^2) u`, radiale `2d`, norma `N`: il flusso di gradiente normalizzato implicito."""
+    """### `mu u = -c lap u + s alpha(u^2) u`, radiale `2d`, norma `N`: il flusso di gradiente normalizzato implicito.
+
+    ### ⭐ **Il calcolo sta in `profilo()`**, ### **qui con la griglia in unita' di `sigma = sqrt(|c|/s)`** *(`R = R_SIGMA sigma`, `dr = DR_SIGMA sigma`, la partenza gaussiana larga
+    `sigma`)*: ### **lo stesso di prima AL BIT** *(verificato al commit della separazione)*."""
+    sig = np.sqrt(abs(c) / s)
+    return profilo(forma, c, s, N, lam0, DR_SIGMA * sig, int(round(R_SIGMA / DR_SIGMA)), sig)[0]
+
+
+def profilo(forma, c, s, N, lam0, dr, M, w0):
+    """### Il risolutore di `solitone()` con la griglia DATA *(`dr`, `M` punti: la scatola `R = M dr`)* e la partenza gaussiana larga `w0`: ### **`(riassunto, r, u)`.**
+
+    ### ⭐ **Lo usa `csv/_modi_pi_e_solitoni.py` con la scatola in ARCHI** *(i solitoni larghi)*. ### ⚠ **E se la coda non e' rappresentabile gia' al primo passo, `mu` e' `nan`**
+    *(prima dava un `UnboundLocalError`)*."""
     import _screening_forme_s3 as SF
     from scipy.linalg import solve_banded
     pz = SF.pezzi_di(forma)
     sg = 1.0 if c > 0 else -1.0
     ca = abs(c)
-    sig = np.sqrt(ca / s)
-    dr = DR_SIGMA * sig
-    M = int(round(R_SIGMA / DR_SIGMA))
+    sig = w0
     r = (np.arange(M) + 0.5) * dr
     w = 2.0 * np.pi * r * dr
     rp, rm = r + 0.5 * dr, r - 0.5 * dr
@@ -375,6 +385,7 @@ def solitone(forma, c, s, N, lam0):
     u = np.exp(-r ** 2 / (2.0 * sig * sig))
     u *= np.sqrt(N / np.sum(w * u * u))
     tau = sig * sig / ca
+    mu = float("nan")
     mu_v = None
     stato = "NON CONVERGE"
     for it in range(MAX_IT):
@@ -405,8 +416,8 @@ def solitone(forma, c, s, N, lam0):
         esiste = "COLLASSO"
     else:
         esiste = "LEGATO"
-    return {"mu": sg * mu, "larghezza": larg, "rho_centro": float(u[0] ** 2), "x_centro": float(u[0] ** 2 / lam0), "stato": stato,
-            "iterazioni": it + 1, "esiste": esiste, "inviluppo_lento": larg >= 2.0, "R": float(M * dr), "dr": dr}
+    return ({"mu": sg * mu, "larghezza": larg, "rho_centro": float(u[0] ** 2), "x_centro": float(u[0] ** 2 / lam0), "stato": stato,
+             "iterazioni": it + 1, "esiste": esiste, "inviluppo_lento": larg >= 2.0, "R": float(M * dr), "dr": dr}, r, u)
 
 
 def c_di(g):
