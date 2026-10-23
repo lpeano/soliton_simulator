@@ -18,14 +18,14 @@
   - ### **la forma del campo prodotto dalla materia** *(in 3D `1/r^2`; in 2D `1/r`, col potenziale logaritmico; in relativita' generale a `2+1` dimensioni nessuna forza locale, solo difetti
     conici, e nessuna onda gravitazionale)*;
   - ### **l'esistenza e la stabilita' dei solitoni** *(in 2D il legame cubico e' il caso critico)*;
-  - ### **lo spin** *(in 2D le rotazioni dello spazio sono solo `U(1)`)* -- ⚠ **vedi la nota in fondo alla sezione**;
+  - ### **lo spin:** ### **le rotazioni dello SPAZIO in 2D sono solo `U(1)`; lo spin INTERNO del modello resta `SU(2)` anche sui triangoli** *(il trasporto `U` in `SU(2)`, la simmetria
+    della griglia sollevata al dicicloico `Dic6` dentro `SU(2)`, `doc/PROGETTO_TRIANGOLI.md`)*: ### **cio' che in 2D manca e' la piena `SU(2)` delle rotazioni dello spazio, non quella dello
+    spinore** *(la correzione di Luca, errore del guardiano `n.55`, `2026-10-23`)*;
   - ### **la propagazione senza coda** *(solo nelle dimensioni dispari)*.
 - ### **Il 2D e' un GRADINO.** ### **L'obiettivo tecnico e' la FCC** *(non bipartita, `12` vicini)*; ### **l'obiettivo di fisica e' lo spazio che emerge** *(`D9`: `DEC-D9-GEOMETRIA` in
   `doc/ALBERO_era2.yaml`, «come nasce la geometria: la topologia e la metrica», `presa: false`)*.
 
-> ⚠ **NOTA SULLO SPIN** *(non e' una correzione: lo segnalo)*: ### **in `doc/PROGETTO_TRIANGOLI.md` la moneta in 2D e' `exp(i (a I + b sigma.n_h))` con gli `n_h` NEL PIANO**, ### **gli assi doppi
-> del diedrale `D6` visto in 3D, il gruppo `Dic6` dentro `SU(2)`**: ### **lo spinore in 2D ruota per assi del piano, che NON commutano.** ### **«Solo `U(1)`» e' vero per le rotazioni del
-> PIANO** *(`SO(2)`)*, ### **non per il gruppo della moneta.**
+> 📝 **LA NOTA SULLO SPIN DELLA PRIMA VERSIONE** *(`7e794402`)* ### **segnalava il contrasto con `doc/PROGETTO_TRIANGOLI.md`; Luca l'ha risolto con la frase sopra** *(errore del guardiano `n.55`)*.
 
 ## B. CHE COSA SI TRASFERISCE AL 3D, E CHE COSA NO
 
@@ -49,9 +49,13 @@
 
 ## C. PROSEGUIRE
 
-1. ### **LA FORZA SUI TRIANGOLI** *(il mandato «i triangoli, secondo gradino»)*: ### **FATTO in `cbcb99c7`, FERMO su un DEVE-PASSARE** *(lo specchio a `eta 1e-3`, `4` casi su `128`)*:
-   ### **Hamilton confermato dalla dinamica** *(`a_mis/a_H` `0.92`-`0.98`)*; ### **il fattore `2.26` NON viene dalla velocita'** *(con `v_max = 0.60 s` scende a `1.63`-`1.68`)*; ### **l'universalita' fra le bande
-   col simmetrico** *(`1.007` a `eps 0`; a `eps 0.5` si rompe come `s^2.18 eps^1.71`)*; ### **il limite a `s` piccolo piatto** *(`0.969`, `0.977`)*.
+1. ### **LA FORZA SUI TRIANGOLI** *(il mandato «i triangoli, secondo gradino»)*: ### **FATTO in `cbcb99c7`** *(lo specchio: i `4` casi su `128` NON LEGGIBILI PER LO SPECCHIO, decisione di Luca;
+   da ora lo specchio si fissa sul differenziale, `doc/PATTERN_DI_PROVA.md`)*:
+   - ### **Hamilton confermato dalla dinamica** *(`a_mis/a_H` `0.920`-`0.976` a `eta 1e-2`; `0.882`-`0.988` con `eta 1e-3`; il differenziale `0.921`-`0.977`)*;
+   - ### **il fattore NON viene dalla velocita'** *(con `v_max = 0.60 s` `a/a_RG` e' `1.63`-`1.68`: da spiegare)*;
+   - ### **le due bande uguali col SOLO zero simmetrico** *(`a_1/a_0 = 1.007` a `eps 0`)*;
+   - ### **la violazione da moneta va come `s^2 eps^2`:** ### **`lambda* - 1/2 ~ s^2.030 eps^1.873`; la differenza fra le bande `~ s^2.177 eps^1.714`**;
+   - ### **il limite a `s` piccolo piatto** *(`0.969`, `0.977`)*.
 2. ### **POI LA FCC:** ### **la stessa catena** *(gli spettri, i modi leggeri, Hamilton, la forza)*. ### **Gli strumenti si progettano in un mandato a se':** ### **la scena FCC** *(`12`
    estremita' per nodo)*, ### **la zona di Brillouin** *(l'ottaedro troncato; i punti `Gamma`, `X`, `L`, `W`, `K`)*, ### **la prova di non bipartizione, la simmetria del reticolo, il toro a lati
    diversi.**
@@ -134,3 +138,5 @@
 | `n.51` | il salto vicino a pi | «Gli errori del guardiano n.51 e n.52 sono nel mandato» (`2026-10-23_modi_pi_e_solitoni.md`): ### **il contenuto NON e' scritto nel repo** |
 | `n.52` | solitoni larghi non verificati | come n.51: il contenuto NON e' scritto nel repo |
 | `n.53` | il quadrato usato dopo la decisione di Luca | ⚠ **diversa:** «i mandati del 2026-10-22/23 dicevano «stessa griglia di 51f45268», cioe' il quadrato, e la frase di cbc1114f «_triangoli.scena fa solo il toro quadrato» era stata accettata senza verificarla» (la voce `DECISIONE-SOLO-TRIANGOLI`; `doc/REGOLE/par13.md`): ### **il quadrato usato PRIMA della decisione, perche' una frase non verificata diceva che i triangoli non c'erano** |
+| `n.55` | la frase sullo spin in 2D del mandato del piano («le rotazioni sono solo `U(1)`») | ### **corretta da Luca** *(`2026-10-23`)*: le rotazioni dello SPAZIO in 2D sono solo `U(1)`, lo spin INTERNO resta `SU(2)` *(sezione `A`)* |
+| `n.56` | le tre imprecisioni del mandato del piano | ### **restano come segnalate col ⚠** *(sezione `B`)*: `|D| <= 2.05e-8`, non al bit; `129` e' `Vi`; `D_tot = D_ramo` |
