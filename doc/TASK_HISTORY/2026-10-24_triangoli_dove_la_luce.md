@@ -57,6 +57,11 @@
 - ### **IL VERDETTO DI FISICA: le tabelle.** ### **A parte: tre righe di lettura; una sulla definizione di Luca; una sulla tensione col principio di equivalenza** *(violato d'ordine `1` nel regime `s -> 1` sul quadrato,
   `05055fc6`; sui triangoli NON ancora misurato)*; ### **una su che cosa resta per il campo `U(1)`.** ### **Informazione per Luca, non scelte.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa, nel commit dello strumento)*: ### **la prova a vuoto ridotta** *(`s` in `(0.5, 0.9, 0.99, 0.999, 1)`, e `eps 0, s 0.3`)* ### **ha trovato UN mio difetto, corretto:**
+### **il salto attraverso `pi` a `Gamma` usciva `pi` a `s = 1` invece di `0`: si legge sui livelli NON uniti sul cerchio.** ### **I NUMERI VISTI** *(non li uso; le previsioni restano)*: ### **`v_max/s -> 0.70711`
+a `s = 1`; il tocco lineare a `Gamma` a `0.7071`, isotropo entro `1e-12`, in materia e vuoto; `v_b/s` della coppia a `K` SCENDE verso `0.550`** *(`v_b/v_max`: `1.26` a `s 0.3`, `0.78` a `s = 1`)*; ### **a `s
+0.999` i rami del tocco escono «altro» `1.89`** *(il salto `6.3e-3` e' del passo della dispersione: `k ~ 1e-3`)*.
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
