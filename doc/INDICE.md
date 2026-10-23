@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 144 |
+| `FISICA` | `2` | 145 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -633,6 +633,7 @@
 | `P7` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 18 volte, MAI definito in un registro) [P7] |
 | `P8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 20 volte, MAI definito in un registro) [P8] |
 | `P9` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 12 volte, MAI definito in un registro) [P9] |
+| `PACCHETTO-K-NON-FERMO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il pacchetto del modo a K non e- fermo: deriva e accelera senza gradiente (lo st |
 | `PADRE-FIGLIO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `PASSO-1` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | IL PASSO NON È step(): SONO CINQUE CHIAMATE, e 24 script sotto csv/ avanzano in  |
 | `PASSO-2` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | UN AVANZAMENTO INCOMPLETO NEL SIMULATORE STESSO, :8404: for in range(300): net.s |

@@ -3070,3 +3070,13 @@ dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo refe
   file del nucleo, fuori dal mandato della cura di `D0`. ### **Decisione di Luca.**
 - **Criterio di chiusura:** con la cura, ### **una scena fuori dal cono alza `AssertionError` col valore
   di `s`**, e la suite resta verde.
+
+## `[[PACCHETTO-K-NON-FERMO]]` — il pacchetto del modo a `K` non e' fermo *(aperto il 2026-10-23)*
+
+- **MISURATO in `cbcb99c7`** *(`csv/_triangoli_forza.py`, `doc/referti_l2/triangoli_forza.jsonl`)*: ### **a `eta 0` il pacchetto `G(m) u_K e^{i K.r}` deriva e accelera senza gradiente.** ### **Toro `A`: `v0`
+  da `-1.17e-5` a `-2.6e-8`; un'accelerazione propria uguale alla semisomma `(a(+eta) + a(-eta))/2`** *(nei `4` casi falliti dello specchio entro `5.3e-10`)*, ### **fino al `5.7%` del differenziale a
+  `eta 1e-3`.** ### **Toro `B`: `|v0|` fino a `9.92e-3`, `|a(eta 0)|` fino a `6.45e-5`** *(la deformazione trigonale lungo `Gamma-K`: annotazione `1` del task history)*.
+- **IL SOSPETTO, non provato:** ### **la costruzione dello STATO INIZIALE** *(lo stesso `u_K` per tutto il pacchetto, invece degli stati di Bloch della banda a ogni `k`: la norma fuori dallo
+  spazio `Q` va dallo `0.3%` al `6%`)*.
+- **DA DIAGNOSTICARE in un mandato a se'.** ### **Intanto il differenziale `(a(+eta) - a(-eta))/2` elimina l'accelerazione propria, e la semisomma si riporta sempre contro `a(eta 0)`**
+  *(`doc/PATTERN_DI_PROVA.md`, «LE CORSE DELLA FORZA: I CRITERI»)*.

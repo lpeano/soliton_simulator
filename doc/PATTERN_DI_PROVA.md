@@ -105,9 +105,11 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 > metodo di ogni sigillo.**
 
 - ### **LO SPECCHIO SI FISSA PRIMA SUL DIFFERENZIALE:** ### **`(a(+eta) - a(-eta))/2`, con `a(+-eta)` letti da `x(+-eta) - x(0)` dalla stessa partenza, entro il `5%`**; ### **lo specchio GREZZO
-  si stampa come LETTURA, non come controllo.**
+  si stampa come LETTURA, non come controllo;** ### **e insieme si riporta SEMPRE la SEMISOMMA `(a(+eta) + a(-eta))/2` confrontata con `a(eta 0)`** *(la correzione
+  del guardiano: e' la misura della deriva propria del pacchetto)*.
 - ### **Il perche':** ### **in `cbcb99c7` lo specchio grezzo a `eta 1e-3` falliva in `4` casi su `128`** *(fino al `10.74%`)* ### **per la deriva a `eta 0`, sotto il rumore, che pesa su un segnale dieci
-  volte piu' piccolo; il differenziale teneva entro lo `0.13%`.** ### **Quei `4` casi sono NON LEGGIBILI PER LO SPECCHIO, e il criterio di quella corsa non e' cambiato a posteriori.**
+  volte piu' piccolo; il differenziale teneva entro lo `0.13%`.** ### **Quei `4` casi restano FALLITI** *(il criterio di quella corsa non e' cambiato a posteriori)*; ### **la causa, misurata: la semisomma coincide con `a(eta 0)`, un'accelerazione propria del
+  pacchetto** *(`doc/TASK_HISTORY/2026-10-23_triangoli_forza.md`, sezione `10`)*.
 
 ## IN PROVA
 

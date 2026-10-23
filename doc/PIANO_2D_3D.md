@@ -49,7 +49,7 @@
 
 ## C. PROSEGUIRE
 
-1. ### **LA FORZA SUI TRIANGOLI** *(il mandato «i triangoli, secondo gradino»)*: ### **FATTO in `cbcb99c7`** *(lo specchio: i `4` casi su `128` NON LEGGIBILI PER LO SPECCHIO, decisione di Luca;
+1. ### **LA FORZA SUI TRIANGOLI** *(il mandato «i triangoli, secondo gradino»)*: ### **FATTO in `cbcb99c7`** *(lo specchio: i `4` casi su `128` restano FALLITI, la causa misurata e' un'accelerazione propria del pacchetto, [[PACCHETTO-K-NON-FERMO]];
    da ora lo specchio si fissa sul differenziale, `doc/PATTERN_DI_PROVA.md`)*:
    - ### **Hamilton confermato dalla dinamica** *(`a_mis/a_H` `0.920`-`0.976` a `eta 1e-2`; `0.882`-`0.988` con `eta 1e-3`; il differenziale `0.921`-`0.977`)*;
    - ### **il fattore NON viene dalla velocita'** *(con `v_max = 0.60 s` `a/a_RG` e' `1.63`-`1.68`: da spiegare)*;
