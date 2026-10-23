@@ -1,0 +1,120 @@
+[TIMBRO] _triangoli_luce.py  sha1-BYTE 6d3970a3  committato e pulito
+==============================================================================================================
+LA LUCE SUI TRIANGOLI: i modi senza massa del vuoto e del sistema accoppiato, e il cono di tutti i settori
+==============================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_stabilita_triangoli.py d38ab409; csv/_stabilita_lineare.py 08c374ef; csv/_screening_forme_s3.py 80ffe96c; csv/_scala_e_zero.py 0629c68e; csv/_zero_simmetrico.py b400d76e; csv/_triangoli_luce.py 6d3970a3
+  la configurazione: RIF 8781162c 7daa8840; L 48; S_A (0.02, 0.05, 0.1, 0.3, 0.5); CONV ('simm', 'oggi'); PUNTI {'Gamma': (0, 0), 'K': (16, 16), "K'": (32, 32), 'M': (24, 0)}; K_DISP (0.001, 0.002, 0.004); DIREZIONI 16; LB 48; S_B (0.05, 0.1, 0.3); X_B (0.0001, 0.001, 0.01); FORME ('S1', 'S3', 'S4'); EPS_REL 1e-06; M_LINEA 6; S_C (0.05, 0.3, 0.5);
+    TOLL_LIV 1e-09 TOLL_PIATTA 1e-09 TOLL_C6 1e-12 TOLL_PEZZO 1e-12 TOLL_GREEN 1e-12 TOLL_RIF 1e-09 TOLL_LUCE 0.05; il fronte: L 192, T (50, 100), soglie (0.01, 0.0001, 1e-06)
+--------------------------------------------------------------------------------------------------------------
+### PARTE A -- IL VUOTO DA SOLO (materia nulla; lato 48; la dispersione lungo 16 direzioni a k (0.001, 0.002, 0.004))
+  s 0.02 simm: i livelli Gamma -0.0628(3) -0.0000(2) +0.0628(1) | K -0.0628(2) -0.0314(1) -0.0000(2) +0.0314(1) | K' -0.0628(2) -0.0314(1) -0.0000(2) +0.0314(1) | M -0.0628(2) -0.0363(1) -0.0000(2) +0.0363(1) | piatte -0.0628 -0.0000
+     tocco a Gamma, livello -0.06283 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     Einstein della banda dispersiva a Gamma (+pi s): curvatura 0.00786, v_b,vuoto/s 1.1109
+  s 0.02 oggi: i livelli Gamma -0.1257(3) -0.0628(2) -0.0000(1) | K -0.1257(2) -0.0942(1) -0.0628(2) -0.0314(1) | K' -0.1257(2) -0.0942(1) -0.0628(2) -0.0314(1) | M -0.1257(2) -0.0991(1) -0.0628(2) -0.0266(1) | piatte -0.1257 -0.0628
+     tocco a Gamma, livello -0.12566 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     tocco a Gamma, livello -0.00000 (x1): quadratico esp 2.000 pend/s -- aniso --
+  s 0.05 simm: i livelli Gamma -0.1571(3) +0.0000(2) +0.1571(1) | K -0.1571(2) -0.0785(1) +0.0000(2) +0.0785(1) | K' -0.1571(2) -0.0785(1) +0.0000(2) +0.0785(1) | M -0.1571(2) -0.0906(1) +0.0000(2) +0.0906(1) | piatte -0.1571 +0.0000
+     tocco a Gamma, livello -0.15708 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     Einstein della banda dispersiva a Gamma (+pi s): curvatura 0.01968, v_b,vuoto/s 1.1119
+  s 0.05 oggi: i livelli Gamma -0.3142(3) -0.1571(2) +0.0000(1) | K -0.3142(2) -0.2356(1) -0.1571(2) -0.0786(1) | K' -0.3142(2) -0.2356(1) -0.1571(2) -0.0786(1) | M -0.3142(2) -0.2477(1) -0.1571(2) -0.0665(1) | piatte -0.3142 -0.1571
+     tocco a Gamma, livello -0.31416 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     tocco a Gamma, livello +0.00000 (x1): quadratico esp 2.000 pend/s -- aniso --
+  s 0.1  simm: i livelli Gamma -0.3142(3) -0.0000(2) +0.3142(1) | K -0.3142(2) -0.1566(1) -0.0000(2) +0.1566(1) | K' -0.3142(2) -0.1566(1) -0.0000(2) +0.1566(1) | M -0.3142(2) -0.1809(1) -0.0000(2) +0.1809(1) | piatte -0.3142 -0.0000
+     tocco a Gamma, livello -0.31416 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     Einstein della banda dispersiva a Gamma (+pi s): curvatura 0.03960, v_b,vuoto/s 1.1153
+  s 0.1  oggi: i livelli Gamma -0.6283(3) -0.3142(2) +0.0000(1) | K -0.6283(2) -0.4708(1) -0.3142(2) -0.1576(1) | K' -0.6283(2) -0.4708(1) -0.3142(2) -0.1576(1) | M -0.6283(2) -0.4950(1) -0.3142(2) -0.1333(1) | piatte -0.6283 -0.3142
+     tocco a Gamma, livello -0.62832 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     tocco a Gamma, livello +0.00000 (x1): quadratico esp 2.000 pend/s -- aniso --
+  s 0.3  simm: i livelli Gamma -0.9425(3) +0.0000(2) +0.9425(1) | K -0.9425(2) -0.4580(1) +0.0000(2) +0.4580(1) | K' -0.9425(2) -0.4580(1) +0.0000(2) +0.4580(1) | M -0.9425(2) -0.5304(1) -0.0000(2) +0.5304(1) | piatte -0.9425 +0.0000
+     tocco a Gamma, livello -0.94248 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     Einstein della banda dispersiva a Gamma (+pi s): curvatura 0.12738, v_b,vuoto/s 1.1550
+  s 0.3  oggi: i livelli Gamma -1.8850(3) -0.9425(2) -0.0000(1) | K -1.8850(2) -1.4005(1) -0.9425(2) -0.4845(1) | K' -1.8850(2) -1.4005(1) -0.9425(2) -0.4845(1) | M -1.8850(2) -1.4729(1) -0.9425(2) -0.4121(1) | piatte -1.8850 -0.9425
+     tocco a Gamma, livello -1.88496 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     tocco a Gamma, livello -0.00000 (x1): quadratico esp 2.000 pend/s -- aniso --
+  s 0.5  simm: i livelli Gamma -1.5708(3) -0.0000(2) +1.5708(1) | K -1.5708(2) -0.7227(1) +0.0000(2) +0.7227(1) | K' -1.5708(2) -0.7227(1) +0.0000(2) +0.7227(1) | M -1.5708(2) -0.8411(1) -0.0000(2) +0.8411(1) | piatte -1.5708 -0.0000
+     tocco a Gamma, livello -1.57080 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+     Einstein della banda dispersiva a Gamma (+pi s): curvatura 0.25000, v_b,vuoto/s 1.2533
+  s 0.5  oggi: i livelli Gamma -1.5708(2) -0.0000(1) +3.1416(3) | K -3.1416(2) -2.2935(1) -1.5708(2) -0.8481(1) | K' -3.1416(1) -2.2935(1) -1.5708(2) -0.8481(1) +3.1416(1) | M -3.1416(1) -2.4119(1) -1.5708(2) -0.7297(1) +3.1416(1) | piatte -1.5708 +3.1416
+     tocco a Gamma, livello -0.00000 (x1): quadratico esp 2.000 pend/s -- aniso --
+     tocco a Gamma, livello +3.14159 (x3): piatto esp -- pend/s -- aniso --; piatto esp -- pend/s -- aniso --; quadratico esp 2.000 pend/s -- aniso --
+  DI SERVIZIO: il blocco materia-vuoto della camminata e' nullo                              PASSA   0.0e+00
+  DEVE PASSARE: lo spettro del vuoto invariante per 60 gradi (scarto_c6 sul cerchio) entro 1 PASSA   il peggiore 2.40e-15
+  un pezzo solo, CAMM-GROVER-VUOTO a k (0, 0): delta(s) massimo 6.2e-15 (||H_eff|| 7.025)
+  un pezzo solo, CAMM-GROVER-VUOTO a k (1, 0): delta(s) massimo 2.5e-15 (||H_eff|| 7.025)
+  un pezzo solo, CAMM-SPOSTAMENTO-VUOTO a k (0, 0): delta(s) massimo 6.0e-15 (||H_eff|| 5.441)
+  un pezzo solo, CAMM-SPOSTAMENTO-VUOTO a k (1, 0): delta(s) massimo 6.0e-15 (||H_eff|| 5.441)
+  DEVE PASSARE: un pezzo solo (GROVER-VUOTO, SPOSTAMENTO-VUOTO) sul blocco del vuoto, delta( PASSA   il peggiore 6.2e-15
+  il fronte del vuoto a s 0.02: thr 0.01: /s 0.6458 thr 0.0001: /s 1.0000 thr 1e-06: /s 1.3944
+  il fronte del vuoto a s 0.05: thr 0.01: /s 0.5436 thr 0.0001: /s 0.6895 thr 1e-06: /s 0.7678
+  il fronte del vuoto a s 0.1: thr 0.01: /s 0.5704 thr 0.0001: /s 0.6913 thr 1e-06: /s 0.7849
+  il fronte del vuoto a s 0.3: thr 0.01: /s 0.5989 thr 0.0001: /s 0.6500 thr 1e-06: /s 0.6685
+  il fronte del vuoto a s 0.5: thr 0.01: /s 0.6334 thr 0.0001: /s 0.6568 thr 1e-06: /s 0.6827
+  DEVE FALLIRE: <<la materia a eps 0 ha un modo senza massa>> (il salto della coppia a K < 1 PASSA   il salto 0.156958 (8781162c: 0.156958)
+  PUO' FALLIRE: esiste un modo senza massa LINEARE del vuoto a s 0.05                        ### FALLISCE   0 rami lineari a s 0.05 (in tutto 0)
+  PUO' FALLIRE: |v_luce/s - 0.785|/0.785 < 0.05 a s 0.05 (la luce va a v_b)                  ### FALLISCE   nessun v_luce: nessun modo lineare
+--------------------------------------------------------------------------------------------------------------
+### PARTE B -- IL SISTEMA ACCOPPIATO (la Green di un tick, lato 48, eps_rel 1e-06, nel riferimento che ruota; la base: la banda alta della coppia a Gamma)
+  DEVE PASSARE: a materia nulla il blocco phi -> phi della Green = il blocco del vuoto entro PASSA   il peggiore 1.4e-15
+  S1 s 0.05 x 0.0001 simm: staz psi 1.2e-15 phi 3.0e-16 | tasso +3.508e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.05 x 0.0001 oggi: staz psi 2.4e-16 phi 3.8e-29 | tasso +4.648e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.05 x 0.001  simm: staz psi 1.3e-15 phi 2.1e-15 | tasso +7.084e-07 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.24e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.05 x 0.001  oggi: staz psi 8.7e-16 phi 8.4e-26 | tasso +3.789e-07 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.24e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.05 x 0.01   simm: staz psi 2.8e-15 phi 1.6e-15 | tasso +5.744e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.14e-04 esp 2.02 v/s 0.0284; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.05 x 0.01   oggi: staz psi 4.9e-16 phi 3.3e-16 | tasso +1.007e-07 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.14e-04 esp 2.02 v/s 0.0284; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S1 s 0.1  x 0.0001 simm: staz psi 2.2e-15 phi 2.1e-15 | tasso +1.988e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.1  x 0.0001 oggi: staz psi 3.4e-16 phi 1.5e-28 | tasso +2.617e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.1  x 0.001  simm: staz psi 2.0e-15 phi 1.6e-15 | tasso +1.299e-07 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.1  x 0.001  oggi: staz psi 2.0e-15 phi 6.5e-26 | tasso +2.079e-07 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.1  x 0.01   simm: staz psi 6.2e-15 phi 2.9e-15 | tasso +3.312e-06 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.31e-04 esp 2.02 v/s 0.0285; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.1  x 0.01   oggi: staz psi 6.9e-15 phi 1.8e-15 | tasso +3.081e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.31e-04 esp 2.02 v/s 0.0285; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S1 s 0.3  x 0.0001 simm: staz psi 4.7e-15 phi 1.5e-15 | tasso +1.182e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S1 s 0.3  x 0.0001 oggi: staz psi 6.7e-16 phi 1.1e-16 | tasso +4.052e-09 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S1 s 0.3  x 0.001  simm: staz psi 4.0e-15 phi 4.0e-16 | tasso +1.523e-09 a k [2, 45] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0320; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S1 s 0.3  x 0.001  oggi: staz psi 5.5e-15 phi 5.2e-25 | tasso +5.176e-09 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0320; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S1 s 0.3  x 0.01   simm: staz psi 5.9e-15 phi 1.0e-15 | tasso +4.074e-08 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.39e-03 esp 2.02 v/s 0.0307; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S1 s 0.3  x 0.01   oggi: staz psi 3.2e-15 phi 1.2e-15 | tasso +1.632e-06 a k [0, 0] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.39e-03 esp 2.02 v/s 0.0307; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.05 x 0.0001 simm: staz psi 3.0e-15 phi 4.0e-16 | tasso +9.064e-01 a k [17, 40] | zeri a Gamma 4 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.05 x 0.0001 oggi: staz psi 7.3e-15 phi 1.3e-15 | tasso +9.064e-01 a k [17, 40] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.05 x 0.001  simm: staz psi 7.4e-16 phi 3.1e-15 | tasso +9.057e-01 a k [8, 31] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.05 x 0.001  oggi: staz psi 4.1e-15 phi 5.6e-16 | tasso +9.057e-01 a k [31, 9] | zeri a Gamma 4 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.05 x 0.01   simm: staz psi 3.9e-15 phi 1.2e-15 | tasso +8.980e-01 a k [16, 35] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.05 x 0.01   oggi: staz psi 5.4e-15 phi 1.0e-15 | tasso +8.980e-01 a k [3, 13] | zeri a Gamma 4 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S3 s 0.1  x 0.0001 simm: staz psi 1.2e-15 phi 1.5e-15 | tasso +9.042e-01 a k [3, 13] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.1  x 0.0001 oggi: staz psi 5.0e-16 phi 1.3e-15 | tasso +9.042e-01 a k [3, 13] | zeri a Gamma 4 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.1  x 0.001  simm: staz psi 1.0e-15 phi 1.8e-15 | tasso +9.034e-01 a k [35, 16] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.1  x 0.001  oggi: staz psi 4.2e-15 phi 5.6e-16 | tasso +9.034e-01 a k [32, 3] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.1  x 0.01   simm: staz psi 8.4e-16 phi 2.6e-15 | tasso +8.958e-01 a k [16, 35] | zeri a Gamma 4 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.1  x 0.01   oggi: staz psi 5.3e-15 phi 1.6e-15 | tasso +8.958e-01 a k [13, 32] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S3 s 0.3  x 0.0001 simm: staz psi 6.7e-16 phi 2.6e-15 | tasso +8.801e-01 a k [9, 32] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.11e-09 esp -0.17 v/s 0.0000; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.3  x 0.0001 oggi: staz psi 6.9e-15 phi 2.6e-15 | tasso +8.801e-01 a k [39, 16] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.23e-09 esp -0.09 v/s 0.0000; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.3  x 0.001  simm: staz psi 2.7e-15 phi 1.5e-15 | tasso +8.794e-01 a k [39, 16] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.3  x 0.001  oggi: staz psi 8.6e-16 phi 2.6e-15 | tasso +8.794e-01 a k [9, 7] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.3  x 0.01   simm: staz psi 6.3e-15 phi 2.2e-15 | tasso +8.721e-01 a k [8, 8] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S3 s 0.3  x 0.01   oggi: staz psi 1.0e-14 phi 2.8e-15 | tasso +8.721e-01 a k [16, 40] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.05 x 0.0001 simm: staz psi 1.0e-15 phi 1.8e-15 | tasso +1.107e-02 a k [1, 1] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.05 x 0.0001 oggi: staz psi 6.6e-15 phi 3.3e-16 | tasso +1.107e-02 a k [47, 47] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.05 x 0.001  simm: staz psi 2.0e-15 phi 1.0e-15 | tasso +4.733e-02 a k [44, 2] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.05 x 0.001  oggi: staz psi 2.5e-15 phi 6.7e-16 | tasso +4.733e-02 a k [46, 46] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.05 x 0.01   simm: staz psi 4.1e-16 phi 1.7e-15 | tasso +1.886e-01 a k [6, 41] | zeri a Gamma 6 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.05 x 0.01   oggi: staz psi 6.2e-16 phi 1.8e-15 | tasso +1.886e-01 a k [6, 1] | zeri a Gamma 4 | i rami bassi: ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297; ang(m=1) 2.25e-04 esp 1.99 v/s 0.0297 (2 s)
+  S4 s 0.1  x 0.0001 simm: staz psi 6.7e-15 phi 6.8e-16 | tasso +1.105e-02 a k [1, 1] | zeri a Gamma 4 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.1  x 0.0001 oggi: staz psi 7.5e-15 phi 1.8e-15 | tasso +1.105e-02 a k [47, 47] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.1  x 0.001  simm: staz psi 2.2e-15 phi 1.8e-15 | tasso +4.728e-02 a k [4, 46] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.1  x 0.001  oggi: staz psi 5.1e-15 phi 1.1e-16 | tasso +4.728e-02 a k [4, 46] | zeri a Gamma 6 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.1  x 0.01   simm: staz psi 6.0e-15 phi 6.7e-16 | tasso +1.885e-01 a k [42, 47] | zeri a Gamma 4 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.1  x 0.01   oggi: staz psi 1.8e-15 phi 4.4e-16 | tasso +1.885e-01 a k [42, 47] | zeri a Gamma 4 | i rami bassi: ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299; ang(m=1) 4.52e-04 esp 1.99 v/s 0.0299 (2 s)
+  S4 s 0.3  x 0.0001 simm: staz psi 8.8e-16 phi 1.3e-15 | tasso +1.080e-02 a k [2, 47] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.3  x 0.0001 oggi: staz psi 6.3e-15 phi 3.9e-15 | tasso +1.080e-02 a k [46, 1] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.3  x 0.001  simm: staz psi 2.1e-15 phi 2.0e-15 | tasso +4.750e-02 a k [3, 0] | zeri a Gamma 4 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.3  x 0.001  oggi: staz psi 6.0e-15 phi 2.4e-15 | tasso +4.750e-02 a k [0, 3] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.3  x 0.01   simm: staz psi 7.9e-15 phi 2.2e-15 | tasso +1.877e-01 a k [2, 5] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+  S4 s 0.3  x 0.01   oggi: staz psi 8.7e-15 phi 7.8e-16 | tasso +1.877e-01 a k [43, 46] | zeri a Gamma 6 | i rami bassi: ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321; ang(m=1) 1.45e-03 esp 1.99 v/s 0.0321 (2 s)
+--------------------------------------------------------------------------------------------------------------
+### PARTE C -- IL CONO DI TUTTI I SETTORI (v_max della materia e del vuoto: _triangoli_forza.v_max; il vuoto al posto della materia, un'identita' nel resto)
+  s 0.05: v_max materia/s 0.5989  vuoto/s 0.5990 (a k (9, 31))  il cono/s 0.5990 | v_b/s 0.7850 (7daa8840) | cono/v_b 0.7631
+  s 0.3: v_max materia/s 0.6120  vuoto/s 0.6122 (a k (40, 39))  il cono/s 0.6122 | v_b/s 0.7701 (7daa8840) | cono/v_b 0.7949
+  s 0.5: v_max materia/s 0.6351  vuoto/s 0.6351 (a k (40, 16))  il cono/s 0.6351 | v_b/s 0.7391 (7daa8840) | cono/v_b 0.8592
+  PUO' FALLIRE: il cono di tutti i settori >= v_b (ogni s di C)                              ### FALLISCE   0.7631 0.7949 0.8592
+==============================================================================================================
+LA LUCE SUI TRIANGOLI: 5 su 8 controlli   ### CI SONO BUCHI  (il verdetto di fisica sono le tabelle)
+==============================================================================================================

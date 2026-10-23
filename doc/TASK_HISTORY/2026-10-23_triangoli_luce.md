@@ -101,3 +101,94 @@ dell'accoppiato quadratici** *(esponente `~2`: nessun suono a `x 1e-2`)*.
 3. la corsa, il referto, la relazione *(e il collegamento a `LUCE-VINCOLO-LAMPI-GAMMA`)*, la sezione `7`.
 
 ## 7. I RISULTATI *(scritti dopo la corsa, sotto)*
+
+> **La corsa:** ### **strumento `csv/_triangoli_luce.py` sha1-BYTE `6d3970a3`; referto `doc/referti_l2/triangoli_luce.txt` sha1-BYTE `2ede1886`, `.jsonl` `5a93de5b`; `6` minuti.** ### **Le tabelle sono GENERATE
+> dal `.jsonl`.** ### **`5` controlli su `8`: TUTTI i DEVE passano; falliscono i TRE PUO'-FALLIRE, come avevo previsto.**
+
+### 7.0 I CONTROLLI
+
+| criterio | esito | il numero |
+|---|---|---|
+| di servizio: il blocco materia-vuoto della camminata nullo | **PASSA** | `0.0` |
+| DEVE: il vuoto invariante per `60` gradi | **PASSA** | `2.40e-15` |
+| DEVE: un pezzo solo sul vuoto, `delta(s) < 1e-12` | **PASSA** | `6.2e-15` |
+| DEVE: a materia nulla il blocco `phi -> phi` della Green = il vuoto | **PASSA** | `1.4e-15` |
+| DEVE FALLIRE: la materia a `eps 0` ha un modo senza massa | **fallisce, come deve** | il salto `0.156958` = `8781162c` |
+| PUO': esiste un modo senza massa LINEARE del vuoto a `s 0.05` | ### **FALLISCE** *(previsto)* | `0` rami lineari, a nessuna `s` |
+| PUO': `v_luce` entro il `5%` da `v_b` | ### **FALLISCE** *(previsto: per assenza)* | nessun `v_luce` |
+| PUO': il cono di tutti i settori `>= v_b` | ### **FALLISCE** *(previsto)* | cono`/v_b`: `0.7631`, `0.7949`, `0.8592` |
+
+### 7.1 PARTE A -- IL VUOTO DA SOLO
+
+| `s` | conv | livelli a `Gamma` *(molteplicita')* | a `K` | piatte | i tocchi *(punto, livello: i rami)* | `v_b,vuoto/s` *(a `Gamma`, `+pi s`)* | fronte`/s` *(1e-2, 1e-4, 1e-6)* |
+|---|---|---|---|---|---|---|---|
+| `0.02` | simm | `-0.0628`(3) `-0.0000`(2) `+0.0628`(1) | `-0.0628`(2) `-0.0314`(1) `-0.0000`(2) `+0.0314`(1) | `-0.0628` `-0.0000` | Gamma -0.0628: piatto, piatto, quadratico (2.00) | `1.1109` | `0.6458` `1.0000` `1.3944` |
+| `0.02` | oggi | `-0.1257`(3) `-0.0628`(2) `-0.0000`(1) | `-0.1257`(2) `-0.0942`(1) `-0.0628`(2) `-0.0314`(1) | `-0.1257` `-0.0628` | Gamma -0.1257: piatto, piatto, quadratico (2.00); Gamma -0.0000: quadratico (2.00) | -- | `0.6458` `1.0000` `1.3944` |
+| `0.05` | simm | `-0.1571`(3) `+0.0000`(2) `+0.1571`(1) | `-0.1571`(2) `-0.0785`(1) `+0.0000`(2) `+0.0785`(1) | `-0.1571` `+0.0000` | Gamma -0.1571: piatto, piatto, quadratico (2.00) | `1.1119` | `0.5436` `0.6895` `0.7678` |
+| `0.05` | oggi | `-0.3142`(3) `-0.1571`(2) `+0.0000`(1) | `-0.3142`(2) `-0.2356`(1) `-0.1571`(2) `-0.0786`(1) | `-0.3142` `-0.1571` | Gamma -0.3142: piatto, piatto, quadratico (2.00); Gamma +0.0000: quadratico (2.00) | -- | `0.5436` `0.6895` `0.7678` |
+| `0.1` | simm | `-0.3142`(3) `-0.0000`(2) `+0.3142`(1) | `-0.3142`(2) `-0.1566`(1) `-0.0000`(2) `+0.1566`(1) | `-0.3142` `-0.0000` | Gamma -0.3142: piatto, piatto, quadratico (2.00) | `1.1153` | `0.5704` `0.6913` `0.7849` |
+| `0.1` | oggi | `-0.6283`(3) `-0.3142`(2) `+0.0000`(1) | `-0.6283`(2) `-0.4708`(1) `-0.3142`(2) `-0.1576`(1) | `-0.6283` `-0.3142` | Gamma -0.6283: piatto, piatto, quadratico (2.00); Gamma +0.0000: quadratico (2.00) | -- | `0.5704` `0.6913` `0.7849` |
+| `0.3` | simm | `-0.9425`(3) `+0.0000`(2) `+0.9425`(1) | `-0.9425`(2) `-0.4580`(1) `+0.0000`(2) `+0.4580`(1) | `-0.9425` `+0.0000` | Gamma -0.9425: piatto, piatto, quadratico (2.00) | `1.1550` | `0.5989` `0.6500` `0.6685` |
+| `0.3` | oggi | `-1.8850`(3) `-0.9425`(2) `-0.0000`(1) | `-1.8850`(2) `-1.4005`(1) `-0.9425`(2) `-0.4845`(1) | `-1.8850` `-0.9425` | Gamma -1.8850: piatto, piatto, quadratico (2.00); Gamma -0.0000: quadratico (2.00) | -- | `0.5989` `0.6500` `0.6685` |
+| `0.5` | simm | `-1.5708`(3) `-0.0000`(2) `+1.5708`(1) | `-1.5708`(2) `-0.7227`(1) `+0.0000`(2) `+0.7227`(1) | `-1.5708` `-0.0000` | Gamma -1.5708: piatto, piatto, quadratico (2.00) | `1.2533` | `0.6334` `0.6568` `0.6827` |
+| `0.5` | oggi | `-1.5708`(2) `-0.0000`(1) `+3.1416`(3) | `-3.1416`(2) `-2.2935`(1) `-1.5708`(2) `-0.8481`(1) | `-1.5708` `+3.1416` | Gamma -0.0000: quadratico (2.00); Gamma +3.1416: piatto, piatto, quadratico (2.00) | -- | `0.6334` `0.6568` `0.6827` |
+
+### 7.2 PARTE B -- IL SISTEMA ACCOPPIATO *(la base: la banda alta della coppia a `Gamma`; il tasso per `s`, zero simmetrico e di oggi; il ramo piu' basso lungo `theta_1`: l'angolo al primo passo e l'esponente in `k`)*
+
+| forma | `s` | `x` | tasso simm | tasso oggi | il ramo basso: angolo al passo `1`, esponente |
+|---|---|---|---|---|---|
+| S1 | `0.05` | `0.0001` | `+3.51e-08` | `+4.65e-08` | `2.246e-04`, `1.99` |
+| S1 | `0.05` | `0.001` | `+7.08e-07` | `+3.79e-07` | `2.245e-04`, `1.99` |
+| S1 | `0.05` | `0.01` | `+5.74e-08` | `+1.01e-07` | `2.143e-04`, `2.02` |
+| S1 | `0.1` | `0.0001` | `+1.99e-08` | `+2.62e-08` | `4.520e-04`, `1.99` |
+| S1 | `0.1` | `0.001` | `+1.30e-07` | `+2.08e-07` | `4.518e-04`, `1.99` |
+| S1 | `0.1` | `0.01` | `+3.31e-06` | `+3.08e-08` | `4.313e-04`, `2.02` |
+| S1 | `0.3` | `0.0001` | `+1.18e-08` | `+4.05e-09` | `1.454e-03`, `1.99` |
+| S1 | `0.3` | `0.001` | `+1.52e-09` | `+5.18e-09` | `1.453e-03`, `1.99` |
+| S1 | `0.3` | `0.01` | `+4.07e-08` | `+1.63e-06` | `1.392e-03`, `2.02` |
+| S3 | `0.05` | `0.0001` | `+9.06e-01` | `+9.06e-01` | `2.246e-04`, `1.99` |
+| S3 | `0.05` | `0.001` | `+9.06e-01` | `+9.06e-01` | `2.246e-04`, `1.99` |
+| S3 | `0.05` | `0.01` | `+8.98e-01` | `+8.98e-01` | `2.246e-04`, `1.99` |
+| S3 | `0.1` | `0.0001` | `+9.04e-01` | `+9.04e-01` | `4.520e-04`, `1.99` |
+| S3 | `0.1` | `0.001` | `+9.03e-01` | `+9.03e-01` | `4.520e-04`, `1.99` |
+| S3 | `0.1` | `0.01` | `+8.96e-01` | `+8.96e-01` | `4.520e-04`, `1.99` |
+| S3 | `0.3` | `0.0001` | `+8.80e-01` | `+8.80e-01` | `1.114e-09`, `-0.17` |
+| S3 | `0.3` | `0.001` | `+8.79e-01` | `+8.79e-01` | `1.454e-03`, `1.99` |
+| S3 | `0.3` | `0.01` | `+8.72e-01` | `+8.72e-01` | `1.454e-03`, `1.99` |
+| S4 | `0.05` | `0.0001` | `+1.11e-02` | `+1.11e-02` | `2.246e-04`, `1.99` |
+| S4 | `0.05` | `0.001` | `+4.73e-02` | `+4.73e-02` | `2.246e-04`, `1.99` |
+| S4 | `0.05` | `0.01` | `+1.89e-01` | `+1.89e-01` | `2.246e-04`, `1.99` |
+| S4 | `0.1` | `0.0001` | `+1.10e-02` | `+1.10e-02` | `4.520e-04`, `1.99` |
+| S4 | `0.1` | `0.001` | `+4.73e-02` | `+4.73e-02` | `4.520e-04`, `1.99` |
+| S4 | `0.1` | `0.01` | `+1.89e-01` | `+1.89e-01` | `4.520e-04`, `1.99` |
+| S4 | `0.3` | `0.0001` | `+1.08e-02` | `+1.08e-02` | `1.454e-03`, `1.99` |
+| S4 | `0.3` | `0.001` | `+4.75e-02` | `+4.75e-02` | `1.454e-03`, `1.99` |
+| S4 | `0.3` | `0.01` | `+1.88e-01` | `+1.88e-01` | `1.454e-03`, `1.99` |
+
+### 7.3 PARTE C -- IL CONO DI TUTTI I SETTORI
+
+| `s` | `v_max` materia`/s` | `v_max` vuoto`/s` | il cono`/s` | `v_b/s` *(`7daa8840`)* | cono`/v_b` |
+|---|---|---|---|---|---|
+| `0.05` | `0.5989` | `0.5990` | `0.5990` | `0.7850` | `0.7631` |
+| `0.3` | `0.6120` | `0.6122` | `0.6122` | `0.7701` | `0.7949` |
+| `0.5` | `0.6351` | `0.6351` | `0.6351` | `0.7391` | `0.8592` |
+
+### 7.4 LA LETTURA *(tre righe)*
+
+1. ### **IL VUOTO NON HA LUCE:** ### **nessun ramo lineare a nessuna `s`** *(i tocchi sono tutti quadratici, esponente `2.00`)*; ### **a `eps 0` la materia e' DUE COPIE della camminata del vuoto** *(`U = I`,
+   moneta spenta)*, ### **quindi il vuoto ha la STESSA coppia massiva a `K`, lo stesso `v_max`** *(`0.599 s`)* ### **e lo stesso fronte.** ### **La banda dispersiva del vuoto a `Gamma` ha `v_b,vuoto = 1.11 s`.**
+2. ### **IL SISTEMA ACCOPPIATO NON CREA UN SUONO:** ### **i rami bassi restano quadratici** *(esponente `1.99`-`2.02`)* ### **per `S1`, `S3`, `S4`, ogni `s` e `x` -- tranne `S3`, `s 0.3`, `x 1e-4`, dove il primo ramo ha un angolo `~1e-9` a ogni `k` *(esponente `-0.17`, `-0.09`): un modo a frequenza NULLA in piu', non lineare** *(non lo spiego)*; ### **`S1` e' stabile** *(il tasso `<= 3.3e-6`, il
+   rumore della differenza finita)*, ### **`S3` instabile** *(`0.87`-`0.91`)*, ### **`S4` instabile e crescente con `x`** *(`0.011`, `0.047`, `0.19`)*.
+3. ### **IL CONO DEI SEGNALI E' `v_max = 0.60`-`0.64 s` IN TUTTI I SETTORI** *(materia e vuoto uguali)*, ### **SOTTO `v_b` del modo a `K`** *(`0.76`-`0.86 v_b`)*: ### **la particella vede una `c` che nessun segnale
+   raggiunge.**
+
+### 7.5 QUAL E' LA LUCE DEL MODELLO SUI TRIANGOLI
+
+### **NON C'E':** ### **ne' il vuoto ne' il sistema accoppiato hanno un modo senza massa lineare** *(fra `s 0.02` e `0.5`, `x` fino a `1e-2`)*. ### **Il modello ha un CONO** *(la `v_max` dei segnali, `0.60`-`0.64 s`)* ### **ma
+nessun FOTONE che lo percorra.**
+
+### 7.6 CHE COSA VUOL DIRE PER LA RELATIVITA' RISTRETTA E LA PROVA DI LORENTZ *(informazione per Luca, non una scelta)*
+
+### **La gravita' sui triangoli e' quella della relativita' generale se la «luce» va a `v_b`** *(`7daa8840`)*; ### **ma nel modello nessun segnale va a `v_b`: il cono e' `1.3` volte piu' lento.** ### **E' un problema
+di RELATIVITA' RISTRETTA, non di gravita':** ### **la dispersione del modo massivo non e' invariante rispetto al cono della camminata.** ### **Per la prova di Lorentz** *(`doc/SPAZIOTEMPO_3PIU1.md`, `G` punto `3`)*: ### **sui
+triangoli fallirebbe gia' a riposo** *(la relazione di Einstein del modo non usa la velocita' del cono)*; ### **resta da vedere se la moneta** *(`eps > 0`)* ### **o la FCC cambiano il quadro.**
