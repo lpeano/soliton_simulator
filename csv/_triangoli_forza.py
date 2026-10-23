@@ -64,6 +64,7 @@ TOLL_STESSA = 0.05
 PUO1 = (0.9, 1.1)
 PUO2 = (0.8, 1.2)
 F_A = math.sqrt(3.0) / 2.0
+TOLL_BLOCCO = 1e-14              # ### i blocchi in spazio reale sotto questa soglia sono nulli (la camminata arriva a +-2 celle)
 JSONL = os.path.join(RADICE, "doc", "referti_l2", "triangoli_forza.jsonl")
 OK = [0, 0]
 
@@ -631,6 +632,131 @@ def parte_C():
         segni = sorted({"+" if v > 0 else "-" for v in y})
         scrivi({"tipo": "fit_moneta", "che": che, "c": float(c[0]), "p_s": float(c[1]), "q_eps": float(c[2]), "residuo_log_max": res, "segni": segni})
         print("  il fit di |%s| = e^c s^p eps^q: p %.3f  q %.3f  (e^c %.3e; il residuo in ln, massimo %.3f; i segni %s)" % (che, c[1], c[2], math.exp(c[0]), res, "".join(segni)))
+
+
+# =====================================================================================
+#   LA CORREZIONE DEL PACCHETTO *(il task history `2026-10-23_triangoli_fattore.md`, [[PACCHETTO-K-NON-FERMO]])*: ### funzioni NUOVE, `corsa()` di sopra INTATTA
+# =====================================================================================
+def blocchi(eps, s):
+    """### I blocchi in spazio reale della camminata *(dal lato `L`, zero simmetrico)*: `[(r1, r2, B)]`, ### **la camminata arriva a `+-2` celle, quindi `A(k)` e' ESATTA a ogni `k`.**"""
+    A = matrice_L(eps, s)[:, :, :NB, :NB]
+    n = A.shape[0]
+    AR = np.fft.ifft2(A, axes=(0, 1))
+    m = np.arange(n)
+    m = np.where(m > n // 2, m - n, m)
+    return [(int(m[i]), int(m[j]), AR[i, j]) for i in range(n) for j in range(n) if float(np.abs(AR[i, j]).max()) > TOLL_BLOCCO]
+
+
+def A_di(bl, t1, t2):
+    """### `A(k)` a un `k` qualunque *(le fasi per legame `t1 = k.a1`, `t2 = k.a2`)*: `sum_R B_R e^{-i k.R}`."""
+    return sum(B * np.exp(-1j * (t1 * r1 + t2 * r2)) for r1, r2, B in bl)
+
+
+def theta_di(toro, q):
+    """### Le fasi `(k.a1, k.a2)` di `K + q`, `q` lungo la striscia: ### **toro `A` `(2pi/3 + q, 2pi/3)`; toro `B`** *(`k.u = 2pi/3 + q`, `k.w = 0`, `a2 = u + w`)* ### **`(2pi/3 + q, 2pi/3 + q)`.**"""
+    t = 2.0 * np.pi / 3.0 + q
+    return (t, 2.0 * np.pi / 3.0) if toro == "A" else (t, t)
+
+
+def fase_di(toro, q, m1, m2):
+    """### La fase `(K + q).r` per nodo, nelle coordinate del toro."""
+    return (2.0 * np.pi / 3.0 + q) * m1 + (2.0 * np.pi / 3.0 * m2 if toro == "A" else 0.0)
+
+
+def q_della_striscia(Lx):
+    return [2.0 * np.pi * k / Lx for k in range(-(Lx // 2), Lx - Lx // 2)]
+
+
+def spazi_banda(bl, Q, toro, qs):
+    """### Lo spazio della banda a `K + q` *(due vettori)*, ### **seguito per sovrapposizione da `q = 0` verso l'esterno.**"""
+    out = {0.0: Q}
+    for q in sorted(qs, key=abs):
+        if q == 0.0:
+            continue
+        lam, V = np.linalg.eig(A_di(bl, *theta_di(toro, q)))
+        prec = min(out, key=lambda x: (abs(x - q), x))
+        ov = np.linalg.norm(out[prec].conj().T @ V, axis=0)
+        top = [int(x) for x in np.argsort(-ov)[:2]]
+        out[q] = np.linalg.qr(V[:, top])[0]
+    return out
+
+
+def pacchetto_banda(toro, Lx, x0, W, Q, spazi, m1, m2):
+    """### **IL PACCHETTO DI BANDA:** ### **`psi = sum_q g(q) e^{i (K + q).r} u(q)`, `g` la trasformata dell'inviluppo gaussiano in `m1`, `u(q) = P_banda(q) u_K/|.|`.** ### **Normalizzato.**"""
+    mm = np.arange(Lx, dtype=float)
+    g = np.exp(-(mm - x0) ** 2 / (2.0 * W * W))
+    cel = np.zeros((len(m1), NB), dtype=complex)
+    for q in spazi:
+        u = spazi[q] @ (spazi[q].conj().T @ Q[:, 0])
+        u = u / np.linalg.norm(u)
+        gq = np.sum(g * np.exp(-1j * q * mm)) / Lx
+        cel += gq * np.exp(1j * fase_di(toro, q, m1, m2))[:, None] * u[None, :]
+    return cel / np.sqrt(np.sum(np.abs(cel) ** 2))
+
+
+def frazioni(cel, toro, Lx, spazi_b, spazi_p):
+    """### Le frazioni di norma ### **sulla banda, sull'ALTRA banda della coppia, e sul resto** *(proiezione in `k` sulla riga della striscia; fuori da quella riga va nel resto)*."""
+    c = np.fft.fft2(cel.reshape(Lx, LY, NB), axes=(0, 1))
+    tot = float(np.sum(np.abs(c) ** 2))
+    n2 = LY // 3 if toro == "A" else 0               # ### `k.a2 = 2 pi/3` sul toro `A`: la riga `LY/3` della trasformata (`e^{-i}`); sul `B` `k.w = 0`
+    fb = fp = 0.0
+    for q in spazi_b:
+        n1 = int(round((2.0 * np.pi / 3.0 + q) * Lx / (2.0 * np.pi))) % Lx
+        v = c[n1, n2]
+        fb += float(np.sum(np.abs(spazi_b[q].conj().T @ v) ** 2))
+        fp += float(np.sum(np.abs(spazi_p[q].conj().T @ v) ** 2))
+    return fb / tot, fp / tot, 1.0 - (fb + fp) / tot
+
+
+def corsa_con(toro, Lx, eps, s0, eta, cel, nome, Tmax, rampa, lineare):
+    """### La corsa con un pacchetto DATO *(`cel`, `(n, 12)`)*, ### **la rampa** *(`eta(t) = eta min(1, t/rampa)`; il fit sui `Tmax` tick dopo)*, ### **il baricentro lineare o circolare, e `gamma(t) =
+    exp(-(2 pi/Lx)^2 var(t)/2)` dalla varianza LINEARE della densita'.** ### Ritorna il fit *(`_forza_da_cs.fit_moto`)*, la traccia, `<gamma>`, `gamma(0)`."""
+    import _forza_da_cs as FC
+    import _triangoli as T
+    tr = tori()[toro]
+    vero = T.EPS_MONETA
+    T.EPS_MONETA = eps
+    try:
+        inc, mot, st, par = T.scena_toro((tr["spost"], T.TRIANGOLI[1]), (Lx, LY), 1.0, T.X)
+    finally:
+        T.EPS_MONETA = vero
+    n = inc.n
+    m1 = (np.arange(n) // LY).astype(float)
+    prof = np.cos(2.0 * np.pi * m1 / Lx)
+    mot.lambda_c = None
+    for k in st:
+        st[k][...] = 0
+    x0 = Lx / 4.0
+    st["psi_h"][...] = cel.reshape(st["psi_h"].shape)
+    fase = np.exp(2j * np.pi * m1 / Lx)
+    xr = (m1 - x0 + Lx / 2.0) % Lx - Lx / 2.0
+    tt, xx, gg = [], [], []
+    norma0 = None
+    with conv(nome):
+        for t in range(rampa + Tmax + 1):
+            et = eta * (min(1.0, t / rampa) if rampa else 1.0)
+            cs = s0 * (1.0 + et * prof)
+            assert float(cs.max()) <= 1.0 and float(cs.min()) > 0.0
+            mot.cs = cs
+            if t:
+                T.camminata(st, mot, par)
+            p = st["psi_h"].reshape(n, NB)
+            w = np.sum(np.abs(p) ** 2, axis=1)
+            tot = float(np.sum(w) + np.sum(np.abs(st["phi_h"]) ** 2))
+            norma0 = tot if norma0 is None else norma0
+            assert abs(tot - norma0) <= FC.TOLL_NORMA * norma0, "la norma non si conserva"
+            if t < rampa:
+                continue
+            mu = float(np.sum(w * xr) / np.sum(w))
+            var = float(np.sum(w * (xr - mu) ** 2) / np.sum(w))
+            dx = mu if lineare else ((Lx / (2.0 * np.pi) * np.angle(np.sum(w * fase))) - x0 + Lx / 2.0) % Lx - Lx / 2.0
+            tt.append(float(t - rampa))
+            xx.append(float(dx))
+            gg.append(math.exp(-(2.0 * np.pi / Lx) ** 2 * var / 2.0))
+    tt, xx = np.array(tt), np.array(xx)
+    r = FC.fit_moto(tt, xx)
+    r.update(gamma_medio=float(np.mean(gg)), gamma0=gg[0], punti=len(tt))
+    return r, tt, xx
 
 
 def main(argv):
