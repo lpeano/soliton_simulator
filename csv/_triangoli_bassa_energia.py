@@ -95,6 +95,23 @@ def un_pezzo(idl):
         T.camminata = vero
 
 
+def c6_cerchio(A):
+    """### La simmetria a `60` gradi SUL CERCHIO: ### **gli autovalori a `k` e a `k` ruotato** *(`_triangoli.ruota60`)* ### **accoppiati con l'assegnamento ungherese, lo scarto massimo.**
+
+    ### ⛔ **Perche' non `_triangoli.scarto_c6`** *(`1e2437a9`)*: ### **quella ordina le fasi, e un autovalore a `-1` esatto** *(fase `+-pi`)* ### **cambia posto fra `-pi` e `+pi`: `3.14` invece di `~1e-15`.**"""
+    import _triangoli as T
+    from scipy.optimize import linear_sum_assignment
+    B = T.ruota60(A)
+    la, lb = np.linalg.eigvals(A), np.linalg.eigvals(B)
+    peg = 0.0
+    for i in range(A.shape[0]):
+        for j in range(A.shape[1]):
+            D = np.abs(la[i, j][:, None] - lb[i, j][None, :])
+            r, c = linear_sum_assignment(D)
+            peg = max(peg, float(D[r, c].max()))
+    return peg
+
+
 def segui(A, cammino):
     """### Le `12` bande della materia lungo `cammino`, seguite per sovrapposizione dei vettori propri, srotolate."""
     from scipy.optimize import linear_sum_assignment
@@ -226,7 +243,10 @@ def main(argv):
         for s in S_LISTA:
             A = matrice(eps, s, L, "simm")
             Ao = matrice(eps, s, L, "oggi")
-            c6 = max(c6, float(T.scarto_c6(A)), float(T.scarto_c6(Ao)))
+            c6 = max(c6, c6_cerchio(A), c6_cerchio(Ao))
+            c6v = max(float(T.scarto_c6(A)), float(T.scarto_c6(Ao)))
+            if c6v > 1e-12:
+                print("  (scarto_c6 di _triangoli, con le fasi ordinate: %.2e -- il difetto di 1e2437a9; sul cerchio %.2e)" % (c6v, max(c6_cerchio(A), c6_cerchio(Ao))))
             Af = matrice(eps, s, LF, "simm")
             for n, (a, b) in PUNTI.items():
                 serv = max(serv, float(np.abs(Af[a * LF // L, b * LF // L] - A[a, b]).max()))
@@ -323,7 +343,7 @@ def main(argv):
                 coppie.append({"eps": eps, "s": s, "k": list(ks), "lambda_stella": ls})
                 scrivi({"tipo": "lambda_stella", "eps": eps, "s": s, "k": list(ks), "lambda_stella": ls})
                 print("    lambda* della coppia a %s: %s" % (ks, f_(ls, "%.8f")))
-    esito("DEVE PASSARE: lo spettro invariante per 60 gradi entro 1e-12 (ruota60, ogni eps, s, convenzione)", c6 < 1e-12, "il peggiore %.2e" % c6)
+    esito("DEVE PASSARE: lo spettro invariante per 60 gradi entro 1e-12 (ruota60, SUL CERCHIO, ogni eps, s, convenzione)", c6 < 1e-12, "il peggiore %.2e" % c6)
     esito("DI SERVIZIO: il blocco al lato %d = al lato %d ai punti speciali, entro 1e-12" % (LF, L), serv < 1e-12, "il peggiore %.2e" % serv)
     ls = [c["lambda_stella"] for c in coppie if c["lambda_stella"] is not None]
     esito("PUO' FALLIRE: lambda* = 1/2 entro 1e-6 al punto del salto minimo (%d coppie)" % len(ls), len(ls) > 0 and all(abs(x - 0.5) < 1e-6 for x in ls),
