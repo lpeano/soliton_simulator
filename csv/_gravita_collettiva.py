@@ -240,6 +240,7 @@ def livello_1():
                             stb = stabilita(forma, L, s, sc0, r0["omega_m"], r0["omega_v"])
                             rec = {"tipo": "livello1", "forma": forma, "eps": eps, "s": s, "x": x, "lato": L, "ramo": g["nome"],
                                    "omega_ramo0": g["omega0"], "Dt": g["Dt"], "segno_curv": g["segno"], "copie": g["copie"],
+                                   "rho0": r0["rho0"], "Lambda0": r0["Lambda0"],
                                    "alpha": al, "omega_tot": w_tot, "omega_misurata": r0["omega_m"], "omega_vuoto": r0["omega_v"],
                                    "staz_materia": r0["staz_m"], "staz_vuoto": r0["staz_v"], "scomposizione": scomp,
                                    "x_scarto": r0["x_scarto"], "pendenza_tot": p_tot, "pendenza_nl": p_nl, **stb}
