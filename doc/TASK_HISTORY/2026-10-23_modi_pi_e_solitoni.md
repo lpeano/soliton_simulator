@@ -78,6 +78,18 @@
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE:** ### **le tabelle.** ### **A parte: la lettura in tre righe; una riga su dove sta la fisica a bassa energia; una riga sulla tensione
   larghezza / principio di equivalenza, per Luca.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto in memoria** *(griglia ridotta: `s 0.3`, il `jsonl` negli appunti)*
+### **ha mostrato due DIFETTI DEL MIO METODO, corretti prima della corsa, e dei numeri che dichiaro:**
+- ### **(a) LE BANDE DEGENERI col gruppo a `k = 0`** *(le sue copie e le bande piatte con la stessa `omega(0)`: lo spazio a `k = 0` del ramo alto ha dimensione `4`, `557d94d6`)* ### **davano un
+  «salto» nullo a `k = 0`**: ### **non sono «altre bande», e si escludono.**
+- ### **(b) UN PUNTO `k*` DOVE LA BANDA E' PIATTA** *(curvatura `~0`, `v ~ 0`: il ramo alto seguito lungo `y` arrivava a `(0, pi)` su una banda piatta, e `a_H/a_RG ~ 1e14`)* ### **non e' un modo
+  massivo fermo**: ### **`k*` e' il primo candidato** *(in ordine di salto)* ### **con curvatura e `v` non nulli** *(`>= 1e-6`)*.
+- ### **(c) IL PASSO DELLA GRIGLIA DEI SOLITONI:** ### **`dr = w/640`, non `min(w, sigma)/64`** *(sez. `2`)*: ### **con `/64` la gaussiana esatta sbaglia di `~4e-5`** *(l'ordine `2` di `8b6cca50`)*, ### **e
+  `w/640` tiene la scatola a `6400` punti per ogni `w`.** ### **La gaussiana esatta, provata: `3.7e-7`.**
+- ### **I NUMERI VISTI** *(non li uso; le previsioni restano)*: ### **a `eps 0, s 0.3` i due rami hanno `k* = (pi, 0)`, salto `0.654`, e nella SIMMETRICA `a_H/a_RG = +2.30` TUTTI E DUE** *(verso `cs`
+  BASSO; `lambda* = 0.500000` anche li')*; ### **oggi `+5.76` e `-1.16`**; ### **misurato, simmetrica, ramo a curvatura `-`: `+2.15`..`+2.20`**; ### **`E0 M > 0` a `k*` su tutti i rami visti**;
+  ### **`eta = 0` a `eps 0.5, (pi, pi)` vi fallisce** *(`7.9e-6` contro `sigma 2.9e-6`)*.
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;

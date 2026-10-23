@@ -37,6 +37,7 @@ ETA_MODULI = (5e-4, 1e-3, 5e-3, 1e-2)
 ETA_CONTROLLI = (1e-3, 1e-2)
 LX_LISTA = (128, 256)
 LY = 4
+PORTANTE = None                # (kx, ky) del pacchetto: None = a riposo a k = 0 (com'era); csv/_modi_pi_e_solitoni.py la imposta in memoria per i modi a k = pi
 TOLL_FIT = 0.05                # il fit di un ramo massivo (44d4963d)
 TOLL_DISPERSIVO = 0.1          # |v_g| per tempo proprio (51f45268)
 TOLL_OMEGA = 1e-9              # lo stesso autovalore a k = 0
@@ -265,6 +266,9 @@ def corsa(Lx, eps, s0, eta, Q):
     e = Q[:, 0]
     G = np.exp(-(x - x0) ** 2 / (2.0 * W * W))
     cel = G[:, None] * e[None, :]
+    if PORTANTE is not None:
+        # ### la PORTANTE `e^{i k.x}` del modo a `k`: ### **`A(k)` e' la trasformata con `e^{-i k x}`**, quindi lo stato di Bloch e' `e^{+i k x} u_k`
+        cel = cel * np.exp(1j * (PORTANTE[0] * x + PORTANTE[1] * (np.arange(n) % LY)))[:, None]
     cel /= np.sqrt(np.sum(np.abs(cel) ** 2))
     st["psi_h"][...] = cel.reshape(st["psi_h"].shape)
     fase = np.exp(2j * np.pi * x / Lx)
