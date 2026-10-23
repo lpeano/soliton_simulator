@@ -112,6 +112,13 @@ che parta la parte `B`**, ### **che lo LEGGE e non ricalcola la previsione.**
 - ### **COSA MI FA FERMARE:** ### **un nodo fuori dal cono**; ### **la norma che non si conserva** *(oltre `1e-10` relativo)*; ### **la parte `A` non committata quando parte la
   `B`.**
 
+### 📝 **ANNOTAZIONE 1** *(prima di ogni corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto delle funzioni, in memoria** *(lo strumento
+nel blocco degli appunti, nessun file del repo scritto; `s0` `0.9` e `0.99`, `Lx 128`, pochi `eta`)*, ### **ha mostrato che a `eps 0` lo spazio a `k = 0` con l'`omega(0)` del ramo
+ALTO ha dimensione `4`, non `2`**: ### **ci stanno anche rami NON massivi, degeneri a `k = 0`.** ### **Quindi il vettore del pacchetto e il proiettore `P` NON vengono piu' da tutto
+lo spazio proprio a `k = 0`** *(come scritto al punto `2`)*, ### **ma dallo SPAZIO DEL RAMO**: ### **i vettori del ramo al primo `k` lungo `x`** *(`omega(k_1)`)* ### **proiettati
+sullo spazio a `k = 0`**, ### **col rango che deve uguagliare il numero delle copie** *(asserito)*. ### **Le formule della previsione e i criteri NON cambiano.** ### ⚠ **E lo
+dichiaro: la prova a vuoto ha stampato anche dei valori di `a`**; ### **non li uso, e la previsione e' gia' fissata in formule da `cbc1114f`.**
+
 ## 5. I TRIANGOLI: **NON IN QUESTA MISURA, E PERCHE'**
 
 ### **La stessa funzione NON lo permette:** ### **`_triangoli.scena` costruisce solo il toro QUADRATO `(lato, lato)`** *(non il rettangolo lungo in `x`)*; ### **e la catena
