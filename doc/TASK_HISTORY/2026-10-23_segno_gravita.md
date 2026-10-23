@@ -119,6 +119,15 @@ anche dei numeri di `A`: li dichiaro** *(a `s0 0.3`: `lambda* = 0.500000026`, re
 - ### **PUO' FALLIRE:** ### **parte `D`, almeno un solitone `S3` o `S4` con lo zero simmetrico e `a_mis/a_RG > 0`.** ### **La mia previsione: FALLISCE.**
 - ### **Se la parte `D` e' lunga, il suo referto si committa a parte.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*:
+- ### **LA PARTE `D` SI FERMA ALLA SCELTA DELLE NORME, e lo dico prima:** ### **la prova a vuoto in memoria** *(`solitone()` sulla griglia `N`, `s0 0.3` e `0.5`)* ### **non trova NESSUNA forma con
+  uno stato legato largo `>= 4` archi**: ### **sul ramo a curvatura `-` `sigma = sqrt(|c|/s)` vale `0.46` e `0.50` archi** *(`c = -0.064` e `-0.125`)*, ### **e gli stati legati sono larghi `0.5`-`1.2`
+  archi.** ### ⚠ **E UN LIMITE DEL RISOLUTORE, dichiarato:** ### **la sua scatola e' `12 sigma` = `5.5`-`6.0` archi e la «dispersione» scatta oltre `R/5 = 1.1`-`1.2` archi**: ### **uno stato largo
+  `>= 4` archi QUESTO strumento non lo puo' dire legato.** ### **Allargare la scatola porta la coda sotto il doppio** *(`d222af13`, annotazione `1` di `gravita_collettiva`)*: ### **non lo faccio
+  qui.** ### **Quindi: i controlli della parte `D` NON SONO ESEGUIBILI e non si contano**, ### **e l'estrazione del profilo da `solitone()`** *(sez. `3-bis`)* ### **NON SERVE e non si fa.**
+- ### **La prova a vuoto delle parti `A`-`C`** *(griglia ridotta)* ### **ha stampato dei numeri: li dichiaro** *(`a_H/a_RG -1.84` a `s0 0.05`, `E0 M < 0` su tutti i rami visti, il salto a `k = pi` vicino a `0` a
+  `s 0.1` e a `k = 0` vicino a `pi` a `s 0.9`; il controllo `eta = 0` a `s0 0.1` vi fallisce)* ### **e non tocco ne' le previsioni ne' i criteri.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
