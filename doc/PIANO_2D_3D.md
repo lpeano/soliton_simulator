@@ -22,6 +22,7 @@
     della griglia sollevata al dicicloico `Dic6` dentro `SU(2)`, `doc/PROGETTO_TRIANGOLI.md`)*: ### **cio' che in 2D manca e' la piena `SU(2)` delle rotazioni dello spazio, non quella dello
     spinore** *(la correzione di Luca, errore del guardiano `n.55`, `2026-10-23`)*;
   - ### **la propagazione senza coda** *(solo nelle dimensioni dispari)*.
+- ### **LE IDEE SULLO SPAZIO-TEMPO `3+1`** *(la discussione del `2026-10-23`, `18:37`-`19:39`: le idee di Luca, i fatti, le prove da fare, la verifica del `3.08` dell'era `1`; NESSUNA decisione)*: ### **`doc/SPAZIOTEMPO_3PIU1.md`** *([[SPAZIOTEMPO-3PIU1]])*.
 - ### **Il 2D e' un GRADINO.** ### **L'obiettivo tecnico e' la FCC** *(non bipartita, `12` vicini)*; ### **l'obiettivo di fisica e' lo spazio che emerge** *(`D9`: `DEC-D9-GEOMETRIA` in
   `doc/ALBERO_era2.yaml`, «come nasce la geometria: la topologia e la metrica», `presa: false`)*.
 
