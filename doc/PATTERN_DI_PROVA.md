@@ -99,6 +99,16 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 
 ---
 
+## LE CORSE DELLA FORZA: I CRITERI *(decisione di Luca, `2026-10-23`, dopo `cbcb99c7`)*
+
+> ### **NON e' una riga della tabella `STANDARD`** *(il tetto e' `10`, deciso da Luca il `2026-09-26`)*: ### **e' un criterio di un TIPO di misura** *(un pacchetto in un gradiente di `cs`)*, ### **non un
+> metodo di ogni sigillo.**
+
+- ### **LO SPECCHIO SI FISSA PRIMA SUL DIFFERENZIALE:** ### **`(a(+eta) - a(-eta))/2`, con `a(+-eta)` letti da `x(+-eta) - x(0)` dalla stessa partenza, entro il `5%`**; ### **lo specchio GREZZO
+  si stampa come LETTURA, non come controllo.**
+- ### **Il perche':** ### **in `cbcb99c7` lo specchio grezzo a `eta 1e-3` falliva in `4` casi su `128`** *(fino al `10.74%`)* ### **per la deriva a `eta 0`, sotto il rumore, che pesa su un segnale dieci
+  volte piu' piccolo; il differenziale teneva entro lo `0.13%`.** ### **Quei `4` casi sono NON LEGGIBILI PER LO SPECCHIO, e il criterio di quella corsa non e' cambiato a posteriori.**
+
 ## IN PROVA
 
 *(nessuna)*

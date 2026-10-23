@@ -1,3 +1,4 @@
+### MARCA -- DECISIONE DI LUCA (2026-10-23, dopo cbcb99c7): i 4 casi su 128 che falliscono lo specchio (s0 0.5, eta 1e-3, banda 1: 5.97%, 10.74%, 6.60%, 5.88%) sono NON LEGGIBILI PER LO SPECCHIO; il criterio di questa corsa NON cambia e non passano a posteriori. Da ora lo specchio si fissa PRIMA sul differenziale (a(+eta) - a(-eta))/2, entro il 5%; lo specchio grezzo si stampa come lettura. (doc/TASK_HISTORY/2026-10-23_triangoli_forza.md, sezione 9)
 [TIMBRO] _triangoli_forza.py  sha1-BYTE 19d5663e  committato e pulito
 ==============================================================================================================
 I TRIANGOLI, SECONDO GRADINO: la forza sul modo a K (il toro rettangolare, la velocita' del cono, la corsa, l'universalita', la moneta e lo zero)

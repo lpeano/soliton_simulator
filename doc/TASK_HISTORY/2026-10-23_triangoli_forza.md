@@ -301,3 +301,16 @@ d'ordine `10%` a `s 0.5`.**
 
 ### **`lambda* - 1/2` va come `s^2.03 eps^1.87`** *(`lambda*_RG`; `lambda*_H` come `s^2.07 eps^1.83`)*: ### **la previsione `s^2 eps^2` regge in `s`, in `eps` l'esponente e' `1.87`, non `2`.**
 ### **Il centro della coppia/`s` va come `s^2.03 eps^1.72`, negativo.**
+
+## 9. LA DECISIONE DI LUCA SULLO SPECCHIO *(`2026-10-23`, dopo `cbcb99c7`)*
+
+- ### **I `4` casi su `128` che falliscono lo specchio** *(`s0 0.5`, `eta 1e-3`, banda `1`: `5.97%`, `10.74%`, `6.60%`, `5.88%`)* ### **sono NON LEGGIBILI PER LO SPECCHIO.** ### **Il criterio di
+  questa corsa NON cambia, e quei casi NON passano a posteriori:** ### **il DEVE-PASSARE della sezione `8.0` resta FALLITO.**
+- ### **DA ORA, nelle corse della forza:** ### **lo specchio si fissa PRIMA sul DIFFERENZIALE `(a(+eta) - a(-eta))/2`, entro il `5%`; lo specchio grezzo si stampa come lettura.** ### **Il
+  criterio e' scritto in `doc/PATTERN_DI_PROVA.md`, sezione «LE CORSE DELLA FORZA: I CRITERI».**
+- ### **LA LETTURA DI FISICA DI `cbcb99c7` RESTA:** ### **Hamilton confermato dalla dinamica; le due bande uguali col SOLO zero simmetrico; il fattore `a/a_RG(v_max)` `1.63`-`1.68` da spiegare.**
+
+### ⚠ **UN MIO ERRORE, e i numeri del referto** *(dal `.jsonl`, toro `A`)*: ### **in `8.6` e nella relazione ho scritto «`a_mis/a_H` fra `0.92` e `0.98` in OGNI caso»: vale per le corse
+a `eta 1e-2`** *(`0.920`-`0.976`, `128` corse)*. ### **Con quelle a `eta 1e-3`: `0.882`-`0.988`** *(`256` corse)*; ### **senza le `8` corse dei `4` casi non leggibili per lo specchio: `0.905`-`0.988`**;
+### **il differenziale: `0.921`-`0.977`.** ### **Il `0.952`-`0.981` del mandato e' la portata del primo PUO'-FALLIRE** *(`eps 0`, `s0 0.05`, simmetrico: `0.9516`-`0.9808`)*. ### **La lettura non
+cambia: il minimo grezzo `0.882` e' una corsa a `eta 1e-3` di un caso non leggibile per lo specchio** *(`eps 0.5`, `s0 0.5`, `Lx 96`, banda `1`, `-eta`; il differenziale li' `0.935`)*.
