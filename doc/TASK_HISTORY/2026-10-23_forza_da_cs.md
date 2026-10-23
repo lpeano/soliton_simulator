@@ -133,3 +133,121 @@ hanno `12` complessi di materia per cella)*. ### **Servirebbe uno spettro dei tr
 4. la parte `B`, il referto committato con la relazione e la sezione `7` qui sotto *(le tabelle, i controlli, il confronto)*.
 
 ## 7. I RISULTATI *(scritti dopo la corsa, sotto)*
+
+### **LA CORSA:** `python csv/_forza_da_cs.py B`, strumento blob sha1-BYTE `e8789ea9` *(committato e pulito)*, ### **la previsione letta da `forza_da_cs_previsione.jsonl`
+committata in `f6f7b108`** *(blob sha1-BYTE `4465cfc4`)*. ### **`1` controllo su `5`.** ### **I criteri NON si cambiano.**
+
+- ### **DEVE FALLIRE «`a = 0`» a `eta 1e-2`: FALLISCE, per la chiave giusta** *(`14` righe con `a_H != 0`, `|a|/sigma_a` da `24` a `180`)*: ### **lo strumento vede una forza
+  quando c'e'.**
+- ### ⚠ **`eta = 0`: FALLISCE** ### **a `eps 0.5, s0 0.9, Lx 128`** *(`a = -1.44e-5`, `2.3 sigma_a`)* ### **e a `eps 0, s0 0.99`** *(tutti e due i rami e le due taglie: li' la
+  norma fuori dal ramo e' `27`-`42%`, il pacchetto NON e' semiclassico)*.
+- ### ⚠ **LO SPECCHIO: FALLISCE dappertutto contro `1e-6`**: ### **sulle righe pulite lo scarto e' `1e-3`-`1e-2`** *(il migliore `6.0e-6`, `eps 0` alto `s0 0.9 Lx 256 eta 1e-3`)*,
+  ### **e scende passando da `Lx 128` a `256`.** ### **La camminata NON e' simmetrica per specchio al bit su questa scena**, ### **o il pacchetto non lo e'**: ### **non lo so separare.**
+- ### ⚠ **LA LINEARITA': FALLISCE sulle righe dove `a` e' nullo** *(il ramo BASSO: un rapporto di due zeri)* ### **e a `s0 0.99`, `eps 0`**; ### **sulle righe con una forza vera
+  sta entro il `5%`** *(`1.90`-`2.04`)*, ### **tranne `eps 0.5, s0 0.9, Lx 128, eta 1e-3`** *(`2.635`)*.
+- ### ⚠ **LE TAGLIE: FALLISCONO** *(il peggiore `5.543`, sul ramo BASSO dove `a` e' nullo)*; ### **sulla riga piu' pulita** *(`eps 0` alto `s0 0.9`)* ### **lo scarto e' `5.3`-`6.5%`**,
+  ### **appena fuori.**
+
+### 7.1 LA TABELLA *(`eta > 0`; `a/a_RG > 0` = verso `cs` BASSO, `< 0` = verso `cs` ALTO)*
+
+| `eps` | `s0` | ramo | `Lx` | `eta` | `a_mis` | `sigma_a` | `a_mis/a_RG` | `a_prev/a_RG` | `a_prev[Dt]/a_RG` | `a_H/a_RG` | `a_mis/a_H` | verso misurato | si legge |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `0` | `0.9` | alto | `128` | `0.001` | `-3.951e-04` | `9.5e-06` | `-17.806` | `-9.000` | `-8.366` | `-19.938` | `+0.893` | verso cs ALTO | si' |
+| `0` | `0.9` | alto | `128` | `0.01` | `-3.880e-03` | `6.3e-05` | `-17.486` | `-9.024` | `-8.391` | `-19.938` | `+0.877` | verso cs ALTO | si' |
+| `0` | `0.9` | alto | `256` | `0.001` | `-2.065e-04` | `1.5e-06` | `-18.612` | `-9.000` | `-8.366` | `-19.938` | `+0.933` | verso cs ALTO | si' |
+| `0` | `0.9` | alto | `256` | `0.01` | `-2.046e-03` | `1.1e-05` | `-18.442` | `-9.024` | `-8.391` | `-19.938` | `+0.925` | verso cs ALTO | si' |
+| `0` | `0.95` | alto | `128` | `0.001` | `-8.292e-04` | `4.2e-05` | `-35.838` | `-19.002` | `-18.776` | `-41.044` | `+0.873` | verso cs ALTO | si' |
+| `0` | `0.95` | alto | `128` | `0.01` | `-7.761e-03` | `2.6e-04` | `-33.544` | `-19.234` | `-19.017` | `-41.044` | `+0.817` | verso cs ALTO | si' |
+| `0` | `0.95` | alto | `256` | `0.001` | `-4.130e-04` | `8.0e-06` | `-35.705` | `-19.002` | `-18.776` | `-41.044` | `+0.870` | verso cs ALTO | si' |
+| `0` | `0.95` | alto | `256` | `0.01` | `-4.047e-03` | `6.2e-05` | `-34.982` | `-19.234` | `-19.017` | `-41.044` | `+0.852` | verso cs ALTO | si' |
+| `0` | `0.99` | alto | `128` | `0.001` | `-3.166e-03` | `1.2e-04` | `-133.447` | `-99.325` | `-106.163` | `-222.169` | `+0.601` | verso cs ALTO | **NO** |
+| `0` | `0.99` | alto | `128` | `0.01` | `-1.866e-02` | `7.7e-04` | `-78.648` | `-264.665` | `-877.066` | `-222.169` | `+0.354` | verso cs ALTO | **NO** |
+| `0` | `0.99` | alto | `256` | `0.001` | `-2.114e-03` | `2.9e-05` | `-178.208` | `-99.325` | `-106.163` | `-222.169` | `+0.802` | verso cs ALTO | **NO** |
+| `0` | `0.99` | alto | `256` | `0.01` | `-1.680e-02` | `4.1e-04` | `-141.600` | `-264.665` | `-877.066` | `-222.169` | `+0.637` | verso cs ALTO | **NO** |
+| `0` | `0.9` | basso | `128` | `0.001` | `+1.044e-05` | `9.6e-06` | `+0.471` | -- | `-8.366` | `-0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.9` | basso | `128` | `0.01` | `+5.642e-05` | `8.6e-05` | `+0.254` | -- | `-8.391` | `-0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.9` | basso | `256` | `0.001` | `+1.347e-06` | `1.6e-06` | `+0.121` | -- | `-8.366` | `-0.000` | -- | nessuno (a nullo) | si' |
+| `0` | `0.9` | basso | `256` | `0.01` | `+6.970e-06` | `1.3e-05` | `+0.063` | -- | `-8.391` | `-0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.95` | basso | `128` | `0.001` | `-3.993e-05` | `5.5e-05` | `-1.726` | -- | `-18.776` | `+0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.95` | basso | `128` | `0.01` | `-3.958e-04` | `5.1e-04` | `-1.711` | -- | `-19.017` | `-0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.95` | basso | `256` | `0.001` | `+9.379e-06` | `1.0e-05` | `+0.811` | -- | `-18.776` | `+0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.95` | basso | `256` | `0.01` | `+3.320e-05` | `7.8e-05` | `+0.287` | -- | `-19.017` | `-0.000` | -- | nessuno (a nullo) | **NO** |
+| `0` | `0.99` | basso | `128` | `0.001` | `-1.455e-03` | `7.3e-05` | `-61.337` | -- | `-106.163` | `+0.000` | -- | verso cs ALTO | **NO** |
+| `0` | `0.99` | basso | `128` | `0.01` | `-1.444e-02` | `6.0e-04` | `-60.857` | -- | `-877.066` | `-1.122` | -- | verso cs ALTO | **NO** |
+| `0` | `0.99` | basso | `256` | `0.001` | `-5.786e-04` | `4.8e-05` | `-48.771` | -- | `-106.163` | `+0.000` | -- | verso cs ALTO | **NO** |
+| `0` | `0.99` | basso | `256` | `0.01` | `-1.056e-02` | `1.6e-04` | `-89.027` | -- | `-877.066` | `-1.122` | -- | verso cs ALTO | **NO** |
+| `0.5` | `0.9` | unico | `128` | `0.001` | `+5.968e-05` | `6.9e-06` | `+3.005` | `+7.286` | `-2.536` | `+3.913` | `+0.768` | verso cs BASSO | **NO** |
+| `0.5` | `0.9` | unico | `128` | `0.01` | `+7.250e-04` | `2.6e-05` | `+3.651` | `+7.285` | `-2.533` | `+3.916` | `+0.932` | verso cs BASSO | si' |
+| `0.5` | `0.9` | unico | `256` | `0.001` | `+3.716e-05` | `4.9e-07` | `+3.743` | `+7.286` | `-2.536` | `+3.913` | `+0.956` | verso cs BASSO | si' |
+| `0.5` | `0.9` | unico | `256` | `0.01` | `+3.699e-04` | `3.6e-06` | `+3.726` | `+7.285` | `-2.533` | `+3.916` | `+0.951` | verso cs BASSO | si' |
+| `0.5` | `0.95` | unico | `128` | `0.001` | `+1.386e-04` | `1.0e-05` | `+6.921` | `+7.514` | `-2.184` | `+6.868` | `+1.008` | verso cs BASSO | si' |
+| `0.5` | `0.95` | unico | `128` | `0.01` | `+1.316e-03` | `3.4e-05` | `+6.571` | `+7.511` | `-2.182` | `+6.869` | `+0.957` | verso cs BASSO | si' |
+| `0.5` | `0.95` | unico | `256` | `0.001` | `+6.591e-05` | `7.8e-07` | `+6.583` | `+7.514` | `-2.184` | `+6.868` | `+0.959` | verso cs BASSO | si' |
+| `0.5` | `0.95` | unico | `256` | `0.01` | `+6.534e-04` | `5.3e-06` | `+6.526` | `+7.511` | `-2.182` | `+6.869` | `+0.950` | verso cs BASSO | si' |
+| `0.5` | `0.99` | unico | `128` | `0.001` | `+1.761e-04` | `7.2e-06` | `+8.972` | `+7.370` | `-1.682` | `+9.928` | `+0.904` | verso cs BASSO | si' |
+| `0.5` | `0.99` | unico | `128` | `0.01` | `+1.761e-03` | `3.8e-05` | `+8.971` | `+7.367` | `-1.685` | `+9.926` | `+0.904` | verso cs BASSO | si' |
+| `0.5` | `0.99` | unico | `256` | `0.001` | `+9.374e-05` | `7.7e-07` | `+9.550` | `+7.370` | `-1.682` | `+9.928` | `+0.962` | verso cs BASSO | si' |
+| `0.5` | `0.99` | unico | `256` | `0.01` | `+9.280e-04` | `6.4e-06` | `+9.455` | `+7.367` | `-1.685` | `+9.926` | `+0.953` | verso cs BASSO | si' |
+
+### 7.2 I CONTROLLI, RIGA PER RIGA *(`spec` = `| |a(-eta)| - |a(eta)| | / |a(eta)|`, `lin` = `a(eta)/a(eta/2)`, `fuori` = la norma fuori dal ramo, massimo nella finestra)*
+
+| `eps` | `s0` | ramo | `Lx` | `a(eta=0)` | `sigma_a(0)` | `spec 1e-3` | `spec 1e-2` | `lin 1e-3` | `lin 1e-2` | `fuori` |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `0` | `0.9` | alto | `128` | `-4.04e-06` | `5.6e-06` | `2.0e-02` | `1.8e-03` | `1.979` | `1.985` | `0.018` |
+| `0` | `0.9` | alto | `256` | `-1.58e-08` | `2.9e-07` | `6.0e-06` | `1.6e-03` | `2.000` | `1.986` | `0.009` |
+| `0` | `0.95` | alto | `128` | `-1.92e-05` | `2.4e-05` | `4.6e-02` | `1.0e-03` | `1.954` | `1.929` | `0.078` |
+| `0` | `0.95` | alto | `256` | `-1.52e-06` | `1.5e-06` | `6.8e-03` | `4.2e-03` | `1.992` | `1.980` | `0.038` |
+| `0` | `0.99` | alto | `128` | `-4.93e-04` | `2.3e-05` | `3.1e-01` | `1.0e-01` | `1.729` | `1.466` | `0.420` |
+| `0` | `0.99` | alto | `256` | `-1.20e-04` | `5.5e-06` | `1.1e-01` | `1.5e-02` | `1.886` | `1.649` | `0.348` |
+| `0` | `0.9` | basso | `128` | `+4.20e-06` | `5.6e-06` | `8.1e-01` | `1.9e-01` | `1.426` | `1.649` | `0.017` |
+| `0` | `0.9` | basso | `256` | `+2.13e-08` | `2.9e-07` | `3.2e-02` | `1.8e-02` | `1.961` | `1.209` | `0.005` |
+| `0` | `0.95` | basso | `128` | `+1.95e-05` | `2.4e-05` | `9.7e-01` | `2.5e-02` | `3.897` | `1.544` | `0.078` |
+| `0` | `0.95` | basso | `256` | `+1.52e-06` | `1.5e-06` | `3.3e-01` | `1.8e-01` | `1.715` | `0.977` | `0.025` |
+| `0` | `0.99` | basso | `128` | `+4.92e-04` | `2.3e-05` | `6.8e-01` | `9.7e-02` | `3.018` | `1.614` | `0.382` |
+| `0` | `0.99` | basso | `256` | `+1.20e-04` | `5.5e-06` | `4.2e-01` | `3.0e-02` | `2.521` | `3.141` | `0.273` |
+| `0.5` | `0.9` | unico | `128` | `-1.44e-05` | `6.3e-06` | `4.8e-01` | `3.8e-02` | `2.635` | `2.037` | `0.010` |
+| `0.5` | `0.9` | unico | `256` | `+7.13e-08` | `3.2e-07` | `3.6e-03` | `1.6e-03` | `1.996` | `1.996` | `0.003` |
+| `0.5` | `0.95` | unico | `128` | `+7.05e-06` | `1.0e-05` | `1.0e-01` | `8.0e-03` | `1.903` | `1.982` | `0.017` |
+| `0.5` | `0.95` | unico | `256` | `+2.75e-07` | `5.1e-07` | `8.1e-03` | `1.6e-03` | `1.992` | `1.992` | `0.005` |
+| `0.5` | `0.99` | unico | `128` | `-1.39e-06` | `9.7e-06` | `1.6e-02` | `7.6e-03` | `2.016` | `1.992` | `0.023` |
+| `0.5` | `0.99` | unico | `256` | `+4.03e-07` | `5.1e-07` | `8.4e-03` | `6.9e-04` | `1.991` | `1.990` | `0.007` |
+
+### 7.3 L'ESPONENTE `p` di `|a_mis/a_RG|` contro `s0/(1 - s0)` *(solo i punti leggibili)*
+
+| `eps` | ramo | `Lx` | `eta` | punti | `p` |
+|---|---|---|---|---|---|
+| `0` | alto | `128` | `0.001` | `2` | `0.936` |
+| `0` | alto | `128` | `0.01` | `2` | `0.872` |
+| `0` | alto | `256` | `0.001` | `2` | `0.872` |
+| `0` | alto | `256` | `0.01` | `2` | `0.857` |
+| `0` | basso | `128` | `0.001` | `0` | -- |
+| `0` | basso | `128` | `0.01` | `0` | -- |
+| `0` | basso | `256` | `0.001` | `0` | -- |
+| `0` | basso | `256` | `0.01` | `0` | -- |
+| `0.5` | unico | `128` | `0.001` | `2` | `0.157` |
+| `0.5` | unico | `128` | `0.01` | `3` | `0.344` |
+| `0.5` | unico | `256` | `0.001` | `3` | `0.363` |
+| `0.5` | unico | `256` | `0.01` | `3` | `0.361` |
+
+### 7.4 IL CONFRONTO FRA PREVISIONE E MISURA
+
+- ### **IL VERSO:** ### **`eps 0`, ramo ALTO: verso `cs` ALTO** *(repulsivo; `a_mis/a_RG` da `-17.5` a `-35.8` sulle righe leggibili)*, ### **come prevedevano tutte e tre le formule.**
+  ### **`eps 0.5`: verso `cs` BASSO** *(come la relativita' generale; `a_mis/a_RG` da `+3.65` a `+9.55`)*, ### **come prevedevano `a_prev` e `a_H`.** ### **`eps 0`, ramo BASSO: `a`
+  nullo entro l'errore** *(a `s0 0.9` e `0.95`)*, ### **come prevedeva `a_H`.**
+- ### **L'INTENSITA':** ### **`a_mis/a_H` sulle righe leggibili: `0.82`-`0.93` a `eps 0` alto, `0.90`-`1.01` a `eps 0.5`.** ### **`a_prev` sbaglia di un fattore circa `2` a `eps 0`
+  alto** *(perche' usa `omega(0)` come se fosse la massa e la curvatura `v^2/omega(0)`)*.
+- ### ⛔ **QUALE IPOTESI CADE** *(la previsione NON si corregge)*: ### **`a_prev[Dt]`, cioe' la previsione fatta con le pendenze del `Dt` del fit** *(quelle del guardiano)*,
+  ### **sbaglia il VERSO a `eps 0.5`** *(prevede verso `cs` ALTO, la misura va verso `cs` BASSO)* ### **e sbaglia sul ramo BASSO** *(prevede una forza, la misura non la vede)*.
+  ### **L'ipotesi che cade e' «l'energia del pacchetto fermo e' il `Dt` del fit», cioe' `omega(0) = Delta`:** ### **la frequenza a riposo e' `omega(0)`, e la curvatura e' `v^2/Dt`**:
+  ### **due numeri diversi**, ### **e la forza le vuole tutte e due** *(`a_H`)*.
+- ### **L'ESPONENTE:** ### **`eps 0` alto: `p = 0.86`-`0.94`** *(solo `2` punti: `s0 0.99` non si legge)*; ### **`eps 0.5`: `p = 0.16`-`0.36`.** ### **Il conto a mano** *(`p = 1` a `eps 0`)* ### **non
+  si puo' confermare con due punti.**
+
+### 7.5 LA LETTURA, IN TRE RIGHE
+
+1. ### **UN GRADIENTE DI `cs` SPINGE IL PACCHETTO, MA IL VERSO DIPENDE DALLA SPECIE:** ### **la massa del solo generatore** *(`eps 0`, ramo ALTO)* ### **va verso `cs` ALTO** *(repulsiva)*;
+   ### **quella con la moneta** *(`eps 0.5`)* ### **va verso `cs` BASSO** *(come la relativita' generale)*; ### **il ramo BASSO di `eps 0` non si muove.**
+2. ### **LA FORZA LA DANNO LE EQUAZIONI DI HAMILTON CON `omega(0)` E LA CURVATURA MISURATA** *(`a_mis/a_H` `0.82`-`1.01`)*, ### **non le pendenze del `Dt` del fit**, ### **che sbagliano
+   il verso a `eps 0.5`.**
+3. ### ⚠ **`4` controlli su `5` FALLISCONO:** ### **lo specchio e le taglie mostrano effetti di taglia finita** *(scendono da `Lx 128` a `256`)*, ### **e a `s0 0.99` il pacchetto non e'
+   semiclassico.** ### **I versi sono netti** *(`|a|/sigma_a` fino a `180`)*; ### **le intensita' valgono come ordine di grandezza.** ### **Nessuna conclusione oltre la tabella.**

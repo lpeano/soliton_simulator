@@ -1,0 +1,199 @@
+[TIMBRO] _forza_da_cs.py  sha1-BYTE e8789ea9  committato e pulito
+====================================================================================================
+IL VERSO E L'INTENSITA' DELLA FORZA DA cs -- PARTE B
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); la camminata sola (S3 saltata); cs per nodo in memoria, lambda_c None
+  la configurazione: L_SPETTRO 64; S_PREV (0.85, 0.9, 0.95, 0.99); S0 (0.9, 0.95, 0.99); EPS (0.0, 0.5); ETA (0.0, 0.0005, 0.001, -0.001, 0.005, 0.01, -0.01); LX (128, 256); LY 4; TOLL_FIT 0.05; TOLL_DISPERSIVO 0.1; TOLL_OMEGA 1e-09; TOLL_DISTINTI 1e-06; SPECCHIO 1e-06; LIN 0.05; TAGLIE 0.05; SALTO 0.01; NORMA_FUORI 0.1; PAVIMENTO 1e-12; MIN_PUNTI 6; TOLL_NORMA 1e-10
+----------------------------------------------------------------------------------------------------
+### PARTE B -- LA CORSA (toro 128/256 x 4, dtau 1, cs = s0 (1 + eta cos(2 pi x/Lx)), W = Lx/16, x0 = Lx/4, T <= Lx/4, finestra |<x> - x0| < Lx/32)
+  la previsione: doc\referti_l2\forza_da_cs_previsione.jsonl, committata e pulita, blob {'sha1-BYTE': '4465cfc4', 'git': '44ed79f2'}
+  Lx 128 eps 0   s0 0.9  alto   eta +0e+00: punti  33  a -4.0429e-06 +- 5.6e-06  v0 +6.34e-05  fuori 1.65e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta +5e-04: punti  33  a -1.9963e-04 +- 7.1e-06  v0 +1.02e-05  fuori 1.65e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta +1e-03: punti  33  a -3.9515e-04 +- 9.5e-06  v0 -4.31e-05  fuori 1.65e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta -1e-03: punti  33  a +3.8722e-04 +- 7.5e-06  v0 +1.70e-04  fuori 1.66e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta +5e-03: punti  33  a -1.9547e-03 +- 3.4e-05  v0 -4.92e-04  fuori 1.65e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta +1e-02: punti  33  a -3.8804e-03 +- 6.3e-05  v0 -1.20e-03  fuori 1.77e-02  
+  Lx 128 eps 0   s0 0.9  alto   eta -1e-02: punti  33  a +3.8873e-03 +- 6.1e-05  v0 +1.35e-03  fuori 1.79e-02  
+  Lx 256 eps 0   s0 0.9  alto   eta +0e+00: punti  65  a -1.5802e-08 +- 2.9e-07  v0 +1.19e-06  fuori 4.56e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta +5e-04: punti  65  a -1.0328e-04 +- 7.9e-07  v0 -1.87e-05  fuori 4.56e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta +1e-03: punti  65  a -2.0652e-04 +- 1.5e-06  v0 -3.88e-05  fuori 4.56e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta -1e-03: punti  65  a +2.0652e-04 +- 1.4e-06  v0 +4.15e-05  fuori 4.56e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta +5e-03: punti  65  a -1.0302e-03 +- 6.7e-06  v0 -2.26e-04  fuori 5.54e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta +1e-02: punti  65  a -2.0463e-03 +- 1.1e-05  v0 -6.55e-04  fuori 8.83e-03  
+  Lx 256 eps 0   s0 0.9  alto   eta -1e-02: punti  65  a +2.0496e-03 +- 1.1e-05  v0 +6.90e-04  fuori 8.86e-03  
+  Lx 128 eps 0   s0 0.9  basso  eta +0e+00: punti  33  a +4.2014e-06 +- 5.6e-06  v0 -6.65e-05  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta +5e-04: punti  33  a +7.3228e-06 +- 6.4e-06  v0 -1.36e-04  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta +1e-03: punti  33  a +1.0441e-05 +- 9.6e-06  v0 -2.06e-04  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta -1e-03: punti  33  a -2.0136e-06 +- 1.2e-05  v0 +7.24e-05  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta +5e-03: punti  33  a +3.4221e-05 +- 4.5e-05  v0 -7.46e-04  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta +1e-02: punti  33  a +5.6423e-05 +- 8.6e-05  v0 -1.32e-03  fuori 1.74e-02  
+  Lx 128 eps 0   s0 0.9  basso  eta -1e-02: punti  33  a -4.5719e-05 +- 8.8e-05  v0 +1.16e-03  fuori 1.75e-02  
+  Lx 256 eps 0   s0 0.9  basso  eta +0e+00: punti  65  a +2.1336e-08 +- 2.9e-07  v0 -1.40e-06  fuori 4.79e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta +5e-04: punti  65  a +6.8673e-07 +- 8.0e-07  v0 -2.56e-05  fuori 4.79e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta +1e-03: punti  65  a +1.3465e-06 +- 1.6e-06  v0 -4.97e-05  fuori 4.79e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta -1e-03: punti  65  a -1.3029e-06 +- 1.7e-06  v0 +4.69e-05  fuori 4.79e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta +5e-03: punti  65  a +5.7666e-06 +- 7.5e-06  v0 -2.20e-04  fuori 4.79e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta +1e-02: punti  65  a +6.9702e-06 +- 1.3e-05  v0 -3.24e-04  fuori 4.81e-03  
+  Lx 256 eps 0   s0 0.9  basso  eta -1e-02: punti  65  a -6.8435e-06 +- 1.3e-05  v0 +3.20e-04  fuori 4.82e-03  
+  Lx 128 eps 0.5 s0 0.9  unico  eta +0e+00: punti  33  a -1.4387e-05 +- 6.3e-06  v0 +2.00e-04  fuori 9.67e-03  
+  Lx 128 eps 0.5 s0 0.9  unico  eta +5e-04: punti  33  a +2.2644e-05 +- 6.5e-06  v0 +1.86e-04  fuori 9.71e-03  
+  Lx 128 eps 0.5 s0 0.9  unico  eta +1e-03: punti  33  a +5.9676e-05 +- 6.9e-06  v0 +1.73e-04  fuori 9.76e-03  
+  Lx 128 eps 0.5 s0 0.9  unico  eta -1e-03: punti  33  a -8.8437e-05 +- 6.7e-06  v0 +2.27e-04  fuori 9.57e-03  
+  Lx 128 eps 0.5 s0 0.9  unico  eta +5e-03: punti  33  a +3.5583e-04 +- 1.4e-05  v0 +6.47e-05  fuori 1.01e-02  
+  Lx 128 eps 0.5 s0 0.9  unico  eta +1e-02: punti  33  a +7.2497e-04 +- 2.6e-05  v0 -6.07e-05  fuori 1.04e-02  
+  Lx 128 eps 0.5 s0 0.9  unico  eta -1e-02: punti  33  a -7.5265e-04 +- 2.4e-05  v0 +4.36e-04  fuori 8.45e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta +0e+00: punti  65  a +7.1320e-08 +- 3.2e-07  v0 -1.66e-06  fuori 2.57e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta +5e-04: punti  65  a +1.8618e-05 +- 3.7e-07  v0 -3.24e-06  fuori 2.60e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta +1e-03: punti  65  a +3.7162e-05 +- 4.9e-07  v0 -4.77e-06  fuori 2.63e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta -1e-03: punti  65  a -3.7027e-05 +- 5.0e-07  v0 +1.57e-06  fuori 2.52e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta +5e-03: punti  65  a +1.8535e-04 +- 1.9e-06  v0 -1.40e-05  fuori 2.85e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta +1e-02: punti  65  a +3.6993e-04 +- 3.6e-06  v0 -1.18e-05  fuori 3.15e-03  
+  Lx 256 eps 0.5 s0 0.9  unico  eta -1e-02: punti  65  a -3.7050e-04 +- 3.3e-06  v0 +1.92e-05  fuori 2.13e-03  
+  Lx 128 eps 0   s0 0.95 alto   eta +0e+00: punti  33  a -1.9186e-05 +- 2.4e-05  v0 +3.82e-04  fuori 7.71e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta +5e-04: punti  33  a -4.2436e-04 +- 3.1e-05  v0 +7.77e-04  fuori 7.71e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta +1e-03: punti  33  a -8.2918e-04 +- 4.2e-05  v0 +1.17e-03  fuori 7.71e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta -1e-03: punti  33  a +7.9116e-04 +- 3.1e-05  v0 -4.04e-04  fuori 7.72e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta +5e-03: punti  33  a -4.0226e-03 +- 1.5e-04  v0 +3.90e-03  fuori 7.72e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta +1e-02: punti  33  a -7.7611e-03 +- 2.6e-04  v0 +4.82e-03  fuori 7.83e-02  
+  Lx 128 eps 0   s0 0.95 alto   eta -1e-02: punti  33  a +7.7532e-03 +- 2.5e-04  v0 -3.74e-03  fuori 7.98e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta +0e+00: punti  65  a -1.5157e-06 +- 1.5e-06  v0 +4.43e-05  fuori 2.50e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta +5e-04: punti  65  a -2.0735e-04 +- 4.4e-06  v0 -1.19e-04  fuori 2.50e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta +1e-03: punti  65  a -4.1305e-04 +- 8.0e-06  v0 -2.83e-04  fuori 2.50e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta -1e-03: punti  65  a +4.1023e-04 +- 7.4e-06  v0 +3.71e-04  fuori 2.51e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta +5e-03: punti  65  a -2.0439e-03 +- 3.6e-05  v0 -1.76e-03  fuori 2.71e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta +1e-02: punti  63  a -4.0469e-03 +- 6.2e-05  v0 -3.46e-03  fuori 3.84e-02  
+  Lx 256 eps 0   s0 0.95 alto   eta -1e-02: punti  63  a +4.0641e-03 +- 6.2e-05  v0 +3.55e-03  fuori 3.88e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta +0e+00: punti  33  a +1.9515e-05 +- 2.4e-05  v0 -3.87e-04  fuori 7.79e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta +5e-04: punti  33  a -1.0249e-05 +- 3.3e-05  v0 -1.38e-04  fuori 7.78e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta +1e-03: punti  33  a -3.9934e-05 +- 5.5e-05  v0 +1.09e-04  fuori 7.78e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta -1e-03: punti  33  a +7.8659e-05 +- 6.4e-05  v0 -8.78e-04  fuori 7.79e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta +5e-03: punti  33  a -2.5640e-04 +- 2.7e-04  v0 +1.79e-03  fuori 7.78e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta +1e-02: punti  33  a -3.9584e-04 +- 5.1e-04  v0 +2.00e-03  fuori 7.79e-02  
+  Lx 128 eps 0   s0 0.95 basso  eta -1e-02: punti  33  a +4.0590e-04 +- 5.1e-04  v0 -2.37e-03  fuori 7.84e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta +0e+00: punti  65  a +1.5214e-06 +- 1.5e-06  v0 -4.45e-05  fuori 2.53e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta +5e-04: punti  65  a +5.4689e-06 +- 5.0e-06  v0 -2.23e-04  fuori 2.53e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta +1e-03: punti  65  a +9.3792e-06 +- 1.0e-05  v0 -4.01e-04  fuori 2.53e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta -1e-03: punti  65  a -6.2914e-06 +- 1.1e-05  v0 +3.11e-04  fuori 2.53e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta +5e-03: punti  65  a +3.3994e-05 +- 4.8e-05  v0 -1.64e-03  fuori 2.53e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta +1e-02: punti  65  a +3.3199e-05 +- 7.8e-05  v0 -2.32e-03  fuori 2.54e-02  
+  Lx 256 eps 0   s0 0.95 basso  eta -1e-02: punti  65  a -2.7316e-05 +- 7.8e-05  v0 +2.17e-03  fuori 2.56e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta +0e+00: punti  33  a +7.0500e-06 +- 1.0e-05  v0 -6.48e-05  fuori 1.58e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta +5e-04: punti  33  a +7.2831e-05 +- 1.0e-05  v0 -9.97e-05  fuori 1.59e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta +1e-03: punti  33  a +1.3860e-04 +- 1.0e-05  v0 -1.35e-04  fuori 1.59e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta -1e-03: punti  33  a -1.2453e-04 +- 1.1e-05  v0 +5.13e-06  fuori 1.57e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta +5e-03: punti  33  a +6.6383e-04 +- 1.9e-05  v0 -4.08e-04  fuori 1.64e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta +1e-02: punti  33  a +1.3159e-03 +- 3.4e-05  v0 -7.12e-04  fuori 1.71e-02  
+  Lx 128 eps 0.5 s0 0.95 unico  eta -1e-02: punti  33  a -1.3053e-03 +- 3.6e-05  v0 +5.81e-04  fuori 1.50e-02  
+  Lx 256 eps 0.5 s0 0.95 unico  eta +0e+00: punti  65  a +2.7458e-07 +- 5.1e-07  v0 -6.99e-06  fuori 4.31e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta +5e-04: punti  65  a +3.3096e-05 +- 5.9e-07  v0 -1.15e-05  fuori 4.34e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta +1e-03: punti  65  a +6.5911e-05 +- 7.8e-07  v0 -1.59e-05  fuori 4.37e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta -1e-03: punti  65  a -6.5378e-05 +- 7.6e-07  v0 +2.06e-06  fuori 4.25e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta +5e-03: punti  65  a +3.2798e-04 +- 2.9e-06  v0 -4.37e-05  fuori 4.63e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta +1e-02: punti  65  a +6.5341e-04 +- 5.3e-06  v0 -4.05e-05  fuori 5.03e-03  
+  Lx 256 eps 0.5 s0 0.95 unico  eta -1e-02: punti  65  a -6.5442e-04 +- 5.2e-06  v0 +4.11e-05  fuori 3.89e-03  
+  Lx 128 eps 0   s0 0.99 alto   eta +0e+00: punti  33  a -4.9269e-04 +- 2.3e-05  v0 +1.01e-02  fuori 3.81e-01  ### NON LEGGIBILE (norma fuori 0.381 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta +5e-04: punti  33  a -1.8317e-03 +- 7.0e-05  v0 +1.96e-02  fuori 3.81e-01  ### NON LEGGIBILE (norma fuori 0.381 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta +1e-03: punti  33  a -3.1664e-03 +- 1.2e-04  v0 +2.91e-02  fuori 3.81e-01  ### NON LEGGIBILE (norma fuori 0.381 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta -1e-03: punti  33  a +2.1814e-03 +- 1.1e-04  v0 -8.91e-03  fuori 3.82e-01  ### NON LEGGIBILE (norma fuori 0.382 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta +5e-03: punti  32  a -1.2725e-02 +- 5.0e-04  v0 +9.19e-02  fuori 3.89e-01  ### NON LEGGIBILE (norma fuori 0.389 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta +1e-02: punti  27  a -1.8661e-02 +- 7.7e-04  v0 +1.06e-01  fuori 4.20e-01  ### NON LEGGIBILE (norma fuori 0.420 > 0.1)
+  Lx 128 eps 0   s0 0.99 alto   eta -1e-02: punti  26  a +1.6730e-02 +- 6.9e-04  v0 -7.79e-02  fuori 4.29e-01  ### NON LEGGIBILE (norma fuori 0.429 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta +0e+00: punti  65  a -1.1970e-04 +- 5.5e-06  v0 +3.89e-03  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta +5e-04: punti  65  a -1.1208e-03 +- 1.7e-05  v0 +1.19e-02  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta +1e-03: punti  65  a -2.1142e-03 +- 2.9e-05  v0 +1.99e-02  fuori 2.74e-01  ### NON LEGGIBILE (norma fuori 0.274 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta -1e-03: punti  65  a +1.8806e-03 +- 1.9e-05  v0 -1.22e-02  fuori 2.74e-01  ### NON LEGGIBILE (norma fuori 0.274 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta +5e-03: punti  49  a -1.0185e-02 +- 1.6e-04  v0 +9.15e-02  fuori 2.90e-01  ### NON LEGGIBILE (norma fuori 0.290 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta +1e-02: punti  39  a -1.6799e-02 +- 4.1e-04  v0 +1.29e-01  fuori 3.48e-01  ### NON LEGGIBILE (norma fuori 0.348 > 0.1)
+  Lx 256 eps 0   s0 0.99 alto   eta -1e-02: punti  39  a +1.6551e-02 +- 3.9e-04  v0 -1.21e-01  fuori 3.56e-01  ### NON LEGGIBILE (norma fuori 0.356 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta +0e+00: punti  33  a +4.9235e-04 +- 2.3e-05  v0 -1.01e-02  fuori 3.82e-01  ### NON LEGGIBILE (norma fuori 0.382 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta +5e-04: punti  33  a -4.8229e-04 +- 3.7e-05  v0 -2.94e-03  fuori 3.82e-01  ### NON LEGGIBILE (norma fuori 0.382 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta +1e-03: punti  33  a -1.4554e-03 +- 7.3e-05  v0 +4.17e-03  fuori 3.81e-01  ### NON LEGGIBILE (norma fuori 0.381 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta -1e-03: punti  33  a +2.4379e-03 +- 9.4e-05  v0 -2.43e-02  fuori 3.82e-01  ### NON LEGGIBILE (norma fuori 0.382 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta +5e-03: punti  33  a -8.9452e-03 +- 3.7e-04  v0 +5.80e-02  fuori 3.79e-01  ### NON LEGGIBILE (norma fuori 0.379 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta +1e-02: punti  29  a -1.4440e-02 +- 6.0e-04  v0 +8.23e-02  fuori 3.72e-01  ### NON LEGGIBILE (norma fuori 0.372 > 0.1)
+  Lx 128 eps 0   s0 0.99 basso  eta -1e-02: punti  30  a +1.5841e-02 +- 6.4e-04  v0 -1.08e-01  fuori 3.74e-01  ### NON LEGGIBILE (norma fuori 0.374 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta +0e+00: punti  65  a +1.1980e-04 +- 5.5e-06  v0 -3.89e-03  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta +5e-04: punti  65  a -2.2953e-04 +- 2.2e-05  v0 -4.50e-03  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta +1e-03: punti  65  a -5.7861e-04 +- 4.8e-05  v0 -5.10e-03  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta -1e-03: punti  65  a +8.1971e-04 +- 5.8e-05  v0 -2.72e-03  fuori 2.73e-01  ### NON LEGGIBILE (norma fuori 0.273 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta +5e-03: punti  65  a -3.3628e-03 +- 2.4e-04  v0 -8.08e-03  fuori 2.71e-01  ### NON LEGGIBILE (norma fuori 0.271 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta +1e-02: punti  48  a -1.0562e-02 +- 1.6e-04  v0 +8.40e-02  fuori 2.63e-01  ### NON LEGGIBILE (norma fuori 0.263 > 0.1)
+  Lx 256 eps 0   s0 0.99 basso  eta -1e-02: punti  48  a +1.0882e-02 +- 1.8e-04  v0 -9.39e-02  fuori 2.65e-01  ### NON LEGGIBILE (norma fuori 0.265 > 0.1)
+  Lx 128 eps 0.5 s0 0.99 unico  eta +0e+00: punti  33  a -1.3894e-06 +- 9.7e-06  v0 +1.33e-05  fuori 2.13e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta +5e-04: punti  33  a +8.7382e-05 +- 8.3e-06  v0 +1.89e-05  fuori 2.13e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta +1e-03: punti  33  a +1.7612e-04 +- 7.2e-06  v0 +2.49e-05  fuori 2.14e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta -1e-03: punti  33  a -1.7901e-04 +- 1.3e-05  v0 +2.44e-06  fuori 2.12e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta +5e-03: punti  33  a +8.8410e-04 +- 1.7e-05  v0 +8.68e-05  fuori 2.19e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta +1e-02: punti  33  a +1.7610e-03 +- 3.8e-05  v0 +2.26e-04  fuori 2.28e-02  
+  Lx 128 eps 0.5 s0 0.99 unico  eta -1e-02: punti  33  a -1.7744e-03 +- 5.1e-05  v0 -1.24e-04  fuori 2.13e-02  
+  Lx 256 eps 0.5 s0 0.99 unico  eta +0e+00: punti  65  a +4.0304e-07 +- 5.1e-07  v0 -1.01e-05  fuori 5.94e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta +5e-04: punti  65  a +4.7074e-05 +- 5.5e-07  v0 -2.10e-05  fuori 5.96e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta +1e-03: punti  65  a +9.3737e-05 +- 7.7e-07  v0 -3.18e-05  fuori 5.99e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta -1e-03: punti  65  a -9.2945e-05 +- 9.4e-07  v0 +1.17e-05  fuori 5.91e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta +5e-03: punti  65  a +4.6631e-04 +- 3.3e-06  v0 -1.08e-04  fuori 6.28e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta +1e-02: punti  65  a +9.2802e-04 +- 6.4e-06  v0 -1.36e-04  fuori 6.95e-03  
+  Lx 256 eps 0.5 s0 0.99 unico  eta -1e-02: punti  65  a -9.2867e-04 +- 6.5e-06  v0 +1.19e-04  fuori 6.26e-03  
+### I CONTROLLI
+  DEVE PASSARE: eta = 0, |a| <= 2 sigma_a o |a| < 1e-12, su 18 righe                 ### FALLISCE   (0.9, 0.5, 'unico', 128) a -1.4386636152421289e-05 sigma 6.3034428808414995e-06; (0.99, 0.0, 'alto', 128) a -0.000492687776968535 sigma 2.3224197210043245e-05; (0.99, 0.0, 'alto', 256) a -0.00011970195295980509 sigma 5.461715516179634e-06; (0.99, 0.0, 'basso', 128) a 0.0004923453137057297 sigma 2.317106434101455e-05; (0.99, 0.0, 'basso', 256) a 0.00011980335529858084 sigma 5.454795029406276e-06
+  DEVE PASSARE: lo specchio, a(-eta) = -a(eta) entro 1e-06 relativo                  ### FALLISCE   il peggiore 9.70e-01; ((0.9, 0.0, 'alto', 128), 0.001, '2.01e-02'); ((0.9, 0.0, 'alto', 128), 0.01, '1.78e-03'); ((0.9, 0.0, 'alto', 256), 0.001, '6.04e-06'); ((0.9, 0.0, 'alto', 256), 0.01, '1.61e-03'); ((0.9, 0.0, 'basso', 128), 0.001, '8.07e-01'); ((0.9, 0.0, 'basso', 128), 0.01, '1.90e-01'); ((0.9, 0.0, 'basso', 256), 0.001, '3.24e-02'); ((0.9, 0.0, 'basso', 256), 0.01, '1.82e-02'); ((0.9, 0.5, 'unico', 128), 0.001, '4.82e-01'); ((0.9, 0.5, 'unico', 128), 0.01, '3.82e-02'); ((0.9, 0.5, 'unico', 256), 0.001, '3.63e-03'); ((0.9, 0.5, 'unico', 256), 0.01, '1.56e-03')
+  DEVE PASSARE: la linearita', a(eta)/a(eta/2) = 2 entro il 5%                       ### FALLISCE   (0.9, 0.0, 'basso', 128) eta 0.001: 1.4259; (0.9, 0.0, 'basso', 128) eta 0.01: 1.6488; (0.9, 0.0, 'basso', 256) eta 0.01: 1.2087; (0.9, 0.5, 'unico', 128) eta 0.001: 2.6354; (0.95, 0.0, 'basso', 128) eta 0.001: 3.8966; (0.95, 0.0, 'basso', 128) eta 0.01: 1.5439; (0.95, 0.0, 'basso', 256) eta 0.001: 1.7150; (0.95, 0.0, 'basso', 256) eta 0.01: 0.9766; (0.99, 0.0, 'alto', 128) eta 0.001: 1.7287; (0.99, 0.0, 'alto', 128) eta 0.01: 1.4665; (0.99, 0.0, 'alto', 256) eta 0.001: 1.8863; (0.99, 0.0, 'alto', 256) eta 0.01: 1.6494; (0.99, 0.0, 'basso', 128) eta 0.001: 3.0177; (0.99, 0.0, 'basso', 128) eta 0.01: 1.6143; (0.99, 0.0, 'basso', 256) eta 0.001: 2.5208; (0.99, 0.0, 'basso', 256) eta 0.01: 3.1408
+  DEVE FALLIRE: <<a = 0>> a eta 1e-2, su 14 righe con a_H != 0 (e per la chiave gius PASSA   |a|/sigma_a: 6.1e+01, 1.8e+02, 2.8e+01, 1.0e+02, 3.0e+01, 6.5e+01, 3.8e+01, 1.2e+02, 2.4e+01, 4.1e+01, 2.4e+01, 6.5e+01, 4.6e+01, 1.5e+02
+    la MISURA dove a_H = 0: (0.9, 0.0, 'basso', 128) eta 1e-2: a +5.6423e-05, sigma_a 8.6e-05, |a|/sigma_a 6.58e-01
+    la MISURA dove a_H = 0: (0.9, 0.0, 'basso', 256) eta 1e-2: a +6.9702e-06, sigma_a 1.3e-05, |a|/sigma_a 5.57e-01
+    la MISURA dove a_H = 0: (0.95, 0.0, 'basso', 128) eta 1e-2: a -3.9584e-04, sigma_a 5.1e-04, |a|/sigma_a 7.82e-01
+    la MISURA dove a_H = 0: (0.95, 0.0, 'basso', 256) eta 1e-2: a +3.3199e-05, sigma_a 7.8e-05, |a|/sigma_a 4.28e-01
+  TAGLIE (scelta di Luca): a * Lx a 128 e 256 entro il 5%, catena principale, Dt > 0 ### FALLISCE   il peggiore 5.543; ((0.9, 0.0, 'alto', -0.001), '0.065'); ((0.9, 0.0, 'alto', 0.01), '0.053'); ((0.9, 0.0, 'alto', -0.01), '0.053'); ((0.9, 0.0, 'basso', 0.001), '1.180'); ((0.9, 0.0, 'basso', -0.001), '0.256'); ((0.9, 0.0, 'basso', 0.01), '1.208'); ((0.9, 0.0, 'basso', -0.01), '1.078'); ((0.9, 0.5, 'unico', 0.001), '0.219'); ((0.9, 0.5, 'unico', -0.001), '0.177'); ((0.95, 0.0, 'basso', 0.001), '5.543'); ((0.95, 0.0, 'basso', -0.001), '2.762'); ((0.95, 0.0, 'basso', 0.01), '2.806')
+### LA TABELLA (eta > 0; per eta < 0 i segni si invertono): a_mis contro le tre previsioni e a_RG
+  Lx 128 eps 0   s0 0.9  alto   eta 0.001: a_mis -3.951e-04 (+- 9.5e-06) | prev -1.997e-04 prev[Dt] -1.857e-04 H -4.425e-04 RG +2.219e-05 | mis/RG -1.781e+01 mis/H +8.931e-01 | verso cs ALTO
+  Lx 128 eps 0   s0 0.9  alto   eta 0.01 : a_mis -3.880e-03 (+- 6.3e-05) | prev -2.003e-03 prev[Dt] -1.862e-03 H -4.425e-03 RG +2.219e-04 | mis/RG -1.749e+01 mis/H +8.770e-01 | verso cs ALTO
+  Lx 256 eps 0   s0 0.9  alto   eta 0.001: a_mis -2.065e-04 (+- 1.5e-06) | prev -9.987e-05 prev[Dt] -9.283e-05 H -2.212e-04 RG +1.110e-05 | mis/RG -1.861e+01 mis/H +9.335e-01 | verso cs ALTO
+  Lx 256 eps 0   s0 0.9  alto   eta 0.01 : a_mis -2.046e-03 (+- 1.1e-05) | prev -1.001e-03 prev[Dt] -9.310e-04 H -2.212e-03 RG +1.110e-04 | mis/RG -1.844e+01 mis/H +9.249e-01 | verso cs ALTO
+  Lx 128 eps 0   s0 0.9  basso  eta 0.001: a_mis +1.044e-05 (+- 9.6e-06) | prev     --     prev[Dt] -1.857e-04 H -0.000e+00 RG +2.219e-05 | mis/RG +4.705e-01 mis/H     --     | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 128 eps 0   s0 0.9  basso  eta 0.01 : a_mis +5.642e-05 (+- 8.6e-05) | prev     --     prev[Dt] -1.862e-03 H -0.000e+00 RG +2.219e-04 | mis/RG +2.543e-01 mis/H     --     | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.9  basso  eta 0.001: a_mis +1.347e-06 (+- 1.6e-06) | prev     --     prev[Dt] -9.283e-05 H -0.000e+00 RG +1.110e-05 | mis/RG +1.214e-01 mis/H     --     | nessun verso (a nullo)
+  Lx 256 eps 0   s0 0.9  basso  eta 0.01 : a_mis +6.970e-06 (+- 1.3e-05) | prev     --     prev[Dt] -9.310e-04 H -0.000e+00 RG +1.110e-04 | mis/RG +6.282e-02 mis/H     --     | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 128 eps 0.5 s0 0.9  unico  eta 0.001: a_mis +5.968e-05 (+- 6.9e-06) | prev +1.447e-04 prev[Dt] -5.036e-05 H +7.770e-05 RG +1.986e-05 | mis/RG +3.005e+00 mis/H +7.680e-01 | verso cs BASSO  ### NON SI LEGGE
+  Lx 128 eps 0.5 s0 0.9  unico  eta 0.01 : a_mis +7.250e-04 (+- 2.6e-05) | prev +1.447e-03 prev[Dt] -5.030e-04 H +7.776e-04 RG +1.986e-04 | mis/RG +3.651e+00 mis/H +9.323e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.9  unico  eta 0.001: a_mis +3.716e-05 (+- 4.9e-07) | prev +7.234e-05 prev[Dt] -2.518e-05 H +3.885e-05 RG +9.929e-06 | mis/RG +3.743e+00 mis/H +9.565e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.9  unico  eta 0.01 : a_mis +3.699e-04 (+- 3.6e-06) | prev +7.233e-04 prev[Dt] -2.515e-04 H +3.888e-04 RG +9.929e-05 | mis/RG +3.726e+00 mis/H +9.515e-01 | verso cs BASSO
+  Lx 128 eps 0   s0 0.95 alto   eta 0.001: a_mis -8.292e-04 (+- 4.2e-05) | prev -4.397e-04 prev[Dt] -4.344e-04 H -9.496e-04 RG +2.314e-05 | mis/RG -3.584e+01 mis/H +8.732e-01 | verso cs ALTO
+  Lx 128 eps 0   s0 0.95 alto   eta 0.01 : a_mis -7.761e-03 (+- 2.6e-04) | prev -4.450e-03 prev[Dt] -4.400e-03 H -9.496e-03 RG +2.314e-04 | mis/RG -3.354e+01 mis/H +8.173e-01 | verso cs ALTO
+  Lx 256 eps 0   s0 0.95 alto   eta 0.001: a_mis -4.130e-04 (+- 8.0e-06) | prev -2.198e-04 prev[Dt] -2.172e-04 H -4.748e-04 RG +1.157e-05 | mis/RG -3.570e+01 mis/H +8.699e-01 | verso cs ALTO
+  Lx 256 eps 0   s0 0.95 alto   eta 0.01 : a_mis -4.047e-03 (+- 6.2e-05) | prev -2.225e-03 prev[Dt] -2.200e-03 H -4.748e-03 RG +1.157e-04 | mis/RG -3.498e+01 mis/H +8.523e-01 | verso cs ALTO
+  Lx 128 eps 0   s0 0.95 basso  eta 0.001: a_mis -3.993e-05 (+- 5.5e-05) | prev     --     prev[Dt] -4.344e-04 H +3.533e-17 RG +2.314e-05 | mis/RG -1.726e+00 mis/H -1.130e+12 | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 128 eps 0   s0 0.95 basso  eta 0.01 : a_mis -3.958e-04 (+- 5.1e-04) | prev     --     prev[Dt] -4.400e-03 H -0.000e+00 RG +2.314e-04 | mis/RG -1.711e+00 mis/H     --     | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.95 basso  eta 0.001: a_mis +9.379e-06 (+- 1.0e-05) | prev     --     prev[Dt] -2.172e-04 H +1.766e-17 RG +1.157e-05 | mis/RG +8.108e-01 mis/H +5.310e+11 | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.95 basso  eta 0.01 : a_mis +3.320e-05 (+- 7.8e-05) | prev     --     prev[Dt] -2.200e-03 H -0.000e+00 RG +1.157e-04 | mis/RG +2.870e-01 mis/H     --     | nessun verso (a nullo)  ### NON SI LEGGE
+  Lx 128 eps 0.5 s0 0.95 unico  eta 0.001: a_mis +1.386e-04 (+- 1.0e-05) | prev +1.505e-04 prev[Dt] -4.373e-05 H +1.375e-04 RG +2.002e-05 | mis/RG +6.921e+00 mis/H +1.008e+00 | verso cs BASSO
+  Lx 128 eps 0.5 s0 0.95 unico  eta 0.01 : a_mis +1.316e-03 (+- 3.4e-05) | prev +1.504e-03 prev[Dt] -4.370e-04 H +1.376e-03 RG +2.002e-04 | mis/RG +6.571e+00 mis/H +9.566e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.95 unico  eta 0.001: a_mis +6.591e-05 (+- 7.8e-07) | prev +7.523e-05 prev[Dt] -2.187e-05 H +6.876e-05 RG +1.001e-05 | mis/RG +6.583e+00 mis/H +9.586e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.95 unico  eta 0.01 : a_mis +6.534e-04 (+- 5.3e-06) | prev +7.521e-04 prev[Dt] -2.185e-04 H +6.878e-04 RG +1.001e-04 | mis/RG +6.526e+00 mis/H +9.500e-01 | verso cs BASSO
+  Lx 128 eps 0   s0 0.99 alto   eta 0.001: a_mis -3.166e-03 (+- 1.2e-04) | prev -2.357e-03 prev[Dt] -2.519e-03 H -5.272e-03 RG +2.373e-05 | mis/RG -1.334e+02 mis/H +6.007e-01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 128 eps 0   s0 0.99 alto   eta 0.01 : a_mis -1.866e-02 (+- 7.7e-04) | prev -6.280e-02 prev[Dt] -2.081e-01 H -5.272e-02 RG +2.373e-04 | mis/RG -7.865e+01 mis/H +3.540e-01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.99 alto   eta 0.001: a_mis -2.114e-03 (+- 2.9e-05) | prev -1.178e-03 prev[Dt] -1.259e-03 H -2.636e-03 RG +1.186e-05 | mis/RG -1.782e+02 mis/H +8.021e-01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.99 alto   eta 0.01 : a_mis -1.680e-02 (+- 4.1e-04) | prev -3.140e-02 prev[Dt] -1.041e-01 H -2.636e-02 RG +1.186e-04 | mis/RG -1.416e+02 mis/H +6.374e-01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 128 eps 0   s0 0.99 basso  eta 0.001: a_mis -1.455e-03 (+- 7.3e-05) | prev     --     prev[Dt] -2.519e-03 H +1.882e-16 RG +2.373e-05 | mis/RG -6.134e+01 mis/H -7.734e+12 | verso cs ALTO  ### NON SI LEGGE
+  Lx 128 eps 0   s0 0.99 basso  eta 0.01 : a_mis -1.444e-02 (+- 6.0e-04) | prev     --     prev[Dt] -2.081e-01 H -2.662e-04 RG +2.373e-04 | mis/RG -6.086e+01 mis/H +5.424e+01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.99 basso  eta 0.001: a_mis -5.786e-04 (+- 4.8e-05) | prev     --     prev[Dt] -1.259e-03 H +9.409e-17 RG +1.186e-05 | mis/RG -4.877e+01 mis/H -6.150e+12 | verso cs ALTO  ### NON SI LEGGE
+  Lx 256 eps 0   s0 0.99 basso  eta 0.01 : a_mis -1.056e-02 (+- 1.6e-04) | prev     --     prev[Dt] -1.041e-01 H -1.331e-04 RG +1.186e-04 | mis/RG -8.903e+01 mis/H +7.934e+01 | verso cs ALTO  ### NON SI LEGGE
+  Lx 128 eps 0.5 s0 0.99 unico  eta 0.001: a_mis +1.761e-04 (+- 7.2e-06) | prev +1.447e-04 prev[Dt] -3.302e-05 H +1.949e-04 RG +1.963e-05 | mis/RG +8.972e+00 mis/H +9.037e-01 | verso cs BASSO
+  Lx 128 eps 0.5 s0 0.99 unico  eta 0.01 : a_mis +1.761e-03 (+- 3.8e-05) | prev +1.446e-03 prev[Dt] -3.307e-04 H +1.949e-03 RG +1.963e-04 | mis/RG +8.971e+00 mis/H +9.038e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.99 unico  eta 0.001: a_mis +9.374e-05 (+- 7.7e-07) | prev +7.234e-05 prev[Dt] -1.651e-05 H +9.745e-05 RG +9.816e-06 | mis/RG +9.550e+00 mis/H +9.619e-01 | verso cs BASSO
+  Lx 256 eps 0.5 s0 0.99 unico  eta 0.01 : a_mis +9.280e-04 (+- 6.4e-06) | prev +7.232e-04 prev[Dt] -1.654e-04 H +9.743e-04 RG +9.816e-05 | mis/RG +9.455e+00 mis/H +9.525e-01 | verso cs BASSO
+### L'ESPONENTE: |a_mis/a_RG| contro s0/(1 - s0), fit log-log sui tre s0 (solo i punti leggibili, a non nullo)
+  eps 0   alto   Lx 128 eta 0.001: 2 punti, p 0.936
+  eps 0   alto   Lx 128 eta 0.01 : 2 punti, p 0.872
+  eps 0   alto   Lx 256 eta 0.001: 2 punti, p 0.872
+  eps 0   alto   Lx 256 eta 0.01 : 2 punti, p 0.857
+  eps 0   basso  Lx 128 eta 0.001: 0 punti, p --
+  eps 0   basso  Lx 128 eta 0.01 : 0 punti, p --
+  eps 0   basso  Lx 256 eta 0.001: 0 punti, p --
+  eps 0   basso  Lx 256 eta 0.01 : 0 punti, p --
+  eps 0.5 unico  Lx 128 eta 0.001: 2 punti, p 0.157
+  eps 0.5 unico  Lx 128 eta 0.01 : 3 punti, p 0.344
+  eps 0.5 unico  Lx 256 eta 0.001: 3 punti, p 0.363
+  eps 0.5 unico  Lx 256 eta 0.01 : 3 punti, p 0.361
+### I TRIANGOLI: NON in questa misura -- _triangoli.scena fa solo il toro quadrato, e lo spettro (matrice, rami_seguiti, spettro) e' del quadrato
+====================================================================================================
+LA FORZA DA cs: 1 su 5 controlli   ### CI SONO BUCHI  (il verdetto di fisica e' il verso e la tabella)
+====================================================================================================
