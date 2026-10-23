@@ -43,6 +43,7 @@ S_CONTROLLO = 0.9              # c del ramo basso a eps 0, s 0.9: il controllo c
 R_SIGMA, DR_SIGMA = 12.0, 1.0 / 40.0   # la griglia radiale in unita' di sigma_rif = sqrt(|c|/s); R tale che la coda gaussiana resti rappresentabile
 MAX_IT = 20000
 JSONL = os.path.join(RADICE, "doc", "referti_l2", "gravita_collettiva.jsonl")
+NON_DEFINITI = set()
 OK = [0, 0]
 
 
@@ -73,11 +74,13 @@ def spettro(s, eps):
 
 
 def gruppi(lista):
-    """### I rami raggruppati per `Dt` e `omega(0)` distinti entro `TOLL_DISTINTI`: una riga per gruppo, nel formato di `_forza_da_cs`."""
+    """### I rami raggruppati per le FASI PROPRIE `omega(0)` e `omega(k_1)` distinte entro `TOLL_DISTINTI`: una riga per gruppo, nel formato di `_forza_da_cs`.
+
+    ### ⚠ **Non per il `Dt` del FIT** *(`d222af13`)*: ### **due copie degeneri hanno fasi proprie uguali, ma `Dt` del fit diversi fino a `~1e-6`** *(il rumore del fit)*."""
     out = []
-    for r in sorted(lista, key=lambda r: (r["Dt"], r["omega0"])):
+    for r in sorted(lista, key=lambda r: (r["omega0"], r["omega1"])):
         for g in out:
-            if abs(r["Dt"] - g[0]["Dt"]) <= TOLL_DISTINTI * g[0]["Dt"] and abs(r["omega0"] - g[0]["omega0"]) <= TOLL_DISTINTI:
+            if abs(r["omega0"] - g[0]["omega0"]) <= TOLL_DISTINTI and abs(r["omega1"] - g[0]["omega1"]) <= TOLL_DISTINTI:
                 g.append(r)
                 break
         else:
@@ -95,7 +98,7 @@ def ramo_a(s, eps, riga):
     import _forza_da_cs as F
     lista, BB, _ = spettro(s, eps)
     r = F.segui(lista, riga)
-    g = [x for x in gruppi(lista) if abs(x["Dt"] - r["Dt"]) <= TOLL_DISTINTI * x["Dt"] and abs(x["omega0"] - r["omega0"]) <= TOLL_DISTINTI][0]
+    g = [x for x in gruppi(lista) if abs(x["omega0"] - r["omega0"]) <= TOLL_DISTINTI and r["omega1"] in x["omega1"]][0]
     return g, BB
 
 
@@ -195,12 +198,20 @@ def livello_1():
             sm = s * (1.0 - H)
             sp = None if s >= 1.0 else s * (1.0 + H)
             for g in gg:
-                Q, _d0, _sv = F.spazio_del_ramo(BB, g)
-                gm, BBm = ramo_a(sm, eps, g)
-                Qm = F.spazio_del_ramo(BBm, gm)[0]
-                if sp is not None:
-                    gp, BBp = ramo_a(sp, eps, g)
-                    Qp = F.spazio_del_ramo(BBp, gp)[0]
+                # ### ⚠ **lo spazio del ramo puo' NON essere definito** *(il rango al primo `k` diverso dalle copie: al cono, `eps 0, s 1`, i `Dt`
+                # ### sono `~1e-9`, rumore su un cono senza massa -- `d222af13`, la diagnosi corretta qui)*: ### **si scrive, non si misura.**
+                try:
+                    Q, _d0, _sv = F.spazio_del_ramo(BB, g)
+                    gm, BBm = ramo_a(sm, eps, g)
+                    Qm = F.spazio_del_ramo(BBm, gm)[0]
+                    if sp is not None:
+                        gp, BBp = ramo_a(sp, eps, g)
+                        Qp = F.spazio_del_ramo(BBp, gp)[0]
+                except AssertionError as err:
+                    print("  eps %g s %g %-24s: RAMO NON DEFINITO (%s)" % (eps, s, g["nome"], str(err)[:110]))
+                    scrivi({"tipo": "ramo_non_definito", "eps": eps, "s": s, "ramo": g["nome"], "Dt": g["Dt"], "perche": str(err)})
+                    NON_DEFINITI.add((eps, s, g["nome"]))
+                    continue
                 # ---- il caso che deve fallire: la sola omega_ramo(0), rho0 = 0
                 if eps == 0.0 and abs(g["omega0"]) > 1e-9 and sp is not None:
                     p_lin = pendenza(gm["omega0"], g["omega0"], gp["omega0"], sm, s, sp)
@@ -341,6 +352,8 @@ def livello_2(lam0):
             sm = s * (1.0 - H)
             sp = None if s >= 1.0 else s * (1.0 + H)
             for g in gruppi(lista):
+                if (eps, s, g["nome"]) in NON_DEFINITI:
+                    continue
                 gm = ramo_a(sm, eps, g)[0]
                 gp = ramo_a(sp, eps, g)[0] if sp is not None else None
                 for forma in FORME:

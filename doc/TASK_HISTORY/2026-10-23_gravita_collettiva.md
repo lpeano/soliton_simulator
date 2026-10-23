@@ -129,6 +129,15 @@ dispersi crescono con lei**: ### **il criterio `R/5` li separa.** ### **E aggiun
 ### **deve dare la gaussiana esatta** *(`mu` entro `1e-6` relativo)*. ### ⚠ **La prova a vuoto ha stampato anche dei valori di livello `1` e `2`: non li uso; le previsioni sono
 fissate in `151b31e2`.**
 
+### 📝 **ANNOTAZIONE 2** *(dopo la prima corsa, che si e' FERMATA, `d222af13`; prima della seconda)*: ### ⛔ **LA DIAGNOSI SCRITTA IN `d222af13` ERA SBAGLIATA.** ### **Non si e'
+fermata a `eps 0.5`**: ### **si e' fermata a `eps 0, s = 1`**, ### **dove i «rami massivi» hanno `Dt` del fit `1.6e-9` e `3.0e-9`** ### **-- rumore su un cono SENZA massa, appena sopra
+la soglia `1e-9` della definizione di `44d4963d`** *(in `51f45268` lo stesso `Delta(1)` era `7.5e-10`, sotto)*: ### **due gruppi da UNA copia** *(`omega(k_1) = +-0.0694`)* ### **e al primo
+`k` un autovalore DOPPIO**: ### **l'asserzione di `spazio_del_ramo` e' GIUSTA, li' lo spazio del ramo non e' definito.** ### **Avevo letto il primo `eps` del giro successivo invece
+di guardare il punto.** ### **LE DUE CORREZIONI** *(uno strumento nuovo, `6870ee85` -> questo commit)*: ### **(1) un ramo il cui spazio non e' definito SI SCRIVE** *(«RAMO NON
+DEFINITO»)* ### **e non si misura**, ne' al livello `1` ne' al `2`; ### **(2) i rami si raggruppano per le FASI PROPRIE `omega(0)` e `omega(k_1)`**, ### **non per il `Dt` del fit**
+*(il fit e' rumoroso fino a `~1e-6` fra due copie; nessun caso l'aveva ancora rotto, ma e' la grandezza sbagliata)*. ### **Nessun criterio cambia**; ### **la previsione «a `eps 0, s 1`
+non ce n'e'» era giusta nella fisica, e la definizione numerica la contava.**
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
