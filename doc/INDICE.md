@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 143 |
+| `FISICA` | `2` | 144 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -661,6 +661,7 @@
 | `PI-REPLAY` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l-indice e- il REPLAY del suo storico: ogni voce coincide col dopo della sua ult |
 | `PI-SIMBOLI-ERA1` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una voce dell-era 2 che nomina un SIMBOLO dell-era 1: sta ancora parlando del ve |
 | `PI-STORICO-SENZA-COMMIT` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una riga di storico GIA- COMMITTATA e senza il campo commit |
+| `PIANO-2D-3D` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | IL PIANO: 2D per le proprieta' locali del passo, 3D per le leggi globali (la FCC |
 | `PIATTAFORMA-NON-TIMBRATA` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono |
 | `POTATURA-GUARDIE` | FRONTE | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | I 57 rami MORTI delle guardie di lunghezza: potatura rimandata dopo il riordino  |
 | `POTENZE-1` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHIUSA il 2026-09-26 con la CURA A (rhos/W^2), sigillo 6/6: F2 da x47 000 a x1.4 |

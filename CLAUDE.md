@@ -344,6 +344,6 @@ firma, un id corto: ### **non sono avvisi, sono rifiuti** -- e la cura e' **camb
 tabella**, non aggirare il controllo.
 
 ### ⛔ **SOLO TRIANGOLI** *([[DECISIONE-SOLO-TRIANGOLI]], Luca, `2026-10-23`)*: **ogni misura di fisica si fa sulla griglia a TRIANGOLI**; il quadrato
-**solo come controllo di servizio ESPLICITO, mai come risultato.**
+**solo come controllo di servizio ESPLICITO, mai come risultato.** ### 📌 **IL PIANO CORRENTE: `doc/PIANO_2D_3D.md`** *([[PIANO-2D-3D]], Luca, `2026-10-23`)*: **2D per le proprieta' locali del passo, 3D per le leggi globali.**
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par13.md`**.
