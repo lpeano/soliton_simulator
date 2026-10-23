@@ -310,3 +310,21 @@ pochi per cento)*; ### **il LEGAME resta la sola strada non misurata per il vers
 
 ### **PER LA SCELTA FRA `S1` E `S4`** *(informazione)*: ### **nessuna delle tre forme da' un solitone legato largo `>= 4` archi sul ramo a curvatura `-` a `s0 0.3`-`0.5`** *(`S4` lega a ogni `N`
 ma largo `0.5`-`1.05` archi; `S1` lega solo a `N 30`-`300`, largo `~1`)*: ### **su questa domanda le forme non si distinguono ancora.**
+
+## 6. LA PRECISAZIONE DI LUCA SULLA PARTE `D` *(arrivata DOPO la corsa `e31366ec`; registrata, nessuna corsa nuova)*
+
+- ### **IL VUOTO:** ### **uniforme, con la `Lambda0` della riga corrispondente del livello `1` di `c4efc937`** ### **-> `Lambda0 = 4.0`** *(tutte le `72` righe `eps 0` di quel livello `1`, e tutte
+  le altre, hanno `Lambda0 = 4.0`: letto dal `jsonl` committato)*; ### **lo stato di `phi`: lo stesso di li', `phi = VUOTO = 1` per estremita'** *(`statica_protocollo.VUOTO`; quattro estremita'
+  per nodo, `Lambda0 = 4`)*. ### **La scelta delle norme di `e31366ec` usava gia' quel `Lambda0`** *(`LAM0 = 4.0` in `csv/_segno_gravita.py`)*: ### **la precisazione NON la cambia.**
+- ### **IL PROFILO E' SOLO UN PUNTO DI PARTENZA:** ### **viene dall'equazione d'inviluppo approssimata del livello `2`** *(un ramo solo, inviluppo lento, `Lambda` fisso, il continuo al posto del
+  reticolo)*, ### **NON e' uno stato fermo dell'automa.** ### **Dichiarato.**
+- ### **L'ASSESTAMENTO E LA TENUTA** *(quando la parte `D` si potra' correre)*: ### **un tempo `T0` a `cs` uniforme di ALMENO `10` periodi `2 pi/|mu|`**, ### **la norma emessa durante l'assestamento
+  riportata**; ### **poi la tenuta a `cs` uniforme per tutto il tempo della misura** *(larghezza entro il `10%`, baricentro fermo sotto il rumore)*; ### **se non tiene: un RISULTATO, col tempo**;
+  ### **la forza si misura dallo stato ASSESTATO.**
+- ### ⛔ **MA LA PARTE `D` RESTA FERMA ALLA SCELTA DELLE NORME,** ### **e la precisazione non tocca quel punto:** ### **nessuna forma ha uno stato legato largo `>= 4` archi sul ramo a curvatura `-` a
+  `s0 0.3`-`0.5`** *(`sigma = 0.46`-`0.50` archi, gli stati legati larghi `0.5`-`1.2` archi)*, ### **e il risolutore** *(scatola `12 sigma` = `5.5`-`6` archi, la dispersione oltre `R/5`)* ### **non
+  puo' dire legato uno stato piu' largo di `~1.1` archi.** ### **Per correre la `D` serve PRIMA uno strumento per i solitoni larghi** *(una scatola grande senza che la coda scenda sotto il doppio:
+  per esempio il profilo risolto nel logaritmo dell'ampiezza)* ### **-- oppure una decisione di Luca sulla larghezza minima.**
+
+### ❓ **LA DOMANDA PER LUCA:** ### **costruisco lo strumento per i solitoni larghi** *(e poi la `D` con assestamento e tenuta)*, ### **o la larghezza minima di `4` archi si rivede?** *(Criterio di
+chiusura: una tua decisione registrata.)*
