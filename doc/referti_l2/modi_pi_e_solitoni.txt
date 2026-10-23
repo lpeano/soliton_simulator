@@ -1,0 +1,221 @@
+[TIMBRO] _modi_pi_e_solitoni.py  sha1-BYTE 1ed7c073  committato e pulito
+====================================================================================================
+I MODI A k = pi E I SOLITONI LARGHI: dove sta la fisica a bassa energia, e i solitoni larghi
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); le convenzioni SOLO in memoria; i blob nel repo: soliton_simulator.py b8c21049; csv/_massa_vicino_al_cono.py 5842f83a; csv/_universalita_massa.py 94ebb415; csv/_forza_da_cs.py 1cd55ba0; csv/_stabilita_lineare.py 08c374ef; csv/_gravita_collettiva.py 04683c42; csv/_scala_e_zero.py 0629c68e; csv/_zero_simmetrico.py b400d76e; csv/_segno_gravita.py 20a0da41; csv/_modi_pi_e_solitoni.py 1ed7c073; doc/referti_l2/segno_gravita.jsonl 80e2b6e4
+  la configurazione: S_A (0.1, 0.3, 0.5, 0.9); EPS (0.0, 0.5); L 64; H 0.001; SALTO_NULLO 1e-06; S0_B (0.3, 0.5); ETA_B (0.0, 0.0005, 0.001, 0.005, 0.01); LX_B 256; FORME ('S1', 'S3', 'S4'); S_C (0.3, 0.5, 0.7, 0.9, 0.95, 0.99); N_C (10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, 10000000.0); LAM0 4; LARGHEZZA_MIN 4; W_MAX 3000; PUNTI_PER_W 640
+----------------------------------------------------------------------------------------------------
+  DEVE PASSARE: a k = 0, a_H/a_RG di s0 0.3 e 0.5, lambda 0 e 1/2 = e31366ec entro 1 PASSA   il peggiore 0.00e+00
+### PARTE A -- I MODI A k = pi (zero simmetrico; s (0.1, 0.3, 0.5, 0.9); eps (0.0, 0.5); lato 64; le linee verso (pi,0), (0,pi), (pi,pi))
+  eps 0   s 0.1  curv + Dt 0.1696  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 0.2217  (0,pi) 0.3142  (pi,pi) 0.0000
+    oggi a (pi,0) (salto 0.2217, dim 2): omega -0.53584 E0 -5.3584 | curv xx -0.0556 yy +0.0556 xy +0.0000 | v_g (+0.0e+00, +0.0e+00) v 0.0687 | M -0.5565 E0 M POSITIVO | D +9.214e-02 | a_H/a_RG +6.3012
+    simm a (pi,0) (salto 0.2217, dim 2): omega -0.22169 E0 -2.2169 | curv xx -0.0556 yy +0.0556 xy +0.0000 | v_g (+0.0e+00, +0.0e+00) v 0.0687 | M -0.5565 E0 M POSITIVO | D +9.214e-02 | a_H/a_RG +2.6005
+  eps 0   s 0.1  curv - Dt 0.1696  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 0.2217  (0,pi) 0.2217  (pi,pi) 0.0000
+    oggi a (0,pi) (salto 0.2217, dim 2): omega -0.09247 E0 -0.9247 | curv xx -0.0556 yy +0.0556 xy -0.0000 | v_g (+0.0e+00, -2.3e-15) v 0.1867 | M -0.5565 E0 M POSITIVO | D -9.214e-02 | a_H/a_RG +0.1491
+    simm a (0,pi) (salto 0.2217, dim 2): omega +0.22169 E0 +2.2169 | curv xx -0.0556 yy +0.0556 xy -0.0000 | v_g (+0.0e+00, -2.3e-15) v 0.1867 | M -0.5565 E0 M negativo | D -9.214e-02 | a_H/a_RG -0.3524
+  eps 0   s 0.3  curv + Dt 0.4807  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 0.6536  (0,pi) 0.9425  (pi,pi) 0.0000
+    oggi a (pi,0) (salto 0.6536, dim 2): omega -1.59609 E0 -5.3203 | curv xx -0.1695 yy +0.1695 xy +0.0000 | v_g (+2.3e-15, +0.0e+00) v 0.2148 | M -0.5649 E0 M POSITIVO | D +2.959e-01 | a_H/a_RG +5.7646
+    simm a (pi,0) (salto 0.6536, dim 2): omega -0.65361 E0 -2.1787 | curv xx -0.1695 yy +0.1695 xy +0.0000 | v_g (+2.3e-15, +0.0e+00) v 0.2148 | M -0.5649 E0 M POSITIVO | D +2.959e-01 | a_H/a_RG +2.3029
+  eps 0   s 0.3  curv - Dt 0.4807  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 0.6536  (0,pi) 0.6536  (pi,pi) 0.0000
+    oggi a (pi,0) (salto 0.6536, dim 2): omega -0.28887 E0 -0.9629 | curv xx +0.1695 yy -0.1695 xy -0.0000 | v_g (+0.0e+00, +2.3e-15) v 0.2148 | M +0.5649 E0 M negativo | D -2.959e-01 | a_H/a_RG -1.1588
+    simm a (pi,0) (salto 0.6536, dim 2): omega +0.65361 E0 +2.1787 | curv xx +0.1695 yy -0.1695 xy -0.0000 | v_g (+0.0e+00, +2.3e-15) v 0.2148 | M +0.5649 E0 M POSITIVO | D -2.959e-01 | a_H/a_RG +2.3029
+  eps 0   s 0.5  curv + Dt 0.6858  : il salto minimo 1.04720 a k = (1.000, 0.000) pi, fase -1.0472 | (pi,0) 1.0472  (0,pi) 1.5708  (pi,pi) 1.5708
+    oggi a (pi,0) (salto 1.0472, dim 2): omega -2.61799 E0 -5.2360 | curv xx -0.2887 yy +0.2887 xy +0.0000 | v_g (+0.0e+00, +2.3e-15) v 0.3885 | M -0.5773 E0 M POSITIVO | D +5.612e-01 | a_H/a_RG +4.7376
+    simm a (pi,0) (salto 1.0472, dim 2): omega -1.04720 E0 -2.0944 | curv xx -0.2887 yy +0.2887 xy +0.0000 | v_g (+0.0e+00, +2.3e-15) v 0.3885 | M -0.5773 E0 M POSITIVO | D +5.612e-01 | a_H/a_RG +1.7341
+  eps 0   s 0.5  curv - Dt 0.6858  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 1.0472  (0,pi) 1.0472  (pi,pi) 0.0000
+    oggi a (0,pi) (salto 1.0472, dim 2): omega -0.52360 E0 -1.0472 | curv xx -0.2887 yy +0.2887 xy -0.0000 | v_g (+0.0e+00, -2.3e-15) v 0.7021 | M -0.5773 E0 M POSITIVO | D -5.612e-01 | a_H/a_RG +0.3888
+    simm a (0,pi) (salto 1.0472, dim 2): omega +1.04720 E0 +2.0944 | curv xx -0.2887 yy +0.2887 xy -0.0000 | v_g (+0.0e+00, -2.3e-15) v 0.7021 | M -0.5773 E0 M negativo | D -5.612e-01 | a_H/a_RG -0.5311
+  eps 0   s 0.9  curv + Dt 0.2836  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase +0.0000 | (pi,0) 1.5463  (0,pi) 1.9094  (pi,pi) 0.0000
+    oggi a (pi,0) (salto 1.5463, dim 2): omega -4.37376 E0 -4.8597 | curv xx -0.4879 yy +0.4879 xy +0.0000 | v_g (+0.0e+00, +0.0e+00) v 0.8232 | M -0.5421 E0 M POSITIVO | D +1.370e+00 | a_H/a_RG +2.3501
+    simm a (pi,0) (salto 1.5463, dim 2): omega -1.54632 E0 -1.7181 | curv xx -0.4879 yy +0.4879 xy +0.0000 | v_g (+0.0e+00, +0.0e+00) v 0.8232 | M -0.5421 E0 M POSITIVO | D +1.370e+00 | a_H/a_RG +0.3146
+  eps 0   s 0.9  curv - Dt 0.2836  : il salto minimo 0.00000 a k = (1.000, 1.000) pi, fase -0.0000 | (pi,0) 1.5463  (0,pi) 1.5463  (pi,pi) 0.0000
+    oggi a (pi,0) (salto 1.5463, dim 2): omega -1.28111 E0 -1.4235 | curv xx +0.4879 yy -0.4879 xy +0.0000 | v_g (+0.0e+00, +4.5e-15) v 0.8232 | M +0.5421 E0 M negativo | D -1.370e+00 | a_H/a_RG -1.7209
+    simm a (pi,0) (salto 1.5463, dim 2): omega +1.54632 E0 +1.7181 | curv xx +0.4879 yy -0.4879 xy +0.0000 | v_g (+0.0e+00, +4.5e-15) v 0.8232 | M +0.5421 E0 M POSITIVO | D -1.370e+00 | a_H/a_RG +0.3146
+  eps 0.5 s 0.1  curv + Dt 0.2233  : il salto minimo 0.00388 a k = (0.000, 0.000) pi, fase -0.3180 | (pi,0) 0.0945  (0,pi) 0.0945  (pi,pi) 0.0577
+    oggi a (pi,pi) (salto 0.0577, dim 2): omega -0.36416 E0 -3.6416 | curv xx -0.2447 yy -0.2447 xy +0.0000 | v_g (+2.3e-15, +0.0e+00) v 0.1013 | M -2.4474 E0 M POSITIVO | D -1.776e-11 | a_H/a_RG +8.6896
+    simm a (pi,pi) (salto 0.0577, dim 2): omega -0.05000 E0 -0.5000 | curv xx -0.2447 yy -0.2447 xy +0.0000 | v_g (+2.3e-15, +0.0e+00) v 0.1013 | M -2.4474 E0 M POSITIVO | D +1.138e-11 | a_H/a_RG +1.1931
+  eps 0.5 s 0.1  curv - Dt 0.1650  : il salto minimo 0.04230 a k = (1.000, 1.000) pi, fase +0.0500 | (pi,0) 0.2193  (0,pi) 0.2193  (pi,pi) 0.0423
+    oggi a (pi,pi) (salto 0.0423, dim 2): omega -0.26416 E0 -2.6416 | curv xx +0.2438 yy +0.2438 xy +0.0000 | v_g (-4.5e-15, +0.0e+00) v 0.1013 | M +2.4378 E0 M negativo | D +2.220e-12 | a_H/a_RG -6.2758
+    simm a (pi,pi) (salto 0.0423, dim 2): omega +0.05000 E0 +0.5000 | curv xx +0.2438 yy +0.2438 xy +0.0000 | v_g (-4.5e-15, +0.0e+00) v 0.1013 | M +2.4378 E0 M POSITIVO | D -1.110e-11 | a_H/a_RG +1.1879
+  eps 0.5 s 0.3  curv - Dt 0.4684  : il salto minimo 0.12842 a k = (1.000, 1.000) pi, fase +0.1500 | (pi,0) 0.6432  (0,pi) 0.6432  (pi,pi) 0.1284
+    oggi a (pi,pi) (salto 0.1284, dim 2): omega -0.79248 E0 -2.6416 | curv xx +0.6690 yy +0.6690 xy +0.0000 | v_g (+4.5e-15, +0.0e+00) v 0.2955 | M +2.2299 E0 M negativo | D +3.701e-12 | a_H/a_RG -6.0732
+    simm a (pi,pi) (salto 0.1284, dim 2): omega +0.15000 E0 +0.5000 | curv xx +0.6690 yy +0.6690 xy +0.0000 | v_g (+4.5e-15, +0.0e+00) v 0.2955 | M +2.2299 E0 M POSITIVO | D -1.388e-12 | a_H/a_RG +1.1495
+  eps 0.5 s 0.5  curv - Dt 0.6718  : il salto minimo 0.21938 a k = (1.000, 1.000) pi, fase +0.2500 | (pi,0) 1.0172  (0,pi) 1.0172  (pi,pi) 0.2194
+    oggi a (pi,pi) (salto 0.2194, dim 2): omega -1.32080 E0 -2.6416 | curv xx +0.9269 yy +0.9269 xy +0.0000 | v_g (-2.3e-15, -2.3e-15) v 0.4643 | M +1.8538 E0 M negativo | D +4.441e-13 | a_H/a_RG -5.6779
+    simm a (pi,pi) (salto 0.2194, dim 2): omega +0.25000 E0 +0.5000 | curv xx +0.9269 yy +0.9269 xy +0.0000 | v_g (-2.3e-15, -2.3e-15) v 0.4643 | M +1.8538 E0 M POSITIVO | D -1.443e-12 | a_H/a_RG +1.0747
+  eps 0.5 s 0.9  curv + Dt 0.0132  : il salto minimo 0.24418 a k = (0.000, 0.000) pi, fase -2.8432 | (pi,0) 1.1176  (0,pi) 1.1176  (pi,pi) 2.3932
+    oggi a (0,pi) (salto 1.1176, dim 2): omega -5.58726 E0 -6.2081 | curv xx -0.0836 yy -0.0033 xy -0.0000 | v_g (+2.3e-15, +2.3e-15) v 0.0626 | M -0.0929 E0 M POSITIVO | D +3.863e-01 | a_H/a_RG +112.7225
+    simm a (0,pi) (salto 1.1176, dim 2): omega -2.75983 E0 -3.0665 | curv xx -0.0836 yy -0.0033 xy -0.0000 | v_g (+2.3e-15, +2.3e-15) v 0.0626 | M -0.0929 E0 M POSITIVO | D +3.863e-01 | a_H/a_RG +52.2950
+  eps 0.5 s 0.9  curv - Dt 0.4253  : il salto minimo 0.43425 a k = (1.000, 1.000) pi, fase +0.4500 | (pi,0) 1.3823  (0,pi) 1.3823  (pi,pi) 0.4343
+    oggi a (pi,pi) (salto 0.4343, dim 2): omega -2.37743 E0 -2.6416 | curv xx +0.8015 yy +0.8015 xy +0.0000 | v_g (+2.3e-15, +2.3e-15) v 0.6644 | M +0.8905 E0 M negativo | D -4.934e-13 | a_H/a_RG -4.3167
+    simm a (pi,pi) (salto 0.4343, dim 2): omega +0.45000 E0 +0.5000 | curv xx +0.8015 yy +0.8015 xy +0.0000 | v_g (+2.3e-15, +2.3e-15) v 0.6644 | M +0.8905 E0 M POSITIVO | D -1.542e-13 | a_H/a_RG +0.8171
+### lambda* a k* (le coppie di gruppi con lo stesso k* e lo stesso s): a_H/a_RG(lambda) per la retta per lambda 0 e 1/2
+  eps 0   s 0.3  curv + Dt 0.4807 / curv - Dt 0.4807 a (pi,0): lambda* 0.500000
+  eps 0   s 0.9  curv + Dt 0.2836 / curv - Dt 0.2836 a (pi,0): lambda* 0.500000
+  eps 0.5 s 0.1  curv + Dt 0.2233 / curv - Dt 0.1650 a (pi,pi): lambda* 0.500175
+  DEVE FALLIRE: <<il salto minimo e' a k = 0 a s 0.3>> (eps 0; per la chiave giusta: PASSA   curv + Dt 0.4807: k = (1.000, 1.000) pi, distanza 0.00e+00; curv - Dt 0.4807: k = (1.000, 1.000) pi, distanza 0.00e+00
+  PUO' FALLIRE: parte A, E0 M > 0 su almeno un ramo a k* a s 0.3 (simmetrica)        PASSA   eps 0 curv + Dt 0.4807 a (pi,0): E0 M +; eps 0 curv - Dt 0.4807 a (pi,0): E0 M +; eps 0.5 curv - Dt 0.4684 a (pi,pi): E0 M +
+### PARTE B -- LA FORZA SUL MODO A k* (s0 (0.3, 0.5), eta (0.0, 0.0005, 0.001, 0.005, 0.01), Lx 256, le due convenzioni; la corsa di _forza_da_cs con la PORTANTE)
+  oggi eps 0   s0 0.3  curv + Dt 0.4807   a (pi,0) eta 0.001: a +6.251e-06 (+- 6.1e-08) | a/a_RG +5.520 a/a_H +0.958 | lin 2.008 | fuori 0.000 | verso cs BASSO
+  oggi eps 0   s0 0.3  curv + Dt 0.4807   a (pi,0) eta 0.01 : a +6.272e-05 (+- 2.0e-07) | a/a_RG +5.538 a/a_H +0.961 | lin 2.000 | fuori 0.000 | verso cs BASSO
+  simm eps 0   s0 0.3  curv + Dt 0.4807   a (pi,0) eta 0.001: a +2.476e-06 (+- 6.0e-08) | a/a_RG +2.187 a/a_H +0.950 | lin 2.021 | fuori 0.000 | verso cs BASSO
+  simm eps 0   s0 0.3  curv + Dt 0.4807   a (pi,0) eta 0.01 : a +2.499e-05 (+- 1.9e-07) | a/a_RG +2.207 a/a_H +0.958 | lin 2.002 | fuori 0.000 | verso cs BASSO
+  oggi eps 0   s0 0.3  curv - Dt 0.4807   a (pi,0) eta 0.001: a -1.346e-06 (+- 2.3e-07) | a/a_RG -1.188 a/a_H +1.025 | lin 1.904 | fuori 0.002 | verso cs ALTO
+  oggi eps 0   s0 0.3  curv - Dt 0.4807   a (pi,0) eta 0.01 : a -1.284e-05 (+- 6.6e-07) | a/a_RG -1.134 a/a_H +0.978 | lin 1.989 | fuori 0.002 | verso cs ALTO
+  simm eps 0   s0 0.3  curv - Dt 0.4807   a (pi,0) eta 0.001: a +2.429e-06 (+- 2.3e-07) | a/a_RG +2.145 a/a_H +0.931 | lin 2.057 | fuori 0.002 | verso cs BASSO
+  simm eps 0   s0 0.3  curv - Dt 0.4807   a (pi,0) eta 0.01 : a +2.490e-05 (+- 6.7e-07) | a/a_RG +2.199 a/a_H +0.955 | lin 2.005 | fuori 0.002 | verso cs BASSO
+  oggi eps 0   s0 0.5  curv + Dt 0.6858   a (pi,0) eta 0.001: a +1.689e-05 (+- 5.1e-08) | a/a_RG +4.559 a/a_H +0.962 | lin 2.001 | fuori 0.000 | verso cs BASSO
+  oggi eps 0   s0 0.5  curv + Dt 0.6858   a (pi,0) eta 0.01 : a +1.689e-04 (+- 2.1e-07) | a/a_RG +4.559 a/a_H +0.962 | lin 1.999 | fuori 0.000 | verso cs BASSO
+  simm eps 0   s0 0.5  curv + Dt 0.6858   a (pi,0) eta 0.001: a +6.172e-06 (+- 5.0e-08) | a/a_RG +1.666 a/a_H +0.961 | lin 2.003 | fuori 0.000 | verso cs BASSO
+  simm eps 0   s0 0.5  curv + Dt 0.6858   a (pi,0) eta 0.01 : a +6.180e-05 (+- 2.1e-07) | a/a_RG +1.668 a/a_H +0.962 | lin 2.000 | fuori 0.000 | verso cs BASSO
+  oggi eps 0   s0 0.5  curv - Dt 0.6858   a (0,pi) eta 0.001: a +4.549e-06 (+- 3.9e-08) | a/a_RG +0.376 a/a_H +0.967 | lin 1.993 | fuori 0.000 | verso cs BASSO
+  oggi eps 0   s0 0.5  curv - Dt 0.6858   a (0,pi) eta 0.01 : a +4.534e-05 (+- 3.2e-07) | a/a_RG +0.375 a/a_H +0.964 | lin 1.999 | fuori 0.000 | verso cs BASSO
+  simm eps 0   s0 0.5  curv - Dt 0.6858   a (0,pi) eta 0.001: a -6.183e-06 (+- 3.9e-08) | a/a_RG -0.511 a/a_H +0.962 | lin 2.005 | fuori 0.000 | verso cs ALTO
+  simm eps 0   s0 0.5  curv - Dt 0.6858   a (0,pi) eta 0.01 : a -6.197e-05 (+- 3.2e-07) | a/a_RG -0.512 a/a_H +0.964 | lin 2.001 | fuori 0.000 | verso cs ALTO
+  oggi eps 0.5 s0 0.3  curv - Dt 0.4684   a (pi,pi) eta 0.001: a -5.589e-06 (+- 2.8e-06) | a/a_RG -2.608 a/a_H +0.430 | lin -4.857 | fuori 0.011 | verso cs ALTO  ### NON SI LEGGE
+  oggi eps 0.5 s0 0.3  curv - Dt 0.4684   a (pi,pi) eta 0.01 : a -1.267e-04 (+- 2.1e-06) | a/a_RG -5.912 a/a_H +0.974 | lin 2.130 | fuori 0.011 | verso cs ALTO  ### NON SI LEGGE
+  simm eps 0.5 s0 0.3  curv - Dt 0.4684   a (pi,pi) eta 0.001: a +9.995e-06 (+- 2.9e-06) | a/a_RG +4.665 a/a_H +4.058 | lin 1.118 | fuori 0.011 | verso cs BASSO  ### NON SI LEGGE
+  simm eps 0.5 s0 0.3  curv - Dt 0.4684   a (pi,pi) eta 0.01 : a +2.893e-05 (+- 3.4e-06) | a/a_RG +1.350 a/a_H +1.175 | lin 1.571 | fuori 0.011 | verso cs BASSO  ### NON SI LEGGE
+  oggi eps 0.5 s0 0.5  curv - Dt 0.6718   a (pi,pi) eta 0.001: a -2.340e-05 (+- 2.0e-06) | a/a_RG -4.421 a/a_H +0.779 | lin 2.617 | fuori 0.011 | verso cs ALTO  ### NON SI LEGGE
+  oggi eps 0.5 s0 0.5  curv - Dt 0.6718   a (pi,pi) eta 0.01 : a -2.837e-04 (+- 2.1e-06) | a/a_RG -5.361 a/a_H +0.944 | lin 2.040 | fuori 0.011 | verso cs ALTO
+  simm eps 0.5 s0 0.5  curv - Dt 0.6718   a (pi,pi) eta 0.001: a +1.085e-05 (+- 2.2e-06) | a/a_RG +2.050 a/a_H +1.907 | lin 1.326 | fuori 0.011 | verso cs BASSO  ### NON SI LEGGE
+  simm eps 0.5 s0 0.5  curv - Dt 0.6718   a (pi,pi) eta 0.01 : a +5.885e-05 (+- 2.7e-06) | a/a_RG +1.112 a/a_H +1.035 | lin 1.828 | fuori 0.011 | verso cs BASSO  ### NON SI LEGGE
+  DEVE PASSARE: eta 0 nella parte B, |a| sotto il rumore del fit (12 corse)          ### FALLISCE   oggi eps 0.5 s0 0.3 curv - Dt 0.4684: a +7.9e-06 sigma 2.9e-06; simm eps 0.5 s0 0.3 curv - Dt 0.4684: a +7.9e-06 sigma 2.9e-06; oggi eps 0.5 s0 0.5 curv - Dt 0.6718: a +5.5e-06 sigma 2.1e-06; simm eps 0.5 s0 0.5 curv - Dt 0.6718: a +5.5e-06 sigma 2.1e-06
+  (eps 0.5 a s0 0.1 dopo la correzione del ramo: gia' provato in 6c36b19a, 2 su 2)
+### PARTE C -- I SOLITONI LARGHI (la scatola in archi: R = 10 w, dr = w/640; S (0.3, 0.5, 0.7, 0.9, 0.95, 0.99); N (10.0, 100.0, 1000.0, 10000.0, 100000.0, 1000000.0, 10000000.0); eps 0, ramo a curvatura -)
+  DEVE PASSARE: la gaussiana esatta col risolutore nuovo (c -0.8, s 0.9, N 10), erro PASSA   mu -0.9995901403 contro -0.9995905065 (3.7e-07); larghezza 0.94281 contro 0.94281
+  S1 s 0.3  N 10     : DISPERSIONE (oltre 3000 arch larghezza 10334.682 archi  mu -0.0000  x_centro 6.03e-09  (6 giri, R 22129.9)
+  S1 s 0.3  N 100    : LEGATO                       larghezza     0.957 archi  mu +0.1804  x_centro 8.29  (2 giri, R 9.6)
+  S1 s 0.3  N 1000   : LEGATO                       larghezza     1.443 archi  mu +0.2586  x_centro 32.1  (2 giri, R 14.4)
+  S1 s 0.3  N 10000  : LEGATO                       larghezza     2.437 archi  mu +0.2862  x_centro 110  (2 giri, R 24.4)
+  S1 s 0.3  N 100000 : LEGATO                       larghezza     4.240 archi  mu +0.2955  x_centro 359  (3 giri, R 42.4)
+  S1 s 0.3  N 1e+06  : LEGATO                       larghezza     7.463 archi  mu +0.2986  x_centro 1.16e+03  (3 giri, R 74.6)
+  S1 s 0.3  N 1e+07  : LEGATO                       larghezza    13.201 archi  mu +0.2995  x_centro 3.7e+03  (3 giri, R 132.0)
+  S3 s 0.3  N 10     : LEGATO                       larghezza     0.627 archi  mu -0.2794  x_centro 1.83  (2 giri, R 6.3)
+  S3 s 0.3  N 100    : LEGATO                       larghezza     0.947 archi  mu -0.1004  x_centro 7.53  (2 giri, R 9.5)
+  S3 s 0.3  N 1000   : NON RAPPRESENTABILE (la coda larghezza     1.567 archi  mu -0.0340  x_centro 26.7  (2 giri, R 15.7)
+  S3 s 0.3  N 10000  : NON RAPPRESENTABILE (la coda larghezza     2.699 archi  mu -0.0112  x_centro 89  (2 giri, R 27.0)
+  S3 s 0.3  N 100000 : NON RAPPRESENTABILE (la coda larghezza     4.749 archi  mu -0.0036  x_centro 286  (2 giri, R 45.3)
+  S3 s 0.3  N 1e+06  : NON RAPPRESENTABILE (la coda larghezza     7.904 archi  mu -0.0013  x_centro 1.03e+03  (2 giri, R 46.7)
+  S3 s 0.3  N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    11.071 archi  mu -0.0006  x_centro 5.3e+03  (2 giri, R 46.7)
+  S4 s 0.3  N 10     : LEGATO                       larghezza     0.505 archi  mu -0.1992  x_centro 3.3  (2 giri, R 5.1)
+  S4 s 0.3  N 100    : LEGATO                       larghezza     0.537 archi  mu +0.3430  x_centro 26.2  (2 giri, R 5.4)
+  S4 s 0.3  N 1000   : LEGATO                       larghezza     0.701 archi  mu +0.6599  x_centro 146  (2 giri, R 7.0)
+  S4 s 0.3  N 10000  : LEGATO                       larghezza     0.998 archi  mu +0.8168  x_centro 703  (2 giri, R 10.0)
+  S4 s 0.3  N 100000 : LEGATO                       larghezza     1.480 archi  mu +0.8884  x_centro 3.15e+03  (2 giri, R 14.8)
+  S4 s 0.3  N 1e+06  : LEGATO                       larghezza     2.245 archi  mu +0.9197  x_centro 1.36e+04  (2 giri, R 22.4)
+  S4 s 0.3  N 1e+07  : LEGATO                       larghezza     3.448 archi  mu +0.9330  x_centro 5.74e+04  (2 giri, R 34.5)
+  S1 s 0.5  N 10     : DISPERSIONE (oltre 3000 arch larghezza 10337.899 archi  mu -0.0000  x_centro 6.02e-09  (6 giri, R 22136.7)
+  S1 s 0.5  N 100    : LEGATO                       larghezza     1.021 archi  mu +0.2854  x_centro 7.43  (2 giri, R 10.2)
+  S1 s 0.5  N 1000   : LEGATO                       larghezza     1.513 archi  mu +0.4255  x_centro 29.3  (2 giri, R 15.1)
+  S1 s 0.5  N 10000  : LEGATO                       larghezza     2.544 archi  mu +0.4751  x_centro 101  (2 giri, R 25.4)
+  S1 s 0.5  N 100000 : LEGATO                       larghezza     4.422 archi  mu +0.4919  x_centro 330  (3 giri, R 44.2)
+  S1 s 0.5  N 1e+06  : LEGATO                       larghezza     7.779 archi  mu +0.4974  x_centro 1.06e+03  (3 giri, R 77.8)
+  S1 s 0.5  N 1e+07  : LEGATO                       larghezza    13.757 archi  mu +0.4992  x_centro 3.4e+03  (3 giri, R 137.6)
+  S3 s 0.5  N 10     : LEGATO                       larghezza     0.665 archi  mu -0.4990  x_centro 1.63  (2 giri, R 6.6)
+  S3 s 0.5  N 100    : LEGATO                       larghezza     0.994 archi  mu -0.1804  x_centro 6.85  (2 giri, R 9.9)
+  S3 s 0.5  N 1000   : NON RAPPRESENTABILE (la coda larghezza     1.638 archi  mu -0.0613  x_centro 24.5  (2 giri, R 16.4)
+  S3 s 0.5  N 10000  : NON RAPPRESENTABILE (la coda larghezza     2.816 archi  mu -0.0202  x_centro 81.8  (2 giri, R 28.1)
+  S3 s 0.5  N 100000 : NON RAPPRESENTABILE (la coda larghezza     4.942 archi  mu -0.0065  x_centro 264  (2 giri, R 45.7)
+  S3 s 0.5  N 1e+06  : NON RAPPRESENTABILE (la coda larghezza     8.202 archi  mu -0.0023  x_centro 960  (2 giri, R 46.7)
+  S3 s 0.5  N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    11.571 archi  mu -0.0012  x_centro 4.86e+03  (2 giri, R 46.7)
+  S4 s 0.5  N 10     : LEGATO                       larghezza     0.554 archi  mu -0.4083  x_centro 2.77  (2 giri, R 5.5)
+  S4 s 0.5  N 100    : LEGATO                       larghezza     0.575 archi  mu +0.5203  x_centro 23  (2 giri, R 5.8)
+  S4 s 0.5  N 1000   : LEGATO                       larghezza     0.744 archi  mu +1.0728  x_centro 130  (2 giri, R 7.4)
+  S4 s 0.5  N 10000  : LEGATO                       larghezza     1.054 archi  mu +1.3486  x_centro 631  (2 giri, R 10.5)
+  S4 s 0.5  N 100000 : LEGATO                       larghezza     1.560 archi  mu +1.4751  x_centro 2.84e+03  (2 giri, R 15.6)
+  S4 s 0.5  N 1e+06  : LEGATO                       larghezza     2.364 archi  mu +1.5304  x_centro 1.23e+04  (2 giri, R 23.6)
+  S4 s 0.5  N 1e+07  : LEGATO                       larghezza     3.629 archi  mu +1.5540  x_centro 5.18e+04  (2 giri, R 36.3)
+  S1 s 0.7  N 10     : DISPERSIONE (oltre 3000 arch larghezza 10348.199 archi  mu -0.0000  x_centro 6.01e-09  (6 giri, R 22158.8)
+  S1 s 0.7  N 100    : LEGATO                       larghezza     1.181 archi  mu +0.3502  x_centro 5.86  (2 giri, R 11.8)
+  S1 s 0.7  N 1000   : LEGATO                       larghezza     1.671 archi  mu +0.5777  x_centro 24.3  (2 giri, R 16.7)
+  S1 s 0.7  N 10000  : LEGATO                       larghezza     2.784 archi  mu +0.6590  x_centro 84.2  (2 giri, R 27.8)
+  S1 s 0.7  N 100000 : LEGATO                       larghezza     4.824 archi  mu +0.6866  x_centro 278  (3 giri, R 48.3)
+  S1 s 0.7  N 1e+06  : LEGATO                       larghezza     8.477 archi  mu +0.6957  x_centro 897  (3 giri, R 84.8)
+  S1 s 0.7  N 1e+07  : LEGATO                       larghezza    14.982 archi  mu +0.6986  x_centro 2.87e+03  (3 giri, R 149.8)
+  S3 s 0.7  N 10     : LEGATO                       larghezza     0.752 archi  mu -0.8042  x_centro 1.29  (2 giri, R 7.5)
+  S3 s 0.7  N 100    : LEGATO                       larghezza     1.101 archi  mu -0.2948  x_centro 5.63  (2 giri, R 11.0)
+  S3 s 0.7  N 1000   : LEGATO                       larghezza     1.797 archi  mu -0.1009  x_centro 20.4  (2 giri, R 18.0)
+  S3 s 0.7  N 10000  : NON RAPPRESENTABILE (la coda larghezza     3.075 archi  mu -0.0333  x_centro 68.6  (2 giri, R 30.7)
+  S3 s 0.7  N 100000 : NON RAPPRESENTABILE (la coda larghezza     5.372 archi  mu -0.0108  x_centro 224  (2 giri, R 46.1)
+  S3 s 0.7  N 1e+06  : NON RAPPRESENTABILE (la coda larghezza     8.901 archi  mu -0.0039  x_centro 815  (2 giri, R 46.7)
+  S3 s 0.7  N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    12.618 archi  mu -0.0019  x_centro 4.1e+03  (2 giri, R 46.7)
+  S4 s 0.7  N 10     : LEGATO                       larghezza     0.678 archi  mu -0.7950  x_centro 1.89  (2 giri, R 6.8)
+  S4 s 0.7  N 100    : LEGATO                       larghezza     0.665 archi  mu +0.5702  x_centro 17.4  (2 giri, R 6.6)
+  S4 s 0.7  N 1000   : LEGATO                       larghezza     0.842 archi  mu +1.4174  x_centro 102  (2 giri, R 8.4)
+  S4 s 0.7  N 10000  : LEGATO                       larghezza     1.182 archi  mu +1.8479  x_centro 503  (2 giri, R 11.8)
+  S4 s 0.7  N 100000 : LEGATO                       larghezza     1.741 archi  mu +2.0472  x_centro 2.28e+03  (2 giri, R 17.4)
+  S4 s 0.7  N 1e+06  : LEGATO                       larghezza     2.631 archi  mu +2.1348  x_centro 9.91e+03  (2 giri, R 26.3)
+  S4 s 0.7  N 1e+07  : LEGATO                       larghezza     4.034 archi  mu +2.1723  x_centro 4.2e+04  (3 giri, R 40.3)
+  S1 s 0.9  N 10     : DISPERSIONE (oltre 3000 arch larghezza 10363.356 archi  mu -0.0000  x_centro 5.99e-09  (6 giri, R 22191.3)
+  S1 s 0.9  N 100    : LEGATO                       larghezza     2.110 archi  mu +0.2088  x_centro 2.45  (3 giri, R 21.1)
+  S1 s 0.9  N 1000   : LEGATO                       larghezza     2.224 archi  mu +0.6589  x_centro 14.3  (2 giri, R 22.2)
+  S1 s 0.9  N 10000  : LEGATO                       larghezza     3.573 archi  mu +0.8179  x_centro 51.6  (3 giri, R 35.7)
+  S1 s 0.9  N 100000 : LEGATO                       larghezza     6.127 archi  mu +0.8729  x_centro 173  (3 giri, R 61.3)
+  S1 s 0.9  N 1e+06  : LEGATO                       larghezza    10.722 archi  mu +0.8912  x_centro 561  (3 giri, R 107.2)
+  S1 s 0.9  N 1e+07  : LEGATO                       larghezza    18.915 archi  mu +0.8972  x_centro 1.8e+03  (3 giri, R 189.2)
+  S3 s 0.9  N 10     : LEGATO                       larghezza     1.078 archi  mu -1.4914  x_centro 0.647  (2 giri, R 10.8)
+  S3 s 0.9  N 100    : LEGATO                       larghezza     1.473 archi  mu -0.5736  x_centro 3.22  (2 giri, R 14.7)
+  S3 s 0.9  N 1000   : LEGATO                       larghezza     2.325 archi  mu -0.2006  x_centro 12.3  (2 giri, R 23.3)
+  S3 s 0.9  N 10000  : NON RAPPRESENTABILE (la coda larghezza     3.921 archi  mu -0.0671  x_centro 42.4  (2 giri, R 39.2)
+  S3 s 0.9  N 100000 : NON RAPPRESENTABILE (la coda larghezza     6.788 archi  mu -0.0220  x_centro 140  (2 giri, R 46.5)
+  S3 s 0.9  N 1e+06  : NON RAPPRESENTABILE (la coda larghezza    12.130 archi  mu -0.0069  x_centro 438  (3 giri, R 119.6)
+  S3 s 0.9  N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    22.278 archi  mu -0.0020  x_centro 1.3e+03  (3 giri, R 211.1)
+  S4 s 0.9  N 10     : LEGATO                       larghezza     1.281 archi  mu -1.7843  x_centro 0.565  (2 giri, R 12.8)
+  S4 s 0.9  N 100    : LEGATO                       larghezza     1.015 archi  mu +0.0981  x_centro 7.78  (2 giri, R 10.2)
+  S4 s 0.9  N 1000   : LEGATO                       larghezza     1.195 archi  mu +1.4639  x_centro 51.7  (2 giri, R 12.0)
+  S4 s 0.9  N 10000  : LEGATO                       larghezza     1.625 archi  mu +2.2012  x_centro 269  (2 giri, R 16.3)
+  S4 s 0.9  N 100000 : LEGATO                       larghezza     2.357 archi  mu +2.5530  x_centro 1.25e+03  (2 giri, R 23.6)
+  S4 s 0.9  N 1e+06  : LEGATO                       larghezza     3.532 archi  mu +2.7105  x_centro 5.51e+03  (2 giri, R 35.3)
+  S4 s 0.9  N 1e+07  : LEGATO                       larghezza     5.388 archi  mu +2.7784  x_centro 2.36e+04  (3 giri, R 53.9)
+  S1 s 0.95 N 10     : DISPERSIONE (oltre 3000 arch larghezza 13546.184 archi  mu -0.0000  x_centro 3.51e-09  (6 giri, R 29006.7)
+  S1 s 0.95 N 100    : DISPERSIONE (oltre 3000 arch larghezza 13075.192 archi  mu -0.0000  x_centro 3.77e-08  (6 giri, R 27998.2)
+  S1 s 0.95 N 1000   : LEGATO                       larghezza     2.787 archi  mu +0.6070  x_centro 9.56  (2 giri, R 27.9)
+  S1 s 0.95 N 10000  : LEGATO                       larghezza     4.288 archi  mu +0.8318  x_centro 36.2  (2 giri, R 42.8)
+  S1 s 0.95 N 100000 : LEGATO                       larghezza     7.272 archi  mu +0.9107  x_centro 123  (3 giri, R 72.7)
+  S1 s 0.95 N 1e+06  : LEGATO                       larghezza    12.675 archi  mu +0.9372  x_centro 402  (3 giri, R 126.7)
+  S1 s 0.95 N 1e+07  : LEGATO                       larghezza    22.323 archi  mu +0.9459  x_centro 1.29e+03  (3 giri, R 223.2)
+  S3 s 0.95 N 10     : LEGATO                       larghezza     1.422 archi  mu -2.0001  x_centro 0.379  (2 giri, R 14.2)
+  S3 s 0.95 N 100    : LEGATO                       larghezza     1.836 archi  mu -0.8055  x_centro 2.11  (2 giri, R 18.4)
+  S3 s 0.95 N 1000   : LEGATO                       larghezza     2.808 archi  mu -0.2872  x_centro 8.53  (2 giri, R 28.1)
+  S3 s 0.95 N 10000  : NON RAPPRESENTABILE (la coda larghezza     4.671 archi  mu -0.0970  x_centro 30  (2 giri, R 46.7)
+  S3 s 0.95 N 100000 : NON RAPPRESENTABILE (la coda larghezza     8.053 archi  mu -0.0319  x_centro 99.9  (2 giri, R 60.5)
+  S3 s 0.95 N 1e+06  : NON RAPPRESENTABILE (la coda larghezza    14.244 archi  mu -0.0101  x_centro 318  (3 giri, R 141.2)
+  S3 s 0.95 N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    25.914 archi  mu -0.0031  x_centro 959  (3 giri, R 249.3)
+  S4 s 0.95 N 10     : LEGATO                       larghezza     2.242 archi  mu -2.3619  x_centro 0.193  (2 giri, R 22.4)
+  S4 s 0.95 N 100    : LEGATO                       larghezza     1.417 archi  mu -0.4392  x_centro 4.14  (2 giri, R 14.2)
+  S4 s 0.95 N 1000   : LEGATO                       larghezza     1.552 archi  mu +1.2115  x_centro 31.2  (2 giri, R 15.5)
+  S4 s 0.95 N 10000  : LEGATO                       larghezza     2.049 archi  mu +2.1547  x_centro 171  (2 giri, R 20.5)
+  S4 s 0.95 N 100000 : LEGATO                       larghezza     2.930 archi  mu +2.6169  x_centro 813  (2 giri, R 29.3)
+  S4 s 0.95 N 1e+06  : LEGATO                       larghezza     4.359 archi  mu +2.8268  x_centro 3.63e+03  (2 giri, R 43.6)
+  S4 s 0.95 N 1e+07  : LEGATO                       larghezza     6.622 archi  mu +2.9181  x_centro 1.56e+04  (3 giri, R 66.2)
+  S1 s 0.99 N 10     : DISPERSIONE (oltre 3000 arch larghezza  6559.939 archi  mu -0.0000  x_centro 1.5e-08  (5 giri, R 14046.9)
+  S1 s 0.99 N 100    : DISPERSIONE (oltre 3000 arch larghezza  6552.779 archi  mu -0.0000  x_centro 1.5e-07  (5 giri, R 14031.6)
+  S1 s 0.99 N 1000   : LEGATO                       larghezza     6.568 archi  mu +0.2358  x_centro 2.51  (3 giri, R 65.7)
+  S1 s 0.99 N 10000  : LEGATO                       larghezza     6.997 archi  mu +0.7267  x_centro 14.4  (2 giri, R 70.0)
+  S1 s 0.99 N 100000 : LEGATO                       larghezza    11.252 archi  mu +0.9004  x_centro 52  (3 giri, R 112.5)
+  S1 s 0.99 N 1e+06  : LEGATO                       larghezza    19.298 archi  mu +0.9604  x_centro 174  (3 giri, R 193.0)
+  S1 s 0.99 N 1e+07  : LEGATO                       larghezza    33.771 archi  mu +0.9804  x_centro 566  (3 giri, R 337.7)
+  S3 s 0.99 N 10     : LEGATO                       larghezza     3.016 archi  mu -3.4437  x_centro 0.0866  (2 giri, R 30.2)
+  S3 s 0.99 N 100    : LEGATO                       larghezza     3.389 archi  mu -1.6309  x_centro 0.655  (2 giri, R 33.9)
+  S3 s 0.99 N 1000   : LEGATO                       larghezza     4.636 archi  mu -0.6266  x_centro 3.25  (2 giri, R 46.4)
+  S3 s 0.99 N 10000  : LEGATO                       larghezza     7.320 archi  mu -0.2190  x_centro 12.4  (2 giri, R 73.2)
+  S3 s 0.99 N 100000 : NON RAPPRESENTABILE (la coda larghezza    12.350 archi  mu -0.0732  x_centro 42.7  (2 giri, R 122.8)
+  S3 s 0.99 N 1e+06  : NON RAPPRESENTABILE (la coda larghezza    21.367 archi  mu -0.0240  x_centro 142  (2 giri, R 137.5)
+  S3 s 0.99 N 1e+07  : NON RAPPRESENTABILE (la coda larghezza    38.214 archi  mu -0.0075  x_centro 441  (3 giri, R 376.7)
+  S4 s 0.99 N 10     : LEGATO                       larghezza    14.564 archi  mu -3.0401  x_centro 0.00484  (3 giri, R 145.6)
+  S4 s 0.99 N 100    : LEGATO                       larghezza     4.003 archi  mu -1.9497  x_centro 0.578  (2 giri, R 40.0)
+  S4 s 0.99 N 1000   : LEGATO                       larghezza     3.187 archi  mu +0.1206  x_centro 7.89  (2 giri, R 31.9)
+  S4 s 0.99 N 10000  : LEGATO                       larghezza     3.758 archi  mu +1.6178  x_centro 52.3  (2 giri, R 37.6)
+  S4 s 0.99 N 100000 : LEGATO                       larghezza     5.112 archi  mu +2.4251  x_centro 272  (2 giri, R 51.1)
+  S4 s 0.99 N 1e+06  : LEGATO                       larghezza     7.416 archi  mu +2.8100  x_centro 1.26e+03  (2 giri, R 74.2)
+  S4 s 0.99 N 1e+07  : LEGATO                       larghezza    11.114 archi  mu +2.9822  x_centro 5.57e+03  (3 giri, R 111.2)
+### IL PRIMO s CON UNO STATO LEGATO LARGO >= 4 ARCHI, e le norme
+  S1: s 0.3, N [100000.0, 1000000.0, 10000000.0]
+  S3: s 0.99, N [1000.0, 10000.0]
+  S4: s 0.7, N [10000000.0]
+  PUO' FALLIRE: parte C, almeno una forma con uno stato legato largo >= 4 archi a s  PASSA   S1: s 0.3; S3: s 0.99; S4: s 0.7
+### LA PARTE C.3 (la dinamica dei solitoni larghi): in uno strumento a se', ai punti qui sopra
+====================================================================================================
+I MODI A k = pi E I SOLITONI LARGHI: 5 su 6 controlli   ### CI SONO BUCHI  (il verdetto di fisica sono le tabelle)
+====================================================================================================
