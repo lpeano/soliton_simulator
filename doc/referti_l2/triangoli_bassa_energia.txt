@@ -1,8 +1,8 @@
-[TIMBRO] _triangoli_bassa_energia.py  sha1-BYTE 785ebbb7  committato e pulito
+[TIMBRO] _triangoli_bassa_energia.py  sha1-BYTE 74be8455  committato e pulito
 ====================================================================================================
 I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la gravita' di Hamilton
 ====================================================================================================
-  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_triangoli.py 57742ca8; csv/_zero_simmetrico.py b400d76e; csv/_scala_e_zero.py 0629c68e; csv/_modi_pi_e_solitoni.py 1ed7c073; csv/_gravita_collettiva.py 04683c42; csv/_moneta_massa.py c114245d; csv/_triangoli_bassa_energia.py 785ebbb7
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_triangoli.py 57742ca8; csv/_zero_simmetrico.py b400d76e; csv/_scala_e_zero.py 0629c68e; csv/_modi_pi_e_solitoni.py 1ed7c073; csv/_gravita_collettiva.py 04683c42; csv/_moneta_massa.py c114245d; csv/_triangoli_bassa_energia.py 74be8455
   la configurazione: L 48; LF 6; S (0.05, 0.1, 0.3, 0.5, 0.9); EPS (0.0, 0.25, 0.5, 1.0); PUNTI {'Gamma': (0, 0), 'K': (16, 16), "K'": (32, 32), 'M1': (24, 0), 'M2': (0, 24), 'M3': (24, 24)}; DISPERSIVA 0.001; TOLL_GRUPPO 1e-06; H 0.001; PASSO_S 0.005; S_RIF 0.02
 ----------------------------------------------------------------------------------------------------
   DEVE FALLIRE: <<la griglia a triangoli e' bipartita>> (per la chiave giusta: il ci PASSA   ciclo dispari [48, 0, 47]
@@ -21,6 +21,7 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
     banda 0: curvatura (theta) -0.1554 -0.1554 -0.0776; cartesiana ['-0.1166', '-0.1165'] ISOTROPA (7.4e-04) | v 0.1816 v_g (+0.0e+00, +0.0e+00) | oggi: omega -1.4005 E0 -4.6682 E0M + D +2.98e-01 a_H/a_RG +6.4694 | simm: E0 -1.5266 E0M + a_H/a_RG +2.0305
     banda 1: curvatura (theta) +0.1554 +0.1554 +0.0776; cartesiana ['+0.1165', '+0.1166'] ISOTROPA (7.4e-04) | v 0.1816 v_g (+0.0e+00, -1.7e-15) | oggi: omega -0.4845 E0 -1.6150 E0M - D -2.98e-01 a_H/a_RG -2.4083 | simm: E0 +1.5266 E0M + a_H/a_RG +2.0305
     lambda* della coppia a (16, 16): 0.50000000
+  (scarto_c6 di _triangoli, con le fasi ordinate: 3.14e+00 -- il difetto di 1e2437a9; sul cerchio 3.53e-15)
 ### eps 0 s 0.5: i livelli (simmetrica) Gamma -1.5708(6) +0.0000(4) +1.5708(2) | K -1.5708(4) -0.7227(2) -0.0000(4) +0.7227(2) | K' -1.5708(4) -0.7227(2) +0.0000(4) +0.7227(2) | M1 -1.5708(4) -0.8411(2) +0.0000(4) +0.8411(2) | M2 -1.5708(4) -0.8411(2) +0.0000(4) +0.8411(2) | M3 -1.5708(4) -0.8411(2) +0.0000(4) +0.8411(2)
   la coppia dispersiva piu' stretta: il salto 1.44547 (salto/s 2.8909) a k = (16, 16) (K), linea diag; le fasi -0.7227 +0.7227 (il centro/s +0.0000)
     banda 0: curvatura (theta) -0.2520 -0.2520 -0.1259; cartesiana ['-0.1891', '-0.1889'] ISOTROPA (7.1e-04) | v 0.3029 v_g (-1.7e-15, -3.4e-15) | oggi: omega -2.2935 E0 -4.5871 E0M + D +5.16e-01 a_H/a_RG +5.9463 | simm: E0 -1.4455 E0M + a_H/a_RG +1.6310
@@ -45,6 +46,7 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
     banda 0: curvatura (theta) -0.1531 -0.1531 -0.0765; cartesiana ['-0.1149', '-0.1148'] ISOTROPA (7.2e-04) | v 0.1802 v_g (-3.4e-15, +0.0e+00) | oggi: omega -1.4071 E0 -4.6903 E0M + D +2.83e-01 a_H/a_RG +6.5113 | simm: E0 -1.5487 E0M + a_H/a_RG +2.0695
     banda 1: curvatura (theta) +0.1534 +0.1534 +0.0766; cartesiana ['+0.1150', '+0.1151'] ISOTROPA (7.2e-04) | v 0.1804 v_g (-1.7e-15, +3.4e-15) | oggi: omega -0.4792 E0 -1.5973 E0M - D -3.13e-01 a_H/a_RG -2.3895 | simm: E0 +1.5443 E0M + a_H/a_RG +2.0496
     lambda* della coppia a (16, 16): 0.50112378
+  (scarto_c6 di _triangoli, con le fasi ordinate: 3.14e+00 -- il difetto di 1e2437a9; sul cerchio 5.80e-15)
 ### eps 0.25 s 0.5: i livelli (simmetrica) Gamma -1.5786(4) -1.5708(2) +0.0078(4) +1.5708(2) | K -1.5786(2) -1.5770(2) -0.7358(2) +0.0078(2) +0.0124(2) +0.7296(2) | K' -1.5786(2) -1.5770(2) -0.7358(2) +0.0078(2) +0.0124(2) +0.7296(2) | M1 -1.5786(2) -1.5764(2) -0.8526(2) +0.0078(2) +0.0120(2) +0.8463(2) | M2 -1.5786(2) -1.5764(2) -0.8526(2) +0.0078(2) +0.0120(2) +0.8463(2) | M3 -1.5786(2) -1.5764(2) -0.8526(2) +0.0078(2) +0.0120(2) +0.8463(2)
   la coppia dispersiva piu' stretta: il salto 0.00777 (salto/s 0.0155) a k = (0, 0) (Gamma), linea diag; le fasi -1.5786 -1.5708 (il centro/s -3.1494)
     banda 0: anisotropa (6.2e-01) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
@@ -67,6 +69,7 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
   la coppia dispersiva piu' stretta: il salto 0.01345 (salto/s 0.0448) a k = (0, 0) (Gamma), linea diag; le fasi -0.9641 -0.9506 (il centro/s -3.1911)
     banda 0: PIATTA a k* (curvatura ['-4.7e-15', '+5.3e-14'], v 5.3e-23): non e' un modo massivo fermo, Hamilton non si calcola
     banda 1: anisotropa (8.3e-02) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
+  (scarto_c6 di _triangoli, con le fasi ordinate: 3.14e+00 -- il difetto di 1e2437a9; sul cerchio 5.34e-15)
 ### eps 0.5 s 0.5: i livelli (simmetrica) Gamma -1.6014(4) -1.5708(2) +0.0306(4) +1.5708(2) | K -1.6014(2) -1.5953(2) -0.7727(2) +0.0306(2) +0.0474(2) +0.7497(2) | K' -1.6014(2) -1.5953(2) -0.7727(2) +0.0306(2) +0.0474(2) +0.7497(2) | M1 -1.6014(2) -1.5932(2) -0.8853(2) +0.0306(2) +0.0460(2) +0.8617(2) | M2 -1.6014(2) -1.5932(2) -0.8853(2) +0.0306(2) +0.0460(2) +0.8617(2) | M3 -1.6014(2) -1.5932(2) -0.8853(2) +0.0306(2) +0.0460(2) +0.8617(2)
   la coppia dispersiva piu' stretta: il salto 0.03062 (salto/s 0.0612) a k = (0, 0) (Gamma), linea diag; le fasi -1.6014 -1.5708 (il centro/s -3.1722)
     banda 0: anisotropa (1.7e-01) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
@@ -89,6 +92,7 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
   la coppia dispersiva piu' stretta: il salto 0.04919 (salto/s 0.1640) a k = (0, 0) (Gamma), linea diag; le fasi -1.0237 -0.9746 (il centro/s -3.3305)
     banda 0: anisotropa (1.9e+00) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
     banda 1: anisotropa (1.1e-02) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
+  (scarto_c6 di _triangoli, con le fasi ordinate: 3.14e+00 -- il difetto di 1e2437a9; sul cerchio 5.45e-15)
 ### eps 1 s 0.5: i livelli (simmetrica) Gamma -1.6868(4) -1.5708(2) +0.1160(4) +1.5708(2) | K -1.6868(2) -1.6652(2) -0.8965(2) +0.1160(2) +0.1641(2) +0.8268(2) | K' -1.6868(2) -1.6652(2) -0.8965(2) +0.1160(2) +0.1641(2) +0.8268(2) | M1 -1.6868(2) -1.6580(2) -0.9966(2) +0.1160(2) +0.1626(2) +0.9212(2) | M2 -1.6868(2) -1.6580(2) -0.9966(2) +0.1160(2) +0.1626(2) +0.9212(2) | M3 -1.6868(2) -1.6580(2) -0.9966(2) +0.1160(2) +0.1626(2) +0.9212(2)
   la coppia dispersiva piu' stretta: il salto 0.11596 (salto/s 0.2319) a k = (0, 0) (Gamma), linea diag; le fasi -1.6868 -1.5708 (il centro/s -3.2576)
     banda 0: anisotropa (1.2e-02) in un punto SIMMETRICO (Gamma): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
@@ -97,7 +101,7 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
   la coppia dispersiva piu' stretta: il salto 0.62637 (salto/s 0.6960) a k = (16, 16) (K), linea diag; le fasi +0.3699 +0.9962 (il centro/s +0.7589)
     banda 0: anisotropa (1.2e-02) in un punto SIMMETRICO (K): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
     banda 1: anisotropa (1.6e-03) in un punto SIMMETRICO (K): la tracciatura ai vicini NON e' affidabile, Hamilton non si calcola
-  DEVE PASSARE: lo spettro invariante per 60 gradi entro 1e-12 (ruota60, ogni eps, s ### FALLISCE   il peggiore 3.14e+00
+  DEVE PASSARE: lo spettro invariante per 60 gradi entro 1e-12 (ruota60, SUL CERCHIO PASSA   il peggiore 5.91e-15
   DI SERVIZIO: il blocco al lato 6 = al lato 48 ai punti speciali, entro 1e-12       PASSA   il peggiore 0.00e+00
   PUO' FALLIRE: lambda* = 1/2 entro 1e-6 al punto del salto minimo (11 coppie)       ### FALLISCE   eps 0 s 0.05: 0.50000000; eps 0 s 0.1: 0.50000000; eps 0 s 0.3: 0.50000000; eps 0 s 0.5: 0.50000000; eps 0.25 s 0.05: 0.50003066; eps 0.25 s 0.1: 0.50012282; eps 0.25 s 0.3: 0.50112378; eps 0.5 s 0.05: 0.50011709; eps 0.5 s 0.1: 0.50046922; eps 1 s 0.05: 0.50040404; eps 1 s 0.1: 0.50162143
 ### IL PASSO: delta(s) = ||H_eff(s) - H_eff(0.02)|| / ||H_eff(0.02)|| a Gamma e a k = (2 pi/16, 0), il logaritmo principale (lato 16)
@@ -114,5 +118,5 @@ I TRIANGOLI, PRIMO GRADINO: gli spettri, dove sta la fisica di bassa energia, la
   passo intero eps 1 k(1,0): 0.02:0.0e+00 0.05:8.8e-04 0.1:4.0e-03 0.2:1.7e-02 0.3:4.0e-02 0.5:1.5e+00 0.7:1.3e+00 0.9:1.0e+00 0.95:9.7e-01 0.99:9.3e-01 | esponente (s - 0.02) 1.702, (s) 2.122
   PUO' FALLIRE: l'esponente di delta(s) del passo intero (k(1,0), contro s, s <= 0.3 PASSA   2.140 2.127 2.123 2.122
 ====================================================================================================
-I TRIANGOLI, PRIMO GRADINO: 4 su 6 controlli   ### CI SONO BUCHI  (il verdetto di fisica sono le tabelle)
+I TRIANGOLI, PRIMO GRADINO: 5 su 6 controlli   ### CI SONO BUCHI  (il verdetto di fisica sono le tabelle)
 ====================================================================================================
