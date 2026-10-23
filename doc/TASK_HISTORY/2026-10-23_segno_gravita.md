@@ -78,6 +78,47 @@
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE:** ### **le tabelle e il limite.** ### **A parte: la lettura in tre righe e una riga su «da dove viene la massa»** *(ritardo, moneta, legame)*:
   ### **informazione, non scelta.**
 
+## 3-bis. LA VERSIONE NUOVA DEL MANDATO *(arrivata dopo questo task history; vale l'ultima, [[PRECEDENZA-IN-CODA]])*: ### **LA PARTE `D`, IL SOLITONE IN UN GRADIENTE, e i controlli nuovi**
+
+### **Le parti `A`, `B`, `C` restano come sopra.** ### **Una cosa vista nella prova a vuoto in memoria delle funzioni `A`-`C`** *(nessun file del repo scritto)*: ### **a `eps 0.5, s0 0.05` lo spazio del
+ramo principale NON e' definito** *(rango `1` per `2` copie: l'asserzione di `spazio_del_ramo`)*: ### **si scrive «RAMO NON DEFINITO» e non si misura** *(come in `27df8e79`)*. ### **E a `s0` piccolo
+i nomi «basso/alto» di `righe_del_ramo` si SCAMBIANO** *(a `s0 0.05`-`0.5` il «basso» ha curvatura `+`)*: ### **per questo i rami si nominano per CURVATURA.** ### **La prova a vuoto ha stampato
+anche dei numeri di `A`: li dichiaro** *(a `s0 0.3`: `lambda* = 0.500000026`, residuo `1.4e-13`)* ### **e non tocco le previsioni.**
+
+### PARTE D -- IL METODO
+
+- ### **LA SCENA:** ### **la camminata INTERA col legame acceso** *(il passo coi `14` pezzi, `salta = ()`; la forma `S1`, `S3`, `S4` con `_screening_forme_s3.forma`)*, ### **`eps 0`, il ramo a curvatura
+  NEGATIVA, `s0` in `(0.3, 0.5)`, le DUE convenzioni.** ### **Il toro `Lx x Ly = 128 x 64`** *(il solitone e' RADIALE in `2d`: il toro `Lx x 4` di `_forza_da_cs` non lo contiene; `Ly = 64` e' piu'
+  di otto volte la larghezza minima)*, ### **il vuoto `phi = VUOTO`** *(`Lambda0 = 4` per nodo: senza vuoto il legame non c'e')*, ### **`dtau = 1`, `mot.cs` il profilo, `lambda_c = None`.**
+- ### **LO STATO INIZIALE:** ### **il profilo radiale `u(r)` del solitone di `_gravita_collettiva.solitone`** *(con `c = c_di` del ramo a `s0`)*, ### **la densita' per nodo `u(r)^2` sul vettore del ramo
+  a `k = 0`** *(`spazio_del_ramo`)*, ### **centrato a `(Lx/4, Ly/2)`, fermo**, ### **la norma riportata a `N`.** ### ⚠ **`solitone()` oggi NON RESTITUISCE il profilo**: ### **lo strumento lo
+  chiede a una funzione `_profilo` estratta da `solitone()` in un commit a se'** *(il comportamento di `solitone()` resta lo stesso, verificato al bit)*.
+- ### **LE NORME** *(dichiarate)*: ### **sulla griglia `N` in `(1, 3, 10, 30, 100, 300, 1000, 3000, 10000)`** ### **le DUE piu' piccole con lo stato LEGATO e larghezza `>= 4` archi a TUTTI E DUE gli
+  `s0`.** ### **Se per una forma non ce ne sono: si scrive, e quella forma non si corre.**
+- ### **LA TENUTA** *(prima del gradiente)*: ### **`eta = 0`, per tutto il tempo della misura** *(`T = Lx/4 = 32` tick)*: ### **la larghezza** *(rms attorno al baricentro, immagine minima sul toro)* ### **entro
+  il `10%` della iniziale a ogni tick**, ### **e il baricentro fermo** *(`|a| <= 2 sigma_a`)*. ### **Se non tiene: «NON TIENE» col tick in cui la larghezza esce, e quel punto non si misura.**
+- ### **LA FORZA:** ### **`eta` in `(1e-3, -1e-3, 1e-2, -1e-2)`**, ### **il baricentro circolare in `x` del modulo quadro della materia, il fit `x0 + v0 t + a t^2/2` sulla finestra di
+  `_forza_da_cs`** *(`|<x> - x0| < Lx/32`, `T <= Lx/4`, almeno `6` punti)*, ### **`a_RG = -v^2 (ds/dx)/s0`** *(`v` del ramo)*, ### **`a_mis/a_RG`, il verso, e il confronto fra le due norme.**
+- ### **LA SCOMPOSIZIONE:** ### **`E_ramo = omega0/s0`** *(oggi `0`, simmetrica `+pi` sul ramo a curvatura `-`)* ### **e `E_legame = mu/s0`** *(`mu` di `solitone()`)*: ### **quale domina in modulo.**
+
+### PARTE D -- LE PREVISIONI *(prima dei numeri)*
+
+- ### **HAMILTON PER UN SOLITONE FERMO** *(la stessa formula dei rami, con `omega_sol = omega0 + mu(s)`)*: ### **`a/a_RG = s (omega''/v^2) d omega_sol/ds`**, ### **e col `c` proporzionale a `s`** *(`mu = s mu_1`,
+  `05055fc6`)*: ### **`d omega_sol/ds = d omega0/ds + mu/s`.**
+- ### **ZERO SIMMETRICO** *(`d omega0/ds = pi`, `omega'' < 0`)*: ### **`a/a_RG = -(s/Dt)(pi + mu/s)`**: ### **verso `cs` BASSO solo se `-mu/s > pi`** *(il legame domina sull'energia del ramo)*.
+  ### **Per solitoni larghi `>= 4` archi la densita' e' bassa e `|mu|` piccolo: PREVEDO verso `cs` ALTO per tutte le forme** ### **-- il guardiano: `S3` e `S4` verso `cs` basso SE il legame domina.**
+- ### **CONVENZIONE DI OGGI** *(`d omega0/ds = 0` sul ramo a curvatura `-`)*: ### **`a/a_RG = -mu/Dt`**: ### **`S3` e `S4`** *(`mu < 0`)* ### **verso `cs` BASSO, `S1`** *(`mu > 0`)* ### **verso `cs`
+  ALTO**; ### **e il modulo dipende da `N`** *(attraverso `mu`)*: ### **due solitoni della stessa forma NON accelerano uguale.** ### **Nessuna delle due convenzioni da' `a/a_RG = 1` a ogni `N`.**
+- ### ⚠ **E I LIMITI della previsione:** ### **`c(s)` misurato non e' proporzionale a `s`** *(la parte di moto di `c4efc937`)*; ### **il vuoto reagisce** *(`beta` non uniforme lo fa camminare)*;
+  ### **il solitone puo' non tenere sul reticolo.**
+
+### I CONTROLLI NUOVI *(fissati ora, dal mandato)*
+
+- ### **DEVE PASSARE:** ### **parte `D` a `cs` uniforme: `|a|` sotto il rumore del fit** *(la tenuta)*.
+- ### **DEVE PASSARE:** ### **parte `D`, il profilo specchiato** *(`eta -> -eta`)*: ### **`a` cambia segno, `|a|` uguale entro il `5%`.**
+- ### **PUO' FALLIRE:** ### **parte `D`, almeno un solitone `S3` o `S4` con lo zero simmetrico e `a_mis/a_RG > 0`.** ### **La mia previsione: FALLISCE.**
+- ### **Se la parte `D` e' lunga, il suo referto si committa a parte.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
