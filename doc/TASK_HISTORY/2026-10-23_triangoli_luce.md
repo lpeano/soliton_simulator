@@ -86,6 +86,14 @@ blocco identita' nel resto: velocita' nulla, non cambia il massimo)*; ### **il c
 - ### **IL VERDETTO DI FISICA: le tabelle.** ### **A parte: tre righe di lettura; quale e' la luce del modello sui triangoli, se c'e'; che cosa vuol dire per la relativita' ristretta e per la prova di
   Lorentz** *(`doc/SPAZIOTEMPO_3PIU1.md`, `G`)*: ### **informazione per Luca, non una scelta.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa, nel commit dello strumento)*: ### **la prova a vuoto ridotta** *(`s 0.05`; `S3`/`S1`, `s 0.1`, `x 1e-2`)* ### **ha trovato UN mio difetto, corretto
+prima del commit:** ### **il riferimento del DEVE della parte `B`** *(la Green a materia nulla contro il blocco del vuoto)* ### **era sbagliato: la Green lavora sulle coordinate REALI, e la sua trasformata
+accoppia `k` e `-k`** *(la parte reale della mappa in spazio reale e' `(V(k) + V(-k)*)/2`, non `Re V(k)`)*: ### **`5.2e-2` col riferimento sbagliato, `1.0e-15` con quello giusto.** ### **E UNA COSA CHE NON E' UN
+DIFETTO, e cambia la lettura:** ### **a `eps 0` la MATERIA e' DUE COPIE della camminata del vuoto** *(`U = I`, la moneta spenta: le due componenti dello spinore non si mescolano)*: ### **il fronte e `v_max` del
+vuoto sono quelli della materia** *(`0.5990` contro `0.5989`)*, ### **e la coppia a `K` del vuoto e' la stessa.** ### **I NUMERI VISTI** *(non li uso)*: ### **il vuoto senza pendenze lineari** *(esponente
+`2.000` ai tocchi)*; ### **`v_b,vuoto/s = 1.11` a `Gamma`**; ### **`S1` stabile** *(il tasso `3e-6`, il rumore della differenza finita)*, ### **`S3` instabile** *(`0.90`)*; ### **i rami bassi
+dell'accoppiato quadratici** *(esponente `~2`: nessun suono a `x 1e-2`)*.
+
 ## 6. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
