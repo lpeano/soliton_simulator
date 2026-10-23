@@ -120,6 +120,15 @@
   ### **`+1` e UGUALE per oggetti diversi; qualunque altro valore, o una dipendenza dalla norma o dalla forma, e' una VIOLAZIONE.** ### **Nessuna conclusione oltre la tabella**; ### **la
   lettura in tre righe a parte, piu' UNA riga su che cosa dice per la scelta fra `S1` e `S4`** *(informazione per Luca, non una scelta)*.
 
+### 📝 **ANNOTAZIONE 1** *(prima di ogni corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto delle funzioni in memoria** *(lo strumento negli
+appunti, nessun file del repo scritto)* ### **ha trovato un DIFETTO DEL MIO RISOLUTORE, non della fisica:** ### **nella coda dello stato `u^2` scende sotto il piu' piccolo doppio, e
+`alpha` di `S3`** *(`ln(rho/(rho + Lambda))`)* ### **diventa `-inf`.** ### **NON metto un pavimento su `rho`** *(`A11`)*: ### **la scatola si sceglie perche' la coda resti
+RAPPRESENTABILE** *(`R = 12 sigma`, `dr = sigma/40`, `sigma = sqrt(|c|/s)`: la coda gaussiana a `R` vale `e^{-144}`)*, ### **e un potenziale non finito marca il caso «NON
+RAPPRESENTABILE» invece di dare un numero.** ### **Visto anche:** ### **gli stati legati NON dipendono dalla scatola** *(la stessa larghezza a `R = 12` e `24 sigma`)*, ### **quelli
+dispersi crescono con lei**: ### **il criterio `R/5` li separa.** ### **E aggiungo un controllo DI SERVIZIO del risolutore:** ### **sul logaritmo puro** *(`alpha = ln(rho/Lambda) + 1`)*
+### **deve dare la gaussiana esatta** *(`mu` entro `1e-6` relativo)*. ### ⚠ **La prova a vuoto ha stampato anche dei valori di livello `1` e `2`: non li uso; le previsioni sono
+fissate in `151b31e2`.**
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
