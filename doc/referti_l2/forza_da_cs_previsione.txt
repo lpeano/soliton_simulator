@@ -1,0 +1,72 @@
+[TIMBRO] _forza_da_cs.py  sha1-BYTE e8789ea9  committato e pulito
+====================================================================================================
+IL VERSO E L'INTENSITA' DELLA FORZA DA cs -- PARTE A
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); la camminata sola (S3 saltata); cs per nodo in memoria, lambda_c None
+  la configurazione: L_SPETTRO 64; S_PREV (0.85, 0.9, 0.95, 0.99); S0 (0.9, 0.95, 0.99); EPS (0.0, 0.5); ETA (0.0, 0.0005, 0.001, -0.001, 0.005, 0.01, -0.01); LX (128, 256); LY 4; TOLL_FIT 0.05; TOLL_DISPERSIVO 0.1; TOLL_OMEGA 1e-09; TOLL_DISTINTI 1e-06; SPECCHIO 1e-06; LIN 0.05; TAGLIE 0.05; SALTO 0.01; NORMA_FUORI 0.1; PAVIMENTO 1e-12; MIN_PUNTI 6; TOLL_NORMA 1e-10
+----------------------------------------------------------------------------------------------------
+### PARTE A -- LA PREVISIONE SEMICLASSICA, DAI SOLI SPETTRI UNIFORMI (lato 64, dtau 1, cs = s)
+  eps 0: la catena 0 (lato 64): s 0.5 Dt 0.68578, s 0.6 Dt 0.70982, s 0.7 Dt 0.65627, s 0.8 Dt 0.51252, s 0.9 Dt 0.28362, s 0.95 Dt 0.14543
+  ### 1. omega(0), Dt, v, curvatura della catena principale -- eps 0
+    s 0.85  ramo basso : omega(0) +0.000000  Dt 0.407441  v 0.65332  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.85  ramo alto  : omega(0) +0.942478  Dt 0.407441  v 0.65332  curvatura +1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.9   ramo basso : omega(0) +0.000000  Dt 0.283623  v 0.67238  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.9   ramo alto  : omega(0) +0.628319  Dt 0.283623  v 0.67238  curvatura +1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.95  ramo basso : omega(0) +0.000000  Dt 0.145431  v 0.68654  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.95  ramo alto  : omega(0) +0.314159  Dt 0.145431  v 0.68654  curvatura +1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.99  ramo basso : omega(0) -0.000000  Dt 0.027998  v 0.69525  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.99  ramo alto  : omega(0) +0.062832  Dt 0.027998  v 0.69525  curvatura +1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+  ### 2-5. a_prev, a_prev[Dt], a_H, a_RG -- eps 0 (a per Lx 128 e eta > 0; a scala come eta/Lx)
+    s0 0.9  basso : lo spazio a k = 0 con omega(0) +0.000000 ha dimensione 2; quello del ramo 2 (valori singolari 1.028, 0.965)
+    s0 0.9  basso  eta 0.001 : d omega0/ds +0.0000  d lnDelta/ds     --      d lnDt/ds -9.296 | a_prev     --      a_prev[Dt] -1.857e-04  a_H -0.000e+00  a_RG +2.219e-05
+        a/a_RG: prev     --     (--)  prev[Dt] -8.366e+00 (verso cs ALTO)  H -0.000e+00 (verso cs ALTO);  D/v 0.4218 contro 1/W 0.1250 (Lx 128)
+    s0 0.9  basso  eta 0.01  : d omega0/ds +0.0000  d lnDelta/ds     --      d lnDt/ds -9.323 | a_prev     --      a_prev[Dt] -1.862e-03  a_H -0.000e+00  a_RG +2.219e-04
+        a/a_RG: prev     --     (--)  prev[Dt] -8.391e+00 (verso cs ALTO)  H -0.000e+00 (verso cs ALTO);  D/v 0.4218 contro 1/W 0.1250 (Lx 128)
+    s0 0.9  alto  : lo spazio a k = 0 con omega(0) +0.628319 ha dimensione 4; quello del ramo 2 (valori singolari 1.118, 0.860)
+    s0 0.9  alto   eta 0.001 : d omega0/ds -6.2832  d lnDelta/ds -1.000e+01  d lnDt/ds -9.296 | a_prev -1.997e-04  a_prev[Dt] -1.857e-04  a_H -4.425e-04  a_RG +2.219e-05
+        a/a_RG: prev -9.000e+00 (verso cs ALTO)  prev[Dt] -8.366e+00 (verso cs ALTO)  H -1.994e+01 (verso cs ALTO);  D/v 0.4218 contro 1/W 0.1250 (Lx 128)
+    s0 0.9  alto   eta 0.01  : d omega0/ds -6.2832  d lnDelta/ds -1.003e+01  d lnDt/ds -9.323 | a_prev -2.003e-03  a_prev[Dt] -1.862e-03  a_H -4.425e-03  a_RG +2.219e-04
+        a/a_RG: prev -9.024e+00 (verso cs ALTO)  prev[Dt] -8.391e+00 (verso cs ALTO)  H -1.994e+01 (verso cs ALTO);  D/v 0.4218 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 basso : lo spazio a k = 0 con omega(0) +0.000000 ha dimensione 2; quello del ramo 2 (valori singolari 1.032, 0.935)
+    s0 0.95 basso  eta 0.001 : d omega0/ds -0.0000  d lnDelta/ds     --      d lnDt/ds -19.765 | a_prev     --      a_prev[Dt] -4.344e-04  a_H +3.533e-17  a_RG +2.314e-05
+        a/a_RG: prev     --     (--)  prev[Dt] -1.878e+01 (verso cs ALTO)  H +1.527e-12 (verso cs BASSO);  D/v 0.2118 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 basso  eta 0.01  : d omega0/ds +0.0000  d lnDelta/ds     --      d lnDt/ds -20.018 | a_prev     --      a_prev[Dt] -4.400e-03  a_H -0.000e+00  a_RG +2.314e-04
+        a/a_RG: prev     --     (--)  prev[Dt] -1.902e+01 (verso cs ALTO)  H -0.000e+00 (verso cs ALTO);  D/v 0.2118 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 alto  : lo spazio a k = 0 con omega(0) +0.314159 ha dimensione 4; quello del ramo 2 (valori singolari 1.022, 0.946)
+    s0 0.95 alto   eta 0.001 : d omega0/ds -6.2832  d lnDelta/ds -2.000e+01  d lnDt/ds -19.765 | a_prev -4.397e-04  a_prev[Dt] -4.344e-04  a_H -9.496e-04  a_RG +2.314e-05
+        a/a_RG: prev -1.900e+01 (verso cs ALTO)  prev[Dt] -1.878e+01 (verso cs ALTO)  H -4.104e+01 (verso cs ALTO);  D/v 0.2118 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 alto   eta 0.01  : d omega0/ds -6.2832  d lnDelta/ds -2.025e+01  d lnDt/ds -20.018 | a_prev -4.450e-03  a_prev[Dt] -4.400e-03  a_H -9.496e-03  a_RG +2.314e-04
+        a/a_RG: prev -1.923e+01 (verso cs ALTO)  prev[Dt] -1.902e+01 (verso cs ALTO)  H -4.104e+01 (verso cs ALTO);  D/v 0.2118 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 basso : lo spazio a k = 0 con omega(0) -0.000000 ha dimensione 2; quello del ramo 2 (valori singolari 0.894, 0.821)
+    s0 0.99 basso  eta 0.001 : d omega0/ds -0.0000  d lnDelta/ds     --      d lnDt/ds -107.235 | a_prev     --      a_prev[Dt] -2.519e-03  a_H +1.882e-16  a_RG +2.373e-05
+        a/a_RG: prev     --     (--)  prev[Dt] -1.062e+02 (verso cs ALTO)  H +7.931e-12 (verso cs BASSO);  D/v 0.0403 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 basso  eta 0.01  : d omega0/ds +0.0317  d lnDelta/ds     --      d lnDt/ds -885.925 | a_prev     --      a_prev[Dt] -2.081e-01  a_H -2.662e-04  a_RG +2.373e-04
+        a/a_RG: prev     --     (--)  prev[Dt] -8.771e+02 (verso cs ALTO)  H -1.122e+00 (verso cs ALTO);  D/v 0.0403 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 alto  : lo spazio a k = 0 con omega(0) +0.062832 ha dimensione 4; quello del ramo 2 (valori singolari 0.880, 0.836)
+    s0 0.99 alto   eta 0.001 : d omega0/ds -6.2832  d lnDelta/ds -1.003e+02  d lnDt/ds -107.235 | a_prev -2.357e-03  a_prev[Dt] -2.519e-03  a_H -5.272e-03  a_RG +2.373e-05
+        a/a_RG: prev -9.933e+01 (verso cs ALTO)  prev[Dt] -1.062e+02 (verso cs ALTO)  H -2.222e+02 (verso cs ALTO);  D/v 0.0403 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 alto   eta 0.01  : d omega0/ds -6.2832  d lnDelta/ds -2.673e+02  d lnDt/ds -885.925 | a_prev -6.280e-02  a_prev[Dt] -2.081e-01  a_H -5.272e-02  a_RG +2.373e-04
+        a/a_RG: prev -2.647e+02 (verso cs ALTO)  prev[Dt] -8.771e+02 (verso cs ALTO)  H -2.222e+02 (verso cs ALTO);  D/v 0.0403 contro 1/W 0.1250 (Lx 128)
+  eps 0.5: la catena 0 (lato 64): s 0.5 Dt 0.67184, s 0.6 Dt 0.70088, s 0.7 Dt 0.66215, s 0.8 Dt 0.55720, s 0.9 Dt 0.42535, s 0.95 Dt 0.37347, s 0.99 Dt 0.34483, s 1 Dt 0.33924
+  ### 1. omega(0), Dt, v, curvatura della catena principale -- eps 0.5
+    s 0.85  ramo unico : omega(0) -0.152430  Dt 0.490161  v 0.62426  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.9   ramo unico : omega(0) -0.228427  Dt 0.425350  v 0.63605  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.95  ramo unico : omega(0) -0.341330  Dt 0.373468  v 0.63870  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+    s 0.99  ramo unico : omega(0) -0.464497  Dt 0.344833  v 0.63239  curvatura -1 (copie 2, segni concordi True)  [blocchi fuori diagonale 0.0e+00]
+  ### 2-5. a_prev, a_prev[Dt], a_H, a_RG -- eps 0.5 (a per Lx 128 e eta > 0; a scala come eta/Lx)
+    s0 0.9  unico : lo spazio a k = 0 con omega(0) -0.228427 ha dimensione 2; quello del ramo 2 (valori singolari 1.057, 0.937)
+    s0 0.9  unico  eta 0.001 : d omega0/ds -1.8492  d lnDelta/ds +8.095e+00  d lnDt/ds -2.818 | a_prev +1.447e-04  a_prev[Dt] -5.036e-05  a_H +7.770e-05  a_RG +1.986e-05
+        a/a_RG: prev +7.286e+00 (verso cs BASSO)  prev[Dt] -2.536e+00 (verso cs ALTO)  H +3.913e+00 (verso cs BASSO);  D/v 0.6687 contro 1/W 0.1250 (Lx 128)
+    s0 0.9  unico  eta 0.01  : d omega0/ds -1.8506  d lnDelta/ds +8.094e+00  d lnDt/ds -2.814 | a_prev +1.447e-03  a_prev[Dt] -5.030e-04  a_H +7.776e-04  a_RG +1.986e-04
+        a/a_RG: prev +7.285e+00 (verso cs BASSO)  prev[Dt] -2.533e+00 (verso cs ALTO)  H +3.916e+00 (verso cs BASSO);  D/v 0.6687 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 unico : lo spazio a k = 0 con omega(0) -0.341330 ha dimensione 2; quello del ramo 2 (valori singolari 1.073, 0.915)
+    s0 0.95 unico  eta 0.001 : d omega0/ds -2.6998  d lnDelta/ds +7.910e+00  d lnDt/ds -2.299 | a_prev +1.505e-04  a_prev[Dt] -4.373e-05  a_H +1.375e-04  a_RG +2.002e-05
+        a/a_RG: prev +7.514e+00 (verso cs BASSO)  prev[Dt] -2.184e+00 (verso cs ALTO)  H +6.868e+00 (verso cs BASSO);  D/v 0.5847 contro 1/W 0.1250 (Lx 128)
+    s0 0.95 unico  eta 0.01  : d omega0/ds -2.7004  d lnDelta/ds +7.907e+00  d lnDt/ds -2.297 | a_prev +1.504e-03  a_prev[Dt] -4.370e-04  a_H +1.376e-03  a_RG +2.002e-04
+        a/a_RG: prev +7.511e+00 (verso cs BASSO)  prev[Dt] -2.182e+00 (verso cs ALTO)  H +6.869e+00 (verso cs BASSO);  D/v 0.5847 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 unico : lo spazio a k = 0 con omega(0) -0.464497 ha dimensione 2; quello del ramo 2 (valori singolari 1.084, 0.901)
+    s0 0.99 unico  eta 0.001 : d omega0/ds -3.4580  d lnDelta/ds +7.445e+00  d lnDt/ds -1.699 | a_prev +1.447e-04  a_prev[Dt] -3.302e-05  a_H +1.949e-04  a_RG +1.963e-05
+        a/a_RG: prev +7.370e+00 (verso cs BASSO)  prev[Dt] -1.682e+00 (verso cs ALTO)  H +9.928e+00 (verso cs BASSO);  D/v 0.5453 contro 1/W 0.1250 (Lx 128)
+    s0 0.99 unico  eta 0.01  : d omega0/ds -3.4573  d lnDelta/ds +7.442e+00  d lnDt/ds -1.702 | a_prev +1.446e-03  a_prev[Dt] -3.307e-04  a_H +1.949e-03  a_RG +1.963e-04
+        a/a_RG: prev +7.367e+00 (verso cs BASSO)  prev[Dt] -1.685e+00 (verso cs ALTO)  H +9.926e+00 (verso cs BASSO);  D/v 0.5453 contro 1/W 0.1250 (Lx 128)
+  la previsione e' in doc\referti_l2\forza_da_cs_previsione.jsonl: si COMMITTA prima della parte B
