@@ -84,6 +84,16 @@
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE:** ### **le tabelle di `delta`, `Vi`, `D`, `Q` e gli esponenti.** ### **A parte: la lettura in tre righe; una riga sulle tre strade della
   regola di scala** *(`s -> 0`, `s` fisso, `s -> 1`)*; ### **una riga su che cosa dice la parte `C` per «quale `2 pi k`».** ### **Informazione per Luca, non scelte.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*:
+- ### **`s 0.95` AGGIUNTO alla griglia della parte `A`**: ### **il controllo `(iii)` del mandato lo chiede, e la lista della parte `A` non lo aveva.** ### **Il fit su `s <= 0.3` non
+  cambia.**
+- ### **La prova a vuoto in memoria** *(lo strumento negli appunti, `eps` `0` e `0.5`, lato `64`, `S3`, `N 10`; il `jsonl` negli appunti)* ### **ha stampato dei numeri; li dichiaro e
+  NON correggo le previsioni:** ### **a `eps 0, k = 0` il `delta` continuo e' `~1e-14` a ogni `s`** *(come previsto: `H_eff` a `k = 0` non dipende da `s`)*; ### **a `k = pi/8` l'esponente
+  contro `log(s - 0.02)` e' `~1.7` e contro `log s` `~2.1`, NON `1`** ### **-- il che si leggerebbe col PALINDROMO: una composizione simmetrica cancella i termini dispari di BCH, e la
+  correzione e' `O(s^2)`, non `O(s)`.** ### **La previsione «`1`» resta scritta, e il controllo che puo' fallire fallira'.** ### **Il `(iii)` a `s 0.99` vale `~0.68`: fallira' anche lui.**
+- ### **Un difetto della prova a vuoto, non dello strumento:** ### **dagli appunti la `RADICE` dello strumento puntava fuori dal repo** *(il `jsonl` di `c4efc937` «non committato»)*:
+  ### **nel repo il percorso e' quello giusto.**
+
 ## 4. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
