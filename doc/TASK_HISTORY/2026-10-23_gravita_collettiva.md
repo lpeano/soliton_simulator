@@ -150,6 +150,48 @@ controllo DI SERVIZIO del risolutore FALLISCE con `dr = sigma/40`**: ### **`mu` 
 prima della corsa:** ### **il «deve passare» incontrera' `S4` a `x = 1`, dove `alpha = 0`** *(la fase non lineare si annulla: la sua pendenza logaritmica non esiste)*: ### **fallira' li',
 e il criterio resta.**
 
+### 📝 **ANNOTAZIONE 4** *(il mandato di Luca «correzione del criterio, errore del guardiano n.45», arrivato a TERZA CORSA GIA' FINITA, `d6c03598`)*: ### **la pendenza
+logaritmica `d ln omega/d ln s` NON e' ben posta** ### **dove `omega` passa per lo zero** *(lo zero di una frequenza non ha significato speciale)* ### **e dove `alpha = 0`**
+*(`S4` a `x = 1`)*. ### **IL CRITERIO GIUSTO DELLA RELATIVITA' GENERALE:** ### **la frequenza in TEMPO PROPRIO, `omega/s`, non dipende da `s`** *(`dtau_rif = 1`, `cs = s`)*.
+### **AGGIUNTE, SENZA TOGLIERE NIENTE** *(nello strumento di questo commit)*:
+- ### **`D = d(omega/s)/ds`** *(assoluta, sempre definita; centrata, all'indietro a `s = 1`)* ### **e `R = s D/(omega/s)` quando `|omega/s| > 1e-6`**, ### **ai due livelli.**
+  ### **Criterio di lettura: `D = 0`** *(entro `1e-9` al livello `1`, `1e-6` al livello `2`)* ### **e' la legge della relativita' generale.**
+- ### **le pendenze logaritmiche RESTANO nel referto**, ### **marcate NON LEGGIBILI dove `|omega| < 1e-6` o `|alpha| < 1e-12`.**
+- ### **IL DEVE-PASSARE DIVENTA:** ### **ramo basso di `eps 0`, `|D| < 1e-9`.** ### **IL DEVE-FALLIRE DIVENTA:** ### **«`D = 0`» sul ramo alto di `eps 0` senza non linearita'**
+  *(la sola `omega_ramo(0) = 2 pi (1 - s)`: `D = -2 pi/s^2`)*. ### **I due vecchi si stampano, SENZA verdetto.** ### **Il puo'-fallire del livello `2` resta com'era, e `D` gli sta
+  accanto.**
+- ### **LA PREVISIONE, sulla carta, prima della corsa nuova:** ### **al livello `1` `omega_tot/s = omega_ramo(0)/s + alpha`**, ### **e `alpha` non dipende da `s` a densita'
+  fissata: QUINDI `D_tot = D_ramo`, ESATTAMENTE.** ### **IL LEGAME E' LA LEGGE DELLA RELATIVITA' GENERALE AL BIT; la viola SOLO la parte lineare del ramo** ### **-- sul ramo
+  basso `D = 0`, sul ramo alto `-2 pi/s^2`** *(`-7.757` a `s 0.9`)*.
+
+## LA CONVENZIONE DELLO ZERO *(mandato n.45, punto `3`: si MOSTRA, NON si cambia -- e' una decisione di fisica di Luca)*
+
+- ### **COME SONO SCRITTI OGGI I PEZZI PARZIALI** *(cercati per nome, nel blob di oggi)*:
+  - ### **`CAMM-GROVER`** *(e `CAMM-GROVER-VUOTO`)*: ### **`flussi_parziali.grover`**, ### **`G(theta) = P_u + e^{i theta} (I - P_u) = exp(i theta (I - P_u))`** *(il docstring; e
+    l'intestazione del modulo: «`G = 2 P_u - I = exp(i pi (I - P_u))`»)*, ### **`theta = pi s_nodo frazione`** *(`z_nodo`)*;
+  - ### **`CAMM-SPOSTAMENTO`** *(e `CAMM-SPOSTAMENTO-VUOTO`)*: ### **`flussi_parziali.hop_psi` e `hop_phi`**, ### **`alpha I + beta S_U = I + (e^{i theta} - 1) P- = exp(i theta P-)`**,
+    ### **`P- = (I - S_U)/2`** *(`_alfa_beta`; l'intestazione: «`exp(i pi P-) = I - 2 P- = S_U`»)*, ### **`theta = pi s_arco frazione`** *(`z_arco`)*;
+  - ### **`CAMM-MONETA-SPIN`:** ### **`exp(-i eps dtau_nodo sigma.n)`** *(`motore._moneta_spin`, `_ruota_attorno_a_n`)*: ### **NON e' un pezzo parziale di quella forma** ### **-- il suo
+    generatore `sigma.n` ha traccia nulla, le fasi proprie sono `+-a`, gia' centrate**: ### **resta com'e' nelle due convenzioni.**
+- ### **L'ALTERNATIVA:** ### **ogni pezzo parziale `exp(-i theta P)`, col proiettore COMPLEMENTARE** *(`P_u` per il Grover, `P+ = (I + S_U)/2` per lo spostamento)*: ### **e' LO STESSO
+  pezzo per la fase globale `e^{-i theta}`** *(`exp(i theta (I - P)) = e^{i theta} exp(-i theta P)`)*.
+- ### **SULLA CARTA, a `cs` uniforme:** ### **sulla materia, in un tick, i due mezzi Grover tolgono `e^{i pi s}` e i due mezzi spostamenti `e^{i pi s}`**: ### **`lambda_alt = e^{-2 pi i s}
+  lambda`**, ### **cioe' `omega_alt(0) = omega(0) + 2 pi s` (mod `2 pi`)** *(con `omega = -angle(lambda)`)*, ### **per OGNI ramo e ogni `k`** *(`Dt` e `v` non cambiano)*.
+- ### ⭐ **E COSA FA A `D`:** ### **se la fase si segue CON CONTINUITA'** *(`omega + 2 pi s`)*, ### **`omega_alt/s = omega/s + 2 pi`: `D_alt = D`, LA CONVENZIONE NON PESA.** ### **Se invece
+  la fase si riporta in `(-pi, pi]`** *(come fa oggi `omega_ramo(0)`)*, ### **l'intero aggiunto `2 pi k` vale `2 pi k/s` in tempo proprio** ### **e `D` cambia di `-2 pi k/s^2`.**
+  ### **La previsione per i due rami di `eps 0`:**
+
+| ramo | `omega(0)` oggi | `D` oggi | `omega(0)` alternativa in `(-pi, pi]` | `D` alternativa avvolta | `D` alternativa continua |
+|---|---|---|---|---|---|
+| BASSO | `0` | **`0`** | `2 pi s - 2 pi = -2 pi (1 - s)` | `+2 pi/s^2` | **`0`** |
+| ALTO | `2 pi (1 - s)` | `-2 pi/s^2` | `2 pi = 0` | **`0`** | `-2 pi/s^2` |
+
+  ### ⚠ **QUINDI: CON LE FASI RIPORTATE IN `(-pi, pi]` LA CONVENZIONE DECIDE QUALE RAMO E' «COME LA RELATIVITA' GENERALE»** *(oggi il BASSO, nell'alternativa l'ALTO)*; ### **con le
+  fasi seguite con continuita' non decide niente.** ### **La domanda di fisica per Luca e' quale `2 pi k` e' la frequenza a riposo di un oggetto** *(quale intero ha l'orologio)*.
+- ### **LA VERIFICA, con gli spettri** *(nello strumento, in memoria)*: ### **`flussi_parziali.grover`, `hop_psi`, `hop_phi` avvolte per `e^{-i theta}`** *(stessi `z_nodo` e `z_arco`)*,
+  ### **gli spettri rifatti**, ### **`omega_alt(0) = omega(0) + 2 pi s` entro `1e-12`** *(DI SERVIZIO)* ### **e `Dt` uguale entro il rumore del fit** *(`1e-6`)*; ### **per ogni ramo: `D`
+  oggi, `D` alternativa avvolta, `D` alternativa continua.**
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;

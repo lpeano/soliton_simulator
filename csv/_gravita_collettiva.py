@@ -11,6 +11,7 @@ centro, la pendenza**; ### **il controllo a `c` costante.**
 
 Gira con:  python csv/_gravita_collettiva.py > doc/referti_l2/gravita_collettiva.txt
 """
+import contextlib
 import io
 import json
 import os
@@ -37,6 +38,8 @@ TOLL_DISTINTI = 1e-6
 TOLL_STAZ = 1e-12
 TOLL_UNO = 1e-9
 TOLL_UNO_2 = 1e-6
+TOLL_ZERO_W = 1e-6             # n.45: sotto, la pendenza logaritmica e R NON si leggono
+TOLL_ALPHA_ZERO = 1e-12        # n.45: alpha = 0 (S4 a x = 1)
 EPS_REL = 1e-7
 SOGLIA_STABILE = 1e-3 * 0.4018  # _lineare_s1_s4: 1e-3 del massimo di riferimento R2 (decisione delle 18:09)
 S_CONTROLLO = 0.9              # c del ramo basso a eps 0, s 0.9: il controllo che puo' fallire
@@ -183,6 +186,18 @@ def pendenza(fm, f0, fp, sm, s0, sp):
     return float((np.log(abs(b)) - np.log(abs(a))) / (np.log(tb) - np.log(ta)))
 
 
+def dproprio(fm, f0, fp, sm, s0, sp):
+    """### `D = d(omega/s)/ds` *(mandato n.45)*: ### **la frequenza in TEMPO PROPRIO**, assoluta e sempre definita; centrata, o all'indietro a `s = 1`."""
+    if fp is None:
+        return float((f0 / s0 - fm / sm) / (s0 - sm))
+    return float((fp / sp - fm / sm) / (sp - sm))
+
+
+def erre(D, f0, s0):
+    """### `R = s D / (omega/s)` quando `|omega/s| > TOLL_ZERO_W`, altrimenti `None`."""
+    return None if abs(f0 / s0) <= TOLL_ZERO_W else float(s0 * D / (f0 / s0))
+
+
 def livello_1():
     import _forza_da_cs as F
     import _screening_forme_s3 as SF
@@ -216,7 +231,8 @@ def livello_1():
                 # ---- il caso che deve fallire: la sola omega_ramo(0), rho0 = 0
                 if eps == 0.0 and abs(g["omega0"]) > 1e-9 and sp is not None:
                     p_lin = pendenza(gm["omega0"], g["omega0"], gp["omega0"], sm, s, sp)
-                    mf.append({"s": s, "ramo": g["nome"], "pendenza": p_lin})
+                    D_lin = dproprio(gm["omega0"], g["omega0"], gp["omega0"], sm, s, sp)
+                    mf.append({"s": s, "ramo": g["nome"], "pendenza": p_lin, "D": D_lin})
                 for forma in FORME:
                     for x in X_DI[forma]:
                         for L in LATI:
@@ -238,24 +254,102 @@ def livello_1():
                                 w_p = nl_p = None
                             p_tot = pendenza(w_m, w_tot, w_p, sm, s, sp)
                             p_nl = pendenza(nl_m, nl, nl_p, sm, s, sp)
+                            D_tot = dproprio(w_m, w_tot, w_p, sm, s, sp)
+                            R_tot = erre(D_tot, w_tot, s)
+                            leg_tot = all(abs(w) >= TOLL_ZERO_W for w in (w_m, w_tot, w_p) if w is not None)
+                            leg_nl = abs(al) >= TOLL_ALPHA_ZERO and all(abs(w) >= TOLL_ZERO_W for w in (nl_m, nl, nl_p) if w is not None)
                             stb = stabilita(forma, L, s, sc0, r0["omega_m"], r0["omega_v"])
                             rec = {"tipo": "livello1", "forma": forma, "eps": eps, "s": s, "x": x, "lato": L, "ramo": g["nome"],
                                    "omega_ramo0": g["omega0"], "Dt": g["Dt"], "segno_curv": g["segno"], "copie": g["copie"],
                                    "rho0": r0["rho0"], "Lambda0": r0["Lambda0"],
                                    "alpha": al, "omega_tot": w_tot, "omega_misurata": r0["omega_m"], "omega_vuoto": r0["omega_v"],
                                    "staz_materia": r0["staz_m"], "staz_vuoto": r0["staz_v"], "scomposizione": scomp,
-                                   "x_scarto": r0["x_scarto"], "pendenza_tot": p_tot, "pendenza_nl": p_nl, **stb}
+                                   "x_scarto": r0["x_scarto"], "pendenza_tot": p_tot, "pendenza_nl": p_nl,
+                                   "pendenza_tot_leggibile": leg_tot, "pendenza_nl_leggibile": leg_nl, "D": D_tot, "R": R_tot, **stb}
                             righe1.append(rec)
                             scrivi(rec)
                             if eps == 0.0 and abs(g["omega0"]) <= 1e-9 and sp is not None:
                                 dp.append(rec)
                             print("  %-2s eps %-3g s %-4g x %-6g lato %d %-24s: w_tot %+.6f (w_ramo %+.6f + alpha s %+.6f) | staz %.1e/%.1e scomp %.1e |"
-                                  " d ln w/d ln s %s (nl %s) | gamma %.2e %s"
+                                  " D %+.3e R %s | d ln w/d ln s %s%s (nl %s%s) | gamma %.2e %s"
                                   % (forma, eps, s, x, L, g["nome"], w_tot, g["omega0"], nl, r0["staz_m"], r0["staz_v"], abs(scomp),
-                                     "--" if p_tot is None else "%+.6f" % p_tot, "--" if p_nl is None else "%+.9f" % p_nl,
+                                     D_tot, "--" if R_tot is None else "%+.6f" % R_tot,
+                                     "--" if p_tot is None else "%+.6f" % p_tot, "" if leg_tot else " NON LEGGIBILE",
+                                     "--" if p_nl is None else "%+.9f" % p_nl, "" if leg_nl else " NON LEGGIBILE",
                                      stb["gamma"], "STABILE" if stb["stabile"] else "instabile"))
                             sys.stdout.flush()
     return righe1, mf, dp
+
+
+# =====================================================================================
+#   LA CONVENZIONE DELLO ZERO (n.45, punto 3) -- NON si cambia: si mostra quanto pesa
+# =====================================================================================
+@contextlib.contextmanager
+def convenzione_alternativa():
+    """### **Ogni pezzo PARZIALE scritto `exp(-i theta P)` invece di `exp(i theta (I - P))`**: ### **lo stesso pezzo per `e^{-i theta}`**, ### **in memoria**
+    *(`flussi_parziali.grover`, `hop_psi`, `hop_phi` avvolte; la moneta non e' un pezzo parziale e resta)*."""
+    import flussi_parziali as FP
+    g0, hp0, hf0 = FP.grover, FP.hop_psi, FP.hop_phi
+
+    def grover(mot, vista, frazione):
+        out = g0(mot, vista, frazione)
+        z = FP.z_nodo(mot, frazione)
+        vista *= np.conj(z[mot.inc.nodo])
+        return out
+
+    def hop(f0):
+        def h(mot, x, frazione):
+            out = f0(mot, x, frazione)
+            zz = np.repeat(np.conj(FP.z_arco(mot, frazione)), 2, axis=0)
+            x *= zz if x.ndim == 2 else zz[:, 0]
+            return out
+        return h
+    FP.grover, FP.hop_psi, FP.hop_phi = grover, hop(hp0), hop(hf0)
+    try:
+        yield
+    finally:
+        FP.grover, FP.hop_psi, FP.hop_phi = g0, hp0, hf0
+
+
+def convenzione_dello_zero():
+    import _forza_da_cs as F
+    print("### LA CONVENZIONE DELLO ZERO (n.45): ogni pezzo parziale exp(-i theta P) -- SULLA CARTA omega_alt(0) = omega(0) + 2 pi s (mod 2 pi); NON si cambia")
+    alt = {}
+
+    def A(s, eps):
+        if (s, eps) not in alt:
+            with convenzione_alternativa():
+                alt[(s, eps)] = F.rami(s, eps)[0]
+        return alt[(s, eps)]
+    peg_w, peg_d = 0.0, 0.0
+    for eps in EPS_LISTA:
+        for s in S_LISTA:
+            sm = s * (1.0 - H)
+            sp = None if s >= 1.0 else s * (1.0 + H)
+            for g in gruppi(spettro(s, eps)[0]):
+                if (eps, s, g["nome"]) in NON_DEFINITI:
+                    continue
+                gm = ramo_a(sm, eps, g)[0]
+                gp = ramo_a(sp, eps, g)[0] if sp is not None else None
+                w = {}
+                for q, ss in ((g, s), (gm, sm), (gp, sp)):
+                    if q is None:
+                        continue
+                    prev = dict(q, omega0=F.avvolgi(q["omega0"] + 2.0 * np.pi * ss))
+                    a = F.segui(A(ss, eps), prev)
+                    peg_w = max(peg_w, abs(F.avvolgi(a["omega0"] - prev["omega0"])))
+                    peg_d = max(peg_d, abs(a["Dt"] - q["Dt"]) / q["Dt"])
+                    w[ss] = (q["omega0"], a["omega0"], q["omega0"] + 2.0 * np.pi * ss)
+
+                def f(i):
+                    return dproprio(w[sm][i], w[s][i], w[sp][i] if sp is not None else None, sm, s, sp)
+                rec = {"tipo": "convenzione", "eps": eps, "s": s, "ramo": g["nome"], "omega0_oggi": w[s][0], "omega0_alt": w[s][1],
+                       "D_oggi": f(0), "D_alt_avvolta": f(1), "D_alt_continua": f(2)}
+                scrivi(rec)
+                print("  eps %-3g s %-4g %-24s: omega(0) oggi %+.6f, alternativa %+.6f | D oggi %+.6e, alternativa (in (-pi, pi]) %+.6e, alternativa continua %+.6e"
+                      % (eps, s, g["nome"], w[s][0], w[s][1], f(0), f(1), f(2)))
+    esito("DI SERVIZIO: l'alternativa ha omega(0) = omega(0) di oggi + 2 pi s, entro 1e-12", peg_w < 1e-12, "il peggiore %.2e" % peg_w)
+    esito("DI SERVIZIO: l'alternativa ha lo stesso Dt del fit, entro TOLL_DISTINTI (il fit e' rumoroso)", peg_d < TOLL_DISTINTI, "il peggiore %.2e" % peg_d)
 
 
 # =====================================================================================
@@ -368,13 +462,17 @@ def livello_2(lam0):
                         wp = gp["omega0"] + rp_["mu"] if rp_ is not None else None
                         ok = all(q is None or (q["stato"] == "CONVERGE" and q["esiste"] == "LEGATO") for q in (r0, rm_, rp_))
                         p = pendenza(wm, w0, wp, sm, s, sp) if ok else None
+                        D = dproprio(wm, w0, wp, sm, s, sp) if ok else None
+                        R = erre(D, w0, s) if D is not None else None
+                        leg = ok and all(abs(w) >= TOLL_ZERO_W for w in (wm, w0, wp) if w is not None)
                         rec = {"tipo": "livello2", "forma": forma, "eps": eps, "s": s, "N": N, "ramo": g["nome"], "c": c_di(g),
-                               "omega_ramo0": g["omega0"], "omega_sol": w0, "pendenza": p, **r0}
+                               "omega_ramo0": g["omega0"], "omega_sol": w0, "pendenza": p, "pendenza_leggibile": leg, "D": D, "R": R, **r0}
                         righe2.append(rec)
                         scrivi(rec)
-                        print("  %-2s eps %-3g s %-4g N %-5g %-24s: c %+.4f | %s %s | mu %+.6f w_sol %+.6f larghezza %.3f x_centro %.3g%s | d ln w/d ln s %s"
+                        print("  %-2s eps %-3g s %-4g N %-5g %-24s: c %+.4f | %s %s | mu %+.6f w_sol %+.6f larghezza %.3f x_centro %.3g%s | D %s R %s | d ln w/d ln s %s%s"
                               % (forma, eps, s, N, g["nome"], c_di(g), r0["esiste"], r0["stato"], r0["mu"], w0, r0["larghezza"], r0["x_centro"],
-                                 "" if r0["inviluppo_lento"] else " (L'INVILUPPO LENTO NON VALE)", "--" if p is None else "%+.6f" % p))
+                                 "" if r0["inviluppo_lento"] else " (L'INVILUPPO LENTO NON VALE)", "--" if D is None else "%+.3e" % D,
+                                 "--" if R is None else "%+.6f" % R, "--" if p is None else "%+.6f" % p, "" if leg or p is None else " NON LEGGIBILE"))
                         sys.stdout.flush()
     # ---- il controllo che puo' fallire: c costante, omega0 = 0
     l9 = spettro(S_CONTROLLO, 0.0)[0]
@@ -391,10 +489,11 @@ def livello_2(lam0):
                 qp = solitone(forma, cfix, sp, N, lam0) if sp is not None else None
                 ok = all(q is None or (q["stato"] == "CONVERGE" and q["esiste"] == "LEGATO") for q in (q0, qm, qp))
                 p = pendenza(qm["mu"], q0["mu"], qp["mu"] if qp else None, sm, s, sp) if ok else None
-                ctr.append({"forma": forma, "N": N, "s": s, "pendenza": p, "esiste": q0["esiste"], "mu": q0["mu"]})
-                scrivi({"tipo": "controllo_c_costante", "forma": forma, "N": N, "s": s, "pendenza": p, **q0})
-                print("  %-2s N %-5g s %-4g: %s mu %+.6f larghezza %.3f | d ln mu/d ln s %s" % (
-                    forma, N, s, q0["esiste"], q0["mu"], q0["larghezza"], "--" if p is None else "%+.6f" % p))
+                D = dproprio(qm["mu"], q0["mu"], qp["mu"] if qp else None, sm, s, sp) if ok else None
+                ctr.append({"forma": forma, "N": N, "s": s, "pendenza": p, "D": D, "esiste": q0["esiste"], "mu": q0["mu"]})
+                scrivi({"tipo": "controllo_c_costante", "forma": forma, "N": N, "s": s, "pendenza": p, "D": D, **q0})
+                print("  %-2s N %-5g s %-4g: %s mu %+.6f larghezza %.3f | d ln mu/d ln s %s | D %s" % (
+                    forma, N, s, q0["esiste"], q0["mu"], q0["larghezza"], "--" if p is None else "%+.6f" % p, "--" if D is None else "%+.3e" % D))
     return righe2, ctr
 
 
@@ -412,9 +511,9 @@ def main(argv):
     print("  il passo: %d pezzi, impronta %s (intatto); dtau 1, cs = s per nodo in memoria, lambda_c None; i blob nel repo: %s"
           % (len(CM.ORDINE), CM.IMPRONTA, "; ".join("%s %s" % (k, v["sha1-BYTE"]) for k, v in blobs.items())))
     print("  la configurazione: FORME %s; X %s; S %s; EPS %s; LATI %s; N %s; H %g; TOLL_DISTINTI %g; TOLL_STAZ %g; TOLL_UNO %g; TOLL_UNO_2 %g;"
-          " EPS_REL %g; SOGLIA_STABILE %g; S_CONTROLLO %g; R_SIGMA %g; DR_SIGMA %g; MAX_IT %d"
+          " EPS_REL %g; SOGLIA_STABILE %g; S_CONTROLLO %g; R_SIGMA %g; DR_SIGMA %g; MAX_IT %d; TOLL_ZERO_W %g; TOLL_ALPHA_ZERO %g"
           % (FORME, X_DI, S_LISTA, EPS_LISTA, LATI, N_LISTA, H, TOLL_DISTINTI, TOLL_STAZ, TOLL_UNO, TOLL_UNO_2, EPS_REL, SOGLIA_STABILE,
-             S_CONTROLLO, R_SIGMA, DR_SIGMA, MAX_IT))
+             S_CONTROLLO, R_SIGMA, DR_SIGMA, MAX_IT, TOLL_ZERO_W, TOLL_ALPHA_ZERO))
     print("-" * 100)
     sys.stdout.flush()
     io.open(JSONL, "w", encoding="utf-8").close()
@@ -430,13 +529,20 @@ def main(argv):
     esito("DI SERVIZIO: la scomposizione omega_tot = omega_ramo(0) + alpha s entro %g" % TOLL_STAZ, peg < TOLL_STAZ, "il peggiore %.2e" % peg)
     peg = max(r["x_scarto"] for r in righe1)
     esito("DI SERVIZIO: rho0/Lambda0 = x entro %g" % TOLL_STAZ, peg < TOLL_STAZ, "il peggiore %.2e" % peg)
+    # ### n.45: il criterio VECCHIO (la pendenza logaritmica) si riporta, SENZA verdetto
     peg = max((abs(r["pendenza_nl"] - 1.0) for r in dp if r["pendenza_nl"] is not None), default=float("inf"))
-    esito("DEVE PASSARE: eps 0 ramo basso, la pendenza della sola parte non lineare = 1 entro %g, su %d stati" % (TOLL_UNO, len(dp)),
-          len(dp) > 0 and all(r["pendenza_nl"] is not None for r in dp) and peg < TOLL_UNO, "il peggiore |p - 1| %.2e" % peg)
-    finite = all(m["pendenza"] is not None and np.isfinite(m["pendenza"]) for m in mf)
-    tengono = [m for m in mf if m["pendenza"] is not None and abs(m["pendenza"] - 1.0) < TOLL_UNO]
-    esito("DEVE FALLIRE: <<pendenza = 1>> sul ramo alto di eps 0 a rho0 = 0 (e per la chiave giusta: pendenze finite), su %d punti" % len(mf),
-          finite and len(mf) > 0 and not tengono, "; ".join("s %g: %+.4f" % (m["s"], m["pendenza"]) for m in mf if m["pendenza"] is not None))
+    print("  (il criterio VECCHIO, n.45 non ben posto, senza verdetto) ramo basso: il peggiore |pendenza nl - 1| %.2e; sulle righe leggibili %.2e"
+          % (peg, max((abs(r["pendenza_nl"] - 1.0) for r in dp if r["pendenza_nl"] is not None and r["pendenza_nl_leggibile"]), default=float("nan"))))
+    print("  (il criterio VECCHIO, senza verdetto) ramo alto a rho0 = 0: pendenze %s" % "; ".join(
+        "s %g %+.4f" % (m["s"], m["pendenza"]) for m in mf if m["pendenza"] is not None))
+    peg = max((abs(r["D"]) for r in dp), default=float("inf"))
+    esito("DEVE PASSARE (n.45): eps 0 ramo basso, D = d(omega/s)/ds = 0 entro %g, su %d stati" % (TOLL_UNO, len(dp)),
+          len(dp) > 0 and peg < TOLL_UNO, "il peggiore |D| %.2e" % peg)
+    finite = all(np.isfinite(m["D"]) for m in mf)
+    tengono = [m for m in mf if abs(m["D"]) < TOLL_UNO]
+    esito("DEVE FALLIRE (n.45): <<D = 0>> sul ramo alto di eps 0 a rho0 = 0 (e per la chiave giusta: D finita), su %d punti" % len(mf),
+          finite and len(mf) > 0 and not tengono, "; ".join("s %g: D %+.4f (-2pi/s^2 %+.4f)" % (m["s"], m["D"], -2.0 * np.pi / m["s"] ** 2) for m in mf))
+    convenzione_dello_zero()
     print("### LO STATO PIU' BASSO A OGNI (forma, eps, s, x), lato %d" % LATI[0])
     for forma in FORME:
         for eps in EPS_LISTA:
