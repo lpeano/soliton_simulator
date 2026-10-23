@@ -8,6 +8,7 @@ linearita' in `lambda`, `lambda*`.** ### **PARTE B:** ### **la forza a `s0` picc
 il loro segno, `E0 M/v_p^2`, e dove sta il salto fra due bande.**
 
 Gira con:  python csv/_segno_gravita.py > doc/referti_l2/segno_gravita.txt
+           python csv/_segno_gravita.py prova_eps05 > doc/referti_l2/segno_gravita_correzione.txt   (la prova della correzione del ramo)
 """
 import contextlib
 import io
@@ -157,10 +158,9 @@ def parte_B():
     print("### PARTE B -- IL LIMITE A s PICCOLO (zero simmetrico; s0 %s; eta %s; Lx %s; W = Lx/16, T <= Lx/4, finestra |<x> - x0| < Lx/32)" % (S0_B, ETA_B, LX_B))
     corse, prev = {}, {}
     for eps in EPS:
-        c0 = F.catena_principale(eps)
         for s0 in S0_LIM:
-            lista0, BB0, _ = F.rami(s0, eps)
-            for rg in F.righe_del_ramo(lista0, F.bersaglio(c0, s0)):
+            rr, lista0, BB0 = righe_ramo(eps)[s0]
+            for rg in rr:
                 nr = ZS.nome_curv(rg)
                 sg = "+" if rg["segno"] > 0 else "-"
                 for eta in ETA_H:
@@ -239,6 +239,65 @@ def parte_D():
     return scelte
 
 
+_RIGHE = {}
+
+
+def righe_ramo(eps):
+    """### Le righe della catena principale a ogni `s0` di `S0_LIM`: ### **`{s0: (righe, lista, BB)}`.**
+
+    ### ⛔ **LA CORREZIONE** *(`e31366ec`, COSA RICONTROLLARE `2`)*: ### **sotto il punto piu' basso della catena** *(`min` della `catena 0`, `s 0.5`)* ### **`bersaglio()` prende il
+    `Dt` della catena a `s 0.5`, e a `eps 0.5, s0 0.1` sceglieva un ramo a curvatura `+`** *(`Dt 0.2233`, dove il pacchetto derivava anche a `eta = 0`)*. ### **Ora sotto quel punto ogni
+    riga si SEGUE SCENDENDO lungo `S0_LIM`: lo stesso segno della curvatura, il `Dt` piu' vicino a quello del punto sopra** *(una regola di continuita', non un numero)*."""
+    if eps in _RIGHE:
+        return _RIGHE[eps]
+    import _forza_da_cs as F
+    import _gravita_collettiva as GC
+    c0 = F.catena_principale(eps)
+    out, prec = {}, None
+    for s0 in sorted(S0_LIM, reverse=True):
+        lista0, BB0, _ = F.rami(s0, eps)
+        if s0 >= min(c0) or prec is None:
+            rr = F.righe_del_ramo(lista0, F.bersaglio(c0, s0))
+        else:
+            gg = GC.gruppi(lista0)
+            rr = []
+            for q in prec:
+                cand = [g for g in gg if g["segno"] == q["segno"]]
+                g = min(cand, key=lambda g: abs(g["Dt"] - q["Dt"]) / q["Dt"])
+                rr.append(dict(g, nome=q["nome"]))
+        out[s0] = (rr, lista0, BB0)
+        prec = rr
+    _RIGHE[eps] = out
+    return out
+
+
+def prova_eps05():
+    """### **La prova della correzione:** ### **a `eps 0.5, s0 0.1`, il ramo di prima e quello di ora**, ### **e `eta = 0` col ramo di ora** *(zero simmetrico, `Lx 256` e `512`)*."""
+    import _forza_da_cs as F
+    import _zero_simmetrico as ZS
+    c0 = F.catena_principale(0.5)
+    lista, BB, _ = F.rami(0.1, 0.5)
+    vecchio = F.righe_del_ramo(lista, F.bersaglio(c0, 0.1))
+    nuovo = righe_ramo(0.5)[0.1][0]
+    print("### LA CORREZIONE DEL RAMO DI eps 0.5 A s0 0.1")
+    print("  prima (bersaglio dalla catena a s 0.5): %s" % "; ".join(ZS.nome_curv(r) for r in vecchio))
+    print("  ora (seguito scendendo da s0 0.2, stesso segno, Dt piu' vicino): %s" % "; ".join(ZS.nome_curv(r) for r in nuovo))
+    sopra = righe_ramo(0.5)[0.2][0]
+    print("  il punto sopra, s0 0.2: %s" % "; ".join(ZS.nome_curv(r) for r in sopra))
+    ok = True
+    for rg in nuovo:
+        Q = F.spazio_del_ramo(BB, rg)[0]
+        for Lx in LX_B:
+            with ZS.convenzione_simmetrica():
+                r = F.corsa(Lx, 0.5, 0.1, 0.0, Q)
+            n = r["a"] is not None and F.nullo(r)
+            ok = ok and n
+            print("  eta 0, %s, Lx %d: a %s sigma %s -> %s" % (ZS.nome_curv(rg), Lx, f_(r["a"], "%+.2e"), f_(r["sigma_a"], "%.1e"), "sotto il rumore" if n else "### NON sotto il rumore"))
+    esito("DEVE PASSARE: eps 0.5, s0 0.1, il ramo corretto, eta 0 sotto il rumore del fit (Lx %s)" % (LX_B,), ok)
+    esito("la correzione cambia il ramo: prima curvatura +, ora curvatura -", all(r["segno"] > 0 for r in vecchio) and all(r["segno"] < 0 for r in nuovo),
+          "prima %s, ora %s" % ([r["segno"] for r in vecchio], [r["segno"] for r in nuovo]))
+
+
 _V = {}
 
 
@@ -247,7 +306,6 @@ def r_v(eps, s0, sg):
 
 
 def main(argv):
-    del argv
     import _forza_da_cs as F
     import _gravita_collettiva as GC
     import _presidio
@@ -256,6 +314,12 @@ def main(argv):
     import _zero_simmetrico as ZS
     import composizione as CM
     _presidio.avvia(__file__)
+    if len(argv) > 1 and argv[1] == "prova_eps05":
+        warnings.simplefilter("ignore")
+        print("IL SEGNO DELLA GRAVITA' -- LA PROVA DELLA CORREZIONE DEL RAMO (eps 0.5, s0 0.1); la configurazione: S0_LIM %s; LX_B %s" % (S0_LIM, LX_B))
+        prova_eps05()
+        print("LA PROVA: %d su %d" % (OK[0], OK[1]))
+        return 0
     print("=" * 100)
     print("IL SEGNO DELLA GRAVITA' DEI RAMI: il limite a s piccolo, l'unicita' dello zero universale, energia contro inerzia")
     print("=" * 100)
@@ -301,9 +365,8 @@ def main(argv):
     esito("PUO' FALLIRE: |lambda* - 1/2| < 1e-6 a ogni s0 (e eta)", len(stelle) > 0 and dl < 1e-6, "il peggiore %.2e" % dl)
     # ---------------------------------------------------------------- B
     for eps in EPS:
-        c0 = F.catena_principale(eps)
         for s0 in S0_LIM:
-            for rg in F.righe_del_ramo(F.rami(s0, eps)[0], F.bersaglio(c0, s0)):
+            for rg in righe_ramo(eps)[s0][0]:
                 _V[(eps, s0, "+" if rg["segno"] > 0 else "-")] = rg["v"]
     corse, righe, prev = parte_B()
     zero = [r for k, r in corse.items() if k[1] == 0.1 and k[4] == 0.0]
