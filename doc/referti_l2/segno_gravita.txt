@@ -1,0 +1,159 @@
+[TIMBRO] _segno_gravita.py  sha1-BYTE 2a763b39  committato e pulito
+====================================================================================================
+IL SEGNO DELLA GRAVITA' DEI RAMI: il limite a s piccolo, l'unicita' dello zero universale, energia contro inerzia
+====================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); le letture lambda SOLO in memoria; i blob nel repo: soliton_simulator.py b8c21049; csv/_massa_vicino_al_cono.py 5842f83a; csv/_universalita_massa.py 94ebb415; csv/_forza_da_cs.py e8789ea9; csv/_stabilita_lineare.py 08c374ef; csv/_gravita_collettiva.py 9c34fb6a; csv/_scala_e_zero.py 0629c68e; csv/_zero_simmetrico.py b400d76e; csv/_segno_gravita.py 2a763b39; doc/referti_l2/zero_simmetrico.jsonl 175c1376
+  la configurazione: LAMBDA (0.0, 0.25, 0.5, 0.75, 1.0); S0_A (0.3, 0.5, 0.9); EPS (0.0, 0.5); ETA_H (0.001, 0.01); S0_B (0.05, 0.1, 0.2); ETA_B (0.0, 0.0005, 0.001, 0.005, 0.01); LX_B (256, 512); S0_LIM (0.05, 0.1, 0.2, 0.3, 0.4, 0.5); S_C (0.05, 0.1, 0.2, 0.3, 0.5, 0.9); TOLL_LIN 0.05; TOLL_6E 1e-09; TOLL_UGUALI 1e-06
+----------------------------------------------------------------------------------------------------
+### PARTE A -- L'UNICITA' DELLO ZERO UNIVERSALE: a_H/a_RG per ogni ramo massivo, lambda (0.0, 0.25, 0.5, 0.75, 1.0), s0 (0.3, 0.5, 0.9), eps (0.0, 0.5), eta (0.001, 0.01)
+  eps 0   s0 0.3  curv + Dt 0.4807   eta 0.001: a_H/a_RG 0:-3.9212 0.25:-2.9409 0.5:-1.9606 0.75:-0.9803 1:+0.0000 | retta +3.92116 lambda -3.92116 | residuo 1.4e-13
+  eps 0   s0 0.3  curv + Dt 0.4807   eta 0.01 : a_H/a_RG 0:-3.9212 0.25:-2.9409 0.5:-1.9606 0.75:-0.9803 1:+0.0000 | retta +3.92116 lambda -3.92116 | residuo 1.6e-14
+  eps 0   s0 0.3  curv - Dt 0.4807   eta 0.001: a_H/a_RG 0:-0.0000 0.25:-0.9803 0.5:-1.9606 0.75:-2.9409 1:-3.9212 | retta -3.92116 lambda -0.00000 | residuo 9.4e-14
+  eps 0   s0 0.3  curv - Dt 0.4807   eta 0.01 : a_H/a_RG 0:-0.0000 0.25:-0.9803 0.5:-1.9606 0.75:-2.9409 1:-3.9212 | retta -3.92116 lambda -0.00000 | residuo 1.2e-14
+  eps 0   s0 0.5  curv + Dt 0.6858   eta 0.001: a_H/a_RG 0:-4.5810 0.25:-3.4358 0.5:-2.2905 0.75:-1.1453 1:+0.0000 | retta +4.58105 lambda -4.58105 | residuo 9.2e-14
+  eps 0   s0 0.5  curv + Dt 0.6858   eta 0.01 : a_H/a_RG 0:-4.5810 0.25:-3.4358 0.5:-2.2905 0.75:-1.1453 1:+0.0000 | retta +4.58105 lambda -4.58105 | residuo 1.2e-14
+  eps 0   s0 0.5  curv - Dt 0.6858   eta 0.001: a_H/a_RG 0:-0.0000 0.25:-1.1453 0.5:-2.2905 0.75:-3.4358 1:-4.5810 | retta -4.58105 lambda -0.00000 | residuo 9.2e-14
+  eps 0   s0 0.5  curv - Dt 0.6858   eta 0.01 : a_H/a_RG 0:-0.0000 0.25:-1.1453 0.5:-2.2905 0.75:-3.4358 1:-4.5810 | retta -4.58105 lambda -0.00000 | residuo 9.5e-15
+  eps 0   s0 0.9  curv - Dt 0.2836   eta 0.001: a_H/a_RG 0:-0.0000 0.25:-4.9845 0.5:-9.9690 0.75:-14.9535 1:-19.9380 | retta -19.93797 lambda -0.00000 | residuo 8.2e-14
+  eps 0   s0 0.9  curv - Dt 0.2836   eta 0.01 : a_H/a_RG 0:-0.0000 0.25:-4.9845 0.5:-9.9690 0.75:-14.9535 1:-19.9380 | retta -19.93797 lambda +0.00000 | residuo 3.7e-15
+  eps 0   s0 0.9  curv + Dt 0.2836   eta 0.001: a_H/a_RG 0:-19.9380 0.25:-14.9535 0.5:-9.9690 0.75:-4.9845 1:+0.0000 | retta +19.93797 lambda -19.93797 | residuo 6.3e-14
+  eps 0   s0 0.9  curv + Dt 0.2836   eta 0.01 : a_H/a_RG 0:-19.9380 0.25:-14.9535 0.5:-9.9690 0.75:-4.9845 1:+0.0000 | retta +19.93797 lambda -19.93797 | residuo 1.4e-14
+  eps 0.5 s0 0.3  curv - Dt 0.4684   eta 0.001: a_H/a_RG 0:-0.0003 0.25:-1.0065 0.5:-2.0127 0.75:-3.0188 1:-4.0250 | retta -4.02461 lambda -0.00035 | residuo 2.2e-16
+  eps 0.5 s0 0.3  curv - Dt 0.4684   eta 0.01 : a_H/a_RG 0:-0.0003 0.25:-1.0065 0.5:-2.0127 0.75:-3.0188 1:-4.0250 | retta -4.02461 lambda -0.00035 | residuo 8.3e-15
+  eps 0.5 s0 0.5  curv - Dt 0.6718   eta 0.001: a_H/a_RG 0:+0.0727 0.25:-1.0963 0.5:-2.2654 0.75:-3.4344 1:-4.6034 | retta -4.67609 lambda +0.07268 | residuo 1.0e-13
+  eps 0.5 s0 0.5  curv - Dt 0.6718   eta 0.01 : a_H/a_RG 0:+0.0727 0.25:-1.0963 0.5:-2.2653 0.75:-3.4344 1:-4.6034 | retta -4.67609 lambda +0.07270 | residuo 1.6e-14
+  eps 0.5 s0 0.9  curv - Dt 0.4253   eta 0.001: a_H/a_RG 0:+3.9128 0.25:+0.5891 0.5:-2.7345 0.75:-6.0582 1:-9.3818 | retta -13.29464 lambda +3.91280 | residuo 5.6e-14
+  eps 0.5 s0 0.9  curv - Dt 0.4253   eta 0.01 : a_H/a_RG 0:+3.9156 0.25:+0.5919 0.5:-2.7317 0.75:-6.0554 1:-9.3790 | retta -13.29464 lambda +3.91561 | residuo 6.5e-15
+  eps 0.5 s0 0.9  curv + Dt 0.0132   eta 0.001: a_H/a_RG 0:-420.6702 0.25:-313.3617 0.5:-206.0532 0.75:-98.7447 1:+8.5638 | retta +429.23394 lambda -420.67017 | residuo 8.8e-14
+  eps 0.5 s0 0.9  curv + Dt 0.0132   eta 0.01 : a_H/a_RG 0:-420.6689 0.25:-313.3604 0.5:-206.0519 0.75:-98.7434 1:+8.5651 | retta +429.23394 lambda -420.66887 | residuo 5.4e-15
+### lambda*: dove i due rami di eps 0 coincidono, e eps 0.5 a quel lambda
+  s0 0.3  eta 0.001: lambda* 0.500000026 (|lambda* - 1/2| 2.64e-08), a_H/a_RG di eps 0 a lambda* -1.96058 | eps 0.5: curv - Dt 0.4684 -2.0127 (scarto 0.027)
+  s0 0.3  eta 0.01 : lambda* 0.500000026 (|lambda* - 1/2| 2.64e-08), a_H/a_RG di eps 0 a lambda* -1.96058 | eps 0.5: curv - Dt 0.4684 -2.0127 (scarto 0.027)
+  s0 0.5  eta 0.001: lambda* 0.500000006 (|lambda* - 1/2| 5.55e-09), a_H/a_RG di eps 0 a lambda* -2.29052 | eps 0.5: curv - Dt 0.6718 -2.2654 (scarto 0.011)
+  s0 0.5  eta 0.01 : lambda* 0.500000006 (|lambda* - 1/2| 5.55e-09), a_H/a_RG di eps 0 a lambda* -2.29052 | eps 0.5: curv - Dt 0.6718 -2.2653 (scarto 0.011)
+  s0 0.9  eta 0.001: lambda* 0.500000000 (|lambda* - 1/2| 1.13e-11), a_H/a_RG di eps 0 a lambda* -9.96898 | eps 0.5: curv - Dt 0.4253 -2.7345 (scarto 0.726); curv + Dt 0.0132 -206.0532 (scarto 19.669)
+  s0 0.9  eta 0.01 : lambda* 0.500000000 (|lambda* - 1/2| 1.13e-11), a_H/a_RG di eps 0 a lambda* -9.96898 | eps 0.5: curv - Dt 0.4253 -2.7317 (scarto 0.726); curv + Dt 0.0132 -206.0519 (scarto 19.669)
+  DEVE PASSARE: a lambda 0 e 0.5, a_H/a_RG = 6e022419 entro 1e-09 (36 valori)        PASSA   il peggiore 3.25e-16
+  DEVE FALLIRE: <<a lambda 0 i due rami di eps 0 hanno lo stesso a_H/a_RG>> (per la  PASSA   s0 0.3: -3.9212 / -0.0000; s0 0.5: -4.5810 / -0.0000; s0 0.9: -0.0000 / -19.9380
+  PUO' FALLIRE: la linearita' in lambda, residuo relativo < 1e-6 (ogni ramo, s0, eps PASSA   il peggiore 1.42e-13
+  PUO' FALLIRE: |lambda* - 1/2| < 1e-6 a ogni s0 (e eta)                             PASSA   il peggiore 2.64e-08
+### PARTE B -- IL LIMITE A s PICCOLO (zero simmetrico; s0 (0.05, 0.1, 0.2); eta (0.0, 0.0005, 0.001, 0.005, 0.01); Lx (256, 512); W = Lx/16, T <= Lx/4, finestra |<x> - x0| < Lx/32)
+  eps 0 s0 0.05 curv + Dt 0.0852: Dt/v 2.0801 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0 s0 0.05 curv - Dt 0.0852: Dt/v 2.0801 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0 s0 0.1 curv + Dt 0.1696: Dt/v 2.0687 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0 s0 0.1 curv - Dt 0.1696: Dt/v 2.0687 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0 s0 0.2 curv + Dt 0.3326: Dt/v 2.0223 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0 s0 0.2 curv - Dt 0.3326: Dt/v 2.0223 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0.5 s0 0.05 curv + Dt 0.0887: RAMO NON DEFINITO (lo spazio del ramo ha rango 1, le copie sono 2 (valori singolari [1.31103717 0.49265251]))
+  eps 0.5 s0 0.1 curv + Dt 0.2233: Dt/v 2.4071 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0.5 s0 0.2 curv - Dt 0.3237: Dt/v 2.0087 contro 1/W 0.0625 (Lx 256) 0.0312 (Lx 512)
+  eps 0   s0 0.05 curv + Dt 0.0852   Lx 256 eta 0.001: a -1.0349e-07 (+- 1.6e-08, |a|/sigma 6.3) | a/a_RG -2.512 a/a_H +1.363 a_H/a_RG -1.8433 | lin 1.570 | fuori 0.000 | ### NON SI LEGGE
+  eps 0   s0 0.05 curv + Dt 0.0852   Lx 256 eta 0.01 : a -7.7969e-07 (+- 4.8e-08, |a|/sigma 16.3) | a/a_RG -1.893 a/a_H +1.027 a_H/a_RG -1.8433 | lin 1.929 | fuori 0.000 | 
+  eps 0   s0 0.05 curv + Dt 0.0852   Lx 512 eta 0.001: a -3.8164e-08 (+- 1.1e-09, |a|/sigma 36.0) | a/a_RG -1.853 a/a_H +1.005 a_H/a_RG -1.8433 | lin 1.980 | fuori 0.000 | 
+  eps 0   s0 0.05 curv + Dt 0.0852   Lx 512 eta 0.01 : a -3.7804e-07 (+- 8.0e-09, |a|/sigma 47.2) | a/a_RG -1.835 a/a_H +0.996 a_H/a_RG -1.8433 | lin 1.998 | fuori 0.000 | 
+  eps 0   s0 0.05 curv - Dt 0.0852   Lx 256 eta 0.001: a -8.0975e-08 (+- 3.5e-08, |a|/sigma 2.3) | a/a_RG -1.966 a/a_H +1.066 a_H/a_RG -1.8433 | lin 1.989 | fuori 0.001 | 
+  eps 0   s0 0.05 curv - Dt 0.0852   Lx 256 eta 0.01 : a -8.0579e-07 (+- 6.3e-08, |a|/sigma 12.9) | a/a_RG -1.956 a/a_H +1.061 a_H/a_RG -1.8433 | lin 1.999 | fuori 0.001 | 
+  eps 0   s0 0.05 curv - Dt 0.0852   Lx 512 eta 0.001: a -3.4252e-08 (+- 2.0e-09, |a|/sigma 17.1) | a/a_RG -1.663 a/a_H +0.902 a_H/a_RG -1.8433 | lin 2.254 | fuori 0.000 | ### NON SI LEGGE
+  eps 0   s0 0.05 curv - Dt 0.0852   Lx 512 eta 0.01 : a -3.7719e-07 (+- 1.2e-08, |a|/sigma 30.5) | a/a_RG -1.831 a/a_H +0.994 a_H/a_RG -1.8433 | lin 2.020 | fuori 0.000 | 
+  eps 0   s0 0.1  curv + Dt 0.1696   Lx 256 eta 0.001: a -3.1006e-07 (+- 1.8e-08, |a|/sigma 17.4) | a/a_RG -1.879 a/a_H +1.015 a_H/a_RG -1.8521 | lin 1.961 | fuori 0.000 | 
+  eps 0   s0 0.1  curv + Dt 0.1696   Lx 256 eta 0.01 : a -3.0446e-06 (+- 8.9e-08, |a|/sigma 34.2) | a/a_RG -1.845 a/a_H +0.996 a_H/a_RG -1.8521 | lin 1.996 | fuori 0.000 | 
+  eps 0   s0 0.1  curv + Dt 0.1696   Lx 512 eta 0.001: a -1.4638e-07 (+- 1.7e-09, |a|/sigma 84.3) | a/a_RG -1.774 a/a_H +0.958 a_H/a_RG -1.8521 | lin 2.002 | fuori 0.000 | 
+  eps 0   s0 0.1  curv + Dt 0.1696   Lx 512 eta 0.01 : a -1.4650e-06 (+- 1.6e-08, |a|/sigma 93.4) | a/a_RG -1.776 a/a_H +0.959 a_H/a_RG -1.8521 | lin 2.000 | fuori 0.000 | 
+  eps 0   s0 0.1  curv - Dt 0.1696   Lx 256 eta 0.001: a -2.4481e-07 (+- 3.8e-08, |a|/sigma 6.4) | a/a_RG -1.484 a/a_H +0.801 a_H/a_RG -1.8521 | lin 2.695 | fuori 0.001 | ### NON SI LEGGE
+  eps 0   s0 0.1  curv - Dt 0.1696   Lx 256 eta 0.01 : a -3.0153e-06 (+- 1.4e-07, |a|/sigma 21.3) | a/a_RG -1.827 a/a_H +0.987 a_H/a_RG -1.8521 | lin 2.042 | fuori 0.001 | 
+  eps 0   s0 0.1  curv - Dt 0.1696   Lx 512 eta 0.001: a -1.4821e-07 (+- 2.8e-09, |a|/sigma 53.3) | a/a_RG -1.796 a/a_H +0.970 a_H/a_RG -1.8521 | lin 2.009 | fuori 0.000 | 
+  eps 0   s0 0.1  curv - Dt 0.1696   Lx 512 eta 0.01 : a -1.4880e-06 (+- 2.3e-08, |a|/sigma 65.6) | a/a_RG -1.804 a/a_H +0.974 a_H/a_RG -1.8521 | lin 2.001 | fuori 0.000 | 
+  eps 0   s0 0.2  curv + Dt 0.3326   Lx 256 eta 0.001: a -1.2005e-06 (+- 2.2e-08, |a|/sigma 54.6) | a/a_RG -1.809 a/a_H +0.957 a_H/a_RG -1.8894 | lin 1.999 | fuori 0.000 | 
+  eps 0   s0 0.2  curv + Dt 0.3326   Lx 256 eta 0.01 : a -1.2003e-05 (+- 1.6e-07, |a|/sigma 73.4) | a/a_RG -1.808 a/a_H +0.957 a_H/a_RG -1.8894 | lin 2.000 | fuori 0.000 | 
+  eps 0   s0 0.2  curv + Dt 0.3326   Lx 512 eta 0.001: a -6.0460e-07 (+- 3.0e-09, |a|/sigma 203.5) | a/a_RG -1.822 a/a_H +0.964 a_H/a_RG -1.8894 | lin 2.000 | fuori 0.000 | 
+  eps 0   s0 0.2  curv + Dt 0.3326   Lx 512 eta 0.01 : a -6.0459e-06 (+- 2.8e-08, |a|/sigma 219.0) | a/a_RG -1.822 a/a_H +0.964 a_H/a_RG -1.8894 | lin 2.000 | fuori 0.000 | 
+  eps 0   s0 0.2  curv - Dt 0.3326   Lx 256 eta 0.001: a -1.2067e-06 (+- 4.3e-08, |a|/sigma 28.0) | a/a_RG -1.818 a/a_H +0.962 a_H/a_RG -1.8894 | lin 2.022 | fuori 0.001 | 
+  eps 0   s0 0.2  curv - Dt 0.3326   Lx 256 eta 0.01 : a -1.2183e-05 (+- 2.5e-07, |a|/sigma 49.4) | a/a_RG -1.836 a/a_H +0.972 a_H/a_RG -1.8894 | lin 2.002 | fuori 0.001 | 
+  eps 0   s0 0.2  curv - Dt 0.3326   Lx 512 eta 0.001: a -6.0333e-07 (+- 4.6e-09, |a|/sigma 132.3) | a/a_RG -1.818 a/a_H +0.962 a_H/a_RG -1.8894 | lin 1.999 | fuori 0.000 | 
+  eps 0   s0 0.2  curv - Dt 0.3326   Lx 512 eta 0.01 : a -6.0304e-06 (+- 4.2e-08, |a|/sigma 144.0) | a/a_RG -1.817 a/a_H +0.962 a_H/a_RG -1.8894 | lin 2.000 | fuori 0.000 | 
+  eps 0.5 s0 0.1  curv + Dt 0.2233   Lx 256 eta 0.001: a +8.1193e-08 (+- 9.9e-09, |a|/sigma 8.2) | a/a_RG +0.385 a/a_H -0.270 a_H/a_RG -1.4231 | lin 0.540 | fuori 0.000 | ### NON SI LEGGE
+  eps 0.5 s0 0.1  curv + Dt 0.2233   Lx 256 eta 0.01 : a -1.1636e-06 (+- 3.6e-08, |a|/sigma 32.4) | a/a_RG -0.551 a/a_H +0.387 a_H/a_RG -1.4231 | lin 2.463 | fuori 0.001 | ### NON SI LEGGE
+  eps 0.5 s0 0.1  curv + Dt 0.2233   Lx 512 eta 0.001: a -1.7340e-08 (+- 3.7e-10, |a|/sigma 47.4) | a/a_RG -0.164 a/a_H +0.115 a_H/a_RG -1.4231 | lin -1.027 | fuori 0.000 | ### NON SI LEGGE
+  eps 0.5 s0 0.1  curv + Dt 0.2233   Lx 512 eta 0.01 : a -6.3239e-07 (+- 6.9e-09, |a|/sigma 91.4) | a/a_RG -0.599 a/a_H +0.421 a_H/a_RG -1.4231 | lin 2.174 | fuori 0.000 | ### NON SI LEGGE
+  eps 0.5 s0 0.2  curv - Dt 0.3237   Lx 256 eta 0.001: a -1.1860e-06 (+- 4.4e-08, |a|/sigma 27.0) | a/a_RG -1.861 a/a_H +0.952 a_H/a_RG -1.9557 | lin 2.047 | fuori 0.001 | 
+  eps 0.5 s0 0.2  curv - Dt 0.3237   Lx 256 eta 0.01 : a -1.2102e-05 (+- 2.5e-07, |a|/sigma 47.6) | a/a_RG -1.899 a/a_H +0.971 a_H/a_RG -1.9557 | lin 2.004 | fuori 0.001 | 
+  eps 0.5 s0 0.2  curv - Dt 0.3237   Lx 512 eta 0.001: a -6.0159e-07 (+- 4.9e-09, |a|/sigma 123.0) | a/a_RG -1.888 a/a_H +0.966 a_H/a_RG -1.9557 | lin 1.997 | fuori 0.000 | 
+  eps 0.5 s0 0.2  curv - Dt 0.3237   Lx 512 eta 0.01 : a -6.0085e-06 (+- 4.5e-08, |a|/sigma 133.1) | a/a_RG -1.886 a/a_H +0.964 a_H/a_RG -1.9557 | lin 2.000 | fuori 0.000 | 
+  DEVE PASSARE: eta 0 a s0 0.1, |a| sotto il rumore del fit (6 righe)                ### FALLISCE   curv + Dt 0.1696 Lx 256: a -6.1e-09 sigma 1.6e-08; curv + Dt 0.1696 Lx 512: a +1.2e-10 sigma 7.0e-10; curv - Dt 0.1696 Lx 256: a +6.3e-08 sigma 3.6e-08; curv - Dt 0.1696 Lx 512: a +6.6e-10 sigma 1.6e-09; curv + Dt 0.2233 Lx 256: a +2.2e-07 sigma 1.2e-08; curv + Dt 0.2233 Lx 512: a +5.1e-08 sigma 7.8e-10
+### TROPPO LENTO? (a eta 1e-2, |a| < 2 sigma_a su tutte le righe)
+  s0 0.05: si misura (|a|/sigma 16.3, 47.2, 12.9, 30.5)
+  s0 0.1: si misura (|a|/sigma 34.2, 93.4, 21.3, 65.6, 32.4, 91.4)
+  s0 0.2: si misura (|a|/sigma 73.4, 219.0, 49.4, 144.0, 47.6, 133.1)
+### IL LIMITE s0 -> 0 di a_H/a_RG (zero simmetrico, eta 1e-3) e di a_mis/a_RG (righe leggibili, Lx 256; s0 0.3 e 0.5 da 6e022419)
+  eps 0   curv +: a_H/a_RG 0.05:-1.8433 0.1:-1.8521 0.2:-1.8894 0.3:-1.9606 0.4:-2.0829 0.5:-2.2905 | s0 -> 0: grado 2 -1.8671, grado 1 -1.7439 | a_mis/a_RG su 11 punti: grado 2 -2.6811
+  eps 0   curv -: a_H/a_RG 0.05:-1.8433 0.1:-1.8521 0.2:-1.8894 0.3:-1.9606 0.4:-2.0829 0.5:-2.2905 | s0 -> 0: grado 2 -1.8671, grado 1 -1.7439 | a_mis/a_RG su 11 punti: grado 2 -2.6019
+  eps 0.5 curv -: a_H/a_RG 0.2:-1.9557 0.3:-2.0127 0.4:-2.1087 0.5:-2.2654 | s0 -> 0: grado 2 -2.0010, grado 1 -1.7269 | a_mis/a_RG su 8 punti: grado 2 -1.6808
+### PARTE D -- IL SOLITONE IN UN GRADIENTE: la scelta delle norme (N (1.0, 3.0, 10.0, 30.0, 100.0, 300.0, 1000.0, 3000.0, 10000.0), larghezza >= 4 archi, s0 (0.3, 0.5), eps 0, curvatura -)
+  s0 0.3: c -0.06376, sigma = sqrt(|c|/s) 0.461 archi; la scatola del risolutore R = 12 sigma = 5.53 archi, la dispersione oltre R/5 = 1.11 archi
+  s0 0.5: c -0.12517, sigma = sqrt(|c|/s) 0.500 archi; la scatola del risolutore R = 12 sigma = 6.00 archi, la dispersione oltre R/5 = 1.20 archi
+  S1 N 1     : no | s0 0.3 DISPERSIONE larghezza 2.58 mu -0.012; s0 0.5 DISPERSIONE larghezza 2.80 mu -0.020
+  S1 N 3     : no | s0 0.3 DISPERSIONE larghezza 2.58 mu -0.012; s0 0.5 DISPERSIONE larghezza 2.80 mu -0.020
+  S1 N 10    : no | s0 0.3 DISPERSIONE larghezza 2.55 mu -0.011; s0 0.5 DISPERSIONE larghezza 2.78 mu -0.019
+  S1 N 30    : no | s0 0.3 LEGATO larghezza 0.95 mu +0.094; s0 0.5 LEGATO larghezza 1.09 mu +0.128
+  S1 N 100   : no | s0 0.3 LEGATO larghezza 0.96 mu +0.180; s0 0.5 LEGATO larghezza 1.02 mu +0.285
+  S1 N 300   : no | s0 0.3 DISPERSIONE larghezza 1.13 mu +0.227; s0 0.5 LEGATO larghezza 1.19 mu +0.370
+  S1 N 1000  : no | s0 0.3 DISPERSIONE larghezza 1.44 mu +0.259; s0 0.5 DISPERSIONE larghezza 1.51 mu +0.425
+  S1 N 3000  : no | s0 0.3 DISPERSIONE larghezza 1.84 mu +0.275; s0 0.5 DISPERSIONE larghezza 1.93 mu +0.456
+  S1 N 10000 : no | s0 0.3 DISPERSIONE larghezza 2.37 mu +0.285; s0 0.5 DISPERSIONE larghezza 2.50 mu +0.474
+  S1: le norme scelte NESSUNA: per questa forma un solitone legato largo >= 4 archi a tutti e due gli s0 non c'e'
+  S3 N 1     : no | s0 0.3 LEGATO larghezza 0.50 mu -0.681; s0 0.5 LEGATO larghezza 0.53 mu -1.200
+  S3 N 3     : no | s0 0.3 LEGATO larghezza 0.54 mu -0.456; s0 0.5 LEGATO larghezza 0.58 mu -0.810
+  S3 N 10    : no | s0 0.3 LEGATO larghezza 0.63 mu -0.279; s0 0.5 LEGATO larghezza 0.66 mu -0.499
+  S3 N 30    : no | s0 0.3 LEGATO larghezza 0.75 mu -0.173; s0 0.5 LEGATO larghezza 0.79 mu -0.310
+  S3 N 100   : no | s0 0.3 LEGATO larghezza 0.95 mu -0.100; s0 0.5 LEGATO larghezza 0.99 mu -0.180
+  S3 N 300   : no | s0 0.3 DISPERSIONE larghezza 1.20 mu -0.060; s0 0.5 DISPERSIONE larghezza 1.25 mu -0.108
+  S3 N 1000  : no | s0 0.3 DISPERSIONE larghezza 1.57 mu -0.034; s0 0.5 DISPERSIONE larghezza 1.64 mu -0.061
+  S3 N 3000  : no | s0 0.3 DISPERSIONE larghezza 2.02 mu -0.020; s0 0.5 DISPERSIONE larghezza 2.11 mu -0.036
+  S3 N 10000 : no | s0 0.3 DISPERSIONE larghezza 2.50 mu -0.013; s0 0.5 DISPERSIONE larghezza 2.68 mu -0.022
+  S3: le norme scelte NESSUNA: per questa forma un solitone legato largo >= 4 archi a tutti e due gli s0 non c'e'
+  S4 N 1     : no | s0 0.3 LEGATO larghezza 0.88 mu -0.787; s0 0.5 LEGATO larghezza 1.04 mu -1.356
+  S4 N 3     : no | s0 0.3 LEGATO larghezza 0.59 mu -0.536; s0 0.5 LEGATO larghezza 0.67 mu -0.966
+  S4 N 10    : no | s0 0.3 LEGATO larghezza 0.51 mu -0.199; s0 0.5 LEGATO larghezza 0.55 mu -0.408
+  S4 N 30    : no | s0 0.3 LEGATO larghezza 0.50 mu +0.087; s0 0.5 LEGATO larghezza 0.54 mu +0.079
+  S4 N 100   : no | s0 0.3 LEGATO larghezza 0.54 mu +0.343; s0 0.5 LEGATO larghezza 0.58 mu +0.520
+  S4 N 300   : no | s0 0.3 LEGATO larghezza 0.60 mu +0.520; s0 0.5 LEGATO larghezza 0.64 mu +0.828
+  S4 N 1000  : no | s0 0.3 LEGATO larghezza 0.70 mu +0.660; s0 0.5 LEGATO larghezza 0.74 mu +1.073
+  S4 N 3000  : no | s0 0.3 LEGATO larghezza 0.82 mu +0.749; s0 0.5 LEGATO larghezza 0.87 mu +1.230
+  S4 N 10000 : no | s0 0.3 LEGATO larghezza 1.00 mu +0.817; s0 0.5 LEGATO larghezza 1.05 mu +1.349
+  S4: le norme scelte NESSUNA: per questa forma un solitone legato largo >= 4 archi a tutti e due gli s0 non c'e'
+  ### LA PARTE D SI FERMA QUI: per NESSUNA forma c'e' un solitone legato largo >= 4 archi; i controlli della parte D (eta 0, lo specchio, il puo'-fallire) NON SONO ESEGUIBILI e non si contano
+### PARTE C -- ENERGIA CONTRO INERZIA (zero simmetrico, lato 64): E0, M, il segno, E0 M / v_p^2 = omega omega''/v^2
+  eps 0   s 0.05 curv + Dt 0.0852  : E0 -3.1416 M +0.3935 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8415
+  eps 0   s 0.05 curv - Dt 0.0852  : E0 +3.1416 M -0.3935 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8415
+  eps 0   s 0.1  curv + Dt 0.1696  : E0 -3.1416 M +0.3960 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8502
+  eps 0   s 0.1  curv - Dt 0.1696  : E0 +3.1416 M -0.3960 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8502
+  eps 0   s 0.2  curv + Dt 0.3326  : E0 -3.1416 M +0.4061 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8874
+  eps 0   s 0.2  curv - Dt 0.3326  : E0 +3.1416 M -0.4061 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.8874
+  eps 0   s 0.3  curv + Dt 0.4807  : E0 -3.1416 M +0.4246 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.9584
+  eps 0   s 0.3  curv - Dt 0.4807  : E0 +3.1416 M -0.4246 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.9584
+  eps 0   s 0.5  curv + Dt 0.6858  : E0 -3.1416 M +0.5000 | segno E0 M NEGATIVO | E0 M/v_p^2 -2.2873
+  eps 0   s 0.5  curv - Dt 0.6858  : E0 +3.1416 M -0.5000 | segno E0 M NEGATIVO | E0 M/v_p^2 -2.2873
+  eps 0   s 0.9  curv + Dt 0.2836  : E0 -3.1416 M +1.7520 | segno E0 M NEGATIVO | E0 M/v_p^2 -9.8614
+  eps 0   s 0.9  curv - Dt 0.2836  : E0 +3.1416 M -1.7520 | segno E0 M NEGATIVO | E0 M/v_p^2 -9.8614
+  eps 0.5 s 0.05 curv + Dt 0.0887  : E0 -3.1808 M +0.3862 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.7864
+  eps 0.5 s 0.05 curv - Dt 0.0829  : E0 +3.1808 M -0.3886 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.9171
+  eps 0.5 s 0.1  curv + Dt 0.2233  : E0 -3.1798 M +0.3814 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.4097
+  eps 0.5 s 0.1  curv - Dt 0.1650  : E0 +3.1798 M -0.3909 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.9253
+  eps 0.5 s 0.2  curv - Dt 0.3237  : E0 +3.1758 M -0.4006 | segno E0 M NEGATIVO | E0 M/v_p^2 -1.9604
+  eps 0.5 s 0.3  curv - Dt 0.4684  : E0 +3.1687 M -0.4181 | segno E0 M NEGATIVO | E0 M/v_p^2 -2.0274
+  eps 0.5 s 0.5  curv - Dt 0.6718  : E0 +3.1416 M -0.4877 | segno E0 M NEGATIVO | E0 M/v_p^2 -2.3348
+  eps 0.5 s 0.9  curv + Dt 0.0132  : E0 -3.1591 M +0.4390 | segno E0 M NEGATIVO | E0 M/v_p^2 -147.0201
+  eps 0.5 s 0.9  curv - Dt 0.4253  : E0 +2.8878 M -1.0516 | segno E0 M NEGATIVO | E0 M/v_p^2 -6.0804
+### DOVE STA IL SALTO: per ogni coppia di rami, il minimo lungo k della distanza fra le bande, e la fase del punto medio
+  eps 0   s 0.05 curv + Dt 0.0852 / curv - Dt 0.0852: il minimo a k = 1.0000 pi, distanza 0.22203, fase +0.00000 -> vicino a 0
+  eps 0   s 0.1  curv + Dt 0.1696 / curv - Dt 0.1696: il minimo a k = 1.0000 pi, distanza 0.44337, fase +0.00000 -> vicino a 0
+  eps 0   s 0.2  curv + Dt 0.3326 / curv - Dt 0.3326: il minimo a k = 1.0000 pi, distanza 0.88114, fase +0.00000 -> vicino a 0
+  eps 0   s 0.3  curv + Dt 0.4807 / curv - Dt 0.4807: il minimo a k = 1.0000 pi, distanza 1.30722, fase +0.00000 -> vicino a 0
+  eps 0   s 0.5  curv + Dt 0.6858 / curv - Dt 0.6858: il minimo a k = 1.0000 pi, distanza 2.09440, fase +0.00000 -> vicino a 0
+  eps 0   s 0.9  curv + Dt 0.2836 / curv - Dt 0.2836: il minimo a k = 0.0000 pi, distanza 0.62832, fase -3.14159 -> vicino a pi
+  eps 0.5 s 0.05 curv + Dt 0.0887 / curv - Dt 0.0829: il minimo a k = 1.0000 pi, distanza 0.22758, fase -0.00001 -> vicino a 0
+  eps 0.5 s 0.1  curv + Dt 0.2233 / curv - Dt 0.1650: il minimo a k = 1.0000 pi, distanza 0.45445, fase -0.00009 -> vicino a 0
+  eps 0.5 s 0.9  curv + Dt 0.0132 / curv - Dt 0.4253: il minimo a k = 0.0000 pi, distanza 0.84100, fase +3.01950 -> vicino a pi
+====================================================================================================
+IL SEGNO DELLA GRAVITA': 4 su 5 controlli   ### CI SONO BUCHI  (il verdetto di fisica sono le tabelle e il limite)
+====================================================================================================
