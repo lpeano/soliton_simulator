@@ -68,6 +68,16 @@ di `7daa8840`, la coppia attraverso `pi` a `Gamma`, la `c6` nelle due convenzion
 - ### **IL VERDETTO DI FISICA: le tabelle.** ### **A parte: tre righe; la definizione di Luca; la vestizione; la tensione col principio di equivalenza** *(sui triangoli NON misurato)*; ### **che cosa resta per il campo
   `U(1)` e per le onde di `cs`.**
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa, nel commit dello strumento)*: ### **la prova a vuoto della parte `C`** *(`eps 0, s 0.3`, `S1` e `S4`, `x 1e-2`)* ### **ha trovato DUE miei difetti, corretti, e
+UNA scelta che cambio prima dei numeri:**
+- ### **`(a)` `v_b = sqrt(omega(0) omega'')` col PRODOTTO** *(la banda bassa ha `omega(0) < 0` e `omega'' < 0`)*: ### **la radice di `|omega(0)| omega''` alzava un errore.** ### **Dove il prodotto e' negativo** *(`S4` sulla banda
+  alta: `omega(0) < 0`, `omega'' > 0`)* ### **`v_b` NON e' definita, e si scrive.**
+- ### **`(b)` la stima di `v_max` dell'accoppiato dalle fasi ORDINATE dava `1.06 s`** *(l'ordinamento salta quando un autovalore passa per `+-pi`)*; ### **con l'accoppiamento ungherese fra `q` vicini `0.816 s` -- ancora
+  sopra il nudo `0.612 s` a `x 1e-2`, dove la vestizione sposta `omega(0)` di `3e-5`: agli incroci la griglia `2 pi/48` confonde i rami.** ### **LA SCELTA:** ### **il rapporto `v_b vestita/v_max` del quarto PUO' usa `v_max`
+  NUDO di tutti i settori** *(`_triangoli_dove_la_luce.vmax_tutti`)*; ### **la stima resta stampata come LETTURA.**
+- ### **I NUMERI VISTI** *(non li uso)*: ### **il controllo a `120` gradi `8.3e-12`; `S1` a `x 1e-8` = la nuda entro `2e-13`; `S4` a `x 1e-8` NO** *(`0.75`: `alpha_4(0) = -pi`, come previsto)*; ### **`S1` stabile, `S4`
+  instabile** *(`0.017`-`0.042`)*; ### **il ramo per `0` quadratico** *(esponente `1.97`-`2.00`: nessun suono)*.
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo; 2. `csv/_triangoli_dove_la_c.py` e l'inventario, prima dei numeri; 3. la corsa, il referto, la relazione, i collegamenti, la sezione `6`.
