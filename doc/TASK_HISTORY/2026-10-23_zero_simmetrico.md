@@ -79,6 +79,12 @@
 - ### **IL VERDETTO DI FISICA NON E' UN PASSA/FALLISCE:** ### **le tabelle di `Q`, `a_mis/a_RG`, `a_mis/a_H` e `Vi` nelle due convenzioni.** ### **A parte: la lettura in tre righe e una riga per
   la decisione di Luca** *(informazione, non scelta)*.
 
+### 📝 **ANNOTAZIONE 1** *(prima della corsa dello strumento committato, nel commit dello strumento)*: ### **la prova a vuoto in memoria** *(griglia ridotta: `eps 0`, `s0 0.3` e
+`0.9`, `Lx 128`; il `jsonl` negli appunti)* ### **ha stampato dei numeri; li dichiaro e NON correggo le previsioni:** ### **nella simmetrica, a `eps 0`, i due rami vanno VERSO `cs` ALTO**
+*(`a_mis/a_RG ~ -1.85` a `s0 0.3`, contro `a_H/a_RG = -1.96`)*; ### **`Q = -1.96` a `s 0.3`, `-9.86` a `0.9`.** ### ⚠ **E una mia stima della sez. `2` era sbagliata nel numero:** ### **`Dt(0.3)`
+e' `0.481`, non `pi 0.3 0.7 = 0.66`** *(la forma `pi s (1 - s)` vale vicino al cono, non a `s 0.3`)*: ### **`-pi s/Dt` a `s0 0.3` e' `-1.96`, non `-1.4`.** ### **Il verso previsto resta.**
+### **E la convenzione di oggi rifatta a `s0 0.9` coincide con `557d94d6` al bit.**
+
 ## 5. TODO DEL NEXT STEP
 
 1. questo task history, da solo, committato e pushato;
