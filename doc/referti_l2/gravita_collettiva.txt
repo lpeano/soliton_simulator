@@ -1,9 +1,9 @@
-[TIMBRO] _gravita_collettiva.py  sha1-BYTE f6be5a13  committato e pulito
+[TIMBRO] _gravita_collettiva.py  sha1-BYTE d14d903e  committato e pulito
 ====================================================================================================
 LA GRAVITA' COLLETTIVA SULLA CARTA: la frequenza a riposo della materia legata al variare di s (S1, S3, S4)
 ====================================================================================================
-  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); dtau 1, cs = s per nodo in memoria, lambda_c None; i blob nel repo: soliton_simulator.py b8c21049; csv/_massa_vicino_al_cono.py 5842f83a; csv/_universalita_massa.py 94ebb415; csv/_forza_da_cs.py e8789ea9; csv/_stabilita_lineare.py 08c374ef; csv/_screening_forme_s3.py 80ffe96c; csv/_gravita_collettiva.py f6be5a13
-  la configurazione: FORME ('S1', 'S3', 'S4'); X {'S1': (0.01, 0.3, 1.0), 'S3': (0.0001, 0.1, 1.0), 'S4': (0.01, 0.3, 1.0)}; S (0.85, 0.9, 0.95, 0.99, 1.0); EPS (0.0, 0.5); LATI (32, 64); N (1.0, 10.0, 100.0); H 0.001; TOLL_DISTINTI 1e-06; TOLL_STAZ 1e-12; TOLL_UNO 1e-09; TOLL_UNO_2 1e-06; EPS_REL 1e-07; SOGLIA_STABILE 0.0004018; S_CONTROLLO 0.9; R_SIGMA 12; DR_SIGMA 0.025; MAX_IT 20000
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); dtau 1, cs = s per nodo in memoria, lambda_c None; i blob nel repo: soliton_simulator.py b8c21049; csv/_massa_vicino_al_cono.py 5842f83a; csv/_universalita_massa.py 94ebb415; csv/_forza_da_cs.py e8789ea9; csv/_stabilita_lineare.py 08c374ef; csv/_screening_forme_s3.py 80ffe96c; csv/_gravita_collettiva.py d14d903e
+  la configurazione: FORME ('S1', 'S3', 'S4'); X {'S1': (0.01, 0.3, 1.0), 'S3': (0.0001, 0.1, 1.0), 'S4': (0.01, 0.3, 1.0)}; S (0.85, 0.9, 0.95, 0.99, 1.0); EPS (0.0, 0.5); LATI (32, 64); N (1.0, 10.0, 100.0); H 0.001; TOLL_DISTINTI 1e-06; TOLL_STAZ 1e-12; TOLL_UNO 1e-09; TOLL_UNO_2 1e-06; EPS_REL 1e-07; SOGLIA_STABILE 0.0004018; S_CONTROLLO 0.9; R_SIGMA 12; DR_SIGMA 0.0015625; MAX_IT 20000
 ----------------------------------------------------------------------------------------------------
 ### LIVELLO 1 -- LO STATO UNIFORME (ogni ramo massivo; lati (32, 64); x {'S1': (0.01, 0.3, 1.0), 'S3': (0.0001, 0.1, 1.0), 'S4': (0.01, 0.3, 1.0)}; s (0.85, 0.9, 0.95, 0.99, 1.0); eps (0.0, 0.5))
   S1 eps 0   s 0.85 x 0.01   lato 32 Dt 0.4074 w0 +0.0000    : w_tot +0.000085 (w_ramo +0.000000 + alpha s +0.000085) | staz 4.4e-15/7.1e-15 scomp 3.6e-15 | d ln w/d ln s +1.000000 (nl +0.999999984) | gamma 1.70e-08 STABILE
@@ -368,11 +368,324 @@ LA GRAVITA' COLLETTIVA SULLA CARTA: la frequenza a riposo della materia legata a
   S4 eps 0.5 s 1    x 0.3    lato 64 Dt 0.6799 w0 +0.5000    : w_tot -0.648299 (w_ramo +0.500000 + alpha s -1.148299) | staz 2.4e-15/1.7e-15 scomp 1.8e-15 | d ln w/d ln s +5.874150 (nl +1.000000000) | gamma 2.10e-01 instabile
   S4 eps 0.5 s 1    x 1      lato 32 Dt 0.6799 w0 +0.5000    : w_tot +0.500000 (w_ramo +0.500000 + alpha s -0.000000) | staz 1.3e-14/9.0e-15 scomp 1.8e-15 | d ln w/d ln s -5.284626 (nl -311.659672279) | gamma 2.62e-01 instabile
   S4 eps 0.5 s 1    x 1      lato 64 Dt 0.6799 w0 +0.5000    : w_tot +0.500000 (w_ramo +0.500000 + alpha s -0.000000) | staz 3.5e-15/1.3e-15 scomp 8.9e-16 | d ln w/d ln s -5.284626 (nl -226.077123066) | gamma 2.62e-01 instabile
-Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\_gravita_collettiva.py", line 466, in <module>
-    sys.exit(main(sys.argv))
-             ~~~~^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_gravita_collettiva.py", line 423, in main
-    lam0 = righe1[0]["Lambda0"]
-           ~~~~~~~~~^^^^^^^^^^^
-KeyError: 'Lambda0'
+### I CONTROLLI DEL LIVELLO 1
+  DI SERVIZIO: la stazionarieta' per settore entro 1e-12, su 360 stati               PASSA   il peggiore 2.32e-14
+  DI SERVIZIO: la scomposizione omega_tot = omega_ramo(0) + alpha s entro 1e-12      PASSA   il peggiore 1.11e-14
+  DI SERVIZIO: rho0/Lambda0 = x entro 1e-12                                          PASSA   il peggiore 5.55e-16
+  DEVE PASSARE: eps 0 ramo basso, la pendenza della sola parte non lineare = 1 entro ### FALLISCE   il peggiore |p - 1| 6.52e+02
+  DEVE FALLIRE: <<pendenza = 1>> sul ramo alto di eps 0 a rho0 = 0 (e per la chiave  PASSA   s 0.85: -5.6667; s 0.9: -9.0002; s 0.95: -19.0023; s 0.99: -99.3253
+### LO STATO PIU' BASSO A OGNI (forma, eps, s, x), lato 32
+  S1 eps 0   s 0.85 x 0.01  : Dt 0.4074 w0 +0.0000     w_tot +0.000085, STABILE (gamma 1.70e-08)
+  S1 eps 0   s 0.85 x 0.3   : Dt 0.4074 w0 +0.0000     w_tot +0.070183, instabile (gamma 1.67e-01)
+  S1 eps 0   s 0.85 x 1     : Dt 0.4074 w0 +0.0000     w_tot +0.425000, instabile (gamma 5.85e-01)
+  S1 eps 0   s 0.9  x 0.01  : Dt 0.2836 w0 +0.0000     w_tot +0.000090, STABILE (gamma 1.87e-06)
+  S1 eps 0   s 0.9  x 0.3   : Dt 0.2836 w0 +0.0000     w_tot +0.074312, instabile (gamma 1.57e-01)
+  S1 eps 0   s 0.9  x 1     : Dt 0.2836 w0 +0.0000     w_tot +0.450000, instabile (gamma 5.02e-01)
+  S1 eps 0   s 0.95 x 0.01  : Dt 0.1454 w0 +0.0000     w_tot +0.000095, STABILE (gamma 2.01e-06)
+  S1 eps 0   s 0.95 x 0.3   : Dt 0.1454 w0 +0.0000     w_tot +0.078440, instabile (gamma 1.32e-01)
+  S1 eps 0   s 0.95 x 1     : Dt 0.1454 w0 +0.0000     w_tot +0.475000, instabile (gamma 3.74e-01)
+  S1 eps 0   s 0.99 x 0.01  : Dt 0.0280 w0 -0.0000     w_tot +0.000099, STABILE (gamma 3.63e-08)
+  S1 eps 0   s 0.99 x 0.3   : Dt 0.0280 w0 -0.0000     w_tot +0.081743, instabile (gamma 4.80e-02)
+  S1 eps 0   s 0.99 x 1     : Dt 0.0280 w0 -0.0000     w_tot +0.495000, instabile (gamma 1.74e-01)
+  S1 eps 0.5 s 0.85 x 0.01  : Dt 0.4902 w0 -0.1524     w_tot -0.152345, STABILE (gamma 1.62e-08)
+  S1 eps 0.5 s 0.85 x 0.3   : Dt 0.4902 w0 -0.1524     w_tot -0.082246, instabile (gamma 1.69e-01)
+  S1 eps 0.5 s 0.85 x 1     : Dt 0.4902 w0 -0.1524     w_tot +0.272570, instabile (gamma 5.89e-01)
+  S1 eps 0.5 s 0.9  x 0.01  : Dt 0.4253 w0 -0.2284     w_tot -0.228337, STABILE (gamma 1.65e-07)
+  S1 eps 0.5 s 0.9  x 0.3   : Dt 0.4253 w0 -0.2284     w_tot -0.154115, instabile (gamma 1.59e-01)
+  S1 eps 0.5 s 0.9  x 1     : Dt 0.4253 w0 -0.2284     w_tot +0.221573, instabile (gamma 5.18e-01)
+  S1 eps 0.5 s 0.95 x 0.01  : Dt 0.3735 w0 -0.3413     w_tot -0.341235, STABILE (gamma 5.98e-09)
+  S1 eps 0.5 s 0.95 x 0.3   : Dt 0.3735 w0 -0.3413     w_tot -0.262889, instabile (gamma 1.45e-01)
+  S1 eps 0.5 s 0.95 x 1     : Dt 0.3735 w0 -0.3413     w_tot +0.133670, instabile (gamma 4.24e-01)
+  S1 eps 0.5 s 0.99 x 0.01  : Dt 0.3448 w0 -0.4645     w_tot -0.464398, STABILE (gamma 5.09e-05)
+  S1 eps 0.5 s 0.99 x 0.3   : Dt 0.3448 w0 -0.4645     w_tot -0.382754, instabile (gamma 1.26e-01)
+  S1 eps 0.5 s 0.99 x 1     : Dt 0.3448 w0 -0.4645     w_tot +0.030503, instabile (gamma 3.20e-01)
+  S1 eps 0.5 s 1    x 0.01  : Dt 0.3392 w0 -0.5000     w_tot -0.499900, STABILE (gamma 1.58e-07)
+  S1 eps 0.5 s 1    x 0.3   : Dt 0.3392 w0 -0.5000     w_tot -0.417431, instabile (gamma 1.21e-01)
+  S1 eps 0.5 s 1    x 1     : Dt 0.3392 w0 -0.5000     w_tot -0.000000, instabile (gamma 2.89e-01)
+  S3 eps 0   s 0.85 x 0.0001: Dt 0.4074 w0 +0.0000     w_tot -6.978959, instabile (gamma 5.85e-01)
+  S3 eps 0   s 0.85 x 0.1   : Dt 0.4074 w0 +0.0000     w_tot -1.265484, instabile (gamma 5.49e-01)
+  S3 eps 0   s 0.85 x 1     : Dt 0.4074 w0 +0.0000     w_tot -0.164175, instabile (gamma 3.58e-01)
+  S3 eps 0   s 0.9  x 0.0001: Dt 0.2836 w0 +0.0000     w_tot -7.389486, instabile (gamma 5.02e-01)
+  S3 eps 0   s 0.9  x 0.1   : Dt 0.2836 w0 +0.0000     w_tot -1.339924, instabile (gamma 4.73e-01)
+  S3 eps 0   s 0.9  x 1     : Dt 0.2836 w0 +0.0000     w_tot -0.173832, instabile (gamma 3.18e-01)
+  S3 eps 0   s 0.95 x 0.0001: Dt 0.1454 w0 +0.0000     w_tot -7.800013, instabile (gamma 3.74e-01)
+  S3 eps 0   s 0.95 x 0.1   : Dt 0.1454 w0 +0.0000     w_tot -1.414364, instabile (gamma 3.54e-01)
+  S3 eps 0   s 0.95 x 1     : Dt 0.1454 w0 +0.0000     w_tot -0.183490, instabile (gamma 2.48e-01)
+  S3 eps 0   s 0.99 x 0.0001: Dt 0.0280 w0 -0.0000     w_tot -8.128435, instabile (gamma 1.74e-01)
+  S3 eps 0   s 0.99 x 0.1   : Dt 0.0280 w0 -0.0000     w_tot -1.473916, instabile (gamma 1.65e-01)
+  S3 eps 0   s 0.99 x 1     : Dt 0.0280 w0 -0.0000     w_tot -0.191216, instabile (gamma 1.22e-01)
+  S3 eps 0.5 s 0.85 x 0.0001: Dt 0.4902 w0 -0.1524     w_tot -7.131389, instabile (gamma 5.96e-01)
+  S3 eps 0.5 s 0.85 x 0.1   : Dt 0.4902 w0 -0.1524     w_tot -1.417913, instabile (gamma 5.58e-01)
+  S3 eps 0.5 s 0.85 x 1     : Dt 0.4902 w0 -0.1524     w_tot -0.316605, instabile (gamma 3.60e-01)
+  S3 eps 0.5 s 0.9  x 0.0001: Dt 0.4253 w0 -0.2284     w_tot -7.617913, instabile (gamma 5.42e-01)
+  S3 eps 0.5 s 0.9  x 0.1   : Dt 0.4253 w0 -0.2284     w_tot -1.568351, instabile (gamma 5.07e-01)
+  S3 eps 0.5 s 0.9  x 1     : Dt 0.4253 w0 -0.2284     w_tot -0.402260, instabile (gamma 3.26e-01)
+  S3 eps 0.5 s 0.95 x 0.0001: Dt 0.3735 w0 -0.3413     w_tot -8.141343, instabile (gamma 4.86e-01)
+  S3 eps 0.5 s 0.95 x 0.1   : Dt 0.3735 w0 -0.3413     w_tot -1.755694, instabile (gamma 4.50e-01)
+  S3 eps 0.5 s 0.95 x 1     : Dt 0.3735 w0 -0.3413     w_tot -0.524820, instabile (gamma 2.71e-01)
+  S3 eps 0.5 s 0.99 x 0.0001: Dt 0.3448 w0 -0.4645     w_tot -8.592932, instabile (gamma 4.48e-01)
+  S3 eps 0.5 s 0.99 x 0.1   : Dt 0.3448 w0 -0.4645     w_tot -1.938414, instabile (gamma 4.05e-01)
+  S3 eps 0.5 s 0.99 x 1     : Dt 0.3448 w0 -0.4645     w_tot -0.655713, instabile (gamma 2.00e-01)
+  S3 eps 0.5 s 1    x 0.0001: Dt 0.3392 w0 -0.5000     w_tot -8.710540, instabile (gamma 4.39e-01)
+  S3 eps 0.5 s 1    x 0.1   : Dt 0.3392 w0 -0.5000     w_tot -1.988804, instabile (gamma 3.94e-01)
+  S3 eps 0.5 s 1    x 1     : Dt 0.3392 w0 -0.5000     w_tot -0.693147, instabile (gamma 1.78e-01)
+  S4 eps 0   s 0.85 x 0.01  : Dt 0.4074 w0 +0.0000     w_tot -2.400079, instabile (gamma 1.65e-01)
+  S4 eps 0   s 0.85 x 0.3   : Dt 0.4074 w0 +0.0000     w_tot -0.976054, instabile (gamma 6.32e-01)
+  S4 eps 0   s 0.85 x 1     : Dt 0.4074 w0 +0.0000     w_tot -0.000000, instabile (gamma 9.02e-01)
+  S4 eps 0   s 0.9  x 0.01  : Dt 0.2836 w0 +0.0000     w_tot -2.541260, instabile (gamma 1.55e-01)
+  S4 eps 0   s 0.9  x 0.3   : Dt 0.2836 w0 +0.0000     w_tot -1.033469, instabile (gamma 5.40e-01)
+  S4 eps 0   s 0.9  x 1     : Dt 0.2836 w0 +0.0000     w_tot +0.000000, instabile (gamma 7.53e-01)
+  S4 eps 0   s 0.95 x 0.01  : Dt 0.1454 w0 +0.0000     w_tot -2.682441, instabile (gamma 1.31e-01)
+  S4 eps 0   s 0.95 x 0.3   : Dt 0.1454 w0 +0.0000     w_tot -1.090884, instabile (gamma 4.00e-01)
+  S4 eps 0   s 0.95 x 1     : Dt 0.1454 w0 +0.0000     w_tot -0.000000, instabile (gamma 5.46e-01)
+  S4 eps 0   s 0.99 x 0.01  : Dt 0.0280 w0 -0.0000     w_tot -2.795386, instabile (gamma 4.64e-02)
+  S4 eps 0   s 0.99 x 0.3   : Dt 0.0280 w0 -0.0000     w_tot -1.136816, instabile (gamma 1.86e-01)
+  S4 eps 0   s 0.99 x 1     : Dt 0.0280 w0 -0.0000     w_tot -0.000000, instabile (gamma 2.48e-01)
+  S4 eps 0.5 s 0.85 x 0.01  : Dt 0.4902 w0 -0.1524     w_tot -2.552509, instabile (gamma 1.68e-01)
+  S4 eps 0.5 s 0.85 x 0.3   : Dt 0.4902 w0 -0.1524     w_tot -1.128484, instabile (gamma 6.40e-01)
+  S4 eps 0.5 s 0.85 x 1     : Dt 0.4902 w0 -0.1524     w_tot -0.152430, instabile (gamma 9.06e-01)
+  S4 eps 0.5 s 0.9  x 0.01  : Dt 0.4253 w0 -0.2284     w_tot -2.769687, instabile (gamma 1.62e-01)
+  S4 eps 0.5 s 0.9  x 0.3   : Dt 0.4253 w0 -0.2284     w_tot -1.261896, instabile (gamma 5.71e-01)
+  S4 eps 0.5 s 0.9  x 1     : Dt 0.4253 w0 -0.2284     w_tot -0.228427, instabile (gamma 7.79e-01)
+  S4 eps 0.5 s 0.95 x 0.01  : Dt 0.3735 w0 -0.3413     w_tot -3.023771, instabile (gamma 1.53e-01)
+  S4 eps 0.5 s 0.95 x 0.3   : Dt 0.3735 w0 -0.3413     w_tot -1.432213, instabile (gamma 4.92e-01)
+  S4 eps 0.5 s 0.95 x 1     : Dt 0.3735 w0 -0.3413     w_tot -0.341330, instabile (gamma 6.31e-01)
+  S4 eps 0.5 s 0.99 x 0.01  : Dt 0.3448 w0 -0.4645     w_tot -3.259883, instabile (gamma 1.45e-01)
+  S4 eps 0.5 s 0.99 x 0.3   : Dt 0.3448 w0 -0.4645     w_tot -1.601313, instabile (gamma 4.23e-01)
+  S4 eps 0.5 s 0.99 x 1     : Dt 0.3448 w0 -0.4645     w_tot -0.464497, instabile (gamma 4.82e-01)
+  S4 eps 0.5 s 1    x 0.01  : Dt 0.3392 w0 -0.5000     w_tot -3.323622, instabile (gamma 1.44e-01)
+  S4 eps 0.5 s 1    x 0.3   : Dt 0.3392 w0 -0.5000     w_tot -1.648299, instabile (gamma 4.05e-01)
+  S4 eps 0.5 s 1    x 1     : Dt 0.3392 w0 -0.5000     w_tot -0.500000, instabile (gamma 4.39e-01)
+### LIVELLO 2 -- IL SOLITONE EFFICACE (N (1.0, 10.0, 100.0); griglia R = 12 sigma, dr = 0.0015625 sigma, sigma = sqrt(|c|/s))
+  DI SERVIZIO: il risolutore sul logaritmo puro = la gaussiana esatta (c -0.8, s 0.9 PASSA   mu -0.9995901403 contro -0.9995905065; larghezza 0.94281 contro 0.94281
+  S1 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.0000    : c -0.5238 | DISPERSIONE CONVERGE | mu -0.034129 w_sol -0.034129 larghezza 4.399 x_centro 0.00333 | d ln w/d ln s --
+  S1 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.0000    : c -0.5238 | DISPERSIONE CONVERGE | mu -0.033760 w_sol -0.033760 larghezza 4.393 x_centro 0.0335 | d ln w/d ln s --
+  S1 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu +0.302201 w_sol +0.302201 larghezza 1.588 x_centro 3.7 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -3.117171
+  S3 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu -2.688630 w_sol -2.688630 larghezza 0.808 x_centro 0.12 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.393344
+  S3 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu -1.224355 w_sol -1.224355 larghezza 0.932 x_centro 0.856 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.936543
+  S3 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu -0.461115 w_sol -0.461115 larghezza 1.311 x_centro 4.02 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.201810
+  S4 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.0000    : c -0.5238 | DISPERSIONE CONVERGE | mu -2.563697 w_sol -2.563697 larghezza 2.802 x_centro 0.0123 | d ln w/d ln s --
+  S4 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu -1.411759 w_sol -1.411759 larghezza 0.980 x_centro 0.94 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.709719
+  S4 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.0000    : c -0.5238 | LEGATO CONVERGE | mu +0.340713 w_sol +0.340713 larghezza 0.855 x_centro 10.8 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -8.568930
+  S1 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu +0.034136 w_sol +0.976614 larghezza 4.399 x_centro 0.00333 | d ln w/d ln s --
+  S1 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu +0.034500 w_sol +0.976977 larghezza 4.405 x_centro 0.0331 | d ln w/d ln s --
+  S1 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu +0.059253 w_sol +1.001731 larghezza 4.744 x_centro 0.241 | d ln w/d ln s --
+  S3 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -4.936717 w_sol -3.994239 larghezza 6.060 x_centro 0.00111 | d ln w/d ln s --
+  S3 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -2.994974 w_sol -2.052496 larghezza 6.056 x_centro 0.0111 | d ln w/d ln s --
+  S3 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -1.182158 w_sol -0.239680 larghezza 6.020 x_centro 0.113 | d ln w/d ln s --
+  S4 eps 0   s 0.85 N 1     Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -2.552132 w_sol -1.609654 larghezza 4.896 x_centro 0.00221 | d ln w/d ln s --
+  S4 eps 0   s 0.85 N 10    Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -2.322237 w_sol -1.379759 larghezza 5.429 x_centro 0.0152 | d ln w/d ln s --
+  S4 eps 0   s 0.85 N 100   Dt 0.4074 w0 +0.9425    : c +0.5238 | DISPERSIONE CONVERGE | mu -1.570520 w_sol -0.628042 larghezza 5.867 x_centro 0.12 | d ln w/d ln s --
+  S1 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.0000    : c -0.7970 | DISPERSIONE CONVERGE | mu -0.036138 w_sol -0.036138 larghezza 5.273 x_centro 0.00232 | d ln w/d ln s --
+  S1 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.0000    : c -0.7970 | DISPERSIONE CONVERGE | mu -0.035950 w_sol -0.035950 larghezza 5.270 x_centro 0.0232 | d ln w/d ln s --
+  S1 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu +0.208930 w_sol +0.208930 larghezza 2.103 x_centro 2.46 | d ln w/d ln s -13.351800
+  S3 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu -3.143507 w_sol -3.143507 larghezza 0.961 x_centro 0.0853 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.179304
+  S3 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu -1.491367 w_sol -1.491367 larghezza 1.078 x_centro 0.647 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +4.130455
+  S3 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu -0.573579 w_sol -0.573579 larghezza 1.473 x_centro 3.22 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +4.641828
+  S4 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.0000    : c -0.7970 | DISPERSIONE CONVERGE | mu -2.760656 w_sol -2.760656 larghezza 3.946 x_centro 0.00577 | d ln w/d ln s --
+  S4 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu -1.784347 w_sol -1.784347 larghezza 1.281 x_centro 0.565 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +4.558931
+  S4 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.0000    : c -0.7970 | LEGATO CONVERGE | mu +0.098066 w_sol +0.098066 larghezza 1.015 x_centro 7.78 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -61.998136
+  S1 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu +0.036142 w_sol +0.664461 larghezza 5.274 x_centro 0.00232 | d ln w/d ln s --
+  S1 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu +0.036329 w_sol +0.664648 larghezza 5.277 x_centro 0.0231 | d ln w/d ln s --
+  S1 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu +0.051003 w_sol +0.679322 larghezza 5.528 x_centro 0.189 | d ln w/d ln s --
+  S3 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -5.552893 w_sol -4.924575 larghezza 7.264 x_centro 0.000771 | d ln w/d ln s --
+  S3 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -3.491981 w_sol -2.863662 larghezza 7.261 x_centro 0.00771 | d ln w/d ln s --
+  S3 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -1.528445 w_sol -0.900127 larghezza 7.231 x_centro 0.078 | d ln w/d ln s --
+  S4 eps 0   s 0.9  N 1     Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -2.719356 w_sol -2.091037 larghezza 5.784 x_centro 0.00163 | d ln w/d ln s --
+  S4 eps 0   s 0.9  N 10    Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -2.519995 w_sol -1.891676 larghezza 6.406 x_centro 0.0111 | d ln w/d ln s --
+  S4 eps 0   s 0.9  N 100   Dt 0.2836 w0 +0.6283    : c +0.7970 | DISPERSIONE CONVERGE | mu -1.849274 w_sol -1.220955 larghezza 6.969 x_centro 0.0856 | d ln w/d ln s --
+  S1 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.0000    : c -1.6205 | DISPERSIONE CONVERGE | mu -0.038147 w_sol -0.038147 larghezza 7.319 x_centro 0.0012 | d ln w/d ln s --
+  S1 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.0000    : c -1.6205 | DISPERSIONE CONVERGE | mu -0.038094 w_sol -0.038094 larghezza 7.318 x_centro 0.012 | d ln w/d ln s --
+  S1 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.0000    : c -1.6205 | DISPERSIONE CONVERGE | mu -0.032202 w_sol -0.032202 larghezza 7.159 x_centro 0.133 | d ln w/d ln s --
+  S3 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.0000    : c -1.6205 | LEGATO CONVERGE | mu -3.904346 w_sol -3.904346 larghezza 1.321 x_centro 0.0454 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +5.293577
+  S3 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.0000    : c -1.6205 | LEGATO CONVERGE | mu -2.000053 w_sol -2.000053 larghezza 1.422 x_centro 0.379 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +7.455625
+  S3 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.0000    : c -1.6205 | LEGATO CONVERGE | mu -0.805474 w_sol -0.805474 larghezza 1.836 x_centro 2.11 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +8.910768
+  S4 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.0000    : c -1.6205 | DISPERSIONE CONVERGE | mu -2.959751 w_sol -2.959751 larghezza 6.344 x_centro 0.00196 | d ln w/d ln s --
+  S4 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.0000    : c -1.6205 | LEGATO CONVERGE | mu -2.361888 w_sol -2.361888 larghezza 2.242 x_centro 0.193 | d ln w/d ln s +5.920372
+  S4 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.0000    : c -1.6205 | LEGATO CONVERGE | mu -0.439249 w_sol -0.439249 larghezza 1.417 x_centro 4.14 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +37.205064
+  S1 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu +0.038149 w_sol +0.352308 larghezza 7.319 x_centro 0.0012 | d ln w/d ln s --
+  S1 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu +0.038202 w_sol +0.352361 larghezza 7.320 x_centro 0.012 | d ln w/d ln s --
+  S1 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu +0.043097 w_sol +0.357256 larghezza 7.441 x_centro 0.112 | d ln w/d ln s --
+  S3 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -6.483540 w_sol -6.169381 larghezza 10.083 x_centro 0.0004 | d ln w/d ln s --
+  S3 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -4.302355 w_sol -3.988196 larghezza 10.080 x_centro 0.004 | d ln w/d ln s --
+  S3 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -2.176044 w_sol -1.861885 larghezza 10.058 x_centro 0.0403 | d ln w/d ln s --
+  S4 eps 0   s 0.95 N 1     Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -2.894952 w_sol -2.580793 larghezza 7.842 x_centro 0.000926 | d ln w/d ln s --
+  S4 eps 0   s 0.95 N 10    Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -2.748894 w_sol -2.434735 larghezza 8.629 x_centro 0.00643 | d ln w/d ln s --
+  S4 eps 0   s 0.95 N 100   Dt 0.1454 w0 +0.3142    : c +1.6205 | DISPERSIONE CONVERGE | mu -2.238829 w_sol -1.924670 larghezza 9.485 x_centro 0.047 | d ln w/d ln s --
+  S1 eps 0   s 0.99 N 1     Dt 0.0280 w0 -0.0000    : c -8.6322 | DISPERSIONE CONVERGE | mu -0.039754 w_sol -0.039754 larghezza 16.548 x_centro 0.000235 | d ln w/d ln s --
+  S1 eps 0   s 0.99 N 10    Dt 0.0280 w0 -0.0000    : c -8.6322 | DISPERSIONE CONVERGE | mu -0.039752 w_sol -0.039752 larghezza 16.548 x_centro 0.00235 | d ln w/d ln s --
+  S1 eps 0   s 0.99 N 100   Dt 0.0280 w0 -0.0000    : c -8.6322 | DISPERSIONE CONVERGE | mu -0.039538 w_sol -0.039538 larghezza 16.536 x_centro 0.0236 | d ln w/d ln s --
+  S3 eps 0   s 0.99 N 1     Dt 0.0280 w0 -0.0000    : c -8.6322 | LEGATO CONVERGE | mu -5.648572 w_sol -5.648572 larghezza 2.960 x_centro 0.00908 | d ln w/d ln s +19.348512
+  S3 eps 0   s 0.99 N 10    Dt 0.0280 w0 -0.0000    : c -8.6322 | LEGATO CONVERGE | mu -3.443728 w_sol -3.443728 larghezza 3.016 x_centro 0.0866 | d ln w/d ln s +28.979057
+  S3 eps 0   s 0.99 N 100   Dt 0.0280 w0 -0.0000    : c -8.6322 | LEGATO CONVERGE | mu -1.630889 w_sol -1.630889 larghezza 3.389 x_centro 0.655 | d ln w/d ln s +41.152108
+  S4 eps 0   s 0.99 N 1     Dt 0.0280 w0 -0.0000    : c -8.6322 | DISPERSIONE CONVERGE | mu -3.128777 w_sol -3.128777 larghezza 15.934 x_centro 0.00027 | d ln w/d ln s --
+  S4 eps 0   s 0.99 N 10    Dt 0.0280 w0 -0.0000    : c -8.6322 | DISPERSIONE CONVERGE | mu -3.035059 w_sol -3.035059 larghezza 12.315 x_centro 0.00594 | d ln w/d ln s --
+  S4 eps 0   s 0.99 N 100   Dt 0.0280 w0 -0.0000    : c -8.6322 | LEGATO CONVERGE | mu -1.949652 w_sol -1.949652 larghezza 4.003 x_centro 0.578 | d ln w/d ln s +46.939167
+  S1 eps 0   s 0.99 N 1     Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu +0.039754 w_sol +0.102586 larghezza 16.548 x_centro 0.000235 | d ln w/d ln s --
+  S1 eps 0   s 0.99 N 10    Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu +0.039756 w_sol +0.102588 larghezza 16.548 x_centro 0.00235 | d ln w/d ln s --
+  S1 eps 0   s 0.99 N 100   Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu +0.039969 w_sol +0.102800 larghezza 16.560 x_centro 0.0234 | d ln w/d ln s --
+  S3 eps 0   s 0.99 N 1     Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -8.371157 w_sol -8.308325 larghezza 22.796 x_centro 7.83e-05 | d ln w/d ln s --
+  S3 eps 0   s 0.99 N 10    Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -6.092879 w_sol -6.030048 larghezza 22.795 x_centro 0.000783 | d ln w/d ln s --
+  S3 eps 0   s 0.99 N 100   Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -3.826070 w_sol -3.763239 larghezza 22.785 x_centro 0.00784 | d ln w/d ln s --
+  S4 eps 0   s 0.99 N 1     Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -3.050598 w_sol -2.987766 larghezza 17.041 x_centro 0.000211 | d ln w/d ln s --
+  S4 eps 0   s 0.99 N 10    Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -2.990565 w_sol -2.927733 larghezza 18.161 x_centro 0.00165 | d ln w/d ln s --
+  S4 eps 0   s 0.99 N 100   Dt 0.0280 w0 +0.0628    : c +8.6322 | DISPERSIONE CONVERGE | mu -2.769382 w_sol -2.706550 larghezza 20.114 x_centro 0.0113 | d ln w/d ln s --
+  S1 eps 0.5 s 0.85 N 1     Dt 0.4902 w0 -0.1524    : c -0.3975 | DISPERSIONE CONVERGE | mu -0.034126 w_sol -0.186556 larghezza 3.832 x_centro 0.00438 | d ln w/d ln s --
+  S1 eps 0.5 s 0.85 N 10    Dt 0.4902 w0 -0.1524    : c -0.3975 | DISPERSIONE CONVERGE | mu -0.033483 w_sol -0.185912 larghezza 3.823 x_centro 0.0443 | d ln w/d ln s --
+  S1 eps 0.5 s 0.85 N 100   Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu +0.366849 w_sol +0.214419 larghezza 1.356 x_centro 4.7 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -5.408503
+  S3 eps 0.5 s 0.85 N 1     Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu -2.481795 w_sol -2.634224 larghezza 0.710 x_centro 0.155 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +1.956416
+  S3 eps 0.5 s 0.85 N 10    Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu -1.097086 w_sol -1.249515 larghezza 0.838 x_centro 1.05 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.493292
+  S3 eps 0.5 s 0.85 N 100   Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu -0.407403 w_sol -0.559833 larghezza 1.203 x_centro 4.75 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.319234
+  S4 eps 0.5 s 0.85 N 1     Dt 0.4902 w0 -0.1524    : c -0.3975 | DISPERSIONE CONVERGE | mu -2.511147 w_sol -2.663577 larghezza 2.073 x_centro 0.0232 | d ln w/d ln s --
+  S4 eps 0.5 s 0.85 N 10    Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu -1.194450 w_sol -1.346880 larghezza 0.813 x_centro 1.34 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.965417
+  S4 eps 0.5 s 0.85 N 100   Dt 0.4902 w0 -0.1524    : c -0.3975 | LEGATO CONVERGE | mu +0.518432 w_sol +0.366002 larghezza 0.754 x_centro 13.7 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -5.210494
+  S1 eps 0.5 s 0.9  N 1     Dt 0.4253 w0 -0.2284    : c -0.4756 | DISPERSIONE CONVERGE | mu -0.036135 w_sol -0.264562 larghezza 4.073 x_centro 0.00388 | d ln w/d ln s --
+  S1 eps 0.5 s 0.9  N 10    Dt 0.4253 w0 -0.2284    : c -0.4756 | DISPERSIONE CONVERGE | mu -0.035603 w_sol -0.264030 larghezza 4.065 x_centro 0.0391 | d ln w/d ln s --
+  S1 eps 0.5 s 0.9  N 100   Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu +0.359360 w_sol +0.130933 larghezza 1.449 x_centro 4.25 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -13.660358
+  S3 eps 0.5 s 0.9  N 1     Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu -2.723913 w_sol -2.952340 larghezza 0.752 x_centro 0.139 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.014938
+  S3 eps 0.5 s 0.9  N 10    Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu -1.219827 w_sol -1.448254 larghezza 0.878 x_centro 0.96 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.652132
+  S3 eps 0.5 s 0.9  N 100   Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu -0.455732 w_sol -0.684159 larghezza 1.249 x_centro 4.41 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.687772
+  S4 eps 0.5 s 0.9  N 1     Dt 0.4253 w0 -0.2284    : c -0.4756 | DISPERSIONE CONVERGE | mu -2.686135 w_sol -2.914562 larghezza 2.376 x_centro 0.0175 | d ln w/d ln s --
+  S4 eps 0.5 s 0.9  N 10    Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu -1.367253 w_sol -1.595680 larghezza 0.882 x_centro 1.15 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.931145
+  S4 eps 0.5 s 0.9  N 100   Dt 0.4253 w0 -0.2284    : c -0.4756 | LEGATO CONVERGE | mu +0.466919 w_sol +0.238491 larghezza 0.797 x_centro 12.3 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -10.634580
+  S1 eps 0.5 s 0.9  N 1     Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu +0.036155 w_sol +0.648724 larghezza 3.181 x_centro 0.00636 | d ln w/d ln s --
+  S1 eps 0.5 s 0.9  N 10    Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu +0.037535 w_sol +0.650105 larghezza 3.197 x_centro 0.0622 | d ln w/d ln s --
+  S1 eps 0.5 s 0.9  N 100   Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu +0.105538 w_sol +0.718108 larghezza 3.666 x_centro 0.357 | d ln w/d ln s --
+  S3 eps 0.5 s 0.9  N 1     Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -4.645235 w_sol -4.032665 larghezza 4.382 x_centro 0.00212 | d ln w/d ln s --
+  S3 eps 0.5 s 0.9  N 10    Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -2.603980 w_sol -1.991410 larghezza 4.377 x_centro 0.0212 | d ln w/d ln s --
+  S3 eps 0.5 s 0.9  N 100   Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -0.805884 w_sol -0.193314 larghezza 4.327 x_centro 0.219 | d ln w/d ln s --
+  S4 eps 0.5 s 0.9  N 1     Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -2.661459 w_sol -2.048890 larghezza 3.642 x_centro 0.0038 | d ln w/d ln s --
+  S4 eps 0.5 s 0.9  N 10    Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -2.315556 w_sol -1.702986 larghezza 4.030 x_centro 0.0266 | d ln w/d ln s --
+  S4 eps 0.5 s 0.9  N 100   Dt 0.0132 w0 +0.6126    : c +0.2900 | DISPERSIONE CONVERGE | mu -1.260639 w_sol -0.648069 larghezza 4.300 x_centro 0.222 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 1     Dt 0.3735 w0 -0.3413    : c -0.5462 | DISPERSIONE CONVERGE | mu -0.038143 w_sol -0.379473 larghezza 4.249 x_centro 0.00357 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 10    Dt 0.3735 w0 -0.3413    : c -0.5462 | DISPERSIONE CONVERGE | mu -0.037669 w_sol -0.378999 larghezza 4.242 x_centro 0.0359 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 100   Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu +0.356960 w_sol +0.015630 larghezza 1.521 x_centro 3.94 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -160.299174
+  S3 eps 0.5 s 0.95 N 1     Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu -2.946138 w_sol -3.287468 larghezza 0.782 x_centro 0.128 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +1.937168
+  S3 eps 0.5 s 0.95 N 10    Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu -1.331446 w_sol -1.672775 larghezza 0.907 x_centro 0.902 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.649016
+  S3 eps 0.5 s 0.95 N 100   Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu -0.499602 w_sol -0.840932 larghezza 1.283 x_centro 4.2 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.914391
+  S4 eps 0.5 s 0.95 N 1     Dt 0.3735 w0 -0.3413    : c -0.5462 | DISPERSIONE CONVERGE | mu -2.852609 w_sol -3.193938 larghezza 2.604 x_centro 0.0144 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 10    Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu -1.517344 w_sol -1.858674 larghezza 0.934 x_centro 1.03 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.674495
+  S4 eps 0.5 s 0.95 N 100   Dt 0.3735 w0 -0.3413    : c -0.5462 | LEGATO CONVERGE | mu +0.431801 w_sol +0.090471 larghezza 0.828 x_centro 11.5 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s -31.781200
+  S1 eps 0.5 s 0.95 N 1     Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu +0.038164 w_sol +0.343613 larghezza 3.157 x_centro 0.00646 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 10    Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu +0.039664 w_sol +0.345114 larghezza 3.174 x_centro 0.0631 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 100   Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu +0.112991 w_sol +0.418440 larghezza 3.644 x_centro 0.36 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 1     Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -4.888993 w_sol -4.583544 larghezza 4.349 x_centro 0.00215 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 10    Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -2.734828 w_sol -2.429378 larghezza 4.344 x_centro 0.0216 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 100   Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -0.840670 w_sol -0.535221 larghezza 4.293 x_centro 0.223 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 1     Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -2.808116 w_sol -2.502666 larghezza 3.618 x_centro 0.00384 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 10    Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -2.440030 w_sol -2.134581 larghezza 4.002 x_centro 0.027 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 100   Dt 0.0163 w0 +0.3054    : c +0.3015 | DISPERSIONE CONVERGE | mu -1.319659 w_sol -1.014209 larghezza 4.269 x_centro 0.225 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 1     Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu +0.038162 w_sol +0.693651 larghezza 3.263 x_centro 0.00605 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 10    Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu +0.039481 w_sol +0.694970 larghezza 3.278 x_centro 0.0593 | d ln w/d ln s --
+  S1 eps 0.5 s 0.95 N 100   Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu +0.106293 w_sol +0.761782 larghezza 3.739 x_centro 0.346 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 1     Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -4.951347 w_sol -4.295858 larghezza 4.494 x_centro 0.00201 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 10    Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -2.795089 w_sol -2.139600 larghezza 4.489 x_centro 0.0202 | d ln w/d ln s --
+  S3 eps 0.5 s 0.95 N 100   Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -0.884547 w_sol -0.229058 larghezza 4.441 x_centro 0.208 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 1     Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -2.813282 w_sol -2.157793 larghezza 3.728 x_centro 0.00364 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 10    Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -2.457955 w_sol -1.802466 larghezza 4.126 x_centro 0.0255 | d ln w/d ln s --
+  S4 eps 0.5 s 0.95 N 100   Dt 1.0325 w0 +0.6555    : c +0.3220 | DISPERSIONE CONVERGE | mu -1.367291 w_sol -0.711802 larghezza 4.406 x_centro 0.211 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 1     Dt 0.3448 w0 -0.4645    : c -0.5799 | DISPERSIONE CONVERGE | mu -0.039749 w_sol -0.504247 larghezza 4.289 x_centro 0.0035 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 10    Dt 0.3448 w0 -0.4645    : c -0.5799 | DISPERSIONE CONVERGE | mu -0.039274 w_sol -0.503771 larghezza 4.282 x_centro 0.0353 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 100   Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu +0.366684 w_sol -0.097813 larghezza 1.539 x_centro 3.88 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +30.843676
+  S3 eps 0.5 s 0.99 N 1     Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu -3.086625 w_sol -3.551123 larghezza 0.789 x_centro 0.126 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +1.797944
+  S3 eps 0.5 s 0.99 N 10    Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu -1.397783 w_sol -1.862280 larghezza 0.914 x_centro 0.889 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.546722
+  S3 eps 0.5 s 0.99 N 100   Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu -0.525009 w_sol -0.989507 larghezza 1.290 x_centro 4.15 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.956519
+  S4 eps 0.5 s 0.99 N 1     Dt 0.3448 w0 -0.4645    : c -0.5799 | DISPERSIONE CONVERGE | mu -2.976411 w_sol -3.440908 larghezza 2.657 x_centro 0.0138 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 10    Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu -1.598241 w_sol -2.062738 larghezza 0.946 x_centro 1.01 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.371731
+  S4 eps 0.5 s 0.99 N 100   Dt 0.3448 w0 -0.4645    : c -0.5799 | LEGATO CONVERGE | mu +0.435756 w_sol -0.028741 larghezza 0.836 x_centro 11.3 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +100.518996
+  S1 eps 0.5 s 0.99 N 1     Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu +0.039771 w_sol +0.100717 larghezza 3.134 x_centro 0.00655 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 10    Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu +0.041380 w_sol +0.102326 larghezza 3.151 x_centro 0.064 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 100   Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu +0.119363 w_sol +0.180310 larghezza 3.624 x_centro 0.363 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 1     Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -5.080581 w_sol -5.019635 larghezza 4.317 x_centro 0.00218 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 10    Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -2.836212 w_sol -2.775265 larghezza 4.312 x_centro 0.0219 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 100   Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -0.866162 w_sol -0.805215 larghezza 4.262 x_centro 0.226 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 1     Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -2.925143 w_sol -2.864197 larghezza 3.594 x_centro 0.00389 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 10    Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -2.538583 w_sol -2.477637 larghezza 3.975 x_centro 0.0273 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 100   Dt 0.0189 w0 +0.0609    : c +0.3097 | DISPERSIONE CONVERGE | mu -1.364193 w_sol -1.303247 larghezza 4.239 x_centro 0.228 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 1     Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu +0.039768 w_sol +0.567098 larghezza 3.269 x_centro 0.00603 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 10    Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu +0.041135 w_sol +0.568464 larghezza 3.283 x_centro 0.0591 | d ln w/d ln s --
+  S1 eps 0.5 s 0.99 N 100   Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu +0.110419 w_sol +0.637748 larghezza 3.744 x_centro 0.345 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 1     Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -5.163235 w_sol -4.635905 larghezza 4.502 x_centro 0.00201 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 10    Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -2.916076 w_sol -2.388747 larghezza 4.497 x_centro 0.0201 | d ln w/d ln s --
+  S3 eps 0.5 s 0.99 N 100   Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -0.924218 w_sol -0.396888 larghezza 4.449 x_centro 0.207 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 1     Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -2.932014 w_sol -2.404684 larghezza 3.733 x_centro 0.00363 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 10    Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -2.562410 w_sol -2.035081 larghezza 4.132 x_centro 0.0254 | d ln w/d ln s --
+  S4 eps 0.5 s 0.99 N 100   Dt 0.7162 w0 +0.5273    : c +0.3368 | DISPERSIONE CONVERGE | mu -1.427438 w_sol -0.900109 larghezza 4.414 x_centro 0.211 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 1     Dt 0.3392 w0 -0.5000    : c -0.5840 | DISPERSIONE CONVERGE | mu -0.040151 w_sol -0.540151 larghezza 4.283 x_centro 0.00351 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 10    Dt 0.3392 w0 -0.5000    : c -0.5840 | DISPERSIONE CONVERGE | mu -0.039668 w_sol -0.539668 larghezza 4.276 x_centro 0.0354 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 100   Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu +0.371226 w_sol -0.128774 larghezza 1.536 x_centro 3.89 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +24.674873
+  S3 eps 0.5 s 1    N 1     Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu -3.115216 w_sol -3.615216 larghezza 0.788 x_centro 0.126 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +1.763618
+  S3 eps 0.5 s 1    N 10    Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu -1.410281 w_sol -1.910281 larghezza 0.913 x_centro 0.891 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.519085
+  S3 eps 0.5 s 1    N 100   Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu -0.529623 w_sol -1.029623 larghezza 1.289 x_centro 4.16 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +3.951371
+  S4 eps 0.5 s 1    N 1     Dt 0.3392 w0 -0.5000    : c -0.5840 | DISPERSIONE CONVERGE | mu -3.005902 w_sol -3.505902 larghezza 2.648 x_centro 0.0139 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 10    Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu -1.611712 w_sol -2.111712 larghezza 0.944 x_centro 1.01 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +2.301770
+  S4 eps 0.5 s 1    N 100   Dt 0.3392 w0 -0.5000    : c -0.5840 | LEGATO CONVERGE | mu +0.442399 w_sol -0.057601 larghezza 0.834 x_centro 11.3 (L'INVILUPPO LENTO NON VALE) | d ln w/d ln s +51.011419
+  S1 eps 0.5 s 1    N 1     Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu +0.040173 w_sol +0.040173 larghezza 3.128 x_centro 0.00658 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 10    Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu +0.041810 w_sol +0.041810 larghezza 3.145 x_centro 0.0642 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 100   Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu +0.121026 w_sol +0.121026 larghezza 3.618 x_centro 0.364 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 1     Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -5.127915 w_sol -5.127915 larghezza 4.309 x_centro 0.00219 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 10    Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -2.861015 w_sol -2.861015 larghezza 4.304 x_centro 0.022 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 100   Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -0.872152 w_sol -0.872152 larghezza 4.253 x_centro 0.227 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 1     Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -2.954350 w_sol -2.954350 larghezza 3.587 x_centro 0.0039 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 10    Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -2.563050 w_sol -2.563050 larghezza 3.968 x_centro 0.0274 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 100   Dt 0.0195 w0 +0.0000    : c +0.3116 | DISPERSIONE CONVERGE | mu -1.374883 w_sol -1.374883 larghezza 4.231 x_centro 0.229 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 1     Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu +0.040170 w_sol +0.540170 larghezza 3.252 x_centro 0.00609 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 10    Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu +0.041578 w_sol +0.541578 larghezza 3.267 x_centro 0.0596 | d ln w/d ln s --
+  S1 eps 0.5 s 1    N 100   Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu +0.112576 w_sol +0.612576 larghezza 3.729 x_centro 0.348 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 1     Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -5.205279 w_sol -4.705279 larghezza 4.479 x_centro 0.00203 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 10    Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -2.935751 w_sol -2.435751 larghezza 4.474 x_centro 0.0203 | d ln w/d ln s --
+  S3 eps 0.5 s 1    N 100   Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -0.926367 w_sol -0.426367 larghezza 4.426 x_centro 0.21 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 1     Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -2.960807 w_sol -2.460807 larghezza 3.716 x_centro 0.00366 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 10    Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -2.585434 w_sol -2.085434 larghezza 4.113 x_centro 0.0256 | d ln w/d ln s --
+  S4 eps 0.5 s 1    N 100   Dt 0.6799 w0 +0.5000    : c +0.3367 | DISPERSIONE CONVERGE | mu -1.434208 w_sol -0.934208 larghezza 4.392 x_centro 0.213 | d ln w/d ln s --
+### IL CONTROLLO CHE PUO' FALLIRE: c costante -0.796990 (ramo basso, eps 0, s 0.9), omega0 = 0
+  S1 N 1     s 0.85: DISPERSIONE mu -0.034131 larghezza 5.426 | d ln mu/d ln s --
+  S1 N 1     s 0.9 : DISPERSIONE mu -0.036138 larghezza 5.273 | d ln mu/d ln s --
+  S1 N 1     s 0.95: DISPERSIONE mu -0.038146 larghezza 5.133 | d ln mu/d ln s --
+  S1 N 1     s 0.99: DISPERSIONE mu -0.039752 larghezza 5.028 | d ln mu/d ln s --
+  S1 N 1     s 1   : DISPERSIONE mu -0.040153 larghezza 5.003 | d ln mu/d ln s --
+  S1 N 10    s 0.85: DISPERSIONE mu -0.033972 larghezza 5.423 | d ln mu/d ln s --
+  S1 N 10    s 0.9 : DISPERSIONE mu -0.035950 larghezza 5.270 | d ln mu/d ln s --
+  S1 N 10    s 0.95: DISPERSIONE mu -0.037924 larghezza 5.129 | d ln mu/d ln s --
+  S1 N 10    s 0.99: DISPERSIONE mu -0.039501 larghezza 5.024 | d ln mu/d ln s --
+  S1 N 10    s 1   : DISPERSIONE mu -0.039895 larghezza 4.999 | d ln mu/d ln s --
+  S1 N 100   s 0.85: LEGATO mu +0.176823 larghezza 2.237 | d ln mu/d ln s +3.129457
+  S1 N 100   s 0.9 : LEGATO mu +0.208930 larghezza 2.103 | d ln mu/d ln s +2.738723
+  S1 N 100   s 0.95: LEGATO mu +0.240565 larghezza 1.997 | d ln mu/d ln s +2.490632
+  S1 N 100   s 0.99: LEGATO mu +0.265774 larghezza 1.926 | d ln mu/d ln s +2.347220
+  S1 N 100   s 1   : LEGATO mu +0.272076 larghezza 1.910 | d ln mu/d ln s +2.318094
+  S3 N 1     s 0.85: LEGATO mu -3.013780 larghezza 0.988 | d ln mu/d ln s +0.738755
+  S3 N 1     s 0.9 : LEGATO mu -3.143507 larghezza 0.961 | d ln mu/d ln s +0.735877
+  S3 N 1     s 0.95: LEGATO mu -3.270856 larghezza 0.936 | d ln mu/d ln s +0.733132
+  S3 N 1     s 0.99: LEGATO mu -3.371119 larghezza 0.918 | d ln mu/d ln s +0.731024
+  S3 N 1     s 1   : LEGATO mu -3.395969 larghezza 0.913 | d ln mu/d ln s +0.730534
+  S3 N 10    s 0.85: LEGATO mu -1.439295 larghezza 1.104 | d ln mu/d ln s +0.622937
+  S3 N 10    s 0.9 : LEGATO mu -1.491367 larghezza 1.078 | d ln mu/d ln s +0.620602
+  S3 N 10    s 0.95: LEGATO mu -1.542167 larghezza 1.055 | d ln mu/d ln s +0.618434
+  S3 N 10    s 0.99: LEGATO mu -1.581954 larghezza 1.037 | d ln mu/d ln s +0.616808
+  S3 N 10    s 1   : LEGATO mu -1.591788 larghezza 1.033 | d ln mu/d ln s +0.616434
+  S3 N 100   s 0.85: LEGATO mu -0.555539 larghezza 1.501 | d ln mu/d ln s +0.559588
+  S3 N 100   s 0.9 : LEGATO mu -0.573579 larghezza 1.473 | d ln mu/d ln s +0.558627
+  S3 N 100   s 0.95: LEGATO mu -0.591153 larghezza 1.448 | d ln mu/d ln s +0.557736
+  S3 N 100   s 0.99: LEGATO mu -0.604900 larghezza 1.429 | d ln mu/d ln s +0.557068
+  S3 N 100   s 1   : LEGATO mu -0.608296 larghezza 1.424 | d ln mu/d ln s +0.556914
+  S4 N 1     s 0.85: DISPERSIONE mu -2.612302 larghezza 4.138 | d ln mu/d ln s --
+  S4 N 1     s 0.9 : DISPERSIONE mu -2.760656 larghezza 3.946 | d ln mu/d ln s --
+  S4 N 1     s 0.95: DISPERSIONE mu -2.908297 larghezza 3.767 | d ln mu/d ln s --
+  S4 N 1     s 0.99: DISPERSIONE mu -3.025878 larghezza 3.632 | d ln mu/d ln s --
+  S4 N 1     s 1   : DISPERSIONE mu -3.055197 larghezza 3.599 | d ln mu/d ln s --
+  S4 N 10    s 0.85: LEGATO mu -1.726468 larghezza 1.340 | d ln mu/d ln s +0.585050
+  S4 N 10    s 0.9 : LEGATO mu -1.784347 larghezza 1.281 | d ln mu/d ln s +0.568665
+  S4 N 10    s 0.95: LEGATO mu -1.839270 larghezza 1.229 | d ln mu/d ln s +0.552676
+  S4 N 10    s 0.99: LEGATO mu -1.881191 larghezza 1.191 | d ln mu/d ln s +0.540133
+  S4 N 10    s 1   : LEGATO mu -1.891401 larghezza 1.182 | d ln mu/d ln s +0.537183
+  S4 N 100   s 0.85: LEGATO mu +0.052078 larghezza 1.044 | d ln mu/d ln s +14.682924
+  S4 N 100   s 0.9 : LEGATO mu +0.098066 larghezza 1.015 | d ln mu/d ln s +8.622407
+  S4 N 100   s 0.95: LEGATO mu +0.145983 larghezza 0.989 | d ln mu/d ln s +6.356411
+  S4 N 100   s 0.99: LEGATO mu +0.185619 larghezza 0.970 | d ln mu/d ln s +5.359274
+  S4 N 100   s 1   : LEGATO mu +0.195702 larghezza 0.965 | d ln mu/d ln s +5.178280
+### IL CONTROLLO DEL LIVELLO 2
+  PUO' FALLIRE: c costante e omega0 = 0, la pendenza di omega_sol = 1 entro 1e-06, s ### FALLISCE   S1 N 100 s 0.85: +3.1295; S1 N 100 s 0.9: +2.7387; S1 N 100 s 0.95: +2.4906; S1 N 100 s 0.99: +2.3472; S1 N 100 s 1: +2.3181; S3 N 1 s 0.85: +0.7388; S3 N 1 s 0.9: +0.7359; S3 N 1 s 0.95: +0.7331; S3 N 1 s 0.99: +0.7310; S3 N 1 s 1: +0.7305; S3 N 10 s 0.85: +0.6229; S3 N 10 s 0.9: +0.6206
+====================================================================================================
+LA GRAVITA' COLLETTIVA: 5 su 7 controlli   ### CI SONO BUCHI  (il verdetto di fisica e' la tabella delle pendenze)
+====================================================================================================
