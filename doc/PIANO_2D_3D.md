@@ -57,6 +57,10 @@
    - ### **le due bande uguali col SOLO zero simmetrico** *(`a_1/a_0 = 1.007` a `eps 0`)*;
    - ### **la violazione da moneta va come `s^2 eps^2`:** ### **`lambda* - 1/2 ~ s^2.030 eps^1.873`; la differenza fra le bande `~ s^2.177 eps^1.714`**;
    - ### **il limite a `s` piccolo piatto** *(`0.969`, `0.977`)*.
+   - ### **IL BILANCIO DEI TRIANGOLI** *(`77f9f850`, `92c63912`)*: ### **l'UNICO modo senza massa e' a `s = 1` ESATTO, a `Gamma` attraverso la fase `pi`, a `1/sqrt2 = v_max`; per `s < 1` quei rami hanno salto `2 pi (1 - s)`
+     -- la massa da ritardo;** ### **la moneta non apre modi senza massa fino a `pi/2`; la vestizione dal vuoto non cambia `omega''`;** ### **`v_b/v_max` della coppia a `K` da `1.310` (`s 0.05`) a `0.778` (`s 1`), con
+     l'incrocio `v_b = v_max` fra `s 0.7` e `0.9`** *(la stima del guardiano per interpolazione: `s ~ 0.73`, DA MISURARE)*; ### **la `c` del modello NON c'e' sui triangoli: va cercata nel campo `U(1)` o nelle onde di
+     `cs`, in 3D.** ### **`S1` contro `S4`: il dossier `doc/DOSSIER_S1_S4.md`.**
 2. ### **POI LA FCC:** ### **la stessa catena** *(gli spettri, i modi leggeri, Hamilton, la forza)*. ### **Gli strumenti si progettano in un mandato a se':** ### **la scena FCC** *(`12`
    estremita' per nodo)*, ### **la zona di Brillouin** *(l'ottaedro troncato; i punti `Gamma`, `X`, `L`, `W`, `K`)*, ### **la prova di non bipartizione, la simmetria del reticolo, il toro a lati
    diversi.**

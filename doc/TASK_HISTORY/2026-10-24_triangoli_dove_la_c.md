@@ -345,3 +345,12 @@ e' quella, la si ha proprio dove sul quadrato l'equivalenza cade.**
 
 ### **Nella camminata a `s < 1` NON c'e' un modo senza massa** *(nudo, con la moneta, vestito)*: ### **la `c` del modello, se c'e', deve venire da un ALTRO settore: l'onda del campo `U(1)` sugli archi** *(la luce vera, oggi senza
 dinamica)* ### **o le onde di `cs`** *(quando il canale di `cs` sara' aperto: le onde gravitazionali del modello)*.
+
+## 7. LA PROPRIETA' DI S4, REGISTRATA *(`2026-10-24`, il mandato «chiudere il capitolo dei triangoli»)*
+
+- ### **Il DEVE della parte `C`** *(`x 1e-8`: la vestita = la nuda entro `1e-4`)* ### **RESTA FALLITO per `S4`** *(`0.73`-`0.75`)*: ### **il criterio non cambia.**
+- ### **E' una PROPRIETA' FISICA della forma `S4`:** ### **`alpha_4(0) = -pi`** *(dalla formula: `pi (x^p - 1)/(x^p + 1)`, `x^p -> 0`)*, ### **una fase `-pi s` per tick anche a densita' nulla** *(`psi -> e^{+i pi s} psi`)*; ### **`S1` torna alla
+  particella nuda entro `2e-13`.**
+- ### **IL SEGNO** *(l'osservazione del guardiano, verificata sulla carta)*: ### **con lo zero simmetrico `A_simm = e^{-i pi s} A_oggi`, il tick con `S4` a densita' nulla e' `e^{+i pi s} A_simm = A_oggi`: `S4` riporta la materia allo zero
+  di OGGI** *(il numero: `-0.48448` e `-1.40045` contro i valori di oggi `-0.48450` e `-1.40046`)*.
+- ### **Il dossier:** ### **`doc/DOSSIER_S1_S4.md`** *(per [[DEC-FC-COESIONE]]: la nota del nodo nell'albero NON si tocca)*.
