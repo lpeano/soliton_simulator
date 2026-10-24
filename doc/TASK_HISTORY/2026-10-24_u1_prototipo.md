@@ -107,3 +107,16 @@
 2. `csv/_u1_prototipo.py` e la sua voce in `doc/INVENTARIO_strumenti.md`, committati PRIMA dei numeri;
 3. la corsa, `doc/referti_l2/u1_prototipo.{txt,jsonl}`;
 4. il referto con la relazione e i legami nell'indice *(`PROGETTO-U1`, `LUCE-VINCOLO-LAMPI-GAMMA`, `LORENTZ-MATERIA-INTERFERENZA`)*; ### **se una DEVE fallisce, FERMO.**
+
+## 4. ANNOTAZIONI DOPO LA PROVA A VUOTO *(ridotta, nello scratchpad: `N_B 10`, `N_C 30`, `N_D 15`, `s 0.05` e `0.1`, lo zero `simm`; PRIMA di committare lo script e PRIMA della corsa)*
+
+### ⛔ **NON SI RISCRIVE, SI ANNOTA:** ### **i criteri della sezione `2.4` NON cambiano.**
+
+1. ### ⛔ **IL SIGILLO `(b)` FALLIRA' SU `E`, e la causa e' l'arrotondamento della GAUGE, non la fisica:** ### **nella prova a vuoto `E` differisce di `4.1e-9` relativo a `e 0.1` e `4.6e-10` a `e 0.3029`** *(`~1/e^2`)*, ### **`rho` e `e B` entro `2e-15`.**
+   ### **Il meccanismo:** ### **`A' = A + (chi_jj - chi_ii)/e` vale fino a `2 pi/e = 63`, e `B'` e' una somma di numeri grandi che porta un'informazione piccola:** ### **l'errore `~3 eps max|A'|` entra in `E` dalla spinta**, ### **ed `E`
+   e' piccolo** *(`~ e J`)*: ### **il relativo va come `1/e^2`.** ### **La sezione `2.4` aveva previsto l'errore su `e B`** *(e passa)*, ### **NON la sua propagazione in `E`:** ### **e' un MIO errore di previsione.**
+   ### **LA DIAGNOSI aggiunta allo script** *(non un criterio)*: ### **`(i)` la fase GLOBALE** *(`chi` uniforme, `A` invariato: una simmetria esatta)* ### **da' `E` entro `1e-14`;** ### **`(ii)` la stima `N_B 6 eps max|A'|/A_p` contro `|dE|`: il rapporto
+   `0.49`-`0.50`.** ### **Quindi nella corsa vera `(b)` fallira' come DEVE, il referto lo dira', e MI FERMO** *(la correzione -- la scala di `E` dall'arrotondamento di `A'`, o `A` ridotto modulo `2 pi/e` nel compatto -- e' una decisione e un commit a se')*.
+2. ### ⛔ **IL CONTROLLO DI SERVIZIO DEL PACCHETTO ERA SBAGLIATO, ed e' uno strumento, non un criterio:** ### **il baricentro andava a `0.9716` contro `v_g(k0) = 0.9979`** *(a `s 0.05`)*: ### **`v_g(k0)` ignora la larghezza in ANGOLO del pacchetto** *(`sigma_k/k0 = (1/12)/0.2618 = 0.32` rad: `<cos> ~ 0.95`)*. ### **La previsione diventa la media di `d omega/d k_x` sullo spettro del pacchetto, pesata con l'energia di ogni componente** *(`v_prevista`)*: ### **`0.97162` contro `0.97163`.** ### **`v_g(k0)` resta stampato accanto.**
+3. ### **UN MIO ERRORE DI SCRITTURA, corretto prima della corsa:** ### **`coppia_K` mette gia' lo zero simmetrico, e calcolata DENTRO `conv("simm")` lo metteva DUE volte** *(la coppia a `K` non si trovava: «gruppi `[2, 4, 2]`»)*: ### **si calcola una volta, fuori da ogni convenzione.**
+4. ### **`(g)`: il `k` sulla griglia** *(`t1 = 2 pi 7/192`, `|k| = 0.2645`, la lunghezza d'onda `23.75`)* ### **e' il piu' vicino a `2 pi/24`** *(dichiarato nella configurazione)*.
