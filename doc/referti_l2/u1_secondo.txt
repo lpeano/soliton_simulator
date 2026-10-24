@@ -1,0 +1,67 @@
+[TIMBRO] _u1_secondo.py  sha1-BYTE ab015054  committato e pulito
+========================================================================================================================
+IL PROTOTIPO U(1), SECONDO PASSO: il sigillo di gauge rifatto, la luce in un gradiente con le due forme del tempo dell'arco, il limite di v_b a s piccolo
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_u1_prototipo.py d073761c; csv/_u1_secondo.py ab015054; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_zero_simmetrico.py b400d76e; csv/_universalita_massa.py 94ebb415
+  la configurazione: RIF_U1 0b6bfde8 RIF_FATTORE 7daa8840; CONV ('simm', 'oggi'); S (0.05, 0.1, 0.3); E_PROVA (0.1, 0.302862); N_B 100; SCALA_J (0, 1, 2, 3, 4); TOLL_REL 1e-12 TOLL_ROTTA 1e-09; la carica: la norma
+    parte 2: LG2 (384, 48) S0 0.20 ETA 0.20 W2 12.0 N1_LUNGO 14 N_FASCIO (-8, 2) T_LUNGO 600 T_FASCIO 400 FIN 10 TOLL_V 0.02 TOLL_DEF 0.1; (G) L 24 s 0.10 eta 0.20 200 tick
+    parte 3: S3 (0.02, 0.01, 0.005, 0.002, 0.001) S3_VICINO 0.0001 S_RIF3 0.05 KMAX3 0.1 NK3 200 TOLL_RIF3 1e-06 TOLL_PI4 0.0001; eps 0, lo zero simmetrico
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 1 -- IL SIGILLO DI GAUGE RIFATTO (la decisione (1) di Luca): (b1) compatto con A modulo 2 pi/e, chi in [-pi, pi); (b2) non compatto, chi_max = e/2; 100 tick
+  simm s 0.05 e 0.1000 | (b1) rho 2.6e-15 eB 1.1e-15 E 3.6e-09 (max|A'| 31.41, |dE|/stima 0.144) | (b2) rho 4.2e-15 eB 0.0e+00 E 8.2e-11 (max|A'| 0.978, |dE|/stima 0.105) | (b-) 1.2e-01 | grande: E 5.7e-09, |dE|/stima 0.115
+  simm s 0.05 e 0.3029 | (b1) rho 4.6e-15 eB 1.5e-15 E 4.0e-10 (max|A'| 10.37, |dE|/stima 0.146) | (b2) rho 5.2e-15 eB 7.1e-17 E 2.7e-11 (max|A'| 0.978, |dE|/stima 0.106) | (b-) 3.9e-01 | grande: E 8.4e-10, |dE|/stima 0.156
+  simm s 0.10 e 0.1000 | (b1) rho 3.5e-15 eB 1.1e-15 E 1.7e-09 (max|A'| 31.41, |dE|/stima 0.073) | (b2) rho 4.4e-15 eB 0.0e+00 E 4.1e-11 (max|A'| 0.978, |dE|/stima 0.057) | (b-) 1.2e-01 | grande: E 2.4e-09, |dE|/stima 0.052
+  simm s 0.10 e 0.3029 | (b1) rho 3.1e-15 eB 1.8e-15 E 2.0e-10 (max|A'| 10.37, |dE|/stima 0.079) | (b2) rho 3.8e-15 eB 7.1e-17 E 1.5e-11 (max|A'| 0.978, |dE|/stima 0.063) | (b-) 3.4e-01 | grande: E 2.6e-10, |dE|/stima 0.052
+  simm s 0.30 e 0.1000 | (b1) rho 4.2e-15 eB 1.7e-15 E 2.5e-10 (max|A'| 31.41, |dE|/stima 0.025) | (b2) rho 3.0e-15 eB 7.1e-17 E 5.9e-12 (max|A'| 0.978, |dE|/stima 0.018) | (b-) 5.4e-02 | grande: E 3.0e-10, |dE|/stima 0.015
+  simm s 0.30 e 0.3029 | (b1) rho 5.4e-15 eB 2.0e-15 E 3.4e-11 (max|A'| 10.37, |dE|/stima 0.031) | (b2) rho 4.1e-15 eB 7.1e-17 E 1.9e-12 (max|A'| 0.978, |dE|/stima 0.018) | (b-) 1.7e-01 | grande: E 3.9e-11, |dE|/stima 0.018
+  oggi s 0.05 e 0.1000 | (b1) rho 3.3e-15 eB 1.1e-15 E 3.6e-09 (max|A'| 31.41, |dE|/stima 0.144) | (b2) rho 2.5e-15 eB 0.0e+00 E 8.2e-11 (max|A'| 0.978, |dE|/stima 0.105) | (b-) 1.2e-01 | grande: E 5.7e-09, |dE|/stima 0.115
+  oggi s 0.05 e 0.3029 | (b1) rho 3.0e-15 eB 1.5e-15 E 4.0e-10 (max|A'| 10.37, |dE|/stima 0.146) | (b2) rho 2.5e-15 eB 7.1e-17 E 2.7e-11 (max|A'| 0.978, |dE|/stima 0.106) | (b-) 3.9e-01 | grande: E 8.4e-10, |dE|/stima 0.156
+  oggi s 0.10 e 0.1000 | (b1) rho 2.8e-15 eB 1.2e-15 E 1.7e-09 (max|A'| 31.41, |dE|/stima 0.073) | (b2) rho 2.7e-15 eB 0.0e+00 E 4.1e-11 (max|A'| 0.978, |dE|/stima 0.057) | (b-) 1.2e-01 | grande: E 2.4e-09, |dE|/stima 0.052
+  oggi s 0.10 e 0.3029 | (b1) rho 3.3e-15 eB 1.7e-15 E 2.0e-10 (max|A'| 10.37, |dE|/stima 0.079) | (b2) rho 2.9e-15 eB 7.1e-17 E 1.5e-11 (max|A'| 0.978, |dE|/stima 0.063) | (b-) 3.4e-01 | grande: E 2.6e-10, |dE|/stima 0.052
+  oggi s 0.30 e 0.1000 | (b1) rho 3.6e-15 eB 2.0e-15 E 2.7e-10 (max|A'| 31.41, |dE|/stima 0.026) | (b2) rho 2.4e-15 eB 0.0e+00 E 6.0e-12 (max|A'| 0.978, |dE|/stima 0.019) | (b-) 5.4e-02 | grande: E 3.9e-10, |dE|/stima 0.019
+  oggi s 0.30 e 0.3029 | (b1) rho 3.6e-15 eB 1.8e-15 E 3.7e-11 (max|A'| 10.37, |dE|/stima 0.034) | (b2) rho 2.9e-15 eB 1.4e-16 E 2.1e-12 (max|A'| 0.978, |dE|/stima 0.020) | (b-) 1.7e-01 | grande: E 4.2e-11, |dE|/stima 0.020
+  LA SCALA (lettura) simm s 0.05 e 0.1000 chi_max 5.00e-02: max|A'| 9.78e-01 | E 8.22e-11 | rho 4.2e-15 eB 0.0e+00 | |dE|/stima 0.105
+  LA SCALA (lettura) simm s 0.05 e 0.1000 chi_max 5.00e-03: max|A'| 9.78e-02 | E 8.81e-12 | rho 3.5e-15 eB 0.0e+00 | |dE|/stima 0.113
+  LA SCALA (lettura) simm s 0.05 e 0.1000 chi_max 5.00e-04: max|A'| 9.78e-03 | E 1.13e-12 | rho 3.6e-15 eB 0.0e+00 | |dE|/stima 0.144
+  LA SCALA (lettura) simm s 0.05 e 0.1000 chi_max 5.00e-05: max|A'| 9.78e-04 | E 9.88e-14 | rho 3.3e-15 eB 0.0e+00 | |dE|/stima 0.127
+  LA SCALA (lettura) simm s 0.05 e 0.1000 chi_max 5.00e-06: max|A'| 9.78e-05 | E 1.74e-14 | rho 3.2e-15 eB 0.0e+00 | |dE|/stima 0.186
+  LA SCALA (lettura) simm s 0.05 e 0.3029 chi_max 1.51e-01: max|A'| 9.78e-01 | E 2.74e-11 | rho 5.2e-15 eB 7.1e-17 | |dE|/stima 0.106
+  LA SCALA (lettura) simm s 0.05 e 0.3029 chi_max 1.51e-02: max|A'| 9.78e-02 | E 3.21e-12 | rho 3.0e-15 eB 0.0e+00 | |dE|/stima 0.124
+  LA SCALA (lettura) simm s 0.05 e 0.3029 chi_max 1.51e-03: max|A'| 9.78e-03 | E 4.24e-13 | rho 3.2e-15 eB 0.0e+00 | |dE|/stima 0.164
+  LA SCALA (lettura) simm s 0.05 e 0.3029 chi_max 1.51e-04: max|A'| 9.78e-04 | E 2.96e-14 | rho 3.7e-15 eB 0.0e+00 | |dE|/stima 0.115
+  LA SCALA (lettura) simm s 0.05 e 0.3029 chi_max 1.51e-05: max|A'| 9.78e-05 | E 2.28e-14 | rho 4.5e-15 eB 0.0e+00 | |dE|/stima 0.443
+  DEVE PASSARE (b1): compatto, A modulo 2 pi/e: rho, eB, E entro 1e-12 relativo, ogni riga             ### FALLISCE   il peggiore 3.62e-09 (E 3.6e-09)
+  DEVE PASSARE (b2): non compatto, chi_max = e/2: rho, eB, E entro 1e-12 relativo, ogni riga           ### FALLISCE   il peggiore 8.22e-11 (E 8.2e-11)
+  DEVE FALLIRE (b-), PER LA CHIAVE GIUSTA: solo psi > 1e-09, e la corsa intera con lo stesso chi sotto PASSA   (b-) il minimo 5.35e-02; la chiave True (|dE|/stima al piu' 0.106)
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 2 -- LA LUCE IN UN GRADIENTE DI cs, LE DUE FORME (F1 di 0b6bfde8, F2 adattata in impedenza)
+  DEVE PASSARE (G): Gauss con la materia in un gradiente di cs (200 tick), F1 e F2, entro 1e-12        PASSA   F1 4.79e-14 F2 4.57e-14
+### PARTE G -- Shapiro: il toro 192x48, cs = 0.20 (1 + 0.50 cos(2 pi m1/L1)), non compatto; la velocita' locale contro cs locale, e la deflessione
+  lungo il gradiente: v/cs media 0.99356, min 0.96547, max 1.07914: variazione 1.14e-01 (cs visto 0.102..0.287, tratto u 124.1); int du/(v/cs . cs) 800.2 tick contro 800; energia 3.6e-05
+  PUO' FALLIRE (g): la velocita' locale proporzionale a cs entro 0.02                              ### FALLISCE   1.14e-01
+  la deflessione (lungo a2, nel gradiente massimo): d2u/dt2 2.073e-04 contro l'ottica dei raggi -s ds/du 7.557e-04: rapporto 0.274 (verso cs piu' basso)
+  DEVE PASSARE: _u1_prototipo.parte_G rigirata riproduce (g) di 0b6bfde8 entro 1e-9, ogni numero       PASSA   0.0e+00
+  SERVIZIO: lo strumento nuovo in F1 sulla scena vecchia = (g) di 0b6bfde8 (v/cs media) entro 1e-9     PASSA   0.0e+00
+  LA SCENA NUOVA: toro 384x48 (Lu 332.6), cs = 0.20 (1 + 0.20 cos), cs fra 0.160 e 0.240 (Courant 0.408), W 12.0, la lunghezza del gradiente 259.3 = 21.6 W; il lungo t1 = 2 pi 14/384, 600 tick; il fascio (-8, 2), 400 tick
+  F1 lungo il gradiente: v/cs media 0.99657 (0.99471..1.00249) variazione 7.81e-03 | T previsto/T 0.99867 | dietro 1.15e-05 (controllo 4.19e-06): riflessione 7.33e-06 | Gauss 5.0e-16 | energia 3.4e-06 | c0 (controllo) 0.99784
+  F2 lungo il gradiente: v/cs media 0.99658 (0.99468..1.00357) variazione 8.93e-03 | T previsto/T 0.99868 | dietro 1.26e-05 (controllo 4.19e-06): riflessione 8.45e-06 | Gauss 3.3e-16 | energia 4.0e-06 | c0 (controllo) 0.99784
+  DEVE PASSARE (G): Gauss senza materia nel gradiente, F1 e F2, entro 1e-12 di max|E|                  PASSA   F1 5.0e-16 F2 3.3e-16
+  F1 la deflessione: d2u/dt2 1.2628e-04, v_par = 0.99820 cs(u0) 0.200: kappa 3.1683e-03 contro R1 (Soldner) 3.7787e-03 e R2 (Einstein) 7.5575e-03: kappa/R1 0.8384
+  F2 la deflessione: d2u/dt2 1.2607e-04, v_par = 0.99820 cs(u0) 0.200: kappa 3.1632e-03 contro R1 (Soldner) 3.7787e-03 e R2 (Einstein) 7.5575e-03: kappa/R1 0.8371
+  PUO' FALLIRE: F1, il pacchetto stretto, v/cs costante entro 0.02                                     PASSA   7.81e-03 (F2 8.93e-03)
+  PUO' FALLIRE: la deflessione entro 0.1 da R1, con F1                                                 ### FALLISCE   kappa/R1 F1 0.8384 (F2 0.8371)
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 3 -- IL LIMITE DI v_b A s PICCOLO (eps 0, lo zero simmetrico; la coppia a K; v_max)
+  DEVE PASSARE: a s 0.05 v_b/s riproduce 7daa8840 entro 1e-06 (i due rami)                             PASSA   0.784994 0.784994 contro 0.784994 0.784994: 0.0e+00
+  s 0.02    v_b/s 0.78533353 0.78533353 | v_max/s 0.59853015 | 15s
+  s 0.01    v_b/s 0.78538199 0.78538199 | v_max/s 0.59848313 | 15s
+  s 0.005   v_b/s 0.78539410 0.78539410 | v_max/s 0.59847137 | 15s
+  s 0.002   v_b/s 0.78539750 0.78539750 | v_max/s 0.59846808 | 15s
+  s 0.001   v_b/s 0.78539798 0.78539798 | v_max/s 0.59846761 | 15s
+  s 0.0001  v_b/s 0.78539814 0.78539814 | v_max/s 0.59846745 | 15s
+  il limite di vb0 : libero f0 0.7853981409 f1 +5.767e-07 f2 -1.616e-01 | pari f0 0.7853981425 f2 -1.615e-01 | contro pi/4: -2.255e-08 (libero) -2.089e-08 (pari)
+  il limite di vb1 : libero f0 0.7853981405 f1 +6.507e-07 f2 -1.616e-01 | pari f0 0.7853981423 f2 -1.615e-01 | contro pi/4: -2.292e-08 (libero) -2.105e-08 (pari)
+  il limite di vmax: libero f0 0.5984674498 f1 +3.886e-07 f2 +1.567e-01 | pari f0 0.5984674509 f2 +1.567e-01 | contro pi/4: -1.869e-01 (libero) -1.869e-01 (pari)
+  PUO' FALLIRE: il limite di v_b/s (ramo 0, fit libero) entro 0.0001 da pi/4                           PASSA   0.78539814 contro 0.78539816
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 8/11 controlli passano; DEVE fallite: 2 ['DEVE PASSARE (b1): compatto, A modulo 2 pi/e: rho, eB, E entro 1e-12 relativo, ogni riga', 'DEVE PASSARE (b2): non compatto, chi_max = e/2: rho, eB, E entro 1e-12 relativo, ogni riga']

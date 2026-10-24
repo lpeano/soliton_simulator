@@ -20740,3 +20740,43 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### ⛔ **FERMO: la DEVE `(b)` e' fallita.** ### **LE DOMANDE A LUCA** *(il criterio di chiusura: una sua decisione registrata)*: ### **`(1)` il sigillo di gauge: la scala di `E` dall'arrotondamento di `A'` (`N 6 eps max|A'|/A_p`), o `chi` ridotto, o `A` modulo `2 pi/e` nel compatto?** ### **`(2)` il tempo dell'arco: la forma scelta (deriva `s^2`) o quella adattata in impedenza (vuole una regola per `s` della placchetta)?** ### **`(3)` (gia' aperte, NON risolte qui) la carica, la norma contro `A14.3`; `A16` contro l'energia `E^2/2`.** ### **Il valore derivato di `e`: SALTATO** *(la derivazione e' per lo spostamento intero, e la scena ha il vuoto nullo)*.
 
 ### 📌 **LE DUE DECISIONI DI LUCA SUL PROTOTIPO U(1), REGISTRATE** *([[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]]; `doc/TASK_HISTORY/2026-10-24_u1_prototipo.md` sezione `6`)*: ### **`(1)` il `(b)` di `0b6bfde8` RESTA FALLITO; si rifa' col compatto modulo `2 pi/e` e col non compatto a `chi` piccolo, soglia `1e-12`; la trasformazione grande come lettura.** ### **`(2)` il tempo dell'arco nel campo NON e' scelto: `F1` e `F2` (adattata in impedenza, la media armonica dei tre nodi come regola di prova) misurate accanto.** ### **L'errore del guardiano `n.62`** *(la soglia andava ricavata dalla grandezza di `A`)*. ### ⚠ **LA MIA PREVISIONE SULLA CARTA, prima dei numeri:** ### **lo scarto su `E` va come `max|A'|`; per `1e-12` serve `max|A'| ~ 1e-2`: il compatto modulo `2 pi/e` (`max|A'|` da `2 pi/e` a `pi/e`) e il non compatto con `A ~ 1` dovrebbero FALLIRE ancora** *(`~3e-9` e `~1e-10`)*; ### **aggiungo la lettura dello scarto contro `|chi|` per decadi.**
+
+### 📌 **IL SECONDO PASSO DEL PROTOTIPO U(1): IL REFERTO** *([[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]], [[LORENTZ-MATERIA-INTERFERENZA]]; nessun file del nucleo, nessuna decisione presa)*.
+
+### **IL REFERTO:** `doc/referti_l2/u1_secondo.{txt,jsonl}` *(`csv/_u1_secondo.py` `sha1-BYTE ab015054` al commit `3a43207c`; il task history `90886129`; le decisioni `331176f5`)*. ### **`8/11` controlli; DUE DEVE FALLITE, `(b1)` e `(b2)`, come la previsione sulla carta.** ### ⛔ **FERMO.**
+
+### **PARTE 1, IL SIGILLO DI GAUGE COME DECISO:**
+
+| | `max|A'|` | `E` relativo, il peggiore | `rho`, `e B` | `|dE|/stima` | il criterio |
+|---|---|---|---|---|---|
+| `(b1)` compatto modulo `2 pi/e` | `31.41` *(`pi/e`, `e 0.1`)* | ### **`3.6e-9`** | `<= 5.4e-15` | `0.025`-`0.146` | ### ⛔ **FALLISCE** |
+| `(b2)` non compatto `chi_max = e/2` | `0.978` | ### **`8.2e-11`** | `<= 5.2e-15` | `0.018`-`0.106` | ### ⛔ **FALLISCE** |
+| `(b-)` solo `psi`, lo stesso `chi` | -- | `>= 5.4e-2` | -- | la chiave: la corsa intera sotto la stima | ### **PASSA** *(fallisce per la chiave giusta)* |
+| la grande, non compatto *(lettura)* | `62.8` | `5.7e-9` | -- | `0.015`-`0.156` | lettura |
+
+### **LA SCALA** *(lettura; non compatto, `simm`, `s 0.05`, `e 0.1`)*: ### **`max|A'|` `0.978 / 0.0978 / 0.00978 / 0.000978 / 0.0000978` -> `E` `8.2e-11 / 8.8e-12 / 1.1e-12 / 9.9e-14 / 1.7e-14`:** ### **LINEARE in `max|A'|` fino al pavimento `~2e-14`, e `1e-12` si raggiunge a `max|A'| ~ 1e-2`** *(la previsione sulla carta)*. ### **La causa e' l'arrotondamento, non la fisica:** ### **`rho` ed `e B` restano a `1e-15` in ogni riga, e lo scarto su `E` sta sempre SOTTO la stima** *(al piu' `0.44` di essa)*.
+
+### **PARTE 2, LA LUCE IN UN GRADIENTE** *(il toro `384 x 48`, `cs = 0.2 (1 + 0.2 cos)`, `W = 12`, la lunghezza del gradiente `259.3 = 21.6 W`)*:
+
+| | `F1` | `F2` |
+|---|---|---|
+| Gauss con la materia *(`200` tick)* / senza | `4.8e-14` / `5.0e-16` | `4.6e-14` / `3.3e-16` |
+| `v/cs` media *(min..max)*, la variazione | `0.99657` *(`0.99471..1.00249`)*, ### **`7.8e-3`** | `0.99658` *(`0.99468..1.00357`)*, `8.9e-3` |
+| il tempo d'arrivo previsto/vero | `0.99867` | `0.99868` |
+| la riflessione *(meno il controllo `4.2e-6`)* | `7.3e-6` | `8.5e-6` |
+| la curvatura del fascio / `R1` *(Soldner, `3.779e-3`)* | ### **`0.8384`** | ### **`0.8371`** |
+| ... / `R2` *(Einstein, `7.557e-3`)* | `0.419` | `0.419` |
+
+### **LA RIPRODUZIONE** *(DEVE)*: ### **`_u1_prototipo.parte_G` rigirata: ogni numero di `(g)` di `0b6bfde8` AL BIT** *(`0.0`)*; ### **lo strumento nuovo in `F1` sulla scena vecchia: AL BIT.**
+
+### **PARTE 3, IL LIMITE DI `v_b`** *(`eps 0`, lo zero simmetrico)*: ### **`v_b/s` `0.78533353` *(`s 0.02`)*, `0.78538199`, `0.78539410`, `0.78539750`, `0.78539798` *(`s 0.001`)*, `0.78539814` *(`s 1e-4`)*;** ### **il limite fittato `0.7853981409`** *(il termine lineare `5.8e-7`: nullo; `f2 = -0.1616`)* ### **contro `pi/4 = 0.7853981634`: `-2.3e-8`.** ### **`v_max/s` -> `0.5984674498`** *(`f2 = +0.1567`)*: ### **la forma chiusa NON la trovo** *(`0.5984674498/pi = 0.190498`; nessuna derivazione)*. ### **La riproduzione di `7daa8840` a `s 0.05`: AL BIT.**
+
+### **LA LETTURA, in tre righe:**
+1. ### **la gauge E' esatta nella fisica e no nei numeri:** ### **lo scarto su `E` va come `max|A'|` e sta sotto la stima dell'arrotondamento in OGNI riga; la decisione `(1)` porta `max|A'|` a `pi/e` e a `1`, e `1e-12` vorrebbe `~1e-2`** *(la soglia, non il campo, e' cio' che fallisce)*;
+2. ### **col pacchetto stretto la luce va a `cs` locale entro l'`0.8%` e arriva quando `int du/cs` dice** *(`0.13%`)*, ### **in `F1` come in `F2`:** ### **il fallimento di `(g)` di `0b6bfde8` era il pacchetto largo** *(la previsione debole del guardiano su `v` confermata; su `F2` che riduce la riflessione NO: `8.5e-6` contro `7.3e-6`, al pavimento)*;
+3. ### **la deflessione e' verso `cs` basso, `0.84` di `R1` e `0.42` di `R2`, uguale nelle due forme** *(l'indice e' lo stesso)*: ### **e' una deflessione «di Soldner», con un `16%` in meno che NON so attribuire** *(la larghezza del fascio, la diffrazione, il fit su `400` tick: una domanda aperta)*.
+
+### **`R1` CONTRO `R2`** *(informazione per Luca)*: ### **una deflessione «di Soldner» dice che nel modello `cs` agisce SOLO come ritmo dell'orologio e lo spazio resta piatto:** ### **la luce del Sole verrebbe deviata della META' di quanto si osserva** *(`1.75''` e' quella di Einstein)*; ### **per arrivare a `R2`, `cs` dovrebbe entrare anche nelle LUNGHEZZE** *(la metrica spaziale: i pesi `l`, `l*`, `A_p` dipendenti da `cs`)*, ### **e questo e' un vincolo sulla teoria «a spinta»** *(il bersaglio, `CLAUDE.md` par.`1`)*.
+### **`pi/4` E LA REGOLA `theta = pi s`** *(informazione per Luca)*: ### **l'osservazione del guardiano e' confermata entro `2.3e-8`:** ### **a `s -> 0` il tick e' `exp(i pi s H)`, e `v_b/s -> pi x` con `x = 1/4` una velocita' del generatore `H` della geometria** *(il Grover piu' lo spostamento)*: ### **il `pi` viene dalla regola `B-4`, il `1/4` dai triangoli.** ### **Con `theta = s` la stessa particella andrebbe a `1/4`.**
+
+### ⛔ **FERMO: le DEVE `(b1)` e `(b2)` sono fallite** *(come previsto)*. ### **LE DOMANDE A LUCA:** ### **`(1)` il sigillo di gauge: la soglia ricavata dalla stima** *(`|dE| <= stima`, che regge in ogni riga)*, ### **o `chi_max` tale che `max|A'| <= 1e-2`?** ### **`(2)` il `16%` mancante nella deflessione: un fascio piu' largo o piu' stretto per separare la diffrazione?** ### **`(3)` il tempo dell'arco nel campo: `F1` e `F2` danno gli STESSI raggi e la stessa riflessione al pavimento -- la differenza fra le due non e' misurabile qui.**
