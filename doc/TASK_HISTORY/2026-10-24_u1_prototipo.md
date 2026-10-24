@@ -120,3 +120,35 @@
 2. ### ⛔ **IL CONTROLLO DI SERVIZIO DEL PACCHETTO ERA SBAGLIATO, ed e' uno strumento, non un criterio:** ### **il baricentro andava a `0.9716` contro `v_g(k0) = 0.9979`** *(a `s 0.05`)*: ### **`v_g(k0)` ignora la larghezza in ANGOLO del pacchetto** *(`sigma_k/k0 = (1/12)/0.2618 = 0.32` rad: `<cos> ~ 0.95`)*. ### **La previsione diventa la media di `d omega/d k_x` sullo spettro del pacchetto, pesata con l'energia di ogni componente** *(`v_prevista`)*: ### **`0.97162` contro `0.97163`.** ### **`v_g(k0)` resta stampato accanto.**
 3. ### **UN MIO ERRORE DI SCRITTURA, corretto prima della corsa:** ### **`coppia_K` mette gia' lo zero simmetrico, e calcolata DENTRO `conv("simm")` lo metteva DUE volte** *(la coppia a `K` non si trovava: «gruppi `[2, 4, 2]`»)*: ### **si calcola una volta, fuori da ogni convenzione.**
 4. ### **`(g)`: il `k` sulla griglia** *(`t1 = 2 pi 7/192`, `|k| = 0.2645`, la lunghezza d'onda `23.75`)* ### **e' il piu' vicino a `2 pi/24`** *(dichiarato nella configurazione)*.
+
+## 5. IL RISULTATO *(la corsa vera, dopo `9550806a`)*
+
+### **IL REFERTO:** `doc/referti_l2/u1_prototipo.{txt,jsonl}` *(lo script `csv/_u1_prototipo.py`, `sha1-BYTE d073761c`, al commit `9550806a`; il task history `7757a137`)*. ### **`27/29` controlli passano; UNA DEVE FALLITA: `(b)`, come la prova a vuoto aveva previsto** *(annotazione `1` del task history)*. ### ⛔ **FERMO.**
+
+| il sigillo | il criterio | il misurato |
+|---|---|---|
+| `(a1)` `e = 0`, il campo acceso, `50` tick, i due zeri | AL BIT | ### **PASSA: `st` e i `56` attributi di `mot` uguali** |
+| `(a2)` la prima meta' del tick, `e` `0.1` e `0.3029` | AL BIT | ### **PASSA**; ### **lo scarto dopo un tick `9.012e-9` e `8.266e-8`: il rapporto `9.1725` = `(e2/e1)^2 = 9.1725`** |
+| `(b)` la gauge, `chi` casuale, `100` tick | `1e-12` relativo | ### ⛔ **FALLISCE: `E` a `5.7e-9`** *(`rho` `6.5e-15`, `e B` `2.5e-15`)*; ### **la fase globale `4.0e-14`; lo scarto su `E` fra `0.015` e `0.16` della stima dell'arrotondamento dalla gauge** *(`A'` fino a `2 pi/e`)* |
+| `(b-)` solo `psi` | DEVE FALLIRE | ### **PASSA** *(il minimo `0.945`)* |
+| `(c)` Gauss, `1000` tick | `1e-12` | ### **PASSA: il peggiore `1.75e-13`** |
+| `(c-)` senza sorgente | DEVE FALLIRE per la chiave | ### **PASSA: Gauss `0.79`, e `G - G0 = -e(rho - rho0)` entro `5.1e-14`** |
+| `(d)` `500` avanti, `T`, `500` avanti, `T` | `1e-12` | ### **PASSA: il peggiore `6.89e-13`** |
+| `(e)` l'energia, `1000` tick | deriva `<=` ampiezza/2 | ### **PASSA: deriva/ampiezza al piu' `0.010`; l'ampiezza relativa fra `9.8e-6` e `9.9e-4`** |
+| `(f)` la velocita' del fotone, `k 1e-3`, `s 0.05` | PUO' FALLIRE entro `0.01` | ### **PASSA: `v_g/s = 1.000000`, isotropia `2.4e-8`** *(anche a `s 0.1`, `0.3`, `0.45`)* |
+| `(f)` il compatto, `s 0.05` | PUO' FALLIRE entro `0.01` | ### **PASSA: `4.2e-4` a `e 0.1`, `3.8e-3` a `e 0.3029`** *(l'ampiezza: `max|eB|` `0.087`, `0.262`)* |
+| `(f)` Courant | DEVE FALLIRE a `s 0.45`, stabile a `0.3` | ### **PASSA: `max|lambda| = 2.452204` a `Gamma`; a `s 0.3` `1.000000000000`; `s` critico `0.40824829` = `2/sqrt24`** |
+| `(g)` `v/cs` costante | PUO' FALLIRE entro `0.02` | ### ⚠ **FALLISCE: la media `0.99356`, fra `0.96547` e `1.07914`** *(`cs` visto `0.102`-`0.287`)*; ### **il tempo `int du/(v/cs . cs)` `800.2` tick contro `800`** |
+| `(g)` la deflessione | una lettura | ### **verso `cs` piu' basso, `d^2u/dt^2 = 2.073e-4` contro l'ottica dei raggi `7.557e-4`: il rapporto `0.274`** |
+
+### **LA DISPERSIONE** *(dai blocchi del tick, `omega/s`)*: ### **a `s 0.05` `Gamma` `0, 0, 4.9113`, `K` `0, 3.4684, 3.4684`, `M` `0, 2.8308, 4.0067` contro la carta `0, 0, 4.8990` / `0, 3.4641, 3.4641` / `0, 2.8284, 4.0000`** *(la differenza e' il passo di tempo: si apre con `s`)*; ### **il controllo `Re(lambda) = 1 - s^2 lambda_carta/2` entro `4.6e-15`.**
+
+### **LA LETTURA, in tre righe:**
+1. ### **il campo e' costruito giusto:** ### **Gauss, la reversibilita', l'energia, il limite `e = 0` e la scala `e^2` reggono, e la velocita' della luce E' `1` arco per tempo proprio, isotropa, uscita dal passo e non dalla formula;**
+2. ### **la gauge regge su `rho` e `e B` all'arrotondamento, e su `E` fallisce il criterio scritto PER ARROTONDAMENTO** *(la fase globale e la stima lo dicono)*: ### **il criterio non ha previsto che `A` grande porti l'errore in `E` attraverso la spinta -- un MIO errore di previsione;**
+3. ### **Shapiro nel complesso c'e'** *(il tempo d'arrivo da `int du/cs` entro `0.03%`)*, ### **ma la velocita' locale NON e' proporzionale a `cs` entro il `2%` e la deflessione e' un QUARTO dell'ottica dei raggi:** ### **il pacchetto e' largo `12` contro una scala di `cs` di `~80`, e la forma del tempo dell'arco scelta non e' adattata in impedenza** *(annotazione `1.3`): ### **NON so ancora quale delle due cause pesa** *(una domanda, sotto)*.
+
+### **I TRE NUMERI:** ### **`c/s = 1.000000` contro `v_b/s = 0.785` e `v_max/s = 0.60`: la luce del campo e' piu' veloce del cono della materia.** ### **Per la relativita' ristretta del modello: DUE coni** *(quello della luce, `c`, e quello dei segnali della materia, `v_max = 0.60 c`)*: ### **un osservatore fatto di materia vedrebbe un limite dei segnali materiali diverso da `c` -- l'invarianza di Lorentz della materia NON e' quella della luce** *([[LORENTZ-MATERIA-INTERFERENZA]])*.
+### **IL LIMITE DI COURANT E LA REGOLA DI SCALA:** ### **misurato `s <= 0.40824829 = 2/sqrt24`, piu' stretto di `B-5`** *(`s <= 1`)*: ### **con un passo del campo per tick, il campo ESCLUDE il regime `s -> 1`, dove vive l'unico modo senza massa della camminata** *(`92c63912`)*; ### **allargarlo vuole sotto-passi** *(un numero, `A1`)* ### **o pesi diversi** *(che cambiano `c`)*.
+
+### ⛔ **FERMO: la DEVE `(b)` e' fallita.** ### **LE DOMANDE A LUCA** *(il criterio di chiusura: una sua decisione registrata)*: ### **`(1)` il sigillo di gauge: la scala di `E` dall'arrotondamento di `A'` (`N 6 eps max|A'|/A_p`), o `chi` ridotto, o `A` modulo `2 pi/e` nel compatto?** ### **`(2)` il tempo dell'arco: la forma scelta (deriva `s^2`) o quella adattata in impedenza (vuole una regola per `s` della placchetta)?** ### **`(3)` (gia' aperte, NON risolte qui) la carica, la norma contro `A14.3`; `A16` contro l'energia `E^2/2`.** ### **Il valore derivato di `e`: SALTATO** *(la derivazione e' per lo spostamento intero, e la scena ha il vuoto nullo)*.

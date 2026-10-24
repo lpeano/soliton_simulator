@@ -1,0 +1,103 @@
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+========================================================================================================================
+IL PROTOTIPO DEL CAMPO U(1) SUI TRIANGOLI, IN MEMORIA: la catena dei sigilli e la velocita' della luce
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_zero_simmetrico.py b400d76e; csv/_universalita_massa.py 94ebb415; csv/_u1_prototipo.py d073761c
+  la configurazione: CONV ('simm', 'oggi'); S (0.05, 0.1, 0.3); S_COURANT 0.45; S_STABILE 0.30; FORME ('compatto', 'noncompatto'); E_PROVA (0.1, 0.302862) (il derivato: SALTATO, il task history 1.5); la carica: la norma; il tempo del campo: l'arco
+    l/l* 1.732051, A_p 0.433013; eps moneta 0.50; L_MAT 24, W_MAT 3.0, il vuoto nullo, la camminata senza CAMM-MATERIA-VUOTO; N_A1 50 N_B 100 N_C 1000 N_D 500; SEME_CHI 11
+    TOLL_REL 1e-12 TOLL_ROTTA 1e-09 TOLL_SERV 1e-12; L_BLOCCHI 8 SUPPORTO 2 L_COURANT 48; K_PICCOLO 0.001 H_K 0.0001 DIREZIONI_V 12; GAUGE_VICINO 1e-06 INSTABILE 1e-06; L_PACC 96 N_K0 4 W_PACC 12.0 TRATTO 30.0 TOLL_PACC 0.01 TOLL_UNO 0.01
+    LG (192, 48) S0_G 0.20 ETA_G 0.50 N1_G 7 N_DEF (-4, 2) W_G 12.0 T_G 800 T_DEF 400 FIN_G 10 TOLL_G 0.02
+------------------------------------------------------------------------------------------------------------------------
+  SERVIZIO: div rot^T = 0 ESATTO negli interi (toro 6x6), ogni arco in due placchette              PASSA   0.0e+00
+------------------------------------------------------------------------------------------------------------------------
+### PARTE A -- (a1) e = 0, A = E = 0, il campo acceso: la materia e OGNI attributo AL BIT per 50 tick; (a2) e != 0: la prima meta' del tick AL BIT, lo scarto dopo un tick
+  DEVE PASSARE (a1) simm: e = 0, 50 tick: st e mot uguali AL BIT (56 attributi di mot)             PASSA   diversi: mot [], st []; campo max|A| 0.0e+00 max|E| 0.0e+00
+  DEVE PASSARE (a2) simm e 0.1000: i primi 7 pezzi (fino alla deriva) uguali AL BIT                PASSA   diversi []; dopo un tick: scarto psi 9.012e-09
+  DEVE PASSARE (a2) simm e 0.3029: i primi 7 pezzi (fino alla deriva) uguali AL BIT                PASSA   diversi []; dopo un tick: scarto psi 8.266e-08
+  (a2) LETTURA simm: scarto dopo un tick 8.266e-08 / 9.012e-09 = 9.1725 contro (e2/e1)^2 = 9.1725
+  DEVE PASSARE (a1) oggi: e = 0, 50 tick: st e mot uguali AL BIT (56 attributi di mot)             PASSA   diversi: mot [], st []; campo max|A| 0.0e+00 max|E| 0.0e+00
+  DEVE PASSARE (a2) oggi e 0.1000: i primi 7 pezzi (fino alla deriva) uguali AL BIT                PASSA   diversi []; dopo un tick: scarto psi 9.012e-09
+  DEVE PASSARE (a2) oggi e 0.3029: i primi 7 pezzi (fino alla deriva) uguali AL BIT                PASSA   diversi []; dopo un tick: scarto psi 8.266e-08
+  (a2) LETTURA oggi: scarto dopo un tick 8.266e-08 / 9.012e-09 = 9.1725 contro (e2/e1)^2 = 9.1725
+------------------------------------------------------------------------------------------------------------------------
+### PARTE B-E -- (b) gauge 100 tick, (c) Gauss 1000 tick, (d) reversibilita' 500+500, (e) energia 1000 tick; per conv, s, forma, e
+  simm s 0.05 compatto    e 0.1000 | (b) rho 4.6e-15 E 5.7e-09 eB 1.8e-15 [fase globale: E 1.7e-14; |dE| / stima 0.12] | (c) 1.7e-14 | (d) psi 2.3e-14 A 1.2e-14 E 9.4e-14 | (e) E -0.083244 deriva 1.64e-08 ampiezza 2.36e-06 (rel 2.8e-05) campo 2.30e-07 | 14s
+  simm s 0.05 compatto    e 0.3029 | (b) rho 3.9e-15 E 8.4e-10 eB 1.8e-15 [fase globale: E 2.1e-14; |dE| / stima 0.16] | (c) 1.8e-14 | (d) psi 2.1e-14 A 1.2e-14 E 8.9e-14 | (e) E -0.083233 deriva 2.00e-08 ampiezza 2.36e-06 (rel 2.8e-05) campo 2.14e-06 | 13s
+  simm s 0.05 noncompatto e 0.1000 | (b) rho 3.1e-15 E 5.7e-09 eB 1.8e-15 [fase globale: E 1.6e-14; |dE| / stima 0.12] | (c) 1.3e-14 | (d) psi 1.8e-14 A 1.3e-14 E 9.4e-14 | (e) E -0.083244 deriva 1.64e-08 ampiezza 2.36e-06 (rel 2.8e-05) campo 2.30e-07 | 14s
+  simm s 0.05 noncompatto e 0.3029 | (b) rho 3.0e-15 E 8.4e-10 eB 1.8e-15 [fase globale: E 2.1e-14; |dE| / stima 0.16] | (c) 1.5e-14 | (d) psi 2.3e-14 A 1.5e-14 E 9.3e-14 | (e) E -0.083233 deriva 2.00e-08 ampiezza 2.36e-06 (rel 2.8e-05) campo 2.14e-06 | 13s
+  simm s 0.10 compatto    e 0.1000 | (b) rho 4.0e-15 E 2.4e-09 eB 1.9e-15 [fase globale: E 2.0e-14; |dE| / stima 0.05] | (c) 1.0e-13 | (d) psi 1.8e-13 A 8.9e-14 E 2.3e-13 | (e) E -0.166495 deriva 1.15e-07 ampiezza 1.88e-05 (rel 1.1e-04) campo 2.15e-07 | 13s
+  simm s 0.10 compatto    e 0.3029 | (b) rho 3.0e-15 E 2.5e-10 eB 1.9e-15 [fase globale: E 2.1e-14; |dE| / stima 0.05] | (c) 1.0e-13 | (d) psi 1.8e-13 A 8.7e-14 E 2.3e-13 | (e) E -0.166451 deriva 1.88e-07 ampiezza 1.88e-05 (rel 1.1e-04) campo 1.98e-06 | 13s
+  simm s 0.10 noncompatto e 0.1000 | (b) rho 2.5e-15 E 2.4e-09 eB 1.9e-15 [fase globale: E 2.1e-14; |dE| / stima 0.05] | (c) 1.0e-13 | (d) psi 1.8e-13 A 8.7e-14 E 2.3e-13 | (e) E -0.166495 deriva 1.15e-07 ampiezza 1.88e-05 (rel 1.1e-04) campo 2.15e-07 | 13s
+  simm s 0.10 noncompatto e 0.3029 | (b) rho 2.9e-15 E 2.6e-10 eB 1.8e-15 [fase globale: E 1.6e-14; |dE| / stima 0.05] | (c) 1.0e-13 | (d) psi 1.8e-13 A 8.7e-14 E 2.3e-13 | (e) E -0.166451 deriva 1.88e-07 ampiezza 1.88e-05 (rel 1.1e-04) campo 1.98e-06 | 13s
+  simm s 0.30 compatto    e 0.1000 | (b) rho 4.5e-15 E 3.7e-10 eB 2.2e-15 [fase globale: E 3.0e-14; |dE| / stima 0.02] | (c) 1.4e-13 | (d) psi 3.8e-13 A 2.9e-13 E 6.9e-13 | (e) E -0.498780 deriva 7.38e-07 ampiezza 4.93e-04 (rel 9.9e-04) campo 9.20e-06 | 13s
+  simm s 0.30 compatto    e 0.3029 | (b) rho 4.5e-15 E 3.7e-11 eB 1.9e-15 [fase globale: E 2.4e-14; |dE| / stima 0.02] | (c) 1.5e-13 | (d) psi 3.9e-13 A 3.0e-13 E 6.7e-13 | (e) E -0.498382 deriva 3.07e-06 ampiezza 4.94e-04 (rel 9.9e-04) campo 8.53e-05 | 13s
+  simm s 0.30 noncompatto e 0.1000 | (b) rho 5.9e-15 E 3.0e-10 eB 2.4e-15 [fase globale: E 2.3e-14; |dE| / stima 0.02] | (c) 1.4e-13 | (d) psi 3.7e-13 A 2.9e-13 E 6.2e-13 | (e) E -0.498780 deriva 7.38e-07 ampiezza 4.93e-04 (rel 9.9e-04) campo 9.20e-06 | 13s
+  simm s 0.30 noncompatto e 0.3029 | (b) rho 6.5e-15 E 3.9e-11 eB 2.3e-15 [fase globale: E 2.7e-14; |dE| / stima 0.02] | (c) 1.4e-13 | (d) psi 3.9e-13 A 3.0e-13 E 6.7e-13 | (e) E -0.498382 deriva 3.07e-06 ampiezza 4.94e-04 (rel 9.9e-04) campo 8.53e-05 | 13s
+  oggi s 0.05 compatto    e 0.1000 | (b) rho 4.3e-15 E 5.7e-09 eB 1.8e-15 [fase globale: E 1.2e-14; |dE| / stima 0.12] | (c) 1.7e-13 | (d) psi 1.8e-13 A 3.3e-14 E 1.4e-13 | (e) E -0.240324 deriva 1.64e-08 ampiezza 2.36e-06 (rel 9.8e-06) campo 2.30e-07 | 8s
+  oggi s 0.05 compatto    e 0.3029 | (b) rho 2.7e-15 E 8.4e-10 eB 1.8e-15 [fase globale: E 1.5e-14; |dE| / stima 0.16] | (c) 1.7e-13 | (d) psi 1.8e-13 A 3.7e-14 E 1.2e-13 | (e) E -0.240313 deriva 2.00e-08 ampiezza 2.36e-06 (rel 9.8e-06) campo 2.14e-06 | 7s
+  oggi s 0.05 noncompatto e 0.1000 | (b) rho 2.3e-15 E 5.7e-09 eB 1.8e-15 [fase globale: E 1.4e-14; |dE| / stima 0.12] | (c) 1.8e-13 | (d) psi 1.7e-13 A 3.5e-14 E 1.2e-13 | (e) E -0.240324 deriva 1.64e-08 ampiezza 2.36e-06 (rel 9.8e-06) campo 2.30e-07 | 7s
+  oggi s 0.05 noncompatto e 0.3029 | (b) rho 2.3e-15 E 8.4e-10 eB 1.8e-15 [fase globale: E 2.1e-14; |dE| / stima 0.16] | (c) 1.7e-13 | (d) psi 1.8e-13 A 3.5e-14 E 1.4e-13 | (e) E -0.240313 deriva 2.00e-08 ampiezza 2.36e-06 (rel 9.8e-06) campo 2.14e-06 | 8s
+  oggi s 0.10 compatto    e 0.1000 | (b) rho 3.4e-15 E 2.4e-09 eB 1.9e-15 [fase globale: E 1.6e-14; |dE| / stima 0.05] | (c) 1.1e-13 | (d) psi 2.1e-13 A 9.5e-14 E 2.5e-13 | (e) E -0.480654 deriva 1.15e-07 ampiezza 1.88e-05 (rel 3.9e-05) campo 2.15e-07 | 7s
+  oggi s 0.10 compatto    e 0.3029 | (b) rho 3.8e-15 E 2.5e-10 eB 1.9e-15 [fase globale: E 1.3e-14; |dE| / stima 0.05] | (c) 1.1e-13 | (d) psi 2.1e-13 A 9.5e-14 E 2.9e-13 | (e) E -0.480611 deriva 1.88e-07 ampiezza 1.88e-05 (rel 3.9e-05) campo 1.98e-06 | 8s
+  oggi s 0.10 noncompatto e 0.1000 | (b) rho 4.1e-15 E 2.4e-09 eB 1.9e-15 [fase globale: E 1.3e-14; |dE| / stima 0.05] | (c) 1.1e-13 | (d) psi 2.1e-13 A 9.5e-14 E 3.0e-13 | (e) E -0.480654 deriva 1.15e-07 ampiezza 1.88e-05 (rel 3.9e-05) campo 2.15e-07 | 8s
+  oggi s 0.10 noncompatto e 0.3029 | (b) rho 4.4e-15 E 2.6e-10 eB 1.8e-15 [fase globale: E 1.6e-14; |dE| / stima 0.05] | (c) 1.2e-13 | (d) psi 2.1e-13 A 9.4e-14 E 2.6e-13 | (e) E -0.480611 deriva 1.88e-07 ampiezza 1.88e-05 (rel 3.9e-05) campo 1.98e-06 | 7s
+  oggi s 0.30 compatto    e 0.1000 | (b) rho 3.4e-15 E 3.6e-10 eB 2.0e-15 [fase globale: E 2.6e-14; |dE| / stima 0.02] | (c) 1.7e-14 | (d) psi 4.1e-14 A 3.8e-14 E 3.8e-13 | (e) E -1.441258 deriva 7.38e-07 ampiezza 4.93e-04 (rel 3.4e-04) campo 9.20e-06 | 7s
+  oggi s 0.30 compatto    e 0.3029 | (b) rho 3.5e-15 E 4.9e-11 eB 2.5e-15 [fase globale: E 2.4e-14; |dE| / stima 0.02] | (c) 1.7e-14 | (d) psi 4.2e-14 A 4.0e-14 E 3.0e-13 | (e) E -1.440860 deriva 3.07e-06 ampiezza 4.94e-04 (rel 3.4e-04) campo 8.53e-05 | 8s
+  oggi s 0.30 noncompatto e 0.1000 | (b) rho 4.5e-15 E 3.9e-10 eB 2.4e-15 [fase globale: E 4.0e-14; |dE| / stima 0.02] | (c) 1.7e-14 | (d) psi 4.1e-14 A 4.0e-14 E 3.5e-13 | (e) E -1.441258 deriva 7.38e-07 ampiezza 4.93e-04 (rel 3.4e-04) campo 9.20e-06 | 7s
+  oggi s 0.30 noncompatto e 0.3029 | (b) rho 4.6e-15 E 4.2e-11 eB 2.4e-15 [fase globale: E 3.7e-14; |dE| / stima 0.02] | (c) 1.6e-14 | (d) psi 4.2e-14 A 4.1e-14 E 2.9e-13 | (e) E -1.440860 deriva 3.07e-06 ampiezza 4.94e-04 (rel 3.4e-04) campo 8.53e-05 | 8s
+  NEGATIVI simm s 0.05 | (b-) solo psi: rho 4.2e-01 E 4.4e+00 eB 1.1e-06 | (c-) senza sorgente: Gauss 7.9e-01, la chiave G - G0 + e(rho - rho0) 8.0e-15
+  NEGATIVI simm s 0.10 | (b-) solo psi: rho 5.6e-01 E 3.6e+00 eB 1.3e-06 | (c-) senza sorgente: Gauss 9.6e-01, la chiave G - G0 + e(rho - rho0) 2.8e-14
+  NEGATIVI simm s 0.30 | (b-) solo psi: rho 7.6e-01 E 9.5e-01 eB 5.2e-06 | (c-) senza sorgente: Gauss 9.6e-01, la chiave G - G0 + e(rho - rho0) 5.1e-14
+  NEGATIVI oggi s 0.05 | (b-) solo psi: rho 4.2e-01 E 4.4e+00 eB 1.1e-06 | (c-) senza sorgente: Gauss 7.9e-01, la chiave G - G0 + e(rho - rho0) 2.7e-14
+  NEGATIVI oggi s 0.10 | (b-) solo psi: rho 5.6e-01 E 3.6e+00 eB 1.3e-06 | (c-) senza sorgente: Gauss 9.6e-01, la chiave G - G0 + e(rho - rho0) 3.2e-14
+  NEGATIVI oggi s 0.30 | (b-) solo psi: rho 7.6e-01 E 9.5e-01 eB 5.2e-06 | (c-) senza sorgente: Gauss 9.6e-01, la chiave G - G0 + e(rho - rho0) 1.3e-14
+### I CONTROLLI DI B-E
+  DEVE PASSARE (b): le osservabili invarianti uguali entro 1e-12 relativo, ogni riga               ### FALLISCE   il peggiore 5.66e-09 (rho 6.5e-15, E 5.7e-09, eB 2.5e-15); la diagnosi, la fase globale (solo arrotondamento): il peggiore 3.96e-14
+  DEVE PASSARE (c): Gauss a ogni tick per 1000 tick entro 1e-12 relativo, ogni riga                PASSA   il peggiore 1.75e-13
+  DEVE PASSARE (d): 500 avanti, T, 500 avanti, T: lo stato di partenza entro 1e-12 relativo, ogni  PASSA   il peggiore 6.89e-13
+  DEVE PASSARE (e): nessuna deriva dell'energia: |pendenza| 1000 <= ampiezza/2, ogni riga          PASSA   0 righe con deriva; la peggiore deriva/ampiezza 1.00e-02
+  DEVE FALLIRE (b-): trasformando solo psi le osservabili cambiano (> 1e-09)                       PASSA   il minimo 9.45e-01
+  DEVE FALLIRE (c-), PER LA CHIAVE GIUSTA: senza sorgente Gauss si rompe (> 1e-09) e G - G0 = -e(r PASSA   Gauss minimo 7.93e-01, la chiave peggiore 5.06e-14
+------------------------------------------------------------------------------------------------------------------------
+### PARTE F -- le onde libere: i blocchi del tick del campo, la dispersione a Gamma K M, la velocita' di gruppo a k 0.001, l'isotropia, Courant, il pacchetto
+  SERVIZIO s 0.05: i blocchi oltre +-2 celle nulli, e la mappa ricostruita dai blocchi = la mappa  PASSA   fuori 0.0e+00, ricostruzione 0.0e+00
+  SERVIZIO s 0.05: Re(lambda) del passo = 1 - s^2 lambda_carta/2 sulla griglia 8x8 (fuori Gamma)   PASSA   4.6e-15
+  s 0.05 | Gamma omega/s 0.0000 0.0000 0.0000 0.0000 4.9113 4.9113 | K 0.0000 0.0000 3.4684 3.4684 3.4684 3.4684 | M 0.0000 0.0000 2.8308 2.8308 4.0067 4.0067
+         carta sqrt(lambda): Gamma 0.0000 0.0000 4.8990 K 0.0000 3.4641 3.4641 M 0.0000 2.8284 4.0000
+         v_g/s a k 0.001: media 1.000000, min 1.000000, max 1.000000, isotropia 2.44e-08 | max|lambda| (fuori dalla gauge) 1.000000 a k (13, 32)
+  SERVIZIO s 0.10: i blocchi oltre +-2 celle nulli, e la mappa ricostruita dai blocchi = la mappa  PASSA   fuori 0.0e+00, ricostruzione 0.0e+00
+  SERVIZIO s 0.10: Re(lambda) del passo = 1 - s^2 lambda_carta/2 sulla griglia 8x8 (fuori Gamma)   PASSA   2.7e-15
+  s 0.10 | Gamma omega/s 0.0000 0.0000 0.0000 0.0000 4.9493 4.9493 | K 0.0000 0.0000 3.4817 3.4817 3.4817 3.4817 | M 0.0000 0.0000 2.8379 2.8379 4.0272 4.0272
+         carta sqrt(lambda): Gamma 0.0000 0.0000 4.8990 K 0.0000 3.4641 3.4641 M 0.0000 2.8284 4.0000
+         v_g/s a k 0.001: media 1.000000, min 1.000000, max 1.000000, isotropia 3.81e-08 | max|lambda| (fuori dalla gauge) 1.000000 a k (38, 11)
+  SERVIZIO s 0.30: i blocchi oltre +-2 celle nulli, e la mappa ricostruita dai blocchi = la mappa  PASSA   fuori 0.0e+00, ricostruzione 0.0e+00
+  SERVIZIO s 0.30: Re(lambda) del passo = 1 - s^2 lambda_carta/2 sulla griglia 8x8 (fuori Gamma)   PASSA   1.2e-15
+  s 0.30 | Gamma omega/s 0.0000 0.0000 0.0000 0.0000 5.5029 5.5029 | K 0.0000 0.0000 3.6427 3.6427 3.6427 3.6427 | M 0.0000 0.0000 2.9210 2.9210 4.2900 4.2900
+         carta sqrt(lambda): Gamma 0.0000 0.0000 4.8990 K 0.0000 3.4641 3.4641 M 0.0000 2.8284 4.0000
+         v_g/s a k 0.001: media 1.000000, min 1.000000, max 1.000000, isotropia 1.73e-08 | max|lambda| (fuori dalla gauge) 1.000000 a k (2, 13)
+  SERVIZIO s 0.45: i blocchi oltre +-2 celle nulli, e la mappa ricostruita dai blocchi = la mappa  PASSA   fuori 0.0e+00, ricostruzione 0.0e+00
+  s 0.45 | Gamma omega/s 0.0000 0.0000 0.0000 0.0000 6.9813 6.9813 | K 0.0000 0.0000 3.9722 3.9722 3.9722 3.9722 | M 0.0000 0.0000 3.0659 3.0659 4.9768 4.9768
+         carta sqrt(lambda): Gamma 0.0000 0.0000 4.8990 K 0.0000 3.4641 3.4641 M 0.0000 2.8284 4.0000
+         v_g/s a k 0.001: media 1.000000, min 1.000000, max 1.000000, isotropia 9.58e-09 | max|lambda| (fuori dalla gauge) 2.452204 a k (0, 0)
+  DEVE FALLIRE (la stabilita' a s 0.45), PER LA CHIAVE GIUSTA: max|lambda| > 1 + 1e-06, il k peggi PASSA   max|lambda| 2.452204 a (0, 0)
+  DEVE PASSARE: stabile a s 0.30 (max|lambda| fuori dalla gauge <= 1 + 1e-06)                      PASSA   1.000000000000
+  COURANT MISURATO: s critico fra 0.40824829 e 0.40824829 (bisezione sulla griglia 6x6, Gamma compreso), contro 2/sqrt(24) = 0.40824829
+  PUO' FALLIRE: la velocita' del fotone entro 0.01 da 1 per tempo proprio, non compatto, s 0.05 (d PASSA   v_g/s 1.000000
+  SERVIZIO s 0.05: il pacchetto non compatto alla velocita' prevista dallo spettro (i blocchi) ent PASSA   v 0.97161 contro la prevista 0.97162 (v_g(k0) 0.99788); energia -1.1e-08
+  pacchetto s 0.05 e 0.1000 | v/s non compatto 0.97161, compatto 0.97120 (max|eB| 0.087), v_g(k0)/s 0.99788 | il criterio 4.16e-04
+  PUO' FALLIRE: lo stesso nel compatto (Polyakov), s 0.05 e 0.1000: |v_c/v_nc - 1| + |v_g/s - 1| < PASSA   4.16e-04
+  pacchetto s 0.05 e 0.3029 | v/s non compatto 0.97161, compatto 0.96789 (max|eB| 0.262), v_g(k0)/s 0.99788 | il criterio 3.83e-03
+  PUO' FALLIRE: lo stesso nel compatto (Polyakov), s 0.05 e 0.3029: |v_c/v_nc - 1| + |v_g/s - 1| < PASSA   3.83e-03
+  SERVIZIO s 0.10: il pacchetto non compatto alla velocita' prevista dallo spettro (i blocchi) ent PASSA   v 0.97219 contro la prevista 0.97220 (v_g(k0) 0.99794); energia -5.1e-07
+  pacchetto s 0.10 e 0.1000 | v/s non compatto 0.97219, compatto 0.97178 (max|eB| 0.087), v_g(k0)/s 0.99794 | il criterio 4.16e-04
+  pacchetto s 0.10 e 0.3029 | v/s non compatto 0.97219, compatto 0.96847 (max|eB| 0.263), v_g(k0)/s 0.99794 | il criterio 3.83e-03
+  SERVIZIO s 0.30: il pacchetto non compatto alla velocita' prevista dallo spettro (i blocchi) ent PASSA   v 0.97394 contro la prevista 0.97389 (v_g(k0) 0.99863); energia 6.3e-05
+  pacchetto s 0.30 e 0.1000 | v/s non compatto 0.97394, compatto 0.97346 (max|eB| 0.093), v_g(k0)/s 0.99863 | il criterio 4.90e-04
+  pacchetto s 0.30 e 0.3029 | v/s non compatto 0.97394, compatto 0.96955 (max|eB| 0.282), v_g(k0)/s 0.99863 | il criterio 4.51e-03
+------------------------------------------------------------------------------------------------------------------------
+### PARTE G -- Shapiro: il toro 192x48, cs = 0.20 (1 + 0.50 cos(2 pi m1/L1)), non compatto; la velocita' locale contro cs locale, e la deflessione
+  lungo il gradiente: v/cs media 0.99356, min 0.96547, max 1.07914: variazione 1.14e-01 (cs visto 0.102..0.287, tratto u 124.1); int du/(v/cs . cs) 800.2 tick contro 800; energia 3.6e-05
+  PUO' FALLIRE (g): la velocita' locale proporzionale a cs entro 0.02                              ### FALLISCE   1.14e-01
+  la deflessione (lungo a2, nel gradiente massimo): d2u/dt2 2.073e-04 contro l'ottica dei raggi -s ds/du 7.557e-04: rapporto 0.274 (verso cs piu' basso)
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 27/29 controlli passano; DEVE fallite: 1 ['DEVE PASSARE (b): le osservabili invarianti uguali entro 1e-12 relativo, ogni riga']

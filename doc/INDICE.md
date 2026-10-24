@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 147 |
+| `FISICA` | `2` | 148 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -913,6 +913,7 @@
 | `TW-DIVISIONE-INCOGNITA` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | il tw che sparisce a una divisione non torna con la soglia misurata: -7.19 contr |
 | `U-ARCO-DINAMICA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | la U d-arco diventa dinamica: la memoria d-arco dell-era 1 tradotta in coppia co |
 | `U1` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | URGENTE, PRIMA DI QUALUNQUE GIRO LUNGO — massacriticacollasso: 21 usi DENTRO LEG |
+| `U1-PROTOTIPO-TRIANGOLI` | MISURA | FISICA | 2 | ### **AGENDA** |  | IL PROTOTIPO U(1) SUI TRIANGOLI: c = 1 per tempo proprio, Courant 0.408, la DEVE |
 | `U2` | DIFETTO | FISICA | 1 | ### **CHIUSA** |  | M2 DIVENTA URGENTE — la mitosi mette figli SOTTO la scala di Planck. Con la semi |
 | `U3` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | confrontava con il mio sviluppo e/2 invece del valore esatto e/(2+e); il numero  |
 | `U4` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [U4] |
