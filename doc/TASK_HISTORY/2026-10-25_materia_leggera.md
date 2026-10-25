@@ -43,3 +43,20 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice *(la voce `MATERIA-LEGGERA`)*.
+
+## 4. IL RISULTATO *(dopo `e188773e`)*
+
+### **IL REFERTO DELLA MATERIA LEGGERA:** `doc/referti_l2/materia_leggera.{txt,jsonl}` *(`csv/_materia_leggera.py` `sha1-BYTE e620f287`, al commit `e188773e`)*. ### ⛔ **`3/6`, UNA DEVE FALLITA** *(la `2` del guardiano, gia' annotata prima della corsa)*: ### **`FERMO`.**
+
+- ### **`L1` TORNA:** ### **`v_b/c = 0.7853982`, `v_max/c = 0.5992864`, `v_max/v_b = 0.7630351`; il prodotto `0.5992864`** *(dal jsonl di `afba052b`)*.
+- ### **IL CONTROLLO `3`:** ### **`alpha = beta = 1`, `eps 0` e `s 0.01` danno lo stesso punto** *(`m = W = 1/2`, `v_max/v_b = 0.763035`, `0.763070` a `s 0.01`)*; ### **`alpha = beta = 2` lo stesso `m/W` e lo stesso rapporto** *(scalati insieme NON contano)*. ### **La convergenza di `v_max` fra la griglia `48` e la `96`, dopo l'ottimizzatore: `4.4e-9`.**
+- ### ⛔ **IL RIFERIMENTO NON VA A `1`** *(la DEVE `2`: FALLISCE)*: ### **il nido d'ape con la massa di Semenoff ha `v_max/v_b` `0.934`, `1.066`, `1.135`, `1.149`, `1.153`, `1.1545`, `1.1547`, `1.1549` a `m/W` `0.46`, `0.20`, `0.071`, `0.034`, `0.017`, `0.0067`, `0.0033`, `0.0017`:** ### **tende a `2/sqrt(3) = 1.1547`** *(il massimo della velocita' di gruppo del reticolo, a `t = (pi, pi/2)`, non quella del cono)*. ### **MA A MASSA PESANTE ANCHE IL RIFERIMENTO HA `v_max/v_b < 1`** *(`0.934` a `m/W 0.46`)*: ### **la piegatura della banda prima di `v_b` e' GENERICA quando `m` e' paragonabile a `W`.**
+- ### **`L2`, LE MANOPOLE DEL MODELLO** *(la chiave `6` del riferimento: PASSA, il rapporto cambia di `0.22`)*:
+  - ### **`(a)` `alpha/beta`: `m/W` ha il MINIMO a `alpha = beta`** *(`1.000`; `1.366` a `beta/alpha` `0.5` e `2`; `13.18` a `0.05` e `20`: simmetrico)*: ### **qualunque squilibrio APPESANTISCE la coppia** *(e `v_max/v_b` scende a `0.258`)*.
+  - ### **`(b)` `eps`: `m/W` CRESCE** *(`1.003`, `1.019`, `1.076`, `1.298`, `1.659` a `eps` `0.1`-`1.5`)*, ### **`v_b` resta `0.25`, `v_max/v_b` scende a `0.642`.**
+  - ### **`(c)` `s`: `m/W` SCENDE fino a `0.508` a `s 0.99`** *(`0.945` a `0.3`, `0.852` a `0.5`, `0.724` a `0.7`, `0.576` a `0.9`)*, ### **e `v_max/v_b` SALE OLTRE `1`** *(`0.972` a `0.7`, `1.157` a `0.9`, `1.272` a `0.99`)*: ### **l'unica manopola che alleggerisce, ma solo di un fattore `2` e solo vicino al limite del cono `B-5`.**
+  - ### **`(d)` LO ZERO: `m/W` fino a `0.2`** *(`delta 0.4`)*, ### **MA la banda bassa diventa PIU' pesante** *(`m` `0.1` contro `0.9`, `v_b` `0.112` contro `0.335`)*: ### **rompe l'universalita' fra le bande** *(il prezzo che il mandato chiedeva di riportare)*.
+  - ### **`(e)` I TERMINI `S`: su un vuoto uniforme sono uno spostamento dello zero** *(la `(d)`)*; ### **non misurati a parte.**
+- ### **`(4)` e `(5)`** *(PUO' FALLIRE: FALLISCONO)*: ### **nessuna manopola arriva a `m/W <= 0.01`** *(il minimo `0.2`, lo zero)*; ### **nessuna rende `m/W < 0.1` restando universale e isotropa** *(l'isotropia vale ovunque: `v_b` lungo `x` e `y` uguali)*.
+
+### **`L4`, LA LETTURA** *(informazione per Luca, non scelte)*: ### **il guardiano aveva ragione sul «non i nodi»** *(gli spettri sono del reticolo infinito)* ### **e sulle due cause** *(gli orologi, `pi/4`; la massa alla grana, `0.763`)*. ### **Con le manopole del modello `m/W` non scende sotto `~0.5`** *(e solo con `s -> 1`)*: ### **la massa della coppia `K/K'` e' fissata dalla STRUTTURA del passo alla scala della grana** *(`mu0 = 1/2` contro `W = 1/2`)*: ### **e' il problema della gerarchia nella forma di questo modello.** ### ⚠ **E la correzione del riferimento cambia la domanda:** ### **anche una massa leggera su un reticolo NON darebbe `v_max = v_b`** *(il reticolo dei triangoli porta il massimo a `2/sqrt 3` del cono)*: ### **la richiesta «la materia lenta non supera la luce» va posta sul MASSIMO del reticolo, non sul cono.** ### **LA PISTA DI LUCA, la massa COLLETTIVA** *(un solitone di molti nodi, la cui massa non e' `mu0` di un nodo)*: ### **resta una domanda aperta, non misurata.**

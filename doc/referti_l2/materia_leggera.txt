@@ -1,0 +1,63 @@
+[TIMBRO] _materia_leggera.py  sha1-BYTE e620f287  !! MODIFICATO rispetto a HEAD (blob-git f2e4cf39) -- i byte che girano NON sono quelli committati
+==================================================================================================================================
+LA MATERIA LEGGERA, SULLA CARTA: v_max/v_b contro m/W per le manopole del modello e per un Dirac a nido d'ape con la massa di Semenoff
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_materia_leggera.py e620f287; csv/_curvatura_parte2.py e2282e17; csv/_u1_terzo.py dbcf49c4; csv/_triangoli_forza.py d0c0b981; doc/referti_l2/curvatura_0bis_v2.jsonl c2b88f67
+  la configurazione: BETA_SU_ALPHA (0.05, 0.1, 0.2, 0.5, 1.0, 2.0, 5.0, 10.0, 20.0) EPSS (0.0, 0.1, 0.25, 0.5, 1.0, 1.5) SS (0.01, 0.05, 0.3, 0.5, 0.7, 0.9, 0.99) DELTE (-0.4, -0.2, 0.0, 0.2, 0.4) DD (1.0, 0.5, 0.2, 0.1, 0.05, 0.02, 0.01, 0.005) N_GRIGLIA 48 N_CONV 96 N_PARTENZE 5 H_CURV 0.001 H_GRAD 1e-06 TOLL_PIATTA 1e-09
+  le soglie: TOLL_L1 1e-05 TOLL_UNO 0.01 MW_PICCOLO 0.01 MW_SOGLIA 0.1 TOLL_CTRL 0.0001 TOLL_SCALA 1e-10 TOLL_UNIV 1e-06 TOLL_ISO 1e-06 TOLL_CONV 1e-06 SALTO_MIN 0.001 CHIAVE 0.1
+  le unita': quelle del generatore (v/s = pi v; c = 1/pi a r 1)
+----------------------------------------------------------------------------------------------------------------------------------
+### L1 -- LA SCOMPOSIZIONE a r 1 (dal jsonl di afba052b): v_b/c 0.7853982, v_max/c 0.5992864, v_max/v_b 0.7630351; il prodotto 0.5992864
+  DEVE PASSARE (1): (v_b/c)(v_max/v_b) = v_max/c entro 1e-05, v_b/c = 0.785398 e v_max/v_b = 0.76304 entro 1e-05 PASSA   0.7853982 0.7630351
+### L2 (a) -- alpha/beta (alpha 1)
+  ab       0.05     banda  5: m 0.487981 (giu' 0.487981) W 0.037019 m/W 13.18173 | v_b 0.055902 (y 0.055902, giu' 0.055902) v_max 0.014447 (griglia 0.014431, 96 0.014447) v_max/v_b 0.258431 | salto 9.63e-01 | 20 s
+  ab       0.1      banda  5: m 0.476970 (giu' 0.476970) W 0.073030 m/W 6.53111 | v_b 0.079057 (y 0.079057, giu' 0.079057) v_max 0.028435 (griglia 0.028427, 96 0.028435) v_max/v_b 0.359683 | salto 9.27e-01 | 20 s
+  ab       0.2      banda  5: m 0.458258 (giu' 0.458258) W 0.141742 m/W 3.23303 | v_b 0.111803 (y 0.111803, giu' 0.111803) v_max 0.054951 (griglia 0.054882, 96 0.054951) v_max/v_b 0.491497 | salto 8.58e-01 | 30 s
+  ab       0.5      banda  5: m 0.433013 (giu' 0.433013) W 0.316987 m/W 1.36603 | v_b 0.176777 (y 0.176777, giu' 0.176777) v_max 0.121627 (griglia 0.121534, 96 0.121627) v_max/v_b 0.688027 | salto 6.83e-01 | 25 s
+  ab       1.0      banda  5: m 0.500000 (giu' 0.500000) W 0.500000 m/W 1.00000 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.763035 | salto 5.00e-01 | 17 s
+  ab       2.0      banda  5: m 0.866025 (giu' 0.866025) W 0.633975 m/W 1.36603 | v_b 0.353553 (y 0.353553, giu' 0.353553) v_max 0.243254 (griglia 0.243067, 96 0.243254) v_max/v_b 0.688027 | salto 3.66e-01 | 19 s
+  ab       5.0      banda  5: m 2.291288 (giu' 2.291288) W 0.708712 m/W 3.23303 | v_b 0.559017 (y 0.559017, giu' 0.559017) v_max 0.274755 (griglia 0.274411, 96 0.274755) v_max/v_b 0.491497 | salto 2.91e-01 | 14 s
+  ab       10.0     banda  5: m 4.769696 (giu' 4.769696) W 0.730304 m/W 6.53111 | v_b 0.790569 (y 0.790569, giu' 0.790569) v_max 0.284355 (griglia 0.284266, 96 0.284355) v_max/v_b 0.359683 | salto 2.70e-01 | 17 s
+  ab       20.0     banda  5: m 9.759611 (giu' 9.759611) W 0.740389 m/W 13.18173 | v_b 1.118034 (y 1.118034, giu' 1.118034) v_max 0.288935 (griglia 0.288622, 96 0.288935) v_max/v_b 0.258431 | salto 2.60e-01 | 22 s
+  ab       2,2      banda  5: m 1.000000 (giu' 1.000000) W 1.000000 m/W 1.00000 | v_b 0.500000 (y 0.500000, giu' 0.500000) v_max 0.381518 (griglia 0.381094, 96 0.381518) v_max/v_b 0.763035 | salto 1.00e+00 | 17 s
+### L2 (b) -- eps della moneta
+  eps      0.0      banda 10: m 0.500000 (giu' 0.500000) W 0.500000 m/W 1.00000 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.763035 | salto 5.00e-01 | 74 s
+  eps      0.1      banda 10: m 0.501012 (giu' 0.501012) W 0.499494 m/W 1.00304 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.190578 (griglia 0.190370, 96 0.190578) v_max/v_b 0.762310 | salto 5.00e-01 | 62 s
+  eps      0.25     banda 10: m 0.506293 (giu' 0.506293) W 0.496868 m/W 1.01897 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.189636 (griglia 0.189451, 96 0.189636) v_max/v_b 0.758542 | salto 5.00e-01 | 134 s
+  eps      0.5      banda 10: m 0.524719 (giu' 0.524719) W 0.487867 m/W 1.07554 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.186398 (griglia 0.186273, 96 0.186398) v_max/v_b 0.745590 | salto 5.00e-01 | 72 s
+  eps      1.0      banda 10: m 0.592724 (giu' 0.592724) W 0.456715 m/W 1.29780 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.175091 (griglia 0.174992, 96 0.175091) v_max/v_b 0.700363 | salto 5.00e-01 | 92 s
+  eps      1.5      banda 10: m 0.691356 (giu' 0.691356) W 0.416784 m/W 1.65879 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.160394 (griglia 0.160246, 96 0.160394) v_max/v_b 0.641576 | salto 5.00e-01 | 83 s
+### L2 (c) -- s del tick (eps 0)
+  s        0.01     banda  5: m 0.499985 (giu' 0.499985) W 0.500015 m/W 0.99994 | v_b 0.249995 (y 0.249995, giu' 0.249995) v_max 0.190763 (griglia 0.190552, 96 0.190763) v_max/v_b 0.763070 | salto 5.00e-01 | 47 s
+  s        0.05     banda  5: m 0.499614 (giu' 0.499614) W 0.500386 m/W 0.99846 | v_b 0.249871 (y 0.249871, giu' 0.249871) v_max 0.190876 (griglia 0.190672, 96 0.190876) v_max/v_b 0.763897 | salto 5.00e-01 | 47 s
+  s        0.3      banda  5: m 0.485935 (giu' 0.485935) W 0.514065 m/W 0.94528 | v_b 0.245127 (y 0.245127, giu' 0.245127) v_max 0.194946 (griglia 0.194857, 96 0.194946) v_max/v_b 0.795286 | salto 4.86e-01 | 21 s
+  s        0.5      banda  5: m 0.460107 (giu' 0.460107) W 0.539893 m/W 0.85222 | v_b 0.235277 (y 0.235277, giu' 0.235277) v_max 0.202161 (griglia 0.202161, 96 0.202161) v_max/v_b 0.859247 | salto 4.60e-01 | 67 s
+  s        0.7      banda  5: m 0.419929 (giu' 0.419929) W 0.580071 m/W 0.72393 | v_b 0.217969 (y 0.217969, giu' 0.217969) v_max 0.211947 (griglia 0.211943, 96 0.211947) v_max/v_b 0.972370 | salto 4.20e-01 | 67 s
+  s        0.9      banda  5: m 0.365353 (giu' 0.365353) W 0.634647 m/W 0.57568 | v_b 0.191555 (y 0.191555, giu' 0.191555) v_max 0.221702 (griglia 0.221603, 96 0.221702) v_max/v_b 1.157383 | salto 3.65e-01 | 54 s
+  s        0.99     banda  5: m 0.336655 (giu' 0.336655) W 0.663345 m/W 0.50751 | v_b 0.176754 (y 0.176754, giu' 0.176754) v_max 0.224820 (griglia 0.224808, 96 0.224820) v_max/v_b 1.271938 | salto 3.37e-01 | 54 s
+### L2 (d) -- lo zero spostato di delta
+  zero     -0.4     banda  5: m 0.900000 (giu' 0.100000) W 0.500000 m/W 1.80000 | v_b 0.335410 (y 0.335410, giu' 0.111803) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.568733 | salto 5.00e-01 | 13 s
+  zero     -0.2     banda  5: m 0.700000 (giu' 0.300000) W 0.500000 m/W 1.40000 | v_b 0.295804 (y 0.295804, giu' 0.193649) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.644882 | salto 5.00e-01 | 16 s
+  zero     0.0      banda  5: m 0.500000 (giu' 0.500000) W 0.500000 m/W 1.00000 | v_b 0.250000 (y 0.250000, giu' 0.250000) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.763035 | salto 5.00e-01 | 16 s
+  zero     0.2      banda  5: m 0.300000 (giu' 0.700000) W 0.500000 m/W 0.60000 | v_b 0.193649 (y 0.193649, giu' 0.295804) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 0.985074 | salto 5.00e-01 | 16 s
+  zero     0.4      banda  5: m 0.100000 (giu' 0.900000) W 0.500000 m/W 0.20000 | v_b 0.111803 (y 0.111803, giu' 0.335410) v_max 0.190759 (griglia 0.190547, 96 0.190759) v_max/v_b 1.706198 | salto 5.00e-01 | 6 s
+### L2 (e) -- i termini S: su un vuoto uniforme una fase uniforme per nodo, cioe' uno spostamento dello zero: e' la (d) (non misurato a parte)
+### L3 -- il riferimento: il Dirac a nido d'ape con la massa di Semenoff D
+  semenoff 1.0      banda  1: m 1.000000 (giu' 1.000000) W 2.162278 m/W 0.46248 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.809017 (griglia 0.808338, 96 0.809017) v_max/v_b 0.934172 | salto 2.00e+00 | 2 s
+  semenoff 0.5      banda  1: m 0.500000 (giu' 0.500000) W 2.541381 m/W 0.19674 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.923279 (griglia 0.921960, 96 0.923279) v_max/v_b 1.066110 | salto 1.00e+00 | 2 s
+  semenoff 0.2      banda  1: m 0.200000 (giu' 0.200000) W 2.806659 m/W 0.07126 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.982664 (griglia 0.980978, 96 0.982664) v_max/v_b 1.134682 | salto 4.00e-01 | 1 s
+  semenoff 0.1      banda  1: m 0.100000 (giu' 0.100000) W 2.901666 m/W 0.03446 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.995213 (griglia 0.995037, 96 0.995213) v_max/v_b 1.149172 | salto 2.00e-01 | 2 s
+  semenoff 0.05     banda  1: m 0.050000 (giu' 0.050000) W 2.950417 m/W 0.01695 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.998764 (griglia 0.998752, 96 0.998764) v_max/v_b 1.153274 | salto 1.00e-01 | 2 s
+  semenoff 0.02     banda  1: m 0.020000 (giu' 0.020000) W 2.980067 m/W 0.00671 | v_b 0.866025 (y 0.866025, giu' 0.866025) v_max 0.999800 (griglia 0.999800, 96 0.999800) v_max/v_b 1.154471 | salto 4.00e-02 | 2 s
+  semenoff 0.01     banda  1: m 0.010000 (giu' 0.010000) W 2.990017 m/W 0.00334 | v_b 0.866014 (y 0.866014, giu' 0.866014) v_max 0.999950 (griglia 0.999950, 96 0.999950) v_max/v_b 1.154659 | salto 2.00e-02 | 1 s
+  semenoff 0.005    banda  1: m 0.005000 (giu' 0.005000) W 2.995004 m/W 0.00167 | v_b 0.865847 (y 0.865847, giu' 0.865847) v_max 0.999988 (griglia 0.999988, 96 0.999988) v_max/v_b 1.154924 | salto 1.00e-02 | 0 s
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (2): il riferimento a m/W <= 0.01 ha v_max/v_b entro 0.01 da 1                                    ### FALLISCE   m/W 0.0067: 1.15447 m/W 0.0033: 1.15466 m/W 0.0017: 1.15492
+  DEVE PASSARE (3): (a) a alpha = beta = 1, (b) a eps 0, (c) a s 0.01: m = W = 1/2 e v_max/v_b = 0.76304 entro 0 PASSA   m 0.500000 W 0.500000 q 0.763035 | m 0.500000 W 0.500000 q 0.763035 | m 0.499985 W 0.500015 q 0.763070
+  PUO' FALLIRE (4): ogni manopola che rende m/W <= 0.01 da' v_max/v_b entro 0.01 da 1                            ### FALLISCE   nessuna manopola arriva a m/W <= 0.01; il minimo 0.2000 (zero 0.4)
+  PUO' FALLIRE (5): una manopola rende m/W < 0.1 senza rompere l'universalita' fra le bande o l'isotropia        ### FALLISCE   nessuna
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA (6): v_max/v_b non dipende da m/W sul riferimento; la chiave: fra D 1 e D 0 PASSA   0.93417 1.15492
+### LA CONVERGENZA DI v_max (griglia 48 contro 96, dopo l'ottimizzatore): il massimo scarto 4.40e-09
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/6 controlli passano; DEVE fallite: 1 ['DEVE PASSARE (2): il riferimento a m/W <= 0.01 ha v_max/v_b entro 0.01 da 1']
