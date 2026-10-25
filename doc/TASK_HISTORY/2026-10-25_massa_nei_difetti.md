@@ -35,6 +35,11 @@
 
 ### **Mi FERMO** ### **se il criterio `1` o `4` fallisce** *(la scena o il generatore sono sbagliati: niente numeri di `(i)`, `(ii)`)*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DEI NUMERI *(dopo la prova a vuoto dello script a `L 6`, che non e' una misura)*
+
+- ### ⚠ **LA PREMESSA «la banda proibita `|mu| < 1/2`» NON TIENE:** ### **lo spettro del toro perfetto ha BANDE PIATTE dentro quella finestra.** ### **A `eps 0`** *(`_u1_terzo.H_gen` su `60 x 60` fasi)*: ### **due bande piatte a `mu = 0` e due a `mu = -1`** *(per nodo; un terzo degli stati a `mu = 0`)*, ### **una banda in `[-1, -1/2]` e una in `[1/2, 1]`;** ### **la coppia a `K` e' `+-1/2`, il bordo delle due bande DISPERSIVE.** ### **A `eps 0.5`: quattro piatte a `+0.024719`, quattro a `-1.024719`, le dispersive in `+-[0.524719, 1.012586]`.** ### **Con la definizione del §2 `E0 = min |mu| = 0`, e la misura `(i)` non ha senso.**
+- ### **LA DEFINIZIONE CORRETTA, fissata qui:** ### **i livelli PIATTI = le bande di Bloch con escursione `< 1e-10` sulle `L^2` fasi;** ### **`E0` = il minimo di `|mu|` sulle bande NON piatte** *(il bordo della coppia)*; ### **uno stato e' NELLA BANDA PROIBITA se `|mu| < E0 - 1e-8` E dista `> 1e-8` da ogni livello piatto;** ### **lo spettro locale `(ii)` ESCLUDE gli stati a `< 1e-8` da un livello piatto, e `F_v` si normalizza sul peso NON piatto del nodo** *(il riferimento: il quantile di `|mu|` fra gli stati non piatti dell'unione di Bloch)*. ### **Le soglie di §2 per il resto restano.** ### **Lo riporto nel referto come premessa caduta del mandato.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice.
