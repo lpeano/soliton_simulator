@@ -20780,3 +20780,12 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### **`pi/4` E LA REGOLA `theta = pi s`** *(informazione per Luca)*: ### **l'osservazione del guardiano e' confermata entro `2.3e-8`:** ### **a `s -> 0` il tick e' `exp(i pi s H)`, e `v_b/s -> pi x` con `x = 1/4` una velocita' del generatore `H` della geometria** *(il Grover piu' lo spostamento)*: ### **il `pi` viene dalla regola `B-4`, il `1/4` dai triangoli.** ### **Con `theta = s` la stessa particella andrebbe a `1/4`.**
 
 ### ⛔ **FERMO: le DEVE `(b1)` e `(b2)` sono fallite** *(come previsto)*. ### **LE DOMANDE A LUCA:** ### **`(1)` il sigillo di gauge: la soglia ricavata dalla stima** *(`|dE| <= stima`, che regge in ogni riga)*, ### **o `chi_max` tale che `max|A'| <= 1e-2`?** ### **`(2)` il `16%` mancante nella deflessione: un fascio piu' largo o piu' stretto per separare la diffrazione?** ### **`(3)` il tempo dell'arco nel campo: `F1` e `F2` danno gli STESSI raggi e la stessa riflessione al pavimento -- la differenza fra le due non e' misurabile qui.**
+
+### 📌 **LE DECISIONI DI LUCA SUL SECONDO PASSO DEL U(1), REGISTRATE** *([[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]]; `doc/TASK_HISTORY/2026-10-24_u1_secondo.md` sezione `5`; il criterio in `doc/PATTERN_DI_PROVA.md`)*:
+
+1. ### ⭐ **DECISIONE DI LUCA `(1)`, IL CRITERIO DEL SIGILLO DI GAUGE:** ### **i sigilli `(b)` di `0b6bfde8`, `(b1)` e `(b2)` di `64bb2328` RESTANO FALLITI;** ### **da ora l'invarianza di gauge del campo si prova con la soglia ricavata dalla stima dell'arrotondamento, `|dE| <= stima`** *(`N 6 eps max|A'|/A_p`, come nel referto)*, ### **fissata prima;** ### **`rho` ed `e B` restano a `1e-12` relativo.**
+2. ### ⭐ **DECISIONE DI LUCA `(2)`, IL TEMPO DELL'ARCO NEL CAMPO: `F1`** *(la deriva con `s_arco^2`, la spinta senza `s`)*, ### **perche' `F1` e `F2` sono indistinguibili in tutto cio' che si e' misurato e `F1` non chiede una regola per lo `s` della placchetta.** ### **`F2` resta nello strumento come confronto.**
+3. ### ⭐ **DECISIONE DI LUCA `(3)`:** ### **la scansione della larghezza del fascio** *(il mandato del `2026-10-25`, parte `1`)*.
+4. ### ⭐ **DECISIONE DI LUCA `(4)`:** ### **la regola `theta = s/x` si PROVA in memoria** *(parte `2`)*; ### **NON e' decisa, e `B-4` non cambia.**
+
+### **L'ERRORE DEL GUARDIANO `n.63`** *(nel mandato)*: ### **aveva consigliato una soluzione** *(il compatto modulo `2 pi/e`, il `chi` piccolo)* ### **che non poteva passare.**

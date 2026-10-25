@@ -111,6 +111,15 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
   volte piu' piccolo; il differenziale teneva entro lo `0.13%`.** ### **Quei `4` casi restano FALLITI** *(il criterio di quella corsa non e' cambiato a posteriori)*; ### **la causa, misurata: la semisomma coincide con `a(eta 0)`, un'accelerazione propria del
   pacchetto** *(`doc/TASK_HISTORY/2026-10-23_triangoli_forza.md`, sezione `10`)*.
 
+## IL SIGILLO DI GAUGE DEL CAMPO: IL CRITERIO *(decisione di Luca, `2026-10-25`, dopo `64bb2328`)*
+
+> ### **NON e' una riga della tabella `STANDARD`:** ### **e' il criterio di un TIPO di misura** *(l'invarianza di gauge di un campo sugli archi)*.
+
+- ### **`E` SI GIUDICA CONTRO LA STIMA DELL'ARROTONDAMENTO, fissata prima:** ### **`|dE| <= N 6 eps max|A'|/A_p`** *(`N` i tick, `A'` il potenziale trasformato)*; ### **`rho` ed `e B` restano a `1e-12` relativo.**
+- ### **Il perche':** ### **in `0b6bfde8` e `64bb2328` lo scarto su `E` andava come `max|A'|`, lineare fino al pavimento `~2e-14`, sempre SOTTO la stima** *(al piu' `0.44` di essa)*: ### **un `1e-12` relativo fisso chiedeva `max|A'| ~ 1e-2`, cioe' di non provare la gauge.** ### **I sigilli `(b)`, `(b1)`, `(b2)` RESTANO FALLITI** *(il criterio di quelle corse non cambia a posteriori)*.
+
+---
+
 ## IN PROVA
 
 *(nessuna)*
