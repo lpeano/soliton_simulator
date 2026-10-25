@@ -9,10 +9,10 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 150 |
+| `FISICA` | `2` | 151 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
-| `INFRASTRUTTURA` | `2` | 23 |
+| `INFRASTRUTTURA` | `2` | 25 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 27 |
@@ -298,9 +298,11 @@
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
 | `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** |  | la corrente locale di E ESISTE per la parte lineare, portata misurata 3 archi |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
+| `DOMANDA-D7-DIPENDE-DA-FC` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D7 presa: il presidio P-ALB rifiuta, perche D7 dipende dalla coesione DEC-FC-COE |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
 | `DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE` | DECISIONE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la scheda di Lambda_c non si genera dalla tabella: lo schema pretende valore E o |
+| `DOMANDA-DRIVER-CAMMINATA` | DECISIONE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il driver sui triangoli: solo il grafo della pipeline di prova, o il driver fa g |
 | `DOMANDA-DUE-SOGLIE-SENZA-ERRORE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | due soglie senza l-errore da cui proteggono: tol in corrente.instrada e il limit |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
@@ -785,6 +787,7 @@
 | `RI-MISURA` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `RIDUZIONE-AL-LIMITE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in... [RIDUZIONE-AL-LI |
 | `RINCULO-RIPETUTI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il rinculo dei genitori applica UNA spinta sola a un nodo genitore due volte nel |
+| `RINOMINA-SCENA-QUADRATO` | FRONTE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | scena_l2.scena costruisce il quadrato e il nome non lo dice: la rinomina, con i  |
 | `RIORDINO-NOMI-H` | DIFETTO | DOCUMENTAZIONE | ENTRAMBE | ### **CHIUSA** |  | il prefisso `H-` e' sui NOMI VECCHI (H-P3) e non sui nomi semantici (H-CLI) che  |
 | `RIORDINO-POSTO2` | FRONTE | DOCUMENTAZIONE | ENTRAMBE | ### **CHIUSA** |  | IL POSTO 2 HA 11 REGOLE E IL TETTO E' 10: quale si fonde |
 | `RIPIEGHI-ZERO` | CURA | FISICA | 1 | ### **CHIUSA** |  | ZERO ripieghi che cambiano la fisica in silenzio: tutti e 100 i confronti `len(x |
