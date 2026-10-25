@@ -266,6 +266,43 @@ def toro(lati):
     return (np.asarray(ii, dtype=np.int64), np.asarray(jj, dtype=np.int64), nn)
 
 
+
+def toro_spostamenti(lati, spostamenti):
+    """### Il toro su `lati` con ### **una lista di SPOSTAMENTI INTERI** *(gli archi propri del nodo)*: `(ii, jj, nn)`.
+
+    ### ⭐ **LA COSTRUZIONE GENERALE** *(portata da `csv/_triangoli.py`, [[DECISIONE-SOLO-TRIANGOLI]], `2026-10-25`)*: ### **l'arco `k = v d + a` va dal nodo `v` al vicino
+    `v + spostamento_a`, nell'ordine degli spostamenti** -- ### **la convenzione di `toro`, che e' il caso degli spostamenti sugli ASSI** *(il sigillo lo verifica al bit)*.
+    ### ⛔ **LA TRAPPOLA DELLO `zip`, CHIUSA:** ### **uno spostamento con un numero di componenti diverso da `lati` ALZA** *(nello strumento lo `zip` troncava in silenzio: con `lati` di
+    due elementi e spostamenti di tre si perdeva la terza componente)*.
+    """
+    lati = tuple(int(a) for a in lati)
+    spostamenti = tuple(tuple(int(x) for x in s) for s in spostamenti)
+    for s in spostamenti:
+        assert len(s) == len(lati), (
+            "lo spostamento %r ha %d componenti e il toro %r ne ha %d: lo `zip` le troncherebbe IN SILENZIO"
+            % (s, len(s), lati, len(lati)))
+    nn = 1
+    for a in lati:
+        nn *= a
+
+    def indice(c):
+        v = 0
+        for a, cc in zip(lati, c):
+            v = v * a + cc
+        return v
+    ii, jj = [], []
+    for v in range(nn):
+        c, r = [], v
+        for a in reversed(lati):
+            c.append(r % a)
+            r //= a
+        c = list(reversed(c))
+        for s in spostamenti:
+            ii.append(v)
+            jj.append(indice([(cc + ds) % a for cc, ds, a in zip(c, s, lati)]))
+    return (np.asarray(ii, dtype=np.int64), np.asarray(jj, dtype=np.int64), nn)
+
+
 def _scena(ii, jj, nn, seme):
     """### Lo stato e la geometria casuali, ### **`U(2)` per arco via `QR`.**"""
     import incidenza as IN

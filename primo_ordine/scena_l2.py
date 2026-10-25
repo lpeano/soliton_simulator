@@ -63,6 +63,58 @@ if _QUI not in sys.path:
 LATI = (7, 7)
 
 
+
+def _direzione(gradi):
+    a = np.deg2rad(gradi)
+    return (float(np.cos(a)), float(np.sin(a)), 0.0)
+
+
+# ### ⭐ **LE GRIGLIE, PER NOME** *([[DECISIONE-SOLO-TRIANGOLI]], Luca `2026-10-23`; portate da `csv/_triangoli.py` il `2026-10-25`)*: ### **gli spostamenti interi dell'arco e la direzione
+# ### di ciascuno** *(il versore della moneta, [[N-DIREZIONI-DI-MOTO]])*. ### ⛔ **LA GRIGLIA DEL MODELLO SONO I TRIANGOLI; il quadrato esiste SOLO come controllo di servizio, e il nome
+# ### lo dice.** ### ⚠ **`scena` qui sotto e' ANCORA il quadrato** *(la usano `12` strumenti di `csv/`: la rinomina va col loro passaggio, un lavoro a se')*.
+GRIGLIE = {
+    "triangoli": (((1, 0), (0, 1), (1, 1)), (_direzione(0.0), _direzione(120.0), _direzione(60.0))),
+    "quadrato_di_servizio": (((1, 0), (0, 1)), ((1.0, 0.0, 0.0), (0.0, 1.0, 0.0))),
+}
+GRIGLIA_DEL_MODELLO = "triangoli"
+VUOTO_PER_ESTREMITA = 1.0
+EPS_MONETA = 0.5
+
+
+def versori(m, direzioni):
+    """### Il versore di ogni estremita': ### **`+e_a` sul lato `2k`, `-e_a` sul lato `2k + 1`** *(le direzioni di moto, [[N-DIREZIONI-DI-MOTO]])*."""
+    d = len(direzioni)
+    nv = np.zeros((2 * m, 3), dtype=float)
+    for k in range(m):
+        e = np.asarray(direzioni[k % d], dtype=float)
+        nv[2 * k] = e
+        nv[2 * k + 1] = -e
+    return nv
+
+
+def scena_toro(griglia, lati, dtau, x):
+    """### **LA SCENA SU UN TORO DELLA GRIGLIA DATA PER NOME** *(`"triangoli"`, o `"quadrato_di_servizio"`)*: `(inc, mot, st, par)`, ### **la materia uniforme allineata `sqrt(x)`, il
+    vuoto uniforme `VUOTO_PER_ESTREMITA`, `U = I`.** ### **Lati diversi ammessi; `dtau` scalare o per nodo.** ### **E' la scena di `csv/_triangoli.scena_toro`, AL BIT** *(il sigillo
+    `csv/_sigillo_scena_triangoli.py`)*. ### ⛔ **La griglia non ha un valore di comodo: si NOMINA.**"""
+    assert griglia in GRIGLIE, "la griglia %r non e' nel vocabolario %s" % (griglia, sorted(GRIGLIE))
+    import corrente as CO
+    import incidenza as IN
+    import motore as MO
+    import stato as ST
+    spost, direz = GRIGLIE[griglia]
+    ii, jj, nn = CO.toro_spostamenti(lati, spost)
+    inc = IN.Incidenza(np.asarray(ii, dtype=IN.INDICE), np.asarray(jj, dtype=IN.INDICE), nn, capacita=len(ii))
+    nv = versori(inc.m, direz)
+    U = np.zeros((inc.m, 2, 2), dtype=complex)
+    U[:, 0, 0] = 1.0
+    U[:, 1, 1] = 1.0
+    st = ST.nuovo(nn, inc.m)
+    st["phi_h"][...] = VUOTO_PER_ESTREMITA
+    st["psi_h"][...] = float(np.sqrt(x)) * spinore_allineato(nv)
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.broadcast_to(np.asarray(dtau, dtype=float), (nn,)).copy(), "numpy")
+    return inc, mot, st, {"eps": EPS_MONETA}
+
+
 def versori_geometrici(lati, m):
     """### `n` **GEOMETRICI**: la direzione dell'arco uscente dal nodo.
 
