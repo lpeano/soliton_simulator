@@ -98,6 +98,6 @@
 6. ### **`..._soglia_grad_`** *(`150` passi)*: ### **senza il `0.3` le nascite quasi spariscono; `..._zero_dove_`** *(`1000` passi)*: ### **`R = 0.16`, non annientate.**
 7. ### **il criterio di `6b` poggiava su una premessa falsa** *(`PIANO` `L166`)*: ### **che `MITOSI_2LAM` agisca non e' misurato.**
 8. ### **IL MANDATO e l'intestazione dell'era `1`** *(«la mitosi nel guscio, poca nel nucleo»)* ### **contro i referti** *(`Z46`: le masse ferme sono il guscio, il centro e' mobile; `..._zero_dove_`: «la rete cresce dove c'e' rete»)*.
-9. ### **`DEC-D7-DIVISIONE`: `presa: False`, e la nota dice «da CANDIDATA a PRESA».**
+9. ### **`DEC-D7-DIVISIONE`: `presa: False`, e la nota dice «da CANDIDATA a PRESA».** ### ⚠ *(ANNOTATO il `2026-10-25`, dopo la conferma di Luca delle `20:44`: NON e' un errore dell'albero. La stessa nota, piu' sotto, dice che `D7` dipende da `DEC-FC-COESIONE`, non presa, e che `P-ALB` rifiuta; l'avevo scritto senza leggere quella riga. Provato di nuovo: [[DOMANDA-D7-DIPENDE-DA-FC]].)*
 10. ### **IL MANDATO:** ### **«il tempo proprio `tau = 1 + |torsione|/PHI_CRIT` e `KERNEL_ALPHA`»: il kernel usa `|tw|/PHI_CRIT` SENZA l'`1`** *(`6251`)*; ### **«la soglia locale pilotata dal gradiente di tempo proprio»: TOLTA il `2026-10-06`** *(`8417`-`8428`)*.
 11. ### **due commenti scaduti dell'era `2`:** ### **`motore.cresci`** *(«a zero» a `330`, il codice scrive `iniziali`)*.
