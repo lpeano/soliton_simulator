@@ -1,0 +1,7 @@
+{"blobs": {"csv/_sigillo_scena_triangoli.py": {"git": "ade088be", "sha1-BYTE": "dcea2ea2"}, "csv/_triangoli.py": {"git": "5265d17f", "sha1-BYTE": "a74c7823"}, "primo_ordine/corrente.py": {"git": "9e1733db", "sha1-BYTE": "52d1d72b"}, "primo_ordine/leggi/leggi.yaml": {"git": "78a5d66f", "sha1-BYTE": "2593860b"}, "primo_ordine/scena_l2.py": {"git": "039bfe60", "sha1-BYTE": "a581e3cd"}, "soliton_simulator.py": {"git": "e96ca41a", "sha1-BYTE": "b8c21049"}}, "rif": "6ea2ba20", "tipo": "testata"}
+{"incidenza": [], "lati": [6, 6], "motore": [], "n_attributi": 44, "stato": [], "tick": [], "tipo": "a"}
+{"incidenza": [], "lati": [12, 12], "motore": [], "n_attributi": 44, "stato": [], "tick": [], "tipo": "a"}
+{"incidenza": [], "lati": [48, 48], "motore": [], "n_attributi": 44, "stato": [], "tick": [], "tipo": "a"}
+{"incidenza": [], "lati": [96, 6], "motore": [], "n_attributi": 44, "stato": [], "tick": [], "tipo": "a"}
+{"livelli": 0.0, "tipo": "b"}
+{"deve_fallite": [], "passano": 13, "tipo": "esito", "totale": 13}

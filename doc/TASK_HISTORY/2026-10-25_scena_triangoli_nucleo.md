@@ -38,3 +38,12 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. il cambiamento in `corrente.py` e `scena_l2.py`, il sigillo, la suite, il referto `doc/referti_l2/sigillo_scena_triangoli.txt`, l'indice, il censimento, la relazione — un commit; poi le parti `B` e `C`.
+
+## 4. IL RISULTATO *(dopo `36040a07`)*
+
+### **LA SCENA A TRIANGOLI NEL NUCLEO, FATTA** *(`36040a07`; il sigillo `doc/referti_l2/sigillo_scena_triangoli.{txt,jsonl}`, `csv/_sigillo_scena_triangoli.py` `sha1-BYTE dcea2ea2`)*: ### **`13/13`; la suite `64` su `64`.**
+- ### **`primo_ordine/corrente.py`, `toro_spostamenti(lati, spostamenti)`** *(la trappola dello `zip` chiusa: uno spostamento con un numero di componenti diverso ALZA)*; ### **`primo_ordine/scena_l2.py`, `GRIGLIE`, `GRIGLIA_DEL_MODELLO = "triangoli"`, `versori`, `scena_toro(griglia, lati, dtau, x)`** *(il quadrato solo come `"quadrato_di_servizio"`)*.
+- ### **IL SIGILLO:** ### **i triangoli del nucleo = `csv/_triangoli.scena_toro` AL BIT a `(6,6)`, `(12,12)`, `(48,48)`, `(96,6)`** *(`11` attributi d'incidenza, `33` di motore, lo stato, un tick)*; ### **la matrice del tick al bit** *(lato `48`, `s 0.05`)*; ### **i livelli a `K` contro `8781162c`: `0.0`;** ### **il quadrato di servizio al bit; `corrente.toro` = `toro_spostamenti` sugli assi al bit; `scena_l2.scena` al bit col padre `6ea2ba20`;** ### **la griglia del modello e' `triangoli`, grado `6` a ogni nodo** *(la DEVE FALLIRE per la chiave)*; ### **la trappola dello `zip` alza; `leggi.yaml` e l'impronta `2e7f795d2a52fbe7` intatti.**
+- ### ⚠ **UNA PRECISAZIONE DEL SIGILLO:** ### **gli strumenti di `csv/` cambiano la moneta con la globale `_triangoli.EPS_MONETA`, il nucleo la prende dalla tabella** *(`0.5`)*: ### **nel confronto `(b)` la scena del nucleo riceve la moneta dello strumento.**
+- ### **I DUE PUNTI APERTI** *(domande per Luca)*: ### **`(1)` il driver resta sulla catena:** ### **e' la pipeline delle leggi di PROVA, e i suoi collaudi sono costruiti sulla catena di `9` nodi** *(farla diventare a triangoli vuol dire ridefinire quei collaudi)*; ### **`(2)` `scena_l2.scena` resta il quadrato e il nome non lo dice:** ### **la usano `12` strumenti di `csv/`; la rinomina e il loro passaggio alla funzione del nucleo sono un lavoro a se', dopo.**
+- ### **LA PARTE C NON SI ESEGUE in questo giro** *(la precisazione di Luca delle `17:38`)*: ### **la decisione provvisoria di Luca delle `16:38`** *(`S1` al posto di `S3`, rivedibile in 3D)* ### **resta APERTA, legata a [[DECISIONE-LINEARE]].**

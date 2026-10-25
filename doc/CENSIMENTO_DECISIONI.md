@@ -47,7 +47,7 @@
 | `9` | [[DECISIONE-L1-NATURA-A-SIMULATORE-B]], `2026-10-22` | un criterio di prova *(fisico e' cio' che converge raffinando)* | solo `doc/MAPPA_DIPENDENZE.md` | ### **MANCANZA LIBERA** *(un documento: `doc/PATTERN_DI_PROVA.md`)* |
 | `10` | [[DECISIONE-LINEARE]], `2026-10-22` | un criterio su una legge | ### **IL NUCLEO HA LA FORMA CHE LA DECISIONE ESCLUDE:** `CAMM-MATERIA-VUOTO` *(`leggi.yaml`, riga `506`)* e' `S3` | ### **MANCANZA BLOCCATA** *(`S1` contro `S4`, `doc/DOSSIER_S1_S4.md`)* |
 | `11` | [[DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA]], `2026-10-15` | una lettura di un collaudo | i collaudi *(la chiusura di `L1`, `de89549`)* | giusto |
-| `12` | [[DECISIONE-SOLO-TRIANGOLI]], `2026-10-23` | una SCENA | ### **SOLO NEGLI STRUMENTI:** `csv/_triangoli.py`; il nucleo ha il quadrato *(`scena_l2.py`)* e la catena *(`driver.py`)* | ### **MANCANZA LIBERA** *(sezione `5`)* |
+| `12` | [[DECISIONE-SOLO-TRIANGOLI]], `2026-10-23` | una SCENA | ### **NEL NUCLEO dal `36040a07`:** `corrente.toro_spostamenti`, `scena_l2.scena_toro`, `GRIGLIA_DEL_MODELLO = "triangoli"` *(il sigillo `13/13`)*; ### **il driver resta sulla catena** *(una domanda)* | ### **COLMATA** *(gli strumenti di `csv/` usano ancora la loro funzione: il passaggio e' un lavoro a se', dopo)* |
 | `13` | [[DECISIONE-STRADA-B-FLUSSI]], `2026-10-13` | una legge | ### **NEL NUCLEO:** `flussi_parziali.grover` *(`317`)*, `hop_psi` *(`378`)* | giusto |
 | `14` | [[DECISIONE-TICK-OROLOGIO-MASSIMO]], `2026-10-13` *(`B-5`)* | un principio | ### **NEL NUCLEO:** `flussi_parziali._nel_cono` *(`226`)*, `dtau_rif` *(`61`)* | giusto |
 | `15` | [[DECISIONE-VUOTO-MEDIATORE]], `2026-10-13` | una strada, FALLITA | niente | giusto |
@@ -134,3 +134,7 @@
 3. ### **`DEC-D6F-FORME-VUOTO` e' `presa: true`, e la sua nota dice che le forme «restano aperte».**
 4. ### **[[DECISIONE-LINEARE]] esclude `S3`, e `S3` e' la legge che gira nel nucleo:** ### **e' corretto finche' `S1` contro `S4` e' aperta** *(nessuna delle due e' derivata)*, ### **ma vuol dire che il nucleo gira con una forma che una decisione di Luca ha escluso.**
 5. ### **[[DEC-ALBERO-CINQUE-SENZA-ARGOMENTO]]:** ### **«la lista numerata delle decisioni di Luca NON E' NEL REPO»** *(le decisioni `1`, `3`, `10` citate dai mandati)*: ### **il censimento la conta dove si trova, e non la ricostruisce.**
+
+## 7. GLI AGGIORNAMENTI
+
+- ### **`2026-10-25`: la mancanza `12` colmata in `36040a07`** *(la scena a triangoli nel nucleo)*; ### **il passaggio degli strumenti di `csv/` alla funzione del nucleo, e la rinomina di `scena_l2.scena`, sono un lavoro a se', da fare dopo.** ### **La parte C** *(`S1` provvisoria)* ### **NON eseguita** *(la precisazione di Luca delle `17:38`)*: ### **la mancanza `10` resta.**

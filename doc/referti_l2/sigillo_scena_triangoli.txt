@@ -1,0 +1,22 @@
+[TIMBRO] _sigillo_scena_triangoli.py  sha1-BYTE dcea2ea2  committato e pulito
+==============================================================================================================
+IL SIGILLO DELLA SCENA A TRIANGOLI NEL NUCLEO (DECISIONE-SOLO-TRIANGOLI)
+==============================================================================================================
+  i blob nel repo: primo_ordine/corrente.py 52d1d72b; primo_ordine/scena_l2.py a581e3cd; primo_ordine/leggi/leggi.yaml 2593860b; csv/_triangoli.py a74c7823; csv/_sigillo_scena_triangoli.py dcea2ea2; soliton_simulator.py b8c21049
+  la configurazione: RIF 6ea2ba20; LATI ((6, 6), (12, 12), (48, 48), (96, 6)); LATI_QUADRATO ((7, 7), (6, 6)); LATI_TORO ((7, 7), (6, 6), (5, 4, 3)); LATO_MATRICE 48 S_MATRICE 0.05; S_LIVELLI (0.05, 0.1, 0.3) EPS_LIVELLI (0.0, 0.5) RIF_BASSA 8781162c; TOLL_LIV 1e-12
+--------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (a): i triangoli del nucleo = csv/_triangoli.scena_toro al bit, lati (6, 6) (incidenza, PASSA   attributi 11 + 33; diversi [] [] [], dopo un tick []
+  DEVE PASSARE (a): i triangoli del nucleo = csv/_triangoli.scena_toro al bit, lati (12, 12) (incidenz PASSA   attributi 11 + 33; diversi [] [] [], dopo un tick []
+  DEVE PASSARE (a): i triangoli del nucleo = csv/_triangoli.scena_toro al bit, lati (48, 48) (incidenz PASSA   attributi 11 + 33; diversi [] [] [], dopo un tick []
+  DEVE PASSARE (a): i triangoli del nucleo = csv/_triangoli.scena_toro al bit, lati (96, 6) (incidenza PASSA   attributi 11 + 33; diversi [] [] [], dopo un tick []
+  DEVE PASSARE (b): la matrice del tick con la scena del nucleo = quella dello strumento AL BIT (lato  PASSA   0.0e+00
+  DEVE PASSARE (b): i livelli a K con la scena del nucleo contro 8781162c entro 1e-12 (eps (0.0, 0.5), PASSA   0.0e+00
+  DEVE PASSARE (c): il quadrato di servizio del nucleo = csv/_triangoli.scena_toro(QUADRATO) al bit, l PASSA   [] [] []
+  DEVE PASSARE (c): il quadrato di servizio del nucleo = csv/_triangoli.scena_toro(QUADRATO) al bit, l PASSA   [] [] []
+  DEVE PASSARE (c): corrente.toro = toro_spostamenti sugli assi AL BIT, lati ((7, 7), (6, 6), (5, 4, 3 PASSA   [True, True, True]
+  DEVE PASSARE (c): scena_l2.scena (il quadrato di oggi) identica al bit prima (6ea2ba20) e dopo       PASSA   []
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: <<la griglia del modello e' il quadrato>>; la chiave: e' 'triang PASSA   i gradi [6]
+  DEVE FALLIRE: toro_spostamenti con lati di 2 elementi e spostamenti di 3 ALZA (la trappola dello zip PASSA   lo spostamento (1, 0, 0) ha 3 componenti e il toro (6, 6) ne ha 2: lo 
+  DEVE PASSARE (f): leggi.yaml identico a 6ea2ba20 e l'impronta 2e7f795d2a52fbe7                       PASSA   leggi.yaml True, impronta 2e7f795d2a52fbe7
+--------------------------------------------------------------------------------------------------------------
+ESITO: 13/13 controlli passano; DEVE fallite: 0 []
