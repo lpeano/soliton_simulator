@@ -39,6 +39,13 @@
 
 ### **Mi FERMO** ### **se il criterio `0` o `1` fallisce** *(lo strumento non misura la geometria)*.
 
+## 3-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(le prove di costruzione dello script, NON misure)*
+
+- ### **IL TORO DEL PACCHETTO DI LUCE E' `128 x 128`, NON `256`:** ### **`pacchetto_campo` costa (`k` del pacchetto) x (nodi del toro), e a `256` non si chiude in tempi umani;** ### **quindi `N_K0 = 20`, `|k0| = 2 pi 20/128 = 0.982`** *(non `1.006`)*, ### **e la tolleranza del piatto per la luce `0.1/(0.982 x 6) = 0.0170` rad.** ### **La copia sul disco entro `D_COPIA = 50` dalla sorgente** *(oltre, il pacchetto e' sotto `e^-30`)*, ### **lo stesso per la materia.**
+- ### **LA FINESTRA D'USCITA vuole anche il baricentro a `x > 0`** *(oltre il centro: il fascio SOPRA e' nei settori `0, 1` gia' prima del centro)*; ### **la finestra finisce quando il baricentro ha percorso `L_USCITA = 40` dentro di essa, o alla guardia del bordo.**
+- ### ⚠ **UN NUMERO GIA' VISTO, dichiarato:** ### **la prova di costruzione a piena taglia, la luce sul cono a `b 32`, `W 6`, ha dato `delta` `-0.0041` sopra e `+1.0456` sotto** *(la convergenza `1.0497`)*. ### **Le soglie del §3 erano gia' fissate e NON cambiano.** ### **La materia: il pacchetto copiato ha `<H> = 0.4812` contro `1 - mu(k0) = 0.4827`, varianza `7e-5`** *(nella banda alta: la copia degli slot e' giusta)*; ### **la norma fuori banda sul toro `5e-32`.**
+- ### **IL CONTROLLO `0` aggiunto allo script:** ### **la banda della materia** *(il massimo sulle corse della norma fuori banda, `<= 1e-10`)*.
+
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice.
