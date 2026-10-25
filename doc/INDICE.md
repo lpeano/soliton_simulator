@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 154 |
+| `FISICA` | `2` | 155 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 25 |
@@ -526,6 +526,7 @@
 | `MASSA-VUOTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
 | `MATERIA-ANTIMATERIA-SPAZIO` | TEORIA | FISICA | 2 | ### **AGENDA** |  | materia, antimateria e spazio nella camminata: IPOTESI DA MISURARE |
+| `MATERIA-LEGGERA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia leggera: v_max/c dipende dalla massa della coppia rispetto alla largh |
 | `MAX-NODI-FERMA` | CURA | FISICA | 1 | ### **CHIUSA** |  | MAX_NODI e' una guardia di MEMORIA che oggi cambia la FISICA in silenzio: deve F |
 | `MCRIT-RICALCOLO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | massa_critica_adattiva si ricalcola 7 volte per passo su stati diversi: e' una l |
 | `MEM-HEBB-PIANO-XY` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | dir_laterale ruota di 90 gradi nel SOLO piano xy e azzera z: un piano preferito |
