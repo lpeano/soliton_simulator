@@ -1,0 +1,67 @@
+[TIMBRO] _u1_terzo.py  sha1-BYTE dbcf49c4  committato e pulito
+========================================================================================================================
+IL TERZO PASSO DEL U(1): la larghezza del fascio, e la regola theta = s/x sui triangoli, in memoria
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_u1_prototipo.py d073761c; csv/_u1_secondo.py ab015054; csv/_u1_terzo.py dbcf49c4; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_triangoli_dove_la_luce.py 43147bf2; csv/_scala_e_zero.py 0629c68e; csv/_zero_simmetrico.py b400d76e; csv/_universalita_massa.py 94ebb415
+  la configurazione: parte 1: W_SCAN (6.0, 8.0, 12.0, 16.0, 24.0) TOLL_RIP 1e-09 TOLL_EST 0.02; la scena di 64bb2328 (LG2 (384, 48) S0 0.20 ETA 0.20 N_FASCIO (-8, 2) T_FASCIO 400 N1_LUNGO 14 T_LUNGO 600), F1
+    parte 2: S_VAR (0.001, 0.01, 0.05, 0.1, 0.3) EPS_VAR (0.0, 0.5) S_RIP (0.05, 0.1, 0.3) EPS_RIP (0.0, 0.5) H_DER 0.001 S_DELTA (0.02, 0.05, 0.1, 0.2, 0.3) S0_F (0.05, 0.1, 0.3) LX_F 96 ETA_F (0.0, 0.001, -0.001, 0.01, -0.01) S_CHIAVE 0.10; lo zero simmetrico; TOLL_BIT 1e-12 TOLL_X 1e-09 TOLL_VB1 1e-06 TOLL_F1 0.02 TOLL_RG 0.05 TOLL_LS 1e-06
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 1 -- IL 16% DELLA DEFLESSIONE: F1, la scena di 64bb2328 (384x48, s0 0.20, eta 0.20), il fascio largo W in (6.0, 8.0, 12.0, 16.0, 24.0)
+  DEVE PASSARE: il fascio e il pacchetto lungo W 12 (F1) riproducono 64bb2328 entro 1e-09              PASSA   fascio 0.0e+00, lungo 0.0e+00
+  W  6.0 | kappa/R1 0.6509 | a/a_Ehrenfest 0.6893 | <cos^2> 0.8474, a/(a_E <cos^2>) 0.8135 | sigma_u 4.6 -> 30.4 (x6.64) | X = <k_g^2 sigma^2> 0.1179 | riflessione 3.68e-03 | v/cs variazione 8.37e-02 | 17s
+  W  8.0 | kappa/R1 0.7526 | a/a_Ehrenfest 0.7859 | <cos^2> 0.9041, a/(a_E <cos^2>) 0.8692 | sigma_u 5.9 -> 24.3 (x4.11) | X = <k_g^2 sigma^2> 0.0809 | riflessione 7.62e-04 | v/cs variazione 1.58e-02 | 17s
+  SERVIZIO: il fascio esteso a W 12 = corsa_fascio (la stessa a)                                       PASSA   0.0e+00
+  W 12.0 | kappa/R1 0.8384 | a/a_Ehrenfest 0.8689 | <cos^2> 0.9533, a/(a_E <cos^2>) 0.9114 | sigma_u 8.6 -> 18.3 (x2.11) | X = <k_g^2 sigma^2> 0.0591 | riflessione 7.33e-06 | v/cs variazione 7.81e-03 | 17s
+  W 16.0 | kappa/R1 0.8676 | a/a_Ehrenfest 0.9020 | <cos^2> 0.9728, a/(a_E <cos^2>) 0.9272 | sigma_u 11.4 -> 16.5 (x1.45) | X = <k_g^2 sigma^2> 0.0647 | riflessione 2.96e-05 | v/cs variazione 1.27e-02 | 17s
+  W 24.0 | kappa/R1 0.8748 | a/a_Ehrenfest 0.9286 | <cos^2> 0.9876, a/(a_E <cos^2>) 0.9402 | sigma_u 17.0 -> 18.4 (x1.08) | X = <k_g^2 sigma^2> 0.1101 | riflessione 1.28e-04 | v/cs variazione 1.72e-02 | 17s
+  L'ESTRAPOLAZIONE a X -> 0 (il fascio largo e il gradiente lento): grado 1 0.9569 (pendenza -1.850), grado 2 0.7415
+  PUO' FALLIRE: la deflessione estrapolata (grado 1, X -> 0) entro 0.02 da R1                          ### FALLISCE   0.9569
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 2 -- LA REGOLA theta = s/x SUI TRIANGOLI, IN MEMORIA (espi avvolta; B-4 non cambia)
+  DEVE PASSARE: la variante SPENTA riproduce 8781162c (i livelli a K) e 7daa8840 (omega0, omega'', v_b PASSA   0.0e+00
+  x DAL GENERATORE H = (I - P_u) + P_- (le proiezioni, non il passo): mu0 -0.500000 (misurato -0.500000) x 0.250000000070 mu0 0.500000 (misurato 0.500000) x 0.250000000154 | il limite misurato in 64bb2328: (pi/4)/pi = 0.25 | y = max|grad lambda_H| 0.1907194508 (pi y 0.5991628255 contro v_max/s -> 0.5984674498)
+  la variante: K = 1/(pi x) = 1.273239544377 (theta = 4.000000 s f); il limite di sicurezza theta <= pi: s <= pi x = 0.785398; con la luce Courant s <= 0.408
+  SERVIZIO: lo scarto fra i due zeri misurato: pi spenta, 1/x accesa, entro 1e-12 (e un fattore unico) PASSA   spenta 3.141592653590 accesa 3.999999998875, residui 1.1e-16 1.4e-16
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: <<theta = s/x a s 0.1 e' il passo di oggi>> (> 1e-3); E = oggi a PASSA   contro oggi 5.54e-02, contro oggi a s K 0.0e+00
+  eps 0.0 s 0.001 [la mappa 0.0e+00] | v_b/s 0.99999964 0.99999964 | v_max/s 0.762189 | salto/s 3.999998 | F(c=1) 1.00016 1.00016 (R_t 1.00000 1.00000 Q_b 1.00016 1.00016 L 1.00000 1.00000) | F(v_max) 1.72164 1.72164 | lambda* 0.50000000 | 27s
+  eps 0.0 s 0.01  [la mappa 0.0e+00] | v_b/s 0.99996664 0.99996664 | v_max/s 0.762221 | salto/s 3.999800 | F(c=1) 0.99999 0.99999 (R_t 0.99990 0.99990 Q_b 1.00016 1.00016 L 0.99993 0.99993) | F(v_max) 1.72121 1.72121 | lambda* 0.50000000 | 26s
+  eps 0.0 s 0.05  [la mappa 0.0e+00] | v_b/s 0.99916463 0.99916463 | v_max/s 0.762997 | salto/s 3.994997 | F(c=1) 0.99598 0.99598 (R_t 0.99749 0.99749 Q_b 1.00016 1.00016 L 0.99833 0.99833) | F(v_max) 1.71083 1.71083 | lambda* 0.50000000 | 27s
+  eps 0.0 s 0.1   [la mappa 0.0e+00] | v_b/s 0.99663444 0.99663444 | v_max/s 0.765405 | salto/s 3.979950 | F(c=1) 0.98340 0.98340 (R_t 0.98990 0.98990 Q_b 1.00016 1.00016 L 0.99328 0.99328) | F(v_max) 1.67861 1.67861 | lambda* 0.50000000 | 26s
+  eps 0.0 s 0.3   [la mappa 0.0e+00] | v_b/s 0.96741629 0.96741629 | v_max/s 0.789198 | salto/s 3.816172 | F(c=1) 0.84409 0.84409 (R_t 0.90178 0.90178 Q_b 1.00015 1.00015 L 0.93589 0.93589) | F(v_max) 1.35525 1.35525 | lambda* 0.50000000 | 26s
+  eps 0.5 s 0.001 [la mappa 0.0e+00] | v_b/s 0.99999963 0.99999961 | v_max/s 0.762189 | salto/s 4.123104 | F(c=1) 1.00014 1.00014 (R_t 1.00000 1.00000 Q_b 1.00014 1.00014 L 1.00000 1.00000) | F(v_max) 1.72162 1.72162 | lambda* 0.50000004 | 28s
+  eps 0.5 s 0.01  [la mappa 0.0e+00] | v_b/s 0.99996566 0.99996342 | v_max/s 0.762221 | salto/s 4.122907 | F(c=1) 0.99999 0.99996 (R_t 0.99991 0.99989 Q_b 1.00014 1.00014 L 0.99993 0.99993) | F(v_max) 1.72121 1.72116 | lambda* 0.50000479 | 29s
+  eps 0.5 s 0.05  [la mappa 7.0e-18] | v_b/s 0.99914029 0.99908402 | v_max/s 0.762997 | salto/s 4.118127 | F(c=1) 0.99629 0.99562 (R_t 0.99786 0.99730 Q_b 1.00014 1.00014 L 0.99828 0.99817) | F(v_max) 1.71136 1.71020 | lambda* 0.50011987 | 34s
+  eps 0.5 s 0.1   [la mappa 1.4e-17] | v_b/s 0.99653748 0.99630985 | v_max/s 0.765405 | salto/s 4.103149 | F(c=1) 0.98467 0.98196 (R_t 0.99138 0.98911 Q_b 1.00014 1.00014 L 0.99309 0.99263) | F(v_max) 1.68077 1.67615 | lambda* 0.50048077 | 34s
+  eps 0.5 s 0.3   [la mappa 0.0e+00] | v_b/s 0.96656454 0.96427613 | v_max/s 0.789198 | salto/s 3.939638 | F(c=1) 0.85633 0.83035 (R_t 0.91648 0.89289 Q_b 1.00014 1.00013 L 0.93425 0.92983) | F(v_max) 1.37490 1.33318 | lambda* 0.50445949 | 34s
+  il limite a s -> 0, eps 0.0, vb0  : f0 0.9999701875 f1 +3.696e-03 f2 -3.740e-01
+  il limite a s -> 0, eps 0.0, vb1  : f0 0.9999701874 f1 +3.696e-03 f2 -3.740e-01
+  il limite a s -> 0, eps 0.0, vmax : f0 0.7621633515 f1 +3.112e-03 f2 +2.900e-01
+  il limite a s -> 0, eps 0.0, salto: f0 3.9999561735 f1 +5.449e-03 f2 -2.060e+00
+  il limite a s -> 0, eps 0.5, vb0  : f0 0.9999704535 f1 +3.663e-03 f2 -3.834e-01
+  il limite a s -> 0, eps 0.5, vb1  : f0 0.9999673403 f1 +4.049e-03 f2 -4.100e-01
+  il limite a s -> 0, eps 0.5, vmax : f0 0.7621633515 f1 +3.112e-03 f2 +2.900e-01
+  il limite a s -> 0, eps 0.5, salto: f0 4.1230555471 f1 +6.223e-03 f2 -2.059e+00
+  DEVE PASSARE: la mappa, la variante a (eps, s) = oggi a (eps/K, K s), entro 1e-12 a ogni riga        PASSA   1.4e-17
+  delta(s) eps 0.0 (k(1,0), lato 16): 0.02:0.00e+00 0.05:2.48e-04 0.1:1.15e-03 0.2:4.99e-03 0.3:1.23e-02 | l'esponente contro s 2.171
+  delta(s) eps 0.5 (k(1,0), lato 16): 0.02:0.00e+00 0.05:6.05e-04 0.1:2.79e-03 0.2:1.19e-02 0.3:2.86e-02 | l'esponente contro s 2.145
+  la forza s0 0.05 banda 0 eta 0.001 (630 tick): dif +2.0461e-07 semis -6.71e-12 | dif/a_H 0.9417 | dif/a_RG(c = 1) 0.9379 | <g> 0.9577
+  la forza s0 0.05 banda 0 eta 0.01 (630 tick): dif +2.0449e-06 semis -6.70e-10 | dif/a_H 0.9411 | dif/a_RG(c = 1) 0.9373 | <g> 0.9577
+  la forza s0 0.05 banda 1 eta 0.001 (630 tick): dif +2.0483e-07 semis -9.54e-12 | dif/a_H 0.9426 | dif/a_RG(c = 1) 0.9389 | <g> 0.9572
+  la forza s0 0.05 banda 1 eta 0.01 (630 tick): dif +2.0470e-06 semis -9.53e-10 | dif/a_H 0.9421 | dif/a_RG(c = 1) 0.9383 | <g> 0.9572
+    (33s)
+  la forza s0 0.10 banda 0 eta 0.001 (316 tick): dif +8.0807e-07 semis -2.59e-11 | dif/a_H 0.9416 | dif/a_RG(c = 1) 0.9260 | <g> 0.9576
+  la forza s0 0.10 banda 0 eta 0.01 (316 tick): dif +8.0759e-06 semis -2.59e-09 | dif/a_H 0.9411 | dif/a_RG(c = 1) 0.9254 | <g> 0.9577
+  la forza s0 0.10 banda 1 eta 0.001 (316 tick): dif +8.0898e-07 semis -3.72e-11 | dif/a_H 0.9427 | dif/a_RG(c = 1) 0.9270 | <g> 0.9572
+  la forza s0 0.10 banda 1 eta 0.01 (316 tick): dif +8.0851e-06 semis -3.71e-09 | dif/a_H 0.9421 | dif/a_RG(c = 1) 0.9265 | <g> 0.9572
+    (18s)
+  la forza s0 0.30 banda 0 eta 0.001 (110 tick): dif +6.2437e-06 semis -1.49e-10 | dif/a_H 0.9418 | dif/a_RG(c = 1) 0.7950 | <g> 0.9574
+  la forza s0 0.30 banda 0 eta 0.01 (110 tick): dif +6.2407e-05 semis -1.49e-08 | dif/a_H 0.9414 | dif/a_RG(c = 1) 0.7946 | <g> 0.9574
+  la forza s0 0.30 banda 1 eta 0.001 (110 tick): dif +6.2515e-06 semis -2.35e-10 | dif/a_H 0.9430 | dif/a_RG(c = 1) 0.7960 | <g> 0.9569
+  la forza s0 0.30 banda 1 eta 0.01 (110 tick): dif +6.2485e-05 semis -2.35e-08 | dif/a_H 0.9425 | dif/a_RG(c = 1) 0.7956 | <g> 0.9569
+    (8s)
+  PUO' FALLIRE: il limite di v_b/s (eps 0, ramo 0) entro 1e-06 da 1                                    ### FALLISCE   0.9999701875
+  PUO' FALLIRE: F con c = 1 entro 0.02 da 1 a s <= 0.1 (eps 0)                                         PASSA   1.0002 1.0002 1.0000 1.0000 0.9960 0.9960 0.9834 0.9834
+  PUO' FALLIRE: la forza a_mis/a_RG(c = 1) entro 0.05 da 1 a s0 0.05                                   ### FALLISCE   0.9379 0.9373 0.9389 0.9383
+  PUO' FALLIRE: lambda* = 1/2 entro 1e-06 (eps 0)                                                      PASSA   0.50000000 0.50000000 0.50000000 0.50000000 0.50000000
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 8/11 controlli passano; DEVE fallite: 0 []
