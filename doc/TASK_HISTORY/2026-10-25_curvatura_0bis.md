@@ -77,3 +77,23 @@
 2. ### **LA DEVE a `r 1`: `v_max/s = 0.599286` entro `1e-5`** *(il valore del guardiano, scritto prima della corsa)*; ### **il vecchio `0.598467` si riporta come SOTTOSTIMA, con le due cause misurate: le `61` direzioni e la griglia** *(la scansione e l'ottimizzatore accanto)*.
 3. ### **PUO' FALLIRE: `0.382103` a `r 0.5` e `0.764206` a `r 2` entro `1e-5`.**
 4. ### **L'AGGIUNTA DELLE `17:07`, FUSA QUI:** ### **la correzione delle UNITA'** *(errore del guardiano `n.65`)* ### **e' gia' nel referto di `0764d566`** *(sezione `5`)*: ### **la carta in archi per tick `r s`, in archi per tempo proprio `r`, in lunghezza propria `1`: le tre tornano, e l'esponente `2` di `31ee70cc` e' quello degli archi per tick.** ### **`M4` e' nella sezione `5`** *(una rilettura)*. ### **`M1-BIS`, ORA:** ### **`(i)` a `cs` uniforme `r` `0.8`, `1`, `1.25`: `v_g/s` a `|k| = 1e-3` lungo le tre direzioni degli archi** *(`0`, `120`, `60` gradi)* ### **e la normale ad `a2`** *(`30` gradi)*: ### **DEVE a `r 1` uguali entro `1e-3`; PUO' FALLIRE isotropa entro `1e-3` a ogni `r`;** ### **`(ii)` nella scena di `31ee70cc`: un pacchetto LOCALIZZATO** *(`W 8`, `cs` quasi costante su di lui)* ### **lungo `a2`** *(il `k` del fascio)*, ### **a tre quote** *(`m1/L1` `0`, `0.25`, `0.5`: `cs` `0.24`, `0.20`, `0.16`)*, ### **`80` tick; la velocita' lungo `a2` contro `cs`; l'esponente: PUO' FALLIRE `= 2.02` entro `0.05`.** ### **Se viene `~1.47`, l'ipotesi del guardiano spiega la differenza fra Shapiro e la deflessione** *(una lettura)*.
+
+## 7. IL RISULTATO DELLA SECONDA CORSA *(dopo `a027e1b0`)*
+
+### **IL REFERTO DELLA SECONDA CORSA:** `doc/referti_l2/curvatura_0bis_v2.{txt,jsonl}` *(`csv/_curvatura_0bis.py` `sha1-BYTE 7573b65f` al commit `a027e1b0`)*. ### **`9/9`.**
+
+| `r` | `0.5` | `0.8` | `1` | `1.25` | `2` |
+|---|---|---|---|---|---|
+| `c` *(archi per tempo proprio)* | `0.500000` | `0.800000` | `1.000000` | `1.250000` | `2.000000` |
+| `v_max/s` *(l'ottimizzatore)* | `0.3821032` | `0.5298489` | `0.5992864` | `0.6623111` | `0.7642063` |
+| `v_max/c` | `0.764206` | `0.662311` | `0.599286` | `0.529849` | `0.382103` |
+| `v_b/c` | `1.110721` | `0.878102` | `0.785398` | `0.702481` | `0.555360` |
+| il salto minimo con la seconda banda | `0.683` | `0.558` | `0.500` | `0.448` | `0.366` |
+
+- ### **LA DEVE a `r 1`: `v_max/s = 0.5992864` contro `0.599286` entro `1e-5`: PASSA;** ### **le stime del guardiano a `r 0.5` e `2`** *(`0.382103`, `0.764206`)*: ### **PASSANO** *(entro `3e-7`)*.
+- ### **LA CAUSA DELLA SOTTOSTIMA, MISURATA** *(`r 1`)*: ### **la scansione su `61` direzioni `0.5984675`, il modulo del gradiente sulla griglia `48` `0.5986216`, l'ottimizzatore `0.5992864`:** ### **le direzioni pesano `1.5e-4`, la griglia `6.6e-4`** *([[V-MAX-DIREZIONI]])*.
+- ### **`M1-BIS (i)`: la luce a `cs` uniforme e' ISOTROPA:** ### **le tre direzioni degli archi e la normale ad `a2` uguali entro `3e-8`** *(`r` `0.8`, `1`, `1.25`)*.
+- ### **`M1-BIS (ii)`: lungo `a2` nel gradiente di `31ee70cc`:** ### **`v/(cs^2/cs_rif)` `0.94468`, `0.94027`, `0.93749` a `cs` `0.240`, `0.200`, `0.160`; l'esponente `2.0188`** *(lungo il gradiente `2.0245`)*. ### **L'IPOTESI DEL GUARDIANO CADE:** ### **la luce di `A1` va come `cs^2` in tutte e due le direzioni:** ### **la differenza fra Shapiro e la deflessione NON viene dalla direzione.**
+- ### **`M3`: `v_max/c < 1` a ogni `r`: NESSUN superamento della luce in `A1`;** ### **e `v_max/c` varia di `2.000` volte fra `r 0.5` e `r 2`** *(la DEVE FALLIRE per la chiave giusta: PASSA)*.
+
+### **LA LETTURA:** ### **la luce di `A1` va a `1` lunghezza propria per tempo proprio, isotropa;** ### **la materia ha la sua velocita' massima vera `v_max(r)`, e `v_max/c` scende da `0.76` a `0.38` fra `r 0.5` e `r 2`:** ### **il cono della materia resta DENTRO quello della luce, e il loro rapporto dipende da `cs`** *(l'obiezione di Luca, nella forma misurata)*.

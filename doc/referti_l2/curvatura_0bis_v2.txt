@@ -1,0 +1,55 @@
+[TIMBRO] _curvatura_0bis.py  sha1-BYTE 7573b65f  committato e pulito
+========================================================================================================================
+LA CURVATURA, PARTE 0-BIS: la luce in A1 misurata, la velocita' massima vera della materia, il rapporto delle due c nella stessa unita'
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_curvatura_0bis.py 7573b65f; csv/_curvatura_prototipo.py fa3d3353; csv/_u1_terzo.py dbcf49c4; csv/_u1_secondo.py ab015054; csv/_u1_prototipo.py d073761c; csv/_triangoli.py a74c7823; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_bassa_energia.py 74be8455
+  la configurazione: R_LISTA (0.5, 0.8, 1.0, 1.25, 2.0) R_SPETTRI (0.5, 1.0, 2.0) S_LUCE 0.05 (Courant in A1: s <= 0.40825/r, al r massimo 2: 0.2041) S_SPETTRI 0.01 GRIGLIE (48, 96, 192) K_PICCOLO 0.001 H_K 0.0001 DIREZIONI_V 12
+    VMAX_1 0.599286 STIME {0.5: 0.382103, 2.0: 0.764206} TOLL_C1 0.001 TOLL_VMAX1 1e-05 TOLL_X1 1e-09 TOLL_CR 0.001 TOLL_STIME 1e-05; le unita': archi per tempo proprio (la velocita' per tick / s), e lunghezza propria per tempo proprio (x l = 1/r)
+------------------------------------------------------------------------------------------------------------------------
+### M1 -- LA LUCE IN A1 (una regione uniforme, s 0.05, s_rif = s/r, l = 1/r, A_p = (sqrt3/4)/r^2, il tempo del campo F1)
+  r 0.5   | c (dispersione) 0.500000 archi/tempo proprio = 1.000000 lunghezza propria/tempo proprio | isotropia 2.7e-08 | il pacchetto 0.48606 (previsto 0.48606) | max|lambda| 1.000000000000 (Courant carta s <= 0.8165) | 2s
+  r 0.8   | c (dispersione) 0.800000 archi/tempo proprio = 1.000000 lunghezza propria/tempo proprio | isotropia 7.9e-08 | il pacchetto 0.77740 (previsto 0.77739) | max|lambda| 1.000000000000 (Courant carta s <= 0.5103) | 2s
+  r 1     | c (dispersione) 1.000000 archi/tempo proprio = 1.000000 lunghezza propria/tempo proprio | isotropia 2.4e-08 | il pacchetto 0.97161 (previsto 0.97162) | max|lambda| 1.000000000000 (Courant carta s <= 0.4082) | 2s
+  r 1.25  | c (dispersione) 1.250000 archi/tempo proprio = 1.000000 lunghezza propria/tempo proprio | isotropia 3.0e-08 | il pacchetto 1.21440 (previsto 1.21440) | max|lambda| 1.000000000000 (Courant carta s <= 0.3266) | 2s
+  r 2     | c (dispersione) 2.000000 archi/tempo proprio = 1.000000 lunghezza propria/tempo proprio | isotropia 3.8e-08 | il pacchetto 1.94365 (previsto 1.94287) | max|lambda| 1.000000000000 (Courant carta s <= 0.2041) | 2s
+  SERVIZIO: stabile a s 0.05 per ogni r (max|lambda| fuori dalla gauge <= 1 + 1e-6)                    PASSA   1.000000000 1.000000000 1.000000000 1.000000000 1.000000000
+------------------------------------------------------------------------------------------------------------------------
+### M2 -- LA VELOCITA' MASSIMA VERA DELLA MATERIA (il generatore H_r, la banda della coppia a K seguita per continuita'; e su tutte le bande)
+  r 0.5   | v_b/s 0.555360 0.555360 | v_max/s banda K seguita: 48: 0.381810 0.381810 | 96: 0.381986 0.381986 | 192: 0.382093 0.382093 | tutte le bande (48) 0.381810 | L'OTTIMIZZATORE (griglia 120 0.3820996): 0.3821032 a t 1.09677 4.08964, k 1.09677 5.35553, il salto minimo con la seconda banda 0.6830 | 12s
+  r 0.8   | v_b/s 0.702481 0.702481 | v_max/s banda K seguita: 48: 0.529394 0.529394 | 96: 0.529670 0.529670 | 192: 0.529828 0.529828 | tutte le bande (48) 0.529394 | L'OTTIMIZZATORE (griglia 120 0.5297857): 0.5298489 a t 5.15114 5.15114, k 5.15114 8.92203, il salto minimo con la seconda banda 0.5583 | 10s
+  r 1     | v_b/s 0.785398 0.785398 | v_max/s banda K seguita: 48: 0.598622 0.598622 | 96: 0.599163 0.599163 | 192: 0.599237 0.599237 | tutte le bande (48) 0.598622 | L'OTTIMIZZATORE (griglia 120 0.5991528): 0.5992864 a t 5.14610 2.27416, k 5.14610 5.59708, il salto minimo con la seconda banda 0.5000 | 10s
+  r 1.25  | v_b/s 0.878102 0.878102 | v_max/s banda K seguita: 48: 0.661742 0.661742 | 96: 0.662087 0.662087 | 192: 0.662285 0.662285 | tutte le bande (48) 0.661742 | L'OTTIMIZZATORE (griglia 120 0.6622322): 0.6623111 a t 5.15114 5.15114, k 5.15114 8.92203, il salto minimo con la seconda banda 0.4478 | 10s
+  r 2     | v_b/s 1.110721 1.110721 | v_max/s banda K seguita: 48: 0.763619 0.763619 | 96: 0.763971 0.763971 | 192: 0.764186 0.764186 | tutte le bande (48) 0.763619 | L'OTTIMIZZATORE (griglia 120 0.7641991): 0.7642063 a t 2.19355 5.18641, k 2.19355 7.25520, il salto minimo con la seconda banda 0.3660 | 10s
+  LA CAUSA DELLA SOTTOSTIMA (lettura): r 1, griglia 48: la scansione su 61 direzioni (come _triangoli_forza.v_max) 0.5984675; |grad| 0.5986216; l'ottimizzatore 0.5992864; il vecchio valore 0.598467
+  gli spettri completi con A1 (s 0.01, tutte le bande, griglia 48) a r 0.5: v_max/s 0.381716 contro il generatore (tutte, 48) 0.381810
+  gli spettri completi con A1 (s 0.01, tutte le bande, griglia 48) a r 1: v_max/s 0.598483 contro il generatore (tutte, 48) 0.598622
+  gli spettri completi con A1 (s 0.01, tutte le bande, griglia 48) a r 2: v_max/s 0.763457 contro il generatore (tutte, 48) 0.763619
+------------------------------------------------------------------------------------------------------------------------
+### M3 -- IL RAPPORTO, nella stessa unita' (archi per tempo proprio)
+  r 0.5   | c 0.500000 | v_max (l'ottimizzatore) 0.382103: v_max/c 0.764206 | v_b 0.555360: v_b/c 1.110721 | v_max (tutte) / c 0.763619
+  r 0.8   | c 0.800000 | v_max (l'ottimizzatore) 0.529849: v_max/c 0.662311 | v_b 0.702481: v_b/c 0.878102 | v_max (tutte) / c 0.661743
+  r 1     | c 1.000000 | v_max (l'ottimizzatore) 0.599286: v_max/c 0.599286 | v_b 0.785398: v_b/c 0.785398 | v_max (tutte) / c 0.598622
+  r 1.25  | c 1.250000 | v_max (l'ottimizzatore) 0.662311: v_max/c 0.529849 | v_b 0.878102: v_b/c 0.702481 | v_max (tutte) / c 0.529394
+  r 2     | c 2.000000 | v_max (l'ottimizzatore) 0.764206: v_max/c 0.382103 | v_b 1.110721: v_b/c 0.555360 | v_max (tutte) / c 0.381810
+------------------------------------------------------------------------------------------------------------------------
+### M1-BIS (i) -- LA LUCE NELLE DIREZIONI, a cs uniforme (le tre direzioni degli archi e la normale ad a2)
+  r 0.8   | 0.0 gradi 0.8000000 120.0 gradi 0.8000000 60.0 gradi 0.8000000 30.0 gradi 0.8000000 | la variazione relativa 1.77e-08
+  r 1     | 0.0 gradi 1.0000000 120.0 gradi 1.0000000 60.0 gradi 1.0000000 30.0 gradi 1.0000000 | la variazione relativa 1.23e-08
+  r 1.25  | 0.0 gradi 1.2500000 120.0 gradi 1.2500000 60.0 gradi 1.2499999 30.0 gradi 1.2500000 | la variazione relativa 2.95e-08
+### M1-BIS (ii) -- LA LUCE LUNGO a2 NEL GRADIENTE di 31ee70cc (un pacchetto largo 8, 80 tick, a tre quote)
+  la quota m1/L1 0.00 (m1 0): v lungo a2 0.271078 archi/tick a cs 0.23956: v/(cs^2/cs_rif) 0.94468
+  la quota m1/L1 0.25 (m1 96): v lungo a2 0.187873 archi/tick a cs 0.19990: v/(cs^2/cs_rif) 0.94027
+  la quota m1/L1 0.50 (m1 192): v lungo a2 0.120565 archi/tick a cs 0.16038: v/(cs^2/cs_rif) 0.93749
+  l'esponente d ln v/d ln cs lungo a2: 2.0188 (lungo il gradiente, 31ee70cc: 2.0245)
+------------------------------------------------------------------------------------------------------------------------
+### I CONTROLLI
+  DEVE PASSARE: a r 1, c = 1 entro 0.001; v_max/s (l'ottimizzatore) = 0.599286 entro 1e-05; x(1) = 1/4 PASSA   c 1.000000, v_max 0.599286 (tutte 0.598622), x 0.2500000002 0.2500000001
+  PUO' FALLIRE: c_luce(r) = r archi per tempo proprio entro 0.001 a ogni r (la carta)                  PASSA   lo scarto peggiore 4.12e-08
+  PUO' FALLIRE: v_max/s (l'ottimizzatore) contro le stime del guardiano entro 1e-05                    PASSA   r 0.5 0.3821032/0.382103 r 2 0.7642063/0.764206
+  DEVE PASSARE (M1-BIS): a r 1 le quattro direzioni uguali entro 0.001                                 PASSA   1.23e-08
+  PUO' FALLIRE (M1-BIS i): isotropa entro 0.001 a ogni r                                               PASSA   la peggiore 2.95e-08
+  PUO' FALLIRE (M1-BIS ii): l'esponente lungo a2 = 2.02 entro 0.05                                     PASSA   2.0188
+  PUO' FALLIRE: v_max/c_luce < 1 a ogni r (nessun superamento della luce in A1)                        PASSA   0.7642 0.6623 0.5993 0.5298 0.3821
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: v_max/c_luce costante in r (la chiave: il rapporto fra r 0.5 e r PASSA   2.000
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 9/9 controlli passano; DEVE fallite: 0 []
