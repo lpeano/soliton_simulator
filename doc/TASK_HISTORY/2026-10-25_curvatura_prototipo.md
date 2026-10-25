@@ -76,3 +76,30 @@
 - ### **LA VARIANTE `B`** *(solo il campo)*: ### **il rapporto varia del `141%` sulla lista di `r`, e il rapporto per `r` e' `v_b/s` di oggi entro `1.4e-16`** *(DEVE FALLIRE per la chiave giusta: PASSA)*.
 
 ### **LA LETTURA:** ### **in `A1` il rapporto fra la `c` della materia e quella della luce in una regione uniforme e' `pi/(4 sqrt(r))`, NON `pi/4`:** ### **la luce va come `r`, la materia come `sqrt(r)`.** ### **L'OBIEZIONE DI LUCA E' FONDATA, ma nel verso opposto all'allineamento:** ### **i due orologi NON si allineano da soli; dove `cs` scende sotto il riferimento** *(`r < 1`)* ### **la materia diventa RELATIVAMENTE piu' veloce della luce** *(a `r 0.5` il rapporto e' `1.11`: oltre la luce)*, ### **dove sale, piu' lenta.** ### **La previsione del guardiano** *(`x(r) = r/4`)* ### **cade** *(errore `n.64` confermato dai numeri)*. ### **E la ragione e' la massa: per meta' viene dall'arco, quindi la materia sente `r` a meta'.**
+
+## 6. IL RISULTATO DELLA PARTE 1 *(dopo `b0edae62`)*
+
+### **IL REFERTO DELLA PARTE `1`:** `doc/referti_l2/curvatura_prototipo.{txt,jsonl}` *(`csv/_curvatura_prototipo.py` `sha1-BYTE fa3d3353` al commit `7a489f2c`)*. ### **`6/10`; UNA DEVE FALLITA: la chiave del DEVE FALLIRE di `(c)`.** ### ⛔ **FERMO.**
+
+| | il criterio | il misurato |
+|---|---|---|
+| `(a)` `cs = cs_rif`, `20` tick, e `0.3029` | DEVE al bit | ### **PASSA** *(`st`, `56` attributi di `mot`, `A` ed `E`)*; ### **la chiave a `1.1 cs_rif`: `1.6e-2` contro oggi, `0.0` contro la stessa variante costruita in `z_arco`** |
+| `(b)` Gauss, gauge, reversibilita', energia *(un gradiente, `F1` con Erone)* | DEVE | ### **PASSA:** Gauss `7.0e-14`; `rho` `3.1e-15`, `e B` `1.9e-15`, `|dE|/stima` `0.059`; `T` `5.0e-14`; deriva/ampiezza `0.022` |
+| `(c)` la luce, il pacchetto lungo | lettura | ### **`v/(cs^2/cs_rif)` `0.99136`, variazione `6.2e-3`; `d ln v/d ln cs = 2.0245`: `gamma` da Shapiro `1.0245`; il tempo d'arrivo `0.99352`** |
+| `(c)` il fascio *(`W 12`, `16`, `24`)* | lettura | ### **`kappa/R1` `1.4653`, `1.4798`, `1.4808`; `kappa/R2` `0.733`-`0.740`; `a/(a_E <cos^2>)` `0.837`, `0.829`, `0.824`** |
+| `(c)` l'estrapolazione *(contro `X`)* | PUO' FALLIRE `gamma` entro il `5%` | ### **FALLISCE: `kappa/R2 = 0.7305`, `gamma` dalla deflessione `0.461`** |
+| `(c)` la deflessione entro il `10%` da `R1` | ### **DEVE FALLIRE, la chiave `kappa/R1 > 1.5` a ogni `W`** | ### ⛔ **FALLISCE LA CHIAVE: `1.465`, `1.480`, `1.481`** *(la deflessione NON sta entro il `10%` da `R1`, ma nemmeno a `1.5` volte)* |
+| `(d)` la caduta lenta *(`eps 0`, `s0` `0.05`, `0.1`, `0.3`, due rami, `eta 1e-3` e `1e-2`)* | PUO' FALLIRE entro il `2%` | ### **FALLISCE: con `A1` il differenziale e' `1.4982`-`1.5006` volte quello di oggi** |
+| `(f)` l'universalita' *(`s0 0.1`)* | PUO' FALLIRE entro il `2%` | ### **i due rami entro `4.1e-4`; `eps 0.5` contro `eps 0`: `3.1e-2`** *(FALLISCE: `1.452` contro `1.500`)* |
+| `(e)` il rapporto delle due `c` lungo il gradiente | lettura | ### **`pi x(r)/r` da `0.878` *(`r 0.8`)* a `0.718` *(`r 1.2`)*** *(dal generatore, localmente uniforme)* |
+
+### **LA LETTURA, in tre righe:**
+1. ### **la LUCE in `A1` va come `cs^2`** *(`gamma` da Shapiro `1.02`)* ### **ma il fascio devia `1.47` volte `R1`, non `2`:** ### **`0.73` di Einstein, con Ehrenfest che ne spiega solo l'`83%`** *(senza `A1`, in `fa7ee993`, il `94%`)*: ### **la velocita' e la deflessione NON danno lo stesso `gamma`, e non so perche'** *(una domanda aperta: la scala del gradiente contro la velocita' del fascio che cresce, o i pesi di Erone che non sono quelli di una metrica conforme)*;
+2. ### **la CADUTA lenta con `A1` e' `1.50` volte quella di oggi, a ogni `s0` e nei due rami:** ### **e' esattamente `1 + d ln mu0/d ln r` = `1 + 0.5` della parte `0`** *(la massa per meta' dall'arco sente anche il potenziale delle lunghezze)*: ### **`A1` NON lascia la caduta a `g_00`;**
+3. ### **e la moneta lo sposta:** ### **a `eps 0.5` il fattore e' `1.45`** *(l'universalita' fra `eps 0` e `0.5` cade del `3%`)*.
+
+### **L'OBIEZIONE DI LUCA:** ### **aveva ragione** *(i due orologi non si allineano da soli: il rapporto delle due `c` e' `pi/(4 sqrt r)`, dipende da `cs`)*, ### **e il guardiano torto** *(`x(r) = r/4` falsa)*. ### **Ma la curvatura `A1` li ALLONTANA invece di allinearli.**
+### **SU `gamma`:** ### **la velocita' della luce dice `gamma = 1.02`, la deflessione `0.46` o `0.47`** *(`kappa/R1 - 1`)*: ### **non sono d'accordo, e il numero di `gamma` NON si puo' dare.**
+### **PER LA DECISIONE SUGLI OROLOGI** *(informazione, non scelte)*: ### **con `A1` nessuna delle due opzioni basta:** ### **un `theta = s/x` fisso allinea le due `c` solo a `r = 1`, perche' il loro rapporto varia con `cs`;** ### **e la caduta cambia di `1.5`:** ### **la massa dall'arco e' la chiave** *(una strada dove la massa venga solo dal nodo, o una dove anche il nodo senta le lunghezze, `A2` del progetto, che pero' raddoppia la caduta)*.
+
+### ⛔ **FERMO: la chiave del DEVE FALLIRE di `(c)` e' fallita** *(`kappa/R1 = 1.47` invece di `> 1.5`)*. ### **LE DOMANDE A LUCA:** ### **`(1)` la chiave era fissata a `1.5`, e la deflessione sta fra `R1` e `R2`: si accetta la lettura «la deflessione non e' `R1`» o si cerca prima perche' non arriva a `R2`?** ### **`(2)` la caduta `x1.5` dice che `A1` non e' la relativita' generale a campo debole: si prova la strada con la massa solo dal nodo** *(se esiste)*, ### **o `A2`, o `(C)`?**

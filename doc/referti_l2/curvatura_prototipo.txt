@@ -1,0 +1,56 @@
+[TIMBRO] _curvatura_prototipo.py  sha1-BYTE fa3d3353  committato e pulito
+========================================================================================================================
+IL PROTOTIPO DELLA CURVATURA DELLO SPAZIO SUI TRIANGOLI, IN MEMORIA (la strada A1) -- PARTE 1: le misure del prototipo
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_curvatura_prototipo.py fa3d3353; csv/_u1_terzo.py dbcf49c4; csv/_u1_secondo.py ab015054; csv/_u1_prototipo.py d073761c; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_zero_simmetrico.py b400d76e; csv/_universalita_massa.py 94ebb415
+  le scelte di prova di Luca (2026-10-25 16:26): A1; cs_rif il vuoto imperturbato (il fondo della scena); Erone; i versori fissi; lo zero simmetrico
+  la configurazione: R_LISTA (0.5, 0.8, 0.9, 0.95, 1.0, 1.05, 1.1, 1.25, 2.0) R_SPETTRI (0.8, 1.0, 1.25) S_SPETTRI 0.01 PASSI_R 200 K_FINE 0.01 NK 200 H_R 0.0001; TOLL_X1 1e-09 TOLL_XR 1e-06 TOLL_SPETTRI 0.001 TOLL_B 1e-06 TOLL_BIT 1e-12 TOLL_REL 1e-12
+    R_CHIAVE 1.10 N_A 20 N_G 200 N_REV 100 N_EN 500 L_M 24 S_M 0.10 ETA_M 0.20 E_M 0.3029 W_SCAN (12.0, 16.0, 24.0) TOLL_GAMMA 0.05 TOLL_R1 0.1 S0_F (0.05, 0.1, 0.3) S0_EPS 0.10 LX_F 96 ETA_F (0.0, 0.001, -0.001, 0.01, -0.01) TOLL_CADUTA 0.02; la scena di (c) LG2 (384, 48) S0 0.20 ETA 0.20
+------------------------------------------------------------------------------------------------------------------------
+### (a) cs = cs_rif ovunque: il passo di oggi AL BIT con A1 accesa (materia e campo, 20 tick, e 0.3029, compatto)
+  DEVE PASSARE (a): A1 a cs = cs_rif = il passo di oggi AL BIT (st, 56 attributi di mot, A ed E del ca PASSA   diversi: mot [] st [] campo []
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: cs = 1.1 cs_rif e' il passo di oggi (> 1e-6); E = lo spostamento PASSA   contro oggi 1.64e-02; contro z_arco 0.0e+00
+------------------------------------------------------------------------------------------------------------------------
+### (b) Gauss, la gauge, la reversibilita', l'energia: la materia in un gradiente cs = 0.10 (1 + 0.20 cos), A1 (s_rif 0.10), il campo F1 con Erone, e 0.3029 compatto
+  Gauss 6.98e-14 | gauge rho 3.1e-15 eB 1.9e-15 |dE| 3.69e-13 stima 6.25e-12 | rev 4.99e-14 | energia: deriva 2.21e-06 ampiezza 1.01e-04 (media -0.12969)
+  DEVE PASSARE (b): Gauss entro 1e-12 per 200 tick                                                     PASSA   6.98e-14
+  DEVE PASSARE (b): la gauge, rho ed eB entro 1e-12 e |dE| <= la stima                                 PASSA   |dE|/stima 0.059
+  DEVE PASSARE (b): la reversibilita' 100 + 100 entro 1e-12                                            PASSA   4.99e-14
+  DEVE PASSARE (b): l'energia senza deriva (|pendenza| 500 <= ampiezza/2)                              PASSA   deriva/ampiezza 0.022
+------------------------------------------------------------------------------------------------------------------------
+### (c) LA LUCE IN UN GRADIENTE CON A1 (la scena di 64bb2328: 384x48, s0 0.20, eta 0.20, cs_rif = s0; il campo F1 con Erone)
+  il pacchetto lungo: v/(cs^2/cs_rif) 0.99136 variazione 6.18e-03 | d ln v/d ln cs 2.0245: gamma (Shapiro) 1.0245 | il tempo d'arrivo previsto/vero 0.99352 | il controllo eta 0: 0.99784
+  il fascio W 12.0: kappa/R1 1.4653 kappa/R2 0.7327 | a/(a_E <cos^2>) 0.8369 | X 0.0493 | sigma 8.6 -> 15.0
+  il fascio W 16.0: kappa/R1 1.4798 kappa/R2 0.7399 | a/(a_E <cos^2>) 0.8291 | X 0.0554 | sigma 11.4 -> 13.6
+  il fascio W 24.0: kappa/R1 1.4808 kappa/R2 0.7404 | a/(a_E <cos^2>) 0.8240 | X 0.0974 | sigma 17.0 -> 15.4
+  l'estrapolazione a X -> 0: kappa/R2 0.7305 (grado 1): gamma (deflessione) = 2 kappa/R2 - 1 = 0.4610
+  PUO' FALLIRE (c): gamma (dalla deflessione estrapolata) entro 0.05 da 1                              ### FALLISCE   gamma 0.4610 (Shapiro 1.0245)
+  DEVE FALLIRE (c), PER LA CHIAVE GIUSTA: la deflessione entro 0.1 da R1 (la chiave: kappa/R1 > 1.5 a  ### FALLISCE   1.465 1.480 1.481
+------------------------------------------------------------------------------------------------------------------------
+### (d), (f) LA CADUTA DI UNA PARTICELLA LENTA (le corse di 7daa8840, Lx 96): il differenziale con A1 contro quello di oggi alla stessa scena
+  s0 0.05 banda 0 eta 0.001 (801 tick): dif A1 +1.89705e-07 oggi +1.26421e-07: A1/oggi 1.50058
+  s0 0.05 banda 0 eta 0.01 (801 tick): dif A1 +1.89433e-06 oggi +1.26345e-06: A1/oggi 1.49933
+  s0 0.05 banda 1 eta 0.001 (801 tick): dif A1 +1.89755e-07 oggi +1.26549e-07: A1/oggi 1.49946
+  s0 0.05 banda 1 eta 0.01 (801 tick): dif A1 +1.89483e-06 oggi +1.26472e-06: A1/oggi 1.49821
+    (82s)
+  s0 0.10 banda 0 eta 0.001 (402 tick): dif A1 +7.52876e-07 oggi +5.01731e-07: A1/oggi 1.50055
+  s0 0.10 banda 0 eta 0.01 (402 tick): dif A1 +7.51805e-06 oggi +5.01433e-06: A1/oggi 1.49931
+  s0 0.10 banda 1 eta 0.001 (402 tick): dif A1 +7.53183e-07 oggi +5.02282e-07: A1/oggi 1.49952
+  s0 0.10 banda 1 eta 0.01 (402 tick): dif A1 +7.52111e-06 oggi +5.01982e-06: A1/oggi 1.49828
+    (43s)
+  s0 0.30 banda 0 eta 0.001 (138 tick): dif A1 +6.19779e-06 oggi +4.13062e-06: A1/oggi 1.50045
+  s0 0.30 banda 0 eta 0.01 (138 tick): dif A1 +6.18978e-05 oggi +4.12840e-05: A1/oggi 1.49932
+  s0 0.30 banda 1 eta 0.001 (138 tick): dif A1 +6.20078e-06 oggi +4.13468e-06: A1/oggi 1.49970
+  s0 0.30 banda 1 eta 0.01 (138 tick): dif A1 +6.19283e-05 oggi +4.13247e-05: A1/oggi 1.49858
+    (17s)
+  eps 0.5 s0 0.10 banda 0 eta 0.001: dif A1 +7.30799e-07 oggi +5.03025e-07: A1/oggi 1.45281
+  eps 0.5 s0 0.10 banda 0 eta 0.01: dif A1 +7.29789e-06 oggi +5.02718e-06: A1/oggi 1.45169
+  eps 0.5 s0 0.10 banda 1 eta 0.001: dif A1 +7.29710e-07 oggi +5.02178e-07: A1/oggi 1.45309
+  eps 0.5 s0 0.10 banda 1 eta 0.01: dif A1 +7.28689e-06 oggi +5.01867e-06: A1/oggi 1.45196
+  PUO' FALLIRE (d): la caduta lenta con A1 invariata entro 0.02 (eps 0, ogni s0, ramo, eta)            ### FALLISCE   A1/oggi da 1.4982 a 1.5006
+  PUO' FALLIRE (f): l'universalita' con A1 a s0 0.10: i due rami entro 0.02, eps 0.5 contro eps 0 entr ### FALLISCE   rami 4.07e-04, eps 3.11e-02
+------------------------------------------------------------------------------------------------------------------------
+### (e) IL RAPPORTO DELLE DUE c NEL GRADIENTE di (c): dal generatore al r locale (l'approssimazione localmente uniforme, dichiarata)
+  r da 0.80 a 1.20 lungo il gradiente: pi x(r)/r r 0.8: 0.878102 r 1.0: 0.785398 r 1.2: 0.717937 (pi/4 = 0.785398)
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/10 controlli passano; DEVE fallite: 1 ['DEVE FALLIRE (c), PER LA CHIAVE GIUSTA: la deflessione entro 0.1 da R1 (la chiave: kappa/R1 > 1.5 a ogni W)']
