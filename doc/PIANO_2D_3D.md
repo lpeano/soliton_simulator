@@ -50,6 +50,15 @@
 
 ## C. PROSEGUIRE
 
+0. ### ⭐ **L'ORDINE DOPO IL TERZO PASSO DEL `U(1)`** *(Luca, `2026-10-25`; [[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]])*:
+   1. ### **il PROGETTO della curvatura dello spazio** *(`doc/PROGETTO_CURVATURA.md`, sulla carta)*;
+   2. ### **il PROTOTIPO della curvatura sui triangoli, in memoria, con la misura del rapporto delle due `c`** *(la prova dell'obiezione di Luca)*;
+   3. ### **la DECISIONE di Luca sugli orologi, DOPO quella misura;**
+   4. ### **il progetto del CANALE di `cs`** *(la materia che produce `cs`)*, ### **col vincolo che le onde di `cs` vadano alla stessa `c`;**
+   5. ### **l'UNIONE in 2D, con le misure scelte prima** *(le tre velocita', la deflessione, l'attrazione qualitativa, la stabilita')*;
+   6. ### **la FCC** *(le leggi globali)*, ### **con `x` ricalcolato sul nuovo reticolo.**
+   ### ⚠ **IL CONTRASTO, riportato e NON corretto:** ### **la sezione `D` qui sotto mette il canale di `cs` fra le cose da FERMARE in 2D e riprendere in 3D, e il punto `2` di questa sezione mette la FCC subito dopo i triangoli;** ### **l'ordine nuovo porta il canale di `cs` e l'unione in 2D PRIMA della FCC.**
+
 1. ### **LA FORZA SUI TRIANGOLI** *(il mandato «i triangoli, secondo gradino»)*: ### **FATTO in `cbcb99c7`** *(lo specchio: i `4` casi su `128` restano FALLITI, la causa misurata e' un'accelerazione propria del pacchetto, [[PACCHETTO-K-NON-FERMO]];
    da ora lo specchio si fissa sul differenziale, `doc/PATTERN_DI_PROVA.md`)*:
    - ### **Hamilton confermato dalla dinamica** *(`a_mis/a_H` `0.920`-`0.976` a `eta 1e-2`; `0.882`-`0.988` con `eta 1e-3`; il differenziale `0.921`-`0.977`)*;

@@ -20829,3 +20829,33 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 
 ### **PER LA RELATIVITA' RISTRETTA DEL MODELLO** *(informazione per Luca)*: ### **con `theta = s/x` la particella lenta della coppia a `K` ha la stessa `c` della luce** *(un solo cono per la cinematica di bassa energia: `F -> 1` con `c = 1`)*, ### **ma il cono dei segnali della materia resta `0.762 c`.** ### **IL COSTO:** ### **`B-4` cambia significato** *(`theta = pi` arriva a `s = pi/4`, non a `1`: il cono di `B-5` diventa `s <= pi/4`, e `_nel_cono` oggi controlla `s <= 1` PRIMA dell'angolo)*; ### **l'unico modo senza massa** *(`92c63912`, a `theta = pi`)* ### **va a `s = pi/4`;** ### **la moneta non scala: la massa da moneta pesa `pi/4` volte di meno rispetto all'energia cinetica** *(`eps' = eps pi/4`)*.
 ### **SULLA FCC:** ### **`x` si ricaverebbe dallo STESSO generatore `(I - P_u) + P_-` sul blocco di Bloch della FCC** *(le `12` estremita' del nodo)*: ### **`x = sqrt(2 mu0 a)` dalla curvatura della coppia piu' stretta, senza nessuna corsa** *(`doc/PROGETTO_FCC.md`)*.
+
+### 📌 **IL PIANO DOPO IL TERZO PASSO DEL U(1), REGISTRATO** *([[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]], [[PIANO-2D-3D]]; `doc/PIANO_2D_3D.md` sezione `C` punto `0`; `doc/RIPRESA_2026-10-25.md`)*:
+
+### **L'OBIEZIONE DI LUCA** *(`2026-10-25`, `15:46`)*: ### **«chi dice che, quando lo spazio si curvera', i due orologi non si allineeranno da soli?»**
+### ⭐ **LA DECISIONE DI LUCA:** ### **NON scegliere ora quale orologio regolare** *(l'opzione `1`, `theta = s/x`, che cambia `B-4`; l'opzione `2`, il tempo del campo scalato di `pi/4`, che normalizza la legge nuova)*; ### **costruire PRIMA la curvatura dello spazio, e poi RIMISURARE il rapporto fra la `c` della materia e quella della luce.**
+### **LA PREVISIONE DEL GUARDIANO** *(da verificare, NON un fatto)*: ### **il rapporto resta `pi/4` in una regione a `cs` uniforme** *(dove la curvatura e' nulla)* ### **e la curvatura non lo sposta, perche' materia e luce corrono sugli stessi archi;** ### **si sposterebbe solo se la curvatura trattasse materia e luce in modo diverso, violando il principio di equivalenza.**
+
+### ⭐ **L'ORDINE DOPO IL TERZO PASSO DEL `U(1)`** *(Luca, `2026-10-25`; [[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]])*:
+   1. ### **il PROGETTO della curvatura dello spazio** *(`doc/PROGETTO_CURVATURA.md`, sulla carta)*;
+   2. ### **il PROTOTIPO della curvatura sui triangoli, in memoria, con la misura del rapporto delle due `c`** *(la prova dell'obiezione di Luca)*;
+   3. ### **la DECISIONE di Luca sugli orologi, DOPO quella misura;**
+   4. ### **il progetto del CANALE di `cs`** *(la materia che produce `cs`)*, ### **col vincolo che le onde di `cs` vadano alla stessa `c`;**
+   5. ### **l'UNIONE in 2D, con le misure scelte prima** *(le tre velocita', la deflessione, l'attrazione qualitativa, la stabilita')*;
+   6. ### **la FCC** *(le leggi globali)*, ### **con `x` ricalcolato sul nuovo reticolo.**
+   ### ⚠ **IL CONTRASTO, riportato e NON corretto:** ### **la sezione `D` qui sotto mette il canale di `cs` fra le cose da FERMARE in 2D e riprendere in 3D, e il punto `2` di questa sezione mette la FCC subito dopo i triangoli;** ### **l'ordine nuovo porta il canale di `cs` e l'unione in 2D PRIMA della FCC.**
+
+### **LE DECISIONI DI LUCA, aperte e prese:**
+
+| la decisione | lo stato | il documento |
+|---|---|---|
+| lo zero dell'energia | APERTA *(il simmetrico raccomandato)* | `doc/PIANO_2D_3D.md` sezione `F` punto `7`; `doc/TASK_HISTORY/2026-10-23_triangoli_forza.md` |
+| il regime di `s` | APERTA *(`s <= 0.3` proposto dal guardiano; Courant del campo `s <= 0.408`)* | `doc/PIANO_2D_3D.md` sezione `F` punto `8`; `doc/PROGETTO_U1.md` sezione `5` |
+| `S1` contro `S4` | APERTA | `doc/DOSSIER_S1_S4.md` |
+| gli orologi | APERTA *(opzione `1` `theta = s/x`; opzione `2` il tempo del campo scalato di `pi/4`)*: ### **DOPO la misura del prototipo della curvatura** | `doc/TASK_HISTORY/2026-10-25_u1_terzo.md` sezioni `5` e `6` |
+| la carica | APERTA *(la norma contro la carica di rotazione di `A14.3`)* | `doc/PROGETTO_U1.md` sezione `8`; `doc/TASK_HISTORY/2026-10-24_u1_prototipo.md` sezione `2.7` |
+| `A16` e l'energia del campo | APERTA | `doc/TASK_HISTORY/2026-10-24_u1_prototipo.md` sezione `2.7` |
+| la costante di accoppiamento | APERTA | `doc/PROGETTO_U1.md` sezione `7` |
+| il campo compatto | APERTA *(compatto raccomandato)* | `doc/PROGETTO_U1.md` sezioni `4` e `8` |
+| la forma del tempo dell'arco | ### **DECISA: `F1`** *(`9acde572`)* | `doc/TASK_HISTORY/2026-10-24_u1_secondo.md` sezione `5` |
+| il criterio di gauge | ### **DECISO: contro la stima dell'arrotondamento** *(`9acde572`)* | `doc/PATTERN_DI_PROVA.md`; `doc/TASK_HISTORY/2026-10-24_u1_secondo.md` sezione `5` |
