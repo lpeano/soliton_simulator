@@ -120,6 +120,17 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 
 ---
 
+## UN NUMERO E' FISICO SOLO SE CONVERGE RAFFINANDO *(decisione di Luca, `2026-10-22`, `19:57`; portata qui il `2026-10-25`)*
+
+> ### **Le parole di Luca** *(`doc/MAPPA_DIPENDENZE.md`, «LA DECISIONE SU `L1`»; la voce [[DECISIONE-L1-NATURA-A-SIMULATORE-B]])*: ### **«LA NATURA E' (A), IL SIMULATORE E' (B)** *(...)* ### **la sua griglia e' un CAMPIONAMENTO GROSSOLANO di quell'automa. Quindi una scala che resta FISSA IN ARCHI raffinando e' un ARTEFATTO; e' fisico solo cio' che CONVERGE raffinando.»**
+> ### **NON e' una riga della tabella `STANDARD`** *(il tetto `10`)*: ### **e' il criterio di un TIPO di misura, quella che si legge come fisica.**
+
+- ### **LA REGOLA:** ### **un numero e' fisico solo se CONVERGE raffinando** ### **la griglia** *(il lato, la risoluzione in `k`)*, ### **il passo `s`** *(il limite `s -> 0`, o la dipendenza dichiarata)*, ### **e la taglia** *(il toro, il pacchetto)*.
+- ### **IL REFERTO:** ### **ogni referto che usa un numero COME FISICA dichiara la sua convergenza** *(i valori a due o tre raffinamenti, e lo scarto)*, ### **oppure scrive che NON e' misurata.** ### **Un numero senza la sua convergenza e' una lettura dello strumento, non della fisica.**
+- ### **IL CASO CHE L'HA RESA CONCRETA** *([[V-MAX-DIREZIONI]], `afba052b`)*: ### **`v_max/s` a `r 1`: `0.598622` sulla griglia `48`, `0.599163` a `96`, `0.599237` a `192`, `0.5992864` con l'ottimizzatore:** ### **il valore «noto» `0.598467`, usato come riferimento in molti referti dei triangoli, era la griglia `48` piu' la scansione su `61` direzioni;** ### **nessuno l'aveva raffinato.**
+
+---
+
 ## IN PROVA
 
 *(nessuna)*

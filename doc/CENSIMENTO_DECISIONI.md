@@ -44,7 +44,7 @@
 | `6` | [[DEC-Z47-TRANSIZIONE]], `2026-10-10` | l'indice | l'indice | giusto |
 | `7` | [[DECISIONE-COMPOSIZIONE-SIMMETRICA]], `2026-10-15` | una legge *(il palindromo)* | ### **NEL NUCLEO:** `composizione.ORDINE`, `leggi.yaml` *(`14` pezzi, l'impronta `2e7f795d2a52fbe7`)* | giusto |
 | `8` | [[DECISIONE-DIREZIONE-STRADA-3]], `2026-10-13` | un principio *(la `C` esatta nelle leggi, rotta nello stato)* | ### **IN PARTE:** la `C` si MISURA *(`primo_ordine/bande.py`)* ma ### **non e' dichiarata in tabella** *(`DOMANDA-DOVE-STA-LA-C-IN-TABELLA`)*; nessun termine d'ordinamento | ### **MANCANZA BLOCCATA** *(`DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H`, `DOMANDA-DOVE-STA-LA-C-IN-TABELLA`)* |
-| `9` | [[DECISIONE-L1-NATURA-A-SIMULATORE-B]], `2026-10-22` | un criterio di prova *(fisico e' cio' che converge raffinando)* | solo `doc/MAPPA_DIPENDENZE.md` | ### **MANCANZA LIBERA** *(un documento: `doc/PATTERN_DI_PROVA.md`)* |
+| `9` | [[DECISIONE-L1-NATURA-A-SIMULATORE-B]], `2026-10-22` | un criterio di prova *(fisico e' cio' che converge raffinando)* | ### **`doc/PATTERN_DI_PROVA.md` dal `2026-10-25`**, la sezione «UN NUMERO E' FISICO SOLO SE CONVERGE RAFFINANDO» | ### **COLMATA** |
 | `10` | [[DECISIONE-LINEARE]], `2026-10-22` | un criterio su una legge | ### **IL NUCLEO HA LA FORMA CHE LA DECISIONE ESCLUDE:** `CAMM-MATERIA-VUOTO` *(`leggi.yaml`, riga `506`)* e' `S3` | ### **MANCANZA BLOCCATA** *(`S1` contro `S4`, `doc/DOSSIER_S1_S4.md`)* |
 | `11` | [[DECISIONE-M-B2-SI-LEGGE-SULLA-PENDENZA]], `2026-10-15` | una lettura di un collaudo | i collaudi *(la chiusura di `L1`, `de89549`)* | giusto |
 | `12` | [[DECISIONE-SOLO-TRIANGOLI]], `2026-10-23` | una SCENA | ### **NEL NUCLEO dal `36040a07`:** `corrente.toro_spostamenti`, `scena_l2.scena_toro`, `GRIGLIA_DEL_MODELLO = "triangoli"` *(il sigillo `13/13`)*; ### **il driver resta sulla catena** *(una domanda)* | ### **COLMATA** *(gli strumenti di `csv/` usano ancora la loro funzione: il passaggio e' un lavoro a se', dopo)* |
@@ -138,3 +138,4 @@
 ## 7. GLI AGGIORNAMENTI
 
 - ### **`2026-10-25`: la mancanza `12` colmata in `36040a07`** *(la scena a triangoli nel nucleo)*; ### **il passaggio degli strumenti di `csv/` alla funzione del nucleo, e la rinomina di `scena_l2.scena`, sono un lavoro a se', da fare dopo.** ### **La parte C** *(`S1` provvisoria)* ### **NON eseguita** *(la precisazione di Luca delle `17:38`)*: ### **la mancanza `10` resta.**
+- ### **`2026-10-25`: la mancanza `9` colmata** *(il criterio della convergenza in `doc/PATTERN_DI_PROVA.md`, col caso di [[V-MAX-DIREZIONI]])*.
