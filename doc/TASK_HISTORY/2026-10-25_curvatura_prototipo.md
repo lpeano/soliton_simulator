@@ -57,3 +57,22 @@
 ## 4. TODO DEL NEXT STEP
 
 1. questo task history, da solo; 2. lo script e l'inventario, prima dei numeri *(una prova a vuoto ridotta)*; 3. la parte `0` e il suo referto *(un commit, con le scelte di prova nella voce `PROGETTO-CURVATURA`)*; 4. la parte `1` e il suo referto; ### **se una DEVE fallisce, FERMO.**
+
+## 5. IL RISULTATO DELLA PARTE 0 *(dopo `7a489f2c`)*
+
+### **IL REFERTO DELLA PARTE `0`:** `doc/referti_l2/curvatura_x_r.{txt,jsonl}` *(`csv/_curvatura_prototipo.py` `sha1-BYTE fa3d3353` al commit `7a489f2c`; il task history `f4fb6582`)*. ### **`3/4`: le DEVE passano, la PUO' FALLIRE del guardiano FALLISCE.**
+
+| `r` | `0.5` | `0.8` | `0.9` | `0.95` | `1.0` | `1.05` | `1.1` | `1.25` | `2.0` |
+|---|---|---|---|---|---|---|---|---|---|
+| `mu0` | `0.43301270` | `0.45825757` | `0.47696960` | `0.48798053` | `0.50000000` | `0.51295711` | `0.52678269` | `0.57282196` | `0.86602540` |
+| `x(r)` | `0.17677670` | `0.22360680` | `0.23717082` | `0.24366986` | `0.25000000` | `0.25617377` | `0.26220221` | `0.27950850` | `0.35355339` |
+| `x/(r/4)` | `1.414214` | `1.118034` | `1.054093` | `1.025978` | `1.000000` | `0.975900` | `0.953463` | `0.894427` | `0.707107` |
+| `pi x/r` | `1.110721` | `0.878102` | `0.827882` | `0.805802` | `0.785398` | `0.766470` | `0.748848` | `0.702481` | `0.555360` |
+
+- ### **`x(1) = 0.250000000154` e `0.250000000070`** *(DEVE entro `1e-9`: PASSA)*.
+- ### **LA FORMA: `ln x` contro `ln r` ha la pendenza `0.500000` e l'intercetta `0.250000`, il residuo `7.55e-10`: `x(r) = sqrt(r)/4`.** ### **E `mu0(r)`:** ### **la forma `(1/2) sqrt(1 - r + r^2)` coincide con la tabella a `8` cifre a ogni `r`** *(UNA LETTURA mia della tabella, controllata a mano, NON uscita dallo script)*.
+- ### **DA DOVE VIENE LA MASSA: `d ln mu0/d ln r = +0.500000` a `r = 1`, i due rami:** ### **META' dal nodo e META' dall'arco** *(`0` vorrebbe dire solo il nodo)*.
+- ### **GLI SPETTRI COMPLETI con `A1`** *(`s 0.01`, `r` `0.8`, `1.0`, `1.25`)*: ### **`v_b/s` `0.70246990`, `0.78538199`, `0.87807925` contro `pi x(r)` `0.70248147`, `0.78539816`, `0.87810184`: entro `2.6e-5`** *(DEVE entro `1e-3`: PASSA)*.
+- ### **LA VARIANTE `B`** *(solo il campo)*: ### **il rapporto varia del `141%` sulla lista di `r`, e il rapporto per `r` e' `v_b/s` di oggi entro `1.4e-16`** *(DEVE FALLIRE per la chiave giusta: PASSA)*.
+
+### **LA LETTURA:** ### **in `A1` il rapporto fra la `c` della materia e quella della luce in una regione uniforme e' `pi/(4 sqrt(r))`, NON `pi/4`:** ### **la luce va come `r`, la materia come `sqrt(r)`.** ### **L'OBIEZIONE DI LUCA E' FONDATA, ma nel verso opposto all'allineamento:** ### **i due orologi NON si allineano da soli; dove `cs` scende sotto il riferimento** *(`r < 1`)* ### **la materia diventa RELATIVAMENTE piu' veloce della luce** *(a `r 0.5` il rapporto e' `1.11`: oltre la luce)*, ### **dove sale, piu' lenta.** ### **La previsione del guardiano** *(`x(r) = r/4`)* ### **cade** *(errore `n.64` confermato dai numeri)*. ### **E la ragione e' la massa: per meta' viene dall'arco, quindi la materia sente `r` a meta'.**

@@ -1,0 +1,30 @@
+[TIMBRO] _curvatura_prototipo.py  sha1-BYTE fa3d3353  committato e pulito
+========================================================================================================================
+IL PROTOTIPO DELLA CURVATURA DELLO SPAZIO SUI TRIANGOLI, IN MEMORIA (la strada A1) -- PARTE 0: la prova dell'obiezione di Luca dagli spettri
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_curvatura_prototipo.py fa3d3353; csv/_u1_terzo.py dbcf49c4; csv/_u1_secondo.py ab015054; csv/_u1_prototipo.py d073761c; csv/_triangoli.py a74c7823; csv/_triangoli_bassa_energia.py 74be8455; csv/_triangoli_forza.py d0c0b981; csv/_triangoli_fattore.py 577c349a; csv/_zero_simmetrico.py b400d76e; csv/_universalita_massa.py 94ebb415
+  le scelte di prova di Luca (2026-10-25 16:26): A1; cs_rif il vuoto imperturbato (il fondo della scena); Erone; i versori fissi; lo zero simmetrico
+  la configurazione: R_LISTA (0.5, 0.8, 0.9, 0.95, 1.0, 1.05, 1.1, 1.25, 2.0) R_SPETTRI (0.8, 1.0, 1.25) S_SPETTRI 0.01 PASSI_R 200 K_FINE 0.01 NK 200 H_R 0.0001; TOLL_X1 1e-09 TOLL_XR 1e-06 TOLL_SPETTRI 0.001 TOLL_B 1e-06 TOLL_BIT 1e-12 TOLL_REL 1e-12
+    R_CHIAVE 1.10 N_A 20 N_G 200 N_REV 100 N_EN 500 L_M 24 S_M 0.10 ETA_M 0.20 E_M 0.3029 W_SCAN (12.0, 16.0, 24.0) TOLL_GAMMA 0.05 TOLL_R1 0.1 S0_F (0.05, 0.1, 0.3) S0_EPS 0.10 LX_F 96 ETA_F (0.0, 0.001, -0.001, 0.01, -0.01) TOLL_CADUTA 0.02; la scena di (c) LG2 (384, 48) S0 0.20 ETA 0.20
+------------------------------------------------------------------------------------------------------------------------
+### PARTE 0 -- LA PROVA DELL'OBIEZIONE DI LUCA DAGLI SPETTRI: x(r) dal generatore (I - P_u) + r P_-, lo zero simmetrico (mu = (1+r)/2 - lambda), eps 0
+  r 0.5   | mu0 +0.43301270 -0.43301270 | x 0.1767766955 0.1767766952 | x/(r/4) 1.414214 1.414214 | il rapporto pi x/r 1.110721 1.110721 (pi/4 = 0.785398)
+  r 0.8   | mu0 +0.45825757 -0.45825757 | x 0.2236067977 0.2236067979 | x/(r/4) 1.118034 1.118034 | il rapporto pi x/r 0.878102 0.878102 (pi/4 = 0.785398)
+  r 0.9   | mu0 +0.47696960 -0.47696960 | x 0.2371708245 0.2371708246 | x/(r/4) 1.054093 1.054093 | il rapporto pi x/r 0.827882 0.827882 (pi/4 = 0.785398)
+  r 0.95  | mu0 +0.48798053 -0.48798053 | x 0.2436698587 0.2436698585 | x/(r/4) 1.025978 1.025978 | il rapporto pi x/r 0.805802 0.805802 (pi/4 = 0.785398)
+  r 1     | mu0 +0.50000000 -0.50000000 | x 0.2500000002 0.2500000001 | x/(r/4) 1.000000 1.000000 | il rapporto pi x/r 0.785398 0.785398 (pi/4 = 0.785398)
+  r 1.05  | mu0 +0.51295711 -0.51295711 | x 0.2561737692 0.2561737690 | x/(r/4) 0.975900 0.975900 | il rapporto pi x/r 0.766470 0.766470 (pi/4 = 0.785398)
+  r 1.1   | mu0 +0.52678269 -0.52678269 | x 0.2622022120 0.2622022120 | x/(r/4) 0.953463 0.953463 | il rapporto pi x/r 0.748848 0.748848 (pi/4 = 0.785398)
+  r 1.25  | mu0 +0.57282196 -0.57282196 | x 0.2795084973 0.2795084971 | x/(r/4) 0.894427 0.894427 | il rapporto pi x/r 0.702481 0.702481 (pi/4 = 0.785398)
+  r 2     | mu0 +0.86602540 -0.86602540 | x 0.3535533906 0.3535533906 | x/(r/4) 0.707107 0.707107 | il rapporto pi x/r 0.555360 0.555360 (pi/4 = 0.785398)
+  DEVE PASSARE: x(1) = 1/4 entro 1e-09 (i due rami)                                                    PASSA   0.250000000154 0.250000000070
+  PUO' FALLIRE: x(r) = r/4 entro 1e-06 a ogni r (la previsione del guardiano)                          ### FALLISCE   lo scarto peggiore 1.464e-01
+  DA DOVE VIENE LA MASSA: d ln mu0/d ln r a r = 1 = +0.500000 +0.500000 (0 = solo il nodo)
+  LA FORMA: ln x contro ln r, la pendenza 0.500000, l'intercetta exp 0.250000 (x = r/4 vorrebbe 1 e 0.25); il residuo massimo 7.55e-10
+  SPETTRI r 0.8   s 0.01: w0 +1.439625e-02 -1.439625e-02 (previsto +1.439659e-02 -1.439659e-02, il doppio 1.7e-18 1.7e-16) | v_b/s 0.70246990 0.70246990 contro pi x(r) 0.70248147 0.70248147
+  SPETTRI r 1     s 0.01: w0 +1.570748e-02 -1.570748e-02 (previsto +1.570796e-02 -1.570796e-02, il doppio 9.7e-17 1.3e-16) | v_b/s 0.78538199 0.78538199 contro pi x(r) 0.78539816 0.78539816
+  SPETTRI r 1.25  s 0.01: w0 +1.799507e-02 -1.799507e-02 (previsto +1.799573e-02 -1.799573e-02, il doppio 3.1e-16 1.2e-16) | v_b/s 0.87807925 0.87807925 contro pi x(r) 0.87810184 0.87810184
+  DEVE PASSARE: gli spettri completi con A1 (s 0.01) danno v_b/s = pi x(r) entro 0.001 relativo a r in PASSA   2.57e-05
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: B (solo il campo), il rapporto delle due c costante in r; la chi PASSA   variazione 1.410, la chiave 1.4e-16
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/4 controlli passano; DEVE fallite: 0 []
