@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 151 |
+| `FISICA` | `2` | 152 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 25 |
@@ -202,6 +202,7 @@
 | `CONSERVAZIONE-LOCALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | A14: ogni legge si giudica su tre domande -- energia locale, carica locale, tota |
 | `CONTA-RIGHE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di  |
 | `CONTO-BOOLEANI-P5` | DIFETTO | METODO | 1 | ### **SOSPESA** |  | i booleani di modulo contati da P5 sono passati da 79 a 82 col simulatore INTATT |
+| `CONTO-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | conto del vuoto: nascita con D7 e flip liberano energia; il vuoto uniforme, al m |
 | `CONTROLLO-CONTRO-ATTESA-CONGELATA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | un controllo della migrazione gridava fuori posto su un lavoro CHIESTO da Luca |
 | `COPPIA-RAMP` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |

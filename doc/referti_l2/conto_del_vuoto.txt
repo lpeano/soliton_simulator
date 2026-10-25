@@ -1,0 +1,49 @@
+[TIMBRO] _conto_del_vuoto.py  sha1-BYTE c3d9c303  committato e pulito
+==================================================================================================================================
+IL CONTO DEL VUOTO: la nascita (b1) con D7 e il flip 2<->2 sul toro perfetto; Delta H_tot in materia, vuoto e legame; la capacita' del vuoto locale; la rotazione e cs
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_conto_del_vuoto.py c3d9c303; csv/_massa_nei_difetti.py cca69f69; csv/_u1_terzo.py dbcf49c4; primo_ordine/energia_pesata.py 7889c512
+  la configurazione: LATI (24, 36) TOLL_NORMA 1e-14 TOLL_CONTROLLO 1e-12 TOLL_CONV 0.01 SOGLIA_CHIAVE 1e-06 LC_SU_L6 (0.1, 1.0, 10.0) PAR {'eps': 0.0}; OMEGA_H 3.14159
+  la materia: la coppia a K, il livello alto, spin su, rho = X per nodo; il vuoto 1 per estremita'; il padre della nascita: i (il capo di partenza dell'arco tolto)
+----------------------------------------------------------------------------------------------------------------------------------
+### NASCITA, L 24
+  H_tot prima -327.264202999769 (materia -90.477868423386, vuoto 0.000000000000, legame -236.786334576383)
+  H_tot dopo  -335.812416677983 (materia -90.542669910897, vuoto -8.483412190703, legame -236.786334576383)
+  Delta H_tot -8.548214e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame +2.842171e-14
+  le norme: M 57.599999999999994 -> 57.599999999999994 (rel 0.0e+00); V 3456 -> 3456 (rel 0.0e+00)
+  (iii) S: 30 estremita' su 5 nodi, |phi_S|^2 24.000000; il vuoto di S ora 1.350774e+01, serve 2.205595e+01; l'intervallo ESATTO [-1.644666e+02, 2.181360e+01]; lo SPETTRO x norma [-1.507964e+02, -1.114039e+01] (lambda -6.2832, -0.4642): basta False (esatto), True (spettro)
+  (iv) la rotazione NON ESISTE su quel cerchio: sul cerchio fino all'estremo Delta H_tot non cambia segno: -8.548214e+00 -> -2.334053e-01
+### FLIP, L 24
+  H_tot prima -327.264202999769 (materia -90.477868423386, vuoto 0.000000000000, legame -236.786334576383)
+  H_tot dopo  -327.524506391066 (materia -90.738171814683, vuoto 0.000000000000, legame -236.786334576383)
+  Delta H_tot -2.603034e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00
+  le norme: M 57.599999999999994 -> 57.599999999999994 (rel 0.0e+00); V 3456 -> 3456 (rel 0.0e+00)
+  (iii) S: 84 estremita' su 14 nodi, |phi_S|^2 84.000000; il vuoto di S ora 4.084070e+01, serve 4.110101e+01; l'intervallo ESATTO [-5.576813e+02, 4.084070e+01]; lo SPETTRO x norma [-5.277876e+02, -2.057772e+01] (lambda -6.2832, -0.2450): basta False (esatto), True (spettro)
+  (iv) la rotazione NON ESISTE su quel cerchio: sul cerchio fino all'estremo Delta H_tot non cambia segno: -2.603034e-01 -> -2.395129e+00
+### NASCITA, L 36
+  H_tot prima -736.344456749480 (materia -203.575203952619, vuoto 0.000000000000, legame -532.769252796861)
+  H_tot dopo  -744.892670427694 (materia -203.640005440130, vuoto -8.483412190703, legame -532.769252796861)
+  Delta H_tot -8.548214e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame -1.136868e-13
+  le norme: M 129.59999999999999 -> 129.59999999999999 (rel 0.0e+00); V 7776 -> 7776 (rel 0.0e+00)
+  (iii) S: 30 estremita' su 5 nodi, |phi_S|^2 24.000000; il vuoto di S ora 1.350774e+01, serve 2.205595e+01; l'intervallo ESATTO [-1.644666e+02, 2.181360e+01]; lo SPETTRO x norma [-1.507964e+02, -1.114039e+01] (lambda -6.2832, -0.4642): basta False (esatto), True (spettro)
+  (iv) la rotazione NON ESISTE su quel cerchio: sul cerchio fino all'estremo Delta H_tot non cambia segno: -8.548214e+00 -> -2.334053e-01
+### FLIP, L 36
+  H_tot prima -736.344456749480 (materia -203.575203952619, vuoto 0.000000000000, legame -532.769252796861)
+  H_tot dopo  -736.604760140777 (materia -203.835507343916, vuoto 0.000000000000, legame -532.769252796861)
+  Delta H_tot -2.603034e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00
+  le norme: M 129.59999999999999 -> 129.59999999999999 (rel 0.0e+00); V 7776 -> 7776 (rel 0.0e+00)
+  (iii) S: 84 estremita' su 14 nodi, |phi_S|^2 84.000000; il vuoto di S ora 4.084070e+01, serve 4.110101e+01; l'intervallo ESATTO [-5.576813e+02, 4.084070e+01]; lo SPETTRO x norma [-5.277876e+02, -2.057772e+01] (lambda -6.2832, -0.2450): basta False (esatto), True (spettro)
+  (iv) la rotazione NON ESISTE su quel cerchio: sul cerchio fino all'estremo Delta H_tot non cambia segno: -2.603034e-01 -> -2.395129e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): la nascita conserva M e V entro 1e-14 relativo (non al bit: la nota di D7)                   PASSA   
+  DEVE PASSARE (1): il flip conserva le norme AL BIT (una permutazione: gli stessi moduli, ordinati, byte per by PASSA   
+  DEVE PASSARE (1): la rotazione conserva V entro 1e-14                                                          PASSA   
+  DEVE PASSARE (2): H_tot = energia_pesata.g_dello_stato, e uguale a ogni nodo del toro perfetto, entro 1e-12    PASSA   L 24: 0.0e+00 3.9e-16 L 36: 0.0e+00 5.0e-16
+  PUO' FALLIRE (3): la capacita' del vuoto locale basta per la nascita (l'intervallo esatto, a ogni L)           ### FALLISCE   L 24: serve 2.2056e+01 in [-1.6447e+02, 2.1814e+01] L 36: serve 2.2056e+01 in [-1.6447e+02, 2.1814e+01]
+  PUO' FALLIRE (3): la capacita' del vuoto locale basta per la flip (l'intervallo esatto, a ogni L)              ### FALLISCE   L 24: serve 4.1101e+01 in [-5.5768e+02, 4.0841e+01] L 36: serve 4.1101e+01 in [-5.5768e+02, 4.0841e+01]
+  DEVE PASSARE (4): Delta H_tot della nascita converge in L (scarto sotto il 1%)                                 PASSA   -8.548214e+00 -8.548214e+00
+  DEVE PASSARE (4): Delta H_tot della flip converge in L (scarto sotto il 1%)                                    PASSA   -2.603034e-01 -2.603034e-01
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA (5): la mossa non cambia l'energia; la chiave: |Delta H_tot| > 1e-06 per la PASSA   -8.548e+00 -2.603e-01
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 7/9 controlli passano; DEVE fallite: 0 []

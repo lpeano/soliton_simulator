@@ -41,3 +41,15 @@
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice.
+
+## 5. IL RISULTATO *(dopo il commit dello script)*
+
+### **IL REFERTO DEL CONTO DEL VUOTO:** `doc/referti_l2/conto_del_vuoto.{txt,jsonl}` *(`csv/_conto_del_vuoto.py` `sha1-BYTE c3d9c303`; il task history `2077fc56`)*. ### **`7/9`, nessun DEVE fallito; i due PUO' FALLIRE della capacita' FALLISCONO.**
+
+- ### **LE DUE MOSSE ABBASSANO `H_tot`, e il conto e' LOCALE** *(identico a `L 24` e `36`)*: ### **LA NASCITA `Delta H_tot = -8.548214` = materia `-0.064801` + vuoto `-8.483412` + legame `~1e-13`;** ### **IL FLIP `-0.260303` = tutto materia** *(il vuoto e il legame `0`: il vuoto uniforme non vede il flip)*. ### **Il legame `N` non cambia con `D7`:** ### **`N = rho ln(rho/(rho + Lambda))` e' omogeneo di grado `1`, e `D7` dimezza `rho` e `Lambda` insieme al padre e al figlio.**
+- ### **LE NORME:** ### **`M` e `V` conservate** *(la nascita entro `1e-14`, qui al bit; il flip AL BIT, una permutazione)*; ### **`H_tot` = `energia_pesata.g_dello_stato` a `0.0`, uniforme per nodo a `3.9e-16`.**
+- ### ⚠ **`(iii)` LA CAPACITA' DEL VUOTO LOCALE NON BASTA, ne' per la nascita ne' per il flip** *(l'intervallo ESATTO, col vuoto fuori da `S` fisso)*: ### **le mosse LIBERANO energia, quindi il vuoto la dovrebbe ASSORBIRE alzando la sua parte;** ### **ma il vuoto uniforme e' il MASSIMO della sua forma** *(`-pi <phi|H|phi>`, `H >= 0`)*: ### **per il flip il vuoto di `S` vale gia' il massimo esatto** *(`40.84070` = `40.84070`)* ### **e non puo' salire di `0.2603`;** ### **per la nascita `D7` ha gia' abbassato il vuoto di `8.4834`** *(il `phi` non e' piu' uniforme)* ### **e la rotazione ne puo' rendere al piu' `21.8136 - 13.5077 = 8.3059`, contro `8.5482`** *(manca `0.2423`)*.
+- ### ⚠ **LO SPETTRO SOLO** *(come chiedeva il mandato: `[lambda_min, lambda_max] |phi_S|^2`)* ### **direbbe «basta» per tutte e due: E' FUORVIANTE,** ### **perche' ignora il termine incrociato col vuoto fuori da `S`** *(che e' cio' che fa del vuoto uniforme un massimo)*. ### **Il criterio leggeva l'intervallo esatto, fissato prima.**
+- ### **`(iv)` L'OROLOGIO: la rotazione che annulla `Delta H_tot` NON ESISTE** *(su quel cerchio `Delta H_tot` resta negativo fino all'estremo: `-8.548 -> -0.233` la nascita, `-0.260 -> -2.395` il flip)*: ### **nessun `Delta cs` da riportare, e la lettura contro `gamma = 1` non si puo' fare con queste regole.**
+
+### **LA LETTURA** *(informazione per Luca, non scelte)*: ### **«lo spazio paga col vuoto», con il vuoto UNIFORME di oggi e le regole di trasporto dichiarate, NON si chiude:** ### **non per mancanza di energia, ma per il VERSO** *(le mosse liberano, e il vuoto uniforme sta in cima)*. ### **Le vie, sulla carta:** ### **un vuoto che non sia al massimo** *(un fondo eccitato, o un segno diverso della sua forma)*; ### **regole di trasporto che non liberino** *(il figlio con un `phi` scelto per la sua energia)*; ### **o un pagatore diverso** *(la materia, il campo).*
