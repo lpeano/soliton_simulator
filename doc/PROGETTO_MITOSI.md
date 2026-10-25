@@ -54,11 +54,25 @@
 
 ### 3(c) IL BILANCIO, CON L'ORIENTAMENTO DI LUCA PER PRIMO
 
+- ### ⭐ **L'ORIENTAMENTO DI LUCA DEL `2026-10-25`, `20:53`** *(un principio ORIENTATIVO, NON una legge decisa)*: ### **«ogni cambiamento della forma dello spazio (la nascita di un nodo E il flip di una diagonale) scambia la sua energia col vuoto; lo spazio paga sempre col vuoto».** ### **Allarga quello delle `17:53`** *(la sola nascita)* ### **a OGNI mossa del grafo:** ### **il conto qui sotto vale per ognuna delle mosse di `3(c-bis)`.**
+
 - ### **CHE COSA VUOL DIRE NELL'ERA 2 «l'energia della nascita scambiata col vuoto»:** ### **il vuoto e' la camminata di Grover scalare `phi`** *(`CAMM-GROVER-VUOTO`, `CAMM-SPOSTAMENTO-VUOTO`)*, ### **la sua norma `V` si conserva ESATTA** *(il nodo `DEC-QC-CONSERVATA` dell'albero, presa il `2026-10-16`)*, ### **e la materia lo sente col legame `CAMM-MATERIA-VUOTO`** *(`materia_vuoto.py`, nel tempo `dtau_nodo`)*. ### **L'energia che si conserva al secondo ordine e' `H_tot`** *(`energia.py`)*: ### **la parte del vuoto e' il suo generatore** *(`<I - P_u>`, `<P_->` su `phi`)* ### **piu' `N = rho ln(rho/(rho + Lambda))`.**
 - ### **IL VINCOLO DURO:** ### **la probabilita' totale si conserva:** ### **lo stato del nodo che nasce viene da un'IMMERSIONE ISOMETRICA dello stato vecchio nello spazio piu' grande** *(una mappa `W` con `W^dagger W = I`)*, ### **non da un'aggiunta.** ### **La regola di `D7`** *(`psi -> psi/sqrt(2)` per il padre e il figlio, la stessa fase)* ### **e' una tale immersione** *(conserva la somma di `rho`)*; ### **lo stesso per `phi`.**
 - ### **DOVE SI PRENDE E DOVE SI RENDE L'ENERGIA:** ### **l'immersione cambia `H_tot` di un `Delta E` che non e' zero in generale** *(i gradi cambiano, il Grover `2/d` cambia)*; ### **l'orientamento di Luca: il VUOTO rende `-Delta E`** ### **con una rotazione UNITARIA delle sue ampiezze sul nodo nuovo e sui vicini** *(che non cambia `V`)*, ### **scelta per annullare `Delta E_tot`.** ### **COME SI MISURA che il conto torna:** ### **`|Delta H_tot|` per nascita all'arrotondamento; `M` e `V` al bit; la corrente d'energia** *(`corrente.py`)* ### **che chiude il bilancio LOCALE attorno al nodo nato.**
 - ### **LA REVERSIBILITA':** ### **la morte e' `W^dagger` con la rotazione inversa del vuoto;** ### ⚠ **ma `W^dagger` e' esatta solo sugli stati nell'immagine di `W`:** ### **dopo qualche tick lo stato esce dall'immagine, e la morte di un nodo qualunque PERDE informazione** *(una proiezione: irreversibile)*. ### **La via esatta: una DILATAZIONE unitaria** *(lo stato del nodo nato porta con se' cio' che serve a disfarlo: un grado di liberta' del vuoto come registro)*: ### **una memoria, e quindi `A16`.**
 - ### **LE ALTRE OPZIONI:** ### **`(c2)` paga il campo `U(1)`** *(l'energia delle placchette: naturale se la nascita scatta sul flusso, `(a1)`)*; ### **`(c3)` paga la materia stessa** *(la tensione dei genitori: [[D-BILANCIO-NASCITA]])*; ### **`(c4)` non paga nessuno** *(l'energia cresce: viola `A14`, scartata dalla forma)*.
+
+### 3(c-bis) LE MOSSE DI PACHNER SUI TRIANGOLI *(solo descritte, nessuna scelta)*
+
+| la mossa | che cosa fa | i gradi | i nodi |
+|---|---|---|---|
+| ### **`1 -> 3`** | ### **un nodo nuovo dentro un triangolo, legato ai suoi tre vertici** | ### **il nuovo `3`, i tre vertici `+1`** | `+1` |
+| ### **`3 -> 1`** | ### **l'inversa: un nodo di grado `3` tolto, il suo triangolo ricomposto** | ### **i tre vicini `-1`** | `-1` |
+| ### **`2 <-> 2`** *(il FLIP)* | ### **la diagonale comune a due triangoli girata: l'arco `i-j` tolto, l'arco `k-l` messo** | ### **`i`, `j` `-1`; `k`, `l` `+1`** *(sul toro perfetto `6,6,6,6 -> 5,5,7,7`)* | `0` |
+
+- ### **LO SDOPPIAMENTO `(b1)` E' UNA COMBINAZIONE:** ### **`1 -> 3` nel triangolo `ijk`** *(il nuovo `n` a `3`; `i`, `j`, `k` a `7`)* ### **poi il FLIP dell'arco `i-j`** *(fra i triangoli `inj` e `ijl`: tolto `i-j`, messo `n-l`)*: ### **`i`, `j` tornano a `6`, `n` va a `4`, `l` a `7`** *(e `k` resta a `7`)*. ### **Quindi (b1) costa, nel bilancio, quanto le due mosse in fila.**
+- ### **IL FLIP NON TOGLIE NODI:** ### **e' compatibile con `A14.2`** *(la crescita come sola freccia del NUMERO dei nodi)*, ### **ed e' la mossa che permette ai DIFETTI di SEGUIRE una massa:** ### **una coppia `5`-`7` si sposta di un arco con un flip, senza nascite e senza morti.**
+- ### ⚠ **IL RISCHIO DELLA «MEMORIA»:** ### **con le sole nascite** *(senza la morte, `3 -> 1`, e senza il flip)* ### **una massa che si sposta lascia una SCIA di nodi in piu' dove e' passata:** ### **il profilo di `3(d)` seguirebbe la storia della massa, non la sua posizione.** ### **E' la ragione per cui il flip e la morte non sono dettagli:** ### **sono le mosse che rendono il profilo una funzione dello stato.**
 
 ### 3(d) IL PROFILO CHE LA GRAVITA' CHIEDE
 
