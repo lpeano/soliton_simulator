@@ -1,0 +1,71 @@
+[TIMBRO] _curvatura_parte2.py  sha1-BYTE e2282e17  committato e pulito
+========================================================================================================================
+LA CURVATURA, PARTE 2 SULLA CARTA: la famiglia H(alpha, beta) = alpha (I - P_u) + beta P_-, gli zeri, le due condizioni della relativita' generale a campo debole
+========================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_curvatura_parte2.py e2282e17; csv/_u1_terzo.py dbcf49c4; csv/_curvatura_prototipo.py fa3d3353; csv/_triangoli.py a74c7823; csv/_triangoli_forza.py d0c0b981
+  la configurazione: R_P0 (0.5, 1.0, 2.0) R_C (0.5, 0.8, 0.9, 0.95, 0.99, 1.0, 1.05, 1.25, 2.0) R_D (0.5, 0.8, 0.9, 1.0) N_COPPIE 20 SEME 7 AB in [0.05, 4] passo 0.01 (grosso 0.1) PASSI 200 K_FINE 0.01 NK 200 EPS 0.5 TOLL_P0 1e-08 TOLL_A 1e-08 TOLL_D 1e-06; gli zeri Z1 = (alpha + beta)/2, Z2 = 0, Z3 = il punto medio della coppia
+------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: a alpha = beta = 1 il generatore e' _u1_terzo.H_gen AL BIT (10 k casuali)              PASSA   True
+### P0 -- IL GENERATORE A1 (alpha 1, beta r), lo zero Z1
+  r 0.5  | mu0 0.4330127019 (formula 0.4330127019) | x 0.1767766955 (formula 0.1767766953)
+  r 1    | mu0 0.5000000000 (formula 0.5000000000) | x 0.2500000002 (formula 0.2500000000)
+  r 2    | mu0 0.8660254038 (formula 0.8660254038) | x 0.3535533906 (formula 0.3535533906)
+  DEVE PASSARE (P0): A1 riproduce mu0 = sqrt(1 - r + r^2)/2 e x = sqrt(r)/4 entro 1e-08                PASSA   1.7e-10
+### P1 (a), (b) -- LE FORMULE SU 20 COPPIE CASUALI, i tre zeri
+  alpha 0.8029 beta 0.6486 | Z1: mu0 +0.36896212 -0.36896212 (formula +-0.36896212), x^2 0.03254580 (formula 0.03254580) | Z2: mu0 -0.356767 -1.094691, x -- 0.310744 | Z3 - Z1 2.2e-16
+  alpha 1.9151 beta 0.3230 | Z1: mu0 +0.88788374 -0.88788374 (formula +-0.88788374), x^2 0.03866580 (formula 0.03866580) | Z2: mu0 -0.231191 -2.006958, x -- 0.295634 | Z3 - Z1 -6.7e-16
+  alpha 0.2999 beta 1.6417 | Z1: mu0 +0.75708889 -0.75708889 (formula +-0.75708889), x^2 0.03077189 (formula 0.03077189) | Z2: mu0 -0.213708 -1.727886, x -- 0.265009 | Z3 - Z1 -4.4e-16
+  alpha 1.5054 beta 2.7681 | Z1: mu0 +1.20014390 -1.20014390 (formula +-1.20014390), x^2 0.26043676 (formula 0.26043676) | Z2: mu0 -0.936579 -3.336867, x -- 0.850950 | Z3 - Z1 -1.3e-15
+  alpha 1.9618 beta 1.6395 | Z1: mu0 +0.91109325 -0.91109325 (formula +-0.91109325), x^2 0.20103023 (formula 0.20103023) | Z2: mu0 -0.889588 -2.711775, x -- 0.773528 | Z3 - Z1 6.7e-16
+  alpha 1.5912 beta 0.8930 | Z1: mu0 +0.69074913 -0.69074913 (formula +-0.69074913), x^2 0.08881555 (formula 0.08881555) | Z2: mu0 -0.551395 -1.932893, x -- 0.498526 | Z3 - Z1 -6.7e-16
+  alpha 0.2330 beta 0.7387 | Z1: mu0 +0.32706100 -0.32706100 (formula +-0.32706100), x^2 0.01075877 (formula 0.01075877) | Z2: mu0 -0.158814 -0.812936, x -- 0.163529 | Z3 - Z1 -2.8e-16
+  alpha 2.1377 beta 0.7617 | Z1: mu0 +0.93829999 -0.93829999 (formula +-0.93829999), x^2 0.10176725 (formula 0.10176724) | Z2: mu0 -0.511394 -2.387994, x -- 0.508920 | Z3 - Z1 2.2e-16
+  alpha 1.2347 beta 0.2105 | Z1: mu0 +0.57204232 -0.57204232 (formula +-0.57204232), x^2 0.01624064 (formula 0.01624064) | Z2: mu0 -0.150536 -1.294621, x -- 0.191716 | Z3 - Z1 3.3e-16
+  alpha 2.5241 beta 0.6325 | Z1: mu0 +1.13740974 -1.13740974 (formula +-1.13740974), x^2 0.09978074 (formula 0.09978074) | Z2: mu0 -0.440903 -2.715722, x -- 0.488099 | Z3 - Z1 -4.4e-16
+  alpha 0.9493 beta 2.6649 | Z1: mu0 +1.16974584 -1.16974584 (formula +-1.16974584), x^2 0.15810997 (formula 0.15810997) | Z2: mu0 -0.637358 -2.976850, x -- 0.634326 | Z3 - Z1 2.2e-16
+  alpha 1.6274 beta 2.5720 | Z1: mu0 +1.12672362 -1.12672362 (formula +-1.12672362), x^2 0.26160895 (formula 0.26160895) | Z2: mu0 -0.972994 -3.226441, x -- 0.865525 | Z3 - Z1 1.3e-15
+  alpha 1.9912 beta 2.2770 | Z1: mu0 +1.07419177 -1.07419177 (formula +-1.07419177), x^2 0.28336865 (formula 0.28336865) | Z2: mu0 -1.059892 -3.208275, x -- 0.919964 | Z3 - Z1 0.0e+00
+  alpha 0.4562 beta 1.7152 | Z1: mu0 +0.76934601 -0.76934601 (formula +-0.76934601), x^2 0.04890340 (formula 0.04890340) | Z2: mu0 -0.316349 -1.855041, x -- 0.343388 | Z3 - Z1 4.4e-16
+  alpha 1.6218 beta 2.6398 | Z1: mu0 +1.15296866 -1.15296866 (formula +-1.15296866), x^2 0.26756546 (formula 0.26756546) | Z2: mu0 -0.977788 -3.283725, x -- 0.872951 | Z3 - Z1 4.4e-16
+  alpha 1.2115 beta 1.8749 | Z1: mu0 +0.82334706 -0.82334706 (formula +-0.82334706), x^2 0.14197086 (formula 0.14197086) | Z2: mu0 -0.719880 -2.366574, x -- 0.638805 | Z3 - Z1 6.7e-16
+  alpha 0.3659 beta 1.2854 | Z1: mu0 +0.57352797 -0.57352797 (formula +-0.57352797), x^2 0.02939515 (formula 0.02939515) | Z2: mu0 -0.252109 -1.399165, x -- 0.267790 | Z3 - Z1 2.2e-16
+  alpha 1.1045 beta 0.6206 | Z1: mu0 +0.47948127 -0.47948127 (formula +-0.47948127), x^2 0.04283805 (formula 0.04283805) | Z2: mu0 -0.383049 -1.342012, x -- 0.346264 | Z3 - Z1 -1.1e-16
+  alpha 2.4857 beta 1.2624 | Z1: mu0 +1.07640439 -1.07640439 (formula +-1.07640439), x^2 0.19613307 (formula 0.19613307) | Z2: mu0 -0.797694 -2.950502, x -- 0.733222 | Z3 - Z1 -1.6e-15
+  alpha 2.9405 beta 1.8520 | Z1: mu0 +1.28749725 -1.28749725 (formula +-1.28749725), x^2 0.34035791 (formula 0.34035791) | Z2: mu0 -1.108738 -3.683733, x -- 0.986822 | Z3 - Z1 8.9e-16
+  PUO' FALLIRE (P1 a): mu0 = sqrt(alpha^2 - alpha beta + beta^2)/2 e x^2 = alpha beta/16 (lo zero Z1)  PASSA   1.7e-10
+  LO ZERO Z3 (il punto medio della coppia) contro Z1 = (alpha + beta)/2: lo scarto massimo 1.55e-15 su 20 coppie
+### P1 (c) -- LE DUE CONDIZIONI mu0 = 1/2 e x = r/4, lo zero Z1: la formula [sqrt(1 + 3 r^2) +- sqrt(1 - r^2)]/2 e la verifica sul generatore; per r > 1 il residuo minimo sulla griglia
+  r 0.5   ramo +: alpha 1.09445053 beta 0.22842513 | il generatore: mu0 0.5000000000 (1/2) x 0.1250000001 (r/4 = 0.1250000000)
+  r 0.5   ramo -: alpha 0.22842513 beta 1.09445053 | il generatore: mu0 0.5000000000 (1/2) x 0.1250000000 (r/4 = 0.1250000000)
+  r 0.8   ramo +: alpha 1.15440037 beta 0.55440037 | il generatore: mu0 0.5000000000 (1/2) x 0.2000000001 (r/4 = 0.2000000000)
+  r 0.8   ramo -: alpha 0.55440037 beta 1.15440037 | il generatore: mu0 0.5000000000 (1/2) x 0.2000000001 (r/4 = 0.2000000000)
+  r 0.9   ramo +: alpha 1.14395791 beta 0.70806801 | il generatore: mu0 0.5000000000 (1/2) x 0.2250000000 (r/4 = 0.2250000000)
+  r 0.9   ramo -: alpha 0.70806801 beta 1.14395791 | il generatore: mu0 0.5000000000 (1/2) x 0.2250000001 (r/4 = 0.2250000000)
+  r 0.95  ramo +: alpha 1.11886843 beta 0.80661853 | il generatore: mu0 0.5000000000 (1/2) x 0.2374999999 (r/4 = 0.2375000000)
+  r 0.95  ramo -: alpha 0.80661853 beta 1.11886843 | il generatore: mu0 0.5000000000 (1/2) x 0.2375000000 (r/4 = 0.2375000000)
+  r 0.99  ramo +: alpha 1.06304313 beta 0.92197577 | il generatore: mu0 0.5000000000 (1/2) x 0.2475000002 (r/4 = 0.2475000000)
+  r 0.99  ramo -: alpha 0.92197577 beta 1.06304313 | il generatore: mu0 0.5000000000 (1/2) x 0.2475000000 (r/4 = 0.2475000000)
+  r 1     ramo +: alpha 1.00000000 beta 1.00000000 | il generatore: mu0 0.5000000000 (1/2) x 0.2500000002 (r/4 = 0.2500000000)
+  r 1     ramo -: alpha 1.00000000 beta 1.00000000 | il generatore: mu0 0.5000000000 (1/2) x 0.2500000002 (r/4 = 0.2500000000)
+  r 1.05 : NESSUNA soluzione reale ((alpha - beta)^2 = 1 - r^2 < 0); il residuo minimo sulla griglia (dalla formula) 1.2500e-04 a alpha 1.01 beta 1.01; il generatore li': mu0 0.505000 x 0.252500 (r/4 0.2625)
+  r 1.25 : NESSUNA soluzione reale ((alpha - beta)^2 = 1 - r^2 < 0); il residuo minimo sulla griglia (dalla formula) 3.1250e-03 a alpha 1.05 beta 1.05; il generatore li': mu0 0.525000 x 0.262500 (r/4 0.3125)
+  r 2    : NESSUNA soluzione reale ((alpha - beta)^2 = 1 - r^2 < 0); il residuo minimo sulla griglia (dalla formula) 5.0000e-02 a alpha 1.20 beta 1.20; il generatore li': mu0 0.600000 x 0.300000 (r/4 0.5000)
+  PUO' FALLIRE (P1 c): nessuna soluzione per r > 1 con lo zero Z1 (r 1.05, 1.25, 2: il residuo minimo  PASSA   dalla formula (alpha - beta)^2 = 1 - r^2, verificata in (a)
+### P1 (b)-(c) -- GLI ALTRI ZERI: la ricerca grossa (passo 0.1) del residuo sul generatore, a r 0.9 e 1.25
+  lo zero Z2, r 0.9: il residuo minimo 1.241e-02 a (0.4, 0.2, -0.4732050807568876, 0.11687708949529736)
+  lo zero Z2, r 1.25: il residuo minimo 2.940e-02 a (0.4, 0.4, -0.6000000000000004, 0.17320508065558565)
+  lo zero Z3, r 0.9: il residuo minimo 5.503e-04 a (0.6000000000000001, 1.2, -0.5196152422706627, 0.21213203442210374)
+  lo zero Z3, r 1.25: il residuo minimo 3.906e-03 a (1.0, 1.0, 0.49999999999999856, 0.25000000015180307)
+### P1 (d) -- LA MONETA (eps 0.5) SULLA SOLUZIONE DI (c), ramo +: mu0 della coppia, con gamma = 1 (la moneta fissa) e gamma = alpha (la moneta col nodo)
+  gamma 1     r 0.5 : i livelli della coppia (Z1) +0.52471925 +0.52471925 | -0.52471925 -0.52471925
+  gamma 1     r 0.8 : i livelli della coppia (Z1) +0.52471925 +0.52471925 | -0.52471925 -0.52471925
+  gamma 1     r 0.9 : i livelli della coppia (Z1) +0.52471925 +0.52471925 | -0.52471925 -0.52471925
+  gamma 1     r 1   : i livelli della coppia (Z1) +0.52471925 +0.52471925 | -0.52471925 -0.52471925
+  gamma alpha r 0.5 : i livelli della coppia (Z1) +0.52947255 +0.52947255 | -0.52947255 -0.52947255
+  gamma alpha r 0.8 : i livelli della coppia (Z1) +0.53268769 +0.53268769 | -0.53268769 -0.53268769
+  gamma alpha r 0.9 : i livelli della coppia (Z1) +0.53211675 +0.53211675 | -0.53211675 -0.53211675
+  gamma alpha r 1   : i livelli della coppia (Z1) +0.52471925 +0.52471925 | -0.52471925 -0.52471925
+  PUO' FALLIRE (P1 d): con eps 0.5 la soluzione di (c) tiene mu0 indipendente da r entro 1e-06 (gamma  PASSA   gamma 1: 1.55e-15; gamma alpha: 7.97e-03
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA: A1 (alpha 1, beta r) soddisfa le due condizioni; la chiave: mu0  PASSA   mu0 0.866025
+------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
