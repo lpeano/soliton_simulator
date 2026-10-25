@@ -39,14 +39,24 @@ GRIGLIE = (48, 96, 192)
 K_PICCOLO = U.K_PICCOLO
 H_K = U.H_K
 DIREZIONI_V = U.DIREZIONI_V
-VMAX_1 = 0.598467
-STIME = {0.5: 0.3821, 0.8: 0.5298, 1.25: 0.6623, 2.0: 0.7642}
+VMAX_1 = 0.599286                 # ### il valore del guardiano (l'ottimizzatore), scritto PRIMA di questa corsa; il vecchio 0.598467 e' la sottostima di _triangoli_forza.v_max
+VMAX_1_VECCHIO = 0.598467
+STIME = {0.5: 0.382103, 2.0: 0.764206}
+TOLL_STIME = 1e-5
+N_GRIGLIA_OTT = 120
+R_DIREZIONI = (0.8, 1.0, 1.25)
+DIREZIONI_ARCHI = (0.0, 120.0, 60.0, 30.0)   # ### le tre direzioni degli archi e la normale ad a2
+TOLL_DIR = 1e-3
+QUOTE = (0.0, 0.25, 0.5)                    # ### m1/L1: cs = 0.24, 0.20, 0.16 nella scena di 31ee70cc
+W_A2 = 8.0
+T_A2 = 80
+ESP_LUNGO = 2.0245                           # ### d ln v/d ln cs lungo il gradiente, 31ee70cc
+TOLL_ESP = 0.05
 TOLL_C1 = 1e-3
-TOLL_VMAX1 = 1e-4
+TOLL_VMAX1 = 1e-5
 TOLL_X1 = 1e-9
 TOLL_CR = 1e-3
-TOLL_STIME = 3e-3
-JSONL = os.path.join(RADICE, "doc", "referti_l2", "curvatura_0bis.jsonl")
+JSONL = os.path.join(RADICE, "doc", "referti_l2", "curvatura_0bis_v2.jsonl")   # ### la seconda corsa (la correzione del guardiano dopo 52eba072): la prima resta in curvatura_0bis.*
 OK = [0, 0]
 FALLITE = []
 
@@ -154,6 +164,74 @@ def vmax_direzioni(r, n, ndir):
     return np.pi * best
 
 
+def mu_banda_alta(t1, t2, r):
+    """### **La banda ALTA** *(`mu` piu' grande: `+mu0` a `K`, `(1 + r)/2` a `Gamma`)*: ### **isolata** *(il salto con la seconda si misura sulla griglia)*: l'ordinamento non la mescola."""
+    mu, V = CP.mu_di(t1, t2, r)
+    return mu, V
+
+
+def vmax_ottimizzato(r):
+    """### **Il massimo della banda alta: la griglia `N_GRIGLIA_OTT` e poi Nelder-Mead sul modulo del gradiente** *(la correzione del guardiano)*: ### `pi max |grad mu|`, il punto, il salto minimo."""
+    from scipy.optimize import minimize
+
+    def g_di(x):
+        mu, V = mu_banda_alta(x[0], x[1], r)
+        return grad_mu(x[0], x[1], r, V[:, 0])
+    n = N_GRIGLIA_OTT
+    best, dove, salto = -1.0, None, 1e9
+    for a in range(n):
+        for b in range(n):
+            x = (2 * np.pi * a / n, 2 * np.pi * b / n)
+            mu, V = mu_banda_alta(x[0], x[1], r)
+            salto = min(salto, float(mu[0] - mu[1]))
+            g = grad_mu(x[0], x[1], r, V[:, 0])
+            if g > best:
+                best, dove = g, x
+    res = minimize(lambda x: -g_di(x), np.array(dove), method="Nelder-Mead", options={"xatol": 1e-12, "fatol": 1e-15, "maxiter": 20000})
+    import _triangoli_bassa_energia as BE
+    k = np.linalg.inv(BE.J) @ np.array(res.x)
+    return {"griglia": np.pi * best, "ottimo": np.pi * float(-res.fun), "t": [float(x) for x in res.x], "k_cart": [float(x) for x in k], "salto_minimo": salto}
+
+
+def luce_direzioni(r):
+    """### **`M1-BIS (i)`:** ### **`v_g/s` a `|k| = K_PICCOLO` nelle tre direzioni degli archi e lungo la normale ad `a2`**, a `cs` uniforme."""
+    s = S_LUCE
+    out = {}
+    with campo_a1(r):
+        bl, _, _ = U.blocchi_campo(s)
+        for gradi in DIREZIONI_ARCHI:
+            a = math.radians(gradi)
+            wp = U.omega_fotone(bl, *U.t_di((K_PICCOLO + H_K) * math.cos(a), (K_PICCOLO + H_K) * math.sin(a)))
+            wm = U.omega_fotone(bl, *U.t_di((K_PICCOLO - H_K) * math.cos(a), (K_PICCOLO - H_K) * math.sin(a)))
+            out[str(gradi)] = (wp - wm) / (2 * H_K) / s
+    return out
+
+
+def luce_lungo_a2():
+    """### **`M1-BIS (ii)`:** ### **nella scena del gradiente di `31ee70cc`, un pacchetto LOCALIZZATO** *(largo `W_A2`, `cs` quasi costante su di lui)* ### **che si propaga lungo `a2`, a tre quote:**
+    ### **la velocita' lungo `a2`** *(la proiezione dello spostamento su `a2`, archi per tick)* ### **contro `cs` mediato sull'energia; l'esponente `d ln v/d ln cs`.**"""
+    import _u1_secondo as U2
+    L1, L2 = U2.LG2
+    bl0 = U.blocchi_campo(U2.S0)[0]
+    t0 = (2 * np.pi * U2.N_FASCIO[0] / L1, 2 * np.pi * U2.N_FASCIO[1] / L2)
+    out = []
+    for q in QUOTE:
+        c, cs = CP.campo_grad_a1(U2.ETA)
+        m1q = q * L1
+        U.pacchetto_campo(c, bl0, t0, W_A2, (m1q, L2 / 2.0), 2)
+        pos, xx, ss = (m1q, L2 / 2.0), [], []
+        for tt in range(T_A2 + 1):
+            if tt:
+                U.tick_campo(c)
+            pos, w = U2.baricentro(c, pos)
+            xx.append(-0.5 * (pos[0] - m1q) + (pos[1] - L2 / 2.0))
+            ss.append(float(np.sum(w * cs) / np.sum(w)))
+        v = float(np.polyfit(np.arange(T_A2 + 1, dtype=float), np.array(xx), 1)[0])
+        out.append({"quota": q, "m1": m1q, "v_a2": v, "cs": float(np.mean(ss))})
+    p = np.polyfit(np.log([o["cs"] for o in out]), np.log([o["v_a2"] for o in out]), 1)
+    return out, float(p[0])
+
+
 def vmax_tutte(r, n):
     best = 0.0
     for a in range(n):
@@ -207,15 +285,17 @@ def main(argv):
         vb = [np.pi * x["x"] for x in CP.x_di(r)]
         vk = {n: CP_max for n, CP_max in ((n, vmax_banda_K(r, n)) for n in GRIGLIE)}
         vt = vmax_tutte(r, GRIGLIE[0])
-        V[r] = {"v_b": vb, "v_max_K": {str(n): v for n, v in vk.items()}, "v_max_tutte_48": vt}
+        vo = vmax_ottimizzato(r)
+        V[r] = {"v_b": vb, "v_max_K": {str(n): v for n, v in vk.items()}, "v_max_tutte_48": vt, "ottimizzato": vo}
         scrivi(dict(V[r], tipo="materia", r=r))
-        print("  r %-5g | v_b/s %s | v_max/s banda K seguita: %s | tutte le bande (48) %.6f | %.0fs"
-              % (r, " ".join("%.6f" % x for x in vb), " | ".join("%d: %s" % (n, " ".join("%.6f" % x for x in v)) for n, v in vk.items()), vt, time.time() - t0))
+        print("  r %-5g | v_b/s %s | v_max/s banda K seguita: %s | tutte le bande (48) %.6f | L'OTTIMIZZATORE (griglia %d %.7f): %.7f a t %s, k %s, il salto minimo con la seconda banda %.4f | %.0fs"
+              % (r, " ".join("%.6f" % x for x in vb), " | ".join("%d: %s" % (n, " ".join("%.6f" % x for x in v)) for n, v in vk.items()), vt, N_GRIGLIA_OTT, vo["griglia"], vo["ottimo"],
+                 " ".join("%.5f" % x for x in vo["t"]), " ".join("%.5f" % x for x in vo["k_cart"]), vo["salto_minimo"], time.time() - t0))
         sys.stdout.flush()
     vd = vmax_direzioni(1.0, GRIGLIE[0], 61)
     scrivi({"tipo": "diagnosi_direzioni", "r": 1.0, "n": GRIGLIE[0], "ndir": 61, "v_max_su_s": vd})
-    print("  LA DIAGNOSI (lettura): il generatore a r 1, griglia %d, con la scansione su 61 direzioni come _triangoli_forza.v_max: %.6f contro |grad| %.6f e il valore noto %.6f"
-          % (GRIGLIE[0], vd, V[1.0]["v_max_tutte_48"], VMAX_1))
+    print("  LA CAUSA DELLA SOTTOSTIMA (lettura): r 1, griglia %d: la scansione su 61 direzioni (come _triangoli_forza.v_max) %.7f; |grad| %.7f; l'ottimizzatore %.7f; il vecchio valore %.6f"
+          % (GRIGLIE[0], vd, V[1.0]["v_max_tutte_48"], V[1.0]["ottimizzato"]["ottimo"], VMAX_1_VECCHIO))
     sp = {}
     for r in R_SPETTRI:
         with CP.a1(S_SPETTRI / r):
@@ -227,22 +307,42 @@ def main(argv):
     rap = {}
     for r in R_LISTA:
         c = L[r]["c_archi"]
-        vm = max(V[r]["v_max_K"]["48"])
+        vm = V[r]["ottimizzato"]["ottimo"]
         rap[r] = {"v_max_su_c": vm / c, "v_b_su_c": V[r]["v_b"][0] / c, "v_max_tutte_su_c": V[r]["v_max_tutte_48"] / c}
-        print("  r %-5g | c %.6f | v_max (banda K, 48) %.6f: v_max/c %.6f | v_b %.6f: v_b/c %.6f | v_max (tutte) / c %.6f"
+        print("  r %-5g | c %.6f | v_max (l'ottimizzatore) %.6f: v_max/c %.6f | v_b %.6f: v_b/c %.6f | v_max (tutte) / c %.6f"
               % (r, c, vm, rap[r]["v_max_su_c"], V[r]["v_b"][0], rap[r]["v_b_su_c"], rap[r]["v_max_tutte_su_c"]))
     scrivi({"tipo": "rapporto", "rapporti": {str(k): v for k, v in rap.items()}})
     print("-" * 120)
+    print("### M1-BIS (i) -- LA LUCE NELLE DIREZIONI, a cs uniforme (le tre direzioni degli archi e la normale ad a2)")
+    DIR = {}
+    for r in R_DIREZIONI:
+        DIR[r] = luce_direzioni(r)
+        sp_ = max(DIR[r].values()) - min(DIR[r].values())
+        scrivi({"tipo": "direzioni", "r": r, "v_g_su_s": DIR[r]})
+        print("  r %-5g | %s | la variazione relativa %.2e" % (r, " ".join("%s gradi %.7f" % (k, v) for k, v in DIR[r].items()), sp_ / np.mean(list(DIR[r].values()))))
+    print("### M1-BIS (ii) -- LA LUCE LUNGO a2 NEL GRADIENTE di 31ee70cc (un pacchetto largo %.0f, %d tick, a tre quote)" % (W_A2, T_A2))
+    A2, esp_a2 = luce_lungo_a2()
+    for o in A2:
+        print("  la quota m1/L1 %.2f (m1 %.0f): v lungo a2 %.6f archi/tick a cs %.5f: v/(cs^2/cs_rif) %.5f" % (o["quota"], o["m1"], o["v_a2"], o["cs"], o["v_a2"] / (o["cs"] ** 2 / 0.2)))
+    print("  l'esponente d ln v/d ln cs lungo a2: %.4f (lungo il gradiente, 31ee70cc: %.4f)" % (esp_a2, ESP_LUNGO))
+    scrivi({"tipo": "lungo_a2", "quote": A2, "esponente": esp_a2, "esponente_lungo_gradiente": ESP_LUNGO})
+    print("-" * 120)
     print("### I CONTROLLI")
     x1 = [x["x"] for x in CP.x_di(1.0)]
-    vk1 = max(V[1.0]["v_max_K"]["48"])
-    esito("DEVE PASSARE: a r 1, c = 1 entro %g; v_max/s (banda K, 48) = %g entro %g; x(1) = 1/4 entro %g" % (TOLL_C1, VMAX_1, TOLL_VMAX1, TOLL_X1),
+    vk1 = V[1.0]["ottimizzato"]["ottimo"]
+    esito("DEVE PASSARE: a r 1, c = 1 entro %g; v_max/s (l'ottimizzatore) = %g entro %g; x(1) = 1/4 entro %g" % (TOLL_C1, VMAX_1, TOLL_VMAX1, TOLL_X1),
           abs(L[1.0]["c_archi"] - 1) <= TOLL_C1 and abs(vk1 - VMAX_1) <= TOLL_VMAX1 and all(abs(x - 0.25) <= TOLL_X1 for x in x1),
           "c %.6f, v_max %.6f (tutte %.6f), x %s" % (L[1.0]["c_archi"], vk1, V[1.0]["v_max_tutte_48"], " ".join("%.10f" % x for x in x1)))
     peg = max(abs(L[r]["c_archi"] / r - 1) for r in R_LISTA)
     esito("PUO' FALLIRE: c_luce(r) = r archi per tempo proprio entro %g a ogni r (la carta)" % TOLL_CR, peg <= TOLL_CR, "lo scarto peggiore %.2e" % peg, deve=False)
-    peg = max(abs(max(V[r]["v_max_K"]["48"]) - STIME[r]) for r in STIME)
-    esito("PUO' FALLIRE: v_max/s contro le stime del guardiano entro %g" % TOLL_STIME, peg <= TOLL_STIME, " ".join("r %g %.4f/%.4f" % (r, max(V[r]["v_max_K"]["48"]), STIME[r]) for r in STIME), deve=False)
+    peg = max(abs(V[r]["ottimizzato"]["ottimo"] - STIME[r]) for r in STIME)
+    esito("PUO' FALLIRE: v_max/s (l'ottimizzatore) contro le stime del guardiano entro %g" % TOLL_STIME, peg <= TOLL_STIME,
+          " ".join("r %g %.7f/%.6f" % (r, V[r]["ottimizzato"]["ottimo"], STIME[r]) for r in STIME), deve=False)
+    d1 = (max(DIR[1.0].values()) - min(DIR[1.0].values())) / np.mean(list(DIR[1.0].values()))
+    esito("DEVE PASSARE (M1-BIS): a r 1 le quattro direzioni uguali entro %g" % TOLL_DIR, d1 <= TOLL_DIR, "%.2e" % d1)
+    dd = max((max(DIR[r].values()) - min(DIR[r].values())) / np.mean(list(DIR[r].values())) for r in R_DIREZIONI)
+    esito("PUO' FALLIRE (M1-BIS i): isotropa entro %g a ogni r" % TOLL_DIR, dd <= TOLL_DIR, "la peggiore %.2e" % dd, deve=False)
+    esito("PUO' FALLIRE (M1-BIS ii): l'esponente lungo a2 = %.2f entro %g" % (ESP_LUNGO, TOLL_ESP), abs(esp_a2 - ESP_LUNGO) <= TOLL_ESP, "%.4f" % esp_a2, deve=False)
     esito("PUO' FALLIRE: v_max/c_luce < 1 a ogni r (nessun superamento della luce in A1)", all(rap[r]["v_max_su_c"] < 1 for r in R_LISTA),
           " ".join("%.4f" % rap[r]["v_max_su_c"] for r in R_LISTA), deve=False)
     var = rap[0.5]["v_max_su_c"] / rap[2.0]["v_max_su_c"]
