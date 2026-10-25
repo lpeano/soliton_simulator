@@ -34,3 +34,10 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, prima dei numeri; 3. la corsa; 4. il referto, la relazione, le annotazioni della frase «oltre la luce».
+
+## 4. ANNOTAZIONI DOPO LA PROVA A VUOTO *(ridotta, nello scratchpad: `r` `0.5`, `1`, `2`; la griglia `48`; PRIMA di committare lo script)*
+
+### ⛔ **NON SI RISCRIVE, SI ANNOTA:** ### **i criteri della sezione `2` NON cambiano.**
+
+1. ### ⛔ **LA DEVE `1` FALLIRA' sul valore di riferimento:** ### **il generatore a `r 1`, griglia `48`, da' `v_max/s = 0.598622` contro `0.598467` entro `1e-4`** *(lo scarto `1.6e-4`)*. ### **La mia ipotesi:** ### **`0.598467` viene da `_triangoli_forza.v_max`, che sui gruppi DEGENERI** *(a `eps 0` ogni banda del tick e' doppia per lo spin)* ### **prende il massimo su `61` direzioni in `[0, pi]`:** ### **la scansione sottostima fino a `1 - cos(1.5 gradi) = 3.4e-4`.** ### **LA DIAGNOSI aggiunta** *(una LETTURA, non un criterio)*: ### **il generatore con la STESSA scansione su `61` direzioni.** ### **Nella corsa vera la DEVE `1` fallira', il referto lo dira', e MI FERMO.**
+2. ### **Le altre letture della prova a vuoto** *(non il referto)*: ### **la luce in `A1` va a `r` archi per tempo proprio entro `4e-8`** *(cioe' `1` lunghezza propria per tempo proprio)*; ### **`v_max/c` `0.764`, `0.599`, `0.382` a `r` `0.5`, `1`, `2`.**
