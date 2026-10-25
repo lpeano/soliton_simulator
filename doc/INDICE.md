@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 152 |
+| `FISICA` | `2` | 153 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 25 |
@@ -521,6 +521,7 @@
 | `MASSA-ID` | FRONTE | METODO | 1 | ### **SOSPESA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
 | `MASSA-ID-FISSO` | MISURA | METODO | 1 | ### **SOSPESA** |  | MASSA-ID a LIGNAGGIO FISSO: non applicabile, la precondizione V-PRE non regge (i |
 | `MASSA-MIGRA` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la massa segue i NODI o la COERENZA? E come cambia la sua FORMA? |
+| `MASSA-NEI-DIFETTI` | MISURA | FISICA | 2 | ### **AGENDA** |  | la massa nei difetti: nessuno stato legato; il bordo locale non converge; Lambda |
 | `MASSA-VUOTO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `MASSE-PESI-SOVRAPPOSTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione  |
 | `MATERIA-ANTIMATERIA-SPAZIO` | TEORIA | FISICA | 2 | ### **AGENDA** |  | materia, antimateria e spazio nella camminata: IPOTESI DA MISURARE |

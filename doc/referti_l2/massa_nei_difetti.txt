@@ -1,0 +1,72 @@
+[TIMBRO] _massa_nei_difetti.py  sha1-BYTE cca69f69  committato e pulito
+==================================================================================================================================
+LA MASSA NEI DIFETTI: il generatore (I - P_u) + P_- su un toro a triangoli con uno sdoppiamento d'arco (il nodo nuovo a 4, gli opposti a 7)
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_massa_nei_difetti.py cca69f69; csv/_u1_terzo.py dbcf49c4; csv/_curvatura_parte2.py e2282e17; primo_ordine/corrente.py 52d1d72b; primo_ordine/scena_l2.py a581e3cd
+  la configurazione: LATI_EPS0 (24, 36, 48) LATI_EPS (24, 36) EPS 0.5 TOLL_BLOCH 1e-12 DELTA_BANDA 1e-08 R_LOC 3 PESO_LOC 0.5 IPR_LOC 50 FF (0.005, 0.02) R_MAX 8 SOGLIA_DECADE 0.01 SOGLIA_CHIAVE 1e-06 LC_SU_L6 (0.1, 1.0, 10.0)
+  la scena: i = (L/2, L/2), l'arco i -> i + (1,0) tolto, n legato a i, j = i + (1,0), k = i + (1,1), l = i + (0,-1); n al punto medio di i-j (i versori della moneta: verso il vicino)
+----------------------------------------------------------------------------------------------------------------------------------
+### eps 0, L 24 (10 s): dim 3456 -> 3462; E0 (il bordo del toro perfetto) 0.5000000000; lo scarto dal Bloch 1.89e-14; i gradi {'n': 4, 'i': 6, 'j': 6, 'k': 7, 'l': 7} (attesi: True)
+  i livelli piatti del toro perfetto [-1.0, 0.0]: stati piatti 2305 nel perfetto, 2309 col difetto
+  (i) gli stati con |mu| < E0 - 1e-08, non piatti: 0; localizzati sul difetto: 0
+  (ii) f 0.005: E_rif 0.505647; delta n -1.1308e-04  k -1.1308e-04  l -1.1308e-04  i -1.1308e-04  j -1.1308e-04  lontano (dist 16) -1.1308e-04; max|delta| per anello r=0..8: 1.13e-04 1.13e-04 1.13e-04 4.27e-04 4.27e-04 4.27e-04 4.27e-04 4.27e-04 4.27e-04; max a r >= 3: 4.272e-04
+  (ii) f 0.02: E_rif 0.505647; delta n +1.6579e-02  k +1.6098e-02  l +1.6098e-02  i +1.6579e-02  j +1.6579e-02  lontano (dist 16) +1.7565e-15; max|delta| per anello r=0..8: 1.66e-02 1.66e-02 1.61e-02 2.32e-03 2.32e-03 2.32e-03 8.51e-05 8.51e-05 8.51e-05; max a r >= 3: 2.325e-03
+  (v) Lambda per nodo {'n': 4.0, 'i': 6.0, 'j': 6.0, 'k': 7.0, 'l': 7.0} (lontano 6); per estremita' {'n': 1.0, 'i': 1.0, 'j': 1.0, 'k': 1.0, 'l': 1.0}
+### eps 0, L 36 (88 s): dim 7776 -> 7782; E0 (il bordo del toro perfetto) 0.5000000000; lo scarto dal Bloch 1.79e-14; i gradi {'n': 4, 'i': 6, 'j': 6, 'k': 7, 'l': 7} (attesi: True)
+  i livelli piatti del toro perfetto [-1.0, 0.0]: stati piatti 5185 nel perfetto, 5189 col difetto
+  (i) gli stati con |mu| < E0 - 1e-08, non piatti: 0; localizzati sul difetto: 0
+  (ii) f 0.005: E_rif 0.502526; delta n +1.7443e-05  k -2.3027e-05  l -2.3027e-05  i -2.3027e-05  j -2.3027e-05  lontano (dist 24) +4.4186e-16; max|delta| per anello r=0..8: 1.74e-05 2.30e-05 2.30e-05 2.30e-05 2.30e-05 2.30e-05 2.30e-05 2.30e-05 2.30e-05; max a r >= 3: 2.303e-05
+  (ii) f 0.02: E_rif 0.508251; delta n +1.3094e-02  k +3.2611e-03  l +3.2611e-03  i +4.5355e-03  j +4.5355e-03  lontano (dist 24) +4.4985e-04; max|delta| per anello r=0..8: 1.31e-02 4.54e-03 3.26e-03 3.26e-03 3.26e-03 3.26e-03 4.50e-04 4.50e-04 4.50e-04; max a r >= 3: 3.261e-03
+  (v) Lambda per nodo {'n': 4.0, 'i': 6.0, 'j': 6.0, 'k': 7.0, 'l': 7.0} (lontano 6); per estremita' {'n': 1.0, 'i': 1.0, 'j': 1.0, 'k': 1.0, 'l': 1.0}
+### eps 0, L 48 (507 s): dim 13824 -> 13830; E0 (il bordo del toro perfetto) 0.5000000000; lo scarto dal Bloch 3.63e-14; i gradi {'n': 4, 'i': 6, 'j': 6, 'k': 7, 'l': 7} (attesi: True)
+  i livelli piatti del toro perfetto [-1.0, 0.0]: stati piatti 9217 nel perfetto, 9221 col difetto
+  (i) gli stati con |mu| < E0 - 1e-08, non piatti: 0; localizzati sul difetto: 0
+  (ii) f 0.005: E_rif 0.501424; delta n +6.2565e-03  k +4.9831e-03  l +4.9831e-03  i +4.9831e-03  j +4.9831e-03  lontano (dist 32) -4.4283e-16; max|delta| per anello r=0..8: 6.26e-03 4.98e-03 4.98e-03 4.98e-03 5.12e-04 5.12e-04 5.12e-04 5.12e-04 5.12e-04; max a r >= 3: 4.983e-03
+  (ii) f 0.02: E_rif 0.508856; delta n +1.0271e-02  k +3.7066e-03  l +3.7066e-03  i +6.9372e-03  j +6.9372e-03  lontano (dist 32) +4.3636e-16; max|delta| per anello r=0..8: 1.03e-02 6.94e-03 3.65e-03 3.65e-03 5.20e-04 3.52e-05 3.52e-05 1.75e-15 1.75e-15; max a r >= 3: 3.654e-03
+  (v) Lambda per nodo {'n': 4.0, 'i': 6.0, 'j': 6.0, 'k': 7.0, 'l': 7.0} (lontano 6); per estremita' {'n': 1.0, 'i': 1.0, 'j': 1.0, 'k': 1.0, 'l': 1.0}
+### eps 0.5, L 24 (450 s): dim 6912 -> 6924; E0 (il bordo del toro perfetto) 0.5247192544; lo scarto dal Bloch 3.00e-14; i gradi {'n': 4, 'i': 6, 'j': 6, 'k': 7, 'l': 7} (attesi: True)
+  i livelli piatti del toro perfetto [-1.024719254374, 0.024719254374]: stati piatti 4608 nel perfetto, 4616 col difetto
+  (i) gli stati con |mu| < E0 - 1e-08, non piatti: 4; localizzati sul difetto: 0
+      mu -0.5246913336  il legame 2.792e-05  il peso entro 3 0.0294  IPR 2m 2.2
+      mu +0.5246913336  il legame 2.792e-05  il peso entro 3 0.0295  IPR 2m 2.8
+      mu +0.5246913336  il legame 2.792e-05  il peso entro 3 0.0295  IPR 2m 2.8
+      mu -0.5246913336  il legame 2.792e-05  il peso entro 3 0.0294  IPR 2m 2.2
+  (ii) f 0.005: E_rif 0.530103; delta n -5.5532e-04  k -5.5532e-04  l -5.5532e-04  i -5.5532e-04  j -5.5532e-04  lontano (dist 16) -5.5532e-04; max|delta| per anello r=0..8: 5.55e-04 5.55e-04 5.55e-04 5.55e-04 5.55e-04 5.55e-04 5.55e-04 5.55e-04 3.88e-04; max a r >= 3: 5.553e-04
+  (ii) f 0.02: E_rif 0.530103; delta n +1.5417e-02  k +2.1154e-03  l +2.1154e-03  i +1.4657e-02  j +1.4657e-02  lontano (dist 16) +7.1208e-15; max|delta| per anello r=0..8: 1.54e-02 1.47e-02 2.12e-03 2.12e-03 2.12e-03 2.12e-03 1.98e-04 1.98e-04 1.98e-04; max a r >= 3: 2.115e-03
+  (v) Lambda per nodo {'n': 4.0, 'i': 6.0, 'j': 6.0, 'k': 7.0, 'l': 7.0} (lontano 6); per estremita' {'n': 1.0, 'i': 1.0, 'j': 1.0, 'k': 1.0, 'l': 1.0}
+### eps 0.5, L 36 (5131 s): dim 15552 -> 15564; E0 (il bordo del toro perfetto) 0.5247192544; lo scarto dal Bloch 6.48e-14; i gradi {'n': 4, 'i': 6, 'j': 6, 'k': 7, 'l': 7} (attesi: True)
+  i livelli piatti del toro perfetto [-1.024719254374, 0.024719254374]: stati piatti 10368 nel perfetto, 10376 col difetto
+  (i) gli stati con |mu| < E0 - 1e-08, non piatti: 4; localizzati sul difetto: 0
+      mu -0.5247066042  il legame 1.265e-05  il peso entro 3 0.0135  IPR 2m 2.2
+      mu -0.5247066042  il legame 1.265e-05  il peso entro 3 0.0135  IPR 2m 2.2
+      mu +0.5247066042  il legame 1.265e-05  il peso entro 3 0.0135  IPR 2m 2.8
+      mu +0.5247066042  il legame 1.265e-05  il peso entro 3 0.0135  IPR 2m 2.8
+  (ii) f 0.005: E_rif 0.527126; delta n +4.9054e-05  k -2.0154e-04  l -2.0154e-04  i -2.0154e-04  j -2.0154e-04  lontano (dist 24) -2.5274e-15; max|delta| per anello r=0..8: 4.91e-05 2.02e-04 2.02e-04 2.02e-04 2.02e-04 7.35e-05 7.35e-05 7.35e-05 7.35e-05; max a r >= 3: 2.015e-04
+  (ii) f 0.02: E_rif 0.532588; delta n +1.1686e-02  k +2.7631e-03  l +2.7631e-03  i +3.1771e-03  j +3.1771e-03  lontano (dist 24) +4.0969e-04; max|delta| per anello r=0..8: 1.17e-02 3.18e-03 2.76e-03 2.76e-03 2.76e-03 2.76e-03 4.10e-04 4.10e-04 4.10e-04; max a r >= 3: 2.763e-03
+  (v) Lambda per nodo {'n': 4.0, 'i': 6.0, 'j': 6.0, 'k': 7.0, 'l': 7.0} (lontano 6); per estremita' {'n': 1.0, 'i': 1.0, 'j': 1.0, 'k': 1.0, 'l': 1.0}
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): senza difetto lo spettro diretto = l'unione di Bloch entro 1e-12, a ogni L ed eps            PASSA   0/24 1.9e-14 0/36 1.8e-14 0/48 3.6e-14 0.5/24 3.0e-14 0.5/36 6.5e-14
+  DEVE PASSARE (1): i gradi del grafo col difetto (n 4, k e l 7, i e j 6, gli altri 6)                           PASSA   
+  PUO' FALLIRE (2): nessuno stato LOCALIZZATO nella banda proibita (eps 0, a ogni L)                             PASSA   {24: 0, 36: 0, 48: 0}
+  PUO' FALLIRE (3): max|delta_v| a distanza >= 3 sotto 0.01 (f 0.005, eps 0, L 48)                               PASSA   4.983e-03
+  DEVE PASSARE (4): Lambda per nodo 4/6 e 7/6 di quello a 6 ESATTI; per estremita' uguale ovunque                PASSA   
+  (v) cs_v/cs_6 = (Lambda_v/Lambda_6) (1 + Lc/Lambda_6)/(Lambda_v/Lambda_6 + Lc/Lambda_6), per nodo:
+      Lc/Lambda_6 0.1  : il nodo a 4 0.956522, a 7 1.013158; per estremita': 1, 1
+      Lc/Lambda_6 1    : il nodo a 4 0.800000, a 7 1.076923; per estremita': 1, 1
+      Lc/Lambda_6 10   : il nodo a 4 0.687500, a 7 1.149254; per estremita': 1, 1
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA (5): il difetto non cambia niente; la chiave: 6 estremita' in piu' e un liv PASSA   5.1e-01 5.0e-01 5.0e-01 5.5e-01 5.5e-01
+### (iii) LA CONVERGENZA (eps 0): lo scarto 36-48 minore di 24-36 e minore del 10% del valore
+  f 0.005  delta_n: -1.1308e-04 +1.7443e-05 +6.2565e-03  -> NON CONVERGE
+  f 0.005  delta_k: -1.1308e-04 -2.3027e-05 +4.9831e-03  -> NON CONVERGE
+  f 0.005  delta_l: -1.1308e-04 -2.3027e-05 +4.9831e-03  -> NON CONVERGE
+  f 0.005  delta_i: -1.1308e-04 -2.3027e-05 +4.9831e-03  -> NON CONVERGE
+  f 0.02   delta_n: +1.6579e-02 +1.3094e-02 +1.0271e-02  -> NON CONVERGE
+  f 0.02   delta_k: +1.6098e-02 +3.2611e-03 +3.7066e-03  -> NON CONVERGE
+  f 0.02   delta_l: +1.6098e-02 +3.2611e-03 +3.7066e-03  -> NON CONVERGE
+  f 0.02   delta_i: +1.6579e-02 +4.5355e-03 +6.9372e-03  -> NON CONVERGE
+  i legami degli stati localizzati a L 24: nessuno
+  i legami degli stati localizzati a L 36: nessuno
+  i legami degli stati localizzati a L 48: nessuno
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
