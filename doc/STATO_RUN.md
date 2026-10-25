@@ -3080,3 +3080,11 @@ dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo refe
   spazio `Q` va dallo `0.3%` al `6%`)*.
 - **DA DIAGNOSTICARE in un mandato a se'.** ### **Intanto il differenziale `(a(+eta) - a(-eta))/2` elimina l'accelerazione propria, e la semisomma si riporta sempre contro `a(eta 0)`**
   *(`doc/PATTERN_DI_PROVA.md`, «LE CORSE DELLA FORZA: I CRITERI»)*.
+
+## `[[V-MAX-DIREZIONI]]` — `_triangoli_forza.v_max` sottostima la velocita' massima sui gruppi degeneri *(aperto il 2026-10-25)*
+
+- **MISURATO in `doc/referti_l2/curvatura_0bis.txt`** *(`csv/_curvatura_0bis.py`, `52eba072`)*: ### **a `eps 0` ogni banda del tick e' doppia per lo spin, e `v_max` sui gruppi degeneri prende il massimo su `61` direzioni in `[0, pi]`:** ### **sul generatore la stessa scansione da' `0.598467` contro il gradiente vero `0.598622`** *(griglia `48`, `r 1`)*: ### **una sottostima di `1.6e-4`** *(fino a `1 - cos(1.5 gradi) = 3.4e-4`)*.
+- **E IN PIU' la griglia `48` non e' convergiuta:** ### **`0.598622`, `0.599163`, `0.599237` a `48`, `96`, `192`.**
+- **CHE COSA TOCCA:** ### **ogni `v_max/s` dei referti dei triangoli** *(`0.60`, `0.598467`, i fattori `F` con `c = v_max`)*: ### **lo scarto e' dello `0.01`-`0.1%`, nessuna lettura di quei referti cambia di segno o di ordine.**
+- **LA CURA, non fatta** *(lo strumento non si cambia in questo mandato)*: ### **il massimo sugli autovalori della matrice proiettata `cos(t) M1 + sin(t) M2` per ogni `t`** *(una forma quadratica in `t`: si massimizza esattamente)*, ### **e la griglia raffinata.**
+- **Criterio di chiusura:** ### **`v_max` del tick a `s 0.001` uguale a `pi max |grad mu|` del generatore entro `1e-6`, alla stessa griglia.**

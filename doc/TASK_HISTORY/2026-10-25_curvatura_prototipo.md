@@ -103,3 +103,8 @@
 ### **PER LA DECISIONE SUGLI OROLOGI** *(informazione, non scelte)*: ### **con `A1` nessuna delle due opzioni basta:** ### **un `theta = s/x` fisso allinea le due `c` solo a `r = 1`, perche' il loro rapporto varia con `cs`;** ### **e la caduta cambia di `1.5`:** ### **la massa dall'arco e' la chiave** *(una strada dove la massa venga solo dal nodo, o una dove anche il nodo senta le lunghezze, `A2` del progetto, che pero' raddoppia la caduta)*.
 
 ### ⛔ **FERMO: la chiave del DEVE FALLIRE di `(c)` e' fallita** *(`kappa/R1 = 1.47` invece di `> 1.5`)*. ### **LE DOMANDE A LUCA:** ### **`(1)` la chiave era fissata a `1.5`, e la deflessione sta fra `R1` e `R2`: si accetta la lettura «la deflessione non e' `R1`» o si cerca prima perche' non arriva a `R2`?** ### **`(2)` la caduta `x1.5` dice che `A1` non e' la relativita' generale a campo debole: si prova la strada con la massa solo dal nodo** *(se esiste)*, ### **o `A2`, o `(C)`?**
+
+## 7. ANNOTAZIONI DEL MANDATO 0-BIS *(si annota, non si riscrive)*
+
+1. ### **La frase della sezione `5` «a `r 0.5` il rapporto e' `1.11`: oltre la luce» NON ERA MISURATA** *(`v_b` non e' una velocita' che un pacchetto raggiunge, e la luce di `A1` veniva dalla carta)*: ### **misurato in `doc/referti_l2/curvatura_0bis.txt`: `v_max/c < 1` a ogni `r`.**
+2. ### **«`gamma` da Shapiro `1.02`» della sezione `6` era contro la materia di OGGI:** ### **contro la materia di `A1`** *(che cade `1.50` volte)* ### **la rilettura da' `gamma ~ 0.35` dalla velocita' e `~ 0` dalla deflessione** *(`doc/TASK_HISTORY/2026-10-25_curvatura_0bis.md`, sezione `5`, `M4`)*.

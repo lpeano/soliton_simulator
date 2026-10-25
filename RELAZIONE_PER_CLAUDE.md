@@ -20909,3 +20909,30 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### **PER LA DECISIONE SUGLI OROLOGI** *(informazione, non scelte)*: ### **con `A1` nessuna delle due opzioni basta:** ### **un `theta = s/x` fisso allinea le due `c` solo a `r = 1`, perche' il loro rapporto varia con `cs`;** ### **e la caduta cambia di `1.5`:** ### **la massa dall'arco e' la chiave** *(una strada dove la massa venga solo dal nodo, o una dove anche il nodo senta le lunghezze, `A2` del progetto, che pero' raddoppia la caduta)*.
 
 ### ⛔ **FERMO: la chiave del DEVE FALLIRE di `(c)` e' fallita** *(`kappa/R1 = 1.47` invece di `> 1.5`)*. ### **LE DOMANDE A LUCA:** ### **`(1)` la chiave era fissata a `1.5`, e la deflessione sta fra `R1` e `R2`: si accetta la lettura «la deflessione non e' `R1`» o si cerca prima perche' non arriva a `R2`?** ### **`(2)` la caduta `x1.5` dice che `A1` non e' la relativita' generale a campo debole: si prova la strada con la massa solo dal nodo** *(se esiste)*, ### **o `A2`, o `(C)`?**
+
+### 📌 **LA CURVATURA, PARTE 0-BIS: LA LUCE IN A1 MISURATA, LA VELOCITA' MASSIMA VERA** *([[PROGETTO-CURVATURA]], [[V-MAX-DIREZIONI]], [[LORENTZ-MATERIA-INTERFERENZA]])*. ### ⚠ **CORREGGE due frasi di questa relazione** *(la parte `0` e la parte `1` della curvatura, qui sopra)*: ### **«oltre la luce» NON era misurata; «`gamma` da Shapiro `1.02`» era contro la materia di oggi.**
+
+### **IL REFERTO DELLA PARTE 0-BIS:** `doc/referti_l2/curvatura_0bis.{txt,jsonl}` *(`csv/_curvatura_0bis.py` `sha1-BYTE f5386aab` al commit `52eba072`; il task history `8288068d`)*. ### **`5/6`; UNA DEVE FALLITA, sul VALORE DI RIFERIMENTO** *(come la prova a vuoto aveva previsto)*. ### ⛔ **FERMO.**
+
+### **`M1`, LA LUCE IN `A1`** *(una regione uniforme, `s 0.05`, `s_rif = s/r`)*: ### **`c` dalla dispersione `0.500000`, `0.800000`, `1.000000`, `1.250000`, `2.000000` archi per tempo proprio a `r` `0.5`, `0.8`, `1`, `1.25`, `2`** *(lo scarto dalla carta `4.1e-8`)*, ### **cioe' `1.000000` lunghezza propria per tempo proprio a ogni `r`;** ### **isotropa entro `7.9e-8`** *(le `12` direzioni, il `k` piccolo)*; ### **il pacchetto `0.48606`, `0.77740`, `0.97161`, `1.21440`, `1.94365` contro la previsione dallo spettro** *(`1e-4`-`4e-4`)*; ### **stabile a `s 0.05` per ogni `r`** *(Courant sulla carta `s <= 0.40825/r`)*.
+- ### **LE UNITA'** *(la correzione `1` dell'aggiunta, errore del guardiano `n.65`)*: ### **la previsione della carta e' `c = r s` archi per TICK = `r` archi per TEMPO PROPRIO = `1` lunghezza propria per tempo proprio:** ### **le tre tornano.** ### **E con l'esponente di `31ee70cc`** *(`d ln v/d ln cs = 2.0245` nel gradiente, archi per tick)*: ### **archi per tick `= r s = s^2/s_rif`, l'esponente `2`: coerente** *(lo scarto `0.0245` e' del gradiente, non dell'unita')*.
+
+### **`M2`, LA VELOCITA' MASSIMA VERA DELLA MATERIA** *(il generatore, la banda di `K` seguita per continuita')*:
+
+| `r` | `0.5` | `0.8` | `1` | `1.25` | `2` |
+|---|---|---|---|---|---|
+| griglia `48` | `0.381810` | `0.529394` | `0.598622` | `0.661742` | `0.763619` |
+| griglia `96` | `0.381986` | `0.529670` | `0.599163` | `0.662087` | `0.763971` |
+| griglia `192` | `0.382093` | `0.529828` | `0.599237` | `0.662285` | `0.764186` |
+| gli spettri completi *(`s 0.01`, tutte le bande, `48`)* | `0.381716` | -- | `0.598483` | -- | `0.763457` |
+
+- ### ⛔ **LA DEVE `1` FALLISCE:** ### **`v_max/s = 0.598622` contro `0.598467` entro `1e-4`** *(`c = 1.000000` e `x(1) = 0.2500000002` passano)*. ### **LA DIAGNOSI** *(una lettura)*: ### **il generatore con la scansione su `61` direzioni, come `_triangoli_forza.v_max` sui gruppi degeneri, da' `0.598467`: il valore «noto» e' SOTTOSTIMATO dalla scansione** *(il difetto [[V-MAX-DIREZIONI]])*. ### **E la griglia `48` NON e' convergiuta** *(`0.598622` -> `0.599237` a `192`)*: ### **la regola della convergenza raffinando** *(il censimento, la parte `B`)*.
+- ### **Le stime del guardiano** *(PUO' FALLIRE entro `3e-3`)*: ### **PASSANO** *(`0.3818`/`0.3821`, `0.5294`/`0.5298`, `0.6617`/`0.6623`, `0.7636`/`0.7642`)*.
+
+### **`M3`, IL RAPPORTO nella stessa unita'** *(archi per tempo proprio)*: ### **`v_max/c` `0.7636`, `0.6617`, `0.5986`, `0.5294`, `0.3818`** *(PUO' FALLIRE `< 1` a ogni `r`: PASSA)*; ### **`v_b/c` `1.1107`, `0.8781`, `0.7854`, `0.7025`, `0.5554`;** ### **la variazione di `v_max/c` fra `r 0.5` e `r 2`: `2.000`** *(DEVE FALLIRE per la chiave giusta: PASSA)*.
+
+### ⛔ **LA CORREZIONE CHIESTA DAL MANDATO:** ### **la frase di `b0edae62` «a `r 0.5` il rapporto e' `1.11`: oltre la luce» NON ERA MISURATA:** ### **`1.11` e' `v_b/c`, e `v_b` e' la `c` asintotica della dispersione massiva che nessun pacchetto raggiunge;** ### **con la velocita' massima vera, `v_max/c < 1` a ogni `r` misurato: NESSUN superamento della luce in `A1`.**
+
+### **`M4`, `gamma` RISPETTO ALLA MATERIA DI `A1`** *(una RILETTURA dei numeri di `31ee70cc`, fatta a mano, non uno script)*: ### **`R1` nello script e' `2 pi eta/Lu`, la caduta della materia di OGGI; con `A1` la materia cade `1.50` volte** *(la parte `(d)`)*: ### **dalla velocita' della luce: `1 + gamma = 2.0245/1.50 = 1.350`, `gamma ~ 0.35`;** ### **dalla deflessione: `kappa/(1.5 R1)` `0.977`, `0.987`, `0.987` a `W` `12`, `16`, `24`, `gamma ~ 0`** *(con Ehrenfest che spiega l'`83%`)*. ### ⛔ **QUINDI la frase «`gamma` da Shapiro `1.02`» di `31ee70cc` era contro la materia di oggi, non contro quella di `A1`.**
+
+### ⛔ **FERMO: la DEVE `1` e' fallita** *(sul valore di riferimento: [[V-MAX-DIREZIONI]])*. ### **NON ESEGUITA:** ### **la misura `M1-BIS` dell'aggiunta** *(la luce in due direzioni, l'ipotesi di anisotropia del guardiano)*: ### **resta in coda, dopo la decisione di Luca.** ### **LE DOMANDE A LUCA:** ### **`(1)` il valore di riferimento di `v_max/s`: `0.598622`** *(il gradiente vero, griglia `48`)* ### **o il valore convergente in griglia** *(`~0.5992`)*? ### **`(2)` si esegue `M1-BIS`?** ### **Le domande di `31ee70cc` restano aperte** *(non toccate)*.
