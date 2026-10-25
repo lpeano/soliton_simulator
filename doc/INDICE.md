@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 148 |
+| `FISICA` | `2` | 149 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 23 |
@@ -674,6 +674,7 @@
 | `PRESTAZIONI-CORSE` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | le corse costano: sei strade per il tempo di calcolo, da affrontare a modello ST |
 | `PRIMA-LO-SPAZIO-POI-LA-MATERIA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | prima lo spazio, poi la materia, in modo causale: la materia ci arriva camminand |
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
+| `PROGETTO-CURVATURA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DELLA CURVATURA DELLO SPAZIO: cs nelle lunghezze, gamma = 1, sulla c |
 | `PROGETTO-U1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DEL CAMPO U(1) SUGLI ARCHI: la luce del modello, sulla carta |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la conservazione modificata si conserva: si promuove a energia? |
 | `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
