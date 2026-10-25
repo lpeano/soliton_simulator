@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 23 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 25 |
+| `METODO` | `2` | 26 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -154,6 +154,7 @@
 | `CENS-B7` | FRONTE | FISICA | 1 | ### **SOSPESA** | SI | [B] *"Default ancora off; **convergenza e superiorita' rispetto al percors |
 | `CENS-B8` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | [B] *"INTEGRATORE METRICO **SPERIMENTALE** ... Default off per mantenere i |
 | `CENS-B9` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | [B] *"LEGGE DI STABILITA' (**esplorativa**): i nuovi nodi in regione sovra |
+| `CENSIMENTO-DECISIONI` | MISURA | METODO | 2 | ### **AGENDA** |  | IL CENSIMENTO DELLE DECISIONI DI LUCA: 48, di cui 25 nel nucleo, 15 giustamente  |
 | `CHI-BASC-DESCRIZIONE` | DIFETTO | DOCUMENTAZIONE | 1 | ### **CHIUSA** |  | il flag --chi-basc stampa <<perc_chi vira>>, ma con --chi-coop scrive perc_geom |
 | `CHI-TORS-ZERO-FALSO` | MISURA | METODO | 1 | ### **CHIUSA** |  | il gancio chi_tors lascia uno ZERO dove non ha potuto misurare: 392 e 731 passi  |
 | `CHK2` | CURA | FISICA | 1 | ### **CHIUSA** |  | CHECKPOINT 2 / GLOBALE §3 / raggiunto e riferito a Luca. IL RUN LUNGO NON SI LAN |
