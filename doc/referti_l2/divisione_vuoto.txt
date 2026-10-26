@@ -1,0 +1,129 @@
+[TIMBRO] _divisione_vuoto.py  sha1-BYTE aa0384b6  !! MODIFICATO rispetto a HEAD (blob-git 4ffe9808) -- i byte che girano NON sono quelli committati
+==================================================================================================================================
+LA DIVISIONE DEL VUOTO, SULLA CARTA: cinque regole di trasporto di phi alla nascita (b1) e al flip, con lo strumento di C3
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_divisione_vuoto.py aa0384b6; csv/_conto_del_vuoto.py c3d9c303; csv/_massa_nei_difetti.py cca69f69; doc/referti_l2/conto_del_vuoto.jsonl fd3b3286
+  la configurazione: LATI (24, 36) REGOLE ('v1', 'v2', 'v3', 'v4', 'v5') CONSERVANO ('v1', 'v3', 'v4', 'v5') TOLL_NORMA 1e-14 TOLL_V5 1e-12 SOGLIA_ZERO 1e-10 LC_SU_L6 (0.1, 1.0, 10.0); psi: D7 col padre i, come in C3
+----------------------------------------------------------------------------------------------------------------------------------
+### NASCITA, L 24
+  v1: Delta H_tot -8.548213678e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame +2.842171e-14 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2056e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.000000 (per estremita' 0.750000); dcs/cs per nodo -8.333e-02 -3.333e-01 -4.762e-01; per estremita' -2.941e-02 -1.429e-01 -2.326e-01
+      i (grado 6): Lambda 6.000000 -> 3.000000 (per estremita' 0.500000); dcs/cs per nodo -8.333e-02 -3.333e-01 -4.762e-01; per estremita' -8.333e-02 -3.333e-01 -4.762e-01
+      j (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 6.000000 (per estremita' 0.857143); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' -1.493e-02 -7.692e-02 -1.316e-01
+      l (grado 7): Lambda 6.000000 -> 6.000000 (per estremita' 0.857143); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' -1.493e-02 -7.692e-02 -1.316e-01
+  v2: Delta H_tot -1.435872887e-01 = materia -6.480149e-02 + vuoto +0.000000e+00 + legame -7.878580e-02 | V 3456.000000 -> 3462.000000 | la capacita' esatta [-2.0217e+02, 2.1991e+01], serve 2.2135e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 4.000000 (per estremita' 1.000000); dcs/cs per nodo -4.348e-02 -2.000e-01 -3.125e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      i (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v3: Delta H_tot -4.531145615e-02 = materia -6.480149e-02 + vuoto +1.612790e-12 + legame +1.949003e-02 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-2.0182e+02, 2.1953e+01], serve 2.1998e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.993068 (per estremita' 0.998267); dcs/cs per nodo -4.369e-02 -2.008e-01 -3.136e-01; per estremita' -1.578e-04 -8.673e-04 -1.576e-03
+      i (grado 6): Lambda 6.000000 -> 5.989601 (per estremita' 0.998267); dcs/cs per nodo -1.578e-04 -8.673e-04 -1.576e-03; per estremita' -1.578e-04 -8.673e-04 -1.576e-03
+      j (grado 6): Lambda 6.000000 -> 5.989601 (per estremita' 0.998267); dcs/cs per nodo -1.578e-04 -8.673e-04 -1.576e-03; per estremita' -1.578e-04 -8.673e-04 -1.576e-03
+      k (grado 7): Lambda 6.000000 -> 6.987868 (per estremita' 0.998267); dcs/cs per nodo +1.302e-02 +7.606e-02 +1.475e-01; per estremita' -1.578e-04 -8.673e-04 -1.576e-03
+      l (grado 7): Lambda 6.000000 -> 6.987868 (per estremita' 0.998267); dcs/cs per nodo +1.302e-02 +7.606e-02 +1.475e-01; per estremita' -1.578e-04 -8.673e-04 -1.576e-03
+  v4: Delta H_tot -3.008040790e-01 = materia -6.480149e-02 + vuoto -2.451049e-01 + legame +9.102350e-03 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2047e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.200000 (per estremita' 0.800000); dcs/cs per nodo -7.368e-02 -3.043e-01 -4.430e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      i (grado 6): Lambda 6.000000 -> 4.800000 (per estremita' 0.800000); dcs/cs per nodo -2.222e-02 -1.111e-01 -1.852e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      j (grado 6): Lambda 6.000000 -> 4.800000 (per estremita' 0.800000); dcs/cs per nodo -2.222e-02 -1.111e-01 -1.852e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      k (grado 7): Lambda 6.000000 -> 5.600000 (per estremita' 0.800000); dcs/cs per nodo -6.452e-03 -3.448e-02 -6.098e-02; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      l (grado 7): Lambda 6.000000 -> 5.600000 (per estremita' 0.800000); dcs/cs per nodo -6.452e-03 -3.448e-02 -6.098e-02; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+  v5: Delta H_tot -2.334053164e-01 = materia -6.480149e-02 + vuoto -1.775461e-01 + legame +8.942222e-03 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2047e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 2.788549 (per estremita' 0.697137); dcs/cs per nodo -9.477e-02 -3.654e-01 -5.115e-01; per estremita' -3.799e-02 -1.785e-01 -2.831e-01
+      i (grado 6): Lambda 6.000000 -> 4.847477 (per estremita' 0.807913); dcs/cs per nodo -2.116e-02 -1.062e-01 -1.777e-01; per estremita' -2.116e-02 -1.062e-01 -1.777e-01
+      j (grado 6): Lambda 6.000000 -> 4.847477 (per estremita' 0.807913); dcs/cs per nodo -2.116e-02 -1.062e-01 -1.777e-01; per estremita' -2.116e-02 -1.062e-01 -1.777e-01
+      k (grado 7): Lambda 6.000000 -> 5.758249 (per estremita' 0.822607); dcs/cs per nodo -3.802e-03 -2.056e-02 -3.676e-02; per estremita' -1.923e-02 -9.733e-02 -1.639e-01
+      l (grado 7): Lambda 6.000000 -> 5.758249 (per estremita' 0.822607); dcs/cs per nodo -3.802e-03 -2.056e-02 -3.676e-02; per estremita' -1.923e-02 -9.733e-02 -1.639e-01
+### FLIP, L 24
+  v1: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v2: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v3: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v4: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v5: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +1.674177e-14 + legame +2.842171e-14 | V 3456.000000 -> 3456.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +2.220e-16 +1.554e-15 +2.665e-15
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +4.441e-16 +2.220e-15 +4.219e-15
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 -5.551e-16 -8.882e-16
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +4.441e-16 +2.442e-15 +4.219e-15
+### NASCITA, L 36
+  v1: Delta H_tot -8.548213678e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame -1.136868e-13 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2056e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.000000 (per estremita' 0.750000); dcs/cs per nodo -8.333e-02 -3.333e-01 -4.762e-01; per estremita' -2.941e-02 -1.429e-01 -2.326e-01
+      i (grado 6): Lambda 6.000000 -> 3.000000 (per estremita' 0.500000); dcs/cs per nodo -8.333e-02 -3.333e-01 -4.762e-01; per estremita' -8.333e-02 -3.333e-01 -4.762e-01
+      j (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 6.000000 (per estremita' 0.857143); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' -1.493e-02 -7.692e-02 -1.316e-01
+      l (grado 7): Lambda 6.000000 -> 6.000000 (per estremita' 0.857143); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' -1.493e-02 -7.692e-02 -1.316e-01
+  v2: Delta H_tot -1.435872887e-01 = materia -6.480149e-02 + vuoto +0.000000e+00 + legame -7.878580e-02 | V 7776.000000 -> 7782.000000 | la capacita' esatta [-2.0217e+02, 2.1991e+01], serve 2.2135e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 4.000000 (per estremita' 1.000000); dcs/cs per nodo -4.348e-02 -2.000e-01 -3.125e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      i (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 6): Lambda 6.000000 -> 6.000000 (per estremita' 1.000000); dcs/cs per nodo +0.000e+00 +0.000e+00 +0.000e+00; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v3: Delta H_tot -4.526435690e-02 = materia -6.480149e-02 + vuoto +0.000000e+00 + legame +1.953713e-02 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-2.0201e+02, 2.1974e+01], serve 2.2019e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.996916 (per estremita' 0.999229); dcs/cs per nodo -4.357e-02 -2.004e-01 -3.130e-01; per estremita' -7.014e-05 -3.857e-04 -7.010e-04
+      i (grado 6): Lambda 6.000000 -> 5.995374 (per estremita' 0.999229); dcs/cs per nodo -7.014e-05 -3.857e-04 -7.010e-04; per estremita' -7.014e-05 -3.857e-04 -7.010e-04
+      j (grado 6): Lambda 6.000000 -> 5.995374 (per estremita' 0.999229); dcs/cs per nodo -7.014e-05 -3.857e-04 -7.010e-04; per estremita' -7.014e-05 -3.857e-04 -7.010e-04
+      k (grado 7): Lambda 6.000000 -> 6.994603 (per estremita' 0.999229); dcs/cs per nodo +1.310e-02 +7.654e-02 +1.485e-01; per estremita' -7.014e-05 -3.857e-04 -7.010e-04
+      l (grado 7): Lambda 6.000000 -> 6.994603 (per estremita' 0.999229); dcs/cs per nodo +1.310e-02 +7.654e-02 +1.485e-01; per estremita' -7.014e-05 -3.857e-04 -7.010e-04
+  v4: Delta H_tot -3.008040790e-01 = materia -6.480149e-02 + vuoto -2.451049e-01 + legame +9.102350e-03 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2047e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 3.200000 (per estremita' 0.800000); dcs/cs per nodo -7.368e-02 -3.043e-01 -4.430e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      i (grado 6): Lambda 6.000000 -> 4.800000 (per estremita' 0.800000); dcs/cs per nodo -2.222e-02 -1.111e-01 -1.852e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      j (grado 6): Lambda 6.000000 -> 4.800000 (per estremita' 0.800000); dcs/cs per nodo -2.222e-02 -1.111e-01 -1.852e-01; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      k (grado 7): Lambda 6.000000 -> 5.600000 (per estremita' 0.800000); dcs/cs per nodo -6.452e-03 -3.448e-02 -6.098e-02; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+      l (grado 7): Lambda 6.000000 -> 5.600000 (per estremita' 0.800000); dcs/cs per nodo -6.452e-03 -3.448e-02 -6.098e-02; per estremita' -2.222e-02 -1.111e-01 -1.852e-01
+  v5: Delta H_tot -2.334053164e-01 = materia -6.480149e-02 + vuoto -1.775461e-01 + legame +8.942222e-03 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-1.6447e+02, 2.1814e+01], serve 2.2047e+01 | rotazione NON ESISTE
+      n (grado 4): Lambda 6.000000 -> 2.788549 (per estremita' 0.697137); dcs/cs per nodo -9.477e-02 -3.654e-01 -5.115e-01; per estremita' -3.799e-02 -1.785e-01 -2.831e-01
+      i (grado 6): Lambda 6.000000 -> 4.847477 (per estremita' 0.807913); dcs/cs per nodo -2.116e-02 -1.062e-01 -1.777e-01; per estremita' -2.116e-02 -1.062e-01 -1.777e-01
+      j (grado 6): Lambda 6.000000 -> 4.847477 (per estremita' 0.807913); dcs/cs per nodo -2.116e-02 -1.062e-01 -1.777e-01; per estremita' -2.116e-02 -1.062e-01 -1.777e-01
+      k (grado 7): Lambda 6.000000 -> 5.758249 (per estremita' 0.822607); dcs/cs per nodo -3.802e-03 -2.056e-02 -3.676e-02; per estremita' -1.923e-02 -9.733e-02 -1.639e-01
+      l (grado 7): Lambda 6.000000 -> 5.758249 (per estremita' 0.822607); dcs/cs per nodo -3.802e-03 -2.056e-02 -3.676e-02; per estremita' -1.923e-02 -9.733e-02 -1.639e-01
+### FLIP, L 36
+  v1: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v2: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v3: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v4: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +0.000000e+00 + legame +0.000000e+00 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 +0.000e+00 +0.000e+00
+  v5: Delta H_tot -2.603033913e-01 = materia -2.603034e-01 + vuoto +1.674177e-14 + legame +0.000000e+00 | V 7776.000000 -> 7776.000000 | la capacita' esatta [-5.5768e+02, 4.0841e+01], serve 4.1101e+01 | rotazione NON ESISTE
+      i (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +2.220e-16 +1.554e-15 +2.665e-15
+      j (grado 5): Lambda 6.000000 -> 5.000000 (per estremita' 1.000000); dcs/cs per nodo -1.786e-02 -9.091e-02 -1.538e-01; per estremita' +4.441e-16 +2.220e-15 +4.219e-15
+      k (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +0.000e+00 -5.551e-16 -8.882e-16
+      l (grado 7): Lambda 6.000000 -> 7.000000 (per estremita' 1.000000); dcs/cs per nodo +1.316e-02 +7.692e-02 +1.493e-01; per estremita' +4.441e-16 +2.442e-15 +4.219e-15
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): (v1) ridà i numeri di d999cca7 AL BIT (Delta H_tot e le tre parti, M, V)                     PASSA   L 24 True L 36 True
+  DEVE PASSARE (2): il flip: v2, v3, v4 = v1 AL BIT, v5 entro 1e-12 (l'estremo della sfera e' numerico)          PASSA   
+  DEVE PASSARE (3): V conservata entro 1e-14 per v1, v3, v4, v5; v2 cresce di 6 esatto                           PASSA   
+  PUO' FALLIRE (4): una regola con V conservata e |Delta H_tot| < 1e-10 per la nascita (con la rotazione di C3,  ### FALLISCE   nessuna
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/4 controlli passano; DEVE fallite: 0 []

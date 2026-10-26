@@ -86,6 +86,31 @@
 - ### **L'ERA 2:** ### **`cs = Lambda/(Lambda + Lambda_c)`** *(`flussi_parziali.cs`)* ### **e `dtau_nodo = dtau cs`.** ### ⚠ **LA MITOSI TOCCA `cs` DIRETTAMENTE, attraverso il GRADO:** ### **`Lambda_k = somma |phi_h|^2` sulle estremita' del nodo, e le estremita' sono quante il grado:** ### **un nodo a `4` e uno a `7` con lo stesso vuoto per estremita' hanno `Lambda` diversi, quindi `cs` diversi** *(e' gia' misurato: `DOMANDA-QUALE-FORMA-FISSA-CS`, «`Lambda_k = grado_k lambda_0`, correlazione col grado `1.0000`»)*.
 - ### **SEPARARE IL TEMPO DALLO SPAZIO** *(la caduta newtoniana da `cs`; la deflessione doppia dal numero dei nodi)* ### **vuole che `cs` NON veda il grado:** ### **`Lambda` per estremita'** *(`Lambda_k/grado_k`)* ### **o un'immersione che conservi `Lambda_k` del nodo:** ### **una scelta da fare PRIMA del codice.**
 
+### 3(f) LA DIVISIONE DEL VUOTO *(la parte 2 del mandato del `2026-10-26`; NIENTE scelte)*
+
+### **IL FATTO** *(`d999cca7`)*: ### **con `D7` anche per `phi` la nascita libera `8.548`** *(il vuoto `-8.483`)*: ### **il `-8.48` viene dalla REGOLA di trasporto di `phi`, non dalla mitosi.**
+
+- ### **`(a)` PERCHE' IL VUOTO UNIFORME E' IL MASSIMO:** ### **la parte del vuoto di `H_tot`** *(`energia_pesata.termini_di_h`)* ### **e' `-pi <phi|(I - P_u) + P_-|phi>`:** ### **`(I - P_u)` e `P_-` sono PROIETTORI, la forma e' `>= 0`, col segno `-pi` e' `<= 0`;** ### **vale `0` solo col vuoto uniforme per estremita'** *(`P_u phi = phi` su ogni nodo, `P_- phi = 0` su ogni arco)*. ### **QUINDI ogni regola che perturba il vuoto uniforme ne ABBASSA l'energia: o la regola lo lascia uniforme per estremita', o l'energia va altrove.** ### ⭐ **L'ALTROVE: il legame `N = rho ln(rho/(rho + Lambda))`, con `dN/dLambda < 0`:** ### **abbassare `Lambda` sotto la materia ALZA `H_tot`.**
+- ### **`(b)` LE REGOLE, misurate sulla carta** *(con lo strumento di `C3`)*:
+
+### **IL REFERTO:** `doc/referti_l2/divisione_vuoto.{txt,jsonl}` *(`csv/_divisione_vuoto.py` al commit `aac33f2f`; il task history `273cf8bc`)*. ### **`3/4`, nessun DEVE fallito; la PUO' FALLIRE `4` FALLISCE.**
+
+| la regola | `Delta H_tot` *(`L 36`)* | materia | vuoto | legame | `V` | `Lambda` per estremita' su `n, i, k` |
+|---|---|---|---|---|---|---|
+| `(v1)` `D7` anche per `phi` | `-8.548214` | `-0.064801` | `-8.483412` | `~1e-13` | conservata | `0.75`, `0.50`, `0.857` |
+| `(v2)` le nuove uniformi | `-0.143587` | `-0.064801` | `0` | `-0.078786` | ### **`+6`** | `1`, `1`, `1` |
+| `(v3)` la diluizione globale | `-0.045264` *(`-0.045311` a `L 24`)* | `-0.064801` | `0` | ### **`+0.019537`** | conservata | `0.99923` ovunque |
+| `(v4)` uniforme su `S` | `-0.300804` | `-0.064801` | `-0.245105` | `+0.009102` | conservata | `0.8` su `S` |
+| `(v5)` il massimo su `S` | `-0.233405` | `-0.064801` | `-0.177546` | `+0.008942` | conservata | `0.697`, `0.808`, `0.823` |
+
+- ### **`(v1)` RIDA' `d999cca7` AL BIT** *(il DEVE `1`)*; ### **il flip: le cinque regole COINCIDONO** *(`-0.260303`, tutto materia: nessuna estremita' nasce; il DEVE `2`)*; ### **le norme come dichiarato** *(il DEVE `3`)*.
+- ### ⭐ **IL LEGAME PAGA, COME PREVISTO DALLA FORMA, MA NON BASTA:** ### **`(v3)` e' la migliore** *(`-0.0453`)*: ### **la diluizione del vuoto sotto la materia ALZA `N` di `+0.0195`,** ### **contro la materia `-0.0648` che nessuna regola di `phi` tocca** *(e' `D7` su `psi`)*. ### **E il guadagno del legame NON svanisce con `L`:** ### **diluire `6` di vuoto su tutto il toro alza `N` di circa `6 rho/(rho + Lambda) = 0.098` in tutto, a ogni `L`** *(il resto e' il `-0.079` di `(v2)`)*.
+- ### **NESSUNA ROTAZIONE di `C3` porta il conto a `0`** *(per nessuna regola: il verso, come in `C3`)*.
+- ### **`cs`** *(`Lambda_c/Lambda_6 = 1`)*: ### **`(v1)` `-33%` al nodo nuovo e al padre** *(per nodo e per estremita' al padre)*; ### **`(v3)` per estremita' `-0.04%` ovunque, per nodo `-20%` al nodo nuovo e `+7.7%` ai nodi a `7`** *(e' il grado)*; ### **`(v4)` per estremita' `-11%` su tutto `S`.**
+
+- ### **`(c)` LA DOMANDA DI FONDO:** ### **«esiste una regola con `V` conservata e `Delta H_tot = 0` per la nascita?»** ### **SULLA FAMIGLIA PROVATA, NO** *(`(v1)`, `(v3)`, `(v4)`, `(v5)` e la rotazione di `C3` su ognuna)*. ### **E la forma dice perche', per OGNI regola che tocca solo `phi`:** ### **la materia** *(`D7` su `psi`)* ### **libera `0.0648`; il vuoto quadratico puo' solo scendere** *(`(a)`)*; ### **resta il legame, che sale solo diluendo il vuoto sotto la materia, e la diluizione massima con `V` conservata** *(spargere tutto il vuoto nuovo sul toro)* ### **e' `(v3)`, `+0.0195`.** ### ⚠ **NON e' una dimostrazione per TUTTE le regole:** ### **una regola che tolga vuoto SOTTO LA MATERIA e lo metta dove la materia non c'e'** *(non uniforme, quindi con un costo quadratico)* ### **non e' nella famiglia: e' la `(v6)` da provare, se Luca la vuole.** ### **Con lo stato di oggi** *(la coppia a `K` UNIFORME: la materia e' ovunque)* ### **«dove la materia non c'e'» non esiste: la domanda va rifatta su uno stato localizzato** *(un solitone)*.
+- ### **`(d)` L'ALBERO:** ### **`DEC-D6F-FORME-VUOTO`** *(presa; la sua nota dice che le forme «restano aperte»: il contrasto `3` del censimento)* ### **e' il posto di questa scelta:** ### **la regola di divisione del vuoto e' una FORMA del vuoto alla nascita.** ### **`DEC-QC-CONSERVATA`** *(presa: `M` e `V` ESATTE, `H_tot` al secondo ordine)*: ### **`(v2)` la viola** *(`V` cresce di `6`)*; ### **`(v3)` la rispetta ma non e' locale; `(v4)`, `(v5)` sono isometrie locali.** ### **E `D7` resta non presa** *(la scelta di Luca delle `08:57`)*: ### **la sua parte su `phi` e' esattamente cio' che questa sezione lascia aperto.**
+
 ## 4. IL LEGAME CON LA CURVATURA
 
 ### **LA MITOSI COME STRADA `D` di [[PROGETTO-CURVATURA]]:** ### **accanto ad `A1`** *(la lunghezza sugli archi: la massa per meta' dall'arco, la caduta `x1.50`, `31ee70cc`)*, ### **alla parte `2` sulla carta** *(la famiglia `alpha, beta`: una soluzione solo per `r <= 1`, `5aec4725`)* ### **e ad `A2`/`(C)`.** ### **Il vantaggio sulla carta: OGNI ARCO resta quello di oggi, quindi la massa nell'interno della griglia non e' toccata;** ### **la curvatura sta nei DIFETTI** *(i nodi a `4` e a `7`)*.
