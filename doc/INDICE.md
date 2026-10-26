@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 157 |
+| `FISICA` | `2` | 158 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 26 |
@@ -685,6 +685,7 @@
 | `PROBLEMI-CHK3` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | IL PIANO DEI PROBLEMI APERTI — per ciascuno: la domanda da chiudere · la misura  |
 | `PROGETTO-CURVATURA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DELLA CURVATURA DELLO SPAZIO: cs nelle lunghezze, gamma = 1, sulla c |
 | `PROGETTO-DRIVER-CAMMINATA` | FRONTE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il progetto del driver della camminata: tre opzioni, lo schema, il timbro, il si |
+| `PROGETTO-MASSA-COLLETTIVA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il progetto della massa collettiva: inventario, ipotesi di Luca, costituenti sen |
 | `PROGETTO-MITOSI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DELLA MITOSI NELL ERA 2, sulla carta: olonomia, forma sui triangoli, |
 | `PROGETTO-U1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DEL CAMPO U(1) SUGLI ARCHI: la luce del modello, sulla carta |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la conservazione modificata si conserva: si promuove a energia? |

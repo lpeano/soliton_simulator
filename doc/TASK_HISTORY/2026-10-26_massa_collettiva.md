@@ -22,3 +22,7 @@
 ## 3. TODO
 
 1. questo task history, da solo, con la voce `INDIRIZZO-MASSA-COLLETTIVA`; 2. il documento, la relazione, la voce del progetto; poi le parti `2` e `3`.
+
+## 4. IL RISULTATO
+
+### **`doc/PROGETTO_MASSA_COLLETTIVA.md`: le sezioni `(e)`, `(f)`, `(g)` per prime** *(l'ipotesi di Luca)*, ### **poi `(a)`-`(d)` e le previsioni del guardiano; nessuna scelta.**
