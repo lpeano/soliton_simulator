@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 156 |
+| `FISICA` | `2` | 157 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 26 |
@@ -448,6 +448,7 @@
 | `IN-RUN` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `INDICE-COLLAUDO-SCRITTURA` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **APERTA** |  | `crea-lotto` e `storico-commit` NON hanno un caso nel collaudo di `indice.py` |
 | `INDICE-LEGGERO` | FRONTE | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | l'indice pesa 169 KB e leggerlo intero non fa risparmiare contesto: serve un com |
+| `INDIRIZZO-MASSA-COLLETTIVA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l indirizzo di Luca: una massa e una velocita di gruppo collettive, non una mass |
 | `INERZIA-1` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | LA LEGGE DELL'INERZIA CEDE A k = 2, ED È UN DIFETTO DIMOSTRATO (misura 3, f8b27d |
 | `INERZIA-1(C)` | CURA | FISICA | 1 | ### **CHIUSA** |  | 1(C) — CURATA e SIGILLATA 3/6 il 2026-09-25: GIUSTA e INSUFFICIENTE / LA CURA TO |
 | `INTERO-BLOCCO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 7 volte, MAI definito in un registro) [INTERO-BLOCCO] |
