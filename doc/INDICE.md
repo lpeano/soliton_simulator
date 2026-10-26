@@ -299,11 +299,11 @@
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
 | `DOMANDA-CORRENTE-LOCALE-NON-ESISTE` | MISURA | FISICA | ENTRAMBE | ### **APERTA** |  | la corrente locale di E ESISTE per la parte lineare, portata misurata 3 archi |
 | `DOMANDA-D13-CONIUGATI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D13: i coniugati delle memorie -- tw come fase U(1) sull-arco? |
-| `DOMANDA-D7-DIPENDE-DA-FC` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D7 presa: il presidio P-ALB rifiuta, perche D7 dipende dalla coesione DEC-FC-COE |
+| `DOMANDA-D7-DIPENDE-DA-FC` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | D7 presa: il presidio P-ALB rifiuta, perche D7 dipende dalla coesione DEC-FC-COE |
 | `DOMANDA-D9-GEOMETRIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi? |
 | `DOMANDA-DOVE-STA-LA-C-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la C e decisa al punto F3 e nessuna legge della tabella la dichiara |
 | `DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE` | DECISIONE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | la scheda di Lambda_c non si genera dalla tabella: lo schema pretende valore E o |
-| `DOMANDA-DRIVER-CAMMINATA` | DECISIONE | INFRASTRUTTURA | 2 | ### **AGENDA** |  | il driver sui triangoli: solo il grafo della pipeline di prova, o il driver fa g |
+| `DOMANDA-DRIVER-CAMMINATA` | DECISIONE | INFRASTRUTTURA | 2 | ### **CHIUSA** |  | il driver sui triangoli: solo il grafo della pipeline di prova, o il driver fa g |
 | `DOMANDA-DUE-SOGLIE-SENZA-ERRORE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | due soglie senza l-errore da cui proteggono: tol in corrente.instrada e il limit |
 | `DOMANDA-E-NON-SI-CONSERVA-A-X-UNO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | E non si conserva nel regime in cui la saturazione lavora, e i termini non si co |
 | `DOMANDA-ESTREMITA-NUOVE-INIZIALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | con che psi e che phi nascono le estremita di un arco nuovo |
