@@ -20,3 +20,7 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. il documento, la relazione, l'indice.
+
+## 4. IL RISULTATO
+
+### **`doc/PROGETTO_DRIVER_CAMMINATA.md`: sette sezioni, sette domande per Luca; nessuna scelta.** ### **Una correzione mentre scrivevo:** ### **avevo elencato `_collauda_motore` fra chi chiama `tick`; non lo importa** *(lo importano `_collauda_tempo_proprio`, `_collauda_cs`, `_collauda_cs_centro`, `_collauda_cs_l1`, `_collauda_deriva`, `_collauda_scala`)*.
