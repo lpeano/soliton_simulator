@@ -496,7 +496,7 @@
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
-| `LUCE-MATERIA-CONO` | MISURA | FISICA | 2 | ### **AGENDA** |  | luce e materia attorno a un cono: tutte e due convergono di pi/3, senza 1/b (C2, |
+| `LUCE-MATERIA-CONO` | MISURA | FISICA | 2 | ### **CHIUSA** |  | luce e materia attorno a un cono: tutte e due convergono di pi/3, senza 1/b (C2, |
 | `LUCE-VINCOLO-LAMPI-GAMMA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | LA LUCE DEL MODELLO RISPETTA IL VINCOLO DEI LAMPI GAMMA? |
 | `LUNGA-BATTITO-CADUTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | la corsa da 1000 passi cade al passo 1: la stampa cita un contatore RINOMINATO |
 | `LUNGHEZZA-COME-SEGNALE` | FRONTE | METODO | 1 | ### **SOSPESA** |  | usare len(x) < n come segnale di <<nodo nuovo>> e una toppa implicita: serve una |

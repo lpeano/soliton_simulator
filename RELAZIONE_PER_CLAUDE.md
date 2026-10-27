@@ -21247,3 +21247,10 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **PEZZI-C2-PARZIALE CHIUSA: LA CURA 217bc812 HA PASSATO P-AB SENZA SPOSTARE NIENTE**
 
 - ### **[[PEZZI-C2-PARZIALE]] passa a `CHIUSA`** *(il criterio della voce: la corsa chiusa `e48e7414`, lo script nuovo committato, e `217bc812` passa `P-AB` senza spostare niente)*. ### **La coda: il mandato dopo `15df5c63`.**
+
+### 📌 **LUCE-MATERIA-CONO CHIUSA (LUCA, 15:44): LA MATERIA E LA LUCE CONVERGONO DI PI/3, NIENTE 1/B -- CON LE DUE CAUTELE, E UNA PRECISAZIONE SULLO 0.1%**
+
+- ### **LA DECISIONE DI LUCA** *(`2026-10-27`, `15:44`)*: ### **[[LUCE-MATERIA-CONO]] si chiude come prova superata** *(`e48e7414`)*: ### **la materia e la luce convergono di `pi/3`, niente `1/b`, il piatto senza deviazione.** ### **Lo stato e' `CHIUSA`** *(«superata» come prova passata; lo stato `SUPERATA` dell'indice vuole una voce che la sostituisca, e non c'e')*.
+- ### ⚠ **UNA PRECISAZIONE, dai referti:** ### **il messaggio dice «entro lo `0.1%`»:** ### **vale per la MATERIA** *(dal baricentro `1.04691`, `1.04638`, `1.04636`; dall'impulso `1.04665`, `1.04716`, `1.04720`; `pi/3 = 1.04720`)*, ### **non per la LUCE a `b 24`, `W 6`: `1.05034`** *(il fascio sopra fermato dalla guardia del bordo dopo `102` punti; `luce_materia_cono_2`)*; ### **la luce a `b 32` `1.04735`, a `b 40` `1.04653`, a `b 32` `W 9` `1.04690`.** ### **Nella chiusura sono scritti i valori, non la percentuale.**
+- ### **LE DUE CAUTELE, scritte nella chiusura:** ### **`1` la lettura delle valli** *(il fascio che attraversa la cucitura passa tutto in `K'`)* ### **e' da verificare, non derivata;** ### **`2` il principio di equivalenza vale qui per la geometria IMPOSTA, non per una gravita' che emerge dalla materia.**
+- ### **LA CODA:** ### **la torsione del vuoto aspetta le risposte delle `13:46`, che NON ho ricevuto** *(le domande: la strada della corrente del libro dei conti, e se la torsione si puo' misurare prima dello strumento)*; ### **quindi proseguo col mandato dopo `15df5c63`, la parte 1.**
