@@ -3097,3 +3097,11 @@ dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo refe
 - **La cura, non fatta** *(durante la corsa il file non si tocca, `CLAUDE.md` par.5)*: ### **un suffisso che non sia `.parziale`, fuori da `db_era2/` o col timbro che `P-AB` pretende.**
 - **Criterio di chiusura:** ### **la corsa di `C2` chiusa, lo script col suffisso nuovo committato, e un commit che passa `P-AB` senza spostare niente.**
 - **La cura, fatta** *(`2026-10-27`, a corsa chiusa: il referto e' `e48e7414`)*: ### **`PEZZI = db_era2_pezzi/`, il suffisso `.json`** *(`csv/_luce_materia_cono_3.py` `sha1-BYTE bebb5e26`)*; ### **`db_era2_pezzi/` in `.gitignore`;** ### **i `12` pezzi chiusi rinominati la' dentro** *(una ripresa li ritrova)*. ### **Il commit della cura passa `P-AB` senza spostare niente: CHIUSA.**
+
+## `[[PUNTO-FISSO-CS-SOLITONE]]` — il punto fisso di `cs` non converge col solitone `S1`, gia' al tick `0` *(aperto il 2026-10-27)*
+
+- **Trovato da:** ### **la misura della torsione del vuoto** *(`csv/_torsione_del_vuoto.py` `e4a4291a`, [[TORSIONE-DEL-VUOTO]])*.
+- **Che cosa succede:** ### **`tick.tick_con_cs(st, mot, par, lc, ())` col solitone `S1`** *(`N 1e5` `L 48`, `N 1e6` `L 81`, lo zero simmetrico, `lc` = la media di `Lambda` per nodo a `t 0` = `6.0`)* ### **ALZA al tick `0`: `120` giri, l'ultimo scarto `0.217` e `0.265`.** ### **Sul vuoto da solo, con lo stesso `lc`, converge** *(`2000` tick, il controllo `0`)*.
+- **Che cosa blocca:** ### **ogni misura con `cs` acceso e la materia presente.**
+- **La cura:** ### **non scelta:** ### **lo schema del punto fisso e' una decisione di Luca** *(la docstring di `tick.cs_al_centro`: relazionare, non scegliere)*.
+- **Criterio di chiusura:** ### **la decisione di Luca sullo schema, e una corsa col solitone in cui il punto fisso converge, o la decisione che `cs` col solitone si fa in un altro modo.**

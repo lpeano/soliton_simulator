@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 168 |
+| `FISICA` | `2` | 170 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -702,6 +702,7 @@
 | `PROVV-U-FISSE-TRE-SCENE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le matrici d-arco sono FISSE, in tre scene dichiarate: provvisorio |
 | `PROVV-VERSORI-NON-RELAZIONALI` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | i versori del riferimento locale sono DATI e non relazionali: provvisorio |
 | `PSI-FLASH` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | /psi/ SALTA di 1.6x nei passi con nascite: due siti ricalcolano psi dopo la mito |
+| `PUNTO-FISSO-CS-SOLITONE` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | il punto fisso di cs (tick.tick_con_cs) non converge col solitone S1, gia al tic |
 | `Q0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [Q0] |
 | `Q1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 13 volte, MAI definito in un registro) [Q1] |
 | `Q1a` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 5 volte, MAI definito in un registro) [Q1a] |
@@ -920,6 +921,7 @@
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
 | `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
+| `TORSIONE-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | la torsione del vuoto sugli archi attorno al solitone S1: lo srotolamento per ti |
 | `TRATTI-INTERNI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
 | `TS-1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la soglia è raggiungibile nel regime `A13`: frazione di archi (o cicli) oltre il |
 | `TS-2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | `tw = 0` e `tw = 4π` danno lo STESSO passo, byte per byte |
