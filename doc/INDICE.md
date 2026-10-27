@@ -493,7 +493,7 @@
 | `LAMBDA-INVARIANTE-OGNI-ARCO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mito |
 | `LEGAME-SCENE-GRANDI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2 |
 | `LETTORI-INDICE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
-| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti: lo strumento (A + B) c'e', 6/7; l'errore del passo NON va co |
+| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti: lo strumento (A + B) conta giusto; H_tot non devia come s^2  |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
@@ -921,7 +921,7 @@
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
 | `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
-| `TORSIONE-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | la torsione del vuoto: in fase illeggibile; in energia massima sul bordo del sol |
+| `TORSIONE-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | la torsione del vuoto: in energia massima sul bordo della buca, senza freno; in  |
 | `TRATTI-INTERNI` | MISURA | FISICA | 1 | ### **SOSPESA** |  | a 80 passi il calo di A(t) sta negli INTERNI, non nel varco: le regioni si contr |
 | `TS-1` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | la soglia è raggiungibile nel regime `A13`: frazione di archi (o cicli) oltre il |
 | `TS-2` | CRITERIO | METODO | 1 | ### **SOSPESA** |  | `tw = 0` e `tw = 4π` danno lo STESSO passo, byte per byte |

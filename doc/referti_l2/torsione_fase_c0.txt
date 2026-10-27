@@ -1,0 +1,16 @@
+[TIMBRO] _torsione_fase_c0.py  sha1-BYTE e5666e4b  committato e pulito
+==================================================================================================================================
+LA DEVE (0) DELLA TORSIONE IN FASE, CORRETTA DOPO I NUMERI (Luca, 17:51): ENTRO 1e-12 RELATIVO A 2 pi; E L'ESITO DELLA MISURA IN FASE
+==================================================================================================================================
+  i blob nel repo: csv/_torsione_fase_c0.py e5666e4b; csv/_torsione_del_vuoto.py 0c60cc94; doc/referti_l2/torsione_del_vuoto.jsonl 60cf0b46
+  la configurazione: TOLL_REL 1e-12 SCALA 2 pi = 6.283185307180 GUARDIA 1.570796
+  ### LA CORREZIONE, DICHIARATA DOPO I NUMERI: la convenzione simmetrica aggiunge operazioni in virgola mobile; 'al bit' non e' il criterio giusto (Luca, 17:51)
+----------------------------------------------------------------------------------------------------------------------------------
+  il referto rivalutato: csv/_torsione_del_vuoto.py 0c60cc94
+  il vuoto uniforme L 48 cs spento: max |theta| 1.014e-30 = 1.614e-31 di 2 pi
+  il vuoto uniforme L 48 cs acceso: max |theta| 2.829e-44 = 4.502e-45 di 2 pi
+  DEVE PASSARE (0'): il vuoto uniforme senza materia, la torsione entro 1e-12 relativo a 2 pi, cs spento e acceso PASSA
+----------------------------------------------------------------------------------------------------------------------------------
+  N 100000 L 48 cs spento: l'incremento massimo per tick 3.1416; 5799 archi oltre pi/2
+  N 1e+06 L 81 cs spento: l'incremento massimo per tick 3.1416; 15505 archi oltre pi/2
+### L'ESITO DELLA MISURA IN FASE: NON LEGGIBILE (gli incrementi a pi: lo srotolamento per tick non regge)
