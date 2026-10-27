@@ -80,7 +80,7 @@
 | | il lavoro | lo stato |
 |---|---|---|
 | 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(`76eecbf5`)* |
-| 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **FATTO, `0/3`, FERMO:** ### **la DEVE `(0)` per arrotondamento; l'additivo NON universale** *(il commit di `zero_del_vuoto.txt`)* |
+| 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **FATTO, `0/3`, FERMO:** ### **la DEVE `(0)` per arrotondamento; l'additivo NON universale** *(`43c3a298`)* |
 | 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **in coda, dopo lo zero** |
 
 ## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
