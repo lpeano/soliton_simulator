@@ -44,3 +44,12 @@
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script `csv/_torsione_energia.py`, committato prima della corsa; 3. la corsa; 4. il referto *(con l'avvertenza)*, la relazione, l'indice (`TORSIONE-DEL-VUOTO`).
+
+## 5. IL RISULTATO
+
+- ### **IL REFERTO:** `doc/referti_l2/torsione_energia.{txt,jsonl}` *(`csv/_torsione_energia.py` `sha1-BYTE 6f51d303`, committato e pulito; lo zero simmetrico vero, `conv("simm")`)*. ### **`1/2`: nessun DEVE fallito; la PUO' FALLIRE di Luca cade a META'.** ### **L'AVVERTENZA di Luca e' stampata nel referto:** ### *«la fase gira come l'energia solo per uno stato a energia definita; per un vuoto disturbato e' un'approssimazione, e la misura in fase non leggibile non e' una smentita dell'ipotesi».*
+- ### **I CONTROLLI:** ### **`(0)` il vuoto uniforme senza materia: la somma `0` al bit per `2000` tick: PASSA;** ### **`(u)` l'unita': la fase misurata di un'estremita' in un tick `-0.942477796077` = `-s eps`, il rapporto `1.000000000000`** *(e' la costante: non prova la scala delle differenze)*.
+- ### ⭐ **IL RITMO E' MASSIMO SUL BORDO DEL SOLITONE, APPENA FUORI DA `VICINO`, E CALA CON LA DISTANZA:** ### **la classe piu' alta `[8, 9)` a `N 1e5`** *(VICINO `<= 7.61`, `w_in 3.81`)* ### **e `[14, 15)` a `N 1e6`** *(VICINO `<= 13.26`, `w_in 6.63`)*: ### **a `2.1`-`2.2` larghezze, non dentro;** ### **i gusci decrescono a tutte e due le taglie:** ### **`5.04e-2 > 4.90e-2 > 1.75e-2`** *(`N 1e5`; i primi due quasi uguali)* ### **e `5.21e-2 > 2.18e-2 > 8.19e-3`** *(`N 1e6`)*. ### **La PUO' FALLIRE `(1)` FALLISCE per la sua prima meta'** *(il massimo in `VICINO`)*; ### **la seconda** *(cala con la distanza)* ### **regge.**
+- ### **IL PRIMO ARCO A `2 pi`:** ### **al tick `15`, a `r 7.50`** *(`N 1e5`)*; ### **al tick `16`, a `r 13.03`, `8` archi insieme** *(`N 1e6`)*: ### **sul bordo, prima della vita** *(`140`, `320`)*. ### **A `T_MAX` ci arrivano `5772` archi su `6912` e `15097` su `19683`.**
+- ### ⛔ **IL FRENO NON C'E':** ### **la media del ritmo per finestra di `250` tick CRESCE per tutta la corsa** *(`2.32e-2` -> `8.53e-2` a `N 1e5`; `1.38e-2` -> `6.87e-2` a `N 1e6`; in `VICINO` lo stesso, dopo un calo nella seconda finestra a `N 1e5`)*: ### **dopo la rottura il gas disturba tutto il toro, e la torsione d'energia cresce ovunque.**
+- ### **IL MINIMO DI `Lambda` per nodo** *(una lettura, per `eps` come rapporto)*: ### **`1.3e-2` e `9.1e-3`** *(contro `6` del vuoto uniforme)*.

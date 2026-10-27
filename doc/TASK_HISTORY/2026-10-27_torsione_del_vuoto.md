@@ -60,3 +60,9 @@
 ## 5. CORREZIONE *(dopo il referto; trovata dalla torsione in forma d'energia)*
 
 - ### ⛔ **UN MIO ERRORE:** ### **`BE.conv(LAM_ZERO)` con `LAM_ZERO = 0.5` da' la convenzione di OGGI** *(`_triangoli_bassa_energia.conv` prende il nome, `"simm"`)*: ### **i referti `76e85c0a` e `9a8f9afa` dicono «lo zero simmetrico» e sono allo zero di OGGI.** ### **La torsione e' una fase RELATIVA, e la convenzione cambia la dinamica per una fase globale** *(`762cb0e8`: `2 pi lambda` entro `8.9e-15`)*: ### **mi aspetto gli stessi numeri a meno dell'arrotondamento** *(ma con incrementi a `pi` l'arrotondamento puo' cambiare lo srotolamento)*. ### **Corretto lo script** *(`ZERO = "simm"`)*; ### **la corsa si rifa, e il referto lo dice.**
+
+## 6. LA CORSA RIFATTA COLLO ZERO SIMMETRICO
+
+- ### **LA FASE RIFATTA COLLO ZERO SIMMETRICO VERO** *(`csv/_torsione_del_vuoto.py` `sha1-BYTE 0c60cc94`; il referto `torsione_del_vuoto.{txt,jsonl}` riscritto)*: ### **`2/4`, DUE DEVE FALLITE.**
+- ### ⛔ **LA DEVE `(0)` ORA FALLISCE, PER L'ARROTONDAMENTO:** ### **sul vuoto uniforme senza materia `max |theta|` `1.0e-30`** *(`cs` spento)* ### **e `2.8e-44`** *(`cs` acceso)*, ### **contro «zero al bit»:** ### **allo zero simmetrico il vuoto gira di `-0.94` per tick, e le due estremita' di un arco prendono differenze di arrotondamento** *(l'incremento massimo `5.5e-17`)*. ### **Allo zero di OGGI il vuoto non gira, e la prova passava a `0`.** ### **La previsione «al bit» del guardiano vale per la fase allo zero di oggi, non a quello simmetrico;** ### **nella forma d'ENERGIA invece passa al bit** *(gli stessi termini per nodo)*.
+- ### **IL RESTO E' QUELLO DI PRIMA, a meno dell'arrotondamento** *(la convenzione e' una fase globale)*: ### **la guardia `g` fallisce** *(`5799` archi su `6912`, `15505` su `19683`)*; ### **il punto fisso di `cs` alza al tick `0`** *(gli scarti `0.254` e `0.292`)*; ### **le PUO' FALLIRE `NON MISURATE`.**

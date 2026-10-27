@@ -1,0 +1,34 @@
+[TIMBRO] _torsione_energia.py  sha1-BYTE 6f51d303  committato e pulito
+==================================================================================================================================
+LA TORSIONE DEL VUOTO NELLA SUA FORMA D'ENERGIA: per arco theta_E = -s sum_t (eps_i - eps_j), eps l'energia del vuoto per unita' di norma al nodo; il ritmo, il primo arco a 2 pi, il freno
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_torsione_energia.py 6f51d303; csv/_torsione_del_vuoto.py 0c60cc94; csv/_energia_del_legame.py 0197ecc0; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_solitoni_triangoli.py ec6fb68a; primo_ordine/energia_pesata.py 7889c512
+  la configurazione: T_MAX 2000 FATTORE 12 CASI (100000.0, 1000000.0) ZERO simm LAM_ZERO 0.5 R_VICINO 2 GUSCI (2.0, 4.0, 8.0) FINESTRA 250; da _solitone_vuoto_congelato: S 0.3 FORMA S1; cs SPENTO (PUNTO-FISSO-CS-SOLITONE)
+  L'UNITA': uno stato a energia definita E per unita' di norma gira di -s E per tick (74f99039, 762cb0e8); eps_k = (e_v(k) + 2 pi lambda Lambda_k)/Lambda_k; theta_E(a) = -s sum_t (eps_i - eps_j), i, j = inc.nodo[2a], inc.nodo[2a+1]
+  ### L'AVVERTENZA: la fase gira come l'energia solo per uno stato a energia definita; per un vuoto disturbato e' un'approssimazione, e la misura in fase non leggibile (76e85c0a) non e' una smentita dell'ipotesi (Luca, 16:58)
+----------------------------------------------------------------------------------------------------------------------------------
+### IL VUOTO UNIFORME SENZA MATERIA (la scena di N 100000, la materia a zero, 2000 tick)
+  L 48: max |theta_E| 0.000e+00; Lambda min 6.000000 (42 s)
+  (u) L'UNITA': la fase misurata di un'estremita' in un tick -0.942477796077; -s eps -0.942477796077; il rapporto 1.000000000000
+  DEVE PASSARE (0): il vuoto uniforme senza materia: la somma zero al bit per 2000 tick                          PASSA   max |theta_E| 0.0e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### N 100000 L 48: w_in 3.8054, VICINO r <= 7.61 (636 archi su 6912); Lambda min nel tempo 1.317e-02 (42 s)
+  omega per arco (rad per tick): la media 4.594e-02, il massimo 2.884e-01 (all'arco 3406, r 8.05); in VICINO 3.570e-02, fuori 4.698e-02
+  la classe di distanza con la media piu' alta: r in [8, 9), media 1.015e-01 (174 archi)
+  i gusci (da quante w_in, media, archi): 2 5.038e-02 1872; 4 4.900e-02 3920; 8 1.754e-02 484
+  per classe (r, media omega, archi): 0 5.84e-02 8; 1 5.17e-02 34; 2 3.37e-02 48; 3 3.04e-02 90; 4 3.44e-02 96; 5 2.29e-02 114; 6 3.13e-02 144; 7 6.21e-02 156; 8 1.02e-01 174; 9 5.83e-02 228; 10 4.70e-02 234; 11 4.80e-02 240; 12 3.78e-02 272; 13 4.16e-02 298; 14 3.89e-02 300; 15 3.58e-02 330; 16 5.41e-02 384; 17 8.22e-02 378; 18 9.60e-02 408; 19 8.67e-02 420; 20 6.18e-02 386; 21 4.08e-02 288; 22 1.69e-02 234; 23 8.85e-03 226; 24 1.11e-02 192; 25 1.37e-02 168; 26 1.32e-02 146; 27 1.72e-02 140; 28 2.04e-02 116; 29 1.62e-02 130; 30 1.31e-02 102; 31 1.19e-02 90; 32 1.23e-02 76; 33 1.29e-02 60; 34 2.18e-02 48; 35 2.04e-02 56; 36 3.07e-02 38; 37 2.73e-02 24; 38 2.97e-02 22; 39 1.81e-02 10; 40 1.95e-02 4
+  2 pi: il primo al tick 15, l'arco 4559 a r 7.50 (1 archi insieme); a T_MAX 5772 archi con |theta_E| >= 2 pi; max |theta_E| 576.7118
+  il freno, la media di |omega| per finestra di 250 tick: tutto 2.32e-02 4.38e-02 6.06e-02 7.23e-02 7.88e-02 8.19e-02 8.08e-02 8.53e-02; VICINO 4.10e-02 3.15e-02 4.65e-02 5.81e-02 7.56e-02 8.41e-02 8.37e-02 9.21e-02
+### N 1e+06 L 81: w_in 6.6297, VICINO r <= 13.26 (1902 archi su 19683); Lambda min nel tempo 9.066e-03 (143 s)
+  omega per arco (rad per tick): la media 2.917e-02, il massimo 3.976e-01 (all'arco 13242, r 14.50); in VICINO 1.430e-02, fuori 3.076e-02
+  la classe di distanza con la media piu' alta: r in [14, 15), media 1.060e-01 (300 archi)
+  i gusci (da quante w_in, media, archi): 2 5.213e-02 5754; 4 2.185e-02 10865; 8 8.186e-03 1162
+  per classe (r, media omega, archi): 0 1.17e-02 8; 1 1.70e-02 34; 2 1.05e-02 48; 3 7.73e-03 90; 4 1.09e-02 96; 5 1.02e-02 114; 6 1.08e-02 144; 7 1.10e-02 156; 8 1.21e-02 174; 9 1.20e-02 228; 10 1.28e-02 234; 11 1.56e-02 240; 12 2.04e-02 272; 13 6.18e-02 298; 14 1.06e-01 300; 15 7.85e-02 330; 16 5.81e-02 384; 17 5.28e-02 378; 18 5.25e-02 408; 19 5.04e-02 420; 20 5.03e-02 438; 21 5.00e-02 456; 22 4.45e-02 510; 23 4.59e-02 516; 24 3.61e-02 522; 25 4.02e-02 552; 26 3.08e-02 564; 27 3.48e-02 606; 28 2.84e-02 600; 29 2.86e-02 678; 30 3.13e-02 684; 31 4.07e-02 666; 32 3.81e-02 708; 33 2.56e-02 720; 34 2.68e-02 738; 35 2.23e-02 576; 36 2.32e-02 498; 37 1.81e-02 412; 38 7.30e-03 360; 39 3.74e-03 326; 40 5.24e-03 357; 41 4.17e-03 300; 42 4.56e-03 290; 43 5.92e-03 272; 44 1.02e-02 246; 45 8.76e-03 246; 46 8.16e-03 220; 47 1.03e-02 198; 48 8.66e-03 216; 49 9.24e-03 190; 50 8.65e-03 176; 51 8.68e-03 166; 52 8.66e-03 158; 53 8.72e-03 148; 54 8.11e-03 130; 55 7.99e-03 132; 56 8.08e-03 106; 57 1.07e-02 100; 58 7.60e-03 94; 59 1.13e-02 78; 60 9.06e-03 64; 61 7.31e-03 82; 62 8.79e-03 60; 63 8.38e-03 42; 64 6.37e-03 46; 65 4.19e-03 28; 66 2.59e-03 22; 67 1.77e-03 24; 68 4.18e-03 6
+  2 pi: il primo al tick 16, l'arco 6401 a r 13.03 (8 archi insieme); a T_MAX 15097 archi con |theta_E| >= 2 pi; max |theta_E| 795.2462
+  il freno, la media di |omega| per finestra di 250 tick: tutto 1.38e-02 2.23e-02 3.02e-02 3.63e-02 4.87e-02 5.61e-02 6.22e-02 6.87e-02; VICINO 1.51e-02 1.62e-02 1.70e-02 2.07e-02 2.75e-02 3.20e-02 3.64e-02 4.13e-02
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  PUO' FALLIRE (1): il ritmo e' massimo vicino al solitone (la classe piu' alta in VICINO) e cala con la distanz ### FALLISCE   N 100000 la classe [8, 9) contro VICINO 7.61; i gusci 5.04e-02 > 4.90e-02 > 1.75e-02; N 1e+06 la classe [14, 15) contro VICINO 13.26; i gusci 5.21e-02 > 2.18e-02 > 8.19e-03
+----------------------------------------------------------------------------------------------------------------------------------
+### L'AVVERTENZA: la fase gira come l'energia solo per uno stato a energia definita; per un vuoto disturbato e' un'approssimazione, e la misura in fase non leggibile (76e85c0a) non e' una smentita dell'ipotesi (Luca, 16:58)
+ESITO: 1/2 controlli passano; DEVE fallite: 0 []
