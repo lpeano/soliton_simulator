@@ -1,8 +1,8 @@
-[TIMBRO] _torsione_del_vuoto.py  sha1-BYTE e4a4291a  committato e pulito
+[TIMBRO] _torsione_del_vuoto.py  sha1-BYTE 8a518049  committato e pulito
 ==================================================================================================================================
 LA TORSIONE DEL VUOTO SUGLI ARCHI ATTORNO AL SOLITONE S1: il ritmo per arco contro la distanza, contro Delta cs e Delta e_vuoto ai capi; il primo arco a 2 pi; il freno
 ==================================================================================================================================
-  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_torsione_del_vuoto.py e4a4291a; csv/_energia_del_legame.py 0197ecc0; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_solitoni_triangoli.py ec6fb68a; primo_ordine/tick.py d9a59ff9; primo_ordine/flussi_parziali.py 1461182f
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_torsione_del_vuoto.py 8a518049; csv/_energia_del_legame.py 0197ecc0; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_solitoni_triangoli.py ec6fb68a; primo_ordine/tick.py d9a59ff9; primo_ordine/flussi_parziali.py 1461182f
   la configurazione: T_MAX 2000 FATTORE 12 CASI (100000.0, 1000000.0) LAM_ZERO 0.5 RAPPORTO 1 R_VICINO 2 FINESTRA 250 OGNI_E 10 GUARDIA 1.570796 SOGLIA_CORR 0.9 SINT ((0.7, True), (3.5, False)) TOLL_SINT 1e-12; da _solitone_vuoto_congelato: S 0.3 FORMA S1
   la torsione dell'arco a: arg(conj(phi_h[2a+1]) phi_h[2a]) srotolata tick per tick; il ritmo omega_a = theta_a(T_MAX)/T_MAX rad per tick; r_a la media delle distanze dei due nodi
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -12,10 +12,10 @@ LA TORSIONE DEL VUOTO SUGLI ARCHI ATTORNO AL SOLITONE S1: il ritmo per arco cont
 ----------------------------------------------------------------------------------------------------------------------------------
 ### IL VUOTO UNIFORME SENZA MATERIA (la scena di N 100000, la materia a zero, 2000 tick)
   N 0 L 48 cs spento: max |theta| 0.000e+00; d_max 0.000e+00; |z| min 1.000000; lambda_c None (21 s)
-  N 0 L 48 cs acceso: max |theta| 0.000e+00; d_max 0.000e+00; |z| min 1.000000; lambda_c 6.0 (86 s)
+  N 0 L 48 cs acceso: max |theta| 0.000e+00; d_max 0.000e+00; |z| min 1.000000; lambda_c 6.0 (101 s)
   DEVE PASSARE (0): il vuoto uniforme senza materia: la torsione zero al bit, cs spento e acceso                 PASSA   cs spento max|theta| 0.0e+00; cs acceso max|theta| 0.0e+00
 ----------------------------------------------------------------------------------------------------------------------------------
-### N 100000 L 48 cs spento (lambda_c None): w_in 3.8054, VICINO r <= 7.61 (636 archi su 6912); d_max 3.1416; |z| min 0.000015; i giri del punto fisso max None (19 s)
+### N 100000 L 48 cs spento (lambda_c None): w_in 3.8054, VICINO r <= 7.61 (636 archi su 6912); d_max 3.1416; |z| min 0.000015; i giri del punto fisso max None (25 s)
   ### LA GUARDIA: 5794 archi su 6912 con un incremento oltre pi/2, a r da 0.50 a 40.28; il loro |z| minimo da 1.54e-05 a 1.43e-01 (gli altri archi: |z| minimo da 2.31e-03)
   |omega| per arco: la media 2.198e-02, il massimo 1.979e-01 (all'arco 6172, r 17.76); in VICINO 2.106e-02, fuori 2.207e-02
   la classe di distanza con la media piu' alta: r in [17, 18), media 5.291e-02 (378 archi)
@@ -24,7 +24,7 @@ LA TORSIONE DEL VUOTO SUGLI ARCHI ATTORNO AL SOLITONE S1: il ritmo per arco cont
   2 pi: il primo al tick 14, l'arco 4706 a r 8.50 (1 archi insieme); a T_MAX 4896 archi con |theta| >= 2 pi; max |theta| 395.7817
   il freno, la media di |omega| per finestra di 250 tick: tutto 1.09e-02 2.50e-02 3.43e-02 4.31e-02 4.84e-02 5.20e-02 5.29e-02 5.34e-02; VICINO 1.05e-02 2.56e-02 3.61e-02 4.47e-02 5.22e-02 6.08e-02 7.87e-02 7.38e-02
   ### N 100000 cs True: IL PUNTO FISSO DI cs ALZA: al tick 0: il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 2.174e-01): il mandato dice di RELAZIONARE coi numeri e NON di scegliere un altro schema, quindi questo ALZA invece di fermarsi a un valore qualunque
-### N 1e+06 L 81 cs spento (lambda_c None): w_in 6.6297, VICINO r <= 13.26 (1902 archi su 19683); d_max 3.1416; |z| min 0.000004; i giri del punto fisso max None (59 s)
+### N 1e+06 L 81 cs spento (lambda_c None): w_in 6.6297, VICINO r <= 13.26 (1902 archi su 19683); d_max 3.1416; |z| min 0.000004; i giri del punto fisso max None (75 s)
   ### LA GUARDIA: 15535 archi su 19683 con un incremento oltre pi/2, a r da 0.50 a 66.27; il loro |z| minimo da 3.95e-06 a 1.19e-01 (gli altri archi: |z| minimo da 3.73e-04)
   |omega| per arco: la media 1.286e-02, il massimo 1.082e-01 (all'arco 13482, r 16.02); in VICINO 1.039e-02, fuori 1.312e-02
   la classe di distanza con la media piu' alta: r in [30, 31), media 2.225e-02 (684 archi)
@@ -36,7 +36,7 @@ LA TORSIONE DEL VUOTO SUGLI ARCHI ATTORNO AL SOLITONE S1: il ritmo per arco cont
 ----------------------------------------------------------------------------------------------------------------------------------
 ### I CRITERI
   DEVE PASSARE (g): in ogni corsa col solitone l'incremento per tick sotto pi/2 (lo srotolamento valido)         ### FALLISCE   N 100000 cs False 3.1416; N 1e+06 cs False 3.1416 -- CORSE MANCANTI
-  PUO' FALLIRE (1): con cs acceso il ritmo e' massimo vicino al solitone (la classe di distanza con la media piu ### FALLISCE   
-  PUO' FALLIRE (2): con cs acceso il ritmo e' proporzionale a Delta cs (Pearson > 0.9)                           ### FALLISCE   
+  PUO' FALLIRE (1): con cs acceso il ritmo e' massimo vicino al solitone (la classe di distanza con la media piu NON MISURATA   mancano le corse con cs acceso a N 100000, 1e+06 (il punto fisso di cs alza)
+  PUO' FALLIRE (2): con cs acceso il ritmo e' proporzionale a Delta cs (Pearson > 0.9)                           NON MISURATA   mancano le corse con cs acceso a N 100000, 1e+06 (il punto fisso di cs alza)
 ----------------------------------------------------------------------------------------------------------------------------------
-ESITO: 3/6 controlli passano; DEVE fallite: 1 ["DEVE PASSARE (g): in ogni corsa col solitone l'incremento per tick sotto pi/2 (lo srotolamento valido)"]
+ESITO: 3/4 controlli passano; DEVE fallite: 1 ["DEVE PASSARE (g): in ogni corsa col solitone l'incremento per tick sotto pi/2 (lo srotolamento valido)"]; NON MISURATE: 2
