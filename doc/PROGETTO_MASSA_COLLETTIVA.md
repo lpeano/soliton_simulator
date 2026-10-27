@@ -57,6 +57,9 @@
 
 ## (d) LE DOMANDE PER LUCA
 
+### ⭐ **LE RISPOSTE DI LUCA, `2026-10-27`, `00:58`** *(sulla raccomandazione del guardiano)*: ### **`(2)` per l'ESISTENZA di un solitone conta la DINAMICA sul reticolo col tick intero, non il risolutore d'inviluppo** *(`bcbd1f40` lo mostra: il risolutore trova un oggetto che la dinamica disfa in `320` tick)*; ### **`(3)` la SCOMPOSIZIONE dell'energia a riposo** *(la misura `(e)`)* ### **va PRIMA della relazione energia-impulso, e la relazione energia-impulso solo su un oggetto STABILE.** ### **APERTE: `(1)` `S1` contro `S4`; `(4)` lavorare a `s = 1`; `(5)` lo spettro del gas a `s = 1`** *(in coda)*.
+
+
 1. ### **`S1` contro `S4`** *(`DOSSIER_S1_S4.md` §`7`, da aggiornare con le parti `2` e `3`)*: ### **`S1` torna alla particella nuda a densita' nulla e lega solo da `N 100`; `S4` lega da `N 10` ma non torna alla particella nuda** *(`alpha_4(0) = -pi`)*: ### **quale delle due proprieta' pesa di piu'?**
 2. ### **Il risolutore d'inviluppo** *(il vuoto fisso)* ### **basta per l'esistenza sui triangoli, o la misura deve essere solo la DINAMICA sul reticolo col vuoto che risponde?**
 3. ### **L'ipotesi delle `09:08`: la misura `(e)`** *(la frazione del legame nell'energia a riposo)* ### **va fatta PRIMA della relazione energia-impulso?**
