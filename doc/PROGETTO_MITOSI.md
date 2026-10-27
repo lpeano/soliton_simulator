@@ -42,6 +42,12 @@
 | `(a4)` la fase della camminata | la fase di `psi` sull'arco | -- | ### **non invariante di gauge** *(come `(a2)`)*, ### **salvo un anello di Wilson** | -- |
 | `(a5)` il FLUSSO di norma sull'arco *(`J` integrato)* | non un'olonomia: un conteggio di carica | -- | non e' un quanto | -- |
 
+### ⭐ **L'IPOTESI DI LUCA E DEL GUARDIANO** *(`2026-10-27`, `13:06`-`13:09`; un'IPOTESI, NON una legge; [[LIBRO-DEI-CONTI]], [[PROGETTO-MITOSI]])*
+
+- ### **L'innesco dell'era `1`** *(la torsione dell'arco a `2 pi`)* ### **e' un criterio d'ENERGIA scritto come FASE:** ### **la differenza di fase fra i capi di un arco cresce come la differenza di energia** *(di frequenza)* ### **per il tempo;** ### **`2 pi` e' un quanto d'AZIONE, non d'energia.**
+- ### **Dove `cs` differisce fra i due capi** *(vicino a una massa)* ### **la fase relativa cresce piu' in fretta:** ### **la mitosi scatterebbe dove c'e' gravita'** *(il tempo curvo che produce lo spazio curvo, il legame che da' `gamma = 1`)*.
+- ### **LA MISURA CHE LA METTE ALLA PROVA** *(l'aggiunta al mandato del libro dei conti; nessuna nascita, solo la misura)*: ### **sulla corsa del solitone `S1` col tick intero** *(`N 1e5` `L 48`, `N 1e6` `L 81`, lo zero simmetrico, `2000` tick, `cs` spento e acceso a `lambda_c = Lambda`)*: ### **per ogni arco la torsione `(a3)` srotolata nel tempo, il ritmo contro la distanza dal centro, il primo arco e il primo tick a `2 pi`, quanti archi ci arrivano;** ### **il ritmo contro la differenza di `cs` ai capi** *(la previsione: proporzionale)* ### **e contro la differenza di energia del vuoto ai capi;** ### **e se il ritmo cala nel tempo** *(un freno naturale)*, ### **senza inventarne uno.** ### **NON ANCORA ESEGUITA.**
+
 ### 3(b) LA FORMA SUI TRIANGOLI
 
 | l'opzione | i gradi | il costo | come si misura |
