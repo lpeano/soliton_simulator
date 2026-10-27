@@ -21436,3 +21436,30 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **DOVE, per regione** *(`F0` alla vita)*: ### **VICINO il vuoto `-1.22e3`, LONTANO `+3.70e3`:** ### **il vuoto vicino al solitone cede ancora, quello lontano prende di piu'.** ### **La strada `A` sul disco `2 w_in`:** ### **dopo la vita entra `+0.147` ed esce `-0.137`** *(`N |e_K(0)|`; `3038` tick in entrata su `5840`)*.
 - ### **CHE COSA VUOL DIRE PER LA DOMANDA `(b)` DELLA MAPPA** *(il vuoto in cima e' la causa dei due problemi?)*: ### **il verso dello scambio SI'** *(dal fondo il vuoto prende)*; ### **la vita del solitone solo IN PARTE** *(`1.6`-`1.9` volte, non `4`)*: ### **c'e' un'altra causa dello scioglimento oltre al vuoto in cima.** ### **Le prossime decisioni sono di Luca.**
 - ### **LA MAPPA aggiornata nello stesso commit** *(la domanda `(b)`, la coda, la riga `16` di che cosa funziona)*.
+
+### 📌 **IL MANDATO DELLE 22:59 (IL SOLITONE CON LA SUA BUCA) RICEVUTO, IN CODA DOPO LO ZERO DEL VUOTO -- E IL TESTO DELL'IPOTESI DELLE 01:26, CHE NEL REPO NON C'ERA** *([[MAPPA-DEL-LAVORO]], [[PROGETTO-MITOSI]], [[VUOTO-SUL-FONDO]])*.
+
+- ### **IL MANDATO DELLE `22:59`** *(il solitone con la sua buca: la rampa del vuoto, l'equilibrio comune di materia e vuoto; promosso dalla lista in attesa di [[MAPPA-DEL-LAVORO]])* ### **e' RICEVUTO, in coda DOPO l'ipotesi dello zero del vuoto** *(come dice il mandato)*.
+- ### **L'ORDINE DELLA CODA** *(`PRECEDENZA-IN-CODA`)*: ### **`1` l'ipotesi di Luca sullo zero del vuoto** *(01:26)*; ### **`2` il solitone con la sua buca** *(22:59)*.
+- ### ⛔ **IL TESTO DELL'IPOTESI DELLE `01:26` NON ERA NEL REPO:** ### **c'era solo il nome in coda** *(«lo spostamento locale dello zero e l'universalita'»)*. ### **Lo riporto qui, alla lettera, dalla conversazione** *(la regola delle `21:41`: lo stato nel repo)*; ### **e l'ipotesi va in `doc/PROGETTO_MITOSI.md` 3(c) come ipotesi da provare, come chiede il mandato.**
+
+```
+AGGIUNTA IN CODA (DOPO la parte 1-2 del mandato del 2026-10-27 e DOPO la materia di C2 corretta) -- L'IPOTESI DI LUCA SULLO ZERO DEL VUOTO
+
+L'IPOTESI DI LUCA (2026-10-27 01:26), da scrivere in doc/PROGETTO_MITOSI.md sezione 3(c) come ipotesi da provare, NON come legge: "l'energia liberata dalla nascita di un nodo sposta lo zero del vuoto uniforme".
+IL PERCHE' (d999cca7, f7ee87a9): la nascita libera energia (v1 -8.548, la migliore v3 -0.045) e il vuoto uniforme, al massimo della sua forma, non la puo' assorbire come disordine (ogni disordine lo abbassa: un sistema a "temperatura negativa"). Lo spostamento dello zero e' un altro canale.
+
+LA MISURA SULLA CARTA (in memoria, nessun file del nucleo):
+  (0) IL CONTROLLO: uno spostamento UNIFORME dello zero (lo stesso delta su tutti i nodi) e' una fase globale: la densita' di materia e vuoto al bit con e senza, per 200 tick (M, V, rho, phi in modulo).
+  (1) QUANTO SERVE: il delta locale che assorbirebbe Delta E della nascita (v1 e v3), delta = Delta E / (la norma locale su cui agisce), nei due casi: (i) lo zero del solo vuoto; (ii) lo zero di tutti i pezzi (materia e vuoto). Riporta delta in unita' di lambda* = 1/2.
+  (2) LA PROVA CHE DECIDE, L'UNIVERSALITA': un profilo locale di delta (un gradino liscio o una gaussiana larga, dichiarati PRIMA) sulla scena a triangoli; pacchetti delle due bande della coppia e a eps 0 e 0.5 (come le misure di caduta di 7daa8840); l'accelerazione nel gradiente di delta, nei casi (i) e (ii). Confronto con la caduta da un gradiente di s (Hamilton) alla stessa scena.
+  (3) LA VARIANTE PROPORZIONALE: delta proporzionale all'energia locale invece che additivo (dichiara la forma PRIMA): stesse misure di (2).
+PREVISIONI (dal guardiano, scritte PRIMA):
+  DEVE PASSARE: (0) al bit.
+  PUO' FALLIRE: (2) l'accelerazione e' la stessa per le due bande e per eps 0 e 0.5 entro il 2% (il guardiano si aspetta di NO per lo spostamento additivo: agisce come un potenziale uguale per tutti, e accelera di piu' cio' che pesa meno).
+  PUO' FALLIRE: (3) la variante proporzionale e' universale entro il 2%.
+  LETTURA: delta di (1) contro 1/2 (lo zero simmetrico): piccolo o grande?
+  Se lo zero si muove, l'universalita' che fisso' lambda* = 1/2 va ricontrollata: dillo nel referto.
+
+FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
+```

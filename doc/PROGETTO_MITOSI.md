@@ -86,6 +86,12 @@
 - ### **Le regole della nascita di `f7ee87a9` non si applicano: `v1`** *(`D7`: le estremita' nuove nella direzione `chiv/|chiv|`, `chiv` la somma di `phi` sul padre)* ### **e' `0/0`;** ### **`v2`-`v5` sono scritte per il vuoto uniforme.**
 - ### **LA DOMANDA:** ### **con un vuoto la cui somma per nodo e' `0`, la regola della nascita e' una SCELTA DELLA FORMA DEL VUOTO** *(`D6f`)*, ### **da fare in questo progetto** *(che cosa porta il vuoto nelle estremita' nuove: il flusso, la sua direzione, il grado `!= 6`)*. ### **Non decisa; `(c-ii)` del mandato dopo `15df5c63` e' SALTATA in quel giro.**
 
+### ❓ **L'IPOTESI DI LUCA SULLO ZERO DEL VUOTO** *(`2026-10-27`, `01:26`; un'IPOTESI da provare, NON una legge)*
+
+- ### **«L'energia liberata dalla nascita di un nodo sposta lo zero del vuoto uniforme».**
+- ### **Il perche'** *(`d999cca7`, `f7ee87a9`)*: ### **la nascita libera energia** *(`v1` `-8.548`, la migliore `v3` `-0.045`)* ### **e il vuoto uniforme, al massimo della sua forma** *(`787296da`)*, ### **non la puo' assorbire come disordine** *(ogni disordine lo abbassa: un sistema a «temperatura negativa»)*; ### **lo spostamento dello zero e' un altro canale.**
+- ### **La prova che decide: l'UNIVERSALITA'** *(un profilo locale dello zero fa cadere allo stesso modo le due bande e i due `eps`?)*. ### **In coda** *(la mappa, sezione `6`)*.
+
 ### 3(d) IL PROFILO CHE LA GRAVITA' CHIEDE
 
 - ### **PER `gamma = 1`:** ### **le lunghezze proprie crescono di `|Phi|`** *(`g_ij = (1 + 2|Phi|) delta_ij` a campo debole)*: ### **in 2D l'AREA propria di `2|Phi|`** *(in 3D il volume di `3|Phi|`)*: ### **la frazione di nodi in piu' attesa attorno a una massa e' `~2|Phi|` per unita' d'area.**
