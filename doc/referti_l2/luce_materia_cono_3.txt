@@ -1,0 +1,46 @@
+[TIMBRO] _luce_materia_cono_3.py  sha1-BYTE ce06a8af  committato e pulito
+==================================================================================================================================
+C2, LA MATERIA RIFATTA: il segno del tempo corretto, q 1.0, W 12, il tempo dal percorso, l'angolo dall'impulso medio; e la prova a vuoto sulla luce
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_luce_materia_cono_3.py ce06a8af; csv/_luce_materia_cono_2.py 6775130a; csv/_luce_materia_cono.py 3209518c; csv/_u1_prototipo.py d073761c
+  la configurazione: X0 -55 BB (24.0, 32.0, 40.0) Q_MAT 0.7 W_MAT 8 V_MAT 0.1005 W_LUCE 6 L_USCITA 30 DT_MAT 10 FATTORE_BORDO 3 USCITA {6: (4, 5, 0, 1), 5: (0, 1)} INGRESSO (2, 3) R_PROVA 300 B_PROVA 32 TOLL_PROVA 0.01 TOLL_PI3 0.05 TOLL_CHIAVE 0.1
+  IL RAGGIO DALLA REGOLA: L_tot 155.1880, la sorgente a 68.0074, l'inraggio >= 533.5714: R = 617; il tempo massimo della materia = il percorso / 0.1005
+----------------------------------------------------------------------------------------------------------------------------------
+  LA PROVA A VUOTO (il cono di lato 300, b 32, la luce): dall'impulso sopra +0.00104 sotto +1.04714 -> la convergenza +1.04610; dal baricentro +1.04735 (105 s)
+  DEVE PASSARE (prova): la lettura dall'impulso ridà pi/3 entro l'1% sulla luce                                  PASSA   +1.04610
+  il disco a 6 settori di lato 617: 1143919 nodi, 3428052 archi (249 s)
+  materia disco 6 b   24 lato +1: dal baricentro -0.00000 (punti 25/77); dall'impulso +0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.2e-139; T_max 1428 (3013 s)
+  materia disco 6 b   24 lato -1: dal baricentro +0.00000 (punti 24/78); dall'impulso -0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.2e-139; T_max 1428 (3014 s)
+  ### materia disco 6 b 24: LA CONVERGENZA dal baricentro +0.00000, dall'impulso -0.00000 (pi/3 = 1.04720)
+  materia disco 6 b   32 lato +1: dal baricentro -0.00000 (punti 22/92); dall'impulso +0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.6e-113; T_max 1525 (3188 s)
+  materia disco 6 b   32 lato -1: dal baricentro +0.00000 (punti 20/95); dall'impulso -0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 4.2e-114; T_max 1525 (3187 s)
+  ### materia disco 6 b 32: LA CONVERGENZA dal baricentro +0.00000, dall'impulso -0.00000 (pi/3 = 1.04720)
+  materia disco 6 b   40 lato +1: dal baricentro +0.00000 (punti 17/108); dall'impulso +0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.7e-91; T_max 1621 (3372 s)
+  materia disco 6 b   40 lato -1: dal baricentro +0.00000 (punti 16/108); dall'impulso -0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.7e-91; T_max 1621 (3350 s)
+  ### materia disco 6 b 40: LA CONVERGENZA dal baricentro -0.00000, dall'impulso -0.00000 (pi/3 = 1.04720)
+  il disco a 5 settori di lato 617: 953266 nodi, 2856710 archi (205 s)
+  materia disco 5 b   24 lato +1: dal baricentro -0.00069 (punti 25/77); dall'impulso +0.00054; la frazione uscita 0.999; il peso in K 1.0000 -> 0.9998; la guardia 1.2e-139; T_max 1428 (3393 s)
+  materia disco 5 b   24 lato -1: dal baricentro +1.04622 (punti 24/40); dall'impulso +1.04719; la frazione uscita 1.000; il peso in K 1.0000 -> 0.0000; la guardia 1.2e-139; T_max 1428 (3660 s)
+  ### materia disco 5 b 24: LA CONVERGENZA dal baricentro +1.04691, dall'impulso +1.04665 (pi/3 = 1.04720)
+  materia disco 5 b   32 lato +1: dal baricentro -0.00003 (punti 22/92); dall'impulso +0.00005; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.6e-113; T_max 1525 (3745 s)
+  materia disco 5 b   32 lato -1: dal baricentro +1.04634 (punti 20/44); dall'impulso +1.04720; la frazione uscita 1.000; il peso in K 1.0000 -> 0.0000; la guardia 4.2e-114; T_max 1525 (3252 s)
+  ### materia disco 5 b 32: LA CONVERGENZA dal baricentro +1.04638, dall'impulso +1.04716 (pi/3 = 1.04720)
+  materia disco 5 b   40 lato +1: dal baricentro -0.00000 (punti 17/108); dall'impulso +0.00000; la frazione uscita 1.000; il peso in K 1.0000 -> 1.0000; la guardia 1.7e-91; T_max 1621 (3171 s)
+  materia disco 5 b   40 lato -1: dal baricentro +1.04636 (punti 16/47); dall'impulso +1.04721; la frazione uscita 1.000; il peso in K 1.0000 -> 0.0000; la guardia 1.7e-91; T_max 1621 (2942 s)
+  ### materia disco 5 b 40: LA CONVERGENZA dal baricentro +1.04636, dall'impulso +1.04720 (pi/3 = 1.04720)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (0): il pacchetto di materia nella banda entro 1e-10                                              PASSA   9.0e-32
+  DEVE PASSARE (1): sul PIATTO nessuna deviazione dal baricentro, entro 0.1/(|q| W) = 0.0179, i due fasci, a ogn PASSA   24 so -0.0000 / impulso +0.0000; 24 so +0.0000 / impulso -0.0000; 32 so -0.0000 / impulso +0.0000; 32 so +0.0000 / impulso -0.0000; 40 so +0.0000 / impulso +0.0000; 40 so +0.0000 / impulso -0.0000
+  PUO' FALLIRE (2): la MATERIA sul cono converge di pi/3 entro il 5% a ogni b (dal baricentro)                   PASSA   +1.04691 +1.04638 +1.04636
+  il controllo, dall'impulso medio: +1.04665 +1.04716 +1.04720
+  DEVE FALLIRE, PER LA CHIAVE GIUSTA (3): la materia va come 1/b; la chiave: conv(b 24)/conv(b 40) entro il 10%  PASSA   1.0005
+### LE VALLI: la frazione del peso in K all'uscita, fascio per fascio (una lettura)
+  disco 6 b 24: sopra 1.0000, sotto 1.0000 (all'ingresso 1.0000, 1.0000)
+  disco 6 b 32: sopra 1.0000, sotto 1.0000 (all'ingresso 1.0000, 1.0000)
+  disco 6 b 40: sopra 1.0000, sotto 1.0000 (all'ingresso 1.0000, 1.0000)
+  disco 5 b 24: sopra 0.9998, sotto 0.0000 (all'ingresso 1.0000, 1.0000)
+  disco 5 b 32: sopra 1.0000, sotto 0.0000 (all'ingresso 1.0000, 1.0000)
+  disco 5 b 40: sopra 1.0000, sotto 0.0000 (all'ingresso 1.0000, 1.0000)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 5/5 controlli passano; DEVE fallite: 0 []
