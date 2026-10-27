@@ -21243,3 +21243,7 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 ### 📌 **LA CURA DI PEZZI-C2-PARZIALE: I PEZZI DI C2 IN db_era2_pezzi/ COL SUFFISSO .json -- P-AB NON LI VEDE PIU**
 
 - ### **`csv/_luce_materia_cono_3.py` scrive ora i pezzi chiusi in `db_era2_pezzi/c2m_*.json`** *(`sha1-BYTE bebb5e26`; era `ce06a8af`)*, ### **`db_era2_pezzi/` e' in `.gitignore`, e i `12` pezzi chiusi sono rinominati la' dentro** *(una ripresa li ritrova tutti e `12`: controllato)*. ### **Il referto di `C2` resta di `ce06a8af`, al commit `e48e7414`.** ### **La voce [[PEZZI-C2-PARZIALE]] si chiude nel commit dopo, citando questo** *(il criterio: un commit che passa `P-AB` senza spostare niente)*.
+
+### 📌 **PEZZI-C2-PARZIALE CHIUSA: LA CURA 217bc812 HA PASSATO P-AB SENZA SPOSTARE NIENTE**
+
+- ### **[[PEZZI-C2-PARZIALE]] passa a `CHIUSA`** *(il criterio della voce: la corsa chiusa `e48e7414`, lo script nuovo committato, e `217bc812` passa `P-AB` senza spostare niente)*. ### **La coda: il mandato dopo `15df5c63`.**

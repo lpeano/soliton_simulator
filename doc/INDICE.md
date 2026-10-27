@@ -659,7 +659,7 @@
 | `PERC-TW-MORTA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | perc_tw e STATO MORTO: scritta sempre a zero da quattro siti di nascita, e NESSU |
 | `PERCHE-NON-LEGA` | TEORIA | FISICA | 2 | ### **AGENDA** |  | perche- nessun termine locale lega in 3D: quattro ipotesi, una verificata |
 | `PESO-MAX` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | partecipazioni multiple: l'opacita' di un nodo e' il MAX su tutte le masse, non  |
-| `PEZZI-C2-PARZIALE` | DIFETTO | INFRASTRUTTURA | 2 | ### **AGENDA** |  | i pezzi chiusi della corsa di C2 si chiamano .parziale, e P-AB rifiuta ogni comm |
+| `PEZZI-C2-PARZIALE` | DIFETTO | INFRASTRUTTURA | 2 | ### **CHIUSA** |  | i pezzi chiusi della corsa di C2 si chiamano .parziale, e P-AB rifiuta ogni comm |
 | `PHI-FUORI-DOMINIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | una delle dieci scritture di phi NON normalizza, e il sito della fase lo copriva |
 | `PHI0-CONGELATA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | phi0 e CONGELATA: 5 scritture tutte alla nascita, e lo step la legge come memori |
 | `PI-CHIUSURA-ORFANA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | una chiusura PIENA su una voce che non e- CHIUSA: la chiusura e- orfana |
