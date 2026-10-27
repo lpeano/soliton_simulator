@@ -1,0 +1,53 @@
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 9c5d81d5  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+IL LIBRO DEI CONTI DELL'ENERGIA: i conti per nodo sommati per regione (fsum); la strada A (dischi annidati, entrate e uscite nel tempo) e la B (pezzo per pezzo, diagnosi); i sigilli
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_libro_dei_conti.py 9c5d81d5; csv/_energia_del_legame.py 0197ecc0; csv/_scomposizione_solitone.py 17dde60a; csv/_solitone_vuoto_congelato.py 81db8c0a; primo_ordine/energia_pesata.py 7889c512; primo_ordine/tick.py d9a59ff9; doc/referti_l2/energia_del_legame.jsonl 891ad115
+  la configurazione: N_RIF 100000 FATTORE 12 ZERO simm LAM_ZERO 0.5 R_VICINO 2 RAGGI (1.0, 2.0, 3.0, 4.0) T_MAX 2000 OGNI 10 VITA 140 T_VUOTO 200 T_B 200 OGNI_B 10 S_PASSI (0.3, 0.15) TOLL_I 1e-12 TOLL_II 1e-06 TOLL_III 1e-12 RAPPORTO_ATTESO 4 TOLL_IV 0.2
+  il legame S1 (in memoria, _screening_forme_s3.forma); cs SPENTO; lo zero simmetrico (BE.conv('simm')); le energie a zero lambda: + 2 pi lambda per unita' di norma, materia e vuoto
+----------------------------------------------------------------------------------------------------------------------------------
+  N 100000 L 48: w_in 3.8054; e_K(0) -4.710543; l'unita' N |e_K(0)| = 4.710543e+05
+----------------------------------------------------------------------------------------------------------------------------------
+### (i) IL VUOTO UNIFORME SENZA MATERIA: il guadagno netto di ogni disco per 200 tick (i dischi del solitone, w_in 3.8054)
+  il guadagno netto massimo 7.276e-11; sum_k |e_tot,k| 4.342938e+04
+  DEVE PASSARE (i): sul vuoto uniforme il guadagno netto di ogni disco a ogni tick entro 1e-12 di sum_k |e_tot,k PASSA   7.276e-11 (soglia 4.343e-08)
+----------------------------------------------------------------------------------------------------------------------------------
+### (ii) I CONTI PER REGIONE CONTRO energia_del_legame.jsonl (N 100000 L 48 simm intero), ogni 10 tick fino a 2000
+  il peggiore 1.101e-16 (t 990 totale cin) (48 s)
+  DEVE PASSARE (ii): i conti per regione = energia_del_legame.jsonl entro 1e-06 di N |e_K(0)|                    PASSA   1.101e-16 (t 990 totale cin)
+----------------------------------------------------------------------------------------------------------------------------------
+### (iv) L'ERRORE DEL PASSO: max |H_tot(t) - H_tot(0)| per s t <= 42, a s (0.3, 0.15) (lo stesso stato iniziale, mot.cs = s)
+  s 0.3: 140 tick; max |H_tot(t) - H_tot(0)| 9.750655e+01 = 2.070e-04 N |e_K(0)|
+  s 0.15: 280 tick; max |H_tot(t) - H_tot(0)| 1.583283e+02 = 3.361e-04 N |e_K(0)|
+  DEVE PASSARE (iv): l'errore del passo va come s^2: il rapporto s 0.3 / s 0.15 entro 4 +- 20%                   ### FALLISCE   0.6159
+----------------------------------------------------------------------------------------------------------------------------------
+### (iii) LA QUADRATURA CON A (identita' dichiarate nel task history)
+  DEVE PASSARE (iii-a): vicino + lontano = totale, ogni conto, entro 1e-12 di N |e_K(0)|                         PASSA   6.178e-17
+  DEVE PASSARE (iii-b): gli anelli sommati = Delta H_tot del toro, entro 1e-12 di N |e_K(0)|                     PASSA   2.124e-17
+  DEVE PASSARE (iii-c): max_{t <= vita} |Delta H_tot| del toro = l'errore del passo a s 0.3 (lo stesso numero, u PASSA   9.750655e+01 contro 9.750655e+01
+----------------------------------------------------------------------------------------------------------------------------------
+### LA STRADA A, LA LETTURA: per ogni disco, le somme dei guadagni positivi (ENTRATE) e negativi (USCITE) di H_tot per tick, in unita' di N |e_K(0)|; fino alla vita (140) e dopo
+  disco_1  : fino alla vita entrate +7.0846e-02 uscite -5.7795e-02 (saldo +1.3051e-02); dopo entrate +5.8987e-01 uscite -5.4868e-01 (saldo +4.1188e-02; 927 tick in entrata su 1860)
+  disco_2  : fino alla vita entrate +2.8241e-02 uscite -2.1430e-02 (saldo +6.8105e-03); dopo entrate +5.9547e-01 uscite -5.4181e-01 (saldo +5.3659e-02; 915 tick in entrata su 1860)
+  disco_3  : fino alla vita entrate +3.0809e-03 uscite -1.3253e-02 (saldo -1.0172e-02); dopo entrate +9.4178e-02 uscite -7.3512e-02 (saldo +2.0666e-02; 979 tick in entrata su 1860)
+  disco_4  : fino alla vita entrate +3.4302e-03 uscite -1.6171e-02 (saldo -1.2741e-02); dopo entrate +6.5026e-02 uscite -7.3769e-02 (saldo -8.7428e-03; 902 tick in entrata su 1860)
+  toro     : fino alla vita entrate +5.7417e-03 uscite -5.6461e-03 (saldo +9.5605e-05); dopo entrate +5.5351e-02 uscite -5.5100e-02 (saldo +2.5133e-04; 939 tick in entrata su 1860)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA STRADA B, LA DIAGNOSI: da una copia, il conto dopo ogni pezzo; il va-e-vieni sum_k |Delta_k E| contro |Delta_tick E|, i primi 200 tick ogni 10 (N |e_K(0)|)
+  DEVE PASSARE (B): dopo 14 pezzi la copia = il tick intero al bit (psi e phi)                                   PASSA   
+  lontano  cin : il va-e-vieni 9.0716e-02, il saldo dei tick 1.1808e-02, il rapporto 7.7
+  lontano  cost: il va-e-vieni 1.3721e-02, il saldo dei tick 1.3006e-02, il rapporto 1.1
+  lontano  leg : il va-e-vieni 8.8938e-03, il saldo dei tick 7.9946e-03, il rapporto 1.1
+  lontano  tot : il va-e-vieni 1.0681e-01, il saldo dei tick 7.2280e-03, il rapporto 14.8
+  lontano  vuo : il va-e-vieni 1.5262e-02, il saldo dei tick 3.6962e-04, il rapporto 41.3
+  vicino   cin : il va-e-vieni 2.1101e+00, il saldo dei tick 1.1854e-02, il rapporto 178.0
+  vicino   cost: il va-e-vieni 1.3721e-02, il saldo dei tick 1.3006e-02, il rapporto 1.1
+  vicino   leg : il va-e-vieni 8.9688e-03, il saldo dei tick 8.2071e-03, il rapporto 1.1
+  vicino   tot : il va-e-vieni 2.1109e+00, il saldo dei tick 7.3728e-03, il rapporto 286.3
+  vicino   vuo : il va-e-vieni 2.7611e-03, il saldo dei tick 4.0842e-04, il rapporto 6.8
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/7 controlli passano; DEVE fallite: 1 ["DEVE PASSARE (iv): l'errore del passo va come s^2: il rapporto s 0.3 / s 0.15 entro 4 +- 20%"]
