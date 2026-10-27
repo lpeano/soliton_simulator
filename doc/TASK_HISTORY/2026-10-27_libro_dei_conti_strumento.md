@@ -32,6 +32,12 @@
 
 ### **Mi FERMO** ### **se un DEVE fallisce** *(la correzione e' un commit a se')*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(la prova di costruzione: `T_MAX 60`, la vita `20`, `10` tick di vuoto, `20` di `B`; NON il referto)*
+
+- ### **LETTO DAL CODICE, PRIMA DI `(iv)`:** ### **ogni pezzo legge il passo da `flussi_parziali.dtau_nodo = dtau cs`** *(l'accoppiamento `materia_vuoto.applica`, la camminata via `s_arco`/`z_arco`; il legame `S1` in memoria cambia solo `alpha`, `beta`)*, ### **e `energia_pesata.termini_di_h` NON dipende da `cs`:** ### **quindi `mot.cs = 0.15` col doppio dei tick e' un raffinamento dello STESSO flusso, e `H_tot` si misura allo stesso modo.**
+- ### ⚠ **I NUMERI GIA' VISTI, DICHIARATI:** ### **`(i)` il guadagno massimo `4.4e-11` contro la soglia `4.3e-8`;** ### **`(ii)` `9.0e-17`;** ### **`(iii-a)` `6.2e-17`, `(iii-b)` `0`, `(iii-c)` uguali;** ### **`(B)` la copia = il tick al bit;** ### ⛔ **`(iv)` sul tempo fisico `6`** *(`20` tick a `0.3`, `40` a `0.15`)*: ### **la deviazione di `H_tot` `97.4` a `s 0.3` e `158.3` a `s 0.15`: il rapporto `0.62`, NON `4`.** ### **Il sigillo vero e' sul tempo fisico `42`:** ### **se fallisce anche li', `H_tot` col legame `S1` non si conserva come un errore del passo, e mi FERMO.** ### **La diagnosi `B` nella prova:** ### **in VICINO il va-e-vieni di `H_tot` e' `336` volte il saldo dei tick.**
+- ### **LE SOGLIE NON CAMBIANO.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice (`LIBRO-DEI-CONTI`); 5. `doc/PATTERN_DI_PROVA.md`: ogni misura d'energia usa lo strumento.
