@@ -25,6 +25,10 @@
 
 ### **Mi FERMO** ### **se `(p1)` o `(p2)` fallisce** *(lo strumento del fit non legge)*, ### **o se un criterio corretto fallisce** *(allora il «fino alla vita» non basta, e lo dico a Luca)*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(un controllo della pairing sul jsonl, NON una misura)*
+
+- ### **LA VITA DI `N 1e5` COL TICK INTERO:** ### **il campo `vita` del jsonl** *(la risoluzione `10` tick)* ### **e' `130`; `vita20`** *(la risoluzione `20` tick di `74f99039`)* ### **e' `140`, il numero del mandato.** ### **Uso `140`** *(il mandato, e il massimo su piu' punti: il piu' severo)*; ### **lo script lo controlla contro `vita20`.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script `csv/_criteri_fino_alla_vita.py`, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice (`ENERGIA-DEL-LEGAME`).
