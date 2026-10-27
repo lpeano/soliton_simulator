@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 176 |
+| `FISICA` | `2` | 177 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -1136,3 +1136,4 @@
 | `Z97` | CURA | FISICA | 1 | ### **CHIUSA** |  | Z97 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / SCALAMINPASSO (C3): il freno UNA VOLT |
 | `Z98` | CURA | FISICA | 1 | ### **CHIUSA** |  | Z98 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / COESCAUSALE (C4): un solo ISTANTE e i |
 | `Z99` | CURA | FISICA | 1 | ### **CHIUSA** |  | Z99 CURATA E SIGILLATA ⏳[EPOCA 3 · CURA] / ANOMSIMM (C1-bis): il pavimento max(p |
+| `ZERO-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | lo zero del vuoto: l'additivo NON e' universale (bande opposte); il proporzional |

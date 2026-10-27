@@ -1414,7 +1414,8 @@
    "Z96",
    "Z97",
    "Z98",
-   "Z99"
+   "Z99",
+   "ZERO-DEL-VUOTO"
   ],
   "SI": [
    "CENS-A1",
@@ -2238,7 +2239,8 @@
    "Z8",
    "Z86",
    "Z93",
-   "Z94"
+   "Z94",
+   "ZERO-DEL-VUOTO"
   ],
   "NON_DEFINITA": [
    "A2b",
@@ -3335,7 +3337,8 @@
    "Z96",
    "Z97",
    "Z98",
-   "Z99"
+   "Z99",
+   "ZERO-DEL-VUOTO"
   ],
   "INFRASTRUTTURA": [
    "A5-PANNELLO",
@@ -4493,7 +4496,8 @@
    "VUOTO-DA-SOLO",
    "VUOTO-DISTURBATO",
    "VUOTO-LOCALE-DETERMINISTICO",
-   "VUOTO-SUL-FONDO"
+   "VUOTO-SUL-FONDO",
+   "ZERO-DEL-VUOTO"
   ],
   "DA_CLASSIFICARE": [
    "A2b",
@@ -8327,7 +8331,8 @@
    "VUOTO-DA-SOLO",
    "VUOTO-DISTURBATO",
    "VUOTO-LOCALE-DETERMINISTICO",
-   "VUOTO-SUL-FONDO"
+   "VUOTO-SUL-FONDO",
+   "ZERO-DEL-VUOTO"
   ],
   "APERTA": [
    "A1",

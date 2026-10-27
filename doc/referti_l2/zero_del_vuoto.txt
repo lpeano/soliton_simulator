@@ -1,0 +1,45 @@
+[TIMBRO] _zero_del_vuoto.py  sha1-BYTE eaa6a2b1  committato e pulito
+==================================================================================================================================
+L'IPOTESI DI LUCA SULLO ZERO DEL VUOTO (01:26): (0) lo spostamento uniforme; (1) quanto serve alla nascita; (2) l'universalita' dello spostamento locale; (3) la variante proporzionale
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_zero_del_vuoto.py eaa6a2b1; csv/_forza_da_cs.py fb90aecc; csv/_triangoli_forza.py d0c0b981; csv/_conto_del_vuoto.py c3d9c303; csv/_divisione_vuoto.py 07b75ba1; doc/referti_l2/divisione_vuoto.jsonl 0ca37b72
+  la configurazione: S0 0.3 ZERO simm LAM_ZERO 0.5 FORMA S1 L0 24 T0 200 DELTA_UNIFORME 0.1 L_NASCITA 24 REGOLE ('v1', 'v3') LX 96 LY 6 ETA 0.01 EPS (0.0, 0.5) PERIODI 10 TOLL_UNIV 0.02 MECCANISMI ('ii', 'i', 'prop', 'H'); cs spento (salvo H)
+  lo spostamento dello zero: la fase e^{-i 2 pi s delta_k} per tick, a meta' prima e a meta' dopo il tick; (ii) su psi e phi, (i) sul solo phi; (prop) e^{-i s g_k e_k}, e_k l'energia per unita' di norma allo zero simmetrico; (H) cs = s0 (1 + eta cos)
+----------------------------------------------------------------------------------------------------------------------------------
+### (0) LO SPOSTAMENTO UNIFORME (delta 0.1 su materia e vuoto, L 24, 200 tick)
+  DEVE PASSARE (0): delta uniforme: rho_k e |phi_h| AL BIT con e senza, 200 tick                                 ### FALLISCE   max|d rho| 3.2e-14 max|d |phi|| 1.6e-14
+----------------------------------------------------------------------------------------------------------------------------------
+### (1) QUANTO SERVE: delta = |Delta E| / (2 pi norma locale), la norma sui cinque nodi della mossa dopo la nascita (L 24)
+  v1: Delta E -8.548214e+00; i nodi [576, 300, 324, 325, 299]; Lambda 24.0000, rho 0.4000; (i) delta 5.6687e-02 = 1.1337e-01 lambda*; (ii) delta 5.5758e-02 = 1.1152e-01 lambda*
+  v3: Delta E -4.531146e-02; i nodi [576, 300, 324, 325, 299]; Lambda 29.9480, rho 0.4000; (i) delta 2.4080e-04 = 4.8160e-04 lambda*; (ii) delta 2.3763e-04 = 4.7526e-04 lambda*
+----------------------------------------------------------------------------------------------------------------------------------
+### (2), (3): L'ACCELERAZIONE DIFFERENZIALE a = (a(+eta) - a(-eta))/2 (dal fit di x(+-eta) - x(0)); il toro a striscia 96 x 6, eta 0.01
+  eps 0 banda 0 (w -0.4580) ii  : T 138, punti 139; a(+) -1.7981e-04 a(-) +1.7962e-04 -> a -1.7972e-04 (4 s)
+  eps 0 banda 0 (w -0.4580) i   : T 138, punti 139; a(+) +2.6728e-10 a(-) -2.6751e-10 -> a +2.6739e-10 (4 s)
+  eps 0 banda 0 (w -0.4580) prop: T 138, punti 139; a(+) +4.4582e-05 a(-) -4.4593e-05 -> a +4.4587e-05 (6 s)
+  eps 0 banda 0 (w -0.4580) H   : T 138, punti 139; a(+) +4.1482e-05 a(-) -4.1497e-05 -> a +4.1489e-05 (3 s)
+  eps 0 banda 1 (w +0.4580) ii  : T 138, punti 139; a(+) +1.7832e-04 a(-) -1.7873e-04 -> a +1.7852e-04 (3 s)
+  eps 0 banda 1 (w +0.4580) i   : T 138, punti 139; a(+) -2.7016e-10 a(-) +2.7035e-10 -> a -2.7026e-10 (3 s)
+  eps 0 banda 1 (w +0.4580) prop: T 138, punti 139; a(+) +4.3516e-05 a(-) -4.3540e-05 -> a +4.3528e-05 (4 s)
+  eps 0 banda 1 (w +0.4580) H   : T 138, punti 139; a(+) +4.1730e-05 a(-) -4.1751e-05 -> a +4.1740e-05 (3 s)
+  eps 0.5 banda 0 (w -0.4837) ii  : T 132, punti 133; a(+) -1.7048e-04 a(-) +1.7029e-04 -> a -1.7038e-04 (4 s)
+  eps 0.5 banda 0 (w -0.4837) i   : T 132, punti 133; a(+) +2.3910e-10 a(-) -2.3925e-10 -> a +2.3918e-10 (4 s)
+  eps 0.5 banda 0 (w -0.4837) prop: T 132, punti 133; a(+) +4.0086e-05 a(-) -4.0103e-05 -> a +4.0095e-05 (6 s)
+  eps 0.5 banda 0 (w -0.4837) H   : T 132, punti 133; a(+) +4.1996e-05 a(-) -4.2030e-05 -> a +4.2013e-05 (4 s)
+  eps 0.5 banda 1 (w +0.4789) ii  : T 139, punti 140; a(+) +1.6966e-04 a(-) -1.7006e-04 -> a +1.6986e-04 (4 s)
+  eps 0.5 banda 1 (w +0.4789) i   : T 139, punti 140; a(+) -2.6307e-10 a(-) +2.6323e-10 -> a -2.6315e-10 (4 s)
+  eps 0.5 banda 1 (w +0.4789) prop: T 139, punti 140; a(+) +3.9835e-05 a(-) -3.9841e-05 -> a +3.9838e-05 (5 s)
+  eps 0.5 banda 1 (w +0.4789) H   : T 139, punti 140; a(+) +4.1116e-05 a(-) -4.1137e-05 -> a +4.1127e-05 (4 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### L'UNIVERSALITA' PER MECCANISMO: le quattro accelerazioni contro la loro media; e contro la caduta da cs (H)
+  ii  : a -1.7972e-04 +1.7852e-04 -1.7038e-04 +1.6986e-04; la media -4.2872e-07; lo scarto massimo 418.1920; contro H -4.3316 4.2769 -4.0555 4.1302
+  i   : a +2.6739e-10 -2.7026e-10 +2.3918e-10 -2.6315e-10; la media -6.7084e-12; lo scarto massimo 40.8596; contro H 0.0000 -0.0000 0.0000 -0.0000
+  prop: a +4.4587e-05 +4.3528e-05 +4.0095e-05 +3.9838e-05; la media +4.2012e-05; lo scarto massimo 0.0613; contro H 1.0747 1.0428 0.9543 0.9687
+  H   : a +4.1489e-05 +4.1740e-05 +4.2013e-05 +4.1127e-05; la media +4.1592e-05; lo scarto massimo 0.0112; contro H 1.0000 1.0000 1.0000 1.0000
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  PUO' FALLIRE (2): l'additivo (ii) universale entro il 2%                                                       ### FALLISCE   418.19199274669825
+  PUO' FALLIRE (3): il proporzionale universale entro il 2%                                                      ### FALLISCE   0.061298008543826166
+  ### SE LO ZERO SI MUOVE: l'universalita' che fisso' lambda* = 1/2 va ricontrollata (il mandato)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 0/3 controlli passano; DEVE fallite: 1 ['DEVE PASSARE (0): delta uniforme: rho_k e |phi_h| AL BIT con e senza, 200 tick']

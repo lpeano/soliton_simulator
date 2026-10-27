@@ -44,3 +44,14 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima; 3. la corsa e il referto; 4. la relazione, l'indice *(una voce `ZERO-DEL-VUOTO`)*, la mappa.
+
+## 4. IL RISULTATO
+
+- ### **IL REFERTO:** `doc/referti_l2/zero_del_vuoto.{txt,jsonl}` *(`csv/_zero_del_vuoto.py` `sha1-BYTE eaa6a2b1`, committato e pulito; [[ZERO-DEL-VUOTO]])*. ### ⛔ **`0/3`, LA DEVE `(0)` FALLISCE: FERMO.**
+- ### ⛔ **`(0)` LO SPOSTAMENTO UNIFORME** *(`delta 0.1` su materia e vuoto, `L 24`, `200` tick)*: ### **`max |d rho| 3.2e-14`, `max |d |phi|| 1.6e-14`: NON al bit** *(l'arrotondamento di una fase globale moltiplicata e poi la dinamica: l'avevo scritto come cio' che non so, e la prova a `10` tick lo aveva gia' mostrato a `2e-15`)*. ### **La soglia «al bit» e' del mandato: non la cambio.** ### **La domanda per Luca:** ### **la `(0)` si riscrive «entro `1e-12` relativo»** *(come per la torsione in fase alle `17:51`)*, ### **o resta fallita?**
+- ### **`(1)` QUANTO SERVE** *(`L 24`, la norma sui cinque nodi della mossa)*: ### **`v1`** *(`Delta E -8.548`)*: ### **`delta 0.057` = `0.113 lambda*`** *(il solo vuoto)*, ### **`0.056` = `0.112 lambda*`** *(materia e vuoto)*; ### **`v3`** *(`-0.0453`)*: ### **`2.4e-4` = `4.8e-4 lambda*`.** ### **LA LETTURA: piccolo per `v3`, un decimo dello zero simmetrico per `v1`.**
+- ### ⛔ **`(2)` L'ADDITIVO NON E' UNIVERSALE** *(la previsione del guardiano: giusta)*: ### **`(ii)` su materia e vuoto: le due bande cadono in VERSI OPPOSTI** *(`-1.80e-4`, `+1.79e-4`, `-1.70e-4`, `+1.70e-4`: circa `4` volte la caduta da `cs`, col segno della curvatura della banda)*; ### **`(i)` il solo vuoto: `~2.5e-10`** *(`1e-5` della caduta da `cs`: al primo ordine il vuoto non spinge la materia)*.
+- ### **`(3)` IL PROPORZIONALE all'energia: entro il `6.1%`** *(`4.46e-5`, `4.35e-5`, `4.01e-5`, `3.98e-5`)*, ### **contro la caduta da `cs` `0.95`-`1.07`:** ### **la PUO' FALLIRE `(3)`** *(entro il `2%`)* ### **FALLISCE;** ### **dalle quattro accelerazioni del referto lo scarto e' soprattutto fra i due `eps`** *(le due coppie `4.46e-5`/`4.35e-5` e `4.01e-5`/`3.98e-5`)*.
+- ### **`(H)` LA CADUTA DA UN GRADIENTE DI `cs`, il riferimento: universale entro l'`1.1%`** *(`4.15e-5`, `4.17e-5`, `4.20e-5`, `4.11e-5`)*.
+- ### **CHE COSA VUOL DIRE** *(una lettura)*: ### **uno spostamento dello zero ADDITIVO e' un potenziale uguale per tutti: accelera secondo la massa efficace della banda, e le due bande in versi opposti;** ### **non puo' essere il canale della gravita' universale.** ### **Lo spostamento PROPORZIONALE all'energia e' un tempo locale: si avvicina alla caduta da `cs`, ma non la eguaglia** *(il `6%` contro l'`1%`)*. ### **L'universalita' che fisso' `lambda* = 1/2`:** ### **non e' toccata da questa misura** *(lo zero qui e' imposto, non mosso dalla nascita)*.
+- ### **LA MAPPA** *(nello stesso commit)*: ### **la coda: lo zero FATTO col FERMO; poi il solitone con la sua buca.**
