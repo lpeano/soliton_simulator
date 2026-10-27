@@ -80,6 +80,12 @@
 - ### **IL FLIP NON TOGLIE NODI:** ### **e' compatibile con `A14.2`** *(la crescita come sola freccia del NUMERO dei nodi)*, ### **ed e' la mossa che permette ai DIFETTI di SEGUIRE una massa:** ### **una coppia `5`-`7` si sposta di un arco con un flip, senza nascite e senza morti.**
 - ### ⚠ **IL RISCHIO DELLA «MEMORIA»:** ### **con le sole nascite** *(senza la morte, `3 -> 1`, e senza il flip)* ### **una massa che si sposta lascia una SCIA di nodi in piu' dove e' passata:** ### **il profilo di `3(d)` seguirebbe la storia della massa, non la sua posizione.** ### **E' la ragione per cui il flip e la morte non sono dettagli:** ### **sono le mosse che rendono il profilo una funzione dello stato.**
 
+### ❓ **LA DOMANDA APERTA: LA NASCITA IN UN VUOTO A SOMMA NULLA PER NODO** *(`2026-10-27`, la risposta di Luca delle `18:45`; [[VUOTO-SUL-FONDO]])*
+
+- ### **Il fondo del generatore del vuoto** *(`-2 pi` per unita' di norma; `787296da`)* ### **e' a SOMMA NULLA in ogni nodo** *(un flusso senza divergenza; uniforme in modulo: il flusso costante per direzione, torsione `pi` su ogni arco)*.
+- ### **Le regole della nascita di `f7ee87a9` non si applicano: `v1`** *(`D7`: le estremita' nuove nella direzione `chiv/|chiv|`, `chiv` la somma di `phi` sul padre)* ### **e' `0/0`;** ### **`v2`-`v5` sono scritte per il vuoto uniforme.**
+- ### **LA DOMANDA:** ### **con un vuoto la cui somma per nodo e' `0`, la regola della nascita e' una SCELTA DELLA FORMA DEL VUOTO** *(`D6f`)*, ### **da fare in questo progetto** *(che cosa porta il vuoto nelle estremita' nuove: il flusso, la sua direzione, il grado `!= 6`)*. ### **Non decisa; `(c-ii)` del mandato dopo `15df5c63` e' SALTATA in quel giro.**
+
 ### 3(d) IL PROFILO CHE LA GRAVITA' CHIEDE
 
 - ### **PER `gamma = 1`:** ### **le lunghezze proprie crescono di `|Phi|`** *(`g_ij = (1 + 2|Phi|) delta_ij` a campo debole)*: ### **in 2D l'AREA propria di `2|Phi|`** *(in 3D il volume di `3|Phi|`)*: ### **la frazione di nodi in piu' attesa attorno a una massa e' `~2|Phi|` per unita' d'area.**

@@ -60,3 +60,7 @@
 - ### ⛔ **`(c-iii)` IL FONDO E' DEGENERE** *(`2n + 1`)*: ### **anche restando uniformi in modulo, il flusso costante ha una FAMIGLIA** *(almeno una fase per ognuna delle tre direzioni)*, ### **e partire da uno solo e' una scelta dello stato del vuoto** *(il solitone accoppia la materia al vuoto nodo per nodo, e le fasi relative fra le direzioni entrano nel Grover del nodo)*. ### **Non so se il risultato ne dipende.**
 - ### **LE DOMANDE PER LUCA:** ### **`1` `(c-ii)`: come si scrivono le regole della nascita dal fondo** *(o si salta `(c-ii)`)*? ### **`2` `(c-iii)`: quale stato del fondo** *(il flusso costante con le tre fasi uguali, il piu' semplice, dichiarato come scelta; o una famiglia di fasi, misurata)*? ### **Il criterio di chiusura: le due risposte.**
 - ### **INTANTO** *(la coda, `(d)`)*: ### **la parte 3, la carica di `A14.3` sulla carta, che non dipende da queste scelte.**
+
+## 4-ter. LA NOTA DEL GUARDIANO SUL FONDO *(Luca, `18:45`)*
+
+- ### **LA NOTA DEL GUARDIANO, COME LETTURA** *(Luca, `18:45`)*: ### **il fondo uniforme in modulo ha TORSIONE `pi` su ogni arco;** ### **nell'era `1` il «twist dipolare `pi`» sommato al quanto `2 pi` dava la SOGLIA `3 pi` della mitosi.** ### **Una coincidenza da tenere a mente, non una derivazione.**
