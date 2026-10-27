@@ -141,6 +141,16 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 
 ---
 
+## LA MAPPA DEL LAVORO: LA REGOLA DI MANUTENZIONE E LA REGOLA DELLE DOMANDE IN ATTESA *(decisione di Luca, `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*
+
+> ### **NON e' una riga della tabella `STANDARD`** *(il tetto `10`)*: ### **e' una regola di lavoro.**
+
+- ### **LA FONTE DELLO STATO E' `doc/MAPPA.md`** *(il guardiano non ha memoria fra le sessioni)*.
+- ### **LA MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga della mappa che lo riguarda, NELLO STESSO COMMIT** *(e `doc/MAPPA.md` sta nei FILE CAMBIATI)*.
+- ### **LE DOMANDE IN ATTESA:** ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3` della mappa)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
+
+---
+
 ## IN PROVA
 
 *(nessuna)*

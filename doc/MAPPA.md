@@ -1,0 +1,109 @@
+# LA MAPPA DEL LAVORO — lo stato, in un posto solo
+
+> ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
+> ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
+> ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
+> ### **Aggiornata al:** `2026-10-27`, sera *(la corsa di `(c-iii)` in corso)*.
+
+## 1. CHE COSA FUNZIONA, MISURATO
+
+| | il fatto | il commit |
+|---|---|---|
+| 1 | ### **la scena a triangoli nel nucleo** *(al bit contro quella in memoria)* | `36040a07`, `2d996edc` |
+| 2 | ### **la luce isotropa, e a `1` nel tempo proprio** | `0764d566`, `afba052b` |
+| 3 | ### **la gravita' senza curvatura, attrattiva e universale** *(con lo zero simmetrico)* | ### **lo zero simmetrico** *(`_segno_gravita`, `_zero_simmetrico`)* |
+| 4 | ### **la materia mai oltre la luce** *(`v_max/s 0.5992864` a `r 1`)* | `afba052b` |
+| 5 | ### **i difetti non intrappolano** *(nessuno stato legato al difetto)* | `74b4bce4` |
+| 6 | ### **la geometria del conteggio per la LUCE:** ### **il cono converge di `pi/3`, niente `1/b`** | `b99ba2b1` |
+| 7 | ### **e per la MATERIA:** ### **la materia converge di `pi/3` entro lo `0.1%`** *(la luce entro lo `0.3%` a `b 24`)*; ### **il fascio che attraversa la cucitura esce tutto in `K'`;** ### **la voce `LUCE-MATERIA-CONO` CHIUSA** *(con le due cautele)* | `e48e7414`, `e2df0e2e` |
+| 8 | ### **il solitone esiste col vuoto FERMO** *(`N 1e6`, stabile fino a `2000` tick)* | `74f99039` |
+| 9 | ### **con lo zero fisico il legame e' il `63%` dei costituenti, il solitone il `37%`** | `0fb93b8c`, `442b704a` |
+| 10 | ### **il vuoto da solo e' STABILE, non solo stazionario** | `532598c7` |
+| 11 | ### **`H_tot` conservata a `O(s^2)` col risolutore a ogni `s`** *(i rapporti `3.25`, `3.69`, `3.95`; a `s 0.075` la deviazione e' lo `0.49%` della perdita del vuoto)* | `99eb7a42` |
+| 12 | ### **il legame e' coerente: il vuoto riceve la rotazione gemella** *(`S1` e `S3`)* | `acbdfb88` |
+| 13 | ### **i pesi del passo = quelli di `termini_di_h`** *(`H_tick = H_tot`)* | `a33daa09` |
+| 14 | ### **la carica `sigma_z` a due segni, conservata a `eps 0`** | `8dea8c95` |
+| 15 | ### **lo strumento del libro dei conti conta giusto** *(i conti di `15df5c63` a `1e-16`; la strada `A`)* | `4f6a4bd7` |
+
+## 2. CHE COSA NON FUNZIONA ANCORA, E PERCHE'
+
+| | il fatto | il perche', per quanto si sa | il commit |
+|---|---|---|---|
+| 1 | ### **il solitone si scioglie col tick intero** *(vive `320` tick a `N 1e6`)* | ### **il vuoto gli cede energia;** ### **il verso regge, la spartizione si fida da `s 0.075`** | `15df5c63`, `abd5a809`, `99eb7a42` |
+| 2 | ### **la nascita libera energia che il vuoto uniforme non prende** | ### **il vuoto uniforme e' al massimo** | `d999cca7`, `f7ee87a9` |
+| 3 | ### **il vuoto uniforme e' il MASSIMO del generatore** | ### **per la FORMA** *(`-pi` per due proiettori)*; ### **il fondo a `-2 pi` e' un flusso, torsione `pi`** | `787296da` |
+| 4 | ### **`v_b` della materia = `pi/4` della luce** | ### **una violazione di Lorentz a bassa energia della materia NUDA** | `b0edae62`, `afba052b` |
+| 5 | ### **la particella elementare pesa quanto la grana** | -- | `25cada4e` |
+| 6 | ### **lo spazio curvo non nasce ancora dalla materia** | ### **la curvatura e' imposta** *(il cono scritto nel grafo)* | -- |
+| 7 | ### **`A1` chiusa** | ### **la luce va come `cs^2`** | `31ee70cc` |
+| 8 | ### **il punto fisso di `cs` non converge col solitone, gia' al tick `0`** | ### **la voce aperta [[PUNTO-FISSO-CS-SOLITONE]]; si riprende dopo il vuoto sul fondo** | `76e85c0a`, `05c080f8` |
+| 9 | ### **il driver non fa girare la camminata** | ### **e' la pipeline delle leggi di PROVA** *(l'errore `n.68`)* | -- |
+
+## 3. LE DOMANDE CHE DECIDONO LA DIREZIONE
+
+| | la domanda | lo stato | il commit |
+|---|---|---|---|
+| `a` | ### **la materia sul cono come la luce?** | ### **SI'** | `e48e7414` |
+| `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **la prima meta' CONFERMATA** *(il vuoto uniforme e' il massimo per la forma)*; ### **il solitone dal fondo IN CORSA a `s 0.075`** | `787296da`, `bdf5baea` |
+| `c` | ### **dove va l'energia, nei due versi?** | ### **lo strumento c'e'** *(la strada `A`)*: ### **il vuoto lontano rimanda indietro** *(`915` tick in entrata su `1860` dopo la vita)* | `4f6a4bd7` |
+
+## 4. LA LISTA IN ATTESA *(idee da NON eseguire finche' la sezione `3` non e' chiusa)*
+
+| | l'idea | dove sta |
+|---|---|---|
+| 1 | ### **il cono di luce emergente** | [[DOMANDA-CONO-EMERGENTE]] *(`ceba2925`)* |
+| 2 | ### **la torsione come quanto d'azione; la mitosi dove gli orologi differiscono** | `doc/PROGETTO_MITOSI.md` 3(a); ### **in forma d'energia col `cs` spento** *(`80dc4d4a`)*: ### **il ritmo massimo sul bordo della buca, nessun freno;** ### **col `cs` acceso BLOCCATA** *([[PUNTO-FISSO-CS-SOLITONE]])* |
+| 3 | ### **la materia accoppiata alla luce** | `doc/PROGETTO_U1.md`; [[PROGETTO-MASSA-COLLETTIVA]] *(l'ordine dei lavori)* |
+| 4 | ### **il solitone con la sua buca** | -- |
+| 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **in coda** *(la sezione `6`)* |
+| 6 | ### **i nodi ciascuno al proprio ritmo** | -- |
+| 7 | ### **due solitoni che si attraggono attraverso il vuoto** | -- |
+| 8 | ### **la nascita in un vuoto a somma nulla per nodo** | `doc/PROGETTO_MITOSI.md` 3(c) |
+| 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]] |
+| 10 | ### **la valle come carica** *(e il momento angolare modulo `6`)* | [[DOMANDA-VALLE-CARICA]] |
+
+## 5. LE DECISIONI APERTE DI LUCA *(con la raccomandazione del guardiano)*
+
+| | la decisione | la raccomandazione |
+|---|---|---|
+| 1 | ### **`S1` contro `S4`** | ### **`S1`, dopo il vuoto sul fondo** |
+| 2 | ### **lo zero nel nucleo** | ### **il simmetrico e' quello fisico; il nucleo non si tocca ora** |
+| 3 | ### **`cs` per estremita' o per nodo** | ### **per estremita', se si fa la mitosi** |
+| 4 | ### **le forme della mitosi** | -- *(`doc/PROGETTO_MITOSI.md`)* |
+| 5 | ### **la carica, la costante, il campo compatto** | ### **la norma provvisoria, una costante debole di prova, compatto** *(`doc/PROGETTO_U1.md` par.`8`, `8-bis`)* |
+| 6 | ### **il driver della camminata** | ### **`7` domande, non urgente** |
+| 7 | ### **la moneta di spin (`eps`)** | ### **la sua origine fisica e' aperta;** ### **spegnerla rende la carica `sigma_z` conservata, ma la riduce a «due specie separate»** |
+
+## 6. LA CODA DI OGGI, IN ORDINE *(`PRECEDENZA-IN-CODA`)*
+
+| | il lavoro | lo stato |
+|---|---|---|
+| 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **IN CORSA** *(`bdf5baea`)* |
+| 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **in coda** |
+
+## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
+
+| | l'errore | dove |
+|---|---|---|
+| `n.54` | ### **la coda in 2D scritta come misurata** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.55` | ### **le rotazioni dello spazio in 2D: solo `U(1)`; lo spin interno resta `SU(2)`** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.56` | ### **una delle tre imprecisioni della sezione `G`** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.57` | ### **i numeri di `a/a_H`** | ### **nel mandato** |
+| `n.58` | ### **`L ~ 1/1.37`** | ### **nel mandato** |
+| `n.59` | ### **NON REGISTRATO NEL REPO** | -- |
+| `n.60` | ### **NON REGISTRATO NEL REPO** | -- |
+| `n.61` | ### **una proprieta' locale del passo: si misura gia' in 2D** | `doc/PROGETTO_U1.md` |
+| `n.62` | ### **la soglia andava ricavata dalla grandezza di `A`** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.63` | ### **aveva consigliato una soluzione** *(il compatto modulo `2 pi/e`, il `chi` piccolo)* ### **che non poteva passare** | ### **nel mandato** |
+| `n.64` | ### **la previsione `x(r) = r/4` cade** *(la massa sente `r` a meta')* | `RELAZIONE_PER_CLAUDE.md` |
+| `n.65` | ### **le unita'** *(`c = r s` archi per tick = `r` per tempo proprio)* | `RELAZIONE_PER_CLAUDE.md` |
+| `n.66` | ### **la DEVE a `1e-4` su un riferimento non verificato** *(`v_max/s`)* | `doc/TASK_HISTORY/2026-10-25_curvatura_0bis.md` |
+| `n.67` | ### **NON REGISTRATO NEL REPO** | -- |
+| `n.68` | ### **il driver creduto il programma della camminata** *(e' la pipeline delle leggi di prova)* | `RELAZIONE_PER_CLAUDE.md` |
+| `n.69` | ### **il riferimento di Dirac creduto a `v_max/v_b = 1`** *(e' `2/sqrt 3`)* | `RELAZIONE_PER_CLAUDE.md` |
+| `n.70` | ### **`D7` raccomandata senza controllare le dipendenze dell'albero** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.71` | ### **la raccomandazione delle `01:17` non controllo' la diagnosi** *(la causa era il segno del tempo)* | `doc/TASK_HISTORY/2026-10-27_c2_materia.md` |
+| `n.72` | ### **il vuoto «stazionario» non provato stabile** *(risolto dalla misura: stabile)* | `RELAZIONE_PER_CLAUDE.md`, `532598c7` |
+| `n.73` | ### **la premessa «la corrente d'energia gia' nel nucleo»:** ### **e' di un'altra energia** | `RELAZIONE_PER_CLAUDE.md` |
+| `n.74` | ### **ANNULLATO** *(Luca, `21:27`)*: ### **«il passo conserva `H_tot` a meno di `O(s^2)`» era GIUSTO** | `aa03a6c1` |
+| `n.75` | ### **alle `19:25` ha accettato la non conservazione da un confronto con stati di partenza non confrontabili** *(`998203e9`)* ### **e ha chiamato errore un'affermazione corretta** | `aa03a6c1` |

@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 173 |
+| `FISICA` | `2` | 176 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -294,6 +294,7 @@
 | `DIVISIONE-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | la divisione del vuoto: nessuna regola di phi con V conservata chiude il conto d |
 | `DOMANDA-A-NON-E-MECCANICA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0 |
 | `DOMANDA-A3B-CLASSE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | A3b: con che classe entra nell-indice? |
+| `DOMANDA-BANDA-ANTIMATERIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la banda di sotto come antimateria: un vuoto con la banda negativa occupata, la  |
 | `DOMANDA-BANDE-O-SEGNO-LOCALE` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | il parametro d ordine della strada (3): le popolazioni di banda o il segno local |
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
@@ -354,6 +355,7 @@
 | `DOMANDA-U-DINAMICA-LE-FORME` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olon |
 | `DOMANDA-UN-NODO-SENZA-VUOTO-HA-L-OROLOGIO-FERMO` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | Lambda = 0 da cs = 0, e l-assert del cono lo rifiuta: orologio fermo o stato non |
 | `DOMANDA-UNITA-DI-STATO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | l-unita- di stato: qual e- la capacita- di un nodo? |
+| `DOMANDA-VALLE-CARICA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la valle come carica: K - K' si conserva con la moneta accesa? e il momento ango |
 | `DOMANDA-VIA-DEL-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D? |
 | `DOPPIA-COP` | CURA | FISICA | 1 | ### **SOSPESA** |  | LA CURA (b): la doppia copertura 4 pi e' un ASSIOMA e va resa STRUTTURALE, non m |
 | `DRIVER-SCENA-II` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | APERTA il 2026-09-26 (rilievo di Luca) / IL DRIVER NON SA FARE LA SCENA (ii), e  |
@@ -525,6 +527,7 @@
 | `M5b` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M5c` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `M8` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
+| `MAPPA-DEL-LAVORO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la mappa del lavoro (doc/MAPPA.md): lo stato in un posto solo, aggiornata a ogni |
 | `MAPPA-DIPENDENZE` | STANDARD | METODO | 2 | ### **AGENDA** |  | la mappa delle dipendenze: tutto si interseca, ma le intersezioni hanno un verso |
 | `MASSA-CRITICA-LOCALE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di collasso deve essere LOCALE e DINAMICA, e dipendere da lambda: dire |
 | `MASSA-ID` | FRONTE | METODO | 1 | ### **SOSPESA** |  | le masse si identificano con l'ID di massa (conc_nodi), non coi nodi del passo 0 |
