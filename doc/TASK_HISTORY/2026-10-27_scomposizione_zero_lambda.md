@@ -42,6 +42,12 @@
 
 ### **LA LETTURA** *(nessuna soglia)*: ### **con lo zero simmetrico la frazione del legame nell'energia a riposo;** ### **il `lambda` a cui `e_K = 0`, e quello a cui `E0 = 0`;** ### **la tabella delle frazioni contro `lambda`.** ### **Mi FERMO** ### **se un DEVE fallisce.**
 
+## 3-bis. ANNOTAZIONE DOPO LA PROVA A VUOTO *(prima della corsa; il paragrafo `3` resta com'era)*
+
+- ### ⚠ **IL SEGNO DELLA FORMULA DEL PARAGRAFO `3` ERA SBAGLIATO:** ### **la fase per tick e' `-s E`, non `+s E`** *(lo stato uniforme ruota di `+1.39` per tick con `e_K = -4.71`;* ### *e la rotazione di `74f99039` e' definita `-arg` nel codice: `fasi.append(-np.angle(a1 / a0))`)*. ### **Quindi `Delta e(lambda) = -[arg <psi|T_lambda psi> - arg <psi|T_0 psi>] / s`** ### **e lo script lo scrive cosi'.** ### **Con la formula del paragrafo `3` la prova a vuoto dava `-2 pi lambda` e il criterio `3` falliva:** ### **non e' la fisica a cambiare, e' il segno della mia lettura** *(il paragrafo `2` lo derivava giusto dal codice: `+2 pi lambda`)*.
+- ### **E lo stato uniforme della materia si fa col vuoto UNIFORME congelato, non a zero:** ### **con `Lambda = 0` la forma `S1` divide per zero** *(la prova a vuoto dava `NaN`)*; ### **il legame da' la stessa fase a ogni `lambda`, e si cancella nella differenza.**
+- ### **Del vuoto si stampa solo lo spostamento crudo** *(fuori da `E0`)*: ### **la relazione fase-energia e' verificata solo per la materia.**
+
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa *(scritto in binario, senza `CRLF`)*; 3. la corsa, in parallelo a `C2`; 4. il referto, la relazione, l'indice.
