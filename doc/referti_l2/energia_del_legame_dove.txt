@@ -1,0 +1,41 @@
+[TIMBRO] _energia_del_legame_dove.py  sha1-BYTE f266d9bb  committato e pulito
+==================================================================================================================================
+DOVE FALLISCONO I CRITERI 2 (LE TAGLIE) E 3 (I DUE ZERI) DEL CONTO DELL'ENERGIA DEL LEGAME: il peggiore e dove, alla vita e a T_MAX
+==================================================================================================================================
+  i blob nel repo: csv/_energia_del_legame_dove.py f266d9bb; csv/_energia_del_legame.py 0197ecc0; doc/referti_l2/energia_del_legame.jsonl 891ad115
+  la configurazione: VITA {1000000.0: 320, 100000.0: 140} T_MAX 2000 PEZZI ('cost', 'cin', 'leg', 'vuo', 'tot') REGIONI ('vicino', 'lontano', 'totale')
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) LE TAGLIE: |Delta E(L1) - Delta E(L2)| / N |e_K(0)|, il totale di ogni pezzo
+  N 1e+06   simm intero    t  320: il peggiore 7.53e-06 (leg)   cost 9.89e-17  cin 7.10e-06  leg 7.53e-06  vuo 1.46e-06  tot 1.03e-06
+  N 1e+06   simm intero    t 2000: il peggiore 5.91e-04 (cin)   cost 1.98e-16  cin 5.91e-04  leg 1.67e-04  vuo 3.79e-04  tot 4.50e-05
+  N 1e+06   simm congelato t  320: il peggiore 2.12e-06 (cin)   cost 0.00e+00  cin 2.12e-06  leg 1.97e-06  vuo 0.00e+00  tot 1.44e-07
+  N 1e+06   simm congelato t 2000: il peggiore 1.47e-05 (tot)   cost 0.00e+00  cin 1.13e-05  leg 3.43e-06  vuo 0.00e+00  tot 1.47e-05
+  N 1e+06   oggi intero    t  320: il peggiore 7.53e-06 (leg)   cost 3.95e-16  cin 7.10e-06  leg 7.53e-06  vuo 1.46e-06  tot 1.03e-06
+  N 1e+06   oggi intero    t 2000: il peggiore 5.88e-04 (cin)   cost 1.98e-16  cin 5.88e-04  leg 1.66e-04  vuo 3.79e-04  tot 4.40e-05
+  N 1e+06   oggi congelato t  320: il peggiore 2.12e-06 (cin)   cost 0.00e+00  cin 2.12e-06  leg 1.97e-06  vuo 0.00e+00  tot 1.44e-07
+  N 1e+06   oggi congelato t 2000: il peggiore 1.47e-05 (tot)   cost 1.98e-16  cin 1.13e-05  leg 3.43e-06  vuo 0.00e+00  tot 1.47e-05
+  N 100000  simm intero    t  140: il peggiore 1.20e-06 (tot)   cost 1.24e-16  cin 1.05e-06  leg 3.21e-07  vuo 4.71e-07  tot 1.20e-06
+  N 100000  simm intero    t 2000: il peggiore 1.95e-03 (cin)   cost 1.24e-16  cin 1.95e-03  leg 6.79e-04  vuo 1.17e-03  tot 1.00e-04
+  N 100000  simm congelato t  140: il peggiore 5.60e-07 (tot)   cost 6.18e-17  cin 5.58e-07  leg 2.36e-09  vuo 0.00e+00  tot 5.60e-07
+  N 100000  simm congelato t 2000: il peggiore 6.50e-04 (cin)   cost 2.47e-16  cin 6.50e-04  leg 3.87e-04  vuo 0.00e+00  tot 2.63e-04
+  N 100000  oggi intero    t  140: il peggiore 1.20e-06 (tot)   cost 2.47e-16  cin 1.05e-06  leg 3.21e-07  vuo 4.71e-07  tot 1.20e-06
+  N 100000  oggi intero    t 2000: il peggiore 1.98e-03 (cin)   cost 6.18e-16  cin 1.98e-03  leg 6.91e-04  vuo 1.17e-03  tot 1.13e-04
+  N 100000  oggi congelato t  140: il peggiore 5.60e-07 (tot)   cost 2.47e-16  cin 5.58e-07  leg 2.36e-09  vuo 0.00e+00  tot 5.60e-07
+  N 100000  oggi congelato t 2000: il peggiore 6.50e-04 (cin)   cost 0.00e+00  cin 6.50e-04  leg 3.87e-04  vuo 0.00e+00  tot 2.63e-04
+### (3) I DUE ZERI: |Delta E(simm) - Delta E(oggi) - 2 pi (1/2) Delta norma| / N |e_K(0)|, ogni regione e pezzo
+  N 1e+06   L  81 intero    t  320: il peggiore 8.84e-14 (totale cost)
+  N 1e+06   L  81 intero    t 2000: il peggiore 1.22e-05 (vicino tot)
+  N 1e+06   L  81 congelato t  320: il peggiore 8.89e-14 (totale cost)
+  N 1e+06   L  81 congelato t 2000: il peggiore 5.54e-13 (totale cost)
+  N 1e+06   L 120 intero    t  320: il peggiore 8.84e-14 (totale cost)
+  N 1e+06   L 120 intero    t 2000: il peggiore 2.99e-06 (lontano leg)
+  N 1e+06   L 120 congelato t  320: il peggiore 8.87e-14 (totale cost)
+  N 1e+06   L 120 congelato t 2000: il peggiore 6.58e-13 (vicino cost)
+  N 100000  L  48 intero    t  140: il peggiore 3.90e-14 (totale cost)
+  N 100000  L  48 intero    t 2000: il peggiore 1.63e-04 (vicino cost)
+  N 100000  L  48 congelato t  140: il peggiore 3.88e-14 (totale cost)
+  N 100000  L  48 congelato t 2000: il peggiore 9.28e-13 (vicino cost)
+  N 100000  L  69 intero    t  140: il peggiore 3.86e-14 (totale cost)
+  N 100000  L  69 intero    t 2000: il peggiore 4.09e-05 (vicino cin)
+  N 100000  L  69 congelato t  140: il peggiore 3.87e-14 (totale cost)
+  N 100000  L  69 congelato t 2000: il peggiore 5.53e-13 (totale cost)

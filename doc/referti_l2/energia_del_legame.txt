@@ -1,0 +1,146 @@
+[TIMBRO] _energia_del_legame.py  sha1-BYTE 0197ecc0  committato e pulito
+==================================================================================================================================
+DOVE VA L'ENERGIA DEL LEGAME: il conto dell'energia nel tempo del solitone S1 di 74f99039, tick intero e vuoto congelato, per pezzo e per regione; il fronte del vuoto
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_energia_del_legame.py 0197ecc0; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_scomposizione_solitone.py 17dde60a; csv/_solitoni_triangoli.py ec6fb68a; primo_ordine/energia_pesata.py 7889c512; doc/referti_l2/solitone_vuoto_congelato.jsonl 7a797113
+  la configurazione: OGNI 10 OGNI_VITA 20 R_VICINO 2 SOGLIA_FRONTE 1e-06 FRAZ_TORO 0.8 MODI ('intero', 'congelato') ZERI (('simm', 0.5), ('oggi', 0.0)) TOLL_NORMA 1e-10 TOLL_TAGLIE 0.001 TOLL_ZERI 1e-06 FATTORE_DERIVA 10; da _solitone_vuoto_congelato: S 0.3 FORMA S1 CASI ((1000000.0, (12.0, 18.0)), (100000.0, (12.0, 18.0))) VITA_RIF {1000000.0: 320, 100000.0: 140} VUOTO ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO'); T_MAX 2000
+  l'energia: H_tot = H_cam(psi) + H_cam(phi) + sum Lambda F_1(rho/Lambda) (S1); a zero lambda + 2 pi lambda per unita' di norma (materia e vuoto, 0fb93b8c); i costituenti M e_K(lambda), la cinetica H_cam(psi) - M e_K
+----------------------------------------------------------------------------------------------------------------------------------
+  v_max della coppia a s 0.3: 0.183601 archi per tick (il cono: 1)
+### N 1e+06: la larghezza del risolutore 6.6003; e_K(0) -4.710543
+  N 1e+06   L  81 intero    zero simm: vita 320 (ogni 20: 320; 74f99039 320); dM 1.9e-12 dV 8.6e-13; il vuoto al bit False; la deriva di H_tot 5.926e+02; il fronte 0.3037 archi/tick (3 punti; r vicino 13.3, r toro 28.1; r materia 65.8) (150 s)
+      Delta E a t  320 vicino  : cost +1.0447e+05  cin -1.4426e+03  leg -6.4064e+04  vuo -5.4579e+03  tot +3.3505e+04
+      Delta E a t  320 lontano : cost -1.0447e+05  cin +3.3468e+03  leg +6.5217e+04  vuo +2.6608e+03  tot -3.3245e+04
+      Delta E a t  320 totale  : cost +4.8103e-07  cin +1.9042e+03  leg +1.1531e+03  vuo -2.7971e+03  tot +2.6022e+02
+      Delta E a t 2000 vicino  : cost +1.1785e+06  cin +9.4606e+03  leg -7.4581e+05  vuo -1.1155e+04  tot +4.3097e+05
+      Delta E a t 2000 lontano : cost -1.1785e+06  cin -6.2431e+02  leg +7.4650e+05  vuo +2.2228e+03  tot -4.3038e+05
+      Delta E a t 2000 totale  : cost +3.0077e-06  cin +8.8363e+03  leg +6.8862e+02  vuo -8.9323e+03  tot +5.9258e+02
+  N 1e+06   L  81 congelato zero simm: vita None (ogni 20: None; 74f99039 None); dM 1.9e-12 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 3.401e+02; il fronte - archi/tick (0 punti; r vicino 13.3, r toro 28.1; r materia 65.8) (123 s)
+      Delta E a t  320 vicino  : cost +6.0396e+03  cin -2.7634e+03  leg -3.8778e+03  vuo +0.0000e+00  tot -6.0157e+02
+      Delta E a t  320 lontano : cost -6.0396e+03  cin +3.7998e+03  leg +2.8549e+03  vuo +0.0000e+00  tot +6.1514e+02
+      Delta E a t  320 totale  : cost +4.8196e-07  cin +1.0365e+03  leg -1.0229e+03  vuo +0.0000e+00  tot +1.3571e+01
+      Delta E a t 2000 vicino  : cost +1.8218e+04  cin -1.9999e+03  leg -1.1647e+04  vuo +0.0000e+00  tot +4.5707e+03
+      Delta E a t 2000 lontano : cost -1.8218e+04  cin +6.8581e+03  leg +6.8636e+03  vuo +0.0000e+00  tot -4.4957e+03
+      Delta E a t 2000 totale  : cost +3.0091e-06  cin +4.8582e+03  leg -4.7833e+03  vuo +0.0000e+00  tot +7.4954e+01
+  N 1e+06   L  81 intero    zero oggi: vita 320 (ogni 20: 320; 74f99039 320); dM 2.6e-13 dV 4.2e-13; il vuoto al bit False; la deriva di H_tot 5.891e+02; il fronte 0.3037 archi/tick (3 punti; r vicino 13.3, r toro 28.1; r materia 65.8) (91 s)
+      Delta E a t  320 vicino  : cost +3.1365e+05  cin -1.4426e+03  leg -6.4064e+04  vuo -2.6713e+02  tot +2.4788e+05
+      Delta E a t  320 lontano : cost -3.1365e+05  cin +3.3468e+03  leg +6.5217e+04  vuo -2.5300e+03  tot -2.4762e+05
+      Delta E a t  320 totale  : cost +1.9372e-07  cin +1.9042e+03  leg +1.1531e+03  vuo -2.7971e+03  tot +2.6022e+02
+      Delta E a t 2000 vicino  : cost +3.5382e+06  cin +9.4177e+03  leg -7.4579e+05  vuo -3.7003e+02  tot +2.8014e+06
+      Delta E a t 2000 lontano : cost -3.5382e+06  cin -5.8915e+02  leg +7.4648e+05  vuo -8.5594e+03  tot -2.8008e+06
+      Delta E a t 2000 totale  : cost +1.2051e-06  cin +8.8285e+03  leg +6.8995e+02  vuo -8.9294e+03  tot +5.8908e+02
+  N 1e+06   L  81 congelato zero oggi: vita None (ogni 20: None; 74f99039 None); dM 2.6e-13 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 3.401e+02; il fronte - archi/tick (0 punti; r vicino 13.3, r toro 28.1; r materia 65.8) (78 s)
+      Delta E a t  320 vicino  : cost +1.8133e+04  cin -2.7634e+03  leg -3.8778e+03  vuo +0.0000e+00  tot +1.1492e+04
+      Delta E a t  320 lontano : cost -1.8133e+04  cin +3.7998e+03  leg +2.8549e+03  vuo +0.0000e+00  tot -1.1478e+04
+      Delta E a t  320 totale  : cost +1.9278e-07  cin +1.0365e+03  leg -1.0229e+03  vuo +0.0000e+00  tot +1.3571e+01
+      Delta E a t 2000 vicino  : cost +5.4695e+04  cin -1.9999e+03  leg -1.1647e+04  vuo +0.0000e+00  tot +4.1049e+04
+      Delta E a t 2000 lontano : cost -5.4695e+04  cin +6.8581e+03  leg +6.8636e+03  vuo +0.0000e+00  tot -4.0974e+04
+      Delta E a t 2000 totale  : cost +1.2051e-06  cin +4.8582e+03  leg -4.7833e+03  vuo +0.0000e+00  tot +7.4954e+01
+  N 1e+06   L 120 intero    zero simm: vita 320 (ogni 20: 320; 74f99039 320); dM 1.9e-12 dV 8.4e-13; il vuoto al bit False; la deriva di H_tot 4.010e+02; il fronte 0.2539 archi/tick (9 punti; r vicino 13.3, r toro 41.6; r materia 66.0) (427 s)
+      Delta E a t  320 vicino  : cost +1.0446e+05  cin -1.4735e+03  leg -6.4062e+04  vuo -5.4474e+03  tot +3.3476e+04
+      Delta E a t  320 lontano : cost -1.0446e+05  cin +3.3443e+03  leg +6.5251e+04  vuo +2.6434e+03  tot -3.3221e+04
+      Delta E a t  320 totale  : cost +4.8149e-07  cin +1.8708e+03  leg +1.1886e+03  vuo -2.8040e+03  tot +2.5537e+02
+      Delta E a t 2000 vicino  : cost +1.2418e+06  cin +8.6336e+03  leg -7.8599e+05  vuo -1.1296e+04  tot +4.5312e+05
+      Delta E a t 2000 lontano : cost -1.2418e+06  cin -2.5823e+03  leg +7.8747e+05  vuo +4.1499e+03  tot -4.5274e+05
+      Delta E a t 2000 totale  : cost +3.0086e-06  cin +6.0513e+03  leg +1.4759e+03  vuo -7.1465e+03  tot +3.8063e+02
+  N 1e+06   L 120 congelato zero simm: vita None (ogni 20: None; 74f99039 None); dM 1.9e-12 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 3.401e+02; il fronte - archi/tick (0 punti; r vicino 13.3, r toro 41.6; r materia 66.0) (320 s)
+      Delta E a t  320 vicino  : cost +6.0298e+03  cin -2.7573e+03  leg -3.8716e+03  vuo +0.0000e+00  tot -5.9909e+02
+      Delta E a t  320 lontano : cost -6.0298e+03  cin +3.8038e+03  leg +2.8394e+03  vuo +0.0000e+00  tot +6.1333e+02
+      Delta E a t  320 totale  : cost +4.8196e-07  cin +1.0465e+03  leg -1.0322e+03  vuo +0.0000e+00  tot +1.4249e+01
+      Delta E a t 2000 vicino  : cost +1.5712e+04  cin -1.4970e+03  leg -1.0046e+04  vuo +0.0000e+00  tot +4.1691e+03
+      Delta E a t 2000 lontano : cost -1.5712e+04  cin +6.3019e+03  leg +5.2461e+03  vuo +0.0000e+00  tot -4.1636e+03
+      Delta E a t 2000 totale  : cost +3.0091e-06  cin +4.8050e+03  leg -4.7995e+03  vuo +0.0000e+00  tot +5.5082e+00
+  N 1e+06   L 120 intero    zero oggi: vita 320 (ogni 20: 320; 74f99039 320); dM 2.6e-13 dV 4.2e-13; il vuoto al bit False; la deriva di H_tot 4.017e+02; il fronte 0.2539 archi/tick (9 punti; r vicino 13.3, r toro 41.6; r materia 66.0) (232 s)
+      Delta E a t  320 vicino  : cost +3.1362e+05  cin -1.4735e+03  leg -6.4062e+04  vuo -2.6665e+02  tot +2.4782e+05
+      Delta E a t  320 lontano : cost -3.1362e+05  cin +3.3443e+03  leg +6.5251e+04  vuo -2.5373e+03  tot -2.4757e+05
+      Delta E a t  320 totale  : cost +1.9185e-07  cin +1.8708e+03  leg +1.1886e+03  vuo -2.8040e+03  tot +2.5537e+02
+      Delta E a t 2000 vicino  : cost +3.7282e+06  cin +8.6285e+03  leg -7.8598e+05  vuo -1.8167e+02  tot +2.9507e+06
+      Delta E a t 2000 lontano : cost -3.7282e+06  cin -2.5719e+03  leg +7.8745e+05  vuo -6.9642e+03  tot -2.9503e+06
+      Delta E a t 2000 totale  : cost +1.2042e-06  cin +6.0565e+03  leg +1.4712e+03  vuo -7.1459e+03  tot +3.8186e+02
+  N 1e+06   L 120 congelato zero oggi: vita None (ogni 20: None; 74f99039 None); dM 2.6e-13 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 3.401e+02; il fronte - archi/tick (0 punti; r vicino 13.3, r toro 41.6; r materia 66.0) (198 s)
+      Delta E a t  320 vicino  : cost +1.8104e+04  cin -2.7573e+03  leg -3.8716e+03  vuo +0.0000e+00  tot +1.1475e+04
+      Delta E a t  320 lontano : cost -1.8104e+04  cin +3.8038e+03  leg +2.8394e+03  vuo +0.0000e+00  tot -1.1460e+04
+      Delta E a t  320 totale  : cost +1.9278e-07  cin +1.0465e+03  leg -1.0322e+03  vuo +0.0000e+00  tot +1.4249e+01
+      Delta E a t 2000 vicino  : cost +4.7172e+04  cin -1.4970e+03  leg -1.0046e+04  vuo +0.0000e+00  tot +3.5629e+04
+      Delta E a t 2000 lontano : cost -4.7172e+04  cin +6.3019e+03  leg +5.2461e+03  vuo +0.0000e+00  tot -3.5624e+04
+      Delta E a t 2000 totale  : cost +1.2061e-06  cin +4.8050e+03  leg -4.7995e+03  vuo +0.0000e+00  tot +5.5082e+00
+### N 100000: la larghezza del risolutore 3.7540; e_K(0) -4.710543
+  N 100000  L  48 intero    zero simm: vita 130 (ogni 20: 140; 74f99039 140); dM 1.9e-12 dV 8.8e-13; il vuoto al bit False; la deriva di H_tot 2.401e+02; il fronte - archi/tick (1 punti; r vicino 7.6, r toro 16.6; r materia 37.3) (51 s)
+      Delta E a t  140 vicino  : cost +1.0787e+04  cin +3.1213e+02  leg -6.1203e+03  vuo -1.7708e+03  tot +3.2081e+03
+      Delta E a t  140 lontano : cost -1.0787e+04  cin +4.2002e+02  leg +6.5865e+03  vuo +6.1745e+02  tot -3.1631e+03
+      Delta E a t  140 totale  : cost +2.1129e-08  cin +7.3216e+02  leg +4.6620e+02  vuo -1.1533e+03  tot +4.5035e+01
+      Delta E a t 2000 vicino  : cost +7.8988e+04  cin +1.9165e+03  leg -4.8582e+04  vuo -3.8379e+03  tot +2.8484e+04
+      Delta E a t 2000 lontano : cost -7.8988e+04  cin +2.0394e+03  leg +4.8965e+04  vuo -3.3716e+02  tot -2.8321e+04
+      Delta E a t 2000 totale  : cost +3.0058e-07  cin +3.9559e+03  leg +3.8261e+02  vuo -4.1751e+03  tot +1.6343e+02
+  N 100000  L  48 congelato zero simm: vita 1080 (ogni 20: 1080; 74f99039 1080); dM 1.9e-12 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 1.719e+02; il fronte - archi/tick (0 punti; r vicino 7.6, r toro 16.6; r materia 37.3) (40 s)
+      Delta E a t  140 vicino  : cost +1.3488e+03  cin -6.5602e+02  leg -8.9153e+02  vuo +0.0000e+00  tot -1.9875e+02
+      Delta E a t  140 lontano : cost -1.3488e+03  cin +9.9103e+02  leg +5.4588e+02  vuo +0.0000e+00  tot +1.8811e+02
+      Delta E a t  140 totale  : cost +2.1158e-08  cin +3.3501e+02  leg -3.4565e+02  vuo +0.0000e+00  tot -1.0640e+01
+      Delta E a t 2000 vicino  : cost +7.1558e+03  cin +3.2031e+02  leg -4.6059e+03  vuo +0.0000e+00  tot +2.8702e+03
+      Delta E a t 2000 lontano : cost -7.1558e+03  cin +2.4632e+03  leg +1.9882e+03  vuo +0.0000e+00  tot -2.7044e+03
+      Delta E a t 2000 totale  : cost +3.0058e-07  cin +2.7835e+03  leg -2.6177e+03  vuo +0.0000e+00  tot +1.6578e+02
+  N 100000  L  48 intero    zero oggi: vita 130 (ogni 20: 140; 74f99039 140); dM 2.6e-13 dV 4.3e-13; il vuoto al bit False; la deriva di H_tot 2.417e+02; il fronte - archi/tick (1 punti; r vicino 7.6, r toro 16.6; r materia 37.3) (30 s)
+      Delta E a t  140 vicino  : cost +3.2386e+04  cin +3.1213e+02  leg -6.1203e+03  vuo -1.2171e+02  tot +2.6457e+04
+      Delta E a t  140 lontano : cost -3.2386e+04  cin +4.2002e+02  leg +6.5865e+03  vuo -1.0316e+03  tot -2.6412e+04
+      Delta E a t  140 totale  : cost +8.3819e-09  cin +7.3216e+02  leg +4.6620e+02  vuo -1.1533e+03  tot +4.5035e+01
+      Delta E a t 2000 vicino  : cost +2.3692e+05  cin +1.9865e+03  leg -4.8531e+04  vuo -1.5259e+02  tot +1.9022e+05
+      Delta E a t 2000 lontano : cost -2.3692e+05  cin +1.9825e+03  leg +4.8900e+04  vuo -4.0161e+03  tot -1.9005e+05
+      Delta E a t 2000 totale  : cost +1.2055e-07  cin +3.9689e+03  leg +3.6818e+02  vuo -4.1687e+03  tot +1.6845e+02
+  N 100000  L  48 congelato zero oggi: vita 1080 (ogni 20: 1080; 74f99039 1080); dM 2.6e-13 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 1.719e+02; il fronte - archi/tick (0 punti; r vicino 7.6, r toro 16.6; r materia 37.3) (25 s)
+      Delta E a t  140 vicino  : cost +4.0496e+03  cin -6.5602e+02  leg -8.9153e+02  vuo +0.0000e+00  tot +2.5020e+03
+      Delta E a t  140 lontano : cost -4.0496e+03  cin +9.9103e+02  leg +5.4588e+02  vuo +0.0000e+00  tot -2.5127e+03
+      Delta E a t  140 totale  : cost +8.4983e-09  cin +3.3501e+02  leg -3.4565e+02  vuo +0.0000e+00  tot -1.0640e+01
+      Delta E a t 2000 vicino  : cost +2.1484e+04  cin +3.2031e+02  leg -4.6059e+03  vuo +0.0000e+00  tot +1.7199e+04
+      Delta E a t 2000 lontano : cost -2.1484e+04  cin +2.4632e+03  leg +1.9882e+03  vuo +0.0000e+00  tot -1.7033e+04
+      Delta E a t 2000 totale  : cost +1.2072e-07  cin +2.7835e+03  leg -2.6177e+03  vuo +0.0000e+00  tot +1.6578e+02
+  N 100000  L  69 intero    zero simm: vita 130 (ogni 20: 140; 74f99039 140); dM 1.9e-12 dV 8.5e-13; il vuoto al bit False; la deriva di H_tot 1.990e+02; il fronte 0.2855 archi/tick (4 punti; r vicino 7.6, r toro 23.9; r materia 37.5) (111 s)
+      Delta E a t  140 vicino  : cost +1.0787e+04  cin +3.1210e+02  leg -6.1203e+03  vuo -1.7708e+03  tot +3.2081e+03
+      Delta E a t  140 lontano : cost -1.0787e+04  cin +4.1956e+02  leg +6.5866e+03  vuo +6.1722e+02  tot -3.1636e+03
+      Delta E a t  140 totale  : cost +2.1071e-08  cin +7.3166e+02  leg +4.6635e+02  vuo -1.1535e+03  tot +4.4468e+01
+      Delta E a t 2000 vicino  : cost +6.8782e+04  cin +2.3775e+03  leg -4.2014e+04  vuo -3.8926e+03  tot +2.5253e+04
+      Delta E a t 2000 lontano : cost -6.8782e+04  cin +6.5840e+02  leg +4.2716e+04  vuo +2.7040e+02  tot -2.5137e+04
+      Delta E a t 2000 totale  : cost +3.0064e-07  cin +3.0359e+03  leg +7.0233e+02  vuo -3.6222e+03  tot +1.1610e+02
+  N 100000  L  69 congelato zero simm: vita 590 (ogni 20: 620; 74f99039 620); dM 1.9e-12 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 1.293e+02; il fronte - archi/tick (0 punti; r vicino 7.6, r toro 23.9; r materia 37.5) (87 s)
+      Delta E a t  140 vicino  : cost +1.3488e+03  cin -6.5601e+02  leg -8.9153e+02  vuo +0.0000e+00  tot -1.9874e+02
+      Delta E a t  140 lontano : cost -1.3488e+03  cin +9.9075e+02  leg +5.4588e+02  vuo +0.0000e+00  tot +1.8783e+02
+      Delta E a t  140 totale  : cost +2.1129e-08  cin +3.3474e+02  leg -3.4565e+02  vuo +0.0000e+00  tot -1.0903e+01
+      Delta E a t 2000 vicino  : cost +4.9483e+03  cin +3.0570e+02  leg -3.1950e+03  vuo +0.0000e+00  tot +2.0590e+03
+      Delta E a t 2000 lontano : cost -4.9483e+03  cin +2.1715e+03  leg +7.5964e+02  vuo +0.0000e+00  tot -2.0172e+03
+      Delta E a t 2000 totale  : cost +3.0070e-07  cin +2.4772e+03  leg -2.4353e+03  vuo +0.0000e+00  tot +4.1822e+01
+  N 100000  L  69 intero    zero oggi: vita 130 (ogni 20: 140; 74f99039 140); dM 2.6e-13 dV 4.3e-13; il vuoto al bit False; la deriva di H_tot 1.990e+02; il fronte 0.2855 archi/tick (4 punti; r vicino 7.6, r toro 23.9; r materia 37.5) (65 s)
+      Delta E a t  140 vicino  : cost +3.2386e+04  cin +3.1210e+02  leg -6.1203e+03  vuo -1.2171e+02  tot +2.6457e+04
+      Delta E a t  140 lontano : cost -3.2386e+04  cin +4.1956e+02  leg +6.5866e+03  vuo -1.0318e+03  tot -2.6412e+04
+      Delta E a t  140 totale  : cost +8.4983e-09  cin +7.3166e+02  leg +4.6635e+02  vuo -1.1535e+03  tot +4.4468e+01
+      Delta E a t 2000 vicino  : cost +2.0650e+05  cin +2.3968e+03  leg -4.2012e+04  vuo -8.6860e+01  tot +1.6680e+05
+      Delta E a t 2000 lontano : cost -2.0650e+05  cin +6.4071e+02  leg +4.2705e+04  vuo -3.5292e+03  tot -1.6668e+05
+      Delta E a t 2000 totale  : cost +1.2084e-07  cin +3.0375e+03  leg +6.9364e+02  vuo -3.6161e+03  tot +1.1505e+02
+  N 100000  L  69 congelato zero oggi: vita 590 (ogni 20: 620; 74f99039 620); dM 2.6e-13 dV 0.0e+00; il vuoto al bit True; la deriva di H_tot 1.293e+02; il fronte - archi/tick (0 punti; r vicino 7.6, r toro 23.9; r materia 37.5) (55 s)
+      Delta E a t  140 vicino  : cost +4.0496e+03  cin -6.5601e+02  leg -8.9153e+02  vuo +0.0000e+00  tot +2.5020e+03
+      Delta E a t  140 lontano : cost -4.0496e+03  cin +9.9075e+02  leg +5.4588e+02  vuo +0.0000e+00  tot -2.5129e+03
+      Delta E a t  140 totale  : cost +8.6147e-09  cin +3.3474e+02  leg -3.4565e+02  vuo +0.0000e+00  tot -1.0903e+01
+      Delta E a t 2000 vicino  : cost +1.4857e+04  cin +3.0570e+02  leg -3.1950e+03  vuo +0.0000e+00  tot +1.1967e+04
+      Delta E a t 2000 lontano : cost -1.4857e+04  cin +2.1715e+03  leg +7.5964e+02  vuo +0.0000e+00  tot -1.1925e+04
+      Delta E a t 2000 totale  : cost +1.2072e-07  cin +2.4772e+03  leg -2.4353e+03  vuo +0.0000e+00  tot +4.1822e+01
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LETTURA (lo zero simmetrico, il tick intero): il verso dello scambio, vicino; l'energia che arriva lontano
+  N 1e+06   L  81 t  320: vicino il legame -6.4064e+04, il vuoto -5.4579e+03, la cinetica -1.4426e+03, i costituenti +1.0447e+05; lontano il totale -3.3245e+04 (il vuoto +2.6608e+03, il legame +6.5217e+04)
+  N 1e+06   L  81 t 2000: vicino il legame -7.4581e+05, il vuoto -1.1155e+04, la cinetica +9.4606e+03, i costituenti +1.1785e+06; lontano il totale -4.3038e+05 (il vuoto +2.2228e+03, il legame +7.4650e+05)
+  N 1e+06   L  81: il fronte del vuoto 0.3037 archi/tick, contro v_max 0.1836
+  N 1e+06   L 120 t  320: vicino il legame -6.4062e+04, il vuoto -5.4474e+03, la cinetica -1.4735e+03, i costituenti +1.0446e+05; lontano il totale -3.3221e+04 (il vuoto +2.6434e+03, il legame +6.5251e+04)
+  N 1e+06   L 120 t 2000: vicino il legame -7.8599e+05, il vuoto -1.1296e+04, la cinetica +8.6336e+03, i costituenti +1.2418e+06; lontano il totale -4.5274e+05 (il vuoto +4.1499e+03, il legame +7.8747e+05)
+  N 1e+06   L 120: il fronte del vuoto 0.2539 archi/tick, contro v_max 0.1836
+  N 100000  L  48 t  140: vicino il legame -6.1203e+03, il vuoto -1.7708e+03, la cinetica +3.1213e+02, i costituenti +1.0787e+04; lontano il totale -3.1631e+03 (il vuoto +6.1745e+02, il legame +6.5865e+03)
+  N 100000  L  48 t 2000: vicino il legame -4.8582e+04, il vuoto -3.8379e+03, la cinetica +1.9165e+03, i costituenti +7.8988e+04; lontano il totale -2.8321e+04 (il vuoto -3.3716e+02, il legame +4.8965e+04)
+  N 100000  L  48: il fronte del vuoto - archi/tick, contro v_max 0.1836
+  N 100000  L  69 t  140: vicino il legame -6.1203e+03, il vuoto -1.7708e+03, la cinetica +3.1210e+02, i costituenti +1.0787e+04; lontano il totale -3.1636e+03 (il vuoto +6.1722e+02, il legame +6.5866e+03)
+  N 100000  L  69 t 2000: vicino il legame -4.2014e+04, il vuoto -3.8926e+03, la cinetica +2.3775e+03, i costituenti +6.8782e+04; lontano il totale -2.5137e+04 (il vuoto +2.7040e+02, il legame +4.2716e+04)
+  N 100000  L  69: il fronte del vuoto 0.2855 archi/tick, contro v_max 0.1836
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (0): lo stato a t 0 e la vita (ogni 20 tick) = il jsonl di 74f99039, per ogni N, L, modo e zero   PASSA   N 1e+06 L 81 intero simm vita 320/320; N 1e+06 L 81 congelato simm vita None/None; N 1e+06 L 81 intero oggi vita 320/320; N 1e+06 L 81 congelato oggi vita None/None; N 1e+06 L 120 intero simm vita 320/320; N 1e+06 L 120 congelato simm vita None/None; N 1e+06 L 120 intero oggi vita 320/320; N 1e+06 L 120 congelato oggi vita None/None; N 100000 L 48 intero simm vita 140/140; N 100000 L 48 congelato simm vita 1080/1080; N 100000 L 48 intero oggi vita 140/140; N 100000 L 48 congelato oggi vita 1080/1080; N 100000 L 69 intero simm vita 140/140; N 100000 L 69 congelato simm vita 620/620; N 100000 L 69 intero oggi vita 140/140; N 100000 L 69 congelato oggi vita 620/620
+  DEVE PASSARE (1): M e V entro 1e-10; col vuoto congelato l'energia del vuoto costante al bit                   PASSA   dM 1.9e-12 dV 8.8e-13
+  DEVE PASSARE (2): le differenze nel tempo dei pezzi (totale, alla vita e a T_MAX) alle due taglie entro 0.001  ### FALLISCE   il peggiore 1.98e-03
+  DEVE PASSARE (3): le differenze nel tempo coi due zeri uguali entro 1e-06 di N |e_K(0)|, tolto 2 pi lambda vol ### FALLISCE   il peggiore 1.63e-04
+  PUO' FALLIRE (4): H_tot nel tick intero entro 10 volte la deriva del vuoto congelato                           PASSA   N 1e+06 L 81 simm 5.93e+02/3.40e+02; N 1e+06 L 81 oggi 5.89e+02/3.40e+02; N 1e+06 L 120 simm 4.01e+02/3.40e+02; N 1e+06 L 120 oggi 4.02e+02/3.40e+02; N 100000 L 48 simm 2.40e+02/1.72e+02; N 100000 L 48 oggi 2.42e+02/1.72e+02; N 100000 L 69 simm 1.99e+02/1.29e+02; N 100000 L 69 oggi 1.99e+02/1.29e+02
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/5 controlli passano; DEVE fallite: 2 ['DEVE PASSARE (2): le differenze nel tempo dei pezzi (totale, alla vita e a T_MAX) alle due taglie entro 0.001 di N |e_K(0)|', 'DEVE PASSARE (3): le differenze nel tempo coi due zeri uguali entro 1e-06 di N |e_K(0)|, tolto 2 pi lambda volte la differenza di norma']
