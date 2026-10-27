@@ -38,6 +38,12 @@
 
 ### **Mi FERMO** ### **se `s1`, `s2`, `0` o `g` fallisce** *(lo strumento non misura la torsione)*, ### **o se il punto fisso di `cs` ALZA** *(lo riporto, e la corsa con `cs` spento resta)*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(la prova di costruzione a `60` tick, `N 1e5` soltanto: NON il referto)*
+
+- ### **IL CONTROLLO `0` SENZA MATERIA:** ### **il profilo del solitone non si risolve a norma zero** *(`_gravita_collettiva.profilo`: `NaN`)*: ### **il controllo usa la scena di `N 1e5` con la materia messa a zero** *(lo stesso toro `L 48`)*. ### **A `60` tick: `max |theta| = 0` al bit, `cs` spento e acceso.**
+- ### ⚠ **I NUMERI GIA' VISTI, DICHIARATI:** ### **`(i)` con `cs` SPENTO la guardia SCATTA: l'incremento massimo per tick `3.13`** *(quasi `pi`)*; ### **`390` archi su `6912` oltre `pi/2`, a `r` da `5.8` a `10.8`** *(il bordo del solitone, `w_in 3.81`)*, ### **col loro `|z|` minimo da `1.2e-3` a `0.20`:** ### **non solo fasi vicino a uno zero del modulo: la fase relativa GIRA piu' in fretta di quanto un tick risolva.** ### **`(ii)` con `cs` ACCESO il punto fisso di `cs` NON CONVERGE GIA' AL TICK `0`** *(`120` giri, l'ultimo scarto `0.217`)*: ### **`tick.tick_con_cs` ALZA.**
+- ### **LE SOGLIE NON CAMBIANO.** ### **Lo script ha in piu' la diagnosi della guardia** *(gli archi oltre `pi/2`: quanti, a che `r`, col loro `|z|` minimo)* ### **e il tick a cui il punto fisso alza.** ### **La corsa si fa intera per documentare le due fermate a piena taglia** *(`N 1e6` `L 81` compreso)*; ### **le fermate del §2 restano:** ### **se `g` fallisce o il punto fisso alza, il referto lo dice e mi FERMO.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script `csv/_torsione_del_vuoto.py`, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice (una voce `TORSIONE-DEL-VUOTO`).
