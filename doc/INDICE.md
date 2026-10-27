@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 167 |
+| `FISICA` | `2` | 168 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -205,6 +205,7 @@
 | `CONTO-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | conto del vuoto: nascita con D7 e flip liberano energia; il vuoto uniforme, al m |
 | `CONTROLLO-CONTRO-ATTESA-CONGELATA` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | un controllo della migrazione gridava fuori posto su un lavoro CHIESTO da Luca |
 | `COPPIA-RAMP` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | APERTA il 2026-09-26 / PERCHE' LA COPPIA NON PORTA ramp? Misurato sui figli (2 s |
+| `CORRENTE-DERIVATA-H-TOT` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la strada D del libro dei conti: una corrente d energia per H_tot derivata dai c |
 | `COSA-RICONTROLLARE` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [COSA-RICONTROLLARE] |
 | `COSTO-MEMORIA-DEI-FLUSSI-PARZIALI` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | I flussi parziali costano 1.17x dello stato in buffer, e la scena passa la sogli |
 | `CRESCITA-DOPO-Z43` | MISURA | FISICA | 1 | ### **SOSPESA** |  | con r = cs/CS_M la rete quasi non cresce: ~25 nascite contro ~1500 in 150 passi |
@@ -492,7 +493,7 @@
 | `LAMBDA-INVARIANTE-OGNI-ARCO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mito |
 | `LEGAME-SCENE-GRANDI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2 |
 | `LETTORI-INDICE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
-| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti dell energia: il documento c'e', la corrente sul confine aspe |
+| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti dell energia: la strada A come strumento, la B come diagnosi  |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
