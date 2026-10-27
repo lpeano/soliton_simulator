@@ -493,7 +493,7 @@
 | `LAMBDA-INVARIANTE-OGNI-ARCO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mito |
 | `LEGAME-SCENE-GRANDI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2 |
 | `LETTORI-INDICE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
-| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti: lo strumento (A + B) conta giusto; H_tot non devia come s^2  |
+| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti: conta giusto; H_tot col legame S1 DERIVA senza scalare con s |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |

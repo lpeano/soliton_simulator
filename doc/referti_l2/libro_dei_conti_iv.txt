@@ -1,0 +1,18 @@
+[TIMBRO] _libro_dei_conti_iv.py  sha1-BYTE d43fbce7  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+IL SIGILLO (iv) DEL LIBRO DEI CONTI, CORRETTO DOPO I NUMERI (Luca, 18:45): l'assestamento, il salto iniziale, l'errore del passo e la deriva dopo l'assestamento
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_libro_dei_conti_iv.py d43fbce7; csv/_libro_dei_conti.py 9c5d81d5; csv/_energia_del_legame.py 0197ecc0
+  la configurazione: TAU 600 S_PASSI (0.3, 0.15) CRESCITA 0.01 RAPPORTO_ATTESO 4 TOLL 0.2; da _libro_dei_conti: N_RIF 100000 FATTORE 12 ZERO simm LAM_ZERO 0.5
+  ### IL CRITERIO, CORRETTO DOPO I NUMERI: l'errore del passo = max_{t >= t_a} |H_tot(t) - H_tot(t_a)|; t_a = il primo tick dopo il quale il massimo progressivo di |H_tot - H_tot(0)| cresce meno dell'1%
+----------------------------------------------------------------------------------------------------------------------------------
+  s 0.3: 2000 tick; t_a 1797 (tempo fisico 539.10); il SALTO +2.435958e+02 = +5.171e-04 N |e_K(0)|; l'errore del passo dopo t_a 1.402775e+02 = 2.978e-04 N |e_K(0)|; la deriva +7.0478e-02 per unita' di tempo fisico; il max su tutto 2.435958e+02 (75 s)
+  s 0.15: 4000 tick; t_a 6 (tempo fisico 0.90); il SALTO -1.583283e+02 = -3.361e-04 N |e_K(0)|; l'errore del passo dopo t_a 1.961699e+02 = 4.164e-04 N |e_K(0)|; la deriva +9.7825e-02 per unita' di tempo fisico; il max su tutto 1.583283e+02 (155 s)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (iv'): l'errore del passo dopo l'assestamento va come s^2: il rapporto s 0.3 / s 0.15 entro 4 +- 20% ### FALLISCE   0.7151
+  il rapporto dei SALTI (una lettura): -1.5385
+ESITO: 0/1; DEVE fallite: 1
