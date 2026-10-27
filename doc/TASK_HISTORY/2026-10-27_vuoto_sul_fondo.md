@@ -35,6 +35,10 @@
 
 ### **Mi FERMO** ### **se `t` o `a` fallisce, o se `f` fallisce** *(come dice il mandato)*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(la prova di costruzione a `L 6`, l'energia a `L 12`: NON il referto)*
+
+- ### ⚠ **I NUMERI GIA' VISTI, DICHIARATI:** ### **`(t)` `3.6e-16`;** ### **lo spettro da `-2 pi` (molteplicita' `73` = `2n + 1`) a `0` (molteplicita' `1`);** ### **il vuoto uniforme a `0`, residuo `3.0e-15`;** ### **il flusso costante per direzione a `-2 pi`, residuo `3.3e-15`, `|phi| = 1`, la torsione `pi` su ogni arco;** ### **il tick sui due stati: autostati a `1e-15`, la fase = `-s (E + 2 pi lambda)` a `1e-15`;** ### **la materia: lo stato `K` a `-4.710543`, a meta' del suo spettro** *(`216` livelli sotto e `216` sopra)*. ### **La derivazione del §1 torna dal codice.** ### **Le soglie non cambiano.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. `csv/_vuoto_sul_fondo.py`, committato prima della corsa; 3. la corsa e il referto; 4. se `f` passa: `(c-ii)`, la nascita dal fondo *(con lo strumento di `f7ee87a9`, `csv/_divisione_vuoto.py`; un'annotazione qui prima)*; 5. `(c-iii)`, il solitone dal fondo *(lo strumento del libro dei conti)*.
