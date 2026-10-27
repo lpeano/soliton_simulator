@@ -36,3 +36,13 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa *(scritto in binario, senza `CRLF`)*; 3. la corsa, in parallelo a `C2`; 4. il referto, la relazione, l'indice.
+
+## 4. IL RISULTATO *(dopo `762cb0e8`)*
+
+### **IL REFERTO DEL VUOTO DISTURBATO:** `doc/referti_l2/vuoto_disturbato.{txt,jsonl}` *(`csv/_vuoto_disturbato.py` al commit `762cb0e8`, «committato e pulito»; il task history `abdd212c`)*. ### **`3/3`.**
+
+- ### **I CONTROLLI:** ### **`V` conservato entro `4.4e-13`;** ### **il controllo nullo** *(`cs` acceso SENZA disturbo, `L 48`)* ### **resta a scarto `0` AL BIT per `2000` tick.**
+- ### ⭐ **IL VUOTO E' STABILE, non solo stazionario** *(l'errore del guardiano `n.72` risolto dalla misura)*: ### **col disturbo relativo `1e-6` per estremita'** *(lo scarto iniziale di `Lambda` per estremita' `8.2e-7`-`8.3e-7`)*, ### **a `L 48, 69, 81, 120`, lo scarto MASSIMO e' quello iniziale, e alla fine e' `5.7e-7`-`6.0e-7`** *(il disturbo si sparge in onde e scende di circa il `30%`)*, ### **CON `cs` SPENTO E CON `cs` ACCESO.** ### **Il tasso dal fit e' fra `-1.1e-5` e `-6.3e-6` per tick su tutta la serie** *(sulla seconda meta' fra `-6.5e-6` e `+1.1e-5`, di segno variabile: rumore attorno a zero)*.
+- ### **CONTRO IL CANALE DI `cs`** *(`974d411a`: `R1` `S1` `0.402` per unita' di `N dtau`; qui `dtau 1`, quindi per tick)*: ### **almeno quattro ordini di grandezza sotto.** ### ⚠ **Ma `974d411a` era CON la materia** *(`x 0.1`, sul quadrato)*: ### **col vuoto da solo il canale di `cs` non si accende** *(lo dice la forma: senza materia `Lambda` resta vicino all'uniforme, e `cs` resta a `1/2` entro `6.2e-7`)*. ### **Quindi l'instabilita' di `R1` viene dalla materia dentro il canale, non dal vuoto.**
+- ### **LA LETTURA PER IL SOLITONE:** ### **nessuna crescita del vuoto da solo in `2000` tick, contro una vita del solitone di `320` e `140` tick:** ### **la lettura `(1)` di `e9e42332` regge anche col disturbo: il vuoto RISPONDE alla materia.**
+- ### ⚠ **IL PROCESSORE ERA CONDIVISO** *(con `C2` e con la parte 1)*: ### **i tempi** *(`33`-`256` s con `cs` spento, `161`-`1572` s con `cs` acceso)* ### **non sono tempi puliti.**

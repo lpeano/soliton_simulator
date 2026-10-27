@@ -1,0 +1,34 @@
+[TIMBRO] _vuoto_disturbato.py  sha1-BYTE c4f03848  committato e pulito
+==================================================================================================================================
+IL VUOTO DA SOLO CON UN DISTURBO: le scene di e9e42332, il disturbo relativo 1e-06 per estremita'; (i) cs spento, (ii) cs acceso (il rapporto 1); il controllo nullo
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_vuoto_disturbato.py c4f03848; csv/_solitone_vuoto_congelato.py 81db8c0a; primo_ordine/tick.py d9a59ff9; primo_ordine/flussi_parziali.py 1461182f
+  la configurazione: LATI (48, 69, 81, 120) L_NULLO 48 T_MAX 2000 OGNI 20 AMPIEZZA 1e-06 SEME 20261027 RAPPORTO 1 SOGLIE (0.1, 1.0) TOLL_NORMA 1e-10 TOLL_STABILE 1e-05 GAMMA_RIF 0.402 VITE_SOLITONE (320, 140); da _solitone_vuoto_congelato: S 0.3 FORMA S1
+  la materia a zero; (i) mot.cs = S, lambda_c None, tick.percorri_tick; (ii) tick.tick_con_cs con Lambda_c = RAPPORTO x la media di Lambda per nodo a t 0 (dopo il disturbo); dtau 1: il tasso per tick = per unita' di N dtau
+----------------------------------------------------------------------------------------------------------------------------------
+  L  48 cs ACCESO    SENZA disturbo: lo scarto di Lambda per estremita' 0.000e+00 -> max 0.000e+00, finale 0.000e+00; il tasso per tick - (seconda meta' -); oltre 0.1: None, oltre 1: None; dV 0.0e+00; Lambda_c 6.000000, cs alla fine [0.49999999999999994, 0.49999999999999994] (161 s)
+  L  48 cs spento    disturbato    : lo scarto di Lambda per estremita' 8.330e-07 -> max 8.330e-07, finale 5.723e-07; il tasso per tick -6.327e-06 (seconda meta' +1.103e-05); oltre 0.1: None, oltre 1: None; dV 4.4e-13; Lambda_c None, cs alla fine [0.3, 0.3] (33 s)
+  L  48 cs ACCESO    disturbato    : lo scarto di Lambda per estremita' 8.330e-07 -> max 8.330e-07, finale 5.659e-07; il tasso per tick -7.898e-06 (seconda meta' +2.971e-06); oltre 0.1: None, oltre 1: None; dV 1.1e-13; Lambda_c 6.000000, cs alla fine [0.4999995201002391, 0.5000004850159742] (246 s)
+  L  69 cs spento    disturbato    : lo scarto di Lambda per estremita' 8.288e-07 -> max 8.288e-07, finale 5.975e-07; il tasso per tick -1.035e-05 (seconda meta' +5.206e-06); oltre 0.1: None, oltre 1: None; dV 4.4e-13; Lambda_c None, cs alla fine [0.3, 0.3] (60 s)
+  L  69 cs ACCESO    disturbato    : lo scarto di Lambda per estremita' 8.288e-07 -> max 8.288e-07, finale 5.946e-07; il tasso per tick -9.345e-06 (seconda meta' +1.068e-06); oltre 0.1: None, oltre 1: None; dV 1.1e-13; Lambda_c 6.000000, cs alla fine [0.49999940849895397, 0.5000005346351666] (541 s)
+  L  81 cs spento    disturbato    : lo scarto di Lambda per estremita' 8.193e-07 -> max 8.193e-07, finale 5.820e-07; il tasso per tick -8.891e-06 (seconda meta' +1.442e-06); oltre 0.1: None, oltre 1: None; dV 4.4e-13; Lambda_c None, cs alla fine [0.3, 0.3] (103 s)
+  L  81 cs ACCESO    disturbato    : lo scarto di Lambda per estremita' 8.193e-07 -> max 8.193e-07, finale 5.864e-07; il tasso per tick -1.121e-05 (seconda meta' -6.535e-06); oltre 0.1: None, oltre 1: None; dV 1.1e-13; Lambda_c 6.000000, cs alla fine [0.49999950852008096, 0.5000005480149924] (754 s)
+  L 120 cs spento    disturbato    : lo scarto di Lambda per estremita' 8.204e-07 -> max 8.204e-07, finale 5.904e-07; il tasso per tick -9.264e-06 (seconda meta' -8.109e-07); oltre 0.1: None, oltre 1: None; dV 4.4e-13; Lambda_c None, cs alla fine [0.3, 0.3] (256 s)
+  L 120 cs ACCESO    disturbato    : lo scarto di Lambda per estremita' 8.204e-07 -> max 8.204e-07, finale 5.867e-07; il tasso per tick -7.006e-06 (seconda meta' +7.526e-06); oltre 0.1: None, oltre 1: None; dV 1.1e-13; Lambda_c 6.000000, cs alla fine [0.4999994363679024, 0.5000006122460477] (1572 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LETTURA: col cs acceso il tasso contro 0.402 (974d411a: R1, S1, il quadrato, la materia x 0.1, per unita' di N dtau); il tempo all'ordine 1 contro la vita del solitone (320, 140)
+  L  48 cs spento : il tasso -6.327e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L  48 cs ACCESO : il tasso -7.898e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L  69 cs spento : il tasso -1.035e-05 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L  69 cs ACCESO : il tasso -9.345e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L  81 cs spento : il tasso -8.891e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L  81 cs ACCESO : il tasso -1.121e-05 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L 120 cs spento : il tasso -9.264e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+  L 120 cs ACCESO : il tasso -7.006e-06 (-0.000 di 0.402); all'ordine 1 non arrivato (la stima dal tasso -)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): V conservato entro 1e-10 relativo (ogni corsa)                                               PASSA   il peggiore 4.4e-13
+  DEVE PASSARE (2): il controllo nullo, cs acceso SENZA disturbo a L 48: lo scarto 0 al bit per T_MAX            PASSA   0.0e+00
+  PUO' FALLIRE (3): (i) cs spento, lo scarto non supera 1e-05 fino a T_MAX (a ogni L)                            PASSA   lo scarto massimo 8.330e-07
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []
