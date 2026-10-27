@@ -66,3 +66,8 @@
 - ### **LA FASE RIFATTA COLLO ZERO SIMMETRICO VERO** *(`csv/_torsione_del_vuoto.py` `sha1-BYTE 0c60cc94`; il referto `torsione_del_vuoto.{txt,jsonl}` riscritto)*: ### **`2/4`, DUE DEVE FALLITE.**
 - ### ⛔ **LA DEVE `(0)` ORA FALLISCE, PER L'ARROTONDAMENTO:** ### **sul vuoto uniforme senza materia `max |theta|` `1.0e-30`** *(`cs` spento)* ### **e `2.8e-44`** *(`cs` acceso)*, ### **contro «zero al bit»:** ### **allo zero simmetrico il vuoto gira di `-0.94` per tick, e le due estremita' di un arco prendono differenze di arrotondamento** *(l'incremento massimo `5.5e-17`)*. ### **Allo zero di OGGI il vuoto non gira, e la prova passava a `0`.** ### **La previsione «al bit» del guardiano vale per la fase allo zero di oggi, non a quello simmetrico;** ### **nella forma d'ENERGIA invece passa al bit** *(gli stessi termini per nodo)*.
 - ### **IL RESTO E' QUELLO DI PRIMA, a meno dell'arrotondamento** *(la convenzione e' una fase globale)*: ### **la guardia `g` fallisce** *(`5799` archi su `6912`, `15505` su `19683`)*; ### **il punto fisso di `cs` alza al tick `0`** *(gli scarti `0.254` e `0.292`)*; ### **le PUO' FALLIRE `NON MISURATE`.**
+
+## 7. LA DEVE (0) CORRETTA DOPO I NUMERI *(la risposta di Luca delle `17:51`)*
+
+- ### **LA CORREZIONE, DICHIARATA DOPO I NUMERI** *(`1.0e-30` e `2.8e-44` gia' visti)*: ### **«al bit» diventa «entro `1e-12` relativo»:** ### **la convenzione simmetrica aggiunge operazioni in virgola mobile.** ### **Relativo a `2 pi`, il quanto della torsione** *(la mia lettura di «relativo», dichiarata)*. ### **Si rivaluta sul jsonl con `csv/_torsione_fase_c0.py`; nessuna corsa.**
+- ### **L'ESITO DELLA MISURA IN FASE si scrive: NON LEGGIBILE** *(gli incrementi a `pi`, la guardia `g`)*.
