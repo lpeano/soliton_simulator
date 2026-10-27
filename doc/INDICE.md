@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 163 |
+| `FISICA` | `2` | 164 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -956,6 +956,7 @@
 | `VETTORI-DAI-BILINEARI` | STANDARD | FISICA | 2 | ### **AGENDA** |  | vettori e tensori SOLO dai bilineari dello spinore e dalle fasi sugli archi |
 | `VIDEO-SCENA` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il video della scena del pilota: diagnostico, mostra `pos` che NON e' la distanz |
 | `VUOTO-DA-SOLO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto da solo e stabile al bit: il vuoto risponde alla materia, non si disfa  |
+| `VUOTO-DISTURBATO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto da solo e stabile, non solo stazionario: un disturbo 1e-6 non cresce, c |
 | `VUOTO-LOCALE-DETERMINISTICO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuo |
 | `W1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `W2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [W2] |
