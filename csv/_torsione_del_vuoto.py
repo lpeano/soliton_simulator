@@ -40,6 +40,7 @@ SINT = ((0.7, True), (3.5, False))   # ### (il ritmo sintetico in rad per tick, 
 TOLL_SINT = 1e-12
 OK = [0, 0]
 FALLITE = []
+NON_MISURATE = []
 
 
 def esito(che, passa, nota="", deve=True):
@@ -50,6 +51,13 @@ def esito(che, passa, nota="", deve=True):
     print("  %-110s %s   %s" % (che[:110], "PASSA" if passa else "### FALLISCE", nota))
     sys.stdout.flush()
     return passa
+
+
+def non_misurata(che, nota):
+    """### **Un criterio senza le sue corse:** ### **NON MISURATO, ne' passato ne' fallito** *(la correzione chiesta da Luca alle 16:58)*."""
+    NON_MISURATE.append(che)
+    print("  %-110s %s   %s" % (che[:110], "NON MISURATA", nota))
+    sys.stdout.flush()
 
 
 def scrivi(r):
@@ -266,10 +274,10 @@ def main(argv):
           "; ".join("N %g cs %s %.4f" % (N, a, r["d_max"]) for (N, a), r in sorted(ris.items())) + ("" if len(ris) == 2 * len(CASI) else " -- CORSE MANCANTI"))
     v1, n1 = True, []
     v2, n2_ = True, []
+    mancano = [N for N in CASI if (N, True) not in ris]
     for N in CASI:
         r = ris.get((N, True))
         if r is None:
-            v1 = v2 = False
             continue
         om = np.abs(r["omega"])
         cl = max(per_classe(r["r_a"], om), key=lambda x: x[1])
@@ -279,11 +287,18 @@ def main(argv):
         c = pearson(om, r["dcs"])
         v2 &= c is not None and c > SOGLIA_CORR
         n2_.append("N %g %s" % (N, "%.4f" % c if c is not None else "-"))
-    esito("PUO' FALLIRE (1): con cs acceso il ritmo e' massimo vicino al solitone (la classe di distanza con la media piu' alta in VICINO)", v1, "; ".join(n1), deve=False)
-    esito("PUO' FALLIRE (2): con cs acceso il ritmo e' proporzionale a Delta cs (Pearson > %g)" % SOGLIA_CORR, v2, "; ".join(n2_), deve=False)
+    c1 = "PUO' FALLIRE (1): con cs acceso il ritmo e' massimo vicino al solitone (la classe di distanza con la media piu' alta in VICINO)"
+    c2 = "PUO' FALLIRE (2): con cs acceso il ritmo e' proporzionale a Delta cs (Pearson > %g)" % SOGLIA_CORR
+    if mancano:
+        nota = "mancano le corse con cs acceso a N %s (il punto fisso di cs alza)" % ", ".join("%g" % N for N in mancano)
+        non_misurata(c1, nota)
+        non_misurata(c2, nota)
+    else:
+        esito(c1, v1, "; ".join(n1), deve=False)
+        esito(c2, v2, "; ".join(n2_), deve=False)
     print("-" * 130)
-    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
-    scrivi({"tipo": "esito", "passano": OK[0], "totale": OK[1], "deve_fallite": FALLITE})
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s; NON MISURATE: %d" % (OK[0], OK[1], len(FALLITE), FALLITE, len(NON_MISURATE)))
+    scrivi({"tipo": "esito", "passano": OK[0], "totale": OK[1], "deve_fallite": FALLITE, "non_misurate": NON_MISURATE})
     return 0
 
 
