@@ -1,0 +1,44 @@
+[TIMBRO] _luce_materia_cono_2.py  sha1-BYTE 6775130a  committato e pulito
+==================================================================================================================================
+C2 CORRETTA: LA LUCE E LA MATERIA ATTORNO A UN CONO -- il disco dalla regola del mandato, la finestra d'uscita in una carta continua
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_luce_materia_cono_2.py 6775130a; csv/_luce_materia_cono.py 3209518c; csv/_u1_prototipo.py d073761c; csv/_u1_terzo.py dbcf49c4; csv/_massa_nei_difetti.py cca69f69
+  la configurazione: X0 -55 BB (24.0, 32.0, 40.0) B_CONV 32 W_LUCE (6.0, 9.0) Q_MAT 0.7 W_MAT (8.0, 11.0) L_USCITA 30 DT_MAT 10 T_MAX_MAT 6000 T_MAX_LUCE 20000 FATTORE_BORDO 3 USCITA {6: (4, 5, 0, 1), 5: (0, 1)} INGRESSO (2, 3); da _luce_materia_cono: S_LUCE 0.3 L_TORO 128 N_K0 20 D_COPIA 50 PERC_FINESTRA 0.99 D_BORDO 4 GUARDIA_BORDO 1e-06
+  IL RAGGIO DALLA REGOLA: L_tot 155.1880, la sorgente a 68.0074, l'inraggio >= 533.5714: R = 617
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (0): il campo su grafo e il generatore sparso vecchi contro i loro riferimenti (i controlli di _l PASSA   0.0e+00 0.0e+00
+  DEVE PASSARE (0): il disco 6 di lato 40: il generatore sparso vettoriale = il vecchio AL BIT, e la distanza da PASSA   H True, distanze True
+  DEVE PASSARE (0): il disco 5 di lato 40: il generatore sparso vettoriale = il vecchio AL BIT, e la distanza da PASSA   H True, distanze True
+  DEVE PASSARE (0): il disco a 6 settori di lato 617: il centro a 6, l'interno a 6, ogni arco interno in due tri PASSA   nodi 1143919, archi 3428052, triangoli 2284134 (137 s)
+  DEVE PASSARE (0): il disco a 5 settori di lato 617: il centro a 5, l'interno a 6, ogni arco interno in due tri PASSA   nodi 953266, archi 2856710, triangoli 1903445 (122 s)
+  luce    disco 6 b   24 W    6 lato +1: theta_in -0.00000 theta_out -0.00000 delta -0.00000 (punti 97/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.49; 169 s)
+  luce    disco 6 b   24 W    6 lato -1: theta_in -0.00000 theta_out -0.00000 delta +0.00000 (punti 99/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.58; 156 s)
+  ### luce disco 6 b 24 W 6: LA CONVERGENZA +0.00000 (pi/3 = 1.04720)
+  luce    disco 6 b   32 W    6 lato +1: theta_in -0.00000 theta_out -0.00000 delta -0.00000 (punti 84/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.49; 170 s)
+  luce    disco 6 b   32 W    6 lato -1: theta_in -0.00000 theta_out -0.00000 delta -0.00000 (punti 83/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.38; 168 s)
+  ### luce disco 6 b 32 W 6: LA CONVERGENZA -0.00000 (pi/3 = 1.04720)
+  luce    disco 6 b   40 W    6 lato +1: theta_in -0.00000 theta_out -0.00000 delta -0.00000 (punti 68/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.43; 160 s)
+  luce    disco 6 b   40 W    6 lato -1: theta_in -0.00000 theta_out -0.00000 delta -0.00000 (punti 70/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.43; 171 s)
+  ### luce disco 6 b 40 W 6: LA CONVERGENZA -0.00000 (pi/3 = 1.04720)
+  luce    disco 5 b   24 W    6 lato +1: theta_in -0.00000 theta_out -0.00549 delta -0.00549 (punti 97/102; fermata bordo; guardia 1.1e-06; larghezza all'uscita 10.63; 719 s)
+  luce    disco 5 b   24 W    6 lato -1: theta_in -0.00000 theta_out +1.04485 delta +1.04485 (punti 99/102; fermata uscita; guardia 0.0e+00; larghezza all'uscita 14.10; 176 s)
+  ### luce disco 5 b 24 W 6: LA CONVERGENZA +1.05034 (pi/3 = 1.04720)
+  luce    disco 5 b   32 W    6 lato +1: theta_in -0.00000 theta_out -0.00089 delta -0.00089 (punti 84/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.52; 146 s)
+  luce    disco 5 b   32 W    6 lato -1: theta_in -0.00000 theta_out +1.04647 delta +1.04647 (punti 83/102; fermata uscita; guardia 0.0e+00; larghezza all'uscita 14.79; 192 s)
+  ### luce disco 5 b 32 W 6: LA CONVERGENZA +1.04735 (pi/3 = 1.04720)
+  luce    disco 5 b   40 W    6 lato +1: theta_in -0.00000 theta_out -0.00007 delta -0.00007 (punti 68/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.44; 146 s)
+  luce    disco 5 b   40 W    6 lato -1: theta_in -0.00000 theta_out +1.04646 delta +1.04646 (punti 70/102; fermata uscita; guardia 0.0e+00; larghezza all'uscita 15.57; 197 s)
+  ### luce disco 5 b 40 W 6: LA CONVERGENZA +1.04653 (pi/3 = 1.04720)
+  luce    disco 5 b   32 W    9 lato +1: theta_in -0.00000 theta_out -0.00016 delta -0.00016 (punti 66/104; fermata uscita; guardia 0.0e+00; larghezza all'uscita 10.69; 140 s)
+  luce    disco 5 b   32 W    9 lato -1: theta_in -0.00000 theta_out +1.04674 delta +1.04674 (punti 65/102; fermata uscita; guardia 0.0e+00; larghezza all'uscita 12.71; 173 s)
+  ### luce disco 5 b 32 W 9: LA CONVERGENZA +1.04690 (pi/3 = 1.04720)
+  materia disco 6 b   24 W    8 lato +1: theta_in - theta_out - delta - (punti 358/0; fermata bordo; guardia 1.0e-06; larghezza all'uscita -; 7428 s)
+  materia disco 6 b   24 W    8 lato -1: theta_in - theta_out - delta - (punti 358/0; fermata bordo; guardia 1.0e-06; larghezza all'uscita -; 7151 s)
+  ### materia disco 6 b 24 W 8: LA CONVERGENZA - (pi/3 = 1.04720)
+  materia disco 6 b   32 W    8 lato +1: theta_in - theta_out - delta - (punti 355/0; fermata bordo; guardia 1.1e-06; larghezza all'uscita -; 7098 s)
+  materia disco 6 b   32 W    8 lato -1: theta_in - theta_out - delta - (punti 356/0; fermata bordo; guardia 1.2e-06; larghezza all'uscita -; 7112 s)
+  ### materia disco 6 b 32 W 8: LA CONVERGENZA - (pi/3 = 1.04720)
+  materia disco 6 b   40 W    8 lato +1: theta_in - theta_out - delta - (punti 352/0; fermata bordo; guardia 1.0e-06; larghezza all'uscita -; 7039 s)
+  materia disco 6 b   40 W    8 lato -1: theta_in - theta_out - delta - (punti 352/0; fermata bordo; guardia 1.0e-06; larghezza all'uscita -; 7052 s)
+  ### materia disco 6 b 40 W 8: LA CONVERGENZA - (pi/3 = 1.04720)
+  materia disco 5 b   24 W    8 lato +1: theta_in - theta_out - delta - (punti 358/0; fermata bordo; guardia 1.0e-06; larghezza all'uscita -; 5930 s)
