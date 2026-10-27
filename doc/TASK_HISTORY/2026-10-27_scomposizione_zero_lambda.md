@@ -67,3 +67,11 @@
 - ### **Il criterio `5` del paragrafo `3` confrontava le FRAZIONI alle due taglie:** ### **hanno `E0` al denominatore, ed esplodono dove `E0` passa per zero** *(`lambda 0.59`)*: ### **non sono una grandezza da confrontare fra le taglie.**
 - ### **IL CRITERIO CORRETTO** *(di Luca)*: ### **`N e_K`, la cinetica, il legame ed `E0` alle due taglie, dopo `2000` tick, entro `1e-3` relativo a `N |e_K(0)|`, a ogni `lambda`.** ### **Si valuta con `csv/_scomposizione_zero_lambda_c5.py` sul jsonl di `0fb93b8c`, senza rigirare.** ### **Il paragrafo `3` e il referto di `0fb93b8c` restano come sono.**
 - ### **La lettura resta** *(Luca)*: ### **a `lambda 1/2` il legame e' il `63%` dei costituenti e il solitone il `37%`** *(lo script lo ricalcola)*.
+
+## 7. IL CRITERIO 5 CORRETTO, VALUTATO *(dopo `f86d5cbb`)*
+
+### **IL CRITERIO `5` CORRETTO DOPO I NUMERI** *(la risposta di Luca del `2026-10-27`, `10:35`; dichiarata, non nascosta)*: `doc/referti_l2/scomposizione_zero_lambda_c5.txt` *(`csv/_scomposizione_zero_lambda_c5.py` al commit `f86d5cbb`, «committato e pulito»; legge il jsonl di `0fb93b8c`, non rigira)*. ### **`1/1`: la parte 1 e' `5/5` col criterio corretto.**
+
+- ### **IL CRITERIO** *(di Luca)*: ### **`N e_K`, la cinetica, il legame ed `E0` alle due taglie dopo `2000` tick entro `1e-3` di `N |e_K(0)| = 4.710543e6`, a ogni `lambda`** *(le frazioni hanno `E0` al denominatore, ed esplodono dove `E0` passa per zero)*.
+- ### **PASSA: il peggiore `1.47e-5`** *(`E0`; la cinetica `1.13e-5`, il legame `3.43e-6`, `N e_K` `2.2e-15`; gli stessi a ogni `lambda`, perche' lo spostamento e' lo stesso alle due taglie)*.
+- ### ⭐ **LA LETTURA, che resta:** ### **a `lambda 1/2`, in parti dei costituenti `N e_K`: il legame `-0.6331`, la cinetica `+0.0029`, il solitone** *(l'energia a riposo)* ### **`+0.3698`.** ### **Il legame e' il `63%` dei costituenti, il solitone il `37%`.**

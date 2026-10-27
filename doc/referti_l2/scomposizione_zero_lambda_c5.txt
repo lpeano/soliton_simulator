@@ -1,0 +1,28 @@
+[TIMBRO] _scomposizione_zero_lambda_c5.py  sha1-BYTE 64b7fb5c  committato e pulito
+==================================================================================================================================
+IL CRITERIO 5 CORRETTO DOPO I NUMERI: le energie alle due taglie dopo 2000 tick, entro 0.001 relativo a N |e_K(0)|, a ogni lambda
+==================================================================================================================================
+  i blob nel repo: csv/_scomposizione_zero_lambda_c5.py 64b7fb5c; csv/_scomposizione_zero_lambda.py 2feff268; doc/referti_l2/scomposizione_zero_lambda.jsonl 4530e1f9
+  la configurazione: TOLL 0.001 QUANDO t2000 LETTURA 0.5 VOCI ('N_eK', 'E_cin', 'E_legame', 'E0')
+----------------------------------------------------------------------------------------------------------------------------------
+  le taglie L 81 e L 120; la scala N |e_K(0)| = 4.710543e+06
+  lambda 0.00: N_eK 5.93e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.10: N_eK 5.93e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.20: N_eK 7.91e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.30: N_eK 9.89e-17  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.40: N_eK 1.58e-15  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.50: N_eK 1.29e-15  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.60: N_eK 1.06e-15  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.70: N_eK 3.58e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.80: N_eK 3.95e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.90: N_eK 8.16e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 1.00: N_eK 2.17e-15  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.25: N_eK 9.89e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+  lambda 0.75: N_eK 3.77e-16  E_cin 1.13e-05  E_legame 3.43e-06  E0 1.47e-05
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LETTURA a lambda 0.5 (t 0, L 81): in parti dei costituenti
+  il legame -0.6331, la cinetica +0.0029, l'energia a riposo (il solitone) +0.3698 di N e_K
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CRITERIO
+  DEVE PASSARE (5 corretto): N e_K, cinetica, legame, E0 alle due taglie dopo 2000 tick entro 0.001 di N |e_K(0)|, a ogni lambda PASSA   il peggiore 1.47e-05
+ESITO: 1/1

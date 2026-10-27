@@ -860,7 +860,7 @@
 | `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
 | `SCIOGLIMENTO-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e  |
 | `SCOMPOSIZIONE-SOLITONE` | MISURA | FISICA | 2 | ### **AGENDA** |  | l energia a riposo del solitone: i costituenti 127%, il legame -27%, la cinetica |
-| `SCOMPOSIZIONE-ZERO-LAMBDA` | MISURA | FISICA | 2 | ### **AGENDA** |  | la scomposizione con lo zero simmetrico: il legame da -27% a -171% dell energia  |
+| `SCOMPOSIZIONE-ZERO-LAMBDA` | MISURA | FISICA | 2 | ### **AGENDA** |  | la scomposizione con lo zero simmetrico: il legame 63% dei costituenti, il solit |
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
 | `SHAKE-THEN-FREEZE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come prede |
 | `SIGILLO-COMPARATORE-DUPLICATO` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |
