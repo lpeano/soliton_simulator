@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 159 |
+| `FISICA` | `2` | 160 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 26 |
@@ -870,6 +870,7 @@
 | `SMP-APRI-COMMENTO` | DIFETTO | DOCUMENTAZIONE | 1 | ### **SOSPESA** |  | il docstring di _smp_apri dice che la chiamano cinque leggi: oggi la chiama solo |
 | `SOGLIA-MITOSI-3PI` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la soglia di mitosi e 2pi + pi col pi di dipolo MASSIMO, e in questa scena il di |
 | `SOGLIA-NON-MODULATA` | MISURA | FISICA | 1 | ### **CHIUSA** |  | la modulazione 0.3 della soglia non agisce: il gradiente di tempo proprio e' zer |
+| `SOLITONE-VUOTO-CONGELATO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il solitone col vuoto congelato: stabile a N 1e6; col tick intero vive 320: lo d |
 | `SOLITONI-TRIANGOLI` | MISURA | FISICA | 2 | ### **AGENDA** |  | i solitoni sui triangoli: S1 esiste nel risolutore ma nella dinamica si disfa; S |
 | `SOTTO-PASSO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [SOTTO-PASSO] |
 | `SPAZIO-CHE-NASCE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | lo spazio nasce dalla dinamica: U d-arco dinamica, mitosi al quanto di olonomia |

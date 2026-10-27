@@ -45,3 +45,14 @@
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice.
+
+## 5. IL RISULTATO *(dopo `b71d46e3`)*
+
+### **IL REFERTO:** `doc/referti_l2/solitone_vuoto_congelato.{txt,jsonl}` *(`csv/_solitone_vuoto_congelato.py` al commit `b71d46e3`; il task history `3909d0e3`)*. ### **`4/5`, nessun DEVE fallito; la PUO' FALLIRE `4` cade per `N 1e5`.**
+
+- ### **I CONTROLLI:** ### **`(a)` col tick intero ridà `bcbd1f40`** *(la vita `320` e `140`, la rotazione `-1.1011`/`-1.1020`)*; ### **`M` e `V` a `1.9e-12`; `Lambda` AL BIT nel vuoto congelato;** ### **i due zeri a vuoto e legame spenti: `4.0e-14` relativo** *(non al bit, come dichiarato prima)*.
+- ### ⭐ **LA LETTURA DI `bcbd1f40` E' CONFERMATA PER `N 1e6`: E' LA RISPOSTA DEL VUOTO A DISFARE IL SOLITONE.** ### **Col vuoto CONGELATO il solitone e' STABILE fino a `2000` tick a tutte e due le taglie** *(la larghezza `6.63 -> 7.34` / `7.58`, la frazione `0.997`; CONVERGE)*; ### **col tick intero vive `320`; senza legame `240`** *(il legame lega, ma non abbastanza contro il vuoto che risponde)*.
+- ### **`N 1e5`: col vuoto congelato vive `1080` / `620` tick** *(da `4` a `8` volte di piu', ma NON stabile, e NON CONVERGE fra le taglie)*; ### **col tick intero `140`, senza legame `80`.** ### **Un solitone di `3.8` archi non regge neanche col vuoto fermo: la grana conta** *(la lettura dei solitoni incastrati della previsione del guardiano: qui il piccolo si disfa, il largo regge)*.
+- ### **LA RISPOSTA DEL VUOTO** *(`(a)`, `N 1e6`)*: ### **non un riempimento lento: `Lambda` per estremita' al centro va `1.00 -> 1.57` a `t ~ 120`, `0.25` a `t ~ 160`, `3.8` a `t ~ 220`** *(il vuoto SUONA sotto il solitone)*, ### **e alla fine anche lontano** *(`2.9`, `5.1` all'angolo del toro)*: ### **le onde del vuoto attraversano il toro.**
+- ### **I DUE ZERI: le vite IDENTICHE in ogni corsa** *(la rotazione cambia: `-1.101` oggi, `-0.159` simmetrico, la differenza `pi s = 0.942`)*: ### **lo zero e' una fase per il solitone, come dice la forma.**
+- ### **LA PARTE `2`** *(la scomposizione)* ### **SI ESEGUE: l'oggetto stabile e' `N 1e6` col vuoto congelato.**

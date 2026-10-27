@@ -1,0 +1,65 @@
+[TIMBRO] _solitone_vuoto_congelato.py  sha1-BYTE 3b7d21d0  !! MODIFICATO rispetto a HEAD (blob-git 768ef4a8) -- i byte che girano NON sono quelli committati
+==================================================================================================================================
+IL SOLITONE COL VUOTO CONGELATO: S1 di bcbd1f40, il tick intero / il vuoto congelato / senza legame, lo zero di oggi e lo zero simmetrico
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_solitone_vuoto_congelato.py 3b7d21d0; csv/_solitoni_triangoli.py 95b23bb0; csv/_zero_simmetrico.py b400d76e; csv/_screening_forme_s3.py 80ffe96c
+  la configurazione: FORMA S1 S 0.3 CASI ((1000000.0, (12.0, 18.0)), (100000.0, (12.0, 18.0))) VITA_RIF {1000000.0: 320, 100000.0: 140} ROT_RIF -1.101 MODI ('intero', 'congelato', 'senza_legame') ZERI ('oggi', 'simm') VUOTO ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO') LEGAME ('CAMM-MATERIA-VUOTO',) TOLL_VITA 0.2 TOLL_ROT 0.01 TOLL_NORMA 1e-10 TOLL_ZERO 1e-12 FATTORE_VITA 4 L_ZERO 12 T_ZERO 50 T_PENDENZA 200; da _solitoni_triangoli: LAM0_TRI 6 T_MAX 2000 OGNI 20
+  il vuoto congelato: saltati ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO'), e phi rimesso al valore dell'istante zero dopo ogni tick; senza legame: saltato ('CAMM-MATERIA-VUOTO',)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (3): vuoto e legame spenti, s uniforme: la densita' coi due zeri entro 1e-12 relativo (al bit: Fa PASSA   4.01e-14
+### N 1e+06: il risolutore LEGATO, larghezza 6.6003, mu +0.29831
+  N 1e+06   L  81 zero oggi intero      : larghezza 6.630 -> 19.983, frazione 0.538; vita 320 tick; dM 2.6e-13 dV 4.2e-13; rotazione -1.101092; Lambda per estremita' al centro 1.000000 -> 0.079046 (pendenza +4.12e-03), lontano 2.914530 (69 s)
+  N 1e+06   L 120 zero oggi intero      : larghezza 6.630 -> 23.766, frazione 0.407; vita 320 tick; dM 2.6e-13 dV 4.2e-13; rotazione -1.101132; Lambda per estremita' al centro 1.000000 -> 0.223713 (pendenza +4.12e-03), lontano 5.142679 (167 s)
+  N 1e+06   L  81 zero oggi congelato   : larghezza 6.630 -> 7.344, frazione 0.997; vita STABILE fino a 2000; dM 2.6e-13 dV 0.0e+00; Lambda al bit True; rotazione -1.102066; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (56 s)
+  N 1e+06   L 120 zero oggi congelato   : larghezza 6.630 -> 7.576, frazione 0.996; vita STABILE fino a 2000; dM 2.6e-13 dV 0.0e+00; Lambda al bit True; rotazione -1.102081; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (150 s)
+  N 1e+06   L  81 zero oggi senza_legame: larghezza 6.630 -> 32.160, frazione 0.224; vita 240 tick; dM 2.6e-13 dV 0.0e+00; rotazione -1.401070; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (50 s)
+  N 1e+06   L 120 zero oggi senza_legame: larghezza 6.630 -> 37.797, frazione 0.233; vita 240 tick; dM 2.6e-13 dV 0.0e+00; rotazione -1.401192; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (144 s)
+  N 1e+06   L  81 zero simm intero      : larghezza 6.630 -> 19.984, frazione 0.538; vita 320 tick; dM 1.9e-12 dV 8.6e-13; rotazione -0.158614; Lambda per estremita' al centro 1.000000 -> 0.061430 (pendenza +4.12e-03), lontano 3.280185 (122 s)
+  N 1e+06   L 120 zero simm intero      : larghezza 6.630 -> 23.765, frazione 0.407; vita 320 tick; dM 1.9e-12 dV 8.4e-13; rotazione -0.158655; Lambda per estremita' al centro 1.000000 -> 0.215359 (pendenza +4.12e-03), lontano 5.187631 (327 s)
+  N 1e+06   L  81 zero simm congelato   : larghezza 6.630 -> 7.344, frazione 0.997; vita STABILE fino a 2000; dM 1.9e-12 dV 0.0e+00; Lambda al bit True; rotazione -0.159588; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (79 s)
+  N 1e+06   L 120 zero simm congelato   : larghezza 6.630 -> 7.576, frazione 0.996; vita STABILE fino a 2000; dM 1.9e-12 dV 0.0e+00; Lambda al bit True; rotazione -0.159603; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (199 s)
+  N 1e+06   L  81 zero simm senza_legame: larghezza 6.630 -> 32.160, frazione 0.224; vita 240 tick; dM 1.9e-12 dV 8.2e-13; rotazione -0.458593; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza -4.08e-16), lontano 1.000000 (84 s)
+  N 1e+06   L 120 zero simm senza_legame: larghezza 6.630 -> 37.797, frazione 0.233; vita 240 tick; dM 1.9e-12 dV 8.2e-13; rotazione -0.458715; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza -4.08e-16), lontano 1.000000 (238 s)
+### N 100000: il risolutore LEGATO, larghezza 3.7540, mu +0.29475
+  N 100000  L  48 zero oggi intero      : larghezza 3.805 -> 8.700, frazione 0.822; vita 140 tick; dM 2.6e-13 dV 4.3e-13; rotazione -1.102001; Lambda per estremita' al centro 1.000000 -> 0.076972 (pendenza +1.67e-03), lontano 2.202265 (21 s)
+  N 100000  L  69 zero oggi intero      : larghezza 3.805 -> 8.693, frazione 0.822; vita 140 tick; dM 2.6e-13 dV 4.3e-13; rotazione -1.101467; Lambda per estremita' al centro 1.000000 -> 0.033775 (pendenza +1.67e-03), lontano 0.146629 (44 s)
+  N 100000  L  48 zero oggi congelato   : larghezza 3.805 -> 5.200, frazione 0.981; vita 1080 tick; dM 2.6e-13 dV 0.0e+00; Lambda al bit True; rotazione -1.105371; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (18 s)
+  N 100000  L  69 zero oggi congelato   : larghezza 3.805 -> 5.819, frazione 0.980; vita 620 tick; dM 2.6e-13 dV 0.0e+00; Lambda al bit True; rotazione -1.105521; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (38 s)
+  N 100000  L  48 zero oggi senza_legame: larghezza 3.805 -> 20.310, frazione 0.262; vita 80 tick; dM 2.6e-13 dV 0.0e+00; rotazione -1.405091; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (16 s)
+  N 100000  L  69 zero oggi senza_legame: larghezza 3.805 -> 28.273, frazione 0.055; vita 80 tick; dM 2.6e-13 dV 0.0e+00; rotazione -1.405092; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (34 s)
+  N 100000  L  48 zero simm intero      : larghezza 3.805 -> 8.704, frazione 0.822; vita 140 tick; dM 1.9e-12 dV 8.8e-13; rotazione -0.159524; Lambda per estremita' al centro 1.000000 -> 0.033523 (pendenza +1.67e-03), lontano 2.420261 (37 s)
+  N 100000  L  69 zero simm intero      : larghezza 3.805 -> 8.693, frazione 0.822; vita 140 tick; dM 1.9e-12 dV 8.5e-13; rotazione -0.158988; Lambda per estremita' al centro 1.000000 -> 0.039300 (pendenza +1.67e-03), lontano 0.152633 (78 s)
+  N 100000  L  48 zero simm congelato   : larghezza 3.805 -> 5.200, frazione 0.981; vita 1080 tick; dM 1.9e-12 dV 0.0e+00; Lambda al bit True; rotazione -0.162893; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (28 s)
+  N 100000  L  69 zero simm congelato   : larghezza 3.805 -> 5.819, frazione 0.980; vita 620 tick; dM 1.9e-12 dV 0.0e+00; Lambda al bit True; rotazione -0.163043; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza +2.20e-18), lontano 1.000000 (52 s)
+  N 100000  L  48 zero simm senza_legame: larghezza 3.805 -> 20.310, frazione 0.262; vita 80 tick; dM 1.9e-12 dV 8.2e-13; rotazione -0.462614; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza -4.08e-16), lontano 1.000000 (28 s)
+  N 100000  L  69 zero simm senza_legame: larghezza 3.805 -> 28.273, frazione 0.055; vita 80 tick; dM 1.9e-12 dV 8.2e-13; rotazione -0.462614; Lambda per estremita' al centro 1.000000 -> 1.000000 (pendenza -4.08e-16), lontano 1.000000 (56 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): (a) lo zero di oggi ridà la vita di bcbd1f40 entro il 20% e la rotazione -1.101 entro 0.01   PASSA   N 1e+06 L 81: vita 320, rot -1.1011; N 1e+06 L 120: vita 320, rot -1.1011; N 100000 L 48: vita 140, rot -1.1020; N 100000 L 69: vita 140, rot -1.1015
+  DEVE PASSARE (2): M e V entro 1e-10 in ogni corsa; Lambda al bit nel vuoto congelato                           PASSA   il peggiore dM 1.9e-12 dV 8.8e-13
+  PUO' FALLIRE (4): (b) vive almeno 4 volte (a) e resta entro il 20% fino a T_MAX (zero di oggi, le due taglie)  ### FALLISCE   N 1e+06 L 81: stabile; N 1e+06 L 120: stabile; N 100000 L 48: vita 1080; N 100000 L 69: vita 620
+  PUO' FALLIRE (5): (c) si disperde piu' in fretta di (a) (zero di oggi, le due taglie)                          PASSA   N 1e+06 L 81: 240 contro 320; N 1e+06 L 120: 240 contro 320; N 100000 L 48: 80 contro 140; N 100000 L 69: 80 contro 140
+### LA CONVERGENZA (le due taglie: lo stesso verdetto, la vita entro il 20%)
+  N 1e+06   zero oggi intero      : L 81 320, L 120 320 -> CONVERGE
+  N 1e+06   zero oggi congelato   : L 81 stabile, L 120 stabile -> CONVERGE
+  N 1e+06   zero oggi senza_legame: L 81 240, L 120 240 -> CONVERGE
+  N 1e+06   zero simm intero      : L 81 320, L 120 320 -> CONVERGE
+  N 1e+06   zero simm congelato   : L 81 stabile, L 120 stabile -> CONVERGE
+  N 1e+06   zero simm senza_legame: L 81 240, L 120 240 -> CONVERGE
+  N 100000  zero oggi intero      : L 48 140, L 69 140 -> CONVERGE
+  N 100000  zero oggi congelato   : L 48 1080, L 69 620 -> NON CONVERGE
+  N 100000  zero oggi senza_legame: L 48 80, L 69 80 -> CONVERGE
+  N 100000  zero simm intero      : L 48 140, L 69 140 -> CONVERGE
+  N 100000  zero simm congelato   : L 48 1080, L 69 620 -> NON CONVERGE
+  N 100000  zero simm senza_legame: L 48 80, L 69 80 -> CONVERGE
+### LA LETTURA: lo zero simmetrico contro quello di oggi (la vita, a ogni taglia)
+  N 1e+06   intero     L 81: oggi 320, simmetrico 320
+  N 1e+06   intero     L 120: oggi 320, simmetrico 320
+  N 1e+06   congelato  L 81: oggi stabile, simmetrico stabile
+  N 1e+06   congelato  L 120: oggi stabile, simmetrico stabile
+  N 100000  intero     L 48: oggi 140, simmetrico 140
+  N 100000  intero     L 69: oggi 140, simmetrico 140
+  N 100000  congelato  L 48: oggi 1080, simmetrico 1080
+  N 100000  congelato  L 69: oggi 620, simmetrico 620
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/5 controlli passano; DEVE fallite: 0 []
