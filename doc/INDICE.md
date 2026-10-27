@@ -367,7 +367,7 @@
 | `EM-CURVATURA-BIDIREZIONALE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | l accoppiamento EM-curvatura e' bidirezionale in natura: il verso EM->curvatura  |
 | `END-TO-END` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ENERGIA-DEL-LEGAME` | MISURA | FISICA | 2 | ### **AGENDA** |  | il conto dell energia del legame: il vuoto cede energia alla materia; 5/5 coi cr |
-| `ENERGIA-NON-CONSERVATA-S1` | MISURA | FISICA | 2 | ### **AGENDA** |  | H_tot col legame S1 SI conserva a O(s^2) col risolutore a ogni s; la deriva di 9 |
+| `ENERGIA-NON-CONSERVATA-S1` | MISURA | FISICA | 2 | ### **AGENDA** |  | H_tot col legame S1 e' conservata a O(s^2): la "non conservazione" era lo stato  |
 | `ENERGIA-NON-DEFINITA` | FRONTE | FISICA | 1 | ### **SUPERATA** |  | il modello non ha un'energia totale, e senza quella bilancio e calore non hanno  |
 | `ESENTE-P3` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `ETC-C1-CONFINE` | CURA | INFRASTRUTTURA | 1 | ### **CHIUSA** |  | cura (c) pezzo 1: la fotografia si apre a inizio PASSO PIENO, non di step, e ide |
