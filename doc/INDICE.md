@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 160 |
+| `FISICA` | `2` | 161 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 26 |
@@ -858,6 +858,7 @@
 | `SCHW-SOTTO-LAM` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger fa nascere archi SOTTO LAM che _nasce alza: A13 alla nascita NON ap |
 | `SCHWINGER-UN-NODO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | lo Schwinger crea UN solo nodo e il commento dice che la coppia e' neutra: la ca |
 | `SCIOGLIMENTO-FASE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | perche' coer_campo va da 0.999 a 0.20 in 120 passi: la scena non tocca phivel e  |
+| `SCOMPOSIZIONE-SOLITONE` | MISURA | FISICA | 2 | ### **AGENDA** |  | l energia a riposo del solitone: i costituenti 127%, il legame -27%, la cinetica |
 | `SCUOT-INNESCO` | MISURA | FISICA | 1 | ### **CHIUSA** |  | lo scuotimento del vuoto e' l'innesco: senza di lui zero nascite e spin omogenei |
 | `SHAKE-THEN-FREEZE` | MISURA | FISICA | 1 | ### **CHIUSA** |  | ✅ SHAKE-THEN-FREEZE — CHIUSO (2026-09-14, commit `5cffa73`). ESITO B, come prede |
 | `SIGILLO-COMPARATORE-DUPLICATO` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | il comparatore del lockstep e copiato in due sigilli: due copie che possono dive |

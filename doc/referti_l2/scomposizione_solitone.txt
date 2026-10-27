@@ -1,0 +1,24 @@
+[TIMBRO] _scomposizione_solitone.py  sha1-BYTE 17dde60a  committato e pulito
+==================================================================================================================================
+LA SCOMPOSIZIONE DELL'ENERGIA A RIPOSO DEL SOLITONE: S1, N 1e6, il vuoto congelato; i costituenti N e_K, la parte cinetica, il legame (l'energia di S1)
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_scomposizione_solitone.py 17dde60a; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_solitoni_triangoli.py ec6fb68a; primo_ordine/energia_pesata.py 7889c512; doc/referti_l2/solitone_vuoto_congelato.jsonl 7a797113
+  la configurazione: N_SOL 1e+06 FATTORI (12.0, 18.0) T_FROZEN 2000 TOLL_FORMA 1e-08 TOLL_NORMA 1e-10 TOLL_CONV 0.01; da _solitone_vuoto_congelato: FORMA S1 S 0.3 VUOTO ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO')
+  il legame: Lambda F_1(rho/Lambda), F_1(x) = x - arctan x (termini_di_h scrive la forma S3 del nucleo)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (2): la forma del legame: F_1' = alpha_1 di _screening_forme_s3 entro 1e-08 (50 x da 1e-4 a 1e3)  PASSA   8.2e-11
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+  L  81 t0    : E0 -3.721753e+06 = N e_K -4.710543e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 (il vuoto +0.0e+00) | le frazioni: costituenti +1.2657, cinetica +0.0012, legame -0.2669 | il legame per costituente +0.99331 (e_K -4.71054, mu +0.29831) | larghezza 6.630
+  L  81 t2000 : E0 -3.721678e+06 = N e_K -4.710543e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 (il vuoto +0.0e+00) | le frazioni: costituenti +1.2657, cinetica -0.0001, legame -0.2656 | il legame per costituente +0.98853 (e_K -4.71054, mu +0.29831) | larghezza 7.344
+  L 120 t0    : E0 -3.721753e+06 = N e_K -4.710543e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 (il vuoto +0.0e+00) | le frazioni: costituenti +1.2657, cinetica +0.0012, legame -0.2669 | il legame per costituente +0.99331 (e_K -4.71054, mu +0.29831) | larghezza 6.630
+  L 120 t2000 : E0 -3.721747e+06 = N e_K -4.710543e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 (il vuoto +0.0e+00) | le frazioni: costituenti +1.2657, cinetica -0.0001, legame -0.2656 | il legame per costituente +0.98851 (e_K -4.71054, mu +0.29831) | larghezza 7.576
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): lo stato a t = 0 = quello della parte 1 (la larghezza e la frazione al bit col jsonl di 74f9 PASSA   
+  DEVE PASSARE (3): M e V dopo 2000 tick col vuoto congelato entro 1e-10                                         PASSA   2.6e-13/0.0e+00 2.6e-13/0.0e+00
+  DEVE PASSARE (4): le frazioni alle due taglie entro 0.01                                                       PASSA   2.36e-05
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

@@ -38,3 +38,12 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice.
+
+## 4. IL RISULTATO *(dopo `dc4a1437`)*
+
+### **IL REFERTO DELLA SCOMPOSIZIONE:** `doc/referti_l2/scomposizione_solitone.{txt,jsonl}` *(`csv/_scomposizione_solitone.py` al commit `dc4a1437`, «committato e pulito»; il task history `6c6b5ef0`)*. ### **`4/4`.**
+
+- ### **I CONTROLLI:** ### **lo stato a `t 0` = quello di `74f99039` al bit; la forma del legame `F_1' = alpha_1` a `8.2e-11`; `M`, `V` dopo `2000` tick a `2.6e-13`; le frazioni alle due taglie entro `2.4e-5`.**
+- ### ⭐ **LA SCOMPOSIZIONE** *(`S1`, `N 1e6`, `L 81` e `120`, a `t 0`)*: ### **`E0 = -3.721753e6` = i COSTITUENTI `N e_K = -4.710543e6`** *(`e_K = -4.71054` per unita' di norma, lo stato uniforme dello stesso ramo)* ### **+ la CINETICA `-4.52e3` + il LEGAME `+9.933e5`.** ### **Le frazioni: i costituenti `+1.2657`, la cinetica `+0.0012`, il legame `-0.2669`.** ### **Dopo `2000` tick col vuoto congelato: `+1.2657`, `-0.0001`, `-0.2656`** *(il legame `+0.9885` per costituente)*.
+- ### **LA LETTURA** *(nessuna soglia)*: ### **l'energia a riposo di QUESTO oggetto e' DOMINATA DAI COSTITUENTI** *(`127%`)*; ### **il legame col vuoto e' `+0.99` per costituente** *(per `S1` a `x >> 1`: `F_1 ~ x`)* ### **e la RIDUCE di circa un quarto; la cinetica e' trascurabile.** ### **Non e' ancora la massa come autointerazione dell'ipotesi di Luca delle `09:08`:** ### **coi costituenti di oggi** *(la coppia con `mu0` fisso in archi)* ### **la massa resta la loro somma, corretta dal legame** *(la nota di Luca: la sua strada sono i costituenti SENZA massa, `(f)` e `(g)` del progetto)*.
+- ### **UN'AVVERTENZA INNOCUA del referto:** ### **lo stato uniforme ha `phi = 0`, e il suo legame `rho/Lambda` da' `NaN`** *(non usato: dello stato uniforme serve solo la parte quadratica)*.
