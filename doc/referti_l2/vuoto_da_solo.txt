@@ -1,0 +1,27 @@
+[TIMBRO] _vuoto_da_solo.py  sha1-BYTE e9c2f408  committato e pulito
+==================================================================================================================================
+IL VUOTO DA SOLO: le scene di 74f99039 con la materia a zero, il tick intero; il controllo col vuoto congelato
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_vuoto_da_solo.py e9c2f408; csv/_solitone_vuoto_congelato.py 81db8c0a; doc/referti_l2/solitone_vuoto_congelato.jsonl 7a797113
+  la configurazione: LATI (48, 69, 81, 120) T_MAX 2000 OGNI 20 SOGLIE (0.1, 1.0) TOLL_NORMA 1e-10 TOLL_UNIF 1e-06 T_SOLITONE 320; da _solitone_vuoto_congelato: S 0.3 FORMA S1 VUOTO ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO'); la materia a zero, lambda_c None
+----------------------------------------------------------------------------------------------------------------------------------
+  L  48 intero    : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (20 s)
+  L  48 congelato : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (15 s)
+  L  69 intero    : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (36 s)
+  L  69 congelato : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (30 s)
+  L  81 intero    : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (57 s)
+  L  81 congelato : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (49 s)
+  L 120 intero    : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (140 s)
+  L 120 congelato : lo scarto di Lambda per estremita' massimo 0.000e+00, finale 0.000e+00 (min 1.000000000, max 1.000000000); il primo tick oltre 0.1: None, oltre 1: None; dV 0.0e+00; al bit True (117 s)
+### ACCANTO: il tick intero col solitone di 74f99039 (lo zero di oggi), Lambda per estremita' al centro e lontano
+  N 1e+06   L  81: a 320 tick il centro 2.1163, lontano 2.3370; alla fine il centro 0.0790, lontano 2.9145; la vita 320
+  N 1e+06   L 120: a 320 tick il centro 2.1161, lontano 0.7982; alla fine il centro 0.2237, lontano 5.1427; la vita 320
+  N 100000  L  48: a 320 tick il centro 0.7406, lontano 2.5092; alla fine il centro 0.0770, lontano 2.2023; la vita 140
+  N 100000  L  69: a 320 tick il centro 1.1758, lontano 2.1701; alla fine il centro 0.0338, lontano 0.1466; la vita 140
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): V conservato entro 1e-10 relativo                                                            PASSA   il peggiore 0.0e+00
+  DEVE PASSARE (2): il controllo, col vuoto congelato Lambda per estremita' uniforme AL BIT                      PASSA   
+  PUO' FALLIRE (3): il vuoto da solo resta uniforme entro 1e-06 fino a T_MAX (a ogni L)                          PASSA   lo scarto massimo 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []

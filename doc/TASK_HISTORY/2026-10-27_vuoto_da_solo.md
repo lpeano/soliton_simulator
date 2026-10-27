@@ -31,3 +31,11 @@
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa *(i byte committati: scritto senza `CRLF`)*; 3. la corsa; 4. il referto, la relazione, l'indice.
+
+## 4. IL RISULTATO *(dopo `58bc40c4`)*
+
+### **IL REFERTO DEL VUOTO DA SOLO:** `doc/referti_l2/vuoto_da_solo.{txt,jsonl}` *(`csv/_vuoto_da_solo.py` al commit `58bc40c4`; il task history `7a115c93`)*. ### **`3/3`.**
+
+- ### ⭐ **IL VUOTO DA SOLO E' STABILE, AL BIT:** ### **con la materia a zero e il tick intero, a `L 48, 69, 81, 120`, `Lambda` per estremita' resta `1.000000000` a ogni nodo per `2000` tick** *(lo scarto quadratico medio `0.0`; `V` esatto)*; ### **lo stesso col vuoto congelato** *(il controllo)*.
+- ### **QUINDI LA LETTURA E' LA `(1)`: IL VUOTO RISPONDE ALLA MATERIA, non e' instabile per conto suo** *(e `cs` era spento: il canale di [[CANALE-CS-SECONDA-SORGENTE]] non c'entra qui)*. ### **Le salite di `Lambda` lontano nelle corse col solitone** *(`2.34` / `0.80` a `320` tick, `2.91` / `5.14` alla fine, `N 1e6`)* ### **sono ONDE DEL VUOTO partite dalla buca sotto la materia** *(il centro `2.12` a `320` tick, `0.08` / `0.22` alla fine)*, ### **non il vuoto che si disfa da solo.**
+- ### **LA STRADA CHE NE VIENE** *(la lettura del guardiano, non una scelta)*: ### **l'oggetto giusto e' il solitone CON la sua buca: lo stato stazionario dei due insieme** *(materia e vuoto),* ### **non il solitone del risolutore col vuoto fisso.**
