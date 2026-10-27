@@ -21126,3 +21126,15 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### **LA RISPOSTA DEL VUOTO** *(`(a)`, `N 1e6`)*: ### **non un riempimento lento: `Lambda` per estremita' al centro va `1.00 -> 1.57` a `t ~ 120`, `0.25` a `t ~ 160`, `3.8` a `t ~ 220`** *(il vuoto SUONA sotto il solitone)*, ### **e alla fine anche lontano** *(`2.9`, `5.1` all'angolo del toro)*: ### **le onde del vuoto attraversano il toro.**
 - ### **I DUE ZERI: le vite IDENTICHE in ogni corsa** *(la rotazione cambia: `-1.101` oggi, `-0.159` simmetrico, la differenza `pi s = 0.942`)*: ### **lo zero e' una fase per il solitone, come dice la forma.**
 - ### **LA PARTE `2`** *(la scomposizione)* ### **SI ESEGUE: l'oggetto stabile e' `N 1e6` col vuoto congelato.**
+
+### 📌 **UN MIO ERRORE DI METODO: QUATTRO SCRIPT CON I FINE RIGA CRLF (LA TRAPPOLA DI CLAUDE.md PAR. 7), E LE CORREZIONI** *([[MATERIA-LEGGERA]], [[DIVISIONE-DEL-VUOTO]], [[SOLITONI-TRIANGOLI]], [[SOLITONE-VUOTO-CONGELATO]], [[LUCE-MATERIA-CONO]])*:
+
+- ### **CHE COSA E' SUCCESSO:** ### **ho corretto quattro script con `io.open(..., "w")` in modo TESTO, che su Windows scrive `CRLF`;** ### **git li ha committati in `LF`** *(il contenuto)*, ### **e sul disco sono rimasti in `CRLF`:** ### **lo STESSO CONTENUTO, BYTE DIVERSI** *(il terzo stato di `CLAUDE.md` par. `7`)*. ### **Il timbro del presidio lo diceva in testa ai referti** *(«!! MODIFICATO rispetto a HEAD»)*, ### **e non l'ho letto.**
+- ### **I REFERTI TOCCATI:** ### **`materia_leggera`, `divisione_vuoto`, `solitoni_triangoli`, `solitone_vuoto_congelato`.** ### **Il contenuto, tolti i `CR`, e' IDENTICO a quello committato** *(confrontato file per file)*: ### **il codice committato RIPRODUCE quei referti; i referti NON si riscrivono** *(il timbro «MODIFICATO» resta, ed e' vero dei byte)*.
+- ### **LE CORREZIONI, in questo commit:** ### **i byte ripristinati da `git cat-file` in binario; e nell'INVENTARIO il blob delle quattro voci era quello `CRLF`:**
+  - ### **`csv/_materia_leggera.py`: il blob sul disco `e620f287` (CRLF), quello committato `57a6e604` (LF)**
+  - ### **`csv/_divisione_vuoto.py`: il blob sul disco `aa0384b6` (CRLF), quello committato `07b75ba1` (LF)**
+  - ### **`csv/_solitoni_triangoli.py`: il blob sul disco `95b23bb0` (CRLF), quello committato `ec6fb68a` (LF)**
+  - ### **`csv/_solitone_vuoto_congelato.py`: il blob sul disco `3b7d21d0` (CRLF), quello committato `81db8c0a` (LF)**
+- ### **E UN ALTRO MIO ERRORE, gia' scritto nei task history:** ### **la scratchpad conteneva copie vecchie degli strumenti** *(da sessioni precedenti)* ### **che una prova fatta da li' importava; le prove ora da una cartella pulita.**
+- ### **COME NON RIFARLO:** ### **ogni scrittura di un file del repo con `newline="\n"` o in binario;** ### **e leggere la riga del timbro di ogni referto prima di committarlo.**
