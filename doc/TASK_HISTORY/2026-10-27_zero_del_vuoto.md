@@ -35,6 +35,12 @@
 
 ### **Mi FERMO** ### **se `(0)` fallisce** *(lo strumento)*.
 
+## 2-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(la prova di costruzione: `(0)` a `10` tick, `PERIODI 1`: NON il referto)*
+
+- ### **`(0)` USA LA SCENA DEL NUCLEO `L 24`** *(`_scomposizione_solitone.stato_uniforme`, la coppia a `K` uniforme, il vuoto uniforme)*, ### **non il grafo di `C3`** *(`C3` serve solo a `(1)`)*.
+- ### **`(3)`: `e_k` = l'energia per unita' di norma allo ZERO SIMMETRICO** *(`per_nodo` / la densita' `+ pi`, la stessa dei conti)*.
+- ### ⚠ **I NUMERI GIA' VISTI:** ### **`(0)` FALLISCE AL BIT: `max |d rho| 2.2e-15`, `max |d |phi|| 1.8e-15`** *(l'arrotondamento: lo avevo scritto nel §1 come cio' che NON so)*; ### **la soglia «al bit» e' del mandato e NON la cambio: la corsa vera la misura, e se fallisce mi fermo e lo chiedo.** ### **`(1)` a `L 24`: `v1` `delta 0.057` = `0.11 lambda*`; `v3` `2.4e-4` = `4.8e-4 lambda*`.** ### **Su `24` tick: l'additivo `(ii)` manda le due bande in versi OPPOSTI** *(`+-1.8e-4`)*; ### **il solo vuoto `(i)` `~1e-11`;** ### **il proporzionale entro il `4.9%`, la caduta da `cs` entro il `4.75%`.**
+
 ## 3. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima; 3. la corsa e il referto; 4. la relazione, l'indice *(una voce `ZERO-DEL-VUOTO`)*, la mappa.
