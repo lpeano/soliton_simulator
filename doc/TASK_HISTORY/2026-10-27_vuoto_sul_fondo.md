@@ -72,3 +72,9 @@
 - ### **I CONTROLLI** *(DEVE)*: ### **`(k0)` il flusso con `F0` = `_vuoto_sul_fondo.fondo_uniforme` AL BIT;** ### **`(k1)` ogni vuoto del fondo ha `E/V = -2 pi` entro `1e-12`** *(sulla scena `L 81`, la materia a zero)*; ### **`(k2)` `M` e `V` entro `1e-10` in ogni corsa;** ### **`(k3)` il controllo positivo: lo stesso script col vuoto UNIFORME e il tick intero ridà la vita `320` di `15df5c63`** *(ogni `20` tick)*.
 - ### **LE PREVISIONI DEL MANDATO** *(PUO' FALLIRE)*: ### **`(p1)` col fondo e il tick intero il solitone vive oltre `1280` tick** *(a ogni fase)*; ### **`(p2)` il vuoto PRENDE energia dalla materia** *(`Delta E_vuoto > 0` sul toro alla vita, a ogni fase)*.
 - ### ⚠ **LA CAUTELA** *([[ENERGIA-NON-CONSERVATA-S1]])*: ### **`H_tot` deriva; i versi si leggono contro la deriva** *(la stessa tabella di `peso_deriva`)*.
+
+## 5-bis. IL PASSO DI `(c-iii)` E LA PREVISIONE `(p1)` RIESPRESSA *(dichiarato prima della corsa; la risposta di Luca delle `20:00` e il referto `99eb7a42`)*
+
+- ### **IL PASSO: `s 0.075`** *(`regime_del_passo.txt`: la deviazione di `H_tot` lo `0.49%` della perdita del vuoto, sotto l'`1%`; il costo stimato `~515` s per corsa a `L 81`, circa `80`-`90` minuti per le `10` corse: ragionevole)*. ### **IL RISOLUTORE A `s 0.075`** *(`VC.S` in memoria)*, ### **il tempo fisico `600`** *(`8000` tick)*, ### **i conti ogni `40` tick e la vita ogni `80`** *(lo stesso tempo fisico di `10` e `20` tick a `s 0.3`)*; ### **il toro `L 81` fisso.**
+- ### **IL CONTROLLO POSITIVO `(k3)` resta a `s 0.3`** *(la vita `320` di `15df5c63`)*.
+- ### **`(p1)` RIESPRESSA:** ### **il mandato dice «oltre `1280` tick» = `4` volte la vita di `15df5c63` a `s 0.3`;** ### **a `s 0.075` la vita di riferimento e' quella del vuoto UNIFORME AL PASSO STESSO** *(una corsa in piu')*, ### **in tempo fisico; `(p1)` passa se ogni fase vive oltre `4` volte quella.** ### **Dichiarato prima dei numeri.**
