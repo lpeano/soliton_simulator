@@ -24,7 +24,7 @@
 | 13 | ### **i pesi del passo = quelli di `termini_di_h`** *(`H_tick = H_tot`)* | `a33daa09` |
 | 14 | ### **la carica `sigma_z` a due segni, conservata a `eps 0`** | `8dea8c95` |
 | 15 | ### **lo strumento del libro dei conti conta giusto** *(i conti di `15df5c63` a `1e-16`; la strada `A`)* | `4f6a4bd7` |
-| 16 | ### **dal vuoto del FONDO il vuoto prende energia dalla materia** *(il verso si rovescia; a `s 0.075`)* | il commit di `solitone_dal_fondo.txt` |
+| 16 | ### **dal vuoto del FONDO il vuoto prende energia dalla materia** *(il verso si rovescia; a `s 0.075`)* | `76eecbf5` |
 
 ## 2. CHE COSA NON FUNZIONA ANCORA, E PERCHE'
 
@@ -45,7 +45,7 @@
 | | la domanda | lo stato | il commit |
 |---|---|---|---|
 | `a` | ### **la materia sul cono come la luce?** | ### **SI'** | `e48e7414` |
-| `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **IN PARTE:** ### **il vuoto uniforme e' il massimo per la forma;** ### **dal fondo il vuoto PRENDE energia dalla materia** *(il verso si rovescia)*, ### **ma il solitone vive solo `1.6`-`1.9` volte di piu', non `4`: c'e' un'altra causa** | `787296da`, il commit di `solitone_dal_fondo.txt` |
+| `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **IN PARTE:** ### **il vuoto uniforme e' il massimo per la forma;** ### **dal fondo il vuoto PRENDE energia dalla materia** *(il verso si rovescia)*, ### **ma il solitone vive solo `1.6`-`1.9` volte di piu', non `4`: c'e' un'altra causa** | `787296da`, `76eecbf5` |
 | `c` | ### **dove va l'energia, nei due versi?** | ### **lo strumento c'e'** *(la strada `A`)*: ### **il vuoto lontano rimanda indietro** *(`915` tick in entrata su `1860` dopo la vita)* | `4f6a4bd7` |
 
 ## 4. LA LISTA IN ATTESA *(idee da NON eseguire finche' la sezione `3` non e' chiusa)*
@@ -79,7 +79,7 @@
 
 | | il lavoro | lo stato |
 |---|---|---|
-| 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(il referto `solitone_dal_fondo.txt`)* |
+| 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(`76eecbf5`)* |
 | 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **in coda** |
 
 ## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
