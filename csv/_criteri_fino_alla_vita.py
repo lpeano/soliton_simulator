@@ -176,10 +176,13 @@ def main(argv):
     print("-" * 130)
     print("### LA LUCE: c = s = %g archi per tick (0764d566); il fronte del vuoto e v_max della coppia in unita' di c" % C_LUCE)
     for x in sorted(cc, key=lambda x: (-x["N"], x["L"], x["modo"], x["zero"])):
+        if x["velocita_fronte"] is None:   # ### col vuoto congelato non c'e' un fronte del vuoto
+            print("  N %-7g L %3d %-9s %-4s: nessun fronte (il vuoto non si muove)" % (x["N"], x["L"], x["modo"], x["zero"]))
+            continue
         print("  N %-7g L %3d %-9s %-4s: il fronte %.4f archi per tick = %.3f c (punti del fit %d)" % (x["N"], x["L"], x["modo"], x["zero"], x["velocita_fronte"], x["velocita_fronte"] / C_LUCE, x["punti_fronte"]))
     print("  v_max della coppia %.6f archi per tick = %.3f c" % (v_max, v_max / C_LUCE))
     scrivi({"tipo": "luce", "c": C_LUCE, "v_max": v_max, "v_max_su_c": v_max / C_LUCE,
-            "fronti": [{"N": x["N"], "L": x["L"], "modo": x["modo"], "zero": x["zero"], "v": x["velocita_fronte"], "v_su_c": x["velocita_fronte"] / C_LUCE} for x in cc]})
+            "fronti": [{"N": x["N"], "L": x["L"], "modo": x["modo"], "zero": x["zero"], "v": x["velocita_fronte"], "v_su_c": x["velocita_fronte"] / C_LUCE} for x in cc if x["velocita_fronte"] is not None]})
     print("-" * 130)
     print("### I CRITERI CORRETTI (dopo i numeri, Luca 12:37)")
     esito("DEVE PASSARE (2'): le taglie, il massimo per t <= vita, entro %g di N |e_K(0)|" % TOLL_2, peg2[0] <= TOLL_2, "%.2e (%s)" % peg2)
