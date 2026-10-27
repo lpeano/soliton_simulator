@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 165 |
+| `FISICA` | `2` | 166 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -491,6 +491,7 @@
 | `LAMBDA-INVARIANTE-OGNI-ARCO` | STANDARD | FISICA | 2 | ### **AGENDA** |  | la lunghezza minima lambda e- un INVARIANTE SU OGNI ARCO, non una regola di mito |
 | `LEGAME-SCENE-GRANDI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2 |
 | `LETTORI-INDICE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | CHIUSA il 2026-09-26 (decisioni di Luca) / ESITO: 1 RITIRATO, 1 CONVERTITO, 4 FU |
+| `LIBRO-DEI-CONTI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | il libro dei conti dell energia: il documento c'e', la corrente sul confine aspe |
 | `LINGUAGGIO-REGOLE` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento |
 | `LORENTZ-MATERIA-INTERFERENZA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la materia per interferenza aggira la violazione di Lorentz che si propaga alle  |
 | `LOSCHMIDT-ECO` | FRONTE | METODO | ENTRAMBE | ### **APERTA** |  | l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del COD |
