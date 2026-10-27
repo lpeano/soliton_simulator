@@ -1,0 +1,43 @@
+# LA TORSIONE DEL VUOTO SUGLI ARCHI, ATTORNO AL SOLITONE `S1` *(l'aggiunta al libro dei conti, `13:06`-`13:09`; la risposta di Luca delle `13:46`: subito, prima dello strumento)*
+
+> **Il mandato:** ### **la misura scritta nell'aggiunta al libro dei conti** *(`doc/PROGETTO_MITOSI.md` 3(a), l'ipotesi di Luca e del guardiano; [[PROGETTO-MITOSI]], [[LIBRO-DEI-CONTI]], [[ENERGIA-DEL-LEGAME]])*: ### **sulla corsa del solitone `S1` col tick intero** *(`N 1e5` `L 48`, `N 1e6` `L 81`, lo zero simmetrico, `2000` tick, `cs` spento e acceso a `lambda_c = Lambda`)*: ### **per ogni arco la torsione `(a3)` srotolata nel tempo; il ritmo contro la distanza dal solitone e contro la differenza di `cs` ai capi; il primo arco e il primo tick a `2 pi`, quanti archi ci arrivano; il ritmo contro la differenza di energia del vuoto ai capi; il freno: il ritmo costante o calante nel tempo.** ### **Nessuna nascita, solo la misura; nessun freno inventato.**
+> ### **In memoria; nessun file del nucleo; B-4, B-5 e l'impronta `2e7f795d2a52fbe7` intatte.**
+
+**LIVELLO:** una misura.
+
+## 0. LA STELLA POLARE
+
+1. **`A14`:** ### **la torsione e' una fase; il confronto con l'energia del vuoto ai capi e' un conto.** 2. **Il gradino:** ### **dove la mitosi scatterebbe, prima di accenderla.** 3. **Aggiunge un numero o una legge?** ### **No: la soglia `2 pi` e' quella dell'era `1`, qui solo LETTA.** 4. **Tocca `rho`, `c_s` o il segno?** ### **No: `cs` acceso col tick del nucleo** *(`tick.tick_con_cs`)*, ### **come in `_vuoto_disturbato`.** 5. **Emergente o imposto?** ### **Si misura se la torsione cresce dove `cs` cambia.**
+
+## 1. CHE COSA CREDO PRIMA DI GUARDARE, E CHE COSA NON SO
+
+- ### **LA DEFINIZIONE** *(`(a3)` di `PROGETTO_MITOSI`)*: ### **il vuoto vive sulle estremita': `phi_h` ha due slot per arco** *(`flussi_parziali.hop_phi`: `phi.reshape(m, 2)`, il lato `0` al nodo `inc.nodo[2a]`, il lato `1` a `inc.nodo[2a+1]`)*; ### **la torsione dell'arco `a` e' `theta_a = arg(conj(phi_h[2a+1]) phi_h[2a])`,** ### **srotolata nel tempo tick per tick** *(il contatore dei giri)*. ### **Il vuoto e' neutro** *(nessuna `U`)*, ### **quindi `theta_a` e' invariante per una fase globale, e per lo zero `lambda`** *(lo spostamento `2 pi lambda` e' lo stesso ai due capi)*.
+- ### **Credo:** ### **senza materia, col vuoto uniforme, `theta_a = 0` al bit per sempre** *(ogni estremita' fa le stesse operazioni)*; ### **col solitone, l'accoppiamento materia-vuoto** *(`materia_vuoto.applica`: `beta` su `phi`, che dipende da `rho`)* ### **sfasa le estremita' dove `rho` cambia da un capo all'altro: la torsione cresce sul BORDO del solitone, anche con `cs` spento.**
+- ### ⚠ **NON SO:** ### **se con `cs` acceso la torsione segue `Delta cs`** *(l'ipotesi)* ### **o segue `rho`** *(l'accoppiamento)*: ### **i due sono correlati fra loro** *(`cs` segue `Lambda`, e `Lambda` cambia dove la materia c'e')*, ### **quindi una correlazione con `Delta cs` NON separa le due cause da sola:** ### **il confronto con `cs` spento e' quello che separa.**
+- ### ⚠ **NON SO** ### **se il punto fisso di `cs` converge col solitone** *(in `_vuoto_disturbato` girava sul vuoto da solo)*: ### **se `tick_con_cs` ALZA, lo riporto e mi fermo su quella corsa.**
+- ### ⚠ **NON SO** ### **se il ritmo per tick sta sotto `pi`** *(lo srotolamento lo vuole)*: ### **lo controllo a ogni tick.**
+
+## 2. LA PROGETTAZIONE *(le letture fissate qui, prima dei numeri)*
+
+1. ### **LE SCENE:** ### **le righe di `_energia_del_legame.stato`** *(importate, non copiate)*, ### **`fattore 12`** *(`N 1e5` -> `L 48`, `N 1e6` -> `L 81`)*, ### **la forma `S1`, lo zero simmetrico** *(`BE.conv(0.5)`)*, ### **`T_MAX 2000`.** ### **`cs` SPENTO: `tick.percorri_tick`** *(come `_energia_del_legame.corsa`, modo intero)*; ### **`cs` ACCESO: `tick.tick_con_cs(st, mot, par, lc, ())` con `lc` = la media di `Lambda` per nodo a `t 0`** *(`RAPPORTO 1`, come `_vuoto_disturbato`)*.
+2. ### **LA TORSIONE:** ### **a ogni tick `z_a = conj(phi[2a+1]) phi[2a]`, l'incremento `d_a = arg(z_a(t) conj(z_a(t-1)))`, `theta_a += d_a`.** ### **IL RITMO dell'arco: `omega_a = theta_a(T_MAX)/T_MAX`** *(radianti per tick)*; ### **e per finestre di `250` tick** *(il freno)*.
+3. ### **LA DISTANZA:** ### **`r_a` = la media delle distanze dal centro dei due nodi** *(`rr` di `stato`)*; ### **le classi di larghezza `1`.** ### **`VICINO` = `r_a <= 2 w_in`** *(come in `15df5c63`)*.
+4. ### **`Delta cs_a = |cs(nodo 2a) - cs(nodo 2a+1)|`, mediato su tutti i tick** *(con `cs` spento e' zero)*; ### **`Delta e_vuoto_a` = la stessa cosa per l'energia del vuoto per nodo** *(`_energia_del_legame.per_nodo(..., "psi_h")`)*, ### **mediata ogni `10` tick** *(costa)*.
+5. ### **`2 pi`:** ### **il primo tick in cui un arco ha `|theta_a| >= 2 pi`, quell'arco** *(la sua `r_a`)*, ### **e quanti archi ci sono arrivati a `T_MAX`.**
+
+| | il criterio | il tipo |
+|---|---|---|
+| `s1` | ### **lo srotolamento, su fasi SINTETICHE: un ritmo di `0.7` rad per tick ridà `0.7` entro `1e-12`** | DEVE |
+| `s2` | ### **un ritmo di `3.5` rad per tick** *(oltre `pi`)* ### **lo fa scattare la guardia** *(`max |d| > pi/2`)* | DEVE |
+| `0` | ### **il vuoto UNIFORME senza materia** *(`N 0`, `L 48`, `2000` tick, `cs` spento e acceso)*: ### **`max |theta_a| = 0` al bit** *(la previsione del guardiano)* | DEVE |
+| `g` | ### **in ogni corsa col solitone: `max |d_a| < pi/2` su tutti gli archi e tutti i tick** *(lo srotolamento e' valido)* | DEVE |
+| `1` | ### **con `cs` acceso, il ritmo e' MASSIMO vicino al solitone:** ### **la classe di distanza con la media di `|omega_a|` piu' alta sta in `VICINO`** *(a ogni `N`)* | PUO' FALLIRE |
+| `2` | ### **con `cs` acceso, il ritmo e' proporzionale a `Delta cs`:** ### **la correlazione di Pearson fra `|omega_a|` e `Delta cs_a` sopra `0.9`** *(a ogni `N`)* | PUO' FALLIRE |
+
+- ### **LE LETTURE** *(nessuna soglia)*: ### **il ritmo contro la distanza** *(`cs` spento e acceso)*; ### **la correlazione con `Delta e_vuoto`** *(spento e acceso)*; ### **il primo arco e tick a `2 pi`, il conto;** ### **il freno: la media di `|omega|` per finestra di `250` tick, in `VICINO` e in tutto il toro: costante, calante o crescente;** ### **il confronto spento/acceso** *(se con `cs` spento la torsione e' la stessa, la causa non e' `cs`)*.
+
+### **Mi FERMO** ### **se `s1`, `s2`, `0` o `g` fallisce** *(lo strumento non misura la torsione)*, ### **o se il punto fisso di `cs` ALZA** *(lo riporto, e la corsa con `cs` spento resta)*.
+
+## 3. TODO
+
+1. questo task history, da solo; 2. lo script `csv/_torsione_del_vuoto.py`, committato prima della corsa; 3. la corsa; 4. il referto, la relazione, l'indice (una voce `TORSIONE-DEL-VUOTO`).
