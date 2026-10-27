@@ -3088,3 +3088,11 @@ dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo refe
 - **CHE COSA TOCCA:** ### **ogni `v_max/s` dei referti dei triangoli** *(`0.60`, `0.598467`, i fattori `F` con `c = v_max`)*: ### **lo scarto e' dello `0.01`-`0.1%`, nessuna lettura di quei referti cambia di segno o di ordine.**
 - **LA CURA, non fatta** *(lo strumento non si cambia in questo mandato)*: ### **il massimo sugli autovalori della matrice proiettata `cos(t) M1 + sin(t) M2` per ogni `t`** *(una forma quadratica in `t`: si massimizza esattamente)*, ### **e la griglia raffinata.**
 - **Criterio di chiusura:** ### **`v_max` del tick a `s 0.001` uguale a `pi max |grad mu|` del generatore entro `1e-6`, alla stessa griglia.**
+
+## `[[PEZZI-C2-PARZIALE]]` — i pezzi chiusi della corsa di `C2` si chiamano `.parziale`, e `P-AB` rifiuta ogni commit *(aperto il 2026-10-27)*
+
+- **Trovato da:** ### **il commit del task history `2d5f8036`, rifiutato da `P-AB`** *(`csv/_confronti_e_dati.py`)* ### **con `6` errori «E' UN FILE A META'».**
+- **Che cosa succede:** ### **`csv/_luce_materia_cono_3.py` scrive ogni pezzo chiuso come `db_era2/c2m_<disco>_<b>_<lato>.parziale`** *(scrittura atomica: `.tmp` poi `os.replace`)*; ### **`P-AB` legge il suffisso `.parziale` come un file lasciato a meta' da un processo morto.** ### **Il nome e' sbagliato, non il presidio.**
+- **Il ripiego, dichiarato:** ### **i pezzi chiusi spostati in `db_era2_c2m_pezzi/` prima di ogni commit** *(la corsa li legge solo all'inizio di un disco)*; ### **per riprendere dopo un riavvio vanno rimessi in `db_era2/`.**
+- **La cura, non fatta** *(durante la corsa il file non si tocca, `CLAUDE.md` par.5)*: ### **un suffisso che non sia `.parziale`, fuori da `db_era2/` o col timbro che `P-AB` pretende.**
+- **Criterio di chiusura:** ### **la corsa di `C2` chiusa, lo script col suffisso nuovo committato, e un commit che passa `P-AB` senza spostare niente.**

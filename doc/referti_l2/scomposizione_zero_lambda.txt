@@ -1,0 +1,116 @@
+[TIMBRO] _scomposizione_zero_lambda.py  sha1-BYTE 2feff268  committato e pulito
+==================================================================================================================================
+LA SCOMPOSIZIONE DELL'ENERGIA A RIPOSO A UNO ZERO lambda GENERICO: S1, N 1e6, il vuoto congelato; la famiglia exp(i theta (lambda I - P)), lo spostamento misurato dalla rotazione
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_scomposizione_zero_lambda.py 2feff268; csv/_scomposizione_solitone.py 17dde60a; csv/_solitone_vuoto_congelato.py 81db8c0a; csv/_zero_simmetrico.py b400d76e; csv/_gravita_collettiva.py 04683c42; primo_ordine/energia_pesata.py 7889c512; doc/referti_l2/scomposizione_solitone.jsonl 8eb9e138
+  la configurazione: LAMBDE (0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0, 0.25, 0.75) L_DINAMICA 0.5 TOLL_RIF 0.0001 TOLL_SPOST 1e-09 TOLL_LIN 1e-06 TOLL_NORMA 1e-10 TOLL_CONV 0.01; da _scomposizione_solitone: N_SOL 1e+06 FATTORI (12.0, 18.0) T_FROZEN 2000; da _solitone_vuoto_congelato: FORMA S1 S 0.3 VUOTO ('CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-FASE-VUOTO')
+  il legame: Lambda F_1(rho/Lambda), F_1(x) = x - arctan x (S1; _scomposizione_solitone.parti); E_mat col vuoto a zero (l'N S3 di termini_di_h li' vale 0)
+  lo spostamento: Delta e(lambda) = -[arg <x|T_lambda x> - arg <x|T_0 x>] / s sullo stato uniforme (la fase per tick e' -s E: la rotazione di 74f99039 e' -arg); E_mat(lambda) = E_mat(0) + M Delta e; del vuoto (fuori da E0) solo Delta e_vuoto, crudo: la relazione fase-energia del vuoto non e' verificata qui
+----------------------------------------------------------------------------------------------------------------------------------
+  L  81: la famiglia a lambda 0 = il tick di oggi al bit True; a lambda 1/2 = convenzione_simmetrica al bit True
+  L  81 lambda 0.00: Delta e -0.000000000000 (2 pi lambda +0.000000000000, scarto -0.0e+00); il vuoto (crudo) -0.000000000000; autostato 1-|<x|Tx>| -8.9e-16; la rotazione per tick +1.392352246
+  L  81 lambda 0.10: Delta e +0.628318530718 (2 pi lambda +0.628318530718, scarto 1.4e-15); il vuoto (crudo) +0.628318530718; autostato 1-|<x|Tx>| -2.2e-16; la rotazione per tick +1.203856687
+  L  81 lambda 0.20: Delta e +1.256637061436 (2 pi lambda +1.256637061436, scarto 8.9e-16); il vuoto (crudo) +1.256637061436; autostato 1-|<x|Tx>| 1.2e-15; la rotazione per tick +1.015361127
+  L  81 lambda 0.30: Delta e +1.884955592154 (2 pi lambda +1.884955592154, scarto 3.6e-15); il vuoto (crudo) +1.884955592154; autostato 1-|<x|Tx>| -6.7e-16; la rotazione per tick +0.826865568
+  L  81 lambda 0.40: Delta e +2.513274122872 (2 pi lambda +2.513274122872, scarto -1.3e-15); il vuoto (crudo) +2.513274122872; autostato 1-|<x|Tx>| 1.2e-15; la rotazione per tick +0.638370009
+  L  81 lambda 0.50: Delta e +3.141592653590 (2 pi lambda +3.141592653590, scarto 5.8e-15); il vuoto (crudo) +3.141592653590; autostato 1-|<x|Tx>| -1.8e-15; la rotazione per tick +0.449874450
+  L  81 lambda 0.60: Delta e +3.769911184308 (2 pi lambda +3.769911184308, scarto 2.7e-15); il vuoto (crudo) +3.769911184308; autostato 1-|<x|Tx>| -2.2e-15; la rotazione per tick +0.261378890
+  L  81 lambda 0.70: Delta e +4.398229715026 (2 pi lambda +4.398229715026, scarto 8.9e-16); il vuoto (crudo) +4.398229715026; autostato 1-|<x|Tx>| 0.0e+00; la rotazione per tick +0.072883331
+  L  81 lambda 0.80: Delta e +5.026548245744 (2 pi lambda +5.026548245744, scarto 8.9e-16); il vuoto (crudo) +5.026548245744; autostato 1-|<x|Tx>| 1.1e-16; la rotazione per tick -0.115612228
+  L  81 lambda 0.90: Delta e +5.654866776462 (2 pi lambda +5.654866776462, scarto 3.6e-15); il vuoto (crudo) +5.654866776462; autostato 1-|<x|Tx>| 2.9e-15; la rotazione per tick -0.304107787
+  L  81 lambda 1.00: Delta e +6.283185307180 (2 pi lambda +6.283185307180, scarto -8.9e-16); il vuoto (crudo) +6.283185307180; autostato 1-|<x|Tx>| -1.6e-15; la rotazione per tick -0.492603346
+  L  81 lambda 0.25: Delta e +1.570796326795 (2 pi lambda +1.570796326795, scarto 4.4e-15); il vuoto (crudo) +1.570796326795; autostato 1-|<x|Tx>| -4.4e-16; la rotazione per tick +0.921113348
+  L  81 lambda 0.75: Delta e +4.712388980385 (2 pi lambda +4.712388980385, scarto 8.9e-16); il vuoto (crudo) +4.712388980385; autostato 1-|<x|Tx>| 2.3e-15; la rotazione per tick -0.021364448
+  L  81: e_K(0) -4.710543 per unita' di norma; -arg <x|T x> / s dello stato uniforme -4.641174 (la lettura: H e' il generatore al primo ordine)
+  L  81: 2000 tick col vuoto congelato e la convenzione lambda 0.00: fatto
+  L  81: 2000 tick col vuoto congelato e la convenzione lambda 0.50: fatto
+  L  81 t0     lambda 0.00: E0 -3.721753e+06 = N e_K -4.710543e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.2657, cinetica +0.0012, legame -0.2669 | e_K -4.71054
+  L  81 t0     lambda 0.10: E0 -3.093434e+06 = N e_K -4.082225e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.3196, cinetica +0.0015, legame -0.3211 | e_K -4.08222
+  L  81 t0     lambda 0.20: E0 -2.465116e+06 = N e_K -3.453906e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.4011, cinetica +0.0018, legame -0.4029 | e_K -3.45391
+  L  81 t0     lambda 0.30: E0 -1.836797e+06 = N e_K -2.825588e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.5383, cinetica +0.0025, legame -0.5408 | e_K -2.82559
+  L  81 t0     lambda 0.40: E0 -1.208479e+06 = N e_K -2.197269e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.8182, cinetica +0.0037, legame -0.8220 | e_K -2.19727
+  L  81 t0     lambda 0.50: E0 -5.801600e+05 = N e_K -1.568951e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +2.7043, cinetica +0.0078, legame -1.7121 | e_K -1.56895
+  L  81 t0     lambda 0.60: E0 +4.815855e+04 = N e_K -9.406323e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti -19.5320, cinetica -0.0938, legame +20.6258 | e_K -0.94063
+  L  81 t0     lambda 0.70: E0 +6.764771e+05 = N e_K -3.123137e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti -0.4617, cinetica -0.0067, legame +1.4684 | e_K -0.31231
+  L  81 t0     lambda 0.80: E0 +1.304796e+06 = N e_K +3.160048e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.2422, cinetica -0.0035, legame +0.7613 | e_K +0.31600
+  L  81 t0     lambda 0.90: E0 +1.933114e+06 = N e_K +9.443233e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.4885, cinetica -0.0023, legame +0.5138 | e_K +0.94432
+  L  81 t0     lambda 1.00: E0 +2.561433e+06 = N e_K +1.572642e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.6140, cinetica -0.0018, legame +0.3878 | e_K +1.57264
+  L  81 t0     lambda 0.25: E0 -2.150956e+06 = N e_K -3.139747e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.4597, cinetica +0.0021, legame -0.4618 | e_K -3.13975
+  L  81 t0     lambda 0.75: E0 +9.906363e+05 = N e_K +1.845535e+03 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.0019, cinetica -0.0046, legame +1.0027 | e_K +0.00185
+  L  81 t0    : N e_K lineare in lambda (lo scarto dal fit 9.9e-16 relativo, la pendenza / M +6.283185307); e_K = 0 a lambda 0.74971; E0 = 0 a lambda 0.59234
+  L  81 t2000  lambda 0.00: E0 -3.721678e+06 = N e_K -4.710543e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.2657, cinetica -0.0001, legame -0.2656 | e_K -4.71054
+  L  81 t2000  lambda 0.10: E0 -3.093359e+06 = N e_K -4.082225e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.3197, cinetica -0.0001, legame -0.3196 | e_K -4.08222
+  L  81 t2000  lambda 0.20: E0 -2.465041e+06 = N e_K -3.453906e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.4012, cinetica -0.0001, legame -0.4010 | e_K -3.45391
+  L  81 t2000  lambda 0.30: E0 -1.836722e+06 = N e_K -2.825588e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.5384, cinetica -0.0002, legame -0.5382 | e_K -2.82559
+  L  81 t2000  lambda 0.40: E0 -1.208404e+06 = N e_K -2.197269e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.8183, cinetica -0.0003, legame -0.8180 | e_K -2.19727
+  L  81 t2000  lambda 0.50: E0 -5.800850e+05 = N e_K -1.568951e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +2.7047, cinetica -0.0006, legame -1.7041 | e_K -1.56895
+  L  81 t2000  lambda 0.60: E0 +4.823350e+04 = N e_K -9.406323e+05 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti -19.5016, cinetica +0.0070, legame +20.4946 | e_K -0.94063
+  L  81 t2000  lambda 0.70: E0 +6.765520e+05 = N e_K -3.123137e+05 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti -0.4616, cinetica +0.0005, legame +1.4611 | e_K -0.31231
+  L  81 t2000  lambda 0.80: E0 +1.304871e+06 = N e_K +3.160048e+05 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +0.2422, cinetica +0.0003, legame +0.7576 | e_K +0.31600
+  L  81 t2000  lambda 0.90: E0 +1.933189e+06 = N e_K +9.443233e+05 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +0.4885, cinetica +0.0002, legame +0.5113 | e_K +0.94432
+  L  81 t2000  lambda 1.00: E0 +2.561508e+06 = N e_K +1.572642e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +0.6140, cinetica +0.0001, legame +0.3859 | e_K +1.57264
+  L  81 t2000  lambda 0.25: E0 -2.150881e+06 = N e_K -3.139747e+06 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +1.4597, cinetica -0.0002, legame -0.4596 | e_K -3.13975
+  L  81 t2000  lambda 0.75: E0 +9.907113e+05 = N e_K +1.845535e+03 + cinetica +3.395501e+02 + legame +9.885262e+05 | le frazioni: costituenti +0.0019, cinetica +0.0003, legame +0.9978 | e_K +0.00185
+  L  81 t2000 : N e_K lineare in lambda (lo scarto dal fit 1.1e-15 relativo, la pendenza / M +6.283185307); e_K = 0 a lambda 0.74971; E0 = 0 a lambda 0.59232
+  L  81: dopo 2000 tick a lambda 0.50 contro lambda 0: il legame +9.885262135e+05 / +9.885262135e+05 (1.6e-12 relativo), la cinetica +3.395501e+02 / +3.395501e+02 (1.6e-10 relativo); la larghezza 7.3436 / 7.3436
+  L 120: la famiglia a lambda 0 = il tick di oggi al bit True; a lambda 1/2 = convenzione_simmetrica al bit True
+  L 120 lambda 0.00: Delta e -0.000000000000 (2 pi lambda +0.000000000000, scarto -0.0e+00); il vuoto (crudo) -0.000000000000; autostato 1-|<x|Tx>| 3.3e-16; la rotazione per tick +1.392352246
+  L 120 lambda 0.10: Delta e +0.628318530718 (2 pi lambda +0.628318530718, scarto -3.7e-15); il vuoto (crudo) +0.628318530718; autostato 1-|<x|Tx>| -8.9e-16; la rotazione per tick +1.203856687
+  L 120 lambda 0.20: Delta e +1.256637061436 (2 pi lambda +1.256637061436, scarto -5.1e-15); il vuoto (crudo) +1.256637061436; autostato 1-|<x|Tx>| -4.2e-15; la rotazione per tick +1.015361127
+  L 120 lambda 0.30: Delta e +1.884955592154 (2 pi lambda +1.884955592154, scarto 8.9e-16); il vuoto (crudo) +1.884955592154; autostato 1-|<x|Tx>| -2.4e-15; la rotazione per tick +0.826865568
+  L 120 lambda 0.40: Delta e +2.513274122872 (2 pi lambda +2.513274122872, scarto 4.4e-15); il vuoto (crudo) +2.513274122872; autostato 1-|<x|Tx>| 0.0e+00; la rotazione per tick +0.638370009
+  L 120 lambda 0.50: Delta e +3.141592653590 (2 pi lambda +3.141592653590, scarto -1.8e-15); il vuoto (crudo) +3.141592653590; autostato 1-|<x|Tx>| 2.4e-15; la rotazione per tick +0.449874450
+  L 120 lambda 0.60: Delta e +3.769911184308 (2 pi lambda +3.769911184308, scarto -3.6e-15); il vuoto (crudo) +3.769911184308; autostato 1-|<x|Tx>| 1.7e-15; la rotazione per tick +0.261378890
+  L 120 lambda 0.70: Delta e +4.398229715026 (2 pi lambda +4.398229715026, scarto -1.8e-15); il vuoto (crudo) +4.398229715026; autostato 1-|<x|Tx>| 6.7e-16; la rotazione per tick +0.072883331
+  L 120 lambda 0.80: Delta e +5.026548245744 (2 pi lambda +5.026548245744, scarto -1.8e-15); il vuoto (crudo) +5.026548245744; autostato 1-|<x|Tx>| 5.6e-16; la rotazione per tick -0.115612228
+  L 120 lambda 0.90: Delta e +5.654866776462 (2 pi lambda +5.654866776462, scarto -8.9e-16); il vuoto (crudo) +5.654866776462; autostato 1-|<x|Tx>| 1.1e-16; la rotazione per tick -0.304107787
+  L 120 lambda 1.00: Delta e +6.283185307180 (2 pi lambda +6.283185307180, scarto 8.9e-15); il vuoto (crudo) +6.283185307180; autostato 1-|<x|Tx>| 2.0e-15; la rotazione per tick -0.492603346
+  L 120 lambda 0.25: Delta e +1.570796326795 (2 pi lambda +1.570796326795, scarto 7.1e-15); il vuoto (crudo) +1.570796326795; autostato 1-|<x|Tx>| 3.3e-15; la rotazione per tick +0.921113348
+  L 120 lambda 0.75: Delta e +4.712388980385 (2 pi lambda +4.712388980385, scarto -1.8e-15); il vuoto (crudo) +4.712388980385; autostato 1-|<x|Tx>| 1.1e-16; la rotazione per tick -0.021364448
+  L 120: e_K(0) -4.710543 per unita' di norma; -arg <x|T x> / s dello stato uniforme -4.641174 (la lettura: H e' il generatore al primo ordine)
+  L 120: 2000 tick col vuoto congelato e la convenzione lambda 0.00: fatto
+  L 120: 2000 tick col vuoto congelato e la convenzione lambda 0.50: fatto
+  L 120 t0     lambda 0.00: E0 -3.721753e+06 = N e_K -4.710543e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.2657, cinetica +0.0012, legame -0.2669 | e_K -4.71054
+  L 120 t0     lambda 0.10: E0 -3.093434e+06 = N e_K -4.082225e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.3196, cinetica +0.0015, legame -0.3211 | e_K -4.08222
+  L 120 t0     lambda 0.20: E0 -2.465116e+06 = N e_K -3.453906e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.4011, cinetica +0.0018, legame -0.4029 | e_K -3.45391
+  L 120 t0     lambda 0.30: E0 -1.836797e+06 = N e_K -2.825588e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.5383, cinetica +0.0025, legame -0.5408 | e_K -2.82559
+  L 120 t0     lambda 0.40: E0 -1.208479e+06 = N e_K -2.197269e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.8182, cinetica +0.0037, legame -0.8220 | e_K -2.19727
+  L 120 t0     lambda 0.50: E0 -5.801600e+05 = N e_K -1.568951e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +2.7043, cinetica +0.0078, legame -1.7121 | e_K -1.56895
+  L 120 t0     lambda 0.60: E0 +4.815855e+04 = N e_K -9.406323e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti -19.5320, cinetica -0.0938, legame +20.6258 | e_K -0.94063
+  L 120 t0     lambda 0.70: E0 +6.764771e+05 = N e_K -3.123137e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti -0.4617, cinetica -0.0067, legame +1.4684 | e_K -0.31231
+  L 120 t0     lambda 0.80: E0 +1.304796e+06 = N e_K +3.160048e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.2422, cinetica -0.0035, legame +0.7613 | e_K +0.31600
+  L 120 t0     lambda 0.90: E0 +1.933114e+06 = N e_K +9.443233e+05 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.4885, cinetica -0.0023, legame +0.5138 | e_K +0.94432
+  L 120 t0     lambda 1.00: E0 +2.561433e+06 = N e_K +1.572642e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.6140, cinetica -0.0018, legame +0.3878 | e_K +1.57264
+  L 120 t0     lambda 0.25: E0 -2.150956e+06 = N e_K -3.139747e+06 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +1.4597, cinetica +0.0021, legame -0.4618 | e_K -3.13975
+  L 120 t0     lambda 0.75: E0 +9.906363e+05 = N e_K +1.845535e+03 + cinetica -4.518694e+03 + legame +9.933095e+05 | le frazioni: costituenti +0.0019, cinetica -0.0046, legame +1.0027 | e_K +0.00185
+  L 120 t0    : N e_K lineare in lambda (lo scarto dal fit 1.9e-15 relativo, la pendenza / M +6.283185307); e_K = 0 a lambda 0.74971; E0 = 0 a lambda 0.59234
+  L 120 t2000  lambda 0.00: E0 -3.721747e+06 = N e_K -4.710543e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.2657, cinetica -0.0001, legame -0.2656 | e_K -4.71054
+  L 120 t2000  lambda 0.10: E0 -3.093429e+06 = N e_K -4.082225e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.3196, cinetica -0.0001, legame -0.3196 | e_K -4.08222
+  L 120 t2000  lambda 0.20: E0 -2.465110e+06 = N e_K -3.453906e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.4011, cinetica -0.0001, legame -0.4010 | e_K -3.45391
+  L 120 t2000  lambda 0.30: E0 -1.836792e+06 = N e_K -2.825588e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.5383, cinetica -0.0002, legame -0.5382 | e_K -2.82559
+  L 120 t2000  lambda 0.40: E0 -1.208473e+06 = N e_K -2.197269e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.8182, cinetica -0.0002, legame -0.8180 | e_K -2.19727
+  L 120 t2000  lambda 0.50: E0 -5.801545e+05 = N e_K -1.568951e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +2.7044, cinetica -0.0005, legame -1.7039 | e_K -1.56895
+  L 120 t2000  lambda 0.60: E0 +4.816406e+04 = N e_K -9.406323e+05 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti -19.5298, cinetica +0.0059, legame +20.5238 | e_K -0.94063
+  L 120 t2000  lambda 0.70: E0 +6.764826e+05 = N e_K -3.123137e+05 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti -0.4617, cinetica +0.0004, legame +1.4612 | e_K -0.31231
+  L 120 t2000  lambda 0.80: E0 +1.304801e+06 = N e_K +3.160048e+05 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +0.2422, cinetica +0.0002, legame +0.7576 | e_K +0.31600
+  L 120 t2000  lambda 0.90: E0 +1.933120e+06 = N e_K +9.443233e+05 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +0.4885, cinetica +0.0001, legame +0.5114 | e_K +0.94432
+  L 120 t2000  lambda 1.00: E0 +2.561438e+06 = N e_K +1.572642e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +0.6140, cinetica +0.0001, legame +0.3859 | e_K +1.57264
+  L 120 t2000  lambda 0.25: E0 -2.150951e+06 = N e_K -3.139747e+06 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +1.4597, cinetica -0.0001, legame -0.4596 | e_K -3.13975
+  L 120 t2000  lambda 0.75: E0 +9.906419e+05 = N e_K +1.845535e+03 + cinetica +2.862840e+02 + legame +9.885100e+05 | le frazioni: costituenti +0.0019, cinetica +0.0003, legame +0.9978 | e_K +0.00185
+  L 120 t2000 : N e_K lineare in lambda (lo scarto dal fit 1.7e-15 relativo, la pendenza / M +6.283185307); e_K = 0 a lambda 0.74971; E0 = 0 a lambda 0.59233
+  L 120: dopo 2000 tick a lambda 0.50 contro lambda 0: il legame +9.885100333e+05 / +9.885100333e+05 (1.7e-12 relativo), la cinetica +2.862840e+02 / +2.862840e+02 (7.3e-10 relativo); la larghezza 7.5763 / 7.5763
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LETTURA: con lo zero simmetrico (lambda 1/2)
+  L  81 t0    : i costituenti +2.7043, la cinetica +0.0078, il legame -1.7121 dell'energia a riposo (E0 -5.801600e+05, e_K -1.56895)
+  L  81 t2000 : i costituenti +2.7047, la cinetica -0.0006, il legame -1.7041 dell'energia a riposo (E0 -5.800850e+05, e_K -1.56895)
+  L 120 t0    : i costituenti +2.7043, la cinetica +0.0078, il legame -1.7121 dell'energia a riposo (E0 -5.801600e+05, e_K -1.56895)
+  L 120 t2000 : i costituenti +2.7044, la cinetica -0.0005, il legame -1.7039 dell'energia a riposo (E0 -5.801545e+05, e_K -1.56895)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (1): lo zero di oggi (lambda 0) ridà le frazioni di 9adcb3b1 (il suo jsonl) entro 0.0001          PASSA   L 81 t0 0.0e+00; L 81 t2000 0.0e+00; L 120 t0 0.0e+00; L 120 t2000 0.0e+00
+  DEVE PASSARE (2): la famiglia a lambda 0 = il tick di oggi, a lambda 1/2 = convenzione_simmetrica, AL BIT (un  PASSA   
+  DEVE PASSARE (3): lo spostamento misurato Delta e(lambda) = 2 pi lambda entro 1e-09, e lo stato uniforme autos PASSA   il peggiore 8.9e-15
+  DEVE PASSARE (4): N e_K lineare entro 1e-06; il legame e la cinetica dopo la dinamica a lambda 0.5 = lambda 0  PASSA   L 81 t0 lin 9.9e-16; L 81 t2000 lin 1.1e-15; L 81 dinamica legame 1.6e-12 cinetica 1.6e-10; L 120 t0 lin 1.9e-15; L 120 t2000 lin 1.7e-15; L 120 dinamica legame 1.7e-12 cinetica 7.3e-10
+  DEVE PASSARE (5): M e V dopo 2000 tick a lambda 0.5 entro 1e-10; le frazioni alle due taglie entro 0.01 (a ogn ### FALLISCE   1.9e-12/0.0e+00 1.9e-12/0.0e+00; le taglie 2.92e-02
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/5 controlli passano; DEVE fallite: 1 ['DEVE PASSARE (5): M e V dopo 2000 tick a lambda 0.5 entro 1e-10; le frazioni alle due taglie entro 0.01 (a ogni lambda)']
