@@ -169,3 +169,6 @@ csv/_test_fork/_mitosi_zero_dove/amp0_3_senza_ganci.json
 #   ### CHE RIPRODUCE QUEL DATO.
 db_era2/*.npz
 db_era2/*.parziale
+# I PEZZI CHIUSI delle corse a pezzi (PEZZI-C2-PARZIALE, 2026-10-27): fuori da db_era2/, dove P-AB
+#   pretende un timbro per ogni dato e legge `.parziale` come un file a meta'.
+db_era2_pezzi/

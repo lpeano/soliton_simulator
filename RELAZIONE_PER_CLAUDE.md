@@ -21239,3 +21239,7 @@ La domanda di Luca *(«l'instabilita', se c'e', dipende dal fatto che lo spazio 
 - ### ⚠ **LA NOTA DOVUTA:** ### **la materia di `f94e45e9`** *(`csv/_luce_materia_cono.corsa_materia`)* ### **aveva lo STESSO errore di segno** *(il tempo rovesciato, `exp(-i (H - I) t)`)*: ### **i suoi numeri di materia non valgono.** ### **E la diagnosi di `3a94f4af`** *(«il pacchetto lento si allarga»)* ### **era sbagliata: col segno giusto, a `q 0.7`, `W 8`, sul disco di lato `617`, la materia esce intera** *(la frazione `1.000`)*.
 - ### **I TEMPI:** ### **`12` corse da `2942` a `3745` s ciascuna.**
 - ### **LA CODA, ORA:** ### **la cura di [[PEZZI-C2-PARZIALE]]** *(a corsa chiusa)*, ### **poi il mandato dopo `15df5c63`.**
+
+### 📌 **LA CURA DI PEZZI-C2-PARZIALE: I PEZZI DI C2 IN db_era2_pezzi/ COL SUFFISSO .json -- P-AB NON LI VEDE PIU**
+
+- ### **`csv/_luce_materia_cono_3.py` scrive ora i pezzi chiusi in `db_era2_pezzi/c2m_*.json`** *(`sha1-BYTE bebb5e26`; era `ce06a8af`)*, ### **`db_era2_pezzi/` e' in `.gitignore`, e i `12` pezzi chiusi sono rinominati la' dentro** *(una ripresa li ritrova tutti e `12`: controllato)*. ### **Il referto di `C2` resta di `ce06a8af`, al commit `e48e7414`.** ### **La voce [[PEZZI-C2-PARZIALE]] si chiude nel commit dopo, citando questo** *(il criterio: un commit che passa `P-AB` senza spostare niente)*.

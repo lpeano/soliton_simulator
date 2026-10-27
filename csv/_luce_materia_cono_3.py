@@ -32,7 +32,7 @@ W_LUCE = 6.0
 L_USCITA = 30.0
 DT_MAT = 10.0
 FATTORE_T = 1.05                # ### il tempo massimo della materia: 1.05 x il percorso / v (il baricentro va a 0.0998, lo 0.7% sotto)
-PEZZI = os.path.join(RADICE, "db_era2")   # ### i pezzi, uno per corsa: si riprende da quelli chiusi (db_era2/*.parziale e' ignorato da git)
+PEZZI = os.path.join(RADICE, "db_era2_pezzi")   # ### i pezzi, uno per corsa: si riprende da quelli chiusi (db_era2_pezzi/ e' ignorato da git; fuori da db_era2/ perche' P-AB legge `.parziale` come un file a meta': PEZZI-C2-PARZIALE)
 FATTORE_BORDO = 3.0
 USCITA = {6: (4, 5, 0, 1), 5: (0, 1)}
 INGRESSO = (2, 3)
@@ -298,9 +298,10 @@ def main(argv):
     esito("DEVE PASSARE (prova): la lettura dall'impulso ridà pi/3 entro l'%g%% sulla luce" % (100 * TOLL_PROVA), abs(cp - math.pi / 3) <= TOLL_PROVA * math.pi / 3, "%+.5f" % cp)
     del Dp, dbp, _nh, _A, mpp
     ris = []
+    os.makedirs(PEZZI, exist_ok=True)
     for n in (6, 5):
         t0 = time.time()
-        if all(os.path.exists(os.path.join(PEZZI, "c2m_%d_%g_%+d.parziale" % (n, b, lato))) for b in BB for lato in (+1, -1)):
+        if all(os.path.exists(os.path.join(PEZZI, "c2m_%d_%g_%+d.json" % (n, b, lato))) for b in BB for lato in (+1, -1)):
             D = db = nh = A = mp = None
         else:
             D, db, nh, A, mp = disco(n, R)
@@ -310,7 +311,7 @@ def main(argv):
             coppia = {}
             for lato in (+1, -1):
                 t0 = time.time()
-                pz = os.path.join(PEZZI, "c2m_%d_%g_%+d.parziale" % (n, b, lato))
+                pz = os.path.join(PEZZI, "c2m_%d_%g_%+d.json" % (n, b, lato))
                 if os.path.exists(pz):
                     r = json.loads(io.open(pz, encoding="utf-8").read())
                     print("  (il pezzo %s, gia' chiuso: ripreso)" % os.path.basename(pz))
