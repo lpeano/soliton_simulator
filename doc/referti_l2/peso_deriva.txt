@@ -1,0 +1,22 @@
+[TIMBRO] _peso_deriva.py  sha1-BYTE 25e6a1ae  committato e pulito
+==================================================================================================================================
+QUANTO PESA LA DERIVA DI H_tot (IL LEGAME S1) SUI RISULTATI DI OGGI: contro gli scambi di 15df5c63 e i flussi della strada A; il criterio di Luca, sotto il 5%% il verso resta
+==================================================================================================================================
+  i blob nel repo: csv/_peso_deriva.py 25e6a1ae; doc/referti_l2/energia_del_legame.jsonl 891ad115; doc/referti_l2/libro_dei_conti.jsonl f02788b3
+  la configurazione: SOGLIA 0.05 T_MAX 2000; le corse di 15df5c63 col tick intero e lo zero simmetrico
+----------------------------------------------------------------------------------------------------------------------------------
+### 15df5c63: D = |Delta H_tot| contro gli scambi |Delta E_p| sul toro intero
+  N 1e+06   L  81 t  320: Delta H_tot +2.6022e+02; il vuoto -2.7971e+03 (D/X 0.0930); la cinetica +1.9042e+03 (D/X 0.1367); il legame +1.1531e+03 (D/X 0.2257) -> ### OLTRE IL 5%
+  N 1e+06   L  81 t 2000: Delta H_tot +5.9258e+02; il vuoto -8.9323e+03 (D/X 0.0663); la cinetica +8.8363e+03 (D/X 0.0671); il legame +6.8862e+02 (D/X 0.8605) -> ### OLTRE IL 5%
+  N 1e+06   L 120 t  320: Delta H_tot +2.5537e+02; il vuoto -2.8040e+03 (D/X 0.0911); la cinetica +1.8708e+03 (D/X 0.1365); il legame +1.1886e+03 (D/X 0.2149) -> ### OLTRE IL 5%
+  N 1e+06   L 120 t 2000: Delta H_tot +3.8063e+02; il vuoto -7.1465e+03 (D/X 0.0533); la cinetica +6.0513e+03 (D/X 0.0629); il legame +1.4759e+03 (D/X 0.2579) -> ### OLTRE IL 5%
+  N 100000  L  48 t  140: Delta H_tot +4.5035e+01; il vuoto -1.1533e+03 (D/X 0.0390); la cinetica +7.3216e+02 (D/X 0.0615); il legame +4.6620e+02 (D/X 0.0966) -> ### OLTRE IL 5%
+  N 100000  L  48 t 2000: Delta H_tot +1.6343e+02; il vuoto -4.1751e+03 (D/X 0.0391); la cinetica +3.9559e+03 (D/X 0.0413); il legame +3.8261e+02 (D/X 0.4271) -> ### OLTRE IL 5%
+  N 100000  L  69 t  140: Delta H_tot +4.4468e+01; il vuoto -1.1535e+03 (D/X 0.0385); la cinetica +7.3166e+02 (D/X 0.0608); il legame +4.6635e+02 (D/X 0.0954) -> ### OLTRE IL 5%
+  N 100000  L  69 t 2000: Delta H_tot +1.1610e+02; il vuoto -3.6222e+03 (D/X 0.0321); la cinetica +3.0359e+03 (D/X 0.0382); il legame +7.0233e+02 (D/X 0.1653) -> ### OLTRE IL 5%
+----------------------------------------------------------------------------------------------------------------------------------
+### IL LIBRO DEI CONTI, LA STRADA A (N 1e5 L 48): il residuo del toro (la deriva) contro i flussi del disco 2 w_in (VICINO), in N |e_K(0)|
+  fino alla vita: il toro entrate +5.7417e-03 uscite -5.6461e-03 (saldo +9.5605e-05); il disco 2 entrate +2.8241e-02 uscite -2.1430e-02 (saldo +6.8105e-03); il rapporto dei valori assoluti 0.2293, dei saldi 0.0140
+  dopo la vita: il toro entrate +5.5351e-02 uscite -5.5100e-02 (saldo +2.5133e-04); il disco 2 entrate +5.9547e-01 uscite -5.4181e-01 (saldo +5.3659e-02); il rapporto dei valori assoluti 0.0971, dei saldi 0.0047
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LETTURA: il verso regge sotto il 5% in 0 casi su 8 (corsa per corsa, alla vita e a T_MAX)
