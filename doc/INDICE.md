@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 172 |
+| `FISICA` | `2` | 173 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -123,6 +123,7 @@
 | `CAMMINATA-NELLA-TABELLA` | FRONTE | FISICA | 2 | ### **AGENDA** |  | la camminata entra nella tabella -- ASSORBITA da SIMULATORE-ERA-2, e i quattro p |
 | `CAMMINATA-SENTE-TRIANGOLO` | TEORIA | FISICA | 2 | ### **AGENDA** |  | LA CAMMINATA CHE SENTE IL TRIANGOLO: l-olonomia come differenza di fase fra le d |
 | `CANALE-CS-SECONDA-SORGENTE` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL CANALE DI cs: LA SECONDA SORGENTE DELL-INSTABILITA- DELLA MATERIA UNIFORME |
+| `CARICA-A14-3` | MISURA | FISICA | 2 | ### **AGENDA** |  | la carica di A14.3: la rotazione interna sigma_z ha due segni e si conserva a ep |
 | `CARICA-DI-GAUGE` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | il segno di perc_chi dipende al 100 per cento dal rappresentante canonico: e' un |
 | `CARICA-PERCORSO` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | l ordine in cui si chiude il filone della carica: cinque punti, e il primo si pu |
 | `CARICA-ROTAZIONE` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | la carica e' il verso di rotazione collettivo: somma di /psi/^2 * phivel per mas |

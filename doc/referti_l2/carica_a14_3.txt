@@ -1,0 +1,19 @@
+[TIMBRO] _carica_a14_3.py  sha1-BYTE 62ddb972  committato e pulito
+==================================================================================================================================
+LA CARICA DI A14.3: QUATTRO CANDIDATE (la norma, la rotazione interna sigma_z, N+ - N- della banda di W0, il segno della frequenza locale) IN TRE DINAMICHE
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_carica_a14_3.py 62ddb972; primo_ordine/tick.py d9a59ff9; primo_ordine/flussi_parziali.py 1461182f; primo_ordine/materia_vuoto.py 68ff3ffd; primo_ordine/motore.py 0e07bbfd
+  la configurazione: L 12 T 200 SEME 20261027 ZERO simm FORMA S1 SALTA_W0 ('CAMM-MATERIA-VUOTO', 'CAMM-FASE-VUOTO') EPS (0.0, 0.5) TOLL_0 1e-12 TOLL_1 1e-10 TOLL_2 1e-12 TOLL_MODI 1e-09; il vuoto uniforme; cs spento; U = I
+----------------------------------------------------------------------------------------------------------------------------------
+### W0 (il tick senza ('CAMM-MATERIA-VUOTO', 'CAMM-FASE-VUOTO')), 1728 componenti (13 s): l'unitarieta' 1.6e-15; omega da -0.942478 a +0.942478; 288 positive, 864 negative, 576 a zero, 0 a pi; [W, P+-] 7.1e-10; P+ P- 2.1e-10
+----------------------------------------------------------------------------------------------------------------------------------
+  W0             : la deriva massima relativa a Q_N(0) = 864.0: Q_N 1.81e-13; Q_S 3.29e-15 (Q_S(0) -18.4081); Q_B 3.15e-11 (Q_B(0) -287.3274); Q_F 8.84e-02 (Q_F(0) -787.6651) (1 s)
+  intero eps 0   : la deriva massima relativa a Q_N(0) = 864.0: Q_N 1.79e-13; Q_S 3.16e-15 (Q_S(0) -18.4081); Q_B 4.16e-02 (Q_B(0) -287.3274); Q_F 5.56e-01 (Q_F(0) -631.5167) (2 s)
+  intero eps 0.5 : la deriva massima relativa a Q_N(0) = 864.0: Q_N 1.39e-13; Q_S 6.33e-02 (Q_S(0) -18.4081); Q_B 3.19e-02 (Q_B(0) -287.3274); Q_F 5.32e-01 (Q_F(0) -614.1009) (2 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (0): Q_N conservata entro 1e-12 relativo nelle tre dinamiche                                      PASSA   W0 1.8e-13 intero eps 0 1.8e-13 intero eps 0.5 1.4e-13
+  DEVE PASSARE (1): Q_B = N+ - N- conservata entro 1e-10 relativo sotto W0 (il controllo dei proiettori)         PASSA   3.2e-11
+  PUO' FALLIRE (2): Q_S = sum psi^+ sigma_z psi conservata entro 1e-12 relativo col tick intero a eps 0          PASSA   3.2e-15
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []

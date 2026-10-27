@@ -119,6 +119,42 @@
 | la costante | postulato / emergente / il vuoto come scala | **il vuoto come scala, da derivare** *(sezione `7`)* |
 | il tempo del campo | dell'arco *(`B-3`)* / globale | **dell'arco**: il ritardo di Shapiro e il «zero manopole» |
 
+## 8-bis. LA CARICA CON DUE SEGNI: LE CANDIDATE DI `A14.3`, SULLA CARTA *(la parte 3 del mandato dopo `15df5c63`, `2026-10-27`; uno studio, NESSUNA SCELTA; [[CARICA-A14-3]])*
+
+> ### **IL PERCHE'** *(dal guardiano)*: ### **con la norma come carica** *(la raccomandazione del par.`8`)* ### **tutta la materia ha lo stesso segno: niente materia neutra, e ogni oggetto grande si respinge da solo.** ### **`A14` punto `(3)`: «la carica si conserva anche globalmente, nascita compresa: il verso di rotazione collettivo, la carica di Noether della fase».** ### **La misura breve:** `csv/_carica_a14_3.py` *(`62ddb972`)*, `doc/referti_l2/carica_a14_3.txt` *(il toro `L 12`, `psi` casuale con `rho ~ Lambda`, `S1`, lo zero simmetrico, `cs` spento, `U = I`, `200` tick)*.
+
+### `(a)` LE DEFINIZIONI SUL RETICOLO
+
+| | la candidata | la densita' locale | i segni |
+|---|---|---|---|
+| `Q_N` | ### **la NORMA `sum |psi|^2`** *(Noether della fase GLOBALE)* | ### **`rho_k`** | ### **uno** |
+| `Q_S` | ### **la ROTAZIONE INTERNA `sum psi^+ sigma_z psi`** *(Noether di `e^{i a sigma_z}`: le due componenti dello spinore ruotano in verso opposto)* | ### **`|psi_k,su|^2 - |psi_k,giu|^2`** | ### **due** |
+| `Q_B` | ### **il SEGNO DELLA BANDA `N+ - N-`** *(`<psi|P+ - P-|psi>`, `P+-` i proiettori sulle frequenze positive e negative del tick LINEARE `W0`)* | ### **NESSUNA:** `P+-` sono spettrali, GLOBALI *(`doc/REFERTO_bande.md` par.`6`)* | ### **due** |
+| `Q_F` | ### **il SEGNO DELLA FREQUENZA LOCALE** `sum_k sign(omega_k) rho_k` *(`omega_k` la rotazione per tick della materia al nodo)* | ### **`sign(omega_k) rho_k`** | ### **due** |
+| -- | ### **la CORRENTE DI FASE** *(il mandato)* | ### **e' la corrente `J_a` dello spostamento: la corrente di `Q_N`;** ### **la differenza delle correnti delle due componenti e' quella di `Q_S`** | -- |
+| -- | ### **la VORTICITA'** *(l'avvolgimento della fase attorno a una placchetta)* | ### **intera, per placchetta** | ### **due, TOPOLOGICA:** ### **non una carica di Noether; nasce e muore a coppie;** ### **e la fase di QUALE componente e' gia' una scelta** *(non misurata)* |
+
+### `(b)` SI CONSERVANO NEL TICK? *(dal generatore, e la misura come riscontro)*
+
+- ### **`Q_N`: SI', ESATTA** *(il tick e' unitario: la deriva `1.4e-13`-`1.8e-13` relativa nelle tre dinamiche)*.
+- ### **`Q_S`: SI' se ogni pezzo commuta con `sigma_z`:** ### **il Grover agisce allo stesso modo sulle due componenti, il legame da' la stessa fase alle due** *(`rho` conta tutte e due: `motore.densita_materia`)*, ### **lo spostamento con `U` DIAGONALE;** ### **la moneta con `eps != 0` NO** *(`e^{-i eps dtau sigma.n}` mescola le componenti)*. ### **Misurata: `3.2e-15` col tick intero a `eps 0`; `6.3e-2` a `eps 0.5`.**
+- ### **`Q_B`: SI' sotto `W0`** *(i proiettori commutano: `3.2e-11`)*, ### **NO col tick intero** *(il legame dipende dallo stato: `4.2e-2` a `eps 0`, `3.2e-2` a `eps 0.5`)*: ### **e' la misura di `REFERTO_bande` `B3`, ritrovata.**
+- ### **`Q_F`: NO** *(il segno e' non lineare: `8.8e-2` gia' sotto `W0`, `0.53`-`0.56` col tick intero)*.
+
+### `(c)` IL RAPPORTO CON LE DUE BANDE E CON `N+ - N-`
+
+- ### **`Q_B` E' `N+ - N-`, per definizione.** ### ⚠ **Allo zero simmetrico le bande di `W0` NON sono simmetriche: `288` positive, `864` negative, `576` a frequenza ZERO** *(su `1728`, a `L 12`; lo stesso `1 : 3 : 2` a `L 6`)*: ### **un terzo degli stati non ha un segno di banda,** ### **e il segno dipende dallo zero** *(una costante sposta tutte le frequenze)*.
+- ### **`Q_S` E' INDIPENDENTE DALLE BANDE a `eps 0`:** ### **le due componenti evolvono con lo stesso `W0`** *(`W0 = W_su (+) W_giu`, uguali)*, ### **quindi ogni banda contiene le due rotazioni interne in parti uguali per costruzione:** ### **una carica di segno `+` o `-` in ogni banda.**
+- ### **IL LEGAME DI OGGI** *(`rho` = tutte e due le componenti)* ### **e' NEUTRO rispetto a `Q_S`:** ### **materia di `Q_S` opposta pesa uguale sul vuoto** *(la decisione di Luca del `2026-10-15` sulla sorgente: «conta materia e antimateria allo stesso modo»)*.
+
+### `(d)` CHE COSA SERVE PERCHE' SIA LA SORGENTE DI UN CAMPO CON LA LEGGE DI GAUSS ESATTA
+
+- ### **UNA DENSITA' LOCALE `q_k` E UNA CORRENTE `J_a` sugli archi, con la continuita' ESATTA pezzo per pezzo:** ### **i pezzi del nodo non cambiano `q_k`, e lo spostamento la sposta di `J_a`;** ### **allora `E_a <- E_a - e J_a` nello stesso pezzo tiene `div E = e q` al bit** *(il par.`6`)*.
+- ### **`Q_N`: c'e' tutto** *(la scelta di oggi nel par.`8`)*.
+- ### **`Q_S`: c'e' tutto SE** ### **`eps = 0`** *(o una moneta che commuti con `sigma_z`)* ### **E `U` DIAGONALE** *(`U(1) x U(1)`, non `SU(2)`)*; ### **e il campo si accoppia come `U = e^{i e A sigma_z}`** *(le due componenti con fasi opposte)*: ### **cambia il gruppo a cui il campo si accoppia, e tocca le scelte del par.`8`** *(`U(1)` separato da `SU(2)`, la moneta di spin)*.
+- ### **`Q_B`: NO** *(nessuna densita' locale)*. ### **`Q_F`: NO** *(nessuna continuita')*. ### **La VORTICITA': non e' una sorgente di Noether;** ### **un campo con Gauss esatto la vorrebbe come carica conservata di un'altra simmetria.**
+- ### **LE SCELTE RESTANO DI LUCA** *(quale carica; la moneta; il gruppo di `U`; la costante; il campo compatto)*: ### **questa sezione dice solo che cosa ognuna richiede.**
+
 ## 9. LA CATENA DEI SIGILLI E LE MISURE DEL PROTOTIPO SUI TRIANGOLI *(in memoria, in `csv/`, come gli strumenti dei triangoli)*
 
 | | la misura | DEVE passare | DEVE fallire *(la chiave giusta)* | PUO' fallire |
