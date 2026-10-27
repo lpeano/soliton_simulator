@@ -40,6 +40,10 @@
 
 ### **LA LETTURA** *(nessuna soglia; il guardiano non sa)*: ### **`(1)` se il vuoto VICINO cresce mentre il legame cala, la materia cede energia al vuoto;** ### **`(2)` se il vuoto cala mentre la cinetica cresce, il vuoto restituisce energia alla materia e la scalda;** ### **`(3)` quanta energia arriva LONTANO e in che tempo, e la velocita' del fronte.** ### **Mi FERMO** ### **se un DEVE fallisce.**
 
+## 3-bis. ANNOTAZIONE DOPO LA PROVA A VUOTO *(prima della corsa; il paragrafo `3` resta)*
+
+- ### ⚠ **IL FRONTE:** ### **sul toro il profilo della materia del risolutore NON HA BORDO** *(il nodo piu' lontano con materia e' a `37` archi, oltre la meta' del toro `L 48`)*: ### **la finestra del fit «dal bordo della materia» era vuota.** ### **La finestra comincia al bordo di VICINO** *(`2 w_in`, gia' dichiarato)* ### **e finisce a `0.8` della meta' del toro.**
+
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script, committato prima della corsa *(in binario, senza `CRLF`)*; 3. la corsa; 4. il referto, la relazione, l'indice.
