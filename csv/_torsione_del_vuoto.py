@@ -29,7 +29,8 @@ JSONL = os.path.join(RADICE, "doc", "referti_l2", "torsione_del_vuoto.jsonl")
 T_MAX = 2000
 FATTORE = 12.0
 CASI = (1e5, 1e6)
-LAM_ZERO = 0.5                 # ### lo zero simmetrico
+LAM_ZERO = 0.5                 # ### lo zero simmetrico: il suo lambda
+ZERO = "simm"                  # ### e il suo NOME: `_triangoli_bassa_energia.conv` prende il nome, e con un numero da' la convenzione di oggi (il mio errore, 2026-10-27)
 RAPPORTO = 1.0                 # ### `lambda_c = RAPPORTO x` la media di `Lambda` per nodo a `t 0` (come `_vuoto_disturbato`)
 R_VICINO = 2.0                 # ### `VICINO`: `r_a <= R_VICINO w_in` (come `15df5c63`)
 FINESTRA = 250
@@ -129,7 +130,7 @@ def corsa(N, rec, cs_acceso, senza_materia):
     primo = None
     giri = []
     t0 = time.time()
-    with SF.forma(VC.FORMA), BE.conv(LAM_ZERO):
+    with SF.forma(VC.FORMA), BE.conv(ZERO):
         for t in range(T_MAX + 1):
             if t % OGNI_E == 0 and M > 0:
                 ev = EL.per_nodo(inc, mot, st, "psi_h")
@@ -188,8 +189,8 @@ def main(argv):
     blobs = {p: UM.blob(p) for p in ("soliton_simulator.py", "csv/_torsione_del_vuoto.py", "csv/_energia_del_legame.py", "csv/_solitone_vuoto_congelato.py", "csv/_solitoni_triangoli.py",
                                      "primo_ordine/tick.py", "primo_ordine/flussi_parziali.py")}
     print("  il passo: %d pezzi, impronta %s (intatto); i blob nel repo: %s" % (len(CM.ORDINE), CM.IMPRONTA, "; ".join("%s %s" % (k, v["sha1-BYTE"]) for k, v in blobs.items())))
-    print("  la configurazione: T_MAX %d FATTORE %g CASI %s LAM_ZERO %g RAPPORTO %g R_VICINO %g FINESTRA %d OGNI_E %d GUARDIA %.6f SOGLIA_CORR %g SINT %s TOLL_SINT %g; da _solitone_vuoto_congelato: S %g FORMA %s"
-          % (T_MAX, FATTORE, CASI, LAM_ZERO, RAPPORTO, R_VICINO, FINESTRA, OGNI_E, GUARDIA, SOGLIA_CORR, SINT, TOLL_SINT, VC.S, VC.FORMA))
+    print("  la configurazione: T_MAX %d FATTORE %g CASI %s ZERO %s LAM_ZERO %g RAPPORTO %g R_VICINO %g FINESTRA %d OGNI_E %d GUARDIA %.6f SOGLIA_CORR %g SINT %s TOLL_SINT %g; da _solitone_vuoto_congelato: S %g FORMA %s"
+          % (T_MAX, FATTORE, CASI, ZERO, LAM_ZERO, RAPPORTO, R_VICINO, FINESTRA, OGNI_E, GUARDIA, SOGLIA_CORR, SINT, TOLL_SINT, VC.S, VC.FORMA))
     print("  la torsione dell'arco a: arg(conj(phi_h[2a+1]) phi_h[2a]) srotolata tick per tick; il ritmo omega_a = theta_a(T_MAX)/T_MAX rad per tick; r_a la media delle distanze dei due nodi")
     print("-" * 130)
     if os.path.exists(JSONL):

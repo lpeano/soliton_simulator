@@ -36,6 +36,11 @@
 
 ### **Mi FERMO** ### **se `0` fallisce.**
 
+## 3-bis. ANNOTAZIONE, PRIMA DELLA CORSA *(la prova di costruzione a `60` tick, `N 1e5`: NON il referto)*
+
+- ### ⛔ **UN MIO ERRORE, TROVATO DALLA LETTURA `(u)`:** ### **`_triangoli_bassa_energia.conv` prende il NOME della convenzione** *(`"simm"` o `"oggi"`)*, ### **e io gli passavo `0.5`: con un numero da' la convenzione di OGGI** *(`nullcontext`)*. ### **Quindi la prova girava con lo zero di oggi, e la fase del vuoto uniforme era `0` contro `-s eps = -0.9425`.** ### **Con `conv("simm")` la fase per tick del vuoto uniforme e' `-0.942477796077` = `-s (e_v/Lambda + pi)` alle `12` cifre:** ### **l'unita' torna** *(una prova in memoria; e' la COSTANTE, che si cancella nelle differenze: non prova la scala delle differenze)*. ### **Lo stesso errore e' nella torsione in FASE** *(`e4a4291a`, `8a518049`: i referti `76e85c0a` e `9a8f9afa` sono allo zero di OGGI)*: ### **corretto nei due script, e la fase si rifa.**
+- ### ⚠ **I NUMERI GIA' VISTI** *(allo zero di oggi, `60` tick)*: ### **il controllo `0` passa;** ### **la classe di ritmo massimo `[7, 8)` contro il bordo di `VICINO` `7.61`: la classe STRADDLA il bordo,** ### **e il criterio la conta FUORI** *(conta solo le classi tutte dentro)*. ### **Il criterio NON cambia** *(l'ho visto prima della corsa: cambiarlo ora sarebbe tararlo sui numeri)*; ### **i gusci `5.1e-2 > 8.0e-4 > 1.1e-6`.**
+
 ## 4. TODO
 
 1. questo task history, da solo; 2. lo script `csv/_torsione_energia.py`, committato prima della corsa; 3. la corsa; 4. il referto *(con l'avvertenza)*, la relazione, l'indice (`TORSIONE-DEL-VUOTO`).
