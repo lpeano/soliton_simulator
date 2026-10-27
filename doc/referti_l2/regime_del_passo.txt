@@ -1,0 +1,26 @@
+[TIMBRO] _regime_del_passo.py  sha1-BYTE 79703179  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+IL REGIME DEL PASSO: LA DERIVA DI H_tot (IL LEGAME S1) A s 0.3, 0.15, 0.075, 0.0375 ALLO STESSO TEMPO FISICO; IL RISOLUTORE A OGNI s
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_regime_del_passo.py 79703179; csv/_energia_del_legame.py 0197ecc0; csv/_libro_dei_conti.py 9c5d81d5; csv/_libro_dei_conti_iv.py d43fbce7
+  la configurazione: N 100000 L_TORO 48 TAU 600 PASSI (0.3, 0.15, 0.075, 0.0375) ZERO simm LAM_ZERO 0.5 OMEGA pi TOLL_NORMA 1e-10 PERDITA_VUOTO 4175.1 SOGLIA_LETTURA 0.01 RAPPORTO 3-5; il toro fisso a ogni s (fattore = (L - 0.1)/w0)
+----------------------------------------------------------------------------------------------------------------------------------
+  s 0.3   : il risolutore: larghezza 3.7540, mu 0.294752, e_K -4.710543; 2000 tick; s omega 0.9425 (con 2 pi: 1.8850); t_a 1797 (tempo 539.10); il SALTO +2.4360e+02; l'errore dopo t_a 1.4028e+02; la DERIVA +7.0478e-02 per unita' di tempo; il totale max|D| 2.4360e+02 (5.83% della perdita del vuoto); dM 1.9e-12 dV 8.8e-13 (50 s, 25.16 ms per tick)
+  s 0.15  : il risolutore: larghezza 3.7621, mu 0.147365, e_K -4.712275; 4000 tick; s omega 0.4712 (con 2 pi: 0.9425); t_a 3732 (tempo 559.80); il SALTO +7.4992e+01; l'errore dopo t_a 1.7975e+01; la DERIVA +5.0321e-02 per unita' di tempo; il totale max|D| 7.4992e+01 (1.80% della perdita del vuoto); dM 1.6e-12 dV 1.7e-12 (90 s, 22.38 ms per tick)
+  s 0.075 : il risolutore: larghezza 3.7639, mu 0.073681, e_K -4.712382; 8000 tick; s omega 0.2356 (con 2 pi: 0.4712); t_a 7611 (tempo 570.82); il SALTO +2.0214e+01; l'errore dopo t_a 6.2649e+00; la DERIVA +9.2277e-03 per unita' di tempo; il totale max|D| 2.0348e+01 (0.49% della perdita del vuoto); dM 1.0e-11 dV 6.4e-12 (181 s, 22.63 ms per tick)
+  s 0.0375: il risolutore: larghezza 3.7643, mu 0.036841, e_K -4.712389; 16000 tick; s omega 0.1178 (con 2 pi: 0.2356); t_a 15582 (tempo 584.32); il SALTO +5.1218e+00; l'errore dopo t_a 1.8030e+00; la DERIVA -6.1032e-03 per unita' di tempo; il totale max|D| 5.1477e+00 (0.12% della perdita del vuoto); dM 1.5e-11 dV 6.4e-12 (359 s, 22.46 ms per tick)
+----------------------------------------------------------------------------------------------------------------------------------
+### I RAPPORTI fra s consecutivi (s / s/2): la DERIVA, l'errore dopo t_a, il totale
+  s 0.3 / 0.15: la deriva 1.4006; l'errore 7.8041; il totale 3.2483
+  s 0.15 / 0.075: la deriva 5.4533; l'errore 2.8691; il totale 3.6855
+  s 0.075 / 0.0375: la deriva -1.5119; l'errore 3.4747; il totale 3.9528
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE: M e V entro 1e-10 a ogni s                                                                       PASSA   dM max 1.5e-11 dV max 6.4e-12
+  PUO' FALLIRE: fra s 0.075 e 0.0375 il rapporto delle derive fra 3 e 5                                          ### FALLISCE   -1.5119
+### LA LETTURA: il totale max|H_tot - H_tot(0)| sotto l'1% della perdita del vuoto (41.75) a s [0.075, 0.0375]; il costo a quell's: s 0.075: 181 s a L 48, stimati 515 s per N 1e6 L 81 (i nodi x 2.85, a pari tempo fisico); s 0.0375: 359 s a L 48, stimati 1023 s per N 1e6 L 81 (i nodi x 2.85, a pari tempo fisico)
+ESITO: DEVE passa; PUO' FALLIRE fallisce
