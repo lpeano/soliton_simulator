@@ -1,0 +1,60 @@
+[TIMBRO] _criteri_fino_alla_vita.py  sha1-BYTE 853b984c  committato e pulito
+==================================================================================================================================
+I CRITERI 2 E 3 DEL CONTO DELL'ENERGIA DEL LEGAME, FINO ALLA VITA (la correzione dichiarata dopo i numeri, Luca 12:37); LA DIFFERENZA FRA I DUE ZERI NEL TEMPO; LA LUCE
+==================================================================================================================================
+  i blob nel repo: csv/_criteri_fino_alla_vita.py 853b984c; csv/_energia_del_legame.py 0197ecc0; csv/_energia_del_legame_dove.py f266d9bb; doc/referti_l2/energia_del_legame.jsonl 891ad115
+  la configurazione: VITA {1000000.0: 320, 100000.0: 140} T_MAX 2000 TOLL_2 0.001 TOLL_3 1e-06 R2_MIN 0.9 SALTO 1 S 0.3 C_LUCE 0.3 SEME 20261027 P1 r 0.01 rumore 0.1 toll 0.05
+----------------------------------------------------------------------------------------------------------------------------------
+### I CONTROLLI DELLO STRUMENTO DEL FIT (sulla griglia dei tempi di N 1e5: da 140 a 2000 ogni 10)
+  DEVE PASSARE (p1): un esponenziale sintetico col rumore del 10%: il tasso entro il 5% e R2 >= 0.9, nessun salt PASSA   tasso 0.01002 R2 0.9997 salti 0
+  DEVE PASSARE (p2): un gradino a t 500: la lettura dice NON regolare                                            PASSA   tasso 0.01034 R2 0.4664 salti [(500, 8.999999999999998)]
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) LE TAGLIE, IL MASSIMO PER t <= vita: |Delta E(L1) - Delta E(L2)| / N |e_K(0)|, il totale di ogni pezzo
+  N 1e+06   simm intero   : il peggiore per t <= 320: 1.02e-05 (t 290, leg)
+  N 1e+06   simm congelato: il peggiore per t <= 320: 2.12e-06 (t 320, cin)
+  N 1e+06   oggi intero   : il peggiore per t <= 320: 1.02e-05 (t 290, leg)
+  N 1e+06   oggi congelato: il peggiore per t <= 320: 2.12e-06 (t 320, cin)
+  N 100000  simm intero   : il peggiore per t <= 140: 1.20e-06 (t 140, tot)
+  N 100000  simm congelato: il peggiore per t <= 140: 6.14e-07 (t 100, tot)
+  N 100000  oggi intero   : il peggiore per t <= 140: 1.20e-06 (t 140, tot)
+  N 100000  oggi congelato: il peggiore per t <= 140: 6.14e-07 (t 100, tot)
+### (3) I DUE ZERI, IL MASSIMO PER t <= vita: ogni regione e pezzo, tolto 2 pi lambda volte la norma
+  N 1e+06   L  81 intero   : il peggiore per t <= 320: 8.84e-14 (t 320, totale cost)
+  N 1e+06   L  81 congelato: il peggiore per t <= 320: 8.89e-14 (t 320, totale cost)
+  N 1e+06   L 120 intero   : il peggiore per t <= 320: 8.84e-14 (t 320, totale cost)
+  N 1e+06   L 120 congelato: il peggiore per t <= 320: 8.87e-14 (t 320, totale cost)
+  N 100000  L  48 intero   : il peggiore per t <= 140: 3.90e-14 (t 140, totale cost)
+  N 100000  L  48 congelato: il peggiore per t <= 140: 3.88e-14 (t 140, totale cost)
+  N 100000  L  69 intero   : il peggiore per t <= 140: 3.86e-14 (t 140, totale cost)
+  N 100000  L  69 congelato: il peggiore per t <= 140: 3.87e-14 (t 140, totale cost)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA DIFFERENZA FRA I DUE ZERI NEL TEMPO, DALLA VITA A T_MAX (tick intero): il fit di ln g contro t; regolare se R2 >= 0.9 e nessun salto di piu' di 1 decade in 10 tick
+  N 1e+06   L  81: g alla vita 8.84e-14, a T_MAX 1.22e-05 (fino alla vita il massimo 8.84e-14); il tasso 0.01250 per tick, R2 0.9700, salti nessuno; il tasso nella prima meta' 0.00808 (t 320-1160), nella seconda 0.01461 (t 1160-2000) -> REGOLARE
+  N 1e+06   L 120: g alla vita 8.84e-14, a T_MAX 2.99e-06 (fino alla vita il massimo 8.84e-14); il tasso 0.01167 per tick, R2 0.9818, salti nessuno; il tasso nella prima meta' 0.00923 (t 320-1160), nella seconda 0.01152 (t 1160-2000) -> REGOLARE
+  ### N 100000  L  48: g alla vita 3.90e-14, a T_MAX 1.63e-04 (fino alla vita il massimo 3.90e-14); il tasso 0.01312 per tick, R2 0.9454, salti nessuno; il tasso nella prima meta' 0.00658 (t 140-1070), nella seconda 0.01797 (t 1070-2000) -> REGOLARE
+  N 100000  L  69: g alla vita 3.86e-14, a T_MAX 4.09e-05 (fino alla vita il massimo 3.86e-14); il tasso 0.01188 per tick, R2 0.9596, salti nessuno; il tasso nella prima meta' 0.00676 (t 140-1070), nella seconda 0.01468 (t 1070-2000) -> REGOLARE
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LUCE: c = s = 0.3 archi per tick (0764d566); il fronte del vuoto e v_max della coppia in unita' di c
+  N 1e+06   L  81 congelato oggi: nessun fronte (il vuoto non si muove)
+  N 1e+06   L  81 congelato simm: nessun fronte (il vuoto non si muove)
+  N 1e+06   L  81 intero    oggi: il fronte 0.3037 archi per tick = 1.012 c (punti del fit 3)
+  N 1e+06   L  81 intero    simm: il fronte 0.3037 archi per tick = 1.012 c (punti del fit 3)
+  N 1e+06   L 120 congelato oggi: nessun fronte (il vuoto non si muove)
+  N 1e+06   L 120 congelato simm: nessun fronte (il vuoto non si muove)
+  N 1e+06   L 120 intero    oggi: il fronte 0.2539 archi per tick = 0.846 c (punti del fit 9)
+  N 1e+06   L 120 intero    simm: il fronte 0.2539 archi per tick = 0.846 c (punti del fit 9)
+  N 100000  L  48 congelato oggi: nessun fronte (il vuoto non si muove)
+  N 100000  L  48 congelato simm: nessun fronte (il vuoto non si muove)
+  N 100000  L  48 intero    oggi: nessun fronte (il vuoto non si muove)
+  N 100000  L  48 intero    simm: nessun fronte (il vuoto non si muove)
+  N 100000  L  69 congelato oggi: nessun fronte (il vuoto non si muove)
+  N 100000  L  69 congelato simm: nessun fronte (il vuoto non si muove)
+  N 100000  L  69 intero    oggi: il fronte 0.2855 archi per tick = 0.952 c (punti del fit 4)
+  N 100000  L  69 intero    simm: il fronte 0.2855 archi per tick = 0.952 c (punti del fit 4)
+  v_max della coppia 0.183601 archi per tick = 0.612 c
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI CORRETTI (dopo i numeri, Luca 12:37)
+  DEVE PASSARE (2'): le taglie, il massimo per t <= vita, entro 0.001 di N |e_K(0)|                              PASSA   1.02e-05 (N 1e+06 oggi intero t 290 leg)
+  DEVE PASSARE (3'): i due zeri, il massimo per t <= vita, entro 1e-06 di N |e_K(0)|                             PASSA   8.89e-14 (N 1e+06 L 81 congelato t 320 totale cost)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
