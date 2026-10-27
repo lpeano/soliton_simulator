@@ -969,7 +969,7 @@
 | `VUOTO-DA-SOLO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto da solo e stabile al bit: il vuoto risponde alla materia, non si disfa  |
 | `VUOTO-DISTURBATO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto da solo e stabile, non solo stazionario: un disturbo 1e-6 non cresce, c |
 | `VUOTO-LOCALE-DETERMINISTICO` | FRONTE | FISICA | 2 | ### **AGENDA** |  | termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuo |
-| `VUOTO-SUL-FONDO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto uniforme e' il MASSIMO del generatore (la forma); il fondo -2 pi: un fl |
+| `VUOTO-SUL-FONDO` | MISURA | FISICA | 2 | ### **AGENDA** |  | il vuoto uniforme e' il MASSIMO; dal fondo il vuoto PRENDE energia, il solitone  |
 | `W1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 8 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |
 | `W2` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 4 volte, MAI definito in un registro) [W2] |
 | `W3` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro; citato solo in referti/sigilli/tas |

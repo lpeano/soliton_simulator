@@ -1,0 +1,98 @@
+[TIMBRO] _solitone_dal_fondo.py  sha1-BYTE b3c2c23d  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+IL SOLITONE S1 COL VUOTO DEL FONDO (c-iii): quattro fasi del flusso costante, il vuoto congelato e il tick intero, a s 0.075; la vita, i conti per regione, la strada A sul disco 2 w_in
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_solitone_dal_fondo.py b3c2c23d; csv/_energia_del_legame.py 0197ecc0; csv/_libro_dei_conti.py 9c5d81d5; csv/_vuoto_sul_fondo.py f267c673; primo_ordine/tick.py d9a59ff9; primo_ordine/materia_vuoto.py 68ff3ffd
+  la configurazione: N 1e+06 L_TORO 81 ZERO simm LAM_ZERO 0.5 S_RIF 0.3 S_CORSA 0.075 TAU 600 OGNI_TAU 3 OGNI_VITA_TAU 6 R_VICINO 2 VITA_RIF 320 FATTORE_P1 4 DIREZIONI ((0, 1), (1, 0), (1, 1)) FASI [('F0', (0.0, 0.0, 0.0)), ('F1', (0.0, 2.094395, 4.18879)), ('F2', (0.0, 1.570796, 3.141593)), ('F3', (0.0, 0.0, 3.141593))] MODI ('congelato', 'intero') TOLL_NORMA 1e-10 TOLL_FONDO 1e-12; FORMA S1; cs spento
+  ### F0 (le tre fasi uguali) e' la SCELTA dichiarata di Luca (18:45); F1-F3 la famiglia, dichiarata prima. ### IL PASSO s 0.075: dichiarato (regime_del_passo.txt, 99eb7a42); il controllo positivo a s 0.3
+----------------------------------------------------------------------------------------------------------------------------------
+  s 0.3: il risolutore: larghezza 6.6003, mu 0.298310, fattore 12.2570; e_K(0) -4.710543
+### il CONTROLLO POSITIVO a s 0.3, il vuoto uniforme, il tick intero: vita 320 (ogni 20: 320); dM 1.9e-12 dV 8.6e-13 (142 s)
+  s 0.075: il risolutore: larghezza 6.6175, mu 0.074575, fattore 12.2252; e_K(0) -4.712382; l'unita' N |e_K(0)| = 4.712382e+06
+  DEVE PASSARE (k0): il flusso F0 = _vuoto_sul_fondo.fondo_uniforme AL BIT                                       PASSA   
+  DEVE PASSARE (k1): ogni vuoto del fondo ha E/V = -2 pi entro 1e-12                                             PASSA   F0 -6.283185307180; F1 -6.283185307180; F2 -6.283185307180; F3 -6.283185307180
+----------------------------------------------------------------------------------------------------------------------------------
+### uniforme intero    (L 81, w_in 6.6468, 8000 tick): vita 1320 (ogni 20 di s 0.3: 1360; tempo fisico 102.0); dM 1.0e-11 dV 6.3e-12 (550 s)
+  alla vita 1360  totale  : vuoto -2.7902e+03  cinetica +1.9731e+03  legame +8.2609e+02  H_tot +9.0082e+00
+  alla vita 1360  vicino  : vuoto -4.7570e+03  cinetica -5.3217e+03  legame -7.3350e+04  H_tot +3.5131e+04
+  alla vita 1360  lontano : vuoto +1.9668e+03  cinetica +7.2949e+03  legame +7.4176e+04  H_tot -3.5122e+04
+  a T_MAX         totale  : vuoto -9.0164e+03  cinetica +9.0093e+03  legame +6.0339e+01  H_tot +5.3211e+01
+  a T_MAX         vicino  : vuoto -1.0833e+04  cinetica +9.1575e+03  legame -7.5414e+05  H_tot +4.3688e+05
+  a T_MAX         lontano : vuoto +1.8162e+03  cinetica -1.4819e+02  legame +7.5420e+05  H_tot -4.3683e+05
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +2.6422e-02 uscite -1.8967e-02; dopo entrate +2.4677e-01 uscite -1.6151e-01 (3569 tick in entrata su 6640)
+### F0       congelato (L 81, w_in 6.6468, 8000 tick): vita None (ogni 20 di s 0.3: None; tempo fisico -); dM 1.0e-11 dV 0.0e+00 (628 s)
+  alla vita 8000  totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  alla vita 8000  vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  alla vita 8000  lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  a T_MAX         totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  a T_MAX         vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  a T_MAX         lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +1.3606e-01 uscite -1.3333e-01; dopo entrate +0.0000e+00 uscite +0.0000e+00 (0 tick in entrata su 0)
+### F0       intero    (L 81, w_in 6.6468, 8000 tick): vita 2120 (ogni 20 di s 0.3: 2160; tempo fisico 162.0); dM 1.0e-11 dV 1.1e-11 (709 s)
+  alla vita 2160  totale  : vuoto +2.4817e+03  cinetica +3.2670e+02  legame -2.8052e+03  H_tot +3.1285e+00
+  alla vita 2160  vicino  : vuoto -1.2226e+03  cinetica -7.0051e+03  legame -4.1922e+04  H_tot +1.3760e+04
+  alla vita 2160  lontano : vuoto +3.7042e+03  cinetica +7.3318e+03  legame +3.9117e+04  H_tot -1.3757e+04
+  a T_MAX         totale  : vuoto +5.5831e+03  cinetica -8.3274e+02  legame -4.7303e+03  H_tot +2.0115e+01
+  a T_MAX         vicino  : vuoto +1.5407e+02  cinetica +3.2294e+03  legame -1.0010e+05  H_tot +5.9406e+04
+  a T_MAX         lontano : vuoto +5.4290e+03  cinetica -4.0622e+03  legame +9.5367e+04  H_tot -5.9386e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +2.5489e-02 uscite -2.2569e-02; dopo entrate +1.4701e-01 uscite -1.3732e-01 (3038 tick in entrata su 5840)
+### F1       congelato (L 81, w_in 6.6468, 8000 tick): vita None (ogni 20 di s 0.3: None; tempo fisico -); dM 1.0e-11 dV 0.0e+00 (812 s)
+  alla vita 8000  totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  alla vita 8000  vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  alla vita 8000  lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  a T_MAX         totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  a T_MAX         vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  a T_MAX         lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +1.3606e-01 uscite -1.3333e-01; dopo entrate +0.0000e+00 uscite +0.0000e+00 (0 tick in entrata su 0)
+### F1       intero    (L 81, w_in 6.6468, 8000 tick): vita 2320 (ogni 20 di s 0.3: 2320; tempo fisico 174.0); dM 1.0e-11 dV 1.1e-11 (769 s)
+  alla vita 2320  totale  : vuoto +2.3925e+03  cinetica +1.6715e+02  legame -2.5631e+03  H_tot -3.4627e+00
+  alla vita 2320  vicino  : vuoto -8.4914e+02  cinetica -7.8452e+03  legame -4.1743e+04  H_tot +1.3697e+04
+  alla vita 2320  lontano : vuoto +3.2416e+03  cinetica +8.0123e+03  legame +3.9180e+04  H_tot -1.3700e+04
+  a T_MAX         totale  : vuoto +4.9181e+03  cinetica -7.3291e+02  legame -4.1760e+03  H_tot +9.1960e+00
+  a T_MAX         vicino  : vuoto +7.1352e+01  cinetica +3.0376e+03  legame -6.6219e+04  H_tot +3.9912e+04
+  a T_MAX         lontano : vuoto +4.8467e+03  cinetica -3.7705e+03  legame +6.2043e+04  H_tot -3.9903e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +3.1195e-02 uscite -2.8288e-02; dopo entrate +1.5013e-01 uscite -1.4457e-01 (2721 tick in entrata su 5680)
+### F2       congelato (L 81, w_in 6.6468, 8000 tick): vita None (ogni 20 di s 0.3: None; tempo fisico -); dM 1.0e-11 dV 0.0e+00 (673 s)
+  alla vita 8000  totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  alla vita 8000  vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  alla vita 8000  lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  a T_MAX         totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  a T_MAX         vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  a T_MAX         lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +1.3606e-01 uscite -1.3333e-01; dopo entrate +0.0000e+00 uscite +0.0000e+00 (0 tick in entrata su 0)
+### F2       intero    (L 81, w_in 6.6468, 8000 tick): vita 2320 (ogni 20 di s 0.3: 2320; tempo fisico 174.0); dM 1.0e-11 dV 1.1e-11 (544 s)
+  alla vita 2320  totale  : vuoto +2.3581e+03  cinetica +5.5254e+01  legame -2.4138e+03  H_tot -4.0039e-01
+  alla vita 2320  vicino  : vuoto -8.1444e+02  cinetica -7.1076e+03  legame -3.8107e+04  H_tot +1.2442e+04
+  alla vita 2320  lontano : vuoto +3.1726e+03  cinetica +7.1628e+03  legame +3.5693e+04  H_tot -1.2443e+04
+  a T_MAX         totale  : vuoto +4.8987e+03  cinetica -6.1717e+02  legame -4.2650e+03  H_tot +1.6529e+01
+  a T_MAX         vicino  : vuoto -1.0984e+01  cinetica +1.8052e+03  legame -6.6330e+04  H_tot +3.8658e+04
+  a T_MAX         lontano : vuoto +4.9096e+03  cinetica -2.4224e+03  legame +6.2065e+04  H_tot -3.8642e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +2.7885e-02 uscite -2.5245e-02; dopo entrate +1.4756e-01 uscite -1.4200e-01 (2717 tick in entrata su 5680)
+### F3       congelato (L 81, w_in 6.6468, 8000 tick): vita None (ogni 20 di s 0.3: None; tempo fisico -); dM 1.0e-11 dV 0.0e+00 (561 s)
+  alla vita 8000  totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  alla vita 8000  vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  alla vita 8000  lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  a T_MAX         totale  : vuoto +0.0000e+00  cinetica +6.8889e+03  legame -6.9267e+03  H_tot -3.7812e+01
+  a T_MAX         vicino  : vuoto +0.0000e+00  cinetica -3.1158e+02  legame -2.3211e+04  H_tot +1.2867e+04
+  a T_MAX         lontano : vuoto +0.0000e+00  cinetica +7.2005e+03  legame +1.6284e+04  H_tot -1.2905e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +1.3606e-01 uscite -1.3333e-01; dopo entrate +0.0000e+00 uscite +0.0000e+00 (0 tick in entrata su 0)
+### F3       intero    (L 81, w_in 6.6468, 8000 tick): vita 2640 (ogni 20 di s 0.3: 2640; tempo fisico 198.0); dM 1.0e-11 dV 1.1e-11 (553 s)
+  alla vita 2640  totale  : vuoto +2.2937e+03  cinetica -2.9584e+02  legame -1.9950e+03  H_tot +2.9104e+00
+  alla vita 2640  vicino  : vuoto -2.1037e+02  cinetica -6.5871e+03  legame -3.7055e+04  H_tot +1.3713e+04
+  alla vita 2640  lontano : vuoto +2.5041e+03  cinetica +6.2913e+03  legame +3.5060e+04  H_tot -1.3710e+04
+  a T_MAX         totale  : vuoto +4.5732e+03  cinetica -5.8299e+02  legame -3.9735e+03  H_tot +1.6756e+01
+  a T_MAX         vicino  : vuoto -3.5722e+01  cinetica +6.0410e+02  legame -6.3598e+04  H_tot +3.5995e+04
+  a T_MAX         lontano : vuoto +4.6090e+03  cinetica -1.1871e+03  legame +5.9624e+04  H_tot -3.5978e+04
+  la strada A sul disco 2 w_in (N |e_K(0)|): fino alla vita entrate +3.0116e-02 uscite -2.7206e-02; dopo entrate +1.5656e-01 uscite -1.5184e-01 (2540 tick in entrata su 5360)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (k2): M e V entro 1e-10 in ogni corsa                                                             PASSA   dM max 1.0e-11 dV max 1.1e-11
+  DEVE PASSARE (k3): il controllo positivo a s 0.3: col vuoto uniforme la vita (ogni 20) = 320 di 15df5c63       PASSA   vita20 320
+  PUO' FALLIRE (p1): col fondo e il tick intero la vita (tempo fisico) oltre 4 volte quella col vuoto uniforme a ### FALLISCE   F0 162.0; F1 174.0; F2 174.0; F3 198.0
+  PUO' FALLIRE (p2): il vuoto PRENDE energia dalla materia (Delta E_vuoto > 0 sul toro alla vita, a ogni fase)   PASSA   F0 +2.482e+03; F1 +2.392e+03; F2 +2.358e+03; F3 +2.294e+03
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 5/6 controlli passano; DEVE fallite: 0 []

@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-27`, sera *(la corsa di `(c-iii)` in corso)*.
+> ### **Aggiornata al:** `2026-10-27`, sera *(`(c-iii)` chiusa)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -24,6 +24,7 @@
 | 13 | ### **i pesi del passo = quelli di `termini_di_h`** *(`H_tick = H_tot`)* | `a33daa09` |
 | 14 | ### **la carica `sigma_z` a due segni, conservata a `eps 0`** | `8dea8c95` |
 | 15 | ### **lo strumento del libro dei conti conta giusto** *(i conti di `15df5c63` a `1e-16`; la strada `A`)* | `4f6a4bd7` |
+| 16 | ### **dal vuoto del FONDO il vuoto prende energia dalla materia** *(il verso si rovescia; a `s 0.075`)* | il commit di `solitone_dal_fondo.txt` |
 
 ## 2. CHE COSA NON FUNZIONA ANCORA, E PERCHE'
 
@@ -44,7 +45,7 @@
 | | la domanda | lo stato | il commit |
 |---|---|---|---|
 | `a` | ### **la materia sul cono come la luce?** | ### **SI'** | `e48e7414` |
-| `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **la prima meta' CONFERMATA** *(il vuoto uniforme e' il massimo per la forma)*; ### **il solitone dal fondo IN CORSA a `s 0.075`** | `787296da`, `bdf5baea` |
+| `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **IN PARTE:** ### **il vuoto uniforme e' il massimo per la forma;** ### **dal fondo il vuoto PRENDE energia dalla materia** *(il verso si rovescia)*, ### **ma il solitone vive solo `1.6`-`1.9` volte di piu', non `4`: c'e' un'altra causa** | `787296da`, il commit di `solitone_dal_fondo.txt` |
 | `c` | ### **dove va l'energia, nei due versi?** | ### **lo strumento c'e'** *(la strada `A`)*: ### **il vuoto lontano rimanda indietro** *(`915` tick in entrata su `1860` dopo la vita)* | `4f6a4bd7` |
 
 ## 4. LA LISTA IN ATTESA *(idee da NON eseguire finche' la sezione `3` non e' chiusa)*
@@ -78,7 +79,7 @@
 
 | | il lavoro | lo stato |
 |---|---|---|
-| 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **IN CORSA** *(`bdf5baea`)* |
+| 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(il referto `solitone_dal_fondo.txt`)* |
 | 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **in coda** |
 
 ## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
