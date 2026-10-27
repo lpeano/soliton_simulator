@@ -1,0 +1,45 @@
+[TIMBRO] _vuoto_sul_fondo.py  sha1-BYTE f267c673  committato e pulito
+==================================================================================================================================
+IL VUOTO SUL FONDO, SULLA CARTA: la matrice del generatore del vuoto dal codice, lo spettro, il fondo uniforme in modulo, il tick, il segno, l'energia a L 48
+==================================================================================================================================
+  il passo: 14 pezzi, impronta 2e7f795d2a52fbe7 (intatto); i blob nel repo: soliton_simulator.py b8c21049; csv/_vuoto_sul_fondo.py f267c673; csv/_scomposizione_solitone.py 17dde60a; primo_ordine/energia_pesata.py 7889c512; primo_ordine/tick.py d9a59ff9; primo_ordine/flussi_parziali.py 1461182f
+  la configurazione: LATI (6, 12) L_ENERGIA 48 ZERI (('oggi', 0.0), ('simm', 0.5)) N_CASUALI 5 SEME 20261027 TOLL_T 1e-12 TOLL_A 1e-12 TOLL_M 1e-09 TOLL_F 1e-12 TOLL_MOLT 1e-09; S 0.3; VUOTO_PER_ESTREMITA 1; eps 0
+  la forma letta dal codice: per nodo -pi (nrm_phi - pu_phi), per arco -pi (|f0|^2 + |f1|^2 - 2 Re f0* f1)/2; lo zero simmetrico sposta di + 2 pi lambda = + pi per unita' di norma
+----------------------------------------------------------------------------------------------------------------------------------
+### L 6: 36 nodi, 108 archi, 216 estremita' (0 s); le direzioni del reticolo [(0, 1), (1, 0), (1, 1)]
+  il controllo: E del codice contro phi^+ H phi su 5 stati casuali, il peggiore 3.55e-16 relativo
+  lo spettro per unita' di norma (lo zero di oggi): da -6.283185307180 (molteplicita' 73) a 0.000000000000 (molteplicita' 1); allo zero simmetrico + pi: da -3.141592653590 a 3.141592653590
+  il vuoto UNIFORME: il quoziente 0.000000000000, il residuo 3.03e-15
+  il FONDO UNIFORME IN MODULO (il flusso costante per direzione): il quoziente -6.283185307180, il residuo 3.26e-15; |phi| da 1.000000 a 1.000000; la somma per nodo al massimo 0.0e+00; la torsione sugli archi da 3.141593 a 3.141593 (in valore assoluto)
+  i livelli distinti (arrotondati a 1e-9): 13; i piu' bassi ['-6.283185 x73', '-6.009461 x6', '-5.541024 x6', '-5.363034 x6']; i piu' alti ['-0.920151 x6', '-0.742162 x6', '-0.273724 x6', '0.000000 x1']
+  (b) i due termini SEPARATI: il nodo da -3.141592653590 a 0.000000000000, l'arco da -3.141592653590 a 0.000000000000; la somma ricostruisce H: 6.3e-16
+  il tick (oggi) sul uniforme: il residuo da autostato 0.00e+00; la fase +0.000000000000 contro -s (E + 2 pi lambda) -0.000000000000 (lo scarto mod 2 pi 4.0e-16)
+  il tick (oggi) sul fondo   : il residuo da autostato 1.57e-16; la fase +1.884955592154 contro -s (E + 2 pi lambda) +1.884955592154 (lo scarto mod 2 pi -8.9e-16)
+  il tick (simm) sul uniforme: il residuo da autostato 4.58e-16; la fase -0.942477796077 contro -s (E + 2 pi lambda) -0.942477796077 (lo scarto mod 2 pi 7.8e-16)
+  il tick (simm) sul fondo   : il residuo da autostato 7.11e-16; la fase +0.942477796077 contro -s (E + 2 pi lambda) +0.942477796077 (lo scarto mod 2 pi -1.4e-15)
+  (b) LA MATERIA a L 6 (il vuoto a zero, eps 0): lo spettro da -6.283185 a 0.000000; lo stato uniforme della materia (K) -4.710543: 216 livelli sotto e 216 sopra (su 432)
+      col segno capovolto (-H) lo stesso stato sarebbe a 4.710543, con 216 livelli sotto e 216 sopra
+### L 12: 144 nodi, 432 archi, 864 estremita' (3 s); le direzioni del reticolo [(0, 1), (1, 0), (1, 1)]
+  il controllo: E del codice contro phi^+ H phi su 5 stati casuali, il peggiore 2.47e-16 relativo
+  lo spettro per unita' di norma (lo zero di oggi): da -6.283185307180 (molteplicita' 289) a 0.000000000000 (molteplicita' 1); allo zero simmetrico + pi: da -3.141592653590 a 3.141592653590
+  il vuoto UNIFORME: il quoziente 0.000000000000, il residuo 3.03e-15
+  il FONDO UNIFORME IN MODULO (il flusso costante per direzione): il quoziente -6.283185307180, il residuo 1.28e-14; |phi| da 1.000000 a 1.000000; la somma per nodo al massimo 0.0e+00; la torsione sugli archi da 3.141593 a 3.141593 (in valore assoluto)
+  i livelli distinti (arrotondati a 1e-9): 33; i piu' bassi ['-6.283185 x289', '-6.212235 x6', '-6.075256 x6', '-6.009461 x6']; i piu' alti ['-0.273724 x6', '-0.207930 x6', '-0.070950 x6', '0.000000 x1']
+  (b) i due termini SEPARATI: il nodo da -3.141592653590 a 0.000000000000, l'arco da -3.141592653590 a 0.000000000000; la somma ricostruisce H: 6.3e-16
+  il tick (oggi) sul uniforme: il residuo da autostato 0.00e+00; la fase +0.000000000000 contro -s (E + 2 pi lambda) -0.000000000000 (lo scarto mod 2 pi 4.0e-16)
+  il tick (oggi) sul fondo   : il residuo da autostato 3.55e-16; la fase +1.884955592154 contro -s (E + 2 pi lambda) +1.884955592154 (lo scarto mod 2 pi 2.9e-15)
+  il tick (simm) sul uniforme: il residuo da autostato 1.02e-15; la fase -0.942477796077 contro -s (E + 2 pi lambda) -0.942477796077 (lo scarto mod 2 pi -6.7e-16)
+  il tick (simm) sul fondo   : il residuo da autostato 1.44e-15; la fase +0.942477796077 contro -s (E + 2 pi lambda) +0.942477796077 (lo scarto mod 2 pi 4.2e-15)
+----------------------------------------------------------------------------------------------------------------------------------
+### (c-i) L'ENERGIA A L 48 (dal codice, i due stati costruiti)
+  il uniforme: V 13824.0; E (zero di oggi) 0.000000 = 0.000000000000 per unita' di norma; allo zero simmetrico 43429.376843
+  il fondo   : V 13824.0; E (zero di oggi) -86858.753686 = -6.283185307180 per unita' di norma; allo zero simmetrico -43429.376843
+  la differenza fondo - uniforme: -86858.753686 = -6.283185307180 per unita' di norma (non dipende dallo zero)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE (t): la matrice ridà l'energia del codice su 5 stati casuali entro 1e-12 relativo                 PASSA   L 6 3.5e-16; L 12 2.5e-16
+  DEVE PASSARE (a): il vuoto uniforme e' un autostato del generatore (residuo <= 1e-12)                          PASSA   L 6 3.0e-15; L 12 3.0e-15
+  PUO' FALLIRE (m): il vuoto uniforme e' l'autovalore MASSIMO (entro 1e-09)                                      PASSA   L 6 E_u 0.000000000000 max 0.000000000000; L 12 E_u 0.000000000000 max 0.000000000000
+  PUO' FALLIRE (f): esiste un fondo uniforme in modulo: il flusso costante per direzione e' sul minimo (entro 1e PASSA   L 6 E_f -6.283185307180 min -6.283185307180 res 3.3e-15; L 12 E_f -6.283185307180 min -6.283185307180 res 1.3e-14
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
