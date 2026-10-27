@@ -131,6 +131,16 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 
 ---
 
+## OGNI MISURA D'ENERGIA USA IL LIBRO DEI CONTI *(il mandato di Luca delle `12:54` del `2026-10-27`; lo strumento `02954bc4`, il referto `4f6a4bd7`)*
+
+> ### **NON e' una riga della tabella `STANDARD`** *(il tetto `10`)*: ### **e' il criterio di un TIPO di misura, quella che conta l'energia** *([[LIBRO-DEI-CONTI]]; `doc/LIBRO_DEI_CONTI.md`)*.
+
+- ### **LA REGOLA:** ### **una misura d'energia per conto o per regione usa `csv/_libro_dei_conti.py`** *(`conti_per_nodo`, `per_regione` con `math.fsum`, `dischi`, `guadagni_A`, `pezzi_B`)*, ### **non una sua copia:** ### **i conti sono UNA definizione** *(i costituenti, la cinetica, il legame dichiarato, il vuoto, `H_tot`, `M`, `V`; lo zero e il suo `2 pi lambda`)*. ### **Il dare e l'avere sul confine si legge con la strada `A`** *(dischi annidati, i tick in entrata e in uscita separati)*; ### **la `B`** *(pezzo per pezzo)* ### **e' una diagnosi del va-e-vieni del passo, non un flusso.**
+- ### **IL REFERTO DICHIARA:** ### **il legame attivo** *(`S1` o `S3`)*, ### **`cs`** *(acceso o spento)*, ### **lo zero** *(per NOME: `conv("simm")`; con un numero la convenzione e' quella di oggi, l'errore del `2026-10-27`)*, ### **e l'unita' `N |e_K(0)|`.**
+- ### ⚠ **LA CAUTELA, MISURATA** *(il sigillo `(iv)`, `4f6a4bd7`)*: ### **col legame `S1` la deviazione di `H_tot` NON va come `s^2`** *(il rapporto `0.62` fra `s 0.3` e `0.15`, non `4`)*: ### **i residui di `A` non sono solo l'errore del passo, e un flusso di `A` piu' piccolo della deviazione di `H_tot` sullo stesso tempo non si legge come fisica.**
+
+---
+
 ## IN PROVA
 
 *(nessuna)*
