@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 r"""**IL CONGELATO LUNGO** *(la risposta di Luca delle `15:49` del `2026-10-28`, punto `2`; [[VUOTO-SUL-FONDO]], [[PROGETTO-MASSA-COLLETTIVA]];
-il task history `doc/TASK_HISTORY/2026-10-28_congelato_lungo_e_fasi_del_vuoto.md`)*: ### **il solo congelato, `N 1e6`, `s 0.3`, lo zero simmetrico, `S1`, `cs` spento;**
+il task history `doc/TASK_HISTORY/2026-10-28_congelato_lungo_e_fasi_del_vuoto.md`)*: ### **il solo congelato VERO** *(i pezzi del vuoto saltati, `phi` rimesso a fine tick: quello di `74f99039`; Luca `16:15`)*, ### **`N 1e6`, `s 0.3`, lo zero simmetrico, `S1`, `cs` spento;**
 ### **`L 81` e `L 120`, il vuoto uniforme e il fondo; `3000` di tempo fisico, A PEZZI:** ### **la larghezza, la frazione entro `w_in`, il picco ogni `3` di tempo fisico.**
 
 > ### **In memoria; nessun file del nucleo.** ### **Lo stato a fine pezzo in `db/congelato_lungo/*.npz`** *(ignorato da git: il dato e' il comando)*; ### **i punti in un file
@@ -38,6 +38,8 @@ TICK_KP = 40
 TOLL_NORMA = 1e-10
 STATI = os.path.join(RADICE, "db", "congelato_lungo")
 PUNTI = os.path.join(RADICE, "doc", "referti_l2", "congelato_lungo")
+# ### le corse col congelato A FINE TICK (lo script di 8dddef5a, fermate alle 16:15): tenute e lette accanto (Luca 16:39)
+PUNTI_FT = os.path.join(RADICE, "doc", "referti_l2", "congelato_lungo_fine_tick")
 RIF_74 = os.path.join(RADICE, "doc", "referti_l2", "solitone_vuoto_congelato.jsonl")
 OK = [0, 0]
 FALLITE = []
@@ -78,9 +80,14 @@ def punto(z, t, w_in, w0):
 
 
 def avanza(z, phi0, quanti):
+    """### **IL CONGELATO VERO, quello di `74f99039`** *(`_solitone_vuoto_congelato.salta_di("congelato")`)*: ### **i pezzi del vuoto `VC.VUOTO` SALTATI, e `phi` rimesso a `phi0` a fine tick.**
+    ### ⚠ **NON `DC.tick_congelato`, che fa girare i pezzi del vuoto e rimette `phi` solo a fine tick** *(il congelato «a fine tick» delle corse della buca)*: ### **con quello `(k74)` fallirebbe per la DEFINIZIONE** *(Luca, `16:15`)*."""
     import _deriva_congelato as DC
+    import _solitone_vuoto_congelato as VC
+    salta = VC.salta_di("congelato")
+    assert salta == VC.VUOTO, salta
     for _t in range(quanti):
-        DC.tick_congelato(z, phi0)
+        DC.tick_congelato(z, phi0, salta)
 
 
 def nome(L, scena):
@@ -159,12 +166,12 @@ def kp():
     return za["st"]["psi_h"].tobytes() == zc["st"]["psi_h"].tobytes()
 
 
-def serie(L, scena):
+def serie(L, scena, cartella=PUNTI):
     righe = []
-    if os.path.isdir(PUNTI):
-        for n in sorted(os.listdir(PUNTI)):
+    if os.path.isdir(cartella):
+        for n in sorted(os.listdir(cartella)):
             if n.startswith(nome(L, scena) + "_") and n.endswith(".jsonl"):
-                righe.append(json.loads(io.open(os.path.join(PUNTI, n), encoding="utf-8").read()))
+                righe.append(json.loads(io.open(os.path.join(cartella, n), encoding="utf-8").read()))
     righe.sort(key=lambda r: r["t0"])
     for a, b in zip(righe, righe[1:]):
         assert a["t1"] == b["t0"], ("un buco fra i pezzi", a["t1"], b["t0"])
@@ -173,7 +180,7 @@ def serie(L, scena):
 
 def referto():
     print("=" * 130)
-    print("IL CONGELATO LUNGO (Luca 15:49, punto 2): N 1e6, s %g, zero simmetrico, S1, cs spento; L %s; il vuoto %s; %d tick (%g di tempo fisico), un punto ogni %d tick"
+    print("IL CONGELATO LUNGO (Luca 15:49, punto 2; il congelato VERO, i pezzi del vuoto saltati: Luca 16:15): N 1e6, s %g, zero simmetrico, S1, cs spento; L %s; il vuoto %s; %d tick (%g di tempo fisico), un punto ogni %d tick"
           % (S, TAGLIE, SCENE, T_MAX, T_MAX * S, OGNI))
     print("=" * 130)
     print("  la configurazione: S %g TAGLIE %s SCENE %s T_MAX %d PEZZO %d OGNI %d FINESTRA %g TICK_KP %d TOLL_NORMA %g" % (S, TAGLIE, SCENE, T_MAX, PEZZO, OGNI, FINESTRA, TICK_KP, TOLL_NORMA))
@@ -200,34 +207,38 @@ def referto():
     presenti = [(k, v) for k, v in tutte.items() if v[1]]
     dM = {k: max(abs(p["M"] - v[1][0]["M"]) / v[1][0]["M"] for p in v[1]) for k, v in presenti}
     esito("DEVE PASSARE (n): M entro %g relativo in ogni corsa" % TOLL_NORMA, bool(dM) and all(x <= TOLL_NORMA for x in dM.values()), "%s" % {"%d %s" % k: "%.1e" % x for k, x in dM.items()})
-    print("-" * 130)
-    for (L, sc), (righe, pts) in tutte.items():
-        if not pts:
-            print("### L %d %s: nessun pezzo" % (L, sc))
-            continue
-        w_in, p0, f0 = righe[0]["w_in"], pts[0]["picco"], pts[0]["f_win"]
-        print("### L %d, il vuoto %s: %d pezzi, fino al tick %d (tempo fisico %.0f); w_in %.4f, mu %+.6f; %.0f s" % (L, sc, len(righe), righe[-1]["t1"], righe[-1]["t1"] * S, w_in, righe[0]["mu"], sum(r["secondi"] for r in righe)))
-        tau = np.array([p["tau"] for p in pts])
-        q = np.array([p["w"] / w_in for p in pts])
-        pk = np.array([p["picco"] / p0 for p in pts])
-        fr = np.array([p["f_win"] / f0 for p in pts])
-        a = 0.0
-        while a < tau[-1] - 1e-9:
-            m = (tau >= a - 1e-9) & (tau <= a + FINESTRA + 1e-9)
-            if m.sum() > 2:
+    ft = {k: serie(k[0], k[1], PUNTI_FT) for k in tutte}
+    for (titolo, insieme) in (("IL CONGELATO VERO (i pezzi del vuoto saltati, phi rimesso a fine tick)", tutte),
+                              ("IL CONGELATO A FINE TICK (i pezzi del vuoto girano, phi rimesso a fine tick; lo script di 8dddef5a, fermato alle 16:15)", ft)):
+        print("-" * 130)
+        print("### %s" % titolo)
+        for (L, sc), (righe, pts) in insieme.items():
+            if not pts:
+                print("### L %d %s: nessun pezzo" % (L, sc))
+                continue
+            w_in, p0, f0 = righe[0]["w_in"], pts[0]["picco"], pts[0]["f_win"]
+            print("### L %d, il vuoto %s: %d pezzi, fino al tick %d (tempo fisico %.0f); w_in %.4f, mu %+.6f; %.0f s" % (L, sc, len(righe), righe[-1]["t1"], righe[-1]["t1"] * S, w_in, righe[0]["mu"], sum(r["secondi"] for r in righe)))
+            tau = np.array([p["tau"] for p in pts])
+            q = np.array([p["w"] / w_in for p in pts])
+            pk = np.array([p["picco"] / p0 for p in pts])
+            fr = np.array([p["f_win"] / f0 for p in pts])
+            a = 0.0
+            while a < tau[-1] - 1e-9:
+                m = (tau >= a - 1e-9) & (tau <= a + FINESTRA + 1e-9)
+                if m.sum() > 2:
+                    pend, inter = np.polyfit(tau[m], q[m], 1)
+                    res = q[m] - (pend * tau[m] + inter)
+                    print("  tau [%6.0f, %6.0f]: w/w_in da %.5f a %.5f, pendenza %+.3e per unita' di tempo fisico, ampiezza tolta la retta %.3e; picco relativo medio %.5f (min %.5f); frazione entro w_in relativa media %.5f (min %.5f)"
+                          % (a, a + FINESTRA, q[m][0], q[m][-1], pend, res.max() - res.min(), pk[m].mean(), pk[m].min(), fr[m].mean(), fr[m].min()))
+                a += FINESTRA
+            m = tau >= tau[-1] / 2.0
+            if m.sum() > 8:
                 pend, inter = np.polyfit(tau[m], q[m], 1)
                 res = q[m] - (pend * tau[m] + inter)
-                print("  tau [%6.0f, %6.0f]: w/w_in da %.5f a %.5f, pendenza %+.3e per unita' di tempo fisico, ampiezza tolta la retta %.3e; picco relativo medio %.5f (min %.5f); frazione entro w_in relativa media %.5f (min %.5f)"
-                      % (a, a + FINESTRA, q[m][0], q[m][-1], pend, res.max() - res.min(), pk[m].mean(), pk[m].min(), fr[m].mean(), fr[m].min()))
-            a += FINESTRA
-        m = tau >= tau[-1] / 2.0
-        if m.sum() > 8:
-            pend, inter = np.polyfit(tau[m], q[m], 1)
-            res = q[m] - (pend * tau[m] + inter)
-            sp = np.abs(np.fft.rfft(res)) ** 2
-            fq = np.fft.rfftfreq(len(res), d=OGNI * S)
-            i = 1 + int(np.argmax(sp[1:]))
-            print("  la seconda meta' (tau >= %.0f) tolta la retta: il periodo dominante %.1f di tempo fisico (la frequenza %.4e), ampiezza (max - min) %.3e" % (tau[-1] / 2.0, 1.0 / fq[i], fq[i], res.max() - res.min()))
+                sp = np.abs(np.fft.rfft(res)) ** 2
+                fq = np.fft.rfftfreq(len(res), d=OGNI * S)
+                i = 1 + int(np.argmax(sp[1:]))
+                print("  la seconda meta' (tau >= %.0f) tolta la retta: il periodo dominante %.1f di tempo fisico (la frequenza %.4e), ampiezza (max - min) %.3e" % (tau[-1] / 2.0, 1.0 / fq[i], fq[i], res.max() - res.min()))
     print("-" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 

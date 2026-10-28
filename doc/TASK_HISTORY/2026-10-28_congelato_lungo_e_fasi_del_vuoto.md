@@ -74,3 +74,35 @@ RISPOSTA DI LUCA (2026-10-28 15:49) A f2c646e3 E 83daa823, sulla raccomandazione
 1. ### **questo task history, committato da solo, PRIMA dello script;**
 2. ### **lo script e la voce d'inventario, committati prima della corsa;** ### **l'annotazione nel task history della rilettura** *(la frase corretta)*;
 3. ### **le `4` corse a pezzi; il referto; la RELAZIONE; la MAPPA** *(la riga `4`: la rilettura e la deriva intrinseca)*.
+
+
+## 2-bis. ANNOTAZIONI *(il task history non si riscrive: si annota)*
+
+### **`(a)` LA PRIORITA' DI LUCA DELLE `16:15`, alla lettera:**
+
+```
+PRIORITA' (2026-10-28 16:15): se la corsa di csv/_congelato_lungo.py e' gia' partita, FERMALA: usa DC.tick_congelato
+(r.83), cioe' il congelato A FINE TICK, e il controllo (k74) la confronta al bit con 74f99039, che usava il congelato
+VERO (i pezzi del vuoto saltati): (k74) fallirebbe per la definizione, non per la fisica. Correggi lo script perche'
+il congelato lungo usi il congelato VERO (salta VC.VUOTO e rimette phi), committalo prima della corsa, poi riparti. Il
+resto come nella correzione qui sotto.
+```
+
+### **`(b)` LA NOTA DI LUCA DELLE `16:39`, alla lettera:**
+
+```
+NOTA DI LUCA (2026-10-28 16:39):
+1. Le corse a L 81 GIA' CHIUSE (10000 tick, congelato a fine tick) NON si buttano: sono il confronto col congelato a
+   fine tick che la correzione delle 15:56 chiedeva su un tratto breve, qui lungo e gia' pagato. Tienile nella loro
+   cartella, dichiarate "congelato a fine tick", e leggile nel referto accanto a quelle col congelato vero.
+2. Per vedere se restano processi Python vivi, senza wmic, in sola lettura: powershell ... Get-CimInstance
+   Win32_Process ... Se restano pezzi _congelato_lungo.py --pezzo 120 vivi, fermali con Stop-Process -Id <id>
+   (solo quelli, controllando la riga di comando).
+Il resto come hai impostato: lo script corretto (il congelato vero, VC.salta_di("congelato"), e (kp) rifatto)
+committato prima di ripartire.
+```
+
+- ### ⚠ **«LA CORREZIONE DELLE `15:56`» e «QUI SOTTO» NON MI SONO ARRIVATE** *(in questa sessione nessun messaggio delle `15:56`)*: ### **lo dichiaro; ho seguito il resto come impostato.**
+- ### **CHE COSA E' SUCCESSO:** ### **`(kp)` passato** *(col congelato a fine tick)*; ### **le corse partite alle `16:10`;** ### **a `L 81` chiuse a `10000` tick alle `16:36`;** ### **a `L 120` arrivate al tick `4000`;** ### **fermate alle `16:37`** *(il task in background)*; ### **nessun processo `python.exe` vivo** *(la query di Luca, verificata: trova `6` processi `powershell.exe`)*.
+- ### **I DATI A FINE TICK, TENUTI:** `doc/referti_l2/congelato_lungo_fine_tick/` *(`15` file: `kp.json`, `L 81` completi alle due scene, `L 120` fino a `4000`)*; ### **gli stati in `db/congelato_lungo_fine_tick/`** *(ignorati)*. ### **Il referto li legge accanto al congelato vero.**
+- ### **LO SCRIPT CORRETTO** *(`sha1-BYTE 7ee652b4`)*: ### **`avanza` usa `VC.salta_di("congelato")`** *(= `VC.VUOTO`, asserito)*; ### **`(kp)` si rifa' con quello.**

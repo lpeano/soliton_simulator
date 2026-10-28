@@ -21590,3 +21590,12 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **UNA CONSEGUENZA:** ### **«il vuoto congelato» non e' «il vuoto fermo»: dentro il tick si muove;** ### **solo la corsa a `r = 0` ha `phi` fermo al bit.**
 - ### **PUNTO `2`, IN CORSA:** ### **`(kp)` prima, poi le `4` corse** *(`L 81` e `120`, l'uniforme e il fondo)* ### **a pezzi di `2000` tick fino a `10000`.**
 - ### **PUNTO `4`, LA MAPPA:** ### **la riga `4` con la rilettura** *(la vita relativa al congelato col fondo `1584`-`2867` per `T_r` `25` e `100`)* ### **e la deriva intrinseca, non dello stato di partenza.**
+
+
+### 📌 **IL CONGELATO LUNGO FERMATO E RIFATTO COL CONGELATO VERO (LUCA, 16:15 E 16:39): LE CORSE A FINE TICK TENUTE ACCANTO; E UNA SECONDA CORREZIONE MIA, SU `(k2)`** *([[VUOTO-SUL-FONDO]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- ### **LO STOP:** ### **lo script di `8dddef5a` usava `DC.tick_congelato` senza `salta`: il congelato A FINE TICK** *(i pezzi del vuoto girano, `phi` rimesso a fine tick)*; ### **`74f99039` usava il congelato VERO** *(i pezzi del vuoto saltati)*: ### **`(k74)` sarebbe fallito per la definizione.** ### **Fermato alle `16:37`: `L 81` gia' a `10000` tick, `L 120` a `4000`;** ### **nessun processo `python.exe` vivo** *(la query di Luca, verificata)*.
+- ### **I DATI A FINE TICK, TENUTI** *(Luca `16:39`)*: `doc/referti_l2/congelato_lungo_fine_tick/`; ### **il referto li legge accanto al congelato vero.**
+- ### **LO SCRIPT CORRETTO** *(`sha1-BYTE 7ee652b4`)*: ### **`avanza` con `VC.salta_di("congelato")`;** ### **`(kp)` rifatto prima delle corse.**
+- ### ⛔ **UNA SECONDA CORREZIONE MIA:** ### **in `f2c646e3` ho scritto che `(k2)` falliva per la SCENA** *(uniforme contro fondo)*; ### **ma `_code_o_cuore` usava il congelato a fine tick e `74f99039` quello vero:** ### **le definizioni erano diverse, e da `(k2)` non si separa quanto pesi l'una e quanto l'altra.** ### **Le misure di `code_o_cuore.txt` e `deriva_congelato.txt` sono col congelato a fine tick** *(lo stesso della buca e di `76eecbf5`)*: ### **fra loro confrontabili, con `74f99039` no.** ### **Annotata nel task history della rilettura, `(e)`.**
+- ### ⚠ **«La correzione delle `15:56`» citata da Luca non mi e' arrivata:** ### **lo dichiaro.**

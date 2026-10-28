@@ -117,3 +117,9 @@ il picco nel tempo, la forma della crescita (rallenta o accelera), e lo stesso a
 ### **`(d)` LA CORREZIONE DELLA SEZIONE `1`** *(Luca `15:49`, punto `3`; il task history non si riscrive: si annota)*
 
 - ### ⛔ **LA FRASE DELLA SEZIONE `1` E' SBAGLIATA:** ### **«col vuoto congelato `psi` vede `phi` solo attraverso `Lambda = sum |phi|^2` per nodo».** ### **Vero che il solo ponte e' `materia_vuoto.applica`, che legge `Lambda`;** ### **ma lo legge AL MOMENTO DELLA CHIAMATA:** ### **in posizione `13` del passo, DOPO che il Grover e il salto del vuoto** *(posizioni `5`-`8`)* ### **hanno fatto interferire le fasi di `phi`.** ### **Il congelato rimette `phi` solo a fine tick.** ### **Quindi `psi` sente le FASI del vuoto attraverso `Lambda` a meta' tick.** ### **Il meccanismo, con file e righe:** `doc/TASK_HISTORY/2026-10-28_congelato_lungo_e_fasi_del_vuoto.md`, *sezione `1`*.
+
+
+### **`(e)` UNA SECONDA CORREZIONE, SU `(k2)`** *(Luca `16:15`)*
+
+- ### ⛔ **IN `(b)` HO SCRITTO CHE `(k2)` FALLIVA PER LA SCENA** *(il vuoto uniforme di `74f99039` contro il fondo)*. ### **E' INCOMPLETO:** ### **`_code_o_cuore` usava il congelato A FINE TICK** *(`DC.tick_congelato` senza `salta`: i pezzi del vuoto girano)*, ### **`74f99039` il congelato VERO** *(`salta_di("congelato")`: i pezzi del vuoto saltati)*. ### **Le DEFINIZIONI erano diverse, e questo basta a far fallire `(k2)`.** ### **Quanto pesi la scena e quanto la definizione, da `(k2)` non si separa.**
+- ### **E le misure di `code_o_cuore.txt` e `deriva_congelato.txt` sono col congelato A FINE TICK** *(lo stesso delle corse della buca e di `76eecbf5`)*: ### **il confronto fra `s 0.075` e `s 0.3` dentro quei referti e' fra pari;** ### **il confronto con `74f99039` NO.**
