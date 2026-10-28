@@ -63,3 +63,26 @@ Un'esplorazione *(non salvata)*: a `L 81` il residuo per tick `|T psi - lambda p
 - **Tutte le varianti si fermano fra `2e-6` e `6e-6`**, con `mu` fermo alla settima cifra; il criterio `1e-9` non si raggiunge.
 - **Lo script usa la variante col precondizionatore e la differenza centrata**, `30` passi, lo stesso criterio.
 - **Se il criterio non si raggiunge:** il confronto del punto `2` si fa sullo stato QUASI FERMO, dichiarato come tale; **la corsa del punto `3` non parte** *(`--pezzo` lo rifiuta)*: evolvere uno stato non fermo e' una decisione di Luca.
+
+## 7. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/stato_fermo.txt`; lo script `sha1-BYTE 444e371d`, `b61dea8e`; `12/12`)*
+
+- **La sezione `6` va letta cosi':** le prove nella cartella di lavoro si erano fermate al passo `12` o prima; lo script, coi `30` passi del criterio, ha raggiunto `9.808e-10` *(`L 81`, `15` passi)* e `1.431e-10` *(`L 120`, `16` passi)*.
+
+| `L 81` | `w/w_in` | il cuore `f_win` | il picco per nodo | distanza dal finale di `40061005` |
+|---|---|---|---|---|
+| lo stato iniziale *(l'inviluppo continuo)* | `1.0000` | `0.58583` | `5088` | `7.743e-02` |
+| lo stato FERMO *(residuo `9.808e-10`)* | `0.9645` | `0.63001` | `5616` | `1.087e-01` |
+| il finale di `40061005` *(tick `10000`)* | `1.3277` | `0.45858` | `3651` | `0` |
+
+| la corsa dello stato fermo, finestre di `500` | `0`-`500` | `500`-`1000` | `1000`-`1500` | `1500`-`2000` | `2000`-`2500` | `2500`-`3000` |
+|---|---|---|---|---|---|---|
+| il cuore, dallo stato fermo | `0.630` -> `0.584` | -> `0.522` | -> `0.486` | -> `0.466` | -> `0.458` | -> `0.454` |
+| il cuore, da `40061005` | `0.586` -> `0.551` | -> `0.511` | -> `0.489` | -> `0.480` | -> `0.459` | -> `0.459` |
+| `w/w_in`, dallo stato fermo, alla fine della finestra | `1.055` | `1.176` | `1.246` | `1.285` | `1.309` | `1.331` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (a) lo stato fermo piu' largo dell'iniziale, piu' vicino al finale, e evoluto regge | **NO:** e' piu' STRETTO *(`w/w_in 0.9645`, il cuore `0.630`)* e piu' lontano dal finale *(`0.109` contro `0.077`)* |
+| (b) esiste ma evoluto si svuota | **SI':** il cuore `0.630` -> `0.454` a `3000`; gia' `-0.046` nella prima finestra. Un residuo di `1e-9` per tick, sommato linearmente, resta molti ordini sotto: lo scostamento CRESCE |
+| (c) non si trova | no: si trova a `L 81` e `L 120`, `mu -0.532745112` a tutte e due |
+| dove *(la saturazione del cuore, il margine `dN/dmu`)* | **non si separa da questi dati:** lo stato fermo ha il cuore piu' saturo dell'iniziale *(il picco `5616` contro `5088`)*; la corsa arriva allo stesso stato di `40061005` *(`w/w_in 1.331` contro `1.328`; il cuore `0.454` contro `0.459`)* |

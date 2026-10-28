@@ -1,0 +1,133 @@
+[TIMBRO] _stato_fermo.py  sha1-BYTE 444e371d  committato e pulito
+==================================================================================================================================
+LO STATO FERMO DI S1 SUL RETICOLO (Luca 21:29): Newton sulla mappa del tick congelato vero; S1, s 0.3, N 1e6, zero simmetrico, cs spento, il vuoto uniforme
+==================================================================================================================================
+  la configurazione: S 0.3 TAGLIE (81, 120) L_CORSA 81 TOLL_RES 1e-09 MAX_NEWTON 30 GMRES_RTOL 0.001 GMRES_RESTART 60 GMRES_MAXITER 10 DIMEZZA 8 H_REL 1e-05 T_MAX 10000 PEZZO 2000 OGNI 10 FINESTRA 500 TOLL_NORMA 1e-10
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (a) lo stato fermo piu' largo dell'iniziale, piu' vicino al finale, e evoluto il cuore regge: l'assestamento; (b) esiste ma evoluto si svuota: VK sbaglia sul reticolo; (c) non si trova con la norma data; (d) altro
+----------------------------------------------------------------------------------------------------------------------------------
+### L 81: LA RICERCA (Newton)
+  passo  0: residuo 3.384e-02  mu -0.531761137  GMRES    0  dimezzamenti 0
+  passo  1: residuo 2.467e-03  mu -0.532788335  GMRES   36  dimezzamenti 0
+  passo  2: residuo 2.988e-04  mu -0.532813303  GMRES   37  dimezzamenti 0
+  passo  3: residuo 9.614e-05  mu -0.532745205  GMRES  610  dimezzamenti 0
+  passo  4: residuo 4.974e-06  mu -0.532745900  GMRES  610  dimezzamenti 0
+  passo  5: residuo 1.288e-06  mu -0.532745179  GMRES  610  dimezzamenti 0
+  passo  6: residuo 5.327e-07  mu -0.532745124  GMRES  610  dimezzamenti 0
+  passo  7: residuo 3.936e-07  mu -0.532745124  GMRES  610  dimezzamenti 0
+  passo  8: residuo 3.152e-07  mu -0.532745128  GMRES  610  dimezzamenti 1
+  passo  9: residuo 2.684e-07  mu -0.532745126  GMRES  610  dimezzamenti 2
+  passo 10: residuo 2.219e-07  mu -0.532745123  GMRES  610  dimezzamenti 2
+  passo 11: residuo 1.786e-07  mu -0.532745120  GMRES  610  dimezzamenti 2
+  passo 12: residuo 1.110e-07  mu -0.532745115  GMRES  610  dimezzamenti 1
+  passo 13: residuo 4.494e-08  mu -0.532745108  GMRES  610  dimezzamenti 0
+  passo 14: residuo 2.572e-09  mu -0.532745112  GMRES  451  dimezzamenti 0
+  passo 15: residuo 9.809e-10  mu -0.532745112  GMRES  610  dimezzamenti 0
+  DEVE PASSARE: L 81, il residuo finale sotto 1e-09 (il criterio di arresto)                                     PASSA   9.808e-10 in 15 passi, 1498 s
+  DEVE PASSARE: L 81, lo stato fermo sul disco = quello della ricerca (sha1)                                     PASSA   
+  DEVE PASSARE: L 81, la norma dello stato fermo = N entro 1e-12                                                 PASSA   0.0e+00
+  il residuo ricalcolato dello stato FERMO: 9.808e-10 (lo stato iniziale: 3.384e-02)
+  DEVE PASSARE: L 81, il residuo ricalcolato = quello della ricerca                                              PASSA   9.808e-10
+  DEVE PASSARE: L 81, lo stato finale di 40061005 = sha_fine                                                     PASSA   
+  mu: lo stato fermo -0.532745112; lo stato iniziale (la fase di <psi, T psi>) -0.531761137; -mu s - w_K(A) per lo stato fermo +0.617806, per l'iniziale +0.617511; mu del risolutore +0.298310
+  iniziale : w 6.6297 (w/w_in 1.0000), cuore f_win 0.58583, entro 3 w0 1.00000, picco per nodo 5087.88, FWHM 13.2652, il baricentro (+1.67e-01, +2.89e-01)
+  fermo    : w 6.3944 (w/w_in 0.9645), cuore f_win 0.63001, entro 3 w0 1.00000, picco per nodo 5616.24, FWHM 12.8338, il baricentro (+2.50e-01, +4.33e-01)
+  finale   : w 8.8025 (w/w_in 1.3277), cuore f_win 0.45858, entro 3 w0 0.98880, picco per nodo 3651.08, FWHM 15.4968, il baricentro (+8.23e-02, +6.50e-01)
+  la distanza 1 - |<a|b>|^2: iniziale  - fermo     1.22799e-02
+  la distanza 1 - |<a|b>|^2: fermo     - finale    1.08683e-01
+  la distanza 1 - |<a|b>|^2: iniziale  - finale    7.74287e-02
+  il profilo per anelli, r 0..24 (rho per nodo):
+    r  0: iniziale  5.05729e+03  fermo  5.40670e+03  finale  3.61873e+03
+    r  1: iniziale  4.91617e+03  fermo  5.35074e+03  finale  3.46991e+03
+    r  2: iniziale  4.62820e+03  fermo  4.99035e+03  finale  3.32696e+03
+    r  3: iniziale  4.22523e+03  fermo  4.49382e+03  finale  3.15622e+03
+    r  4: iniziale  3.73721e+03  fermo  3.93727e+03  finale  2.89507e+03
+    r  5: iniziale  3.18998e+03  fermo  3.30958e+03  finale  2.58102e+03
+    r  6: iniziale  2.60531e+03  fermo  2.64840e+03  finale  2.23585e+03
+    r  7: iniziale  2.02723e+03  fermo  2.02918e+03  finale  1.89132e+03
+    r  8: iniziale  1.48979e+03  fermo  1.46280e+03  finale  1.56140e+03
+    r  9: iniziale  1.00958e+03  fermo  9.35667e+02  finale  1.22035e+03
+    r 10: iniziale  6.19366e+02  fermo  5.25263e+02  finale  9.15584e+02
+    r 11: iniziale  3.25494e+02  fermo  2.43699e+02  finale  6.37542e+02
+    r 12: iniziale  1.27485e+02  fermo  8.34659e+01  finale  3.94761e+02
+    r 13: iniziale  2.78228e+01  fermo  1.60748e+01  finale  2.54492e+02
+    r 14: iniziale  1.95835e+00  fermo  1.25344e+00  finale  1.49022e+02
+    r 15: iniziale  2.94113e-02  fermo  8.13330e-02  finale  7.18881e+01
+    r 16: iniziale  3.24825e-04  fermo  3.18593e-03  finale  2.52023e+01
+    r 17: iniziale  3.36279e-06  fermo  1.05171e-04  finale  7.63088e+00
+    r 18: iniziale  3.54473e-08  fermo  4.06135e-06  finale  4.44100e+00
+    r 19: iniziale  4.10221e-10  fermo  1.48856e-07  finale  3.28709e+00
+    r 20: iniziale  3.91044e-12  fermo  6.50433e-09  finale  2.68938e+00
+    r 21: iniziale  3.60790e-14  fermo  2.76438e-10  finale  2.55384e+00
+    r 22: iniziale  3.83622e-16  fermo  1.10986e-11  finale  2.08655e+00
+    r 23: iniziale  3.93456e-18  fermo  4.57805e-13  finale  2.28791e+00
+    r 24: iniziale  4.46812e-20  fermo  1.91972e-14  finale  2.20745e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### L 120: LA RICERCA (Newton)
+  passo  0: residuo 3.384e-02  mu -0.531761137  GMRES    0  dimezzamenti 0
+  passo  1: residuo 2.467e-03  mu -0.532788335  GMRES   36  dimezzamenti 0
+  passo  2: residuo 2.988e-04  mu -0.532813303  GMRES   37  dimezzamenti 0
+  passo  3: residuo 9.614e-05  mu -0.532745204  GMRES  610  dimezzamenti 0
+  passo  4: residuo 4.974e-06  mu -0.532745900  GMRES  610  dimezzamenti 0
+  passo  5: residuo 1.288e-06  mu -0.532745179  GMRES  610  dimezzamenti 0
+  passo  6: residuo 5.327e-07  mu -0.532745125  GMRES  610  dimezzamenti 0
+  passo  7: residuo 3.936e-07  mu -0.532745124  GMRES  610  dimezzamenti 0
+  passo  8: residuo 3.151e-07  mu -0.532745128  GMRES  610  dimezzamenti 1
+  passo  9: residuo 2.683e-07  mu -0.532745126  GMRES  610  dimezzamenti 2
+  passo 10: residuo 2.218e-07  mu -0.532745123  GMRES  610  dimezzamenti 2
+  passo 11: residuo 1.785e-07  mu -0.532745120  GMRES  610  dimezzamenti 2
+  passo 12: residuo 1.109e-07  mu -0.532745115  GMRES  610  dimezzamenti 1
+  passo 13: residuo 4.441e-08  mu -0.532745108  GMRES  610  dimezzamenti 0
+  passo 14: residuo 2.818e-09  mu -0.532745112  GMRES  610  dimezzamenti 0
+  passo 15: residuo 1.557e-09  mu -0.532745112  GMRES  610  dimezzamenti 1
+  passo 16: residuo 1.430e-10  mu -0.532745112  GMRES  610  dimezzamenti 0
+  DEVE PASSARE: L 120, il residuo finale sotto 1e-09 (il criterio di arresto)                                    PASSA   1.431e-10 in 16 passi, 3084 s
+  DEVE PASSARE: L 120, lo stato fermo sul disco = quello della ricerca (sha1)                                    PASSA   
+  DEVE PASSARE: L 120, la norma dello stato fermo = N entro 1e-12                                                PASSA   2.2e-16
+  il residuo ricalcolato dello stato FERMO: 1.431e-10 (lo stato iniziale: 3.384e-02)
+  DEVE PASSARE: L 120, il residuo ricalcolato = quello della ricerca                                             PASSA   1.431e-10
+  DEVE PASSARE: L 120, lo stato finale di 40061005 = sha_fine                                                    PASSA   
+  mu: lo stato fermo -0.532745112; lo stato iniziale (la fase di <psi, T psi>) -0.531761137; -mu s - w_K(A) per lo stato fermo +0.617806, per l'iniziale +0.617511; mu del risolutore +0.298310
+  iniziale : w 6.6297 (w/w_in 1.0000), cuore f_win 0.58583, entro 3 w0 1.00000, picco per nodo 5087.88, FWHM 13.2652, il baricentro (+1.67e-01, +2.89e-01)
+  fermo    : w 6.3944 (w/w_in 0.9645), cuore f_win 0.63001, entro 3 w0 1.00000, picco per nodo 5616.26, FWHM 12.8338, il baricentro (+2.50e-01, +4.33e-01)
+  finale   : w 9.8919 (w/w_in 1.4921), cuore f_win 0.48356, entro 3 w0 0.98471, picco per nodo 3982.86, FWHM 14.8697, il baricentro (+2.61e-01, +5.58e-01)
+  la distanza 1 - |<a|b>|^2: iniziale  - fermo     1.22809e-02
+  la distanza 1 - |<a|b>|^2: fermo     - finale    8.33506e-02
+  la distanza 1 - |<a|b>|^2: iniziale  - finale    6.09651e-02
+  il profilo per anelli, r 0..24 (rho per nodo):
+    r  0: iniziale  5.05729e+03  fermo  5.40668e+03  finale  3.87636e+03
+    r  1: iniziale  4.91617e+03  fermo  5.35075e+03  finale  3.79726e+03
+    r  2: iniziale  4.62820e+03  fermo  4.99034e+03  finale  3.61761e+03
+    r  3: iniziale  4.22523e+03  fermo  4.49381e+03  finale  3.33955e+03
+    r  4: iniziale  3.73721e+03  fermo  3.93727e+03  finale  3.03539e+03
+    r  5: iniziale  3.18998e+03  fermo  3.30958e+03  finale  2.68764e+03
+    r  6: iniziale  2.60531e+03  fermo  2.64840e+03  finale  2.31492e+03
+    r  7: iniziale  2.02723e+03  fermo  2.02918e+03  finale  1.91192e+03
+    r  8: iniziale  1.48979e+03  fermo  1.46280e+03  finale  1.54002e+03
+    r  9: iniziale  1.00958e+03  fermo  9.35666e+02  finale  1.17898e+03
+    r 10: iniziale  6.19366e+02  fermo  5.25264e+02  finale  8.54093e+02
+    r 11: iniziale  3.25494e+02  fermo  2.43698e+02  finale  5.70023e+02
+    r 12: iniziale  1.27485e+02  fermo  8.34659e+01  finale  3.38656e+02
+    r 13: iniziale  2.78228e+01  fermo  1.60748e+01  finale  1.91962e+02
+    r 14: iniziale  1.95835e+00  fermo  1.25344e+00  finale  1.08874e+02
+    r 15: iniziale  2.94113e-02  fermo  8.13328e-02  finale  3.69859e+01
+    r 16: iniziale  3.24825e-04  fermo  3.18593e-03  finale  9.44375e+00
+    r 17: iniziale  3.36279e-06  fermo  1.05171e-04  finale  3.35546e+00
+    r 18: iniziale  3.54473e-08  fermo  4.06136e-06  finale  2.24981e+00
+    r 19: iniziale  4.10221e-10  fermo  1.48856e-07  finale  1.47587e+00
+    r 20: iniziale  3.91044e-12  fermo  6.50434e-09  finale  1.29639e+00
+    r 21: iniziale  3.60790e-14  fermo  2.76439e-10  finale  1.18934e+00
+    r 22: iniziale  3.83622e-16  fermo  1.10986e-11  finale  1.30509e+00
+    r 23: iniziale  3.93456e-18  fermo  4.57804e-13  finale  1.22258e+00
+    r 24: iniziale  4.46812e-20  fermo  1.91972e-14  finale  1.19706e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### LA CORSA DELLO STATO FERMO, L 81, il congelato vero, 10000 tick (tempo fisico 3000)
+  DEVE PASSARE: la corsa e' completa (10000 tick)                                                                PASSA   
+  DEVE PASSARE: M entro 1e-10 relativo                                                                           PASSA   9.6e-12
+  tau [     0,    500]: w/w_in da 0.96451 a 1.05526 (pendenza +2.107e-04); cuore da 0.63001 a 0.58443 (pendenza -1.205e-04); alone da 0.00000 a 0.00276; picco relativo medio 0.96274 | 40061005: cuore da 0.58583 a 0.55071
+  tau [   500,   1000]: w/w_in da 1.05623 a 1.17646 (pendenza +2.087e-04); cuore da 0.58397 a 0.52166 (pendenza -9.657e-05); alone da 0.00280 a 0.00650; picco relativo medio 0.84930 | 40061005: cuore da 0.55654 a 0.51112
+  tau [  1000,   1500]: w/w_in da 1.17691 a 1.24567 (pendenza +1.563e-04); cuore da 0.52121 a 0.48579 (pendenza -9.206e-05); alone da 0.00650 a 0.00785; picco relativo medio 0.75410 | 40061005: cuore da 0.51212 a 0.48851
+  tau [  1500,   2000]: w/w_in da 1.24567 a 1.28511 (pendenza +1.107e-04); cuore da 0.48579 a 0.46602 (pendenza -5.987e-05); alone da 0.00785 a 0.00906; picco relativo medio 0.69603 | 40061005: cuore da 0.48851 a 0.48014
+  tau [  2000,   2500]: w/w_in da 1.28497 a 1.30897 (pendenza +8.405e-05); cuore da 0.46618 a 0.45809 (pendenza -4.280e-05); alone da 0.00905 a 0.01051; picco relativo medio 0.67432 | 40061005: cuore da 0.47285 a 0.45930
+  tau [  2500,   3000]: w/w_in da 1.30948 a 1.33098 (pendenza +7.102e-05); cuore da 0.45904 a 0.45433 (pendenza -3.709e-05); alone da 0.01052 a 0.01200; picco relativo medio 0.66048 | 40061005: cuore da 0.45792 a 0.45858
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 12/12 controlli passano; DEVE fallite: 0 []
