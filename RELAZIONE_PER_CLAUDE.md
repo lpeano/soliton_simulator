@@ -21569,3 +21569,13 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **LA RILETTURA** *(`rilettura_buca.txt`; il fondo; fino al tick `8000`)*: ### **contro il congelato, alla grande, la vita decresce ancora con `T_r`** *(tanh `2746`, `1584`, non misurabile; `sin^2` `2867`, `2507`, `27`)*; ### **il vuoto vivo allarga del `14`-`16%` rispetto al fermo all'ultimo tick comune.** ### **Alla piccola nessuna rottura relativa.** ### **Nessuna coppia tanh/`sin^2` a durata uguale.**
 - ### **CODE O CUORE** *(`code_o_cuore.txt`)*: ### **a `s 0.075` il cuore cambia** *(la frazione entro `w_in` relativa `0.871`, il picco `0.841`)*, ### **a `s 0.3` meno** *(`0.949`, `0.922`)*; ### **la crescita non monotona alle due;** ### **la deriva piu' grande a `s` piu' piccolo.** ### **Ne' la `(a)` ne' la `(b)` reggono pulite;** ### **il salto al tick `20` alle due `s` indica il passo discreto.**
 - ### **LA MAPPA** *(il punto `4` di Luca)*: ### **la riga `4`: «la rampa non ha dato un oggetto stabile; la lettura in corso»;** ### **la riga `12`: la gobba confermata alla grande, come misura.**
+
+
+### 📌 **LA DERIVA DEL CONGELATO, DOPO LA CORREZIONE (2026-10-28): LO STATO DEL RISOLUTORE RUOTA TUTTO INSIEME ALLA FREQUENZA PREVISTA -- E' VICINISSIMO ALLO STAZIONARIO DEL PASSO; LA DERIVA LUNGA NON VIENE DA LI'** *([[VUOTO-SUL-FONDO]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- ### **IL REFERTO:** `doc/referti_l2/deriva_congelato.txt` *(lo script corretto in `35ca68b1`, `sha1-BYTE 0c424cfa`)*.
+- ### **LA ROTAZIONE PER TICK:** ### **`s 0.075`: al centro `-0.043033`, prevista** *(l'onda piana a `K` senza legame, autostato al bit, piu' `mu`)* ### **`-0.043030`, scarto `-3.0e-06`, dispersione fra i nodi `4.2e-07`;** ### **`s 0.3`: scarto `+5.8e-05`, dispersione `2.2e-05`.**
+- ### **IL PROFILO a `7.5` di tempo fisico:** ### **`|rho - rho0|/|rho0|` `4.2e-03` e `4.7e-03`; la fedelta' `0.9981` e `0.9979`.**
+- ### **LA RISPOSTA AL PUNTO `2`:** ### **lo stato del risolutore e' vicinissimo allo stazionario del passo a `s 0.075`, piu' che a `s 0.3`;** ### **la mia stima contraria non e' confermata.** ### **La deriva lunga, piu' grande a `s` piccolo, resta senza causa:** ### **un residuo del `0.2%` che non si smorza, o un'instabilita' lenta.**
+- ### **LA PROPOSTA** *(non eseguita)*: ### **un filtro sul passo stesso, lungo `2 pi / mu` tick** *(`85` a `s 0.075`)*, ### **ripetuto fino al punto fisso;** ### **circa `5` s per giro;** ### **i giri non noti;** ### ⚠ **la tolleranza d'arresto e' un numero da decidere, non da scegliere io** *(`A1`)*.
+- ### **LA PARTE `2` DEL MANDATO** *(il risolutore autoconsistente)* ### **resta descritta e non fatta** *(il punto `3` di Luca)*.

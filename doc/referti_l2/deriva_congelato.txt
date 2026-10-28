@@ -1,4 +1,4 @@
-[TIMBRO] _deriva_congelato.py  sha1-BYTE e40c1bc5  committato e pulito
+[TIMBRO] _deriva_congelato.py  sha1-BYTE 0c424cfa  committato e pulito
 ==================================================================================================================================
 LA DERIVA DEL CONGELATO (Luca 14:27, parte 2): lo stato del risolutore e' lo stazionario del passo? N 1e+06, L 81, zero simm, S1, cs spento; 100 tick congelati a s (0.075, 0.3)
 ==================================================================================================================================
@@ -8,3 +8,16 @@ LA DERIVA DEL CONGELATO (Luca 14:27, parte 2): lo stato del risolutore e' lo sta
   DEVE PASSARE (c0): congelato, 20 tick, s 0.075: psi uguale AL BIT col fondo e con l'uniforme, e Lambda per nod ### FALLISCE   Lambda True, psi False
   DEVE PASSARE (c1): la larghezza del congelato ai tick 40 e 80 = la serie di grande_fondo_congelato AL BIT      PASSA   qui {40: 6.700559495355789, 80: 6.793307513181812}, la serie {40: 6.700559495355789, 80: 6.793307513181812}
 ----------------------------------------------------------------------------------------------------------------------------------
+### s 0.075: il risolutore LEGATO, larghezza 6.6175, mu +0.074575; L 81; w_in sul toro 6.6468; 0.059 s per tick
+  la rotazione per tick: al centro -0.043033 (dev 6.24e-05); pesata con rho entro w_in -0.043033, la dispersione fra i nodi 4.170e-07 (min -0.043034 max -0.043032)
+  l'onda piana a K senza legame: rotazione -0.117605 (dev 1.24e-17), sovrapposizione dopo 20 tick 1.000000000000; la rotazione PREVISTA -0.043030; misurata al centro - prevista -3.017e-06
+  dopo 100 tick (tempo fisico 7.50): w/w_in 1.001188, frazione 1.000000, |rho - rho0|/|rho0| 4.2457e-03, la fedelta' |<psi0,psi>|/N 0.99809925
+  LA PROPOSTA, IL COSTO DI UN GIRO: un filtro sul passo stesso lungo 2 pi / |mu| = 85 tick, a 0.059 s per tick: 5 s per giro (il numero dei giri NON e' noto prima di provare)
+### s 0.3: il risolutore LEGATO, larghezza 6.6003, mu +0.298310; L 81; w_in sul toro 6.6297; 0.055 s per tick
+  la rotazione per tick: al centro -0.159614 (dev 1.02e-03); pesata con rho entro w_in -0.159617, la dispersione fra i nodi 2.243e-05 (min -0.159688 max -0.159573)
+  l'onda piana a K senza legame: rotazione -0.457983 (dev 5.95e-17), sovrapposizione dopo 20 tick 1.000000000000; la rotazione PREVISTA -0.159672; misurata al centro - prevista +5.833e-05
+  dopo  25 tick (tempo fisico 7.50): w/w_in 1.002667, frazione 1.000000, |rho - rho0|/|rho0| 4.6937e-03, la fedelta' |<psi0,psi>|/N 0.99791530
+  dopo 100 tick (tempo fisico 30.00): w/w_in 1.015628, frazione 0.999938, |rho - rho0|/|rho0| 1.7795e-02, la fedelta' |<psi0,psi>|/N 0.99289945
+  LA PROPOSTA, IL COSTO DI UN GIRO: un filtro sul passo stesso lungo 2 pi / |mu| = 22 tick, a 0.055 s per tick: 1 s per giro (il numero dei giri NON e' noto prima di provare)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 1/2 controlli passano; DEVE fallite: 1 ["DEVE PASSARE (c0): congelato, 20 tick, s 0.075: psi uguale AL BIT col fondo e con l'uniforme, e Lambda per nodo uguale al bit"]
