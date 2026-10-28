@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -76,7 +76,42 @@
 | 6 | ### **il driver della camminata** | ### **`7` domande, non urgente** |
 | 7 | ### **la moneta di spin (`eps`)** | ### **la sua origine fisica e' aperta;** ### **spegnerla rende la carica `sigma_z` conservata, ma la riduce a «due specie separate»** |
 
-## 6. LA CODA DI OGGI, IN ORDINE *(`PRECEDENZA-IN-CODA`)*
+## 6. LA BUSSOLA: CHE COSA SERVIREBBE PER UN SISTEMA COMPLETO *(Luca, `2026-10-28` `08:58`)*
+
+> ### **«Nessuna teoria della gravita' quantistica oggi ha un sistema completo; questa bussola serve a sapere con precisione che cosa manca, non a misurare un ritardo.»**
+> ### ⛔ **NON E' UNA CODA E NON E' LA LISTA IN ATTESA: E' UN ORIENTAMENTO.** ### **Nessuna voce di questa sezione si esegue senza essere prima promossa** *(alla lista in attesa, poi alla coda)* ### **da una decisione di Luca.**
+
+### `(A)` CIO' CHE C'E', ALMENO IN PARTE
+
+| | che cosa | dove |
+|---|---|---|
+| 1 | ### **la luce e il campo `U(1)` con la legge di Gauss** | `doc/PROGETTO_U1.md`, [[PROGETTO-U1]] |
+| 2 | ### **la gravita' come «lo spazio dice alla materia come muoversi»:** ### **la caduta da `cs`; il cono per luce e materia** | ### **la sezione `1`, righe `3`, `6`, `7`;** `e48e7414` |
+| 3 | ### **l'energia e i suoi bilanci** | [[LIBRO-DEI-CONTI]] *(`4f6a4bd7`)* |
+| 4 | ### **il vuoto e la sua posizione nello spettro** *(in cima o sul fondo)* | `787296da`, `76eecbf5` |
+| 5 | ### **la massa come legame; l'oggetto collettivo** *(il solitone con la sua buca, in coda)* | `0fb93b8c`; [[PROGETTO-MASSA-COLLETTIVA]] |
+| 6 | ### **la carica, la chiralita', il cono di luce unico** | ### **la lista in attesa** *(righe `1`, `9`, `10`, `11`)* |
+
+### `(B)` CIO' CHE SAPPIAMO MANCARE *(solo i titoli)*
+
+| | che cosa | dove |
+|---|---|---|
+| 1 | ### **la seconda meta' della gravita': la materia che curva lo spazio** *(la regola della mitosi)*; ### **senza, ne' la legge di Newton nel suo limite ne' le onde gravitazionali** | `doc/PROGETTO_MITOSI.md`, [[PROGETTO-MITOSI]]; ### **la sezione `2`, riga `6`** |
+| 2 | ### **il `3+1`: tutto e' in 2D** | `doc/PIANO_2D_3D.md` *([[PIANO-2D-3D]])*, `doc/PROGETTO_FCC.md` |
+| 3 | ### **l'invarianza di Lorentz:** ### **i due coni** *(`v_b = pi/4`)*; ### **le fette** *(i nodi ciascuno al proprio ritmo)* | ### **la sezione `2`, riga `4`** *(`b0edae62`, `afba052b`)*; ### **la lista in attesa, riga `6`** |
+| 4 | ### **il dizionario con le unita' fisiche** | [[DECISIONE-L1-NATURA-A-SIMULATORE-B]] |
+| 5 | ### **le altre forze:** ### **la debole** *(la sola che distingue la chiralita')*; ### **la forte;** ### **il fork `SU(2)` dell'era `1` come inizio** | ### **il ramo `fork-su2`;** [[DOMANDA-CHIRALITA]] |
+
+### `(C)` LE DOMANDE NON ANCORA FATTE *(le piu' profonde per prime)*
+
+| | la domanda | dove |
+|---|---|---|
+| 1 | ### **MOLTE PARTICELLE E LA STATISTICA:** ### **il modello e' un'onda sola; fermioni e bosoni;** ### **e' lo stesso nodo della carica `(a)`;** ### **senza, il modello e' una teoria di campi classici** | [[DOMANDA-BANDA-ANTIMATERIA]] |
+| 2 | ### **LA MISURA E LE PROBABILITA':** ### **la regola di Born e il risultato unico di una misura in una camminata deterministica e reversibile;** ### **la meccanica quantistica relazionale ha una risposta sua** | -- |
+| 3 | ### **LE CONSERVAZIONI DELL'IMPULSO E DEL MOMENTO ANGOLARE:** ### **sulla griglia solo in forma ridotta;** ### **nel limite continuo da controllare** | [[DOMANDA-VALLE-CARICA]] *(il momento angolare modulo `6`)* |
+| 4 | ### **LA COSMOLOGIA:** ### **se i nodi solo nascono l'universo cresce: con quale ritmo, da quale stato iniziale;** ### **l'energia del vuoto e la costante cosmologica** | `787296da` |
+
+## 7. LA CODA DI OGGI, IN ORDINE *(`PRECEDENZA-IN-CODA`)*
 
 | | il lavoro | lo stato |
 |---|---|---|
@@ -84,7 +119,7 @@
 | 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **CHIUSO:** ### **la DEVE `(0)` entro `1e-12` relativo, `1/3`** *(Luca `08:31`; il commit di `zero_del_vuoto_c0.txt`)*; ### **l'ipotesi come canale di gravita' chiusa** *(`43c3a298`)* |
 | 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **IL PROSSIMO** |
 
-## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
+## 8. GLI ERRORI DEL GUARDIANO, DAL `n.54`
 
 | | l'errore | dove |
 |---|---|---|

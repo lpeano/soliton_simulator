@@ -21496,3 +21496,13 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **LA CLASSE:** ### **il mandato chiede «DOMANDA», che il vocabolario chiuso non ha: `DECISIONE`, stato `AGENDA`, come le due domande sulla carica** *(dichiarato)*.
 - ### **LA PRECISAZIONE DELLE `08:52`** *(parte `1(b)`)*: ### **nello spostamento additivo la banda di sopra si comporta a massa positiva, quella di sotto a massa negativa** -- ### **annotata in [[DOMANDA-BANDA-ANTIMATERIA]] come lettura.**
 - ### **LA MAPPA** *(nello stesso commit)*: ### **la riga `11` della lista in attesa.** ### **Il prossimo in coda: la bussola** *(il mandato delle `08:58`)*, ### **poi il solitone con la sua buca** *(`22:59`)*.
+
+
+### 📌 **IL MANDATO DI LUCA DELLE 08:58 (2026-10-28): LA BUSSOLA NELLA MAPPA -- CHE COSA SERVIREBBE PER UN SISTEMA COMPLETO; UN ORIENTAMENTO, NON UNA CODA** *([[MAPPA-DEL-LAVORO]])*.
+
+- ### **LIVELLO:** ### **un documento; nessun codice, nessuna corsa, nessun file del nucleo.** ### **Il task history prima:** `doc/TASK_HISTORY/2026-10-28_bussola.md` *(`a21f5fbe`)*.
+- ### **LA SEZIONE `6` DI `doc/MAPPA.md`,** ### **dopo le decisioni aperte e prima della coda** *(la coda diventa la `7`, gli errori del guardiano la `8`; nessun file citava quei numeri, verificato con una ricerca)*. ### **In testa la frase di Luca:** ### **«Nessuna teoria della gravita' quantistica oggi ha un sistema completo; questa bussola serve a sapere con precisione che cosa manca, non a misurare un ritardo.»**
+- ### ⛔ **LA REGOLA DELLA SEZIONE:** ### **nessuna voce si esegue senza essere promossa** *(alla lista in attesa, poi alla coda)* ### **da una decisione di Luca.**
+- ### **I TRE GRUPPI:** ### **`(A)` cio' che c'e', almeno in parte** *(sei righe: la luce e `U(1)`, la gravita' come moto nello spazio dato, i bilanci, il vuoto nello spettro, la massa come legame, la carica e la chiralita')*; ### **`(B)` cio' che sappiamo mancare** *(cinque titoli: la materia che curva lo spazio, il `3+1`, Lorentz, le unita' fisiche, le altre forze)*; ### **`(C)` le domande non ancora fatte** *(quattro, le piu' profonde per prime: molte particelle e la statistica, la misura e le probabilita', le conservazioni dell'impulso e del momento angolare, la cosmologia)*.
+- ### **I RIFERIMENTI:** ### **con `[[...]]` solo gli ID che sono nell'indice** *(verificato)*; ### **`PROGETTO_FCC` non e' una voce: citato col percorso.**
+- ### **Il prossimo in coda: il solitone con la sua buca** *(`22:59`)*.
