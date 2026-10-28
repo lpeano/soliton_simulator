@@ -1,0 +1,40 @@
+[TIMBRO] _code_o_cuore.py  sha1-BYTE 03fcc1f1  committato e pulito
+==================================================================================================================================
+CODE O CUORE: il congelato, N 1e6 L 81 zero simm, 600 di tempo fisico a s 0.075 e a s 0.3; ogni 3 di tempo fisico
+==================================================================================================================================
+  la configurazione: TAU 600 OGNI_TAU 3 QUARTI (0.0, 150.0, 300.0, 450.0, 600.0) SOGLIA_REL 0.95 (sulla frazione entro w_in RELATIVA al valore iniziale); il passo: 14 pezzi, impronta 2e7f795d2a52fbe7
+  le due letture di Luca: (a) CODE: la frazione entro w_in resta, la crescita rallenta fino a fermarsi, cala con s piu' piccolo; (b) CUORE: il cuore cambia, la crescita non si ferma o accelera, non dipende da s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (k1): s 0.075, le larghezze ai tick comuni = grande_fondo_congelato AL BIT                        PASSA   201 tick comuni
+  DEVE PASSARE (k2): s 0.3, le larghezze ogni 20 tick = 74f99039 simm L 81 congelato AL BIT                      ### FALLISCE   101 tick comuni; lo scarto massimo 1.47e-01
+----------------------------------------------------------------------------------------------------------------------------------
+### s 0.075: w0 del risolutore 6.6175, w_in sul toro 6.6468; 8000 tick (456 s)
+  tau    0.0 (tick     0): w/w_in 1.00000; frazione entro w_in 0.58882 (relativa 1.00000), entro 3 w0 1.000000; picco 5.0617e+03 (relativo 1.00000)
+  tau    1.5 (tick    20): w/w_in 1.02114; frazione entro w_in 0.57566 (relativa 0.97766), entro 3 w0 1.000000; picco 4.9247e+03 (relativo 0.97293)
+  tau    3.0 (tick    40): w/w_in 1.00809; frazione entro w_in 0.58394 (relativa 0.99171), entro 3 w0 1.000000; picco 5.0108e+03 (relativo 0.98994)
+  tau   75.0 (tick  1000): w/w_in 1.02289; frazione entro w_in 0.57949 (relativa 0.98416), entro 3 w0 0.999611; picco 5.1548e+03 (relativo 1.01839)
+  tau  150.0 (tick  2000): w/w_in 1.07263; frazione entro w_in 0.54467 (relativa 0.92502), entro 3 w0 0.999005; picco 4.5016e+03 (relativo 0.88935)
+  tau  225.0 (tick  3000): w/w_in 1.09438; frazione entro w_in 0.53506 (relativa 0.90870), entro 3 w0 0.998369; picco 4.4345e+03 (relativo 0.87609)
+  tau  300.0 (tick  4000): w/w_in 1.08973; frazione entro w_in 0.54839 (relativa 0.93134), entro 3 w0 0.997685; picco 4.6179e+03 (relativo 0.91232)
+  tau  375.0 (tick  5000): w/w_in 1.09822; frazione entro w_in 0.55780 (relativa 0.94733), entro 3 w0 0.996898; picco 4.8234e+03 (relativo 0.95291)
+  tau  450.0 (tick  6000): w/w_in 1.12780; frazione entro w_in 0.53914 (relativa 0.91563), entro 3 w0 0.996417; picco 4.5078e+03 (relativo 0.89057)
+  tau  525.0 (tick  7000): w/w_in 1.15978; frazione entro w_in 0.51589 (relativa 0.87615), entro 3 w0 0.995633; picco 4.1660e+03 (relativo 0.82303)
+  tau  600.0 (tick  8000): w/w_in 1.17279; frazione entro w_in 0.51832 (relativa 0.88027), entro 3 w0 0.995006; picco 4.2567e+03 (relativo 0.84096)
+  la pendenza di w/w_in per unita' di tempo fisico nei quarti (0.0, 150.0, 300.0, 450.0, 600.0): ['4.842e-04', '1.140e-04', '2.538e-04', '2.999e-04'] -> NON MONOTONA
+  la frazione entro w_in relativa: minimo 0.87137 (soglia 0.95); il picco relativo alla fine 0.84096
+### s 0.3: w0 del risolutore 6.6003, w_in sul toro 6.6297; 2000 tick (109 s)
+  tau    0.0 (tick     0): w/w_in 1.00000; frazione entro w_in 0.58583 (relativa 1.00000), entro 3 w0 1.000000; picco 5.0879e+03 (relativo 1.00000)
+  tau    6.0 (tick    20): w/w_in 1.02093; frazione entro w_in 0.57280 (relativa 0.97776), entro 3 w0 1.000000; picco 4.9509e+03 (relativo 0.97307)
+  tau   12.0 (tick    40): w/w_in 1.00146; frazione entro w_in 0.58504 (relativa 0.99864), entro 3 w0 0.999996; picco 5.0803e+03 (relativo 0.99850)
+  tau   75.0 (tick   250): w/w_in 1.02146; frazione entro w_in 0.57546 (relativa 0.98229), entro 3 w0 0.999717; picco 5.0191e+03 (relativo 0.98649)
+  tau  150.0 (tick   500): w/w_in 1.03630; frazione entro w_in 0.56567 (relativa 0.96558), entro 3 w0 0.999446; picco 4.8818e+03 (relativo 0.95950)
+  tau  225.0 (tick   750): w/w_in 1.03163; frazione entro w_in 0.57866 (relativa 0.98776), entro 3 w0 0.998906; picco 4.9057e+03 (relativo 0.96420)
+  tau  300.0 (tick  1000): w/w_in 1.03723; frazione entro w_in 0.57871 (relativa 0.98785), entro 3 w0 0.998523; picco 5.0100e+03 (relativo 0.98470)
+  tau  375.0 (tick  1250): w/w_in 1.06252; frazione entro w_in 0.56811 (relativa 0.96974), entro 3 w0 0.997914; picco 4.8373e+03 (relativo 0.95075)
+  tau  450.0 (tick  1500): w/w_in 1.06850; frazione entro w_in 0.56563 (relativa 0.96552), entro 3 w0 0.997642; picco 4.7971e+03 (relativo 0.94285)
+  tau  525.0 (tick  1750): w/w_in 1.07429; frazione entro w_in 0.56792 (relativa 0.96941), entro 3 w0 0.997101; picco 4.7913e+03 (relativo 0.94171)
+  tau  600.0 (tick  2000): w/w_in 1.09201; frazione entro w_in 0.55855 (relativa 0.95343), entro 3 w0 0.996686; picco 4.6896e+03 (relativo 0.92173)
+  la pendenza di w/w_in per unita' di tempo fisico nei quarti (0.0, 150.0, 300.0, 450.0, 600.0): ['2.420e-04', '6.251e-06', '2.084e-04', '1.567e-04'] -> NON MONOTONA
+  la frazione entro w_in relativa: minimo 0.94864 (soglia 0.95); il picco relativo alla fine 0.92173
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 1/2 controlli passano; DEVE fallite: 1 ['DEVE PASSARE (k2): s 0.3, le larghezze ogni 20 tick = 74f99039 simm L 81 congelato AL BIT']

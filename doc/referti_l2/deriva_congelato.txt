@@ -1,0 +1,10 @@
+[TIMBRO] _deriva_congelato.py  sha1-BYTE e40c1bc5  committato e pulito
+==================================================================================================================================
+LA DERIVA DEL CONGELATO (Luca 14:27, parte 2): lo stato del risolutore e' lo stazionario del passo? N 1e+06, L 81, zero simm, S1, cs spento; 100 tick congelati a s (0.075, 0.3)
+==================================================================================================================================
+  la configurazione: N 1e+06 L_TORO 81 ZERO simm S_MISURA (0.075, 0.3) TICK 100 TICK_C0 20 TICK_ONDA 20 TAU_UGUALE 7.5; il passo: 14 pezzi, impronta 2e7f795d2a52fbe7
+  la rotazione PREVISTA = la rotazione dell'onda piana a K (gli stessi pezzi, senza il legame) + mu del risolutore (la regola di 74f99039, dichiarata nel task history)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE (c0): congelato, 20 tick, s 0.075: psi uguale AL BIT col fondo e con l'uniforme, e Lambda per nod ### FALLISCE   Lambda True, psi False
+  DEVE PASSARE (c1): la larghezza del congelato ai tick 40 e 80 = la serie di grande_fondo_congelato AL BIT      PASSA   qui {40: 6.700559495355789, 80: 6.793307513181812}, la serie {40: 6.700559495355789, 80: 6.793307513181812}
+----------------------------------------------------------------------------------------------------------------------------------

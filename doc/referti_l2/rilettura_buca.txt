@@ -1,0 +1,45 @@
+[TIMBRO] _rilettura_buca.py  sha1-BYTE 4833e386  committato e pulito
+==================================================================================================================================
+LA RILETTURA DELLA BUCA CONTRO IL CONGELATO (Luca 14:27, parte 1): w(t) / w_congelato(t) sui tick comuni dopo la rampa; i dati di bd87c0d5, nessuna corsa
+==================================================================================================================================
+  la configurazione: TOLL_LARGH 0.2 FRAZ_MIN 0.8 (la frazione ASSOLUTA); SALITA (0.1, 0.9); il riferimento: <taglia>_fondo_congelato; l'uniforme contro il congelato del fondo: NO (senza riferimento)
+  la correzione e' dichiarata DOPO i numeri di 58791831; quel referto resta com'e'
+----------------------------------------------------------------------------------------------------------------------------------
+### grande: il congelato fino al tick 8000; la sua larghezza / w_in a 4000 e a 8000: 1.0897, 1.1728
+  fondo    tanh25   rampa fino al tick   614: la vita relativa 2746 tick (tempo fisico 205.9); scarto relativo massimo dopo 0.249, in rampa 0.003; w/w_cong alla fine della rampa 1.0037, all'ultimo tick comune 1.1423
+  fondo    tanh100  rampa fino al tick  2456: la vita relativa 1584 tick (tempo fisico 118.8); scarto relativo massimo dopo 0.244, in rampa 0.057; w/w_cong alla fine della rampa 1.0595, all'ultimo tick comune 1.1639
+  fondo    tanh400  rampa fino al tick  9824: la vita relativa non misurabile (nessun tick comune dopo la rampa); scarto relativo massimo dopo -, in rampa 0.190; w/w_cong alla fine della rampa -, all'ultimo tick comune -
+  fondo    sin225   rampa fino al tick   333: la vita relativa 2867 tick (tempo fisico 215.0); scarto relativo massimo dopo 0.249, in rampa 0.001; w/w_cong alla fine della rampa 1.0013, all'ultimo tick comune 1.1569
+  fondo    sin2100  rampa fino al tick  1333: la vita relativa 2507 tick (tempo fisico 188.0); scarto relativo massimo dopo 0.227, in rampa 0.031; w/w_cong alla fine della rampa 1.0329, all'ultimo tick comune 1.1542
+  fondo    sin2400  rampa fino al tick  5333: la vita relativa 27 tick (tempo fisico 2.0); scarto relativo massimo dopo 0.240, in rampa 0.241; w/w_cong alla fine della rampa 1.2375, all'ultimo tick comune 1.1437
+  uniforme: senza riferimento
+### piccola: il congelato fino al tick 8000; la sua larghezza / w_in a 4000 e a 8000: 1.3370, 1.4822
+  fondo    tanh25   rampa fino al tick   614: la vita relativa oltre 7386 tick dopo la rampa (tempo fisico 553.9); scarto relativo massimo dopo 0.122, in rampa 0.015; w/w_cong alla fine della rampa 1.0206, all'ultimo tick comune 1.0014
+  fondo    tanh100  rampa fino al tick  2456: la vita relativa oltre 5544 tick dopo la rampa (tempo fisico 415.8); scarto relativo massimo dopo 0.081, in rampa 0.083; w/w_cong alla fine della rampa 1.0757, all'ultimo tick comune 0.9979
+  fondo    tanh400  rampa fino al tick  9824: la vita relativa non misurabile (nessun tick comune dopo la rampa); scarto relativo massimo dopo -, in rampa 0.141; w/w_cong alla fine della rampa -, all'ultimo tick comune -
+  fondo    sin225   rampa fino al tick   333: la vita relativa oltre 7667 tick dopo la rampa (tempo fisico 575.0); scarto relativo massimo dopo 0.124, in rampa 0.005; w/w_cong alla fine della rampa 1.0095, all'ultimo tick comune 0.9776
+  fondo    sin2100  rampa fino al tick  1333: la vita relativa oltre 6667 tick dopo la rampa (tempo fisico 500.0); scarto relativo massimo dopo 0.136, in rampa 0.121; w/w_cong alla fine della rampa 1.1214, all'ultimo tick comune 1.0145
+  fondo    sin2400  rampa fino al tick  5333: la vita relativa oltre 2667 tick dopo la rampa (tempo fisico 200.0); scarto relativo massimo dopo 0.117, in rampa 0.159; w/w_cong alla fine della rampa 1.0826, all'ultimo tick comune 1.0525
+  uniforme: senza riferimento
+----------------------------------------------------------------------------------------------------------------------------------
+### LA VITA RELATIVA CONTRO T_r (la tanh e il sin^2; None = non si rompe fino all'ultimo tick comune; - = non misurabile)
+  grande  fondo    tanh T_r [25.0, 100.0, 400.0]: ['2746', '1584', '-']
+  grande  fondo    sin2 T_r [25.0, 100.0, 400.0]: ['2867', '2507', '27']
+  piccola fondo    tanh T_r [25.0, 100.0, 400.0]: ['oltre', 'oltre', '-']
+  piccola fondo    sin2 T_r [25.0, 100.0, 400.0]: ['oltre', 'oltre', 'oltre']
+----------------------------------------------------------------------------------------------------------------------------------
+### LA DURATA UGUALE (le funzioni di rampa dello script delle corse, s 0.075)
+  sin2 T_r  25: durata 24.975, salita 10-90% 14.775 (tick di fine 333)
+  sin2 T_r 100: durata 99.975, salita 10-90% 59.025 (tick di fine 1333)
+  sin2 T_r 400: durata 399.975, salita 10-90% 236.175 (tick di fine 5333)
+  tanh T_r  25: durata 46.050, salita 10-90% 5.550 (tick di fine 614)
+  tanh T_r 100: durata 184.200, salita 10-90% 21.975 (tick di fine 2456)
+  tanh T_r 400: durata 736.800, salita 10-90% 87.900 (tick di fine 9824)
+  coppie tanh/sin^2 a durata o salita UGUALE (entro un tick): NESSUNA
+  le piu' vicine per tempo di salita (NON uguali):
+    tanh T_r 25 contro sin2 T_r 25 (salita tanh/sin2 0.376) grande  fondo   : vita relativa 2746 contro 2867
+    tanh T_r 25 contro sin2 T_r 25 (salita tanh/sin2 0.376) piccola fondo   : vita relativa None contro None
+    tanh T_r 100 contro sin2 T_r 25 (salita tanh/sin2 1.487) grande  fondo   : vita relativa 1584 contro 2867
+    tanh T_r 100 contro sin2 T_r 25 (salita tanh/sin2 1.487) piccola fondo   : vita relativa None contro None
+    tanh T_r 400 contro sin2 T_r 100 (salita tanh/sin2 1.489) grande  fondo   : vita relativa - contro 2507
+    tanh T_r 400 contro sin2 T_r 100 (salita tanh/sin2 1.489) piccola fondo   : vita relativa - contro None
