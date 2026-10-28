@@ -21536,3 +21536,12 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **IN CODA** *(`L-UN-PROMPT`)*: ### **le corse della rampa girano;** ### **la ricerca della causa si fa a corse chiuse, PRIMA del referto.**
 - ### **CHE COSA SO GIA', SENZA AVER CERCATO** *(dai log, non una diagnosi)*: ### **l'avviso compare in ogni corsa, in `_scomposizione_solitone.parti`, chiamata da `prepara` per `e_K`** *(prima del tick `0`)*; ### **resta da vedere se anche i conti del libro** *(`_libro_dei_conti.conti_per_nodo`, il legame per nodo)* ### **ne sono toccati, cioe' se nei jsonl c'e' un NaN.**
 - ### **IL CRITERIO DI CHIUSURA:** ### **la corsa, il tick e i nodi dove compare, e il valore di `Lambda` su quei nodi, misurati da uno script;** ### **e per ogni bilancio del referto, se usa quel conto o no.**
+
+
+### 📌 **IL SOLITONE CON LA SUA BUCA: LE `28` CORSE CHIUSE, I DATI COMMITTATI PRIMA DEL REFERTO; E LA CAUSA DEL NaN IN `E_leg`, LETTA DAL CODICE** *(la nota di Luca delle `11:17`; [[VUOTO-SUL-FONDO]], [[LIBRO-DEI-CONTI]])*.
+
+- ### **LE CORSE:** ### **le `24` della rampa chiuse, tutte con uscita `0`;** ### **con le `4` di riferimento e `k0`, `29` file in `doc/referti_l2/solitone_con_la_buca/`** *(`4.5` MB)*, ### **committati in questo commit, prima del referto** *(il codice e' quello di `327e5ad8`)*.
+- ### **NEI DATI NESSUN `NaN` NE' `Infinity`** *(cercati nei `29` file; `json.dumps` li scriverebbe in chiaro)*: ### **i conti del libro, legame compreso, sono finiti in ogni corsa.** ### **E il libro ha `assert np.all(lam > 0.0)` a ogni tick** *(`_libro_dei_conti.conti_per_nodo`)*: ### **un `Lambda` a zero in una corsa l'avrebbe fermata.**
+- ### **LA CAUSA, DAL CODICE:** ### **`_scomposizione_solitone.stato_uniforme` mette `phi_h = 0`:** ### **`Lambda = 0` su ogni nodo, `rho/lam = inf`, `lam * F1(inf) = 0 * inf = NaN`.** ### **Il NaN sta nello STATO DI COSTRUZIONE di `prepara`** *(la materia uniforme senza vuoto, fatta per `E_mat`)*, ### **prima del tick `0`, in ogni corsa, su tutti i nodi;** ### **`prepara` ne usa solo `E_mat / M` = `e_K`.**
+- ### **LO SCRIPT CHE LO MISURA:** `csv/_nan_e_leg.py` *(`sha1-BYTE b987467e`)*, ### **committato qui, prima di girarlo;** ### **i numeri nel commit successivo, col suo referto.**
+- ### ⚠ **CHE COSA RESTA FUORI:** ### **«o quasi zero» nelle corse:** ### **il minimo di `Lambda` per nodo durante le corse NON e' registrato nei jsonl** *(ci sono le medie per regione della buca)*; ### **lo dichiaro, non lo ricostruisco.**
