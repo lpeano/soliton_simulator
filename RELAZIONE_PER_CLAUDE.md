@@ -21694,3 +21694,12 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Le risposte delle `20:52`** sono in `doc/REQUISITI_LEGAME.md` 9: la diagnosi di `S4` e' chiusa.
 - **Una nota:** la divisione `A-basso` / `A-alto` per indice dipende dalla griglia in `k`: non si legge.
+
+### 📌 **LO STATO FERMO DI `S1` SUL RETICOLO (LUCA, 21:29), CHECKPOINT: TROVATO A `L 81` E `L 120`; E' PIU' STRETTO DELLO STATO INIZIALE; LA CORSA PARTE** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il punto `0`:** lo stato iniziale di `40061005` e' lo stato fermo dell'inviluppo continuo radiale messo sul reticolo *(il task history `doc/TASK_HISTORY/2026-10-28_stato_fermo_sul_reticolo.md`, file e righe)*; il suo residuo per tick e' `3.384e-02`.
+- **Una correzione alle premesse:** `w0 3.1065` archi e' di `S4`; `S1` ha `6.6003`.
+- **La ricerca** *(`csv/_stato_fermo.py`, `b61dea8e`; Newton col precondizionatore del tick libero)*: il residuo `9.808e-10` a `L 81` in `15` passi, `1.431e-10` a `L 120` in `16`; `mu -0.532745112` a tutte e due.
+- **Lo stato fermo contro l'iniziale** *(`L 81`)*: `w` `6.3944` contro `6.6297`; il cuore `0.63001` contro `0.58583`; il picco per nodo `5616` contro `5088`; la distanza `1.228e-02`. Dal finale: `1.087e-01` *(l'iniziale: `7.743e-02`)*.
+- **Le prove nella cartella di lavoro si erano fermate prima** *(sezione `6` del task history)*: si erano fermate al passo `12` o prima; il crollo del residuo viene ai passi `13`-`15`.
+- **In corsa:** lo stato fermo di `L 81`, il congelato vero, `10000` tick.
