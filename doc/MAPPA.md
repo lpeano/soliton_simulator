@@ -48,6 +48,7 @@
 | `a` | ### **la materia sul cono come la luce?** | ### **SI'** | `e48e7414` |
 | `b` | ### **il vuoto in cima e' la causa dei due problemi** *(il solitone che si scioglie, la nascita)*? | ### **IN PARTE:** ### **il vuoto uniforme e' il massimo per la forma;** ### **dal fondo il vuoto PRENDE energia dalla materia** *(il verso si rovescia)*, ### **ma il solitone vive solo `1.6`-`1.9` volte di piu', non `4`: c'e' un'altra causa** | `787296da`, `76eecbf5` |
 | `c` | ### **dove va l'energia, nei due versi?** | ### **lo strumento c'e'** *(la strada `A`)*: ### **il vuoto lontano rimanda indietro** *(`915` tick in entrata su `1860` dopo la vita)* | `4f6a4bd7` |
+| `d` | ### **i requisiti del legame e la stabilita' sulla carta** *(Luca `19:18`)* | ### **`S1`: R1-R3, R6; R4 e R5 sulla carta** *(VK: sopra un `n` minimo)*; ### **`S4`: R2 e R3 no;** ### **il cuore dei solitoni misurati nel regime saturato** *(`REQUISITI_LEGAME.md`)*; ### **la diagnosi di `S4` in corsa** | `2b3f1421` |
 
 ## 4. LA LISTA IN ATTESA *(idee da NON eseguire finche' la sezione `3` non e' chiusa)*
 

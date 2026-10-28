@@ -21631,3 +21631,21 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **La lettura "stabile e irradia" non regge.**
 - **Ritirata** *(Luca, `18:12`)*: la frase di `83daa823` "la deriva lunga non viene dallo stato di partenza".
 - **La prossima mossa sul solitone la decide Luca.**
+
+### 📌 **I REQUISITI DEL LEGAME, SULLA CARTA (LUCA, 19:18, PARTE 1): `17/17` -- IL CUORE DEI SOLITONI MISURATI VIVE NEL REGIME SATURATO; VK: `S1` STABILE SOPRA UN `n` MINIMO IN 2D E 3D, `S4` STABILE SU TUTTA LA GRIGLIA** *([[DECISIONE-LINEARE]], [[PIANO-2D-3D]])*.
+
+- **Il documento:** `doc/REQUISITI_LEGAME.md`. **Il referto:** `doc/referti_l2/requisiti_legame.txt` *(lo script `sha1-BYTE e62182ea`, `2b3f1421`)*.
+
+| | `S1` | `S4` |
+|---|---|---|
+| R1, R6 *(la primitiva)* | si' | si' |
+| R2, R3 | si' | NO |
+| `x` al centro dei solitoni misurati *(`s 0.3`)* | `6.7` .. `3153` | `2.3` .. `4.7e4` |
+| `sigma_eff` li' | `4.4e-2` .. `2.0e-7` | `0.23` .. `6.7e-4` |
+| VK `d 2`: `n` minimo | `22.87` a `nu/tetto 0.1`; sopra `dn/dnu > 0` | nessuno sulla griglia; `dn/dnu > 0` |
+| VK `d 3`: `n` minimo | `169.0` *(`N 86.8` col parametro)* | nessuno sulla griglia; `dn/dnu > 0` |
+
+- **I controlli:** il logaritmo esatto in `d 2, 3` entro `1e-6`; Townes `11.700897`; le potenze con l'esponente `1/sigma - d/2`; il tiro contro il risolutore di `bcbd1f40` entro `8.4e-07` in `n`.
+- **Una correzione mia, dichiarata nel commit `2b3f1421`:** il controllo R6 si legge con l'arrotondamento stimato *(`S1` a `x 1e-6`: `beta ~ -2x^3/3` da termini `O(x)`)*; l'ho cambiato dopo averlo visto fallire in prova.
+- **Esito:** la corsa lunga di `S1` *(cuore che si svuota)* sta sul ramo che VK dice stabile: lo svuotamento non e' l'instabilita' di VK dell'inviluppo. La forma "`x^2` a poca materia, saturazione nel cuore" e' gia' `S1`.
+- **La parte `2`** *(la diagnosi di `S4`, `9e8805ba`)*: in corsa.
