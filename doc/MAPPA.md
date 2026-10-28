@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -62,6 +62,7 @@
 | 8 | ### **la nascita in un vuoto a somma nulla per nodo** | `doc/PROGETTO_MITOSI.md` 3(c) |
 | 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]]; ### **la lettura delle `08:31`: per un potenziale additivo le due bande gia' come cariche opposte** *(una lettura, non una misura; `43c3a298`)* |
 | 10 | ### **la valle come carica** *(e il momento angolare modulo `6`)* | [[DOMANDA-VALLE-CARICA]] |
+| 11 | ### **la chiralita': quale grandezza del modello e'?** *(la moneta di spin, le due componenti che il salto a `K` mescola, le valli `K`/`K'`)* | [[DOMANDA-CHIRALITA]] *(Luca, `2026-10-28` `08:52`; `doc/TASK_HISTORY/2026-10-28_chiralita.md`)*; ### **si apre insieme alle due domande sulla carica** |
 
 ## 5. LE DECISIONI APERTE DI LUCA *(con la raccomandazione del guardiano)*
 

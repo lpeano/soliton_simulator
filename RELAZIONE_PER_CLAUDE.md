@@ -21485,3 +21485,14 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
   - ### **`(d)` il `delta` che servirebbe:** ### **`0.113 lambda*` per la nascita `v1`, `4.8e-4 lambda*` per `v3`.**
 - ### ❓ **RESTA APERTA** *(in `doc/PROGETTO_MITOSI.md` 3(c))*: ### **«dove va l'energia della nascita»,** ### **con la nota che il vuoto del FONDO prende energia dalla materia** *(`76eecbf5`)* ### **e che li' va riprovata.**
 - ### **La voce [[ZERO-DEL-VUOTO]] e' CHIUSA** *(il criterio: la decisione di Luca delle `08:31` su `43c3a298`)*; ### **la mappa aggiornata nello stesso commit;** ### **il prossimo in coda: il solitone con la sua buca** *(`22:59`)*.
+
+
+### 📌 **IL MANDATO DI LUCA DELLE 08:52, PARTE 2 (2026-10-28): LA DOMANDA SULLA CHIRALITA' NELLA LISTA IN ATTESA -- NESSUNA MISURA** *([[DOMANDA-CHIRALITA]], [[DOMANDA-BANDA-ANTIMATERIA]], [[DOMANDA-VALLE-CARICA]], [[MAPPA-DEL-LAVORO]])*.
+
+- ### **LIVELLO:** ### **un documento e una voce d'indice; nessuna corsa, nessun file del nucleo.** ### **La parte `1` del mandato delle `08:52`** *(la chiusura dello zero del vuoto)* ### **coincide con la risposta delle `08:31`, gia' eseguita** *(`dfa59387`, `34053d39`)*.
+- ### **IL TASK HISTORY PRIMA:** `doc/TASK_HISTORY/2026-10-28_chiralita.md` *(`d43540f9`)*: ### **il testo della domanda vi sta per intero.**
+- ### **LA DOMANDA:** ### **quale grandezza del modello e' la chiralita'?** ### **Tre candidati, nessuno misurato come tale:** ### **`(a)` la moneta di spin** *(`sigma.n`, un termine d'elicita'; rompe la conservazione di `sigma_z`, `8dea8c95`; ma la moneta non e' la massa)*; ### **`(b)` le due componenti che il salto a `K` mescola** *(`mu0 = (1/2) sqrt(1 - r + r^2)`, la massa del modello)*; ### **`(c)` le valli `K` e `K'`** *(sul cono il fascio passa tutto da `K` a `K'`, `e48e7414`)*.
+- ### **LE MISURE QUANDO SI APRE** *(descritte, NON eseguite)*: ### **sulla carta dagli autovettori della coppia a `K`; la conservazione dove la massa e' piccola; se lo spostamento additivo dello zero** *(`43c3a298`)* ### **la rispetta.** ### **LA CONDIZIONE DI APERTURA:** ### **dopo le domande che decidono, insieme alle due sulla carica.**
+- ### **LA CLASSE:** ### **il mandato chiede «DOMANDA», che il vocabolario chiuso non ha: `DECISIONE`, stato `AGENDA`, come le due domande sulla carica** *(dichiarato)*.
+- ### **LA PRECISAZIONE DELLE `08:52`** *(parte `1(b)`)*: ### **nello spostamento additivo la banda di sopra si comporta a massa positiva, quella di sotto a massa negativa** -- ### **annotata in [[DOMANDA-BANDA-ANTIMATERIA]] come lettura.**
+- ### **LA MAPPA** *(nello stesso commit)*: ### **la riga `11` della lista in attesa.** ### **Il prossimo in coda: la bussola** *(il mandato delle `08:58`)*, ### **poi il solitone con la sua buca** *(`22:59`)*.

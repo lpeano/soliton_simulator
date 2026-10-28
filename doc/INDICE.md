@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 177 |
+| `FISICA` | `2` | 178 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -299,6 +299,7 @@
 | `DOMANDA-BASE-DI-CICLI` | DECISIONE | FISICA | ENTRAMBE | ### **APERTA** | SI | la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi |
 | `DOMANDA-C2-O-C4` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | due componenti o quattro: il gap c-e- solo con C4? |
 | `DOMANDA-CHI-CAUSA-L-ANISOTROPIA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si |
+| `DOMANDA-CHIRALITA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la chiralita: quale grandezza del modello e? la moneta di spin, le due component |
 | `DOMANDA-COME-LA-MATERIA-CAMBIA-LAMBDA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | come la materia cambia la densita- del vuoto: scattering nel nodo o trasmissione |
 | `DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA` | DECISIONE | FISICA | 2 | ### **AGENDA** | SI | la tabella non ha un posto dove dichiarare le condizioni iniziali |
 | `DOMANDA-CONO-EMERGENTE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il cono di luce unico puo' emergere dalla dinamica della materia vestita dal vuo |
