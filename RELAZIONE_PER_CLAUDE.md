@@ -21528,3 +21528,11 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **CHE COSA PESA GIA':** ### **la prova breve della gobba era alla taglia piccola, dove oggi il congelato si rompe** *(il paragrafo sopra)*: ### **la gobba va riletta alla taglia grande.**
 - ### **LA CLASSE:** ### **il mandato chiede «DOMANDA», che il vocabolario chiuso non ha: `DECISIONE`, stato `AGENDA`, come [[DOMANDA-CHIRALITA]]** *(dichiarato)*. ### **Collegata a** [[PROGETTO-MASSA-COLLETTIVA]], [[VUOTO-SUL-FONDO]], [[PUNTO-FISSO-CS-SOLITONE]], [[CANALE-CS-SECONDA-SORGENTE]].
 - ### **LA MAPPA** *(nello stesso commit)*: ### **la riga `12` della lista in attesa;** ### **la riga `4`** *(il solitone con la sua buca)* ### **da «in coda» a «in corso».**
+
+
+### 📌 **LA NOTA DI LUCA DELLE 11:17 (2026-10-28): LA CAUSA DEL NaN IN `E_leg`, A CORSE CHIUSE E PRIMA DEL REFERTO** *([[VUOTO-SUL-FONDO]], [[LIBRO-DEI-CONTI]])*.
+
+- ### **IL TESTO:** ### **«dove e quando compare (quale corsa, quale tick, quali nodi), e se viene da `Lambda` a zero o quasi (la forma `S1` divide per `Lambda`). Finche' non e' chiarita, i bilanci d'energia del referto che usano `E_leg` si scrivono con la riserva, e i criteri che ne dipendono come non valutabili, non come passati o falliti.»**
+- ### **IN CODA** *(`L-UN-PROMPT`)*: ### **le corse della rampa girano;** ### **la ricerca della causa si fa a corse chiuse, PRIMA del referto.**
+- ### **CHE COSA SO GIA', SENZA AVER CERCATO** *(dai log, non una diagnosi)*: ### **l'avviso compare in ogni corsa, in `_scomposizione_solitone.parti`, chiamata da `prepara` per `e_K`** *(prima del tick `0`)*; ### **resta da vedere se anche i conti del libro** *(`_libro_dei_conti.conti_per_nodo`, il legame per nodo)* ### **ne sono toccati, cioe' se nei jsonl c'e' un NaN.**
+- ### **IL CRITERIO DI CHIUSURA:** ### **la corsa, il tick e i nodi dove compare, e il valore di `Lambda` su quei nodi, misurati da uno script;** ### **e per ogni bilancio del referto, se usa quel conto o no.**
