@@ -1,0 +1,116 @@
+[TIMBRO] _dove_va_la_materia.py  sha1-BYTE 31870035  committato e pulito
+==================================================================================================================================
+DOVE VA LA MATERIA CHE IL CUORE PERDE (Luca 20:52): gli stati salvati sugli autovettori del tick libero; nessuna corsa nuova
+==================================================================================================================================
+  la configurazione: STATI ['S1_s0.30_L81', 'S1_s0.30_L120', 'S4_s0.30_L81', 'S4_s0.30_L120', 'S4_s0.99_L81'] AMP 1e-06 SPESSORE 1 GRUPPI (('Ppi', (0, 1, 2, 3)), ('A', (4, 5)), ('P0', (6, 7, 8, 9)), ('B', (10, 11))) N_RADIALE 12 TOLL_UNIT 1e-12 TOLL_LIN 1e-09 TOLL_FASI 1e-09 TOLL_PARSEVAL 1e-12 TOLL_TICK 1e-09
+  il riferimento: il tick congelato (VC.VUOTO saltati, phi rimesso) con la forma S1 a ampiezza 1e-06 (il legame spento), sulla scena di ogni stato; gli stati S1 a s 0.075 NON esistono
+  LE LETTURE, SCRITTE PRIMA: (i) la materia persa in B o nelle piatte; (ii) nella valle K'; (iii) in A, valle K, a |k - K| piu' grande; (iv) altro; S1 contro S4 a s 0.3
+  le pesature: frazioni di |psi|^2 dello stato INTERO (cuore + anello + fuori = 1); A-basso / A-alto fuori dai punti K, K', Gamma (li' degeneri)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: S1_s0.30_L81, lo stato finale (tick 10000) = sha_fine dell'ultimo pezzo                          PASSA   
+  DEVE PASSARE: L 81, s 0.3: A(k) unitaria entro 1e-12                                                           PASSA   1.8e-15
+  DEVE PASSARE: L 81, s 0.3: A(k) lineare (ampiezza 1e-06 e 2e-06) entro 1e-09                                   PASSA   0.0e+00
+  DEVE PASSARE: L 81, s 0.3: le fasi a K (indici 4, 5, 10, 11) = coppia_K entro 1e-09                            PASSA   1.7e-16 (-0.457983, 0.457983)
+  DEVE PASSARE: L 81, s 0.3: le piatte (indici 0-3 a -pi s, 6-9 a 0) piatte entro 1e-09                          PASSA   1.3e-15
+  DEVE PASSARE: L 81, s 0.3: il Q dello stato iniziale sta nel sottospazio A a K entro 1e-12                     PASSA   6.7e-16
+  DEVE PASSARE: un tick dello stato iniziale scalato (max 1e-06) = A(k) applicata entro 1e-09                    PASSA   1.5e-15
+  DEVE PASSARE: uno stato col Q di +0.458 sta in B piu' che in A                                                 PASSA   B 0.99006, A 0.00004
+  DEVE PASSARE: S1_s0.30_L81 inizio: i pesi sommano a |psi|^2 entro 1e-12                                        PASSA   1.1e-16
+  S1_s0.30_L81   inizio  intero : A 0.99489  B 0.00001  P0 0.00274  Ppi 0.00236 | A@K 0.99488  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.58292  A-alto 0.33492  A@puntoK 0.07705  tutto@Gamma 5.03e-12 | |k-K| medio in A@K 0.14410
+  S1_s0.30_L81   inizio  cuore  : A 0.46456  B 0.00003  P0 0.00318  Ppi 0.00282 | A@K 0.46456  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.26275  A-alto 0.18711  A@puntoK 0.01469  tutto@Gamma 4.32e-13 | |k-K| medio in A@K 0.22987
+  S1_s0.30_L81   inizio  anello : A 0.30263  B 0.00004  P0 0.00252  Ppi 0.00230 | A@K 0.30262  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.15549  A-alto 0.12270  A@puntoK 0.02444  tutto@Gamma 8.84e-12 | |k-K| medio in A@K 0.22708
+  DEVE PASSARE: S1_s0.30_L81 fine: i pesi sommano a |psi|^2 entro 1e-12                                          PASSA   1.1e-16
+  S1_s0.30_L81   fine    intero : A 0.97935  B 0.00404  P0 0.00879  Ppi 0.00781 | A@K 0.97593  A@K' 0.00213  A@Gamma 0.00129 | A-basso 0.55794  A-alto 0.31377  A@puntoK 0.10765  tutto@Gamma 5.07e-06 | |k-K| medio in A@K 0.12292
+  S1_s0.30_L81   fine    cuore  : A 0.35290  B 0.00014  P0 0.00268  Ppi 0.00236 | A@K 0.35280  A@K' 0.00007  A@Gamma 0.00004 | A-basso 0.20059  A-alto 0.14062  A@puntoK 0.01169  tutto@Gamma 2.11e-08 | |k-K| medio in A@K 0.22579
+  S1_s0.30_L81   fine    anello : A 0.42158  B 0.00094  P0 0.00690  Ppi 0.00459 | A@K 0.42083  A@K' 0.00044  A@Gamma 0.00031 | A-basso 0.21748  A-alto 0.15652  A@puntoK 0.04758  tutto@Gamma 1.73e-06 | |k-K| medio in A@K 0.18197
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: S1_s0.30_L120, lo stato finale (tick 10000) = sha_fine dell'ultimo pezzo                         PASSA   
+  DEVE PASSARE: L 120, s 0.3: A(k) unitaria entro 1e-12                                                          PASSA   1.8e-15
+  DEVE PASSARE: L 120, s 0.3: le fasi a K (indici 4, 5, 10, 11) = coppia_K entro 1e-09                           PASSA   3.3e-16 (-0.457983, 0.457983)
+  DEVE PASSARE: L 120, s 0.3: le piatte (indici 0-3 a -pi s, 6-9 a 0) piatte entro 1e-09                         PASSA   1.3e-15
+  DEVE PASSARE: L 120, s 0.3: il Q dello stato iniziale sta nel sottospazio A a K entro 1e-12                    PASSA   2.2e-16
+  DEVE PASSARE: S1_s0.30_L120 inizio: i pesi sommano a |psi|^2 entro 1e-12                                       PASSA   2.2e-16
+  S1_s0.30_L120  inizio  intero : A 0.99489  B 0.00001  P0 0.00274  Ppi 0.00236 | A@K 0.99488  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.32565  A-alto 0.63413  A@puntoK 0.03511  tutto@Gamma 2.29e-12 | |k-K| medio in A@K 0.14514
+  S1_s0.30_L120  inizio  cuore  : A 0.46456  B 0.00003  P0 0.00318  Ppi 0.00282 | A@K 0.46456  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.17273  A-alto 0.28513  A@puntoK 0.00669  tutto@Gamma 1.97e-13 | |k-K| medio in A@K 0.23028
+  S1_s0.30_L120  inizio  anello : A 0.30263  B 0.00004  P0 0.00252  Ppi 0.00230 | A@K 0.30262  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.10328  A-alto 0.18821  A@puntoK 0.01114  tutto@Gamma 4.03e-12 | |k-K| medio in A@K 0.22819
+  DEVE PASSARE: S1_s0.30_L120 fine: i pesi sommano a |psi|^2 entro 1e-12                                         PASSA   2.2e-16
+  S1_s0.30_L120  fine    intero : A 0.98138  B 0.00454  P0 0.00856  Ppi 0.00551 | A@K 0.97494  A@K' 0.00470  A@Gamma 0.00174 | A-basso 0.30761  A-alto 0.62973  A@puntoK 0.04404  tutto@Gamma 7.10e-07 | |k-K| medio in A@K 0.13361
+  S1_s0.30_L120  fine    cuore  : A 0.37720  B 0.00011  P0 0.00210  Ppi 0.00189 | A@K 0.37712  A@K' 0.00005  A@Gamma 0.00003 | A-basso 0.13981  A-alto 0.23179  A@puntoK 0.00560  tutto@Gamma 1.53e-08 | |k-K| medio in A@K 0.22751
+  S1_s0.30_L120  fine    anello : A 0.38757  B 0.00064  P0 0.00903  Ppi 0.00439 | A@K 0.38692  A@K' 0.00035  A@Gamma 0.00030 | A-basso 0.12728  A-alto 0.24196  A@puntoK 0.01833  tutto@Gamma 3.98e-07 | |k-K| medio in A@K 0.19394
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: S4_s0.30_L81, lo stato finale (tick 10000) = sha_fine dell'ultimo pezzo                          PASSA   
+  DEVE PASSARE: S4_s0.30_L81 inizio: i pesi sommano a |psi|^2 entro 1e-12                                        PASSA   0.0e+00
+  S4_s0.30_L81   inizio  intero : A 0.97982  B 0.00013  P0 0.01057  Ppi 0.00948 | A@K 0.97981  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.52349  A-alto 0.43814  A@puntoK 0.01819  tutto@Gamma 4.46e-10 | |k-K| medio in A@K 0.29550
+  S4_s0.30_L81   inizio  cuore  : A 0.37851  B 0.00019  P0 0.00801  Ppi 0.00762 | A@K 0.37851  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.19070  A-alto 0.18421  A@puntoK 0.00360  tutto@Gamma 1.01e-09 | |k-K| medio in A@K 0.41958
+  S4_s0.30_L81   inizio  anello : A 0.23529  B 0.00015  P0 0.00404  Ppi 0.00407 | A@K 0.23528  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.12812  A-alto 0.10175  A@puntoK 0.00541  tutto@Gamma 2.11e-09 | |k-K| medio in A@K 0.33879
+  DEVE PASSARE: S4_s0.30_L81 fine: i pesi sommano a |psi|^2 entro 1e-12                                          PASSA   0.0e+00
+  S4_s0.30_L81   fine    intero : A 0.95955  B 0.00986  P0 0.01958  Ppi 0.01101 | A@K 0.95777  A@K' 0.00106  A@Gamma 0.00072 | A-basso 0.51531  A-alto 0.42538  A@puntoK 0.01886  tutto@Gamma 3.96e-06 | |k-K| medio in A@K 0.28830
+  S4_s0.30_L81   fine    cuore  : A 0.35960  B 0.00027  P0 0.00419  Ppi 0.00376 | A@K 0.35954  A@K' 0.00005  A@Gamma 0.00001 | A-basso 0.18093  A-alto 0.17532  A@puntoK 0.00336  tutto@Gamma 1.16e-07 | |k-K| medio in A@K 0.42439
+  S4_s0.30_L81   fine    anello : A 0.24311  B 0.00107  P0 0.01069  Ppi 0.00670 | A@K 0.24282  A@K' 0.00020  A@Gamma 0.00009 | A-basso 0.13345  A-alto 0.10361  A@puntoK 0.00604  tutto@Gamma 1.38e-06 | |k-K| medio in A@K 0.32252
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: S4_s0.30_L120, lo stato finale (tick 10000) = sha_fine dell'ultimo pezzo                         PASSA   
+  DEVE PASSARE: S4_s0.30_L120 inizio: i pesi sommano a |psi|^2 entro 1e-12                                       PASSA   2.2e-16
+  S4_s0.30_L120  inizio  intero : A 0.97982  B 0.00013  P0 0.01057  Ppi 0.00948 | A@K 0.97981  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.38638  A-alto 0.58515  A@puntoK 0.00829  tutto@Gamma 2.03e-10 | |k-K| medio in A@K 0.29575
+  S4_s0.30_L120  inizio  cuore  : A 0.37851  B 0.00019  P0 0.00801  Ppi 0.00762 | A@K 0.37851  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.15900  A-alto 0.21787  A@puntoK 0.00164  tutto@Gamma 4.60e-10 | |k-K| medio in A@K 0.41970
+  S4_s0.30_L120  inizio  anello : A 0.23529  B 0.00015  P0 0.00404  Ppi 0.00407 | A@K 0.23528  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.09152  A-alto 0.14130  A@puntoK 0.00247  tutto@Gamma 9.61e-10 | |k-K| medio in A@K 0.33909
+  DEVE PASSARE: S4_s0.30_L120 fine: i pesi sommano a |psi|^2 entro 1e-12                                         PASSA   4.4e-16
+  S4_s0.30_L120  fine    intero : A 0.95940  B 0.00976  P0 0.02010  Ppi 0.01074 | A@K 0.95744  A@K' 0.00122  A@Gamma 0.00075 | A-basso 0.37575  A-alto 0.57497  A@puntoK 0.00867  tutto@Gamma 3.94e-06 | |k-K| medio in A@K 0.28760
+  S4_s0.30_L120  fine    cuore  : A 0.35674  B 0.00026  P0 0.00427  Ppi 0.00375 | A@K 0.35667  A@K' 0.00005  A@Gamma 0.00002 | A-basso 0.15001  A-alto 0.20520  A@puntoK 0.00153  tutto@Gamma 7.31e-08 | |k-K| medio in A@K 0.42313
+  S4_s0.30_L120  fine    anello : A 0.24539  B 0.00100  P0 0.01085  Ppi 0.00642 | A@K 0.24503  A@K' 0.00025  A@Gamma 0.00010 | A-basso 0.09457  A-alto 0.14803  A@puntoK 0.00278  tutto@Gamma 6.82e-07 | |k-K| medio in A@K 0.32255
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: S4_s0.99_L81, lo stato finale (tick 3030) = sha_fine dell'ultimo pezzo                           PASSA   
+  DEVE PASSARE: L 81, s 0.99: A(k) unitaria entro 1e-12                                                          PASSA   1.4e-15
+  DEVE PASSARE: L 81, s 0.99: le fasi a K (indici 4, 5, 10, 11) = coppia_K entro 1e-09                           PASSA   8.9e-16 (-1.047055, 1.047055)
+  DEVE PASSARE: L 81, s 0.99: le piatte (indici 0-3 a -pi s, 6-9 a 0) piatte entro 1e-09                         PASSA   1.0e-15
+  DEVE PASSARE: L 81, s 0.99: il Q dello stato iniziale sta nel sottospazio A a K entro 1e-12                    PASSA   2.2e-16
+  DEVE PASSARE: S4_s0.99_L81 inizio: i pesi sommano a |psi|^2 entro 1e-12                                        PASSA   2.2e-16
+  S4_s0.99_L81   inizio  intero : A 0.98247  B 0.00008  P0 0.00377  Ppi 0.01368 | A@K 0.98246  A@K' 0.00000  A@Gamma 0.00001 | A-basso 0.36356  A-alto 0.60371  A@puntoK 0.01519  tutto@Gamma 1.89e-09 | |k-K| medio in A@K 0.32376
+  S4_s0.99_L81   inizio  cuore  : A 0.37189  B 0.00012  P0 0.00267  Ppi 0.01031 | A@K 0.37189  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.14168  A-alto 0.22715  A@puntoK 0.00307  tutto@Gamma 1.91e-09 | |k-K| medio in A@K 0.45124
+  S4_s0.99_L81   inizio  anello : A 0.22908  B 0.00009  P0 0.00130  Ppi 0.00535 | A@K 0.22907  A@K' 0.00000  A@Gamma 0.00000 | A-basso 0.08468  A-alto 0.14000  A@puntoK 0.00440  tutto@Gamma 1.20e-10 | |k-K| medio in A@K 0.36321
+  DEVE PASSARE: S4_s0.99_L81 fine: i pesi sommano a |psi|^2 entro 1e-12                                          PASSA   2.2e-16
+  S4_s0.99_L81   fine    intero : A 0.88831  B 0.01464  P0 0.03674  Ppi 0.06030 | A@K 0.87749  A@K' 0.00604  A@Gamma 0.00478 | A-basso 0.32484  A-alto 0.54705  A@puntoK 0.01640  tutto@Gamma 1.78e-05 | |k-K| medio in A@K 0.30054
+  S4_s0.99_L81   fine    cuore  : A 0.30088  B 0.00013  P0 0.00154  Ppi 0.00598 | A@K 0.30040  A@K' 0.00044  A@Gamma 0.00003 | A-basso 0.11432  A-alto 0.18399  A@puntoK 0.00256  tutto@Gamma 2.19e-07 | |k-K| medio in A@K 0.44525
+  S4_s0.99_L81   fine    anello : A 0.23853  B 0.00111  P0 0.00837  Ppi 0.02598 | A@K 0.23779  A@K' 0.00058  A@Gamma 0.00016 | A-basso 0.08712  A-alto 0.14589  A@puntoK 0.00552  tutto@Gamma 3.58e-06 | |k-K| medio in A@K 0.32651
+----------------------------------------------------------------------------------------------------------------------------------
+### LA DIVISIONE A-basso / A-alto (per indice di fase) dello STESSO stato iniziale S1 a L 81 e L 120: 0.58292 / 0.33492 contro 0.32565 / 0.63413;
+    se diverse, la divisione per indice dipende dalla griglia in k e NON si legge: si legge il gruppo A intero
+### LO SPETTRO RADIALE di A nella valle K, per anelli di |k - K| larghi un passo della griglia (frazioni di |psi|^2 dello stato intero)
+  S1_s0.30_L81   inizio  cuore  : 0.0147 0.0794 0.1217 0.1386 0.0740 0.0263 0.0046 0.0002 0.0013 0.0019 0.0014 0.0003
+  S1_s0.30_L81   inizio  anello : 0.0244 0.1004 0.0674 0.0078 0.0352 0.0450 0.0136 0.0006 0.0039 0.0032 0.0008 0.0000
+  S1_s0.30_L81   fine    cuore  : 0.0117 0.0628 0.0950 0.1051 0.0535 0.0174 0.0024 0.0002 0.0014 0.0017 0.0011 0.0002
+  S1_s0.30_L81   fine    anello : 0.0476 0.1732 0.0768 0.0151 0.0664 0.0340 0.0024 0.0013 0.0013 0.0007 0.0009 0.0005
+  S1_s0.30_L120  inizio  cuore  : 0.0067 0.0383 0.0679 0.1055 0.0918 0.0688 0.0440 0.0235 0.0098 0.0027 0.0002 0.0004
+  S1_s0.30_L120  inizio  anello : 0.0111 0.0564 0.0722 0.0505 0.0073 0.0061 0.0250 0.0331 0.0232 0.0084 0.0009 0.0014
+  S1_s0.30_L120  fine    cuore  : 0.0056 0.0320 0.0565 0.0871 0.0749 0.0551 0.0345 0.0178 0.0070 0.0017 0.0001 0.0005
+  S1_s0.30_L120  fine    anello : 0.0183 0.0894 0.1029 0.0545 0.0044 0.0194 0.0408 0.0345 0.0145 0.0022 0.0005 0.0015
+  S4_s0.30_L81   inizio  cuore  : 0.0036 0.0209 0.0385 0.0648 0.0636 0.0563 0.0454 0.0336 0.0228 0.0142 0.0093 0.0036
+  S4_s0.30_L81   inizio  anello : 0.0054 0.0299 0.0483 0.0607 0.0369 0.0148 0.0025 0.0006 0.0043 0.0082 0.0113 0.0070
+  S4_s0.30_L81   fine    cuore  : 0.0034 0.0195 0.0359 0.0606 0.0597 0.0531 0.0432 0.0323 0.0222 0.0140 0.0094 0.0037
+  S4_s0.30_L81   fine    anello : 0.0060 0.0332 0.0527 0.0641 0.0368 0.0134 0.0018 0.0010 0.0050 0.0083 0.0103 0.0059
+  S4_s0.30_L120  inizio  cuore  : 0.0016 0.0097 0.0187 0.0345 0.0387 0.0405 0.0401 0.0378 0.0341 0.0296 0.0301 0.0196
+  S4_s0.30_L120  inizio  anello : 0.0025 0.0142 0.0259 0.0422 0.0393 0.0319 0.0223 0.0130 0.0057 0.0014 0.0002 0.0014
+  S4_s0.30_L120  fine    cuore  : 0.0015 0.0090 0.0174 0.0322 0.0361 0.0378 0.0375 0.0354 0.0321 0.0279 0.0286 0.0187
+  S4_s0.30_L120  fine    anello : 0.0028 0.0160 0.0289 0.0464 0.0422 0.0332 0.0222 0.0121 0.0048 0.0009 0.0004 0.0020
+  S4_s0.99_L81   inizio  cuore  : 0.0031 0.0179 0.0333 0.0573 0.0581 0.0535 0.0455 0.0358 0.0261 0.0177 0.0131 0.0059
+  S4_s0.99_L81   inizio  anello : 0.0044 0.0246 0.0414 0.0568 0.0402 0.0212 0.0071 0.0007 0.0008 0.0040 0.0088 0.0078
+  S4_s0.99_L81   fine    cuore  : 0.0026 0.0149 0.0277 0.0473 0.0476 0.0434 0.0365 0.0283 0.0205 0.0137 0.0100 0.0044
+  S4_s0.99_L81   fine    anello : 0.0055 0.0305 0.0494 0.0628 0.0390 0.0166 0.0035 0.0003 0.0029 0.0062 0.0091 0.0061
+----------------------------------------------------------------------------------------------------------------------------------
+### LA DIFFERENZA fine - inizio (frazioni di |psi|^2 dello stato intero)
+  S1_s0.30_L81   intero : A -0.01553  B +0.00402  P0 +0.00606  Ppi +0.00545 | A@K -0.01895  A@K' +0.00213  A@Gamma +0.00129 | A-basso -0.02498  A-alto -0.02115 | |k-K| medio -0.02119
+  S1_s0.30_L81   cuore  : A -0.11166  B +0.00010  P0 -0.00050  Ppi -0.00047 | A@K -0.11176  A@K' +0.00007  A@Gamma +0.00004 | A-basso -0.06216  A-alto -0.04649 | |k-K| medio -0.00408
+  S1_s0.30_L81   anello : A +0.11895  B +0.00090  P0 +0.00438  Ppi +0.00229 | A@K +0.11821  A@K' +0.00044  A@Gamma +0.00031 | A-basso +0.06199  A-alto +0.03382 | |k-K| medio -0.04511
+  S1_s0.30_L120  intero : A -0.01350  B +0.00453  P0 +0.00583  Ppi +0.00314 | A@K -0.01994  A@K' +0.00470  A@Gamma +0.00173 | A-basso -0.01804  A-alto -0.00440 | |k-K| medio -0.01153
+  S1_s0.30_L120  cuore  : A -0.08736  B +0.00008  P0 -0.00108  Ppi -0.00094 | A@K -0.08744  A@K' +0.00005  A@Gamma +0.00003 | A-basso -0.03292  A-alto -0.05334 | |k-K| medio -0.00277
+  S1_s0.30_L120  anello : A +0.08494  B +0.00060  P0 +0.00651  Ppi +0.00209 | A@K +0.08430  A@K' +0.00034  A@Gamma +0.00030 | A-basso +0.02399  A-alto +0.05375 | |k-K| medio -0.03425
+  S4_s0.30_L81   intero : A -0.02027  B +0.00973  P0 +0.00901  Ppi +0.00153 | A@K -0.02204  A@K' +0.00106  A@Gamma +0.00071 | A-basso -0.00818  A-alto -0.01276 | |k-K| medio -0.00721
+  S4_s0.30_L81   cuore  : A -0.01891  B +0.00008  P0 -0.00382  Ppi -0.00386 | A@K -0.01897  A@K' +0.00005  A@Gamma +0.00001 | A-basso -0.00977  A-alto -0.00889 | |k-K| medio +0.00481
+  S4_s0.30_L81   anello : A +0.00782  B +0.00092  P0 +0.00665  Ppi +0.00263 | A@K +0.00753  A@K' +0.00019  A@Gamma +0.00009 | A-basso +0.00533  A-alto +0.00186 | |k-K| medio -0.01627
+  S4_s0.30_L120  intero : A -0.02042  B +0.00963  P0 +0.00953  Ppi +0.00126 | A@K -0.02238  A@K' +0.00121  A@Gamma +0.00075 | A-basso -0.01062  A-alto -0.01018 | |k-K| medio -0.00815
+  S4_s0.30_L120  cuore  : A -0.02177  B +0.00007  P0 -0.00374  Ppi -0.00387 | A@K -0.02184  A@K' +0.00005  A@Gamma +0.00002 | A-basso -0.00899  A-alto -0.01266 | |k-K| medio +0.00342
+  S4_s0.30_L120  anello : A +0.01010  B +0.00085  P0 +0.00681  Ppi +0.00235 | A@K +0.00975  A@K' +0.00025  A@Gamma +0.00010 | A-basso +0.00305  A-alto +0.00673 | |k-K| medio -0.01654
+  S4_s0.99_L81   intero : A -0.09416  B +0.01456  P0 +0.03297  Ppi +0.04663 | A@K -0.10496  A@K' +0.00604  A@Gamma +0.00477 | A-basso -0.03872  A-alto -0.05666 | |k-K| medio -0.02321
+  S4_s0.99_L81   cuore  : A -0.07101  B +0.00002  P0 -0.00113  Ppi -0.00433 | A@K -0.07149  A@K' +0.00044  A@Gamma +0.00003 | A-basso -0.02736  A-alto -0.04315 | |k-K| medio -0.00599
+  S4_s0.99_L81   anello : A +0.00945  B +0.00103  P0 +0.00707  Ppi +0.02063 | A@K +0.00871  A@K' +0.00058  A@Gamma +0.00015 | A-basso +0.00243  A-alto +0.00589 | |k-K| medio -0.03670
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 30/30 controlli passano; DEVE fallite: 0 []

@@ -47,3 +47,24 @@
 
 1. questo file, da solo;
 2. `csv/_dove_va_la_materia.py`, commit; il referto; la RELAZIONE; la MAPPA; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/dove_va_la_materia.txt`; lo script `sha1-BYTE 31870035`, `7a40636f`; `30/30`; le sezioni sopra restano come erano)*
+
+| fine - inizio, frazioni di `|psi|^2` dello stato intero | `S1` `s 0.3` `L 81` | `S1` `s 0.3` `L 120` | `S4` `s 0.3` `L 81` | `S4` `s 0.3` `L 120` | `S4` `s 0.99` `L 81` |
+|---|---|---|---|---|---|
+| cuore, banda `A` | `-0.112` | `-0.087` | `-0.019` | `-0.022` | `-0.071` |
+| anello, banda `A` | `+0.119` | `+0.085` | `+0.008` | `+0.010` | `+0.009` |
+| anello, `|k - K|` medio in `A` | `-0.045` | `-0.034` | `-0.016` | `-0.017` | `-0.037` |
+| intero, banda `A` | `-0.0155` | `-0.0135` | `-0.0203` | `-0.0204` | `-0.0942` |
+| intero, `B` / `P0` / `Ppi` | `+0.0040` / `+0.0061` / `+0.0055` | `+0.0045` / `+0.0058` / `+0.0031` | `+0.0097` / `+0.0090` / `+0.0015` | `+0.0096` / `+0.0095` / `+0.0013` | `+0.0146` / `+0.0330` / `+0.0466` |
+| intero, `A` nella valle `K'` / `Gamma` | `+0.0021` / `+0.0013` | `+0.0047` / `+0.0017` | `+0.0011` / `+0.0007` | `+0.0012` / `+0.0008` | `+0.0060` / `+0.0048` |
+
+| lettura | esito |
+|---|---|
+| (i) la materia persa in `B` o nelle piatte | `S1`: **no** per il cuore *(l'anello: `B` `+0.001`, `P0` `+0.004`, `Ppi` `+0.002`, contro `A` `+0.119`)*; il mescolamento sullo stato intero e' `1.5%`. `S4` `s 0.99`: **si'** *(`P0` `+0.033`, `Ppi` `+0.047`)* |
+| (ii) nella valle `K'` | **no** *(`+0.002`-`+0.005`)* |
+| (iii) in `A`, valle `K`, a `|k - K|` piu' grande | **no**: `|k - K|` medio dell'anello **cala** *(`-0.045`, `-0.034`)* |
+| (iv) altro | `S1`: **la materia che il cuore perde resta nella banda `A`, valle `K`, e va nell'anello a `|k - K|` piu' piccolo** |
+| `S1` contro `S4` a `s 0.3` | il mescolamento fra bande e valli c'e' in tutte e due *(`1.5%` e `2.0%`)*; `S1` ha in piu' il passaggio cuore -> anello nella stessa banda *(`0.112` contro `0.019`)* |
+
+- **La divisione `A-basso` / `A-alto`** per indice di fase dello stesso stato iniziale cambia fra `L 81` e `L 120` *(`0.583` / `0.335` contro `0.326` / `0.634`)*: non si legge; si legge il gruppo `A`.

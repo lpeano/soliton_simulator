@@ -105,3 +105,13 @@ Il congelato vero, il vuoto uniforme, `N 1e7`, `3000` di tempo fisico. I control
 3. **La forma nuova:** la forma "`x^2` a poca materia, saturazione nel cuore" e' gia' `S1`; sulla carta nessun requisito R1-R5 chiede una forma nuova. Si conferma che non si cerca una forma nuova?
 4. **`S4`, la diagnosi:** a `s 0.3` il cuore regge, a `s 0.99` no. Si chiude qui *(R2, R3 contrari)* o serve un'altra diagnosi *(per esempio la stessa `s 0.99` a `L 120`)*?
 5. **La discontinuita' di `S4` a `rho = 0` esatto** *(`2925`-`10764` nodi al tick `0`)*: resta una nota, o va tolta prima di qualunque altra misura con `S4`?
+
+## 9. LE RISPOSTE DI LUCA *(`2026-10-28`, `20:52`)*
+
+| | la risposta |
+|---|---|
+| 1 | la causa dello svuotamento di `S1` si cerca fuori dall'inviluppo: `doc/referti_l2/dove_va_la_materia.txt` |
+| 2 | il 3D di `S1`: non ancora |
+| 3 | nessuna forma nuova |
+| 4 | **la diagnosi di `S4` e' CHIUSA:** a `s 0.3` il cuore regge *(`0.579` -> `0.572`-`0.575`)*, a `s 0.99` no *(`0.622` -> `0.502`)*; R2 e R3 contrari; i suoi stati finali sono il caso di controllo |
+| 5 | la discontinuita' di `S4` a `rho = 0`: una nota |
