@@ -106,3 +106,31 @@ CAMBIATI esatto; le corse lunghe a pezzi (il riavvio notturno della macchina di 
 2. ### **lo script `csv/_solitone_con_la_buca.py`** *(LF, `_presidio.avvia`)*, ### **una prova breve a `L 48`;** ### **lo script committato prima della corsa, con l'inventario;**
 3. ### **le corse a pezzi; il referto; la RELAZIONE, l'indice, la MAPPA nello stesso commit;**
 4. ### **la parte `2` descritta nel referto; la parte `3` solo se la parte `1` trova un oggetto stabile.**
+
+## 2-bis. ANNOTAZIONI DOPO IL PRIMO COMMIT *(il task history non si riscrive: si annota)*
+
+### **`(a)` L'AGGIUNTA DI LUCA DELLE `09:58`** *(2026-10-28; arrivata mentre scrivevo lo script, prima di qualunque corsa: per `PRECEDENZA-IN-CODA` vale l'ultima versione del mandato)*, ### **alla lettera:**
+
+```
+AGGIUNTA AL MANDATO DEL SOLITONE CON LA SUA BUCA (Luca, 2026-10-28 09:58): la rampa principale e'
+una TANH, r(t) = 1/2 [1 + tanh((t - t0)/tau)], con tau = T_r/10 e t0 scelto perche' r(0) = 1e-8
+(dichiaralo; la corsa col tick intero comincia quando r supera 1 - 1e-8). Il sin^2 resta come
+CONFRONTO, agli stessi T_r: se i risultati coincidono, il regime e' adiabatico; se la tanh fa vivere
+di piu' il solitone, il sin^2 lo scuoteva ancora. Riporta per entrambe l'energia iniettata dalla
+rampa (il libro dei conti).
+```
+
+- ### **`t0` DICHIARATO:** ### **`t0 = tau atanh(1 - 2e-8)`, cioe' `9.2103 tau = 0.92103 T_r`:** ### **`23.026`, `92.103`, `368.414` per `T_r` `25`, `100`, `400`** *(`r(0)` = `1e-8` a meno di `5e-17` relativo)*. ### **Per simmetria la rampa finisce a circa `2 t0`:** ### **`614`, `2456`, `9824` tick a `s 0.075`.** ### **`r` si valuta, come per il `sin^2`, al centro del tick;** ### **dal primo tick in cui supera `1 - 1e-8`, `r = 1` esatto.**
+- ### **LA RIGA `1` DELLA TABELLA DELLE SCELTE CAMBIA:** ### **la forma principale e' la tanh; il `sin^2` e' il confronto, agli stessi `T_r`.** ### **Le PUO' FALLIRE `(p1)` e `(p2)` si valutano sulla TANH.** ### **La lettura di Luca** *(coincidono: adiabatico; la tanh vive di piu': il `sin^2` scuoteva)* ### **si riporta come LETTURA, senza soglia:** ### **una soglia per «coincidono» non era nel mandato, e non la scelgo io.**
+- ### **L'ENERGIA INIETTATA DALLA RAMPA:** ### **i conti del libro alla fine della rampa meno quelli a `t = 0`, per pezzo e per regione, in `N |e_K(0)|`** *(il libro misura con l'`H` intero: durante la rampa l'`H` del passo non e' quello)*.
+- ### **IL COSTO:** ### **le corse raddoppiano** *(`2` forme)*: ### **`28` corse, circa `184000` tick per taglia;** ### **la prova: `0.02` s per tick a `L 48`.**
+
+### **`(b)` LA PROVA, PRIMA DI COMMITTARE LO SCRIPT** *(non nel jsonl)*:
+
+- ### **alla taglia piccola, dopo la tanh a `T_r 25`** *(`614` tick di rampa, `10` dopo)*: ### **al centro `Lambda` per estremita' sale a `4.30`, contro `0.97` lontano e `0.88` sul bordo:** ### **una GOBBA, non una buca.** ### **Con la tanh a `T_r 5`** *(la prova della catena)* ### **una buca del `2`-`4%`.** ### **Non lo interpreto: e' una prova.**
+- ### ⚠ **PERCIO' LA LARGHEZZA DELLA BUCA E' CAMBIATA DOPO LA PROVA** *(riga `6` della tabella)*: ### **col deficit negativo il secondo momento non esiste;** ### **ora e' il secondo momento di `|deficit|`.** ### **E' una lettura, non un criterio.**
+- ### **`r = 0` contro il congelato di `76eecbf5`** *(la prova della catena, `40` tick, taglia piccola)*: ### **la distanza massima delle larghezze `4.85e-07`:** ### **NON gli stessi bit** *(la cosa che non sapevo, sezione `1`)*; ### **la `(d2)` resta com'era scritta** *(`phi` fermo al bit, e nessuna rottura se il congelato non si rompe)*.
+
+### **`(c)` LE CORSE IN FILE SEPARATI:** ### **`doc/referti_l2/solitone_con_la_buca/<taglia>_<scena>_<modo>.jsonl`, una riga ciascuno** *(il jsonl del referto e' quella cartella)*: ### **le corse girano in parallelo e a pezzi, e nessuna scrive nel file di un'altra;** ### **un file che c'e' gia' non si riscrive.** ### **I conti per regione ogni `4` controlli della forma** *(`12` di tempo fisico; e a `t = 0`, alla fine della rampa, a `T_MAX`)*; ### **`M` e `V` a ogni controllo** *(`3` di tempo fisico)*.
+
+### **`(d)` IL RIFERIMENTO DI `(k1)`, DICHIARATO** *(Luca, `2026-10-28 10:17`)*: ### **il riferimento e' la corsa `congelato` dello script** *(il tick intero, e `phi` rimesso a `phi0` a fine tick)*, ### **confrontata AL BIT con la serie delle larghezze di `F0 congelato` di `76eecbf5`.** ### **La distanza `4.85e-07` dalla corsa a `r = 0`** *(i pezzi del vuoto spenti, `phi` mai mosso)* ### **e' la differenza fra i due modi di congelare:** ### **dichiarata, non un difetto;** ### **la `(d2)` la riporta come lettura.**
