@@ -21610,3 +21610,24 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### ⭐ **COL CONGELATO VERO FONDO E UNIFORME SONO IDENTICI:** ### **i dati confermano la lettura del codice** *(le fasi di `phi` arrivano a `psi` solo attraverso i pezzi del vuoto dentro il tick)*.
 - ### **IL CONGELATO A FINE TICK, ACCANTO:** ### **a `L 81` la stessa forma, `1.364`-`1.365` a `3000`, lo stesso periodo.**
 - ### **CHE COSA NE SEGUE PER LUCA:** ### **la prova di `S4` in 2D** *(la conseguenza di `(iii)`)* ### **non e' indicata da questi dati;** ### **resta aperto se l'allargamento si fermi oltre `3000`, e quanto dipenda dalla scatola.**
+
+### 📌 **IL CUORE E L'ALONE DEL CONGELATO LUNGO (LUCA, 18:12): `8/8` -- IL CUORE CALA FRENANDO, LA NORMA VA NELL'ANELLO VICINO; "STABILE E IRRADIA" NON REGGE** *([[VUOTO-SUL-FONDO]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/cuore_e_alone.txt` *(lo script `sha1-BYTE a6c16679`, `c0ffea1d`; nessuna corsa nuova; il task history `doc/TASK_HISTORY/2026-10-28_cuore_e_alone.md`)*.
+
+| | `L 81` | `L 120` |
+|---|---|---|
+| (a) cuore `f_win`, da -> a `3000` | `0.586` -> `0.459` | `0.586` -> `0.484` |
+| (a) pendenza del cuore, la piu' ripida -> l'ultima finestra | `-6.9e-5` -> `-1.4e-5` | `-7.3e-5` -> `-9.9e-6` |
+| (a) alone `1 - f_3w0` a `3000` | `0.0112` | `0.0153` |
+| (a) anello fra `w_in` e `3 w0`, a `0` -> media dell'ultima finestra | `0.414` -> `0.535` | `0.414` -> `0.507` |
+| (b) FWHM inizio -> fine | `13.27` -> `15.50` (`x1.17`) | `13.27` -> `14.87` (`x1.12`) |
+| (b) picco per nodo, fine / inizio | `x0.72` | `x0.78` |
+| (d) FWHM: cuore finale / risolutore a `N_c` | `15.50` / `11.27` | `14.87` / `11.47` |
+| (d) picco: cuore finale / risolutore a `N_c` | `x1.06` | `x1.12` |
+| controllo di scala: FWHM e picco, inizio / risolutore a `N = M` | `13.27` / `13.33`; `5088` / `5125` | idem |
+
+- **Esito:** il cuore cala frenando *(`0.586` -> `0.459` di `M` a `3000`; pendenza `-6.9e-5` -> `-1.4e-5`)*; l'alone oltre `3 w0` e' l'`1.1%` *(`1.5%` a `120`)*; la norma va nell'anello fra `w_in` e `3 w0` *(`0.414` -> `0.535`)*; FWHM `x1.17` *(`x1.12`)*, picco `x0.72` *(`x0.78`)*; il cuore finale non e' il solitone del risolutore alla sua norma *(FWHM `11.3` contro `15.5`)*.
+- **La lettura "stabile e irradia" non regge.**
+- **Ritirata** *(Luca, `18:12`)*: la frase di `83daa823` "la deriva lunga non viene dallo stato di partenza".
+- **La prossima mossa sul solitone la decide Luca.**

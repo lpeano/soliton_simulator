@@ -1,0 +1,102 @@
+[TIMBRO] _cuore_e_alone.py  sha1-BYTE a6c16679  committato e pulito
+==================================================================================================================================
+IL CUORE E L'ALONE DEL CONGELATO LUNGO (Luca 18:12, a 40061005): N 1e6, s 0.3, zero simmetrico, S1, cs spento, il congelato vero; nessuna corsa nuova
+==================================================================================================================================
+  la configurazione: SCENA uniforme ANELLO 1 R_PROFILO 30 FINESTRA 500 TOLL_SCALA 0.02; TAGLIE (81, 120), T_MAX 10000
+  LE LETTURE DI LUCA, SCRITTE PRIMA: cuore fermo + alone che cresce + FWHM che resta o cala = STABILE e irradia; cuore che cala senza fermarsi = si svuota; (d): il cuore e' gia' l'oggetto stazionario?
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: L 81, gli stati finali 'uniforme' e 'fondo' identici al byte                                     PASSA   
+### (a) L 81: il cuore = f_win M (entro w_in 6.6297), l'alone = (1 - f_3w0) M (oltre 3 w0 = 19.8010), in frazione di M; 1001 punti
+  tau [     0,    500]: cuore medio 0.56703 (da 0.58583 a 0.55071), pendenza -3.688e-05; alone medio 0.00136 (da 0.00000 a 0.00284), pendenza +6.114e-06; fra w_in e 3 w0 medio 0.43161
+  tau [   500,   1000]: cuore medio 0.53901 (da 0.55654 a 0.51112), pendenza -6.942e-05; alone medio 0.00414 (da 0.00286 a 0.00536), pendenza +5.019e-06; fra w_in e 3 w0 medio 0.45684
+  tau [  1000,   1500]: cuore medio 0.50057 (da 0.51212 a 0.48851), pendenza -5.623e-05; alone medio 0.00629 (da 0.00538 a 0.00709), pendenza +3.655e-06; fra w_in e 3 w0 medio 0.49314
+  tau [  1500,   2000]: cuore medio 0.47982 (da 0.48851 a 0.48014), pendenza -3.874e-05; alone medio 0.00769 (da 0.00709 a 0.00837), pendenza +2.527e-06; fra w_in e 3 w0 medio 0.51249
+  tau [  2000,   2500]: cuore medio 0.46657 (da 0.47285 a 0.45930), pendenza -3.646e-05; alone medio 0.00903 (da 0.00838 a 0.00976), pendenza +2.798e-06; fra w_in e 3 w0 medio 0.52440
+  tau [  2500,   3000]: cuore medio 0.45493 (da 0.45792 a 0.45858), pendenza -1.432e-05; alone medio 0.01045 (da 0.00975 a 0.01120), pendenza +3.029e-06; fra w_in e 3 w0 medio 0.53462
+  DEVE PASSARE: L 81, lo stato finale e' quello del tick 10000 (sha1 = sha_fine del pezzo 08000)                 PASSA   t 10000
+  DEVE PASSARE: L 81, il punto ricalcolato dallo stato finale = l'ultimo punto del jsonl, AL BIT                 PASSA   
+  DEVE PASSARE (scala): L 81, lo stato iniziale contro il risolutore a N = M: FWHM e picco entro 0.02            PASSA   FWHM 13.2652 contro 13.3316; picco 5087.88 contro 5124.83
+### (b) L 81: la FWHM all'inizio 13.2652, alla fine 15.4968 (rapporto 1.1682); il picco per nodo 5087.88 e 3651.08 (rapporto 0.7176); il baricentro finale (+8.23e-02, +6.50e-01)
+### (d) L 81: il cuore finale N_c = 458584.4 (0.45858 M); il risolutore a N_c: LEGATO, larghezza 5.4478 (a N = M: 6.6003), mu +0.297517; la sua frazione entro w_in sul toro 0.76365
+  FWHM: il cuore finale 15.4968, il risolutore a N_c 11.2732 (rapporto 1.3747); il picco per nodo: 3651.08 contro 3451.55 (rapporto 1.0578); rho_centro AREA_NODO del risolutore 3451.53
+### (c) L 81: il profilo radiale medio per anelli [r, r+1): l'inizio, la fine, il risolutore a N = M e a N_c (rho per nodo)
+  r   0: inizio  5.05729e+03   fine  3.61873e+03   ris(M)  5.06941e+03   ris(N_c)  3.39685e+03   fine/inizio  7.155e-01   fine/ris(N_c)  1.065e+00
+  r   1: inizio  4.91617e+03   fine  3.46991e+03   ris(M)  4.92401e+03   ris(N_c)  3.25445e+03   fine/inizio  7.058e-01   fine/ris(N_c)  1.066e+00
+  r   2: inizio  4.62820e+03   fine  3.32696e+03   ris(M)  4.64518e+03   ris(N_c)  2.99469e+03   fine/inizio  7.188e-01   fine/ris(N_c)  1.111e+00
+  r   3: inizio  4.22523e+03   fine  3.15622e+03   ris(M)  4.25110e+03   ris(N_c)  2.63976e+03   fine/inizio  7.470e-01   fine/ris(N_c)  1.196e+00
+  r   4: inizio  3.73721e+03   fine  2.89507e+03   ris(M)  3.77923e+03   ris(N_c)  2.21111e+03   fine/inizio  7.747e-01   fine/ris(N_c)  1.309e+00
+  r   5: inizio  3.18998e+03   fine  2.58102e+03   ris(M)  3.27372e+03   ris(N_c)  1.76597e+03   fine/inizio  8.091e-01   fine/ris(N_c)  1.462e+00
+  r   6: inizio  2.60531e+03   fine  2.23585e+03   ris(M)  2.63921e+03   ris(N_c)  1.27142e+03   fine/inizio  8.582e-01   fine/ris(N_c)  1.759e+00
+  r   7: inizio  2.02723e+03   fine  1.89132e+03   ris(M)  2.00898e+03   ris(N_c)  8.10054e+02   fine/inizio  9.330e-01   fine/ris(N_c)  2.335e+00
+  r   8: inizio  1.48979e+03   fine  1.56140e+03   ris(M)  1.47093e+03   ris(N_c)  4.48439e+02   fine/inizio  1.048e+00   fine/ris(N_c)  3.482e+00
+  r   9: inizio  1.00958e+03   fine  1.22035e+03   ris(M)  1.01450e+03   ris(N_c)  2.11599e+02   fine/inizio  1.209e+00   fine/ris(N_c)  5.767e+00
+  r  10: inizio  6.19366e+02   fine  9.15584e+02   ris(M)  6.32354e+02   ris(N_c)  6.66516e+01   fine/inizio  1.478e+00   fine/ris(N_c)  1.374e+01
+  r  11: inizio  3.25494e+02   fine  6.37542e+02   ris(M)  3.44041e+02   ris(N_c)  6.81281e+00   fine/inizio  1.959e+00   fine/ris(N_c)  9.358e+01
+  r  12: inizio  1.27485e+02   fine  3.94761e+02   ris(M)  1.38416e+02   ris(N_c)  1.04885e-01   fine/inizio  3.097e+00   fine/ris(N_c)  3.764e+03
+  r  13: inizio  2.78228e+01   fine  2.54492e+02   ris(M)  2.72661e+01   ris(N_c)  1.13451e-03   fine/inizio  9.147e+00   fine/ris(N_c)  2.243e+05
+  r  14: inizio  1.95835e+00   fine  1.49022e+02   ris(M)  8.24139e-01   ris(N_c)  9.40467e-06   fine/inizio  7.610e+01   fine/ris(N_c)  1.585e+07
+  r  15: inizio  2.94113e-02   fine  7.18881e+01   ris(M)  6.55318e-03   ris(N_c)  7.02671e-08   fine/inizio  2.444e+03   fine/ris(N_c)  1.023e+09
+  r  16: inizio  3.24825e-04   fine  2.52023e+01   ris(M)  7.06124e-05   ris(N_c)  8.17695e-10   fine/inizio  7.759e+04   fine/ris(N_c)  3.082e+10
+  r  17: inizio  3.36279e-06   fine  7.63088e+00   ris(M)  8.99652e-07   ris(N_c)  1.04779e-11   fine/inizio  2.269e+06   fine/ris(N_c)  7.283e+11
+  r  18: inizio  3.54473e-08   fine  4.44100e+00   ris(M)  1.08096e-08   ris(N_c)  1.26639e-13   fine/inizio  1.253e+08   fine/ris(N_c)  3.507e+13
+  r  19: inizio  4.10221e-10   fine  3.28709e+00   ris(M)  1.10569e-10   ris(N_c)  1.30289e-15   fine/inizio  8.013e+09   fine/ris(N_c)  2.523e+15
+  r  20: inizio  3.91044e-12   fine  2.68938e+00   ris(M)  8.45706e-13   ris(N_c)  1.00281e-17   fine/inizio  6.877e+11   fine/ris(N_c)  2.682e+17
+  r  21: inizio  3.60790e-14   fine  2.55384e+00   ris(M)  9.19529e-15   ris(N_c)  1.09670e-19   fine/inizio  7.078e+13   fine/ris(N_c)  2.329e+19
+  r  22: inizio  3.83622e-16   fine  2.08655e+00   ris(M)  7.95689e-17   ris(N_c)  9.54997e-22   fine/inizio  5.439e+15   fine/ris(N_c)  2.185e+21
+  r  23: inizio  3.93456e-18   fine  2.28791e+00   ris(M)  9.21995e-19   ris(N_c)  1.11325e-23   fine/inizio  5.815e+17   fine/ris(N_c)  2.055e+23
+  r  24: inizio  4.46812e-20   fine  2.20745e+00   ris(M)  1.04359e-20   ris(N_c)  1.26747e-25   fine/inizio  4.940e+19   fine/ris(N_c)  1.742e+25
+  r  25: inizio  4.93169e-22   fine  2.10947e+00   ris(M)  1.06032e-22   ris(N_c)  1.29566e-27   fine/inizio  4.277e+21   fine/ris(N_c)  1.628e+27
+  r  26: inizio  5.16973e-24   fine  2.27789e+00   ris(M)  1.15775e-24   ris(N_c)  1.42284e-29   fine/inizio  4.406e+23   fine/ris(N_c)  1.601e+29
+  r  27: inizio  4.70141e-26   fine  2.17312e+00   ris(M)  9.63038e-27   ris(N_c)  1.19104e-31   fine/inizio  4.622e+25   fine/ris(N_c)  1.825e+31
+  r  28: inizio  5.09185e-28   fine  2.11285e+00   ris(M)  1.09483e-28   ris(N_c)  1.36191e-33   fine/inizio  4.149e+27   fine/ris(N_c)  1.551e+33
+  r  29: inizio  5.46015e-30   fine  2.05993e+00   ris(M)  1.02963e-30   ris(N_c)  1.28886e-35   fine/inizio  3.773e+29   fine/ris(N_c)  1.598e+35
+  r  30: inizio  6.07744e-32   fine  2.04990e+00   ris(M)  1.24961e-32   ris(N_c)  1.57346e-37   fine/inizio  3.373e+31   fine/ris(N_c)  1.303e+37
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: L 120, gli stati finali 'uniforme' e 'fondo' identici al byte                                    PASSA   
+### (a) L 120: il cuore = f_win M (entro w_in 6.6297), l'alone = (1 - f_3w0) M (oltre 3 w0 = 19.8010), in frazione di M; 1001 punti
+  tau [     0,    500]: cuore medio 0.56919 (da 0.58583 a 0.55270), pendenza -2.702e-05; alone medio 0.00149 (da 0.00000 a 0.00313), pendenza +6.736e-06; fra w_in e 3 w0 medio 0.42932
+  tau [   500,   1000]: cuore medio 0.55215 (da 0.55853 a 0.54340), pendenza -4.700e-05; alone medio 0.00482 (da 0.00315 a 0.00631), pendenza +6.475e-06; fra w_in e 3 w0 medio 0.44302
+  tau [  1000,   1500]: cuore medio 0.53107 (da 0.54358 a 0.51355), pendenza -7.301e-05; alone medio 0.00796 (da 0.00632 a 0.00958), pendenza +6.494e-06; fra w_in e 3 w0 medio 0.46097
+  tau [  1500,   2000]: cuore medio 0.50494 (da 0.51355 a 0.50102), pendenza -3.279e-05; alone medio 0.01095 (da 0.00958 a 0.01197), pendenza +4.735e-06; fra w_in e 3 w0 medio 0.48411
+  tau [  2000,   2500]: cuore medio 0.48967 (da 0.49693 a 0.48443), pendenza -2.404e-05; alone medio 0.01281 (da 0.01196 a 0.01365), pendenza +3.299e-06; fra w_in e 3 w0 medio 0.49751
+  tau [  2500,   3000]: cuore medio 0.47893 (da 0.48825 a 0.48356), pendenza -9.895e-06; alone medio 0.01449 (da 0.01365 a 0.01529), pendenza +3.446e-06; fra w_in e 3 w0 medio 0.50658
+  DEVE PASSARE: L 120, lo stato finale e' quello del tick 10000 (sha1 = sha_fine del pezzo 08000)                PASSA   t 10000
+  DEVE PASSARE: L 120, il punto ricalcolato dallo stato finale = l'ultimo punto del jsonl, AL BIT                PASSA   
+  DEVE PASSARE (scala): L 120, lo stato iniziale contro il risolutore a N = M: FWHM e picco entro 0.02           PASSA   FWHM 13.2652 contro 13.3671; picco 5087.88 contro 5124.83
+### (b) L 120: la FWHM all'inizio 13.2652, alla fine 14.8697 (rapporto 1.1210); il picco per nodo 5087.88 e 3982.86 (rapporto 0.7828); il baricentro finale (+2.61e-01, +5.58e-01)
+### (d) L 120: il cuore finale N_c = 483556.0 (0.48356 M); il risolutore a N_c: LEGATO, larghezza 5.5192 (a N = M: 6.6003), mu +0.297581; la sua frazione entro w_in sul toro 0.75298
+  FWHM: il cuore finale 14.8697, il risolutore a N_c 11.4686 (rapporto 1.2966); il picco per nodo: 3982.86 contro 3545.73 (rapporto 1.1233); rho_centro AREA_NODO del risolutore 3545.71
+### (c) L 120: il profilo radiale medio per anelli [r, r+1): l'inizio, la fine, il risolutore a N = M e a N_c (rho per nodo)
+  r   0: inizio  5.05729e+03   fine  3.87636e+03   ris(M)  5.06941e+03   ris(N_c)  3.49706e+03   fine/inizio  7.665e-01   fine/ris(N_c)  1.108e+00
+  r   1: inizio  4.91617e+03   fine  3.79726e+03   ris(M)  4.92401e+03   ris(N_c)  3.35094e+03   fine/inizio  7.724e-01   fine/ris(N_c)  1.133e+00
+  r   2: inizio  4.62820e+03   fine  3.61761e+03   ris(M)  4.63645e+03   ris(N_c)  3.06711e+03   fine/inizio  7.816e-01   fine/ris(N_c)  1.179e+00
+  r   3: inizio  4.22523e+03   fine  3.33955e+03   ris(M)  4.25022e+03   ris(N_c)  2.71433e+03   fine/inizio  7.904e-01   fine/ris(N_c)  1.230e+00
+  r   4: inizio  3.73721e+03   fine  3.03539e+03   ris(M)  3.78776e+03   ris(N_c)  2.29203e+03   fine/inizio  8.122e-01   fine/ris(N_c)  1.324e+00
+  r   5: inizio  3.18998e+03   fine  2.68764e+03   ris(M)  3.27372e+03   ris(N_c)  1.86655e+03   fine/inizio  8.425e-01   fine/ris(N_c)  1.440e+00
+  r   6: inizio  2.60531e+03   fine  2.31492e+03   ris(M)  2.65044e+03   ris(N_c)  1.36279e+03   fine/inizio  8.885e-01   fine/ris(N_c)  1.699e+00
+  r   7: inizio  2.02723e+03   fine  1.91192e+03   ris(M)  2.01988e+03   ris(N_c)  8.71848e+02   fine/inizio  9.431e-01   fine/ris(N_c)  2.193e+00
+  r   8: inizio  1.48979e+03   fine  1.54002e+03   ris(M)  1.46341e+03   ris(N_c)  4.92894e+02   fine/inizio  1.034e+00   fine/ris(N_c)  3.124e+00
+  r   9: inizio  1.00958e+03   fine  1.17898e+03   ris(M)  1.00439e+03   ris(N_c)  2.47301e+02   fine/inizio  1.168e+00   fine/ris(N_c)  4.767e+00
+  r  10: inizio  6.19366e+02   fine  8.54093e+02   ris(M)  6.22531e+02   ris(N_c)  8.41692e+01   fine/inizio  1.379e+00   fine/ris(N_c)  1.015e+01
+  r  11: inizio  3.25494e+02   fine  5.70023e+02   ris(M)  3.36108e+02   ris(N_c)  1.12474e+01   fine/inizio  1.751e+00   fine/ris(N_c)  5.068e+01
+  r  12: inizio  1.27485e+02   fine  3.38656e+02   ris(M)  1.35124e+02   ris(N_c)  2.17217e-01   fine/inizio  2.656e+00   fine/ris(N_c)  1.559e+03
+  r  13: inizio  2.78228e+01   fine  1.91962e+02   ris(M)  2.56237e+01   ris(N_c)  2.38522e-03   fine/inizio  6.899e+00   fine/ris(N_c)  8.048e+04
+  r  14: inizio  1.95835e+00   fine  1.08874e+02   ris(M)  7.11257e-01   ris(N_c)  1.90480e-05   fine/inizio  5.559e+01   fine/ris(N_c)  5.716e+06
+  r  15: inizio  2.94113e-02   fine  3.69859e+01   ris(M)  6.15850e-03   ris(N_c)  1.42243e-07   fine/inizio  1.258e+03   fine/ris(N_c)  2.600e+08
+  r  16: inizio  3.24825e-04   fine  9.44375e+00   ris(M)  7.21732e-05   ris(N_c)  1.65452e-09   fine/inizio  2.907e+04   fine/ris(N_c)  5.708e+09
+  r  17: inizio  3.36279e-06   fine  3.35546e+00   ris(M)  8.73332e-07   ris(N_c)  2.11902e-11   fine/inizio  9.978e+05   fine/ris(N_c)  1.583e+11
+  r  18: inizio  3.54473e-08   fine  2.24981e+00   ris(M)  1.05530e-08   ris(N_c)  2.55990e-13   fine/inizio  6.347e+07   fine/ris(N_c)  8.789e+12
+  r  19: inizio  4.10221e-10   fine  1.47587e+00   ris(M)  1.07971e-10   ris(N_c)  2.63242e-15   fine/inizio  3.598e+09   fine/ris(N_c)  5.607e+14
+  r  20: inizio  3.91044e-12   fine  1.29639e+00   ris(M)  7.98258e-13   ris(N_c)  2.02520e-17   fine/inizio  3.315e+11   fine/ris(N_c)  6.401e+16
+  r  21: inizio  3.60790e-14   fine  1.18934e+00   ris(M)  8.86494e-15   ris(N_c)  2.21373e-19   fine/inizio  3.297e+13   fine/ris(N_c)  5.373e+18
+  r  22: inizio  3.83622e-16   fine  1.30509e+00   ris(M)  7.86101e-17   ris(N_c)  1.92674e-21   fine/inizio  3.402e+15   fine/ris(N_c)  6.774e+20
+  r  23: inizio  3.93456e-18   fine  1.22258e+00   ris(M)  8.85783e-19   ris(N_c)  2.24490e-23   fine/inizio  3.107e+17   fine/ris(N_c)  5.446e+22
+  r  24: inizio  4.46812e-20   fine  1.19706e+00   ris(M)  1.04359e-20   ris(N_c)  2.55463e-25   fine/inizio  2.679e+19   fine/ris(N_c)  4.686e+24
+  r  25: inizio  4.93169e-22   fine  1.15042e+00   ris(M)  1.03867e-22   ris(N_c)  2.61012e-27   fine/inizio  2.333e+21   fine/ris(N_c)  4.408e+26
+  r  26: inizio  5.16973e-24   fine  1.12801e+00   ris(M)  1.10710e-24   ris(N_c)  2.86505e-29   fine/inizio  2.182e+23   fine/ris(N_c)  3.937e+28
+  r  27: inizio  4.70141e-26   fine  1.21705e+00   ris(M)  9.99335e-27   ris(N_c)  2.39704e-31   fine/inizio  2.589e+25   fine/ris(N_c)  5.077e+30
+  r  28: inizio  5.09185e-28   fine  1.21994e+00   ris(M)  1.10488e-28   ris(N_c)  2.73970e-33   fine/inizio  2.396e+27   fine/ris(N_c)  4.453e+32
+  r  29: inizio  5.46015e-30   fine  1.26557e+00   ris(M)  1.07717e-30   ris(N_c)  2.59135e-35   fine/inizio  2.318e+29   fine/ris(N_c)  4.884e+34
+  r  30: inizio  6.07744e-32   fine  1.24548e+00   ris(M)  1.28624e-32   ris(N_c)  3.16204e-37   fine/inizio  2.049e+31   fine/ris(N_c)  3.939e+36
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 8/8 controlli passano; DEVE fallite: 0 []

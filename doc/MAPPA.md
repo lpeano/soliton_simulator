@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`; la domanda sulla gobba del vuoto in attesa, `10:40`; il referto del solitone con la sua buca)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`; la domanda sulla gobba del vuoto in attesa, `10:40`; il referto del solitone con la sua buca; sera: il congelato lungo, il cuore e l'alone)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -25,6 +25,7 @@
 | 14 | ### **la carica `sigma_z` a due segni, conservata a `eps 0`** | `8dea8c95` |
 | 15 | ### **lo strumento del libro dei conti conta giusto** *(i conti di `15df5c63` a `1e-16`; la strada `A`)* | `4f6a4bd7` |
 | 16 | ### **dal vuoto del FONDO il vuoto prende energia dalla materia** *(il verso si rovescia; a `s 0.075`)* | `76eecbf5` |
+| 17 | ### **col congelato vero fondo e uniforme identici: la materia sente il vuoto solo attraverso Lambda** | `40061005` |
 
 ## 2. CHE COSA NON FUNZIONA ANCORA, E PERCHE'
 
@@ -55,7 +56,7 @@
 | 1 | ### **il cono di luce emergente** | [[DOMANDA-CONO-EMERGENTE]] *(`ceba2925`)* |
 | 2 | ### **la torsione come quanto d'azione; la mitosi dove gli orologi differiscono** | `doc/PROGETTO_MITOSI.md` 3(a); ### **in forma d'energia col `cs` spento** *(`80dc4d4a`)*: ### **il ritmo massimo sul bordo della buca, nessun freno;** ### **col `cs` acceso BLOCCATA** *([[PUNTO-FISSO-CS-SOLITONE]])* |
 | 3 | ### **la materia accoppiata alla luce** | `doc/PROGETTO_U1.md`; [[PROGETTO-MASSA-COLLETTIVA]] *(l'ordine dei lavori)* |
-| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`)*: ### **la rampa non ha dato un oggetto stabile;** ### **contro il congelato, col fondo, la vita relativa `1584`-`2867` tick per `T_r` `25` e `100`** *(`rilettura_buca.txt`)*; ### **la deriva del congelato e' INTRINSECA, non dello stato di partenza** *(lo stazionario del passo entro `3e-06`: `deriva_congelato.txt`)*; ### **il congelato lungo** *(`s 0.3`, `3000`; `congelato_lungo.txt`)*: ### **non scappa; respira** *(periodo `11.1`)* ### **e si allarga sempre piu' piano, senza plateau a `3000`; la scatola conta** |
+| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`)*: ### **la rampa non ha dato un oggetto stabile;** ### **contro il congelato, col fondo, la vita relativa `1584`-`2867` tick per `T_r` `25` e `100`** *(`rilettura_buca.txt`)*; ### **lo stato del risolutore e' lo stazionario del passo entro `3e-06`** *(`deriva_congelato.txt`; la frase "la deriva non viene dallo stato di partenza" ritirata, Luca `18:12`)*; ### **il congelato lungo** *(`s 0.3`, `3000`; `congelato_lungo.txt`)*: ### **il congelato vero non scappa, ma il cuore si svuota lentamente nell'anello vicino, frenando, senza fermarsi a `3000`** *(`cuore_e_alone.txt`)*; ### **respira** *(periodo `11.1`)*; ### **la scatola conta** |
 | 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **CHIUSA come canale di gravita'** *(Luca, `2026-10-28` `08:31`)*: ### **l'additivo a bande opposte, il proporzionale e' un altro modo di scrivere `cs`** *(`43c3a298`, [[ZERO-DEL-VUOTO]])* |
 | 6 | ### **i nodi ciascuno al proprio ritmo** | -- |
 | 7 | ### **due solitoni che si attraggono attraverso il vuoto** | -- |

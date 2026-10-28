@@ -62,3 +62,25 @@ si svuota; (d) dice se il cuore e' gia' l'oggetto stazionario. Nessuna corsa nuo
 2. `csv/_cuore_e_alone.py`, commit e push prima di girarlo; l'INVENTARIO;
 3. `--referto > doc/referti_l2/cuore_e_alone.txt`; la regola di forma in `doc/PATTERN_DI_PROVA.md`; la RELAZIONE; la MAPPA
    *(riga `4` della sezione `4`, riga nuova della sezione `1`)*; commit e push.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/cuore_e_alone.txt`; lo script `sha1-BYTE a6c16679`, `c0ffea1d`; controlli `8/8`)*
+
+| | `L 81` | `L 120` |
+|---|---|---|
+| (a) cuore `f_win`, da -> a `3000` | `0.586` -> `0.459` | `0.586` -> `0.484` |
+| (a) pendenza del cuore, la piu' ripida -> l'ultima finestra | `-6.9e-5` -> `-1.4e-5` | `-7.3e-5` -> `-9.9e-6` |
+| (a) alone `1 - f_3w0` a `3000` | `0.0112` | `0.0153` |
+| (a) anello fra `w_in` e `3 w0`, a `0` -> media dell'ultima finestra | `0.414` -> `0.535` | `0.414` -> `0.507` |
+| (b) FWHM inizio -> fine | `13.27` -> `15.50` (`x1.17`) | `13.27` -> `14.87` (`x1.12`) |
+| (b) picco per nodo, fine / inizio | `x0.72` | `x0.78` |
+| (d) FWHM: cuore finale / risolutore a `N_c` | `15.50` / `11.27` | `14.87` / `11.47` |
+| (d) picco: cuore finale / risolutore a `N_c` | `x1.06` | `x1.12` |
+| controllo di scala: FWHM e picco, inizio / risolutore a `N = M` | `13.27` / `13.33`; `5088` / `5125` | idem |
+
+| lettura | esito |
+|---|---|
+| cuore fermo + alone che cresce + FWHM che resta o cala: stabile e irradia | **NO**: la FWHM cresce; l'alone e' l'`1.1%`-`1.5%` |
+| cuore che cala senza fermarsi: si svuota | **il cuore cala, frenando; a `3000` non si e' fermato** |
+| (d) il cuore e' gia' l'oggetto stazionario | **NO**: FWHM `x1.37` (`x1.30`) del risolutore a `N_c` |
+
+Limite: lo stato finale e' un'istantanea; ampiezza del respiro `0.02`-`0.04` in `w/w_in`.
