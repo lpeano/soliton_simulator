@@ -104,6 +104,13 @@ def misura(s):
     phi0 = z["st"]["phi_h"].copy()
     w0 = rec["larghezza"]
     psi0 = z["st"]["psi_h"].copy()
+    # ### l'onda piana a K: gli stessi pezzi, SENZA il legame; uniforme, norma N.
+    # ### COSTRUITA FUORI DA BE.conv: dentro, coppia_K trova i gruppi [2, 4, 2] e l'assert ferma tutto (f2c646e3)
+    zo = nuovo(rec, "fondo")
+    cel = zo["Q"][None, :] * np.exp(2j * np.pi * (zo["m1"] + zo["m2"]) / 3.0)[:, None]
+    cel *= math.sqrt(N / float(np.sum(np.abs(cel) ** 2)))
+    zo["st"]["psi_h"][...] = cel.reshape(zo["st"]["psi_h"].shape)
+    po = zo["st"]["psi_h"].copy()
     out = {"s": s, "L": z["L"], "mu": rec["mu"], "verdetto": rec["verdetto"], "w0": w0}
     with SF.forma(VC.FORMA), BE.conv(ZERO):
         w_in, _f, rho0, _l = forma(z, w0)
@@ -131,12 +138,6 @@ def misura(s):
         media = float(p @ R[dentro])
         out.update({"w_in": w_in, "rot_centro": float(np.mean(rot_c)), "rot_centro_dev": float(np.std(rot_c)), "rot_pesata": media,
                     "rot_dispersione": float(math.sqrt(p @ (R[dentro] - media) ** 2)), "rot_min_max": (float(R[dentro].min()), float(R[dentro].max())), "profilo": prof, "t_eq": t_eq})
-        # ### l'onda piana a K: gli stessi pezzi, SENZA il legame; uniforme, norma N
-        zo = nuovo(rec, "fondo")
-        cel = zo["Q"][None, :] * np.exp(2j * np.pi * (zo["m1"] + zo["m2"]) / 3.0)[:, None]
-        cel *= math.sqrt(N / float(np.sum(np.abs(cel) ** 2)))
-        zo["st"]["psi_h"][...] = cel.reshape(zo["st"]["psi_h"].shape)
-        po = zo["st"]["psi_h"].copy()
         ac = ampiezze(zo)
         ro = []
         for _t in range(TICK_ONDA):
