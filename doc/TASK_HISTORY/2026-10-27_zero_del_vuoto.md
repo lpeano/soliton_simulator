@@ -55,3 +55,14 @@
 - ### **`(H)` LA CADUTA DA UN GRADIENTE DI `cs`, il riferimento: universale entro l'`1.1%`** *(`4.15e-5`, `4.17e-5`, `4.20e-5`, `4.11e-5`)*.
 - ### **CHE COSA VUOL DIRE** *(una lettura)*: ### **uno spostamento dello zero ADDITIVO e' un potenziale uguale per tutti: accelera secondo la massa efficace della banda, e le due bande in versi opposti;** ### **non puo' essere il canale della gravita' universale.** ### **Lo spostamento PROPORZIONALE all'energia e' un tempo locale: si avvicina alla caduta da `cs`, ma non la eguaglia** *(il `6%` contro l'`1%`)*. ### **L'universalita' che fisso' `lambda* = 1/2`:** ### **non e' toccata da questa misura** *(lo zero qui e' imposto, non mosso dalla nascita)*.
 - ### **LA MAPPA** *(nello stesso commit)*: ### **la coda: lo zero FATTO col FERMO; poi il solitone con la sua buca.**
+
+## 5. LA CHIUSURA (Luca, 2026-10-28 08:31)
+
+- ### **LA DEVE `(0)` CORRETTA DOPO I NUMERI** *(Luca, `2026-10-28` `08:31`; come per la torsione in fase, `11410186`)*: ### **«al bit» diventa «entro `1e-12` relativo».** ### **Rivalutata sul jsonl** *(`doc/referti_l2/zero_del_vuoto_c0.txt`, `csv/_zero_del_vuoto_c0.py` `sha1-BYTE 80bbb052`; le scale dichiarate: il massimo di `rho_k` e di `|phi_h|` dello stato iniziale, entrambi `1`)*: ### **`3.186e-14` e `1.643e-14` relativo: PASSA.** ### **L'esito dopo la correzione: `1/3`, nessuna DEVE fallita** *(le due PUO' FALLIRE `(2)` e `(3)` restano fallite)*.
+- ### ⛔ **LA CHIUSURA DELL'IPOTESI** *(Luca, `08:31`)*: ### **lo spostamento dello zero del vuoto come «canale di gravita'» SI CHIUDE.**
+  - ### **`(a)` lo spostamento ADDITIVO** *(tutti i pezzi)* ### **NON e' gravita':** ### **le due bande accelerano in versi opposti** *(`-1.80e-4` / `+1.79e-4`)*, ### **come una particella e un'antiparticella in un potenziale elettrico.** ### **Annotato in [[DOMANDA-BANDA-ANTIMATERIA]]:** ### **per un potenziale additivo le due bande si comportano gia' come cariche opposte** *(una lettura, NON una misura della carica)*.
+  - ### **`(b)` lo spostamento del SOLO vuoto non spinge la materia** *(`~2.5e-10`)*.
+  - ### **`(c)` lo spostamento PROPORZIONALE all'energia e' quasi universale** *(`6.1%`, la differenza dipende da `eps`)* ### **ma meno della caduta da `cs`** *(`1.1%`)*: ### **equivale a un ritmo del tempo locale, cioe' a un altro modo di scrivere `cs`, meno pulito.** ### **Il canale della gravita' resta `cs`.**
+  - ### **`(d)` il `delta` che servirebbe:** ### **`0.113 lambda*` per la nascita `v1`, `4.8e-4 lambda*` per `v3`.**
+- ### ❓ **RESTA APERTA** *(in `doc/PROGETTO_MITOSI.md` 3(c))*: ### **«dove va l'energia della nascita»,** ### **con la nota che il vuoto del FONDO prende energia dalla materia** *(`76eecbf5`)* ### **e che li' va riprovata.**
+- ### **La voce [[ZERO-DEL-VUOTO]] e' CHIUSA** *(il criterio: la decisione di Luca delle `08:31` su `43c3a298`)*; ### **la mappa aggiornata nello stesso commit;** ### **il prossimo in coda: il solitone con la sua buca** *(`22:59`)*.

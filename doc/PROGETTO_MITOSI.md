@@ -91,6 +91,8 @@
 - ### **«L'energia liberata dalla nascita di un nodo sposta lo zero del vuoto uniforme».**
 - ### **Il perche'** *(`d999cca7`, `f7ee87a9`)*: ### **la nascita libera energia** *(`v1` `-8.548`, la migliore `v3` `-0.045`)* ### **e il vuoto uniforme, al massimo della sua forma** *(`787296da`)*, ### **non la puo' assorbire come disordine** *(ogni disordine lo abbassa: un sistema a «temperatura negativa»)*; ### **lo spostamento dello zero e' un altro canale.**
 - ### **La prova che decide: l'UNIVERSALITA'** *(un profilo locale dello zero fa cadere allo stesso modo le due bande e i due `eps`?)*. ### **In coda** *(la mappa, sezione `6`)*.
+- ### ⛔ **L'IPOTESI SI CHIUDE come canale di gravita'** *(la decisione di Luca del `2026-10-28`, `08:31`, su `43c3a298`; [[ZERO-DEL-VUOTO]])*: ### **l'additivo manda le due bande in versi opposti** *(`-1.80e-4` / `+1.79e-4`: come cariche opposte in un potenziale elettrico)*; ### **il solo vuoto non spinge** *(`~2.5e-10`)*; ### **il proporzionale e' quasi universale** *(`6.1%`, dipende da `eps`)* ### **ma meno della caduta da `cs`** *(`1.1%`)*: ### **un ritmo del tempo locale, un altro modo di scrivere `cs`. Il canale della gravita' resta `cs`.** ### **Il `delta` che servirebbe: `0.113 lambda*` per `v1`, `4.8e-4` per `v3`.**
+- ### ❓ **RESTA APERTA: dove va l'energia della nascita.** ### **Il vuoto del FONDO prende energia dalla materia** *(`76eecbf5`)*: ### **li' la nascita va riprovata.**
 
 ### 3(d) IL PROFILO CHE LA GRAVITA' CHIEDE
 

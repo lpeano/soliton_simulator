@@ -8331,8 +8331,7 @@
    "VUOTO-DA-SOLO",
    "VUOTO-DISTURBATO",
    "VUOTO-LOCALE-DETERMINISTICO",
-   "VUOTO-SUL-FONDO",
-   "ZERO-DEL-VUOTO"
+   "VUOTO-SUL-FONDO"
   ],
   "APERTA": [
    "A1",
@@ -8720,7 +8719,8 @@
    "Z96",
    "Z97",
    "Z98",
-   "Z99"
+   "Z99",
+   "ZERO-DEL-VUOTO"
   ],
   "DA_CLASSIFICARE": [
    "A2b",

@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-27`, sera *(`(c-iii)` chiusa)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -31,7 +31,7 @@
 | | il fatto | il perche', per quanto si sa | il commit |
 |---|---|---|---|
 | 1 | ### **il solitone si scioglie col tick intero** *(vive `320` tick a `N 1e6`)* | ### **il vuoto gli cede energia;** ### **il verso regge, la spartizione si fida da `s 0.075`** | `15df5c63`, `abd5a809`, `99eb7a42` |
-| 2 | ### **la nascita libera energia che il vuoto uniforme non prende** | ### **il vuoto uniforme e' al massimo** | `d999cca7`, `f7ee87a9` |
+| 2 | ### **la nascita libera energia che il vuoto uniforme non prende** | ### **il vuoto uniforme e' al massimo;** ### **lo spostamento dello zero NON e' il canale** *(chiuso, Luca `08:31`)*; ### **dove va resta aperto: da riprovare dal vuoto del fondo** *(`76eecbf5`)* | `d999cca7`, `f7ee87a9`, `43c3a298` |
 | 3 | ### **il vuoto uniforme e' il MASSIMO del generatore** | ### **per la FORMA** *(`-pi` per due proiettori)*; ### **il fondo a `-2 pi` e' un flusso, torsione `pi`** | `787296da` |
 | 4 | ### **`v_b` della materia = `pi/4` della luce** | ### **una violazione di Lorentz a bassa energia della materia NUDA** | `b0edae62`, `afba052b` |
 | 5 | ### **la particella elementare pesa quanto la grana** | -- | `25cada4e` |
@@ -56,11 +56,11 @@
 | 2 | ### **la torsione come quanto d'azione; la mitosi dove gli orologi differiscono** | `doc/PROGETTO_MITOSI.md` 3(a); ### **in forma d'energia col `cs` spento** *(`80dc4d4a`)*: ### **il ritmo massimo sul bordo della buca, nessun freno;** ### **col `cs` acceso BLOCCATA** *([[PUNTO-FISSO-CS-SOLITONE]])* |
 | 3 | ### **la materia accoppiata alla luce** | `doc/PROGETTO_U1.md`; [[PROGETTO-MASSA-COLLETTIVA]] *(l'ordine dei lavori)* |
 | 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`): in coda* |
-| 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **MISURATO** *(la sezione `6`): l'additivo non universale, il proporzionale entro il `6%`* |
+| 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **CHIUSA come canale di gravita'** *(Luca, `2026-10-28` `08:31`)*: ### **l'additivo a bande opposte, il proporzionale e' un altro modo di scrivere `cs`** *(`43c3a298`, [[ZERO-DEL-VUOTO]])* |
 | 6 | ### **i nodi ciascuno al proprio ritmo** | -- |
 | 7 | ### **due solitoni che si attraggono attraverso il vuoto** | -- |
 | 8 | ### **la nascita in un vuoto a somma nulla per nodo** | `doc/PROGETTO_MITOSI.md` 3(c) |
-| 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]] |
+| 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]]; ### **la lettura delle `08:31`: per un potenziale additivo le due bande gia' come cariche opposte** *(una lettura, non una misura; `43c3a298`)* |
 | 10 | ### **la valle come carica** *(e il momento angolare modulo `6`)* | [[DOMANDA-VALLE-CARICA]] |
 
 ## 5. LE DECISIONI APERTE DI LUCA *(con la raccomandazione del guardiano)*
@@ -80,8 +80,8 @@
 | | il lavoro | lo stato |
 |---|---|---|
 | 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(`76eecbf5`)* |
-| 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **FATTO, `0/3`, FERMO:** ### **la DEVE `(0)` per arrotondamento; l'additivo NON universale** *(`43c3a298`)* |
-| 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **in coda, dopo lo zero** |
+| 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **CHIUSO:** ### **la DEVE `(0)` entro `1e-12` relativo, `1/3`** *(Luca `08:31`; il commit di `zero_del_vuoto_c0.txt`)*; ### **l'ipotesi come canale di gravita' chiusa** *(`43c3a298`)* |
+| 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **IL PROSSIMO** |
 
 ## 7. GLI ERRORI DEL GUARDIANO, DAL `n.54`
 
