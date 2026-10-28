@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 178 |
+| `FISICA` | `2` | 179 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -316,6 +316,7 @@
 | `DOMANDA-FLUSSO-SENZA-AZIONE` | DECISIONE | METODO | 2 | ### **AGENDA** |  | un flusso non dichiara dove agisce: lo schema non ha il campo azione per lui |
 | `DOMANDA-FORME-VUOTO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiam |
 | `DOMANDA-FUSIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la FUSIONE di due nodi: si vieta, e con che cosa? |
+| `DOMANDA-GOBBA-SEGNO-GRAVITA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la gobba del vuoto e il segno della gravita: la massa sul fondo fa un pozzo o un |
 | `DOMANDA-GRAFO-INIZIALE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il grafo iniziale SENZA pos: reticolo, k-regolare, espansore? |
 | `DOMANDA-GRANDEZZA-LOCALE-TEMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | da dove viene la grandezza locale da cui escono r_k e cs_k? |
 | `DOMANDA-GUSCIO-E-INTERFERENZA` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio? |

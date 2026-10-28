@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`; la domanda sulla gobba del vuoto in attesa, `10:40`)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -55,7 +55,7 @@
 | 1 | ### **il cono di luce emergente** | [[DOMANDA-CONO-EMERGENTE]] *(`ceba2925`)* |
 | 2 | ### **la torsione come quanto d'azione; la mitosi dove gli orologi differiscono** | `doc/PROGETTO_MITOSI.md` 3(a); ### **in forma d'energia col `cs` spento** *(`80dc4d4a`)*: ### **il ritmo massimo sul bordo della buca, nessun freno;** ### **col `cs` acceso BLOCCATA** *([[PUNTO-FISSO-CS-SOLITONE]])* |
 | 3 | ### **la materia accoppiata alla luce** | `doc/PROGETTO_U1.md`; [[PROGETTO-MASSA-COLLETTIVA]] *(l'ordine dei lavori)* |
-| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`): in coda* |
+| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`)*: ### **IN CORSO** *(lo script `327e5ad8`; le corse della rampa girano)* |
 | 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **CHIUSA come canale di gravita'** *(Luca, `2026-10-28` `08:31`)*: ### **l'additivo a bande opposte, il proporzionale e' un altro modo di scrivere `cs`** *(`43c3a298`, [[ZERO-DEL-VUOTO]])* |
 | 6 | ### **i nodi ciascuno al proprio ritmo** | -- |
 | 7 | ### **due solitoni che si attraggono attraverso il vuoto** | -- |
@@ -63,6 +63,7 @@
 | 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]]; ### **la lettura delle `08:31`: per un potenziale additivo le due bande gia' come cariche opposte** *(una lettura, non una misura; `43c3a298`)* |
 | 10 | ### **la valle come carica** *(e il momento angolare modulo `6`)* | [[DOMANDA-VALLE-CARICA]] |
 | 11 | ### **la chiralita': quale grandezza del modello e'?** *(la moneta di spin, le due componenti che il salto a `K` mescola, le valli `K`/`K'`)* | [[DOMANDA-CHIRALITA]] *(Luca, `2026-10-28` `08:52`; `doc/TASK_HISTORY/2026-10-28_chiralita.md`)*; ### **si apre insieme alle due domande sulla carica** |
+| 12 | ### **la gobba del vuoto e il segno della gravita':** ### **sul fondo la massa fa un pozzo o una collina di `cs`, e la materia di prova cade verso la massa o se ne allontana?** *(una lettura della prova breve, non una misura: `Lambda` `4.30` al centro contro `0.97` lontano)* | [[DOMANDA-GOBBA-SEGNO-GRAVITA]] *(Luca, `2026-10-28` `10:40`; `doc/TASK_HISTORY/2026-10-28_gobba_segno_gravita.md`)*; ### **si apre dopo il referto della rampa e dopo [[PUNTO-FISSO-CS-SOLITONE]]** |
 
 ## 5. LE DECISIONI APERTE DI LUCA *(con la raccomandazione del guardiano)*
 
