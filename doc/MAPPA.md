@@ -3,7 +3,7 @@
 > ### **LA FONTE DELLO STATO DEL LAVORO** *(la decisione di Luca del `2026-10-27`, `21:41`; [[MAPPA-DEL-LAVORO]])*: ### **il guardiano non ha memoria fra le sessioni, quindi lo stato sta QUI, nel repo.**
 > ### **LA REGOLA DI MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga che lo riguarda, NELLO STESSO COMMIT** *(nei FILE CAMBIATI)*; ### **la regola sta in `doc/PATTERN_DI_PROVA.md`.**
 > ### **LA REGOLA DI LAVORO** *(`2026-10-27`)*: ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3`)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
-> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`; la domanda sulla gobba del vuoto in attesa, `10:40`)*.
+> ### **Aggiornata al:** `2026-10-28`, mattina *(lo zero del vuoto chiuso; la domanda sulla chiralita' in attesa; la bussola, sezione `6`; la domanda sulla gobba del vuoto in attesa, `10:40`; il referto del solitone con la sua buca)*.
 
 ## 1. CHE COSA FUNZIONA, MISURATO
 
@@ -55,7 +55,7 @@
 | 1 | ### **il cono di luce emergente** | [[DOMANDA-CONO-EMERGENTE]] *(`ceba2925`)* |
 | 2 | ### **la torsione come quanto d'azione; la mitosi dove gli orologi differiscono** | `doc/PROGETTO_MITOSI.md` 3(a); ### **in forma d'energia col `cs` spento** *(`80dc4d4a`)*: ### **il ritmo massimo sul bordo della buca, nessun freno;** ### **col `cs` acceso BLOCCATA** *([[PUNTO-FISSO-CS-SOLITONE]])* |
 | 3 | ### **la materia accoppiata alla luce** | `doc/PROGETTO_U1.md`; [[PROGETTO-MASSA-COLLETTIVA]] *(l'ordine dei lavori)* |
-| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`)*: ### **IN CORSO** *(lo script `327e5ad8`; le corse della rampa girano)* |
+| 4 | ### **il solitone con la sua buca** | ### **PROMOSSO** *(Luca, `22:59`)*: ### **FATTO `4/6`:** ### **la rampa non basta, la vita decresce con `T_r`** *(`doc/referti_l2/solitone_con_la_buca.txt`)*; ### **la parte `2` descritta, in attesa di decisione** |
 | 5 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`)* | ### **CHIUSA come canale di gravita'** *(Luca, `2026-10-28` `08:31`)*: ### **l'additivo a bande opposte, il proporzionale e' un altro modo di scrivere `cs`** *(`43c3a298`, [[ZERO-DEL-VUOTO]])* |
 | 6 | ### **i nodi ciascuno al proprio ritmo** | -- |
 | 7 | ### **due solitoni che si attraggono attraverso il vuoto** | -- |
@@ -63,7 +63,7 @@
 | 9 | ### **la banda di sotto come antimateria** | [[DOMANDA-BANDA-ANTIMATERIA]]; ### **la lettura delle `08:31`: per un potenziale additivo le due bande gia' come cariche opposte** *(una lettura, non una misura; `43c3a298`)* |
 | 10 | ### **la valle come carica** *(e il momento angolare modulo `6`)* | [[DOMANDA-VALLE-CARICA]] |
 | 11 | ### **la chiralita': quale grandezza del modello e'?** *(la moneta di spin, le due componenti che il salto a `K` mescola, le valli `K`/`K'`)* | [[DOMANDA-CHIRALITA]] *(Luca, `2026-10-28` `08:52`; `doc/TASK_HISTORY/2026-10-28_chiralita.md`)*; ### **si apre insieme alle due domande sulla carica** |
-| 12 | ### **la gobba del vuoto e il segno della gravita':** ### **sul fondo la massa fa un pozzo o una collina di `cs`, e la materia di prova cade verso la massa o se ne allontana?** *(una lettura della prova breve, non una misura: `Lambda` `4.30` al centro contro `0.97` lontano)* | [[DOMANDA-GOBBA-SEGNO-GRAVITA]] *(Luca, `2026-10-28` `10:40`; `doc/TASK_HISTORY/2026-10-28_gobba_segno_gravita.md`)*; ### **si apre dopo il referto della rampa e dopo [[PUNTO-FISSO-CS-SOLITONE]]** |
+| 12 | ### **la gobba del vuoto e il segno della gravita':** ### **sul fondo la massa fa un pozzo o una collina di `cs`, e la materia di prova cade verso la massa o se ne allontana?** *(una lettura della prova breve, non una misura: `Lambda` `4.30` al centro contro `0.97` lontano)* | [[DOMANDA-GOBBA-SEGNO-GRAVITA]] *(Luca, `2026-10-28` `10:40`; `doc/TASK_HISTORY/2026-10-28_gobba_segno_gravita.md`)*; ### **si apre dopo il referto della rampa e dopo [[PUNTO-FISSO-CS-SOLITONE]]**; ### **la misura `(1)` dal referto della rampa: alla grande la gobba resta fino a `T_MAX`** |
 
 ## 5. LE DECISIONI APERTE DI LUCA *(con la raccomandazione del guardiano)*
 
@@ -90,7 +90,7 @@
 | 2 | ### **la gravita' come «lo spazio dice alla materia come muoversi»:** ### **la caduta da `cs`; il cono per luce e materia** | ### **la sezione `1`, righe `3`, `6`, `7`;** `e48e7414` |
 | 3 | ### **l'energia e i suoi bilanci** | [[LIBRO-DEI-CONTI]] *(`4f6a4bd7`)* |
 | 4 | ### **il vuoto e la sua posizione nello spettro** *(in cima o sul fondo)* | `787296da`, `76eecbf5` |
-| 5 | ### **la massa come legame; l'oggetto collettivo** *(il solitone con la sua buca, in coda)* | `0fb93b8c`; [[PROGETTO-MASSA-COLLETTIVA]] |
+| 5 | ### **la massa come legame; l'oggetto collettivo** *(il solitone con la sua buca: la rampa non basta, `4/6`)* | `0fb93b8c`; [[PROGETTO-MASSA-COLLETTIVA]] |
 | 6 | ### **la carica, la chiralita', il cono di luce unico** | ### **la lista in attesa** *(righe `1`, `9`, `10`, `11`)* |
 
 ### `(B)` CIO' CHE SAPPIAMO MANCARE *(solo i titoli)*
@@ -118,7 +118,7 @@
 |---|---|---|
 | 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(`76eecbf5`)* |
 | 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **CHIUSO:** ### **la DEVE `(0)` entro `1e-12` relativo, `1/3`** *(Luca `08:31`; il commit di `zero_del_vuoto_c0.txt`)*; ### **l'ipotesi come canale di gravita' chiusa** *(`43c3a298`)* |
-| 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **IL PROSSIMO** |
+| 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **FATTO: `4/6`** *(`doc/referti_l2/solitone_con_la_buca.txt`)*: ### **i DEVE passano; `(p1)` e `(p2)` falliscono; la parte `2` attende Luca** |
 
 ## 8. GLI ERRORI DEL GUARDIANO, DAL `n.54`
 

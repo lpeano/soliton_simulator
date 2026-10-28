@@ -1,0 +1,14 @@
+[TIMBRO] _nan_e_leg.py  sha1-BYTE b987467e  committato e pulito
+==============================================================================================================
+LA CAUSA DEL NaN IN E_leg: lo stato di _solitone_con_la_buca.prepara (SC.stato_uniforme, poi SC.parti), alle due taglie
+==============================================================================================================
+### grande: 6561 nodi; nello stato di costruzione Lambda = 0 su 6561 nodi (max 0.000e+00), rho minimo 1.000000e+00;
+    lam * F1(rho / lam) non finito su 6561 nodi; E_leg = nan; E_mat = -3.091793751761e+04; e_K = E_mat / M = -4.712381880447e+00
+    gli avvisi: ['divide by zero encountered in divide', 'invalid value encountered in multiply']
+    lo stato delle corse a t = 0, vuoto fondo   : Lambda minimo 6.000000e+00, nodi a zero 0
+    lo stato delle corse a t = 0, vuoto uniforme: Lambda minimo 6.000000e+00, nodi a zero 0
+### piccola: 2304 nodi; nello stato di costruzione Lambda = 0 su 2304 nodi (max 0.000e+00), rho minimo 1.000000e+00;
+    lam * F1(rho / lam) non finito su 2304 nodi; E_leg = nan; E_mat = -1.085732785255e+04; e_K = E_mat / M = -4.712381880447e+00
+    gli avvisi: ['divide by zero encountered in divide', 'invalid value encountered in multiply']
+    lo stato delle corse a t = 0, vuoto fondo   : Lambda minimo 6.000000e+00, nodi a zero 0
+    lo stato delle corse a t = 0, vuoto uniforme: Lambda minimo 6.000000e+00, nodi a zero 0
