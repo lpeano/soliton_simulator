@@ -1,0 +1,74 @@
+[TIMBRO] _congelato_lungo.py  sha1-BYTE 7ee652b4  committato e pulito
+==================================================================================================================================
+IL CONGELATO LUNGO (Luca 15:49, punto 2; il congelato VERO, i pezzi del vuoto saltati: Luca 16:15): N 1e6, s 0.3, zero simmetrico, S1, cs spento; L (81, 120); il vuoto ('uniforme', 'fondo'); 10000 tick (3000 di tempo fisico), un punto ogni 10 tick
+==================================================================================================================================
+  la configurazione: S 0.3 TAGLIE (81, 120) SCENE ('uniforme', 'fondo') T_MAX 10000 PEZZO 2000 OGNI 10 FINESTRA 500 TICK_KP 40 TOLL_NORMA 1e-10
+  LA LETTURA DI LUCA, SCRITTA PRIMA: (i) un plateau: il solitone esiste; (ii) oscilla con periodo e ampiezza che restano: esiste e respira; (iii) scappa (la crescita accelera o il picco crolla): l'instabilita' del 2D
+  DEVE PASSARE (kp): 40 tick di fila = due meta' con lo stato salvato e ricaricato, AL BIT                       PASSA   
+  DEVE PASSARE (k74): L 81, il vuoto uniforme: le larghezze ogni 20 tick fino a 2000 = 74f99039 simm congelato A PASSA   101 tick comuni su 101
+  DEVE PASSARE (k74): L 120, il vuoto uniforme: le larghezze ogni 20 tick fino a 2000 = 74f99039 simm congelato  PASSA   101 tick comuni su 101
+  DEVE PASSARE (n): M entro 1e-10 relativo in ogni corsa                                                         PASSA   {'81 uniforme': '9.6e-12', '81 fondo': '9.6e-12', '120 uniforme': '9.6e-12', '120 fondo': '9.6e-12'}
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CONGELATO VERO (i pezzi del vuoto saltati, phi rimesso a fine tick)
+### L 81, il vuoto uniforme: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 829 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.10062, pendenza +1.624e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.714e-02; picco relativo medio 0.94889 (min 0.88675); frazione entro w_in relativa media 0.96790 (min 0.94005)
+  tau [   500,   1000]: w/w_in da 1.09286 a 1.17276, pendenza +1.463e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.990e-02; picco relativo medio 0.88246 (min 0.81823); frazione entro w_in relativa media 0.92008 (min 0.86902)
+  tau [  1000,   1500]: w/w_in da 1.17117 a 1.22426, pendenza +1.218e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.496e-02; picco relativo medio 0.81126 (min 0.75885); frazione entro w_in relativa media 0.85446 (min 0.82665)
+  tau [  1500,   2000]: w/w_in da 1.22426 a 1.26136, pendenza +1.042e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.275e-02; picco relativo medio 0.76207 (min 0.71958); frazione entro w_in relativa media 0.81904 (min 0.79481)
+  tau [  2000,   2500]: w/w_in da 1.26869 a 1.30525, pendenza +7.262e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.955e-02; picco relativo medio 0.72955 (min 0.69511); frazione entro w_in relativa media 0.79642 (min 0.76862)
+  tau [  2500,   3000]: w/w_in da 1.30883 a 1.32774, pendenza +5.571e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.489e-02; picco relativo medio 0.71076 (min 0.67562); frazione entro w_in relativa media 0.77655 (min 0.75422)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 11.1 di tempo fisico (la frequenza 8.9820e-02), ampiezza (max - min) 4.092e-02
+### L 81, il vuoto fondo: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 835 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.10062, pendenza +1.624e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.714e-02; picco relativo medio 0.94889 (min 0.88675); frazione entro w_in relativa media 0.96790 (min 0.94005)
+  tau [   500,   1000]: w/w_in da 1.09286 a 1.17276, pendenza +1.463e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.990e-02; picco relativo medio 0.88246 (min 0.81823); frazione entro w_in relativa media 0.92008 (min 0.86902)
+  tau [  1000,   1500]: w/w_in da 1.17117 a 1.22426, pendenza +1.218e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.496e-02; picco relativo medio 0.81126 (min 0.75885); frazione entro w_in relativa media 0.85446 (min 0.82665)
+  tau [  1500,   2000]: w/w_in da 1.22426 a 1.26136, pendenza +1.042e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.275e-02; picco relativo medio 0.76207 (min 0.71958); frazione entro w_in relativa media 0.81904 (min 0.79481)
+  tau [  2000,   2500]: w/w_in da 1.26869 a 1.30525, pendenza +7.262e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.955e-02; picco relativo medio 0.72955 (min 0.69511); frazione entro w_in relativa media 0.79642 (min 0.76862)
+  tau [  2500,   3000]: w/w_in da 1.30883 a 1.32774, pendenza +5.571e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.489e-02; picco relativo medio 0.71076 (min 0.67562); frazione entro w_in relativa media 0.77655 (min 0.75422)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 11.1 di tempo fisico (la frequenza 8.9820e-02), ampiezza (max - min) 4.092e-02
+### L 120, il vuoto uniforme: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 1610 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.13747, pendenza +2.439e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.096e-02; picco relativo medio 0.95531 (min 0.88867); frazione entro w_in relativa media 0.97160 (min 0.94337)
+  tau [   500,   1000]: w/w_in da 1.12965 a 1.23055, pendenza +2.236e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.677e-02; picco relativo medio 0.91184 (min 0.87787); frazione entro w_in relativa media 0.94251 (min 0.91732)
+  tau [  1000,   1500]: w/w_in da 1.22992 a 1.32877, pendenza +1.931e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.480e-02; picco relativo medio 0.86415 (min 0.82312); frazione entro w_in relativa media 0.90652 (min 0.87415)
+  tau [  1500,   2000]: w/w_in da 1.32877 a 1.39515, pendenza +1.556e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.623e-02; picco relativo medio 0.81349 (min 0.77843); frazione entro w_in relativa media 0.86193 (min 0.83705)
+  tau [  2000,   2500]: w/w_in da 1.39937 a 1.45077, pendenza +9.611e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.913e-02; picco relativo medio 0.77959 (min 0.74753); frazione entro w_in relativa media 0.83586 (min 0.81460)
+  tau [  2500,   3000]: w/w_in da 1.44773 a 1.49207, pendenza +8.300e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.938e-02; picco relativo medio 0.76075 (min 0.71955); frazione entro w_in relativa media 0.81752 (min 0.79419)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 1503.0 di tempo fisico (la frequenza 6.6534e-04), ampiezza (max - min) 4.189e-02
+### L 120, il vuoto fondo: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 1614 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.13747, pendenza +2.439e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.096e-02; picco relativo medio 0.95531 (min 0.88867); frazione entro w_in relativa media 0.97160 (min 0.94337)
+  tau [   500,   1000]: w/w_in da 1.12965 a 1.23055, pendenza +2.236e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.677e-02; picco relativo medio 0.91184 (min 0.87787); frazione entro w_in relativa media 0.94251 (min 0.91732)
+  tau [  1000,   1500]: w/w_in da 1.22992 a 1.32877, pendenza +1.931e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.480e-02; picco relativo medio 0.86415 (min 0.82312); frazione entro w_in relativa media 0.90652 (min 0.87415)
+  tau [  1500,   2000]: w/w_in da 1.32877 a 1.39515, pendenza +1.556e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.623e-02; picco relativo medio 0.81349 (min 0.77843); frazione entro w_in relativa media 0.86193 (min 0.83705)
+  tau [  2000,   2500]: w/w_in da 1.39937 a 1.45077, pendenza +9.611e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.913e-02; picco relativo medio 0.77959 (min 0.74753); frazione entro w_in relativa media 0.83586 (min 0.81460)
+  tau [  2500,   3000]: w/w_in da 1.44773 a 1.49207, pendenza +8.300e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.938e-02; picco relativo medio 0.76075 (min 0.71955); frazione entro w_in relativa media 0.81752 (min 0.79419)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 1503.0 di tempo fisico (la frequenza 6.6534e-04), ampiezza (max - min) 4.189e-02
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CONGELATO A FINE TICK (i pezzi del vuoto girano, phi rimesso a fine tick; lo script di 8dddef5a, fermato alle 16:15)
+### L 81, il vuoto uniforme: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 1519 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.11978, pendenza +1.868e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.462e-02; picco relativo medio 0.93831 (min 0.86182); frazione entro w_in relativa media 0.95630 (min 0.91123)
+  tau [   500,   1000]: w/w_in da 1.11174 a 1.20065, pendenza +1.812e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.794e-02; picco relativo medio 0.84800 (min 0.78540); frazione entro w_in relativa media 0.89155 (min 0.84948)
+  tau [  1000,   1500]: w/w_in da 1.19667 a 1.25940, pendenza +1.365e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.010e-02; picco relativo medio 0.78277 (min 0.72194); frazione entro w_in relativa media 0.83714 (min 0.80539)
+  tau [  1500,   2000]: w/w_in da 1.25940 a 1.29053, pendenza +9.782e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.508e-02; picco relativo medio 0.73779 (min 0.69197); frazione entro w_in relativa media 0.79824 (min 0.77404)
+  tau [  2000,   2500]: w/w_in da 1.29885 a 1.33696, pendenza +9.062e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.221e-02; picco relativo medio 0.70039 (min 0.66330); frazione entro w_in relativa media 0.76040 (min 0.73782)
+  tau [  2500,   3000]: w/w_in da 1.34417 a 1.36355, pendenza +5.989e-05 per unita' di tempo fisico, ampiezza tolta la retta 1.991e-02; picco relativo medio 0.68074 (min 0.65372); frazione entro w_in relativa media 0.74498 (min 0.72839)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 11.1 di tempo fisico (la frequenza 8.9820e-02), ampiezza (max - min) 3.216e-02
+### L 81, il vuoto fondo: 5 pezzi, fino al tick 10000 (tempo fisico 3000); w_in 6.6297, mu +0.298310; 1513 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.08297, pendenza +1.318e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.469e-02; picco relativo medio 0.96483 (min 0.91721); frazione entro w_in relativa media 0.97781 (min 0.95462)
+  tau [   500,   1000]: w/w_in da 1.07533 a 1.15529, pendenza +1.460e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.685e-02; picco relativo medio 0.90894 (min 0.85982); frazione entro w_in relativa media 0.93714 (min 0.88306)
+  tau [  1000,   1500]: w/w_in da 1.15529 a 1.22128, pendenza +1.301e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.839e-02; picco relativo medio 0.82557 (min 0.76282); frazione entro w_in relativa media 0.87945 (min 0.84728)
+  tau [  1500,   2000]: w/w_in da 1.22128 a 1.26779, pendenza +1.287e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.167e-02; picco relativo medio 0.76307 (min 0.70353); frazione entro w_in relativa media 0.83244 (min 0.78433)
+  tau [  2000,   2500]: w/w_in da 1.27422 a 1.32296, pendenza +9.851e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.120e-02; picco relativo medio 0.70511 (min 0.67154); frazione entro w_in relativa media 0.76815 (min 0.74144)
+  tau [  2500,   3000]: w/w_in da 1.32473 a 1.36548, pendenza +7.397e-05 per unita' di tempo fisico, ampiezza tolta la retta 2.125e-02; picco relativo medio 0.66786 (min 0.63978); frazione entro w_in relativa media 0.73367 (min 0.71616)
+  la seconda meta' (tau >= 1500) tolta la retta: il periodo dominante 11.1 di tempo fisico (la frequenza 8.9820e-02), ampiezza (max - min) 3.070e-02
+### L 120, il vuoto uniforme: 2 pezzi, fino al tick 4000 (tempo fisico 1200); w_in 6.6297, mu +0.298310; 1493 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.15172, pendenza +2.566e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.901e-02; picco relativo medio 0.94316 (min 0.87806); frazione entro w_in relativa media 0.96074 (min 0.92413)
+  tau [   500,   1000]: w/w_in da 1.14537 a 1.24042, pendenza +1.791e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.542e-02; picco relativo medio 0.88695 (min 0.84374); frazione entro w_in relativa media 0.92819 (min 0.89575)
+  tau [  1000,   1500]: w/w_in da 1.23939 a 1.29841, pendenza +2.983e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.508e-02; picco relativo medio 0.86071 (min 0.81204); frazione entro w_in relativa media 0.90439 (min 0.86967)
+  la seconda meta' (tau >= 600) tolta la retta: il periodo dominante 11.2 di tempo fisico (la frequenza 8.9552e-02), ampiezza (max - min) 3.077e-02
+### L 120, il vuoto fondo: 2 pezzi, fino al tick 4000 (tempo fisico 1200); w_in 6.6297, mu +0.298310; 1494 s
+  tau [     0,    500]: w/w_in da 1.00000 a 1.12212, pendenza +2.323e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.222e-02; picco relativo medio 0.96500 (min 0.92239); frazione entro w_in relativa media 0.97941 (min 0.95577)
+  tau [   500,   1000]: w/w_in da 1.11470 a 1.21964, pendenza +2.072e-04 per unita' di tempo fisico, ampiezza tolta la retta 3.013e-02; picco relativo medio 0.92879 (min 0.88511); frazione entro w_in relativa media 0.95588 (min 0.92851)
+  tau [  1000,   1500]: w/w_in da 1.22063 a 1.25678, pendenza +1.729e-04 per unita' di tempo fisico, ampiezza tolta la retta 2.184e-02; picco relativo medio 0.90070 (min 0.87211); frazione entro w_in relativa media 0.93396 (min 0.91890)
+  la seconda meta' (tau >= 600) tolta la retta: il periodo dominante 11.2 di tempo fisico (la frequenza 8.9552e-02), ampiezza (max - min) 2.823e-02
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

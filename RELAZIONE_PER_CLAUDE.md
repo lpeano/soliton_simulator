@@ -21599,3 +21599,14 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - ### **LO SCRIPT CORRETTO** *(`sha1-BYTE 7ee652b4`)*: ### **`avanza` con `VC.salta_di("congelato")`;** ### **`(kp)` rifatto prima delle corse.**
 - ### ⛔ **UNA SECONDA CORREZIONE MIA:** ### **in `f2c646e3` ho scritto che `(k2)` falliva per la SCENA** *(uniforme contro fondo)*; ### **ma `_code_o_cuore` usava il congelato a fine tick e `74f99039` quello vero:** ### **le definizioni erano diverse, e da `(k2)` non si separa quanto pesi l'una e quanto l'altra.** ### **Le misure di `code_o_cuore.txt` e `deriva_congelato.txt` sono col congelato a fine tick** *(lo stesso della buca e di `76eecbf5`)*: ### **fra loro confrontabili, con `74f99039` no.** ### **Annotata nel task history della rilettura, `(e)`.**
 - ### ⚠ **«La correzione delle `15:56`» citata da Luca non mi e' arrivata:** ### **lo dichiaro.**
+
+
+### 📌 **IL REFERTO DEL CONGELATO LUNGO (LUCA, 15:49): `4/4` -- NON SCAPPA: IL SOLITONE RESPIRA (PERIODO `11.1`) E SI ALLARGA SEMPRE PIU' PIANO, SENZA PLATEAU A `3000`; LA SCATOLA CONTA; COL CONGELATO VERO FONDO E UNIFORME IDENTICI** *([[VUOTO-SUL-FONDO]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- ### **IL REFERTO:** `doc/referti_l2/congelato_lungo.txt` *(lo script `sha1-BYTE 7ee652b4`, `ef576b3f`; i dati in `doc/referti_l2/congelato_lungo/`; quelli a fine tick in `congelato_lungo_fine_tick/`)*.
+- ### **I DEVE `4/4`:** ### **i pezzi al bit; `74f99039` ridato al bit a `L 81` e `120`; `M` entro `9.6e-12`.**
+- ### **LA FORMA:** ### **la pendenza di `w/w_in` per finestre di `500` decresce in modo monotono** *(`L 81` da `1.62e-4` a `0.56e-4`; `L 120` da `2.44e-4` a `0.83e-4`)*; ### **a `3000` `1.328` e `1.492`.** ### **Il picco cala** *(da `0.95` a `0.71`, `L 81`)* ### **e il calo rallenta.** ### **A `L 81` un periodo di `11.1` di tempo fisico, ampiezza `0.02`-`0.04`, che resta.**
+- ### **LA LETTURA** *(mia, senza soglie)*: ### **NON `(iii)`; fra `(i)` e `(ii)`:** ### **respira e si allarga sempre piu' piano;** ### **non un plateau entro `3000`.** ### **La scatola conta:** ### **a `L 120` piu' largo.**
+- ### ⭐ **COL CONGELATO VERO FONDO E UNIFORME SONO IDENTICI:** ### **i dati confermano la lettura del codice** *(le fasi di `phi` arrivano a `psi` solo attraverso i pezzi del vuoto dentro il tick)*.
+- ### **IL CONGELATO A FINE TICK, ACCANTO:** ### **a `L 81` la stessa forma, `1.364`-`1.365` a `3000`, lo stesso periodo.**
+- ### **CHE COSA NE SEGUE PER LUCA:** ### **la prova di `S4` in 2D** *(la conseguenza di `(iii)`)* ### **non e' indicata da questi dati;** ### **resta aperto se l'allargamento si fermi oltre `3000`, e quanto dipenda dalla scatola.**
