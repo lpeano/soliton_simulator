@@ -50,3 +50,16 @@ Un'esplorazione *(non salvata)*: a `L 81` il residuo per tick `|T psi - lambda p
 
 1. questo file, da solo;
 2. `csv/_stato_fermo.py`, commit; `--cerca 81`, `--cerca 120`; `--pezzo` (5 volte); `--referto`; RELAZIONE; MAPPA; commit.
+
+## 6. ANNOTAZIONE PRIMA DELLO SCRIPT *(le sezioni sopra restano come erano)*
+
+| prova nello scratchpad *(non committata; i numeri li rifa' lo script)* | esito |
+|---|---|
+| Newton, GMRES senza precondizionatore, `30` passi | il residuo cala lento; GMRES non arriva alla sua tolleranza in nessun passo |
+| lo stesso, GMRES piu' largo *(`restart 200`)* | GMRES ristagna |
+| il precondizionatore `(A(k) - lambda)^{-1}` del tick libero *(`9aa268c8`)* | i primi passi rapidi; poi ristagna |
+| il precondizionatore e la differenza centrata per `J v` | lo stesso pavimento: non e' la differenza finita |
+
+- **Tutte le varianti si fermano fra `2e-6` e `6e-6`**, con `mu` fermo alla settima cifra; il criterio `1e-9` non si raggiunge.
+- **Lo script usa la variante col precondizionatore e la differenza centrata**, `30` passi, lo stesso criterio.
+- **Se il criterio non si raggiunge:** il confronto del punto `2` si fa sullo stato QUASI FERMO, dichiarato come tale; **la corsa del punto `3` non parte** *(`--pezzo` lo rifiuta)*: evolvere uno stato non fermo e' una decisione di Luca.
