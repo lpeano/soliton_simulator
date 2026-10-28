@@ -169,7 +169,7 @@ esatti **non** si usa `git checkout`: si usa `git cat-file -p <commit>:<path>`, 
 
 **Tre sezioni, in `doc/TASK_HISTORY/<AAAA-MM-GG>_<slug>.md`:**
 
-1. **RAGIONAMENTO PRELIMINARE** — *cosa credo prima di guardare*, e **cosa NON so**.
+1. **LE PREMESSE DAL CODICE** *(decisione di Luca, 2026-10-28)* — *cosa credo prima di guardare*, e **cosa NON so**.
    ### **Non si riscrive quando si rivela sbagliato: si ANNOTA.**
 2. **PROGETTAZIONE DEL RAGIONAMENTO** — i passi, **cosa decide ciascuno**, e **cosa mi
    farebbe FERMARE**. ### **Le letture si fissano QUI, prima di vedere i numeri.**

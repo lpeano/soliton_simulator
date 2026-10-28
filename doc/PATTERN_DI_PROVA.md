@@ -149,6 +149,10 @@ fonderle mescola due presidi)* e **`P4` dentro `P1-sexies`** *(la fusione che Lu
 - ### **LA MANUTENZIONE:** ### **ogni commit che chiude un referto o registra una decisione aggiorna la riga della mappa che lo riguarda, NELLO STESSO COMMIT** *(e `doc/MAPPA.md` sta nei FILE CAMBIATI)*.
 - ### **LE DOMANDE IN ATTESA:** ### **niente domande nuove in esecuzione finche' non arrivano le risposte che decidono la direzione** *(la sezione `3` della mappa)*; ### **le idee nuove vanno nella LISTA IN ATTESA** *(la sezione `4`)*, ### **non in coda.**
 
+## LA FORMA DEI TASK HISTORY E DEI REFERTI *(decisione di Luca, 2026-10-28)*
+
+I titoli dei task history e dei referti sono: LE PREMESSE DAL CODICE, I CRITERI, LE LETTURE, LE MOTIVAZIONI, TODO. Il contenuto e' fatti, numeri, criteri e decisioni.
+
 ---
 
 ## IN PROVA
