@@ -74,3 +74,23 @@ RISPOSTA DI LUCA (2026-10-28 14:27) A 58791831 (IL SOLITONE CON LA SUA BUCA), su
 1. ### **questo task history, committato e pushato da solo;**
 2. ### **i due script e le voci d'inventario, committati prima di girarli;**
 3. ### **le corse brevi; i due referti; la RELAZIONE; la MAPPA** *(la riga `12` come misura; la riga `4`: «la rampa non ha dato un oggetto stabile; la lettura in corso»)*.
+
+
+## 2-bis. ANNOTAZIONI *(il task history non si riscrive: si annota)*
+
+### **`(a)` IL RILIEVO DI LUCA DOPO LE `14:27`** *(arrivato mentre la misura della deriva girava; in coda dietro di essa, `L-UN-PROMPT`)*, ### **alla lettera:**
+
+```
+DISTINGUI DUE CAUSE (lettura del guardiano): (a) lo stato di partenza non e' l'esatto stazionario del passo discreto e
+PERDE CODE (la larghezza e' un secondo momento: poche code lontane la gonfiano): allora la frazione entro la larghezza
+iniziale resta sopra 0.95, la crescita rallenta fino a fermarsi, e cala con s piu' piccolo; (b) il solitone S1 e'
+INSTABILE PER NATURA in 2D (S1 "sopra-critica in 2D", DOSSIER_S1_S4): allora cambia il cuore, la crescita non si ferma
+o accelera, e non dipende da s. Riporta, per il congelato alla taglia grande: la frazione entro la larghezza iniziale e
+il picco nel tempo, la forma della crescita (rallenta o accelera), e lo stesso a s 0.3 (74f99039) per il confronto.
+```
+
+- ### ⚠ **I DATI NON BASTANO:** ### **i jsonl hanno la frazione entro `3 w0`, non entro la larghezza iniziale;** ### **a `s 0.3`** *(`solitone_vuoto_congelato.jsonl`)* ### **la serie ha la larghezza e la frazione entro `3 w0` ogni `20` tick, non il picco.** ### **Servono due corse congelate:** ### **`8000` tick a `s 0.075`, `2000` a `s 0.3`** *(tempo fisico `600` tutte e due)*: ### **`csv/_code_o_cuore.py`.**
+- ### ⚠ **UN RILIEVO SUL CRITERIO, PRIMA DEI NUMERI:** ### **in 2D la frazione entro il raggio quadratico medio PARTE sotto `1`** *(per una gaussiana `1 - 1/e = 0.63`)*: ### **«sopra `0.95`» assoluto non vale nemmeno a `t = 0`.** ### **Riporto la frazione entro `w_in` ASSOLUTA e RELATIVA al suo valore iniziale;** ### **leggo la soglia `0.95` sulla RELATIVA, e lo dichiaro qui.**
+- ### **LE GRANDEZZE, FISSATE ORA:** ### **ogni `3` di tempo fisico** *(`40` tick a `s 0.075`, `10` a `s 0.3`)*: ### **la larghezza, la frazione entro `w_in` e entro `3 w0`, il picco di `rho`;** ### **la forma della crescita: la pendenza media di `w/w_in` nel tempo fisico nei quattro quarti `[0,150]`, `[150,300]`, `[300,450]`, `[450,600]`;** ### **«rallenta» se le quattro pendenze DECRESCONO, «accelera» se crescono, altrimenti «non monotona».**
+- ### **I CONTROLLI:** ### **`(k1)` a `s 0.075` le larghezze ai tick comuni = `grande_fondo_congelato` AL BIT;** ### **`(k2)` a `s 0.3` le larghezze ogni `20` tick = la corsa `simm L 81 congelato` di `74f99039` AL BIT** *(li' il vuoto uniforme: vale se `(c0)` passa)*.
+- ### **CHE COSA CREDO:** ### **dai dati gia' visti** *(il picco a `s 0.075` scende da `5062` a `4257` in `600`; a `s 0.3` la larghezza sale del `2%` nei primi `20` tick, e a `L 120` finisce piu' larga che a `L 81`)*: ### **piu' la `(a)`, circa `60%`:** ### **il salto iniziale e la dipendenza dalla scatola sono da code;** ### **il picco che cala e' un indizio per la `(b)`.**
