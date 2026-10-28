@@ -21649,3 +21649,22 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **Una correzione mia, dichiarata nel commit `2b3f1421`:** il controllo R6 si legge con l'arrotondamento stimato *(`S1` a `x 1e-6`: `beta ~ -2x^3/3` da termini `O(x)`)*; l'ho cambiato dopo averlo visto fallire in prova.
 - **Esito:** la corsa lunga di `S1` *(cuore che si svuota)* sta sul ramo che VK dice stabile: lo svuotamento non e' l'instabilita' di VK dell'inviluppo. La forma "`x^2` a poca materia, saturazione nel cuore" e' gia' `S1`.
 - **La parte `2`** *(la diagnosi di `S4`, `9e8805ba`)*: in corsa.
+
+### 📌 **LA DIAGNOSI DI `S4` (LUCA, 19:18, PARTE 2): `11/11` -- A `s 0.3` IL CUORE REGGE E L'ALONE CRESCE; A `s 0.99` SI SVUOTA; LA LARGHEZZA CAMBIA CON `s`** *([[DECISIONE-L1-NATURA-A-SIMULATORE-B]], [[PIANO-2D-3D]])*.
+
+- **Il referto:** `doc/referti_l2/diagnosi_s4.txt` *(lo script `sha1-BYTE d35e6c40`, `9e8805ba`; i punti in `doc/referti_l2/diagnosi_s4/`)*. **Il documento:** `doc/REQUISITI_LEGAME.md` 7, 8.
+
+| | `S4`, `s 0.3`, `L 81` | `S4`, `s 0.3`, `L 120` | `S4`, `s 0.99`, `L 81` |
+|---|---|---|---|
+| il risolutore: `w0` in archi *(in `l`)* | `3.1065` *(`7.0486`)* | `3.1065` *(`7.0486`)* | `2.8405` *(`7.4396`)* |
+| il cuore `f_win`, tick `0` -> fine | `0.57897` -> `0.57476` | `0.57897` -> `0.57171` | `0.62239` -> `0.50167` |
+| l'alone `1 - f_3w0` alla fine | `0.01985` | `0.02001` | `0.07514` |
+| `w/w_in` alla fine; la pendenza nella prima e nell'ultima finestra | `1.573`; `+6.8e-5` -> `+3.2e-4` | `1.553`; `+6.7e-5` -> `+2.7e-4` | `3.309`; `+5.6e-4` -> `+4.5e-4` |
+| il picco relativo medio, l'ultima finestra | `0.905` | `0.903` | `0.779` |
+| la FWHM in archi, inizio -> fine *(in `l`)* | `6.049` -> `6.223` *(`13.73` -> `14.12`)* | `6.049` -> `6.230` *(`13.73` -> `14.14`)* | `5.577` -> `5.846` *(`14.61` -> `15.31`)* |
+| il cuore finale contro il risolutore a `N_c`: FWHM, picco | `x1.126`, `x1.241` | `x1.137`, `x1.243` | `x1.174`, `x1.149` |
+| i nodi con `rho = 0` esatto al tick `0` *(li' `alpha_4 = 0`, non `-pi`)* | `2925` | `10764` | `3513` |
+
+- **I controlli:** i pezzi al bit; `S1` = `40061005` al bit sui primi `200` tick; `M` entro `9.6e-12`.
+- **Esito:** una diagnosi, non un candidato: `S4` resta con R2 e R3 contrari.
+- **Le cinque domande per Luca:** `doc/REQUISITI_LEGAME.md` 8.

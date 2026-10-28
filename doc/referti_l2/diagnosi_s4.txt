@@ -1,0 +1,63 @@
+[TIMBRO] _diagnosi_s4.py  sha1-BYTE d35e6c40  committato e pulito
+==================================================================================================================================
+LA DIAGNOSI DEL SOLITONE S4 (Luca 19:18, parte 2; una DIAGNOSI, non un candidato): il congelato vero, zero simmetrico, cs spento, il vuoto uniforme
+==================================================================================================================================
+  la configurazione: CORSE (('S4', 0.3, 10000000.0, 81), ('S4', 0.3, 10000000.0, 120), ('S4', 0.99, 10000000.0, 81)) SCENA uniforme T_FIS 3000 PEZZO 2000 PASSO_FIS 3 FINESTRA 500 TICK_KP 40 TICK_K40 200 TOLL_NORMA 1e-10
+  LE LETTURE, SCRITTE PRIMA: il cuore di S4 si stabilizza o si svuota; la larghezza in archi cambia o no fra s 0.3 e s 0.99. S4 resta con R2 e R3 contrari
+  DEVE PASSARE (kp): S4, s 0.3, L 81: 40 tick di fila = due meta' con lo stato salvato e ricaricato, AL BIT      PASSA   
+  DEVE PASSARE (k40): S1, s 0.3, N 1e6, L 81: i punti dei primi 200 tick = 40061005, AL BIT                      PASSA   21 punti
+----------------------------------------------------------------------------------------------------------------------------------
+### S4_s0.30_L81: 5 pezzi, fino al tick 10000 (tempo fisico 3000); il risolutore: LEGATO, w0 3.1065 archi, l = sqrt(|c|/s) 0.4407 (w0/l 7.0486), mu +0.931777; w_in 3.1684; 765 s
+  DEVE PASSARE (n): S4_s0.30_L81, M entro 1e-10 relativo                                                         PASSA   9.6e-12
+  DEVE PASSARE: S4_s0.30_L81, la corsa e' completa (10000 tick)                                                  PASSA   
+  tau [     0,    500]: w/w_in da 1.00000 a 1.07906 (pendenza +6.846e-05); cuore da 0.57897 a 0.59591 (pendenza +6.293e-05); alone da 0.00000 a 0.00294; picco relativo medio 0.93073
+  tau [   500,   1000]: w/w_in da 1.08711 a 1.12539 (pendenza +8.562e-05); cuore da 0.58745 a 0.55764 (pendenza +2.503e-06); alone da 0.00294 a 0.00610; picco relativo medio 0.92079
+  tau [  1000,   1500]: w/w_in da 1.12879 a 1.20323 (pendenza +1.438e-04); cuore da 0.55792 a 0.55870 (pendenza +1.143e-05); alone da 0.00610 a 0.00968; picco relativo medio 0.91435
+  tau [  1500,   2000]: w/w_in da 1.20323 a 1.29976 (pendenza +1.946e-04); cuore da 0.55870 a 0.55087 (pendenza -1.614e-05); alone da 0.00968 a 0.01303; picco relativo medio 0.91124
+  tau [  2000,   2500]: w/w_in da 1.30155 a 1.42474 (pendenza +2.445e-04); cuore da 0.55177 a 0.54685 (pendenza -2.107e-05); alone da 0.01301 a 0.01642; picco relativo medio 0.90861
+  tau [  2500,   3000]: w/w_in da 1.42464 a 1.57299 (pendenza +3.159e-04); cuore da 0.54882 a 0.57476 (pendenza +6.858e-05); alone da 0.01646 a 0.01985; picco relativo medio 0.90479
+  DEVE PASSARE: S4_s0.30_L81, lo stato finale = sha_fine dell'ultimo pezzo                                       PASSA   t 10000
+  i nodi con rho = 0 esatto al tick 0: 2925 (alpha_4 li' vale 0, non -pi: _screening_forme_s3.pezzi_di)
+  la FWHM (anelli di 1): all'inizio 6.0493, alla fine 6.2228 archi (x1.0287; in unita' di l 13.7260 e 14.1198); il picco per nodo x0.9115; il baricentro finale (+2.31e-01, +4.05e-01)
+  il cuore finale N_c 5747575.1 (0.57476 M); il risolutore a N_c: LEGATO, larghezza 2.8001, FWHM 5.5260 (il cuore finale / il risolutore x1.1261), picco per nodo x1.2408
+  il profilo per anelli, r 0..8: inizio 2.29e+05 1.982e+05 1.446e+05 8.724e+04 4.193e+04 1.425e+04 2802 176.4 1.5
+                                  fine   2.114e+05 1.831e+05 1.398e+05 8.41e+04 4.185e+04 1.776e+04 5426 1370 275.2
+----------------------------------------------------------------------------------------------------------------------------------
+### S4_s0.30_L120: 5 pezzi, fino al tick 10000 (tempo fisico 3000); il risolutore: LEGATO, w0 3.1065 archi, l = sqrt(|c|/s) 0.4407 (w0/l 7.0486), mu +0.931777; w_in 3.1684; 1467 s
+  DEVE PASSARE (n): S4_s0.30_L120, M entro 1e-10 relativo                                                        PASSA   9.6e-12
+  DEVE PASSARE: S4_s0.30_L120, la corsa e' completa (10000 tick)                                                 PASSA   
+  tau [     0,    500]: w/w_in da 1.00000 a 1.07970 (pendenza +6.706e-05); cuore da 0.57897 a 0.57480 (pendenza +3.969e-05); alone da 0.00000 a 0.00279; picco relativo medio 0.93073
+  tau [   500,   1000]: w/w_in da 1.08885 a 1.12811 (pendenza +8.142e-05); cuore da 0.56700 a 0.58751 (pendenza +5.128e-06); alone da 0.00277 a 0.00595; picco relativo medio 0.91954
+  tau [  1000,   1500]: w/w_in da 1.12961 a 1.20097 (pendenza +1.460e-04); cuore da 0.56467 a 0.57859 (pendenza -1.282e-05); alone da 0.00600 a 0.00949; picco relativo medio 0.91131
+  tau [  1500,   2000]: w/w_in da 1.20097 a 1.29786 (pendenza +1.925e-04); cuore da 0.57859 a 0.56092 (pendenza -2.951e-05); alone da 0.00949 a 0.01293; picco relativo medio 0.90985
+  tau [  2000,   2500]: w/w_in da 1.29833 a 1.42217 (pendenza +2.363e-04); cuore da 0.56616 a 0.56656 (pendenza +1.539e-05); alone da 0.01298 a 0.01650; picco relativo medio 0.90840
+  tau [  2500,   3000]: w/w_in da 1.41966 a 1.55341 (pendenza +2.721e-04); cuore da 0.56804 a 0.57171 (pendenza -3.449e-05); alone da 0.01651 a 0.02001; picco relativo medio 0.90330
+  DEVE PASSARE: S4_s0.30_L120, lo stato finale = sha_fine dell'ultimo pezzo                                      PASSA   t 10000
+  i nodi con rho = 0 esatto al tick 0: 10764 (alpha_4 li' vale 0, non -pi: _screening_forme_s3.pezzi_di)
+  la FWHM (anelli di 1): all'inizio 6.0493, alla fine 6.2302 archi (x1.0299; in unita' di l 13.7260 e 14.1364); il picco per nodo x0.9100; il baricentro finale (+3.34e-02, +4.74e-01)
+  il cuore finale N_c 5717061.9 (0.57171 M); il risolutore a N_c: LEGATO, larghezza 2.7973, FWHM 5.4794 (il cuore finale / il risolutore x1.1370), picco per nodo x1.2429
+  il profilo per anelli, r 0..8: inizio 2.29e+05 1.982e+05 1.446e+05 8.724e+04 4.193e+04 1.425e+04 2802 176.4 1.5
+                                  fine   2.117e+05 1.84e+05 1.392e+05 8.499e+04 4.439e+04 1.727e+04 5520 1477 292.1
+----------------------------------------------------------------------------------------------------------------------------------
+### S4_s0.99_L81: 2 pezzi, fino al tick 3030 (tempo fisico 3000); il risolutore: LEGATO, w0 2.8405 archi, l = sqrt(|c|/s) 0.3818 (w0/l 7.4396), mu +3.078533; w_in 2.9081; 288 s
+  DEVE PASSARE (n): S4_s0.99_L81, M entro 1e-10 relativo                                                         PASSA   3.0e-12
+  DEVE PASSARE: S4_s0.99_L81, la corsa e' completa (3030 tick)                                                   PASSA   
+  tau [     0,    500]: w/w_in da 1.00000 a 1.30835 (pendenza +5.562e-04); cuore da 0.62239 a 0.57984 (pendenza -9.213e-05); alone da 0.00000 a 0.01235; picco relativo medio 0.92802
+  tau [   500,   1000]: w/w_in da 1.31061 a 1.91227 (pendenza +1.203e-03); cuore da 0.57937 a 0.54998 (pendenza -1.633e-06); alone da 0.01246 a 0.02672; picco relativo medio 0.86565
+  tau [  1000,   1500]: w/w_in da 1.91530 a 2.43296 (pendenza +1.033e-03); cuore da 0.55411 a 0.51730 (pendenza -5.807e-05); alone da 0.02670 a 0.04106; picco relativo medio 0.83342
+  tau [  1500,   2000]: w/w_in da 2.43375 a 2.78014 (pendenza +6.737e-04); cuore da 0.51905 a 0.49828 (pendenza -2.320e-05); alone da 0.04119 a 0.05259; picco relativo medio 0.80991
+  tau [  2000,   2500]: w/w_in da 2.78199 a 3.07446 (pendenza +5.833e-04); cuore da 0.49864 a 0.51250 (pendenza +1.824e-06); alone da 0.05266 a 0.06412; picco relativo medio 0.79158
+  tau [  2500,   3000]: w/w_in da 3.07921 a 3.30940 (pendenza +4.501e-04); cuore da 0.50714 a 0.50167 (pendenza -4.231e-05); alone da 0.06435 a 0.07514; picco relativo medio 0.77868
+  DEVE PASSARE: S4_s0.99_L81, lo stato finale = sha_fine dell'ultimo pezzo                                       PASSA   t 3030
+  i nodi con rho = 0 esatto al tick 0: 3513 (alpha_4 li' vale 0, non -pi: _screening_forme_s3.pezzi_di)
+  la FWHM (anelli di 1): all'inizio 5.5765, alla fine 5.8459 archi (x1.0483; in unita' di l 14.6057 e 15.3114); il picco per nodo x0.7815; il baricentro finale (+1.96e-01, -2.20e-01)
+  il cuore finale N_c 5016670.1 (0.50167 M); il risolutore a N_c: LEGATO, larghezza 2.4953, FWHM 4.9795 (il cuore finale / il risolutore x1.1740), picco per nodo x1.1493
+  il profilo per anelli, r 0..8: inizio 2.703e+05 2.275e+05 1.558e+05 8.411e+04 3.373e+04 8310 920.9 15.26 0.003639
+                                  fine   2.099e+05 1.772e+05 1.281e+05 7.339e+04 3.575e+04 1.736e+04 6574 1230 253.3
+----------------------------------------------------------------------------------------------------------------------------------
+### LA LARGHEZZA IN ARCHI E IN l = sqrt(|c|/s), alle due s (la convergenza: DECISIONE-L1-NATURA-A-SIMULATORE-B)
+  S4_s0.30_L81     s 0.30: w0 del risolutore 3.1065 archi (7.0486 l); FWHM 6.0493 -> 6.2228 archi (13.7260 -> 14.1198 l); w finale 4.9839 archi; cuore 0.57897 -> 0.57476
+  S4_s0.30_L120    s 0.30: w0 del risolutore 3.1065 archi (7.0486 l); FWHM 6.0493 -> 6.2302 archi (13.7260 -> 14.1364 l); w finale 4.9219 archi; cuore 0.57897 -> 0.57171
+  S4_s0.99_L81     s 0.99: w0 del risolutore 2.8405 archi (7.4396 l); FWHM 5.5765 -> 5.8459 archi (14.6057 -> 15.3114 l); w finale 9.6242 archi; cuore 0.62239 -> 0.50167
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 11/11 controlli passano; DEVE fallite: 0 []

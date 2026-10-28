@@ -75,10 +75,33 @@ Il critico: `1` in 2D, `2/3` in 3D. `S4` a `x -> 0`: `0.6366 < 2/3`.
 - **La forma "`x^2` a poca materia, saturazione nel cuore" e' gia' `S1`:** `sigma_eff = 2` sotto `x 1e-2`, `2/(1+x^2)` sopra; il tetto `1`.
 - Per `S1` l'ostacolo che resta per R4 non e' la stabilita' dell'inviluppo: e' fuori dall'equazione dell'inviluppo *(la dinamica del passo sul reticolo)*.
 
-## 7. LA DIAGNOSI DI `S4` *(parte `2`)*
+## 7. LA DIAGNOSI DI `S4` *(parte `2`; `doc/referti_l2/diagnosi_s4.txt`, lo script `sha1-BYTE d35e6c40`, `9e8805ba`; `11/11`)*
 
-In corsa *(`9e8805ba`)*: si scrive col referto.
+Il congelato vero, il vuoto uniforme, `N 1e7`, `3000` di tempo fisico. I controlli: i pezzi al bit; `S1` a `s 0.3`, `N 1e6`, `L 81` = `40061005` al bit sui primi `200` tick; `M` entro `9.6e-12`.
+
+| | `S4`, `s 0.3`, `L 81` | `S4`, `s 0.3`, `L 120` | `S4`, `s 0.99`, `L 81` |
+|---|---|---|---|
+| il risolutore: `w0` in archi *(in `l`)* | `3.1065` *(`7.0486`)* | `3.1065` *(`7.0486`)* | `2.8405` *(`7.4396`)* |
+| il cuore `f_win`, tick `0` -> fine | `0.57897` -> `0.57476` | `0.57897` -> `0.57171` | `0.62239` -> `0.50167` |
+| l'alone `1 - f_3w0` alla fine | `0.01985` | `0.02001` | `0.07514` |
+| `w/w_in` alla fine; la pendenza nella prima e nell'ultima finestra | `1.573`; `+6.8e-5` -> `+3.2e-4` | `1.553`; `+6.7e-5` -> `+2.7e-4` | `3.309`; `+5.6e-4` -> `+4.5e-4` |
+| il picco relativo medio, l'ultima finestra | `0.905` | `0.903` | `0.779` |
+| la FWHM in archi, inizio -> fine *(in `l`)* | `6.049` -> `6.223` *(`13.73` -> `14.12`)* | `6.049` -> `6.230` *(`13.73` -> `14.14`)* | `5.577` -> `5.846` *(`14.61` -> `15.31`)* |
+| il cuore finale contro il risolutore a `N_c`: FWHM, picco | `x1.126`, `x1.241` | `x1.137`, `x1.243` | `x1.174`, `x1.149` |
+| i nodi con `rho = 0` esatto al tick `0` *(li' `alpha_4 = 0`, non `-pi`)* | `2925` | `10764` | `3513` |
+
+| lettura *(scritta prima)* | esito |
+|---|---|
+| il cuore di `S4` si stabilizza o si svuota | `s 0.3`: **regge** *(`L 81`: ai bordi delle finestre fra `0.547` e `0.596`, nessuna deriva netta)*, la FWHM `x1.03`, l'alone cresce; `s 0.99`: **si svuota** *(`0.622` -> `0.502`)* |
+| la larghezza in archi cambia o no fra `s 0.3` e `s 0.99` | **cambia**: `w0` `3.11` -> `2.84` archi; in `l` `7.05` -> `7.44`; il test e' debole *(le due larghezze sono vicine)* |
+| la scatola | a `s 0.3` `L 81` e `L 120` coincidono entro la fluttuazione |
+
+`S4` resta con R2 e R3 contrari.
 
 ## 8. LE DOMANDE PER LUCA
 
-Si scrivono col referto della parte `2`.
+1. **`S1`, R4:** sulla carta e' stabile *(VK)*, in dinamica il cuore si svuota. Si cerca la causa **fuori dall'inviluppo** *(il passo sul reticolo, la coppia a `K`)* prima di cambiare forma o dimensione?
+2. **`S1`, R5:** il 3D sulla carta ha un ramo stabile sopra `n 169`. Si verifica il 3D di `S1` *(la FCC, `doc/PROGETTO_FCC.md`)* con questa lettura in mano?
+3. **La forma nuova:** la forma "`x^2` a poca materia, saturazione nel cuore" e' gia' `S1`; sulla carta nessun requisito R1-R5 chiede una forma nuova. Si conferma che non si cerca una forma nuova?
+4. **`S4`, la diagnosi:** a `s 0.3` il cuore regge, a `s 0.99` no. Si chiude qui *(R2, R3 contrari)* o serve un'altra diagnosi *(per esempio la stessa `s 0.99` a `L 120`)*?
+5. **La discontinuita' di `S4` a `rho = 0` esatto** *(`2925`-`10764` nodi al tick `0`)*: resta una nota, o va tolta prima di qualunque altra misura con `S4`?

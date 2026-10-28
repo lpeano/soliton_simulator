@@ -41,3 +41,12 @@
 1. questo file, da solo;
 2. `csv/_requisiti_legame.py`, commit; referto; `doc/REQUISITI_LEGAME.md`; RELAZIONE; MAPPA; commit;
 3. `csv/_diagnosi_s4.py`, commit; le corse a pezzi; referto; il documento; RELAZIONE; MAPPA; commit.
+
+## 6. ANNOTAZIONE DOPO I REFERTI *(le sezioni sopra restano come erano)*
+
+| | esito | referto |
+|---|---|---|
+| parte `1` | `17/17`; i numeri in `doc/REQUISITI_LEGAME.md` 3-6 | `requisiti_legame.txt` *(`2b3f1421`)* |
+| R6 | il controllo letto con l'arrotondamento stimato: cambiato dopo una prova fallita, dichiarato | `2b3f1421` |
+| parte `2` | `11/11`; `S4` a `s 0.3` il cuore regge, a `s 0.99` si svuota; la larghezza cambia con `s` | `diagnosi_s4.txt` *(`9e8805ba`)* |
+| le domande | `doc/REQUISITI_LEGAME.md` 8 | |
