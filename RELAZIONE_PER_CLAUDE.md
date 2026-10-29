@@ -21905,3 +21905,24 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 | il periodo | `11.45` a tutte e tre le `s`; non segue `2 pi/|mu|` |
 
 - **Il mandato delle `13:02` e' chiuso:** `p1` *(in coppia)*, `q1` *(l'anello `13`)*, `b` *(`-pi/2`)*, `A1`.
+
+### 📌 **LA LARGHEZZA DELLA RISONANZA (LUCA, 14:51; UNA DIAGNOSI): `3/3` NEI DEVE, MA IL TASSO A `delta != 0` NON SI MISURA: IL RIFERIMENTO DICHIARATO NON E' UNO STATO FERMO DELLA MAPPA SPOSTATA; FERMO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/larghezza_risonanza.txt` *(lo script `sha1-BYTE 3f68bf99`, `e679e2ea`; il task history `d10042fe`)*.
+
+| la corsa *(`s 0.15`)* | lo scarto | il tasso | `|D|` a tempo `60` / `120` / `180` |
+|---|---|---|---|
+| `delta 0` | `0` | **`0.15108`** | `1.1e-07` / `8.5e-04` / `3.4e-02` |
+| stessa `+0.025` / `-0.025` | `+0.05` / `-0.05` | -- / -- | `2.9e-02` / `8.5e-02` / `1.4e-01`; `2.1e-02` / `5.0e-02` / `7.4e-02` |
+| stessa `+0.1` / `-0.1` | `+0.2` / `-0.2` | -- / *(`2` campioni)* | `3.9e-02` / `8.7e-02` / `1.6e-01`; `7.6e-03` / `2.1e-02` / `3.5e-02` |
+| stessa `+0.4` / `-0.4` | `+0.8` / `-0.8` | -- / *(non esponenziale)* | `1.2e-02` / `4.0e-02` / `8.5e-02`; `9.0e-03` / `1.4e-02` / `1.8e-02` |
+| stessa `+0.8` / `-0.8` | `+1.6` / `-1.6` | *(non esponenziale)* / -- | `1.4e-02` / `1.3e-02` / `1.3e-02`; `6.6e-02` / `1.5e-01` / `2.7e-01` |
+| opposte `0.2` / `0.8` | `0` / `0` | -- / -- | `3.4e-02` / `6.7e-02` / `9.5e-02`; `4.1e-02` / `6.7e-02` / `9.2e-02` |
+| solo `P0` `0.2` / `0.8` | `+0.2` / `+0.8` | -- / -- | `4.0e-02` / `8.8e-02` / `1.6e-01`; `1.1e-02` / `2.9e-02` / `7.3e-02` |
+
+- **I DEVE passano** *(`3/3`)*: la norma conservata *(`8.9e-16`)*; `delta 0` = `0.15108`.
+- **Il tasso a `delta != 0` NON si misura col metodo dichiarato:** `|D|` e' gia' `7.6e-03`-`6.6e-02` al tempo `60`; la finestra e' vuota o di pochi campioni senza un tratto esponenziale. **Il riferimento dichiarato** *(lo stato fermo con la sua parte piatta ruotata)* **non e' uno stato fermo della mappa spostata:** lo scostamento iniziale viene da li', non dal modo.
+- **Le letture `w1`-`w4`, `k1`-`k2`: non si decidono.**
+- **La correzione proposta** *(non eseguita; una decisione di Luca)*: per ogni `delta`, lo stato fermo della mappa spostata con Newton *(partendo dallo stato fermo a `delta 0`)*, poi la corsa e il tasso come in `dfb5ab7e`.
+
+- **La MAPPA:** le quattro voci della lista d'attesa di Luca *(il periodo `11.45`; la decisione sulle piatte; `S4` con questa lente; la coppia come innesco)* e l'errore `n.80` del guardiano.

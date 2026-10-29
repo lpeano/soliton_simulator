@@ -1,0 +1,38 @@
+[TIMBRO] _larghezza_risonanza.py  sha1-BYTE 3f68bf99  committato e pulito
+==================================================================================================================================
+LA LARGHEZZA DELLA RISONANZA (Luca 14:51; UNA DIAGNOSI): le piatte spostate in frequenza a ogni tick; S1_s0.150, 180 unita' di tempo per corsa
+==================================================================================================================================
+  la configurazione: CASO S1_s0.150 P0 (6, 7, 8, 9) PPI (0, 1, 2, 3) DELTA_STESSA (0.0, 0.025, -0.025, 0.05, -0.05, 0.1, -0.1, 0.2, -0.2, 0.4, -0.4, 0.8, -0.8) DELTA_OPPOSTE (0.2, 0.8) DELTA_UNA (0.2, 0.8) T_FIS 180 T_DA_FIS 60 PASSO_FIS 3 FATTORE_RUMORE 1000 SATURAZIONE 0.01 TASSO_DFB 0.15108 TOLL_DFB 0.001 TOLL_NORMA 1e-10
+  IL SEGNO: e^{-i delta_p s} sulle componenti della piatta p alza ph_p = -arg(lambda) di delta_p s per tick; lo scarto ph_P0 + ph_Ppi - 2 ph_sol cambia di delta_P0 + delta_Ppi per unita' di tempo
+  D(t) = e^{i mu s t} psi(t) - psi_ref(t), psi_ref = lo stato fermo con le sue componenti piatte ruotate dello stesso spostamento (a delta 0: lo stato fermo)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (w1) nella stessa direzione il tasso cala con |delta| e si spegne; (w2) non cala fino a 0.8; (w3) cala per un segno e cresce per l'altro; (w4) altro; (k1) opposte ~0.151 e una piatta a delta = la stessa direzione a delta/2; (k2) no
+  DEVE PASSARE: S1_s0.150, lo stato fermo = la ricerca (sha1), e fermo                                           PASSA   1.771e-10
+----------------------------------------------------------------------------------------------------------------------------------
+### LA STESSA DIREZIONE (P0 e Ppi di delta: lo scarto 2 delta)
+  stessa delta +0.000        dP0 +0.000 dPpi +0.000 (lo scarto +0.000): il tasso +0.15108; la finestra tempo 66 .. 138 (|D| 2.1e-07 .. 8.1e-03); |D| a tempo 60, 120, 180: 1.1e-07 8.5e-04 3.4e-02; la norma 8.9e-16; 95 s
+  stessa delta +0.025        dP0 +0.025 dPpi +0.025 (lo scarto +0.050): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 2.9e-02 8.5e-02 1.4e-01; la norma 8.9e-16; 82 s
+  stessa delta -0.025        dP0 -0.025 dPpi -0.025 (lo scarto -0.050): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 2.1e-02 5.0e-02 7.4e-02; la norma 8.9e-16; 91 s
+  stessa delta +0.050        dP0 +0.050 dPpi +0.050 (lo scarto +0.100): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 3.9e-02 9.7e-02 1.6e-01; la norma 8.9e-16; 87 s
+  stessa delta -0.050        dP0 -0.050 dPpi -0.050 (lo scarto -0.100): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 2.1e-02 3.7e-02 6.0e-02; la norma 8.9e-16; 92 s
+  stessa delta +0.100        dP0 +0.100 dPpi +0.100 (lo scarto +0.200): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 3.9e-02 8.7e-02 1.6e-01; la norma 8.9e-16; 93 s
+  stessa delta -0.100        dP0 -0.100 dPpi -0.100 (lo scarto -0.200): il tasso +0.03125; la finestra tempo 60 .. 66 (|D| 7.6e-03 .. 9.2e-03); |D| a tempo 60, 120, 180: 7.6e-03 2.1e-02 3.5e-02; la norma 8.9e-16; 88 s
+  stessa delta +0.200        dP0 +0.200 dPpi +0.200 (lo scarto +0.400): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 2.9e-02 9.7e-02 1.9e-01; la norma 8.9e-16; 77 s
+  stessa delta -0.200        dP0 -0.200 dPpi -0.200 (lo scarto -0.400): il tasso +0.00503; la finestra tempo 60 .. 162 (|D| 4.3e-03 .. 9.5e-03); |D| a tempo 60, 120, 180: 4.3e-03 8.4e-03 1.4e-02; la norma 7.8e-16; 85 s
+  stessa delta +0.400        dP0 +0.400 dPpi +0.400 (lo scarto +0.800): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 1.2e-02 4.0e-02 8.5e-02; la norma 8.9e-16; 82 s
+  stessa delta -0.400        dP0 -0.400 dPpi -0.400 (lo scarto -0.800): il tasso +0.00353; la finestra tempo 60 .. 141 (|D| 9.0e-03 .. 8.4e-03); |D| a tempo 60, 120, 180: 9.0e-03 1.4e-02 1.8e-02; la norma 7.8e-16; 86 s
+  stessa delta +0.800        dP0 +0.800 dPpi +0.800 (lo scarto +1.600): il tasso +0.00338; la finestra tempo 63 .. 102 (|D| 7.4e-03 .. 9.1e-03); |D| a tempo 60, 120, 180: 1.4e-02 1.3e-02 1.3e-02; la norma 7.8e-16; 84 s
+  stessa delta -0.800        dP0 -0.800 dPpi -0.800 (lo scarto -1.600): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 6.6e-02 1.5e-01 2.7e-01; la norma 8.9e-16; 84 s
+----------------------------------------------------------------------------------------------------------------------------------
+### I CONTROLLI DEL MECCANISMO
+  opposte delta 0.200        dP0 +0.200 dPpi -0.200 (lo scarto +0.000): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 3.4e-02 6.7e-02 9.5e-02; la norma 8.9e-16; 85 s
+  opposte delta 0.800        dP0 +0.800 dPpi -0.800 (lo scarto +0.000): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 4.1e-02 6.7e-02 9.2e-02; la norma 8.9e-16; 82 s
+  solo P0 delta 0.200        dP0 +0.200 dPpi +0.000 (lo scarto +0.200): il tasso --; la finestra ha 0 campioni; |D| a tempo 60, 120, 180: 4.0e-02 8.8e-02 1.6e-01; la norma 8.9e-16; 76 s
+  solo P0 delta 0.800        dP0 +0.800 dPpi +0.000 (lo scarto +0.800): il tasso --; la finestra ha 1 campioni; |D| a tempo 60, 120, 180: 1.1e-02 2.9e-02 7.3e-02; la norma 8.9e-16; 74 s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: lo spostamento conserva la norma entro 1e-10 (il massimo su tutte le corse)                      PASSA   8.9e-16
+  DEVE PASSARE: delta 0 ridà il tasso di dfb5ab7e (0.15108) entro 0.001 relativo                                 PASSA   0.15107905246142542
+### LA SINTESI (il tasso per unita' di tempo)
+  la stessa direzione: -0.800: --  -0.400: 0.0035  -0.200: 0.0050  -0.100: 0.0313  -0.050: --  -0.025: --  +0.000: 0.1511  +0.025: --  +0.050: --  +0.100: --  +0.200: --  +0.400: --  +0.800: 0.0034
+  le opposte: 0.2: --  0.8: --; solo P0: 0.2: --  0.8: --; da confrontare con la stessa direzione a delta/2: 0.1: --  0.4: --
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []
