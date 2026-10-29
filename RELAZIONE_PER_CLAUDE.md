@@ -21958,3 +21958,19 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **L'errore `n.81` del guardiano** *(MAPPA, sezione 8)*: il mandato delle `14:51` non chiedeva lo stato fermo di ogni mappa spostata, e non l'ho segnalato prima di girare.
 - **Da decidere** *(di Luca)*: la decisione sulle piatte *(lista d'attesa `19`)*; se stringere la griglia sui due bordi *(scarto fra `-0.1` e `-0.4`, fra `+0.4` e `+1.6`)*; stessa `-0.8` *(Newton non converge)*; il periodo `22.80` delle opposte.
+
+### 📌 **IL MENU PER LA DECISIONE SULLE BANDE PIATTE (LUCA, 19:12): `5/5`; IL PUNTO DI MEZZO NON E' UNA SIMMETRIA MA `r = 1` PIU' `c(K) = -1/2`; LA STRADA (B) HA UNA FAMIGLIA SOLA, E COSTA UN NUMERO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]], [[DOMANDA-CHIRALITA]])*.
+
+- **Il referto:** `doc/referti_l2/bande_piatte.txt` *(lo script `sha1-BYTE 3d62588b`, `919b610a`; il task history `c4fe2712`)*; **il documento:** `doc/BANDE_PIATTE.md` *(non sceglie)*.
+- **Un fatto del codice per tutto il filone:** in tutte le scene di `S1` `eps = 0` *(`_solitone_vuoto_congelato.corsa`)*: la moneta di spin e' spenta; la tabella ha `0.5`.
+
+| punto | il fatto *(`doc/referti_l2/bande_piatte.txt`, `5/5`)* |
+|---|---|
+| (1) il punto di mezzo | **non e' una simmetria dello spettro** *(`E -> -pi - E` scarta `3.14`)*; **e' `r = 1` piu' `c(K) = -1/2`**: le piatte `(-alpha ± beta)/2`, `A` e `B` = `∓(1/2) sqrt(alpha^2 + 2 alpha beta c + beta^2)`, entro `O(s^2)` *(i rapporti `4.07`, `4.02`)*; valgono `E(k) = E(-k)` e `A(k) = -B(k)` *(`≤ 1.9e-14`)*; **lo scarto libero della coppia e' zero al primo ordine** *(`-0.0219` a `s 0.15`, `O(s^2)`)* |
+| (2) che cosa tocca | `Q_S`: no *(`[T, sigma_z]` `0` a `eps 0`, `1.46e-1` a `eps 0.5`)*; `K`/`K'`: si', uguali; `DOMANDA-CHIRALITA` `(b)` *(`mu0`)*: si'; il cono di `C2`: si', attraverso `r` |
+| (3) gli stati compatti | `P0` e `Ppi` su un triangolo *(`2` e `4` stati)*; `P0`: le traslazioni generano la banda a ogni `k` *(un proiettore locale)*; `Ppi`: a `Gamma` mancano `2` stati *(tocca `A`)* |
+| (4) la strada (B) | **una famiglia sola, `(B1)` il rapporto nodo/arco**: `+0.806` *(`r 1.5247`)* e `-0.395` *(`r 0.6920`)*, `A(K)` entro `3.1e-3`, **un numero nuovo**; `(B2)` `eps 0.5`: `+0.161`, sposta `A` di `-0.080`, rompe `Q_S`; `(B3)` un altro ordine e `(B4)` la convenzione: `0` |
+
+- **Due premesse del mandato, lette contro `99b679bc`:** il punto a `+0.8` e' una piatta sola *(nella stessa direzione il modo c'e' a `+0.4` ed e' spento a `+1.6`)*; la crescita lenta e' negli anelli `6`-`9` a `-0.4` e con una piatta sola, negli anelli `3`-`6` a `+1.6`.
+- **La MAPPA:** la riga `d`; la lista d'attesa `22` *(la crescita lenta residua)* e `23` *(il periodo dalla differenza delle due piatte)*.
+- **Da decidere** *(di Luca)*: `(A)`, `(B)` o `(C)` *(la lista d'attesa `19`)*.

@@ -80,3 +80,15 @@
 2. `csv/_bande_piatte.py`, la voce d'inventario, commit;
 3. `--referto` -> `doc/referti_l2/bande_piatte.txt`;
 4. `doc/BANDE_PIATTE.md` *(i quattro punti, le tre strade col costo; non sceglie)*; RELAZIONE; MAPPA *(la riga `d`; le due voci della lista d'attesa)*; questo file annotato; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/bande_piatte.txt`; lo script `sha1-BYTE 3d62588b`, `919b610a`; `5/5`; il documento `doc/BANDE_PIATTE.md`)*
+
+| punto | il fatto *(`doc/referti_l2/bande_piatte.txt`, `5/5`)* |
+|---|---|
+| (1) il punto di mezzo | **non e' una simmetria dello spettro** *(`E -> -pi - E` scarta `3.14`)*; **e' `r = 1` piu' `c(K) = -1/2`**: le piatte `(-alpha ± beta)/2`, `A` e `B` = `∓(1/2) sqrt(alpha^2 + 2 alpha beta c + beta^2)`, entro `O(s^2)` *(i rapporti `4.07`, `4.02`)*; valgono `E(k) = E(-k)` e `A(k) = -B(k)` *(`≤ 1.9e-14`)*; **lo scarto libero della coppia e' zero al primo ordine** *(`-0.0219` a `s 0.15`, `O(s^2)`)* |
+| (2) che cosa tocca | `Q_S`: no *(`[T, sigma_z]` `0` a `eps 0`, `1.46e-1` a `eps 0.5`)*; `K`/`K'`: si', uguali; `DOMANDA-CHIRALITA` `(b)` *(`mu0`)*: si'; il cono di `C2`: si', attraverso `r` |
+| (3) gli stati compatti | `P0` e `Ppi` su un triangolo *(`2` e `4` stati)*; `P0`: le traslazioni generano la banda a ogni `k` *(un proiettore locale)*; `Ppi`: a `Gamma` mancano `2` stati *(tocca `A`)* |
+| (4) la strada (B) | **una famiglia sola, `(B1)` il rapporto nodo/arco**: `+0.806` *(`r 1.5247`)* e `-0.395` *(`r 0.6920`)*, `A(K)` entro `3.1e-3`, **un numero nuovo**; `(B2)` `eps 0.5`: `+0.161`, sposta `A` di `-0.080`, rompe `Q_S`; `(B3)` un altro ordine e `(B4)` la convenzione: `0` |
+
+- **Il conto sulla carta della sezione 1 regge:** il primo ordine e lo scarto libero zero a `r = 1`.
+- **La prova a vuoto** *(una copia temporanea, prima del commit dello script)* aveva il rango di `P0` dal grappolo minimo *(`2` a ogni `k`)*; lo script committato lo prende dal grappolo piu' grande.
