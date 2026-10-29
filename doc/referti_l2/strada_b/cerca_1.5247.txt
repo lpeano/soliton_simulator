@@ -1,0 +1,20 @@
+[TIMBRO] _strada_b_lati.py  sha1-BYTE 542e597d  committato e pulito
+  r 1.52: a_n 2.341598 b_a 3.570235; la partenza: lo stato fermo a r 1 (sha1 5cd2b475, mu -0.566022365)
+  r 1.52: passo 0, residuo 7.878e-02, mu -0.479054927
+  r 1.52: passo 1, residuo 2.437e-03, mu -0.571036151, GMRES 8, dimezzamenti 0 (1 s)
+  r 1.52: passo 2, residuo 2.936e-03, mu -0.568856421, GMRES 24, dimezzamenti 0 (4 s)
+  r 1.52: passo 3, residuo 5.395e-04, mu -0.568867589, GMRES 25, dimezzamenti 0 (8 s)
+  r 1.52: passo 4, residuo 4.129e-04, mu -0.568795589, GMRES 311, dimezzamenti 2 (50 s)
+  r 1.52: passo 5, residuo 1.486e-04, mu -0.568631426, GMRES 108, dimezzamenti 0 (64 s)
+  r 1.52: passo 6, residuo 1.302e-04, mu -0.568629976, GMRES 104, dimezzamenti 3 (80 s)
+  r 1.52: passo 7, residuo 1.140e-04, mu -0.568628585, GMRES 104, dimezzamenti 3 (100 s)
+  r 1.52: passo 8, residuo 8.568e-05, mu -0.568625943, GMRES 105, dimezzamenti 2 (117 s)
+  r 1.52: passo 9, residuo 4.329e-05, mu -0.568621461, GMRES 107, dimezzamenti 1 (133 s)
+  r 1.52: passo 10, residuo 1.441e-06, mu -0.568616025, GMRES 114, dimezzamenti 0 (152 s)
+  r 1.52: passo 11, residuo 4.546e-07, mu -0.568614704, GMRES 118, dimezzamenti 0 (170 s)
+  r 1.52: passo 12, residuo 1.942e-07, mu -0.568613666, GMRES 252, dimezzamenti 0 (207 s)
+  r 1.52: passo 13, residuo 3.736e-08, mu -0.568613320, GMRES 240, dimezzamenti 0 (242 s)
+  r 1.52: passo 14, residuo 7.807e-09, mu -0.568613139, GMRES 610, dimezzamenti 0 (331 s)
+  r 1.52: passo 15, residuo 1.362e-09, mu -0.568613116, GMRES 366, dimezzamenti 0 (383 s)
+  r 1.52: passo 16, residuo 1.687e-10, mu -0.568613109, GMRES 610, dimezzamenti 0 (472 s)
+  r 1.52: residuo finale 1.686e-10, mu -0.568613109; CONVERGE
