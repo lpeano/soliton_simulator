@@ -38,3 +38,26 @@
 
 1. questo file, DA SOLO, e aspettare il push;
 2. `csv/_decadimento_in_coppia.py`, commit; `--cerca` in parallelo; `--referto`; RELAZIONE; MAPPA; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO INTERMEDIO *(`doc/referti_l2/decadimento_in_coppia.txt`; lo script `sha1-BYTE fc59d7a1`, `e38289a3`; `3/3`; il punto `3` in corsa)*
+
+| il conto | `s 0.3` | `s 0.15` | `s 0.075` | `s 0.0375` |
+|---|---|---|---|---|
+| `x alpha'(x)` massimo per anello *(l'anello)*; negli anelli `12`, `13` | `0.2668` *(`13`)*; `0.0160`, `0.2668` | `0.2560` *(`13`)*; `0.0149`, `0.2560` | -- | -- |
+| `ph_A(K)/s`; lo scarto da `-pi/2` | `-1.52661`; `+4.42e-02` | `-1.55986`; `+1.09e-02` | `-1.56807`; `+2.73e-03` | `-1.57011`; `+6.81e-04` |
+| `2 - pi - 2 mu` per unita' di tempo | `-0.07610` | `-0.00955` | `+0.00692` *(`mu` NON fermo)* | -- |
+
+| il filtro *(`S1` `s 0.3`, `600` tick)* | il tasso per unita' di tempo | la norma tolta per tick *(alla fine)* |
+|---|---|---|
+| nessuno *(`dfb5ab7e`)* | `0.13870` | -- |
+| solo `P0` | `0.00557` | `4.55e-06` |
+| solo `Ppi` | `0.00592` | `2.75e-06` |
+| `P0` e `Ppi` insieme *(`6d941a4d`)* | `0.00067` | `7.33e-06` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (p1) togliendo una sola piatta il modo non cresce, in tutti e due i casi: in coppia `P0+Ppi` | **SI':** `0.0056` e `0.0059` contro `0.139` |
+| (p2) / (p3) | no |
+| (q1) il massimo di `x alpha'` negli anelli del modo | **SI':** l'anello `13`, a tutte e due le `s` |
+| (b) `ph_A(K)/s` tende a `-pi/2` | **SI':** lo scarto cala di `~4` volte a ogni dimezzamento di `s` *(i rapporti `0.2475`, `0.2494`, `0.2498`)* |
+| il punto `3` *(`s 0.075`)* | **IN CORSA:** Newton ripreso dallo stato di `dfb5ab7e` |

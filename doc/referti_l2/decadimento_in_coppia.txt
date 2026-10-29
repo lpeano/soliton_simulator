@@ -1,0 +1,54 @@
+[TIMBRO] _decadimento_in_coppia.py  sha1-BYTE fc59d7a1  committato e pulito
+==================================================================================================================================
+IL DECADIMENTO IN COPPIA (Luca 13:02): (1) i conti; (2) il filtro su una piatta sola; (3) Newton ripreso a s 0.075
+==================================================================================================================================
+  la configurazione: CASI_XA ('S1_s0.300', 'S1_s0.150') S_FASE (0.3, 0.15, 0.075, 0.0375) R_MAX 24 ANELLI_MODO (12, 13) FILTRI (('solo P0', (6, 7, 8, 9)), ('solo Ppi', (0, 1, 2, 3))) T_FILTRO 600 CASO_075 S1_s0.075 MAX_NEWTON 60 TOLL_RES 1e-09 FATTORE_RUMORE 1000 TOLL_ACC 1e-06 TOLL_NORMA 1e-10
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (p1) togliendo una sola piatta il modo non cresce, tutti e due i casi: in coppia; (p2) solo una delle due: un processo di una banda; (p3) nessuna delle due da sola; (p4) altro; (q1) il massimo di x alpha' negli anelli del modo; (q2) altrove; (b) ph_A(K)/s -> -pi/2 o no; (3) il tasso a s 0.075 contro 0.139 e 0.151
+----------------------------------------------------------------------------------------------------------------------------------
+### (1a) x alpha'(x)
+  DEVE PASSARE: acc_mano(S1) = x d alpha/dx per differenze di _ab, entro 1e-06                                   PASSA   1.4e-07
+  DEVE PASSARE: S1_s0.300, lo stato fermo = la ricerca (sha1), e fermo                                           PASSA   9.808e-10
+  S1_s0.300: x alpha'(x) medio per anello, r 0..24: 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0003 0.0015 0.0160 0.2668 0.0964 0.0006 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  S1_s0.300: x medio per anello, r 10..16: r10 87.5 r11 40.6 r12 13.9 r13 2.68 r14 0.209 r15 0.0136 r16 0.000531
+  S1_s0.300: il massimo 0.2668 all'anello 13; gli anelli del modo (12, 13): 0.0160 0.2668
+  DEVE PASSARE: S1_s0.150, lo stato fermo = la ricerca (sha1), e fermo                                           PASSA   1.771e-10
+  S1_s0.150: x alpha'(x) medio per anello, r 0..24: 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0003 0.0014 0.0149 0.2560 0.1046 0.0007 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  S1_s0.150: x medio per anello, r 10..16: r10 88.5 r11 41.3 r12 14.4 r13 2.85 r14 0.221 r15 0.0146 r16 0.000577
+  S1_s0.150: il massimo 0.2560 all'anello 13; gli anelli del modo (12, 13): 0.0149 0.2560
+----------------------------------------------------------------------------------------------------------------------------------
+### (1b) la fase di A a K per tick, divisa per s (coppia_K), contro -pi/2 = -1.570796
+  s 0.3    : ph_A(K) -0.457982558; / s -1.526608526; lo scarto da -pi/2 +4.419e-02
+  s 0.15   : ph_A(K) -0.233978724; / s -1.559858161; lo scarto da -pi/2 +1.094e-02; il rapporto con lo scarto di prima 0.2475
+  s 0.075  : ph_A(K) -0.117605160; / s -1.568068806; lo scarto da -pi/2 +2.728e-03; il rapporto con lo scarto di prima 0.2494
+  s 0.0375 : ph_A(K) -0.058879308; / s -1.570114889; lo scarto da -pi/2 +6.814e-04; il rapporto con lo scarto di prima 0.2498
+----------------------------------------------------------------------------------------------------------------------------------
+### (1c) 2 - pi - 2 mu (la condizione c2 P0+Ppi nel cuore, alpha = 1, per unita' di tempo)
+  S1_s0.300: mu -0.532745112 (fermo, residuo 9.8e-10); 2 - pi - 2 mu = -0.07610
+  S1_s0.150: mu -0.566022365 (fermo, residuo 1.8e-10); 2 - pi - 2 mu = -0.00955
+  S1_s0.075: mu -0.574255685 (NON fermo, residuo 9.7e-06); 2 - pi - 2 mu = +0.00692
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) IL FILTRO SOLO P0: S1_s0.300, 600 tick
+  lo stato fermo filtrato una volta: |psi0f - psi0| / |psi0| 5.3654e-03
+  la norma tolta per tick: il primo 2.879e-05; la media degli ultimi 100 tick 4.552e-06; il totale 2.7427e-03
+  [solo P0, D rispetto a psi0f] |D|/|psi0| ogni 10 tick da 200: 3.4e-03 3.5e-03 3.5e-03 3.5e-03 3.6e-03 3.7e-03 3.8e-03 3.8e-03 3.9e-03 4.0e-03 4.1e-03 4.2e-03 4.3e-03 4.4e-03 4.5e-03 4.5e-03 4.6e-03 4.6e-03 4.6e-03 4.8e-03 4.8e-03 4.8e-03 4.9e-03 4.9e-03 4.9e-03 4.9e-03 5.0e-03 5.1e-03 5.3e-03 5.4e-03 5.5e-03 5.7e-03 5.8e-03 6.0e-03 6.1e-03 6.3e-03 6.4e-03 6.5e-03 6.6e-03 6.7e-03 6.7e-03
+  [solo P0, D rispetto a psi0f] la finestra: t 200 .. 600 (tempo 60 .. 180); il tasso 0.00167 per tick, 0.00557 per unita' di tempo
+  [solo P0, D rispetto a psi0f] 0 cambi di segno: il periodo non si misura
+  [solo P0, D rispetto a psi0f] t 200 (tempo 60, |D|/|psi0| 3.4e-03): gli anelli maggiori r 13 0.211, r 12 0.181, r 11 0.124; le bande Ppi 0.021  A 0.961  P0 0.000  B 0.018
+  [solo P0, D rispetto a psi0f] t 600 (tempo 180, |D|/|psi0| 6.7e-03): gli anelli maggiori r 12 0.174, r 11 0.161, r 10 0.140; le bande Ppi 0.003  A 0.992  P0 0.000  B 0.005
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) IL FILTRO SOLO PPI: S1_s0.300, 600 tick
+  lo stato fermo filtrato una volta: |psi0f - psi0| / |psi0| 3.1894e-03
+  la norma tolta per tick: il primo 1.017e-05; la media degli ultimi 100 tick 2.754e-06; il totale 1.6669e-03
+  [solo Ppi, D rispetto a psi0f] |D|/|psi0| ogni 10 tick da 200: 2.7e-03 2.8e-03 2.9e-03 3.0e-03 3.0e-03 3.1e-03 3.1e-03 3.2e-03 3.2e-03 3.3e-03 3.3e-03 3.4e-03 3.5e-03 3.6e-03 3.6e-03 3.7e-03 3.8e-03 3.9e-03 4.0e-03 4.0e-03 4.1e-03 4.1e-03 4.2e-03 4.3e-03 4.4e-03 4.4e-03 4.5e-03 4.6e-03 4.7e-03 4.8e-03 4.9e-03 5.0e-03 5.0e-03 5.1e-03 5.2e-03 5.2e-03 5.3e-03 5.3e-03 5.3e-03 5.3e-03 5.3e-03
+  [solo Ppi, D rispetto a psi0f] la finestra: t 200 .. 600 (tempo 60 .. 180); il tasso 0.00178 per tick, 0.00592 per unita' di tempo
+  [solo Ppi, D rispetto a psi0f] 0 cambi di segno: il periodo non si misura
+  [solo Ppi, D rispetto a psi0f] t 200 (tempo 60, |D|/|psi0| 2.7e-03): gli anelli maggiori r 12 0.204, r 11 0.146, r 13 0.134; le bande Ppi 0.000  A 0.962  P0 0.037  B 0.001
+  [solo Ppi, D rispetto a psi0f] t 600 (tempo 180, |D|/|psi0| 5.3e-03): gli anelli maggiori r 12 0.149, r 11 0.122, r 10 0.104; le bande Ppi 0.000  A 0.979  P0 0.021  B 0.000
+----------------------------------------------------------------------------------------------------------------------------------
+### (3) NEWTON RIPRESO A s 0.075 (dallo stato di dfb5ab7e, sha1 9744446c), al piu' 60 passi
+  la ricerca e' IN CORSA (python csv/_decadimento_in_coppia.py --cerca): questo referto e' intermedio
+----------------------------------------------------------------------------------------------------------------------------------
+### LA SINTESI
+  il filtro, il tasso per unita' di tempo (senza filtro 0.13870; con le due piatte insieme 0.00067): solo P0 0.00557; solo Ppi 0.00592
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []

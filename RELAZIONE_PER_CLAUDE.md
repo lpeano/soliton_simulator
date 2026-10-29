@@ -21856,3 +21856,30 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 | il terzo passo *(`s 0.075`)* | **il tasso non si misura:** lo stato di partenza non e' fermo *(`9.7e-6` per tick)*; `|D|/|psi0|` e' gia' `1.9e-2` al tempo `60` e cresce senza un tratto esponenziale; la finestra, anche in deroga, e' vuota |
 
 - **La lista d'attesa:** le due voci di Luca *(`S4` e Newton fermo; le bande piatte come fisica o come artefatto)* nella MAPPA, sezione `4`.
+
+### 📌 **IL DECADIMENTO IN COPPIA (LUCA, 13:02), CHECKPOINT: `3/3` -- TOGLIENDO UNA SOLA PIATTA IL MODO NON CRESCE (`p1`); IL MASSIMO DI `x alpha'` ALL'ANELLO `13` (`q1`); `ph_A(K)/s` -> `-pi/2`; IL PUNTO `3` IN CORSA** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto intermedio:** `doc/referti_l2/decadimento_in_coppia.txt` *(lo script `sha1-BYTE fc59d7a1`, `e38289a3`; il task history `c8ffacc0`)*.
+
+| il conto | `s 0.3` | `s 0.15` | `s 0.075` | `s 0.0375` |
+|---|---|---|---|---|
+| `x alpha'(x)` massimo per anello *(l'anello)*; negli anelli `12`, `13` | `0.2668` *(`13`)*; `0.0160`, `0.2668` | `0.2560` *(`13`)*; `0.0149`, `0.2560` | -- | -- |
+| `ph_A(K)/s`; lo scarto da `-pi/2` | `-1.52661`; `+4.42e-02` | `-1.55986`; `+1.09e-02` | `-1.56807`; `+2.73e-03` | `-1.57011`; `+6.81e-04` |
+| `2 - pi - 2 mu` per unita' di tempo | `-0.07610` | `-0.00955` | `+0.00692` *(`mu` NON fermo)* | -- |
+
+| il filtro *(`S1` `s 0.3`, `600` tick)* | il tasso per unita' di tempo | la norma tolta per tick *(alla fine)* |
+|---|---|---|
+| nessuno *(`dfb5ab7e`)* | `0.13870` | -- |
+| solo `P0` | `0.00557` | `4.55e-06` |
+| solo `Ppi` | `0.00592` | `2.75e-06` |
+| `P0` e `Ppi` insieme *(`6d941a4d`)* | `0.00067` | `7.33e-06` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (p1) togliendo una sola piatta il modo non cresce, in tutti e due i casi: in coppia `P0+Ppi` | **SI':** `0.0056` e `0.0059` contro `0.139` |
+| (p2) / (p3) | no |
+| (q1) il massimo di `x alpha'` negli anelli del modo | **SI':** l'anello `13`, a tutte e due le `s` |
+| (b) `ph_A(K)/s` tende a `-pi/2` | **SI':** lo scarto cala di `~4` volte a ogni dimezzamento di `s` *(i rapporti `0.2475`, `0.2494`, `0.2498`)* |
+| il punto `3` *(`s 0.075`)* | **IN CORSA:** Newton ripreso dallo stato di `dfb5ab7e` |
+
+- **In corsa:** Newton ripreso a `s 0.075` *(al piu' `60` passi)*; il referto si rigenera quando finisce.
