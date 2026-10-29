@@ -21729,3 +21729,21 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Il controllo:** `M` entro `9.6e-12`; la corsa completa; lo stato fermo sul disco = quello della ricerca *(sha1)*.
 - **Per Luca:** sulla carta *(VK, `5a0e9db4`)* `S1` e' stabile; sul reticolo lo stato fermo e' instabile. Da qui non si separa se la causa e' la saturazione del cuore o il margine `dN/dmu`.
+
+### 📌 **IL MODO INSTABILE (LUCA, 08:24): `5/6` -- ARNOLDI NON CONVERGE COL BUDGET DICHIARATO; FERMO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/modo_instabile.txt` *(lo script `sha1-BYTE 9e6afa60`, `b02f6ce8`; il task history `doc/TASK_HISTORY/2026-10-29_modo_instabile.md`)*.
+
+| controllo | esito |
+|---|---|
+| lo stato fermo = la ricerca *(sha1)*; il residuo | passa; `9.808e-10` |
+| `J` lineare *(`h`, `2 h`)* | passa; `1.4e-09` |
+| la fase: `J (i psi0) = i psi0` | passa; `9.85e-09` |
+| la traslazione lungo `A1` *(approssimata, senza DEVE)* | `|J d - d| / |d| = 2.297e-02` dopo `10` tick |
+| **Arnoldi converge** *(`k 6`, `ncv 40`, `tol 1e-8`, `30` riavvii)* | **FALLISCE:** `0` autovalori convergiti; `21220` tick, `1050` s |
+| il tick `450` dallo stato fermo = la corsa di `26300537` | passa, al bit; `|D| / |psi0| = 5.886e-03` |
+
+- **FERMO:** la correzione e' una scelta di metodo, di Luca. **Le proposte del guardiano** *(nessuna eseguita)*:
+  1. **il metodo delle potenze sulla corsa gia' fatta:** lo scostamento `D` dei tick `400`-`500`, nel regime lineare, e' gia' dominato dal modo che cresce; la sua forma *(armoniche, bande)* e il tasso dal rapporto delle norme, senza numeri nuovi da scegliere;
+  2. **Arnoldi con `P` piu' grande o `tol` piu' larga:** due numeri da scegliere.
+- **La lista d'attesa:** le due righe di Luca *(lo stato finale comune; l'altermagnetismo)* scritte nella MAPPA, sezione `4`.

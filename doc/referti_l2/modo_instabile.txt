@@ -1,0 +1,24 @@
+[TIMBRO] _modo_instabile.py  sha1-BYTE 9e6afa60  committato e pulito
+==================================================================================================================================
+IL MODO INSTABILE DELLO STATO FERMO DI S1 (Luca 08:24): L 81, s 0.3, N 1e6; G = e^{i mu s} T, il congelato vero; Arnoldi su G^P
+==================================================================================================================================
+  la configurazione: L 81 P 10 H_REL 1e-05 K_AUT 6 NCV 40 TOLL_ARNOLDI 1e-08 RIAVVII 30 M_MAX 12 ANELLO 1 R_PROFILO 30 T_CONTROLLO 450 TOLL_LIN 0.0001 SEME 20261029
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (a) radiale (m = 0) in A: VK applicato male; (b) m >= 1 in A: un'instabilita' che il criterio radiale non vede; (c) peso in B o nelle piatte; (d) altro
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: lo stato fermo sul disco = quello della ricerca (sha1)                                           PASSA   
+  DEVE PASSARE: il residuo dello stato fermo |G psi0 - psi0| / |psi0| < 1e-9                                     PASSA   9.808e-10; mu -0.532745112
+  DEVE PASSARE: J lineare (h e 2 h) entro 0.0001 su un vettore a caso                                            PASSA   1.4e-09; |J v|/|v| 1.0007
+  DEVE PASSARE: la fase: |J (i psi0) - i psi0| / |psi0| < 1e-6 (l'autovalore 1, esatto)                          PASSA   9.85e-09
+  la traslazione lungo A1 (la derivata per differenze sul reticolo, approssimata): |J d - d| / |d| = 2.297e-02 (dopo 10 tick)
+----------------------------------------------------------------------------------------------------------------------------------
+### LO SPETTRO (Arnoldi su G^10, modulo massimo)
+  Arnoldi: NON converge (gli autovalori convergiti); 0 autovalori; 21220 tick; 1050 s
+  DEVE PASSARE: Arnoldi converge                                                                                 ### FALLISCE   
+  i modi con |lambda| > 1: []
+----------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CONTROLLO INDIPENDENTE: 450 tick dallo stato fermo
+  DEVE PASSARE: il punto del tick 450 = quello della corsa di 26300537, AL BIT                                   PASSA   
+  |D| / |psi0| = 5.886e-03
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 5/6 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: Arnoldi converge']

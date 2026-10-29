@@ -41,3 +41,17 @@
 
 1. questo file, da solo;
 2. `csv/_modo_instabile.py`, commit; il referto; RELAZIONE; MAPPA *(la riga `d` della sezione `3` e le due righe della lista d'attesa)*; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/modo_instabile.txt`; lo script `sha1-BYTE 9e6afa60`, `b02f6ce8`; `5/6`)*
+
+| controllo | esito |
+|---|---|
+| lo stato fermo = la ricerca *(sha1)*; il residuo | passa; `9.808e-10` |
+| `J` lineare *(`h`, `2 h`)* | passa; `1.4e-09` |
+| la fase: `J (i psi0) = i psi0` | passa; `9.85e-09` |
+| la traslazione lungo `A1` *(approssimata, senza DEVE)* | `|J d - d| / |d| = 2.297e-02` dopo `10` tick |
+| **Arnoldi converge** *(`k 6`, `ncv 40`, `tol 1e-8`, `30` riavvii)* | **FALLISCE:** `0` autovalori convergiti; `21220` tick, `1050` s |
+| il tick `450` dallo stato fermo = la corsa di `26300537` | passa, al bit; `|D| / |psi0| = 5.886e-03` |
+
+- **Il sigillo e' FALLITO** *(Arnoldi)*: lo stato e il fallimento committati; **FERMO** *(par. `5`)*. Le parti `2` e `3` *(la forma e la sovrapposizione)* non hanno un modo su cui leggersi.
+- **La causa non e' misurata.**
