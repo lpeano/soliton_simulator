@@ -1,0 +1,69 @@
+[TIMBRO] _strada_b_r.py  sha1-BYTE 8f79f8a1  committato e pulito
+==================================================================================================================================
+LA STRADA (B) CON r < 1 CURA IL SOLITONE S1? (Luca 19:58; UNA DIAGNOSI): i pesi del nodo e dell'arco in memoria; S1_s0.150, L 81, eps 0, il congelato vero
+==================================================================================================================================
+  la configurazione: CASO S1_s0.150 R_LISTA (0.65, 0.69) R_CARTA (0.65, 0.69, 1.0) MAX_NEWTON 30 TOLL_RES 1e-09 T_FIS 180 T_DA_FIS 60 PASSO_FIS 3 TASSO_CORSA 0.02 T_MAX 20000 PEZZO 2000 OGNI 10 FINESTRA 500 TICK_BIT 10 TOLL_NORMA 1e-10 TOLL_RICOMPOSTO 1e-10 R_ANELLI 24
+  i pesi: a_n = pi/sqrt(1 - r + r^2), b_a = r a_n (mu0 = pi/2 fisso); lo scarto nel cuore = 2 - a_n - 2 mu per unita' di tempo (scritto prima)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (c1) a r 0.65 il modo non cresce e il cuore regge: (B) con r < 1 cura S1; (c2) il modo non cresce ma il cuore si svuota: un'altra causa; (c3) il modo cresce ancora: lo scarto nel solitone non e' quello libero; (c4) altro
+----------------------------------------------------------------------------------------------------------------------------------
+### (0) SULLA CARTA: i vincoli (v1), (v2) nelle loro formule
+  r 0.65: a_n/pi 1.137760 b_a/pi 0.739544 mu0/pi 0.500000; lo scarto libero pi (1 - 1/sqrt(1 - r + r^2)) -0.432787; x = sqrt(a_n b_a)/(4 pi) 0.229323 (la parte 2 vuole 0.25 al vuoto di riferimento); pi x 0.720439; pi/(4 sqrt r) di A1 0.974167
+  r 0.69: a_n/pi 1.127875 b_a/pi 0.778234 mu0/pi 0.500000; lo scarto libero pi (1 - 1/sqrt(1 - r + r^2)) -0.401732; x = sqrt(a_n b_a)/(4 pi) 0.234221 (la parte 2 vuole 0.25 al vuoto di riferimento); pi x 0.735827; pi/(4 sqrt r) di A1 0.945508
+  r 1.00: a_n/pi 1.000000 b_a/pi 1.000000 mu0/pi 0.500000; lo scarto libero pi (1 - 1/sqrt(1 - r + r^2)) +0.000000; x = sqrt(a_n b_a)/(4 pi) 0.250000 (la parte 2 vuole 0.25 al vuoto di riferimento); pi x 0.785398; pi/(4 sqrt r) di A1 0.785398
+  (pi/4)^2 = 0.616850
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) IL CAMBIO IN MEMORIA: a r 1, 10 tick dallo stato fermo di dfb5ab7e, con e senza l'avvolgimento
+  DEVE PASSARE: lo stato fermo a r 1 = quello di dfb5ab7e (sha1)                                                 PASSA   
+  DEVE PASSARE: a r 1 il tick in memoria = il tick di oggi AL BIT (10 tick)                                      PASSA   
+----------------------------------------------------------------------------------------------------------------------------------
+### (1) IL TICK LIBERO COI PESI, s 0.15
+  r 1.00: P0 in [-0.000000, +0.000000], Ppi in [-3.141593, -3.141593]; A(K) -1.559858; lo scarto libero a K -0.02188; la curvatura di A a K -3.1399e-03, rispetto a r 1 1.0000 (a_n b_a/pi^2 1.0000)
+  DEVE PASSARE: r 0.65, il tick coi pesi in memoria = il tick ricomposto dai generatori entro 1e-10              PASSA   4.8e-16
+  r 0.65: P0 in [-0.625516, -0.625516], Ppi in [-2.948863, -2.948863]; A(K) -1.563055; lo scarto libero a K -0.44827; la curvatura di A a K -2.6407e-03, rispetto a r 1 0.8410 (a_n b_a/pi^2 0.8414)
+  DEVE PASSARE: r 0.69, il tick coi pesi in memoria = il tick ricomposto dai generatori entro 1e-10              PASSA   4.6e-16
+  r 0.69: P0 in [-0.549215, -0.549215], Ppi in [-2.994110, -2.994110]; A(K) -1.562372; lo scarto libero a K -0.41858; la curvatura di A a K -2.7549e-03, rispetto a r 1 0.8774 (a_n b_a/pi^2 0.8778)
+----------------------------------------------------------------------------------------------------------------------------------
+### (3) GLI STATI FERMI COI PESI
+  DEVE PASSARE: r 0.65, lo stato sul disco = la ricerca (sha1)                                                   PASSA   
+  r 0.65: Newton dallo stato a r 1: 30 passi, residuo 5.757e-06 (NON CONVERGE), 2229 s; la storia del residuo: 8.1e-02 2.7e-03 1.0e-03 9.1e-04 5.9e-04 4.2e-04 2.6e-04 2.2e-04 1.6e-04 1.7e-04 1.3e-04 1.2e-04 8.1e-05 7.9e-05 6.2e-05 6.0e-05 4.6e-05 4.3e-05 4.3e-05 3.8e-05 2.9e-05 2.2e-05 1.9e-05 1.4e-05 1.4e-05 1.1e-05 9.9e-06 8.4e-06 6.7e-06 6.3e-06 5.8e-06
+  DEVE PASSARE: r 0.69, lo stato sul disco = la ricerca (sha1)                                                   PASSA   
+  r 0.69: Newton dallo stato a r 1: 30 passi, residuo 1.262e-06 (NON CONVERGE), 1999 s; la storia del residuo: 7.1e-02 1.8e-03 7.1e-04 1.7e-04 1.5e-05 3.5e-06 2.3e-06 1.9e-06 1.8e-06 1.7e-06 1.6e-06 1.6e-06 1.6e-06 1.5e-06 1.5e-06 1.5e-06 1.5e-06 1.5e-06 1.4e-06 1.4e-06 1.4e-06 1.4e-06 1.4e-06 1.4e-06 1.3e-06 1.3e-06 1.3e-06 1.3e-06 1.3e-06 1.3e-06 1.3e-06
+  r 1.00 (dfb5ab7e)  mu -0.566022365; lo scarto nel cuore 2 - a_n - 2 mu -0.00955; w/w_in 0.96453, cuore f_win 0.62829, entro 3 w0 1.00000, picco 5598.03, FWHM 12.8618; 1 - |<a|b>|^2 da r 1 0.000e+00
+  r 0.65             mu -0.568753654; lo scarto nel cuore 2 - a_n - 2 mu -0.43687; w/w_in 0.92457, cuore f_win 0.66468, entro 3 w0 1.00000, picco 6215.32, FWHM 12.3657; 1 - |<a|b>|^2 da r 1 3.608e-02
+  r 0.69             mu -0.568233828; lo scarto nel cuore 2 - a_n - 2 mu -0.40686; w/w_in 0.92950, cuore f_win 0.65948, entro 3 w0 1.00000, picco 6079.20, FWHM 12.4071; 1 - |<a|b>|^2 da r 1 2.732e-02
+  il profilo per anelli (rho per nodo): r 1.00 (dfb5ab7e)  r 0.65  r 0.69
+    r  0:  5.38192e+03   5.82998e+03   5.78992e+03
+    r  1:  5.33141e+03   5.84130e+03   5.74908e+03
+    r  2:  4.97104e+03   5.37075e+03   5.31974e+03
+    r  3:  4.47800e+03   4.78609e+03   4.74996e+03
+    r  4:  3.92768e+03   4.16382e+03   4.12168e+03
+    r  5:  3.30337e+03   3.42616e+03   3.40887e+03
+    r  6:  2.64551e+03   2.67759e+03   2.67843e+03
+    r  7:  2.03043e+03   1.99018e+03   1.99651e+03
+    r  8:  1.46626e+03   1.37282e+03   1.38871e+03
+    r  9:  9.40424e+02   8.23295e+02   8.42021e+02
+    r 10:  5.30741e+02   4.18705e+02   4.33301e+02
+    r 11:  2.48077e+02   1.64641e+02   1.76266e+02
+    r 12:  8.61609e+01   4.70295e+01   5.17284e+01
+    r 13:  1.70738e+01   5.75560e+00   6.82091e+00
+    r 14:  1.32424e+00   1.47962e+00   5.16572e-01
+    r 15:  8.74717e-02   1.24753e+00   3.88995e-02
+    r 16:  3.46109e-03   7.03439e-01   1.29207e-03
+    r 17:  1.15670e-04   9.65813e-02   4.14648e-05
+    r 18:  4.52986e-06   9.37075e-04   1.38852e-06
+    r 19:  1.68253e-07   3.90894e-05   4.49109e-08
+    r 20:  7.41958e-09   1.74773e-06   1.63281e-09
+    r 21:  3.18077e-10   5.91977e-08   5.77511e-11
+    r 22:  1.29079e-11   1.74840e-09   1.94087e-12
+    r 23:  5.41388e-13   7.88050e-11   6.68471e-14
+    r 24:  2.29739e-14   2.85235e-12   2.54373e-15
+----------------------------------------------------------------------------------------------------------------------------------
+### (4) LE CORSE BREVI (180 unita' di tempo; gli esami completi in doc/referti_l2/strada_b/breve_<r>.txt)
+  r 0.65: nessuna corsa breve
+  r 0.69: nessuna corsa breve
+----------------------------------------------------------------------------------------------------------------------------------
+### (5) LA CORSA LUNGA
+  r 0.65: nessuna corsa lunga
+  r 0.69: nessuna corsa lunga
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

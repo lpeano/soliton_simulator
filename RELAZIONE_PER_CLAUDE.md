@@ -21974,3 +21974,29 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **Due premesse del mandato, lette contro `99b679bc`:** il punto a `+0.8` e' una piatta sola *(nella stessa direzione il modo c'e' a `+0.4` ed e' spento a `+1.6`)*; la crescita lenta e' negli anelli `6`-`9` a `-0.4` e con una piatta sola, negli anelli `3`-`6` a `+1.6`.
 - **La MAPPA:** la riga `d`; la lista d'attesa `22` *(la crescita lenta residua)* e `23` *(il periodo dalla differenza delle due piatte)*.
 - **Da decidere** *(di Luca)*: `(A)`, `(B)` o `(C)` *(la lista d'attesa `19`)*.
+
+### 📌 **LA STRADA (B) CON `r < 1` (LUCA, 19:58; UNA DIAGNOSI): `6/6`; IL TICK LIBERO SPOSTA LA COPPIA DI `-0.45` A `r 0.65` SENZA MUOVERE `A(K)`, MA LO STATO FERMO DI `S1` COI PESI NON SI TROVA IN `30` PASSI (`5.8e-6`, `1.3e-6`): LE CORSE NON PARTONO; FERMO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]], [[PROGETTO-CURVATURA]])*.
+
+- **Il referto:** `doc/referti_l2/strada_b_r.txt` *(lo script `sha1-BYTE 8f79f8a1`, `1426f6f2`; il task history `29e4192f`)*; le ricerche in `doc/referti_l2/strada_b/` *(`862fdf40`, `caf4b96b`)*.
+
+| `S1`, `s 0.15`, `L 81`, `eps 0` | `r 1` *(`dfb5ab7e`)* | `r 0.65` | `r 0.69` |
+|---|---|---|---|
+| `a_n`, `b_a` | `pi`, `pi` | `3.574379`, `2.323347` | `3.543325`, `2.444894` |
+| il tick libero: lo scarto della coppia a `K` | `-0.02188` | **`-0.44827`** | **`-0.41858`** |
+| `A(K)`; la curvatura di `A` a `K` rispetto a `r 1` *(`a_n b_a/pi^2`)* | `-1.559858`; `1` | `-1.563055`; `0.8410` *(`0.8414`)* | `-1.562372`; `0.8774` *(`0.8778`)* |
+| Newton dallo stato a `r 1`, `30` passi | `1.8e-10` | **`5.757e-06`, NON CONVERGE** *(lento: `1.3e-04` al passo `10`, `2.9e-05` al `20`)* | **`1.262e-06`, NON CONVERGE** *(ristagna: `1.6e-06` al passo `10`)* |
+| `mu` *(non fermo a `r < 1`)* | `-0.566022365` | `-0.568753654` | `-0.568233828` |
+| lo scarto nel cuore `2 - a_n - 2 mu` | `-0.00955` | `-0.43687` | `-0.40686` |
+| `w/w_in`; il cuore `f_win`; il picco | `0.96453`; `0.62829`; `5598` | `0.92457`; `0.66468`; `6215` | `0.92950`; `0.65948`; `6079` |
+| `1 - |<a|b>|^2` da `r 1` | `0` | `3.6e-02` | `2.7e-02` |
+| la corsa breve, la lunga | `0.15108` | **non partono** *(lo stato non e' fermo)* | **non partono** |
+
+| il punto | l'esito |
+|---|---|
+| (0) la finestra di `r` | (v1) NON VALE come vincolo su `b_a/a_n` *(la sua `r` e' `cs/cs_rif`; con le condizioni della parte 2 adottate, solo `r = 1`)*; (v2) NON VALE *(smentito in `A1` da `afba052b`; fuori da `A1` non si applica)*; **`0.65` dentro la finestra del repo** *(nessun vincolo finche' la parte 2 non e' adottata)*; a `r 0.65` `x = 0.229`, la parte 2 vorrebbe `0.25` |
+| (1) il tick libero | le piatte esatte; lo scarto `-0.448` *(`-0.4328` al primo ordine)*; `A(K)` entro `3.2e-3`; la curvatura come `a_n b_a` |
+| (2) i pesi in memoria | `FP.z_nodo`, `FP.z_arco` avvolti; **a `r 1` il tick = quello di oggi AL BIT** *(`10` tick)*; il tick coi pesi = il ricomposto entro `4.8e-16` |
+| (3), (6) gli stati fermi | **NON SI TROVANO col criterio in `30` passi:** `r 0.65` cala lento, `r 0.69` ristagna |
+| (4), (5) | **non partono**; le letture `c1`-`c4` **non si decidono** |
+
+- **Da decidere** *(di Luca)*: riprendere Newton oltre i `30` passi *(come a `s 0.075` il `13:02`: li' `23` passi ripresi bastarono)*; oppure la corsa breve dallo stato quasi fermo con la finestra in deroga *(come il `12:11`)*.
