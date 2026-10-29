@@ -258,9 +258,9 @@ def lunga():
         t0 = 0
         punti = []
         if os.path.exists(f_stato):
-            dati = np.load(f_stato)
-            t0 = int(dati["t"])
-            z["st"]["psi_h"][...] = dati["psi_h"]
+            with np.load(f_stato) as dati:          # ### chiuso subito: su Windows un .npz aperto impedisce os.replace (il pezzo 02000, il mio errore)
+                t0 = int(dati["t"])
+                z["st"]["psi_h"][...] = dati["psi_h"]
             prec = leggi(os.path.join(SB.DIR_JSON, "lunga_%s_%05d.jsonl" % (SB.nome_r(r), t0 - PEZZO)))
             assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
         else:
