@@ -21747,3 +21747,31 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
   1. **il metodo delle potenze sulla corsa gia' fatta:** lo scostamento `D` dei tick `400`-`500`, nel regime lineare, e' gia' dominato dal modo che cresce; la sua forma *(armoniche, bande)* e il tasso dal rapporto delle norme, senza numeri nuovi da scegliere;
   2. **Arnoldi con `P` piu' grande o `tol` piu' larga:** due numeri da scegliere.
 - **La lista d'attesa:** le due righe di Luca *(lo stato finale comune; l'altermagnetismo)* scritte nella MAPPA, sezione `4`.
+
+### 📌 **IL MODO INSTABILE LETTO DALLA CORSA (LUCA, 09:21): `2/2` -- UN MODO CHE OSCILLA COL PERIODO DEL RESPIRO, SUL BORDO DELLO STATO FERMO, NELLE BANDE PIATTE, CON ARMONICHE ANGOLARI ALTE; TASSO `0.139` PER UNITA' DI TEMPO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/modo_dalla_corsa.txt` *(lo script `sha1-BYTE e06acad5`, `c780080c`)*; i punti fino al tick `600` al bit con `26300537`.
+
+| | `t 400` | `t 450` | `t 500` *(fuori dalla finestra lineare)* |
+|---|---|---|---|
+| `|D|/|psi0|` | `8.18e-04` | `5.89e-03` | `1.41e-02` |
+| `|D|^2` negli anelli `r 12` e `r 13` | `0.3717` + `0.5254` | `0.3592` + `0.5256` | `0.3818` + `0.4028` |
+| le bande `P0` / `Ppi` / `A` / `B` | `0.484` / `0.411` / `0.099` / `0.005` | `0.483` / `0.387` / `0.124` / `0.006` | `0.403` / `0.287` / `0.293` / `0.017` |
+| le armoniche di `drho`, le tre maggiori | `m8 0.200`, `m12 0.183`, `m11 0.154` | `m4 0.161`, `m8 0.155`, `m12 0.134` | `m0 0.374`, `m4 0.265`, `m6 0.084` |
+| `m0` di `drho` | `0.041` | `0.117` | `0.374` |
+
+- **Il tasso:** nella finestra dichiarata *(`t 250`-`470`)* `0.04161` per tick, `0.13870` per unita' di tempo; le pendenze locali `0.042`-`0.044` per tick fra `t 260` e `410`.
+- **La rotazione:** fra due istanti a `10` tick la sovrapposizione `|<D, D'>|` e' `0.04`-`0.15`; la proiezione su `D(450)` cambia segno con periodo `36.4` tick *(`10.91` unita' di tempo)*.
+- **Arnoldi** *(la conferma, `k 2`, `ncv 20`, `tol 1e-6`, `20` riavvii, partenza `D(450)`)*: **NON converge**, `0` autovalori, `7620` tick.
+
+| lettura *(08:24)* | esito |
+|---|---|
+| (a) `m = 0` in `A` | **no:** `m0` di `drho` `0.04`-`0.12` nella finestra lineare; il peso in `A` `0.10`-`0.12` |
+| (b) `m >= 1` in `A` | **no:** il peso in `A` e' piccolo |
+| (c) peso in `B` o nelle piatte | **si', nelle piatte:** `P0` + `Ppi` `0.87`-`0.90`; `B` `0.006` |
+| (d) altro | **un modo che oscilla** *(periodo `~36` tick, come il respiro)*, **sul bordo dello stato fermo** *(gli anelli `12`-`13`)*, **con armoniche angolari alte** *(`m 4`, `8`, `11`, `12`)* |
+
+- **Il punto `5`** *(`N(mu)`)* non si esegue: il modo non e' `m = 0`.
+
+- **Un errore mio:** il task history di questo mandato non e' stato committato da solo prima dello script *(il suo commit rifiutato perche' ho lanciato un altro commit mentre i suoi hook giravano; e' entrato in `c780080c`)*. Il rito del par. `8` rotto; la regola e' nella mia memoria.
+- **L'errore `n.79` del guardiano** *(il tasso `~0.2` letto sulla larghezza)* nella MAPPA, sezione `8`.
