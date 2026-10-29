@@ -61,3 +61,21 @@
 | (q1) il massimo di `x alpha'` negli anelli del modo | **SI':** l'anello `13`, a tutte e due le `s` |
 | (b) `ph_A(K)/s` tende a `-pi/2` | **SI':** lo scarto cala di `~4` volte a ogni dimezzamento di `s` *(i rapporti `0.2475`, `0.2494`, `0.2498`)* |
 | il punto `3` *(`s 0.075`)* | **IN CORSA:** Newton ripreso dallo stato di `dfb5ab7e` |
+
+## 7. ANNOTAZIONE DOPO IL REFERTO FINALE *(il referto rigenerato; lo stesso script `sha1-BYTE fc59d7a1`; `6/6`)*
+
+| `S1`, `L 81`, `N 1e6` | `s 0.3` | `s 0.15` | `s 0.075` |
+|---|---|---|---|
+| lo stato fermo *(residuo, passi)* | `9.8e-10`, `15` | `1.8e-10`, `22` | `3.6e-10`, `23` **ripresi** dallo stato di `dfb5ab7e` |
+| `mu` | `-0.532745112` | `-0.566022365` | `-0.574239118` |
+| `2 - pi - 2 mu` per unita' di tempo | `-0.07610` | `-0.00955` | `+0.00689` |
+| il tasso per unita' di tempo | `0.13870` | `0.15108` | `0.14998` |
+| il periodo | `11.45` | `11.45` | `11.45` |
+| `|D|^2` negli anelli `12` / `13`, al primo istante | `0.355` / `0.545` | `0.503` / `0.418` | `0.523` / `0.403` |
+| le piatte `P0` + `Ppi`, al primo istante | `0.481` + `0.417` | `0.503` + `0.417` | `0.496` + `0.430` |
+
+| lettura | esito |
+|---|---|
+| (A1) il tasso converge al calare di `s` *(il mandato delle `10:00`)* | **SI':** `0.139` -> `0.151` -> `0.150` |
+| il tasso massimo dove `2 - pi - 2 mu` passa per lo zero *(il punto `3` delle `13:02`)* | **compatibile, debole:** `2 - pi - 2 mu` passa per lo zero fra `s 0.15` e `s 0.075`; il tasso li' e' `0.151` e `0.150`, la differenza e' lo `0.7%` |
+| il periodo | `11.45` a tutte e tre le `s`; non segue `2 pi/|mu|` |

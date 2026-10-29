@@ -46,9 +46,19 @@ IL DECADIMENTO IN COPPIA (Luca 13:02): (1) i conti; (2) il filtro su una piatta 
   [solo Ppi, D rispetto a psi0f] t 600 (tempo 180, |D|/|psi0| 5.3e-03): gli anelli maggiori r 12 0.149, r 11 0.122, r 10 0.104; le bande Ppi 0.000  A 0.979  P0 0.021  B 0.000
 ----------------------------------------------------------------------------------------------------------------------------------
 ### (3) NEWTON RIPRESO A s 0.075 (dallo stato di dfb5ab7e, sha1 9744446c), al piu' 60 passi
-  la ricerca e' IN CORSA (python csv/_decadimento_in_coppia.py --cerca): questo referto e' intermedio
+  la storia: 9.7e-06 9.1e-06 8.5e-06 8.0e-06 7.5e-06 7.0e-06 6.6e-06 6.2e-06 5.8e-06 5.5e-06 5.1e-06 4.8e-06 4.5e-06 4.2e-06 3.7e-06 3.2e-06 2.8e-06 2.5e-06 1.9e-06 1.4e-06 7.2e-07 1.7e-08 2.1e-09 3.6e-10
+  DEVE PASSARE: lo stato ripreso sul disco = quello della ricerca (sha1); la partenza = 9744446c                 PASSA   
+  DEVE PASSARE: Newton ripreso a s 0.075 sotto 1e-09                                                             PASSA   3.600e-10 in 23 passi; mu -0.574239118
+  DEVE PASSARE: M conservata nella corsa a s 0.075 entro 1e-10                                                   PASSA   3.0e-12
+  [s 0.075, D rispetto allo stato fermo ripreso] |D|/|psi0| ogni 40 tick da 800: 6.1e-07 9.1e-07 1.4e-06 2.2e-06 3.4e-06 5.3e-06 8.4e-06 1.3e-05 2.1e-05 3.3e-05 5.3e-05 8.3e-05 1.4e-04 2.1e-04 3.4e-04 5.3e-04 8.6e-04 1.3e-03 2.1e-03 3.2e-03 4.7e-03 6.7e-03 8.8e-03 1.1e-02 1.3e-02 1.6e-02 1.8e-02 2.0e-02 2.2e-02 2.4e-02 2.6e-02 2.8e-02 3.0e-02 3.2e-02 3.5e-02 3.7e-02 3.9e-02 4.1e-02 4.4e-02 4.6e-02 4.8e-02
+  [s 0.075, D rispetto allo stato fermo ripreso] la finestra: t 800 .. 1680 (tempo 60 .. 126); il tasso 0.01125 per tick, 0.14998 per unita' di tempo
+  [s 0.075, D rispetto allo stato fermo ripreso] il periodo: 11.45 unita' di tempo (12 cambi)
+  [s 0.075, D rispetto allo stato fermo ripreso] t 1280 (tempo 96, |D|/|psi0| 1.4e-04): gli anelli maggiori r 12 0.523, r 13 0.403, r 14 0.033; le bande Ppi 0.430  A 0.071  P0 0.496  B 0.003
+  [s 0.075, D rispetto allo stato fermo ripreso] t 1480 (tempo 111, |D|/|psi0| 1.3e-03): gli anelli maggiori r 12 0.507, r 13 0.412, r 14 0.037; le bande Ppi 0.431  A 0.070  P0 0.494  B 0.004
+  [s 0.075, D rispetto allo stato fermo ripreso] t 1680 (tempo 126, |D|/|psi0| 8.8e-03): gli anelli maggiori r 12 0.485, r 13 0.419, r 14 0.031; le bande Ppi 0.402  A 0.114  P0 0.478  B 0.006
 ----------------------------------------------------------------------------------------------------------------------------------
 ### LA SINTESI
   il filtro, il tasso per unita' di tempo (senza filtro 0.13870; con le due piatte insieme 0.00067): solo P0 0.00557; solo Ppi 0.00592
+  s 0.075 ripreso: mu -0.574239118; 2 - pi - 2 mu = +0.00689; il tasso 0.14998 (la serie: 0.13870 a s 0.3, 0.15108 a s 0.15)
 ----------------------------------------------------------------------------------------------------------------------------------
-ESITO: 3/3 controlli passano; DEVE fallite: 0 []
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
