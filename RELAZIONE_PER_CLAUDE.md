@@ -21780,3 +21780,27 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Il mandato delle `10:22`** *(il filtro sulle bande piatte, una diagnosi)* **e' arrivato mentre quello delle `10:00` era in corso** *(il task history `2e51b243`, lo script `364ffe5d`, le tre ricerche di Newton in corsa)*.
 - **Le sue premesse e il suo punto `5` citano l'esito delle `10:00`:** va in coda dopo. **L'ordine e' registrato nella MAPPA, sezione `7`.**
+
+### 📌 **IL MODO AL VARIARE DI `s`, E PER `S4` (LUCA, 10:00): `8/10` -- A `s 0.15` IL TASSO E' `0.151` *(A `s 0.3` `0.139`)*, IL PERIODO `11.45` A TUTTE E DUE, NON `2 pi/|mu|`; NEWTON NON TROVA LO STATO FERMO A `s 0.075` NE' PER `S4`: FERMO SU QUESTI DUE** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/modo_al_variare_di_s.txt` *(lo script `sha1-BYTE 65fa0bd3`, `364ffe5d`; la storia di Newton in `doc/referti_l2/modo_s/`)*.
+
+| | `S1` `s 0.3` | `S1` `s 0.15` | `S1` `s 0.075` | `S4` `s 0.3` |
+|---|---|---|---|---|
+| Newton *(criterio `1e-9`, `30` passi)* | `9.808e-10`, `15` passi | `1.771e-10`, `22` passi | **FALLISCE:** `9.696e-06`, cala lento | **FALLISCE:** `1.422e-03`, quasi fermo |
+| `mu`; `2 pi / |mu|` | `-0.532745`; `11.794` | `-0.566022`; `11.101` | -- | -- |
+| il tasso per unita' di tempo *(la finestra)* | `0.13870` *(tempo `75`-`141`)* | `0.15108` *(tempo `66`-`138`)* | -- | -- |
+| il periodo | `11.45` | `11.45` | -- | -- |
+| `|D|^2` negli anelli, al primo istante | `r 13 0.545`, `r 12 0.355` | `r 12 0.503`, `r 13 0.418` | -- | -- |
+| le bande `P0` / `Ppi` / `A`, al primo istante | `0.481` / `0.417` / `0.096` | `0.503` / `0.417` / `0.078` | -- | -- |
+| la pendenza massima del profilo / picco *(anelli)* | `0.1223` *(5-6)* | `0.1222` *(5-6)* | -- | -- |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (A1) il tasso converge al calare di `s` / (A2) cambia molto | **non si decide con due passi:** `0.139` -> `0.151` *(`+9%`)*; il terzo passo, `s 0.075`, non ha lo stato fermo |
+| (B1) / (B2) `S4` ha o no il modo | **non si decide:** lo stato fermo di `S4` non si trova col criterio *(`1.4e-3`)* |
+| (C) il periodo segue `2 pi / |mu|` | **no:** il periodo e' `11.45` a tutte e due le `s`; `2 pi / |mu|` va da `11.794` a `11.101` |
+| (D) altro | la forma del modo e' la stessa alle due `s`: il bordo *(anelli `12`-`13`)*, le piatte *(`0.90`-`0.92`)* |
+
+- **FERMO** su `S1` `s 0.075` e su `S4`: **le domande per Luca:** (1) per `s 0.075` piu' passi di Newton *(il residuo cala ancora, `~4%` a passo)*?; (2) per `S4` un altro metodo, o la diagnosi di `S4` resta chiusa?
+- **La coda:** il mandato delle `10:22` *(il filtro sulle bande piatte)* si lavora ora; il suo punto `5` *(un passo dove il modo e' piu' forte)*: `s 0.15`, tasso `0.151` contro `0.139`.

@@ -39,3 +39,24 @@
 
 1. questo file, DA SOLO, e aspettare il push;
 2. `csv/_modo_al_variare_di_s.py`, commit; `--cerca` e `--corsa` per i tre casi; `--referto`; RELAZIONE; MAPPA; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/modo_al_variare_di_s.txt`; lo script `sha1-BYTE 65fa0bd3`, `364ffe5d`; `8/10`)*
+
+| | `S1` `s 0.3` | `S1` `s 0.15` | `S1` `s 0.075` | `S4` `s 0.3` |
+|---|---|---|---|---|
+| Newton *(criterio `1e-9`, `30` passi)* | `9.808e-10`, `15` passi | `1.771e-10`, `22` passi | **FALLISCE:** `9.696e-06`, cala lento | **FALLISCE:** `1.422e-03`, quasi fermo |
+| `mu`; `2 pi / |mu|` | `-0.532745`; `11.794` | `-0.566022`; `11.101` | -- | -- |
+| il tasso per unita' di tempo *(la finestra)* | `0.13870` *(tempo `75`-`141`)* | `0.15108` *(tempo `66`-`138`)* | -- | -- |
+| il periodo | `11.45` | `11.45` | -- | -- |
+| `|D|^2` negli anelli, al primo istante | `r 13 0.545`, `r 12 0.355` | `r 12 0.503`, `r 13 0.418` | -- | -- |
+| le bande `P0` / `Ppi` / `A`, al primo istante | `0.481` / `0.417` / `0.096` | `0.503` / `0.417` / `0.078` | -- | -- |
+| la pendenza massima del profilo / picco *(anelli)* | `0.1223` *(5-6)* | `0.1222` *(5-6)* | -- | -- |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (A1) il tasso converge al calare di `s` / (A2) cambia molto | **non si decide con due passi:** `0.139` -> `0.151` *(`+9%`)*; il terzo passo, `s 0.075`, non ha lo stato fermo |
+| (B1) / (B2) `S4` ha o no il modo | **non si decide:** lo stato fermo di `S4` non si trova col criterio *(`1.4e-3`)* |
+| (C) il periodo segue `2 pi / |mu|` | **no:** il periodo e' `11.45` a tutte e due le `s`; `2 pi / |mu|` va da `11.794` a `11.101` |
+| (D) altro | la forma del modo e' la stessa alle due `s`: il bordo *(anelli `12`-`13`)*, le piatte *(`0.90`-`0.92`)* |
+
+- **Due DEVE falliti** *(Newton a `S1` `s 0.075` e a `S4`)*: lo stato e il fallimento committati; **FERMO** su questi due *(par. `5`)*.
