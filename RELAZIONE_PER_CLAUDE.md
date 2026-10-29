@@ -21775,3 +21775,8 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Un errore mio:** il task history di questo mandato non e' stato committato da solo prima dello script *(il suo commit rifiutato perche' ho lanciato un altro commit mentre i suoi hook giravano; e' entrato in `c780080c`)*. Il rito del par. `8` rotto; la regola e' nella mia memoria.
 - **L'errore `n.79` del guardiano** *(il tasso `~0.2` letto sulla larghezza)* nella MAPPA, sezione `8`.
+
+### 📌 **LA CODA (LUCA, 10:22): LA DIAGNOSI COL FILTRO SULLE BANDE PIATTE VA IN CODA DOPO IL MANDATO DELLE `10:00`** *([[L-UN-PROMPT]], [[PRECEDENZA-IN-CODA]], [[MAPPA-DEL-LAVORO]])*.
+
+- **Il mandato delle `10:22`** *(il filtro sulle bande piatte, una diagnosi)* **e' arrivato mentre quello delle `10:00` era in corso** *(il task history `2e51b243`, lo script `364ffe5d`, le tre ricerche di Newton in corsa)*.
+- **Le sue premesse e il suo punto `5` citano l'esito delle `10:00`:** va in coda dopo. **L'ordine e' registrato nella MAPPA, sezione `7`.**

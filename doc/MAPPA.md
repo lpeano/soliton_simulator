@@ -123,6 +123,8 @@
 | 1 | ### **il vuoto sul fondo `(c-iii)`: il solitone dal fondo a `s 0.075`** *(`F0` la scelta di Luca, `F1`-`F3` la famiglia)* | ### **FATTO: `5/6`** *(`76eecbf5`)* |
 | 2 | ### **lo zero del vuoto** *(l'ipotesi di Luca delle `01:26`; il testo nella relazione e in `PROGETTO_MITOSI` 3(c))* | ### **CHIUSO:** ### **la DEVE `(0)` entro `1e-12` relativo, `1/3`** *(Luca `08:31`; il commit di `zero_del_vuoto_c0.txt`)*; ### **l'ipotesi come canale di gravita' chiusa** *(`43c3a298`)* |
 | 3 | ### **il solitone con la sua buca** *(la rampa del vuoto; il mandato delle `22:59`)* | ### **FATTO: `4/6`** *(`doc/referti_l2/solitone_con_la_buca.txt`)*: ### **i DEVE passano; `(p1)` e `(p2)` falliscono; la parte `2` attende Luca** |
+| 4 | ### **il modo instabile al variare di `s`, e per `S4`** *(Luca, `2026-10-29` `10:00`)* | ### **IN CORSO:** ### **il task history `2e51b243`, lo script `364ffe5d`; le tre ricerche di Newton in corsa** |
+| 5 | ### **la diagnosi col filtro sulle bande piatte** *(Luca, `2026-10-29` `10:22`; NON una cura)* | ### **IN CODA dopo la `4`, che le serve** *(le premesse e il punto `5` ne citano l'esito; `L-UN-PROMPT`)* |
 
 ## 8. GLI ERRORI DEL GUARDIANO, DAL `n.54`
 
