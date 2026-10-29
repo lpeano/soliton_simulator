@@ -1,0 +1,11 @@
+[TIMBRO] _strada_b_lati.py  sha1-BYTE 542e597d  committato e pulito
+  r 0.6500: lo stato sha1 30ab4df1, residuo 5.757e-06 (NON fermo), mu -0.568753654
+  r 0.6500: 1200 tick in 70 s; M entro 9.8e-13
+  r 0.6500: lo stato NON fermo (residuo 5.757e-06); mu -0.568753654; M entro 9.8e-13
+    |D|/|psi0| ogni 3 unita' di tempo da 3: 1.06e-04 2.07e-04 3.07e-04 4.10e-04 5.15e-04 6.23e-04 7.32e-04 8.45e-04 9.60e-04 1.08e-03 1.20e-03 1.32e-03 1.45e-03 1.58e-03 1.71e-03 1.85e-03 1.99e-03 2.14e-03 2.29e-03 2.44e-03 2.60e-03 2.76e-03 2.93e-03 3.10e-03 3.28e-03 3.46e-03 3.65e-03 3.84e-03 4.04e-03 4.24e-03 4.45e-03 4.67e-03 4.89e-03 5.11e-03 5.34e-03 5.58e-03 5.81e-03 6.06e-03 6.30e-03 6.55e-03 6.80e-03 7.05e-03 7.30e-03 7.55e-03 7.80e-03 8.06e-03 8.31e-03 8.57e-03 8.83e-03 9.09e-03 9.35e-03 9.62e-03 9.89e-03 1.02e-02 1.04e-02 1.07e-02 1.10e-02 1.13e-02 1.15e-02 1.18e-02
+    d ln|D|/dt (accanto 1/t) a tempo 15, 30, 60, 90, 120, 150, 180: 0.0696 (0.0667)  0.0370 (0.0333)  0.0213 (0.0167)  0.0162 (0.0111)  0.0126 (0.0083)  0.0096 (0.0067)  0.0077 (0.0056)
+    sotto 1e-02: 53 campioni; (L) |D| = -9.519e-04 + 6.314e-05 t, scarto inf; (E) ln|D| = -7.642 + 0.02179 t, scarto 0.3568; la pendenza attesa residuo/s 3.838e-05 (v / attesa 1.645)
+    LA FORMA: ESPONENZIALE
+    il tasso nella finestra (in deroga, fra 5.8e-05 e 1e-02; tempo 3 .. 159, 53 campioni): 0.02179 per unita' di tempo (dfb5ab7e a r 1: 0.15108)
+    D a tempo 90: gli anelli maggiori r 15 0.405, r 14 0.378, r 13 0.041; le bande Ppi 0.000  A 0.139  P0 0.861  B 0.000
+    D a tempo 180: gli anelli maggiori r 15 0.428, r 14 0.371, r 16 0.086; le bande Ppi 0.001  A 0.073  P0 0.926  B 0.000
