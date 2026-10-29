@@ -22000,3 +22000,5 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 | (4), (5) | **non partono**; le letture `c1`-`c4` **non si decidono** |
 
 - **Da decidere** *(di Luca)*: riprendere Newton oltre i `30` passi *(come a `s 0.075` il `13:02`: li' `23` passi ripresi bastarono)*; oppure la corsa breve dallo stato quasi fermo con la finestra in deroga *(come il `12:11`)*.
+
+- **il mio errore di `af1758fd`:** lo script di patch ha scritto il task history e la RELAZIONE, poi un controllo sull'ancora della MAPPA e' fallito *(l'ancora non era il testo vero)*: **la MAPPA non era nel commit, e il suo COSA la dichiarava.** La riga `d` entra nel commit dopo. **E' la regola della mia memoria «i controlli prima di ogni scrittura», violata ancora.**
