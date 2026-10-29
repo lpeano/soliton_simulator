@@ -1,0 +1,49 @@
+[TIMBRO] _filtro_bande_piatte.py  sha1-BYTE 093675f7  committato e pulito
+==================================================================================================================================
+LA DIAGNOSI COL FILTRO SULLE BANDE PIATTE (Luca 10:22; NON una cura): a ogni tick la proiezione su P0 e Ppi tolta e psi rinormalizzata; l'esame di 5f06dbfb
+==================================================================================================================================
+  la configurazione: CASI ('S1_s0.300', 'S1_s0.150') PIATTE (0, 1, 2, 3, 6, 7, 8, 9) T_FIS 180 T_DA_FIS 60 PASSO_FIS 3 FATTORE_RUMORE 1000 SATURAZIONE 0.01 SOGLIE_FORMA (0.0001, 0.001) TOLL_PARSEVAL 1e-12
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (a) col filtro il modo sparisce o il tasso cala molto: le piatte sono il canale; (b) resta con lo stesso tasso: il canale e' un altro; (c) il filtro cambia troppo lo stato fermo; (d) altro
+  SENZA FILTRO (dfb5ab7e): il tasso 0.13870 a s 0.3, 0.15108 a s 0.15 per unita' di tempo
+----------------------------------------------------------------------------------------------------------------------------------
+### S1_s0.300: S1, s 0.3, N 1e+06, L 81; mu -0.532745112; il residuo dello stato fermo 9.808e-10
+  DEVE PASSARE: S1_s0.300, lo stato fermo sul disco = quello della ricerca (sha1)                                PASSA   
+  DEVE PASSARE: S1_s0.300, i pesi per banda sommano a |psi0|^2 (Parseval) entro 1e-12                            PASSA   1.1e-16
+  il controllo (punto 4): la frazione di |psi0|^2 nelle piatte 3.8959e-05; |psi0f - psi0| / |psi0| 6.2417e-03
+  la corsa filtrata: 600 tick in 47 s
+  la norma tolta per tick (frazione di N), ogni 10 tick: 7.3e-06 7.4e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06 7.3e-06
+  la norma tolta: il totale 4.4200e-03 di N; il primo tick 3.896e-05; il massimo 3.896e-05 (tick 1); la media degli ultimi 100 tick 7.328e-06
+  [D rispetto a psi0] |D|/|psi0| ogni 10 tick da 200: 7.2e-03 7.2e-03 7.2e-03 7.2e-03 7.2e-03 7.2e-03 7.3e-03 7.3e-03 7.3e-03 7.3e-03 7.3e-03 7.4e-03 7.4e-03 7.5e-03 7.5e-03 7.5e-03 7.5e-03 7.5e-03 7.6e-03 7.6e-03 7.5e-03 7.5e-03 7.5e-03 7.5e-03 7.4e-03 7.4e-03 7.3e-03 7.3e-03 7.3e-03 7.3e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03 7.4e-03
+  [D rispetto a psi0] la finestra: t 200 .. 600 (tempo 60 .. 180); il tasso 0.00005 per tick, 0.00018 per unita' di tempo
+  [D rispetto a psi0] 0 cambi di segno: il periodo non si misura
+  [D rispetto a psi0] t 200 (tempo 60, |D|/|psi0| 7.2e-03): gli anelli maggiori r 13 0.403, r 12 0.225, r 14 0.197; le bande Ppi 0.198  A 0.238  P0 0.560  B 0.003
+  [D rispetto a psi0] t 600 (tempo 180, |D|/|psi0| 7.4e-03): gli anelli maggiori r 13 0.379, r 12 0.215, r 14 0.178; le bande Ppi 0.185  A 0.290  P0 0.522  B 0.003
+  [D rispetto a psi0f] |D|/|psi0| ogni 10 tick da 200: 3.5e-03 3.6e-03 3.6e-03 3.7e-03 3.6e-03 3.7e-03 3.7e-03 3.7e-03 3.8e-03 3.8e-03 3.8e-03 3.9e-03 4.0e-03 4.1e-03 4.1e-03 4.2e-03 4.2e-03 4.2e-03 4.3e-03 4.3e-03 4.2e-03 4.1e-03 4.2e-03 4.1e-03 4.1e-03 3.9e-03 3.9e-03 3.9e-03 3.8e-03 3.9e-03 3.9e-03 3.9e-03 3.9e-03 3.9e-03 3.9e-03 4.0e-03 4.0e-03 4.0e-03 4.0e-03 4.1e-03 4.0e-03
+  [D rispetto a psi0f] la finestra: t 200 .. 600 (tempo 60 .. 180); il tasso 0.00020 per tick, 0.00067 per unita' di tempo
+  [D rispetto a psi0f] 0 cambi di segno: il periodo non si misura
+  [D rispetto a psi0f] t 200 (tempo 60, |D|/|psi0| 3.5e-03): gli anelli maggiori r 12 0.175, r 13 0.169, r 11 0.118; le bande Ppi 0.000  A 0.986  P0 0.000  B 0.014
+  [D rispetto a psi0f] t 600 (tempo 180, |D|/|psi0| 4.0e-03): gli anelli maggiori r 13 0.142, r 11 0.138, r 12 0.136; le bande Ppi 0.000  A 0.990  P0 0.000  B 0.010
+----------------------------------------------------------------------------------------------------------------------------------
+### S1_s0.150: S1, s 0.15, N 1e+06, L 81; mu -0.566022365; il residuo dello stato fermo 1.771e-10
+  DEVE PASSARE: S1_s0.150, lo stato fermo sul disco = quello della ricerca (sha1)                                PASSA   
+  DEVE PASSARE: S1_s0.150, i pesi per banda sommano a |psi0|^2 (Parseval) entro 1e-12                            PASSA   0.0e+00
+  il controllo (punto 4): la frazione di |psi0|^2 nelle piatte 3.9004e-05; |psi0f - psi0| / |psi0| 6.2454e-03
+  la corsa filtrata: 1200 tick in 84 s
+  la norma tolta per tick (frazione di N), ogni 20 tick: 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06 1.9e-06
+  la norma tolta: il totale 2.3449e-03 di N; il primo tick 3.900e-05; il massimo 3.900e-05 (tick 1); la media degli ultimi 200 tick 1.925e-06
+  [D rispetto a psi0] |D|/|psi0| ogni 20 tick da 400: 6.8e-03 6.8e-03 6.9e-03 6.9e-03 6.8e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 7.0e-03 7.0e-03 6.9e-03 7.0e-03 7.0e-03 6.9e-03 6.9e-03 7.0e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03 6.9e-03
+  [D rispetto a psi0] la finestra: t 400 .. 1200 (tempo 60 .. 180); il tasso 0.00001 per tick, 0.00008 per unita' di tempo
+  [D rispetto a psi0] 0 cambi di segno: il periodo non si misura
+  [D rispetto a psi0] t 400 (tempo 60, |D|/|psi0| 6.8e-03): gli anelli maggiori r 13 0.442, r 12 0.223, r 14 0.221; le bande Ppi 0.243  A 0.152  P0 0.602  B 0.003
+  [D rispetto a psi0] t 1200 (tempo 180, |D|/|psi0| 6.9e-03): gli anelli maggiori r 13 0.430, r 12 0.217, r 14 0.211; le bande Ppi 0.234  A 0.184  P0 0.579  B 0.003
+  [D rispetto a psi0f] |D|/|psi0| ogni 20 tick da 400: 2.7e-03 2.8e-03 2.8e-03 2.8e-03 2.8e-03 2.8e-03 2.9e-03 2.9e-03 2.9e-03 2.9e-03 2.9e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03 3.1e-03 3.1e-03 3.0e-03 3.1e-03 3.2e-03 3.0e-03 2.9e-03 3.1e-03 3.0e-03 3.0e-03 3.0e-03 2.9e-03 2.9e-03 2.9e-03 2.9e-03 3.0e-03 3.0e-03 2.9e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03 3.0e-03
+  [D rispetto a psi0f] la finestra: t 400 .. 1200 (tempo 60 .. 180); il tasso 0.00007 per tick, 0.00047 per unita' di tempo
+  [D rispetto a psi0f] 0 cambi di segno: il periodo non si misura
+  [D rispetto a psi0f] t 400 (tempo 60, |D|/|psi0| 2.7e-03): gli anelli maggiori r 13 0.227, r 12 0.155, r 11 0.104; le bande Ppi 0.000  A 0.980  P0 0.000  B 0.020
+  [D rispetto a psi0f] t 1200 (tempo 180, |D|/|psi0| 3.0e-03): gli anelli maggiori r 13 0.199, r 12 0.117, r 14 0.112; le bande Ppi 0.000  A 0.984  P0 0.000  B 0.016
+----------------------------------------------------------------------------------------------------------------------------------
+### LA SINTESI (il tasso per unita' di tempo, col filtro)
+  S1_s0.300 s 0.30: rispetto a psi0 0.00018; rispetto a psi0f 0.00067
+  S1_s0.150 s 0.15: rispetto a psi0 0.00008; rispetto a psi0f 0.00047
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

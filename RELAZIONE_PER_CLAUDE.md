@@ -21804,3 +21804,27 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **FERMO** su `S1` `s 0.075` e su `S4`: **le domande per Luca:** (1) per `s 0.075` piu' passi di Newton *(il residuo cala ancora, `~4%` a passo)*?; (2) per `S4` un altro metodo, o la diagnosi di `S4` resta chiusa?
 - **La coda:** il mandato delle `10:22` *(il filtro sulle bande piatte)* si lavora ora; il suo punto `5` *(un passo dove il modo e' piu' forte)*: `s 0.15`, tasso `0.151` contro `0.139`.
+
+### 📌 **IL FILTRO SULLE BANDE PIATTE (LUCA, 10:22; UNA DIAGNOSI): `4/4` -- COL FILTRO IL MODO NON CRESCE: IL TASSO DA `0.139` A `0.0007` (`s 0.3`), DA `0.151` A `0.0005` (`s 0.15`); LE PIATTE SONO IL CANALE** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/filtro_bande_piatte.txt` *(lo script `sha1-BYTE 093675f7`, `8068d88e`; il task history `doc/TASK_HISTORY/2026-10-29_filtro_bande_piatte.md`, `581fc22c`)*.
+
+| | `S1` `s 0.3` | `S1` `s 0.15` |
+|---|---|---|
+| il tasso SENZA filtro *(`dfb5ab7e`)* | `0.13870` | `0.15108` |
+| il tasso COL filtro, rispetto allo stato fermo filtrato *(`psi0f`)* | `0.00067` | `0.00047` |
+| il tasso COL filtro, rispetto allo stato fermo *(`psi0`)* | `0.00018` | `0.00008` |
+| `|D|/|psi0|` rispetto a `psi0f`, tempo `60` -> `180` | `3.5e-03` -> `4.0e-03` | `2.7e-03` -> `3.0e-03` |
+| le bande di `D` rispetto a `psi0f` *(`A` / `B`)* | `0.986` / `0.014` -> `0.990` / `0.010` | `0.980` / `0.020` -> `0.984` / `0.016` |
+| il controllo: le piatte nello stato fermo; `|psi0f - psi0| / |psi0|` | `3.8959e-05`; `6.2417e-03` | `3.9004e-05`; `6.2454e-03` |
+| la norma tolta: il primo tick; la media degli ultimi `100` *(`200`)* tick; il totale | `3.896e-05`; `7.328e-06`; `4.4200e-03` | `3.900e-05`; `1.925e-06`; `2.3449e-03` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (a) col filtro il modo sparisce o il tasso cala molto: le piatte sono il canale | **SI':** il tasso cala da `0.139` a `0.0007` *(`s 0.3`)* e da `0.151` a `0.0005` *(`s 0.15`)*; in `180` unita' di tempo `D` non cresce |
+| (b) resta con lo stesso tasso | no |
+| (c) il filtro cambia troppo lo stato fermo | **una cautela, non un impedimento:** lo sposta di `6.2e-3` *(le piatte sono `3.9e-5` della norma)*; e toglie norma a ogni tick, costante *(`7.3e-6` per tick a `s 0.3`)*: il bordo continua a riempire le piatte |
+| (d) altro | -- |
+
+- **La voce della lista d'attesa** *(da NON eseguire)*: la cura nel modello, la moneta o la composizione che allontanano le piatte dalla frequenza del solitone; MAPPA, sezione `4`.
+- **Restano FERMI** *(dal mandato delle `10:00`, `dfb5ab7e`)*: lo stato fermo a `s 0.075` e di `S4`.
