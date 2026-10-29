@@ -1,0 +1,94 @@
+[TIMBRO] _larghezza_risonanza.py  sha1-BYTE ef39b66a  committato e pulito
+==================================================================================================================================
+LA LARGHEZZA DELLA RISONANZA CON LO STATO FERMO DI OGNI MAPPA SPOSTATA (Luca 17:15; UNA DIAGNOSI): S1_s0.150, 180 unita' di tempo per corsa
+==================================================================================================================================
+  la configurazione: CASO S1_s0.150 P0 (6, 7, 8, 9) PPI (0, 1, 2, 3) STATI (('stessa+0.05', 0.05, 0.05, 'piu'), ('stessa+0.2', 0.2, 0.2, 'piu'), ('stessa+0.8', 0.8, 0.8, 'piu'), ('soloP0+0.8', 0.8, 0.0, 'piu'), ('stessa-0.05', -0.05, -0.05, 'meno'), ('stessa-0.2', -0.2, -0.2, 'meno'), ('stessa-0.8', -0.8, -0.8, 'meno'), ('opposte0.8', 0.8, -0.8, 'opposte')) MAX_NEWTON 30 TOLL_RES 1e-09 T_FIS 180 T_DA_FIS 60 PASSO_FIS 3 FATTORE_RUMORE 1000 SATURAZIONE 0.01 TASSO_DFB 0.15108 TOLL_DFB 0.001 TOLL_NORMA 1e-10
+  IL SEGNO: e^{-i delta_p s} sulle componenti della piatta p alza ph_p = -arg(lambda) di delta_p s per tick; lo scarto ph_P0 + ph_Ppi - 2 ph_sol cambia di delta_P0 + delta_Ppi per unita' di tempo
+  D(t) = e^{i mu s t} psi(t) - psi_delta, psi_delta = lo stato fermo della mappa spostata (Newton, per continuazione)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (w1) nella stessa direzione il tasso cala con |delta| e si spegne; (w2) non cala fino a 0.8; (w3) cala per un segno e cresce per l'altro; (w4) altro; (k1) opposte ~0.151 e solo P0 a 0.8 = la stessa direzione fra 0.2 e 0.8; (k2) no
+  DEVE PASSARE: S1_s0.150, lo stato a delta 0 = la ricerca (sha1), e fermo                                       PASSA   1.771e-10
+----------------------------------------------------------------------------------------------------------------------------------
+### GLI STATI FERMI DELLE MAPPE SPOSTATE
+  stessa+0.05  dP0 +0.05 dPpi +0.05 (lo scarto +0.10), la catena piu     dalla partenza delta0      : 3 passi, residuo 4.599e-10, CONVERGE; mu -0.566021183 (da delta 0 +1.182e-06); 1-|<a|b>|^2 3.489e-07; 272 s
+  stessa+0.2   dP0 +0.20 dPpi +0.20 (lo scarto +0.40), la catena piu     dalla partenza stessa+0.05 : 4 passi, residuo 7.389e-10, CONVERGE; mu -0.566017577 (da delta 0 +4.789e-06); 1-|<a|b>|^2 6.102e-06; 334 s
+  stessa+0.8   dP0 +0.80 dPpi +0.80 (lo scarto +1.60), la catena piu     dalla partenza stessa+0.2  : 7 passi, residuo 5.269e-11, CONVERGE; mu -0.565997492 (da delta 0 +2.487e-05); 1-|<a|b>|^2 1.915e-04; 409 s
+  soloP0+0.8   dP0 +0.80 dPpi +0.00 (lo scarto +0.80), la catena piu     dalla partenza stessa+0.2  : 3 passi, residuo 6.162e-10, CONVERGE; mu -0.566015790 (da delta 0 +6.575e-06); 1-|<a|b>|^2 9.251e-06; 172 s
+  stessa-0.05  dP0 -0.05 dPpi -0.05 (lo scarto -0.10), la catena meno    dalla partenza delta0      : 3 passi, residuo 3.387e-10, CONVERGE; mu -0.566023549 (da delta 0 -1.184e-06); 1-|<a|b>|^2 3.222e-07; 273 s
+  stessa-0.2   dP0 -0.20 dPpi -0.20 (lo scarto -0.40), la catena meno    dalla partenza stessa-0.05 : 6 passi, residuo 9.690e-10, CONVERGE; mu -0.566027203 (da delta 0 -4.837e-06); 1-|<a|b>|^2 4.985e-06; 724 s
+  stessa-0.8   dP0 -0.80 dPpi -0.80 (lo scarto -1.60), la catena meno    dalla partenza stessa-0.2  : 30 passi, residuo 1.058e-04, NON CONVERGE; mu -0.565977538 (da delta 0 +4.483e-05); 1-|<a|b>|^2 2.322e-04; 3172 s
+  opposte0.8   dP0 +0.80 dPpi -0.80 (lo scarto +0.00), la catena opposte dalla partenza delta0      : 4 passi, residuo 6.745e-10, CONVERGE; mu -0.566021681 (da delta 0 +6.842e-07); 1-|<a|b>|^2 8.412e-06; 200 s
+  DEVE PASSARE: lo sha1 di ogni stato = il suo .json                                                             PASSA   
+----------------------------------------------------------------------------------------------------------------------------------
+### LE CORSE
+  ## delta0: dP0 +0.00 dPpi +0.00, lo scarto +0.00
+  [delta0] la norma conservata dallo spostamento: 8.9e-16; 74 s
+  [delta0] |D|/|psi0| ogni 20 tick da 400: 1.1e-07 1.5e-07 2.1e-07 3.3e-07 4.9e-07 8.1e-07 1.2e-06 2.0e-06 3.1e-06 5.0e-06 7.9e-06 1.2e-05 2.0e-05 3.1e-05 5.1e-05 7.8e-05 1.3e-04 2.0e-04 3.4e-04 4.9e-04 8.5e-04 1.2e-03 2.1e-03 3.0e-03 4.5e-03 6.1e-03 8.1e-03 1.0e-02 1.2e-02 1.4e-02 1.6e-02 1.8e-02 1.9e-02 2.1e-02 2.3e-02 2.5e-02 2.6e-02 2.8e-02 3.0e-02 3.2e-02 3.4e-02
+  [delta0] la finestra: t 440 .. 920 (tempo 66 .. 138); il tasso 0.02266 per tick, 0.15108 per unita' di tempo
+  [delta0] il periodo: 11.45 unita' di tempo (12 cambi)
+  [delta0] t 720 (tempo 108, |D|/|psi0| 1.3e-04): gli anelli maggiori r 12 0.503, r 13 0.418, r 14 0.039; le bande Ppi 0.417  A 0.078  P0 0.503  B 0.003
+  [delta0] t 820 (tempo 123, |D|/|psi0| 1.2e-03): gli anelli maggiori r 12 0.507, r 13 0.400, r 14 0.042; le bande Ppi 0.419  A 0.084  P0 0.493  B 0.005
+  [delta0] t 920 (tempo 138, |D|/|psi0| 8.1e-03): gli anelli maggiori r 12 0.487, r 13 0.407, r 14 0.034; le bande Ppi 0.396  A 0.132  P0 0.465  B 0.007
+  ## stessa+0.05: dP0 +0.05 dPpi +0.05, lo scarto +0.10
+  [stessa+0.05] la norma conservata dallo spostamento: 8.9e-16; 72 s
+  [stessa+0.05] |D|/|psi0| ogni 20 tick da 400: 2.9e-06 4.5e-06 7.4e-06 1.2e-05 1.9e-05 3.2e-05 5.0e-05 8.6e-05 1.3e-04 2.3e-04 3.4e-04 6.1e-04 9.1e-04 1.6e-03 2.4e-03 4.0e-03 5.7e-03 8.7e-03 1.1e-02 1.5e-02 1.8e-02 2.2e-02 2.5e-02 2.8e-02 3.2e-02 3.5e-02 3.8e-02 4.2e-02 4.5e-02 4.8e-02 5.1e-02 5.4e-02 5.8e-02 6.1e-02 6.3e-02 6.6e-02 6.9e-02 7.2e-02 7.5e-02 7.8e-02 8.1e-02
+  [stessa+0.05] la finestra: t 400 .. 740 (tempo 60 .. 111); il tasso 0.02392 per tick, 0.15946 per unita' di tempo
+  [stessa+0.05] il periodo: 11.25 unita' di tempo (9 cambi)
+  [stessa+0.05] t 560 (tempo 84, |D|/|psi0| 1.3e-04): gli anelli maggiori r 13 0.650, r 12 0.275, r 14 0.038; le bande Ppi 0.432  A 0.069  P0 0.495  B 0.004
+  [stessa+0.05] t 660 (tempo 99, |D|/|psi0| 1.6e-03): gli anelli maggiori r 13 0.662, r 12 0.267, r 14 0.041; le bande Ppi 0.439  A 0.065  P0 0.492  B 0.003
+  [stessa+0.05] t 740 (tempo 111, |D|/|psi0| 8.7e-03): gli anelli maggiori r 13 0.630, r 12 0.296, r 14 0.034; le bande Ppi 0.432  A 0.101  P0 0.461  B 0.006
+  ## stessa+0.2: dP0 +0.20 dPpi +0.20, lo scarto +0.40
+  [stessa+0.2] la norma conservata dallo spostamento: 8.9e-16; 68 s
+  [stessa+0.2] |D|/|psi0| ogni 20 tick da 400: 1.8e-06 3.1e-06 4.8e-06 8.2e-06 1.3e-05 2.2e-05 3.6e-05 5.9e-05 9.8e-05 1.6e-04 2.7e-04 4.3e-04 7.4e-04 1.1e-03 2.0e-03 3.0e-03 4.7e-03 6.2e-03 8.1e-03 9.5e-03 1.1e-02 1.2e-02 1.2e-02 1.3e-02 1.5e-02 1.6e-02 1.8e-02 2.0e-02 2.1e-02 2.2e-02 2.4e-02 2.6e-02 2.8e-02 2.9e-02 3.1e-02 3.3e-02 3.6e-02 3.8e-02 4.1e-02 4.3e-02 4.6e-02
+  [stessa+0.2] la finestra: t 400 .. 780 (tempo 60 .. 117); il tasso 0.02366 per tick, 0.15772 per unita' di tempo
+  [stessa+0.2] il periodo: 11.33 unita' di tempo (10 cambi)
+  [stessa+0.2] t 580 (tempo 87, |D|/|psi0| 1.6e-04): gli anelli maggiori r 13 0.744, r 12 0.225, r 14 0.018; le bande Ppi 0.429  A 0.043  P0 0.524  B 0.004
+  [stessa+0.2] t 660 (tempo 99, |D|/|psi0| 1.1e-03): gli anelli maggiori r 13 0.751, r 12 0.217, r 14 0.018; le bande Ppi 0.425  A 0.049  P0 0.521  B 0.004
+  [stessa+0.2] t 780 (tempo 117, |D|/|psi0| 9.5e-03): gli anelli maggiori r 13 0.643, r 12 0.267, r 14 0.028; le bande Ppi 0.327  A 0.308  P0 0.354  B 0.011
+  ## stessa+0.8: dP0 +0.80 dPpi +0.80, lo scarto +1.60
+  [stessa+0.8] la norma conservata dallo spostamento: 7.8e-16; 72 s
+  [stessa+0.8] |D|/|psi0| ogni 20 tick da 400: 2.1e-08 2.2e-08 2.4e-08 2.5e-08 2.6e-08 2.7e-08 2.8e-08 2.9e-08 3.0e-08 3.1e-08 3.2e-08 3.3e-08 3.4e-08 3.5e-08 3.7e-08 3.8e-08 3.9e-08 4.0e-08 4.1e-08 4.2e-08 4.3e-08 4.4e-08 4.5e-08 4.6e-08 4.7e-08 4.8e-08 4.9e-08 5.1e-08 5.2e-08 5.3e-08 5.4e-08 5.5e-08 5.6e-08 5.7e-08 5.8e-08 5.9e-08 6.0e-08 6.1e-08 6.3e-08 6.4e-08 6.5e-08
+  [stessa+0.8] la finestra: t 980 .. 1200 (tempo 147 .. 180); il tasso 0.00094 per tick, 0.00624 per unita' di tempo
+  [stessa+0.8] 0 cambi di segno: il periodo non si misura
+  [stessa+0.8] t 1200 (tempo 180, |D|/|psi0| 6.5e-08): gli anelli maggiori r 3 0.122, r 6 0.121, r 4 0.120; le bande Ppi 0.001  A 0.999  P0 0.000  B 0.000
+  ## soloP0+0.8: dP0 +0.80 dPpi +0.00, lo scarto +0.80
+  [soloP0+0.8] la norma conservata dallo spostamento: 8.9e-16; 72 s
+  [soloP0+0.8] |D|/|psi0| ogni 20 tick da 400: 2.7e-07 2.9e-07 3.0e-07 3.2e-07 3.3e-07 3.5e-07 3.6e-07 3.8e-07 3.9e-07 4.1e-07 4.2e-07 4.4e-07 4.5e-07 4.7e-07 4.8e-07 5.0e-07 5.1e-07 5.3e-07 5.4e-07 5.6e-07 5.7e-07 5.9e-07 6.0e-07 6.2e-07 6.4e-07 6.5e-07 6.7e-07 6.8e-07 7.0e-07 7.2e-07 7.3e-07 7.5e-07 7.7e-07 7.8e-07 8.0e-07 8.2e-07 8.3e-07 8.5e-07 8.7e-07 8.9e-07 9.1e-07
+  [soloP0+0.8] la finestra: t 860 .. 1200 (tempo 129 .. 180); il tasso 0.00112 per tick, 0.00746 per unita' di tempo
+  [soloP0+0.8] 0 cambi di segno: il periodo non si misura
+  [soloP0+0.8] t 1200 (tempo 180, |D|/|psi0| 9.1e-07): gli anelli maggiori r 9 0.121, r 8 0.110, r 6 0.109; le bande Ppi 0.006  A 0.988  P0 0.006  B 0.000
+  ## stessa-0.05: dP0 -0.05 dPpi -0.05, lo scarto -0.10
+  [stessa-0.05] la norma conservata dallo spostamento: 8.9e-16; 67 s
+  [stessa-0.05] |D|/|psi0| ogni 20 tick da 400: 3.5e-07 5.3e-07 7.4e-07 1.2e-06 1.7e-06 2.6e-06 3.9e-06 5.8e-06 9.0e-06 1.3e-05 2.1e-05 3.0e-05 4.8e-05 6.8e-05 1.1e-04 1.6e-04 2.6e-04 3.6e-04 5.8e-04 8.3e-04 1.3e-03 1.9e-03 2.7e-03 3.7e-03 4.9e-03 6.2e-03 7.6e-03 9.0e-03 1.0e-02 1.1e-02 1.2e-02 1.3e-02 1.4e-02 1.6e-02 1.7e-02 1.8e-02 1.9e-02 2.1e-02 2.2e-02 2.3e-02 2.4e-02
+  [stessa-0.05] la finestra: t 400 .. 940 (tempo 60 .. 141); il tasso 0.01975 per tick, 0.13164 per unita' di tempo
+  [stessa-0.05] il periodo: 11.54 unita' di tempo (14 cambi)
+  [stessa-0.05] t 680 (tempo 102, |D|/|psi0| 1.1e-04): gli anelli maggiori r 13 0.731, r 12 0.158, r 14 0.063; le bande Ppi 0.403  A 0.090  P0 0.504  B 0.004
+  [stessa-0.05] t 800 (tempo 120, |D|/|psi0| 1.3e-03): gli anelli maggiori r 13 0.725, r 12 0.167, r 14 0.059; le bande Ppi 0.433  A 0.095  P0 0.468  B 0.005
+  [stessa-0.05] t 940 (tempo 141, |D|/|psi0| 9.0e-03): gli anelli maggiori r 13 0.547, r 12 0.292, r 14 0.047; le bande Ppi 0.313  A 0.201  P0 0.475  B 0.010
+  ## stessa-0.2: dP0 -0.20 dPpi -0.20, lo scarto -0.40
+  [stessa-0.2] la norma conservata dallo spostamento: 8.9e-16; 73 s
+  [stessa-0.2] |D|/|psi0| ogni 20 tick da 400: 4.4e-07 4.6e-07 4.8e-07 5.1e-07 5.3e-07 5.6e-07 5.8e-07 6.1e-07 6.3e-07 6.5e-07 6.8e-07 7.1e-07 7.3e-07 7.6e-07 7.8e-07 8.1e-07 8.3e-07 8.6e-07 8.8e-07 9.1e-07 9.3e-07 9.6e-07 9.8e-07 1.0e-06 1.0e-06 1.1e-06 1.1e-06 1.1e-06 1.1e-06 1.2e-06 1.2e-06 1.2e-06 1.3e-06 1.3e-06 1.3e-06 1.3e-06 1.4e-06 1.4e-06 1.4e-06 1.5e-06 1.5e-06
+  [stessa-0.2] la finestra: t 840 .. 1200 (tempo 126 .. 180); il tasso 0.00115 per tick, 0.00769 per unita' di tempo
+  [stessa-0.2] 0 cambi di segno: il periodo non si misura
+  [stessa-0.2] t 1200 (tempo 180, |D|/|psi0| 1.5e-06): gli anelli maggiori r 9 0.121, r 8 0.110, r 6 0.110; le bande Ppi 0.000  A 0.999  P0 0.001  B 0.000
+  ## opposte0.8: dP0 +0.80 dPpi -0.80, lo scarto +0.00
+  [opposte0.8] la norma conservata dallo spostamento: 8.9e-16; 72 s
+  [opposte0.8] |D|/|psi0| ogni 20 tick da 400: 4.5e-07 6.1e-07 9.1e-07 1.4e-06 2.1e-06 3.3e-06 5.4e-06 8.7e-06 1.4e-05 2.1e-05 3.5e-05 5.6e-05 8.7e-05 1.4e-04 2.3e-04 3.6e-04 5.6e-04 8.9e-04 1.4e-03 2.2e-03 3.3e-03 4.8e-03 6.7e-03 8.8e-03 1.1e-02 1.3e-02 1.5e-02 1.7e-02 1.8e-02 2.0e-02 2.1e-02 2.3e-02 2.4e-02 2.6e-02 2.8e-02 2.9e-02 3.1e-02 3.3e-02 3.4e-02 3.6e-02 3.8e-02
+  [opposte0.8] la finestra: t 440 .. 860 (tempo 66 .. 129); il tasso 0.02259 per tick, 0.15058 per unita' di tempo
+  [opposte0.8] il periodo: 22.80 unita' di tempo (6 cambi)
+  [opposte0.8] t 660 (tempo 99, |D|/|psi0| 1.4e-04): gli anelli maggiori r 13 0.560, r 12 0.379, r 14 0.034; le bande Ppi 0.488  A 0.014  P0 0.468  B 0.030
+  [opposte0.8] t 760 (tempo 114, |D|/|psi0| 1.4e-03): gli anelli maggiori r 13 0.576, r 12 0.366, r 14 0.032; le bande Ppi 0.491  A 0.015  P0 0.465  B 0.029
+  [opposte0.8] t 860 (tempo 129, |D|/|psi0| 8.8e-03): gli anelli maggiori r 13 0.543, r 12 0.395, r 14 0.023; le bande Ppi 0.459  A 0.067  P0 0.447  B 0.027
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: lo spostamento conserva la norma entro 1e-10 (il massimo su tutte le corse)                      PASSA   8.9e-16
+  DEVE PASSARE: delta 0 ridà il tasso di dfb5ab7e (0.15108) entro 0.001 relativo                                 PASSA   0.15107905246152378
+### LA SINTESI (il tasso per unita' di tempo)
+  delta0       dP0 +0.00 dPpi +0.00 lo scarto +0.00: 0.15108
+  stessa+0.05  dP0 +0.05 dPpi +0.05 lo scarto +0.10: 0.15946
+  stessa+0.2   dP0 +0.20 dPpi +0.20 lo scarto +0.40: 0.15772
+  stessa+0.8   dP0 +0.80 dPpi +0.80 lo scarto +1.60: 0.00624
+  soloP0+0.8   dP0 +0.80 dPpi +0.00 lo scarto +0.80: 0.00746
+  stessa-0.05  dP0 -0.05 dPpi -0.05 lo scarto -0.10: 0.13164
+  stessa-0.2   dP0 -0.20 dPpi -0.20 lo scarto -0.40: 0.00769
+  opposte0.8   dP0 +0.80 dPpi -0.80 lo scarto +0.00: 0.15058
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

@@ -21926,3 +21926,35 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **La correzione proposta** *(non eseguita; una decisione di Luca)*: per ogni `delta`, lo stato fermo della mappa spostata con Newton *(partendo dallo stato fermo a `delta 0`)*, poi la corsa e il tasso come in `dfb5ab7e`.
 
 - **La MAPPA:** le quattro voci della lista d'attesa di Luca *(il periodo `11.45`; la decisione sulle piatte; `S4` con questa lente; la coppia come innesco)* e l'errore `n.80` del guardiano.
+
+### 📌 **LA LARGHEZZA CON LO STATO FERMO DI OGNI MAPPA SPOSTATA (LUCA, 17:15; UNA DIAGNOSI): `4/4`; NELLA STESSA DIREZIONE IL MODO SI SPEGNE, CON LA LARGHEZZA ASIMMETRICA; IN DIREZIONI OPPOSTE IL TASSO RESTA `0.1506`** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/larghezza_stati_fermi.txt` *(lo script `sha1-BYTE ef39b66a`, `a5003014`; il task history `ea48f9dd`)*. **Gli stati:** un commit per ciascuno, `e65b7441` .. `def75661`; i `.json` in `doc/referti_l2/larghezza/`.
+
+| lo stato *(`s 0.15`)* | lo scarto | Newton *(passi, residuo)* | `mu - mu_0` | `1-|<a|b>|^2` | il tasso | il periodo | `D` al bordo della finestra *(anelli; bande)* |
+|---|---|---|---|---|---|---|---|
+| `delta 0` | `0` | `22`, `1.8e-10` *(`dfb5ab7e`)* | `0` | `0` | **`0.15108`** | `11.45` | `12`-`13`; `P0` + `Ppi` `0.86` |
+| stessa `+0.05` | `+0.1` | `3`, `4.6e-10` | `+1.18e-06` | `3.5e-07` | **`0.15946`** | `11.25` | `13`-`12`; `0.89` |
+| stessa `+0.2` | `+0.4` | `4`, `7.4e-10` | `+4.79e-06` | `6.1e-06` | **`0.15772`** | `11.33` | `13`-`12`; `0.68` |
+| stessa `+0.8` | `+1.6` | `7`, `5.3e-11` | `+2.49e-05` | `1.9e-04` | `0.00624` *(non il modo)* | -- | anelli `3`-`6`; `A` `0.999` |
+| stessa `-0.05` | `-0.1` | `3`, `3.4e-10` | `-1.18e-06` | `3.2e-07` | **`0.13164`** | `11.54` | `13`-`12`; `0.79` |
+| stessa `-0.2` | `-0.4` | `6`, `9.7e-10` | `-4.84e-06` | `5.0e-06` | `0.00769` *(non il modo)* | -- | anelli `6`-`9`; `A` `0.999` |
+| stessa `-0.8` | `-1.6` | **`30`, `1.06e-04`: NON CONVERGE** | `+4.48e-05` | `2.3e-04` | -- *(nessuna corsa)* | -- | -- |
+| opposte `P0 +0.8`, `Ppi -0.8` | `0` | `4`, `6.7e-10` | `+6.8e-07` | `8.4e-06` | **`0.15058`** | **`22.80`** | `13`-`12`; `0.91` |
+| solo `P0` `+0.8` | `+0.8` | `3`, `6.2e-10` | `+6.58e-06` | `9.3e-06` | `0.00746` *(non il modo)* | -- | anelli `9`-`6`; `A` `0.988` |
+
+- **I DEVE passano** *(`4/4`)*: lo sha1 dello stato a `delta 0` e di ogni stato; la norma conservata *(`8.9e-16`)*; `delta 0` = `0.15108`.
+- **«non il modo»:** `|D|` resta fra `2e-08` e `1.5e-06` in `180` unita' di tempo, cresce lento senza oscillare, sta nella banda `A` *(`0.99`)* e negli anelli interni: **il modo dei bordi `12`-`13` non cresce**; il numero e' la pendenza di quella deriva nella finestra, non un tasso del modo.
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (w1) nella stessa direzione il tasso cala con `|delta|` e si spegne | **SI', con la larghezza ASIMMETRICA:** dal lato negativo il modo si spegne fra lo scarto `-0.1` *(`0.132`)* e `-0.4` *(spento)*; dal lato positivo fra `+0.4` *(`0.158`)* e `+1.6` *(spento)* |
+| (w2) non cala fino a `0.8` | no |
+| (w3) cala per un segno e cresce per l'altro | **vicino a zero, si':** `+0.05` -> `0.159` *(+5.5%)*, `-0.05` -> `0.132` *(-12.9%)*; **ma a `|delta|` grande si spegne da tutti e due i lati** |
+| la larghezza contro `x alpha'` `0.27` e `mu` | dal lato negativo il bordo e' fra `0.1` e `0.4` *(contiene `x alpha'` `0.256` all'anello `13`)*; dal lato positivo fra `0.4` e `1.6` *(contiene `|mu|` `0.566` e `2|mu|`)*: **la griglia non decide** |
+| (k1) opposte `~0.151`; solo `P0` a `0.8` = la stessa direzione fra `0.2` e `0.8` | **SI':** opposte `0.15058` *(-0.3%)*; solo `P0` `+0.8` *(scarto `+0.8`)* spento, e lo scarto `+0.8` cade nell'intervallo dove la stessa direzione si spegne *(fra `+0.4` e `+1.6`)*: **compatibile, non stretto** |
+| (k2) | no |
+| **in piu'** | **le opposte: il periodo `22.80`, il doppio di `11.45`**; **stessa `-0.8`: Newton non converge** *(il residuo da `1.26e-04` al passo `20` a `1.06e-04` al passo `30`)* |
+
+- **L'errore `n.81` del guardiano** *(MAPPA, sezione 8)*: il mandato delle `14:51` non chiedeva lo stato fermo di ogni mappa spostata, e non l'ho segnalato prima di girare.
+- **Da decidere** *(di Luca)*: la decisione sulle piatte *(lista d'attesa `19`)*; se stringere la griglia sui due bordi *(scarto fra `-0.1` e `-0.4`, fra `+0.4` e `+1.6`)*; stessa `-0.8` *(Newton non converge)*; il periodo `22.80` delle opposte.
