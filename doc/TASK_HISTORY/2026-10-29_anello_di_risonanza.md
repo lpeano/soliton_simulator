@@ -47,3 +47,26 @@
 
 1. questo file, DA SOLO, e aspettare il push;
 2. `csv/_anello_di_risonanza.py`, commit; `--referto`; RELAZIONE; MAPPA *(la riga `d`; le due voci della lista d'attesa)*; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/anello_di_risonanza.txt`; lo script `sha1-BYTE fd579c2c`, `c0db073f`; `6/6`)*
+
+| per tick, avvolte | `s 0.3`: anello `12` / `13` / `14` / `15` | `s 0.15`: anello `12` / `13` / `14` / `15` |
+|---|---|---|
+| `alpha` medio | `0.992` / `0.753` / `0.055` / `0.0003` | `0.992` / `0.771` / `0.061` / `0.0004` |
+| `(c1)` `P0` | `+0.457` / `+0.386` / `+0.176` / `+0.160` | `+0.234` / `+0.201` / `+0.094` / `+0.085` |
+| `(c2)` `P0+Ppi` | `-0.028` / `-0.171` / `-0.590` / `-0.623` | `-0.004` / `-0.070` / `-0.283` / `-0.301` |
+| `|c1 P0|` meno la frequenza del modo | `+0.293` / `+0.221` / `+0.012` / `-0.005` | `+0.151` / `+0.118` / `+0.012` / `+0.003` |
+
+| la condizione | gli incroci a `s 0.3` | a `s 0.15` |
+|---|---|---|
+| `(c1)` `P0`, `Ppi`; `(c2)` `P0+P0`, `P0+Ppi`, `Ppi+Ppi` | nessuno | nessuno |
+| `|c1 P0|` = la frequenza del modo *(aggiunta)* | fra gli anelli `14` e `15` | nessuno |
+| `(c2)` `P0+Ppi` nel cuore *(anelli `0`-`11`)* | `-0.023` | `-0.0016` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (r1) un incrocio negli anelli `12`-`13` a tutte e due le `s` | **no** |
+| (r2) un incrocio altrove | solo la condizione aggiunta, fra `14` e `15`, e solo a `s 0.3` |
+| (r3) nessun incrocio | **si', per le condizioni `c1` e `c2`** |
+| (r4) altro | **la coppia `P0+Ppi` e' quasi risonante nel cuore saturo** *(`c2` `-0.023` a `s 0.3`, `-0.0016` a `s 0.15`: si avvicina a zero al calare di `s`)*, non sul bordo |
+| il terzo passo *(`s 0.075`)* | **il tasso non si misura:** lo stato di partenza non e' fermo *(`9.7e-6` per tick)*; `|D|/|psi0|` e' gia' `1.9e-2` al tempo `60` e cresce senza un tratto esponenziale; la finestra, anche in deroga, e' vuota |

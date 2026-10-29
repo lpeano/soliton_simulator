@@ -21828,3 +21828,31 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **La voce della lista d'attesa** *(da NON eseguire)*: la cura nel modello, la moneta o la composizione che allontanano le piatte dalla frequenza del solitone; MAPPA, sezione `4`.
 - **Restano FERMI** *(dal mandato delle `10:00`, `dfb5ab7e`)*: lo stato fermo a `s 0.075` e di `S4`.
+
+### 📌 **L'ANELLO DI RISONANZA E IL TERZO PASSO (LUCA, 12:11): `6/6` -- IL LEGAME E' UNO SCALARE PER NODO; NESSUNA DELLE CONDIZIONI DICHIARATE SI INCROCIA SUL BORDO (`r3`); LA COPPIA `P0+Ppi` E' QUASI RISONANTE NEL CUORE; IL TERZO PASSO NON DA' IL TASSO** *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*.
+
+- **Il referto:** `doc/referti_l2/anello_di_risonanza.txt` *(lo script `sha1-BYTE fd579c2c`, `c0db073f`; il task history `doc/TASK_HISTORY/2026-10-29_anello_di_risonanza.md`, `1b4118ab`)*.
+- **Il punto `1`, dal codice:** `materia_vuoto.applica` moltiplica tutte le `12` componenti del nodo per `exp(-i alpha(rho/Lambda) dtau f)`, due volte con `f 0.5`; `dtau = s`: **ogni banda, piatte comprese, prende `alpha s` per tick.**
+
+| per tick, avvolte | `s 0.3`: anello `12` / `13` / `14` / `15` | `s 0.15`: anello `12` / `13` / `14` / `15` |
+|---|---|---|
+| `alpha` medio | `0.992` / `0.753` / `0.055` / `0.0003` | `0.992` / `0.771` / `0.061` / `0.0004` |
+| `(c1)` `P0` | `+0.457` / `+0.386` / `+0.176` / `+0.160` | `+0.234` / `+0.201` / `+0.094` / `+0.085` |
+| `(c2)` `P0+Ppi` | `-0.028` / `-0.171` / `-0.590` / `-0.623` | `-0.004` / `-0.070` / `-0.283` / `-0.301` |
+| `|c1 P0|` meno la frequenza del modo | `+0.293` / `+0.221` / `+0.012` / `-0.005` | `+0.151` / `+0.118` / `+0.012` / `+0.003` |
+
+| la condizione | gli incroci a `s 0.3` | a `s 0.15` |
+|---|---|---|
+| `(c1)` `P0`, `Ppi`; `(c2)` `P0+P0`, `P0+Ppi`, `Ppi+Ppi` | nessuno | nessuno |
+| `|c1 P0|` = la frequenza del modo *(aggiunta)* | fra gli anelli `14` e `15` | nessuno |
+| `(c2)` `P0+Ppi` nel cuore *(anelli `0`-`11`)* | `-0.023` | `-0.0016` |
+
+| lettura *(di Luca, scritta prima)* | esito |
+|---|---|
+| (r1) un incrocio negli anelli `12`-`13` a tutte e due le `s` | **no** |
+| (r2) un incrocio altrove | solo la condizione aggiunta, fra `14` e `15`, e solo a `s 0.3` |
+| (r3) nessun incrocio | **si', per le condizioni `c1` e `c2`** |
+| (r4) altro | **la coppia `P0+Ppi` e' quasi risonante nel cuore saturo** *(`c2` `-0.023` a `s 0.3`, `-0.0016` a `s 0.15`: si avvicina a zero al calare di `s`)*, non sul bordo |
+| il terzo passo *(`s 0.075`)* | **il tasso non si misura:** lo stato di partenza non e' fermo *(`9.7e-6` per tick)*; `|D|/|psi0|` e' gia' `1.9e-2` al tempo `60` e cresce senza un tratto esponenziale; la finestra, anche in deroga, e' vuota |
+
+- **La lista d'attesa:** le due voci di Luca *(`S4` e Newton fermo; le bande piatte come fisica o come artefatto)* nella MAPPA, sezione `4`.

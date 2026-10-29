@@ -1,0 +1,93 @@
+[TIMBRO] _anello_di_risonanza.py  sha1-BYTE fd579c2c  committato e pulito
+==================================================================================================================================
+L'ANELLO DI RISONANZA E IL TERZO PASSO (Luca 12:11): la frequenza locale delle piatte per anello contro quella del solitone; S1 s 0.075 dallo stato di dfb5ab7e
+==================================================================================================================================
+  la configurazione: CASI_CONTO ('S1_s0.300', 'S1_s0.150') CASO_TERZO S1_s0.075 R_MAX 24 PERIODO 11.45 FATTORE_RUMORE_DEROGA 10 SATURAZIONE 0.01 T_FIS 180 T_DA_FIS 60 PASSO_FIS 3 SOGLIE_FORMA (0.0001, 0.001) TOLL_NORMA 1e-10
+  IL PUNTO 1 (dal codice, il task history): il legame e' exp(-i alpha(rho/Lambda) dtau f) uguale su tutte le 12 componenti del nodo, due volte con f 0.5: alpha s per tick su ogni banda
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (r1) un incrocio negli anelli 12-13 a tutte e due le s; (r2) altrove; (r3) nessuno; (r4) altro. Il terzo passo: il terzo punto della serie 0.139, 0.151
+----------------------------------------------------------------------------------------------------------------------------------
+### S1_s0.300: S1, s 0.3, N 1e+06; mu -0.532745112; ph_sol = mu s = -0.159824 per tick
+  DEVE PASSARE: S1_s0.300, lo stato fermo sul disco = quello della ricerca (sha1), e fermo                       PASSA   9.808e-10
+  DEVE PASSARE: S1_s0.300, dtau = s su ogni nodo                                                                 PASSA   min 0.3 max 0.3
+  r: rho medio / picco dell'anello, alpha medio; ph_P0 = alpha s, ph_Ppi = -pi s + alpha s; (c1) ph_p - ph_sol; (c2) ph_p + ph_p' - 2 ph_sol (avvolte, per tick); Omega del modo 0.16462 per tick
+  r  0: rho/picco 1.0000e+00  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48265 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  1: rho/picco 9.8965e-01  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48265 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  2: rho/picco 9.2299e-01  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48265 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  3: rho/picco 8.3116e-01  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48265 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  4: rho/picco 7.2822e-01  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48265 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  5: rho/picco 6.1213e-01  alpha 1.00000 | c1 P0 +0.45982  Ppi -0.48266 | c2 P0+P0 +0.91965  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  6: rho/picco 4.8984e-01  alpha 0.99999 | c1 P0 +0.45982  Ppi -0.48266 | c2 P0+P0 +0.91964  P0+Ppi -0.02283  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  7: rho/picco 3.7531e-01  alpha 0.99999 | c1 P0 +0.45982  Ppi -0.48266 | c2 P0+P0 +0.91964  P0+Ppi -0.02284  Ppi+Ppi -0.96531 | |c1| - Omega: P0 +0.29520  Ppi +0.31803
+  r  8: rho/picco 2.7055e-01  alpha 0.99998 | c1 P0 +0.45982  Ppi -0.48266 | c2 P0+P0 +0.91964  P0+Ppi -0.02284  Ppi+Ppi -0.96532 | |c1| - Omega: P0 +0.29519  Ppi +0.31803
+  r  9: rho/picco 1.7306e-01  alpha 0.99995 | c1 P0 +0.45981  Ppi -0.48267 | c2 P0+P0 +0.91962  P0+Ppi -0.02286  Ppi+Ppi -0.96534 | |c1| - Omega: P0 +0.29519  Ppi +0.31804
+  r 10: rho/picco 9.7150e-02  alpha 0.99985 | c1 P0 +0.45978  Ppi -0.48270 | c2 P0+P0 +0.91956  P0+Ppi -0.02292  Ppi+Ppi -0.96540 | |c1| - Omega: P0 +0.29515  Ppi +0.31807
+  r 11: rho/picco 4.5073e-02  alpha 0.99927 | c1 P0 +0.45960  Ppi -0.48287 | c2 P0+P0 +0.91921  P0+Ppi -0.02327  Ppi+Ppi -0.96575 | |c1| - Omega: P0 +0.29498  Ppi +0.31825
+  r 12: rho/picco 1.5437e-02  alpha 0.99187 | c1 P0 +0.45738  Ppi -0.48509 | c2 P0+P0 +0.91477  P0+Ppi -0.02771  Ppi+Ppi -0.97019 | |c1| - Omega: P0 +0.29276  Ppi +0.32047
+  r 13: rho/picco 2.9731e-03  alpha 0.75349 | c1 P0 +0.38587  Ppi -0.55661 | c2 P0+P0 +0.77174  P0+Ppi -0.17073  Ppi+Ppi -1.11321 | |c1| - Omega: P0 +0.22125  Ppi +0.39198
+  r 14: rho/picco 2.3183e-04  alpha 0.05520 | c1 P0 +0.17638  Ppi -0.76609 | c2 P0+P0 +0.35277  P0+Ppi -0.58971  Ppi+Ppi -1.53219 | |c1| - Omega: P0 +0.01176  Ppi +0.60147
+  r 15: rho/picco 1.5043e-05  alpha 0.00031 | c1 P0 +0.15992  Ppi -0.78256 | c2 P0+P0 +0.31983  P0+Ppi -0.62265  Ppi+Ppi -1.56512 | |c1| - Omega: P0 -0.00471  Ppi +0.61794
+  r 16: rho/picco 5.8926e-07  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 17: rho/picco 1.9452e-08  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 18: rho/picco 7.5117e-10  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 19: rho/picco 2.7532e-11  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 20: rho/picco 1.2030e-12  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 21: rho/picco 5.1129e-14  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 22: rho/picco 2.0528e-15  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 23: rho/picco 8.4674e-17  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  r 24: rho/picco 3.5506e-18  alpha 0.00000 | c1 P0 +0.15982  Ppi -0.78265 | c2 P0+P0 +0.31965  P0+Ppi -0.62283  Ppi+Ppi -1.56531 | |c1| - Omega: P0 -0.00480  Ppi +0.61803
+  GLI INCROCI (un cambio di segno fra l'anello r e r+1):
+    c1_P0      nessuno
+    c1_Ppi     nessuno
+    c2_P0P0    nessuno
+    c2_P0Ppi   nessuno
+    c2_PpiPpi  nessuno
+    m_P0       fra gli anelli 14-15
+    m_Ppi      nessuno
+----------------------------------------------------------------------------------------------------------------------------------
+### S1_s0.150: S1, s 0.15, N 1e+06; mu -0.566022365; ph_sol = mu s = -0.084903 per tick
+  DEVE PASSARE: S1_s0.150, lo stato fermo sul disco = quello della ricerca (sha1), e fermo                       PASSA   1.771e-10
+  DEVE PASSARE: S1_s0.150, dtau = s su ogni nodo                                                                 PASSA   min 0.15 max 0.15
+  r: rho medio / picco dell'anello, alpha medio; ph_P0 = alpha s, ph_Ppi = -pi s + alpha s; (c1) ph_p - ph_sol; (c2) ph_p + ph_p' - 2 ph_sol (avvolte, per tick); Omega del modo 0.08231 per tick
+  r  0: rho/picco 1.0000e+00  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  1: rho/picco 9.9062e-01  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  2: rho/picco 9.2366e-01  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  3: rho/picco 8.3204e-01  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  4: rho/picco 7.2979e-01  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  5: rho/picco 6.1379e-01  alpha 1.00000 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  6: rho/picco 4.9155e-01  alpha 0.99999 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46981  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  7: rho/picco 3.7727e-01  alpha 0.99999 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46980  P0+Ppi -0.00143  Ppi+Ppi -0.47267 | |c1| - Omega: P0 +0.15259  Ppi +0.15402
+  r  8: rho/picco 2.7244e-01  alpha 0.99998 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46980  P0+Ppi -0.00144  Ppi+Ppi -0.47268 | |c1| - Omega: P0 +0.15259  Ppi +0.15403
+  r  9: rho/picco 1.7474e-01  alpha 0.99996 | c1 P0 +0.23490  Ppi -0.23634 | c2 P0+P0 +0.46979  P0+Ppi -0.00145  Ppi+Ppi -0.47268 | |c1| - Omega: P0 +0.15258  Ppi +0.15403
+  r 10: rho/picco 9.8616e-02  alpha 0.99986 | c1 P0 +0.23488  Ppi -0.23636 | c2 P0+P0 +0.46976  P0+Ppi -0.00148  Ppi+Ppi -0.47271 | |c1| - Omega: P0 +0.15257  Ppi +0.15404
+  r 11: rho/picco 4.6095e-02  alpha 0.99930 | c1 P0 +0.23480  Ppi -0.23644 | c2 P0+P0 +0.46960  P0+Ppi -0.00164  Ppi+Ppi -0.47288 | |c1| - Omega: P0 +0.15249  Ppi +0.15413
+  r 12: rho/picco 1.6009e-02  alpha 0.99248 | c1 P0 +0.23377  Ppi -0.23746 | c2 P0+P0 +0.46755  P0+Ppi -0.00369  Ppi+Ppi -0.47493 | |c1| - Omega: P0 +0.15146  Ppi +0.15515
+  r 13: rho/picco 3.1724e-03  alpha 0.77122 | c1 P0 +0.20059  Ppi -0.27065 | c2 P0+P0 +0.40117  P0+Ppi -0.07007  Ppi+Ppi -0.54131 | |c1| - Omega: P0 +0.11827  Ppi +0.18834
+  r 14: rho/picco 2.4605e-04  alpha 0.06073 | c1 P0 +0.09401  Ppi -0.37723 | c2 P0+P0 +0.18803  P0+Ppi -0.28321  Ppi+Ppi -0.75445 | |c1| - Omega: P0 +0.01170  Ppi +0.29491
+  r 15: rho/picco 1.6253e-05  alpha 0.00035 | c1 P0 +0.08496  Ppi -0.38628 | c2 P0+P0 +0.16991  P0+Ppi -0.30133  Ppi+Ppi -0.77256 | |c1| - Omega: P0 +0.00264  Ppi +0.30397
+  r 16: rho/picco 6.4310e-07  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 17: rho/picco 2.1492e-08  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 18: rho/picco 8.4168e-10  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 19: rho/picco 3.1263e-11  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 20: rho/picco 1.3786e-12  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 21: rho/picco 5.9101e-14  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 22: rho/picco 2.3984e-15  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 23: rho/picco 1.0059e-16  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  r 24: rho/picco 4.2687e-18  alpha 0.00000 | c1 P0 +0.08490  Ppi -0.38634 | c2 P0+P0 +0.16981  P0+Ppi -0.30143  Ppi+Ppi -0.77267 | |c1| - Omega: P0 +0.00259  Ppi +0.30402
+  GLI INCROCI (un cambio di segno fra l'anello r e r+1):
+    c1_P0      nessuno
+    c1_Ppi     nessuno
+    c2_P0P0    nessuno
+    c2_P0Ppi   nessuno
+    c2_PpiPpi  nessuno
+    m_P0       nessuno
+    m_Ppi      nessuno
+----------------------------------------------------------------------------------------------------------------------------------
+### IL TERZO PASSO: S1_s0.075, s 0.075; dallo stato di dfb5ab7e (residuo 9.696e-06, NON fermo secondo il criterio); mu -0.574255685
+  DEVE PASSARE: S1_s0.075, lo stato sul disco = quello della ricerca (sha1)                                      PASSA   9744446c
+  DEVE PASSARE: S1_s0.075, M conservata entro 1e-10                                                              PASSA   3.0e-12; 2400 tick in 107 s
+  |D|/|psi0| ogni 40 tick da 800: 1.9e-02 2.2e-02 2.4e-02 2.7e-02 3.0e-02 3.3e-02 3.6e-02 3.9e-02 4.1e-02 4.4e-02 4.7e-02 4.9e-02 5.2e-02 5.4e-02 5.7e-02 5.9e-02 6.2e-02 6.4e-02 6.6e-02 6.8e-02 7.1e-02 7.3e-02 7.5e-02 7.7e-02 7.9e-02 8.1e-02 8.3e-02 8.5e-02 8.7e-02 8.8e-02 9.0e-02 9.2e-02 9.4e-02 9.6e-02 9.8e-02 1.0e-01 1.0e-01 1.0e-01 1.1e-01 1.1e-01 1.1e-01
+  la finestra (in deroga: fra 9.7e-05 e 1e-02) ha 0 campioni: il tasso non si misura
+----------------------------------------------------------------------------------------------------------------------------------
+### LA SERIE DEL TASSO per unita' di tempo: s 0.3 0.13870, s 0.15 0.15108 (dfb5ab7e); s 0.075 --
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
