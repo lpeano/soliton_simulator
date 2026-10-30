@@ -1,0 +1,21 @@
+[TIMBRO] _livelli_piatti.py  sha1-BYTE 72f7f461  committato e pulito
+  R_1e6: r 0.60 g 0.50 N 1e+06; la partenza dfb5ab7e (sha1 5cd2b475), riscalata alla norma
+  R_1e6: passo 0, residuo 8.202e-02, mu -0.756478894
+  R_1e6: passo 1, residuo 3.785e-03, mu -0.874186115, GMRES 9, dimezzamenti 0 (2 s)
+  R_1e6: passo 2, residuo 1.609e-03, mu -0.868399239, GMRES 26, dimezzamenti 0 (6 s)
+  R_1e6: passo 3, residuo 6.918e-05, mu -0.868469922, GMRES 23, dimezzamenti 0 (11 s)
+  R_1e6: passo 4, residuo 2.377e-05, mu -0.868492715, GMRES 25, dimezzamenti 0 (15 s)
+  R_1e6: passo 5, residuo 2.229e-05, mu -0.868492842, GMRES 127, dimezzamenti 4 (41 s)
+  R_1e6: passo 6, residuo 2.090e-05, mu -0.868492972, GMRES 127, dimezzamenti 4 (65 s)
+  R_1e6: passo 7, residuo 1.830e-05, mu -0.868493235, GMRES 127, dimezzamenti 3 (89 s)
+  R_1e6: passo 8, residuo 1.602e-05, mu -0.868493506, GMRES 124, dimezzamenti 3 (112 s)
+  R_1e6: passo 9, residuo 1.402e-05, mu -0.868493783, GMRES 129, dimezzamenti 3 (137 s)
+  R_1e6: passo 10, residuo 1.053e-05, mu -0.868494458, GMRES 140, dimezzamenti 2 (164 s)
+  R_1e6: passo 11, residuo 5.318e-06, mu -0.868495820, GMRES 216, dimezzamenti 1 (206 s)
+  R_1e6: passo 12, residuo 2.345e-07, mu -0.868497125, GMRES 265, dimezzamenti 0 (258 s)
+  R_1e6: passo 13, residuo 1.066e-07, mu -0.868496874, GMRES 358, dimezzamenti 0 (326 s)
+  R_1e6: passo 14, residuo 6.840e-08, mu -0.868496750, GMRES 610, dimezzamenti 1 (451 s)
+  R_1e6: passo 15, residuo 2.204e-08, mu -0.868496598, GMRES 610, dimezzamenti 0 (573 s)
+  R_1e6: passo 16, residuo 4.676e-09, mu -0.868496549, GMRES 610, dimezzamenti 0 (694 s)
+  R_1e6: passo 17, residuo 4.724e-10, mu -0.868496535, GMRES 610, dimezzamenti 0 (820 s)
+  R_1e6: residuo finale 4.719e-10, mu -0.868496535; CONVERGE
