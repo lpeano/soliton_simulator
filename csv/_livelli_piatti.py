@@ -500,14 +500,22 @@ def stampa_pendenze(fn, vecchia):
 
 
 def collaudo_forma():
-    """### **Il collaudo, PRIMA dei casi** *(`P1-sexies`; il task history `6-pre`)*: sulla griglia `t = 3 .. 300` ogni `3`; ### **i campioni con `|D| <= 0` tolti** *(il caso con l'intercetta negativa scritto nel task history e' negativo per `t < 5.07`: annotato)*."""
+    """### **Il collaudo, PRIMA dei casi** *(`P1-sexies`; il task history `6-pre`)*: sulla griglia `t = 3 .. 300` ogni `3`; ### **i campioni con `|D| <= 0` tolti.**
+    ### **Il caso della retta STIMATA `-1.774e-8 + 3.502e-9 t` e' TOLTO** *(Luca `20:46`: non fisico, negativo per `t < 5.07`, vicino allo zero simula `t^2`)*; ### **al suo posto la serie VERA committata di `breve_R_1e6` (`nD5` contro `t5`), che DEVE dare LINEARE.**"""
     tau = np.arange(1, int(round(T_BREVE / PASSO_BREVE)) + 1) * PASSO_BREVE
-    casi = (("|D| = 1e-8 t", 1e-8 * tau, "lineare"),
-            ("|D| = -1.774e-8 + 3.502e-9 t (i numeri di breve_R_1e6; il caso che il criterio vecchio sbaglia)", -1.774e-8 + 3.502e-9 * tau, "lineare"),
-            ("|D| = 1e-8 e^{0.06 t}", 1e-8 * np.exp(0.06 * tau), "esponenziale"),
-            ("|D| = 1e-8 (t + e^{0.0331 t}) (il tasso del modo lento col seme lineare)", 1e-8 * (tau + np.exp(0.0331 * tau)), "esponenziale"),
-            ("|D| = 1e-8 (il caso nullo: niente cresce)", 1e-8 + 0.0 * tau, "potenza t^0"))
-    for nome, y, atteso in casi:
+    vera = leggi(os.path.join(DIR_JSON, "breve_R_1e6.json"))
+    tv, yv = np.array(vera["t5"], dtype=float) * vera["s"], np.array(vera["nD5"])
+    casi = (("|D| = 1e-8 t", tau, 1e-8 * tau, "lineare"),
+            ("la serie VERA di breve_R_1e6 (nD5 contro t5, %d campioni ogni %.2f; il caso che il criterio vecchio sbaglia)" % (len(tv), tv[1] - tv[0]), tv, yv, "lineare"),
+            ("|D| = 1e-8 e^{0.06 t}", tau, 1e-8 * np.exp(0.06 * tau), "esponenziale"),
+            ("|D| = 1e-8 (t + e^{0.0331 t}) (il tasso del modo lento col seme lineare)", tau, 1e-8 * (tau + np.exp(0.0331 * tau)), "esponenziale"),
+            ("|D| = 1e-8 (il caso nullo: niente cresce)", tau, 1e-8 + 0.0 * tau, "potenza t^0"))
+    m = yv < SL.SATURAZIONE
+    X = np.column_stack([np.ones(int(m.sum())), np.log(tv[m]), tv[m]])
+    a_, b_, g_ = np.linalg.lstsq(X, np.log(yv[m]), rcond=None)[0]
+    print("  il controllo di Luca sulla serie vera di breve_R_1e6: ln|D| = a + b ln t + gamma t, %d campioni sotto %.0e: a %.4f, b %.4f, gamma %.3e" % (int(m.sum()), SL.SATURAZIONE, a_, b_, g_))
+    for nome, tt, y, atteso in casi:
+        tau = tt
         m = y > 0
         fn = forma_pendenze(tau[m], y[m])
         esito("DEVE dare %s: %s" % (atteso.upper(), nome), fn["forma"] == atteso,
