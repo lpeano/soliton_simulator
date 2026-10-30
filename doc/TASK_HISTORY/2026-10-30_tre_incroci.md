@@ -1,5 +1,7 @@
 # 2026-10-30 — LA REGOLA DEI TRE INCROCI *(UNA DIAGNOSI IN `csv/`, NESSUNA MODIFICA AL NUCLEO; [[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]]; il mandato di Luca delle `08:52`, dopo `ea8ace8f`)*
 
+> ### **SUPERATO dal mandato delle `09:09`** *(il chiarimento di Luca delle `09:16`, `PRECEDENZA-IN-CODA`)*: **di questo si esegue solo il punto `1`** *(il modo lento a `r 1.5247`)*, nel task history `doc/TASK_HISTORY/2026-10-30_lezione_e_modo_lento.md`; **i punti `2` e `3` non si eseguono** *(lista d'attesa: tolti come taratura)*. **Le premesse della sezione `1` restano valide.** Nessuno script era stato scritto, nessuna corsa partita.
+
 > **LIVELLO:** i pesi del tick in memoria *(`_strada_b_r.pesi`)* o ricomposti dai generatori *(`_bande_piatte.ricomposto`)*; una corsa di `4400` tick a `r 1.5247`, una corsa lunga a pezzi a `r 0.69`, un conto sulla carta e sul tick libero; nessun file del nucleo.
 > **I nomi:** `a_n`, `b_a` i pesi del nodo e dell'arco per unita' di tempo; `r = b_a/a_n`; `mu0 = (1/2) sqrt(a_n^2 - a_n b_a + b_a^2)`; `alpha` il legame di `S1`, da `0` *(coda)* a `1` *(cuore)*; le frequenze sono energie per unita' di tempo, `-arg(lambda)/s`, come `mu`. `P0 = (b_a - a_n)/2`, `Ppi = -(a_n + b_a)/2` *(esatte a ogni `s`, `ea8ace8f`)*.
 
