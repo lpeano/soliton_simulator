@@ -7,7 +7,9 @@ r"""**LA REGOLA DEI LIVELLI PIATTI E LA PROVA DI UN SOLITONE CHE LA RISPETTA** *
     python csv/_livelli_piatti.py --previsioni > doc/referti_l2/livelli_piatti/previsioni.txt
     python csv/_livelli_piatti.py --cerca R_1e6 > doc/referti_l2/livelli_piatti/cerca_R_1e6.txt   # idem X1, X2, R_3e5, R_3e6
     python csv/_livelli_piatti.py --breve R_1e6 > doc/referti_l2/livelli_piatti/breve_R_1e6.txt   # idem le altre
-    python csv/_livelli_piatti.py --lunga               # un pezzo; si ripete fino alla fine
+    python csv/_livelli_piatti.py --lunga               # un pezzo; si ripete fino alla fine (senza stato di ripresa, lo RICOSTRUISCE dai pezzi scritti)
+    python csv/_livelli_piatti.py --cerca R_3e6_t > doc/referti_l2/livelli_piatti/cerca_R_3e6_t.txt   # la ripresa (Luca 13:22): la tappa a N 2e6; idem X1_p (al piu' 10 passi)
+    python csv/_livelli_piatti.py --collaudo-forma > doc/referti_l2/livelli_piatti/collaudo_forma.txt  # il criterio aggiunto della forma sui casi noti
     python csv/_livelli_piatti.py --referto > doc/referti_l2/livelli_piatti.txt
 """
 import contextlib
@@ -36,6 +38,12 @@ S = 0.15
 N_RIF = 1e6                    # ### la N di dfb5ab7e (S1_s0.150)
 CONFIG = {"R_1e6": (0.6, 0.5, 1e6), "X1": (1.0, 0.5, 1e6), "X2": (0.6, 1.0, 1e6), "R_3e5": (0.6, 0.5, 3e5), "R_3e6": (0.6, 0.5, 3e6)}
 PARTENZA = {"R_1e6": None, "X1": None, "X2": None, "R_3e5": "R_1e6", "R_3e6": "R_1e6"}   # ### None = dfb5ab7e riscalato
+# ### LA RIPRESA (il testo di Luca delle 13:22, mandato alle 15:45): nomi nuovi, perche' scrivi_nuovo non riscrive; le vecchie ricerche e brevi restano, dichiarate
+PASSI_X1 = 10                  # ### «al piu' 10 passi in piu'» (Luca, 13:22)
+RIPRESE = {"R_3e6_t": {"come": "R_3e6", "partenza": "R_1e6", "tappa_N": 2e6, "passi": None},     # ### la tappa a N 2e6, NON scritta; passi None = SB.MAX_NEWTON
+           "X1_p": {"come": "X1", "partenza": "X1", "tappa_N": None, "passi": PASSI_X1}}
+SIGMA_FORMA = 3.0              # ### il 3 sigma di doc/PATTERN_DI_PROVA.md (P1-sexies), per il criterio aggiunto della forma
+LETTURA = {"R_1e6": ("R_1e6",), "R_3e5": ("R_3e5",), "R_3e6": ("R_3e6_t", "R_3e6"), "X1": ("X1_p", "X1"), "X2": ("X2",)}   # ### per le letture: la prima che ha la breve
 W_LISTA = (0.05, 0.2)          # ### la larghezza per quanto di 99b679bc, il lato stretto
 L_SCENA = 81
 FRAZ_LARGO = 1.0 / 6.0         # ### oltre L/6 la corsa a L 120 (il mandato)
@@ -190,22 +198,28 @@ def stato(nome):
     return psi, mu, cj
 
 
+def conf(nome):
+    """### **`(r, g, N)`: una ripresa ha quelli della configurazione che riprende.**"""
+    return CONFIG[RIPRESE[nome]["come"]] if nome in RIPRESE else CONFIG[nome]
+
+
 def partenza(nome):
     import _modo_al_variare_di_s as MS
-    N = CONFIG[nome][2]
-    if PARTENZA[nome] is None:
+    N = conf(nome)[2]
+    da_chi = RIPRESE[nome]["partenza"] if nome in RIPRESE else PARTENZA[nome]
+    if da_chi is None:
         p0, _mu, cj, ok = MS.carica("S1_s0.150")
         assert ok, "dfb5ab7e"
         da = "dfb5ab7e (sha1 %s)" % cj["sha"][:8]
     else:
-        st = stato(PARTENZA[nome])
-        assert st is not None, "manca lo stato di partenza %s" % PARTENZA[nome]
+        st = stato(da_chi)
+        assert st is not None, "manca lo stato di partenza %s" % da_chi
         p0 = st[0]
-        da = "%s (sha1 %s)" % (PARTENZA[nome], st[2]["sha"][:8])
+        da = "%s (sha1 %s)" % (da_chi, st[2]["sha"][:8])
     return p0 * math.sqrt(N / float(np.sum(np.abs(p0) ** 2))), da
 
 
-def newton(r, g, N, p0, etichetta):
+def newton(r, g, N, p0, etichetta, passi):
     """### **Il metodo di `_strada_b_r.cerca`, invariato, coi contesti della configurazione.**"""
     from scipy.sparse.linalg import LinearOperator, gmres
     import _dove_va_la_materia as DV
@@ -241,7 +255,7 @@ def newton(r, g, N, p0, etichetta):
         sys.stdout.flush()
         s0 = time.time()
         migliore = (storia[0]["residuo"], p0.copy(), mu)
-        for it in range(1, SB.MAX_NEWTON + 1):
+        for it in range(1, passi + 1):
             if storia[-1]["residuo"] < SB.TOLL_RES:
                 break
             nx = float(np.linalg.norm(x))
@@ -292,18 +306,28 @@ def cerca(nome):
     import _stato_fermo as SFM
     fj = os.path.join(DIR_JSON, "cerca_%s.json" % nome)
     assert not os.path.exists(fj), fj
-    r, g, N = CONFIG[nome]
+    r, g, N = conf(nome)
     p0, da = partenza(nome)
     print("  %s: r %.2f g %.2f N %.0e; la partenza %s, riscalata alla norma" % (nome, r, g, N, da))
     tentativi = []
-    psi, mu, rf, storia, sec = newton(r, g, N, p0, nome)
-    tentativi.append({"via": "diretta", "residuo": rf, "passi": len(storia) - 1, "storia": storia, "secondi": sec})
-    if rf >= SB.TOLL_RES and PARTENZA[nome] is None:
+    rip = RIPRESE.get(nome)
+    if rip is not None and rip["tappa_N"] is not None:
+        # ### la tappa in N (Luca 13:22): dalla partenza riscalata a tappa_N, poi la destinazione dallo stato della tappa riscalato; ### la tappa resta IN MEMORIA
+        Nt = rip["tappa_N"]
+        print("  %s: la tappa a N %.0e (non si scrive su disco)" % (nome, Nt))
+        pt, mut, rft, stt, sect = newton(r, g, Nt, p0 * math.sqrt(Nt / N), "%s-tappa-N" % nome, SB.MAX_NEWTON)
+        tentativi.append({"via": "tappa N %.0e" % Nt, "residuo": rft, "mu": mut, "passi": len(stt) - 1, "storia": stt, "secondi": sect})
+        p0 = pt * math.sqrt(N / float(np.sum(np.abs(pt) ** 2)))
+        da = "%s, poi la tappa a N %.0e (residuo %.3e)" % (da, Nt, rft)
+    passi = rip["passi"] if (rip is not None and rip["passi"] is not None) else SB.MAX_NEWTON
+    psi, mu, rf, storia, sec = newton(r, g, N, p0, nome, passi)
+    tentativi.append({"via": "diretta" if rip is None else "dalla tappa N" if rip["tappa_N"] is not None else "ripresa, al piu' %d passi" % passi, "residuo": rf, "passi": len(storia) - 1, "storia": storia, "secondi": sec})
+    if rf >= SB.TOLL_RES and rip is None and PARTENZA[nome] is None:
         rm, gm = 0.5 * (1.0 + r), 0.5 * (1.0 + g)
         print("  %s: la diretta NON converge (%.3e): la tappa a meta' strada r %.2f g %.2f" % (nome, rf, rm, gm))
-        pm, mum, rfm, stm, secm = newton(rm, gm, N, p0, "%s-tappa" % nome)
+        pm, mum, rfm, stm, secm = newton(rm, gm, N, p0, "%s-tappa" % nome, SB.MAX_NEWTON)
         tentativi.append({"via": "tappa r %.3f g %.3f" % (rm, gm), "residuo": rfm, "passi": len(stm) - 1, "storia": stm, "secondi": secm})
-        psi2, mu2, rf2, st2, sec2 = newton(r, g, N, pm, "%s-dalla-tappa" % nome)
+        psi2, mu2, rf2, st2, sec2 = newton(r, g, N, pm, "%s-dalla-tappa" % nome, SB.MAX_NEWTON)
         tentativi.append({"via": "dalla tappa", "residuo": rf2, "passi": len(st2) - 1, "storia": st2, "secondi": sec2})
         if rf2 < rf:
             psi, mu, rf = psi2, mu2, rf2
@@ -322,7 +346,7 @@ def breve(nome):
     import _modo_al_variare_di_s as MS
     fj = os.path.join(DIR_JSON, "breve_%s.json" % nome)
     assert not os.path.exists(fj), fj
-    r, g, N = CONFIG[nome]
+    r, g, N = conf(nome)
     psi0, mu, cj = stato(nome)
     with scena(N) as (_rec, z, phi0, _p), configurazione(r, g):
         Z = DV.autovettori(DV.matrice(z, phi0, DV.AMP))[1]
@@ -400,6 +424,17 @@ def lunga():
                 z["st"]["psi_h"][...] = dati["psi_h"]
             prec = leggi(os.path.join(DIR_JSON, "lunga_%s_%05d.jsonl" % (nome, t0 - PEZZO)))
             assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
+        elif os.path.exists(os.path.join(DIR_JSON, "lunga_%s_%05d.jsonl" % (nome, 0))):
+            # ### NESSUNO STATO DI RIPRESA ma pezzi gia' scritti (Luca 16:00: la ripresa a 4000 scartata): lo stato si RICOSTRUISCE
+            # ### da psi0 in memoria, e alla fine di ogni pezzo esistente lo sha DEVE essere il suo sha_fine
+            z["st"]["psi_h"][...] = psi0
+            while os.path.exists(os.path.join(DIR_JSON, "lunga_%s_%05d.jsonl" % (nome, t0))):
+                prec = leggi(os.path.join(DIR_JSON, "lunga_%s_%05d.jsonl" % (nome, t0)))
+                with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                    CL.avanza(z, phi0, prec["t1"] - t0)
+                assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato ricostruito a %d NON e' la fine del pezzo %05d" % (prec["t1"], t0)
+                print("  la corsa lunga %s: lo stato ricostruito a tick %d = sha_fine del pezzo %05d (%s)" % (nome, prec["t1"], t0, prec["sha_fine"][:8]))
+                t0 = prec["t1"]
         else:
             z["st"]["psi_h"][...] = psi0
             with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
@@ -433,6 +468,51 @@ def lunga():
 
 
 # ====================================================================== IL REFERTO
+# ====================================================================== IL CRITERIO AGGIUNTO DELLA FORMA (Luca 13:22, punto 6)
+def forma_pendenze(tau, nD):
+    """### **Le pendenze locali `l = d ln|D|/dt`** *(`np.gradient`, come le stampa `SL.stampa_forma`)* **sui campioni sotto la saturazione, esclusi il primo e l'ultimo; il fit `l = gamma + b/t`:**
+    ### **ESPONENZIALE se `gamma - SIGMA_FORMA sigma_gamma > 0` e `gamma t_ultimo > 1`; altrimenti la potenza `t^b`, LINEARE se `b` arrotondato e' `1`** *(il task history, `6-pre`)*."""
+    loc = np.gradient(np.log(nD), tau)
+    idx = [i for i in range(1, len(nD) - 1) if nD[i] < SL.SATURAZIONE]
+    if len(idx) < 3:
+        return {"forma": None, "campioni": len(idx)}
+    t, ll = tau[idx], loc[idx]
+    X = np.column_stack([np.ones_like(t), 1.0 / t])
+    coef = np.linalg.lstsq(X, ll, rcond=None)[0]
+    res = ll - X @ coef
+    cov = float(res @ res) / max(len(t) - 2, 1) * np.linalg.inv(X.T @ X)
+    g, b = float(coef[0]), float(coef[1])
+    sg, sb = float(np.sqrt(cov[0, 0])), float(np.sqrt(cov[1, 1]))
+    if g - SIGMA_FORMA * sg > 0 and g * float(t[-1]) > 1.0:
+        f = "esponenziale"
+    else:
+        f = "lineare" if int(round(b)) == 1 else "potenza t^%d" % int(round(b))
+    return {"forma": f, "gamma": g, "sigma_gamma": sg, "b": b, "sigma_b": sb, "t_ultimo": float(t[-1]), "campioni": len(idx)}
+
+
+def stampa_pendenze(fn, vecchia):
+    if fn["forma"] is None:
+        print("    LA FORMA, IL CRITERIO AGGIUNTO: %d campioni utili sotto %.0e: non si giudica" % (fn["campioni"], SL.SATURAZIONE))
+        return
+    print("    LA FORMA, IL CRITERIO AGGIUNTO: %s -- l = gamma + b/t su %d campioni: gamma %.5f +- %.5f, gamma t_ultimo %.3f (t_ultimo %.1f), b %.4f +- %.4f; il vecchio alla lettera: %s"
+          % (fn["forma"].upper(), fn["campioni"], fn["gamma"], fn["sigma_gamma"], fn["gamma"] * fn["t_ultimo"], fn["t_ultimo"], fn["b"], fn["sigma_b"], vecchia))
+
+
+def collaudo_forma():
+    """### **Il collaudo, PRIMA dei casi** *(`P1-sexies`; il task history `6-pre`)*: sulla griglia `t = 3 .. 300` ogni `3`; ### **i campioni con `|D| <= 0` tolti** *(il caso con l'intercetta negativa scritto nel task history e' negativo per `t < 5.07`: annotato)*."""
+    tau = np.arange(1, int(round(T_BREVE / PASSO_BREVE)) + 1) * PASSO_BREVE
+    casi = (("|D| = 1e-8 t", 1e-8 * tau, "lineare"),
+            ("|D| = -1.774e-8 + 3.502e-9 t (i numeri di breve_R_1e6; il caso che il criterio vecchio sbaglia)", -1.774e-8 + 3.502e-9 * tau, "lineare"),
+            ("|D| = 1e-8 e^{0.06 t}", 1e-8 * np.exp(0.06 * tau), "esponenziale"),
+            ("|D| = 1e-8 (t + e^{0.0331 t}) (il tasso del modo lento col seme lineare)", 1e-8 * (tau + np.exp(0.0331 * tau)), "esponenziale"),
+            ("|D| = 1e-8 (il caso nullo: niente cresce)", 1e-8 + 0.0 * tau, "potenza t^0"))
+    for nome, y, atteso in casi:
+        m = y > 0
+        fn = forma_pendenze(tau[m], y[m])
+        esito("DEVE dare %s: %s" % (atteso.upper(), nome), fn["forma"] == atteso,
+              "%s; %d campioni > 0; gamma %.5f +- %.5f, gamma t_ultimo %.3f, b %.4f +- %.4f" % (fn["forma"], int(m.sum()), fn["gamma"], fn["sigma_gamma"], fn["gamma"] * fn["t_ultimo"], fn["b"], fn["sigma_b"]))
+
+
 def referto():
     import _congelato_lungo as CL
     import _deriva_congelato as DC
@@ -461,7 +541,8 @@ def referto():
     print("-" * 130)
     print("### (1) GLI STATI FERMI")
     stati = {}
-    for nome, (r, g, N) in CONFIG.items():
+    for nome in list(CONFIG) + list(RIPRESE):
+        r, g, N = conf(nome)
         st = stato(nome)
         if st is None:
             print("  %s: nessuna ricerca" % nome)
@@ -476,7 +557,8 @@ def referto():
                 w_in = DC.forma(z, w0)[0]
                 z["st"]["psi_h"][...] = psi
                 pt = CL.punto(z, 0, w_in, w0)
-            P0, Ppi = (prev["configurazioni"][nome]["P0"], prev["configurazioni"][nome]["Ppi"]) if prev else (None, None)
+            cp = RIPRESE[nome]["come"] if nome in RIPRESE else nome
+            P0, Ppi = (prev["configurazioni"][cp]["P0"], prev["configurazioni"][cp]["Ppi"]) if prev else (None, None)
             _ra, am = SL.anelli(z, psi, FORMA)
             print("  %s: %s (residuo %.3e), mu %+.9f; la partenza %s; w %.3f (L/6 %.2f: %s), cuore f_win %.5f, picco %.2f; alpha del cuore %.5f (g %.2f), della coda %.5f"
                   % (nome, "FERMO" if cj["convergito"] else "NON FERMO, lo stato migliore", cj["residuo_finale"], mu, cj["partenza"], pt["w"], L_SCENA * FRAZ_LARGO,
@@ -485,9 +567,12 @@ def referto():
                 inc, _ra = SL.conto(nome, z, phi0, S, FORMA, r, psi, mu, P0, Ppi)
                 stati[nome] = {"inc": inc, "alpha_cuore": float(am[0])}
     print("-" * 130)
+    print("### (2-pre) IL CRITERIO AGGIUNTO DELLA FORMA (Luca 13:22, punto 6; scritto nel task history PRIMA dei casi): le pendenze locali d ln|D|/dt contro 1/t, il fit l = gamma + b/t;"
+          " ESPONENZIALE se gamma - %g sigma > 0 e gamma t_ultimo > 1, altrimenti la potenza t^b (LINEARE se b arrotondato e' 1)" % SIGMA_FORMA)
+    collaudo_forma()
     print("### (2) LE CORSE BREVI (%g unita' di tempo)" % T_BREVE)
     brevi = {}
-    for nome in CONFIG:
+    for nome in list(CONFIG) + list(RIPRESE):
         fj = os.path.join(DIR_JSON, "breve_%s.json" % nome)
         if not os.path.exists(fj):
             print("  %s: nessuna corsa breve" % nome)
@@ -496,6 +581,8 @@ def referto():
         esito("DEVE PASSARE: %s, Q_S e M conservate entro %g nella corsa breve" % (nome, TOLL_NORMA), fr["dn"] < TOLL_NORMA, "%.1e" % fr["dn"])
         print("  --- %s (r %.2f, g %.2f, N %.0e)" % (nome, fr["r"], fr["g"], fr["N"]))
         stampa_breve(fr)
+        fr["forma_nuova"] = forma_pendenze(np.array(fr["t"], dtype=float) * fr["s"], np.array(fr["nD"]))
+        stampa_pendenze(fr["forma_nuova"], fr.get("forma"))
         brevi[nome] = fr
     print("-" * 130)
     print("### (3) LA CORSA LUNGA (R_1e6)")
@@ -538,8 +625,6 @@ def referto():
                      ("%.3e (%s)" % (ultimo["nD"], "  ".join("%s %.3f" % kv for kv in ultimo["bande"].items()))) if ultimo else "--"))
             a0 += FINESTRA
     print("-" * 130)
-    print("### LE LETTURE, COI CRITERI SCRITTI PRIMA")
-    esp = {nome: (fr["forma"] == "esponenziale") for nome, fr in brevi.items()}
 
     def modo(nome, quale):
         an = brevi[nome]["analisi"]
@@ -550,6 +635,28 @@ def referto():
         if quale == "coppia":
             return all(x["bande"]["P0"] + x["bande"]["Ppi"] > x["bande"]["A"] + x["bande"]["B"] for x in ist.values())
         return all(x["bande"]["P0"] > x["bande"]["Ppi"] + x["bande"]["A"] + x["bande"]["B"] for x in ist.values())
+    print("### LE LETTURE, COI CRITERI SCRITTI PRIMA (la forma: il criterio aggiunto delle 13:22; quello vecchio, alla lettera, accanto)")
+    scelta = {k: next((n for n in v if n in brevi), None) for k, v in LETTURA.items()}
+    for k, n in scelta.items():
+        if n is None:
+            print("  %s: nessuna corsa breve" % k)
+            continue
+        fn, fv = brevi[n]["forma_nuova"]["forma"], brevi[n].get("forma")
+        extra = "; il modo previsto (la coppia) agli istanti: %s" % modo(n, "coppia") if k == "X1" else "; il modo previsto (P0 da sola) agli istanti: %s" % modo(n, "P0") if k == "X2" else ""
+        print("  %s: si legge %s (stato %s); la forma, il criterio aggiunto: %s; il vecchio alla lettera: %s%s%s"
+              % (k, n, "FERMO" if brevi[n]["convergito"] else "NON FERMO", fn, fv, extra, "" if (fn is None or fv is None or fn == fv) else "   ### I DUE CRITERI DANNO FORME DIVERSE"))
+    giudicate = all(scelta[k] is not None and brevi[scelta[k]]["forma_nuova"]["forma"] is not None for k in LETTURA)
+    esp = {k: brevi[n]["forma_nuova"]["forma"] == "esponenziale" for k, n in scelta.items() if n is not None}
+    if not giudicate:
+        print("  LA LETTURA: NON SI FA -- una configurazione senza breve o con la forma che non si giudica: %s"
+              % [k for k in LETTURA if scelta[k] is None or brevi[scelta[k]]["forma_nuova"]["forma"] is None])
+    else:
+        r_ok = not any(esp[k] for k in LETTURA if k.startswith("R_"))
+        x_ok = esp["X1"] and esp["X2"] and modo(scelta["X1"], "coppia") and modo(scelta["X2"], "P0")
+        print("  LA LETTURA: %s" % ("(p1)" if (r_ok and x_ok) else " ".join(x for x, c in (("(p2)", not r_ok), ("(p3)", not x_ok)) if c)))
+    print("-" * 130)
+    print("### LE LETTURE COL SOLO CRITERIO VECCHIO, ALLA LETTERA (stampate come prima; NON usate)")
+    esp = {nome: (fr["forma"] == "esponenziale") for nome, fr in brevi.items()}
     for nome in CONFIG:
         if nome not in brevi:
             continue
@@ -559,7 +666,7 @@ def referto():
         if nome == "X2":
             extra = "; il modo previsto (P0 da sola) agli istanti: %s" % modo(nome, "P0")
         print("  %s: la forma %s%s" % (nome, brevi[nome]["forma"], extra))
-    if len(brevi) == len(CONFIG):
+    if all(k in brevi for k in CONFIG):
         r_ok = not any(esp[k] for k in CONFIG if k.startswith("R_"))
         x_ok = esp["X1"] and esp["X2"] and modo("X1", "coppia") and modo("X2", "P0")
         print("  LA LETTURA: %s" % ("(p1)" if (r_ok and x_ok) else " ".join(x for x, c in (("(p2)", not r_ok), ("(p3)", not x_ok)) if c)))
@@ -580,8 +687,12 @@ def main(argv):
             previsioni()
         elif argv == ["--lunga"]:
             lunga()
+        elif argv == ["--collaudo-forma"]:
+            collaudo_forma()
+            print("%d/%d PASSANO; fallite: %s" % (OK[0], OK[1], FALLITE))
+            return 0 if OK[0] == OK[1] else 1
         elif argv[:1] in (["--cerca"], ["--breve"]) and len(argv) == 2:
-            assert argv[1] in CONFIG, argv[1]
+            assert argv[1] in CONFIG or argv[1] in RIPRESE, argv[1]
             {"--cerca": cerca, "--breve": breve}[argv[0]](argv[1])
         else:
             raise SystemExit(__doc__)
