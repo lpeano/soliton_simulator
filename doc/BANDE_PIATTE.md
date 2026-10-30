@@ -89,7 +89,7 @@
 - c1 su `P0`: `P0 + alpha - mu`,
 - c1 su `Ppi`: `Ppi + alpha - mu`
 
-scorrono lungo il profilo per un tratto lungo `alpha_max` *(la coppia `2 alpha_max`)*. **Nel cuore la coppia vale `-a_n + 2 mu0 - 2 d`: a `r = 1` e' `-2 d`, QUALUNQUE sia `alpha_max`**, perche' il legame sposta l'oggetto e la coppia della stessa quantita'. **Quindi per QUALUNQUE oggetto legato a `K` con questo legame una delle tre passa per lo zero da qualche parte del profilo, o vi sta entro la larghezza della risonanza, salvo tarature** *(i pesi scelti rispetto a `alpha_max` e a `d`, cioe' a `mu`, alla forma, a `N`)*.
+scorrono lungo il profilo per un tratto lungo `alpha_max` *(la coppia `2 alpha_max`)*. **Nel cuore la coppia vale `-a_n + 2 mu0 - 2 d`: a `r = 1` e' `-2 d`, QUALUNQUE sia `alpha_max`**, perche' il legame sposta l'oggetto e la coppia della stessa quantita'. **Quindi, A `r = 1`, per QUALUNQUE oggetto legato a `K` con questo legame la coppia sta sullo zero nel cuore** *(entro `2 d` e la larghezza della risonanza)*. **Fuori da `r = 1` nessuna delle tre incrocia solo se `J` sta fuori dai livelli piatti e dalle loro medie** *(sotto, la regola delle `09:31`)*.
 
 **Il conto sugli stati trovati** *(`S1`, `s 0.15`; `alpha` della coda `0`, del cuore `1.00000`)*:
 
@@ -114,4 +114,29 @@ scorrono lungo il profilo per un tratto lungo `alpha_max` *(la coppia `2 alpha_m
 
 **Un fatto di metodo che esce da qui:** il periodo vero di `D` a `r 1` e' **`4.07`-`4.10` unita' di tempo**. **Il «`10.91`» di `5f06dbfb` e l'«`11.45` a ogni `s`» di `de411167` sono compatibili con un ALIAS del campionamento ogni `3` unita' di tempo** *(il conto: `11.20`-`11.39`)*: **l'«indipendente da `s`» viene dal passo, non dal modo.** A `r 1.5247` i due metodi non coincidono *(`3.49` dalle rotazioni, `4.96` dai cambi di segno, con `~2.3` campioni per mezzo periodo)*: non risolto.
 
-**Quello che la regola NON dice:** «incrocia» e' stato visto diventare «decade» su `r 1`, `0.65`, `1.5247`; **su un caso dove nessuna incrocia non c'e' misura** *(`r 0.69`: lista d'attesa)*. Sulla carta, a pesi liberi, esistono punti dove nessuna incrocia *(`085ffb27`, sez. `1`)*: **sono tarature** nel senso della decisione delle `09:09`.
+**Quello che la regola NON dice:** «incrocia» e' stato visto diventare «decade» su `r 1`, `0.65`, `1.5247`; **su un caso dove nessuna incrocia non c'e' misura** *(`r 0.69`: lista d'attesa)*. Sulla carta, a pesi liberi, esistono punti dove nessuna incrocia *(`085ffb27`, sez. `1`)*. **AGGIORNATO** *(Luca, `10:06`)*: **non sono tarature in quanto tali.** **Una TARATURA sceglie i pesi per un solitone dato** *(il suo `mu`, la sua forma, la sua `N`)*; **la REGOLA qui sotto e' una disuguaglianza generale:** vale **per ogni solitone su quel punto della banda**, con la legge **`U_max <= margine`**, e si prova su tre `N` e con due controlli che la violano. **La decisione delle `09:09`** *(niente taratura dei pesi per stabilizzare `S1`)* **resta.**
+
+### LA REGOLA DEI LIVELLI PIATTI *(del guardiano, Luca `09:31`; ### **DA VERIFICARE**: la prova e' `doc/TASK_HISTORY/2026-10-30_livelli_piatti.md`)*
+
+Un solitone costruito sul punto `E0` della banda *(oggi `A` a `K`, `E0 = -mu0`)* ha una frequenza locale nuda `mu - U(r)` che percorre **`J = [E0, E0 + U_max]`**, con `U_max` il massimo spostamento del legame *(per `S1` la saturazione `g`, oggi `1`)*, **per qualunque quantita' di materia**. **Le uscite esponenziali sono quelle i cui prodotti non si propagano** *(le piatte: togliere una piatta sola spegneva il modo anche con la banda `A` disponibile, `6d941a4d`, `de411167`)*.
+
+> **LA REGOLA:** nessun livello piatto `F` *(`P0 = (b_a - a_n)/2`, `Ppi = -(a_n + b_a)/2`)* e nessuna media di due livelli piatti *(`(P0 + Ppi)/2 = -a_n/2`, `P0`, `Ppi`)* cade in `J` allargato di `W` *(la larghezza della risonanza, `99b679bc`: lo spegnimento fra `0.05` e `0.2` per quanto, a `g 1`; **ASIMMETRICA**: `0.2`-`0.8` dall'altro lato)*. **Le uscite con un prodotto che si propaga danno solo una perdita lenta** *(da verificare)*.
+
+**E' la stessa cosa delle tre condizioni qui sopra:** c1 e' `F = mu - alpha` in `J`, la coppia e' `(F_i + F_j)/2 = mu - alpha` in `J`; **in piu' ci sono la larghezza `W` e la legge `U_max <= margine`.**
+
+**Il controllo sui casi gia' misurati:**
+
+| `r` | dove sta `J` rispetto ai livelli | che cosa si e' misurato |
+|---|---|---|
+| `1` | **la coppia sul bordo di `J`** | decade, `0.15` |
+| `0.65` | **`P0` dentro `J`** | la risonanza di `P0` *(`ea8ace8f`)* |
+| `1.5247` | **la coppia dentro `J`** | il modo lento, `0.0331`, agli anelli `12`-`13` *(`03142636`)* |
+| `0.69` | **al limite** | non misurato |
+
+### LA FORMA GENERALE *(Luca `09:33`; ### **IPOTESI DEL GUARDIANO DA VERIFICARE, NON LEGGE**)*
+
+Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento locale del legame, `F_j` i livelli dei modi a velocita' di gruppo zero *(le piatte)*: **per ogni ordine `n` permesso dal legame, `n (omega - V) != F_j1 + ... + F_jn` per ogni `V` in `[0, V_max]`, con margine `n W`** *(le quasienergie modulo `2 pi/s`; nel limite `s -> 0` senza modulo)*. `n = 1`: una piatta; `n = 2`: la coppia; `n >= 3` solo se il legame ha termini di ordine piu' alto. **Il riferimento:** la condizione di non risonanza dei breather discreti *(MacKay e Aubry, `1994`: `n omega` fuori dallo spettro lineare)*. **Le differenze qui:** (i) il pericolo esponenziale viene solo dai modi fermi *(i modi che si propagano danno una perdita lenta: da verificare)*; (ii) `V` varia lungo il profilo, quindi la condizione vale su un intervallo, non su un valore. **`W` e' empirica** *(`99b679bc`)*; la sua legge *(per esempio con `x alpha'(x)`)* non e' nota.
+
+*(Una nota del codice: `alpha(x) = g x^2/(1 + x^2)` non e' un polinomio, ma **la stabilita' lineare vede solo `D` e `conj(D)`: `n = 1` e `n = 2`.** `n >= 3` non si verifica con queste corse.)*
+
+**L'esito della prova:** *(dopo le corse)*.
