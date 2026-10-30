@@ -1,0 +1,14 @@
+[TIMBRO] _livelli_piatti.py  sha1-BYTE f53ad849  committato e pulito
+  X1_p: r 1.00 g 0.50 N 1e+06; la partenza X1 (sha1 005443ea), riscalata alla norma
+  X1_p: passo 0, residuo 2.290e-07, mu -1.064180560
+  X1_p: passo 1, residuo 2.219e-07, mu -1.064180564, GMRES 334, dimezzamenti 5 (52 s)
+  X1_p: passo 2, residuo 2.185e-07, mu -1.064180566, GMRES 333, dimezzamenti 6 (93 s)
+  X1_p: passo 3, residuo 2.168e-07, mu -1.064180566, GMRES 332, dimezzamenti 7 (134 s)
+  X1_p: passo 4, residuo 2.151e-07, mu -1.064180567, GMRES 332, dimezzamenti 7 (176 s)
+  X1_p: passo 5, residuo 2.134e-07, mu -1.064180568, GMRES 332, dimezzamenti 7 (217 s)
+  X1_p: passo 6, residuo 2.117e-07, mu -1.064180569, GMRES 331, dimezzamenti 7 (258 s)
+  X1_p: passo 7, residuo 2.101e-07, mu -1.064180570, GMRES 331, dimezzamenti 7 (300 s)
+  X1_p: passo 8, residuo 2.084e-07, mu -1.064180571, GMRES 331, dimezzamenti 7 (341 s)
+  X1_p: passo 9, residuo 2.068e-07, mu -1.064180572, GMRES 331, dimezzamenti 7 (382 s)
+  X1_p: passo 10, residuo 2.052e-07, mu -1.064180573, GMRES 330, dimezzamenti 7 (425 s)
+  X1_p: residuo finale 2.052e-07, mu -1.064180573; NON CONVERGE: lo stato migliore, dichiarato
