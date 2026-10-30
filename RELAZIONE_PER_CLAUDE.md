@@ -22026,3 +22026,11 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **Gli errori miei:** in `ea8ace8f` «`13`-`14`» per `12`-`13`, e il limite di `0.039` *(il seme non era il residuo)*; **un referto girato da uno script non committato** *(il commit rifiutato da `H-NON-TRACCIATI` e nascosto da `| tail`)*: cancellato, rigirato dopo il commit. **L'errore `n.83` del guardiano** nella MAPPA.
 - **La domanda aperta, col criterio di chiusura:** **`(m2)` alla lettera viene dalla saturazione o da un'altra uscita?** Si chiude guardando `D` nella finestra con un terzo istante prima della saturazione *(gia' sul disco: i `D` in `db/modo_lento/`)*, **se Luca lo chiede**.
 - **In coda:** il mandato delle `09:31` *(la regola dei livelli piatti e la prova di un solitone che la rispetta)* con l'integrazione delle `09:33`.
+
+
+## 2026-10-30, 14:50 -- I CONTROLLI DOPO IL DISCO PIENO (LUCA, `13:40`): ### FERMO, IL DISCO SI E' RIEMPITO DI NUOVO
+
+- **Lo spazio e git:** alle `14:13` `6.6G` liberi; `git log origin/primo-ordine..HEAD` vuoto: **ogni commit locale era su GitHub** *(l'ultimo `6fb0b485`)*. **Nessun commit fallito da rifare:** il commit del pezzo `02000` della corsa lunga e' **fermo nel hook dalle `11:36`**, mai finito *(`.git/index.lock` assente)*; i commit nuovi passano accanto *(`d791e1a9`, `4e2bf875`)*.
+- **Le indicazioni delle `13:22` NON LE HO:** non sono nella conversazione ne' nel repo. **Criterio di chiusura: il testo.**
+- **I controlli** *(`csv/_controllo_disco_pieno.py`, il referto `doc/referti_l2/livelli_piatti/controllo_disco_pieno.txt`)*: **i `5` stati di Newton sono sani** *(si aprono, `sha(psi)` = quello registrato)*; i `.txt` e i `.json` si leggono; **due fallimenti sono dello strumento, non dei file** *(la trappola CRLF su un `.txt`; il riferimento sbagliato per le chiavi delle brevi, smascherato da `breve_R_1e6` committato prima)*. ### **La corsa lunga rifatta al bit NON e' finita: memoria virtuale esaurita, e il disco di nuovo pieno (`256M`)**: il pezzo `02000` e lo stato di ripresa **non sono verificati e non si usano**.
+- ### **FERMO:** il disco non basta. Chi lo riempie non lo so; il mio controllo non scrive su disco. **`db/modo_lento` occupa `580M`** *(le istantanee di `D` delle `09:09`)*: **cancellarle e' una decisione di Luca.**
