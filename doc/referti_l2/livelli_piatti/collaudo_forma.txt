@@ -1,7 +1,8 @@
-[TIMBRO] _livelli_piatti.py  sha1-BYTE f53ad849  committato e pulito
+[TIMBRO] _livelli_piatti.py  sha1-BYTE 658ffad4  committato e pulito
+  il controllo di Luca sulla serie vera di breve_R_1e6: ln|D| = a + b ln t + gamma t, 400 campioni sotto 1e-02: a -19.5990, b 1.0061, gamma 3.143e-04
   DEVE dare LINEARE: |D| = 1e-8 t                                                                                PASSA   lineare; 100 campioni > 0; gamma -0.00062 +- 0.00012, gamma t_ultimo -0.185, b 1.0621 +- 0.0043
-  DEVE dare LINEARE: |D| = -1.774e-8 + 3.502e-9 t (i numeri di breve_R_1e6; il caso che il criterio vecchio sbag ### FALLISCE   potenza t^2; 99 campioni > 0; gamma -0.00995 +- 0.00179, gamma t_ultimo -2.956, b 2.1557 +- 0.0852
+  DEVE dare LINEARE: la serie VERA di breve_R_1e6 (nD5 contro t5, 400 campioni ogni 0.75; il caso che il criteri PASSA   lineare; 400 campioni > 0; gamma -0.00031 +- 0.00011, gamma t_ultimo -0.092, b 1.0495 +- 0.0021
   DEVE dare ESPONENZIALE: |D| = 1e-8 e^{0.06 t}                                                                  PASSA   esponenziale; 100 campioni > 0; gamma 0.06000 +- 0.00000, gamma t_ultimo 13.680, b -0.0000 +- 0.0000
   DEVE dare ESPONENZIALE: |D| = 1e-8 (t + e^{0.0331 t}) (il tasso del modo lento col seme lineare)               PASSA   esponenziale; 100 campioni > 0; gamma 0.01803 +- 0.00106, gamma t_ultimo 5.356, b 0.6941 +- 0.0397
   DEVE dare POTENZA T^0: |D| = 1e-8 (il caso nullo: niente cresce)                                               PASSA   potenza t^0; 100 campioni > 0; gamma 0.00000 +- 0.00000, gamma t_ultimo 0.000, b 0.0000 +- 0.0000
-4/5 PASSANO; fallite: ['DEVE dare LINEARE: |D| = -1.774e-8 + 3.502e-9 t (i numeri di breve_R_1e6; il caso che il criterio vecchio sbaglia)']
+5/5 PASSANO; fallite: []
