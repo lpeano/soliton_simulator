@@ -1,9 +1,9 @@
-[TIMBRO] _controllo_disco_pieno.py  sha1-BYTE 98459922  committato e pulito
+[TIMBRO] _controllo_disco_pieno.py  sha1-BYTE b732959f  committato e pulito
 
 (a1) I FILE COMMITTATI: lo sha1 dei byte sul disco = il blob a HEAD
   doc/referti_l2/livelli_piatti/lunga_R_1e6_00000.jsonl: 48939 byte, sha1 7f59ddca                               PASSA   HEAD 7f59ddca
   doc/referti_l2/livelli_piatti/breve_R_3e6.json: 13470 byte, sha1 46154de0                                      PASSA   HEAD 46154de0
-  doc/referti_l2/livelli_piatti/breve_R_3e6.txt: 1555 byte, sha1 5c85e33c                                        ### FALLISCE   HEAD ee4b4524
+  doc/referti_l2/livelli_piatti/breve_R_3e6.txt: 1555 byte, sha1 5c85e33c; senza i CR 1547 byte, sha1 ee4b4524   PASSA   HEAD ee4b4524; byte diversi solo per i CR
   doc/referti_l2/livelli_piatti/cerca_X1.json: 10645 byte, sha1 58c18891                                         PASSA   HEAD 58c18891
   doc/referti_l2/livelli_piatti/cerca_R_3e6.json: 3719 byte, sha1 dca4ad56                                       PASSA   HEAD dca4ad56
   doc/referti_l2/livelli_piatti/cerca_R_1e6.json: 2304 byte, sha1 c6454357                                       PASSA   HEAD c6454357
@@ -15,10 +15,10 @@
   R_3e5: 1260220 byte, psi (39366, 2) complex128, sha b3e090a8; il json chiuso da a-capo, mu -0.868778404        PASSA   json b3e090a8, residuo 1.242e-03
   X2: 1260220 byte, psi (39366, 2) complex128, sha 0d6193e2; il json chiuso da a-capo, mu -0.369733694           PASSA   json 0d6193e2, residuo 4.827e-05
 
-(a3) LE CORSE BREVI: il json si legge, ha le chiavi di quella committata, il suo sha = quello dello stato
-  doc/referti_l2/livelli_piatti/breve_R_1e6.json: 14999 byte, sha1 d2727d4b, 28 chiavi, 400 campioni ogni 5 tick ### FALLISCE   
+(a3) LE CORSE BREVI: il json si legge, ha le chiavi di una committata (R_1e6 se la forma si giudica, R_3e6 se no), il suo sha = quello dello stato
+  doc/referti_l2/livelli_piatti/breve_R_1e6.json: 14999 byte, sha1 d2727d4b, 28 chiavi, 400 campioni ogni 5 tick PASSA   
   doc/referti_l2/livelli_piatti/breve_R_3e6.json: 13470 byte, sha1 46154de0, 19 chiavi, 400 campioni ogni 5 tick PASSA   
-  doc/referti_l2/livelli_piatti/breve_X1.json: 21278 byte, sha1 a4dff339, 28 chiavi, 400 campioni ogni 5 tick    ### FALLISCE   
+  doc/referti_l2/livelli_piatti/breve_X1.json: 21278 byte, sha1 a4dff339, 28 chiavi, 400 campioni ogni 5 tick    PASSA   
 
 (a4) I .txt: la copia nel repo = l'output nello scratchpad, al byte
   breve_X1.txt: 6495 byte, sha1 63a35361                                                                         PASSA   scratchpad 63a35361
@@ -26,35 +26,24 @@
   cerca_X2.txt solo nello scratchpad: 8896 byte, sha1 8c392fe0; l'ultima riga                                    PASSA   X2: residuo finale 4.827e-05, mu -0.369733694; NON CONVERGE: lo stato migliore, dichiarato
 
 (b) LA CORSA LUNGA DI R_1e6 RIFATTA IN MEMORIA, tick 1 -> 4000
-Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\_controllo_disco_pieno.py", line 194, in <module>
-    sys.exit(main())
-             ~~~~^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_controllo_disco_pieno.py", line 183, in main
-    b = lunga()
-  File "C:\Users\lpeano\soliton_simulator\csv\_controllo_disco_pieno.py", line 138, in lunga
-    CL.avanza(z, phi0, 1)
-    ~~~~~~~~~^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_congelato_lungo.py", line 90, in avanza
-    DC.tick_congelato(z, phi0, salta)
-    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_deriva_congelato.py", line 76, in tick_congelato
-    TK.percorri_tick(z["st"], z["mot"], z["par"], salta, None, len(CM.ORDINE))
-    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 99, in percorri_tick
-    mot.operatori[nome](st, par if vuole_par else {}, frazione)
-    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\primo_ordine\motore.py", line 446, in _grover
-    FP.grover(self, st["psi_h"], frazione)
-    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\_zero_simmetrico.py", line 75, in f
-    oggi(mot, x, 0.5 * frazione)
-    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\primo_ordine\flussi_parziali.py", line 341, in grover
-    np.take(S, nodo, axis=0, out=presa)
-    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py", line 203, in take
-    return _wrapfunc(a, 'take', indices, axis=axis, out=out, mode=mode)
-  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py", line 57, in _wrapfunc
-    return bound(*args, **kwds)
-numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.20 MiB for an array with shape (39366, 2) and data type complex128
+  4000 tick in 182 s
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): sha_fine uguale AL BIT                          PASSA   94cd0dda10bc3ed1
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): w0 uguale AL BIT                                PASSA   
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): w_in uguale AL BIT                              PASSA   
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): punti uguale AL BIT                             PASSA   201 voci
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): D uguale AL BIT                                 PASSA   100 voci
+  il pezzo 00000 committato in 6c385aa2 (IL CONTROLLO POSITIVO): t0 0, t1 2000                                   PASSA   
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): sha_fine uguale AL BIT                                   PASSA   445b4f19e497d3dd
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): w0 uguale AL BIT                                         PASSA   
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): w_in uguale AL BIT                                       PASSA   
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): punti uguale AL BIT                                      PASSA   200 voci
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): D uguale AL BIT                                          PASSA   100 voci
+  il pezzo 02000 sul disco (49060 byte, sha1 c7d385c4): t0 2000, t1 4000                                         PASSA   
+  il pezzo 02000: chiuso da a-capo                                                                               PASSA   
+  lo stato di ripresa lunga_R_1e6.npz: t 4000, sha 445b4f19 = la fine rifatta in memoria                         PASSA   
+
+(c) LO SPAZIO
+  serve (per eccesso): 8 pezzi da 49060 byte, 2 brevi da 21278 byte (json + txt), 2 stati da 1260220 byte: 8.52 MB
+  lo spazio libero su C basta: 30.72 GB liberi                                                                   PASSA   il rapporto 3607
+
+32/32 PASSANO

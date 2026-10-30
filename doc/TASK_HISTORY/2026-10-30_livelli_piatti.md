@@ -117,3 +117,52 @@ La regola non dipende dal solitone *(`N`, larghezza, nodi)*: si prova su tre `N`
 - **La correzione dei due difetti dello strumento** *(i `.txt` confrontati senza i CR; le chiavi delle brevi contro quelle committate di `R_1e6` o `R_3e6`)* **e' pronta e NON applicata:** e' un commit a se', dopo lo spazio.
 
 - **Dopo il FERMO** *(Luca: «ora c'e' spazio»)*: `df -h` `16G` liberi; memoria virtuale disponibile `10.605` MB *(`systeminfo`)*. **Il primo commit di questo esito era rimasto fermo nel hook e l'ho interrotto col `timeout` dopo `900` s: rifatto qui.** Il commit del pezzo `02000` *(PID `39716`)* e' ancora fermo; un `git` in piu' *(PID `45192`)*, probabilmente il figlio del commit interrotto, anche.
+
+## 5-ter. L'ESITO DEI CONTROLLI, RIGIRATI; E IL COMMIT APPESO CHIUSO *(Luca, `15:45`, punti `0` e `1`)*
+
+- **I controlli, rigirati per intero** *(lo script corretto di `5eeb3d5c`, sha1-BYTE `b732959f`; ### **Luca chiedeva «lo script di `4e2bf875`»: quello aveva i due difetti di strumento di `47ad8c8c`, e l'ho corretto PRIMA del suo messaggio; dichiarato)***: **`32/32` PASSANO.** Il controllo positivo *(il pezzo `00000` di `6c385aa2`, rifatto in memoria)* passa AL BIT; **il pezzo `02000` e lo stato di ripresa *(`t 4000`)* coincidono AL BIT con la corsa rifatta**; gli `5` stati, le `3` brevi, i `.txt` sani; lo spazio che serve per finire, per eccesso, `8.52` MB contro `30.72` GB liberi. Il referto: `doc/referti_l2/livelli_piatti/controllo_disco_pieno.txt`.
+- **Il commit appeso dalle `11:36`:** terminato `git cat-file --batch` *(PID `41948`)*, con lui sono usciti `indice.py valida` *(`41012`)* e `git commit` *(`39716`)*; terminato anche il `git` rimasto dal mio commit interrotto *(`45192`)*. **`.git/index.lock` non c'e'.** Il ciclo della corsa lunga, che aspettava quel commit, **si e' fermato da se'** *(il commit fallito: `FINE lunga 02000 commit 1`)* **senza girare il pezzo `04000`** *(lo stato di ripresa e' ancora delle `11:28:59`)*. ### ⚠ **Il job in coda dello stato di `R_3e5` e' ripartito da solo appena liberato il lucchetto** *(`15:58`)*: committa `cerca_R_3e5` e poi gira la sua corsa breve. **E' cio' che il punto `5` chiede** *(`R_3e5` passa i controlli)*, **ma non l'ho deciso io a quell'ora: dichiarato.**
+- **Il pezzo `02000`** si committa con un commit nuovo, ora che i controlli passano.
+
+## 6-pre. LA RIPRESA DEL MANDATO DELLE `09:31` *(il testo delle `13:22`, mandato alle `15:45`; scritto PRIMA dello script e delle corse)*
+
+### Le premesse dal codice
+
+- **`newton` fa al piu' `SB.MAX_NEWTON = 30` passi** e tiene **lo stato migliore**; il criterio e' `SB.TOLL_RES = 1e-9` sul residuo relativo del tick *(il criterio di `26300537`)*. **Per i passi in piu' di `X1` serve un argomento `passi`** *(nessun default: `30` per le ricerche di prima, `10` per `X1`)*.
+- **`scrivi_nuovo` apre in `xb`: un `.json` esistente non si riscrive.** Quindi gli stati e le brevi nuovi hanno **nomi nuovi**: **`R_3e6_t`** *(`R_3e6` per la tappa a `2e6`)* e **`X1_p`** *(`X1` coi passi in piu')*; **le vecchie `cerca_R_3e6`, `breve_R_3e6`, `cerca_X1`, `breve_X1` restano, dichiarate** *(stati non fermi)*.
+- **La tappa a `2e6`:** dallo stato di `R_1e6` riscalato a `N 2e6`, Newton coi `30` passi; poi dallo stato della tappa riscalato a `3e6`, Newton coi `30` passi. **La tappa resta in memoria: non si scrive** *(il punto `3` delle `15:45`, e il `5` delle `13:40`)*; nel `.json` di `R_3e6_t` restano **la sua storia dei residui e il suo `mu`**, non lo stato.
+- **`X1_p`:** dallo stato migliore di `X1` *(`2.290e-7`, sha `005443ea`)*, Newton con al piu' `10` passi. **Se converge**, la sua breve dallo stato fermo; **la breve di `X1` dallo stato non fermo resta, dichiarata.**
+- **Se `R_3e6_t` o `X1_p` NON convergono:** lo stato migliore si scrive e si dichiara, come per gli altri; la breve di `R_3e6_t` gira comunque *(il punto `3` dice «poi la sua corsa breve»)*; quella di `X1_p` **no** *(il punto `4` la lega alla convergenza)*.
+- **La corsa lunga:** l'ultimo pezzo che passa AL BIT e' `02000` *(fine a tick `4000`)*: si riparte dallo stato di ripresa, pezzi `04000` .. `18000`, fino a `20000`. **Lo script non si modifica mentre gira:** prima si committa la versione nuova, poi si lancia.
+- **La memoria:** alle `14:40` la memoria virtuale si era esaurita. **Al piu' due processi di calcolo insieme** *(la corsa lunga e una ricerca, o una breve)*.
+
+### IL CRITERIO AGGIUNTO DELLA FORMA DELLA CRESCITA *(il punto `6`; scritto PRIMA di leggere i casi)*
+
+**Il difetto del criterio vecchio** *((L) contro (E) nello scarto di `ln|D|`)*: con l'intercetta negativa *(`breve_R_1e6`: `|D| = -1.774e-8 + 3.502e-9 t`)* lo scarto di (L) e' **infinito** e vince (E) **per costruzione**, anche se `|D|` cresce come `v t` *(`v / attesa 1.11`)*.
+
+**Il criterio aggiunto, dalle pendenze locali** `l(t) = d ln|D|/dt` *(le stesse che il referto gia' stampa: `np.gradient` di `ln|D|` sui campioni ogni `3`)*, **sui campioni sotto la saturazione `1e-2`, esclusi il primo e l'ultimo della serie** *(il bordo del gradiente)*:
+
+- **perche':** se `|D| = c + v t`, `l = v/(c + v t)` **tende a `1/t`**; se `|D| ~ e^{gamma t}`, `l` **tende alla costante `gamma`**; se `|D| ~ t^b`, `l = b/t`.
+- **il fit:** `l = gamma + b/t`, minimi quadrati in `(1, 1/t)`; `sigma_gamma` dalla covarianza del fit.
+- **ESPONENZIALE** se `gamma - 3 sigma_gamma > 0` **e** `gamma t_ultimo > 1` *(la costante supera `1/t` dentro la finestra: e' cio' che rende «sopra una costante» VISIBILE; il `3 sigma` e' quello di `PATTERN_DI_PROVA`)*;
+- **altrimenti, una POTENZA `t^b`:** **LINEARE** se `b` arrotondato all'intero e' `1` *(le alternative sono discrete: `t`, `t^2` di un seme quadratico, la costante `t^0` del caso nullo)*; altrimenti **POTENZA `t^<b>`**, dichiarata;
+- **meno di `3` campioni:** non si giudica.
+- **Il collaudo, PRIMA dei casi** *(`P1-sexies`; stampato nel referto, sulla stessa griglia `t = 3 .. 300` ogni `3`)*: **DEVE dare LINEARE** `|D| = 1e-8 t` e `|D| = -1.774e-8 + 3.502e-9 t` *(i numeri di `breve_R_1e6`: il caso che il criterio vecchio sbaglia)*; **DEVE dare ESPONENZIALE** `|D| = 1e-8 e^{0.06 t}` e `|D| = 1e-8 (t + e^{0.0331 t})` *(il tasso del modo lento, col seme lineare)*; **il caso nullo** `|D| = 1e-8` *(niente cresce)* **DEVE dare POTENZA `t^0`, non LINEARE ne' ESPONENZIALE.**
+- **Nel referto, per ogni breve:** la lettura **alla lettera del criterio vecchio** *(stampata accanto, invariata)* e quella del criterio aggiunto. **Le letture `p1`-`p3` usano il criterio aggiunto**; **dove i due danno forme diverse, si dice.** Vale per le brevi gia' fatte *(`R_1e6`, `R_3e6`, `X1`)*, **rilette dal `.json`, non rifatte.**
+
+### La progettazione, e cosa mi fa FERMARE
+
+1. Questo testo, committato **da solo**; poi la MAPPA *(la ripresa, la tappa, i passi di `X1`, il criterio aggiunto, il commit appeso)*.
+2. I dati in coda committati: il pezzo `02000`, `breve_X1`, `cerca_X2` *(`R_3e5` col suo job)*.
+3. **Lo script nuovo** *(`--cerca R_3e6_t`, `--cerca X1_p`, `newton(..., passi)`, il criterio aggiunto e il collaudo nel referto)* **e la sua riga nell'inventario, committati prima di girare** — **solo quando nessuna corsa dello script vecchio e' in vita** *(la breve di `R_3e5`)*.
+4. Le corse: la corsa lunga *(`04000` .. `18000`, ogni pezzo committato)* e, accanto, `R_3e6_t`, poi `X1_p`, poi le brevi *(`X2`, `R_3e6_t`, e `X1_p` se converge)*.
+5. Il referto, `BANDE_PIATTE` *(l'esito)*, `RELAZIONE`, `MAPPA` *(la riga `d`, i punti `10:06`)*, la sezione `6` qui.
+- **FERMO se:** **il collaudo del criterio aggiunto fallisce** *(si committa il fallimento e ci si ferma: un criterio che sbaglia sui casi noti non legge i casi veri)*; un pezzo della corsa lunga che non riparte AL BIT dal precedente *(l'`assert` di `lunga()`)*; lo spazio o la memoria di nuovo esauriti.
+
+## 6-pre-bis. L'AGGIUNTA DELLE `16:00` *(LA MEMORIA)*, E I SUOI NUMERI; ### **FERMO**
+
+- **Il testo, in breve:** dopo il punto `0`, misurare la memoria virtuale libera e lo spazio; **sotto `15` GB liberi di memoria virtuale, o con processi `python.exe` estranei, FERMARSI** *(Luca decide se riavviare)*; **la corsa lunga si confronta AL BIT solo fino al tick `2000`** *(il pezzo `00000` di `6c385aa2`)*, **il pezzo `02000` e lo stato di ripresa si scartano e si rifanno dal tick `2000`**; **UN SOLO processo di calcolo alla volta**, col controllo a fine corsa che sia terminato; **sotto `4` GB liberi: fermarsi.** ### **Sostituisce, per la corsa lunga e il parallelismo, cio' che avevo scritto in `6-pre`** *(«al piu' due processi»; «si riparte dallo stato di ripresa a `4000`»)*: **vale l'ultima** *(`PRECEDENZA-IN-CODA`)*.
+- **Le misure** *(`systeminfo`, `df -h`, `tasklist`)*: alle `16:02` memoria virtuale **disponibile `8.929` MB** *(massima `46.416`, in uso `37.487`)*, `C:` **`29G`** liberi; vivi: **un solo `python.exe`** *(PID `1800`, `127` MB: la corsa breve di `R_3e5`, di questo lavoro, partita da sola dopo il commit del suo stato alle `16:00`)* e i `git.exe` della push di `2924d947`. Alle `16:03:44`, finita la breve: **nessun `python.exe` vivo**, memoria virtuale **disponibile `10.494` MB**. ### **SOTTO I `15` GB: FERMO.** **La dimensione massima e' scesa da `63.262` a `46.416` MB**: il file di paging si e' ristretto *(compatibile con l'ipotesi di Luca)*.
+- **La breve di `R_3e5` e' finita prima dell'aggiunta** *(partita alle `16:02`, finita alle `16:03:44`, `88` s)*: si committa. **Stato NON fermo** *(residuo `1.242e-3`)*: `|D|/|psi0|` parte da `2.18e-2`, **nessun campione sotto `1e-2`: la forma non si giudica, con nessuno dei due criteri.**
+- **Scartati** *(cancellati dal disco, non committati)*: `doc/referti_l2/livelli_piatti/lunga_R_1e6_02000.jsonl` *(sha1 dei byte `c7d385c4`)* e `db/livelli_piatti/lunga_R_1e6.npz` *(lo stato a `t 4000`)*. **Erano sani AL BIT** *(`5-ter`)*, **ma l'ordine e' di rifarli.** ### ⚠ **Per ripartire dal tick `2000` lo script deve RICOSTRUIRE lo stato a `2000`** *(da `fermo_R_1e6`, `2000` tick in memoria, `sha` = `sha_fine` del pezzo `00000`)*: **`lunga()` oggi, senza stato di ripresa, ripartirebbe da `0` e si fermerebbe sull'`assert` di `scrivi_nuovo`** *(il pezzo `00000` esiste)*. **Va nello script nuovo, prima di girare.**
+- **Committati ora, senza calcolo:** `breve_R_3e5`, `breve_X1`, `cerca_X2` *(passati i controlli)*.
