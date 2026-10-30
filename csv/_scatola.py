@@ -8,6 +8,7 @@ r"""**LA REGOLA CON L'USCITA MISTA E LA PROVA DELLA SCATOLA** *(UNA PROVA, NON U
     python csv/_scatola.py --pezzo                     # un pezzo; si ripete finche' dice "finita"
     python csv/_scatola.py --referto > doc/referti_l2/scatola.txt
 """
+import contextlib
 import math
 import os
 import sys
@@ -33,32 +34,54 @@ SOGLIA = 1e-2                  # ### la soglia della vita (Luca 22:11, decisa)
 TAU_MAX = 3000.0               # ### «al piu' 3000 unita' di tempo» (Luca 22:11)
 ESAME = 40                     # ### i D dei 40 tick prima della fine di un pezzo, in memoria: l'esame di 795d2c81
 SIGMA = 3.0                    # ### il 3 sigma di doc/PATTERN_DI_PROVA.md
-# ### (1) i casi gia' misurati: (r, g, mu, da dove) e il tasso misurato con la sua uscita
-CASI = (("r 1", 1.0, 1.0, "dfb5ab7e (S1_s0.150)", 0.151, "coppia di piatte"),
-        ("r 1.5247", 1.5247, 1.0, "_strada_b_r cerca_r1.52", 0.033, "coppia di piatte"),
-        ("X1", 1.0, 0.5, "cerca_X1.json", 0.061, "coppia di piatte"),
-        ("(R)", 0.6, 0.5, "cerca_R_1e6.json", 0.0079, "mista (P0 + A)"))
+# ### (1) i casi gia' misurati: (nome, la FAMIGLIA dei pesi dello stato, r, g, da dove, il tasso misurato, la sua uscita)
+# ### le famiglie (Luca 00:21): "lp" = _livelli_piatti (a_n = pi, b_a = r pi, il legame g); "sb" = _strada_b_r (a = pi/sqrt(1 - r + r^2), b = r a, mu0 = pi/2, g 1)
+CASI = (("r 1", "lp", 1.0, 1.0, "dfb5ab7e (S1_s0.150)", 0.151, "coppia di piatte"),
+        ("r 1.5247", "sb", 1.5247, 1.0, "_strada_b_r cerca_r1.52", 0.033, "coppia di piatte"),
+        ("X1", "lp", 1.0, 0.5, "cerca_X1.json", 0.061, "coppia di piatte"),
+        ("(R)", "lp", 0.6, 0.5, "cerca_R_1e6.json", 0.0079, "mista (P0 + A)"))
 PIATTE = ("P0", "Ppi")
 DISPERSIVE = ("A", "B")
+TOLL_RES_REL = 1e-6            # ### il residuo ricalcolato coi pesi della riga contro quello registrato, relativo
 
 
-def mu_di(nome):
+def stato_di(nome):
+    """### **`(psi, mu, il residuo registrato dalla sua ricerca)`.**"""
     import _modo_al_variare_di_s as MS
     import _strada_b_r as SB
     if nome == "r 1":
-        return MS.carica("S1_s0.150")[1]
-    if nome == "r 1.5247":
-        return SB.carica(1.5247)[1]
-    if nome == "X1":
-        return LP.leggi(os.path.join(LP.DIR_JSON, "cerca_X1.json"))["mu"]
-    return LP.leggi(os.path.join(LP.DIR_JSON, "cerca_R_1e6.json"))["mu"]
+        psi, mu, cj, ok = MS.carica("S1_s0.150")
+    elif nome == "r 1.5247":
+        psi, mu, cj, ok = SB.carica(1.5247)
+    else:
+        psi, mu, cj = LP.stato("X1" if nome == "X1" else NOME)
+        ok = True
+    assert ok, nome
+    return psi, mu, cj["residuo_finale"]
 
 
-def spettro(r, g):
-    """### **Lo spettro libero** *(`DV.matrice` a `AMP`, dentro la configurazione)*: ### **per gruppo l'intervallo `[min, max]` di `E = fase/s`** *(`ALPHA0` di `S1` = `0`)*."""
+@contextlib.contextmanager
+def famiglia(fam, r, g):
+    """### **La scena e i pesi della famiglia:** `lp` = `LP.scena` + `LP.configurazione(r, g)`; `sb` = `SB.scena` + `SB.pesi(r)`."""
+    import _strada_b_r as SB
+    if fam == "lp":
+        with LP.scena(LP.N_RIF) as (_rec, z, phi0, _p), LP.configurazione(r, g):
+            yield z, phi0
+    else:
+        assert g == 1.0, "la famiglia sb ha il legame di S1 com'e'"
+        with SB.scena() as (_rec, z, phi0, _p, _forma, _s), SB.pesi(r):
+            yield z, phi0
+
+
+def residuo(z, phi0, psi, mu):
+    import _modo_al_variare_di_s as MS
+    return float(np.linalg.norm(MS.tick(z, phi0, psi, LP.FORMA) - np.exp(-1j * mu * LP.S) * psi) / np.linalg.norm(psi))
+
+
+def spettro(z, phi0):
+    """### **Lo spettro libero** *(`DV.matrice` a `AMP`, dentro la famiglia)*: ### **per gruppo l'intervallo `[min, max]` di `E = fase/s`** *(`ALPHA0` di `S1` = `0`)*."""
     import _dove_va_la_materia as DV
-    with LP.scena(LP.N_RIF) as (_rec, z, phi0, _p), LP.configurazione(r, g):
-        ph, _Z = DV.autovettori(DV.matrice(z, phi0, DV.AMP))
+    ph, _Z = DV.autovettori(DV.matrice(z, phi0, DV.AMP))
     E = ph / LP.S
     return {gr: (float(E[..., list(idx)].min()), float(E[..., list(idx)].max())) for gr, idx in DV.GRUPPI}
 
@@ -70,11 +93,19 @@ def sovrapposti(a, b):
 # ====================================================================== (1) LE USCITE
 def uscite():
     print("### (1) LE USCITE SULLO SPETTRO LIBERO (la regola corretta di Luca 22:11): (n2-misto) [2 mu - F - g, 2 mu - F] contro A, B; (n2) 2 mu - F_i - F_j in [0, 2 g]")
-    for nome, r, g, da, tasso, tipo in CASI:
-        mu = mu_di(nome)
-        sp = spettro(r, g)
+    print("    (Luca 00:21: OGNI riga coi pesi della famiglia dello stato che legge; DEVE: il residuo del tick dello stato coi pesi della riga = quello della sua ricerca, entro %g relativo)" % TOLL_RES_REL)
+    for nome, fam, r, g, da, tasso, tipo in CASI:
+        psi, mu, res_reg = stato_di(nome)
+        with famiglia(fam, r, g) as (z, phi0):
+            res = residuo(z, phi0, psi, mu)
+            sp = spettro(z, phi0)
+        LP.esito("DEVE PASSARE: %s, i pesi della riga (famiglia %s) sono quelli dello stato: il residuo ricalcolato = il registrato" % (nome, fam), abs(res / res_reg - 1.0) < TOLL_RES_REL, "%.6e contro %.6e" % (res, res_reg))
+        if nome == "r 1.5247":
+            with famiglia("lp", r, g) as (z, phi0):
+                res_sb = residuo(z, phi0, psi, mu)
+            LP.esito("DEVE FALLIRE: r 1.5247 coi pesi della famiglia SBAGLIATA (lp: a_n = pi, b_a = r pi), l'errore di c6ad04ac", not (abs(res_sb / res_reg - 1.0) < TOLL_RES_REL), "%.3e contro %.3e" % (res_sb, res_reg))
         F = {p: 0.5 * (sp[p][0] + sp[p][1]) for p in PIATTE}
-        print("  --- %s: r %.4f g %.2f mu %+.5f (%s); il tasso misurato %.4f (%s)" % (nome, r, g, mu, da, tasso, tipo))
+        print("  --- %s: famiglia %s, r %.4f g %.2f mu %+.5f (%s); il tasso misurato %.4f (%s)" % (nome, fam, r, g, mu, da, tasso, tipo))
         print("      le bande libere: %s; le piatte larghe %s" % ("  ".join("%s [%+.5f, %+.5f]" % (k, v[0], v[1]) for k, v in sp.items()), "  ".join("%s %.1e" % (p, sp[p][1] - sp[p][0]) for p in PIATTE)))
         for p in PIATTE:
             iv = (2.0 * mu - F[p] - g, 2.0 * mu - F[p])
@@ -86,7 +117,8 @@ def uscite():
         for i, p in enumerate(PIATTE):
             for q in PIATTE[i:]:
                 x = 2.0 * mu - F[p] - F[q]
-                print("      (n2) %-3s + %-3s: 2 mu - F_i - F_j %+.5f contro [0, 2 g = %.2f] -> %s" % (p, q, x, 2.0 * g, "APERTA" if 0.0 <= x <= 2.0 * g else "chiusa"))
+                dentro = 0.0 <= x <= 2.0 * g
+                print("      (n2) %-3s + %-3s: 2 mu - F_i - F_j %+.5f contro [0, 2 g = %.2f] -> %s" % (p, q, x, 2.0 * g, ("APERTA, a alpha %.4f" % (x / 2.0)) if dentro else "chiusa, %.4f fuori" % (x - 2.0 * g if x > 2.0 * g else -x)))
             x = mu - F[p]
             print("      (n1) %-3s: mu - F %+.5f contro [0, g = %.2f] -> %s" % (p, x, g, "APERTA" if 0.0 <= x <= g else "chiusa"))
 
@@ -252,6 +284,30 @@ def pezzo():
           % (L_GRANDE, t0, t1, punti[-1]["w"] / w_in, punti[-1]["f_win"], dd[-1]["nD"], dd[-1]["bande"]["A"], dd[-1]["bande"]["P0"], esame["rot"]["P0"]["media"], esame["rot"]["A"]["media"], riga["secondi"]))
 
 
+def ripresa_al_bit(pz):
+    """### **I pezzi ripartono AL BIT** *(Luca 00:21)*: ### **la corsa rifatta dallo stato fermo `L 120` fino all'ultimo `t1`, lo `sha` a ogni fine pezzo = `sha_fine` committato; lo stato di ripresa sul disco = l'ultimo.**"""
+    import _congelato_lungo as CL
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _stato_fermo as SFM
+    import _triangoli_bassa_energia as BE
+    r, g, N = LP.CONFIG[NOME]
+    psi0, _mu, _cj = stato_grande()
+    fine = {x["t1"]: x["sha_fine"] for x in pz}
+    s0 = time.time()
+    with LP.scena(N, L_GRANDE) as (_rec, z, phi0, _p), LP.configurazione(r, g):
+        z["st"]["psi_h"][...] = psi0
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            for t in range(1, max(fine) + 1):
+                CL.avanza(z, phi0, 1)
+                if t in fine:
+                    LP.esito("DEVE PASSARE: la corsa su L %d rifatta: lo stato al tick %d = sha_fine del pezzo committato (AL BIT)" % (L_GRANDE, t), SFM.sha(z["st"]["psi_h"]) == fine[t], fine[t][:8])
+    with np.load(F_RIPRESA) as dati:
+        LP.esito("DEVE PASSARE: lo stato di ripresa sul disco (t %d) = l'ultimo sha_fine" % int(dati["t"]), int(dati["t"]) == max(fine) and SFM.sha(dati["psi_h"]) == fine[max(fine)], "")
+    print("  la corsa rifatta: %d tick in %.0f s" % (max(fine), time.time() - s0))
+
+
 # ====================================================================== IL REFERTO
 def tasso(tau, nD, attesa):
     """### **La finestra di `5f06dbfb`** *(da `FATTORE_DEROGA` volte la deriva attesa a `SOGLIA`)*; ### **l'errore: il piu' grande fra la `sigma` del fit e meta' della differenza fra le due meta'.**"""
@@ -284,6 +340,9 @@ def referto():
     print("=" * 130)
     cj = LP.leggi(os.path.join(DIR_JSON, "cerca_L%d.json" % L_GRANDE))
     stato_grande()
+    c81_ = LP.leggi(os.path.join(LP.DIR_JSON, "cerca_%s.json" % NOME))
+    LP.esito("DEVE PASSARE: lo stato su L %d ha il residuo di L 81 (dai .json committati, %g relativo)" % (L_GRANDE, TOLL_RES_REL), abs(cj["residuo_finale"] / c81_["residuo_finale"] - 1.0) < TOLL_RES_REL, "%.6e contro %.6e" % (cj["residuo_finale"], c81_["residuo_finale"]))
+    LP.esito("DEVE PASSARE: lo stato su L %d ha il mu di L 81 (entro 1e-12)" % L_GRANDE, abs(cj["mu"] - c81_["mu"]) < 1e-12, "%+.12f contro %+.12f" % (cj["mu"], c81_["mu"]))
     print("### LO STATO SU L %d: %s (residuo %.3e), mu %+.9f (L 81 %+.9f); la storia %s" % (L_GRANDE, "FERMO" if cj["convergito"] else "NON FERMO", cj["residuo_finale"], cj["mu"], cj["mu_L81"],
                                                                                       " ".join("%.1e" % p["residuo"] for p in cj["storia"])))
     c81 = LP.leggi(os.path.join(LP.DIR_JSON, "cerca_%s.json" % NOME))
@@ -297,6 +356,7 @@ def referto():
         print("  pezzo %05d: |D| a fine %.3e (A %.3f P0 %.3f Ppi %.3f); cuore %.5f; rot P0 %+.4f A %+.4f somma %+.4f (dev %.4f); E_A %+.4f, E_P0 %+.4f; raggi A %.2f P0 %.2f psi0 %.2f uniforme %.2f"
               % (x["t0"], x["D"][-1]["nD"], x["D"][-1]["bande"]["A"], x["D"][-1]["bande"]["P0"], x["D"][-1]["bande"]["Ppi"], x["punti"][-1]["f_win"], e["rot"]["P0"]["media"], e["rot"]["A"]["media"],
                  e["somma_P0_A"]["media"], e["somma_P0_A"]["dev"], e["E"]["A"], e["E"]["P0"], e["raggio"]["A"], e["raggio"]["P0"], e["raggio"]["psi0"], e["raggio"]["uniforme"]))
+    ripresa_al_bit(pz)
     print("  le bande libere su L %d: %s" % (L_GRANDE, "  ".join("%s [%+.4f, %+.4f]" % (k, v[0], v[1]) for k, v in pz[-1]["esame"]["bande_libere"].items())))
     tg = {}
     for chi, righe, cc in (("L %d" % L_GRANDE, pz, cj), ("L 81", p81, c81)):
