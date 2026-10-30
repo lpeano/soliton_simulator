@@ -45,6 +45,13 @@ Con `a_n = pi`, `b_a = r pi`: `mu0 = (pi/2) sqrt(1 - r + r^2)`, `P0 = (r - 1) pi
 - **quale lato di `W`** vale per la coppia sotto `J`;
 - **se `U_max = g`** e' raggiunto: a `N 3e5` il cuore puo' non saturare *(`alpha` del cuore `< g`)*: allora `J` vero e' piu' corto. **Lo script stampa `alpha` del cuore di ogni stato.**
 
+## 1-bis. L'INTEGRAZIONE DELLE `10:06` *(arrivata a mandato iniziato: il task history `68285252` committato, lo script scritto e NON ancora committato; annotata qui con un commit a parte, nessuna corsa in piu')*
+
+1. **Il campionamento:** il periodo vero del modo e' `4.07`-`4.10` *(`03142636`)*; `10.91`, `11.45`, `22.8` e il respiro `11.1` sono compatibili con un alias del campionamento ogni `3` *(**l'errore `n.84` del guardiano**)*. **Qui ogni periodo si misura con le rotazioni per banda, con `D` campionato non piu' rado di `0.75` unita' di tempo, e ogni periodo riportato dice il suo passo.** Lo script: `D` ogni `5` tick *(`0.75`)*; il periodo dai cambi di segno resta stampato come in `03142636`, **ma non entra in nessuna lettura**.
+2. **I criteri di forma:** **l'istante al bordo alto della finestra** *(la saturazione: per costruzione l'ULTIMO campione della finestra)* **non entra nei criteri** *(«il modo previsto» di X1 e X2 si legge sui due istanti prima)*. **`Q_S` si confronta con una tolleranza assoluta dichiarata, `1e-6`.** ### **Una cosa da sapere PRIMA:** nei dati di `03142636` `q - 1` della parte piatta PROIETTATA vale `-1.3e-6`..`-6.2e-6` *(l'artefatto del proiettore su `Ppi`, dove tocca `A` in `Gamma`)*, mentre `q(D) - 1` resta sotto `8e-9`: **con `1e-6` sulla parte proiettata, `Q_S` «non tornerebbe» per l'artefatto.** In questo mandato `Q_S` non entra nelle letture; se servira', **il confronto va fatto su `q(D)` o su `q(P0)`** *(`P0` e' isolata)*, **e lo decide Luca.**
+3. **`doc/BANDE_PIATTE.md`:** la regola **AGGIORNA la sezione `5`** *(non le si affianca)*: **una taratura sceglie i pesi per un solitone dato; la regola vale per ogni solitone su quel punto della banda, con la legge `U_max <= margine`.** La decisione delle `09:09` *(niente taratura)* resta.
+4. **La MAPPA:** la voce del periodo *(`18`, e la `23`)* chiusa come alias; **il respiro della corsa lunga da rimisurare col campionamento fitto**, in lista d'attesa; l'errore `n.84`.
+
 ## 2. I CRITERI
 
 | il punto | il criterio *(fissato qui)* |
