@@ -8,7 +8,7 @@ r"""**LA REGOLA DEI LIVELLI PIATTI E LA PROVA DI UN SOLITONE CHE LA RISPETTA** *
     python csv/_livelli_piatti.py --cerca R_1e6 > doc/referti_l2/livelli_piatti/cerca_R_1e6.txt   # idem X1, X2, R_3e5, R_3e6
     python csv/_livelli_piatti.py --breve R_1e6 > doc/referti_l2/livelli_piatti/breve_R_1e6.txt   # idem le altre
     python csv/_livelli_piatti.py --lunga               # un pezzo; si ripete fino alla fine (senza stato di ripresa, lo RICOSTRUISCE dai pezzi scritti)
-    python csv/_livelli_piatti.py --cerca R_3e6_t > doc/referti_l2/livelli_piatti/cerca_R_3e6_t.txt   # la ripresa (Luca 13:22): la tappa a N 2e6; idem X1_p (al piu' 10 passi)
+    python csv/_livelli_piatti.py --cerca R_3e6_t > doc/referti_l2/livelli_piatti/cerca_R_3e6_t.txt   # la ripresa (Luca 13:22): la tappa a N 2e6; idem X1_p (al piu' 10 passi), R_3e5_t (Luca 16:26: la tappa a N 6e5)
     python csv/_livelli_piatti.py --collaudo-forma > doc/referti_l2/livelli_piatti/collaudo_forma.txt  # il criterio aggiunto della forma sui casi noti
     python csv/_livelli_piatti.py --referto > doc/referti_l2/livelli_piatti.txt
 """
@@ -41,9 +41,10 @@ PARTENZA = {"R_1e6": None, "X1": None, "X2": None, "R_3e5": "R_1e6", "R_3e6": "R
 # ### LA RIPRESA (il testo di Luca delle 13:22, mandato alle 15:45): nomi nuovi, perche' scrivi_nuovo non riscrive; le vecchie ricerche e brevi restano, dichiarate
 PASSI_X1 = 10                  # ### «al piu' 10 passi in piu'» (Luca, 13:22)
 RIPRESE = {"R_3e6_t": {"come": "R_3e6", "partenza": "R_1e6", "tappa_N": 2e6, "passi": None},     # ### la tappa a N 2e6, NON scritta; passi None = SB.MAX_NEWTON
-           "X1_p": {"come": "X1", "partenza": "X1", "tappa_N": None, "passi": PASSI_X1}}
+           "X1_p": {"come": "X1", "partenza": "X1", "tappa_N": None, "passi": PASSI_X1},
+           "R_3e5_t": {"come": "R_3e5", "partenza": "R_1e6", "tappa_N": 6e5, "passi": None}}   # ### Luca 16:26 (d): per continuazione, la tappa a N 6e5, NON scritta
 SIGMA_FORMA = 3.0              # ### il 3 sigma di doc/PATTERN_DI_PROVA.md (P1-sexies), per il criterio aggiunto della forma
-LETTURA = {"R_1e6": ("R_1e6",), "R_3e5": ("R_3e5",), "R_3e6": ("R_3e6_t", "R_3e6"), "X1": ("X1_p", "X1"), "X2": ("X2",)}   # ### per le letture: la prima che ha la breve
+LETTURA = {"R_1e6": ("R_1e6",), "R_3e5": ("R_3e5_t", "R_3e5"), "R_3e6": ("R_3e6_t", "R_3e6"), "X1": ("X1",), "X2": ("X2",)}   # ### per le letture: la prima che ha la breve; X1 da X1 (Luca 16:26: X1_p non e' nell'ordine)
 W_LISTA = (0.05, 0.2)          # ### la larghezza per quanto di 99b679bc, il lato stretto
 L_SCENA = 81
 FRAZ_LARGO = 1.0 / 6.0         # ### oltre L/6 la corsa a L 120 (il mandato)
@@ -560,9 +561,9 @@ def referto():
             cp = RIPRESE[nome]["come"] if nome in RIPRESE else nome
             P0, Ppi = (prev["configurazioni"][cp]["P0"], prev["configurazioni"][cp]["Ppi"]) if prev else (None, None)
             _ra, am = SL.anelli(z, psi, FORMA)
-            print("  %s: %s (residuo %.3e), mu %+.9f; la partenza %s; w %.3f (L/6 %.2f: %s), cuore f_win %.5f, picco %.2f; alpha del cuore %.5f (g %.2f), della coda %.5f"
+            print("  %s: %s (residuo %.3e), mu %+.9f; la partenza %s; w %.3f (L/6 %.2f: %s; w/L %.3f, il bordo del toro), cuore f_win %.5f, picco %.2f; alpha del cuore %.5f (g %.2f), della coda %.5f"
                   % (nome, "FERMO" if cj["convergito"] else "NON FERMO, lo stato migliore", cj["residuo_finale"], mu, cj["partenza"], pt["w"], L_SCENA * FRAZ_LARGO,
-                     "dentro" if pt["w"] <= L_SCENA * FRAZ_LARGO else "### OLTRE: L 120", pt["f_win"], pt["picco"], float(am[0]), g, float(am[SL.R_MAX])))
+                     "dentro" if pt["w"] <= L_SCENA * FRAZ_LARGO else "### OLTRE: L 120", pt["w"] / L_SCENA, pt["f_win"], pt["picco"], float(am[0]), g, float(am[SL.R_MAX])))
             if P0 is not None:
                 inc, _ra = SL.conto(nome, z, phi0, S, FORMA, r, psi, mu, P0, Ppi)
                 stati[nome] = {"inc": inc, "alpha_cuore": float(am[0])}
@@ -584,6 +585,7 @@ def referto():
         fr["forma_nuova"] = forma_pendenze(np.array(fr["t"], dtype=float) * fr["s"], np.array(fr["nD"]))
         stampa_pendenze(fr["forma_nuova"], fr.get("forma"))
         brevi[nome] = fr
+    print("  NOTA (Luca 16:26, senza lettura nuova): X1 decade per la coppia col tasso 0.061 (a g 1, r 1: 0.151): un indizio che la larghezza W scali col legame g")
     print("-" * 130)
     print("### (3) LA CORSA LUNGA (R_1e6)")
     righe = sorted([leggi(os.path.join(DIR_JSON, n)) for n in os.listdir(DIR_JSON) if n.startswith("lunga_R_1e6_") and n.endswith(".jsonl")] if os.path.isdir(DIR_JSON) else [], key=lambda x: x["t0"])
