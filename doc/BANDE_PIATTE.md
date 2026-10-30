@@ -179,7 +179,14 @@ Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento loc
 
 - **La mista `P0 + A` e' aperta in tutti e quattro.** **Dove la coppia di piatte sta entro `W` dal bordo** *(`0.004`-`0.013`)*, **la coppia domina** *(`0.033`-`0.151`)*; **dove ne e' lontana** *(`0.405`, (R))* **resta la mista, piu' lenta** *(`0.0079`)*. **Col bordo netto `[0, 2g]` la coppia risulta chiusa anche dove decade: la larghezza `W` resta necessaria** *(`99b679bc`)*.
 - **I tassi per tipo di uscita:** **coppia di piatte** `0.151`, `0.061`, `0.033`; **mista** `0.0079`.
-- **La prova della scatola** *(se `0.0079` e' fisico o del toro)*: sotto, «L'ESITO DELLA SCATOLA».
+- **La prova della scatola** *(se `0.0079` e' fisico o del toro)*: sotto.
+
+### L'ESITO DELLA SCATOLA *(Luca `22:11`; `doc/referti_l2/scatola.txt`, sha1-BYTE `10d10378`)*
+
+- **Lo stato su `L 120`:** lo stato di `L 81` messo al centro; **Newton converge al passo `0`** *(residuo `4.719e-10`, `mu -0.868496535`: identici a `L 81`)*.
+- **La corsa** *(`9` pezzi, fino a `tau 2700`)*: **la stessa uscita** -- nella finestra `D` e' `A 0.487`, `P0 0.495`, `Ppi 0.018` *(`L 81`: `0.486`, `0.496`, `0.018`)*; **la somma delle rotazioni `P0 + A` torna `~0`** *(`-0.0065 +- 0.036` e `-0.0027 +- 0.033` nei pezzi `10000` e `12000`)*; `E_A -1.60`, dentro `A`; `E_P0 -0.14`, nel gap; **`D_A` diffusa** *(raggio medio `27.5` contro `psi0` `5.8` e l'uniforme `44.5`)*, **`D_P0` agli anelli `13`-`14`**.
+- ### **Il tasso: `L 120` `0.00741 +- 0.00053`, `L 81` `0.00792 +- 0.00039`; la differenza `-0.00051` contro `3 sigma` combinati `0.00197`. LA LETTURA ALLA LETTERA: (s1), il tasso uguale entro gli errori: il decadimento misto e' FISICO, non della scatola.**
+- ⚠ **Quanto e' forte la prova:** l'errore viene dalle **due meta' della finestra** *(`L 120`: `0.00779` e `0.00673`; `L 81`: `0.00819` e `0.00741`)*: **il tasso cala dentro la finestra** in tutti e due i tori; la `sigma` del fit *(`0.00002`)* lo sottostimerebbe di `20`-`25` volte. **Con questo errore una differenza fino a `~25 %` passerebbe per (s1).** **La vita:** `2445` su `L 120`, `2304` su `L 81` *(`+6 %`)*.
 
 ## 6. LA VITA DEL SOLITONE *(Luca, `2026-10-30` `20:41` e `20:46`)*
 

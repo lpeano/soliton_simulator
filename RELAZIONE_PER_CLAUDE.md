@@ -22093,3 +22093,11 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Lo stato:** lo stato fermo di `L 81` messo al centro del toro `120` *(il baricentro `40.17` -> `60.00`, il blocco da `(20, 20)`; la norma e i passi del reticolo: `2/2`)*: **Newton CONVERGE al passo `0`**, residuo `4.719e-10`, `mu -0.868496535`, **identici a `L 81`**: lo stato e' localizzato, il toro grande non lo tocca. `doc/referti_l2/scatola/cerca_L120.json`, `.txt`.
 - **`doc/BANDE_PIATTE.md`:** la regola estesa ai modi interni di `A` **segnata SMENTITA** e sostituita dalla **regola con l'uscita mista** *(n1, n2, n2-misto; il partner in `[2 mu - F - g, 2 mu - F]`)* col controllo sui quattro casi e i tassi per tipo di uscita; **lo spostamento `+0.491` di `795d2c81` e' `alpha` del cuore**. **La soglia della vita, DECISA da Luca:** il primo `tau` con `|D|/|psi0| >= 1e-2` *(sezione `6`; la MAPPA, decisione `9`)*.
+
+
+## 2026-10-30, 23:55 -- LA PROVA DELLA SCATOLA (LUCA `22:11`): ### (s1) -- IL TASSO SU `L 120` E' QUELLO DI `L 81` ENTRO GLI ERRORI; IL DECADIMENTO MISTO E' FISICO
+
+- **Il referto:** `doc/referti_l2/scatola.txt` *(`python csv/_scatola.py --referto`, sha1-BYTE `10d10378`)*; i pezzi `doc/referti_l2/scatola/corsa_L120_*.jsonl` *(`9`, ciascuno committato appena fatto; un processo alla volta, il driver col file-semaforo)*.
+- **La stessa uscita:** nella finestra `A 0.487`, `P0 0.495`, `Ppi 0.018`; la somma delle rotazioni `P0 + A` `~0`; `E_A -1.60` dentro `A`, diffusa; `E_P0 -0.14` nel gap, agli anelli `13`-`14`.
+- ### **Il tasso: `0.00741 +- 0.00053` (`L 120`) contro `0.00792 +- 0.00039` (`L 81`): la differenza `-0.00051`, `3 sigma` `0.00197`: (s1).** **La vita: `2445` contro `2304`.**
+- ⚠ **Il limite:** l'errore e' quello delle due meta' della finestra *(il tasso cala dentro la finestra: `0.0078 -> 0.0067`, `0.0082 -> 0.0074`)*; **una differenza fino a `~25 %` passerebbe per (s1).** **Il seme efficace e' simile** *(`1.76e-10` contro `1.46e-10`)*, **ma il modo si accende piu' tardi su `L 120`** *(la rotazione di `P0` arriva a `+0.70` nel pezzo `06000`; su `L 81` `|D|` a `tau 1500` era `2.0e-5`, qui `1.2e-5`)*: **e' cio' che resta da capire, se conta.**

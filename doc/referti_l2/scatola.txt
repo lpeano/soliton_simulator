@@ -1,0 +1,28 @@
+[TIMBRO] _scatola.py  sha1-BYTE 10d10378  committato e pulito
+==================================================================================================================================
+LA PROVA DELLA SCATOLA (Luca 22:11): R_1e6 (r 0.6, g 0.5, s 0.15, N 1e6) su L 120 contro L 81; la soglia della vita |D|/|psi0| >= 0.01 (decisa)
+  la configurazione: L_GRANDE 120 SOGLIA 0.01 TAU_MAX 3000 ESAME 40 SIGMA 3; da _livelli_piatti: PEZZO 2000 OGNI 10 OGNI_LUNGA_D 20 FATTORE_DEROGA 10; da _strada_b_r: MAX_NEWTON 30 TOLL_RES 1e-09
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (s1) il tasso uguale a L 81 entro gli errori: il decadimento misto e' fisico; (s2) il tasso cambia con L: la radiazione che torna conta; (s3) altro
+==================================================================================================================================
+### LO STATO SU L 120: FERMO (residuo 4.719e-10), mu -0.868496535 (L 81 -0.868496535); la storia 4.7e-10
+### LA CORSA SU L 120: 9 pezzi, tick 0 -> 18000
+  pezzo 00000: |D| a fine 1.051e-06 (A 0.999 P0 0.000 Ppi 0.000); cuore 0.56291; rot P0 +0.0029 A -0.0007 somma +0.0022 (dev 0.0012); E_A -0.8692, E_P0 -0.8656; raggi A 7.26 P0 14.35 psi0 5.77 uniforme 44.49
+  pezzo 02000: |D| a fine 2.462e-06 (A 0.999 P0 0.001 Ppi 0.000); cuore 0.56291; rot P0 +0.0067 A -0.0004 somma +0.0063 (dev 0.0068); E_A -0.8689, E_P0 -0.8618; raggi A 8.01 P0 14.30 psi0 5.77 uniforme 44.49
+  pezzo 04000: |D| a fine 4.066e-06 (A 0.998 P0 0.001 Ppi 0.000); cuore 0.56291; rot P0 +0.1944 A -0.0005 somma +0.1939 (dev 0.0091); E_A -0.8690, E_P0 -0.6741; raggi A 8.39 P0 14.10 psi0 5.77 uniforme 44.49
+  pezzo 06000: |D| a fine 5.561e-06 (A 0.983 P0 0.016 Ppi 0.001); cuore 0.56291; rot P0 +0.7006 A -0.0112 somma +0.6894 (dev 0.0299); E_A -0.8797, E_P0 -0.1679; raggi A 8.74 P0 13.60 psi0 5.77 uniforme 44.49
+  pezzo 08000: |D| a fine 1.186e-05 (A 0.631 P0 0.355 Ppi 0.013); cuore 0.56291; rot P0 +0.7284 A -0.3977 somma +0.3307 (dev 0.0341); E_A -1.2662, E_P0 -0.1401; raggi A 18.96 P0 13.51 psi0 5.77 uniforme 44.49
+  pezzo 10000: |D| a fine 1.050e-04 (A 0.471 P0 0.512 Ppi 0.017); cuore 0.56291; rot P0 +0.7271 A -0.7336 somma -0.0065 (dev 0.0359); E_A -1.6021, E_P0 -0.1414; raggi A 27.20 P0 13.53 psi0 5.77 uniforme 44.49
+  pezzo 12000: |D| a fine 1.079e-03 (A 0.465 P0 0.517 Ppi 0.017); cuore 0.56290; rot P0 +0.7348 A -0.7375 somma -0.0027 (dev 0.0329); E_A -1.6060, E_P0 -0.1337; raggi A 27.54 P0 13.51 psi0 5.77 uniforme 44.49
+  pezzo 14000: |D| a fine 8.104e-03 (A 0.518 P0 0.460 Ppi 0.022); cuore 0.56229; rot P0 +0.7179 A -0.6397 somma +0.0782 (dev 0.0139); E_A -1.5082, E_P0 -0.1506; raggi A 28.73 P0 13.50 psi0 5.77 uniforme 44.49
+  pezzo 16000: |D| a fine 2.357e-02 (A 0.689 P0 0.302 Ppi 0.010); cuore 0.55648; rot P0 +0.7115 A -0.2927 somma +0.4187 (dev 0.0204); E_A -1.1612, E_P0 -0.1570; raggi A 19.68 P0 13.61 psi0 5.77 uniforme 44.49
+  le bande libere su L 120: A [-2.5133, -1.3649]  B [+1.3649, +2.5133]  P0 [-0.6283, -0.6283]  Ppi [-2.5133, -2.5133]
+### L 120: la vita (il primo tau con |D|/|psi0| >= 0.01) 2445.0; la forma col criterio aggiunto esponenziale
+  la finestra tau 1719 .. 2442, 242 campioni: gamma 0.00741; sigma del fit 0.00002, le due meta' 0.00779 e 0.00673: l'errore 0.00053; il seme efficace 1.76e-10; dentro A 0.487 P0 0.495 Ppi 0.018
+### L 81: la vita (il primo tau con |D|/|psi0| >= 0.01) 2304.0; la forma col criterio aggiunto esponenziale
+  la finestra tau 1620 .. 2301, 228 campioni: gamma 0.00792; sigma del fit 0.00002, le due meta' 0.00819 e 0.00741: l'errore 0.00039; il seme efficace 1.46e-10; dentro A 0.486 P0 0.496 Ppi 0.018
+### LA LETTURA, COL CRITERIO SCRITTO PRIMA
+  gamma L 120 0.00741 +- 0.00053; L 81 0.00792 +- 0.00039; la differenza -0.00051, 3 sigma combinati = 0.00197
+  LA LETTURA: (s1) il tasso uguale entro gli errori
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 0/0 controlli passano; fallite: []
+controlli: 0/0; fallite: []
