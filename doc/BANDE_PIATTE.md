@@ -155,17 +155,39 @@ Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento loc
 - ### **LA FREQUENZA E IL POSTO, che decidono:** **la parte `A` ha `E = -1.607`, DENTRO la banda `A` libera** *(`-2.513 .. -1.365`)*, **ed e' DIFFUSA** *(raggio medio `22.2` contro `psi0` `5.8` e l'uniforme `29.9`)*: **e' RADIAZIONE.** ### **La parte `P0` ha `E = -0.138`, FUORI da ogni banda (nel gap), `0.49` SOPRA il livello piatto libero `-0.628`, ed e' LOCALIZZATA sugli anelli `13`-`14`** *(il bordo del solitone: `psi0` finisce fra `12` e `14`)*. 
 - ### **LA LETTURA ALLA LETTERA: (i2)** *(la parte `A` e' diffusa: radiazione)*; ### **la crescita viene da un modo di `P0` TRATTENUTO al bordo del solitone, il cui livello il solitone SPOSTA dal piatto libero, in coppia con la radiazione in `A`:** `E_P0 + E_A = -1.745` contro `2 mu = -1.737`. **Col livello piatto LIBERO** *(`-0.628`)* **il partner cadeva a `2 mu + 0.628 = -1.109`, nel gap sopra `A`: la regola diceva «sicuro»; col livello SPOSTATO** *(`-0.138`)* **il partner cade a `-1.599`, DENTRO `A`: e' l'uscita che la regola non vedeva.** *(Calcolo del guardiano coi numeri del referto, non stampato dallo script.)*
 
-### LA REGOLA ESTESA *(Luca `20:46`; ### **IPOTESI DEL GUARDIANO DA VERIFICARE, NON LEGGE**)*
+### LA REGOLA ESTESA *(Luca `20:46`)* -- ### **SMENTITA dalla lettura (i2) di `795d2c81`, SOSTITUITA qui sotto** *(Luca `22:11`)*
 
-**I livelli `F` della forma generale sono quelli dei modi che non lasciano il solitone: le piatte E i modi interni della banda `A` trattenuti dal solitone.** I tassi misurati: **`r 1`, `g 1`: `0.151`; `X1`: `0.061`; `R_1e6`: `0.008`.**
+*(Diceva: i livelli `F` sono quelli dei modi che non lasciano il solitone, le piatte E i modi interni della banda `A`. In (R) la parte `A` di `D` e' radiazione, non un modo interno.)*
 
-- ### ⚠ **Che cosa dice la misura `(b)` su questa forma:** **in (R) il modo trattenuto NON e' di `A`** *(`A` e' radiazione nel continuo)*: **e' di `P0`, e il suo livello NON e' quello piatto libero ma quello SPOSTATO dal solitone** *(`+0.49`)*. **Quindi, per (R), la regola estesa andrebbe letta cosi':** `F` = **i livelli dei modi trattenuti** *(le piatte COME LE SPOSTA il solitone, e gli eventuali modi interni di `A`)*, e l'uscita e' una coppia **trattenuto + continuo** quando `2 mu - F` cade in una banda che si propaga. **E' una lettura da verificare, non una legge:** quanto il solitone sposta le piatte va **calcolato** *(non tarato: `A1`)*, e **in `X1` e a `r 1` non l'ho misurato.**
+### LA REGOLA CON L'USCITA MISTA *(Luca `22:11`; ### **IPOTESI DEL GUARDIANO DA VERIFICARE, NON LEGGE**)*
+
+**Le uscite:**
+- **(n1)** una piatta: `F + alpha = mu`;
+- **(n2)** due piatte: `(F_i + alpha) + (F_j + alpha) = 2 mu`;
+- **(n2-misto)** una piatta trattenuta e un'onda che si propaga: `(F + alpha) + E_c = 2 mu`, con `E_c` in una banda DISPERSIVA libera *(`A` o `B`)*.
+
+**Per `alpha` in `[0, g]` il partner percorre `[2 mu - F - g, 2 mu - F]`: se tocca una banda dispersiva, l'uscita mista e' aperta.** **Lo «spostamento» `+0.491` della parte `P0` in (R)** *(`795d2c81`)* **e' `alpha` del cuore** *(`0.5000`, `g 0.5`)*: **il livello trattenuto e' `F + alpha`.**
+
+**Il controllo** *(`doc/referti_l2/scatola/uscite.txt`, `2/2`, nessuna corsa)*:
+
+| il caso | `mu` | (n2-misto) `P0`: il partner | `A` libera | (n2) `P0 + Ppi`: `2 mu - F_i - F_j` contro `[0, 2g]` | il tasso misurato, l'uscita |
+|---|---|---|---|---|---|
+| `r 1` *(`g 1`)* | `-0.56602` | `[-2.132, -1.132]`: **APERTA** | `[-3.142, -1.560]` | `+2.00955` contro `[0, 2]`: `0.0096` fuori | `0.151`, la coppia di piatte |
+| `r 1.5247` *(`g 1`)* | `-0.56861` | `[-2.961, -1.961]`: **APERTA** | `[-3.966, -2.088]` | `+2.00437` contro `[0, 2]`: `0.0044` fuori | `0.033`, la coppia di piatte |
+| `X1` *(`g 0.5`)* | `-1.06418` | `[-2.628, -2.128]`: **APERTA** | `[-3.142, -1.560]` | `+1.01323` contro `[0, 1]`: `0.0132` fuori | `0.061`, la coppia di piatte |
+| (R) *(`g 0.5`)* | `-0.86850` | `[-1.609, -1.109]`: **APERTA** *(misurato: `-1.607`)* | `[-2.513, -1.365]` | `+1.40460` contro `[0, 1]`: `0.405` fuori | `0.0079`, **la mista** |
+
+- **La mista `P0 + A` e' aperta in tutti e quattro.** **Dove la coppia di piatte sta entro `W` dal bordo** *(`0.004`-`0.013`)*, **la coppia domina** *(`0.033`-`0.151`)*; **dove ne e' lontana** *(`0.405`, (R))* **resta la mista, piu' lenta** *(`0.0079`)*. **Col bordo netto `[0, 2g]` la coppia risulta chiusa anche dove decade: la larghezza `W` resta necessaria** *(`99b679bc`)*.
+- **I tassi per tipo di uscita:** **coppia di piatte** `0.151`, `0.061`, `0.033`; **mista** `0.0079`.
+- **La prova della scatola** *(se `0.0079` e' fisico o del toro)*: sotto, «L'ESITO DELLA SCATOLA».
 
 ## 6. LA VITA DEL SOLITONE *(Luca, `2026-10-30` `20:41` e `20:46`)*
 
 > **La materia e' metastabile: non si cerca un solitone stabile per sempre, ma uno che vive abbastanza per l'esperimento.**
 
 **`t_vita ~ ln(soglia/seme)/gamma`**, con `gamma` il tasso del modo piu' rapido, **il seme** l'ampiezza iniziale della perturbazione, **la soglia** dove il cuore cambia in modo visibile *(`|D|/|psi0| = 1e-2`)*.
+
+### **LA SOGLIA, DECISA** *(Luca `22:11`, sulla raccomandazione del guardiano)*: **`t_vita` si misura al PRIMO `tau` con `|D|/|psi0| >= 1e-2`** *(la definizione di `795d2c81`)*.
 
 **Il controllo sui casi misurati** *(`doc/referti_l2/modo_di_R.txt`, sezione `5`; l'osservato e' il primo `tau` con `|D|/|psi0| >= 1e-2`)*:
 

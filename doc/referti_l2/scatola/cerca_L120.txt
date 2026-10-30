@@ -1,0 +1,7 @@
+[TIMBRO] _scatola.py  sha1-BYTE 10d10378  committato e pulito
+  DEVE PASSARE: il blocco messo sul toro 120 conserva la norma (entro l'ordine della somma, 1e-14 relativo)      PASSA   999999.99999999965 / 999999.99999999965
+  DEVE PASSARE: i passi del reticolo coincidono sui due tori (il nodo +1 e il nodo +L)                           PASSA   [-0.5        0.8660254] [-0.5        0.8660254] | [1. 0.] [1. 0.]
+  il baricentro (indici) di L 81 ['40.17', '40.17'], della scena L 120 ['60.00', '60.00']; il blocco a partire da (20, 20)
+  R_1e6-L120: passo 0, residuo 4.719e-10, mu -0.868496535
+  R_1e6 L 120: residuo finale 4.719e-10, mu -0.868496535 (L 81: -0.868496535); CONVERGE
+controlli: 2/2; fallite: []

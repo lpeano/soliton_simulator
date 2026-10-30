@@ -95,6 +95,7 @@
 | 6 | ### **il driver della camminata** | ### **`7` domande, non urgente** |
 | 7 | ### **la moneta di spin (`eps`)** | ### **la sua origine fisica e' aperta;** ### **spegnerla rende la carica `sigma_z` conservata, ma la riduce a «due specie separate»** |
 | 8 | ### **i pesi del nodo e dell'arco per stabilizzare `S1`** | ### **PRESA da Luca** *(`2026-10-30` `09:09`)*: ### **NON si tarano** *(dipenderebbe da `mu`, dalla forma, da `N`)*; ### **la strada (B) esce dal menu come cura, resta come diagnosi** |
+| 9 | ### **la soglia della vita del solitone** | ### **PRESA da Luca** *(`2026-10-30` `22:11`, sulla raccomandazione del guardiano)*: ### **`t_vita` al PRIMO `tau` con `|D|/|psi0| >= 1e-2`** *(la definizione di `795d2c81`; `doc/BANDE_PIATTE.md` sez. `6`)* |
 
 ## 6. LA BUSSOLA: CHE COSA SERVIREBBE PER UN SISTEMA COMPLETO *(Luca, `2026-10-28` `08:58`)*
 
