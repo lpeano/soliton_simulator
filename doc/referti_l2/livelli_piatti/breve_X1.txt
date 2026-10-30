@@ -1,0 +1,41 @@
+[TIMBRO] _livelli_piatti.py  sha1-BYTE 72f7f461  committato e pulito
+  X1: 2000 tick in 222 s; Q_S e M entro 7.8e-13
+  [X1] la finestra: da la regola volte la deriva/il rumore a 0.01: 35 campioni
+  r 1.0000: lo stato NON fermo (residuo 2.290e-07); mu -1.064180574; M entro 7.8e-13
+    |D|/|psi0| ogni 3 unita' di tempo da 3: 3.56e-06 6.80e-06 9.76e-06 1.26e-05 1.53e-05 1.80e-05 2.08e-05 2.36e-05 2.64e-05 2.92e-05 3.20e-05 3.48e-05 3.76e-05 4.04e-05 4.32e-05 4.61e-05 4.90e-05 5.20e-05 5.49e-05 5.80e-05 6.12e-05 6.47e-05 6.82e-05 7.24e-05 7.67e-05 8.25e-05 8.83e-05 9.71e-05 1.06e-04 1.21e-04 1.35e-04 1.59e-04 1.83e-04 2.22e-04 2.61e-04 3.24e-04 3.88e-04 4.85e-04 5.86e-04 7.37e-04 8.97e-04 1.13e-03 1.37e-03 1.72e-03 2.11e-03 2.62e-03 3.19e-03 3.93e-03 4.75e-03 5.71e-03 6.74e-03 7.94e-03 9.20e-03 1.05e-02 1.18e-02 1.32e-02 1.46e-02 1.59e-02 1.72e-02 1.86e-02 1.99e-02 2.11e-02 2.23e-02 2.35e-02 2.47e-02 2.58e-02 2.69e-02 2.80e-02 2.91e-02 3.00e-02 3.09e-02 3.19e-02 3.28e-02 3.35e-02 3.43e-02 3.50e-02 3.57e-02 3.63e-02 3.69e-02 3.75e-02 3.81e-02 3.87e-02 3.93e-02 3.98e-02 4.04e-02 4.09e-02 4.15e-02 4.20e-02 4.25e-02 4.30e-02 4.34e-02 4.38e-02 4.43e-02 4.47e-02 4.51e-02 4.56e-02 4.60e-02 4.65e-02 4.71e-02 4.76e-02
+    d ln|D|/dt (accanto 1/t) a tempo 15, 30, 60, 90, 120, 150, 180: 0.0602 (0.0667)  0.0321 (0.0333)  0.0181 (0.0167)  0.0400 (0.0111)  0.0711 (0.0083)  0.0583 (0.0067)  0.0235 (0.0056)
+    sotto 1e-02: 53 campioni; (L) |D| = -1.499e-03 + 3.161e-05 t, scarto inf; (E) ln|D| = -12.171 + 0.04255 t, scarto 0.4441; la pendenza attesa residuo/s 1.527e-06 (v / attesa 20.701)
+    LA FORMA: ESPONENZIALE
+    il tasso nella finestra (in deroga, fra 2.3e-06 e 1e-02; tempo 3 .. 159, 53 campioni): 0.04255 per unita' di tempo (dfb5ab7e a r 1: 0.15108)
+  r 1.0000 (s 0.15): mu -1.064180574; il residuo 2.290e-07; i punti al bit col riferimento: True (0 confronti); Q_S e M entro 7.8e-13
+    |D|/|psi0| ogni 0.75 unita' di tempo (stampati ogni 20): 1:1.11e-06 16:1.60e-05 31:2.99e-05 46:4.40e-05 61:5.87e-05 76:7.82e-05 91:1.23e-04 106:2.78e-04 121:7.72e-04 136:2.22e-03 151:6.01e-03 166:1.22e-02 181:1.89e-02 196:2.50e-02 211:3.03e-02 226:3.44e-02 241:3.77e-02 256:4.05e-02 271:4.31e-02 286:4.53e-02
+    LA FINESTRA: tempo 135.00 .. 160.50, 35 campioni (il basso da 2.06e-03 a 2.45e-03, l'alto 0.01); IL TASSO 0.06084 per unita' di tempo (0.00913 per tick); lo scarto massimo dalla retta 5.919e-02
+    il tasso delle sole piatte (P0 + Ppi), sui D salvati nella finestra: 0.06038 (scarto massimo 6.222e-02)
+    IL PERIODO dai cambi di segno di Re<D(t_rif), D(t)>: 26.67 tick, 4.000 unita' di tempo (13 cambi)
+    LE ROTAZIONI PER BANDA (-arg<x(t), x(t+dt)>/dt, rispetto a mu): P0 +1.55666 (dev 2.3e-02, +1.5195 .. +1.6020); Ppi -1.57022 (dev 2.3e-02, -1.6044 .. -1.5261); LA SOMMA -0.01356 (dev 1.9e-02)
+    psi0: q +1.000e+00; la parte A 0.99999 di |psi0|^2, q_A +1.000e+00; le valli della parte A: Gamma 0.0000  K 0.9998  K' 0.0002
+    D a tempo 135.00 (|D|/|psi0| 2.112e-03):
+      le bande Ppi 0.4557  A 0.0400  P0 0.5034  B 0.0009; gli anelli maggiori r 15 0.4692, r 16 0.4611, r 14 0.0367
+      il profilo di |D|^2, r 0..24: 0.0000 0.0001 0.0002 0.0003 0.0003 0.0003 0.0004 0.0003 0.0003 0.0003 0.0003 0.0003 0.0006 0.0020 0.0367 0.4692 0.4611 0.0116 0.0049 0.0027 0.0020 0.0015 0.0012 0.0008 0.0006
+      le armoniche di drho: m0 0.2036 m1 0.0883 m2 0.1714 m3 0.0486 m4 0.0675 m5 0.0554 m6 0.0138 m7 0.0399 m8 0.0595 m9 0.0353 m10 0.0881 m11 0.0490 m12 0.0797
+      le armoniche della fase: m0 0.2142 m1 0.3175 m2 0.1848 m3 0.0216 m4 0.0608 m5 0.0132 m6 0.0188 m7 0.0103 m8 0.0423 m9 0.0145 m10 0.0401 m11 0.0114 m12 0.0505
+      Q_S per unita' di norma: D +1.000e+00, P0 +1.000e+00, Ppi +9.999e-01, le piatte +9.999e-01, A +9.987e-01
+      le valli: P0 Gamma 0.4903  K 0.1534  K' 0.3564 | Ppi Gamma 0.3677  K 0.1316  K' 0.5007
+      le valli di Ppi contro quelle di P0 portate dalla mappa (somma delle differenze): identita' 0.2886  +K 0.7173  -K 0.4495  riflessione per K (2K - k) 0.0435  riflessione per K' (2K' - k) 0.7173
+    D a tempo 147.75 (|D|/|psi0| 4.950e-03):
+      le bande Ppi 0.4664  A 0.0420  P0 0.4894  B 0.0022; gli anelli maggiori r 15 0.4698, r 16 0.4610, r 14 0.0387
+      il profilo di |D|^2, r 0..24: 0.0000 0.0000 0.0000 0.0001 0.0001 0.0001 0.0001 0.0001 0.0001 0.0001 0.0001 0.0001 0.0005 0.0024 0.0387 0.4698 0.4610 0.0100 0.0050 0.0029 0.0021 0.0017 0.0013 0.0009 0.0007
+      le armoniche di drho: m0 0.1436 m1 0.0873 m2 0.1135 m3 0.0520 m4 0.0346 m5 0.1300 m6 0.0617 m7 0.0990 m8 0.0350 m9 0.0717 m10 0.0280 m11 0.0436 m12 0.1000
+      le armoniche della fase: m0 0.2422 m1 0.1565 m2 0.2354 m3 0.0138 m4 0.0411 m5 0.0248 m6 0.0351 m7 0.0154 m8 0.0933 m9 0.0029 m10 0.0715 m11 0.0099 m12 0.0581
+      Q_S per unita' di norma: D +1.000e+00, P0 +1.000e+00, Ppi +9.999e-01, le piatte +1.000e+00, A +9.989e-01
+      le valli: P0 Gamma 0.4916  K 0.1467  K' 0.3617 | Ppi Gamma 0.3713  K 0.1291  K' 0.4996
+      le valli di Ppi contro quelle di P0 portate dalla mappa (somma delle differenze): identita' 0.2758  +K 0.7251  -K 0.4653  riflessione per K (2K - k) 0.0352  riflessione per K' (2K' - k) 0.7251
+    D a tempo 160.50 (|D|/|psi0| 9.874e-03):
+      le bande Ppi 0.4544  A 0.0601  P0 0.4817  B 0.0037; gli anelli maggiori r 15 0.4767, r 16 0.4440, r 14 0.0444
+      il profilo di |D|^2, r 0..24: 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0001 0.0001 0.0003 0.0011 0.0043 0.0444 0.4767 0.4440 0.0092 0.0049 0.0032 0.0026 0.0020 0.0017 0.0013 0.0009
+      le armoniche di drho: m0 0.3097 m1 0.0306 m2 0.2336 m3 0.0285 m4 0.0323 m5 0.0393 m6 0.0429 m7 0.0537 m8 0.0638 m9 0.0669 m10 0.0618 m11 0.0177 m12 0.0194
+      le armoniche della fase: m0 0.3511 m1 0.0581 m2 0.3062 m3 0.0124 m4 0.0336 m5 0.0131 m6 0.0458 m7 0.0116 m8 0.0895 m9 0.0149 m10 0.0368 m11 0.0044 m12 0.0225
+      Q_S per unita' di norma: D +1.000e+00, P0 +1.000e+00, Ppi +9.999e-01, le piatte +1.000e+00, A +9.994e-01
+      le valli: P0 Gamma 0.4902  K 0.1391  K' 0.3707 | Ppi Gamma 0.3732  K 0.1307  K' 0.4961
+      le valli di Ppi contro quelle di P0 portate dalla mappa (somma delle differenze): identita' 0.2508  +K 0.7190  -K 0.4801  riflessione per K (2K - k) 0.0169  riflessione per K' (2K' - k) 0.7190
+    IL PERIODO (le rotazioni per banda; D campionato ogni 5 tick, 0.75 unita' di tempo): 2 pi/|rot| medio 4.019; il periodo dai cambi di segno qui sopra NON entra nelle letture (l'integrazione delle 10:06)
