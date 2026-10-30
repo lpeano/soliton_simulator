@@ -432,6 +432,15 @@ def referto():
         eok = abs(ro["media"]) <= max(ro["dev"], TOLL_CONS)
         print("  punto 2bis, r %g: Q_S: q delle piatte %s contro q(psi0) %+.3e, la dispersione %.1e: %s; la quasi-energia: la somma delle rotazioni %+.5f, la dev %.1e: %s"
               % (fr["r"], " ".join("%+.3e" % v for v in qp), q0, disp, "TORNA" if qok else "NON TORNA", ro["media"], ro["dev"], "TORNA" if eok else "NON TORNA"))
+        an_, bn_ = SB.pesi_di(fr["r"])
+        F0, Fpi = (bn_ - an_) / 2.0, -(an_ + bn_) / 2.0
+        rot = an["rotazioni"]
+        print("    AGGIUNTO DOPO I NUMERI (nessuna lettura): q - 1 delle parti ai tre istanti %s; q(D) - 1 %s;"
+              " alpha* dalle rotazioni (rot - F + mu): da P0 %.4f, da Ppi %.4f; l'alpha dove la coppia si annulla mu - (P0 + Ppi)/2 %.4f; il periodo 2 pi / |rot| medio %.3f"
+              % (" | ".join("P0 %+.1e Ppi %+.1e A %+.1e" % (x["q"]["P0"] - 1.0, x["q"]["Ppi"] - 1.0, x["q"]["A"] - 1.0) for x in an["istanti"].values()),
+                 " ".join("%+.1e" % (x["q"]["D"] - 1.0) for x in an["istanti"].values()),
+                 rot["P0"]["media"] - F0 + fr["mu"], rot["Ppi"]["media"] - Fpi + fr["mu"], fr["mu"] - (F0 + Fpi) / 2.0,
+                 2.0 * math.pi / ((abs(rot["P0"]["media"]) + abs(rot["Ppi"]["media"])) / 2.0)))
     print("-" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
