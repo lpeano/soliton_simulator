@@ -57,6 +57,12 @@ def file_committati():
     print("\n(a1) I FILE COMMITTATI: lo sha1 dei byte sul disco = il blob a HEAD")
     for p in COMMITTATI:
         d, h = disco(p), blob("HEAD", p)
+        if p.endswith(".txt"):
+            # ### la trappola CRLF (CLAUDE.md par.7): l'output di python su Windows ha CRLF, il blob LF: stesso CONTENUTO, byte diversi
+            dl = d.replace(b"\r\n", b"\n")
+            LP.esito("%s: %d byte, sha1 %s; senza i CR %d byte, sha1 %s" % (p, len(d), sha1(d)[:8], len(dl), sha1(dl)[:8]), dl == h,
+                     "HEAD %s; %s" % (sha1(h)[:8], "byte uguali" if d == h else "byte diversi solo per i CR"))
+            continue
         LP.esito("%s: %d byte, sha1 %s" % (p, len(d), sha1(d)[:8]), sha1(d) == sha1(h), "HEAD %s" % sha1(h)[:8])
 
 
@@ -77,15 +83,15 @@ def stati():
 
 
 def brevi():
-    print("\n(a3) LE CORSE BREVI: il json si legge, ha le chiavi di quella committata, il suo sha = quello dello stato")
-    _d, rif, _nl = json_pieno(REL + "breve_R_3e6.json")
+    print("\n(a3) LE CORSE BREVI: il json si legge, ha le chiavi di una committata (R_1e6 se la forma si giudica, R_3e6 se no), il suo sha = quello dello stato")
+    chiavi = [set(json.loads(blob("HEAD", REL + "breve_%s.json" % n).decode("utf-8"))) for n in ("R_1e6", "R_3e6")]
     for nome in BREVI:
         p = REL + "breve_%s.json" % nome
         d, b, nl = json_pieno(p)
         cj = json.loads(disco(REL + "cerca_%s.json" % nome).decode("utf-8"))
         n = int(round(LP.T_BREVE / LP.S))
         LP.esito("%s: %d byte, sha1 %s, %d chiavi, %d campioni ogni 5 tick" % (p, len(d), sha1(d)[:8], len(b), len(b["t5"])),
-                 set(b) == set(rif) and b["sha"] == cj["sha"] and nl and len(b["t5"]) == n // LP.OGNI_D and b["t5"][-1] == n, "")
+                 set(b) in chiavi and b["sha"] == cj["sha"] and nl and len(b["t5"]) == n // LP.OGNI_D and b["t5"][-1] == n, "")
 
 
 def testi():
