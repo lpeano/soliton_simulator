@@ -40,6 +40,7 @@ T1_DA = 200
 OGNI1_D = 2                    # ### 0.6 unita' di tempo a s 0.3
 FATTORE_RUMORE1 = 1e3          # ### r 1: la finestra di 5f06dbfb, da 1e3 volte il residuo
 TOLL_CONS = 1e-10
+DT_ALIAS = (3.0,)             # ### il passo di 5f06dbfb (10 tick a s 0.3) e di _modo_al_variare_di_s (PASSO_FIS 3 a ogni s): AGGIUNTO DOPO I NUMERI
 R_PROFILO = 24
 DIR_JSON = os.path.join(RADICE, "doc", "referti_l2", "modo_lento")
 DIR_NPZ = os.path.join(RADICE, "db", "modo_lento")
@@ -441,6 +442,18 @@ def referto():
                  " ".join("%+.1e" % (x["q"]["D"] - 1.0) for x in an["istanti"].values()),
                  rot["P0"]["media"] - F0 + fr["mu"], rot["Ppi"]["media"] - Fpi + fr["mu"], fr["mu"] - (F0 + Fpi) / 2.0,
                  2.0 * math.pi / ((abs(rot["P0"]["media"]) + abs(rot["Ppi"]["media"])) / 2.0)))
+    print("-" * 130)
+    print("### AGGIUNTO DOPO I NUMERI (nessuna lettura): IL PERIODO CHE SI VEDE CAMPIONANDO OGNI dt UN'OSCILLAZIONE DI PERIODO P (l'alias: 1 / |1/P - n/dt|, n l'intero piu' vicino a dt/P)")
+    for k, fr in letto.items():
+        rot = fr["analisi"].get("rotazioni")
+        pe = fr["analisi"].get("periodo")
+        if not rot:
+            continue
+        for nome_, P in (("2 pi/|rot| medio", 2.0 * math.pi / ((abs(rot["P0"]["media"]) + abs(rot["Ppi"]["media"])) / 2.0)), ("i cambi di segno", pe.get("tau") if pe else None)):
+            if not P:
+                continue
+            print("  r %g, P %.3f (%s): campionato ogni %s -> %s" % (fr["r"], P, nome_, ", ".join("%g" % dt for dt in DT_ALIAS),
+                  ", ".join("%.2f" % (1.0 / abs(1.0 / P - round(dt / P) / dt)) if abs(1.0 / P - round(dt / P) / dt) > 0 else "inf" for dt in DT_ALIAS)))
     print("-" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
