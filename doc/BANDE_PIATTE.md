@@ -60,6 +60,8 @@
 
 ### (B) ALLONTANARLE ALLA WILSON *(sul tick libero ricomposto in `csv/`)*
 
+> ### ⛔ **FUORI DAL MENU COME CURA** *(decisione di Luca, `2026-10-30` `09:09`: **niente taratura dei pesi del nodo e dell'arco per stabilizzare `S1`**, perche' dipenderebbe da `mu`, dalla forma, da `N`)*; ### **resta scritta come diagnosi.**
+
 | la modifica | lo scarto libero a `K` | `A(K)` | il costo nel punto `2` |
 |---|---|---|---|
 | **(B1) il rapporto nodo/arco**, `mu0 = pi/2` fisso: `alpha 2.3416`, `beta 3.5702` *(`r 1.5247`)* | **`+0.806`** | `-3.1e-03`; la curvatura di `A` a `K` da `-3.14e-3` a `-2.66e-3` | **un numero nuovo** *(`A1`: `r` non derivato; la somma delle frazioni di una legge non e' piu' `1`)*; il cono *(`pi/(4 sqrt r)`)* cambia con `r`; `mu0` di `(b)` resta `pi/2` per costruzione, ma `alpha` e `beta` cambiano; `Q_S` e le valli intatti |
@@ -76,3 +78,40 @@
 - **Il fatto del punto `3`:** `P0` ha stati compatti su un triangolo che generano tutta la banda, quindi **un proiettore locale** *(esponenziale, non compatto)*; `Ppi` no, a `Gamma`.
 - **La forma, se Luca la sceglie:** il legame `exp(-i alpha(rho/Lambda) dtau)` che sulle componenti `P0` agisce con una fase diversa. **Basta una piatta:** il tasso dipende dalla somma *(`99b679bc`: `P0` sola a `+0.8` spegne il modo)*.
 - **Il costo:** una legge nuova *(9-ter: una cura che aggiunge una legge deve dire perche' non si poteva togliere niente)*; **un proiettore a coda esponenziale non e' compatto** *(la scala minima e' un arco, `A13`)*; su `Ppi` la stessa forma non e' locale.
+
+## 5. LA LEZIONE GENERALE: LA REGOLA DEI TRE INCROCI *(Luca, `2026-10-30` `09:09`; ### **UNA REGOLA DA VERIFICARE, NON UNA LEGGE**)*
+
+> **I numeri:** `doc/referti_l2/modo_lento.txt` *(`python csv/_modo_lento.py --referto`, lo script `sha1-BYTE 36ff91ba`, `a3e7100d`; `8/8`)*; il task history `doc/TASK_HISTORY/2026-10-30_lezione_e_modo_lento.md` *(`f2271150`)*. **Nessuna corsa per questa sezione:** il conto lungo il profilo degli stati gia' trovati.
+
+**L'argomento.** `K` sta a meta' fra le piatte *(`r = 1` e `c(K) = -1/2`, `b5fd8ecc`; sezione `1`)*. Un legame **scalare per nodo** che va da `0` *(coda)* a `alpha_max` *(cuore)* sposta **tutte** le bande di ogni valore in `[0, alpha_max]` lungo il profilo. Un oggetto legato a `K` ha `mu = -mu0 + alpha_max + d` *(`d` piccolo)*. Le tre condizioni
+
+- la coppia `(P0 + alpha) + (Ppi + alpha) - 2 mu`,
+- c1 su `P0`: `P0 + alpha - mu`,
+- c1 su `Ppi`: `Ppi + alpha - mu`
+
+scorrono lungo il profilo per un tratto lungo `alpha_max` *(la coppia `2 alpha_max`)*. **Nel cuore la coppia vale `-a_n + 2 mu0 - 2 d`: a `r = 1` e' `-2 d`, QUALUNQUE sia `alpha_max`**, perche' il legame sposta l'oggetto e la coppia della stessa quantita'. **Quindi per QUALUNQUE oggetto legato a `K` con questo legame una delle tre passa per lo zero da qualche parte del profilo, o vi sta entro la larghezza della risonanza, salvo tarature** *(i pesi scelti rispetto a `alpha_max` e a `d`, cioe' a `mu`, alla forma, a `N`)*.
+
+**Il conto sugli stati trovati** *(`S1`, `s 0.15`; `alpha` della coda `0`, del cuore `1.00000`)*:
+
+| `r` | `mu`, `d` | la coppia, coda -> cuore | c1 su `P0` | c1 su `Ppi` | che cosa si misura |
+|---|---|---|---|---|---|
+| `1` | `-0.566022`, `+0.00477` | `-2.0095 -> -0.0096` *(nessun incrocio: **tocca lo zero nel cuore, a `-2 d`**)* | `+0.566 -> +1.566` | `-2.576 -> -1.576` | **decade**: il tasso `0.139` *(`s 0.3`)*, `D` in `P0 + Ppi` agli anelli `12`-`13` *(`5f06dbfb`; qui al bit)* |
+| `0.65` | `-0.568754`, `+0.00204` | `-2.437 -> -0.437` | **`-0.057 -> +0.943`, fra gli anelli `14`-`15`** | `-2.380 -> -1.380` | **`D` in `P0` agli anelli `14`-`15`** *(`ea8ace8f`)* |
+| `1.5247` | `-0.568613`, `+0.00218` | **`-1.204 -> +0.796`, fra gli anelli `12`-`13`** | `+1.183 -> +2.183` | `-2.387 -> -1.387` | **il modo lento** *(sotto)* |
+| `0.69` *(la fettina TARATA)* | `-0.568234`, `+0.00256` | `-2.407 -> -0.407` | `+0.019 -> +1.019` *(nessun incrocio, a `0.019` dallo zero)* | `-2.426 -> -1.426` | **non misurato** *(la corsa lunga e' in lista d'attesa: tolta come taratura)* |
+
+**Il modo lento a `r 1.5247`** *(`4400` tick dallo stato fermo, al bit con la corsa lunga di `ea8ace8f`)*: la finestra `377`-`621` unita' di tempo, **il tasso `0.0331`** *(nelle sole piatte `0.0310`)*. A `450` e a `535.5` **`D` sta per il `92%` e il `90%` in `P0 + Ppi`, agli anelli `12` e `13`**; all'ultimo istante *(`621`, `|D|/|psi0|` `9.8e-3`, vicino alla saturazione)* la banda `A` pesa `0.507` e entrano gli anelli `7`-`11`. **Le rotazioni delle due parti danno `alpha* = 0.638` *(da `P0`)* e `0.604` *(da `Ppi`)*, contro `0.602` dove la coppia si annulla:** il modo sta dove la coppia incrocia. **La lettura scritta prima chiedeva i tre istanti: ALLA LETTERA `(m2)`** *(il terzo istante non passa)*; i primi due sono `(m1)`. **La decisione su che cosa vuol dire e' di Luca.**
+
+**Le conservazioni nel decadimento** *(il `2bis` delle `09:16`, sui `D` salvati; a `r 1` i `D` di `5f06dbfb` rigenerati al bit)*:
+
+| la grandezza | `r 1.5247` | `r 1` |
+|---|---|---|
+| **`Q_S`** *(`sigma_z`, `eps 0`)* | `psi0` e' **tutto spin su** *(`q = 1` esatto)*: `N_giu = 0` si conserva, e `D` resta tutto su *(`q(D) - 1` `<= 4e-13`)*. **Il test e' banale.** Alla lettera **TORNA** | stesso fatto *(`q(D) - 1` `<= 8e-9`)*; alla lettera **NON TORNA**: la dispersione fra gli istanti `8.2e-7` e' sotto lo scarto delle parti proiettate, **un artefatto del proiettore** *(`Ppi` `-3e-6`..`-5e-6`, `A` `-6e-6`..`-2e-5`, dove `Ppi` tocca `A` in `Gamma`; `P0`, isolata, `<= 2e-8`)*. **Il criterio era mal fatto; non lo cambio** |
+| **la quasi-energia** *(la coppia: le due parti ruotano in verso opposto)* | `P0 +1.821`, `Ppi -1.783`; **la somma `+0.037 ± 0.11`: TORNA** | `P0 +1.527`, `Ppi -1.540`; **la somma `-0.013 ± 0.066`: TORNA** |
+| **il quasi-impulso** *(non e' una conservazione della mappa non lineare)* | le valli di `D_P0` e `D_Ppi` quasi uniformi *(`~1/3` ciascuna)*: **non distinguono** | la riflessione per `K` e l'identita' accoppiano meglio *(`0.06`-`0.14`)* degli spostamenti di `±K` *(`0.28`-`0.37`)*; nessuna lettura |
+
+**Quindi `(n1)` per la quasi-energia** *(e per `Q_S` nel fatto, banale: alla lettera `(n2)` a `r 1` per l'artefatto)*: **il decadimento e' permesso dalle conservazioni del modello, come un atomo eccitato.**
+
+**Un fatto di metodo che esce da qui:** il periodo vero di `D` a `r 1` e' **`4.07`-`4.10` unita' di tempo**. **Il «`10.91`» di `5f06dbfb` e l'«`11.45` a ogni `s`» di `de411167` sono compatibili con un ALIAS del campionamento ogni `3` unita' di tempo** *(il conto: `11.20`-`11.39`)*: **l'«indipendente da `s`» viene dal passo, non dal modo.** A `r 1.5247` i due metodi non coincidono *(`3.49` dalle rotazioni, `4.96` dai cambi di segno, con `~2.3` campioni per mezzo periodo)*: non risolto.
+
+**Quello che la regola NON dice:** «incrocia» e' stato visto diventare «decade» su `r 1`, `0.65`, `1.5247`; **su un caso dove nessuna incrocia non c'e' misura** *(`r 0.69`: lista d'attesa)*. Sulla carta, a pesi liberi, esistono punti dove nessuna incrocia *(`085ffb27`, sez. `1`)*: **sono tarature** nel senso della decisione delle `09:09`.

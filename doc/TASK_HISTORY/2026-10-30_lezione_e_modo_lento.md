@@ -77,3 +77,17 @@ La decisione delle piatte fra **(A)** *(tenerle come fisica: il solitone stabile
 6. `doc/BANDE_PIATTE.md`: la sezione della lezione; la strada (B) fuori dal menu come cura.
 7. `RELAZIONE_PER_CLAUDE.md`; `doc/MAPPA.md`: la riga `d`; la lista d'attesa *(i punti `2`-`3` delle `08:52`, tolti come taratura; la decisione sulle piatte `(A)`/`(C)`)*; l'errore `n.83` del guardiano; la decisione delle `09:09`; la sostituzione `08:52` -> `09:09` e l'aggiunta `2bis`.
 8. La sezione `6` qui; il checkpoint; la coda.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/modo_lento.txt`; lo script `sha1-BYTE 36ff91ba`, `a3e7100d`; `8/8`)*
+
+| il punto | l'esito |
+|---|---|
+| `1`, la lezione | il conto lungo il profilo *(nessuna corsa)*: `r 1` la coppia `-2.0095 -> -0.0096` *(tocca lo zero nel cuore, a `-2 d`)*; `r 0.65` c1 su `P0` fra `14`-`15`; `r 1.5247` la coppia fra `12`-`13`; `r 0.69` nessun incrocio *(la fettina tarata, c1 su `P0` a `+0.019`)*. In `doc/BANDE_PIATTE.md` sez. `5`, **come regola da verificare** |
+| `2`, il modo lento | al bit con `lunga_r1.52` *(`440` confronti)*; `Q_S` e `M` entro `1.2e-12`; la finestra `377`-`621`; **il tasso `0.0331`** *(le piatte `0.0310`)*; le rotazioni `P0 +1.821`, `Ppi -1.783`; `alpha*` `0.638`/`0.604` contro `0.602`; a `450` e `535.5` `P0 + Ppi` `0.92`/`0.90`, anelli `12`-`13`; **a `621` `A` `0.507`** -> **ALLA LETTERA `(m2)`** *(il criterio chiedeva i tre istanti)* |
+| `2bis` | `Q_S`: `psi0` tutto spin su, **banale**; alla lettera TORNA a `r 1.5247`, **NON TORNA a `r 1` per un artefatto del proiettore** *(`Ppi`/`A` in `Gamma`, `~1e-6`; `q(D) - 1 <= 8e-9`)*. **La quasi-energia TORNA** *(`+0.037 ± 0.11`, `-0.013 ± 0.066`)*. Le valli: non distinguono a `r 1.5247` |
+| `r 1` *(i `D` di `5f06dbfb`)* | al bit con `26300537` *(`60` confronti)*; il tasso `0.13901` *(`5f06dbfb` `0.13870`)*; **il periodo `4.07`-`4.10`, non `10.91`: un alias del campionamento ogni `3`** *(il conto `11.20`-`11.39`; vale anche per l'`11.45` di `de411167`)* |
+
+- **Una premessa corretta PRIMA dei numeri** *(nel commit dello script, `1eb344e6`)*: in un modo di Bogoliubov le due componenti di `D` portano direttamente i due quanti *(`k_Ppi = 2K - k_P0`, una riflessione)*, non uno spostamento di `±K`; lo script ha confrontato tutte e cinque le mappe.
+- **Due righe AGGIUNTE DOPO I NUMERI** *(`a50ab539`, `a3e7100d`)*: `q - 1` a precisione piena, `alpha*` dalle rotazioni, e il periodo che si vede campionando ogni `3`. **Nessun criterio cambiato.**
+- **Il mio errore:** dopo la prima di quelle due modifiche, il commit e' stato **rifiutato** *(`H-NON-TRACCIATI`: il referto precedente sul disco)*, ma il referto e' girato lo stesso, perche' `| tail` nascondeva il codice d'uscita del commit *(la trappola gia' scritta in memoria)*. **Quel referto, timbrato «MODIFICATO rispetto a HEAD», e' stato cancellato senza committarlo; il referto valido e' quello rigirato dopo `a3e7100d`.**
+- **Il criterio di `Q_S` era mal fatto:** la dispersione fra tre istanti non e' una barra per un artefatto di `1e-6`. Dichiarato, non cambiato.
