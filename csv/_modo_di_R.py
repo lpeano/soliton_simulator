@@ -143,7 +143,7 @@ def corsa():
         z["st"]["psi_h"][...] = psi0
         s0 = time.time()
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
-            for t in range(1, T_FINE + 1):
+            for t in range(1, max(tieni) + 1):          # ### fino a 14001: l'ultimo istante vuole il D del tick dopo (il primo giro morto per KeyError 14001)
                 CL.avanza(z, phi0, 1)
                 if t in fine:
                     LP.esito("DEVE PASSARE: lo stato al tick %d = sha_fine del pezzo committato (AL BIT)" % t, SFM.sha(z["st"]["psi_h"]) == fine[t], fine[t][:8])
