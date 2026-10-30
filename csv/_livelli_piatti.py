@@ -220,12 +220,12 @@ def partenza(nome):
     return p0 * math.sqrt(N / float(np.sum(np.abs(p0) ** 2))), da
 
 
-def newton(r, g, N, p0, etichetta, passi):
-    """### **Il metodo di `_strada_b_r.cerca`, invariato, coi contesti della configurazione.**"""
+def newton(r, g, N, p0, etichetta, passi, L):
+    """### **Il metodo di `_strada_b_r.cerca`, invariato, coi contesti della configurazione;** ### **`L` il toro** *(esplicito dalla scatola, Luca `22:11`)*."""
     from scipy.sparse.linalg import LinearOperator, gmres
     import _dove_va_la_materia as DV
     import _modo_al_variare_di_s as MS
-    with scena(N) as (_rec, z, phi0, _p), configurazione(r, g):
+    with scena(N, L) as (_rec, z, phi0, _p), configurazione(r, g):
         A = DV.matrice(z, phi0, DV.AMP) * np.exp(-1j * MS.ALPHA0[FORMA] * S)
         L = z["L"]
         n = z["inc"].n
@@ -316,19 +316,19 @@ def cerca(nome):
         # ### la tappa in N (Luca 13:22): dalla partenza riscalata a tappa_N, poi la destinazione dallo stato della tappa riscalato; ### la tappa resta IN MEMORIA
         Nt = rip["tappa_N"]
         print("  %s: la tappa a N %.0e (non si scrive su disco)" % (nome, Nt))
-        pt, mut, rft, stt, sect = newton(r, g, Nt, p0 * math.sqrt(Nt / N), "%s-tappa-N" % nome, SB.MAX_NEWTON)
+        pt, mut, rft, stt, sect = newton(r, g, Nt, p0 * math.sqrt(Nt / N), "%s-tappa-N" % nome, SB.MAX_NEWTON, L_SCENA)
         tentativi.append({"via": "tappa N %.0e" % Nt, "residuo": rft, "mu": mut, "passi": len(stt) - 1, "storia": stt, "secondi": sect})
         p0 = pt * math.sqrt(N / float(np.sum(np.abs(pt) ** 2)))
         da = "%s, poi la tappa a N %.0e (residuo %.3e)" % (da, Nt, rft)
     passi = rip["passi"] if (rip is not None and rip["passi"] is not None) else SB.MAX_NEWTON
-    psi, mu, rf, storia, sec = newton(r, g, N, p0, nome, passi)
+    psi, mu, rf, storia, sec = newton(r, g, N, p0, nome, passi, L_SCENA)
     tentativi.append({"via": "diretta" if rip is None else "dalla tappa N" if rip["tappa_N"] is not None else "ripresa, al piu' %d passi" % passi, "residuo": rf, "passi": len(storia) - 1, "storia": storia, "secondi": sec})
     if rf >= SB.TOLL_RES and rip is None and PARTENZA[nome] is None:
         rm, gm = 0.5 * (1.0 + r), 0.5 * (1.0 + g)
         print("  %s: la diretta NON converge (%.3e): la tappa a meta' strada r %.2f g %.2f" % (nome, rf, rm, gm))
-        pm, mum, rfm, stm, secm = newton(rm, gm, N, p0, "%s-tappa" % nome, SB.MAX_NEWTON)
+        pm, mum, rfm, stm, secm = newton(rm, gm, N, p0, "%s-tappa" % nome, SB.MAX_NEWTON, L_SCENA)
         tentativi.append({"via": "tappa r %.3f g %.3f" % (rm, gm), "residuo": rfm, "passi": len(stm) - 1, "storia": stm, "secondi": secm})
-        psi2, mu2, rf2, st2, sec2 = newton(r, g, N, pm, "%s-dalla-tappa" % nome, SB.MAX_NEWTON)
+        psi2, mu2, rf2, st2, sec2 = newton(r, g, N, pm, "%s-dalla-tappa" % nome, SB.MAX_NEWTON, L_SCENA)
         tentativi.append({"via": "dalla tappa", "residuo": rf2, "passi": len(st2) - 1, "storia": st2, "secondi": sec2})
         if rf2 < rf:
             psi, mu, rf = psi2, mu2, rf2
