@@ -73,3 +73,33 @@
 4. `--forma 1.5247`, commit;
 5. `--lunga` pezzo per pezzo, ogni pezzo committato;
 6. `--referto` -> `doc/referti_l2/strada_b_lati.txt`; RELAZIONE; MAPPA *(la riga `d` della sezione `3`; l'errore `n.82` nella sezione `8`)*; questo file annotato; commit.
+
+## 6. ANNOTAZIONE DOPO IL REFERTO *(`doc/referti_l2/strada_b_lati.txt`; lo script `sha1-BYTE 0011b1ac`, `b9e3c565`; `15/15`)*
+
+| | `r 0.65` | `r 0.69` | `r 1.5247` |
+|---|---|---|---|
+| lo stato | NON fermo, `5.757e-06` | NON fermo, `1.262e-06` | **fermo: Newton in `16` passi, `1.686e-10`**, `mu -0.568613109` |
+| il conto c1 *(punto `1`)* | **c1 su `P0` fra gli anelli `14`-`15`**; c1 su `P0` `+0.001`, `-0.009`, `-0.030`, `-0.054` agli anelli `14`-`17` *(fuori `-0.057`)* | nessun incrocio *(c1 su `P0` `+0.019` fuori)* | **la coppia fra gli anelli `13`-`14`** *(col profilo di `r 1` e col proprio)*; c1 nessuno |
+| la corsa breve, `D` a `180` | `1.18e-02` | `1.51e-03` | `1.97e-07` |
+| la forma | **la regola dice ESPONENZIALE per un artefatto:** il fit lineare ha intercetta negativa, il suo scarto in `ln` e' `inf`; l'esponenziale ha scarto `0.357`; **la pendenza locale scende** *(`0.070` a `15`, `0.0077` a `180`)*: **sopra-lineare, non esponenziale** | **lineare**, `v` = `0.998` della pendenza attesa | **lineare**, `v` = `0.977` della pendenza attesa |
+| dove sta `D` *(a `90`, `180`)* | **`P0` `0.861`, `0.926`; anelli `14`-`15`** | banda `A` `1.000`; anelli `3`-`6` | banda `A` `0.999`; anelli `4`-`7` |
+| il tasso piu' piccolo che la corsa breve vede *(`ln(D_180/residuo)/180`)* | `0.042` | `0.039` | `0.039` |
+
+**La corsa lunga** *(`r 1.5247`, la sua forma lineare; `20000` tick, `M` entro `5.4e-12`)*:
+
+| `tau` | il cuore `f_win` | `w/w_in` | `r 1` *(`26300537`, `s 0.3`)*: il cuore |
+|---|---|---|---|
+| `0` -> `500` | `0.66280` -> `0.66280` *(pendenza `-2.7e-11`)* | `0.92412` -> `0.92412` | `0.630` -> `0.584` |
+| `500` -> `1000` | -> `0.58384` | -> `1.01747` | -> `0.522` |
+| `1000` -> `2000` | -> `0.53960` | -> `1.10005` | -> `0.466` |
+| `2000` -> `3000` | -> `0.51006` | -> `1.15207` | -> `0.454` |
+
+| la lettura | l'esito |
+|---|---|
+| `r 1.5247` | **alla lettera `(c2)`:** nessuna crescita esponenziale nella corsa breve, e il cuore si svuota nella lunga. **Ma la corsa breve non vede un tasso sotto `0.039`** *(la deriva lineare del residuo copre `D`)*: **un modo lento, partito da `~1e-10`, darebbe proprio un cuore fermo per `500` e poi in caduta.** **`(c2)` e un `(c3)` lento NON SI SEPARANO con questi dati.** Il candidato dal punto `1`: **la coppia nella coda, anelli `13`-`14`.** Rispetto a `r 1`: il cuore regge `500` unita' di tempo invece di cadere subito, e a `3000` e' `0.510` contro `0.454` *(due `s`)* |
+| `r 0.65` | **`(s1)`:** l'incrocio di c1 su `P0` sta nella spalla *(`14`-`15`)*, c1 vi e' quasi zero su `4` anelli, e la crescita di `D` sta per l'`86`-`93%` in `P0` negli anelli `14`-`15` |
+| `r 0.69` | nessuna crescita esponenziale sopra `0.039` in `180`; `D` e' la deriva dello stato non fermo, in `A`. **La corsa lunga non era sua** *(la scelta del mandato: `r 1.5247` prima)*: **`(c1)`-`(c4)` non si decidono** |
+
+- **Il mio errore:** il secondo pezzo della corsa lunga e' caduto su `os.replace` *(`np.load` teneva aperto il `.npz`, su Windows)*; lo stato ripristinato dal `_tmp` dopo il controllo dello sha1, la correzione in `b9e3c565`. **Lo stesso difetto e' in `csv/_strada_b_r.corsa`**, mai partita: non toccato.
+- **La regola della forma ha un buco:** un fit lineare con intercetta negativa la fa pendere verso l'esponenziale. Dichiarato, non corretto dopo i numeri.
+- **Dichiarato:** prima del commit dello script ho girato `--referto` una volta come prova *(non scrive file)*: il conto per anello l'ho visto prima del commit, a criteri gia' committati.
