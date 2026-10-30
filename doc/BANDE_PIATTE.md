@@ -168,16 +168,16 @@ Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento loc
 
 **Per `alpha` in `[0, g]` il partner percorre `[2 mu - F - g, 2 mu - F]`: se tocca una banda dispersiva, l'uscita mista e' aperta.** **Lo «spostamento» `+0.491` della parte `P0` in (R)** *(`795d2c81`)* **e' `alpha` del cuore** *(`0.5000`, `g 0.5`)*: **il livello trattenuto e' `F + alpha`.**
 
-**Il controllo** *(`doc/referti_l2/scatola/uscite.txt`, `2/2`, nessuna corsa)*:
+**Il controllo** *(`doc/referti_l2/scatola/uscite.txt`, nessuna corsa; ### **CORRETTO il `2026-10-31` (Luca `00:21`): la riga di `r 1.5247` di `c6ad04ac` usava i pesi della famiglia SBAGLIATA** *(`a_n = pi`, `b_a = r pi`: `P0 +0.824`)*; **ora ogni riga coi pesi del SUO stato, e un DEVE lo verifica** *(il residuo del tick dello stato coi pesi della riga = quello della sua ricerca; coi pesi sbagliati `7.9e-2` contro `1.7e-10`)*)*:
 
 | il caso | `mu` | (n2-misto) `P0`: il partner | `A` libera | (n2) `P0 + Ppi`: `2 mu - F_i - F_j` contro `[0, 2g]` | il tasso misurato, l'uscita |
 |---|---|---|---|---|---|
 | `r 1` *(`g 1`)* | `-0.56602` | `[-2.132, -1.132]`: **APERTA** | `[-3.142, -1.560]` | `+2.00955` contro `[0, 2]`: `0.0096` fuori | `0.151`, la coppia di piatte |
-| `r 1.5247` *(`g 1`)* | `-0.56861` | `[-2.961, -1.961]`: **APERTA** | `[-3.966, -2.088]` | `+2.00437` contro `[0, 2]`: `0.0044` fuori | `0.033`, la coppia di piatte |
+| `r 1.5247` *(`g 1`; ### **i pesi di `_strada_b_r`**: `a 2.3416`, `b 3.5702`, `mu0 = pi/2`)* | `-0.56861` | `[-2.752, -1.752]`: **APERTA** | `[-2.956, -1.563]` | ### **`+1.20437` DENTRO `[0, 2]`: APERTA, ad `alpha 0.602`** *(il modo misurato agli anelli `12`-`13`, dove `alpha ~0.6`: `03142636`)* | `0.033`, la coppia di piatte |
 | `X1` *(`g 0.5`)* | `-1.06418` | `[-2.628, -2.128]`: **APERTA** | `[-3.142, -1.560]` | `+1.01323` contro `[0, 1]`: `0.0132` fuori | `0.061`, la coppia di piatte |
 | (R) *(`g 0.5`)* | `-0.86850` | `[-1.609, -1.109]`: **APERTA** *(misurato: `-1.607`)* | `[-2.513, -1.365]` | `+1.40460` contro `[0, 1]`: `0.405` fuori | `0.0079`, **la mista** |
 
-- **La mista `P0 + A` e' aperta in tutti e quattro.** **Dove la coppia di piatte sta entro `W` dal bordo** *(`0.004`-`0.013`)*, **la coppia domina** *(`0.033`-`0.151`)*; **dove ne e' lontana** *(`0.405`, (R))* **resta la mista, piu' lenta** *(`0.0079`)*. **Col bordo netto `[0, 2g]` la coppia risulta chiusa anche dove decade: la larghezza `W` resta necessaria** *(`99b679bc`)*.
+- **La mista `P0 + A` e' aperta in tutti e quattro.** ### **La coppia di piatte `P0 + Ppi`:** **per `r 1` e `X1` e' SUL BORDO** *(`0.0096` e `0.0132` fuori da `[0, 2g]`: entro `W`, la larghezza di `99b679bc`)*; **per `r 1.5247` e' APERTA DENTRO l'intervallo** *(`1.204` in `[0, 2]`, ad `alpha 0.602`)*; **per (R) e' lontana** *(`0.405` fuori)*. **Dove la coppia e' aperta o entro `W`, domina** *(`0.033`-`0.151`)*; **dove e' lontana resta la mista, piu' lenta** *(`0.0079`)*. *(La frase di `c6ad04ac`, «la coppia chiusa ovunque ma entro `W`», era sbagliata per `r 1.5247`: correzione di Luca `00:21`.)*
 - **I tassi per tipo di uscita:** **coppia di piatte** `0.151`, `0.061`, `0.033`; **mista** `0.0079`.
 - **La prova della scatola** *(se `0.0079` e' fisico o del toro)*: sotto.
 
@@ -187,6 +187,13 @@ Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento loc
 - **La corsa** *(`9` pezzi, fino a `tau 2700`)*: **la stessa uscita** -- nella finestra `D` e' `A 0.487`, `P0 0.495`, `Ppi 0.018` *(`L 81`: `0.486`, `0.496`, `0.018`)*; **la somma delle rotazioni `P0 + A` torna `~0`** *(`-0.0065 +- 0.036` e `-0.0027 +- 0.033` nei pezzi `10000` e `12000`)*; `E_A -1.60`, dentro `A`; `E_P0 -0.14`, nel gap; **`D_A` diffusa** *(raggio medio `27.5` contro `psi0` `5.8` e l'uniforme `44.5`)*, **`D_P0` agli anelli `13`-`14`**.
 - ### **Il tasso: `L 120` `0.00741 +- 0.00053`, `L 81` `0.00792 +- 0.00039`; la differenza `-0.00051` contro `3 sigma` combinati `0.00197`. LA LETTURA ALLA LETTERA: (s1), il tasso uguale entro gli errori: il decadimento misto e' FISICO, non della scatola.**
 - ⚠ **Quanto e' forte la prova:** l'errore viene dalle **due meta' della finestra** *(`L 120`: `0.00779` e `0.00673`; `L 81`: `0.00819` e `0.00741`)*: **il tasso cala dentro la finestra** in tutti e due i tori; la `sigma` del fit *(`0.00002`)* lo sottostimerebbe di `20`-`25` volte. **Con questo errore una differenza fino a `~25 %` passerebbe per (s1).** **La vita:** `2445` su `L 120`, `2304` su `L 81` *(`+6 %`)*.
+
+### LA SINTESI *(Luca `00:21`; solo scrittura)*
+
+- **La regola con le tre uscite (n1, n2, n2-misto) spiega i casi misurati:** `r 1`, `X1`, `r 1.5247` decadono per la coppia di piatte *(aperta o entro `W`)*; (R), dove la coppia e' lontana, per la mista `P0 + A`.
+- **I tassi per tipo di uscita:** **coppia di piatte `0.03`-`0.15`; mista `~0.008`.**
+- **Il decadimento misto e' FISICO:** `L 81` e `L 120` danno lo stesso tasso entro gli errori *(la scatola, `(s1)`)*.
+- ### **Per un solitone molto longevo serve chiudere ANCHE l'uscita mista: un vincolo sullo spettro del cammino** *(il partner `[2 mu - F - g, 2 mu - F]` fuori dalle bande dispersive)*. **E' una voce in lista d'attesa** *(la MAPPA, `29`)*, **collegata alla decisione sulle piatte** *(`25`)* **e alla vita richiesta** *(`27`)*.
 
 ## 6. LA VITA DEL SOLITONE *(Luca, `2026-10-30` `20:41` e `20:46`)*
 

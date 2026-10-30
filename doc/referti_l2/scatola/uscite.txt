@@ -1,41 +1,47 @@
-[TIMBRO] _scatola.py  sha1-BYTE 10d10378  committato e pulito
+[TIMBRO] _scatola.py  sha1-BYTE 931fed00  committato e pulito
 ### (1) LE USCITE SULLO SPETTRO LIBERO (la regola corretta di Luca 22:11): (n2-misto) [2 mu - F - g, 2 mu - F] contro A, B; (n2) 2 mu - F_i - F_j in [0, 2 g]
-  --- r 1: r 1.0000 g 1.00 mu -0.56602 (dfb5ab7e (S1_s0.150)); il tasso misurato 0.1510 (coppia di piatte)
+    (Luca 00:21: OGNI riga coi pesi della famiglia dello stato che legge; DEVE: il residuo del tick dello stato coi pesi della riga = quello della sua ricerca, entro 1e-06 relativo)
+  DEVE PASSARE: r 1, i pesi della riga (famiglia lp) sono quelli dello stato: il residuo ricalcolato = il regist PASSA   1.771013e-10 contro 1.771013e-10
+  --- r 1: famiglia lp, r 1.0000 g 1.00 mu -0.56602 (dfb5ab7e (S1_s0.150)); il tasso misurato 0.1510 (coppia di piatte)
       le bande libere: Ppi [-3.14159, -3.14159]  A [-3.14159, -1.55986]  P0 [-0.00000, +0.00000]  B [+1.55986, +3.14159]; le piatte larghe P0 1.4e-14  Ppi 1.4e-14
       (n2-misto) P0  F -0.00000: il partner in [-2.13204, -1.13204] -> APERTA con A
       (n2-misto) Ppi F -3.14159: il partner in [+1.00955, +2.00955] -> APERTA con B
-      (n2) P0  + P0 : 2 mu - F_i - F_j -1.13204 contro [0, 2 g = 2.00] -> chiusa
-      (n2) P0  + Ppi: 2 mu - F_i - F_j +2.00955 contro [0, 2 g = 2.00] -> chiusa
+      (n2) P0  + P0 : 2 mu - F_i - F_j -1.13204 contro [0, 2 g = 2.00] -> chiusa, 1.1320 fuori
+      (n2) P0  + Ppi: 2 mu - F_i - F_j +2.00955 contro [0, 2 g = 2.00] -> chiusa, 0.0095 fuori
       (n1) P0 : mu - F -0.56602 contro [0, g = 1.00] -> chiusa
-      (n2) Ppi + Ppi: 2 mu - F_i - F_j +5.15114 contro [0, 2 g = 2.00] -> chiusa
+      (n2) Ppi + Ppi: 2 mu - F_i - F_j +5.15114 contro [0, 2 g = 2.00] -> chiusa, 3.1511 fuori
       (n1) Ppi: mu - F +2.57557 contro [0, g = 1.00] -> chiusa
-  --- r 1.5247: r 1.5247 g 1.00 mu -0.56861 (_strada_b_r cerca_r1.52); il tasso misurato 0.0330 (coppia di piatte)
-      le bande libere: Ppi [-3.96579, -3.96579]  A [-3.96579, -2.08846]  P0 [+0.82420, +0.82420]  B [+2.08846, +3.96579]; le piatte larghe P0 1.4e-14  Ppi 1.6e-14
-      (n2-misto) P0  F +0.82420: il partner in [-2.96142, -1.96142] -> APERTA con A
-      (n2-misto) Ppi F -3.96579: il partner in [+1.82856, +2.82856] -> APERTA con B
-      (n2) P0  + P0 : 2 mu - F_i - F_j -2.78562 contro [0, 2 g = 2.00] -> chiusa
-      (n2) P0  + Ppi: 2 mu - F_i - F_j +2.00437 contro [0, 2 g = 2.00] -> chiusa
-      (n1) P0 : mu - F -1.39281 contro [0, g = 1.00] -> chiusa
-      (n2) Ppi + Ppi: 2 mu - F_i - F_j +6.79435 contro [0, 2 g = 2.00] -> chiusa
-      (n1) Ppi: mu - F +3.39718 contro [0, g = 1.00] -> chiusa
-  --- X1: r 1.0000 g 0.50 mu -1.06418 (cerca_X1.json); il tasso misurato 0.0610 (coppia di piatte)
+  DEVE PASSARE: r 1.5247, i pesi della riga (famiglia sb) sono quelli dello stato: il residuo ricalcolato = il r PASSA   1.685968e-10 contro 1.685968e-10
+  DEVE FALLIRE: r 1.5247 coi pesi della famiglia SBAGLIATA (lp: a_n = pi, b_a = r pi), l'errore di c6ad04ac      PASSA   7.913e-02 contro 1.686e-10
+  --- r 1.5247: famiglia sb, r 1.5247 g 1.00 mu -0.56861 (_strada_b_r cerca_r1.52); il tasso misurato 0.0330 (coppia di piatte)
+      le bande libere: Ppi [-2.95592, -2.95592]  A [-2.95592, -1.56295]  P0 [+0.61432, +0.61432]  B [+1.56295, +2.95592]; le piatte larghe P0 1.3e-14  Ppi 1.4e-14
+      (n2-misto) P0  F +0.61432: il partner in [-2.75154, -1.75154] -> APERTA con A
+      (n2-misto) Ppi F -2.95592: il partner in [+0.81869, +1.81869] -> APERTA con B
+      (n2) P0  + P0 : 2 mu - F_i - F_j -2.36586 contro [0, 2 g = 2.00] -> chiusa, 2.3659 fuori
+      (n2) P0  + Ppi: 2 mu - F_i - F_j +1.20437 contro [0, 2 g = 2.00] -> APERTA, a alpha 0.6022
+      (n1) P0 : mu - F -1.18293 contro [0, g = 1.00] -> chiusa
+      (n2) Ppi + Ppi: 2 mu - F_i - F_j +4.77461 contro [0, 2 g = 2.00] -> chiusa, 2.7746 fuori
+      (n1) Ppi: mu - F +2.38730 contro [0, g = 1.00] -> chiusa
+  DEVE PASSARE: X1, i pesi della riga (famiglia lp) sono quelli dello stato: il residuo ricalcolato = il registr PASSA   2.290462e-07 contro 2.290462e-07
+  --- X1: famiglia lp, r 1.0000 g 0.50 mu -1.06418 (cerca_X1.json); il tasso misurato 0.0610 (coppia di piatte)
       le bande libere: Ppi [-3.14159, -3.14159]  A [-3.14159, -1.55986]  P0 [-0.00000, +0.00000]  B [+1.55986, +3.14159]; le piatte larghe P0 1.4e-14  Ppi 1.4e-14
       (n2-misto) P0  F -0.00000: il partner in [-2.62836, -2.12836] -> APERTA con A
       (n2-misto) Ppi F -3.14159: il partner in [+0.51323, +1.01323] -> chiusa
-      (n2) P0  + P0 : 2 mu - F_i - F_j -2.12836 contro [0, 2 g = 1.00] -> chiusa
-      (n2) P0  + Ppi: 2 mu - F_i - F_j +1.01323 contro [0, 2 g = 1.00] -> chiusa
+      (n2) P0  + P0 : 2 mu - F_i - F_j -2.12836 contro [0, 2 g = 1.00] -> chiusa, 2.1284 fuori
+      (n2) P0  + Ppi: 2 mu - F_i - F_j +1.01323 contro [0, 2 g = 1.00] -> chiusa, 0.0132 fuori
       (n1) P0 : mu - F -1.06418 contro [0, g = 0.50] -> chiusa
-      (n2) Ppi + Ppi: 2 mu - F_i - F_j +4.15482 contro [0, 2 g = 1.00] -> chiusa
+      (n2) Ppi + Ppi: 2 mu - F_i - F_j +4.15482 contro [0, 2 g = 1.00] -> chiusa, 3.1548 fuori
       (n1) Ppi: mu - F +2.07741 contro [0, g = 0.50] -> chiusa
-  --- (R): r 0.6000 g 0.50 mu -0.86850 (cerca_R_1e6.json); il tasso misurato 0.0079 (mista (P0 + A))
+  DEVE PASSARE: (R), i pesi della riga (famiglia lp) sono quelli dello stato: il residuo ricalcolato = il regist PASSA   4.719354e-10 contro 4.719354e-10
+  --- (R): famiglia lp, r 0.6000 g 0.50 mu -0.86850 (cerca_R_1e6.json); il tasso misurato 0.0079 (mista (P0 + A))
       le bande libere: Ppi [-2.51327, -2.51327]  A [-2.51327, -1.36488]  P0 [-0.62832, -0.62832]  B [+1.36488, +2.51327]; le piatte larghe P0 1.7e-14  Ppi 1.5e-14
       (n2-misto) P0  F -0.62832: il partner in [-1.60867, -1.10867] -> APERTA con A
   DEVE PASSARE: (R) P0, l'intervallo del guardiano [-1.609, -1.109] entro 1e-3                                   PASSA   [-1.6087, -1.1087]
   DEVE PASSARE: (R) P0, la mista con A APERTA (il partner misurato a -1.607 dentro A)                            PASSA   
       (n2-misto) Ppi F -2.51327: il partner in [+0.27628, +0.77628] -> chiusa
-      (n2) P0  + P0 : 2 mu - F_i - F_j -0.48036 contro [0, 2 g = 1.00] -> chiusa
-      (n2) P0  + Ppi: 2 mu - F_i - F_j +1.40460 contro [0, 2 g = 1.00] -> chiusa
+      (n2) P0  + P0 : 2 mu - F_i - F_j -0.48036 contro [0, 2 g = 1.00] -> chiusa, 0.4804 fuori
+      (n2) P0  + Ppi: 2 mu - F_i - F_j +1.40460 contro [0, 2 g = 1.00] -> chiusa, 0.4046 fuori
       (n1) P0 : mu - F -0.24018 contro [0, g = 0.50] -> chiusa
-      (n2) Ppi + Ppi: 2 mu - F_i - F_j +3.28956 contro [0, 2 g = 1.00] -> chiusa
+      (n2) Ppi + Ppi: 2 mu - F_i - F_j +3.28956 contro [0, 2 g = 1.00] -> chiusa, 2.2896 fuori
       (n1) Ppi: mu - F +1.64478 contro [0, g = 0.50] -> chiusa
-controlli: 2/2; fallite: []
+controlli: 7/7; fallite: []
