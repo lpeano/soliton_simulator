@@ -1,0 +1,24 @@
+[TIMBRO] _livelli_piatti.py  sha1-BYTE 72f7f461  committato e pulito
+### (0) LE PREVISIONI, PRIMA DI NEWTON: il tick libero a s 0.15 coi pesi (pi, r pi); J = [E0, E0 + g], E0 = A(K); W (0.05, 0.2) per quanto
+  DEVE PASSARE: lo stato di dfb5ab7e sul disco = la ricerca (sha1)                                               PASSA   
+  DEVE PASSARE: a r 1, g 1 il tick dello stato di dfb5ab7e = quello di oggi, AL BIT                              PASSA   
+  DEVE PASSARE: R_1e6, il tick coi pesi in memoria = il tick ricomposto entro 1e-10                              PASSA   5.6e-16
+  R_1e6  r 0.60 g 0.50 N 1e+06 [tick]: E0 -1.36488, J [-1.3649, -0.8649]; P0 -0.6283 sopra 0.2366; Ppi -2.5133 sotto 1.1484; (P0+Ppi)/2 -1.5708 sotto 0.2059; (P0+P0)/2 -0.6283 sopra 0.2366; (Ppi+Ppi)/2 -2.5133 sotto 1.1484; IL MARGINE MINIMO +0.2059 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_1e6  r 0.60 g 0.50 N 1e+06 [primo]: E0 -1.36939, J [-1.3694, -0.8694]; P0 -0.6283 sopra 0.2411; Ppi -2.5133 sotto 1.1439; (P0+Ppi)/2 -1.5708 sotto 0.2014; (P0+P0)/2 -0.6283 sopra 0.2411; (Ppi+Ppi)/2 -2.5133 sotto 1.1439; IL MARGINE MINIMO +0.2014 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_1e6  la massa: la curvatura di A a K 0.6884 di r 1 (a_n b_a/pi^2 0.6000); mu0 1.36488 (tick) 1.36939 (primo ordine), r 1 pi/2
+  DEVE PASSARE: X1, il tick coi pesi in memoria = il tick ricomposto entro 1e-10                                 PASSA   9.0e-16
+  X1     r 1.00 g 0.50 N 1e+06 [tick]: E0 -1.55986, J [-1.5599, -1.0599]; P0 -0.0000 sopra 1.0599; Ppi -3.1416 sotto 1.5817; (P0+Ppi)/2 -1.5708 sotto 0.0109; (P0+P0)/2 -0.0000 sopra 1.0599; (Ppi+Ppi)/2 -3.1416 sotto 1.5817; IL MARGINE MINIMO +0.0109 (DENTRO W 0.05, DENTRO W 0.2); le copie modulo 2 pi/s a 39.8
+  X1     r 1.00 g 0.50 N 1e+06 [primo]: E0 -1.57080, J [-1.5708, -1.0708]; P0 +0.0000 sopra 1.0708; Ppi -3.1416 sotto 1.5708; (P0+Ppi)/2 -1.5708 DENTRO -0.0000; (P0+P0)/2 +0.0000 sopra 1.0708; (Ppi+Ppi)/2 -3.1416 sotto 1.5708; IL MARGINE MINIMO -0.0000 (DENTRO W 0.05, DENTRO W 0.2); le copie modulo 2 pi/s a 39.8
+  X1     la massa: la curvatura di A a K 1.0000 di r 1 (a_n b_a/pi^2 1.0000); mu0 1.55986 (tick) 1.57080 (primo ordine), r 1 pi/2
+  DEVE PASSARE: X2, il tick coi pesi in memoria = il tick ricomposto entro 1e-10                                 PASSA   5.6e-16
+  X2     r 0.60 g 1.00 N 1e+06 [tick]: E0 -1.36488, J [-1.3649, -0.3649]; P0 -0.6283 DENTRO -0.2634; Ppi -2.5133 sotto 1.1484; (P0+Ppi)/2 -1.5708 sotto 0.2059; (P0+P0)/2 -0.6283 DENTRO -0.2634; (Ppi+Ppi)/2 -2.5133 sotto 1.1484; IL MARGINE MINIMO -0.2634 (DENTRO W 0.05, DENTRO W 0.2); le copie modulo 2 pi/s a 39.7
+  X2     r 0.60 g 1.00 N 1e+06 [primo]: E0 -1.36939, J [-1.3694, -0.3694]; P0 -0.6283 DENTRO -0.2589; Ppi -2.5133 sotto 1.1439; (P0+Ppi)/2 -1.5708 sotto 0.2014; (P0+P0)/2 -0.6283 DENTRO -0.2589; (Ppi+Ppi)/2 -2.5133 sotto 1.1439; IL MARGINE MINIMO -0.2589 (DENTRO W 0.05, DENTRO W 0.2); le copie modulo 2 pi/s a 39.7
+  X2     la massa: la curvatura di A a K 0.6884 di r 1 (a_n b_a/pi^2 0.6000); mu0 1.36488 (tick) 1.36939 (primo ordine), r 1 pi/2
+  DEVE PASSARE: R_3e5, il tick coi pesi in memoria = il tick ricomposto entro 1e-10                              PASSA   5.6e-16
+  R_3e5  r 0.60 g 0.50 N 3e+05 [tick]: E0 -1.36488, J [-1.3649, -0.8649]; P0 -0.6283 sopra 0.2366; Ppi -2.5133 sotto 1.1484; (P0+Ppi)/2 -1.5708 sotto 0.2059; (P0+P0)/2 -0.6283 sopra 0.2366; (Ppi+Ppi)/2 -2.5133 sotto 1.1484; IL MARGINE MINIMO +0.2059 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_3e5  r 0.60 g 0.50 N 3e+05 [primo]: E0 -1.36939, J [-1.3694, -0.8694]; P0 -0.6283 sopra 0.2411; Ppi -2.5133 sotto 1.1439; (P0+Ppi)/2 -1.5708 sotto 0.2014; (P0+P0)/2 -0.6283 sopra 0.2411; (Ppi+Ppi)/2 -2.5133 sotto 1.1439; IL MARGINE MINIMO +0.2014 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_3e5  la massa: la curvatura di A a K 0.6884 di r 1 (a_n b_a/pi^2 0.6000); mu0 1.36488 (tick) 1.36939 (primo ordine), r 1 pi/2
+  DEVE PASSARE: R_3e6, il tick coi pesi in memoria = il tick ricomposto entro 1e-10                              PASSA   5.6e-16
+  R_3e6  r 0.60 g 0.50 N 3e+06 [tick]: E0 -1.36488, J [-1.3649, -0.8649]; P0 -0.6283 sopra 0.2366; Ppi -2.5133 sotto 1.1484; (P0+Ppi)/2 -1.5708 sotto 0.2059; (P0+P0)/2 -0.6283 sopra 0.2366; (Ppi+Ppi)/2 -2.5133 sotto 1.1484; IL MARGINE MINIMO +0.2059 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_3e6  r 0.60 g 0.50 N 3e+06 [primo]: E0 -1.36939, J [-1.3694, -0.8694]; P0 -0.6283 sopra 0.2411; Ppi -2.5133 sotto 1.1439; (P0+Ppi)/2 -1.5708 sotto 0.2014; (P0+P0)/2 -0.6283 sopra 0.2411; (Ppi+Ppi)/2 -2.5133 sotto 1.1439; IL MARGINE MINIMO +0.2014 (fuori da W 0.05, fuori da W 0.2); le copie modulo 2 pi/s a 40.2
+  R_3e6  la massa: la curvatura di A a K 0.6884 di r 1 (a_n b_a/pi^2 0.6000); mu0 1.36488 (tick) 1.36939 (primo ordine), r 1 pi/2
