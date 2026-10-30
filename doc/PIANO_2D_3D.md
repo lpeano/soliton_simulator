@@ -48,6 +48,15 @@
 - ### **INDIZIO, da UN SOLO confronto, NON una regola:** ### **la non bipartizione va col segno giusto.** ### **E' un argomento per la FCC contro la cubica e la BCC** *(la BCC e' bipartita:
   `doc/PROGETTO_TRIANGOLI.md`)*.
 
+### **LA REGOLA IN 3D** *(Luca, `2026-10-30` `20:49`, mandato delle `20:52`; ### **IN ATTESA: nessuna corsa**)*
+
+**Prima di ogni corsa di solitoni sul reticolo FCC, sulla carta e sul cammino libero 3D:** **lo spettro**; **le bande piatte** *(quante, dove)*; **il punto della banda su cui si costruisce il solitone**; **la regola dei livelli piatti** *(estesa ai modi interni: `doc/BANDE_PIATTE.md`)* **applicata a `J`**; **la formula della vita** *(`t_vita ~ ln(soglia/seme)/gamma`, `doc/BANDE_PIATTE.md`)*; **la soglia VK in 3D** *(`S1`: `n_min 169`, `5a0e9db4`)*.
+
+| | |
+|---|---|
+| **VALE IN OGNI DIMENSIONE** | il principio della regola *(la conservazione dell'energia)*, la formula della vita, il metodo |
+| **VA RICALCOLATO** | le piatte; il punto di mezzo *(in 2D viene da `c(K) = -1/2` e da `r = 1`)*; i modi interni |
+
 ## C. PROSEGUIRE
 
 0. ### ⭐ **L'ORDINE DOPO IL TERZO PASSO DEL `U(1)`** *(Luca, `2026-10-25`; [[U1-PROTOTIPO-TRIANGOLI]], [[PROGETTO-U1]])*:
