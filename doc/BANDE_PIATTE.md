@@ -147,3 +147,34 @@ Con `omega` la frequenza del solitone, `V(x)` in `[0, V_max]` lo spostamento loc
 - **(X1):** **ESPONENZIALE con entrambi i criteri, col modo previsto** *(la coppia `P0 + Ppi` agli istanti prima della saturazione: `0.50 + 0.46`, anelli `15`-`16`; il periodo dalle rotazioni `4.019`, `D` ogni `0.75`)*. ### **Da annotare (Luca `16:26`): il tasso `0.061` contro `0.151` a `g 1`, `r 1`: un indizio che `W` scali col legame `g`.**
 - **(X2):** dallo stato non fermo `|D|` parte da `1.0e-3` e cresce come la deriva *(`v / attesa 1.29`)*: **il modo previsto non si vede in `300` unita' di tempo; la lettura non si fa.**
 - **Il criterio aggiunto della forma ha fallito il suo collaudo su un caso** *(la retta con intercetta negativa: `t^2`)*: **la sua decisione e' di Luca** *(la relazione, `9e7dc1d7`)*. **Sui dati veri di `R_1e6` dice LINEARE, coi `98` campioni.**
+
+### IL MODO DI (R) *(Luca `20:46`; il referto `doc/referti_l2/modo_di_R.txt`, sha1-BYTE `82a627e9`, `12/12`)*
+
+- **La corsa lunga riletta:** la finestra del criterio di `5f06dbfb` *(da `10` volte la deriva a `1e-2`)* e' **`tau 1620 .. 2301`, il tasso `0.00792`** *(la finestra del guardiano `1500 .. 2200`: `0.00810`)*; **dentro la finestra `D` e' `A 0.486`, `P0 0.496`, `Ppi 0.018`**; prima, in media, `A 0.914`, `P0 0.082`. **`(p2)` confermata: l'uscita mancante e' `P0 + A`.**
+- **La corsa rifatta** *(AL BIT coi pezzi a `2000` .. `14000`)*: **le rotazioni rispetto a `mu`: `P0` `+0.744 +- 0.031`, `A` `-0.728 +- 0.017`; la somma `+0.016 +- 0.041`: ZERO** *(una coppia)*; ogni tick e ogni `5` coincidono *(nessun alias)*.
+- ### **LA FREQUENZA E IL POSTO, che decidono:** **la parte `A` ha `E = -1.607`, DENTRO la banda `A` libera** *(`-2.513 .. -1.365`)*, **ed e' DIFFUSA** *(raggio medio `22.2` contro `psi0` `5.8` e l'uniforme `29.9`)*: **e' RADIAZIONE.** ### **La parte `P0` ha `E = -0.138`, FUORI da ogni banda (nel gap), `0.49` SOPRA il livello piatto libero `-0.628`, ed e' LOCALIZZATA sugli anelli `13`-`14`** *(il bordo del solitone: `psi0` finisce fra `12` e `14`)*. 
+- ### **LA LETTURA ALLA LETTERA: (i2)** *(la parte `A` e' diffusa: radiazione)*; ### **la crescita viene da un modo di `P0` TRATTENUTO al bordo del solitone, il cui livello il solitone SPOSTA dal piatto libero, in coppia con la radiazione in `A`:** `E_P0 + E_A = -1.745` contro `2 mu = -1.737`. **Col livello piatto LIBERO** *(`-0.628`)* **il partner cadeva a `2 mu + 0.628 = -1.109`, nel gap sopra `A`: la regola diceva «sicuro»; col livello SPOSTATO** *(`-0.138`)* **il partner cade a `-1.599`, DENTRO `A`: e' l'uscita che la regola non vedeva.** *(Calcolo del guardiano coi numeri del referto, non stampato dallo script.)*
+
+### LA REGOLA ESTESA *(Luca `20:46`; ### **IPOTESI DEL GUARDIANO DA VERIFICARE, NON LEGGE**)*
+
+**I livelli `F` della forma generale sono quelli dei modi che non lasciano il solitone: le piatte E i modi interni della banda `A` trattenuti dal solitone.** I tassi misurati: **`r 1`, `g 1`: `0.151`; `X1`: `0.061`; `R_1e6`: `0.008`.**
+
+- ### ⚠ **Che cosa dice la misura `(b)` su questa forma:** **in (R) il modo trattenuto NON e' di `A`** *(`A` e' radiazione nel continuo)*: **e' di `P0`, e il suo livello NON e' quello piatto libero ma quello SPOSTATO dal solitone** *(`+0.49`)*. **Quindi, per (R), la regola estesa andrebbe letta cosi':** `F` = **i livelli dei modi trattenuti** *(le piatte COME LE SPOSTA il solitone, e gli eventuali modi interni di `A`)*, e l'uscita e' una coppia **trattenuto + continuo** quando `2 mu - F` cade in una banda che si propaga. **E' una lettura da verificare, non una legge:** quanto il solitone sposta le piatte va **calcolato** *(non tarato: `A1`)*, e **in `X1` e a `r 1` non l'ho misurato.**
+
+## 6. LA VITA DEL SOLITONE *(Luca, `2026-10-30` `20:41` e `20:46`)*
+
+> **La materia e' metastabile: non si cerca un solitone stabile per sempre, ma uno che vive abbastanza per l'esperimento.**
+
+**`t_vita ~ ln(soglia/seme)/gamma`**, con `gamma` il tasso del modo piu' rapido, **il seme** l'ampiezza iniziale della perturbazione, **la soglia** dove il cuore cambia in modo visibile *(`|D|/|psi0| = 1e-2`)*.
+
+**Il controllo sui casi misurati** *(`doc/referti_l2/modo_di_R.txt`, sezione `5`; l'osservato e' il primo `tau` con `|D|/|psi0| >= 1e-2`)*:
+
+| il caso | `gamma` | previsto col seme `1e-9` | col primo campione | col seme EFFICACE *(`e^a` del fit)* | **osservato** |
+|---|---|---|---|---|---|
+| `r 1` *(`s 0.3`)* | `0.13901` | `116` | `111` *(`1.96e-9`)* | `139` *(`4.3e-11`)* | **`142.2`** |
+| `r 1.5247` | `0.03311` | `487` | `492` *(`8.4e-10`)* | `611` *(`1.6e-11`)* | **`621.8`** |
+| `R_1e6` | `0.00792` | `2035` | `1752` *(`9.4e-9`)* | `2278` *(`1.5e-10`)* | **`2304.0`** |
+
+- **Col seme `1e-9` la formula da' l'ordine giusto e sbaglia per DIFETTO del `18`-`22 %`.** **Col seme efficace torna entro il `2 %`**, ma **e' quasi una tautologia** *(il seme efficace viene dallo stesso fit)*: **dice solo che il modo parte da un seme `~45`-`65` volte piu' piccolo del primo campione di `|D|`** *(la proiezione del residuo sul modo; rapporti del guardiano dalla tabella: `46`, `52`, `64`)*.
+- ### ⚠ **L'osservato di Luca per `r 1.5247` era `450`-`480`; qui `621.8`:** **due definizioni** *(il cambio visibile del cuore contro `|D| = 1e-2`)*. **La soglia va fissata una volta** *(decisione di Luca)*. *(Per `r 1` col tasso `0.151` di Luca, `dfb5ab7e` a `s 0.15`: `107`.)*
+- **La nota:** in un sistema con altri solitoni e radiazione **il seme e' molto piu' grande** *(per esempio `1e-3`: `ln ~2.3`, la vita sette volte piu' corta)*. **La regola dei livelli piatti serve a stimare `gamma`, cioe' a scegliere la vita, non a dire stabile si' o no.**

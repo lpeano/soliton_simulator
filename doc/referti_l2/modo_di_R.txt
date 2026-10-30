@@ -1,0 +1,92 @@
+[TIMBRO] _modo_di_R.py  sha1-BYTE 82a627e9  committato e pulito
+### (2) LA CORSA LUNGA DI R_1e6 RILETTA DAI .jsonl COMMITTATI
+  10 pezzi, tick 0 -> 20000; la deriva attesa residuo/s 3.146e-09 per unita' di tempo
+  LA FINESTRA del criterio (da 10 volte la deriva attesa a 0.01): tau 1620 .. 2301, 228 campioni: gamma 0.00792, a -22.650 (il seme efficace e^a 1.456e-10), scarto max di ln 0.188
+  la finestra del guardiano tau 1500 .. 2200: 234 campioni, gamma 0.00810, a -22.980
+  le bande di D PRIMA della finestra (539 campioni, media): A 0.9144  P0 0.0823  Ppi 0.0033  B 0.0000
+  le bande di D DENTRO la finestra (228 campioni, media): A 0.4858  P0 0.4961  Ppi 0.0180  B 0.0001
+  la forma PRIMA della finestra, col criterio aggiunto: ESPONENZIALE (b 1.0270 +- 0.0102, gamma 1.38e-03 +- 1.2e-04, 537 campioni)
+  v / attesa prima della finestra (|D| / (residuo/s tau), mediana): 1.411
+  il cuore: 0.56291 a tau 0, 0.56291 a 1620, 0.53619 a 3000
+----------------------------------------------------------------------------------------------------------------------------------
+### (5) LA VITA: t_vita = ln(0.01/seme)/gamma, contro l'osservato (il primo tau con |D|/|psi0| >= 0.01)
+  r 1 (s 0.3; 03142636)            gamma 0.13901 | previsto, seme 1e-9 (Luca): 116; il primo campione 1.96e-09: 111; il seme efficace e^a 4.29e-11: 139 | OSSERVATO 142.2
+  r 1.5247 (s 0.15; 03142636)      gamma 0.03311 | previsto, seme 1e-9 (Luca): 487; il primo campione 8.41e-10: 492; il seme efficace e^a 1.62e-11: 611 | OSSERVATO 621.8
+  R_1e6 (s 0.15; la corsa lunga)   gamma 0.00792 | previsto, seme 1e-9 (Luca): 2035; il primo campione 9.39e-09: 1752; il seme efficace e^a 1.46e-10: 2278 | OSSERVATO 2304.0
+  (il tasso di Luca per r 1, 0.151 di dfb5ab7e a s 0.15: col seme 1e-9 107)
+----------------------------------------------------------------------------------------------------------------------------------
+### (3) R_1e6 RIFATTA DALLO STATO FERMO FINO AL TICK 14000, AL BIT COI PEZZI; D SOLO AGLI ISTANTI DELL'ESAME
+  DEVE PASSARE: lo stato al tick 2000 = sha_fine del pezzo committato (AL BIT)                                   PASSA   94cd0dda
+  DEVE PASSARE: lo stato al tick 4000 = sha_fine del pezzo committato (AL BIT)                                   PASSA   445b4f19
+  DEVE PASSARE: lo stato al tick 6000 = sha_fine del pezzo committato (AL BIT)                                   PASSA   453de809
+  DEVE PASSARE: lo stato al tick 8000 = sha_fine del pezzo committato (AL BIT)                                   PASSA   fffffe1e
+  DEVE PASSARE: lo stato al tick 10000 = sha_fine del pezzo committato (AL BIT)                                  PASSA   a437d9e0
+  DEVE PASSARE: lo stato al tick 12000 = sha_fine del pezzo committato (AL BIT)                                  PASSA   bc849801
+  DEVE PASSARE: lo stato al tick 14000 = sha_fine del pezzo committato (AL BIT)                                  PASSA   598a8028
+  14000 tick in 678 s; 91 D in memoria
+-- i controlli dello strumento
+  DEVE PASSARE: le quattro parti nello spazio reale ricompongono D                                               PASSA   9.6e-16
+  DEVE PASSARE: la rotazione di una parte sintetica e^{-i 1.234 dtau}, dtau 0.15, ridà 1.234                     PASSA   1.234000
+  DEVE PASSARE: la rotazione di una parte sintetica e^{-i 1.234 dtau}, dtau 0.75, ridà 1.234                     PASSA   1.234000
+  DEVE PASSARE: la rotazione di una parte sintetica e^{-i 5.000 dtau}, dtau 0.15, ridà 5.000                     PASSA   5.000000
+  DEVE FALLIRE (l'alias): la rotazione di una parte sintetica e^{-i 5.000 dtau}, dtau 0.75, ridà 5.000 (oltre pi PASSA   -3.377580
+-- (a) le rotazioni per banda (l'energia della parte RISPETTO A mu = -0.868496535)
+  P0  ai 10 istanti (dtau 0.15): media +0.74429 dev 0.03107; +0.7595 +0.7883 +0.7647 +0.7169 +0.6912 +0.7042 +0.7446 +0.7773 +0.7676 +0.7285
+  A   ai 10 istanti (dtau 0.15): media -0.72825 dev 0.01717; -0.6808 -0.7157 -0.7298 -0.7358 -0.7386 -0.7395 -0.7387 -0.7370 -0.7350 -0.7317
+  Ppi ai 10 istanti (dtau 0.15): media -0.70607 dev 0.04903; -0.7126 -0.6542 -0.6577 -0.7195 -0.7879 -0.7893 -0.7243 -0.6625 -0.6522 -0.7005
+  B   ai 10 istanti (dtau 0.15): media +0.50220 dev 0.10946; +0.4687 +0.3860 +0.4076 +0.5351 +0.7136 +0.6844 +0.5089 +0.4093 +0.4095 +0.4987
+  la somma P0 + A  : media +0.01603 dev 0.04088 -> ZERO entro 3 sigma
+  la somma P0 + Ppi: media +0.03822 dev 0.07832 -> ZERO entro 3 sigma
+  il blocco ogni tick da 12000 (dtau 0.15, 40 coppie): P0 +0.73092 (dev 0.03233)  A -0.73858 (dev 0.00070)  Ppi -0.73572 (dev 0.05388)  B +0.56466 (dev 0.12512)
+  il blocco ogni 5 tick da 12000 (dtau 0.75, 40 coppie): P0 +0.73685 (dev 0.03218)  A -0.73899 (dev 0.00061)  Ppi -0.72680 (dev 0.05208)  B +0.56935 (dev 0.13779)
+  l'alias, P0 : ogni tick +0.73092, ogni 5 +0.73685, differenza +0.00593 (2 pi/0.75 = 8.3776)
+  l'alias, A  : ogni tick -0.73858, ogni 5 -0.73899, differenza -0.00041 (2 pi/0.75 = 8.3776)
+  l'alias, Ppi: ogni tick -0.73572, ogni 5 -0.72680, differenza +0.00892 (2 pi/0.75 = 8.3776)
+  l'alias, B  : ogni tick +0.56466, ogni 5 +0.56935, differenza +0.00469 (2 pi/0.75 = 8.3776)
+-- (b) la frequenza delle parti contro lo spettro libero (E = rotazione + mu; lo spettro E(k) = fase/s + ALPHA0, la convenzione di Newton)
+  la banda Ppi libera: E fra -2.51327 e -2.51327
+  la banda A   libera: E fra -2.51327 e -1.36488
+  la banda P0  libera: E fra -0.62832 e -0.62832
+  la banda B   libera: E fra +1.36488 e +2.51327
+  mu -0.86850
+  la parte A  : E -1.60708; dentro le bande libere ['A']; dalla SUA banda DENTRO (distanza dal bordo 0.00000)
+  la parte P0 : E -0.13758; dentro le bande libere NESSUNA (nel gap); dalla SUA banda FUORI (distanza dal bordo 0.49074)
+  la parte Ppi: E -1.60422; dentro le bande libere ['A']; dalla SUA banda FUORI (distanza dal bordo 0.90905)
+-- (b), (c) dove stanno: i profili per anelli (r 0 .. 24) e i raggi medi
+  |psi0|^2: raggio medio 5.773; 0.0187 0.0456 0.0695 0.1193 0.1128 0.1163 0.1225 0.1063 0.0911 0.0840 0.0551 0.0327 0.0181 0.0065 0.0013 0.0002 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  la densita' UNIFORME sul toro (il caso nullo): raggio medio 29.867
+  |D_A|^2 a tick 10400 (tau 1560.0): raggio medio 21.328; 0.0018 0.0054 0.0063 0.0147 0.0128 0.0153 0.0205 0.0215 0.0241 0.0270 0.0250 0.0325 0.0339 0.0409 0.0378 0.0356 0.0407 0.0368 0.0350 0.0328 0.0302 0.0308 0.0297 0.0282 0.0263
+  |D_A|^2 a tick 12000 (tau 1800.0): raggio medio 22.420; 0.0012 0.0041 0.0049 0.0106 0.0088 0.0109 0.0147 0.0171 0.0176 0.0207 0.0187 0.0251 0.0318 0.0376 0.0363 0.0382 0.0450 0.0404 0.0383 0.0358 0.0329 0.0337 0.0322 0.0307 0.0286
+  |D_A|^2 a tick 14000 (tau 2100.0): raggio medio 22.416; 0.0011 0.0044 0.0051 0.0109 0.0090 0.0107 0.0149 0.0173 0.0172 0.0201 0.0197 0.0249 0.0324 0.0397 0.0372 0.0402 0.0434 0.0390 0.0375 0.0344 0.0319 0.0334 0.0314 0.0301 0.0284
+  A  : il raggio medio ai 10 istanti 22.247 (dev 0.332) contro psi0 5.773 e uniforme 29.867 -> DIFFUSA (piu' vicina all'uniforme)
+  |D_P0|^2 a tick 10400 (tau 1560.0): raggio medio 13.479; 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0012 0.0520 0.4354 0.4902 0.0202 0.0008 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  |D_P0|^2 a tick 12000 (tau 1800.0): raggio medio 13.467; 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0012 0.0518 0.4474 0.4786 0.0201 0.0008 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  |D_P0|^2 a tick 14000 (tau 2100.0): raggio medio 13.446; 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0013 0.0552 0.4577 0.4683 0.0168 0.0006 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000 0.0000
+  P0 : il raggio medio ai 10 istanti 13.461 (dev 0.013) contro psi0 5.773 e uniforme 29.867 -> LOCALIZZATA (piu' vicina a psi0)
+-- le bande e |D| ai 10 istanti
+  tick 10400 tau 1560.0 |D|/|psi0| 3.183e-05  Ppi 0.0182  A 0.5069  P0 0.4748  B 0.0001
+  tick 10800 tau 1620.0 |D|/|psi0| 5.097e-05  Ppi 0.0210  A 0.5037  P0 0.4751  B 0.0002
+  tick 11200 tau 1680.0 |D|/|psi0| 8.369e-05  Ppi 0.0210  A 0.4932  P0 0.4856  B 0.0002
+  tick 11600 tau 1740.0 |D|/|psi0| 1.391e-04  Ppi 0.0188  A 0.4766  P0 0.5045  B 0.0001
+  tick 12000 tau 1800.0 |D|/|psi0| 2.298e-04  Ppi 0.0166  A 0.4666  P0 0.5167  B 0.0001
+  tick 12400 tau 1860.0 |D|/|psi0| 3.740e-04  Ppi 0.0161  A 0.4699  P0 0.5139  B 0.0001
+  tick 12800 tau 1920.0 |D|/|psi0| 6.020e-04  Ppi 0.0174  A 0.4830  P0 0.4994  B 0.0001
+  tick 13200 tau 1980.0 |D|/|psi0| 9.701e-04  Ppi 0.0188  A 0.4950  P0 0.4861  B 0.0002
+  tick 13600 tau 2040.0 |D|/|psi0| 1.578e-03  Ppi 0.0185  A 0.4951  P0 0.4862  B 0.0002
+  tick 14000 tau 2100.0 |D|/|psi0| 2.575e-03  Ppi 0.0169  A 0.4855  P0 0.4974  B 0.0001
+  il tasso ai 10 istanti: 0.00815 (seme efficace e^a 9.550e-11)
+-- (d) le armoniche (m = 0 .. 12) di drho e della fase
+  tick 10400 D     drho: 0.030 0.669 0.009 0.048 0.017 0.012 0.041 0.049 0.008 0.038 0.031 0.020 0.028 | fase: 0.039 0.056 0.043 0.174 0.056 0.020 0.141 0.096 0.023 0.137 0.113 0.023 0.080
+  tick 10400 D_A   drho: 0.030 0.676 0.009 0.043 0.017 0.011 0.042 0.048 0.007 0.038 0.032 0.019 0.028 | fase: 0.034 0.051 0.039 0.173 0.061 0.018 0.143 0.102 0.014 0.138 0.120 0.021 0.086
+  tick 10400 D_P0  drho: 0.129 0.030 0.019 0.255 0.114 0.059 0.126 0.038 0.049 0.059 0.004 0.036 0.083 | fase: 0.220 0.053 0.105 0.062 0.058 0.031 0.119 0.008 0.152 0.117 0.038 0.018 0.018
+  tick 12000 D     drho: 0.084 0.079 0.038 0.062 0.066 0.016 0.232 0.096 0.023 0.056 0.080 0.024 0.144 | fase: 0.060 0.011 0.027 0.241 0.050 0.014 0.057 0.108 0.023 0.218 0.133 0.026 0.031
+  tick 12000 D_A   drho: 0.075 0.086 0.032 0.067 0.063 0.017 0.240 0.098 0.019 0.053 0.079 0.025 0.147 | fase: 0.048 0.009 0.026 0.260 0.047 0.014 0.050 0.113 0.016 0.221 0.138 0.027 0.030
+  tick 12000 D_P0  drho: 0.142 0.033 0.151 0.161 0.052 0.017 0.080 0.020 0.123 0.122 0.047 0.030 0.022 | fase: 0.261 0.054 0.013 0.046 0.093 0.061 0.178 0.006 0.150 0.062 0.008 0.011 0.059
+  tick 14000 D     drho: 0.078 0.037 0.036 0.222 0.049 0.015 0.095 0.079 0.018 0.166 0.123 0.018 0.064 | fase: 0.187 0.012 0.018 0.073 0.058 0.010 0.201 0.113 0.024 0.089 0.074 0.030 0.112
+  tick 14000 D_A   drho: 0.060 0.040 0.034 0.238 0.046 0.016 0.091 0.083 0.011 0.171 0.127 0.019 0.064 | fase: 0.184 0.014 0.019 0.075 0.056 0.012 0.199 0.114 0.024 0.089 0.075 0.029 0.109
+  tick 14000 D_P0  drho: 0.234 0.057 0.102 0.027 0.066 0.031 0.134 0.004 0.170 0.110 0.034 0.010 0.020 | fase: 0.055 0.023 0.073 0.339 0.090 0.047 0.067 0.047 0.004 0.062 0.024 0.072 0.097
+-- LE LETTURE, COI CRITERI SCRITTI PRIMA
+  la somma P0 + A zero: True; la parte A localizzata: False; la frequenza di A fuori dalla banda A libera: False
+  LA LETTURA: (i2) la parte A e' diffusa: radiazione; la crescita viene da altro (vedi le bande e le rotazioni qui sopra)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 12/12 controlli passano; fallite: []
