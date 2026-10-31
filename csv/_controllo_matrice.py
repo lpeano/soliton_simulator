@@ -188,11 +188,11 @@ def stato():
     CB = CO.CB
     MB = CB.MB
     print("=" * 130)
-    print("IL CONTROLLO DI matrice (Luca 21:03): LO STATO -- la scena di _massimo_di_B.scena (N %.0e, L %d, eps %g), lo stato ricaricato = la p della scena (una copia)" % (CB.N, CB.L, CB.EPS))
+    print("IL CONTROLLO DI matrice (Luca 21:03): LO STATO -- la scena di _massimo_di_B.scena (N %.0e, L %d, eps %g), lo stato ricaricato = la p della scena (una copia)" % (CB.N, CB.L, CB.EPS_LUNGA))
     print("=" * 130)
     R = {}
     for caso in ("senza", "con"):
-        with MB.scena(CB.N, CB.L, CB.EPS) as (rec, z, phi0, p):
+        with MB.scena(CB.N, CB.L, CB.EPS_LUNGA) as (rec, z, phi0, p):
             with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
                 w_in = DC.forma(z, rec["larghezza"])[0]
             s0 = istantanea(z)
