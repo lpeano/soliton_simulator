@@ -22279,3 +22279,10 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Un H-P8 falso positivo** *(il presidio vede `cat-file` vicino alla parola «prima»; il blob viene dal PADRE)*: **dichiarato con `ESENTE-H-P8`** e l'elenco delle esenzioni rigenerato, invece di spostare il testo. **Un mio errore:** il messaggio di `6c5da5e8` cita il blob dello script `0417b6d2` invece di `e0ab93ed`, e non nomina `doc/ESENZIONI_presidi.md`. La patch del messaggio e' morta per un errore di sintassi e il commit e' partito col testo vecchio; la lista FILE CAMBIATI e' giusta.
 
 **Le domande per Luca** *(nel task history, coi criteri di chiusura)*: **(i)** le `4` altre funzioni `matrice` vanno controllate? **(ii)** `MB.misure` va corretta *(prende `w_in` dallo stato che c'e', non da quello della scena)*?
+
+## 2026-11-01 — LA VOCE 31 DELLA MAPPA (Luca 00:28): IL c DINAMICO E LA LUCE CHE ARRIVA DA LONTANO -- SOLO SCRITTURA
+
+
+**Scritta nella lista d'attesa della `MAPPA` come voce `31`**, dopo la `30`, col testo di Luca: l'ipotesi *(`c` dipende dal luogo e dalla materia, nel modello `cs`)*; il vincolo *(la luce arriva intatta da lontano solo se il vuoto agisce su tutte le frequenze allo stesso modo: Lorentz locale, equivalenza)*; **la domanda per il modello** *(la velocita' della luce al variare di `cs` e' la stessa per tutte le lunghezze d'onda molto piu' grandi del passo? quanto si disperde vicino alla scala del reticolo, da confrontare coi lampi gamma?)*. I collegamenti li ho controllati nella `MAPPA` prima di scriverli: la sezione `2` riga `4` *(`v_b = pi/4`)*, la bussola `(B)3`, la decisione `3` *(`cs` per estremita' o per nodo)*, la voce `12` *(la gobba)*.
+
+**L'ordine della coda, registrato** *([[PRECEDENZA-IN-CODA]])*: questa voce *(arrivata alle `00:28`, sesta)* e' scritta **prima** del mandato delle `22:35` *(il vuoto vivo, quinto)*. E' solo scrittura, e durante le corse lunghe del quinto il driver committa a ogni pezzo: non si potrebbe committare insieme a lui. **Il quinto viene subito dopo.**
