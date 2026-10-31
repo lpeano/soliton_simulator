@@ -43,6 +43,7 @@ CASI = (("r 1", "lp", 1.0, 1.0, "dfb5ab7e (S1_s0.150)", 0.151, "coppia di piatte
 PIATTE = ("P0", "Ppi")
 DISPERSIVE = ("A", "B")
 TOLL_RES_REL = 1e-6            # ### il residuo ricalcolato coi pesi della riga contro quello registrato, relativo
+TOLL_RES_SCATOLA = 1e-3        # ### Luca 11:51: il residuo di L 120 contro L 81, relativo; e |Delta mu| entro il residuo (le mie di 80df9ab9, 1e-6 e 1e-12, non erano derivate)
 
 
 def stato_di(nome):
@@ -341,8 +342,8 @@ def referto():
     cj = LP.leggi(os.path.join(DIR_JSON, "cerca_L%d.json" % L_GRANDE))
     stato_grande()
     c81_ = LP.leggi(os.path.join(LP.DIR_JSON, "cerca_%s.json" % NOME))
-    LP.esito("DEVE PASSARE: lo stato su L %d ha il residuo di L 81 (dai .json committati, %g relativo)" % (L_GRANDE, TOLL_RES_REL), abs(cj["residuo_finale"] / c81_["residuo_finale"] - 1.0) < TOLL_RES_REL, "%.6e contro %.6e" % (cj["residuo_finale"], c81_["residuo_finale"]))
-    LP.esito("DEVE PASSARE: lo stato su L %d ha il mu di L 81 (entro 1e-12)" % L_GRANDE, abs(cj["mu"] - c81_["mu"]) < 1e-12, "%+.12f contro %+.12f" % (cj["mu"], c81_["mu"]))
+    LP.esito("DEVE PASSARE: lo stato su L %d ha il residuo di L 81 (dai .json committati, %g relativo; Luca 11:51)" % (L_GRANDE, TOLL_RES_SCATOLA), abs(cj["residuo_finale"] / c81_["residuo_finale"] - 1.0) < TOLL_RES_SCATOLA, "%.6e contro %.6e (%.1e relativo)" % (cj["residuo_finale"], c81_["residuo_finale"], abs(cj["residuo_finale"] / c81_["residuo_finale"] - 1.0)))
+    LP.esito("DEVE PASSARE: lo stato su L %d ha il mu di L 81 entro il residuo (%.1e; Luca 11:51)" % (L_GRANDE, cj["residuo_finale"]), abs(cj["mu"] - c81_["mu"]) <= cj["residuo_finale"], "%+.12f contro %+.12f (%.1e)" % (cj["mu"], c81_["mu"], abs(cj["mu"] - c81_["mu"])))
     print("### LO STATO SU L %d: %s (residuo %.3e), mu %+.9f (L 81 %+.9f); la storia %s" % (L_GRANDE, "FERMO" if cj["convergito"] else "NON FERMO", cj["residuo_finale"], cj["mu"], cj["mu_L81"],
                                                                                       " ".join("%.1e" % p["residuo"] for p in cj["storia"])))
     c81 = LP.leggi(os.path.join(LP.DIR_JSON, "cerca_%s.json" % NOME))
