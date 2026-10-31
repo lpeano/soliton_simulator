@@ -51,3 +51,11 @@ La vita richiesta *(MAPPA `27`)* per la materia vera e' `~10^49` periodi interni
 2. `csv/_chiudere_le_uscite.py` *(il tick libero a `eps 0` e `0.5`; i punti `1`-`5`)* e la sua riga nell'inventario, committati prima di girare.
 3. Il referto `doc/referti_l2/chiudere_le_uscite.txt` *(un processo)*.
 4. `doc/CHIUDERE_LE_USCITE.md` *(le disuguaglianze in forma chiusa; le letture)*; `RELAZIONE`; `MAPPA` *(la `27` promossa; `9`, `10`, `11`, `14` collegate; la decisione `7` annotata; la riga `d`; l'errore `n.85`)*; la sezione `6` qui.
+
+
+## 6. L'ESITO *(`chiudere_le_uscite.txt`, `4/4`; il documento `doc/CHIUDERE_LE_USCITE.md`)*
+
+- **(1)-(3):** **(u1) con riserva** -- il massimo di `B` a `Gamma` chiude tutte le uscite fino a `n = 2` ai pesi di oggi *(margine `~2.1`, `eps 0.5` e `0`)*; il massimo di `A` a `K` solo per `a_n < b_a`, `g <= 1.5`.
+- **(4):** `Q_AB` le vieterebbe tutte; i proiettori locali solo a `eps 0.5` *(il gap `0.0397` a `Gamma`)*. **(5):** le piatte troppo lente; la moneta (e4) dal codice, il tipo non deciso dallo spettro.
+- **Le premesse che cadono:** «il solitone si costruisce dove sta oggi» *(il punto di oggi, `A` a `K`, e' quello con le uscite aperte; il massimo di `B` a `Gamma` no)*; **(4c) come l'avevo pensato** *(il termine di ordine zero non distingue: serve l'accoppiamento di coppia)*.
+- **Gli errori miei:** il margine `0` del primo giro *(la n0 della banda stessa)*, corretto a parte.

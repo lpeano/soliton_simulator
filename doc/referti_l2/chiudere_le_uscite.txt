@@ -1,0 +1,120 @@
+[TIMBRO] _chiudere_le_uscite.py  sha1-BYTE 1ee42dbe  committato e pulito
+==================================================================================================================================
+CHIUDERE LE USCITE (Luca 00:38, 00:44, 00:50): il tick libero, s 0.15, Omega 2 pi/s 41.8879; eps (0.5, 0.0) (0.5 il principale); W (0.05, 0.2); nessuna corsa di solitoni
+  LE LETTURE, SCRITTE PRIMA: (u1) una regione con tutte le uscite chiuse; (u2) vuota: quale resta aperta e perche'; (u3) una carica conservata con un legame locale le vieterebbe; (u4) il decadimento e' strutturale; (u5) la moneta cambia la risposta; la moneta: (e1) campo uniforme; (e2) massa di Dirac; (e3) altro; (e4) accoppiamento spin-direzione (elicita' o spin-orbita)
+==================================================================================================================================
+  DEVE PASSARE: eps 0.5, il tick ricomposto coi pesi di oggi e la moneta = il tick dei pezzi (entro 1e-10)       PASSA   1.1e-16
+  DEVE PASSARE: eps 0, il tick ricomposto coi pesi di oggi e la moneta = il tick dei pezzi (entro 1e-10)         PASSA   1.1e-16
+### (1), (2) LO SPETTRO DI OGGI E I PUNTI DELLA BANDA (mu in [E0, E0 + g], alpha in [0, g])
+  --- eps 0.5, r 1 (a_n = b_a = pi), g 1: le bande Ppi [-3.21784, -3.21614] (larga 0.0017)  A [-3.17818, -1.63950] (larga 1.5387)  P0 [+0.07625, +0.07913] (larga 0.0029)  B [+1.63559, +3.17818] (larga 1.5426)
+    A[4] a Gamma                   E0 -3.17818 (curvatura +0.0030): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[4] a K                       E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] a K'                      E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] a M~                      E0 -1.87271 (curvatura -0.0052): APERTE: (n0) mu in A; (n2-misto) P0 + A; (n2) P0 + Ppi
+    A[4] il MASSIMO (27, 27)       E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] il MINIMO (0, 0)          E0 -3.17818 (curvatura +0.0030): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[5] a Gamma                   E0 -3.17818 (curvatura +0.0030): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[5] a K                       E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] a K'                      E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] a M~                      E0 -1.87271 (curvatura -0.0052): APERTE: (n0) mu in A; (n2-misto) P0 + A; (n2) P0 + Ppi
+    A[5] il MASSIMO (27, 27)       E0 -1.63950 (curvatura -0.0030): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] il MINIMO (0, 0)          E0 -3.17818 (curvatura +0.0030): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    B[10] a Gamma                  E0 +3.17818 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.0990) -- (n0) mu in A 4.8177; (n0) mu in B 0.0000; (n1) P0 2.0990; (n2-misto) P0 + A 6.9167; (n2-misto) P0 + B 2.0990; (n1) Ppi 5.3943; (n2-misto) Ppi + A 10.2120; (n2-misto) Ppi + B 5.3943; (n2) P0 + P0 4.1981; (n2) P0 + Ppi 7.4934; (n2) Ppi + Ppi 10.7886
+    B[10] a K                      E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] a K'                     E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] a M~                     E0 +1.86872 (curvatura +0.0052): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] il MASSIMO (0, 0)        E0 +3.17818 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.0990) -- (n0) mu in A 4.8177; (n0) mu in B 0.0000; (n1) P0 2.0990; (n2-misto) P0 + A 6.9167; (n2-misto) P0 + B 2.0990; (n1) Ppi 5.3943; (n2-misto) Ppi + A 10.2120; (n2-misto) Ppi + B 5.3943; (n2) P0 + P0 4.1981; (n2) P0 + Ppi 7.4934; (n2) Ppi + Ppi 10.7886
+    B[10] il MINIMO (54, 54)       E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a Gamma                  E0 +3.17818 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.0990) -- (n0) mu in A 4.8177; (n0) mu in B 0.0000; (n1) P0 2.0990; (n2-misto) P0 + A 6.9167; (n2-misto) P0 + B 2.0990; (n1) Ppi 5.3943; (n2-misto) Ppi + A 10.2120; (n2-misto) Ppi + B 5.3943; (n2) P0 + P0 4.1981; (n2) P0 + Ppi 7.4934; (n2) Ppi + Ppi 10.7886
+    B[11] a K                      E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a K'                     E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a M~                     E0 +1.86872 (curvatura +0.0052): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] il MASSIMO (0, 0)        E0 +3.17818 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.0990) -- (n0) mu in A 4.8177; (n0) mu in B 0.0000; (n1) P0 2.0990; (n2-misto) P0 + A 6.9167; (n2-misto) P0 + B 2.0990; (n1) Ppi 5.3943; (n2-misto) Ppi + A 10.2120; (n2-misto) Ppi + B 5.3943; (n2) P0 + P0 4.1981; (n2) P0 + Ppi 7.4934; (n2) Ppi + Ppi 10.7886
+    B[11] il MINIMO (27, 27)       E0 +1.63559 (curvatura +0.0030): APERTE: (n0) mu in B; (n2-misto) P0 + B
+  --- eps 0, r 1 (a_n = b_a = pi), g 1: le bande Ppi [-3.14159, -3.14159] (larga 0.0000)  A [-3.14159, -1.55986] (larga 1.5817)  P0 [-0.00000, +0.00000] (larga 0.0000)  B [+1.55986, +3.14159] (larga 1.5817)
+  DEVE PASSARE: eps 0, r 1, mu -0.56602: (n2) P0 + Ppi a 0.0096 fuori, come uscite.txt (entro 1e-3)              PASSA   0.00955
+  DEVE PASSARE: eps 0, (R) (a_n = pi, b_a = 0.6 pi, g 0.5), mu -0.86850: (n2-misto) P0 + A APERTA                PASSA   -0.24380
+    A[4] a Gamma                   E0 -3.14159 (curvatura +0.0032): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[4] a K                       E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] a K'                      E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] a M~                      E0 -1.80323 (curvatura -0.0054): APERTE: (n0) mu in A; (n2-misto) P0 + A; (n2) P0 + Ppi
+    A[4] il MASSIMO (27, 27)       E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[4] il MINIMO (0, 0)          E0 -3.14159 (curvatura +0.0032): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[5] a Gamma                   E0 -3.14159 (curvatura +0.0032): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    A[5] a K                       E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] a K'                      E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] a M~                      E0 -1.80323 (curvatura -0.0054): APERTE: (n0) mu in A; (n2-misto) P0 + A; (n2) P0 + Ppi
+    A[5] il MASSIMO (27, 27)       E0 -1.55986 (curvatura -0.0031): APERTE: (n2-misto) P0 + A; (n2-misto) Ppi + B; (n2) P0 + Ppi
+    A[5] il MINIMO (0, 0)          E0 -3.14159 (curvatura +0.0032): APERTE: (n0) mu in A; (n1) Ppi; (n2-misto) Ppi + A; (n2) Ppi + Ppi
+    B[10] a Gamma                  E0 +3.14159 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.1416) -- (n0) mu in A 4.7015; (n0) mu in B 0.0000; (n1) P0 2.1416; (n2-misto) P0 + A 6.8430; (n2-misto) P0 + B 2.1416; (n1) Ppi 5.2832; (n2-misto) Ppi + A 9.9846; (n2-misto) Ppi + B 5.2832; (n2) P0 + P0 4.2832; (n2) P0 + Ppi 7.4248; (n2) Ppi + Ppi 10.5664
+    B[10] a K                      E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] a K'                     E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] a M~                     E0 +1.80323 (curvatura +0.0054): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[10] il MASSIMO (0, 0)        E0 +3.14159 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.1416) -- (n0) mu in A 4.7015; (n0) mu in B 0.0000; (n1) P0 2.1416; (n2-misto) P0 + A 6.8430; (n2-misto) P0 + B 2.1416; (n1) Ppi 5.2832; (n2-misto) Ppi + A 9.9846; (n2-misto) Ppi + B 5.2832; (n2) P0 + P0 4.2832; (n2) P0 + Ppi 7.4248; (n2) Ppi + Ppi 10.5664
+    B[10] il MINIMO (27, 27)       E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a Gamma                  E0 +3.14159 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.1416) -- (n0) mu in A 4.7015; (n0) mu in B 0.0000; (n1) P0 2.1416; (n2-misto) P0 + A 6.8430; (n2-misto) P0 + B 2.1416; (n1) Ppi 5.2832; (n2-misto) Ppi + A 9.9846; (n2-misto) Ppi + B 5.2832; (n2) P0 + P0 4.2832; (n2) P0 + Ppi 7.4248; (n2) Ppi + Ppi 10.5664
+    B[11] a K                      E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a K'                     E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] a M~                     E0 +1.80323 (curvatura +0.0054): APERTE: (n0) mu in B; (n2-misto) P0 + B
+    B[11] il MASSIMO (0, 0)        E0 +3.14159 (curvatura -0.0032): TUTTE CHIUSE, il margine (senza la n0 della sua banda) CHIUSA (2.1416) -- (n0) mu in A 4.7015; (n0) mu in B 0.0000; (n1) P0 2.1416; (n2-misto) P0 + A 6.8430; (n2-misto) P0 + B 2.1416; (n1) Ppi 5.2832; (n2-misto) Ppi + A 9.9846; (n2-misto) Ppi + B 5.2832; (n2) P0 + P0 4.2832; (n2) P0 + Ppi 7.4248; (n2) Ppi + Ppi 10.5664
+    B[11] il MINIMO (27, 27)       E0 +1.55986 (curvatura +0.0031): APERTE: (n0) mu in B; (n2-misto) P0 + B
+### (3) LA REGIONE
+  --- eps 0.5: il piano a_n/pi x b_a/pi ((0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0)), g in (0.25, 0.5, 1.0, 1.5, 2.0); per ogni punto: il massimo e il minimo di A e di B come E0
+    64 spettri in 29 s
+    quante volte ogni uscita e' APERTA, su 2560 casi (punto, E0, g): (n1) Ppi 848; (n2) Ppi + Ppi 848; (n2-misto) Ppi + A 844; (n2) P0 + Ppi 682; (n2-misto) P0 + A 652; (n0) mu in B 652; (n0) mu in A 640; (n2-misto) P0 + B 558; (n1) P0 456; (n2) P0 + P0 456; (n2-misto) Ppi + B 290
+    ### 680 casi con TUTTE le uscite chiuse a eps 0.5; per margine (senza la n0 della sua banda): oltre W 0.20 630, fra 0.05 e 0.20 36, sotto 0.05 14
+      la banda B, il max a (0, 0): 574 casi; il margine da 0.0010 a 6.0037; g [0.25, 0.5, 1.0, 1.5, 2.0]; (a, b) [(0.25, 0.25), (0.25, 0.5), (0.25, 0.75), (0.25, 1.0), (0.25, 1.25), (0.25, 1.5), (0.25, 1.75), (0.25, 2.0), (0.5, 0.25), (0.5, 0.5), (0.5, 0.75), (0.5, 1.0)]
+      la banda A, il max a (27, 27): 69 casi; il margine da 0.0078 a 1.3259; g [0.25, 0.5, 1.0, 1.5]; (a, b) [(0.25, 0.5), (0.25, 0.75), (0.25, 1.25), (0.25, 1.5), (0.25, 2.0), (0.5, 1.0), (0.5, 1.25), (0.5, 1.5), (0.5, 2.0), (0.75, 1.0), (0.75, 1.25), (0.75, 1.5)]
+      la banda A, il max a (54, 54): 37 casi; il margine da 0.0393 a 1.7561; g [0.25, 0.5, 1.0]; (a, b) [(0.25, 1.0), (0.25, 1.75), (0.5, 0.75), (0.5, 1.75), (0.5, 2.0), (0.75, 1.5), (1.0, 1.5), (1.0, 1.75), (1.0, 2.0), (1.25, 2.0)]
+      i pesi di oggi (a = b = pi): g 0.25 B[10] max E0 +3.1782 margine 2.8490; g 0.50 B[10] max E0 +3.1782 margine 2.5990; g 1.00 B[10] max E0 +3.1782 margine 2.0990; g 1.50 B[10] max E0 +3.1782 margine 1.5990; g 2.00 B[10] max E0 +3.1782 margine 1.0990; g 0.25 B[11] max E0 +3.1782 margine 2.8490; g 0.50 B[11] max E0 +3.1782 margine 2.5990; g 1.00 B[11] max E0 +3.1782 margine 2.0990; g 1.50 B[11] max E0 +3.1782 margine 1.5990; g 2.00 B[11] max E0 +3.1782 margine 1.0990
+  --- eps 0: il piano a_n/pi x b_a/pi ((0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, 2.0)), g in (0.25, 0.5, 1.0, 1.5, 2.0); per ogni punto: il massimo e il minimo di A e di B come E0
+    64 spettri in 24 s
+    quante volte ogni uscita e' APERTA, su 2560 casi (punto, E0, g): (n1) Ppi 856; (n2) Ppi + Ppi 856; (n2-misto) Ppi + A 848; (n2-misto) P0 + A 702; (n2) P0 + Ppi 700; (n0) mu in B 664; (n0) mu in A 640; (n2-misto) P0 + B 576; (n1) P0 512; (n2) P0 + P0 512; (n2-misto) Ppi + B 310
+    ### 672 casi con TUTTE le uscite chiuse a eps 0; per margine (senza la n0 della sua banda): oltre W 0.20 628, fra 0.05 e 0.20 36, sotto 0.05 8
+      la banda B, il max a (0, 0): 576 casi; il margine da 0.0708 a 6.0332; g [0.25, 0.5, 1.0, 1.5, 2.0]; (a, b) [(0.25, 0.25), (0.25, 0.5), (0.25, 0.75), (0.25, 1.0), (0.25, 1.25), (0.25, 1.5), (0.25, 1.75), (0.25, 2.0), (0.5, 0.25), (0.5, 0.5), (0.5, 0.75), (0.5, 1.0)]
+      la banda A, il max a (27, 27): 58 casi; il margine da 0.0025 a 1.7490; g [0.25, 0.5, 1.0, 1.5]; (a, b) [(0.25, 1.0), (0.25, 1.5), (0.25, 1.75), (0.25, 2.0), (0.5, 0.75), (0.5, 1.0), (0.5, 1.25), (0.5, 1.75), (0.5, 2.0), (0.75, 1.25), (0.75, 1.5), (0.75, 1.75)]
+      la banda A, il max a (54, 54): 38 casi; il margine da 0.0025 a 1.7490; g [0.25, 0.5, 1.0]; (a, b) [(0.25, 0.5), (0.25, 0.75), (0.25, 1.25), (0.25, 1.5), (0.5, 0.75), (0.5, 1.5), (0.5, 1.75), (0.5, 2.0), (0.75, 1.5), (0.75, 1.75), (1.0, 2.0), (1.25, 2.0)]
+      i pesi di oggi (a = b = pi): g 0.25 B[10] max E0 +3.1416 margine 2.8916; g 0.50 B[10] max E0 +3.1416 margine 2.6416; g 1.00 B[10] max E0 +3.1416 margine 2.1416; g 1.50 B[10] max E0 +3.1416 margine 1.6416; g 2.00 B[10] max E0 +3.1416 margine 1.1416; g 0.25 B[11] max E0 +3.1416 margine 2.8916; g 0.50 B[11] max E0 +3.1416 margine 2.6416; g 1.00 B[11] max E0 +3.1416 margine 2.1416; g 1.50 B[11] max E0 +3.1416 margine 1.6416; g 2.00 B[11] max E0 +3.1416 margine 1.1416
+### (4a) le cariche sul tick LIBERO
+  eps 0.5: ||[T(k), sigma_z]|| massimo sulla zona 1.462e-01 -> sigma_z (Q_S) NON conservata dal tick libero
+  eps 0: ||[T(k), sigma_z]|| massimo sulla zona 0.000e+00 -> sigma_z (Q_S) CONSERVATA dal tick libero
+  Q_AB = N_A - N_B e la valle: il tick libero e' LINEARE e invariante per traslazioni: ogni stato di Bloch evolve per una fase -> le popolazioni di banda e il momento sono CONSERVATE esattamente (per costruzione)
+  col LEGAME di oggi (alpha di rho = sum delle 12 componenti, una fase per nodo): non lineare; conserva la norma (una fase) e il momento cristallino modulo il reticolo reciproco; NON le popolazioni di banda
+### (4b) le uscite con la carica di banda Q_AB (il solitone: due quanti di A, Q_AB +2)
+  (n1) A -> piatta (un quanto)       Q_AB +1 -> 0 per il quanto: Q_AB 2 -> 1: VIETATA se Q_AB conservata
+  (n2) A + A -> piatta + piatta      Q_AB 2 -> 0: VIETATA se Q_AB conservata
+  (n2-misto) A + A -> piatta + A     Q_AB 2 -> 1: VIETATA se Q_AB conservata
+  (n2-misto) A + A -> piatta + B     Q_AB 2 -> -1: VIETATA se Q_AB conservata
+  sigma_z: il solitone tutto spin su (q 1); le uscite misurate hanno q(D) 1 (03142636): sigma_z NON vieta; la valle: 2K = k1 + k2 (la riflessione per K, misurata): NON vieta
+### (4c) perche' oggi non protegge: la parte NON LINEARE del tick su psi0 di (R) e le sue frazioni di banda
+  psi0                               |.|/|psi0| 1.000e+00; Ppi 6.1544e-06  A 9.9995e-01  P0 4.0315e-05  B 1.1786e-07
+  T(psi0) - T_lin psi0 (il legame)   |.|/|psi0| 7.495e-02; Ppi 6.6344e-05  A 9.9992e-01  P0 9.3130e-06  B 2.6058e-06
+  la frazione PIATTA (P0 + Ppi): del legame su psi0 7.5657e-05, di psi0 stesso 4.6469e-05 (il confronto: il legame accoppia il solitone alle piatte se la prima non e' al livello della seconda)
+### (4d) la localita' dei proiettori di banda (r 1)
+  eps 0.5: max_ab |P_g(R)_ab| per distanza |R| (0, 1, 2, 4, 8, 16, 32) e la pendenza di ln max|P| contro |R| fra 2 e 20:
+    Ppi 3.33e-01 8.76e-02 5.73e-02 4.10e-03 3.30e-04 4.57e-06 9.85e-10; pendenza -0.567
+    A   1.67e-01 1.27e-01 1.02e-01 3.95e-03 3.30e-04 4.57e-06 9.85e-10; pendenza -0.567
+    P0  3.33e-01 7.10e-02 7.10e-02 1.16e-03 1.60e-06 7.10e-12 2.13e-17; pendenza -1.711
+    B   1.67e-01 1.35e-01 1.35e-01 9.39e-04 1.40e-06 5.73e-12 1.31e-17; pendenza -1.719
+  eps 0: max_ab |P_g(R)_ab| per distanza |R| (0, 1, 2, 4, 8, 16, 32) e la pendenza di ln max|P| contro |R| fra 2 e 20:
+    Ppi 3.33e-01 8.33e-02 5.77e-02 4.53e-03 9.64e-04 2.29e-04 7.63e-05; pendenza -0.183
+    A   1.67e-01 1.41e-01 1.15e-01 4.90e-03 9.65e-04 2.29e-04 7.63e-05; pendenza -0.186
+    P0  3.33e-01 7.44e-02 7.44e-02 1.31e-03 2.26e-06 1.49e-11 1.71e-17; pendenza -1.656
+    B   1.67e-01 1.38e-01 1.38e-01 1.04e-03 1.85e-06 1.06e-11 1.18e-17; pendenza -1.672
+### (5a) le piatte che si muovono (eps 0.5): la velocita' di gruppo massima, e il tempo per lasciare il bordo (~2 archi)
+  Ppi v_max 2.9726e-03 archi per unita' di tempo; 2/v_max 673 unita' di tempo, contro 1/gamma 7 (r 1)  16 (X1)  125 ((R))
+  P0  v_max 1.2586e-03 archi per unita' di tempo; 2/v_max 1589 unita' di tempo, contro 1/gamma 7 (r 1)  16 (X1)  125 ((R))
+### (5c) la moneta: exp(-i eps dtau sigma.n) per ESTREMITA' (motore._moneta_spin, CAMM-MONETA-SPIN): mescola i due stati di SPIN di ogni estremita', col versore n dell'arco
+  Gamma eps 0.5: -3.2178 -3.2178 -3.2178 -3.2178 -3.1782 -3.1782 +0.0762 +0.0762 +0.0762 +0.0762 +3.1782 +3.1782; le separazioni minime fra livelli vicini 0.0000 0.0000 0.0000
+  Gamma eps 0: -3.1416 -3.1416 -3.1416 -3.1416 -3.1416 -3.1416 -0.0000 +0.0000 +0.0000 +0.0000 +3.1416 +3.1416; le separazioni minime fra livelli vicini 0.0000 0.0000 0.0000
+  K     eps 0.5: -3.2178 -3.2178 -3.2168 -3.2168 -1.6395 -1.6395 +0.0762 +0.0762 +0.0791 +0.0791 +1.6356 +1.6356; le separazioni minime fra livelli vicini 0.0000 0.0000 0.0000
+  K     eps 0: -3.1416 -3.1416 -3.1416 -3.1416 -1.5599 -1.5599 -0.0000 -0.0000 +0.0000 +0.0000 +1.5599 +1.5599; le separazioni minime fra livelli vicini 0.0000 0.0000 0.0000
+  il gap fra le bande, eps 0.5: a Gamma Ppi (max -3.21784) e A (min -3.17818): 0.03966; a K A (max -1.63950) e P0 (min +0.07625): 1.71575; a K i due livelli di A 4.44e-15, di P0 2.89e-03
+  il gap fra le bande, eps 0: a Gamma Ppi (max -3.14159) e A (min -3.14159): 0.00000; a K A (max -1.55986) e P0 (min -0.00000): 1.55986; a K i due livelli di A 4.44e-16, di P0 1.59e-15
+  l'elicita' <sigma.k^> degli stati della banda A vicino a Gamma e a K (k relativo al punto), eps 0.5 contro 0:
+    eps 0.5, Gamma: <sigma.k^> delle due bande di A sui 6 vicini: -0.029 +0.029 -0.000 -0.000 +0.014 -0.014 -0.000 +0.000 -0.044 +0.044 +0.057 -0.057
+    eps 0.5, K    : <sigma.k^> delle due bande di A sui 6 vicini: -0.068 +0.068 -0.430 +0.430 +0.010 -0.010 -0.431 +0.431 +0.195 -0.195 -0.266 +0.266
+    eps 0, Gamma: <sigma.k^> delle due bande di A sui 6 vicini: +0.124 -0.124 -0.011 +0.011 +0.000 -0.000 -0.004 +0.004 +0.000 -0.000 +0.079 -0.079
+    eps 0, K    : <sigma.k^> delle due bande di A sui 6 vicini: +0.000 -0.000 +0.000 -0.000 -0.000 +0.000 +0.000 -0.000 -0.000 +0.000 +0.087 -0.087
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; fallite: []
