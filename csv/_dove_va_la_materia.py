@@ -88,11 +88,17 @@ def matrice(z, phi0, amp):
     L = z["L"]
     n = z["inc"].n
     A = np.empty((L, L, 12, 12), dtype=complex)
-    for c in range(12):
-        p = np.zeros((n, 12), dtype=complex)
-        p[0, c] = amp
-        R = un_tick(z, phi0, p) / amp
-        A[:, :, :, c] = np.fft.fft2(R.reshape(L, L, 12), axes=(0, 1))
+    # ### GUARDIA_STATO (Luca 21:03): un_tick SCRIVE z["st"] (psi_h, rho); si salva ogni array e si RIMETTE al suo posto, in place (chi ne tiene una vista la ritrova)
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    try:
+        for c in range(12):
+            p = np.zeros((n, 12), dtype=complex)
+            p[0, c] = amp
+            R = un_tick(z, phi0, p) / amp
+            A[:, :, :, c] = np.fft.fft2(R.reshape(L, L, 12), axes=(0, 1))
+    finally:
+        for k, v in salvato.items():
+            z["st"][k][...] = v
     return A
 
 

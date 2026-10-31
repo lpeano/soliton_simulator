@@ -23,6 +23,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_controlli_indice_v2.py|H-P5` | non importa il simulatore e non lo fa girare. Controlla una migrazione. |
 | `csv/_controlli_riordino.py|H-P5` | non importa il simulatore e non lo fa girare. Conta righe e cerca stringhe. |
 | `csv/_controllo_il_fatto.py|H-P5` | non importa il simulatore e non lo fa girare. Legge l'indice e documenti. |
+| `csv/_controllo_matrice.py|H-P8` | il codice di prima si prende dal PADRE del commit della guardia (git log -S GUARDIA_STATO, poi il padre), e NON da HEAD: un falso positivo, dichiarato invece di spostare il testo. |
 | `csv/_cura_il_fatto.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_da_dividere.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce un lotto. |
 | `csv/_doc_referto_chiusure.py|H-P5` | non importa il simulatore e non lo fa girare. Scrive un referto sull'indice. |
@@ -150,5 +151,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   143
+esenzioni dichiarate   144
 ```

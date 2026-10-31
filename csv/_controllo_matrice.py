@@ -5,6 +5,7 @@ r"""**IL CONTROLLO DI `matrice` SUI REFERTI GIA' FATTI** *(UNA PROVA E UNA CORRE
 
     python csv/_controllo_matrice.py --elenco > doc/referti_l2/controllo_matrice_elenco.txt
     python csv/_controllo_matrice.py --stato > doc/referti_l2/controllo_matrice_stato.txt
+    python csv/_controllo_matrice.py --guardia > doc/referti_l2/controllo_matrice_guardia.txt
 """
 import ast
 import glob
@@ -233,6 +234,80 @@ def stato():
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
 
+# ====================================================================== LA GUARDIA
+# ESENTE-H-P8: il codice di prima si prende dal PADRE del commit della guardia (git log -S GUARDIA_STATO, poi il padre), e NON da HEAD: un falso positivo, dichiarato invece di spostare il testo.
+MARCA_GUARDIA = "GUARDIA_STATO"
+
+
+def matrice_del_padre():
+    """### **Il modulo `_dove_va_la_materia` del PADRE del commit che ha messo la guardia** *(H-P8: il codice di prima dal padre, `git cat-file`, in binario)*: `(modulo, commit della guardia, padre)`."""
+    import importlib.util
+    import subprocess
+    import tempfile
+    rel = "csv/_dove_va_la_materia.py"
+    cg = subprocess.check_output(["git", "log", "-1", "--format=%H", "-S", MARCA_GUARDIA, "--", rel], cwd=RADICE).decode().strip()
+    assert cg, "il commit della guardia non si trova"
+    padre = subprocess.check_output(["git", "rev-parse", cg + "^"], cwd=RADICE).decode().strip()
+    dati = subprocess.check_output(["git", "cat-file", "-p", "%s:%s" % (padre, rel)], cwd=RADICE)
+    assert MARCA_GUARDIA.encode() not in dati, "il padre ha gia' la guardia"
+    d = tempfile.mkdtemp(prefix="dvm_padre_")
+    f = os.path.join(d, "_dvm_padre.py")
+    with open(f, "wb") as fh:
+        fh.write(dati)
+    spec = importlib.util.spec_from_file_location("_dvm_padre", f)
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m, cg, padre
+
+
+def guardia():
+    """### **DEVE:** con la guardia lo stato dopo `matrice` e' identico al bit; `A` identica al bit a quella del padre; ### **il caso che DEVE fallire:** la `matrice` del padre lascia lo stato diverso."""
+    import hashlib
+    import _consolida_B as CO
+    import _deriva_congelato as DC
+    import _dove_va_la_materia as DV
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _stato_fermo as SFM
+    import _triangoli_bassa_energia as BE
+    import _congelato_lungo as CL
+    CB = CO.CB
+    MB = CB.MB
+    blob = hashlib.sha1(open(DV.__file__, "rb").read()).hexdigest()[:8]
+    vecchio, cg, padre = matrice_del_padre()
+    print("=" * 130)
+    print("IL CONTROLLO DI matrice (Luca 21:03): LA GUARDIA -- _dove_va_la_materia.py sul disco sha1-BYTE %s; la guardia al commit %s, il padre %s; la scena N %.0e L %d eps %g" % (blob, cg[:8], padre[:8], CB.N, CB.L, CB.EPS_LUNGA))
+    print("=" * 130)
+    esito("DEVE PASSARE: il modulo in uso ha la guardia", MARCA_GUARDIA in open(DV.__file__, encoding="utf-8").read(), "")
+    R = {}
+    for nome, mod in (("oggi", DV), ("padre", vecchio)):
+        with MB.scena(CB.N, CB.L, CB.EPS_LUNGA) as (rec, z, phi0, p):
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                w_rif = DC.forma(z, rec["larghezza"])[0]
+            s0 = istantanea(z)
+            A = mod.matrice(z, phi0, DV.AMP)
+            s1 = istantanea(z)
+            m = MB.misure(z, phi0, rec, p)
+            z["st"]["psi_h"][...] = p
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                CL.avanza(z, phi0, 1)
+            R[nome] = {"c": confronta(s0, s1), "A": A, "w_in": m["w_in"], "w_rif": w_rif, "tick": SFM.sha(z["st"]["psi_h"])}
+    c = R["oggi"]["c"]
+    esito("DEVE PASSARE: con la guardia, dopo matrice ogni chiave di z[\"st\"] = prima, AL BIT", all(v[0] for v in c.values()),
+          " ".join("%s %s" % (k, "=" if v[0] else "DIVERSO") for k, v in c.items()))
+    cp = R["padre"]["c"]
+    esito("DEVE PASSARE: il caso che DEVE fallire -- la matrice del padre lascia lo stato DIVERSO", not all(v[0] for v in cp.values()),
+          " ".join("%s %s" % (k, "=" if v[0] else "DIVERSO %.2e" % v[1]) for k, v in cp.items()))
+    esito("DEVE PASSARE: A con la guardia = A del padre, AL BIT", R["oggi"]["A"].tobytes() == R["padre"]["A"].tobytes(),
+          "max |dA| %.1e" % float(abs(R["oggi"]["A"] - R["padre"]["A"]).max()))
+    print("  MB.misure subito dopo matrice: w_in con la guardia %.6f, col padre %.6f" % (R["oggi"]["w_in"], R["padre"]["w_in"]))
+    esito("DEVE PASSARE: con la guardia MB.misure dopo matrice da' il w_in della scena (DC.forma prima di matrice), AL BIT", R["oggi"]["w_in"] == R["oggi"]["w_rif"], "%.12f contro %.12f" % (R["oggi"]["w_in"], R["oggi"]["w_rif"]))
+    print("  un tick dalla p della scena, dopo matrice e la ricarica: con la guardia %s, col padre %s" % (R["oggi"]["tick"][:8], R["padre"]["tick"][:8]))
+    esito("DEVE PASSARE: le corse (matrice, poi la ricarica, poi i tick) non cambiano: un tick uguale al bit con e senza guardia", R["oggi"]["tick"] == R["padre"]["tick"], "")
+    print("=" * 130)
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
@@ -240,6 +315,8 @@ def main(argv):
         elenco()
     elif "--stato" in argv:
         stato()
+    elif "--guardia" in argv:
+        guardia()
     else:
         print(__doc__)
 
