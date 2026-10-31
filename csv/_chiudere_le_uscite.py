@@ -116,6 +116,11 @@ def uscite(E0, g, sp, mu=None):
     return out
 
 
+def margine(u, c):
+    """### **Il margine minimo SENZA la `(n0)` della banda di `E0`** *(a distanza `0` per costruzione: `mu` parte dal suo bordo; la prima stampa di `cc6b28d9` la contava, ed era un difetto mio)*."""
+    return min(d for k, d in u.items() if k != "(n0) mu in %s" % c)
+
+
 def giudizio(d):
     if d < 0:
         return "APERTA (dentro di %.4f)" % -d
@@ -164,7 +169,8 @@ def oggi(lib):
     for nome, E0, c, b, ij in punti_critici(E, L):
         u = uscite(E0, 1.0, sp)
         aperte = [k for k, d in u.items() if d < 0]
-        print("    %-30s E0 %+.5f (curvatura %+.4f): %s" % (nome, E0, curvatura(E[..., b], ij, L), ("APERTE: " + "; ".join(aperte)) if aperte else "TUTTE CHIUSE -- " + "; ".join("%s %s" % (k, giudizio(d)) for k, d in u.items())))
+        print("    %-30s E0 %+.5f (curvatura %+.4f): %s" % (nome, E0, curvatura(E[..., b], ij, L), ("APERTE: " + "; ".join(aperte)) if aperte else
+              "TUTTE CHIUSE, il margine (senza la n0 della sua banda) %s -- %s" % (giudizio(margine(u, c)), "; ".join("%s %.4f" % (k, d) for k, d in u.items()))))
     return E, sp
 
 
@@ -192,16 +198,24 @@ def regione(lib):
                                 sempre[k] = sempre.get(k, 0) + 1
                             sempre["_tot"] = sempre.get("_tot", 0) + 1
                             if not ap:
-                                chiusi.append((a, b, g, "%s[%d] %s" % (c, bi, chi), float(Eb[ij]), curvatura(Eb, ij, L), vA, min(u.values())))
+                                chiusi.append((a, b, g, "%s[%d] %s" % (c, bi, chi), float(Eb[ij]), curvatura(Eb, ij, L), vA, margine(u, c), tuple(int(x) for x in ij)))
     print("    %d spettri in %.0f s" % (len(PESI) ** 2, time.time() - s0))
     tot = sempre.pop("_tot")
     print("    quante volte ogni uscita e' APERTA, su %d casi (punto, E0, g): %s" % (tot, "; ".join("%s %d" % kv for kv in sorted(sempre.items(), key=lambda x: -x[1]))))
     if not chiusi:
         print("    ### LA REGIONE E' VUOTA a eps %g: nessun (pesi, g, E0) con tutte le uscite chiuse" % lib.eps)
     else:
-        print("    ### %d casi con TUTTE le uscite chiuse a eps %g (a_n/pi, b_a/pi, g, il punto, E0, la curvatura, v_max di A, il margine minimo):" % (len(chiusi), lib.eps))
-        for x in chiusi[:40]:
-            print("      a %.2f b %.2f g %.2f %-12s E0 %+.4f curvatura %+.4f v_max(A) %.4f margine %.4f (%s)" % (x[0], x[1], x[2], x[3], x[4], x[5], x[6], x[7], giudizio(x[7])))
+        print("    ### %d casi con TUTTE le uscite chiuse a eps %g; per margine (senza la n0 della sua banda): oltre W %.2f %d, fra %.2f e %.2f %d, sotto %.2f %d"
+              % (len(chiusi), lib.eps, W[1], sum(x[7] > W[1] for x in chiusi), W[0], W[1], sum(W[0] < x[7] <= W[1] for x in chiusi), W[0], sum(x[7] <= W[0] for x in chiusi)))
+        tipi = {}
+        for x in chiusi:
+            k = (x[3].split("[")[0], x[3].split()[-1], x[8])
+            tipi.setdefault(k, []).append(x)
+        for k, v in sorted(tipi.items(), key=lambda kv: -len(kv[1])):
+            print("      la banda %s, il %s a %s: %d casi; il margine da %.4f a %.4f; g %s; (a, b) %s" % (k[0], k[1], k[2], len(v), min(x[7] for x in v), max(x[7] for x in v),
+                  sorted(set(x[2] for x in v)), sorted(set((x[0], x[1]) for x in v))[:12]))
+        oggi_ = [x for x in chiusi if x[0] == 1.0 and x[1] == 1.0]
+        print("      i pesi di oggi (a = b = pi): %s" % ("; ".join("g %.2f %s E0 %+.4f margine %.4f" % (x[2], x[3], x[4], x[7]) for x in oggi_) or "nessun caso chiuso"))
     return chiusi
 
 
@@ -295,6 +309,11 @@ def piatte_e_moneta(libs, Es):
     for e_ in range(6):
         sx[2 * e_, 2 * e_ + 1] = sx[2 * e_ + 1, 2 * e_] = 1.0
         sy[2 * e_, 2 * e_ + 1], sy[2 * e_ + 1, 2 * e_] = -1j, 1j
+    for x in libs:
+        e_g = Es[x.eps][(0, 0)]
+        e_k = Es[x.eps][K]
+        print("  il gap fra le bande, eps %g: a Gamma Ppi (max %+.5f) e A (min %+.5f): %.5f; a K A (max %+.5f) e P0 (min %+.5f): %.5f; a K i due livelli di A %.2e, di P0 %.2e"
+              % (x.eps, e_g[3], e_g[4], e_g[4] - e_g[3], e_k[5], e_k[6], e_k[6] - e_k[5], e_k[5] - e_k[4], e_k[9] - e_k[6]))
     print("  l'elicita' <sigma.k^> degli stati della banda A vicino a Gamma e a K (k relativo al punto), eps 0.5 contro 0:")
     for x in libs:
         _ph, Z = DV.autovettori(x.tick(math.pi, math.pi))
