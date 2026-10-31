@@ -805,6 +805,13 @@
 
 ---
 
+## `_dove_va_la_materia.matrice` *(`csv/`, il tick lineare per `k`)* -- **SCRIVE LO STATO DELLA SCENA** *(2026-10-31)*
+
+### ⛔ **`matrice(z, phi0, AMP)` lascia in `z["st"]["psi_h"]` e in `z["st"]["rho"]` i suoi vettori di prova** *(misurato: `psi_h` cambia di `2.5`, `rho` di `5060`, `Lambda` di `1.8e-15`; `phi_h`, `psi`, `h_int` no)*.
+- **Chi legge lo stato DOPO, nella stessa scena, legge quello di `matrice`:** `_deriva_congelato.forma` *(e quindi `_massimo_di_B.misure`)* ha dato `w_in 0.227` invece di `6.644`, e il cuore `0.00000` *(`1b6978f1`)*.
+- **Non tocca chi prende lo stato come ARGOMENTO:** `_modo_al_variare_di_s.tick(z, phi0, psi, ...)` da' lo stesso residuo prima e dopo, al bit.
+- ### **La regola: misurare lo stato PRIMA di `matrice`, o in una scena sua** *(come fanno `_coppia_di_B.lunga` e `_consolida_B.corsa`: `DC.forma` prima, poi `matrice`, poi lo stato caricato)*.
+
 ## FATTI CHE NON RIGUARDANO IL SIMULATORE
 
 - **IL 75 % DELLE VOCI DEI REGISTRI NON PORTA IL BLOB DEL CODICE CHE LE HA PRODOTTE — MISURATO**

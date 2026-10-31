@@ -156,10 +156,10 @@ def partenza_robusta(nome):
     L_, w81 = l_robusta(nome)
     q, _qp, th, fi = q_migliore()
     with MB.scena(N_, L_, EPS) as (rec, z, phi0, pK):
-        _q1, _q2, E0, G = CB.coppia(z, phi0)
         p = inviluppo(z, pK, q, N_)
+        m = MB.misure(z, phi0, rec, p)     # ### PRIMA di CB.coppia: _dove_va_la_materia.matrice SCRIVE z["st"]["psi_h"] e rho (doc/FATTI_dal_codice.md)
+        _q1, _q2, E0, G = CB.coppia(z, phi0)
         r, mu = CB.residuo(z, phi0, p)
-        m = MB.misure(z, phi0, rec, p)
     info = {"N": N_, "L": L_, "w_a_L81": w81, "theta": th, "phi": fi, "E0": E0, "bloch": float(np.linalg.norm(G @ q - np.exp(-1j * E0 * S) * q)),
             "norma": abs(float(np.sum(np.abs(p) ** 2)) / N_ - 1.0), "residuo": r, "mu": mu, "misure": m}
     return p, mu, N_, L_, info, "l'inviluppo di N %.0e per la scelta migliore (theta %.4f phi %.4f), SENZA Newton, L %d; mu di Rayleigh" % (N_, th, fi, L_)
@@ -376,7 +376,8 @@ def vincolo(nome):
             q, qp, cosa = q1, q2, "q1 (spin su), lo spin giu' q2 nullo"
         sz = CB.ritratto(z, q)["sigma_z"]
         p0 = inviluppo(z, pK, q, N)
-        m_in = MB.misure(z, phi0, rec, p0)
+    with MB.scena(N, L, eps) as (rec, z, phi0, _p):
+        m_in = MB.misure(z, phi0, rec, p0)  # ### in una scena sua: _dove_va_la_materia.matrice SCRIVE z["st"]["psi_h"] e rho (doc/FATTI_dal_codice.md)
     print("### (4) NEWTON COL VINCOLO: %s (eps %g), %s; il bordo: lambda u, u il campo uniforme del partner; il criterio %g, %d passi" % (nome, eps, cosa, LP.SB.TOLL_RES, LP.SB.MAX_NEWTON))
     if nome != NOME_EPS:
         esito("DEVE PASSARE: a eps 0 q1 e' tutto spin su: sigma_z = 1 entro %g" % TOLL_SZ, abs(sz - 1.0) < TOLL_SZ, "%+.12f" % sz)
@@ -473,9 +474,10 @@ def referto():
         esito("DEVE PASSARE: %s, la norma della partenza = N entro %g" % (nome, TOLL_PARTENZA), info["norma"] < TOLL_PARTENZA, "%.1e" % info["norma"])
         fw = finestre(pr)
         esito("DEVE PASSARE: %s, M entro %g relativo" % (nome, TOLL_NORMA), fw["dM"] <= TOLL_NORMA, "%.1e" % fw["dM"])
-        print("  --- %s: N %.0e, L %d%s; la partenza: residuo per tick %.3e, mu %+.6f (mu - E0 %+.5f), w %.3f, cuore %.5f; tick %d%s"
+        p0 = pr[0]["punti"][0]      # ### la partenza dal punto a t 0 della corsa: info["misure"] dei pezzi di 153272e4 e' misurato DOPO matrice (il cuore sbagliato)
+        print("  --- %s: N %.0e, L %d%s; la partenza: residuo per tick %.3e, mu %+.6f (mu - E0 %+.5f), w %.3f, cuore %.5f (il punto a t 0); tick %d%s"
               % (nome, info["N"], info["L"], "" if info["w_a_L81"] is None else " (w a L 81 %.3f contro L/6 %.2f)" % (info["w_a_L81"], L * LP.FRAZ_LARGO), info["residuo"], info["mu"],
-                 info["mu"] - info["E0"], info["misure"]["w"], info["misure"]["f_win"], fw["fine"], "" if fw["fine"] >= T_ROBUSTA else " (NON FINITA)"))
+                 info["mu"] - info["E0"], p0["w"], p0["f_win"], fw["fine"], "" if fw["fine"] >= T_ROBUSTA else " (NON FINITA)"))
         print("    il cuore %.5f -> %.5f (fra %.5f e %.5f), w/w_in a fine %.4f, l'alone massimo %.5f" % (fw["cuore0"], fw["cuore1"], fw["cuore_min"], fw["cuore_max"], fw["w_fine"], fw["alone_max"]))
         stampa_finestre(fw)
         stampa_limite(limite(pr))
