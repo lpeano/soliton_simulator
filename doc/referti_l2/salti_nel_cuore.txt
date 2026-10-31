@@ -1,0 +1,41 @@
+[TIMBRO] _salti_nel_cuore.py  sha1-BYTE 92d2159b  committato e pulito
+==================================================================================================================================
+I SALTI NEL CUORE (Luca 19:08): la corsa lunga di B a Gamma (eps 0.5, N 1e+06, L 81, s 0.15), RIGENERATA; FATTORE 10 ISTANTI (21230, 31400, 59400, 60130, 76580, 96260) MAX_ATTR 24 OGNI 10
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (j1) i salti sono della finestra (spariscono con la liscia); (j2) restano: un fatto fisico; (j3) altro
+==================================================================================================================================
+### (0) LA RIGENERAZIONE
+  DEVE PASSARE: tutti i pezzi rigenerati                                                                         PASSA   17 su 17
+  DEVE PASSARE: ogni pezzo AL BIT (lo sha1 della fine = l'originale)                                             PASSA   283d312f 103fdd91 e2b5755b
+  DEVE PASSARE: f_win e w di ogni campione = l'originale, al bit                                                 PASSA   0 diversi
+  13334 campioni, tick 0 .. 133330; w_in 6.643741; h (la lunghezza di un arco, la mediana) 1.000000; la finestra liscia: 1 fino a w_in - h/2, 0 da w_in + h/2, lineare in mezzo
+----------------------------------------------------------------------------------------------------------------------------------
+### (a) IL BARICENTRO
+  x 0.71450 .. 0.80122 (la media 0.75701), y 0.39332 .. 0.48334 (la media 0.43887); la distanza dalla media: la mediana 0.02813, il massimo 0.04714; la distanza fra campioni: la mediana 2.41e-04, il massimo 3.95e-04
+----------------------------------------------------------------------------------------------------------------------------------
+### (b) I SALTI DELLA FINESTRA NETTA E LA SCOMPOSIZIONE ESATTA DEL PASSO
+  la mediana di |Delta f_win| 1.017e-04; un salto oltre 10 volte: 68 salti su 13333 passi
+  l'ampiezza dei salti: 0.00237 .. 0.00281 (la mediana 0.00265); in su 34, in giu' 34; |Delta w| ai salti: la mediana 8.18e-04 (fuori dai salti 7.24e-04)
+  ai salti: con nodi che attraversano il bordo 68 su 68; quanti nodi: {np.int64(1): np.int64(68)}; il termine della finestra / Delta f: la mediana 0.9712; |Delta f - il termine| la mediana 1.17e-04 (contro 1.02e-04 di |Delta f| fuori dai salti)
+  fuori dai salti: con nodi che attraversano 0 su 13265
+  gli istanti del guardiano (il passo che finisce a t):
+    t  21230: Delta f_win +0.00011 (salto: no), il termine della finestra +0.00000, il resto +1.13e-04; entrati 0 usciti 0 ; Delta w -9.89e-04; Delta f_liscia +1.18e-04; il baricentro si sposta di 2.79e-04
+    t  31400: Delta f_win +0.00019 (salto: no), il termine della finestra +0.00000, il resto +1.90e-04; entrati 0 usciti 0 ; Delta w -9.97e-04; Delta f_liscia +1.83e-04; il baricentro si sposta di 3.23e-04
+    t  59400: Delta f_win -0.00017 (salto: no), il termine della finestra +0.00000, il resto -1.68e-04; entrati 0 usciti 0 ; Delta w +1.04e-03; Delta f_liscia -1.70e-04; il baricentro si sposta di 2.77e-04
+    t  60130: Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.61e-04; entrati 0 usciti 0 ; Delta w -9.23e-04; Delta f_liscia +1.58e-04; il baricentro si sposta di 1.36e-04
+    t  76580: Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.60e-04; entrati 0 usciti 0 ; Delta w -9.46e-04; Delta f_liscia +1.70e-04; il baricentro si sposta di 2.19e-04
+    t  96260: Delta f_win -0.00019 (salto: no), il termine della finestra +0.00000, il resto -1.91e-04; entrati 0 usciti 0 ; Delta w +1.05e-03; Delta f_liscia -1.86e-04; il baricentro si sposta di 2.05e-04
+----------------------------------------------------------------------------------------------------------------------------------
+### (c) LA FINESTRA LISCIA
+  la mediana di |Delta f_liscia| 1.022e-04; i salti della liscia (oltre 10 volte la SUA mediana): 0 su 13333 passi; il massimo |Delta f_liscia| 2.335e-04 (contro il massimo |Delta f_win| 2.814e-03)
+  agli istanti dei salti della netta: |Delta f_liscia| la mediana 1.119e-04, il massimo 1.986e-04; salti della liscia fra questi 0
+  la netta meno la liscia: 0.00220 .. 0.00510 (la media 0.00394)
+----------------------------------------------------------------------------------------------------------------------------------
+### (d) L'OSCILLAZIONE LENTA
+  f_liscia                     la media 0.62202, (max - min)/2 0.00596, la deviazione standard 0.00354; lo spettro: il picco al periodo 307.7 unita' di tempo (l'ampiezza 0.00473)
+  f_win                        la media 0.62596, (max - min)/2 0.00710, la deviazione standard 0.00391; lo spettro: il picco al periodo 307.7 unita' di tempo (l'ampiezza 0.00496)
+  w                            la media 6.39800, (max - min)/2 0.03888, la deviazione standard 0.02410; lo spettro: il picco al periodo 307.7 unita' di tempo (l'ampiezza 0.03220)
+  la distanza del baricentro   la media 0.02665, (max - min)/2 0.02337, la deviazione standard 0.00899; lo spettro: il picco al periodo 500.0 unita' di tempo (l'ampiezza 0.00978)
+  le correlazioni a ritardo zero: f_liscia con la distanza del baricentro -0.050; f_liscia con w -0.998; f_win con f_liscia +0.951
+----------------------------------------------------------------------------------------------------------------------------------
+### LE LETTURE: i numeri sono quelli sopra; la parola (j1)/(j2)/(j3) nella relazione
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []

@@ -22213,3 +22213,15 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 - **Nella lista d'attesa** *(`doc/MAPPA.md`, sez. `4`, dopo la `29`)*: **la voce `30`, col testo di Luca delle `17:56`** *(lo specchio `E_B(k) = -E_A(k)` manda `Gamma` in `Gamma`: lo specchio del massimo di `B` a `Gamma` e' il minimo di `A` a `Gamma`; le tre condizioni di Sakharov; gli ingredienti (i)-(iii) gia' nel modello; la domanda sull'universo che cresce)*, **collegata alle voci `9`, `21`, a `doc/PROGETTO_MITOSI.md` e alla domanda delle molte particelle** *(`(C)`, riga `1`)*.
 - **Nessuna corsa, nessuna lettura mia.** Eseguita dopo la chiusura del mandato delle `15:58` *(`751bca7f`)*, come chiesto.
+
+## 2026-10-31 — I SALTI NEL CUORE (Luca 19:08): IL REFERTO, E UN DIFETTO DI CONVENZIONE NEGLI ISTANTI DEL GUARDIANO
+
+
+**La rigenerazione e' AL BIT:** `17` pezzi su `17`, lo sha1 della fine di ognuno = l'originale, `f_win` e `w` di ogni campione = l'originale *(`0` diversi su `13334` campioni)*. Pezzi committati da `a2a45ab7` a `c4cacafc`. Il referto: `doc/referti_l2/salti_nel_cuore.txt` *(`python csv/_salti_nel_cuore.py --referto`, sha1-BYTE `92d2159b`)*, `3/3`.
+
+**I numeri del referto, che NON dipendono dalla convenzione:**
+- `68` salti su `13333` passi *(oltre `10` volte la mediana `1.017e-4`)*, ampiezza `0.00237 .. 0.00281`, `34` in su e `34` in giu';
+- **ogni salto ha ESATTAMENTE UN nodo che attraversa il bordo della finestra** *(`68` su `68`)*, e **nessun passo fuori dai salti ne ha** *(`0` su `13265`)*; il termine della finestra spiega il salto *(la mediana del rapporto `0.971`)*;
+- **la finestra liscia non ha salti** *(`0` su `13333`; il massimo `|Delta f_liscia|` `2.3e-4` contro `2.8e-3` della netta)*.
+
+### ⚠ **IL DIFETTO:** la sezione «gli istanti del guardiano» del referto stampa **il passo che FINISCE a `t`**, e a quei passi dice «salto: no». **Ma i salti stanno al passo che COMINCIA a `t`:** ognuno dei sei istanti *(`21230`, `31400`, `59400`, `60130`, `76580`, `96260`)* e' a `10` tick da un salto *(`21240`, `31410`, `59410`, `60140`, `76590`, `96270`, le fini dei passi; dalla lista dei `68`, con lo script dello scratchpad sui `rig_*.jsonl`)*. ### **Il guardiano etichettava un passo col campione d'inizio, lo script con quello di fine: lo script stampava i passi sbagliati.** La correzione e' **un commit a se'** *(stampare tutti e due i passi)*, poi il referto si rigira *(nessuna corsa: legge i jsonl)*.
