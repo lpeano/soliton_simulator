@@ -1,0 +1,35 @@
+[TIMBRO] _coppia_di_B.py  sha1-BYTE fd362e6c  committato e pulito
+### (1) LA SCELTA DENTRO LA COPPIA: q(theta, phi) = cos(theta) q1 + e^{i phi} sin(theta) q2, l'inviluppo di S1; theta 0.0000 0.2618 0.5236 0.7854 1.0472 1.3090 1.5708; phi 0.0000 0.7854 1.5708 2.3562 3.1416 3.9270 4.7124 5.4978; il residuo per tick |T psi - lambda psi|/|psi|
+  DEVE PASSARE: e05, q1 e q2 ortonormali entro 1e-12                                                             PASSA   2.2e-16
+  --- e05 (eps 0.5): E0 +3.178178
+    q1: sigma_z +0.97883, l'elicita' media +0.14549, le 6 estremita' 0.1702 0.1631 0.1649 0.1684 0.1684 0.1649
+    q2: sigma_z -0.97883, l'elicita' media +0.14549, le 6 estremita' 0.1631 0.1702 0.1684 0.1649 0.1649 0.1684
+    i versori n_e delle 6 estremita' del nodo 0: (+1.000 +0.000 +0.000)  (-1.000 -0.000 -0.000)  (-0.500 +0.866 +0.000)  (+0.500 -0.866 -0.000)  (+0.500 +0.866 +0.000)  (-0.500 -0.866 -0.000)
+    il controllo (q1 per 8 fasi globali): il residuo 3.2952584418e-02 .. 3.2952584418e-02, lo scarto s0 1.39e-17
+  DEVE PASSARE: e05, ogni q(theta, phi) e' autovettore di A(Gamma) entro 1e-10                                   PASSA   8.9e-16
+    la griglia (49 punti; a theta 0 uno solo): il residuo per theta (righe) e phi (colonne):
+      theta 0.0000: 3.2953e-02
+      theta 0.2618: 3.2954e-02 3.2956e-02 3.2955e-02 3.2953e-02 3.2951e-02 3.2950e-02 3.2950e-02 3.2952e-02
+      theta 0.5236: 3.2955e-02 3.2958e-02 3.2957e-02 3.2954e-02 3.2950e-02 3.2948e-02 3.2948e-02 3.2951e-02
+      theta 0.7854: 3.2955e-02 3.2958e-02 3.2958e-02 3.2954e-02 3.2950e-02 3.2947e-02 3.2947e-02 3.2951e-02
+      theta 1.0472: 3.2955e-02 3.2957e-02 3.2957e-02 3.2954e-02 3.2950e-02 3.2947e-02 3.2948e-02 3.2951e-02
+      theta 1.3090: 3.2953e-02 3.2955e-02 3.2955e-02 3.2953e-02 3.2950e-02 3.2949e-02 3.2949e-02 3.2951e-02
+      theta 1.5708: 3.2952e-02 3.2952e-02 3.2952e-02 3.2952e-02 3.2952e-02 3.2952e-02 3.2952e-02 3.2952e-02
+    ### il residuo da 3.2947e-02 a 3.2958e-02 (max - min 1.17e-05 contro 10 s0 = 1.39e-16): DIPENDE DALLA SCELTA; il minimo a theta 0.7854 phi 3.9270 (residuo 3.2947e-02, mu +4.161868; q1 da solo 3.2953e-02)
+  DEVE PASSARE: e0, q1 e q2 ortonormali entro 1e-12                                                              PASSA   2.2e-16
+  --- e0 (eps 0): E0 +3.141593
+    q1: sigma_z +1.00000, l'elicita' media -0.00000, le 6 estremita' 0.1667 0.1667 0.1667 0.1667 0.1667 0.1667
+    q2: sigma_z -1.00000, l'elicita' media -0.00000, le 6 estremita' 0.1667 0.1667 0.1667 0.1667 0.1667 0.1667
+    i versori n_e delle 6 estremita' del nodo 0: (+1.000 +0.000 +0.000)  (-1.000 -0.000 -0.000)  (-0.500 +0.866 +0.000)  (+0.500 -0.866 -0.000)  (+0.500 +0.866 +0.000)  (-0.500 -0.866 -0.000)
+    il controllo (q1 per 8 fasi globali): il residuo 3.3028459981e-02 .. 3.3028459981e-02, lo scarto s0 1.39e-17
+  DEVE PASSARE: e0, ogni q(theta, phi) e' autovettore di A(Gamma) entro 1e-10                                    PASSA   9.7e-16
+    la griglia (49 punti; a theta 0 uno solo): il residuo per theta (righe) e phi (colonne):
+      theta 0.0000: 3.3028e-02
+      theta 0.2618: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+      theta 0.5236: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+      theta 0.7854: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+      theta 1.0472: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+      theta 1.3090: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+      theta 1.5708: 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02 3.3028e-02
+    ### il residuo da 3.3028e-02 a 3.3028e-02 (max - min 4.16e-17 contro 10 s0 = 1.39e-16): ### NON DIPENDE: LA ROTAZIONE DENTRO LA COPPIA E' UNA DIREZIONE LIBERA; il minimo a theta 1.5708 phi 2.3562 (residuo 3.3028e-02, mu +4.125669; q1 da solo 3.3028e-02)
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

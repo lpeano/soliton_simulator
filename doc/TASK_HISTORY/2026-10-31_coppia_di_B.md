@@ -53,3 +53,7 @@ La domanda vera e' **se il cuore regge** sul punto dove la regola chiude le usci
 4. `--cerca e05`, `--cerca e0` *(se dipende)*, ciascuno committato appena trovato.
 5. `--lunga B` a pezzi, poi `--lunga AK` a pezzi, ogni pezzo committato.
 6. `--referto`; `doc/CHIUDERE_LE_USCITE.md` *(l'esito)*; `RELAZIONE`; `MAPPA` *(la riga `d`)*; la sezione `6` qui.
+
+### Annotazione *(dopo la prova a secco, prima della griglia)*
+
+- ### **La premessa «la distribuzione sulle `6` estremita' del nodo» era sbagliata nel dettaglio:** le `6` righe del blocco sono la CELLA *(3 archi, due estremita' ciascuno; `inc.nodo[:6]` `0, 81, 0, 1, 0, 82`)*. **Per uno stato di `Gamma` il peso e' lo stesso** *(ogni nodo riceve le estremita' pari della sua cella e le dispari delle vicine)*: lo script lo dice e lo cabla *(due assert)*.
