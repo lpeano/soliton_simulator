@@ -206,16 +206,16 @@ def referto():
               % (int(((ne + nu)[sal] > 0).sum()), int(sal.sum()), dict(zip(*np.unique((ne + nu)[sal], return_counts=True))), float(np.median(fin[sal] / df[sal])),
                  float(np.median(np.abs(df[sal] - fin[sal]))), med))
         print("  fuori dai salti: con nodi che attraversano %d su %d" % (int(((ne + nu)[~sal] > 0).sum()), int((~sal).sum())))
-    print("  gli istanti del guardiano (il passo che finisce a t):")
+    # ### il guardiano etichetta un passo col campione d'INIZIO: a ogni istante si stampano TUTTI E DUE i passi (96ddfa9c: prima solo quello che finisce a t)
+    print("  gli istanti del guardiano: il passo che FINISCE a t (fine) e quello che COMINCIA a t (inizio):")
     idx = {int(tt): i for i, tt in enumerate(t[1:])}
-    for ti in ISTANTI:
-        i = idx.get(ti)
+    for ti, i, qu in [(ti, idx.get(ti + k), qu) for ti in ISTANTI for k, qu in ((0, "fine  "), (OGNI, "inizio"))]:
         if i is None:
-            print("    t %d: nessun campione" % ti)
+            print("    t %d %s: nessun campione" % (ti, qu))
             continue
         p = cc[i + 1]
-        print("    t %6d: Delta f_win %+.5f (salto: %s), il termine della finestra %+.5f, il resto %+.2e; entrati %d usciti %d %s; Delta w %+.2e; Delta f_liscia %+.2e; il baricentro si sposta di %.2e"
-              % (ti, df[i], "si" if sal[i] else "no", fin[i], df[i] - fin[i], ne[i], nu[i],
+        print("    t %6d %s: Delta f_win %+.5f (salto: %s), il termine della finestra %+.5f, il resto %+.2e; entrati %d usciti %d %s; Delta w %+.2e; Delta f_liscia %+.2e; il baricentro si sposta di %.2e"
+              % (ti, qu, df[i], "si" if sal[i] else "no", fin[i], df[i] - fin[i], ne[i], nu[i],
                  ("(d - w_in prima/dopo: %s)" % " ".join("%+.4f/%+.4f" % (q[1], q[2]) for q in p.get("attr", [])[:8])) if p.get("attr") else "", dw[i], dfl[i],
                  math.hypot(x[i + 1] - x[i], y[i + 1] - y[i])))
     print("-" * 130)
