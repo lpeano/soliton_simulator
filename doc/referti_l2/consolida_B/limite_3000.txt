@@ -1,0 +1,8 @@
+[TIMBRO] _consolida_B.py  sha1-BYTE efb66942  committato e pulito
+### (1) IL LIMITE SUPERIORE DEL TASSO dalla corsa di B a Gamma di a8e0e43b (eps 0.5, 20000 tick; la partenza il punto 2 (cerca_e05.json, NON FERMO), residuo 6.806e-05)
+  ### la frazione scende perche' D cresce lineare in B: il limite sull'AMPIEZZA (i tassi noti sono dell'ampiezza: t_vita = ln(1e-2/seme)/gamma); (lett) e' la formula alla lettera
+  1000 campioni, tau 3.0 .. 3000.0
+    piatte la frazione di |D|^2: 5.751e-03 (tau 3) .. il massimo 5.751e-03 (tau 3) .. 3.554e-06; l'ampiezza sqrt(f) nD: 8.667e-05 .. il minimo 8.667e-05 (tau 3) .. il massimo 3.847e-04 .. 3.367e-04
+    piatte i limiti: (lett) ln(f1/f0)/T -2.466e-03; (a0) ln(a1/a0)/T +4.529e-04; (amin) ln(a1/a_min)/(T - tau_min) +4.529e-04; (pend) ln a sulla seconda meta' +5.335e-05; ### IL LIMITE 4.529e-04 -- la mista (modo_di_R.txt) 0.0079: 17.4 volte sotto; il modo lento (modo_lento.txt) 0.0331: 73.1 volte sotto; la coppia di piatte (decadimento_in_coppia.txt) 0.139: 306.9 volte sotto
+    A      la frazione di |D|^2: 6.136e-03 (tau 3) .. il massimo 6.136e-03 (tau 3) .. 3.059e-06; l'ampiezza sqrt(f) nD: 8.952e-05 .. il minimo 8.952e-05 (tau 3) .. il massimo 3.561e-04 .. 3.124e-04
+    A      i limiti: (lett) ln(f1/f0)/T -2.537e-03; (a0) ln(a1/a0)/T +4.170e-04; (amin) ln(a1/a_min)/(T - tau_min) +4.170e-04; (pend) ln a sulla seconda meta' +5.619e-05; ### IL LIMITE 4.170e-04 -- la mista (modo_di_R.txt) 0.0079: 18.9 volte sotto; il modo lento (modo_lento.txt) 0.0331: 79.4 volte sotto; la coppia di piatte (decadimento_in_coppia.txt) 0.139: 333.3 volte sotto
