@@ -22225,3 +22225,15 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **la finestra liscia non ha salti** *(`0` su `13333`; il massimo `|Delta f_liscia|` `2.3e-4` contro `2.8e-3` della netta)*.
 
 ### ⚠ **IL DIFETTO:** la sezione «gli istanti del guardiano» del referto stampa **il passo che FINISCE a `t`**, e a quei passi dice «salto: no». **Ma i salti stanno al passo che COMINCIA a `t`:** ognuno dei sei istanti *(`21230`, `31400`, `59400`, `60130`, `76580`, `96260`)* e' a `10` tick da un salto *(`21240`, `31410`, `59410`, `60140`, `76590`, `96270`, le fini dei passi; dalla lista dei `68`, con lo script dello scratchpad sui `rig_*.jsonl`)*. ### **Il guardiano etichettava un passo col campione d'inizio, lo script con quello di fine: lo script stampava i passi sbagliati.** La correzione e' **un commit a se'** *(stampare tutti e due i passi)*, poi il referto si rigira *(nessuna corsa: legge i jsonl)*.
+
+## 2026-11-01 — I SALTI NEL CUORE (Luca 19:08): L'ESITO -- (j1), LA FINESTRA NETTA SALTA, LA FISICA NO
+
+
+**Il referto rigirato** *(`csv/_salti_nel_cuore.py --referto`, sha1-BYTE `85d43f65`, dopo la correzione `155e39fd`)*: `3/3`.
+
+- **Ai sei istanti del guardiano il passo che COMINCIA a `t` e' un salto** *(`+0.00275`, `+0.00277`, `-0.00274`, `+0.00278`, `+0.00277`, `-0.00277`)*, e ogni volta **entra o esce UN nodo** con `d - w_in` di `~1e-4` prima e dopo; il termine della finestra ne spiega `0.0026`, il resto e' il passo ordinario *(`~1.5e-4`)*.
+- **In tutta la corsa:** `68` salti, un nodo che attraversa a ogni salto *(`68` su `68`)*, nessuno fuori *(`0` su `13265`)*; **la finestra liscia: `0` salti.**
+- **L'oscillazione lenta:** periodo `307.7` unita' di tempo, `(max-min)/2` `0.006` su `f_liscia`; **correlazione con `w` `-0.998`, col baricentro `-0.05`:** ### **un respiro della larghezza, non il baricentro sopra i nodi.**
+- **Il «salto di `w`» di `~0.001`** non e' un salto: `|Delta w|` ai salti `8.2e-4` *(mediana)*, fuori `7.2e-4` — e' il respiro.
+
+### ⇒ **(j1).** Un fatto nuovo in `doc/FATTI_dal_codice.md` *(`_congelato_lungo.punto`: la netta ha gradini di un nodo, sta sopra la liscia di `0.0039`; un cuore campionato fitto si misura con la liscia)*. La riga `d` della `MAPPA`; la sezione `6` del task history. ### **Sulla lettura (k1) di `751bca7f`:** i gradini sono `~0.0027` e si contano `34` in su e `34` in giu'; la liscia sta sotto la netta di `0.0022 .. 0.0051`. **Non ho rifatto le pendenze per finestra con la liscia:** lo dichiaro, non lo deduco.

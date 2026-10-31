@@ -812,6 +812,13 @@
 - **Non tocca chi prende lo stato come ARGOMENTO:** `_modo_al_variare_di_s.tick(z, phi0, psi, ...)` da' lo stesso residuo prima e dopo, al bit.
 - ### **La regola: misurare lo stato PRIMA di `matrice`, o in una scena sua** *(come fanno `_coppia_di_B.lunga` e `_consolida_B.corsa`: `DC.forma` prima, poi `matrice`, poi lo stato caricato)*.
 
+## `_congelato_lungo.punto` *(`csv/`, il cuore `f_win`)* -- **LA FINESTRA NETTA SALTA DI UN NODO** *(2026-11-01)*
+
+### ⚠ **`f_win = sum(rho[d <= w_in])/M` salta di `~0.0027` (`0.00237 .. 0.00281`) ogni volta che UN nodo attraversa il bordo `w_in`** *(`csv/_salti_nel_cuore.py --referto`, sha1-BYTE `85d43f65`, sulla corsa lunga di `B` a `Gamma` rigenerata al bit)*.
+- **`68` salti su `13333` passi** *(oltre `10` volte la mediana `1.0e-4`)*; **ogni salto ha esattamente un nodo che attraversa, e nessun altro passo ne ha.** Il peso di un nodo al bordo e' il salto.
+- **Con la finestra LISCIA** *(peso lineare da `1` a `0` su una lunghezza d'arco attorno a `w_in`)* **i salti spariscono** *(`0`; il massimo passo `2.3e-4`)*; ### **la netta sta sopra la liscia di `0.0039` in media** *(`0.0022 .. 0.0051`)*: **un confronto fra cuori va fatto con la STESSA finestra.**
+- ### **La regola: un cuore campionato fitto si misura con la finestra liscia** *(o si legge la netta sapendo che ha gradini di un nodo)*; **una pendenza da una netta corta puo' essere un gradino.**
+
 ## FATTI CHE NON RIGUARDANO IL SIMULATORE
 
 - **IL 75 % DELLE VOCI DEI REGISTRI NON PORTA IL BLOB DEL CODICE CHE LE HA PRODOTTE — MISURATO**

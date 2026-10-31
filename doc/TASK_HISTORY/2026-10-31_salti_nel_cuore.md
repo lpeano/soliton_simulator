@@ -40,3 +40,16 @@
 2. `csv/_salti_nel_cuore.py` e la riga nell'inventario, committati prima di girare.
 3. `--rigenera` a pezzi *(`17`)*, ogni pezzo committato; **se un DEVE del bit fallisce: FERMO.**
 4. `--referto`; `RELAZIONE`; `MAPPA` *(la riga `d`)*; `doc/FATTI_dal_codice.md` *(se la finestra netta salta: un fatto su `_congelato_lungo.punto`)*; la sezione `6` qui.
+
+## 6. L'ESITO *(2026-11-01; `doc/referti_l2/salti_nel_cuore.txt`, `3/3`)*
+
+- **(0) la rigenerazione:** `17` pezzi su `17` al bit *(lo sha1 della fine = l'originale; `0` campioni diversi su `13334`)*.
+- **(a) il baricentro:** si muove di `2.4e-4` per campione *(mediana)*, entro `0.047` dalla sua media.
+- **(b) la netta:** `68` salti *(`34` su, `34` giu')*, ampiezza `0.00237 .. 0.00281`; **un nodo che attraversa il bordo a ogni salto** *(`68` su `68`)*, **nessuno fuori** *(`0` su `13265`)*. Ai sei istanti del guardiano **il passo che COMINCIA a `t`** e' un salto *(entra o esce un nodo, con `d - w_in` di `~1e-4` prima e dopo)*.
+- **(c) la liscia:** `0` salti; il massimo passo `2.3e-4` contro `2.8e-3` della netta.
+- **(d) l'oscillazione lenta:** su `f_liscia` il periodo `307.7` unita' di tempo, `(max-min)/2` `0.006`, la deviazione standard `0.0035`; **la correlazione con `w` `-0.998`, col baricentro `-0.05`.** ### **E' un respiro della larghezza del solitone, non il baricentro che passa sopra i nodi.**
+- **Il salto di `w` del guardiano** *(`~0.001`)* **non e' un salto:** `|Delta w|` ai salti ha la mediana `8.2e-4`, fuori `7.2e-4`; ### **e' il respiro, che a quella fase muove `w` di `~1e-3` per passo.**
+
+### ⇒ **(j1).** **La finestra netta salta; la fisica non salta.**
+
+### ⚠ **Un mio errore, corretto:** il primo referto *(`96ddfa9c`)* stampava agli istanti del guardiano **il passo che FINISCE a `t`**, e diceva «salto: no». Il guardiano etichettava un passo col campione d'**inizio**. Corretto in `155e39fd` *(tutti e due i passi)*, referto rigirato *(nessuna corsa)*.

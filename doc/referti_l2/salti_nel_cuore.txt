@@ -1,4 +1,4 @@
-[TIMBRO] _salti_nel_cuore.py  sha1-BYTE 92d2159b  committato e pulito
+[TIMBRO] _salti_nel_cuore.py  sha1-BYTE 85d43f65  committato e pulito
 ==================================================================================================================================
 I SALTI NEL CUORE (Luca 19:08): la corsa lunga di B a Gamma (eps 0.5, N 1e+06, L 81, s 0.15), RIGENERATA; FATTORE 10 ISTANTI (21230, 31400, 59400, 60130, 76580, 96260) MAX_ATTR 24 OGNI 10
   LE LETTURE DI LUCA, SCRITTE PRIMA: (j1) i salti sono della finestra (spariscono con la liscia); (j2) restano: un fatto fisico; (j3) altro
@@ -17,13 +17,19 @@ I SALTI NEL CUORE (Luca 19:08): la corsa lunga di B a Gamma (eps 0.5, N 1e+06, L
   l'ampiezza dei salti: 0.00237 .. 0.00281 (la mediana 0.00265); in su 34, in giu' 34; |Delta w| ai salti: la mediana 8.18e-04 (fuori dai salti 7.24e-04)
   ai salti: con nodi che attraversano il bordo 68 su 68; quanti nodi: {np.int64(1): np.int64(68)}; il termine della finestra / Delta f: la mediana 0.9712; |Delta f - il termine| la mediana 1.17e-04 (contro 1.02e-04 di |Delta f| fuori dai salti)
   fuori dai salti: con nodi che attraversano 0 su 13265
-  gli istanti del guardiano (il passo che finisce a t):
-    t  21230: Delta f_win +0.00011 (salto: no), il termine della finestra +0.00000, il resto +1.13e-04; entrati 0 usciti 0 ; Delta w -9.89e-04; Delta f_liscia +1.18e-04; il baricentro si sposta di 2.79e-04
-    t  31400: Delta f_win +0.00019 (salto: no), il termine della finestra +0.00000, il resto +1.90e-04; entrati 0 usciti 0 ; Delta w -9.97e-04; Delta f_liscia +1.83e-04; il baricentro si sposta di 3.23e-04
-    t  59400: Delta f_win -0.00017 (salto: no), il termine della finestra +0.00000, il resto -1.68e-04; entrati 0 usciti 0 ; Delta w +1.04e-03; Delta f_liscia -1.70e-04; il baricentro si sposta di 2.77e-04
-    t  60130: Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.61e-04; entrati 0 usciti 0 ; Delta w -9.23e-04; Delta f_liscia +1.58e-04; il baricentro si sposta di 1.36e-04
-    t  76580: Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.60e-04; entrati 0 usciti 0 ; Delta w -9.46e-04; Delta f_liscia +1.70e-04; il baricentro si sposta di 2.19e-04
-    t  96260: Delta f_win -0.00019 (salto: no), il termine della finestra +0.00000, il resto -1.91e-04; entrati 0 usciti 0 ; Delta w +1.05e-03; Delta f_liscia -1.86e-04; il baricentro si sposta di 2.05e-04
+  gli istanti del guardiano: il passo che FINISCE a t (fine) e quello che COMINCIA a t (inizio):
+    t  21230 fine  : Delta f_win +0.00011 (salto: no), il termine della finestra +0.00000, il resto +1.13e-04; entrati 0 usciti 0 ; Delta w -9.89e-04; Delta f_liscia +1.18e-04; il baricentro si sposta di 2.79e-04
+    t  21230 inizio: Delta f_win +0.00275 (salto: si), il termine della finestra +0.00262, il resto +1.31e-04; entrati 1 usciti 0 (d - w_in prima/dopo: +0.0000/-0.0001); Delta w -9.77e-04; Delta f_liscia +1.35e-04; il baricentro si sposta di 2.79e-04
+    t  31400 fine  : Delta f_win +0.00019 (salto: no), il termine della finestra +0.00000, il resto +1.90e-04; entrati 0 usciti 0 ; Delta w -9.97e-04; Delta f_liscia +1.83e-04; il baricentro si sposta di 3.23e-04
+    t  31400 inizio: Delta f_win +0.00277 (salto: si), il termine della finestra +0.00257, il resto +1.99e-04; entrati 1 usciti 0 (d - w_in prima/dopo: +0.0001/-0.0002); Delta w -9.95e-04; Delta f_liscia +1.97e-04; il baricentro si sposta di 3.23e-04
+    t  59400 fine  : Delta f_win -0.00017 (salto: no), il termine della finestra +0.00000, il resto -1.68e-04; entrati 0 usciti 0 ; Delta w +1.04e-03; Delta f_liscia -1.70e-04; il baricentro si sposta di 2.77e-04
+    t  59400 inizio: Delta f_win -0.00274 (salto: si), il termine della finestra -0.00258, il resto -1.65e-04; entrati 0 usciti 1 (d - w_in prima/dopo: -0.0001/+0.0000); Delta w +1.03e-03; Delta f_liscia -1.63e-04; il baricentro si sposta di 2.74e-04
+    t  60130 fine  : Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.61e-04; entrati 0 usciti 0 ; Delta w -9.23e-04; Delta f_liscia +1.58e-04; il baricentro si sposta di 1.36e-04
+    t  60130 inizio: Delta f_win +0.00278 (salto: si), il termine della finestra +0.00261, il resto +1.68e-04; entrati 1 usciti 0 (d - w_in prima/dopo: +0.0001/-0.0000); Delta w -9.40e-04; Delta f_liscia +1.69e-04; il baricentro si sposta di 1.36e-04
+    t  76580 fine  : Delta f_win +0.00016 (salto: no), il termine della finestra +0.00000, il resto +1.60e-04; entrati 0 usciti 0 ; Delta w -9.46e-04; Delta f_liscia +1.70e-04; il baricentro si sposta di 2.19e-04
+    t  76580 inizio: Delta f_win +0.00277 (salto: si), il termine della finestra +0.00262, il resto +1.47e-04; entrati 1 usciti 0 (d - w_in prima/dopo: +0.0001/-0.0000); Delta w -9.61e-04; Delta f_liscia +1.58e-04; il baricentro si sposta di 2.18e-04
+    t  96260 fine  : Delta f_win -0.00019 (salto: no), il termine della finestra +0.00000, il resto -1.91e-04; entrati 0 usciti 0 ; Delta w +1.05e-03; Delta f_liscia -1.86e-04; il baricentro si sposta di 2.05e-04
+    t  96260 inizio: Delta f_win -0.00277 (salto: si), il termine della finestra -0.00258, il resto -1.85e-04; entrati 0 usciti 1 (d - w_in prima/dopo: -0.0000/+0.0001); Delta w +1.06e-03; Delta f_liscia -1.80e-04; il baricentro si sposta di 2.01e-04
 ----------------------------------------------------------------------------------------------------------------------------------
 ### (c) LA FINESTRA LISCIA
   la mediana di |Delta f_liscia| 1.022e-04; i salti della liscia (oltre 10 volte la SUA mediana): 0 su 13333 passi; il massimo |Delta f_liscia| 2.335e-04 (contro il massimo |Delta f_win| 2.814e-03)
