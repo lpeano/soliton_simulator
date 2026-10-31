@@ -4,6 +4,7 @@ r"""**IL CONTROLLO DI `matrice` SUI REFERTI GIA' FATTI** *(UNA PROVA E UNA CORRE
 ### **l'elenco AST di chi chiama `_dove_va_la_materia.matrice` (o `un_tick`, o una funzione che le chiama), con le righe che leggono lo stato DOPO la chiamata** *(la classe la do a mano, nel referto)*.
 
     python csv/_controllo_matrice.py --elenco > doc/referti_l2/controllo_matrice_elenco.txt
+    python csv/_controllo_matrice.py --stato > doc/referti_l2/controllo_matrice_stato.txt
 """
 import ast
 import glob
@@ -13,6 +14,10 @@ import sys
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 RADICE = os.path.dirname(_QUI)
+_PO = os.path.join(RADICE, "primo_ordine")
+for _p in (_QUI, _PO, os.path.join(_PO, "leggi")):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 
 SRC = "_dove_va_la_materia"
 RADICI = ((SRC, "matrice"), (SRC, "un_tick"))   # ### un_tick: la causa; matrice la chiama (un'estensione dichiarata nel task history)
@@ -109,11 +114,132 @@ def elenco():
     print("=" * 130)
 
 
+# ====================================================================== LO STATO: che cosa lascia matrice, e chi lo legge
+OK = [0, 0]
+FALLITE = []
+
+
+def esito(che, passa, nota=""):
+    OK[1] += 1
+    OK[0] += 1 if passa else 0
+    if not passa:
+        FALLITE.append(che)
+    print("  %-110s %s   %s" % (che[:110], "PASSA" if passa else "### FALLISCE", nota))
+    sys.stdout.flush()
+    return passa
+
+
+def istantanea(z):
+    """### **ogni chiave di `z["st"]`**: gli array copiati, il resto per `repr`."""
+    import numpy as np
+    return {k: (np.array(v, copy=True) if isinstance(v, np.ndarray) else repr(v)) for k, v in z["st"].items()}
+
+
+def confronta(a, b):
+    """### **`{chiave: (uguale al bit, max |a - b|)}`**."""
+    import numpy as np
+    out = {}
+    for k in sorted(set(a) | set(b)):
+        x, y = a.get(k), b.get(k)
+        if isinstance(x, np.ndarray) and isinstance(y, np.ndarray) and x.shape == y.shape:
+            out[k] = (x.tobytes() == y.tobytes(), float(np.max(np.abs(x - y))) if x.size else 0.0)
+        else:
+            out[k] = (x == y if not isinstance(x, np.ndarray) and not isinstance(y, np.ndarray) else False, float("nan"))
+    return out
+
+
+def letture(z, phi0, rec, p, w_in):
+    """### **i lettori dei siti dell'elenco, dopo aver ricaricato `p`:** `DC.forma`, `EL.densita`, `CL.punto`, `SL.anelli`, e lo sha1 dopo UN tick (`CL.avanza`)."""
+    import _consolida_B as CO
+    import _congelato_lungo as CL
+    import _deriva_congelato as DC
+    import _energia_del_legame as EL
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _stato_fermo as SFM
+    import _triangoli_bassa_energia as BE
+    LP = CO.CB.LP
+    w0 = rec["larghezza"]
+    z["st"]["psi_h"][...] = p
+    out = {}
+    with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+        f = DC.forma(z, w0)
+        out["DC.forma (w, fr)"] = (f[0], f[1])
+        rho, lam = EL.densita(z["inc"], z["st"])
+        out["EL.densita (rho, lam)"] = (SFM.sha(rho), SFM.sha(lam))
+        pt = CL.punto(z, 0, w_in, w0)
+        out["CL.punto (w, f_win, f_3w0, picco, M)"] = tuple(pt[k] for k in ("w", "f_win", "f_3w0", "picco", "M"))
+    ra, am = LP.SL.anelli(z, p, LP.FORMA)
+    out["SL.anelli"] = (SFM.sha(ra), SFM.sha(am))
+    with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+        CL.avanza(z, phi0, 1)
+    out["un tick (CL.avanza): lo sha1 di psi_h"] = SFM.sha(z["st"]["psi_h"])
+    return out
+
+
+def stato():
+    """### **(E1)** che chiavi cambia `matrice`; **(E2)** quali restano diverse dopo aver ricaricato `psi_h`; **(E3)** i lettori, con e senza `matrice` prima; **(E4)** `MB.misure` (il controllo positivo); **(E5)** un tick."""
+    import _consolida_B as CO
+    import _deriva_congelato as DC
+    import _dove_va_la_materia as DV
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    CB = CO.CB
+    MB = CB.MB
+    print("=" * 130)
+    print("IL CONTROLLO DI matrice (Luca 21:03): LO STATO -- la scena di _massimo_di_B.scena (N %.0e, L %d, eps %g), lo stato ricaricato = la p della scena (una copia)" % (CB.N, CB.L, CB.EPS))
+    print("=" * 130)
+    R = {}
+    for caso in ("senza", "con"):
+        with MB.scena(CB.N, CB.L, CB.EPS) as (rec, z, phi0, p):
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                w_in = DC.forma(z, rec["larghezza"])[0]
+            s0 = istantanea(z)
+            if caso == "con":
+                DV.matrice(z, phi0, DV.AMP)
+            s1 = istantanea(z)
+            z["st"]["psi_h"][...] = p
+            s2 = istantanea(z)
+            m = MB.misure(z, phi0, rec, p) if caso == "senza" else None
+            if caso == "con":
+                z["st"]["psi_h"][...] = s1["psi_h"]   # ### lo stato come lo lascia matrice, per (E4)
+                m = MB.misure(z, phi0, rec, p)
+            R[caso] = {"s0": s0, "s1": s1, "s2": s2, "w_in": w_in, "misure": m, "letture": letture(z, phi0, rec, p, w_in)}
+    print("### (0) IL CASO NULLO: due scene nuove sono identiche")
+    c00 = confronta(R["senza"]["s0"], R["con"]["s0"])
+    esito("DEVE PASSARE: lo stato iniziale delle due scene uguale al bit, chiave per chiave", all(v[0] for v in c00.values()), "%d chiavi: %s" % (len(c00), " ".join(sorted(c00))))
+    esito("DEVE PASSARE: w_in delle due scene uguale al bit", R["senza"]["w_in"] == R["con"]["w_in"], "%.12f" % R["senza"]["w_in"])
+    print("### (E1) CHE COSA CAMBIA matrice (lo stato prima e dopo, nella scena 'con')")
+    c01 = confronta(R["con"]["s0"], R["con"]["s1"])
+    for k, (ug, d) in c01.items():
+        print("  %-12s %s   max |prima - dopo| %.3e" % (k, "uguale al bit" if ug else "### DIVERSO", d))
+    esito("DEVE PASSARE: il controllo positivo -- matrice cambia lo stato (psi_h)", not c01["psi_h"][0], "%.3e" % c01["psi_h"][1])
+    print("### (E2) DOPO AVER RICARICATO psi_h: che cosa resta diverso dallo stato iniziale")
+    c02 = confronta(R["con"]["s0"], R["con"]["s2"])
+    for k, (ug, d) in c02.items():
+        print("  %-12s %s   max |iniziale - ricaricato| %.3e" % (k, "uguale al bit" if ug else "### DIVERSO", d))
+    print("### (E3) I LETTORI DEI SITI DELL'ELENCO, dopo aver ricaricato lo stato: senza matrice prima / con matrice prima")
+    for k in R["senza"]["letture"]:
+        a, b = R["senza"]["letture"][k], R["con"]["letture"][k]
+        print("  %-42s %s   %s | %s" % (k, "uguale al bit" if a == b else "### DIVERSO", str(a)[:80], str(b)[:80]))
+    tutti = all(R["senza"]["letture"][k] == R["con"]["letture"][k] for k in R["senza"]["letture"])
+    print("  ### IL CRITERIO DELLA CLASSE: i lettori dopo una ricarica sono ciechi a matrice: %s" % ("SI" if tutti else "NO"))
+    print("### (E4) IL CONTROLLO POSITIVO DEI LETTORI: _massimo_di_B.misure (w_in da DC.forma PRIMA di caricare psi) sullo stato lasciato da matrice")
+    ms, mc = R["senza"]["misure"], R["con"]["misure"]
+    print("  senza: w_in %.6f f_win %.5f w %.5f | con: w_in %.6f f_win %.5f w %.5f" % (ms["w_in"], ms["f_win"], ms["w"], mc["w_in"], mc["f_win"], mc["w"]))
+    esito("DEVE PASSARE: il controllo positivo -- misure dopo matrice (senza ricarica) da' un altro w_in (lo strumento vede l'effetto)", ms["w_in"] != mc["w_in"], "%.6f contro %.6f" % (ms["w_in"], mc["w_in"]))
+    print("=" * 130)
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
     if "--elenco" in argv:
         elenco()
+    elif "--stato" in argv:
+        stato()
     else:
         print(__doc__)
 

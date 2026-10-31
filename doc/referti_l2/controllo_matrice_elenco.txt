@@ -1,0 +1,268 @@
+[TIMBRO] _controllo_matrice.py  sha1-BYTE d7462e25  committato e pulito
+<unknown>:2: SyntaxWarning: invalid escape sequence '\|'
+==================================================================================================================================
+IL CONTROLLO DI matrice (Luca 21:03): L'ELENCO -- chi chiama _dove_va_la_materia.matrice o _dove_va_la_materia.un_tick, anche transitivamente; le righe DOPO la chiamata che leggono lo stato
+  le letture cercate (la regex): \[\s*"st"\s*\]|\.st\b|\bst\s*\[|\bforma\s*\(|\bpunto\s*\(|\banelli\s*\(|\bdensita\s*\(|\bmisure\s*\(|baricentro|\bcarica\w*\s*\(|\bpartenza\w*\s*\(
+  ### la riga si stampa, la classe (PULITO / SOSPETTO) la do a mano nel referto
+==================================================================================================================================
+### LE CHIAMATE DIRETTE (a matrice o un_tick)
+  39 chiamate in 22 file
+  _anello_di_risonanza.py:132  terzo -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:99  pezzi -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _chiudere_le_uscite.py:244  cariche -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:183  corsa -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 11)
+      191: z["st"]["psi_h"][...] = dati["psi_h"]
+      197: z["st"]["psi_h"][...] = rip0[0]
+      201: z["st"]["psi_h"][...] = psi0
+      202: with SF.forma(VC.FORMA), conv0(DC):
+      203: p = CL.punto(z, 0, w_in, w0)
+      207: sha_rip = SFM.sha(z["st"]["psi_h"])
+      216: with SF.forma(VC.FORMA), conv0(DC):
+      220: p = CL.punto(z, t, w_in, w0)
+      224: D = np.exp(1j * mu * S * t) * z["st"]["psi_h"] - psi0
+      232: sha_fine = SFM.sha(z["st"]["psi_h"])
+      234: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _consolida_B.py:283  newton_bordo -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _controllo_disco_pieno.py:133  lunga -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 7)
+      136: z["st"]["psi_h"][...] = psi0
+      137: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      138: p = CL.punto(z, 0, w_in, w0)
+      142: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      146: q = CL.punto(z, t, w_in, w0)
+      150: D = np.exp(1j * mu * LP.S * t) * z["st"]["psi_h"] - psi0
+      155: righe[t0] = json.loads(json.dumps({"punti": punti, "D": dd, "sha_fine": SFM.sha(z["st"]["psi_h"]), "w0": w0, "w_in": w_in}, sort_keys=True))
+  _coppia_di_B.py:66  coppia -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _coppia_di_B.py:226  lunga -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 10)
+      235: z["st"]["psi_h"][...] = dati["psi_h"]
+      237: assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
+      240: z["st"]["psi_h"][...] = psi0
+      241: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      242: p = CL.punto(z, 0, w_in, w0)
+      251: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      255: p = CL.punto(z, t, w_in, w0)
+      259: D = np.exp(1j * mu * S * t) * z["st"]["psi_h"] - psi0
+      267: sha_fine = SFM.sha(z["st"]["psi_h"])
+      269: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _decadimento_in_coppia.py:96  filtro_una -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:141  cerca -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:259  terzo -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _dove_va_la_materia.py:203  referto -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _dove_va_la_materia.py:208  referto -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _dove_va_la_materia.py:229  referto -> _dove_va_la_materia.un_tick   (letture dopo, nella stessa funzione: 0)
+  _filtro_bande_piatte.py:126  corsa -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _larghezza_risonanza.py:135  cerca -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _larghezza_risonanza.py:292  referto -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:167  previsioni -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:229  newton -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:353  breve -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:417  lunga -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 13)
+      425: z["st"]["psi_h"][...] = dati["psi_h"]
+      427: assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
+      431: z["st"]["psi_h"][...] = psi0
+      434: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      436: assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato ricostruito a %d NON e' la fine del pezzo %05d" % (prec["t1"], t0)
+      440: z["st"]["psi_h"][...] = psi0
+      441: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      442: p = CL.punto(z, 0, w_in, w0)
+      450: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      454: p = CL.punto(z, t, w_in, w0)
+      458: D = np.exp(1j * mu * S * t) * z["st"]["psi_h"] - psi0
+      463: riga = {"nome": nome, "r": r, "g": g, "N": N, "t0": t0, "t1": t1, "s": S, "w0": w0, "w_in": w_in, "punti": punti, "D": dd, "sha_fine": SFM.sha(z["st"]
+      466: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _massimo_di_B.py:89  bloch_B -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:261  breve -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:320  lunga -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 10)
+      329: z["st"]["psi_h"][...] = dati["psi_h"]
+      331: assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
+      334: z["st"]["psi_h"][...] = psi0
+      335: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      336: p = CL.punto(z, 0, w_in, w0)
+      345: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      349: p = CL.punto(z, t, w_in, w0)
+      353: D = np.exp(1j * mu * S * t) * z["st"]["psi_h"] - psi0
+      361: sha_fine = SFM.sha(z["st"]["psi_h"])
+      363: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _modo_al_variare_di_s.py:92  cerca -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _modo_al_variare_di_s.py:234  esame -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _modo_dalla_corsa.py:145  referto -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 1)
+      148: forma(mp, Z, D[t], "t %d" % t)
+  _modo_di_R.py:139  corsa -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 8)
+      143: z["st"]["psi_h"][...] = psi0
+      145: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      149: LP.esito("DEVE PASSARE: lo stato al tick %d = sha_fine del pezzo committato (AL BIT)" % t, SFM.sha(z["st"]["psi_h"]) == fine[t], fine[t][:8])
+      151: Ds[t] = np.exp(1j * mu * LP.S * t) * z["st"]["psi_h"] - psi0
+      165: def anelli(x):
+      211: print("-- (b), (c) dove stanno: i profili per anelli (r 0 .. %d) e i raggi medi" % LP.ML.R_PROFILO)
+      212: p0 = anelli(psi0)
+      223: pa = anelli(reale(Ds[t], (gr,)))
+  _modo_instabile.py:165  referto -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 3)
+      212: mp.z["st"]["psi_h"][...] = psi
+      213: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      214: pt = CL.punto(mp.z, T_CONTROLLO, w_in, w0)
+  _modo_lento.py:225  modo -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 4)
+      226: z["st"]["psi_h"][...] = psi0
+      233: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      237: p = CL.punto(z, t, w_in, w0)
+      241: psi = z["st"]["psi_h"]
+  _modo_lento.py:282  uno -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 3)
+      292: mp.z["st"]["psi_h"][...] = psi
+      293: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      294: pt = CL.punto(mp.z, t, w_in, w0)
+  _salti_nel_cuore.py:115  rigenera -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 4)
+      118: z["st"]["psi_h"][...] = st
+      120: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      141: sha_fine = SFM.sha(z["st"]["psi_h"])
+      143: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _scatola.py:85  spettro -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:217  pezzo -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 10)
+      226: z["st"]["psi_h"][...] = dati["psi_h"]
+      228: assert prec["sha_fine"] == SFM.sha(z["st"]["psi_h"]), "lo stato salvato NON e' quello della fine del pezzo prima"
+      233: z["st"]["psi_h"][...] = psi0
+      234: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      235: p = CL.punto(z, 0, w_in, w0)
+      241: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      245: p = CL.punto(z, t, w_in, w0)
+      249: D = np.exp(1j * mu * S * t) * z["st"]["psi_h"] - psi0
+      258: sha_fine = SFM.sha(z["st"]["psi_h"])
+      260: np.savez(tmp, psi_h=z["st"]["psi_h"], t=t1)
+  _stato_fermo.py:94  cerca -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _strada_b_lati.py:140  forma -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _strada_b_r.py:118  cerca -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _strada_b_r.py:213  breve -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+  _strada_b_r.py:303  libero -> _dove_va_la_materia.matrice   (letture dopo, nella stessa funzione: 0)
+----------------------------------------------------------------------------------------------------------------------------------
+### LE CHIAMATE TRANSITIVE (a una funzione che le chiama)
+  80 chiamate in 22 file
+  _anello_di_risonanza.py:187  referto -> _anello_di_risonanza.terzo   (letture dopo, nella stessa funzione: 0)
+  _anello_di_risonanza.py:202  main -> _anello_di_risonanza.referto   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:163  punto1 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:199  punto2 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:253  punto3 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:264  punto4 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:285  punto4 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:292  punto4 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:299  punto4 -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:312  referto -> _bande_piatte.punto1   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:313  referto -> _bande_piatte.punto2   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:314  referto -> _bande_piatte.punto3   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:315  referto -> _bande_piatte.punto4   (letture dopo, nella stessa funzione: 0)
+  _bande_piatte.py:328  main -> _bande_piatte.referto   (letture dopo, nella stessa funzione: 0)
+  _chiudere_le_uscite.py:53  __init__ -> _bande_piatte.pezzi   (letture dopo, nella stessa funzione: 0)
+  _chiudere_le_uscite.py:357  main -> _chiudere_le_uscite.cariche   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:132  q_migliore -> _coppia_di_B.coppia   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:148  l_robusta -> _consolida_B.q_migliore   (letture dopo, nella stessa funzione: 1)
+      150: w = MB.misure(z, phi0, rec, inviluppo(z, pK, q, N_))["w"]
+  _consolida_B.py:156  partenza_robusta -> _consolida_B.l_robusta   (letture dopo, nella stessa funzione: 1)
+      160: m = MB.misure(z, phi0, rec, p)     # ### PRIMA di CB.coppia: _dove_va_la_materia.matrice SCRIVE z["st"]["psi_h"] e rho (doc/FATTI_dal_codice.md)
+  _consolida_B.py:157  partenza_robusta -> _consolida_B.q_migliore   (letture dopo, nella stessa funzione: 1)
+      160: m = MB.misure(z, phi0, rec, p)     # ### PRIMA di CB.coppia: _dove_va_la_materia.matrice SCRIVE z["st"]["psi_h"] e rho (doc/FATTI_dal_codice.md)
+  _consolida_B.py:161  partenza_robusta -> _coppia_di_B.coppia   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:266  lunga -> _consolida_B.corsa   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:271  robusta -> _consolida_B.partenza_robusta   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:272  robusta -> _consolida_B.corsa   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:370  vincolo -> _coppia_di_B.coppia   (letture dopo, nella stessa funzione: 2)
+      380: m_in = MB.misure(z, phi0, rec, p0)  # ### in una scena sua: _dove_va_la_materia.matrice SCRIVE z["st"]["psi_h"] e rho (doc/FATTI_dal_codice.md)
+      387: m = MB.misure(z, phi0, rec, psi)
+  _consolida_B.py:384  vincolo -> _consolida_B.newton_bordo   (letture dopo, nella stessa funzione: 1)
+      387: m = MB.misure(z, phi0, rec, psi)
+  _consolida_B.py:510  main -> _consolida_B.lunga   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:512  main -> _consolida_B.robusta   (letture dopo, nella stessa funzione: 0)
+  _consolida_B.py:514  main -> _consolida_B.vincolo   (letture dopo, nella stessa funzione: 0)
+  _controllo_disco_pieno.py:189  main -> _controllo_disco_pieno.lunga   (letture dopo, nella stessa funzione: 0)
+  _coppia_di_B.py:117  griglia -> _coppia_di_B.coppia   (letture dopo, nella stessa funzione: 0)
+  _coppia_di_B.py:163  cerca -> _coppia_di_B.coppia   (letture dopo, nella stessa funzione: 1)
+      170: m = MB.misure(z, phi0, rec, psi)
+  _coppia_di_B.py:389  main -> _coppia_di_B.griglia   (letture dopo, nella stessa funzione: 0)
+  _coppia_di_B.py:391  main -> _coppia_di_B.cerca   (letture dopo, nella stessa funzione: 0)
+  _coppia_di_B.py:393  main -> _coppia_di_B.lunga   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:305  referto -> _decadimento_in_coppia.filtro_una   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:306  referto -> _decadimento_in_coppia.terzo   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:324  main -> _decadimento_in_coppia.cerca   (letture dopo, nella stessa funzione: 0)
+  _decadimento_in_coppia.py:326  main -> _decadimento_in_coppia.referto   (letture dopo, nella stessa funzione: 0)
+  _dove_va_la_materia.py:286  main -> _dove_va_la_materia.referto   (letture dopo, nella stessa funzione: 0)
+  _filtro_bande_piatte.py:174  referto -> _filtro_bande_piatte.corsa   (letture dopo, nella stessa funzione: 0)
+  _filtro_bande_piatte.py:191  main -> _filtro_bande_piatte.referto   (letture dopo, nella stessa funzione: 0)
+  _larghezza_risonanza.py:319  main -> _larghezza_risonanza.referto   (letture dopo, nella stessa funzione: 0)
+  _larghezza_risonanza.py:321  main -> _larghezza_risonanza.cerca   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:319  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:324  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:329  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:331  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:697  main -> _livelli_piatti.previsioni   (letture dopo, nella stessa funzione: 0)
+  _livelli_piatti.py:699  main -> _livelli_piatti.lunga   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:116  partenza -> _massimo_di_B.bloch_B   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:221  cerca -> _massimo_di_B.partenza   (letture dopo, nella stessa funzione: 2)
+      234: m_in = misure(z, phi0, rec, p0)
+      235: m = misure(z, phi0, rec, psi)
+  _massimo_di_B.py:232  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 2)
+      234: m_in = misure(z, phi0, rec, p0)
+      235: m = misure(z, phi0, rec, psi)
+  _massimo_di_B.py:506  main -> _massimo_di_B.cerca   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:508  main -> _massimo_di_B.breve   (letture dopo, nella stessa funzione: 0)
+  _massimo_di_B.py:510  main -> _massimo_di_B.lunga   (letture dopo, nella stessa funzione: 0)
+  _modo_al_variare_di_s.py:290  referto -> _modo_al_variare_di_s.esame   (letture dopo, nella stessa funzione: 0)
+  _modo_al_variare_di_s.py:312  main -> _modo_al_variare_di_s.cerca   (letture dopo, nella stessa funzione: 0)
+  _modo_al_variare_di_s.py:314  main -> _modo_al_variare_di_s.referto   (letture dopo, nella stessa funzione: 0)
+  _modo_dalla_corsa.py:177  main -> _modo_dalla_corsa.referto   (letture dopo, nella stessa funzione: 0)
+  _modo_di_R.py:273  main -> _modo_di_R.corsa   (letture dopo, nella stessa funzione: 0)
+  _modo_instabile.py:234  main -> _modo_instabile.referto   (letture dopo, nella stessa funzione: 0)
+  _modo_lento.py:373  referto -> _strada_b_r.libero   (letture dopo, nella stessa funzione: 2)
+      378: c = SB.carica(r)
+      381: _ra, am = SL.anelli(z, psi, forma_)
+  _modo_lento.py:469  main -> _modo_lento.referto   (letture dopo, nella stessa funzione: 0)
+  _modo_lento.py:471  main -> _modo_lento.modo   (letture dopo, nella stessa funzione: 0)
+  _modo_lento.py:473  main -> _modo_lento.uno   (letture dopo, nella stessa funzione: 0)
+  _salti_nel_cuore.py:249  main -> _salti_nel_cuore.rigenera   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:102  uscite -> _scatola.spettro   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:175  cerca -> _livelli_piatti.newton   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:398  main -> _scatola.uscite   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:400  main -> _scatola.cerca   (letture dopo, nella stessa funzione: 0)
+  _scatola.py:402  main -> _scatola.pezzo   (letture dopo, nella stessa funzione: 0)
+  _stato_fermo.py:336  main -> _stato_fermo.cerca   (letture dopo, nella stessa funzione: 0)
+  _strada_b_lati.py:81  cerca -> _strada_b_r.cerca   (letture dopo, nella stessa funzione: 0)
+  _strada_b_lati.py:321  referto -> _strada_b_r.libero   (letture dopo, nella stessa funzione: 8)
+      342: c = SB.carica(r)
+      360: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      361: z["st"]["psi_h"][...] = p0
+      362: w_in = DC.forma(z, w0)[0]
+      365: c = SB.carica(r)
+      375: z["st"]["psi_h"][...] = psi
+      376: pt = CL.punto(z, 0, w_in, w0)
+      379: print("  il profilo per anelli (rho per nodo): " + "  ".join(prof))
+  _strada_b_lati.py:325  referto -> _strada_b_r.libero   (letture dopo, nella stessa funzione: 8)
+      342: c = SB.carica(r)
+      360: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      361: z["st"]["psi_h"][...] = p0
+      362: w_in = DC.forma(z, w0)[0]
+      365: c = SB.carica(r)
+      375: z["st"]["psi_h"][...] = psi
+      376: pt = CL.punto(z, 0, w_in, w0)
+      379: print("  il profilo per anelli (rho per nodo): " + "  ".join(prof))
+  _strada_b_lati.py:447  main -> _strada_b_lati.referto   (letture dopo, nella stessa funzione: 0)
+  _strada_b_r.py:353  referto -> _strada_b_r.libero   (letture dopo, nella stessa funzione: 10)
+      369: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      370: z["st"]["psi_h"][...] = p0
+      371: w_in = DC.forma(z, w0)[0]
+      374: c = carica(r)
+      386: z["st"]["psi_h"][...] = psi
+      387: pt = CL.punto(z, 0, w_in, w0)
+      388: rho = EL.densita(z["inc"], z["st"])[0]
+      389: _M, _c, d = CE.baricentro(z, rho)
+      390: prof[nome_] = CE.anelli(rho, d)
+      394: print("  il profilo per anelli (rho per nodo): " + "  ".join(prof))
+  _strada_b_r.py:358  referto -> _strada_b_r.libero   (letture dopo, nella stessa funzione: 10)
+      369: with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+      370: z["st"]["psi_h"][...] = p0
+      371: w_in = DC.forma(z, w0)[0]
+      374: c = carica(r)
+      386: z["st"]["psi_h"][...] = psi
+      387: pt = CL.punto(z, 0, w_in, w0)
+      388: rho = EL.densita(z["inc"], z["st"])[0]
+      389: _M, _c, d = CE.baricentro(z, rho)
+      390: prof[nome_] = CE.anelli(rho, d)
+      394: print("  il profilo per anelli (rho per nodo): " + "  ".join(prof))
+  _strada_b_r.py:466  main -> _strada_b_r.referto   (letture dopo, nella stessa funzione: 0)
+----------------------------------------------------------------------------------------------------------------------------------
+### LE ALTRE FUNZIONI `matrice` (non _dove_va_la_materia.matrice: elencate, NON controllate; il task history, Cosa NON so)
+  4: _larghezza_risonanza _massa_vicino_al_cono _triangoli_bassa_energia _vuoto_sul_fondo
+==================================================================================================================================
