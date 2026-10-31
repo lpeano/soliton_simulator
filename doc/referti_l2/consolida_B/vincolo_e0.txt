@@ -1,0 +1,37 @@
+[TIMBRO] _consolida_B.py  sha1-BYTE efb66942  committato e pulito
+### (4) NEWTON COL VINCOLO: e0 (eps 0), q1 (spin su), lo spin giu' q2 nullo; il bordo: lambda u, u il campo uniforme del partner; il criterio 1e-09, 30 passi
+  DEVE PASSARE: a eps 0 q1 e' tutto spin su: sigma_z = 1 entro 1e-10                                             PASSA   +1.000000000000
+  passo 0, residuo 3.303e-02, mu +4.125669126, il vincolo 2.0e-32
+  passo 1, residuo 2.894e-02, mu +4.127409752, |lambda| 8.31e-16, il vincolo 2.1e-17, GMRES 95, dimezzamenti 3 (12 s)
+  passo 2, residuo 1.461e-02, mu +4.131719862, |lambda| 5.95e-08, il vincolo 5.2e-08, GMRES 67, dimezzamenti 1 (20 s)
+  passo 3, residuo 7.578e-03, mu +4.133884552, |lambda| 2.98e-08, il vincolo 2.6e-08, GMRES 55, dimezzamenti 1 (27 s)
+  passo 4, residuo 3.828e-03, mu +4.134912103, |lambda| 1.49e-08, il vincolo 1.3e-08, GMRES 40, dimezzamenti 1 (32 s)
+  passo 5, residuo 2.274e-03, mu +4.135462729, |lambda| 7.44e-09, il vincolo 6.5e-09, GMRES 43, dimezzamenti 1 (38 s)
+  passo 6, residuo 2.563e-03, mu +4.135477984, |lambda| 5.58e-09, il vincolo 4.9e-09, GMRES 52, dimezzamenti 2 (44 s)
+  passo 7, residuo 2.553e-03, mu +4.135488555, |lambda| 5.56e-09, il vincolo 4.9e-09, GMRES 73, dimezzamenti 8 (54 s)
+  passo 8, residuo 2.534e-03, mu +4.135493051, |lambda| 5.52e-09, il vincolo 4.8e-09, GMRES 103, dimezzamenti 7 (67 s)
+  passo 9, residuo 2.497e-03, mu +4.135547988, |lambda| 5.43e-09, il vincolo 4.8e-09, GMRES 58, dimezzamenti 6 (75 s)
+  passo 10, residuo 8.419e-04, mu +4.135804597, |lambda| 9.29e-13, il vincolo 1.6e-15, GMRES 28, dimezzamenti 0 (78 s)
+  passo 11, residuo 6.602e-04, mu +4.135839371, |lambda| 9.37e-13, il vincolo 1.2e-15, GMRES 60, dimezzamenti 2 (87 s)
+  passo 12, residuo 5.976e-04, mu +4.135782931, |lambda| 6.20e-09, il vincolo 1.6e-09, GMRES 67, dimezzamenti 3 (95 s)
+  passo 13, residuo 5.830e-04, mu +4.135785567, |lambda| 6.01e-09, il vincolo 1.6e-09, GMRES 60, dimezzamenti 5 (103 s)
+  passo 14, residuo 2.029e-03, mu +4.135600877, |lambda| 5.98e-09, il vincolo 1.6e-09, GMRES 610, dimezzamenti 8 (180 s)
+  passo 15, residuo 1.984e-03, mu +4.135543874, |lambda| 6.09e-13, il vincolo 3.2e-16, GMRES 38, dimezzamenti 0 (185 s)
+  passo 16, residuo 1.253e-03, mu +4.135612958, |lambda| 4.77e-13, il vincolo 2.1e-16, GMRES 61, dimezzamenti 1 (192 s)
+  passo 17, residuo 1.170e-03, mu +4.135599069, |lambda| 4.86e-13, il vincolo 9.3e-17, GMRES 165, dimezzamenti 4 (213 s)
+  passo 18, residuo 9.133e-04, mu +4.135657875, |lambda| 5.09e-13, il vincolo 2.3e-16, GMRES 109, dimezzamenti 2 (228 s)
+  passo 19, residuo 9.065e-04, mu +4.135659978, |lambda| 5.02e-13, il vincolo 2.4e-16, GMRES 205, dimezzamenti 7 (255 s)
+  passo 20, residuo 8.293e-04, mu +4.135623016, |lambda| 4.34e-13, il vincolo 4.7e-16, GMRES 115, dimezzamenti 3 (270 s)
+  passo 21, residuo 7.969e-04, mu +4.135639315, |lambda| 3.23e-13, il vincolo 6.0e-16, GMRES 120, dimezzamenti 2 (286 s)
+  passo 22, residuo 1.162e-03, mu +4.135480964, |lambda| 1.71e-13, il vincolo 9.1e-17, GMRES 49, dimezzamenti 0 (293 s)
+  passo 23, residuo 1.032e-03, mu +4.135376860, |lambda| 6.32e-14, il vincolo 1.1e-15, GMRES 115, dimezzamenti 1 (307 s)
+  passo 24, residuo 5.309e-04, mu +4.135538985, |lambda| 4.22e-14, il vincolo 4.6e-16, GMRES 59, dimezzamenti 0 (315 s)
+  passo 25, residuo 2.552e-04, mu +4.135468926, |lambda| 1.85e-14, il vincolo 1.3e-17, GMRES 42, dimezzamenti 0 (320 s)
+  passo 26, residuo 1.901e-04, mu +4.135430889, |lambda| 1.06e-14, il vincolo 1.2e-17, GMRES 48, dimezzamenti 0 (326 s)
+  passo 27, residuo 1.439e-04, mu +4.135441171, |lambda| 8.08e-15, il vincolo 5.7e-17, GMRES 47, dimezzamenti 1 (332 s)
+  passo 28, residuo 1.405e-04, mu +4.135441002, |lambda| 7.61e-15, il vincolo 5.2e-17, GMRES 87, dimezzamenti 5 (343 s)
+  passo 29, residuo 1.261e-04, mu +4.135432043, |lambda| 5.02e-15, il vincolo 2.2e-17, GMRES 53, dimezzamenti 2 (350 s)
+  passo 30, residuo 1.119e-04, mu +4.135425536, |lambda| 3.26e-15, il vincolo 9.2e-18, GMRES 48, dimezzamenti 2 (356 s)
+  DEVE PASSARE: il vincolo vale alla partenza entro 1e-12                                                        PASSA   2.0e-32
+  e0: NON CONVERGE: lo stato migliore, dichiarato (residuo 1.119e-04), mu +4.135425536 (mu - E0 +0.99383), |lambda| 3.26e-15; w 6.406, cuore 0.62585, picco 5420.08; il peso di spin giu' 6.131e-24; la partenza w 6.644, cuore 0.00000
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []
