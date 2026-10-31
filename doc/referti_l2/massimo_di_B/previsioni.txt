@@ -1,0 +1,18 @@
+[TIMBRO] _massimo_di_B.py  sha1-BYTE b75de4f9  committato e pulito
+### (0) LE PREVISIONI, PRIMA DI NEWTON: il tick libero di _chiudere_le_uscite (ricomposto) a s 0.15, r 1, g 1; J = [E0, E0 + g]; W (0.05, 0.2); modulo Omega 41.89
+  DEVE PASSARE: e05 (eps 0.5), il tick ricomposto ai pesi di oggi = il tick dei mezzi pezzi entro 1e-10          PASSA   1.1e-16
+  DEVE PASSARE: e05, il livello piu' alto di B a Gamma e' il MASSIMO di B sulla zona                             PASSA   E0 +3.17818, max +3.17818
+  --- e05, eps 0.5: E0 +3.17818 (la coppia di B a Gamma a 8.9e-16); la curvatura -0.0032; J [+3.17818, +4.17818]; le bande Ppi [-3.21784, -3.21614]  A [-3.17818, -1.63950]  P0 [+0.07625, +0.07913]  B [+1.63559, +3.17818]
+    per ogni mu in J e alpha in [0, g]:
+      (n0) mu in A +4.8177; (n0) mu in B +0.0000 (per costruzione); (n1) P0 +2.0990; (n2-misto) P0 + A +6.9167; (n2-misto) P0 + B +2.0990; (n1) Ppi +5.3943; (n2-misto) Ppi + A +10.2120; (n2-misto) Ppi + B +5.3943; (n2) P0 + P0 +4.1981; (n2) P0 + Ppi +7.4934; (n2) Ppi + Ppi +10.7886; (n3) P0 + P0 + P0 +6.2971; (n3) P0 + P0 + Ppi +9.5924; (n3) P0 + Ppi + Ppi +12.8877; (n3) Ppi + Ppi + Ppi +16.1829; (c0) A + A +9.6354; (c1) A + A +8.6354; (c2) A + A +7.6354; (c0) A + B +4.8177; (c1) A + B +3.8177; (c2) A + B +2.8177; (c0) B + B +0.0000; (c1) B + B -1.0000; (c2) B + B -2.0000 (per costruzione)
+      ### APERTE: (c1) B + B; il margine minimo (senza quelle per costruzione) (c1) B + B: APERTA (dentro di 1.0000)
+    (c0) B + B: il margine e' 2 (mu - E0), zero al bordo basso di J: si rilegge al mu misurato
+  DEVE PASSARE: e0 (eps 0), il tick ricomposto ai pesi di oggi = il tick dei mezzi pezzi entro 1e-10             PASSA   1.1e-16
+  DEVE PASSARE: e0, il livello piu' alto di B a Gamma e' il MASSIMO di B sulla zona                              PASSA   E0 +3.14159, max +3.14159
+  --- e0, eps 0: E0 +3.14159 (la coppia di B a Gamma a 2.7e-15); la curvatura -0.0032; J [+3.14159, +4.14159]; le bande Ppi [-3.14159, -3.14159]  A [-3.14159, -1.55986]  P0 [-0.00000, +0.00000]  B [+1.55986, +3.14159]
+    per ogni mu in J e alpha in [0, g]:
+      (n0) mu in A +4.7015; (n0) mu in B +0.0000 (per costruzione); (n1) P0 +2.1416; (n2-misto) P0 + A +6.8430; (n2-misto) P0 + B +2.1416; (n1) Ppi +5.2832; (n2-misto) Ppi + A +9.9846; (n2-misto) Ppi + B +5.2832; (n2) P0 + P0 +4.2832; (n2) P0 + Ppi +7.4248; (n2) Ppi + Ppi +10.5664; (n3) P0 + P0 + P0 +6.4248; (n3) P0 + P0 + Ppi +9.5664; (n3) P0 + Ppi + Ppi +12.7080; (n3) Ppi + Ppi + Ppi +15.8496; (c0) A + A +9.4029; (c1) A + A +8.4029; (c2) A + A +7.4029; (c0) A + B +4.7015; (c1) A + B +3.7015; (c2) A + B +2.7015; (c0) B + B +0.0000; (c1) B + B -1.0000; (c2) B + B -2.0000 (per costruzione)
+      ### APERTE: (c1) B + B; il margine minimo (senza quelle per costruzione) (c1) B + B: APERTA (dentro di 1.0000)
+    (c0) B + B: il margine e' 2 (mu - E0), zero al bordo basso di J: si rilegge al mu misurato
+  ### LA PREVISIONE (Luca 11:51): nessun modo esponenziale.
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

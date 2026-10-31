@@ -22129,3 +22129,9 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 ## 2026-10-31 — LE TOLLERANZE DELLA SCATOLA (Luca `11:51`)
 
 - **I due DEVE dello stato su `L 120` contro `L 81`** *(che in `80df9ab9` fallivano per le mie tolleranze non derivate)* **con quelle di Luca:** il residuo entro `1e-3` relativo *(misurato `1.8e-06`)*, `|Delta mu|` entro il residuo `4.7e-10` *(misurato `6.0e-12`)*. **Il referto rifatto: `12/12`**; la corsa riparte AL BIT come prima; **le altre righe identiche** *(il `diff` cambia solo il timbro, i due DEVE e il tempo della corsa rifatta)*. ### **La lettura (s1) non cambia.** `csv/_scatola.py` `sha1-BYTE df2c6ae6` (`43c0e56c`).
+
+## 2026-10-31 — IL MASSIMO DI B A `Gamma`: LE PREVISIONI, PRIMA DI NEWTON (Luca `11:51`, punto `0`)
+
+- **`previsioni.txt`, `4/4`** *(`csv/_massimo_di_B.py` `sha1-BYTE b75de4f9`)*. `E0` `+3.17818` (`eps 0.5`) e `+3.14159` (`eps 0`), la coppia degenere a `1e-15`; **(n1), (n2), (n2-misto) come in `e92a7f9c`; le (n3) chiuse** *(la piu' vicina `P0 + P0 + P0` a `6.30`, `6.42`)*.
+- ### **LE COPPIE DI ONDE DISPERSIVE, NUOVE:** **(c0) `B + B` libere: sul bordo** *(margine `2 (mu - E0)`, zero al bordo basso di `J`)*; ### **(c1) `B + B`, una col legame (`alpha` in `[0, g]`) e una libera: APERTA, dentro di `1.0`, a tutti e due gli `eps`** *(`2 mu - alpha` puo' scendere a `2 E0` quando `alpha` arriva a `g` e `mu` sta in basso in `J`)*; `A + A`, `A + B` chiuse *(`>= 2.8`)*. **La (c2) `B + B` e' il solitone stesso: esclusa per costruzione, dichiarata.**
+- ### ⚠ **Quindi la regola di `e92a7f9c` («tutte chiuse fino a `n = 2`») NON vale piu' per intero, sull'intervallo generico:** la (c1) `B + B` e' un'uscita che `e92a7f9c` non contava. **Al `mu` misurato** *(dopo Newton)* il conto si rifa': se `mu - E0 > g/2` la (c1) si chiude *(`2 mu - g > 2 E0`)*. **Non lo so ancora.** La previsione di Luca *(nessun modo esponenziale)* resta scritta.
