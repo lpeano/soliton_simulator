@@ -9,6 +9,11 @@
 - **`un_tick` ha lo stesso effetto, ed e' la sua causa:** lo includo nel censimento *(un'estensione dichiarata: il mandato dice «o una funzione che la chiama», e `un_tick` e' chiamata da `matrice`, non la chiama)*.
 - **Le costruzioni dei proiettori** *(nominate nel mandato)*: passano da `autovettori(matrice(...))`, quindi le prende il censimento per transitivita'.
 
+> ### ⚠ **ANNOTAZIONE** *(dopo `--stato`, `doc/referti_l2/controllo_matrice_stato.txt`; le premesse non si riscrivono)*:
+> - **`Lambda` NON cambia** in questa scena *(`N 1e6`, `L 81`, eps `0.5`)*: `matrice` cambia **`psi_h`** *(`2.9e1`)* e **il campo `rho` di `z["st"]`** *(`9.5e-13`)*; `Lambda`, `phi_h`, `psi`, `h_int` restano al bit. **Il `1.8e-15` di `baf1e5b3` non si ritrova qui** *(la scena di allora va riletta: e' una premessa caduta, la correggo in `FATTI`)*.
+> - **Le «altre funzioni `matrice`» sono `4`, non `7`:** il mio `grep "def matrice"` contava anche `def matrice_qualcosa` *(l'elenco AST le conta per nome esatto)*.
+> - **La conseguenza della guardia scritta nei criteri e' probabilmente FALSA:** dopo la ricarica di `psi_h` un tick e' uguale al bit con e senza `matrice` prima *(E3)*, quindi la guardia **non dovrebbe** rompere il bit delle corse. Lo decide il DEVE di `--guardia`.
+
 ### Cosa NON so
 
 - **Quali dei `39` siti leggono lo stato DOPO la chiamata, nella stessa scena.** L'AST trova le chiamate; **la lettura la classifico A MANO**, sito per sito, con le righe.

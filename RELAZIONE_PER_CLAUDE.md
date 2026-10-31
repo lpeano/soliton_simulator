@@ -22246,3 +22246,18 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **La coda, in ordine:** ③ i salti nel cuore *(19:08)*: **CHIUSO** in `7e462d03`, (j1) · ④ il controllo di `matrice` sui referti gia' fatti *(21:03)*: **ORA** · ⑤ il vuoto vivo *(22:35)*: `6` corse *(BG e AK, con i vuoti U e F, a s `0.15`; poi BG coi due vuoti a s `0.075`)*, `3000` unita' di tempo ciascuna o fino alla dissoluzione, a pezzi committati; la finestra liscia e la netta, la larghezza, l'alone, il baricentro, le bande di D, il libro dei conti *(4f6a4bd7)* con H_tot conservata a O(s^2), Lambda sotto e lontano; le letture v1-v4.
 
 **Da leggere dal codice prima del task history di ⑤:** come la prova del libro dei conti spegne `cs`; quale e' il vuoto F0 di `76eecbf5`; se il libro dei conti misura lo stato prima di `matrice` *(il fatto di `baf1e5b3`, e il controllo di ④)*.
+
+## 2026-11-01 — IL CONTROLLO DI matrice (Luca 21:03): L'ELENCO E LO STATO -- I LETTORI DOPO UNA RICARICA SONO CIECHI A matrice; SOLO MB.misure NO
+
+
+**L'elenco** *(`doc/referti_l2/controllo_matrice_elenco.txt`, `--elenco`, sha1-BYTE `d7462e25`)*: **`39` chiamate dirette** a `matrice`/`un_tick` in `22` file *(`21` piu' `_dove_va_la_materia`)*, **`80` transitive**. Le righe che leggono lo stato DOPO la chiamata, nella stessa funzione, stanno in `10` siti diretti e in `11` transitivi; **le ho lette a mano tutte**: o **ricaricano `psi_h` prima di leggere** *(le corse: `_consolida_B.corsa`, `_coppia_di_B.lunga`, `_livelli_piatti.lunga`, `_massimo_di_B.lunga`, `_scatola.pezzo`, `_controllo_disco_pieno.lunga`, `_modo_di_R.corsa`, `_modo_lento.modo/uno`, `_modo_instabile.referto`, `_salti_nel_cuore.rigenera`, `_strada_b_r.referto`, `_strada_b_lati.referto`, `SL.anelli`)*, o **aprono una scena nuova** *(`MB.scena`, e la `p` della scena e' una COPIA)* prima di `MB.misure`. **Molte di quelle corse confrontano gia' ogni punto al bit con un riferimento.**
+
+**Lo stato** *(`doc/referti_l2/controllo_matrice_stato.txt`, `--stato`, sha1-BYTE `79dc7eb7`; `4/4`)*:
+- **(E1)** `matrice` cambia **`psi_h`** *(fino a `29`)* e **il campo `rho` di `z["st"]`** *(`9.5e-13`)*; `Lambda`, `phi_h`, `psi`, `h_int` al bit. ### **Il `1.8e-15` su `Lambda` che avevo scritto in `FATTI` (`baf1e5b3`) qui non c'e':** una premessa caduta, la correggo.
+- **(E2)** dopo la ricarica di `psi_h` resta diverso **solo** il campo `rho` *(`9.5e-13`)*.
+- **(E3)** **i lettori dei siti** *(`DC.forma`, `EL.densita`, `CL.punto`, `SL.anelli`)* **e un tick** sono **uguali al bit** con e senza `matrice` prima ⇒ **ciechi a `matrice`** dopo una ricarica.
+- **(E4)** il controllo positivo: **`MB.misure` calcola `w_in` PRIMA di caricare lo stato** ⇒ sullo stato lasciato da `matrice` da' `w_in 0.227` e `f_win 0.00000` *(contro `6.644` e `0.589`)*: **e' l'unico lettore sensibile**, ed e' quello dei due casi gia' corretti in `baf1e5b3`.
+
+### ⇒ **verso (m1):** nessun sito oggi legge lo stato di `matrice`. **Resta da dire** quali referti siano nati **prima** di `baf1e5b3` con le due misure sbagliate *(quelli li ha gia' corretti `baf1e5b3`)*. **Un fatto a parte, non di `matrice`:** in `_massimo_di_B.cerca` la seconda `misure` della stessa scena prende `w_in` dallo stato caricato dalla prima *(`p0`)*, non da quello della scena. Siccome `p0` e' l'inviluppo di `pK` per una colonna di `q`, la sua densita' **dovrebbe** avere la forma di quella di `pK`. **Non l'ho misurato.**
+
+**Un mio errore:** la prima corsa di `--stato` *(a `d7c6d03e`)* e' morta alla prima stampa *(`CB.EPS`, che non esiste)*. Nessun numero; corretto in `e682bb8b`.

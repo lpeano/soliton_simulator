@@ -1,0 +1,34 @@
+[TIMBRO] _controllo_matrice.py  sha1-BYTE 79dc7eb7  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DI matrice (Luca 21:03): LO STATO -- la scena di _massimo_di_B.scena (N 1e+06, L 81, eps 0.5), lo stato ricaricato = la p della scena (una copia)
+==================================================================================================================================
+### (0) IL CASO NULLO: due scene nuove sono identiche
+  DEVE PASSARE: lo stato iniziale delle due scene uguale al bit, chiave per chiave                               PASSA   6 chiavi: Lambda h_int phi_h psi psi_h rho
+  DEVE PASSARE: w_in delle due scene uguale al bit                                                               PASSA   6.643741075297
+### (E1) CHE COSA CAMBIA matrice (lo stato prima e dopo, nella scena 'con')
+  Lambda       uguale al bit   max |prima - dopo| 0.000e+00
+  h_int        uguale al bit   max |prima - dopo| 0.000e+00
+  phi_h        uguale al bit   max |prima - dopo| 0.000e+00
+  psi          uguale al bit   max |prima - dopo| 0.000e+00
+  psi_h        ### DIVERSO   max |prima - dopo| 2.916e+01
+  rho          ### DIVERSO   max |prima - dopo| 9.455e-13
+  DEVE PASSARE: il controllo positivo -- matrice cambia lo stato (psi_h)                                         PASSA   2.916e+01
+### (E2) DOPO AVER RICARICATO psi_h: che cosa resta diverso dallo stato iniziale
+  Lambda       uguale al bit   max |iniziale - ricaricato| 0.000e+00
+  h_int        uguale al bit   max |iniziale - ricaricato| 0.000e+00
+  phi_h        uguale al bit   max |iniziale - ricaricato| 0.000e+00
+  psi          uguale al bit   max |iniziale - ricaricato| 0.000e+00
+  psi_h        uguale al bit   max |iniziale - ricaricato| 0.000e+00
+  rho          ### DIVERSO   max |iniziale - ricaricato| 9.455e-13
+### (E3) I LETTORI DEI SITI DELL'ELENCO, dopo aver ricaricato lo stato: senza matrice prima / con matrice prima
+  DC.forma (w, fr)                           uguale al bit   (6.6437410752971084, 0.9999999999999981) | (6.6437410752971084, 0.9999999999999981)
+  EL.densita (rho, lam)                      uguale al bit   ('e85db50bde37542f752219e8ab61601b887d3a7f', '3eedb72ac740c2f0b88e590b63100a7555 | ('e85db50bde37542f752219e8ab61601b887d3a7f', '3eedb72ac740c2f0b88e590b63100a7555
+  CL.punto (w, f_win, f_3w0, picco, M)       uguale al bit   (6.6437410752971084, 0.5891893105179622, 0.9999999999999981, 5066.379254344658,  | (6.6437410752971084, 0.5891893105179622, 0.9999999999999981, 5066.379254344658, 
+  SL.anelli                                  uguale al bit   ('d2b18bf666859cc6bd8561840d5133abf22dc825', '426ee6794f82caa87404f61586519c04d9 | ('d2b18bf666859cc6bd8561840d5133abf22dc825', '426ee6794f82caa87404f61586519c04d9
+  un tick (CL.avanza): lo sha1 di psi_h      uguale al bit   8438911e13a675675a6b892a37e4b417ebc14f52 | 8438911e13a675675a6b892a37e4b417ebc14f52
+  ### IL CRITERIO DELLA CLASSE: i lettori dopo una ricarica sono ciechi a matrice: SI
+### (E4) IL CONTROLLO POSITIVO DEI LETTORI: _massimo_di_B.misure (w_in da DC.forma PRIMA di caricare psi) sullo stato lasciato da matrice
+  senza: w_in 6.643741 f_win 0.58919 w 6.64374 | con: w_in 0.227115 f_win 0.00000 w 6.64374
+  DEVE PASSARE: il controllo positivo -- misure dopo matrice (senza ricarica) da' un altro w_in (lo strumento ve PASSA   6.643741 contro 0.227115
+==================================================================================================================================
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
