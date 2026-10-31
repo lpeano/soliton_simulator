@@ -22237,3 +22237,12 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **Il «salto di `w`» di `~0.001`** non e' un salto: `|Delta w|` ai salti `8.2e-4` *(mediana)*, fuori `7.2e-4` — e' il respiro.
 
 ### ⇒ **(j1).** Un fatto nuovo in `doc/FATTI_dal_codice.md` *(`_congelato_lungo.punto`: la netta ha gradini di un nodo, sta sopra la liscia di `0.0039`; un cuore campionato fitto si misura con la liscia)*. La riga `d` della `MAPPA`; la sezione `6` del task history. ### **Sulla lettura (k1) di `751bca7f`:** i gradini sono `~0.0027` e si contano `34` in su e `34` in giu'; la liscia sta sotto la netta di `0.0022 .. 0.0051`. **Non ho rifatto le pendenze per finestra con la liscia:** lo dichiaro, non lo deduco.
+
+## 2026-11-01 — LA CODA: IL MANDATO DELLE 22:35 (IL SOLITONE SU B A Gamma COL TICK INTERO, IL VUOTO VIVO) IN CODA AL QUINTO POSTO
+
+
+**Arrivato a meta' della rigenerazione dei salti** *(L-UN-PROMPT: non interrompe)*; registrato ora perche' durante la rigenerazione il driver committava a ogni pezzo e non si committa insieme a lui.
+
+**La coda, in ordine:** ③ i salti nel cuore *(19:08)*: **CHIUSO** in `7e462d03`, (j1) · ④ il controllo di `matrice` sui referti gia' fatti *(21:03)*: **ORA** · ⑤ il vuoto vivo *(22:35)*: `6` corse *(BG e AK, con i vuoti U e F, a s `0.15`; poi BG coi due vuoti a s `0.075`)*, `3000` unita' di tempo ciascuna o fino alla dissoluzione, a pezzi committati; la finestra liscia e la netta, la larghezza, l'alone, il baricentro, le bande di D, il libro dei conti *(4f6a4bd7)* con H_tot conservata a O(s^2), Lambda sotto e lontano; le letture v1-v4.
+
+**Da leggere dal codice prima del task history di ⑤:** come la prova del libro dei conti spegne `cs`; quale e' il vuoto F0 di `76eecbf5`; se il libro dei conti misura lo stato prima di `matrice` *(il fatto di `baf1e5b3`, e il controllo di ④)*.
