@@ -22147,3 +22147,9 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **`cerca_e0_L81.txt`, `4/4`** *(il controllo positivo `1.4e-16`; `E0` `+3.141593`)*. ### **Newton: il residuo da `3.3e-02` a `3.2e-04` al passo `13`, poi FERMO a `3.0e-04` per `17` passi** *(un plateau piatto, non un'oscillazione: il segno di una direzione che Newton non sa correggere)*. **NON FERMO: lo stato migliore** *(`3.003e-04`)*.
 - **Lo stato resta STRETTO:** `w 6.653` *(partenza `6.644`)*, il cuore `0.58851` *(partenza `0.58919`)*, `alpha` del cuore `1.0`; ### **`mu - E0 = +0.99425`.**
 - ### **A tutti e due gli `eps` nessuno stato fermo, e nessuno dei due si allarga:** le corse brevi e la lunga *(che il mandato fa partire dagli stati FERMI)* **non hanno da dove partire**. Con questi residui la deriva attesa *(`residuo/s`: `0.016` e `0.002` per unita' di tempo)* satura `1e-2` in meno di `1` e in `~5` unita' di tempo: **una corsa breve non misurerebbe niente.** ### **Che cosa fare e' una decisione di Luca.**
+
+## 2026-10-31 — IL MASSIMO DI B A `Gamma`: IL REFERTO (Luca `11:51`)
+
+- **`massimo_di_B.txt`, `4/4`.** **Al `mu` misurato** *(degli stati migliori)* **tutte le uscite controllate sono chiuse**, a `eps 0.5` e a `0`: il margine minimo e' la (c1) `B + B`, `0.988` *(`0.9885` a `eps 0`)*; le (n1)-(n3) oltre `3`.
+- **Nessuno stato fermo** *(i due paragrafi qui sopra)*: **(3) e (4) non partite.** ### **La lettura: (b3) per il criterio scritto, non separata da un limite del metodo.** `doc/CHIUDERE_LE_USCITE.md` sez. `8`; MAPPA, la riga `d`.
+- ### **FERMO, le domande per Luca:** **(i)** un altro modo di cercare lo stato *(un altro vettore della coppia di `Gamma`, una tappa, piu' passi: sono scelte di metodo, non le prendo io)*; **(ii)** oppure una corsa DALLO STATO DI PARTENZA o dal migliore senza stato fermo *(il cuore regge o no, dove va `D`: non e' la prova del mandato)*; **(iii)** oppure prendere (b3) e passare alla strada della carica o dei pesi.

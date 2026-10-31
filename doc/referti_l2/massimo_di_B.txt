@@ -1,0 +1,38 @@
+[TIMBRO] _massimo_di_B.py  sha1-BYTE b75de4f9  committato e pulito
+==================================================================================================================================
+LA PROVA: IL SOLITONE SUL MASSIMO DI B A Gamma (Luca 11:51): S1, N 1e+06, s 0.15, r 1 (a_n = b_a = pi), g 1, il congelato vero; eps 0.5 (PRINCIPALE) e 0
+  la configurazione: CASI {'e05': 0.5, 'e0': 0.0} L_SCENA 81 L_GRANDE 120 FRAZ_LARGO 0.1667 T_LUNGA 40000 PEZZO 4000 OGNI 10 OGNI_D 20 ESAME 40 SOGLIA 0.01 SEME_LUCA 1e-09 TOLL_CONTROLLO 1e-12 TOLL_BLOCH 1e-10 TOLL_E0 1e-05 TOLL_NORMA 1e-10; da _livelli_piatti: T_BREVE 300 PASSO_BREVE 3 OGNI_D 5 FATTORE_DEROGA 10 SIGMA_FORMA 3; da _strada_b_r: MAX_NEWTON 30 TOLL_RES 1e-09; W (0.05, 0.2)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (b1) esiste, nessun modo esponenziale nella corsa lunga, il cuore regge: la prima uscita chiusa dall'energia confermata (il limite superiore del tasso); (b2) esiste ma decade: quale uscita; (b3) non esiste un legato su B a Gamma con S1; (b4) altro; eps 0 contro 0.5
+==================================================================================================================================
+### (0) LE PREVISIONI (previsioni.json, committate prima di Newton)
+  e0 (eps 0): E0 +3.14159; aperte per ogni mu in J: ['(c1) B + B']; il margine minimo (c1) B + B -1.0000
+  e05 (eps 0.5): E0 +3.17818; aperte per ogni mu in J: ['(c1) B + B']; il margine minimo (c1) B + B -1.0000
+----------------------------------------------------------------------------------------------------------------------------------
+### (1), (2) GLI STATI
+  DEVE PASSARE: e05 L 81, lo stato sul disco = la ricerca (sha1)                                                 PASSA   7fa74445
+  DEVE PASSARE: e05 L 81, il controllo positivo dello stato di A a K entro 1e-12; A(Gamma) q entro 1e-10; la nor PASSA   1.4e-16 5.0e-16 1.1e-16
+  e05 L 81: NON FERMO (residuo 2.411e-03 in 30 passi), mu +4.172104725, mu - E0 +0.99393; w 6.437 (partenza 6.644; L/6 13.50: dentro), cuore 0.61281 (partenza 0.58667), picco 5402.59; alpha del cuore 1.00000, della coda 0.00000
+    la storia del residuo: 3.3e-02 2.5e-02 2.3e-02 2.3e-02 1.1e-02 8.8e-03 7.0e-03 6.8e-03 6.0e-03 5.9e-03 5.8e-03 5.6e-03 3.8e-03 6.3e-03 5.7e-03 5.7e-03 3.5e-03 3.5e-03 3.4e-03 3.2e-03 3.0e-03 2.5e-03 2.4e-03 2.4e-03 2.4e-03 3.5e-03 2.8e-03 2.6e-03 2.6e-03 2.5e-03 2.5e-03
+    le uscite AL mu MISURATO (alpha in [0, g]):
+      (n0) mu in A +5.8116; (n0) mu in B +0.9939 (per costruzione); (n1) P0 +3.0930; (n2-misto) P0 + A +8.9046; (n2-misto) P0 + B +4.0869; (n1) Ppi +6.3882; (n2-misto) Ppi + A +12.1998; (n2-misto) Ppi + B +7.3822; (n2) P0 + P0 +6.1859; (n2) P0 + Ppi +9.4812; (n2) Ppi + Ppi +12.7765; (n3) P0 + P0 + P0 +9.2789; (n3) P0 + P0 + Ppi +12.5742; (n3) P0 + Ppi + Ppi +15.8695; (n3) Ppi + Ppi + Ppi +19.1647; (c0) A + A +11.6232; (c1) A + A +10.6232; (c2) A + A +9.6232; (c0) A + B +6.8055; (c1) A + B +5.8055; (c2) A + B +4.8055; (c0) B + B +1.9879; (c1) B + B +0.9879; (c2) B + B -0.0121 (per costruzione)
+      ### TUTTE CHIUSE; il margine minimo (senza quelle per costruzione) (c1) B + B: CHIUSA (0.9879)
+  DEVE PASSARE: e0 L 81, lo stato sul disco = la ricerca (sha1)                                                  PASSA   0eb9c1fd
+  DEVE PASSARE: e0 L 81, il controllo positivo dello stato di A a K entro 1e-12; A(Gamma) q entro 1e-10; la norm PASSA   1.4e-16 6.8e-16 2.2e-16
+  e0 L 81: NON FERMO (residuo 3.003e-04 in 30 passi), mu +4.135840647, mu - E0 +0.99425; w 6.653 (partenza 6.644; L/6 13.50: dentro), cuore 0.58851 (partenza 0.58919), picco 5064.33; alpha del cuore 1.00000, della coda 0.00000
+    la storia del residuo: 3.3e-02 2.9e-02 1.5e-02 1.1e-02 6.0e-03 4.3e-03 3.4e-03 3.6e-03 2.7e-03 2.7e-03 1.8e-03 1.8e-03 1.7e-03 3.2e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.1e-04 3.0e-04 3.0e-04 3.0e-04 3.0e-04 3.0e-04 3.0e-04 3.0e-04 3.0e-04
+    le uscite AL mu MISURATO (alpha in [0, g]):
+      (n0) mu in A +5.6957; (n0) mu in B +0.9942 (per costruzione); (n1) P0 +3.1358; (n2-misto) P0 + A +8.8315; (n2-misto) P0 + B +4.1301; (n1) Ppi +6.2774; (n2-misto) Ppi + A +11.9731; (n2-misto) Ppi + B +7.2717; (n2) P0 + P0 +6.2717; (n2) P0 + Ppi +9.4133; (n2) Ppi + Ppi +12.5549; (n3) P0 + P0 + P0 +9.4075; (n3) P0 + P0 + Ppi +12.5491; (n3) P0 + Ppi + Ppi +15.6907; (n3) Ppi + Ppi + Ppi +18.8323; (c0) A + A +11.3914; (c1) A + A +10.3914; (c2) A + A +9.3914; (c0) A + B +6.6899; (c1) A + B +5.6899; (c2) A + B +4.6899; (c0) B + B +1.9885; (c1) B + B +0.9885; (c2) B + B -0.0115 (per costruzione)
+      ### TUTTE CHIUSE; il margine minimo (senza quelle per costruzione) (c1) B + B: CHIUSA (0.9885)
+----------------------------------------------------------------------------------------------------------------------------------
+### (3) LE CORSE BREVI (300 unita' di tempo)
+  e05: nessuna corsa breve
+  e0: nessuna corsa breve
+----------------------------------------------------------------------------------------------------------------------------------
+### (4) LA CORSA LUNGA (e05)
+  nessuna corsa lunga
+----------------------------------------------------------------------------------------------------------------------------------
+### LE LETTURE
+  e05 (eps 0.5): (b3) candidata: Newton NON converge, w 6.437 (L/6 13.50)
+  e0 (eps 0): (b3) candidata: Newton NON converge, w 6.653 (L/6 13.50)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

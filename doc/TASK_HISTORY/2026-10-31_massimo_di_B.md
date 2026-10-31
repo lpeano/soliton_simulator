@@ -61,3 +61,9 @@ La vita della materia vera *(`~10^49` periodi)* vuole uscite **chiuse**; **la re
 6. `--breve e05`, `--breve e0`, committati.
 7. `--lunga` a pezzi *(se la breve a `eps 0.5` non e' esponenziale)*, ogni pezzo committato.
 8. `--referto`; `doc/CHIUDERE_LE_USCITE.md` *(l'esito)*; `RELAZIONE`; `MAPPA` *(la riga `d`; le tolleranze della scatola)*; la sezione `6` qui.
+
+## 6. L'ESITO *(`massimo_di_B.txt`, `4/4`; `doc/CHIUDERE_LE_USCITE.md` sez. `8`)*
+
+- **(0):** (n3) chiuse; **(c1) `B + B` aperta sull'intervallo generico, chiusa al `mu` misurato** *(`0.988`)*. ### **La premessa che cade:** «`e92a7f9c` chiude tutto fino a `n = 2`» -- **sull'intervallo generico la (c1) e' un'uscita che non contava.**
+- **(2):** **nessuno stato fermo:** il residuo ristagna a `2.4e-3` (`eps 0.5`) e `3.0e-4` (`eps 0`); lo stato migliore resta stretto, `mu - E0 +0.994`. **(3), (4) non partite** *(partono dagli stati fermi)*.
+- **La lettura:** (b3) per il criterio; **non separata da un limite del metodo.** ### **FERMO: che cosa fare e' una decisione di Luca.**

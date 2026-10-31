@@ -87,3 +87,10 @@ La vita di un solitone e' `ln(soglia/seme)/gamma` *(`795d2c81`, `45cc48d8`)*. **
 1. **Una prova: Newton sul massimo di `B` a `Gamma`** *(il solitone c'e'? la sua vita?)*: **la candidata piu' diretta**, senza cambiare i pesi.
 2. **La strada del legame sulla carica** *(`rho_A - rho_B`, locale a `eps 0.5`)*: una legge nuova *(`9-ter`)*.
 3. **La moneta** *(la decisione `7`)*: in questo lavoro `eps 0.5` cambia la localita', non le uscite.
+
+## 8. L'ESITO DELLA PROVA SUL MASSIMO DI `B` A `Gamma` *(Luca `2026-10-31` `11:51`; `csv/_massimo_di_B.py`, `doc/referti_l2/massimo_di_B.txt`, `4/4`)*
+
+- **Le riserve della sez. `6`, sciolte sulla carta:** **le (n3) sono chiuse** *(la piu' vicina `P0 + P0 + P0`, `6.30` a `eps 0.5`)*; **delle coppie di onde dispersive, la (c1) `B + B`** *(un quanto di `B` col legame, `alpha` in `[0, g]`, e uno libero)* **e' APERTA sull'intervallo generico** *(dentro di `1.0`: `2 mu - alpha` scende a `2 E0`)*, ### **ma al `mu` misurato e' CHIUSA, margine `0.988`** *(`mu - E0 ~0.994 > g/2`)*. **La (c2) `B + B` e' il solitone stesso, esclusa per costruzione.** ### **Al `mu` misurato TUTTE le uscite controllate sono chiuse, a tutti e due gli `eps`.**
+- ### **Lo stato fermo NON si trova:** Newton *(il metodo e il criterio di `26300537`, `30` passi)* **ristagna a `2.4e-3` (`eps 0.5`) e a `3.0e-4` (`eps 0`, un plateau dal passo `13`)**. **Lo stato migliore resta stretto** *(`w 6.44`, `6.65` contro `6.64` della partenza; il cuore `0.613`, `0.589`)* **con `mu - E0 = +0.994`**, lo stesso spostamento di `A` a `K`. **Non si allarga.**
+- ### **La lettura: (b3) per il criterio scritto** *(nessuno stato fermo)*, **ma NON separata da un limite del metodo** *(la coppia degenere a `Gamma`, il plateau)*. **Le corse brevi e la lunga non sono partite:** partono dagli stati FERMI, e con questi residui la deriva satura `1e-2` in `< 1` e `~5` unita' di tempo. ### **La prima uscita chiusa dall'energia NON e' ne' confermata ne' smentita.**
+- **`eps 0` contro `0.5`:** le stesse cose; a `eps 0` Newton arriva piu' in basso *(`3.0e-4` contro `2.4e-3`)*.
