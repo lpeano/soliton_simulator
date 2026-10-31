@@ -314,7 +314,7 @@ def referto():
     print("=" * 130)
     print("LA SCELTA DENTRO LA COPPIA E LA CORSA LUNGA ANCHE SENZA STATO FERMO (Luca 13:52): il massimo di B a Gamma, S1, N %.0e, s %g, r 1, g 1, il congelato vero, L %d" % (N, S, L))
     print("  la configurazione: TETA %s FI %s FATTORE %g TOLL_ORTO %g TOLL_BLOCH %g T_LUNGA %d PEZZO %d OGNI %d OGNI_D %d ESAME %d FINESTRA %g EPS_LUNGA %g CORSE %s TOLL_NORMA %g; da _strada_b_r: MAX_NEWTON %d TOLL_RES %g"
-          % (["%.4f" % x for x in TETA], ["%.4f" % x for x in FI], FATTORE, TOLL_ORTO, TOLL_BLOCH, T_LUNGA, PEZZO, OGNI, OGNI_D, ESAME, FINESTRA, EPS_LUNGA, CORSE, LP.SB.MAX_NEWTON, LP.SB.TOLL_RES))
+          % (["%.4f" % x for x in TETA], ["%.4f" % x for x in FI], FATTORE, TOLL_ORTO, TOLL_BLOCH, T_LUNGA, PEZZO, OGNI, OGNI_D, ESAME, FINESTRA, EPS_LUNGA, CORSE, TOLL_NORMA, LP.SB.MAX_NEWTON, LP.SB.TOLL_RES))
     print("  LE LETTURE DI LUCA, SCRITTE PRIMA: (q1) il residuo dipende dalla scelta e una scelta fa convergere Newton; (q2) la rotazione dentro la coppia e' libera: col vincolo converge o no;"
           " (q3) il cuore di B a Gamma RESTA mentre quello di A a K si svuota; (q4) il cuore di B si svuota: quale uscita; (q5) altro")
     print("=" * 130)
