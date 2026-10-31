@@ -22261,3 +22261,21 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 ### ⇒ **verso (m1):** nessun sito oggi legge lo stato di `matrice`. **Resta da dire** quali referti siano nati **prima** di `baf1e5b3` con le due misure sbagliate *(quelli li ha gia' corretti `baf1e5b3`)*. **Un fatto a parte, non di `matrice`:** in `_massimo_di_B.cerca` la seconda `misure` della stessa scena prende `w_in` dallo stato caricato dalla prima *(`p0`)*, non da quello della scena. Siccome `p0` e' l'inviluppo di `pK` per una colonna di `q`, la sua densita' **dovrebbe** avere la forma di quella di `pK`. **Non l'ho misurato.**
 
 **Un mio errore:** la prima corsa di `--stato` *(a `d7c6d03e`)* e' morta alla prima stampa *(`CB.EPS`, che non esiste)*. Nessun numero; corretto in `e682bb8b`.
+
+## 2026-11-01 — IL CONTROLLO DI matrice (Luca 21:03): L'ESITO -- (m1), NESSUN REFERTO TOCCATO; LA GUARDIA IN matrice, 6/6
+
+
+**La guardia** *(`6c5da5e8`; `csv/_dove_va_la_materia.py` sha1-BYTE `89b1ca18`)*: `matrice` salva ogni array di `z["st"]` e lo rimette in place dopo le `12` chiamate a `un_tick`. **Il sigillo** *(`doc/referti_l2/controllo_matrice_guardia.txt`, `python csv/_controllo_matrice.py --guardia`, sha1-BYTE `e0ab93ed`)*, `6/6`:
+- con la guardia **ogni chiave di `z["st"]` al bit** dopo `matrice`;
+- **il caso che deve fallire:** la `matrice` del padre *(`2cec2ec7`, presa con `git cat-file`)* lascia `psi_h` diverso di `2.92e+01` e `rho` di `9.46e-13`;
+- **`A` al bit** con quella del padre *(`max |dA| 0`)*;
+- `MB.misure` subito dopo `matrice`: `w_in` **`6.643741`** con la guardia, `0.227115` col padre;
+- **un tick dopo la ricarica al bit con e senza guardia** *(`8438911e`)* ⇒ **le corse vecchie non cambiano**, contro cio' che avevo scritto nei criteri *(premessa caduta, annotata)*.
+
+### ⇒ **(m1): nessun referto toccato, nessuna misura da rifare.** I due soli casi sensibili *(la partenza di `vincolo` e di `partenza_robusta`, via `MB.misure`)* erano gia' corretti in `baf1e5b3`, prima del referto `consolida_B.txt`.
+
+**`doc/FATTI_dal_codice.md`:** la sezione di `matrice` corretta. I numeri del `2026-10-31` *(`rho 5060`, `Lambda 1.8e-15`)* **non si riconciliano** con quelli di oggi, e di quella misura non ho scritto la scena, quindi non li uso piu'. Aggiunte la guardia e il fatto di `MB.misure`. **La `MAPPA`:** la riga `d`. **Il task history:** la sezione `6`.
+
+**Un H-P8 falso positivo** *(il presidio vede `cat-file` vicino alla parola «prima»; il blob viene dal PADRE)*: **dichiarato con `ESENTE-H-P8`** e l'elenco delle esenzioni rigenerato, invece di spostare il testo. **Un mio errore:** il messaggio di `6c5da5e8` cita il blob dello script `0417b6d2` invece di `e0ab93ed`, e non nomina `doc/ESENZIONI_presidi.md`. La patch del messaggio e' morta per un errore di sintassi e il commit e' partito col testo vecchio; la lista FILE CAMBIATI e' giusta.
+
+**Le domande per Luca** *(nel task history, coi criteri di chiusura)*: **(i)** le `4` altre funzioni `matrice` vanno controllate? **(ii)** `MB.misure` va corretta *(prende `w_in` dallo stato che c'e', non da quello della scena)*?

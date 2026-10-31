@@ -46,3 +46,20 @@
 3. Per ogni SOSPETTO: `--rifai <nome>`, committato prima; il confronto; se cambia, la correzione del referto **in un commit a se'**.
 4. La guardia in `matrice` e `--guardia` *(il DEVE e il caso che deve fallire)*: **un commit a se'**; poi il referto.
 5. `doc/FATTI_dal_codice.md` *(l'esito)*, `RELAZIONE`, `MAPPA`, l'inventario *(le corse che si rigirano al loro commit)*.
+
+## 6. L'ESITO *(2026-11-01)*
+
+| il punto | che cosa | il referto |
+|---|---|---|
+| `1` | **`39` chiamate dirette** a `matrice`/`un_tick` in `22` file, **`80` transitive**; le righe che leggono lo stato dopo la chiamata: `10` siti diretti, `11` transitivi, **letti a mano tutti** | `controllo_matrice_elenco.txt` |
+| `1`, la classe | **tutti PULITI:** o ricaricano `psi_h` prima di leggere *(le corse; molte confrontano gia' ogni punto al bit col riferimento)*, o aprono una scena nuova *(`MB.scena`, la `p` della scena e' una copia)* prima di `MB.misure` | la lettura del codice; `RELAZIONE` |
+| `2` | **(E3): i lettori dei siti e un tick sono ciechi a `matrice` dopo una ricarica**, al bit; **(E4): solo `MB.misure` e' sensibile** *(`w_in 0.227`)*, ed e' il lettore dei due casi gia' corretti in `baf1e5b3` *(la partenza di `vincolo` e di `partenza_robusta`; il referto `consolida_B.txt` e' nato dopo la correzione)* | `controllo_matrice_stato.txt` |
+| `3` | **la guardia**, `6/6` | `controllo_matrice_guardia.txt` |
+
+### ⇒ **(m1): nessun referto toccato.** **Nessuna misura da rifare** *(il criterio `2` voleva la misura rifatta per ogni SOSPETTO: non ce ne sono)*.
+
+**Le premesse cadute** *(annotate nella sezione `1`)*: `Lambda` non cambia; le altre `matrice` sono `4`; **la guardia NON rompe il bit delle corse** *(un tick al bit con e senza)*, contro cio' che avevo scritto nei criteri.
+
+**I miei errori:** la prima corsa di `--stato` morta su `CB.EPS` *(`e682bb8b`)*; il messaggio di `6c5da5e8` cita il blob dello script `0417b6d2` invece di `e0ab93ed` *(la patch del messaggio e' morta per un errore di sintassi e il commit e' partito col testo vecchio)* e non nomina `doc/ESENZIONI_presidi.md` *(la lista FILE CAMBIATI e' giusta)*.
+
+**Le domande per Luca:** **(i)** le `4` altre funzioni `matrice` *(`_larghezza_risonanza`, `_massa_vicino_al_cono`, `_triangoli_bassa_energia`, `_vuoto_sul_fondo`)* vanno controllate allo stesso modo? *(criterio di chiusura: un si' o un no)* **(ii)** `MB.misure` va corretta *(`w_in` dallo stato della scena, non da quello che c'e')*? *(criterio di chiusura: un si' o un no; se si', prima si misura quanto cambia la seconda `misure` di `_massimo_di_B.cerca`)*

@@ -1,0 +1,14 @@
+[TIMBRO] _controllo_matrice.py  sha1-BYTE e0ab93ed  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DI matrice (Luca 21:03): LA GUARDIA -- _dove_va_la_materia.py sul disco sha1-BYTE 89b1ca18; la guardia al commit 6c5da5e8, il padre 2cec2ec7; la scena N 1e+06 L 81 eps 0.5
+==================================================================================================================================
+  DEVE PASSARE: il modulo in uso ha la guardia                                                                   PASSA   
+  DEVE PASSARE: con la guardia, dopo matrice ogni chiave di z["st"] = prima, AL BIT                              PASSA   Lambda = h_int = phi_h = psi = psi_h = rho =
+  DEVE PASSARE: il caso che DEVE fallire -- la matrice del padre lascia lo stato DIVERSO                         PASSA   Lambda = h_int = phi_h = psi = psi_h DIVERSO 2.92e+01 rho DIVERSO 9.46e-13
+  DEVE PASSARE: A con la guardia = A del padre, AL BIT                                                           PASSA   max |dA| 0.0e+00
+  MB.misure subito dopo matrice: w_in con la guardia 6.643741, col padre 0.227115
+  DEVE PASSARE: con la guardia MB.misure dopo matrice da' il w_in della scena (DC.forma prima di matrice), AL BI PASSA   6.643741075297 contro 6.643741075297
+  un tick dalla p della scena, dopo matrice e la ricarica: con la guardia 8438911e, col padre 8438911e
+  DEVE PASSARE: le corse (matrice, poi la ricarica, poi i tick) non cambiano: un tick uguale al bit con e senza  PASSA   
+==================================================================================================================================
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

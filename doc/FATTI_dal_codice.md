@@ -805,12 +805,16 @@
 
 ---
 
-## `_dove_va_la_materia.matrice` *(`csv/`, il tick lineare per `k`)* -- **SCRIVE LO STATO DELLA SCENA** *(2026-10-31)*
+## `_dove_va_la_materia.matrice` *(`csv/`, il tick lineare per `k`)* -- **SCRIVEVA LO STATO DELLA SCENA; DAL `2026-11-01` HA LA GUARDIA** *(2026-10-31, 2026-11-01)*
 
 ### ⛔ **`matrice(z, phi0, AMP)` lascia in `z["st"]["psi_h"]` e in `z["st"]["rho"]` i suoi vettori di prova** *(misurato: `psi_h` cambia di `2.5`, `rho` di `5060`, `Lambda` di `1.8e-15`; `phi_h`, `psi`, `h_int` no)*.
 - **Chi legge lo stato DOPO, nella stessa scena, legge quello di `matrice`:** `_deriva_congelato.forma` *(e quindi `_massimo_di_B.misure`)* ha dato `w_in 0.227` invece di `6.644`, e il cuore `0.00000` *(`1b6978f1`)*.
 - **Non tocca chi prende lo stato come ARGOMENTO:** `_modo_al_variare_di_s.tick(z, phi0, psi, ...)` da' lo stesso residuo prima e dopo, al bit.
 - ### **La regola: misurare lo stato PRIMA di `matrice`, o in una scena sua** *(come fanno `_coppia_di_B.lunga` e `_consolida_B.corsa`: `DC.forma` prima, poi `matrice`, poi lo stato caricato)*.
+- ### ⚠ **LA CORREZIONE DEI NUMERI** *(2026-11-01, `doc/referti_l2/controllo_matrice_stato.txt`, `csv/_controllo_matrice.py --stato`, sha1-BYTE `79dc7eb7`)*: **nella scena `N 1e6`, `L 81`, eps `0.5`** `matrice` cambia `psi_h` *(fino a `29`)* e **il campo** `z["st"]["rho"]` *(`9.5e-13`)*; ### **`Lambda`, `phi_h`, `psi`, `h_int` restano AL BIT.** I numeri sopra *(`rho 5060`, `Lambda 1.8e-15`)* vengono da una misura del `2026-10-31` di cui **non ho scritto la scena**: ### **non si riconciliano coi nuovi, e non li uso piu'.** *(Il `5060` e' forse la densita' calcolata dal vettore di prova, non il campo: non verificato.)*
+- **Dopo una ricarica di `psi_h`**, `DC.forma`, `EL.densita`, `CL.punto`, `SL.anelli` e un tick sono **uguali al bit** con e senza `matrice` prima *(E3)*. ### **L'unico lettore sensibile e' `_massimo_di_B.misure`, che calcola `w_in` PRIMA di caricare lo stato** *(E4: `0.227` contro `6.644`)*.
+- ### ✅ **LA GUARDIA** *(`6c5da5e8`, sha1-BYTE `89b1ca18`)*: `matrice` salva ogni array di `z["st"]` e lo **rimette in place** dopo. **Sigillo** `python csv/_controllo_matrice.py --guardia` *(`6/6`)*: lo stato al bit dopo `matrice`; `A` al bit con quella del padre; il padre lascia lo stato diverso *(il caso che deve fallire)*; `misure` dopo `matrice` da' il `w_in` della scena; un tick al bit con e senza guardia ⇒ **le corse vecchie non cambiano.**
+- ### ⚠ **Resta un fatto di `_massimo_di_B.misure`, non di `matrice`:** il suo `w_in` viene dallo stato **gia' nella scena**, quindi una seconda `misure` nella stessa scena lo prende dallo stato caricato dalla prima *(`_massimo_di_B.cerca`: `m` dopo `m_in`)*. **Non misurato.**
 
 ## `_congelato_lungo.punto` *(`csv/`, il cuore `f_win`)* -- **LA FINESTRA NETTA SALTA DI UN NODO** *(2026-11-01)*
 
