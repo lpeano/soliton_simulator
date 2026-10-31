@@ -1,0 +1,42 @@
+[TIMBRO] _massimo_di_B.py  sha1-BYTE b75de4f9  committato e pulito
+### (1) LO STATO DI PARTENZA: e05, eps 0.5, L 81, N 1e+06; l'inviluppo di S1 (quello di _energia_del_legame.stato) per la prima colonna QR della coppia di B a Gamma
+  DEVE PASSARE: il controllo positivo -- l'inviluppo per Q_K e la fase di K rifa' lo stato di A a K della scena  PASSA   1.4e-16
+  DEVE PASSARE: A(Gamma) q = e^{-i E0 s} q entro 1e-10                                                           PASSA   5.0e-16
+  DEVE PASSARE: E0 della scena = E0 del tick ricomposto di _chiudere_le_uscite entro 1e-05                       PASSA   +3.178178 contro +3.178178
+  DEVE PASSARE: la norma dello stato di partenza = N entro 1e-12 relativo                                        PASSA   1.1e-16
+  la coppia di B a Gamma: E0 +3.178178, degenere a 8.9e-16, separata dal livello sotto di 3.10193
+### (2) NEWTON (_livelli_piatti.newton invariato; il criterio di 26300537: residuo < 1e-09 entro 30 passi)
+  e05-L81: passo 0, residuo 3.296e-02, mu +4.162431257
+  e05-L81: passo 1, residuo 2.481e-02, mu +4.165626841, GMRES 89, dimezzamenti 2 (11 s)
+  e05-L81: passo 2, residuo 2.327e-02, mu +4.166219499, GMRES 168, dimezzamenti 4 (31 s)
+  e05-L81: passo 3, residuo 2.255e-02, mu +4.166556013, GMRES 326, dimezzamenti 5 (70 s)
+  e05-L81: passo 4, residuo 1.140e-02, mu +4.169605446, GMRES 58, dimezzamenti 1 (77 s)
+  e05-L81: passo 5, residuo 8.786e-03, mu +4.170110704, GMRES 106, dimezzamenti 2 (90 s)
+  e05-L81: passo 6, residuo 6.960e-03, mu +4.170317686, GMRES 112, dimezzamenti 2 (103 s)
+  e05-L81: passo 7, residuo 6.849e-03, mu +4.170358098, GMRES 115, dimezzamenti 6 (117 s)
+  e05-L81: passo 8, residuo 6.041e-03, mu +4.170556559, GMRES 59, dimezzamenti 3 (125 s)
+  e05-L81: passo 9, residuo 5.863e-03, mu +4.170609167, GMRES 69, dimezzamenti 5 (135 s)
+  e05-L81: passo 10, residuo 5.831e-03, mu +4.170597906, GMRES 71, dimezzamenti 8 (145 s)
+  e05-L81: passo 11, residuo 5.580e-03, mu +4.170772756, GMRES 51, dimezzamenti 3 (151 s)
+  e05-L81: passo 12, residuo 3.805e-03, mu +4.171278431, GMRES 43, dimezzamenti 1 (156 s)
+  e05-L81: passo 13, residuo 6.257e-03, mu +4.171973663, GMRES 45, dimezzamenti 0 (162 s)
+  e05-L81: passo 14, residuo 5.693e-03, mu +4.172018676, GMRES 52, dimezzamenti 3 (168 s)
+  e05-L81: passo 15, residuo 5.667e-03, mu +4.172020882, GMRES 73, dimezzamenti 5 (178 s)
+  e05-L81: passo 16, residuo 3.502e-03, mu +4.172024304, GMRES 21, dimezzamenti 1 (180 s)
+  e05-L81: passo 17, residuo 3.471e-03, mu +4.172031041, GMRES 68, dimezzamenti 8 (189 s)
+  e05-L81: passo 18, residuo 3.367e-03, mu +4.172142365, GMRES 30, dimezzamenti 0 (193 s)
+  e05-L81: passo 19, residuo 3.242e-03, mu +4.172152053, GMRES 74, dimezzamenti 5 (202 s)
+  e05-L81: passo 20, residuo 3.022e-03, mu +4.172161977, GMRES 54, dimezzamenti 4 (209 s)
+  e05-L81: passo 21, residuo 2.452e-03, mu +4.172096630, GMRES 24, dimezzamenti 0 (212 s)
+  e05-L81: passo 22, residuo 2.441e-03, mu +4.172102387, GMRES 610, dimezzamenti 8 (290 s)
+  e05-L81: passo 23, residuo 2.421e-03, mu +4.172103765, GMRES 610, dimezzamenti 7 (367 s)
+  e05-L81: passo 24, residuo 2.411e-03, mu +4.172104725, GMRES 610, dimezzamenti 8 (446 s)
+  e05-L81: passo 25, residuo 3.496e-03, mu +4.172003328, GMRES 610, dimezzamenti 8 (525 s)
+  e05-L81: passo 26, residuo 2.772e-03, mu +4.171933574, GMRES 53, dimezzamenti 2 (532 s)
+  e05-L81: passo 27, residuo 2.621e-03, mu +4.171899757, GMRES 74, dimezzamenti 4 (541 s)
+  e05-L81: passo 28, residuo 2.610e-03, mu +4.171907212, GMRES 151, dimezzamenti 8 (560 s)
+  e05-L81: passo 29, residuo 2.534e-03, mu +4.171922135, GMRES 113, dimezzamenti 5 (575 s)
+  e05-L81: passo 30, residuo 2.524e-03, mu +4.171920121, GMRES 516, dimezzamenti 8 (640 s)
+  e05 L 81: NON CONVERGE: lo stato migliore, dichiarato (residuo 2.411e-03), mu +4.172104725 (mu - E0 +0.99393); w 6.437 (L/6 13.50: dentro), cuore f_win 0.61281, picco 5402.59; alpha del cuore 1.00000 (g 1), della coda 0.00000
+  la partenza: w 6.644, cuore 0.58667, picco 5066.64; la storia del residuo 3.3e-02 2.5e-02 2.3e-02 2.3e-02 1.1e-02 8.8e-03 7.0e-03 6.8e-03 6.0e-03 5.9e-03 5.8e-03 5.6e-03 3.8e-03 6.3e-03 5.7e-03 5.7e-03 3.5e-03 3.5e-03 3.4e-03 3.2e-03 3.0e-03 2.5e-03 2.4e-03 2.4e-03 2.4e-03 3.5e-03 2.8e-03 2.6e-03 2.6e-03 2.5e-03 2.5e-03
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
