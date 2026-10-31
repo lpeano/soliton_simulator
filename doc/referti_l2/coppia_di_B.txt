@@ -1,0 +1,51 @@
+[TIMBRO] _coppia_di_B.py  sha1-BYTE 12dfa491  committato e pulito
+==================================================================================================================================
+LA SCELTA DENTRO LA COPPIA E LA CORSA LUNGA ANCHE SENZA STATO FERMO (Luca 13:52): il massimo di B a Gamma, S1, N 1e+06, s 0.15, r 1, g 1, il congelato vero, L 81
+  la configurazione: TETA ['0.0000', '0.2618', '0.5236', '0.7854', '1.0472', '1.3090', '1.5708'] FI ['0.0000', '0.7854', '1.5708', '2.3562', '3.1416', '3.9270', '4.7124', '5.4978'] FATTORE 10 TOLL_ORTO 1e-12 TOLL_BLOCH 1e-10 T_LUNGA 20000 PEZZO 4000 OGNI 10 OGNI_D 20 ESAME 40 FINESTRA 500 EPS_LUNGA 0.5 CORSE ('B', 'AK') TOLL_NORMA 1e-10; da _strada_b_r: MAX_NEWTON 30 TOLL_RES 1e-09
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (q1) il residuo dipende dalla scelta e una scelta fa convergere Newton; (q2) la rotazione dentro la coppia e' libera: col vincolo converge o no; (q3) il cuore di B a Gamma RESTA mentre quello di A a K si svuota; (q4) il cuore di B si svuota: quale uscita; (q5) altro
+==================================================================================================================================
+### (1) LA SCELTA DENTRO LA COPPIA (griglia.json)
+  e0 (eps 0): q1 sigma_z +1.00000 elicita' -0.00000; q2 sigma_z -1.00000 elicita' -0.00000; il residuo 3.3028e-02 .. 3.3028e-02 (s0 1.39e-17): NON DIPENDE (direzione libera); il minimo theta 1.5708 phi 2.3562 (3.3028e-02)
+  e05 (eps 0.5): q1 sigma_z +0.97883 elicita' +0.14549; q2 sigma_z -0.97883 elicita' +0.14549; il residuo 3.2947e-02 .. 3.2958e-02 (s0 1.39e-17): DIPENDE; il minimo theta 0.7854 phi 3.9270 (3.2947e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) NEWTON DALLA SCELTA MIGLIORE
+  DEVE PASSARE: e05, lo stato sul disco = la ricerca (sha1)                                                      PASSA   d22b7cc2
+  e05: NON FERMO (residuo 6.806e-05 in 30 passi), mu - E0 +0.99396; w 6.429, cuore 0.62039; la storia 3.3e-02 2.9e-02 2.2e-02 3.6e-03 3.1e-03 3.4e-03 3.3e-03 2.8e-03 2.3e-03 2.3e-03 2.3e-03 2.1e-03 2.9e-03 2.1e-03 1.8e-03 1.5e-03 1.3e-03 8.0e-04 5.4e-04 5.4e-04 4.1e-04 3.2e-04 7.2e-05 6.8e-05 6.8e-05 6.8e-05 6.8e-05 6.9e-05 7.0e-05 6.9e-05 6.9e-05
+  e0: nessuna ricerca (la rotazione e' libera: non si insiste)
+----------------------------------------------------------------------------------------------------------------------------------
+### (3) LE CORSE LUNGHE (eps 0.5, 20000 tick; le finestre di 500)
+  DEVE PASSARE: B, M entro 1e-10 relativo nella corsa                                                            PASSA   1.2e-11
+  --- B: la partenza il punto 2 (cerca_e05.json, NON FERMO), residuo 6.806e-05; 5 pezzi, tick 20000
+    tau [    0,   500]: cuore 0.62039 -> 0.62834 (pendenza +9.279e-06; fra 0.62019 e 0.63150); w/w_in 0.96770 -> 0.95901; alone 0.00000 -> 0.00000; picco medio 5444.84 | D 3.736e-02 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    tau [  500,  1000]: cuore 0.62828 -> 0.62188 (pendenza -1.798e-06; fra 0.61914 e 0.63197); w/w_in 0.95911 -> 0.96522; alone 0.00000 -> 0.00000; picco medio 5430.22 | D 6.143e-02 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    tau [ 1000,  1500]: cuore 0.62206 -> 0.62503 (pendenza +3.665e-06; fra 0.62206 e 0.63124); w/w_in 0.96510 -> 0.96478; alone 0.00000 -> 0.00000; picco medio 5454.56 | D 9.018e-02 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    tau [ 1500,  2000]: cuore 0.62503 -> 0.62946 (pendenza -1.761e-06; fra 0.62006 e 0.63137); w/w_in 0.96478 -> 0.95779; alone 0.00000 -> 0.00000; picco medio 5433.72 | D 1.187e-01 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    tau [ 2000,  2500]: cuore 0.62946 -> 0.62273 (pendenza +2.636e-06; fra 0.61884 e 0.63195); w/w_in 0.95774 -> 0.96745; alone 0.00000 -> 0.00000; picco medio 5445.55 | D 1.491e-01 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    tau [ 2500,  3000]: cuore 0.62276 -> 0.62850 (pendenza +5.191e-06; fra 0.62276 e 0.63132); w/w_in 0.96743 -> 0.96137; alone 0.00000 -> 0.00000; picco medio 5449.13 | D 1.786e-01 (A 0.000 B 1.000 P0 0.000 Ppi 0.000)
+    le rotazioni a fine pezzo 00000: A -0.0585 (E +4.1136) B -0.0030 (E +4.1691) P0 -0.0125 (E +4.1596) Ppi -0.0350 (E +4.1372)
+    le rotazioni a fine pezzo 04000: A -0.0837 (E +4.0884) B -0.0008 (E +4.1713) P0 -0.0139 (E +4.1583) Ppi -0.0493 (E +4.1229)
+    le rotazioni a fine pezzo 08000: A -0.0714 (E +4.1008) B -0.0004 (E +4.1717) P0 -0.0144 (E +4.1577) Ppi -0.0367 (E +4.1354)
+    le rotazioni a fine pezzo 12000: A -0.0619 (E +4.1103) B -0.0003 (E +4.1719) P0 -0.0121 (E +4.1600) Ppi -0.0277 (E +4.1444)
+    le rotazioni a fine pezzo 16000: A -0.0671 (E +4.1050) B -0.0002 (E +4.1720) P0 -0.0138 (E +4.1584) Ppi -0.0277 (E +4.1444)
+  DEVE PASSARE: AK, M entro 1e-10 relativo nella corsa                                                           PASSA   1.1e-11
+  --- AK: la partenza lo stato iniziale della scena (l'inviluppo per Q_K e la fase di K), mu di Rayleigh; 5 pezzi, tick 20000
+    tau [    0,   500]: cuore 0.58919 -> 0.52100 (pendenza -1.235e-04; fra 0.51571 e 0.59222); w/w_in 1.00000 -> 1.10397; alone 0.00000 -> 0.00108; picco medio 4587.98 | D 1.393e+00 (A 0.875 B 0.000 P0 0.115 Ppi 0.009)
+    tau [  500,  1000]: cuore 0.51540 -> 0.48381 (pendenza -5.803e-05; fra 0.48222 e 0.52027); w/w_in 1.11208 -> 1.17344; alone 0.00109 -> 0.00214; picco medio 4118.97 | D 1.983e+00 (A 0.905 B 0.000 P0 0.069 Ppi 0.025)
+    tau [ 1000,  1500]: cuore 0.48397 -> 0.48421 (pendenza -1.883e-05; fra 0.47485 e 0.49503); w/w_in 1.17261 -> 1.19453; alone 0.00215 -> 0.00295; picco medio 3938.45 | D 1.611e+00 (A 0.899 B 0.001 P0 0.084 Ppi 0.016)
+    tau [ 1500,  2000]: cuore 0.48421 -> 0.47699 (pendenza -1.051e-05; fra 0.46452 e 0.48936); w/w_in 1.19453 -> 1.22188; alone 0.00295 -> 0.00371; picco medio 3852.40 | D 7.560e-01 (A 0.951 B 0.003 P0 0.018 Ppi 0.027)
+    tau [ 2000,  2500]: cuore 0.48009 -> 0.46304 (pendenza -1.488e-05; fra 0.45791 e 0.48156); w/w_in 1.21956 -> 1.24647; alone 0.00371 -> 0.00430; picco medio 3733.33 | D 6.323e-01 (A 0.661 B 0.005 P0 0.177 Ppi 0.157)
+    tau [ 2500,  3000]: cuore 0.45785 -> 0.44565 (pendenza -2.031e-05; fra 0.44565 e 0.46368); w/w_in 1.25521 -> 1.27361; alone 0.00430 -> 0.00485; picco medio 3631.66 | D 1.529e+00 (A 0.879 B 0.001 P0 0.081 Ppi 0.039)
+    le rotazioni a fine pezzo 00000: A -0.0396 (E -0.6052) B +2.4164 (E +1.8507) P0 +0.9066 (E +0.3410) Ppi -0.9329 (E -1.4986)
+    le rotazioni a fine pezzo 04000: A -0.0622 (E -0.6279) B +2.6983 (E +2.1327) P0 +0.9262 (E +0.3606) Ppi -1.0220 (E -1.5876)
+    le rotazioni a fine pezzo 08000: A -0.0402 (E -0.6058) B +2.7977 (E +2.2321) P0 +0.9621 (E +0.3965) Ppi -1.0061 (E -1.5718)
+    le rotazioni a fine pezzo 12000: A -0.0433 (E -0.6090) B +2.8661 (E +2.3004) P0 +0.9739 (E +0.4082) Ppi -0.9729 (E -1.5385)
+    le rotazioni a fine pezzo 16000: A -0.0419 (E -0.6075) B +2.8982 (E +2.3326) P0 +0.9612 (E +0.3956) Ppi -1.0488 (E -1.6144)
+  il contesto (26300537, s 0.3, eps 0, dallo stato fermo di A a K): il cuore 0.63001 a tau 0, 0.45433 a tau 3000
+----------------------------------------------------------------------------------------------------------------------------------
+### LE LETTURE (i numeri accanto: "resta" e "si svuota" non hanno soglia)
+  e0: la rotazione dentro la coppia e' LIBERA: (q2), senza vincolo (non si insiste)
+  e05: il residuo DIPENDE dalla scelta; Newton dalla migliore: NON FERMO (6.806e-05) -> (q1) no: la scelta non basta
+  la corsa: B il cuore 0.62039 -> 0.62850 (w/w_in 0.9614 a fine); AK 0.58919 -> 0.44565 (w/w_in 1.2736); le pendenze per finestra B +9.3e-06 -1.8e-06 +3.7e-06 -1.8e-06 +2.6e-06 +5.2e-06 | AK -1.2e-04 -5.8e-05 -1.9e-05 -1.1e-05 -1.5e-05 -2.0e-05
+  ### (q3) se B resta e AK si svuota; (q4) se B si svuota (le bande di D qui sopra); i numeri sono questi: la parola nella relazione
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []
