@@ -22476,3 +22476,8 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **La MAPPA:** accanto a (7), (1) e alla riga `11` *(le piatte)*, «nel codice: ...», col commit dell'allineamento.
 
 **I mandati in coda sono finiti.** **Il criterio di chiusura dei due punti:** una decisione di Luca registrata nella MAPPA.
+
+## 2026-11-01 — S1 E LA MONETA NEL NUCLEO (Luca 16:52): IL RIFERIMENTO DELLA SUITE SUL NUCLEO DI PRIMA -- 64/64 rc 0
+
+
+**Il riferimento** *(`doc/referti_l2/s1_e_moneta_nel_nucleo/prima.json`, da `python csv/_suite_al_bit.py --gira prima`, sha1-BYTE `1827005a`, girato a `27655e28`, sul nucleo **prima** di ogni modifica)*: ogni collaudo di `collauda.COLLAUDI` *(`64`)* gira uno alla volta. Per ognuno c'e' lo `sha1` dell'uscita **senza le righe dei tempi e dei timbri**, e tutti escono con codice `0`. **Prima di toccare il nucleo lo rigiro una seconda volta** *(`prima_bis`)*: dira' quali uscite cambiano **da sole**, senza nessuna modifica.
