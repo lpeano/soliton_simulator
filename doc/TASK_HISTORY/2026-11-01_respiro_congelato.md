@@ -44,3 +44,26 @@ Senza questo controllo non si sa se l'allargamento dopo `~5000` sia un effetto d
 3. `--ripartizione > doc/referti_l2/ripartizione_vuoto_vivo.txt` *(breve)*: committato. **Se il caso nullo fallisce: FERMO.**
 4. `--corsa` a pezzi di `10000` tick, uno alla volta, ognuno committato *(un driver)*, fino a tick `66667`.
 5. `--referto > doc/referti_l2/respiro_congelato.txt`; la MAPPA *(la sezione `2` riga `1`)*; `doc/CHIUDERE_LE_USCITE.md`; `RELAZIONE`; la sezione `6` qui. **Se esce (c2):** il tempo di vita come detto nelle premesse, e **la proposta a Luca, senza eseguirla, di una prova a `L 120`** per escludere gli effetti di bordo.
+
+## 6. L'ESITO
+
+
+**Il referto** *(`doc/referti_l2/respiro_congelato.txt`, sha1-BYTE `4004db2e`, girato da `csv/_respiro_congelato.py` sha1-BYTE `65a5abef` a `b2774bb7`)*: BG-F-0.15, la stessa scena e la stessa partenza della corsa viva *(`mu`, `w_in`, `e_K` asseriti uguali nello script)*, col tick congelato vero *(`_congelato_lungo.avanza`)* fino a `10000` in `7` pezzi *(`6ce50e1b` .. `b2774bb7`)*, la ripresa al bit fra i pezzi. **`3/3` DEVE:** arriva a `10000`; `dM 3.9e-11`, `dV 0`; il libro dei conti col `par` della corsa.
+
+**I fatti, a blocchi di `1000`:**
+
+| | il cuore | `w` | cuore x `w` | l'alone |
+|---|---|---|---|---|
+| VIVO `0`-`1000` | `0.460` | `8.07` | `3.685` | `0.0008` |
+| VIVO `9000`-`10000` | `0.416` | `9.86` | `4.095` | `0.0218` |
+| CONGELATO `0`-`1000` | `0.592` | `6.68` | `3.953` | `0.00037` |
+| CONGELATO `9000`-`10000` | `0.600` | `6.63` | `3.976` | `0.00049` |
+
+- **a vuoto congelato `w` non cresce** *(`6.68` -> `6.63`, le pendenze per blocco dei due segni, `|.| <= 2.3e-2` per `1000`)*, **l'alone resta a `~5e-4`** *(contro `0.022` col vuoto vivo)*, **il cuore sale appena** *(`0.592` -> `0.600`)*; `D` resta in `B` *(`0.995`-`0.999` da tempo `2500`; a tempo `3` le due corse sono uguali, `B 0.103`, `P0 0.885`)*;
+- **col vuoto vivo la differenza c'e' gia' nel primo blocco** *(il cuore `0.460` contro `0.592`, l'alone che cresce da subito con pendenza `1.3e-3` per `1000`)*: **non comincia a `~5000`**; a `~5000` comincia solo la crescita di `w`;
+- **la forma, sul tratto `5000`-`10000` del vivo:** l'alone **lineare** *(il rapporto fra le pendenze dei terzi `0.990`; il residuo del fit lineare `3.8e-5`, dell'esponenziale `4.1e-4`)*; per `w` **indecisa** *(il rapporto `1.099`; i residui `7.9e-2` e `8.1e-2`)*;
+- **`Lambda` medio sotto il solitone, col vuoto vivo, SALE** *(`6.000` -> `6.221`)*, e lontano scende *(`6.000` -> `5.976`)*; a vuoto congelato resta `6.000`.
+
+**La lettura, per la domanda posta: (c1)** -- l'allargamento non appartiene al solitone su questo vuoto: **senza vuoto vivo non c'e'.** **Ma la parentesi di (c1)** *(«`Lambda` che cala sotto il solitone»)* **NON e' quella misurata:** sotto il solitone `Lambda` cresce di `0.22`. **Il meccanismo resta aperto**, e per questo la classificazione fra (c1) e (c3) **la lascio a Luca**. Con (c2) escluso, il tempo di vita da `w(t)` e la proposta a `L 120` **non servono**; l'estrapolazione dichiarata del vivo *(il cuore sotto meta' a `~15400`, con la pendenza degli ultimi `3000`)* **non e' una misura**.
+
+**Per la decisione `10`:** il fondo `F0` congelato tiene `BG` fermo per `10000`; **vivo, il vuoto stesso si muove** *(su di `0.22` sotto, giu' di `0.024` lontano)* e il solitone si allarga. **Se il fondo diventa vuoto di riferimento, la domanda e' perche' il fondo vivo non resta fermo sotto il solitone.**

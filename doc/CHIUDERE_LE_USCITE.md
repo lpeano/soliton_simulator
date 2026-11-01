@@ -127,3 +127,9 @@ La vita di un solitone e' `ln(soglia/seme)/gamma` *(`795d2c81`, `45cc48d8`)*. **
 - ### **Sul vuoto del FONDO** *(`F0`)* **reggono tutti e due fino a `3000`**, `BG` meglio *(il cuore `0.51` contro `0.41`; `D` resta in `B`, mentre quello di `AK` lascia `A`)*. **`BG` continuato regge fino a `10000`, ma non e' fermo:** dopo `~5000` il cuore cala da `0.517` a `0.416` di media, l'alone cresce da `0.0055` a `0.023`, `w` da `7.9` a `10.0`, `D` sempre in `B` *(la lettura (r2); `doc/referti_l2/respiro_sul_fondo.txt`)*.
 - ### **L'energia:** il `DEVE` di `H_tot` a `O(s^2)` di `326747d0` falliva perche' **il libro dei conti contava a eps `0`** *(il termine della moneta mancava)*; corretto *(`029cac81`)*, il rapporto e' `3.88` e `3.90` *(`doc/referti_l2/energia_vuoto_vivo.txt`, `12/12`)*.
 - ### **Che cosa decide Luca:** il vuoto del fondo come vuoto fisico del modello *(la MAPPA, sez. `5`, decisione `10`)*.
+
+## 12. IL RESPIRO A VUOTO CONGELATO *(Luca `2026-11-01`, dopo `1ee60e19`; `csv/_respiro_congelato.py`, `doc/referti_l2/respiro_congelato.txt`, `3/3`)*
+
+- ### **A vuoto CONGELATO** *(`F0` fermo, `_congelato_lungo.avanza`)* **`BG` a `s 0.15` non si allarga in `10000`:** `w` `6.68` -> `6.63`, l'alone `~5e-4`, il cuore `0.592` -> `0.600`, `D` in `B`. **Col vuoto VIVO**, dalla stessa partenza, `w` `8.07` -> `9.86` e l'alone `0.0008` -> `0.022`.
+- ### **La lettura (c1) per la domanda posta: l'allargamento e' del vuoto vivo.** **Ma `Lambda` sotto il solitone SALE** *(`6.000` -> `6.221`; lontano `5.976`)*, **non cala come diceva la parentesi di (c1):** il meccanismo resta aperto, e fra (c1) e (c3) decide Luca.
+- ### **L'alone del vivo cresce LINEARE** *(dal primo blocco, `~2.5e-3` per `1000` dopo `3000`)*; per `w` lineare ed esponenziale non si distinguono sul tratto `5000`-`10000`.

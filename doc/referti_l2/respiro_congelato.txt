@@ -1,0 +1,62 @@
+[TIMBRO] _respiro_congelato.py  sha1-BYTE 65a5abef  committato e pulito
+==================================================================================================================================
+IL CONTROLLO A VUOTO CONGELATO DEL RESPIRO SUL FONDO (Luca, dopo 1ee60e19): BG-F-0.15 (BG, il fondo F0, s 0.15, eps 0.5, N 1e+06, L 81, cs spento, lo zero conv('simm')) col vuoto VIVO (il tick intero) e CONGELATO (_congelato_lungo.avanza), fino a 10000
+  la configurazione: TAU_FINE 10000 BLOCCO 1000 TRATTO (5000.0, 10000.0) ISTANTI (0.0, 2500.0, 5000.0, 7500.0, 10000.0); di _vuoto_vivo_B: PEZZO 10000 OGNI 10 OGNI_D 20 META 0.5 R_VICINO 2 LAM_ZERO 0.5 TOLL_NORMA 1e-10; il libro dei conti della corsa congelata col par della corsa
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (c1) a vuoto congelato w resta limitato: e' il vuoto vivo; (c2) anche a vuoto congelato w cresce in modo simile: e' del solitone; (c3) altro
+==================================================================================================================================
+### la corsa congelata: REGGE fino a 10000; 7 pezzi, 6667 campioni, 3062 s
+### VIVO, a blocchi di 1000 (le medie; le pendenze per 1000 unita' di tempo; il baricentro: la distanza dalla posizione iniziale)
+    il tempo          cuore     w         cuore x w   alone      pend. alone    pend. w        baric.   
+          0 ..    1000 0.46031   8.0673    3.68530     0.00080    +1.3220e-03    +8.9813e-01    0.2208
+       1000 ..    2000 0.42617   8.4976    3.61235     0.00233    +1.7240e-03    -3.0011e-01    1.0117
+       2000 ..    3000 0.47622   8.0679    3.84100     0.00437    +2.2452e-03    -8.5196e-02    2.0011
+       3000 ..    4000 0.50863   7.9162    4.02422     0.00660    +2.3235e-03    -1.7719e-01    1.3013
+       4000 ..    5000 0.51741   8.0288    4.15305     0.00899    +2.3480e-03    +2.0175e-01    2.5753
+       5000 ..    6000 0.51033   8.2861    4.22685     0.01153    +2.6259e-03    +3.0439e-01    2.5256
+       6000 ..    7000 0.49092   8.6368    4.23840     0.01412    +2.5175e-03    +4.0928e-01    1.7660
+       7000 ..    8000 0.46118   9.0856    4.18909     0.01669    +2.6157e-03    +4.0977e-01    2.6631
+       8000 ..    9000 0.43939   9.4592    4.15540     0.01925    +2.5768e-03    +3.8637e-01    1.4591
+       9000 ..   10000 0.41552   9.8575    4.09542     0.02181    +2.5275e-03    +1.5177e-01    1.3835
+    Lambda medio sotto il solitone 6.000000 -> 6.221331; lontano 6.000000 -> 5.975703
+### CONGELATO, a blocchi di 1000 (le medie; le pendenze per 1000 unita' di tempo; il baricentro: la distanza dalla posizione iniziale)
+    il tempo          cuore     w         cuore x w   alone      pend. alone    pend. w        baric.   
+          0 ..    1000 0.59175   6.6801    3.95285     0.00037    +2.6493e-04    -2.2532e-02    0.3023
+       1000 ..    2000 0.59396   6.6700    3.96163     0.00044    +2.9679e-05    -1.8662e-02    0.3331
+       2000 ..    3000 0.59733   6.6434    3.96829     0.00045    +2.4520e-05    -1.0658e-02    0.3382
+       3000 ..    4000 0.59828   6.6365    3.97046     0.00047    +5.8213e-06    +6.9526e-05    0.3348
+       4000 ..    5000 0.59906   6.6325    3.97323     0.00047    +1.1591e-05    +2.7486e-03    0.3439
+       5000 ..    6000 0.59911   6.6322    3.97340     0.00048    +1.7058e-05    -3.1148e-03    0.3583
+       6000 ..    7000 0.59939   6.6307    3.97433     0.00048    +6.0711e-06    +1.1191e-03    0.3673
+       7000 ..    8000 0.59965   6.6292    3.97519     0.00048    +7.2969e-07    +3.0366e-03    0.3704
+       8000 ..    9000 0.59982   6.6291    3.97626     0.00049    +8.8335e-06    -6.0708e-03    0.3608
+       9000 ..   10000 0.59981   6.6286    3.97589     0.00049    +5.4317e-07    +2.2506e-03    0.3644
+    Lambda medio sotto il solitone 6.000000 -> 6.000000; lontano 6.000000 -> 6.000000
+----------------------------------------------------------------------------------------------------------------------------------
+### LA FORMA DELLA CRESCITA
+  VIVO, w sul tratto 5000 .. 10000: la pendenza del primo terzo +3.2036e-01, dell'ultimo +3.5199e-01 per 1000, il rapporto 1.099; il fit lineare: residuo RMS 7.9008e-02; l'esponenziale v = A e^{k t}: k +4.3582e-05 per unita' di tempo, residuo RMS 8.1443e-02
+  VIVO, l'alone sul tratto 5000 .. 10000: la pendenza del primo terzo +2.6024e-03, dell'ultimo +2.5760e-03 per 1000, il rapporto 0.990; il fit lineare: residuo RMS 3.8288e-05; l'esponenziale v = A e^{k t}: k +1.5900e-04 per unita' di tempo, residuo RMS 4.0579e-04
+  CONGELATO, w sul tratto 5000 .. 10000: la pendenza del primo terzo -1.5214e-03, dell'ultimo -5.8666e-04 per 1000, il rapporto 0.386; il fit lineare: residuo RMS 8.3691e-03; l'esponenziale v = A e^{k t}: k -1.2899e-07 per unita' di tempo, residuo RMS 8.3691e-03
+  CONGELATO, l'alone sul tratto 5000 .. 10000: la pendenza del primo terzo +7.1365e-06, dell'ultimo -4.3911e-07 per 1000, il rapporto -0.062; il fit lineare: residuo RMS 5.3353e-06; l'esponenziale v = A e^{k t}: k +9.0759e-06 per unita' di tempo, residuo RMS 5.3392e-06
+----------------------------------------------------------------------------------------------------------------------------------
+### LE BANDE DI D
+  VIVO      a tempo     3.0: |D|/|psi0| 1.0023e-01; le bande A 0.0078 B 0.1027 P0 0.8860 Ppi 0.0036
+  VIVO      a tempo  2499.0: |D|/|psi0| 7.9724e-01; le bande A 0.0018 B 0.9879 P0 0.0089 Ppi 0.0014
+  VIVO      a tempo  5001.0: |D|/|psi0| 1.9641e+00; le bande A 0.0006 B 0.9973 P0 0.0012 Ppi 0.0009
+  VIVO      a tempo  7500.0: |D|/|psi0| 1.1620e+00; le bande A 0.0028 B 0.9848 P0 0.0080 Ppi 0.0045
+  VIVO      a tempo  9999.0: |D|/|psi0| 9.2065e-01; le bande A 0.0055 B 0.9682 P0 0.0179 Ppi 0.0083
+  CONGELATO a tempo     3.0: |D|/|psi0| 1.0021e-01; le bande A 0.0088 B 0.1026 P0 0.8847 Ppi 0.0039
+  CONGELATO a tempo  2499.0: |D|/|psi0| 1.2528e+00; le bande A 0.0006 B 0.9960 P0 0.0031 Ppi 0.0002
+  CONGELATO a tempo  5001.0: |D|/|psi0| 1.9200e+00; le bande A 0.0003 B 0.9990 P0 0.0006 Ppi 0.0001
+  CONGELATO a tempo  7500.0: |D|/|psi0| 1.9058e+00; le bande A 0.0003 B 0.9984 P0 0.0012 Ppi 0.0001
+  CONGELATO a tempo  9999.0: |D|/|psi0| 1.2717e+00; le bande A 0.0007 B 0.9951 P0 0.0039 Ppi 0.0003
+----------------------------------------------------------------------------------------------------------------------------------
+### L'ESTRAPOLAZIONE DICHIARATA (NON una misura): se il cuore liscio continuasse con la pendenza degli ultimi 3000, il tempo a cui scenderebbe sotto 0.5 volte il valore iniziale (il criterio di dissoluzione delle corse)
+  VIVO      la pendenza del cuore negli ultimi 3000 -2.1947e-02 per 1000; sotto 0.29582 a tempo ~15434
+  CONGELATO la pendenza del cuore negli ultimi 3000 +7.6581e-05 per 1000; il cuore non cala: nessuna estrapolazione
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE: la corsa congelata arriva a 10000 o si scioglie                                                  PASSA   
+  DEVE PASSARE: M e V entro 1e-10 (la corsa congelata)                                                           PASSA   dM 3.9e-11 dV 0.0e+00
+  DEVE PASSARE: la corsa congelata e' stata fatta col libro col par della corsa                                  PASSA   
+==================================================================================================================================
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []
