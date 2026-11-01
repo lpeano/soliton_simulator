@@ -22422,3 +22422,26 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Per gli script nuovi:** `import solitone.uscite`, `solitone.protetto` e `solitone.misure`, con `csv/` nel `sys.path`.
 
 **Il mandato delle `01:22` e' chiuso. Le decisioni che il mandato elenca** *(la moneta (7), `S1` (1), le piatte (17, 19, 25), la regola dei livelli piatti)* **restano di Luca.** **Il successivo in coda e' ⑧** *(`01:27` + `01:28`)*.
+
+## 2026-11-01 — LE DECISIONI CHIUSE E LE VOCI SUPERATE (Luca 01:27): SEGNATE NELLA MAPPA, IN BANDE_PIATTE E IN CHIUDERE_LE_USCITE
+
+
+**Le tre decisioni di Luca, segnate PRESE nella sezione `5` della MAPPA** *(con data, ora e i commit che le motivano)*:
+- **(7) la moneta accesa:** eps `0.5` come nella tabella; eps `0` solo come caso ridotto, dichiarato. L'origine fisica *(elicita' o spin-orbita)* resta una domanda;
+- **(1) `S1`;**
+- **le bande piatte: la strada (A), senza cura** *(una riga nuova, la `11`)*.
+
+**Le voci della lista in attesa chiuse** *(spostate in una tabella «LE VOCI CHIUSE», con la riga com'era, il motivo e il commit)*:
+- `15`: non serve, per la strada (A);
+- `16` e `20`: superate da (1);
+- `17`, `19` e `25`: decise, la strada (A);
+- `13` e `26`: superate, perche' riguardano il solitone non protetto;
+- `22`: spiegata, e' l'uscita mista;
+- `29`: risolta per `B` a `Gamma`.
+
+**Annotati accanto, non toccati:**
+- la sez. `2` riga `1` e la riga `d`;
+- la promozione della regola dei livelli piatti, coi suoi limiti, che e' di Luca;
+- le voci `27` e `28`.
+
+**Una riga in cima** a `doc/BANDE_PIATTE.md` e a `doc/CHIUDERE_LE_USCITE.md`. **«Nel codice: ...»** accanto a ogni decisione arriva dopo la lettura del codice *(il mandato delle `01:28`)*.

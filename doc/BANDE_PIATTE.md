@@ -1,5 +1,7 @@
 # LE BANDE PIATTE: IL MENU PER LA DECISIONE *([[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]]; il mandato di Luca delle `19:12` del `2026-10-29`)*
 
+> **LE DECISIONI DI LUCA** *(`2026-11-01` `01:27`)*: **(7) la moneta di spin ACCESA**, eps `0.5` come nella tabella, e' il modello *(eps `0` solo come caso ridotto, dichiarato)*; **(1) `S1`**; **le bande piatte: la strada (A)**, tenerle come fisica del modello, col solitone costruito sul massimo di `B` a `Gamma`, **NESSUNA CURA** *(ne' (B) ne' (C))*. I motivi e i commit: la MAPPA, sez. `5`.
+
 > **Il documento NON sceglie: la decisione fra `(A)`, `(B)`, `(C)` e' di Luca.**
 > **I numeri:** `doc/referti_l2/bande_piatte.txt` *(`python csv/_bande_piatte.py --referto`, lo script `sha1-BYTE 3d62588b`, `919b610a`; `5/5`)*; il task history `doc/TASK_HISTORY/2026-10-29_bande_piatte_menu.md` *(`c4fe2712`)*.
 > **Il quadro:** il tick libero di `S1`, `L 81`, la convenzione `simm` degli strumenti; le energie per unita' di tempo, `-arg(lambda)/s`; `s 0.15` dove non e' detto.

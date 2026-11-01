@@ -1,5 +1,7 @@
 # CHIUDERE LE USCITE *(Luca, `2026-10-31` `00:38`, con `00:44` e `00:50`; SULLA CARTA E SUL TICK LIBERO, NESSUNA CORSA DI SOLITONI; [[PIANO-2D-3D]], [[PROGETTO-MASSA-COLLETTIVA]])*
 
+> **LE DECISIONI DI LUCA** *(`2026-11-01` `01:27`)*: **(7) la moneta di spin ACCESA**, eps `0.5` come nella tabella, e' il modello *(eps `0` solo come caso ridotto, dichiarato)*; **(1) `S1`**; **le bande piatte: la strada (A)**, tenerle come fisica del modello, col solitone costruito sul massimo di `B` a `Gamma`, **NESSUNA CURA** *(ne' (B) ne' (C))*. I motivi e i commit: la MAPPA, sez. `5`.
+
 > **I conti:** `csv/_chiudere_le_uscite.py` *(sha1-BYTE `1ee42dbe`)*, il referto `doc/referti_l2/chiudere_le_uscite.txt` *(`4/4` DEVE)*. **Il task history:** `doc/TASK_HISTORY/2026-10-31_chiudere_le_uscite.md`. **`eps 0.5` e' il caso principale, `eps 0` il ridotto.**
 
 ## IL PRIMO RISULTATO *(Luca `2026-10-31` `15:58`, la lettura (k1); il dettaglio nella sez. `10`)*
