@@ -22564,3 +22564,26 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **I presidi:** `P-MOD` *(quattro import di `materia_vuoto` dichiarati in mappa)*; `P-R1` *(tolto il ramo di `termini_di_h`, che non c'e' piu')*. **Il blob di `csv/_rami_era2.py` nell'inventario era scaduto** *(`335cd798`)*, e non l'avevo aggiornato in `c7ad2238`: corretto.
 
 **Le corse vere** *(la suite con `S3` esplicita, poi col predefinito, poi la cassetta)* vengono dopo questo commit, una alla volta.
+
+
+## 2026-11-01 — S1 NEL NUCLEO, LA CHIUSURA (Luca): L'ESITO -- H_w TORNA A PENDENZA 2 (h1), SUITE rc 0 NEI DUE MODI; LA CASSETTA 37/38: e_K CAMBIA DI 1 CON S1 -- FERMO, DECIDE LUCA
+
+**Il referto:** `doc/referti_l2/s1_nucleo_chiusura.txt` *(le corse a `00821633`, una alla volta)*.
+
+- **`C1` passa, lettura `(h1)`:** `H_w` col predefinito `S1` ha pendenza **`1.953`** in `(b)` e **`1.995`** in `(a)`; nel modo dinamico `2.082`. Con la formula vecchia era `0.045` e `0.154`. **Erano tre righe vecchie, non una** *(`energia_pesata` e due in `_misura_mb2`)*.
+- **`C2` passa:** con `S3` esplicita, contro `dopo_S3` *(gia' giudicato solo metadati contro `prima`)*: `58` uguali e `7` diversi. Le differenze sono solo tempi, una riga di codice, conteggi e le righe nuove dei bracci `S1`. **`H_w`, `M-B1` e `L2` sono al bit.**
+- **`C3` passa:** col predefinito `S1`, `65` collaudi su `65` con codice `0`. `A2` di `L2` col protocollo `S1`: peggio `4.8e-14` e `3.7e-14` *(criterio `1e-10`)*. Il cono: `0.6532`, `0.9189`, `0.8740`, `0.8970`.
+- **`C5` passa:** formule di legge a mano `3` prima della correzione, `0` dopo.
+- ### ⛔ **`C4` FALLISCE: la cassetta e' `37/38`, cade `P3 BG-F-0.15`.**
+  - **La causa, misurata:** `e_K = _vuoto_vivo_B.e_K_di(z)` e' l'energia per norma dello stato uniforme di `A` a `K`, calcolata con `energia_pesata.termini_di_h` **col vuoto azzerato** *(`Lambda = 0` ovunque)*.
+  - Con `S3` la `N` li' valeva `0`. Con `S1` vale il **limite della scheda**, `N = rho`, e `e_K` sale di **`1.0`** esatto: riferimento `-4.7122750003546425`, `S1` `-3.7122750003546425`, `S3` esplicita `-4.7122750003546425`.
+  - **Con `S3` esplicita la cassetta e' `38/38`:** non c'e' un'altra causa.
+  - **E' anche la `RuntimeWarning` «non spiegata» di prima:** `_scomposizione_solitone.parti` calcola `E_leg` su quello stato con `rho/0`. Il risultato e' `nan`, ma `e_K` non lo usa.
+- **Una premessa mia che cade:** avevo scritto che `csv/solitone/` non sarebbe cambiata perche' `cs` e' spento. **La libreria usa `energia_pesata` anche per MISURARE**, attraverso lo storico `_scomposizione_solitone.parti`.
+
+**La domanda a Luca** *(criterio di chiusura: una sua decisione su che cosa e' `e_K` con `S1`)*:
+- **(i)** `e_K` resta «l'energia senza il legame»: si calcola con `S3` esplicita o senza `N`. La libreria non puo' toccare lo storico, puo' solo avvolgerlo.
+- **(ii)** `e_K` con `S1` e' il nuovo riferimento di `S1` *(`+1` per norma)*, e `P3` lo confronta con quello.
+- **(iii)** altro.
+
+**Restano da confermare:** la mia lettura di `A2` *(la forma del protocollo da `MV.ATTIVA`)*, e il giudizio su `saturazione.py`. **La MAPPA non l'ho toccata:** la chiusura non e' chiusa.

@@ -98,3 +98,15 @@
 5. Il referto `doc/referti_l2/s1_nucleo_chiusura.txt`, la relazione, la MAPPA, `DECISIONI_NEL_CODICE` *(sez. `6`)*, l'esito qui.
 
 ## 7. L'ESITO
+
+- **Le corse** *(a `00821633`, una alla volta)*: il referto `doc/referti_l2/s1_nucleo_chiusura.txt`.
+- **`C1` PASSA:** `H_w` col predefinito, pendenza **`1.953`** in `(b)` e **`1.995`** in `(a)` *(il dinamico `2.082`)*. **Lettura `(h1)`**, con tre righe vecchie e non una, come atteso nelle premesse.
+- **`C2` PASSA:** con `S3` esplicita, contro `dopo_S3`: `58` uguali, `7` diversi solo per tempi, una riga di codice, conteggi e le righe nuove dei bracci `S1`. `H_w`, `M-B1`, `L2` al bit.
+- **`C3` PASSA:** col predefinito, `65` collaudi su `65` con codice `0`.
+- **`C5` PASSA:** formule di legge a mano `3` prima *(il caso che deve fallire)*, `0` dopo.
+- ### ⛔ **`C4` FALLISCE: `37/38`, `P3 BG-F-0.15`.** La causa, misurata: `e_K` *(`_vuoto_vivo_B.e_K_di`)* e' l'energia di `energia_pesata.termini_di_h` sullo stato uniforme **con `phi` azzerato**.
+  - Con `S3` la `N` a `Lambda = 0` vale `0`; con `S1` vale il limite `N = rho`.
+  - Quindi `e_K` sale di **`1.0`** esatto *(`-4.7122750003546425` -> `-3.7122750003546425`)*.
+  - Con `S3` esplicita la cassetta e' `38/38`: nessun'altra causa.
+- **Una premessa che cade:** avevo scritto «`csv/solitone/` non dovrebbe cambiare, perche' `cs` e' spento». **Falso:** la libreria usa `energia_pesata` anche **per misurare** *(via lo storico `_scomposizione_solitone.parti`)*, non solo nel passo.
+- **FERMO:** decide Luca che cosa e' `e_K` con `S1` *(le opzioni nel referto)*. **La MAPPA non l'ho toccata:** la chiusura non e' chiusa.

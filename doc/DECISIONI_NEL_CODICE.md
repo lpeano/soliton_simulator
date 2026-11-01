@@ -49,3 +49,9 @@
 - **(1) la forma:** `primo_ordine/leggi/leggi.yaml`, `CAMM-MATERIA-VUOTO`, `parametri.forma` *(`S1` predefinita, `S3` ammessa)*; `primo_ordine/materia_vuoto.py` legge `FORMA` dal modulo generato `termini/camm_materia_vuoto.py`; `N_s1`, `alpha_s1`, `beta_s1` *(le espressioni di `csv/`)* e `N_s3`, `alpha_s3`, `beta_s3` *(i corpi di prima)*; `scegli` e `forma_esplicita` per `S3`. **Le sezioni `2` e `4` qui sopra descrivono il nucleo di PRIMA.**
 - **(7) eps:** solo dalla tabella *(`dict(termini.camm_moneta_spin.PARAMETRI)`)*: tolti `scena_l2.EPS_MONETA` e i `20` `{"eps": 0.5}` del nucleo e dei suoi collaudi. **La seconda fonte della sezione `1` non c'e' piu'.**
 - **le scene di `csv/`** *(`_energia_del_legame.stato` e le altre della sezione `1`)* **restano a eps `0`: STORICHE** *(Luca `16:52`)*; `csv/solitone/protetto.forma_predefinita` legge la forma dalla tabella.
+
+## 6. LA CHIUSURA *(`00821633`; il referto `doc/referti_l2/s1_nucleo_chiusura.txt`)*
+
+- **La `N` dell'energia** viene da `materia_vuoto` *(per nome di modulo)* in `energia_pesata.termini_di_h`, `_misura_mb2.h_tot` e `_misura_mb2.pezzi_di_h`: **fuori da `materia_vuoto.py` nessuna formula della legge scritta a mano** *(`csv/_cerca_formule_legge.py`)*.
+- **I collaudi legati a `S3` esplicita**, coi loro equivalenti `S1`: `_collauda_materia_vuoto` `(0)` e `(4)`, `_collauda_deriva` `(1-bis)`. **`M-B1`:** riferimento `8c7b9288` per `S3`, `c7ad2238` per `S1`. **`A2` di `L2`:** la forma del protocollo statico da `MV.ATTIVA` *(la mia lettura)*.
+- ### ⚠ **APERTO:** `e_K` della libreria *(lo storico `_vuoto_vivo_B.e_K_di`)* cambia di `1.0` con `S1`. Decide Luca.

@@ -1,11 +1,11 @@
 [TIMBRO] __init__.py  sha1-BYTE a704ae0c  committato e pulito
 [TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
-[TIMBRO] protetto.py  sha1-BYTE 47605b08  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE c86cd6dd  committato e pulito
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
-[TIMBRO] test_protetto.py  sha1-BYTE 0986ced2  committato e pulito
+[TIMBRO] test_protetto.py  sha1-BYTE 2667816b  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 15d4b0ec  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE 618c5568  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -26,8 +26,17 @@ LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, pro
   DEVE PASSARE: P1 A a K (N 1e+06, L 81, eps 0.5): lo sha e mu = lunga_AK_00000.jsonl (a8e0e43b) AL BIT                              PASSA   mu -0.565633409457
   DEVE PASSARE: P2 B a Gamma, l'inviluppo a N 3e5: lo sha, E0, bloch, mu, il residuo = robusta_N3e5_000000.jsonl AL BIT              PASSA   E0 +3.178177524 mu +4.148998947 residuo 4.393046e-02
   DEVE FALLIRE: P2 col partner della scelta al posto della scelta: lo sha = robusta_N3e5_000000.jsonl                                PASSA   
-  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT         PASSA   mu +4.161868162
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT         ### FALLISCE   mu +4.161868162
     P3, E0: qui +3.178177523812364 (fase/s); _vuoto_vivo_B +3.178177523812364 (E0 * CB.S / s); la differenza 0.0e+00 (la conversione fatta una volta)
+### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)
+  DEVE PASSARE: D5 eps della prova = 0.5 della tabella (la decisione (7)); ridotto=True = 0, dichiarato                              PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN) | CASO RIDOTTO: eps 0 (la moneta spenta), non il modello
+  DEVE PASSARE: D5 la forma predefinita = S1 (la decisione (1), da _solitone_vuoto_congelato.FORMA)                                  PASSA   S1
+  DEVE PASSARE: D5 la scena della prova (BG-F-0.15) ha eps 0.5, e il costruttore predefinito = la partenza di P3 AL BIT (B a Gamma)  PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN); la forma S1
+  DEVE FALLIRE: D5 il costruttore predefinito = A a K                                                                                PASSA   
 ### LE MISURE (csv/solitone/misure.py)
   DEVE PASSARE: le costanti = quelle degli strumenti (SOGLIA_VITA, SIGMA_FORMA, GRUPPI_LIMITE)                                       PASSA   
   DEVE PASSARE: M1 w_in, h e il campione a t 0 (x, y, w, f_win, f_liscia) = rig_000000.jsonl AL BIT                                  PASSA   f_liscia 0.618068063360118
@@ -46,6 +55,13 @@ LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, pro
   DEVE PASSARE: M6 un periodo vero di 99 tick (33 passi) letto giusto (entro la risoluzione 2.49e-02)                                PASSA   letto 99.0124
   DEVE PASSARE: M6 un periodo vero di 3.3 tick (1.1 passi, sotto Nyquist 6): NON letto giusto, ma il vero fra gli alias              PASSA   letto 33.0000; gli alias 1.4348 1.5714 2.7500 3.3000
   DEVE FALLIRE: M6 il periodo SENZA il passo                                                                                         PASSA   
+### D6: LA LIBRERIA E' QUELLA DI 3fe2f12d (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 3fe2f12d a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+  DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
+    i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
+    csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 20 s; protetto 12 s; misure 6 s
-ESITO: 32/32 controlli passano; fallite: 0 []
+  i tempi: uscite 18 s; protetto 14 s; misure 5 s
+ESITO: 37/38 controlli passano; fallite: 1 ['DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT']

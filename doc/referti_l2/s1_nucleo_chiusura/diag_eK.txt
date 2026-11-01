@@ -1,0 +1,4 @@
+riferimento -4.7122750003546425
+S1 (predefinito) -3.7122750003546425
+S3 esplicita    -4.7122750003546425
+differenza S1-S3 1.0

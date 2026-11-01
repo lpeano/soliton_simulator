@@ -1,0 +1,51 @@
+[TIMBRO] _cerca_formule_legge.py  sha1-BYTE fb675e38  committato e pulito
+============================================================================================================================================
+LA RICERCA PER FORMULE (non per nomi): primo_ordine, csv\solitone, esclusi primo_ordine/materia_vuoto.py e primo_ordine/termini/
+  i pattern: log(rho; log(r/; log(x/; atan/arctan; x^2/(1+x^2); rho + lam
+============================================================================================================================================
+NEL CODICE: 12 occorrenze in 7 file (su 95 esaminati)
+  primo_ordine/_collauda_forme.py                  65  atan/arctan  oracolo di collaudo        np.array_equal(MV.alpha_s1(rho, lam)[1:], x ** 2 / (1.0 + x ** 2)) and np.array_equal(MV.beta_s1(rho, lam)[1:]
+                                                                                                 -> l'oracolo di `S1`: le espressioni di `csv/` scritte apposta FUORI dal nucleo, per il confronto al bit
+  primo_ordine/_collauda_forme.py                  66  atan/arctan  oracolo di collaudo        and np.array_equal(MV.N_s1(rho, lam)[1:], lam[1:] * (x - np.arctan(x))) and MV.alpha_s1(rho, lam)[0] == MV.bet
+                                                                                                 -> l'oracolo di `S1` (`N`): idem
+  primo_ordine/_collauda_materia_vuoto.py         434  log(rho      oracolo di collaudo        n_gira = -rho * np.log(rho / (rho + lam))
+                                                                                                 -> braccio `(s3)`, il caso che DEVE fallire: la forma float di `S3` contro `log1p`; non chiama il nucleo
+  primo_ordine/_deriva_forme_l2.py                134  atan/arctan  screening dichiarato       forme["S1"] = ("N = Lambda G(x), G = x - arctan x", x - sp.atan(x))
+                                                                                                 -> la derivazione `sympy` delle forme candidate `S1`-`S4` (screening)
+  primo_ordine/_deriva_forme_l2.py                138  log(x/       screening dichiarato       forme["S3"] = ("N = rho ln(rho/(rho+Lambda))", x * sp.log(x / (1 + x)))
+                                                                                                 -> idem, `S3`
+  primo_ordine/_misura_forme_l2.py                 81  atan/arctan  screening dichiarato       return x ** 2 / (1.0 + x ** 2), x / (1.0 + x ** 2) - np.arctan(x)
+                                                                                                 -> le quattro forme candidate per il confronto (`_alpha_beta`), usate da `statica_protocollo`
+  primo_ordine/_misura_forme_l2.py                 88  log(x/       screening dichiarato       al = np.log(x / (1.0 + x)) + 1.0 / (1.0 + x)
+                                                                                                 -> idem, `S3`
+  primo_ordine/saturazione.py                      33  atan/arctan  modulo di un'altra legge   return x - np.arctan(x)
+                                                                                                 -> `CAMM-SATURAZIONE` (`G(x) = x - arctan x` di `h_int`), il modulo della sua legge; fuori dall'ordine di composizione
+  primo_ordine/saturazione.py                      38  x^2/(1+x^2)  modulo di un'altra legge   return (x * x) / (1.0 + x * x)
+                                                                                                 -> idem, `a(x)`
+  primo_ordine/saturazione.py                      43  atan/arctan  modulo di un'altra legge   return x / (1.0 + x * x) - np.arctan(x)
+                                                                                                 -> idem, `b(x)`
+  csv/solitone/misure.py                           99  atan/arctan  non e' la legge            return -math.atan2(v.imag, v.real) / dtau
+                                                                                                 -> `atan2`: la fase di un numero complesso (una frequenza misurata)
+  csv/solitone/protetto.py                         97  atan/arctan  non e' la legge            return -math.atan2(lam.imag, lam.real) / s, float(np.linalg.norm(T - lam * p) / np.linalg.norm(p))
+                                                                                                 -> `atan2`: la fase dell'autovalore (una frequenza misurata)
+NEL TESTO (commenti e stringhe, non si giudicano): 17 occorrenze in 11 file
+  primo_ordine/_collauda_deriva.py              2
+  primo_ordine/_collauda_forme.py               1
+  primo_ordine/_collauda_materia_vuoto.py       1
+  primo_ordine/_collauda_saturazione.py         1
+  primo_ordine/_collauda_schema_camminata.py    1
+  primo_ordine/_deriva_forme_l2.py              1
+  primo_ordine/_misura_mb2.py                   1
+  primo_ordine/_misura_verso_l2.py              1
+  primo_ordine/deriva.py                        4
+  primo_ordine/saturazione.py                   3
+  primo_ordine/scena_l2.py                      1
+  ### SPARITA (era `legge a mano`, cioe' CORRETTA): primo_ordine/_misura_mb2.py  N[vivi]=rho[vivi]*np.log(rho[vivi]/(rho[vivi]+lam[vivi]))
+  ### SPARITA (era `legge a mano`, cioe' CORRETTA): primo_ordine/energia_pesata.py  N[vivi]=rho[vivi]*np.log(rho[vivi]/(rho[vivi]+lam[vivi]))
+============================================================================================================================================
+PER CATEGORIA: legge a mano 0; screening dichiarato 4; oracolo di collaudo 3; modulo di un'altra legge 3; non e' la legge 2
+  il caso che DEVE fallire: la formula di `S3` in una riga sintetica si trova nel codice, e quella nel commento si separa  PASSA
+  ogni occorrenza nel codice ha un giudizio (0 senza)                                                                      PASSA
+  nessun giudizio orfano e nessuna categoria fuori elenco (0, 0)                                                           PASSA
+  DEVE PASSARE: zero `legge a mano` fuori da materia_vuoto.py (0)                                                          PASSA
+LA RICERCA PER FORMULE: ### TUTTO PASSA

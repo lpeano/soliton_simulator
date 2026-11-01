@@ -1,0 +1,16 @@
+import os, sys, json
+R = r"C:\Users\lpeano\soliton_simulator"
+os.chdir(R)
+sys.path.insert(0, os.path.join(R, "csv")); sys.path.insert(0, os.path.join(R, "primo_ordine"))
+import solitone  # noqa
+from solitone import protetto as P
+import _vuoto_vivo_B as V, materia_vuoto as MV, _solitone_vuoto_congelato as VC
+sol, vuoto, s = V.CORSE["BG-F-0.15"]
+righe = open(os.path.join(V.DIR_JSON, "BG-F-0.15_000000.jsonl"), encoding="utf-8").readline()
+ref = json.loads(righe)
+import _livelli_piatti as LP, _coppia_di_B as CB
+with P.scena_vuoto(CB.N, CB.L, V.EPS, s, LP.FORMA, vuoto) as (rec, z, phi0, pK):
+    e1 = V.e_K_di(z)
+    with MV.forma_esplicita("S3"):
+        e3 = V.e_K_di(z)
+print("riferimento %r\nS1 (predefinito) %r\nS3 esplicita    %r\ndifferenza S1-S3 %r" % (ref["e_K"], e1, e3, e1 - e3))
