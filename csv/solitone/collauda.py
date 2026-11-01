@@ -36,7 +36,9 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### dalla libreria cambiato» non puo' piu' valere, e i referti vecchi si rigirano AL LORO COMMIT. ### **Il controllo diventa: nessun `.py` della
 # ### libreria cambiato** da `LIBRERIA_RIFERITA`, l'ultimo commit in cui i `32` test e `D5` hanno dato i numeri al bit col predefinito `S1`.
 # ### ⚠ **`collauda.py` si esclude, dichiarato:** e' il collaudo, non la libreria *(e la chiusura lo cambia)*.
-LIBRERIA_RIFERITA = "3fe2f12d"
+# ### **Dall'unita' `e_K`** *(Luca, dopo `6052a2b4`)*: la libreria cambia per mandato *(`protetto.legame_spento`, `protetto.e_K`, `P3`)*, e
+# ### `LIBRERIA_RIFERITA` e' il suo commit, `3d5fe03a` *(prima `3fe2f12d`)*.
+LIBRERIA_RIFERITA = "3d5fe03a"
 
 
 def vecchi():
