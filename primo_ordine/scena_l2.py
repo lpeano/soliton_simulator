@@ -52,6 +52,8 @@ import sys
 
 import numpy as np
 
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
+
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
@@ -78,7 +80,6 @@ GRIGLIE = {
 }
 GRIGLIA_DEL_MODELLO = "triangoli"
 VUOTO_PER_ESTREMITA = 1.0
-EPS_MONETA = 0.5
 
 
 def versori(m, direzioni):
@@ -112,7 +113,7 @@ def scena_toro(griglia, lati, dtau, x):
     st["phi_h"][...] = VUOTO_PER_ESTREMITA
     st["psi_h"][...] = float(np.sqrt(x)) * spinore_allineato(nv)
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.broadcast_to(np.asarray(dtau, dtype=float), (nn,)).copy(), "numpy")
-    return inc, mot, st, {"eps": EPS_MONETA}
+    return inc, mot, st, dict(TMS.PARAMETRI)
 
 
 def versori_geometrici(lati, m):
@@ -280,7 +281,7 @@ def scena(dtau, vuoto, ampiezza, raggio, materia, geometrici, fasi_casuali, seme
             if int(inc.nodo[h]) in dentro:
                 st["psi_h"][h] = float(ampiezza) * chi[h]
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
-    return inc, mot, st, {"eps": 0.5}, centro, per
+    return inc, mot, st, dict(TMS.PARAMETRI), centro, per
 
 
 def grumo_isotropo(st, inc, per, raggio, ampiezza):

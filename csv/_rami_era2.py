@@ -255,9 +255,17 @@ _SING = (
     "nullo non vuol dire niente>>, quindi la' `alpha = 0` ed e' il valore che "
     "l-espressione PRENDE dove e' definita. ### Il mandato del 2026-10-16 chiede "
     "esattamente questo: dichiararlo col rimando, senza deciderlo di nuovo")
-RAMI[("primo_ordine/materia_vuoto.py", "N")] = (1, "smistamento", _SING)
-RAMI[("primo_ordine/materia_vuoto.py", "alpha")] = (1, "smistamento", _SING)
-RAMI[("primo_ordine/materia_vuoto.py", "beta")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "N_s3")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "alpha_s3")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "beta_s3")] = (1, "smistamento", _SING)
+# ### `S1` (Luca 2026-11-01 16:52): lo stesso ramo, sui nodi con materia E vuoto; a `Lambda = 0` il LIMITE della scheda, non un pavimento
+RAMI[("primo_ordine/materia_vuoto.py", "N_s1")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "alpha_s1")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "beta_s1")] = (1, "smistamento", _SING)
+RAMI[("primo_ordine/materia_vuoto.py", "forma_esplicita")] = (
+    1, "smistamento",
+    "il `try/finally` dell-opzione esplicita: all-uscita rimette la forma di PRIMA, cosi' la scelta di `S3` non resta accesa per errore "
+    "(Luca 2026-11-01 16:52: `S3` solo come opzione esplicita, per riprodurre il vecchio)")
 # ------------------------------------------------------------------ `motore.py`
 RAMI[("primo_ordine/motore.py", "_b")] = (
     1, "smistamento",

@@ -26,6 +26,7 @@ import checkpoint as CH                                       # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import motore as MO                                           # noqa: E402
 import stato as ST                                            # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 OK = [0, 0]
 CFG, IMP = {"prova": True}, "collaudo-5c"
@@ -70,7 +71,7 @@ def _motore(nn, seme):
 def _tick(mot):
     mot.apri_tick()
     mot.operatori["grover"](mot.st, {}, 1)
-    mot.operatori["moneta_spin"](mot.st, {"eps": 0.5}, 1)
+    mot.operatori["moneta_spin"](mot.st, dict(TMS.PARAMETRI), 1)
     mot.operatori["spostamento_trasporto"](mot.st, {}, 1)
     mot.chiudi_tick()
 

@@ -137,6 +137,8 @@ COLLAUDI = (
     # ### non gira piu-.
     ("il flusso materia-vuoto", "primo_ordine/_collauda_materia_vuoto.py",
      "pre-commit"),
+    # ### **LE FORME DEL LEGAME NEL NUCLEO** *(Luca `2026-11-01` `16:52`)*: `S1` dalla tabella, `S3` opzione esplicita, la rotazione gemella per tutte e due.
+    ("le forme del legame", "primo_ordine/_collauda_forme.py", "pre-commit"),
     # ### \u26d4 **`P3`: L-ENERGIA E LA CORRENTE, E QUESTO COLLAUDO AFFERMA UN
     # ### FALLIMENTO.** La previsione scritta ### **prima** dei numeri diceva *<<la parte
     # ### lineare chiude il bilancio locale ESATTAMENTE>>*: ### **non chiude**, e il

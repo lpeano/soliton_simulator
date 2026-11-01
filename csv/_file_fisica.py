@@ -225,6 +225,7 @@ FILE_FISICA = (
     # ### <<due mezzi fanno l-intero>> passerebbe anche per un metodo APPROSSIMATO**,
     # ### cioe- il collaudo sarebbe ### **un FALSO-UNO.**
     'primo_ordine/_collauda_materia_vuoto.py',
+    'primo_ordine/_collauda_forme.py',
     'primo_ordine/_collauda_saturazione.py',
     # ### `P3`: L-ENERGIA COME SOMMA DI DENSITA- LOCALI, e la corrente sugli archi.
     # ### \u26d4 **E il suo collaudo AFFERMA UN FALLIMENTO MISURATO:** la corrente

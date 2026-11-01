@@ -24,6 +24,7 @@ import _presidio                                              # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import motore as MO                                           # noqa: E402
 import stato as ST                                            # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 NL = chr(10)
 
@@ -50,12 +51,12 @@ def main(argv):
         mot = MO.Motore(inc, MO.Geometria(n_ver, U), st, np.full(nn, 0.1), "numpy")
         for _ in range(3):
             mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+            mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
             mot.operatori["spostamento_trasporto"](st, {}, 1)
         primi = mot.ripieghi
         for _ in range(20):
             mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+            mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
             mot.operatori["spostamento_trasporto"](st, {}, 1)
         print("  n=%-6d  buffer allocati: %d nei primi 3 tick, %d nei 20 dopo"
               "   byte: %d" % (nn, primi, mot.ripieghi - primi, mot.byte()))
@@ -84,7 +85,7 @@ def main(argv):
         # ### un passo = i tre pezzi su `psi`, cioe- cio- che un tick fa DAVVERO
         def _passo():
             mot.operatori["grover"](st, {}, 1)
-            mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+            mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
             mot.operatori["spostamento_trasporto"](st, {}, 1)
         _passo()                                   # ### scalda i buffer: il primo ALLOCA
         giri = 20 if nn <= 10000 else 5

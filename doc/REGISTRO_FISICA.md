@@ -46,6 +46,13 @@ che rifiuta un commit a `soliton_simulator.py` che non tocchi il registro, salvo
 
 **⚠ IL LIMITE, dichiarato invece che nascosto:** **non distingue una modifica di LEGGE da una di COMMENTO.** Distinguerle richiederebbe un confronto di AST fra le due versioni, e **un commento che descrive una legge è parte della legge** *(i commenti stale sono un difetto documentato di questo repo)*. **Quindi è più severo del necessario**, e le modifiche davvero non fisiche passano per `[SENZA-FISICA: <motivo>]`.
 
+## ⭐ **LA DECISIONE DEL 2026-11-01: `S1` E LA MONETA NEL NUCLEO, DALLA TABELLA** *(Luca `16:52`; le decisioni (1) e (7) delle `01:27`; [[STRUMENTO-LEGGE-DALLA-TABELLA]])*
+
+### **LA FORMA.** `CAMM-MATERIA-VUOTO` ha un parametro `forma` *(`leggi.yaml`)*: **`S1` predefinita**, `S3` ammessa. `S1`: `N = Lambda (x - arctan x)`, `alpha = dN/drho = x^2/(1+x^2)`, `beta = dN/dLambda = x - arctan x - x^3/(1+x^2)`, `x = rho/Lambda` *(le espressioni di `csv/`, al bit)*. **Nessuna costante.** **Il vuoto riceve la rotazione gemella per tutte e due le forme** *(acbdfb88; `primo_ordine/_collauda_forme.py`, a differenze finite)*. A `Lambda = 0` il **LIMITE** *(`1`, `-pi/2`, `rho`)*, non un pavimento.
+### **LA DERIVAZIONE:** nessuna nuova. **E' una SCELTA di Luca fra forme misurate**, come era `S3` *(il nodo `DEC-D6F-FORME-VUOTO` resta il posto dove si derivera')*.
+### **IL PERCHE':** il solitone protetto, le bande piatte, la regola dei livelli e il vuoto vivo sono misurati con `S1` *(a8e0e43b, 751bca7f)*. `S3` resta **solo come opzione esplicita** *(`materia_vuoto.scegli`, `forma_esplicita`)* per riprodurre il vecchio.
+### **eps:** `0.5` resta il valore, **letto solo dalla tabella** *(`CAMM-MONETA-SPIN`)*: tolti `EPS_MONETA` e ogni `{"eps": 0.5}` scritto a mano nel nucleo.
+
 ## ⭐ **IL PIANO DEL 2026-10-23: 2D PER LE PROPRIETA' LOCALI, 3D PER LE LEGGI GLOBALI** *([[PIANO-2D-3D]])*
 
 **Di Luca, il `2026-10-23` alle `18:34`** *(il piano discusso col guardiano dalle `18:00`)*, **alla lettera:** «dovremmo formalizzare tutte queste considerazioni e il nuovo piano sul repository». ### **In 2D** *(i triangoli)* ### **si provano le PROPRIETA' LOCALI del passo** *(la scala con `s`, lo zero dell'energia, la risposta di una particella di prova a un gradiente di `cs`)*; ### **le LEGGI GLOBALI si decidono in 3D** *(la forma del campo prodotto dalla materia, l'esistenza dei solitoni, lo spin, la propagazione senza coda)*. ### **L'obiettivo tecnico e' la FCC; quello di fisica lo spazio che emerge** *(`D9`)*. ### **CHE COSA CAMBIA NELLA FISICA DEL MODELLO: NIENTE** -- ### **nessuna legge, nessuna decisione di fisica: le decisioni aperte restano aperte.** ### **Il piano intero, coi numeri verificati contro i referti:** `doc/PIANO_2D_3D.md`.

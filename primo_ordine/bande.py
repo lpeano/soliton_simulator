@@ -47,6 +47,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import deriva as DV                                           # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 import tick as TK                                           # noqa: E402
 import deriva_variabile as DVAR                               # noqa: E402
 import energia as EN                                          # noqa: E402
@@ -62,7 +63,7 @@ def applica_W(mot, st, v):
     """### `W v`, ### **col pezzo lineare della tabella e nient'altro.**"""
     s = dict(st)
     s["psi_h"] = v.reshape(st["psi_h"].shape).copy()
-    mot.operatori["moneta_spin"](s, {"eps": 0.5}, 1)
+    mot.operatori["moneta_spin"](s, dict(TMS.PARAMETRI), 1)
     mot.operatori["grover"](s, {}, 1)
     mot.operatori["spostamento_trasporto"](s, {}, 1)
     return s["psi_h"].ravel().copy()

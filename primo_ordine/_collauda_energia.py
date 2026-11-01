@@ -34,10 +34,11 @@ import energia as EN                                          # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import motore as MO                                           # noqa: E402
 import stato as ST                                            # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 OK = [0, 0]
 EPS = float(np.finfo(float).eps)
-PAR = {"eps": 0.5}
+PAR = dict(TMS.PARAMETRI)
 
 
 def esito(che, passa, nota=""):

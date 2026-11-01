@@ -41,6 +41,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import energia as EN                                          # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 
 def dim(m):
@@ -323,7 +324,7 @@ def _scena(ii, jj, nn, seme):
                         + 1j * r.normal(size=st["psi_h"].shape))
     st["phi_h"][...] = np.exp(1j * r.random(st["phi_h"].shape) * 2.0 * np.pi)
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, 0.2), "numpy")
-    return inc, mot, st, {"eps": 0.5}
+    return inc, mot, st, dict(TMS.PARAMETRI)
 
 
 def termine_di_bordo(ii, jj, nn, dentro, seme=4, scossa=0.7):

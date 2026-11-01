@@ -22481,3 +22481,29 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 
 
 **Il riferimento** *(`doc/referti_l2/s1_e_moneta_nel_nucleo/prima.json`, da `python csv/_suite_al_bit.py --gira prima`, sha1-BYTE `1827005a`, girato a `27655e28`, sul nucleo **prima** di ogni modifica)*: ogni collaudo di `collauda.COLLAUDI` *(`64`)* gira uno alla volta. Per ognuno c'e' lo `sha1` dell'uscita **senza le righe dei tempi e dei timbri**, e tutti escono con codice `0`. **Prima di toccare il nucleo lo rigiro una seconda volta** *(`prima_bis`)*: dira' quali uscite cambiano **da sole**, senza nessuna modifica.
+
+## 2026-11-01 — S1 E LA MONETA NEL NUCLEO (Luca 16:52): LA MODIFICA DEL NUCLEO -- S1 DALLA TABELLA, EPS DALLA TABELLA; COL PREDEFINITO TRE COLLAUDI DEL NUCLEO CAMBIANO (n2)
+
+
+**Il riferimento e' stabile:** `prima_bis` *(`doc/referti_l2/s1_e_moneta_nel_nucleo/prima_bis.json`)* ha `63` collaudi su `64` uguali al bit a `prima`. L'unico diverso e' «il grafo valido», per una riga di tempo in **microsecondi** che il filtro non toglie *(`46.581 us` contro `39.112 us`)*.
+
+**La modifica** *(un commit; nessuna corsa di fisica)*:
+- **la tabella:** `CAMM-MATERIA-VUOTO` ha `parametri.forma` con `S1` predefinita, `ammessi` `S1` e `S3` coi loro generatori, `dimensione E^0`; il `generatore` diventa quello di `S1`; rigenerati il modulo e la scheda;
+- **`materia_vuoto`:** `N_s3`, `alpha_s3`, `beta_s3` hanno i corpi di prima. `N_s1`, `alpha_s1`, `beta_s1` sono le espressioni di `csv/`, piu' il limite a `Lambda = 0`. `FORMA` si legge dal modulo generato; `scegli` e `forma_esplicita` sono l'opzione `S3`. **`pezzi` e `applica` sono quelli di prima**, quindi `_screening_forme_s3.forma` funziona ancora;
+- **eps:** tolti `EPS_MONETA` e i `{"eps": 0.5}` scritti a mano; ora tutto passa da `dict(termini.camm_moneta_spin.PARAMETRI)`. I punti sono `20`: `scena_l2` *(`2`)*, `bande`, `bande_floquet`, `corrente`, `deriva`, e i collaudi *(`checkpoint`, `energia`, `memoria` `3`, `motore` `6`, `misura_costo_motore` `3`)*;
+- **il collaudo nuovo** `primo_ordine/_collauda_forme.py` *(`20/20`)*:
+  - la forma della tabella, e gli `ammessi` uguali alle forme del nucleo;
+  - `alpha = dN/drho` e `beta = dN/dLambda` per `S1` e per `S3`, a differenze finite *(scarti `<= 2.2e-10`)*;
+  - `S1` uguale al bit alle espressioni di `csv/`, e il limite;
+  - l'opzione esplicita, e `S2` che **alza**;
+- **i presidi aggiornati:** `csv/_rami_era2.py` *(i rami delle funzioni rinominate e nuove)*, `primo_ordine/_mappa.yaml`, `csv/_file_fisica.py`, `primo_ordine/collauda.py`. Poi `REGISTRO_FISICA` *(la sezione della decisione)* e `csv/solitone/protetto.forma_predefinita` *(ora dalla tabella)*.
+
+**La suite veloce col predefinito `S1`** *(`collauda.py --solo-veloci`, prima di correggere `P-RIF`)*: **`4` collaudi falliscono:**
+- **`P-RIF`**: era un errore mio, un ID in un commento. L'ho corretto: `10/10`;
+- **tre cambiano con `S1`, e sono collaudi scritti per `S3`. E' la lettura (n2), che decide Luca:**
+  - **`_collauda_materia_vuoto.py`** `22/26`: per esempio «`alpha` diverge come `ln rho`» non vale, perche' con `S1` l'`alpha` minima sui nodi pieni e' `0.7051`;
+  - **`_collauda_deriva.py`** `16/17`: «`|beta|` di `S3` contro la saturazione» chiama `MV.beta`, che ora e' `S1`;
+  - **`_misura_hw.py`** `4/7`: l'energia pesata.
+- **Le prove con `S3` esplicita e col predefinito** *(la suite al bit, collaudo per collaudo, e i `38` test di `csv/solitone/`)* vengono **dopo questo commit**.
+
+**K3: zero righe.** **K4: la legge legge la forma solo dalla tabella.** Nel nucleo restano nomi di forma negli **strumenti di screening** *(`statica_protocollo.py`, `_deriva_forme_l2.py`, `_misura_forme_l2.py`, `_misura_statica_*.py`, `_misura_completa_l2.py`)*: sono scelte esplicite di confronto fra forme, non il predefinito.

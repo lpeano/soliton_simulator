@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-"""IL GENERATORE DELL'ACCOPPIAMENTO MATERIA-VUOTO — **le tre funzioni, e il LIMITE.**
+"""IL GENERATORE DELL'ACCOPPIAMENTO MATERIA-VUOTO -- ### **DAL `2026-11-01` (Luca `16:52`) LE FORME SONO DUE, `S1` (predefinita, DALLA TABELLA) E `S3` (opzione esplicita): sotto, `FORME`.** Il testo che segue e' quello di `S3`.
+
+### — **le tre funzioni, e il LIMITE.**
 
 > `N_k = rho_k ln(rho_k / (rho_k + Lambda_k))`, con `rho_k = somma_h |psi_h|^2` e
 > `Lambda_k = somma_h |phi_h|^2`. ### **Decisione di Luca del `2026-10-15`** *(`23:30`)*:
@@ -48,6 +50,7 @@ funzione.**
 ### ✅ **E SONO PURE: nessun `self`, nessuno stato, nessun buffer.** Il collaudo le prova
 ### **sui numeri**, senza costruire un motore.
 """
+import contextlib
 import os
 import sys
 
@@ -60,7 +63,7 @@ if _QUI not in sys.path:
 import flussi_parziali as FP                                   # noqa: E402
 
 
-def N(rho, lam):
+def N_s3(rho, lam):
     """### `N = rho ln(rho/(rho+Lambda))`, ### **col limite `rho -> 0` che fa `0`.**
 
     ### ⭐ **`x ln x -> 0` per `x -> 0`**, quindi la' il termine ### **non c'e'**: e' il
@@ -77,7 +80,7 @@ def N(rho, lam):
     return fuori
 
 
-def alpha(rho, lam):
+def alpha_s3(rho, lam):
     """### `alpha = ln(rho/(rho+Lambda)) + Lambda/(rho+Lambda)`, ### **`0` dove `rho = 0`.**"""
     rho = np.asarray(rho, dtype=float)
     lam = np.asarray(lam, dtype=float)
@@ -91,7 +94,7 @@ def alpha(rho, lam):
     return fuori
 
 
-def beta(rho, lam):
+def beta_s3(rho, lam):
     """### `beta = -rho/(rho+Lambda)`, ### **definita OVUNQUE** *(e `0` dove `rho = 0`)*.
 
     ### 📌 **Qui non c'e' nessun limite da prendere:** il numeratore e' `rho`, quindi
@@ -106,6 +109,97 @@ def beta(rho, lam):
         r = np.broadcast_to(rho, fuori.shape)[vivi]
         fuori[vivi] = -r / (r + np.broadcast_to(lam, fuori.shape)[vivi])
     return fuori
+
+
+# =====================================================================================
+#   S1 -- LA FORMA DEL LEGAME DECISA DA LUCA (decisione (1) delle `01:27`, nel nucleo dalle `16:52` del `2026-11-01`)
+# =====================================================================================
+# ### `N = Lambda F1(x)`, `F1(x) = x - arctan x`, `x = rho/Lambda`: ### **le espressioni di `csv/`** *(`_screening_forme_s3._ab("S1")`,
+# ### `_scomposizione_solitone.F1`)*, **operazione per operazione**, perche' il confronto con le misure di `csv/` e' AL BIT.
+# ### `alpha = F1'(x) = dN/drho`, `beta = F1(x) - x F1'(x) = dN/dLambda`: ### **il vuoto riceve la rotazione gemella** *(acbdfb88)*.
+# ### **NESSUNA COSTANTE** *(la scala e' il vuoto locale, come per `S3`)*.
+# ### ⛔ **`Lambda = 0` con `rho > 0`: il LIMITE, non un pavimento** *(l'assioma sui limiti, nel docstring di `N_s1`)*: `x -> infinito`, `alpha -> 1`, `beta -> -pi/2`, `N -> rho`.
+# ### **E `rho = 0`:** `alpha = 0`, `beta = 0`, `N = 0` -- il valore che le espressioni PRENDONO *(a `Lambda > 0`, `x = 0`)*.
+def N_s1(rho, lam):
+    """### `N = Lambda (x - arctan x)`, `x = rho/Lambda`; ### **`rho` dove `Lambda = 0`** *(il limite, non un pavimento: `A11`)*, `0` dove `rho = 0`."""
+    rho = np.asarray(rho, dtype=float)
+    lam = np.asarray(lam, dtype=float)
+    fuori = np.zeros(np.broadcast(rho, lam).shape, dtype=float)
+    r = np.broadcast_to(rho, fuori.shape)
+    l = np.broadcast_to(lam, fuori.shape)
+    pieni = (r > 0.0) & (l > 0.0)
+    if np.any(pieni):
+        x = r[pieni] / l[pieni]
+        fuori[pieni] = l[pieni] * (x - np.arctan(x))
+    senza_vuoto = (r > 0.0) & (l == 0.0)
+    fuori[senza_vuoto] = r[senza_vuoto]
+    return fuori
+
+
+def alpha_s1(rho, lam):
+    """### `alpha = x^2/(1+x^2)`; ### **`1` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    rho = np.asarray(rho, dtype=float)
+    lam = np.asarray(lam, dtype=float)
+    fuori = np.zeros(np.broadcast(rho, lam).shape, dtype=float)
+    r = np.broadcast_to(rho, fuori.shape)
+    l = np.broadcast_to(lam, fuori.shape)
+    pieni = (r > 0.0) & (l > 0.0)
+    if np.any(pieni):
+        x = r[pieni] / l[pieni]
+        fuori[pieni] = x ** 2 / (1.0 + x ** 2)
+    fuori[(r > 0.0) & (l == 0.0)] = 1.0
+    return fuori
+
+
+def beta_s1(rho, lam):
+    """### `beta = x - arctan x - x^3/(1+x^2)`; ### **`-pi/2` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    rho = np.asarray(rho, dtype=float)
+    lam = np.asarray(lam, dtype=float)
+    fuori = np.zeros(np.broadcast(rho, lam).shape, dtype=float)
+    r = np.broadcast_to(rho, fuori.shape)
+    l = np.broadcast_to(lam, fuori.shape)
+    pieni = (r > 0.0) & (l > 0.0)
+    if np.any(pieni):
+        x = r[pieni] / l[pieni]
+        fuori[pieni] = x - np.arctan(x) - x ** 3 / (1.0 + x ** 2)
+    fuori[(r > 0.0) & (l == 0.0)] = -0.5 * np.pi
+    return fuori
+
+
+# =====================================================================================
+#   LA FORMA SI LEGGE DALLA TABELLA (`CAMM-MATERIA-VUOTO`, `parametri.forma`; il modulo generato)
+# =====================================================================================
+# ### ⛔ **NESSUNA SCELTA SCRITTA QUI:** `FORMA` e' il valore della tabella. ### **`S3` resta come OPZIONE ESPLICITA**, solo per riprodurre il
+# ### vecchio *(Luca `16:52`)*: `scegli(nome)` per un processo intero, `forma_esplicita(nome)` per un contesto.
+# ### ⚠ **`pezzi` e `applica` chiamano `alpha` e `beta` PER NOME DI MODULO:** cosi' la sostituzione di `MV.pezzi` di `csv/_screening_forme_s3.forma`
+# ### continua a funzionare per gli strumenti di `csv/`.
+FORME = {"S1": (N_s1, alpha_s1, beta_s1), "S3": (N_s3, alpha_s3, beta_s3)}
+
+import termini.camm_materia_vuoto as _TMV                     # noqa: E402
+
+FORMA = _TMV.PARAMETRI["forma"]
+assert FORMA in FORME, "la forma della tabella %r non e' fra quelle del nucleo %s" % (FORMA, sorted(FORME))
+N, alpha, beta = FORME[FORMA]
+ATTIVA = FORMA
+
+
+def scegli(nome):
+    """### **L'opzione esplicita, per un processo intero:** `N`, `alpha`, `beta` della forma `nome`."""
+    global N, alpha, beta, ATTIVA
+    assert nome in FORME, "la forma %r non e' fra quelle del nucleo %s" % (nome, sorted(FORME))
+    N, alpha, beta = FORME[nome]
+    ATTIVA = nome
+
+
+@contextlib.contextmanager
+def forma_esplicita(nome):
+    """### **L'opzione esplicita, per un contesto:** rimette la forma di prima all'uscita."""
+    prima = ATTIVA
+    scegli(nome)
+    try:
+        yield
+    finally:
+        scegli(prima)
 
 
 def pezzi(rho, lam):

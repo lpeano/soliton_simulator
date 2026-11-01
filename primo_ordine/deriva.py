@@ -42,6 +42,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import composizione as CM                                     # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 import tick as TK                                             # noqa: E402
 import deriva_serie as DS                                     # noqa: E402
 import deriva_variabile as DVAR                                     # noqa: E402
@@ -153,7 +154,7 @@ def scena(nn, seme, dtau, lunghezza=0, norma="locale", vuoto_modulo=1.0,
     st["phi_h"][...] = (float(vuoto_modulo)
                         * np.exp(1j * r.random(st["phi_h"].shape) * 2.0 * np.pi))
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
-    return inc, mot, st, {"eps": 0.5}
+    return inc, mot, st, dict(TMS.PARAMETRI)
 
 
 def corri(nn, dtau, ticks, seme=7, lunghezza=0, ogni=1, norma="locale",

@@ -99,7 +99,7 @@ def mu_rayleigh(z, phi0, p, s, forma):
 
 # ====================================================================== LE DECISIONI DI LUCA (01:27), PER LE PROVE NUOVE (01:28, punto 6)
 # ### (7) eps: dalla TABELLA, letto, mai scritto a mano; eps 0 solo con ridotto=True, e dichiarato.
-# ### (1) la forma: S1, letta da dove vive in csv/ (_solitone_vuoto_congelato.FORMA); il nucleo usa S3 (doc/DECISIONI_NEL_CODICE.md).
+# ### (1) la forma: dalla TABELLA (dal 2026-11-01 16:52 il nucleo usa S1 dalla tabella; S3 opzione esplicita).
 # ### le piatte, la strada (A): il costruttore predefinito e' l'inviluppo su B a Gamma; A a K con quale="AK".
 def eps_tabella():
     """### **eps di `CAMM-MONETA-SPIN` dalla tabella** *(`_genera.carica`)*."""
@@ -118,8 +118,10 @@ def eps_della_prova(ridotto=False):
 
 
 def forma_predefinita():
-    import _solitone_vuoto_congelato as VC
-    return VC.FORMA
+    """### **La forma della TABELLA** *(`CAMM-MATERIA-VUOTO`, `parametri.forma`, dal modulo generato; Luca `16:52`)*: le corse la applicano con
+    `_screening_forme_s3.forma`, cioe' con le espressioni di `csv/` che il nucleo ripete al bit."""
+    import termini.camm_materia_vuoto as TMV
+    return TMV.PARAMETRI["forma"]
 
 
 @contextlib.contextmanager

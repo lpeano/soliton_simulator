@@ -52,6 +52,7 @@ import incidenza as IN                                        # noqa: E402
 import motore as MO                                           # noqa: E402
 import stato as ST                                            # noqa: E402
 import timbro as TI                                           # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 try:
     import psutil
@@ -195,7 +196,7 @@ def main(argv):
         # ### direbbe ### **una scena senza i suoi buffer**, che non e- la scena.
         mot.apri_tick()
         mot.operatori["grover"](st, {}, 1)
-        mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+        mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
         mot.operatori["spostamento_trasporto"](st, {}, 1)
         mot.operatori["grover_scalare"](st, {}, 1)
         mot.operatori["spostamento_scalare"](st, {}, 1)
@@ -280,7 +281,7 @@ def main(argv):
     for k in range(TICK_M3):
         mot.apri_tick()
         mot.operatori["grover"](st, {}, 1)
-        mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+        mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
         mot.operatori["spostamento_trasporto"](st, {}, 1)
         mot.chiudi_tick()
         if k == 0:
@@ -362,7 +363,7 @@ def main(argv):
     for _ in range(10):
         mot.apri_tick()
         mot.operatori["grover"](st, {}, 1)
-        mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+        mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
         mot.operatori["spostamento_trasporto"](st, {}, 1)
         mot.chiudi_tick()
     referto["costo_per_tick_ms"] = (time.perf_counter() - t0) / 10 * 1e3

@@ -226,6 +226,10 @@ moduli:
     responsabilita: il flusso di CAMM-MATERIA-VUOTO -- esatto, il limite rho zero, e l Eulero che DEVE fallire
     importa: [_presidio, flussi_parziali, incidenza, materia_vuoto, motore, stato]
 
+  - nome: _collauda_forme.py
+    responsabilita: le forme del legame -- S1 dalla tabella, S3 esplicita, la rotazione gemella
+    importa: [_presidio, _genera, materia_vuoto]
+
   - nome: _collauda_saturazione.py
     responsabilita: il collaudo del flusso di saturazione, e la causa della sua esattezza
     importa: [_presidio, incidenza, motore, saturazione, stato]

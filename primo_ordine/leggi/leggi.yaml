@@ -506,13 +506,27 @@ leggi:
   - id: CAMM-MATERIA-VUOTO
     tipo: flusso
     prova: false
-    generatore: rho*log(rho/(rho + Lambda))
+    generatore: rho - Lambda*atan(rho/Lambda)
     esatto: true
     ambito: [psi_h, phi_h, Lambda, rho]
-    parametri: {}
+    parametri:
+      forma:
+        valore: S1
+        dimensione: E^0
+        ammessi:
+          S1: rho - Lambda*atan(rho/Lambda)
+          S3: rho*log(rho/(rho + Lambda))
+        origine: >-
+          ### LA DECISIONE DI LUCA, NON UNA TARATURA (2026-11-01 16:52; la decisione (1) delle 01:27): il nucleo usa
+          `S1`, la forma con cui sono misurati il solitone protetto, le bande piatte, la regola dei livelli e il
+          vuoto vivo (a8e0e43b, 751bca7f). `S3` resta AMMESSA come opzione esplicita, solo per riprodurre i
+          risultati vecchi (`materia_vuoto.scegli`, `forma_esplicita`). ### NESSUNA COSTANTE: `x = rho/Lambda`,
+          `N = Lambda (x - arctan x)`, le espressioni di `csv/_screening_forme_s3._ab("S1")` e
+          `csv/_scomposizione_solitone.F1`; nessun `g` (a `g 1` il fattore di `csv/_livelli_piatti` vale `1`).
     simmetrie: [U1-FASE-GLOBALE]
     conserva: [NORMA]
     scheda: >-
+      ### DAL 2026-11-01 (Luca 16:52) LA FORMA E' UN PARAMETRO DELLA TABELLA: `S1` predefinita, `N = Lambda (x - arctan x)`, `alpha = x^2/(1+x^2)`, `beta = x - arctan x - x^3/(1+x^2)`, `x = rho/Lambda`; a `Lambda = 0` il LIMITE (`1`, `-pi/2`, `rho`), non un pavimento. `S3` ammessa come opzione esplicita. IL TESTO CHE SEGUE E' LA SCHEDA DI `S3`, com'era.
       L'accoppiamento fra la MATERIA e il VUOTO: `N_k = rho_k ln(rho_k / (rho_k +
       Lambda_k))`, con `rho_k = somma_h |psi_h|^2` e `Lambda_k = somma_h |phi_h|^2`
       (punto `F5`). ### DECISIONE DI LUCA del 2026-10-15 (23:30 e 23:38): SOSTITUISCE

@@ -25,6 +25,7 @@ import _presidio                                              # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import motore as MO                                           # noqa: E402
 import stato as ST                                            # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 
 OK = [0, 0]
 
@@ -95,7 +96,7 @@ def main(argv):
     def passo():
         mot.apri_tick()
         mot.operatori["grover"](st, {}, 1)
-        mot.operatori["moneta_spin"](st, {"eps": 0.5}, 1)
+        mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 1)
         mot.operatori["spostamento_trasporto"](st, {}, 1)
         mot.operatori["grover_scalare"](st, {}, 1)
         mot.operatori["spostamento_scalare"](st, {}, 1)
@@ -167,7 +168,7 @@ def main(argv):
     inc, st, mot = _banco(32, "numpy", 7, DTAU_BANCO)
     n0 = _norma(st["psi_h"])
     eps_m = float(np.finfo(float).eps)
-    for nome, par in (("grover", {}), ("moneta_spin", {"eps": 0.5}),
+    for nome, par in (("grover", {}), ("moneta_spin", dict(TMS.PARAMETRI)),
                       ("spostamento_trasporto", {})):
         mot.apri_tick()
         mot.operatori[nome](st, par, 1)
@@ -253,7 +254,7 @@ def main(argv):
     # ### `eps dtau`**: `exp(-i a) exp(-i b) = exp(-i(a+b))`. ### **Senza questo braccio,
     # ### il braccio di sopra proverebbe solo che tutto alza.**
     mot.apri_tick()
-    mot.operatori["moneta_spin"](st, {"eps": 0.5}, 0.5)
+    mot.operatori["moneta_spin"](st, dict(TMS.PARAMETRI), 0.5)
     mot.chiudi_tick()
     esito("### e la moneta di spin INVECE accetta 0.5: e' un FLUSSO in `eps dtau`",
           True, "### altrimenti il braccio di sopra proverebbe solo che tutto alza")
@@ -261,13 +262,13 @@ def main(argv):
     _i2, s2, m2 = _banco(16, "numpy", 3, DTAU_BANCO)
     pr = s2["psi_h"].copy()
     m2.apri_tick()
-    m2.operatori["moneta_spin"](s2, {"eps": 0.5}, 1)
+    m2.operatori["moneta_spin"](s2, dict(TMS.PARAMETRI), 1)
     m2.chiudi_tick()
     intero = s2["psi_h"].copy()
     s2["psi_h"][...] = pr
     m2.apri_tick()
-    m2.operatori["moneta_spin"](s2, {"eps": 0.5}, 0.5)
-    m2.operatori["moneta_spin"](s2, {"eps": 0.5}, 0.5)
+    m2.operatori["moneta_spin"](s2, dict(TMS.PARAMETRI), 0.5)
+    m2.operatori["moneta_spin"](s2, dict(TMS.PARAMETRI), 0.5)
     m2.chiudi_tick()
     d = float(np.max(np.abs(s2["psi_h"] - intero)))
     esito("### e DUE META' fanno l'INTERO: la moneta e' un flusso, non un'involuzione",

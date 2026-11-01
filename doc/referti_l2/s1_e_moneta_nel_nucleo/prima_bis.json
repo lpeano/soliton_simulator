@@ -1,0 +1,646 @@
+{
+ "etichetta": "prima_bis",
+ "forma": null,
+ "collaudi": [
+  {
+   "i": 0,
+   "nome": "il grafo valido",
+   "cmd": "primo_ordine/_collauda_grafo.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "3b35c1a1ac7e28630f00494201503555bd41e09e",
+   "righe": 30,
+   "tolte": 0
+  },
+  {
+   "i": 1,
+   "nome": "il determinismo",
+   "cmd": "primo_ordine/_collauda_determinismo.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "626ad80188893e223e00c8291f74b577814d9043",
+   "righe": 57,
+   "tolte": 0
+  },
+  {
+   "i": 2,
+   "nome": "le simmetrie e le conservazioni",
+   "cmd": "primo_ordine/_collauda_simmetrie.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "1623da37dfbb41957db5201e1511bd6dbb6bbf94",
+   "righe": 42,
+   "tolte": 0
+  },
+  {
+   "i": 3,
+   "nome": "lo schema della tabella",
+   "cmd": "primo_ordine/leggi/_collauda_schema.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "a22f3ee94cce2060d85ebf2963a62ea970a405d7",
+   "righe": 49,
+   "tolte": 1
+  },
+  {
+   "i": 4,
+   "nome": "il generatore",
+   "cmd": "primo_ordine/_collauda_genera.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "8b1fd38a78ba518f56a28e28f7af7f6870aee252",
+   "righe": 33,
+   "tolte": 1
+  },
+  {
+   "i": 5,
+   "nome": "la struttura compatta delle estremita-",
+   "cmd": "primo_ordine/_collauda_incidenza.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "4ab822a9aa4c0aeed3a4cc84dccb53ed0dd40839",
+   "righe": 34,
+   "tolte": 1
+  },
+  {
+   "i": 6,
+   "nome": "il motore: contenitore e pezzi unitari",
+   "cmd": "primo_ordine/_collauda_motore.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "eaf795fc54c26d7ca95af38ebac66ff4d15ff70a",
+   "righe": 59,
+   "tolte": 1
+  },
+  {
+   "i": 7,
+   "nome": "il checkpoint e la ripresa",
+   "cmd": "primo_ordine/_collauda_checkpoint.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "3c9c23e712d7e629c966071b887c2dbd7a7ce7e9",
+   "righe": 27,
+   "tolte": 1
+  },
+  {
+   "i": 8,
+   "nome": "il confronto tabella / banco",
+   "cmd": "primo_ordine/_collauda_confronto.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "4280a6e10fd1bb9afbb62b4f8d9afd5f031ce084",
+   "righe": 27,
+   "tolte": 1
+  },
+  {
+   "i": 9,
+   "nome": "la memoria: `m1`..`m4`",
+   "cmd": "primo_ordine/_collauda_memoria.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "005a7eb695a9e2d0b8ef3d54b4d5fd24b35f7478",
+   "righe": 27,
+   "tolte": 2
+  },
+  {
+   "i": 10,
+   "nome": "il flusso di saturazione",
+   "cmd": "primo_ordine/_collauda_saturazione.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "8e3c1ff2d9bea9e829f5b550578784ca606f618f",
+   "righe": 29,
+   "tolte": 1
+  },
+  {
+   "i": 11,
+   "nome": "il flusso materia-vuoto",
+   "cmd": "primo_ordine/_collauda_materia_vuoto.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "8306b806b98793734ed0065bd7aee156992f299f",
+   "righe": 44,
+   "tolte": 1
+  },
+  {
+   "i": 12,
+   "nome": "`P3` l-energia e la corrente",
+   "cmd": "primo_ordine/_collauda_energia.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "34a25d45b851e288974e1545403b20c2d7730b91",
+   "righe": 18,
+   "tolte": 1
+  },
+  {
+   "i": 13,
+   "nome": "la corrente locale costruita",
+   "cmd": "primo_ordine/_collauda_corrente.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c28d5b993a690cc034e06304995e7b02c4ffc81f",
+   "righe": 19,
+   "tolte": 1
+  },
+  {
+   "i": 14,
+   "nome": "la deriva di `E` e la sorgente",
+   "cmd": "primo_ordine/_collauda_deriva.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "622cb480c9f88a36810ae1dcd0897a8b5161ccff",
+   "righe": 26,
+   "tolte": 1
+  },
+  {
+   "i": 15,
+   "nome": "il tempo proprio in TUTTE le leggi",
+   "cmd": "primo_ordine/_collauda_tempo_proprio.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "6e9a885870d97bf4a775fdb6ac4c0c3084ceb8ab",
+   "righe": 30,
+   "tolte": 1
+  },
+  {
+   "i": 16,
+   "nome": "lo schema della camminata",
+   "cmd": "primo_ordine/_collauda_schema_camminata.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "b61b4e5a9ff53bb996aed06eab8e0e1f5043056f",
+   "righe": 31,
+   "tolte": 1
+  },
+  {
+   "i": 17,
+   "nome": "lo schema della configurazione",
+   "cmd": "primo_ordine/config/schema_config.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "f103baad231ca58dfefa84bb12f967bdccf416c6",
+   "righe": 34,
+   "tolte": 1
+  },
+  {
+   "i": 18,
+   "nome": "`@rif` byte-inerte",
+   "cmd": "primo_ordine/_rif.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "02b082e59e8a72483b254562a64e20f4c13d7c9d",
+   "righe": 20,
+   "tolte": 1
+  },
+  {
+   "i": 19,
+   "nome": "il modello di sigillo",
+   "cmd": "primo_ordine/sigilli/_modello.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "ef52793f54a4db99ab17fc3ec13dff5dcd2f4adb",
+   "righe": 35,
+   "tolte": 1
+  },
+  {
+   "i": 20,
+   "nome": "la catena",
+   "cmd": "primo_ordine/_collauda_passo.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "ab33ec5a89a4ff76c9d9d37fe889587dbdc8323c",
+   "righe": 94,
+   "tolte": 1
+  },
+  {
+   "i": 21,
+   "nome": "la GUIDA, eseguita",
+   "cmd": "primo_ordine/_collauda_guida.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "74c12744c4cf764d7a61a5d564c8163c04910c4a",
+   "righe": 41,
+   "tolte": 0
+  },
+  {
+   "i": 22,
+   "nome": "il referto dell-infrastruttura (LENTO)",
+   "cmd": "csv/_referto_infrastruttura_era2.py",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "dc0686b7142da5a33c39209dc47092e073fcb5ae",
+   "righe": 10,
+   "tolte": 1
+  },
+  {
+   "i": 23,
+   "nome": "la barriera dei hook",
+   "cmd": "csv/_barriera.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "7fa31974cc0109aacb3cb1ce56e9d98b6b42563b",
+   "righe": 20,
+   "tolte": 0
+  },
+  {
+   "i": 24,
+   "nome": "`P-ALB` l-albero delle scelte",
+   "cmd": "csv/_albero_era2.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "3970568f67f812388cb1a176dca9252ca5f7151c",
+   "righe": 39,
+   "tolte": 2
+  },
+  {
+   "i": 25,
+   "nome": "`P-ID` un id che nasce",
+   "cmd": "csv/_id_nuovo.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "640585c14a643a6178e1a23414164a4bd0c8edf9",
+   "righe": 23,
+   "tolte": 2
+  },
+  {
+   "i": 26,
+   "nome": "`P-T2` il replay dei registri",
+   "cmd": "csv/_replay_registri.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "bea9e0e36e71905ca439b82281ee196059d6cebe",
+   "righe": 40,
+   "tolte": 1
+  },
+  {
+   "i": 27,
+   "nome": "l-arbitro fra le due vie",
+   "cmd": "csv/_registri_indice.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "9b14dbbae396a4ea2f7066ec7b54f9095309e103",
+   "righe": 72,
+   "tolte": 1
+  },
+  {
+   "i": 28,
+   "nome": "i presidi dell-indice",
+   "cmd": "csv/_presidio_indice.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "b8d51130caec7f7a695aa7cc3bac2fe67244479a",
+   "righe": 59,
+   "tolte": 1
+  },
+  {
+   "i": 29,
+   "nome": "`P-REG` le regole di gestione",
+   "cmd": "csv/_collauda_regole.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "cf2fa24eb0dcfe27743d78a028150848b440b536",
+   "righe": 25,
+   "tolte": 1
+  },
+  {
+   "i": 30,
+   "nome": "il presidio sullo STOP",
+   "cmd": "csv/_stop_coda.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "638009137dfc8553d0461a0815e498103b1f59a9",
+   "righe": 20,
+   "tolte": 0
+  },
+  {
+   "i": 31,
+   "nome": "`P-E1`..`P-E5` i presidi dell-era 2",
+   "cmd": "csv/_presidi_era2.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c83b86c6b5b6c436470bdd4a634dd666cc3b7550",
+   "righe": 45,
+   "tolte": 1
+  },
+  {
+   "i": 32,
+   "nome": "`P-M1` il documento dei metodi",
+   "cmd": "csv/_metodi_era2.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "8b9f0c04289d1ccb79d7a63a678ac980b7505476",
+   "righe": 14,
+   "tolte": 1
+  },
+  {
+   "i": 33,
+   "nome": "`P-C1` i controlli nell-indice",
+   "cmd": "csv/_controlli_nell_indice.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "6cfdb6fc9d28eeb750e5bcd7135867378017345f",
+   "righe": 14,
+   "tolte": 1
+  },
+  {
+   "i": 34,
+   "nome": "`P-T1` il testo non si interpreta",
+   "cmd": "csv/_testo_e_metadati.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "4741d004e70aae5638bca6074a3e678131fb4a91",
+   "righe": 17,
+   "tolte": 1
+  },
+  {
+   "i": 35,
+   "nome": "`P-R1` ogni ramo e- dichiarato",
+   "cmd": "csv/_rami_era2.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "bfd2bb078628e22f3b1a0924207b5d7b78f4fa46",
+   "righe": 23,
+   "tolte": 1
+  },
+  {
+   "i": 36,
+   "nome": "`P-T3` le citazioni strutturate",
+   "cmd": "csv/_citazioni_strutturate.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "b625b22012cea8571c451e4a6a62b800fa37eac6",
+   "righe": 20,
+   "tolte": 1
+  },
+  {
+   "i": 37,
+   "nome": "`P-RIF` un ID nel codice e- un costrutto",
+   "cmd": "csv/_rif_nel_codice.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "cdc1cddba253fdc733e0d24e39614d97f34f3885",
+   "righe": 16,
+   "tolte": 1
+  },
+  {
+   "i": 38,
+   "nome": "`P-ES1` un solo esecutore",
+   "cmd": "csv/_un_solo_esecutore.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c781459d30fb6128f839d20030c20763bcbd518a",
+   "righe": 14,
+   "tolte": 1
+  },
+  {
+   "i": 39,
+   "nome": "`P-MOD` la modularita-",
+   "cmd": "csv/_modularita_era2.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "2d6b6c72ed0c3160f574c4f294bd2b801e358fbe",
+   "righe": 16,
+   "tolte": 1
+  },
+  {
+   "i": 40,
+   "nome": "`P-AB` i confronti e i dati",
+   "cmd": "csv/_confronti_e_dati.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "b6f65f7345fdd3db86a438b8a7b29ba853bb6600",
+   "righe": 19,
+   "tolte": 1
+  },
+  {
+   "i": 41,
+   "nome": "`P-TAB` la legge si legge dalla tabella",
+   "cmd": "csv/_strumento_dalla_tabella.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "3b4e677e4bdd037207ffae11ff6144807d0530f2",
+   "righe": 15,
+   "tolte": 1
+  },
+  {
+   "i": 42,
+   "nome": "`D0` la forma `cs` spenta e' il passo di oggi",
+   "cmd": "primo_ordine/_collauda_cs.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "4ec63bcd71678409e48844fb20d1712773c94d10",
+   "righe": 23,
+   "tolte": 1
+  },
+  {
+   "i": 43,
+   "nome": "`D1` l-invarianza di scala",
+   "cmd": "primo_ordine/_collauda_scala.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "80c7357a40ad4770d5ffaa5568aba3fcc813da4c",
+   "righe": 30,
+   "tolte": 1
+  },
+  {
+   "i": 44,
+   "nome": "`D2` `cs` al centro, a punto fisso",
+   "cmd": "primo_ordine/_collauda_cs_centro.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "05626e69a6d5216e646c820e436252c769dc0332",
+   "righe": 40,
+   "tolte": 1
+  },
+  {
+   "i": 45,
+   "nome": "il censimento dei rami (NON blocca)",
+   "cmd": "csv/_censimento_rami.py --collaudo",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "1ddfee7d95552dd5a65038bd7dff1a81ff78d88c",
+   "righe": 12,
+   "tolte": 1
+  },
+  {
+   "i": 46,
+   "nome": "chi la suite NON gira (NON blocca)",
+   "cmd": "csv/_censimento_suite.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "da1a68378ffb3882f2054f0ea4c1b451c584075f",
+   "righe": 29,
+   "tolte": 1
+  },
+  {
+   "i": 47,
+   "nome": "`M-B1` PUO- fallire, ed e- provato",
+   "cmd": "primo_ordine/_collauda_mb1.py",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "dbcf598fd3ccd4511652417a35cd356aaea444f9",
+   "righe": 35,
+   "tolte": 1
+  },
+  {
+   "i": 48,
+   "nome": "i presidi dell-indice, nei due versi",
+   "cmd": "csv/_collaudo_presidi_indice.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c711bfac5b71119ac1fa65847c028059b4e50100",
+   "righe": 89,
+   "tolte": 3
+  },
+  {
+   "i": 49,
+   "nome": "i controlli della migrazione",
+   "cmd": "csv/_controlli_indice_v2.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "2789f06990937296f3659992b1dc8b8437ebaeb0",
+   "righe": 34,
+   "tolte": 3
+  },
+  {
+   "i": 50,
+   "nome": "il rinominamento, sul piano",
+   "cmd": "csv/_rinomina.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "e4b5448a29c0afd624f338f3ccae1fd2566dda2d",
+   "righe": 17,
+   "tolte": 1
+  },
+  {
+   "i": 51,
+   "nome": "la FORMA dei testi generati",
+   "cmd": "csv/_forma_referti.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "55a333adbdcb3d393b8da82307cd0b6ed0dab81f",
+   "righe": 19,
+   "tolte": 1
+  },
+  {
+   "i": 52,
+   "nome": "i controlli sullo STAGE e non sul disco",
+   "cmd": "csv/_stage.py --collaudo",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "a15c31ce25ed5f22228fd9cfca6e31e2f14e2e13",
+   "righe": 14,
+   "tolte": 1
+  },
+  {
+   "i": 53,
+   "nome": "la pulizia delle temporanee",
+   "cmd": "csv/_pulizia.py --collaudo",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "37e50e7dd9a435b11c21fb152c668542227a01f6",
+   "righe": 16,
+   "tolte": 1
+  },
+  {
+   "i": 54,
+   "nome": "la simmetria `(P Theta)` sulla parte LINEARE",
+   "cmd": "primo_ordine/_misura_theta_n.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "791c994b7a4f1c20e2bf20bb8b834834065ab073",
+   "righe": 45,
+   "tolte": 1
+  },
+  {
+   "i": 55,
+   "nome": "la `(P Theta)` col termine NON lineare, e `cs` nei due modi",
+   "cmd": "primo_ordine/_misura_theta_nonlineare.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "4dc8255722cd912f8ed1e60c8144bae3e7f3ccf2",
+   "righe": 66,
+   "tolte": 1
+  },
+  {
+   "i": 56,
+   "nome": "la misura COMPLETA di `L2`, su piu- stati",
+   "cmd": "primo_ordine/_misura_completa_l2.py",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "7dde34cfc9f9e8bf624449966f0efdfc431623da",
+   "righe": 39,
+   "tolte": 6
+  },
+  {
+   "i": 57,
+   "nome": "`H_w`: l-energia PESATA, e se il passo con `cs` la conserva",
+   "cmd": "primo_ordine/_misura_hw.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c909d72ea9a2f206622dc55e6cbc2da805206e30",
+   "righe": 71,
+   "tolte": 1
+  },
+  {
+   "i": 58,
+   "nome": "il banco della camminata",
+   "cmd": "proto_camminata/_collauda_banco.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "027e074e67b61da23676fcb332eed407c4000864",
+   "righe": 27,
+   "tolte": 1
+  },
+  {
+   "i": 59,
+   "nome": "il banco della camminata v2",
+   "cmd": "proto_camminata/_collauda_banco2.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "ec976b45e8d4e5a2b197cf9d190453b3efbaa357",
+   "righe": 30,
+   "tolte": 1
+  },
+  {
+   "i": 60,
+   "nome": "il banco della camminata v3",
+   "cmd": "proto_camminata/_collauda_banco3.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "5b6d900d301ccddbd337474ae4cc2f08cf09bfc6",
+   "righe": 38,
+   "tolte": 1
+  },
+  {
+   "i": 61,
+   "nome": "le letture del guscio e del moto",
+   "cmd": "proto_camminata/_collauda_guscio.py",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "4334a674faf0f44c1db0bc2ed95d680ee2178f09",
+   "righe": 20,
+   "tolte": 4
+  },
+  {
+   "i": 62,
+   "nome": "il banco del v4",
+   "cmd": "proto_camminata/_collauda_banco4.py",
+   "dove": "pre-commit",
+   "rc": 0,
+   "sha1": "c5ab59c3e6222c83f76a128fc0436128019a8852",
+   "righe": 56,
+   "tolte": 4
+  },
+  {
+   "i": 63,
+   "nome": "il banco del legame",
+   "cmd": "proto_camminata/_collauda_legame.py",
+   "dove": "solo-CI",
+   "rc": 0,
+   "sha1": "efa6b3570adf592f11727f5acec8d3b098b53ffa",
+   "righe": 30,
+   "tolte": 5
+  }
+ ]
+}

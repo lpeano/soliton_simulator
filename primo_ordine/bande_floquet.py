@@ -25,6 +25,7 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
 import bande as BD                                            # noqa: E402
+import termini.camm_moneta_spin as TMS                         # noqa: E402  (eps dalla tabella, Luca 16:52)
 import deriva as DV                                           # noqa: E402
 import tick as TK                                           # noqa: E402
 import deriva_variabile as DVAR                               # noqa: E402
@@ -66,7 +67,7 @@ def scena_toro(lati, seme=7, dtau=0.25, vuoto_modulo=2.0, su2=True):
     st["phi_h"][...] = (float(vuoto_modulo)
                         * np.exp(1j * r.random(st["phi_h"].shape) * 2.0 * np.pi))
     mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.full(nn, dtau), "numpy")
-    return inc, mot, st, {"eps": 0.5}
+    return inc, mot, st, dict(TMS.PARAMETRI)
 
 
 def floquet(lati=(10, 10), ticks=4000, seme=7, vuoto_modulo=2.0, ogni=20,
