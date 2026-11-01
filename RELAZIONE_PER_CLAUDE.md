@@ -22391,3 +22391,34 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Per la decisione `10`:** il fondo `F0` congelato tiene `BG` fermo per `10000`; **vivo, il vuoto stesso si muove** *(su di `0.22` sotto, giu' di `0.024` lontano)* e il solitone si allarga. **Se il fondo diventa vuoto di riferimento, la domanda e' perche' il fondo vivo non resta fermo sotto il solitone.**
 
 **Scritto:** la sezione `6` del task history `2026-11-01_respiro_congelato`; `doc/CHIUDERE_LE_USCITE.md` sez. `12`; la MAPPA *(la sezione `2` riga `1`)*. **Il mandato e' chiuso. Il successivo in coda e' ⑦**, la cassetta degli attrezzi delle `01:22`.
+
+## 2026-11-01 — LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): 32/32 -- OGNI MODULO RIDA' AL BIT I NUMERI COMMITTATI (t1)
+
+
+**Il referto** *(`doc/referti_l2/cassetta_solitone.txt`, da `python csv/solitone/collauda.py`, girato a `37e56400`; i blob sha1-BYTE nel referto e nell'inventario)*. **La libreria `csv/solitone/`** ha tre moduli. Le funzioni sono **le stesse espressioni** degli strumenti che hanno prodotto i referti: sono copie, non richiami, e gli script vecchi non sono stati toccati.
+- **`uscite`**: le uscite (n0)-(n3) e le coppie dispersive coi margini, con `Omega` come argomento. **Lo spettro ha una sola firma, dalla scena** *(`spettro_scena(z, phi0, s)`)*. Quando si legge uno stato, `stato_nella_scena` **rifiuta** *(con un `AssertionError`)* se il residuo registrato non torna entro `1e-6`;
+- **`protetto`**: le due scene *(quella di riferimento e quella col vuoto scelto)*, la coppia di `B` a `Gamma` con `E0 = fase/s`, la scelta dentro la coppia, l'inviluppo, `A` a `K`, `mu` di Rayleigh. `N`, `eps`, `s`, `L` e la forma sono argomenti;
+- **`misure`**: il cuore netto e quello liscio, `w`, l'alone, il baricentro, le bande di `D`, le rotazioni, la forma della crescita, la vita *(`1e-2`)*, il limite del tasso. **Il periodo dai cambi di segno vuole il passo** *(non ha un default)*, **e restituisce gli alias.**
+
+**I test** *(tempi: `20`, `12` e `6` s)*:
+- **le uscite:**
+  - `U1`: le `24` uscite, `E0` e le bande di `previsioni.json`, a eps `0.5` e a eps `0`, AL BIT; con `g + 1e-3` non coincidono;
+  - `U2`: la riga `(n2) P0 + Ppi` di `chiudere_le_uscite.txt`;
+  - `U3`: `r 1.5247` dalla scena della sua famiglia: il residuo `1.685968e-10` e le bande libere sono le righe di `scatola/uscite.txt`. **Nella scena della famiglia sbagliata `stato_nella_scena` rifiuta** *(residuo `7.9e-2`: l'errore di `c6ad04ac`)*;
+- **il solitone protetto:**
+  - `P1`: `A` a `K` della corsa di `a8e0e43b`, lo `sha` e `mu`;
+  - `P2`: `B` a `Gamma` dall'inviluppo a `N 3e5`: lo `sha`, `E0`, `bloch`, `mu` e il residuo di `robusta_N3e5`. Col partner della scelta lo `sha` non coincide;
+  - `P3`: la partenza di BG-F-0.15 sulla scena del fondo: `mu`, il residuo, `w_in`, `h`, `e_K`. **`E0` coincide anche con la conversione fatta una volta sola** *(differenza `0`)*;
+- **le misure:**
+  - `M1`: il campione a `t 0` di `salti_nel_cuore` e il punto di `a8e0e43b`. La finestra netta e quella liscia sono diverse *(`0.620386` contro `0.618068`)*;
+  - `M2`: lo stato di BG-F-0.15 al tick `20000`: il campione, l'alone e la riga `D` coincidono con l'ultimo pezzo;
+  - `M3`: `limite_3000.json`;
+  - `M4`: i `5` casi del collaudo della forma *(la serie vera di `breve_R_1e6` compresa)*, riga per riga;
+  - `M5`: gli `OSSERVATO 142.2` e `621.8` di `modo_di_R.txt`;
+  - `M6`: un periodo vero di `33` passi letto giusto. Un periodo vero di `1.1` passi viene letto `33.0`, cioè **l'alias**, e **il vero `3.3` compare fra gli alias**. Senza il passo, la funzione rifiuta.
+
+**La lettura e' (t1).** Una nota onesta: i test confrontano con i numeri committati, quindi **dicono che la libreria e' il codice che ha prodotto quei referti, non che quei referti siano giusti**. Il `RuntimeWarning` *(una divisione per zero)* in `_scomposizione_solitone.parti`, chiamata da `e_K_di`, ricompare anche qui: `e_K` coincide al bit, ma il warning resta **in lista, non spiegato**.
+
+**Per gli script nuovi:** `import solitone.uscite`, `solitone.protetto` e `solitone.misure`, con `csv/` nel `sys.path`.
+
+**Il mandato delle `01:22` e' chiuso. Le decisioni che il mandato elenca** *(la moneta (7), `S1` (1), le piatte (17, 19, 25), la regola dei livelli piatti)* **restano di Luca.** **Il successivo in coda e' ⑧** *(`01:27` + `01:28`)*.
