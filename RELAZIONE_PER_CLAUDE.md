@@ -22336,3 +22336,22 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Che cosa cambia per `326747d0`:** le letture **di dissoluzione e di forma** *(il cuore, `w`, l'alone, le bande di `D`, `Lambda`)* **non cambiano**: non usano il libro. Cambiano invece **i conti di `cin` e `tot`** e la **strada `A`**, che erano senza il termine della moneta. Per BG-U il trasferimento di `cin` dal disco al lontano *(`-0.199` / `+0.199 N |e_K|`)* e' piu' grande dell'intero termine della moneta all'inizio *(`1.54e-2`)*, **ma va riletto col libro corretto prima di farne una conclusione**. **Il respiro** *(punto 2)* usa il libro col `par` della corsa.
 
 **Domanda aperta, col criterio di chiusura:** **quali altri script girano con eps acceso e usano il libro dei conti senza passare il `par`?** Va fatto un censimento *(chi chiama `conti_per_nodo`, `per_nodo` o `energie` con `z["par"]["eps"]` diverso da `0`)*. Si chiude con l'elenco committato. **Un avviso nel referto** *(se comparisse anche nei pezzi del driver non lo so: la loro uscita non e' stata conservata)*: `_scomposizione_solitone.parti` stampa un `RuntimeWarning` *(divisione per zero in `F1(rho / lam)`)* dentro `e_K_di`, lo stato uniforme. Nei pezzi committati `e_K` e' finito *(`-4.712275` a `s 0.15`, dal referto `326747d0`)*, e `H_tot` non dipende da `e_K` *(`e_K` entra solo in `cost` e `cin`)*. Ma l'avviso non e' spiegato: lo metto in lista.
+
+## 2026-11-01 — IL RESPIRO SUL FONDO (Luca 11:22, punto 2): 2/2 -- BG-F REGGE FINO A 10000, MA DOPO ~5000 SI ALLARGA DENTRO LA BANDA B (LETTURA r2); LA MAPPA E LA DECISIONE 10
+
+
+**Il referto** *(`doc/referti_l2/respiro_sul_fondo.txt`, sha1-BYTE `2893d109`, girato a `f7f9bf77`)*: BG-F a `s 0.15`, continuato **al bit** dalla fine di `_vuoto_vivo_B` *(tick `20000`)* fino a `10000` unita' di tempo in `5` pezzi *(`2eb0b19f` .. `f7f9bf77`)*. **`2/2` DEVE:** arriva a `10000`; `M` e `V` entro `3.9e-11`. `H_tot` col termine della moneta resta entro `4.1e-5 N |e_K|` sulla continuazione *(col libro a eps `0` sarebbe `5.0e-4`)*.
+
+**I fatti:**
+- **il minimo del cuore** della continuazione *(`0.397`)* **non scende sotto quello fino a `3000`** *(`0.379`)*;
+- **ma l'alone cresce regolare** *(`0.0055` -> `0.023`)*, **e cresce anche `w`** *(`7.95` -> `9.98`)*; **il cuore medio, dopo `~5000`, cala** *(`0.517` -> `0.416`, sui blocchi di `1000`)*;
+- **`D` resta nella banda `B`** *(`0.95`-`0.99`)*: il solitone si allarga dentro la sua banda;
+- il libro dei conti *(col `par`)*: `cin` vicino `-0.070`, lontano `+0.052`, **il vuoto lontano `+0.020`**; il totale `-3.6e-6 N |e_K|`.
+
+**La lettura: (r2), non (r1).** Sul fondo il solitone vive molto piu' a lungo che sul vuoto uniforme *(oltre `10000` contro `160`)*, **ma non e' fermo**. **Non so** se il calo arrivi alla dissoluzione, ne' con che legge: e' un solo tratto di discesa, a un solo `s`.
+
+**Scritto:** la sezione `6` del task history `2026-11-01_energia_e_respiro`; `doc/CHIUDERE_LE_USCITE.md` sez. `11`; la MAPPA *(la sezione `2` riga `1`: si scioglie sul vuoto UNIFORME qualunque sia il punto della banda, regge sul FONDO con l'allargamento lento; la riga `d`; **la decisione `10` nella sezione `5`**, il vuoto del fondo come vuoto fisico)*.
+
+**La raccomandazione per la decisione `10`, che e' di Luca:** il fondo come **vuoto di riferimento delle prove**, non ancora come vuoto fisico nel nucleo. Prima va deciso se l'allargamento e' fisico *(un secondo `s`)*. Inoltre `F0` e' uno dei quattro fondi degeneri e la scelta fra loro non e' derivata; ed e' il «pavimento freddo» della voce `32`.
+
+**Il mandato delle `11:22` e' chiuso. Il successivo in coda e' ⑦**, la cassetta degli attrezzi delle `01:22`.

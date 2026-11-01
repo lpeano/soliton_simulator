@@ -48,3 +48,34 @@ Un `H_tot` che non si conserva **toglie valore a ogni lettura energetica** del v
 3. `python csv/_energia_vuoto_vivo.py > doc/referti_l2/energia_vuoto_vivo.txt`; il referto, `RELAZIONE`. **`E0` o `E2` falliti: FERMO.**
 4. `csv/_respiro_sul_fondo.py` *(`R0`)*, committato; i pezzi, uno alla volta, ognuno committato; il referto.
 5. `doc/CHIUDERE_LE_USCITE.md`; `RELAZIONE`; la `MAPPA` *(la sezione `2` riga `1`: il solitone si scioglie col vuoto UNIFORME, qualunque sia il punto della banda, e regge sul FONDO; la decisione di Luca da prendere: il vuoto del fondo come vuoto fisico del modello)*; la sezione `6` qui. Poi ⑦.
+
+## 6. L'ESITO
+
+### Punto `1`, l'energia *(`doc/referti_l2/energia_vuoto_vivo.txt`, sha1-BYTE `da5bee14`, girato a `029cac81`; `12/12`)*
+
+**Annotazione alle premesse:** (a) **non** era la causa *(il vuoto e' uguale al bit ai due `s`)*; **(c) si'**: il libro dei conti non contava il termine della moneta. **Col termine dentro, il rapporto e' `3.880` (BG-U) e `3.896` (BG-F)**, mentre col libro a eps `0` resta `0.873` e `0.871` *(il caso che DEVE fallire)*. (b) porta un salto nei primi `10` unita' di tempo, ma scala anch'esso col passo. **La lettura e' (h3).**
+
+### Punto `2`, il respiro *(`doc/referti_l2/respiro_sul_fondo.txt`, sha1-BYTE `2893d109`, girato a `f7f9bf77`; `2/2` DEVE)*
+
+**BG-F a `s 0.15` regge fino a `10000`** *(la ripresa da `_vuoto_vivo_B` al bit; `M` e `V` entro `3.9e-11`; `H_tot` col termine della moneta entro `4.1e-5 N |e_K|` sulla continuazione, contro `5.0e-4` col libro a eps `0`)*. **Ma non e' (r1):**
+
+| tempo | il cuore liscio medio | `w` medio | l'alone medio |
+|---|---|---|---|
+| `3000`-`4000` | `0.509` | `7.92` | `0.0066` |
+| `4000`-`5000` | `0.517` | `8.03` | `0.0090` |
+| `5000`-`6000` | `0.510` | `8.28` | `0.0115` |
+| `6000`-`7000` | `0.491` | `8.64` | `0.0141` |
+| `7000`-`8000` | `0.461` | `9.08` | `0.0167` |
+| `8000`-`9000` | `0.440` | `9.46` | `0.0192` |
+| `9000`-`10000` | `0.416` | `9.86` | `0.0218` |
+
+- **il minimo della continuazione** *(`0.397` a tempo `9537`)* **non scende sotto quello visto fino a `3000`** *(`0.379`)*: questa meta' di (r1) regge;
+- **l'alone CRESCE**, regolare, da `0.0055` a `0.0231` *(la pendenza `+2.5e-3` per `1000`)*, e **`w` cresce** da `7.95` a `9.98`: l'altra meta' di (r1) cade;
+- **(r2): il cuore cala dopo tempo `~5000`**, da una media di `0.517` a `0.416`. **Dove va:** `D` resta nella banda **`B`** *(`0.95`-`0.99` lungo tutta la continuazione)*: **il solitone si allarga dentro la sua banda, non scappa in altre bande.** Il libro dei conti *(col `par`)* fra tempo `3000` e `10000`: `cin` vicino `-0.0696`, lontano `+0.0519`; **il vuoto lontano `+0.0202`**; il totale `H_tot` `-3.6e-6 N |e_K|`. **La materia e la sua energia escono dal disco, e una parte va al vuoto lontano**; la strada `A` sul disco: netto `-0.0606` *(entrate `+0.733`, uscite `-0.794`)*.
+- **Non so** se il calo continui fino alla dissoluzione, ne' con che legge *(lineare o esponenziale)*: la finestra e' **un solo tratto di discesa**, e **non c'e' un secondo passo `s`** per la continuazione.
+
+**La lettura e' (r2)**: sul fondo il solitone vive **molto piu' a lungo** che sul vuoto uniforme *(oltre `10000` contro `160`)*, **ma non e' fermo**: dopo `~5000` si allarga lentamente dentro la banda `B`, e cede materia e energia al lontano e al vuoto.
+
+### Punto `3`, la MAPPA
+
+La sezione `2` riga `1`, la riga `d` della sezione `3`, e **la decisione `10` nella sezione `5`** *(il vuoto del fondo come vuoto fisico del modello: di Luca)*.

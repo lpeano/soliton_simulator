@@ -1,0 +1,36 @@
+[TIMBRO] _respiro_sul_fondo.py  sha1-BYTE 2893d109  committato e pulito
+==================================================================================================================================
+IL RESPIRO SUL FONDO (Luca 11:22, punto 2): BG-F-0.15 di _vuoto_vivo_B (BG, il fondo F0, s 0.15, eps 0.5, N 1e+06, L 81, il tick intero, cs spento, lo zero conv('simm')) continuato fino a 10000; l'unita' N |e_K|
+  la configurazione: TAU_FINE 10000; di _vuoto_vivo_B: PEZZO 10000 OGNI 10 OGNI_D 20 META 0.5 R_VICINO 2 LAM_ZERO 0.5 TOLL_NORMA 1e-10; il libro dei conti della continuazione: col par della corsa (eps 0.5)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (r1) il cuore oscilla limitato (il minimo non sotto ~0.38) e l'alone non cresce; (r2) il cuore cala: quanto, dove va; (r3) altro
+==================================================================================================================================
+### BG-F-0.15: REGGE fino a 10000; 5 pezzi della continuazione, 4667 campioni, tempo 3000.0 .. 9999.0, 3555 s
+  fino a 3000 (_vuoto_vivo_B): il cuore liscio 0.59164 -> 0.50952, il minimo 0.37871, il massimo 0.59660
+  la continuazione: il cuore liscio 0.50952 -> 0.41509, il minimo 0.39693 a tempo 9537.0, il massimo 0.54242; la pendenza -1.7084e-02 per 1000 unita' di tempo
+    tempo  3000.0 ..  3997.5: il cuore liscio medio 0.50865, min 0.47405, max 0.54242; w medio 7.9160; l'alone medio 0.00660
+    tempo  3999.0 ..  4996.5: il cuore liscio medio 0.51733, min 0.49375, max 0.53775; w medio 8.0290; l'alone medio 0.00899
+    tempo  4998.0 ..  5995.5: il cuore liscio medio 0.51048, min 0.48229, max 0.53439; w medio 8.2843; l'alone medio 0.01152
+    tempo  5997.0 ..  6994.5: il cuore liscio medio 0.49101, min 0.46636, max 0.51687; w medio 8.6353; l'alone medio 0.01411
+    tempo  6996.0 ..  7993.5: il cuore liscio medio 0.46128, min 0.44818, max 0.48051; w medio 9.0836; l'alone medio 0.01667
+    tempo  7995.0 ..  8992.5: il cuore liscio medio 0.43960, min 0.41327, max 0.45067; w medio 9.4565; l'alone medio 0.01923
+    tempo  8994.0 ..  9991.5: il cuore liscio medio 0.41551, min 0.39693, max 0.43062; w medio 9.8560; l'alone medio 0.02179
+    tempo  9993.0 ..  9999.0: il cuore liscio medio 0.41577, min 0.41509, max 0.41637; w medio 9.9779; l'alone medio 0.02309
+  w 7.9455 -> 9.9825; l'alone 0.00551 -> 0.02308 (il massimo 0.02309 a tempo 9996.0), la pendenza +2.5457e-03 per 1000; il baricentro si sposta di 2.9159
+  Lambda medio sotto il solitone 6.402289 -> 6.221331; lontano 5.955838 -> 5.975703
+  il libro dei conti (col par), vicino   (fine - inizio della continuazione, in N |e_K|): la materia (cin) -6.9610e-02  il vuoto +6.1303e-04  il legame -1.4551e-02  H_tot -6.0636e-02
+  il libro dei conti (col par), lontano  (fine - inizio della continuazione, in N |e_K|): la materia (cin) +5.1870e-02  il vuoto +2.0165e-02  il legame +1.1510e-02  H_tot +6.0632e-02
+  il libro dei conti (col par), totale   (fine - inizio della continuazione, in N |e_K|): la materia (cin) -1.7740e-02  il vuoto +2.0778e-02  il legame -3.0414e-03  H_tot -3.6366e-06
+  la strada A sul disco (in N |e_K|): le entrate +7.3327e-01, le uscite -7.9390e-01, il netto -6.0636e-02
+  H_tot sul toro, max |H - H(inizio continuazione)|: col par 4.0909e-05; il libro a eps 0 4.9545e-04 (in N |e_K|)
+  D a tempo  3003.0: |D|/|psi0| 9.9736e-01; le bande A 0.0013 B 0.9940 P0 0.0037 Ppi 0.0010
+  D a tempo  4752.0: |D|/|psi0| 5.0228e-01; le bande A 0.0091 B 0.9521 P0 0.0263 Ppi 0.0125
+  D a tempo  6501.0: |D|/|psi0| 1.5671e+00; le bande A 0.0013 B 0.9924 P0 0.0041 Ppi 0.0021
+  D a tempo  8250.0: |D|/|psi0| 1.7507e+00; le bande A 0.0013 B 0.9924 P0 0.0042 Ppi 0.0021
+  D a tempo  9999.0: |D|/|psi0| 9.2065e-01; le bande A 0.0055 B 0.9682 P0 0.0179 Ppi 0.0083
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE: la corsa arriva a 10000 o si scioglie                                                            PASSA   
+  DEVE PASSARE: M e V entro 1e-10 (rispetto all'inizio di _vuoto_vivo_B)                                         PASSA   dM 3.9e-11 dV 2.6e-11
+  LETTURA (r1), il fatto: il minimo della continuazione 0.39693 contro quello visto fino a 3000 (letto dai pezzi di _vuoto_vivo_B) 0.37871: NON scende sotto; la pendenza dell'alone +2.5457e-03 per 1000
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []
