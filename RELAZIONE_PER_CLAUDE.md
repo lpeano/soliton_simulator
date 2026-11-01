@@ -22298,3 +22298,12 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **`cs` spento, dal codice:** `_energia_del_legame.stato` mette `mot.cs` costante `= s` e `mot.lambda_c = None`, e il passo e' `tick.percorri_tick` *(lo script lo asserisce sulla scena)*.
 
 **Ora girano le `6` corse**, una alla volta, a pezzi di `10000` tick, ogni pezzo committato da un driver *(BG-U, BG-F, AK-U, AK-F a `s 0.15`; poi BG-U, BG-F a `s 0.075`)*. Il driver si ferma senza committare se un pezzo fallisce, e la ripresa al bit e' un `assert` *(lo sha1 di ogni chiave di `z["st"]`)*.
+
+## 2026-11-01 — IL VUOTO VIVO SU B A Gamma (Luca 22:35): LE 6 CORSE FINITE, IL REFERTO PRIMA DI GIRARLO; LA CODA (01:22, 01:27, 01:28) E S3 NEL NUCLEO
+
+
+**Le 6 corse sono finite** *(il driver, `RC 0` a ogni pezzo, l'ultimo commit di dati `b4238ea4`)*; i numeri stanno nei messaggi dei pezzi e, letti, nel referto che segue. **`--referto`** e' aggiunto a `csv/_vuoto_vivo_B.py` *(sha1-BYTE `25170803`; le righe del controllo e delle corse sono quelle di `1dd07e67`, intatte)* e si committa **prima** di girarlo. I criteri DEVE sono quelli del task history: `M` e `V` entro `TOLL_NORMA` in ogni corsa; per BG-U e BG-F il rapporto `max |H - H(0)|` fra `s 0.15` e `0.075`, sul tempo comune, fra `3` e `5`.
+
+**LA CODA, registrata qui come chiede L-UN-PROMPT:** ⑤ il vuoto vivo *(22:35, in chiusura)* → ⑦ la cassetta degli attrezzi del solitone *(01:22)* → ⑧ le decisioni chiuse e le voci superate *(01:27)*, con l'aggiunta delle decisioni nel codice *(01:28)*. Fra le versioni di uno stesso mandato vale l'ultima; l'01:28 si somma all'01:27, non la sostituisce.
+
+**UN RISCONTRO PER ⑧, dalla lettura del codice (nessuna modifica):** la forma del legame nel nucleo e' **S3**, non S1: `primo_ordine/materia_vuoto.py`, `alpha` *(`ln(rho/(rho+Lambda)) + Lambda/(rho+Lambda)`)* e `beta` *(`-rho/(rho+Lambda)`)*, restituite da `pezzi`. S1 entra **solo in memoria**, da `csv/_screening_forme_s3.forma`, che sostituisce `MV.pezzi` dentro un `with`. **La decisione (1), S1, non si allinea negli strumenti di `csv/` senza lasciare il nucleo a S3:** farla diventare il modello tocca `materia_vuoto.py` e la sua legge in `leggi.yaml`, cioe' il nucleo. **Per il punto 7 del mandato delle 01:28, su questa parte mi fermero' e lo scrivero' a Luca col file, la riga e la modifica.** Su eps invece il nucleo e' gia' allineato: `leggi.yaml`, `CAMM-MONETA-SPIN`, `parametri.eps.valore 0.5`; le sovrascritture a `0` stanno solo in `csv/`.

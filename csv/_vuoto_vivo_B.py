@@ -287,6 +287,80 @@ def controllo():
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
 
+def serie(nome):
+    """### **La corsa intera dai pezzi:** `(testa, campioni, D, pezzi)`; ### **i pezzi DEVONO essere contigui.**"""
+    rr = [LP.leggi(os.path.join(DIR_JSON, n)) for n in nomi(nome)]
+    for a, b in zip(rr, rr[1:]):
+        assert a["t1"] == b["t0"], "un buco fra i pezzi di %s" % nome
+    camp = [c for r in rr for c in r["campioni"]]
+    dd = [d for r in rr for d in r["D"]]
+    return rr[0], camp, dd, rr
+
+
+def referto():
+    print("=" * 130)
+    print("IL VUOTO VIVO SU B A Gamma (Luca 22:35): IL REFERTO -- due solitoni dall'inviluppo (BG, AK), due vuoti (U, F0), il tick intero (14 pezzi, cs spento), eps %g, N %.0e, L %d" % (EPS, N, L))
+    print("  la configurazione: TAU_FINE %g PEZZO %d OGNI %d OGNI_D %d META %g R_VICINO %g LAM_ZERO %g RAPPORTO %s TOLL_NORMA %g; CORSE %s" % (TAU_FINE, PEZZO, OGNI, OGNI_D, META, R_VICINO, LAM_ZERO, RAPPORTO, TOLL_NORMA, CORSE))
+    print("  LE LETTURE DI LUCA, SCRITTE PRIMA: (v1) BG regge con tutti e due i vuoti, AK si scioglie; (v2) BG regge con un vuoto solo; (v3) BG si scioglie con tutti e due; (v4) altro; per ognuna s 0.15 contro 0.075")
+    print("=" * 130)
+    R = {}
+    for nome, (sol, vuoto, s) in CORSE.items():
+        if not nomi(nome):
+            print("### %s: NESSUN PEZZO" % nome)
+            continue
+        testa, camp, dd, rr = serie(nome)
+        ult = rr[-1]
+        fatta = ult["t1"] >= ult["t_fine"] or ult["t_dis"] is not None
+        sc = N * abs(testa["e_K"])
+        c0, cf = camp[0], camp[-1]
+        fl = np.array([c["f_liscia"] for c in camp])
+        tt = np.array([c["t"] for c in camp])
+        M = np.array([c["E"]["totale"]["M"] for c in camp])
+        V = np.array([c["E"]["totale"]["V"] for c in camp])
+        H = np.array([c["E"]["totale"]["tot"] for c in camp])
+        R[nome] = {"s": s, "tau": tt * s, "H": H, "t_dis": ult["t_dis"], "dM": float(np.max(np.abs(M / M[0] - 1.0))), "dV": float(np.max(np.abs(V / V[0] - 1.0)))}
+        inf = testa["info"]
+        print("### %s (%s, vuoto %s, s %g): %s; %d pezzi, %d campioni, tick %d .. %d (tempo %.1f), %.0f s"
+              % (nome, sol, vuoto, s, ("SCIOLTO a t %d (tempo %.1f)" % (ult["t_dis"], ult["t_dis"] * s)) if ult["t_dis"] is not None else ("REGGE fino a %g" % (ult["t1"] * s) if fatta else "### NON FINITA"),
+                 len(rr), len(camp), tt[0], tt[-1], tt[-1] * s, sum(r["secondi"] for r in rr)))
+        print("  la partenza: mu %+.6f, il residuo per tick %.3e%s; w_in %.6f, h %.4f, e_K %+.6f (l'unita' N |e_K| %.4e)"
+              % (inf["mu"], inf["residuo"], (", E0 %+.6f, degenere a %.1e, separata dal livello sotto di %.5f, theta %.4f phi %.4f, Bloch %.1e" % (inf["E0"], inf["degenere"], inf["separazione"], inf["theta"], inf["phi"], inf["bloch"])) if sol == "BG" else "",
+                 testa["w_in"], testa["h"], testa["e_K"], sc))
+        print("  il cuore liscio %.5f -> %.5f (il minimo %.5f a tempo %.1f, il massimo %.5f); il netto %.5f -> %.5f; w %.4f -> %.4f; l'alone %.5f -> %.5f (il massimo %.5f); il baricentro si sposta di %.4f"
+              % (fl[0], fl[-1], fl.min(), tt[np.argmin(fl)] * s, fl.max(), c0["f_win"], cf["f_win"], c0["w"], cf["w"], c0["alone"], cf["alone"], max(c["alone"] for c in camp),
+                 math.hypot(cf["x"] - c0["x"], cf["y"] - c0["y"])))
+        print("  Lambda medio sotto il solitone (disco %g w_in) %.6f -> %.6f; lontano %.6f -> %.6f" % (R_VICINO, c0["lam_vicino"], cf["lam_vicino"], c0["lam_lontano"], cf["lam_lontano"]))
+        for reg in ("vicino", "lontano", "totale"):
+            e0, e1 = c0["E"][reg], cf["E"][reg]
+            print("  il libro dei conti, %-8s (alla fine - all'inizio, in N |e_K|): la materia (cin) %+.4e  il vuoto %+.4e  il legame %+.4e  H_tot %+.4e"
+                  % (reg, (e1["cin"] - e0["cin"]) / sc, (e1["vuo"] - e0["vuo"]) / sc, (e1["leg"] - e0["leg"]) / sc, (e1["tot"] - e0["tot"]) / sc))
+        gp = sum(c["gA_pos"] for c in camp)
+        gn = sum(c["gA_neg"] for c in camp)
+        print("  la strada A sul disco (in N |e_K|): le entrate %+.4e, le uscite %+.4e, il netto %+.4e; H_tot sul toro: max |H - H(0)| %.4e; dM %.1e dV %.1e"
+              % (gp / sc, gn / sc, (gp + gn) / sc, float(np.max(np.abs(H - H[0]))) / sc, R[nome]["dM"], R[nome]["dV"]))
+        if dd:
+            for d in (dd[0], dd[len(dd) // 2], dd[-1]):
+                print("  D a tempo %7.1f: |D|/|psi0| %.4e; le bande %s" % (d["t"] * s, d["nD"], " ".join("%s %.4f" % (k, v) for k, v in sorted(d["bande"].items()))))
+        print("-" * 130)
+    print("### I CRITERI")
+    esito("DEVE PASSARE: M e V entro %g in ogni corsa" % TOLL_NORMA, all(r["dM"] <= TOLL_NORMA and r["dV"] <= TOLL_NORMA for r in R.values()),
+          " ".join("%s %.1e/%.1e" % (k, r["dM"], r["dV"]) for k, r in R.items()))
+    for v in ("U", "F"):
+        a, b = R.get("BG-%s-0.15" % v), R.get("BG-%s-0.075" % v)
+        if a is None or b is None:
+            esito("DEVE PASSARE: BG-%s, H_tot a O(s^2)" % v, False, "una corsa manca")
+            continue
+        T = min(a["tau"][-1], b["tau"][-1])
+        da = float(np.max(np.abs(a["H"][a["tau"] <= T] - a["H"][0])))
+        db = float(np.max(np.abs(b["H"][b["tau"] <= T] - b["H"][0])))
+        rap = da / db if db > 0 else float("inf")
+        esito("DEVE PASSARE: BG-%s, H_tot a O(s^2): max |H - H(0)| a s 0.15 / a s 0.075, sul tempo comune %.1f, fra %g e %g" % (v, T, RAPPORTO[0], RAPPORTO[1]),
+              RAPPORTO[0] <= rap <= RAPPORTO[1], "%.4e / %.4e = %.3f" % (da, db, rap))
+    print("-" * 130)
+    print("### LE LETTURE: i numeri sono quelli sopra; la parola (v1)..(v4) nella relazione")
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
@@ -294,6 +368,8 @@ def main(argv):
         controllo()
     elif "--corsa" in argv:
         sys.exit(corsa(argv[argv.index("--corsa") + 1]))
+    elif "--referto" in argv:
+        referto()
     else:
         print(__doc__)
 
