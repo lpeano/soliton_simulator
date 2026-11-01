@@ -1,0 +1,46 @@
+[TIMBRO] _respiro_congelato.py  sha1-BYTE 65a5abef  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+LA RIPARTIZIONE DELL'ENERGIA DI 326747d0 COL TERMINE DELLA MONETA (Luca, il TODO del controllo congelato): le 6 corse di _vuoto_vivo_B, (fine - inizio) per regione, dagli stati iniziale e finale
+  la configurazione: eps 0.5, N 1e+06, L 81, LAM_ZERO 0.5, R_VICINO 2, lo zero conv('simm'); l'unita' N |e_K|; ### la strada A tick per tick NON si ricalcola senza rigirare
+==================================================================================================================================
+### BG-U-0.15 (tick 0 .. 1070)
+  DEVE PASSARE: BG-U-0.15, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni regione PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin -1.9920e-01 vuoto -1.5378e-03 legame -4.2003e-02 H_tot -1.7562e-01  |  COL TERMINE DELLA MONETA: cin -2.0207e-01 vuoto -1.5378e-03 legame -4.2003e-02 H_tot -1.7849e-01  (la moneta all'inizio +1.5358e-02, alla fine +1.2493e-02)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +1.9934e-01 vuoto +9.4570e-04 legame +4.2467e-02 H_tot +1.7563e-01  |  COL TERMINE DELLA MONETA: cin +2.0225e-01 vuoto +9.4570e-04 legame +4.2467e-02 H_tot +1.7854e-01  (la moneta all'inizio +7.9430e-05, alla fine +2.9847e-03)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin +1.3773e-04 vuoto -5.9212e-04 legame +4.6412e-04 H_tot +9.7297e-06  |  COL TERMINE DELLA MONETA: cin +1.7812e-04 vuoto -5.9212e-04 legame +4.6412e-04 H_tot +5.0116e-05  (la moneta all'inizio +1.5438e-02, alla fine +1.5478e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-F-0.15 (tick 0 .. 20000)
+  DEVE PASSARE: BG-F-0.15, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni regione PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin -3.2513e-02 vuoto +2.9796e-04 legame -7.2212e-03 H_tot -2.8242e-02  |  COL TERMINE DELLA MONETA: cin -3.2831e-02 vuoto +2.9796e-04 legame -7.2212e-03 H_tot -2.8560e-02  (la moneta all'inizio +1.5358e-02, alla fine +1.5039e-02)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +3.0106e-02 vuoto +3.7461e-03 legame +5.6361e-03 H_tot +2.8294e-02  |  COL TERMINE DELLA MONETA: cin +3.0438e-02 vuoto +3.7461e-03 legame +5.6361e-03 H_tot +2.8626e-02  (la moneta all'inizio +7.9430e-05, alla fine +4.1090e-04)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin -2.4065e-03 vuoto +4.0441e-03 legame -1.5851e-03 H_tot +5.2423e-05  |  COL TERMINE DELLA MONETA: cin -2.3938e-03 vuoto +4.0441e-03 legame -1.5851e-03 H_tot +6.5109e-05  (la moneta all'inizio +1.5438e-02, alla fine +1.5450e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### AK-U-0.15 (tick 0 .. 1280)
+  DEVE PASSARE: AK-U-0.15, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni regione PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin +5.6525e-02 vuoto -1.6547e-03 legame -3.8782e-02 H_tot +7.8212e-02  |  COL TERMINE DELLA MONETA: cin +2.1829e-03 vuoto -1.6547e-03 legame -3.8782e-02 H_tot +2.3870e-02  (la moneta all'inizio -2.4705e-17, alla fine -5.4342e-02)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +5.0204e-03 vuoto +7.8071e-04 legame +3.9164e-02 H_tot -1.7159e-02  |  COL TERMINE DELLA MONETA: cin -1.2218e-03 vuoto +7.8071e-04 legame +3.9164e-02 H_tot -2.3402e-02  (la moneta all'inizio +0.0000e+00, alla fine -6.2421e-03)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin +6.1545e-02 vuoto -8.7401e-04 legame +3.8116e-04 H_tot +6.1052e-02  |  COL TERMINE DELLA MONETA: cin +9.6113e-04 vuoto -8.7401e-04 legame +3.8116e-04 H_tot +4.6828e-04  (la moneta all'inizio -1.2352e-17, alla fine -6.0584e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### AK-F-0.15 (tick 0 .. 20000)
+  DEVE PASSARE: AK-F-0.15, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni regione PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin +1.2672e-03 vuoto +1.8782e-04 legame -2.0064e-02 H_tot +1.2637e-02  |  COL TERMINE DELLA MONETA: cin +2.1854e-03 vuoto +1.8782e-04 legame -2.0064e-02 H_tot +1.3555e-02  (la moneta all'inizio -2.4705e-17, alla fine +9.1815e-04)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +3.7670e-04 vuoto +2.5373e-03 legame +1.7990e-02 H_tot -1.0342e-02  |  COL TERMINE DELLA MONETA: cin -2.2314e-03 vuoto +2.5373e-03 legame +1.7990e-02 H_tot -1.2951e-02  (la moneta all'inizio +0.0000e+00, alla fine -2.6081e-03)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin +1.6439e-03 vuoto +2.7251e-03 legame -2.0744e-03 H_tot +2.2946e-03  |  COL TERMINE DELLA MONETA: cin -4.6020e-05 vuoto +2.7251e-03 legame -2.0744e-03 H_tot +6.0467e-04  (la moneta all'inizio +0.0000e+00, alla fine -1.6900e-03)
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-U-0.075 (tick 0 .. 2170)
+  DEVE PASSARE: BG-U-0.075, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni region PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin -1.9919e-01 vuoto -1.5454e-03 legame -4.2054e-02 H_tot -1.7558e-01  |  COL TERMINE DELLA MONETA: cin -2.0234e-01 vuoto -1.5454e-03 legame -4.2054e-02 H_tot -1.7873e-01  (la moneta all'inizio +1.6289e-02, alla fine +1.3139e-02)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +1.9930e-01 vuoto +9.4150e-04 legame +4.2530e-02 H_tot +1.7556e-01  |  COL TERMINE DELLA MONETA: cin +2.0249e-01 vuoto +9.4150e-04 legame +4.2530e-02 H_tot +1.7875e-01  (la moneta all'inizio +8.1899e-05, alla fine +3.2779e-03)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin +1.0474e-04 vuoto -6.0392e-04 legame +4.7604e-04 H_tot -2.3139e-05  |  COL TERMINE DELLA MONETA: cin +1.5049e-04 vuoto -6.0392e-04 legame +4.7604e-04 H_tot +2.2617e-05  (la moneta all'inizio +1.6371e-02, alla fine +1.6417e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-F-0.075 (tick 0 .. 40000)
+  DEVE PASSARE: BG-F-0.075, il libro a eps 0 all'inizio e alla fine = i campioni committati, AL BIT, ogni region PASSA   
+  vicino   (fine - inizio, in N |e_K|): a eps 0: cin -2.0680e-02 vuoto +3.1900e-04 legame -4.5498e-03 H_tot -1.7873e-02  |  COL TERMINE DELLA MONETA: cin -2.0492e-02 vuoto +3.1900e-04 legame -4.5498e-03 H_tot -1.7685e-02  (la moneta all'inizio +1.6289e-02, alla fine +1.6477e-02)
+  lontano  (fine - inizio, in N |e_K|): a eps 0: cin +1.7878e-02 vuoto +3.5485e-03 legame +3.0917e-03 H_tot +1.7480e-02  |  COL TERMINE DELLA MONETA: cin +1.8109e-02 vuoto +3.5485e-03 legame +3.0917e-03 H_tot +1.7710e-02  (la moneta all'inizio +8.1899e-05, alla fine +3.1214e-04)
+  totale   (fine - inizio, in N |e_K|): a eps 0: cin -2.8020e-03 vuoto +3.8675e-03 legame -1.4581e-03 H_tot -3.9261e-04  |  COL TERMINE DELLA MONETA: cin -2.3838e-03 vuoto +3.8675e-03 legame -1.4581e-03 H_tot +2.5543e-05  (la moneta all'inizio +1.6371e-02, alla fine +1.6789e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

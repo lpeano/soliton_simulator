@@ -22355,3 +22355,14 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **La raccomandazione per la decisione `10`, che e' di Luca:** il fondo come **vuoto di riferimento delle prove**, non ancora come vuoto fisico nel nucleo. Prima va deciso se l'allargamento e' fisico *(un secondo `s`)*. Inoltre `F0` e' uno dei quattro fondi degeneri e la scelta fra loro non e' derivata; ed e' il «pavimento freddo» della voce `32`.
 
 **Il mandato delle `11:22` e' chiuso. Il successivo in coda e' ⑦**, la cassetta degli attrezzi delle `01:22`.
+
+## 2026-11-01 — LA RIPARTIZIONE DELL'ENERGIA DI 326747d0 COL TERMINE DELLA MONETA: 6/6 -- PER BG POCO CAMBIA, PER AK IL TERMINE MANCANTE ERA QUASI TUTTO
+
+
+**Il referto** *(`doc/referti_l2/ripartizione_vuoto_vivo.txt`, `csv/_respiro_congelato.py --ripartizione`, sha1-BYTE `65a5abef`, girato a `656e5229`)* da' **`6/6`**: per ognuna delle `6` corse, il libro a eps `0` all'inizio *(`p0` ricostruito)* e alla fine *(lo stato di ripresa, sha1 = l'ultimo pezzo)* **= i campioni committati, AL BIT**, ogni regione e ogni conto. Poi gli stessi `(fine - inizio)` col termine della moneta. **La strada `A` tick per tick non e' ricalcolata** *(servirebbe rigirare)*.
+
+**I fatti** *(in `N |e_K|`)*:
+- **BG:** il termine della moneta sposta i conti di **pochi `1e-3`**. BG-U-0.15 vicino: `cin` da `-0.1992` a `-0.2021`, `H_tot` da `-0.1756` a `-0.1785`; il totale `H_tot` da `+9.7e-6` a `+5.0e-5`. BG-F-0.075: il totale da `-3.9e-4` a `+2.6e-5`. **La lettura di BG in `326747d0` resta:** col vuoto uniforme la materia passa dal disco al lontano *(`~0.20`)*.
+- **AK: il termine mancante era quasi tutto.** AK-U totale `H_tot` da **`+6.1e-2` a `+4.7e-4`**, vicino `cin` da `+5.65e-2` a `+2.2e-3`: **lo scostamento di `H_tot` di AK in `326747d0` (`8e-2`) era il termine della moneta che cambia** *(da `0` all'inizio a `-6.1e-2` alla fine: la partenza `pK` ha elicita' nulla, e la corsa la fa crescere)*. AK-F totale da `+2.3e-3` a `+6.0e-4`.
+
+**Quindi le letture energetiche di AK in `326747d0` non valgono; quelle di BG si'**, entro qualche `1e-3`.
