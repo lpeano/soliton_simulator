@@ -1,0 +1,62 @@
+[TIMBRO] __init__.py  sha1-BYTE a704ae0c  committato e pulito
+[TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 7347d2ee  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
+[TIMBRO] test_protetto.py  sha1-BYTE 2667816b  committato e pulito
+[TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE f24c30d2  committato e pulito
+======================================================================================================================================================
+LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
+======================================================================================================================================================
+### LE USCITE (csv/solitone/uscite.py)
+  DEVE PASSARE: le costanti = quelle degli strumenti (GRUPPI, W, TOLL_RES_REL, Omega a s 0.15)                                       PASSA   
+  DEVE PASSARE: U1 e05 (eps 0.5), E0, le bande e le 24 uscite = previsioni.json AL BIT                                               PASSA   E0 +3.178178; diverse []
+  DEVE PASSARE: U1 e05, le aperte e il margine = previsioni.json                                                                     PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e05 con g spostato di 1e-3, le uscite = previsioni.json                                                           PASSA   
+  DEVE PASSARE: U1 e0 (eps 0), E0, le bande e le 24 uscite = previsioni.json AL BIT                                                  PASSA   E0 +3.141593; diverse []
+  DEVE PASSARE: U1 e0, le aperte e il margine = previsioni.json                                                                      PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e0 con g spostato di 1e-3, le uscite = previsioni.json                                                            PASSA   
+  DEVE PASSARE: U2 eps 0, mu -0.56602: (n2) P0 + Ppi = la riga di chiudere_le_uscite.txt                                             PASSA   0.00955
+  DEVE PASSARE: U3 r 1.5247 dalla scena (famiglia sb): il residuo e le bande libere = le righe di scatola/uscite.txt                 PASSA   1.685968e-10 contro 1.685968e-10
+  DEVE FALLIRE: U3 r 1.5247 nella scena della famiglia SBAGLIATA (lp), l'errore di c6ad04ac: stato_nella_scena lo accetta            PASSA   i pesi della scena NON sono quelli dello stato: il residuo 7.912611e-02 contro il registra
+### IL SOLITONE PROTETTO (csv/solitone/protetto.py)
+  DEVE PASSARE: GRIGLIA e' il griglia.json di _coppia_di_B                                                                           PASSA   
+  DEVE PASSARE: P1 A a K (N 1e+06, L 81, eps 0.5): lo sha e mu = lunga_AK_00000.jsonl (a8e0e43b) AL BIT                              PASSA   mu -0.565633409457
+  DEVE PASSARE: P2 B a Gamma, l'inviluppo a N 3e5: lo sha, E0, bloch, mu, il residuo = robusta_N3e5_000000.jsonl AL BIT              PASSA   E0 +3.178177524 mu +4.148998947 residuo 4.393046e-02
+  DEVE FALLIRE: P2 col partner della scelta al posto della scelta: lo sha = robusta_N3e5_000000.jsonl                                PASSA   
+  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT         PASSA   mu +4.161868162
+    P3, E0: qui +3.178177523812364 (fase/s); _vuoto_vivo_B +3.178177523812364 (E0 * CB.S / s); la differenza 0.0e+00 (la conversione fatta una volta)
+### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)
+  DEVE PASSARE: D5 eps della prova = 0.5 della tabella (la decisione (7)); ridotto=True = 0, dichiarato                              PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN) | CASO RIDOTTO: eps 0 (la moneta spenta), non il modello
+  DEVE PASSARE: D5 la forma predefinita = S1 (la decisione (1), da _solitone_vuoto_congelato.FORMA)                                  PASSA   S1
+  DEVE PASSARE: D5 la scena della prova (BG-F-0.15) ha eps 0.5, e il costruttore predefinito = la partenza di P3 AL BIT (B a Gamma)  PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN); la forma S1
+  DEVE FALLIRE: D5 il costruttore predefinito = A a K                                                                                PASSA   
+### LE MISURE (csv/solitone/misure.py)
+  DEVE PASSARE: le costanti = quelle degli strumenti (SOGLIA_VITA, SIGMA_FORMA, GRUPPI_LIMITE)                                       PASSA   
+  DEVE PASSARE: M1 w_in, h e il campione a t 0 (x, y, w, f_win, f_liscia) = rig_000000.jsonl AL BIT                                  PASSA   f_liscia 0.618068063360118
+  DEVE PASSARE: M1 il punto a t 0 (w, f_win, f_3w0, picco, M) = lunga_B_00000.jsonl (a8e0e43b) AL BIT                                PASSA   alone 4.441e-16
+  DEVE FALLIRE: M1 la finestra netta = la liscia (f_win = f_liscia)                                                                  PASSA   0.620386 contro 0.618068
+  DEVE PASSARE: M2 BG-F-0.15 a tick 20000: il campione e l'alone = l'ultimo campione AL BIT                                          PASSA   f_liscia 0.509523 alone 0.005512
+  DEVE PASSARE: M2 la riga D (|D|/|psi0| e le frazioni di banda) = l'ultima riga D AL BIT                                            PASSA   nD 1.028041 B 0.991594
+  DEVE PASSARE: M3 il limite del tasso (piatte, A) = limite_3000.json AL BIT                                                         PASSA   piatte 4.529e-04 A 4.170e-04
+  DEVE PASSARE: M4 |D| = 1e-8 t -> lineare, = la riga di livelli_piatti.txt                                                          PASSA   lineare; 100 campioni > 0; gamma -0.00062 +- 0.00012, gamma t_ultimo -0.185, b 1.0621 +- 0.0043
+  DEVE PASSARE: M4 la serie VERA di breve_R_1e6 -> lineare, = la riga di livelli_piatti.txt                                          PASSA   lineare; 400 campioni > 0; gamma -0.00031 +- 0.00011, gamma t_ultimo -0.092, b 1.0495 +- 0.0021
+  DEVE PASSARE: M4 |D| = 1e-8 e^{0.06 t} -> esponenziale, = la riga di livelli_piatti.txt                                            PASSA   esponenziale; 100 campioni > 0; gamma 0.06000 +- 0.00000, gamma t_ultimo 13.680, b -0.0000 +- 0.0000
+  DEVE PASSARE: M4 |D| = 1e-8 (t + e^{0.0331 t}) -> esponenziale, = la riga di livelli_piatti.txt                                    PASSA   esponenziale; 100 campioni > 0; gamma 0.01803 +- 0.00106, gamma t_ultimo 5.356, b 0.6941 +- 0.0397
+  DEVE PASSARE: M4 |D| = 1e-8 (il caso nullo -> potenza t^0, = la riga di livelli_piatti.txt                                         PASSA   potenza t^0; 100 campioni > 0; gamma 0.00000 +- 0.00000, gamma t_ultimo 0.000, b 0.0000 +- 0.0000
+  DEVE PASSARE: M5 la vita di r 1 (s 0.3; 03142636) = la riga di modo_di_R.txt                                                       PASSA   OSSERVATO 142.2
+  DEVE PASSARE: M5 la vita di r 1.5247 (s 0.15; 03142636) = la riga di modo_di_R.txt                                                 PASSA   OSSERVATO 621.8
+  DEVE PASSARE: M6 un periodo vero di 99 tick (33 passi) letto giusto (entro la risoluzione 2.49e-02)                                PASSA   letto 99.0124
+  DEVE PASSARE: M6 un periodo vero di 3.3 tick (1.1 passi, sotto Nyquist 6): NON letto giusto, ma il vero fra gli alias              PASSA   letto 33.0000; gli alias 1.4348 1.5714 2.7500 3.3000
+  DEVE FALLIRE: M6 il periodo SENZA il passo                                                                                         PASSA   
+### D6: I TRE REFERTI VECCHI DOPO L'ALLINEAMENTO (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt)
+  DEVE PASSARE: D6 nessun .py fuori da csv/solitone/ cambiato da 9180fd38 a HEAD, e niente di non committato                         PASSA   cambiati ['csv/solitone/collauda.py', 'csv/solitone/protetto.py', 'csv/solitone/test_protetto.py']
+  DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
+    csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  i tempi: uscite 21 s; protetto 14 s; misure 5 s
+ESITO: 38/38 controlli passano; fallite: 0 []

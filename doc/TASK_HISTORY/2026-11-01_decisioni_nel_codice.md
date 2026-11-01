@@ -49,3 +49,34 @@ Le decisioni prese da Luca vanno dove le legge chi lavora *(la MAPPA, i document
 5. `D7`: la MAPPA «nel codice: ...», la relazione, **FERMO** coi due punti per Luca.
 
 **La raccomandazione per il conflitto di (7)** *(di Luca)*: **lasciare le scene condivise come sono** *(scrivono `0` in modo esplicito, ed e' il comportamento con cui i referti vecchi sono nati)* **e fare della libreria l'unico strumento per le prove nuove**, con eps dalla tabella. L'alternativa: le scene condivise leggono la tabella **e** ogni script vecchio a eps `0` dichiara `ridotto=True`. Questo **modifica gli script vecchi** *(contro il punto `6`)*, e ognuno andrebbe ricontrollato al bit.
+
+## 6. L'ESITO
+
+
+**La lettura** *(`doc/DECISIONI_NEL_CODICE.md`, `9180fd38`; file, funzione e riga al blob di oggi)*:
+- **(7) eps.** La tabella dice `0.5`, come il deciso. Il nucleo dice `0.5`, ma scritto a mano in `primo_ordine/scena_l2.py` *(`EPS_MONETA`, piu' un secondo `{"eps": 0.5}`)*: **e' una seconda fonte, non letta dalla tabella.** **Le scene condivise di `csv/` scrivono `0`** in `9` punti; quello che conta e' `_energia_del_legame.stato`, che e' la scena di tutto il filone. Il filone del solitone protetto rimette `0.5` a mano;
+- **(1) la forma.** **Il nucleo usa `S3`** *(`materia_vuoto.alpha`, `beta`)*. `S1` entra solo in memoria, da `_screening_forme_s3.forma`, ed e' il predefinito di `csv/`;
+- **le piatte.** `A` a `K` si costruisce in `_energia_del_legame.stato`, `B` a `Gamma` in `_consolida_B.inviluppo` + `q_migliore` e in `csv/solitone/protetto.py`.
+
+**L'allineamento, fatto dove non c'e' conflitto: nella libreria nuova** *(`92069d24`; il referto `doc/referti_l2/cassetta_solitone_decisioni.txt`, `38/38`)*:
+- eps si legge dalla tabella *(`_genera.carica`)*;
+- `ridotto=True` da' `0`, con la dichiarazione «CASO RIDOTTO» da stampare nel referto;
+- la forma `S1` si legge da `_solitone_vuoto_congelato.FORMA`;
+- il costruttore predefinito e' su `B` a `Gamma` e coincide al bit con la partenza di BG-F-0.15; `A` a `K` si ottiene con `quale="AK"` *(DEVE FALLIRE: i due sono diversi)*;
+- i `32` test di `55962e54` passano ancora;
+- **D6, i tre referti vecchi** *(eps `0`: `livelli_piatti.txt`; eps `0.5`: `massimo_di_B.txt`; `A` a `K`: `coppia_di_B.txt`)*. Nessun `.py` fuori da `csv/solitone/` e' cambiato dopo `9180fd38`, e nessuno script vecchio importa la libreria: **i loro blob sono quelli di prima, quindi ridanno i loro referti.** **Rigirarli da byte identici sarebbe un FALSO-UNO**, e non l'ho fatto.
+
+### ⛔ **FERMO, due punti per Luca** *(il punto `7` del mandato)*:
+1. **(1) la forma nel nucleo.**
+   - Il problema: `primo_ordine/materia_vuoto.py` *(`alpha` riga `80`, `beta` riga `94`, `pezzi` riga `111`, blob `68ff3ffd`)* da' `S3`, mentre il deciso e' `S1`.
+   - La modifica che servirebbe: `S1` come forma del nucleo, **attraverso la tabella `primo_ordine/leggi/leggi.yaml` e il generatore**, non a mano *(`doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`)*, poi la suite.
+   - **Non fatto.**
+2. **(7) eps nelle scene condivise di `csv/`.** Il mandato chiede due cose che non stanno insieme: «il valore predefinito di ogni scena e' quello della tabella» e «gli script vecchi non si cambiano e ridanno i loro referti». Gli script a eps `0` *(`_livelli_piatti`, `_modo_lento`, `_strada_b_*`, `_dove_va_la_materia`, ...)* prendono `0` da `_energia_del_legame.stato` *(riga `77`)*.
+   - **La raccomandazione:** lasciare quelle scene come sono, e usare la libreria come strumento delle prove nuove *(e' gia' fatto)*.
+   - **L'alternativa:** le scene leggono la tabella, e ogni script vecchio a eps `0` chiede `ridotto=True`. Questo modifica gli script vecchi, e ognuno andrebbe ricontrollato al bit.
+
+**E una cosa vista e non toccata** *(e' nel nucleo)*: la seconda fonte di eps in `scena_l2.py` dovrebbe leggere la tabella. **Il valore e' giusto: e' pulizia.**
+
+**La MAPPA:** accanto a (7), (1) e alla riga `11` *(le piatte)*, «nel codice: ...», col commit dell'allineamento.
+
+**I mandati in coda sono finiti.** **Il criterio di chiusura dei due punti:** una decisione di Luca registrata nella MAPPA.
