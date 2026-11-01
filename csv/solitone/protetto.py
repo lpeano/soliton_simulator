@@ -95,3 +95,52 @@ def mu_rayleigh(z, phi0, p, s, forma):
     T = MS.tick(z, phi0, p, forma)
     lam = complex(np.vdot(p, T) / np.vdot(p, p))
     return -math.atan2(lam.imag, lam.real) / s, float(np.linalg.norm(T - lam * p) / np.linalg.norm(p))
+
+
+# ====================================================================== LE DECISIONI DI LUCA (01:27), PER LE PROVE NUOVE (01:28, punto 6)
+# ### (7) eps: dalla TABELLA, letto, mai scritto a mano; eps 0 solo con ridotto=True, e dichiarato.
+# ### (1) la forma: S1, letta da dove vive in csv/ (_solitone_vuoto_congelato.FORMA); il nucleo usa S3 (doc/DECISIONI_NEL_CODICE.md).
+# ### le piatte, la strada (A): il costruttore predefinito e' l'inviluppo su B a Gamma; A a K con quale="AK".
+def eps_tabella():
+    """### **eps di `CAMM-MONETA-SPIN` dalla tabella** *(`_genera.carica`)*."""
+    import _genera as GE
+    leggi, _v, _o = GE.carica()
+    voce = [x for x in leggi if x.get("id") == "CAMM-MONETA-SPIN"]
+    assert len(voce) == 1, "CAMM-MONETA-SPIN non e' UNA voce della tabella"
+    return float(voce[0]["parametri"]["eps"]["valore"])
+
+
+def eps_della_prova(ridotto=False):
+    """### **`(eps, la dichiarazione)`:** la tabella, o `0` col «caso ridotto» *(da stampare nel referto)*."""
+    if ridotto:
+        return 0.0, "CASO RIDOTTO: eps 0 (la moneta spenta), non il modello"
+    return eps_tabella(), "eps %g dalla tabella (CAMM-MONETA-SPIN)" % eps_tabella()
+
+
+def forma_predefinita():
+    import _solitone_vuoto_congelato as VC
+    return VC.FORMA
+
+
+@contextlib.contextmanager
+def scena_prova(N, L, s, vuoto=None, ridotto=False):
+    """### **La scena di una prova nuova:** eps e la forma dalle decisioni; `vuoto=None` la scena di riferimento, altrimenti `scena_vuoto`.
+    ### **`(rec, z, phi0, pK, la dichiarazione)`.**"""
+    eps, dich = eps_della_prova(ridotto)
+    forma = forma_predefinita()
+    cm = scena_riferimento(N, L, eps, s, forma) if vuoto is None else scena_vuoto(N, L, eps, s, forma, vuoto)
+    with cm as (rec, z, phi0, pK):
+        yield rec, z, phi0, pK, "%s; la forma %s" % (dich, forma)
+
+
+GRIGLIA_PER_EPS = {0.5: "e05", 0.0: "e0"}      # ### le chiavi di griglia.json (= _massimo_di_B.CASI): la scelta migliore e' misurata solo a questi due eps
+
+
+def partenza(z, phi0, pK, s, N, quale="BG"):
+    """### **Il solitone di una prova nuova:** `"BG"` *(predefinito)* l'inviluppo per la scelta migliore della coppia di QUESTA scena, al suo eps; `"AK"` lo stato di `A` a `K`."""
+    if quale == "AK":
+        return stato_AK(pK)
+    assert quale == "BG", quale
+    q1, q2, _E0, _G = coppia(z, phi0, s)
+    q, _qp = scelta(q1, q2, *griglia(GRIGLIA_PER_EPS[z["par"]["eps"]]))
+    return inviluppo(z, pK, q, N)

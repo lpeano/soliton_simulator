@@ -69,4 +69,16 @@ def gira(esito):
     esito("DEVE PASSARE: P3 BG-F-0.15 (s %g, il vuoto %s): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT" % (s, vuoto),
           mu == inf["mu"] and r == inf["residuo"] and w_in == ref["w_in"] and h == ref["h"] and e_K == ref["e_K"], "mu %+.9f" % mu)
     print("    P3, E0: qui %+.17g (fase/s); _vuoto_vivo_B %+.17g (E0 * CB.S / s); la differenza %.1e (la conversione fatta una volta)" % (E0, inf["E0"], E0 - inf["E0"]))
+    # ### D5: le decisioni di Luca (01:27) per le prove nuove (01:28, punto 6)
+    print("### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)")
+    e, dich = P.eps_della_prova()
+    e0, dich0 = P.eps_della_prova(ridotto=True)
+    esito("DEVE PASSARE: D5 eps della prova = 0.5 della tabella (la decisione (7)); ridotto=True = 0, dichiarato", e == 0.5 and e0 == 0.0 and "CASO RIDOTTO" in dich0, "%s | %s" % (dich, dich0))
+    esito("DEVE PASSARE: D5 la forma predefinita = S1 (la decisione (1), da _solitone_vuoto_congelato.FORMA)", P.forma_predefinita() == "S1" == FORMA, P.forma_predefinita())
+    with P.scena_prova(N, L, s, vuoto=vuoto) as (_rec, z, phi0, pK, dich):
+        ok_eps = z["par"]["eps"] == 0.5
+        pd = P.partenza(z, phi0, pK, s, N)
+        pa = P.partenza(z, phi0, pK, s, N, quale="AK")
+    esito("DEVE PASSARE: D5 la scena della prova (BG-F-0.15) ha eps 0.5, e il costruttore predefinito = la partenza di P3 AL BIT (B a Gamma)", ok_eps and SFM.sha(pd) == SFM.sha(p), dich)
+    esito("DEVE FALLIRE: D5 il costruttore predefinito = A a K", SFM.sha(pd) != SFM.sha(pa), "")
     return {"psi0_BG_F": p, "mu_BG_F": mu}
