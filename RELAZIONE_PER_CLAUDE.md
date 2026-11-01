@@ -22587,3 +22587,20 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **(iii)** altro.
 
 **Restano da confermare:** la mia lettura di `A2` *(la forma del protocollo da `MV.ATTIVA`)*, e il giudizio su `saturazione.py`. **La MAPPA non l'ho toccata:** la chiusura non e' chiusa.
+
+## 2026-11-01 — L'UNITA' e_K CON S1 (Luca): L'ESITO -- (e1): e_K COL LEGAME SPENTO E' AL BIT CON S1 E CON S3, LA CASSETTA 38/38, LA SUITE SENZA RIGHE DI FISICA DIVERSE
+
+**Il referto:** `doc/referti_l2/unita_eK.txt` *(task history `12d3b969`; la libreria `3d5fe03a`, `D6` `02f85517`; le corse una alla volta)*.
+
+- **La decisione di Luca:** `e_K` e' l'energia dell'onda libera nel massimo di banda, e si misura **col legame spento esplicitamente**. Confermati anche `A2` di `L2` *(la forma da `MV.ATTIVA`)* e `saturazione.py` fuori dalla ricerca per formule.
+- **Nel codice, solo la libreria:**
+  - `csv/solitone/protetto.legame_spento()`: dentro, `N`, `alpha` e `beta` di `materia_vuoto` sono zero. Funziona perche' il nucleo le chiama per nome di modulo, e lo asserisce.
+  - `protetto.e_K(z)`: lo storico `_vuoto_vivo_B.e_K_di` **non toccato**, chiamato dentro `legame_spento()`.
+  - `P3` usa `P.e_K`, e nella sua condizione c'e' il **controllo positivo**: col legame acceso *(`S1` esplicita)* `e_K` deve differire dal riferimento.
+- **`U1` passa:** `e_K = -4.7122750003546425` col predefinito `S1` e con `S3` esplicita. Col legame acceso vale `-3.7122750003546425`.
+- **`U2` passa:** la cassetta e' `38/38` col predefinito *(e `38/38` anche con `S3` esplicita)*.
+- **`U3` passa:** la suite fa `65` su `65` con rc `0`. Contro `chiusura_S1`, `62` collaudi sono uguali al bit e `3` diversi solo per metadati *(il tempo del grafo valido, la pendenza della memoria, `444 -> 445` reperti)*.
+- **`U4` passa:** `git diff --name-only 12d3b969 02f85517` da' i `3` `.py` di `csv/solitone/` e l'inventario. **Nessuno storico.**
+- **Una mia lettura, dichiarata nel task history:** «il legame spento» significa `N`, `alpha` e `beta` zero. **Non e' `cs` spento** *(la «forma spenta» della prova `(0)` di `H_w`)*, che nella libreria e' gia' spento.
+- **Il referto e' scritto da uno script** che legge le uscite *(copiato in `doc/referti_l2/unita_eK/ref_ek.py.txt`)*.
+- **Dove si scrive la decisione:** la riga `12` in `doc/MAPPA.md` *(sez. `5`)*; `DECISIONI_NEL_CODICE` sez. `7`, che chiude l'«APERTO» della sez. `6`.

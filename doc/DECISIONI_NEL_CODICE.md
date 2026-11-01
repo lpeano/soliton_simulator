@@ -55,3 +55,10 @@
 - **La `N` dell'energia** viene da `materia_vuoto` *(per nome di modulo)* in `energia_pesata.termini_di_h`, `_misura_mb2.h_tot` e `_misura_mb2.pezzi_di_h`: **fuori da `materia_vuoto.py` nessuna formula della legge scritta a mano** *(`csv/_cerca_formule_legge.py`)*.
 - **I collaudi legati a `S3` esplicita**, coi loro equivalenti `S1`: `_collauda_materia_vuoto` `(0)` e `(4)`, `_collauda_deriva` `(1-bis)`. **`M-B1`:** riferimento `8c7b9288` per `S3`, `c7ad2238` per `S1`. **`A2` di `L2`:** la forma del protocollo statico da `MV.ATTIVA` *(la mia lettura)*.
 - ### ⚠ **APERTO:** `e_K` della libreria *(lo storico `_vuoto_vivo_B.e_K_di`)* cambia di `1.0` con `S1`. Decide Luca.
+
+## 7. L'UNITA' `e_K` *(Luca, dopo `6052a2b4`; `3d5fe03a`, `02f85517`; il referto `doc/referti_l2/unita_eK.txt`)*
+
+- **`e_K` col legame SPENTO esplicitamente:** `csv/solitone/protetto.legame_spento()` *(dentro, `N`, `alpha`, `beta` di `materia_vuoto` sono zero; funziona perche' il nucleo le chiama per nome di modulo, e lo asserisce)* e `protetto.e_K(z)`, che chiama lo storico `_vuoto_vivo_B.e_K_di` dentro. **Nessuno storico toccato.**
+- **`P3` della cassetta** usa `P.e_K`, col controllo positivo: `e_K` col legame acceso *(`S1` esplicita)* deve differire dal riferimento.
+- **`D6`:** `LIBRERIA_RIFERITA = 3d5fe03a`.
+- **L'«APERTO» della sezione `6` e' CHIUSO** dalla decisione di Luca.

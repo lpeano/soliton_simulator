@@ -1,0 +1,56 @@
+L'UNITA' e_K CON S1 (Luca, 2026-11-01) -- IL REFERTO
+Il task history: doc/TASK_HISTORY/2026-11-01_unita_eK.md (12d3b969). La libreria: 3d5fe03a; D6: 02f85517 (il codice delle corse).
+Le corse, una alla volta, a 02f85517:
+  python csv/solitone/collauda.py > doc/referti_l2/cassetta_solitone.txt
+  python -c "<BOOT di csv/_suite_al_bit.py>" S3 csv/solitone/collauda.py > doc/referti_l2/unita_eK/cassetta_S3_esplicita.txt
+  python csv/_suite_al_bit.py --gira unita_eK_S1
+  python csv/_suite_al_bit.py --confronta chiusura_S1 unita_eK_S1   (copiato qui sotto)
+Questo referto e' scritto da uno script che legge quelle uscite (le righe sotto sono copiate, non ricopiate a mano).
+
+==============================================================================================================
+I CRITERI (del mandato, scritti nel task history prima delle corse)
+==============================================================================================================
+  U1 DEVE: e_K = -4.7122750003546425 al bit col predefinito S1 e con S3 esplicita     PASSA   S1 -4.7122750003546425, S3 esplicita -4.7122750003546425
+  U2 DEVE: la cassetta 38/38 col predefinito S1                              PASSA   ESITO: 38/38 controlli passano; fallite: 0 []
+  U3 DEVE: la suite col predefinito rc 0, nessuna riga di fisica diversa     PASSA   FINE: 65 collaudi, 65 con rc 0; contro chiusura_S1: 3 diversi, solo metadati (sotto)
+  U4 DEVE: nessuno script storico modificato                                 PASSA   la libreria avvolge _vuoto_vivo_B.e_K_di; git diff --name-only 12d3b969 02f85517: i 3 .py di csv/solitone/ e l'inventario, nessuno storico
+  U5 un processo alla volta                                                  PASSA
+
+LA LETTURA: (e1) -- col legame spento e_K torna al bit con entrambe le forme; l'unita' dei referti e' quella di prima.
+
+IL CONTROLLO POSITIVO (nella condizione di P3): e_K col legame ACCESO (S1 esplicita) = -3.7122750003546425 (predefinito) e -3.7122750003546425 (S3 esplicita):
+  diverso dal riferimento, quindi lo spegnimento legge davvero la N del nucleo.
+  NOTA: con S3 esplicita il BOOT sceglie S3 per tutto il processo; che lo faccia davvero lo ha mostrato 6052a2b4 (li' la cassetta con
+  S3 esplicita dava 38/38 e col predefinito 37/38). Qui e_K non dipende dalla forma, quindi le due cassette danno lo stesso numero.
+
+==============================================================================================================
+LE RIGHE DELLE DUE CASSETTE
+==============================================================================================================
+  predefinito S1:  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K (legame spento) = il primo pezzo di _vuoto_vivo_ PASSA   mu +4.161868162 e_K -4.7122750003546425, acceso -3.7122750003546425
+                   ESITO: 38/38 controlli passano; fallite: 0 []
+  S3 esplicita:    DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K (legame spento) = il primo pezzo di _vuoto_vivo_ PASSA   mu +4.161868162 e_K -4.7122750003546425, acceso -3.7122750003546425
+                   ESITO: 38/38 controlli passano; fallite: 0 []
+
+==============================================================================================================
+IL CONFRONTO DELLA SUITE (csv/_suite_al_bit.py --confronta chiusura_S1 unita_eK_S1; rc 1 = ci sono righe diverse)
+==============================================================================================================
+  [TIMBRO] _suite_al_bit.py  sha1-BYTE 1827005a  committato e pulito
+  IL CONFRONTO: chiusura_S1 (predefinito) contro unita_eK_S1 (predefinito)
+    ### il grafo valido                          rc 0 -> 0; le righe diverse:
+        @@ -24,2 +24,2 @@
+        -  il controllo: 38.189 us   un passo GLOBALE: 1290.2 us   rapporto: 2.9600%
+        -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.9600%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+        +  il controllo: 36.186 us   un passo GLOBALE: 1200.3 us   rapporto: 3.0148%
+        +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   3.0148%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+    ### la memoria: `m1`..`m4`                   rc 0 -> 0; le righe diverse:
+        @@ -18 +18 @@
+        -  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005327 MB/tick, sigma 0.003075, cioe' 1.73 sigma su 10 campioni
+        +  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005540 MB/tick, sigma 0.003198, cioe' 1.73 sigma su 10 campioni
+    ### il rinominamento, sul piano              rc 0 -> 0; le righe diverse:
+        @@ -10 +10 @@
+        -  ### e NESSUN REPERTO e- fra i file da riscrivere                 PASSA   444 reperti, e il piano ne tocca 0
+        +  ### e NESSUN REPERTO e- fra i file da riscrivere                 PASSA   445 reperti, e il piano ne tocca 0
+  ESITO: 62 collaudi uguali al bit, 3 diversi: il grafo valido; la memoria: `m1`..`m4`; il rinominamento, sul piano
+
+IL GIUDIZIO DELLE 3 DIFFERENZE: il grafo valido (il tempo del controllo e il suo rapporto), la memoria (la pendenza misurata per tick),
+  il rinominamento (444 -> 445 reperti: un referto in piu' nel repo). Nessuna e' una riga di fisica.
