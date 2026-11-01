@@ -146,3 +146,33 @@ def partenza(z, phi0, pK, s, N, quale="BG"):
     q1, q2, _E0, _G = coppia(z, phi0, s)
     q, _qp = scelta(q1, q2, *griglia(GRIGLIA_PER_EPS[z["par"]["eps"]]))
     return inviluppo(z, pK, q, N)
+
+
+# ====================================================================== L'UNITA' e_K (Luca, 2026-11-01, dopo 6052a2b4)
+# ### e_K e' l'energia dell'onda libera nel massimo di banda: si misura col legame SPENTO esplicitamente, non col vuoto azzerato, e non
+# ### dipende dalla forma del legame. ### Con S1 la N a Lambda 0 e' il limite N = rho (con S3 era 0): col vuoto azzerato e_K saliva di 1.
+def _zero(rho, lam):
+    return np.zeros(np.broadcast(np.asarray(rho, dtype=float), np.asarray(lam, dtype=float)).shape, dtype=float)
+
+
+@contextlib.contextmanager
+def legame_spento():
+    """### **Il legame SPENTO, esplicitamente:** dentro, `N`, `alpha` e `beta` di `materia_vuoto` sono zero ovunque; all'uscita tornano quelle di prima.
+    ### ⚠ **Funziona perche' il nucleo le chiama PER NOME DI MODULO** *(`energia_pesata.termini_di_h`, `materia_vuoto.pezzi`)*: lo si asserisce."""
+    import energia_pesata as EP
+    import materia_vuoto as MV
+    assert EP.MV is MV, "energia_pesata non usa questo materia_vuoto: spegnere qui non spegnerebbe niente"
+    prima = (MV.N, MV.alpha, MV.beta)
+    MV.N, MV.alpha, MV.beta = _zero, _zero, _zero
+    try:
+        yield
+    finally:
+        MV.N, MV.alpha, MV.beta = prima
+
+
+def e_K(z):
+    """### **`e_K`: l'energia per norma dell'onda libera** *(lo stato uniforme di `A` a `K`)* **col legame spento:** lo storico `_vuoto_vivo_B.e_K_di`,
+    non toccato, dentro `legame_spento()`."""
+    import _vuoto_vivo_B as V
+    with legame_spento():
+        return V.e_K_di(z)

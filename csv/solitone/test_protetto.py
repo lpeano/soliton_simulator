@@ -23,6 +23,7 @@ def gira(esito):
     import _stato_fermo as SFM
     import _triangoli_bassa_energia as BE
     import _vuoto_vivo_B as V
+    import materia_vuoto as MV
     print("### IL SOLITONE PROTETTO (csv/solitone/protetto.py)")
     S, FORMA, N, L, EPS = LP.S, LP.FORMA, CB.N, CB.L, CB.EPS_LUNGA
     esito("DEVE PASSARE: GRIGLIA e' il griglia.json di _coppia_di_B", os.path.samefile(P.GRIGLIA, os.path.join(CB.DIR_JSON, "griglia.json")), "")
@@ -64,10 +65,15 @@ def gira(esito):
         q, _qp = P.scelta(q1, q2, th, fi)
         p = P.inviluppo(z, pK, q, N)
         mu, r = P.mu_rayleigh(z, phi0, p, s, FORMA)
-        e_K = V.e_K_di(z)
+        e_K = P.e_K(z)
+        # ### il controllo positivo (Luca, l'unita' e_K): col legame ACCESO (S1 esplicita) e_K DEVE differire, o lo spegnimento non legge N
+        with MV.forma_esplicita("S1"):
+            e_K_acceso = V.e_K_di(z)
     inf = ref["info"]
-    esito("DEVE PASSARE: P3 BG-F-0.15 (s %g, il vuoto %s): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT" % (s, vuoto),
-          mu == inf["mu"] and r == inf["residuo"] and w_in == ref["w_in"] and h == ref["h"] and e_K == ref["e_K"], "mu %+.9f" % mu)
+    esito("DEVE PASSARE: P3 BG-F-0.15 (s %g, il vuoto %s): mu, il residuo, w_in, h, e_K (legame spento) = il primo pezzo di _vuoto_vivo_B AL BIT;"
+          " e_K col legame acceso (S1) diverso" % (s, vuoto),
+          mu == inf["mu"] and r == inf["residuo"] and w_in == ref["w_in"] and h == ref["h"] and e_K == ref["e_K"] and e_K_acceso != ref["e_K"],
+          "mu %+.9f e_K %+.17g, acceso %+.17g" % (mu, e_K, e_K_acceso))
     print("    P3, E0: qui %+.17g (fase/s); _vuoto_vivo_B %+.17g (E0 * CB.S / s); la differenza %.1e (la conversione fatta una volta)" % (E0, inf["E0"], E0 - inf["E0"]))
     # ### D5: le decisioni di Luca (01:27) per le prove nuove (01:28, punto 6)
     print("### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)")
