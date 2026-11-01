@@ -1,0 +1,85 @@
+[TIMBRO] _vuoto_vivo_B.py  sha1-BYTE 25170803  committato e pulito
+==================================================================================================================================
+IL VUOTO VIVO SU B A Gamma (Luca 22:35): IL REFERTO -- due solitoni dall'inviluppo (BG, AK), due vuoti (U, F0), il tick intero (14 pezzi, cs spento), eps 0.5, N 1e+06, L 81
+  la configurazione: TAU_FINE 3000 PEZZO 10000 OGNI 10 OGNI_D 20 META 0.5 R_VICINO 2 LAM_ZERO 0.5 RAPPORTO (3.0, 5.0) TOLL_NORMA 1e-10; CORSE {'BG-U-0.15': ('BG', 'uniforme', 0.15), 'BG-F-0.15': ('BG', 'fondo', 0.15), 'AK-U-0.15': ('AK', 'uniforme', 0.15), 'AK-F-0.15': ('AK', 'fondo', 0.15), 'BG-U-0.075': ('BG', 'uniforme', 0.075), 'BG-F-0.075': ('BG', 'fondo', 0.075)}
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (v1) BG regge con tutti e due i vuoti, AK si scioglie; (v2) BG regge con un vuoto solo; (v3) BG si scioglie con tutti e due; (v4) altro; per ognuna s 0.15 contro 0.075
+==================================================================================================================================
+### BG-U-0.15 (BG, vuoto uniforme, s 0.15): SCIOLTO a t 1070 (tempo 160.5); 1 pezzi, 108 campioni, tick 0 .. 1070 (tempo 160.5), 100 s
+  la partenza: mu +4.161868, il residuo per tick 3.295e-02, E0 +3.178178, degenere a 8.9e-16, separata dal livello sotto di 3.10193, theta 0.7854 phi 3.9270, Bloch 7.8e-16; w_in 6.643741, h 1.0000, e_K -4.712275 (l'unita' N |e_K| 4.7123e+06)
+  il cuore liscio 0.59164 -> 0.29405 (il minimo 0.29405 a tempo 160.5, il massimo 0.59981); il netto 0.59152 -> 0.29352; w 6.6454 -> 10.4742; l'alone 0.00000 -> 0.01106 (il massimo 0.01106); il baricentro si sposta di 0.0053
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 2.546828; lontano 6.000000 -> 6.379078
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) -1.9920e-01  il vuoto -1.5378e-03  il legame -4.2003e-02  H_tot -1.7562e-01
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.9934e-01  il vuoto +9.4570e-04  il legame +4.2467e-02  H_tot +1.7563e-01
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.3773e-04  il vuoto -5.9212e-04  il legame +4.6412e-04  H_tot +9.7297e-06
+  la strada A sul disco (in N |e_K|): le entrate +1.4613e-01, le uscite -3.2175e-01, il netto -1.7562e-01; H_tot sul toro: max |H - H(0)| 1.0962e-03; dM 6.2e-13 dV 4.5e-13
+  D a tempo     3.0: |D|/|psi0| 1.0039e-01; le bande A 0.0087 B 0.1060 P0 0.8814 Ppi 0.0039
+  D a tempo    81.0: |D|/|psi0| 9.3607e-01; le bande A 0.0017 B 0.9938 P0 0.0040 Ppi 0.0005
+  D a tempo   159.0: |D|/|psi0| 1.5941e+00; le bande A 0.0003 B 0.9990 P0 0.0004 Ppi 0.0003
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-F-0.15 (BG, vuoto fondo, s 0.15): REGGE fino a 3000; 2 pezzi, 2001 campioni, tick 0 .. 20000 (tempo 3000.0), 1438 s
+  la partenza: mu +4.161868, il residuo per tick 3.295e-02, E0 +3.178178, degenere a 8.9e-16, separata dal livello sotto di 3.10193, theta 0.7854 phi 3.9270, Bloch 7.8e-16; w_in 6.643741, h 1.0000, e_K -4.712275 (l'unita' N |e_K| 4.7123e+06)
+  il cuore liscio 0.59164 -> 0.50952 (il minimo 0.37871 a tempo 1785.0, il massimo 0.59660); il netto 0.59152 -> 0.50725; w 6.6454 -> 7.9455; l'alone 0.00000 -> 0.00551 (il massimo 0.00551); il baricentro si sposta di 1.5249
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 6.402289; lontano 6.000000 -> 5.955838
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) -3.2513e-02  il vuoto +2.9796e-04  il legame -7.2212e-03  H_tot -2.8242e-02
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +3.0106e-02  il vuoto +3.7461e-03  il legame +5.6361e-03  H_tot +2.8294e-02
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) -2.4065e-03  il vuoto +4.0441e-03  il legame -1.5851e-03  H_tot +5.2423e-05
+  la strada A sul disco (in N |e_K|): le entrate +1.9408e+00, le uscite -1.9691e+00, il netto -2.8242e-02; H_tot sul toro: max |H - H(0)| 1.0402e-03; dM 1.2e-11 dV 7.6e-12
+  D a tempo     3.0: |D|/|psi0| 1.0023e-01; le bande A 0.0078 B 0.1027 P0 0.8860 Ppi 0.0036
+  D a tempo  1503.0: |D|/|psi0| 4.9918e-01; le bande A 0.0038 B 0.9843 P0 0.0107 Ppi 0.0012
+  D a tempo  3000.0: |D|/|psi0| 1.0280e+00; le bande A 0.0012 B 0.9916 P0 0.0062 Ppi 0.0010
+----------------------------------------------------------------------------------------------------------------------------------
+### AK-U-0.15 (AK, vuoto uniforme, s 0.15): SCIOLTO a t 1280 (tempo 192.0); 1 pezzi, 129 campioni, tick 0 .. 1280 (tempo 192.0), 98 s
+  la partenza: mu -0.565633, il residuo per tick 7.638e-02; w_in 6.643741, h 1.0000, e_K -4.712275 (l'unita' N |e_K| 4.7123e+06)
+  il cuore liscio 0.59173 -> 0.29012 (il minimo 0.29012 a tempo 192.0, il massimo 0.59421); il netto 0.58919 -> 0.28954; w 6.6437 -> 10.2796; l'alone 0.00000 -> 0.00560 (il massimo 0.00560); il baricentro si sposta di 0.0461
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 2.368156; lontano 6.000000 -> 6.398692
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) +5.6525e-02  il vuoto -1.6547e-03  il legame -3.8782e-02  H_tot +7.8212e-02
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +5.0204e-03  il vuoto +7.8071e-04  il legame +3.9164e-02  H_tot -1.7159e-02
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) +6.1545e-02  il vuoto -8.7401e-04  il legame +3.8116e-04  H_tot +6.1052e-02
+  la strada A sul disco (in N |e_K|): le entrate +4.2908e+00, le uscite -4.2126e+00, il netto +7.8212e-02; H_tot sul toro: max |H - H(0)| 8.0214e-02; dM 7.1e-13 dV 5.4e-13
+  D a tempo     3.0: |D|/|psi0| 4.4358e-01; le bande A 0.2594 B 0.0052 P0 0.5451 Ppi 0.1903
+  D a tempo    99.0: |D|/|psi0| 1.2906e+00; le bande A 0.9862 B 0.0006 P0 0.0125 Ppi 0.0007
+  D a tempo   192.0: |D|/|psi0| 1.7643e+00; le bande A 0.9216 B 0.0001 P0 0.0467 Ppi 0.0316
+----------------------------------------------------------------------------------------------------------------------------------
+### AK-F-0.15 (AK, vuoto fondo, s 0.15): REGGE fino a 3000; 2 pezzi, 2001 campioni, tick 0 .. 20000 (tempo 3000.0), 1431 s
+  la partenza: mu -0.565633, il residuo per tick 7.638e-02; w_in 6.643741, h 1.0000, e_K -4.712275 (l'unita' N |e_K| 4.7123e+06)
+  il cuore liscio 0.59173 -> 0.40673 (il minimo 0.38418 a tempo 1902.0, il massimo 0.59397); il netto 0.58919 -> 0.40449; w 6.6437 -> 9.0920; l'alone 0.00000 -> 0.00613 (il massimo 0.00628); il baricentro si sposta di 0.4884
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 6.749634; lontano 6.000000 -> 5.917708
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.2672e-03  il vuoto +1.8782e-04  il legame -2.0064e-02  H_tot +1.2637e-02
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +3.7670e-04  il vuoto +2.5373e-03  il legame +1.7990e-02  H_tot -1.0342e-02
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.6439e-03  il vuoto +2.7251e-03  il legame -2.0744e-03  H_tot +2.2946e-03
+  la strada A sul disco (in N |e_K|): le entrate +6.5552e+01, le uscite -6.5539e+01, il netto +1.2637e-02; H_tot sul toro: max |H - H(0)| 8.1733e-02; dM 1.1e-11 dV 7.6e-12
+  D a tempo     3.0: |D|/|psi0| 4.4350e-01; le bande A 0.2595 B 0.0052 P0 0.5449 Ppi 0.1904
+  D a tempo  1503.0: |D|/|psi0| 1.9315e+00; le bande A 0.9268 B 0.0004 P0 0.0702 Ppi 0.0027
+  D a tempo  3000.0: |D|/|psi0| 8.7304e-01; le bande A 0.6406 B 0.0022 P0 0.2346 Ppi 0.1225
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-U-0.075 (BG, vuoto uniforme, s 0.075): SCIOLTO a t 2170 (tempo 162.8); 1 pezzi, 218 campioni, tick 0 .. 2170 (tempo 162.8), 167 s
+  la partenza: mu +4.163259, il residuo per tick 1.703e-02, E0 +3.180403, degenere a 5.3e-15, separata dal livello sotto di 3.10310, theta 0.7854 phi 3.9270, Bloch 5.2e-16; w_in 6.646789, h 1.0000, e_K -4.712382 (l'unita' N |e_K| 4.7124e+06)
+  il cuore liscio 0.59163 -> 0.29511 (il minimo 0.29511 a tempo 162.8, il massimo 0.59980); il netto 0.59113 -> 0.29427; w 6.6485 -> 10.4572; l'alone 0.00000 -> 0.01024 (il massimo 0.01024); il baricentro si sposta di 0.0161
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 2.531551; lontano 6.000000 -> 6.380755
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) -1.9919e-01  il vuoto -1.5454e-03  il legame -4.2054e-02  H_tot -1.7558e-01
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.9930e-01  il vuoto +9.4150e-04  il legame +4.2530e-02  H_tot +1.7556e-01
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.0474e-04  il vuoto -6.0392e-04  il legame +4.7604e-04  H_tot -2.3139e-05
+  la strada A sul disco (in N |e_K|): le entrate +1.7874e-01, le uscite -3.5432e-01, il netto -1.7558e-01; H_tot sul toro: max |H - H(0)| 1.2739e-03; dM 1.9e-12 dV 1.7e-12
+  D a tempo     1.5: |D|/|psi0| 8.9512e-02; le bande A 0.2405 B 0.0395 P0 0.5954 Ppi 0.1247
+  D a tempo    82.5: |D|/|psi0| 1.0125e+00; le bande A 0.0006 B 0.9904 P0 0.0086 Ppi 0.0004
+  D a tempo   162.0: |D|/|psi0| 1.6792e+00; le bande A 0.0004 B 0.9962 P0 0.0030 Ppi 0.0003
+----------------------------------------------------------------------------------------------------------------------------------
+### BG-F-0.075 (BG, vuoto fondo, s 0.075): REGGE fino a 3000; 4 pezzi, 4001 campioni, tick 0 .. 40000 (tempo 3000.0), 2894 s
+  la partenza: mu +4.163259, il residuo per tick 1.703e-02, E0 +3.180403, degenere a 5.3e-15, separata dal livello sotto di 3.10310, theta 0.7854 phi 3.9270, Bloch 5.2e-16; w_in 6.646789, h 1.0000, e_K -4.712382 (l'unita' N |e_K| 4.7124e+06)
+  il cuore liscio 0.59163 -> 0.50305 (il minimo 0.38615 a tempo 1239.0, il massimo 0.59675); il netto 0.59113 -> 0.50268; w 6.6485 -> 7.8679; l'alone 0.00000 -> 0.00533 (il massimo 0.00533); il baricentro si sposta di 0.9309
+  Lambda medio sotto il solitone (disco 2 w_in) 6.000000 -> 6.279791; lontano 6.000000 -> 5.969285
+  il libro dei conti, vicino   (alla fine - all'inizio, in N |e_K|): la materia (cin) -2.0680e-02  il vuoto +3.1900e-04  il legame -4.5498e-03  H_tot -1.7873e-02
+  il libro dei conti, lontano  (alla fine - all'inizio, in N |e_K|): la materia (cin) +1.7878e-02  il vuoto +3.5485e-03  il legame +3.0917e-03  H_tot +1.7480e-02
+  il libro dei conti, totale   (alla fine - all'inizio, in N |e_K|): la materia (cin) -2.8020e-03  il vuoto +3.8675e-03  il legame -1.4581e-03  H_tot -3.9261e-04
+  la strada A sul disco (in N |e_K|): le entrate +2.3064e+00, le uscite -2.3243e+00, il netto -1.7873e-02; H_tot sul toro: max |H - H(0)| 1.2024e-03; dM 3.5e-11 dV 5.6e-11
+  D a tempo     1.5: |D|/|psi0| 8.9481e-02; le bande A 0.2408 B 0.0384 P0 0.5958 Ppi 0.1250
+  D a tempo  1501.5: |D|/|psi0| 8.9609e-01; le bande A 0.0012 B 0.9882 P0 0.0100 Ppi 0.0006
+  D a tempo  3000.0: |D|/|psi0| 1.4208e+00; le bande A 0.0006 B 0.9948 P0 0.0040 Ppi 0.0006
+----------------------------------------------------------------------------------------------------------------------------------
+### I CRITERI
+  DEVE PASSARE: M e V entro 1e-10 in ogni corsa                                                                  PASSA   BG-U-0.15 6.2e-13/4.5e-13 BG-F-0.15 1.2e-11/7.6e-12 AK-U-0.15 7.1e-13/5.4e-13 AK-F-0.15 1.1e-11/7.6e-12 BG-U-0.075 1.9e-12/1.7e-12 BG-F-0.075 3.5e-11/5.6e-11
+  DEVE PASSARE: BG-U, H_tot a O(s^2): max |H - H(0)| a s 0.15 / a s 0.075, sul tempo comune 160.5, fra 3 e 5     ### FALLISCE   5.1658e+03 / 6.0030e+03 = 0.861
+  DEVE PASSARE: BG-F, H_tot a O(s^2): max |H - H(0)| a s 0.15 / a s 0.075, sul tempo comune 3000.0, fra 3 e 5    ### FALLISCE   4.9018e+03 / 5.6663e+03 = 0.865
+----------------------------------------------------------------------------------------------------------------------------------
+### LE LETTURE: i numeri sono quelli sopra; la parola (v1)..(v4) nella relazione
+ESITO: 1/3 controlli passano; DEVE fallite: 2 ['DEVE PASSARE: BG-U, H_tot a O(s^2): max |H - H(0)| a s 0.15 / a s 0.075, sul tempo comune 160.5, fra 3 e 5', 'DEVE PASSARE: BG-F, H_tot a O(s^2): max |H - H(0)| a s 0.15 / a s 0.075, sul tempo comune 3000.0, fra 3 e 5']

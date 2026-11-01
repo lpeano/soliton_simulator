@@ -47,3 +47,34 @@
 3. `--controllo` *(le scene al bit, `F0`, la vita `320`)*: committato; **se un DEVE fallisce, FERMO.**
 4. Le corse a pezzi, una alla volta, ogni pezzo committato *(un driver)*; **se la ripresa non e' al bit, FERMO.**
 5. `--referto`; `doc/CHIUDERE_LE_USCITE.md`; `RELAZIONE`; `MAPPA` *(la sezione `2` riga `1`; la riga `d` della sezione `3`)*; la sezione `6` qui.
+
+## 6. L'ESITO *(il referto `doc/referti_l2/vuoto_vivo_B.txt`, `--referto`, sha1-BYTE `25170803`, girato a `7322488b`)*
+
+### ⛔ **`1/3`: DUE DEVE FALLITE. FERMO.**
+
+| il criterio | l'esito |
+|---|---|
+| `M` e `V` entro `1e-10` in ogni corsa | **PASSA** *(il peggiore: `BG-F-0.075`, `3.5e-11` / `5.6e-11`)* |
+| `BG-U`: `max abs(H_tot - H_tot(0))` a `s 0.15` / a `s 0.075`, sul tempo comune `160.5`, fra `3` e `5` | ### **FALLISCE: `0.861`** |
+| `BG-F`: lo stesso, sul tempo comune `3000` | ### **FALLISCE: `0.865`** |
+
+**Che cosa dice il numero, e che cosa NON dice.** Lo scostamento massimo di `H_tot` sul toro, in `N |e_K|`, e' `1.10e-3` *(BG-U)* e `1.04e-3` *(BG-F)* a `s 0.15`, `1.27e-3` e `1.20e-3` a `s 0.075`: **non scende col passo**, quindi **non e' l'errore `O(s^2)` del passo che il criterio presupponeva**. Fra l'inizio e la fine il totale cambia molto meno *(BG-U: `+9.7e-6` a `s 0.15`, `-2.3e-5` a `s 0.075`)*: lo scostamento massimo e' **un'escursione**, non una deriva. **NON so** se a non conservarsi sia la grandezza *(cioe' se `tot` del libro dei conti sia la quantita' che il tick intero conserva, coi suoi `14` pezzi e `cs` spento)* o il passo; **non lo provo qui**: la cura, o la correzione del criterio, e' un commit a se' e una decisione di Luca. **Il confronto che c'e' gia':** `doc/referti_l2/regime_del_passo.txt` *(`99eb7a42`, la fonte del `RAPPORTO`)*, tick intero, **eps `0`**, `N 1e5`, `L 48`, partenza dal risolutore: **li' il totale scalava, `3.69` fra `0.15` e `0.075`.** Qui cambiano eps *(`0.5`)*, la partenza *(l'inviluppo)*, `N` e `L`: **un indizio, non una diagnosi.** *(La mia annotazione: in `_regime_del_passo` il `RAPPORTO` era il criterio della DERIVA dopo l'assestamento; io l'ho messo sul totale, che li' scalava anch'esso.)*
+
+**Le corse** *(i numeri del referto; con `H_tot` che non scala, le letture energetiche valgono solo sopra `~1e-3 N |e_K|`)*:
+
+| la corsa | l'esito | il cuore liscio, alla fine | `w` alla fine | `Lambda` sotto, alla fine |
+|---|---|---|---|---|
+| `BG-U-0.15` | **SCIOLTO** a tempo `160.5` | `0.294` | `10.47` | `2.547` |
+| `BG-U-0.075` | **SCIOLTO** a tempo `162.8` | `0.295` | `10.46` | `2.532` |
+| `BG-F-0.15` | **REGGE** fino a `3000` *(il minimo `0.379` a tempo `1785`)* | `0.510` | `7.95` | `6.402` |
+| `BG-F-0.075` | **REGGE** fino a `3000` *(il minimo `0.386` a tempo `1239`)* | `0.503` | `7.87` | `6.280` |
+| `AK-U-0.15` | **SCIOLTO** a tempo `192.0` | `0.290` | `10.28` | `2.368` |
+| `AK-F-0.15` | **REGGE** fino a `3000` *(il minimo `0.384` a tempo `1902`)* | `0.407` | `9.09` | `6.750` |
+
+**Le letture, i fatti accanto alla parola** *(la parola e' di Luca, a criteri falliti)*:
+- i numeri di `BG` stanno sotto **(v2)**: si scioglie col vuoto uniforme, regge col fondo, **a tutti e due i passi** *(la dissoluzione a `160.5` e `162.8`)*;
+- **ma `AK` fa lo stesso** *(si scioglie con U a `192.0`, regge con F)*: **con questi numeri non e' la protezione di `B` a decidere, e' il vuoto.** Col fondo `AK` tiene un cuore piu' basso *(`0.407` contro `0.51`)* e `D` lascia la banda `A` *(a tempo `3000`: `A 0.64`, `P0 0.23`, `Ppi 0.12`)*, mentre `D` di `BG` resta in `B` *(`0.99`)*;
+- col vuoto uniforme, in `BG-U`, **la materia passa dal disco al lontano**: `cin` vicino `-0.199`, lontano `+0.199` `N |e_K|` *(`~180` volte lo scostamento di `H_tot`)*, e `Lambda` sotto il solitone scende da `6.0` a `2.55`;
+- **`s 0.15` contro `0.075`:** la dissoluzione, il cuore e `w` finali coincidono entro `~2%` *(il tempo della dissoluzione `1.4%`, `Lambda` sotto in BG-F `2%`)*; **il tempo del minimo di BG-F no** *(`1785` contro `1239`)*.
+
+**Che cosa NON si e' fatto, per il FERMO:** `doc/CHIUDERE_LE_USCITE.md`, la `MAPPA` *(la sezione `2` riga `1`, la riga `d`)*. Aspettano la decisione di Luca sul criterio di `H_tot`.
