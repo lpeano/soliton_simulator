@@ -1,0 +1,41 @@
+[TIMBRO] _energia_vuoto_vivo.py  sha1-BYTE da5bee14  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+==================================================================================================================================
+IL VUOTO VIVO: PERCHE' H_tot NON SCALA COME s^2 (Luca 11:22) -- la scena di _vuoto_vivo_B (N 1e+06, L 81, eps 0.5, il tick intero, cs spento, lo zero conv('simm'))
+  la configurazione: PASSI (0.15, 0.075) TAU_BREVE 150 TAU_PRIMI 10 CORSE_BREVI ('BG-U', 'BG-F') TOLL_MONETA 1e-12; RAPPORTO (3.0, 5.0) LAM_ZERO 0.5 OGNI 10 (di _vuoto_vivo_B); l'unita' N |e_K|
+==================================================================================================================================
+### (E0) LA CORREZIONE: il par del tick nel libro dei conti (la scena U, s 0.15, eps 0.5, lo stato BG)
+  DEVE PASSARE: senza par = col PAR del modulo = col par a eps 0, AL BIT, ogni conto                             PASSA   M V cin cost leg tot vuo; PAR {'eps': 0.0}
+  DEVE PASSARE: col par della corsa (eps 0.5) tot cambia di eps * sum(elicita) (entro 1e-12 relativo), e solo ci PASSA   tot(eps) - tot(0) +7.274651e+04, eps * sum(h) +7.274651e+04, relativo 4.6e-15; leg vuo M V cost al bit: True; in N |e_K| +1.5438e-02
+### (E1) IL VUOTO A DUE s: phi_h della scena a s 0.15 = a s 0.075, AL BIT
+  FATTO (non un sigillo): il vuoto uniforme a s 0.15 = a s 0.075, al bit                                         PASSA   
+  FATTO (non un sigillo): il vuoto fondo a s 0.15 = a s 0.075, al bit                                            PASSA   
+### (E2, E3) LE CORSE BREVI, fino a tempo 150 (dichiarate): H del libro a eps 0 e col par della corsa
+  DEVE PASSARE: BG-U a s 0.15 = la corsa committata, H del libro (eps 0) AL BIT su 101 campioni                  PASSA   97 s
+  DEVE PASSARE: BG-U a s 0.075 = la corsa committata, H del libro (eps 0) AL BIT su 201 campioni                 PASSA   167 s
+  DEVE PASSARE: BG-F a s 0.15 = la corsa committata, H del libro (eps 0) AL BIT su 101 campioni                  PASSA   89 s
+  DEVE PASSARE: BG-F a s 0.075 = la corsa committata, H del libro (eps 0) AL BIT su 201 campioni                 PASSA   175 s
+----------------------------------------------------------------------------------------------------------------------------------
+  BG-U s 0.15   il libro a eps 0 (la definizione di 326747d0)    max|H - H(0)| 5.2415e+03 (in N |e_K| 1.1123e-03)
+  BG-U s 0.075  il libro a eps 0 (la definizione di 326747d0)    max|H - H(0)| 6.0030e+03 (in N |e_K| 1.2739e-03)
+  DEVE FALLIRE (il caso di 326747d0): BG-U, il libro a eps 0, lo stesso rapporto FUORI da 3-5                    PASSA   0.8732
+  BG-U s 0.15   col termine della moneta (il par della corsa)    max|H - H(0)| 7.0543e+02 (in N |e_K| 1.4970e-04)
+  BG-U s 0.075  col termine della moneta (il par della corsa)    max|H - H(0)| 1.8183e+02 (in N |e_K| 3.8586e-05)
+  DEVE PASSARE (Luca): BG-U, col termine della moneta, il rapporto fra s 0.15 e 0.075 sul tempo 150 fra 3 e 5    PASSA   3.8796
+  BG-F s 0.15   il libro a eps 0 (la definizione di 326747d0)    max|H - H(0)| 5.0003e+03 (in N |e_K| 1.0611e-03)
+  BG-F s 0.075  il libro a eps 0 (la definizione di 326747d0)    max|H - H(0)| 5.7401e+03 (in N |e_K| 1.2181e-03)
+  DEVE FALLIRE (il caso di 326747d0): BG-F, il libro a eps 0, lo stesso rapporto FUORI da 3-5                    PASSA   0.8711
+  BG-F s 0.15   col termine della moneta (il par della corsa)    max|H - H(0)| 6.6621e+02 (in N |e_K| 1.4138e-04)
+  BG-F s 0.075  col termine della moneta (il par della corsa)    max|H - H(0)| 1.7100e+02 (in N |e_K| 3.6288e-05)
+  DEVE PASSARE (Luca): BG-F, col termine della moneta, il rapporto fra s 0.15 e 0.075 sul tempo 150 fra 3 e 5    PASSA   3.8959
+----------------------------------------------------------------------------------------------------------------------------------
+### (E4) QUANDO CADE IL MASSIMO
+  BG-U s 0.15  : la corsa committata (eps 0): il massimo a tempo 57.0 (di 160.5); la breve: eps 0 nei primi 10 3.714e-04, dopo 1.112e-03; con la moneta nei primi 10 1.287e-04, dopo 1.497e-04 (in N |e_K|)
+  BG-U s 0.075 : la corsa committata (eps 0): il massimo a tempo 74.2 (di 162.8); la breve: eps 0 nei primi 10 4.414e-04, dopo 1.274e-03; con la moneta nei primi 10 3.238e-05, dopo 3.859e-05 (in N |e_K|)
+  BG-F s 0.15  : la corsa committata (eps 0): il massimo a tempo 57.0 (di 3000.0); la breve: eps 0 nei primi 10 3.648e-04, dopo 1.061e-03; con la moneta nei primi 10 1.256e-04, dopo 1.414e-04 (in N |e_K|)
+  BG-F s 0.075 : la corsa committata (eps 0): il massimo a tempo 55.5 (di 3000.0); la breve: eps 0 nei primi 10 4.493e-04, dopo 1.218e-03; con la moneta nei primi 10 3.158e-05, dopo 3.629e-05 (in N |e_K|)
+==================================================================================================================================
+ESITO: 12/12 controlli passano; DEVE fallite: 0 []
