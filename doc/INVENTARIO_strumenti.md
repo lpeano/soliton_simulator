@@ -3875,3 +3875,76 @@ secondi ### **escono dai file a ogni corsa.**
 | `csv/_al_bit_cura_d0.py` | `python csv/_al_bit_cura_d0.py` | la cura di `D0` al bit sul referto della base proiettata `594417f6`: rigira `braccio_proiettato` a lato `32` per `R2` *(`cs` spento: la cura non lo tocca per costruzione, quindi e' il controllo dello strumento)* e `R1` *(`cs` acceso: il punto fisso gira)*, e confronta AL BIT col `jsonl` letto da `git show 594417f6` | `sha1-BYTE 227cea6d` | `doc/referti_l2/al_bit_cura_d0.txt` |
 | `csv/_avviso_giri.py` | `python csv/_avviso_giri.py` | l'avviso di convergenza lenta SUI GIRI (oltre `GIRI_AVVISO_OMEGA`): DEVE RIUSCIRE `D0` almeno `1` avviso; DEVE RESTARE `0` `R1` di `594417f6` a lato `32` e `C1` di strada `(d)`; il contatore uguale al conto; `R1` al bit col `jsonl` di `594417f6` e l'uscita di `braccio_c1` riga per riga in `c1_tetto_omega.txt` | `sha1-BYTE 766ac138` | `doc/referti_l2/avviso_giri.txt` |
 | `csv/_cono_messaggio.py` | `python csv/_cono_messaggio.py` | `CONO-MESSAGGIO-ROTTO`: la scena di `D0` a `dtau 1.25` deve far alzare al nucleo `AssertionError` (non `TypeError`) al tick `18`, col messaggio che porta `dove` e il valore VERO di `s`; e a `dtau 1` nessun rifiuto | `sha1-BYTE 903220fe` | `doc/referti_l2/cono_messaggio.txt` |
+
+## GLI SCRIPT STORICI DI `csv/` *(Luca `2026-11-01` `16:52`: `S1` e la moneta nel nucleo; il lavoro nuovo passa SOLO da `csv/solitone/`)*
+
+> **Una riga per ogni script di `csv/` che fa girare il passo** *(il censimento e' PER PAROLE: i nomi delle funzioni del passo e della forma nel sorgente; dichiarato, non una classificazione letta riga per riga)*. **Nessuno e' stato modificato.** Un referto storico **si rigira con `git checkout` del commit che l'ha prodotto**: a `HEAD` il nucleo usa `S1` e eps dalla tabella.
+
+| lo script | lo stato |
+|---|---|
+| `csv/_anello_di_risonanza.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_bande_piatte.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_carica_a14_3.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_chiudere_le_uscite.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_code_o_cuore.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_congelato_lungo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_consolida_B.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_conto_del_vuoto.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_controllo_disco_pieno.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_controllo_matrice.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_controllo_passo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_coppia_di_B.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_costo_punti_fissi.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_curvatura_prototipo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_decadimento_in_coppia.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_deriva_congelato.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_diagnosi_s4.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_dove_va_la_materia.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_energia_del_legame.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_energia_vuoto_vivo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_filtro_bande_piatte.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_gravita_collettiva.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`); **legge `SL.EPS_MONETA`, tolto dal nucleo: a `HEAD` si ROMPE**, si rigira al suo commit |
+| `csv/_instabilita_dtau_piccolo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_larghezza_risonanza.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_libro_dei_conti.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_libro_dei_conti_iv.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_livelli_piatti.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_massimo_di_B.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_modo_al_variare_di_s.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_modo_di_R.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_modo_lento.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_rami_era2.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_regime_del_passo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_respiro_congelato.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_respiro_sul_fondo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_salti_nel_cuore.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_scala_salto.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_scatola.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_scomposizione_solitone.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_scomposizione_zero_lambda.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_sigillo_scena_triangoli.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_solitone_con_la_buca.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_solitone_dal_fondo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_solitone_vuoto_congelato.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_solitoni_triangoli.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_stabilita_lineare.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_stato_fermo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_strada_b_lati.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_strada_b_r.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_tolleranza_omega.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_torsione_del_vuoto.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_torsione_energia.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_triangoli.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_triangoli_bassa_energia.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_triangoli_dove_la_c.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_triangoli_forza.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_triangoli_luce.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_u1_prototipo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_u1_secondo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_vuoto_da_solo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_vuoto_disturbato.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_vuoto_sul_fondo.py` | storico, caso ridotto eps `0` dove la scena lo scrive; **la forma: `S3` del nucleo per omissione** (non nomina la forma): a `HEAD` gira con `S1`, si rigira al suo commit |
+| `csv/_vuoto_vivo_B.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_zero_del_vuoto.py` | storico, caso ridotto eps `0` dove la scena lo scrive; la forma: `S1` da `csv/` (`_screening_forme_s3.forma`, o il suo `FORMA`) |
+| `csv/_massa_vicino_al_cono.py` | storico; **legge `SL.EPS_MONETA`, tolto dal nucleo: a `HEAD` si ROMPE**, si rigira al suo commit *(non nel censimento del passo: aggiunto per `EPS_MONETA`)* |
+| `csv/_moneta_massa.py` | storico; **legge `SL.EPS_MONETA`, tolto dal nucleo: a `HEAD` si ROMPE**, si rigira al suo commit *(non nel censimento del passo: aggiunto per `EPS_MONETA`)* |

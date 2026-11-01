@@ -1,0 +1,592 @@
+S1 E LA MONETA NEL NUCLEO (Luca 2026-11-01 16:52): IL REFERTO -- le uscite degli strumenti, tali e quali
+  nucleo modificato a c7ad2238; riferimento prima (ca24f19c) e prima_bis sul nucleo di prima; dopo_S3 (S3 esplicita) e dopo_S1 (predefinito) a c7ad2238
+  comandi: python csv/_suite_al_bit.py --confronta prima prima_bis | prima dopo_S3 | prima dopo_S1; python csv/solitone/collauda.py; i grep di K3, K4, K6 qui sotto
+==================================================================================================
+### (0) IL RUMORE: prima contro prima_bis (lo stesso nucleo, due volte)
+[TIMBRO] _suite_al_bit.py  sha1-BYTE 1827005a  committato e pulito
+IL CONFRONTO: prima (predefinito) contro prima_bis (predefinito)
+  ### il grafo valido                          rc 0 -> 0; le righe diverse:
+      @@ -24,2 +24,2 @@
+      -  il controllo: 46.581 us   un passo GLOBALE: 1761.3 us   rapporto: 2.6447%
+      -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.6447%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+      +  il controllo: 39.112 us   un passo GLOBALE: 1252.9 us   rapporto: 3.1218%
+      +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   3.1218%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+ESITO: 63 collaudi uguali al bit, 1 diversi: il grafo valido
+==================================================================================================
+### (K1) prima contro dopo_S3 (S3 scelta esplicitamente)
+[TIMBRO] _suite_al_bit.py  sha1-BYTE 1827005a  committato e pulito
+IL CONFRONTO: prima (predefinito) contro dopo_S3 (S3)
+  ### il grafo valido                          rc 0 -> 0; le righe diverse:
+      @@ -24,2 +24,2 @@
+      -  il controllo: 46.581 us   un passo GLOBALE: 1761.3 us   rapporto: 2.6447%
+      -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.6447%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+      +  il controllo: 39.454 us   un passo GLOBALE: 1517.5 us   rapporto: 2.5999%
+      +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.5999%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+      @@ -29 +29 @@
+      -C:\Users\lpeano\soliton_simulator\primo_ordine\_collauda_grafo.py:104: ComplexWarning: Casting complex values to real discards the imaginary part
+      +primo_ordine/_collauda_grafo.py:104: ComplexWarning: Casting complex values to real discards the imaginary part
+  ### il determinismo                          rc 0 -> 0; le righe diverse:
+      @@ -5,3 +5,3 @@
+      -     primo_ordine/_collauda_checkpoint.py     riga 44    .default_rng
+      -     primo_ordine/_collauda_energia.py        riga 53    .default_rng
+      -     primo_ordine/_collauda_energia.py        riga 83    .default_rng
+      +     primo_ordine/_collauda_checkpoint.py     riga 45    .default_rng
+      +     primo_ordine/_collauda_energia.py        riga 54    .default_rng
+      +     primo_ordine/_collauda_energia.py        riga 84    .default_rng
+      @@ -11 +11 @@
+      -     primo_ordine/_collauda_motore.py         riga 63    .default_rng
+      +     primo_ordine/_collauda_motore.py         riga 64    .default_rng
+      @@ -23,6 +23,6 @@
+      -     primo_ordine/bande.py                    riga 130   .default_rng
+      -     primo_ordine/bande.py                    riga 287   .default_rng
+      -     primo_ordine/bande_floquet.py            riga 53    .default_rng
+      -     primo_ordine/corrente.py                 riga 313   .default_rng
+      -     primo_ordine/deriva.py                   riga 119   .default_rng
+      -     primo_ordine/deriva.py                   riga 285   .default_rng
+      +     primo_ordine/bande.py                    riga 131   .default_rng
+      +     primo_ordine/bande.py                    riga 288   .default_rng
+      +     primo_ordine/bande_floquet.py            riga 54    .default_rng
+      +     primo_ordine/corrente.py                 riga 314   .default_rng
+      +     primo_ordine/deriva.py                   riga 120   .default_rng
+      +     primo_ordine/deriva.py                   riga 286   .default_rng
+      @@ -30 +30 @@
+      -     primo_ordine/scena_l2.py                 riga 243   .default_rng
+      +     primo_ordine/scena_l2.py                 riga 244   .default_rng
+  ### le simmetrie e le conservazioni          rc 0 -> 0; le righe diverse:
+      @@ -41 +41 @@
+      -C:\Users\lpeano\soliton_simulator\primo_ordine\_collauda_simmetrie.py:129: ComplexWarning: Casting complex values to real discards the imaginary part
+      +primo_ordine/_collauda_simmetrie.py:129: ComplexWarning: Casting complex values to real discards the imaginary part
+  ### il generatore                            rc 0 -> 0; le righe diverse:
+      @@ -30 +30 @@
+      -  ### e la tabella e- tornata IDENTICA AL BYTE                       PASSA   `2593860b`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e la tabella e- tornata IDENTICA AL BYTE                       PASSA   `809d7fdb`: ### un collaudo che lascia danno non e- un collaudo
+  ### la memoria: `m1`..`m4`                   rc 0 -> 0; le righe diverse:
+      @@ -18 +18 @@
+      -  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005625 MB/tick, sigma 0.003248, cioe' 1.73 sigma su 10 campioni
+      +  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005582 MB/tick, sigma 0.003223, cioe' 1.73 sigma su 10 campioni
+      @@ -24 +24 @@
+      -  ### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI  PASSA   ### tabella `2593860b`, generati `d0ce04cd`: un numero senza il codice che lo ha prodotto non ha provenienza
+      +  ### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI  PASSA   ### tabella `809d7fdb`, generati `5d907b19`: un numero senza il codice che lo ha prodotto non ha provenienza
+  ### il modello di sigillo                    rc 0 -> 0; le righe diverse:
+      @@ -19,2 +19,2 @@
+      -  #   tabella    2593860bcb3439a2
+      -  #   generati   d0ce04cda188f0ab   (13 file)
+      +  #   tabella    809d7fdb3e2c55e2
+      +  #   generati   5d907b196e623da1   (13 file)
+      @@ -32 +32 @@
+      -C:\Users\lpeano\soliton_simulator\primo_ordine\sigilli\_modello.py:108: ComplexWarning: Casting complex values to real discards the imaginary part
+      +primo_ordine/sigilli/_modello.py:108: ComplexWarning: Casting complex values to real discards the imaginary part
+      @@ -34 +34 @@
+      -C:\Users\lpeano\soliton_simulator\primo_ordine\sigilli\_modello.py:129: ComplexWarning: Casting complex values to real discards the imaginary part
+      +primo_ordine/sigilli/_modello.py:129: ComplexWarning: Casting complex values to real discards the imaginary part
+  ### la catena                                rc 0 -> 0; le righe diverse:
+      @@ -91 +91 @@
+      -C:\Users\lpeano\soliton_simulator\primo_ordine\_collauda_passo.py:78: ComplexWarning: Casting complex values to real discards the imaginary part
+      +primo_ordine/_collauda_passo.py:78: ComplexWarning: Casting complex values to real discards the imaginary part
+  ### la GUIDA, eseguita                       rc 0 -> 0; le righe diverse:
+      @@ -36 +36 @@
+      -  ### e la TABELLA e- tornata IDENTICA AL BYTE                   PASSA   `2593860b`: ### un collaudo che lasciasse una legge finta nella tabella CAMBIEREBBE LA FISICA DEL REPO
+      +  ### e la TABELLA e- tornata IDENTICA AL BYTE                   PASSA   `809d7fdb`: ### un collaudo che lasciasse una legge finta nella tabella CAMBIEREBBE LA FISICA DEL REPO
+  ### `P-T2` il replay dei registri            rc 0 -> 0; le righe diverse:
+      @@ -6 +6 @@
+      -  ### e il `13(c)` HA MATERIA: ci sono righe che CAMBIANO un campo di testo PASSA   1502 righe: ### il replay sul testo non e- un braccio vuoto
+      +  ### e il `13(c)` HA MATERIA: ci sono righe che CAMBIANO un campo di testo PASSA   1503 righe: ### il replay sul testo non e- un braccio vuoto
+      @@ -20 +20 @@
+      -  ### e il file e- tornato IDENTICO AL BYTE                        PASSA   `0849636d`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e il file e- tornato IDENTICO AL BYTE                        PASSA   `a4d55a7d`: ### un collaudo che lascia danno non e- un collaudo
+  ### l-arbitro fra le due vie                 rc 0 -> 0; le righe diverse:
+      @@ -49 +49 @@
+      -  ### e il file e- tornato IDENTICO AL BYTE                      PASSA   `0849636d`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e il file e- tornato IDENTICO AL BYTE                      PASSA   `a4d55a7d`: ### un collaudo che lascia danno non e- un collaudo
+  ### `P-E1`..`P-E5` i presidi dell-era 2      rc 0 -> 0; le righe diverse:
+      @@ -44 +44 @@
+      -C:\Users\lpeano\soliton_simulator\csv\_presidi_era2.py:427: ComplexWarning: Casting complex values to real discards the imaginary part
+      +csv/_presidi_era2.py:427: ComplexWarning: Casting complex values to real discards the imaginary part
+  ### `P-R1` ogni ramo e- dichiarato           rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  sul disco: `P-R1` TACE                                           PASSA   59 rami in 30 funzioni
+      -  ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   59 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) ne ha tolti 8
+      +  sul disco: `P-R1` TACE                                           PASSA   63 rami in 34 funzioni
+      +  ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   63 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) ne ha tolti 8
+      @@ -16 +16 @@
+      -  ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 15 errori di fondo (le righe vere citano funzioni che il finto non ha), e sul pulito la differenza e' VUOTA
+      +  ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 19 errori di fondo (le righe vere citano funzioni che il finto non ha), e sul pulito la differenza e' VUOTA
+  ### `P-RIF` un ID nel codice e- un costrutto rc 0 -> 0; le righe diverse:
+      @@ -4,3 +4,3 @@
+      -  sul disco: `P-RIF` TACE                                          PASSA   99 file di `primo_ordine/` guardati
+      -  ### il braccio sopra HA MATERIA (ci sono file da guardare)       PASSA   99 file
+      -  ### e gli ID nei DOCSTRING RESTANO, ed e- una scelta DICHIARATA  PASSA   161 ID nei docstring: ### il mandato dice <<nei COMMENTI>>, e nessun difetto di questo repo e- mai nato da un docstring
+      +  sul disco: `P-RIF` TACE                                          PASSA   100 file di `primo_ordine/` guardati
+      +  ### il braccio sopra HA MATERIA (ci sono file da guardare)       PASSA   100 file
+      +  ### e gli ID nei DOCSTRING RESTANO, ed e- una scelta DICHIARATA  PASSA   162 ID nei docstring: ### il mandato dice <<nei COMMENTI>>, e nessun difetto di questo repo e- mai nato da un docstring
+  ### `P-ES1` un solo esecutore                rc 0 -> 0; le righe diverse:
+      @@ -4 +4 @@
+      -  sul disco: `P-ES1` TACE                                          PASSA   99 file, 8 eccezioni dichiarate, 13 passi a mano
+      +  sul disco: `P-ES1` TACE                                          PASSA   100 file, 8 eccezioni dichiarate, 13 passi a mano
+  ### `P-MOD` la modularita-                   rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  sul disco: `P-MOD` TACE                                          PASSA   99 moduli in mappa, tetto 700 righe
+      -  ### il braccio sopra HA MATERIA (la mappa non e- vuota)          PASSA   99 moduli: se fosse 0 il braccio sarebbe un FALSO-UNO
+      +  sul disco: `P-MOD` TACE                                          PASSA   100 moduli in mappa, tetto 700 righe
+      +  ### il braccio sopra HA MATERIA (la mappa non e- vuota)          PASSA   100 moduli: se fosse 0 il braccio sarebbe un FALSO-UNO
+  ### chi la suite NON gira (NON blocca)       rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  la LISTA della fisica:            100 file `.py`
+      -    ESEGUIBILI (hanno un `main`):    59
+      +  la LISTA della fisica:            101 file `.py`
+      +    ESEGUIBILI (hanno un `main`):    60
+      @@ -7 +7 @@
+      -  i comandi della suite:             61
+      +  i comandi della suite:             62
+ESITO: 48 collaudi uguali al bit, 16 diversi: il grafo valido; il determinismo; le simmetrie e le conservazioni; il generatore; la memoria: `m1`..`m4`; il modello di sigillo; la catena; la GUIDA, eseguita; `P-T2` il replay dei registri; l-arbitro fra le due vie; `P-E1`..`P-E5` i presidi dell-era 2; `P-R1` ogni ramo e- dichiarato; `P-RIF` un ID nel codice e- un costrutto; `P-ES1` un solo esecutore; `P-MOD` la modularita-; chi la suite NON gira (NON blocca)
+  i codici d'uscita di dopo_S3:
+  12 le forme del legame                      rc 1  be0dd98375  (26 righe, 1 tolte; 0 s)
+FINE: 65 collaudi, 64 con rc 0
+==================================================================================================
+### (n2) prima contro dopo_S1 (il predefinito: S1, eps 0.5)
+[TIMBRO] _suite_al_bit.py  sha1-BYTE 1827005a  committato e pulito
+IL CONFRONTO: prima (predefinito) contro dopo_S1 (predefinito)
+  ### il grafo valido                          rc 0 -> 0; le righe diverse:
+      @@ -24,2 +24,2 @@
+      -  il controllo: 46.581 us   un passo GLOBALE: 1761.3 us   rapporto: 2.6447%
+      -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.6447%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+      +  il controllo: 31.505 us   un passo GLOBALE: 1195.4 us   rapporto: 2.6356%
+      +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.6356%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+  ### il determinismo                          rc 0 -> 0; le righe diverse:
+      @@ -5,3 +5,3 @@
+      -     primo_ordine/_collauda_checkpoint.py     riga 44    .default_rng
+      -     primo_ordine/_collauda_energia.py        riga 53    .default_rng
+      -     primo_ordine/_collauda_energia.py        riga 83    .default_rng
+      +     primo_ordine/_collauda_checkpoint.py     riga 45    .default_rng
+      +     primo_ordine/_collauda_energia.py        riga 54    .default_rng
+      +     primo_ordine/_collauda_energia.py        riga 84    .default_rng
+      @@ -11 +11 @@
+      -     primo_ordine/_collauda_motore.py         riga 63    .default_rng
+      +     primo_ordine/_collauda_motore.py         riga 64    .default_rng
+      @@ -23,6 +23,6 @@
+      -     primo_ordine/bande.py                    riga 130   .default_rng
+      -     primo_ordine/bande.py                    riga 287   .default_rng
+      -     primo_ordine/bande_floquet.py            riga 53    .default_rng
+      -     primo_ordine/corrente.py                 riga 313   .default_rng
+      -     primo_ordine/deriva.py                   riga 119   .default_rng
+      -     primo_ordine/deriva.py                   riga 285   .default_rng
+      +     primo_ordine/bande.py                    riga 131   .default_rng
+      +     primo_ordine/bande.py                    riga 288   .default_rng
+      +     primo_ordine/bande_floquet.py            riga 54    .default_rng
+      +     primo_ordine/corrente.py                 riga 314   .default_rng
+      +     primo_ordine/deriva.py                   riga 120   .default_rng
+      +     primo_ordine/deriva.py                   riga 286   .default_rng
+      @@ -30 +30 @@
+      -     primo_ordine/scena_l2.py                 riga 243   .default_rng
+      +     primo_ordine/scena_l2.py                 riga 244   .default_rng
+  ### il generatore                            rc 0 -> 0; le righe diverse:
+      @@ -30 +30 @@
+      -  ### e la tabella e- tornata IDENTICA AL BYTE                       PASSA   `2593860b`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e la tabella e- tornata IDENTICA AL BYTE                       PASSA   `809d7fdb`: ### un collaudo che lascia danno non e- un collaudo
+  ### la memoria: `m1`..`m4`                   rc 0 -> 0; le righe diverse:
+      @@ -18 +18 @@
+      -  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005625 MB/tick, sigma 0.003248, cioe' 1.73 sigma su 10 campioni
+      +  ### `m3`: la memoria per tick e' PIATTA (pendenza a 3 sigma da PASSA   ### 0.005412 MB/tick, sigma 0.003125, cioe' 1.73 sigma su 10 campioni
+      @@ -24 +24 @@
+      -  ### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI  PASSA   ### tabella `2593860b`, generati `d0ce04cd`: un numero senza il codice che lo ha prodotto non ha provenienza
+      +  ### e il TIMBRO porta l'impronta della TABELLA e dei GENERATI  PASSA   ### tabella `809d7fdb`, generati `5d907b19`: un numero senza il codice che lo ha prodotto non ha provenienza
+  ### il flusso materia-vuoto                  rc 0 -> 1; le righe diverse:
+      @@ -6 +6 @@
+      -  (0) `beta = -x/(1+x)` ESATTO su ogni valore                    PASSA   scarto massimo 0.000e+00
+      +  (0) `beta = -x/(1+x)` ESATTO su ogni valore                    ### FALLISCE   scarto massimo 5.293e-01
+      @@ -8,2 +8,2 @@
+      -  (0) e con `rho > 0` PICCOLO `alpha` resta GRANDE: nessun pavim PASSA   alpha(1e-12) = -28.017 e alpha(1e-6) = -14.202: diverge come `ln rho`
+      -  (0) `beta` SATURA a `-1` per molta materia                     PASSA   beta(100/4) = -0.961538, e il limite e' -1
+      +  (0) e con `rho > 0` PICCOLO `alpha` resta GRANDE: nessun pavim ### FALLISCE   alpha(1e-12) = 0.000 e alpha(1e-6) = 0.000: diverge come `ln rho`
+      +  (0) `beta` SATURA a `-1` per molta materia                     ### FALLISCE   beta(100/4) = -1.490882, e il limite e' -1
+      @@ -11,2 +11,2 @@
+      -  (0) `alpha` E' la derivata di `N` (differenze finite)          PASSA   numerica -0.809437914 contro analitica -0.809437912
+      -  (0) `beta` E' la derivata di `N` (differenze finite)           PASSA   numerica -0.200000000 contro analitica -0.200000000
+      +  (0) `alpha` E' la derivata di `N` (differenze finite)          PASSA   numerica 0.058823529 contro analitica 0.058823529
+      +  (0) `beta` E' la derivata di `N` (differenze finite)           PASSA   numerica -0.009684545 contro analitica -0.009684545
+      @@ -15,3 +15,3 @@
+      -  (1) il flusso CAMBIA lo stato: non e' l'identita'              PASSA   |dpsi| 3.986e-02 e |dphi| 2.692e-01: se fossero zero il collaudo sarebbe VUOTO
+      -  (1) e l'INVERSO lo ANNULLA: `psi` torna entro pochi ulp        PASSA   scarto 4.475e-16 su scala 2.693e+00, cioe' 0.7 ulp
+      -  (1) e `phi` torna anche lui: la FASE si annulla                PASSA   scarto 1.570e-16, cioe' 0.7 ulp
+      +  (1) il flusso CAMBIA lo stato: non e' l'identita'              PASSA   |dpsi| 8.139e-01 e |dphi| 3.940e-01: se fossero zero il collaudo sarebbe VUOTO
+      +  (1) e l'INVERSO lo ANNULLA: `psi` torna entro pochi ulp        PASSA   scarto 4.578e-16 su scala 2.693e+00, cioe' 0.8 ulp
+      +  (1) e `phi` torna anche lui: la FASE si annulla                PASSA   scarto 4.163e-16, cioe' 1.9 ulp
+      @@ -25,4 +25,4 @@
+      -  (3) DUE MEZZI FANNO L'INTERO al bit: il flusso e' ESATTO       PASSA   scarto 4.442e-16 su scala 2.538e+00, cioe' 0.8 ulp
+      -  (3) e la CAUSA: il flusso CONSERVA `rho` e `Lambda`, i suoi co PASSA   |drho| 7.105e-15 e |dLambda| 8.882e-16: una FASE non cambia un modulo quadro
+      -  ### (3) DEVE fallire: con l'EULERO due mezzi NON fanno l'inter PASSA   scarto 3.333e-03, cioe' 5914752882669 ulp -- il braccio di sopra HA DENTI
+      -  ### (3) DEVE fallire: `0.5 + 0.4` NON fa l'intero              PASSA   scarto 9.588e-03: il confronto guarda DAVVERO le frazioni
+      +  (3) DUE MEZZI FANNO L'INTERO al bit: il flusso e' ESATTO       PASSA   scarto 4.965e-16 su scala 2.538e+00, cioe' 0.9 ulp
+      +  (3) e la CAUSA: il flusso CONSERVA `rho` e `Lambda`, i suoi co PASSA   |drho| 5.329e-15 e |dLambda| 6.661e-16: una FASE non cambia un modulo quadro
+      +  ### (3) DEVE fallire: con l'EULERO due mezzi NON fanno l'inter PASSA   scarto 5.742e-02, cioe' 97534504447644 ulp -- il braccio di sopra HA DENTI
+      +  ### (3) DEVE fallire: `0.5 + 0.4` NON fa l'intero              PASSA   scarto 7.675e-02: il confronto guarda DAVVERO le frazioni
+      @@ -33 +33 @@
+      -  (4) e `alpha` NON e' tagliata dove `rho > 0`: la si usa com'e' PASSA   alpha minima sui nodi pieni -0.1060, e nessun valore non finito
+      +  (4) e `alpha` NON e' tagliata dove `rho > 0`: la si usa com'e' ### FALLISCE   alpha minima sui nodi pieni 0.7051, e nessun valore non finito
+      @@ -43 +43 @@
+      -IL COLLAUDO DI `CAMM-MATERIA-VUOTO`: 26 su 26   ### TUTTI PASSATI
+      +IL COLLAUDO DI `CAMM-MATERIA-VUOTO`: 22 su 26   ### CI SONO BUCHI
+  ### `P3` l-energia e la corrente             rc 0 -> 0; le righe diverse:
+      @@ -8 +8 @@
+      -  ### (2) `E` come SOMMA DELLE DENSITA' coincide con la forma glob PASSA   ### scarto 7.105e-15: la somma delle densita' NON e' un'approssimazione della forma globale -- E' la forma globale
+      +  ### (2) `E` come SOMMA DELLE DENSITA' coincide con la forma glob PASSA   ### scarto 0.000e+00: la somma delle densita' NON e' un'approssimazione della forma globale -- E' la forma globale
+  ### la deriva di `E` e la sorgente           rc 0 -> 1; le righe diverse:
+      @@ -9 +9 @@
+      -  ### (1-bis) nel regime `globale` il termine NON e- spento, con PASSA   a x_max = 0.06479: |beta| di `S3` = 6.084923e-02 contro 1.804200e-04 della saturazione, cioe- 337 volte
+      +  ### (1-bis) nel regime `globale` il termine NON e- spento, con ### FALLISCE   a x_max = 0.06479: |beta| di `S3` = 1.804200e-04 contro 1.804200e-04 della saturazione, cioe- 1 volte
+      @@ -12 +12 @@
+      -  ### (3) DEVE CAMBIARE: il primo termine sotto `N` NON e- conse PASSA   |Delta| = 1.511e-03: senza questo il braccio (2) sarebbe un FALSO-UNO
+      +  ### (3) DEVE CAMBIARE: il primo termine sotto `N` NON e- conse PASSA   |Delta| = 7.094e-02: senza questo il braccio (2) sarebbe un FALSO-UNO
+      @@ -19,4 +19,4 @@
+      -      la SORGENTE ai tre `dtau` (0.2, 0.05, 0.0125): 2.330036e+00  7.205664e-01  1.828900e-01
+      -      gli ESPONENTI (log del rapporto / log 4): 0.8466  0.9891
+      -  ### (6) la SORGENTE per nodo e- `O(dtau)` PER PASSO            PASSA   esponenti 0.8466  0.9891, attesi `1.0` entro `0.25`
+      -  ### (6) DEVE fallire: `O(1)` (esponente `0`) e `O(dtau^2)` (es PASSA   gli esponenti misurati sono 0.8466  0.9891: entrambe le alternative sono FUORI banda
+      +      la SORGENTE ai tre `dtau` (0.2, 0.05, 0.0125): 3.039451e+00  6.808360e-01  1.632325e-01
+      +      gli ESPONENTI (log del rapporto / log 4): 1.0792  1.0302
+      +  ### (6) la SORGENTE per nodo e- `O(dtau)` PER PASSO            PASSA   esponenti 1.0792  1.0302, attesi `1.0` entro `0.25`
+      +  ### (6) DEVE fallire: `O(1)` (esponente `0`) e `O(dtau^2)` (es PASSA   gli esponenti misurati sono 1.0792  1.0302: entrambe le alternative sono FUORI banda
+      @@ -25 +25 @@
+      -  17 su 17
+      +  16 su 17
+  ### il tempo proprio in TUTTE le leggi       rc 0 -> 0; le righe diverse:
+      @@ -4 +4 @@
+      -  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.415e-01   dipende dal tempo proprio
+      +  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 2.809e-01   dipende dal tempo proprio
+      @@ -17 +17 @@
+      -  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 1.415e-01   dipende dal tempo proprio
+      +  CAMM-MATERIA-VUOTO         frazione 0.5   |psi(dtau) - psi(dtau/2)| = 2.809e-01   dipende dal tempo proprio
+      @@ -20 +20 @@
+      -  ### (2) DEVE DIPENDERE: TUTTI i pezzi che GIRANO, letti  PASSA   7 pezzi distinti dall-ordine; il piu- debole e- CAMM-MATERIA-VUOTO con 1.415e-01 (la soglia e- 1e-09)
+      +  ### (2) DEVE DIPENDERE: TUTTI i pezzi che GIRANO, letti  PASSA   7 pezzi distinti dall-ordine; il piu- debole e- CAMM-MONETA-SPIN con 1.591e-01 (la soglia e- 1e-09)
+  ### il modello di sigillo                    rc 0 -> 0; le righe diverse:
+      @@ -19,2 +19,2 @@
+      -  #   tabella    2593860bcb3439a2
+      -  #   generati   d0ce04cda188f0ab   (13 file)
+      +  #   tabella    809d7fdb3e2c55e2
+      +  #   generati   5d907b196e623da1   (13 file)
+  ### la GUIDA, eseguita                       rc 0 -> 0; le righe diverse:
+      @@ -36 +36 @@
+      -  ### e la TABELLA e- tornata IDENTICA AL BYTE                   PASSA   `2593860b`: ### un collaudo che lasciasse una legge finta nella tabella CAMBIEREBBE LA FISICA DEL REPO
+      +  ### e la TABELLA e- tornata IDENTICA AL BYTE                   PASSA   `809d7fdb`: ### un collaudo che lasciasse una legge finta nella tabella CAMBIEREBBE LA FISICA DEL REPO
+  ### `P-T2` il replay dei registri            rc 0 -> 0; le righe diverse:
+      @@ -6 +6 @@
+      -  ### e il `13(c)` HA MATERIA: ci sono righe che CAMBIANO un campo di testo PASSA   1502 righe: ### il replay sul testo non e- un braccio vuoto
+      +  ### e il `13(c)` HA MATERIA: ci sono righe che CAMBIANO un campo di testo PASSA   1503 righe: ### il replay sul testo non e- un braccio vuoto
+      @@ -20 +20 @@
+      -  ### e il file e- tornato IDENTICO AL BYTE                        PASSA   `0849636d`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e il file e- tornato IDENTICO AL BYTE                        PASSA   `a4d55a7d`: ### un collaudo che lascia danno non e- un collaudo
+  ### l-arbitro fra le due vie                 rc 0 -> 0; le righe diverse:
+      @@ -49 +49 @@
+      -  ### e il file e- tornato IDENTICO AL BYTE                      PASSA   `0849636d`: ### un collaudo che lascia danno non e- un collaudo
+      +  ### e il file e- tornato IDENTICO AL BYTE                      PASSA   `a4d55a7d`: ### un collaudo che lascia danno non e- un collaudo
+  ### `P-R1` ogni ramo e- dichiarato           rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  sul disco: `P-R1` TACE                                           PASSA   59 rami in 30 funzioni
+      -  ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   59 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) ne ha tolti 8
+      +  sul disco: `P-R1` TACE                                           PASSA   63 rami in 34 funzioni
+      +  ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   63 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) ne ha tolti 8
+      @@ -16 +16 @@
+      -  ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 15 errori di fondo (le righe vere citano funzioni che il finto non ha), e sul pulito la differenza e' VUOTA
+      +  ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 19 errori di fondo (le righe vere citano funzioni che il finto non ha), e sul pulito la differenza e' VUOTA
+  ### `P-RIF` un ID nel codice e- un costrutto rc 0 -> 0; le righe diverse:
+      @@ -4,3 +4,3 @@
+      -  sul disco: `P-RIF` TACE                                          PASSA   99 file di `primo_ordine/` guardati
+      -  ### il braccio sopra HA MATERIA (ci sono file da guardare)       PASSA   99 file
+      -  ### e gli ID nei DOCSTRING RESTANO, ed e- una scelta DICHIARATA  PASSA   161 ID nei docstring: ### il mandato dice <<nei COMMENTI>>, e nessun difetto di questo repo e- mai nato da un docstring
+      +  sul disco: `P-RIF` TACE                                          PASSA   100 file di `primo_ordine/` guardati
+      +  ### il braccio sopra HA MATERIA (ci sono file da guardare)       PASSA   100 file
+      +  ### e gli ID nei DOCSTRING RESTANO, ed e- una scelta DICHIARATA  PASSA   162 ID nei docstring: ### il mandato dice <<nei COMMENTI>>, e nessun difetto di questo repo e- mai nato da un docstring
+  ### `P-ES1` un solo esecutore                rc 0 -> 0; le righe diverse:
+      @@ -4 +4 @@
+      -  sul disco: `P-ES1` TACE                                          PASSA   99 file, 8 eccezioni dichiarate, 13 passi a mano
+      +  sul disco: `P-ES1` TACE                                          PASSA   100 file, 8 eccezioni dichiarate, 13 passi a mano
+  ### `P-MOD` la modularita-                   rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  sul disco: `P-MOD` TACE                                          PASSA   99 moduli in mappa, tetto 700 righe
+      -  ### il braccio sopra HA MATERIA (la mappa non e- vuota)          PASSA   99 moduli: se fosse 0 il braccio sarebbe un FALSO-UNO
+      +  sul disco: `P-MOD` TACE                                          PASSA   100 moduli in mappa, tetto 700 righe
+      +  ### il braccio sopra HA MATERIA (la mappa non e- vuota)          PASSA   100 moduli: se fosse 0 il braccio sarebbe un FALSO-UNO
+  ### `D0` la forma `cs` spenta e' il passo di rc 0 -> 0; le righe diverse:
+      @@ -11,3 +11,3 @@
+      -      nn=16   seme=7     max|d psi| = 3.855573e+00   max|d phi| = 5.225992e+00
+      -      nn=12   seme=11    max|d psi| = 3.183243e+00   max|d phi| = 3.992089e+00
+      -  ### (a1) DEVE fallire: con la forma ACCESA la distanza e' `> PASSA   la piu' piccola delle quattro distanze e' 3.183243e+00
+      +      nn=16   seme=7     max|d psi| = 3.424187e+00   max|d phi| = 5.995023e+00
+      +      nn=12   seme=11    max|d psi| = 4.093998e+00   max|d phi| = 4.708952e+00
+      +  ### (a1) DEVE fallire: con la forma ACCESA la distanza e' `> PASSA   la piu' piccola delle quattro distanze e' 3.424187e+00
+  ### `D1` l-invarianza di scala               rc 0 -> 0; le righe diverse:
+      @@ -6 +6 @@
+      -  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=16 seme=7: 1.570e-15 su scala 3.520e+00 = 2.0 ulp
+      +  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=16 seme=7: 1.807e-15 su scala 3.536e+00 = 2.3 ulp
+      @@ -9,3 +9,3 @@
+      -  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=12 seme=11: 1.337e-15 su scala 3.273e+00 = 1.8 ulp
+      -  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=16 seme=7: 3.487489e+00 su scala 3.486e+00 = 4.505e+15 ulp -- e GIA' A UN TICK
+      -  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=12 seme=11: 3.021442e+00 su scala 3.324e+00 = 4.093e+15 ulp -- e GIA' A UN TICK
+      +  ### (s2) SPENTA, `lambda = 3.0`: entro 8 ulp a 1 tick          PASSA   nn=12 seme=11: 1.337e-15 su scala 3.234e+00 = 1.9 ulp
+      +  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=16 seme=7: 3.201887e+00 su scala 3.506e+00 = 4.113e+15 ulp -- e GIA' A UN TICK
+      +  ### (a1) DEVE fallire: ACCESA a `Lambda_c` FISSA, `lambda = 2` PASSA   nn=12 seme=11: 2.805911e+00 su scala 3.315e+00 = 3.812e+15 ulp -- e GIA' A UN TICK
+      @@ -14 +14 @@
+      -  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=16 seme=7: 2.220e-15 su scala 3.486e+00 = 2.9 ulp
+      +  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=16 seme=7: 1.790e-15 su scala 3.506e+00 = 2.3 ulp
+      @@ -17 +17 @@
+      -  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=12 seme=11: 2.391e-15 su scala 3.324e+00 = 3.2 ulp
+      +  ### (c2) `Lambda_c` per `lambda^2`, `lambda = 3.0`: entro 8 ul PASSA   nn=12 seme=11: 1.807e-15 su scala 3.315e+00 = 2.5 ulp
+      @@ -21,7 +21,7 @@
+      -             1          2.0          0.0
+      -             2          2.7          0.0
+      -             5          5.6          0.0
+      -            10         15.2          0.0
+      -            25         28.7          0.0
+      -            50         96.3          0.0
+      -           100       1902.1          0.0
+      +             1          2.3          0.0
+      +             2          3.6          0.0
+      +             5          5.8          0.0
+      +            10         12.7          0.0
+      +            25         86.7          0.0
+      +            50        221.9          0.0
+      +           100       3512.6          0.0
+  ### `D2` `cs` al centro, a punto fisso       rc 0 -> 0; le righe diverse:
+      @@ -5,4 +5,4 @@
+      -      nn=16  lc=0.8         38      0.415
+      -  ### (f) il punto fisso converge: nn=16, `Lambda_c = 0.8`       PASSA   38 giri, contrazione 0.415
+      -      nn=16  lc=8.0         47      0.490
+      -  ### (f) il punto fisso converge: nn=16, `Lambda_c = 8.0`       PASSA   47 giri, contrazione 0.490
+      +      nn=16  lc=0.8         35      0.388
+      +  ### (f) il punto fisso converge: nn=16, `Lambda_c = 0.8`       PASSA   35 giri, contrazione 0.388
+      +      nn=16  lc=8.0         43      0.458
+      +  ### (f) il punto fisso converge: nn=16, `Lambda_c = 8.0`       PASSA   43 giri, contrazione 0.458
+      @@ -11,7 +11,7 @@
+      -      nn=12  lc=0.8         28      0.307
+      -  ### (f) il punto fisso converge: nn=12, `Lambda_c = 0.8`       PASSA   28 giri, contrazione 0.307
+      -      nn=12  lc=8.0         34      0.364
+      -  ### (f) il punto fisso converge: nn=12, `Lambda_c = 8.0`       PASSA   34 giri, contrazione 0.364
+      -      nn=12  lc=80.0        12      0.046
+      -  ### (f) il punto fisso converge: nn=12, `Lambda_c = 80.0`      PASSA   12 giri, contrazione 0.046
+      -  ### (f) e il MASSIMO dei giri sta sotto il tetto dichiarato    PASSA   massimo 47 giri su un tetto di 120: ogni giro costa MEZZO tick, quindi ~23 tick di lavoro per tick
+      +      nn=12  lc=0.8         27      0.285
+      +  ### (f) il punto fisso converge: nn=12, `Lambda_c = 0.8`       PASSA   27 giri, contrazione 0.285
+      +      nn=12  lc=8.0         32      0.348
+      +  ### (f) il punto fisso converge: nn=12, `Lambda_c = 8.0`       PASSA   32 giri, contrazione 0.348
+      +      nn=12  lc=80.0        12      0.047
+      +  ### (f) il punto fisso converge: nn=12, `Lambda_c = 80.0`      PASSA   12 giri, contrazione 0.047
+      +  ### (f) e il MASSIMO dei giri sta sotto il tetto dichiarato    PASSA   massimo 43 giri su un tetto di 120: ogni giro costa MEZZO tick, quindi ~21 tick di lavoro per tick
+      @@ -19,6 +19,6 @@
+      -      spenta          2.007   2.130 2.028 2.007
+      -      centro          1.999   1.997 1.997 1.999
+      -      inizio          1.081   1.079 1.113 1.081
+      -  ### (o1) la forma SPENTA e' del SECONDO ordine                 PASSA   pendenza 2.007 >= 1.9
+      -  ### (o2) `cs` al CENTRO CONSERVA il secondo ordine             PASSA   pendenza 1.999 >= 1.9: la valutazione simmetrica FUNZIONA
+      -  ### (o3) DEVE fallire: `cs` a INIZIO PASSO PERDE il secondo or PASSA   pendenza 1.081 <= 1.5: e' il PRIMO ordine, e il palindromo e' rotto
+      +      spenta          2.008   2.201 2.032 2.008
+      +      centro          2.000   1.965 1.998 2.000
+      +      inizio          1.094   1.094 1.131 1.094
+      +  ### (o1) la forma SPENTA e' del SECONDO ordine                 PASSA   pendenza 2.008 >= 1.9
+      +  ### (o2) `cs` al CENTRO CONSERVA il secondo ordine             PASSA   pendenza 2.000 >= 1.9: la valutazione simmetrica FUNZIONA
+      +  ### (o3) DEVE fallire: `cs` a INIZIO PASSO PERDE il secondo or PASSA   pendenza 1.094 <= 1.5: e' il PRIMO ordine, e il palindromo e' rotto
+      @@ -27,5 +27,5 @@
+  ### chi la suite NON gira (NON blocca)       rc 0 -> 0; le righe diverse:
+      @@ -4,2 +4,2 @@
+      -  la LISTA della fisica:            100 file `.py`
+      -    ESEGUIBILI (hanno un `main`):    59
+      +  la LISTA della fisica:            101 file `.py`
+      +    ESEGUIBILI (hanno un `main`):    60
+      @@ -7 +7 @@
+      -  i comandi della suite:             61
+      +  i comandi della suite:             62
+  ### `M-B1` PUO- fallire, ed e- provato       rc 0 -> 1; le righe diverse:
+      @@ -12 +12 @@
+      -    nn=16   seme=7    CAMM-MATERIA-VUOTO       sha1-BYTE 8a168b6d3c62
+      +    nn=16   seme=7    CAMM-MATERIA-VUOTO       sha1-BYTE e651ed838801
+      @@ -19,2 +19,2 @@
+      -    nn=16   seme=7    (il passo intero)        sha1-BYTE e99035d80da0
+      -    nn=12   seme=11   CAMM-MATERIA-VUOTO       sha1-BYTE 8e3729637472
+      +    nn=16   seme=7    (il passo intero)        sha1-BYTE a6a2c0564f63
+      +    nn=12   seme=11   CAMM-MATERIA-VUOTO       sha1-BYTE 0dd80ed39cd2
+      @@ -27,2 +27,2 @@
+      -    nn=12   seme=11   (il passo intero)        sha1-BYTE 4f0b5798b1af
+      -  ### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8 PASSA   ### `CAMM-MATERIA-VUOTO` e- il pezzo n.1 di 7 (n.1 di 6 nell-albero vecchio), e i suoi byte coincidono su 2 scene su 2
+      +    nn=12   seme=11   (il passo intero)        sha1-BYTE 5f5bee241635
+      +  ### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8 ### FALLISCE   ### `CAMM-MATERIA-VUOTO` e- il pezzo n.1 di 7 (n.1 di 6 nell-albero vecchio), e i suoi byte coincidono su 2 scene su 2
+      @@ -33 +33 @@
+      -IL COLLAUDO DI `M-B1`: 11 su 11   ### TUTTI PASSATI
+      +IL COLLAUDO DI `M-B1`: 10 su 11   ### CI SONO ROSSI
+  ### la `(P Theta)` col termine NON lineare,  rc 0 -> 0; le righe diverse:
+      @@ -12 +12 @@
+      -  (1) il braccio HA MATERIA: il termine NON LINEARE cambia i PASSA   |W - W_lineare| = 1.541e+00 su scala 2.796e+00: se fosse 0 la misura non guarderebbe il termine
+      +  (1) il braccio HA MATERIA: il termine NON LINEARE cambia i PASSA   |W - W_lineare| = 2.163e+00 su scala 2.796e+00: se fosse 0 la misura non guarderebbe il termine
+      @@ -15,3 +15,3 @@
+      -  (3) `W A W A^-1 = 1` col termine NON lineare (`A = P Theta PASSA   scarto 1.831e-15 su scala 2.774e+00, cioe' 3 ulp
+      -  ### (3) DEVE fallire: `Theta` SENZA `P` non chiude l-ident PASSA   scarto 1.795e+00, cioe' 2913514579846639 ulp: `P` SERVE
+      -  ### (3) DEVE fallire: con `U` CASUALE l'identita' si ROMPE PASSA   scarto 3.765e+00, cioe' 6112404059540811 ulp: `U = I` SERVE
+      +  (3) `W A W A^-1 = 1` col termine NON lineare (`A = P Theta PASSA   scarto 2.095e-15 su scala 2.774e+00, cioe' 3 ulp
+      +  ### (3) DEVE fallire: `Theta` SENZA `P` non chiude l-ident PASSA   scarto 1.778e+00, cioe' 2885786390976631 ulp: `P` SERVE
+      +  ### (3) DEVE fallire: con `U` CASUALE l'identita' si ROMPE PASSA   scarto 3.765e+00, cioe' 6112404059540810 ulp: `U = I` SERVE
+      @@ -19 +19 @@
+      -  ### (4) e `C Op C^-1 = Op` NON vale [ATTESO NO]            PASSA   scarto 2.979e+00: la sorgente `rho` e' PARI sotto `C`, quindi il flusso ROVESCIA invece di COMMUTARE
+      +  ### (4) e `C Op C^-1 = Op` NON vale [ATTESO NO]            PASSA   scarto 4.488e+00: la sorgente `rho` e' PARI sotto `C`, quindi il flusso ROVESCIA invece di COMMUTARE
+      @@ -21,2 +21,2 @@
+      -  (6) con `cs` al CENTRO `W A W A^-1 = 1` REGGE              PASSA   scarto 5.389e-15 su scala 2.774e+00, cioe' 9 ulp (Lambda_c = 5.7868, rapporto 1.0)
+      -  ### (7) DEVE fallire: `cs` a INIZIO PASSO ROMPE la simmetr PASSA   scarto 1.019e+00, cioe' 1654451491757007 ulp: e' 403918821230x la banda, e il palindromo e' rotto
+      +  (6) con `cs` al CENTRO `W A W A^-1 = 1` REGGE              PASSA   scarto 3.504e-15 su scala 2.774e+00, cioe' 6 ulp (Lambda_c = 5.7868, rapporto 1.0)
+      +  ### (7) DEVE fallire: `cs` a INIZIO PASSO ROMPE la simmetr PASSA   scarto 8.048e-01, cioe' 1306511602390668 ulp: e' 318972559177x la banda, e il palindromo e' rotto
+      @@ -26 +26 @@
+      -  (1) il braccio HA MATERIA: il termine NON LINEARE cambia i PASSA   |W - W_lineare| = 6.852e-01 su scala 2.978e+00: se fosse 0 la misura non guarderebbe il termine
+      +  (1) il braccio HA MATERIA: il termine NON LINEARE cambia i PASSA   |W - W_lineare| = 1.306e+00 su scala 2.978e+00: se fosse 0 la misura non guarderebbe il termine
+      @@ -29,3 +29,3 @@
+      -  (3) `W A W A^-1 = 1` col termine NON lineare (`A = P Theta PASSA   scarto 9.421e-16 su scala 2.774e+00, cioe' 2 ulp
+      -  ### (3) DEVE fallire: `Theta` SENZA `P` non chiude l-ident PASSA   scarto 9.475e-01, cioe' 1538044864440005 ulp: `P` SERVE
+      -  ### (3) DEVE fallire: con `U` CASUALE l'identita' si ROMPE PASSA   scarto 2.498e+00, cioe' 4054238389176590 ulp: `U = I` SERVE
+      +  (3) `W A W A^-1 = 1` col termine NON lineare (`A = P Theta PASSA   scarto 1.196e-15 su scala 2.774e+00, cioe' 2 ulp
+      +  ### (3) DEVE fallire: `Theta` SENZA `P` non chiude l-ident PASSA   scarto 9.468e-01, cioe' 1537034882328038 ulp: `P` SERVE
+      +  ### (3) DEVE fallire: con `U` CASUALE l'identita' si ROMPE PASSA   scarto 2.500e+00, cioe' 4057732465525102 ulp: `U = I` SERVE
+      @@ -33 +33 @@
+      -  ### (4) e `C Op C^-1 = Op` NON vale [ATTESO NO]            PASSA   scarto 1.615e+00: la sorgente `rho` e' PARI sotto `C`, quindi il flusso ROVESCIA invece di COMMUTARE
+      +  ### (4) e `C Op C^-1 = Op` NON vale [ATTESO NO]            PASSA   scarto 2.532e+00: la sorgente `rho` e' PARI sotto `C`, quindi il flusso ROVESCIA invece di COMMUTARE
+      @@ -35,2 +35,2 @@
+      -  (6) con `cs` al CENTRO `W A W A^-1 = 1` REGGE              PASSA   scarto 1.831e-15 su scala 2.774e+00, cioe' 3 ulp (Lambda_c = 5.7868, rapporto 1.0)
+      -  ### (7) DEVE fallire: `cs` a INIZIO PASSO ROMPE la simmetr PASSA   scarto 4.647e-01, cioe' 754280594422422 ulp: e' 184150535748x la banda, e il palindromo e' rotto
+      +  (6) con `cs` al CENTRO `W A W A^-1 = 1` REGGE              PASSA   scarto 2.880e-15 su scala 2.774e+00, cioe' 5 ulp (Lambda_c = 5.7868, rapporto 1.0)
+      +  ### (7) DEVE fallire: `cs` a INIZIO PASSO ROMPE la simmetr PASSA   scarto 3.545e-01, cioe' 575497655533872 ulp: e' 140502357308x la banda, e il palindromo e' rotto
+      @@ -40 +40 @@
+      -  (1) il braccio HA MATERIA: il termine NON LINEARE cambia i PASSA   |W - W_lineare| = 4.301e-01 su scala 2.848e+00: se fosse 0 la misura non guarderebbe il termine
+  ### la misura COMPLETA di `L2`, su piu- stat rc 0 -> 1; le righe diverse:
+      @@ -11,5 +11,5 @@
+      -  (A1) dtau=0.5000: rapporto <= 1                            PASSA   0.8048 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      -  (A1) dtau=0.2500: rapporto <= 1                            PASSA   0.9903 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      -  (A1) dtau=0.1250: rapporto <= 1                            PASSA   0.9127 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      -  (A1) dtau=0.0625: rapporto <= 1                            PASSA   0.9228 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      -  ### I RAPPORTI, uno per uno: 0.8048  0.9903  0.9127  0.9228
+      +  (A1) dtau=0.5000: rapporto <= 1                            PASSA   0.6532 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      +  (A1) dtau=0.2500: rapporto <= 1                            PASSA   0.9189 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      +  (A1) dtau=0.1250: rapporto <= 1                            PASSA   0.8740 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      +  (A1) dtau=0.0625: rapporto <= 1                            PASSA   0.8970 -- sopra `1` sarebbe UNA VIOLAZIONE DEL CONO, e il punto `D` non si fa
+      +  ### I RAPPORTI, uno per uno: 0.6532  0.9189  0.8740  0.8970
+      @@ -20,3 +20,3 @@
+      -  dtau=0.50  primo tick con differenza: 2 (4.441e-16)   a 200 tick: 4.974e-14
+      -      pendenza di log10(scarto) per tick: 0.00489 +- 0.00460   (fette: 0.0261  0.0060  0.0037  0.0023  0.0017)
+      -  (A2) dtau=0.50: il PEGGIO del rumore resta sotto 1e-10     PASSA   peggio 5.063e-14 su 200 tick, e la pendenza 0.00489 +- 0.00460 e' INFORMAZIONE
+      +  dtau=0.50  primo tick con differenza: 1 (1.602e-01)   a 200 tick: 4.877e-01
+      +      pendenza di log10(scarto) per tick: -0.00060 +- 0.00140   (fette: -0.0063  0.0022  0.0000  -0.0020  -0.0007)
+      +  (A2) dtau=0.50: il PEGGIO del rumore resta sotto 1e-10     ### FALLISCE   peggio 1.094e+00 su 200 tick, e la pendenza -0.00060 +- 0.00140 e' INFORMAZIONE
+      @@ -24,3 +24,3 @@
+      -  dtau=0.25  primo tick con differenza: 3 (1.776e-15)   a 200 tick: 2.842e-14
+      -      pendenza di log10(scarto) per tick: 0.00413 +- 0.00496   (fette: 0.0273  0.0051  0.0026  0.0034  0.0003)
+      -  (A2) dtau=0.25: il PEGGIO del rumore resta sotto 1e-10     PASSA   peggio 3.997e-14 su 200 tick, e la pendenza 0.00413 +- 0.00496 e' INFORMAZIONE
+      +  dtau=0.25  primo tick con differenza: 1 (5.683e-02)   a 200 tick: 4.247e-01
+      +      pendenza di log10(scarto) per tick: -0.00129 +- 0.00212   (fette: 0.0080  -0.0043  0.0006  -0.0026  0.0010)
+      +  (A2) dtau=0.25: il PEGGIO del rumore resta sotto 1e-10     ### FALLISCE   peggio 1.040e+00 su 200 tick, e la pendenza -0.00129 +- 0.00212 e' INFORMAZIONE
+      @@ -30,8 +30,8 @@
+      -  dtau=1.0000  il PEGGIO su 8 semi: 2.97 ulp (seme 11)
+      -  (A3) dtau=1.0000: <= 8 ulp su tutti gli stati              PASSA   peggio 2.97 ulp, sul seme 11
+      -  dtau=0.5000  il PEGGIO su 8 semi: 2.67 ulp (seme 37)
+      -  (A3) dtau=0.5000: <= 8 ulp su tutti gli stati              PASSA   peggio 2.67 ulp, sul seme 37
+      -  dtau=0.2500  il PEGGIO su 8 semi: 3.32 ulp (seme 37)
+      -  (A3) dtau=0.2500: <= 8 ulp su tutti gli stati              PASSA   peggio 3.32 ulp, sul seme 37
+      -  ### (A3) DEVE fallire: `Theta` SENZA `P`                   PASSA   scarto 9.475e-01: `P` SERVE
+      -  ### (A3) DEVE fallire: con `U` CASUALE                     PASSA   scarto 2.498e+00: `U = I` SERVE
+      +  dtau=1.0000  il PEGGIO su 8 semi: 3.71 ulp (seme 37)
+      +  (A3) dtau=1.0000: <= 8 ulp su tutti gli stati              PASSA   peggio 3.71 ulp, sul seme 37
+      +  dtau=0.5000  il PEGGIO su 8 semi: 2.27 ulp (seme 71)
+      +  (A3) dtau=0.5000: <= 8 ulp su tutti gli stati              PASSA   peggio 2.27 ulp, sul seme 71
+  ### `H_w`: l-energia PESATA, e se il passo c rc 0 -> 1; le righe diverse:
+      @@ -14 +14 @@
+      -  (0) a forma SPENTA `H_w` e' `h_tot` entro 4096 ulp             PASSA   il PEGGIO su 8 tick e' 0.7 ulp: e' l'ordine della somma, non una legge diversa
+      +  (0) a forma SPENTA `H_w` e' `h_tot` entro 4096 ulp             PASSA   il PEGGIO su 8 tick e' 1.4 ulp: e' l'ordine della somma, non una legge diversa
+      @@ -18,8 +18,8 @@
+      -     1    0.500000   16      8.709755e-01     1.934196e+00
+      -     2    0.250000   32      2.185362e-01     4.853084e-01
+      -     3    0.125000   64      5.496325e-02     1.220582e-01
+      -     4    0.062500   128     1.377234e-02     3.058456e-02
+      -     5    0.031250   256     3.441564e-03     7.642763e-03
+      -  (b) `cs` UNIFORME = 0.450304: la pendenza di `H_w` e' `>= 1.9` PASSA   pendenza 1.996 su 4 dimezzamenti
+      -  (b) e quella di `H_tot` COINCIDE, come deve a peso costante    PASSA   pendenza 1.996: a peso costante `H_w = c H_tot`
+      -  (b) e le due fonti restano d'accordo entro 4096 ulp            PASSA   il PEGGIO su tutte le corse e' 1.6 ulp
+      +     1    0.500000   16      2.130829e+00     4.657538e+00
+      +     2    0.250000   32      1.990675e+00     4.351191e+00
+      +     3    0.125000   64      1.902338e+00     4.158105e+00
+      +     4    0.062500   128     1.886918e+00     4.124399e+00
+      +     5    0.031250   256     1.881930e+00     4.113497e+00
+      +  (b) `cs` UNIFORME = 0.457501: la pendenza di `H_w` e' `>= 1.9` ### FALLISCE   pendenza 0.045 su 4 dimezzamenti
+      +  (b) e quella di `H_tot` COINCIDE, come deve a peso costante    ### FALLISCE   pendenza 0.045: a peso costante `H_w = c H_tot`
+      +  (b) e le due fonti restano d'accordo entro 4096 ulp            PASSA   il PEGGIO su tutte le corse e' 1.5 ulp
+      @@ -29,7 +29,7 @@
+      -     1    0.500000   16      2.351748e+00     7.191029e+01
+      -     2    0.250000   32      5.237171e-01     7.225465e+01
+      -     3    0.125000   64      1.359165e-01     7.237083e+01
+      -     4    0.062500   128     3.382504e-02     7.240124e+01
+      -     5    0.031250   256     8.446580e-03     7.243986e+01
+      -  (a) con `cs` CONGELATO la pendenza di `H_w` e' `>= 1.9`        PASSA   pendenza 2.030 (e `H_tot` NON pesato: -0.003) -- `cs` va da 0.217531 a 0.686555
+      -  (a) e il braccio HA MATERIA: `cs` NON e' uniforme              PASSA   spread 0.469024: se fosse 0 questo braccio sarebbe `(b)`
+      +     1    0.500000   16      6.653331e+00     7.882842e+01
+      +     2    0.250000   32      4.812175e+00     7.990228e+01
+      +     3    0.125000   64      4.489140e+00     8.022169e+01
+      +     4    0.062500   128     4.370480e+00     8.028958e+01
+      +     5    0.031250   256     4.340928e+00     8.031989e+01
+      +  (a) con `cs` CONGELATO la pendenza di `H_w` e' `>= 1.9`        ### FALLISCE   pendenza 0.154 (e `H_tot` NON pesato: -0.007) -- `cs` va da 0.066425 a 0.670619
+      +  (a) e il braccio HA MATERIA: `cs` NON e' uniforme              PASSA   spread 0.604195: se fosse 0 questo braccio sarebbe `(b)`
+      @@ -39,6 +39,6 @@
+      -     1    0.500000   16      1.070057e+01     2.867630e+01
+      -     2    0.250000   32      2.209896e+00     3.923201e+01
+ESITO: 40 collaudi uguali al bit, 24 diversi: il grafo valido; il determinismo; il generatore; la memoria: `m1`..`m4`; il flusso materia-vuoto; `P3` l-energia e la corrente; la deriva di `E` e la sorgente; il tempo proprio in TUTTE le leggi; il modello di sigillo; la GUIDA, eseguita; `P-T2` il replay dei registri; l-arbitro fra le due vie; `P-R1` ogni ramo e- dichiarato; `P-RIF` un ID nel codice e- un costrutto; `P-ES1` un solo esecutore; `P-MOD` la modularita-; `D0` la forma `cs` spenta e' il passo di oggi; `D1` l-invarianza di scala; `D2` `cs` al centro, a punto fisso; chi la suite NON gira (NON blocca); `M-B1` PUO- fallire, ed e- provato; la `(P Theta)` col termine NON lineare, e `cs` nei due modi; la misura COMPLETA di `L2`, su piu- stati; `H_w`: l-energia PESATA, e se il passo con `cs` la conserva
+  i codici d'uscita di dopo_S1:
+  11 il flusso materia-vuoto                  rc 1  fc5794fb62  (44 righe, 1 tolte; 0 s)
+  15 la deriva di `E` e la sorgente           rc 1  27db16538c  (26 righe, 1 tolte; 18 s)
+  48 `M-B1` PUO- fallire, ed e- provato       rc 1  b95ed40027  (35 righe, 1 tolte; 31 s)
+  57 la misura COMPLETA di `L2`, su piu- stat rc 1  88e9314182  (39 righe, 6 tolte; 13 s)
+  58 `H_w`: l-energia PESATA, e se il passo c rc 1  c513ef68c4  (71 righe, 1 tolte; 15 s)
+FINE: 65 collaudi, 60 con rc 0
+FINE
+==================================================================================================
+### (K2) csv/solitone/collauda.py col predefinito
+  DEVE PASSARE: le costanti = quelle degli strumenti (GRUPPI, W, TOLL_RES_REL, Omega a s 0.15)                                       PASSA   
+  DEVE PASSARE: U1 e05 (eps 0.5), E0, le bande e le 24 uscite = previsioni.json AL BIT                                               PASSA   E0 +3.178178; diverse []
+  DEVE PASSARE: U1 e05, le aperte e il margine = previsioni.json                                                                     PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e05 con g spostato di 1e-3, le uscite = previsioni.json                                                           PASSA   
+  DEVE PASSARE: U1 e0 (eps 0), E0, le bande e le 24 uscite = previsioni.json AL BIT                                                  PASSA   E0 +3.141593; diverse []
+  DEVE PASSARE: U1 e0, le aperte e il margine = previsioni.json                                                                      PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e0 con g spostato di 1e-3, le uscite = previsioni.json                                                            PASSA   
+  DEVE PASSARE: U2 eps 0, mu -0.56602: (n2) P0 + Ppi = la riga di chiudere_le_uscite.txt                                             PASSA   0.00955
+  DEVE PASSARE: U3 r 1.5247 dalla scena (famiglia sb): il residuo e le bande libere = le righe di scatola/uscite.txt                 PASSA   1.685968e-10 contro 1.685968e-10
+  DEVE FALLIRE: U3 r 1.5247 nella scena della famiglia SBAGLIATA (lp), l'errore di c6ad04ac: stato_nella_scena lo accetta            PASSA   i pesi della scena NON sono quelli dello stato: il residuo 7.912611e-02 contro il registra
+  DEVE PASSARE: GRIGLIA e' il griglia.json di _coppia_di_B                                                                           PASSA   
+  DEVE PASSARE: P1 A a K (N 1e+06, L 81, eps 0.5): lo sha e mu = lunga_AK_00000.jsonl (a8e0e43b) AL BIT                              PASSA   mu -0.565633409457
+  DEVE PASSARE: P2 B a Gamma, l'inviluppo a N 3e5: lo sha, E0, bloch, mu, il residuo = robusta_N3e5_000000.jsonl AL BIT              PASSA   E0 +3.178177524 mu +4.148998947 residuo 4.393046e-02
+  DEVE FALLIRE: P2 col partner della scelta al posto della scelta: lo sha = robusta_N3e5_000000.jsonl                                PASSA   
+  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K = il primo pezzo di _vuoto_vivo_B AL BIT         PASSA   mu +4.161868162
+  DEVE PASSARE: D5 eps della prova = 0.5 della tabella (la decisione (7)); ridotto=True = 0, dichiarato                              PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN) | CASO RIDOTTO: eps 0 (la moneta spenta), non il modello
+  DEVE PASSARE: D5 la forma predefinita = S1 (la decisione (1), da _solitone_vuoto_congelato.FORMA)                                  PASSA   S1
+  DEVE PASSARE: D5 la scena della prova (BG-F-0.15) ha eps 0.5, e il costruttore predefinito = la partenza di P3 AL BIT (B a Gamma)  PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN); la forma S1
+  DEVE FALLIRE: D5 il costruttore predefinito = A a K                                                                                PASSA   
+  DEVE PASSARE: le costanti = quelle degli strumenti (SOGLIA_VITA, SIGMA_FORMA, GRUPPI_LIMITE)                                       PASSA   
+  DEVE PASSARE: M1 w_in, h e il campione a t 0 (x, y, w, f_win, f_liscia) = rig_000000.jsonl AL BIT                                  PASSA   f_liscia 0.618068063360118
+  DEVE PASSARE: M1 il punto a t 0 (w, f_win, f_3w0, picco, M) = lunga_B_00000.jsonl (a8e0e43b) AL BIT                                PASSA   alone 4.441e-16
+  DEVE FALLIRE: M1 la finestra netta = la liscia (f_win = f_liscia)                                                                  PASSA   0.620386 contro 0.618068
+  DEVE PASSARE: M2 BG-F-0.15 a tick 20000: il campione e l'alone = l'ultimo campione AL BIT                                          PASSA   f_liscia 0.509523 alone 0.005512
+  DEVE PASSARE: M2 la riga D (|D|/|psi0| e le frazioni di banda) = l'ultima riga D AL BIT                                            PASSA   nD 1.028041 B 0.991594
+  DEVE PASSARE: M3 il limite del tasso (piatte, A) = limite_3000.json AL BIT                                                         PASSA   piatte 4.529e-04 A 4.170e-04
+  DEVE PASSARE: M4 |D| = 1e-8 t -> lineare, = la riga di livelli_piatti.txt                                                          PASSA   lineare; 100 campioni > 0; gamma -0.00062 +- 0.00012, gamma t_ultimo -0.185, b 1.0621 +- 0.0043
+  DEVE PASSARE: M4 la serie VERA di breve_R_1e6 -> lineare, = la riga di livelli_piatti.txt                                          PASSA   lineare; 400 campioni > 0; gamma -0.00031 +- 0.00011, gamma t_ultimo -0.092, b 1.0495 +- 0.0021
+  DEVE PASSARE: M4 |D| = 1e-8 e^{0.06 t} -> esponenziale, = la riga di livelli_piatti.txt                                            PASSA   esponenziale; 100 campioni > 0; gamma 0.06000 +- 0.00000, gamma t_ultimo 13.680, b -0.0000 +- 0.0000
+  DEVE PASSARE: M4 |D| = 1e-8 (t + e^{0.0331 t}) -> esponenziale, = la riga di livelli_piatti.txt                                    PASSA   esponenziale; 100 campioni > 0; gamma 0.01803 +- 0.00106, gamma t_ultimo 5.356, b 0.6941 +- 0.0397
+  DEVE PASSARE: M4 |D| = 1e-8 (il caso nullo -> potenza t^0, = la riga di livelli_piatti.txt                                         PASSA   potenza t^0; 100 campioni > 0; gamma 0.00000 +- 0.00000, gamma t_ultimo 0.000, b 0.0000 +- 0.0000
+  DEVE PASSARE: M5 la vita di r 1 (s 0.3; 03142636) = la riga di modo_di_R.txt                                                       PASSA   OSSERVATO 142.2
+  DEVE PASSARE: M5 la vita di r 1.5247 (s 0.15; 03142636) = la riga di modo_di_R.txt                                                 PASSA   OSSERVATO 621.8
+  DEVE PASSARE: M6 un periodo vero di 99 tick (33 passi) letto giusto (entro la risoluzione 2.49e-02)                                PASSA   letto 99.0124
+  DEVE PASSARE: M6 un periodo vero di 3.3 tick (1.1 passi, sotto Nyquist 6): NON letto giusto, ma il vero fra gli alias              PASSA   letto 33.0000; gli alias 1.4348 1.5714 2.7500 3.3000
+  DEVE FALLIRE: M6 il periodo SENZA il passo                                                                                         PASSA   
+  DEVE PASSARE: D6 nessun .py fuori da csv/solitone/ cambiato da 9180fd38 a HEAD, e niente di non committato                         ### FALLISCE   cambiati ['csv/_file_fisica.py', 'csv/_rami_era2.py', 'csv/_suite_al_bit.py', 'csv/solitone/collauda.py', 'csv/solitone/protetto.py', 'csv/solitone/test_protetto.py', 'primo_ordine/_collauda_checkpoint.py', 'primo_ordine/_collauda_energia.py', 'primo_ordine/_collauda_forme.py', 'primo_ordine/_collauda_memoria.py', 'primo_ordine/_collauda_motore.py', 'primo_ordine/_misura_costo_motore.py', 'primo_ordine/bande.py', 'primo_ordine/bande_floquet.py', 'primo_ordine/collauda.py', 'primo_ordine/corrente.py', 'primo_ordine/deriva.py', 'primo_ordine/materia_vuoto.py', 'primo_ordine/scena_l2.py', 'primo_ordine/termini/camm_materia_vuoto.py']
+  DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
+  i tempi: uscite 17 s; protetto 14 s; misure 5 s
+ESITO: 37/38 controlli passano; fallite: 1 ['DEVE PASSARE: D6 nessun .py fuori da csv/solitone/ cambiato da 9180fd38 a HEAD, e niente di non committato']
+==================================================================================================
+### (K3) grep -rn 'EPS_MONETA|"eps": 0.5|'eps': 0.5' primo_ordine --include=*.py, fuori da termini/:
+0
+### (K4) le occorrenze di FORMA in materia_vuoto (la sola lettura della forma della legge):
+180:FORMA = _TMV.PARAMETRI["forma"]
+### (K6) i .py di csv/ cambiati da a78b3f48 (il task history) a HEAD:
+csv/_file_fisica.py
+csv/_rami_era2.py
+csv/_suite_al_bit.py
+csv/solitone/protetto.py

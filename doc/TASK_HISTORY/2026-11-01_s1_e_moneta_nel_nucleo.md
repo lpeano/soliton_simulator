@@ -70,3 +70,30 @@
 3. Il nucleo: la tabella, la rigenerazione, `materia_vuoto`, `scena_l2` e gli altri `{"eps": 0.5}`, i collaudi del nucleo *(solo la riga di eps: il valore dalla tabella)*, il collaudo `K5`, `REGISTRO_FISICA`, `csv/solitone/protetto.forma_predefinita`. La SUITE nel messaggio. **Un commit.**
 4. Le due corse della suite *(`S3` esplicita, poi il predefinito)* e il collaudo di `csv/solitone/`, uno alla volta.
 5. Il referto `doc/referti_l2/s1_e_moneta_nel_nucleo.txt`; le righe «storico» nell'inventario; la MAPPA *(«nel codice:» di (1) e (7))*; `doc/DECISIONI_NEL_CODICE.md`; la relazione.
+
+## 7. L'ESITO
+
+
+**Il referto:** `doc/referti_l2/s1_e_moneta_nel_nucleo.txt`. Contiene le uscite di `csv/_suite_al_bit.py --confronta` e di `csv/solitone/collauda.py`, e i grep. Il nucleo e' quello di `c7ad2238`; il riferimento e' `prima`, girato a `ca24f19c`.
+
+- **(0) il rumore** *(lo stesso nucleo due volte)*: `63/64` uguali al bit; diversa una sola riga, un tempo in microsecondi.
+- **(K1) con `S3` esplicita** *(`dopo_S3`)*: `48` collaudi uguali al bit, `16` diversi. **Tutte le righe diverse sono metadati:** le impronte della tabella *(`2593860b` -> `809d7fdb`)* e dei generati, i conteggi di file, moduli e rami *(`99` -> `100`, `59` -> `63` rami)*, i numeri di riga spostati *(una riga d'import in piu')*, il percorso stampato nei warning *(sotto `runpy`)*, i tempi e la pendenza della memoria. **Nessuna riga di fisica cambia.** Esce con codice `1` solo `_collauda_forme.py`, ed e' **per costruzione**: verifica che il predefinito sia `S1`. **Quindi K1 passa nel merito, non con lo `sha1` grezzo:** il criterio scritto («la stessa uscita, lo `sha1` senza i tempi») **era troppo stretto**, perche' non toglieva le impronte e i conteggi. Lo dichiaro come errore mio nel criterio.
+- **(K2) `csv/solitone/` col predefinito:** `37/38`. **Tutti i numeri al bit:** i `32` test, `D5`, e il `D6` sugli import. **Fallisce il `D6` «nessun `.py` fuori dalla libreria cambiato da `9180fd38`»**, ed e' vero: il nucleo e' cambiato per questo mandato. Quel controllo diceva «i referti vecchi ridanno i loro numeri perche' il loro codice e' quello di prima», **e adesso non e' piu' cosi'** *(vedi sotto)*.
+- **(n2) col predefinito `S1`** *(`dopo_S1`)*: `40` uguali, `24` diversi, **`5` con codice `1`:**
+  - `_collauda_materia_vuoto` *(i bracci di `S3`: `alpha` che diverge come `ln rho`)*;
+  - `_collauda_deriva` *(`|beta|` di `S3` contro la saturazione)*;
+  - **`M-B1`** *(«la legge che gira coincide AL BIT» con il suo riferimento: con `S1` gli `sha1` dei pezzi cambiano)*;
+  - **la misura completa di `L2`** *(il rapporto del cono a `dtau 0.5`: `0.8048` -> `0.6532`; a `0.25`: `0.9903` -> `0.9189`; tutti ancora `<= 1`)*;
+  - **`H_w`** *(l'energia pesata)*.
+  - **Cambiano numeri, ma passano ancora:** `P3` energia e corrente, il tempo proprio *(per `CAMM-MATERIA-VUOTO` `|psi(dtau) - psi(dtau/2)|` `1.415e-01` -> `2.809e-01`)*, `D0`, `D1`, `D2`, la `(P Theta)` non lineare. Il dettaglio riga per riga e' nel referto.
+- **K3: zero righe. K4:** la forma della legge si legge solo in `materia_vuoto.py` *(`FORMA = _TMV.PARAMETRI["forma"]`)*. Negli strumenti di screening restano nomi di forma espliciti. **K6:** fuori dalla libreria sono cambiati solo `csv/_file_fisica.py` e `csv/_rami_era2.py`, che sono presidi; piu' `csv/_suite_al_bit.py`, che e' nuovo.
+
+**La lettura e' (n2).** I collaudi che cambiano sono di due tipi:
+- **scritti per `S3`** *(il flusso materia-vuoto, la deriva, `M-B1` col suo riferimento al bit)*: vanno o **riscritti per `S1`** o **legati a `S3` esplicita**;
+- **misure del passo** *(il cono di `L2`, `H_w`, e quelli che cambiano numeri)*: con `S1` danno numeri nuovi.
+
+**Decide Luca**, collaudo per collaudo. Non ne ho toccato nessuno.
+
+**Gli script storici di `csv/`:** una riga per ciascuno nell'inventario *(`66`; il censimento e' per parole e lo dichiaro)*. **`11` non nominano la forma**, quindi a `HEAD` girano con `S1` invece di `S3`. **`3` leggono `SL.EPS_MONETA`** *(`_gravita_collettiva`, `_massa_vicino_al_cono`, `_moneta_massa`)*, quindi a `HEAD` **si rompono**. Tutti si rigirano al loro commit.
+
+**La MAPPA:** «nel codice:» di (1) e (7). **`doc/DECISIONI_NEL_CODICE.md`:** la sezione `5`.

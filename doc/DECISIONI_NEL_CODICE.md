@@ -43,3 +43,9 @@
 ## 4. CHE COSA SERVIREBBE NEL NUCLEO *(punto `7`: NON fatto, decide Luca)*
 
 - **(1) la forma:** in `primo_ordine/materia_vuoto.py` `alpha` e `beta` *(e `pezzi`, che le chiama)* dovrebbero dare quelle di `S1` *(le espressioni di `_screening_forme_s3.pezzi_di("S1")`)*. **Ma in `primo_ordine/` le leggi non si scrivono a mano:** la via e' la tabella `primo_ordine/leggi/leggi.yaml` e il generatore *(`doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`)*, poi la suite.- **(7) eps:** il nucleo e' gia' a `0.5`. **La seconda fonte** in `primo_ordine/scena_l2.py` *(`EPS_MONETA = 0.5` e il `{"eps": 0.5}` della riga `283`)* dovrebbe leggere la tabella. Il valore non cambia: **e' pulizia, non fisica.**
+
+## 5. DOPO LA DECISIONE DI LUCA DELLE `16:52` *(`c7ad2238`; il referto `doc/referti_l2/s1_e_moneta_nel_nucleo.txt`)*
+
+- **(1) la forma:** `primo_ordine/leggi/leggi.yaml`, `CAMM-MATERIA-VUOTO`, `parametri.forma` *(`S1` predefinita, `S3` ammessa)*; `primo_ordine/materia_vuoto.py` legge `FORMA` dal modulo generato `termini/camm_materia_vuoto.py`; `N_s1`, `alpha_s1`, `beta_s1` *(le espressioni di `csv/`)* e `N_s3`, `alpha_s3`, `beta_s3` *(i corpi di prima)*; `scegli` e `forma_esplicita` per `S3`. **Le sezioni `2` e `4` qui sopra descrivono il nucleo di PRIMA.**
+- **(7) eps:** solo dalla tabella *(`dict(termini.camm_moneta_spin.PARAMETRI)`)*: tolti `scena_l2.EPS_MONETA` e i `20` `{"eps": 0.5}` del nucleo e dei suoi collaudi. **La seconda fonte della sezione `1` non c'e' piu'.**
+- **le scene di `csv/`** *(`_energia_del_legame.stato` e le altre della sezione `1`)* **restano a eps `0`: STORICHE** *(Luca `16:52`)*; `csv/solitone/protetto.forma_predefinita` legge la forma dalla tabella.
