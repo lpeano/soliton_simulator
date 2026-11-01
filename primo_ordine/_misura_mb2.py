@@ -59,6 +59,7 @@ if _QUI not in sys.path:
 sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 
 import tick as TK                                             # noqa: E402
+import materia_vuoto as MV                                    # noqa: E402
 
 # ### ⛔ **LA CONFIGURAZIONE INTERA, DICHIARATA E STAMPATA**
 TEMPO = 8.0
@@ -124,18 +125,14 @@ def h_tot(inc, mot, st, par):
     # ### ⚠ **Non e- un parametro aggiustato: e- la misura che deve guardare LA LEGGE
     # ### CHE GIRA.** La saturazione e- ### **fuori dall-ordine di composizione**, quindi
     # ### ### **il suo generatore non e- piu- in `H`.**
-    # ### ⭐ **E resta UNA SECONDA FONTE, come tutto il resto di questa funzione:** la
-    # ### `N` si scrive ### **qui**, con `rho` e `Lambda` ### **che questa funzione ha
-    # ### gia- calcolato da se-** (`nrm_psi` e `nrm_phi`), e ### **non si importa da
-    # ### `materia_vuoto.py`** -- se le due divergessero, il confronto lo direbbe.
+    # ### ⛔⛔ **LA `N` SI PRENDE DA `materia_vuoto`, PER NOME DI MODULO** *(Luca, `S1` nel nucleo, la chiusura)*: qui era scritta a mano,
+    # ### come SECONDA FONTE voluta *(«se le due divergessero, il confronto lo direbbe»)*. ### **Con due forme una copia a mano non puo'
+    # ### seguire la tabella:** col predefinito `S1` il confronto l'ha detto, e `H_w` era piatto *(pendenze `0.045` e `0.154`, `3fe2f12d`)*.
+    # ### ⚠ **L'indipendenza sulla sola `N` sta ora in `_collauda_forme`** *(`S1` al bit contro `csv/`, le derivate a differenze finite)*;
+    # ### gli altri termini restano scritti qui. ### **Con `S3` esplicita `MV.N_s3` fa le stesse operazioni: al bit.**
     rho = nrm_psi
     lam = nrm_phi
-    N = np.zeros(inc.n, dtype=float)
-    vivi = rho > 0.0
-    if np.any(vivi):
-        N[vivi] = rho[vivi] * np.log(rho[vivi] / (rho[vivi] + lam[vivi]))
-    # ### ⛔ **E dove `rho == 0` il termine fa `0`**, perche- `x ln x -> 0`: ### **e- il
-    # ### valore che la funzione PRENDE**, non un pavimento.
+    N = MV.N(rho, lam)
     accoppia = float(np.sum(N))
     return nodo + arco + moneta + accoppia
 
@@ -185,13 +182,10 @@ def pezzi_di_h(inc, mot, st, par):
         "`elicita` ha forma %r invece di `(n,)`: se tornasse per ESTREMITA' andrebbe"
         " raccolta sui nodi, e questo termine starebbe pesato SBAGLIATO" % (h.shape,))
     per_nodo = per_nodo + float(par["eps"]) * h
-    # ### l'ACCOPPIAMENTO `N`, ### **per nodo**: la stessa riga di `h_tot`
+    # ### l'ACCOPPIAMENTO `N`, ### **per nodo**: la stessa riga di `h_tot` *(da `materia_vuoto`, la forma della tabella)*
     rho = nrm_psi
     lam = nrm_phi
-    N = np.zeros(inc.n, dtype=float)
-    vivi = rho > 0.0
-    if np.any(vivi):
-        N[vivi] = rho[vivi] * np.log(rho[vivi] / (rho[vivi] + lam[vivi]))
+    N = MV.N(rho, lam)
     per_nodo = per_nodo + N
     # ------------------------------------------------- i termini di ARCO
     v = psi.reshape(m, 2, 2)

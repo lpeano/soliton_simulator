@@ -40,6 +40,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 import _misura_theta_n as TN                                  # noqa: E402
 import _misura_theta_nonlineare as TNL                        # noqa: E402
 import statica_protocollo as PR                               # noqa: E402
+import materia_vuoto as MV                                    # noqa: E402
 
 OK = [0, 0]
 EPSM = float(np.finfo(float).eps)
@@ -120,7 +121,10 @@ def braccio_rumore():
         # ### il protocollo di `ebf5317` *(`S3` sostituito, fotografia, congelamento per
         # ### tick)* contro quello del motore *(congelamento per PEZZO)*
         PR.SOSTITUISCI = True
-        a3, _d1, _t1, _p1 = PR.corri(dtau, PR.X_RIF, "S3", TICK_DIV, 0, (0,),
+        # ### ⛔ **LA FORMA SOSTITUITA E' QUELLA DEL MOTORE** *(Luca, `S1` nel nucleo, la chiusura; la mia lettura, nel task history)*: era
+        # ### `"S3"` scritta a mano, e col predefinito `S1` i due protocolli giravano DUE LEGGI -- lo scarto non era piu' rumore.
+        # ### **Con `S3` esplicita e' la corsa di prima.**
+        a3, _d1, _t1, _p1 = PR.corri(dtau, PR.X_RIF, MV.ATTIVA, TICK_DIV, 0, (0,),
                                      congela="tick")
         PR.SOSTITUISCI = False
         am, _d2, _t2, _p2 = PR.corri(dtau, PR.X_RIF, "MOTORE", TICK_DIV, 0, (0,),
@@ -227,8 +231,8 @@ def main(argv):
     print("=" * 96)
     print("  (A1) toro %s   %d tick   x = %.2f   dtau = %s"
           % (PR.LATI, TICK_CONO, PR.X_RIF, DTAU_CONO))
-    print("  (A2) %d tick   dtau = %s   i due protocolli: `S3`+foto+tick contro"
-          " MOTORE+pezzo" % (TICK_DIV, DTAU_DIV))
+    print("  (A2) %d tick   dtau = %s   i due protocolli: `%s`+foto+tick contro"
+          " MOTORE+pezzo" % (TICK_DIV, DTAU_DIV, MV.ATTIVA))
     print("  (A3) toro %s   %d semi %s   dtau = %s   nodi vuoti: %s"
           % (TN.LATI, len(SEMI), SEMI, TN.DTAU, VUOTI_PER_SEME))
     sys.stdout.flush()

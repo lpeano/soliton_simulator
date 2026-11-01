@@ -138,6 +138,52 @@ def braccio_funzioni():
               "numerica %.9f contro analitica %.9f" % (float(d), atteso))
 
 
+def braccio_funzioni_s1():
+    """### `(0-S1)` **LE FUNZIONI DI `S1`, sui numeri** *(Luca, `S1` nel nucleo, la chiusura: «i collaudi equivalenti per `S1`»)*.
+
+    ### Le bande vengono dalla forma, non da una scelta: `1 - alpha = 1/(1+x^2) < 1/x^2` e `alpha/x^2 = 1/(1+x^2)`, quindi
+    `|1 - alpha| <= 1/x^2` e `|alpha/x^2 - 1| <= x^2`, **piu' `8` ulp** di arrotondamento *(la banda del braccio `(0)`)*.
+    ### **Il limite a `Lambda = 0`** e' quello della scheda: `alpha = 1`, `beta = -pi/2`, `N = rho`, ### **esatti** *(il codice li scrive come limite, non li calcola)*.
+    """
+    print()
+    print("### (0-S1) LE FUNZIONI DI `S1`, sui numeri: `alpha -> 1` per `x` grande, `~x^2` per `x` piccolo, il limite a `Lambda = 0`")
+    with MV.forma_esplicita("S1"):
+        grandi = np.array([1e2, 1e4, 1e8])
+        al, be = MV.pezzi(grandi * 4.0, np.full(3, 4.0))
+        esito("(0-S1) `alpha -> 1` per `x` grande: `|1 - alpha| <= 1/x^2 + 8 eps`",
+              bool(np.all(np.abs(1.0 - al) <= 1.0 / grandi ** 2 + 8 * EPS)) and bool(np.all(al <= 1.0)),
+              "1 - alpha = %s a x = %s" % (" ".join("%.3e" % v for v in 1.0 - al), " ".join("%.0e" % v for v in grandi)))
+        esito("(0-S1) e `beta -> -pi/2` per `x` grande: `|beta + pi/2| <= 2/x + 8 eps x`",
+              bool(np.all(np.abs(be + 0.5 * np.pi) <= 2.0 / grandi + 8 * EPS * grandi)),
+              "beta + pi/2 = %s  (`arctan x = pi/2 - 1/x + ...`, `x/(1+x^2) ~ 1/x`; l'arrotondamento di `x - x^3/(1+x^2)` e' `~eps x`)"
+              % " ".join("%.3e" % v for v in be + 0.5 * np.pi))
+        piccoli = np.array([1e-2, 1e-4, 1e-6])
+        al, be = MV.pezzi(piccoli * 4.0, np.full(3, 4.0))
+        esito("(0-S1) `alpha ~ x^2` per `x` piccolo: `|alpha/x^2 - 1| <= x^2 + 8 eps`",
+              bool(np.all(np.abs(al / piccoli ** 2 - 1.0) <= piccoli ** 2 + 8 * EPS)) and bool(np.all(al > 0.0)),
+              "alpha/x^2 - 1 = %s: nessun pavimento, `alpha` scende come `x^2`" % " ".join("%.3e" % v for v in al / piccoli ** 2 - 1.0))
+        rho = np.array([0.0, 0.5, 3.0])
+        lam = np.array([4.0, 0.0, 0.0])
+        al, be = MV.pezzi(rho, lam)
+        nn = MV.N(rho, lam)
+        esito("(0-S1) il limite a `Lambda = 0`: `alpha = 1`, `beta = -pi/2`, `N = rho`, esatti",
+              bool(np.all(al[1:] == 1.0)) and bool(np.all(be[1:] == -0.5 * np.pi)) and bool(np.array_equal(nn[1:], rho[1:])),
+              "alpha %s, beta %s, N %s" % (al[1:], be[1:], nn[1:]))
+        esito("(0-S1) `alpha`, `beta`, `N` sono `0` dove `rho = 0`, ESATTAMENTE",
+              al[0] == 0.0 and be[0] == 0.0 and nn[0] == 0.0,
+              "alpha %.1e, beta %.1e, N %.1e: il valore che le espressioni PRENDONO a `x = 0`" % (al[0], be[0], nn[0]))
+        h = 1e-7
+        a4, b4 = MV.pezzi(np.array([1.0]), np.array([4.0]))
+        for nome, atteso, qua in (("alpha", float(a4[0]), "rho"), ("beta", float(b4[0]), "Lambda")):
+            if qua == "rho":
+                d = (MV.N(1.0 + h, 4.0) - MV.N(1.0 - h, 4.0)) / (2 * h)
+            else:
+                d = (MV.N(1.0, 4.0 + h) - MV.N(1.0, 4.0 - h)) / (2 * h)
+            esito("(0-S1) `%s` E' la derivata di `N` (differenze finite)" % nome,
+                  abs(float(d) - atteso) <= 1e-6,
+                  "numerica %.9f contro analitica %.9f" % (float(d), atteso))
+
+
 def braccio_flusso():
     """### Il flusso **cambia** lo stato, e il suo **inverso lo annulla.**"""
     print()
@@ -282,11 +328,19 @@ def braccio_singolarita():
     esito("(4) dove `rho = 0` lo stato resta IDENTICO (`psi = 0`, e la fase non conta)",
           d == 0.0, "scarto %.1e su %d estremita': la fase di un vettore nullo non vuol"
           " dire niente" % (d, int(np.sum(dentro))))
-    al, _be = MV.pezzi(rho, mot.densita_vuoto(st))
+    # ### ⛔ **QUESTO BRACCIO E' DI `S3`** *(`alpha < 0`)*, e gira con `S3` ESPLICITA *(Luca, `S1` nel nucleo, la chiusura)*.
+    with MV.forma_esplicita("S3"):
+        al, _be = MV.pezzi(rho, mot.densita_vuoto(st))
     esito("(4) e `alpha` NON e' tagliata dove `rho > 0`: la si usa com'e'",
           bool(np.all(np.isfinite(al))) and float(np.min(al[rho > 0.0])) < 0.0,
           "alpha minima sui nodi pieni %.4f, e nessun valore non finito"
           % float(np.min(al[rho > 0.0])))
+    # ### ⭐ **L'EQUIVALENTE PER `S1`:** `alpha = x^2/(1+x^2)` sta in `(0, 1)` dove `rho > 0` e `Lambda > 0`, ed e' finita.
+    with MV.forma_esplicita("S1"):
+        a1, _b1 = MV.pezzi(rho, mot.densita_vuoto(st))
+    esito("(4-S1) con `S1` `alpha` e' finita e in `(0, 1]` sui nodi pieni",
+          bool(np.all(np.isfinite(a1))) and float(np.min(a1[rho > 0.0])) > 0.0 and float(np.max(a1)) <= 1.0,
+          "alpha sui nodi pieni fra %.4f e %.4f" % (float(np.min(a1[rho > 0.0])), float(np.max(a1[rho > 0.0]))))
 
 
 def braccio_frazione():
@@ -391,7 +445,11 @@ def main(argv):
     print("IL FLUSSO DI `CAMM-MATERIA-VUOTO` -- ESATTO, e il suo inverso lo ANNULLA")
     print("### `N = rho ln(rho/(rho+Lambda))`, decisione di Luca del 2026-10-15.")
     print("=" * 100)
-    braccio_funzioni()
+    # ### ⛔ **`(0)` E' SCRITTO PER `S3`, e gira con `S3` ESPLICITA** *(Luca, `S1` nel nucleo, la chiusura)*; `(0-S1)` e' il suo equivalente per `S1`.
+    # ### **I bracci `(1)`-`(5)` sono proprieta' di un flusso di FASE, non di una forma: girano col PREDEFINITO.**
+    with MV.forma_esplicita("S3"):
+        braccio_funzioni()
+    braccio_funzioni_s1()
     braccio_flusso()
     braccio_norme()
     braccio_esatto()

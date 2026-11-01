@@ -135,13 +135,6 @@ RAMI = {
         "2026-10-19: prima era `max|Omega|`, e in campo debole chiedeva meno dello "
         "zero macchina). ### (4) il tetto `GIRI_MAX_OMEGA`: ALZA, perche- la "
         "regola dice di RELAZIONARE e non di scegliere un altro schema"),
-    ("primo_ordine/energia_pesata.py", "termini_di_h"): (
-        1, "smistamento",
-        "### UN RAMO, e non e- un pavimento: `rho_k = 0` vuol dire `psi = 0` "
-        "in quel nodo, e la- `N = rho ln(rho/(rho+Lambda))` PRENDE il valore "
-        "`0` (`x ln x -> 0`). ### E- LA STESSA SINGOLARITA- ELIMINABILE di "
-        "`materia_vuoto`, e il ramo esiste perche- `np.log(0)` darebbe `-inf` "
-        "-- non perche- il valore sia in dubbio"),
     ("primo_ordine/energia_pesata.py", "g_pesata"): (
         1, "smistamento",
         "### UN RAMO: a forma SPENTA i pesi sono `1`, e `G` e- `H_tot` -- "

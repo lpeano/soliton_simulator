@@ -22534,3 +22534,33 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Gli script storici di `csv/`:** una riga per ciascuno nell'inventario *(`66`; il censimento e' per parole e lo dichiaro)*. **`11` non nominano la forma**, quindi a `HEAD` girano con `S1` invece di `S3`. **`3` leggono `SL.EPS_MONETA`** *(`_gravita_collettiva`, `_massa_vicino_al_cono`, `_moneta_massa`)*, quindi a `HEAD` **si rompono**. Tutti si rigirano al loro commit.
 
 **La MAPPA:** «nel codice:» di (1) e (7). **`doc/DECISIONI_NEL_CODICE.md`:** la sezione `5`.
+
+
+## 2026-11-01 — S1 NEL NUCLEO, LA CHIUSURA (Luca): LA CORREZIONE -- LA N DA MATERIA_VUOTO IN DUE MODULI, I COLLAUDI COME DA DECISIONE
+
+**Il task history** e' `doc/TASK_HISTORY/2026-11-01_s1_nucleo_chiusura.md` *(`08f104e4`, da solo)*. **Lo strumento della ricerca per formule** e' `csv/_cerca_formule_legge.py` *(`7897a322`, committato prima di girarlo)*.
+
+**La premessa del mandato era vera ma non bastava.** La `N` di `S3` era scritta a mano in **tre** righe, non in una:
+- `energia_pesata.termini_di_h`: la `N` di `Omega` *(la fase `CAMM-FASE-VUOTO`, con `cs` acceso)* e di `g_dello_stato` *(il modo dinamico di `H_w`)*;
+- **`_misura_mb2.h_tot` e `_misura_mb2.pezzi_di_h`.** **I bracci `(a)` e `(b)` di `H_w` leggono questa**, non `energia_pesata`. Correggendo solo `energia_pesata`, `H_w` restava piatto.
+- Il commento di `_misura_mb2` diceva che era **una seconda fonte voluta** *(«se le due divergessero, il confronto lo direbbe»)*. **Con due forme una copia a mano non puo' seguire la tabella.** L'indipendenza sulla sola `N` sta ora in `_collauda_forme`.
+
+**La ricerca per formule, prima della correzione** *(`doc/referti_l2/s1_nucleo_chiusura/formule_prima.txt`, dallo script committato)*: `15` occorrenze nel codice in `9` file su `95`. Per categoria: **`legge a mano` `3`** *(le tre righe sopra)*, screening `4`, oracolo di collaudo `3`, un'altra legge `3`, non e' la legge `2`; il criterio fallisce, come deve.
+- **Un errore mio, trovato prima del commit dello strumento:** il pattern era solo `atan`, e **«arctan» non contiene «atan»** *(a-r-c-t-a-n)*. Corretto; il caso sintetico ora prova tutti e due.
+- **`saturazione.py`** e' giudicata «modulo di un'altra legge» *(`CAMM-SATURAZIONE`, fuori dall'ordine)*. **Per la lettera del criterio** e' una formula fuori da `materia_vuoto.py`; **per il merito** e' il modulo della sua legge. Lo dichiaro: se Luca la legge diversamente, va detto.
+
+**La correzione:** le tre righe chiamano `MV.N(rho, lam)`, per nome di modulo. **Con `S3` esplicita e' al bit:** `MV.N_s3` fa le stesse operazioni *(verificato su `100000` coppie casuali con zeri, prima del commit)*.
+
+**I collaudi, come da decisione:**
+- **`_collauda_materia_vuoto`:** il braccio `(0)` gira con `S3` esplicita; nuovi `(0-S1)` e `(4-S1)`. Le bande vengono dalla forma: `|1 - alpha| <= 1/x^2`, `|alpha/x^2 - 1| <= x^2`, `|beta + pi/2| <= 2/x`, piu' l'arrotondamento. Il limite a `Lambda = 0` e' esatto. **Diagnostica, prima del commit: `34/34`.**
+- **`_collauda_deriva`:** `(1-bis)` con `S3` esplicita; nuovo `(1-bis-S1)`.
+  - ### ⭐ **Una cosa di fisica che il braccio fa vedere:** con `S1`, `beta = x/(1+x^2) - arctan x` **e' la `b` della saturazione** *(scarto `9.4e-18` a `x = 0.0648`)*.
+  - **Nel regime `globale` il termine torna cubico, cioe' spento:** una misura della deriva fatta la' con `S1` sarebbe di nuovo un FALSO-ZERO.
+  - Diagnostica: `18/18`.
+- **`M-B1`:** il riferimento del controllo positivo si sceglie dalla forma attiva: **`S3` -> `8c7b9288`**, **`S1` -> `c7ad2238`**. Diagnostica col predefinito: `11/11`.
+- **`A2` di `L2`:** il protocollo statico prende la forma da `MV.ATTIVA` invece della stringa `"S3"`. ### ⚠ **E' la mia lettura, scritta nel task history prima del codice:** con due leggi diverse lo scarto non e' rumore. **Se Luca vuole `A2` legato a `S3` esplicita, si cambia.**
+- **`D6` della cassetta:** nessun `.py` della libreria cambiato da `3fe2f12d` *(escluso `collauda.py`, dichiarato)*.
+
+**I presidi:** `P-MOD` *(quattro import di `materia_vuoto` dichiarati in mappa)*; `P-R1` *(tolto il ramo di `termini_di_h`, che non c'e' piu')*. **Il blob di `csv/_rami_era2.py` nell'inventario era scaduto** *(`335cd798`)*, e non l'avevo aggiornato in `c7ad2238`: corretto.
+
+**Le corse vere** *(la suite con `S3` esplicita, poi col predefinito, poi la cassetta)* vengono dopo questo commit, una alla volta.

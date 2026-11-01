@@ -61,6 +61,7 @@ resta ### **una seconda fonte DICHIARATA** che si confronta ### **a ogni corsa.*
 import numpy as np
 
 import flussi_parziali as FP
+import materia_vuoto as MV
 
 # ### ⛔ **`OMEGA_H` E' `pi` E NON E' UNA SCELTA:** `flussi_parziali.espi` applica
 # ### ### **`e^{i pi s}`**, quindi il generatore dei pezzi di nodo e d'arco porta
@@ -182,12 +183,11 @@ def termini_di_h(mot, st, par):
         "`Omega` vuole `eps` dal `par` del tick: senza, il termine della moneta"
         " sparirebbe da `H` IN SILENZIO -- e `Omega` sarebbe quello di un'altra energia")
     per_nodo = per_nodo + float(eps) * h
-    # ### l'ACCOPPIAMENTO `N`, per nodo: ### **la forma che gira**, non una sua copia
+    # ### l'ACCOPPIAMENTO `N`, per nodo: ### **la forma che gira**, non una sua copia.
+    # ### ⛔ **Da `materia_vuoto`, PER NOME DI MODULO** *(Luca, `S1` nel nucleo, la chiusura)*: qui c'era la `N` di `S3` scritta a mano, e col
+    # ### predefinito `S1` `Omega` era quello di UN'ALTRA legge. ### **Con `S3` esplicita `MV.N_s3` fa le stesse operazioni: al bit.**
     rho, lam = nrm_psi, nrm_phi
-    N = np.zeros(inc.n, dtype=float)
-    vivi = rho > 0.0
-    if np.any(vivi):
-        N[vivi] = rho[vivi] * np.log(rho[vivi] / (rho[vivi] + lam[vivi]))
+    N = MV.N(rho, lam)
     per_nodo = per_nodo + N
     # ------------------------------------------------- i termini di ARCO
     v = psi.reshape(m, 2, 2)

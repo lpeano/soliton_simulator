@@ -32,15 +32,27 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
                   ("A a K", "csv/_coppia_di_B.py", "doc/referti_l2/coppia_di_B.txt"))
 
 
+# ### ⛔ **D6 RISCRITTO** *(Luca, `S1` nel nucleo, la chiusura)*: il nucleo e' cambiato *(`c7ad2238`, e la chiusura)*, quindi «nessun `.py` fuori
+# ### dalla libreria cambiato» non puo' piu' valere, e i referti vecchi si rigirano AL LORO COMMIT. ### **Il controllo diventa: nessun `.py` della
+# ### libreria cambiato** da `LIBRERIA_RIFERITA`, l'ultimo commit in cui i `32` test e `D5` hanno dato i numeri al bit col predefinito `S1`.
+# ### ⚠ **`collauda.py` si esclude, dichiarato:** e' il collaudo, non la libreria *(e la chiusura lo cambia)*.
+LIBRERIA_RIFERITA = "3fe2f12d"
+
+
 def vecchi():
-    """### **D6** *(01:28, punto 6)*: **gli script vecchi ridanno i loro referti perche' il loro codice e' AL BIT quello di prima:** nessun `.py` fuori da `csv/solitone/`
-    e' cambiato da `PRIMA_ALLINEAMENTO`, e nessuno script fuori da `csv/solitone/` importa la libreria. ### **Rigirarli da byte identici sarebbe un FALSO-UNO.**"""
+    """### **D6** *(riscritto)*: **nessun `.py` della libreria cambiato** da `LIBRERIA_RIFERITA` *(escluso questo collaudo)*, niente di non committato
+    nella libreria, e nessuno script fuori da `csv/solitone/` importa la libreria. ### **I tre referti vecchi si rigirano al loro commit:** il nucleo e'
+    cambiato da `PRIMA_ALLINEAMENTO`, e a `HEAD` non sono piu' garantiti."""
     import subprocess
-    print("### D6: I TRE REFERTI VECCHI DOPO L'ALLINEAMENTO (%s)" % "; ".join("%s: %s -> %s" % r for r in REFERTI_VECCHI))
+    print("### D6: LA LIBRERIA E' QUELLA DI %s (escluso collauda.py); i tre referti vecchi (%s) si rigirano al loro commit"
+          % (LIBRERIA_RIFERITA, "; ".join("%s: %s -> %s" % r for r in REFERTI_VECCHI)))
     rad = solitone.RADICE
-    cambiati = subprocess.check_output(["git", "diff", "--name-only", PRIMA_ALLINEAMENTO, "HEAD", "--", "*.py"], cwd=rad).decode().split()
-    sporchi = subprocess.check_output(["git", "status", "--porcelain", "--", "*.py"], cwd=rad).decode().splitlines()
-    fuori = [f for f in cambiati if not f.startswith("csv/solitone/")]
+    lib = "csv/solitone/"
+    escluso = lib + "collauda.py"
+    cambiati = subprocess.check_output(["git", "diff", "--name-only", LIBRERIA_RIFERITA, "HEAD", "--", lib + "*.py"], cwd=rad).decode().split()
+    sporchi = subprocess.check_output(["git", "status", "--porcelain", "--", lib + "*.py"], cwd=rad).decode().splitlines()
+    cambiati = [f for f in cambiati if f != escluso]
+    sporchi = [x for x in sporchi if x.strip() and not x.strip().endswith(escluso)]
     importano = []
     for cart in ("csv", "primo_ordine"):
         for d, _s, ff in os.walk(os.path.join(rad, cart)):
@@ -52,11 +64,13 @@ def vecchi():
                         tt = fh.read()
                     if "import solitone" in tt or "from solitone" in tt:
                         importano.append(os.path.join(d, f))
-    esito("DEVE PASSARE: D6 nessun .py fuori da csv/solitone/ cambiato da %s a HEAD, e niente di non committato" % PRIMA_ALLINEAMENTO, not fuori and not [x for x in sporchi if x.strip()],
-          "cambiati %s" % (cambiati or "nessuno"))
+    esito("DEVE PASSARE: D6 nessun .py della libreria cambiato da %s a HEAD (escluso collauda.py), e niente di non committato" % LIBRERIA_RIFERITA,
+          not cambiati and not sporchi, "cambiati %s, non committati %s" % (cambiati or "nessuno", sporchi or "nessuno"))
     esito("DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria", not importano, "%s" % importano)
+    fuori = subprocess.check_output(["git", "diff", "--name-only", PRIMA_ALLINEAMENTO, "HEAD", "--", "*.py"], cwd=rad).decode().split()
+    print("    i .py fuori dalla libreria cambiati da %s: %d (il nucleo); i tre script vecchi:" % (PRIMA_ALLINEAMENTO, len([f for f in fuori if not f.startswith(lib)])))
     for _chi, scr, ref in REFERTI_VECCHI:
-        print("    %s: il blob a %s e a HEAD %s" % (scr, PRIMA_ALLINEAMENTO, "uguali" if scr not in cambiati else "### DIVERSI"))
+        print("    %s: il blob a %s e a HEAD %s" % (scr, PRIMA_ALLINEAMENTO, "uguali" if scr not in fuori else "### DIVERSI"))
 
 
 def main():

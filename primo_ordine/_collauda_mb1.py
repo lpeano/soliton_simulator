@@ -33,6 +33,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(_QUI), "csv"))
 
 import _misura_mb1 as MB1                                      # noqa: E402
 import composizione as CM                                      # noqa: E402
+import materia_vuoto as MV                                     # noqa: E402
 
 # ### ✅ **I NOMI DELLA MISURA SI PRENDONO DA LEI**, non si ricopiano: un secondo
 # ### elenco ### **sarebbe il prossimo a restare indietro.**
@@ -41,6 +42,10 @@ SCENE = MB1.SCENE
 TICK = MB1.TICK
 VIAGGIANO = MB1.VIAGGIANO
 PEZZI_NUOVI = MB1.PEZZI_NUOVI
+# ### ⛔ **IL RIFERIMENTO AL BIT DEL CONTROLLO POSITIVO, PER FORMA** *(Luca, `S1` nel nucleo, la chiusura)*: `S3` resta `8c7b9288`; `S1` e'
+# ### `c7ad2238`, il commit in cui `S1` e' entrata nel nucleo *(la' e' il predefinito)*. ### **Gli altri bracci restano su `8c7b9288`:**
+# ### provano il meccanismo *(le perturbazioni)*, non la forma.
+RIFERIMENTO_PER_FORMA = {"S3": "8c7b9288", "S1": "c7ad2238"}
 
 
 def collaudo():
@@ -138,6 +143,9 @@ def collaudo():
         # ### c-era:** `MB1.PEZZI` era una lista a mano che conteneva la ### **saturazione**
         # ### *(fuori dall-ordine)* e ### **non la legge che gira.**
         import tempfile as _tf
+        _rif = RIFERIMENTO_PER_FORMA[MV.ATTIVA]
+        if _rif != "8c7b9288":
+            _n6, _i6, b_puro, ids_puro = MB1._byte_dell_albero(_rif, os.path.join(base, "rif_forma"), None)
         _oggi_bin = os.path.join(base, "oggi.bin")
         MB1.scrivi(_oggi_bin)
         _n5, _i5, ids5, b_oggi = MB1._leggi(_oggi_bin)
@@ -153,7 +161,7 @@ def collaudo():
         ugua = _ka >= 0 and _kb >= 0 and all(
             b_oggi[j * _sa + _ka] == b_puro[j * _sb + _kb]
             for j in range(len(SCENE)))
-        MB1._esito("### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro 8c7b928",
+        MB1._esito("### ⭐ la legge CHE GIRA e- fra i pezzi, e coincide AL BIT contro %s" % _rif[:7],
                ugua, "### `CAMM-MATERIA-VUOTO` e- il pezzo n.%d di %d (n.%d di %d nell-albero"
                " vecchio), e i suoi byte coincidono su %d scene su %d"
                % (_ka + 1, len(ids5), _kb + 1, len(ids_puro), len(SCENE),
@@ -180,7 +188,7 @@ def collaudo():
         # ### ### **la registrazione in `.git/worktrees`** -- e `git worktree list` la
         # ### mostrerebbe per sempre. ### **Misurato il `2026-10-17`: ce n'erano `4` di
         # ### corse vecchie.**
-        for q in ("pert", "puro", "infetto", "ordine"):
+        for q in ("pert", "puro", "infetto", "ordine", "rif_forma"):
             MB1._sgombera(RADICE, os.path.join(base, q))
         shutil.rmtree(base, ignore_errors=True)
     print("=" * 100)

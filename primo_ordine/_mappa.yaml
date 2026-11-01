@@ -112,7 +112,7 @@ moduli:
 
   - nome: _misura_completa_l2.py
     responsabilita: le tre misure del punto A -- cono, divergenza e simmetria su stati
-    importa: [_presidio, corrente, _misura_theta_n, _misura_theta_nonlineare, statica_protocollo]
+    importa: [_presidio, corrente, materia_vuoto, _misura_theta_n, _misura_theta_nonlineare, statica_protocollo]
 
   - nome: _misura_statica_motore.py
     responsabilita: la risposta statica con la legge NEL MOTORE, e il confronto con S3 di ebf5317
@@ -148,7 +148,7 @@ moduli:
 
   - nome: _misura_mb2.py
     responsabilita: l-errore di conservazione di H_tot contro dtau, a tempo totale fisso
-    importa: [_presidio, deriva, tick]
+    importa: [_presidio, deriva, materia_vuoto, tick]
 
   - nome: _misura_c_flussi.py
     responsabilita: dove la C si rompe coi flussi parziali, e che cosa la riparerebbe
@@ -180,7 +180,7 @@ moduli:
 
   - nome: _collauda_mb1.py
     responsabilita: la prova che il criterio di M-B1 PUO- fallire, coi casi finti
-    importa: [_censimento_strumenti, _misura_mb1, _presidio, composizione]
+    importa: [_censimento_strumenti, _misura_mb1, _presidio, composizione, materia_vuoto]
 
   - nome: _misura_mb1.py
     responsabilita: il raccordo al bit pezzo per pezzo contro il commit di riferimento
@@ -196,7 +196,7 @@ moduli:
 
   - nome: energia_pesata.py
     responsabilita: il generatore pesato G, Omega, e la fase sul vuoto che ne viene
-    importa: [flussi_parziali]
+    importa: [flussi_parziali, materia_vuoto]
 
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick

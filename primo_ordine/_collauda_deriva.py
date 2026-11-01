@@ -145,12 +145,25 @@ def main(argv):
     # ### FALSO-ZERO>>: con `S3` quel pericolo NON C-E- PIU-, e il braccio lo PROVA.**
     _i2, mot2, st2, _p2 = DV.scena(16, 7, 0.2, norma="globale")
     x2 = DVAR.satura(st2, mot2)
-    b_s3 = abs(float(MV.beta(x2, 1.0)))
+    # ### ⛔ **`(1-bis)` E' SCRITTO PER `S3`, e gira con `S3` ESPLICITA** *(Luca, `S1` nel nucleo, la chiusura)*.
+    with MV.forma_esplicita("S3"):
+        b_s3 = abs(float(MV.beta(x2, 1.0)))
     b_sat = abs(float(SAT.b(x2)))
     esito("### (1-bis) nel regime `globale` il termine NON e- spento, con `S3`",
           b_s3 > 1e-2 and b_s3 / b_sat > 100.0,
           "a x_max = %.5f: |beta| di `S3` = %.6e contro %.6e della saturazione,"
           " cioe- %.0f volte" % (x2, b_s3, b_sat, b_s3 / b_sat))
+    # ### ⭐⭐ **L'EQUIVALENTE PER `S1`, e capovolge di nuovo:** con `S1` `beta = x - arctan x - x^3/(1+x^2) = x/(1+x^2) - arctan x`,
+    # ### ### **che e' la `b` della saturazione** *(la stessa funzione)*. ### **Quindi nel regime `globale` il termine torna CUBICO**, e una
+    # ### misura fatta la' con `S1` sarebbe di nuovo un FALSO-ZERO. ### La banda: l'arrotondamento di una differenza fra termini di ordine `x`,
+    # ### `8 eps x` *(le due espressioni fanno operazioni diverse)*.
+    with MV.forma_esplicita("S1"):
+        b_s1 = float(MV.beta(x2, 1.0))
+    b_sat_s = float(SAT.b(x2))
+    esito("### (1-bis-S1) con `S1` il termine E' quello della saturazione: cubico",
+          abs(b_s1 - b_sat_s) <= 8.0 * EPS * x2,
+          "a x_max = %.5f: beta di `S1` = %.6e contro %.6e della saturazione (scarto %.1e):"
+          " nel regime `globale` il termine torna spento" % (x2, b_s1, b_sat_s, abs(b_s1 - b_sat_s)))
     # ### ⭐⭐ **IL CONTROLLO POSITIVO: IL TICK DELLO STRUMENTO COINCIDE AL BIT CON
     # ### `TK.tick`.** ### ⚠ **E non e- un falso-uno:** la fotografia di mezzo tick
     # ### costruisce `Q` e `J` ### **passando dai buffer di `mot`**, e se uno di quei
