@@ -99,12 +99,16 @@ def densita(inc, st):
     return rho, lam
 
 
-def per_nodo(inc, mot, st, campo_zero):
-    """### `H_cam` per nodo col campo `campo_zero` messo a zero: ### **i termini di nodo, piu' meta' di ogni termine d'arco a ciascuno dei suoi due nodi.**"""
+def per_nodo(inc, mot, st, campo_zero, par=PAR):
+    """### `H_cam` per nodo col campo `campo_zero` messo a zero: ### **i termini di nodo, piu' meta' di ogni termine d'arco a ciascuno dei suoi due nodi.**
+
+    ### ⚠ **`par` e' il `par` del TICK** *(il mandato di Luca delle `11:22` del `2026-11-01`)*: `termini_di_h` mette `eps * elicita` nella moneta, e col `PAR`
+    di questo modulo *(eps `0`)* quel termine MANCA. ### **Il valore se non passato e' `PAR`: ogni chiamata di prima resta uguale al bit.**
+    """
     import energia_pesata as EP
     s = dict(st)
     s[campo_zero] = np.zeros_like(st[campo_zero])
-    pn, pa = EP.termini_di_h(mot, s, PAR)
+    pn, pa = EP.termini_di_h(mot, s, par)
     out = np.array(pn, dtype=float).copy()
     out += 0.5 * np.bincount(inc.nodo[0::2], weights=pa, minlength=inc.n)
     out += 0.5 * np.bincount(inc.nodo[1::2], weights=pa, minlength=inc.n)

@@ -52,14 +52,19 @@ FALLITE = []
 
 
 # ---------------------------------------------------------------------------------------------------------------- la libreria
-def conti_per_nodo(inc, mot, st, e_K, lam_z):
-    """### **I conti per nodo** *(gli array prima della somma)*: ### **come `_energia_del_legame.energie`, nodo per nodo** *(il legame `S1`; `+ 2 pi lambda` per unita' di norma)*."""
+def conti_per_nodo(inc, mot, st, e_K, lam_z, par=None):
+    """### **I conti per nodo** *(gli array prima della somma)*: ### **come `_energia_del_legame.energie`, nodo per nodo** *(il legame `S1`; `+ 2 pi lambda` per unita' di norma)*.
+
+    ### ⚠ **`par`: il `par` del TICK** *(Luca `11:22`, `2026-11-01`)*. ### **Senza, vale `_energia_del_legame.PAR` (eps `0`)**, e a eps diverso da `0` il termine
+    della moneta *(`eps * elicita`)* MANCA da `cin` e da `tot`: ### **chi gira con eps acceso lo passa.**
+    """
     import _energia_del_legame as EL
     import _scomposizione_solitone as SC
     rho, lam = EL.densita(inc, st)
     assert np.all(lam > 0.0), "Lambda nullo in un nodo: il legame S1 non e' definito"
-    em = EL.per_nodo(inc, mot, st, "phi_h") + 2 * math.pi * lam_z * rho
-    ev = EL.per_nodo(inc, mot, st, "psi_h") + 2 * math.pi * lam_z * lam
+    par = EL.PAR if par is None else par
+    em = EL.per_nodo(inc, mot, st, "phi_h", par) + 2 * math.pi * lam_z * rho
+    ev = EL.per_nodo(inc, mot, st, "psi_h", par) + 2 * math.pi * lam_z * lam
     el = lam * SC.F1(rho / lam)
     ec = rho * (e_K + 2 * math.pi * lam_z)
     return {"cost": ec, "cin": em - ec, "leg": el, "vuo": ev, "tot": em + ev + el, "M": rho, "V": lam}
