@@ -1,0 +1,11 @@
+[TIMBRO] _vuoto_vivo_B.py  sha1-BYTE 1dd07e67  committato e pulito
+==================================================================================================================================
+IL VUOTO VIVO SU B A Gamma (Luca 22:35): IL CONTROLLO -- le scene al bit, il vuoto F0, la vita di 15df5c63 col tick intero di questo script
+  la configurazione: N 1e+06 L 81 EPS 0.5 TAU_FINE 3000 PEZZO 10000 OGNI 10 OGNI_D 20 META 0.5 R_VICINO 2 LAM_ZERO 0.5 RAPPORTO (3.0, 5.0) TOLL_NORMA 1e-10 S_RIF 0.3 VITA_RIF 320 OGNI_VITA_TAU 6; CORSE {'BG-U-0.15': ('BG', 'uniforme', 0.15), 'BG-F-0.15': ('BG', 'fondo', 0.15), 'AK-U-0.15': ('AK', 'uniforme', 0.15), 'AK-F-0.15': ('AK', 'fondo', 0.15), 'BG-U-0.075': ('BG', 'uniforme', 0.075), 'BG-F-0.075': ('BG', 'fondo', 0.075)}; FORMA S1; cs spento (EL.stato: mot.cs costante = s, lambda_c None; tick.percorri_tick)
+==================================================================================================================================
+  DEVE PASSARE: la scena (U, s 0.15, eps 0.5) di questo script = _massimo_di_B.scena, AL BIT, ogni chiave        PASSA   Lambda h_int phi_h psi psi_h rho
+  DEVE PASSARE: il vuoto (F) della scena = _vuoto_sul_fondo.fondo_uniforme (F0), AL BIT                          PASSA   
+### IL CONTROLLO POSITIVO DEL TICK INTERO: lo stato di 15df5c63 (eps 0, il vuoto uniforme, s 0.3); la vita col criterio di _solitoni_triangoli, ogni 20 tick
+  DEVE PASSARE: la vita (ogni 20 tick) = 320 di 15df5c63                                                         PASSA   vita 320 (22 s)
+==================================================================================================================================
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []

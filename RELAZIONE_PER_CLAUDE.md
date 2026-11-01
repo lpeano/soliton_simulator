@@ -22286,3 +22286,15 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 **Scritta nella lista d'attesa della `MAPPA` come voce `31`**, dopo la `30`, col testo di Luca: l'ipotesi *(`c` dipende dal luogo e dalla materia, nel modello `cs`)*; il vincolo *(la luce arriva intatta da lontano solo se il vuoto agisce su tutte le frequenze allo stesso modo: Lorentz locale, equivalenza)*; **la domanda per il modello** *(la velocita' della luce al variare di `cs` e' la stessa per tutte le lunghezze d'onda molto piu' grandi del passo? quanto si disperde vicino alla scala del reticolo, da confrontare coi lampi gamma?)*. I collegamenti li ho controllati nella `MAPPA` prima di scriverli: la sezione `2` riga `4` *(`v_b = pi/4`)*, la bussola `(B)3`, la decisione `3` *(`cs` per estremita' o per nodo)*, la voce `12` *(la gobba)*.
 
 **L'ordine della coda, registrato** *([[PRECEDENZA-IN-CODA]])*: questa voce *(arrivata alle `00:28`, sesta)* e' scritta **prima** del mandato delle `22:35` *(il vuoto vivo, quinto)*. E' solo scrittura, e durante le corse lunghe del quinto il driver committa a ogni pezzo: non si potrebbe committare insieme a lui. **Il quinto viene subito dopo.**
+
+## 2026-11-01 — IL VUOTO VIVO SU B A Gamma (Luca 22:35): IL CONTROLLO, 3/3 -- LE SCENE AL BIT, F0, LA VITA 320 DI 15df5c63 COL TICK INTERO DELLO SCRIPT
+
+
+**Il task history** *(`6e758b09`, da solo)* **e lo script** *(`csv/_vuoto_vivo_B.py`, sha1-BYTE `1dd07e67`, `e5753117`)* sono committati prima di girare. **Il controllo** *(`doc/referti_l2/vuoto_vivo_B_controllo.txt`, `--controllo`)* da' `3/3`:
+- la scena `(U, s 0.15, eps 0.5)` costruita dallo script **= `_massimo_di_B.scena` AL BIT**, ogni chiave *(`Lambda h_int phi_h psi psi_h rho`)*;
+- il vuoto (F) della scena **= `_vuoto_sul_fondo.fondo_uniforme` (F0) AL BIT**;
+- **il controllo positivo del tick intero:** lo stato di `15df5c63` *(eps `0`, vuoto uniforme, `s 0.3`)* col `percorri_tick` dello script **si scioglie a `320` tick**, come allora *(`22` s)*.
+
+**`cs` spento, dal codice:** `_energia_del_legame.stato` mette `mot.cs` costante `= s` e `mot.lambda_c = None`, e il passo e' `tick.percorri_tick` *(lo script lo asserisce sulla scena)*.
+
+**Ora girano le `6` corse**, una alla volta, a pezzi di `10000` tick, ogni pezzo committato da un driver *(BG-U, BG-F, AK-U, AK-F a `s 0.15`; poi BG-U, BG-F a `s 0.075`)*. Il driver si ferma senza committare se un pezzo fallisce, e la ripresa al bit e' un `assert` *(lo sha1 di ogni chiave di `z["st"]`)*.
