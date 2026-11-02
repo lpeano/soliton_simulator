@@ -7,6 +7,7 @@ r"""**LA CASSETTA DEGLI ATTREZZI DEL SOLITONE** *(il mandato di Luca delle `01:2
     misure    il cuore (netto e liscio), w, l'alone, il baricentro; le bande di D, le rotazioni, il periodo col passo;
               la forma della crescita, la vita, il limite del tasso
     vuoto     le bande del vuoto attorno a F0 (il tick intero con psi = 0), dove cade una frequenza, il margine
+    respiro   la serie densa del cuore (il tick intero, a ogni tick), Omega dai picchi, le frequenze sul cerchio (il margine, la somma di due bande)
 
     python csv/solitone/collauda.py > doc/referti_l2/cassetta_solitone.txt
 

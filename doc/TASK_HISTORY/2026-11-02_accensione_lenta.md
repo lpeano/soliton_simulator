@@ -172,6 +172,12 @@
 7. **Il referto** `doc/referti_l2/solitone_vestito_carta_respiro.txt`, la relazione, la MAPPA *(la riga accanto alla decisione `9`; l'errore `n.90`)*.
 8. **Poi l'accensione**, i passi `2`-`5` della sez. `2`, con `A2` secondo la (i) e la vita secondo la decisione `2`.
 
+### Due annotazioni col codice *(scritte quando ho scritto `respiro.py`, prima di ogni numero della scena)*
+
+- **`PERIODI_MIN = 10`:** un picco conta solo se nella finestra ci stanno almeno `10` suoi periodi. Sotto, e' la deriva lenta, che nei campioni committati domina lo spettro *(centinaia di unita' di tempo)*. **E' un limite della finestra, non un parametro del modello.**
+- **`R1-F` corretto prima della prova a secco:** il seno di prova di periodo `4.07` campionato ogni `1.5` sta **sopra** Nyquist e si legge giusto, quindi il test non distingueva. **Il seno del test e' quello sotto Nyquist che da' gli stessi campioni radi** *(periodo `2.3755`)*: campionato ogni `10` tick si legge `4.07`.
+- **DICHIARO una prova a secco** del runner con `400` tick per finestra, nello scratchpad, prima del commit del codice, per vedere che girasse; le uscite non entrano nel repo.
+
 ### Che cosa mi farebbe FERMARE
 
 - **il controllo di (W1) o di (W2) fallisce:** la serie densa non e' la corsa;
