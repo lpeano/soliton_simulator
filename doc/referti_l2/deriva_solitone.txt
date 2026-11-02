@@ -1,0 +1,253 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 2ee11bdb  committato e pulito
+[TIMBRO] carta_deriva.py  sha1-BYTE 1bf9ce37  committato e pulito
+==================================================================================================================================
+LA CARTA DELLA DERIVA (Luca 15:54): (i) ln dello spostamento a tratti; (ii) la velocita' contro w per blocco di 1000; (iii) l'ampiezza del cuore a finestre di 500
+  le definizioni (dichiarate nel task history, sez. 11-ter, prima dei numeri): s = |X - X_rif|, X_rif la media del primo blocco dopo T_acc; la pendenza di ln s per blocco;
+  due rette lunghe, T_acc + 1000 .. 9000 e 9000 .. la fine valida; la velocita': le rette di x e y nella finestra; l'ampiezza: sqrt(2) x la deviazione standard del cuore
+  liscio meno la sua retta nella finestra (l'ampiezza di un seno con quella varianza). Un esponenziale da' pendenze di ln s uguali a ogni tratto; un moto uniforme le da' calanti
+  ### il tremolio (la coppia veloce ~0.99) e' aliasato dai campioni ogni 1.5: ln s campione per campione e' rumore, le rette per blocco lo mediano
+==================================================================================================================================
+### TP1000: il centro PERIODICO, srotolato; T_acc 1000; i dati fino a 15999; tutti i blocchi con 3 w < 40.50
+  (i) TP1000: lo spostamento s = |X - X_rif|, X_rif la media sul blocco 1000 .. 2000 = (-0.9735, -0.4578); per blocco: s medio, ln s medio, la pendenza di ln s (per 1000)
+       1000 ..    2000  s 1.5413e-01  ln s -2.0556  la pendenza di ln s -1.0948e+00
+       2000 ..    3000  s 3.6767e-01  ln s -1.1066  la pendenza di ln s +1.6393e+00
+       3000 ..    4000  s 6.9848e-01  ln s -0.3684  la pendenza di ln s +3.9373e-01
+       4000 ..    5000  s 4.3172e-01  ln s -0.8599  la pendenza di ln s -1.2268e-01
+       5000 ..    6000  s 8.1679e-01  ln s -0.3115  la pendenza di ln s +1.5521e+00
+       6000 ..    7000  s 2.5759e-01  ln s -1.6993  la pendenza di ln s -1.8662e+00
+       7000 ..    8000  s 9.9214e-01  ln s -0.1228  la pendenza di ln s +1.7175e+00
+       8000 ..    9000  s 2.1833e+00  ln s +0.7782  la pendenza di ln s +2.3220e-01
+       9000 ..   10000  s 2.4822e+00  ln s +0.9046  la pendenza di ln s +3.0536e-01
+      10000 ..   11000  s 4.1567e+00  ln s +1.4082  la pendenza di ln s +6.3075e-01
+      11000 ..   12000  s 7.8492e+00  ln s +2.0349  la pendenza di ln s +7.7256e-01
+      12000 ..   13000  s 1.8513e+01  ln s +2.8882  la pendenza di ln s +8.5648e-01
+      13000 ..   14000  s 3.6121e+01  ln s +3.5772  la pendenza di ln s +4.8165e-01
+      14000 ..   15000  s 5.0621e+01  ln s +3.9219  la pendenza di ln s +2.4484e-01
+      15000 ..   16000  s 6.2079e+01  ln s +4.1271  la pendenza di ln s +1.7745e-01
+    LA RETTA LUNGA 2000 .. 9000: la pendenza di ln s +1.9584e-01 per 1000 (4666 campioni)
+    LA RETTA LUNGA 9000 .. 16000: la pendenza di ln s +5.7817e-01 per 1000 (4667 campioni)
+### VIVO: il centro EUCLIDEO; T_acc 0; i dati fino a 9999; senza il criterio di validita' (il centro euclideo)
+  (i) VIVO: lo spostamento s = |X - X_rif|, X_rif la media sul blocco 0 .. 1000 = (0.0334, 0.1609); per blocco: s medio, ln s medio, la pendenza di ln s (per 1000)
+          0 ..    1000  s 1.4711e-01  ln s -2.0056  la pendenza di ln s +1.6627e-01
+       1000 ..    2000  s 8.0678e-01  ln s -0.3291  la pendenza di ln s +1.7055e+00
+       2000 ..    3000  s 1.7920e+00  ln s +0.5765  la pendenza di ln s -1.2042e-01
+       3000 ..    4000  s 1.1025e+00  ln s +0.0750  la pendenza di ln s +3.6772e-01
+       4000 ..    5000  s 2.3754e+00  ln s +0.8556  la pendenza di ln s +4.7243e-01
+       5000 ..    6000  s 2.3220e+00  ln s +0.8326  la pendenza di ln s -4.7188e-01
+       6000 ..    7000  s 1.6652e+00  ln s +0.5048  la pendenza di ln s +2.8853e-01
+       7000 ..    8000  s 2.5729e+00  ln s +0.9422  la pendenza di ln s +6.9682e-02
+       8000 ..    9000  s 1.3916e+00  ln s +0.2832  la pendenza di ln s -1.0166e+00
+       9000 ..   10000  s 1.4821e+00  ln s +0.3640  la pendenza di ln s +8.3666e-01
+    LA RETTA LUNGA 1000 .. 9000: la pendenza di ln s +8.9136e-02 per 1000 (5333 campioni)
+    LA RETTA LUNGA 9000 .. 10000: la pendenza di ln s +8.3666e-01 per 1000 (667 campioni)
+### TA2000: il centro EUCLIDEO; T_acc 2000; i dati fino a 6999; senza il criterio di validita' (il centro euclideo)
+  (i) TA2000: lo spostamento s = |X - X_rif|, X_rif la media sul blocco 2000 .. 3000 = (0.0230, -0.5712); per blocco: s medio, ln s medio, la pendenza di ln s (per 1000)
+       2000 ..    3000  s 1.4951e-01  ln s -2.2778  la pendenza di ln s +2.2932e+00
+       3000 ..    4000  s 1.0447e+00  ln s +0.0306  la pendenza di ln s +2.2981e-01
+       4000 ..    5000  s 1.0219e+00  ln s +0.0176  la pendenza di ln s +1.7699e-01
+       5000 ..    6000  s 1.6681e+00  ln s +0.5080  la pendenza di ln s +2.7612e-01
+       6000 ..    7000  s 2.1633e+00  ln s +0.7704  la pendenza di ln s +1.5020e-01
+    LA RETTA LUNGA 3000 .. 7000: la pendenza di ln s +2.6704e-01 per 1000 (2667 campioni)
+    LA RETTA LUNGA 9000 .. : non c'e' (i dati validi finiscono a 7000)
+----------------------------------------------------------------------------------------------------------------------------------
+### (ii) LA VELOCITA' CONTRO w, per blocco di 1000 (|v| per 1000 unita' di tempo; l'angolo dall'asse x; w medio)
+  TP1000:
+          0 ..    1000  w   7.7200  |v| 5.8994e-01  angolo -135.0
+       1000 ..    2000  w   8.3327  |v| 4.7717e-01  angolo -157.1
+       2000 ..    3000  w   7.8918  |v| 5.4115e-01  angolo -105.1
+       3000 ..    4000  w   7.7981  |v| 3.5958e-01  angolo  -85.2
+       4000 ..    5000  w   7.9869  |v| 6.5088e-01  angolo  +29.9
+       5000 ..    6000  w   8.3496  |v| 1.2418e+00  angolo -150.1
+       6000 ..    7000  w   8.7202  |v| 5.8571e-01  angolo  +55.7
+       7000 ..    8000  w   9.1403  |v| 1.5537e+00  angolo -125.7
+       8000 ..    9000  w   9.5067  |v| 9.1370e-01  angolo +156.2
+       9000 ..   10000  w   9.7887  |v| 7.7984e-01  angolo -151.9
+      10000 ..   11000  w  10.1531  |v| 2.7883e+00  angolo +174.0
+      11000 ..   12000  w  10.2713  |v| 6.1605e+00  angolo -179.5
+      12000 ..   13000  w  10.2891  |v| 1.5625e+01  angolo -169.9
+      13000 ..   14000  w  10.6005  |v| 1.7109e+01  angolo -169.1
+      14000 ..   15000  w  10.9526  |v| 1.2365e+01  angolo -176.3
+      15000 ..   16000  w  11.2197  |v| 1.1071e+01  angolo -179.7
+  VIVO:
+          0 ..    1000  w   8.0673  |v| 5.2797e-01  angolo -132.7
+       1000 ..    2000  w   8.4976  |v| 1.2485e+00  angolo -108.0
+       2000 ..    3000  w   8.0679  |v| 3.9672e-01  angolo +122.0
+       3000 ..    4000  w   7.9162  |v| 6.0337e-01  angolo  -72.1
+       4000 ..    5000  w   8.0288  |v| 1.3561e+00  angolo -157.9
+       5000 ..    6000  w   8.2861  |v| 1.0637e+00  angolo  +69.7
+       6000 ..    7000  w   8.6368  |v| 1.8827e+00  angolo  -25.6
+       7000 ..    8000  w   9.0856  |v| 3.8267e-01  angolo   -5.1
+       8000 ..    9000  w   9.4592  |v| 1.4644e+00  angolo +124.4
+       9000 ..   10000  w   9.8575  |v| 2.1595e+00  angolo  +13.8
+  TA2000:
+          0 ..    1000  w   7.4829  |v| 5.5035e-01  angolo -115.8
+       1000 ..    2000  w   8.2691  |v| 5.5892e-01  angolo  -79.6
+       2000 ..    3000  w   7.8868  |v| 3.5384e-01  angolo  -30.4
+       3000 ..    4000  w   7.9771  |v| 1.9751e-01  angolo  -43.9
+       4000 ..    5000  w   8.1699  |v| 2.1071e-01  angolo  -56.0
+       5000 ..    6000  w   8.4783  |v| 9.5006e-01  angolo  +28.1
+       6000 ..    7000  w   8.9599  |v| 1.0913e+00  angolo  +66.2
+----------------------------------------------------------------------------------------------------------------------------------
+### (iii) L'AMPIEZZA DEL CUORE A FINESTRE DI 500, ACCANTO ALLA VELOCITA' (dalla fine della rampa)
+  TP1000:
+       1000 ..    1500  l'ampiezza del cuore 1.5576e-02  |v| 1.4083e+00  angolo -168.9  w   8.3767
+       1500 ..    2000  l'ampiezza del cuore 2.3950e-02  |v| 1.5120e-01  angolo  +15.8  w   8.2888
+       2000 ..    2500  l'ampiezza del cuore 2.5449e-02  |v| 6.9821e-01  angolo  -92.6  w   7.9513
+       2500 ..    3000  l'ampiezza del cuore 2.6082e-02  |v| 4.3881e-01  angolo -148.2  w   7.8322
+       3000 ..    3500  l'ampiezza del cuore 1.8418e-02  |v| 4.0656e-01  angolo -179.4  w   7.7672
+       3500 ..    4000  l'ampiezza del cuore 1.8101e-02  |v| 4.1061e-01  angolo  -15.7  w   7.8291
+       4000 ..    4500  l'ampiezza del cuore 1.1153e-02  |v| 1.8274e+00  angolo  +30.7  w   7.9018
+       4500 ..    5000  l'ampiezza del cuore 9.5095e-03  |v| 6.5113e-01  angolo -164.1  w   8.0717
+       5000 ..    5500  l'ampiezza del cuore 7.5398e-03  |v| 1.8121e+00  angolo -134.2  w   8.2759
+       5500 ..    6000  l'ampiezza del cuore 3.4086e-03  |v| 8.2327e-01  angolo +128.3  w   8.4233
+       6000 ..    6500  l'ampiezza del cuore 4.2430e-03  |v| 1.6423e+00  angolo  +37.4  w   8.5871
+       6500 ..    7000  l'ampiezza del cuore 4.1259e-03  |v| 4.5179e-01  angolo -168.5  w   8.8537
+       7000 ..    7500  l'ampiezza del cuore 3.8409e-03  |v| 1.3981e+00  angolo -133.8  w   9.0603
+       7500 ..    8000  l'ampiezza del cuore 8.8259e-03  |v| 1.6222e+00  angolo -132.3  w   9.2201
+       8000 ..    8500  l'ampiezza del cuore 9.3987e-03  |v| 1.1934e+00  angolo +178.7  w   9.4272
+       8500 ..    9000  l'ampiezza del cuore 7.5830e-03  |v| 7.4737e-01  angolo +124.7  w   9.5863
+       9000 ..    9500  l'ampiezza del cuore 7.1511e-03  |v| 3.5020e-01  angolo +140.6  w   9.6947
+       9500 ..   10000  l'ampiezza del cuore 5.6703e-03  |v| 1.2899e+00  angolo -154.3  w   9.8831
+      10000 ..   10500  l'ampiezza del cuore 8.9263e-03  |v| 2.2315e+00  angolo +178.5  w  10.1173
+      10500 ..   11000  l'ampiezza del cuore 4.1652e-03  |v| 3.0525e+00  angolo +170.4  w  10.1889
+      11000 ..   11500  l'ampiezza del cuore 3.7988e-03  |v| 3.9009e+00  angolo +176.4  w  10.2881
+      11500 ..   12000  l'ampiezza del cuore 4.7521e-03  |v| 8.6621e+00  angolo -177.1  w  10.2544
+      12000 ..   12500  l'ampiezza del cuore 7.4590e-03  |v| 1.2829e+01  angolo -173.9  w  10.2462
+      12500 ..   13000  l'ampiezza del cuore 9.9758e-03  |v| 1.8166e+01  angolo -167.3  w  10.3322
+      13000 ..   13500  l'ampiezza del cuore 4.3982e-03  |v| 1.8730e+01  angolo -169.3  w  10.4648
+      13500 ..   14000  l'ampiezza del cuore 1.1337e-02  |v| 1.5489e+01  angolo -169.3  w  10.7357
+      14000 ..   14500  l'ampiezza del cuore 7.4309e-03  |v| 1.3509e+01  angolo -172.6  w  10.8509
+      14500 ..   15000  l'ampiezza del cuore 1.0020e-02  |v| 1.1622e+01  angolo -179.4  w  11.0542
+      15000 ..   15500  l'ampiezza del cuore 5.4413e-03  |v| 1.1466e+01  angolo -179.3  w  11.1239
+      15500 ..   16000  l'ampiezza del cuore 1.1645e-02  |v| 1.0744e+01  angolo -179.1  w  11.3157
+  VIVO:
+          0 ..     500  l'ampiezza del cuore 2.7085e-02  |v| 3.4339e-01  angolo -160.2  w   7.9445
+        500 ..    1000  l'ampiezza del cuore 4.8666e-02  |v| 6.4322e-01  angolo -111.2  w   8.1905
+       1000 ..    1500  l'ampiezza del cuore 2.8982e-02  |v| 1.0157e+00  angolo -107.9  w   8.6225
+       1500 ..    2000  l'ampiezza del cuore 3.8522e-02  |v| 1.3332e+00  angolo -106.8  w   8.3730
+       2000 ..    2500  l'ampiezza del cuore 1.4853e-02  |v| 1.3924e+00  angolo -147.9  w   8.0944
+       2500 ..    3000  l'ampiezza del cuore 1.4227e-02  |v| 1.4492e+00  angolo  +59.4  w   8.0414
+       3000 ..    3500  l'ampiezza del cuore 1.7940e-02  |v| 1.0665e+00  angolo  +38.2  w   7.9521
+       3500 ..    4000  l'ampiezza del cuore 2.1538e-02  |v| 1.8086e+00  angolo -104.7  w   7.8802
+       4000 ..    4500  l'ampiezza del cuore 1.5981e-02  |v| 2.0483e+00  angolo -166.6  w   7.9814
+       4500 ..    5000  l'ampiezza del cuore 2.0052e-02  |v| 8.0034e-01  angolo  -89.2  w   8.0761
+       5000 ..    5500  l'ampiezza del cuore 1.8583e-02  |v| 1.2823e+00  angolo   -5.5  w   8.1918
+       5500 ..    6000  l'ampiezza del cuore 2.0423e-02  |v| 2.0173e+00  angolo  +96.2  w   8.3803
+       6000 ..    6500  l'ampiezza del cuore 1.5918e-02  |v| 1.3140e+00  angolo  -21.5  w   8.5337
+       6500 ..    7000  l'ampiezza del cuore 7.4162e-03  |v| 2.2724e+00  angolo  -27.2  w   8.7401
+       7000 ..    7500  l'ampiezza del cuore 7.9434e-03  |v| 1.4332e+00  angolo  -51.4  w   8.9862
+       7500 ..    8000  l'ampiezza del cuore 4.3966e-03  |v| 1.1796e+00  angolo  +93.8  w   9.1847
+       8000 ..    8500  l'ampiezza del cuore 4.1458e-03  |v| 2.1959e+00  angolo +107.6  w   9.3624
+       8500 ..    9000  l'ampiezza del cuore 8.8824e-03  |v| 7.7897e-01  angolo +176.5  w   9.5560
+       9000 ..    9500  l'ampiezza del cuore 9.0515e-03  |v| 1.4221e+00  angolo  -10.2  w   9.8103
+       9500 ..   10000  l'ampiezza del cuore 8.7351e-03  |v| 2.6771e+00  angolo  +25.3  w   9.9049
+  TA2000:
+       2000 ..    2500  l'ampiezza del cuore 5.0921e-02  |v| 5.4587e-01  angolo +153.0  w   7.9201
+       2500 ..    3000  l'ampiezza del cuore 3.1734e-02  |v| 1.6271e+00  angolo  -27.3  w   7.8535
+       3000 ..    3500  l'ampiezza del cuore 1.8815e-02  |v| 1.3781e+00  angolo  -11.2  w   7.9427
+       3500 ..    4000  l'ampiezza del cuore 1.2701e-02  |v| 5.6106e-01  angolo -160.7  w   8.0116
+       4000 ..    4500  l'ampiezza del cuore 1.8164e-02  |v| 2.1847e-01  angolo +155.1  w   8.1275
+       4500 ..    5000  l'ampiezza del cuore 1.3385e-02  |v| 9.6798e-01  angolo  -67.8  w   8.2121
+       5000 ..    5500  l'ampiezza del cuore 1.1013e-02  |v| 8.3424e-01  angolo  -63.3  w   8.3481
+       5500 ..    6000  l'ampiezza del cuore 1.3802e-02  |v| 1.6569e+00  angolo  +41.0  w   8.6084
+       6000 ..    6500  l'ampiezza del cuore 1.4253e-02  |v| 7.0291e-01  angolo  +20.9  w   8.8463
+       6500 ..    7000  l'ampiezza del cuore 8.3502e-03  |v| 1.8301e+00  angolo  +70.9  w   9.0738
+----------------------------------------------------------------------------------------------------------------------------------
+### (iv) LA CURVATURA (sez. 11-quater): fra finestre consecutive, d theta (gradi, in (-180, 180]) degli angoli della velocita', ds la distanza fra le posizioni medie,
+    kappa = d theta [rad] / ds per nodo, il raggio 1/|kappa|, il verso antiorario se d theta > 0; con |v| piccola la direzione e' rumore
+  TP1000, finestre di 1000:
+       1000 ->    2000  |v| 4.7717e-01 -> 5.4115e-01  d theta  +52.05  ds   0.3618  kappa +2.5107e+00  raggio       0.40  antiorario
+       2000 ->    3000  |v| 5.4115e-01 -> 3.5958e-01  d theta  +19.90  ds   0.3447  kappa +1.0077e+00  raggio       0.99  antiorario
+       3000 ->    4000  |v| 3.5958e-01 -> 6.5088e-01  d theta +115.06  ds   0.7470  kappa +2.6884e+00  raggio       0.37  antiorario
+       4000 ->    5000  |v| 6.5088e-01 -> 1.2418e+00  d theta +179.95  ds   0.7936  kappa +3.9576e+00  raggio       0.25  antiorario
+       5000 ->    6000  |v| 1.2418e+00 -> 5.8571e-01  d theta -154.18  ds   0.5493  kappa -4.8991e+00  raggio       0.20  orario
+       6000 ->    7000  |v| 5.8571e-01 -> 1.5537e+00  d theta +178.63  ds   0.7353  kappa +4.2401e+00  raggio       0.24  antiorario
+       7000 ->    8000  |v| 1.5537e+00 -> 9.1370e-01  d theta  -78.10  ds   1.2105  kappa -1.1260e+00  raggio       0.89  orario
+       8000 ->    9000  |v| 9.1370e-01 -> 7.7984e-01  d theta  +51.84  ds   0.5640  kappa +1.6043e+00  raggio       0.62  antiorario
+       9000 ->   10000  |v| 7.7984e-01 -> 2.7883e+00  d theta  -34.01  ds   1.7054  kappa -3.4810e-01  raggio       2.87  orario
+      10000 ->   11000  |v| 2.7883e+00 -> 6.1605e+00  d theta   +6.44  ds   3.8011  kappa +2.9592e-02  raggio      33.79  antiorario
+      11000 ->   12000  |v| 6.1605e+00 -> 1.5625e+01  d theta   +9.64  ds  10.6628  kappa +1.5782e-02  raggio      63.36  antiorario
+      12000 ->   13000  |v| 1.5625e+01 -> 1.7109e+01  d theta   +0.77  ds  17.6426  kappa +7.6092e-04  raggio    1314.21  antiorario
+      13000 ->   14000  |v| 1.7109e+01 -> 1.2365e+01  d theta   -7.18  ds  14.4998  kappa -8.6473e-03  raggio     115.64  orario
+      14000 ->   15000  |v| 1.2365e+01 -> 1.1071e+01  d theta   -3.44  ds  11.5326  kappa -5.1999e-03  raggio     192.31  orario
+  TP1000, finestre di 500:
+       1000 ->    1500  |v| 1.4083e+00 -> 1.5120e-01  d theta -175.29  ds   0.2176  kappa -1.4062e+01  raggio       0.07  orario
+       1500 ->    2000  |v| 1.5120e-01 -> 6.9821e-01  d theta -108.40  ds   0.1416  kappa -1.3357e+01  raggio       0.07  orario
+       2000 ->    2500  |v| 6.9821e-01 -> 4.3881e-01  d theta  -55.60  ds   0.2773  kappa -3.4998e+00  raggio       0.29  orario
+       2500 ->    3000  |v| 4.3881e-01 -> 4.0656e-01  d theta  -31.26  ds   0.2458  kappa -2.2194e+00  raggio       0.45  orario
+       3000 ->    3500  |v| 4.0656e-01 -> 4.1061e-01  d theta +163.75  ds   0.2304  kappa +1.2402e+01  raggio       0.08  antiorario
+       3500 ->    4000  |v| 4.1061e-01 -> 1.8274e+00  d theta  +46.36  ds   0.6245  kappa +1.2957e+00  raggio       0.77  antiorario
+       4000 ->    4500  |v| 1.8274e+00 -> 6.5113e-01  d theta +165.27  ds   0.3357  kappa +8.5913e+00  raggio       0.12  antiorario
+       4500 ->    5000  |v| 6.5113e-01 -> 1.8121e+00  d theta  +29.84  ds   0.6243  kappa +8.3405e-01  raggio       1.20  antiorario
+       5000 ->    5500  |v| 1.8121e+00 -> 8.2327e-01  d theta  -97.49  ds   0.6724  kappa -2.5305e+00  raggio       0.40  orario
+       5500 ->    6000  |v| 8.2327e-01 -> 1.6423e+00  d theta  -90.87  ds   0.7068  kappa -2.2436e+00  raggio       0.45  orario
+       6000 ->    6500  |v| 1.6423e+00 -> 4.5179e-01  d theta +154.11  ds   0.2875  kappa +9.3565e+00  raggio       0.11  antiorario
+       6500 ->    7000  |v| 4.5179e-01 -> 1.3981e+00  d theta  +34.68  ds   0.4938  kappa +1.2256e+00  raggio       0.82  antiorario
+       7000 ->    7500  |v| 1.3981e+00 -> 1.6222e+00  d theta   +1.48  ds   0.7871  kappa +3.2909e-02  raggio      30.39  antiorario
+       7500 ->    8000  |v| 1.6222e+00 -> 1.1934e+00  d theta  -48.97  ds   0.7254  kappa -1.1782e+00  raggio       0.85  orario
+       8000 ->    8500  |v| 1.1934e+00 -> 7.4737e-01  d theta  -54.06  ds   0.4638  kappa -2.0346e+00  raggio       0.49  orario
+       8500 ->    9000  |v| 7.4737e-01 -> 3.5020e-01  d theta  +15.99  ds   0.3092  kappa +9.0273e-01  raggio       1.11  antiorario
+       9000 ->    9500  |v| 3.5020e-01 -> 1.2899e+00  d theta  +65.02  ds   0.4032  kappa +2.8148e+00  raggio       0.36  antiorario
+       9500 ->   10000  |v| 1.2899e+00 -> 2.2315e+00  d theta  -27.15  ds   0.8299  kappa -5.7096e-01  raggio       1.75  orario
+      10000 ->   10500  |v| 2.2315e+00 -> 3.0525e+00  d theta   -8.09  ds   1.4200  kappa -9.9430e-02  raggio      10.06  orario
+      10500 ->   11000  |v| 3.0525e+00 -> 3.9009e+00  d theta   +6.00  ds   1.5678  kappa +6.6797e-02  raggio      14.97  antiorario
+      11000 ->   11500  |v| 3.9009e+00 -> 8.6621e+00  d theta   +6.45  ds   3.0585  kappa +3.6818e-02  raggio      27.16  antiorario
+      11500 ->   12000  |v| 8.6621e+00 -> 1.2829e+01  d theta   +3.25  ds   5.2367  kappa +1.0826e-02  raggio      92.37  antiorario
+      12000 ->   12500  |v| 1.2829e+01 -> 1.8166e+01  d theta   +6.56  ds   7.8435  kappa +1.4588e-02  raggio      68.55  antiorario
+      12500 ->   13000  |v| 1.8166e+01 -> 1.8730e+01  d theta   -2.00  ds   9.4294  kappa -3.7086e-03  raggio     269.64  orario
+      13000 ->   13500  |v| 1.8730e+01 -> 1.5489e+01  d theta   +0.00  ds   8.5598  kappa +8.6764e-06  raggio  115255.04  antiorario
+      13500 ->   14000  |v| 1.5489e+01 -> 1.3509e+01  d theta   -3.27  ds   7.1684  kappa -7.9548e-03  raggio     125.71  orario
+      14000 ->   14500  |v| 1.3509e+01 -> 1.1622e+01  d theta   -6.85  ds   6.1470  kappa -1.9436e-02  raggio      51.45  orario
+      14500 ->   15000  |v| 1.1622e+01 -> 1.1466e+01  d theta   +0.11  ds   5.7002  kappa +3.4244e-04  raggio    2920.24  antiorario
+      15000 ->   15500  |v| 1.1466e+01 -> 1.0744e+01  d theta   +0.20  ds   5.5327  kappa +6.1851e-04  raggio    1616.79  antiorario
+  LA CONDIZIONE DI "DUE GIRI" per TP1000 (finestre di 500 da 11000 alla fine valida 16000): 9 coppie, d theta di un solo segno NO, l'angolo girato +4.45 gradi (soglia 10): NON CONFERMATA
+  VIVO, finestre di 1000:
+          0 ->    1000  |v| 5.2797e-01 -> 1.2485e+00  d theta  +24.78  ds   0.8063  kappa +5.3639e-01  raggio       1.86  antiorario
+       1000 ->    2000  |v| 1.2485e+00 -> 3.9672e-01  d theta -130.03  ds   0.9957  kappa -2.2791e+00  raggio       0.44  orario
+       2000 ->    3000  |v| 3.9672e-01 -> 6.0337e-01  d theta +165.86  ds   0.7183  kappa +4.0301e+00  raggio       0.25  antiorario
+       3000 ->    4000  |v| 6.0337e-01 -> 1.3561e+00  d theta  -85.82  ds   1.3090  kappa -1.1442e+00  raggio       0.87  orario
+       4000 ->    5000  |v| 1.3561e+00 -> 1.0637e+00  d theta -132.31  ds   0.2614  kappa -8.8330e+00  raggio       0.11  orario
+       5000 ->    6000  |v| 1.0637e+00 -> 1.8827e+00  d theta  -95.32  ds   0.9313  kappa -1.7864e+00  raggio       0.56  orario
+       6000 ->    7000  |v| 1.8827e+00 -> 3.8267e-01  d theta  +20.47  ds   1.4876  kappa +2.4017e-01  raggio       4.16  antiorario
+       7000 ->    8000  |v| 3.8267e-01 -> 1.4644e+00  d theta +129.46  ds   1.2119  kappa +1.8643e+00  raggio       0.54  antiorario
+       8000 ->    9000  |v| 1.4644e+00 -> 2.1595e+00  d theta -110.54  ds   0.4707  kappa -4.0986e+00  raggio       0.24  orario
+  VIVO, finestre di 500:
+          0 ->     500  |v| 3.4339e-01 -> 6.4322e-01  d theta  +49.04  ds   0.2771  kappa +3.0894e+00  raggio       0.32  antiorario
+        500 ->    1000  |v| 6.4322e-01 -> 1.0157e+00  d theta   +3.27  ds   0.3609  kappa +1.5797e-01  raggio       6.33  antiorario
+       1000 ->    1500  |v| 1.0157e+00 -> 1.3332e+00  d theta   +1.14  ds   0.6368  kappa +3.1108e-02  raggio      32.15  antiorario
+       1500 ->    2000  |v| 1.3332e+00 -> 1.3924e+00  d theta  -41.13  ds   0.7363  kappa -9.7504e-01  raggio       1.03  orario
+       2000 ->    2500  |v| 1.3924e+00 -> 1.4492e+00  d theta -152.70  ds   0.2091  kappa -1.2747e+01  raggio       0.08  orario
+       2500 ->    3000  |v| 1.4492e+00 -> 1.0665e+00  d theta  -21.18  ds   0.7642  kappa -4.8368e-01  raggio       2.07  orario
+       3000 ->    3500  |v| 1.0665e+00 -> 1.8086e+00  d theta -142.96  ds   0.3071  kappa -8.1256e+00  raggio       0.12  orario
+       3500 ->    4000  |v| 1.8086e+00 -> 2.0483e+00  d theta  -61.84  ds   0.9169  kappa -1.1771e+00  raggio       0.85  orario
+       4000 ->    4500  |v| 2.0483e+00 -> 8.0034e-01  d theta  +77.35  ds   0.7131  kappa +1.8933e+00  raggio       0.53  antiorario
+       4500 ->    5000  |v| 8.0034e-01 -> 1.2823e+00  d theta  +83.68  ds   0.5528  kappa +2.6421e+00  raggio       0.38  antiorario
+       5000 ->    5500  |v| 1.2823e+00 -> 2.0173e+00  d theta +101.73  ds   0.5317  kappa +3.3395e+00  raggio       0.30  antiorario
+       5500 ->    6000  |v| 2.0173e+00 -> 1.3140e+00  d theta -117.73  ds   0.5269  kappa -3.8999e+00  raggio       0.26  orario
+       6000 ->    6500  |v| 1.3140e+00 -> 2.2724e+00  d theta   -5.68  ds   0.9575  kappa -1.0348e-01  raggio       9.66  orario
+       6500 ->    7000  |v| 2.2724e+00 -> 1.4332e+00  d theta  -24.19  ds   0.9353  kappa -4.5130e-01  raggio       2.22  orario
+       7000 ->    7500  |v| 1.4332e+00 -> 1.1796e+00  d theta +145.21  ds   0.1887  kappa +1.3429e+01  raggio       0.07  antiorario
+       7500 ->    8000  |v| 1.1796e+00 -> 2.1959e+00  d theta  +13.83  ds   0.8954  kappa +2.6960e-01  raggio       3.71  antiorario
+       8000 ->    8500  |v| 2.1959e+00 -> 7.7897e-01  d theta  +68.87  ds   0.7604  kappa +1.5807e+00  raggio       0.63  antiorario
+       8500 ->    9000  |v| 7.7897e-01 -> 1.4221e+00  d theta +173.27  ds   0.1539  kappa +1.9644e+01  raggio       0.05  antiorario
+       9000 ->    9500  |v| 1.4221e+00 -> 2.6771e+00  d theta  +35.47  ds   1.1138  kappa +5.5580e-01  raggio       1.80  antiorario
+  LA CONDIZIONE DI "DUE GIRI" per VIVO: nessuna coppia di finestre da 11000
+  TA2000, finestre di 1000:
+       2000 ->    3000  |v| 3.5384e-01 -> 1.9751e-01  d theta  -13.46  ds   1.0435  kappa -2.2520e-01  raggio       4.44  orario
+       3000 ->    4000  |v| 1.9751e-01 -> 2.1071e-01  d theta  -12.17  ds   0.1574  kappa -1.3495e+00  raggio       0.74  orario
+       4000 ->    5000  |v| 2.1071e-01 -> 9.5006e-01  d theta  +84.17  ds   0.6443  kappa +2.2800e+00  raggio       0.44  antiorario
+       5000 ->    6000  |v| 9.5006e-01 -> 1.0913e+00  d theta  +38.10  ds   1.0377  kappa +6.4086e-01  raggio       1.56  antiorario
+  TA2000, finestre di 500:
+       2000 ->    2500  |v| 5.4587e-01 -> 1.6271e+00  d theta +179.75  ds   0.1458  kappa +2.1511e+01  raggio       0.05  antiorario
+       2500 ->    3000  |v| 1.6271e+00 -> 1.3781e+00  d theta  +16.05  ds   0.9512  kappa +2.9454e-01  raggio       3.40  antiorario
+       3000 ->    3500  |v| 1.3781e+00 -> 5.6106e-01  d theta -149.51  ds   0.0593  kappa -4.3984e+01  raggio       0.02  orario
+       3500 ->    4000  |v| 5.6106e-01 -> 2.1847e-01  d theta  -44.18  ds   0.1547  kappa -4.9839e+00  raggio       0.20  orario
+       4000 ->    4500  |v| 2.1847e-01 -> 9.6798e-01  d theta +137.14  ds   0.0809  kappa +2.9570e+01  raggio       0.03  antiorario
+       4500 ->    5000  |v| 9.6798e-01 -> 8.3424e-01  d theta   +4.45  ds   0.6188  kappa +1.2547e-01  raggio       7.97  antiorario
+       5000 ->    5500  |v| 8.3424e-01 -> 1.6569e+00  d theta +104.33  ds   0.5015  kappa +3.6306e+00  raggio       0.28  antiorario
+       5500 ->    6000  |v| 1.6569e+00 -> 7.0291e-01  d theta  -20.13  ds   0.5656  kappa -6.2107e-01  raggio       1.61  orario
+       6000 ->    6500  |v| 7.0291e-01 -> 1.8301e+00  d theta  +50.03  ds   0.5360  kappa +1.6292e+00  raggio       0.61  antiorario
+  LA CONDIZIONE DI "DUE GIRI" per TA2000: nessuna coppia di finestre da 11000
+==================================================================================================================================

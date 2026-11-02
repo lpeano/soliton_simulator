@@ -639,3 +639,19 @@
   - si sposta di `68.45` nodi a `-173.1` gradi, cioe' `+6.9` da `-A1`;
   - la velocita' massima e' `17.1` per `1000` a `13000`-`14000`, poi **rallenta**;
   - la direzione si scosta di `~10` gradi e poi torna. **La curvatura e' da leggere con la carta *(iv)*.**
+
+### 11-sexies. LA DECISIONE DI LUCA SU `TP2` E IL REFERTO DELLA DERIVA *(dopo `76822344`)*
+
+- **La (a):** `TP2` si accetta col limite dichiarato. **Lo `0.1` era una soglia non ricavata** *(l'errore del guardiano `n.95`)*. **Il centro periodico e' la misura;** l'euclideo vale solo come confronto, e solo finche' l'alone e' piccolo.
+- **`carta_deriva.py`** *(il referto `doc/referti_l2/deriva_solitone.txt`)*: ### **la condizione di «due giri» NON e' soddisfatta.**
+  - Nelle finestre di `500` da `11000` a `16000`, `d theta` **cambia segno**: antiorario fino a `~12500` *(`+6.0`, `+6.5`, `+3.3`, `+6.6`)*, poi orario *(`-2.0`, `-3.3`, `-6.9`)*. L'angolo girato in tutto e' `+4.45` gradi.
+  - **«Due giri» non si fa.** Si passa alle mappe *(`TM1000`)*.
+- **Le letture dell'aggiunta delle `15:54`, dal referto:**
+  - **(i)** `ln s` cresce, ma **non con una pendenza costante**:
+    - `+0.196` per `1000` su `2000 .. 9000`, `+0.578` su `9000 .. 16000`;
+    - per blocco sale fino a `+0.86` *(`12000 .. 13000`)* e poi cala *(`0.48`, `0.24`, `0.18`)*;
+    - **prima di `~7000` lo spostamento e' sotto `1` nodo e cambia direzione** *(il tremolio)*.
+
+    **Non e' un solo esponenziale dall'inizio.**
+  - **(ii)** il vivo e `TA2000` non arrivano al `w` a cui `TP1000` parte *(`TP1000` supera `|v| 2.8` a `w 10.15`; il vivo arriva a `w 9.86`, `TA2000` a `8.96`)*: **la soglia di larghezza non si puo' controllare con questi dati.**
+  - **(iii)** l'ampiezza del cuore cala da `~0.026` *(`2500`)* a `~0.004` *(`5500`-`7500`)*, poi oscilla fra `0.004` e `0.012` mentre la velocita' sale: **nessuna relazione evidente.**

@@ -22961,3 +22961,47 @@ Il referto stampa per `TA1000`:
   - **(b)** la soglia di Luca resta, e il vivo si usa solo fino a dove i due centri coincidono entro `0.1` *(`~8750`, in `TP1000`)*;
   - **(c)** altro.
 - **Dopo la decisione:** `carta_deriva.py` *(il referto della deriva, con la curvatura e la condizione di «due giri»)*, poi la coda.
+
+## 2026-11-02 — LA DERIVA: IL REFERTO `deriva_solitone.txt` -- LA TRAIETTORIA NON CURVA DI UN SOLO VERSO: «DUE GIRI» NON SI FA; LO SPOSTAMENTO NON E' UN SOLO ESPONENZIALE
+
+**La decisione di Luca su `TP2`:** la (a). Lo `0.1` era una soglia non ricavata *(l'errore del guardiano `n.95`)*; il centro periodico e' la misura. **Il referto:** `doc/referti_l2/deriva_solitone.txt` *(`python csv/solitone/carta_deriva.py`, a `76822344`)*.
+
+### **(iv) LA CURVATURA E LA CONDIZIONE DI «DUE GIRI»** *(il criterio fissato prima, sez. `11-quater`)*
+
+| finestre di `500` | `d theta` | il raggio |
+|---|---|---|
+| `10500 -> 11000` | `+6.00` | `15.0` |
+| `11000 -> 11500` | `+6.45` | `27.2` |
+| `11500 -> 12000` | `+3.25` | `92.4` |
+| `12000 -> 12500` | `+6.56` | `68.6` |
+| `12500 -> 13000` | `-2.00` | `269.6` |
+| `13000 -> 13500` | `+0.00` | -- |
+| `13500 -> 14000` | `-3.27` | `125.7` |
+| `14000 -> 14500` | `-6.85` | `51.5` |
+| `14500 -> 15000`, `15000 -> 15500` | `+0.11`, `+0.20` | `~2000`-`3000` |
+
+- **Antiorario fino a `~12500`, poi orario, poi dritto. Angolo girato da `11000`: `+4.45` gradi.** ### **NON CONFERMATA:** «due giri» non si fa.
+- **La stima del guardiano** *(curvatura `~0.011`, raggio `~90`)* **corrisponde al solo tratto antiorario** `11500`-`12500` *(raggi `92` e `69`)*. **Dopo, la curva rientra.**
+
+### **LE TRE TABELLE DELLE `15:54`**
+
+- **(i) `ln s`:**
+  - la retta su `2000 .. 9000` ha pendenza **`+0.196`** per `1000`, quella su `9000 .. 16000` **`+0.578`**;
+  - per blocco: `+0.23`, `+0.31`, `+0.63`, `+0.77`, **`+0.86`** *(`12000 .. 13000`)*, poi `+0.48`, `+0.24`, `+0.18`;
+  - **prima di `~7000` lo spostamento resta sotto `1` nodo, con pendenze di ogni segno.**
+  - **La mia lettura:** non e' un'instabilita' esponenziale presente dall'inizio con un solo tasso. Cresce, accelera fino a `12000`-`13000`, poi rallenta. **Decide Luca.**
+- **(ii) la velocita' contro `w`:**
+  - `TP1000` supera `|v| 2.8` per `1000` a `w 10.15` *(`10000 .. 11000`)*;
+  - **il vivo** arriva a `w 9.86` con `|v|` al massimo `2.16`, e le direzioni a caso *(l'ultimo blocco a `+13.8` gradi, non lungo `-A1`)*;
+  - **`TA2000`** arriva a `w 8.96`, con `|v|` al massimo `1.09`.
+  - **Nessuna delle due arriva al `w` a cui `TP1000` parte: la «soglia di larghezza» non si controlla con questi dati.** Il vivo e `TA2000` usano il centro euclideo, col limite di `TP2`.
+- **(iii) l'ampiezza del cuore** *(finestre di `500`)*: cala da `0.026` *(`2500`-`3000`)* a `~0.004` *(`5500`-`7500`)*, poi oscilla fra `0.004` e `0.012` mentre la velocita' sale da `~1` a `18.7`. **Nessuna relazione evidente.**
+
+### **LA MAPPA** *(voci `1` e `27`, come dettato)*
+
+- la vita del cuore `~26000` *(estrapolata)*;
+- l'emissione `2.52e-3` per `1000` *(il `10%` a `~40000`)*;
+- la deriva: `68` nodi lungo `-A1`, una deviazione fino a `~11` gradi che rientra, la velocita' fino a `~17` e poi giu';
+- il criterio `3 w < 40.5`.
+
+**Poi, nella coda: `TM1000`** *(le mappe e gli stati su `E:`)*.
