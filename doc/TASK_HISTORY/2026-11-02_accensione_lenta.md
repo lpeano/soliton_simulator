@@ -763,3 +763,13 @@
     - **Per `0 .. 16000` i campioni non lo hanno.** Si ricava **dalle mappe di `TM1000`** *(`rho` per nodo e il centro, ogni `100` tick)*, che e' in coda dopo: **lo dichiaro, e il referto di «due giri» lo dira' come mancante fino ad allora.**
   - **(iii)** il libro attorno al centro *(`E_cen`, la sez. `13-bis`)* da' `M` vicino e lontano a ogni campione. Il «flusso verso il solitone» e' la variazione di `M` vicino, con la conservazione di `M` totale.
   - **Il fit esponenziale:** minimi quadrati non lineari *(`scipy.optimize.curve_fit`, se c'e'; altrimenti una griglia su `tau`)*, coi parametri iniziali dalla retta. **Non e' un parametro del modello:** e' un'analisi, e dichiaro come la si fa.
+
+### 13-quater. L'ESITO DI `DG1000` *(il referto `doc/referti_l2/due_giri.txt`; la relazione per i numeri)*
+
+- **Le premesse, annotate** *(non riscritte)*:
+  - «alla velocita' di oggi la condizione (a) arriva prima, verso `24500`»: ### **SBAGLIATA.** La velocita' e' calata fino a `~1.5` per `1000`, e la corsa e' finita al **tetto `40000`** col cammino a `123`;
+  - «il solitone puo' sciogliersi prima»: **no**, il cuore periodico a blocchi resta `0.262` contro la meta' `0.221`;
+  - «gli stati a `20000`, `30000`, `40000` con lo `sha` a `t + 100`»: ### **lo stato a `40000` e' l'ULTIMO tick, il `t + 100` non esiste** *(n.97)*.
+- **Che cosa mi ha fermato** *(dalla lista scritta prima)*: **`A3`**, `1.55e-10` contro `1e-10`. E' un accumulo lineare di un solo segno *(`diag_a3.txt`)*; a `16000` vale `6.2e-11`. **E la ripresa dell'ultimo stato** *(n.97)*.
+- **La lettura di `Lambda` al giro `1` non misura una scia** *(n.98: il disco vicino contiene il solitone)*.
+- ### **FERMO: la decisione su `A3` e sulle due correzioni e' di Luca. `TM1000` aspetta.**

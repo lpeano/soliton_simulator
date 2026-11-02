@@ -1,0 +1,37 @@
+(1) A3: M e V totali contro il primo campione (12267 campioni, 10667 da TP1000, il resto rado da DG1000)
+  fino a   4000: max|M/M0-1| 1.551e-11  max|V/V0-1| 7.646e-12  all'ultimo campione M +1.551e-11 V +7.646e-12
+  fino a   8000: max|M/M0-1| 3.102e-11  max|V/V0-1| 1.813e-11  all'ultimo campione M +3.102e-11 V +1.813e-11
+  fino a  16000: max|M/M0-1| 6.202e-11  max|V/V0-1| 3.956e-11  all'ultimo campione M +6.202e-11 V +3.956e-11
+  fino a  24000: max|M/M0-1| 9.301e-11  max|V/V0-1| 6.119e-11  all'ultimo campione M +9.301e-11 V +6.119e-11
+  fino a  32000: max|M/M0-1| 1.240e-10  max|V/V0-1| 8.285e-11  all'ultimo campione M +1.240e-10 V +8.285e-11
+  fino a  40001: max|M/M0-1| 1.549e-10  max|V/V0-1| 1.045e-10  all'ultimo campione M +1.549e-10 V +1.045e-10
+  la retta di M/M0-1 contro il tempo: +3.8746e-12 per 1000 unita' di tempo, +5.8119e-16 per tick; il residuo massimo 2.30e-14; i campioni sotto zero 0
+  la retta di V/V0-1 contro il tempo: +2.6667e-12 per 1000 unita' di tempo, +4.0000e-16 per tick; il residuo massimo 2.95e-12; i campioni sotto zero 279
+  M: il primo campione oltre 1e-10 a tempo 25815.0
+  V: il primo campione oltre 1e-10 a tempo 38325.0
+(2) IL CUORE E w: EUCLIDEI (le righe di avanzamento) contro PERIODICI, il campione piu' vicino a ogni 1000, da 16000
+   15999.0  il cuore eucl. 0.34455  per. 0.34590   w eucl.  12.0401  per.  11.1901
+   16995.0  il cuore eucl. 0.32440  per. 0.32587   w eucl.  12.0295  per.  11.4564
+   18000.0  il cuore eucl. 0.30436  per. 0.30337   w eucl.  12.4099  per.  11.9177
+   19005.0  il cuore eucl. 0.30045  per. 0.30162   w eucl.  12.5275  per.  11.9482
+   19995.0  il cuore eucl. 0.29628  per. 0.29881   w eucl.  12.7375  per.  12.0181
+   21000.0  il cuore eucl. 0.30807  per. 0.30881   w eucl.  12.7324  per.  11.9028
+   22005.0  il cuore eucl. 0.29122  per. 0.29228   w eucl.  13.0949  per.  12.1229
+   22995.0  il cuore eucl. 0.30447  per. 0.30743   w eucl.  13.4366  per.  12.0583
+   24000.0  il cuore eucl. 0.28665  per. 0.29307   w eucl.  14.2838  per.  12.2200
+   25005.0  il cuore eucl. 0.26924  per. 0.28120   w eucl.  15.3918  per.  12.2916
+   25995.0  il cuore eucl. 0.27922  per. 0.29823   w eucl.  17.5668  per.  12.1565
+   27000.0  il cuore eucl. 0.20485  per. 0.28009   w eucl.  22.2472  per.  12.4427
+   28005.0  il cuore eucl. 0.09314  per. 0.27489   w eucl.  27.6048  per.  12.5888
+   28995.0  il cuore eucl. 0.01493  per. 0.26311   w eucl.  31.9557  per.  12.7593
+   30000.0  il cuore eucl. 0.00177  per. 0.27640   w eucl.  34.3502  per.  12.6133
+   31005.0  il cuore eucl. 0.00146  per. 0.28348   w eucl.  35.5696  per.  12.5415
+   31995.0  il cuore eucl. 0.00149  per. 0.27164   w eucl.  36.1231  per.  12.6096
+   33000.0  il cuore eucl. 0.00152  per. 0.29307   w eucl.  36.1535  per.  12.4159
+   34005.0  il cuore eucl. 0.00155  per. 0.28557   w eucl.  35.2185  per.  12.4134
+   34995.0  il cuore eucl. 0.00672  per. 0.27722   w eucl.  33.3570  per.  12.6980
+   36000.0  il cuore eucl. 0.02623  per. 0.27174   w eucl.  31.1635  per.  12.6361
+   37005.0  il cuore eucl. 0.04744  per. 0.28030   w eucl.  30.3972  per.  12.6489
+   37995.0  il cuore eucl. 0.07626  per. 0.26676   w eucl.  28.9689  per.  12.6627
+   39000.0  il cuore eucl. 0.11078  per. 0.25998   w eucl.  27.9826  per.  12.9135
+   39990.0  il cuore eucl. 0.09754  per. 0.25425   w eucl.  28.2679  per.  13.0349

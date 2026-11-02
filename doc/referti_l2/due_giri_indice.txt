@@ -1,0 +1,46 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE fd0a158c  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 58432e11  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA DG1000 (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_106667.npz  4715475 byte  sha1 bd555279132bde6cf816d4550ddffd4fdcc427b9  tempo 16005.00 .. 17490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_116667.npz  4718145 byte  sha1 0d17756a2fa80bc15c485d3a047ea9389000e1be  tempo 17505.00 .. 18990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_126667.npz  4718277 byte  sha1 6601fe3254eb95e425b598b5b2dfabc7d47ddbd1  tempo 19005.00 .. 20490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_136667.npz  4716992 byte  sha1 d45069f3c9fa98f8dc4d27df39310132dfff9410  tempo 20505.00 .. 21990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_146667.npz  4716442 byte  sha1 56adac8f0ed1f86c85efb4180425c8c6cdfed122  tempo 22005.00 .. 23490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_156667.npz  4715372 byte  sha1 3da075e05d9927dcff36c342aa357d16b381da7f  tempo 23505.00 .. 24990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_166667.npz  4714085 byte  sha1 f2feca828b0c59e11ec47c59dcdb2f80b513b4df  tempo 25005.00 .. 26490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_176667.npz  4712526 byte  sha1 3faad8ef1a96d639b500d6b154adeac36351a0d6  tempo 26505.00 .. 27990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_186667.npz  4713428 byte  sha1 f59fd73a5a96019adbbb2064f2c12d5603568ba9  tempo 28005.00 .. 29490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_196667.npz  4712473 byte  sha1 f205b29cbce1b6af164391ded5250460205fe799  tempo 29505.00 .. 30990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_206667.npz  4712510 byte  sha1 748542451a2ed22fb1bd2925be8e664243898b98  tempo 31005.00 .. 32490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_216667.npz  4712788 byte  sha1 2719700c45b6f0ef538e0bfbe18d4edf609a394a  tempo 32505.00 .. 33990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_226667.npz  4712523 byte  sha1 4d46c7fafeb0d105f270f30f1bf967bd79ee3653  tempo 34005.00 .. 35490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_236667.npz  4711652 byte  sha1 0dc1901593903248ef7175b23e07da8a9da0d269  tempo 35505.00 .. 36990.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_246667.npz  4711529 byte  sha1 1cfea6b8ae07cbcac391ed3153057826e6a4fc2e  tempo 37005.00 .. 38490.00  100 istantanee
+  E:\soliton_simulator\due_giri\mappe\DG1000\DG1000_256667.npz  4712170 byte  sha1 55d2f530297f09ca05bc24c7d32440a52175dd1d  tempo 38505.00 .. 39990.00  100 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\due_giri\stati\DG1000\DG1000_stato_133333.npz  2258694 byte  sha1 ad0524a568403b7f1f120c845353380fb3a1f0a5  tempo 19999.95 (tick 133333)
+  E:\soliton_simulator\due_giri\stati\DG1000\DG1000_stato_200000.npz  2258694 byte  sha1 5018f3dd7b1f04ce3452540edb121b75f3480dea  tempo 30000.00 (tick 200000)
+  E:\soliton_simulator\due_giri\stati\DG1000\DG1000_stato_266667.npz  2258694 byte  sha1 1b8c3595ca88b936e0d38808ab4c139652df743c  tempo 40000.05 (tick 266667)
+### I PEZZI DEI CAMPIONI (jsonl interi; nel repo la versione rada in C:\Users\lpeano\soliton_simulator\doc\referti_l2\due_giri)
+  E:\soliton_simulator\due_giri\campioni\DG1000_106667.jsonl  2017550 byte  sha1 a733a3850309b8f28df4db31948e14c3a24ec7c7  tempo 16000.05 .. 17500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_116667.jsonl  2021552 byte  sha1 99271446f79ea8351159d69c326dd73ea37805b6  tempo 17500.05 .. 19000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_126667.jsonl  2022706 byte  sha1 df50c1b2ac533b30ea04bd8e01854e650ca262dd  tempo 19000.05 .. 20500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_136667.jsonl  2024822 byte  sha1 619ca718f4e34669818dd2752df1fd0506a69839  tempo 20500.05 .. 22000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_146667.jsonl  2024481 byte  sha1 ef9b1678abc0a36e8ab938443829ca683eb16315  tempo 22000.05 .. 23500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_156667.jsonl  2022926 byte  sha1 7a84cbf7691cbc99db451e2661deec2f59149977  tempo 23500.05 .. 25000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_166667.jsonl  2021146 byte  sha1 3e462bb5759b27704d8b4b2cc4d3ea53b8efe08b  tempo 25000.05 .. 26500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_176667.jsonl  2022385 byte  sha1 418e613eaca2bb582d12cd93e2c93558024ddc1d  tempo 26500.05 .. 28000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_186667.jsonl  2022902 byte  sha1 3ab2ba18cf83bbde28d7a2ccfd73361ebb323399  tempo 28000.05 .. 29500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_196667.jsonl  2027332 byte  sha1 19ce16b4f1a152acfaa8f137492df5fd700549f2  tempo 29500.05 .. 31000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_206667.jsonl  2026336 byte  sha1 a38995f964838e9f97b81b6506715c0ad95415aa  tempo 31000.05 .. 32500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_216667.jsonl  2023662 byte  sha1 471b4a9d68833550b33bd7ddfc3ddd532b0a10ca  tempo 32500.05 .. 34000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_226667.jsonl  2022621 byte  sha1 451b0f53b0afa14f54c23810d746d9e8b92cc11e  tempo 34000.05 .. 35500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_236667.jsonl  2021633 byte  sha1 41a944ac1f82292338a5c3036556962f728d58a2  tempo 35500.05 .. 37000.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_246667.jsonl  2020632 byte  sha1 6bb4fa21e468571c612427bd73b3116d1aa1b37a  tempo 37000.05 .. 38500.05
+  E:\soliton_simulator\due_giri\campioni\DG1000_256667.jsonl  2020507 byte  sha1 046b8bf3fe8e8583975d24357c05ed4b32cc5d19  tempo 38500.05 .. 40000.05

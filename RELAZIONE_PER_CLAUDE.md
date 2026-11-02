@@ -23074,3 +23074,43 @@ Il referto stampa per `TA1000`:
 - **Due fatti, per quando la prova si progettera'** *(non ora)*:
   - nel codice **non c'e' una temperatura**. «Raffreddare» dovra' essere un protocollo dichiarato, senza una legge nuova: per esempio l'accensione lenta di una parte del tick, come la rampa `sin^2` di `csv/solitone/accensione.py`, che e' gia' un protocollo di questo tipo. **E' una lettura mia, non una proposta di metodo;**
   - la lunghezza di correlazione delle frecce vuole **la freccia per nodo come osservabile**. E' cio' che la parte `1` *(f4)* deve definire.
+
+## 2026-11-02 — DUE GIRI DEL TORO: L'ESITO DI `DG1000` *(il referto `doc/referti_l2/due_giri.txt`, carta `8ddc3513`; la diagnostica `doc/referti_l2/due_giri/diag_a3.txt`)*
+
+### **La corsa e' finita al TETTO `t = 40000`** *(16 pezzi; nessuna fermata)*. ### **La carta: `4/6`, DUE DEVE FALLITI. FERMO.**
+
+**I due fallimenti, e che cosa sono:**
+
+- **`A3`:** `max|M/M0-1|` vale `1.549e-10` contro `1e-10` *(`V`: `1.045e-10`)*. **La diagnostica dice che e' un accumulo regolare, non un salto:**
+  - `M/M0-1` e' una RETTA nel tempo, `+3.8746e-12` per `1000` *(`+5.81e-16` per tick)*, col residuo massimo `2.3e-14` e **nessun campione sotto zero**: un arrotondamento di un solo segno a ogni tick;
+  - supera `1e-10` a tempo `25815` *(`V` a `38325`)*. A `16000` vale `6.2e-11`: **la soglia `1e-10` era stata fissata per corse di `16000`.**
+  - ### **La decisione e' di Luca** *(come per `TP2`)*: tenere `1e-10` e dichiarare il limite, oppure una soglia che dipende dalla durata. **Non tocco la soglia.**
+- **La ripresa al bit dello stato a `40000`:** ### **e' un MIO errore di progetto (n.97).** Lo stato a `40000` e' **l'ultimo tick della corsa**: i `100` tick «dopo» non esistono, e quel DEVE **non poteva passare**. Gli altri due stati *(`20000`, `30000`)* si rileggono al bit e ripartono al bit, e anche quello a `40000` **si rilegge al bit**. **La correzione possibile** *(un commit a se', dopo la decisione)*: per l'ultimo stato, il confronto con lo `sha_fine` del pezzo invece della ripresa.
+
+**Un falso allarme, da scrivere:** le righe di avanzamento della corsa stampano **il cuore e `w` EUCLIDEI**, che si rompono al taglio delle coordinate. Verso `28000` davano il cuore a `0.003` e `w` a `36`, come uno scioglimento. **Il cuore periodico resta fra `0.25` e `0.30`** *(la diagnostica, parte (2))*. La fermata (b) legge il periodico, ed e' giusto che non sia scattata.
+
+**I numeri del referto:**
+
+- **La traiettoria:**
+  - il primo passaggio dal punto di partenza a `18045`, a `7.58` nodi *(dentro `3 w`)*: |v| `5.97` prima, `6.52` dopo, per `1000`;
+  - ### **NON ARRIVA AL SECONDO GIRO:** il cammino si ferma a `123.0` *(contro `162`)*. Il «passaggio» del giro `2` a `38340` e' a `44.4` nodi: **FUORI**.
+- **La velocita':** dal picco `17.1` per `1000` *(13000-14000)* scende in modo continuo, a `~1.3`-`1.5` a `38000`-`40000`. **Il rallentamento comincia prima del passaggio** *(`12.4`, `11.1`, `7.9`, `6.1` fra `14000` e `18000`)*. Dopo `20000` la direzione del blocco salta di decine di gradi: **un tremolio, non una curva.**
+- **La vita:** il cuore periodico a blocchi a `39000`-`40000` vale `0.262`, sopra la meta' `0.221` *(il riferimento `0.44243`)*. ### **L'estrapolazione di `~26000` (`TP1000`) e' SMENTITA dalla misura:** il calo rallenta.
+- **L'energia al passaggio** *(Luca `18:12`)*: `M` vicino, nella finestra di `±1000` attorno al passaggio del giro `1`, scende di `-8.2e3` per `1000`; fra un blocco e il successivo *(il referto, (iii), da `16000` a `20000`)*: `-9.7e3`, `-12.9e3`, `-6.8e3`, `-2.2e3`. **Nessuna ripresa di energia visibile.**
+- **`Lambda` al punto di partenza, dalle mappe:**
+  - giro `1`, a `17550`: il disco «vicino» **contiene ancora il solitone** *(il centro a `8.0` nodi; `rho` vicino `627` contro `7.9`)*. ### **Quella lettura NON misura una scia: e' un MIO errore di progetto (n.98).** Il disco vicino andava tolto, come il lontano, dai `3 w` attorno al centro;
+  - giro `2`, a `37845` *(il centro a `43.9` nodi)*: `Lambda` vicino `4.03` contro lontano `8.26` *(il rapporto `0.49`)*, `rho` uguale *(`9.88`, `9.80`)*. **Un fatto da capire, non una conclusione:** il «lontano» ha solo `746` nodi.
+- **L'alone verso un tetto** *(Luca `18:18`)*:
+  - l'esponenziale con tetto ha `0.26` volte il residuo della retta *(`a_tetto` `0.074`, `tau` `21057`)*;
+  - ### **ma l'alone a `3 w(t)` CALA** *(da `0.0183` a `0.0099` su `DG1000`)*: **la crescita dell'alone a `3 w0` e' soprattutto il solitone che si allarga** *(`w` periodico da `11.2` a `13.0`)*, **non materia che se ne va.**
+- **Il raggio contro la velocita'** *(i blocchi con |v| > 2)*: la pendenza di `ln R` contro `ln |v|` e' `+2.02`. ### **Non la leggo:** con un tremolio di angolo fisso, il raggio cresce con la velocita' anche senza fisica.
+
+**Le letture di Luca, la mia proposta** *(la scelta e' sua)*:
+- **(r1)** no: non ripassa;
+- **(r3)** no: la velocita' del secondo giro non ripete il primo;
+- **(r4)** no: non si scioglie;
+- **(r2)** non separabile: il rallentamento comincia prima del passaggio.
+
+**La piu' vicina e' (r5):** si ferma quasi, e il moto diventa un tremolio.
+
+### **FERMO: due decisioni di Luca.** (1) `A3` oltre `16000`; (2) la correzione del DEVE dell'ultimo stato *(n.97)*, e del disco vicino *(n.98)*. ### **`TM1000` NON parte:** la corsa importa `_vuoto_vivo_B`, dove sta la soglia di `A3`, e una decisione su `A3` potrebbe toccarla mentre gira.
