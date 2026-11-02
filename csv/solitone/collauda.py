@@ -42,7 +42,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **Dalla carta completata col respiro** *(Luca dopo `25614c34`, punto `3`)*: `respiro.py`, `test_respiro.py`, `carta_respiro.py` *(`2f3e93f8`)*.
 # ### **Dalla decisione (a) di Luca dopo `04b02794` e dall'aggiunta delle `09:20`:** `respiro.elenco`, `presenza`, `serie_modi`, `R4`-`R5-Q`, `carta_respiro.py` *(`b71d86eb`)*.
 # ### **Dall'accensione lenta nel repo** *(Luca dopo `04b02794`, punto `4`)*: `accensione.py`, `test_accensione.py`, `corsa_accensione.py` *(`8f8b8f8a`)*.
-LIBRERIA_RIFERITA = "8f8b8f8a"
+# ### **Dalla decisione di Luca sulla vita** *(dopo `bfee5330`)*: `accensione.vita_a_blocchi`, `tempo_alone`, `A7`-`A8-F`, la corsa lunga *(`791c5926`)*.
+LIBRERIA_RIFERITA = "791c5926"
 
 
 def vecchi():
