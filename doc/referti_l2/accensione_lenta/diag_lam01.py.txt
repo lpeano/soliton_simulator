@@ -1,0 +1,53 @@
+import os, sys, contextlib
+R = r"C:\Users\lpeano\soliton_simulator"
+sys.path.insert(0, os.path.join(R, "csv"))
+import solitone
+import numpy as np
+from solitone import protetto as P
+import _vuoto_vivo_B as V, _congelato_lungo as CL, _deriva_congelato as DC, _screening_forme_s3 as SF
+import _solitone_vuoto_congelato as VC, _triangoli_bassa_energia as BE, composizione as CM, tick as TK, materia_vuoto as MV
+import _livelli_piatti as LP
+
+def tick_acceso(z, lam):
+    st, mot, par = z["st"], z["mot"], z["par"]
+    b0 = MV.pezzi
+    def pz(r, l):
+        al, be = b0(r, l)
+        return al, lam * be
+    MV.pezzi = pz
+    try:
+        mot.apri_tick()
+        for idl, fr, _t in CM.ORDINE:
+            nome, vp = TK.OPERATORE[idl]
+            if idl in VC.VUOTO:
+                if lam == 0.0:
+                    continue
+                f = fr * lam
+            else:
+                f = fr
+            mot.operatori[nome](st, par if vp else {}, f)
+        mot.chiudi_tick()
+    finally:
+        MV.pezzi = b0
+
+sol, vuoto, s = V.CORSE["BG-F-0.15"]
+for lam, nome in ((1.0, "intero"), (0.0, "congelato")):
+    with P.scena_vuoto(V.N, V.L, V.EPS, s, LP.FORMA, vuoto) as (rec, z, phi0, pK):
+        salv = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+        p0, info = V.partenza(sol, z, phi0, pK, s)
+        for k, v in salv.items(): z["st"][k][...] = v
+        z["st"]["psi_h"][...] = p0
+        A = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            for t in range(20):
+                tick_acceso(z, lam)
+        X = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+        for k, v in A.items(): z["st"][k][...] = v
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            for t in range(20):
+                if lam == 1.0:
+                    TK.percorri_tick(z["st"], z["mot"], z["par"], (), None, len(CM.ORDINE))
+                else:
+                    CL.avanza(z, phi0, 1)
+        Y = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+        print(nome, {k: (X[k].tobytes() == Y[k].tobytes(), float(np.max(np.abs(X[k] - Y[k])))) for k in X})

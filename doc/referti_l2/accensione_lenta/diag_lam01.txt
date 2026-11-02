@@ -1,0 +1,2 @@
+intero {'psi': (True, 0.0), 'psi_h': (True, 0.0), 'phi_h': (True, 0.0), 'Lambda': (True, 0.0), 'rho': (True, 0.0), 'h_int': (True, 0.0)}
+congelato {'psi': (True, 0.0), 'psi_h': (False, 1.2758510841771825e-14), 'phi_h': (True, 0.0), 'Lambda': (False, 1.7763568394002505e-15), 'rho': (False, 9.094947017729282e-13), 'h_int': (True, 0.0)}

@@ -22632,3 +22632,21 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
 - **La mia lettura, dichiarata nel task history e non un criterio:** in uno stato fermo la materia entra nel vuoto solo attraverso `rho`, che non porta `mu`. `mu` arriva nel vuoto solo attraverso i battimenti della materia.
 
 **La cassetta** con `test_vuoto` fa `44/44` *(i `38` di prima, piu' `6`)*. **La MAPPA e `CHIUDERE_LE_USCITE` non le tocco:** non c'e' un'uscita, e le voci `1` e `27` vanno con l'accensione lenta.
+
+## 2026-11-02 — L'ACCENSIONE LENTA DEL VUOTO (Luca 01:13): IL TASK HISTORY -- UN DEVE CHE NON PASSA, MISURATO PRIMA DEL CODICE (lam = 0 contro il congelato): FERMO, DECIDE LUCA
+
+**Il task history:** `doc/TASK_HISTORY/2026-11-02_accensione_lenta.md`. **La diagnostica, fatta prima e dichiarata:** `doc/referti_l2/accensione_lenta/diag_lam01.py.txt`, con l'uscita in `diag_lam01.txt`.
+
+- **Lo schema dal codice:** i pezzi del vuoto *(Grover e spostamento)* sono flussi parziali, quindi si accendono con `frazione * lam`. La `beta` si scala sostituendo `MV.pezzi` con `(al, lam * be)`.
+  - Sotto `_screening_forme_s3.forma` `MV.pezzi` e' gia' sostituito: **scalare `MV.beta` non arrivava**, e la diagnostica l'ha mostrato.
+  - Il nucleo rifiuta la frazione `0`, quindi a `lam = 0` i pezzi del vuoto non girano.
+- **`A1` passa:** con `lam = 1`, `20` tick dalla partenza di BG-F-0.15 sono il tick intero **al bit**.
+- ### ⛔ **`A2` NON PASSA:** con `lam = 0`, `phi` resta `phi0` al bit, ma `psi_h` differisce da `_congelato_lungo.avanza` di **`1.28e-14`** dopo `20` tick *(`Lambda` di `1.78e-15`)*.
+  - **La causa:** il congelato fa girare `CAMM-MATERIA-VUOTO` intero e rimette `phi` solo a fine tick. Il secondo pezzo legge `|e^{i theta} phi0|^2`, che differisce da `|phi0|^2` di un ulp.
+  - **E' arrotondamento, non fisica.**
+- **Le possibilita':**
+  - **(i)** *(la raccomando)* `phi = phi0` al bit, e `psi` contro il congelato entro l'arrotondamento, con la causa dichiarata;
+  - **(ii)** `lam = 0` come ramo a parte uguale a `avanza`: un FALSO-UNO;
+  - **(iii)** non scalare `beta` e rimettere `phi` col peso `1 - lam`: una legge nuova.
+- **La seconda domanda: la vita «dopo la rampa».** Con la soglia `9`, BG-F-0.15 da' `3.0`, il primo campione. **La mia proposta:** `D` rispetto alla partenza nella rampa, e rispetto allo stato vestito *(a `T_acc`, `mu` di Rayleigh del tick intero)* dopo. Accanto restano l'alone, il cuore e le bande di `D`.
+- **Un limite dichiarato:** il libro dei conti della corsa viva di riferimento e' a eps `0` *(solo inizio e fine col `par`)*.
