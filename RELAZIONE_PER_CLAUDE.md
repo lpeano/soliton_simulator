@@ -22812,3 +22812,47 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
 - **(a3) per la vita a meta', MA NON ATTRIBUIBILE all'accensione:** `~29371` contro `~14972` *(un fattore `2`)*. ### ⚠ **La premessa che cade: il criterio «la vita a meta' del valore del cuore a `T_acc`» prende un valore ISTANTANEO, e il cuore oscilla lento** *(le medie a blocchi da `0.42` a `0.52`)*. `TA1000` arriva a `T_acc` in un minimo *(`0.39`)*, `TA2000` in un massimo *(`0.53`)*: **la differenza viene dalla fase dell'oscillazione, non dalla rampa.** Anche le pendenze del cuore su `5000` *(di segno opposto fra le due)* sono la stessa oscillazione, non una perdita.
 - ### **QUINDI LA VITA DELLA VOCE `27` NON E' ANCORA UN NUMERO.** **La domanda a Luca:** la vita si misura dalla **media del cuore a blocchi** *(un blocco intero dopo `T_acc` come riferimento, la pendenza delle medie)*, o dall'**alone** *(che cresce lineare, `~2.5e-3` per `1000`, e non oscilla)*? **Criterio di chiusura:** la scelta di Luca, poi la misura dalle stesse corse *(i `jsonl` committati bastano; nessuna corsa nuova)*.
 - **Una riga cosmetica del referto:** l'ultimo blocco di `TA1000` *(`6000 .. 7000`)* ha un solo campione, e le sue pendenze sono `nan`. Non cambia nessun criterio.
+
+## 2026-11-02 — LA DECISIONE DI LUCA SULLA VITA (dopo `bfee5330`): LA CORSA LUNGA `TA1000` ARRIVA A `16000`, MA DOPO `~12000` IL SOLITONE DERIVA AL BORDO DEL TORO E LE MISURE COL BARICENTRO EUCLIDEO NON VALGONO -- ### FERMO
+
+**Il task history:** sez. `10` *(`d200d1f8`)*. **Il codice:** `791c5926`; `D6` `00822ce0`. **La cassetta:** `62/62` *(con `A7`-`A8-F`)*. **Il referto:** `doc/referti_l2/accensione_lenta.txt` *(rifatto; le righe del confronto di `bfee5330` identiche)*. **La diagnostica:** `doc/referti_l2/accensione_lenta/diag_toro.py.txt`, `diag_toro.txt`.
+
+**I DEVE della corsa lunga:** `A6`, `A3` *(`dM 6.2e-11`, `dV 4.0e-11`)*, `A4`, la fine: **passano.** `11` pezzi, `16000` raggiunto.
+
+### ⛔ **QUELLO CHE IL REFERTO DICE E NON E' VERO**
+
+Il referto stampa per `TA1000`:
+- la vita del cuore a blocchi **«MISURATA, il blocco centrato a `13500`»** *(la media `0.03845` nel blocco `13000 .. 14000`)*;
+- l'alone **«MISURATO a `13005`»**.
+
+**Non e' uno scioglimento.** Dopo, il cuore torna a `0.30`-`0.34` e l'alone a `0.04` *(`15000 .. 16000`: `0.33722`, `0.03836`)*: **la materia non si ri-concentra da sola dal `99%` di alone**, e `M`, `V` sono conservati.
+
+**Il perche', dal codice:**
+- `_salti_nel_cuore.campione` e `_congelato_lungo.punto` centrano **sul baricentro EUCLIDEO** `rho @ pos / M`;
+- **il dominio e' un TORO:** `x` da `-60` a `60`, `y` da `-34.64` a `34.64`;
+- **il solitone DERIVA** lungo `-x`, e **accelera**: `x` medio per blocco `-0.95` *(`6000`)*, `-2.99` *(`9000`)*, `-4.62`, `-8.27`, `-17.94` *(`12000 .. 13000`)*;
+- fra `~13000` e `~14000` **attraversa il bordo in `x`**. Il baricentro euclideo di un solitone tagliato in due finisce in mezzo al dominio *(`x` da `-22.9` a `+27.5`)*: `w` `36.7`, il cuore `0.001`, l'alone `0.99`.
+
+**Da quando le misure non valgono: non lo so con un criterio.** La distanza del baricentro piu' `3 w` supera la meta' del lato corto *(`34.64`)* gia' nel blocco `10000 .. 11000` *(`37.97`; `34.32` in `9000 .. 10000`)*. Il blocco `12000 .. 13000` e' gia' contaminato *(`83.20`)*. **Non scelgo una soglia.**
+
+### **CIO' CHE REGGE** *(le finestre col baricentro a meno di `~3.5` dal centro)*
+
+- **LA BARRA** *(punto `4`, la finestra comune `2000 .. 7000`)*. Le pendenze dell'alone sono `+2.4419e-3` *(il vivo)*, `+2.5611e-3` *(`TA1000`)*, `+2.5200e-3` *(`TA2000`)*. La media e' `+2.5077e-3`, la deviazione standard `6.05e-5`, cioe' **il `2.4%`**.
+  - ⚠ E' la dispersione delle tre stesse, non un errore indipendente.
+  - **(v4) regge:** l'accensione lenta non cambia la perdita. **(a2) e' scritta nella MAPPA, voci `1` e `27`.**
+- **L'EMISSIONE** *(punto `3`, estrapolata)*:
+  - il vivo arriva all'alone `0.1` a `~42416`, con la pendenza `+2.39e-3` su `0 .. 9999`;
+  - `TA2000` a `~39829`, con `+2.52e-3` su `2000 .. 6999`;
+  - **(v3) regge.** **Il tempo di `TA1000`** *(la pendenza `+1.45e-2` su `1000 .. 16000`)* **e' falsato dal bordo: non vale.**
+- **L'ALLARGAMENTO** *(punto `1`, le medie del cuore a blocchi)*:
+  - il vivo: il riferimento `0.46031`, l'estrapolata `~93965`, con la pendenza `-2.70e-3`;
+  - `TA2000`: il riferimento `0.50859`, l'estrapolata `~31904`, con `-9.10e-3` su `5` blocchi;
+  - **le due estrapolate differiscono di un fattore `3`, su finestre corte e con l'oscillazione lenta del cuore dentro.**
+  - `TA1000` fino a `12000`: le medie scendono da `0.44240` a `0.38591` *(il minimo `0.38425`)*, **senza arrivare alla meta' `0.22120`.** Il resto e' il bordo.
+- **Il moto del solitone e' un fatto nuovo:** il baricentro deriva e accelera dopo `~9000`. **Non lo interpreto** *(lo spostamento della carta del respiro? il vuoto vivo?)*.
+
+### **LE DOMANDE A LUCA** *(criterio di chiusura: la sua scelta)*
+
+1. **Le misure su un toro:** un baricentro **periodico** *(la media circolare per asse, nessun parametro)* al posto di quello euclideo, in una funzione nuova, perche' i test di oggi ridanno al bit i numeri committati. **Per rimisurare `TA1000` oltre `~10000` serve rigirare la corsa:** gli stati intermedi non sono salvati, solo l'ultimo. Da `0` a `16000` sono `~3` ore.
+2. **Oppure** la vita del cuore si legge solo dove il solitone sta al centro, con un criterio di validita' tuo *(io non scelgo la soglia)*.
+3. **Il moto del solitone:** e' una domanda nuova, da mettere in coda?

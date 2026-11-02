@@ -1,0 +1,34 @@
+# -*- coding: utf-8 -*-
+"""LA DIAGNOSTICA DEL TORO (dopo la corsa lunga TA1000, 2026-11-02): il dominio, il baricentro per blocchi, la traiettoria attorno a 13000.
+Le misure (_salti_nel_cuore.campione, _congelato_lungo.punto) centrano sul baricentro EUCLIDEO rho @ pos / M; il dominio e' un toro.
+    python diag_toro.py   (dalla radice del repo; copiato in doc/referti_l2/accensione_lenta/diag_toro.py.txt)
+"""
+import os
+import sys
+
+import numpy as np
+
+sys.path.insert(0, "csv")
+import _vuoto_vivo_B as V  # noqa: E402
+
+sol, vuoto, s = V.CORSE["BG-F-0.15"]
+with V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
+    p = z["pos"]
+    print("il dominio: x da %.4f a %.4f, y da %.4f a %.4f; w0 %.6f" % (p[:, 0].min(), p[:, 0].max(), p[:, 1].min(), p[:, 1].max(), rec["larghezza"]))
+d = "doc/referti_l2/accensione_lenta/"
+cc = [c for n in sorted(os.listdir(d)) if n.startswith("TA1000_") and n.endswith(".jsonl") for c in V.LP.leggi(d + n)["campioni"]]
+t = np.array([c["t"] for c in cc]) * s
+x = np.array([c["x"] for c in cc])
+y = np.array([c["y"] for c in cc])
+w = np.array([c["w"] for c in cc])
+fl = np.array([c["f_liscia"] for c in cc])
+al = np.array([c["alone"] for c in cc])
+print("TA1000, per blocco di 1000: |x| massimo, |y| massimo, il massimo di (distanza del baricentro + 3 w), x medio")
+for a in range(0, 16000, 1000):
+    m = (t >= a) & (t < a + 1000)
+    print("  %5d .. %5d  |x|max %6.2f  |y|max %5.2f  max(dist + 3w) %7.2f  x medio %7.2f"
+          % (a, a + 1000, np.abs(x[m]).max(), np.abs(y[m]).max(), (np.hypot(x[m], y[m]) + 3 * w[m]).max(), x[m].mean()))
+print("TA1000, un campione ogni 25 fra 12500 e 14600: il baricentro, w, il cuore liscio, l'alone")
+for i in range(0, len(t), 25):
+    if 12500 <= t[i] <= 14600:
+        print("  %8.1f  x %8.3f  y %7.3f  w %7.3f  f_liscia %.4f  alone %.4f" % (t[i], x[i], y[i], w[i], fl[i], al[i]))

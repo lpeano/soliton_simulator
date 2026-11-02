@@ -387,3 +387,11 @@
 - **(v2)** scende sotto meta' prima di `16000`: si scrive il tempo.
 - **(v3)** l'alone al `10%` arriva in un tempo dell'ordine di `~4 x 10^4` *(la pendenza `~2.5e-3` per `1000`)*: **l'emissione e' il processo piu' rapido**.
 - **(v4)** le tre pendenze dell'alone sulla finestra comune stanno entro `~10%` l'una dall'altra: **(a2) regge con la barra**.
+
+### 10-bis. L'ESITO *(il referto a `00822ce0`; la relazione per i numeri)*
+
+- **I DEVE della corsa lunga passano;** la cassetta `62/62`.
+- ### ⛔ **UNA PREMESSA CHE MANCAVA** *(annoto, non riscrivo)*: non avevo scritto che **le misure centrano sul baricentro EUCLIDEO e il dominio e' un toro** *(`x` `±60`, `y` `±34.64`)*. Il solitone **deriva lungo `-x` e accelera dopo `~9000`**, e fra `~13000` e `~14000` **attraversa il bordo**: la «vita misurata a `13500`» e l'«alone misurato a `13005`» del referto **sono il bordo, non uno scioglimento** *(dopo, il cuore torna a `0.30`-`0.34`)*. La diagnostica: `doc/referti_l2/accensione_lenta/diag_toro.txt`.
+- **(v1)/(v2) per `TA1000`: NON DECIDIBILE.** Fino a `12000` le medie non arrivano a meta' *(minimo `0.38425` contro `0.22120`)*; oltre, le misure non valgono.
+- **(v3) regge** per il vivo e `TA2000` *(`~42416`, `~39829`)*. **(v4) regge** *(la dispersione `2.4%` sulla finestra comune)*. **(a2) nella MAPPA.**
+- **FERMO:** le domande a Luca nella relazione *(il baricentro periodico e la corsa da rifare, o un criterio di validita'; il moto del solitone)*.

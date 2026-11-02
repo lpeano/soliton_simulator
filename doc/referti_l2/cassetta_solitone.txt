@@ -4,14 +4,14 @@
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
 [TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
 [TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
-[TIMBRO] accensione.py  sha1-BYTE ebc4908a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE fd0a158c  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
 [TIMBRO] test_vuoto.py  sha1-BYTE 5c5753b2  committato e pulito
 [TIMBRO] test_respiro.py  sha1-BYTE 810ee3ff  committato e pulito
-[TIMBRO] test_accensione.py  sha1-BYTE 69af23bf  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE f4309554  committato e pulito
+[TIMBRO] test_accensione.py  sha1-BYTE e53febc9  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE ed80bfee  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -82,13 +82,20 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: A1 con lam = 1 il tick dell'accensione e' il tick intero (tick.percorri_tick) AL BIT, 20 tick, ogni chiave           PASSA   chiavi diverse: nessuna
   DEVE PASSARE: A2 (la decisione (i)) con lam = 0 phi resta phi0 AL BIT a ogni tick, e psi = _congelato_lungo.avanza entro 1e-12 (20 PASSA   phi al bit True; |dpsi|/|psi| 1.71e-16 (la causa: la rotazione di beta e il ritorno a phi0 nel congelato, un ulp sul modulo)
   DEVE FALLIRE: A0 con lam = 0.5 psi coincide col tick intero o col congelato entro 1e-12                                            PASSA   |dpsi| dal tick intero 2.410e+00, dal congelato 1.649e+00
-### D6: LA LIBRERIA E' QUELLA DI 8f8b8f8a (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 8f8b8f8a a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### LA VITA A BLOCCHI E L'ALONE (accensione.vita_a_blocchi, tempo_alone): serie a mano; TOLL_ESATTO 1e-09
+  DEVE PASSARE: A7 un cuore lineare: la vita estrapolata dalle medie a blocchi e' quella esatta (entro 1e-09)                        PASSA   estrapolata 10250.124999999993, attesa 10250.125000; il riferimento 0.975012500 (atteso 0.975012500)
+  DEVE PASSARE: A7-M un cuore che scende sotto meta' nel blocco 3000 .. 4000: misurata al suo centro, 3500                           PASSA   misurata 3500.0
+  DEVE PASSARE: A7-B i campioni fino a 6000 dal blocco 1000: 5 blocchi completi (6000 .. 7000 ha un campione solo, fuori)            PASSA   blocchi [(1000.0, 2000.0), (2000.0, 3000.0), (3000.0, 4000.0), (4000.0, 5000.0), (5000.0, 6000.0)]
+  DEVE FALLIRE: A7-F un cuore che SALE da' una vita (misurata o estrapolata)                                                         PASSA   misurata None estrapolata None pendenza +5.0000e-02
+  DEVE PASSARE: A8 un alone lineare 0.001 + 2.5e-3 per 1000: il 10% a 39600 (entro 1e-09)                                            PASSA   tempo 39600.0, pendenza +2.5000e-03
+  DEVE FALLIRE: A8-F un alone che CALA da' un tempo al 10%                                                                           PASSA   tempo None, pendenza -1.0000e-03
+### D6: LA LIBRERIA E' QUELLA DI 791c5926 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 791c5926 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 19 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s
-ESITO: 56/56 controlli passano; fallite: 0 []
+  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 1 s; accensione 7 s
+ESITO: 62/62 controlli passano; fallite: 0 []

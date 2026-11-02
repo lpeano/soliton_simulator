@@ -1,0 +1,75 @@
+il dominio: x da -60.0000 a 60.0000, y da -34.6410 a 34.6410; w0 6.614431
+TA1000, per blocco di 1000: |x| massimo, |y| massimo, il massimo di (distanza del baricentro + 3 w), x medio
+      0 ..  1000  |x|max   0.33  |y|max  0.31  max(dist + 3w)   26.62  x medio    0.07
+   1000 ..  2000  |x|max   0.96  |y|max  0.21  max(dist + 3w)   27.42  x medio   -0.78
+   2000 ..  3000  |x|max   1.07  |y|max  0.63  max(dist + 3w)   25.71  x medio   -0.93
+   3000 ..  4000  |x|max   1.27  |y|max  0.86  max(dist + 3w)   25.63  x medio   -1.19
+   4000 ..  5000  |x|max   1.03  |y|max  0.71  max(dist + 3w)   25.64  x medio   -0.52
+   5000 ..  6000  |x|max   1.55  |y|max  1.08  max(dist + 3w)   27.72  x medio   -1.17
+   6000 ..  7000  |x|max   1.41  |y|max  0.72  max(dist + 3w)   28.64  x medio   -0.95
+   7000 ..  8000  |x|max   2.00  |y|max  1.36  max(dist + 3w)   31.39  x medio   -1.47
+   8000 ..  9000  |x|max   2.80  |y|max  1.41  max(dist + 3w)   32.85  x medio   -2.52
+   9000 .. 10000  |x|max   3.46  |y|max  1.23  max(dist + 3w)   34.32  x medio   -2.99
+  10000 .. 11000  |x|max   5.98  |y|max  1.28  max(dist + 3w)   37.97  x medio   -4.62
+  11000 .. 12000  |x|max  11.92  |y|max  1.11  max(dist + 3w)   44.35  x medio   -8.27
+  12000 .. 13000  |x|max  22.95  |y|max  3.68  max(dist + 3w)   83.20  x medio  -17.94
+  13000 .. 14000  |x|max  23.81  |y|max  6.65  max(dist + 3w)  119.54  x medio    1.10
+  14000 .. 15000  |x|max  27.55  |y|max  7.49  max(dist + 3w)  106.30  x medio   25.99
+  15000 .. 16000  |x|max  23.05  |y|max  7.57  max(dist + 3w)   62.99  x medio   17.74
+TA1000, un campione ogni 25 fra 12500 e 14600: il baricentro, w, il cuore liscio, l'alone
+   12525.0  x  -18.426  y  -1.896  w  11.387  f_liscia 0.3846  alone 0.0318
+   12562.5  x  -19.001  y  -2.018  w  11.394  f_liscia 0.3838  alone 0.0319
+   12600.0  x  -19.582  y  -2.145  w  11.431  f_liscia 0.3891  alone 0.0321
+   12637.5  x  -20.150  y  -2.272  w  11.504  f_liscia 0.3985  alone 0.0326
+   12675.0  x  -20.639  y  -2.412  w  11.772  f_liscia 0.4019  alone 0.0341
+   12712.5  x  -21.148  y  -2.562  w  12.041  f_liscia 0.4005  alone 0.0355
+   12750.0  x  -21.604  y  -2.714  w  12.483  f_liscia 0.3977  alone 0.0379
+   12787.5  x  -21.938  y  -2.863  w  13.228  f_liscia 0.3962  alone 0.0419
+   12825.0  x  -22.249  y  -3.012  w  14.034  f_liscia 0.3890  alone 0.0464
+   12862.5  x  -22.729  y  -3.161  w  14.480  f_liscia 0.3754  alone 0.0492
+   12900.0  x  -22.935  y  -3.308  w  15.467  f_liscia 0.3625  alone 0.0550
+   12937.5  x  -22.797  y  -3.447  w  16.952  f_liscia 0.3397  alone 0.0651
+   12975.0  x  -22.150  y  -3.587  w  19.037  f_liscia 0.3123  alone 0.0826
+   13012.5  x  -21.251  y  -3.724  w  21.079  f_liscia 0.2718  alone 0.1045
+   13050.0  x  -20.260  y  -3.856  w  22.960  f_liscia 0.2169  alone 0.1314
+   13087.5  x  -19.483  y  -3.981  w  24.472  f_liscia 0.1638  alone 0.1575
+   13125.0  x  -18.428  y  -4.112  w  26.131  f_liscia 0.1145  alone 0.2003
+   13162.5  x  -16.959  y  -4.237  w  27.918  f_liscia 0.0695  alone 0.2656
+   13200.0  x  -15.382  y  -4.362  w  29.559  f_liscia 0.0356  alone 0.3645
+   13237.5  x  -13.624  y  -4.490  w  31.045  f_liscia 0.0137  alone 0.5055
+   13275.0  x  -11.590  y  -4.618  w  32.419  f_liscia 0.0041  alone 0.6500
+   13312.5  x   -9.523  y  -4.742  w  33.555  f_liscia 0.0013  alone 0.7795
+   13350.0  x   -7.495  y  -4.864  w  34.476  f_liscia 0.0011  alone 0.8770
+   13387.5  x   -5.385  y  -4.977  w  35.256  f_liscia 0.0010  alone 0.9460
+   13425.0  x   -3.193  y  -5.087  w  35.871  f_liscia 0.0010  alone 0.9798
+   13462.5  x   -0.355  y  -5.195  w  36.424  f_liscia 0.0010  alone 0.9898
+   13500.0  x    2.074  y  -5.319  w  36.679  f_liscia 0.0011  alone 0.9906
+   13537.5  x    3.907  y  -5.444  w  36.748  f_liscia 0.0011  alone 0.9906
+   13575.0  x    6.180  y  -5.571  w  36.605  f_liscia 0.0011  alone 0.9904
+   13612.5  x    8.014  y  -5.689  w  36.334  f_liscia 0.0011  alone 0.9882
+   13650.0  x    9.731  y  -5.798  w  36.009  f_liscia 0.0011  alone 0.9791
+   13687.5  x   11.381  y  -5.920  w  35.540  f_liscia 0.0011  alone 0.9525
+   13725.0  x   13.127  y  -6.041  w  35.002  f_liscia 0.0010  alone 0.9062
+   13762.5  x   15.076  y  -6.148  w  34.187  f_liscia 0.0010  alone 0.8309
+   13800.0  x   16.911  y  -6.246  w  33.244  f_liscia 0.0016  alone 0.7224
+   13837.5  x   18.966  y  -6.341  w  31.954  f_liscia 0.0053  alone 0.5868
+   13875.0  x   20.197  y  -6.416  w  30.962  f_liscia 0.0140  alone 0.4870
+   13912.5  x   21.126  y  -6.495  w  30.039  f_liscia 0.0275  alone 0.4063
+   13950.0  x   22.028  y  -6.562  w  29.058  f_liscia 0.0481  alone 0.3351
+   13987.5  x   23.348  y  -6.630  w  27.719  f_liscia 0.0814  alone 0.2639
+   14025.0  x   24.469  y  -6.698  w  26.404  f_liscia 0.1211  alone 0.2174
+   14062.5  x   25.183  y  -6.775  w  25.242  f_liscia 0.1520  alone 0.1829
+   14100.0  x   25.846  y  -6.851  w  24.031  f_liscia 0.1816  alone 0.1550
+   14137.5  x   26.406  y  -6.927  w  22.857  f_liscia 0.2130  alone 0.1341
+   14175.0  x   26.501  y  -6.999  w  22.117  f_liscia 0.2373  alone 0.1229
+   14212.5  x   26.666  y  -7.072  w  21.350  f_liscia 0.2651  alone 0.1138
+   14250.0  x   26.710  y  -7.136  w  20.728  f_liscia 0.2805  alone 0.1058
+   14287.5  x   26.722  y  -7.196  w  20.125  f_liscia 0.2903  alone 0.0983
+   14325.0  x   26.811  y  -7.255  w  19.398  f_liscia 0.2975  alone 0.0884
+   14362.5  x   26.988  y  -7.314  w  18.539  f_liscia 0.3051  alone 0.0799
+   14400.0  x   27.241  y  -7.356  w  17.547  f_liscia 0.3153  alone 0.0694
+   14437.5  x   27.342  y  -7.388  w  16.679  f_liscia 0.3213  alone 0.0619
+   14475.0  x   27.513  y  -7.409  w  15.661  f_liscia 0.3323  alone 0.0543
+   14512.5  x   27.434  y  -7.429  w  15.016  f_liscia 0.3396  alone 0.0502
+   14550.0  x   27.270  y  -7.438  w  14.515  f_liscia 0.3488  alone 0.0470
+   14587.5  x   26.923  y  -7.449  w  14.272  f_liscia 0.3552  alone 0.0457
