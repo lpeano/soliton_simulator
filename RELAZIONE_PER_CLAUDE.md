@@ -22870,3 +22870,15 @@ Il referto stampa per `TA1000`:
   - il «vuoto congelato» del repo e' `_congelato_lungo.avanza` *(i pezzi del vuoto saltati, `phi` rimesso a `phi0`)*;
   - `toro.py` da' gia' il centro periodico che la prova chiede.
 - **Una lettura mia** *(non un criterio)*: nei dati di `TA1000` *(il centro euclideo, `455b9a95`)* la deriva accelera quando il solitone e' gia' largo *(`w` medio `9.77`-`10.48` nei blocchi `8000 .. 11000`)*. La barriera di Peierls-Nabarro cala con `w`: la prova (m2) a due larghezze diverse direbbe se l'incastro dipende dalla larghezza.
+
+## 2026-11-02 — LA CODA, REGISTRATA *(`[[PRECEDENZA-IN-CODA]]`; mentre `TP1000` gira)*
+
+| | che cosa | lo stato |
+|---|---|---|
+| `1` | **la deriva e le misure sul toro** *(Luca dopo `455b9a95`, la conferma dopo `8e425771`, l'aggiunta delle `15:54`)*: il referto di `TP1000` e `doc/referti_l2/deriva_solitone.txt` | **la corsa gira** *(dal commit `18c91ad8`)*; il codice e' committato |
+| `2` | **le mappe per l'animazione** *(Luca `15:49`)*: `TM1000`, la ripetizione di `TP1000` con le mappe su `E:` | il codice di `mappe.py` committato *(`719b97bd`)*, non ancora girato; il cablaggio nella corsa **a corsa chiusa** |
+| `3` | **chi sceglie la direzione del solitone** *(Luca `16:29`-`16:34`)*: `D1`-`D5` *(~`9` ore)* | **in coda**, dopo `TM1000`; il task history si scrive quando tocca |
+| attesa | la voce `34` *(l'inerzia, dopo il referto della deriva)*; il toro `L 120` *(decisione di Luca)* | scritte nella MAPPA |
+
+- **Un solo processo di calcolo alla volta.**
+- **Le premesse di (3)** si leggeranno dal codice quando tocca: la rotazione e lo specchio del reticolo con lo spin, il capovolgimento dello spin, `eps 0`, il rumore coi semi.
