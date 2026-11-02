@@ -23005,3 +23005,26 @@ Il referto stampa per `TA1000`:
 - il criterio `3 w < 40.5`.
 
 **Poi, nella coda: `TM1000`** *(le mappe e gli stati su `E:`)*.
+
+## 2026-11-02 — L'ORDINE DEI LAVORI E LA VOCE `38` *(Luca `18:24`-`18:29`; solo scrittura, nessuna corsa)*
+
+**La coda, registrata** *(`[[PRECEDENZA-IN-CODA]]`)*:
+
+| | che cosa | lo stato |
+|---|---|---|
+| `1` | **due giri del toro** *(`DG1000`, Luca `18:05`, con le aggiunte delle `18:12` e `18:18`)* | **la corsa gira** *(dopo `055ffbb2`)* |
+| `2` | **le mappe** *(`TM1000`)* | il codice committato *(`65f44871`)* |
+| `3` | **chi sceglie la direzione** *(`D1`-`D5`)* | in coda |
+| `4` | **`cs` col solitone** *(il punto fisso, poi la corsa; il respiro veloce con e senza `cs`)* | in coda |
+| `5` | **la voce `38`, il coarse graining del solitone singolo** *(la prima dopo la coda)* | lista d'attesa, con priorita' |
+| `6` | **la coppia** *(voce `33` (a), (c))* | lista d'attesa |
+| `7` | **il triangolo** *(voce `33` (b))* | lista d'attesa |
+
+- **Niente si butta:** le voci `30`-`37` e i mandati gia' scritti restano come sono.
+- **La voce `38` e' scritta nella MAPPA come dettata:**
+  - la forma da provare, `m dv/dt = - c1 grad Lambda - c2 v`, coi parametri **misurati, non tarati**;
+  - il criterio di successo scritto prima;
+  - i modi nuovi e il solitone «vestito»;
+  - perche' prima della coppia;
+  - che cosa si fa se non riesce.
+- **Un fatto dal codice per quando tocchera'** *(non ora)*: `E_cen` e `alone_3w` *(Luca `18:12`, `18:18`)* ci sono **solo nei campioni di `DG1000`**. Le mappe di `TM1000` danno `rho` e `Lambda` per nodo ogni `100` tick: **sono il dato per `Lambda` «nel riferimento del solitone».**
