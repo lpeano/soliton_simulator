@@ -567,3 +567,36 @@
 - `E:` assente, non scrivibile, o senza spazio;
 - un `sha_fine` di `TM1000` diverso da `TP1000`;
 - una rilettura fuori da `1e-6`.
+
+### 11-ter. L'AGGIUNTA DI LUCA *(15:54)*: NEL REFERTO DELLA DERIVA, IL LOGARITMO DELLO SPOSTAMENTO, LA VELOCITA' CONTRO `w`, L'AMPIEZZA DEL CUORE
+
+**La richiesta** *(nella sostanza)*:
+- **(i)** il logaritmo dello spostamento del centro periodico contro il tempo, dalla fine della rampa, con **la pendenza a tratti**. Se e' una retta gia' prima di `9000`, e' **un'instabilita' presente fin dall'inizio, nascosta dal tremolio del respiro**.
+- **(ii)** la velocita' contro `w` per `TP1000` e, dove i dati bastano, per **il vivo** *(senza rampa)* e **`TA2000`**. Se il moto parte allo stesso `w`, e' **una soglia di larghezza**.
+- **(iii)** l'ampiezza dell'oscillazione del cuore **a finestre di `500`**, accanto alla velocita'.
+
+**L'ordine** *(`[[PRECEDENZA-IN-CODA]]`, registrato)*: e' arrivata dopo l'aggiunta delle mappe *(15:49)*, ma **riguarda il referto della deriva, che viene prima nella coda**. La si fa **col referto di `TP1000`**; le mappe vengono dopo, come scritto nella sez. `12`.
+
+### Le premesse dal codice
+
+- ### ⚠ **`corsa_accensione.py` E' NEL PERCORSO DELLA CORSA IN USO** *(`TP1000` gira)*: **non si modifica** *(par. `5`)*. Quindi **uno script a parte**, `csv/solitone/carta_deriva.py`, che legge i pezzi, col suo referto **`doc/referti_l2/deriva_solitone.txt`**. Non tocca la corsa.
+- **I dati:**
+  - `TP1000`: il centro periodico *(`c1`, `c2`)* in ogni campione, la traiettoria srotolata come in `sul_toro`;
+  - **il vivo** *(`_respiro_congelato.serie_viva`, fino a `9999`)* e **`TA2000`** *(fino a `7000`)*: **solo il centro EUCLIDEO**.
+  - Il baricentro di queste due resta entro `~3.5` dalla partenza, e su `TP1000` **il DEVE `TP2`** misura la differenza fra i due centri prima di `9000`. **Lo dichiaro:** per queste due corse il centro e' l'euclideo, **valido finche' `TP2` dice che i due coincidono.**
+- **Le definizioni** *(le mie, dichiarate prima dei numeri)*:
+  - **(i) lo spostamento:** `s(t) = |X(t) - X_rif|`, con `X_rif` **la media di `X` sul primo blocco dopo `T_acc`** *(lo stesso riferimento della vita, la decisione di Luca dopo `bfee5330`)*.
+    - **La pendenza a tratti:** per ogni blocco di `BLOCCO` `= 1000`, la retta di `ln s` contro `t` sui campioni del blocco, per `1000`.
+    - **E due rette lunghe:** su `T_acc + 1000 .. 9000` e da `9000` al primo blocco non valido.
+    - **Un esponenziale da' pendenze uguali a ogni tratto;** un moto uniforme da' pendenze che calano come `1/t`.
+    - ⚠ **Nel primo blocco `s` e' piccolo e dominato dal tremolio:** `ln s` e' rumore, e lo stampo comunque.
+  - **(ii) la velocita':** per ogni blocco di `1000`, la retta di `x` e di `y` contro `t` *(per `1000`)*, e `w` medio del blocco. **Senza una soglia mia:** la tabella, e la lettura e' di Luca.
+  - **(iii) l'ampiezza del cuore** in finestre di `500`:
+    - `sqrt(2)` volte la deviazione standard del cuore liscio meno la sua retta nella finestra, cioe' **l'ampiezza di un seno con quella varianza**. E' una scelta, dichiarata;
+    - accanto, la velocita' della stessa finestra.
+- **Il periodo del tremolio:** la coppia veloce `~0.99` *(la carta del respiro)*. I campioni ogni `1.5` lo **aliasano**: `ln s` campione per campione e' rumoroso. **Le rette per blocco lo mediano.**
+
+### La progettazione *(si aggiunge ai passi della sez. `11`)*
+
+1. **`csv/solitone/carta_deriva.py`** *(nuovo, mentre `TP1000` gira; non nel percorso della corsa)*: le tre tabelle, per `TP1000`, il vivo, `TA2000`. Una prova sui pezzi gia' committati di `TA1000` *(il centro euclideo, fino a `9000`)*.
+2. **Dopo `TP1000`:** il referto `deriva_solitone.txt`, insieme a quello della corsa.
