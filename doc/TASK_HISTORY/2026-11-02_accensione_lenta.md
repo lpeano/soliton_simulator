@@ -193,3 +193,14 @@
 - **(r5)** altro.
 
 ## 7. L'ESITO
+
+### La carta completata col respiro *(il referto `doc/referti_l2/solitone_vestito_carta_respiro.txt`; il codice `2f3e93f8`, `D6` `49a116d5`)*
+
+- **I controlli passano:** `R1`, `R1-F`, `R2`, `R3`, `V0`-`V4`; (W1) al bit coi `400` campioni committati; (W2) gli `sha` della fine della corsa viva.
+- ### ⛔ **FERMO, sul criterio scritto prima:** il primo picco del cuore in (W1) supera il primo non armonico di **`1.58`** volte, non di `3`. **`Omega` non e' definito.**
+  - I picchi di (W1): `57.44`, `42.41`, `36.50`, `0.9909`, `0.9829`.
+  - I picchi di (W2): `19.54`, `26.18`, `11.70`, `13.29`, `2.029`.
+  - **Nessun picco a `~4.07`.**
+- **Le bande laterali, le uscite miste e la quota non sono state calcolate.** **L'accensione non e' partita:** decide Luca fra (a), (b), (c) della relazione.
+- **La riga finale del referto conta anche il `PUO' FALLIRE`** *(«DEVE fallite: `2`»)*: la DEVE fallita e' una sola. Un difetto del runner, dichiarato.
+- **Le letture (r1)-(r5) non si applicano:** la carta si e' fermata prima delle uscite.

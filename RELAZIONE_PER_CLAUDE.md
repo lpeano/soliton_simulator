@@ -22658,3 +22658,49 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
   - **Dopo l'accensione lenta.**
 - **La voce `32`:** il tempo di vita in un vuoto caldo come equilibrio fra cio' che il solitone cede e cio' che riceve; `F0` e' il caso a zero assoluto.
 - **L'ordine, dichiarato:** i due mandati sulla voce `33` sono arrivati mentre l'accensione lenta era in corso *(in coda, [[L-UN-PROMPT]])*. Li scrivo dopo il task history dell'accensione, che si e' fermato su `A2`, **in un commit solo**, perche' il secondo modifica la voce scritta dal primo.
+
+## 2026-11-02 — L'ACCENSIONE LENTA: LE DECISIONI DI LUCA, E LA CARTA COL RESPIRO -- ### FERMO: IL CUORE DI BG-F-0.15 NON HA UN RESPIRO NETTO, `Omega` NON E' DEFINITO
+
+**Le decisioni di Luca** *(dopo `25614c34` e `4d1c2b65`)* **sono nel task history, sez. `6-bis`** *(`497a4e7f`)*:
+- `A2` secondo la (i), con la tolleranza scritta prima *(`1e-12` relativa su `20` tick)*;
+- la vita dal cuore liscio a meta' del suo valore a `T_acc`, con la soglia `9` come misura accessoria;
+- la carta da completare col respiro *(l'errore del guardiano `n.90`)*;
+- il libro a eps `0` di BG-F, dichiarato.
+
+**Il codice:** `respiro.py`, `test_respiro.py`, `carta_respiro.py` *(`2f3e93f8`; `D6` `49a116d5`)*.
+
+**Il referto:** `doc/referti_l2/solitone_vestito_carta_respiro.txt`.
+
+**I controlli passano:**
+- `R1`: un seno noto ritrovato con errore `7.0e-09`;
+- `R1-F`: il seno di periodo `2.3755`, campionato ogni `10` tick, si legge `4.070000`, cioe' l'alias. **Il test distingue;**
+- `R2`, `R3`, `V0`-`V4`;
+- **(W1):** la serie densa dalla partenza ridà **al bit** i `400` campioni committati del cuore;
+- **(W2):** lo stato di partenza e' la fine committata della corsa viva a `10000` *(gli `sha`)*.
+
+**Che cosa dice il cuore, campionato a ogni tick** *(passo `0.15`, Nyquist `0.3`)*:
+
+| | i picchi *(periodo, ampiezza)*, almeno `10` periodi nella finestra | il primo contro il primo non armonico | i cambi di segno |
+|---|---|---|---|
+| (W1) `0 .. 600` | `57.44` `1.82e-3`; `42.41` `1.16e-3`; `36.50` `7.40e-4`; `0.9909` `3.17e-4`; `0.9829` `2.78e-4` | **`1.58`** | `50.84` |
+| (W2) `10000 .. 10300` | `19.54` `3.98e-4`; `26.18` `2.16e-4`; `11.70` `1.17e-4`; `13.29` `1.33e-4`; `2.029` `7.89e-5` | `1.84` | `19.66` |
+
+- ### **IL CRITERIO SCRITTO PRIMA NON PASSA:** il primo picco di (W1) supera il primo non armonico di `1.58` volte, non di `3`. **Quindi `Omega` non e' definito.**
+- **La carta si ferma li', come dichiarato.** Le bande laterali, le uscite miste e la quota **non sono state calcolate nella corsa committata.**
+- **Un picco a periodo `~4.07` non c'e'** in nessuna delle due finestre. Il cuore ha:
+  - **componenti lente** *(da `~12` a `~57` unita' di tempo)*, che cambiano fra l'inizio e la fine della corsa;
+  - **una coppia veloce a periodo `~0.99`** *(`Omega 6.341`, `6.392`)*;
+  - in (W2) un picco a `2.029` *(`Omega 3.097`)*.
+- **La mia lettura, non un criterio:**
+  - il `4.07` di `modo_lento.txt` e' il periodo di `D` dalle **rotazioni per banda**, a `r 1`, su un'altra configurazione. **Non e' detto che sia un respiro del cuore di BG-F-0.15;**
+  - la coppia a `~0.99` e il picco a `~2.03` stanno vicino a `2 pi` e a `pi` in `Omega`. Sarebbero battimenti a frequenza `2 |nu_F0|` e `|nu_F0|`, se il vuoto ci entra. Non l'ho verificato.
+- **Un difetto della riga finale del referto:** «DEVE fallite: `2`» conta anche il controllo `PUO' FALLIRE` *(i cambi di segno)*. Nel ramo del FERMO il conto usa `len(FALLITE)`. **La DEVE fallita e' una sola.**
+
+**La prova a secco** *(dichiarata nel commit del codice; `400` tick per finestra, quindi finestre di `60`)* aveva dato il primo picco a `0.991`, con rapporto `5.08`. **Era la finestra corta:** con `PERIODI_MIN = 10` le componenti lente non entravano.
+
+**L'accensione non e' partita.** Il mandato la mette dopo la carta, e il criterio che avevo scritto dice: senza un picco netto, FERMO, e decide Luca. Il modulo, il test e il runner delle corse sono pronti nello **scratchpad**, non nel repo.
+
+**Le possibilita', con la mia raccomandazione** *(non scelgo)*:
+- **(a)** *(la raccomando, insieme a (b))* le tabelle per **ogni** picco, non per uno solo: la coppia veloce `~0.99` e le tre componenti lente. Il codice c'e', costa minuti.
+- **(b)** `Omega` dalle **rotazioni per banda di `D`**, con `D` a ogni tick *(la regola della voce `18` della MAPPA: un periodo si misura con le rotazioni e `D` non piu' rado di `0.75`)*. Dice **quale banda** porta quale frequenza.
+- **(c)** prendere la carta cosi' com'e' *(nessun respiro netto, quindi nessuna banda laterale definita)* e passare alle corse dell'accensione.
