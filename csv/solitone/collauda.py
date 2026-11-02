@@ -39,7 +39,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **Dall'unita' `e_K`** *(Luca, dopo `6052a2b4`)*: la libreria cambia per mandato *(`protetto.legame_spento`, `protetto.e_K`, `P3`)*, e
 # ### `LIBRERIA_RIFERITA` e' il suo commit, `3d5fe03a` *(prima `3fe2f12d`)*.
 # ### **Dal solitone vestito** *(Luca `2026-11-02` `01:04`, passo `2`)*: la libreria aggiunge `vuoto.py`, `test_vuoto.py`, `carta_vuoto.py` *(`ae4640ee`)*.
-LIBRERIA_RIFERITA = "ae4640ee"
+# ### **Dalla carta completata col respiro** *(Luca dopo `25614c34`, punto `3`)*: `respiro.py`, `test_respiro.py`, `carta_respiro.py` *(`2f3e93f8`)*.
+LIBRERIA_RIFERITA = "2f3e93f8"
 
 
 def vecchi():
