@@ -395,3 +395,110 @@
 - **(v1)/(v2) per `TA1000`: NON DECIDIBILE.** Fino a `12000` le medie non arrivano a meta' *(minimo `0.38425` contro `0.22120`)*; oltre, le misure non valgono.
 - **(v3) regge** per il vivo e `TA2000` *(`~42416`, `~39829`)*. **(v4) regge** *(la dispersione `2.4%` sulla finestra comune)*. **(a2) nella MAPPA.**
 - **FERMO:** le domande a Luca nella relazione *(il baricentro periodico e la corsa da rifare, o un criterio di validita'; il moto del solitone)*.
+
+## 11. LA DERIVA DEL SOLITONE E LE MISURE SUL TORO *(Luca, 2026-11-02, dopo `455b9a95`)*
+
+### Le decisioni *(di Luca, nella sostanza)*
+
+1. **Il centro periodico:** la media circolare *(l'argomento di `sum rho e^{i 2 pi x / Lx}`, e cosi' per `y`, sui vettori del reticolo)*, e tutte le misure centrate li' *(cuore liscio, `w`, alone, i blocchi)*.
+2. **Il criterio di validita'** *(dalla geometria, non tarato)*: una misura vale finche' `3 w <` meta' del lato corto del toro. Il primo blocco che non lo rispetta e' marcato, e la vita si dice solo sui blocchi validi.
+3. **La ripresa:** `TA1000` dall'ultimo stato salvato prima della deriva *(il tick piu' vicino a `9000`)* fino a `16000`. I blocchi fino a `9000` si ricalcolano se gli stati ci sono, altrimenti si dichiara.
+4. **La deriva, da descrivere e non da interpretare:**
+   - la traiettoria e la velocita' per blocco;
+   - la direzione, rispetto agli assi del reticolo e al lato corto;
+   - la velocita' contro `w`;
+   - l'alone e il libro dei conti avanti e dietro rispetto al moto.
+5. **La MAPPA, voci `1` e `27`:** l'emissione `2.51e-3` con la barra `2.4%`, la deriva, il criterio.
+
+**I criteri:**
+- **DEVE:** `M` e `V` entro `1e-10`; il libro col `par`.
+- **DEVE:** su un solitone traslato di mezzo lato, il centro periodico da' i numeri del solitone al centro, entro l'arrotondamento.
+- **DEVE:** prima di `9000` il centro periodico e quello euclideo coincidono entro `0.1`.
+
+**Le letture:** (t1)-(t4), nel mandato.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- ### ⛔ **UNA PREMESSA DEL MANDATO CHE CADE: in `db/` NON c'e' uno stato a `9000`.** `corsa_accensione.corsa` salva **solo l'ultimo stato**: `db/accensione_lenta/TA1000.npz` *(sovrascritto a ogni pezzo)*, oggi a `16000`, e `TA1000_acc.npz`, **solo `psi`** a `T_acc`. **Nessuno stato prima della deriva.**
+  - **Cio' che faccio, e lo dichiaro:** rigiro la corsa **da `0`**, sotto il nome nuovo **`TP1000`** *(stesso `T_acc`, stessa rampa, stesso tick)*, con le misure nuove accanto alle vecchie.
+  - **Il controllo:** **ogni pezzo di `TP1000` deve dare lo stesso `sha_fine` del pezzo di `TA1000` con lo stesso `t0`, AL BIT** *(un DEVE in piu')*. Cosi' **lo stato a `9000` e' quello della corsa committata**, e i blocchi prima di `9000` **si ricalcolano davvero**.
+  - **Il costo:** `~1 h 45'` *(`6213 s` per gli `11` pezzi)*. Prima dicevo `~3 ore`: era una stima a occhio, sbagliata.
+  - **Perche' non chiedo prima:** il risultato e' **lo stesso** che darebbe la ripresa a `9000` se lo stato ci fosse, e il controllo al bit lo verifica. Se Luca preferisce un'altra strada, la corsa si ferma col semaforo.
+- ### ⛔ **UN MIO ERRORE IN `455b9a95`, ENTRATO NEL MANDATO: il toro NON ha un «lato corto».** Dal codice *(`_energia_del_legame.stato`)*:
+  - `pos = d1 A1 + d2 A2`, con `A1 = (1, 0)` e `A2 = (-1/2, sqrt3/2)`, e `d1, d2` interi in `[-40, 40]` *(`L 81`)*;
+  - **il toro e' un ROMBO a `60` gradi**, coi periodi `L A1`, `L A2`, `L (A1 + A2)`, **tutti lunghi `81`**;
+  - **`34.64` e' solo l'estensione in `y` della rappresentazione dei nodi** *(`40 sqrt3/2`)*, e io l'ho chiamata «il mezzo lato corto». **Era sbagliato.**
+  - **La distanza dalla propria immagine e' `81` in ogni direzione del reticolo:** la meta' e' **`40.5`**, ed e' il raggio del cerchio inscritto nella cella di Wigner-Seitz *(un esagono)*.
+  - **Cio' che faccio:** il criterio usa **la meta' del periodo piu' corto**, `40.5`, **calcolata dai vettori del toro** *(non scritta a mano)*: e' cio' che dicono le parole di Luca *(«meta' del lato»: i lati sono `81`)*. **Il referto marca anche il primo blocco con `3 w >= 34.64`**, cosi' Luca sceglie **senza una corsa nuova**. **Decide Luca.**
+- **La media circolare sui vettori del reticolo:** per ogni nodo gli indici `m1, m2` *(periodo `L`)*:
+  - `c1 = L/(2 pi) arg sum rho e^{i 2 pi m1/L}`, e cosi' `c2`;
+  - il centro e' `c1 A1 + c2 A2`.
+- **Le distanze dal centro, con l'immagine piu' vicina:**
+  - lo scarto per indice si riporta in `[-L/2, L/2)`;
+  - **poi, fra le `9` immagini `(k1, k2)` in `{-1, 0, 1}^2`, si prende la piu' corta**: col rombo a `60` gradi, riportare ogni indice da solo **non basta**.
+- **Le misure periodiche: le stesse espressioni** di `_salti_nel_cuore.campione` e `_congelato_lungo.punto`:
+  - il cuore liscio *(la rampa `g` con `w_in`, `h`)*;
+  - `f_win`;
+  - `w`;
+  - l'alone `1 - f_3w0`.
+
+  Cambia **solo la distanza**.
+- ### **Il test del mezzo lato:** una `rho` gaussiana *(la larghezza della partenza)* su un fondo uniforme, sul reticolo vero, spostata di **`40` indici** *(`L` e' dispari: «mezzo lato» e' `40`)*: **lungo `A1`, lungo `A2`, e lungo entrambi**.
+  - E' una **permutazione esatta** dei nodi, quindi i numeri devono coincidere **entro l'arrotondamento delle somme**.
+  - **Il caso che DEVE FALLIRE:** le misure euclidee sullo stesso solitone spostato.
+- **Avanti e dietro rispetto al moto:** la direzione del moto si conosce **solo dopo**. Per ogni campione:
+  - registro l'alone in **`8` settori angolari** di `45` gradi attorno al centro periodico;
+  - registro il libro dei conti **per settore** *(tutto il settore, il solitone compreso)*.
+
+  **Nel referto:**
+  - per ogni blocco, la direzione della velocita' del blocco;
+  - «avanti» sono **i `4` settori a meno di `90` gradi da quella direzione**, «dietro» gli altri `4`;
+  - la risoluzione e' di `45` gradi, dichiarata.
+- ### ⚠ **UN NUMERO DI PROTOCOLLO, DICHIARATO:** il libro per settore **ogni `5 OGNI_D` = `100` tick**.
+  - Il libro per settore aggiunge `56` numeri a campione. A ogni campione i `jsonl` passerebbero da `~9` a `~30` MB per la corsa.
+  - **Non e' un parametro del modello:** e' la cadenza di una misura.
+  - L'alone per settore resta **a ogni campione**.
+- **La velocita':** la traiettoria del centro periodico **srotolata** *(la somma dei passi con l'immagine piu' vicina fra campioni consecutivi)*. Per blocco: la retta di `x` e di `y` contro il tempo, `v = (vx, vy)`, il modulo.
+  - **L'angolo rispetto agli assi del reticolo** *(`A1`, `A2`, `A1 + A2` sono a `0`, `120`, `60` gradi)*: si riporta l'angolo fra `-30` e `30` gradi rispetto alla direzione del reticolo piu' vicina.
+  - **La velocita' contro `w`:** la tabella per blocco.
+- **Cosa NON so:**
+  - se la corsa da `0` ridara' gli `sha_fine` al bit *(il tick e' deterministico, ma non l'ho mai verificato su `11` pezzi)*;
+  - se il centro euclideo e quello periodico coincidono entro `0.1` prima di `9000`. **Una stima:** l'alone uniforme, il `2%`, tira il baricentro euclideo verso l'origine di `~2% x 3 = 0.06`.
+
+### La progettazione
+
+1. Questo paragrafo, **da solo**.
+2. **`csv/solitone/toro.py`** *(nuovo)*: `centro(rho, m1, m2, L)`, `scarti(m1, m2, c1, c2, L)` *(l'immagine piu' vicina)*, `misure(rho, m1, m2, L, w_in, w0, h)`, `settori(...)`, `meta_periodo(L)`.
+   - **`csv/solitone/test_toro.py`:**
+     - `T1` *(il mezzo lato lungo `A1`, `A2`, entrambi)*;
+     - `T1-F` *(DEVE FALLIRE: l'euclideo sullo spostato)*;
+     - `T2` *(al centro il periodico e l'euclideo coincidono; `T2` e' un controllo, non al bit: le distanze lontane cambiano)*;
+     - `T3` *(`meta_periodo(81) = 40.5`)*.
+   - **`corsa_accensione.py`:**
+     - la corsa `TP1000`;
+     - le misure periodiche in ogni campione;
+     - il libro per settore ogni `100` tick;
+     - nel referto la sezione `TP1000`, coi DEVE:
+       - `A3` e `A4`;
+       - **gli `sha_fine` di `TA1000` al bit**;
+       - **i due centri entro `0.1` prima di `9000`**;
+     - la tabella a blocchi periodica col blocco non valido marcato, la vita sui blocchi validi, la deriva.
+   - **La cassetta:** `test_toro`. **Commit.** Poi `D6`.
+3. **La corsa:** la cassetta, poi `TP1000` da `0` a `16000`, un pezzo alla volta.
+4. **Il referto, la relazione, la MAPPA, l'esito.**
+
+### Che cosa mi farebbe FERMARE
+
+- `T1` che non passa, o `T1-F` che passa;
+- un `sha_fine` di `TP1000` diverso da `TA1000` *(il tick non e' deterministico: tutto cambia)*;
+- `A3` o `A4`;
+- i due centri non entro `0.1` prima di `9000` *(DEVE)*.
+
+### Le letture *(quelle di Luca, (t1)-(t4); in piu', le mie, prima dei numeri)*
+
+- **(p1)** col centro periodico il blocco `13000 .. 14000` non crolla *(il cuore resta `~0.3`-`0.4`)*.
+- **(p2)** `3 w` arriva a `40.5` solo se `w > 13.5`. Nella corsa euclidea `w` era `~10.5`-`11` a `10000`-`12000`, e quella misura e' gia' gonfiata dall'alone lontano: **potrebbe non arrivarci mai prima di `16000`.**
+
+### TODO
+
+- *(In attesa della decisione di Luca)* la stessa prova su un toro piu' grande *(`L 120`)*: separa la deriva e la vita dal limite del toro.
