@@ -38,7 +38,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### ⚠ **`collauda.py` si esclude, dichiarato:** e' il collaudo, non la libreria *(e la chiusura lo cambia)*.
 # ### **Dall'unita' `e_K`** *(Luca, dopo `6052a2b4`)*: la libreria cambia per mandato *(`protetto.legame_spento`, `protetto.e_K`, `P3`)*, e
 # ### `LIBRERIA_RIFERITA` e' il suo commit, `3d5fe03a` *(prima `3fe2f12d`)*.
-LIBRERIA_RIFERITA = "3d5fe03a"
+# ### **Dal solitone vestito** *(Luca `2026-11-02` `01:04`, passo `2`)*: la libreria aggiunge `vuoto.py`, `test_vuoto.py`, `carta_vuoto.py` *(`ae4640ee`)*.
+LIBRERIA_RIFERITA = "ae4640ee"
 
 
 def vecchi():
