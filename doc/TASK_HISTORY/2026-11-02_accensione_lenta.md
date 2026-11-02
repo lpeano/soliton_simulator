@@ -301,3 +301,12 @@
 - **(m2)** tutti i picchi stanno nello **stesso** osservabile: per questa carta, un modo solo con piu' frequenze.
 - **(m3)** la coppia veloce `~0.99` sta nello **scambio col vuoto** *(`Lambda`)*: coerente con la lettura del guardiano *(`mu - Omega` nella banda del vuoto)*.
 - **(m4)** un picco **«nessuna»**: un battimento interno, che nessuno di questi osservabili vede.
+
+### 8-ter. Le annotazioni col codice *(scritte col commit del codice, prima della corsa vera)*
+
+- ### ⚠ **LA PREMESSA SULLA SIGNIFICATIVITA' ERA SBAGLIATA** *(la sez. `8-bis` non si riscrive: si annota)*. **La prova a secco** *(finestre di `400` e `300` tick, nello scratchpad, dichiarata)* **da' significativita' fra `~10` e `~3e5`.** Su una serie liscia e deterministica la mediana dello spettro e' il fondo delle code della finestra di Hann, non un rumore: la significativita' dice **quanto e' pulito l'osservabile**, non quanto e' forte il picco.
+  - **Quindi la classe si legge dalla QUOTA:** `a^2/2` sulla varianza dell'osservabile tolta la tendenza, cioe' **la parte della fluttuazione di quell'osservabile che sta a quella frequenza**. E' adimensionale e si confronta fra osservabili.
+  - **La significativita' resta, con la soglia `3`, solo per dire SE il picco c'e'** in quell'osservabile. La classe e' la quota piu' alta fra gli osservabili dove c'e'; **«nessuna»** se non c'e' in nessuno.
+  - **Il test:** `R5-Q` *(un seno puro ha quota `1` entro `1e-2`; un seno nel rumore ha la quota attesa `a^2/2/(sigma^2 + a^2/2)` entro un fattore `2`)*.
+- **`R4` con la tolleranza di `1` canale, non `1e-6`:** con tre seni insieme la rifinitura di uno alla volta sente gli altri *(il terzo letto a `19.5032` per `19.5`)*. **Il canale e' lo stesso criterio di identita' che usa `elenco`.**
+- **Le uscite del vuoto da solo `n mu` a `k = 0`** si stampano una volta, nella sezione delle miste a `k = 0`, e non si ripetono per ogni picco.
