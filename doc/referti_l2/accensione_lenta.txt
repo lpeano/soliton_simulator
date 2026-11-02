@@ -1,0 +1,84 @@
+[TIMBRO] __init__.py  sha1-BYTE 6b7e9b74  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE ebc4908a  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 5fb72d94  committato e pulito
+==================================================================================================================================
+L'ACCENSIONE LENTA DEL VUOTO (Luca 01:13, con le decisioni dopo 25614c34): BG-F-0.15 dalla sua partenza, il vuoto acceso con lam = sin^2 su T_acc, poi il tick intero; confrontato con BG-F-0.15 vivo
+  la configurazione: CORSE {'TA1000': (1000.0, 6000.0), 'TA2000': (2000.0, 7000.0)} BLOCCO 1000 META 0.5 CODA 3000; di _vuoto_vivo_B: PEZZO 10000 OGNI 10 OGNI_D 20 R_VICINO 2 LAM_ZERO 0.5 TOLL_NORMA 1e-10; s 0.15 eps 0.5 N 1e+06 L 81; la soglia accessoria 0.01
+  la vita principale (Luca, la precisazione della decisione 9): il tempo a cui il cuore liscio scende a META' del suo valore a T_acc, misurato o estrapolato (dichiarato); la soglia |D|/|psi| >= 0.01 accessoria
+  ### il libro di BG-F-0.15 vivo e' a eps 0 blocco per blocco (_vuoto_vivo_B.corsa non passa il par): il confronto del libro e' fra conti diversi (Luca: si dichiara)
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (a1) dopo la rampa si assesta e perde piu' lentamente di BG-F; (a2) perde come BG-F: la perdita e' del vuoto vivo; (a3) T_acc 1000 e 2000 diversi: non ancora lenta; (a4) altro
+==================================================================================================================================
+### BG-F-0.15 VIVO (il riferimento: _vuoto_vivo_B + _respiro_sul_fondo)
+### VIVO, a blocchi di 1000 (le medie; le pendenze per 1000 unita' di tempo; il baricentro: la distanza dalla posizione iniziale)
+    il tempo          cuore     w         cuore x w   alone      pend. alone    pend. w        baric.   
+          0 ..    1000 0.46031   8.0673    3.68530     0.00080    +1.3220e-03    +8.9813e-01    0.2208
+       1000 ..    2000 0.42617   8.4976    3.61235     0.00233    +1.7240e-03    -3.0011e-01    1.0117
+       2000 ..    3000 0.47622   8.0679    3.84100     0.00437    +2.2452e-03    -8.5196e-02    2.0011
+       3000 ..    4000 0.50863   7.9162    4.02422     0.00660    +2.3235e-03    -1.7719e-01    1.3013
+       4000 ..    5000 0.51741   8.0288    4.15305     0.00899    +2.3480e-03    +2.0175e-01    2.5753
+       5000 ..    6000 0.51033   8.2861    4.22685     0.01153    +2.6259e-03    +3.0439e-01    2.5256
+       6000 ..    7000 0.49092   8.6368    4.23840     0.01412    +2.5175e-03    +4.0928e-01    1.7660
+       7000 ..    8000 0.46118   9.0856    4.18909     0.01669    +2.6157e-03    +4.0977e-01    2.6631
+       8000 ..    9000 0.43939   9.4592    4.15540     0.01925    +2.5768e-03    +3.8637e-01    1.4591
+       9000 ..   10000 0.41552   9.8575    4.09542     0.02181    +2.5275e-03    +1.5177e-01    1.3835
+----------------------------------------------------------------------------------------------------------------------------------
+### TA1000 (T_acc 1000, fino a 6000): arriva a 6000; 4 pezzi, 4001 campioni, 2382 s
+    lo stato a T_acc (tick 6667): mu di Rayleigh del tick intero +4.158003856 (la partenza +4.161868162), il residuo per tick 3.613e-02
+### TA1000, a blocchi di 1000 (le medie; le pendenze per 1000 unita' di tempo; il baricentro: la distanza dalla posizione iniziale)
+    il tempo          cuore     w         cuore x w   alone      pend. alone    pend. w        baric.   
+          0 ..    1000 0.49232   7.7343    3.76040     0.00110    +2.6326e-03    +1.3604e+00    0.2305
+       1000 ..    2000 0.44240   8.3793    3.69609     0.00343    +2.2718e-03    -5.0354e-01    1.0738
+       2000 ..    3000 0.49740   7.9766    3.96442     0.00587    +2.6245e-03    -1.8074e-01    1.3684
+       3000 ..    4000 0.52423   7.9246    4.15315     0.00846    +2.4836e-03    +1.3225e-01    1.7051
+       4000 ..    5000 0.52116   8.1465    4.24478     0.01099    +2.6328e-03    +3.1741e-01    0.9914
+       5000 ..    6000 0.49731   8.5376    4.24543     0.01357    +2.6230e-03    +2.8895e-01    1.7594
+       6000 ..    7000 0.49122   8.7055    4.27634     0.01492    +nan    +nan    1.9026
+  DEVE PASSARE: A6 TA1000 non si scioglie durante la rampa (altrimenti FERMO)                                    PASSA   
+  DEVE PASSARE: A3 TA1000 M e V entro 1e-10                                                                      PASSA   dM 2.3e-11 dV 1.3e-11
+  DEVE PASSARE: A4 TA1000 il libro col par della corsa (eps 0.5)                                                 PASSA   
+  DEVE PASSARE: TA1000 arriva alla fine o si scioglie                                                            PASSA   
+  LA VITA PRINCIPALE: il cuore liscio a T_acc 0.39253; sotto 0.5 x: ESTRAPOLATA (non una misura) a tempo ~29371; la pendenza del cuore negli ultimi 3000 -1.2621e-02 per 1000
+  le pendenze dopo la rampa (1000 .. 6000), per 1000: il cuore +1.3463e-02, l'alone +2.5409e-03, w +4.7193e-02
+  LA SOGLIA ACCESSORIA (|D|/|psi| >= 0.01): sulla rampa, D rispetto alla partenza: tempo 3.0
+                                         dopo, D rispetto allo stato a T_acc: tempo 1002.0 (il primo campione 1.1086e-01 a tempo 1002.0)
+    D dalla partenza           a tempo   249.0: |D|/|psi| 1.9464e+00; le bande A 0.0003 B 0.9982 P0 0.0015 Ppi 0.0001
+    D dalla partenza           a tempo   501.0: |D|/|psi| 6.4987e-01; le bande A 0.0029 B 0.9924 P0 0.0033 Ppi 0.0014
+    D dalla partenza           a tempo   999.0: |D|/|psi| 8.7221e-01; le bande A 0.0013 B 0.9890 P0 0.0089 Ppi 0.0008
+    D dallo stato a T_acc      a tempo  1500.0: |D|/|psi| 1.5790e+00; le bande A 0.0004 B 0.9976 P0 0.0017 Ppi 0.0003
+    D dallo stato a T_acc      a tempo  3501.0: |D|/|psi| 1.4874e+00; le bande A 0.0009 B 0.9950 P0 0.0031 Ppi 0.0011
+    D dallo stato a T_acc      a tempo  6000.0: |D|/|psi| 1.8728e+00; le bande A 0.0010 B 0.9941 P0 0.0034 Ppi 0.0016
+----------------------------------------------------------------------------------------------------------------------------------
+### TA2000 (T_acc 2000, fino a 7000): arriva a 7000.05; 5 pezzi, 4667 campioni, 2671 s
+    lo stato a T_acc (tick 13333): mu di Rayleigh del tick intero +4.150227419 (la partenza +4.161868162), il residuo per tick 4.359e-02
+### TA2000, a blocchi di 1000 (le medie; le pendenze per 1000 unita' di tempo; il baricentro: la distanza dalla posizione iniziale)
+    il tempo          cuore     w         cuore x w   alone      pend. alone    pend. w        baric.   
+          0 ..    1000 0.51391   7.4829    3.80770     0.00069    +1.5975e-03    +1.3017e+00    0.2560
+       1000 ..    2000 0.45310   8.2691    3.73087     0.00352    +2.5806e-03    -4.0458e-01    0.6824
+       2000 ..    3000 0.50859   7.8868    4.00364     0.00599    +2.4042e-03    -1.6215e-01    0.9013
+       3000 ..    4000 0.51778   7.9771    4.12930     0.00836    +2.5487e-03    +1.2019e-01    1.4933
+       4000 ..    5000 0.51817   8.1699    4.23220     0.01097    +2.5965e-03    +2.4946e-01    1.5626
+       5000 ..    6000 0.50443   8.4783    4.27484     0.01349    +2.5156e-03    +4.4798e-01    2.1922
+       6000 ..    7000 0.46975   8.9599    4.20687     0.01603    +2.4634e-03    +4.8813e-01    2.2888
+  DEVE PASSARE: A6 TA2000 non si scioglie durante la rampa (altrimenti FERMO)                                    PASSA   
+  DEVE PASSARE: A3 TA2000 M e V entro 1e-10                                                                      PASSA   dM 2.7e-11 dV 1.3e-11
+  DEVE PASSARE: A4 TA2000 il libro col par della corsa (eps 0.5)                                                 PASSA   
+  DEVE PASSARE: TA2000 arriva alla fine o si scioglie                                                            PASSA   
+  LA VITA PRINCIPALE: il cuore liscio a T_acc 0.53111; sotto 0.5 x: ESTRAPOLATA (non una misura) a tempo ~14972; la pendenza del cuore negli ultimi 3000 -2.4197e-02 per 1000
+  le pendenze dopo la rampa (2000 .. 6999), per 1000: il cuore -8.9398e-03, l'alone +2.5200e-03, w +2.6335e-01
+  LA SOGLIA ACCESSORIA (|D|/|psi| >= 0.01): sulla rampa, D rispetto alla partenza: tempo 3.0
+                                         dopo, D rispetto allo stato a T_acc: tempo 2001.0 (il primo campione 1.5424e-01 a tempo 2001.0)
+    D dalla partenza           a tempo   501.0: |D|/|psi| 7.5510e-01; le bande A 0.0021 B 0.9944 P0 0.0025 Ppi 0.0010
+    D dalla partenza           a tempo   999.0: |D|/|psi| 1.0289e+00; le bande A 0.0009 B 0.9922 P0 0.0064 Ppi 0.0005
+    D dalla partenza           a tempo  2001.0: |D|/|psi| 1.3317e+00; le bande A 0.0006 B 0.9958 P0 0.0030 Ppi 0.0006
+    D dallo stato a T_acc      a tempo  2499.0: |D|/|psi| 8.8197e-01; le bande A 0.0016 B 0.9923 P0 0.0043 Ppi 0.0019
+    D dallo stato a T_acc      a tempo  4500.0: |D|/|psi| 1.2743e+00; le bande A 0.0016 B 0.9922 P0 0.0037 Ppi 0.0025
+    D dallo stato a T_acc      a tempo  6999.0: |D|/|psi| 1.9647e+00; le bande A 0.0010 B 0.9947 P0 0.0027 Ppi 0.0017
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CONFRONTO CON BG-F-0.15 VIVO SULLE STESSE FINESTRE (le pendenze per 1000; la vita con lo stesso criterio, dal valore del vivo a T_acc)
+  TA1000, 1000 .. 6000: il cuore +1.3463e-02 (VIVO +2.0662e-02); l'alone +2.5409e-03 (VIVO +2.3000e-03); la vita a meta': estrapolata ~29371 (VIVO, dal suo cuore a T_acc 0.40201: --)
+  TA2000, 2000 .. 6999: il cuore -8.9398e-03 (VIVO +3.1447e-03); l'alone +2.5200e-03 (VIVO +2.4419e-03); la vita a meta': estrapolata ~14972 (VIVO, dal suo cuore a T_acc 0.46257: estrapolata ~24907)
+  VIVO dalla partenza (il cuore a 0 0.59164, fino a 9999): estrapolata ~15434
+==================================================================================================================================
+ESITO: 8/8 controlli passano; DEVE fallite: 0 []

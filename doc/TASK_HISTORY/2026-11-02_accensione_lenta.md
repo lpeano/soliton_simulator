@@ -320,3 +320,13 @@
 - **La quota:** nessuna uscita COMPATIBILE da sola; `P0`, `Ppi`, `A` «fra le due»; la loro somma `~0.96` volte l'alone *(una lettura)*.
 - **I modi:** (m1) in parte; (m3) no; (m4) no. **La coppia veloce e' uno spostamento** *(e `w`)*, **i lenti sono confusi dalla deriva** *(i periodi tondi, `50.0000`)*.
 - **Poi:** la voce `33` (d) della MAPPA *(in coda)*, e l'accensione lenta nel repo e le corse.
+
+## 9. L'ESITO DELL'ACCENSIONE LENTA *(il referto `doc/referti_l2/accensione_lenta.txt`, a `5c13ac57`; la relazione per i numeri)*
+
+- **I criteri `A3`, `A4`, `A6`** e la fine della corsa: **passano** per `TA1000` e `TA2000` *(ESITO `8/8`)*. `A1`, `A2` *(la (i))*, `A0` nella cassetta: `56/56`.
+- **(a2) per l'alone** *(cresce come nel vivo dopo la rampa, `+2.54e-3` e `+2.52e-3` per `1000`)*; **(a1) no.**
+- **(a3) solo in apparenza, per la vita a meta' del cuore** *(`~29371` contro `~14972`)*.
+  - ### **Annoto una premessa sbagliata della sez. `1` e della progettazione** *(non riscrivo)*: la vita «a meta' del valore a `T_acc`» prende **un valore istantaneo** di un cuore che **oscilla lento**. `TA1000` arriva a `T_acc` in un minimo *(`0.39`)*, `TA2000` in un massimo *(`0.53`)*.
+  - **La differenza viene dalla fase, non dalla rampa.**
+- **Aperta, a Luca:** la vita dalla media del cuore a blocchi, o dall'alone? Criterio di chiusura: la sua scelta, e la misura dai `jsonl` gia' committati.
+- **La MAPPA:** voci `1` e `27`, una riga ciascuna.

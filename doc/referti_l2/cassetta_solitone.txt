@@ -1,15 +1,17 @@
-[TIMBRO] __init__.py  sha1-BYTE 0980ef9c  committato e pulito
+[TIMBRO] __init__.py  sha1-BYTE 6b7e9b74  committato e pulito
 [TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
 [TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
 [TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE ebc4908a  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
 [TIMBRO] test_vuoto.py  sha1-BYTE 5c5753b2  committato e pulito
 [TIMBRO] test_respiro.py  sha1-BYTE 810ee3ff  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE eb9f1130  committato e pulito
+[TIMBRO] test_accensione.py  sha1-BYTE 69af23bf  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE f4309554  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -76,13 +78,17 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: R5 presenza: un seno di ampiezza 3e-4 nel rumore gaussiano di sigma 1e-3 ha significativita' >= 3                    PASSA   significativita' 9.39, ampiezza 3.098e-04, quota 0.0451
   DEVE FALLIRE: R5-F presenza: sul solo rumore la significativita' alla stessa frequenza e' >= 3                                     PASSA   significativita' 1.25, ampiezza 4.112e-05
   DEVE PASSARE: R5-Q la quota: il seno puro di R1 ha quota 1 entro 0.01; il seno di R5 nel rumore ha quota a^2/2/(sigma^2 + a^2/2) = PASSA   seno puro 1.000419 (ampiezza 2.000000e-03); nel rumore 0.0451
-### D6: LA LIBRERIA E' QUELLA DI b71d86eb (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da b71d86eb a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### L'ACCENSIONE LENTA (csv/solitone/accensione.py): la scena di BG-F-0.15 dalla partenza; TICK 20 TOLL_PSI_A2 1e-12 LAM_MEZZO 0.5
+  DEVE PASSARE: A1 con lam = 1 il tick dell'accensione e' il tick intero (tick.percorri_tick) AL BIT, 20 tick, ogni chiave           PASSA   chiavi diverse: nessuna
+  DEVE PASSARE: A2 (la decisione (i)) con lam = 0 phi resta phi0 AL BIT a ogni tick, e psi = _congelato_lungo.avanza entro 1e-12 (20 PASSA   phi al bit True; |dpsi|/|psi| 1.71e-16 (la causa: la rotazione di beta e il ritorno a phi0 nel congelato, un ulp sul modulo)
+  DEVE FALLIRE: A0 con lam = 0.5 psi coincide col tick intero o col congelato entro 1e-12                                            PASSA   |dpsi| dal tick intero 2.410e+00, dal congelato 1.649e+00
+### D6: LA LIBRERIA E' QUELLA DI 8f8b8f8a (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 8f8b8f8a a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 23 s; protetto 16 s; misure 6 s; vuoto 4 s; respiro 0 s
-ESITO: 53/53 controlli passano; fallite: 0 []
+  i tempi: uscite 19 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s
+ESITO: 56/56 controlli passano; fallite: 0 []

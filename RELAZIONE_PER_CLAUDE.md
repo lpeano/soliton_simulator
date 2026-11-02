@@ -22789,3 +22789,26 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
 - **Scritto nella voce `33`, come dettato:** l'ipotesi *(il respiro, lo spostamento, la deformazione parlano col vuoto in modi diversi; il parallelo scalare, dipolo, quadrupolo)*, la prova nella coppia di (a) *(un modo alla volta nel primo, che cosa sente il secondo e quale modo si accende)*, i limiti *(un modo non e' una forza; il «tre» puo' non voler dire niente)*, i legami.
 - **Arrivata durante la carta del respiro:** l'ho messa in coda e scritta **dopo** il referto della carta *(`fcda3281`)*, come diceva il mandato.
 - **Un legame coi numeri di oggi** *(una lettura, non un criterio)*: la carta del respiro trova **una coppia veloce che e' uno spostamento del baricentro** *(e un respiro di `w`)*, con `mu - Omega` dentro una banda del vuoto. **E' il candidato piu' diretto per il canale «di dipolo» del punto (d)**: un modo che irradia nel vuoto. Se l'altro solitone lo senta, lo dice solo la coppia.
+
+## 2026-11-02 — L'ACCENSIONE LENTA DEL VUOTO: LE CORSE `T_acc 1000` E `2000` -- L'ALONE CRESCE COME SENZA ACCENSIONE; LA VITA A META' DEL CUORE NON E' ANCORA UN NUMERO
+
+**Il codice:** `8f8b8f8a` *(`accensione.py`, `test_accensione.py`, `corsa_accensione.py`)*; `D6` `5c13ac57`. **La cassetta:** `56/56` *(con `A1`, `A2` secondo la (i), `A0`)*. **Il referto:** `doc/referti_l2/accensione_lenta.txt` *(tutti i timbri committati e puliti)*; i pezzi in `doc/referti_l2/accensione_lenta/*.jsonl`.
+
+**I DEVE:** `A6` *(non si scioglie nella rampa)*, `A3` *(`M` e `V` entro `1e-10`: `dM 2.3e-11`, `2.7e-11`)*, `A4` *(il libro col `par`)*, la fine della corsa: **passano tutti, per le due corse. ESITO `8/8`.**
+
+| | dopo la rampa, per `1000` | l'alone | il cuore | la vita a meta' del cuore |
+|---|---|---|---|---|
+| `TA1000` | `1000 .. 6000` | `+2.5409e-3` *(vivo `+2.3000e-3`)* | `+1.3463e-2` *(vivo `+2.0662e-2`)* | estrapolata `~29371` *(dal cuore a `T_acc` `0.39253`)* |
+| `TA2000` | `2000 .. 6999` | `+2.5200e-3` *(vivo `+2.4419e-3`)* | `-8.9398e-3` *(vivo `+3.1447e-3`)* | estrapolata `~14972` *(dal cuore a `T_acc` `0.53111`)* |
+| il vivo | dalla partenza | | | estrapolata `~15434` *(dal cuore a `0` `0.59164`)* |
+
+- **`D` resta in `B` al `99%`** *(`0.989` .. `0.998`)*, sulla rampa e dopo: e' il respiro e la deriva del solitone, non un'uscita in altre bande.
+- **`mu` di Rayleigh a `T_acc`:** `+4.158004` *(`TA1000`)*, `+4.150227` *(`TA2000`)*, contro `+4.161868` della partenza.
+
+### **LE LETTURE** *(le mie; decide Luca)*
+
+- **(a2) PER L'ALONE:** dopo la rampa l'alone cresce **come nel vivo** *(rapporto `1.10` e `1.03` sulle stesse finestre; nessuna barra d'errore, una corsa per `T_acc`)*. **La perdita verso l'alone non e' della partenza brusca: e' del vuoto vivo.**
+- **(a1) NO:** nessuna delle due corse perde piu' lentamente del vivo.
+- **(a3) per la vita a meta', MA NON ATTRIBUIBILE all'accensione:** `~29371` contro `~14972` *(un fattore `2`)*. ### ⚠ **La premessa che cade: il criterio «la vita a meta' del valore del cuore a `T_acc`» prende un valore ISTANTANEO, e il cuore oscilla lento** *(le medie a blocchi da `0.42` a `0.52`)*. `TA1000` arriva a `T_acc` in un minimo *(`0.39`)*, `TA2000` in un massimo *(`0.53`)*: **la differenza viene dalla fase dell'oscillazione, non dalla rampa.** Anche le pendenze del cuore su `5000` *(di segno opposto fra le due)* sono la stessa oscillazione, non una perdita.
+- ### **QUINDI LA VITA DELLA VOCE `27` NON E' ANCORA UN NUMERO.** **La domanda a Luca:** la vita si misura dalla **media del cuore a blocchi** *(un blocco intero dopo `T_acc` come riferimento, la pendenza delle medie)*, o dall'**alone** *(che cresce lineare, `~2.5e-3` per `1000`, e non oscilla)*? **Criterio di chiusura:** la scelta di Luca, poi la misura dalle stesse corse *(i `jsonl` committati bastano; nessuna corsa nuova)*.
+- **Una riga cosmetica del referto:** l'ultimo blocco di `TA1000` *(`6000 .. 7000`)* ha un solo campione, e le sue pendenze sono `nan`. Non cambia nessun criterio.
