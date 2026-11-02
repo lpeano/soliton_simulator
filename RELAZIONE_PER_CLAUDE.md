@@ -22901,3 +22901,15 @@ Il referto stampa per `TA1000`:
 - **La decisione di Luca, nel mandato:** l'ordine.
 - **Il task history di `(4)`** si scrive quando tocca, **da solo**, con la lettura del codice e dei referti di allora *([[PUNTO-FISSO-CS-SOLITONE]], la voce `12`, la voce `31`, «cs <-> clock» nella roadmap)*.
 - **Un processo alla volta.**
+
+## 2026-11-02 — L'AGGIUNTA A `(4)` *(Luca `16:47`)*: IL RESPIRO VELOCE CON E SENZA `cs` -- IN CODA, CON UNA PREMESSA E UNA PROPOSTA
+
+- **La richiesta, in coda dentro `(4)`:**
+  - finestre **a ogni tick**, di `50` unita' di tempo, a `t` `2000`, `6000`, `10000`, con `cs` acceso e a `cs` spento;
+  - in ognuna, lo spettro del centro periodico, di `w`, del cuore e di `cs` sotto il solitone, e il periodo e l'ampiezza del modo veloce;
+  - le letture (f1)-(f4).
+- ### ⚠ **UNA PREMESSA DAL CODICE:** le corse salvano **solo l'ultimo stato** *(`db/accensione_lenta/<corsa>.npz`, sovrascritto)*. **Per «una finestra rigirata dallo stesso stato» a cs spento servono gli stati a `2000`, `6000`, `10000`, e `TP1000` non li tiene.**
+- ### **UNA PROPOSTA, NON UNA DECISIONE:** `TM1000` *(la ripetizione di `TP1000` per le mappe, la `(2)` della coda)* potrebbe salvare in `db/` anche **lo stato intero** a quei tre tempi.
+  - **Non tocca il tick**, e il controllo al bit sugli `sha_fine` lo verifica.
+  - Le finestre a `cs` spento si rigirerebbero da li' **senza una terza corsa**.
+  - **Decide Luca.** Senza risposta, `TM1000` fa solo le mappe *(`[[L-DOPO-STOP]]`)*, e le finestre a `cs` spento si faranno con una corsa da `0`.
