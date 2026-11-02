@@ -513,3 +513,57 @@
    - **Il confronto:** con la direzione dello spostamento totale srotolato.
 
 **Nel codice** *(un commit a se', prima di `D6` e della corsa)*: le righe del referto di `sul_toro`. **Le misure non cambiano.**
+
+## 12. LE MAPPE PER L'ANIMAZIONE *(Luca, 2026-11-02 15:49; un'aggiunta, non cambia la coda)*
+
+### La decisione *(di Luca, nella sostanza)*
+
+- **Ogni `100` tick** *(`15` unita' di tempo)*: `rho` *(`sum_h |psi_h|^2`)* e `Lambda` per nodo in `float32`, piu' `t`, il centro periodico e `lam` *(la rampa)*.
+- **Un `.npz` compresso per pezzo** in `E:\soliton_simulator\mappe\<corsa>\<corsa>_<t0>.npz`, con le coordinate dei nodi *(`d1`, `d2`)* e i vettori del toro, una volta per file. **Nel repo solo l'indice:** `doc/referti_l2/mappe_indice.txt`.
+- **Se `TP1000` e' gia' partita, NON si interrompe:** le mappe si fanno dopo, con una ripetizione di `TP1000` identica *(controllo al bit sugli `sha_fine`)*, o nella prossima corsa in coda; **si dichiara quale.**
+- **I DEVE:**
+  - col salvataggio acceso gli `sha_fine` sono identici;
+  - `E:` esiste, e' scrivibile, con lo spazio libero almeno `10` volte la stima, altrimenti FERMO;
+  - rileggendo un'istantanea, `sum rho = M` e `sum Lambda = V` entro `1e-6` relativo.
+- **TODO dopo:** `csv/solitone/anima.py`, i fotogrammi del toro.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- ### **`TP1000` E' GIA' PARTITA** *(il driver dopo `18c91ad8`)*: **non la interrompo.**
+- ### **LA MIA SCELTA, DICHIARATA: la ripetizione.** Le mappe vengono da **`TM1000`**, una ripetizione di `TP1000`, **dopo** che `TP1000` si chiude col suo referto.
+  - **Il perche':** la prossima corsa in coda *(il toro `L 120`)* aspetta una decisione di Luca, e non so quando partira'.
+  - **Il controllo:** ogni pezzo di `TM1000` deve dare lo `sha_fine` del pezzo di `TP1000` con lo stesso `t0`, **al bit**. **E' esattamente il DEVE del salvataggio:** gli stessi pezzi, con le mappe e senza.
+- ### ⚠ **«Lo stesso codice» non puo' essere letterale:** per salvare le mappe, `corsa_accensione.py` deve cambiare. **Cambia a corsa chiusa** *(`CLAUDE.md`, par. `5`: durante un run nessun file del percorso in uso si modifica)*. **Il tick no:** il controllo al bit lo verifica.
+- **I campioni di `TM1000` sarebbero identici a quelli di `TP1000`** *(stesse misure, stati al bit)*.
+  - **La mia scelta, dichiarata:** i `jsonl` di `TM1000` vanno su `E:`, accanto alle mappe, e non nel repo *(sono `~20` MB di doppioni)*.
+  - **Nel repo** restano il confronto degli `sha_fine` e l'indice.
+- **`rho` e `Lambda`:** sono `_energia_del_legame.densita` *(`rho = sum_h |psi_h|^2`, `lam = |phi_h|^2`, per nodo)*. Nel libro, `M` e `V` del totale sono `sum rho` e `sum lam` *(`_libro_dei_conti.conti_per_nodo`: `"M": rho`, `"V": lam`)*. **Il confronto del DEVE e' quindi diretto**, e `float32` lo rispetta *(`~6e-8` relativo per valore; la somma in `float64` alla rilettura)*.
+- **La stima:** `6561` nodi `x 2 x 4` byte `= 52 KB` a istantanea. Da `0` a `16000` sono `1067` istantanee *(ogni `100` tick)*, cioe' `~56` MB prima della compressione. **Il DEVE del disco: libero `>= 10 x 56 MB`.** Oggi `E:` ha `214` GB liberi *(`df`)*.
+- **Il test della cassetta scrive su `E:`** *(una cartella `_prova`)*: **la cassetta dipende dal disco esterno.** Lo dichiaro: e' cio' che chiede il DEVE del disco.
+- **Cosa NON so:** quanto comprime `savez_compressed` su `rho` e `Lambda` in `float32`.
+
+### La progettazione
+
+1. Questo paragrafo, **da solo** *(mentre `TP1000` gira: i suoi `jsonl` nuovi sono non tracciati, e lo dichiaro nel messaggio)*.
+2. **Subito** *(non toccano il percorso della corsa)*:
+   - **`csv/solitone/mappe.py`:** `controlla_disco`, `istantanea`, `scrivi`, `leggi`, `indice`.
+   - **`csv/solitone/test_mappe.py`:**
+     - `K1` *(il disco)*;
+     - `K1-F` *(DEVE FALLIRE: lo spazio con una stima piu' grande del disco)*;
+     - `K2` *(un'istantanea della scena scritta e riletta: `sum rho = M`, `sum Lambda = V` entro `1e-6`)*;
+     - `K2-F` *(DEVE FALLIRE: con un nodo alterato)*;
+     - `K3` *(lo `sha1` e la dimensione dell'indice sono quelli del file)*.
+   - L'inventario. **Commit.**
+3. **Dopo il referto di `TP1000`:**
+   - in `corsa_accensione.py`, la corsa `TM1000` *(gemella `TP1000`, le mappe ogni `100` tick, i `jsonl` su `E:`)*;
+   - la cassetta col `test_mappe`;
+   - `D6`;
+   - la corsa;
+   - l'indice;
+   - il referto *(gli `sha_fine` al bit, le riletture)*.
+
+### Che cosa mi farebbe FERMARE
+
+- `E:` assente, non scrivibile, o senza spazio;
+- un `sha_fine` di `TM1000` diverso da `TP1000`;
+- una rilettura fuori da `1e-6`.
