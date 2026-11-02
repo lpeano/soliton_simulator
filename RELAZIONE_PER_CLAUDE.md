@@ -22650,3 +22650,11 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
   - **(iii)** non scalare `beta` e rimettere `phi` col peso `1 - lam`: una legge nuova.
 - **La seconda domanda: la vita «dopo la rampa».** Con la soglia `9`, BG-F-0.15 da' `3.0`, il primo campione. **La mia proposta:** `D` rispetto alla partenza nella rampa, e rispetto allo stato vestito *(a `T_acc`, `mu` di Rayleigh del tick intero)* dopo. Accanto restano l'alone, il cuore e le bande di `D`.
 - **Un limite dichiarato:** il libro dei conti della corsa viva di riferimento e' a eps `0` *(solo inizio e fine col `par`)*.
+
+## 2026-11-02 — LA MAPPA, VOCE 33 (Luca 01:17-01:19) E LA SUA AGGIUNTA (Luca 01:23-01:28); L'AGGIUNTA ALLA VOCE 32 (Luca 01:16) -- SOLO SCRITTURA
+
+- **La voce `33` in lista d'attesa** *(`doc/MAPPA.md`, dopo la `32`)*: **I SOLITONI CHE SI PARLANO ATTRAVERSO IL VUOTO.** Contiene **(a)** la coppia, **(b)** il triangolo, **(c)** il ponte *(il tubo; le misure `c1`-`c3`; il limite SU(3))*, e **l'ipotesi di Luca dichiarata come ipotesi** *(l'accoppiamento allunga la vita; Dicke, la subradianza; il protone solo con i numeri)*.
+  - **I legami:** voci `30`, `32`, `21`, la massa collettiva, il fork SU(2).
+  - **Dopo l'accensione lenta.**
+- **La voce `32`:** il tempo di vita in un vuoto caldo come equilibrio fra cio' che il solitone cede e cio' che riceve; `F0` e' il caso a zero assoluto.
+- **L'ordine, dichiarato:** i due mandati sulla voce `33` sono arrivati mentre l'accensione lenta era in corso *(in coda, [[L-UN-PROMPT]])*. Li scrivo dopo il task history dell'accensione, che si e' fermato su `A2`, **in un commit solo**, perche' il secondo modifica la voce scritta dal primo.
