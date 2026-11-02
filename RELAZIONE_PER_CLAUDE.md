@@ -22894,3 +22894,10 @@ Il referto stampa per `TA1000`:
   - ⚠ **Il limite, gia' scritto allora:** la quota e' **per gruppo, non per canale**, e molte uscite sono aperte insieme.
   - **«Quale canale porta l'`80%`» e' proprio cio' che la carta NON dice:** e' il collaudo che la voce chiede.
 - **Non ho scritto niente in `BANDE_PIATTE.md` ne' in `CHIUDERE_LE_USCITE.md`:** la voce dice «da scrivere», e lo leggo come il lavoro della voce, non di questo mandato.
+
+## 2026-11-02 — LA CODA, AGGIORNATA *(`[[PRECEDENZA-IN-CODA]]`)*: `cs` COL SOLITONE *(Luca `16:42`-`16:44`)*
+
+- **Dopo** `(1)` la deriva *(`TP1000`, la corsa gira)*, `(2)` le mappe *(`TM1000`)*, `(3)` chi sceglie la direzione *(`D1`-`D5`)*: **`(4)` `cs` col solitone** *(il punto fisso, poi la corsa)*.
+- **La decisione di Luca, nel mandato:** l'ordine.
+- **Il task history di `(4)`** si scrive quando tocca, **da solo**, con la lettura del codice e dei referti di allora *([[PUNTO-FISSO-CS-SOLITONE]], la voce `12`, la voce `31`, «cs <-> clock» nella roadmap)*.
+- **Un processo alla volta.**
