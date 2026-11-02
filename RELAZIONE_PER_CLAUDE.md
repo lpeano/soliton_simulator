@@ -23062,3 +23062,15 @@ Il referto stampa per `TA1000`:
 
 - **La parte `1` e' un calcolo breve, ma e' un processo di calcolo:** la faccio dopo `TM1000`, non mentre `DG1000` gira *(un processo alla volta)*.
 - **Il costruttore dei domini** della parte `3` andra' nella libreria `csv/solitone/`, coi suoi test.
+
+## 2026-11-02 — LA MAPPA, VOCE `39`: IL MOSAICO CHE NASCE DAL RAFFREDDAMENTO, IL MECCANISMO DI KIBBLE-ZUREK *(Luca `19:55`-`20:00`; solo scrittura, nessuna corsa)*
+
+- **Scritta nella MAPPA come dettata**, dopo la `38`:
+  - il meccanismo;
+  - il legame con la visione di Luca;
+  - la prova, da progettare dopo le parti `1` e `3` del mandato delle `19:21`;
+  - le letture (k1)-(k5).
+- **In lista d'attesa, dopo la freccia di `F0` e il primo mosaico:** ne ha bisogno *(le frecce alla stessa energia, le pareti che reggono)*. **La coda non cambia.**
+- **Due fatti, per quando la prova si progettera'** *(non ora)*:
+  - nel codice **non c'e' una temperatura**. «Raffreddare» dovra' essere un protocollo dichiarato, senza una legge nuova: per esempio l'accensione lenta di una parte del tick, come la rampa `sin^2` di `csv/solitone/accensione.py`, che e' gia' un protocollo di questo tipo. **E' una lettura mia, non una proposta di metodo;**
+  - la lunghezza di correlazione delle frecce vuole **la freccia per nodo come osservabile**. E' cio' che la parte `1` *(f4)* deve definire.
