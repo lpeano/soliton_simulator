@@ -346,6 +346,8 @@ def sul_toro():
     print("=" * 130)
     print("### LE MISURE SUL TORO (Luca, dopo 455b9a95): %s = %s rifatta DA 0 (in db/ c'e' solo l'ultimo stato), con il centro periodico accanto all'euclideo" % (nome, gem))
     print("    il centro: la media circolare sugli indici del reticolo; le distanze: l'immagine piu' vicina fra le 9; le misure: le stesse espressioni, cambia la distanza")
+    print("    (Luca dopo 8e425771) il toro NON ha un bordo: cio' che rompeva le misure euclidee e' il TAGLIO DELLE COORDINATE (gli indici da -40 a +40); il crollo a 13500 di %s" % gem)
+    print("    e' l'effetto della misura euclidea sul taglio. Il rombo e' uguale nelle tre direzioni: nessuna direzione del moto viene dalla forma del toro")
     rr, camp, _dd, _da = serie(nome)
     if not rr:
         print("### %s: NESSUN PEZZO" % nome)
@@ -354,8 +356,8 @@ def sul_toro():
     A1, A2 = TO.vettori()
     R = TO.meta_periodo(L)
     R_Y = float((L // 2) * A2[1])
-    print("    IL CRITERIO DI VALIDITA' (Luca): 3 w < %.4f, la meta' del periodo piu' corto del toro (dai vettori del toro; il rombo ha i lati uguali, %d)" % (R, L))
-    print("    accanto, marcato: 3 w < %.4f, l'estensione in y della rappresentazione dei nodi (il \"mezzo lato corto\" di 455b9a95, una mia lettura sbagliata, nel mandato)" % R_Y)
+    print("    IL CRITERIO DI VALIDITA' (decisione di Luca dopo 8e425771): 3 w < %.4f, la meta' del periodo piu' corto del toro (dai vettori del toro; i periodi sono lunghi %d)" % (R, L))
+    print("    SOLO COME CONFRONTO: 3 w < %.4f, l'estensione in y della rappresentazione dei nodi (l'errore di lettura n.92, il \"mezzo lato corto\" di 455b9a95)" % R_Y)
     ult = rr[-1]
     fatta = ult["t1"] >= ult["t_fine"]
     print("### %s (T_acc %g, fino a %g): %s; %d pezzi, %d campioni, %.0f s" % (nome, T_acc, tau_fine, ("arriva a %g" % (ult["t1"] * s)) if fatta else "### NON FINITA", len(rr), len(camp),
@@ -388,7 +390,7 @@ def sul_toro():
     u2 = np.concatenate([[0.0], np.cumsum(((np.diff(c2) + 0.5 * L) % L) - 0.5 * L)])
     X = u1[:, None] * A1 + u2[:, None] * A2
     print("### %s, a blocchi di %g, COL CENTRO PERIODICO (le medie; la traiettoria SROTOLATA dalla partenza; v per 1000 unita' di tempo; l'angolo dall'asse x, e dalla" % (nome, BLOCCO))
-    print("    direzione del reticolo piu' vicina (A1 0, A1+A2 60, A2 120 gradi); max 3w nel blocco; NV = il blocco non rispetta 3 w < %.2f, NVy = non rispetta 3 w < %.2f)" % (R, R_Y))
+    print("    direzione del reticolo piu' vicina (A1 0, A1+A2 60, A2 120 gradi); max 3w nel blocco; NV = il blocco non rispetta 3 w < %.2f, il criterio; NVy = 3 w >= %.2f, solo confronto)" % (R, R_Y))
     print("    %-17s %-9s %-9s %-9s %-17s %-8s %-11s %-8s %-8s %-8s %s" % ("il tempo", "cuore", "w", "alone", "il centro (x, y)", "dist.", "|v|", "angolo", "dal ret.", "max 3w", ""))
     blocchi = []
     a = 0.0
@@ -405,7 +407,13 @@ def sul_toro():
                   % (a, a + BLOCCO, fl[m].mean(), ww[m].mean(), al[m].mean(), X[m, 0].mean(), X[m, 1].mean(), float(np.hypot(X[m, 0], X[m, 1]).mean()), math.hypot(vx, vy), ang,
                      ((ang + 30.0) % 60.0) - 30.0, m3, "NV " if m3 >= R else "", "NVy" if m3 >= R_Y else ""))
         a += BLOCCO
-    for soglia, che in ((R, "3 w < %.2f (la meta' del periodo)" % R), (R_Y, "3 w < %.2f (l'estensione in y, marcata)" % R_Y)):
+    ang_tot = math.degrees(math.atan2(X[-1, 1], X[-1, 0]))
+    ang_p = math.degrees(math.atan2(per[0]["y"], per[0]["x"]))
+    print("  LA DIREZIONE (Luca dopo 8e425771: con gli assi del reticolo e con la partenza): lo spostamento totale srotolato (%.3f, %.3f), lungo %.3f, l'angolo %+.1f, dalla direzione"
+          % (X[-1, 0], X[-1, 1], math.hypot(X[-1, 0], X[-1, 1]), ang_tot))
+    print("    del reticolo piu' vicina %+.1f; la partenza: il centro periodico al primo campione (%.5f, %.5f) dal nodo d'origine, l'angolo %+.1f; la differenza %+.1f gradi"
+          % (((ang_tot + 30.0) % 60.0) - 30.0, per[0]["x"], per[0]["y"], ang_p, ((ang_tot - ang_p + 180.0) % 360.0) - 180.0))
+    for soglia, che in ((R, "3 w < %.2f (la meta' del periodo, il criterio)" % R), (R_Y, "3 w < %.2f (l'estensione in y, solo come confronto: n.92)" % R_Y)):
         nv = next((b["a"] for b in blocchi if b["m3"] >= soglia), None)
         t_val = nv if nv is not None else tt[-1] + 1.0
         print("  CON IL CRITERIO %s: %s" % (che, ("il primo blocco NON valido comincia a %g; la vita solo prima" % nv) if nv is not None else "tutti i blocchi validi fino alla fine"))

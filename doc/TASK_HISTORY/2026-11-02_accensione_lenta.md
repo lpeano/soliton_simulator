@@ -502,3 +502,14 @@
 ### TODO
 
 - *(In attesa della decisione di Luca)* la stessa prova su un toro piu' grande *(`L 120`)*: separa la deriva e la vita dal limite del toro.
+
+### 11-bis. LA CONFERMA DI LUCA *(dopo `8e425771`, arrivata mentre scrivevo il codice; prima della corsa)*
+
+1. **Il criterio e' `40.5`**, la meta' del periodo *(decisione di Luca)*. Il `34.64` era **l'errore di lettura `n.92`** *(il mio)*: nel referto **solo come confronto**.
+2. **La corsa da `0` come `TP1000`**, col controllo al bit su `TA1000`: **va bene.**
+3. **Le parole:** il toro **non ha un bordo**. Cio' che rompeva le misure e' **il TAGLIO DELLE COORDINATE** *(gli indici da `-40` a `+40`)*; il crollo a `13500` e' **l'effetto della misura euclidea sul taglio**. Nel referto e nella MAPPA si scrive cosi'. ### **Correggo le mie parole in `455b9a95` e nella sez. `11`** *(«il bordo del toro»)*: **le annoto qui, non le riscrivo.**
+4. **Il rombo e' uguale nelle tre direzioni:** nessuna direzione del moto viene dalla forma del toro. **Il referto confronta la direzione con gli assi del reticolo e con la partenza.**
+   - **Come leggo «la partenza», e lo dichiaro:** la direzione del centro periodico al primo campione rispetto al nodo d'origine *(la partenza non e' centrata su un nodo: `x ~ 0.19`)*.
+   - **Il confronto:** con la direzione dello spostamento totale srotolato.
+
+**Nel codice** *(un commit a se', prima di `D6` e della corsa)*: le righe del referto di `sul_toro`. **Le misure non cambiano.**
