@@ -410,8 +410,10 @@ def referto():
         esito("DEVE PASSARE: A6 %s non si scioglie durante la rampa (altrimenti FERMO)" % nome, not sciolto_rampa, "")
         M = np.array([c["E"]["totale"]["M"] for c in camp])
         Vv = np.array([c["E"]["totale"]["V"] for c in camp])
-        dM, dV = float(np.max(np.abs(M / M[0] - 1.0))), float(np.max(np.abs(Vv / Vv[0] - 1.0)))
-        esito("DEVE PASSARE: A3 %s M e V entro %g" % (nome, V.TOLL_NORMA), dM <= V.TOLL_NORMA and dV <= V.TOLL_NORMA, "dM %.1e dV %.1e" % (dM, dV))
+        t3 = np.array([c["t"] for c in camp]) * s
+        oM, nM = AC.a3(t3, M, camp[-1]["t"], V.TOLL_NORMA)
+        oV, nV = AC.a3(t3, Vv, camp[-1]["t"], V.TOLL_NORMA)
+        esito("DEVE PASSARE: A3 %s M e V (accensione.a3, Luca dopo fabce56d)" % nome, oM and oV, "M %s; V %s" % (nM, nV))
         esito("DEVE PASSARE: A4 %s il libro col par della corsa (eps %g)" % (nome, V.EPS), all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rr), "")
         esito("DEVE PASSARE: %s arriva alla fine o si scioglie" % nome, fatta, "")
         t_sotto = next((r["t_dis"] for r in rr if r["t_dis"] is not None), None)
@@ -508,8 +510,10 @@ def sul_toro():
                                                                      sum(r["secondi"] for r in rr)))
     M_ = np.array([c["E"]["totale"]["M"] for c in camp])
     V_ = np.array([c["E"]["totale"]["V"] for c in camp])
-    dM, dV = float(np.max(np.abs(M_ / M_[0] - 1.0))), float(np.max(np.abs(V_ / V_[0] - 1.0)))
-    esito("DEVE PASSARE: A3 %s M e V entro %g" % (nome, V.TOLL_NORMA), dM <= V.TOLL_NORMA and dV <= V.TOLL_NORMA, "dM %.1e dV %.1e" % (dM, dV))
+    t3 = np.array([c["t"] for c in camp]) * s
+    oM, nM = AC.a3(t3, M_, camp[-1]["t"], V.TOLL_NORMA)
+    oV, nV = AC.a3(t3, V_, camp[-1]["t"], V.TOLL_NORMA)
+    esito("DEVE PASSARE: A3 %s M e V (accensione.a3, Luca dopo fabce56d)" % nome, oM and oV, "M %s; V %s" % (nM, nV))
     esito("DEVE PASSARE: A4 %s il libro col par della corsa (eps %g)" % (nome, V.EPS), all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rr), "")
     esito("DEVE PASSARE: %s arriva alla fine" % nome, fatta, "")
     rg, cg, _x, _y = serie(gem)
@@ -697,6 +701,7 @@ def indice(nome="TM1000"):
 def verifica_mappe(nome="TM1000"):
     """### **Il referto di `TM1000`:** i DEVE del mandato delle mappe e della decisione dopo `3e3277a2`."""
     import _vuoto_vivo_B as V
+    from solitone import accensione as AC
     from solitone import mappe as MP
     s = V.CORSE[NOME][2]
     gem = GEMELLE[nome]
@@ -715,8 +720,10 @@ def verifica_mappe(nome="TM1000"):
           disco[0]["nota"] if disco else "nessuna registrazione")
     M_ = np.array([c["E"]["totale"]["M"] for c in camp])
     V_ = np.array([c["E"]["totale"]["V"] for c in camp])
-    dM, dV = float(np.max(np.abs(M_ / M_[0] - 1.0))), float(np.max(np.abs(V_ / V_[0] - 1.0)))
-    esito("DEVE PASSARE: A3 %s M e V entro %g" % (nome, V.TOLL_NORMA), dM <= V.TOLL_NORMA and dV <= V.TOLL_NORMA, "dM %.1e dV %.1e" % (dM, dV))
+    t3 = np.array([c["t"] for c in camp]) * s
+    oM, nM = AC.a3(t3, M_, camp[-1]["t"], V.TOLL_NORMA)
+    oV, nV = AC.a3(t3, V_, camp[-1]["t"], V.TOLL_NORMA)
+    esito("DEVE PASSARE: A3 %s M e V (accensione.a3, Luca dopo fabce56d)" % nome, oM and oV, "M %s; V %s" % (nM, nV))
     esito("DEVE PASSARE: A4 %s il libro col par della corsa (eps %g)" % (nome, V.EPS), all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rr), "")
     gg = {r["t0"]: r for r in rg}
     diversi = [r["t0"] for r in rr if r["t0"] not in gg or gg[r["t0"]]["sha_fine"] != r["sha_fine"] or gg[r["t0"]]["t1"] != r["t1"]]

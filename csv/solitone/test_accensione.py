@@ -8,6 +8,7 @@ TICK = 20                      # ### i tick dei confronti (la diagnostica di 256
 TOLL_PSI_A2 = 1e-12            # ### A2: |psi - psi_avanza|/|psi| (la decisione (i); il task history, sez. 6-bis: cento volte la differenza misurata)
 LAM_MEZZO = 0.5                # ### A0: un lam intermedio deve differire da entrambi
 TOLL_ESATTO = 1e-9             # ### A7, A8: una retta esatta (l'arrotondamento del fit)
+TOLL_A3 = 1e-10                # ### A9: la tolleranza di A3 (_vuoto_vivo_B.TOLL_NORMA)
 
 
 def _stato(z):
@@ -100,3 +101,20 @@ def vite(esito):
           not mis and t_a is not None and abs(t_a / 39600.0 - 1.0) <= TOLL_ESATTO, "tempo %s, pendenza %+.4e" % (t_a, p_a))
     t_a, p_a, mis = AC.tempo_alone(tau, 0.02 - 1e-6 * tau, 0.0, tau[-1], 0.1)
     esito("DEVE FALLIRE: A8-F un alone che CALA da' un tempo al 10%", t_a is None, "tempo %s, pendenza %+.4e" % (t_a, p_a))
+    a3(esito)
+
+
+def a3(esito):
+    """### **`A9`** *(Luca, dopo `fabce56d`)*: ### **`A3` delle corse lunghe, su serie scritte a mano** *(i numeri di `DG1000`: `doc/referti_l2/due_giri/diag_a3.txt`)*."""
+    print("### A3 DELLE CORSE LUNGHE (accensione.a3): serie a mano; A3_TICK_LUNGA %d A3_PENDENZA %g, la tolleranza %g" % (AC.A3_TICK_LUNGA, AC.A3_PENDENZA, TOLL_A3))
+    tau = np.arange(0.0, 40000.0, 15.0)
+    tick = 266667
+    x = 1.0 + 3.8746e-15 * tau                         # ### la deriva di M in DG1000: +3.8746e-12 per 1000, a 40000 1.55e-10
+    ok, nota = AC.a3(tau, x, tick, TOLL_A3)
+    esito("DEVE PASSARE: A9 la deriva di DG1000 (+3.87e-12 per 1000, 1.55e-10 a 40000), %d tick" % tick, ok, nota)
+    ok, nota = AC.a3(tau, 1.0 + 2e-14 * tau, tick, TOLL_A3)
+    esito("DEVE FALLIRE: A9-F una deriva di 2e-11 per 1000", not ok, nota)
+    ok, nota = AC.a3(tau, np.where(tau < 20000.0, 1.0, 1.0 + 2.4e-10), tick, TOLL_A3)
+    esito("DEVE FALLIRE: A9-S un salto di 2.4e-10 a 20000 (la pendenza da sola starebbe sotto: ~9e-12 per 1000; il residuo ~1.2e-10)", not ok, nota)
+    ok, nota = AC.a3(tau[tau <= 16000.0], 1.0 + 1e-14 * tau[tau <= 16000.0], 100000, TOLL_A3)
+    esito("DEVE FALLIRE: A9-C una corsa corta (100000 tick) con 1.6e-10 a 16000: il criterio di prima", not ok, nota)

@@ -5,7 +5,7 @@ del repo), il centro periodico srotolato.**
 
     python csv/solitone/carta_giri.py > doc/referti_l2/due_giri.txt      # (scrive anche doc/referti_l2/due_giri/traiettoria.png)
 
-### **I DEVE:** `A3`, `A4`, il disco, **la rada dall'intera** *(lo `sha1` dell'intera su `E:`, i campioni comuni uguali al bit)*, **le riprese al bit** *(`corsa_accensione.ripartenza`)*.
+### **I DEVE:** `A3`, `A4`, il disco, **la rada dall'intera** *(lo `sha1` dell'intera su `E:`, i campioni comuni uguali al bit)*, **le riprese al bit** *(`corsa_accensione.ripartenza`; solo gli stati INTERMEDI, Luca dopo `fabce56d`)*; `A3` da `accensione.a3`. ### **`Lambda` vicino senza il solitone** *(n.98)*.
 ### **Le misure:** la fermata; a blocchi di `1000` la posizione, la velocita', la direzione, la curvatura, il raggio, il verso, `w`, il cuore, l'alone; il raggio contro la
 velocita'; i passaggi dal punto di partenza; la velocita' lungo il giro e il primo giro contro il secondo; il libro attorno al centro ai passaggi e a meta' giro *(`18:12`)*;
 `Lambda` e `rho` al punto di partenza dalle mappe; l'alone verso un tetto *(`18:18`)*.
@@ -59,6 +59,7 @@ def rade():
 def main(argv):
     import _presidio
     import _vuoto_vivo_B as V
+    from solitone import accensione as AC
     from solitone import corsa_accensione as CA
     from solitone import mappe as MP
     from solitone import toro as TO
@@ -88,8 +89,10 @@ def main(argv):
     esito("DEVE PASSARE: DG1000 finita (una delle tre)", fatta, "")
     M_ = np.array([c["E"]["totale"]["M"] for c in cp + cd])
     V_ = np.array([c["E"]["totale"]["V"] for c in cp + cd])
-    dM, dV = float(np.max(np.abs(M_ / M_[0] - 1.0))), float(np.max(np.abs(V_ / V_[0] - 1.0)))
-    esito("DEVE PASSARE: A3 TP1000 + DG1000 M e V entro %g" % TOLL_TP, dM <= TOLL_TP and dV <= TOLL_TP, "dM %.1e dV %.1e" % (dM, dV))
+    t3 = np.array([c["t"] for c in cp + cd]) * s
+    oM, nM = AC.a3(t3, M_, cd[-1]["t"], TOLL_TP)
+    oV, nV = AC.a3(t3, V_, cd[-1]["t"], TOLL_TP)
+    esito("DEVE PASSARE: A3 TP1000 + DG1000 M e V (accensione.a3, Luca dopo fabce56d)", oM and oV, "M %s; V %s" % (nM, nV))
     esito("DEVE PASSARE: A4 il libro col par della corsa", all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rd), "")
     disco = rd[0].get("disco")
     esito("DEVE PASSARE: il disco prima di cominciare (%d volte la stima)" % MP.VOLTE_SPAZIO, bool(disco) and disco["ok"], disco["nota"] if disco else "nessuna registrazione")
@@ -107,8 +110,11 @@ def main(argv):
         n_com += len(ci)
     esito("DEVE PASSARE: la versione rada si ricava dall'intera (lo sha1 dell'intera su E:, i campioni e le righe di D comuni uguali AL BIT, lo sha_fine)", not cattive,
           "%d campioni comuni; pezzi diversi %s" % (n_com, cattive or "nessuno"))
-    rip = CA.ripartenza("DG1000")
-    esito("DEVE PASSARE: ogni stato salvato si rilegge AL BIT e ripartendo per %d tick ridà AL BIT lo stato della corsa" % CA.DOPO_STATO, all(a and b for _t, a, b in rip),
+    rip_tutti = CA.ripartenza("DG1000")
+    rip = [x for x in rip_tutti if x[0] < ult["t1"]]       # ### Luca dopo fabce56d: solo gli stati intermedi (l'ultimo tick non ha i 100 dopo, n.97)
+    print("  gli stati salvati %s; il controllo delle riprese solo sugli intermedi (Luca dopo fabce56d): %s; l'ultimo tick %d, letto %s"
+          % ([x[0] for x in rip_tutti], [x[0] for x in rip], ult["t1"], "; ".join("al bit" if a else "### NO" for t_, a, _b in rip_tutti if t_ >= ult["t1"]) or "nessuno stato"))
+    esito("DEVE PASSARE: ogni stato INTERMEDIO salvato si rilegge AL BIT e ripartendo per %d tick ridà AL BIT lo stato della corsa" % CA.DOPO_STATO, all(a and b for _t, a, b in rip),
           "; ".join("tick %d: letto %s, dopo %s" % (t, "al bit" if a else "### NO", "al bit" if b else "### NO") for t, a, b in rip) or "nessuno stato (la corsa finita prima)")
     # ------------------------------------------------------------------ la traiettoria
     camp = cp + cd
@@ -210,8 +216,8 @@ def main(argv):
         else:
             print("  il confronto: meta' del giro %d a %.1f: prima di DG1000, senza E_cen" % (k, tm))
     # ------------------------------------------------------------------ 18:12 le mappe al punto di partenza
-    print("### LAMBDA E RHO AL PUNTO DI PARTENZA DALLE MAPPE (l'istantanea piu' vicina a t_p - %g; il disco di raggio 3 w0 attorno alla posizione iniziale, contro il lontano:" % PRIMA_MAPPA)
-    print("    fuori da quel disco e fuori da 3 w attorno al centro del solitone)")
+    print("### LAMBDA E RHO AL PUNTO DI PARTENZA DALLE MAPPE (l'istantanea piu' vicina a t_p - %g; il disco di raggio 3 w0 attorno alla posizione iniziale SENZA i nodi entro 3 w" % PRIMA_MAPPA)
+    print("    dal centro del solitone (Luca dopo fabce56d, n.98), contro il lontano: fuori da quel disco e fuori da 3 w attorno al centro del solitone)")
     mm_, _ss, _cc = CA.file_e("DG1000")
     for k, i in passaggi:
         tv = tt[i] - PRIMA_MAPPA
@@ -232,9 +238,15 @@ def main(argv):
         d0 = np.array([TO.distanza(q, x0, L) for q in pos])
         dc = np.array([TO.distanza(q, d["centro"][j], L) for q in pos])
         wj = ww[int(np.argmin(np.abs(tt - d["t"][j] * s)))]
-        vic = d0 <= 3.0 * w0
-        lon = (~vic) & (dc > 3.0 * wj)
+        disco = d0 <= 3.0 * w0
+        vic = disco & (dc > 3.0 * wj)
+        lon = (~disco) & (dc > 3.0 * wj)
         lam, rho = d["Lambda"][j].astype(np.float64), d["rho"][j].astype(np.float64)
+        print("  il giro %d: il disco vicino %d nodi (3 w0 %.2f), di cui entro 3 w dal centro (3 w %.2f) %d, liberi %d; il nodo del disco piu' lontano dal centro a %.2f"
+              % (k, int(disco.sum()), 3.0 * w0, 3.0 * wj, int((disco & ~vic).sum()), int(vic.sum()), float(dc[disco].max())))
+        if not vic.any():
+            print("  il giro %d: ### NESSUN NODO DEL DISCO VICINO E' LIBERO DAL SOLITONE: da questa istantanea la domanda non ha risposta" % k)
+            continue
         print("  il giro %d: l'istantanea a %.1f (il centro a %.2f dal punto di partenza): Lambda vicino %.6f, lontano %.6f (il rapporto %.6f); rho vicino %.4e, lontano %.4e; %d e %d nodi"
               % (k, d["t"][j] * s, TO.distanza(d["centro"][j], x0, L), lam[vic].mean(), lam[lon].mean(), lam[vic].mean() / lam[lon].mean(), rho[vic].mean(), rho[lon].mean(), int(vic.sum()), int(lon.sum())))
     # ------------------------------------------------------------------ 18:18 l'alone verso un tetto

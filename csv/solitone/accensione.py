@@ -10,11 +10,16 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO** *(il mandato di Luca delle `01:13` del `202
 
 ### **La vita dal cuore a blocchi e l'alone** *(Luca, dopo `bfee5330`)*: `medie_a_blocchi`, `vita_a_blocchi`, `tempo_alone`.
 
+### **`A3`, la conservazione di `M` e `V`** *(Luca, dopo `fabce56d`)*: `a3`, ### **oltre `A3_TICK_LUNGA` tick la deriva lineare sotto `A3_PENDENZA` per `1000`.**
+
 ### **La rampa** *(dichiarata nel task history, prima)*: `lam_k = sin^2(pi k / (2 K))`, `k = 1 .. K`, `K = T_acc/s`; `lam_K = 1` esatto; ### **dopo, `tick.percorri_tick`.**
 """
 import math
 
 import numpy as np
+
+A3_TICK_LUNGA = 100000         # ### Luca dopo fabce56d: oltre questi tick la corsa e' lunga, e A3 guarda la deriva
+A3_PENDENZA = 1e-11            # ### ... lineare nel tempo e sotto 1e-11 per 1000 unita' di tempo
 
 
 def tick_acceso(z, lam):
@@ -142,3 +147,17 @@ def tempo_alone(tau, al, tau0, tau1, quota):
     if len(su):
         return float(tau[m][su[0]]), 1000.0 * float(p), True
     return (float((quota - c) / p) if p > 0 else None), 1000.0 * float(p), False
+
+
+def a3(tau, x, tick, toll):
+    """### **`A3`** *(Luca, dopo `fabce56d`)*: ### **fino a `A3_TICK_LUNGA` tick, `max|x/x0 - 1| <= toll`; oltre, la retta di `x/x0 - 1` contro il tempo ha la
+    pendenza sotto `A3_PENDENZA` per `1000` e il residuo massimo entro `toll`** *(«lineare»: la lettura dichiarata nel task history, sez. `13-quinquies`; tolta la retta,
+    il criterio di prima)*. `tick` e' il tick dell'ultimo campione. ### **`(passa, la nota)`.**"""
+    tau, d = np.asarray(tau, dtype=float), np.asarray(x, dtype=float) / float(x[0]) - 1.0
+    if tick <= A3_TICK_LUNGA:
+        mx = float(np.max(np.abs(d)))
+        return mx <= toll, "corta (%d tick): max %.2e (la tolleranza %g)" % (tick, mx, toll)
+    p, c = np.polyfit(tau, d, 1)
+    res = float(np.max(np.abs(d - (p * tau + c))))
+    return abs(1000.0 * p) <= A3_PENDENZA and res <= toll, "lunga (%d tick): la pendenza %+.3e per 1000 (il tetto %g), il residuo %.2e (la tolleranza %g)" % (
+        tick, 1000.0 * p, A3_PENDENZA, res, toll)
