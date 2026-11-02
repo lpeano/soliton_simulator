@@ -8,6 +8,8 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO** *(il mandato di Luca delle `01:13` del `202
 ### sostituito: scalare `MV.beta` non arriverebbe)*. ### **Il palindromo resta palindromo:** ogni pezzo del vuoto ha la stessa scala nelle due meta'.
 ### **Nessuna legge nuova:** `dtau` e' gia' un argomento dei pezzi.
 
+### **La vita dal cuore a blocchi e l'alone** *(Luca, dopo `bfee5330`)*: `medie_a_blocchi`, `vita_a_blocchi`, `tempo_alone`.
+
 ### **La rampa** *(dichiarata nel task history, prima)*: `lam_k = sin^2(pi k / (2 K))`, `k = 1 .. K`, `K = T_acc/s`; `lam_K = 1` esatto; ### **dopo, `tick.percorri_tick`.**
 """
 import math
@@ -92,3 +94,51 @@ def vita_a_meta(tau, f, tau0, meta=0.5, coda=3000.0):
     if not len(dopo) and p < 0:
         out["estrapolata"] = float(tau[-1] + (meta * f0 - f[-1]) / p)
     return out
+
+
+def medie_a_blocchi(tau, f, tau0, blocco=1000.0):
+    """### **Le medie di `f` su blocchi `[a, a + blocco)`, `a = tau0 + k blocco`** *(Luca, dopo `bfee5330`, punto `1`)*: ### **solo i blocchi COMPLETI**, cioe' con un
+    campione entro un passo di campionamento *(misurato dai campioni)* dalla fine del blocco. ### **`[(a, b, media)]`.**"""
+    tau, f = np.asarray(tau), np.asarray(f)
+    passo = float(np.median(np.diff(tau)))
+    out = []
+    a = tau0
+    while a + blocco <= tau[-1] + passo:
+        m = (tau >= a) & (tau < a + blocco)
+        if m.any() and tau[m][-1] >= a + blocco - passo:
+            out.append((a, a + blocco, float(f[m].mean())))
+        a += blocco
+    return out
+
+
+def vita_a_blocchi(tau, f, tau0, meta=0.5, blocco=1000.0):
+    """### **La vita dal cuore a blocchi** *(Luca, dopo `bfee5330`, punto `1`)*: ### **la meta' rispetto alla media del PRIMO blocco dopo `tau0`.**
+    ### **Misurata:** il CENTRO del primo blocco con la media sotto meta' *(la risoluzione e' il blocco)*. ### **Altrimenti ESTRAPOLATA, dichiarata:** la retta delle
+    medie contro i centri, su tutti i blocchi completi, fino a meta'; solo con la pendenza negativa e almeno `3` blocchi.
+    ### **`{"rif", "blocchi", "misurata", "estrapolata", "pendenza"}`** *(la pendenza per `1000`)*."""
+    bb = medie_a_blocchi(tau, f, tau0, blocco)
+    rif = bb[0][2]
+    out = {"rif": rif, "blocchi": bb, "misurata": None, "estrapolata": None, "pendenza": float("nan")}
+    sotto = [b for b in bb if b[2] < meta * rif]
+    if sotto:
+        out["misurata"] = 0.5 * (sotto[0][0] + sotto[0][1])
+    if len(bb) >= 3:
+        cc = np.array([0.5 * (a + b) for a, b, _m in bb])
+        p, c = np.polyfit(cc, np.array([m for _a, _b, m in bb]), 1)
+        out["pendenza"] = 1000.0 * float(p)
+        if not sotto and p < 0:
+            out["estrapolata"] = float((meta * rif - c) / p)
+    return out
+
+
+def tempo_alone(tau, al, tau0, tau1, quota):
+    """### **La vita dell'emissione** *(Luca, dopo `bfee5330`, punto `3`)*: ### **il tempo a cui la retta dell'alone su `[tau0, tau1]` arriva a `quota`**
+    *(l'alone e' gia' una frazione della materia)*. ### **`(tempo o None, la pendenza per 1000, misurato)`**: `misurato` se un campione arriva gia' a `quota`;
+    nessun tempo se la pendenza non e' positiva."""
+    tau, al = np.asarray(tau), np.asarray(al)
+    m = (tau >= tau0) & (tau <= tau1)
+    p, c = np.polyfit(tau[m], al[m], 1)
+    su = np.nonzero(al[m] >= quota)[0]
+    if len(su):
+        return float(tau[m][su[0]]), 1000.0 * float(p), True
+    return (float((quota - c) / p) if p > 0 else None), 1000.0 * float(p), False
