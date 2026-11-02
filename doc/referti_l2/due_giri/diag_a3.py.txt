@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+"""LA DIAGNOSTICA DEI DUE GIRI (dopo la corsa DG1000, 2026-11-02): (1) A3, M e V totali contro il primo campione, TP1000 + DG1000 rado, a soglie di tempo,
+    e la retta della deriva; (2) il cuore e w EUCLIDEI (quelli delle righe di avanzamento della corsa) contro quelli PERIODICI, ogni 1000.
+    python diag_a3.py   (dalla radice del repo; copiato in doc/referti_l2/due_giri/diag_a3.py.txt)
+"""
+import glob
+import json
+import sys
+
+import numpy as np
+
+sys.path.insert(0, "csv")
+import solitone  # noqa: E402,F401
+from solitone import corsa_accensione as CA  # noqa: E402
+
+_rr, cp, _d, _a = CA.serie("TP1000")
+rd = [json.loads(l) for f in sorted(glob.glob("doc/referti_l2/due_giri/DG1000_*.jsonl")) for l in open(f, encoding="utf-8")]
+s = rd[0]["s"]
+cc = cp + [c for r in rd for c in r["campioni"]]
+t = np.array([c["t"] for c in cc]) * s
+M = np.array([c["E"]["totale"]["M"] for c in cc])
+V = np.array([c["E"]["totale"]["V"] for c in cc])
+dM, dV = M / M[0] - 1.0, V / V[0] - 1.0
+print("(1) A3: M e V totali contro il primo campione (%d campioni, %d da TP1000, il resto rado da DG1000)" % (len(cc), len(cp)))
+for a in (4000, 8000, 16000, 24000, 32000, 40001):
+    m = t <= a
+    print("  fino a %6d: max|M/M0-1| %.3e  max|V/V0-1| %.3e  all'ultimo campione M %+.3e V %+.3e" % (a, np.abs(dM[m]).max(), np.abs(dV[m]).max(), dM[m][-1], dV[m][-1]))
+pm, pv = np.polyfit(t, dM, 1), np.polyfit(t, dV, 1)
+for nome, p, d in (("M", pm, dM), ("V", pv, dV)):
+    res = d - np.polyval(p, t)
+    print("  la retta di %s/%s0-1 contro il tempo: %+.4e per 1000 unita' di tempo, %+.4e per tick; il residuo massimo %.2e; i campioni sotto zero %d"
+          % (nome, nome, p[0] * 1000, p[0] * s, np.abs(res).max(), int(np.sum(d < 0))))
+for nome, d in (("M", dM), ("V", dV)):
+    sopra = np.abs(d) > 1e-10
+    print("  %s: il primo campione oltre 1e-10 a tempo %s" % (nome, ("%.1f" % t[np.argmax(sopra)]) if sopra.any() else "nessuno"))
+print("(2) IL CUORE E w: EUCLIDEI (le righe di avanzamento) contro PERIODICI, il campione piu' vicino a ogni 1000, da 16000")
+for a in range(16000, 40001, 1000):
+    i = int(np.argmin(np.abs(t - a)))
+    c = cc[i]
+    print("  %8.1f  il cuore eucl. %.5f  per. %.5f   w eucl. %8.4f  per. %8.4f" % (t[i], c["f_liscia"], c["per"]["f_liscia"], c["w"], c["per"]["w"]))
