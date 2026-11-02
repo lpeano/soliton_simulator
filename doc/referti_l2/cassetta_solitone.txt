@@ -1,13 +1,15 @@
-[TIMBRO] __init__.py  sha1-BYTE e320193c  committato e pulito
+[TIMBRO] __init__.py  sha1-BYTE 0980ef9c  committato e pulito
 [TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
 [TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
+[TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
 [TIMBRO] test_vuoto.py  sha1-BYTE 5c5753b2  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE b3816217  committato e pulito
+[TIMBRO] test_respiro.py  sha1-BYTE 810ee3ff  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE eb9f1130  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -64,13 +66,23 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: V3 A_v(k) unitaria a ogni k entro 1e-12; F0 autostato del tick, residuo e |lambda| - 1 <= 1e-12                      PASSA   max|A^H A - I| 4.44e-16; F0: residuo 7.55e-15, |lambda| - 1 -6.4e-15, nu 38.746309394274
   DEVE PASSARE: V4 il rivelatore trova nu di F0 dentro o sul bordo di una banda (margine <= 1e-09)                                   PASSA   fuori, margine +1.421e-14, bande []
   DEVE FALLIRE: V4-F il mezzo del gap piu' largo e' dentro una banda                                                                 PASSA   margine +17.802358 (il gap e' largo 35.604717)
-### D6: LA LIBRERIA E' QUELLA DI ae4640ee (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da ae4640ee a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### IL RESPIRO SULLA CARTA (csv/solitone/respiro.py): PASSO 0.15 N_TICK 4000 PERIODO_PROVA 4.07 OGNI_RADO 10 TOLL_FREQ 1e-06 TOLL_SOMMA 1e-15 FRAZIONE 0.1 FRAZIONE_F 0.0333333 SEME 20261102 SIGNIF 3 TOLL_QUOTA 0.01; PERIODI_MIN 10
+  DEVE PASSARE: R1 omega ritrova un seno noto (periodo 4.07, a ogni tick, con una tendenza quadratica) entro 1e-06 sulla frequenza   PASSA   periodo 4.070000029, errore 7.0e-09, ampiezza 2.000000e-03; cambi 4.0704
+  DEVE FALLIRE: R1-F un seno di periodo 2.3755 (sotto il Nyquist dei campioni radi) campionato ogni 10 tick ridà la frequenza vera e PASSA   a ogni tick 2.375486; ogni 10 tick letto 4.070000 (l'alias); gli alias dai cambi 0.6334 0.9192 1.0964 2.3738
+  DEVE PASSARE: R2 margine_mod su un intervallo che passa per lo zero del cerchio: dentro e fuori, il margine col segno, il cerchio  PASSA   -1.500 -0.500 +1.000 +1.000 -20.944
+  DEVE PASSARE: R3 somma e opposto contro il conto a mano                                                                            PASSA   (1.75, 4.25) (-0.5, 1.25)
+  DEVE PASSARE: R4 elenco a 0.1 (primi 1) su tre seni di ampiezza 1, 0.15, 0.05: i primi due entro 1 canale, non il terzo, nessun do PASSA   2 picchi nell'elenco (4 massimi rifiniti): 4.0700 0.9900
+  DEVE FALLIRE: R4-F elenco a 0.0333 NON contiene il terzo seno (periodo 19.5)                                                       PASSA   3 picchi: 4.0700 0.9900 19.5032
+  DEVE PASSARE: R5 presenza: un seno di ampiezza 3e-4 nel rumore gaussiano di sigma 1e-3 ha significativita' >= 3                    PASSA   significativita' 9.39, ampiezza 3.098e-04, quota 0.0451
+  DEVE FALLIRE: R5-F presenza: sul solo rumore la significativita' alla stessa frequenza e' >= 3                                     PASSA   significativita' 1.25, ampiezza 4.112e-05
+  DEVE PASSARE: R5-Q la quota: il seno puro di R1 ha quota 1 entro 0.01; il seno di R5 nel rumore ha quota a^2/2/(sigma^2 + a^2/2) = PASSA   seno puro 1.000419 (ampiezza 2.000000e-03); nel rumore 0.0451
+### D6: LA LIBRERIA E' QUELLA DI b71d86eb (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da b71d86eb a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s
-ESITO: 44/44 controlli passano; fallite: 0 []
+  i tempi: uscite 23 s; protetto 16 s; misure 6 s; vuoto 4 s; respiro 0 s
+ESITO: 53/53 controlli passano; fallite: 0 []

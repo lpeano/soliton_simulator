@@ -310,3 +310,13 @@
   - **Il test:** `R5-Q` *(un seno puro ha quota `1` entro `1e-2`; un seno nel rumore ha la quota attesa `a^2/2/(sigma^2 + a^2/2)` entro un fattore `2`)*.
 - **`R4` con la tolleranza di `1` canale, non `1e-6`:** con tre seni insieme la rifinitura di uno alla volta sente gli altri *(il terzo letto a `19.5032` per `19.5`)*. **Il canale e' lo stesso criterio di identita' che usa `elenco`.**
 - **Le uscite del vuoto da solo `n mu` a `k = 0`** si stampano una volta, nella sezione delle miste a `k = 0`, e non si ripetono per ogni picco.
+
+### 8-quater. L'ESITO *(il referto `doc/referti_l2/solitone_vestito_carta_respiro.txt`, a `e8ccbac1`; la relazione per i numeri)*
+
+- **I controlli passano** *(W1 al bit, W2 gli `sha`, `R1`-`R5-Q`, `V0`-`V4`)*; **i primi `5` picchi identici a `04b02794`**; il DEVE del picco netto fallisce come scritto; il conto finale corretto *(`1` DEVE, `1` PUO' FALLIRE)*.
+- **(p1) REGGE:** `mu - Omega` della coppia veloce dentro la banda del vuoto *(margini `-0.62`, `-0.67`)*.
+- **(p3) SI':** tre miste aperte a `k = 0` *(`(L) B n 1`, `(C+) A n 1`, `(C+) B n 2`)*.
+- **(p4) SI', dal lato `-`:** `mu - 3 Omega` dentro per `7` picchi su `14` di (W2).
+- **La quota:** nessuna uscita COMPATIBILE da sola; `P0`, `Ppi`, `A` «fra le due»; la loro somma `~0.96` volte l'alone *(una lettura)*.
+- **I modi:** (m1) in parte; (m3) no; (m4) no. **La coppia veloce e' uno spostamento** *(e `w`)*, **i lenti sono confusi dalla deriva** *(i periodi tondi, `50.0000`)*.
+- **Poi:** la voce `33` (d) della MAPPA *(in coda)*, e l'accensione lenta nel repo e le corse.

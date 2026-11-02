@@ -22704,3 +22704,82 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
 - **(a)** *(la raccomando, insieme a (b))* le tabelle per **ogni** picco, non per uno solo: la coppia veloce `~0.99` e le tre componenti lente. Il codice c'e', costa minuti.
 - **(b)** `Omega` dalle **rotazioni per banda di `D`**, con `D` a ogni tick *(la regola della voce `18` della MAPPA: un periodo si misura con le rotazioni e `D` non piu' rado di `0.75`)*. Dice **quale banda** porta quale frequenza.
 - **(c)** prendere la carta cosi' com'e' *(nessun respiro netto, quindi nessuna banda laterale definita)* e passare alle corse dell'accensione.
+
+## 2026-11-02 — LA CARTA DEL RESPIRO, LA DECISIONE (a) DI LUCA E L'AGGIUNTA DELLE `09:20`: LE TABELLE PER OGNI PICCO, DI CHE MODO E' OGNI PICCO
+
+**Il task history:** sez. `8` *(`23b14fa8`)*, `8-bis` *(`3acb7a2a`)*, `8-ter` *(le annotazioni col codice)*. **Il codice:** `b71d86eb` *(`respiro.elenco`, `presenza`, `serie_modi`; `R4`-`R5-Q`)*; `D6` `e8ccbac1`. **La cassetta:** `53/53`. **Il referto:** `doc/referti_l2/solitone_vestito_carta_respiro.txt` *(riscritto alla nuova versione; il vecchio resta a `04b02794`)*.
+
+**I controlli:**
+- (W1) al bit coi `400` campioni committati; (W2) gli `sha` della fine della corsa viva;
+- **i primi `5` picchi di ogni finestra e i cambi di segno sono IDENTICI a `04b02794`** *(il diff delle righe `periodo` e `cambi di segno`)*;
+- **il DEVE del picco netto resta scritto com'e' e fallisce** *(rapporto `1.58`)*. **La riga finale ora dice:** DEVE fallite `1`, PUO' FALLIRE fallite `1` *(Luca, punto `3`)*.
+
+**I picchi delle tabelle** *(i primi `5` piu' quelli fino a `1/10` del primo)*: **`10` in (W1)** *(su `533` massimi rifiniti)*, **`14` in (W2)** *(su `230`)*.
+- In piu' dei `5` gia' noti: (W1) `22.02`, `20.27`, `18.25`, `27.68`, `15.33`; (W2) `0.9829` *(la coppia veloce c'e' anche alla fine)*, `16.23`, `7.39`, `10.16`, `5.73`, `8.21`, `6.31`, `4.32`, `9.23`.
+
+### **LA LETTURA DEL GUARDIANO: REGGE** *(la lettura (p1))*
+
+- `W1.4` *(periodo `0.990863`)*: `mu - Omega = 39.708649`, **DENTRO** la banda del vuoto `[38.746309, 40.328044]`, margine **`-0.6194`**;
+- `W1.5` *(periodo `0.982928`)*: `39.657455`, **DENTRO**, margine **`-0.6706`**.
+- **Un'uscita del vuoto da solo, `(L) n 1 k -1`, aperta dal respiro veloce.** La sua quota **non si misura da `D`** *(l'alone e `D` sono materia)*: lo scrivo, senza un numero inventato.
+- Gli altri picchi di (W1) *(i lenti)*: `mu - Omega` fuori, margini da `+0.61` a `+0.91`.
+
+### **(W2): IL `k = 3` DI LUCA, CONTROLLATO** *(la lettura (p4))*
+
+- **Il `+1.02` e' il margine di `mu` stesso** dalla banda del vuoto piu' vicina *(`+1.0203`, la banda `5`)*: confermato.
+- **`mu - 3 Omega` cade DENTRO una banda per `7` picchi su `14`:** `W2.3` *(`3 Omega = 1.6112`, `-0.5909`)*, `W2.4` *(`-0.3986`)*, `W2.7` *(`-0.1413`)*, `W2.8` *(`-0.0514`)*, `W2.9` *(`-0.7469`)*, `W2.11` *(`-0.3070`)*, `W2.14` *(`-0.5589`)*.
+- **`mu + 3 Omega` resta fuori per tutti.** Il primo picco `W2.1` *(`3 Omega = 0.9645`, sotto `1.02`)* resta fuori di `+0.0557`.
+
+### **LE MISTE A `k = 0`: TRE APERTE, INDIPENDENTI DAL RESPIRO** *(la lettura (p3))*
+
+| la forma | il margine |
+|---|---|
+| `(L) B, n 1` *(un'onda del vuoto della banda `5` piu' un'onda di `B` = `mu`)* | **`-0.9664`** |
+| `(C+) A, n 1` | **`-0.4818`** |
+| `(C+) B, n 2` | **`-1.1376`** |
+
+- `(C+) B, n 1` e `(C-) B, n 1` sono **per costruzione** *(`E_m = mu`, `nu_v = nu_F0`)* e non contano.
+- **La carta di `4d1c2b65` guardava solo `n mu`, non le miste:** queste tre sono nuove *(l'errore `n.90`)*.
+- ⚠ **Due delle tre hanno l'onda di materia in `B`, la banda del solitone stesso:** la quota dalle bande di `D` li' **non dice niente** *(`D` in `B` cala: `3.85 -> 0.82`, la pendenza `-2.8e-2` per `1000`)*.
+
+### **LE USCITE APERTE, IN TUTTO: `688`** *(contate dal referto: `sed -n '/^### LA QUOTA/,$p' REFERTO | grep "dentro di"`, poi `grep -c` sul verdetto)*
+
+| la quota | quante |
+|---|---|
+| non misurabile da `D` *(il vuoto da solo)* | `75` |
+| COMPATIBILE *(il gruppo cresce almeno quanto l'alone)* | **`0`** |
+| fra le due *(entro un ordine di grandezza, sotto l'alone)* | `226` |
+| INCOMPATIBILE | `387` |
+
+- **Le `387` incompatibili sono le miste con l'onda di materia in `B`** *(`387` su `387`)*: e' l'effetto della pendenza negativa di `B`, non una misura del canale.
+- **Le pendenze dei gruppi** *(il tratto `5000 .. 10000`, contro l'alone `+2.57e-3` per `1000`)*: `P0` `+1.28e-3` *(rapporto `0.50`)*, `Ppi` `+7.4e-4` *(`0.29`)*, `A` `+4.4e-4` *(`0.17`)*.
+- **Nessun gruppo da solo cresce quanto l'alone. Le uscite in `P0`, `Ppi`, `A` sono tutte «fra le due».**
+- ### **La mia lettura** *(non un criterio)*: **la somma dei tre** *(`~0.96` volte l'alone)* **e' compatibile con l'alone.** Ma la carta non dice quale canale porti quanto: **molte uscite sono aperte insieme**, e la quota e' **per gruppo**, non per uscita.
+
+### **DI CHE MODO E' OGNI PICCO** *(l'aggiunta delle `09:20`)*
+
+**Lo spettro separato di ogni osservabile** *(il primo picco di ciascuno)*:
+
+| | (W1) | (W2) |
+|---|---|---|
+| il cuore | `57.44` | `19.54` |
+| `w` | **`0.9907`** | **`0.9830`** |
+| `x` | **`0.9904`** | `28.08` |
+| `y` | **`0.9905`** | **`0.9827`** |
+| `Q2` *(re, im)* | `63.19`, `48.38` | `26.70`, `25.78` |
+| `Q3` *(re, im)* | `50.89`, `51.52` | `16.42`, `21.86` |
+| `Lambda` medio | `50.0000` | `32.46` |
+
+- ### **La coppia veloce `~0.99` e' il primo picco di `w`, `x` e `y`, non del cuore:** e' **una larghezza che respira e un baricentro che oscilla**, alla stessa frequenza. Il secondo picco di `w`, `x`, `y` e' `~2.03`.
+- **I lenti** stanno nel cuore, in `Q2`, `Q3` e in `Lambda`.
+- **La classe dalla quota** *(nel referto, per ogni picco)*: `W1.4`, `W1.5` **lo spostamento** *(`x`)*; `W1.1`, `W1.2` la deformazione *(`Q3 re`)*; `W1.3` lo scambio col vuoto; `W2.1` il respiro *(il cuore)*; `W2.2` la deformazione *(`Q2 re`, `6.1%`)*; `W2.6` *(la coppia veloce)* lo spostamento *(`y`)*.
+- ### ⚠ **I LIMITI, prima di leggerla:**
+  - **le quote sono piccole** *(da `0.0%` a `7.4%`)*. In (W1) la varianza tolta la tendenza quadratica e' dominata dalla **deriva non quadratica** *(il cuore medio `0.46` contro `0.59` della partenza)*. **Le quote si confrontano fra osservabili, non si leggono come frazioni assolute;**
+  - **alcuni picchi lenti di `Lambda` e del baricentro cadono su periodi tondi** *(`50.0000` = `600/12`; `20.0000`, `10.0002` in (W2))*, cioe' **su canali interi della finestra**: **sono la deriva che passa nello spettro, non modi.** Lo stesso dubbio vale per i lenti di `Q2`, `Q3`;
+  - **la significativita' non distingue** *(fino a `~7e6`)*: dice solo che il picco c'e', come annotato.
+- **Le letture:**
+  - **(m1) in parte:** la coppia veloce sta in un altro osservabile *(lo spostamento e `w`)*, i lenti no *(il cuore e la deformazione, con il dubbio della deriva)*;
+  - **(m3) NO:** la coppia veloce in `Lambda` e' debole *(la significativita' `~1e4` contro `~1e6` in `w`, `x`)*. **L'uscita verso il vuoto aperta dal respiro veloce e' un baricentro che oscilla, non uno scambio di `Lambda` sotto il solitone;**
+  - **(m4):** nessun picco «nessuna».
+
+**L'ipotesi di Luca** *(ogni frequenza e' un modo diverso)*: **la carta la sostiene per la coppia veloce** *(un modo di spostamento, separato dal respiro lento del cuore)*. **Per i lenti non decide:** la deriva li confonde. **`H` non e' misurato qui.**
