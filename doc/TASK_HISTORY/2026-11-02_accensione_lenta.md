@@ -655,3 +655,79 @@
     **Non e' un solo esponenziale dall'inizio.**
   - **(ii)** il vivo e `TA2000` non arrivano al `w` a cui `TP1000` parte *(`TP1000` supera `|v| 2.8` a `w 10.15`; il vivo arriva a `w 9.86`, `TA2000` a `8.96`)*: **la soglia di larghezza non si puo' controllare con questi dati.**
   - **(iii)** l'ampiezza del cuore cala da `~0.026` *(`2500`)* a `~0.004` *(`5500`-`7500`)*, poi oscilla fra `0.004` e `0.012` mentre la velocita' sale: **nessuna relazione evidente.**
+
+## 13. DUE GIRI DEL TORO *(Luca 17:30-17:33, la condizione cambiata alle 18:05, dopo `76822344`)*
+
+### La decisione *(di Luca, nella sostanza)*
+
+- **La condizione «la traiettoria curva» decade** *(il referto: va lungo `-A1`, una deviazione fino a `~11` gradi che rientra, poi rallenta)*. **Vale: DUE GIRI DEL TORO.**
+- **La corsa:** `TP1000` continuata dal suo stato a `16000`, finche':
+  - **(a)** lo spostamento lungo la direzione del moto *(il centro periodico seguito senza salti)* arriva a `2 x 81 = 162` nodi;
+  - **(b)** il cuore a blocchi scende sotto meta';
+  - **(c)** il tetto di `40000` unita' di tempo.
+
+  **Si scrive quale.**
+- **I dati:** mappe, stati completi e pezzi `.jsonl` interi su `E:\soliton_simulator\due_giri\`; nel repo l'indice e i campioni RADI *(uno ogni `100` tick)*.
+- **Il referto:**
+  - posizione, velocita', direzione, curvatura e raggio, verso, `w`, cuore, alone, a blocchi di `1000`;
+  - il raggio contro la velocita';
+  - il passaggio dal punto di partenza *(`t`, la velocita' e la direzione prima e dopo, `Lambda` e l'alone sul percorso)*;
+  - la velocita' contro la posizione lungo il giro;
+  - il primo giro contro il secondo;
+  - il grafico della traiettoria sul rombo.
+- **I DEVE:**
+  - `M` e `V` entro `1e-10`;
+  - il libro col `par`;
+  - ogni ripresa dallo stato salvato al bit;
+  - lo spazio su `E:` *(almeno `10` volte la stima)*;
+  - **la versione rada si ricava dall'intera** *(i campioni comuni identici al bit)*;
+  - un solo processo.
+- **Le letture:** (r1)-(r5), nel mandato.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- ### **L'ORDINE NELLA CODA** *(`[[PRECEDENZA-IN-CODA]]`)*: il mandato delle `17:30` metteva «due giri» **prima di `TM1000`**, e la condizione nuova non cambia l'ordine. **Il codice di `TM1000` e' gia' committato** *(`65f44871`)* **ma non e' girato:** «due giri» passa prima, e `TM1000` dopo.
+  - **`D6`** si ripunta dopo il codice di «due giri», **una volta per tutti e due.**
+- **Lo stato a `16000`:** `db/accensione_lenta/TP1000.npz` *(il tick `106667`)*; `TP1000_acc.npz` *(`psi` a `T_acc`)*. **La corsa nuova si chiama `DG1000`:**
+  - il primo pezzo parte dall'ultimo di `TP1000` *(la stessa verifica al bit degli `sha` di ogni chiave)*;
+  - i pezzi dopo partono dai suoi.
+- ### **LE MIE LETTURE DEL MANDATO, DICHIARATE:**
+  - **«Lo spostamento lungo la direzione del moto»** = la distanza del centro periodico **srotolato** *(la somma dei passi con l'immagine piu' vicina)* **dalla partenza di `TP1000`** *(il primo campione)*. Il moto e' quasi dritto lungo `-A1`, quindi coincide con lo spostamento lungo la direzione a meno di un coseno di `~7` gradi. A `16000` vale gia' `68.45`.
+  - **«Il tetto di `40000`»** = il tempo `t = 40000` dalla partenza, come i `16000` di `TP1000`. Non sono `40000` unita' in piu'. Alla velocita' di oggi *(`~11` per `1000`)* la condizione (a) arriva prima, verso `t ~ 24500`.
+  - **(b) «il cuore a blocchi sotto meta'»** = la decisione di Luca dopo `bfee5330`:
+    - la media su blocchi di `1000` del cuore liscio **periodico**;
+    - il riferimento e' **la media del primo blocco dopo `T_acc`** *(`0.44243`, `TP1000`)*;
+    - si controlla a ogni blocco chiuso.
+  - **Gli stati completi «ogni `10000` unita'»:** a `20000`, `30000`, `40000` *(il tick piu' vicino)*, con lo `sha` a `t + 100` per la ripresa al bit *(come `TM1000`)*.
+- **I dati, dove:**
+  - in `E:\soliton_simulator\due_giri\`: `mappe\DG1000\`, `stati\DG1000\`, `campioni\` *(i `jsonl` interi)*;
+  - nel repo, `doc/referti_l2/due_giri/DG1000_<t0>.jsonl`: **la versione rada**, la stessa riga con i campioni *(e le righe di `D`)* coi soli `t` multipli di `100`, piu' il percorso e lo `sha1` dell'intera.
+- **Il disco:** la stima e' quella delle mappe *(`~25` KB a istantanea compressa, `~52` KB scompressa)*, piu' tre stati *(`~2.3` MB)*, piu' i `jsonl` *(`~1.6` MB per `10000` tick, da `TP1000`)*. Fino a `t = 40000` sono `~160000` tick, cioe' `~40` MB. **Il DEVE: `E:` libero oltre `10` volte; oggi ha `~214` GB.**
+- **Il referto** *(`csv/solitone/carta_giri.py`, da scrivere mentre la corsa gira, fuori dal suo percorso)* legge **la versione rada del repo**, cosi' si rifa' senza `E:`. **Il passaggio dal punto di partenza:** quando lo spostamento srotolato passa `81` *(un giro lungo `A1` riporta al punto)*.
+  - **`Lambda` e l'alone sul percorso:** dalle mappe su `E:`, all'istantanea piu' vicina al passaggio. Dichiaro come: la media di `Lambda` e di `rho` in una striscia larga `w` lungo la linea del moto, davanti e dietro. **Il dettaglio lo fisso nel codice della carta, prima di girarla.**
+- **Cosa NON so:**
+  - se il solitone arriva a `162` prima di sciogliersi;
+  - se la velocita' resta `~11` o cala ancora *(cala da `17` a `11` fra `14000` e `16000`)*.
+
+  Se cala molto, il tetto `40000` arriva prima. **Il costo:** da `16000` a `~24500` sono `~57000` tick, `~6` pezzi, `~1 h`; fino al tetto, `~160000` tick, `~3 h`.
+
+### La progettazione
+
+1. Questo paragrafo, **da solo**.
+2. **`corsa_accensione.py`:**
+   - `DG1000` *(`CONTINUA` da `TP1000`)*;
+   - gli arresti (a) e (b) dentro la corsa, con lo stato del cammino e dei blocchi passato da un pezzo all'altro nel `jsonl`;
+   - le mappe, gli stati e i campioni su `E:\soliton_simulator\due_giri\`;
+   - la versione rada nel repo.
+
+   L'inventario. **Commit.** Poi **`D6`** *(per `TM1000` e `DG1000`)*, e la cassetta.
+3. **La corsa `DG1000`**, un pezzo alla volta, fino a «finita» *(e quale delle tre)*.
+4. **Mentre gira:** `carta_giri.py` *(il referto, dalla versione rada; i DEVE della rada e delle riprese)*, committato prima del referto.
+5. **Il referto, l'indice, la relazione, la MAPPA, l'esito.** Poi `TM1000`.
+
+### Che cosa mi farebbe FERMARE
+
+- la ripresa dallo stato di `TP1000` non al bit;
+- `A3`, `A4`;
+- il disco;
+- la rada diversa dall'intera.
