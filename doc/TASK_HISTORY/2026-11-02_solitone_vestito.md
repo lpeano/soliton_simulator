@@ -105,3 +105,14 @@
 5. *(Dopo Luca)* il modulo del Newton congiunto in `csv/solitone/`, i suoi test, `D6`, la corsa del passo `4`, il referto `doc/referti_l2/solitone_vestito.txt`, `CHIUDERE_LE_USCITE`.
 
 ## 7. L'ESITO
+
+*(scritto dopo la corsa della carta, a `922279a5`; il referto `doc/referti_l2/solitone_vestito_carta.txt`)*
+
+- **La progettazione e' cambiata prima del codice:** la carta sta nella libreria *(`csv/solitone/vuoto.py`, `test_vuoto.py`, `carta_vuoto.py`)*, non in `csv/_solitone_vestito.py`. **Il motivo:** il lavoro nuovo passa solo da `csv/solitone/` *(Luca `2026-11-01` `16:52`)*.
+- **`V0`-`V4` passano:** la linearita' `4.3e-16`, la ricostruzione `7.7e-16`, l'unitarieta' `4.4e-16`, il residuo di `F0` `7.6e-15`.
+- **Le bande del vuoto:**
+  - quattro piatte *(due a `0`, due a `-pi`)* e due dispersive larghe `1.5817` *(`[pi - 1.58, pi]` e `[-pi, -pi + 1.58]`)*; coprono il `7.55%` del cerchio mod `2 pi/s`;
+  - `nu` di `F0` e' `-pi`, sul bordo.
+- **`mu`, `2 mu`, `3 mu` cadono fuori** *(margini `+1.0203`, `+5.1821`, `+9.3440`)*: **non e' `(v3)`.**
+- **La vita di BG-F-0.15 con la soglia `9` e' `3.0`**: il primo campione, come previsto in `(P-c)`.
+- **Il passo `3` (il Newton congiunto) NON si fa** *(Luca `01:13`)*: lo sostituisce l'accensione lenta, il mandato successivo in coda. **La domanda sul controllo positivo cade con lui.** La domanda sulla separazione riassestamento / perdita lenta passa al mandato dell'accensione.

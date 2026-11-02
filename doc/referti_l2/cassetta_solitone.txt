@@ -1,11 +1,13 @@
-[TIMBRO] __init__.py  sha1-BYTE a704ae0c  committato e pulito
+[TIMBRO] __init__.py  sha1-BYTE e320193c  committato e pulito
 [TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 1145128a  committato e pulito
+[TIMBRO] test_vuoto.py  sha1-BYTE 5c5753b2  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE b3816217  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -55,13 +57,20 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: M6 un periodo vero di 99 tick (33 passi) letto giusto (entro la risoluzione 2.49e-02)                                PASSA   letto 99.0124
   DEVE PASSARE: M6 un periodo vero di 3.3 tick (1.1 passi, sotto Nyquist 6): NON letto giusto, ma il vero fra gli alias              PASSA   letto 33.0000; gli alias 1.4348 1.5714 2.7500 3.3000
   DEVE FALLIRE: M6 il periodo SENZA il passo                                                                                         PASSA   
-### D6: LA LIBRERIA E' QUELLA DI 3d5fe03a (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 3d5fe03a a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### IL VUOTO SULLA CARTA (csv/solitone/vuoto.py): la scena di BG-F-0.15, il tick intero con psi = 0; SEME 20261102 TOLL_LIN 1e-10 TOLL_RIC 1e-12 TOLL_UNI 1e-12 TOLL_BORDO 1e-09
+  DEVE PASSARE: V0 il vuoto della scena e' F0 (_vuoto_sul_fondo.fondo_uniforme) AL BIT                                               PASSA   
+  DEVE PASSARE: V1 con psi = 0 il tick sul vuoto e' lineare: |T(F0 + e) - T(F0) - T(e)|/|T(e)| <= 1e-10                              PASSA   4.30e-16
+  DEVE PASSARE: V2 A_v ricostruisce il tick: |T(g) - ifft(A_v fft(g))|/|T(g)| <= 1e-12                                               PASSA   7.66e-16
+  DEVE PASSARE: V3 A_v(k) unitaria a ogni k entro 1e-12; F0 autostato del tick, residuo e |lambda| - 1 <= 1e-12                      PASSA   max|A^H A - I| 4.44e-16; F0: residuo 7.55e-15, |lambda| - 1 -6.4e-15, nu 38.746309394274
+  DEVE PASSARE: V4 il rivelatore trova nu di F0 dentro o sul bordo di una banda (margine <= 1e-09)                                   PASSA   fuori, margine +1.421e-14, bande []
+  DEVE FALLIRE: V4-F il mezzo del gap piu' largo e' dentro una banda                                                                 PASSA   margine +17.802358 (il gap e' largo 35.604717)
+### D6: LA LIBRERIA E' QUELLA DI ae4640ee (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da ae4640ee a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 19 s; protetto 15 s; misure 5 s
-ESITO: 38/38 controlli passano; fallite: 0 []
+  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s
+ESITO: 44/44 controlli passano; fallite: 0 []

@@ -1,0 +1,36 @@
+[TIMBRO] __init__.py  sha1-BYTE e320193c  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
+[TIMBRO] test_vuoto.py  sha1-BYTE 5c5753b2  committato e pulito
+[TIMBRO] carta_vuoto.py  sha1-BYTE 3b3214ef  committato e pulito
+==================================================================================================================================
+IL SOLITONE VESTITO (Luca 01:04, passo 2): LA LETTURA SULLA CARTA -- le bande del vuoto linearizzato attorno a F0 (il tick intero, psi = 0), n mu e nu, la vita con la soglia 9
+  la configurazione: BG-F-0.15 (BG, il vuoto fondo, s 0.15, eps 0.5, N 1e+06, L 81, la forma della tabella, cs spento); ARMONICHE (1, 2, 3); la soglia della vita 0.01 (_massimo_di_B.SOGLIA, decisione 9)
+  il periodo delle frequenze 2 pi/s = 41.887902; mu di BG-F-0.15 (il primo pezzo committato) +4.161868161822, il residuo per tick della partenza 3.295e-02
+==================================================================================================================================
+### IL VUOTO SULLA CARTA (csv/solitone/vuoto.py): la scena di BG-F-0.15, il tick intero con psi = 0; SEME 20261102 TOLL_LIN 1e-10 TOLL_RIC 1e-12 TOLL_UNI 1e-12 TOLL_BORDO 1e-09
+  DEVE PASSARE: V0 il vuoto della scena e' F0 (_vuoto_sul_fondo.fondo_uniforme) AL BIT                           PASSA   
+  DEVE PASSARE: V1 con psi = 0 il tick sul vuoto e' lineare: |T(F0 + e) - T(F0) - T(e)|/|T(e)| <= 1e-10          PASSA   4.30e-16
+  DEVE PASSARE: V2 A_v ricostruisce il tick: |T(g) - ifft(A_v fft(g))|/|T(g)| <= 1e-12                           PASSA   7.66e-16
+  DEVE PASSARE: V3 A_v(k) unitaria a ogni k entro 1e-12; F0 autostato del tick, residuo e |lambda| - 1 <= 1e-12  PASSA   max|A^H A - I| 4.44e-16; F0: residuo 7.55e-15, |lambda| - 1 -6.4e-15, nu 38.746309394274
+  DEVE PASSARE: V4 il rivelatore trova nu di F0 dentro o sul bordo di una banda (margine <= 1e-09)               PASSA   fuori, margine +1.421e-14, bande []
+  DEVE FALLIRE: V4-F il mezzo del gap piu' largo e' dentro una banda                                             PASSA   margine +17.802358 (il gap e' largo 35.604717)
+### LE BANDE DEL VUOTO (le frequenze -arg/s mod 2 pi/s su 81 x 81 punti k, le 3 direzioni [(0, 1), (1, 0), (1, 1)]; gli intervalli dal taglio 20.943951, nel mezzo del gap piu' largo 35.604717)
+    banda 0: in assoluto [38.746309, 38.746309] mod 41.887902, larga 0.000000
+    banda 1: in assoluto [38.746309, 38.746309] mod 41.887902, larga 0.000000
+    banda 2: in assoluto [38.746309, 40.328044] mod 41.887902, larga 1.581734
+    banda 3: in assoluto [41.887902, 0.000000] mod 41.887902, larga 0.000000
+    banda 4: in assoluto [0.000000, 0.000000] mod 41.887902, larga 0.000000
+    banda 5: in assoluto [1.559858, 3.141593] mod 41.887902, larga 1.581734
+    l'unione: 3 intervalli, coprono 3.163469 su 41.887902 (7.55%); i gap: [40.328044, 41.887902], [0.000000, 1.559858], [3.141593, 38.746309]
+    a Gamma (k = 0) le 6 frequenze: 0.000000 3.141593 38.746309 38.746309 38.746309 41.887902
+### DOVE CADONO n mu (la lettura di Luca) E nu di F0 (il margine: la distanza dal bordo di banda piu' vicino, NEGATIVO se dentro)
+    1 mu = 4.161868162 (mod 2 pi/s 4.161868162): fuori dalle bande, margine +1.020276
+    2 mu = 8.323736324 (mod 2 pi/s 8.323736324): fuori dalle bande, margine +5.182144
+    3 mu = 12.485604485 (mod 2 pi/s 12.485604485): fuori dalle bande, margine +9.344012
+    nu (F0) = 38.746309394: sul bordo, margine +1.421e-14
+### LA VITA DI BG-F-0.15 CON LA SOGLIA DELLA DECISIONE 9 (il primo tau con |D|/|psi0| >= 0.01; i campioni D committati di _vuoto_vivo_B, ogni 20 tick)
+    i campioni: 1000, da tempo 3.0 a 3000.0; il primo: tempo 3.0, |D|/|psi0| 1.0023e-01
+    t_vita (soglia 9) = 3.0: ### il PRIMO campione -- la soglia misura la deriva della partenza non ferma, non una perdita
+==================================================================================================================================
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

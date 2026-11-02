@@ -22604,3 +22604,31 @@ FINE DEL MANDATO: checkpoint (commit, push), poi passa al successivo in coda
 - **Una mia lettura, dichiarata nel task history:** «il legame spento» significa `N`, `alpha` e `beta` zero. **Non e' `cs` spento** *(la «forma spenta» della prova `(0)` di `H_w`)*, che nella libreria e' gia' spento.
 - **Il referto e' scritto da uno script** che legge le uscite *(copiato in `doc/referti_l2/unita_eK/ref_ek.py.txt`)*.
 - **Dove si scrive la decisione:** la riga `12` in `doc/MAPPA.md` *(sez. `5`)*; `DECISIONI_NEL_CODICE` sez. `7`, che chiude l'«APERTO» della sez. `6`.
+
+## 2026-11-02 — IL SOLITONE VESTITO (Luca 01:04, correzione 01:06): LA CARTA -- NESSUNA ARMONICA DI mu NELLE BANDE DEL VUOTO (NON (v3)); TRE PREMESSE NON CONFERMATE; IL NEWTON SOSTITUITO DALL'ACCENSIONE LENTA (Luca 01:13)
+
+**Il referto:** `doc/referti_l2/solitone_vestito_carta.txt` *(`csv/solitone/carta_vuoto.py`, a `922279a5`)*. **Il task history:** `5889642b`.
+
+**Tre premesse del mandato che il codice e i dati committati non confermano:**
+- **BG-F-0.15 parte da un inviluppo, non da uno stato fermo:** residuo per tick `3.29e-2`.
+- **Il Newton congelato su `B` a `Gamma` non e' mai arrivato a convergenza:** si ferma a `1.16e-5` in `30` passi *(`vincolo_e05.json`)*.
+- **La soglia della decisione `9` su BG-F-0.15 da' `t_vita = 3.0`**, cioe' **il primo campione** *(`|D|/|psi0| = 1.0e-1`)*: misura la deriva della partenza non ferma, non una perdita.
+
+Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto non si fa**, lo sostituisce l'accensione lenta.
+
+**La carta** *(la libreria: `vuoto.py`, `test_vuoto.py`, `carta_vuoto.py`; `ae4640ee`; `D6` `922279a5`)*:
+- **I controlli passano tutti:**
+  - `V1` *(con `psi = 0` il tick sul vuoto e' lineare)*: `4.3e-16`;
+  - `V2` *(la matrice di Bloch `6 x 6` ricostruisce il tick)*: `7.7e-16`;
+  - `V3` *(unitaria; `F0` autostato, residuo `7.6e-15`)*;
+  - `V4` e `V4-F`.
+- **Le bande del vuoto** *(frequenze `-arg/s` mod `2 pi/s = 41.888`)*:
+  - **quattro piatte**, due a `0` e due a `-pi` *(cioe' `38.746`)*;
+  - **due dispersive larghe `1.5817`**, `[pi - 1.58, pi]` e `[-pi, -pi + 1.58]`;
+  - in tutto coprono **il `7.55%`** del cerchio.
+- **`nu` di `F0` = `-pi`**, sul bordo di una banda *(a `Gamma`)*.
+- **`mu`, `2 mu`, `3 mu` cadono FUORI**, coi margini `+1.0203`, `+5.1821`, `+9.3440`. Il bordo piu' vicino a `mu` e' `pi`.
+- **Non e' `(v3)`:** nessuna uscita verso il vuoto alle armoniche di `mu`. **Le leve del margine** *(`s`, `N`, `g`)* **non servono**, perche' non c'e' un'uscita.
+- **La mia lettura, dichiarata nel task history e non un criterio:** in uno stato fermo la materia entra nel vuoto solo attraverso `rho`, che non porta `mu`. `mu` arriva nel vuoto solo attraverso i battimenti della materia.
+
+**La cassetta** con `test_vuoto` fa `44/44` *(i `38` di prima, piu' `6`)*. **La MAPPA e `CHIUDERE_LE_USCITE` non le tocco:** non c'e' un'uscita, e le voci `1` e `27` vanno con l'accensione lenta.
