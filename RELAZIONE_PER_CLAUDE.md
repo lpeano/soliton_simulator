@@ -22882,3 +22882,15 @@ Il referto stampa per `TA1000`:
 
 - **Un solo processo di calcolo alla volta.**
 - **Le premesse di (3)** si leggeranno dal codice quando tocca: la rotazione e lo specchio del reticolo con lo spin, il capovolgimento dello spin, `eps 0`, il rumore coi semi.
+
+## 2026-11-02 — LA MAPPA, VOCI `35`, `36`, `37` IN LISTA D'ATTESA *(Luca, dette in giornata; solo scrittura, nessuna corsa)*
+
+- **Scritte nella MAPPA come dettate, dopo la `34`:**
+  - **`35`**, il solitone in un universo che si espande *(prima serve la regola della mitosi, voce `21`)*;
+  - **`36`**, lo spettro dei modi del solitone *(a vuoto congelato, al variare di `N`)*;
+  - **`37`**, la regola dei livelli estesa al vuoto *(da scrivere in `doc/BANDE_PIATTE.md` e `doc/CHIUDERE_LE_USCITE.md`)*.
+- **La coda non cambia:** sono in lista d'attesa.
+- **Un controllo sui numeri della `37`, dal referto della carta** *(`fcda3281`)*: «la perdita per `~80%` nelle piatte» e' la somma di due rapporti, `P0` *(`0.50`)* e `Ppi` *(`0.29`)*, della pendenza di `D` per gruppo contro quella dell'alone *(`+2.57e-3` per `1000`)*.
+  - ⚠ **Il limite, gia' scritto allora:** la quota e' **per gruppo, non per canale**, e molte uscite sono aperte insieme.
+  - **«Quale canale porta l'`80%`» e' proprio cio' che la carta NON dice:** e' il collaudo che la voce chiede.
+- **Non ho scritto niente in `BANDE_PIATTE.md` ne' in `CHIUDERE_LE_USCITE.md`:** la voce dice «da scrivere», e lo leggo come il lavoro della voce, non di questo mandato.
