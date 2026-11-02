@@ -103,4 +103,87 @@
 3. **FERMO:** la decisione su `A2` e la definizione della vita dopo la rampa.
 4. *(Dopo Luca)* i passi `2`-`5` della progettazione.
 
+## 6-bis. LE DECISIONI DI LUCA *(`2026-11-02`, dopo `25614c34` e `4d1c2b65`)* E IL COMPLETAMENTO DELLA CARTA
+
+> **Le premesse della sez. `1` restano come sono:** questa sezione le ANNOTA con le decisioni.
+
+### Le decisioni
+
+1. **`A2`: la (i).**
+   - Con `lam = 0`, `phi` resta `phi0` **AL BIT** a ogni tick.
+   - `psi` coincide con `_congelato_lungo.avanza` **entro l'arrotondamento**, con la causa dichiarata: la rotazione di `beta` e il ritorno danno un ulp sul modulo, `1.3e-14` su `20` tick.
+   - Lo schema resta quello del mandato.
+   - **La tolleranza che scrivo in `test_accensione`, dichiarata qui prima:** `|psi - psi_avanza| / |psi| <= 1e-12` su `20` tick. E' cento volte la differenza misurata, e dieci volte sotto la tolleranza di linearita' della carta.
+2. **La vita** *(precisazione della decisione `9`)*.
+   - **Per i solitoni che respirano, la vita principale** e' il tempo a cui il cuore liscio scende a **META'** del suo valore a `T_acc` *(misurato, o estrapolato e dichiarato come tale)*.
+   - Accanto, la pendenza dell'alone e del cuore.
+   - **La soglia `|D|/|psi0| >= 1e-2`** resta per il regime per cui e' nata *(un seme esponenziale su uno stato fermo)*. Qui e' una misura **accessoria**, con le bande di `D`: rispetto alla partenza sulla rampa, rispetto allo stato a `T_acc` dopo.
+   - Una riga nella MAPPA accanto alla decisione `9`.
+3. **La carta, il completamento** *(prima delle corse; l'errore del guardiano `n.90`: la carta chiedeva solo `n mu`)*. **I passi sono sotto.**
+4. **Il libro dei conti di riferimento di BG-F a eps `0`, blocco per blocco:** si dichiara. Inizio e fine col `par`, come gia' fatto.
+
+### Le premesse dal codice per il completamento *(cosa credo prima di guardare, e cosa NON so)*
+
+- **I campioni committati del cuore di BG-F-0.15 vivo** *(`_vuoto_vivo_B`)* sono ogni `OGNI = 10` tick, cioe' ogni `1.5` unita' di tempo. Il limite di Nyquist e' un periodo di `3.0`.
+  - Un periodo vero di `~4.07` starebbe sopra Nyquist. Ma dai soli campioni non si distingue dai suoi alias `1/|1/T +- k/1.5|` *(per `4.07`, con `k = 1, 2`: `2.375`, `1.096`, `0.919`, `0.633`)*.
+  - ⚠ **Ho guardato i campioni committati prima di scrivere questo file** *(dichiarato: uno spettro nello scratchpad, non committato)*. Nei primi campioni il cuore **alterna a ogni campione**, cioe' alla frequenza di Nyquist. Poi domina una variazione lenta *(centinaia di unita' di tempo)*.
+  - **Quindi `Omega` non si legge dai campioni committati:** serve una serie **densa**.
+- **La serie densa:** il tick intero del nucleo da BG-F-0.15 *(la scena e la partenza di `_vuoto_vivo_B`, come la corsa)*, il cuore liscio **a ogni tick** *(passo `0.15`, Nyquist `0.3`)*. Due finestre:
+  - **(W1)** dalla partenza, `0 .. 600` unita' di tempo *(`4000` tick)*. **Il controllo:** i campioni a `t % 10 == 0` coincidono **al bit** con il cuore committato di `_vuoto_vivo_B`.
+  - **(W2)** dallo stato finale della corsa viva a `10000` *(`db/respiro_sul_fondo/BG-F-0.15.npz`)*, `300` unita' di tempo *(`2000` tick)*. **Il controllo:** gli `sha` dello stato = `sha_fine` dell'ultimo pezzo committato di `_respiro_sul_fondo`.
+- **`Omega`:** il picco dello spettro del cuore liscio *(tolta la tendenza quadratica, finestra di Hann, il picco interpolato con la parabola sui tre punti)*, piu' il periodo dai cambi di segno *(`misure.periodo_dai_cambi`, col passo di `1` tick)*.
+  - **Si riportano i primi picchi, non solo il massimo.** Il periodo dai cambi deve stare entro il `5%` del picco: e' un controllo, e se fallisce lo dico.
+  - **`Omega` della carta** e' il picco di (W1). Quello di (W2) dice se il respiro cambia nel tempo.
+- **Le bande della materia:** `uscite.spettro_scena` *(i gruppi `A`, `B`, `P0`, `Ppi`, dalla scena)*. **Le bande del vuoto:** `test_vuoto` *(come la carta di `4d1c2b65`)*.
+- ### ⚠ **UNA COSA CHE IL MANDATO NON DICE E IL CODICE SI'** *(una lettura, non un criterio; decide Luca)*:
+  - nel tick la materia entra nel vuoto **solo attraverso `rho = |psi|^2`** *(la rotazione gemella `beta(rho, Lambda)` ruota `phi`)*, e il vuoto entra nella materia solo attraverso `Lambda = |phi|^2`;
+  - un'onda del vuoto `delta phi` accanto al condensato `F0` cambia `Lambda` con la frequenza **`nu_v - nu_F0`**, non `nu_v`;
+  - **quindi un'uscita che conserva `V` sposta un quanto dal condensato** *(`nu_F0 = -pi`, nelle unita' di `4d1c2b65`)* **all'onda**.
+
+  **Scrivo le due forme, e le riporto tutte e due:**
+  - **(L) la lettera del mandato:** `nu_v + E_m` contro `n mu + k Omega` *(mod `2 pi/s`)*;
+  - **(C) col condensato:** `E_m +- (nu_v - nu_F0)` contro `n mu + k Omega`. Per le bande laterali sul vuoto da solo: `nu_F0 + k Omega` *(cio' che `rho` porta nel vuoto)* contro le bande del vuoto.
+  - ⚠ **Prevedo, prima del conto:** `nu_F0` sta **sul bordo** della banda dispersiva `[-pi, -pi + 1.58]`. Quindi in (C) **`nu_F0 + k Omega` cade dentro quella banda se `0 < k Omega < 1.58`**, cioe' per `Omega` vicino a `2 pi/4.07 = 1.54`. **Un'uscita aperta, se `Omega` e' quello.** Non lo so finche' non misuro.
+- **Che cosa NON so:**
+  - se il cuore ha un respiro netto o uno spettro largo;
+  - se `Omega` dipende dalla finestra;
+  - come stimare la **quota** di un'uscita aperta senza l'elemento di matrice dell'accoppiamento.
+
+### La progettazione del completamento
+
+1. **Questo file, da solo.**
+2. **`csv/solitone/respiro.py`** *(nuovo)*:
+   - `serie_densa`: il tick intero, il cuore liscio a ogni tick, la ripresa da uno stato;
+   - `omega`: i picchi e i cambi, col passo;
+   - `circolare` *(un intervallo ridotto mod `2 pi/s`)* e `margine_mod`: la distanza di una frequenza da un intervallo sul cerchio, negativa se dentro;
+   - `somma`: gli intervalli di Minkowski di due bande.
+3. **`csv/solitone/test_respiro.py`** *(nella cassetta)*:
+   - (R1) `omega` ritrova un seno noto a ogni tick, entro `1e-6` sulla frequenza;
+   - (R1-F) lo stesso seno campionato ogni `10` tick NON ridà la frequenza vera: deve fallire, per l'alias;
+   - (R2) `margine_mod`: un punto dentro un intervallo che passa per lo zero del cerchio e' dentro, uno fuori e' fuori, col segno;
+   - (R3) `somma` contro il conto a mano su due intervalli.
+4. **`D6`** in un commit a se'.
+5. **`csv/solitone/carta_respiro.py`** *(il runner)*: (W1), (W2), `Omega`, le bande laterali `mu + k Omega` *(`k = -3 .. 3`)* e le loro armoniche `n (mu + k Omega)` *(`n = 1, 2`)* contro le bande del vuoto; le uscite miste (L) e (C) per `A`, `B`, `P0`, `Ppi`, contro `n mu + k Omega` *(`n = 1, 2`, `k = -3 .. 3`)*; il margine di ognuna; **quale uscita e' aperta**.
+6. **La quota, se un'uscita e' aperta** *(dichiarato qui: un ordine di grandezza, non una derivazione)*:
+   - dalle righe `D` committate della corsa viva, la parte di `|D|^2/|psi0|^2` nel gruppo di materia dell'uscita;
+   - la sua pendenza per `1000` unita' di tempo sul tratto `5000 .. 10000`, contro la pendenza dell'alone *(`~2.5e-3` per `1000`)*;
+   - **compatibile** se la pendenza del gruppo e' almeno quella dell'alone *(il gruppo puo' alimentare l'alone)*; **incompatibile** se e' sotto di un ordine di grandezza.
+   - Se nessuna uscita e' aperta: **la quota non si confronta**, e lo dico.
+7. **Il referto** `doc/referti_l2/solitone_vestito_carta_respiro.txt`, la relazione, la MAPPA *(la riga accanto alla decisione `9`; l'errore `n.90`)*.
+8. **Poi l'accensione**, i passi `2`-`5` della sez. `2`, con `A2` secondo la (i) e la vita secondo la decisione `2`.
+
+### Che cosa mi farebbe FERMARE
+
+- **il controllo di (W1) o di (W2) fallisce:** la serie densa non e' la corsa;
+- **R1-F passa:** il test dell'alias non distingue;
+- **nessun picco netto nel cuore** *(il primo picco non supera di `3` volte il secondo, fuori dalle sue armoniche)*: `Omega` non e' definito. FERMO, e decide Luca come proseguire.
+
+### Le letture *(fissate qui, prima dei numeri)*
+
+- **(r1)** nessuna uscita aperta, ne' (L) ne' (C): l'alone non viene da un'uscita lineare; si passa all'accensione.
+- **(r2)** un'uscita (C) aperta col respiro *(`nu_F0 + k Omega` nel vuoto, o una mista)* e quota compatibile: il respiro irraggia, e l'alone potrebbe venire da li'.
+- **(r3)** un'uscita aperta ma con quota incompatibile: e' aperta ma non spiega l'alone.
+- **(r4)** solo (L) aperta: decide Luca quale forma vale.
+- **(r5)** altro.
+
 ## 7. L'ESITO
