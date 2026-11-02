@@ -44,7 +44,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **Dall'accensione lenta nel repo** *(Luca dopo `04b02794`, punto `4`)*: `accensione.py`, `test_accensione.py`, `corsa_accensione.py` *(`8f8b8f8a`)*.
 # ### **Dalla decisione di Luca sulla vita** *(dopo `bfee5330`)*: `accensione.vita_a_blocchi`, `tempo_alone`, `A7`-`A8-F`, la corsa lunga *(`791c5926`)*.
 # ### **Dalla deriva e dalle misure sul toro** *(Luca dopo `455b9a95` e `8e425771`)*: `toro.py`, `test_toro.py`, la corsa `TP1000`, `sul_toro` *(`adce3254`)*.
-LIBRERIA_RIFERITA = "adce3254"
+# ### **Dalla deriva, dalle mappe e dai due giri** *(Luca dopo `76822344`, `15:49`, `18:05`)*: `carta_deriva.py`, `mappe.py`, `test_mappe.py`, le corse `TM1000` e `DG1000` *(`b78f53db`)*.
+LIBRERIA_RIFERITA = "b78f53db"
 
 
 def vecchi():
