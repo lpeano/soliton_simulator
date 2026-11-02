@@ -23040,3 +23040,25 @@ Il referto stampa per `TA1000`:
   **Le confermero' dal codice nel task history di `(3)`, quando tocca** *(`_vuoto_sul_fondo.fondo_uniforme`, `motore._moneta_spin`)*, **prima di ogni riga di codice.**
 - **Un fatto da tenere per `D0'`:** la previsione scritta prima e' che il solitone vada lungo `+A1`. In `TP1000` lo spostamento totale e' `68.45` nodi a `-173.1` gradi *(`+6.9` da `-A1`)*, quindi la previsione si confronta con `+6.9` ruotato, cioe' `+6.9` da `+A1`.
 - **La coda non cambia di posto:** `(1)` i due giri *(gira)*, `(2)` `TM1000`, **`(3)` la direzione, corretta**, `(4)` `cs`, poi la voce `38`, la coppia, il triangolo.
+
+## 2026-11-02 — LA FRECCIA DI `F0`, LA DECISIONE `10` E IL PRIMO MOSAICO *(Luca `19:19`-`19:21`)*
+
+- **Parte 2, LA DECISIONE `10`, scritta nella MAPPA** *(la sez. `5`, la riga `10`: PRESA)*. **`F0` e' il vuoto DI RIFERIMENTO delle prove, non il vuoto fisico del modello.**
+  - Una freccia uguale su ogni nodo darebbe una direzione privilegiata a ogni particella, e l'invarianza di Lorentz la esclude.
+  - **Il vuoto uniforme non e' l'alternativa:** e' il massimo del generatore e scioglie ogni solitone *(`787296da`)*.
+  - **Il candidato per il vuoto fisico e' il MOSAICO della voce `32`**, a una condizione necessaria: le frecce costano la stessa energia.
+  - **Le prove su `F0` restano valide** come prove sul vuoto di riferimento.
+- **La coda, aggiornata** *(`[[PRECEDENZA-IN-CODA]]`)*:
+
+| | che cosa | lo stato |
+|---|---|---|
+| `1` | due giri *(`DG1000`)* | **gira** |
+| `2` | le mappe *(`TM1000`)* | il codice committato |
+| `3` | **la freccia di `F0`, la parte `1`:** un controllo sulla carta *(f1)-(f4)*, **prima di `D0'`** | in coda |
+| `4` | chi sceglie la direzione *(`D0'`, `D1`, `D2`, `D3`-`D5`)* | in coda |
+| `5` | **il primo mosaico, la parte `3`:** due domini, prima le pareti senza materia, poi il solitone. **Solo se la parte `1` da' (v1)** | in coda, condizionato |
+| `6` | `cs` col solitone | in coda |
+| `7` | la voce `38`, la coppia, il triangolo | lista d'attesa |
+
+- **La parte `1` e' un calcolo breve, ma e' un processo di calcolo:** la faccio dopo `TM1000`, non mentre `DG1000` gira *(un processo alla volta)*.
+- **Il costruttore dei domini** della parte `3` andra' nella libreria `csv/solitone/`, coi suoi test.
