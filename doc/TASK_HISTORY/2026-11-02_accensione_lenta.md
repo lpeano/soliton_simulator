@@ -610,3 +610,21 @@
   - il controllo carica lo stato salvato in una scena nuova, fa `100` tick col tick della corsa *(`accensione.tick`, dopo la rampa e' il tick intero)* e confronta gli `sha`.
   - **I tempi sono in unita' di tempo:** il tick e' `round(t / s)`, con `s = 0.15`. `2000 / 0.15 = 13333.3`: il tick `13333`. **Lo dichiaro: il tick piu' vicino.**
 - **La stima:** lo stato intero e' `~2.3` MB *(come `db/accensione_lenta/TA1000.npz`)*, quindi tre stati sono `~7` MB.
+
+### 11-quater. LA CURVATURA NEL REFERTO DELLA DERIVA *(per il mandato «due giri», Luca `17:30`-`17:33`, che vi e' condizionato)*
+
+- **«Due giri» si fa SOLO se il referto di `TP1000` conferma che la traiettoria curva**, con la curvatura blocco per blocco, il raggio e il verso. **Il codice del referto della deriva non la calcola:** la aggiungo a `carta_deriva.py` *(non nel percorso della corsa in uso)*, come **(iv)**.
+- **La definizione** *(dichiarata prima dei numeri)*. Per due finestre consecutive *(di `1000` e di `500`)*:
+  - `d theta` e' la differenza degli angoli della velocita', riportata in `(-180, 180]`;
+  - `ds` e' la distanza fra le posizioni medie;
+  - la curvatura e' `kappa = d theta [rad] / ds`, per nodo *(il passo del reticolo e' `1`)*;
+  - il raggio e' `1/|kappa|`;
+  - il verso e' antiorario se `d theta > 0`.
+  
+  Accanto: l'angolo girato in tutto, e il raggio contro `|v|`.
+- ### **IL CRITERIO DELLA CONDIZIONE** *(fissato QUI, prima dei numeri; i due numeri vengono dalle premesse di Luca)*: **la traiettoria «curva» se, nelle finestre di `500` da `11000`** *(Luca: il tratto dritto comincia a `11250`)* **fino alla fine dei dati validi di `TP1000`**:
+  - `d theta` ha **lo stesso segno in ogni coppia consecutiva**;
+  - **e l'angolo girato in tutto supera `10` gradi** *(Luca osserva `+10` fra `11250` e `12600`)*.
+  
+  **Altrimenti si scrive, e «due giri» non si fa.** Se Luca vuole un altro criterio, lo cambia prima del referto.
+- **L'ordine nella coda** *(`[[PRECEDENZA-IN-CODA]]`, la decisione di Luca nel mandato)*: `(1)` la deriva; **`(1-bis)` due giri, condizionato**; `(2)` le mappe `TM1000`; `(3)` la direzione; `(4)` `cs` col solitone.
