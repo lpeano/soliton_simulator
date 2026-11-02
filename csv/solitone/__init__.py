@@ -6,6 +6,7 @@ r"""**LA CASSETTA DEGLI ATTREZZI DEL SOLITONE** *(il mandato di Luca delle `01:2
     protetto  la scena, la coppia di B a Gamma, la scelta dentro la coppia, l'inviluppo, A a K, mu di Rayleigh
     misure    il cuore (netto e liscio), w, l'alone, il baricentro; le bande di D, le rotazioni, il periodo col passo;
               la forma della crescita, la vita, il limite del tasso
+    vuoto     le bande del vuoto attorno a F0 (il tick intero con psi = 0), dove cade una frequenza, il margine
 
     python csv/solitone/collauda.py > doc/referti_l2/cassetta_solitone.txt
 
