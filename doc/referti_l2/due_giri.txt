@@ -1,9 +1,9 @@
 [TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
-[TIMBRO] accensione.py  sha1-BYTE fd0a158c  committato e pulito
-[TIMBRO] corsa_accensione.py  sha1-BYTE 58432e11  committato e pulito
-[TIMBRO] carta_giri.py  sha1-BYTE 8ddc3513  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3dcce199  committato e pulito
+[TIMBRO] carta_giri.py  sha1-BYTE ac363484  committato e pulito
 ==================================================================================================================================
 LA CARTA DEI DUE GIRI (Luca 17:30, 18:05, 18:12, 18:18): TP1000 (0 .. 16000, i pezzi interi) + DG1000 (la versione rada, un campione ogni 100 tick), il centro periodico
   le letture di Luca, scritte prima: (r1) ripassa senza cambiare; (r2) la propria scia lo frena o lo devia; (r3) la velocita' dipende dalla posizione lungo il giro e si ripete;
@@ -11,11 +11,12 @@ LA CARTA DEI DUE GIRI (Luca 17:30, 18:05, 18:12, 18:18): TP1000 (0 .. 16000, i p
 ==================================================================================================================================
 ### DG1000: 16 pezzi, 1600 campioni radi, fino a 40000.05; (c) IL TETTO t 40000
   DEVE PASSARE: DG1000 finita (una delle tre)                                                                              PASSA   
-  DEVE PASSARE: A3 TP1000 + DG1000 M e V entro 1e-10                                                                       ### FALLISCE   dM 1.5e-10 dV 1.0e-10
+  DEVE PASSARE: A3 TP1000 + DG1000 M e V (accensione.a3, Luca dopo fabce56d)                                               PASSA   M lunga (266600 tick): la pendenza +3.875e-12 per 1000 (il tetto 1e-11), il residuo 2.30e-14 (la tolleranza 1e-10); V lunga (266600 tick): la pendenza +2.667e-12 per 1000 (il tetto 1e-11), il residuo 2.95e-12 (la tolleranza 1e-10)
   DEVE PASSARE: A4 il libro col par della corsa                                                                            PASSA   
   DEVE PASSARE: il disco prima di cominciare (10 volte la stima)                                                           PASSA   libero 228757733376 byte, richiesti 1161988720 (10 x la stima)
   DEVE PASSARE: la versione rada si ricava dall'intera (lo sha1 dell'intera su E:, i campioni e le righe di D comuni ugual PASSA   1600 campioni comuni; pezzi diversi nessuno
-  DEVE PASSARE: ogni stato salvato si rilegge AL BIT e ripartendo per 100 tick ridà AL BIT lo stato della corsa            ### FALLISCE   tick 133333: letto al bit, dopo al bit; tick 200000: letto al bit, dopo al bit; tick 266667: letto al bit, dopo ### NO
+  gli stati salvati [133333, 200000, 266667]; il controllo delle riprese solo sugli intermedi (Luca dopo fabce56d): [133333, 200000]; l'ultimo tick 266667, letto al bit
+  DEVE PASSARE: ogni stato INTERMEDIO salvato si rilegge AL BIT e ripartendo per 100 tick ridà AL BIT lo stato della corsa PASSA   tick 133333: letto al bit, dopo al bit; tick 200000: letto al bit, dopo al bit
 ### A BLOCCHI DI 1000 (TP1000 fino a 16000, poi DG1000 rado; v per 1000 unita' di tempo; l'angolo dall'asse x; la curvatura fra blocchi consecutivi, kappa = d theta [rad] / ds)
     il tempo          la posizione       cammino  |v|         angolo   d theta  kappa       raggio    w         cuore     alone     
           0 ..    1000 (   -0.12,   -0.20) 0.24     5.8994e-01  -135.0   +nan     +nan        inf       7.7200    0.49233   0.00110    
@@ -70,10 +71,12 @@ LA CARTA DEI DUE GIRI (Luca 17:30, 18:05, 18:12, 18:18): TP1000 (0 .. 16000, i p
   il passaggio del giro 2 a 38340.0 (133 campioni): il vicino, la variazione: M +3.0794e+03 (dalla +7.2828e+05 alla +7.3136e+05; la retta -1.0007e+04 per 1000); leg +3.0233e+03 (dalla +7.2530e+05 alla +7.2832e+05; la retta -9.9986e+03 per 1000); vuo -8.8926e+00 (dalla -2.1214e+02 alla -2.2103e+02; la retta -2.1859e+00 per 1000); tot +1.6168e+04 (dalla +3.7528e+06 alla +3.7689e+06; la retta -5.1768e+04 per 1000)
   il confronto: meta' del giro 1 a 13689.0: prima di DG1000, senza E_cen
   il confronto: meta' del giro 2 (il cammino 121.5) a 38340.0 (133 campioni): il vicino, la variazione: M +3.0794e+03 (dalla +7.2828e+05 alla +7.3136e+05; la retta -1.0007e+04 per 1000); leg +3.0233e+03 (dalla +7.2530e+05 alla +7.2832e+05; la retta -9.9986e+03 per 1000); vuo -8.8926e+00 (dalla -2.1214e+02 alla -2.2103e+02; la retta -2.1859e+00 per 1000); tot +1.6168e+04 (dalla +3.7528e+06 alla +3.7689e+06; la retta -5.1768e+04 per 1000)
-### LAMBDA E RHO AL PUNTO DI PARTENZA DALLE MAPPE (l'istantanea piu' vicina a t_p - 500; il disco di raggio 3 w0 attorno alla posizione iniziale, contro il lontano:
-    fuori da quel disco e fuori da 3 w attorno al centro del solitone)
-  il giro 1: l'istantanea a 17550.0 (il centro a 8.02 dal punto di partenza): Lambda vicino 4.247112, lontano 5.632776 (il rapporto 0.754000); rho vicino 6.2672e+02, lontano 7.8746e+00; 1444 e 2315 nodi
-  il giro 2: l'istantanea a 37845.0 (il centro a 43.86 dal punto di partenza): Lambda vicino 4.030532, lontano 8.257921 (il rapporto 0.488081); rho vicino 9.8802e+00, lontano 9.7955e+00; 1444 e 746 nodi
+### LAMBDA E RHO AL PUNTO DI PARTENZA DALLE MAPPE (l'istantanea piu' vicina a t_p - 500; il disco di raggio 3 w0 attorno alla posizione iniziale SENZA i nodi entro 3 w
+    dal centro del solitone (Luca dopo fabce56d, n.98), contro il lontano: fuori da quel disco e fuori da 3 w attorno al centro del solitone)
+  il giro 1: il disco vicino 1444 nodi (3 w0 19.94), di cui entro 3 w dal centro (3 w 34.21) 1444, liberi 0; il nodo del disco piu' lontano dal centro a 27.80
+  il giro 1: ### NESSUN NODO DEL DISCO VICINO E' LIBERO DAL SOLITONE: da questa istantanea la domanda non ha risposta
+  il giro 2: il disco vicino 1444 nodi (3 w0 19.94), di cui entro 3 w dal centro (3 w 37.90) 841, liberi 603; il nodo del disco piu' lontano dal centro a 46.33
+  il giro 2: l'istantanea a 37845.0 (il centro a 43.86 dal punto di partenza): Lambda vicino 4.028523, lontano 8.257921 (il rapporto 0.487837); rho vicino 9.6894e+00, lontano 9.7955e+00; 603 e 746 nodi
 ### L'ALONE VERSO UN TETTO? (Luca 18:18) la pendenza a blocchi; la retta contro a(t) = a_tetto (1 - e^{-(t - t0)/tau}), dopo T_acc; i residui
   le pendenze per blocco (per 1000): 0 2.633e-03; 1000 2.271e-03; 2000 2.625e-03; 3000 2.484e-03; 4000 2.632e-03; 5000 2.622e-03; 6000 2.506e-03; 7000 2.557e-03; 8000 2.408e-03; 9000 2.457e-03; 10000 2.827e-03; 11000 2.728e-03; 12000 2.402e-03; 13000 1.955e-03; 14000 2.473e-03; 15000 1.656e-03; 16000 1.762e-03; 17000 1.734e-03; 18000 1.830e-05; 19000 1.996e-03; 20000 6.355e-04; 21000 3.170e-03; 22000 1.070e-03; 23000 1.974e-03; 24000 2.034e-03; 25000 -2.085e-03; 26000 9.302e-04; 27000 -5.829e-05; 28000 2.972e-03; 29000 -4.508e-04; 30000 1.287e-03; 31000 3.267e-03; 32000 2.300e-03; 33000 -6.342e-04; 34000 2.139e-03; 35000 -4.741e-03; 36000 -3.047e-03; 37000 -2.512e-03; 38000 3.065e-03; 39000 1.346e-03
   LA RETTA: 5.8802e-03 + 1.7485e-06 t (per 1000: 1.7485e-03); il residuo quadratico medio 4.0284e-03
@@ -84,4 +87,4 @@ LA CARTA DEI DUE GIRI (Luca 17:30, 18:05, 18:12, 18:18): TP1000 (0 .. 16000, i p
   (iii) il libro attorno al centro (DG1000), M vicino per blocco: 16000 825205.3; 17000 815474.9; 18000 802575.3; 19000 795794.5; 20000 793608.6; 21000 783933.3; 22000 780782.0; 23000 776133.5; 24000 766760.1; 25000 769807.1; 26000 764951.3; 27000 765513.3; 28000 754030.4; 29000 750275.5; 30000 751512.3; 31000 749465.8; 32000 754088.0; 33000 745422.7; 34000 744311.4; 35000 744912.0; 36000 738218.9; 37000 740151.3; 38000 731791.1; 39000 727072.1
 ### IL GRAFICO: C:\Users\lpeano\soliton_simulator\doc\referti_l2\due_giri\traiettoria.png
 ==================================================================================================================================
-ESITO: 4/6 controlli passano; DEVE fallite: 2 ['DEVE PASSARE: A3 TP1000 + DG1000 M e V entro 1e-10', 'DEVE PASSARE: ogni stato salvato si rilegge AL BIT e ripartendo per 100 tick ridà AL BIT lo stato della corsa']
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

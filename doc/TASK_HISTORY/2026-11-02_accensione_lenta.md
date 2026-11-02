@@ -810,3 +810,9 @@
 - `A9`-`A9-C` che non danno il verso atteso;
 - la carta che cambia un numero **diverso** da quelli toccati *(`A3`, le riprese, `Lambda` vicino)*;
 - la cassetta non tutta verde.
+
+### 13-sexies. L'ESITO DELLE DECISIONI DOPO `fabce56d` *(la relazione per i numeri)*
+
+- **Le premesse, annotate** *(non riscritte)*: «`3 w0 ~23`» era **`19.94`**; la conclusione «al giro `1` il disco libero e' VUOTO» **e' confermata** *(`0` nodi su `1444`)*.
+- **Nessun motivo per fermarsi:** `A9`-`A9-C` nel verso atteso; la carta cambia solo le righe toccate *(`6/6`)*; la cassetta `80/80`.
+- **La domanda delle `18:12` resta aperta**, come ha deciso Luca. **Poi `TM1000`.**

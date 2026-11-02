@@ -23114,3 +23114,34 @@ Il referto stampa per `TA1000`:
 **La piu' vicina e' (r5):** si ferma quasi, e il moto diventa un tremolio.
 
 ### **FERMO: due decisioni di Luca.** (1) `A3` oltre `16000`; (2) la correzione del DEVE dell'ultimo stato *(n.97)*, e del disco vicino *(n.98)*. ### **`TM1000` NON parte:** la corsa importa `_vuoto_vivo_B`, dove sta la soglia di `A3`, e una decisione su `A3` potrebbe toccarla mentre gira.
+
+## 2026-11-02 — DUE GIRI: LE DECISIONI DI LUCA DOPO `fabce56d`, ESEGUITE; E IL MANDATO `TL120` IN CODA *(Luca `21:48`)*
+
+**Le decisioni, e dove stanno:**
+
+1. **`A3` delle corse lunghe** *(oltre `100000` tick: la deriva di `M` e `V` lineare nel tempo e sotto `1e-11` per `1000`)*:
+   - **nella libreria**, `accensione.a3` *(`a9c54c2d`)*, chiamata dai quattro punti che controllano `A3`;
+   - **i test:** `A9` *(la deriva di `DG1000`)* passa; `A9-F` *(`2e-11` per `1000`)*, `A9-S` *(un salto di `2.4e-10`)* e `A9-C` *(una corsa corta con `1.6e-10`)* falliscono come devono;
+   - **la cassetta:** `80/80` dopo `D6` *(`48554c4a`)*;
+   - ### **«Lineare», la MIA lettura, da confermare:** il residuo massimo della retta entro la tolleranza di sempre, `1e-10`. **Tolta la retta, vale il criterio di prima.**
+2. **Le riprese solo sugli stati intermedi:** i tick `133333` e `200000` al bit; lo stato a `266667` si stampa *(letto al bit)* e non entra nel DEVE.
+3. **La MAPPA, voci `1` e `27`:** scritte come dettate. **Una frase e' mia, ed e' dichiarata come lettura:** «se il tetto regge, l'alone al `10%` non arriva».
+4. **`Lambda` vicino senza il solitone** *(n.98)*, la carta rigirata *(`6/6`; cambiano solo le righe toccate)*:
+   - ### **giro `1`: nessun nodo libero.** I `1444` nodi del disco *(`3 w0` = `19.94`)* sono tutti entro `3 w` *(`34.21`)* dal centro: **da quella istantanea la domanda delle `18:12` non ha risposta**, come avevo previsto *(la premessa diceva `3 w0 ~23`: era `19.94`, la conclusione non cambia)*;
+   - **giro `2`:** `603` nodi liberi, `Lambda` vicino `4.03` contro lontano `8.26`. **Non e' un passaggio**: il centro e' a `43.9` nodi;
+   - ### **la domanda resta APERTA.** Rispondere vuole una scelta di istantanea o di raggio diversa da quella dichiarata, **e non la faccio io.**
+
+**IL MANDATO `TL120`** *(Luca `21:48`, «particella o scatola?»)*: ### **in coda, registrato** *(`[[PRECEDENZA-IN-CODA]]`)*.
+
+| | che cosa | lo stato |
+|---|---|---|
+| `1` | **`TM1000`** *(le mappe)* | parte ora |
+| `2` | **la freccia di `F0`** *(la parte `1` delle `19:21`, sulla carta)* | in coda |
+| `3` | **`TL120`** *(il toro `L 120`: particella o scatola?)* | in coda |
+| `4` | **chi sceglie la direzione** *(`D0'`, `D1`-`D5`)* | in coda |
+| `5` | **il primo mosaico** *(la parte `3`, solo se (v1))* | in coda |
+| `6` | **`cs` col solitone** | in coda |
+
+**Due fatti dal codice, per quando tocchera'** *(non ora)*:
+- **le scene a `L 120` esistono** *(`db/congelato_lungo/L120_fondo.npz`, `L120_uniforme.npz`)*. **Il loro contenuto non l'ho ancora letto:** la prima cosa del suo task history sara' leggere che cosa contengono, e se il costruttore di BG-F-0.15 accetta `L` come argomento;
+- **la corsa `TL120` puo' essere una voce di `CORSE` in `corsa_accensione.py`, ma non con le stesse funzioni a mano:** la partenza e la scena oggi vengono da `_vuoto_vivo_B.scena` con `V.L = CB.L` fisso *(`81`)*. **Va letto prima di scrivere.**
