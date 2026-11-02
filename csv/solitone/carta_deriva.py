@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**LA CARTA DELLA DERIVA** *(l'aggiunta di Luca delle `15:54` del `2026-11-02`; il task history `doc/TASK_HISTORY/2026-11-02_accensione_lenta.md`, sez. `11-ter`)*:
 ### **(i) il logaritmo dello spostamento del centro contro il tempo, dalla fine della rampa, con la pendenza a tratti; (ii) la velocita' contro `w` per blocco;
-(iii) l'ampiezza dell'oscillazione del cuore a finestre di `500`, accanto alla velocita'.** ### **Per `TP1000`** *(il centro periodico)*, **il vivo e `TA2000`** *(il centro
+(iii) l'ampiezza dell'oscillazione del cuore a finestre di `500`, accanto alla velocita'; (iv) la curvatura** *(sez. `11-quater`)*. ### **Per `TP1000`** *(il centro periodico)*, **il vivo e `TA2000`** *(il centro
 euclideo: il loro baricentro resta vicino alla partenza, e `TP2` del referto dell'accensione misura la differenza fra i due centri)*.
 
     python csv/solitone/carta_deriva.py > doc/referti_l2/deriva_solitone.txt
@@ -20,6 +20,8 @@ if os.path.dirname(_QUI) not in sys.path:
 import solitone  # noqa: E402,F401  (i percorsi)
 
 FIN_AMPIEZZA = 500.0           # ### (iii) le finestre dell'ampiezza del cuore (Luca 15:54)
+DA_CURVA = 11000.0             # ### (iv) il criterio della condizione di "due giri": dalle finestre di 500 da 11000 (sez. 11-quater; Luca: il tratto dritto da 11250)
+GRADI_CURVA = 10.0             # ### ... e l'angolo girato in tutto oltre 10 gradi (Luca: +10 fra 11250 e 12600)
 TAGLIO = 9000.0                # ### (i) Luca: "se e' una retta gia' prima di 9000"
 
 
@@ -101,7 +103,8 @@ def finestre(nome, tt, X, ww, fl, a0, fine, passo, ampiezza):
         if m.sum() >= 3:
             vx, vy = 1000 * pendenza(tt[m], X[m, 0]), 1000 * pendenza(tt[m], X[m, 1])
             r = fl[m] - np.polyval(np.polyfit(tt[m], fl[m], 1), tt[m])
-            righe.append((a, a + passo, math.hypot(vx, vy), math.degrees(math.atan2(vy, vx)), float(ww[m].mean()), math.sqrt(2.0) * float(r.std()) if ampiezza else None))
+            righe.append((a, a + passo, math.hypot(vx, vy), math.degrees(math.atan2(vy, vx)), float(ww[m].mean()), math.sqrt(2.0) * float(r.std()) if ampiezza else None,
+                          X[m].mean(axis=0)))
         a += passo
     return righe
 
@@ -135,14 +138,36 @@ def main(argv):
     print("### (ii) LA VELOCITA' CONTRO w, per blocco di %g (|v| per 1000 unita' di tempo; l'angolo dall'asse x; w medio)" % B)
     for nome, (tt, X, ww, fl, T_acc, fine) in tutte.items():
         print("  %s:" % nome)
-        for a, b, v, ang, w, _amp in finestre(nome, tt, X, ww, fl, 0.0, min(fine, tt[-1] + 1.0), B, False):
+        for a, b, v, ang, w, _amp, _p in finestre(nome, tt, X, ww, fl, 0.0, min(fine, tt[-1] + 1.0), B, False):
             print("    %7.0f .. %7.0f  w %8.4f  |v| %.4e  angolo %+6.1f" % (a, b, w, v, ang))
     print("-" * 130)
     print("### (iii) L'AMPIEZZA DEL CUORE A FINESTRE DI %g, ACCANTO ALLA VELOCITA' (dalla fine della rampa)" % FIN_AMPIEZZA)
     for nome, (tt, X, ww, fl, T_acc, fine) in tutte.items():
         print("  %s:" % nome)
-        for a, b, v, ang, w, amp in finestre(nome, tt, X, ww, fl, T_acc, min(fine, tt[-1] + 1.0), FIN_AMPIEZZA, True):
+        for a, b, v, ang, w, amp, _p in finestre(nome, tt, X, ww, fl, T_acc, min(fine, tt[-1] + 1.0), FIN_AMPIEZZA, True):
             print("    %7.0f .. %7.0f  l'ampiezza del cuore %.4e  |v| %.4e  angolo %+6.1f  w %8.4f" % (a, b, amp, v, ang, w))
+    print("-" * 130)
+    print("### (iv) LA CURVATURA (sez. 11-quater): fra finestre consecutive, d theta (gradi, in (-180, 180]) degli angoli della velocita', ds la distanza fra le posizioni medie,")
+    print("    kappa = d theta [rad] / ds per nodo, il raggio 1/|kappa|, il verso antiorario se d theta > 0; con |v| piccola la direzione e' rumore")
+    for nome, (tt, X, ww, fl, T_acc, fine) in tutte.items():
+        for passo in (B, FIN_AMPIEZZA):
+            rr = finestre(nome, tt, X, ww, fl, T_acc, min(fine, tt[-1] + 1.0), passo, False)
+            print("  %s, finestre di %g:" % (nome, passo))
+            for r0, r1 in zip(rr, rr[1:]):
+                dth = ((r1[3] - r0[3] + 180.0) % 360.0) - 180.0
+                ds = float(np.hypot(*(r1[6] - r0[6])))
+                k = math.radians(dth) / ds if ds > 0 else float("nan")
+                print("    %7.0f -> %7.0f  |v| %.4e -> %.4e  d theta %+7.2f  ds %8.4f  kappa %+.4e  raggio %10.2f  %s"
+                      % (r0[0], r1[0], r0[2], r1[2], dth, ds, k, 1.0 / abs(k) if k else float("inf"), "antiorario" if dth > 0 else "orario"))
+        rr = [r for r in finestre(nome, tt, X, ww, fl, T_acc, min(fine, tt[-1] + 1.0), FIN_AMPIEZZA, False) if r[0] >= DA_CURVA]
+        dd = [((r1[3] - r0[3] + 180.0) % 360.0) - 180.0 for r0, r1 in zip(rr, rr[1:])]
+        if dd:
+            segno = all(x > 0 for x in dd) or all(x < 0 for x in dd)
+            print("  LA CONDIZIONE DI \"DUE GIRI\" per %s (finestre di %g da %g alla fine valida %g): %d coppie, d theta di un solo segno %s, l'angolo girato %+.2f gradi (soglia %g): %s"
+                  % (nome, FIN_AMPIEZZA, DA_CURVA, min(fine, tt[-1] + 1.0), len(dd), "SI" if segno else "NO", sum(dd), GRADI_CURVA,
+                     "LA TRAIETTORIA CURVA" if segno and abs(sum(dd)) > GRADI_CURVA else "NON CONFERMATA"))
+        else:
+            print("  LA CONDIZIONE DI \"DUE GIRI\" per %s: nessuna coppia di finestre da %g" % (nome, DA_CURVA))
     print("=" * 130)
 
 
