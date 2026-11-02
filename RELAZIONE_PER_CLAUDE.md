@@ -22856,3 +22856,17 @@ Il referto stampa per `TA1000`:
 1. **Le misure su un toro:** un baricentro **periodico** *(la media circolare per asse, nessun parametro)* al posto di quello euclideo, in una funzione nuova, perche' i test di oggi ridanno al bit i numeri committati. **Per rimisurare `TA1000` oltre `~10000` serve rigirare la corsa:** gli stati intermedi non sono salvati, solo l'ultimo. Da `0` a `16000` sono `~3` ore.
 2. **Oppure** la vita del cuore si legge solo dove il solitone sta al centro, con un criterio di validita' tuo *(io non scelgo la soglia)*.
 3. **Il moto del solitone:** e' una domanda nuova, da mettere in coda?
+
+## 2026-11-02 — LA MAPPA, VOCE `34`: L'INERZIA DEL SOLITONE E LA SUA MASSA EFFICACE *(Luca `16:01`-`16:03`; solo scrittura, nessuna corsa)*
+
+- **Scritta nella MAPPA come dettata:**
+  - l'osservazione di Luca;
+  - la precisazione *(i dati sostengono «senza vuoto vivo non c'e' accelerazione», non «non c'e' spostamento»)*;
+  - la prova *(a vuoto congelato, una spinta iniziale piccola, il centro periodico)*, con le letture (m1)-(m3) e la massa efficace `m = p / v`;
+  - i limiti, i legami.
+- **In lista d'attesa, dopo il referto della deriva** *(`TP1000`)*: la coda non cambia.
+- **Arrivata mentre `TP1000` gira:** l'ho scritta in coda, dopo il codice dell'aggiunta delle `15:54` *(`80eb7cbf`)*.
+- **Due fatti dal codice, per quando la prova si fara'** *(non ora)*:
+  - il «vuoto congelato» del repo e' `_congelato_lungo.avanza` *(i pezzi del vuoto saltati, `phi` rimesso a `phi0`)*;
+  - `toro.py` da' gia' il centro periodico che la prova chiede.
+- **Una lettura mia** *(non un criterio)*: nei dati di `TA1000` *(il centro euclideo, `455b9a95`)* la deriva accelera quando il solitone e' gia' largo *(`w` medio `9.77`-`10.48` nei blocchi `8000 .. 11000`)*. La barriera di Peierls-Nabarro cala con `w`: la prova (m2) a due larghezze diverse direbbe se l'incastro dipende dalla larghezza.
