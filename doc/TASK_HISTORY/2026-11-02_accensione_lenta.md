@@ -259,3 +259,45 @@
 - **(p3)** un'uscita mista aperta **a `k = 0`**: indipendente dal respiro, un'uscita lineare dello stato stesso, che la carta di `4d1c2b65` non guardava.
 - **(p4)** in (W2) un `k = +-3` dentro una banda: il respiro lento sposta `mu` oltre il margine. Se non succede: lo dico.
 - **la quota**, per ogni uscita mista aperta: compatibile / fra le due / incompatibile, come nella sez. `6-bis`.
+
+### 8-bis. L'AGGIUNTA DI LUCA *(09:20)*: DI CHE MODO E' OGNI PICCO
+
+**L'aggiunta** *(arrivata mentre scrivevo la sez. `8`, prima del codice: entra in questa carta perche' usa le stesse finestre)*:
+- con le stesse finestre (W1) e (W2), **lo spettro separato** del cuore liscio, di `w`, del baricentro *(`x` e `y`)*, della **deformazione** *(l'anisotropia del secondo momento: ovale e triangolare, le armoniche `2` e `3` dell'angolo)* e di **`Lambda` medio sotto il solitone**;
+- **per ogni picco della tabella:** in quale osservabile e' piu' forte *(il respiro, la deformazione, lo spostamento, lo scambio col vuoto, o nessuna: un battimento interno)*.
+
+### ⭐ **L'IPOTESI DI LUCA, scritta prima dei numeri**
+
+> **Ogni frequenza e' un modo diverso in cui il solitone tiene la sua energia.** Dichiarato: **l'energia totale e' una sola** *(`H` si conserva)*.
+
+**Che cosa questa carta puo' dire dell'ipotesi, e che cosa no:** dice **in quale osservabile** sta ogni frequenza. Non misura l'energia di ciascun modo, e non misura `H` *(non lo calcolo qui: lo dichiaro)*.
+
+### Le premesse dal codice
+
+- **`misure.campione`** da' gia' il baricentro `(x, y)`, `w`, il cuore liscio. **`_energia_del_legame.densita(inc, st)`** da' `rho` e **`lam = |phi|^2` per nodo**: e' lo stesso `Lambda` che entra nella materia.
+- **Le definizioni** *(le scrivo qui; sono scelte di misura, non leggi)*:
+  - **`Lambda` medio sotto il solitone:** `sum(rho lam)/sum(rho)` *(pesato con la materia)*;
+  - **la deformazione:** con `dx + i dy` dal baricentro e il peso `rho g` *(`g` la rampa del cuore liscio, la stessa di `f_liscia`: il cuore, non l'alone)*, `Q2 = sum(rho g (dx + i dy)^2)/sum(rho g r^2)` *(l'ovale)* e `Q3 = sum(rho g (dx + i dy)^3)/sum(rho g r^3)` *(il triangolo)*. **Lo spettro si fa sulla parte reale e sull'immaginaria**: un ovale che RUOTA ha `|Q2|` costante, ma `Re` e `Im` oscillano.
+  - ⚠ **Il peso `g` invece di `rho` intero:** l'alone a `r` grande dominerebbe `r^3`. **Una scelta, dichiarata.**
+- **«Piu' forte» fra osservabili con unita' diverse** non si confronta con le ampiezze. **Si confronta la SIGNIFICATIVITA'**: l'ampiezza rifinita alla frequenza del picco *(minimi quadrati, `a cos + b sin` piu' la tendenza)* divisa per la **mediana** dello spettro d'ampiezza di quell'osservabile *(Hann, i canali con almeno `PERIODI_MIN` periodi)*. E' adimensionale.
+  - **La classe del picco** e' quella dell'osservabile con la significativita' piu' alta: **respiro** *(`f_liscia`, `w`)*, **spostamento** *(`x`, `y`)*, **deformazione** *(`Re/Im Q2`, `Re/Im Q3`)*, **scambio col vuoto** *(`Lambda` medio)*;
+  - **«nessuna (un battimento interno)»** se in nessun osservabile la significativita' arriva a **`3`** *(il `3` di `doc/PATTERN_DI_PROVA.md`, `P1-sexies`; ⚠ qui la mediana non e' una sigma: **lo dichiaro come criterio di lettura, non come test statistico**)*.
+  - Accanto, **l'ampiezza relativa** di ogni osservabile *(divisa per la sua media; per `x`, `y` divisa per `w` medio; `Q2`, `Q3` gia' adimensionali)*, per chi la vuole leggere.
+- **Che cosa NON so:** se il baricentro si muove davvero *(un solitone fermo darebbe rumore)*; se `Q2`, `Q3` sono sopra il rumore della griglia a triangoli *(la griglia stessa ha una simmetria `6`: un `Q3` statico non e' una deformazione)*. **Per questo si fa lo spettro tolta la tendenza, non il valore.**
+
+### La progettazione *(si aggiunge ai passi della sez. `8`)*
+
+- **`respiro.py`:** `serie_modi(z, t0, t1, w_in, h)` *(il tick intero; a ogni tick `misure.campione` piu' `Lambda` medio, `Q2`, `Q3`)*; `presenza(y, passo, f)` *(la significativita' a `f`)*. ### **`f_liscia` resta quella di `misure.campione`: il controllo al bit di (W1) resta.**
+- **`test_respiro.py`, (R5):** un seno noto con rumore gaussiano *(seme fisso)*: la significativita' alla sua frequenza supera `3`; **(R5-F, DEVE FALLIRE):** sul solo rumore la significativita' alla stessa frequenza supera `3`.
+- **`carta_respiro.py`:** (W1) e (W2) con `serie_modi`; i primi `5` picchi di ogni osservabile; **per ogni picco della tabella**, la significativita' e l'ampiezza relativa in ogni osservabile, e la classe.
+
+### Che cosa mi farebbe FERMARE *(in piu')*
+
+- (R5) fallisce, o (R5-F) passa.
+
+### Le letture *(in piu', prima dei numeri)*
+
+- **(m1)** i picchi lenti di (W1) e (W2) stanno nel **respiro** e la coppia veloce in un **altro** osservabile: le frequenze sono modi diversi, come dice l'ipotesi.
+- **(m2)** tutti i picchi stanno nello **stesso** osservabile: per questa carta, un modo solo con piu' frequenze.
+- **(m3)** la coppia veloce `~0.99` sta nello **scambio col vuoto** *(`Lambda`)*: coerente con la lettura del guardiano *(`mu - Omega` nella banda del vuoto)*.
+- **(m4)** un picco **«nessuna»**: un battimento interno, che nessuno di questi osservabili vede.
