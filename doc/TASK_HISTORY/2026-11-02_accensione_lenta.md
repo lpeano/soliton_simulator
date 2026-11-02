@@ -773,3 +773,40 @@
 - **Che cosa mi ha fermato** *(dalla lista scritta prima)*: **`A3`**, `1.55e-10` contro `1e-10`. E' un accumulo lineare di un solo segno *(`diag_a3.txt`)*; a `16000` vale `6.2e-11`. **E la ripresa dell'ultimo stato** *(n.97)*.
 - **La lettura di `Lambda` al giro `1` non misura una scia** *(n.98: il disco vicino contiene il solitone)*.
 - ### **FERMO: la decisione su `A3` e sulle due correzioni e' di Luca. `TM1000` aspetta.**
+
+### 13-quinquies. LE DECISIONI DI LUCA DOPO `fabce56d`
+
+### La decisione *(di Luca, nella sostanza)*
+
+1. **`A3` si accetta:** lo scarto *(max `1.55e-10`, oltre `1e-10` da `25815`)* e' l'arrotondamento che si accumula *(lineare, `+3.87e-12` per `1000`, il residuo `2.30e-14`)*. ### **Per le corse lunghe (oltre `100000` tick) il criterio diventa: la deriva di `M` e `V` lineare nel tempo e sotto `1e-11` per `1000` unita' di tempo**; scritto nella libreria e nella MAPPA.
+2. **La ripresa dell'ultimo stato** *(n.97)* **si accetta:** il controllo delle riprese vale **solo sugli stati intermedi**.
+3. **La MAPPA, voci `1` e `27`:** vivo a `40000`; il cuore cala `~7` volte piu' piano che a `12000`-`16000`; la velocita' a `~1.3`; un giro, poi una svolta verso il basso; l'alone verso un tetto.
+4. **La domanda delle `18:12` resta aperta:** `Lambda` vicino conteneva il solitone *(n.98)*. ### **Da rifare dalle mappe su `E:` con un disco che escluda il solitone.**
+5. **Poi la coda:** `TM1000`, la freccia di `F0`, la direzione, il primo mosaico, `cs`.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- **`A3` oggi sta in QUATTRO punti:** tre in `corsa_accensione.py` *(il referto dell'accensione, quello della deriva, quello delle mappe)* e uno in `carta_giri.py`. Tutti `max|x/x0 - 1| <= 1e-10`. ### **Il criterio nuovo va in UNA funzione della libreria** *(`accensione.a3`)*, chiamata dai quattro: **una legge di controllo, non quattro copie.**
+- ### **«Lineare», la MIA lettura, dichiarata** *(non un numero nuovo)*: il residuo massimo della retta di `x/x0 - 1` contro il tempo sta **entro la tolleranza di sempre, `1e-10`**. Cioe': **tolta la retta, vale il criterio di prima.** Un salto di `1e-10` fallisce; l'arrotondamento di `DG1000` *(`M` `2.3e-14`, `V` `2.95e-12`)* passa. **Se Luca intende altro, si corregge.**
+- **«Oltre `100000` tick»:** il tick dell'ultimo campione della serie *(`TP1000` e `TM1000` ne hanno `106667`: anche per loro vale il criterio nuovo; con il vecchio passavano lo stesso, `6.2e-11`)*.
+- **Le riprese:** in `carta_giri.py` si tolgono gli stati al tick finale della corsa *(`t1` dell'ultimo pezzo)*; lo si scrive nel referto. `corsa_accensione.ripartenza` **non cambia**.
+- ### **Il disco vicino senza il solitone, un fatto di geometria che prevedo** *(non ancora misurato)*: il disco vicino ha raggio `3 w0` *(`w0` il primo campione, `~7.7`)*, il solitone `3 w(t)` *(`~36` a `18000`)*. Al giro `1` il centro e' a `8` nodi dal punto: **i nodi del disco vicino stanno tutti entro `8 + ~23 = ~31 < 36` dal centro, quindi il disco «libero» e' VUOTO.** Se la carta lo conferma, **la domanda non ha risposta da quella istantanea**, e lo scrivo: non scelgo io un'altra istantanea o un altro raggio.
+- **Cosa NON so:** se al giro `2` *(il centro a `43.9`)* restano nodi liberi, e quanti.
+
+### La progettazione
+
+1. Questo paragrafo, **da solo**.
+2. **Il codice:**
+   - `accensione.py`: `A3_TICK_LUNGA = 100000`, `A3_PENDENZA = 1e-11` *(Luca)*, `a3(tau, x, tick, toll)`;
+   - `test_accensione.py`: `A9` *(la deriva di `DG1000`, passa)*, `A9-F` *(`2e-11` per `1000`, deve fallire)*, `A9-S` *(un salto di `2e-10`, deve fallire)*, `A9-C` *(una corsa corta oltre `1e-10`, deve fallire)*;
+   - `corsa_accensione.py`, `carta_giri.py`: i quattro `A3` chiamano `a3`; le riprese solo sugli stati intermedi; il disco vicino senza il solitone.
+
+   L'inventario. **Commit.** Poi **`D6`**, e la cassetta.
+3. **La carta rigirata**, il referto, **la MAPPA** *(voci `1`, `27`, e il criterio di `A3`)*, la relazione. **Commit.**
+4. **`TM1000`.**
+
+### Che cosa mi farebbe FERMARE
+
+- `A9`-`A9-C` che non danno il verso atteso;
+- la carta che cambia un numero **diverso** da quelli toccati *(`A3`, le riprese, `Lambda` vicino)*;
+- la cassetta non tutta verde.
