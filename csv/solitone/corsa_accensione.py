@@ -4,9 +4,12 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
 ### **le misure di `_vuoto_vivo_B` col libro col `par`; `D` rispetto alla partenza e, dopo la rampa, rispetto allo stato a `T_acc`.**
 ### **Dalla decisione di Luca dopo `bfee5330`:** `TA1000` fino a `16000`; la corsa si interrompe **solo nella rampa** *(`A6`)*, dopo registra il primo cuore
 ### sotto meta' e prosegue; nel referto la vita dal cuore a blocchi, l'alone al `10%`, la barra sulla finestra comune: **due processi.**
+### **Dalla decisione di Luca dopo `455b9a95`:** in ogni campione nuovo le misure sul TORO *(`solitone.toro`: il centro periodico, l'alone per settore, il libro per
+### settore ogni `LIBRO_SETTORI` tick)*; la corsa `TP1000` *(`TA1000` rifatta da `0`, al bit)*; nel referto `sul_toro`.
 
     python csv/solitone/corsa_accensione.py --corsa TA1000     # un pezzo; si ripete finche' dice "finita" (dopo bfee5330: fino a 16000)
     python csv/solitone/corsa_accensione.py --corsa TA2000
+    python csv/solitone/corsa_accensione.py --corsa TP1000     # (Luca dopo 455b9a95) TA1000 rifatta da 0 col centro periodico; ogni pezzo al bit con TA1000
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -27,6 +30,11 @@ CORSE = {"TA1000": (1000.0, 16000.0), "TA2000": (2000.0, 7000.0)}  # ### nome: (
 CONFRONTO = {"TA1000": 6000.0, "TA2000": 7000.0}                   # ### la fine delle finestre del confronto di bfee5330 (i numeri gia' committati)
 FINESTRA = (2000.0, 7000.0)    # ### la finestra comune della barra dell'alone: dopo le due rampe, dentro le tre corse (punto 4)
 QUOTA_ALONE = 0.1              # ### la vita dell'emissione: l'alone al 10% della materia (Luca, punto 3)
+CORSE["TP1000"] = (1000.0, 16000.0)   # ### (Luca dopo 455b9a95) TA1000 rifatta da 0 col centro periodico: in db/ non c'e' lo stato a 9000
+GEMELLE = {"TP1000": "TA1000"}       # ### ogni pezzo DEVE dare lo sha_fine della gemella con lo stesso t0
+LIBRO_SETTORI = 100            # ### il libro per settore ogni 100 tick (5 OGNI_D): un numero di protocollo, dichiarato (task history, sez. 11)
+TP_CENTRI = 9000.0             # ### Luca: prima di 9000 il centro periodico e l'euclideo coincidono ...
+TOLL_CENTRI = 0.1              # ### ... entro 0.1
 BLOCCO = 1000.0                # ### i blocchi del confronto (come _respiro_congelato)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
@@ -132,7 +140,9 @@ def corsa(nome):
         n0 = float(np.linalg.norm(p0))
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             if t0 == 0:
-                c = V.misura(z, 0, w_in, w0, h, LC, LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par), mas)
+                conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
+                c = V.misura(z, 0, w_in, w0, h, LC, conti, mas)
+                periodiche(z, c, conti, w_in, w0, h, 0, LC)
                 c["lam"] = 0.0
                 camp.append(c)
             f_lis0 = camp[0]["f_liscia"] if t0 == 0 else testa["campioni"][0]["f_liscia"]
@@ -146,7 +156,9 @@ def corsa(nome):
                     np.savez(f_acc.replace(".npz", "_tmp.npz"), psi_h=psi_a)
                     os.replace(f_acc.replace(".npz", "_tmp.npz"), f_acc)
                 if t % V.OGNI == 0:
-                    c = V.misura(z, t, w_in, w0, h, LC, LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par), mas)
+                    conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
+                    c = V.misura(z, t, w_in, w0, h, LC, conti, mas)
+                    periodiche(z, c, conti, w_in, w0, h, t, LC)
                     c["lam"] = AC.lam_di(t, K)
                     camp.append(c)
                     if c["f_liscia"] < META * f_lis0 and t_dis is None:
@@ -169,6 +181,14 @@ def corsa(nome):
     V.LP.scrivi_nuovo(os.path.join(DIR_JSON, "%s_%06d.jsonl" % (nome, t0)), riga)
     print("  la corsa %s: il pezzo %d -> %d%s; lam %.4f; f_liscia %.5f (all'inizio %.5f), w %.4f, alone %.5f; %.0f s"
           % (nome, t0, t1, (", SCIOLTO NELLA RAMPA (f_liscia sotto meta')" if t_dis <= K else ", il cuore istantaneo sotto meta' della partenza a tempo %.1f" % (t_dis * s)) if t_dis is not None else "", camp[-1]["lam"], camp[-1]["f_liscia"], f_lis0, camp[-1]["w"], camp[-1]["alone"], time.time() - s0))
+    gem = GEMELLE.get(nome)
+    if gem:
+        fg = os.path.join(DIR_JSON, "%s_%06d.jsonl" % (gem, t0))
+        rg = V.LP.leggi(fg) if os.path.exists(fg) else None
+        uguale = rg is not None and rg["sha_fine"] == V.LP.leggi(os.path.join(DIR_JSON, "%s_%06d.jsonl" % (nome, t0)))["sha_fine"] and rg["t1"] == t1
+        print("  la corsa %s: lo sha_fine del pezzo %d %s" % (nome, t0, ("e' quello di %s, al bit" % gem) if uguale else "### NON e' quello di %s: FERMO" % gem))
+        if not uguale:
+            return 1
     return 0
 
 
@@ -233,7 +253,7 @@ def referto():
     print("### %s VIVO (il riferimento: _vuoto_vivo_B + _respiro_sul_fondo)" % NOME)
     tv, flv, wwv, alv = RC.blocchi("VIVO", cv, s)
     res = {}
-    for nome, (T_acc, tau_fine) in CORSE.items():
+    for nome, (T_acc, tau_fine) in ((n, CORSE[n]) for n in CONFRONTO):
         print("-" * 130)
         rr, camp, dd, da = serie(nome)
         if not rr:
@@ -294,8 +314,131 @@ def referto():
     vv0 = AC.vita_a_meta(tv, flv, 0.0, META, CODA)
     print("  VIVO dalla partenza (il cuore a 0 %.5f, fino a %g): %s" % (vv0["f0"], tv[-1], ("misurata %.1f" % vv0["misurata"]) if vv0["misurata"] else ("estrapolata ~%.0f" % vv0["estrapolata"]) if vv0["estrapolata"] else "--"))
     due_processi(res, tv, flv, alv)
+    sul_toro()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+
+
+def periodiche(z, c, conti, w_in, w0, h, t, LC):
+    """### **Le misure sul toro** *(Luca dopo `455b9a95`, punto `1`)* **accanto a quelle euclidee del campione `c`:** il centro periodico, cuore, `w`, alone,
+    l'alone per settore; ### **il libro per settore ogni `LIBRO_SETTORI` tick** *(dichiarato nel task history, sez. `11`)*."""
+    import _energia_del_legame as EL
+    from solitone import toro as TO
+    rho, _l = EL.densita(z["inc"], z["st"])
+    p, D, M = TO.misure(rho, np.asarray(z["m1"]), np.asarray(z["m2"]), z["L"], w_in, w0, h)
+    p["alone_set"] = TO.alone_settori(rho, D, M, w0)
+    if t % LIBRO_SETTORI == 0:
+        p["E_set"] = LC.per_regione(conti, TO.maschere_settori(D))
+    c["per"] = p
+
+
+def sul_toro():
+    """### **La corsa `TP1000` col centro periodico** *(Luca dopo `455b9a95`)*: ### **i DEVE, la tabella a blocchi col criterio di validita', la vita sui blocchi
+    validi, la deriva** *(la traiettoria srotolata, la velocita' per blocco, la direzione, la velocita' contro `w`, avanti e dietro)*."""
+    import _libro_dei_conti as LC
+    import _vuoto_vivo_B as V
+    from solitone import accensione as AC
+    from solitone import toro as TO
+    _sol, _vuoto, s = V.CORSE[NOME]
+    nome = "TP1000"
+    gem = GEMELLE[nome]
+    T_acc, tau_fine = CORSE[nome]
+    print("=" * 130)
+    print("### LE MISURE SUL TORO (Luca, dopo 455b9a95): %s = %s rifatta DA 0 (in db/ c'e' solo l'ultimo stato), con il centro periodico accanto all'euclideo" % (nome, gem))
+    print("    il centro: la media circolare sugli indici del reticolo; le distanze: l'immagine piu' vicina fra le 9; le misure: le stesse espressioni, cambia la distanza")
+    rr, camp, _dd, _da = serie(nome)
+    if not rr:
+        print("### %s: NESSUN PEZZO" % nome)
+        return
+    L = rr[0]["L"]
+    A1, A2 = TO.vettori()
+    R = TO.meta_periodo(L)
+    R_Y = float((L // 2) * A2[1])
+    print("    IL CRITERIO DI VALIDITA' (Luca): 3 w < %.4f, la meta' del periodo piu' corto del toro (dai vettori del toro; il rombo ha i lati uguali, %d)" % (R, L))
+    print("    accanto, marcato: 3 w < %.4f, l'estensione in y della rappresentazione dei nodi (il \"mezzo lato corto\" di 455b9a95, una mia lettura sbagliata, nel mandato)" % R_Y)
+    ult = rr[-1]
+    fatta = ult["t1"] >= ult["t_fine"]
+    print("### %s (T_acc %g, fino a %g): %s; %d pezzi, %d campioni, %.0f s" % (nome, T_acc, tau_fine, ("arriva a %g" % (ult["t1"] * s)) if fatta else "### NON FINITA", len(rr), len(camp),
+                                                                     sum(r["secondi"] for r in rr)))
+    M_ = np.array([c["E"]["totale"]["M"] for c in camp])
+    V_ = np.array([c["E"]["totale"]["V"] for c in camp])
+    dM, dV = float(np.max(np.abs(M_ / M_[0] - 1.0))), float(np.max(np.abs(V_ / V_[0] - 1.0)))
+    esito("DEVE PASSARE: A3 %s M e V entro %g" % (nome, V.TOLL_NORMA), dM <= V.TOLL_NORMA and dV <= V.TOLL_NORMA, "dM %.1e dV %.1e" % (dM, dV))
+    esito("DEVE PASSARE: A4 %s il libro col par della corsa (eps %g)" % (nome, V.EPS), all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rr), "")
+    esito("DEVE PASSARE: %s arriva alla fine" % nome, fatta, "")
+    rg, cg, _x, _y = serie(gem)
+    gg = {r["t0"]: r for r in rg}
+    diversi = [r["t0"] for r in rr if r["t0"] not in gg or gg[r["t0"]]["sha_fine"] != r["sha_fine"] or gg[r["t0"]]["t1"] != r["t1"]]
+    chiavi = ("t", "x", "y", "w", "f_liscia", "f_win", "alone")
+    camp_ug = len(cg) == len(camp) and all(a[k] == b[k] for a, b in zip(camp, cg) for k in chiavi)
+    esito("DEVE PASSARE: TP1 ogni pezzo di %s ha lo sha_fine del pezzo di %s con lo stesso t0 (AL BIT, ogni chiave), e i campioni euclidei sono gli stessi AL BIT" % (nome, gem),
+          not diversi and len(rr) == len(rg) and camp_ug, "pezzi %d e %d; diversi %s; i campioni %s" % (len(rr), len(rg), diversi or "nessuno", "uguali" if camp_ug else "### DIVERSI"))
+    tt = np.array([c["t"] for c in camp]) * s
+    per = [c["per"] for c in camp]
+    prima = tt < TP_CENTRI
+    dc = np.array([TO.distanza((p["x"], p["y"]), (c["x"], c["y"]), L) for c, p in zip(camp, per)])
+    esito("DEVE PASSARE: TP2 prima di %g il centro periodico e l'euclideo coincidono entro %g" % (TP_CENTRI, TOLL_CENTRI), float(dc[prima].max()) <= TOLL_CENTRI,
+          "il massimo %.4e (a tempo %.1f); dopo %g il massimo %.4e" % (dc[prima].max(), tt[prima][int(np.argmax(dc[prima]))], TP_CENTRI, dc[~prima].max() if (~prima).any() else float("nan")))
+    fl = np.array([p["f_liscia"] for p in per])
+    ww = np.array([p["w"] for p in per])
+    al = np.array([p["alone"] for p in per])
+    c1 = np.array([p["c1"] for p in per])
+    c2 = np.array([p["c2"] for p in per])
+    u1 = np.concatenate([[0.0], np.cumsum(((np.diff(c1) + 0.5 * L) % L) - 0.5 * L)])
+    u2 = np.concatenate([[0.0], np.cumsum(((np.diff(c2) + 0.5 * L) % L) - 0.5 * L)])
+    X = u1[:, None] * A1 + u2[:, None] * A2
+    print("### %s, a blocchi di %g, COL CENTRO PERIODICO (le medie; la traiettoria SROTOLATA dalla partenza; v per 1000 unita' di tempo; l'angolo dall'asse x, e dalla" % (nome, BLOCCO))
+    print("    direzione del reticolo piu' vicina (A1 0, A1+A2 60, A2 120 gradi); max 3w nel blocco; NV = il blocco non rispetta 3 w < %.2f, NVy = non rispetta 3 w < %.2f)" % (R, R_Y))
+    print("    %-17s %-9s %-9s %-9s %-17s %-8s %-11s %-8s %-8s %-8s %s" % ("il tempo", "cuore", "w", "alone", "il centro (x, y)", "dist.", "|v|", "angolo", "dal ret.", "max 3w", ""))
+    blocchi = []
+    a = 0.0
+    while a <= tt[-1]:
+        m = (tt >= a) & (tt < a + BLOCCO)
+        if m.any():
+            vx = 1000 * pendenza(tt[m], X[m, 0])
+            vy = 1000 * pendenza(tt[m], X[m, 1])
+            ang = math.degrees(math.atan2(vy, vx))
+            m3 = 3.0 * float(ww[m].max())
+            b = {"a": a, "m": m, "v": (vx, vy), "ang": ang, "m3": m3}
+            blocchi.append(b)
+            print("    %7.0f .. %7.0f %.5f   %-9.4f %.5f   (%7.2f, %6.2f) %-8.3f %-11.4e %-+8.1f %-+8.1f %-8.2f %s%s"
+                  % (a, a + BLOCCO, fl[m].mean(), ww[m].mean(), al[m].mean(), X[m, 0].mean(), X[m, 1].mean(), float(np.hypot(X[m, 0], X[m, 1]).mean()), math.hypot(vx, vy), ang,
+                     ((ang + 30.0) % 60.0) - 30.0, m3, "NV " if m3 >= R else "", "NVy" if m3 >= R_Y else ""))
+        a += BLOCCO
+    for soglia, che in ((R, "3 w < %.2f (la meta' del periodo)" % R), (R_Y, "3 w < %.2f (l'estensione in y, marcata)" % R_Y)):
+        nv = next((b["a"] for b in blocchi if b["m3"] >= soglia), None)
+        t_val = nv if nv is not None else tt[-1] + 1.0
+        print("  CON IL CRITERIO %s: %s" % (che, ("il primo blocco NON valido comincia a %g; la vita solo prima" % nv) if nv is not None else "tutti i blocchi validi fino alla fine"))
+        m = (tt >= T_acc) & (tt < t_val)
+        if m.sum() < 3:
+            print("    nessun blocco valido dopo T_acc")
+            continue
+        vb = AC.vita_a_blocchi(tt[m], fl[m], T_acc, META, BLOCCO)
+        print("    (1) il cuore a blocchi: il riferimento %.5f, la meta' %.5f: %s; la pendenza delle medie %+.4e per 1000; i blocchi validi %d" % (vb["rif"], META * vb["rif"],
+              ("MISURATA, il blocco centrato a %.0f" % vb["misurata"]) if vb["misurata"] is not None else ("ESTRAPOLATA (non una misura) ~%.0f" % vb["estrapolata"]) if vb["estrapolata"] is not None
+              else "le medie non calano: nessuna vita", vb["pendenza"], len(vb["blocchi"])))
+        t_a, p_a, mis = AC.tempo_alone(tt[m], al[m], T_acc, tt[m][-1], QUOTA_ALONE)
+        print("    (2) l'alone periodico: la pendenza %+.4e per 1000 (%g .. %g); al %g: %s" % (p_a, T_acc, tt[m][-1], QUOTA_ALONE,
+              ("MISURATO a %.1f" % t_a) if mis else ("ESTRAPOLATO (non una misura) ~%.0f" % t_a) if t_a is not None else "l'alone non cresce: nessun tempo"))
+    m = (tt >= FINESTRA[0]) & (tt <= FINESTRA[1])
+    print("  L'ALONE PERIODICO su %g .. %g: %+.4e per 1000 (l'euclideo della stessa corsa %+.4e)" % (FINESTRA[0], FINESTRA[1], 1000 * pendenza(tt[m], al[m]),
+          1000 * pendenza(tt[m], np.array([c["alone"] for c in camp])[m])))
+    print("### LA DERIVA, AVANTI E DIETRO (per blocco: la direzione della velocita' del blocco; avanti = i %d settori a meno di 90 gradi, dietro gli altri; la risoluzione 45 gradi;" % (TO.SETTORI // 2))
+    print("    l'alone per settore a ogni campione; il libro per settore ogni %d tick, tutto il settore, il solitone compreso; con |v| piccola la direzione e' rumore)" % LIBRO_SETTORI)
+    centri = (np.arange(TO.SETTORI) + 0.5) * (2.0 * math.pi / TO.SETTORI)
+    for b in blocchi:
+        th = math.radians(b["ang"])
+        av = np.cos(centri - th) > 0
+        m = b["m"]
+        aset = np.array([per[i]["alone_set"] for i in np.nonzero(m)[0]])
+        a_av, a_di = float(aset[:, av].sum(axis=1).mean()), float(aset[:, ~av].sum(axis=1).mean())
+        ee = [per[i]["E_set"] for i in np.nonzero(m)[0] if "E_set" in per[i]]
+        lib = ""
+        if ee:
+            sv = {k: float(np.mean([sum(e["s%d" % j][k] for j in range(TO.SETTORI) if av[j]) for e in ee])) for k in LC.CONTI}
+            sd = {k: float(np.mean([sum(e["s%d" % j][k] for j in range(TO.SETTORI) if not av[j]) for e in ee])) for k in LC.CONTI}
+            lib = "; il libro (%d campioni) avanti - dietro: %s; M avanti %.1f dietro %.1f" % (len(ee), " ".join("%s %+.4e" % (k, sv[k] - sd[k]) for k in LC.CONTI), sv["M"], sd["M"])
+        print("  %7.0f .. %7.0f |v| %.4e angolo %+6.1f: l'alone avanti %.5f dietro %.5f%s" % (b["a"], b["a"] + BLOCCO, math.hypot(*b["v"]), b["ang"], a_av, a_di, lib))
 
 
 def due_processi(res, tv, flv, alv):
@@ -329,7 +472,7 @@ def due_processi(res, tv, flv, alv):
 
 def main(argv):
     import _presidio
-    for m in ("__init__", "misure", "protetto", "accensione"):
+    for m in ("__init__", "misure", "protetto", "accensione", "toro"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
     if "--corsa" in argv:
