@@ -22913,3 +22913,51 @@ Il referto stampa per `TA1000`:
   - **Non tocca il tick**, e il controllo al bit sugli `sha_fine` lo verifica.
   - Le finestre a `cs` spento si rigirerebbero da li' **senza una terza corsa**.
   - **Decide Luca.** Senza risposta, `TM1000` fa solo le mappe *(`[[L-DOPO-STOP]]`)*, e le finestre a `cs` spento si faranno con una corsa da `0`.
+
+## 2026-11-02 — LA DERIVA SUL TORO: IL REFERTO DI `TP1000` -- COL CENTRO PERIODICO IL SOLITONE NON CROLLA E VA DRITTO LUNGO `-A1`; ### UN DEVE FALLISCE (`TP2`, `0.107` CONTRO `0.1`): FERMO
+
+**Il codice:** `b11b71c6`, `adce3254`; `D6` `18c91ad8`. **La cassetta:** `70/70`. **Il referto:** `doc/referti_l2/accensione_lenta.txt`, la sezione «LE MISURE SUL TORO». **La diagnostica:** `doc/referti_l2/accensione_lenta/diag_tp2.py.txt`, `diag_tp2.txt`.
+
+### **I DEVE**
+
+| | | |
+|---|---|---|
+| `A3` | `M` e `V` entro `1e-10` | **passa** *(`dM 6.2e-11`, `dV 4.0e-11`)* |
+| `A4` | il libro col `par` | **passa** |
+| `TP1` | ogni pezzo **al bit** con `TA1000` *(gli `sha_fine` di ogni chiave, e i campioni euclidei)* | **passa:** `11` pezzi su `11` |
+| `TP2` | prima di `9000` i due centri entro `0.1` *(Luca)* | ### **FALLISCE:** il massimo **`0.1071`** a tempo `8808.0` |
+
+- **`TP2`, dalla diagnostica:**
+  - la distanza fra i due centri **cresce col tempo**: il massimo per blocco e' `0.015` *(`0 .. 1000`)*, `0.039` *(`5000 .. 6000`)*, `0.074` *(`7000 .. 8000`)*, **`0.107`** *(`8000 .. 9000`)*, `0.133` *(`9000 .. 10000`)*;
+  - **prima di `9000` sono sopra `0.1` solo `62` campioni su `6000`**, tutti dopo `8752.5`;
+  - **cresce insieme all'alone** *(`0.001` -> `0.024`)* **e alla distanza dalla partenza** *(il centro euclideo a `~2.8`)*.
+- **La mia lettura** *(non un criterio)*: e' **il baricentro euclideo tirato dall'alone**, cioe' la materia lontana che sta su tutto il toro e ha il suo baricentro euclideo vicino all'origine. Nella sez. `11` stimavo `~0.06`: **misurato `0.107`. La stima era bassa.**
+- ### **CHE COSA TOCCA IL FALLIMENTO:**
+  - **non le misure periodiche di `TP1000`**: il DEVE confronta il centro euclideo con quello periodico, e il periodico non dipende dal taglio;
+  - **tocca il centro EUCLIDEO del vivo e di `TA2000`**, che `carta_deriva.py` usa *(«valido finche' `TP2` lo dice»)*. Fino a `7000` *(la fine di `TA2000`)* la differenza resta sotto `0.074`. Il vivo arriva a `9999`.
+  - ### **Per la regola mi FERMO:** non ho girato `carta_deriva.py`.
+
+### **I NUMERI DEL REFERTO** *(il centro periodico)*
+
+- **(t1) regge: il cuore a blocchi continua liscio oltre `12500`.** `0.39637`, `0.37686`, `0.35512`, `0.33953` nei blocchi `12000 .. 16000`. **Il crollo a `13500` di `TA1000` era la misura euclidea sul taglio delle coordinate.**
+- **Il criterio di validita':** `3 w` massimo `34.25` *(`15000 .. 16000`)*, sotto `40.5` e anche sotto `34.64`. **Tutti i blocchi sono validi fino a `16000`.**
+- **La vita del cuore a blocchi:** il riferimento `0.44243`, **estrapolata `~25983`** *(la pendenza delle medie `-1.20e-2` per `1000`, `15` blocchi; non una misura)*.
+- **L'emissione:**
+  - l'alone periodico cresce di `+2.5232e-3` per `1000` su `1000 .. 15999`, **estrapolato al `10%` a `~39754`**;
+  - su `2000 .. 7000` cresce di `+2.5615e-3`, contro l'euclideo `+2.5611e-3`.
+- **La deriva** *(la traiettoria srotolata)*:
+  - lo spostamento totale e' `68.45` nodi, con l'angolo **`-173.1`**, **`+6.9` gradi da `-A1`**;
+  - **la velocita' per blocco:** `2.79` *(`10000 .. 11000`)*, `6.16`, `15.63`, **`17.11`** *(`13000 .. 14000`)*, poi **`12.37`, `11.07`**, per `1000` unita' di tempo. **Dopo `14000` RALLENTA;**
+  - **la direzione per blocco:** `+174.0`, `-179.5`, `-169.9`, `-169.1`, `-176.3`, `-179.7`. **Si scosta di `~10` gradi da `-A1` a `12000`-`14000` e poi TORNA su `-A1`.** Su blocchi di `1000` non e' una curva di un solo verso: lo dira' la carta *(iv)*, ancora da girare;
+  - **la partenza:** il centro al primo campione e' a `(0.193, 0.314)` dal nodo d'origine, angolo `+58.5`. **Dista `128.5` gradi dalla direzione del moto.**
+- **Avanti e dietro:**
+  - l'alone e' **quasi simmetrico** *(`0.01895` contro `0.01918` a `15000 .. 16000`)*;
+  - **nel libro, `vuo` e `V` avanti meno dietro crescono negli ultimi blocchi** *(`vuo` `+1.9e3` -> `+7.0e3`, `V` `+0.9e3` -> `+2.4e3`)*: davanti al solitone c'e' piu' vuoto. **Una lettura, non un criterio.**
+
+### **LA DECISIONE A LUCA** *(criterio di chiusura: la sua scelta)*
+
+- **`TP2` fallisce di poco** *(`0.107` contro `0.1`, a `8752`-`9000`)*:
+  - **(a)** si accetta come fatto noto *(il centro euclideo e' tirato dall'alone)*, e per il vivo `carta_deriva` dichiara il limite;
+  - **(b)** la soglia di Luca resta, e il vivo si usa solo fino a dove i due centri coincidono entro `0.1` *(`~8750`, in `TP1000`)*;
+  - **(c)** altro.
+- **Dopo la decisione:** `carta_deriva.py` *(il referto della deriva, con la curvatura e la condizione di «due giri»)*, poi la coda.

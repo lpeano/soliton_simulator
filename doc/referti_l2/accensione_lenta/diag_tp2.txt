@@ -1,0 +1,11 @@
+    0.. 1000  max 0.0154  medio 0.0049  alone medio 0.0011  centro eucl. medio (0.07, 0.12)
+ 1000.. 2000  max 0.0234  medio 0.0126  alone medio 0.0034  centro eucl. medio (-0.78, -0.14)
+ 2000.. 3000  max 0.0225  medio 0.0099  alone medio 0.0059  centro eucl. medio (-0.93, -0.46)
+ 3000.. 4000  max 0.0288  medio 0.0160  alone medio 0.0085  centro eucl. medio (-1.19, -0.68)
+ 4000.. 5000  max 0.0261  medio 0.0117  alone medio 0.0110  centro eucl. medio (-0.52, -0.38)
+ 5000.. 6000  max 0.0389  medio 0.0263  alone medio 0.0136  centro eucl. medio (-1.17, -0.80)
+ 6000.. 7000  max 0.0323  medio 0.0182  alone medio 0.0161  centro eucl. medio (-0.95, -0.31)
+ 7000.. 8000  max 0.0741  medio 0.0422  alone medio 0.0187  centro eucl. medio (-1.47, -0.79)
+ 8000.. 9000  max 0.1071  medio 0.0806  alone medio 0.0212  centro eucl. medio (-2.52, -1.30)
+ 9000..10000  max 0.1327  medio 0.1035  alone medio 0.0237  centro eucl. medio (-2.99, -1.03)
+sopra 0.1 prima di 9000: 62 campioni su 6000 ; i primi tempi [8752.5 8754.  8755.5 8757.  8758.5 8760.  8761.5 8763.  8764.5 8766. ]

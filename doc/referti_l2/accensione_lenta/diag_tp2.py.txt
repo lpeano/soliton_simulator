@@ -1,0 +1,21 @@
+# -*- coding: utf-8 -*-
+"""LA DIAGNOSTICA DI TP2 (dopo la corsa TP1000, 2026-11-02): la distanza fra il centro periodico e quello euclideo, per blocco, prima di 10000.
+    python diag_tp2.py   (dalla radice del repo; copiato in doc/referti_l2/accensione_lenta/diag_tp2.py.txt)
+"""
+import sys
+
+import numpy as np
+
+sys.path.insert(0, "csv")
+import solitone  # noqa: E402,F401
+from solitone import corsa_accensione as CA, toro as TO  # noqa: E402
+
+_rr, camp, _d, _a = CA.serie("TP1000")
+s = 0.15
+tt = np.array([c["t"] for c in camp]) * s
+dc = np.array([TO.distanza((c["per"]["x"], c["per"]["y"]), (c["x"], c["y"]), 81) for c in camp])
+for a in range(0, 10000, 1000):
+    m = (tt >= a) & (tt < a + 1000)
+    print("%5d..%5d  max %.4f  medio %.4f  alone medio %.4f  centro eucl. medio (%.2f, %.2f)" % (a, a + 1000, dc[m].max(), dc[m].mean(), np.mean([c["alone"] for c, k in zip(camp, m) if k]),
+          np.mean([c["x"] for c, k in zip(camp, m) if k]), np.mean([c["y"] for c, k in zip(camp, m) if k])))
+print("sopra 0.1 prima di 9000:", int(((dc > 0.1) & (tt < 9000)).sum()), "campioni su", int((tt < 9000).sum()), "; i primi tempi", tt[(dc > 0.1) & (tt < 9000)][:10])

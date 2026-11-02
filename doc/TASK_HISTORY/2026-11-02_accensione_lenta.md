@@ -628,3 +628,14 @@
   
   **Altrimenti si scrive, e «due giri» non si fa.** Se Luca vuole un altro criterio, lo cambia prima del referto.
 - **L'ordine nella coda** *(`[[PRECEDENZA-IN-CODA]]`, la decisione di Luca nel mandato)*: `(1)` la deriva; **`(1-bis)` due giri, condizionato**; `(2)` le mappe `TM1000`; `(3)` la direzione; `(4)` `cs` col solitone.
+
+### 11-quinquies. L'ESITO DI `TP1000` *(il referto a `18c91ad8`; la relazione per i numeri)*
+
+- **`A3`, `A4`, `TP1`** *(`11` pezzi al bit con `TA1000`)*: **passano.** La cassetta: `70/70`.
+- ### ⛔ **`TP2` FALLISCE:** il massimo e' `0.1071` a tempo `8808`, contro `0.1`. **La premessa sbagliata** *(annoto, non riscrivo)*: stimavo `~0.06` dall'alone. La distanza cresce con l'alone e con la distanza dalla partenza *(`diag_tp2.txt`)*. **FERMO:** decide Luca, e `carta_deriva.py` non e' girata.
+- **(p1) e (t1) reggono:** col centro periodico il cuore a blocchi non crolla *(`0.34`-`0.40` a `12000`-`16000`)*.
+- **(p2) regge:** `3 w` arriva al massimo a `34.25`, e tutti i blocchi sono validi.
+- **La deriva:**
+  - si sposta di `68.45` nodi a `-173.1` gradi, cioe' `+6.9` da `-A1`;
+  - la velocita' massima e' `17.1` per `1000` a `13000`-`14000`, poi **rallenta**;
+  - la direzione si scosta di `~10` gradi e poi torna. **La curvatura e' da leggere con la carta *(iv)*.**
