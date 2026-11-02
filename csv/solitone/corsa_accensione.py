@@ -10,6 +10,9 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --corsa TA1000     # un pezzo; si ripete finche' dice "finita" (dopo bfee5330: fino a 16000)
     python csv/solitone/corsa_accensione.py --corsa TA2000
     python csv/solitone/corsa_accensione.py --corsa TP1000     # (Luca dopo 455b9a95) TA1000 rifatta da 0 col centro periodico; ogni pezzo al bit con TA1000
+    python csv/solitone/corsa_accensione.py --corsa TM1000     # (Luca 15:49, dopo 3e3277a2) TP1000 ripetuta con le mappe e gli stati su E:; al bit con TP1000
+    python csv/solitone/corsa_accensione.py --mappe > doc/referti_l2/mappe_TM1000.txt
+    python csv/solitone/corsa_accensione.py --indice > doc/referti_l2/mappe_indice.txt
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -35,6 +38,13 @@ GEMELLE = {"TP1000": "TA1000"}       # ### ogni pezzo DEVE dare lo sha_fine dell
 LIBRO_SETTORI = 100            # ### il libro per settore ogni 100 tick (5 OGNI_D): un numero di protocollo, dichiarato (task history, sez. 11)
 TP_CENTRI = 9000.0             # ### Luca: prima di 9000 il centro periodico e l'euclideo coincidono ...
 TOLL_CENTRI = 0.1              # ### ... entro 0.1
+CORSE["TM1000"] = (1000.0, 16000.0)   # ### (Luca 15:49, dopo 3e3277a2) TP1000 ripetuta con le mappe e gli stati: ogni pezzo DEVE essere quello di TP1000
+GEMELLE["TM1000"] = "TP1000"
+MAPPE = ("TM1000",)            # ### le corse che salvano le mappe (mappe.OGNI tick) su E:
+STATI = {"TM1000": (2000.0, 6000.0, 10000.0)}   # ### Luca dopo 3e3277a2: lo stato completo a questi tempi (il tick piu' vicino)
+DOPO_STATO = 100               # ### Luca dopo 3e3277a2: ripartendo da ogni stato per 100 tick si ritrova lo stato della corsa al bit
+RADICE_E = r"E:\soliton_simulator"   # ### Luca 15:49: il disco esterno degli archivi
+DIRS = {"TM1000": os.path.join(RADICE_E, "mappe", "TM1000", "campioni")}   # ### i campioni di TM1000 su E: (doppioni al bit di TP1000; sez. 12)
 BLOCCO = 1000.0                # ### i blocchi del confronto (come _respiro_congelato)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
@@ -54,9 +64,14 @@ def esito(che, passa, nota=""):
     return passa
 
 
+def dir_json(nome):
+    return DIRS.get(nome, DIR_JSON)
+
+
 def nomi(nome):
     pre = "%s_" % nome
-    return sorted(n for n in os.listdir(DIR_JSON) if n.startswith(pre) and n.endswith(".jsonl") and n[len(pre):-6].isdigit()) if os.path.isdir(DIR_JSON) else []
+    d = dir_json(nome)
+    return sorted(n for n in os.listdir(d) if n.startswith(pre) and n.endswith(".jsonl") and n[len(pre):-6].isdigit()) if os.path.isdir(d) else []
 
 
 def righe_D(bande, D, n0, t):
@@ -86,12 +101,12 @@ def corsa(nome):
     t_fine = int(round(tau_fine / s))
     testa_v = V.LP.leggi(os.path.join(V.DIR_JSON, V.nomi(NOME)[0]))
     fatti = nomi(nome)
-    testa = V.LP.leggi(os.path.join(DIR_JSON, fatti[0])) if fatti else None
-    prec = V.LP.leggi(os.path.join(DIR_JSON, fatti[-1])) if fatti else None
+    testa = V.LP.leggi(os.path.join(dir_json(nome), fatti[0])) if fatti else None
+    prec = V.LP.leggi(os.path.join(dir_json(nome), fatti[-1])) if fatti else None
     if prec is not None and (prec["t1"] >= t_fine or (prec["t_dis"] is not None and prec["t_dis"] <= K)):
         print("  la corsa %s: finita (%d pezzi)" % (nome, len(fatti)))
         return 0
-    os.makedirs(DIR_JSON, exist_ok=True)
+    os.makedirs(dir_json(nome), exist_ok=True)
     os.makedirs(DIR_NPZ, exist_ok=True)
     f_rip = os.path.join(DIR_NPZ, nome + ".npz")
     f_acc = os.path.join(DIR_NPZ, nome + "_acc.npz")
@@ -125,7 +140,7 @@ def corsa(nome):
                     if isinstance(z["st"][k], np.ndarray):
                         z["st"][k][...] = dati[k]
             assert V.shas(z) == prec["sha_fine"], "lo stato di ripresa NON e' la fine del pezzo prima (al bit, ogni chiave)"
-            accs = [r["acc"] for r in (V.LP.leggi(os.path.join(DIR_JSON, n)) for n in fatti) if r.get("acc")]
+            accs = [r["acc"] for r in (V.LP.leggi(os.path.join(dir_json(nome), n)) for n in fatti) if r.get("acc")]
             if accs:
                 acc = dict(accs[0])
                 with np.load(f_acc) as dati:
@@ -138,6 +153,21 @@ def corsa(nome):
         t_dis = None
         acc_nuovo = None
         n0 = float(np.linalg.norm(p0))
+        mappe_on = nome in MAPPE
+        ist, stati, dopo, disco = [], [], {}, None
+        tick_stati = {int(round(x / s)) for x in STATI.get(nome, ())}
+        if mappe_on:
+            from solitone import mappe as MP
+            assert MP.OGNI % V.OGNI == 0, "le mappe cadono sui campioni"
+            gem = GEMELLE[nome]
+            byte_j = sum(os.path.getsize(os.path.join(dir_json(gem), n)) for n in nomi(gem))
+            byte_s = len(tick_stati) * sum(v.nbytes for v in z["st"].values() if isinstance(v, np.ndarray))
+            stima = MP.stima(z["inc"].n, t_fine // MP.OGNI + 1) + byte_s + byte_j
+            ok, _lib, nota = MP.controlla_disco(RADICE_E, stima)
+            disco = {"ok": ok, "nota": nota, "stima": stima}
+            if not ok:
+                print("  la corsa %s: ### IL DISCO NON BASTA (%s): FERMO" % (nome, nota))
+                return 1
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             if t0 == 0:
                 conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
@@ -145,6 +175,8 @@ def corsa(nome):
                 periodiche(z, c, conti, w_in, w0, h, 0, LC)
                 c["lam"] = 0.0
                 camp.append(c)
+                if mappe_on:
+                    ist.append(MP.istantanea(z, 0, 0.0, (c["per"]["x"], c["per"]["y"])))
             f_lis0 = camp[0]["f_liscia"] if t0 == 0 else testa["campioni"][0]["f_liscia"]
             for t in range(t0 + 1, t1 + 1):
                 AC.tick(z, t, K)
@@ -163,6 +195,16 @@ def corsa(nome):
                     camp.append(c)
                     if c["f_liscia"] < META * f_lis0 and t_dis is None:
                         t_dis = t          # ### il primo; si interrompe solo nella rampa (A6)
+                if mappe_on and t % MP.OGNI == 0:
+                    ist.append(MP.istantanea(z, t, AC.lam_di(t, K), (camp[-1]["per"]["x"], camp[-1]["per"]["y"])))
+                if t in tick_stati:
+                    f_st = os.path.join(RADICE_E, "stati", nome, "%s_stato_%06d.npz" % (nome, t))
+                    os.makedirs(os.path.dirname(f_st), exist_ok=True)
+                    np.savez(f_st + ".tmp.npz", t=t, **{k: v for k, v in z["st"].items() if isinstance(v, np.ndarray)})
+                    os.replace(f_st + ".tmp.npz", f_st)
+                    stati.append({"t": t, "file": f_st, "sha": V.shas(z)})
+                if t - DOPO_STATO in tick_stati:
+                    dopo[str(t - DOPO_STATO)] = V.shas(z)
                 if t % V.OGNI_D == 0:
                     dd.append(righe_D(bande, np.exp(1j * mu * s * t) * z["st"]["psi_h"] - p0, n0, t))
                     if acc is not None and t > acc["t"]:
@@ -170,6 +212,11 @@ def corsa(nome):
                 if t_dis is not None and t_dis <= K:
                     t1 = t
                     break
+        mappe = None
+        if mappe_on and ist:
+            f_m = os.path.join(RADICE_E, "mappe", nome, "%s_%06d.npz" % (nome, t0))
+            dim, sha = MP.scrivi(f_m, ist, np.asarray(z["m1"]), np.asarray(z["m2"]), z["L"])
+            mappe = {"file": f_m, "byte": dim, "sha1": sha, "istantanee": len(ist)}
         sha_fine = V.shas(z)
         tmp = f_rip.replace(".npz", "_tmp.npz")
         np.savez(tmp, t=t1, **{k: v for k, v in z["st"].items() if isinstance(v, np.ndarray)})
@@ -178,14 +225,16 @@ def corsa(nome):
             "t_dis": t_dis, "w_in": w_in, "h": h, "e_K": e_K, "info": info, "campioni": camp, "D": dd, "D_acc": da, "sha_fine": sha_fine, "secondi": time.time() - s0,
             "acc": {k: v for k, v in acc_nuovo.items() if k != "psi"} if acc_nuovo else None,
             "tick": "accensione (sin^2 su T_acc, poi tick.percorri_tick)", "libro": "col par della corsa", "rampa": "lam_k = sin^2(pi k/(2 K))"}
-    V.LP.scrivi_nuovo(os.path.join(DIR_JSON, "%s_%06d.jsonl" % (nome, t0)), riga)
+    if mappe_on:
+        riga.update({"mappe": mappe, "stati": stati, "dopo_stato": dopo, "disco": disco})
+    V.LP.scrivi_nuovo(os.path.join(dir_json(nome), "%s_%06d.jsonl" % (nome, t0)), riga)
     print("  la corsa %s: il pezzo %d -> %d%s; lam %.4f; f_liscia %.5f (all'inizio %.5f), w %.4f, alone %.5f; %.0f s"
           % (nome, t0, t1, (", SCIOLTO NELLA RAMPA (f_liscia sotto meta')" if t_dis <= K else ", il cuore istantaneo sotto meta' della partenza a tempo %.1f" % (t_dis * s)) if t_dis is not None else "", camp[-1]["lam"], camp[-1]["f_liscia"], f_lis0, camp[-1]["w"], camp[-1]["alone"], time.time() - s0))
     gem = GEMELLE.get(nome)
     if gem:
-        fg = os.path.join(DIR_JSON, "%s_%06d.jsonl" % (gem, t0))
+        fg = os.path.join(dir_json(gem), "%s_%06d.jsonl" % (gem, t0))
         rg = V.LP.leggi(fg) if os.path.exists(fg) else None
-        uguale = rg is not None and rg["sha_fine"] == V.LP.leggi(os.path.join(DIR_JSON, "%s_%06d.jsonl" % (nome, t0)))["sha_fine"] and rg["t1"] == t1
+        uguale = rg is not None and rg["sha_fine"] == V.LP.leggi(os.path.join(dir_json(nome), "%s_%06d.jsonl" % (nome, t0)))["sha_fine"] and rg["t1"] == t1
         print("  la corsa %s: lo sha_fine del pezzo %d %s" % (nome, t0, ("e' quello di %s, al bit" % gem) if uguale else "### NON e' quello di %s: FERMO" % gem))
         if not uguale:
             return 1
@@ -194,7 +243,7 @@ def corsa(nome):
 
 # ------------------------------------------------------------------------------------------------ il referto
 def serie(nome):
-    rr = [__import__("_vuoto_vivo_B").LP.leggi(os.path.join(DIR_JSON, n)) for n in nomi(nome)]
+    rr = [__import__("_vuoto_vivo_B").LP.leggi(os.path.join(dir_json(nome), n)) for n in nomi(nome)]
     for a, b in zip(rr, rr[1:]):
         assert a["t1"] == b["t0"], "un buco fra i pezzi di %s" % nome
     return rr, [c for r in rr for c in r["campioni"]], [d for r in rr for d in r["D"]], [d for r in rr for d in r["D_acc"]]
@@ -478,15 +527,145 @@ def due_processi(res, tv, flv, alv):
     print("    dire che stanno nella barra e' quasi vero per costruzione; tre numeri, una stima grezza")
 
 
+def ripartenza(nome):
+    """### **Il DEVE della ripartenza** *(Luca dopo `3e3277a2`)*: ### **da ciascuno stato salvato, `DOPO_STATO` tick col tick della corsa, e gli `sha` di ogni chiave
+    contro quelli registrati in corsa.** La scena si prepara con le stesse chiamate di `corsa`, poi lo stato si carica. `[(t, letto al bit, dopo al bit)]`."""
+    import _deriva_congelato as DC
+    import _dove_va_la_materia as DV
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    import _vuoto_vivo_B as V
+    from solitone import accensione as AC
+    from solitone import protetto as P
+    T_acc, _fine = CORSE[nome]
+    sol, vuoto, s = V.CORSE[NOME]
+    K = int(round(T_acc / s))
+    rr = [V.LP.leggi(os.path.join(dir_json(nome), n)) for n in nomi(nome)]
+    stati = [x for r in rr for x in (r.get("stati") or [])]
+    dopo = {}
+    for r in rr:
+        dopo.update(r.get("dopo_stato") or {})
+    out = []
+    with V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
+        w0 = rec["larghezza"]
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            DC.forma(z, w0)
+        salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+        V.partenza(sol, z, phi0, pK, s)
+        P.e_K(z)
+        DV.autovettori(DV.matrice(z, phi0, DV.AMP))
+        for k, v in salvato.items():
+            z["st"][k][...] = v
+        for x in stati:
+            with np.load(x["file"]) as d:
+                assert int(d["t"]) == x["t"]
+                for k in z["st"]:
+                    if isinstance(z["st"][k], np.ndarray):
+                        z["st"][k][...] = d[k]
+            letto = V.shas(z) == x["sha"]
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                for t in range(x["t"] + 1, x["t"] + DOPO_STATO + 1):
+                    AC.tick(z, t, K)
+            out.append((x["t"], letto, str(x["t"]) in dopo and V.shas(z) == dopo[str(x["t"])]))
+    return out
+
+
+def file_e(nome):
+    """### **I file della corsa su `E:`:** `(mappe, stati, campioni)`, ciascuno ordinato."""
+    import glob
+    return (sorted(glob.glob(os.path.join(RADICE_E, "mappe", nome, "%s_*.npz" % nome))), sorted(glob.glob(os.path.join(RADICE_E, "stati", nome, "%s_stato_*.npz" % nome))),
+            sorted(glob.glob(os.path.join(dir_json(nome), "%s_*.jsonl" % nome))))
+
+
+def indice(nome="TM1000"):
+    """### **L'indice dei file su `E:`** *(Luca `15:49`)*: per ogni file il percorso, la dimensione, lo `sha1`, l'intervallo di tempo."""
+    import _vuoto_vivo_B as V
+    from solitone import mappe as MP
+    s = V.CORSE[NOME][2]
+    mm, ss, cc = file_e(nome)
+    print("L'INDICE DEI FILE SU E: DELLA CORSA %s (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo" % nome)
+    print("### LE MAPPE (rho e Lambda in float32, ogni %d tick)" % MP.OGNI)
+    for f in mm:
+        print("  " + MP.riga_indice(f, s))
+    print("### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)")
+    for f in ss:
+        with np.load(f) as d:
+            t = int(d["t"])
+        print("  %s  %d byte  sha1 %s  tempo %.2f (tick %d)" % (f, os.path.getsize(f), MP.sha1(f), t * s, t))
+    print("### I PEZZI DEI CAMPIONI (jsonl, doppioni al bit di TP1000)")
+    for f in cc:
+        r = V.LP.leggi(f)
+        print("  %s  %d byte  sha1 %s  tempo %.2f .. %.2f" % (f, os.path.getsize(f), MP.sha1(f), r["t0"] * s, r["t1"] * s))
+
+
+def verifica_mappe(nome="TM1000"):
+    """### **Il referto di `TM1000`:** i DEVE del mandato delle mappe e della decisione dopo `3e3277a2`."""
+    import _vuoto_vivo_B as V
+    from solitone import mappe as MP
+    s = V.CORSE[NOME][2]
+    gem = GEMELLE[nome]
+    print("=" * 130)
+    print("LE MAPPE E GLI STATI (Luca 15:49 e dopo 3e3277a2): %s = %s ripetuta con le mappe ogni %d tick e gli stati completi a %s su %s" % (nome, gem, MP.OGNI, STATI[nome], RADICE_E))
+    print("  i campioni di %s stanno su E: (doppioni al bit di %s); nel repo l'indice doc/referti_l2/mappe_indice.txt e questo referto" % (nome, gem))
+    print("=" * 130)
+    rr, camp, _dd, _da = serie(nome)
+    rg, cg, _x, _y = serie(gem)
+    ult = rr[-1] if rr else None
+    fatta = ult is not None and ult["t1"] >= ult["t_fine"]
+    print("### %s: %s; %d pezzi, %d campioni, %.0f s" % (nome, "arriva a %g" % (ult["t1"] * s) if fatta else "### NON FINITA", len(rr), len(camp), sum(r["secondi"] for r in rr)))
+    esito("DEVE PASSARE: %s arriva alla fine" % nome, fatta, "")
+    disco = [r.get("disco") for r in rr if r.get("disco")]
+    esito("DEVE PASSARE: K1 prima di cominciare il disco esiste, e' scrivibile, con lo spazio libero almeno %d volte la stima" % MP.VOLTE_SPAZIO, bool(disco) and disco[0]["ok"],
+          disco[0]["nota"] if disco else "nessuna registrazione")
+    M_ = np.array([c["E"]["totale"]["M"] for c in camp])
+    V_ = np.array([c["E"]["totale"]["V"] for c in camp])
+    dM, dV = float(np.max(np.abs(M_ / M_[0] - 1.0))), float(np.max(np.abs(V_ / V_[0] - 1.0)))
+    esito("DEVE PASSARE: A3 %s M e V entro %g" % (nome, V.TOLL_NORMA), dM <= V.TOLL_NORMA and dV <= V.TOLL_NORMA, "dM %.1e dV %.1e" % (dM, dV))
+    esito("DEVE PASSARE: A4 %s il libro col par della corsa (eps %g)" % (nome, V.EPS), all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rr), "")
+    gg = {r["t0"]: r for r in rg}
+    diversi = [r["t0"] for r in rr if r["t0"] not in gg or gg[r["t0"]]["sha_fine"] != r["sha_fine"] or gg[r["t0"]]["t1"] != r["t1"]]
+    chiavi = ("t", "x", "y", "w", "f_liscia", "f_win", "alone")
+    camp_ug = len(cg) == len(camp) and all(a[k] == b[k] for a, b in zip(camp, cg) for k in chiavi) and all(a["per"] == b["per"] for a, b in zip(camp, cg))
+    esito("DEVE PASSARE: MP1 con il salvataggio acceso gli sha_fine dei pezzi sono quelli di %s (AL BIT, ogni chiave), e i campioni sono gli stessi AL BIT" % gem,
+          not diversi and len(rr) == len(rg) and camp_ug, "pezzi %d e %d; diversi %s; i campioni %s" % (len(rr), len(rg), diversi or "nessuno", "uguali" if camp_ug else "### DIVERSI"))
+    per_t = {c["t"]: c for c in camp}
+    mm, ss, _cc = file_e(nome)
+    eM, eV, n_ist, mancano = 0.0, 0.0, 0, 0
+    for f in mm:
+        d = MP.leggi(f)
+        for i, t in enumerate(d["t"]):
+            c = per_t.get(int(t))
+            if c is None:
+                mancano += 1
+                continue
+            eM = max(eM, abs(float(d["rho"][i].astype(np.float64).sum()) / c["E"]["totale"]["M"] - 1.0))
+            eV = max(eV, abs(float(d["Lambda"][i].astype(np.float64).sum()) / c["E"]["totale"]["V"] - 1.0))
+            n_ist += 1
+    esito("DEVE PASSARE: K2 ogni istantanea riletta: sum rho = M e sum Lambda = V del campione allo stesso t, entro 1e-6 relativo (float32)",
+          n_ist > 0 and mancano == 0 and eM <= 1e-6 and eV <= 1e-6, "%d istantanee in %d file; il peggiore M %.2e, V %.2e; senza campione %d" % (n_ist, len(mm), eM, eV, mancano))
+    rip = ripartenza(nome)
+    esito("DEVE PASSARE: ST1 ogni stato salvato si rilegge AL BIT (gli sha registrati), e ripartendo per %d tick ridà AL BIT lo stato della corsa" % DOPO_STATO,
+          len(rip) == len(STATI[nome]) and all(a and b for _t, a, b in rip), "; ".join("tick %d: letto %s, dopo %s" % (t, "al bit" if a else "### NO", "al bit" if b else "### NO") for t, a, b in rip))
+    print("  i file: %d mappe (%d byte), %d stati (%d byte); l'indice: python csv/solitone/corsa_accensione.py --indice > doc/referti_l2/mappe_indice.txt"
+          % (len(mm), sum(os.path.getsize(f) for f in mm), len(ss), sum(os.path.getsize(f) for f in ss)))
+    print("=" * 130)
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+
+
 def main(argv):
     import _presidio
-    for m in ("__init__", "misure", "protetto", "accensione", "toro"):
+    for m in ("__init__", "misure", "protetto", "accensione", "toro", "mappe"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
     if "--corsa" in argv:
         sys.exit(corsa(argv[argv.index("--corsa") + 1]))
     elif "--referto" in argv:
         referto()
+    elif "--mappe" in argv:
+        verifica_mappe()
+    elif "--indice" in argv:
+        indice()
     else:
         print(__doc__)
 

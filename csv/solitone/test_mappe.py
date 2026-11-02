@@ -25,7 +25,7 @@ def gira(esito):
         ok, libero, nota = MP.controlla_disco(MP.RADICE, st)
         esito("DEVE PASSARE: K1 il disco %s esiste, e' scrivibile, e ha almeno %d volte la stima (%d istantanee, %d byte)" % (MP.RADICE, MP.VOLTE_SPAZIO, QUANTE, st), ok, nota)
         ok_f, _l, nota_f = MP.controlla_disco(MP.RADICE, libero // MP.VOLTE_SPAZIO + 1)
-        esito("DEVE FALLIRE: K1-F il disco basta per una stima di %d volte meno lo spazio libero piu' 1 byte" % MP.VOLTE_SPAZIO, ok_f, nota_f)
+        esito("DEVE FALLIRE: K1-F il disco basta per una stima di %d volte meno lo spazio libero piu' 1 byte" % MP.VOLTE_SPAZIO, not ok_f, nota_f)
         prima = V.shas(z)
         ist = MP.istantanea(z, 0, 0.0, (0.0, 0.0))
         dopo = V.shas(z)
@@ -42,7 +42,7 @@ def gira(esito):
     r2 = d["rho"][1].astype(np.float64)
     r2[int(np.argmax(r2))] *= 2.0
     eF = abs(float(r2.sum()) / M - 1.0)
-    esito("DEVE FALLIRE: K2-F con il nodo piu' denso raddoppiato, sum rho = M entro %g" % TOLL, eF <= TOLL, "errore %.2e" % eF)
+    esito("DEVE FALLIRE: K2-F con il nodo piu' denso raddoppiato, sum rho = M entro %g" % TOLL, not eF <= TOLL, "errore %.2e" % eF)
     with open(f, "rb") as fh:
         b = fh.read()
     riga = MP.riga_indice(f, s)
