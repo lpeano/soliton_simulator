@@ -330,3 +330,60 @@
   - **La differenza viene dalla fase, non dalla rampa.**
 - **Aperta, a Luca:** la vita dalla media del cuore a blocchi, o dall'alone? Criterio di chiusura: la sua scelta, e la misura dai `jsonl` gia' committati.
 - **La MAPPA:** voci `1` e `27`, una riga ciascuna.
+
+## 10. LA DECISIONE DI LUCA SULLA VITA *(2026-11-02, dopo `bfee5330`)*
+
+### Le decisioni *(di Luca, nella sostanza)*
+
+1. **La vita dal cuore a blocchi:** il cuore liscio mediato su blocchi di `1000`; la meta' rispetto alla media del **primo blocco dopo `T_acc`** *(per il vivo, il primo blocco dopo `0`)*. Misurata se la si raggiunge, altrimenti estrapolata dalla pendenza delle medie a blocchi, dichiarata. Una riga nella MAPPA accanto alla decisione `9`.
+2. **La corsa lunga:** `TA1000` continuata dal suo ultimo pezzo fino a `16000`, stesse misure, un solo processo. Se la meta' a blocchi arriva prima, si scrive il tempo e si prosegue fino a `16000`.
+3. **L'alone accanto:** il tempo a cui l'alone arriverebbe al `10%` della materia con la pendenza misurata *(estrapolato, dichiarato)*, per `TA1000`, `TA2000` e il vivo. Il referto dice che sono **due processi** *(l'allargamento dentro `B` e l'emissione fuori)* e da' i due tempi.
+4. **La barra d'errore:** la dispersione delle pendenze dell'alone fra `TA1000`, `TA2000` e il vivo **sulla stessa finestra**, dichiarata come stima.
+5. **(a2) nella MAPPA**, voci `1` e `27`.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- **L'alone** e' `1 - f_3w0` *(`_vuoto_vivo_B.misura`)*: **e' gia' una frazione della materia.** Il `10%` e' `alone = 0.1`.
+- ### ⚠ **La corsa si FERMA da sola** *(`corsa_accensione.corsa`)*: al primo campione col cuore istantaneo sotto `META` del cuore **alla partenza** *(`0.59164`, quindi `0.296`)*, scrive `t_dis` e interrompe; e `--corsa` dice «finita» quando un pezzo ha `t_dis`. **Con la corsa lunga questo criterio puo' scattare prima di `16000`** *(il cuore istantaneo e' sceso a `0.39` a `T_acc`)*, **contro il punto `2`.** Era nato per `A6` *(«non si scioglie durante la rampa»)*. **La modifica, che dichiaro:** la corsa si interrompe **solo nella rampa**; dopo, registra il PRIMO tempo sotto la soglia e prosegue. **Sui pezzi gia' fatti non cambia niente** *(`t_dis` e' `None` in tutti e `9`)*.
+- **`_respiro_congelato.blocchi`** stampa i blocchi fino al suo `TAU_FINE`, e l'ultimo blocco prende **tutto il resto**: per `TA1000` a `16000` la tabella sarebbe sbagliata. **Scrivo una tabella a blocchi nella corsa**, con lo stesso formato e la fine come argomento.
+- **I blocchi completi:** un blocco `[a, a + 1000)` conta se c'e' un campione entro un passo di campionamento dalla sua fine *(il passo misurato dai campioni, `1.5`)*. **Non e' un numero scelto:** e' il passo. Cosi' l'ultimo blocco di `TA1000` a `6000` *(un campione, le pendenze `nan`)* non entra nella vita.
+- **Il tempo «misurato» della meta' a blocchi:** **il centro del primo blocco** con la media sotto meta'. **E' una scelta di lettura, la dichiaro:** la risoluzione e' il blocco *(`1000`)*.
+- **L'estrapolazione:** la retta delle medie a blocchi contro i centri, **su tutti i blocchi completi dopo `T_acc`**, e il tempo a cui la retta arriva a meta'. Solo se la pendenza e' negativa, e con almeno `3` blocchi.
+- **La pendenza dell'alone per il punto `3`:** la retta su **tutto il tratto dopo `T_acc`** di ciascuna corsa *(il vivo: da `0` alla fine, `9999`)*; il tempo e' quello a cui **la retta** arriva a `0.1`.
+- **La finestra comune del punto `4`:** **`2000 .. 7000`**, l'unica che sta **dopo le due rampe** e dentro tutte e tre le corse. **Il limite, dichiarato:** la barra e' la dispersione delle tre pendenze stesse, quindi **dire che le tre stanno nella barra e' quasi vero per costruzione**; dice quanto e' larga la dispersione, non e' un errore indipendente. **Tre numeri danno una stima grezza** *(la deviazione standard con `n - 1`)*.
+- **Il confronto di prima** *(`TA1000` `1000 .. 6000`, `TA2000` `2000 .. 7000`)* resta nel referto **sulle stesse finestre di `bfee5330`**, cosi' i numeri gia' committati si rifanno.
+- **Cosa NON so:** se il cuore a blocchi scende sotto meta' prima di `16000` *(a `6000` la media a blocchi e' `~0.50` contro `0.44` del primo blocco dopo `T_acc`: **sale, non scende**)*; se la corsa lunga regge.
+
+### La progettazione
+
+1. Questo paragrafo, **da solo**.
+2. **`accensione.py`:** `medie_a_blocchi`, `vita_a_blocchi`, `tempo_alone`. **`test_accensione.py`:**
+   - `A7` *(un cuore lineare: la vita estrapolata esatta)*;
+   - `A7-M` *(un cuore che scende sotto meta' in un blocco: misurata al suo centro)*;
+   - `A7-F` *(DEVE FALLIRE: un cuore che sale da' una vita)*;
+   - `A8` *(un alone lineare: il tempo al `10%` esatto)*;
+   - `A8-F` *(DEVE FALLIRE: un alone che cala da' un tempo)*.
+
+   **`corsa_accensione.py`:**
+   - `TA1000` fino a `16000`;
+   - l'arresto solo nella rampa;
+   - la tabella a blocchi;
+   - nel referto: la vita a blocchi per le tre corse, l'alone al `10%`, la barra sulla finestra comune, i due processi.
+
+   L'inventario. **Commit.** Poi `D6`, commit a se'.
+3. **Le corse:** la cassetta, poi `--corsa TA1000` un pezzo alla volta fino a «finita» *(`~7` pezzi, `~70` minuti)*.
+4. **Il referto, la relazione, la MAPPA** *(voci `1`, `27`, la riga accanto alla decisione `9`)*, **l'esito qui.**
+
+### Che cosa mi farebbe FERMARE
+
+- un test nuovo che non passa, o un `DEVE FALLIRE` che passa;
+- la ripresa di `TA1000` non al bit *(l'assert della corsa)*;
+- `A3` o `A4` che falliscono sulla corsa lunga;
+- i numeri del confronto di `bfee5330` non rifatti.
+
+### Le letture *(fissate qui, prima dei numeri)*
+
+- **(v1)** il cuore a blocchi non scende sotto meta' prima di `16000`, e la pendenza delle medie e' **piccola o positiva**: **la vita del cuore e' molto piu' lunga della corsa**, o non c'e'.
+- **(v2)** scende sotto meta' prima di `16000`: si scrive il tempo.
+- **(v3)** l'alone al `10%` arriva in un tempo dell'ordine di `~4 x 10^4` *(la pendenza `~2.5e-3` per `1000`)*: **l'emissione e' il processo piu' rapido**.
+- **(v4)** le tre pendenze dell'alone sulla finestra comune stanno entro `~10%` l'una dall'altra: **(a2) regge con la barra**.
