@@ -22783,3 +22783,9 @@ Luca le ha prese *(01:13, l'errore del guardiano `n.89`)*: **il Newton congiunto
   - **(m4):** nessun picco «nessuna».
 
 **L'ipotesi di Luca** *(ogni frequenza e' un modo diverso)*: **la carta la sostiene per la coppia veloce** *(un modo di spostamento, separato dal respiro lento del cuore)*. **Per i lenti non decide:** la deriva li confonde. **`H` non e' misurato qui.**
+
+## 2026-11-02 — LA MAPPA, VOCE `33`: IL PUNTO (d), I MODI DEL SOLITONE COME CANALI DI FORZA *(Luca `09:23`; solo scrittura, nessuna corsa)*
+
+- **Scritto nella voce `33`, come dettato:** l'ipotesi *(il respiro, lo spostamento, la deformazione parlano col vuoto in modi diversi; il parallelo scalare, dipolo, quadrupolo)*, la prova nella coppia di (a) *(un modo alla volta nel primo, che cosa sente il secondo e quale modo si accende)*, i limiti *(un modo non e' una forza; il «tre» puo' non voler dire niente)*, i legami.
+- **Arrivata durante la carta del respiro:** l'ho messa in coda e scritta **dopo** il referto della carta *(`fcda3281`)*, come diceva il mandato.
+- **Un legame coi numeri di oggi** *(una lettura, non un criterio)*: la carta del respiro trova **una coppia veloce che e' uno spostamento del baricentro** *(e un respiro di `w`)*, con `mu - Omega` dentro una banda del vuoto. **E' il candidato piu' diretto per il canale «di dipolo» del punto (d)**: un modo che irradia nel vuoto. Se l'altro solitone lo senta, lo dice solo la coppia.
