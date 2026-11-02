@@ -600,3 +600,13 @@
 
 1. **`csv/solitone/carta_deriva.py`** *(nuovo, mentre `TP1000` gira; non nel percorso della corsa)*: le tre tabelle, per `TP1000`, il vivo, `TA2000`. Una prova sui pezzi gia' committati di `TA1000` *(il centro euclideo, fino a `9000`)*.
 2. **Dopo `TP1000`:** il referto `deriva_solitone.txt`, insieme a quello della corsa.
+
+### 12-bis. LA DECISIONE DI LUCA SULLA PROPOSTA DI `3e3277a2`: `TM1000` SALVA ANCHE GLI STATI
+
+- **`TM1000` salva lo stato COMPLETO** *(ogni chiave di `z["st"]`: cio' che serve a ripartire al bit, come la ripresa dei pezzi)* **a `t` `2000`, `6000`, `10000`**, in `E:\soliton_simulator\stati\TM1000\`, con la riga nell'indice del repo *(il percorso, la dimensione, lo `sha1`)*.
+- **Il controllo** *(un DEVE)*: ripartendo da ciascuno stato per `100` tick si ritrova **al bit** lo stato della corsa.
+- **Come, dal codice** *(dichiarato prima)*:
+  - durante `TM1000` registro gli `sha` di ogni chiave *(`_vuoto_vivo_B.shas`)* anche al tick `t + 100`;
+  - il controllo carica lo stato salvato in una scena nuova, fa `100` tick col tick della corsa *(`accensione.tick`, dopo la rampa e' il tick intero)* e confronta gli `sha`.
+  - **I tempi sono in unita' di tempo:** il tick e' `round(t / s)`, con `s = 0.15`. `2000 / 0.15 = 13333.3`: il tick `13333`. **Lo dichiaro: il tick piu' vicino.**
+- **La stima:** lo stato intero e' `~2.3` MB *(come `db/accensione_lenta/TA1000.npz`)*, quindi tre stati sono `~7` MB.
