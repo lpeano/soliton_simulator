@@ -80,10 +80,10 @@ def vecchi():
 
 def main():
     import _presidio
-    for m in ("__init__", "uscite", "protetto", "misure", "vuoto", "respiro", "test_uscite", "test_protetto", "test_misure", "test_vuoto", "test_respiro"):
+    for m in ("__init__", "uscite", "protetto", "misure", "vuoto", "respiro", "accensione", "test_uscite", "test_protetto", "test_misure", "test_vuoto", "test_respiro", "test_accensione"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)          # ### per ultimo: SOLITON_DRIVER resta quello del collaudo
-    from solitone import test_misure, test_protetto, test_respiro, test_uscite, test_vuoto
+    from solitone import test_accensione, test_misure, test_protetto, test_respiro, test_uscite, test_vuoto
     print("=" * 150)
     print("LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati")
     print("  LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'")
@@ -104,6 +104,9 @@ def main():
     s0 = time.time()
     test_respiro.gira(esito)
     tempi["respiro"] = time.time() - s0
+    s0 = time.time()
+    test_accensione.gira(esito)
+    tempi["accensione"] = time.time() - s0
     vecchi()
     print("-" * 150)
     print("  i tempi: %s" % "; ".join("%s %.0f s" % kv for kv in tempi.items()))
