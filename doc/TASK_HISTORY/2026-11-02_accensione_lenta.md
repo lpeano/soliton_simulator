@@ -816,3 +816,9 @@
 - **Le premesse, annotate** *(non riscritte)*: «`3 w0 ~23`» era **`19.94`**; la conclusione «al giro `1` il disco libero e' VUOTO» **e' confermata** *(`0` nodi su `1444`)*.
 - **Nessun motivo per fermarsi:** `A9`-`A9-C` nel verso atteso; la carta cambia solo le righe toccate *(`6/6`)*; la cassetta `80/80`.
 - **La domanda delle `18:12` resta aperta**, come ha deciso Luca. **Poi `TM1000`.**
+
+### 13-septies. L'ESITO DI `TM1000` *(il referto `doc/referti_l2/mappe_TM1000.txt`; la relazione per i numeri)*
+
+- **`7/7`**, e ogni pezzo al bit con `TP1000`: **nessuno dei motivi di fermarsi della sez. `12`** *(uno `sha_fine` diverso)* **si e' presentato.**
+- **Le premesse della sez. `12`, annotate** *(non riscritte)*: le mappe stimate `~56` MB prima della compressione, misurate `49619444` byte compresse; gli stati stimati `~7` MB, misurati `6776082` byte. **La sez. `12` non stimava il tempo:** `5848` s per `11` pezzi.
+- **La coda prosegue:** la freccia di `F0`, poi `TL120`.

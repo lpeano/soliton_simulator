@@ -1,0 +1,26 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3dcce199  committato e pulito
+==================================================================================================================================
+LE MAPPE E GLI STATI (Luca 15:49 e dopo 3e3277a2): TM1000 = TP1000 ripetuta con le mappe ogni 100 tick e gli stati completi a (2000.0, 6000.0, 10000.0) su E:\soliton_simulator
+  i campioni di TM1000 stanno su E: (doppioni al bit di TP1000); nel repo l'indice doc/referti_l2/mappe_indice.txt e questo referto
+==================================================================================================================================
+### TM1000: arriva a 16000; 11 pezzi, 10667 campioni, 5848 s
+  DEVE PASSARE: TM1000 arriva alla fine                                                                          PASSA   
+  DEVE PASSARE: K1 prima di cominciare il disco esiste, e' scrivibile, con lo spazio libero almeno 10 volte la s PASSA   libero 228638064640 byte, richiesti 797054560 (10 x la stima)
+  DEVE PASSARE: A3 TM1000 M e V (accensione.a3, Luca dopo fabce56d)                                              PASSA   M lunga (106660 tick): la pendenza +3.876e-12 per 1000 (il tetto 1e-11), il residuo 9.28e-15 (la tolleranza 1e-10); V lunga (106660 tick): la pendenza +2.608e-12 per 1000 (il tetto 1e-11), il residuo 2.53e-12 (la tolleranza 1e-10)
+  DEVE PASSARE: A4 TM1000 il libro col par della corsa (eps 0.5)                                                 PASSA   
+  DEVE PASSARE: MP1 con il salvataggio acceso gli sha_fine dei pezzi sono quelli di TP1000 (AL BIT, ogni chiave) PASSA   pezzi 11 e 11; diversi nessuno; i campioni uguali
+  DEVE PASSARE: K2 ogni istantanea riletta: sum rho = M e sum Lambda = V del campione allo stesso t, entro 1e-6  PASSA   1067 istantanee in 11 file; il peggiore M 3.83e-09, V 1.16e-09; senza campione 0
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+  DEVE PASSARE: ST1 ogni stato salvato si rilegge AL BIT (gli sha registrati), e ripartendo per 100 tick ridà AL PASSA   tick 13333: letto al bit, dopo al bit; tick 40000: letto al bit, dopo al bit; tick 66667: letto al bit, dopo al bit
+  i file: 11 mappe (49619444 byte), 3 stati (6776082 byte); l'indice: python csv/solitone/corsa_accensione.py --indice > doc/referti_l2/mappe_indice.txt
+==================================================================================================================================
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []

@@ -1,0 +1,36 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3dcce199  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA TM1000 (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\mappe\TM1000\TM1000_000000.npz  4427869 byte  sha1 da9fff89399d6547fc9f52da8a9250e0171bd54d  tempo 0.00 .. 1500.00  101 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_010000.npz  4703473 byte  sha1 cceebbe2e26191b04ad6f6e43b7aa9aa2bf1ff01  tempo 1515.00 .. 3000.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_020000.npz  4685502 byte  sha1 012eb7fab602981e91c59572c1926a3571784e74  tempo 3015.00 .. 4500.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_030000.npz  4673762 byte  sha1 f10647ad5d8dc6d5c3330474aa57c093d793a7c0  tempo 4515.00 .. 6000.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_040000.npz  4649097 byte  sha1 329833a0894d8fa4f726f982c2871f34306b2a66  tempo 6015.00 .. 7500.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_050000.npz  4646234 byte  sha1 45f2be1ae006987fe0d1843089750b42758280e3  tempo 7515.00 .. 9000.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_060000.npz  4657557 byte  sha1 f2e74b4829368b60d169f96474261eb796d29033  tempo 9015.00 .. 10500.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_070000.npz  4675300 byte  sha1 cb2ca1afb9ad50fab7666072140333c2c95316a0  tempo 10515.00 .. 12000.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_080000.npz  4689018 byte  sha1 49946f460c291b0fd7973ab4addefaadc7ef9e08  tempo 12015.00 .. 13500.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_090000.npz  4702060 byte  sha1 39218126e9a11c7cbe048964291599f6ad19636d  tempo 13515.00 .. 15000.00  100 istantanee
+  E:\soliton_simulator\mappe\TM1000\TM1000_100000.npz  3109572 byte  sha1 0ab35978bbca7903374c97d1f8d146070048bb51  tempo 15015.00 .. 15990.00  66 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\stati\TM1000\TM1000_stato_013333.npz  2258694 byte  sha1 b01263490c3e042f1c69583b26b63aa9c773ef0d  tempo 1999.95 (tick 13333)
+  E:\soliton_simulator\stati\TM1000\TM1000_stato_040000.npz  2258694 byte  sha1 ddcbc22708f0cbd59a268995ff5d2b92feda2dd4  tempo 6000.00 (tick 40000)
+  E:\soliton_simulator\stati\TM1000\TM1000_stato_066667.npz  2258694 byte  sha1 211c9085492abf41e8debfe2c6275e7a0d4a19fe  tempo 10000.05 (tick 66667)
+### I PEZZI DEI CAMPIONI (jsonl interi, doppioni al bit di TP1000)
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_000000.jsonl  1563313 byte  sha1 9334e8bfc153872c1773cf7938562d719b8c69cb  tempo 0.00 .. 1500.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_010000.jsonl  1599544 byte  sha1 a4d35ceb0c5dc765cb5b3df3d095c377251d7e3f  tempo 1500.00 .. 3000.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_020000.jsonl  1592823 byte  sha1 732615cac1badce87b47ee578a7e90b73b406eac  tempo 3000.00 .. 4500.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_030000.jsonl  1593042 byte  sha1 a40c1ba2ec9d67b84eabefce331095735c8393ba  tempo 4500.00 .. 6000.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_040000.jsonl  1592455 byte  sha1 016adc4383fc7996d9618d469d0fe7f3cb73ec3f  tempo 6000.00 .. 7500.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_050000.jsonl  1590472 byte  sha1 b2e10ac42b9de13c0d4c205afcf6ed1c8a3af394  tempo 7500.00 .. 9000.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_060000.jsonl  1590343 byte  sha1 395034db9c8d7aab26161feecd4be56dbb377a5a  tempo 9000.00 .. 10500.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_070000.jsonl  1590807 byte  sha1 a1ebca8afb8cfd76f6fe01b515f360cc8cba5d27  tempo 10500.00 .. 12000.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_080000.jsonl  1587161 byte  sha1 728837591292ea58bedd7768749449fbdfd37a55  tempo 12000.00 .. 13500.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_090000.jsonl  1581319 byte  sha1 dd172f0b8d43ee31d452cc1d1862799c2d433033  tempo 13500.00 .. 15000.00
+  E:\soliton_simulator\mappe\TM1000\campioni\TM1000_100000.jsonl  1054157 byte  sha1 934857692c0ddd98abd8165d5c5ae94cb5626e2d  tempo 15000.00 .. 16000.05

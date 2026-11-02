@@ -23145,3 +23145,14 @@ Il referto stampa per `TA1000`:
 **Due fatti dal codice, per quando tocchera'** *(non ora)*:
 - **le scene a `L 120` esistono** *(`db/congelato_lungo/L120_fondo.npz`, `L120_uniforme.npz`)*. **Il loro contenuto non l'ho ancora letto:** la prima cosa del suo task history sara' leggere che cosa contengono, e se il costruttore di BG-F-0.15 accetta `L` come argomento;
 - **la corsa `TL120` puo' essere una voce di `CORSE` in `corsa_accensione.py`, ma non con le stesse funzioni a mano:** la partenza e la scena oggi vengono da `_vuoto_vivo_B.scena` con `V.L = CB.L` fisso *(`81`)*. **Va letto prima di scrivere.**
+
+## 2026-11-02 — `TM1000`, LE MAPPE: FINITA, `7/7` *(il referto `doc/referti_l2/mappe_TM1000.txt`, l'indice `doc/referti_l2/mappe_indice.txt`)*
+
+- **La corsa:** `11` pezzi, `10667` campioni, `5848` s *(`~545` s a pezzo da `15000` tick)*; ### **ogni `sha_fine` e' quello di `TP1000`, AL BIT** *(`MP1`)*: le mappe sono di `TP1000`, non di una corsa nuova.
+- **`A3`** *(il criterio delle corse lunghe, `106660` tick)*: `M` la pendenza `+3.876e-12` per `1000`, il residuo `9.28e-15`; `V` `+2.608e-12`, il residuo `2.53e-12`. **Passa.**
+- **`K2`:** `1067` istantanee in `11` file; `sum rho = M` e `sum Lambda = V` entro `1e-6`, il peggiore `M` `3.83e-09`, `V` `1.16e-09`.
+- **`ST1`:** gli stati a tick `13333`, `40000`, `66667` si rileggono al bit e ripartono al bit per `100` tick.
+- **I file su `E:`:** `11` mappe *(`49619444` byte)*, `3` stati *(`6776082` byte)*, `11` pezzi dei campioni; gli `sha1` nell'indice.
+- ### **Una riga del progresso che sembrava un disastro, e non lo e':** il pezzo `80000 -> 90000` stampa il cuore `0.00108`, `w` `36.7`, l'alone `0.99`; il pezzo dopo `0.330`. **E' la trappola gia' vista in `DG1000`:** la riga del progresso usa il centro EUCLIDEO, che si rompe al taglio delle coordinate; e il pezzo e' al bit con `TP1000`, quindi **la fisica e' quella gia' sigillata**.
+- **Un avviso nel referto:** il `RuntimeWarning` di `E_leg` *(`_scomposizione_solitone.py`, la divisione per `Lambda = 0`)* durante `ST1` **e' noto** *(`doc/referti_l2/nan_e_leg.txt`, e in altri `14` referti)*; `ST1` confronta gli `sha`, e non ne dipende.
+- **Dopo:** la freccia di `F0` *(la parte `1` delle `19:21`, sulla carta)*, poi `TL120`.
