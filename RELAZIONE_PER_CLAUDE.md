@@ -23028,3 +23028,15 @@ Il referto stampa per `TA1000`:
   - perche' prima della coppia;
   - che cosa si fa se non riesce.
 - **Un fatto dal codice per quando tocchera'** *(non ora)*: `E_cen` e `alone_3w` *(Luca `18:12`, `18:18`)* ci sono **solo nei campioni di `DG1000`**. Le mappe di `TM1000` danno `rho` e `Lambda` per nodo ogni `100` tick: **sono il dato per `Lambda` «nel riferimento del solitone».**
+
+## 2026-11-02 — LA CORREZIONE AL MANDATO «CHI SCEGLIE LA DIREZIONE» *(Luca `18:44`; l'errore del guardiano `n.96`)*: IN CODA, AL POSTO `3`
+
+- **La versione che vale e' questa** *(`[[PRECEDENZA-IN-CODA]]`: fra piu' versioni di un mandato vale l'ultima)*. L'ordine delle prove: **`D0'`** *(la rotazione di `180` gradi, la prima)*, **`D1`** *(la rotazione di `60`, prima della sola partenza e poi anche del vuoto)*, **`D2`** *(lo specchio lungo l'asse a `60` gradi, che lascia `F0` invariato)*, **`D3`**, **`D4`**, **`D5`**. Le letture (s7) e (s8) si aggiungono a (s1)-(s6).
+- **Le premesse del guardiano** *(da confermare)*:
+  - `F0` ha una freccia per nodo a `60` gradi, e ruotato di `180` diventa `-F0`;
+  - la moneta e' un'elicita';
+  - la materia sente il vuoto solo attraverso `Lambda`.
+  
+  **Le confermero' dal codice nel task history di `(3)`, quando tocca** *(`_vuoto_sul_fondo.fondo_uniforme`, `motore._moneta_spin`)*, **prima di ogni riga di codice.**
+- **Un fatto da tenere per `D0'`:** la previsione scritta prima e' che il solitone vada lungo `+A1`. In `TP1000` lo spostamento totale e' `68.45` nodi a `-173.1` gradi *(`+6.9` da `-A1`)*, quindi la previsione si confronta con `+6.9` ruotato, cioe' `+6.9` da `+A1`.
+- **La coda non cambia di posto:** `(1)` i due giri *(gira)*, `(2)` `TM1000`, **`(3)` la direzione, corretta**, `(4)` `cs`, poi la voce `38`, la coppia, il triangolo.
