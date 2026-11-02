@@ -731,3 +731,19 @@
 - `A3`, `A4`;
 - il disco;
 - la rada diversa dall'intera.
+
+### 13-bis. L'AGGIUNTA DI LUCA *(18:12)*: RIPRENDE ENERGIA AL PUNTO DI PARTENZA?
+
+- **L'ipotesi di Luca:** ripassando dal punto di partenza, dove all'inizio ha lasciato energia nel vuoto *(`Lambda` sotto il solitone fino a `~6.4`, lo squillo della rampa)*, il solitone potrebbe riprenderne una parte.
+- **La misura:**
+  - il libro dei conti *(col `par`)* **nel disco attorno al centro periodico** *(vicino)* e fuori *(lontano)*, a ogni campione, da `1000` prima a `1000` dopo ogni passaggio. **Il passaggio:** il centro a meno di `3 w` dalla posizione iniziale, a ogni giro;
+  - il confronto con la stessa finestra **a meta' giro**;
+  - dalle mappe su `E:`, `Lambda` e `rho` attorno al punto di partenza poco prima di ogni passaggio, contro `Lambda` lontano.
+- **Le premesse dal codice:**
+  - ### ⚠ **il «vicino» del libro di oggi e' un disco FISSO attorno all'origine** *(`mas["vicino"] = z["rr"] <= R_VICINO w_in`, `rr` dalla partenza)*, **non attorno al centro.**
+  - **Aggiungo, solo per `DG1000`, un libro per regione attorno al CENTRO PERIODICO:** `"E_cen"`, il vicino `d <= R_VICINO w_in` *(lo stesso raggio, `R_VICINO = 2`, di `_vuoto_vivo_B`)* e il lontano, a ogni campione.
+  - **Solo per `DG1000`:** `TM1000` deve restare al bit con `TP1000`, campioni compresi.
+- **Nel referto** *(`carta_giri.py`)*:
+  - le finestre `[t_p - 1000, t_p + 1000]` attorno a ogni passaggio, e la stessa a meta' giro;
+  - per `M`, `leg`, `vuo` e `tot` del vicino, la variazione nella finestra;
+  - dalle mappe, `Lambda` e `rho` medi entro `3 w` dalla posizione iniziale all'istantanea prima del passaggio, contro la media lontana.
