@@ -204,3 +204,58 @@
 - **Le bande laterali, le uscite miste e la quota non sono state calcolate.** **L'accensione non e' partita:** decide Luca fra (a), (b), (c) della relazione.
 - **La riga finale del referto conta anche il `PUO' FALLIRE`** *(«DEVE fallite: `2`»)*: la DEVE fallita e' una sola. Un difetto del runner, dichiarato.
 - **Le letture (r1)-(r5) non si applicano:** la carta si e' fermata prima delle uscite.
+
+## 8. LA DECISIONE DI LUCA DOPO `04b02794` *(2026-11-02)*: la (a), le tabelle per OGNI picco
+
+### Le decisioni *(di Luca, verbatim nella sostanza)*
+
+1. **La (a): niente `Omega` unico.** Le tabelle per **ogni** picco, in tutte e due le finestre (W1) e (W2): i `5` picchi gia' trovati di ciascuna, **piu' quelli fino a `1/10` dell'ampiezza del primo**.
+   - per ogni picco `Omega_j`: `n (mu + k Omega_j)` *(`k = -3 .. 3`, `n = 1, 2`)* contro le bande del vuoto attorno a `F0`, col margine *(`respiro.margine_mod`)*;
+   - le uscite miste *(un'onda del vuoto piu' un'onda di materia `A`, `B`, `P0`, `Ppi`)* **a `k = 0` SEMPRE** *(non dipendono da `Omega`)*, e con le bande laterali di ogni picco;
+   - per ogni uscita aperta: **l'ampiezza del picco che la apre e la quota**, contro l'alone che cresce di `~2.5e-3` ogni `1000`.
+2. **La lettura del guardiano, da verificare e non da presumere:** il picco veloce di (W1) *(`Omega 6.341`, `6.392`)* da' `mu - Omega = 39.709`, `39.658` *(mod `41.887902`)*, dentro la banda del vuoto `[38.746309, 40.328044]`: un'uscita verso il vuoto aperta dal respiro veloce. In (W2) i picchi lenti *(`Omega` fino a `0.537`)* con `k = 3` spostano `mu` di `~1.6`, oltre il margine `+1.02`: da controllare.
+3. **Il DEVE fallito resta scritto com'e'** *(era un FERMO giusto)*; il conto finale «DEVE fallite: `2`» si corregge in `1` DEVE e `1` PUO' FALLIRE.
+4. **Il modulo, il test e il runner dell'accensione lenta nel repo** prima di girare le corse.
+5. **Poi le corse dell'accensione lenta** come da mandato *(sez. `2` e `6-bis`)*.
+
+### Le premesse dal codice *(cosa credo prima di guardare, e cosa NON so)*
+
+- **`respiro.omega(y, passo, quanti)`** ordina i massimi locali dello spettro di Hann per altezza e ne rifinisce i primi `quanti`. **Con `quanti = None` li rifinisce tutti** *(`loc[:None]`)*, nello stesso ordine: **i primi `5` sono quelli di `04b02794`, per costruzione** *(la stessa serie, lo stesso codice)*. Lo controllo con il diff delle righe dei picchi fra il referto vecchio e il nuovo.
+- **«Fino a `1/10` dell'ampiezza del primo»:** l'ampiezza e' quella **rifinita** *(`a cos + b sin`)*, il primo e' il primo per altezza dello spettro *(`57.44` in (W1), `19.54` in (W2))*. Il numero `1/10` e' di Luca.
+- ⚠ **Un massimo locale accanto a un picco forte** *(un lobo della finestra)* si rifinisce entro `+- 1` canale, quindi puo' tornare **sulla stessa frequenza** del picco forte: un doppione. **Due picchi rifiniti entro `1` canale sono lo stesso picco:** si tiene il piu' ampio. **E' una regola sul canale, non un numero nuovo** *(il canale e' `1/finestra`)*.
+- **Le bande:** la materia da `uscite.spettro_scena`, il vuoto da `test_vuoto` *(come nella carta di `04b02794`)*. Il margine con `respiro.margine_mod`, il minimo sulle `6` bande del vuoto.
+- **Le uscite miste a `k = 0`** non dipendono da `Omega`: si stampano **una volta**. **(L), (C+), (C-)** come scritto nella sez. `6-bis`; `n = 1`, `k = 0`, il gruppo del solitone in (C) e' **per costruzione** *(`E_m = mu`, `nu_v = nu_F0` sul bordo)* e non conta.
+- **La quota:**
+  - un'uscita con un'onda di **materia** *(le miste)*: la pendenza del suo gruppo in `|D|^2` contro quella dell'alone, come scritto nella sez. `6-bis` *(passo `6`)*;
+  - un'uscita del **vuoto da solo** *((L) `n (mu + k Omega)` e (C) `nu_F0 + k Omega`)*: **l'alone e' materia** *(`1 - f_3w0`, `misure.alone`)* e `D` e' materia. ### **La quota di un'uscita del vuoto da solo non si misura dalle serie che ho.** Lo scrivo accanto all'ampiezza del picco, **senza un numero inventato** *(`A1`)*.
+- **Che cosa NON so:** quanti picchi ci sono fino a `1/10`; se la lettura del guardiano regge *(lo dice il conto)*; quale sia il margine `+1.02` del punto `2` *(credo sia il margine di `mu` stesso, a `k = 0`, dalla banda del vuoto piu' vicina: lo stampo e lo confronto)*.
+
+### La progettazione
+
+1. **Questo file, da solo.**
+2. **`csv/solitone/respiro.py`:** `elenco(r, frazione, primi)` — i primi `primi` picchi, piu' quelli con ampiezza `>= frazione` volte il primo, senza doppioni entro `1` canale. **`test_respiro.py`, (R4):** tre seni di ampiezza `1`, `0.15`, `0.05` *(con la tendenza)*: l'elenco a `1/10` con `primi = 1` ritrova i primi due e non il terzo, entro `1e-6` sulla frequenza, senza doppioni. **(R4-F, DEVE FALLIRE):** lo stesso elenco a `1/30` NON contiene il terzo.
+3. **`carta_respiro.py`:**
+   - il conto finale separa DEVE e PUO' FALLIRE;
+   - il DEVE del picco netto resta, scritto com'e', e fallisce; ### **dopo il FERMO, la decisione di Luca (a):** le tabelle per ogni picco delle due finestre *(`quanti = None`, `elenco` a `1/10` coi primi `5`)*;
+   - per ogni picco: (L) `n (mu + k Omega_j)`, (C) `nu_F0 + k Omega_j`, le miste coi `k != 0`; una volta le miste a `k = 0`;
+   - **la lettura del guardiano**, in righe a parte: `mu - Omega_j` mod `P` per i picchi veloci di (W1), la banda e il margine; per (W2), il margine di `mu` a `k = 0` e lo spostamento `3 Omega_j` di ogni picco;
+   - **l'elenco delle uscite aperte**, con la finestra, il periodo e l'ampiezza del picco che la apre, il margine, e la quota.
+   - Lo stesso referto `doc/referti_l2/solitone_vestito_carta_respiro.txt` *(il vecchio resta nella storia, a `04b02794`)*.
+4. **Il cassetto:** `D6` in un commit a se'.
+5. **Il referto, la relazione, l'esito qui.**
+6. **L'accensione nel repo:** `csv/solitone/accensione.py`, `test_accensione.py` *(A1, A2 secondo la (i), A0 che DEVE FALLIRE; nella cassetta)*, `corsa_accensione.py` *(il runner delle corse, TA1000 e TA2000)*; `D6` a se'; poi le corse, **un processo alla volta**, a pezzi; il referto `doc/referti_l2/accensione_lenta.txt`.
+
+### Che cosa mi farebbe FERMARE
+
+- (W1) o (W2) non coincidono coi controlli di prima *(al bit, gli `sha`)*;
+- **i primi `5` picchi di una finestra NON sono quelli di `04b02794`** *(il diff delle righe)*;
+- (R4) fallisce o (R4-F) passa;
+- per l'accensione: A1 o A2 falliscono, o A0 passa *(come gia' scritto nella sez. `6-bis`)*.
+
+### Le letture *(fissate qui, prima dei numeri)*
+
+- **(p1)** la lettura del guardiano regge: `mu - Omega_j` dentro la banda del vuoto per i picchi veloci di (W1). **Un'uscita del vuoto da solo, aperta dal respiro veloce;** la sua quota non e' misurabile da `D`, e lo dico.
+- **(p2)** la lettura non regge *(fuori banda, o dentro per meno del canale in `Omega`)*: lo dico, coi numeri.
+- **(p3)** un'uscita mista aperta **a `k = 0`**: indipendente dal respiro, un'uscita lineare dello stato stesso, che la carta di `4d1c2b65` non guardava.
+- **(p4)** in (W2) un `k = +-3` dentro una banda: il respiro lento sposta `mu` oltre il margine. Se non succede: lo dico.
+- **la quota**, per ogni uscita mista aperta: compatibile / fra le due / incompatibile, come nella sez. `6-bis`.
