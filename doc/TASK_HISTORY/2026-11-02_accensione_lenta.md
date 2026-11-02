@@ -747,3 +747,19 @@
   - le finestre `[t_p - 1000, t_p + 1000]` attorno a ogni passaggio, e la stessa a meta' giro;
   - per `M`, `leg`, `vuo` e `tot` del vicino, la variazione nella finestra;
   - dalle mappe, `Lambda` e `rho` medi entro `3 w` dalla posizione iniziale all'istantanea prima del passaggio, contro la media lontana.
+
+### 13-ter. L'AGGIUNTA DI LUCA *(18:18)*: L'ALONE VERSO UN TETTO?
+
+- **L'osservazione di Luca:** in `TP1000` la crescita dell'alone *(il centro periodico)* rallenta verso `16000`.
+- **La misura:**
+  - la pendenza dell'alone a blocchi di `1000` per tutta la corsa *(`TP1000` piu' `DG1000`)*;
+  - due forme a confronto, coi residui: **la retta** *(emissione costante)* e **`a(t) = a_tetto (1 - e^{-(t - t0)/tau})`** *(emissione meno riassorbimento sul toro chiuso)*. `a_tetto` e `tau` si dichiarano;
+  - per separare le cause:
+    - **(i)** l'alone a raggio `3 w(t)` *(che segue il solitone)*, non `3 w0`;
+    - **(ii)** la pendenza dell'alone contro la velocita';
+    - **(iii)** se c'e' riassorbimento, il flusso di materia verso il solitone dal libro *(vicino e lontano)*.
+- **Le premesse dal codice:**
+  - **(i)** nei campioni c'e' solo l'alone a `3 w0` *(`toro.misure`: `1 - rho[d <= 3 w0]/M`)*. **Aggiungo, solo per `DG1000`, `alone_3w`** *(`1 - rho[d <= 3 w(t)]/M`, con `w` periodico dello stesso campione)*.
+    - **Per `0 .. 16000` i campioni non lo hanno.** Si ricava **dalle mappe di `TM1000`** *(`rho` per nodo e il centro, ogni `100` tick)*, che e' in coda dopo: **lo dichiaro, e il referto di «due giri» lo dira' come mancante fino ad allora.**
+  - **(iii)** il libro attorno al centro *(`E_cen`, la sez. `13-bis`)* da' `M` vicino e lontano a ogni campione. Il «flusso verso il solitone» e' la variazione di `M` vicino, con la conservazione di `M` totale.
+  - **Il fit esponenziale:** minimi quadrati non lineari *(`scipy.optimize.curve_fit`, se c'e'; altrimenti una griglia su `tau`)*, coi parametri iniziali dalla retta. **Non e' un parametro del modello:** e' un'analisi, e dichiaro come la si fa.
