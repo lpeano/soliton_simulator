@@ -58,3 +58,8 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
 - [ ] se `D-T` passa: la corsa `D0'` *(~`2` ore)*, la carta del confronto; se no: FERMO;
 - [ ] `TS`: la carta della condizione su `q`; poi la costruzione o FERMO.
 - [ ] **`TFI`:** Luca decide ora che `TF3C` e' finita *(non e' in questa coda finche' non decide)*.
+
+## 4. ESITO DEL PASSO 1 *(`d0_simmetria_vivo.txt`, `7/7`)*
+
+- **`D-T` passa:** il tick vivo commuta con `R180` x `sigma_z` *(`5.194e-15` dopo la rampa, `7.631e-16` nella rampa; U = 1 `2.929e-01`)*. **Il vuoto ruotato e' `-F0` esattamente.** **`psi` per nodo e `h_int` sono nulli e non scritti:** il loro zero e' un falso-zero *(dichiarato)*. **Nella rampa `lam` e' `5.6e-06`:** il vuoto lo prova il controllo dopo la rampa.
+- **Quindi il passo 2: la corsa `D0'`**, come progettato. **Niente mi ha fatto fermare.**

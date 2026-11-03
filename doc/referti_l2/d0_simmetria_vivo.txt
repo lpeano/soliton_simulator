@@ -1,0 +1,24 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE c9dac798  committato e pulito
+[TIMBRO] carta_impulso.py  sha1-BYTE a855c74a  committato e pulito
+[TIMBRO] carta_d0.py  sha1-BYTE c20369b0  committato e pulito
+==================================================================================================================================
+D0', PRIMA DELLA CORSA: IL TICK VIVO CONTRO R180 x sigma_z (Luca dopo ae60cfb6): BG-F-0.15 (sol BG, s 0.15, eps 0.5); K 6667; N_TICK 10; T_STATO 13333; TOLL_UGUALE 1e-12
+==================================================================================================================================
+  DEVE PASSARE: P0 lo stato di partenza e' quello di TP1000 (mu al bit di quello del primo pezzo)                          PASSA   mu 4.161868161822483
+  DEVE PASSARE: P0-C l'arco k e' del nodo k // 3 (2k sul nodo, 2k+1 sul vicino lungo un asse fisso per k % 3)              PASSA   gli assi [(1, 0), (0, 1), (1, 1)]
+  le chiavi dello stato {'psi': (6561, 2), 'psi_h': (39366, 2), 'phi_h': (39366,), 'Lambda': (6561,), 'rho': (6561,), 'h_int': (6561,)}; la rotazione attorno a (40.5, 40.5)
+  DEVE PASSARE: D-R2 la rotazione di tutto lo stato due volte e' l'identita' (al bit, ogni chiave)                         PASSA   
+  DEVE PASSARE: D-V il vuoto ruotato di F0 e' -F0 (entro 1e-12)                                                            PASSA   |R F0 + F0| / |F0| = 0.000e+00
+  lo stato dopo la rampa: E:\soliton_simulator\stati\TM1000\TM1000_stato_013333.npz (t 13333, 13333 > K)
+    nella rampa (t 1 .. 10, lam fino a 0.0000)       U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'psi': '0.000e+00', 'psi_h': '7.631e-16', 'phi_h': '1.196e-20', 'Lambda': '4.336e-17', 'rho': '4.242e-16', 'h_int': '0.000e+00'}; il massimo 7.6313e-16
+    nella rampa (t 1 .. 10, lam fino a 0.0000)       U 1 : |T^10(R x) - R T^10(x)| relativo per chiave {'psi': '0.000e+00', 'psi_h': '2.912e-01', 'phi_h': '1.514e-08', 'Lambda': '5.118e-14', 'rho': '1.011e-02', 'h_int': '0.000e+00'}; il massimo 2.9124e-01
+    dopo la rampa (t 13334 .. 13343, il tick intero) U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'psi': '0.000e+00', 'psi_h': '7.644e-16', 'phi_h': '5.194e-15', 'Lambda': '2.402e-15', 'rho': '4.487e-16', 'h_int': '0.000e+00'}; il massimo 5.1937e-15
+    dopo la rampa (t 13334 .. 13343, il tick intero) U 1 : |T^10(R x) - R T^10(x)| relativo per chiave {'psi': '0.000e+00', 'psi_h': '2.929e-01', 'phi_h': '7.923e-03', 'Lambda': '2.502e-03', 'rho': '1.043e-02', 'h_int': '0.000e+00'}; il massimo 2.9291e-01
+  DEVE PASSARE: D-T il tick VIVO commuta con R180 x sigma_z dopo la rampa (t 13334 .. 13343, il tick intero) (entro 1e-12, PASSA   il massimo 5.194e-15
+  DEVE PASSARE: D-T il tick VIVO commuta con R180 x sigma_z nella rampa (t 1 .. 10, lam fino a 0.0000) (entro 1e-12, ogni  PASSA   il massimo 7.631e-16
+  DEVE FALLIRE: D-T-F lo stesso con U = 1 dopo la rampa (t 13334 .. 13343, il tick intero) commuta (entro 1e-12)           PASSA   il massimo 2.929e-01
+  ### D-P (registrata): 10 tick dalla partenza con psi per nodo AZZERATO contro quello vero: le altre chiavi uguali AL BIT? True; psi per nodo dopo i tick: uguale? True
+==================================================================================================================================
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
