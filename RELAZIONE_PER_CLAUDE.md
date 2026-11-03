@@ -23378,3 +23378,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I tempi dei pezzi di `D0R` fin qui** *(il riferimento del 30% di Luca)*: `635`, `612`, `605`, `688`, `613` s.
 - ### **Da sapere: `C:` a `5.56` GB.** `D0R` scrive i suoi stati su `E:` *(non su `C:`)*, i jsonl nel repo *(`~1.5` MB a pezzo)* e lo stato di ripresa in `db/accensione_lenta/` *(`~2` MB)*: per `D0R` basta. **Per le corse dopo** *(`TL120`: un toro piu' grande, stati e jsonl piu' grossi)* lo spazio su `C:` va guardato prima: **lo dico ora, non lo decido io.**
 - **Dopo `D0R`, nell'ordine registrato:** il referto di `D0R`; la cassetta *(il `D6` di `c8777468`, con `test_campo`)*; **il campo, con le uscite nell'ordine di Luca** *(le mappe leggere committate per prime)*; `TS`; `TL120`.
+
+## 2026-11-03 — IL CAMPO PARTE COMUNQUE *(Luca, «Fallo partire comunque», dopo `ba0027ed`)*: LE MAPPE LEGGERE
+
+- **La decisione di Luca, sopra le protezioni** *(la memoria `7.53` GB, `C:` `5.56` GB)*: il campo parte. **Partito alle `19:05:17` a priorita' bassa** *(`cmd start /low /b /wait`)*, **finito alle `19:05:30`** *(`13` s)*; la memoria libera dopo `7.45` GB. **La cassetta del `D6` `c8777468` non e' girata** *(sarebbe un terzo processo)*: gira a `D0R` finita.
+- **`doc/referti_l2/campo_TM1000/mappe_leggere.npz`: `2470567` byte**, `107` mappe *(una ogni `10` istantanee)*, `rho` e `Lambda - Lambda(t 0)` per nodo in `float16` *(il massimo di `rho` `5064`, sotto `65504`)*, con `t`, `tempo`, il centro, `d1`, `d2`, `L`. **Committato per primo**, come chiede Luca *(per il video)*.
