@@ -1,0 +1,63 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 8008c072  committato e pulito
+[TIMBRO] carta_impulso.py  sha1-BYTE a855c74a  committato e pulito
+[TIMBRO] carta_d0.py  sha1-BYTE c20369b0  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_d0_confronto.py  sha1-BYTE 64178e01  committato e pulito
+==================================================================================================================================
+D0': D0R CONTRO L'IMMAGINE RUOTATA DI TP1000 (Luca dopo ae60cfb6, (a)): BG-F-0.15 (s 0.15); BLOCCO 1000; DECADI 1e-14 .. 1e0
+  la previsione di Luca: l'immagine ruotata di TP1000 (lo spostamento a +6.9 gradi da +A1); carta_d0: il tick vivo commuta (5.2e-15), la previsione e' vera per
+  costruzione fino all'arrotondamento: qui QUANTO in fretta l'arrotondamento separa le due corse
+==================================================================================================================================
+  DEVE PASSARE: Z0 la partenza e il vuoto registrati di D0R sono quelli di corsa_accensione.ruotata ricalcolati (lo sha; m PASSA   m2 (81, 81); 11 pezzi
+  DEVE FALLIRE: Z0-F la partenza di D0R e' quella di TP1000 (NON ruotata)                                                  PASSA   
+  DEVE PASSARE: A3 D0R M e V (accensione.a3)                                                                               PASSA   M lunga (106660 tick): la pendenza +3.876e-12 per 1000 (il tetto 1e-11), il residuo 8.60e-15 (la tolleranza 1e-10); V lunga (106660 tick): la pendenza +2.608e-12 per 1000 (il tetto 1e-11), il residuo 2.53e-12 (la tolleranza 1e-10)
+  DEVE PASSARE: A4 D0R il libro col par della corsa                                                                        PASSA   
+  D0R: 11 pezzi, fino al tick 106667 di 106667 (tempo 16000.05)
+----------------------------------------------------------------------------------------------------------------------------------
+### d(t) = |c_D0R - (m2 - c_TP1000)| sul toro (nodi), il centro periodico; 10667 campioni comuni fino a 15999.0
+  il primo tempo in cui d supera ogni decade:
+    d > 1e-14: tempo 114.00 (d 1.231e-14)
+    d > 1e-13: tempo 577.50 (d 1.025e-13)
+    d > 1e-12: tempo 631.50 (d 1.022e-12)
+    d > 1e-11: tempo 691.50 (d 1.004e-11)
+    d > 1e-10: tempo 744.00 (d 1.108e-10)
+    d > 1e-09: tempo 814.50 (d 1.172e-09)
+    d > 1e-08: tempo 895.50 (d 1.019e-08)
+    d > 1e-07: tempo 928.50 (d 1.300e-07)
+    d > 1e-06: tempo 957.00 (d 1.200e-06)
+    d > 1e-05: tempo 991.50 (d 1.020e-05)
+    d > 1e-04: tempo 1032.00 (d 1.024e-04)
+    d > 1e-03: tempo 1110.00 (d 1.063e-03)
+    d > 1e-02: tempo 1179.00 (d 1.016e-02)
+    d > 1e-01: tempo 1419.00 (d 1.003e-01)
+    d > 1e+00: tempo 2679.00 (d 1.000e+00)
+  ### LUCA dopo eaa5e3ec: il tempo a cui TP1000 e la sua immagine smettono di coincidere (il centro) entro 1e-12: 631.50; 1e-06: 957.00; 1e-02: 1179.00
+  per blocco: il massimo di d, il cuore, w, l'alone delle due corse
+          0 ..    1000  max d 1.287e-05  cuore 0.492332 / 0.492332  w 7.71998 / 7.71998  alone 0.001101 / 0.001101
+       1000 ..    2000  max d 6.920e-01  cuore 0.438657 / 0.442430  w 8.37884 / 8.33268  alone 0.003399 / 0.003430
+       2000 ..    3000  max d 1.435e+00  cuore 0.490359 / 0.497387  w 7.96768 / 7.89176  alone 0.005861 / 0.005865
+       3000 ..    4000  max d 1.808e+00  cuore 0.518884 / 0.524263  w 7.83807 / 7.79809  alone 0.008410 / 0.008464
+       4000 ..    5000  max d 1.805e+00  cuore 0.519930 / 0.521177  w 7.99624 / 7.98689  alone 0.011027 / 0.010993
+       5000 ..    6000  max d 1.832e+00  cuore 0.504858 / 0.497315  w 8.28330 / 8.34961  alone 0.013545 / 0.013572
+       6000 ..    7000  max d 2.859e+00  cuore 0.475545 / 0.472945  w 8.69192 / 8.72022  alone 0.016069 / 0.016115
+       7000 ..    8000  max d 2.608e+00  cuore 0.447684 / 0.443999  w 9.10246 / 9.14029  alone 0.018668 / 0.018680
+       8000 ..    9000  max d 2.768e+00  cuore 0.419108 / 0.420619  w 9.53331 / 9.50670  alone 0.021291 / 0.021165
+       9000 ..   10000  max d 3.010e+00  cuore 0.393311 / 0.405979  w 9.93443 / 9.78874  alone 0.023829 / 0.023659
+      10000 ..   11000  max d 7.625e+00  cuore 0.381096 / 0.384370  w 10.20552 / 10.15314  alone 0.026486 / 0.026289
+      11000 ..   12000  max d 1.848e+01  cuore 0.378755 / 0.386042  w 10.34861 / 10.27125  alone 0.028984 / 0.028914
+      12000 ..   13000  max d 4.892e+01  cuore 0.386229 / 0.396368  w 10.40031 / 10.28909  alone 0.031426 / 0.031612
+      13000 ..   14000  max d 4.247e+01  cuore 0.372101 / 0.376857  w 10.66206 / 10.60047  alone 0.034096 / 0.033982
+      14000 ..   15000  max d 5.911e+01  cuore 0.351927 / 0.355125  w 10.99052 / 10.95256  alone 0.036211 / 0.036238
+      15000 ..   16000  max d 6.281e+01  cuore 0.335352 / 0.339531  w 11.27028 / 11.21967  alone 0.038367 / 0.038134
+----------------------------------------------------------------------------------------------------------------------------------
+### GLI STATI: |st_D0R - R st_TM1000| / |R st_TM1000| per chiave (TM1000 al bit di TP1000)
+    tempo  1999.95 (tick 13333): {'psi': '0.000e+00', 'psi_h': '1.702e-01', 'phi_h': '9.748e-01', 'Lambda': '4.000e-01', 'rho': '1.332e-01', 'h_int': '0.000e+00'}
+    tempo  6000.00 (tick 40000): {'psi': '0.000e+00', 'psi_h': '3.102e-01', 'phi_h': '1.414e+00', 'Lambda': '5.378e-01', 'rho': '2.211e-01', 'h_int': '0.000e+00'}
+    tempo 10000.05 (tick 66667): {'psi': '0.000e+00', 'psi_h': '4.204e-01', 'phi_h': '1.408e+00', 'Lambda': '6.327e-01', 'rho': '3.245e-01', 'h_int': '0.000e+00'}
+----------------------------------------------------------------------------------------------------------------------------------
+  lo spostamento totale di D0R     (fino a 15999.0): 57.331 nodi a -137.43 gradi
+  lo spostamento totale di TP1000  (fino a 15999.0): 68.453 nodi a -173.06 gradi
+==================================================================================================================================
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

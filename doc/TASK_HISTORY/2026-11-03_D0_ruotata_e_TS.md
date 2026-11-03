@@ -68,3 +68,9 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
 
 - **La lettura (f1)**; **`TFI` in lista d'attesa**; **`F3` il vuoto predefinito delle prove nuove**.
 - **La coda:** `D0R` *(il referto coi tempi delle decadi `1e-12`, `1e-6`, `1e-2`)*, poi `TS` *(su `F0` e, se il costo lo permette, su `F3`: dichiararlo)*, poi `TL120` su `F3`, poi il resto.
+
+## 6. ESITO DEL PASSO 2 *(`d0_confronto.txt`, `4/4`)*
+
+- **I tempi:** `1e-12` a `631.5`, `1e-6` a `957`, `1e-2` a `1179`; una decade ogni `~50`-`70` unita' di tempo dalla rampa; gli stati d'ordine `1` gia' a `2000`.
+- **La direzione:** `D0R` `-137.43` gradi contro l'immagine di `TP1000` a `+6.94`: **la previsione di Luca vale fino a `~1000` e poi no.** Le grandezze grandi *(cuore, `w`, alone)* restano vicine.
+- **Niente mi ha fatto fermare.** La lettura e' di Luca.
