@@ -7,7 +7,7 @@
 [TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
-[TIMBRO] campo.py  sha1-BYTE 1dcfc284  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
@@ -17,7 +17,7 @@
 [TIMBRO] test_toro.py  sha1-BYTE 2b3cf382  committato e pulito
 [TIMBRO] test_mappe.py  sha1-BYTE b56209c1  committato e pulito
 [TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 814f8825  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE bc5d9dc5  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -122,19 +122,19 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: K3 la riga dell'indice ha la dimensione e lo sha1 del file (hashlib sui byte letti a parte)                          PASSA   E:\soliton_simulator\mappe\_prova\_prova_000000.npz  21944 byte  sha1 32a86e53007b1f56029c6336ee2be3598a341244  tempo 0.00 .. 0.00  2 istantanee
 ### I PROFILI AD ANELLI (csv/solitone/campo.py): ELLE 3 SOGLIE (0.001, 0.0001, 1e-05) TOLL_ARR 1e-12; la gaussiana di test_toro (SIGMA 6.6)
   DEVE PASSARE: C1 ogni nodo dell'anello k ha k <= r < k + 1 e r < R (R 40.50, 41 anelli); oltre R l'anello -1                       PASSA   5935 nodi negli anelli, 626 oltre
-  DEVE PASSARE: C2 la gaussiana spostata di mezzo lato (tre versi), col centro ricalcolato: lo stesso profilo entro 1e-12            PASSA   il peggiore relativo 1.11e-15
-  DEVE FALLIRE: C2-F la distanza EUCLIDEA (senza l'immagine piu' vicina) sulla gaussiana spostata di (40, 0): lo stesso profilo entr PASSA   il peggiore relativo 3.40e-03
-  DEVE PASSARE: C3 la portata di exp(-r / 3) entro 1 anello da ELLE ln(1/f), per le tre soglie                                       ### FALLISCE   0.001: contiguo 22 ultimo 22, ELLE ln(1/f) 20.723; 0.0001: contiguo 28 ultimo 28, ELLE ln(1/f) 27.631; 1e-05: contiguo 35 ultimo 35, ELLE ln(1/f) 34.539
+  DEVE PASSARE: C2 la gaussiana spostata di mezzo lato (tre versi), col centro ricalcolato: lo stesso profilo entro 1e-12            PASSA   il peggiore relativo 6.66e-16
+  DEVE FALLIRE: C2-F la distanza EUCLIDEA (senza l'immagine piu' vicina) sulla gaussiana spostata di (40, 0): lo stesso profilo entr PASSA   il peggiore relativo 1.60e-02
+  DEVE PASSARE: C3 la portata di exp(-r / 3) entro 1 anello da ELLE ln(1/f), per le tre soglie                                       PASSA   0.001: contiguo 21 ultimo 21, ELLE ln(1/f) 20.723; 0.0001: contiguo 28 ultimo 28, ELLE ln(1/f) 27.631; 1e-05: contiguo 35 ultimo 35, ELLE ln(1/f) 34.539
   DEVE PASSARE: C4 il campo cos(2 (theta - -30)) entro 14: l'asse del quadrupolo -30 gradi entro 1e-09                               PASSA   l'asse -30.000000000000, il relativo 0.7844, 721 nodi
   DEVE PASSARE: C5 il campo r cos(theta - 47) entro 14: l'asse del dipolo 47 gradi entro 1e-09                                       PASSA   l'asse 47.000000000000, il relativo 0.7853
   DEVE FALLIRE: C4-F il campo ISOTROPO exp(-r / 3) ha un quadrupolo col relativo sopra 1e-12                                         PASSA   il relativo 1.17e-17
-### D6: LA LIBRERIA E' QUELLA DI 4c1f5a72 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 4c1f5a72 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### D6: LA LIBRERIA E' QUELLA DI 8c83d050 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 8c83d050 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 16 s; protetto 14 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 3 s; campo 2 s
-ESITO: 90/91 controlli passano; fallite: 1 ['DEVE PASSARE: C3 la portata di exp(-r / 3) entro 1 anello da ELLE ln(1/f), per le tre soglie']
+  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 3 s; campo 2 s
+ESITO: 91/91 controlli passano; fallite: 0 []

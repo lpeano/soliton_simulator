@@ -1,11 +1,11 @@
 [TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
-[TIMBRO] campo.py  sha1-BYTE 21c76f47  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
 [TIMBRO] corsa_accensione.py  sha1-BYTE 8008c072  committato e pulito
-[TIMBRO] carta_campo.py  sha1-BYTE 16fcb336  committato e pulito
+[TIMBRO] carta_campo.py  sha1-BYTE 1339a3c2  committato e pulito
 ==================================================================================================================================
-FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di TM1000 (al bit di TP1000, F0) su E:, solo lettura; SOGLIE_RHO (0.001, 0.0001, 1e-05) SOGLIA_L 0.001 TOLL 1e-06 BLOCCO 500 OGNI_LEGGERA 10 TETTO_MB 10
+FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di TM1000 (al bit di TP1000; il vuoto F0) su E:, solo lettura; SOGLIE_RHO (0.001, 0.0001, 1e-05) SOGLIA_L 0.001 TOLL 1e-06 BLOCCO 500 OGNI_LEGGERA 10 TETTO_MB 10
   le definizioni (campo.py, dichiarate nel task history): gli anelli [k, k+1) fino alla meta' del periodo; la media al centro = l'anello 0; la portata: R_contiguo (il primo
   anello che NON supera la soglia, il bordo interno; nan = mai entro R) e R_ultimo (il bordo esterno dell'ultimo che la supera); Lambda - Lambda(t 0) per nodo
 ==================================================================================================================================
