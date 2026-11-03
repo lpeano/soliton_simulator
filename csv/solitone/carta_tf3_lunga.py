@@ -6,7 +6,7 @@ r"""**`TF3` CONTINUATA FINO A `30000`** *(Luca, le decisioni corrette dopo `fe40
 `sha_fine` del primo pezzo di `TF3C` uguale a quello del primo di `DG1000`; `C1` lo `sha_vuoto` e' quello di `fondo_con_fasi(F3)`; `A3` *(`accensione.a3`, `TF3` + `TF3C`)*; `A4`.
 ### **Le misure a blocchi di `1000`, da `0` a `30000`:** la velocita', la direzione *(e i coseni con `A1`, `A2`, `A1+A2`)*, `ln s` *(`carta_deriva.logaritmo`)*, la freccia del vuoto
 sotto il solitone *(`F3`: in ogni campione; `F0`: dagli stati completi di `TM1000` e `DG1000`)*, il cuore, `w`, l'alone; ### **i blocchi oltre la fine valida** *(`3 w >= R`)*
-**marcati con `*`, non tagliati.** **Nessuna soglia, nessun tempo di partenza** *(`TM` abbandonato)*.
+**marcati con `*`, non tagliati.** ### **VAGA O CORRE?** *(Luca `15:22`)*: (i) `r2` dal punto di partenza e la pendenza di `ln r2` contro `ln t` a tratti; (ii) la persistenza della direzione fra blocchi. **Nessuna soglia, nessun tempo di partenza** *(`TM` abbandonato)*.
 """
 import math
 import os
@@ -21,6 +21,10 @@ import solitone  # noqa: E402,F401  (i percorsi)
 
 BLOCCO = 1000.0                # ### Luca: a blocchi di 1000, come TF3
 FINE = 30000.0                 # ### Luca: fino a 30000
+TRATTI = ((1000.0, 2000.0), (2000.0, 4000.0), (4000.0, 8000.0), (8000.0, 16000.0), (16000.0, 30000.0))   # ### (i) Luca 15:22: la pendenza di ln r2 contro ln t a tratti (che raddoppiano: dichiarato)
+K_MAX = 10                     # ### (ii) le distanze fra blocchi 1 .. 10
+META_C = 0.5                   # ### (ii) Luca 15:22: il tempo in cui la correlazione scende sotto 1/2
+META_T = 15000.0               # ### (ii) "se cresce nel tempo": le due meta' 0 .. 15000 e 15000 .. 30000 (dichiarato)
 STATI_F0 = (("TM1000", (13333, 40000, 66667)), ("DG1000", (133333, 200000)))   # ### la freccia di F0: gli stati completi su E: (TM1000 al bit di TP1000; DG1000 a 20000, 30000)
 
 OK = [0, 0]
@@ -48,6 +52,31 @@ def traiettoria(camp, L, s):
     u2 = np.concatenate([[0.0], np.cumsum(((np.diff(c2) + 0.5 * L) % L) - 0.5 * L)])
     X = u1[:, None] * A1 + u2[:, None] * A2
     return tt, X, np.array([c["per"]["w"] for c in camp]), np.array([c["per"]["f_liscia"] for c in camp]), np.array([c["per"]["alone"] for c in camp])
+
+
+def vaga_o_corre(nome, tt, X, righe):
+    """### **Luca `15:22`, vaga o corre?** (i) `r2 = |X(t) - X(0)|^2` *(una sola traiettoria; la media per blocco)* e la pendenza di `ln r2` contro `ln t` a tratti
+    *(`1` vagare, `2` corsa a velocita' costante, oltre `2` corsa che accelera)*; (ii) `C(k)` il coseno medio fra la direzione del blocco `b` e del blocco `b + k`, e il primo `k`
+    con `C(k) < 1/2` *(il tempo di persistenza, `k x 1000`)*, su tutta la corsa e sulle due meta'."""
+    r2 = np.sum((X - X[0]) ** 2, axis=1)
+    print("  ### (i) %s: r2 = |X(t) - X(0)|^2; per tratto: r2 medio all'inizio e alla fine (i blocchi di 1000 agli estremi), la pendenza di ln r2 contro ln t" % nome)
+    for a, b in TRATTI:
+        m = (tt >= a) & (tt < b) & (r2 > 0)
+        if m.sum() < 3:
+            print("    %7.0f .. %7.0f: nessun dato" % (a, b))
+            continue
+        p = float(np.polyfit(np.log(tt[m]), np.log(r2[m]), 1)[0])
+        ma, mb = m & (tt < a + BLOCCO), m & (tt >= b - BLOCCO)
+        print("    %7.0f .. %7.0f: r2 %.4e -> %.4e; la pendenza di ln r2 contro ln t %+.3f (%d campioni)" % (a, b, r2[ma].mean(), r2[mb].mean(), p, int(m.sum())))
+    print("  ### (ii) %s: C(k) = il coseno medio fra la direzione del blocco b e quella del blocco b + k (i blocchi di %g); il primo k con C(k) < %g" % (nome, BLOCCO, META_C))
+    for lab, lo, hi in (("tutta", 0.0, FINE), ("0 .. %g" % META_T, 0.0, META_T), ("%g .. %g" % (META_T, FINE), META_T, FINE)):
+        th = np.array([math.radians(r[3]) for r in righe if r[0] >= lo and r[1] <= hi + 1e-9])
+        cc = []
+        for k in range(1, K_MAX + 1):
+            cc.append(float(np.mean(np.cos(th[k:] - th[:-k]))) if len(th) > k else float("nan"))
+        sotto = next((k for k, c in enumerate(cc, 1) if c < META_C), None)
+        print("    %-15s (%2d blocchi) C(1..%d) %s; sotto %g a k = %s%s" % (lab, len(th), K_MAX, " ".join("%+.2f" % c for c in cc), META_C, sotto,
+                                                                  (" (il tempo di persistenza %g)" % (sotto * BLOCCO)) if sotto else (" (mai entro k = %d)" % K_MAX)))
 
 
 def coseni(v):
@@ -139,6 +168,7 @@ def main(argv):
                   % ("*" if a >= fine else " ", a, b, Xm[0], Xm[1], v, ang, cs[0], cs[1], cs[2], float(fl[m].mean()), wm, float(al[m].mean()),
                      float(np.nanmean(fm[m])) if np.isfinite(fm[m]).any() else float("nan"), float(np.nanmax(fsc[m])) if np.isfinite(fsc[m]).any() else float("nan")))
         CD.logaritmo(nome, tt, X, 1000.0, min(FINE, tt[-1] + 1.0), BLOCCO)
+        vaga_o_corre(nome, tt, X, righe)
         dX = X[-1] - X[0]
         tot[nome] = (float(math.hypot(*dX)), math.degrees(math.atan2(dX[1], dX[0])), float(tt[-1]))
     print("-" * 130)
