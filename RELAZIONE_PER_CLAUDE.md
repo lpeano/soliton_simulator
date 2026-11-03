@@ -23213,3 +23213,11 @@ Il referto stampa per `TA1000`:
 - **`D6`** ripuntato a `5cf16f27` *(`e4674364`)*; **la cassetta: `84/84`** *(le `80` di prima e le quattro `V5`)*.
 - ### **Una cosa che avevo scritto come «non misurata» a `95fa6cbe`, ed era GIA' misurata:** `V3` *(`test_vuoto`, nella cassetta da `ae4640ee`)* dice che **`F0` e' un AUTOSTATO del tick del vuoto** *(`|lambda| - 1` `-6.4e-15`, `nu` `38.746`)*: **lo `0.467` per tick e' solo una fase globale.** Non me ne ero ricordato.
 - **`TF3`** parte ora, un pezzo alla volta *(~`1.7` ore)*. **Un processo alla volta:** fino alla fine non giro altro.
+
+## 2026-11-03 — `TF3`: LA CARTA, SCRITTA E COMMITTATA MENTRE LA CORSA GIRA *(`csv/solitone/carta_freccia.py`; un file che la corsa non importa)*
+
+- **I DEVE:** `T0` *(il vuoto a `t = 0` al bit di `fondo_con_fasi(F3)`)*, `T1` *(il primo campione al bit di `TP1000`)*, `T1-F` *(lo `sha_fine` del primo pezzo uguale: deve fallire)*, `A3`, `A4`, **`TM`**.
+- ### **IL TEMPO DEL MOTO, una definizione MIA, scritta prima di vedere `TF3`:** il task history diceva «il tempo di partenza del moto fuori da `9000 +- 2000`» **senza definirlo**. **La definizione:** l'inizio del primo blocco di `1000` dopo `T_acc` con la velocita' almeno **meta'** della massima a blocchi della stessa corsa *(fino alla fine valida)*. **`TM` la controlla:** su `TP1000` deve ridare un tempo in `7000 .. 11000`; **se non lo fa, e' sbagliata la definizione, non il dato.**
+- **La freccia di `F0` nel tempo** per `TP1000`: dagli stati completi di `TM1000` *(tick `13333`, `40000`, `66667`)*.
+- **`D6` va ripuntato di nuovo** *(la carta e' un `.py` della libreria)*: lo faccio subito, in un commit a se'; **la cassetta la giro dopo `TF3`** *(un processo alla volta)*.
+- **La carta non gira prima della fine di `TF3`:** un processo alla volta. Se ha un errore, la correzione e' un commit a se'.
