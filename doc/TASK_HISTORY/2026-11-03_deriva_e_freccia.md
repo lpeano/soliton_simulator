@@ -83,3 +83,29 @@
   - **la freccia di `F3` NON resta nulla sotto il solitone** *(il modulo per nodo fino a `2.29`)*, e **quella di `F0` perde la media** *(circa `0` gia' a `6000`)*: non l'avevo previsto;
   - **la condizione di `TFI`:** il «meno» e' vero *(`7.557` contro `34.23`)*; il tempo del moto non conta *(`TM` fallito)*.
 - **TODO:** la decisione di Luca su `TM` e su `TFI`; poi `TL120`.
+
+## 5. LE DECISIONI DI LUCA DOPO `fe409582`, E IL PIANO DI `TFI`
+
+- **`TM` si abbandona come numero:** il moto non ha un inizio netto. **Il fallimento resta scritto** *(`fe409582`)*. Il confronto fra le corse si fa con lo spostamento, la velocita' a blocchi e la pendenza di `ln s`.
+- **La lettura di `TF3`: la (a1).** Su `F3` il solitone vaga *(`7.6` nodi, `1.76` per `1000`, la direzione che cambia a ogni blocco)*; su `F0` deriva *(`68.5` nodi, `17.1` per `1000`, lungo `-A1`)*; il cuore, `w`, l'alone quasi uguali: **la (a4) esclusa**. **La deriva su `F0` la causa la freccia del vuoto di fondo.** **Il fatto in piu':** sotto il solitone la freccia tende a `~2` in tutte e due le corse, ma solo con la freccia uniforme di fondo il solitone corre.
+- **`TFI` si fa** *(la condizione «meno» e' vera)*, **stesso protocollo di `TF3`.**
+
+### Le premesse *(cosa credo, e cosa NON so)*
+- **La lunghezza della freccia di fondo, dalla misura** *(`vuoto.freccia` sul fondo a `t = 0`, con la mia definizione)*: `F0` `4`, l'ibrido `2 sqrt2 = 2.83`, `F3` `0` *(`V5`, `V5-I`, `V5-N`)*. **La carta la RICALCOLA dal vuoto di ciascuna corsa**, non la ricopia.
+- **Cosa NON so:** come cresce la deriva con la freccia. **Tre punti non decidono una forma** *(lineare, soglia, quadratica)*: **la carta scrive la tabella, non adatta una curva.**
+
+### Il piano
+1. Questa sezione, la relazione, la MAPPA *(la (a1))*: un commit.
+2. **La carta** *(`carta_freccia.py`)*: `TM`, `META_V`, `T_MOTO_TP`, `TFI_TEMPO` e la colonna del tempo del moto **tolti**; **una tabella nuova: per ogni corsa la lunghezza della freccia di fondo a `t = 0` contro lo spostamento a `16000`, la velocita' massima a blocchi e la pendenza di `ln s` sulle due rette lunghe**; la condizione di `TFI` scritta come fatto storico *(il «meno» e la direzione)*. La pendenza delle rette lunghe la ritorna `carta_deriva.logaritmo` **senza cambiare la stampa** *(il referto di `TP1000` deve restare uguale nelle righe che gia' c'erano)*. Commit; `D6`; la cassetta.
+3. **`TFI`**, un pezzo alla volta *(il driver col semaforo)*; poi la carta, il referto, la relazione, l'esito, la MAPPA.
+
+### I DEVE della carta, dopo
+`T0`, `T1`, `T1-F` *(deve fallire)*, `A3`, `A4`, **per `TF3` e per `TFI`**. **In piu', un controllo che puo' fallire:** `FR0` la lunghezza della freccia di fondo ricalcolata dal vuoto della corsa uguale a quella dei test *(`4`, `2 sqrt2`, `0`, entro `1e-12`)*.
+
+### Che cosa mi farebbe FERMARE
+Un DEVE fallito; un pezzo di `TFI` che si ferma per un errore; la cassetta non tutta verde; le righe del referto di `TF3` e `TP1000` che cambiano con la carta nuova *(diverse da `fe409582` dove non devono)*.
+
+### TODO
+- [ ] commit di questa sezione con la MAPPA e la relazione;
+- [ ] la carta; commit; `D6`; la cassetta;
+- [ ] `TFI` (~`1.7` ore); la carta; il referto; poi `TL120`.

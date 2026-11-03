@@ -23241,3 +23241,11 @@ Il referto stampa per `TA1000`:
 - **LE DOMANDE A LUCA, coi criteri di chiusura:**
   1. **`TM`:** ogni correzione sceglie un numero *(la soglia `0.5`, o la finestra di riferimento)*, ed e' `A1`. **La mia raccomandazione: togliere il tempo del moto dalla condizione di `TFI`**, che e' gia' decisa dal «meno», e lasciare la tabella di `ln s` come FATTO, senza un tempo derivato. Un criterio in meno, e nessun numero nuovo. *Si chiude con la decisione di Luca, e la correzione e' un commit a se'.*
   2. **`TFI`:** il «meno» e' vero indipendentemente da `TM`. **Giro `TFI`?** *Si chiude col si' o col no di Luca.*
+
+## 2026-11-03 — `TF3`: LE DECISIONI DI LUCA *(dopo `fe409582`)*; `TFI` SI FA
+
+- **`TM` abbandonato come numero** *(il moto non ha un inizio netto)*; **il fallimento resta scritto a `fe409582`**. Il confronto: lo spostamento, la velocita' a blocchi, la pendenza di `ln s`.
+- ### **La lettura di Luca: la (a1).** Su `F3` il solitone vaga, su `F0` deriva lungo `-A1`; **la (a4) esclusa** *(il cuore, `w`, l'alone quasi uguali)*; **la deriva su `F0` la causa la freccia del vuoto di fondo.** **Il fatto in piu':** sotto il solitone la freccia del vuoto tende a `~2` in entrambe le corse *(`F3` da `0.35` a `~2.3`, poi `~1.9`; `F0` da `4` a `~2`)*, **ma solo con la freccia uniforme di fondo il solitone corre.**
+- **La MAPPA:** la voce `1` *(sez. `2`)*, le voci `27` e `32`, la decisione `10`: **la (a1); `F3` candidato a vuoto fisico RAFFORZATO** *(regge il solitone, e il solitone non deriva)*.
+- **`TFI`** *(l'ibrido `theta = pi/2`)*: **stesso protocollo di `TF3`**; nel referto, accanto a `TP1000` e `TF3`, **lo spostamento, la velocita' massima e la pendenza di `ln s` contro la lunghezza della freccia di fondo** *(`F0` `4`, l'ibrido `2.83`, `F3` `0`, ricalcolate dal vuoto di ogni corsa)*. **Tre punti non decidono la forma della crescita:** la carta scrive la tabella, non adatta una curva.
+- **La coda dopo:** `TL120`; la direzione *(D0'-D5, da rileggere alla luce di `TF3`)*; il primo mosaico; `cs`.
