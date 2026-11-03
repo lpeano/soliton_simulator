@@ -23470,3 +23470,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La coda** *(`[[PRECEDENZA-IN-CODA]]`)*: `TS` *(in volo)* -> **`TB3`** -> `TM3` -> `TL120` -> `D5` -> la coppia -> il triangolo.
 - ### **La premessa da misurare prima** *(`doc/TASK_HISTORY/2026-11-03_TB3_bordo_assorbente.md`)*: **il bordo riporta `phi` verso `phi0 = F3`; se `F3` da solo non e' fermo sotto il tick vivo** *(anche solo una fase globale per tick)*, **un `phi0` fisso FORZA il vuoto della fascia invece di assorbirne le onde.** In `TM1000` `|dLambda|` `~2` ovunque: il dubbio e' concreto. **La carta `B0`** *(a `TS` finita)* decide: `F3` fermo *(come il mandato)*; fermo a meno di una fase *(propongo `phi0(t) = c(t) F3` con `c` misurato: da confermare)*; non fermo *(FERMO: `phi0` evoluto a parte, costo `~x2`, o il bordo solo su `psi`: di Luca)*.
 - **Il pacchetto del test e la griglia di `g_max`** sono di protocollo, dichiarati nel task history prima dei numeri.
+
+## 2026-11-03 — LA MAPPA, VOCE 35: L'AGGIUNTA DI LUCA *(21:54)*, SOLO SCRITTURA
+
+- **Nella voce 35** *(l'ultima colonna)*: l'universo chiuso esteso dalla mitosi senza fermarsi; oltre una velocita' di espansione il rientro quasi nullo *(l'orizzonte cosmologico)*; **la soglia stimata dal guardiano** *(`~0.09` nodi per unita' di tempo, il toro che raddoppia in `~1000`)*, **scritta come sua stima, non misurata qui**; `TB3` come diagnosi pulita, la mitosi come modello dopo la voce 21.
+- **Una cosa da ricontrollare, non fatta ora:** il `~0.09` viene dalla lettura del guardiano di `TM1000`; **nel repo non c'e' ancora una misura della velocita' dei fronti** *(si puo' fare dalle mappe leggere: il raggio a cui `rho` supera una soglia, contro il tempo)*. **Lo segnalo: un numero senza provenienza nel repo** *(`[[L-NUMERI]]`)*.
