@@ -23453,3 +23453,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La premessa nuova** *(nel task history, sez. 8)*: **`R F0 = -F0`**, quindi la simmetria di `(psi_TS, F0)` e' `R180` x `sigma_z` **composta col segno globale `phi -> -phi`**; **che il tick vivo commuti con quel segno NON e' misurato**: e' il DEVE `S4` del test. **Se fallisce, FERMO.**
 - **Una convenzione mia:** la fase globale di `q+` *(la componente di modulo massimo reale positiva)*.
 - ### **LA CORREZIONE DI LUCA (21:14): `TS` su `F3`, fino a `30000`, contro `TF3` + `TF3C`.** Non era partita. **La premessa sul vuoto si rifa' per `F3`:** il DEVE `S0` *(`R F3 = +-F3`?)* decide se serve il segno globale *(`S4`)*; se `R F3` non e' `+-F3`, FERMO.
+
+## 2026-11-03 — `TS`: LA CASSETTA `98/98`; **LA SIMMETRIA REGGE SULLE LEGGI**; `TS` PARTE
+
+- **`S0`: `R F3 = -F3`** *(`c_v -1.000000000000`, il residuo `~1e-16`; anche `F0`)*: **il segno globale serve.** **`S4`: il tick vivo commuta con `phi -> -phi` AL BIT** *(il peggiore `0.000e+00`; `S4-F` con `1.1 phi`: `2.1e-01`, quindi il controllo legge `phi`)*. **`S1`: la partenza simmetrica `8.3e-16`, `c = +1`**; la partenza di oggi `0.995`. `S2` la norma esatta; `S3` Bloch `5.9e-16`.
+- **Quindi lo stato iniziale di `TS` su `F3` e' invariante per `S` = `R180` x `sigma_z` x `(phi -> -phi)` fino all'arrotondamento, e `S` commuta col tick vivo** *(`D-T` `5.2e-15`, `S4` `0`)*: **il seme della rottura puo' venire solo dall'arrotondamento.**
+- **I dischi prima della corsa:** `C:` `17,93` GB, `E:` `212,55` GB *(sopra `5` GB: si parte)*. **`TS`:** fino a `30000`, ~`20` pezzi; **la stima vera dopo il primo pezzo.**

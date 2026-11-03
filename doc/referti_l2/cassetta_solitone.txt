@@ -1,6 +1,6 @@
 [TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
 [TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
-[TIMBRO] protetto.py  sha1-BYTE 5c5d08d9  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
 [TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
 [TIMBRO] vuoto.py  sha1-BYTE 2b504206  committato e pulito
 [TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
@@ -17,7 +17,8 @@
 [TIMBRO] test_toro.py  sha1-BYTE 2b3cf382  committato e pulito
 [TIMBRO] test_mappe.py  sha1-BYTE b56209c1  committato e pulito
 [TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 9499a2d4  committato e pulito
+[TIMBRO] test_simmetrica.py  sha1-BYTE 63cefa24  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE 6152cb90  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -114,8 +115,8 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: T2 la gaussiana al centro: il centro periodico e l'euclideo entro 1e-09, cuore, f_win, alone entro 1e-12 (w no: le d PASSA   il centro 1.51e-15, il peggiore relativo 1.11e-16; w periodico 9.424822, euclideo 9.444804
   DEVE PASSARE: T4 l'alone per settore somma all'alone (entro 1e-12)                                                                 PASSA   la somma 1.287884424284354e-02, l'alone 1.287884424284336e-02
 ### LE MAPPE (csv/solitone/mappe.py): RADICE E:\soliton_simulator\mappe OGNI 100 VOLTE_SPAZIO 10; TOLL 1e-06 QUANTE 1067
-  DEVE PASSARE: K1 il disco E:\soliton_simulator\mappe esiste, e' scrivibile, e ha almeno 10 volte la stima (1067 istantanee, 560046 PASSA   libero 228219944960 byte, richiesti 560046960 (10 x la stima)
-  DEVE FALLIRE: K1-F il disco basta per una stima di 10 volte meno lo spazio libero piu' 1 byte                                      PASSA   libero 228219944960 byte, richiesti 228219944970 (10 x la stima)
+  DEVE PASSARE: K1 il disco E:\soliton_simulator\mappe esiste, e' scrivibile, e ha almeno 10 volte la stima (1067 istantanee, 560046 PASSA   libero 228220076032 byte, richiesti 560046960 (10 x la stima)
+  DEVE FALLIRE: K1-F il disco basta per una stima di 10 volte meno lo spazio libero piu' 1 byte                                      PASSA   libero 228220076032 byte, richiesti 228220076040 (10 x la stima)
   DEVE PASSARE: K0 l'istantanea non tocca lo stato (gli sha di ogni chiave prima e dopo)                                             PASSA   
   DEVE PASSARE: K2 riletta, sum rho = M e sum Lambda = V entro 1e-06 relativo (float32)                                              PASSA   M 1000000.000000 errore 1.09e-09; V 39366.000000 errore 0.00e+00; il file 21944 byte
   DEVE FALLIRE: K2-F con il nodo piu' denso raddoppiato, sum rho = M entro 1e-06                                                     PASSA   errore 5.06e-03
@@ -128,13 +129,21 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: C4 il campo cos(2 (theta - -30)) entro 14: l'asse del quadrupolo -30 gradi entro 1e-09                               PASSA   l'asse -30.000000000000, il relativo 0.7844, 721 nodi
   DEVE PASSARE: C5 il campo r cos(theta - 47) entro 14: l'asse del dipolo 47 gradi entro 1e-09                                       PASSA   l'asse 47.000000000000, il relativo 0.7853
   DEVE FALLIRE: C4-F il campo ISOTROPO exp(-r / 3) ha un quadrupolo col relativo sopra 1e-12                                         PASSA   il relativo 1.17e-17
-### D6: LA LIBRERIA E' QUELLA DI 3a2ea41f (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 3a2ea41f a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### LA PARTENZA SIMMETRICA (protetto.q_simmetrica, partenza_simmetrica): TOLL 1e-12 N_TICK 10 T_STATO 13333
+  DEVE PASSARE: S0 il vuoto F3 ruotato (attorno a (81, 81) / 2) e' +-F3 entro 1e-12                                                  PASSA   F0: c_v -1.000000000000 +0.0e+00i, |R phi - c_v phi| / |phi| 1.11e-16; F3: c_v -1.000000000000 +0.0e+00i, |R phi - c_v phi| / |phi| 1.11e-16
+  DEVE PASSARE: S1 la partenza simmetrica: |R psi - c psi| / |psi| entro 1e-12 e c = 1 entro 1e-12                                   PASSA   8.325e-16, c +1.000000000000000 -4.0e-20i; m2 (81, 81)
+  DEVE FALLIRE: S1-F la partenza DI OGGI (V.partenza) e' simmetrica entro 1e-12                                                      PASSA   9.946e-01
+  DEVE PASSARE: S2 la norma della partenza simmetrica e' N = 1e+06 entro 1e-12 relativo                                              PASSA   0.000e+00
+  DEVE PASSARE: S3 q+ e' nella coppia (|G q - <G> q| entro 1e-12) e P q+ = q+ (entro 1e-12)                                          PASSA   Bloch 5.92e-16, |P q - q| 8.17e-16, l'autovalore +1.000000000000000
+  DEVE PASSARE: S4 il tick VIVO commuta con phi -> -phi (10 tick nella rampa da TS su F3 e 10 dopo da TM1000 a 13333), ogni chiave e PASSA   il peggiore 0.000e+00 (c_v di F3 -1.000: S4 necessario)
+  DEVE FALLIRE: S4-F lo stesso con phi -> 1.1 phi                                                                                    PASSA   il peggiore 2.102e-01
+### D6: LA LIBRERIA E' QUELLA DI 04433dfb (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 04433dfb a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 18 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 2 s; campo 2 s
-ESITO: 91/91 controlli passano; fallite: 0 []
+  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 2 s; campo 2 s; simmetrica 6 s
+ESITO: 98/98 controlli passano; fallite: 0 []
