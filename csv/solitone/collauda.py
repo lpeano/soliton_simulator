@@ -49,7 +49,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **Dalla freccia di `F0` e da `TF3`** *(Luca `19:21` e `2026-11-03` `08:29`)*: `freccia_F0.py` *(`4f292b7c`)*, `vuoto.freccia`, `V5`-`V5-F`, le corse `TF3`, `TFI` *(`5cf16f27`)*.
 # ### **E la carta di `TF3`** *(`carta_freccia.py`, `61200049`)*.
 # ### **E la carta per `TFI`** *(`TM` tolto, `FR0`, la deriva contro la freccia di fondo; `carta_deriva.logaritmo` ritorna le rette; `c5682cb6`)*.
-LIBRERIA_RIFERITA = "c5682cb6"
+# ### **E la carta dell'impulso della partenza** *(Luca 14:06, carta_impulso.py, e0949417)*.
+LIBRERIA_RIFERITA = "e0949417"
 
 
 def vecchi():
