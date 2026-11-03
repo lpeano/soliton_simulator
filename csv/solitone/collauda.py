@@ -51,7 +51,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la carta per `TFI`** *(`TM` tolto, `FR0`, la deriva contro la freccia di fondo; `carta_deriva.logaritmo` ritorna le rette; `c5682cb6`)*.
 # ### **E la carta dell'impulso della partenza** *(Luca 14:06, carta_impulso.py, e0949417)*.
 # ### **E la carta di `TF3` corretta (n.100, `ffa0781f`, `410eed1e`), la corsa `TF3C` e la sua carta** *(`carta_tf3_lunga.py`)*.
-LIBRERIA_RIFERITA = "0ab4c04b"
+# ### **E le misure di Luca delle `15:22` nella carta di `TF3C`** *(vaga o corre, `0453a150`)*.
+LIBRERIA_RIFERITA = "0453a150"
 
 
 def vecchi():
