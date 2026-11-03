@@ -126,7 +126,7 @@ def main(argv):
     for n in corse:
         tt, X, ww, fl, T_acc, che, R = CD.dati(n)
         fine = CD.fine_valida(tt, ww, R, BLOCCO)
-        righe = CD.finestre(n, tt, X, ww, fl, 0.0, min(fine, tt[-1]), BLOCCO, False)
+        righe = CD.finestre(n, tt, X, ww, fl, 0.0, min(fine, tt[-1] + 1.0), BLOCCO, False)   # ### n.100: tt[-1] e' 15999, e senza + 1 il blocco 15000 .. 16000 non entrava
         D[n] = {"tt": tt, "X": X, "ww": ww, "fl": fl, "T_acc": T_acc, "fine": fine, "righe": righe, "vmax": vmax(righe, T_acc, fine), "camp": S[n][1]}
     for n in corse:
         d = D[n]
