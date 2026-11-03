@@ -73,3 +73,13 @@
 - [ ] il codice, i test, l'inventario; commit; `D6`; la cassetta;
 - [ ] `TF3` *(~`1.7` ore)*; intanto la carta, committata prima di girarla;
 - [ ] il referto, le letture accanto ai fatti *(decide Luca)*; `TFI` solo se la condizione; poi `TL120`.
+
+## 4. ESITO *(2026-11-03, dopo `TF3`; il referto `doc/referti_l2/deriva_e_freccia.txt`)*
+
+- **`T0`, `T1`, `A3`, `A4` passano; `T1-F` fallisce come deve. `TM` FALLISCE** *(la mia definizione ridà `12000` su `TP1000`)*: **FERMO**, le domande a Luca nella relazione.
+- **Le premesse, annotate** *(non riscritte)*:
+  - «la partenza dipende dal vuoto»: **nel codice si'; nel risultato no**, alle cifre stampate *(la sovrapposizione `1.0`, lo stesso `mu`)*;
+  - «cosa NON so: se il libro al primo campione e' al bit»: **lo e'** *(`T1` passa)*;
+  - **la freccia di `F3` NON resta nulla sotto il solitone** *(il modulo per nodo fino a `2.29`)*, e **quella di `F0` perde la media** *(circa `0` gia' a `6000`)*: non l'avevo previsto;
+  - **la condizione di `TFI`:** il «meno» e' vero *(`7.557` contro `34.23`)*; il tempo del moto non conta *(`TM` fallito)*.
+- **TODO:** la decisione di Luca su `TM` e su `TFI`; poi `TL120`.

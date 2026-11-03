@@ -23221,3 +23221,23 @@ Il referto stampa per `TA1000`:
 - **La freccia di `F0` nel tempo** per `TP1000`: dagli stati completi di `TM1000` *(tick `13333`, `40000`, `66667`)*.
 - **`D6` va ripuntato di nuovo** *(la carta e' un `.py` della libreria)*: lo faccio subito, in un commit a se'; **la cassetta la giro dopo `TF3`** *(un processo alla volta)*.
 - **La carta non gira prima della fine di `TF3`:** un processo alla volta. Se ha un errore, la correzione e' un commit a se'.
+
+## 2026-11-03 — `TF3` FINITA; LA CARTA `5/6`: **`TM` FALLISCE** *(la MIA definizione del tempo del moto)*; LA CASSETTA `84/84`; **FERMO**
+
+- **`TF3`** *(`TP1000` col vuoto `F3`, sostituito dopo la partenza su `F0`)*: `11` pezzi, `106667` tick, finita senza errori. I `jsonl` in `doc/referti_l2/accensione_lenta/TF3_*.jsonl`.
+- **La cassetta** *(dopo `D6` a `61200049`)*: **`84/84`** *(`doc/referti_l2/cassetta_solitone.txt`)*.
+- **La carta** *(`doc/referti_l2/deriva_e_freccia.txt`)*: `T0` PASSA *(il vuoto a `t = 0` e' `fondo_con_fasi(0, 0, pi)` al bit)*; `T1` PASSA *(il primo campione al bit di `TP1000`)*; `T1-F` si comporta come deve *(lo `sha_fine` del primo pezzo DIVERSO: il vuoto e' stato sostituito)*; `A3` PASSA *(`M` `+3.877e-12` per `1000`, residuo `7.05e-15`; `V` `+2.578e-12`, residuo `2.48e-12`)*; `A4` PASSA.
+- ### **`TM` FALLISCE:** la mia definizione *(il primo blocco dopo `T_acc` con la velocita' `>= 0.5` della massima a blocchi)* **ridà su `TP1000` `12000`, non `7000 .. 11000`** *(la massima `17.109` per `1000`, al blocco `13000`)*. **Come avevo scritto prima: e' sbagliata la definizione, non il dato.** La colonna del tempo del moto **non si usa**. **Il dato di `TP1000` dice che il moto cresce per tratti:** la velocita' a blocchi `1.554` a `7000`, `2.788` a `10000`, `6.161` a `11000`, `15.625` a `12000`; la pendenza di `ln s` `+0.196` per `1000` su `2000 .. 9000`, `+0.578` su `9000 .. 16000`.
+- **I FATTI, accanto a `TP1000`** *(dal referto; le letture `(a1)`-`(a5)` sono di Luca, io non scelgo)*:
+  - **lo spostamento totale a `16000`:** `TP1000` `68.453` nodi a `-173.06` gradi; **`TF3` `7.557` nodi a `+165.69` gradi** *(la differenza di direzione `21.25` gradi)*;
+  - **la velocita' massima a blocchi:** `TP1000` `17.109`, **`TF3` `1.757`** per `1000`; `TF3` non ha la crescita di `TP1000` dopo `10000` *(la pendenza di `ln s` su `9000 .. 16000`: `+0.113` contro `+0.578`)*;
+  - **la direzione a blocchi di `TF3`** cambia molto da un blocco all'altro *(da `-176` a `+130` gradi)*; quella di `TP1000` dopo `10000` sta fra `-169` e `-180`;
+  - **il cuore, `w`, l'alone:** simili *(`w` `7.38 -> 10.58` contro `7.72 -> 10.95`; l'alone a `14000 .. 15000` `0.0300` contro `0.0362`)*: **`F3` regge il solitone**, almeno fino a `16000`;
+  - **la freccia del vuoto di `TF3` NON resta nulla:** il modulo medio per nodo `0.352` nel primo blocco, `2.289` a `6000 .. 7000`, `1.900` a `14000 .. 15000`; lo scarto fra i nodi `6.1 .. 8.5`;
+  - **la freccia di `F0` sotto `TP1000`** *(dagli stati di `TM1000`)*: il modulo `4.000` a `0`, `3.243` a `2000`, `2.237` a `6000`, `2.032` a `10000`; **la media sui nodi cala quasi a zero gia' a `6000`** *(`|media|` circa `0.03`)*, con lo scarto fra i nodi `6.3 .. 7.1`. **Cioe': sotto il solitone, a `6000`, nessuno dei due vuoti ha piu' una freccia media apprezzabile, e il modulo per nodo e' circa `2` in entrambi.**
+  - **la partenza costruita su `F3`** *(solo registrata)*: la sovrapposizione con quella di `TP1000` `1.0`, `mu` `4.161868161822483` *(quella di `TP1000` `4.161868161822` alle cifre stampate)*. **La premessa diceva «dipende dal vuoto»: nel codice si', nel risultato no** *(alle cifre stampate: non l'ho verificato al bit)*.
+- **La condizione di `TFI`:** «meno» **vero** *(`7.557` contro `0.5 x 68.453 = 34.23`)*; la direzione falso *(`21.25` gradi)*; il tempo del moto «vero», **ma da una definizione fallita: non conta**. **Il «meno» da solo basta**, ed e' indipendente da `TM`.
+- ### **FERMO:** un DEVE fallito; non giro `TFI` e non correggo `TM` senza Luca. **La MAPPA non la tocco** finche' il referto ha un DEVE fallito.
+- **LE DOMANDE A LUCA, coi criteri di chiusura:**
+  1. **`TM`:** ogni correzione sceglie un numero *(la soglia `0.5`, o la finestra di riferimento)*, ed e' `A1`. **La mia raccomandazione: togliere il tempo del moto dalla condizione di `TFI`**, che e' gia' decisa dal «meno», e lasciare la tabella di `ln s` come FATTO, senza un tempo derivato. Un criterio in meno, e nessun numero nuovo. *Si chiude con la decisione di Luca, e la correzione e' un commit a se'.*
+  2. **`TFI`:** il «meno» e' vero indipendentemente da `TM`. **Giro `TFI`?** *Si chiude col si' o col no di Luca.*
