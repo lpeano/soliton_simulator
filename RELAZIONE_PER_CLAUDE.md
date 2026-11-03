@@ -23190,3 +23190,12 @@ Il referto stampa per `TA1000`:
 **Due cose che toccano le prove dopo:**
 - **`R180 F0 = -F0`:** una fase globale. **Il tick e' lineare nel vuoto, e la materia lo sente solo attraverso `Lambda = |phi|^2`.** Se nessun altro termine del tick legge la fase di `phi`, `-F0` e' lo STESSO vuoto con la freccia rovesciata. Allora le frecce davvero distinte sono `3` *(`0`, `60`, `120` gradi, a meno del verso)*. **Per `D0'`** *(la rotazione di `180`)* conta: **e' una cosa da verificare, non l'ho verificata.**
 - **Il primo mosaico e' «solo se (v1)»:** ### **la (v1) alla lettera non e' quella che vedo. Se la parte `3` parte o no lo decide Luca.** La coda intanto prosegue con `TL120`, che non dipende da questa lettura.
+
+## 2026-11-03 — IL MANDATO `TF3` *(Luca `08:29`, «la deriva e la freccia del vuoto»)*: IN CODA PRIMA DI `TL120`, LA CONDIZIONE SODDISFATTA
+
+- **La coda** *(`[[PRECEDENZA-IN-CODA]]`, decisione di Luca)*: `(2-bis)` **`TF3`**, poi `TFI` se la condizione; `(3)` `TL120`; `(4)` la direzione; `(5)` il primo mosaico *(la decisione su (v1) e' di Luca)*; `(6)` `cs`.
+- **La condizione** *((f5) commuta)*: **soddisfatta** a `95fa6cbe`.
+- **Il task history:** `doc/TASK_HISTORY/2026-11-03_deriva_e_freccia.md`. Tre fatti dal codice:
+  - ### **la partenza di `TP1000` e' costruita SUL vuoto** *(`CB.coppia(z, phi0)`)*: per avere lo stato iniziale identico, come chiede Luca, `psi` si costruisce su `F0` e POI il vuoto diventa `F3`; la partenza costruita su `F3` la calcolo e la registro, senza usarla;
+  - **la lunghezza della freccia:** Luca scrive `2`, la mia definizione da' `4` *(il fattore `2` delle due estremita')*; i rapporti non cambiano;
+  - **la condizione di `TFI`, tradotta da me e dichiarata:** lo spostamento a `16000` sotto meta' di `TP1000`, o la direzione a piu' di `30` gradi, o la partenza del moto fuori da `9000 +- 2000`.
