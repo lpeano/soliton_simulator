@@ -23394,3 +23394,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **DUE AVVERTENZE MIE sulla lettura** *(non letture)*:
   1. **Il fondo di `rho` e' l'alone che ha riempito il toro:** `~3-5%` di `M = 1e6` su `6561` nodi da' `~5` per nodo, come l'alone dei campioni. **Sul toro la materia emessa non esce:** «fin dove arriva» per `rho` diventa «tutto il toro» appena il fondo supera la soglia. **`TL120`** *(in coda)* e' la prova della scatola.
   2. ### **`Lambda - Lambda(t 0)` NON separa il campo del solitone dal vuoto che si accende:** `Lambda(t 0)` e' il vuoto PRIMA della rampa *(`lam = 0`)*; con il vuoto acceso `Lambda` cambia di `~2` su `6` dappertutto. **Da questa misura sola non so** se e' il vuoto `F0` che evolve da se' col tick vivo o il campo del solitone che arriva ovunque. ### **Una domanda, col criterio di chiusura:** lo stesso vuoto SENZA solitone *(`psi = 0`)* con la stessa rampa, `Lambda - Lambda(t 0)` sugli stessi tempi: **se resta `~0`, il `~2` e' del solitone; se e' `~2`, e' del vuoto.** **E' una corsa nuova: la decide Luca.**
+
+## 2026-11-03 — IL CAMPO VERO SU `F3`: `TM3` *(Luca `19:34`)*: IL TASK HISTORY; LA CODA; I DISCHI
+
+- **Il mandato delle `19:34` sostituisce «i due poli nel vuoto» delle `19:30`** *(quel mandato non mi e' arrivato: vale solo questo, `[[PRECEDENZA-IN-CODA]]`)*. **La coda registrata:** `D0R` *(in corsa)*, il suo referto, **`TM3`** *(+ `TM3C`)*, `TS`, `TL120` su `F3`, il resto.
+- **I dischi, prima di partire** *(PowerShell `Get-PSDrive`)*: **`C:` `5.61` GB** *(sopra `5`: si parte)*; **`E:` `212.55` GB** *(sopra `10` x `~100` MB)*.
+- ### **Due cose che il mandato non poteva sapere, dichiarate nel task history:**
+  1. **Due corse, non una:** `TM3` *(gemella `TF3`)* e `TM3C` *(gemella `TF3C`)*: con una corsa sola il pezzo `100000` finirebbe a `110000` invece che a `106667`, e lo `sha_fine` di `TF3C` non si confronterebbe. **Le mappe quindi in `mappe\TM3\` e `mappe\TM3C\`**, non solo in `mappe\TM3\`.
+  2. **`corsa_accensione.py` e' nel percorso di `D0R`:** la modifica si applica a `D0R` finita.
+- **I due poli:** le definizioni sono mie *(il dipolo `sum f D`, il quadrupolo `sum f (Dx + i Dy)^2`, l'asse `arg / 2`)*; **il guardiano ha misurato `-29/-31` gradi su `F0` con una definizione che non conosco: se i numeri non tornano, prima si riconciliano le definizioni.** **Il dipolo di `rho` attorno al suo centro e' un falso-zero**, dichiarato.
