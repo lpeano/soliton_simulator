@@ -23249,3 +23249,9 @@ Il referto stampa per `TA1000`:
 - **La MAPPA:** la voce `1` *(sez. `2`)*, le voci `27` e `32`, la decisione `10`: **la (a1); `F3` candidato a vuoto fisico RAFFORZATO** *(regge il solitone, e il solitone non deriva)*.
 - **`TFI`** *(l'ibrido `theta = pi/2`)*: **stesso protocollo di `TF3`**; nel referto, accanto a `TP1000` e `TF3`, **lo spostamento, la velocita' massima e la pendenza di `ln s` contro la lunghezza della freccia di fondo** *(`F0` `4`, l'ibrido `2.83`, `F3` `0`, ricalcolate dal vuoto di ogni corsa)*. **Tre punti non decidono la forma della crescita:** la carta scrive la tabella, non adatta una curva.
 - **La coda dopo:** `TL120`; la direzione *(D0'-D5, da rileggere alla luce di `TF3`)*; il primo mosaico; `cs`.
+
+## 2026-11-03 — `TFI`: LA CARTA *(`c5682cb6`)*, `D6` *(`3b261b17`)*, LA CASSETTA `84/84`; `TFI` PARTE
+
+- **La carta:** `TM` tolto *(il fallimento resta a `fe409582`)*; il DEVE nuovo **`FR0`** *(la lunghezza della freccia di fondo ricalcolata dal vuoto della corsa contro i test: `F0` `4.000000000000000`, `F3` `0.000000000000000`)*; **la tabella della deriva contro la freccia di fondo**. **La prova nello scratchpad su `TP1000` e `TF3`: `7/7`, e ogni riga dei blocchi e di `ln s` identica al referto di `fe409582`.**
+- **`D6`** a `c5682cb6`; **la cassetta `84/84`**.
+- **`TFI`** *(fasi `(0, 0, pi/2)`)* parte ora, un pezzo alla volta *(~`1.7` ore)*. Un processo alla volta.
