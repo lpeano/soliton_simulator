@@ -57,7 +57,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E le carte di `D0R` e di `TS`, e il campo** *(`carta_d0_confronto.py`, `carta_ts.py`, `campo.py`, `test_campo.py`, `carta_campo.py`)*.
 # ### **E i due poli** *(`campo.multipoli`, `test_campo` `C4`, `C5`, `C4-F`, `carta_poli.py`, `carta_campo.py --corsa`)*.
 # ### **E la correzione di `campo.anelli`** *(`r^2` in indici, dopo `C3`)*.
-LIBRERIA_RIFERITA = "8c83d050"
+# ### **E le corse `TM3`, `TM3C`** *(`TF3` e `TF3C` con le mappe)*.
+LIBRERIA_RIFERITA = "3a2ea41f"
 
 
 def vecchi():
