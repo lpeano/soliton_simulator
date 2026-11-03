@@ -23475,3 +23475,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Nella voce 35** *(l'ultima colonna)*: l'universo chiuso esteso dalla mitosi senza fermarsi; oltre una velocita' di espansione il rientro quasi nullo *(l'orizzonte cosmologico)*; **la soglia stimata dal guardiano** *(`~0.09` nodi per unita' di tempo, il toro che raddoppia in `~1000`)*, **scritta come sua stima, non misurata qui**; `TB3` come diagnosi pulita, la mitosi come modello dopo la voce 21.
 - **Una cosa da ricontrollare, non fatta ora:** il `~0.09` viene dalla lettura del guardiano di `TM1000`; **nel repo non c'e' ancora una misura della velocita' dei fronti** *(si puo' fare dalle mappe leggere: il raggio a cui `rho` supera una soglia, contro il tempo)*. **Lo segnalo: un numero senza provenienza nel repo** *(`[[L-NUMERI]]`)*.
+
+## 2026-11-04 — `TS` FINITA: IL REFERTO *(`doc/referti_l2/ts_corsa.txt`, `5/5`)*
+
+- **`20` pezzi fino a `30000`**, l'ultimo `524` s. **I DEVE** `T0`, `T0-F`, `T1`, `A3`, `A4` passano.
+- **La rottura della simmetria** *(`psi_h`)*: `1e-12` a **`565.5`**, `1e-6` a **`1092.0`**, `1e-2` a **`1381.5`**; `phi_h` `486.0`, `1005.0`, `1290.0`. Il seme a `1e-15` gia' a `1.5`: **l'arrotondamento.**
+- ### **Il moto parte prima, non dopo:** `TS` da `~4000`, il massimo `12.04` per `1000` a `7000-8000`; `TF3 + TF3C` da `~16000`, il massimo `22.35`. **Lo spostamento:** `TS` `117.9` nodi a `+7.9` gradi, `TF3 + TF3C` `87.8` a `-158.2`.
+- **Le letture (s1)-(s3) sono di Luca.** **La mia osservazione:** la partenza simmetrizzata e' **un'altra partenza** *(l'inviluppo simmetrizzato e `q+`)*: l'anticipo puo' venire dalla costruzione e non dal seme; **una corsa sola non lo separa.**
+- **Dopo:** `D6` e la cassetta *(i test del bordo)*, poi `B0`.
