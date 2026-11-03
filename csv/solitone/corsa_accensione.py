@@ -19,6 +19,7 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --corsa TFI        # (Luca 08:29) l'ibrido theta = pi/2, SOLO SE la condizione su TF3
     python csv/solitone/corsa_accensione.py --corsa TF3C       # (Luca, le decisioni corrette dopo fe409582) TF3 continuata da 16000 fino a 30000
     python csv/solitone/corsa_accensione.py --corsa D0R        # (Luca dopo ae60cfb6, (a)) D0': la partenza di TP1000 ruotata di 180 gradi (sigma_z), il vuoto -F0
+    python csv/solitone/corsa_accensione.py --corsa TS         # (Luca dopo aad1435a e 21:14) la partenza simmetrizzata su F3, fino a 30000
     python csv/solitone/corsa_accensione.py --corsa TM3        # (Luca 19:34) TF3 ripetuta con le mappe e gli stati su E:; ogni pezzo al bit di TF3
     python csv/solitone/corsa_accensione.py --corsa TM3C       # (Luca 19:34) TF3C ripetuta: TM3 continuata fino a 30000; ogni pezzo al bit di TF3C
     python csv/solitone/corsa_accensione.py --indice TM3 > doc/referti_l2/mappe_indice_TM3.txt
@@ -87,6 +88,9 @@ STATI["TM3"] = (2000.0, 6000.0, 10000.0)   # ### Luca 19:34: gli stati completi 
 STATI["TM3C"] = (20000.0,)                 # ### ... e 20000
 DIRS["TM3"] = os.path.join(RADICE_E, "mappe", "TM3", "campioni")     # ### i campioni su E: (doppioni al bit di TF3, come TM1000)
 DIRS["TM3C"] = os.path.join(RADICE_E, "mappe", "TM3C", "campioni")   # ### i campioni su E: (doppioni al bit di TF3C)
+CORSE["TS"] = (1000.0, 30000.0)     # ### (Luca dopo aad1435a, corretto alle 21:14) la partenza SIMMETRIZZATA (q+, l'inviluppo sul nodo simmetrizzato) su F3, fino a 30000
+VUOTI["TS"] = "F3"                  # ### come TF3: la partenza costruita sulla scena, poi il vuoto sostituito
+SIMMETRIZZATE = ("TS",)             # ### in ogni campione la distanza dello stato dal suo ruotato (asimmetria)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -178,6 +182,43 @@ def partenza_sul_vuoto(sol, z, phi_v, pK, s, p0):
             z["st"][k][...] = v
 
 
+def partenza_ts(z, phi0, pK, s):
+    """### **La partenza SIMMETRIZZATA** *(Luca dopo `aad1435a`: `q+`, l'inviluppo sul nodo simmetrizzato; `protetto.partenza_simmetrica`, `test_simmetrica`)*: `{psi, m2, autovalore,
+    mu, residuo, q}`; `mu` di Rayleigh del tick congelato *(come `V.partenza`)*. ### **La scena NON si rimette qui:** la rimette `corsa` subito dopo *(`salvato`)*."""
+    import _modo_al_variare_di_s as MS
+    import _vuoto_vivo_B as V
+    from solitone import protetto as P
+    q, ev, _G = P.q_simmetrica(z, phi0, s, +1)
+    m2 = P.centro_inversione(z, pK)
+    p = P.partenza_simmetrica(z, pK, q, V.N, m2)
+    T = MS.tick(z, phi0, p, V.LP.FORMA)
+    lr = complex(np.vdot(p, T) / np.vdot(p, p))
+    return {"psi": p, "m2": list(m2), "autovalore": ev, "mu": -math.atan2(lr.imag, lr.real) / s, "residuo": float(np.linalg.norm(T - lr * p) / np.linalg.norm(p)),
+            "q": [[float(x.real), float(x.imag)] for x in q]}
+
+
+def dove_simm(z, m2):
+    """### **La rotazione `R180` attorno a `m2 / 2`** *(`carta_impulso.rotazione`, sulle estremita')*."""
+    from solitone import carta_impulso as CI
+    _ok, dd = CI.assi(z["inc"], z["L"])
+    return CI.rotazione(z["inc"], z["L"], dd, m2)
+
+
+def asimmetria(z, dove):
+    """### **La distanza dello stato dal suo ruotato** *(Luca: quando la simmetria si rompe)*: per `psi_h` *(con `sigma_z`)* e `phi_h` *(senza)*, `|R x - c x| / |x|` con `c = <x, R x> / <x, x>`;
+    `{psi, phi, c_psi, c_phi}`."""
+    from solitone import carta_impulso as CI
+    from solitone import protetto as P
+    out = {}
+    for k, chi, U in (("psi", "psi_h", P.SIGMA_Z), ("phi", "phi_h", None)):
+        x = z["st"][chi]
+        r = CI.applica(x, dove, U)
+        c = complex(np.vdot(x, r) / np.vdot(x, x))
+        out[k] = float(np.linalg.norm(r - c * x) / np.linalg.norm(x))
+        out["c_" + k] = [c.real, c.imag]
+    return out
+
+
 def ruotata(z, salvato, p0):
     """### **`R180` x `sigma_z` di TUTTO lo stato di partenza** *(la scena con `psi_h = p0`)*: `carta_d0.ruota`, attorno al centro d'inversione piu' vicino al centro della
     densita' di `p0` *(come `carta_impulso`; `carta_d0`: il tick vivo commuta, `5.2e-15`)*; `(lo stato ruotato per chiave, m2)`."""
@@ -244,6 +285,11 @@ def corsa(nome):
         if nome in RUOTATE:
             x_rot, m2 = ruotata(z, salvato, p0)
             p0, phi_v = x_rot["psi_h"], x_rot["phi_h"]   # ### la partenza e il vuoto della corsa SONO i ruotati (le bande e D su questi)
+        ts, simm = None, None
+        if nome in SIMMETRIZZATE:
+            ts = partenza_ts(z, phi0, pK, s)
+            p0 = ts["psi"]                 # ### la partenza della corsa e' la simmetrica (le bande e D su questa); info della scena invariato
+            simm = dove_simm(z, ts["m2"])
         e_K = P.e_K(z)
         _ph, Z = DV.autovettori(DV.matrice(z, phi_v, DV.AMP))   # ### le bande sul vuoto della corsa (TF3: F3; il task history 2026-11-03)
         bande = MI.Bande(Z, z["L"])
@@ -282,6 +328,8 @@ def corsa(nome):
                 with np.load(f_acc) as dati:
                     acc["psi"] = dati["psi_h"].copy()
                 assert SFM.sha(acc["psi"]) == acc["sha"], "lo stato a T_acc NON e' quello registrato"
+        if ts is not None:
+            mu = ts["mu"]                  # ### D rispetto alla partenza simmetrica, con il suo mu (dopo i controlli della scena e della ripresa)
         vic = z["rr"] <= V.R_VICINO * w_in
         mas = {"vicino": vic, "lontano": ~vic, "totale": np.ones(z["inc"].n, dtype=bool)}
         t1 = min(t0 + V.PEZZO, t_fine)
@@ -325,6 +373,8 @@ def corsa(nome):
                     c["freccia"] = VU.freccia_media(VU.freccia(z["st"]["phi_h"], *frec))
                 periodiche(z, c, conti, w_in, w0, h, 0, LC, nome in CENTRO_LIBRO)
                 c["lam"] = 0.0
+                if simm is not None:
+                    c["simm"] = asimmetria(z, simm)
                 camp.append(c)
                 if mappe_on:
                     ist.append(MP.istantanea(z, 0, 0.0, (c["per"]["x"], c["per"]["y"])))
@@ -365,6 +415,8 @@ def corsa(nome):
                         if fermata is None and cam >= CAMMINO[nome]:
                             fermata = "(a) lo spostamento srotolato dalla partenza arriva a %.2f (>= %g)" % (cam, CAMMINO[nome])
                     c["lam"] = AC.lam_di(t, K)
+                    if simm is not None:
+                        c["simm"] = asimmetria(z, simm)
                     camp.append(c)
                     if c["f_liscia"] < META * f_lis0 and t_dis is None:
                         t_dis = t          # ### il primo; si interrompe solo nella rampa (A6)
@@ -404,6 +456,8 @@ def corsa(nome):
         riga.update({"mappe": mappe, "stati": stati, "dopo_stato": dopo, "disco": disco})
     if giro is not None:
         riga.update({"giro": giro, "fermata": fermata})
+    if ts is not None:
+        riga.update({"ts": {k: v for k, v in ts.items() if k != "psi"}, "sha_partenza_ts": SFM.sha(ts["psi"])})
     if nome in RUOTATE:
         riga.update({"ruotata": {"m2": list(m2), "U": "sigma_z", "sha_partenza": SFM.sha(p0), "sha_vuoto": sha_v}, "stati": stati, "dopo_stato": dopo})
     f_int = os.path.join(dir_json(nome), "%s_%06d.jsonl" % (nome, t0))

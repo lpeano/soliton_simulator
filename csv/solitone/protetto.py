@@ -176,3 +176,64 @@ def e_K(z):
     import _vuoto_vivo_B as V
     with legame_spento():
         return V.e_K_di(z)
+
+
+# ====================================================================== LA PARTENZA SIMMETRICA (Luca, dopo aad1435a e 21:14; il task history 2026-11-03_D0_ruotata_e_TS, sez. 8-9)
+# ### R180 x sigma_z attorno a un centro d'inversione: sulla cella (P q)[a, s] = sigma_z q[a, 1 - s] (l'indice 4 a + 2 s + componente di reshape(n, 12)); la q nel settore di P
+# ### scelto da Luca (q+), la fase globale con la componente di modulo massimo reale positiva (una convenzione, dichiarata); l'inviluppo sul NODO simmetrizzato.
+SIGMA_Z = np.array([[1, 0], [0, -1]], dtype=complex)
+
+
+def matrice_P(U):
+    """### **`P` sulla cella** *(12 x 12)*: `(P q)[a, s] = U q[a, 1 - s]`."""
+    P = np.zeros((12, 12), dtype=complex)
+    for a in range(3):
+        for s in range(2):
+            P[4 * a + 2 * s:4 * a + 2 * s + 2, 4 * a + 2 * (1 - s):4 * a + 2 * (1 - s) + 2] = U
+    return P
+
+
+def q_simmetrica(z, phi0, s, segno):
+    """### **`(q, l'autovalore, G)`:** l'autovettore di `P` *(`sigma_z`)* nella coppia di `B` a `Gamma` con l'autovalore piu' vicino a `segno` *(`+1`: `q+`)*; la fase globale con la
+    componente di modulo massimo reale positiva."""
+    q1, q2, _E0, G = coppia(z, phi0, s)
+    Q = np.stack([q1, q2], axis=1)
+    M = Q.conj().T @ matrice_P(SIGMA_Z) @ Q
+    w, W = np.linalg.eigh(0.5 * (M + M.conj().T))
+    j = int(np.argmin(np.abs(w - segno)))
+    q = Q @ W[:, j]
+    q = q / np.linalg.norm(q)
+    k = int(np.argmax(np.abs(q)))
+    q = q * (np.conj(q[k]) / abs(q[k]))
+    return q, float(w[j]), G
+
+
+def densita_nodo(z, p):
+    """### **`sum |p_e|^2` sulle estremita' di ogni nodo** *(`inc.nodo`)*."""
+    r = np.zeros(z["inc"].n)
+    np.add.at(r, z["inc"].nodo, np.sum(np.abs(p) ** 2, axis=1))
+    return r
+
+
+def centro_inversione(z, pK):
+    """### **`m2`:** il centro d'inversione del reticolo *(`m2 / 2`: un nodo o il punto medio di un arco)* piu' vicino al centro periodico della densita' di `pK` per nodo."""
+    from . import toro as TO
+    L = z["L"]
+    v = np.arange(z["inc"].n)
+    c1, c2, _x, _y = TO.centro(densita_nodo(z, pK), v // L, v % L, L)
+    return int(round(2 * c1)), int(round(2 * c2))
+
+
+def partenza_simmetrica(z, pK, q, N, m2):
+    """### **`psi[e] = inv(nodo(e)) q[a, s]`**, `inv(v) = sqrt((rho_K(v) + rho_K(R v)) / 2)` *(la densita' di `pK` per nodo simmetrizzata attorno a `m2 / 2`)*, normalizzata a `N`;
+    `a = (e // 2) % 3` l'asse, `s = e % 2` l'estremita' *(`0` sul nodo, `1` sul vicino)*."""
+    inc, L = z["inc"], z["L"]
+    v = np.arange(inc.n)
+    Rv = ((m2[0] - v // L) % L) * L + (m2[1] - v % L) % L
+    rK = densita_nodo(z, pK)
+    inv = np.sqrt(0.5 * (rK + rK[Rv]))
+    e = np.arange(2 * inc.m)
+    qe = q.reshape(3, 2, 2)[(e // 2) % 3, e % 2]
+    p = inv[inc.nodo][:, None] * qe
+    p *= math.sqrt(N / float(np.sum(np.abs(p) ** 2)))
+    return p
