@@ -80,3 +80,14 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
 - **`P` sulla coppia: `+1` e `-1`** *(degeneri al bit)*: **la `q` simmetrica e' una SCELTA DI SETTORE** *(`q+` o `q-`)*: di Luca.
 - **L'inviluppo di `pK` per nodo non e' simmetrico** *(`4.63e-02`; il centro a `(40.333, 40.333)`, un centro di triangolo)*: serve un inviluppo simmetrico; **la proposta** *(la densita' simmetrizzata)* **e' da approvare.**
 - **Il codice di `TS` non si scrive prima delle due risposte.**
+
+## 8. LE DUE SCELTE DI LUCA *(dopo `aad1435a`)* E LA PROGETTAZIONE DI `TS`
+
+- **Il settore: `q+`** *(`P = +1`)*, una corsa sola; `q-` solo se `q+` da' un risultato da capire *(decide Luca)*. **L'inviluppo:** la densita' di `pK` per nodo simmetrizzata attorno al centro d'inversione piu' vicino, `inv(v) = sqrt((rho_K(v) + rho_K(R v)) / 2)`, `psi[e] = inv(nodo(e)) q+[a, s]`; `N` come `TP1000`. **La corsa su `F0` fino a `16000`**; nel referto quando la simmetria si rompe *(`1e-12`, `1e-6`, `1e-2`)* e la direzione.
+- ### **UNA PREMESSA NUOVA, scritta prima del codice:** **il vuoto `F0` ruotato e' `-F0`** *(`D-V`)*, non `F0`. **Quindi lo stato `(psi_TS, F0)` e' simmetrico solo per `S` = `R180` x `sigma_z` su `psi` e `R180` seguito da `phi -> -phi` su `phi`**: `S psi = psi` *(`q+`, l'inviluppo simmetrico)* e `S phi = -R F0 = F0`. **`S` commuta col tick vivo SE il tick commuta con `R180` x `sigma_z`** *(`D-T`, misurato: `5.2e-15`)* **E con il segno globale `phi -> -phi`** *(NON misurato)*. ### **Un DEVE nuovo, nel test:** il tick vivo *(10 tick nella rampa e 10 dopo)* commuta con `phi -> -phi` *(`|T(psi, -phi) - (psi', -phi')|` entro `1e-12`)*. **Se non commuta, `TS` su `F0` non puo' essere esattamente simmetrica: FERMO.**
+- **Una convenzione mia, dichiarata:** la fase globale di `q+` *(l'autovettore e' definito a meno di una fase)*: **la componente di modulo massimo reale positiva.** Con `P q+ = +q+` e l'inviluppo simmetrico `c = +1` esattamente.
+- **Il codice:**
+  1. `protetto.q_simmetrica(z, phi0, s, segno)` *(l'autovettore di `P` nella coppia, la convenzione di fase)* e `protetto.partenza_simmetrica(z, phi0, pK, s, N)` *(l'inviluppo simmetrizzato, `m2` il centro d'inversione piu' vicino al centro di `pK`)*.
+  2. `test_simmetrica.py` nella cassetta: `S1` `|S psi - c psi| / |psi|` sotto `1e-12` e `c = 1`; `S1-F` *(deve fallire)* la partenza di oggi; `S2` la norma `N`; `S3` `q+` nella coppia *(il residuo di Bloch)*; **`S4` il tick vivo commuta con `phi -> -phi`**; `S4-F` *(deve fallire)* con `phi -> 1.1 phi`.
+  3. `corsa_accensione`: `CORSE["TS"]`, la partenza simmetrica; **in ogni campione la distanza dello stato dal suo `S`** *(`psi_h` e `phi_h`, con `c` stimato)*; `info` della scena invariato *(il controllo della scena)*, `mu` di `TS` registrato a parte.
+  4. La carta del referto: i tempi `1e-12`, `1e-6`, `1e-2`; lo spostamento e la direzione contro `TP1000` e `D0R`; cuore, `w`, alone.

@@ -23446,3 +23446,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **L'aggiunta a `D5`** *(i semi di rumore)*: la partenza di `TP1000` piu' un rumore relativo `1e-10`, `1e-8`, `1e-6`, semi dichiarati prima, su `F0`; per ogni seme la distanza dalla corsa di riferimento, il tempo di `e`-folding contro i `~25` di `D0R`, la direzione. Le letture (o1), (o2) di Luca. **In coda con `D5`, dopo `TS`** *(e prima della coppia se Luca lo decide)*, `[[PRECEDENZA-IN-CODA]]`.
 - **Una cosa che servira' a `D5`, da sapere ora:** il «tempo in cui la distanza si moltiplica per `e`» va letto sul tratto di CRESCITA *(in `D0R` da `~577` a `~1400`, dentro e subito dopo la rampa)*, non sul pavimento dell'arrotondamento ne' sulla saturazione *(`d` d'ordine `1`)*: **la finestra la dichiaro nel task history di `D5`, prima dei numeri.**
 - **`TM3`:** la patch di `corsa_accensione.py` applicata *(le ancore provate a secco prima)*: `TM3` *(gemella `TF3`)* e `TM3C` *(gemella `TF3C`)*, le mappe e gli stati su `E:`. **La corsa NON parte** finche' Luca non dice se va prima di `TS` *(FERMO su `TS`)*.
+
+## 2026-11-03 — `TS`: LE DUE SCELTE DI LUCA *(dopo `aad1435a`)*; UNA PREMESSA NUOVA
+
+- **Le scelte:** `q+`, una corsa; l'inviluppo simmetrizzato *(la mia proposta)*; su `F0` fino a `16000`. **L'ordine:** `TS`, `TM3`, `TL120`, `D5` *(con l'aggiunta delle `20:23`)*, la coppia, il triangolo *(`[[PRECEDENZA-IN-CODA]]`)*.
+- ### **La premessa nuova** *(nel task history, sez. 8)*: **`R F0 = -F0`**, quindi la simmetria di `(psi_TS, F0)` e' `R180` x `sigma_z` **composta col segno globale `phi -> -phi`**; **che il tick vivo commuti con quel segno NON e' misurato**: e' il DEVE `S4` del test. **Se fallisce, FERMO.**
+- **Una convenzione mia:** la fase globale di `q+` *(la componente di modulo massimo reale positiva)*.
