@@ -1,0 +1,67 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 21c76f47  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 8008c072  committato e pulito
+[TIMBRO] carta_campo.py  sha1-BYTE 16fcb336  committato e pulito
+==================================================================================================================================
+FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di TM1000 (al bit di TP1000, F0) su E:, solo lettura; SOGLIE_RHO (0.001, 0.0001, 1e-05) SOGLIA_L 0.001 TOLL 1e-06 BLOCCO 500 OGNI_LEGGERA 10 TETTO_MB 10
+  le definizioni (campo.py, dichiarate nel task history): gli anelli [k, k+1) fino alla meta' del periodo; la media al centro = l'anello 0; la portata: R_contiguo (il primo
+  anello che NON supera la soglia, il bordo interno; nan = mai entro R) e R_ultimo (il bordo esterno dell'ultimo che la supera); Lambda - Lambda(t 0) per nodo
+==================================================================================================================================
+  DEVE PASSARE: F0 lo sha1 di ogni file delle mappe = l'indice, e i file su E: sono quelli dell'indice                     PASSA   11 file nell'indice, 11 su E:
+  DEVE FALLIRE: F0-F lo sha1 del primo file = la riga del secondo                                                          PASSA   
+  DEVE PASSARE: F1 sum rho = M e sum Lambda = V del campione di TP1000 allo stesso t, entro 1e-06 relativo, ogni istantane PASSA   1067 istantanee; il peggiore M 3.83e-09, V 1.16e-09; senza campione 0
+  DEVE FALLIRE: F1-F la seconda istantanea col nodo piu' denso raddoppiato: sum rho = M entro 1e-06                        PASSA   l'errore 5.07e-03
+  DEVE PASSARE: F2 Lambda(t 0) uniforme (la simmetria attesa, dichiarata): std / media entro 1e-06                         PASSA   0.000e+00 (la media 6.000000000, min 6.000000000, max 6.000000000)
+  DEVE PASSARE: F3 rho(t 0) della mappa = la densita' della partenza ricalcolata (V.partenza), entro 1e-06 relativo        PASSA   2.642e-08
+  il centro ricalcolato dalla rho float32 contro quello salvato nella mappa (dal campione): il massimo 2.174e-08 nodi (registrato)
+  ### profili.npz 641564 byte; mappe_leggere.npz 2470567 byte (107 mappe, una ogni 10 istantanee)
+  float16: rho fino a 5.0640e+03 (il massimo float16 65504); la precisione relativa float16 ~1e-3 (dichiarata)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA PORTATA, a blocchi di 500: la media sulle istantanee del blocco di R_contiguo e il massimo di R_ultimo (nodi); n = quante istantanee non scendono mai (R_contiguo nan)
+  blocco             ist  rho 1e-3 contig/ult (n)    rho 1e-4                   rho 1e-5                   |dLambda| 1e-3 di L(t0)   
+        0 ..     500   34   16.50 /  20.0 (0)          17.65 /  22.0 (0)          21.21 /  41.0 (20)         11.00 /  41.0 (9)        
+      500 ..    1000   33   17.45 /  19.0 (0)          24.21 /  41.0 (5)            nan /  41.0 (33)           nan /  41.0 (33)       
+     1000 ..    1500   33   18.00 /  19.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     1500 ..    2000   34   17.76 /  19.0 (0)            nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     2000 ..    2500   33   16.88 /  17.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     2500 ..    3000   33   16.18 /  17.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     3000 ..    3500   34   15.94 /  16.0 (0)            nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     3500 ..    4000   33   15.88 /  16.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     4000 ..    4500   33   16.00 /  16.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     4500 ..    5000   34   16.00 /  16.0 (0)            nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     5000 ..    5500   33   16.18 /  17.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     5500 ..    6000   33   16.79 /  17.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     6000 ..    6500   34   17.00 /  17.0 (0)            nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     6500 ..    7000   33   18.45 /  41.0 (0)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     7000 ..    7500   33   24.83 /  41.0 (4)            nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     7500 ..    8000   34   40.00 /  41.0 (33)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     8000 ..    8500   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     8500 ..    9000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+     9000 ..    9500   34     nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+     9500 ..   10000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    10000 ..   10500   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    10500 ..   11000   34     nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+    11000 ..   11500   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    11500 ..   12000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    12000 ..   12500   34     nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+    12500 ..   13000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    13000 ..   13500   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    13500 ..   14000   34     nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+    14000 ..   14500   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    14500 ..   15000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+    15000 ..   15500   34     nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)           nan /  41.0 (34)       
+    15500 ..   16000   33     nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)           nan /  41.0 (33)       
+----------------------------------------------------------------------------------------------------------------------------------
+### I PROFILI DI t 0, 5325, 10665, 15990 (rho e |Lambda - Lambda(t 0)| per anello, ogni 5 anelli)
+  tempo     0.00 rho 5.04e+03 3.17e+03 6.23e+02 3.81e-02 5.12e-12 7.17e-22 8.67e-32 1.21e-41 0.00e+00
+                 |dL| 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+  tempo  5325.00 rho 4.09e+03 2.81e+03 8.36e+02 1.19e+01 2.79e+00 2.73e+00 2.50e+00 2.51e+00 2.55e+00
+                 |dL| 2.36e+00 3.63e+00 2.30e+00 2.42e+00 2.00e+00 1.83e+00 2.01e+00 2.10e+00 2.10e+00
+  tempo 10665.00 rho 3.00e+03 2.24e+03 9.82e+02 1.38e+02 5.53e+00 5.40e+00 5.21e+00 5.19e+00 5.06e+00
+                 |dL| 4.00e+00 3.52e+00 2.81e+00 2.42e+00 2.12e+00 2.41e+00 2.33e+00 2.53e+00 2.69e+00
+  tempo 15990.00 rho 2.64e+03 2.01e+03 9.77e+02 2.15e+02 9.14e+00 7.74e+00 7.01e+00 7.77e+00 6.93e+00
+                 |dL| 2.61e+00 2.33e+00 2.61e+00 2.46e+00 2.56e+00 5.32e+00 4.08e+00 2.90e+00 2.69e+00
+==================================================================================================================================
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
