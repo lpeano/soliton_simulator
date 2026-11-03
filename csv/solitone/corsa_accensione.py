@@ -19,6 +19,10 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --corsa TFI        # (Luca 08:29) l'ibrido theta = pi/2, SOLO SE la condizione su TF3
     python csv/solitone/corsa_accensione.py --corsa TF3C       # (Luca, le decisioni corrette dopo fe409582) TF3 continuata da 16000 fino a 30000
     python csv/solitone/corsa_accensione.py --corsa D0R        # (Luca dopo ae60cfb6, (a)) D0': la partenza di TP1000 ruotata di 180 gradi (sigma_z), il vuoto -F0
+    python csv/solitone/corsa_accensione.py --corsa TM3        # (Luca 19:34) TF3 ripetuta con le mappe e gli stati su E:; ogni pezzo al bit di TF3
+    python csv/solitone/corsa_accensione.py --corsa TM3C       # (Luca 19:34) TF3C ripetuta: TM3 continuata fino a 30000; ogni pezzo al bit di TF3C
+    python csv/solitone/corsa_accensione.py --indice TM3 > doc/referti_l2/mappe_indice_TM3.txt
+    python csv/solitone/corsa_accensione.py --indice TM3C > doc/referti_l2/mappe_indice_TM3C.txt
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -71,6 +75,18 @@ VUOTI["TF3C"] = "F3"                # ### solo per la freccia in ogni campione, 
 CORSE["D0R"] = (1000.0, 16000.0)    # ### (Luca dopo ae60cfb6, (a)) D0': TP1000 dalla partenza RUOTATA di 180 gradi con U = sigma_z, e il vuoto ruotato (-F0); carta_d0: il tick vivo commuta
 RUOTATE = ("D0R",)                  # ### le corse che partono dallo stato di TP1000 ruotato (carta_d0.ruota, attorno al centro d'inversione piu' vicino alla densita')
 STATI["D0R"] = STATI["TM1000"]      # ### gli stati agli stessi tempi di TM1000: il confronto con lo stato ruotato di TM1000, chiave per chiave
+CORSE["TM3"] = (1000.0, 16000.0)    # ### (Luca 19:34) TF3 ripetuta con le mappe e gli stati: ogni pezzo DEVE essere quello di TF3 (le mappe sono di quella corsa)
+GEMELLE["TM3"] = "TF3"
+VUOTI["TM3"] = "F3"
+CORSE["TM3C"] = (1000.0, 30000.0)   # ### (Luca 19:34) TF3C ripetuta: TM3 continuata (due corse, perche' i pezzi di TF3C partono da 106667: lo sha_fine al bit pezzo per pezzo)
+CONTINUA["TM3C"] = "TM3"
+GEMELLE["TM3C"] = "TF3C"
+VUOTI["TM3C"] = "F3"
+MAPPE = MAPPE + ("TM3", "TM3C")   # ### le mappe su E:\soliton_simulator\mappe\TM3\ e \TM3C\ (il percorso porta il nome della corsa: dichiarato)
+STATI["TM3"] = (2000.0, 6000.0, 10000.0)   # ### Luca 19:34: gli stati completi a 2000, 6000, 10000 ...
+STATI["TM3C"] = (20000.0,)                 # ### ... e 20000
+DIRS["TM3"] = os.path.join(RADICE_E, "mappe", "TM3", "campioni")     # ### i campioni su E: (doppioni al bit di TF3, come TM1000)
+DIRS["TM3C"] = os.path.join(RADICE_E, "mappe", "TM3C", "campioni")   # ### i campioni su E: (doppioni al bit di TF3C)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
