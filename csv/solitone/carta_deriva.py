@@ -84,15 +84,21 @@ def logaritmo(nome, tt, X, T_acc, fine, blocco):
         if m.sum() >= 3:
             print("    %7.0f .. %7.0f  s %.4e  ln s %+.4f  la pendenza di ln s %+.4e" % (a, a + blocco, sp[m].mean(), np.log(sp[m]).mean(), 1000 * pendenza(tt[m], np.log(sp[m]))))
         a += blocco
+    rette = []   # ### (Luca dopo fe409582) le pendenze delle due rette lunghe, ritornate per la carta della freccia; la stampa invariata
     for t0, t1 in ((T_acc + blocco, min(TAGLIO, fine)), (TAGLIO, fine)):
         if t1 <= t0:
             print("    LA RETTA LUNGA %g .. : non c'e' (i dati validi finiscono a %g)" % (t0, t1))
+            rette.append((t0, t1, float("nan")))
             continue
         m = (tt >= t0) & (tt < t1) & (sp > 0)
         if m.sum() >= 3:
-            print("    LA RETTA LUNGA %g .. %g: la pendenza di ln s %+.4e per 1000 (%d campioni)" % (t0, t1, 1000 * pendenza(tt[m], np.log(sp[m])), int(m.sum())))
+            p = 1000 * pendenza(tt[m], np.log(sp[m]))
+            print("    LA RETTA LUNGA %g .. %g: la pendenza di ln s %+.4e per 1000 (%d campioni)" % (t0, t1, p, int(m.sum())))
+            rette.append((t0, t1, float(p)))
         else:
             print("    LA RETTA LUNGA %g .. %g: nessun dato" % (t0, t1))
+            rette.append((t0, t1, float("nan")))
+    return rette
 
 
 def finestre(nome, tt, X, ww, fl, a0, fine, passo, ampiezza):
