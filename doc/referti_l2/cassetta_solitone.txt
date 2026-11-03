@@ -8,6 +8,7 @@
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
 [TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 826a475d  committato e pulito
 [TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
 [TIMBRO] test_protetto.py  sha1-BYTE d8c478fe  committato e pulito
 [TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
@@ -18,7 +19,8 @@
 [TIMBRO] test_mappe.py  sha1-BYTE b56209c1  committato e pulito
 [TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
 [TIMBRO] test_simmetrica.py  sha1-BYTE 63cefa24  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 6152cb90  committato e pulito
+[TIMBRO] test_bordo.py  sha1-BYTE a0a9ed01  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE 8cd565af  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -137,13 +139,19 @@ C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWar
   DEVE PASSARE: S3 q+ e' nella coppia (|G q - <G> q| entro 1e-12) e P q+ = q+ (entro 1e-12)                                          PASSA   Bloch 5.92e-16, |P q - q| 8.17e-16, l'autovalore +1.000000000000000
   DEVE PASSARE: S4 il tick VIVO commuta con phi -> -phi (10 tick nella rampa da TS su F3 e 10 dopo da TM1000 a 13333), ogni chiave e PASSA   il peggiore 0.000e+00 (c_v di F3 -1.000: S4 necessario)
   DEVE FALLIRE: S4-F lo stesso con phi -> 1.1 phi                                                                                    PASSA   il peggiore 2.102e-01
-### D6: LA LIBRERIA E' QUELLA DI 04433dfb (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 04433dfb a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### IL BORDO ASSORBENTE (csv/solitone/bordo.py): R_A 28 G_PROVA 0.1 TOLL 1e-12
+  DEVE PASSARE: G0 il profilo: 0 dentro R_A 28, g_max da R_B 40.50, crescente, la derivata nulla a R_A                               PASSA   g(R_A + 1e-6) 1.58e-15
+  DEVE PASSARE: G1 il bilancio: M dopo + dM = M prima, V dopo + dV = V prima, entro 1e-12 relativo                                   PASSA   M 0.00e+00, V 0.00e+00; dM / M0 6.654e-02
+  DEVE FALLIRE: G1-F senza dM, M dopo = M prima entro 1e-12                                                                          PASSA   6.654e-02
+  DEVE PASSARE: G3 dentro R_A (g = 0) lo stato resta AL BIT                                                                          PASSA   17142 estremita' dentro, 22224 nella fascia
+  DEVE PASSARE: G2 con psi = 0 e phi = phi0 lo stato resta AL BIT (si assorbono le onde, non il vuoto)                               PASSA   dM 0 dV 0
+### D6: LA LIBRERIA E' QUELLA DI f44e8a14 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da f44e8a14 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 24 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 17 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 2 s; campo 2 s; simmetrica 6 s
-ESITO: 98/98 controlli passano; fallite: 0 []
+  i tempi: uscite 16 s; protetto 14 s; misure 5 s; vuoto 3 s; respiro 0 s; accensione 7 s; toro 2 s; mappe 2 s; campo 2 s; simmetrica 6 s; bordo 2 s
+ESITO: 103/103 controlli passano; fallite: 0 []

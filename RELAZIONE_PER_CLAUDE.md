@@ -23483,3 +23483,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il moto parte prima, non dopo:** `TS` da `~4000`, il massimo `12.04` per `1000` a `7000-8000`; `TF3 + TF3C` da `~16000`, il massimo `22.35`. **Lo spostamento:** `TS` `117.9` nodi a `+7.9` gradi, `TF3 + TF3C` `87.8` a `-158.2`.
 - **Le letture (s1)-(s3) sono di Luca.** **La mia osservazione:** la partenza simmetrizzata e' **un'altra partenza** *(l'inviluppo simmetrizzato e `q+`)*: l'anticipo puo' venire dalla costruzione e non dal seme; **una corsa sola non lo separa.**
 - **Dopo:** `D6` e la cassetta *(i test del bordo)*, poi `B0`.
+
+## 2026-11-04 — LA CASSETTA DOPO `D6` A `f44e8a14`: **`103/103`**
+
+- **I test del bordo** *(`test_bordo`)*: `G0` il profilo *(`g(R_A + 1e-6)` `1.6e-15`)*; `G1` il bilancio al bit *(`dM / M0` `6.65e-2` col `g` di prova `0.1`)*; `G1-F` fallisce come deve; `G3` `17142` estremita' dentro, `22224` nella fascia, al bit; `G2` col vuoto `phi0` e `psi = 0` niente si muove *(`dM 0`, `dV 0`)*.
+- **Dopo:** `B0`.
