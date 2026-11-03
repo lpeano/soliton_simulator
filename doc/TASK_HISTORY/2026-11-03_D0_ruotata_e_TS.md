@@ -63,3 +63,8 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
 
 - **`D-T` passa:** il tick vivo commuta con `R180` x `sigma_z` *(`5.194e-15` dopo la rampa, `7.631e-16` nella rampa; U = 1 `2.929e-01`)*. **Il vuoto ruotato e' `-F0` esattamente.** **`psi` per nodo e `h_int` sono nulli e non scritti:** il loro zero e' un falso-zero *(dichiarato)*. **Nella rampa `lam` e' `5.6e-06`:** il vuoto lo prova il controllo dopo la rampa.
 - **Quindi il passo 2: la corsa `D0'`**, come progettato. **Niente mi ha fatto fermare.**
+
+## 5. LA CODA DOPO LE DECISIONI DI LUCA *(dopo `eaa5e3ec`)*
+
+- **La lettura (f1)**; **`TFI` in lista d'attesa**; **`F3` il vuoto predefinito delle prove nuove**.
+- **La coda:** `D0R` *(il referto coi tempi delle decadi `1e-12`, `1e-6`, `1e-2`)*, poi `TS` *(su `F0` e, se il costo lo permette, su `F3`: dichiararlo)*, poi `TL120` su `F3`, poi il resto.
