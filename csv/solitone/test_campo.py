@@ -11,6 +11,9 @@ from . import toro as TO
 ELLE = 3.0                     # ### C3: la lunghezza dell'esponenziale exp(-r / ELLE)
 SOGLIE = (1e-3, 1e-4, 1e-5)    # ### C3: le soglie del mandato
 TOLL_ARR = 1e-12               # ### C2: l'arrotondamento (relativo)
+R_POLI = 14.0                  # ### C4, C5: Luca 19:30, entro 14 nodi dal centro
+ASSI = (-30.0, 47.0)           # ### C4 l'asse del quadrupolo, C5 quello del dipolo (gradi; scelti a mano, qualunque)
+TOLL_ASSE = 1e-9               # ### C4, C5: gradi (sul reticolo esagonale le armoniche 4 e 2 si annullano per simmetria)
 
 
 def gira(esito):
@@ -56,3 +59,16 @@ def gira(esito):
         ok = ok and abs(rc - att) <= 1.0 and abs(ru - att) <= 1.0
         righe.append("%g: contiguo %g ultimo %g, ELLE ln(1/f) %.3f" % (sg, rc, ru, att))
     esito("DEVE PASSARE: C3 la portata di exp(-r / %g) entro 1 anello da ELLE ln(1/f), per le tre soglie" % ELLE, ok, "; ".join(righe))
+
+    D = TO.scarti(m1, m2, L // 2, L // 2, L)
+    th = np.arctan2(D[:, 1], D[:, 0])
+    rr = np.hypot(D[:, 0], D[:, 1])
+    a, bb = ASSI
+    mq = CP.multipoli(np.cos(2.0 * (th - math.radians(a))), D, R_POLI)
+    md = CP.multipoli(np.cos(th - math.radians(bb)) * rr, D, R_POLI)
+    esito("DEVE PASSARE: C4 il campo cos(2 (theta - %g)) entro %g: l'asse del quadrupolo %g gradi entro %g" % (a, R_POLI, a, TOLL_ASSE), abs(mq["q_asse"] - a) <= TOLL_ASSE and mq["q_rel"] > 0.5,
+          "l'asse %.12f, il relativo %.4f, %d nodi" % (mq["q_asse"], mq["q_rel"], mq["nodi"]))
+    esito("DEVE PASSARE: C5 il campo r cos(theta - %g) entro %g: l'asse del dipolo %g gradi entro %g" % (bb, R_POLI, bb, TOLL_ASSE), abs(md["p_asse"] - bb) <= TOLL_ASSE and md["p_rel"] > 0.5,
+          "l'asse %.12f, il relativo %.4f" % (md["p_asse"], md["p_rel"]))
+    mi = CP.multipoli(np.exp(-rr / ELLE), D, R_POLI)
+    esito("DEVE FALLIRE: C4-F il campo ISOTROPO exp(-r / %g) ha un quadrupolo col relativo sopra %g" % (ELLE, TOLL_ARR), not mi["q_rel"] > TOLL_ARR, "il relativo %.2e" % mi["q_rel"])

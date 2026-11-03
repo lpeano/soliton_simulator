@@ -40,3 +40,20 @@ def portata(prof, soglia):
     giu = np.nonzero(~sopra)[0]
     su = np.nonzero(sopra)[0]
     return (float(giu[0]) if len(giu) else float("nan")), (float(su[-1] + 1) if len(su) else 0.0)
+
+
+def multipoli(f, D, R):
+    """### **I due poli di `f` entro `R` dal centro** *(`D` gli scarti, l'immagine piu' vicina; il task history `2026-11-03_TM3_campo_F3`)*: ### **il dipolo** `p = sum f D`, l'asse
+    `atan2(p_y, p_x)` *(gradi)*, il modulo e il relativo `|p| / sum |f| |D|`; ### **il quadrupolo** `q = sum f (Dx + i Dy)^2`, l'asse `arg(q) / 2` *(gradi, modulo `180`)*, il modulo e il
+    relativo `|q| / sum |f| |D|^2` *(`0` isotropo, `1` una retta)*."""
+    f = np.asarray(f, dtype=float)
+    r2 = D[:, 0] ** 2 + D[:, 1] ** 2
+    m = r2 <= R * R
+    f, D, r2 = f[m], D[m], r2[m]
+    p = np.sum(f[:, None] * D, axis=0)
+    zz = (D[:, 0] + 1j * D[:, 1]) ** 2
+    q = complex(np.sum(f * zz))
+    bp = float(np.sum(np.abs(f) * np.sqrt(r2)))
+    bq = float(np.sum(np.abs(f) * r2))
+    return {"p_asse": math.degrees(math.atan2(p[1], p[0])), "p": float(np.hypot(*p)), "p_rel": float(np.hypot(*p)) / bp if bp > 0 else float("nan"),
+            "q_asse": 0.5 * math.degrees(math.atan2(q.imag, q.real)), "q": abs(q), "q_rel": abs(q) / bq if bq > 0 else float("nan"), "nodi": int(m.sum())}

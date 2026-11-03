@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**FIN DOVE ARRIVA IL CAMPO: I PROFILI E LE MAPPE LEGGERE DA `TM1000`** *(Luca, `2026-11-03` `18:26`; il task history `doc/TASK_HISTORY/2026-11-03_campo_TM1000.md`)*
     python csv/solitone/carta_campo.py > doc/referti_l2/campo_TM1000.txt
+    python csv/solitone/carta_campo.py --corsa TM3 > doc/referti_l2/campo_TM3.txt     # (Luca 19:34) TM3 + TM3C, F3; gli indici mappe_indice_TM3.txt, mappe_indice_TM3C.txt
 ### **Nessuna corsa: `E:` solo in lettura** *(le mappe di `TM1000`, al bit di `TP1000`, `0 .. 16000`, `F0`)*. ### **Scrive nel repo:** `doc/referti_l2/campo_TM1000/profili.npz` *(`float32`:
 i profili ad anelli di `rho`, `Lambda`, `|Lambda - Lambda(t 0)|` e `Lambda - Lambda(t 0)` di ogni istantanea, quelli di `t 0`, i centri, la portata)* e `mappe_leggere.npz` *(una ogni
 `OGNI_LEGGERA` istantanee: `rho` e `Lambda - Lambda(t 0)` per nodo in `float16`)*.
@@ -21,16 +22,16 @@ if os.path.dirname(_QUI) not in sys.path:
     sys.path.insert(0, os.path.dirname(_QUI))
 import solitone  # noqa: E402,F401  (i percorsi)
 
-CORSA = "TM1000"
-GEMELLA = "TP1000"             # ### TM1000 al bit di TP1000: M e V dai campioni nel repo
+PARTI = {"TM1000": (("TM1000", "TP1000"),),                      # ### la corsa: (le corse con le mappe, la gemella al bit coi campioni nel repo)
+         "TM3": (("TM3", "TF3"), ("TM3C", "TF3C"))}              # ### Luca 19:34: TF3 + TF3C con le mappe (due corse: lo sha_fine al bit pezzo per pezzo)
+INDICI = {"TM1000": ("mappe_indice.txt",), "TM3": ("mappe_indice_TM3.txt", "mappe_indice_TM3C.txt")}   # ### corsa_accensione.py --indice <nome>
 SOGLIE_RHO = (1e-3, 1e-4, 1e-5)   # ### Luca 18:26
 SOGLIA_L = 1e-3                # ### Luca 18:26
 TOLL = 1e-6                    # ### Luca 18:26 (come K2 di TM1000: float32)
 BLOCCO = 500.0                 # ### Luca 18:26: la tabella a blocchi di 500 unita'
 OGNI_LEGGERA = 10              # ### Luca 18:26: una ogni 10 istantanee ...
 TETTO_MB = 10.0                # ### ... se supera 10 MB, una ogni 20
-DIR_OUT = os.path.join(solitone.RADICE, "doc", "referti_l2", "campo_TM1000")
-INDICE = os.path.join(solitone.RADICE, "doc", "referti_l2", "mappe_indice.txt")
+DIR_REF = os.path.join(solitone.RADICE, "doc", "referti_l2")
 
 OK = [0, 0]
 FALLITE = []
@@ -46,14 +47,15 @@ def esito(che, passa, nota=""):
     return passa
 
 
-def indice():
-    """### **Le righe delle mappe nell'indice:** `{percorso: (byte, sha1)}`, nell'ordine."""
+def indice(corsa):
+    """### **Le righe delle mappe negli indici della corsa:** `{percorso: (byte, sha1)}`, nell'ordine *(le parti nell'ordine di `PARTI`)*."""
     out = {}
-    with open(INDICE, encoding="utf-8") as f:
-        for riga in f:
-            m = re.search(r"(E:\\soliton_simulator\\mappe\\%s\\%s_\d+\.npz)\s+(\d+) byte\s+sha1 ([0-9a-f]{40})" % (CORSA, CORSA), riga)
-            if m:
-                out[m.group(1)] = (int(m.group(2)), m.group(3))
+    for (p, _g), nf in zip(PARTI[corsa], INDICI[corsa]):
+        with open(os.path.join(DIR_REF, nf), encoding="utf-8") as f:
+            for riga in f:
+                m = re.search(r"(E:\\soliton_simulator\\mappe\\%s\\%s_\d+\.npz)\s+(\d+) byte\s+sha1 ([0-9a-f]{40})" % (p, p), riga)
+                if m:
+                    out[m.group(1)] = (int(m.group(2)), m.group(3))
     return out
 
 
@@ -66,7 +68,9 @@ def salva(percorso, **dati):
 
 
 def main(argv):
-    del argv
+    corsa = argv[argv.index("--corsa") + 1] if "--corsa" in argv else "TM1000"
+    parti = PARTI[corsa]
+    DIR_OUT = os.path.join(DIR_REF, "campo_%s" % corsa)
     import _energia_del_legame as EL
     import _presidio
     import _vuoto_vivo_B as V
@@ -79,19 +83,19 @@ def main(argv):
     _presidio.avvia(__file__)
     sol, vuoto, s = V.CORSE[CA.NOME]
     print("=" * 130)
-    print("FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di %s (al bit di %s, F0) su E:, solo lettura; SOGLIE_RHO %s SOGLIA_L %g TOLL %g BLOCCO %g OGNI_LEGGERA %d TETTO_MB %g"
-          % (CORSA, GEMELLA, SOGLIE_RHO, SOGLIA_L, TOLL, BLOCCO, OGNI_LEGGERA, TETTO_MB))
+    print("FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di %s (al bit di %s; il vuoto %s) su E:, solo lettura; SOGLIE_RHO %s SOGLIA_L %g TOLL %g BLOCCO %g OGNI_LEGGERA %d TETTO_MB %g"
+          % ("+".join(p for p, _g in parti), "+".join(g for _p, g in parti), "F3" if corsa == "TM3" else "F0", SOGLIE_RHO, SOGLIA_L, TOLL, BLOCCO, OGNI_LEGGERA, TETTO_MB))
     print("  le definizioni (campo.py, dichiarate nel task history): gli anelli [k, k+1) fino alla meta' del periodo; la media al centro = l'anello 0; la portata: R_contiguo (il primo")
     print("  anello che NON supera la soglia, il bordo interno; nan = mai entro R) e R_ultimo (il bordo esterno dell'ultimo che la supera); Lambda - Lambda(t 0) per nodo")
     print("=" * 130)
-    idx = indice()
+    idx = indice(corsa)
     files = list(idx)
     sha_letti = {f: MP.sha1(f) for f in files}
-    presenti = sorted(os.path.join(MP.RADICE, CORSA, n) for n in os.listdir(os.path.join(MP.RADICE, CORSA)) if n.endswith(".npz"))
+    presenti = sorted(os.path.join(MP.RADICE, p, n) for p, _g in parti for n in os.listdir(os.path.join(MP.RADICE, p)) if n.endswith(".npz"))
     esito("DEVE PASSARE: F0 lo sha1 di ogni file delle mappe = l'indice, e i file su E: sono quelli dell'indice", all(sha_letti[f] == idx[f][1] for f in files) and presenti == sorted(files),
           "%d file nell'indice, %d su E:" % (len(files), len(presenti)))
     esito("DEVE FALLIRE: F0-F lo sha1 del primo file = la riga del secondo", sha_letti[files[0]] != idx[files[1]][1], "")
-    _r, camp, _d, _a = CA.serie(GEMELLA)
+    camp = [c for _p, g in parti for c in CA.serie(g)[1]]
     MV = {c["t"]: (c["E"]["totale"]["M"], c["E"]["totale"]["V"]) for c in camp}
     with V.scena(s, vuoto, V.EPS) as (_rec, z, phi0, pK):
         L, m1, m2 = z["L"], np.asarray(z["m1"]), np.asarray(z["m2"])
@@ -149,7 +153,7 @@ def main(argv):
                 legg_l.append(dl.astype(np.float16))
                 legg_c.append((c1, c2))
             i_glob += 1
-    esito("DEVE PASSARE: F1 sum rho = M e sum Lambda = V del campione di %s allo stesso t, entro %g relativo, ogni istantanea" % (GEMELLA, TOLL), eM <= TOLL and eV <= TOLL and manca == 0,
+    esito("DEVE PASSARE: F1 sum rho = M e sum Lambda = V del campione di %s allo stesso t, entro %g relativo, ogni istantanea" % ("+".join(g for _p, g in parti), TOLL), eM <= TOLL and eV <= TOLL and manca == 0,
           "%d istantanee; il peggiore M %.2e, V %.2e; senza campione %d" % (len(tt), eM, eV, manca))
     esito("DEVE FALLIRE: F1-F la seconda istantanea col nodo piu' denso raddoppiato: sum rho = M entro %g" % TOLL, not eF <= TOLL, "l'errore %.2e" % eF)
     sp = float(L0.std() / L0.mean())
