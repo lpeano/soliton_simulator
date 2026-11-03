@@ -17,6 +17,7 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --indice DG1000 > doc/referti_l2/due_giri_indice.txt
     python csv/solitone/corsa_accensione.py --corsa TF3        # (Luca 2026-11-03 08:29) TP1000 col vuoto F3; un pezzo alla volta finche' dice "finita"
     python csv/solitone/corsa_accensione.py --corsa TFI        # (Luca 08:29) l'ibrido theta = pi/2, SOLO SE la condizione su TF3
+    python csv/solitone/corsa_accensione.py --corsa TF3C       # (Luca, le decisioni corrette dopo fe409582) TF3 continuata da 16000 fino a 30000
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -63,6 +64,9 @@ BLOCCO = 1000.0                # ### i blocchi del confronto (come _respiro_cong
 CORSE["TF3"] = (1000.0, 16000.0)   # ### (Luca 2026-11-03 08:29) TP1000 col vuoto F3: la partenza costruita su F0 come TP1000, POI il vuoto sostituito
 CORSE["TFI"] = (1000.0, 16000.0)   # ### (Luca 08:29) l'ibrido theta = pi/2: SOLO SE TF3 si muove meno o diversamente (la condizione nel task history 2026-11-03)
 VUOTI = {"TF3": "F3", "TFI": (0.0, 0.0, 0.5 * math.pi)}   # ### le fasi per (A2, A1, A1+A2): F3 letto da _solitone_dal_fondo.FASI; l'ibrido di Luca
+CORSE["TF3C"] = (1000.0, 30000.0)   # ### (Luca, le decisioni corrette dopo fe409582) TF3 continuata dal suo ultimo stato (16000) fino a 30000, stesso protocollo
+CONTINUA["TF3C"] = "TF3"            # ### il primo pezzo parte dall'ultimo di TF3 (al bit, ogni chiave); il vuoto NON si risostituisce (prec non e' None)
+VUOTI["TF3C"] = "F3"                # ### solo per la freccia in ogni campione, le bande su F3 e lo sha del vuoto registrato, come TF3
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
