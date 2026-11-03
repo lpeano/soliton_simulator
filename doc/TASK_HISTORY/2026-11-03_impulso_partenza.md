@@ -62,3 +62,9 @@ Un DEVE fallito; una commutazione che nessun `U` soddisfa *(lo scrivo, e le lett
 
 ## 3. TODO DEL NEXT STEP
 - [ ] commit di questo file; la carta; commit; `D6`; la cassetta; il referto; poi `TF3C`.
+
+## 4. ESITO *(2026-11-03; il referto `doc/referti_l2/impulso_partenza.txt`, `7/7`)*
+
+- **Tutti i DEVE passano.** **L'impulso canonico e' nullo** *(`2.0e-19`, il falso-zero dichiarato)*; **il centro a vuoto congelato si muove** *(`1.13e-3` nodi in `100` tick, lungo `-(A1+A2)`)*; **F0 e F3 a vuoto congelato uguali al bit**; **`R180` con `sigma_z` e' una simmetria esatta** *(`1.0e-16`)* **e lo stato non e' simmetrico** *(`0.995`)*; **la densita' spostata di `0.368` nodi lungo `A1+A2`** dalla cella orientata.
+- **Le premesse, annotate:** la rotazione attorno al centro d'inversione piu' vicino, non al nodo; `U` dalla commutazione: **`sigma_z`**, l'unica.
+- **Le letture (q1)-(q3) sono di Luca.** **TODO:** `TF3C` *(il task history `2026-11-03_TF3_lunga.md`)*.

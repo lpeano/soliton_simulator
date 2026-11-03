@@ -1,0 +1,51 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 2a1a2912  committato e pulito
+[TIMBRO] carta_deriva.py  sha1-BYTE 0f56fe9d  committato e pulito
+[TIMBRO] carta_impulso.py  sha1-BYTE a855c74a  committato e pulito
+==================================================================================================================================
+L'IMPULSO DELLA PARTENZA (Luca 2026-11-03 14:06): BG-F-0.15 (sol BG, s 0.15, eps 0.5); TICK (1, 10, 100) TOLL_K 1e-09 TOLL_UGUALE 1e-12; la forma del tick congelato S1
+  le letture di Luca, scritte prima: (q1) corrente e impulso nulli entro l'arrotondamento, l'inviluppo simmetrico: la partenza e' innocente; (q2) non nulli, verso -A1
+  (circa): la spinta la diamo noi; (q3) non nulli in un'altra direzione: si scrive. ### UN FALSO-ZERO dichiarato: l'impulso CANONICO di inv x q e' nullo per costruzione
+==================================================================================================================================
+  DEVE PASSARE: P0 lo stato di partenza e' quello di TP1000 (mu al bit di quello del primo pezzo)                          PASSA   mu 4.161868161822483
+  DEVE PASSARE: P0-C l'arco k e' del nodo k // 3 (2k sul nodo, 2k+1 sul vicino lungo un asse fisso per k % 3)              PASSA   gli assi (d1, d2) [(1, 0), (0, 1), (1, 1)]
+  ### la riga v di reshape(n, 12) (protetto.inviluppo) = le 6 estremita' dei tre archi IN AVANTI di v, lungo [(1, 0), (0, 1), (1, 1)]: UNA CELLA ORIENTATA, non il nodo
+  il centro della densita' di partenza (indici) (40.373736, 40.362482); la rotazione di 180 gradi attorno al centro d'inversione piu' vicino (40.5, 40.5) (lo scarto -1.263e-01, -1.375e-01)
+  ### il centro dell'INVILUPPO (la riga v di reshape(n, 12) messa sul nodo v) (40.000000, 40.000000); la densita' sui nodi meno l'inviluppo: |.| 3.6824e-01 a   +58.48 gradi, cos A1 / A2 / A1+A2 +0.523 / +0.477 / +1.000
+  DEVE PASSARE: R2 la rotazione due volte e' l'identita' (al bit)                                                          PASSA   
+  DEVE FALLIRE: V-F il tick congelato sul vuoto F0 scalato di 1.1 (|phi| diverso) e' uguale a quello su F0 (il vuoto ENTRA PASSA   lo scarto 2.701e-04
+  ### F0 CONTRO F3 (|phi| uguale, le fasi diverse): un tick congelato dallo stato di partenza uguale AL BIT? True (lo scarto 0.000e+00)
+  DEVE PASSARE: K+ lo stato per e^{i k0 . r} (k0 . A1 = 2 pi / L) ridà arg C_d = k0 . d entro 1e-09                        PASSA   args ['+0.077570188978', '-0.000000000000', '+0.077570188978'], attesi ['+0.077570188978', '+0.000000000000', '+0.077570188978']
+  DEVE PASSARE: K- il suo ruotato di 180 gradi ridà -k0 . d entro 1e-09                                                    PASSA   args ['-0.077570188978', '+0.000000000000', '-0.077570188978']
+  DEVE FALLIRE: K-F lo stato SENZA la spinta ridà k0 . d entro 1e-09                                                       PASSA   args ['+2.838e-19', '+3.070e-19', '+3.891e-21']
+----------------------------------------------------------------------------------------------------------------------------------
+### (p1) L'IMPULSO MEDIO DELLO STATO DI PARTENZA, rispetto a Gamma (k = 0): arg C_d per gli assi [(1, 0), (0, 1), (1, 1)] = ['+2.838e-19', '+3.070e-19', '+3.891e-21']
+    k = (+8.819e-20, +1.795e-19): |.| 1.9999e-19 a   +63.84 gradi, cos A1 / A2 / A1+A2 +0.441 / +0.557 / +0.998;  il passo di k sul toro 2 pi / L = 7.7570e-02
+### (p2) IL RUOTATO DI 180 GRADI: arg C_d ['+5.303e-20', '+5.407e-20', '+1.674e-19']; k = (+7.315e-20, +1.279e-19)  (il controllo positivo: |.| 8.9570e-02 a   +30.00 gradi, cos A1 / A2 / A1+A2 +0.866 / -0.000 / +0.866 -> |.| 8.9570e-02 a  -150.00 gradi, cos A1 / A2 / A1+A2 -0.866 / +0.000 / -0.866)
+----------------------------------------------------------------------------------------------------------------------------------
+### (p4) LO STATO CONTRO IL SUO RUOTATO (a meno di una fase), E LA COMMUTAZIONE DEL TICK CONGELATO CON R180, per U sulle due componenti
+    la sola densita' per nodo: |rho(R v) - rho(v)| / |rho| = 3.6722e-02
+    U 1 : |R psi - c psi| / |psi| = 1.7347e-01 (c = +0.984838 +0.000000i); commuta su F0: 1.3360e-01; commuta su F3: 1.3360e-01
+    U sx: |R psi - c psi| / |psi| = 7.1036e-01 (c = -0.703835 +0.000000i); commuta su F0: 9.4464e-02; commuta su F3: 9.4464e-02
+    U sy: |R psi - c psi| / |psi| = 7.2509e-01 (c = -0.688657 -0.000000i); commuta su F0: 9.4459e-02; commuta su F3: 9.4459e-02
+    U sz: |R psi - c psi| / |psi| = 9.9457e-01 (c = +0.104058 +0.000000i); commuta su F0: 1.0038e-16; commuta su F3: 1.0038e-16
+    ### LE U PER CUI R180 E' UNA SIMMETRIA DEL TICK CONGELATO (entro 1e-12, su F0 e F3): ['sz']
+----------------------------------------------------------------------------------------------------------------------------------
+### (p1), (p3) IL CENTRO A VUOTO CONGELATO (_modo_al_variare_di_s.tick, LP.FORMA): J = M dX/dt; la velocita' per 1000 unita' di tempo
+    F0 lo stato             dopo   1 tick (tempo   0.150): lo spostamento |.| 8.2491e-05 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995; v per 1000 |.| 5.4994e-01 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995; J = M dX/dt = |.| 5.4994e+02 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995
+    F0 lo stato             dopo  10 tick (tempo   1.500): lo spostamento |.| 8.6197e-04 a  -118.32 gradi, cos A1 / A2 / A1+A2 -0.474 / -0.525 / -1.000; v per 1000 |.| 5.7465e-01 a  -118.32 gradi, cos A1 / A2 / A1+A2 -0.474 / -0.525 / -1.000
+    F0 lo stato             dopo 100 tick (tempo  15.000): lo spostamento |.| 1.1286e-03 a  -109.90 gradi, cos A1 / A2 / A1+A2 -0.340 / -0.644 / -0.984; v per 1000 |.| 7.5239e-02 a  -109.90 gradi, cos A1 / A2 / A1+A2 -0.340 / -0.644 / -0.984
+    F0 il ruotato (U = sz)  dopo   1 tick (tempo   0.150): lo spostamento |.| 8.2491e-05 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995; v per 1000 |.| 5.4994e-01 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995; J = M dX/dt = |.| 5.4994e+02 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995
+    F0 il ruotato (U = sz)  dopo  10 tick (tempo   1.500): lo spostamento |.| 8.6197e-04 a   +61.68 gradi, cos A1 / A2 / A1+A2 +0.474 / +0.525 / +1.000; v per 1000 |.| 5.7465e-01 a   +61.68 gradi, cos A1 / A2 / A1+A2 +0.474 / +0.525 / +1.000
+    F0 il ruotato (U = sz)  dopo 100 tick (tempo  15.000): lo spostamento |.| 1.1286e-03 a   +70.10 gradi, cos A1 / A2 / A1+A2 +0.340 / +0.644 / +0.984; v per 1000 |.| 7.5239e-02 a   +70.10 gradi, cos A1 / A2 / A1+A2 +0.340 / +0.644 / +0.984
+    F3 lo stato             dopo   1 tick (tempo   0.150): lo spostamento |.| 8.2491e-05 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995; v per 1000 |.| 5.4994e-01 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995; J = M dX/dt = |.| 5.4994e+02 a  -114.27 gradi, cos A1 / A2 / A1+A2 -0.411 / -0.584 / -0.995
+    F3 lo stato             dopo  10 tick (tempo   1.500): lo spostamento |.| 8.6197e-04 a  -118.32 gradi, cos A1 / A2 / A1+A2 -0.474 / -0.525 / -1.000; v per 1000 |.| 5.7465e-01 a  -118.32 gradi, cos A1 / A2 / A1+A2 -0.474 / -0.525 / -1.000
+    F3 lo stato             dopo 100 tick (tempo  15.000): lo spostamento |.| 1.1286e-03 a  -109.90 gradi, cos A1 / A2 / A1+A2 -0.340 / -0.644 / -0.984; v per 1000 |.| 7.5239e-02 a  -109.90 gradi, cos A1 / A2 / A1+A2 -0.340 / -0.644 / -0.984
+    F3 il ruotato (U = sz)  dopo   1 tick (tempo   0.150): lo spostamento |.| 8.2491e-05 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995; v per 1000 |.| 5.4994e-01 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995; J = M dX/dt = |.| 5.4994e+02 a   +65.73 gradi, cos A1 / A2 / A1+A2 +0.411 / +0.584 / +0.995
+    F3 il ruotato (U = sz)  dopo  10 tick (tempo   1.500): lo spostamento |.| 8.6197e-04 a   +61.68 gradi, cos A1 / A2 / A1+A2 +0.474 / +0.525 / +1.000; v per 1000 |.| 5.7465e-01 a   +61.68 gradi, cos A1 / A2 / A1+A2 +0.474 / +0.525 / +1.000
+    F3 il ruotato (U = sz)  dopo 100 tick (tempo  15.000): lo spostamento |.| 1.1286e-03 a   +70.10 gradi, cos A1 / A2 / A1+A2 +0.340 / +0.644 / +0.984; v per 1000 |.| 7.5239e-02 a   +70.10 gradi, cos A1 / A2 / A1+A2 +0.340 / +0.644 / +0.984
+    accanto: TP1000, il primo blocco 0 .. 1000 della corsa (il vuoto vivo): v 0.590 per 1000 a -135.02 gradi
+    accanto: TF3, il primo blocco 0 .. 1000 della corsa (il vuoto vivo): v 0.063 per 1000 a -98.46 gradi
+==================================================================================================================================
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
