@@ -23464,3 +23464,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Il primo pezzo** *(`0 -> 10000` tick)*: **`605` s**; `20` pezzi fino a `200000` tick: **~`3.4` ore** *(la stima di Luca: `3.5`-`4`)*.
 - **L'asimmetria dal jsonl del primo pezzo** *(una lettura, nessun calcolo; ogni `150` unita' di tempo)*: `psi_h` `8.3e-16` a `0`, `1.2e-14` a `150`, `1.0e-13` a `450`, **`1.7e-12` a `600`**, `8.5e-11` a `750`, `4.0e-09` a `900`, `3.0e-07` a `1050`, `7.1e-05` a `1200`, **`4.3e-03` a `1350`**, `4.4e-02` a `1500`; `phi_h` circa un ordine piu' avanti *(`1.3e-11` a `600`, `4.8e-02` a `1350`)*. **Come `D0R`:** la crescita comincia nella rampa e porta l'arrotondamento a `1e-2` in `~1400` unita' di tempo. **I tempi esatti e la direzione: nel referto.**
+
+## 2026-11-03 — IL BORDO ASSORBENTE *(Luca `21:52`)*: IL TASK HISTORY; LA CODA; UNA PREMESSA DA MISURARE
+
+- **La coda** *(`[[PRECEDENZA-IN-CODA]]`)*: `TS` *(in volo)* -> **`TB3`** -> `TM3` -> `TL120` -> `D5` -> la coppia -> il triangolo.
+- ### **La premessa da misurare prima** *(`doc/TASK_HISTORY/2026-11-03_TB3_bordo_assorbente.md`)*: **il bordo riporta `phi` verso `phi0 = F3`; se `F3` da solo non e' fermo sotto il tick vivo** *(anche solo una fase globale per tick)*, **un `phi0` fisso FORZA il vuoto della fascia invece di assorbirne le onde.** In `TM1000` `|dLambda|` `~2` ovunque: il dubbio e' concreto. **La carta `B0`** *(a `TS` finita)* decide: `F3` fermo *(come il mandato)*; fermo a meno di una fase *(propongo `phi0(t) = c(t) F3` con `c` misurato: da confermare)*; non fermo *(FERMO: `phi0` evoluto a parte, costo `~x2`, o il bordo solo su `psi`: di Luca)*.
+- **Il pacchetto del test e la griglia di `g_max`** sono di protocollo, dichiarati nel task history prima dei numeri.
