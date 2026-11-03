@@ -23199,3 +23199,10 @@ Il referto stampa per `TA1000`:
   - ### **la partenza di `TP1000` e' costruita SUL vuoto** *(`CB.coppia(z, phi0)`)*: per avere lo stato iniziale identico, come chiede Luca, `psi` si costruisce su `F0` e POI il vuoto diventa `F3`; la partenza costruita su `F3` la calcolo e la registro, senza usarla;
   - **la lunghezza della freccia:** Luca scrive `2`, la mia definizione da' `4` *(il fattore `2` delle due estremita')*; i rapporti non cambiano;
   - **la condizione di `TFI`, tradotta da me e dichiarata:** lo spostamento a `16000` sotto meta' di `TP1000`, o la direzione a piu' di `30` gradi, o la partenza del moto fuori da `9000 +- 2000`.
+
+## 2026-11-03 — LA FRECCIA DI `F0`: LA DECISIONE DI LUCA *(dopo `95fa6cbe`)*, NELLA MAPPA
+
+- **La lettura di Luca: la (v1) nella sostanza, non alla lettera.** Le leggi del vuoto non hanno un orientamento proprio *((f5), al bit)*: la freccia di `F0` e' una SCELTA del vuoto. `F1`-`F3` non sono rotazioni di `F0`: **la famiglia dei vuoti di fondo e' piu' grande** e include `F3`, con la freccia nulla.
+- **Nella MAPPA:** la decisione `10` *(la riga della sez. `5`)* e la voce `32`: ### **`F3` e' un candidato a vuoto fisico senza direzione privilegiata, accanto al mosaico**; il limite dichiarato: (f5) e' a `psi = 0`, la moneta non e' dentro.
+- **La coda:** `TF3` *(il codice in corso: `vuoto.freccia`, i test `V5`, la corsa)*, poi `TL120`, poi il resto come registrato.
+- **Un mio errore, n.99:** `csv/solitone/freccia_F0.py` e' entrato nella libreria a `4f292b7c` **senza ripuntare `D6`**: la cassetta, girata da allora, avrebbe fallito `D6`. **Non e' girata in quella finestra, quindi nessun risultato e' falso;** `D6` si ripunta dopo il codice di `TF3`, che tocca comunque la libreria.
