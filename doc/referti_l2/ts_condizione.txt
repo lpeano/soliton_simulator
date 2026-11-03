@@ -1,0 +1,37 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 8008c072  committato e pulito
+[TIMBRO] carta_impulso.py  sha1-BYTE a855c74a  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_ts.py  sha1-BYTE 3ba26230  committato e pulito
+==================================================================================================================================
+TS, PRIMA DEL CODICE (Luca dopo ae60cfb6, (b)): BG-F-0.15 (sol BG, s 0.15, eps 0.5); TOLL_UGUALE 1e-12
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### IL VUOTO F0
+  la coppia di B a Gamma (CB.coppia, come V.partenza): E0 3.178177523812; i tre livelli in alto ['0.076248236144', '3.178177523812', '3.178177523812']; la degenerazione E[-1] - E[-2] = 8.882e-16; theta 0.785398 phi 3.926991
+  |G P - P G| / |G| per U: {'sz': '1.882e-17', '1': '1.418e-01', 'sx': '1.002e-01', 'sy': '1.002e-01'}
+  DEVE PASSARE: TS-G (F0) G = A(Gamma) commuta con P (U = sigma_z) entro 1e-12                                             PASSA   1.882e-17
+  DEVE FALLIRE: TS-G-F (F0) G commuta con P per U = 1 entro 1e-12                                                          PASSA   1.418e-01
+  DEVE PASSARE: TS-Q (F0) la coppia e' invariante sotto P (|P Q - Q M| entro 1e-12)                                        PASSA   1.395e-15
+  ### M = Q^+ P Q (la P sulla coppia): [[ 0.989359+4.799031e-21j -0.145474+2.362622e-03j]
+ [-0.145474-2.362622e-03j -0.989359+0.000000e+00j]]; gli autovalori ['+1.000000 +0.000000i', '-1.000000 +0.000000i']
+    l'autovettore di P nella coppia con autovalore +1.000000: E 3.178177523812; |G q - <G> q| 5.828e-16; nella base (q1, q2) theta 0.073006 phi -3.125353
+    l'autovettore di P nella coppia con autovalore -1.000000: E 3.178177523812; |G q - <G> q| 8.670e-16; nella base (q1, q2) theta 1.497791 phi +0.016239
+  ### la q DI OGGI (theta 0.785398 phi 3.926991, griglia.json): c = <q, P q> = +0.104536 -0.000000i; |P q - c q| / |q| = 9.9452e-01
+----------------------------------------------------------------------------------------------------------------------------------
+### IL VUOTO F3
+  la coppia di B a Gamma (CB.coppia, come V.partenza): E0 3.178177523812; i tre livelli in alto ['0.076248236144', '3.178177523812', '3.178177523812']; la degenerazione E[-1] - E[-2] = 8.882e-16; theta 0.785398 phi 3.926991
+  |G P - P G| / |G| per U: {'sz': '1.882e-17', '1': '1.418e-01', 'sx': '1.002e-01', 'sy': '1.002e-01'}
+  DEVE PASSARE: TS-G (F3) G = A(Gamma) commuta con P (U = sigma_z) entro 1e-12                                             PASSA   1.882e-17
+  DEVE FALLIRE: TS-G-F (F3) G commuta con P per U = 1 entro 1e-12                                                          PASSA   1.418e-01
+  DEVE PASSARE: TS-Q (F3) la coppia e' invariante sotto P (|P Q - Q M| entro 1e-12)                                        PASSA   1.395e-15
+  ### M = Q^+ P Q (la P sulla coppia): [[ 0.989359+4.799031e-21j -0.145474+2.362622e-03j]
+ [-0.145474-2.362622e-03j -0.989359+0.000000e+00j]]; gli autovalori ['+1.000000 +0.000000i', '-1.000000 +0.000000i']
+    l'autovettore di P nella coppia con autovalore +1.000000: E 3.178177523812; |G q - <G> q| 5.828e-16; nella base (q1, q2) theta 0.073006 phi -3.125353
+    l'autovettore di P nella coppia con autovalore -1.000000: E 3.178177523812; |G q - <G> q| 8.670e-16; nella base (q1, q2) theta 1.497791 phi +0.016239
+  ### la q DI OGGI (theta 0.785398 phi 3.926991, griglia.json): c = <q, P q> = +0.104536 -0.000000i; |P q - c q| / |q| = 9.9452e-01
+  ### l'inviluppo sul NODO (la densita' di pK per nodo) attorno al centro d'inversione piu' vicino al centro di pK (40.5, 40.5): |rho_K(R v) - rho_K(v)| / |rho_K| = 4.6291e-02
+  ### l'inviluppo sul NODO (la densita' di pK per nodo) attorno a (40.5, 40.5), quello di D0R (40.5, 40.5): |rho_K(R v) - rho_K(v)| / |rho_K| = 4.6291e-02
+  il centro di pK per nodo (indici) (40.333259, 40.333259)
+==================================================================================================================================
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []

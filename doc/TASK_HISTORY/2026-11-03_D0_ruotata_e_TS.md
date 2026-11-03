@@ -74,3 +74,9 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
 - **I tempi:** `1e-12` a `631.5`, `1e-6` a `957`, `1e-2` a `1179`; una decade ogni `~50`-`70` unita' di tempo dalla rampa; gli stati d'ordine `1` gia' a `2000`.
 - **La direzione:** `D0R` `-137.43` gradi contro l'immagine di `TP1000` a `+6.94`: **la previsione di Luca vale fino a `~1000` e poi no.** Le grandezze grandi *(cuore, `w`, alone)* restano vicine.
 - **Niente mi ha fatto fermare.** La lettura e' di Luca.
+
+## 7. ESITO DEL PASSO 3 *(`ts_condizione.txt`, `6/6`)*: **FERMO**
+
+- **`P` sulla coppia: `+1` e `-1`** *(degeneri al bit)*: **la `q` simmetrica e' una SCELTA DI SETTORE** *(`q+` o `q-`)*: di Luca.
+- **L'inviluppo di `pK` per nodo non e' simmetrico** *(`4.63e-02`; il centro a `(40.333, 40.333)`, un centro di triangolo)*: serve un inviluppo simmetrico; **la proposta** *(la densita' simmetrizzata)* **e' da approvare.**
+- **Il codice di `TS` non si scrive prima delle due risposte.**
