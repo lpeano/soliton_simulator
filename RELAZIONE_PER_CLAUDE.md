@@ -23452,3 +23452,4 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le scelte:** `q+`, una corsa; l'inviluppo simmetrizzato *(la mia proposta)*; su `F0` fino a `16000`. **L'ordine:** `TS`, `TM3`, `TL120`, `D5` *(con l'aggiunta delle `20:23`)*, la coppia, il triangolo *(`[[PRECEDENZA-IN-CODA]]`)*.
 - ### **La premessa nuova** *(nel task history, sez. 8)*: **`R F0 = -F0`**, quindi la simmetria di `(psi_TS, F0)` e' `R180` x `sigma_z` **composta col segno globale `phi -> -phi`**; **che il tick vivo commuti con quel segno NON e' misurato**: e' il DEVE `S4` del test. **Se fallisce, FERMO.**
 - **Una convenzione mia:** la fase globale di `q+` *(la componente di modulo massimo reale positiva)*.
+- ### **LA CORREZIONE DI LUCA (21:14): `TS` su `F3`, fino a `30000`, contro `TF3` + `TF3C`.** Non era partita. **La premessa sul vuoto si rifa' per `F3`:** il DEVE `S0` *(`R F3 = +-F3`?)* decide se serve il segno globale *(`S4`)*; se `R F3` non e' `+-F3`, FERMO.

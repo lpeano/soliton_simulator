@@ -91,3 +91,9 @@ controllo non legge `U`)*; per `TS` la condizione su `q` che non vale.
   2. `test_simmetrica.py` nella cassetta: `S1` `|S psi - c psi| / |psi|` sotto `1e-12` e `c = 1`; `S1-F` *(deve fallire)* la partenza di oggi; `S2` la norma `N`; `S3` `q+` nella coppia *(il residuo di Bloch)*; **`S4` il tick vivo commuta con `phi -> -phi`**; `S4-F` *(deve fallire)* con `phi -> 1.1 phi`.
   3. `corsa_accensione`: `CORSE["TS"]`, la partenza simmetrica; **in ogni campione la distanza dello stato dal suo `S`** *(`psi_h` e `phi_h`, con `c` stimato)*; `info` della scena invariato *(il controllo della scena)*, `mu` di `TS` registrato a parte.
   4. La carta del referto: i tempi `1e-12`, `1e-6`, `1e-2`; lo spostamento e la direzione contro `TP1000` e `D0R`; cuore, `w`, alone.
+
+## 9. LA CORREZIONE DI LUCA *(21:14)*: `TS` SU `F3`, FINO A `30000`
+
+- **Il vuoto `F3`** *(il predefinito delle prove nuove)*, **fino a `30000`** *(su `F3` la corsa e' partita a `~16000`)*; **il confronto con `TF3` + `TF3C`**. `TS` su `F0` non era partita: niente da interrompere. Il resto *(`q+`, l'inviluppo, l'ordine)* com'era.
+- ### **La premessa cambia col vuoto:** **non so quanto vale `R F3`.** **`S0`** *(registrata e DEVE)*: `c_v = <F3, R F3> / |F3|^2` e `|R F3 - c_v F3| / |F3|` entro `1e-12`. **Se `c_v = +1`**, `S` su `phi` e' la sola `R` e il segno globale non entra *(`S4` resta un controllo in piu')*; **se `c_v = -1`**, `S4` e' necessario come prima; **se `R F3` non e' `+-F3`, `TS` su `F3` non puo' essere simmetrica: FERMO.**
+- **La costruzione:** la partenza simmetrica sulla scena *(`F0`, come `TF3`)*, poi il vuoto sostituito con `F3` *(`VUOTI`, come `TF3`)*. **La coppia di `B` a `Gamma` e' la stessa su `F0` e `F3`** *(`ts_condizione.txt`)*.
