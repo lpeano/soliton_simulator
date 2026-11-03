@@ -23206,3 +23206,10 @@ Il referto stampa per `TA1000`:
 - **Nella MAPPA:** la decisione `10` *(la riga della sez. `5`)* e la voce `32`: ### **`F3` e' un candidato a vuoto fisico senza direzione privilegiata, accanto al mosaico**; il limite dichiarato: (f5) e' a `psi = 0`, la moneta non e' dentro.
 - **La coda:** `TF3` *(il codice in corso: `vuoto.freccia`, i test `V5`, la corsa)*, poi `TL120`, poi il resto come registrato.
 - **Un mio errore, n.99:** `csv/solitone/freccia_F0.py` e' entrato nella libreria a `4f292b7c` **senza ripuntare `D6`**: la cassetta, girata da allora, avrebbe fallito `D6`. **Non e' girata in quella finestra, quindi nessun risultato e' falso;** `D6` si ripunta dopo il codice di `TF3`, che tocca comunque la libreria.
+
+## 2026-11-03 — `TF3`: IL CODICE, `D6`, LA CASSETTA `84/84`; `TF3` PARTE
+
+- **Il codice** *(`5cf16f27`)*: `vuoto.freccia` e `freccia_media`; i test `V5`, `V5-N`, `V5-I`, `V5-F`; le corse `TF3` e `TFI` in `corsa_accensione.py`, ogni ramo nuovo sotto `nome in VUOTI` *(per le corse di prima `phi_v` e' `phi0`, lo stesso oggetto)*.
+- **`D6`** ripuntato a `5cf16f27` *(`e4674364`)*; **la cassetta: `84/84`** *(le `80` di prima e le quattro `V5`)*.
+- ### **Una cosa che avevo scritto come «non misurata» a `95fa6cbe`, ed era GIA' misurata:** `V3` *(`test_vuoto`, nella cassetta da `ae4640ee`)* dice che **`F0` e' un AUTOSTATO del tick del vuoto** *(`|lambda| - 1` `-6.4e-15`, `nu` `38.746`)*: **lo `0.467` per tick e' solo una fase globale.** Non me ne ero ricordato.
+- **`TF3`** parte ora, un pezzo alla volta *(~`1.7` ore)*. **Un processo alla volta:** fino alla fine non giro altro.
