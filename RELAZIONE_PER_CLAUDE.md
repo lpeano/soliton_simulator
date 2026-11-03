@@ -23340,3 +23340,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Le letture (f1)-(f4) sono di Luca.** I fatti toccano **(f1)** *(la deriva parte e corre come su `F0`, piu' tardi: il massimo `~4000` dopo e piu' alto, `22.35` contro `17.11`)* **e (f2)** *(dopo la corsa la velocita' torna bassa e la direzione non persiste: `C` sotto `1/2` a `k = 3`)*; **non scelgo.**
 - **La coda, dopo questo referto** *(`[[PRECEDENZA-IN-CODA]]`)*: `D0'`, `TS` *(i task history prima del codice)*, `TFI` da decidere ora che `TF3C` e' finita, `TL120`, la direzione, il mosaico, `cs`.
+
+## 2026-11-03 — `D0'` E `TS`: IL TASK HISTORY PRIMA DEL CODICE *(doc/TASK_HISTORY/2026-11-03_D0_ruotata_e_TS.md)*
+
+- **Una premessa che cambia il senso di `D0'`:** il tick CONGELATO commuta con R180 e sigma_z (1e-16), ma **il tick VIVO intero non e' misurato.** **Se commuta, la previsione di Luca e' vera per costruzione fino all'arrotondamento**, e `D0'` misura quanto in fretta l'arrotondamento separa le due corse; **se non commuta, la previsione cade gia' sulle leggi.** Quindi prima della corsa (~2 ore) una carta di minuti, `carta_d0.py`: i DEVE `D-R2`, `D-V`, `D-T` (10 tick vivi nella rampa e 10 dopo), `D-T-F` che deve fallire (U = 1).
+- **Una cosa che non so:** `psi` per nodo nello stato e' derivata da `psi_h` o e' una variabile del tick? La carta lo registra.
+- **`TFI`:** ora che `TF3C` e' finita, la decisione e' di Luca; non entra nella coda finche' non decide.
