@@ -15,6 +15,8 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --indice > doc/referti_l2/mappe_indice.txt
     python csv/solitone/corsa_accensione.py --corsa DG1000     # (Luca 18:05) due giri del toro: TP1000 continuata da 16000; i dati su E:, nel repo la versione rada
     python csv/solitone/corsa_accensione.py --indice DG1000 > doc/referti_l2/due_giri_indice.txt
+    python csv/solitone/corsa_accensione.py --corsa TF3        # (Luca 2026-11-03 08:29) TP1000 col vuoto F3; un pezzo alla volta finche' dice "finita"
+    python csv/solitone/corsa_accensione.py --corsa TFI        # (Luca 08:29) l'ibrido theta = pi/2, SOLO SE la condizione su TF3
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -58,6 +60,9 @@ OGNI_RADA = 100                # ### Luca 18:05: un campione ogni 100 tick
 CAMMINO = {"DG1000": 162.0}    # ### Luca 18:05: (a) lo spostamento srotolato dalla partenza arriva a 2 x 81
 CENTRO_LIBRO = ("DG1000",)     # ### Luca 18:12 e 18:18: il libro attorno al centro periodico (E_cen) e l'alone a 3 w(t) (sez. 13-bis, 13-ter)
 BLOCCO = 1000.0                # ### i blocchi del confronto (come _respiro_congelato)
+CORSE["TF3"] = (1000.0, 16000.0)   # ### (Luca 2026-11-03 08:29) TP1000 col vuoto F3: la partenza costruita su F0 come TP1000, POI il vuoto sostituito
+CORSE["TFI"] = (1000.0, 16000.0)   # ### (Luca 08:29) l'ibrido theta = pi/2: SOLO SE TF3 si muove meno o diversamente (la condizione nel task history 2026-11-03)
+VUOTI = {"TF3": "F3", "TFI": (0.0, 0.0, 0.5 * math.pi)}   # ### le fasi per (A2, A1, A1+A2): F3 letto da _solitone_dal_fondo.FASI; l'ibrido di Luca
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -120,6 +125,35 @@ def righe_D(bande, D, n0, t):
 
 
 # ------------------------------------------------------------------------------------------------ la corsa
+def fasi_vuoto(nome):
+    """### **Le fasi del vuoto della corsa** *(per `_solitone_dal_fondo.DIREZIONI`)*: un nome di `FASI` si legge dalla tabella."""
+    import _solitone_dal_fondo as SDF
+    v = VUOTI[nome]
+    return tuple(dict(SDF.FASI)[v]) if isinstance(v, str) else tuple(v)
+
+
+def vuoto_della_corsa(z, nome):
+    """### **Il vuoto della corsa:** `_solitone_dal_fondo.fondo_con_fasi` *(il costruttore di `76eecbf5`, come `_solitone_con_la_buca.vuoto_iniziale` per `F0`)*."""
+    import _solitone_dal_fondo as SDF
+    return SDF.fondo_con_fasi(z["inc"], z["L"], fasi_vuoto(nome))
+
+
+def partenza_sul_vuoto(sol, z, phi_v, pK, s, p0):
+    """### **La partenza costruita SUL vuoto della corsa** *(lo stesso `V.partenza`)*: ### **solo registrata, non usata** *(Luca 08:29: lo stato iniziale identico a `TP1000`)*.
+    `{"mu", "sovrapposizione" |<p_v, p0>|/(|p_v||p0|), "errore"}`; ### **la scena si rimette.**"""
+    import _vuoto_vivo_B as V
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    try:
+        z["st"]["phi_h"][...] = phi_v
+        pv, inf = V.partenza(sol, z, phi_v, pK, s)
+        return {"mu": inf["mu"], "sovrapposizione": float(abs(np.vdot(pv, p0)) / (np.linalg.norm(pv) * np.linalg.norm(p0))), "errore": None}
+    except Exception as ex:          # ### un costruttore che non regge su questo vuoto e' un DATO da registrare, non da nascondere
+        return {"mu": None, "sovrapposizione": None, "errore": "%s: %s" % (type(ex).__name__, ex)}
+    finally:
+        for k, v in salvato.items():
+            z["st"][k][...] = v
+
+
 def corsa(nome):
     """### **Un pezzo di `V.PEZZO` tick;** ### **la ripresa al bit** *(ogni chiave di `z["st"]`, e lo stato a `T_acc`)*."""
     import _deriva_congelato as DC
@@ -163,8 +197,11 @@ def corsa(nome):
         h = MI.lunghezza_arco(z)
         salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
         p0, info = V.partenza(sol, z, phi0, pK, s)
+        phi_v = phi0
+        if nome in VUOTI:
+            phi_v = vuoto_della_corsa(z, nome)
         e_K = P.e_K(z)
-        _ph, Z = DV.autovettori(DV.matrice(z, phi0, DV.AMP))
+        _ph, Z = DV.autovettori(DV.matrice(z, phi_v, DV.AMP))   # ### le bande sul vuoto della corsa (TF3: F3; il task history 2026-11-03)
         bande = MI.Bande(Z, z["L"])
         for k, v in salvato.items():
             z["st"][k][...] = v
@@ -173,9 +210,15 @@ def corsa(nome):
         par = z["par"]
         assert par["eps"] == V.EPS != 0.0, "il libro dei conti deve passare il par della corsa (eps acceso)"
         acc = None
+        part_v = None
+        sha_v = SFM.sha(phi_v)
         if prec is None:
             t0 = 0
             z["st"]["psi_h"][...] = p0
+            if nome in VUOTI:
+                part_v = partenza_sul_vuoto(sol, z, phi_v, pK, s, p0)
+                z["st"]["psi_h"][...] = p0
+                z["st"]["phi_h"][...] = phi_v
         else:
             t0 = prec["t1"]
             assert testa["info"]["mu"] == mu and testa["w_in"] == w_in and testa["e_K"] == e_K, "la scena NON e' quella del primo pezzo"
@@ -217,6 +260,10 @@ def corsa(nome):
                 print("  la corsa %s: ### IL DISCO NON BASTA (%s): FERMO" % (nome, nota))
                 return 1
         giro, fermata = None, None
+        frec = None
+        if nome in VUOTI:
+            from solitone import vuoto as VU
+            frec = VU.celle(z["inc"], z["L"])
         if nome in CAMMINO:
             from solitone import toro as TO
             A1, A2 = TO.vettori()
@@ -227,6 +274,8 @@ def corsa(nome):
             if t0 == 0:
                 conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
                 c = V.misura(z, 0, w_in, w0, h, LC, conti, mas)
+                if frec is not None:
+                    c["freccia"] = VU.freccia_media(VU.freccia(z["st"]["phi_h"], *frec))
                 periodiche(z, c, conti, w_in, w0, h, 0, LC, nome in CENTRO_LIBRO)
                 c["lam"] = 0.0
                 camp.append(c)
@@ -245,6 +294,8 @@ def corsa(nome):
                 if t % V.OGNI == 0:
                     conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
                     c = V.misura(z, t, w_in, w0, h, LC, conti, mas)
+                    if frec is not None:
+                        c["freccia"] = VU.freccia_media(VU.freccia(z["st"]["phi_h"], *frec))
                     periodiche(z, c, conti, w_in, w0, h, t, LC, nome in CENTRO_LIBRO)
                     if giro is not None:
                         p = c["per"]
@@ -300,6 +351,8 @@ def corsa(nome):
             "t_dis": t_dis, "w_in": w_in, "h": h, "e_K": e_K, "info": info, "campioni": camp, "D": dd, "D_acc": da_, "sha_fine": sha_fine, "secondi": time.time() - s0,
             "acc": {k: v for k, v in acc_nuovo.items() if k != "psi"} if acc_nuovo else None,
             "tick": "accensione (sin^2 su T_acc, poi tick.percorri_tick)", "libro": "col par della corsa", "rampa": "lam_k = sin^2(pi k/(2 K))"}
+    if nome in VUOTI:
+        riga.update({"vuoto_fasi": list(fasi_vuoto(nome)), "sha_vuoto": sha_v, "partenza_vuoto": part_v})
     if mappe_on:
         riga.update({"mappe": mappe, "stati": stati, "dopo_stato": dopo, "disco": disco})
     if giro is not None:

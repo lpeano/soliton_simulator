@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**I TEST DEL VUOTO SULLA CARTA** *(il task history `2026-11-02_solitone_vestito`, `V1`-`V4`)*: ### **sulla scena di BG-F-0.15** *(il fondo `F0`, `s 0.15`)*."""
+import math
+
 import numpy as np
 
 from . import protetto as P
@@ -10,6 +12,7 @@ TOLL_LIN = 1e-10               # ### V1
 TOLL_RIC = 1e-12               # ### V2
 TOLL_UNI = 1e-12               # ### V3
 TOLL_BORDO = 1e-9              # ### V4: F0 dentro o sul bordo di una banda
+TOLL_FRECCIA = 1e-12           # ### V5: la freccia per nodo (somme di sei termini di modulo 1)
 
 
 def gira(esito):
@@ -38,6 +41,20 @@ def gira(esito):
         er = float(np.linalg.norm(VU.applica(A, g, idx, L) - Tg) / np.linalg.norm(Tg))
         esito("DEVE PASSARE: V2 A_v ricostruisce il tick: |T(g) - ifft(A_v fft(g))|/|T(g)| <= %g" % TOLL_RIC, er <= TOLL_RIC, "%.2e" % er)
         nu, resF0, dl = VU.frequenza(z, F0, s)
+        import _solitone_dal_fondo as SD
+        aF0 = VU.freccia(F0, idx, dirs)
+        att = np.array([2.0, 2.0 * math.sqrt(3.0)])
+        e5 = float(np.max(np.abs(aF0 - att)))
+        esito("DEVE PASSARE: V5 la freccia di F0 e' (2, 2 sqrt3) su ogni nodo (modulo 4, a 60 gradi) entro %g" % TOLL_FRECCIA, e5 <= TOLL_FRECCIA, "max scarto %.2e" % e5)
+        aF3 = VU.freccia(SD.fondo_con_fasi(inc, L, dict(SD.FASI)["F3"]), idx, dirs)
+        esito("DEVE PASSARE: V5-N la freccia di F3 (fasi 0, 0, pi) e' nulla su ogni nodo entro %g" % TOLL_FRECCIA, float(np.max(np.abs(aF3))) <= TOLL_FRECCIA,
+              "max %.2e" % float(np.max(np.abs(aF3))))
+        fi = VU.freccia_media(VU.freccia(SD.fondo_con_fasi(inc, L, (0.0, 0.0, 0.5 * math.pi)), idx, dirs))
+        esito("DEVE PASSARE: V5-I la freccia dell'ibrido (0, 0, pi/2) ha il modulo 4 cos(pi/4) = 2 sqrt2 su ogni nodo entro %g" % TOLL_FRECCIA,
+              abs(fi["modulo"] - 2.0 * math.sqrt(2.0)) <= TOLL_FRECCIA and fi["scarto"] <= TOLL_FRECCIA, "modulo %.15f, scarto %.2e" % (fi["modulo"], fi["scarto"]))
+        aI = VU.freccia(SD.fondo_con_fasi(inc, L, (0.0, 0.0, 0.5 * math.pi)), idx, dirs)
+        esito("DEVE FALLIRE: V5-F la freccia dell'ibrido e' quella di F0 entro %g" % TOLL_FRECCIA, not float(np.max(np.abs(aI - aF0))) <= TOLL_FRECCIA,
+              "max %.3f" % float(np.max(np.abs(aI - aF0))))
     Ar = A.reshape(-1, 6, 6)
     uni = float(np.max(np.abs(np.einsum("kji,kjl->kil", Ar.conj(), Ar) - np.eye(6))))
     esito("DEVE PASSARE: V3 A_v(k) unitaria a ogni k entro %g; F0 autostato del tick, residuo e |lambda| - 1 <= %g" % (TOLL_UNI, TOLL_UNI),

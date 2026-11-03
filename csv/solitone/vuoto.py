@@ -36,6 +36,24 @@ def celle(inc, L):
     return idx, dirs
 
 
+def freccia(phi, idx, dirs):
+    """### **La freccia per nodo** *(Luca `19:21`, (f4); la definizione di `freccia_F0.py`, `95fa6cbe`)*: ### **`a(v) = sum` sulle estremita' del nodo di `phi u`**,
+    `u` il versore verso l'altro capo: ### **`sum_k (phi[coda] - phi[testa]) e_k`** *(`idx`, `dirs` di `celle`)*. Un vettore COMPLESSO: `(n, 2)`."""
+    from solitone import toro as TO
+    A1, A2 = TO.vettori()
+    a = np.zeros((idx.shape[0], 2), dtype=complex)
+    for k, d in enumerate(dirs):
+        a += (phi[idx[:, 2 * k]] - phi[idx[:, 2 * k + 1]])[:, None] * (d[0] * A1 + d[1] * A2)[None, :]
+    return a
+
+
+def freccia_media(a):
+    """### **La freccia media sui nodi** *(il vettore complesso)*, ### **il modulo medio** `<sqrt(|a_x|^2 + |a_y|^2)>` ### **e lo scarto massimo dalla media**: un dict."""
+    m = a.mean(axis=0)
+    return {"media": [[float(x.real), float(x.imag)] for x in m], "modulo": float(np.mean(np.sqrt(np.sum(np.abs(a) ** 2, axis=1)))),
+            "scarto": float(np.max(np.sqrt(np.sum(np.abs(a - m) ** 2, axis=1))))}
+
+
 def a_celle(phi, idx, L):
     return phi[idx].reshape(L, L, 6)
 
