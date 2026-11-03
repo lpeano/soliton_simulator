@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 r"""**FIN DOVE ARRIVA IL CAMPO: I PROFILI AD ANELLI E LA PORTATA** *(Luca, `2026-11-03` `18:26`; il task history `doc/TASK_HISTORY/2026-11-03_campo_TM1000.md`)*.
-### **Gli anelli:** l'anello `k` sono i nodi con `k <= r < k + 1` attorno al centro periodico *(l'immagine piu' vicina, `toro.scarti`)*, `k = 0 .. ceil(R) - 1`, `r < R` *(`R` la meta'
+### **Gli anelli:** l'anello `k` sono i nodi con `k <= r < k + 1` attorno al centro periodico *(l'immagine piu' vicina fra le `9`, in indici: `anelli`)*, `k = 0 .. ceil(R) - 1`, `r < R` *(`R` la meta'
 del periodo)*; ### **la media per anello** e' la media sui nodi dell'anello. ### **La portata** di un profilo per una soglia: `R_contiguo`, il bordo interno del primo anello dal centro in
 fuori la cui media NON supera la soglia *(«entro cui supera»)*, e `R_ultimo`, il bordo esterno dell'ultimo anello che la supera; `nan` per `R_contiguo` se non scende mai *(oltre `R`)*.
 """
@@ -8,7 +8,6 @@ import math
 
 import numpy as np
 
-from . import toro as TO
 
 
 def quanti(R):
@@ -17,9 +16,18 @@ def quanti(R):
 
 
 def anelli(m1, m2, c1, c2, L, R):
-    """### **`(k, r)`:** l'anello di ogni nodo *(`-1` oltre `R`)* e la distanza dal centro `(c1, c2)` *(gli indici)*, con l'immagine piu' vicina."""
-    D = TO.scarti(m1, m2, c1, c2, L)
-    r = np.hypot(D[:, 0], D[:, 1])
+    """### **`(k, r)`:** l'anello di ogni nodo *(`-1` oltre `R`)* e la distanza dal centro `(c1, c2)` *(gli indici)*, con l'immagine piu' vicina fra le `9`.
+    ### **`r^2` dagli scarti in INDICI:** `|a A1 + b A2|^2 = a^2 + b^2 - a b` *(`A1 . A2 = -1/2`)*, ESATTO per scarti interi. ### **Perche' non in coordinate cartesiane** *(la
+    cassetta `920c0ff7`, `C3`)*: con `sqrt 3 / 2` i primi vicini di un centro su un nodo uscivano a `1 - eps` e cadevano nell'anello `0` *(`5` nodi invece di `1`)*."""
+    e1 = ((np.asarray(m1, dtype=float) - c1 + 0.5 * L) % L) - 0.5 * L
+    e2 = ((np.asarray(m2, dtype=float) - c2 + 0.5 * L) % L) - 0.5 * L
+    r2 = None
+    for k1 in (-1, 0, 1):
+        for k2 in (-1, 0, 1):
+            a, b_ = e1 + k1 * L, e2 + k2 * L
+            q = a * a + b_ * b_ - a * b_
+            r2 = q if r2 is None else np.minimum(r2, q)
+    r = np.sqrt(r2)
     k = np.floor(r).astype(np.int64)
     k[r >= R] = -1
     return k, r
