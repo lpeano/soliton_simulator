@@ -3,24 +3,26 @@
 [TIMBRO] vuoto.py  sha1-BYTE 2b504206  committato e pulito
 [TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
 [TIMBRO] corsa_accensione.py  sha1-BYTE 2a1a2912  committato e pulito
-[TIMBRO] carta_deriva.py  sha1-BYTE 1bf9ce37  committato e pulito
-[TIMBRO] carta_freccia.py  sha1-BYTE 044f0484  committato e pulito
+[TIMBRO] carta_deriva.py  sha1-BYTE 0f56fe9d  committato e pulito
+[TIMBRO] carta_freccia.py  sha1-BYTE ebddcb24  committato e pulito
+  ### TFI: 1 pezzi, fino al tick 10000 di 106667: una corsa INTERROTTA, fuori dal referto
 ==================================================================================================================================
-LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro periodico srotolato; BLOCCO 1000 META_V 0.5 T_MOTO_TP (7000.0, 11000.0); la condizione di TFI: spostamento < 0.5 x TP1000,
-  o la direzione a piu' di 30 gradi, o il tempo del moto a piu' di 2000 da TP1000; STATI_F0 (('TM1000', (13333, 40000, 66667)),)
+LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro periodico srotolato; BLOCCO 1000; la condizione di TFI: spostamento < 0.5 x TP1000,
+  o la direzione a piu' di 30 gradi; STATI_F0 (('TM1000', (13333, 40000, 66667)),); FR_TEST {'TP1000': 4.0, 'TF3': 0.0, 'TFI': 2.8284271247461903}
   le letture di Luca, scritte prima: (a1) su F3 non si muove (o molto meno), sull'ibrido in mezzo: la causa e' la freccia; (a2) su F3 come su F0: la freccia non c'entra;
   (a3) su F3 in un'altra direzione; (a4) F3 non regge il solitone come F0 (gia' prima di 9000); (a5) altro
-  ### IL TEMPO DEL MOTO (la definizione MIA, scritta prima): l'inizio del primo blocco dopo T_acc con la velocita' >= 0.5 della massima a blocchi della stessa corsa
+  ### IL TEMPO DEL MOTO E' ABBANDONATO (Luca dopo fe409582: il moto non ha un inizio netto; il fallimento resta scritto a fe409582)
 ==================================================================================================================================
   DEVE PASSARE: T0 TF3 il vuoto a t = 0 e' fondo_con_fasi((0.0, 0.0, 3.141592653589793)) AL BIT (lo sha registrato, ricalc PASSA   le fasi registrate [0.0, 0.0, 3.141592653589793]
+  DEVE PASSARE: FR0 TP1000 la lunghezza della freccia di fondo a t = 0 e' quella dei test (4.000000), entro 1e-12          PASSA   il modulo 4.000000000000000, lo scarto fra i nodi 2.065e-13
+  DEVE PASSARE: FR0 TF3 la lunghezza della freccia di fondo a t = 0 e' quella dei test (0.000000), entro 1e-12             PASSA   il modulo 0.000000000000000, lo scarto fra i nodi 3.507e-29
   DEVE PASSARE: T1 TF3 il primo campione (le misure sul toro, M, V) e' quello di TP1000 AL BIT                             PASSA   
   DEVE FALLIRE: T1-F TF3 lo sha_fine del primo pezzo e' quello di TP1000                                                   PASSA   
   DEVE PASSARE: A3 TF3 M e V (accensione.a3)                                                                               PASSA   M lunga (106660 tick): la pendenza +3.877e-12 per 1000 (il tetto 1e-11), il residuo 7.05e-15 (la tolleranza 1e-10); V lunga (106660 tick): la pendenza +2.578e-12 per 1000 (il tetto 1e-11), il residuo 2.48e-12 (la tolleranza 1e-10)
   DEVE PASSARE: A4 TF3 il libro col par della corsa                                                                        PASSA   
   TF3 LA PARTENZA COSTRUITA SUL SUO VUOTO (solo registrata): {'errore': None, 'mu': 4.161868161822483, 'sovrapposizione': 1.0}; quella usata: mu 4.161868161822 (TP1000)
-  DEVE PASSARE: TM la definizione del tempo del moto ridà su TP1000 un tempo in (7000.0, 11000.0) (il controllo della defi ### FALLISCE   TP1000: 12000.0 (la velocita' massima a blocchi 17.109 per 1000)
 ----------------------------------------------------------------------------------------------------------------------------------
-### TP1000: il centro periodico srotolato; la fine valida (3 w < R) 16000; il tempo del moto 12000.0 (la velocita' massima 17.109 per 1000)
+### TP1000: il centro periodico srotolato; la fine valida (3 w < R) 16000; la velocita' massima 17.109 per 1000
   blocco            X medio              v/1000    angolo    cos A1 / A2 / A1+A2     cuore     w         alone     |freccia|   scarto     
         0 ..    1000 (  -0.124,   -0.197) 0.590       -135.02 -0.707 / -0.259 / -0.966 0.49233   7.7200    0.00110   nan         nan        
      1000 ..    2000 (  -0.974,   -0.458) 0.477       -157.11 -0.921 / +0.124 / -0.798 0.44243   8.3327    0.00343   nan         nan        
@@ -37,6 +39,7 @@ LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro
     12000 ..   13000 ( -19.374,   -2.464) 15.625      -169.87 -0.984 / +0.340 / -0.644 0.39637   10.2891   0.03161   nan         nan        
     13000 ..   14000 ( -36.689,   -5.849) 17.109      -169.10 -0.982 / +0.327 / -0.655 0.37686   10.6005   0.03398   nan         nan        
     14000 ..   15000 ( -51.036,   -7.949) 12.365      -176.29 -0.998 / +0.443 / -0.555 0.35512   10.9526   0.03624   nan         nan        
+    15000 ..   16000 ( -62.566,   -8.209) 11.071      -179.72 -1.000 / +0.496 / -0.504 0.33953   11.2197   0.03813   nan         nan        
   (i) TP1000: lo spostamento s = |X - X_rif|, X_rif la media sul blocco 1000 .. 2000 = (-0.9735, -0.4578); per blocco: s medio, ln s medio, la pendenza di ln s (per 1000)
        1000 ..    2000  s 1.5413e-01  ln s -2.0556  la pendenza di ln s -1.0948e+00
        2000 ..    3000  s 3.6767e-01  ln s -1.1066  la pendenza di ln s +1.6393e+00
@@ -56,7 +59,7 @@ LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro
     LA RETTA LUNGA 2000 .. 9000: la pendenza di ln s +1.9584e-01 per 1000 (4666 campioni)
     LA RETTA LUNGA 9000 .. 16000: la pendenza di ln s +5.7817e-01 per 1000 (4667 campioni)
 ----------------------------------------------------------------------------------------------------------------------------------
-### TF3: il centro periodico srotolato; la fine valida (3 w < R) 16000; il tempo del moto 4000.0 (la velocita' massima 1.757 per 1000)
+### TF3: il centro periodico srotolato; la fine valida (3 w < R) 16000; la velocita' massima 3.786 per 1000
   blocco            X medio              v/1000    angolo    cos A1 / A2 / A1+A2     cuore     w         alone     |freccia|   scarto     
         0 ..    1000 (  -0.045,   -0.118) 0.063        -98.46 -0.147 / -0.783 / -0.930 0.51885   7.3827    0.00092   3.5242e-01  6.1131e+00 
      1000 ..    2000 (  +0.042,   -0.095) 0.131       +168.33 -0.979 / +0.665 / -0.314 0.38911   8.8952    0.00240   8.8955e-01  6.2259e+00 
@@ -73,6 +76,7 @@ LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro
     12000 ..   13000 (  -0.987,   +5.359) 0.838       +176.01 -0.998 / +0.559 / -0.439 0.39185   10.0058   0.02495   2.0190e+00  6.7913e+00 
     13000 ..   14000 (  -2.158,   +5.163) 1.021       -165.13 -0.967 / +0.261 / -0.705 0.38183   10.2491   0.02751   1.9571e+00  6.8362e+00 
     14000 ..   15000 (  -3.211,   +4.879) 1.750       -147.32 -0.842 / -0.047 / -0.888 0.36329   10.5790   0.03004   1.9004e+00  6.9540e+00 
+    15000 ..   16000 (  -5.535,   +3.245) 3.786       -142.52 -0.794 / -0.130 / -0.924 0.35625   10.7733   0.03229   1.8549e+00  6.7825e+00 
   (i) TF3: lo spostamento s = |X - X_rif|, X_rif la media sul blocco 1000 .. 2000 = (0.0420, -0.0947); per blocco: s medio, ln s medio, la pendenza di ln s (per 1000)
        1000 ..    2000  s 6.5572e-02  ln s -2.8950  la pendenza di ln s +9.4109e-01
        2000 ..    3000  s 4.4706e-01  ln s -0.8463  la pendenza di ln s +4.5789e-01
@@ -99,8 +103,13 @@ LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): TP1000, TF3, il centro
   tempo 10000.05: modulo 2.032013 scarto 6.325e+00 media [[6.514063867343275e-05, -0.016006919239507728], [0.009162407793040409, -0.002247691800079998]]
 ----------------------------------------------------------------------------------------------------------------------------------
 ### LO SPOSTAMENTO TOTALE (l'ultimo campione meno il primo, srotolato) E LA CONDIZIONE DI TFI (il task history, sez. 2)
-  TP1000  lo spostamento 68.453 nodi a -173.06 gradi (a tempo 15999.0); il tempo del moto 12000.0
-  TF3     lo spostamento 7.557 nodi a +165.69 gradi (a tempo 15999.0); il tempo del moto 4000.0
-  ### LA CONDIZIONE DI TFI: meno True (7.557 contro 0.5 x 68.453); la direzione False (21.25 gradi); il tempo del moto True (4000.0 contro 12000.0) => TFI SI GIRA
+  TP1000  lo spostamento 68.453 nodi a -173.06 gradi (a tempo 15999.0)
+  TF3     lo spostamento 7.557 nodi a +165.69 gradi (a tempo 15999.0)
+  ### LA CONDIZIONE DI TFI: meno True (7.557 contro 0.5 x 68.453); la direzione False (21.25 gradi) => TFI SI GIRA (il tempo del moto: abbandonato, Luca dopo fe409582)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA DERIVA CONTRO LA LUNGHEZZA DELLA FRECCIA DEL VUOTO DI FONDO (a t = 0, ricalcolata dal vuoto della corsa): una tabella, non una curva (tre punti non decidono la forma)
+  corsa   |freccia| t=0  lo spostamento a 16000   v massima per 1000     la pendenza di ln s, retta 1       la pendenza di ln s, retta 2      
+  TP1000  4.000000       68.453                   17.109                 +1.9584e-01 ( 2000 ..  9000)          +5.7817e-01 ( 9000 .. 16000)
+  TF3     0.000000       7.557                    3.786                  +4.8216e-01 ( 2000 ..  9000)          +1.1273e-01 ( 9000 .. 16000)
 ==================================================================================================================================
-ESITO: 5/6 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: TM la definizione del tempo del moto ridà su TP1000 un tempo in (7000.0, 11000.0) (il controllo della definizione)']
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
