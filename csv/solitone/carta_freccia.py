@@ -48,6 +48,18 @@ def vmax(righe, T_acc, fine):
     return max(r[2] for r in rr) if rr else float("nan")
 
 
+def finita(CA, V, nome):
+    """### **La corsa e' finita?** *(l'ultimo pezzo arriva a `t_fine`)*; se ci sono pezzi ma non e' finita, lo stampa."""
+    nn = CA.nomi(nome)
+    if not nn:
+        return False
+    ult = V.LP.leggi(os.path.join(CA.dir_json(nome), nn[-1]))
+    if ult["t1"] < ult["t_fine"]:
+        print("  ### %s: %d pezzi, fino al tick %d di %d: una corsa INTERROTTA, fuori dal referto" % (nome, len(nn), ult["t1"], ult["t_fine"]))
+        return False
+    return True
+
+
 def coseni(v):
     from solitone import toro as TO
     A1, A2 = TO.vettori()
@@ -76,7 +88,7 @@ def main(argv):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
     s = V.CORSE[CA.NOME][2]
-    corse = ["TP1000", "TF3"] + (["TFI"] if CA.nomi("TFI") else [])
+    corse = ["TP1000", "TF3"] + (["TFI"] if finita(CA, V, "TFI") else [])   # ### una corsa INTERROTTA non entra (TFI fermata dopo un pezzo, 2c76e94f)
     print("=" * 130)
     print("LA DERIVA E LA FRECCIA DEL VUOTO (Luca 2026-11-03 08:29): %s, il centro periodico srotolato; BLOCCO %g; la condizione di TFI: spostamento < %g x TP1000,"
           % (", ".join(corse), BLOCCO, TFI_SPOSTAMENTO))
