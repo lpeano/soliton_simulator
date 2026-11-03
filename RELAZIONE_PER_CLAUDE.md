@@ -23164,3 +23164,29 @@ Il referto stampa per `TA1000`:
 - ### **Una cosa interrotta, da dove si riprende:** il task history della freccia di `F0` *(`doc/TASK_HISTORY/2026-11-02_freccia_F0.md`)* era scritto e NON committato; la risposta di ieri sera si e' interrotta dopo averlo scritto. **Si committa com'e', da solo, e da li' si prosegue** col suo piano *(lo script, poi il referto)*.
 - **Nel task history, tre fatti dal codice che cambiano la premessa:** `F0`-`F3` sono **fasi per direzione**, non i quattro versi *(`_solitone_dal_fondo.FASI`)*; **prevedo** che `F3` abbia la freccia nulla e che nessuna rotazione di `F0` sia fra `F1`-`F3`; **(f3) e' un FALSO-UNO** *(ogni flusso costante ha la stessa energia per costruzione)*, quindi aggiungo **(f5), dichiarato come MIO**: il tick del vuoto commuta con le rotazioni? Non entra nelle letture (v1)-(v3), che restano di Luca.
 - **La coda:** `(2)` la freccia di `F0`, `(3)` `TL120`, `(4)` la direzione, `(5)` il primo mosaico *(solo se (v1))*, `(6)` `cs`.
+
+## 2026-11-03 — LA FRECCIA DI `F0`, LA PARTE `1`: L'ESITO SULLA CARTA, `5/5` *(il referto `doc/referti_l2/freccia_F0.txt`; il task history `doc/TASK_HISTORY/2026-11-02_freccia_F0.md`, sez. `4`)*
+
+**I fatti** *(la scena di BG-F-0.15, `L 81`)*:
+
+| il vuoto | le fasi per direzione `A2` / `A1` / `A1+A2` | la freccia per nodo *(modulo, angolo)* | e' una rotazione di `F0`? |
+|---|---|---|---|
+| `F0` | `0` / `0` / `0` | `4` a `60` gradi | e' `F0` |
+| `F1` | `0` / `120` / `-120` | complessa *(`|Im|` `1`)* | **no** |
+| `F2` | `0` / `90` / `180` | `2.83` a `180` gradi | **no** |
+| `F3` | `0` / `0` / `180` | **`0`, nulla** | **no** |
+| `F0` ruotato di `60`, `120`, `240`, `300` | versi *(`A1` o `A2` rovesciati)* | `4` a `120`, `180`, `-60`, `0` gradi | **sono FUORI da `F1`-`F3`** |
+| `F0` ruotato di `180` | tutto rovesciato | `4` a `-120` | **`= -F0`, la fase globale `pi`** |
+| `F0` allo specchio lungo `A1+A2` | come `F0` | `4` a `60` | **`= F0`** |
+
+- **(f3) l'energia:** `-2.473438728024316e5` per tutti e dieci, lo scarto relativo massimo `2.2e-16`. ### **Era garantito per costruzione** *(ogni flusso costante ha `S_phi = 0` a ogni nodo)*: **non distingue niente**, lo avevo scritto prima.
+- **(f5), il mio controllo:** **il tick del vuoto commuta con ogni rotazione e con lo specchio, con lo scarto `0`.** Le leggi del vuoto non hanno un orientamento proprio. **Il limite:** non ho una legge rotta su cui vedere fallire questo controllo.
+
+**Accanto alle letture di Luca** *(decide Luca; non scelgo)*:
+- **(v1) dice «i quattro sono `F0` con la freccia ruotata»:** i fatti dicono di no. `F1`, `F2`, `F3` non sono rotazioni di `F0`, e `F3` non ha freccia.
+- **(v2) dice «qualche rotazione di `F0` da' un vuoto fuori dalla famiglia o con energia diversa: la freccia e' nelle leggi»:** la prima meta' e' vera alla lettera *(quattro rotazioni sono fuori da `F1`-`F3`, alla stessa energia)*; **la conclusione no:** il tick commuta con le rotazioni.
+- ### **Che cosa vedo, come fatto:** la famiglia `F0`-`F3` era una SCELTA dichiarata di fasi *(`76eecbf5`)*, non un insieme derivato. **L'insieme alla stessa energia e' molto piu' grande** *(ogni scelta di fasi)*, e le sei rotazioni di `F0` ci stanno dentro. **Una freccia ruotata costa la stessa energia e segue le stesse leggi ruotate.** E' la condizione necessaria del mosaico, ma **non e' la (v1) come e' scritta.**
+
+**Due cose che toccano le prove dopo:**
+- **`R180 F0 = -F0`:** una fase globale. **Il tick e' lineare nel vuoto, e la materia lo sente solo attraverso `Lambda = |phi|^2`.** Se nessun altro termine del tick legge la fase di `phi`, `-F0` e' lo STESSO vuoto con la freccia rovesciata. Allora le frecce davvero distinte sono `3` *(`0`, `60`, `120` gradi, a meno del verso)*. **Per `D0'`** *(la rotazione di `180`)* conta: **e' una cosa da verificare, non l'ho verificata.**
+- **Il primo mosaico e' «solo se (v1)»:** ### **la (v1) alla lettera non e' quella che vedo. Se la parte `3` parte o no lo decide Luca.** La coda intanto prosegue con `TL120`, che non dipende da questa lettura.

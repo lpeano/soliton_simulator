@@ -1,0 +1,60 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] vuoto.py  sha1-BYTE f4f05e61  committato e pulito
+[TIMBRO] freccia_F0.py  sha1-BYTE ce1ee090  committato e pulito
+==================================================================================================================================
+LA FRECCIA DI F0 (Luca 19:21, la parte 1): la scena di BG-F-0.15 (s 0.15, L 81, eps 0.5), il vuoto fondo_uniforme (VUOTO_PER_ESTREMITA 1)
+  la configurazione: TOLL_UGUALE 1e-12 TOLL_TICK 1e-12; FASI [('F0', (0.0, 0.0, 0.0)), ('F1', (0.0, 2.094395, 4.18879)), ('F2', (0.0, 1.570796, 3.141593)), ('F3', (0.0, 0.0, 3.141593))]; DIREZIONI ((0, 1), (1, 0), (1, 1))
+  le letture di Luca, scritte prima: (v1) i quattro sono F0 con la freccia ruotata, alla stessa energia: una SCELTA del vuoto; (v2) qualche rotazione di F0
+  fuori dalla famiglia o con energia diversa: la freccia e' nelle LEGGI; (v3) altro. ### (f3) e' un FALSO-UNO dichiarato prima: ogni flusso costante ha la stessa energia
+==================================================================================================================================
+  DEVE PASSARE: F-0 F0 = fondo_con_fasi((0,0,0)) = _vuoto_sul_fondo.fondo_uniforme AL BIT                                  PASSA   
+  DEVE PASSARE: F-R0 sei rotazioni di 60 gradi sono l'identita' AL BIT, e lo specchio due volte                            PASSA   
+  DEVE PASSARE: F-R1 ogni campo ruotato e' un flusso costante per direzione (coda c_d, testa -c_d)                         PASSA   
+  DEVE FALLIRE: F-R-F il confronto a meno di una fase dice F0 = F1                                                         PASSA   scarto 1.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### (f1) LE FASI PER DIREZIONE, LETTE DAL CAMPO (la coda; in gradi), e la freccia per nodo (f4)
+         A2 (120) / A1 (0) / A1+A2 (60)                   |freccia|  angolo     |Im|       non unif. 
+  F0          +0.00 /    +0.00 /    +0.00                   4.000000   60.000     0.000e+00  0.000e+00 
+  F1          +0.00 /  +120.00 /  -120.00                   3.000000   150.000    1.000e+00  1.110e-16 
+  F2          +0.00 /   +90.00 /  +180.00                   2.828427   -180.000   1.500e-16  0.000e+00 
+  F3          +0.00 /    +0.00 /  +180.00                   0.000000   60.000     1.500e-32  0.000e+00 
+  F0 R60      +0.00 /  +180.00 /    +0.00                   4.000000   120.000    0.000e+00  0.000e+00 
+  F0 R120     +0.00 /  +180.00 /  +180.00                   4.000000   180.000    0.000e+00  0.000e+00 
+  F0 R180   +180.00 /  +180.00 /  +180.00                   4.000000   -120.000   0.000e+00  0.000e+00 
+  F0 R240   +180.00 /    +0.00 /  +180.00                   4.000000   -60.000    0.000e+00  0.000e+00 
+  F0 R300   +180.00 /    +0.00 /    +0.00                   4.000000   0.000      0.000e+00  0.000e+00 
+  F0 S        +0.00 /    +0.00 /    +0.00                   4.000000   60.000     0.000e+00  0.000e+00 
+----------------------------------------------------------------------------------------------------------------------------------
+### (f2) OGNI F0 RUOTATO CONTRO F0-F3, A MENO DI UNA FASE GLOBALE (uguale entro 1e-12)
+  F0 R60   F0 no (scarto 9.43e-01, fase +0.0); F1 no (scarto 7.45e-01, fase +60.0); F2 no (scarto 9.43e-01, fase +90.0); F3 no (scarto 9.43e-01, fase -180.0)
+  F0 R120  F0 no (scarto 9.43e-01, fase +180.0); F1 no (scarto 7.45e-01, fase +0.0); F2 no (scarto 6.67e-01, fase +26.6); F3 no (scarto 9.43e-01, fase +0.0)
+  F0 R180  F0 SI (scarto 1.11e-16, fase +180.0); F1 no (scarto 1.00e+00, fase +45.0); F2 no (scarto 9.43e-01, fase +90.0); F3 no (scarto 9.43e-01, fase +180.0)
+  F0 R240  F0 no (scarto 9.43e-01, fase +180.0); F1 no (scarto 7.45e-01, fase -120.0); F2 no (scarto 9.43e-01, fase -90.0); F3 no (scarto 9.43e-01, fase +0.0)
+  F0 R300  F0 no (scarto 9.43e-01, fase +0.0); F1 no (scarto 7.45e-01, fase -180.0); F2 no (scarto 6.67e-01, fase -153.4); F3 no (scarto 9.43e-01, fase -180.0)
+  F0 S     F0 SI (scarto 1.11e-16, fase +0.0); F1 no (scarto 1.00e+00, fase -135.0); F2 no (scarto 9.43e-01, fase -90.0); F3 no (scarto 9.43e-01, fase -0.0)
+----------------------------------------------------------------------------------------------------------------------------------
+### (f3) L'ENERGIA DEL VUOTO (_vuoto_sul_fondo.energia, phi_h, psi = 0): tutto, nodo, arco
+  F0       -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F1       -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F2       -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F3       -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 R60   -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 R120  -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 R180  -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 R240  -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 R300  -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  F0 S     -2.473438728024316e+05  -1.236719364012158e+05  -1.236719364012158e+05
+  lo scarto relativo massimo da F0: 2.220e-16
+----------------------------------------------------------------------------------------------------------------------------------
+### (f5) IL TICK DEL VUOTO COMMUTA CON LE ROTAZIONI? (il controllo MIO, dichiarato; vuoto.tick_vuoto, il tick intero a psi = 0; entro 1e-12)
+  F0 dopo un tick: |tick(F0) - F0| / |F0| = 4.669e-01
+  F0 R60   |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  F0 R120  |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  F0 R180  |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  F0 R240  |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  F0 R300  |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  F0 S     |tick(R F0) - R tick(F0)| / |tick(F0)| = 0.000e+00   commuta
+  DEVE FALLIRE: F5-F tick(R F0) uguale a tick(F0) non ruotato (entro 1e-12), per ogni rotazione                            PASSA   il minimo 0.000e+00
+==================================================================================================================================
+ESITO: 5/5 controlli passano; DEVE fallite: 0 []
