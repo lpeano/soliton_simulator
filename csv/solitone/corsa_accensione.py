@@ -18,6 +18,7 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --corsa TF3        # (Luca 2026-11-03 08:29) TP1000 col vuoto F3; un pezzo alla volta finche' dice "finita"
     python csv/solitone/corsa_accensione.py --corsa TFI        # (Luca 08:29) l'ibrido theta = pi/2, SOLO SE la condizione su TF3
     python csv/solitone/corsa_accensione.py --corsa TF3C       # (Luca, le decisioni corrette dopo fe409582) TF3 continuata da 16000 fino a 30000
+    python csv/solitone/corsa_accensione.py --corsa D0R        # (Luca dopo ae60cfb6, (a)) D0': la partenza di TP1000 ruotata di 180 gradi (sigma_z), il vuoto -F0
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
 import math
@@ -67,6 +68,9 @@ VUOTI = {"TF3": "F3", "TFI": (0.0, 0.0, 0.5 * math.pi)}   # ### le fasi per (A2,
 CORSE["TF3C"] = (1000.0, 30000.0)   # ### (Luca, le decisioni corrette dopo fe409582) TF3 continuata dal suo ultimo stato (16000) fino a 30000, stesso protocollo
 CONTINUA["TF3C"] = "TF3"            # ### il primo pezzo parte dall'ultimo di TF3 (al bit, ogni chiave); il vuoto NON si risostituisce (prec non e' None)
 VUOTI["TF3C"] = "F3"                # ### solo per la freccia in ogni campione, le bande su F3 e lo sha del vuoto registrato, come TF3
+CORSE["D0R"] = (1000.0, 16000.0)    # ### (Luca dopo ae60cfb6, (a)) D0': TP1000 dalla partenza RUOTATA di 180 gradi con U = sigma_z, e il vuoto ruotato (-F0); carta_d0: il tick vivo commuta
+RUOTATE = ("D0R",)                  # ### le corse che partono dallo stato di TP1000 ruotato (carta_d0.ruota, attorno al centro d'inversione piu' vicino alla densita')
+STATI["D0R"] = STATI["TM1000"]      # ### gli stati agli stessi tempi di TM1000: il confronto con lo stato ruotato di TM1000, chiave per chiave
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -158,6 +162,22 @@ def partenza_sul_vuoto(sol, z, phi_v, pK, s, p0):
             z["st"][k][...] = v
 
 
+def ruotata(z, salvato, p0):
+    """### **`R180` x `sigma_z` di TUTTO lo stato di partenza** *(la scena con `psi_h = p0`)*: `carta_d0.ruota`, attorno al centro d'inversione piu' vicino al centro della
+    densita' di `p0` *(come `carta_impulso`; `carta_d0`: il tick vivo commuta, `5.2e-15`)*; `(lo stato ruotato per chiave, m2)`."""
+    from solitone import carta_d0 as D0
+    from solitone import carta_impulso as CI
+    inc, L = z["inc"], z["L"]
+    ok, dd = CI.assi(inc, L)
+    assert ok, "l'arco k NON e' del nodo k // 3: la rotazione non vale"
+    c0, _rho = CI.centro(z, p0)
+    m2 = (int(round(2 * c0[0])), int(round(2 * c0[1])))
+    v = np.arange(inc.n)
+    x = {k: a.copy() for k, a in salvato.items()}
+    x["psi_h"] = p0.copy()
+    return D0.ruota(x, CI.rotazione(inc, L, dd, m2), CI.nodo_di(L, m2[0] - v // L, m2[1] - v % L), CI.SIGMA["sz"]), m2
+
+
 def corsa(nome):
     """### **Un pezzo di `V.PEZZO` tick;** ### **la ripresa al bit** *(ogni chiave di `z["st"]`, e lo stato a `T_acc`)*."""
     import _deriva_congelato as DC
@@ -204,6 +224,10 @@ def corsa(nome):
         phi_v = phi0
         if nome in VUOTI:
             phi_v = vuoto_della_corsa(z, nome)
+        x_rot, m2 = None, None
+        if nome in RUOTATE:
+            x_rot, m2 = ruotata(z, salvato, p0)
+            p0, phi_v = x_rot["psi_h"], x_rot["phi_h"]   # ### la partenza e il vuoto della corsa SONO i ruotati (le bande e D su questi)
         e_K = P.e_K(z)
         _ph, Z = DV.autovettori(DV.matrice(z, phi_v, DV.AMP))   # ### le bande sul vuoto della corsa (TF3: F3; il task history 2026-11-03)
         bande = MI.Bande(Z, z["L"])
@@ -219,6 +243,9 @@ def corsa(nome):
         if prec is None:
             t0 = 0
             z["st"]["psi_h"][...] = p0
+            if x_rot is not None:
+                for k, v in x_rot.items():
+                    z["st"][k][...] = v
             if nome in VUOTI:
                 part_v = partenza_sul_vuoto(sol, z, phi_v, pK, s, p0)
                 z["st"]["psi_h"][...] = p0
@@ -361,6 +388,8 @@ def corsa(nome):
         riga.update({"mappe": mappe, "stati": stati, "dopo_stato": dopo, "disco": disco})
     if giro is not None:
         riga.update({"giro": giro, "fermata": fermata})
+    if nome in RUOTATE:
+        riga.update({"ruotata": {"m2": list(m2), "U": "sigma_z", "sha_partenza": SFM.sha(p0), "sha_vuoto": sha_v}, "stati": stati, "dopo_stato": dopo})
     f_int = os.path.join(dir_json(nome), "%s_%06d.jsonl" % (nome, t0))
     V.LP.scrivi_nuovo(f_int, riga)
     if nome in RADA:
