@@ -23459,3 +23459,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`S0`: `R F3 = -F3`** *(`c_v -1.000000000000`, il residuo `~1e-16`; anche `F0`)*: **il segno globale serve.** **`S4`: il tick vivo commuta con `phi -> -phi` AL BIT** *(il peggiore `0.000e+00`; `S4-F` con `1.1 phi`: `2.1e-01`, quindi il controllo legge `phi`)*. **`S1`: la partenza simmetrica `8.3e-16`, `c = +1`**; la partenza di oggi `0.995`. `S2` la norma esatta; `S3` Bloch `5.9e-16`.
 - **Quindi lo stato iniziale di `TS` su `F3` e' invariante per `S` = `R180` x `sigma_z` x `(phi -> -phi)` fino all'arrotondamento, e `S` commuta col tick vivo** *(`D-T` `5.2e-15`, `S4` `0`)*: **il seme della rottura puo' venire solo dall'arrotondamento.**
 - **I dischi prima della corsa:** `C:` `17,93` GB, `E:` `212,55` GB *(sopra `5` GB: si parte)*. **`TS`:** fino a `30000`, ~`20` pezzi; **la stima vera dopo il primo pezzo.**
+
+## 2026-11-03 — `TS` IN VOLO: LA STIMA VERA; L'ASIMMETRIA NEL PRIMO PEZZO *(provvisorio: il referto e' a corsa finita)*
+
+- **Il primo pezzo** *(`0 -> 10000` tick)*: **`605` s**; `20` pezzi fino a `200000` tick: **~`3.4` ore** *(la stima di Luca: `3.5`-`4`)*.
+- **L'asimmetria dal jsonl del primo pezzo** *(una lettura, nessun calcolo; ogni `150` unita' di tempo)*: `psi_h` `8.3e-16` a `0`, `1.2e-14` a `150`, `1.0e-13` a `450`, **`1.7e-12` a `600`**, `8.5e-11` a `750`, `4.0e-09` a `900`, `3.0e-07` a `1050`, `7.1e-05` a `1200`, **`4.3e-03` a `1350`**, `4.4e-02` a `1500`; `phi_h` circa un ordine piu' avanti *(`1.3e-11` a `600`, `4.8e-02` a `1350`)*. **Come `D0R`:** la crescita comincia nella rampa e porta l'arrotondamento a `1e-2` in `~1400` unita' di tempo. **I tempi esatti e la direzione: nel referto.**
