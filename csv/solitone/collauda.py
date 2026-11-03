@@ -52,7 +52,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la carta dell'impulso della partenza** *(Luca 14:06, carta_impulso.py, e0949417)*.
 # ### **E la carta di `TF3` corretta (n.100, `ffa0781f`, `410eed1e`), la corsa `TF3C` e la sua carta** *(`carta_tf3_lunga.py`)*.
 # ### **E le misure di Luca delle `15:22` nella carta di `TF3C`** *(vaga o corre, `0453a150`)*.
-LIBRERIA_RIFERITA = "0453a150"
+# ### **E la carta di `D0'`** *(il tick vivo contro `R180` x `sigma_z`, `carta_d0.py`)*.
+LIBRERIA_RIFERITA = "8942e2ab"
 
 
 def vecchi():
