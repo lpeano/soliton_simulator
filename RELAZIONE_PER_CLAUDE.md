@@ -23156,3 +23156,11 @@ Il referto stampa per `TA1000`:
 - ### **Una riga del progresso che sembrava un disastro, e non lo e':** il pezzo `80000 -> 90000` stampa il cuore `0.00108`, `w` `36.7`, l'alone `0.99`; il pezzo dopo `0.330`. **E' la trappola gia' vista in `DG1000`:** la riga del progresso usa il centro EUCLIDEO, che si rompe al taglio delle coordinate; e il pezzo e' al bit con `TP1000`, quindi **la fisica e' quella gia' sigillata**.
 - **Un avviso nel referto:** il `RuntimeWarning` di `E_leg` *(`_scomposizione_solitone.py`, la divisione per `Lambda = 0`)* durante `ST1` **e' noto** *(`doc/referti_l2/nan_e_leg.txt`, e in altri `14` referti)*; `ST1` confronta gli `sha`, e non ne dipende.
 - **Dopo:** la freccia di `F0` *(la parte `1` delle `19:21`, sulla carta)*, poi `TL120`.
+
+## 2026-11-03 — LA RIPRESA DELLA CODA *(Luca `08:18`)*
+
+- **I controlli prima di ripartire:** nessun processo `python` in corsa; nessun semaforo `FERMA`; `E:\soliton_simulator` montato e scrivibile *(una prova di scrittura, poi cancellata)*, `228562567168` byte liberi.
+- **Le corse:** `DG1000` e `TM1000` sono finite coi loro referti *(`8095220b`, `776af495`)*: **nessuna corsa a meta'.**
+- ### **Una cosa interrotta, da dove si riprende:** il task history della freccia di `F0` *(`doc/TASK_HISTORY/2026-11-02_freccia_F0.md`)* era scritto e NON committato; la risposta di ieri sera si e' interrotta dopo averlo scritto. **Si committa com'e', da solo, e da li' si prosegue** col suo piano *(lo script, poi il referto)*.
+- **Nel task history, tre fatti dal codice che cambiano la premessa:** `F0`-`F3` sono **fasi per direzione**, non i quattro versi *(`_solitone_dal_fondo.FASI`)*; **prevedo** che `F3` abbia la freccia nulla e che nessuna rotazione di `F0` sia fra `F1`-`F3`; **(f3) e' un FALSO-UNO** *(ogni flusso costante ha la stessa energia per costruzione)*, quindi aggiungo **(f5), dichiarato come MIO**: il tick del vuoto commuta con le rotazioni? Non entra nelle letture (v1)-(v3), che restano di Luca.
+- **La coda:** `(2)` la freccia di `F0`, `(3)` `TL120`, `(4)` la direzione, `(5)` il primo mosaico *(solo se (v1))*, `(6)` `cs`.
