@@ -55,7 +55,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la carta di `D0'`** *(il tick vivo contro `R180` x `sigma_z`, `carta_d0.py`)*.
 # ### **E la corsa `D0R`** *(`D0'`: la partenza ruotata, `corsa_accensione.ruotata`)*.
 # ### **E le carte di `D0R` e di `TS`, e il campo** *(`carta_d0_confronto.py`, `carta_ts.py`, `campo.py`, `test_campo.py`, `carta_campo.py`)*.
-LIBRERIA_RIFERITA = "4cd4dbac"
+# ### **E i due poli** *(`campo.multipoli`, `test_campo` `C4`, `C5`, `C4-F`, `carta_poli.py`, `carta_campo.py --corsa`)*.
+LIBRERIA_RIFERITA = "4c1f5a72"
 
 
 def vecchi():
