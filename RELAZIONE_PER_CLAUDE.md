@@ -23291,3 +23291,52 @@ Il referto stampa per `TA1000`:
 
 - **La corsa:** `CORSE["TF3C"] = (1000, 30000)`, `CONTINUA["TF3C"] = "TF3"`, `VUOTI["TF3C"] = "F3"`; la continuazione di `DG1000` *(il primo pezzo legge `TF3.npz` e asserisce al bit la fine di `TF3`)*. **La carta** `carta_tf3_lunga.py`: provata solo senza pezzi *(le importazioni)*.
 - **La cassetta: `84/84`.** **`TF3C` parte ora**, un pezzo alla volta *(~`1.8` ore)*; un processo alla volta. Dopo: il referto, poi `D0'` e `TS` *(i task history prima del codice)*.
+
+## 2026-11-03 — `TF3C` FINITA *(10 pezzi, fino a `30000`)*: IL REFERTO `tf3_lunga.txt` `5/5`; VAGA O CORRE? *(Luca `15:22`)*
+
+- **L'aggiunta di Luca delle `15:22`, registrata qui** *(non l'avevo scritta quando e' arrivata: arrivata a corsa in volo, l'ho messa nella carta e non nella relazione; la scrivo ora)*: «sul vuoto `F3` il solitone sembra vagare su e giu' con anse sempre piu' lunghe»; nel referto di `TF3C`, su `TF3` + `TF3C` e accanto su `TP1000` + `DG1000`: **(i)** la distanza quadratica media dal punto di partenza contro il tempo in scala logaritmica, con le pendenze a tratti *(`1` vagare, `2` velocita' costante, crescente accelera)*; **(ii)** la persistenza della direzione: il coseno medio fra le direzioni dei blocchi a distanza `1`, `2`, `3`, ..., e il tempo in cui scende sotto `1/2` *(dichiarare se cresce)*. **Nessuna corsa nuova.**
+- **Le mie definizioni, dichiarate** *(`vaga_o_corre` in `carta_tf3_lunga.py`, `0453a150`, blob `ed522132`)*: (i) `r2 = |X(t) - X(0)|^2` col centro periodico srotolato, **su UNA traiettoria** *(non e' una media d'insieme: una pendenza su un tratto e' un'indicazione, non una distinzione statistica)*; i tratti `1000 .. 2000`, `2000 .. 4000`, `4000 .. 8000`, `8000 .. 16000`, `16000 .. 30000` *(che raddoppiano)*; (ii) `C(k)` sui blocchi di `1000`, `k = 1 .. 10`, su tutta la corsa e sulle due meta' `0 .. 15000`, `15000 .. 30000`. `D6` a `0453a150` *(`b0e11535`)*; **la cassetta `84/84`**.
+- **I DEVE: `5/5`** *(`C0` la ripresa al bit da `TF3.npz`; `C0-F` lo `sha_fine` diverso da `DG1000`; `C1` il vuoto `F3`; `A3` su `TF3` + `TF3C`, `200000` tick: `M` `+3.875e-12`, `V` `+2.653e-12` per `1000`; `A4`)*. **La fine valida** *(`3 w < 40.5`)* **regge fino a `30000` in entrambe le corse:** nessun blocco marcato.
+- ### **I FATTI** *(dal referto)*:
+  - **Su `F3` il moto PARTE:** `14.007` per `1000` a `16000 .. 17000`, **`22.353` a `17000 .. 18000`** *(il massimo)*, `16.863`, `12.812`, `8.477`, `6.448`, `4.467`, `2.523` fino a `24000`; la direzione fra `-151` e `-162` gradi. **Poi si ferma e torna indietro:** `0.669` a `24000 .. 25000` *(a `-86` gradi)*, poi `0.774`, `1.846`, `1.882`, `2.034`, `0.683` a `-11.68`, `+42.41`, `+52.90`, `+5.87`, `-45.21` gradi.
+  - **Su `F0`** *(`TP1000` + `DG1000` rada)*: il massimo `17.109` a `13000 .. 14000`, poi cala fino a `1.4`-`2.8` per `1000` da `20000`; **dal blocco `10000 .. 11000` in poi la direzione sempre fra `+146` e `-130` gradi passando per `180`** *(non torna indietro)*.
+  - **Lo spostamento totale a `30000`:** `F3` `87.782` nodi a `-158.17` gradi; `F0` `112.386` a `-174.72`.
+  - **Il cuore, `w`, l'alone all'ultimo blocco:** `F3` `0.28369`, `12.4000`, `0.05228`; `F0` `0.27555`, `12.5663`, `0.05517`. **La freccia sotto il solitone:** `F3` da `1.8549` *(`15000 .. 16000`)* a `1.6313` *(`29000 .. 30000`)*; `F0` dagli stati `1.6817` a `20000`, `1.6134` a `30000`.
+  - **(i), le pendenze di `ln r2` contro `ln t`** sui cinque tratti: `F3` `+0.691`, `-1.468`, `+5.998`, `+2.764`, `+4.931`; `F0` `+1.551`, `+1.294`, `+2.126`, `+11.231`, `+1.272`.
+  - **(ii), `C(k)`:** `F3` tutta: sotto `1/2` gia' a `k = 1` *(`C(1)` `+0.47`)*; `0 .. 15000` a `k = 1` *(`+0.08`)*; **`15000 .. 30000` a `k = 3`** *(`+0.82`, `+0.53`, `+0.38`, ... fino a `-0.74` a `k = 10`)*. `F0` tutta: **mai entro `k = 10`** *(`C` fra `+0.54` e `+0.77`)*; `0 .. 15000` a `k = 1` *(`+0.34`)*; `15000 .. 30000` mai *(`+0.95` ... `+0.70` ... `+0.84`)*. **Su entrambe il tempo di persistenza CRESCE dalla prima alla seconda meta'** *(`F3` da `1000` a `3000`; `F0` da `1000` a oltre `10000`)*.
+- ### **TRE AVVERTENZE MIE sulla lettura di (i) e (ii)** *(non letture: dove i numeri possono ingannare)*:
+  1. **Il tratto `1000 .. 2000` e' un blocco solo:** «`r2` all'inizio» e «alla fine» sono la stessa media *(`1.6753e-02` due volte su `F3`)*: un effetto del formato, non una misura.
+  2. **La pendenza contro `ln t` con l'origine a `0`, su un tratto dove il moto parte tardi, misura «accelera in questo tratto», non un esponente:** `+5.998` e `+11.231` sono le corse improvvise *(su un tratto lontano dall'origine `ln t` cambia poco)*. Su una traiettoria sola.
+  3. **Il `-0.74` di `C(10)` su `F3` nella seconda meta'** e' l'inversione dopo la corsa: i blocchi di `16000 .. 24000` contro quelli dopo `25000`.
+- ### **UN CONTROLLO MIO, e un sospetto che CADE:** nel referto **le due corse frenano entrambe a `|X - X0|` `~93` nodi** *(`F3` a `24000`, `F0` a `~20000`)*, e il toro ha lato `81`: **e' lo stesso punto del toro?** *(per esempio il solitone che rientra nella propria scia)*. Lo script nello scratchpad *(`toro_ritorno.py`, il testo sotto)* misura la distanza PERIODICA dal punto di partenza *(l'immagine piu' vicina fra `49`)*: **`F0` ripassa a `7.59` nodi a `18000`** *(come nel referto dei due giri)*; **`F3` dopo `18000` non scende sotto `28.82`** *(a `20000`)*, e si ferma a `~35.4` *(`25000`-`26000`)*. **Le due frenate NON avvengono nello stesso punto del toro:** il `~93` comune non e' un ritorno al punto di partenza. *(Che cosa le fermi non lo so; `TL120` in coda e' la prova della scatola.)*
+
+```python
+# -*- coding: utf-8 -*-
+# il controllo mio: la distanza PERIODICA del centro dal punto di partenza (l'immagine piu' vicina fra le 25), a fine blocco
+import os, sys
+R = r"C:\Users\lpeano\soliton_simulator"
+sys.path[:0] = [os.path.join(R, "csv", "solitone"), os.path.join(R, "csv")]
+import numpy as np
+import carta_tf3_lunga as T
+from solitone import corsa_accensione as CA, carta_giri as CG, toro as TO
+import _vuoto_vivo_B as V
+s = V.CORSE[CA.NOME][2]
+A1, A2 = TO.vettori()
+r3, c3, _, _ = CA.serie("TF3")
+rc, cc, _, _ = CA.serie("TF3C")
+rp, cp, _, _ = CA.serie("TP1000")
+cg = [c for r in CG.rade() for c in r["campioni"]]
+L = r3[0]["L"]
+img = np.array([L * (a * A1 + b * A2) for a in range(-3, 4) for b in range(-3, 4)])
+for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
+    tt, X, ww, _, _ = T.traiettoria(camp, L, s)
+    D = X - X[0]
+    per = np.min(np.linalg.norm(D[:, None, :] - img[None, :, :], axis=2), axis=1)
+    print(nome)
+    for t in range(1000, 30001, 1000):
+        i = int(np.argmin(abs(tt - t)))
+        print("  t %6.0f  |X-X0| srotolato %7.2f  periodico %6.2f  w %6.2f" % (tt[i], np.linalg.norm(D[i]), per[i], ww[i]))
+```
+
+- **Le letture (f1)-(f4) sono di Luca.** I fatti toccano **(f1)** *(la deriva parte e corre come su `F0`, piu' tardi: il massimo `~4000` dopo e piu' alto, `22.35` contro `17.11`)* **e (f2)** *(dopo la corsa la velocita' torna bassa e la direzione non persiste: `C` sotto `1/2` a `k = 3`)*; **non scelgo.**
+- **La coda, dopo questo referto** *(`[[PRECEDENZA-IN-CODA]]`)*: `D0'`, `TS` *(i task history prima del codice)*, `TFI` da decidere ora che `TF3C` e' finita, `TL120`, la direzione, il mosaico, `cs`.
