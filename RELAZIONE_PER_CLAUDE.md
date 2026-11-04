@@ -23519,3 +23519,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **L'arresto (i):** `|X - X0| + 3 w_in >= R_A` *(`|X - X0| >= 8.1`)*, `X` il centro periodico srotolato. **`E1-F`** come proposto *(gia' fatto: `e_leg_prova.txt` `6/6`)*.
 - **Nel referto:** il tempo e il motivo dell'arresto; vagando o correndo *(velocita' e `C(k)` prima dell'arresto, accanto a `TF3 + TF3C` e `TS`)*; `w` a ogni campione; **`TB3` dice se il moto parte senza rientro, non quanto corre.**
+
+## 2026-11-04 — LA TABELLA DI `c(t)` *(`doc/referti_l2/fase_F3.txt`, `3/3`)* E IL PROTOCOLLO DEL TEST DEL PACCHETTO *(task history 5.8-bis, 5.9)*
+
+- **`omega = 3 pi / 20` al bit**; **`C0`** il peggiore `1.94e-13` *(entro `1e-12`)*, la seconda corsa del vuoto ridà la tabella al bit; **`C0-F`** `0.313`, fallisce come deve.
+- **Da guardare:** il modulo del vuoto da solo deriva di `~2e-13` per `1000` tick *(estrapolato: `~4e-11` a fine corsa; il riferimento ha `|c| = 1`)*: molto sotto le onde, e `fase_fascia` lo misura.
+- ### **Il test del pacchetto prima della corsa** *(il mandato delle `21:52`; quello delle `09:00` non lo nomina nel TODO)*: banda `B` al `k` di velocita' di gruppo massima, `W 4`, `R0 16`, `N 1`; la riflessione `R(g)` = il massimo di `M` dentro `24` nodi dopo l'uscita; la griglia da `0` a `1e-1`; il piu' piccolo `g_max` sotto `1e-2`. **Una premessa scritta prima:** il bilancio della corsa non chiude meglio della deriva del tick *(`~1.2e-10` su `30000`, `A3` di `TS`)*.

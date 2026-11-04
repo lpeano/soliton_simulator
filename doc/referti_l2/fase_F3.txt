@@ -1,0 +1,27 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 7a401775  committato e pulito
+[TIMBRO] carta_fase.py  sha1-BYTE d5dd2217  committato e pulito
+==================================================================================================================================
+LA TABELLA DI c(t) (Luca 09:00, la scelta (a)): BG-F-0.15 (s 0.15, eps 0.5); K 6667 DOPO 1000; TOLL_OM 1e-14 TOLL 1e-12 TAPPE (1, 10, 100, 1000, 6667, 7667)
+==================================================================================================================================
+### LA TABELLA: 7668 valori (t 0 .. 7667); sha 1394eecf3484bc4020e17fcc1be264c17ea33cfe; scritta in C:\Users\lpeano\soliton_simulator\db\accensione_lenta\fase_F3.npz
+    c(    1) = +1.000000000000000 +0.000000026158930i  |c| 1.000000000000000  arg +2.615892950657e-08
+    c(   10) = +0.999999999949292 +0.000010071175784i  |c| 1.000000000000006  arg +1.007117578431e-05
+    c(  100) = +0.999960840053591 +0.008849766059793i  |c| 0.999999999999999  arg +8.849881580391e-03
+    c( 1000) = -0.704847521856967 +0.709358844966425i  |c| 1.000000000000004  arg +2.353004497619e+00
+    c( 6667) = +0.951056516295199 +0.309016994374771i  |c| 0.999999999999989  arg +3.141592653588e-01
+    c( 7667) = +0.951056516295394 +0.309016994374809i  |c| 1.000000000000185  arg +3.141592653588e-01
+  ### omega (la media su 1000 tick da K): +4.71238898038468967e-01; scarto max dalla media 3.109e-15; 3 pi / 20 = +4.71238898038468967e-01
+  DEVE PASSARE: OM omega = 3 pi / 20 entro 1e-14 (Luca 09:00: se no, FERMO)                                                PASSA   0.000e+00
+    tick     1: |phi - c_di(t) F3| / |F3| 9.926e-23; c della seconda corsa = c della tabella al bit: True
+    tick    10: |phi - c_di(t) F3| / |F3| 5.662e-15; c della seconda corsa = c della tabella al bit: True
+    tick   100: |phi - c_di(t) F3| / |F3| 5.884e-15; c della seconda corsa = c della tabella al bit: True
+    tick  1000: |phi - c_di(t) F3| / |F3| 3.483e-15; c della seconda corsa = c della tabella al bit: True
+    tick  6667: |phi - c_di(t) F3| / |F3| 1.223e-14; c della seconda corsa = c della tabella al bit: True
+    tick  7667: |phi - c_di(t) F3| / |F3| 1.942e-13; c della seconda corsa = c della tabella al bit: True
+  DEVE PASSARE: C0 phi0(t) = c_di(t) F3 contro il vuoto evoluto di nuovo ai tick (1, 10, 100, 1000, 6667, 7667), entro 1e- PASSA   il peggiore 1.942e-13
+  DEVE FALLIRE: C0-F phi0 = F3 fisso contro lo stesso vuoto al tick 7667, entro 1e-12                                      PASSA   3.129e-01
+==================================================================================================================================
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []
