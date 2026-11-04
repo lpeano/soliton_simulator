@@ -23531,3 +23531,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il pacchetto** in banda `B`, `|v_g|` `0.588` *(misurata `0.570`)*. **Senza bordo `R = 0.999`** *(rientra)*; con `g_max` `1e-2` `R = 6.0e-2`; **`3e-2` e `1e-1` `R = 9.555e-3`**: **il piu' piccolo sotto `1e-2` e' `0.03`.** Il bilancio di `M` entro `1e-12`.
 - ### ⚠ **`R` a `0.03` e `0.1` e' la coda dispersiva** *(senza bordo `9.5e-3`)*: **la riflessione vera e' sotto la risoluzione del test, e la soglia passa con poco margine.** Con un pacchetto piu' largo il test risolverebbe meglio: **lo segnalo, non lo rifaccio** *(il protocollo era dichiarato)*.
 - **Dopo:** la patch della corsa `TB3` con `g_max 0.03`, `D6`, la cassetta, i dischi, la corsa.
+
+## 2026-11-04 — `TB3` PRONTA: IL CODICE *(`c64c37bc`)*, `D6`, LA CASSETTA `105/105`, I DISCHI; LA CORSA PARTE
+
+- **Il codice della corsa** *(`corsa_accensione.py` `02ac81b1`)*: il bordo dopo ogni tick con `g_max 0.03` e `phi0(t) = c(t) F3`; la fase della fascia ai campioni PRIMA dell'assorbimento; `M`, `V`, `E` assorbite *(il libro prima e dopo)*; l'arresto (i).
+- **La cassetta** `105/105` dopo `D6` a `c64c37bc`.
+- **I dischi prima della corsa:** **`C:` `10.68` GB liberi** *(erano `17.93` all'avvio di `TS`: scendono)*, **`E:` `228.20` GB**. Sopra i `5` GB di `C:`.
