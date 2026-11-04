@@ -121,7 +121,12 @@ def parti(inc, mot, st):
     np.add.at(rho, inc.nodo, np.sum(np.abs(st["psi_h"]) ** 2, axis=1))
     lam = np.zeros(inc.n)
     np.add.at(lam, inc.nodo, np.abs(st["phi_h"]) ** 2)
-    E_leg = float(np.sum(lam * F1(rho / lam)))
+    # ### Luca 2026-11-04 09:00 (il task history 2026-11-03_TB3_bordo_assorbente, 5.6): a Lambda = 0 il limite dalla definizione, Lambda F1(rho / Lambda) = rho - Lambda arctan(rho / Lambda) -> rho
+    # ### (prima: 0 * inf = nan sullo stato uniforme di e_K); dove Lambda > 0 la formula di prima, nodo per nodo (al bit: e_leg_prova.txt, E0)
+    pos = lam > 0.0
+    leg = rho.copy()
+    leg[pos] = lam[pos] * F1(rho[pos] / lam[pos])
+    E_leg = float(np.sum(leg))
     del VC
     return E_mat, E_vuoto, E_leg, float(rho.sum()), float(lam.sum())
 
