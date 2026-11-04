@@ -60,7 +60,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E le corse `TM3`, `TM3C`** *(`TF3` e `TF3C` con le mappe)*.
 # ### **E la partenza simmetrizzata e la corsa `TS`** *(`protetto.partenza_simmetrica`, `test_simmetrica`)*.
 # ### **E la carta del referto di `TS`, la carta `B0`, il bordo assorbente** *(`carta_ts_corsa`, `carta_b0`, `bordo`, `test_bordo`)*.
-LIBRERIA_RIFERITA = "f44e8a14"
+# ### **E la carta di `E_leg`** *(`carta_e_leg`; la correzione di `_scomposizione_solitone.parti` sta fuori dalla libreria)*.
+LIBRERIA_RIFERITA = "3ed1a0e1"
 
 
 def vecchi():
