@@ -61,7 +61,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la partenza simmetrizzata e la corsa `TS`** *(`protetto.partenza_simmetrica`, `test_simmetrica`)*.
 # ### **E la carta del referto di `TS`, la carta `B0`, il bordo assorbente** *(`carta_ts_corsa`, `carta_b0`, `bordo`, `test_bordo`)*.
 # ### **E la carta di `E_leg`** *(`carta_e_leg`; la correzione di `_scomposizione_solitone.parti` sta fuori dalla libreria)*.
-LIBRERIA_RIFERITA = "3ed1a0e1"
+# ### **E la tabella di `c(t)`, `fase_fascia`, il test del pacchetto** *(`bordo`, `test_bordo` `G4` `G5`, `carta_fase`, `carta_bordo`)*.
+LIBRERIA_RIFERITA = "05f15f68"
 
 
 def vecchi():
