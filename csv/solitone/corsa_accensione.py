@@ -91,6 +91,12 @@ DIRS["TM3C"] = os.path.join(RADICE_E, "mappe", "TM3C", "campioni")   # ### i cam
 CORSE["TS"] = (1000.0, 30000.0)     # ### (Luca dopo aad1435a, corretto alle 21:14) la partenza SIMMETRIZZATA (q+, l'inviluppo sul nodo simmetrizzato) su F3, fino a 30000
 VUOTI["TS"] = "F3"                  # ### come TF3: la partenza costruita sulla scena, poi il vuoto sostituito
 SIMMETRIZZATE = ("TS",)             # ### in ogni campione la distanza dello stato dal suo ruotato (asimmetria)
+CORSE["TB3"] = (1000.0, 30000.0)    # ### (Luca 2026-11-03 21:52; 2026-11-04 09:00, 09:26) TF3 COL BORDO ASSORBENTE (bordo.py) dopo ogni tick: la partenza di TF3, F3, fino a 30000
+VUOTI["TB3"] = "F3"                 # ### come TF3: la partenza costruita sulla scena, poi il vuoto sostituito
+MAPPE = MAPPE + ("TB3",)            # ### Luca 21:52: le mappe, su E:\soliton_simulator\mappe\TB3\
+BORDO = {"TB3": 0.03}                 # ### g_max: il piu' piccolo della griglia con la riflessione del pacchetto sotto 1e-2 (carta_bordo.py, doc/referti_l2/bordo_riflessione.txt, 7dc08427)
+FASE = "fase_F3.npz"                # ### la tabella di c(t) (carta_fase.py, doc/referti_l2/fase_F3.txt, sha 1394eecf...): phi0(t) = c(t) F3 (Luca 09:00, la scelta (a))
+STIMA = {"TB3": "TF3"}              # ### la stima del disco delle mappe dai jsonl di TF3 (TB3 non ha gemella)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -330,6 +336,29 @@ def corsa(nome):
                 assert SFM.sha(acc["psi"]) == acc["sha"], "lo stato a T_acc NON e' quello registrato"
         if ts is not None:
             mu = ts["mu"]                  # ### D rispetto alla partenza simmetrica, con il suo mu (dopo i controlli della scena e della ripresa)
+        bor, gfa = None, None
+        if nome in BORDO:              # ### il bordo (Luca 21:52, 09:00, 09:26; il task history 2026-11-03_TB3_bordo_assorbente, sez. 5)
+            from solitone import bordo as BO
+            from solitone import toro as TO
+            A1b, A2b = TO.vettori()
+            with np.load(os.path.join(DIR_NPZ, FASE)) as dati:
+                tab_c, omega = dati["c"].copy(), float(dati["omega"])
+                assert int(dati["K"]) == K, "la tabella di c(t) NON e' di questo K"
+            assert abs(omega - 3 * math.pi / 20) <= 1e-14, "omega NON e' 3 pi / 20 (fase_F3.txt)"
+            if prec is None:
+                bor = {"g_max": BORDO[nome], "R_A": BO.R_A, "sha_c": SFM.sha(tab_c), "omega": omega, "c0": None, "c": None, "X": [0.0, 0.0],
+                       "M_ass": 0.0, "V_ass": 0.0, "E_ass": 0.0, "M0": None, "V0": None, "E0": None}
+            else:
+                bor = dict(prec["bordo"])
+                assert bor["sha_c"] == SFM.sha(tab_c) and bor["g_max"] == BORDO[nome] and bor["R_A"] == BO.R_A, "la tabella di c(t), g_max o R_A NON sono quelli del primo pezzo"
+                g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], BO.R_A, bor["g_max"])
+                gfa = (g_e, gn > 0.0)
+
+            def campione_bordo(fas, conti_):
+                rho = np.zeros(z["inc"].n)
+                np.add.at(rho, z["inc"].nodo, np.sum(np.abs(z["st"]["psi_h"]) ** 2, axis=1))
+                return {"fase": fas, "spost": float(np.hypot(*bor["X"])), "M": float(rho.sum()), "V": float(np.sum(np.abs(z["st"]["phi_h"]) ** 2)), "E": float(np.sum(conti_["tot"])),
+                        "M_dentro": float(rho[~gfa[1]].sum()), "M_fascia": float(rho[gfa[1]].sum()), "M_ass": bor["M_ass"], "V_ass": bor["V_ass"], "E_ass": bor["E_ass"]}
         vic = z["rr"] <= V.R_VICINO * w_in
         mas = {"vicino": vic, "lontano": ~vic, "totale": np.ones(z["inc"].n, dtype=bool)}
         t1 = min(t0 + V.PEZZO, t_fine)
@@ -343,7 +372,7 @@ def corsa(nome):
         if mappe_on:
             from solitone import mappe as MP
             assert MP.OGNI % V.OGNI == 0, "le mappe cadono sui campioni"
-            gem = GEMELLE.get(nome) or CONTINUA.get(nome)
+            gem = GEMELLE.get(nome) or CONTINUA.get(nome) or STIMA.get(nome)
             ff = [os.path.join(dir_json(gem), n) for n in nomi(gem)]
             fine_g = V.LP.leggi(ff[-1])["t1"]
             byte_j = int(sum(os.path.getsize(f) for f in ff) * max(t_fine - t0, 0) / fine_g)   # ### i jsonl, in proporzione ai tick di quella corsa
@@ -375,12 +404,32 @@ def corsa(nome):
                 c["lam"] = 0.0
                 if simm is not None:
                     c["simm"] = asimmetria(z, simm)
+                if bor is not None:        # ### il centro iniziale del solitone (il centro periodico del campione 0): la fascia e' fissa da qui
+                    bor["c0"] = [c["per"]["c1"], c["per"]["c2"]]
+                    bor["c"] = list(bor["c0"])
+                    g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], BO.R_A, bor["g_max"])
+                    gfa = (g_e, gn > 0.0)
+                    bor["M0"] = float(np.sum(np.abs(z["st"]["psi_h"]) ** 2))
+                    bor["V0"] = float(np.sum(np.abs(z["st"]["phi_h"]) ** 2))
+                    bor["E0"] = float(np.sum(conti["tot"]))
+                    c["bordo"] = campione_bordo(BO.fase_fascia(z["st"]["phi_h"], BO.c_di(0, tab_c, K, omega) * phi_v, z["inc"].nodo, gfa[1]), conti)
                 camp.append(c)
                 if mappe_on:
                     ist.append(MP.istantanea(z, 0, 0.0, (c["per"]["x"], c["per"]["y"])))
             f_lis0 = camp[0]["f_liscia"] if t0 == 0 else testa["campioni"][0]["f_liscia"]
             for t in range(t0 + 1, t1 + 1):
                 AC.tick(z, t, K)
+                conti_b, fas = None, None
+                if bor is not None:        # ### il bordo DOPO il tick: la fase della fascia PRIMA dell'assorbimento (ai campioni), l'energia col libro prima e dopo
+                    rif = BO.c_di(t, tab_c, K, omega) * phi_v
+                    if t % V.OGNI == 0:
+                        fas = BO.fase_fascia(z["st"]["phi_h"], rif, z["inc"].nodo, gfa[1])
+                    e_pr = float(np.sum(LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)["tot"]))
+                    dM, dV = BO.assorbi(z["st"], gfa[0], rif)
+                    conti_b = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
+                    bor["M_ass"] += dM
+                    bor["V_ass"] += dV
+                    bor["E_ass"] += e_pr - float(np.sum(conti_b["tot"]))
                 if t == K:
                     mu_a, res_a = AC.mu_rayleigh(z, s)
                     psi_a = z["st"]["psi_h"].copy()
@@ -389,7 +438,7 @@ def corsa(nome):
                     np.savez(f_acc.replace(".npz", "_tmp.npz"), psi_h=psi_a)
                     os.replace(f_acc.replace(".npz", "_tmp.npz"), f_acc)
                 if t % V.OGNI == 0:
-                    conti = LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
+                    conti = conti_b if conti_b is not None else LC.conti_per_nodo(z["inc"], z["mot"], z["st"], e_K, V.LAM_ZERO, par)
                     c = V.misura(z, t, w_in, w0, h, LC, conti, mas)
                     if frec is not None:
                         c["freccia"] = VU.freccia_media(VU.freccia(z["st"]["phi_h"], *frec))
@@ -415,6 +464,16 @@ def corsa(nome):
                         if fermata is None and cam >= CAMMINO[nome]:
                             fermata = "(a) lo spostamento srotolato dalla partenza arriva a %.2f (>= %g)" % (cam, CAMMINO[nome])
                     c["lam"] = AC.lam_di(t, K)
+                    if bor is not None:    # ### l'arresto (i) di Luca 09:26: |X - X0| + 3 w_in >= R_A, X il centro periodico srotolato
+                        p = c["per"]
+                        Lb = z["L"]
+                        e1 = ((p["c1"] - bor["c"][0] + 0.5 * Lb) % Lb) - 0.5 * Lb
+                        e2 = ((p["c2"] - bor["c"][1] + 0.5 * Lb) % Lb) - 0.5 * Lb
+                        bor["X"] = (np.asarray(bor["X"]) + e1 * A1b + e2 * A2b).tolist()
+                        bor["c"] = [p["c1"], p["c2"]]
+                        c["bordo"] = campione_bordo(fas, conti)
+                        if fermata is None and c["bordo"]["spost"] + 3.0 * w_in >= BO.R_A:
+                            fermata = "(i) lo spostamento %.4f + 3 w_in %.4f >= R_A %g a t %.1f (Luca 09:26)" % (c["bordo"]["spost"], 3.0 * w_in, BO.R_A, t * s)
                     if simm is not None:
                         c["simm"] = asimmetria(z, simm)
                     camp.append(c)
@@ -456,6 +515,8 @@ def corsa(nome):
         riga.update({"mappe": mappe, "stati": stati, "dopo_stato": dopo, "disco": disco})
     if giro is not None:
         riga.update({"giro": giro, "fermata": fermata})
+    if bor is not None:
+        riga.update({"bordo": bor, "fermata": fermata})
     if ts is not None:
         riga.update({"ts": {k: v for k, v in ts.items() if k != "psi"}, "sha_partenza_ts": SFM.sha(ts["psi"])})
     if nome in RUOTATE:
@@ -475,6 +536,10 @@ def corsa(nome):
     print("  la corsa %s: il pezzo %d -> %d%s; lam %.4f; f_liscia %.5f (all'inizio %.5f), w %.4f, alone %.5f; %.0f s%s"
           % (nome, t0, t1, (", SCIOLTO NELLA RAMPA (f_liscia sotto meta')" if t_dis <= K else ", il cuore istantaneo sotto meta' della partenza a tempo %.1f" % (t_dis * s)) if t_dis is not None else "", camp[-1]["lam"], camp[-1]["f_liscia"], f_lis0, camp[-1]["w"], camp[-1]["alone"], time.time() - s0,
              ("; il cammino %.2f%s" % (giro.get("cammino", float("nan")), ("; FERMATA: " + fermata) if fermata else "")) if giro is not None else ""))
+    if bor is not None:
+        print("  la corsa %s: il bordo (g_max %g, R_A %g): lo spostamento %.4f; assorbite M %.6e, V %.6e, E %.6e (relative a M0, V0, E0: %.3e, %.3e, %.3e)%s"
+              % (nome, bor["g_max"], bor["R_A"], float(np.hypot(*bor["X"])), bor["M_ass"], bor["V_ass"], bor["E_ass"], bor["M_ass"] / bor["M0"], bor["V_ass"] / bor["V0"], bor["E_ass"] / bor["E0"],
+                 ("; FERMATA: " + fermata) if fermata else ""))
     gem = GEMELLE.get(nome)
     if gem:
         fg = os.path.join(dir_json(gem), "%s_%06d.jsonl" % (gem, t0))
