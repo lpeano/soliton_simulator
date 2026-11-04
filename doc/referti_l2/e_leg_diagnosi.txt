@@ -1,0 +1,20 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 7a401775  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _scomposizione_solitone.py  sha1-BYTE 17dde60a  committato e pulito
+[TIMBRO] carta_e_leg.py  sha1-BYTE ca0196cb  committato e pulito
+==================================================================================================================================
+E_leg (Luca 09:00): --diagnosi; BG-F-0.15 (s 0.15, eps 0.5); PRIMA 45e996a1
+==================================================================================================================================
+  ### (1) la scena V.scena: 0 avvisi
+    parti(): 6561 nodi; Lambda = 0 su 6561; rho su quei nodi: min 1.000000e+00 max 1.000000e+00; Lambda min 0.000000e+00; chiamata da csv/_vuoto_vivo_B.py:e_K_di <- csv/solitone/protetto.py:e_K
+  ### (2) protetto.e_K: e_K -4.712275000354643e+00; 2 avvisi
+  ### (3) il libro dei conti su lo stato di B0 (psi 0, phi F3): leg finito True, somma 0.000000000000000e+00; 0 avvisi
+  ### (3) il libro dei conti su la corsa a t 0 (psi p0, phi F3): leg finito True, somma 9.932738866526746e+05; 0 avvisi
+----------------------------------------------------------------------------------------------------------------------------------
+### GLI AVVISI (3), con la catena delle chiamate:
+    _livelli_piatti.py:86 ResourceWarning: unclosed file <_io.TextIOWrapper name='C:\\Users\\lpeano\\soliton_simulator\\doc\\referti_l2\\coppia_di_B\\griglia.json' mode='r' encoding='utf-8'>; chiamata da csv/_livelli_piatti.py:leggi <- csv/_vuoto_vivo_B.py:partenza
+    _scomposizione_solitone.py:124 RuntimeWarning: divide by zero encountered in divide; chiamata da csv/_scomposizione_solitone.py:parti <- csv/_vuoto_vivo_B.py:e_K_di <- csv/solitone/protetto.py:e_K
+    _scomposizione_solitone.py:124 RuntimeWarning: invalid value encountered in multiply; chiamata da csv/_scomposizione_solitone.py:parti <- csv/_vuoto_vivo_B.py:e_K_di <- csv/solitone/protetto.py:e_K
+==================================================================================================================================
+ESITO: 0/0 controlli passano; DEVE fallite: 0 []; avvisi 3

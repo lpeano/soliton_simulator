@@ -68,3 +68,11 @@
 3. **La tabella di `c(t)`** *(il vuoto da solo, `K + 1000` tick)* e il test `C0` / `C0-F`.
 4. ### **FERMO: l'arresto della corsa** *(5.2)*. Poi la patch della corsa, la corsa, la stima dopo il primo pezzo.
 5. La carta del referto; la relazione.
+
+### 5.6 LA DIAGNOSI DI `E_leg` *(`doc/referti_l2/e_leg_diagnosi.txt`; `carta_e_leg.py` `ca0196cb`, `_scomposizione_solitone.py` `17dde60a`)*: **PRIMA della correzione**
+- **Quale chiamata:** i due `RuntimeWarning` *(`divide by zero`, `invalid value in multiply`, `_scomposizione_solitone.py:124`)* vengono **SOLO** da `parti <- _vuoto_vivo_B.e_K_di <- protetto.e_K`. **La scena** *(`V.scena`)* **non ne da' nessuno; il libro dei conti nessuno** *(sullo stato di `B0`: `leg` finito, somma `0`; sulla corsa a `t 0`: finito, somma `9.9327e+05`)*.
+- **Quali nodi:** lo stato uniforme di `e_K` *(`SC.stato_uniforme`, `phi_h = 0`)* ha **`Lambda = 0` su TUTTI i `6561` nodi**, con `rho = 1` su ciascuno: `rho / Lambda = inf`, `F1(inf) = inf - pi/2 = inf`, `0 * inf = nan`.
+- **Quale tick:** **nessuno**: e' la costruzione di `e_K`, una volta per corsa, prima del primo tick.
+- **Perche' non ha mai cambiato un numero:** `e_K = E_mat / M` *(`e_K_di`)*: `E_leg` si calcola e si butta *(`e_K` `-4.712275000354643`)*.
+- **Il valore giusto nel limite, dalla definizione** *(5.2)*: `Lambda F1(rho / Lambda) = rho - Lambda arctan(rho / Lambda) -> rho`. **La correzione:** in `parti`, dove `Lambda > 0` la formula di prima operazione per operazione, dove `Lambda = 0` il limite `rho`; **nessun numero cambia dove `Lambda > 0`** *(lo dice `E0`)*.
+- **Un avviso in piu', non chiesto:** un `ResourceWarning` *(`_livelli_piatti.leggi` lascia aperto `griglia.json`)*: **innocuo, non lo tocco** *(un file che molte corse importano)*; lo segnalo.
