@@ -67,7 +67,7 @@ def main(argv):
     b0 = rb[0]["bordo"]
     ult = rb[-1]
     esito("DEVE PASSARE: P0 il primo campione di TB3 e' quello di TF3 (per ed E, al bit)", cb[0]["per"] == c3[0]["per"] and cb[0]["E"] == c3[0]["E"], "t %d" % cb[0]["t"])
-    esito("DEVE FALLIRE: P0-F il primo campione di TB3 e' quello di TS (per, al bit)", cb[0]["per"] == cs[0]["per"], "")
+    esito("DEVE FALLIRE: P0-F il primo campione di TB3 e' quello di TS (per, al bit)", not cb[0]["per"] == cs[0]["per"], "w TB3 %.6f, TS %.6f" % (cb[0]["per"]["w"], cs[0]["per"]["w"]))
     esito("DEVE PASSARE: BR ogni pezzo: la stessa tabella di c(t) (sha), lo stesso g_max e R_A", all(r["bordo"]["sha_c"] == b0["sha_c"] and r["bordo"]["g_max"] == b0["g_max"] and r["bordo"]["R_A"] == b0["R_A"] for r in rb),
           "sha %s, g_max %g, R_A %g, omega %.17e" % (b0["sha_c"], b0["g_max"], b0["R_A"], b0["omega"]))
     tt = np.array([c["t"] for c in cb]) * s

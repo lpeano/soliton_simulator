@@ -23546,3 +23546,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **L'energia assorbita** `8.8e-4 E0` a `1500`; **a `300` negativa** *(`-9.9e-5 E0`: il bordo ha AGGIUNTO energia)* **quando la materia nella fascia era `8e-6 M0`**: l'assorbimento delle onde del vuoto attorno a `c(t) F3` cambia l'energia del vuoto in un verso o nell'altro. **Lo segnalo, non lo interpreto.**
 - **La fase del vuoto nella fascia** *(la lettura 5.3)*: `d` medio `1.6e-2`-`2.5e-2` *(max `0.16`)*; **`|a - 1|` da `6e-6` a `6e-5`, cioe' `~1000` volte sotto `d`**, e **`arg a` cambia segno** *(`+4.4e-5` a `600`, `-2.1e-5` a `1500`)*: **per ora, onde e non forzatura.**
 - **`w`:** `8.24` a `1500` contro `8.98` di `TF3` *(l'alone `0.00002` contro `~0.0025`: assorbito)*. **Lo spostamento** `0.40` a `1500`.
+
+## 2026-11-04 — UN MIO ERRORE IN `carta_tb3.py`, TROVATO PRIMA DEL REFERTO
+
+- **`P0-F` aveva il verso rovesciato:** `esito(... , cb[0]["per"] == cs[0]["per"])` passa se il campione di `TB3` **e'** quello di `TS`; per un «deve fallire» il verso giusto e' `not ...` *(come `C0-F`, `G1-F`)*. **L'ho visto girando la carta sui pezzi gia' scritti** *(un controllo nello scratchpad, non un referto)*: `5/6`, `P0-F` «fallisce». **Corretto in un commit a se'.** Nessun referto ne dipendeva.
