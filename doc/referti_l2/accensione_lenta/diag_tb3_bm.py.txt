@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+"""TB3, IL DEVE BM FALLITO (2026-11-04): il bilancio M + assorbita = M0 di TB3, col segno, contro la deriva di M di TF3 + TF3C SENZA bordo agli stessi tempi
+(E.totale.M di ogni campione); la retta di ciascuno con accensione.a3. La premessa 5.9 del task history: il bilancio non puo' chiudere meglio del tick.
+    python doc/referti_l2/accensione_lenta/diag_tb3_bm.py.txt   (dalla radice del repo)
+"""
+import os
+import sys
+
+import numpy as np
+
+sys.path.insert(0, os.path.join(os.getcwd(), "csv"))
+import solitone  # noqa: E402,F401
+from solitone import accensione as AC  # noqa: E402
+from solitone import corsa_accensione as CA  # noqa: E402
+
+_r, cb, _d, _a = CA.serie("TB3")
+_r3, c3, _d, _a = CA.serie("TF3")
+_rc, cc, _d, _a = CA.serie("TF3C")
+s = _r[0]["s"]
+b0 = _r[0]["bordo"]
+fine = cb[-1]["t"]
+tf = {c["t"]: c["E"]["totale"]["M"] for c in list(c3) + list(cc) if c["t"] <= fine}
+tb = np.array([c["t"] for c in cb])
+eM = np.array([(c["bordo"]["M"] + c["bordo"]["M_ass"]) / b0["M0"] - 1.0 for c in cb])
+mf0 = tf[0]
+dF = np.array([tf[t] / mf0 - 1.0 if t in tf else np.nan for t in tb])
+print("TB3: %d campioni fino al tick %d (tempo %.1f); TF3 + TF3C agli stessi tick: %d trovati" % (len(cb), fine, fine * s, int(np.sum(~np.isnan(dF)))))
+print("  M0 di TB3 %.12f; M di TF3 a t 0 %.12f; uguali al bit: %s" % (b0["M0"], mf0, b0["M0"] == mf0))
+for t in (1500, 3000, 7500, 15000, 22500, 30000):
+    i = int(np.argmin(np.abs(tb * s - t)))
+    print("  t %7.1f: TB3 (M + M_ass)/M0 - 1 %+.4e   TF3 M/M0 - 1 %+.4e   la differenza %+.3e" % (tb[i] * s, eM[i], dF[i], eM[i] - dF[i]))
+ok, n = AC.a3(tb * s, 1.0 + eM, fine, 1e-10)
+print("  TB3 il bilancio, la retta (a3): %s" % n)
+ok, n = AC.a3(tb * s, 1.0 + dF, fine, 1e-10)
+print("  TF3 + TF3C M, la retta (a3): %s" % n)
+dd = eM - dF
+print("  la differenza TB3 - TF3: max |.| %.3e; all'ultimo %+.3e" % (float(np.nanmax(np.abs(dd))), dd[-1]))

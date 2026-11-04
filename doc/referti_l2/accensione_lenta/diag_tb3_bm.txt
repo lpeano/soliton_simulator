@@ -1,0 +1,11 @@
+TB3: 20001 campioni fino al tick 200000 (tempo 30000.0); TF3 + TF3C agli stessi tick: 20001 trovati
+  M0 di TB3 999999.999999999884; M di TF3 a t 0 1000000.000000000000; uguali al bit: False
+  t  1500.0: TB3 (M + M_ass)/M0 - 1 +5.8131e-12   TF3 M/M0 - 1 +5.8171e-12   la differenza -3.997e-15
+  t  3000.0: TB3 (M + M_ass)/M0 - 1 +1.1613e-11   TF3 M/M0 - 1 +1.1636e-11   la differenza -2.265e-14
+  t  7500.0: TB3 (M + M_ass)/M0 - 1 +2.8985e-11   TF3 M/M0 - 1 +2.9088e-11   la differenza -1.024e-13
+  t 15000.0: TB3 (M + M_ass)/M0 - 1 +5.7967e-11   TF3 M/M0 - 1 +5.8151e-11   la differenza -1.845e-13
+  t 22500.0: TB3 (M + M_ass)/M0 - 1 +8.6928e-11   TF3 M/M0 - 1 +8.7207e-11   la differenza -2.787e-13
+  t 30000.0: TB3 (M + M_ass)/M0 - 1 +1.1588e-10   TF3 M/M0 - 1 +1.1626e-10   la differenza -3.766e-13
+  TB3 il bilancio, la retta (a3): lunga (200000 tick): la pendenza +3.862e-12 per 1000 (il tetto 1e-11), il residuo 2.77e-14 (la tolleranza 1e-10)
+  TF3 + TF3C M, la retta (a3): lunga (200000 tick): la pendenza +3.875e-12 per 1000 (il tetto 1e-11), il residuo 1.90e-14 (la tolleranza 1e-10)
+  la differenza TB3 - TF3: max |.| 3.775e-13; all'ultimo -3.766e-13
