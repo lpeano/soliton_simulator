@@ -1,0 +1,35 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 7a401775  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_bordo.py  sha1-BYTE d0f1bb39  committato e pulito
+==================================================================================================================================
+IL TEST DEL BORDO (Luca 21:52): la riflessione di un pacchetto in banda B sul vuoto F3; BG-F-0.15 (s 0.15, eps 0.5); R_A 28 W 4 N_PAC 1 SOGLIA 0.01 GRIGLIA (0.0, 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1); omega 4.71238898038468967e-01 (fase_F3.npz)
+==================================================================================================================================
+### IL PACCHETTO: k della griglia (66, 29), la banda 11 del gruppo B; la velocita' di gruppo (+0.30272, -0.50403), |v_g| 0.58795 nodi per unita' di tempo
+  il centro del bordo (40, 40); il centro del pacchetto (40, 24) a R0 16.000 (atteso R_A - 3 W = 16); M_in a t 0: 0.996717
+  T 1837 tick (2 L / v_g); il minimo di M_in senza bordo cercato entro 919 tick (L / v_g)
+  ### senza bordo, a T: |phi - e^{i omega T} F3| / |F3| 1.311e-08 (il vuoto di riferimento del test: il tick intero da F3, senza rampa)
+  ### senza bordo: la distanza media della materia dal centro cresce di 0.57039 nodi per unita' di tempo nel primo tratto (|v_g| atteso 0.58795)
+  ### senza bordo: il minimo di M_in a t 233 tick (34.9), M_in 9.515e-03
+    g_max 0      : R 9.990e-01 (il massimo di M_in dopo t_min); M finale 1.000e+00; assorbita 0.000000; il bilancio 1.06e-12
+    g_max 0.0001 : R 9.701e-01 (il massimo di M_in dopo t_min); M finale 9.392e-01; assorbita 0.060835; il bilancio 1.02e-12
+  DEVE PASSARE: RB-M g_max 0.0001 il bilancio M + assorbita = M0 entro 1e-10                                               PASSA   1.02e-12
+    g_max 0.0003 : R 9.150e-01 (il massimo di M_in dopo t_min); M finale 8.287e-01; assorbita 0.171304; il bilancio 9.50e-13
+  DEVE PASSARE: RB-M g_max 0.0003 il bilancio M + assorbita = M0 entro 1e-10                                               PASSA   9.50e-13
+    g_max 0.001  : R 7.456e-01 (il massimo di M_in dopo t_min); M finale 5.369e-01; assorbita 0.463112; il bilancio 7.65e-13
+  DEVE PASSARE: RB-M g_max 0.001 il bilancio M + assorbita = M0 entro 1e-10                                                PASSA   7.65e-13
+    g_max 0.003  : R 4.166e-01 (il massimo di M_in dopo t_min); M finale 1.612e-01; assorbita 0.838761; il bilancio 4.38e-13
+  DEVE PASSARE: RB-M g_max 0.003 il bilancio M + assorbita = M0 entro 1e-10                                                PASSA   4.38e-13
+    g_max 0.01   : R 6.008e-02 (il massimo di M_in dopo t_min); M finale 1.092e-02; assorbita 0.989075; il bilancio 1.77e-13
+  DEVE PASSARE: RB-M g_max 0.01 il bilancio M + assorbita = M0 entro 1e-10                                                 PASSA   1.77e-13
+    g_max 0.03   : R 9.555e-03 (il massimo di M_in dopo t_min); M finale 8.792e-03; assorbita 0.991208; il bilancio 1.27e-13
+  DEVE PASSARE: RB-M g_max 0.03 il bilancio M + assorbita = M0 entro 1e-10                                                 PASSA   1.27e-13
+    g_max 0.1    : R 9.555e-03 (il massimo di M_in dopo t_min); M finale 8.791e-03; assorbita 0.991209; il bilancio 1.16e-13
+  DEVE PASSARE: RB-M g_max 0.1 il bilancio M + assorbita = M0 entro 1e-10                                                  PASSA   1.16e-13
+  DEVE FALLIRE: R0-F senza bordo R < 0.01 (il pacchetto rientra dal toro)                                                  PASSA   R 9.990e-01
+  DEVE PASSARE: RB un g_max della griglia con R < 0.01 (il piu' piccolo e' quello della corsa)                             PASSA   il piu' piccolo: 0.03
+==================================================================================================================================
+ESITO: 9/9 controlli passano; DEVE fallite: 0 []; G_MAX 0.03

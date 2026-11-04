@@ -23525,3 +23525,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`omega = 3 pi / 20` al bit**; **`C0`** il peggiore `1.94e-13` *(entro `1e-12`)*, la seconda corsa del vuoto ridà la tabella al bit; **`C0-F`** `0.313`, fallisce come deve.
 - **Da guardare:** il modulo del vuoto da solo deriva di `~2e-13` per `1000` tick *(estrapolato: `~4e-11` a fine corsa; il riferimento ha `|c| = 1`)*: molto sotto le onde, e `fase_fascia` lo misura.
 - ### **Il test del pacchetto prima della corsa** *(il mandato delle `21:52`; quello delle `09:00` non lo nomina nel TODO)*: banda `B` al `k` di velocita' di gruppo massima, `W 4`, `R0 16`, `N 1`; la riflessione `R(g)` = il massimo di `M` dentro `24` nodi dopo l'uscita; la griglia da `0` a `1e-1`; il piu' piccolo `g_max` sotto `1e-2`. **Una premessa scritta prima:** il bilancio della corsa non chiude meglio della deriva del tick *(`~1.2e-10` su `30000`, `A3` di `TS`)*.
+
+## 2026-11-04 — IL TEST DEL PACCHETTO *(`doc/referti_l2/bordo_riflessione.txt`, `9/9`)*: **`g_max = 0.03`**
+
+- **Il pacchetto** in banda `B`, `|v_g|` `0.588` *(misurata `0.570`)*. **Senza bordo `R = 0.999`** *(rientra)*; con `g_max` `1e-2` `R = 6.0e-2`; **`3e-2` e `1e-1` `R = 9.555e-3`**: **il piu' piccolo sotto `1e-2` e' `0.03`.** Il bilancio di `M` entro `1e-12`.
+- ### ⚠ **`R` a `0.03` e `0.1` e' la coda dispersiva** *(senza bordo `9.5e-3`)*: **la riflessione vera e' sotto la risoluzione del test, e la soglia passa con poco margine.** Con un pacchetto piu' largo il test risolverebbe meglio: **lo segnalo, non lo rifaccio** *(il protocollo era dichiarato)*.
+- **Dopo:** la patch della corsa `TB3` con `g_max 0.03`, `D6`, la cassetta, i dischi, la corsa.
