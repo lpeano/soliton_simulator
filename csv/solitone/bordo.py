@@ -40,3 +40,50 @@ def assorbi(st, g_e, phi0):
     psi *= f[:, None]
     phi[...] = phi0 + (phi - phi0) * f
     return M0 - float(np.sum(np.abs(psi) ** 2)), V0 - float(np.sum(np.abs(phi) ** 2))
+
+
+# ====================================================================== IL VUOTO DI RIFERIMENTO CHE GIRA (Luca 2026-11-04 09:00, la scelta (a); il task history TB3, sez. 4-5)
+# ### B0 (633dcc10): F3 da solo sotto il tick vivo resta c(t) F3 entro 1.4e-14, e c gira (3 pi / 20 per tick dopo la rampa): phi0(t) = c(t) F3, con c MISURATO.
+def tabella_fase(z, F3, K, dopo):
+    """### **La tabella di `c(t)`:** il vuoto `F3` da solo *(`psi = 0`)* col tick vivo `AC.tick(z, t, K)` per `t = 1 .. K + dopo`; `c(t) = <F3, phi(t)> / |F3|^2`
+    *(`c(0)` sullo stato di partenza)*; **`omega`** la media di `arg(c(t+1) / c(t))` sui `dopo` tick da `K` *(`t = K .. K + dopo - 1`)*. ### **Lo stato di `z` si rimette.**
+    ### Dentro `SF.forma(VC.FORMA), BE.conv(DC.ZERO)`, come le corse."""
+    from solitone import accensione as AC
+    chiavi = [k for k, v in z["st"].items() if isinstance(v, np.ndarray)]
+    salvato = {k: z["st"][k].copy() for k in chiavi}
+    try:
+        z["st"]["psi_h"][...] = 0.0
+        z["st"]["phi_h"][...] = F3
+        n3 = float(np.vdot(F3, F3).real)
+        c = np.empty(K + dopo + 1, dtype=complex)
+        c[0] = complex(np.vdot(F3, z["st"]["phi_h"]) / n3)
+        for t in range(1, K + dopo + 1):
+            AC.tick(z, t, K)
+            c[t] = complex(np.vdot(F3, z["st"]["phi_h"]) / n3)
+    finally:
+        for k in chiavi:
+            z["st"][k][...] = salvato[k]
+    omega = float(np.mean(np.angle(c[K + 1:] / c[K:-1])))
+    return c, omega
+
+
+def c_di(t, tab, K, omega):
+    """### **`c(t)`:** dalla tabella fino a `K` *(la rampa e il primo tick intero)*, poi `c(K) e^{i omega (t - K)}`."""
+    return complex(tab[t]) if t <= K else complex(tab[K] * np.exp(1j * omega * (t - K)))
+
+
+def fase_fascia(phi, rif, nodo, fascia):
+    """### **Il controllo di Luca** *(09:00; il task history 5.3)*: sui nodi della fascia *(`fascia` maschera per nodo)*, PRIMA dell'assorbimento, `phi = a rif + r`:
+    `d` per nodo `|phi - rif| / |rif|` *(medio e massimo)*, `a = <rif, phi> / |rif|^2`, `|a - 1|`, `arg a`, `|r| / |rif|`, tutti sulla fascia."""
+    e = fascia[nodo]
+    p, q = phi[e], rif[e]
+    dn = np.zeros(len(fascia))
+    nn = np.zeros(len(fascia))
+    np.add.at(dn, nodo[e], np.abs(p - q) ** 2)
+    np.add.at(nn, nodo[e], np.abs(q) ** 2)
+    m = fascia & (nn > 0)
+    dv = np.sqrt(dn[m] / nn[m])
+    nq = float(np.vdot(q, q).real)
+    a = complex(np.vdot(q, p) / nq)
+    return {"d_medio": float(dv.mean()), "d_max": float(dv.max()), "a_meno_1": abs(a - 1.0), "arg_a": float(np.angle(a)),
+            "r": float(np.linalg.norm(p - a * q) / np.sqrt(nq)), "d": float(np.linalg.norm(p - q) / np.sqrt(nq))}
