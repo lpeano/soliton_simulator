@@ -23495,3 +23495,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Quindi `phi0 = F3` fisso FORZEREBBE il vuoto della fascia.** **La mia proposta:** `phi0(t) = c(t) F3` con `c(t)` misurato *(la tabella della rampa, poi la fase costante misurata)*. **Le alternative:** il vuoto evoluto accanto *(`~x2`)*, il bordo solo su `psi`. **La scelta e' di Luca.**
 - **Da controllare:** il libro dei conti ha dato un `RuntimeWarning` *(`E_leg`)*; misurato solo il tempo *(`0.3` tick)*.
 - **La coda:** `TB3` aspetta la scelta; **non anticipo `TM3`** *(l'ordine e' di Luca)*.
+
+## 2026-11-04 — `TB3`, IL MANDATO DI LUCA DELLE `09:00`: IL TASK HISTORY *(sezione 5)*, E DUE PREMESSE CHE CADONO
+
+- **Le decisioni di Luca:** `phi0(t) = c(t) F3` con `c` misurato; il controllo della fase del vuoto nella fascia a ogni campione; `E_leg` sistemato prima della corsa.
+- ### **Premessa caduta 1 (`E1-F`):** il `NaN` di `E_leg` nasce sullo **stato uniforme di costruzione di `e_K`** *(`phi = 0`, `Lambda = 0` ovunque; gia' scritto in `nan_e_leg.txt`, `2026-10-28`)*, **non** sullo stato di `B0` ne' della corsa *(li' `Lambda > 0`, e il libro dei conti ha gia' l'`assert`)*. **`E1-F` quindi si fa su quello stato**, l'unico dove la versione vecchia da' non finito. **Il limite dalla definizione:** `Lambda F1(rho / Lambda) -> rho`.
+- ### **Premessa caduta 2 (l'arresto):** **`3 w >= 28` gia' a `t 2709.0` in `TF3` e a `2947.5` in `TS`** *(`diag_cuore_3w.txt`)*, prima che il moto parta *(`~4000`, `~16000`)*: **`w` cresce per l'alone.** **Con l'arresto com'e' scritto `TB3` finirebbe a `~2700`.** **Le alternative:** (i) l'arresto sullo spostamento, `|X - X0| + 3 w_in >= R_A`; (ii) una larghezza del cuore diversa da `w`; (iii) com'e'. **La scelta e' di Luca: FERMO prima della corsa;** faccio `E_leg` e la tabella di `c(t)`, che non ne dipendono.
+- **La lettura «il bordo forza il vuoto»** *(sezione 5.3)*: lo scarto COERENTE del vuoto della fascia *(`|a - 1|`, `arg a`)* confrontabile con `d` e dello stesso segno per `3` blocchi consecutivi.

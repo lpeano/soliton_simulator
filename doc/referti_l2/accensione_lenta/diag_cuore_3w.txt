@@ -1,0 +1,2 @@
+TF3+TF3C campioni 20001 w a t0 6.6454 3w >= 28 la prima volta a t 2709.0 (w 9.3338) w max 12.6137
+TS campioni 20001 w a t0 6.6458 3w >= 28 la prima volta a t 2947.5 (w 9.3340) w max 12.7384

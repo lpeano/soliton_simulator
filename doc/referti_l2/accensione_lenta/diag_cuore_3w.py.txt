@@ -1,0 +1,18 @@
+# -*- coding: utf-8 -*-
+"""QUANDO 3 w SUPERA R_A = 28 (il criterio d'arresto di TB3, Luca 21:52): w = per.w dei campioni di TF3 + TF3C e di TS, dai jsonl.
+    python diag_cuore_3w.py   (dalla radice del repo; copiato in doc/referti_l2/accensione_lenta/diag_cuore_3w.py.txt)
+"""
+import glob, json, sys
+import numpy as np
+R_A = 28.0
+for nomi in (("TF3", "TF3C"), ("TS",)):
+    camp = []
+    for n in nomi:
+        for f in sorted(glob.glob("doc/referti_l2/accensione_lenta/%s_[0-9]*.jsonl" % n)):
+            r = json.loads(open(f).readline())
+            camp += r["campioni"] if not camp else [c for c in r["campioni"] if c["t"] > camp[-1]["t"]]
+    s = r["s"]
+    t = np.array([c["t"] for c in camp]) * s
+    w = np.array([c["per"]["w"] for c in camp])
+    i = np.argmax(3 * w >= R_A)
+    print("+".join(nomi), "campioni", len(t), "w a t0 %.4f" % w[0], "3w >= %g la prima volta a t %.1f (w %.4f)" % (R_A, t[i], w[i]) if (3 * w >= R_A).any() else "mai", "w max %.4f" % w.max())
