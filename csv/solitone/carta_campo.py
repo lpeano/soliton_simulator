@@ -2,6 +2,7 @@
 r"""**FIN DOVE ARRIVA IL CAMPO: I PROFILI E LE MAPPE LEGGERE DA `TM1000`** *(Luca, `2026-11-03` `18:26`; il task history `doc/TASK_HISTORY/2026-11-03_campo_TM1000.md`)*
     python csv/solitone/carta_campo.py > doc/referti_l2/campo_TM1000.txt
     python csv/solitone/carta_campo.py --corsa TM3 > doc/referti_l2/campo_TM3.txt     # (Luca 19:34) TM3 + TM3C, F3; gli indici mappe_indice_TM3.txt, mappe_indice_TM3C.txt
+    python csv/solitone/carta_campo.py --corsa TB3 > doc/referti_l2/campo_TB3.txt     # (Luca 2026-11-04 sera) TB3, F3 col bordo; l'indice mappe_indice_TB3.txt
 ### **Nessuna corsa: `E:` solo in lettura** *(le mappe di `TM1000`, al bit di `TP1000`, `0 .. 16000`, `F0`)*. ### **Scrive nel repo:** `doc/referti_l2/campo_TM1000/profili.npz` *(`float32`:
 i profili ad anelli di `rho`, `Lambda`, `|Lambda - Lambda(t 0)|` e `Lambda - Lambda(t 0)` di ogni istantanea, quelli di `t 0`, i centri, la portata)* e `mappe_leggere.npz` *(una ogni
 `OGNI_LEGGERA` istantanee: `rho` e `Lambda - Lambda(t 0)` per nodo in `float16`)*.
@@ -23,8 +24,9 @@ if os.path.dirname(_QUI) not in sys.path:
 import solitone  # noqa: E402,F401  (i percorsi)
 
 PARTI = {"TM1000": (("TM1000", "TP1000"),),                      # ### la corsa: (le corse con le mappe, la gemella al bit coi campioni nel repo)
-         "TM3": (("TM3", "TF3"), ("TM3C", "TF3C"))}              # ### Luca 19:34: TF3 + TF3C con le mappe (due corse: lo sha_fine al bit pezzo per pezzo)
-INDICI = {"TM1000": ("mappe_indice.txt",), "TM3": ("mappe_indice_TM3.txt", "mappe_indice_TM3C.txt")}   # ### corsa_accensione.py --indice <nome>
+         "TM3": (("TM3", "TF3"), ("TM3C", "TF3C")),              # ### Luca 19:34: TF3 + TF3C con le mappe (due corse: lo sha_fine al bit pezzo per pezzo)
+         "TB3": (("TB3", "TB3"),)}                               # ### Luca 2026-11-04 sera: TB3 ha le mappe e i campioni (nel repo) nella stessa corsa, nessuna gemella
+INDICI = {"TM1000": ("mappe_indice.txt",), "TM3": ("mappe_indice_TM3.txt", "mappe_indice_TM3C.txt"), "TB3": ("mappe_indice_TB3.txt",)}   # ### corsa_accensione.py --indice <nome>
 SOGLIE_RHO = (1e-3, 1e-4, 1e-5)   # ### Luca 18:26
 SOGLIA_L = 1e-3                # ### Luca 18:26
 TOLL = 1e-6                    # ### Luca 18:26 (come K2 di TM1000: float32)
@@ -84,7 +86,7 @@ def main(argv):
     sol, vuoto, s = V.CORSE[CA.NOME]
     print("=" * 130)
     print("FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di %s (al bit di %s; il vuoto %s) su E:, solo lettura; SOGLIE_RHO %s SOGLIA_L %g TOLL %g BLOCCO %g OGNI_LEGGERA %d TETTO_MB %g"
-          % ("+".join(p for p, _g in parti), "+".join(g for _p, g in parti), "F3" if corsa == "TM3" else "F0", SOGLIE_RHO, SOGLIA_L, TOLL, BLOCCO, OGNI_LEGGERA, TETTO_MB))
+          % ("+".join(p for p, _g in parti), "+".join(g for _p, g in parti), "F3" if corsa in ("TM3", "TB3") else "F0", SOGLIE_RHO, SOGLIA_L, TOLL, BLOCCO, OGNI_LEGGERA, TETTO_MB))
     print("  le definizioni (campo.py, dichiarate nel task history): gli anelli [k, k+1) fino alla meta' del periodo; la media al centro = l'anello 0; la portata: R_contiguo (il primo")
     print("  anello che NON supera la soglia, il bordo interno; nan = mai entro R) e R_ultimo (il bordo esterno dell'ultimo che la supera); Lambda - Lambda(t 0) per nodo")
     print("=" * 130)

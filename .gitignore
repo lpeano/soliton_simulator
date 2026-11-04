@@ -15,6 +15,8 @@ __pycache__/
 *.npz
 # Luca 2026-11-03 18:26: i profili e le mappe leggere del campo NEL REPO (float32/float16, ~3 MB)
 !doc/referti_l2/campo_TM1000/*.npz
+# Luca 2026-11-04 sera: le mappe leggere e i profili di TB3, per il video del campo
+!doc/referti_l2/campo_TB3/*.npz
 
 # ----------------------------------------------------------------------------
 # NUOVO LAYOUT OUTPUT (2026-09-07): db/<campagna>/ (.pkl), csv/<campagna>/ (.csv),
