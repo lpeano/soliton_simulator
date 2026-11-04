@@ -23508,3 +23508,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il `RuntimeWarning` viene solo da `protetto.e_K -> _vuoto_vivo_B.e_K_di -> _scomposizione_solitone.parti`**, sullo stato uniforme con **`Lambda = 0` su tutti i `6561` nodi** *(`rho = 1`)*: `0 * inf = nan`. **Nessun tick; la scena e il libro dei conti senza avvisi** *(il libro finito sullo stato di `B0` e sulla corsa a `t 0`)*. `e_K = E_mat / M` non usa `E_leg`: **il `NaN` non ha mai cambiato un numero.**
 - **Il limite dalla definizione:** `Lambda F1(rho / Lambda) -> rho`. **La correzione** *(un commit a se')*: dove `Lambda = 0`, `rho`; altrove la formula di prima al bit.
 - **In piu':** un `ResourceWarning` in `_livelli_piatti.leggi` *(un file aperto e non chiuso)*: innocuo, non toccato, segnalato.
+
+## 2026-11-04 — `E_leg`: LA PROVA *(`doc/referti_l2/e_leg_prova.txt`, `6/6`)*
+
+- **`E0` al bit** *(le cinque uscite di `parti`, `PRIMA` dal blob di git contro oggi)* sugli stati di `TS` a `30000`, `TF3` a `16000`, `TF3C` a `30000` *(verificati con lo `sha_fine`)*, della corsa a `t 0` e di `B0`. **`E1`** finito; **`E1-F`** *(`PRIMA` sullo stato uniforme: `nan`)* fallisce come deve. **`protetto.e_K` senza avvisi.**
+- ### ⚠ **Un mio errore di etichetta:** nella riga di `E0` il referto chiama «`e_K`» `E_mat / M` col legame ACCESO *(`-3.7123`)*; l'`e_K` delle corse e' col legame spento *(`-4.7123`)*. **Il confronto al bit e' vero per entrambe; il nome no.** Scritto nel task history *(5.7)*.
+- **Il libro dei conti dell'energia assorbita si puo' usare** *(era gia' finito sugli stati della corsa; ora anche `parti` lo e' ovunque)*. **Dopo:** `D6`, la cassetta, la tabella di `c(t)`.
