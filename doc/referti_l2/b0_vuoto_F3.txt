@@ -1,0 +1,29 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 7a401775  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_b0.py  sha1-BYTE ffa5a941  committato e pulito
+==================================================================================================================================
+B0: IL VUOTO F3 DA SOLO SOTTO IL TICK VIVO (Luca 21:52, prima del bordo): BG-F-0.15 (s 0.15, eps 0.5); K 6667; DENTRO (1, 10, 100, 1000) DOPO (1, 10, 100, 1000); TOLL 1e-12 SCALA_P 0.001
+  i tre casi (il task history): (1) fermo, phi0 = F3; (2) fermo a meno di una fase, phi0(t) = c(t) F3 (la mia proposta, da confermare); (3) non fermo: FERMO
+==================================================================================================================================
+### IL VUOTO F3 DA SOLO (psi = 0): ai tick [1, 10, 100, 1000, 6667, 6668, 6677, 6767, 7667]
+    tick      1 (lam 0.000000): c = +1.000000000000000 +0.000000026158930i  |c| 1.000000000000000  arg c +2.615893e-08  |phi - c F3| / |F3| 9.926e-23  Lambda std/media 0.000e+00
+    tick     10 (lam 0.000006): c = +0.999999999949292 +0.000010071175784i  |c| 1.000000000000006  arg c +1.007118e-05  |phi - c F3| / |F3| 5.662e-15  Lambda std/media 0.000e+00
+    tick    100 (lam 0.000555): c = +0.999960840053591 +0.008849766059793i  |c| 0.999999999999999  arg c +8.849882e-03  |phi - c F3| / |F3| 5.884e-15  Lambda std/media 2.961e-16
+    tick   1000 (lam 0.054491): c = -0.704847521856967 +0.709358844966425i  |c| 1.000000000000004  arg c +2.353004e+00  |phi - c F3| / |F3| 3.483e-15  Lambda std/media 1.480e-16
+    tick   6667 (lam 1.000000): c = +0.951056516295199 +0.309016994374771i  |c| 0.999999999999989  arg c +3.141593e-01  |phi - c F3| / |F3| 1.223e-14  Lambda std/media 6.758e-15
+    tick   6668 (lam 1.000000): c = +0.707106781186670 +0.707106781186413i  |c| 0.999999999999991  arg c +7.853982e-01  |phi - c F3| / |F3| 1.191e-14  Lambda std/media 6.896e-15
+    tick   6677 (lam 1.000000): c = +0.309016994374771 -0.951056516295202i  |c| 0.999999999999991  arg c -1.256637e+00  |phi - c F3| / |F3| 1.208e-14  Lambda std/media 6.851e-15
+    tick   6767 (lam 1.000000): c = -0.951056516295225 -0.309016994374775i  |c| 1.000000000000014  arg c -2.827433e+00  |phi - c F3| / |F3| 1.286e-14  Lambda std/media 6.980e-15
+    tick   7667 (lam 1.000000): c = +0.951056516295394 +0.309016994374809i  |c| 1.000000000000185  arg c +3.141593e-01  |phi - c F3| / |F3| 1.408e-14  Lambda std/media 7.759e-15
+  ### dopo la rampa, la fase per tick arg(c(t+1)/c(t)) su 999 tick: media +4.712388980384690e-01, scarto max dalla media 3.109e-15
+  ### IL CASO: (2) F3 fermo a meno di una fase; il peggiore |phi - c F3| / |F3| 1.408e-14
+  DEVE PASSARE: B0-P con la materia piccola (la partenza x 0.001) il vuoto dopo 7667 tick NON e' piu' c F3 entro 1e-12 (la PASSA   |phi - c F3| / |F3| 6.275e-11
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: divide by zero encountered in divide
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+C:\Users\lpeano\soliton_simulator\csv\_scomposizione_solitone.py:124: RuntimeWarning: invalid value encountered in multiply
+  E_leg = float(np.sum(lam * F1(rho / lam)))
+  ### il costo: un tick 0.0475 s (la media su 7667 tick del vuoto da solo); un libro dei conti 0.0139 s (0.3 tick)
+==================================================================================================================================
+ESITO: 1/1 controlli passano; DEVE fallite: 0 []; IL CASO (2)

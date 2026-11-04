@@ -23488,3 +23488,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **I test del bordo** *(`test_bordo`)*: `G0` il profilo *(`g(R_A + 1e-6)` `1.6e-15`)*; `G1` il bilancio al bit *(`dM / M0` `6.65e-2` col `g` di prova `0.1`)*; `G1-F` fallisce come deve; `G3` `17142` estremita' dentro, `22224` nella fascia, al bit; `G2` col vuoto `phi0` e `psi = 0` niente si muove *(`dM 0`, `dV 0`)*.
 - **Dopo:** `B0`.
+
+## 2026-11-04 — `B0`: IL VUOTO `F3` DA SOLO E' FERMO A MENO DI UNA FASE *(il caso 2)*: **FERMO per `TB3`**
+
+- **`F3` resta `c(t) F3`** entro `1.4e-14`, `|c| = 1`; **`c` gira**: dopo la rampa **`3 pi / 20` per tick** *(entro `5.6e-17`; `pi` per unita' di tempo)*, nella rampa `arg c` `2.35` a `1000`. `B0-P` passa *(`6.3e-11`)*.
+- **Quindi `phi0 = F3` fisso FORZEREBBE il vuoto della fascia.** **La mia proposta:** `phi0(t) = c(t) F3` con `c(t)` misurato *(la tabella della rampa, poi la fase costante misurata)*. **Le alternative:** il vuoto evoluto accanto *(`~x2`)*, il bordo solo su `psi`. **La scelta e' di Luca.**
+- **Da controllare:** il libro dei conti ha dato un `RuntimeWarning` *(`E_leg`)*; misurato solo il tempo *(`0.3` tick)*.
+- **La coda:** `TB3` aspetta la scelta; **non anticipo `TM3`** *(l'ordine e' di Luca)*.

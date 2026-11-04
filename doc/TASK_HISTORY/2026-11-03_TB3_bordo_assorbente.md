@@ -25,3 +25,11 @@
 ## 3. TODO
 - [ ] questo file, la relazione; commit;
 - [ ] `carta_b0.py` *(commit; gira dopo `TS`)*; poi le scelte dal suo esito; il resto.
+
+## 4. ESITO DI `B0` *(`doc/referti_l2/b0_vuoto_F3.txt`, `1/1`; `carta_b0.py` `ffa5a941`)*: **IL CASO (2) -- FERMO**
+
+- **`F3` da solo resta `c(t) F3`** in tutte le tappe: il peggiore `|phi - c F3| / |F3|` **`1.4e-14`**, `|c| = 1` entro `1.9e-13`, `Lambda` uniforme *(std/media `<= 7.8e-15`)*. **Ma `c` gira:** `arg c` `2.35` a `1000` *(nella rampa)*, e **dopo la rampa la fase per tick e' costante: `+0.471238898038469`** *(scarto max `3.1e-15` su `999` tick)* **`= 3 pi / 20` entro `5.6e-17`**, cioe' **`pi` per unita' di tempo** *(`s = 0.15`)*. **E' il caso (2).**
+- **`B0-P`** *(la materia `x 1e-3`)*: il vuoto si scosta a `6.3e-11`, sopra `1e-12`: **la misura legge il vuoto.** *(Scosta poco: `1e-3` in `psi`, `6e-11` in `phi`.)*
+- **Il costo del libro dei conti:** `0.014` s contro `0.0475` s per tick *(`0.3` tick)*. ### **Ma la chiamata ha dato `RuntimeWarning`** *(divisione per zero in `E_leg`, `_scomposizione_solitone.py`)*: **ho misurato solo il TEMPO, non il valore**; prima di usare l'energia assorbita va controllato che il libro dia un numero finito sullo stato della corsa.
+- ### **Un `phi0` FISSO = `F3` sarebbe sbagliato:** dopo `n` tick il vuoto vero e' `e^{i 3 pi n / 20} F3`, e il bordo lo riporterebbe a `F3` *(forzandolo, con `|phi - F3|` fino a `2 |F3|`)*.
+- **La mia proposta** *(da confermare: la decisione e' di Luca)*: **`phi0(t) = c(t) F3`, con `c(t)` MISURATO** -- la tabella di `c` sui `6667` tick della rampa *(una corsa del vuoto da solo, `~5` minuti)*, poi `c(t) = c(K) e^{i omega (t - K)}` con `omega` misurato *(`3 pi / 20` per tick)*. **Le alternative:** il vuoto da solo evoluto accanto per tutta la corsa *(il costo `~x2`)*; il bordo solo su `psi`.
