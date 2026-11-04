@@ -23514,3 +23514,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`E0` al bit** *(le cinque uscite di `parti`, `PRIMA` dal blob di git contro oggi)* sugli stati di `TS` a `30000`, `TF3` a `16000`, `TF3C` a `30000` *(verificati con lo `sha_fine`)*, della corsa a `t 0` e di `B0`. **`E1`** finito; **`E1-F`** *(`PRIMA` sullo stato uniforme: `nan`)* fallisce come deve. **`protetto.e_K` senza avvisi.**
 - ### ⚠ **Un mio errore di etichetta:** nella riga di `E0` il referto chiama «`e_K`» `E_mat / M` col legame ACCESO *(`-3.7123`)*; l'`e_K` delle corse e' col legame spento *(`-4.7123`)*. **Il confronto al bit e' vero per entrambe; il nome no.** Scritto nel task history *(5.7)*.
 - **Il libro dei conti dell'energia assorbita si puo' usare** *(era gia' finito sugli stati della corsa; ora anche `parti` lo e' ovunque)*. **Dopo:** `D6`, la cassetta, la tabella di `c(t)`.
+
+## 2026-11-04 — `TB3`: LA DECISIONE DI LUCA DELLE `09:26` *(task history 5.8)*
+
+- **L'arresto (i):** `|X - X0| + 3 w_in >= R_A` *(`|X - X0| >= 8.1`)*, `X` il centro periodico srotolato. **`E1-F`** come proposto *(gia' fatto: `e_leg_prova.txt` `6/6`)*.
+- **Nel referto:** il tempo e il motivo dell'arresto; vagando o correndo *(velocita' e `C(k)` prima dell'arresto, accanto a `TF3 + TF3C` e `TS`)*; `w` a ogni campione; **`TB3` dice se il moto parte senza rientro, non quanto corre.**
