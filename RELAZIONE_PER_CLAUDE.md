@@ -23573,3 +23573,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### ⚠ **UN CAMBIO D'ORDINE DA REGISTRARE** *(`PRECEDENZA-IN-CODA`)*: **la voce `38` della mappa** *(il coarse graining)* diceva *«la prima dopo la coda attuale»* *(Luca `2026-11-02` `18:29`, `41e72710`)*, **prima della coppia**. **Il mandato delle `18:31` di oggi la mette IN ATTESA e la coppia in coda:** vale l'ultimo, e lo scrivo nella voce. **Il perche' del mandato:** la coppia senza bordo misurerebbe il mare che riempie il toro.
 - **I dischi stasera** *(`shutil.disk_usage`)*: **`C:` `6.41` GB, `E:` `228.05` GB.** La soglia nuova di `C:` e' **`6`** GB: **siamo a `0.41` sopra.**
 - **Stasera niente calcoli:** nessuna corsa, nessuna carta. Domani si comincia dal `BM`.
+
+## 2026-11-04 — LE MAPPE LEGGERE DI `TB3` *(`doc/referti_l2/campo_TB3.txt`, `6/6`; `carta_campo.py` `db7bfd91`, `29498ab8`)*: **PER IL VIDEO DEL CAMPO**
+
+- **La richiesta di Luca della sera** *(un'eccezione al solo scrittura: una lettura, nessuna corsa)*. **La carta ha girato in `14` s** su `E:\soliton_simulator\mappe\TB3\` *(`20` file, l'indice `mappe_indice_TB3.txt`)*.
+- **I DEVE:** `F0` lo sha1 dei `20` file = l'indice; `F0-F` fallisce come deve; **`F1` le somme di `rho` e `Lambda` = `M` e `V` dei campioni di `TB3` su `2001` istantanee** *(il peggiore `3.36e-9`, `1.29e-9`)*; `F1-F` fallisce come deve *(`5.07e-3`)*; **`F2` `Lambda(t 0)` uniforme a `6.000000000`** *(std `0`: il vuoto `F3`)*; **`F3` `rho(t 0)` = la partenza ricalcolata entro `2.6e-8`** *(la partenza di `TB3` e' quella costruita sulla scena, come `TF3`: il dubbio del commit della carta si chiude)*.
+- **I file nel repo:** **`doc/referti_l2/campo_TB3/mappe_leggere.npz` `4832348` byte, `201` mappe** *(una ogni `10` istantanee = una ogni `1000` tick = **una ogni `150` unita' di tempo**; le chiavi `t`, `tempo`, `rho`, `dLambda`, `centro`, `d1`, `d2`, `L`, `ogni`, come `TM1000`; `float16`)*; **`profili.npz` `1223392` byte** *(`2001` istantanee, `float32`)*.
+- ### **IL RIFERIMENTO DI `dLambda`:** **`Lambda` a `t 0`**, lo stesso di `TM1000` *(qui uniforme, `6.0`)*.
