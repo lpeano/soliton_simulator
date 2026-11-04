@@ -1,0 +1,23 @@
+# -*- coding: utf-8 -*-
+"""TB3 IN VOLO (2026-11-04): dal primo pezzo, il bilancio del bordo e la fase del vuoto nella fascia, ogni 1500 tick di campione; w contro TF3 agli stessi tempi.
+    python diag_tb3_volo.py   (dalla radice del repo; copiato in doc/referti_l2/accensione_lenta/diag_tb3_volo.py.txt)
+"""
+import json
+r = json.loads(open("doc/referti_l2/accensione_lenta/TB3_000000.jsonl").readline())
+f = json.loads(open("doc/referti_l2/accensione_lenta/TF3_000000.jsonl").readline())
+b = r["bordo"]
+s = r["s"]
+wf = {c["t"]: c["per"]["w"] for c in f["campioni"]}
+print("il primo pezzo %d -> %d, %.0f s; M0 %.6f V0 %.6f E0 %.6f" % (r["t0"], r["t1"], r["secondi"], b["M0"], b["V0"], b["E0"]))
+for c in r["campioni"][::200]:
+    x = c["bordo"]
+    fa = x["fase"]
+    print("t %7.1f  M (M+Mass)/M0-1 %+.3e  V (V+Vass)/V0-1 %+.3e  E (E+Eass)/E0-1 %+.3e  M_dentro/M0 %.6f M_fascia/M0 %.3e  d medio %.3e max %.3e |a-1| %.3e arg a %+.3e r %.3e  spost %.4f  w %.4f (TF3 %.4f)"
+          % (c["t"] * s, (x["M"] + x["M_ass"]) / b["M0"] - 1, (x["V"] + x["V_ass"]) / b["V0"] - 1, (x["E"] + x["E_ass"]) / b["E0"] - 1, x["M_dentro"] / b["M0"], x["M_fascia"] / b["M0"],
+             fa["d_medio"], fa["d_max"], fa["a_meno_1"], fa["arg_a"], fa["r"], x["spost"], c["per"]["w"], wf.get(c["t"], float("nan"))))
+# ### il confronto dell'energia: TF3 (senza bordo) E_tot(t) / E_tot(0) - 1 agli stessi tempi, contro TB3 (E + E_ass) / E0 - 1
+print("l'energia: TF3 senza bordo contro TB3 col bordo (E + E assorbita)")
+ft = {c["t"]: c["E"]["totale"]["tot"] for c in f["campioni"]}
+for c in r["campioni"][::200]:
+    x = c["bordo"]
+    print("t %7.1f  TF3 E/E0-1 %+.3e   TB3 (E+Eass)/E0-1 %+.3e   TB3 E assorbita/E0 %.3e" % (c["t"] * s, ft[c["t"]] / ft[0] - 1, (x["E"] + x["E_ass"]) / b["E0"] - 1, x["E_ass"] / b["E0"]))

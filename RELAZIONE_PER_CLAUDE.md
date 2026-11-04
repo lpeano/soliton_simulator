@@ -23537,3 +23537,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il codice della corsa** *(`corsa_accensione.py` `02ac81b1`)*: il bordo dopo ogni tick con `g_max 0.03` e `phi0(t) = c(t) F3`; la fase della fascia ai campioni PRIMA dell'assorbimento; `M`, `V`, `E` assorbite *(il libro prima e dopo)*; l'arresto (i).
 - **La cassetta** `105/105` dopo `D6` a `c64c37bc`.
 - **I dischi prima della corsa:** **`C:` `10.68` GB liberi** *(erano `17.93` all'avvio di `TS`: scendono)*, **`E:` `228.20` GB**. Sopra i `5` GB di `C:`.
+
+## 2026-11-04 — `TB3` IN VOLO: LA STIMA VERA E IL PRIMO PEZZO *(`doc/referti_l2/accensione_lenta/diag_tb3_volo.txt`; PROVVISORIO)*
+
+- **Il primo pezzo** *(`0 -> 10000` tick)*: **`978` s**; `20` pezzi: **~`5.4` ore** *(la stima di 5.9, coi due libri per tick)*.
+- **Il bilancio di `M`:** `(M + assorbita) / M0 - 1` = `+5.8e-12` a `1500`, **lineare nel tempo** *(`~3.9e-12` per `1000`: la deriva del tick, `A3` di `TS`)*. **`V`:** entro `1.2e-12`.
+- ### **Il bilancio dell'energia NON chiude, ma non per il bordo:** `(E + E assorbita) / E0 - 1` vale `+2.0e-5` a `300`, `+9.0e-5` a `900`, `+6.4e-5` a `1500`; **`TF3` senza bordo agli stessi tempi:** `+2.4e-5`, `+9.6e-5`, `+5.5e-5`. **E' la variazione dell'energia del tick vivo** *(la rampa accende il vuoto: l'hamiltoniana dipende dal tempo)*, **la stessa con e senza bordo entro `~1e-5`.** **Il referto confrontera' `TB3` con `TF3` campione per campione**, non con `E0`.
+- **L'energia assorbita** `8.8e-4 E0` a `1500`; **a `300` negativa** *(`-9.9e-5 E0`: il bordo ha AGGIUNTO energia)* **quando la materia nella fascia era `8e-6 M0`**: l'assorbimento delle onde del vuoto attorno a `c(t) F3` cambia l'energia del vuoto in un verso o nell'altro. **Lo segnalo, non lo interpreto.**
+- **La fase del vuoto nella fascia** *(la lettura 5.3)*: `d` medio `1.6e-2`-`2.5e-2` *(max `0.16`)*; **`|a - 1|` da `6e-6` a `6e-5`, cioe' `~1000` volte sotto `d`**, e **`arg a` cambia segno** *(`+4.4e-5` a `600`, `-2.1e-5` a `1500`)*: **per ora, onde e non forzatura.**
+- **`w`:** `8.24` a `1500` contro `8.98` di `TF3` *(l'alone `0.00002` contro `~0.0025`: assorbito)*. **Lo spostamento** `0.40` a `1500`.
