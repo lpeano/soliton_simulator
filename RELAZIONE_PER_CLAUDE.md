@@ -23645,3 +23645,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`DI0`:** l'assoluto `1.27e-14` *(tetto `1e-12`)*, il relativo `8.36e-9` *(tetto `1e-6`; col criterio di prima falliva)*: **la banda `B` su `F3` ha la simmetria `D6`.** **Le due copie** *(`10`, `11`: lo scarto `1.5e-14` su tutti i cerchi)*: **`DI1` `6.015`.** `DI1-P` il triangolare a `omega0 = 4`: `5.875` *(prima `4.005`)*; `DI1-F` il quadrato `3.909`.
 - **Il risultato:** la dispersione della banda `B` e' isotropa entro lo `0.1%` per lunghezze d'onda sopra `3.25` nodi *(`omega`)* e `6.09` *(`|v_g|`)*; **lo spessore del bordo del solitone, `4.79` nodi, sta in mezzo.**
 - **Prima di rifare il referto** ho corretto due etichette che lo facevano contraddire *(a `Gamma` diceva «doppietto: `DI1` non si legge»)*: un commit a se', `276daaf8`.
+
+## 2026-11-05 — `TBS`: IL TASK HISTORY PRIMA DEL CODICE *(`doc/TASK_HISTORY/2026-11-05_TBS_simmetrizzata_col_bordo.md`)*
+
+- **`TBS` = la partenza di `TS` piu' il bordo di `TB3`:** nel codice quattro voci di configurazione; i due rami *(simmetrizzazione, bordo)* si accendono insieme per la prima volta.
+- ### **Una premessa da controllare prima della corsa:** il profilo del bordo e' radiale attorno al centro periodico `c0`, la simmetria di `TS` e' `R180` attorno a `m2 / 2`: **se non coincidono, il bordo rompe la simmetria.** Una sonda prima della corsa; **se il bordo aggiunge un'asimmetria sopra il pavimento** *(`~1e-15`)*: **FERMO.**
+- **`BM` di `TBS` contro `TS`** *(il gemello senza bordo, la stessa partenza)*: il criterio di Luca per `TB3` applicato al gemello giusto.
+- **Le letture (t1)-(t3) di Luca** registrate prima; **niente mappe, niente stati** *(la mia domanda resta aperta)*.
+- **Il mandato della coppia** *(Luca `2026-11-05` `12:49`, solo scrittura)* **e' in coda:** lo scrivo mentre `TBS` gira.
