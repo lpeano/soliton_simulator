@@ -165,7 +165,7 @@ def main(argv):
     sp = float(L0.std() / L0.mean())
     esito("DEVE PASSARE: F2 Lambda(t 0) uniforme (la simmetria attesa, dichiarata): std / media entro %g" % TOLL, sp <= TOLL, "%.3e (la media %.9f, min %.9f, max %.9f)" % (sp, L0.mean(), L0.min(), L0.max()))
     e3 = float(np.linalg.norm(r0 - rho_p) / np.linalg.norm(rho_p))
-    esito("DEVE PASSARE: F3 rho(t 0) della mappa = la densita' della partenza ricalcolata (V.partenza), entro %g relativo" % TOLL, e3 <= TOLL, "%.3e" % e3)
+    esito("DEVE PASSARE: F3 rho(t 0) della mappa = la densita' della partenza ricalcolata (%s), entro %g relativo" % ("corsa_accensione.partenza_ts" if corsa in CA.SIMMETRIZZATE else "V.partenza", TOLL), e3 <= TOLL, "%.3e" % e3)
     print("  il centro ricalcolato dalla rho float32 contro quello salvato nella mappa (dal campione): il massimo %.3e nodi (registrato)" % max(cen_mappa))
     # ------------------------------------------------------------------ i file nel repo
     tt = np.array(tt)
