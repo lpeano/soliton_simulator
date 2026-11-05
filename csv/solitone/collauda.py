@@ -68,7 +68,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E i criteri di Luca della carta dell'isotropia** *(`carta_isotropia`: `DI1-P` a `omega0 = 4`, `DI0` assoluto, `DI1` per le due copie)*.
 # ### **E la corsa `TBS`** *(`corsa_accensione`: la partenza di `TS` col bordo di `TB3`)*.
 # ### **E le mappe e gli stati di `TBS`** *(`corsa_accensione`: lo stato a `t 0` nel blocco del campione `0`)*.
-LIBRERIA_RIFERITA = "28541f3f"
+# ### **E il ramo della partenza, il pilota, le carte statiche** *(`partenza.py`, `test_partenza.py`, `carta_pilota.py`, `carta_statiche.py`, `carta_tbs.py`; `corsa_accensione`: il pilota `PL1`-`PL4`)*.
+LIBRERIA_RIFERITA = "6235d8ea"
 
 
 def vecchi():
