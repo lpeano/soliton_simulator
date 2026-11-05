@@ -1,0 +1,7 @@
+le mappe di TB3: 20 file in E:\soliton_simulator\mappe\TB3
+  2001 istantanee (con i doppioni ai bordi dei pezzi: 2001 tick distinti), da tick 0 a 200000; il passo: [100] tick; 90751753 byte
+  i campi del primo file: t (101,) int64; rho (101, 6561) float32; Lambda (101, 6561) float32; centro (101, 2) float64; lam (101,) float64; d1 (6561,) int16; d2 (6561,) int16; A1 (2,) float64; A2 (2,) float64; L () int64
+  c'e' un campo complesso (la fase di psi)? False
+  E:\soliton_simulator\stati: ['D0R', 'TM1000']
+  E:\soliton_simulator\due_giri: ['campioni', 'mappe', 'stati']
+  gli stati completi di TB3: 0 []

@@ -1,0 +1,9 @@
+FX0 esagono circumraggio 18, vertici a   0.0 gradi: esagonalita' 0.0318, ovalita' 0.0035, |c1|/c0 0.0003; la fase di c6 / 6 = -0.32 gradi (mod 60); R medio 16.518
+FX0 esagono circumraggio 18, vertici a  30.0 gradi: esagonalita' 0.0288, ovalita' 0.0000, |c1|/c0 0.0000; la fase di c6 / 6 = -30.00 gradi (mod 60); R medio 16.386
+FX0 esagono circumraggio 18, vertici a  15.0 gradi: esagonalita' 0.0309, ovalita' 0.0000, |c1|/c0 0.0000; la fase di c6 / 6 = -15.36 gradi (mod 60); R medio 16.222
+FX0 nel CONTINUO (l'esagono regolare, R(theta) esatto): esagonalita' 0.0291
+FX1 disco di raggio 18, centro giusto: esagonalita' 0.0046, ovalita' 0.0000, |c1|/c0 0.0000; R medio 17.734
+FX1-F lo stesso disco, il centro sbagliato di 3 nodi lungo (+3.000, +0.000): esagonalita' 0.0044, ovalita' 0.0014, |c1|/c0 0.0861
+FX1-F lo stesso disco, il centro sbagliato di 3 nodi lungo (-1.500, +2.598): esagonalita' 0.0044, ovalita' 0.0014, |c1|/c0 0.0861
+FX1-F lo stesso disco, il centro sbagliato di 3 nodi lungo (+2.869, +0.877): esagonalita' 0.0048, ovalita' 0.0019, |c1|/c0 0.0856
+l'attesa a mano per un disco col centro spostato di d: |c1|/c0 ~ d / (2 R) = 0.0833, |c2|/c0 ~ d^2 / (8 R^2) = 0.0035 (d 3, R 18)

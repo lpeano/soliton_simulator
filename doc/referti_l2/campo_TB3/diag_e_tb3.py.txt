@@ -1,0 +1,30 @@
+# -*- coding: utf-8 -*-
+"""CHE COSA HA TB3 SU E: (2026-11-05; il FERMO della carta della corona in movimento, Luca 04/11 20:18-22:26): quanti file e quante mappe, ogni quanti tick, quali campi
+(e se c'e' la fase di psi), gli stati completi e a quali tempi. Solo lettura.
+    python doc/referti_l2/campo_TB3/diag_e_tb3.py.txt   (dalla radice del repo)
+"""
+import glob
+import os
+
+import numpy as np
+
+R = r"E:\soliton_simulator"
+ff = sorted(glob.glob(os.path.join(R, "mappe", "TB3", "TB3_*.npz")))
+print("le mappe di TB3: %d file in %s" % (len(ff), os.path.join(R, "mappe", "TB3")))
+tt, campi, byte = [], None, 0
+for f in ff:
+    byte += os.path.getsize(f)
+    with np.load(f) as d:
+        if campi is None:
+            campi = {k: (d[k].shape, str(d[k].dtype)) for k in d.files}
+        tt.extend(int(x) for x in d["t"])
+tt = np.array(tt)
+pa = np.diff(tt)
+print("  %d istantanee (con i doppioni ai bordi dei pezzi: %d tick distinti), da tick %d a %d; il passo: %s tick; %d byte" % (len(tt), len(np.unique(tt)), tt.min(), tt.max(), sorted(set(int(x) for x in pa)), byte))
+print("  i campi del primo file: %s" % "; ".join("%s %s %s" % (k, v[0], v[1]) for k, v in campi.items()))
+print("  c'e' un campo complesso (la fase di psi)? %s" % any("complex" in v[1] for v in campi.values()))
+for sotto in ("stati", "due_giri"):
+    p = os.path.join(R, sotto)
+    print("  %s: %s" % (p, sorted(os.listdir(p)) if os.path.isdir(p) else "non c'e'"))
+st = sorted(glob.glob(os.path.join(R, "stati", "TB3", "*")))
+print("  gli stati completi di TB3: %d %s" % (len(st), st))

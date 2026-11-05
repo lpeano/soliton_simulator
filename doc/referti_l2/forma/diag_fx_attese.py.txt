@@ -1,0 +1,67 @@
+# -*- coding: utf-8 -*-
+"""LA CARTA DELLA FORMA, PRIMA DEL CODICE (2026-11-05): i valori attesi dei test sintetici FX0, FX1, FX1-F di Luca (04/11 20:18-22:26), sul reticolo triangolare
+di L 81 (A1 = (1, 0), A2 = (-1/2, sqrt 3 / 2)), con la misura dichiarata nel task history 2026-11-05_forma_isotropia_corona: R(theta) in 36 settori = il raggio massimo
+dei nodi con rho >= soglia, attorno al centro dato, l'immagine minima; c_n = la media su 36 settori di R e^{-i n theta}; esagonalita' |c6| / c0, ovalita' |c2| / c0.
+Nessuna libreria del repo: la geometria e' scritta qui, per non dipendere dalla carta che verifica.
+    python doc/referti_l2/forma/diag_fx_attese.py.txt   (dalla radice del repo)
+"""
+import numpy as np
+
+L = 81
+A1 = np.array([1.0, 0.0])
+A2 = np.array([-0.5, np.sqrt(3.0) / 2.0])
+m1, m2 = np.meshgrid(np.arange(L), np.arange(L), indexing="ij")
+m1, m2 = m1.ravel(), m2.ravel()
+
+
+def spost(c):
+    """lo spostamento di ogni nodo dal punto c (cartesiano), l'immagine minima fra le 9"""
+    P = m1[:, None] * A1 + m2[:, None] * A2
+    best = None
+    for a in (-1, 0, 1):
+        for b in (-1, 0, 1):
+            d = P + a * L * A1 + b * L * A2 - c
+            if best is None:
+                best = d.copy()
+            else:
+                piu = np.hypot(d[:, 0], d[:, 1]) < np.hypot(best[:, 0], best[:, 1])
+                best[piu] = d[piu]
+    return best
+
+
+def misura(rho, c, soglia, ns=36):
+    d = spost(c)
+    r = np.hypot(d[:, 0], d[:, 1])
+    th = np.mod(np.arctan2(d[:, 1], d[:, 0]), 2 * np.pi)
+    j = np.minimum((th / (2 * np.pi / ns)).astype(int), ns - 1)
+    R = np.zeros(ns)
+    sel = rho >= soglia
+    np.maximum.at(R, j[sel], r[sel])
+    tj = (np.arange(ns) + 0.5) * 2 * np.pi / ns
+    c_ = {n: np.mean(R * np.exp(-1j * n * tj)) for n in (0, 1, 2, 6)}
+    return {n: abs(v) / abs(c_[0]) for n, v in c_.items() if n}, np.degrees(np.angle(c_[6])) / 6.0, float(np.real(c_[0]))
+
+
+C0 = 40 * A1 + 40 * A2          # il centro: un nodo
+for vert in (0.0, 30.0, 15.0):
+    d = spost(C0)
+    r = np.hypot(d[:, 0], d[:, 1])
+    th = np.arctan2(d[:, 1], d[:, 0]) - np.radians(vert)
+    r_in = 18.0 * np.cos(np.pi / 6)
+    # l'esagono regolare di circumraggio 18 coi vertici a vert: phf l'angolo dalla normale della faccia piu' vicina (le normali a vert + 30 + k 60)
+    phf = np.mod(th, np.pi / 3) - np.pi / 6
+    dentro = r * np.cos(phf) <= r_in
+    rho = np.where(dentro, 1000.0, 0.0)
+    a, f6, R0 = misura(rho, C0, 300.0)
+    print("FX0 esagono circumraggio 18, vertici a %5.1f gradi: esagonalita' %.4f, ovalita' %.4f, |c1|/c0 %.4f; la fase di c6 / 6 = %+.2f gradi (mod 60); R medio %.3f" % (vert, a[6], a[2], a[1], f6, R0))
+d = spost(C0)
+rho = np.where(np.hypot(d[:, 0], d[:, 1]) <= 18.0, 1000.0, 0.0)
+a, f6, R0 = misura(rho, C0, 300.0)
+ph = np.linspace(-np.pi / 6, np.pi / 6, 200001)
+Rc = 1.0 / np.cos(ph)
+print("FX0 nel CONTINUO (l'esagono regolare, R(theta) esatto): esagonalita' %.4f" % (abs(np.mean(Rc * np.cos(6 * ph))) / np.mean(Rc)))
+print("FX1 disco di raggio 18, centro giusto: esagonalita' %.4f, ovalita' %.4f, |c1|/c0 %.4f; R medio %.3f" % (a[6], a[2], a[1], R0))
+for sp in (3.0 * A1, 3.0 * A2, 3.0 * np.array([np.cos(np.radians(17)), np.sin(np.radians(17))])):
+    a, f6, R0 = misura(rho, C0 + sp, 300.0)
+    print("FX1-F lo stesso disco, il centro sbagliato di 3 nodi lungo (%+.3f, %+.3f): esagonalita' %.4f, ovalita' %.4f, |c1|/c0 %.4f" % (sp[0], sp[1], a[6], a[2], a[1]))
+print("l'attesa a mano per un disco col centro spostato di d: |c1|/c0 ~ d / (2 R) = %.4f, |c2|/c0 ~ d^2 / (8 R^2) = %.4f (d 3, R 18)" % (3.0 / 36.0, 9.0 / (8 * 324.0)))
