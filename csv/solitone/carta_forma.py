@@ -69,7 +69,7 @@ def spost(P, c, L, A1, A2):
 
 
 def forma(rho, r, th, soglia, Rmax):
-    """### **`R(theta)` e le sue armoniche:** `{"esag", "oval", "c1", "vert", "R0", "R"}`; `None` se nessun nodo supera la soglia."""
+    """### **`R(theta)` e le sue armoniche** *(i vertici a `-arg(c6) / 6`: `c6 = media R e^{-i 6 theta}` va come `e^{-i 6 theta_v}` se `R` ha il massimo a `theta_v`; il segno corretto il `2026-11-05`, trovato da `FX0` a `15` gradi)*: `{"esag", "oval", "c1", "vert", "R0", "R"}`; `None` se nessun nodo supera la soglia."""
     j = np.minimum((th / (2 * np.pi / N_SET)).astype(int), N_SET - 1)
     R = np.zeros(N_SET)
     sel = (rho >= soglia) & (r <= Rmax)
@@ -79,7 +79,7 @@ def forma(rho, r, th, soglia, Rmax):
     tj = (np.arange(N_SET) + 0.5) * 2 * np.pi / N_SET
     c = {n: np.mean(R * np.exp(-1j * n * tj)) for n in (0, 1, 2, 6)}
     c0 = abs(c[0])
-    return {"esag": abs(c[6]) / c0, "oval": abs(c[2]) / c0, "c1": abs(c[1]) / c0, "vert": math.degrees(np.angle(c[6])) / 6.0, "R0": float(np.real(c[0])), "R": R}
+    return {"esag": abs(c[6]) / c0, "oval": abs(c[2]) / c0, "c1": abs(c[1]) / c0, "vert": -math.degrees(np.angle(c[6])) / 6.0, "R0": float(np.real(c[0])), "R": R}
 
 
 def ang(a, b, per=60.0):
@@ -220,7 +220,7 @@ def main(argv):
             ch = np.mean([x["cor"][ia]["chiazze"] for x in xs])
             nmax = int(np.argmax(mod)) + 1
             zeri = sum(x["cor"][ia]["zeri"] for x in xs)
-            print("    %4g-%-4g %7d %10.4f %9.3f %+9.1f %11.3f %9.3f %8.4f (n %2d) %6d" % (a, b, xs[0]["cor"][ia]["nodi"], np.abs(c6).mean(), coe, math.degrees(np.angle(c6.mean())) / 6.0, cl6, ch,
+            print("    %4g-%-4g %7d %10.4f %9.3f %+9.1f %11.3f %9.3f %8.4f (n %2d) %6d" % (a, b, xs[0]["cor"][ia]["nodi"], np.abs(c6).mean(), coe, -math.degrees(np.angle(c6.mean())) / 6.0, cl6, ch,
                                                                                  mod[nmax - 1], nmax, zeri))
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
