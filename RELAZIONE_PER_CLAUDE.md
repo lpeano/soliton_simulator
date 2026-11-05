@@ -23690,3 +23690,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`g_max = 0.003`, `0.001`, `0.0003`:** la materia che torna a ogni passaggio `42%`, `75%`, `92%` *(`bordo_riflessione.txt`)*, tre punti fra il toro aperto e quello chiuso. **Tre corse `~16.5` ore** *(`5.51` l'una, come `TB3`)*, `~272` MB su `E:`.
 - **Le soglie della forma:** `100` e `300` *(sopra il mare sia in `TB3` sia sul toro chiuso)*. **Gli stati completi:** il mandato non li nomina, **la scelta e' di Luca**.
 - ### **Una nota per (g1):** **la differenza da risolvere e' piccola** -- a `TB3` l'esagonalita' e' `0.46%`-`1.33%` con `+-0.2%` di mappa in mappa, e il confronto con il toro chiuso non si leggeva a nessuna soglia.
+
+## 2026-11-05 — `TM3`: COL BORDO O SENZA? *(il task history `2026-11-03_TM3_campo_F3`, 4)* -- FERMO, DECIDE LUCA
+
+- ### **Un fatto dal codice: «`TM3` col bordo» e' gia' `TB3`** *(la partenza di `TF3`, `F3`, il bordo, le mappe: la stessa configurazione, con le mappe gia' su `E:` e lette)*: **rifarla aggiungerebbe solo gli stati completi.**
+- **La proposta:** **`TM3` SENZA bordo** *(come scritto, `~3.8` ore, al bit con `TF3` / `TF3C`)*: **il punto `g = 0` di `TBG` e il confronto chiuso / aperto sullo stesso `F3`, che oggi manca**; **i due poli su `TB3` subito dalle mappe leggere** *(nessuna corsa)*.
