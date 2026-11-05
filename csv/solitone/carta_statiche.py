@@ -3,6 +3,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --vuoto > doc/referti_l2/statica_vuoto.txt
     python csv/solitone/carta_statiche.py --coppia > doc/referti_l2/statica_coppia.txt
     python csv/solitone/carta_statiche.py --dimensione > doc/referti_l2/statica_dimensione.txt
+    python csv/solitone/carta_statiche.py --coppia-matura > doc/referti_l2/statica_coppia_matura.txt   # (Luca 2026-11-05 21:01) gli stati maturi di TBS
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -11,6 +12,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
 ### **`--dimensione`:** a ogni `N` di `NN`, la scena *(`w0` del continuo)*, la partenza, `w`, lo spessore del bordo e l'esagonalita' a `t 0` *(le soglie scalate per `N / 1e6`)*; il DEVE `DM-F`.
 """
 import contextlib
+import hashlib
 import math
 import os
 import sys
@@ -21,6 +23,8 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 if os.path.dirname(_QUI) not in sys.path:
     sys.path.insert(0, os.path.dirname(_QUI))
 import solitone  # noqa: E402,F401  (i percorsi)
+
+DIR_REF = os.path.join(solitone.RADICE, "doc", "referti_l2")   # ### --coppia-matura: legge statica_coppia.txt per la colonna di t 0
 
 NN = (2.5e5, 5e5, 1e6, 2e6, 4e6)   # ### Luca 15:28: la dimensione a N da 2.5e5 a 4e6
 L_COPPIA = 162                 # ### il task history 1.0: L multiplo di 3 (159 o 162: la proposta 162, la scelta di Luca per le corse)
@@ -325,6 +329,131 @@ def coppia():
     cm.__exit__(None, None, None)
 
 
+STATI_MATURI = (0, 100000, 200000)   # ### Luca 2026-11-05 21:01: gli stati di TBS a t 15000 e 30000 (il tick nel nome), piu' t 0 per il confronto
+TOLL_IMM = 1e-9                # ### Luca 21:01: E[1] su L 162 = E su L 81 + il vuoto aggiunto, entro 1e-9 relativo
+SOGLIA_INT = 1e-6              # ### Luca 21:01: la distanza a cui |E_int| scende sotto 1e-6 E[1]
+TOLL_CM = 1e-12                # ### CM-E (mio): l'energia dello stato caricato = quella del campione della corsa
+
+
+def _ordine_archi(z):
+    """### **L'array delle estremita' e' per arco, gli archi per nodo proprietario** *(3 archi, 6 estremita' per nodo, le stesse direzioni ovunque)*: ASSERITO *(il task history 10.1)*."""
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    nodo = np.asarray(inc.nodo)
+    assert np.array_equal(nodo[0::2], np.repeat(np.arange(n), 3)), "l'estremita' 2a NON e' del nodo proprietario dell'arco a"
+    m1, m2 = np.arange(n) // L, np.arange(n) % L
+    dd = np.stack([((m1[nodo[1::2]] - m1[nodo[0::2]]) + L // 2) % L - L // 2, ((m2[nodo[1::2]] - m2[nodo[0::2]]) + L // 2) % L - L // 2], 1)
+    assert np.array_equal(dd.reshape(n, 3, 2), np.broadcast_to(dd[:3], (n, 3, 2))), "le direzioni degli archi NON sono le stesse per ogni nodo"
+    return [tuple(int(v) for v in x) for x in dd[:3]]
+
+
+def coppia_matura():
+    """### **Luca 2026-11-05 21:01:** la coppia con gli stati maturi di `TBS` *(il task history 10)*."""
+    import _vuoto_vivo_B as V
+    from solitone import bordo as BO
+    from solitone import corsa_accensione as CA
+    with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+        tab_c, omega = d["c"].copy(), float(d["omega"])
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    righe = [V.LP.leggi(os.path.join(CA.dir_json("TBS"), f)) for f in sorted(os.listdir(CA.dir_json("TBS"))) if f.startswith("TBS_") and f.endswith(".jsonl")]
+    e_K = righe[0]["e_K"]
+    reg = {x["t"]: x for r in righe for x in (r.get("stati") or [])}
+    camp = {c["t"]: c for r in righe for c in r["campioni"]}
+    _r8, z8, _p8, F3_8, _i8, cm8 = costruisci(V.N, 81)
+    dir8 = _ordine_archi(z8)
+    print("  e_K della corsa %.16f; il centro di partenza di TBS (40.5, 40.5); le direzioni degli archi per nodo %s" % (e_K, dir8))
+    stati = {}
+    eS, eE = [], []
+    for t in STATI_MATURI:
+        f = reg[t]["file"]
+        with np.load(f) as d:
+            st = {k: d[k].copy() for k in d.files if k != "t"}
+        sha_f = hashlib.sha1(open(f, "rb").read()).hexdigest()
+        ok_s = all(SFM_sha(st[k]) == reg[t]["sha"][k] for k in reg[t]["sha"])
+        eS.append(ok_s)
+        E8 = energia(z8, st["psi_h"], st["phi_h"], e_K)
+        Ec = camp[t]["E"]["totale"]["tot"]
+        eE.append(abs(E8 / Ec - 1.0))
+        c_t = BO.c_di(t, tab_c, K, omega)
+        E8_0 = energia(z8, np.zeros_like(st["psi_h"]), c_t * F3_8, e_K)
+        stati[t] = {"st": st, "E8": E8, "E8_0": E8_0, "c": c_t, "sha": sha_f}
+        print("  lo stato a t %.0f (tick %d): %s sha1 %s; E su L 81 %.12e (il campione %.12e); c(t) %+.12f %+.12fi; E[0] su L 81 %.12e"
+              % (t * s, t, f, sha_f, E8, Ec, c_t.real, c_t.imag, E8_0))
+    cm8.__exit__(None, None, None)
+    esito("DEVE PASSARE: CM-S ogni stato caricato da' gli sha per chiave registrati nella corsa", all(eS), "%s" % eS)
+    esito("DEVE PASSARE: CM-E l'energia dello stato su L 81 = quella del campione della corsa allo stesso tick, entro %g relativo" % TOLL_CM, max(eE) <= TOLL_CM, "il peggiore %.3e" % max(eE))
+    _r, z, _p1, F3, _info, cm = costruisci(V.N, L_COPPIA)
+    L = z["L"]
+    assert _ordine_archi(z) == dir8, "le direzioni degli archi di L 162 NON sono quelle di L 81"
+    ePh = float(np.max(np.abs(F3.reshape(L, L, 6)[:81, :81] - F3_8.reshape(81, 81, 6))))
+    esito("DEVE PASSARE: CM-V F3 su L 162 nel rombo = F3 su L 81, al bit", ePh == 0.0, "%.3e" % ePh)
+    cop0 = {}
+    if os.path.exists(os.path.join(DIR_REF, "statica_coppia.txt")):
+        for l in open(os.path.join(DIR_REF, "statica_coppia.txt"), encoding="utf-8"):
+            p = l.split()
+            if len(p) >= 3 and p[0].isdigit() and int(p[0]) in DD:
+                cop0[int(p[0])] = (float(p[1]), float(p[2]))
+    dist = {}
+    for t in STATI_MATURI:
+        x = stati[t]
+        ph0 = x["c"] * F3
+        ps1 = np.zeros((L, L, 6) + x["st"]["psi_h"].shape[1:], dtype=complex)
+        ps1[:81, :81] = x["st"]["psi_h"].reshape((81, 81, 6) + x["st"]["psi_h"].shape[1:])
+        ps1 = ps1.reshape((-1,) + x["st"]["psi_h"].shape[1:])
+        ph1 = ph0.reshape(L, L, 6).copy()
+        ph1[:81, :81] = x["st"]["phi_h"].reshape(81, 81, 6)
+        ph1 = ph1.reshape(-1)
+        D1 = ph1 - ph0
+        zero = np.zeros_like(ps1)
+        E0 = energia(z, zero, ph0, e_K)
+        E1 = energia(z, ps1, ph1, e_K)
+        atteso = x["E8"] + (E0 - x["E8_0"])
+        e_imm = abs(E1 / atteso - 1.0)
+        esito("DEVE PASSARE: CM-1 (Luca 21:01) t %.0f: E[1] su L 162 = E su L 81 + il vuoto aggiunto (E[0] su 162 - E[0] su 81), entro %g relativo" % (t * s, TOLL_IMM), e_imm <= TOLL_IMM,
+              "%.3e (E[1] %.12e, atteso %.12e)" % (e_imm, E1, atteso))
+        E1m = energia(z, ps1, ph0, e_K)
+        E0v1 = energia(z, zero, ph1, e_K)
+        print("  t %.0f su L %d: E[0] %.12e; E[1] %.12e; M %.6f; il disturbo del vuoto |D1| %.6e" % (t * s, L, E0, E1, float(np.sum(np.abs(ps1) ** 2)), float(np.linalg.norm(D1))))
+        print("  %4s %18s %18s %16s %16s %16s %16s %16s %16s" % ("d", "E_int fase 0", "E_int fase pi", "materia 0", "vuoto", "resto 0", "materia pi", "resto pi", "t 0 TF3 (fase 0)"))
+        rel2 = []
+        Ei = {0: [], 1: []}
+        q1 = ps1.reshape((L, L, -1))
+        d1r = D1.reshape(L, L, -1)
+        for dd_ in DD:
+            ps2 = np.roll(q1, dd_, axis=0).reshape(ps1.shape)
+            D2 = np.roll(d1r, dd_, axis=0).reshape(D1.shape)
+            ph2 = ph0 + D2
+            E2 = energia(z, ps2, ph2, e_K)
+            rel2.append(abs(E2 / E1 - 1.0))
+            E2m = energia(z, ps2, ph0, e_K)
+            Ev = energia(z, zero, ph0 + D1 + D2, e_K) - E0v1 - energia(z, zero, ph2, e_K) + E0
+            riga = [dd_]
+            for f_, sg in ((0, 1.0), (1, -1.0)):
+                Ec_ = energia(z, ps1 + sg * ps2, ph0 + D1 + D2, e_K)
+                Ein = Ec_ - E1 - E2 + E0
+                Em = energia(z, ps1 + sg * ps2, ph0, e_K) - E1m - E2m + E0
+                Ei[f_].append(Ein)
+                riga += [Ein, Em, Ein - Em - Ev]
+            print("  %4d %+18.10e %+18.10e %+16.6e %+16.6e %+16.6e %+16.6e %+16.6e %16s"
+                  % (dd_, riga[1], riga[4], riga[2], Ev, riga[3], riga[5], riga[6], ("%+.6e" % cop0[dd_][0]) if dd_ in cop0 else "-"))
+        eT = max(rel2)
+        esito("DEVE PASSARE: EI-T t %.0f E[2] = E[1] (la traslazione), entro %g relativo, per ogni d" % (t * s, TOLL_E), eT <= TOLL_E, "il peggiore %.3e" % eT)
+        for f_ in (0, 1):
+            sotto = [dd_ for i, dd_ in enumerate(DD) if all(abs(v) < SOGLIA_INT * abs(E1) for v in Ei[f_][i:])]
+            dist[(t, f_)] = sotto[0] if sotto else None
+        print("  t %.0f: |E_int| sotto %g E[1] (%.3e) da d = %s (fase 0), %s (fase pi), e per ogni d dopo" % (t * s, SOGLIA_INT, SOGLIA_INT * abs(E1), dist[(t, 0)], dist[(t, 1)]))
+    print("  ### LA DISTANZA SOTTO %g E[1], per t 0, 15000, 30000: fase 0 %s; fase pi %s" % (SOGLIA_INT, [dist[(t, 0)] for t in STATI_MATURI], [dist[(t, 1)] for t in STATI_MATURI]))
+    print("  ### le definizioni (il task history 10.1): materia = E[psi1 + psi2, phi0] - E[psi1, phi0] - E[psi2, phi0] + E[0]; vuoto = E[0, phi0 + D1 + D2] - E[0, phi0 + D1] - E[0, phi0 + D2] + E[0];"
+          " il resto = E_int - materia - vuoto; la fase pi cambia segno solo a psi2; t 0 TF3 = la colonna di statica_coppia.txt (la partenza di TF3, non lo stato di TBS)")
+    cm.__exit__(None, None, None)
+
+
+def SFM_sha(x):
+    import _stato_fermo as SFM
+    return SFM.sha(x)
+
+
 def dimensione():
     import _energia_del_legame as EL
     import _vuoto_vivo_B as V
@@ -362,14 +491,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--vuoto" if "--vuoto" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --vuoto | --coppia | --dimensione"
+    modo = "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --vuoto | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--coppia": coppia, "--dimensione": dimensione}[modo]()
+    {"--vuoto": vuoto, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
