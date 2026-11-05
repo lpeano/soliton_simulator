@@ -23818,3 +23818,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Delle sei fasi zero di `Gamma`: una coppia ha `omega = 0.19999 |k|^2`, uguale lungo `A1` e a `30` gradi, sopra il pavimento a ogni `|k|`; le altre quattro stanno nel pavimento.** **La velocita' a `|k| -> 0`: `2.9e-6`, sotto il pavimento in velocita' `1.3e-5`; la velocita' di gruppo della coppia `0.4 |k|`.**
 - ### **Un mio errore:** **la riga stampata «il Goldstone PROPAGA» usa il mio criterio** *(`omega` sopra il pavimento)*, **non quello di Luca** *(la velocita' a `|k| -> 0`)*: **col suo, la velocita' e' zero.** Annotato, il referto non si riscrive.
 - ### **Per Luca:** **ne' sonoro ne' piatto: QUADRATICO** *(«alla Schroedinger»)*: **una (r5).** **Poi D** *(la carta di `F1`)*.
+
+## 2026-11-05 — D, PRIMA DELLA CARTA: **`R120 F1` NON E' `F1` PER UNA FASE** -- ### **FERMO** *(`diag_r120_F1.txt`; il task history `2026-11-05_rotazione_triangoli`, sez. `7`)*
+
+- **La sonda:** il controllo regge *(`R180 F3`, `R120 F3` = `F3` entro `1.2e-16`)*; ### **`R120 F1` contro `F1` per la fase migliore: lo scarto `2.000`; contro lo specchio `1.000`, contro `conj(F1)` `1.000`** *(e `R60` uguale)*.
+- ### **Perche'** *(il mio conto, confermato)*: **la rotazione rovescia due delle tre direzioni, e un arco rovesciato aggiunge `pi` alla fase** *(la coda `+`, la testa `-`)*: **`R120 F1` ha le fasi `pi/3`, `2 pi/3`, `pi`** *(contro `2 pi/3`, `0`, `-2 pi/3`)*, **un altro vuoto con la stessa energia.**
+- ### **FERMO su D: il DEVE di Luca** *(«`R120 F1` = `F1` per una fase»)* **fallirebbe come scritto.** **Le domande:** contro che cosa si confronta `R120 F1`; D si fa lo stesso col DEVE corretto; **intanto B, C, E?**

@@ -1,0 +1,18 @@
+[TIMBRO] _solitone_dal_fondo.py  sha1-BYTE b3c2c23d  committato e pulito
+[TIMBRO] diag_r120_F1.py.txt  sha1-BYTE c03139a3  committato e pulito
+le direzioni degli archi per nodo (l'ordine dell'array) [(1, 0), (0, 1), (1, 1)]; SD.DIREZIONI (l'ordine delle fasi) ((0, 1), (1, 0), (1, 1))
+### il controllo: R180 su F3 contro F3, e R120 su F3 contro F3
+  R180 F3 contro F3                  alpha = +1.000000 pi; max |R F - e^{i alpha} G| 0.000e+00
+  R120 F3 contro F3                  alpha = +0.000000 pi; max |R F - e^{i alpha} G| 1.225e-16
+### R120 su F1 (fasi per ((0, 1), (1, 0), (1, 1)): +0.0000 pi +0.6667 pi +1.3333 pi)
+  R120 F1 contro F1                  alpha = -0.333333 pi; max |R F - e^{i alpha} G| 2.000e+00
+  R120 F1 contro lo specchio         alpha = +0.666667 pi; max |R F - e^{i alpha} G| 1.000e+00
+  R120 F1 contro conj(F1)            alpha = +0.666667 pi; max |R F - e^{i alpha} G| 1.000e+00
+  le fasi della coda di R F per direzione [(1, 0), (0, 1), (1, 1)] (in pi): +0.3333 +0.6667 +1.0000
+  le fasi della coda di F1  per direzione [(1, 0), (0, 1), (1, 1)] (in pi): +0.6667 +0.0000 -0.6667
+### R60 su F1 (fasi per ((0, 1), (1, 0), (1, 1)): +0.0000 pi +0.6667 pi +1.3333 pi)
+  R60 F1 contro F1                   alpha = -0.666667 pi; max |R F - e^{i alpha} G| 2.000e+00
+  R60 F1 contro lo specchio          alpha = -0.333333 pi; max |R F - e^{i alpha} G| 1.000e+00
+  R60 F1 contro conj(F1)             alpha = -0.333333 pi; max |R F - e^{i alpha} G| 1.000e+00
+  le fasi della coda di R F per direzione [(1, 0), (0, 1), (1, 1)] (in pi): +1.0000 -0.6667 +0.6667
+  le fasi della coda di F1  per direzione [(1, 0), (0, 1), (1, 1)] (in pi): +0.6667 +0.0000 -0.6667
