@@ -23700,3 +23700,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Il bordo non cambia la crescita del caos nella sua finestra** *(`TBS` rompe la simmetria negli stessi tempi di `TS`)*, **ma toglie la corsa** *(`TB3` ferma)*: **la direzione scelta dal rumore si misura solo senza bordo.**
 - **La proposta:** `D5` **senza bordo, su `F3`, con la partenza di `TF3`** *(il riferimento `TF3` + `TF3C`)*; `4` semi a `1e-10` **in comune col pilota di `TL120`**, `1` a `1e-8`, `1` a `1e-6`; `~18` ore se separati.
+
+## 2026-11-05 — LA SCANSIONE IN DIMENSIONE: LA PROPOSTA *(`doc/TASK_HISTORY/2026-11-05_scansione_dimensione.md`)* -- IN ATTESA, FERMO
+
+- ### **Un fatto dal codice: la dimensione non e' un parametro da girare** -- la partenza e' l'inviluppo dello stato di `A` a `K` della scena, a `N = 1e6`: **a `N` fissato il solitone ha la sua larghezza.**
+- **La proposta:** **prima una carta statica** *(la scena a `N` da `2.5e5` a `4e6`: `w`, lo spessore del bordo, l'esagonalita' della partenza; minuti, nessuna corsa)*, **poi una corsa col bordo per dimensione**; **scartato** lo stiramento dell'inviluppo *(non e' uno stato della scena)*.
