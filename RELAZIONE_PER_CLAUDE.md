@@ -23731,3 +23731,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La dimensione in nodi viene dal profilo del continuo a quella `N`** *(`DC.prepara`)*: **cambiando `N` la larghezza cambia, `L` resta `81`**; le soglie della forma si scalano con `N`.
 - **Il vuoto:** non so se il suo aggiornamento e' complesso-lineare: **la misura e' reale-lineare** *(`12` gradi di liberta' reali per cella, nel riferimento che gira)*, col **controllo del Goldstone** *(la rotazione globale di fase a `Gamma`)*; **il `lambda` statico e' una proposta di lettura**, e **la frequenza a cui il solitone eccita il vuoto non la so**.
 - **Un controllo comune:** a `N = 1e6`, `L = 81` la scena e la partenza costruite con `N`, `L` espliciti = quelle della corsa al bit.
+
+## 2026-11-05 — LA DECISIONE DI LUCA SULLE CARTE STATICHE *(`16:28`)*
+
+- **La coppia su `L 162`**, per la carta statica e per le corse; **`E_int` col vuoto contato una volta** *(la formula del mandato era sbagliata: l'errore `n.107` del guardiano, Luca; si stampa accanto come confronto)*; il resto come proposto. **Le carte a `TBS` finita.** *(Il codice, `c1027d67`, fa gia' cosi': nessuna modifica.)*

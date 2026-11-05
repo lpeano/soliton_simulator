@@ -115,3 +115,6 @@
 8. **Si' alla carta statica della dispersione del vuoto attorno a `F3`** *(per il `lambda` di E)*.
 9. **Il costo e lo spazio dopo il primo pezzo, come sempre.**
 - **Nella coda:** dopo `D5` a `1e-8` e `1e-6` *(la voce `8`)*.
+
+## 7. LA DECISIONE DI LUCA DEL `2026-11-05` `16:28`
+- **`L 162`** *(multiplo di `3`)* **per la carta statica e per le corse della coppia**; **`E_int = E[p1 + p2] - E[p1] - E[p2] + E[0]`** *(il vuoto una volta; la forma `E(coppia) - 2 E(singolo)` solo come confronto: l'errore `n.107` del guardiano, Luca)*. **Il riferimento singolo `S160` resta col suo nome** *(il nome di Luca; su `L 162`)*.

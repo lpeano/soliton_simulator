@@ -43,3 +43,8 @@
 2. `carta_statiche.py`, `D6` *(un `.py` nuovo di `csv/solitone`)*, committati.
 3. A `TBS` finita: il referto di `TBS`; la patch del pilota *(gia' pronta)*; la cassetta; poi le tre carte, un calcolo alla volta.
 4. Le due cose da dire a Luca: **`L 159` o `162`** *(non `160`)*; **`E_int` col vuoto una volta sola**.
+
+## 4. LA DECISIONE DI LUCA *(`2026-11-05` `16:28`; non mia)*
+1. **La coppia su `L 162`** *(multiplo di `3`)*: **vale per la carta statica e per le corse della coppia.**
+2. **`E_int = E[p1 + p2] - E[p1] - E[p2] + E[0]`** *(il vuoto contato una volta)*. **La formula del mandato, `E(coppia) - 2 E(singolo)`, era sbagliata** *(Luca la registra come l'errore `n.107` del guardiano)*: **si stampa accanto, solo come confronto** *(e' cio' che fa `carta_statiche.py`, `c1027d67`: la colonna e il DEVE `EI-F`)*.
+3. **Il resto come proposto** *(il `lambda` statico come proposta di lettura, il Goldstone escluso dal gap e dichiarato)*. **Le carte girano a `TBS` finita.**
