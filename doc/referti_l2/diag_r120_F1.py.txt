@@ -1,0 +1,76 @@
+# -*- coding: utf-8 -*-
+# LA SONDA: R120 (e R60) APPLICATI AL VUOTO F1 SUL RETICOLO VERO (Luca 2026-11-05 21:39: "R120 applicato a F1 = F1 per una fase costante; lo specchio con la fase coniugata")
+#   python doc/referti_l2/diag_r120_F1.py.txt > doc/referti_l2/diag_r120_F1.txt
+# La rotazione geometrica dei nodi (m1, m2) -> R(m1, m2) e degli archi: l'arco (v, v + d) va nell'arco (R v, R v + R d); se R d e' una direzione
+# canonica rovesciata, la coda e la testa si scambiano. Il confronto: R F contro F e^{i alpha} (alpha = arg <F, R F>), e contro lo specchio.
+import math
+import os
+import sys
+
+import numpy as np
+
+QUI = os.path.dirname(os.path.abspath(__file__))
+RAD = os.path.dirname(os.path.dirname(QUI))
+sys.path.insert(0, os.path.join(RAD, "csv"))
+import solitone  # noqa: E402,F401
+import _presidio  # noqa: E402
+_presidio.avvia(os.path.join(RAD, "csv", "_solitone_dal_fondo.py"))
+_presidio.avvia(__file__)
+import _solitone_dal_fondo as SD  # noqa: E402
+from solitone import carta_statiche as CS  # noqa: E402
+import _vuoto_vivo_B as V  # noqa: E402
+
+_r, z, _p, _F3, _i, cm = CS.costruisci(V.N, V.L)
+dirs = CS._ordine_archi(z)
+inc, L = z["inc"], z["L"]
+n = inc.n
+cm.__exit__(None, None, None)
+FASI = dict(SD.FASI)
+print("le direzioni degli archi per nodo (l'ordine dell'array) %s; SD.DIREZIONI (l'ordine delle fasi) %s" % (dirs, SD.DIREZIONI))
+ROT = {"R120": lambda a, b: (-b, a - b), "R60": lambda a, b: (a - b, a), "R180": lambda a, b: (-a, -b)}
+
+
+def ruota(phi, R):
+    out = np.full(phi.shape, np.nan + 0j)
+    for v in range(n):
+        m1, m2 = v // L, v % L
+        for j, d in enumerate(dirs):
+            r1, r2 = R(m1, m2)
+            rd = R(*d)
+            if rd in dirs:
+                k = dirs.index(rd)
+                w = (r1 % L) * L + (r2 % L)
+                out[6 * w + 2 * k], out[6 * w + 2 * k + 1] = phi[6 * v + 2 * j], phi[6 * v + 2 * j + 1]
+            else:
+                k = dirs.index((-rd[0], -rd[1]))
+                w = ((r1 + rd[0]) % L) * L + ((r2 + rd[1]) % L)
+                out[6 * w + 2 * k], out[6 * w + 2 * k + 1] = phi[6 * v + 2 * j + 1], phi[6 * v + 2 * j]
+    assert not np.any(np.isnan(out)), "la rotazione non copre ogni estremita'"
+    return out
+
+
+def confronta(nome, a, b):
+    al = complex(np.vdot(b, a))
+    al = al / abs(al)
+    r = float(np.max(np.abs(a - al * b)))
+    print("  %-34s alpha = %+.6f pi; max |R F - e^{i alpha} G| %.3e" % (nome, math.atan2(al.imag, al.real) / math.pi, r))
+    return r
+
+
+F1 = SD.fondo_con_fasi(inc, L, FASI["F1"])
+F1s = SD.fondo_con_fasi(inc, L, (FASI["F1"][0], FASI["F1"][2], FASI["F1"][1]))   # lo specchio: (0, 4pi/3, 2pi/3)
+F3 = SD.fondo_con_fasi(inc, L, FASI["F3"])
+print("### il controllo: R180 su F3 contro F3, e R120 su F3 contro F3")
+confronta("R180 F3 contro F3", ruota(F3, ROT["R180"]), F3)
+confronta("R120 F3 contro F3", ruota(F3, ROT["R120"]), F3)
+for nr in ("R120", "R60"):
+    RF = ruota(F1, ROT[nr])
+    print("### %s su F1 (fasi per %s: %s)" % (nr, SD.DIREZIONI, " ".join("%+.4f pi" % (x / math.pi) for x in FASI["F1"])))
+    confronta("%s F1 contro F1" % nr, RF, F1)
+    confronta("%s F1 contro lo specchio" % nr, RF, F1s)
+    confronta("%s F1 contro conj(F1)" % nr, RF, np.conj(F1))
+    # le fasi per direzione di R F (dal valore della coda del primo arco di ogni direzione)
+    th = [math.atan2(RF[2 * j].imag, RF[2 * j].real) / math.pi for j in range(3)]
+    print("  le fasi della coda di R F per direzione %s (in pi): %s" % (dirs, " ".join("%+.4f" % x for x in th)))
+    th1 = [math.atan2(F1[2 * j].imag, F1[2 * j].real) / math.pi for j in range(3)]
+    print("  le fasi della coda di F1  per direzione %s (in pi): %s" % (dirs, " ".join("%+.4f" % x for x in th1)))
