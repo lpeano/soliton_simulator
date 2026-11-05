@@ -23724,3 +23724,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-05 — LA CORREZIONE DI LUCA DELLE `15:42`: **PRIMA I CALCOLI STATICI, POI LE CORSE** *(la mappa, sezione `7`)*
 
 - **Le decisioni delle `15:28` restano tutte; cambia solo l'ordine:** `TBS` *(in volo)* -> **le carte statiche** *(la dispersione del vuoto attorno a `F3`; la curva `E_int(d)` della coppia da `24` a `80` ogni `2`, fase `0` e `pi`; la dimensione a `N` da `2.5e5` a `4e6`)* -> ### **FERMO: Luca sceglie le corse alla luce delle carte** -> la coppia -> **`TBG` a `0.001`** *(gli altri due solo se il solitone e' al limite)* -> il pilota di `TL120` / `D5` a `1e-10` -> `TM3` senza bordo -> `D5` a `1e-8` e `1e-6` -> il resto.
+
+## 2026-11-05 — LE TRE CARTE STATICHE: IL TASK HISTORY PRIMA DEL CODICE *(`doc/TASK_HISTORY/2026-11-05_carte_statiche.md`)*
+
+- ### **Due fatti dal codice da dire a Luca:** ① **`L` e' un multiplo di `3`** *(il fattore di valle del profilo)*: **«`L ~160`» della coppia vuol dire `159` o `162`** *(propongo `162` per la carta statica)*; ② **il libro dei conti conta anche l'energia del vuoto:** `E(coppia) - 2 E(singolo)` **la conterebbe due volte** -- ### **propongo `E_int = E[p1 + p2] - E[p1] - E[p2] + E[0]`**, la forma del mandato stampata accanto.
+- **La dimensione in nodi viene dal profilo del continuo a quella `N`** *(`DC.prepara`)*: **cambiando `N` la larghezza cambia, `L` resta `81`**; le soglie della forma si scalano con `N`.
+- **Il vuoto:** non so se il suo aggiornamento e' complesso-lineare: **la misura e' reale-lineare** *(`12` gradi di liberta' reali per cella, nel riferimento che gira)*, col **controllo del Goldstone** *(la rotazione globale di fase a `Gamma`)*; **il `lambda` statico e' una proposta di lettura**, e **la frequenza a cui il solitone eccita il vuoto non la so**.
+- **Un controllo comune:** a `N = 1e6`, `L = 81` la scena e la partenza costruite con `N`, `L` espliciti = quelle della corsa al bit.
