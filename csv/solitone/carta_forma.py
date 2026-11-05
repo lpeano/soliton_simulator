@@ -205,7 +205,7 @@ def main(argv):
     print("-" * 130)
     print("### LA CORONA, t da %g (TB3 fino a %g, TM1000 fino a %g): per anello, media sulle mappe; i sei lobi della densita' pesata |c6| (media dei moduli), la parte coerente |media c6| / media |c6| e la"
           % (T_DA, serie["TB3"][-1]["t"], serie["TM1000"][-1]["t"]))
-    print("  fase dei vertici arg(media c6) / 6; i lobi di log10 rho in decadi (n = 6) e le chiazze (la deviazione standard di log10 rho); il massimo delle armoniche 1..12 pesate (quale n)")
+    print("  fase dei vertici -arg(media c6) / 6; i lobi di log10 rho in decadi (n = 6) e le chiazze (la deviazione standard di log10 rho); il massimo delle armoniche 1..12 pesate (quale n)")
     print("  ### per TB3 gli anelli oltre R_A 28 stanno dentro la fascia del bordo")
     for nome, _c, _d in CORSE:
         xs = [x for x in serie[nome] if x["t"] >= T_DA]
