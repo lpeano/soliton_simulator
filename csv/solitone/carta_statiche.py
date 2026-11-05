@@ -27,7 +27,10 @@ L_COPPIA = 162                 # ### il task history 1.0: L multiplo di 3 (159 o
 DD = tuple(range(24, 81, 2))   # ### Luca 15:28: da 24 a 80 ogni 2 nodi, centri sui nodi
 AMP = 1e-7                     # ### --vuoto: l'ampiezza del disturbo (protocollo; 2 AMP per VD-L)
 TOLL_L = 1e-6                  # ### il task history 1.1: VD-L
-TOLL_A = 1e-12                 # ### VD-T, VD-G
+TOLL_A = 1e-12                 # ### VD-G (due conti sulle STESSE risposte); per VD-T era il mio errore (799ab1cc: sotto il pavimento eps / AMP)
+AMP_T = (1e-7, 1e-6, 1e-5)     # ### Luca 2026-11-05 20:20: VD-T a tre ampiezze
+PEND_T, TOLL_PEND_T = -1.0, 0.3   # ### Luca 20:20: lo scarto di VD-T scende come 1 / ampiezza (la pendenza in log attesa -1 entro 0.3)
+PAV_T = 10.0 * 1e-16           # ### Luca 20:20: a ogni ampiezza lo scarto sotto 10 x (1e-16 / ampiezza)
 TOLL_G = 1e-6                  # ### VD-0: il Goldstone (la risposta lineare con AMP: l'errore O(AMP))
 TOLL_E = 1e-12                 # ### EI-T
 GAP_ZERO = 1e-6                # ### --vuoto: le fasi per tick sotto questo sono zero (il Goldstone e il suo compagno), escluse dal gap
@@ -156,10 +159,20 @@ def vuoto():
     eL = float(np.max(np.abs(R2 - R1)) / np.max(np.abs(R1)))
     esito("DEVE PASSARE: VD-L la risposta a AMP %g e a 2 AMP uguali entro %g relativo (il vuoto lineare a quell'ampiezza)" % (AMP, TOLL_L), eL <= TOLL_L, "%.3e" % eL)
     j0 = 5 * L + 7
-    Rj = risposta(j0, AMP)
     da = ((m1 - j0 // L) % L) * L + (m2 - j0 % L) % L
-    eT = float(np.max(np.abs(Rj - R1[:, da, :])) / np.max(np.abs(R1)))
-    esito("DEVE PASSARE: VD-T la risposta da un altro nodo (%d), riportata indietro, = quella dal nodo 0 entro %g relativo" % (j0, TOLL_A), eT <= TOLL_A, "%.3e" % eT)
+    eTs = []
+    for amp_t in AMP_T:                    # ### Luca 20:20: VD-T a tre ampiezze, la pendenza dello scarto in log e il pavimento a ogni ampiezza
+        R0t = R1 if amp_t == AMP else risposta(0, amp_t)
+        Rj = risposta(j0, amp_t)
+        eTs.append(float(np.max(np.abs(Rj - R0t[:, da, :])) / np.max(np.abs(R0t))))
+    pend_t = float(np.polyfit(np.log(np.array(AMP_T)), np.log(np.array(eTs)), 1)[0])
+    print("  VD-T: lo scarto per ampiezza %s; il pavimento 10 x 1e-16 / ampiezza %s; la pendenza di ln scarto contro ln ampiezza %+.4f"
+          % (", ".join("%g: %.3e" % (a, e) for a, e in zip(AMP_T, eTs)), ", ".join("%.1e" % (PAV_T / a) for a in AMP_T), pend_t))
+    sotto = all(e <= PAV_T / a for a, e in zip(AMP_T, eTs))
+    esito("DEVE PASSARE: VD-T la risposta da un altro nodo (%d), riportata indietro: lo scarto scende come 1 / ampiezza (pendenza %g entro %g) e sta sotto 10 x 1e-16 / ampiezza"
+          % (j0, PEND_T, TOLL_PEND_T), abs(pend_t - PEND_T) <= TOLL_PEND_T and sotto, "pendenza %+.4f; sotto il pavimento a ogni ampiezza: %s" % (pend_t, sotto))
+    if abs(pend_t - PEND_T) > TOLL_PEND_T:
+        print("  ### LO SCARTO NON SCENDE COME 1 / AMPIEZZA: non e' il pavimento (Luca 20:20: FERMO)")
     A1, A2 = TO.vettori()
     nz = np.flatnonzero(np.any(np.abs(R1) > 0.0, axis=(0, 2)))
     d1 = (nz // L + L // 2) % L - L // 2
