@@ -39,6 +39,9 @@ TOLL_G = 1e-6                  # ### VD-0: il Goldstone (la risposta lineare con
 TOLL_E = 1e-12                 # ### EI-T
 GAP_ZERO = 1e-6                # ### --vuoto: le fasi per tick sotto questo sono zero (il Goldstone e il suo compagno), escluse dal gap
 KAPPA = (0.01, 0.02, 0.04, 0.06, 0.08, 0.1)   # ### --vuoto: |k| lungo A1 per la curvatura del ramo del gap
+KAPPA_G = (0.005, 0.01, 0.02, 0.04, 0.08)     # ### --goldstone (Luca 2026-11-05 21:20, la misura A): |k| piccoli; una scelta di protocollo mia, dichiarata (il task history della rotazione, 1)
+DIREZIONI_G = (("A1", 0.0), ("30 gradi", 30.0))   # ### Luca 21:20: lungo A1 e a 30 gradi
+N_GOLD = 6                     # ### a Gamma sei fasi zero (statica_vuoto.txt): il Goldstone e i suoi compagni, seguiti INSIEME (le sei |fasi| piu' piccole a ogni k)
 SOGLIE = (1.0, 10.0, 100.0, 300.0)            # ### le soglie della forma a N 1e6 (scalate per N / 1e6)
 
 OK = [0, 0]
@@ -103,7 +106,7 @@ def cs0():
     esito("DEVE PASSARE: CS0 a N %g, L %d la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit" % (V.N, V.L), SFM.sha(p0) == SFM.sha(p_rif), SFM.sha(p0))
 
 
-def vuoto():
+def vuoto(goldstone=False):
     import _deriva_congelato as DC
     import _screening_forme_s3 as SF
     import _solitone_dal_fondo as SD
@@ -288,7 +291,53 @@ def vuoto():
         print("  %-9s la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo %.3e, contro dentro %.3e (il rapporto peggiore sui 12 gradi %.3e)"
               % (rif, max(f for f, _ in fu[rif]), max(d_ for _, d_ in fu[rif]), max(f / d_ for f, d_ in fu[rif])))
     print("  ### la lettura (Luca 20:20): se il gap a pi sparisce o si sposta nel corotante, era la rotazione vista da fuori; il gap e lambda si leggono solo dopo")
+    if goldstone:
+        goldstone_carta(T, ev, a if nonzero else None, s)
     cm.__exit__(None, None, None)
+
+
+def goldstone_carta(T, ev0, a_oggi, s):
+    """### **La misura A** *(Luca 2026-11-05 21:20; il task history `2026-11-05_rotazione_triangoli`, 1)*: il ramo del Goldstone *(le `N_GOLD` fasi zero a `Gamma`)* lungo `A1` e a `30` gradi."""
+    print("-" * 130)
+    print("### A. IL GOLDSTONE (Luca 21:20): le %d |fasi| piu' piccole di T(k) a ogni k (a Gamma sono zero: il Goldstone e i suoi compagni), per |k| %s; il pavimento della fase per tick %.1e (10 x 1e-16 / AMP)"
+          % (N_GOLD, KAPPA_G, PAV_T / AMP))
+    g0 = np.sort(np.abs(np.angle(ev0)))
+    print("  a Gamma le %d piu' piccole: %s; la prossima %.6e" % (N_GOLD, " ".join("%.3e" % x for x in g0[:N_GOLD]), g0[N_GOLD]))
+    pav_w = PAV_T / AMP / s
+    for nome_d, gradi in DIREZIONI_G:
+        u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
+        wmax = []
+        for kap in KAPPA_G:
+            fs = np.sort(np.abs(np.angle(np.linalg.eigvals(T(kap * u)))))
+            wmax.append(float(fs[N_GOLD - 1]) / s)
+            print("  %-9s |k| %.3f: le %d omega (per unita' di tempo) %s; la prossima %.6e" % (nome_d, kap, N_GOLD, " ".join("%.3e" % (x / s) for x in fs[:N_GOLD]), fs[N_GOLD] / s))
+        kk, ww = np.array(KAPPA_G), np.array(wmax)
+        v_or = float(np.sum(kk * ww) / np.sum(kk * kk))
+        cf = np.polyfit(kk, ww, 2)
+        print("  ### %-9s la omega piu' grande delle %d: %s; la velocita' (la pendenza per l'origine) %.6e; il fit omega = c0 + v |k| + b |k|^2: c0 %+.3e, v %+.6e, b %+.6e; il pavimento in omega %.1e (in velocita' a |k| %.3f: %.1e)"
+              % (nome_d, N_GOLD, " ".join("%.3e" % x for x in wmax), v_or, cf[2], cf[1], cf[0], pav_w, KAPPA_G[0], pav_w / KAPPA_G[0]))
+        print("  ### %-9s la lettura scritta prima (Luca): %s" % (nome_d, "SOPRA il pavimento a ogni |k|: il Goldstone PROPAGA" if all(w > 10 * pav_w for w in wmax)
+              else "ENTRO 10 x il pavimento a ogni |k|: il vuoto e' RIGIDO anche li'" if all(w <= 10 * pav_w for w in wmax) else "misto: sopra a qualche |k|, entro ad altri (dichiarato)"))
+    lam0 = None
+    nz = [i for i in range(len(ev0)) if abs(np.angle(ev0[i])) > GAP_ZERO]
+    if nz:
+        ig = min(nz, key=lambda i: abs(np.angle(ev0[i])))
+        Dr = abs(np.angle(ev0[ig])) / s
+        prev = ev0[ig]
+        rr = []
+        for kap in KAPPA:
+            e2 = np.linalg.eigvals(T(np.array([kap, 0.0])))
+            prev = e2[int(np.argmin(np.abs(e2 - prev)))]
+            rr.append(abs(np.angle(prev)) / s)
+        lam0 = float(np.polyfit(np.array(KAPPA) ** 2, np.array(rr) - Dr, 1)[0])
+    rif = None
+    f_rif = os.path.join(DIR_REF, "statica_vuoto.txt")
+    if os.path.exists(f_rif):
+        for l in open(f_rif, encoding="utf-8"):
+            if "la curvatura a = d omega / d k^2 =" in l:
+                rif = l.split("=")[2].split()[0]   # ### "la curvatura a = d omega / d k^2 = <numero> ..."
+    esito("DEVE PASSARE: GA-PI la stessa misura sul ramo a pi ridà la curvatura di 60de22ec (%s, statica_vuoto.txt), e quella di questa corsa" % rif,
+          lam0 is not None and rif is not None and ("%+.6e" % lam0) == rif and lam0 == a_oggi, "%+.6e" % lam0 if lam0 is not None else "nessun ramo")
 
 
 def coppia():
@@ -491,14 +540,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    modo = "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
     assert modo, "uso: --vuoto | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
