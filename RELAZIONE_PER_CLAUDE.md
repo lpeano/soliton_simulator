@@ -23787,3 +23787,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`VD-R-F` ora passa** *(lo scarto `4.892e-01`, invariato)*; **ogni altro numero uguale a `60de22ec`.**
 - ### **La coda, nell'ordine:** le mappe leggere di `TBS` *(Luca `19:24`)* -> **la coppia con gli stati maturi di `TBS`** *(Luca `21:01`)* -> **la rotazione nei triangoli e la rigidita' del vuoto, A-D** *(Luca `21:20`: il Goldstone, la circolazione, i vortici, `F1`)* -> **FERMO: Luca sceglie le corse della coppia.**
+
+## 2026-11-05 — LE MAPPE LEGGERE DI `TBS` *(Luca `19:24`)*: **`6/6`; `201` MAPPE, `4829557` BYTE** *(`doc/referti_l2/campo_TBS.txt`, `carta_campo.py` `a2ffe2aa`)*
+
+- **Solo lettura da `E:`:** `F0` *(`20` file, gli sha dell'indice `mappe_indice_TBS.txt`)*, **`F1` su `2001` istantanee** *(il peggiore `M` `4.55e-09`, `V` `1.08e-09`)*, `F1-F` *(`5.05e-03`)*, `F2`, **`F3` `2.836e-08`** *(contro la partenza simmetrizzata)*.
+- **I file:** `doc/referti_l2/campo_TBS/mappe_leggere.npz` **`4829557` byte, `201` mappe** *(una ogni `10` istantanee: ogni `150` unita' di tempo, `float16`)*; `profili.npz` **`1221466` byte**.
+- ### **Un'etichetta scaduta, mia:** **la riga di `F3` dice ancora «`(V.partenza)`»**, ma per `TBS` il confronto e' con `corsa_accensione.partenza_ts` *(il ramo di `fcf4ce2c`)*: **il numero e' giusto, l'etichetta no**; **la correggo dopo, in un commit a se', senza rigirare** *(cambia solo la stampa)*.

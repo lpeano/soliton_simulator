@@ -1,0 +1,72 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA TBS (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\mappe\TBS\TBS_000000.npz  3861178 byte  sha1 e725fe51fc133b0b0c8357d906fe376c83a9657a  tempo 0.00 .. 1500.00  101 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_010000.npz  4586123 byte  sha1 3728b66b9b54593a6f1836dbc643d97a54dba1ca  tempo 1515.00 .. 3000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_020000.npz  4570213 byte  sha1 b27521d12c71c1b809d27da7c15da932e32ec289  tempo 3015.00 .. 4500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_030000.npz  4565230 byte  sha1 9c5695fb22d8e7735e82c2214ae2f677cb6730c4  tempo 4515.00 .. 6000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_040000.npz  4556400 byte  sha1 51629a5db75383d9e40cf8682b8255c8026063dc  tempo 6015.00 .. 7500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_050000.npz  4559283 byte  sha1 92472e789bb943e3b03bd966cba27151e7484baa  tempo 7515.00 .. 9000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_060000.npz  4552538 byte  sha1 268f281850601c2f2013df718a50185804fb65d4  tempo 9015.00 .. 10500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_070000.npz  4554516 byte  sha1 85eb92bdfe463a0a530ff84f3183499bda02e0a5  tempo 10515.00 .. 12000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_080000.npz  4547480 byte  sha1 4205832f64034275ea83750f4018e9eb51b45538  tempo 12015.00 .. 13500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_090000.npz  4543976 byte  sha1 90ffa67acae8583653b1fb0916a0d546b721cd49  tempo 13515.00 .. 15000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_100000.npz  4552059 byte  sha1 472b934ac591af3ea2ace9e249b06a0f2170bd9b  tempo 15015.00 .. 16500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_110000.npz  4545645 byte  sha1 7daa2fe93c369b7a3442c78c8a46418f9938e773  tempo 16515.00 .. 18000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_120000.npz  4545093 byte  sha1 98722ceafe78a07c72f4a48ed4bb4abe6fcadc65  tempo 18015.00 .. 19500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_130000.npz  4541639 byte  sha1 1328f5252af19eb617d1932f6d5eac5ef1c78235  tempo 19515.00 .. 21000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_140000.npz  4548268 byte  sha1 5d974b80ab2ae1ec650c3e1fc2b4d20648ccf8f7  tempo 21015.00 .. 22500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_150000.npz  4548376 byte  sha1 8b0c601ef6d8d3ed5428e2e26704b800e23c0be2  tempo 22515.00 .. 24000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_160000.npz  4545841 byte  sha1 d9d1aaac973838246ba44de61cd52c8b53346246  tempo 24015.00 .. 25500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_170000.npz  4545566 byte  sha1 6aa4e77b8cc2a6838894b45a0447f574080870cb  tempo 25515.00 .. 27000.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_180000.npz  4546271 byte  sha1 fe941dfa57eefbba91a9ecd3225d80193f388d6d  tempo 27015.00 .. 28500.00  100 istantanee
+  E:\soliton_simulator\mappe\TBS\TBS_190000.npz  4545664 byte  sha1 98c1de254b31ff92ecfd1c1507c2a5912343d515  tempo 28515.00 .. 30000.00  100 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\stati\TBS\TBS_stato_000000.npz  2258694 byte  sha1 bbbf36a7bb78909f8d9c0575be8a0f0d17a30405  tempo 0.00 (tick 0)
+  E:\soliton_simulator\stati\TBS\TBS_stato_010000.npz  2258694 byte  sha1 ae69c52d0eedfb8bd4bab4e26f201560bc793c04  tempo 1500.00 (tick 10000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_020000.npz  2258694 byte  sha1 fbc0b3210a03e6abb727b3d608ab5d3c691ae788  tempo 3000.00 (tick 20000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_030000.npz  2258694 byte  sha1 8e3cb6ae04d718ed478013255225eb9ec9a3649c  tempo 4500.00 (tick 30000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_040000.npz  2258694 byte  sha1 195707de3e64098f5cb383441b1c83b830ad97e5  tempo 6000.00 (tick 40000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_050000.npz  2258694 byte  sha1 7266b618007e4c1eec8bf28dff9647199a55acb0  tempo 7500.00 (tick 50000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_060000.npz  2258694 byte  sha1 a772c219072ff2409058ed3cf9df4f333fccbbb5  tempo 9000.00 (tick 60000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_070000.npz  2258694 byte  sha1 7119a13993f1e1630e7fcfbfc767d87d78cfcc64  tempo 10500.00 (tick 70000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_080000.npz  2258694 byte  sha1 3ffa379c73b743dcae07871d19679ae4f65e9085  tempo 12000.00 (tick 80000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_090000.npz  2258694 byte  sha1 6cf6bf01fc78c5e3b10e29a19d26c64a4ad76bb6  tempo 13500.00 (tick 90000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_100000.npz  2258694 byte  sha1 3d9aa54c879b14902b6614d053ebba3e61d4ce40  tempo 15000.00 (tick 100000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_110000.npz  2258694 byte  sha1 a4090d0d0e62da8e64c3c33e95be3d332045b9c8  tempo 16500.00 (tick 110000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_120000.npz  2258694 byte  sha1 9621aa35d0316cb6c4d6950cef49c31d8d5ede07  tempo 18000.00 (tick 120000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_130000.npz  2258694 byte  sha1 99673ec5454c1806e805158e673a1bb4447b7e16  tempo 19500.00 (tick 130000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_140000.npz  2258694 byte  sha1 d97282a5665d1b836c2950ec5775017af0ea1a87  tempo 21000.00 (tick 140000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_150000.npz  2258694 byte  sha1 6000ff22b6da3904800ea7e4793f96a982a4a9a0  tempo 22500.00 (tick 150000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_160000.npz  2258694 byte  sha1 916fd8674961fbda3357fd259b410500327fa3c8  tempo 24000.00 (tick 160000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_170000.npz  2258694 byte  sha1 37379273c343cb643860165b353537dcfc23ac99  tempo 25500.00 (tick 170000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_180000.npz  2258694 byte  sha1 ccf7273683cb3bbc71ffb198b2178949b6faa988  tempo 27000.00 (tick 180000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_190000.npz  2258694 byte  sha1 12a314ca65497588fa85a6f1c0d04e4b52d7f02b  tempo 28500.00 (tick 190000)
+  E:\soliton_simulator\stati\TBS\TBS_stato_200000.npz  2258694 byte  sha1 311988f0ec2eece2970c89811969c3abe46fb016  tempo 30000.00 (tick 200000)
+### I PEZZI DEI CAMPIONI (jsonl interi; nel repo la versione rada in --)
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_000000.jsonl  2360517 byte  sha1 f9cfdfe6da518e5904f86a6005ecff21c5af8844  tempo 0.00 .. 1500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_010000.jsonl  2416658 byte  sha1 ab87e0a87059debe8f3007b1fa6e2eb8d0a4bcfd  tempo 1500.00 .. 3000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_020000.jsonl  2415079 byte  sha1 ccbadaecda328d170eb062bbd53abc225153cb75  tempo 3000.00 .. 4500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_030000.jsonl  2413211 byte  sha1 e59727a3b8b76f6d5a0ef2816b72c6ad7ddf91ad  tempo 4500.00 .. 6000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_040000.jsonl  2415229 byte  sha1 a869bd8071c6b7355d92cad72f01a97b0c7d47d2  tempo 6000.00 .. 7500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_050000.jsonl  2416350 byte  sha1 d5f551968efa0bcfe74549c7b684581a8c358bcf  tempo 7500.00 .. 9000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_060000.jsonl  2415783 byte  sha1 55e03651ca8bb3bf84fba6fcec85a0015ca4dda5  tempo 9000.00 .. 10500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_070000.jsonl  2414824 byte  sha1 482687eda02261546511a824a1d27957517ebaff  tempo 10500.00 .. 12000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_080000.jsonl  2414998 byte  sha1 98e042404eac36c527e899627481319fe2c3bbd0  tempo 12000.00 .. 13500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_090000.jsonl  2414740 byte  sha1 36c20be48b5d0388fff7a4fad51cb907675cd298  tempo 13500.00 .. 15000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_100000.jsonl  2415805 byte  sha1 ddf7f8150ab47f17251d47f71213f8e2a6d3e9fc  tempo 15000.00 .. 16500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_110000.jsonl  2417043 byte  sha1 6359ea66acd417349a01caedb06ad31c3446b2a5  tempo 16500.00 .. 18000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_120000.jsonl  2418099 byte  sha1 6597610bd6772ea18f0b798db92c260f5ef47449  tempo 18000.00 .. 19500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_130000.jsonl  2419134 byte  sha1 453482264eb3634d40f0808c44f40df198a69bee  tempo 19500.00 .. 21000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_140000.jsonl  2418667 byte  sha1 359cd0687b20d367798286d27a45ab180d6f7741  tempo 21000.00 .. 22500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_150000.jsonl  2418207 byte  sha1 4e8ab4a426744092ef66cab78de8e7f7f7723035  tempo 22500.00 .. 24000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_160000.jsonl  2417602 byte  sha1 06c894a91096e1063f558eae82ab10967b3e1e66  tempo 24000.00 .. 25500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_170000.jsonl  2417314 byte  sha1 67cafa5055d5b4eeea0a01b530be8b75a114cc8e  tempo 25500.00 .. 27000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_180000.jsonl  2416384 byte  sha1 8f6837bd18be2b34b4c3e94e051c4b535724e2d4  tempo 27000.00 .. 28500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\TBS_190000.jsonl  2416113 byte  sha1 64840e7330ef0715b2fc8b07d0dd409d57bdc524  tempo 28500.00 .. 30000.00
