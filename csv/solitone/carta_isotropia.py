@@ -141,8 +141,8 @@ def main(argv):
     print("=" * 130)
     print("L'ISOTROPIA DELLA DISPERSIONE (Luca 2026-11-04 20:18-22:26): la banda B sul vuoto F3, il tick CONGELATO (DV.un_tick, forma S1); %s (s %g, eps %g); N_K %d N_TH %d K_MIN %g FIT %s"
           % (CA.NOME, s, V.EPS, N_K, N_TH, K_MIN, FIT))
-    print("  k_M = 2 pi / sqrt 3 = %.6f (il raggio inscritto della zona di Brillouin); TOLL_A %g TOLL_D6 %g ESC_MIN %g TOLL_P %g GAP_DOPPIETTO %g; i reticoli di prova omega0 %g t %g (protocollo)"
-          % (kM, TOLL_A, TOLL_D6, ESC_MIN, TOLL_P, GAP_DOPPIETTO, PROVA[0], PROVA[1]))
+    print("  k_M = 2 pi / sqrt 3 = %.6f (il raggio inscritto della zona di Brillouin); TOLL_A %g TOLL_D6 %g ESC_MIN %g TOLL_P %g GAP_DOPPIETTO %g; i reticoli di prova: il quadrato omega0 %g t %g, il triangolare omega0 %g t %g (protocollo)"
+          % (kM, TOLL_A, TOLL_D6, ESC_MIN, TOLL_P, GAP_DOPPIETTO, PROVA[0], PROVA[1], PROVA_TRI[0], PROVA_TRI[1]))
     print("=" * 130)
     idx = tuple(dict(DV.GRUPPI)["B"])
     A1, A2 = TO.vettori()
@@ -175,7 +175,7 @@ def main(argv):
     fG = np.sort(-np.angle(np.linalg.eigvals(matrice_k(Rs, rs, np.zeros(2)))))
     gap = float(fG[idx[1]] - fG[idx[0]])
     print("  a Gamma le fasi per tick delle 12 bande: %s" % " ".join("%+.6f" % x for x in fG))
-    print("  ### la banda B (indici %s) a Gamma: %+.12f, %+.12f; lo scarto %.3e (%s)" % (idx, fG[idx[0]], fG[idx[1]], gap, "### UN DOPPIETTO: DI1 non si legge" if gap < GAP_DOPPIETTO else "non degeneri"))
+    print("  ### la banda B (indici %s) a Gamma: %+.12f, %+.12f; lo scarto %.3e (%s)" % (idx, fG[idx[0]], fG[idx[1]], gap, "### DEGENERI A GAMMA: due copie o un incrocio, lo dice il confronto su tutti i cerchi sotto" if gap < GAP_DOPPIETTO else "non degeneri"))
     print("-" * 130)
     risultati = {}
     for b in (0, 1):
