@@ -71,7 +71,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E il ramo della partenza, il pilota, le carte statiche** *(`partenza.py`, `test_partenza.py`, `carta_pilota.py`, `carta_statiche.py`, `carta_tbs.py`; `corsa_accensione`: il pilota `PL1`-`PL4`)*.
 # ### **E la carta del vuoto corretta** *(`carta_statiche.py`: `VD-T` a tre ampiezze, il riferimento, Luca `20:20`)* **e le mappe leggere di `TBS`** *(`carta_campo.py`, Luca `19:24`)*.
 # ### **E il verdetto di `VD-R-F`** *(`carta_statiche.py`, la condizione negata: `dced2343`)*.
-LIBRERIA_RIFERITA = "dced2343"
+# ### **E la coppia matura** *(`carta_statiche.py --coppia-matura`, Luca `21:01`)* **e l'etichetta di `F3`** *(`carta_campo.py`)*.
+LIBRERIA_RIFERITA = "3a97e929"
 
 
 def vecchi():
