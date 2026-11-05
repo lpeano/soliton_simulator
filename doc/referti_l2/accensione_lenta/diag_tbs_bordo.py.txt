@@ -1,0 +1,66 @@
+# -*- coding: utf-8 -*-
+"""TBS, PRIMA DELLA CORSA (2026-11-05; il task history 2026-11-05_TBS_simmetrizzata_col_bordo, 1): IL BORDO RISPETTA LA SIMMETRIA DI TS?
+Sulla partenza di TBS (corsa_accensione.partenza_ts, il vuoto F3): il centro periodico c0 (dove si centra il bordo) contro il centro di R180 (m2 / 2); l'asimmetria del profilo g
+per estremita' sotto R180; l'asimmetria dello stato (corsa_accensione.asimmetria) dopo il primo tick SENZA il bordo e CON il bordo (bordo.assorbi, rif = c_di(1) F3). Solo lettura: la scena
+si rimette. Il FERMO: il bordo aggiunge un'asimmetria sopra il pavimento dell'arrotondamento (~1e-15).
+    python doc/referti_l2/accensione_lenta/diag_tbs_bordo.py.txt   (dalla radice del repo)
+"""
+import os
+import sys
+
+import numpy as np
+
+sys.path.insert(0, os.path.join(os.getcwd(), "csv"))
+import solitone  # noqa: E402,F401
+import _deriva_congelato as DC  # noqa: E402
+import _screening_forme_s3 as SF  # noqa: E402
+import _solitone_vuoto_congelato as VC  # noqa: E402
+import _triangoli_bassa_energia as BE  # noqa: E402
+import _vuoto_vivo_B as V  # noqa: E402
+from solitone import accensione as AC  # noqa: E402
+from solitone import bordo as BO  # noqa: E402
+from solitone import carta_impulso as CI  # noqa: E402
+from solitone import corsa_accensione as CA  # noqa: E402
+from solitone import toro as TO  # noqa: E402
+
+_sol, vuoto, s = V.CORSE[CA.NOME]
+K = int(round(CA.CORSE["TBS"][0] / s))
+with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+    tab, omega = d["c"].copy(), float(d["omega"])
+with V.scena(s, vuoto, V.EPS) as (_rec, z, phi0, pK):
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    ts = CA.partenza_ts(z, phi0, pK, s)
+    for k, v in salvato.items():
+        z["st"][k][...] = v
+    phi_v = CA.vuoto_della_corsa(z, "TBS")
+    z["st"]["psi_h"][...] = ts["psi"]
+    z["st"]["phi_h"][...] = phi_v
+    L = z["L"]
+    v = np.arange(z["inc"].n)
+    rho = np.zeros(z["inc"].n)
+    np.add.at(rho, z["inc"].nodo, np.sum(np.abs(z["st"]["psi_h"]) ** 2, axis=1))
+    c1, c2 = TO.centro(rho, v // L, v % L, L)[:2]
+    m2 = ts["m2"]
+    print("il centro periodico c0 (dove si centra il bordo): (%.15f, %.15f); il centro di R180 m2 / 2: (%.15f, %.15f); lo scarto (%.3e, %.3e) negli indici"
+          % (c1, c2, m2[0] / 2.0, m2[1] / 2.0, c1 - m2[0] / 2.0, c2 - m2[1] / 2.0))
+    dove = CA.dove_simm(z, m2)
+    g_e, gn, _r = BO.g_estremita(z, c1, c2, BO.R_A, CA.BORDO["TBS"])
+    g_m, _gn, _r = BO.g_estremita(z, m2[0] / 2.0, m2[1] / 2.0, BO.R_A, CA.BORDO["TBS"])
+    print("il profilo g per estremita' (centrato su c0): |R g - g| / |g| %.3e; centrato su m2 / 2: %.3e; le estremita' con g > 0: %d"
+          % (np.linalg.norm(CI.applica(g_e, dove) - g_e) / np.linalg.norm(g_e), np.linalg.norm(CI.applica(g_m, dove) - g_m) / np.linalg.norm(g_m), int((g_e > 0).sum())))
+    a0 = CA.asimmetria(z, dove)
+    print("l'asimmetria della partenza: psi %.3e, phi %.3e" % (a0["psi"], a0["phi"]))
+    st0 = {k: x.copy() for k, x in z["st"].items() if isinstance(x, np.ndarray)}
+    with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+        AC.tick(z, 1, K)
+        a_senza = CA.asimmetria(z, dove)
+        for k, x in st0.items():
+            z["st"][k][...] = x
+        AC.tick(z, 1, K)
+        dM, dV = BO.assorbi(z["st"], g_e, BO.c_di(1, tab, K, omega) * phi_v)
+        a_con = CA.asimmetria(z, dove)
+    print("dopo il primo tick SENZA il bordo: psi %.3e, phi %.3e" % (a_senza["psi"], a_senza["phi"]))
+    print("dopo il primo tick CON il bordo:   psi %.3e, phi %.3e (assorbite M %.3e, V %.3e)" % (a_con["psi"], a_con["phi"], dM, dV))
+    print("il bordo aggiunge: psi %+.3e, phi %+.3e" % (a_con["psi"] - a_senza["psi"], a_con["phi"] - a_senza["phi"]))
+    for k, x in salvato.items():
+        z["st"][k][...] = x

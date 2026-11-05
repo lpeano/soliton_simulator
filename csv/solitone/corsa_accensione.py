@@ -97,6 +97,10 @@ MAPPE = MAPPE + ("TB3",)            # ### Luca 21:52: le mappe, su E:\soliton_si
 BORDO = {"TB3": 0.03}                 # ### g_max: il piu' piccolo della griglia con la riflessione del pacchetto sotto 1e-2 (carta_bordo.py, doc/referti_l2/bordo_riflessione.txt, 7dc08427)
 FASE = "fase_F3.npz"                # ### la tabella di c(t) (carta_fase.py, doc/referti_l2/fase_F3.txt, sha 1394eecf...): phi0(t) = c(t) F3 (Luca 09:00, la scelta (a))
 STIMA = {"TB3": "TF3"}              # ### la stima del disco delle mappe dai jsonl di TF3 (TB3 non ha gemella)
+CORSE["TBS"] = (1000.0, 30000.0)    # ### (Luca 2026-11-04 18:31) la partenza SIMMETRIZZATA di TS col bordo di TB3, F3, fino a 30000 (il task history 2026-11-05_TBS_simmetrizzata_col_bordo)
+VUOTI["TBS"] = "F3"                 # ### come TS
+SIMMETRIZZATE = SIMMETRIZZATE + ("TBS",)   # ### la partenza di TS e l'asimmetria in ogni campione
+BORDO["TBS"] = BORDO["TB3"]         # ### il bordo di TB3 (Luca 18:31: ogni corsa col bordo usa quello di TB3); niente MAPPE, niente STATI (il mandato; la domanda aperta)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
