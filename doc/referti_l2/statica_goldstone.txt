@@ -1,0 +1,60 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE a2e91266  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --goldstone; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+  DEVE PASSARE: VD-L la risposta a AMP 1e-07 e a 2 AMP uguali entro 1e-06 relativo (il vuoto lineare a quell'ampiezza)     PASSA   4.066e-09
+  VD-T: lo scarto per ampiezza 1e-07: 1.639e-09, 1e-06: 1.086e-10, 1e-05: 1.096e-11; il pavimento 10 x 1e-16 / ampiezza 1.0e-08, 1.0e-09, 1.0e-10; la pendenza di ln scarto contro ln ampiezza -1.0874
+  DEVE PASSARE: VD-T la risposta da un altro nodo (412), riportata indietro: lo scarto scende come 1 / ampiezza (pendenza  PASSA   pendenza -1.0874; sotto il pavimento a ogni ampiezza: True
+  il supporto della risposta di un tick: 7 nodi; |d1|, |d2| fino a 1, 1
+  DEVE PASSARE: VD-G T(k) per k qualsiasi = fft2 della risposta su 5 k della griglia, entro 1e-12                          PASSA   3.514e-16
+  DEVE PASSARE: VD-0 il Goldstone: la rotazione globale i F3 a Gamma e' un autovettore con autovalore 1, entro 1e-06       PASSA   4.343e-09
+  a Gamma i 12 autovalori (nel riferimento che gira): la fase per tick e il modulo:
+    -9.424778e-01 |1.000000012|; -4.712389e-01 |1.000000000|; -4.712389e-01 |1.000000000|; -1.936256e-09 |1.000000002|; -1.986928e-10 |1.000000000|; +1.173367e-17 |0.999999999|; +1.952620e-16 |1.000000000|; +1.986927e-10 |1.000000000|; +1.936257e-09 |1.000000002|; +4.712389e-01 |1.000000000|; +4.712389e-01 |1.000000000|; +9.424778e-01 |1.000000012|
+  ### il gap a Gamma (il ramo con la fase piu' piccola sopra 1e-06 per tick): Delta 3.141593e+00 per unita' di tempo (|lambda| 1.000000000)
+    il ramo lungo A1: |k| 0.01 0.02 0.04 0.06 0.08 0.10 -> omega 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00
+  ### la curvatura a = d omega / d k^2 = -5.199415e-10 (nodi^2 per unita' di tempo); la PROPOSTA di lettura: lambda = sqrt(|a| / Delta) = 0.0000 nodi
+  ### non so a quale frequenza il solitone eccita il vuoto (il task history 1.1): il lambda statico puo' non essere quello giusto
+  i moduli a Gamma da 0.999999999 a 1.000000012 (1: il vuoto neutro)
+----------------------------------------------------------------------------------------------------------------------------------
+### IL RIFERIMENTO (Luca 20:20): c(K) +0.951056516295199 +0.309016994374771i, c(K+1) +0.707106781186668 +0.707106781186411i (fase_F3.npz); la risposta ad AMP 1e-07 dal nodo 0 in tre riferimenti
+  oggi: la base F3, la risposta per e^{-i omega}; corotante: eta = c(t)* phi (la base c(K) F3, il disturbo per c(K), la risposta per c(K+1)*); fisso: la base c(K) F3, nessun fattore
+  DEVE PASSARE: VD-R0 la risposta di oggi rifatta col riferimento esplicito = quella di sopra, al bit                      PASSA   0.000e+00
+  DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il rifer PASSA   4.892e-01
+  la risposta corotante contro quella di oggi: lo scarto relativo 6.424e-09 (il pavimento ad AMP 1e-07: 1.0e-08)
+  oggi      a Gamma le 12 fasi per tick: -9.424778e-01 -4.712389e-01 -4.712389e-01 -1.936256e-09 -1.986928e-10 +1.173367e-17 +1.952620e-16 +1.986927e-10 +1.936257e-09 +4.712389e-01 +4.712389e-01 +9.424778e-01; i moduli da 0.999999999 a 1.000000012
+  oggi      il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura -5.199415e-10; sqrt(|a| / Delta) 0.0000 nodi
+  oggi      la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  corotante a Gamma le 12 fasi per tick: -9.424778e-01 -4.712389e-01 -4.712389e-01 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +4.712389e-01 +4.712389e-01 +9.424778e-01; i moduli da 0.999999998 a 1.000000003
+  corotante il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura +1.114644e-11; sqrt(|a| / Delta) 0.0000 nodi
+  corotante la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  fisso     a Gamma le 12 fasi per tick: -4.712389e-01 -4.712389e-01 -4.712389e-01 -4.712389e-01 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +4.712389e-01 +4.712389e-01 +4.712389e-01 +4.712389e-01; i moduli da 0.999999997 a 1.000000007
+  fisso     il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura -7.557772e-10; sqrt(|a| / Delta) 0.0000 nodi
+  fisso     la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  ### la lettura (Luca 20:20): se il gap a pi sparisce o si sposta nel corotante, era la rotazione vista da fuori; il gap e lambda si leggono solo dopo
+----------------------------------------------------------------------------------------------------------------------------------
+### A. IL GOLDSTONE (Luca 21:20): le 6 |fasi| piu' piccole di T(k) a ogni k (a Gamma sono zero: il Goldstone e i suoi compagni), per |k| (0.005, 0.01, 0.02, 0.04, 0.08); il pavimento della fase per tick 1.0e-08 (10 x 1e-16 / AMP)
+  a Gamma le 6 piu' piccole: 1.173e-17 1.953e-16 1.987e-10 1.987e-10 1.936e-09 1.936e-09; la prossima 4.712389e-01
+  A1        |k| 0.005: le 6 omega (per unita' di tempo) 1.350e-12 4.301e-12 1.142e-08 1.143e-08 5.007e-06 5.008e-06; la prossima 3.141593e+00
+  A1        |k| 0.010: le 6 omega (per unita' di tempo) 2.861e-12 8.748e-12 1.142e-08 1.144e-08 2.001e-05 2.001e-05; la prossima 3.141593e+00
+  A1        |k| 0.020: le 6 omega (per unita' di tempo) 5.806e-12 1.757e-11 1.141e-08 1.145e-08 8.003e-05 8.003e-05; la prossima 3.141593e+00
+  A1        |k| 0.040: le 6 omega (per unita' di tempo) 1.165e-11 3.518e-11 1.139e-08 1.148e-08 3.201e-04 3.201e-04; la prossima 3.141593e+00
+  A1        |k| 0.080: le 6 omega (per unita' di tempo) 2.332e-11 7.035e-11 1.134e-08 1.152e-08 1.280e-03 1.280e-03; la prossima 3.141593e+00
+  ### A1        la omega piu' grande delle 6: 5.008e-06 2.001e-05 8.003e-05 3.201e-04 1.280e-03; la velocita' (la pendenza per l'origine) 1.372926e-02; il fit omega = c0 + v |k| + b |k|^2: c0 -1.318e-08, v +2.898902e-06, b +1.999903e-01; il pavimento in omega 6.7e-08 (in velocita' a |k| 0.005: 1.3e-05)
+  ### A1        la lettura scritta prima (Luca): SOPRA il pavimento a ogni |k|: il Goldstone PROPAGA
+  30 gradi  |k| 0.005: le 6 omega (per unita' di tempo) 2.882e-12 6.312e-12 8.228e-09 8.246e-09 5.014e-06 5.014e-06; la prossima 3.141593e+00
+  30 gradi  |k| 0.010: le 6 omega (per unita' di tempo) 6.095e-12 1.294e-11 8.228e-09 8.263e-09 2.002e-05 2.002e-05; la prossima 3.141593e+00
+  30 gradi  |k| 0.020: le 6 omega (per unita' di tempo) 1.235e-11 2.602e-11 8.212e-09 8.284e-09 8.004e-05 8.004e-05; la prossima 3.141593e+00
+  30 gradi  |k| 0.040: le 6 omega (per unita' di tempo) 2.478e-11 5.212e-11 8.178e-09 8.321e-09 3.201e-04 3.201e-04; la prossima 3.141593e+00
+  30 gradi  |k| 0.080: le 6 omega (per unita' di tempo) 4.958e-11 1.043e-10 8.110e-09 8.395e-09 1.280e-03 1.280e-03; la prossima 3.141593e+00
+  ### 30 gradi  la omega piu' grande delle 6: 5.014e-06 2.002e-05 8.004e-05 3.201e-04 1.280e-03; la velocita' (la pendenza per l'origine) 1.372939e-02; il fit omega = c0 + v |k| + b |k|^2: c0 -6.412e-09, v +2.903368e-06, b +1.999903e-01; il pavimento in omega 6.7e-08 (in velocita' a |k| 0.005: 1.3e-05)
+  ### 30 gradi  la lettura scritta prima (Luca): SOPRA il pavimento a ogni |k|: il Goldstone PROPAGA
+  DEVE PASSARE: GA-PI la stessa misura sul ramo a pi ridà la curvatura di 60de22ec (-5.199415e-10, statica_vuoto.txt), e q PASSA   -5.199415e-10
+==================================================================================================================================
+ESITO: 8/8 controlli passano; DEVE fallite: 0 []

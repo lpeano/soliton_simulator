@@ -23811,3 +23811,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'errore `n.108` del guardiano** *(Luca)*: **`phi` e' uno scalare NEUTRO sulle estremita'** *(`fondo_con_fasi`: `+e^{i theta_d}` alla coda, `-e^{i theta_d}` alla testa)*, **spostato con la permutazione pura senza `U`** *(`CAMM-SPOSTAMENTO-VUOTO`)*: **le fasi di `F1` sono una freccia, non un flusso.** **Verificato dal codice.** **Il flusso nei triangoli sta nella MATERIA** *(`S_U`, `CAMM-SPOSTAMENTO`)*: **la misura E, l'olonomia di `U`.** **D cambia domanda:** `F1` trasmette onde dove `F3` ha il ramo piatto? **Un DEVE in piu':** `R120` su `F1` = `F1` per una fase.
 - **Una mia nota:** lo scambio delle due estremita' dello stesso arco e' la parte arco-locale; **la risposta fuori dall'arco del `7.9%` viene da un altro pezzo del tick** *(lo cerco in A)*. **Sei fasi degeneri a `Gamma`:** il Goldstone non e' mai stato seguito lungo `k` *(A e' una misura nuova)*.
 - **In coda, voce `6-bis`:** **la coppia col bordo parziale** *(dopo `TBG`; FERMO prima del codice: la proposta, decide Luca)*.
+
+## 2026-11-05 — LA MISURA A, IL GOLDSTONE DI `F3`: **`8/8`; UNA COPPIA `omega = 0.2 |k|^2` ISOTROPA, QUATTRO RAMI PIATTI; LA VELOCITA' A `|k| -> 0` ZERO ENTRO IL PAVIMENTO** *(`statica_goldstone.txt`; il task history `2026-11-05_rotazione_triangoli`, sez. `6`)*
+
+- **`GA-PI`** *(il ramo a `pi` ridà `-5.199415e-10`)* **passa.**
+- ### **Delle sei fasi zero di `Gamma`: una coppia ha `omega = 0.19999 |k|^2`, uguale lungo `A1` e a `30` gradi, sopra il pavimento a ogni `|k|`; le altre quattro stanno nel pavimento.** **La velocita' a `|k| -> 0`: `2.9e-6`, sotto il pavimento in velocita' `1.3e-5`; la velocita' di gruppo della coppia `0.4 |k|`.**
+- ### **Un mio errore:** **la riga stampata «il Goldstone PROPAGA» usa il mio criterio** *(`omega` sopra il pavimento)*, **non quello di Luca** *(la velocita' a `|k| -> 0`)*: **col suo, la velocita' e' zero.** Annotato, il referto non si riscrive.
+- ### **Per Luca:** **ne' sonoro ne' piatto: QUADRATICO** *(«alla Schroedinger»)*: **una (r5).** **Poi D** *(la carta di `F1`)*.
