@@ -23615,3 +23615,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le bande `10` e `11` coincidono ovunque** *(due copie, non un doppietto accidentale)*: la pendenza dell'anisotropia di `omega` **`6.015`**, di `|v_g|` `3.9`, come la derivazione per il caso non degenere.
 - ### **IL RISULTATO** *(un numero)*: **l'anisotropia di `omega` supera l'`1%` sotto `lambda 2.27` nodi e lo `0.1%` sotto `3.25`; quella di `|v_g|` sotto `3.55` e `6.09`. Il reticolo, nella dispersione, si vede solo sotto `~6` nodi.**
 - **La correzione proposta** *(il task history `2026-11-05_forma_isotropia_corona`, 5; decide Luca)*: `DI1-P` con `omega0 = 4`; `DI0` assoluto sotto `1e-12`, piu' il relativo `1e-6` dove l'escursione supera `1e-6`; `DI1` letto anche per le due copie. **Nell'attesa passo alla carta della forma, che non ne dipende.**
+
+## 2026-11-05 — LA CARTA DELLA FORMA, PRIMO GIRO: **`4/5`, `FX0` A `15` GRADI TROVA UN MIO ERRORE DI SEGNO** *(`doc/referti_l2/forma_solitone.txt`; `carta_forma.py` `e2fea201`)*
+
+- **I vertici stanno a `-arg(c6) / 6`**, non a `+arg(c6) / 6`: a `0` e `30` gradi non si vede, a `15` esce `-15.36` *(`44.64` modulo `60`)*. **Il test sintetico ha fatto il suo lavoro.**
+- ### **E un mio errore nel task history, 1.1:** avevo scritto che nella sonda la fase dei vertici «esce giusta», con `-15.36` per vertici a `15`. **L'avevo letto male.**
+- La correzione in un commit a se', poi il referto rifatto; **i numeri delle mappe vere non li leggo prima.**
