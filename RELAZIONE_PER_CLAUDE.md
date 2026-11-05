@@ -23782,3 +23782,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il co-rotante = oggi a `6.4e-9`** *(sotto il pavimento `1e-8`)*: **le stesse fasi `0`, `+-omega`, `+-2 omega`; il ramo a `3.141593` piatto in tutti e tre i riferimenti.** **La rotazione vista da fuori NON spiega il gap.**
 - ### **La risposta fuori dall'arco `7.9%`:** **la mia ipotesi per il ramo piatto e' caduta; il ramo piatto resta non spiegato.**
 - **In coda:** la decisione di Luca delle `21:01` *(la coppia con gli stati maturi di `TBS`, prima del FERMO)*, dopo le mappe leggere di `TBS`.
+
+## 2026-11-05 — `--vuoto` RIGIRATO DOPO LA CORREZIONE DEL VERDETTO: **`7/7`, GLI STESSI NUMERI** *(`statica_vuoto.txt`, `carta_statiche.py` `51b5160d`)*
+
+- **`VD-R-F` ora passa** *(lo scarto `4.892e-01`, invariato)*; **ogni altro numero uguale a `60de22ec`.**
+- ### **La coda, nell'ordine:** le mappe leggere di `TBS` *(Luca `19:24`)* -> **la coppia con gli stati maturi di `TBS`** *(Luca `21:01`)* -> **la rotazione nei triangoli e la rigidita' del vuoto, A-D** *(Luca `21:20`: il Goldstone, la circolazione, i vortici, `F1`)* -> **FERMO: Luca sceglie le corse della coppia.**

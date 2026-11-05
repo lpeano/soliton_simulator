@@ -4,7 +4,7 @@
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
-[TIMBRO] carta_statiche.py  sha1-BYTE 25d7585e  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 51b5160d  committato e pulito
 ==================================================================================================================================
 LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vuoto; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
 ==================================================================================================================================
@@ -26,7 +26,7 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vuoto; nessuna corsa; NN (25
 ### IL RIFERIMENTO (Luca 20:20): c(K) +0.951056516295199 +0.309016994374771i, c(K+1) +0.707106781186668 +0.707106781186411i (fase_F3.npz); la risposta ad AMP 1e-07 dal nodo 0 in tre riferimenti
   oggi: la base F3, la risposta per e^{-i omega}; corotante: eta = c(t)* phi (la base c(K) F3, il disturbo per c(K), la risposta per c(K+1)*); fisso: la base c(K) F3, nessun fattore
   DEVE PASSARE: VD-R0 la risposta di oggi rifatta col riferimento esplicito = quella di sopra, al bit                      PASSA   0.000e+00
-  DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il rifer ### FALLISCE   4.892e-01
+  DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il rifer PASSA   4.892e-01
   la risposta corotante contro quella di oggi: lo scarto relativo 6.424e-09 (il pavimento ad AMP 1e-07: 1.0e-08)
   oggi      a Gamma le 12 fasi per tick: -9.424778e-01 -4.712389e-01 -4.712389e-01 -1.936256e-09 -1.986928e-10 +1.173367e-17 +1.952620e-16 +1.986927e-10 +1.936257e-09 +4.712389e-01 +4.712389e-01 +9.424778e-01; i moduli da 0.999999999 a 1.000000012
   oggi      il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura -5.199415e-10; sqrt(|a| / Delta) 0.0000 nodi
@@ -39,4 +39,4 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vuoto; nessuna corsa; NN (25
   fisso     la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
   ### la lettura (Luca 20:20): se il gap a pi sparisce o si sposta nel corotante, era la rotazione vista da fuori; il gap e lambda si leggono solo dopo
 ==================================================================================================================================
-ESITO: 6/7 controlli passano; DEVE fallite: 1 ['DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il riferimento)']
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
