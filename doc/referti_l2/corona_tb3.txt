@@ -1,0 +1,34 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] carta_campo.py  sha1-BYTE db7bfd91  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 02ac81b1  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_corona.py  sha1-BYTE 7e308f16  committato e pulito
+==================================================================================================================================
+LA CORONA IN MOVIMENTO (Luca 2026-11-04 20:18-22:26): TB3 da E: (float32, ogni 100 tick); la finestra t 19250 .. 20750; RAGGI (22.0, 26.0, 30.0); TOLL 1e-06
+  ### la parte (c), la corrente e i vortici: FERMA (su E: la fase di psi non c'e'; diag_e_tb3.txt); se e quando salvarla lo decide Luca
+==================================================================================================================================
+  DEVE PASSARE: CO-I lo sha1 dei file di E: usati = l'indice (mappe_indice_TB3.txt)                                        PASSA   2 file: TB3_120000.npz, TB3_130000.npz
+  la finestra: 100 istantanee, tick 128400 .. 138300 (tempo 19260.0 .. 20745.0), il passo [100] tick
+  DEVE PASSARE: CO0 la massa di ogni istantanea della finestra (float32) = M del campione di TB3 allo stesso tick, entro 1 PASSA   il peggiore 2.37e-09
+  ### CO0-F (contro il campione di 100 tick dopo): la massa cambia in 100 tick fra 3.59e-07 e 8.66e-07 relativo
+  ### CO0-F NON SI METTE: la massa cambia in 100 tick meno di 1e-06 ovunque nella finestra, quindi non potrebbe fallire (dichiarato prima, task history 1.3)
+  ### (a) doc\referti_l2\campo_TB3\finestra_fitta.npz: 2407459 byte, 100 mappe (una ogni 100 tick = 15 unita' di tempo); dLambda rispetto a Lambda a t 0 (min 6.000000000, max 6.000000000)
+  ### la massa del file float16 contro i float32: il peggiore 2.84e-05 relativo (un numero, non un DEVE: il file e' per il video)
+----------------------------------------------------------------------------------------------------------------------------------
+### (b) IL FLUSSO Phi(r) = -(M_in(t_i+1) - M_in(t_i)) / 15, positivo verso l'esterno; il centro FISSO (la finestra mediata) (40.1209, 39.6958); il centro di ogni mappa si muove di 0.167, 0.067 (std degli indici)
+  il rumore della somma float32: |errore di M_in| <= M_in * 2^-24, cioe' fino a 0.059; quello di una differenza fino al doppio
+  il centro: ogni mappa
+    r   22: M_in medio 995248.0236; Phi medio +3.7110e-02 +- 7.4398e-03 (min +2.2983e-02, max +5.9866e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+    r   26: M_in medio 995248.6140; Phi medio +3.6976e-02 +- 7.0098e-03 (min +2.3238e-02, max +6.0905e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+    r   30: M_in medio 995249.0682; Phi medio +3.6894e-02 +- 6.8560e-03 (min +2.4069e-02, max +5.9761e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+  il centro: fisso
+    r   22: M_in medio 995248.0291; Phi medio +3.7100e-02 +- 7.3448e-03 (min +2.3341e-02, max +5.7394e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+    r   26: M_in medio 995248.6162; Phi medio +3.6976e-02 +- 6.9933e-03 (min +2.3391e-02, max +6.0573e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+    r   30: M_in medio 995249.0694; Phi medio +3.6892e-02 +- 6.8585e-03 (min +2.4126e-02, max +5.9745e-02); intervalli col flusso verso l'INTERNO oltre il rumore: 0 su 99
+  ### LA LETTURA, scritta prima (task history 1.3): «la materia rientra» se a 26 e a 30 ci sono intervalli col flusso verso l'interno oltre il rumore IN ENTRAMBE le scelte del centro
+  ### il caso: nessun intervallo col flusso verso l'interno oltre il rumore a 26 e 30
+  ### a 30 l'anello e' dentro la fascia del bordo (R_A 28)
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []

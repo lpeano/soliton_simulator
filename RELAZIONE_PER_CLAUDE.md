@@ -23628,3 +23628,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il confronto dell'esagonalita' NON si legge** a nessuna soglia *(sotto due deviazioni standard)*: **la misura preliminare `1.5%` contro `1.0%` non regge al protocollo.**
 - ### **LA CORONA:** in `TB3` **sei lobi COERENTI nel tempo e allineati ai vertici** *(`49%` a `20`-`22` nodi, la parte coerente `0.96`-`0.99` fino a `24`, `0.66`-`0.77` oltre)*; **in `TM1000` nessuna impronta coerente** *(`2`-`6%`, la parte coerente `0.06`-`0.29`)*.
 - **Accanto all'isotropia:** lo spessore del bordo, `4.8` nodi, sta dove la dispersione della banda `B` e' anisotropa fra lo `0.1%` e l'`1%`. **Le letture sono di Luca.**
+
+## 2026-11-05 — LA CORONA IN MOVIMENTO: **`2/2`** *(`doc/referti_l2/corona_tb3.txt`; `carta_corona.py` `7e308f16`)*
+
+- **(a) la finestra fitta** per il video senza sfumature: `doc/referti_l2/campo_TB3/finestra_fitta.npz`, **`2407459` byte, `100` mappe**, una ogni `15` unita' da `19260` a `20745`.
+- ### **(b) il flusso netto attraverso `22`, `26`, `30` nodi e' SEMPRE verso l'esterno** *(`99` intervalli su `99`, entrambe le scelte del centro, `+0.023`-`+0.061` per unita' di tempo)*: **nessun rientro della massa netta.** ### **Il limite:** un rientro lungo alcuni archi compensato altrove non si vede; per i filamenti singoli serve il flusso per settore o la corrente *(la parte (c), ferma: niente fase su `E:`)*.
+- `CO0` `2.37e-9`; **`CO0-F` non si mette** *(la massa cambia in `100` tick meno di `1e-6`: non potrebbe fallire, dichiarato prima)*.
