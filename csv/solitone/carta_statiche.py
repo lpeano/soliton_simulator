@@ -107,6 +107,7 @@ def vuoto():
     import _triangoli_bassa_energia as BE
     import _vuoto_vivo_B as V
     from solitone import accensione as AC
+    from solitone import bordo as BO
     from solitone import corsa_accensione as CA
     from solitone import toro as TO
     _sol, _v, s = V.CORSE[CA.NOME]
@@ -130,25 +131,41 @@ def vuoto():
     salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
     rot = np.exp(-1j * omega)
 
-    def risposta(nodo, amp):
+    with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+        tab_c = d["c"].copy()
+    cK, cK1 = BO.c_di(K, tab_c, K, omega), BO.c_di(K + 1, tab_c, K, omega)
+    # ### Luca 20:20, il riferimento: (la base, il fattore del disturbo prima del tick, il fattore della risposta dopo il tick)
+    # ### "oggi": la base F3, il disturbo com'e', la risposta per e^{-i omega} (il riferimento che gira, ATTORNO A F3: la carta di 799ab1cc)
+    # ### "corotante": eta = c(t)* phi; la base c(K) F3, il disturbo per c(K), la risposta per c(K+1)* (Luca: moltiplicare per c(t)* prima di linearizzare)
+    # ### "fisso": la base c(K) F3, il disturbo com'e', la risposta senza fattore (il riferimento di laboratorio)
+    RIF = {"oggi": (1.0 + 0j, 1.0 + 0j, rot), "corotante": (cK, cK, np.conj(cK1)), "fisso": (cK, 1.0 + 0j, 1.0 + 0j)}
+    fuori = []
+
+    def risposta(nodo, amp, rif="oggi"):
         """`(12, n, 12)`: per ogni grado di liberta' reale `c` del nodo, la risposta reale per nodo (Re, Im delle 6 estremita')."""
+        f_base, f_dist, f_dopo = RIF[rif]
         R = np.empty((12, n, 12))
+        del fuori[:]
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             for k_, v in salvato.items():
                 z["st"][k_][...] = v
             z["st"]["psi_h"][...] = 0.0
-            z["st"]["phi_h"][...] = F3
+            z["st"]["phi_h"][...] = f_base * F3
             AC.tick(z, K + 1, K)
             base = z["st"]["phi_h"].copy()
             for c in range(12):
                 for k_, v in salvato.items():
                     z["st"][k_][...] = v
                 z["st"]["psi_h"][...] = 0.0
-                ph = F3.copy()
-                ph[dove[nodo, c // 2]] += amp * (1.0 if c % 2 == 0 else 1j)
+                ph = f_base * F3
+                e_ = dove[nodo, c // 2]
+                ph[e_] += f_dist * amp * (1.0 if c % 2 == 0 else 1j)
                 z["st"]["phi_h"][...] = ph
                 AC.tick(z, K + 1, K)
-                dl = (z["st"]["phi_h"] - base) * rot / amp
+                dl = (z["st"]["phi_h"] - base) * f_dopo / amp
+                arco = np.zeros(dl.shape[0], dtype=bool)
+                arco[[e_, e_ ^ 1]] = True          # ### l'estremita' disturbata e l'altra dello stesso arco (2a, 2a + 1)
+                fuori.append((float(np.max(np.abs(dl[~arco]))), float(np.max(np.abs(dl[arco])))))
                 per = dl[dove]                       # (n, 6) complesso
                 R[c] = np.stack([per.real, per.imag], axis=2).reshape(n, 12)
         for k_, v in salvato.items():
@@ -224,6 +241,49 @@ def vuoto():
         print("  ### non so a quale frequenza il solitone eccita il vuoto (il task history 1.1): il lambda statico puo' non essere quello giusto")
     mods = [abs(x) for x in ev]
     print("  i moduli a Gamma da %.9f a %.9f (1: il vuoto neutro)" % (min(mods), max(mods)))
+    # ### IL RIFERIMENTO (Luca 2026-11-05 20:20, la domanda del guardiano): la stessa misura in tre riferimenti, a confronto; il gap e lambda si leggono solo dopo
+    print("-" * 130)
+    print("### IL RIFERIMENTO (Luca 20:20): c(K) %+.15f %+.15fi, c(K+1) %+.15f %+.15fi (fase_F3.npz); la risposta ad AMP %g dal nodo 0 in tre riferimenti" % (cK.real, cK.imag, cK1.real, cK1.imag, AMP))
+    print("  oggi: la base F3, la risposta per e^{-i omega}; corotante: eta = c(t)* phi (la base c(K) F3, il disturbo per c(K), la risposta per c(K+1)*); fisso: la base c(K) F3, nessun fattore")
+    Rf, fu = {}, {}
+    for rif in ("oggi", "corotante", "fisso"):
+        Rf[rif] = risposta(0, AMP, rif)
+        fu[rif] = list(fuori)
+    e_r0 = float(np.max(np.abs(Rf["oggi"] - R1)))
+    esito("DEVE PASSARE: VD-R0 la risposta di oggi rifatta col riferimento esplicito = quella di sopra, al bit", e_r0 == 0.0, "%.3e" % e_r0)
+    e_rf = float(np.max(np.abs(Rf["fisso"] - R1)) / np.max(np.abs(R1)))
+    esito("DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro %g relativo (il confronto vede il riferimento)" % TOLL_L, e_rf <= TOLL_L, "%.3e" % e_rf)
+    print("  la risposta corotante contro quella di oggi: lo scarto relativo %.3e (il pavimento ad AMP %g: %.1e)"
+          % (float(np.max(np.abs(Rf["corotante"] - R1)) / np.max(np.abs(R1))), AMP, PAV_T / AMP))
+    for rif in ("oggi", "corotante", "fisso"):
+        Rr = Rf[rif]
+        nz_r = np.flatnonzero(np.any(np.abs(Rr) > 0.0, axis=(0, 2)))
+        rs_r = ((nz_r // L + L // 2) % L - L // 2)[:, None] * A1 + ((nz_r % L + L // 2) % L - L // 2)[:, None] * A2
+        Rs_r = Rr[:, nz_r, :]
+
+        def Tr(k, Rs_r=Rs_r, rs_r=rs_r):
+            return np.einsum("cra,r->ac", Rs_r, np.exp(-1j * (rs_r @ k)))
+        evr = np.linalg.eigvals(Tr(np.zeros(2)))
+        orr = np.argsort(np.angle(evr))
+        print("  %-9s a Gamma le 12 fasi per tick: %s; i moduli da %.9f a %.9f" % (rif, " ".join("%+.6e" % np.angle(evr[i]) for i in orr), min(abs(evr)), max(abs(evr))))
+        nzr = [i for i in range(12) if abs(np.angle(evr[i])) > GAP_ZERO]
+        if nzr:
+            ig = min(nzr, key=lambda i: abs(np.angle(evr[i])))
+            Dr = abs(np.angle(evr[ig])) / s
+            prev = evr[ig]
+            rr = []
+            for kap in KAPPA:
+                e2 = np.linalg.eigvals(Tr(np.array([kap, 0.0])))
+                prev = e2[int(np.argmin(np.abs(e2 - prev)))]
+                rr.append(abs(np.angle(prev)) / s)
+            ar = float(np.polyfit(np.array(KAPPA) ** 2, np.array(rr) - Dr, 1)[0])
+            print("  %-9s il ramo con la fase piu' piccola sopra %g: Delta %.6e per unita' di tempo; lungo A1 %s; la curvatura %+.6e; sqrt(|a| / Delta) %.4f nodi"
+                  % (rif, GAP_ZERO, Dr, " ".join("%.6e" % x for x in rr), ar, math.sqrt(abs(ar) / Dr)))
+        else:
+            print("  %-9s nessuna fase sopra %g a Gamma: il gap non si legge" % (rif, GAP_ZERO))
+        print("  %-9s la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo %.3e, contro dentro %.3e (il rapporto peggiore sui 12 gradi %.3e)"
+              % (rif, max(f for f, _ in fu[rif]), max(d_ for _, d_ in fu[rif]), max(f / d_ for f, d_ in fu[rif])))
+    print("  ### la lettura (Luca 20:20): se il gap a pi sparisce o si sposta nel corotante, era la rotazione vista da fuori; il gap e lambda si leggono solo dopo")
     cm.__exit__(None, None, None)
 
 
