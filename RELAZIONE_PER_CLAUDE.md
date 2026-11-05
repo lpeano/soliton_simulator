@@ -23695,3 +23695,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **Un fatto dal codice: «`TM3` col bordo» e' gia' `TB3`** *(la partenza di `TF3`, `F3`, il bordo, le mappe: la stessa configurazione, con le mappe gia' su `E:` e lette)*: **rifarla aggiungerebbe solo gli stati completi.**
 - **La proposta:** **`TM3` SENZA bordo** *(come scritto, `~3.8` ore, al bit con `TF3` / `TF3C`)*: **il punto `g = 0` di `TBG` e il confronto chiuso / aperto sullo stesso `F3`, che oggi manca**; **i due poli su `TB3` subito dalle mappe leggere** *(nessuna corsa)*.
+
+## 2026-11-05 — `D5`: COL BORDO O SENZA *(`doc/TASK_HISTORY/2026-11-05_D5_semi_e_caos.md`)* -- FERMO, DECIDE LUCA
+
+- **Il bordo non cambia la crescita del caos nella sua finestra** *(`TBS` rompe la simmetria negli stessi tempi di `TS`)*, **ma toglie la corsa** *(`TB3` ferma)*: **la direzione scelta dal rumore si misura solo senza bordo.**
+- **La proposta:** `D5` **senza bordo, su `F3`, con la partenza di `TF3`** *(il riferimento `TF3` + `TF3C`)*; `4` semi a `1e-10` **in comune col pilota di `TL120`**, `1` a `1e-8`, `1` a `1e-6`; `~18` ore se separati.
