@@ -18,3 +18,8 @@
 1. **La via: la norma `N`** *(e la carta statica prima)*?
 2. **Le `N`** *(`2.5e5` .. `4e6`)* e **`R_A` scalato o fisso**.
 3. **Le corse** *(quante, con quale `L`)*, dopo la carta statica.
+
+## 4. LA DECISIONE DI LUCA *(`2026-11-05` `15:28`; non mia)*
+- **Si' alla carta STATICA:** la dimensione del solitone della scena a `N` da `2.5e5` a `4e6`, **nessuna evoluzione**.
+- **Le corse per dimensione: dopo la carta, decide Luca.**
+- **Nella coda:** fra una corsa e l'altra, dopo il pilota di `TL120`, insieme alla carta statica della dispersione del vuoto *(la voce `4`)*.

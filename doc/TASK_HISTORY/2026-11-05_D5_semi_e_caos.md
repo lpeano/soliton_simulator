@@ -18,3 +18,10 @@
 1. **Senza bordo, su `F3`, con la partenza di `TF3`** *(invece di `F0` e `TP1000`)*?
 2. **I semi e le ampiezze** *(`4` a `1e-10`, `1` a `1e-8`, `1` a `1e-6`)*, e **la comunione col pilota di `TL120`**.
 3. **Le finestre** *(la crescita fra `1e-8` e `1e-2`; la direzione al primo blocco sopra `5` per `1000`)*.
+
+## 4. LA DECISIONE DI LUCA *(`2026-11-05` `15:28`; non mia)*
+- **Senza bordo, `F3`, la partenza di `TF3`, il riferimento `TF3 + TF3C`.** **I `4` semi a `1e-10` sono il pilota di `TL120`** *(una volta sola)*.
+- **Piu' `1` seme a `1e-8` e `1` a `1e-6`**, con **la stessa partenza definita e lo stesso arresto del pilota** *(`2000` dopo la partenza, `partenza.py`)*.
+- **La crescita del caos sulla finestra dichiarata** *(la distanza da `1e-8` a `1e-2`)*.
+- ### **Il `tau` del caos** *(Luca, per la coppia)*: **`35`** *(`TS` e `TBS`)*, **con `D5` a confermarlo**; ### **il `25` di `D0R` era un'altra grandezza** *(Luca)*: **scritto qui come lettura di Luca.** *(Quale grandezza, e' una mia nota: in `D0R` si separano `TP1000` e la sua immagine ruotata, non due semi della stessa partenza.)*
+- **Nella coda:** dopo `TM3` *(la voce `7`)*.

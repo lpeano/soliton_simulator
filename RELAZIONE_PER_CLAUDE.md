@@ -23714,3 +23714,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-05 — IL RAMO DELLA PARTENZA: **`3/3`** *(`doc/referti_l2/partenza_prova.txt`; `partenza.py` `7e744e24`)*
 
 - **Su `TF3` la partenza definita da Luca cade in `16000`** *(l'arresto sarebbe a `18000`)*; **le velocita' per blocco = quelle delle tabelle al bit** *(`30` su `30`)*; su `TB3` nessuna partenza. **La patch della corsa a `TBS` finita.**
+
+## 2026-11-05 — LE DECISIONI DI LUCA DELLE `15:28` SUI CINQUE FERMI *(`TBG`, `TM3`, `D5`, la dimensione, la coppia)*; LA CODA NUOVA
+
+- **`TBG`:** la proposta, piu' gli stati completi; **l'avvertenza nel referto** *(la forma puo' non distinguersi dal rumore; la lettura principale e' la densita' del mare alla partenza)*. **`TM3` senza bordo**, mappe e stati; **i due poli su `TB3`**. **`D5`:** il pilota e' `1e-10`; piu' `1e-8` e `1e-6` con la partenza e l'arresto del pilota. **La dimensione:** la carta statica, poi decide Luca. **La coppia:** `L ~160`, `R_A` per configurazione, `C0` su `L 160` prima; `70`, `50`, `35` lungo `A1`; le fasi `0` e `pi`; ### **i nomi `CL`, `CLc`, `CV` abbandonati: `C35-0`, `C35-pi`, `S160`**; il passo statico da `24` a `80` ogni `2`; **`tau = 35`** *(`TS`, `TBS`; `D5` a confermarlo)* **e il `25` di `D0R` era un'altra grandezza** *(Luca)*; si' alla dispersione del vuoto.
+- **La coda** *(la mappa, sezione `7`)*: `TBS` *(in volo)*, il pilota, **le due carte statiche**, `TBG`, `TM3` senza bordo, `D5` a `1e-8` e `1e-6`, la coppia, il secondo stadio di `TL120` se fattibile, il resto.
+- ### **Una premessa da rivedere per `TM3`:** il `TM3` scritto aveva gli stati a `2000`, `6000`, `10000`, `20000` e due corse *(`TM3`, `TM3C`)*; la decisione chiede ogni `1500` piu' `t 0`: **`STATI` cambia** *(il controllo al bit con `TF3` / `TF3C` resta)*.

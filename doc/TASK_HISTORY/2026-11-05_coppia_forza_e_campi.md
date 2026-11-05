@@ -103,3 +103,15 @@
 7. **Le soglie proposte dei DEVE** *(`A0`, `C0-F`, il criterio `2` di E)* e **il `tau` della crescita caotica** *(`25` o `35`)*.
 8. **La carta statica della dispersione del vuoto** *(per il `lambda` di E)*.
 9. **Il costo e lo spazio** *(dal primo pezzo, dopo la decisione)*.
+
+## 6. LA DECISIONE DI LUCA SULLE NOVE DOMANDE *(`2026-11-05` `15:28`; non mia)*
+1. **`L ~160`; `R_A` tale che ogni solitone stia ad almeno `30` nodi dalla fascia, UNO PER CONFIGURAZIONE, dichiarato; la tabella `c(t)` riverificata su `L 160` (`C0`) prima.**
+2. **Le distanze `70`, `50`, `35` lungo `A1`;** il controllo a `30` gradi solo se serve, dopo.
+3. **Le fasi `0` e `pi`.** ### **I nomi `CL`, `CLc`, `CV` si abbandonano** *(non sono mai stati definiti)*: **i nomi nuovi espliciti `C<d>-0` e `C<d>-pi`** *(`C35-0`, `C35-pi`, ...)*, **e `S160` per il singolo.**
+4. **Il primo passo: `C35-0`, `C35-pi` e `S160`** *(tre corse)*.
+5. **Il passo statico: da `24` a `80` ogni `2` nodi** *(centri sui nodi, niente mezzi nodi)*.
+6. **Il riferimento singolo `S160`:** `L 160`, lo stesso bordo, **nella posizione di uno dei due solitoni della coppia**.
+7. **Le soglie dei DEVE come proposte;** ### **`tau` della crescita caotica `35`** *(`TS` e `TBS`)*, **con `D5` a confermarlo; il `25` di `D0R` era un'altra grandezza** *(Luca: scritto)*.
+8. **Si' alla carta statica della dispersione del vuoto attorno a `F3`** *(per il `lambda` di E)*.
+9. **Il costo e lo spazio dopo il primo pezzo, come sempre.**
+- **Nella coda:** dopo `D5` a `1e-8` e `1e-6` *(la voce `8`)*.

@@ -33,3 +33,8 @@
 2. **Le soglie della forma** *(`100` e `300` le principali)*.
 3. **Gli stati completi** *(si' o no, a quali tempi)*.
 4. **Il costo** *(`~16.5` ore, `~272` MB su `E:`)*.
+
+## 4. LA DECISIONE DI LUCA *(`2026-11-05` `15:28`; non mia)*
+- **La proposta cosi' com'e':** `g_max` `0.003`, `0.001`, `0.0003`; le soglie della forma `100` e `300`; le mappe come `TB3`; ### **PIU' gli stati completi ogni `1500` unita' e a `t 0`** *(come `TBS`)*.
+- ### **L'avvertenza va nel referto:** **la parte sulla forma puo' non distinguersi dal rumore; la parte sulla DENSITA' DEL MARE ALLA PARTENZA e' la lettura principale.**
+- **Nella coda:** dopo il pilota di `TL120` e le due carte statiche *(la voce `5` della sezione `7` della mappa)*.
