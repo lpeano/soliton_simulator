@@ -252,7 +252,7 @@ def vuoto():
     e_r0 = float(np.max(np.abs(Rf["oggi"] - R1)))
     esito("DEVE PASSARE: VD-R0 la risposta di oggi rifatta col riferimento esplicito = quella di sopra, al bit", e_r0 == 0.0, "%.3e" % e_r0)
     e_rf = float(np.max(np.abs(Rf["fisso"] - R1)) / np.max(np.abs(R1)))
-    esito("DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro %g relativo (il confronto vede il riferimento)" % TOLL_L, e_rf <= TOLL_L, "%.3e" % e_rf)
+    esito("DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro %g relativo (il confronto vede il riferimento)" % TOLL_L, not e_rf <= TOLL_L, "%.3e" % e_rf)   # ### un DEVE FALLIRE: la condizione NEGATA (60de22ec: il mio errore, il verdetto rovesciato)
     print("  la risposta corotante contro quella di oggi: lo scarto relativo %.3e (il pavimento ad AMP %g: %.1e)"
           % (float(np.max(np.abs(Rf["corotante"] - R1)) / np.max(np.abs(R1))), AMP, PAV_T / AMP))
     for rif in ("oggi", "corotante", "fisso"):
