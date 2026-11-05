@@ -23684,3 +23684,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il costo:** una corsa senza bordo su `L 81` **`3.01` ore** fino a `30000` *(`TS`, `541` s per pezzo)*; su `L 120` **`2.19` volte**: `8.80` ore fino a `40000` *(la partenza di `TF3`, `~16000`, cadrebbe a `~35117` se conta la densita')*.
 - ### **Lo sparpaglio dei semi NON e' misurato:** le tre partenze note sono partenze DIVERSE. **Se fosse quello** *(`0.700` in `ln t`)*, **servirebbero `26` semi per `L` a `2` sigma: centinaia di ore.**
 - **La proposta:** **un pilota di `4` semi su `L 81`** *(la partenza di `TF3` piu' il rumore `1e-10`, `~12` ore)* per misurare lo sparpaglio; **la partenza definita** *(il primo blocco sopra `5` per `1000`)*; **un arresto alla partenza** *(un ramo nuovo)*; **un'alternativa piu' economica con `TBG`** *(la densita' del mare fissata dal bordo parziale)*. **Quattro domande a Luca.**
+
+## 2026-11-05 — `TBG`: LA PROPOSTA DEI VALORI DI `g` *(`doc/TASK_HISTORY/2026-11-05_TBG_bordo_parziale.md`)* -- FERMO, DECIDE LUCA
+
+- **`g_max = 0.003`, `0.001`, `0.0003`:** la materia che torna a ogni passaggio `42%`, `75%`, `92%` *(`bordo_riflessione.txt`)*, tre punti fra il toro aperto e quello chiuso. **Tre corse `~16.5` ore** *(`5.51` l'una, come `TB3`)*, `~272` MB su `E:`.
+- **Le soglie della forma:** `100` e `300` *(sopra il mare sia in `TB3` sia sul toro chiuso)*. **Gli stati completi:** il mandato non li nomina, **la scelta e' di Luca**.
+- ### **Una nota per (g1):** **la differenza da risolvere e' piccola** -- a `TB3` l'esagonalita' e' `0.46%`-`1.33%` con `+-0.2%` di mappa in mappa, e il confronto con il toro chiuso non si leggeva a nessuna soglia.
