@@ -23798,3 +23798,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Gli stati a `t 15000`, `30000`** *(e `t 0`)*, **il vuoto disturbato sommato una volta, le tre parti di `E_int`, la distanza sotto `1e-6 E[1]`; su `L 162` il singolo di `L 81` nel reticolo piu' grande; il DEVE di Luca su `E[1]` entro `1e-9`.**
 - **Le premesse dal codice** *(10.1)*: il libro legge solo `psi_h` e `phi_h`; `F3` e' uguale su ogni estremita' della stessa etichetta *(la traslazione lascia `phi_0` invariato)*; **gli archi che attraversano il rombo di `L 81` sono l'incognita del DEVE** *(sul lato la materia sotto `2.1e-7 M0`, la fascia da `28`)*; `e_K` quello della corsa; **la fase `pi` cambia segno solo a `psi_2`**; due DEVE miei *(`CM-S` gli sha dello stato, `CM-E` l'energia del campione)*.
+
+## 2026-11-05 — LA COPPIA CON GLI STATI MATURI DI `TBS`: **`10/10`; FINO A `~60` NODI INVECE DI `32`, QUASI TUTTA PER LA MATERIA; IL VUOTO DISTURBATO `~1.5%`, ATTRATTIVO, UGUALE NELLE DUE FASI** *(`statica_coppia_matura.txt`; il task history `2026-11-05_carte_statiche`, sez. `11`)*
+
+- **Il DEVE di Luca `CM-1`:** `2.2e-16`, **`9.119e-10`** *(a `15000`: `0.91` della soglia `1e-9`)*, `2.270e-10`; `CM-S`, `CM-E` al bit, `CM-V`, `EI-T`.
+- ### **La distanza sotto `1e-6 E[1]`:** fase `0` **`32`, `62`, `58`**; fase `pi` **`32`, `62`, `60`** *(`t 0`, `15000`, `30000`)*. **`E_int(24)` `17`-`21` volte quella di `t 0`.**
+- ### **Le tre parti:** **la materia domina; il vuoto disturbato e' `-1.85e+04` a `24` (`1.5%`), cresce verso `0` allontanando (ATTRATTIVO fino a `~44`), e non dipende dalla fase**; il segno di `E_int` oscilla con `d` *(maturo)*.
+- **La lettura e' una proposta:** la sovrapposizione delle corone cresciute; **la parte del vuoto e' fra i disturbi, non una propagazione** *(il ramo piatto)*. **Le corse della coppia: FERMO, decide Luca** *(dopo il mandato delle `21:20`, nella coda)*.
