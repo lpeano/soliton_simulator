@@ -58,3 +58,11 @@
 
 ## 4. LA DOMANDA A LUCA *(un riscontro: committata qui prima di farla)*
 **I criteri `FX0`, `FX1`, `FX1-F` della carta della forma, coi numeri della sonda:** ① `FX0` tra `3` e `5%`, ma l'esagono regolare vale `2.91%` nel continuo e `2.88%`-`3.18%` sul reticolo; ② `FX1` sotto `0.5%`, il disco discreto vale `0.46%`; ③ `FX1-F` sull'ovalita' non fallirebbe *(`0.14%`-`0.19%`)*, il centro sbagliato si vede in `|c1| / c0` *(`8.6%`)*. **La mia proposta** sta in 1.1. **Il criterio di chiusura:** la risposta di Luca, scritta qui come decisione sua.
+
+### 4.1 LA DECISIONE DI LUCA *(`2026-11-05`; non mia)*: **LA PROPOSTA DI 1.1, COSI' COM'E'**
+- **`FX0`:** l'esagonalita' entro il `20%` del valore del continuo *(`2.3%`-`3.5%`)* e i vertici entro `5` gradi, **per le tre orientazioni** *(`0`, `15`, `30` gradi)*.
+- **`FX1`:** il disco di raggio `18`, l'esagonalita' sotto l'`1%`.
+- **`FX1-F` (DEVE FALLIRE):** lo stesso disco col centro sbagliato di `3` nodi, `|c1| / c0` sotto l'`1%` *(atteso `8.6%`)*; **`|c1| / c0` stampato per ogni mappa vera.**
+- **La parte (c) della corona resta ferma:** su `E:` non c'e' la fase; se e quando salvare stati con la fase in una corsa futura lo decide Luca.
+- **Luca la registra come l'errore `n.106` del guardiano, nel mandato.** **L'ordine:** la carta dell'isotropia, la carta della forma, la corona (a) e (b), poi `TBS`.
+- *(Prima della decisione la mia domanda col menu era stata rifiutata: l'ho trattata come un'attesa, e mi sono messo sulla carta dell'isotropia, che non ne dipende.)*

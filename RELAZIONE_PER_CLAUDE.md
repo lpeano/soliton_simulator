@@ -23602,3 +23602,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### ⚠ **(b) e `CO0` dai `float32` di `E:`, non dal file `float16`:** l'arrotondamento `float16` sul cuore somma un errore di decine di unita' sulla massa, sopra il flusso fra due mappe *(`~2.5` unita' in `15`)*. Il file `float16` e' per il video; il suo errore si stampa come numero.
 - **La voce `40` della mappa** *(la forma del solitone)*: **non c'era** -- il registro diceva «le voci `32`-`40`», ma la sezione `4` finiva alla `39`. **La coda** *(la mappa, sezione `7`)*: `1` `BM` **fatto** *(`7/7`)*, `1-bis` la forma *(attende Luca)*, `1-ter` l'isotropia, `1-quater` la corona *((c) ferma)*, `2` `TBS`, `3` `TL120`, ### **`4` `TBG`** *(FERMO sui valori di `g`)*, `5` `TM3` *(FERMO su bordo o no)*, `6` `D5`, `7` la coppia e il triangolo, `8` `cs`; **in attesa anche la scansione in dimensione.**
 - **I dischi:** `C:` `24.60` GB, `E:` `228.05` GB.
+
+## 2026-11-05 — LA DECISIONE DI LUCA SUI CRITERI `FX`: **LA PROPOSTA, COSI' COM'E'** *(il task history `2026-11-05_forma_isotropia_corona`, 4.1)*
+
+- `FX0` entro il `20%` del continuo *(`2.3%`-`3.5%`)* coi vertici entro `5` gradi a `0`, `15`, `30`; `FX1` sotto l'`1%`; `FX1-F` su `|c1| / c0` sotto l'`1%`, che deve fallire *(atteso `8.6%`)*; `|c1| / c0` per ogni mappa vera.
+- **Luca registra i criteri di prima come l'errore `n.106` del guardiano.** La parte (c) della corona resta ferma. **L'ordine:** l'isotropia, la forma, la corona (a) e (b), `TBS`.
