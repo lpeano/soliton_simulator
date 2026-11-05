@@ -23621,3 +23621,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I vertici stanno a `-arg(c6) / 6`**, non a `+arg(c6) / 6`: a `0` e `30` gradi non si vede, a `15` esce `-15.36` *(`44.64` modulo `60`)*. **Il test sintetico ha fatto il suo lavoro.**
 - ### **E un mio errore nel task history, 1.1:** avevo scritto che nella sonda la fase dei vertici «esce giusta», con `-15.36` per vertici a `15`. **L'avevo letto male.**
 - La correzione in un commit a se', poi il referto rifatto; **i numeri delle mappe vere non li leggo prima.**
+
+## 2026-11-05 — LA CARTA DELLA FORMA: **`5/5`** *(`doc/referti_l2/forma_solitone.txt`; `carta_forma.py` `50c3ba88`)*
+
+- **`TB3`:** l'esagonalita' `1.33%` a `rho 1`, `0.67%` a `100`, `0.46%` a `300`, **i vertici stabili lungo `A1`**; lo spessore del bordo **`4.79 +- 0.14` nodi**; `|c1| / c0` sotto `0.91%`. **`TM1000`** *(`F0`, chiuso)*: `0.43%`-`1.64%`, **i vertici senza direzione** *(`+- 12`-`16` gradi)*, `rho 1` sotto il mare.
+- ### **Il confronto dell'esagonalita' NON si legge** a nessuna soglia *(sotto due deviazioni standard)*: **la misura preliminare `1.5%` contro `1.0%` non regge al protocollo.**
+- ### **LA CORONA:** in `TB3` **sei lobi COERENTI nel tempo e allineati ai vertici** *(`49%` a `20`-`22` nodi, la parte coerente `0.96`-`0.99` fino a `24`, `0.66`-`0.77` oltre)*; **in `TM1000` nessuna impronta coerente** *(`2`-`6%`, la parte coerente `0.06`-`0.29`)*.
+- **Accanto all'isotropia:** lo spessore del bordo, `4.8` nodi, sta dove la dispersione della banda `B` e' anisotropa fra lo `0.1%` e l'`1%`. **Le letture sono di Luca.**
