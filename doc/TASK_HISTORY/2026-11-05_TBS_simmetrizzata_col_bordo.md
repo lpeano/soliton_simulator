@@ -40,3 +40,12 @@
 ## 5. `TBS` FERMA PRIMA DI PARTIRE *(`2026-11-05`)*: **ATTENDE LA DECISIONE DI LUCA SU MAPPE E STATI**
 - **Pronta:** la sonda passa *(4)*; `D6` a `a75b7343`, la cassetta `105/105`; **i dischi `C:` `24.36` GB, `E:` `228.03` GB.**
 - ### **NON PARTE:** Luca mi ha girato il rapporto del guardiano, che **consiglia** di salvare in `TBS` le mappe *(come `TB3`, `~90` MB)* e gli stati completi *(con la fase, ogni `1500` unita' piu' `t 0`)*, **con una decisione scritta come PROPOSTA** *(«se sei d'accordo, manda»)*. **Non la tratto come una decisione di Luca:** partire ora senza mappe ne' stati perderebbe l'occasione, partire con renderebbe mia una scelta sua. **Il criterio di chiusura:** Luca manda la decisione, o dice di partire come scritto.
+
+## 6. LA DECISIONE DI LUCA *(`2026-11-05` `13:16`, confermata alle `13:27`; non mia)*: **`TBS` SALVA LE MAPPE E GLI STATI COMPLETI**
+- **`TBS` non era partita** *(5)*: **vale la decisione delle `13:16`** *(quella delle `13:27` -- fermarla e ripartire, coi pezzi vecchi come confronto -- valeva solo se fosse partita)*.
+- **Le mappe come `TB3`** *(`rho` e `Lambda`, ogni `100` tick, su `E:`, con l'indice nel repo)*.
+- **Gli stati completi** *(psi e phi, tutte le componenti, complessi: la fase compresa)* **ogni `1500` unita' di tempo, piu' lo stato a `t 0`**: `0, 1500, ..., 30000`, **`21` stati**, su `E:`, con l'indice e lo sha nel repo.
+- **Lo spazio su `C:` ed `E:` nel commit della stima**, prima di partire.
+- ### **DEVE** *(nella carta del referto)*: **lo stato salvato a un tempo, ricaricato e confrontato col campione della corsa allo stesso tick, da' `M` e il centro AL BIT.**
+- **Il resto invariato** *(la sonda del bordo sulla simmetria, gia' passata: 4)*.
+- ### **UNA PREMESSA DAL CODICE:** `corsa_accensione` salva gli stati **dentro il ciclo, dopo un tick** *(e dopo l'assorbimento del bordo: lo stato del campione)*: ### **lo stato a `t 0` non lo salverebbe mai.** **Serve un ramo nel blocco del campione `0`**, che salva nello stesso modo *(lo stesso file, `%s_stato_%06d.npz`, le stesse chiavi, lo sha nella riga)*: **inerte per le corse senza `0` in `STATI`** *(oggi nessuna)*.

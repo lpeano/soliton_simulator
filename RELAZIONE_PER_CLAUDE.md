@@ -23661,3 +23661,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-05 — `TBS` FERMA PRIMA DI PARTIRE: **ATTENDE LUCA SU MAPPE E STATI**; LA CASSETTA `105/105` *(D6 a `a75b7343`)*
 
 - **Tutto pronto** *(la sonda, `D6`, la cassetta; `C:` `24.36` GB, `E:` `228.03` GB)*, ### **ma la corsa NON parte:** il rapporto del guardiano girato da Luca **consiglia** di salvare mappe e stati completi, con la decisione scritta come proposta. **Aspetto la decisione di Luca** *(o l'ordine di partire come scritto)*. **Nell'attesa scrivo il task history della coppia** *(il mandato delle `12:49`, solo scrittura)*.
+
+## 2026-11-05 — LA DECISIONE DI LUCA SU `TBS` *(`13:16`, `13:27`)*: **MAPPE E STATI COMPLETI** *(il task history `2026-11-05_TBS_simmetrizzata_col_bordo`, 6)*
+
+- **`TBS` non era partita:** vale la decisione delle `13:16`. **Le mappe come `TB3`; gli stati completi ogni `1500` unita' piu' `t 0`** *(`21`, con la fase)*; **un DEVE: lo stato ricaricato = il campione allo stesso tick, `M` e il centro al bit.**
+- **Un ramo nuovo nel codice:** la corsa salvava gli stati solo dopo un tick, mai a `t 0`; il ramo nel blocco del campione `0` e' **inerte per le altre corse** *(nessuna ha `0` in `STATI`)*.
