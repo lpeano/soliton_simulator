@@ -67,7 +67,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E le carte della forma, dell'isotropia della dispersione e della corona in movimento** *(`carta_forma`, `carta_isotropia`, `carta_corona`)*.
 # ### **E i criteri di Luca della carta dell'isotropia** *(`carta_isotropia`: `DI1-P` a `omega0 = 4`, `DI0` assoluto, `DI1` per le due copie)*.
 # ### **E la corsa `TBS`** *(`corsa_accensione`: la partenza di `TS` col bordo di `TB3`)*.
-LIBRERIA_RIFERITA = "a75b7343"
+# ### **E le mappe e gli stati di `TBS`** *(`corsa_accensione`: lo stato a `t 0` nel blocco del campione `0`)*.
+LIBRERIA_RIFERITA = "28541f3f"
 
 
 def vecchi():
