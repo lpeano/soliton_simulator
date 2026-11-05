@@ -6,9 +6,9 @@ r"""**L'ISOTROPIA DELLA DISPERSIONE: A QUALE LUNGHEZZA D'ONDA IL RETICOLO SI VED
 `-arg`)*, `omega = fase per tick / s`; su cerchi di `|k|` *(`N_K` raggi in scala logaritmica da `K_MIN` a `k_M = 2 pi / sqrt 3`, `N_TH` direzioni)*: l'anisotropia `(max - min) / |media|` di `omega` e di
 `|v_g|` *(differenze centrali in `k`)*, la componente a sei lobi, la lunghezza d'onda `2 pi / |k|` in nodi.
 ### **I DEVE:** `DI-G` *(mio)* `A(k)` per `k` qualsiasi = `fft2` di `DV.matrice` sui `k` della griglia entro `TOLL_A`; `DI-T` *(mio)* la risposta a un impulso in un altro nodo, riportata indietro, = quella
-dal nodo `0` entro `TOLL_A` *(il tick congelato invariante per traslazione)*; `DI0` la simmetria `D6`: `omega(theta + 60) = omega(theta)` su ogni cerchio con l'escursione sopra `ESC_MIN`, entro `TOLL_D6`
-dell'escursione; `DI1` la pendenza di `ln` anisotropia di `omega` contro `ln |k|` fra `FIT` = `6` entro `TOLL_P` *(la derivazione nel task history; se `10` e `11` sono un doppietto a `Gamma` non si legge)*;
-`DI1-P` *(mio)* il triangolare di prova da' `6`; `DI1-F` *(deve fallire)* il quadrato di prova da' `6`.
+dal nodo `0` entro `TOLL_A` *(il tick congelato invariante per traslazione)*; `DI0` la simmetria `D6`: `omega(theta + 60) = omega(theta)` e le armoniche non multiple di `6` sotto `TOLL_D6_ASS` assoluti su ogni cerchio
+e sotto `TOLL_D6_REL` dell'escursione dove supera `ESC_MIN` *(Luca `2026-11-05`; il criterio di prima stampato accanto)*; `DI1` la pendenza di `ln` anisotropia di `omega` contro `ln |k|` fra `FIT` = `6` entro `TOLL_P` *(la derivazione nel task history; si legge per due copie degeneri ovunque, non per un incrocio a `Gamma`: Luca `2026-11-05`)*;
+`DI1-P` *(mio)* il triangolare di prova *(`omega0 = 4`, Luca `2026-11-05`)* da' `6`; `DI1-F` *(deve fallire)* il quadrato di prova da' `6`.
 """
 import math
 import os
@@ -31,7 +31,10 @@ ESC_MIN = 1e-6                 # ### ... sui cerchi con l'escursione sopra quest
 TOLL_P = 0.5                   # ### task history 1.2: DI1, DI1-P, DI1-F
 GAP_DOPPIETTO = 1e-8           # ### task history 1.2: sotto, 10 e 11 sono un doppietto a Gamma
 SOGLIE = (1e-2, 1e-3)          # ### Luca: la lunghezza d'onda sotto cui l'anisotropia supera l'1% e lo 0.1%
-PROVA = (3.0, 0.5)             # ### task history 1.2: omega0, t dei reticoli di prova (numeri di PROTOCOLLO, fuori dalla fisica)
+PROVA = (3.0, 0.5)             # ### task history 1.2: omega0, t dei reticoli di prova (numeri di PROTOCOLLO, fuori dalla fisica); il quadrato
+PROVA_TRI = (4.0, 0.5)         # ### Luca 2026-11-05 (task history 5.1): il triangolare con omega0 = 4 (omega(Gamma) = 1); con (3, 1/2) omega(Gamma) = 0 (dfafa16b)
+TOLL_D6_ASS = 1e-12            # ### Luca 2026-11-05: DI0, lo scarto ASSOLUTO (per unita' di tempo) su tutti i cerchi ...
+TOLL_D6_REL = 1e-6             # ### ... piu' il relativo dove l'escursione supera ESC_MIN (il criterio di prima, TOLL_D6 1e-9 relativo, stampato accanto)
 DK = 1e-4                      # ### task history 1.2: il passo relativo delle differenze centrali per v_g
 
 OK = [0, 0]
@@ -95,7 +98,7 @@ def anisotropie(om, vv, th):
     c = np.fft.fft(om) / len(om)
     non6 = float(np.max(np.abs(np.delete(c, np.arange(0, len(om), 6)))))
     c6 = np.mean(om * np.exp(-6j * th))
-    return {"media": float(np.mean(om)), "a_om": esc / me, "a_v": float(vv.max() - vv.min()) / float(np.mean(vv)), "lobi6": abs(c6) / me, "fase6": math.degrees(np.angle(c6)) / 6.0,
+    return {"om": om, "media": float(np.mean(om)), "a_om": esc / me, "a_v": float(vv.max() - vv.min()) / float(np.mean(vv)), "lobi6": abs(c6) / me, "fase6": math.degrees(np.angle(c6)) / 6.0,
             "esc": esc, "rot": rot, "non6": non6}
 
 
@@ -188,27 +191,35 @@ def main(argv):
     # ------------------------------------------------------------------ DI0
     peggio = 0.0
     usati = 0
+    ass = 0.0
     for b, (kk, out) in risultati.items():
         for o in out:
+            ass = max(ass, o["rot"], o["non6"])
             if o["esc"] >= ESC_MIN:
                 usati += 1
                 peggio = max(peggio, o["rot"] / o["esc"], o["non6"] / o["esc"])
-    esito("DEVE PASSARE: DI0 la simmetria D6: omega(theta + 60) = omega(theta) e le armoniche non multiple di 6 nulle, entro %g dell'escursione (i cerchi con l'escursione >= %g)" % (TOLL_D6, ESC_MIN),
-          usati > 0 and peggio <= TOLL_D6, "%d cerchi; il peggiore %.3e" % (usati, peggio))
-    d6 = usati > 0 and peggio <= TOLL_D6
+    # ### DI0 (Luca 2026-11-05, task history 5.1): l'assoluto su tutti i cerchi PIU' il relativo dove l'escursione supera ESC_MIN; il criterio di prima stampato accanto
+    d6 = ass <= TOLL_D6_ASS and usati > 0 and peggio <= TOLL_D6_REL
+    esito("DEVE PASSARE: DI0 la simmetria D6: la rotazione di 60 gradi e le armoniche non multiple di 6 sotto %g assoluti su tutti i cerchi, e sotto %g dell'escursione dove supera %g"
+          % (TOLL_D6_ASS, TOLL_D6_REL, ESC_MIN), d6, "l'assoluto il peggiore %.3e (%d cerchi); il relativo il peggiore %.3e (%d cerchi)" % (ass, sum(len(o) for _k, o in risultati.values()), peggio, usati))
+    print("  ### il criterio di prima (dfafa16b, %g relativo sui cerchi con l'escursione >= %g): il peggiore %.3e -- %s" % (TOLL_D6, ESC_MIN, peggio, "passerebbe" if peggio <= TOLL_D6 else "falliva"))
+    d_copie = max(float(np.max(np.abs(o10["om"] - o11["om"]))) for o10, o11 in zip(risultati[idx[0]][1], risultati[idx[1]][1]))
+    copie = gap < GAP_DOPPIETTO and d_copie < GAP_DOPPIETTO
+    print("  ### le bande %d e %d: lo scarto massimo di omega su tutti i punti dei cerchi %.3e (per unita' di tempo): %s" % (idx[0], idx[1], d_copie,
+          "DUE COPIE DEGENERI OVUNQUE (DI1 si legge, Luca 2026-11-05)" if copie else ("UN INCROCIO a Gamma (DI1 non si legge)" if gap < GAP_DOPPIETTO else "non degeneri")))
     # ------------------------------------------------------------------ DI1, DI1-P, DI1-F
     for b, (kk, out) in risultati.items():
         p_om, nn = pendenza(kk, np.array([o["a_om"] for o in out]))
         p_v, _nn = pendenza(kk, np.array([o["a_v"] for o in out]))
         print("  la banda %d: la pendenza dell'anisotropia di omega %.3f, di |v_g| %.3f (%d raggi fra %s k_M); attese 6 e 4 (task history 1.2)" % (b, p_om, p_v, nn, FIT))
-        if gap >= GAP_DOPPIETTO and d6:
+        if d6 and (gap >= GAP_DOPPIETTO or copie):
             esito("DEVE PASSARE: DI1 la banda %d: la pendenza dell'anisotropia di omega = 6 entro %g" % (b, TOLL_P), abs(p_om - 6.0) <= TOLL_P, "%.3f" % p_om)
         else:
-            print("  ### DI1 la banda %d: NON SI LEGGE (%s)" % (b, "il doppietto a Gamma" if gap < GAP_DOPPIETTO else "DI0 fallito: la premessa D6 cade"))
+            print("  ### DI1 la banda %d: NON SI LEGGE (%s)" % (b, "DI0 fallito: la premessa D6 cade" if not d6 else "un incrocio a Gamma"))
     w0, t = PROVA
     vic_tri = (A1, A2, A1 + A2)
 
-    def om_tri(k):
+    def om_tri(k, w0=PROVA_TRI[0], t=PROVA_TRI[1]):
         return w0 - 2 * t * sum(math.cos(float(k @ a)) for a in vic_tri)
 
     def om_qua(k):
@@ -219,7 +230,10 @@ def main(argv):
     pq, _n2 = pendenza(kq, np.array([o["a_om"] for o in oq]))
     pvt, _n3 = pendenza(kt, np.array([o["a_v"] for o in ot]))
     pvq, _n4 = pendenza(kq, np.array([o["a_v"] for o in oq]))
-    print("  i reticoli di prova: il triangolare, la pendenza di omega %.3f, di |v_g| %.3f (attese 6, 4); il quadrato %.3f, %.3f (attese 4, 2)" % (pt, pvt, pq, pvq))
+    kt3, ot3 = cerchi(lambda k: om_tri(k, PROVA[0], PROVA[1]), kM, "tri3")
+    pt3, _n5 = pendenza(kt3, np.array([o["a_om"] for o in ot3]))
+    print("  i reticoli di prova: il triangolare (omega0 %g), la pendenza di omega %.3f, di |v_g| %.3f (attese 6, 4); il quadrato (omega0 %g) %.3f, %.3f (attese 4, 2)" % (PROVA_TRI[0], pt, pvt, w0, pq, pvq))
+    print("  ### il triangolare di prima (omega0 %g, omega(Gamma) = 0; dfafa16b): la pendenza di omega %.3f" % (PROVA[0], pt3))
     esito("DEVE PASSARE: DI1-P il triangolare di prova: la pendenza dell'anisotropia di omega = 6 entro %g" % TOLL_P, abs(pt - 6.0) <= TOLL_P, "%.3f" % pt)
     esito("DEVE FALLIRE: DI1-F il quadrato di prova: la pendenza dell'anisotropia di omega = 6 entro %g" % TOLL_P, not abs(pq - 6.0) <= TOLL_P, "%.3f" % pq)
     # ------------------------------------------------------------------ il risultato principale
