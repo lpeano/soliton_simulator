@@ -1,0 +1,6 @@
+il centro periodico c0 (dove si centra il bordo): (40.500000000000000, 40.500000000000000); il centro di R180 m2 / 2: (40.500000000000000, 40.500000000000000); lo scarto (0.000e+00, 0.000e+00) negli indici
+il profilo g per estremita' (centrato su c0): |R g - g| / |g| 0.000e+00; centrato su m2 / 2: 0.000e+00; le estremita' con g > 0: 22326
+l'asimmetria della partenza: psi 8.325e-16, phi 1.110e-16
+dopo il primo tick SENZA il bordo: psi 8.603e-16, phi 4.461e-23
+dopo il primo tick CON il bordo:   psi 8.603e-16, phi 4.461e-23 (assorbite M 0.000e+00, V 0.000e+00)
+il bordo aggiunge: psi +0.000e+00, phi +0.000e+00

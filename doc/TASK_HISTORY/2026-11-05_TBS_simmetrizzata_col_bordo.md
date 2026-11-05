@@ -31,3 +31,8 @@
 3. `D6`, la cassetta; i dischi nel commit della stima; la corsa in background.
 4. Durante la corsa: `carta_tbs.py` committata; il task history della coppia *(il mandato di Luca del `2026-11-05` `12:49`, solo scrittura)*.
 5. A corsa finita: il referto, l'esito qui, la relazione.
+
+## 4. L'ESITO DELLA SONDA DEL BORDO SULLA SIMMETRIA *(`doc/referti_l2/accensione_lenta/diag_tbs_bordo.txt`)*: **IL BORDO RISPETTA LA SIMMETRIA DI `TS`, AL BIT**
+- **Il centro periodico `c0` = il centro di `R180` `m2 / 2` = `(40.5, 40.5)` al bit** *(lo scarto `0`)*; ### **il profilo `g` per estremita' e' simmetrico ESATTAMENTE** *(`|R g - g| / |g| = 0`, su `22326` estremita' con `g > 0`)*.
+- **L'asimmetria della partenza:** psi `8.3e-16`, phi `1.1e-16` *(quella di `TS`, `ts_corsa.txt`)*.
+- ### ⚠ **UN FALSO-ZERO, dichiarato:** **al primo tick il bordo non assorbe niente** *(`M` e `V` assorbite `0`: nella fascia la materia e' `0` e il vuoto e' gia' `c(1) F3`)*, **quindi il confronto «un tick con e senza bordo» (`+0`) non poteva vedere nulla.** **La prova e' la simmetria esatta di `g`**, insieme a quella del vuoto di riferimento *(`F3`, l'asimmetria di phi `1.1e-16`)*. **Nessun FERMO:** la corsa parte.

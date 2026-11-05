@@ -23653,3 +23653,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`BM` di `TBS` contro `TS`** *(il gemello senza bordo, la stessa partenza)*: il criterio di Luca per `TB3` applicato al gemello giusto.
 - **Le letture (t1)-(t3) di Luca** registrate prima; **niente mappe, niente stati** *(la mia domanda resta aperta)*.
 - **Il mandato della coppia** *(Luca `2026-11-05` `12:49`, solo scrittura)* **e' in coda:** lo scrivo mentre `TBS` gira.
+
+## 2026-11-05 — `TBS`: LA SONDA DEL BORDO SULLA SIMMETRIA *(`diag_tbs_bordo.txt`)*: **IL BORDO RISPETTA LA SIMMETRIA DI `TS`, AL BIT**
+
+- `c0` = `m2 / 2` = `(40.5, 40.5)` al bit; il profilo `g` simmetrico esattamente sotto `R180` *(`0` su `22326` estremita')*. ### **Un falso-zero dichiarato:** al primo tick il bordo non assorbe niente, quindi «con e senza bordo» `+0` non poteva vedere nulla; **la prova e' la simmetria esatta di `g`.** Nessun FERMO.
