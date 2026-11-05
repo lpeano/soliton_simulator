@@ -49,3 +49,8 @@
 - ### **DEVE** *(nella carta del referto)*: **lo stato salvato a un tempo, ricaricato e confrontato col campione della corsa allo stesso tick, da' `M` e il centro AL BIT.**
 - **Il resto invariato** *(la sonda del bordo sulla simmetria, gia' passata: 4)*.
 - ### **UNA PREMESSA DAL CODICE:** `corsa_accensione` salva gli stati **dentro il ciclo, dopo un tick** *(e dopo l'assorbimento del bordo: lo stato del campione)*: ### **lo stato a `t 0` non lo salverebbe mai.** **Serve un ramo nel blocco del campione `0`**, che salva nello stesso modo *(lo stesso file, `%s_stato_%06d.npz`, le stesse chiavi, lo sha nella riga)*: **inerte per le corse senza `0` in `STATI`** *(oggi nessuna)*.
+
+## 7. `TBS` IN VOLO: LA STIMA E IL PRIMO PEZZO *(`doc/referti_l2/accensione_lenta/diag_tbs_volo.txt`: `carta_tbs.py` girata sul primo pezzo, un controllo e non un referto; PROVVISORIO)*
+- **Il primo pezzo** *(`0 -> 10000` tick)*: **`923` s**; `20` pezzi: **`~5.1` ore**. **I dischi** dopo il primo pezzo: `C:` `24.53` GB, `E:` `228.02` GB; **su `E:` la prima mappa e gli stati a `t 0` e `1500`** *(`4517388` byte i due)*.
+- **`9/10`:** `P0`, `P0-F`, `BR`, `BM` *(`2.4e-14`)*, `BV`, `A4`, `ST-L`, **`ST-M`** *(`t 0` e `1500` al bit)*, `ST-M-F`. ### **`BM-F` «fallisce» sul primo pezzo, come scritto prima** *(1 e 5.12 di `TB3`)*: **la deriva di `TS` a `1500` vale `5.8e-12`, sotto `1e-10`: `BM-F` puo' fallire solo verso la fine** *(a `30000` `~1.16e-10`)*. **Non e' un errore della carta.**
+- ### **LA SIMMETRIA SI ROMPE NEGLI STESSI TEMPI DI `TS`:** psi sopra `1e-12` a `528` *(`TS` `565.5`)*, `1e-6` a `1081.5` *(`1092`)*, `1e-2` a `1441.5` *(`1381.5`)*; phi `454.5`, `963`, `1314` *(`486`, `1005`, `1290`)*. **Il bordo non anticipa la rottura.**

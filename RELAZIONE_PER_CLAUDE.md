@@ -23673,3 +23673,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Tre cose che non tornano o non so:** ① **`CL`, `CLc`, `CV` non sono definiti nel repo** *(solo nomi nella coda)*: la corrispondenza con `0` e `pi` e' una domanda; ② **la crescita caotica ha due numeri**: un e-fold `~25` da `D0R` *(la mappa, voce `1`)* contro `~35` del mandato -- **da riconciliare prima del DEVE del terzo principio**; ③ **il passo statico ogni `2.5` vuole centri a mezzo nodo**, e se la partenza di `TB3` li permette non lo so.
 - **Le proposte:** `L ~160`, il bordo centrato sul punto medio con `R_A >= d / 2 + 30`; le distanze `70`, `50`, `35` *(la scansione dopo)*; le fasi `0` e `pi`; **il primo passo: `35` in fase, `35` in opposizione, il singolo -- tre corse**; il passo statico `E_int(d)` a `t 0`. **Le misure A-G** coi loro DEVE proposti; **per il `lambda` della legge di forza serve una carta statica in piu'** *(la dispersione del vuoto attorno a `F3`)*.
 - **Le domande a Luca:** nove, nella sez. `5` del task history.
+
+## 2026-11-05 — `TBS` IN VOLO: `923` s IL PRIMO PEZZO, `~5.1` ORE; `9/10` SUL PRIMO PEZZO *(`diag_tbs_volo.txt`; PROVVISORIO)*
+
+- **Gli stati ricaricati danno `M` e il centro AL BIT del campione** *(`t 0`, `1500`)*. **`BM-F` non puo' ancora fallire** *(la deriva di `TS` `5.8e-12` a `1500`)*: lo fara' verso la fine, come scritto prima.
+- **La simmetria si rompe come in `TS`** *(psi `1e-12` a `528` contro `565.5`, `1e-2` a `1441.5` contro `1381.5`)*: il bordo non la anticipa. **I dischi:** `C:` `24.53` GB, `E:` `228.02` GB.
