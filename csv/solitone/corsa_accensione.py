@@ -104,6 +104,12 @@ BORDO["TBS"] = BORDO["TB3"]         # ### il bordo di TB3 (Luca 18:31: ogni cors
 MAPPE = MAPPE + ("TBS",)            # ### Luca 2026-11-05 13:16: le mappe come TB3, su E: (mappe/TBS)
 STATI["TBS"] = tuple(1500.0 * k for k in range(21))   # ### Luca 2026-11-05 13:16: gli stati completi (la fase compresa) ogni 1500 unita' piu' t 0: 0, 1500, ..., 30000
 STIMA["TBS"] = "TS"                 # ### la stima del disco dai jsonl di TS (la stessa partenza, senza bordo)
+RUMORE, ARRESTO_PARTENZA = {}, ()
+for _k in (1, 2, 3, 4):              # ### (Luca 2026-11-05 14:14) il pilota di TL120 (e D5 a 1e-10): la partenza di TF3 piu' il rumore relativo 1e-10, i semi 1-4, F3, senza bordo, fino a 30000 o all'arresto
+    CORSE["PL%d" % _k] = (1000.0, 30000.0)
+    VUOTI["PL%d" % _k] = "F3"
+    RUMORE["PL%d" % _k] = (1e-10, _k)   # ### (ampiezza, seme): p0 + ampiezza ||p0|| xi / ||xi||, xi complesso gaussiano (la parte reale da numpy default_rng(seme), l'immaginaria da default_rng(seme + 1000)): una scelta mia dichiarata (il task history TL120, 5)
+    ARRESTO_PARTENZA = ARRESTO_PARTENZA + ("PL%d" % _k,)   # ### partenza.py: il primo blocco di 1000 sopra 5 per 1000; la corsa si ferma 2000 dopo
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -298,6 +304,12 @@ def corsa(nome):
         if nome in RUOTATE:
             x_rot, m2 = ruotata(z, salvato, p0)
             p0, phi_v = x_rot["psi_h"], x_rot["phi_h"]   # ### la partenza e il vuoto della corsa SONO i ruotati (le bande e D su questi)
+        rum = None
+        if nome in RUMORE:                 # ### il rumore della partenza (il pilota di TL120): prima del vuoto della corsa, cosi' la partenza sul vuoto e lo stato lo portano
+            amp_r, seme_r = RUMORE[nome]
+            xi = np.random.default_rng(seme_r).standard_normal(p0.shape) + 1j * np.random.default_rng(seme_r + 1000).standard_normal(p0.shape)
+            p0 = p0 + (amp_r * float(np.linalg.norm(p0)) / float(np.linalg.norm(xi))) * xi
+            rum = {"ampiezza": amp_r, "seme": seme_r, "sha_partenza": SFM.sha(p0)}
         ts, simm = None, None
         if nome in SIMMETRIZZATE:
             ts = partenza_ts(z, phi0, pK, s)
@@ -391,6 +403,13 @@ def corsa(nome):
                 print("  la corsa %s: ### IL DISCO NON BASTA (%s): FERMO" % (nome, nota))
                 return 1
         giro, fermata = None, None
+        pst = None
+        if nome in ARRESTO_PARTENZA:      # ### la partenza e l'arresto (Luca 14:14; partenza.py): lo stato portato da un pezzo all'altro
+            from solitone import carta_deriva as CDp
+            from solitone import partenza as PA
+            from solitone import toro as TOp
+            A1p, A2p = TOp.vettori()
+            pst = dict(prec["partenza"]) if prec and prec.get("partenza") else PA.nuovo()
         frec = None
         if nome in VUOTI:
             from solitone import vuoto as VU
@@ -421,6 +440,8 @@ def corsa(nome):
                     bor["E0"] = float(np.sum(conti["tot"]))
                     c["bordo"] = campione_bordo(BO.fase_fascia(z["st"]["phi_h"], BO.c_di(0, tab_c, K, omega) * phi_v, z["inc"].nodo, gfa[1]), conti)
                 camp.append(c)
+                if pst is not None:
+                    PA.aggiorna(pst, 0 * s, c["per"]["c1"], c["per"]["c2"], z["L"], A1p, A2p, CDp.pendenza)
                 if mappe_on:
                     ist.append(MP.istantanea(z, 0, 0.0, (c["per"]["x"], c["per"]["y"])))
                 if 0 in tick_stati:        # ### lo stato a t 0 (Luca 2026-11-05 13:16): il ciclo salva solo dopo un tick; lo stesso file, le stesse chiavi
@@ -490,6 +511,8 @@ def corsa(nome):
                     if simm is not None:
                         c["simm"] = asimmetria(z, simm)
                     camp.append(c)
+                    if pst is not None and PA.aggiorna(pst, t * s, c["per"]["c1"], c["per"]["c2"], z["L"], A1p, A2p, CDp.pendenza) and fermata is None:
+                        fermata = "(p) la partenza a %g (il primo blocco di %g sopra %g per 1000), l'arresto %g dopo, a t %.1f (Luca 14:14)" % (pst["t_p"], PA.PASSO, PA.SOGLIA, PA.DOPO, t * s)
                     if c["f_liscia"] < META * f_lis0 and t_dis is None:
                         t_dis = t          # ### il primo; si interrompe solo nella rampa (A6)
                 if mappe_on and t % MP.OGNI == 0:
@@ -530,6 +553,10 @@ def corsa(nome):
         riga.update({"giro": giro, "fermata": fermata})
     if bor is not None:
         riga.update({"bordo": bor, "fermata": fermata})
+    if pst is not None:
+        riga.update({"partenza": pst, "fermata": fermata})
+    if rum is not None:
+        riga.update({"rumore": rum})
     if ts is not None:
         riga.update({"ts": {k: v for k, v in ts.items() if k != "psi"}, "sha_partenza_ts": SFM.sha(ts["psi"])})
     if nome in RUOTATE:
