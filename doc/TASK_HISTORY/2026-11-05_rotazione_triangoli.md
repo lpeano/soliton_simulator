@@ -1,0 +1,46 @@
+# 2026-11-05 — LA ROTAZIONE NEI TRIANGOLI E LA RIGIDITA' DEL VUOTO *(Luca `2026-11-05` `21:20`, corretto da Luca alle `21:39`)* -- **SOLO CARTE STATICHE E LETTURE DEGLI STATI SALVATI, NESSUNA CORSA**
+
+> **Le premesse di Luca:** `F3` resta il vuoto predefinito di tutte le corse; `F1` qui si misura **solo da solo, come confronto**; **nessuna legge nuova, il nucleo non si tocca.** Da `statica_vuoto.txt` *(`60de22ec`, rigirato in `fab37d00`)*: **il ramo a `pi` per unita' di tempo e' piatto lungo `A1` in tutti i riferimenti; il co-rotante coincide con oggi entro `6.4e-9`.** **La lettura del guardiano, DA VERIFICARE:** un ramo piatto non propaga; se anche il Goldstone non propaga, `F3` e' rigido e le interazioni sono solo di contatto *(coerente con `statica_coppia.txt`: zero da `42`)*. **La domanda di Luca:** la rotazione nei triangoli ha gia' un motivo fisico nel modello?
+
+## 0. LA CORREZIONE DI LUCA DELLE `21:39` *(prima di eseguire qualunque parte; l'ERRORE `n.108` del guardiano)*
+- ### **Il punto (1) delle premesse delle `21:20`** *(«`F1` si avvolge di `2 pi` attorno a un triangolo: un flusso uniforme»)* **E' SBAGLIATO.** **Dal codice** *(verificato qui)*: ### **`phi` e' uno scalare NEUTRO sulle estremita' degli archi** *(`_solitone_dal_fondo.fondo_con_fasi`: `+e^{i theta_d}` alla coda, `-e^{i theta_d}` alla testa)*, **spostato con la permutazione PURA, senza `U`** *(`CAMM-SPOSTAMENTO-VUOTO` in `primo_ordine/leggi/leggi.yaml`: «`phi` e' NEUTRO, quindi non ha carica da trasportare»; l'azione scambia le due estremita' dello STESSO arco)*. **Le fasi per direzione sono valori del campo, non un trasporto: definiscono una FRECCIA, non un flusso.**
+- ### **Le premesse corrette** *(di Luca)*:
+  - **`F1` puo' avere un MOMENTO ANGOLARE INTERNO** *(un ordine chirale «`p + ip`»)*: **la sua fase avanza di `2 pi / 3` da una direzione all'altra; ruotando il reticolo, `F1` dovrebbe tornare `F1` per una fase, e lo specchio con la fase opposta.** **Da verificare in D** *(un DEVE in piu': `R120` applicato a `F1` = `F1` per una fase costante, stampata; lo specchio con la fase coniugata)*.
+  - ### **Il posto dove un flusso nei triangoli esiste davvero e' la MATERIA:** **`psi` si sposta con `S_U = [[0, U^dagger], [U, 0]]`** *(`CAMM-SPOSTAMENTO`, verificato in `leggi.yaml`)*; **il prodotto delle `U` attorno a un triangolo e' l'olonomia** *(il Wilson loop; il protocollo del test dell'olonomia)*.
+  - ### **MISURA E, in piu':** **l'olonomia di `U` attorno ai triangoli** *(su e giu')* **nel modello di oggi: banale o no, uniforme o no, sul vuoto `F3` e nella scena del solitone.** Solo lettura del codice e un calcolo statico. **La lettura di Luca:** e' la base della voce «il flusso nei triangoli» *(la rotazione fissa = un'olonomia non banale di `U`; il verso quantistico = `U` dinamica, un campo di gauge, il fork `SU(2)`)*.
+  - **A, B, C restano come scritti; D cambia la domanda:** **non «`F1` ha un flusso», ma «`F1` (il vuoto con momento angolare interno) trasmette onde dove `F3` ha il ramo piatto?»**
+- ### **La mia nota:** **lo scambio delle due estremita' dello stesso arco** *(lo spostamento del vuoto)* **e' la parte arco-locale della mappa; `statica_vuoto.txt` misura una risposta fuori dall'arco del `7.9%`** *(sez. `9` delle carte statiche)*: **la parte fuori dall'arco viene da un altro pezzo del tick** *(non so quale: lo cerco in A, dal codice)*.
+
+## 1. LE MISURE *(nell'ordine di Luca: A, poi D, poi B e C, poi E)*
+- ### **A. IL GOLDSTONE** *(dalla stessa risposta lineare di `--vuoto`)*: **il ramo che va a zero a `Gamma`:** `omega(k)` per `|k|` piccolo **lungo `A1` e a `30` gradi**, **la velocita' di gruppo per `|k| -> 0`** *(la pendenza di `omega` contro `|k|`)* **e la curvatura.** **La lettura, scritta prima** *(Luca)*: **velocita' oltre il pavimento = il Goldstone propaga; zero entro il pavimento = il vuoto e' rigido anche li'.** **DEVE:** la stessa misura sul ramo a `pi` ridà la curvatura di `60de22ec` *(`-5.199415e-10` oggi)*.
+- ### **B. LA CIRCOLAZIONE NELLA MATERIA** *(dagli stati completi di `TBS` a `t 0`, `15000`, `30000`, su `E:`, gli sha dichiarati)*: **la corrente della materia sugli archi** *(la forma sul reticolo, dal tick: il flusso di massa che il tick sposta su ogni arco -- la forma esatta la scrivo qui PRIMA del codice, dalla lettura di `CAMM-SPOSTAMENTO`)*; **la circolazione attorno a ogni triangolo elementare** *(su e giu')*; **per anelli attorno al centro:** la circolazione media *(un verso preferito?)*, la media dei moduli, il segno per settore. **DEVE:** il vuoto `F3` da solo *(la corrente nulla per costruzione)* da' zero entro il pavimento; **DEVE FALLIRE:** uno stato sintetico con una corrente che gira *(`psi` per `e^{i theta}` attorno al centro)* da' una circolazione NON nulla.
+- ### **C. I VORTICI DELLA FASE DEL VUOTO**, negli stessi stati: **l'avvolgimento della fase del vuoto** *(rispetto a `c(t) F3`)* **attorno a ogni triangolo** *(`+1`, `-1`, `0`)*, per anelli; **lo stesso per la fase di `psi` nella corona.** **DEVE:** zero vortici nel vuoto `F3` da solo; **DEVE PASSARE** su un vortice sintetico *(`+1` esattamente uno)*; **DEVE FALLIRE** senza la fase.
+- ### **D. LA CARTA STATICA DI `F1` E DEL SUO SPECCHIO** *(come `--vuoto` per `F3`, gli stessi DEVE, sul vuoto `F1` da solo)*: **prima la sua fase `c(t)`** *(come `B0`: `F1` da solo sotto il tick vivo resta `F1` a meno di una fase? il ritmo?)*. **La domanda corretta** *(Luca `21:39`)*: **`F1` trasmette onde dove `F3` ha il ramo piatto? Il Goldstone di `F1` propaga? Lo specchio da' le stesse frequenze col verso scambiato?** **DEVE:** lo specchio = `F1` con `k -> -k` *(o la simmetria dichiarata dal codice)* entro il pavimento; ### **DEVE in piu' (Luca `21:39`): `R120` applicato a `F1` = `F1` per una fase costante** *(stampata)*; **lo specchio con la fase coniugata.**
+- ### **E. L'OLONOMIA DI `U` ATTORNO AI TRIANGOLI** *(Luca `21:39`)*: **su e giu', sul vuoto `F3` e nella scena del solitone**: banale *(flusso `0`)* o no, uniforme o no. Solo lettura del codice e un calcolo statico.
+
+## 2. LE LETTURE *(di Luca, scritte prima)*
+- **(r1)** `F3` rigido *(A: il Goldstone non propaga)* e `F1` propaga *(D)*: **il verso della rotazione e' l'ingrediente che permette onde, e forse forze, a distanza.**
+- **(r2)** Tutti e due rigidi: **nessun vuoto della famiglia trasmette; serve un campo nuovo** *(la voce «il flusso nei triangoli»)*.
+- **(r3)** Il Goldstone di `F3` propaga: **il vuoto non e' rigido**, e la coppia matura dovrebbe sentirlo a distanza.
+- **(r4)** B o C trovano una circolazione o dei vortici con un verso preferito attorno al solitone: **la rotazione nei triangoli c'e' gia', senza leggi nuove.**
+- **(r5)** Altro, da descrivere.
+
+## 3. LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+- **`statica_vuoto.txt`:** **a `Gamma` sei fasi `0`** *(il Goldstone e i suoi compagni, entro `2e-9`)*, `+-omega`, `+-2 omega`; **il ramo con la fase piu' piccola SOPRA `GAP_ZERO` e' quello a `pi`**: ### **il Goldstone non e' mai stato seguito lungo `k`** *(la carta esclude le fasi sotto `GAP_ZERO`)*: **A e' una misura nuova, non una rilettura.** ### ⚠ **Cosa NON so:** **sei fasi degeneri a `Gamma`**: **seguire «il» ramo del Goldstone lungo `k` per continuita' puo' saltare fra rami degeneri** *(lo dichiaro nella carta: seguo tutti e sei, e stampo la fase piu' grande fra i sei a ogni `|k|`)*.
+- **Per B ed E** *(dove sta `U` nella scena, come il tick sposta la materia)*: **lo leggo dal codice PRIMA di scrivere la carta, e lo scrivo qui** *(sez. `4`, quando ci arrivo)*.
+
+## 4. PROGETTAZIONE
+| | il passo | cosa decide | cosa mi farebbe FERMARE |
+|---|---|---|---|
+| `0` | questo task history *(con la correzione delle `21:39`)*, un commit, **prima di qualunque parte** | -- | -- |
+| `1` | A: la carta *(committata prima)*, il referto, un commit | il Goldstone propaga o no | il DEVE sul ramo a `pi` fallisce |
+| `2` | D: la fase di `F1` sotto il tick vivo, poi la carta di `F1` e dello specchio | `F1` trasmette o no | `F1` non torna `F1` a meno di una fase *(allora non e' un vuoto stazionario: FERMO)* |
+| `3` | B e C | una circolazione, dei vortici | i DEVE sintetici falliscono |
+| `4` | E | l'olonomia | -- |
+| `5` | la MAPPA *(il rimando dalle voci «la precessione nei triangoli» e «il flusso nei triangoli»)*, la relazione; **poi il FERMO della coppia** | -- | -- |
+
+## 5. TODO
+1. Questo task history, un commit.
+2. A, D, B, C, E: un referto e un commit ciascuna; ogni codice committato prima di girarlo; un calcolo alla volta.
+3. La MAPPA e la relazione.
+4. **FERMO:** Luca sceglie le corse della coppia con tutte le carte.

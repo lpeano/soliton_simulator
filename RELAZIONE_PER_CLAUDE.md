@@ -23805,3 +23805,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La distanza sotto `1e-6 E[1]`:** fase `0` **`32`, `62`, `58`**; fase `pi` **`32`, `62`, `60`** *(`t 0`, `15000`, `30000`)*. **`E_int(24)` `17`-`21` volte quella di `t 0`.**
 - ### **Le tre parti:** **la materia domina; il vuoto disturbato e' `-1.85e+04` a `24` (`1.5%`), cresce verso `0` allontanando (ATTRATTIVO fino a `~44`), e non dipende dalla fase**; il segno di `E_int` oscilla con `d` *(maturo)*.
 - **La lettura e' una proposta:** la sovrapposizione delle corone cresciute; **la parte del vuoto e' fra i disturbi, non una propagazione** *(il ramo piatto)*. **Le corse della coppia: FERMO, decide Luca** *(dopo il mandato delle `21:20`, nella coda)*.
+
+## 2026-11-05 — LA CORREZIONE DI LUCA DELLE `21:39` E IL TASK HISTORY DELLA ROTAZIONE NEI TRIANGOLI *(`doc/TASK_HISTORY/2026-11-05_rotazione_triangoli.md`)*
+
+- ### **L'errore `n.108` del guardiano** *(Luca)*: **`phi` e' uno scalare NEUTRO sulle estremita'** *(`fondo_con_fasi`: `+e^{i theta_d}` alla coda, `-e^{i theta_d}` alla testa)*, **spostato con la permutazione pura senza `U`** *(`CAMM-SPOSTAMENTO-VUOTO`)*: **le fasi di `F1` sono una freccia, non un flusso.** **Verificato dal codice.** **Il flusso nei triangoli sta nella MATERIA** *(`S_U`, `CAMM-SPOSTAMENTO`)*: **la misura E, l'olonomia di `U`.** **D cambia domanda:** `F1` trasmette onde dove `F3` ha il ramo piatto? **Un DEVE in piu':** `R120` su `F1` = `F1` per una fase.
+- **Una mia nota:** lo scambio delle due estremita' dello stesso arco e' la parte arco-locale; **la risposta fuori dall'arco del `7.9%` viene da un altro pezzo del tick** *(lo cerco in A)*. **Sei fasi degeneri a `Gamma`:** il Goldstone non e' mai stato seguito lungo `k` *(A e' una misura nuova)*.
+- **In coda, voce `6-bis`:** **la coppia col bordo parziale** *(dopo `TBG`; FERMO prima del codice: la proposta, decide Luca)*.
