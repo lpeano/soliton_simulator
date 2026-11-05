@@ -1,0 +1,10 @@
+[TIMBRO] partenza.py  sha1-BYTE 7e744e24  committato e pulito
+[TIMBRO] test_partenza.py  sha1-BYTE 6da26dfb  committato e pulito
+[TIMBRO] carta_deriva.py  sha1-BYTE 0f56fe9d  committato e pulito
+[TIMBRO] carta_tf3_lunga.py  sha1-BYTE ed522132  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+### LA PARTENZA E L'ARRESTO (csv/solitone/partenza.py): SOGLIA 5 PASSO 1000 DOPO 2000; ATTESO 16000
+  DEVE PASSARE: PA0 su TF3 + TF3C (dai jsonl) la partenza cade nel blocco 16000 .. 17000 (il referto di TF3)               PASSA   la partenza 16000.0; la corsa si sarebbe fermata a 18000.0
+  DEVE PASSARE: PA1 le velocita' per blocco del modulo = quelle di carta_deriva.finestre, AL BIT                           PASSA   30 blocchi in comune (la tabella 30, il modulo 30); diversi: 0
+  DEVE FALLIRE: PA0-F su TB3 (ferma) c'e' una partenza                                                                     PASSA   la velocita' massima per blocco 0.802
+ESITO: 3/3

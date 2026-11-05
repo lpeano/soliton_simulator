@@ -23710,3 +23710,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`4` semi su `L 81`** *(la partenza di `TF3` piu' il rumore `1e-10`, semi `1`-`4`)*, `F3`, senza bordo, fino a `30000` o all'arresto; **la partenza:** il primo blocco di `1000` sopra `5` per `1000`; **l'arresto** `2000` dopo; **un DEVE su `TF3`** *(dal referto: la partenza cade in `16000 .. 17000`, `14.007`; `15000 .. 16000` e' `3.786`)*. **Il secondo stadio dopo il pilota; `TBG` prima.** **Il pilota vale come `D5` a `1e-10`.**
 - ### **Il vincolo:** `corsa_accensione.py` e' nel percorso di `TBS` in volo: **il modulo nuovo `partenza.py` e il suo DEVE ora; la patch della corsa a `TBS` finita.** **Due scelte mie dichiarate:** il rumore come norma relativa `1e-10` di un disturbo gaussiano complesso; i nomi `PL1`-`PL4`.
+
+## 2026-11-05 — IL RAMO DELLA PARTENZA: **`3/3`** *(`doc/referti_l2/partenza_prova.txt`; `partenza.py` `7e744e24`)*
+
+- **Su `TF3` la partenza definita da Luca cade in `16000`** *(l'arresto sarebbe a `18000`)*; **le velocita' per blocco = quelle delle tabelle al bit** *(`30` su `30`)*; su `TB3` nessuna partenza. **La patch della corsa a `TBS` finita.**
