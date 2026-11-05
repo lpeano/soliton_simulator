@@ -23666,3 +23666,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`TBS` non era partita:** vale la decisione delle `13:16`. **Le mappe come `TB3`; gli stati completi ogni `1500` unita' piu' `t 0`** *(`21`, con la fase)*; **un DEVE: lo stato ricaricato = il campione allo stesso tick, `M` e il centro al bit.**
 - **Un ramo nuovo nel codice:** la corsa salvava gli stati solo dopo un tick, mai a `t 0`; il ramo nel blocco del campione `0` e' **inerte per le altre corse** *(nessuna ha `0` in `STATI`)*.
+
+## 2026-11-05 — LA COPPIA: IL PIANO DELLE MISURE *(il mandato di Luca delle `12:49`, solo scrittura; `doc/TASK_HISTORY/2026-11-05_coppia_forza_e_campi.md`)* -- FERMO, DECIDE LUCA
+
+- **Le premesse** in una tabella con la **provenienza** di ogni numero: misurati *(lo spessore del bordo `4.79`, il flusso netto verso l'esterno, i sei lobi coerenti, l'isotropia sopra `~6` nodi)* e **non misurati nel repo** *(l'altopiano a `~15`, l'anello di `Lambda` piu' basso, la correlazione `0.06` della corona: di Luca e del guardiano)*.
+- ### **Tre cose che non tornano o non so:** ① **`CL`, `CLc`, `CV` non sono definiti nel repo** *(solo nomi nella coda)*: la corrispondenza con `0` e `pi` e' una domanda; ② **la crescita caotica ha due numeri**: un e-fold `~25` da `D0R` *(la mappa, voce `1`)* contro `~35` del mandato -- **da riconciliare prima del DEVE del terzo principio**; ③ **il passo statico ogni `2.5` vuole centri a mezzo nodo**, e se la partenza di `TB3` li permette non lo so.
+- **Le proposte:** `L ~160`, il bordo centrato sul punto medio con `R_A >= d / 2 + 30`; le distanze `70`, `50`, `35` *(la scansione dopo)*; le fasi `0` e `pi`; **il primo passo: `35` in fase, `35` in opposizione, il singolo -- tre corse**; il passo statico `E_int(d)` a `t 0`. **Le misure A-G** coi loro DEVE proposti; **per il `lambda` della legge di forza serve una carta statica in piu'** *(la dispersione del vuoto attorno a `F3`)*.
+- **Le domande a Luca:** nove, nella sez. `5` del task history.
