@@ -20,3 +20,17 @@
 2. **La definizione della partenza** *(sopra `5` per `1000`)* e **l'arresto alla partenza** *(un ramo nuovo)*.
 3. **Il secondo stadio** dopo il pilota, e **`L 120` fino a `40000`**.
 4. **L'alternativa con `TBG`**, prima, insieme o al posto del secondo stadio.
+
+## 4. LA DECISIONE DI LUCA *(`2026-11-05` `14:14`; non mia)*
+1. **Il pilota: si'.** `4` semi su `L 81` *(la partenza di `TF3` piu' il rumore relativo `1e-10`, i semi `1`, `2`, `3`, `4` dichiarati prima)*, `F3`, senza bordo, fino a `30000` o all'arresto.
+2. **La partenza:** il primo blocco di `1000` con la velocita' sopra `5` per `1000`. **L'arresto:** la corsa si ferma `2000` unita' di tempo dopo la partenza. **Il ramo nuovo nel codice, committato prima di girarlo, con un DEVE:** su `TF3` riletta dai suoi jsonl, la partenza definita cosi' cade nel blocco atteso *(`15000`-`16000` o quello che il referto di `TF3` dice)*.
+3. **Il secondo stadio** *(`L 120`)*: deciso dopo il pilota, con lo sparpaglio misurato e il numero di semi che ne segue.
+4. **`TBG` prima del secondo stadio** *(la coda: `TBS`, il pilota, `TBG` col suo FERMO sui valori di `g`, poi il resto)*.
+- **Il pilota vale anche come `D5` per il rumore `1e-10`;** `D5` resta per le ampiezze `1e-8` e `1e-6` e la misura della crescita del caos.
+
+## 5. LE PREMESSE DAL CODICE PER IL RAMO *(scritte prima del codice)*
+- ### **IL BLOCCO ATTESO DEL DEVE, DAL REFERTO DI `TF3`** *(`tb3_corsa.txt` e `tf3_lunga.txt`, la tabella a blocchi di `TF3 + TF3C`)*: `15000 .. 16000` **`3.786`** per `1000` *(sotto `5`)*, **`16000 .. 17000` `14.007`** *(il primo sopra `5`)*: ### **la partenza cade in `16000 .. 17000`** *(«quello che il referto di `TF3` dice»; `15000`-`16000` e' sotto la soglia)*.
+- **La definizione e' quella delle tabelle** *(`carta_deriva.finestre` su `carta_tf3_lunga.traiettoria`)*: **la velocita' per blocco** = `1000 hypot(pendenza(t, X), pendenza(t, Y))`, la retta sui campioni con `t` in `[a, a + 1000)`, almeno `3` campioni, i blocchi da `0`; `X` il centro periodico srotolato. ### **Il ramo in corsa usa le STESSE funzioni** *(un modulo nuovo, `csv/solitone/partenza.py`, aggiornato campione per campione, lo stato portato da un pezzo all'altro come quello di `giro`)*: **la partenza in corsa e quella dei referti sono la stessa cosa.**
+- ### **IL VINCOLO:** `corsa_accensione.py` **e' nel percorso di `TBS` in volo: non si tocca finche' `TBS` gira** *(par. 5)*. **Quindi:** `partenza.py` *(nuovo: il processo di `TBS` non lo importa)* e il suo DEVE **si scrivono e si provano ora**; **la patch di `corsa_accensione.py`** *(le corse del pilota, il rumore, l'arresto)* **si prepara come script nello scratchpad e si applica a `TBS` finita**, poi `D6` e la cassetta.
+- **I DEVE del ramo** *(nella cassetta, `test_partenza.py`)*: `PA0` **su `TF3 + TF3C` riletta dai jsonl la partenza cade in `16000 .. 17000`** *(Luca)*; `PA1` *(mio)* **le velocita' per blocco del modulo = quelle di `carta_deriva.finestre`, al bit**; `PA0-F` *(deve fallire, mio)* **su `TB3` (ferma) c'e' una partenza** *(la velocita' massima `0.802`)*.
+- ### **DUE SCELTE MIE DI DETTAGLIO, DICHIARATE** *(non decise da Luca; se non vanno, le cambia lui)*: ① **il rumore relativo `1e-10`** = `p0 + 1e-10 ||p0|| xi / ||xi||`, `xi` complesso gaussiano su ogni componente *(`numpy.random.default_rng(seme)`)*: **la norma del disturbo e' `1e-10` di quella della partenza**; ② **i nomi delle corse:** `PL1`, `PL2`, `PL3`, `PL4`.

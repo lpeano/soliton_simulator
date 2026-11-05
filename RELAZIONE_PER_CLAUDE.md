@@ -23705,3 +23705,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **Un fatto dal codice: la dimensione non e' un parametro da girare** -- la partenza e' l'inviluppo dello stato di `A` a `K` della scena, a `N = 1e6`: **a `N` fissato il solitone ha la sua larghezza.**
 - **La proposta:** **prima una carta statica** *(la scena a `N` da `2.5e5` a `4e6`: `w`, lo spessore del bordo, l'esagonalita' della partenza; minuti, nessuna corsa)*, **poi una corsa col bordo per dimensione**; **scartato** lo stiramento dell'inviluppo *(non e' uno stato della scena)*.
+
+## 2026-11-05 — LA DECISIONE DI LUCA SU `TL120` *(`14:14`)*: **IL PILOTA** *(il task history `2026-11-05_TL120_densita_o_rientro`, 4 e 5)*
+
+- **`4` semi su `L 81`** *(la partenza di `TF3` piu' il rumore `1e-10`, semi `1`-`4`)*, `F3`, senza bordo, fino a `30000` o all'arresto; **la partenza:** il primo blocco di `1000` sopra `5` per `1000`; **l'arresto** `2000` dopo; **un DEVE su `TF3`** *(dal referto: la partenza cade in `16000 .. 17000`, `14.007`; `15000 .. 16000` e' `3.786`)*. **Il secondo stadio dopo il pilota; `TBG` prima.** **Il pilota vale come `D5` a `1e-10`.**
+- ### **Il vincolo:** `corsa_accensione.py` e' nel percorso di `TBS` in volo: **il modulo nuovo `partenza.py` e il suo DEVE ora; la patch della corsa a `TBS` finita.** **Due scelte mie dichiarate:** il rumore come norma relativa `1e-10` di un disturbo gaussiano complesso; i nomi `PL1`-`PL4`.
