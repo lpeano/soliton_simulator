@@ -23793,3 +23793,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Solo lettura da `E:`:** `F0` *(`20` file, gli sha dell'indice `mappe_indice_TBS.txt`)*, **`F1` su `2001` istantanee** *(il peggiore `M` `4.55e-09`, `V` `1.08e-09`)*, `F1-F` *(`5.05e-03`)*, `F2`, **`F3` `2.836e-08`** *(contro la partenza simmetrizzata)*.
 - **I file:** `doc/referti_l2/campo_TBS/mappe_leggere.npz` **`4829557` byte, `201` mappe** *(una ogni `10` istantanee: ogni `150` unita' di tempo, `float16`)*; `profili.npz` **`1221466` byte**.
 - ### **Un'etichetta scaduta, mia:** **la riga di `F3` dice ancora «`(V.partenza)`»**, ma per `TBS` il confronto e' con `corsa_accensione.partenza_ts` *(il ramo di `fcf4ce2c`)*: **il numero e' giusto, l'etichetta no**; **la correggo dopo, in un commit a se', senza rigirare** *(cambia solo la stampa)*.
+
+## 2026-11-05 — LA DECISIONE DI LUCA DELLE `21:01`: **LA COPPIA CON GLI STATI MATURI DI `TBS`** *(il task history `2026-11-05_carte_statiche`, sez. `10`)*
+
+- **Gli stati a `t 15000`, `30000`** *(e `t 0`)*, **il vuoto disturbato sommato una volta, le tre parti di `E_int`, la distanza sotto `1e-6 E[1]`; su `L 162` il singolo di `L 81` nel reticolo piu' grande; il DEVE di Luca su `E[1]` entro `1e-9`.**
+- **Le premesse dal codice** *(10.1)*: il libro legge solo `psi_h` e `phi_h`; `F3` e' uguale su ogni estremita' della stessa etichetta *(la traslazione lascia `phi_0` invariato)*; **gli archi che attraversano il rombo di `L 81` sono l'incognita del DEVE** *(sul lato la materia sotto `2.1e-7 M0`, la fascia da `28`)*; `e_K` quello della corsa; **la fase `pi` cambia segno solo a `psi_2`**; due DEVE miei *(`CM-S` gli sha dello stato, `CM-E` l'energia del campione)*.
