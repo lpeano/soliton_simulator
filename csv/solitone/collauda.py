@@ -63,7 +63,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la carta di `E_leg`** *(`carta_e_leg`; la correzione di `_scomposizione_solitone.parti` sta fuori dalla libreria)*.
 # ### **E la tabella di `c(t)`, `fase_fascia`, il test del pacchetto** *(`bordo`, `test_bordo` `G4` `G5`, `carta_fase`, `carta_bordo`)*.
 # ### **E la corsa `TB3`** *(`corsa_accensione`: il bordo dopo ogni tick)*.
-LIBRERIA_RIFERITA = "c64c37bc"
+# ### **E la carta del referto di `TB3` col `BM` nuovo, la carta del campo per `TB3`** *(`carta_tb3`, `carta_campo`)*.
+LIBRERIA_RIFERITA = "9bc43170"
 
 
 def vecchi():
