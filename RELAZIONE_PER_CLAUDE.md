@@ -23735,3 +23735,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-05 — LA DECISIONE DI LUCA SULLE CARTE STATICHE *(`16:28`)*
 
 - **La coppia su `L 162`**, per la carta statica e per le corse; **`E_int` col vuoto contato una volta** *(la formula del mandato era sbagliata: l'errore `n.107` del guardiano, Luca; si stampa accanto come confronto)*; il resto come proposto. **Le carte a `TBS` finita.** *(Il codice, `c1027d67`, fa gia' cosi': nessuna modifica.)*
+
+## 2026-11-05 — `TBS` FINITA: **`10/10`, NON PARTE ENTRO `30000`: LA LETTURA (t1)** *(`doc/referti_l2/tbs_corsa.txt`; il task history `2026-11-05_TBS_simmetrizzata_col_bordo.md`, sezione `8`)*
+
+- **`20` pezzi fino a `30000`, nessun arresto.** **`10/10`:** `BM` `4.348e-13`, `BM-F` fallisce come deve *(`1.167e-10`)*, `BV` `6.725e-11`, **`ST-M`: i `21` stati ricaricati danno `M` e il centro al bit**; le mappe `90361359` byte, gli stati `47432574` byte, su `E:`.
+- ### **La velocita' massima `0.927` per `1000`, lo spostamento `0.227` nodi** -- **`TS` senza bordo, dalla stessa partenza, `117.946` nodi** *(sopra `5` per `1000` gia' a `5000 .. 6000`)*. **Col bordo, due corse su due ferme** *(`TB3`: `0.802`, `0.508` nodi)*: ### **(t1).** **Le cautele di (b1) restano:** due corse; **il bordo toglie insieme il rientro e l'alone**.
+- **La simmetria si rompe negli stessi tempi di `TS`, ma la corsa non viene.**
+- **Una mia osservazione, non una lettura:** `C(1)`, `C(2)` negativi e `C(3)` `~+0.7` in `TBS` come in `TB3`: **compatibile con un'oscillazione di periodo `~1500`** *(la nota su `TB3` delle `18:45`)*; **non misurato** *(servirebbe la serie dei campioni)*.
+- **Il prossimo pezzo della coda:** la patch del pilota, `D6`, la cassetta; poi le tre carte statiche, una alla volta; **poi FERMO**.
