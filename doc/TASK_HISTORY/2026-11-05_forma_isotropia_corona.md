@@ -96,3 +96,11 @@
 - ### **(b) IL FLUSSO E' SEMPRE VERSO L'ESTERNO:** a `22`, `26`, `30` nodi, **in tutti i `99` intervalli e con entrambe le scelte del centro**, `Phi` fra `+0.023` e `+0.061` per unita' di tempo *(media `+0.037`)*; **nessun intervallo verso l'interno**, con `|dM|` *(`~0.55`)* ben sopra il rumore della somma *(`<= 0.12`)*. **Il centro di ogni mappa si muove di `0.17`, `0.07`** *(gli indici)*: le due scelte danno lo stesso. ### **La lettura scritta prima: nessun rientro a `26` e `30`.**
 - ### ⚠ **IL LIMITE:** **(b) misura il flusso NETTO attraverso l'anello intero**, a `15` unita' di risoluzione: **un rientro lungo alcuni archi compensato da un'uscita altrove non si vede** *(per quello serve il flusso per settore, o la corrente: la parte (c), ferma)*. «Escono e tornano» resta aperto per i filamenti singoli; **per la massa netta, no.**
 - **La massa fra `22` e `30` nodi e' `~1` unita'** *(`M_in` `995248.02` contro `995249.07`)*, su `~1e6`: la corona e' `~1e-6` della massa.
+
+### 5.1 LA DECISIONE DI LUCA SULLA CARTA DELL'ISOTROPIA *(`2026-11-05`; non mia)*: **LA CORREZIONE PROPOSTA, COSI' COM'E'**
+- **`DI1-P`:** il triangolare di prova con **`omega0 = 4`** *(`omega(Gamma) = 1`)*.
+- **`DI0`:** lo scarto ASSOLUTO *(la rotazione di `60` gradi e le armoniche non multiple di `6`)* **sotto `1e-12` su tutti i cerchi**, piu' il relativo **sotto `1e-6` dove l'escursione supera `1e-6`**.
+- **`DI1` si legge per le due copie degeneri della banda `B`** *(la regola del doppietto era per un incrocio a `Gamma`)*.
+- ### **La misura non cambia: solo i criteri.** Il referto rifatto riporta i numeri di prima accanto.
+- **Luca registra i due errori come errori del protocollo, non del modello** *(`dfafa16b`)*.
+- **Una domanda mia su `TBS`, rifiutata col menu e quindi APERTA** *(il criterio di chiusura: la risposta di Luca)*: **salvare in `TBS` le mappe** *(come `TB3`, `~90` MB su `E:`: la carta della forma su `TBS`)* **e uno o piu' stati completi** *(con la fase di psi: la parte (c) della corona)*? **Senza risposta, `TBS` gira come scritto nel mandato delle `18:31`: niente mappe, niente stati.**

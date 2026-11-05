@@ -23634,3 +23634,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **(a) la finestra fitta** per il video senza sfumature: `doc/referti_l2/campo_TB3/finestra_fitta.npz`, **`2407459` byte, `100` mappe**, una ogni `15` unita' da `19260` a `20745`.
 - ### **(b) il flusso netto attraverso `22`, `26`, `30` nodi e' SEMPRE verso l'esterno** *(`99` intervalli su `99`, entrambe le scelte del centro, `+0.023`-`+0.061` per unita' di tempo)*: **nessun rientro della massa netta.** ### **Il limite:** un rientro lungo alcuni archi compensato altrove non si vede; per i filamenti singoli serve il flusso per settore o la corrente *(la parte (c), ferma: niente fase su `E:`)*.
 - `CO0` `2.37e-9`; **`CO0-F` non si mette** *(la massa cambia in `100` tick meno di `1e-6`: non potrebbe fallire, dichiarato prima)*.
+
+## 2026-11-05 — LA DECISIONE DI LUCA SULLA CARTA DELL'ISOTROPIA: **LA CORREZIONE PROPOSTA, COSI' COM'E'** *(il task history `2026-11-05_forma_isotropia_corona`, 5.1)*
+
+- `DI1-P` con `omega0 = 4`; `DI0` assoluto sotto `1e-12` piu' il relativo `1e-6` dove l'escursione supera `1e-6`; `DI1` letto per le due copie degeneri. **La misura non cambia:** il referto rifatto riporta accanto i numeri di prima.
+- ### **UNA DOMANDA APERTA PER LUCA** *(il menu l'ha rifiutata)*: **in `TBS` salvo le mappe** *(`~90` MB su `E:`, la forma su `TBS`)* **e stati completi con la fase** *(la parte (c) della corona)*? **Senza risposta, `TBS` gira come scritto: niente mappe, niente stati.**
