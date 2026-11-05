@@ -137,3 +137,7 @@
 - ### **TRE IPOTESI APERTE, NESSUNA VERIFICATA** *(Luca)*: ① **il rinculo dell'emissione**; ② **il respiro del cuore che sposta il centro misurato** *(un effetto della misura del centro, non del moto)*; ③ **una preferenza del reticolo per `A1`.** **Nessuna misura nuova ora.**
 - **Che cosa le distinguerebbe** *(una nota per quando si misura, non un piano)*: ② si vede confrontando il periodo con quelli del respiro del cuore gia' misurati *(`respiro.py`)*; ③ con la stessa oscillazione lungo `A2` o `A1 + A2` su una partenza ruotata; ① con la correlazione fra lo spostamento e il flusso di materia nella fascia *(i conti del bordo per campione)*.
 - ### **ANNOTAZIONE A 5.12** *(non la riscrivo)*: **`TL120` NON e' piu' sospesa** *(Luca `18:45`)*: e' al posto `3` della coda, dopo `TBS`, con la domanda «densita' o rientro» e il FERMO sul disegno *(`doc/MAPPA.md`, sezione `7`)*; **`TM3` passa al `4`, `D5` al `5`, la coppia e il triangolo al `6`, `cs` al `7`.**
+
+### 5.14 L'ESITO DEL `BM` NUOVO *(`doc/referti_l2/tb3_corsa.txt`, **`7/7`**; `carta_tb3.py` `390ae9bd`, `9bc43170`)*
+- **`BM` passa:** il bilancio di `TB3` meno la deriva di `TF3 + TF3C` agli stessi tick, il peggiore **`3.775e-13`** *(a `29980.5`)*; la deriva di `TF3` all'ultimo `+1.163e-10`. **`BM-F` fallisce come deve:** il peggiore `1.166e-10` *(a `30000`)*, sopra `1e-10` **solo alla fine**, come scritto in 5.12. **Il `BM` di prima** resta stampato: `1.159e-10`.
+- Il resto del referto e' quello di 5.11, invariato.

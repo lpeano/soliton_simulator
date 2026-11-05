@@ -3,7 +3,7 @@
 [TIMBRO] corsa_accensione.py  sha1-BYTE 02ac81b1  committato e pulito
 [TIMBRO] carta_deriva.py  sha1-BYTE 0f56fe9d  committato e pulito
 [TIMBRO] carta_tf3_lunga.py  sha1-BYTE ed522132  committato e pulito
-[TIMBRO] carta_tb3.py  sha1-BYTE 44badd19  committato e pulito
+[TIMBRO] carta_tb3.py  sha1-BYTE 390ae9bd  committato e pulito
 ==================================================================================================================================
 TB3: TF3 COL BORDO ASSORBENTE (Luca 21:52, 09:00, 09:26) CONTRO TF3 + TF3C E TS; TOLL_B 1e-10 BLOCCO 1000
   le letture di Luca, scritte prima: (b1) non parte entro 30000, o resta sotto TF3 e TS: il moto veniva dal giro del toro; (b2) parte comunque, con velocita' e
@@ -14,7 +14,9 @@ TB3: TF3 COL BORDO ASSORBENTE (Luca 21:52, 09:00, 09:26) CONTRO TF3 + TF3C E TS;
   DEVE PASSARE: P0 il primo campione di TB3 e' quello di TF3 (per ed E, al bit)                                            PASSA   t 0
   DEVE FALLIRE: P0-F il primo campione di TB3 e' quello di TS (per, al bit)                                                PASSA   w TB3 6.645390, TS 6.645831
   DEVE PASSARE: BR ogni pezzo: la stessa tabella di c(t) (sha), lo stesso g_max e R_A                                      PASSA   sha 1394eecf3484bc4020e17fcc1be264c17ea33cfe, g_max 0.03, R_A 28, omega 4.71238898038468967e-01
-  DEVE PASSARE: BM il bilancio M + assorbita = M0 entro 1e-10 a ogni campione                                              ### FALLISCE   il peggiore 1.159e-10 a t 30000.0; all'ultimo 1.159e-10 (TS: A3 di M +3.875e-12 per 1000 (ts_corsa.txt))
+  ### il bilancio M + assorbita = M0 da solo (il BM di prima, un numero): il peggiore 1.159e-10 a t 30000.0; all'ultimo 1.159e-10 (TS: A3 di M +3.875e-12 per 1000 (ts_corsa.txt))
+  DEVE PASSARE: BM il bilancio M + assorbita di TB3 meno la deriva di M di TF3 + TF3C agli stessi tick entro 1e-10 a ogni  PASSA   il peggiore 3.775e-13 a t 29980.5; all'ultimo -3.766e-13 (la deriva di TF3 all'ultimo +1.163e-10); campioni senza TF3: 0
+  DEVE FALLIRE: BM-F lo stesso confronto con la deriva di TF3 per 2, entro 1e-10 a ogni campione                           PASSA   il peggiore 1.166e-10 a t 30000.0
   DEVE PASSARE: BV il bilancio V + assorbito = V0 entro 1e-10 a ogni campione                                              PASSA   il peggiore 6.738e-11
   DEVE PASSARE: A4 TB3 il libro col par della corsa                                                                        PASSA   
   TB3: 20 pezzi, fino al tick 200000 di 200000 (tempo 30000.00); ### L'ARRESTO: la fine a 30000
@@ -192,4 +194,4 @@ TB3: TF3 COL BORDO ASSORBENTE (Luca 21:52, 09:00, 09:26) CONTRO TF3 + TF3C E TS;
   ### LA LETTURA 5.3: blocchi coerenti (|a - 1| >= d medio) 0 su 30; tre consecutivi coerenti con arg a dello stesso segno: no: onde, non forzatura
   ### all'ultimo campione: assorbite M 5.032119e+03 (5.032e-03 M0), V 4.067494e+03 (1.033e-01 V0), E 6.084824e+03 (1.209e-03 E0); la materia dentro 0.994968 M0, nella fascia 3.015e-07 M0
 ==================================================================================================================================
-ESITO: 5/6 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: BM il bilancio M + assorbita = M0 entro 1e-10 a ogni campione']
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
