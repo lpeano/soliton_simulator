@@ -3,8 +3,8 @@ r"""**`TB3`: `TF3` COL BORDO ASSORBENTE, CONTRO `TF3` + `TF3C` E `TS`** *(Luca `
     python csv/solitone/carta_tb3.py > doc/referti_l2/tb3_corsa.txt
 ### **La domanda di Luca:** il moto parte senza il rientro dal toro? ### **Le letture, scritte prima:** (b1) non parte entro `30000`, o resta sotto `TF3` e `TS`: il moto veniva dal giro del toro;
 (b2) parte comunque, con velocita' e persistenza come `TS` / `TF3` / `F0`: il moto e' del solitone; (b3) altro. ### **`TB3` risponde a «parte?», non a «quanto corre»:** l'arresto (i) a `~8` nodi.
-### **I DEVE:** `P0` il primo campione di `TB3` e' quello di `TF3` *(la stessa partenza: `per` e `E`, al bit)*; `P0-F` *(deve fallire)* e' quello di `TS`; `BM` e `BV` il bilancio `M` *(`V`)* dentro +
-assorbita = iniziale entro `TOLL_B` *(Luca 21:52)* a ogni campione; `BR` ogni pezzo legge la stessa tabella di `c(t)` *(lo sha)* e lo stesso `g_max`; `A4` il libro col `par` della corsa.
+### **I DEVE:** `P0` il primo campione di `TB3` e' quello di `TF3` *(la stessa partenza: `per` e `E`, al bit)*; `P0-F` *(deve fallire)* e' quello di `TS`; `BM` il bilancio `M` dentro + assorbita **meno la deriva di `M` di `TF3 + TF3C` agli stessi tick** entro `TOLL_B` *(Luca 2026-11-04 18:31)*, `BM-F` *(deve fallire)* con la deriva per `2`;
+`BV` il bilancio `V` dentro + assorbito = iniziale entro `TOLL_B` *(Luca 21:52)* a ogni campione; `BR` ogni pezzo legge la stessa tabella di `c(t)` *(lo sha)* e lo stesso `g_max`; `A4` il libro col `par` della corsa.
 ### **Le misure:** l'arresto *(tempo e motivo)*; a blocchi di `1000` velocita', direzione, cuore, `w`, alone di `TB3`, `TF3 + TF3C`, `TS` *(fino all'arresto)*; vaga o corre; lo spostamento; la fase del
 vuoto nella fascia *(la lettura 5.3)*; `M`, `V`, `E` assorbite per blocco, il mare di materia dentro; l'energia di `TB3` *(con l'assorbita)* contro quella di `TF3` *(il tick vivo non conserva `E` nella rampa)*.
 """
@@ -73,8 +73,20 @@ def main(argv):
     tt = np.array([c["t"] for c in cb]) * s
     eM = np.array([(c["bordo"]["M"] + c["bordo"]["M_ass"]) / b0["M0"] - 1.0 for c in cb])
     eV = np.array([(c["bordo"]["V"] + c["bordo"]["V_ass"]) / b0["V0"] - 1.0 for c in cb])
-    esito("DEVE PASSARE: BM il bilancio M + assorbita = M0 entro %g a ogni campione" % TOLL_B, float(np.abs(eM).max()) <= TOLL_B,
-          "il peggiore %.3e a t %.1f; all'ultimo %.3e (%s)" % (float(np.abs(eM).max()), tt[int(np.argmax(np.abs(eM)))], eM[-1], DERIVA_TICK))
+    # ### BM (Luca 2026-11-04 18:31; il task history 5.12): il bilancio di TB3 MENO la deriva di M di TF3 + TF3C senza bordo agli stessi tick (E.totale.M, ciascuno
+    # ### diviso per il SUO valore a t 0): la tolleranza applicata a cio' che aggiunge il bordo. Il BM vecchio (contro M0) resta stampato come numero, non come DEVE.
+    print("  ### il bilancio M + assorbita = M0 da solo (il BM di prima, un numero): il peggiore %.3e a t %.1f; all'ultimo %.3e (%s)"
+          % (float(np.abs(eM).max()), tt[int(np.argmax(np.abs(eM)))], eM[-1], DERIVA_TICK))
+    mF = {c["t"]: c["E"]["totale"]["M"] for c in list(c3) + list(cc)}
+    ok_t = all(c["t"] in mF for c in cb)
+    dF = np.array([mF[c["t"]] / mF[0] - 1.0 if c["t"] in mF else np.nan for c in cb])
+    dB = np.abs(eM - dF)
+    esito("DEVE PASSARE: BM il bilancio M + assorbita di TB3 meno la deriva di M di TF3 + TF3C agli stessi tick entro %g a ogni campione" % TOLL_B, ok_t and float(np.nanmax(dB)) <= TOLL_B,
+          "il peggiore %.3e a t %.1f; all'ultimo %+.3e (la deriva di TF3 all'ultimo %+.3e); campioni senza TF3: %d" % (float(np.nanmax(dB)), tt[int(np.nanargmax(dB))], eM[-1] - dF[-1], dF[-1],
+                                                                                                        sum(1 for c in cb if c["t"] not in mF)))
+    dB2 = np.abs(eM - 2.0 * dF)
+    esito("DEVE FALLIRE: BM-F lo stesso confronto con la deriva di TF3 per 2, entro %g a ogni campione" % TOLL_B, not (ok_t and float(np.nanmax(dB2)) <= TOLL_B),
+          "il peggiore %.3e a t %.1f" % (float(np.nanmax(dB2)), tt[int(np.nanargmax(dB2))]))
     esito("DEVE PASSARE: BV il bilancio V + assorbito = V0 entro %g a ogni campione" % TOLL_B, float(np.abs(eV).max()) <= TOLL_B, "il peggiore %.3e" % float(np.abs(eV).max()))
     esito("DEVE PASSARE: A4 TB3 il libro col par della corsa", all(r.get("libro") == "col par della corsa" and r["eps"] == V.EPS for r in rb), "")
     print("  TB3: %d pezzi, fino al tick %d di %d (tempo %.2f); ### L'ARRESTO: %s" % (len(rb), ult["t1"], ult["t_fine"], ult["t1"] * s,
