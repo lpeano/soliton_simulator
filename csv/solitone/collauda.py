@@ -64,7 +64,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la tabella di `c(t)`, `fase_fascia`, il test del pacchetto** *(`bordo`, `test_bordo` `G4` `G5`, `carta_fase`, `carta_bordo`)*.
 # ### **E la corsa `TB3`** *(`corsa_accensione`: il bordo dopo ogni tick)*.
 # ### **E la carta del referto di `TB3` col `BM` nuovo, la carta del campo per `TB3`** *(`carta_tb3`, `carta_campo`)*.
-LIBRERIA_RIFERITA = "9bc43170"
+# ### **E le carte della forma, dell'isotropia della dispersione e della corona in movimento** *(`carta_forma`, `carta_isotropia`, `carta_corona`)*.
+LIBRERIA_RIFERITA = "6a679941"
 
 
 def vecchi():
