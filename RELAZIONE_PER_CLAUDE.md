@@ -23657,3 +23657,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-05 — `TBS`: LA SONDA DEL BORDO SULLA SIMMETRIA *(`diag_tbs_bordo.txt`)*: **IL BORDO RISPETTA LA SIMMETRIA DI `TS`, AL BIT**
 
 - `c0` = `m2 / 2` = `(40.5, 40.5)` al bit; il profilo `g` simmetrico esattamente sotto `R180` *(`0` su `22326` estremita')*. ### **Un falso-zero dichiarato:** al primo tick il bordo non assorbe niente, quindi «con e senza bordo» `+0` non poteva vedere nulla; **la prova e' la simmetria esatta di `g`.** Nessun FERMO.
+
+## 2026-11-05 — `TBS` FERMA PRIMA DI PARTIRE: **ATTENDE LUCA SU MAPPE E STATI**; LA CASSETTA `105/105` *(D6 a `a75b7343`)*
+
+- **Tutto pronto** *(la sonda, `D6`, la cassetta; `C:` `24.36` GB, `E:` `228.03` GB)*, ### **ma la corsa NON parte:** il rapporto del guardiano girato da Luca **consiglia** di salvare mappe e stati completi, con la decisione scritta come proposta. **Aspetto la decisione di Luca** *(o l'ordine di partire come scritto)*. **Nell'attesa scrivo il task history della coppia** *(il mandato delle `12:49`, solo scrittura)*.

@@ -36,3 +36,7 @@
 - **Il centro periodico `c0` = il centro di `R180` `m2 / 2` = `(40.5, 40.5)` al bit** *(lo scarto `0`)*; ### **il profilo `g` per estremita' e' simmetrico ESATTAMENTE** *(`|R g - g| / |g| = 0`, su `22326` estremita' con `g > 0`)*.
 - **L'asimmetria della partenza:** psi `8.3e-16`, phi `1.1e-16` *(quella di `TS`, `ts_corsa.txt`)*.
 - ### ⚠ **UN FALSO-ZERO, dichiarato:** **al primo tick il bordo non assorbe niente** *(`M` e `V` assorbite `0`: nella fascia la materia e' `0` e il vuoto e' gia' `c(1) F3`)*, **quindi il confronto «un tick con e senza bordo» (`+0`) non poteva vedere nulla.** **La prova e' la simmetria esatta di `g`**, insieme a quella del vuoto di riferimento *(`F3`, l'asimmetria di phi `1.1e-16`)*. **Nessun FERMO:** la corsa parte.
+
+## 5. `TBS` FERMA PRIMA DI PARTIRE *(`2026-11-05`)*: **ATTENDE LA DECISIONE DI LUCA SU MAPPE E STATI**
+- **Pronta:** la sonda passa *(4)*; `D6` a `a75b7343`, la cassetta `105/105`; **i dischi `C:` `24.36` GB, `E:` `228.03` GB.**
+- ### **NON PARTE:** Luca mi ha girato il rapporto del guardiano, che **consiglia** di salvare in `TBS` le mappe *(come `TB3`, `~90` MB)* e gli stati completi *(con la fase, ogni `1500` unita' piu' `t 0`)*, **con una decisione scritta come PROPOSTA** *(«se sei d'accordo, manda»)*. **Non la tratto come una decisione di Luca:** partire ora senza mappe ne' stati perderebbe l'occasione, partire con renderebbe mia una scelta sua. **Il criterio di chiusura:** Luca manda la decisione, o dice di partire come scritto.

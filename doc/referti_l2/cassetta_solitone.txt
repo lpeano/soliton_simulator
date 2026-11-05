@@ -20,7 +20,7 @@
 [TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
 [TIMBRO] test_simmetrica.py  sha1-BYTE 63cefa24  committato e pulito
 [TIMBRO] test_bordo.py  sha1-BYTE 38a247e6  committato e pulito
-[TIMBRO] collauda.py  sha1-BYTE 05bab8e8  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE 0972adfc  committato e pulito
 ======================================================================================================================================================
 LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
   LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
@@ -143,13 +143,13 @@ LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, pro
   DEVE PASSARE: G2 con psi = 0 e phi = phi0 lo stato resta AL BIT (si assorbono le onde, non il vuoto)                               PASSA   dM 0 dV 0
   DEVE PASSARE: G4 fase_fascia: phi = rif da' d 0 e a 1; phi = e^{i 0.01} rif da' arg a = 0.01, |a - 1| = |e^{i 0.01} - 1|, r 0 (ent PASSA   arg a 0.010000000000000, d medio 1.000e-02, r 3.3e-15
   DEVE PASSARE: G5 c_di: la tabella fino a K, poi c(K) e^{i omega (t - K)} (continua a K)                                            PASSA   c_di(13) -0.725932304200140 -0.687766159183974i
-### D6: LA LIBRERIA E' QUELLA DI 276daaf8 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
-  DEVE PASSARE: D6 nessun .py della libreria cambiato da 276daaf8 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
+### D6: LA LIBRERIA E' QUELLA DI a75b7343 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da a75b7343 a HEAD (escluso collauda.py), e niente di non committato           PASSA   cambiati nessuno, non committati nessuno
   DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
     i .py fuori dalla libreria cambiati da 9180fd38: 25 (il nucleo); i tre script vecchi:
     csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
     csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
     csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
 ------------------------------------------------------------------------------------------------------------------------------------------------------
-  i tempi: uscite 24 s; protetto 16 s; misure 5 s; vuoto 3 s; respiro 1 s; accensione 7 s; toro 2 s; mappe 3 s; campo 2 s; simmetrica 7 s; bordo 2 s
+  i tempi: uscite 20 s; protetto 16 s; misure 6 s; vuoto 3 s; respiro 0 s; accensione 9 s; toro 2 s; mappe 3 s; campo 2 s; simmetrica 6 s; bordo 2 s
 ESITO: 105/105 controlli passano; fallite: 0 []
