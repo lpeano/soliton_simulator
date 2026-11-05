@@ -1,0 +1,21 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE ddc1389c  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --dimensione; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+         N        w0         w  3w / 40.5      rho max   spessore   esag 100   esag 300   verdetto R(soglie scalate)
+  2.50e+05    4.7047    4.7481      0.352   2.4855e+03      1.961     0.0077     0.0031     LEGATO 10.45 10.07 9.13 8.49
+  5.00e+05    5.5767    5.6135      0.416   3.5514e+03      2.377     0.0070     0.0040     LEGATO 12.20 11.66 10.67 9.82
+  1.00e+06    6.6144    6.6454      0.492   5.0630e+03      3.036     0.0015     0.0007     LEGATO 14.39 13.74 12.45 11.36
+  2.00e+06    7.8490    7.8751      0.583   7.2053e+03      3.958     0.0008     0.0030     LEGATO 16.89 16.12 14.51 12.93
+  4.00e+06    9.3176    9.3396      0.692   1.0240e+04      5.186     0.0029     0.0048     LEGATO 19.89 18.92 16.80 14.70
+  DEVE FALLIRE: DM-F w a N 2e6 = w a N 1e6 (se fossero uguali, la carta non vedrebbe N)                                    PASSA   7.875102 contro 6.645390
+  ### le soglie della forma scalate per N / 1e6; lo spessore = R(rho >= 1 scal.) - R(rho >= 300 scal.); 3w / 40.5 sopra 1: il solitone tocca la meta' del periodo (la riga non conta)
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []

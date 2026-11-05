@@ -23768,3 +23768,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`L 162`, `E_int = E[p1 + p2] - E[p1] - E[p2] + E[0]`:** fase `0` `+5.91e+04` a `24`, `+1.43e+01` a `30`, `+3.4e-03` a `34`, `+7.7e-09` a `40`; ### **da `42` a `80` `2^-32` in ogni riga, in fase `0` e `pi`: il pavimento, non un'interazione.**
 - **Fase `0` repulsiva, fase `pi` attrattiva** *(`F_s` `+-1.46e+04` a `26`)*; il rapporto per `2` nodi cresce da `5.9` a `78.6` *(verso una coda esponenziale)*.
 - ### **La proposta di lettura:** **la coppia statica si sente solo dove i profili si sovrappongono** *(sotto `~42` nodi)*; **coerente col ramo piatto del vuoto, ma quella carta e' ferma**; ed e' **la sovrapposizione statica, non la forza dinamica.** **Per le corse:** a `70` e `50` la coppia statica e' sotto il pavimento.
+
+## 2026-11-05 — LA CARTA STATICA DELLA DIMENSIONE: **`2/2`; `w` CRESCE COME `N^0.244`** *(`doc/referti_l2/statica_dimensione.txt`; il task history `2026-11-05_carte_statiche`, sez. `8`)*
+
+- **`w` della partenza** `4.75` .. `9.34` a `N` `2.5e5` .. `4e6` *(da `0.714` a `1.405` volte quella di oggi)*; **la pendenza di `ln w` contro `ln N` `0.244`**; tutte `LEGATO`, nessuna tocca la meta' del periodo.
+- ### **Una mia premessa caduta:** **avevo scritto che di solito la larghezza cala con la norma** *(la scansione, 1)*: **qui cresce.** Annotata, non riscritta.
+- **La griglia copre `0.71`-`1.41`, non `0.5`-`2`:** **per quelle servirebbero `N ~6e4` e `~1.7e7`** *(estrapolato; a `1.7e7` su `L 81` il solitone toccherebbe la meta' del periodo)*. **Decide Luca.**
