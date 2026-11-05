@@ -23639,3 +23639,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - `DI1-P` con `omega0 = 4`; `DI0` assoluto sotto `1e-12` piu' il relativo `1e-6` dove l'escursione supera `1e-6`; `DI1` letto per le due copie degeneri. **La misura non cambia:** il referto rifatto riporta accanto i numeri di prima.
 - ### **UNA DOMANDA APERTA PER LUCA** *(il menu l'ha rifiutata)*: **in `TBS` salvo le mappe** *(`~90` MB su `E:`, la forma su `TBS`)* **e stati completi con la fase** *(la parte (c) della corona)*? **Senza risposta, `TBS` gira come scritto: niente mappe, niente stati.**
+
+## 2026-11-05 — LA CARTA DELL'ISOTROPIA COI CRITERI DI LUCA: **`7/7`** *(`doc/referti_l2/isotropia_dispersione.txt`; `carta_isotropia.py` `1473435b`)*
+
+- **`DI0`:** l'assoluto `1.27e-14` *(tetto `1e-12`)*, il relativo `8.36e-9` *(tetto `1e-6`; col criterio di prima falliva)*: **la banda `B` su `F3` ha la simmetria `D6`.** **Le due copie** *(`10`, `11`: lo scarto `1.5e-14` su tutti i cerchi)*: **`DI1` `6.015`.** `DI1-P` il triangolare a `omega0 = 4`: `5.875` *(prima `4.005`)*; `DI1-F` il quadrato `3.909`.
+- **Il risultato:** la dispersione della banda `B` e' isotropa entro lo `0.1%` per lunghezze d'onda sopra `3.25` nodi *(`omega`)* e `6.09` *(`|v_g|`)*; **lo spessore del bordo del solitone, `4.79` nodi, sta in mezzo.**
+- **Prima di rifare il referto** ho corretto due etichette che lo facevano contraddire *(a `Gamma` diceva «doppietto: `DI1` non si legge»)*: un commit a se', `276daaf8`.

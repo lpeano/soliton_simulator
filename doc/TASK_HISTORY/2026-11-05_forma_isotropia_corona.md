@@ -104,3 +104,9 @@
 - ### **La misura non cambia: solo i criteri.** Il referto rifatto riporta i numeri di prima accanto.
 - **Luca registra i due errori come errori del protocollo, non del modello** *(`dfafa16b`)*.
 - **Una domanda mia su `TBS`, rifiutata col menu e quindi APERTA** *(il criterio di chiusura: la risposta di Luca)*: **salvare in `TBS` le mappe** *(come `TB3`, `~90` MB su `E:`: la carta della forma su `TBS`)* **e uno o piu' stati completi** *(con la fase di psi: la parte (c) della corona)*? **Senza risposta, `TBS` gira come scritto nel mandato delle `18:31`: niente mappe, niente stati.**
+
+## 9. L'ESITO DELLA CARTA DELL'ISOTROPIA COI CRITERI DI LUCA *(`doc/referti_l2/isotropia_dispersione.txt`, **`7/7`**; `carta_isotropia.py` `1473435b`, `276daaf8`)*
+- **`DI0` passa:** l'assoluto il peggiore **`1.266e-14`** su `120` cerchi *(il tetto `1e-12`)*, il relativo **`8.363e-9`** su `46` *(il tetto `1e-6`)*; **il criterio di prima** *(`1e-9` relativo)* **falliva con lo stesso `8.363e-9`.**
+- **Le bande `10` e `11`: lo scarto massimo di `omega` su tutti i punti dei cerchi `1.465e-14`** per unita' di tempo: **due copie degeneri ovunque.** **`DI1` passa per entrambe: `6.015`.**
+- **`DI1-P` passa:** il triangolare a `omega0 = 4` da' **`5.875`** *(quello di prima, `omega0 = 3`, `4.005`)*; **`DI1-F` fallisce come deve:** il quadrato `3.909`. `|v_g|`: `4.014` il triangolare, `2.009` il quadrato *(attese `4`, `2`)*.
+- **Il risultato, invariato:** l'anisotropia di `omega` sopra l'`1%` sotto `lambda 2.27` nodi, sopra lo `0.1%` sotto `3.25`; quella di `|v_g|` sotto `3.55` e `6.09`. **Accanto allo spessore del bordo del solitone** *(`4.79` nodi, sez. 7)*: **il bordo sta dove la dispersione e' anisotropa fra lo `0.1%` e l'`1%`.** Le letture sono di Luca.

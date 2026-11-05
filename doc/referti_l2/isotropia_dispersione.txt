@@ -1,16 +1,16 @@
 [TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
 [TIMBRO] corsa_accensione.py  sha1-BYTE 02ac81b1  committato e pulito
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
-[TIMBRO] carta_isotropia.py  sha1-BYTE e71f9713  committato e pulito
+[TIMBRO] carta_isotropia.py  sha1-BYTE 1473435b  committato e pulito
 ==================================================================================================================================
 L'ISOTROPIA DELLA DISPERSIONE (Luca 2026-11-04 20:18-22:26): la banda B sul vuoto F3, il tick CONGELATO (DV.un_tick, forma S1); BG-F-0.15 (s 0.15, eps 0.5); N_K 60 N_TH 144 K_MIN 0.005 FIT (0.02, 0.2)
-  k_M = 2 pi / sqrt 3 = 3.627599 (il raggio inscritto della zona di Brillouin); TOLL_A 1e-12 TOLL_D6 1e-09 ESC_MIN 1e-06 TOLL_P 0.5 GAP_DOPPIETTO 1e-08; i reticoli di prova omega0 3 t 0.5 (protocollo)
+  k_M = 2 pi / sqrt 3 = 3.627599 (il raggio inscritto della zona di Brillouin); TOLL_A 1e-12 TOLL_D6 1e-09 ESC_MIN 1e-06 TOLL_P 0.5 GAP_DOPPIETTO 1e-08; i reticoli di prova: il quadrato omega0 3 t 0.5, il triangolare omega0 4 t 0.5 (protocollo)
 ==================================================================================================================================
   DEVE PASSARE: DI-T la risposta a un impulso nel nodo 412, riportata indietro, = quella dal nodo 0 entro 1e-12 (il tick c PASSA   5.551e-17
   il supporto della risposta di un tick: 23 nodi; |d1|, |d2| fino a 2, 2 (contro L / 2 = 40: l'immagine minima e' unica)
   DEVE PASSARE: DI-G A(k) per k qualsiasi = fft2 di DV.matrice su 20 k della griglia (seme 0), entro 1e-12                 PASSA   1.701e-16
   a Gamma le fasi per tick delle 12 bande: -0.482676 -0.482676 -0.482676 -0.482676 -0.476727 -0.476727 +0.011437 +0.011437 +0.011437 +0.011437 +0.476727 +0.476727
-  ### la banda B (indici (10, 11)) a Gamma: +0.476726628572, +0.476726628572; lo scarto 5.551e-17 (### UN DOPPIETTO: DI1 non si legge)
+  ### la banda B (indici (10, 11)) a Gamma: +0.476726628572, +0.476726628572; lo scarto 5.551e-17 (### DEGENERI A GAMMA: due copie o un incrocio, lo dice il confronto su tutti i cerchi sotto)
 ----------------------------------------------------------------------------------------------------------------------------------
 ### LA BANDA 10 (omega = fase per tick / s; per unita' di tempo)
     |k|/k_M    lambda  omega medio    an. omega    an. |v_g|     6 lobi   fase6 (gr)       rot 60        non-6
@@ -137,13 +137,16 @@ L'ISOTROPIA DELLA DISPERSIONE (Luca 2026-11-04 20:18-22:26): la banda B sul vuot
      0.9141      1.89    +1.848752    5.520e-02    5.978e-01  1.380e-02       +30.00    8.660e-15    3.572e-16
      1.0000      1.73    +1.785596    9.343e-02    1.521e+00  2.335e-02       -30.00    1.132e-14    3.359e-16
 ----------------------------------------------------------------------------------------------------------------------------------
-  DEVE PASSARE: DI0 la simmetria D6: omega(theta + 60) = omega(theta) e le armoniche non multiple di 6 nulle, entro 1e-09  ### FALLISCE   46 cerchi; il peggiore 8.363e-09
+  DEVE PASSARE: DI0 la simmetria D6: la rotazione di 60 gradi e le armoniche non multiple di 6 sotto 1e-12 assoluti su tut PASSA   l'assoluto il peggiore 1.266e-14 (120 cerchi); il relativo il peggiore 8.363e-09 (46 cerchi)
+  ### il criterio di prima (dfafa16b, 1e-09 relativo sui cerchi con l'escursione >= 1e-06): il peggiore 8.363e-09 -- falliva
+  ### le bande 10 e 11: lo scarto massimo di omega su tutti i punti dei cerchi 1.465e-14 (per unita' di tempo): DUE COPIE DEGENERI OVUNQUE (DI1 si legge, Luca 2026-11-05)
   la banda 10: la pendenza dell'anisotropia di omega 6.015, di |v_g| 3.918 (26 raggi fra (0.02, 0.2) k_M); attese 6 e 4 (task history 1.2)
-  ### DI1 la banda 10: NON SI LEGGE (il doppietto a Gamma)
+  DEVE PASSARE: DI1 la banda 10: la pendenza dell'anisotropia di omega = 6 entro 0.5                                       PASSA   6.015
   la banda 11: la pendenza dell'anisotropia di omega 6.015, di |v_g| 3.899 (26 raggi fra (0.02, 0.2) k_M); attese 6 e 4 (task history 1.2)
-  ### DI1 la banda 11: NON SI LEGGE (il doppietto a Gamma)
-  i reticoli di prova: il triangolare, la pendenza di omega 4.005, di |v_g| 4.014 (attese 6, 4); il quadrato 3.909, 2.009 (attese 4, 2)
-  DEVE PASSARE: DI1-P il triangolare di prova: la pendenza dell'anisotropia di omega = 6 entro 0.5                         ### FALLISCE   4.005
+  DEVE PASSARE: DI1 la banda 11: la pendenza dell'anisotropia di omega = 6 entro 0.5                                       PASSA   6.015
+  i reticoli di prova: il triangolare (omega0 4), la pendenza di omega 5.875, di |v_g| 4.014 (attese 6, 4); il quadrato (omega0 3) 3.909, 2.009 (attese 4, 2)
+  ### il triangolare di prima (omega0 3, omega(Gamma) = 0; dfafa16b): la pendenza di omega 4.005
+  DEVE PASSARE: DI1-P il triangolare di prova: la pendenza dell'anisotropia di omega = 6 entro 0.5                         PASSA   5.875
   DEVE FALLIRE: DI1-F il quadrato di prova: la pendenza dell'anisotropia di omega = 6 entro 0.5                            PASSA   3.909
 ----------------------------------------------------------------------------------------------------------------------------------
 ### LA LUNGHEZZA D'ONDA SOTTO CUI L'ANISOTROPIA SUPERA LA SOGLIA (il primo raggio, salendo in |k|, con l'anisotropia sopra; lambda = 2 pi / |k| in nodi)
@@ -153,4 +156,4 @@ L'ISOTROPIA DELLA DISPERSIONE (Luca 2026-11-04 20:18-22:26): la banda B sul vuot
   la banda 11, |v_g|: 0.01: lambda 3.55 nodi (|k|/k_M 0.4875); 0.001: lambda 6.09 nodi (|k|/k_M 0.2844)
   ### lo spessore del bordo del solitone, per il confronto: dalla carta della forma (doc/referti_l2/forma_solitone.txt), dopo questa
 ==================================================================================================================================
-ESITO: 3/5 controlli passano; DEVE fallite: 2 ["DEVE PASSARE: DI0 la simmetria D6: omega(theta + 60) = omega(theta) e le armoniche non multiple di 6 nulle, entro 1e-09 dell'escursione (i cerchi con l'escursione >= 1e-06)", "DEVE PASSARE: DI1-P il triangolare di prova: la pendenza dell'anisotropia di omega = 6 entro 0.5"]
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
