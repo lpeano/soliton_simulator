@@ -100,7 +100,10 @@ STIMA = {"TB3": "TF3"}              # ### la stima del disco delle mappe dai jso
 CORSE["TBS"] = (1000.0, 30000.0)    # ### (Luca 2026-11-04 18:31) la partenza SIMMETRIZZATA di TS col bordo di TB3, F3, fino a 30000 (il task history 2026-11-05_TBS_simmetrizzata_col_bordo)
 VUOTI["TBS"] = "F3"                 # ### come TS
 SIMMETRIZZATE = SIMMETRIZZATE + ("TBS",)   # ### la partenza di TS e l'asimmetria in ogni campione
-BORDO["TBS"] = BORDO["TB3"]         # ### il bordo di TB3 (Luca 18:31: ogni corsa col bordo usa quello di TB3); niente MAPPE, niente STATI (il mandato; la domanda aperta)
+BORDO["TBS"] = BORDO["TB3"]         # ### il bordo di TB3 (Luca 18:31: ogni corsa col bordo usa quello di TB3)
+MAPPE = MAPPE + ("TBS",)            # ### Luca 2026-11-05 13:16: le mappe come TB3, su E: (mappe/TBS)
+STATI["TBS"] = tuple(1500.0 * k for k in range(21))   # ### Luca 2026-11-05 13:16: gli stati completi (la fase compresa) ogni 1500 unita' piu' t 0: 0, 1500, ..., 30000
+STIMA["TBS"] = "TS"                 # ### la stima del disco dai jsonl di TS (la stessa partenza, senza bordo)
 META = 0.5                     # ### la vita: il cuore a meta' (Luca; dopo bfee5330, della media del primo blocco dopo T_acc)
 CODA = 3000.0                  # ### l'estrapolazione dichiarata: la pendenza degli ultimi 3000 (come _respiro_congelato)
 DIR_JSON = os.path.join(solitone.RADICE, "doc", "referti_l2", "accensione_lenta")
@@ -420,6 +423,12 @@ def corsa(nome):
                 camp.append(c)
                 if mappe_on:
                     ist.append(MP.istantanea(z, 0, 0.0, (c["per"]["x"], c["per"]["y"])))
+                if 0 in tick_stati:        # ### lo stato a t 0 (Luca 2026-11-05 13:16): il ciclo salva solo dopo un tick; lo stesso file, le stesse chiavi
+                    f_st = os.path.join(base_e(nome), "stati", nome, "%s_stato_%06d.npz" % (nome, 0))
+                    os.makedirs(os.path.dirname(f_st), exist_ok=True)
+                    np.savez(f_st + ".tmp.npz", t=0, **{k: v for k, v in z["st"].items() if isinstance(v, np.ndarray)})
+                    os.replace(f_st + ".tmp.npz", f_st)
+                    stati.append({"t": 0, "file": f_st, "sha": V.shas(z)})
             f_lis0 = camp[0]["f_liscia"] if t0 == 0 else testa["campioni"][0]["f_liscia"]
             for t in range(t0 + 1, t1 + 1):
                 AC.tick(z, t, K)
