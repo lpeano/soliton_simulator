@@ -4,13 +4,14 @@
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
-[TIMBRO] carta_statiche.py  sha1-BYTE ddc1389c  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 25d7585e  committato e pulito
 ==================================================================================================================================
 LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vuoto; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
 ==================================================================================================================================
   DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
   DEVE PASSARE: VD-L la risposta a AMP 1e-07 e a 2 AMP uguali entro 1e-06 relativo (il vuoto lineare a quell'ampiezza)     PASSA   4.066e-09
-  DEVE PASSARE: VD-T la risposta da un altro nodo (412), riportata indietro, = quella dal nodo 0 entro 1e-12 relativo      ### FALLISCE   1.639e-09
+  VD-T: lo scarto per ampiezza 1e-07: 1.639e-09, 1e-06: 1.086e-10, 1e-05: 1.096e-11; il pavimento 10 x 1e-16 / ampiezza 1.0e-08, 1.0e-09, 1.0e-10; la pendenza di ln scarto contro ln ampiezza -1.0874
+  DEVE PASSARE: VD-T la risposta da un altro nodo (412), riportata indietro: lo scarto scende come 1 / ampiezza (pendenza  PASSA   pendenza -1.0874; sotto il pavimento a ogni ampiezza: True
   il supporto della risposta di un tick: 7 nodi; |d1|, |d2| fino a 1, 1
   DEVE PASSARE: VD-G T(k) per k qualsiasi = fft2 della risposta su 5 k della griglia, entro 1e-12                          PASSA   3.514e-16
   DEVE PASSARE: VD-0 il Goldstone: la rotazione globale i F3 a Gamma e' un autovettore con autovalore 1, entro 1e-06       PASSA   4.343e-09
@@ -21,5 +22,21 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vuoto; nessuna corsa; NN (25
   ### la curvatura a = d omega / d k^2 = -5.199415e-10 (nodi^2 per unita' di tempo); la PROPOSTA di lettura: lambda = sqrt(|a| / Delta) = 0.0000 nodi
   ### non so a quale frequenza il solitone eccita il vuoto (il task history 1.1): il lambda statico puo' non essere quello giusto
   i moduli a Gamma da 0.999999999 a 1.000000012 (1: il vuoto neutro)
+----------------------------------------------------------------------------------------------------------------------------------
+### IL RIFERIMENTO (Luca 20:20): c(K) +0.951056516295199 +0.309016994374771i, c(K+1) +0.707106781186668 +0.707106781186411i (fase_F3.npz); la risposta ad AMP 1e-07 dal nodo 0 in tre riferimenti
+  oggi: la base F3, la risposta per e^{-i omega}; corotante: eta = c(t)* phi (la base c(K) F3, il disturbo per c(K), la risposta per c(K+1)*); fisso: la base c(K) F3, nessun fattore
+  DEVE PASSARE: VD-R0 la risposta di oggi rifatta col riferimento esplicito = quella di sopra, al bit                      PASSA   0.000e+00
+  DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il rifer ### FALLISCE   4.892e-01
+  la risposta corotante contro quella di oggi: lo scarto relativo 6.424e-09 (il pavimento ad AMP 1e-07: 1.0e-08)
+  oggi      a Gamma le 12 fasi per tick: -9.424778e-01 -4.712389e-01 -4.712389e-01 -1.936256e-09 -1.986928e-10 +1.173367e-17 +1.952620e-16 +1.986927e-10 +1.936257e-09 +4.712389e-01 +4.712389e-01 +9.424778e-01; i moduli da 0.999999999 a 1.000000012
+  oggi      il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura -5.199415e-10; sqrt(|a| / Delta) 0.0000 nodi
+  oggi      la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  corotante a Gamma le 12 fasi per tick: -9.424778e-01 -4.712389e-01 -4.712389e-01 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +4.712389e-01 +4.712389e-01 +9.424778e-01; i moduli da 0.999999998 a 1.000000003
+  corotante il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura +1.114644e-11; sqrt(|a| / Delta) 0.0000 nodi
+  corotante la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  fisso     a Gamma le 12 fasi per tick: -4.712389e-01 -4.712389e-01 -4.712389e-01 -4.712389e-01 +0.000000e+00 +0.000000e+00 +0.000000e+00 +0.000000e+00 +4.712389e-01 +4.712389e-01 +4.712389e-01 +4.712389e-01; i moduli da 0.999999997 a 1.000000007
+  fisso     il ramo con la fase piu' piccola sopra 1e-06: Delta 3.141593e+00 per unita' di tempo; lungo A1 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00 3.141593e+00; la curvatura -7.557772e-10; sqrt(|a| / Delta) 0.0000 nodi
+  fisso     la risposta FUORI dalle due estremita' dell'arco disturbato: il massimo 7.567e-02, contro dentro 9.575e-01 (il rapporto peggiore sui 12 gradi 7.902e-02)
+  ### la lettura (Luca 20:20): se il gap a pi sparisce o si sposta nel corotante, era la rotazione vista da fuori; il gap e lambda si leggono solo dopo
 ==================================================================================================================================
-ESITO: 4/5 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: VD-T la risposta da un altro nodo (412), riportata indietro, = quella dal nodo 0 entro 1e-12 relativo']
+ESITO: 6/7 controlli passano; DEVE fallite: 1 ['DEVE FALLIRE: VD-R-F la risposta nel riferimento fisso = quella di oggi entro 1e-06 relativo (il confronto vede il riferimento)']

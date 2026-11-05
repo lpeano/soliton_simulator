@@ -23774,3 +23774,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`w` della partenza** `4.75` .. `9.34` a `N` `2.5e5` .. `4e6` *(da `0.714` a `1.405` volte quella di oggi)*; **la pendenza di `ln w` contro `ln N` `0.244`**; tutte `LEGATO`, nessuna tocca la meta' del periodo.
 - ### **Una mia premessa caduta:** **avevo scritto che di solito la larghezza cala con la norma** *(la scansione, 1)*: **qui cresce.** Annotata, non riscritta.
 - **La griglia copre `0.71`-`1.41`, non `0.5`-`2`:** **per quelle servirebbero `N ~6e4` e `~1.7e7`** *(estrapolato; a `1.7e7` su `L 81` il solitone toccherebbe la meta' del periodo)*. **Decide Luca.**
+
+## 2026-11-05 — `--vuoto` CORRETTO: **`VD-T` E' IL PAVIMENTO; IL GAP A `pi` NON SPARISCE NEL CO-ROTANTE; L'IPOTESI DELL'ARCO CADE** *(`statica_vuoto.txt`; il task history `2026-11-05_carte_statiche`, sez. `9`)*
+
+- **`6/7`: `VD-R-F` «fallisce» per un mio errore nel verdetto** *(la condizione diritta invece che negata; lo scarto `4.9e-1`: il riferimento fisso differisce come deve)*: **la correzione, un commit a se'.**
+- **`VD-T`:** la pendenza `-1.087`, sotto il pavimento a ogni ampiezza: **era il pavimento.**
+- ### **Il co-rotante = oggi a `6.4e-9`** *(sotto il pavimento `1e-8`)*: **le stesse fasi `0`, `+-omega`, `+-2 omega`; il ramo a `3.141593` piatto in tutti e tre i riferimenti.** **La rotazione vista da fuori NON spiega il gap.**
+- ### **La risposta fuori dall'arco `7.9%`:** **la mia ipotesi per il ramo piatto e' caduta; il ramo piatto resta non spiegato.**
+- **In coda:** la decisione di Luca delle `21:01` *(la coppia con gli stati maturi di `TBS`, prima del FERMO)*, dopo le mappe leggere di `TBS`.
