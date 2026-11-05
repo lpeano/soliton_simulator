@@ -72,7 +72,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la carta del vuoto corretta** *(`carta_statiche.py`: `VD-T` a tre ampiezze, il riferimento, Luca `20:20`)* **e le mappe leggere di `TBS`** *(`carta_campo.py`, Luca `19:24`)*.
 # ### **E il verdetto di `VD-R-F`** *(`carta_statiche.py`, la condizione negata: `dced2343`)*.
 # ### **E la coppia matura** *(`carta_statiche.py --coppia-matura`, Luca `21:01`)* **e l'etichetta di `F3`** *(`carta_campo.py`)*.
-LIBRERIA_RIFERITA = "3a97e929"
+# ### **E la misura A** *(`carta_statiche.py --goldstone`, Luca `21:20`)*.
+LIBRERIA_RIFERITA = "9c20b0c0"
 
 
 def vecchi():
