@@ -1,0 +1,40 @@
+# -*- coding: utf-8 -*-
+"""TL120, PRIMA DEL DISEGNO (2026-11-05; il task history 2026-11-05_TL120_densita_o_rientro): il costo di una corsa su L 81 e su L 120 dai secondi dei pezzi gia' scritti, e quanti semi
+servirebbero per distinguere un ritardo di 1.48 (il rientro) da 2.19 (la densita'), con lo sparpaglio preso dalle tre partenze note (Luca: ~4000, ~9500, ~16000).
+### ATTENZIONE, dichiarato: quelle tre partenze NON sono semi della stessa partenza (TS, F0, TF3 sono partenze diverse): lo sparpaglio dei semi NON e' misurato; il numero di semi qui e' una stima di
+ordine di grandezza. Nessuna corsa: legge solo i jsonl nel repo.
+    python doc/referti_l2/accensione_lenta/diag_tl120_costo.py.txt   (dalla radice del repo)
+"""
+import glob
+import json
+import math
+
+import numpy as np
+
+D = "doc/referti_l2/accensione_lenta/"
+for nome in ("TB3", "TS", "TF3"):
+    ss = []
+    for f in sorted(glob.glob(D + nome + "_*.jsonl")):
+        with open(f, encoding="utf-8") as fh:
+            ss.append(json.loads(fh.readline())["secondi"])
+    if ss:
+        print("%-4s: %d pezzi da 10000 tick; i secondi per pezzo da %.0f a %.0f, la media %.0f; il totale %.2f ore" % (nome, len(ss), min(ss), max(ss), np.mean(ss), sum(ss) / 3600.0))
+sec = []
+for f in sorted(glob.glob(D + "TS_*.jsonl")):
+    with open(f, encoding="utf-8") as fh:
+        sec.append(json.loads(fh.readline())["secondi"])
+p81 = float(np.mean(sec))            # i secondi per 10000 tick su L 81, senza bordo (TS)
+s = 0.15
+r = (120.0 / 81.0) ** 2              # il costo per tick va coi nodi (il tick e il libro sono locali)
+print("il rapporto dei nodi (120/81)^2 = %.4f; il ritardo atteso: densita' %.4f, rientro %.4f (120/81)" % (r, r, 120.0 / 81.0))
+for Lx, fat in ((81, 1.0), (120, r)):
+    for T in (30000.0, 40000.0, 50000.0):
+        print("  L %3d fino a %6.0f: %5.2f ore per corsa" % (Lx, T, p81 * fat * (T / s) / 10000.0 / 3600.0))
+part = np.array([4000.0, 9500.0, 16000.0])
+sd = float(np.std(np.log(part), ddof=1))
+dl = math.log(r) - math.log(120.0 / 81.0)
+print("lo sparpaglio delle tre partenze note: la deviazione standard di ln t %.3f; la distanza da risolvere ln 2.19 - ln 1.48 = %.3f" % (sd, dl))
+for z in (2.0, 3.0):
+    n = math.ceil(2.0 * (z * sd / dl) ** 2)
+    print("  per separarle a %g sigma con n semi per L (sigma della differenza delle medie di ln t = sd sqrt(2/n)): n >= %d" % (z, n))
+print("il ritardo atteso della partenza piu' tardiva nota (16000) su L 120: densita' %.0f, rientro %.0f" % (16000.0 * r, 16000.0 * 120.0 / 81.0))

@@ -1,0 +1,14 @@
+TB3 : 20 pezzi da 10000 tick; i secondi per pezzo da 827 a 1361, la media 991; il totale 5.51 ore
+TS  : 20 pezzi da 10000 tick; i secondi per pezzo da 520 a 648, la media 541; il totale 3.01 ore
+TF3 : 11 pezzi da 10000 tick; i secondi per pezzo da 394 a 1010, la media 662; il totale 2.02 ore
+il rapporto dei nodi (120/81)^2 = 2.1948; il ritardo atteso: densita' 2.1948, rientro 1.4815 (120/81)
+  L  81 fino a  30000:  3.01 ore per corsa
+  L  81 fino a  40000:  4.01 ore per corsa
+  L  81 fino a  50000:  5.01 ore per corsa
+  L 120 fino a  30000:  6.60 ore per corsa
+  L 120 fino a  40000:  8.80 ore per corsa
+  L 120 fino a  50000: 11.00 ore per corsa
+lo sparpaglio delle tre partenze note: la deviazione standard di ln t 0.700; la distanza da risolvere ln 2.19 - ln 1.48 = 0.393
+  per separarle a 2 sigma con n semi per L (sigma della differenza delle medie di ln t = sd sqrt(2/n)): n >= 26
+  per separarle a 3 sigma con n semi per L (sigma della differenza delle medie di ln t = sd sqrt(2/n)): n >= 58
+il ritardo atteso della partenza piu' tardiva nota (16000) su L 120: densita' 35117, rientro 23704

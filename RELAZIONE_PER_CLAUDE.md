@@ -23678,3 +23678,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Gli stati ricaricati danno `M` e il centro AL BIT del campione** *(`t 0`, `1500`)*. **`BM-F` non puo' ancora fallire** *(la deriva di `TS` `5.8e-12` a `1500`)*: lo fara' verso la fine, come scritto prima.
 - **La simmetria si rompe come in `TS`** *(psi `1e-12` a `528` contro `565.5`, `1e-2` a `1441.5` contro `1381.5`)*: il bordo non la anticipa. **I dischi:** `C:` `24.53` GB, `E:` `228.02` GB.
+
+## 2026-11-05 — `TL120`: IL DISEGNO PROPOSTO *(`doc/TASK_HISTORY/2026-11-05_TL120_densita_o_rientro.md`; i numeri `diag_tl120_costo.txt`)* -- FERMO, DECIDE LUCA
+
+- **Il costo:** una corsa senza bordo su `L 81` **`3.01` ore** fino a `30000` *(`TS`, `541` s per pezzo)*; su `L 120` **`2.19` volte**: `8.80` ore fino a `40000` *(la partenza di `TF3`, `~16000`, cadrebbe a `~35117` se conta la densita')*.
+- ### **Lo sparpaglio dei semi NON e' misurato:** le tre partenze note sono partenze DIVERSE. **Se fosse quello** *(`0.700` in `ln t`)*, **servirebbero `26` semi per `L` a `2` sigma: centinaia di ore.**
+- **La proposta:** **un pilota di `4` semi su `L 81`** *(la partenza di `TF3` piu' il rumore `1e-10`, `~12` ore)* per misurare lo sparpaglio; **la partenza definita** *(il primo blocco sopra `5` per `1000`)*; **un arresto alla partenza** *(un ramo nuovo)*; **un'alternativa piu' economica con `TBG`** *(la densita' del mare fissata dal bordo parziale)*. **Quattro domande a Luca.**
