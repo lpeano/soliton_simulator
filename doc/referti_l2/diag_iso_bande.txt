@@ -1,0 +1,8 @@
+cerchi: 60 e 60
+max |omega medio 10 - 11| 0.000e+00 (alle cifre stampate)
+  |k|/k_M 0.0050: l'anisotropia di omega 10 2.795e-15, 11 2.934e-15; il pavimento della rotazione di 60 gradi (rot 60) 7.105e-15, 7.105e-15
+  |k|/k_M 0.0968: l'anisotropia di omega 10 4.085e-08, 11 4.085e-08; il pavimento della rotazione di 60 gradi (rot 60) 9.326e-15, 8.882e-15
+  |k|/k_M 0.2844: l'anisotropia di omega 10 2.840e-05, 11 2.840e-05; il pavimento della rotazione di 60 gradi (rot 60) 8.438e-15, 8.438e-15
+  |k|/k_M 0.5834: l'anisotropia di omega 10 2.774e-03, 11 2.774e-03; il pavimento della rotazione di 60 gradi (rot 60) 7.994e-15, 7.550e-15
+  |k|/k_M 1.0000: l'anisotropia di omega 10 9.343e-02, 11 9.343e-02; il pavimento della rotazione di 60 gradi (rot 60) 8.882e-15, 1.132e-14
+rot 60 su tutti i cerchi: da 5.329e-15 a 1.266e-14 (assoluto, per unita' di tempo)

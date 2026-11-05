@@ -1,0 +1,24 @@
+# -*- coding: utf-8 -*-
+"""L'ISOTROPIA DELLA DISPERSIONE, DOPO IL REFERTO (2026-11-05): le bande 10 e 11 di B coincidono su tutti i cerchi, o solo a Gamma? Dalle tabelle stampate in
+doc/referti_l2/isotropia_dispersione.txt (alle cifre stampate: omega medio a 6 decimali, le anisotropie a 4 cifre).
+    python doc/referti_l2/diag_iso_bande.py.txt   (dalla radice del repo)
+"""
+import io
+import re
+
+t = io.open("doc/referti_l2/isotropia_dispersione.txt", encoding="utf-8").read()
+b10 = t.split("### LA BANDA 10")[1].split("### LA BANDA 11")[0]
+b11 = t.split("### LA BANDA 11")[1].split("-----")[0]
+
+
+def righe(b):
+    return [list(map(float, r.split())) for r in b.splitlines() if re.match(r"^\s+\d\.\d{4}\s", r)]
+
+
+r10, r11 = righe(b10), righe(b11)
+print("cerchi: %d e %d" % (len(r10), len(r11)))
+print("max |omega medio 10 - 11| %.3e (alle cifre stampate)" % max(abs(a[2] - b[2]) for a, b in zip(r10, r11)))
+for a, b in zip(r10, r11):
+    if a[0] in (0.005, 0.0968, 0.2844, 0.5834, 1.0):
+        print("  |k|/k_M %.4f: l'anisotropia di omega 10 %.3e, 11 %.3e; il pavimento della rotazione di 60 gradi (rot 60) %.3e, %.3e" % (a[0], a[3], b[3], a[7], b[7]))
+print("rot 60 su tutti i cerchi: da %.3e a %.3e (assoluto, per unita' di tempo)" % (min(x[7] for x in r10 + r11), max(x[7] for x in r10 + r11)))

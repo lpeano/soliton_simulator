@@ -23607,3 +23607,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - `FX0` entro il `20%` del continuo *(`2.3%`-`3.5%`)* coi vertici entro `5` gradi a `0`, `15`, `30`; `FX1` sotto l'`1%`; `FX1-F` su `|c1| / c0` sotto l'`1%`, che deve fallire *(atteso `8.6%`)*; `|c1| / c0` per ogni mappa vera.
 - **Luca registra i criteri di prima come l'errore `n.106` del guardiano.** La parte (c) della corona resta ferma. **L'ordine:** l'isotropia, la forma, la corona (a) e (b), `TBS`.
+
+## 2026-11-05 — LA CARTA DELL'ISOTROPIA: **`3/5`, `DI0` E `DI1-P` FALLISCONO, DUE ERRORI MIEI NEL PROTOCOLLO** *(`doc/referti_l2/isotropia_dispersione.txt`; `carta_isotropia.py` `e71f9713`)* -- FERMO SULLA CORREZIONE
+
+- **`DI1-P`:** il triangolare di prova da' `4.005`, non `6`: **coi miei numeri di protocollo** *(`omega0 = 3`, `t = 1/2`)* **ha `omega(Gamma) = 0`**, e l'anisotropia relativa va come `k^4`. La derivazione era giusta, il campione no.
+- **`DI0`:** lo scarto della rotazione di `60` gradi e' fra `5.3e-15` e `1.3e-14` ASSOLUTI su tutti i cerchi: **il pavimento delle fasi.** **La banda `B` su `F3` ha la simmetria `D6` alla precisione della macchina;** la mia tolleranza relativa vicino al pavimento era sbagliata.
+- **Le bande `10` e `11` coincidono ovunque** *(due copie, non un doppietto accidentale)*: la pendenza dell'anisotropia di `omega` **`6.015`**, di `|v_g|` `3.9`, come la derivazione per il caso non degenere.
+- ### **IL RISULTATO** *(un numero)*: **l'anisotropia di `omega` supera l'`1%` sotto `lambda 2.27` nodi e lo `0.1%` sotto `3.25`; quella di `|v_g|` sotto `3.55` e `6.09`. Il reticolo, nella dispersione, si vede solo sotto `~6` nodi.**
+- **La correzione proposta** *(il task history `2026-11-05_forma_isotropia_corona`, 5; decide Luca)*: `DI1-P` con `omega0 = 4`; `DI0` assoluto sotto `1e-12`, piu' il relativo `1e-6` dove l'escursione supera `1e-6`; `DI1` letto anche per le due copie. **Nell'attesa passo alla carta della forma, che non ne dipende.**
