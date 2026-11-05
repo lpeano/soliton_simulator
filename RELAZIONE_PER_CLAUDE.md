@@ -23743,3 +23743,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La simmetria si rompe negli stessi tempi di `TS`, ma la corsa non viene.**
 - **Una mia osservazione, non una lettura:** `C(1)`, `C(2)` negativi e `C(3)` `~+0.7` in `TBS` come in `TB3`: **compatibile con un'oscillazione di periodo `~1500`** *(la nota su `TB3` delle `18:45`)*; **non misurato** *(servirebbe la serie dei campioni)*.
 - **Il prossimo pezzo della coda:** la patch del pilota, `D6`, la cassetta; poi le tre carte statiche, una alla volta; **poi FERMO**.
+
+## 2026-11-05 — `TBS` DOPO IL REFERTO: LA PATCH DEL PILOTA, `D6`, LA CASSETTA
+
+- **La patch del pilota** *(`PL1`-`PL4`)* in `corsa_accensione.py` `facde015` *(`6235d8ea`)*, a `TBS` finita; **`D6` a `6235d8ea`** *(`89a8f24a`)*; **la cassetta `108/108`** *(`a3c2c9d5`)*.
+- ### **Un dettaglio da annotare:** **il task history `TL120` scrive `default_rng(seme)` per `xi`; il codice usa `default_rng(seme)` per la parte reale e `default_rng(seme + 1000)` per l'immaginaria** *(due generatori: la scelta resta mia e dichiarata)*.
+
+## 2026-11-05 — LA CARTA STATICA DEL VUOTO: **`4/5`, `VD-T` FALLISCE** -- ### **FERMO** *(`doc/referti_l2/statica_vuoto.txt`; il task history `2026-11-05_carte_statiche`, sez. `5`)*
+
+- **`VD-T`** *(la risposta da un altro nodo, riportata indietro)*: **`1.639e-09` contro la soglia `1e-12`.** **Passano `CS0`, `VD-L` `4.1e-9`, `VD-G` `3.5e-16`, `VD-0` il Goldstone `4.3e-9`.**
+- ### **La mia lettura, un'ipotesi:** **`1e-12` sta sotto il pavimento della differenza finita ad `AMP 1e-7`** *(`eps / AMP ~ 1e-9`: la grandezza di `VD-T`, `VD-L` e del Goldstone)*. **Ho preso la tolleranza di `VD-G`, che confronta due conti sulle stesse risposte, senza confrontarla col pavimento: il mio errore.** **La chiusura proposta:** **`VD-T` ad `AMP 1e-6` e `1e-5`** *(se e' il pavimento, cala come `1 / AMP`)*, e **`VD-T` alla tolleranza di `VD-L`.**
+- ### **Accanto, non come risultato:** **a `Gamma` le fasi `0`, `+-omega`, `+-2 omega`**, i moduli `1` entro `1.2e-8`; ### **il ramo del gap e' PIATTO lungo `A1`** *(`3.141593` alle `7` cifre, la curvatura `-5.2e-10`)*: ### **il `lambda` statico proposto viene `0`: la lettura non da' una lunghezza.**
+- **La richiesta di Luca delle `19:24`** *(le mappe leggere di `TBS`, solo lettura da `E:`, come `campo_TB3`, col controllo `F1`)*: **in coda dopo le carte statiche**, la riga `3-bis` della mappa.
+- ### **FERMO:** **le domande a Luca:** ① **`VD-T`: la prova di scala e la tolleranza di `VD-L`, o altro?** ② **intanto giro `--coppia` e `--dimensione`** *(non dipendono da `VD-T`)*, **e le mappe di `TBS`?** **Il criterio di chiusura:** la risposta di Luca, scritta nel task history delle carte statiche.
