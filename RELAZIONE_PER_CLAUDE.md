@@ -23904,3 +23904,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-06 — `C0` LUNGO SU `L 162`: **`2/2`** *(`c0_L162.txt`; il task history `2026-11-06_coppia_corse`, sez. `8`)*
 
 - **Il vuoto `F3` da solo su `L 162` segue la tabella `c(t)` di `L 81` entro `4.4e-14`** *(il residuo da `c F3` `4.3e-14`; `omega` al bit)* **su `7667` tick**; la tabella spostata di un tick fallisce come deve. **Avanti con le corse della coppia.**
+
+## 2026-11-06 — IL PRIMO PEZZO DI `S162`: **IL COSTO VERO `4707` s PER PEZZO, `8.7` ORE PER CORSA, `34.9` PER LE QUATTRO** *(il task history `2026-11-06_coppia_corse`, sez. `9`)*
+
+- **`C0` breve passa** *(`3.968e-14`)*; `mu`, `w_in` su `L 162` = `L 81`. **Il costo e' `4.75` volte quello di `TB3`**, contro il `4` stimato dai nodi. **Lo spostamento stampato `17.28` e' la distanza del solitone dal centro del bordo** *(la partenza a `17.5` dal punto medio)*: **l'arresto (i) la usa cosi', giusto; il resto `~0.22` lo rilegge il referto.** **Avanti con `S162` intera.**
