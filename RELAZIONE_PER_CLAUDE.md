@@ -23891,3 +23891,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Nessun FERMO.** ### ⚠ **Un limite della misura** *(mio, da dire)*: **`R(0.03)` coincide col minimo di `M_in` senza bordo** *(`8.739e-3`; in `TB3` `9.515e-3` contro `9.555e-3`)*: **la misura legge la coda del pacchetto che non e' mai uscita, non la riflessione; il suo pavimento e' `~9e-3`.** Una misura piu' fine sarebbe un protocollo nuovo: decide Luca.
 - **Avanti: `C0` lungo** *(`~50` minuti)*.
+
+## 2026-11-06 — `cs`: **«`cs` DAL TICK `1`» NON STA COL TICK DEL NUCLEO NELLA RAMPA** *(il task history `2026-11-06_cs_col_solitone`, sez. `9`; trovato preparando il codice, NON blocca la coppia)*
+
+- **`tick_con_cs` calcola il punto fisso di `cs` col tick INTERO; nella rampa la corsa usa `tick_acceso` coi pezzi del vuoto scalati di `lam`:** ### **«dal tick `1`» vorrebbe un secondo percorso del tick fuori dal nucleo** *(il difetto che `percorri_tick` esiste per impedire)*.
+- ### **Le strade:** **(r1) `cs` dopo la rampa, dal tick `K + 1`** *(la mia proposta)*; (r2) un punto fisso sulla rampa in `accensione.py`, da collaudare; (r3) `cs` letto all'inizio del passo *(la variante dichiarata sbagliata, `D2`)*. **Decide Luca, prima del codice di `cs`.**
