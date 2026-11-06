@@ -4,7 +4,7 @@
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
-[TIMBRO] carta_statiche.py  sha1-BYTE c9df9959  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE d170b8d9  committato e pulito
 ==================================================================================================================================
 LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --circolazione; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
 ==================================================================================================================================
@@ -182,7 +182,7 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --circolazione; nessuna corsa;
     gli anelli contigui con un verso preferito dello stesso segno: 2 (il segno +1)
   DEVE PASSARE: CI-U (mio) l'unitarieta' del blocco: J dalla testa = -J dalla coda entro il pavimento, ogni applicazione,  PASSA   1.478e-12 (pav 5.1e-12); 6.821e-13 (pav 2.6e-12); 6.821e-13 (pav 2.4e-12)
   DEVE PASSARE: CI-A (mio) i pezzi diversi dallo spostamento non cambiano la norma di nessun nodo, entro il pavimento      PASSA   2.046e-12; 1.705e-12; 1.421e-12
-  DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato          ### FALLISCE   5.798e-12; 3.695e-12; 2.899e-12
+  DEVE PASSARE: CI-C (mio; il pavimento di Luca 11:08) la continuita': rho(t + 1) - rho(t) = -div J entro 14 (i pezzi del  PASSA   5.798e-12 (pav 7.1e-11); 3.695e-12 (pav 3.7e-11); 2.899e-12 (pav 3.4e-11)
   ### il sintetico: lo stato di t 0 per e^{+i theta}: il centro (40.5000, 40.5000); max rho 5.054167e+03; il pavimento di C_T 5.054e-12; |J testa + J coda| max 1.251e-12; gli altri pezzi, max |d rho_nodo| CAMM-FASE-VUOTO 0.00e+00, CAMM-MATERIA-VUOTO 1.71e-12, grover 3.52e-12, grover_scalare 0.00e+00, moneta_spin 1.71e-12, spostamento_scalare 0.00e+00; la continuita' 6.480e-12; rho dal libro - rho per nodo 0.000e+00
     tick: max |C_T| 7.518719e+02
     prima meta': max |C_T| 3.866183e+02
@@ -295,7 +295,49 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --circolazione; nessuna corsa;
       r 30-40: -3.672e-35 -3.672e-35 -7.866e-35 -3.672e-35 -3.672e-35 -7.866e-35
     gli anelli contigui con un verso preferito dello stesso segno: 17 (il segno -1)
   DEVE PASSARE: CI-V (mio) Gamma(R) col sintetico e^{-i theta} ha il segno opposto a quello con e^{+i theta}, a ogni R dov PASSA   4 raggi confrontati: R 4 -1.863e+03 / +1.863e+03; R 8 -8.196e+02 / +8.196e+02; R 12 -1.053e+02 / +1.053e+02; R 16 -1.154e-03 / +1.154e-03; R 20 -1.256e-11 / +1.256e-11; R 24 +1.705e-13 / -1.137e-13; R 28 +2.274e-13 / -5.684e-14; R 32 +5.684e-14 / -1.137e-13; R 36 -1.137e-13 / -1.137e-13; R 40 -5.684e-14 / +1.137e-13
+  ### LA SERIE DEL VERSO (Luca 11:08): 21 stati di TBS, i tick [0, 10000, 20000, 30000, 40000, 50000, 60000, 70000, 80000, 90000, 100000, 110000, 120000, 130000, 140000, 150000, 160000, 170000, 180000, 190000, 200000]
+        t    tick   sha        Gamma(12)    pavimento segno        Gamma(16)     anello 0     anello 1     anello 2       unit      altri       cont
+        0       0    ok    +6.750156e-14    5.236e-09    +0    +9.974660e-18  +1.8948e-14  -5.1676e-15  -3.5901e-14   1.48e-12   2.05e-12   5.80e-12
+     1500   10000    ok    +9.547367e+01    3.470e-09    +1    -2.363558e+00  +2.5941e-01  +2.6651e-01  +1.9051e-01   9.09e-13   1.48e-12   3.87e-12
+     3000   20000    ok    +6.939864e+01    3.066e-09    +1    +3.646261e+00  +9.1878e-02  +9.5597e-02  +1.2484e-02   8.53e-13   1.53e-12   3.69e-12
+     4500   30000    ok    +3.458070e+01    2.969e-09    +1    +2.755541e+01  -1.9185e-01  -1.9144e-01  -1.5587e-01   1.02e-12   1.48e-12   4.09e-12
+     6000   40000    ok    +5.829693e+01    3.029e-09    +1    +5.921157e+01  -5.3458e-01  -4.3890e-01  -3.0259e-01   8.53e-13   1.31e-12   3.18e-12
+     7500   50000    ok    +9.741191e+01    2.904e-09    +1    +5.087398e+01  -8.1177e-01  -6.1885e-01  -4.1284e-01   7.96e-13   1.19e-12   3.41e-12
+     9000   60000    ok    +7.124695e+01    2.711e-09    +1    +2.296192e+01  -8.0904e-01  -6.5836e-01  -4.0996e-01   7.96e-13   1.42e-12   3.69e-12
+    10500   70000    ok    -1.403653e+01    2.716e-09    -1    -1.617404e+01  -5.9812e-01  -4.6707e-01  -3.4400e-01   7.39e-13   1.19e-12   3.47e-12
+    12000   80000    ok    -5.191741e+01    2.628e-09    -1    -2.882019e+01  -9.7055e-02  -1.3675e-01  -1.8484e-01   6.25e-13   1.31e-12   3.13e-12
+    13500   90000    ok    -1.124316e+01    2.690e-09    -1    -1.904352e+01  +4.2821e-01  +2.6583e-01  +5.1732e-02   1.02e-12   1.36e-12   3.13e-12
+    15000  100000    ok    +5.630352e+01    2.736e-09    +1    -2.354299e+00  +7.4513e-01  +4.9535e-01  +2.7423e-01   6.82e-13   1.71e-12   3.69e-12
+    16500  110000    ok    +6.515234e+01    2.833e-09    +1    +9.603903e+00  +6.2183e-01  +4.4414e-01  +2.5297e-01   9.09e-13   1.59e-12   4.04e-12
+    18000  120000    ok    +7.382751e+00    2.703e-09    +1    -1.651626e+00  +8.6451e-02  +9.3762e-02  +8.7540e-02   7.96e-13   1.59e-12   2.79e-12
+    19500  130000    ok    -3.338978e+01    2.607e-09    -1    -2.107213e+01  -3.8375e-01  -2.6905e-01  -3.2624e-02   7.96e-13   1.48e-12   3.13e-12
+    21000  140000    ok    -4.692817e+01    2.527e-09    -1    -2.088673e+01  -4.6017e-01  -3.2945e-01  +1.2008e-02   6.25e-13   1.19e-12   3.13e-12
+    22500  150000    ok    -4.777279e+01    2.638e-09    -1    -1.194261e+00  -1.6150e-01  -8.5376e-02  +1.5959e-01   6.25e-13   1.19e-12   2.96e-12
+    24000  160000    ok    -4.097910e+01    2.663e-09    -1    +4.147786e+00  +1.4505e-01  +9.8197e-02  +2.2165e-01   1.02e-12   1.42e-12   3.41e-12
+    25500  170000    ok    -5.611376e+01    2.513e-09    -1    -1.801069e+01  +1.7935e-01  +1.2096e-01  -3.4320e-02   7.39e-13   1.19e-12   3.24e-12
+    27000  180000    ok    -9.497986e+01    2.520e-09    -1    -3.189073e+01  +3.5648e-01  +8.0443e-02  -3.2810e-01   7.96e-13   1.42e-12   3.64e-12
+    28500  190000    ok    -8.118498e+01    2.618e-09    -1    -1.968891e+01  +4.9041e-01  +2.4980e-01  -4.6311e-01   5.68e-13   9.66e-13   3.41e-12
+    30000  200000    ok    +4.397867e+01    2.514e-09    +1    -2.259441e+00  +5.9010e-01  +5.3919e-01  -2.9088e-01   6.82e-13   1.42e-12   2.90e-12
+  DEVE PASSARE: CI-S21 ogni stato di TBS da' gli sha per chiave registrati nella corsa                                     PASSA   21/21
+  DEVE PASSARE: CI-U21 (mio) l'unitarieta' del blocco su ogni stato                                                        PASSA   21/21
+  DEVE PASSARE: CI-A21 (mio) gli altri pezzi non cambiano la norma dei nodi, ogni stato                                    PASSA   21/21
+  DEVE PASSARE: CI-C21 (mio; il pavimento di Luca 11:08) la continuita' entro 14 x il pavimento, ogni stato                PASSA   21/21
+  ### LA LETTURA DELLA SERIE (il task history 11): t_1 1500; i segni +0 +1 +1 +1 +1 +1 +1 -1 -1 -1 +1 +1 +1 -1 -1 -1 -1 -1 -1 -1 +1
+  ### IL VERSO NEL TEMPO: CAMBIA (4 cambi di segno da t 1500; 0 interruzioni)
+  ### TB3: 20 jsonl, 0 stati registrati; nella corsa STATI ha la voce TB3: False -- il conto su TB3 NON si puo' fare (nessuno stato con la fase di psi)
   ### LA LETTURA (r4) DI B (il task history 9.3): gli anelli contigui con un verso preferito dello stesso segno, t 0 / 15000 / 30000: 0 (+0) / 3 (+1) / 2 (+1); la soglia 3
   ### (r4) per B: SI'
+  ### I NUMERI DI PRIMA (il referto a 9b8a0e5f, il pavimento di CI-C per un C_T):
+    prima | DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+    prima | DEVE PASSARE: CI-S ogni stato caricato da' gli sha per chiave registrati nella corsa                                     PASSA   [True, True, True]
+    prima | DEVE PASSARE: CI-0 (Luca) il vuoto F3 da solo (psi = 0, dopo la rampa) da' C_T = 0 -- uno zero PER COSTRUZIONE: controll PASSA   max |C_T| 0.000e+00
+    prima | DEVE PASSARE: CI-U (mio) l'unitarieta' del blocco: J dalla testa = -J dalla coda entro il pavimento, ogni applicazione,  PASSA   1.478e-12 (pav 5.1e-12); 6.821e-13 (pav 2.6e-12); 6.821e-13 (pav 2.4e-12)
+    prima | DEVE PASSARE: CI-A (mio) i pezzi diversi dallo spostamento non cambiano la norma di nessun nodo, entro il pavimento      PASSA   2.046e-12; 1.705e-12; 1.421e-12
+    prima | DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato          ### FALLISCE   5.798e-12; 3.695e-12; 2.899e-12
+    prima | DEVE FALLIRE: CI-F (Luca) il sintetico e^{+i theta}: "nessun verso preferito" (meno di 3 anelli contigui con lo stesso v PASSA   17 anelli contigui (il segno +1)
+    prima | DEVE PASSARE: CI-V (mio) Gamma(R) col sintetico e^{-i theta} ha il segno opposto a quello con e^{+i theta}, a ogni R dov PASSA   4 raggi confrontati: R 4 -1.863e+03 / +1.863e+03; R 8 -8.196e+02 / +8.196e+02; R 12 -1.053e+02 / +1.053e+02; R 16 -1.154e-03 / +1.154e-03; R 20 -1.256e-11 / +1.256e-11; R 
+    prima | ### LA LETTURA (r4) DI B (il task history 9.3): gli anelli contigui con un verso preferito dello stesso segno, t 0 / 15000 / 30000: 0 (+0) / 3 (+1) / 2 (+1); la soglia 3
+    prima | ### (r4) per B: SI'
+    prima | ESITO: 7/8 controlli passano; DEVE fallite: 1 ["DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato"]
 ==================================================================================================================================
-ESITO: 7/8 controlli passano; DEVE fallite: 1 ["DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato"]
+ESITO: 12/12 controlli passano; DEVE fallite: 0 []

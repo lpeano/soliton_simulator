@@ -23845,3 +23845,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **`CI-C` fallisce:** la continuita' `5.8e-12` contro `5.05e-12` *(e `1.41`, `1.21` volte agli altri tempi)*. ### **Il pavimento era per UN `C_T`, e l'ho usato per una somma su `14` pezzi: un mio errore, la terza volta di una soglia non confrontata con la premessa.** **La proposta:** `14 x PAV_C x max rho`; **decide Luca.**
 - **Stampato, non letto:** a `t 0` nessun verso; **a `t 15000` e `30000` il cuore** *(anelli `0`-`2`)* **gira in verso antiorario, su e giu' e le due meta' del tick d'accordo, poi il segno si alterna;** `Gamma(12)` `+56.3` e `+44.0`. **(r4) non si legge finche' il DEVE non regge.**
 - ### **FERMO:** il pavimento di `CI-C`; poi la carta rigirata; **intanto C?**
+
+## 2026-11-06 — B RIFATTA COL PAVIMENTO DI LUCA: **`12/12`; (r4) SI' ALLA SOGLIA; IL VERSO DI `Gamma(12)` CAMBIA `4` VOLTE IN `30000`** *(`statica_circolazione.txt`; il task history `2026-11-05_rotazione_triangoli`, sez. `11`-`12`)*
+
+- **`CI-C` passa** *(`5.8e-12` contro `7.1e-11`)*; i numeri di prima stampati accanto *(letti da `9b8a0e5f`)*; **i DEVE su tutti i `21` stati di `TBS` passano.**
+- ### **(r4) come scritta: SI'** *(a `t 15000` tre anelli contigui antiorari, esattamente la soglia)*.
+- ### **La serie** *(il segno di `Gamma(12)` ogni `1500`)*: `0 + + + + + + - - - + + + - - - - - - - +` -- **«CAMBIA»**, `|Gamma(12)|` sempre `10^9` volte sopra il pavimento. ### **Avvertenza: il campionamento ogni `10000` tick puo' fare alias; si dice solo che il verso NON e' fisso.**
+- **TB3 non ha stati:** il conto non si fa.
+- ### **La mia proposta di lettura:** un'oscillazione rotazionale, non un momento angolare conservato; **una serie fitta** *(una corsa breve)* **la distinguerebbe: decide Luca.** **Avanti con C.**
