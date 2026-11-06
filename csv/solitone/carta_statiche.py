@@ -6,6 +6,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --coppia-matura > doc/referti_l2/statica_coppia_matura.txt   # (Luca 2026-11-05 21:01) gli stati maturi di TBS
     python csv/solitone/carta_statiche.py --circolazione > doc/referti_l2/statica_circolazione.txt   # (Luca 2026-11-05 21:20, 2026-11-06) B: la circolazione della materia dagli stati di TBS
     python csv/solitone/carta_statiche.py --vortici > doc/referti_l2/statica_vortici.txt   # (Luca 2026-11-05 21:20, 2026-11-06) C: i vortici della fase del vuoto e di psi
+    python csv/solitone/carta_statiche.py --olonomia > doc/referti_l2/statica_olonomia.txt   # (Luca 2026-11-05 21:39, 2026-11-06) E: l'olonomia di U attorno ai triangoli
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -964,6 +965,91 @@ def vortici():
     print("  ### (r4) per C: %s" % ("SI'" if any(si for _t, _n, _q, si in lett) else "NO"))
 
 
+TOLL_W = 1e-12                 # ### --olonomia (il task history della rotazione, 15.2-15.3): W = I entro 1e-12
+
+
+def _olonomia(z, tri, U):
+    """### **`W` per triangolo** *(15.1)*: `W = U_e3^dagger U_e2 U_e1` lungo `v -> v + p1 -> v + p2 -> v`, `W^dagger` se quel giro e' orario; ### **`{su, giu'}: (W, max |W - I|, phi, a)`.**"""
+    out = {}
+    for tn in ("su", "giu'"):
+        d = tri[tn]
+        e1, e2, e3 = d["archi"]
+        W = np.einsum("aji,ajk,akl->ail", np.conj(U[e3]), U[e2], U[e1])
+        if d["verso"] < 0:
+            W = np.conj(np.transpose(W, (0, 2, 1)))
+        dW = float(np.max(np.abs(W - np.eye(2))))
+        det = np.linalg.det(W)
+        phi = np.angle(det) / 2.0
+        S = W / np.sqrt(det)[:, None, None]
+        a = 2.0 * np.arccos(np.clip(np.abs(np.real(np.trace(S, axis1=1, axis2=2))) / 2.0, 0.0, 1.0))
+        out[tn] = (W, dW, phi, a)
+    return out
+
+
+def _u2_casuale(rng, k):
+    X = rng.normal(size=(k, 2, 2)) + 1j * rng.normal(size=(k, 2, 2))
+    Q, Rr = np.linalg.qr(X)
+    dg = np.diagonal(Rr, axis1=1, axis2=2)
+    return Q * (dg / np.abs(dg))[:, None, :]
+
+
+def olonomia():
+    """### **E** *(Luca `2026-11-05` `21:39`; `2026-11-06`)*: **l'olonomia di `U` attorno ai triangoli, sul vuoto e nella scena del solitone** *(il task history della rotazione, 15)*."""
+    import _vuoto_vivo_B as V
+    from solitone import corsa_accensione as CA
+    from solitone import toro as TO
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    righe = [V.LP.leggi(os.path.join(CA.dir_json("TBS"), f)) for f in sorted(os.listdir(CA.dir_json("TBS"))) if f.startswith("TBS_") and f.endswith(".jsonl")]
+    reg = {x["t"]: x for r in righe for x in (r.get("stati") or [])}
+    _r8, z, _p8, F3, _i8, cm = costruisci(V.N, 81)
+    A1, A2 = TO.vettori()
+    dirs = _ordine_archi(z)
+    tri = _triangoli(z, dirs, A1, A2)
+    inc = z["inc"]
+    nodo = np.asarray(inc.nodo)
+    U = z["mot"].geo.U
+    print("  U: forma %s; |U - I| max %.3e; il verso antiorario: su %+d, giu' %+d; TOLL_W %g" % (U.shape, float(np.max(np.abs(U - np.eye(2)))), tri["su"]["verso"], tri["giu'"]["verso"], TOLL_W))
+    # ### i controlli (15.2)
+    rng = np.random.default_rng(1)
+    g = _u2_casuale(rng, inc.n)
+    Ug = np.einsum("aij,akj->aik", g[nodo[1::2]], np.conj(g[nodo[0::2]]))     # U_e = g_testa g_coda^dagger
+    og = _olonomia(z, tri, Ug)
+    eg = max(og[t][1] for t in og)
+    esito("DEVE PASSARE: OL-G (mio) una U di pura gauge casuale (seme 1) da' W = I entro %g su ogni triangolo -- il controllo dell'ordine e del verso" % TOLL_W, eg <= TOLL_W, "max |W - I| %.3e" % eg)
+    Ur = _u2_casuale(np.random.default_rng(2), inc.m)
+    orr = _olonomia(z, tri, Ur)
+    er = max(orr[t][1] for t in orr)
+    esito("DEVE FALLIRE: OL-F (mio) una U casuale per arco, non di gauge (seme 2): \"W = I entro %g\"" % TOLL_W, not (er <= TOLL_W), "max |W - I| %.3e" % er)
+    # ### la U della scena: sul vuoto F3 e nella scena del solitone (la stessa U), e dopo il tick della corsa da t 15000
+    U0 = U.copy()
+    t = STATI_MATURI[1]
+    f = reg[t]["file"]
+    with np.load(f) as d:
+        st = {k: d[k].copy() for k in d.files if k != "t"}
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    for k_, v_ in st.items():
+        z["st"][k_][...] = v_
+    _tick_correnti(z, t + 1, K)
+    for k_, v_ in salvato.items():
+        z["st"][k_][...] = v_
+    esito("DEVE PASSARE: OL-T (mio) U della scena uguale al bit prima e dopo il tick della corsa dallo stato di TBS a t %.0f" % (t * s), np.array_equal(U0, z["mot"].geo.U), "sha1 %s / %s" % (SFM_sha(U0), SFM_sha(z["mot"].geo.U)))
+    o = _olonomia(z, tri, z["mot"].geo.U)
+    for tn in ("su", "giu'"):
+        _W, dW, phi, a = o[tn]
+        print("    %s: max |W - I| %.3e; il flusso U(1) phi media %+.3e, dispersione %.3e; l'angolo SU(2) a media %.3e, dispersione %.3e" % (tn, dW, float(np.mean(phi)), float(np.std(phi)), float(np.mean(a)), float(np.std(a))))
+    dmax = max(o[tn][1] for tn in o)
+    if dmax <= TOLL_W:
+        lett = "BANALE (max |W - I| %.3e): la parte di psi di C, senza U, E' gia' quella con U" % dmax
+    elif max(float(np.std(o[tn][2])) for tn in o) <= TOLL_W and max(float(np.std(o[tn][3])) for tn in o) <= TOLL_W:
+        lett = "UNIFORME NON BANALE"
+    else:
+        lett = "NON UNIFORME"
+    cm.__exit__(None, None, None)
+    print("  ### LA LETTURA DI E (il task history 15.3): %s" % lett)
+    print("  ### ATTENZIONE (15.1): U = I e' costruita dalla scena (csv/_triangoli.scena_toro) e nessun pezzo del tick la scrive: uno zero PER COSTRUZIONE, non una misura della fisica")
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -1006,14 +1092,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --vuoto | --goldstone | --circolazione | --vortici | --coppia | --coppia-matura | --dimensione"
+    modo = "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
