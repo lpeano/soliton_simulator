@@ -670,6 +670,71 @@ def _circola(z, dirs, A1, A2, tri, st, t, K, nome, stampa=True):
     return res
 
 
+R_SERIE = 12                   # ### Luca 2026-11-06 11:08: il segno di Gamma(12) su tutti gli stati salvati di TBS
+
+
+def _serie_verso(z, dirs, A1, A2, tri, K, reg, s):
+    """### **Luca `11:08`: il segno di `Gamma(12)` su TUTTI gli stati salvati di `TBS`** *(stabile, nasce, cambia: le letture del task history della rotazione, 11)*; **e i
+    DEVE `CI-U`, `CI-A`, `CI-C` su ogni stato.** ### **E `TB3`: gli stati registrati nei suoi jsonl, CONTATI.**"""
+    import _vuoto_vivo_B as V
+    import composizione as CM
+    from solitone import corsa_accensione as CA
+    NP = len(CM.ORDINE)
+    tt = sorted(reg)
+    print("  ### LA SERIE DEL VERSO (Luca 11:08): %d stati di TBS, i tick %s" % (len(tt), tt))
+    print("  %7s %7s %5s %16s %12s %5s %16s %12s %12s %12s %10s %10s %10s" % ("t", "tick", "sha", "Gamma(12)", "pavimento", "segno", "Gamma(16)", "anello 0", "anello 1", "anello 2", "unit", "altri", "cont"))
+    serie, eS, eU, eA, eC = [], [], [], [], []
+    for t in tt:
+        f = reg[t]["file"]
+        with np.load(f) as d:
+            st = {k: d[k].copy() for k in d.files if k != "t"}
+        ok_s = all(SFM_sha(st[k]) == reg[t]["sha"][k] for k in reg[t]["sha"])
+        r = _circola(z, dirs, A1, A2, tri, st, t + 1, K, "", stampa=False)
+        g = {R_: (G_, N_) for R_, G_, N_ in r[("tick", "Gamma")]}
+        G12, N12 = g[R_SERIE]
+        pav = N12 * r["pav"]
+        sg = int(np.sign(G12)) if abs(G12) > pav else 0
+        an = [x[2] for x in r[("tick", "tutti")][:3]]
+        altri = max(r["altri"].values())
+        eS.append(ok_s)
+        eU.append(r["unit"] <= r["pav"])
+        eA.append(altri <= r["pav"])
+        eC.append(r["cont"] <= NP * r["pav"])
+        serie.append((t, sg))
+        print("  %7.0f %7d %5s %+16.6e %12.3e %+5d %+16.6e %+12.4e %+12.4e %+12.4e %10.2e %10.2e %10.2e" % (t * s, t, "ok" if ok_s else "NO", G12, pav, sg, g[16][0], an[0], an[1], an[2], r["unit"], altri, r["cont"]))
+    esito("DEVE PASSARE: CI-S21 ogni stato di TBS da' gli sha per chiave registrati nella corsa", all(eS), "%d/%d" % (sum(eS), len(eS)))
+    esito("DEVE PASSARE: CI-U21 (mio) l'unitarieta' del blocco su ogni stato", all(eU), "%d/%d" % (sum(eU), len(eU)))
+    esito("DEVE PASSARE: CI-A21 (mio) gli altri pezzi non cambiano la norma dei nodi, ogni stato", all(eA), "%d/%d" % (sum(eA), len(eA)))
+    esito("DEVE PASSARE: CI-C21 (mio; il pavimento di Luca 11:08) la continuita' entro %d x il pavimento, ogni stato" % NP, all(eC), "%d/%d" % (sum(eC), len(eC)))
+    dopo = [(t, sg) for t, sg in serie if t > 0]
+    sopra = [i for i, (_t, sg) in enumerate(dopo) if sg != 0]
+    if not sopra:
+        lett = "altro: Gamma(12) sotto il pavimento a ogni t > 0"
+        t1 = None
+    else:
+        i1 = sopra[0]
+        t1 = dopo[i1][0]
+        coda = [sg for _t, sg in dopo[i1:]]
+        interr = sum(1 for x in coda if x == 0)
+        segni = [x for x in coda if x != 0]
+        nc = sum(1 for a, b in zip(segni[:-1], segni[1:]) if a != b)
+        primo = dopo[0][0]
+        if nc >= 1:
+            lett = "CAMBIA (%d cambi di segno da t %.0f; %d interruzioni)" % (nc, t1 * s, interr)
+        elif interr == 0 and t1 == primo:
+            lett = "STABILE (il segno %+d da t %.0f, il primo stato dopo t 0)" % (segni[0], t1 * s)
+        elif interr == 0:
+            lett = "NASCE a t %.0f (il segno %+d, poi stabile)" % (t1 * s, segni[0])
+        else:
+            lett = "altro: nessun cambio di segno, %d interruzioni sotto il pavimento dopo t %.0f" % (interr, t1 * s)
+    print("  ### LA LETTURA DELLA SERIE (il task history 11): t_1 %s; i segni %s" % ("%.0f" % (t1 * s) if t1 is not None else "-", " ".join("%+d" % sg for _t, sg in serie)))
+    print("  ### IL VERSO NEL TEMPO: %s" % lett)
+    righe = [V.LP.leggi(os.path.join(CA.dir_json("TB3"), f)) for f in sorted(os.listdir(CA.dir_json("TB3"))) if f.startswith("TB3_") and f.endswith(".jsonl")]
+    n3 = sum(len(r.get("stati") or []) for r in righe)
+    print("  ### TB3: %d jsonl, %d stati registrati; nella corsa STATI ha la voce TB3: %s -- %s" % (len(righe), n3, "TB3" in CA.STATI,
+          "il conto su TB3 NON si puo' fare (nessuno stato con la fase di psi)" if n3 == 0 else "### CI SONO STATI: il conto va fatto"))
+
+
 def circolazione():
     """### **B** *(Luca `2026-11-05` `21:20`; `2026-11-06`: avanti)*: **la circolazione della materia attorno ai triangoli, dagli stati di `TBS`** *(il task history della rotazione, 9)*."""
     import _vuoto_vivo_B as V
@@ -734,6 +799,7 @@ def circolazione():
     ok = [(a[1] * b[1] < 0) for a, b, p in zip(gam[1], gam[-1], pavG) if abs(a[1]) > p and abs(b[1]) > p]
     esito("DEVE PASSARE: CI-V (mio) Gamma(R) col sintetico e^{-i theta} ha il segno opposto a quello con e^{+i theta}, a ogni R dove entrambi sono sopra il pavimento",
           len(ok) > 0 and all(ok), "%d raggi confrontati: %s" % (len(ok), "; ".join("R %d %+.3e / %+.3e" % (a[0], a[1], b[1]) for a, b in zip(gam[1], gam[-1]))))
+    _serie_verso(z, dirs, A1, A2, tri, K, reg, s)
     for k_, v_ in salvato.items():
         z["st"][k_][...] = v_
     cm.__exit__(None, None, None)
