@@ -79,7 +79,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E LA MISURA E, L'OLONOMIA**.
 # ### **E IL TEST DEL PACCHETTO E C0 SU L 162**.
 # ### **E LE CORSE DELLA COPPIA**.
-LIBRERIA_RIFERITA = "d46ebab4"
+# ### **E LE CARTE IS1, IS2, IS3 E IL REFERTO DI S162**.
+LIBRERIA_RIFERITA = "f3cce256"
 
 
 def vecchi():
