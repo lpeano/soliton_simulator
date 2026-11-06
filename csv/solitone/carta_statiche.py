@@ -5,6 +5,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --dimensione > doc/referti_l2/statica_dimensione.txt
     python csv/solitone/carta_statiche.py --coppia-matura > doc/referti_l2/statica_coppia_matura.txt   # (Luca 2026-11-05 21:01) gli stati maturi di TBS
     python csv/solitone/carta_statiche.py --circolazione > doc/referti_l2/statica_circolazione.txt   # (Luca 2026-11-05 21:20, 2026-11-06) B: la circolazione della materia dagli stati di TBS
+    python csv/solitone/carta_statiche.py --vortici > doc/referti_l2/statica_vortici.txt   # (Luca 2026-11-05 21:20, 2026-11-06) C: i vortici della fase del vuoto e di psi
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -822,6 +823,147 @@ def _numeri_di_prima():
             print("    prima | %s" % l.strip()[:300])
 
 
+MOD_FASE = 1e-12               # ### --vortici (il task history della rotazione, 13.1): una fase per nodo non e' definita sotto 1e-12 del massimo del modulo della proiezione
+R_VORT = 20.0                  # ### 13.2: il vortice sintetico si conta dentro r < 20 (sul toro il compagno sta sul taglio dell'immagine minima)
+SOGLIA_ANELLO_V = 5            # ### 13.3: un anello con 5 o piu' vortici di un segno solo
+
+
+def _vortici(z, tri, A1, A2, chi, buono, cen):
+    """### **I vortici dei triangoli** *(13.1)*: `w_T` dalle tre differenze di `chi` ridotte in `(-pi, pi]` lungo il giro antiorario; esclusi i triangoli con una fase non definita."""
+    from solitone import carta_forma as CF
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    nodo = np.asarray(inc.nodo)
+    v = np.arange(n)
+    m1, m2 = v // L, v % L
+    P = CF.posizioni(m1, m2, A1, A2)
+    ws, rs, ok = [], [], []
+    for tn in ("su", "giu'"):
+        d = tri[tn]
+        e1, e2, e3 = d["archi"]
+        a, b, c = nodo[2 * e1], nodo[2 * e1 + 1], nodo[2 * e3 + 1]     # v, v + p1, v + p2
+        assert np.array_equal(nodo[2 * e2], b) and np.array_equal(nodo[2 * e2 + 1], c)
+
+        def dd(x, y):
+            return np.angle(np.exp(1j * (chi[y] - chi[x])))
+        w = (dd(a, b) + dd(b, c) + dd(c, a)) / (2 * math.pi)
+        w = d["verso"] * w
+        r, _th = CF.spost(P + d["off"], cen, L, A1, A2)
+        ws.append(np.rint(w).astype(int))
+        rs.append(r)
+        ok.append(buono[a] & buono[b] & buono[c])
+        assert float(np.max(np.abs(w - np.rint(w)))) < 1e-9, "una somma di tre differenze ridotte NON e' un multiplo di 2 pi"
+    return np.concatenate(ws), np.concatenate(rs), np.concatenate(ok)
+
+
+def _conta(nome, w, r, ok, stampa=True):
+    w = np.where(ok, w, 0)
+    dentro = r < R_VORT
+    piu, meno = int(np.sum((w == 1) & dentro)), int(np.sum((w == -1) & dentro))
+    altri = int(np.sum((np.abs(w) > 1) & dentro))
+    an = []
+    for k in range(N_ANELLI):
+        m = (r >= k) & (r < k + 1)
+        an.append((k, int(np.sum((w == 1) & m)), int(np.sum((w == -1) & m)), int(np.sum(~ok & m))))
+    net = [(R_, int(np.sum(w[r < R_]))) for R_ in R_GAMMA]
+    if stampa:
+        print("    %s: dentro r < %g: +1 %d, -1 %d, |w| > 1 %d; esclusi (fase non definita) %d su %d; fuori: +1 %d, -1 %d"
+              % (nome, R_VORT, piu, meno, altri, int(np.sum(~ok)), len(ok), int(np.sum((w == 1) & ~dentro)), int(np.sum((w == -1) & ~dentro))))
+        print("      la carica netta dentro R: %s" % "; ".join("R %d: %+d" % x for x in net))
+        nz = [x for x in an if x[1] or x[2]]
+        print("      gli anelli con vortici (anello, +1, -1, esclusi): %s" % (" ".join("(%d %d %d %d)" % x for x in nz) if nz else "nessuno"))
+    return {"piu": piu, "meno": meno, "net": dict(net), "anelli": an}
+
+
+def vortici():
+    """### **C** *(Luca `2026-11-05` `21:20`; `2026-11-06`: dopo B)*: **i vortici della fase del vuoto e di `psi` attorno ai triangoli, dagli stati di `TBS`** *(il task history della rotazione, 13)*."""
+    import _vuoto_vivo_B as V
+    from solitone import bordo as BO
+    from solitone import carta_forma as CF
+    from solitone import corsa_accensione as CA
+    from solitone import toro as TO
+    with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+        tab_c, omega = d["c"].copy(), float(d["omega"])
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    righe = [V.LP.leggi(os.path.join(CA.dir_json("TBS"), f)) for f in sorted(os.listdir(CA.dir_json("TBS"))) if f.startswith("TBS_") and f.endswith(".jsonl")]
+    reg = {x["t"]: x for r in righe for x in (r.get("stati") or [])}
+    _r8, z, _p8, F3, _i8, cm = costruisci(V.N, 81)
+    A1, A2 = TO.vettori()
+    dirs = _ordine_archi(z)
+    tri = _triangoli(z, dirs, A1, A2)
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    nodo = np.asarray(inc.nodo)
+    v = np.arange(n)
+    m1, m2 = v // L, v % L
+    stati, eS = {}, []
+    for t in STATI_MATURI:
+        f = reg[t]["file"]
+        with np.load(f) as d:
+            st = {k: d[k].copy() for k in d.files if k != "t"}
+        eS.append(all(SFM_sha(st[k]) == reg[t]["sha"][k] for k in reg[t]["sha"]))
+        stati[t] = st
+        print("  lo stato a t %.0f (tick %d): %s sha1 %s" % (t * s, t, f, hashlib.sha1(open(f, "rb").read()).hexdigest()))
+    esito("DEVE PASSARE: VX-S ogni stato caricato da' gli sha per chiave registrati nella corsa", all(eS), "%s" % eS)
+    psi0 = stati[0]["psi_h"]
+    rho0 = np.bincount(nodo, weights=np.sum(np.abs(psi0) ** 2, axis=1), minlength=n)
+    c1, c2 = TO.centro(rho0, m1, m2, L)[:2]
+    cen = c1 * A1 + c2 * A2
+    print("  il centro di t 0 (%.4f, %.4f); MOD_FASE %g; R_VORT %g; SOGLIA_ANELLO_V %d; la parte di psi SENZA U (13.1)" % (c1, c2, MOD_FASE, R_VORT, SOGLIA_ANELLO_V))
+
+    def chi_vuoto(phi, ct):
+        p = np.bincount(nodo, weights=(np.conj(ct * F3) * phi).real, minlength=n) + 1j * np.bincount(nodo, weights=(np.conj(ct * F3) * phi).imag, minlength=n)
+        a = np.abs(p)
+        return np.angle(p), a > MOD_FASE * a.max()
+
+    def chi_psi(psi):
+        q = np.sum(np.conj(psi0) * psi, axis=1)
+        p = np.bincount(nodo, weights=q.real, minlength=n) + 1j * np.bincount(nodo, weights=q.imag, minlength=n)
+        a = np.abs(p)
+        return np.angle(p), a > MOD_FASE * a.max()
+
+    # ### i DEVE sintetici (13.2): il centro del vortice nel baricentro del triangolo "su" piu' vicino al centro
+    P = CF.posizioni(m1, m2, A1, A2)
+    rT, _t = CF.spost(P + tri["su"]["off"], cen, L, A1, A2)
+    cv = P[int(np.argmin(rT))] + tri["su"]["off"]
+    _r, thn = CF.spost(P, cv, L, A1, A2)
+    c0 = BO.c_di(0, tab_c, K, omega)
+    x, b = chi_vuoto(c0 * F3, c0)
+    r0 = _conta("il vuoto F3 da solo", *_vortici(z, tri, A1, A2, x, b, cen))
+    esito("DEVE PASSARE: VX-0 (Luca) il vuoto F3 da solo da' zero vortici (per costruzione: chi = 0)", r0["piu"] == 0 and r0["meno"] == 0 and all(v_ == 0 for v_ in r0["net"].values()), "+1 %d, -1 %d" % (r0["piu"], r0["meno"]))
+    for sg in (+1, -1):
+        x, b = chi_vuoto(c0 * F3 * np.exp(1j * sg * thn[nodo]), c0)
+        rv = _conta("il vuoto sintetico e^{%si theta}" % ("+" if sg > 0 else "-"), *_vortici(z, tri, A1, A2, x, b, cen))
+        x, b = chi_psi(psi0 * np.exp(1j * sg * thn[nodo])[:, None])
+        rp = _conta("psi sintetico e^{%si theta}" % ("+" if sg > 0 else "-"), *_vortici(z, tri, A1, A2, x, b, cen))
+        if sg > 0:
+            esito("DEVE PASSARE: VX-V (Luca) il vuoto sintetico e^{+i theta}: esattamente un +1 e nessun -1 dentro r < %g" % R_VORT, rv["piu"] == 1 and rv["meno"] == 0, "+1 %d, -1 %d" % (rv["piu"], rv["meno"]))
+            esito("DEVE PASSARE: VX-P (mio) psi sintetico e^{+i theta}: esattamente un +1 e nessun -1 dentro r < %g" % R_VORT, rp["piu"] == 1 and rp["meno"] == 0, "+1 %d, -1 %d" % (rp["piu"], rp["meno"]))
+        else:
+            esito("DEVE PASSARE: VX-M (mio) e^{-i theta}: esattamente un -1 e nessun +1 dentro r < %g, nel vuoto e in psi" % R_VORT,
+                  rv["meno"] == 1 and rv["piu"] == 0 and rp["meno"] == 1 and rp["piu"] == 0, "vuoto +1 %d -1 %d; psi +1 %d -1 %d" % (rv["piu"], rv["meno"], rp["piu"], rp["meno"]))
+    x, b = chi_psi(psi0)
+    rf = _conta("psi di t 0 senza la fase", *_vortici(z, tri, A1, A2, x, b, cen))
+    esito("DEVE FALLIRE: VX-F (Luca) senza la fase (psi di t 0): \"esattamente un +1 dentro r < %g\"" % R_VORT, not (rf["piu"] == 1 and rf["meno"] == 0), "+1 %d, -1 %d" % (rf["piu"], rf["meno"]))
+    lett = []
+    for t in STATI_MATURI:
+        st = stati[t]
+        ct = BO.c_di(t, tab_c, K, omega)
+        print("  ### TBS a t %.0f: c(t) %+.12f %+.12fi" % (t * s, ct.real, ct.imag))
+        x, b = chi_vuoto(st["phi_h"], ct)
+        rv = _conta("il vuoto", *_vortici(z, tri, A1, A2, x, b, cen))
+        x, b = chi_psi(st["psi_h"])
+        rp = _conta("psi (rispetto alla partenza, senza U)", *_vortici(z, tri, A1, A2, x, b, cen))
+        if t > 0:
+            for nm, rr in (("vuoto", rv), ("psi", rp)):
+                si = rr["net"][20] != 0 or any(max(a_[1], a_[2]) >= SOGLIA_ANELLO_V and min(a_[1], a_[2]) == 0 for a_ in rr["anelli"])
+                lett.append((t, nm, rr["net"][20], si))
+    cm.__exit__(None, None, None)
+    print("  ### LA LETTURA (r4) DI C (il task history 13.3): %s" % "; ".join("t %.0f %s: netto dentro 20 %+d, %s" % (t * s, nm, q, "si'" if si else "no") for t, nm, q, si in lett))
+    print("  ### (r4) per C: %s" % ("SI'" if any(si for _t, _n, _q, si in lett) else "NO"))
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -864,14 +1006,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --vuoto | --goldstone | --circolazione | --coppia | --coppia-matura | --dimensione"
+    modo = "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --vuoto | --goldstone | --circolazione | --vortici | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
