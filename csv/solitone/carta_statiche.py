@@ -47,6 +47,7 @@ GAP_ZERO = 1e-6                # ### --vuoto: le fasi per tick sotto questo sono
 KAPPA = (0.01, 0.02, 0.04, 0.06, 0.08, 0.1)   # ### --vuoto: |k| lungo A1 per la curvatura del ramo del gap
 KAPPA_G = (0.005, 0.01, 0.02, 0.04, 0.08)     # ### --goldstone (Luca 2026-11-05 21:20, la misura A): |k| piccoli; una scelta di protocollo mia, dichiarata (il task history della rotazione, 1)
 DIREZIONI_G = (("A1", 0.0), ("30 gradi", 30.0))   # ### Luca 21:20: lungo A1 e a 30 gradi
+DIREZIONI_IS = DIREZIONI_G + (("17 gradi", 17.0),)   # ### IS1 (Luca 2026-11-06 23:41): in piu' una direzione GENERICA, non uno specchio del reticolo (i multipli di 30 gradi), per G e D
 N_GOLD = 6                     # ### a Gamma sei fasi zero (statica_vuoto.txt): il Goldstone e i suoi compagni, seguiti INSIEME (le sei |fasi| piu' piccole a ogni k)
 SOGLIE = (1.0, 10.0, 100.0, 300.0)            # ### le soglie della forma a N 1e6 (scalate per N / 1e6)
 
@@ -1201,7 +1202,7 @@ def brezzi():
     print("  |F3_h| sul nodo 0: %s; Lambda %.15f" % (" ".join("%.15f" % x for x in np.abs(F3[dove[0]])), float(np.sum(np.abs(F3[dove[0]]) ** 2))))
     # IS1-N
     eN = 0.0
-    for _nd, gradi in DIREZIONI_G:
+    for _nd, gradi in DIREZIONI_IS:
         u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
         for kap in (0.0,) + KAPPA_IS:
             Tk = T(kap * u)
@@ -1257,7 +1258,8 @@ def brezzi():
         print("  il fattore scalare (uguale per ogni ramo) a rho %s %.6e: x %.6e; d alpha / d Lambda %.6e, d beta / d rho %.6e (dalle espressioni di _screening_forme_s3._ab(S1), alle differenze centrali)"
               % (nome_r, r_, x, -da * x / Lam, db / Lam))
     # i rami
-    for nome_d, gradi in DIREZIONI_G:
+    visto = {}
+    for nome_d, gradi in DIREZIONI_IS:
         u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
         gr, salto = _rami(T, u, KAPPA_IS)
         print("-" * 130)
@@ -1275,6 +1277,7 @@ def brezzi():
                       % (nome_d, nome, kap, " ".join("%.3e" % abs(x) for x in np.sort(np.abs(fasi))), a_, b_, 2.0 * np.linalg.norm(f) * b_, gap, pav / gap))
             ia, ib = int(np.argmin(aa)), int(np.argmin(bb))
             sopra = [max(a_, b_) > p_ for a_, b_, p_ in zip(aa, bb, pp)]
+            visto[(nome_d, nome)] = sum(sopra)
             print("  ### %s %-2s inf a %.3e (|k| %.3f), sup a %.3e; inf b %.3e (|k| %.3f), sup b %.3e; la pendenza in ln |k| sui primi 4: a %+.3f, b %+.3f"
                   % (nome_d, nome, aa[ia], KAPPA_IS[ia], max(aa), bb[ib], KAPPA_IS[ib], max(bb), _pendenza(KAPPA_IS[:4], aa[:4]), _pendenza(KAPPA_IS[:4], bb[:4])))
             print("  ### %s %-2s la lettura scritta prima (Luca): %s" % (nome_d, nome, "max(a, b) ENTRO il pavimento a ogni |k|: il ramo NON E' VISTO dalla materia (il segnale di un modo spurio)" if not any(sopra)
@@ -1287,6 +1290,12 @@ def brezzi():
             Qg, Qz = gr[kap]["G"][1], gr[kap]["Z"][1]
             Qgz, _r = np.linalg.qr(np.hstack([Qg, Qz]))
             print("    %s G+Z |k| %.3f: a %.6e b %.6e" % (nome_d, kap, _coseno(Qgz, Jf), _coseno(Qgz, f)))
+    print("-" * 130)
+    for nome in ("G", "D"):   # ### Luca 23:41: la lettura a 30 gradi resta «zero di simmetria sospetto» finche' la direzione generica non lo chiude
+        v30, v17 = visto[("30 gradi", nome)], visto[("17 gradi", nome)]
+        print("  ### %s: sopra il pavimento a %d |k| a 30 gradi, a %d a 17 gradi (la direzione generica): %s" % (nome, v30, v17,
+              "visto anche a 30 gradi: nessuno zero da chiudere" if v30 else "il NON VISTO a 30 gradi era uno ZERO DI SIMMETRIA (la direzione generica lo vede): CHIUSO" if v17
+              else "### non visto NEMMENO a 17 gradi: lo zero NON e' di simmetria (il sospetto cade; il ramo e' invisibile in una direzione generica)"))
     cm.__exit__(None, None, None)
 
 
