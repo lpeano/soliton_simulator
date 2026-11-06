@@ -1,0 +1,26 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_bordo.py  sha1-BYTE daf932d5  committato e pulito
+==================================================================================================================================
+IL TEST DEL BORDO (Luca 21:52): la riflessione di un pacchetto in banda B sul vuoto F3; BG-F-0.15 (s 0.15, eps 0.5); R_A 47.5 W 4 N_PAC 1 SOGLIA 0.01 GRIGLIA (0.0, 0.03); omega 4.71238898038468967e-01 (fase_F3.npz)
+==================================================================================================================================
+### LE OPZIONI (Luca 2026-11-06 12:42): L 162, R_A 47.5, la griglia (0.0, 0.03), c0 False
+### IL PACCHETTO: k della griglia (29, 104), la banda 10 del gruppo B; la velocita' di gruppo (-0.29422, +0.50960), |v_g| 0.58844 nodi per unita' di tempo
+  il centro del bordo (81, 81); il centro del pacchetto (81, 116) a R0 35.000 (atteso R_A - 3 W = 35.5); M_in a t 0: 0.998211
+  T 3671 tick (2 L / v_g); il minimo di M_in senza bordo cercato entro 1836 tick (L / v_g)
+  ### senza bordo, a T: |phi - e^{i omega T} F3| / |F3| 6.133e-09 (il vuoto di riferimento del test: il tick intero da F3, senza rampa)
+  ### senza bordo: la distanza media della materia dal centro cresce di 0.57452 nodi per unita' di tempo nel primo tratto (|v_g| atteso 0.58844)
+  ### senza bordo: il minimo di M_in a t 231 tick (34.6), M_in 8.739e-03
+    g_max 0      : R 9.990e-01 (il massimo di M_in dopo t_min); M finale 1.000e+00; assorbita 0.000000; il bilancio 2.14e-12
+    g_max 0.03   : R 8.770e-03 (il massimo di M_in dopo t_min); M finale 7.959e-03; assorbita 0.992041; il bilancio 1.69e-13
+  DEVE PASSARE: RB-M g_max 0.03 il bilancio M + assorbita = M0 entro 1e-10                                                 PASSA   1.69e-13
+  DEVE FALLIRE: R0-F senza bordo R < 0.01 (il pacchetto rientra dal toro)                                                  PASSA   R 9.990e-01
+  DEVE PASSARE: RB un g_max della griglia con R < 0.01 (il piu' piccolo e' quello della corsa)                             PASSA   il piu' piccolo: 0.03
+  ### g_max 0      : R su L 162 (R_A 47.5) 9.990e-01; R di TB3 (L 81, R_A 28, bordo_riflessione.txt) 9.990e-01
+  ### g_max 0.03   : R su L 162 (R_A 47.5) 8.770e-03; R di TB3 (L 81, R_A 28, bordo_riflessione.txt) 9.555e-03
+==================================================================================================================================
+ESITO: 3/3 controlli passano; DEVE fallite: 0 []; G_MAX 0.03

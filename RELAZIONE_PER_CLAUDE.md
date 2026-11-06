@@ -23886,3 +23886,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La coppia:** **il bordo (a)** *(`R_B = 81`, la rampa da `R_A` a `81`, `g_max 0.03`)*, **con il test del pacchetto per questa rampa prima** *(FERMO se la riflessione supera `1e-2`)*; **`S162` il riferimento di `C35`** *(`R_A 47.5`, centro nel punto medio)*; **`C0` la rampa intera una volta, poi `200` tick a ogni corsa.** **L'ordine:** il test, `C0`, `S162`, `C35-0`, `C35-pi`, `C50-0`.
 - ### **`cs`:** **(P), `Lambda_c = 34`**; ### **i due interruttori INSIEME col tick del nucleo: un'eccezione dichiarata alla regola, decisa da Luca**; dal tick `1`. **Il codice si prepara durante le corse della coppia SU UNA COPIA** *(la regola del par. `5`: `accensione.py` e' nel percorso della corsa)*, **e si porta sul file vero fra una corsa e l'altra.**
 - **Le mie scelte dichiarate** *(sez. `6`)*: **la griglia del test ridotta a `0` e `0.03`** *(il costo)*; **`C0` su `K + 1000` tick** *(per confrontare anche `omega`)*.
+
+## 2026-11-06 — IL TEST DEL PACCHETTO SU `L 162`: **`3/3`, `R(0.03) = 8.77e-3` SOTTO `1e-2`** *(`TB3` `9.555e-3`; `bordo_riflessione_L162.txt`; il task history `2026-11-06_coppia_corse`, sez. `7`)*
+
+- **Nessun FERMO.** ### ⚠ **Un limite della misura** *(mio, da dire)*: **`R(0.03)` coincide col minimo di `M_in` senza bordo** *(`8.739e-3`; in `TB3` `9.515e-3` contro `9.555e-3`)*: **la misura legge la coda del pacchetto che non e' mai uscita, non la riflessione; il suo pavimento e' `~9e-3`.** Una misura piu' fine sarebbe un protocollo nuovo: decide Luca.
+- **Avanti: `C0` lungo** *(`~50` minuti)*.
