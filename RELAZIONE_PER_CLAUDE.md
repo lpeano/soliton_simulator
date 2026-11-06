@@ -23873,3 +23873,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **`S162`:** **il riferimento di `C35`** *(centro nel punto medio, `R_A 47.5`, il solitone al posto di uno dei due: la decisione di prima)* **o il bordo di `TB3` centrato sul solitone** *(`R_A 28`)*? **Proposta: il primo.**
 - ### **`C0`:** un DEVE all'inizio di ogni corsa *(`200` tick dopo la rampa, entro `1e-12`: numeri miei)* o la rampa intera *(`~45` minuti in piu')*?
 - **Il costo stimato dai jsonl di `TB3`:** **`~7.3` ore per corsa, `~29` per le quattro**; `~121` MB di mappe e `~63` MB di stati per corsa. **Il numero vero dopo il primo pezzo.**
+
+## 2026-11-06 — `cs` COL SOLITONE: **IL TASK HISTORY DALLA RACCOLTA; FERMO SULLA FORMA DI `dtau`** *(`2026-11-06_cs_col_solitone`; la voce `5-bis`, lavorata mentre la coppia aspetta Luca)*
+
+- ### **Il tick con `cs` e' gia' nel nucleo** *(`tick.tick_con_cs`, `cs_al_centro`)*: **accenderlo non tocca il nucleo**, ma vuole **`Lambda_c`** *(la domanda aperta [[DOMANDA-IL-VALORE-DI-LAMBDA-C]])*, ### **e con `Lambda_c` si accendono INSIEME il tempo locale e `CAMM-FASE-VUOTO`: due meccanismi, un interruttore.**
+- **Oggi nella scena del solitone `cs = 0.15` uniforme, `lambda_c = None`** *(misurato)*; **il vuoto `F3` ha `Lambda = 6` esatto.**
+- ### **La proposta (P):** la forma che c'e', con **`Lambda_c = 34`** *(l'unico valore che lascia l'orologio del vuoto a `0.15`: niente cambia lontano dal solitone)*; **vicino al solitone maturo `cs` da `0.0036` a `0.30`** *(un effetto grande)*. ### **La raccomandazione:** **prima il solo tempo locale, poi il generatore pesato** *(uno alla volta)*. **Le alternative e le tre domande nel task history: decide Luca.**
+- **La «voce `cs` <-> clock della roadmap» non l'ho trovata per nome** *(cercata)*.
