@@ -27,3 +27,16 @@
 ## 4. TODO
 1. Questo task history, un commit. **FERMO.**
 2. Dopo le risposte: la sez. `2`.
+
+## 5. LA DECISIONE DI LUCA DEL `2026-11-06` `12:42` *(le domande della sez. `3` CHIUSE)*
+1. ### **Il bordo su `L 162`: (a)** -- **`R_B` = la meta' del periodo** *(`81`)*, **la rampa da `R_A` a `81`, `g_max 0.03`.** ### **In piu', prima della prima corsa: il test del pacchetto** *(`carta_bordo`)* **per QUESTA rampa su `L 162`, la riflessione stampata accanto a quella di `TB3`. Se supera `1e-2`: FERMO.**
+2. ### **`S162`: (a)**, **il riferimento di `C35`** *(il bordo di `C35` centrato nel punto medio, `R_A 47.5`, il solitone nella posizione di uno dei due)*. **Il singolo di `C50`: dopo, se serve, decide Luca.**
+3. ### **`C0`: la rampa intera UNA VOLTA, prima della prima corsa** *(il vuoto `F3` da solo su `L 162`, `6667` tick, `= c(t) F3` entro `1e-12`)*; **poi all'inizio di ogni corsa il DEVE breve da `200` tick.**
+4. ### **L'ordine: il test del pacchetto, `C0` lungo, `S162`, `C35-0`, `C35-pi`, `C50-0`.**
+
+## 6. LA PROGETTAZIONE DEI DUE CONTROLLI *(scritta PRIMA del codice)*
+- ### **IL TEST DEL PACCHETTO SU `L 162`** *(`carta_bordo.py`, con le opzioni nuove `--L 162 --R_A 47.5 --griglia 0,0.03`; senza opzioni la carta di oggi, al bit)*: **lo stesso protocollo** *(il pacchetto in banda `B` alla velocita' di gruppo piu' grande, `W 4`, `R0 = R_A - 3 W = 35.5` dal centro del bordo, `T = 2 L / v_g`)*, **la stessa misura** *(`R` = il massimo di `M_in` dopo il minimo senza bordo)*, **gli stessi DEVE** *(`R0-F`, `RB`, `RB-M`)*. ### ⚠ **La griglia ridotta a `0` e `0.03`** *(lo `0` e' il controllo che deve fallire, `0.03` e' il `g_max` della corsa)*: **una scelta mia per il costo** *(`T ~3700` tick su `L 162`, `~25` minuti per valore)*, **dichiarata.** **Il referto stampa la riflessione di `TB3`** *(`9.555e-03` a `0.03`, letta da `doc/referti_l2/bordo_riflessione.txt`, non ricopiata)*. ### **FERMO se `R(0.03) > 1e-2`** *(Luca)*.
+  - ⚠ **Il centro del bordo nel test e' il centro del toro** *(`L // 2`, come in `TB3`)*: **la rampa e' la stessa ovunque la si centri.**
+- ### **`C0` LUNGO** *(`carta_bordo.py --c0 --L 162`)*: **il vuoto `F3` da solo su `L 162`, il tick della corsa** *(`AC.tick`, la rampa)* **per `t = 1 .. K + dopo`** *(`K 6667`, `dopo 1000`: la tabella `fase_F3.npz` ha `7668` valori, e `omega` viene dai `1000` dopo la rampa -- **mille tick in piu' del mandato, `~7` minuti, per confrontare anche `omega`: dichiarato**)*; ### **DEVE `C0`:** `|c_162(t) - c_81(t)|` **entro `1e-12` a ogni `t`**, **e il residuo `|phi(t) - c(t) F3| / |F3|` entro `1e-12`** *(il vuoto resta `F3` per una fase, nodo per nodo)*; **`omega` stampato accanto.** **DEVE FALLIRE `C0-F`:** **la tabella spostata di un tick** *(`c_81(t + 1)`)* **non regge entro `1e-12`.**
+- **Il DEVE breve all'inizio di ogni corsa** *(`200` tick)*: **nel codice delle corse**, dopo.
+- **I passi:** questo, un commit; il codice di `carta_bordo` *(e l'INVENTARIO)*, un commit; `D6`, la cassetta; **il test, il referto; `C0`, il referto** *(un calcolo alla volta)*; poi il codice delle corse.

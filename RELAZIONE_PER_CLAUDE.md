@@ -23880,3 +23880,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Oggi nella scena del solitone `cs = 0.15` uniforme, `lambda_c = None`** *(misurato)*; **il vuoto `F3` ha `Lambda = 6` esatto.**
 - ### **La proposta (P):** la forma che c'e', con **`Lambda_c = 34`** *(l'unico valore che lascia l'orologio del vuoto a `0.15`: niente cambia lontano dal solitone)*; **vicino al solitone maturo `cs` da `0.0036` a `0.30`** *(un effetto grande)*. ### **La raccomandazione:** **prima il solo tempo locale, poi il generatore pesato** *(uno alla volta)*. **Le alternative e le tre domande nel task history: decide Luca.**
 - **La «voce `cs` <-> clock della roadmap» non l'ho trovata per nome** *(cercata)*.
+
+## 2026-11-06 — LE DECISIONI DI LUCA DELLE `12:42` SUI DUE FERMI *(i task history `2026-11-06_coppia_corse`, sez. `5`-`6`, e `2026-11-06_cs_col_solitone`, sez. `8`)*
+
+- ### **La coppia:** **il bordo (a)** *(`R_B = 81`, la rampa da `R_A` a `81`, `g_max 0.03`)*, **con il test del pacchetto per questa rampa prima** *(FERMO se la riflessione supera `1e-2`)*; **`S162` il riferimento di `C35`** *(`R_A 47.5`, centro nel punto medio)*; **`C0` la rampa intera una volta, poi `200` tick a ogni corsa.** **L'ordine:** il test, `C0`, `S162`, `C35-0`, `C35-pi`, `C50-0`.
+- ### **`cs`:** **(P), `Lambda_c = 34`**; ### **i due interruttori INSIEME col tick del nucleo: un'eccezione dichiarata alla regola, decisa da Luca**; dal tick `1`. **Il codice si prepara durante le corse della coppia SU UNA COPIA** *(la regola del par. `5`: `accensione.py` e' nel percorso della corsa)*, **e si porta sul file vero fra una corsa e l'altra.**
+- **Le mie scelte dichiarate** *(sez. `6`)*: **la griglia del test ridotta a `0` e `0.03`** *(il costo)*; **`C0` su `K + 1000` tick** *(per confrontare anche `omega`)*.

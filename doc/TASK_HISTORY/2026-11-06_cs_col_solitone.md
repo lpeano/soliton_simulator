@@ -50,3 +50,9 @@
 
 ## 7. TODO
 1. Questo task history, un commit. **FERMO.** 2. Dopo le risposte: il codice *(il flag spento di default)*, `D6`, la cassetta, `TCS`.
+
+## 8. LA DECISIONE DI LUCA DEL `2026-11-06` `12:42` *(le domande della sez. `6` CHIUSE)* -- **dopo la coppia**
+1. ### **La forma: (P)** -- `cs = Lambda / (Lambda + Lambda_c)`, **`Lambda_c = 34`** *(la continuita' col vuoto: `Lambda = 6`, `cs_vuoto = 0.15`)*. **Dichiarato che eredita lo `0.15` della corsa.**
+2. ### **Gli interruttori: TUTTI E DUE INSIEME col tick del nucleo** *(`tick.tick_con_cs`)*, **la legge progettata e collaudata;** ### **un'ECCEZIONE DICHIARATA alla regola «uno alla volta», decisa da Luca.** **Se `TCS` mostra un effetto, la separazione con (A2) dopo, decisa da Luca.**
+3. ### **Da quando: dal tick `1`.**
+4. ### **Il codice** *(il flag spento di default, le corse vecchie al bit)*, **`D6`, la cassetta: si puo' preparare mentre girano le corse della coppia, SENZA girarlo.** ### ⚠ **La regola del par. `5`** *(durante un run nessun file del percorso in uso si modifica)*: **il codice di `cs` tocca `csv/solitone/accensione.py`, che la corsa importa** -- ### **si prepara su una COPIA, e si porta sul file vero fra una corsa e l'altra** *(e `D6` e la cassetta allora)*.
