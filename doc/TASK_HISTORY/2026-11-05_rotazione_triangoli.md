@@ -136,3 +136,28 @@
 - ### **DUE AVVERTENZE, MIE:** **(1)** **gli stati sono ogni `1500` unita' di tempo** *(`10000` tick)*: **un'oscillazione piu' veloce, campionata cosi', puo' sembrare lenta** *(l'alias)*: ### **dai `21` punti NON si puo' dire che il verso si rovescia ogni `~6000`-`9000` unita' di tempo**, si puo' dire solo che **non e' fisso.** **(2)** **un tick solo per stato** *(9.1)*: le due meta' del tick concordano negli stati di 10 *(non e' un'oscillazione DENTRO il tick)*, ma su scale fra `1` e `10000` tick la carta non vede niente.
 - ### **TB3: nessuno stato** *(`20` jsonl, `0` stati registrati; `STATI` senza la voce)*: **il conto su `TB3` non si puo' fare.**
 - ### **LA LETTURA, PROPOSTA PER LUCA** *(non la scelgo)*: **la materia del solitone maturo CIRCOLA attorno al centro, con una circolazione grande** *(`|Gamma(12)|` fino a `~97`, contro un `max |C_T|` di `~4`-`5` per triangolo)* **e a strati di segno alterno; ### il verso NON e' fissato nel tempo** *(cambia almeno `4` volte)*: **piu' un'oscillazione rotazionale** *(un modo interno che ruota avanti e indietro)* **che un momento angolare conservato.** **Se servisse sapere la scala di tempo:** una serie fitta *(per esempio ogni `100` tick ripartendo da uno stato, col bordo dopo ogni tick come la corsa)*, ### **una corsa breve: decide Luca.**
+
+## 13. C, I VORTICI DELLA FASE: **LE PREMESSE DAL CODICE E LA PROGETTAZIONE** *(scritte PRIMA del codice; Luca `21:20`, `2026-11-06`: C dopo B)*
+
+### 13.1 LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+- ### **NE' `phi` NE' `psi` HANNO UNA FASE PER NODO:** **`phi_h` e' una per ESTREMITA'** *(`6` per nodo)*, **`psi_h` uno spinore per estremita'** *(`12` numeri complessi per nodo)*; ### **la chiave `psi` per nodo degli stati vale `0`** *(misurato su `TBS_stato_100000`: `max |psi| = 0`; e' il campo di prova dell'era `2`, non la materia)*. **Una fase per nodo va DEFINITA: e' una scelta di protocollo, mia, dichiarata.**
+- ### **LA FASE DEL VUOTO PER NODO** *(«rispetto a `c(t) F3`», Luca)*: `chi_k = arg sum_{h in k} conj(c(t) F3_h) phi_h` -- **la proiezione del vuoto del nodo sul vuoto atteso nello stesso nodo** *(`c(t)` da `fase_F3.npz` con `BO.c_di`, come `--coppia-matura`)*. **Col vuoto `F3` da solo `chi_k = 0` ovunque.**
+- ### **LA FASE DI `psi` PER NODO:** `chi^psi_k = arg sum_{h in k} <psi0_h | psi_h>` **con `psi0` lo stato di `TBS` a `t 0`** *(la partenza)*: **la fase della materia RISPETTO ALLA PARTENZA, nodo per nodo.** ### ⚠ **Perche' non la fase di una componente:** **la partenza NON e' reale a meno di una fase globale** *(misurato: `max |Im(psi e^{-i a})| / max |psi|` `0.063`)*: **lo spin porta gia' fasi sue, e la fase di una componente le scambierebbe per vortici.** **A `t 0`, `chi^psi = 0` per costruzione.**
+- ### **IL VORTICE DI UN TRIANGOLO:** **`w_T = (Delta_12 + Delta_23 + Delta_31) / 2 pi`, le tre differenze ridotte in `(-pi, pi]`, lungo il giro antiorario** *(lo stesso di B)*: **`+1`, `-1` o `0`.** **Dove una fase non e' definita** *(il modulo della proiezione sotto `1e-12` del suo massimo)* **il triangolo si esclude, e si conta.**
+- ### ⚠ **SENZA `U`:** **`psi` si sposta con `S_U`, quindi per la materia la differenza di fase «giusta» fra due nodi contiene `U`.** **C la misura SENZA `U`**; ### **se E trova `U` non banale, la parte di `psi` di C va rifatta con `U`** *(lo scrivo nel referto di E)*.
+- **Per anelli** *(larghezza `1`, da `0` a `40`, attorno al centro di B)*: **il numero di `+1`, di `-1`, il netto**; **e la carica netta dentro `R`** *(`R` = `4`, `8`, ..., `40`)*. **Gli stati:** `TBS` a `t 0`, `15000`, `30000`.
+- ### ⚠ **Cosa NON so:** **sul toro un vortice solo non esiste** *(la carica totale e' zero)*: **il vortice sintetico `e^{i theta}` attorno a un centro ha il suo compagno sul taglio dell'immagine minima** *(al bordo della cella)*: **il DEVE conta dentro `r < 20`.**
+
+### 13.2 I DEVE *(di Luca, `21:20`, piu' i miei, marcati)*
+- **DEVE (Luca):** **il vuoto `F3` da solo da' ZERO vortici** *(per costruzione: `chi_k = 0`)*.
+- **DEVE PASSARE (Luca):** **un vortice sintetico** *(`phi = c F3 e^{i theta}`, `theta` attorno al baricentro di un triangolo vicino al centro)*: **esattamente UN `+1` e nessun `-1` dentro `r < 20`**; **lo stesso per `psi`** *(lo stato di `t 0` per `e^{i theta}`)* -- **mio.**
+- **DEVE FALLIRE (Luca):** **senza la fase** *(lo stesso conto sul campo senza `e^{i theta}`)*: **«esattamente un `+1`» NON regge.**
+- **DEVE (mio):** **`e^{-i theta}` da' esattamente un `-1`.**
+
+### 13.3 LE LETTURE, FISSATE PRIMA DEI NUMERI
+- **(r4) per C = SI'** se a `t 15000` o `30000` **la carica netta dentro `20`** *(del vuoto o di `psi`)* **e' diversa da zero**, **oppure** un anello ha `5` o piu' vortici di un segno solo. **Altrimenti NO.**
+- **Il resto si stampa e non si legge qui.**
+
+### 13.4 LA CARTA E I PASSI
+- **`python csv/solitone/carta_statiche.py --vortici > doc/referti_l2/statica_vortici.txt`.**
+- **I passi:** questo, un commit; il codice e l'INVENTARIO, un commit; `D6`, un commit; la cassetta, un commit; la carta; il referto. ### **FERMO se un DEVE fallisce.**
