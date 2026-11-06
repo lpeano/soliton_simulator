@@ -23824,3 +23824,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La sonda:** il controllo regge *(`R180 F3`, `R120 F3` = `F3` entro `1.2e-16`)*; ### **`R120 F1` contro `F1` per la fase migliore: lo scarto `2.000`; contro lo specchio `1.000`, contro `conj(F1)` `1.000`** *(e `R60` uguale)*.
 - ### **Perche'** *(il mio conto, confermato)*: **la rotazione rovescia due delle tre direzioni, e un arco rovesciato aggiunge `pi` alla fase** *(la coda `+`, la testa `-`)*: **`R120 F1` ha le fasi `pi/3`, `2 pi/3`, `pi`** *(contro `2 pi/3`, `0`, `-2 pi/3`)*, **un altro vuoto con la stessa energia.**
 - ### **FERMO su D: il DEVE di Luca** *(«`R120 F1` = `F1` per una fase»)* **fallirebbe come scritto.** **Le domande:** contro che cosa si confronta `R120 F1`; D si fa lo stesso col DEVE corretto; **intanto B, C, E?**
+
+## 2026-11-06 — LE DECISIONI DI LUCA SUL FERMO DI D E SUL FERMO DELLA COPPIA *(il task history `2026-11-05_rotazione_triangoli`, sez. `8`)*
+
+- ### **D SOSPESA:** **`R120 F1` e' un altro vuoto della famiglia con la stessa energia** *(`af9b5d6a`)*: **`F1` ha una freccia** *(lunghezza `3`)* **e non e' chirale.** ### **L'errore `n.109` del guardiano: la premessa «`p + ip`».**
+- ### **A, la lettura di Luca:** **col suo criterio il Goldstone di `F3` non propaga a onda lunga; `omega = 0.2 |k|^2`, isotropo: un modo lento, quadratico.**
+- ### **B, C, E avanti**, nel loro ordine, un referto ciascuna.
+- ### **La coppia, dopo B, C, E:** **`S162`, `C35-0`, `C35-pi`, `C50-0`** *(in quest'ordine; `L 162`, il bordo di `TB3`, fino a `10000`, le mappe come `TB3`, gli stati ogni `1500` e a `t 0`)*; **nel referto di `S162` il confronto con `TB3` e `TBS`** *(emissione, forma, oscillazione: il bordo lontano contro il bordo a `28`)*; **il costo vero dopo il primo pezzo.**
