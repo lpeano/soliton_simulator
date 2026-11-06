@@ -26,6 +26,7 @@ r"""**L'ACCENSIONE LENTA DEL VUOTO: LE CORSE E IL REFERTO** *(il mandato di Luca
     python csv/solitone/corsa_accensione.py --indice TM3C > doc/referti_l2/mappe_indice_TM3C.txt
     python csv/solitone/corsa_accensione.py --referto > doc/referti_l2/accensione_lenta.txt
 """
+import contextlib
 import math
 import os
 import sys
@@ -104,6 +105,54 @@ BORDO["TBS"] = BORDO["TB3"]         # ### il bordo di TB3 (Luca 18:31: ogni cors
 MAPPE = MAPPE + ("TBS",)            # ### Luca 2026-11-05 13:16: le mappe come TB3, su E: (mappe/TBS)
 STATI["TBS"] = tuple(1500.0 * k for k in range(21))   # ### Luca 2026-11-05 13:16: gli stati completi (la fase compresa) ogni 1500 unita' piu' t 0: 0, 1500, ..., 30000
 STIMA["TBS"] = "TS"                 # ### la stima del disco dai jsonl di TS (la stessa partenza, senza bordo)
+# ### LE CORSE DELLA COPPIA (Luca 2026-11-06 12:42; il task history 2026-11-06_coppia_corse, sez. 5): L 162, il bordo di TB3 (g_max 0.03, R_B la meta' del periodo),
+# ### R_A = d/2 + 30 col centro nel punto medio (uno per configurazione); S162 il riferimento di C35 (il solitone nella posizione di uno dei due, il bordo di C35);
+# ### fino a 10000 unita' di tempo; le mappe come TB3; gli stati completi ogni 1500 e a t 0; C0 breve (200 tick) all'inizio della prima corsa di ogni nome.
+LCORSA, COPPIA, BORDO_CORSA = {}, {}, {}
+for _n, _d, _sg in (("S162", 35, 0), ("C35-0", 35, 1), ("C35-pi", 35, -1), ("C50-0", 50, 1)):
+    CORSE[_n] = (1000.0, 10000.0)
+    VUOTI[_n] = "F3"
+    BORDO[_n] = BORDO["TB3"]
+    MAPPE = MAPPE + (_n,)
+    STATI[_n] = tuple(1500.0 * k for k in range(7))   # ### 0, 1500, ..., 9000 (Luca: ogni 1500 e a t 0)
+    STIMA[_n] = "TB3"                 # ### la stima del disco dai jsonl di TB3 (le mappe scalano coi nodi)
+    LCORSA[_n] = 162
+    COPPIA[_n] = (_d, _sg)            # ### la seconda copia della partenza traslata di d lungo A1, per +1 / -1; 0: il singolo
+    BORDO_CORSA[_n] = (0.5 * _d, 0.5 * _d + 30.0)   # ### (lo spostamento del centro del bordo lungo A1 dal centro della partenza, R_A)
+C0_BREVE, TOLL_C0 = 200, 1e-12        # ### Luca 12:42: il DEVE breve all'inizio di ogni corsa (il vuoto F3 da solo, 200 tick dopo la rampa, = c(t) F3 entro 1e-12)
+
+
+@contextlib.contextmanager
+def con_L(L):
+    """### **`V.L` in memoria per la corsa, rimesso all'uscita** *(come `carta_statiche.scena_con`)*; `None`: nulla."""
+    import _vuoto_vivo_B as V
+    vero = V.L
+    if L is not None:
+        V.L = L
+    try:
+        yield
+    finally:
+        V.L = vero
+
+
+def c0_breve(z, phi_v, K, tab_c, omega):
+    """### **`C0` breve** *(Luca 12:42)*: **il vuoto `phi_v` da solo** *(`psi = 0`)*, `c(K) phi_v` al tick `K`, poi `C0_BREVE` tick interi: **`phi = c(t) phi_v` entro `TOLL_C0`**; ### **lo stato si rimette.** `(max scarto relativo, ok)`."""
+    from solitone import accensione as AC
+    from solitone import bordo as BO
+    chiavi = [k for k, v in z["st"].items() if isinstance(v, np.ndarray)]
+    salvato = {k: z["st"][k].copy() for k in chiavi}
+    n = float(np.linalg.norm(phi_v))
+    peggio = 0.0
+    try:
+        z["st"]["psi_h"][...] = 0.0
+        z["st"]["phi_h"][...] = BO.c_di(K, tab_c, K, omega) * phi_v
+        for t in range(K + 1, K + C0_BREVE + 1):
+            AC.tick(z, t, K)
+            peggio = max(peggio, float(np.linalg.norm(z["st"]["phi_h"] - BO.c_di(t, tab_c, K, omega) * phi_v)) / n)
+    finally:
+        for k in chiavi:
+            z["st"][k][...] = salvato[k]
+    return peggio, peggio <= TOLL_C0
 RUMORE, ARRESTO_PARTENZA = {}, ()
 for _k in (1, 2, 3, 4):              # ### (Luca 2026-11-05 14:14) il pilota di TL120 (e D5 a 1e-10): la partenza di TF3 piu' il rumore relativo 1e-10, i semi 1-4, F3, senza bordo, fino a 30000 o all'arresto
     CORSE["PL%d" % _k] = (1000.0, 30000.0)
@@ -290,7 +339,7 @@ def corsa(nome):
     f_rip_da = os.path.join(DIR_NPZ, (da if da and not fatti else nome) + ".npz")   # ### il primo pezzo di una continuazione legge lo stato di da
     f_acc = os.path.join(DIR_NPZ, (da if da else nome) + "_acc.npz")
     s0 = time.time()
-    with V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
+    with con_L(LCORSA.get(nome)), V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
         w0 = rec["larghezza"]
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             w_in = DC.forma(z, w0)[0]
@@ -310,6 +359,20 @@ def corsa(nome):
             xi = np.random.default_rng(seme_r).standard_normal(p0.shape) + 1j * np.random.default_rng(seme_r + 1000).standard_normal(p0.shape)
             p0 = p0 + (amp_r * float(np.linalg.norm(p0)) / float(np.linalg.norm(xi))) * xi
             rum = {"ampiezza": amp_r, "seme": seme_r, "sha_partenza": SFM.sha(p0)}
+        cop = None
+        if nome in COPPIA:               # ### la partenza della coppia (il task history 2026-11-06_coppia_corse, 1): p0 + sg roll(p0, d lungo A1); S162 il singolo
+            from solitone import toro as TOc
+            d_c, sg_c = COPPIA[nome]
+            Lc = z["L"]
+            rho1 = np.zeros(z["inc"].n)
+            np.add.at(rho1, z["inc"].nodo, np.sum(np.abs(p0) ** 2, axis=1))
+            v_ = np.arange(z["inc"].n)
+            c1_, c2_ = TOc.centro(rho1, v_ // Lc, v_ % Lc, Lc)[:2]
+            cop = {"d": d_c, "segno": sg_c, "centro_1": [c1_, c2_], "sha_singolo": SFM.sha(p0)}
+            if sg_c != 0:
+                q_ = p0.reshape((Lc, Lc, -1) + p0.shape[1:])
+                p0 = p0 + sg_c * np.roll(q_, d_c, axis=0).reshape(p0.shape)
+            cop["sha_partenza"] = SFM.sha(p0)
         ts, simm = None, None
         if nome in SIMMETRIZZATE:
             ts = partenza_ts(z, phi0, pK, s)
@@ -321,7 +384,10 @@ def corsa(nome):
         for k, v in salvato.items():
             z["st"][k][...] = v
         mu = info["mu"]
-        assert testa_v["info"]["mu"] == mu and testa_v["w_in"] == w_in, "la scena NON e' quella di BG-F-0.15"
+        if nome in LCORSA:                # ### su L 162 la scena non e' quella di BG-F-0.15 (L 81): mu e w_in si registrano, non si confrontano (dichiarato)
+            print("  la corsa %s su L %d: mu %.15f, w_in %.12f (BG-F-0.15 su L 81: %.15f, %.12f)" % (nome, z["L"], mu, w_in, testa_v["info"]["mu"], testa_v["w_in"]))
+        else:
+            assert testa_v["info"]["mu"] == mu and testa_v["w_in"] == w_in, "la scena NON e' quella di BG-F-0.15"
         par = z["par"]
         assert par["eps"] == V.EPS != 0.0, "il libro dei conti deve passare il par della corsa (eps acceso)"
         acc = None
@@ -364,13 +430,22 @@ def corsa(nome):
                 tab_c, omega = dati["c"].copy(), float(dati["omega"])
                 assert int(dati["K"]) == K, "la tabella di c(t) NON e' di questo K"
             assert abs(omega - 3 * math.pi / 20) <= 1e-14, "omega NON e' 3 pi / 20 (fase_F3.txt)"
+            RA_c = BORDO_CORSA[nome][1] if nome in BORDO_CORSA else BO.R_A
+            if prec is None and nome in LCORSA:   # ### C0 breve (Luca 12:42) all'inizio della corsa
+                with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                    e_c0, ok_c0 = c0_breve(z, phi_v, K, tab_c, omega)
+                print("  la corsa %s: C0 breve (il vuoto F3 da solo su L %d, %d tick dopo la rampa) lo scarto da c(t) F3 %.3e (TOLL_C0 %g): %s" % (nome, z["L"], C0_BREVE, e_c0, TOLL_C0, "PASSA" if ok_c0 else "### FALLISCE: FERMO"))
+                if not ok_c0:
+                    return 1
+                if cop is not None:
+                    cop["c0_breve"] = e_c0
             if prec is None:
-                bor = {"g_max": BORDO[nome], "R_A": BO.R_A, "sha_c": SFM.sha(tab_c), "omega": omega, "c0": None, "c": None, "X": [0.0, 0.0],
+                bor = {"g_max": BORDO[nome], "R_A": RA_c, "sha_c": SFM.sha(tab_c), "omega": omega, "c0": None, "c": None, "X": [0.0, 0.0],
                        "M_ass": 0.0, "V_ass": 0.0, "E_ass": 0.0, "M0": None, "V0": None, "E0": None}
             else:
                 bor = dict(prec["bordo"])
-                assert bor["sha_c"] == SFM.sha(tab_c) and bor["g_max"] == BORDO[nome] and bor["R_A"] == BO.R_A, "la tabella di c(t), g_max o R_A NON sono quelli del primo pezzo"
-                g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], BO.R_A, bor["g_max"])
+                assert bor["sha_c"] == SFM.sha(tab_c) and bor["g_max"] == BORDO[nome] and bor["R_A"] == RA_c, "la tabella di c(t), g_max o R_A NON sono quelli del primo pezzo"
+                g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], bor["R_A"], bor["g_max"])
                 gfa = (g_e, gn > 0.0)
 
             def campione_bordo(fas, conti_):
@@ -432,8 +507,10 @@ def corsa(nome):
                     c["simm"] = asimmetria(z, simm)
                 if bor is not None:        # ### il centro iniziale del solitone (il centro periodico del campione 0): la fascia e' fissa da qui
                     bor["c0"] = [c["per"]["c1"], c["per"]["c2"]]
+                    if nome in BORDO_CORSA:   # ### il centro del bordo: il centro della partenza singola + d/2 lungo A1 (il punto medio della coppia; per S162 quello di C35)
+                        bor["c0"] = [(cop["centro_1"][0] + BORDO_CORSA[nome][0]) % z["L"], cop["centro_1"][1]]
                     bor["c"] = list(bor["c0"])
-                    g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], BO.R_A, bor["g_max"])
+                    g_e, gn, _r = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], bor["R_A"], bor["g_max"])
                     gfa = (g_e, gn > 0.0)
                     bor["M0"] = float(np.sum(np.abs(z["st"]["psi_h"]) ** 2))
                     bor["V0"] = float(np.sum(np.abs(z["st"]["phi_h"]) ** 2))
@@ -506,8 +583,8 @@ def corsa(nome):
                         bor["X"] = (np.asarray(bor["X"]) + e1 * A1b + e2 * A2b).tolist()
                         bor["c"] = [p["c1"], p["c2"]]
                         c["bordo"] = campione_bordo(fas, conti)
-                        if fermata is None and c["bordo"]["spost"] + 3.0 * w_in >= BO.R_A:
-                            fermata = "(i) lo spostamento %.4f + 3 w_in %.4f >= R_A %g a t %.1f (Luca 09:26)" % (c["bordo"]["spost"], 3.0 * w_in, BO.R_A, t * s)
+                        if fermata is None and c["bordo"]["spost"] + 3.0 * w_in >= bor["R_A"]:
+                            fermata = "(i) lo spostamento %.4f + 3 w_in %.4f >= R_A %g a t %.1f (Luca 09:26)" % (c["bordo"]["spost"], 3.0 * w_in, bor["R_A"], t * s)
                     if simm is not None:
                         c["simm"] = asimmetria(z, simm)
                     camp.append(c)
@@ -538,10 +615,11 @@ def corsa(nome):
             dim, sha = MP.scrivi(f_m, ist, np.asarray(z["m1"]), np.asarray(z["m2"]), z["L"])
             mappe = {"file": f_m, "byte": dim, "sha1": sha, "istantanee": len(ist)}
         sha_fine = V.shas(z)
+        L_z = z["L"]
         tmp = f_rip.replace(".npz", "_tmp.npz")
         np.savez(tmp, t=t1, **{k: v for k, v in z["st"].items() if isinstance(v, np.ndarray)})
     os.replace(tmp, f_rip)
-    riga = {"nome": nome, "da": NOME, "sol": sol, "vuoto": vuoto, "s": s, "eps": V.EPS, "N": V.N, "L": V.L, "T_acc": T_acc, "K": K, "t0": t0, "t1": t1, "t_fine": t_fine,
+    riga = {"nome": nome, "da": NOME, "sol": sol, "vuoto": vuoto, "s": s, "eps": V.EPS, "N": V.N, "L": L_z, "T_acc": T_acc, "K": K, "t0": t0, "t1": t1, "t_fine": t_fine,
             "t_dis": t_dis, "w_in": w_in, "h": h, "e_K": e_K, "info": info, "campioni": camp, "D": dd, "D_acc": da_, "sha_fine": sha_fine, "secondi": time.time() - s0,
             "acc": {k: v for k, v in acc_nuovo.items() if k != "psi"} if acc_nuovo else None,
             "tick": "accensione (sin^2 su T_acc, poi tick.percorri_tick)", "libro": "col par della corsa", "rampa": "lam_k = sin^2(pi k/(2 K))"}
@@ -557,6 +635,8 @@ def corsa(nome):
         riga.update({"partenza": pst, "fermata": fermata})
     if rum is not None:
         riga.update({"rumore": rum})
+    if cop is not None:
+        riga.update({"coppia": cop})
     if ts is not None:
         riga.update({"ts": {k: v for k, v in ts.items() if k != "psi"}, "sha_partenza_ts": SFM.sha(ts["psi"])})
     if nome in RUOTATE:
@@ -907,7 +987,7 @@ def ripartenza(nome):
     for r in rr:
         dopo.update(r.get("dopo_stato") or {})
     out = []
-    with V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
+    with con_L(LCORSA.get(nome)), V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
         w0 = rec["larghezza"]
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             DC.forma(z, w0)
