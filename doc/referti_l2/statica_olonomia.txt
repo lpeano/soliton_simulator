@@ -1,0 +1,21 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 70f3baa4  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --olonomia; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+  U: forma (19683, 2, 2); |U - I| max 0.000e+00; il verso antiorario: su +1, giu' -1; TOLL_W 1e-12
+  DEVE PASSARE: OL-G (mio) una U di pura gauge casuale (seme 1) da' W = I entro 1e-12 su ogni triangolo -- il controllo de PASSA   max |W - I| 1.998e-15
+  DEVE FALLIRE: OL-F (mio) una U casuale per arco, non di gauge (seme 2): "W = I entro 1e-12"                              PASSA   max |W - I| 1.999e+00
+  DEVE PASSARE: OL-T (mio) U della scena uguale al bit prima e dopo il tick della corsa dallo stato di TBS a t 15000       PASSA   sha1 71bb2effffce4c3d7ff249f920824164c780eda4 / 71bb2effffce4c3d7ff249f920824164c780eda4
+    su: max |W - I| 0.000e+00; il flusso U(1) phi media +0.000e+00, dispersione 0.000e+00; l'angolo SU(2) a media 0.000e+00, dispersione 0.000e+00
+    giu': max |W - I| 0.000e+00; il flusso U(1) phi media +0.000e+00, dispersione 0.000e+00; l'angolo SU(2) a media 0.000e+00, dispersione 0.000e+00
+  ### LA LETTURA DI E (il task history 15.3): BANALE (max |W - I| 0.000e+00): la parte di psi di C, senza U, E' gia' quella con U
+  ### ATTENZIONE (15.1): U = I e' costruita dalla scena (csv/_triangoli.scena_toro) e nessun pezzo del tick la scrive: uno zero PER COSTRUZIONE, non una misura della fisica
+==================================================================================================================================
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []

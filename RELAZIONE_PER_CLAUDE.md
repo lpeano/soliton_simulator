@@ -23859,3 +23859,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I DEVE passano:** il vortice sintetico da' esattamente un `+1` *(e un `-1` col segno opposto)* nel vuoto e in `psi`; senza la fase, zero.
 - ### **Il vuoto** *(rispetto a `c(t) F3`)*: **`277`/`281` vortici `+1`/`-1` dentro `20` a `t 15000`, `274`/`270` a `30000`; il netto `-4`, poi `+4`.** ### **`psi`** *(rispetto alla partenza, senza `U`)*: **nessuno dentro `20`.**
 - ### **Un mio errore di criterio:** **«netto diverso da zero» l'ho scritto per pochi vortici: su `~550`, con il segno che si rovescia, e' una fluttuazione.** La stampa dice SI', **io non lo sostengo**; un criterio contro `sqrt(N)` sarebbe un numero nuovo: **decide Luca.** **Avanti con E.**
+
+## 2026-11-06 — E, L'OLONOMIA DI `U`: **`4/4`, BANALE PER COSTRUZIONE** *(`statica_olonomia.txt`)*; ### **LA ROTAZIONE NEI TRIANGOLI CHIUSA** *(il task history `2026-11-05_rotazione_triangoli`, sez. `15`-`17`)*
+
+- **`U = I` su ogni arco** *(la scena, `csv/_triangoli.scena_toro`; nessun pezzo del tick la scrive; uguale al bit dopo un tick)*: **`W = I` su ogni triangolo.** **I controlli:** la pura gauge casuale da' `I` entro `2.0e-15`; una `U` casuale `1.999` *(fallisce come deve)*.
+- ### **Uno zero per costruzione, non una misura del vuoto:** **il flusso nei triangoli oggi non c'e'**; la circolazione di B e i vortici di C nascono senza flusso di fondo. **La parte di `psi` di C non si rifa'.**
+- ### **La chiusura** *(A, B, C, E; D sospesa)*: **la materia circola, senza un verso fisso; il vuoto e' un gas di vortici quasi neutro; nessun flusso di fondo.** **Aperti per Luca:** il criterio della carica di C, la serie fitta di B. **Le voci «precessione» e «flusso nei triangoli» non sono nella MAPPA** *(cercate)*: il rimando sta nella `3-quater`.
+- **Avanti con la coppia.**
