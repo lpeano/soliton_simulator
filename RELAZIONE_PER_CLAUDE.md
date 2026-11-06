@@ -23853,3 +23853,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La serie** *(il segno di `Gamma(12)` ogni `1500`)*: `0 + + + + + + - - - + + + - - - - - - - +` -- **«CAMBIA»**, `|Gamma(12)|` sempre `10^9` volte sopra il pavimento. ### **Avvertenza: il campionamento ogni `10000` tick puo' fare alias; si dice solo che il verso NON e' fisso.**
 - **TB3 non ha stati:** il conto non si fa.
 - ### **La mia proposta di lettura:** un'oscillazione rotazionale, non un momento angolare conservato; **una serie fitta** *(una corsa breve)* **la distinguerebbe: decide Luca.** **Avanti con C.**
+
+## 2026-11-06 — C, I VORTICI DELLA FASE: **`7/7`; IL VUOTO MATURO E' UN GAS DI VORTICI QUASI NEUTRO, LA MATERIA NON NE HA; (r4) «SI'» PER IL MIO CRITERIO, CHE NON LO SOSTIENE** *(`statica_vortici.txt`; il task history `2026-11-05_rotazione_triangoli`, sez. `13`-`14`)*
+
+- **I DEVE passano:** il vortice sintetico da' esattamente un `+1` *(e un `-1` col segno opposto)* nel vuoto e in `psi`; senza la fase, zero.
+- ### **Il vuoto** *(rispetto a `c(t) F3`)*: **`277`/`281` vortici `+1`/`-1` dentro `20` a `t 15000`, `274`/`270` a `30000`; il netto `-4`, poi `+4`.** ### **`psi`** *(rispetto alla partenza, senza `U`)*: **nessuno dentro `20`.**
+- ### **Un mio errore di criterio:** **«netto diverso da zero» l'ho scritto per pochi vortici: su `~550`, con il segno che si rovescia, e' una fluttuazione.** La stampa dice SI', **io non lo sostengo**; un criterio contro `sqrt(N)` sarebbe un numero nuovo: **decide Luca.** **Avanti con E.**

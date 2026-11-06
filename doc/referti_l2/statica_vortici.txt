@@ -1,0 +1,64 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE e07f80c0  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --vortici; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+  lo stato a t 0 (tick 0): E:\soliton_simulator\stati\TBS\TBS_stato_000000.npz sha1 bbbf36a7bb78909f8d9c0575be8a0f0d17a30405
+  lo stato a t 15000 (tick 100000): E:\soliton_simulator\stati\TBS\TBS_stato_100000.npz sha1 3d9aa54c879b14902b6614d053ebba3e61d4ce40
+  lo stato a t 30000 (tick 200000): E:\soliton_simulator\stati\TBS\TBS_stato_200000.npz sha1 311988f0ec2eece2970c89811969c3abe46fb016
+  DEVE PASSARE: VX-S ogni stato caricato da' gli sha per chiave registrati nella corsa                                     PASSA   [True, True, True]
+  il centro di t 0 (40.5000, 40.5000); MOD_FASE 1e-12; R_VORT 20; SOGLIA_ANELLO_V 5; la parte di psi SENZA U (13.1)
+    il vuoto F3 da solo: dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): nessuno
+  DEVE PASSARE: VX-0 (Luca) il vuoto F3 da solo da' zero vortici (per costruzione: chi = 0)                                PASSA   +1 0, -1 0
+    il vuoto sintetico e^{+i theta}: dentro r < 20: +1 1, -1 0, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 2, -1 3
+      la carica netta dentro R: R 4: +1; R 8: +1; R 12: +1; R 16: +1; R 20: +1; R 24: +1; R 28: +1; R 32: +1; R 36: +1; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): (0 1 0 0) (39 0 1 0) (40 0 2 0)
+    psi sintetico e^{+i theta}: dentro r < 20: +1 1, -1 0, |w| > 1 0; esclusi (fase non definita) 10676 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +1; R 8: +1; R 12: +1; R 16: +1; R 20: +1; R 24: +1; R 28: +1; R 32: +1; R 36: +1; R 40: +1
+      gli anelli con vortici (anello, +1, -1, esclusi): (0 1 0 0)
+  DEVE PASSARE: VX-V (Luca) il vuoto sintetico e^{+i theta}: esattamente un +1 e nessun -1 dentro r < 20                   PASSA   +1 1, -1 0
+  DEVE PASSARE: VX-P (mio) psi sintetico e^{+i theta}: esattamente un +1 e nessun -1 dentro r < 20                         PASSA   +1 1, -1 0
+    il vuoto sintetico e^{-i theta}: dentro r < 20: +1 0, -1 1, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 3, -1 2
+      la carica netta dentro R: R 4: -1; R 8: -1; R 12: -1; R 16: -1; R 20: -1; R 24: -1; R 28: -1; R 32: -1; R 36: -1; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): (0 0 1 0) (39 1 0 0) (40 2 0 0)
+    psi sintetico e^{-i theta}: dentro r < 20: +1 0, -1 1, |w| > 1 0; esclusi (fase non definita) 10676 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: -1; R 8: -1; R 12: -1; R 16: -1; R 20: -1; R 24: -1; R 28: -1; R 32: -1; R 36: -1; R 40: -1
+      gli anelli con vortici (anello, +1, -1, esclusi): (0 0 1 0)
+  DEVE PASSARE: VX-M (mio) e^{-i theta}: esattamente un -1 e nessun +1 dentro r < 20, nel vuoto e in psi                   PASSA   vuoto +1 0 -1 1; psi +1 0 -1 1
+    psi di t 0 senza la fase: dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 10676 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): nessuno
+  DEVE FALLIRE: VX-F (Luca) senza la fase (psi di t 0): "esattamente un +1 dentro r < 20"                                  PASSA   +1 0, -1 0
+  ### TBS a t 0: c(t) +1.000000000000 +0.000000000000i
+    il vuoto: dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): nessuno
+    psi (rispetto alla partenza, senza U): dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 10676 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): nessuno
+  ### TBS a t 15000: c(t) +0.987688340595 +0.156434465038i
+    il vuoto: dentro r < 20: +1 277, -1 281, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 12, -1 8
+      la carica netta dentro R: R 4: +0; R 8: +3; R 12: -1; R 16: -2; R 20: -4; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): (0 1 1 0) (1 5 4 0) (2 2 3 0) (3 4 4 0) (4 5 6 0) (5 6 6 0) (6 16 11 0) (7 5 6 0) (8 6 8 0) (9 11 12 0) (10 13 12 0) (11 10 12 0) (12 12 15 0) (13 14 13 0) (14 19 14 0) (15 20 24 0) (16 28 25 0) (17 32 32 0) (18 40 37 0) (19 28 36 0) (20 12 8 0)
+    psi (rispetto alla partenza, senza U): dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 9898 su 13122; fuori: +1 2, -1 1
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +1; R 28: +1; R 32: +1; R 36: +1; R 40: +1
+      gli anelli con vortici (anello, +1, -1, esclusi): (20 1 0 24) (21 1 1 266)
+  ### TBS a t 30000: c(t) +0.987688340596 +0.156434465037i
+    il vuoto: dentro r < 20: +1 274, -1 270, |w| > 1 0; esclusi (fase non definita) 0 su 13122; fuori: +1 39, -1 43
+      la carica netta dentro R: R 4: -2; R 8: -1; R 12: -1; R 16: -2; R 20: +4; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): (1 0 1 0) (2 8 5 0) (3 2 6 0) (4 4 2 0) (5 5 5 0) (6 8 8 0) (7 8 9 0) (8 8 7 0) (9 10 14 0) (10 15 9 0) (11 15 18 0) (12 22 18 0) (13 15 18 0) (14 14 14 0) (15 16 18 0) (16 27 23 0) (17 33 30 0) (18 29 31 0) (19 35 34 0) (20 32 40 0) (21 7 3 0)
+    psi (rispetto alla partenza, senza U): dentro r < 20: +1 0, -1 0, |w| > 1 0; esclusi (fase non definita) 9809 su 13122; fuori: +1 0, -1 0
+      la carica netta dentro R: R 4: +0; R 8: +0; R 12: +0; R 16: +0; R 20: +0; R 24: +0; R 28: +0; R 32: +0; R 36: +0; R 40: +0
+      gli anelli con vortici (anello, +1, -1, esclusi): nessuno
+  ### LA LETTURA (r4) DI C (il task history 13.3): t 15000 vuoto: netto dentro 20 -4, si'; t 15000 psi: netto dentro 20 +0, no; t 30000 vuoto: netto dentro 20 +4, si'; t 30000 psi: netto dentro 20 +0, no
+  ### (r4) per C: SI'
+==================================================================================================================================
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []
