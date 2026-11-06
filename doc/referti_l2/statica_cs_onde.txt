@@ -1,0 +1,50 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 97e31152  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --cs-onde; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS3, cs SULLE ONDE DEL VUOTO (Luca 19:41-20:00): il tick tick_con_cs (cs dinamico e CAMM-FASE-VUOTO insieme) contro il tick di oggi, linearizzati attorno a F3; Lambda del vuoto 6.000000000000000, s 0.15 -> Lambda_c 34.000000000000000; nel vuoto cs 0.14999999999999999
+  il tick di oggi: omega 4.71238898038472354e-01 per tick, il residuo 3.401e-15
+  DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{+i omega} F3| / |F3| entro 1e-12                 PASSA   omega_cs 1.27234502470386501e+00 per tick, il residuo 1.512e-15; i giri del punto fisso [1]
+  IS3-0 (stampato): |tick_cs F3 - tick F3| / |F3| 7.799e-01; omega_cs - omega +8.011e-01
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_statiche.py", line 1569, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_statiche.py", line 1562, in main
+    {"--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_statiche.py", line 1468, in cs_onde
+    Tc, _Rc = _T_vuoto(z, F3, K, np.exp(-1j * oms["cs"]), dove, tk_cs)
+              ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_statiche.py", line 1113, in _T_vuoto
+    tk(z)
+    ~~^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_statiche.py", line 1433, in tk_cs
+    giri.append(TK.tick_con_cs(z_["st"], z_["mot"], z_["par"], lc, ()))
+                ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 187, in tick_con_cs
+    _c, giri = cs_al_centro(st, mot, par, lambda_c, fp, salta)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 164, in cs_al_centro
+    percorri_tick(copia, mot, par, salta, None, meta)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\tick.py", line 99, in percorri_tick
+    mot.operatori[nome](st, par if vuole_par else {}, frazione)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\motore.py", line 674, in _fase_vuoto
+    EP.applica(self, st, parametri, frazione)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\energia_pesata.py", line 413, in applica
+    controlla_tetto(prec, tetto_omega(mot, st, par), "Omega finale")
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\energia_pesata.py", line 127, in controlla_tetto
+    assert eccesso <= 0.0, (
+           ^^^^^^^^^^^^^^
+AssertionError: il TETTO di `Omega` NON e' un tetto (Omega finale): max_k(|Omega_k| - tetto_k) = 2.220e-16 > 0. ### La scala della tolleranza dev'essere un tetto PER COSTRUZIONE (errore n.17): se non lo e', la formula del tetto non segue piu' quella di `omega()`
