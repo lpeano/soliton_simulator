@@ -73,7 +73,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E il verdetto di `VD-R-F`** *(`carta_statiche.py`, la condizione negata: `dced2343`)*.
 # ### **E la coppia matura** *(`carta_statiche.py --coppia-matura`, Luca `21:01`)* **e l'etichetta di `F3`** *(`carta_campo.py`)*.
 # ### **E la misura A** *(`carta_statiche.py --goldstone`, Luca `21:20`)*.
-LIBRERIA_RIFERITA = "9c20b0c0"
+# ### **E la misura B** *(`carta_statiche.py --circolazione`, Luca `21:20`, `2026-11-06`)*.
+LIBRERIA_RIFERITA = "20b1a3b8"
 
 
 def vecchi():
