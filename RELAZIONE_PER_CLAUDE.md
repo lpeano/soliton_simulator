@@ -23957,3 +23957,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **La cura del segno e `IS3-15`, un commit a se'; IS1 anche a `17` gradi** *(una direzione generica, per `G` e `D`; i `30` gradi restano «zero di simmetria sospetto» fino ad allora)*; **poi `C35-0` subito dopo le carte, e le mappe leggere fra `C35-0` e `C35-pi`.**
 - ### **La lettura di IS1 (Luca):** **lungo `A1` nessun ramo e' invisibile: i rami piatti NON sono modi spuri alla Brezzi.** **`Z`, il ramo che porta `Lambda`, e' piatto a frequenza zero e visto: `Lambda` non oscilla e non si propaga** *(una «memoria» del vuoto)*, **coerente con l'anello di `Lambda` attaccato al solitone e con la parte dal vuoto di `E_int` a corto raggio.** **IS3 dira' se `cs` da' a `Z` una velocita'.** *(Una mia precisazione: a `|k| <= 0.04` lungo `A1` si vede `G + Z` insieme, non `G` da solo.)*
+
+## 2026-11-07 — IS1 A `17` GRADI: LO ZERO A `30` GRADI ERA DI SIMMETRIA *(il task history `2026-11-06_brezzi_modi_vuoto`, sez. `9`)*
+
+- **`G` e `D` visti nella direzione generica** *(`10` e `12` `|k|` su `14` sopra il pavimento)*: **il «non visto» a `30` gradi era uno zero di simmetria, CHIUSO.** **Nessun ramo invisibile alla materia in nessuna delle tre direzioni.**

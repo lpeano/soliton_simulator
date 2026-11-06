@@ -113,3 +113,9 @@
 5. **Le mappe leggere di `S162` e `C35-0` fra `C35-0` e `C35-pi`** *(la richiesta delle `23:38`: il task history `2026-11-06_mappe_leggere_S162_C35`, `cbdfce75`)*.
 
 **L'ordine che eseguo** *(`[[PRECEDENZA-IN-CODA]]`, registrato)*: **questa sezione** -> **la cura del segno e `IS3-15`** *(un commit)* -> **la direzione a `17` gradi in IS1** *(un commit: un cambiamento logico diverso)* -> **il codice delle mappe in `carta_campo.py`** *(un commit; il suo task history e' gia' antenato)* -> **`D6`, la cassetta** -> **`--brezzi`, `--passo`, `--cs-onde`, una alla volta** -> **`C35-0`** -> **le mappe di `S162` e `C35-0`** -> **`C35-pi`**, **`C50-0`**.
+
+## 9. IS1 A `17` GRADI *(`statica_brezzi.txt` rigirata, `carta_statiche.py` `97e31152`)*: **`6/6`; LO ZERO A `30` GRADI ERA DI SIMMETRIA: CHIUSO**
+
+- **A `17` gradi** *(la direzione generica di Luca)*: **`G` sopra il pavimento a `10` `|k|` su `14`, `D` a `12` su `14`: VISTI** *(`G`: `a` da `2.032e-03` a `|k| 0.005` a `4.618e-01`; `D`: `a ~ k^1.7`, `b ~ k^2.8`)*; **`Z` e `P` visti come nelle altre due direzioni.** **Il seguimento dei rami: il salto piu' grande `4.405e-04`** *(come `A1`, `4.519e-04`)*.
+- ### **La riga finale della carta:** **per `G` e per `D`, il NON VISTO a `30` gradi era uno ZERO DI SIMMETRIA (la direzione generica lo vede): CHIUSO.** **Quindi in nessuna direzione misurata c'e' un ramo invisibile alla materia: la lettura di Luca delle `23:41` vale in generale, non solo lungo `A1`.**
+- **`A1` e `30` gradi danno gli stessi numeri del primo giro** *(la stessa carta in quelle righe)*. **Un difetto di testo, mio:** l'intestazione di IS1 dice ancora «lungo `A1` e a `30` gradi»: **si corregge col prossimo tocco della carta.**
