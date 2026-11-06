@@ -50,8 +50,91 @@ def velocita(ph, s, L):
     return np.einsum("ij,...j->...i", M, np.stack([d1, d2], axis=-1))
 
 
+TOLL_C0 = 1e-12                # ### Luca 2026-11-06 12:42: C0, il vuoto F3 da solo su L 162 = c(t) F3 entro 1e-12
+REF_TB3 = "bordo_riflessione.txt"   # ### Luca 12:42: la riflessione di TB3 stampata accanto (letta dal referto, non ricopiata)
+
+
+def opzioni(argv):
+    """### **Le opzioni** *(Luca `2026-11-06` `12:42`; il task history `2026-11-06_coppia_corse`, sez. `6`)*: `--L`, `--R_A`, `--griglia a,b,..`, `--c0`. ### **Senza opzioni: la carta di prima, al bit.**"""
+    import _vuoto_vivo_B as V
+    from solitone import bordo as BO
+    o = {"L": V.L, "R_A": BO.R_A, "griglia": GRIGLIA, "c0": "--c0" in argv, "nuove": False}
+    for i, a in enumerate(argv):
+        if a == "--L":
+            o["L"], o["nuove"] = int(argv[i + 1]), True
+        elif a == "--R_A":
+            o["R_A"], o["nuove"] = float(argv[i + 1]), True
+        elif a == "--griglia":
+            o["griglia"], o["nuove"] = tuple(float(x) for x in argv[i + 1].split(",")), True
+    if o["c0"]:
+        o["nuove"] = True
+    return o
+
+
+def rifl_tb3():
+    """### **La riflessione di `TB3`** per `g_max`, **letta da `doc/referti_l2/bordo_riflessione.txt`**."""
+    out = {}
+    with open(os.path.join(solitone.RADICE, "doc", "referti_l2", REF_TB3), encoding="utf-8") as f:
+        for l in f:
+            p = l.split()
+            if len(p) >= 4 and p[0] == "g_max" and p[2] == ":" and p[3] == "R":
+                out[float(p[1])] = float(p[4])
+    return out
+
+
+def c0_lungo(o, K, s, vuoto):
+    """### **`C0` lungo** *(Luca `12:42`)*: **il vuoto `F3` da solo su `L` col tick della corsa** *(`AC.tick`, la rampa)* **per `t = 1 .. K + dopo`**; `c(t) = <F3, phi(t)> / |F3|^2` **contro la tabella di `L 81`**
+    *(`fase_F3.npz`)* **entro `TOLL_C0`**, **e il residuo `|phi - c F3| / |F3|`**; ### **`C0-F`: la tabella spostata di un tick NON regge.**"""
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_dal_fondo as SD
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    import _vuoto_vivo_B as V
+    from solitone import accensione as AC
+    from solitone import carta_statiche as CS
+    from solitone import corsa_accensione as CA
+    with np.load(os.path.join(CA.DIR_NPZ, "fase_F3.npz")) as d:
+        tab, om81, K81, dopo = d["c"].copy(), float(d["omega"]), int(d["K"]), int(d["dopo"])
+    assert K81 == K and len(tab) == K + dopo + 1
+    print("### C0 LUNGO (Luca 12:42): il vuoto F3 da solo su L %d, il tick della corsa per t = 1 .. %d (K %d, dopo %d); TOLL_C0 %g" % (o["L"], K + dopo, K, dopo, TOLL_C0))
+    with CS.scena_con(V.N, o["L"]), V.scena(s, vuoto, V.EPS) as (_rec, z, _phi0, _pK):
+        inc, L = z["inc"], z["L"]
+        assert L == o["L"]
+        F3 = SD.fondo_con_fasi(inc, L, tuple(dict(SD.FASI)["F3"]))
+        n3 = float(np.vdot(F3, F3).real)
+        chiavi = [k for k, v in z["st"].items() if isinstance(v, np.ndarray)]
+        salvato = {k: z["st"][k].copy() for k in chiavi}
+        c = np.empty(K + dopo + 1, dtype=complex)
+        res = np.zeros(K + dopo + 1)
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            try:
+                z["st"]["psi_h"][...] = 0.0
+                z["st"]["phi_h"][...] = F3
+                c[0] = complex(np.vdot(F3, z["st"]["phi_h"]) / n3)
+                for t in range(1, K + dopo + 1):
+                    AC.tick(z, t, K)
+                    ph = z["st"]["phi_h"]
+                    c[t] = complex(np.vdot(F3, ph) / n3)
+                    res[t] = float(np.linalg.norm(ph - c[t] * F3)) / math.sqrt(n3)
+                    if t % 1000 == 0:
+                        print("    t %5d: |c - c_81| %.3e; il residuo %.3e" % (t, abs(c[t] - tab[t]), res[t]))
+                        sys.stdout.flush()
+            finally:
+                for k in chiavi:
+                    z["st"][k][...] = salvato[k]
+    e = float(np.max(np.abs(c - tab)))
+    eF = float(np.max(np.abs(c[:-1] - tab[1:])))
+    om = float(np.mean(np.angle(c[K + 1:] / c[K:-1])))
+    print("  ### omega su L %d: %+.17e; su L 81 (fase_F3.npz): %+.17e; la differenza %.3e" % (L, om, om81, abs(om - om81)))
+    print("  ### il residuo |phi - c F3| / |F3|: il massimo %.3e (a t %d)" % (float(res.max()), int(np.argmax(res))))
+    esito("DEVE PASSARE: C0 (Luca) su L %d c(t) = la tabella di L 81 entro %g a ogni t, e il residuo entro %g" % (L, TOLL_C0, TOLL_C0), e <= TOLL_C0 and float(res.max()) <= TOLL_C0,
+          "max |c - c_81| %.3e (a t %d); residuo %.3e" % (e, int(np.argmax(np.abs(c - tab))), float(res.max())))
+    esito("DEVE FALLIRE: C0-F la tabella spostata di un tick (c_81(t + 1)) entro %g" % TOLL_C0, not (eF <= TOLL_C0), "%.3e" % eF)
+
+
 def main(argv):
-    del argv
+    o = opzioni(argv)
     import _deriva_congelato as DC
     import _dove_va_la_materia as DV
     import _presidio
@@ -74,9 +157,17 @@ def main(argv):
         omega = float(d["omega"])
     print("=" * 130)
     print("IL TEST DEL BORDO (Luca 21:52): la riflessione di un pacchetto in banda B sul vuoto F3; %s (s %g, eps %g); R_A %g W %g N_PAC %g SOGLIA %g GRIGLIA %s; omega %.17e (fase_F3.npz)"
-          % (CA.NOME, s, V.EPS, BO.R_A, W, N_PAC, SOGLIA, GRIGLIA, omega))
+          % (CA.NOME, s, V.EPS, o["R_A"], W, N_PAC, SOGLIA, o["griglia"], omega))
     print("=" * 130)
-    with V.scena(s, vuoto, V.EPS) as (_rec, z, _phi0, _pK):
+    if o["nuove"]:
+        print("### LE OPZIONI (Luca 2026-11-06 12:42): L %d, R_A %g, la griglia %s, c0 %s" % (o["L"], o["R_A"], o["griglia"], o["c0"]))
+    if o["c0"]:
+        c0_lungo(o, K, s, vuoto)
+        print("=" * 130)
+        print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+        return 0 if not FALLITE else 1
+    from solitone import carta_statiche as CS
+    with CS.scena_con(V.N, o["L"]), V.scena(s, vuoto, V.EPS) as (_rec, z, _phi0, _pK):
         inc, L = z["inc"], z["L"]
         m1, m2 = np.asarray(z["m1"]), np.asarray(z["m2"])
         F3 = SD.fondo_con_fasi(inc, L, tuple(dict(SD.FASI)["F3"]))
@@ -95,7 +186,7 @@ def main(argv):
         vmod = float(np.hypot(*v))
         print("### IL PACCHETTO: k della griglia (%d, %d), la banda %d del gruppo B; la velocita' di gruppo (%+.5f, %+.5f), |v_g| %.5f nodi per unita' di tempo" % (i1, i2, b, v[0], v[1], vmod))
         c1 = c2 = L // 2
-        R0 = BO.R_A - 3.0 * W
+        R0 = o["R_A"] - 3.0 * W
         A1, A2 = TO.vettori()
         Ai = np.linalg.inv(np.array([A1, A2]).T)
         e = Ai @ (R0 * u)
@@ -107,19 +198,19 @@ def main(argv):
         cel = np.exp(-0.5 * (rp / W) ** 2)[:, None] * fase[:, None] * Z[i1, i2, :, b][None, :]
         cel *= math.sqrt(N_PAC / float(np.sum(np.abs(cel) ** 2)))
         psi0 = cel.reshape(z["st"]["psi_h"].shape)
-        dentro = rc < BO.R_A - W
+        dentro = rc < o["R_A"] - W
         print("  il centro del bordo (%d, %d); il centro del pacchetto (%d, %d) a R0 %.3f (atteso R_A - 3 W = %g); M_in a t 0: %.6f" % (c1, c2, p1, p2, R0v, R0, float(np.sum(np.abs(cel[dentro]) ** 2)) / N_PAC))
         T = int(math.ceil(2.0 * L / vmod / s))
         t_cerca = int(math.ceil(L / vmod / s))
         print("  T %d tick (2 L / v_g); il minimo di M_in senza bordo cercato entro %d tick (L / v_g)" % (T, t_cerca))
         R, t_min, mins = {}, None, None
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
-            for g_max in GRIGLIA:
+            for g_max in o["griglia"]:
                 for k in chiavi:
                     z["st"][k][...] = salvato[k]
                 z["st"]["psi_h"][...] = psi0
                 z["st"]["phi_h"][...] = F3
-                g_e, _gn, _r = BO.g_estremita(z, c1, c2, BO.R_A, g_max)
+                g_e, _gn, _r = BO.g_estremita(z, c1, c2, o["R_A"], g_max)
                 M0 = float(np.sum(np.abs(z["st"]["psi_h"]) ** 2))
                 Mass, serie, cen = 0.0, [], []
                 for n in range(1, T + 1):
@@ -151,8 +242,14 @@ def main(argv):
         for k in chiavi:
             z["st"][k][...] = salvato[k]
     esito("DEVE FALLIRE: R0-F senza bordo R < %g (il pacchetto rientra dal toro)" % SOGLIA, not R[0.0] < SOGLIA, "R %.3e" % R[0.0])
-    sotto = [g for g in GRIGLIA if g > 0.0 and R[g] < SOGLIA]
+    sotto = [g for g in o["griglia"] if g > 0.0 and R[g] < SOGLIA]
     esito("DEVE PASSARE: RB un g_max della griglia con R < %g (il piu' piccolo e' quello della corsa)" % SOGLIA, bool(sotto), "il piu' piccolo: %s" % (sotto[0] if sotto else "nessuno: FERMO"))
+    if o["nuove"]:
+        t3 = rifl_tb3()
+        for g in o["griglia"]:
+            print("  ### g_max %-7g: R su L %d (R_A %g) %.3e; R di TB3 (L 81, R_A 28, %s) %s" % (g, o["L"], o["R_A"], R[g], REF_TB3, ("%.3e" % t3[g]) if g in t3 else "-"))
+        if any(g > 0.0 and R[g] > SOGLIA for g in o["griglia"]):
+            print("  ### FERMO (Luca 12:42): una riflessione sopra %g" % SOGLIA)
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s; G_MAX %s" % (OK[0], OK[1], len(FALLITE), FALLITE, sotto[0] if sotto else None))
     return 0 if not FALLITE else 1
