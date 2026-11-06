@@ -23896,3 +23896,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`tick_con_cs` calcola il punto fisso di `cs` col tick INTERO; nella rampa la corsa usa `tick_acceso` coi pezzi del vuoto scalati di `lam`:** ### **«dal tick `1`» vorrebbe un secondo percorso del tick fuori dal nucleo** *(il difetto che `percorri_tick` esiste per impedire)*.
 - ### **Le strade:** **(r1) `cs` dopo la rampa, dal tick `K + 1`** *(la mia proposta)*; (r2) un punto fisso sulla rampa in `accensione.py`, da collaudare; (r3) `cs` letto all'inizio del passo *(la variante dichiarata sbagliata, `D2`)*. **Decide Luca, prima del codice di `cs`.**
+
+## 2026-11-06 — `cs`: **LA DECISIONE DI LUCA DELLE `14:06`: (r1), `cs` DAL TICK `K + 1`** *(il task history `2026-11-06_cs_col_solitone`, sez. `10`)*
+
+- **Col tick del nucleo cosi' com'e'; nella rampa `cs = 0.15` come oggi; (r2) e (r3) scartate.** ### **L'accensione a `t = K` e' un cambio brusco** *(dentro il solitone `cs` da `0.15` a `~0.004`)*: **il referto di `TCS` legge il transitorio** *(le prime `1000` unita')* **e il resto separatamente, contro `TB3`.**

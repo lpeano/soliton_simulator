@@ -65,3 +65,8 @@
   - **(r2) `cs` dal tick `1` con un punto fisso sulla rampa** scritto in `csv/solitone/accensione.py` *(il secondo percorso: da collaudare contro `tick_con_cs` a `lam = 1`, al bit)*.
   - **(r3) `cs` dal tick `1` letto all'INIZIO del passo nella rampa** *(`flussi_parziali.accendi_cs`)*: ### **la variante che il codice dichiara SBAGLIATA** *(rompe il palindromo, `D2`: `0.997` contro `2.001`)*.
 - **Il criterio di chiusura:** la risposta di Luca qui, **prima del codice di `cs`** *(che viene dopo la coppia)*.
+
+## 10. LA DECISIONE DI LUCA DEL `2026-11-06` `14:06` *(la sez. `9` CHIUSA)*
+- ### **La strada (r1): `cs` acceso DOPO la rampa, dal tick `K + 1`, col tick del nucleo cosi' com'e'** *(`tick.tick_con_cs`)*; **nella rampa `cs = 0.15` uniforme come oggi.** **Scartate (r2)** *(un secondo percorso del tick)* **e (r3)** *(la variante che il codice dichiara sbagliata)*. **La decisione `3` delle `12:42` («dal tick `1`») e' sostituita da questa.**
+- ### **DICHIARATO, qui e nel referto:** **a `t = K` il vuoto e' gia' disturbato: l'accensione e' un CAMBIO BRUSCO** *(`cs` dentro il solitone da `0.15` fino a `~0.004`)*. ### **Il referto di `TCS` legge SEPARATAMENTE il transitorio** *(le prime `1000` unita' di tempo dopo l'accensione: l'emissione, la forma, il centro)* **e il resto, sempre contro `TB3` agli stessi tempi.**
+- **Il codice di `cs` si prepara durante la coppia, SENZA girarlo** *(su una copia: la regola del par. `5`)*.
