@@ -1290,6 +1290,17 @@ def brezzi():
     cm.__exit__(None, None, None)
 
 
+def _rif_fasi_vuoto(f_v):
+    """### **Le `12` fasi per tick a `Gamma` della riga «oggi» di `statica_vuoto.txt`** *(l'ancoraggio di `IS2-15` e `IS3-15`)*: le stringhe, o `None`."""
+    import re
+    rif = None
+    for l in open(f_v, encoding="utf-8"):
+        m = re.match(r"\s*oggi\s+a Gamma le 12 fasi per tick: (.*?); i moduli", l)
+        if m:
+            rif = m.group(1).split()
+    return rif
+
+
 def passo():
     """### **IS2, il passo di tempo** *(Luca `19:41`; il task history, sez. `2.4`)*: il vuoto `F3` da solo a `s` di `PASSI_S`, `mot.cs` in memoria e rimesso *(l'annotazione `4.1`)*."""
     import re
@@ -1312,11 +1323,7 @@ def passo():
     pav = PAV_T / AMP
     f_v = os.path.join(DIR_REF, "statica_vuoto.txt")
     f_g = os.path.join(DIR_REF, "statica_goldstone.txt")
-    rif_fasi = rif_b = None
-    for l in open(f_v, encoding="utf-8"):
-        m = re.match(r"\s*oggi\s+a Gamma le 12 fasi per tick: (.*?); i moduli", l)
-        if m:
-            rif_fasi = m.group(1).split()
+    rif_fasi, rif_b = _rif_fasi_vuoto(f_v), None
     for l in open(f_g, encoding="utf-8"):
         m = re.match(r"\s*### A1\s+la omega piu' grande .* b ([+-][0-9.e+-]+);", l)
         if m:
@@ -1335,9 +1342,9 @@ def passo():
                 AC.tick(z, K + 1, K)
                 ph = z["st"]["phi_h"].copy()
             lam = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
-            om = -math.atan2(lam.imag, lam.real)
-            res = float(np.linalg.norm(ph - np.exp(-1j * om) * F3) / np.linalg.norm(F3))
-            esito("DEVE PASSARE: IS2-E a s %.2f F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro %g" % (s, TOLL_E2), res <= TOLL_E2, "omega %.17e per tick (pi s %.17e), |lambda| %.15f, il residuo %.3e" % (om, math.pi * s, abs(lam), res))
+            om = math.atan2(lam.imag, lam.real)     # ### la convenzione del repo (fase_F3.npz): tick F3 = e^{+i omega} F3 (il segno sbagliato: eb8fcf05; la cura: Luca 23:41)
+            res = float(np.linalg.norm(ph - np.exp(1j * om) * F3) / np.linalg.norm(F3))
+            esito("DEVE PASSARE: IS2-E a s %.2f F3 e' un autovettore del tick: |tick F3 - e^{+i omega} F3| / |F3| entro %g" % (s, TOLL_E2), res <= TOLL_E2, "omega %.17e per tick (pi s %.17e), |lambda| %.15f, il residuo %.3e" % (om, math.pi * s, abs(lam), res))
             T, _R = _T_vuoto(z, F3, K, np.exp(-1j * om), dove, lambda z_: AC.tick(z_, K + 1, K))
             ev0 = np.linalg.eigvals(T(np.zeros(2)))
             fasi0 = np.sort(np.angle(ev0))
@@ -1439,11 +1446,11 @@ def cs_onde():
     for nome, fai in (("oggi", tk), ("cs", tk_cs)):
         ph = un_tick(fai)
         lam_ = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
-        oms[nome] = -math.atan2(lam_.imag, lam_.real)
+        oms[nome] = math.atan2(lam_.imag, lam_.real)     # ### tick F3 = e^{+i omega} F3, la convenzione del repo (Luca 23:41)
         phs[nome] = ph
-        res = float(np.linalg.norm(ph - np.exp(-1j * oms[nome]) * F3) / np.linalg.norm(F3))
+        res = float(np.linalg.norm(ph - np.exp(1j * oms[nome]) * F3) / np.linalg.norm(F3))
         if nome == "cs":
-            esito("DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{-i omega} F3| / |F3| entro %g" % TOLL_E2, res <= TOLL_E2, "omega_cs %.17e per tick, il residuo %.3e; i giri del punto fisso %s" % (oms[nome], res, giri[-1:]))
+            esito("DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{+i omega} F3| / |F3| entro %g" % TOLL_E2, res <= TOLL_E2, "omega_cs %.17e per tick, il residuo %.3e; i giri del punto fisso %s" % (oms[nome], res, giri[-1:]))
         else:
             print("  il tick di oggi: omega %.17e per tick, il residuo %.3e" % (oms[nome], res))
     print("  IS3-0 (stampato): |tick_cs F3 - tick F3| / |F3| %.3e; omega_cs - omega %+.3e" % (float(np.linalg.norm(phs["cs"] - phs["oggi"]) / np.linalg.norm(F3)), oms["cs"] - oms["oggi"]))
@@ -1460,6 +1467,9 @@ def cs_onde():
     esito("DEVE PASSARE: IS3-R la rotazione globale J f non vede cs: |T_cs(0) J f - T(0) J f| / |J f| entro %.1e" % pav, eR <= pav, "%.3e" % eR)
     esito("DEVE FALLIRE: IS3-L-F f (cambia Lambda, quindi cs): |T_cs(0) f - T(0) f| / |f| entro %.1e" % pav, not eL <= pav, "%.3e" % eL)
     print("  a Gamma le 12 fasi per tick, senza cs: %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(T0)))))
+    rif_fasi = _rif_fasi_vuoto(os.path.join(DIR_REF, "statica_vuoto.txt"))
+    e15 = float(np.max(np.abs(np.sort(np.angle(np.linalg.eigvals(T0))) - np.array([float(x) for x in rif_fasi])))) if rif_fasi is not None and len(rif_fasi) == 12 else float("inf")
+    esito("DEVE PASSARE: IS3-15 l'ancoraggio (Luca 23:41): le 12 fasi a Gamma del T(k) di oggi = la riga oggi di statica_vuoto.txt al pavimento (%.1e per tick)" % pav, e15 <= pav, "lo scarto massimo %.3e" % e15)
     print("  a Gamma le 12 fasi per tick, con cs:   %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(Tc0)))))
     for nome_d, gradi in DIREZIONI_G:
         u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
