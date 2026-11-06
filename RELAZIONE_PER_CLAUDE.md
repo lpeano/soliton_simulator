@@ -23924,3 +23924,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-06 — IL REFERTO DI `S162`: LE LETTURE PRIMA DELLA CARTA *(il task history `2026-11-06_coppia_corse`, sez. `10`)*
 
 - **Una premessa dal codice:** **col bordo di `C35` il solitone di `S162` sta a `17.5` dal centro del bordo, quindi la fascia e' a `30` nodi da un lato e a `65` dall'altro** *(`TB3`: `28` da ogni lato)*: **il «bordo lontano» lo e' da un lato solo.** **Le letture del referto sono mie** *(la forma entro lo scarto fra `TBS` e `TB3`; il periodo e il ritardo dell'emissione stampati senza verdetto)*; **`BM` non si fa** *(su `L 162` non c'e' un gemello senza bordo)*.
+
+## 2026-11-06 — IN ATTESA DI `S162` *(il punto della coda)*
+
+- **`S162` gira** *(i pezzi a `~4500` s; `4` pezzi su `7` finiti all'ultimo controllo)*. **Pronto e committato per il dopo:** le carte IS1, IS2, IS3 *(`carta_statiche.py` `ff59398a`)* e la carta del referto di `S162` *(`carta_s162.py` `1e38993c`)*. **La catena a `S162` finita:** `D6`, la cassetta, poi `carta_s162`, `--brezzi`, `--passo`, `--cs-onde` **una alla volta** *(si ferma alla prima che non passa)*; **i referti li leggo prima di committarli.** **Poi `C35-0`.**
+- ### ⚠ **Una mia scelta di ordine, dichiarata:** **la patch del codice di `cs`** *(pronta, la prova a secco passa: `accensione` `9972de30`, `corsa_accensione` `1eae6e22`)* **NON la applico fra `S162` e `C35-0` ma a coppia finita, prima di `TCS`**: **cosi' le quattro corse della coppia girano sullo stesso blob di `corsa_accensione.py`** *(`12744a43`)*, **e il confronto fra il singolo e le coppie non mescola due codici.** **Se Luca la vuole prima, si cambia.**
