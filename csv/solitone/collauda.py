@@ -76,7 +76,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E la misura B** *(`carta_statiche.py --circolazione`, Luca `21:20`, `2026-11-06`)*.
 # ### **E il pavimento di `CI-C` e la serie del verso** *(Luca `2026-11-06` `11:08`)*.
 # ### **E LA MISURA C, I VORTICI**.
-LIBRERIA_RIFERITA = "7039f90c"
+# ### **E LA MISURA E, L'OLONOMIA**.
+LIBRERIA_RIFERITA = "a5f8d2d0"
 
 
 def vecchi():
