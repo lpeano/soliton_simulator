@@ -9,6 +9,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --olonomia > doc/referti_l2/statica_olonomia.txt   # (Luca 2026-11-05 21:39, 2026-11-06) E: l'olonomia di U attorno ai triangoli
     python csv/solitone/carta_statiche.py --brezzi > doc/referti_l2/statica_brezzi.txt   # (Luca 2026-11-06 19:41) IS1: la visibilita' dei rami del vuoto dalla materia (inf-sup)
     python csv/solitone/carta_statiche.py --passo > doc/referti_l2/statica_passo.txt   # (Luca 2026-11-06 19:41) IS2: il ramo piatto e il Goldstone a s 0.10, 0.15, 0.20
+    python csv/solitone/carta_statiche.py --cs-onde > doc/referti_l2/statica_cs_onde.txt   # (Luca 2026-11-06 19:41-20:00) IS3: cs (tick_con_cs, Lambda_c dal vuoto) sulle onde del vuoto
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -1082,13 +1083,12 @@ def _cella(z):
     return dove
 
 
-def _T_vuoto(z, F3, K, rot, dove):
-    """### **`T(k)` del vuoto `F3` con `psi = 0`, nel riferimento `rot`** *(le righe di `vuoto.risposta` col riferimento «oggi» e di `T`)*: `(T, R)`."""
+def _T_vuoto(z, F3, K, rot, dove, tk):
+    """### **`T(k)` del vuoto `F3` con `psi = 0`, nel riferimento `rot`, col tick `tk(z)`** *(le righe di `vuoto.risposta` col riferimento «oggi» e di `T`)*: `(T, R)`."""
     import _deriva_congelato as DC
     import _screening_forme_s3 as SF
     import _solitone_vuoto_congelato as VC
     import _triangoli_bassa_energia as BE
-    from solitone import accensione as AC
     from solitone import toro as TO
     L = z["L"]
     n = z["inc"].n
@@ -1100,7 +1100,7 @@ def _T_vuoto(z, F3, K, rot, dove):
                 z["st"][k_][...] = v
             z["st"]["psi_h"][...] = 0.0
             z["st"]["phi_h"][...] = F3
-            AC.tick(z, K + 1, K)
+            tk(z)
             base = z["st"]["phi_h"].copy()
             for c in range(12):
                 for k_, v in salvato.items():
@@ -1109,7 +1109,7 @@ def _T_vuoto(z, F3, K, rot, dove):
                 ph = F3.copy()
                 ph[dove[0, c // 2]] += AMP * (1.0 if c % 2 == 0 else 1j)
                 z["st"]["phi_h"][...] = ph
-                AC.tick(z, K + 1, K)
+                tk(z)
                 per = ((z["st"]["phi_h"] - base) * rot / AMP)[dove]
                 R[c] = np.stack([per.real, per.imag], axis=2).reshape(n, 12)
     finally:
@@ -1195,7 +1195,7 @@ def brezzi():
     pav = PAV_T / AMP
     print("### IS1, LA VISIBILITA' (Luca 19:41): per ogni ramo del vuoto F3 e |k| %s lungo A1 e a 30 gradi, (a) |Pi J f| / |J f| (un delta rho eccita il ramo), (b) |Pi f| / |f| (il ramo cambia Lambda);"
           " f = F3 sul nodo 0; il pavimento %.1e / gap; s %g, AMP %g" % (KAPPA_IS, pav, s, AMP))
-    T, _R = _T_vuoto(z, F3, K, np.exp(-1j * omega), dove)
+    T, _R = _T_vuoto(z, F3, K, np.exp(-1j * omega), dove, lambda z_: AC.tick(z_, K + 1, K))
     f = _reali(F3[dove[0]])
     Jf = _reali(1j * F3[dove[0]])
     print("  |F3_h| sul nodo 0: %s; Lambda %.15f" % (" ".join("%.15f" % x for x in np.abs(F3[dove[0]])), float(np.sum(np.abs(F3[dove[0]]) ** 2))))
@@ -1271,8 +1271,8 @@ def brezzi():
                 aa.append(a_)
                 bb.append(b_)
                 pp.append(pav / gap)
-                print("    %s %-2s |k| %.3f: |fase| per tick %s; a %.3e b %.3e; il gap %.3e, il pavimento %.3e"
-                      % (nome_d, nome, kap, " ".join("%.3e" % abs(x) for x in np.sort(np.abs(fasi))), a_, b_, gap, pav / gap))
+                print("    %s %-2s |k| %.3f: |fase| per tick %s; a %.3e b %.3e (max |delta Lambda| / |v| = 2 |f| b %.3e); il gap %.3e, il pavimento %.3e"
+                      % (nome_d, nome, kap, " ".join("%.3e" % abs(x) for x in np.sort(np.abs(fasi))), a_, b_, 2.0 * np.linalg.norm(f) * b_, gap, pav / gap))
             ia, ib = int(np.argmin(aa)), int(np.argmin(bb))
             sopra = [max(a_, b_) > p_ for a_, b_, p_ in zip(aa, bb, pp)]
             print("  ### %s %-2s inf a %.3e (|k| %.3f), sup a %.3e; inf b %.3e (|k| %.3f), sup b %.3e; la pendenza in ln |k| sui primi 4: a %+.3f, b %+.3f"
@@ -1338,7 +1338,7 @@ def passo():
             om = -math.atan2(lam.imag, lam.real)
             res = float(np.linalg.norm(ph - np.exp(-1j * om) * F3) / np.linalg.norm(F3))
             esito("DEVE PASSARE: IS2-E a s %.2f F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro %g" % (s, TOLL_E2), res <= TOLL_E2, "omega %.17e per tick (pi s %.17e), |lambda| %.15f, il residuo %.3e" % (om, math.pi * s, abs(lam), res))
-            T, _R = _T_vuoto(z, F3, K, np.exp(-1j * om), dove)
+            T, _R = _T_vuoto(z, F3, K, np.exp(-1j * om), dove, lambda z_: AC.tick(z_, K + 1, K))
             ev0 = np.linalg.eigvals(T(np.zeros(2)))
             fasi0 = np.sort(np.angle(ev0))
             Pk, Dk = [], []
@@ -1386,6 +1386,111 @@ def passo():
     cm.__exit__(None, None, None)
 
 
+def cs_onde():
+    """### **IS3, `cs` sulle onde del vuoto** *(Luca `2026-11-06 19:41-20:00`; il task history `2026-11-06_brezzi_modi_vuoto`, sez. `5.2`)*: `T_cs(k)` col tick `tick_con_cs`, `Lambda_c` dal vuoto, contro `T(k)`."""
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    import _vuoto_vivo_B as V
+    import tick as TK
+    from solitone import accensione as AC
+    from solitone import corsa_accensione as CA
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    _rec, z, _p0, F3, _info, cm = costruisci(V.N, V.L)
+    dove = _cella(z)
+    pav = PAV_T / AMP
+    mot = z["mot"]
+    cs_vero, lc_vero = mot.cs.copy(), mot.lambda_c
+    lam = np.bincount(z["inc"].nodo, weights=np.abs(F3) ** 2, minlength=z["inc"].n)
+    assert float(np.max(lam) - np.min(lam)) <= 1e-12 * float(np.max(lam)), "Lambda del vuoto NON e' uniforme: Lambda_c non si ricava cosi'"
+    lam0 = float(np.mean(lam))
+    lc = lam0 * (1.0 - s) / s
+    giri = []
+
+    def tk(z_):
+        AC.tick(z_, K + 1, K)
+
+    def tk_cs(z_):
+        try:
+            giri.append(TK.tick_con_cs(z_["st"], z_["mot"], z_["par"], lc, ()))
+        finally:
+            z_["mot"].cs[...] = cs_vero
+            z_["mot"].lambda_c = lc_vero
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+
+    def un_tick(fai):
+        try:
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                for k_, v in salvato.items():
+                    z["st"][k_][...] = v
+                z["st"]["psi_h"][...] = 0.0
+                z["st"]["phi_h"][...] = F3
+                fai(z)
+                return z["st"]["phi_h"].copy()
+        finally:
+            for k_, v in salvato.items():
+                z["st"][k_][...] = v
+    print("### IS3, cs SULLE ONDE DEL VUOTO (Luca 19:41-20:00): il tick tick_con_cs (cs dinamico e CAMM-FASE-VUOTO insieme) contro il tick di oggi, linearizzati attorno a F3; Lambda del vuoto %.15f, s %g -> Lambda_c %.15f; nel vuoto cs %.17f"
+          % (lam0, s, lc, lam0 / (lam0 + lc)))
+    oms = {}
+    phs = {}
+    for nome, fai in (("oggi", tk), ("cs", tk_cs)):
+        ph = un_tick(fai)
+        lam_ = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
+        oms[nome] = -math.atan2(lam_.imag, lam_.real)
+        phs[nome] = ph
+        res = float(np.linalg.norm(ph - np.exp(-1j * oms[nome]) * F3) / np.linalg.norm(F3))
+        if nome == "cs":
+            esito("DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{-i omega} F3| / |F3| entro %g" % TOLL_E2, res <= TOLL_E2, "omega_cs %.17e per tick, il residuo %.3e; i giri del punto fisso %s" % (oms[nome], res, giri[-1:]))
+        else:
+            print("  il tick di oggi: omega %.17e per tick, il residuo %.3e" % (oms[nome], res))
+    print("  IS3-0 (stampato): |tick_cs F3 - tick F3| / |F3| %.3e; omega_cs - omega %+.3e" % (float(np.linalg.norm(phs["cs"] - phs["oggi"]) / np.linalg.norm(F3)), oms["cs"] - oms["oggi"]))
+    T, _R = _T_vuoto(z, F3, K, np.exp(-1j * oms["oggi"]), dove, tk)
+    del giri[:]
+    Tc, _Rc = _T_vuoto(z, F3, K, np.exp(-1j * oms["cs"]), dove, tk_cs)
+    print("  i giri del punto fisso nei 13 tick della risposta con cs: da %s a %s" % (min(giri), max(giri)))
+    assert np.all(mot.cs == cs_vero) and mot.lambda_c == lc_vero, "mot.cs e mot.lambda_c rimessi"
+    f = _reali(F3[dove[0]])
+    Jf = _reali(1j * F3[dove[0]])
+    T0, Tc0 = T(np.zeros(2)), Tc(np.zeros(2))
+    eR = float(np.linalg.norm(Tc0 @ Jf - T0 @ Jf) / np.linalg.norm(Jf))
+    eL = float(np.linalg.norm(Tc0 @ f - T0 @ f) / np.linalg.norm(f))
+    esito("DEVE PASSARE: IS3-R la rotazione globale J f non vede cs: |T_cs(0) J f - T(0) J f| / |J f| entro %.1e" % pav, eR <= pav, "%.3e" % eR)
+    esito("DEVE FALLIRE: IS3-L-F f (cambia Lambda, quindi cs): |T_cs(0) f - T(0) f| / |f| entro %.1e" % pav, not eL <= pav, "%.3e" % eL)
+    print("  a Gamma le 12 fasi per tick, senza cs: %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(T0)))))
+    print("  a Gamma le 12 fasi per tick, con cs:   %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(Tc0)))))
+    for nome_d, gradi in DIREZIONI_G:
+        u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
+        gr, s0 = _rami(T, u, KAPPA_IS)
+        grc, s1 = _rami(Tc, u, KAPPA_IS)
+        print("-" * 130)
+        print("  %s: il salto piu' grande del seguimento senza cs %.3e, con cs %.3e" % (nome_d, s0, s1))
+        for nome, quanti in GRUPPI_IS:
+            w0, w1 = [], []
+            for kap in KAPPA_IS:
+                assert gr[kap][nome][3] == quanti and grc[kap][nome][3] == quanti, (nome_d, nome, kap)
+                w0.append(float(np.mean(np.abs(gr[kap][nome][0]))))
+                w1.append(float(np.mean(np.abs(grc[kap][nome][0]))))
+            print("    %s %-2s |fase| media per unita' di tempo, senza cs: %s" % (nome_d, nome, " ".join("%.6e" % (x / s) for x in w0)))
+            print("    %s %-2s |fase| media per unita' di tempo, con cs:   %s" % (nome_d, nome, " ".join("%.6e" % (x / s) for x in w1)))
+            print("    %s %-2s la differenza (con - senza) per tick: %s; il massimo %.3e" % (nome_d, nome, " ".join("%+.2e" % (b - a) for a, b in zip(w0, w1)), max(abs(b - a) for a, b in zip(w0, w1))))
+            if nome == "P":
+                p0_, p1_ = max(w0) - min(w0), max(w1) - min(w1)
+                print("  ### %s P la pendenza (max - min della |fase| per tick lungo la griglia): senza cs %.3e, con cs %.3e; 10 x il pavimento %.1e" % (nome_d, p0_, p1_, 10 * pav))
+                print("  ### %s P la lettura scritta prima (Luca): %s" % (nome_d, "il ramo piatto ACQUISTA PENDENZA con cs: cs lo cura" if (p1_ > 10 * pav and p0_ <= 10 * pav)
+                      else "RESTA PIATTO con cs: no" if p1_ <= 10 * pav else "non piatto gia' senza cs (%.3e): la lettura non si applica (dichiarato)" % p0_))
+        for nome_t, TT in (("senza cs", T), ("con cs", Tc)):
+            wmax = []
+            for kap in KAPPA_G:
+                fs = np.sort(np.abs(np.angle(np.linalg.eigvals(TT(kap * u)))))
+                wmax.append(float(fs[N_GOLD - 1]) / s)
+            cf = np.polyfit(np.array(KAPPA_G), np.array(wmax), 2)
+            print("  ### %s il Goldstone %-8s la omega piu' grande delle %d: %s; il fit c0 %+.3e v %+.6e b %+.6e" % (nome_d, nome_t, N_GOLD, " ".join("%.3e" % x for x in wmax), cf[2], cf[1], cf[0]))
+    cm.__exit__(None, None, None)
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -1428,14 +1533,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
+    modo = "--cs-onde" if "--cs-onde" in argv else "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --cs-onde | --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
