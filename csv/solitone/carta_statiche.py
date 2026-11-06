@@ -709,8 +709,10 @@ def circolazione():
           all(res[t]["unit"] <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e (pav %.1e)" % (res[t]["unit"], res[t]["pav"]) for t in STATI_MATURI))
     esito("DEVE PASSARE: CI-A (mio) i pezzi diversi dallo spostamento non cambiano la norma di nessun nodo, entro il pavimento",
           all(max(res[t]["altri"].values()) <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e" % max(res[t]["altri"].values()) for t in STATI_MATURI))
-    esito("DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato",
-          all(res[t]["cont"] <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e" % res[t]["cont"] for t in STATI_MATURI))
+    import composizione as CM
+    NP = len(CM.ORDINE)               # ### Luca 2026-11-06 11:08: il pavimento di CI-C = i pezzi del tick x PAV_C x max rho (gli errori si sommano al piu' linearmente)
+    esito("DEVE PASSARE: CI-C (mio; il pavimento di Luca 11:08) la continuita': rho(t + 1) - rho(t) = -div J entro %d (i pezzi del tick) x il pavimento, ogni nodo, ogni stato" % NP,
+          all(res[t]["cont"] <= NP * res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e (pav %.1e)" % (res[t]["cont"], NP * res[t]["pav"]) for t in STATI_MATURI))
     # ### il DEVE FALLIRE di Luca: lo stato di t 0 per e^{+i theta} attorno al centro (9.2)
     L = z["L"]
     nodo = np.asarray(z["inc"].nodo)
@@ -738,6 +740,20 @@ def circolazione():
     print("  ### LA LETTURA (r4) DI B (il task history 9.3): gli anelli contigui con un verso preferito dello stesso segno, t 0 / 15000 / 30000: %s; la soglia %d"
           % (" / ".join("%d (%+d)" % _contigui(res[t][("tick", "tutti")]) for t in STATI_MATURI), CONTIGUI))
     print("  ### (r4) per B: %s" % ("SI'" if any(_contigui(res[t][("tick", "tutti")])[0] >= CONTIGUI for t in STATI_MATURI[1:]) else "NO"))
+    _numeri_di_prima()
+
+
+PRIMA_CIRC = "9b8a0e5f"          # ### Luca 11:08: il referto rifatto stampa accanto i numeri di prima (il referto di B col pavimento vecchio di CI-C)
+
+
+def _numeri_di_prima():
+    """### **I numeri di prima** *(Luca 11:08)*: le righe dei DEVE e della lettura dal referto di `PRIMA_CIRC`, **letti con `git show`, non ricopiati.**"""
+    import subprocess
+    t = subprocess.check_output(["git", "show", PRIMA_CIRC + ":doc/referti_l2/statica_circolazione.txt"], cwd=solitone.RADICE).decode("utf-8")
+    print("  ### I NUMERI DI PRIMA (il referto a %s, il pavimento di CI-C per un C_T):" % PRIMA_CIRC)
+    for l in t.splitlines():
+        if "DEVE" in l or "(r4)" in l or l.startswith("ESITO"):
+            print("    prima | %s" % l.strip()[:300])
 
 
 def SFM_sha(x):
