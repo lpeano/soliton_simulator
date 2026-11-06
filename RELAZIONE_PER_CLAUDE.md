@@ -23831,3 +23831,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **A, la lettura di Luca:** **col suo criterio il Goldstone di `F3` non propaga a onda lunga; `omega = 0.2 |k|^2`, isotropo: un modo lento, quadratico.**
 - ### **B, C, E avanti**, nel loro ordine, un referto ciascuna.
 - ### **La coppia, dopo B, C, E:** **`S162`, `C35-0`, `C35-pi`, `C50-0`** *(in quest'ordine; `L 162`, il bordo di `TB3`, fino a `10000`, le mappe come `TB3`, gli stati ogni `1500` e a `t 0`)*; **nel referto di `S162` il confronto con `TB3` e `TBS`** *(emissione, forma, oscillazione: il bordo lontano contro il bordo a `28`)*; **il costo vero dopo il primo pezzo.**
+
+## 2026-11-06 — LE DECISIONI DI LUCA DEL 2026-11-06 10:14: **`cs` COL SOLITONE, ANTICIPATO DOPO LE PRIME CORSE DELLA COPPIA** *(in coda: la MAPPA, voci `5-bis`, `5-ter`, `5-quater`)*
+
+- **Arrivato mentre preparavo B** *(L-UN-PROMPT: in coda, B non si interrompe)*.
+- ### **L'ordine della coda, come Luca lo scrive:** B, C, E -> la coppia *(`S162`, `C35-0`, `C35-pi`, `C50-0`)* -> **il FERMO su `cs`** *(la forma di `dtau`)* -> `TCS` -> la coppia con `cs` -> `TBG` -> la coppia col bordo parziale -> il pilota di `TL120` / `D5` -> `TM3` senza bordo -> `D5` a `1e-8` e `1e-6` -> il resto.
+- ### ⚠ **Come leggo il TODO `1`** *(«il task history di `cs` ... FERMO; un commit»)*: **lo faccio al posto del FERMO su `cs` nell'ordine, cioe' dopo la coppia**, perche' l'ordine lo mette li'. **Se Luca lo voleva subito** *(e' solo scrittura, non un calcolo)*, **basta dirlo: lo anticipo.**
+- **Le letture (s1)-(s4) sono di Luca, scritte prima;** la U dinamica *(`A2`)* resta in attesa.
