@@ -1,0 +1,40 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE ff59398a  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --passo; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS2, IL PASSO DI TEMPO (Luca 19:41): il vuoto F3 da solo, psi = 0, a s (0.1, 0.15, 0.2) (mot.cs in memoria, rimesso); omega(s) misurato da un tick; T(k) nel riferimento che gira con omega(s)
+  i riferimenti letti dai referti: le 12 fasi di statica_vuoto.txt ['-9.424778e-01', '-4.712389e-01', '-4.712389e-01', '-1.936256e-09', '-1.986928e-10', '+1.173367e-17', '+1.952620e-16', '+1.986927e-10', '+1.936257e-09', '+4.712389e-01', '+4.712389e-01', '+9.424778e-01']; b del Goldstone lungo A1 di statica_goldstone.txt +1.999903e-01
+  DEVE PASSARE: IS2-E a s 0.10 F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro 1e-12               PASSA   omega -3.14159265358980810e-01 per tick (pi s 3.14159265358979312e-01), |lambda| 0.999999999999990, il residuo 1.510e-15
+  s 0.10: le 12 fasi per tick a Gamma -6.283185e-01 -6.283185e-01 -6.283185e-01 -3.141593e-01 -3.141593e-01 -2.261799e-16 +7.812915e-16 +3.141593e-01 +3.141593e-01 +6.283185e-01 +6.283185e-01 +6.283185e-01
+  s 0.10: il ramo piatto P lungo A1, |fase| per tick da 5.547771420e-01 a 6.283182847e-01, per unita' di tempo da 5.547771420e+00 a 6.283182847e+00; theta = pi s 3.141592654e-01 per tick
+  s 0.10: il ramo D lungo A1, |fase| per tick da 6.283185325e-01 a 6.283185325e-01, per unita' di tempo da 6.283185325e+00 a 6.283185325e+00
+  s 0.10: il Goldstone lungo A1 (in unita' di tempo), la omega piu' grande delle 6: 3.142e+00 3.142e+00 3.142e+00 3.142e+00 3.142e+00; il fit c0 +3.142e+00 v +5.771707e-14 b -1.452037e-10
+  DEVE PASSARE: IS2-E a s 0.15 F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro 1e-12               PASSA   omega -4.71238898038472354e-01 per tick (pi s 4.71238898038468967e-01), |lambda| 0.999999999999994, il residuo 3.401e-15
+  s 0.15: le 12 fasi per tick a Gamma -9.424778e-01 -9.424778e-01 -9.424778e-01 -4.712389e-01 -4.712389e-01 -5.851115e-09 +5.851114e-09 +4.712389e-01 +4.712389e-01 +9.424778e-01 +9.424778e-01 +9.424778e-01
+  s 0.15: il ramo piatto P lungo A1, |fase| per tick da 8.317006040e-01 a 9.424774191e-01, per unita' di tempo da 5.544670693e+00 a 6.283182794e+00; theta = pi s 4.712388980e-01 per tick
+  s 0.15: il ramo D lungo A1, |fase| per tick da 9.424777953e-01 a 9.424777957e-01, per unita' di tempo da 6.283185302e+00 a 6.283185304e+00
+  s 0.15: il Goldstone lungo A1 (in unita' di tempo), la omega piu' grande delle 6: 3.142e+00 3.142e+00 3.142e+00 3.142e+00 3.142e+00; il fit c0 +3.142e+00 v +4.629727e-10 b +1.643654e-10
+  DEVE PASSARE: IS2-E a s 0.20 F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro 1e-12               PASSA   omega -6.28318530717956181e-01 per tick (pi s 6.28318530717958623e-01), |lambda| 0.999999999999997, il residuo 2.406e-15
+  s 0.20: le 12 fasi per tick a Gamma -1.256637e+00 -1.256637e+00 -1.256637e+00 -6.283185e-01 -6.283185e-01 -9.346036e-09 +9.346036e-09 +6.283185e-01 +6.283185e-01 +1.256637e+00 +1.256637e+00 +1.256637e+00
+  s 0.20: il ramo piatto P lungo A1, |fase| per tick da 1.108061043e+00 a 1.256636554e+00, per unita' di tempo da 5.540305217e+00 a 6.283182771e+00; theta = pi s 6.283185307e-01 per tick
+  s 0.20: il ramo D lungo A1, |fase| per tick da 1.256637062e+00 a 1.256637062e+00, per unita' di tempo da 6.283185312e+00 a 6.283185312e+00
+  s 0.20: il Goldstone lungo A1 (in unita' di tempo), la omega piu' grande delle 6: 3.142e+00 3.142e+00 3.142e+00 3.142e+00 3.142e+00; il fit c0 +3.142e+00 v +1.683415e-13 b -9.558953e-13
+  DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro 1e-15                                         ### FALLISCE   9.425e-01
+  DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (1.0e-08 per tick; l'a ### FALLISCE   lo scarto massimo 4.712e-01
+  DEVE PASSARE: IS2-15 a s 0.15 la b del Goldstone lungo A1 = statica_goldstone.txt al pavimento (1.0e-05 = il pavimento i ### FALLISCE   +1.643654e-10, lo scarto 2.000e-01
+----------------------------------------------------------------------------------------------------------------------------------
+  ### il ramo P (la media lungo A1): per tick 6.100062133e-01 9.148494986e-01 1.219497019e+00 (lo scarto relativo 4.998e-01); per unita' di tempo 6.100062133e+00 6.098996657e+00 6.097485094e+00 (lo scarto relativo 4.225e-04); omega(s) / s -3.141592654e+00 -3.141592654e+00 -3.141592654e+00
+  ### il ramo P, la lettura scritta prima (Luca; la tolleranza 1e-06: l'annotazione 4.2): ne' l'uno ne' l'altro entro 1e-06 (dichiarato)
+  ### il ramo D (la media lungo A1): per tick 6.283185325e-01 9.424777954e-01 1.256637062e+00 (lo scarto relativo 5.000e-01); per unita' di tempo 6.283185325e+00 6.283185303e+00 6.283185312e+00 (lo scarto relativo 3.543e-09); omega(s) / s -3.141592654e+00 -3.141592654e+00 -3.141592654e+00
+  ### il ramo D, la lettura scritta prima (Luca; la tolleranza 1e-06: l'annotazione 4.2): FISSO PER UNITA' DI TEMPO, segue omega(s): proprieta' del vuoto (la premessa 5: atteso per costruzione, theta = pi s)
+  ### il Goldstone: b in unita' di tempo -1.452037e-10 +1.643654e-10 -9.558953e-13; lo scarto relativo 1.883e+00; la pendenza di ln b contro ln s -6.7513
+  ### il Goldstone, la lettura scritta prima (mia, proposta): b cambia col passo oltre l'1%: dipende dal passo
+==================================================================================================================================
+ESITO: 4/7 controlli passano; DEVE fallite: 3 ['DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro 1e-15', "DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (1.0e-08 per tick; l'annotazione 4.4)", "DEVE PASSARE: IS2-15 a s 0.15 la b del Goldstone lungo A1 = statica_goldstone.txt al pavimento (1.0e-05 = il pavimento in omega / |k|^2 piu' grande; 4.4)"]
