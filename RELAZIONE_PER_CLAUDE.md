@@ -23838,3 +23838,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'ordine della coda, come Luca lo scrive:** B, C, E -> la coppia *(`S162`, `C35-0`, `C35-pi`, `C50-0`)* -> **il FERMO su `cs`** *(la forma di `dtau`)* -> `TCS` -> la coppia con `cs` -> `TBG` -> la coppia col bordo parziale -> il pilota di `TL120` / `D5` -> `TM3` senza bordo -> `D5` a `1e-8` e `1e-6` -> il resto.
 - ### ⚠ **Come leggo il TODO `1`** *(«il task history di `cs` ... FERMO; un commit»)*: **lo faccio al posto del FERMO su `cs` nell'ordine, cioe' dopo la coppia**, perche' l'ordine lo mette li'. **Se Luca lo voleva subito** *(e' solo scrittura, non un calcolo)*, **basta dirlo: lo anticipo.**
 - **Le letture (s1)-(s4) sono di Luca, scritte prima;** la U dinamica *(`A2`)* resta in attesa.
+
+## 2026-11-06 — B, LA CIRCOLAZIONE NELLA MATERIA: **`7/8`, `CI-C` (MIO) FALLISCE -- FERMO** *(`statica_circolazione.txt`; il task history `2026-11-05_rotazione_triangoli`, sez. `9`-`10`)*
+
+- **La corrente sull'arco** dalle due applicazioni dello spostamento *(le voci di `mot.operatori` avvolte in memoria, il nucleo intatto)*; ### **la premessa non verificata regge:** **i pezzi diversi dallo spostamento non cambiano la norma dei nodi** *(`CI-A`, `<= 2e-12`)*.
+- ### **`CI-C` fallisce:** la continuita' `5.8e-12` contro `5.05e-12` *(e `1.41`, `1.21` volte agli altri tempi)*. ### **Il pavimento era per UN `C_T`, e l'ho usato per una somma su `14` pezzi: un mio errore, la terza volta di una soglia non confrontata con la premessa.** **La proposta:** `14 x PAV_C x max rho`; **decide Luca.**
+- **Stampato, non letto:** a `t 0` nessun verso; **a `t 15000` e `30000` il cuore** *(anelli `0`-`2`)* **gira in verso antiorario, su e giu' e le due meta' del tick d'accordo, poi il segno si alterna;** `Gamma(12)` `+56.3` e `+44.0`. **(r4) non si legge finche' il DEVE non regge.**
+- ### **FERMO:** il pavimento di `CI-C`; poi la carta rigirata; **intanto C?**
