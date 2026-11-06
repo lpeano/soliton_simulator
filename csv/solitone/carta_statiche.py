@@ -7,6 +7,8 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --circolazione > doc/referti_l2/statica_circolazione.txt   # (Luca 2026-11-05 21:20, 2026-11-06) B: la circolazione della materia dagli stati di TBS
     python csv/solitone/carta_statiche.py --vortici > doc/referti_l2/statica_vortici.txt   # (Luca 2026-11-05 21:20, 2026-11-06) C: i vortici della fase del vuoto e di psi
     python csv/solitone/carta_statiche.py --olonomia > doc/referti_l2/statica_olonomia.txt   # (Luca 2026-11-05 21:39, 2026-11-06) E: l'olonomia di U attorno ai triangoli
+    python csv/solitone/carta_statiche.py --brezzi > doc/referti_l2/statica_brezzi.txt   # (Luca 2026-11-06 19:41) IS1: la visibilita' dei rami del vuoto dalla materia (inf-sup)
+    python csv/solitone/carta_statiche.py --passo > doc/referti_l2/statica_passo.txt   # (Luca 2026-11-06 19:41) IS2: il ramo piatto e il Goldstone a s 0.10, 0.15, 0.20
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -1050,6 +1052,340 @@ def olonomia():
     print("  ### ATTENZIONE (15.1): U = I e' costruita dalla scena (csv/_triangoli.scena_toro) e nessun pezzo del tick la scrive: uno zero PER COSTRUZIONE, non una misura della fisica")
 
 
+KAPPA_IS = (0.005, 0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5)   # ### --brezzi (il task history 2026-11-06_brezzi_modi_vuoto, 2.1): fino al bordo della zona; una scelta di protocollo mia, dichiarata
+PASSO_SEGUI = 0.005            # ### 2.1: i rami seguiti per continuita' a passi di |k| di 0.005 fra i punti della griglia
+GRUPPI_IS = (("Z", 4), ("G", 2), ("P", 4), ("D", 2))   # ### 2.1: per |fase| crescente a |k| 0.005: i 4 zeri piatti, il Goldstone, il ramo a pi, il ramo a 2 pi
+TOLL_MUTO = 1e-15              # ### IS1-0: il modo muto
+TOLL_N = 1e-6                  # ### IS1-N: |T^H T - I| (il TOLL_G di VD-0)
+PASSI_S = (0.10, 0.15, 0.20)   # ### Luca 19:41: IS2 a tre s
+TOLL_E2 = 1e-12                # ### IS2-E: F3 autovettore del tick (il TOLL_C0)
+TOLL_W15 = 1e-15               # ### IS2-15: omega misurato a s 0.15 = quello di fase_F3.npz
+TOLL_SEGUE = 1e-6              # ### IS2, la lettura del ramo piatto (l'annotazione 4.2 del task history, scritta prima della carta)
+
+
+def _cella(z):
+    """### **`dove[nodo, l]`**: l'estremita' del nodo con l'etichetta `l` *(direzione e lato; le righe di `vuoto`)*."""
+    import _solitone_dal_fondo as SD
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    m1, m2 = np.arange(n) // L, np.arange(n) % L
+    lab = np.empty(2 * inc.m, dtype=int)
+    for a in range(inc.m):
+        i, j = int(inc.nodo[2 * a]), int(inc.nodo[2 * a + 1])
+        dd = ((int(m1[j] - m1[i]) + L // 2) % L - L // 2, (int(m2[j] - m2[i]) + L // 2) % L - L // 2)
+        pos = dd if (dd[0] > 0 or (dd[0] == 0 and dd[1] > 0)) else (-dd[0], -dd[1])
+        k = SD.DIREZIONI.index(pos)
+        lab[2 * a], lab[2 * a + 1] = (2 * k, 2 * k + 1) if pos == dd else (2 * k + 1, 2 * k)
+    dove = np.full((n, 6), -1)
+    dove[inc.nodo, lab] = np.arange(2 * inc.m)
+    assert np.all(dove >= 0) and len(np.unique(dove)) == 2 * inc.m, "ogni nodo deve avere le sue 6 estremita', una per etichetta"
+    return dove
+
+
+def _T_vuoto(z, F3, K, rot, dove):
+    """### **`T(k)` del vuoto `F3` con `psi = 0`, nel riferimento `rot`** *(le righe di `vuoto.risposta` col riferimento «oggi» e di `T`)*: `(T, R)`."""
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    from solitone import accensione as AC
+    from solitone import toro as TO
+    L = z["L"]
+    n = z["inc"].n
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    R = np.empty((12, n, 12))
+    try:
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            for k_, v in salvato.items():
+                z["st"][k_][...] = v
+            z["st"]["psi_h"][...] = 0.0
+            z["st"]["phi_h"][...] = F3
+            AC.tick(z, K + 1, K)
+            base = z["st"]["phi_h"].copy()
+            for c in range(12):
+                for k_, v in salvato.items():
+                    z["st"][k_][...] = v
+                z["st"]["psi_h"][...] = 0.0
+                ph = F3.copy()
+                ph[dove[0, c // 2]] += AMP * (1.0 if c % 2 == 0 else 1j)
+                z["st"]["phi_h"][...] = ph
+                AC.tick(z, K + 1, K)
+                per = ((z["st"]["phi_h"] - base) * rot / AMP)[dove]
+                R[c] = np.stack([per.real, per.imag], axis=2).reshape(n, 12)
+    finally:
+        for k_, v in salvato.items():
+            z["st"][k_][...] = v
+    A1, A2 = TO.vettori()
+    nz = np.flatnonzero(np.any(np.abs(R) > 0.0, axis=(0, 2)))
+    rs = ((nz // L + L // 2) % L - L // 2)[:, None] * A1 + ((nz % L + L // 2) % L - L // 2)[:, None] * A2
+    Rs = R[:, nz, :]
+
+    def T(k):
+        return np.einsum("cra,r->ac", Rs, np.exp(-1j * (rs @ k)))
+    return T, R
+
+
+def _reali(v6):
+    """### le `6` estremita' complesse -> i `12` reali *(`Re`, `Im` alternati, l'ordine di `risposta`)*."""
+    out = np.empty(12)
+    out[0::2], out[1::2] = v6.real, v6.imag
+    return out
+
+
+def _coseno(Q, x):
+    """### **`|Pi x| / |x|`**, `Pi` il proiettore ortogonale sullo spazio delle colonne ortonormali di `Q`."""
+    return float(np.linalg.norm(Q.conj().T @ x) / np.linalg.norm(x))
+
+
+def _rami(T, u, kk):
+    """### **I gruppi seguiti per continuita'** lungo la direzione `u` *(2.1)*: per ogni `|k|` di `kk` `{nome: (fasi, Q, gap)}`."""
+    from scipy.optimize import linear_sum_assignment
+    ev, V = np.linalg.eig(T(kk[0] * u))
+    o = np.argsort(np.abs(np.angle(ev)))
+    etich = np.empty(12, dtype=object)
+    i0 = 0
+    for nome, quanti in GRUPPI_IS:
+        etich[o[i0:i0 + quanti]] = nome
+        i0 += quanti
+    prev = ev.copy()
+    out = {}
+    passi = [kk[0]]
+    for a, b in zip(kk[:-1], kk[1:]):
+        m = max(1, int(math.ceil((b - a) / PASSO_SEGUI)))
+        passi += [a + (b - a) * (j + 1) / m for j in range(m)]
+    salto = 0.0
+    for kap in passi:
+        ev, V = np.linalg.eig(T(kap * u))
+        D = np.abs(prev[:, None] - ev[None, :])
+        r_, c_ = linear_sum_assignment(D)
+        salto = max(salto, float(D[r_, c_].max()))
+        nuovo = np.empty(12, dtype=object)
+        nuovo[c_] = etich[r_]
+        etich, prev = nuovo, ev
+        if any(abs(kap - x) < 1e-12 for x in kk):
+            gr = {}
+            for nome, _q in GRUPPI_IS:
+                sel = np.flatnonzero(etich == nome)
+                Q, _r = np.linalg.qr(V[:, sel])
+                altri = np.flatnonzero(etich != nome)
+                gap = float(np.min(np.abs(ev[sel][:, None] - ev[altri][None, :])))
+                gr[nome] = (np.angle(ev[sel]), Q, gap, len(sel))
+            out[min(kk, key=lambda x: abs(x - kap))] = gr
+    return out, salto
+
+
+def _pendenza(x, y):
+    x, y = np.asarray(x), np.asarray(y)
+    ok = y > 0
+    return float(np.polyfit(np.log(x[ok]), np.log(y[ok]), 1)[0]) if ok.sum() >= 2 else float("nan")
+
+
+def brezzi():
+    """### **IS1, la visibilita'** *(Luca `2026-11-06 19:41`; il task history `2026-11-06_brezzi_modi_vuoto`, sez. `2.1`-`2.3`)*."""
+    import _screening_forme_s3 as SF
+    import _vuoto_vivo_B as V
+    from solitone import accensione as AC
+    from solitone import corsa_accensione as CA
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+        omega = float(d["omega"])
+    _rec, z, p0, F3, _info, cm = costruisci(V.N, V.L)
+    dove = _cella(z)
+    pav = PAV_T / AMP
+    print("### IS1, LA VISIBILITA' (Luca 19:41): per ogni ramo del vuoto F3 e |k| %s lungo A1 e a 30 gradi, (a) |Pi J f| / |J f| (un delta rho eccita il ramo), (b) |Pi f| / |f| (il ramo cambia Lambda);"
+          " f = F3 sul nodo 0; il pavimento %.1e / gap; s %g, AMP %g" % (KAPPA_IS, pav, s, AMP))
+    T, _R = _T_vuoto(z, F3, K, np.exp(-1j * omega), dove)
+    f = _reali(F3[dove[0]])
+    Jf = _reali(1j * F3[dove[0]])
+    print("  |F3_h| sul nodo 0: %s; Lambda %.15f" % (" ".join("%.15f" % x for x in np.abs(F3[dove[0]])), float(np.sum(np.abs(F3[dove[0]]) ** 2))))
+    # IS1-N
+    eN = 0.0
+    for _nd, gradi in DIREZIONI_G:
+        u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
+        for kap in (0.0,) + KAPPA_IS:
+            Tk = T(kap * u)
+            eN = max(eN, float(np.max(np.abs(Tk.conj().T @ Tk - np.eye(12)))))
+    esito("DEVE PASSARE: IS1-N T(k) unitaria (|T^H T - I| entro %g) a Gamma e a ogni |k| della griglia, nelle due direzioni: il proiettore ortogonale e' lo spettrale" % TOLL_N, eN <= TOLL_N, "%.3e" % eN)
+    # IS1-C, IS1-C-F: il canale
+    import _deriva_congelato as DC
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+
+    def psi_dopo(phi):
+        try:
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                for k_, v in salvato.items():
+                    z["st"][k_][...] = v
+                z["st"]["psi_h"][...] = p0
+                z["st"]["phi_h"][...] = phi
+                AC.tick(z, K + 1, K)
+                return z["st"]["psi_h"].copy()
+        finally:
+            for k_, v in salvato.items():
+                z["st"][k_][...] = v
+    q0 = psi_dopo(F3)
+    eC = float(np.linalg.norm(psi_dopo(F3 * np.exp(1j * AMP)) - q0) / np.linalg.norm(q0)) / AMP
+    eCF = float(np.linalg.norm(psi_dopo(F3 * (1.0 + AMP)) - q0) / np.linalg.norm(q0)) / AMP
+    esito("DEVE PASSARE: IS1-C il tick intero con psi = la partenza di TF3 e phi = F3 e^{i AMP} (non tocca Lambda): psi' = quello con phi = F3, lo scarto / AMP entro %.1e" % pav, eC <= pav, "%.3e" % eC)
+    esito("DEVE FALLIRE: IS1-C-F lo stesso con phi = (1 + AMP) F3 (tocca Lambda): lo scarto / AMP entro %.1e" % pav, not eCF <= pav, "%.3e" % eCF)
+    # IS1-0, IS1-L-F, IS1-R
+    eps = np.array([1.0, -1.0, 1.0, -1.0, 1.0, -1.0])
+    w = np.abs(F3[dove[0]]) ** 2
+    eps = eps - np.sum(eps * w) / np.sum(w)
+    u_m = _reali(1j * eps * F3[dove[0]])
+    qm = (u_m / np.linalg.norm(u_m))[:, None].astype(complex)
+    a_m, b_m = _coseno(qm, Jf), _coseno(qm, f)
+    esito("DEVE PASSARE: IS1-0 il modo costruito u = J(eps f), somma eps |F3|^2 = 0 (non tocca ne' Lambda ne' la fase): a e b entro %g" % TOLL_MUTO, max(a_m, b_m) <= TOLL_MUTO, "a %.3e b %.3e" % (a_m, b_m))
+    v_l = np.zeros(12)
+    v_l[0:2] = f[0:2]
+    b_l = _coseno((v_l / np.linalg.norm(v_l))[:, None].astype(complex), f)
+    esito("DEVE FALLIRE: IS1-L-F Lambda locale (f su una sola estremita'): b entro %g" % TOLL_MUTO, not b_l <= TOLL_MUTO, "b %.6f" % b_l)
+    qr_ = (Jf / np.linalg.norm(Jf))[:, None].astype(complex)
+    print("  IS1-R la rotazione globale i F3 (la premessa 3, dichiarata): b %.3e, a %.15f" % (_coseno(qr_, f), _coseno(qr_, Jf)))
+    # il fattore scalare (2.2): sui rho della partenza
+    rho = np.zeros(z["inc"].n)
+    np.add.at(rho, z["inc"].nodo, np.sum(np.abs(p0.reshape(2 * z["inc"].m, -1)) ** 2, axis=1))
+    Lam = float(np.sum(np.abs(F3[dove[0]]) ** 2))
+    rv = np.sort(rho[rho > 1e-6 * rho.max()])
+    for nome_r, r_ in (("il massimo", float(rho.max())), ("la mediana sopra 1e-6 del massimo", float(np.median(rv)))):
+        x = r_ / Lam
+        h = 1e-6 * x
+        da = (SF._ab("S1", x + h)[0] - SF._ab("S1", x - h)[0]) / (2 * h)
+        db = (SF._ab("S1", x + h)[1] - SF._ab("S1", x - h)[1]) / (2 * h)
+        print("  il fattore scalare (uguale per ogni ramo) a rho %s %.6e: x %.6e; d alpha / d Lambda %.6e, d beta / d rho %.6e (dalle espressioni di _screening_forme_s3._ab(S1), alle differenze centrali)"
+              % (nome_r, r_, x, -da * x / Lam, db / Lam))
+    # i rami
+    for nome_d, gradi in DIREZIONI_G:
+        u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
+        gr, salto = _rami(T, u, KAPPA_IS)
+        print("-" * 130)
+        print("  %s: il seguimento per continuita' (passi di |k| %g): il salto piu' grande di un autovalore fra due passi %.3e" % (nome_d, PASSO_SEGUI, salto))
+        for nome, quanti in GRUPPI_IS:
+            aa, bb, pp = [], [], []
+            for kap in KAPPA_IS:
+                fasi, Q, gap, nq = gr[kap][nome]
+                assert nq == quanti, (nome_d, nome, kap, nq)
+                a_, b_ = _coseno(Q, Jf), _coseno(Q, f)
+                aa.append(a_)
+                bb.append(b_)
+                pp.append(pav / gap)
+                print("    %s %-2s |k| %.3f: |fase| per tick %s; a %.3e b %.3e; il gap %.3e, il pavimento %.3e"
+                      % (nome_d, nome, kap, " ".join("%.3e" % abs(x) for x in np.sort(np.abs(fasi))), a_, b_, gap, pav / gap))
+            ia, ib = int(np.argmin(aa)), int(np.argmin(bb))
+            sopra = [max(a_, b_) > p_ for a_, b_, p_ in zip(aa, bb, pp)]
+            print("  ### %s %-2s inf a %.3e (|k| %.3f), sup a %.3e; inf b %.3e (|k| %.3f), sup b %.3e; la pendenza in ln |k| sui primi 4: a %+.3f, b %+.3f"
+                  % (nome_d, nome, aa[ia], KAPPA_IS[ia], max(aa), bb[ib], KAPPA_IS[ib], max(bb), _pendenza(KAPPA_IS[:4], aa[:4]), _pendenza(KAPPA_IS[:4], bb[:4])))
+            print("  ### %s %-2s la lettura scritta prima (Luca): %s" % (nome_d, nome, "max(a, b) ENTRO il pavimento a ogni |k|: il ramo NON E' VISTO dalla materia (il segnale di un modo spurio)" if not any(sopra)
+                  else "SOPRA il pavimento a %d |k| su %d: il ramo E' VISTO, partecipa alla dinamica" % (sum(sopra), len(sopra))))
+            if nome == "G":
+                print("  ### %s IS1-G il Goldstone a k -> 0 (Luca): a %s; b %s; le pendenze in ln |k| a %+.3f b %+.3f"
+                      % (nome_d, " ".join("%.3e" % x for x in aa[:5]), " ".join("%.3e" % x for x in bb[:5]), _pendenza(KAPPA_IS[:4], aa[:4]), _pendenza(KAPPA_IS[:4], bb[:4])))
+        # il Goldstone e gli zeri insieme (il gap verso P e' grande)
+        for kap in KAPPA_IS[:5]:
+            Qg, Qz = gr[kap]["G"][1], gr[kap]["Z"][1]
+            Qgz, _r = np.linalg.qr(np.hstack([Qg, Qz]))
+            print("    %s G+Z |k| %.3f: a %.6e b %.6e" % (nome_d, kap, _coseno(Qgz, Jf), _coseno(Qgz, f)))
+    cm.__exit__(None, None, None)
+
+
+def passo():
+    """### **IS2, il passo di tempo** *(Luca `19:41`; il task history, sez. `2.4`)*: il vuoto `F3` da solo a `s` di `PASSI_S`, `mot.cs` in memoria e rimesso *(l'annotazione `4.1`)*."""
+    import re
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    import _vuoto_vivo_B as V
+    from solitone import accensione as AC
+    from solitone import corsa_accensione as CA
+    _sol, _v, s0 = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s0))
+    with np.load(os.path.join(CA.DIR_NPZ, CA.FASE)) as d:
+        omega_npz = float(d["omega"])
+    _rec, z, _p0, F3, _info, cm = costruisci(V.N, V.L)
+    dove = _cella(z)
+    cs_vero = z["mot"].cs.copy()
+    assert np.all(cs_vero == s0), "la scena deve avere cs uniforme = s della corsa"
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    pav = PAV_T / AMP
+    f_v = os.path.join(DIR_REF, "statica_vuoto.txt")
+    f_g = os.path.join(DIR_REF, "statica_goldstone.txt")
+    rif_fasi = rif_b = None
+    for l in open(f_v, encoding="utf-8"):
+        m = re.match(r"\s*oggi\s+a Gamma le 12 fasi per tick: (.*?); i moduli", l)
+        if m:
+            rif_fasi = m.group(1).split()
+    for l in open(f_g, encoding="utf-8"):
+        m = re.match(r"\s*### A1\s+la omega piu' grande .* b ([+-][0-9.e+-]+);", l)
+        if m:
+            rif_b = m.group(1)
+    print("### IS2, IL PASSO DI TEMPO (Luca 19:41): il vuoto F3 da solo, psi = 0, a s %s (mot.cs in memoria, rimesso); omega(s) misurato da un tick; T(k) nel riferimento che gira con omega(s)" % (PASSI_S,))
+    print("  i riferimenti letti dai referti: le 12 fasi di statica_vuoto.txt %s; b del Goldstone lungo A1 di statica_goldstone.txt %s" % (rif_fasi, rif_b))
+    tab = {}
+    try:
+        for s in PASSI_S:
+            z["mot"].cs[...] = s
+            with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                for k_, v in salvato.items():
+                    z["st"][k_][...] = v
+                z["st"]["psi_h"][...] = 0.0
+                z["st"]["phi_h"][...] = F3
+                AC.tick(z, K + 1, K)
+                ph = z["st"]["phi_h"].copy()
+            lam = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
+            om = -math.atan2(lam.imag, lam.real)
+            res = float(np.linalg.norm(ph - np.exp(-1j * om) * F3) / np.linalg.norm(F3))
+            esito("DEVE PASSARE: IS2-E a s %.2f F3 e' un autovettore del tick: |tick F3 - e^{-i omega} F3| / |F3| entro %g" % (s, TOLL_E2), res <= TOLL_E2, "omega %.17e per tick (pi s %.17e), |lambda| %.15f, il residuo %.3e" % (om, math.pi * s, abs(lam), res))
+            T, _R = _T_vuoto(z, F3, K, np.exp(-1j * om), dove)
+            ev0 = np.linalg.eigvals(T(np.zeros(2)))
+            fasi0 = np.sort(np.angle(ev0))
+            Pk, Dk = [], []
+            gr, _salto = _rami(T, np.array([1.0, 0.0]), KAPPA_IS)
+            for kap in KAPPA_IS:
+                Pk.append(float(np.mean(np.abs(gr[kap]["P"][0]))))
+                Dk.append(float(np.mean(np.abs(gr[kap]["D"][0]))))
+            wmax = []
+            for kap in KAPPA_G:
+                fs = np.sort(np.abs(np.angle(np.linalg.eigvals(T(np.array([kap, 0.0]))))))
+                wmax.append(float(fs[N_GOLD - 1]) / s)
+            cf = np.polyfit(np.array(KAPPA_G), np.array(wmax), 2)
+            tab[s] = {"om": om, "fasi0": fasi0, "P": Pk, "D": Dk, "b": float(cf[0]), "v": float(cf[1]), "c0": float(cf[2])}
+            print("  s %.2f: le 12 fasi per tick a Gamma %s" % (s, " ".join("%+.6e" % x for x in fasi0)))
+            print("  s %.2f: il ramo piatto P lungo A1, |fase| per tick da %.9e a %.9e, per unita' di tempo da %.9e a %.9e; theta = pi s %.9e per tick"
+                  % (s, min(Pk), max(Pk), min(Pk) / s, max(Pk) / s, math.pi * s))
+            print("  s %.2f: il ramo D lungo A1, |fase| per tick da %.9e a %.9e, per unita' di tempo da %.9e a %.9e" % (s, min(Dk), max(Dk), min(Dk) / s, max(Dk) / s))
+            print("  s %.2f: il Goldstone lungo A1 (in unita' di tempo), la omega piu' grande delle %d: %s; il fit c0 %+.3e v %+.6e b %+.6e"
+                  % (s, N_GOLD, " ".join("%.3e" % x for x in wmax), cf[2], cf[1], cf[0]))
+    finally:
+        z["mot"].cs[...] = cs_vero
+        for k_, v in salvato.items():
+            z["st"][k_][...] = v
+    t15 = tab[0.15]
+    esito("DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro %g" % TOLL_W15, abs(t15["om"] - omega_npz) <= TOLL_W15, "%.3e" % abs(t15["om"] - omega_npz))
+    e15 = float(np.max(np.abs(t15["fasi0"] - np.array([float(x) for x in rif_fasi])))) if rif_fasi is not None and len(rif_fasi) == 12 else float("inf")
+    esito("DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (%.1e per tick; l'annotazione 4.4)" % pav, e15 <= pav, "lo scarto massimo %.3e" % e15)
+    pav_b = pav / 0.15 / KAPPA_G[-1] ** 2
+    e_b = abs(t15["b"] - float(rif_b)) if rif_b is not None else float("inf")
+    esito("DEVE PASSARE: IS2-15 a s 0.15 la b del Goldstone lungo A1 = statica_goldstone.txt al pavimento (%.1e = il pavimento in omega / |k|^2 piu' grande; 4.4)" % pav_b, e_b <= pav_b, "%+.6e, lo scarto %.3e" % (t15["b"], e_b))
+    print("-" * 130)
+    for nome in ("P", "D"):
+        pt = {s: float(np.mean(tab[s][nome])) for s in PASSI_S}
+        pu = {s: pt[s] / s for s in PASSI_S}
+        dt = (max(pt.values()) - min(pt.values())) / max(pt.values())
+        du = (max(pu.values()) - min(pu.values())) / max(pu.values())
+        print("  ### il ramo %s (la media lungo A1): per tick %s (lo scarto relativo %.3e); per unita' di tempo %s (lo scarto relativo %.3e); omega(s) / s %s"
+              % (nome, " ".join("%.9e" % pt[s] for s in PASSI_S), dt, " ".join("%.9e" % pu[s] for s in PASSI_S), du, " ".join("%.9e" % (tab[s]["om"] / s) for s in PASSI_S)))
+        print("  ### il ramo %s, la lettura scritta prima (Luca; la tolleranza %g: l'annotazione 4.2): %s" % (nome, TOLL_SEGUE, "FISSO PER UNITA' DI TEMPO, segue omega(s): proprieta' del vuoto (la premessa 5: atteso per costruzione, theta = pi s)" if du <= TOLL_SEGUE
+              else "FISSO PER TICK: artefatto del passo" if dt <= TOLL_SEGUE else "ne' l'uno ne' l'altro entro %g (dichiarato)" % TOLL_SEGUE))
+    bs = {s: tab[s]["b"] for s in PASSI_S}
+    db = (max(bs.values()) - min(bs.values())) / abs(bs[0.15])
+    print("  ### il Goldstone: b in unita' di tempo %s; lo scarto relativo %.3e; la pendenza di ln b contro ln s %+.4f" % (" ".join("%+.6e" % bs[s] for s in PASSI_S), db, _pendenza(PASSI_S, [abs(bs[s]) for s in PASSI_S])))
+    print("  ### il Goldstone, la lettura scritta prima (mia, proposta): %s" % ("la stessa b entro l'1%: proprieta' della legge" if db <= 0.01 else "b cambia col passo oltre l'1%: dipende dal passo"))
+    cm.__exit__(None, None, None)
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -1092,14 +1428,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
+    modo = "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
