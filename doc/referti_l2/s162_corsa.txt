@@ -1,0 +1,102 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] carta_deriva.py  sha1-BYTE 0f56fe9d  committato e pulito
+[TIMBRO] carta_tf3_lunga.py  sha1-BYTE ed522132  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE ff59398a  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_s162.py  sha1-BYTE 1e38993c  committato e pulito
+==================================================================================================================================
+S162: IL SINGOLO DI RIFERIMENTO DI C35 SU L 162 (Luca 2026-11-06) CONTRO TB3 E TBS; TOLL_B 1e-10 TOLL_P0 1e-09 SOGLIA_EM 1e-08 T_RAMPA 1000 BLOCCO 1000
+  la geometria (sez. 10): il bordo di C35, il solitone a d/2 dal centro: la fascia a R_A - d/2 da un lato e a R_A + d/2 dall'altro; TB3 a R_A da ogni lato
+  le letture (mie, scritte prima): (f1) la forma entro lo scarto TBS - TB3 a ogni blocco; (f2) il periodo del cuore e (f3) il ritardo dell'emissione, senza verdetto
+==================================================================================================================================
+  L 162; la coppia di riferimento d 35 segno 0; il bordo R_A 47.5, g_max 0.03: la fascia a 30.0 e a 65.0 nodi dal solitone lungo A1; TB3 R_A 28
+  DEVE PASSARE: P0 la w del primo campione di S162 = quella di TB3 entro 1e-09 relativo (la stessa partenza su un toro piu PASSA   S162 6.645390266939, TB3 6.645390267207
+  DEVE FALLIRE: P0-F lo stesso contro TS entro 1e-09                                                                       PASSA   TS 6.645831268801
+  DEVE PASSARE: BR ogni pezzo: la stessa tabella di c(t) (sha), lo stesso g_max e R_A; la tabella e g_max quelli di TB3    PASSA   sha 1394eecf3484bc4020e17fcc1be264c17ea33cfe, g_max 0.03, R_A 47.5
+  ### il bilancio M + assorbita = M0 da solo (BM non si fa: nessun gemello senza bordo su L 162): il peggiore 3.870e-11 a t 9999.0; all'ultimo 3.870e-11; la deriva di M di TS (L 81) all'ultimo tempo comune +3.878e-11
+  DEVE PASSARE: BV il bilancio V + assorbito = V0 entro 1e-10 a ogni campione                                              PASSA   il peggiore 2.252e-11
+  DEVE PASSARE: A4 S162 il libro col par della corsa                                                                       PASSA   
+  S162: 7 pezzi, fino al tick 66667 di 66667 (tempo 10000.05); ### L'ARRESTO: la fine a 10000
+  DEVE PASSARE: ST-L ogni stato completo su E: si rilegge al bit (gli sha registrati in corsa), e sono 7                   PASSA   7 stati, 63207522 byte
+  DEVE PASSARE: ST-M lo stato ricaricato da' M e il centro periodico AL BIT del campione allo stesso tick                  PASSA   t 0 al bit; t 1500 al bit; t 3000 al bit; t 4500 al bit; t 6000 al bit; t 7500 al bit; t 9000 al bit
+  DEVE FALLIRE: ST-M-F lo stesso confronto col campione di 100 tick dopo                                                   PASSA   7 stati, nessuno uguale al campione di 100 tick dopo
+  le mappe su E:: 7 file, 667 istantanee, 112135948 byte
+----------------------------------------------------------------------------------------------------------------------------------
+### S162: 6667 campioni fino a 9999.0 (la fine di S162)
+  blocco              X medio              v/1000    angolo    cuore     w         alone    
+         0 ..    1000 (  -0.020,   -0.139) 0.154        -36.03 0.52731   7.2512    0.00018  
+      1000 ..    2000 (  +0.190,   +0.000) 0.092       +152.57 0.42893   8.2536    0.00008  
+      2000 ..    3000 (  +0.213,   +0.037) 0.359       -141.14 0.40590   8.5375    0.00004  
+      3000 ..    4000 (  +0.105,   -0.047) 0.452        +44.22 0.39179   8.7243    0.00003  
+      4000 ..    5000 (  +0.171,   -0.002) 0.511        -28.48 0.38210   8.8582    0.00002  
+      5000 ..    6000 (  +0.177,   +0.088) 0.484       -168.71 0.37691   8.9301    0.00002  
+      6000 ..    7000 (  +0.128,   +0.101) 0.205       +105.07 0.37255   8.9962    0.00002  
+      7000 ..    8000 (  +0.114,   -0.102) 0.298         -2.00 0.36850   9.0539    0.00002  
+      8000 ..    9000 (  +0.047,   -0.076) 0.376        -92.16 0.36637   9.0839    0.00002  
+      9000 ..   10000 (  -0.048,   -0.127) 0.455       +169.28 0.36376   9.1283    0.00002  
+  la velocita' massima per blocco: 0.511 per 1000 a 4000 .. 5000 (-28.48 gradi)
+----------------------------------------------------------------------------------------------------------------------------------
+### TB3: 6667 campioni fino a 9999.0 (la fine di S162)
+  blocco              X medio              v/1000    angolo    cuore     w         alone    
+         0 ..    1000 (  -0.014,   -0.142) 0.193        -34.53 0.52800   7.2270    0.00007  
+      1000 ..    2000 (  +0.160,   -0.255) 0.376       -161.11 0.43330   8.1973    0.00003  
+      2000 ..    3000 (  +0.213,   -0.282) 0.239        -75.12 0.40625   8.5323    0.00002  
+      3000 ..    4000 (  -0.059,   -0.303) 0.695         -3.71 0.39480   8.6877    0.00001  
+      4000 ..    5000 (  +0.098,   -0.293) 0.076       +100.51 0.38625   8.8002    0.00001  
+      5000 ..    6000 (  +0.284,   -0.379) 0.438       +174.01 0.37832   8.9107    0.00001  
+      6000 ..    7000 (  +0.195,   -0.320) 0.306       -119.78 0.37172   9.0052    0.00001  
+      7000 ..    8000 (  -0.037,   -0.308) 0.582        +14.85 0.36794   9.0665    0.00001  
+      8000 ..    9000 (  -0.151,   -0.339) 0.651       +166.67 0.36518   9.1065    0.00001  
+      9000 ..   10000 (  +0.007,   -0.353) 0.225       -123.04 0.36331   9.1337    0.00001  
+  la velocita' massima per blocco: 0.695 per 1000 a 3000 .. 4000 (-3.71 gradi)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS: 6667 campioni fino a 9999.0 (la fine di S162)
+  blocco              X medio              v/1000    angolo    cuore     w         alone    
+         0 ..    1000 (  +0.000,   +0.000) 0.000        +55.09 0.53840   7.1433    0.00008  
+      1000 ..    2000 (  -0.005,   -0.002) 0.029       -150.72 0.43047   8.2372    0.00003  
+      2000 ..    3000 (  +0.067,   +0.004) 0.273        +33.62 0.40345   8.5700    0.00002  
+      3000 ..    4000 (  -0.024,   +0.035) 0.110        +63.40 0.39200   8.7261    0.00001  
+      4000 ..    5000 (  +0.016,   -0.043) 0.488       -113.31 0.38383   8.8378    0.00001  
+      5000 ..    6000 (  +0.095,   +0.013) 0.306       -173.74 0.37626   8.9405    0.00001  
+      6000 ..    7000 (  +0.023,   -0.027) 0.598        +24.02 0.37259   8.9984    0.00001  
+      7000 ..    8000 (  -0.172,   -0.136) 0.101        +85.58 0.36853   9.0573    0.00001  
+      8000 ..    9000 (  +0.083,   -0.020) 0.771       -152.59 0.36470   9.1145    0.00002  
+      9000 ..   10000 (  +0.045,   +0.166) 0.815        +12.51 0.36152   9.1638    0.00002  
+  la velocita' massima per blocco: 0.815 per 1000 a 9000 .. 10000 (+12.51 gradi)
+----------------------------------------------------------------------------------------------------------------------------------
+### LO SPOSTAMENTO (l'ultimo campione meno il primo, srotolato; e il massimo lungo la strada), fino a 9999.0
+  S162      0.240 nodi a  -129.57 gradi; il massimo 0.411 (a tempo 9999.0)
+  TB3       0.445 nodi a  -127.43 gradi; il massimo 0.622 (a tempo 9999.0)
+  TBS       0.209 nodi a    +7.82 gradi; il massimo 0.427 (a tempo 9999.0)
+----------------------------------------------------------------------------------------------------------------------------------
+### (f1) LA FORMA: per blocco |S162 - TB3| contro |TBS - TB3| (cuore, w, alone)
+         0: cuore 6.949e-04 (TBS 1.040e-02); w 2.419e-02 (TBS 8.370e-02); alone 1.059e-04 (TBS 9.029e-06)
+      1000: cuore 4.366e-03 (TBS 2.826e-03); w 5.625e-02 (TBS 3.983e-02); alone 5.068e-05 (TBS 1.905e-06)
+      2000: cuore 3.481e-04 (TBS 2.798e-03); w 5.258e-03 (TBS 3.772e-02); alone 2.170e-05 (TBS 4.222e-08)
+      3000: cuore 3.009e-03 (TBS 2.804e-03); w 3.657e-02 (TBS 3.838e-02); alone 1.532e-05 (TBS 8.816e-07)
+      4000: cuore 4.151e-03 (TBS 2.423e-03); w 5.802e-02 (TBS 3.757e-02); alone 1.195e-05 (TBS 7.887e-07)
+      5000: cuore 1.412e-03 (TBS 2.065e-03); w 1.937e-02 (TBS 2.974e-02); alone 8.056e-06 (TBS 8.638e-07)
+      6000: cuore 8.257e-04 (TBS 8.715e-04); w 8.963e-03 (TBS 6.768e-03); alone 6.768e-06 (TBS 3.768e-07)
+      7000: cuore 5.621e-04 (TBS 5.870e-04); w 1.265e-02 (TBS 9.236e-03); alone 4.589e-06 (TBS 1.366e-06)
+      8000: cuore 1.193e-03 (TBS 4.830e-04); w 2.265e-02 (TBS 7.962e-03); alone 3.495e-06 (TBS 2.677e-06)
+      9000: cuore 4.494e-04 (TBS 1.796e-03); w 5.384e-03 (TBS 3.017e-02); alone 4.698e-06 (TBS 1.039e-05)
+  ### (f1) cuore  il massimo |S162 - TB3| 4.366e-03, il massimo |TBS - TB3| 1.040e-02: ENTRO: il bordo asimmetrico non cambia questa grandezza
+  ### (f1) w      il massimo |S162 - TB3| 5.802e-02, il massimo |TBS - TB3| 8.370e-02: ENTRO: il bordo asimmetrico non cambia questa grandezza
+  ### (f1) alone  il massimo |S162 - TB3| 1.059e-04, il massimo |TBS - TB3| 1.039e-05: FUORI: il bordo asimmetrico la cambia
+----------------------------------------------------------------------------------------------------------------------------------
+  ### (f2) S162  il periodo dominante del cuore dopo 1000: 8998.50 (la risoluzione in frequenza 1.111e-04)
+  ### (f2) TB3   il periodo dominante del cuore dopo 1000: 8998.50 (la risoluzione in frequenza 1.111e-04)
+  ### (f2) TBS   il periodo dominante del cuore dopo 1000: 8998.50 (la risoluzione in frequenza 1.111e-04)
+----------------------------------------------------------------------------------------------------------------------------------
+  ### (f3) S162  il primo tempo con M_ass / M0 > 1e-08: 33.0
+  ### (f3) TB3   il primo tempo con M_ass / M0 > 1e-08: 24.0
+  ### (f3) TBS   il primo tempo con M_ass / M0 > 1e-08: 24.0
+  ### (f3) il ritardo S162 - TB3 9.0; la stima della sez. 10 22.2 (senza verdetto)
+  ### per blocco: M, V, E assorbite nel blocco (relative a M0, V0, E0)
+    S162  0: 2.14e-03 5.26e-03 +7.42e-04; 1000: 9.10e-04 5.57e-03 +2.80e-04; 2000: 3.93e-04 2.55e-03 +1.06e-04; 3000: 2.55e-04 1.90e-03 +4.28e-05; 4000: 1.76e-04 1.30e-03 +2.88e-05; 5000: 1.36e-04 1.02e-03 +2.02e-05; 6000: 1.06e-04 8.11e-04 +1.33e-05; 7000: 8.19e-05 6.12e-04 +1.03e-05; 8000: 7.22e-05 6.05e-04 +4.52e-06; 9000: 6.55e-05 5.31e-04 +5.13e-06
+    TB3   0: 2.24e-03 2.25e-02 +7.32e-04; 1000: 8.05e-04 1.98e-02 +2.28e-04; 2000: 4.05e-04 1.08e-02 +9.51e-05; 3000: 2.32e-04 6.43e-03 +4.68e-05; 4000: 1.69e-04 4.96e-03 +2.34e-05; 5000: 1.40e-04 4.67e-03 +8.70e-06; 6000: 1.19e-04 4.15e-03 +2.61e-06; 7000: 1.00e-04 2.83e-03 +1.78e-05; 8000: 8.48e-05 2.43e-03 +1.31e-05; 9000: 5.86e-05 1.79e-03 +8.14e-06
+    TBS   0: 2.52e-03 2.43e-02 +8.19e-04; 1000: 8.55e-04 2.13e-02 +2.35e-04; 2000: 4.03e-04 1.04e-02 +1.03e-04; 3000: 2.51e-04 6.98e-03 +5.06e-05; 4000: 1.70e-04 5.17e-03 +2.43e-05; 5000: 1.44e-04 4.28e-03 +2.16e-05; 6000: 1.07e-04 3.21e-03 +1.55e-05; 7000: 9.80e-05 3.03e-03 +1.25e-05; 8000: 8.66e-05 2.78e-03 +8.79e-06; 9000: 6.96e-05 1.96e-03 +1.34e-05
+==================================================================================================================================
+ESITO: 8/8 controlli passano; DEVE fallite: 0 []
