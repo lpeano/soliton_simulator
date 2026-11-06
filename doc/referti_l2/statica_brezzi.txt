@@ -1,0 +1,167 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE ff59398a  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --brezzi; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS1, LA VISIBILITA' (Luca 19:41): per ogni ramo del vuoto F3 e |k| (0.005, 0.01, 0.02, 0.04, 0.08, 0.16, 0.32, 0.64, 1.0, 1.5, 2.0, 2.5, 3.0, 3.5) lungo A1 e a 30 gradi, (a) |Pi J f| / |J f| (un delta rho eccita il ramo), (b) |Pi f| / |f| (il ramo cambia Lambda); f = F3 sul nodo 0; il pavimento 1.0e-08 / gap; s 0.15, AMP 1e-07
+  |F3_h| sul nodo 0: 1.000000000000000 1.000000000000000 1.000000000000000 1.000000000000000 1.000000000000000 1.000000000000000; Lambda 6.000000000000000
+  DEVE PASSARE: IS1-N T(k) unitaria (|T^H T - I| entro 1e-06) a Gamma e a ogni |k| della griglia, nelle due direzioni: il  PASSA   1.330e-08
+  DEVE PASSARE: IS1-C il tick intero con psi = la partenza di TF3 e phi = F3 e^{i AMP} (non tocca Lambda): psi' = quello c PASSA   2.103e-11
+  DEVE FALLIRE: IS1-C-F lo stesso con phi = (1 + AMP) F3 (tocca Lambda): lo scarto / AMP entro 1.0e-08                     PASSA   2.646e-03
+  DEVE PASSARE: IS1-0 il modo costruito u = J(eps f), somma eps |F3|^2 = 0 (non tocca ne' Lambda ne' la fase): a e b entro PASSA   a 0.000e+00 b 0.000e+00
+  DEVE FALLIRE: IS1-L-F Lambda locale (f su una sola estremita'): b entro 1e-15                                            PASSA   b 0.408248
+  IS1-R la rotazione globale i F3 (la premessa 3, dichiarata): b 5.032e-33, a 1.000000000000000
+  il fattore scalare (uguale per ogni ramo) a rho il massimo 5.062976e+03: x 8.438293e+02; d alpha / d Lambda -4.681255e-07, d beta / d rho -4.681437e-07 (dalle espressioni di _screening_forme_s3._ab(S1), alle differenze centrali)
+  il fattore scalare (uguale per ogni ramo) a rho la mediana sopra 1e-6 del massimo 4.128904e+02: x 6.881506e+01; d alpha / d Lambda -7.036041e-05, d beta / d rho -7.036040e-05 (dalle espressioni di _screening_forme_s3._ab(S1), alle differenze centrali)
+----------------------------------------------------------------------------------------------------------------------------------
+  A1: il seguimento per continuita' (passi di |k| 0.005): il salto piu' grande di un autovalore fra due passi 4.519e-04
+    A1 Z  |k| 0.005: |fase| per tick 2.025e-13 6.451e-13 1.713e-09 1.715e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 7.494e-07, il pavimento 1.334e-02
+    A1 Z  |k| 0.010: |fase| per tick 4.292e-13 1.312e-12 1.713e-09 1.716e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 3.000e-06, il pavimento 3.333e-03
+    A1 Z  |k| 0.020: |fase| per tick 8.709e-13 2.636e-12 1.711e-09 1.718e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 1.200e-05, il pavimento 8.331e-04
+    A1 Z  |k| 0.040: |fase| per tick 1.748e-12 5.277e-12 1.708e-09 1.722e-09; a 9.999e-01 b 9.999e-01 (max |delta Lambda| / |v| = 2 |f| b 4.898e+00); il gap 4.801e-05, il pavimento 2.083e-04
+    A1 Z  |k| 0.080: |fase| per tick 3.498e-12 1.055e-11 1.701e-09 1.728e-09; a 9.996e-01 b 9.996e-01 (max |delta Lambda| / |v| = 2 |f| b 4.897e+00); il gap 1.920e-04, il pavimento 5.208e-05
+    A1 Z  |k| 0.160: |fase| per tick 6.997e-12 2.108e-11 1.688e-09 1.742e-09; a 9.984e-01 b 9.984e-01 (max |delta Lambda| / |v| = 2 |f| b 4.891e+00); il gap 7.676e-04, il pavimento 1.303e-05
+    A1 Z  |k| 0.320: |fase| per tick 1.399e-11 4.195e-11 1.662e-09 1.769e-09; a 9.936e-01 b 9.936e-01 (max |delta Lambda| / |v| = 2 |f| b 4.868e+00); il gap 3.063e-03, il pavimento 3.265e-06
+    A1 Z  |k| 0.640: |fase| per tick 2.791e-11 8.222e-11 1.612e-09 1.821e-09; a 9.744e-01 b 9.744e-01 (max |delta Lambda| / |v| = 2 |f| b 4.774e+00); il gap 1.213e-02, il pavimento 8.247e-07
+    A1 Z  |k| 1.000: |fase| per tick 4.342e-11 1.233e-10 1.565e-09 1.874e-09; a 9.377e-01 b 9.377e-01 (max |delta Lambda| / |v| = 2 |f| b 4.594e+00); il gap 2.902e-02, il pavimento 3.446e-07
+    A1 Z  |k| 1.500: |fase| per tick 6.458e-11 1.682e-10 1.518e-09 1.929e-09; a 8.605e-01 b 8.605e-01 (max |delta Lambda| / |v| = 2 |f| b 4.216e+00); il gap 6.252e-02, il pavimento 1.599e-07
+    A1 Z  |k| 2.000: |fase| per tick 8.617e-11 1.929e-10 1.505e-09 1.956e-09; a 7.537e-01 b 7.537e-01 (max |delta Lambda| / |v| = 2 |f| b 3.692e+00); il gap 1.043e-01, il pavimento 9.591e-08
+    A1 Z  |k| 2.500: |fase| per tick 1.154e-10 1.994e-10 1.533e-09 1.951e-09; a 6.187e-01 b 6.187e-01 (max |delta Lambda| / |v| = 2 |f| b 3.031e+00); il gap 1.491e-01, il pavimento 6.707e-08
+    A1 Z  |k| 3.000: |fase| per tick 1.647e-10 2.084e-10 1.597e-09 1.916e-09; a 4.580e-01 b 4.580e-01 (max |delta Lambda| / |v| = 2 |f| b 2.244e+00); il gap 1.904e-01, il pavimento 5.251e-08
+    A1 Z  |k| 3.500: |fase| per tick 1.965e-10 2.074e-10 1.674e-09 1.859e-09; a 2.753e-01 b 2.753e-01 (max |delta Lambda| / |v| = 2 |f| b 1.349e+00); il gap 2.211e-01, il pavimento 4.523e-08
+  ### A1 Z  inf a 2.753e-01 (|k| 3.500), sup a 1.000e+00; inf b 2.753e-01 (|k| 3.500), sup b 1.000e+00; la pendenza in ln |k| sui primi 4: a -0.000, b -0.000
+  ### A1 Z  la lettura scritta prima (Luca): SOPRA il pavimento a 14 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+    A1 G  |k| 0.005: |fase| per tick 7.511e-07 7.511e-07; a 1.392e-03 b 1.229e-03 (max |delta Lambda| / |v| = 2 |f| b 6.019e-03); il gap 7.494e-07, il pavimento 1.334e-02
+    A1 G  |k| 0.010: |fase| per tick 3.002e-06 3.002e-06; a 3.537e-04 b 3.101e-04 (max |delta Lambda| / |v| = 2 |f| b 1.519e-03); il gap 3.000e-06, il pavimento 3.333e-03
+    A1 G  |k| 0.020: |fase| per tick 1.200e-05 1.200e-05; a 1.099e-04 b 9.051e-05 (max |delta Lambda| / |v| = 2 |f| b 4.434e-04); il gap 1.200e-05, il pavimento 8.331e-04
+    A1 G  |k| 0.040: |fase| per tick 4.801e-05 4.801e-05; a 1.153e-04 b 1.048e-04 (max |delta Lambda| / |v| = 2 |f| b 5.133e-04); il gap 4.801e-05, il pavimento 2.083e-04
+    A1 G  |k| 0.080: |fase| per tick 1.920e-04 1.920e-04; a 3.823e-04 b 3.795e-04 (max |delta Lambda| / |v| = 2 |f| b 1.859e-03); il gap 1.920e-04, il pavimento 5.208e-05
+    A1 G  |k| 0.160: |fase| per tick 7.676e-04 7.676e-04; a 1.510e-03 b 1.510e-03 (max |delta Lambda| / |v| = 2 |f| b 7.396e-03); il gap 7.676e-04, il pavimento 1.303e-05
+    A1 G  |k| 0.320: |fase| per tick 3.063e-03 3.063e-03; a 6.043e-03 b 6.043e-03 (max |delta Lambda| / |v| = 2 |f| b 2.961e-02); il gap 3.063e-03, il pavimento 3.265e-06
+    A1 G  |k| 0.640: |fase| per tick 1.213e-02 1.213e-02; a 2.428e-02 b 2.428e-02 (max |delta Lambda| / |v| = 2 |f| b 1.190e-01); il gap 1.213e-02, il pavimento 8.247e-07
+    A1 G  |k| 1.000: |fase| per tick 2.902e-02 2.902e-02; a 5.979e-02 b 5.979e-02 (max |delta Lambda| / |v| = 2 |f| b 2.929e-01); il gap 2.902e-02, il pavimento 3.446e-07
+    A1 G  |k| 1.500: |fase| per tick 6.253e-02 6.253e-02; a 1.369e-01 b 1.369e-01 (max |delta Lambda| / |v| = 2 |f| b 6.709e-01); il gap 6.252e-02, il pavimento 1.599e-07
+    A1 G  |k| 2.000: |fase| per tick 1.043e-01 1.043e-01; a 2.490e-01 b 2.490e-01 (max |delta Lambda| / |v| = 2 |f| b 1.220e+00); il gap 1.043e-01, il pavimento 9.591e-08
+    A1 G  |k| 2.500: |fase| per tick 1.492e-01 1.492e-01; a 3.972e-01 b 3.972e-01 (max |delta Lambda| / |v| = 2 |f| b 1.946e+00); il gap 1.491e-01, il pavimento 6.707e-08
+    A1 G  |k| 3.000: |fase| per tick 1.907e-01 1.907e-01; a 5.741e-01 b 5.741e-01 (max |delta Lambda| / |v| = 2 |f| b 2.812e+00); il gap 1.904e-01, il pavimento 5.251e-08
+    A1 G  |k| 3.500: |fase| per tick 2.216e-01 2.216e-01; a 7.474e-01 b 7.474e-01 (max |delta Lambda| / |v| = 2 |f| b 3.661e+00); il gap 2.211e-01, il pavimento 4.523e-08
+  ### A1 G  inf a 1.099e-04 (|k| 0.020), sup a 7.474e-01; inf b 9.051e-05 (|k| 0.020), sup b 7.474e-01; la pendenza in ln |k| sui primi 4: a -1.247, b -1.243
+  ### A1 G  la lettura scritta prima (Luca): SOPRA il pavimento a 10 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+  ### A1 IS1-G il Goldstone a k -> 0 (Luca): a 1.392e-03 3.537e-04 1.099e-04 1.153e-04 3.823e-04; b 1.229e-03 3.101e-04 9.051e-05 1.048e-04 3.795e-04; le pendenze in ln |k| a -1.247 b -1.243
+    A1 P  |k| 0.005: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.768e-03 b 1.768e-03 (max |delta Lambda| / |v| = 2 |f| b 8.660e-03); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 P  |k| 0.010: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 3.536e-03 b 3.536e-03 (max |delta Lambda| / |v| = 2 |f| b 1.732e-02); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 P  |k| 0.020: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 7.071e-03 b 7.071e-03 (max |delta Lambda| / |v| = 2 |f| b 3.464e-02); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 P  |k| 0.040: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.414e-02 b 1.414e-02 (max |delta Lambda| / |v| = 2 |f| b 6.928e-02); il gap 4.668e-01, il pavimento 2.142e-08
+    A1 P  |k| 0.080: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 2.828e-02 b 2.828e-02 (max |delta Lambda| / |v| = 2 |f| b 1.385e-01); il gap 4.667e-01, il pavimento 2.143e-08
+    A1 P  |k| 0.160: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 5.652e-02 b 5.652e-02 (max |delta Lambda| / |v| = 2 |f| b 2.769e-01); il gap 4.661e-01, il pavimento 2.145e-08
+    A1 P  |k| 0.320: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.128e-01 b 1.128e-01 (max |delta Lambda| / |v| = 2 |f| b 5.525e-01); il gap 4.639e-01, il pavimento 2.156e-08
+    A1 P  |k| 0.640: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 2.233e-01 b 2.233e-01 (max |delta Lambda| / |v| = 2 |f| b 1.094e+00); il gap 4.551e-01, il pavimento 2.197e-08
+    A1 P  |k| 1.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 3.420e-01 b 3.420e-01 (max |delta Lambda| / |v| = 2 |f| b 1.676e+00); il gap 4.386e-01, il pavimento 2.280e-08
+    A1 P  |k| 1.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 4.893e-01 b 4.893e-01 (max |delta Lambda| / |v| = 2 |f| b 2.397e+00); il gap 4.059e-01, il pavimento 2.464e-08
+    A1 P  |k| 2.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 6.017e-01 b 6.017e-01 (max |delta Lambda| / |v| = 2 |f| b 2.948e+00); il gap 3.649e-01, il pavimento 2.741e-08
+    A1 P  |k| 2.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 6.549e-01 b 6.549e-01 (max |delta Lambda| / |v| = 2 |f| b 3.209e+00); il gap 3.206e-01, il pavimento 3.119e-08
+    A1 P  |k| 3.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 6.125e-01 b 6.125e-01 (max |delta Lambda| / |v| = 2 |f| b 3.001e+00); il gap 2.796e-01, il pavimento 3.577e-08
+    A1 P  |k| 3.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 4.365e-01 b 4.365e-01 (max |delta Lambda| / |v| = 2 |f| b 2.138e+00); il gap 2.490e-01, il pavimento 4.015e-08
+  ### A1 P  inf a 1.768e-03 (|k| 0.005), sup a 6.549e-01; inf b 1.768e-03 (|k| 0.005), sup b 6.549e-01; la pendenza in ln |k| sui primi 4: a +1.000, b +1.000
+  ### A1 P  la lettura scritta prima (Luca): SOPRA il pavimento a 14 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+    A1 D  |k| 0.005: |fase| per tick 9.425e-01 9.425e-01; a 1.316e-08 b 1.635e-09 (max |delta Lambda| / |v| = 2 |f| b 8.010e-09); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 D  |k| 0.010: |fase| per tick 9.425e-01 9.425e-01; a 1.692e-08 b 1.075e-08 (max |delta Lambda| / |v| = 2 |f| b 5.265e-08); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 D  |k| 0.020: |fase| per tick 9.425e-01 9.425e-01; a 8.671e-08 b 8.569e-08 (max |delta Lambda| / |v| = 2 |f| b 4.198e-07); il gap 4.669e-01, il pavimento 2.142e-08
+    A1 D  |k| 0.040: |fase| per tick 9.424e-01 9.424e-01; a 6.858e-07 b 6.856e-07 (max |delta Lambda| / |v| = 2 |f| b 3.359e-06); il gap 4.668e-01, il pavimento 2.142e-08
+    A1 D  |k| 0.080: |fase| per tick 9.423e-01 9.423e-01; a 5.485e-06 b 5.485e-06 (max |delta Lambda| / |v| = 2 |f| b 2.687e-05); il gap 4.667e-01, il pavimento 2.143e-08
+    A1 D  |k| 0.160: |fase| per tick 9.417e-01 9.417e-01; a 4.389e-05 b 4.389e-05 (max |delta Lambda| / |v| = 2 |f| b 2.150e-04); il gap 4.661e-01, il pavimento 2.145e-08
+    A1 D  |k| 0.320: |fase| per tick 9.394e-01 9.394e-01; a 3.515e-04 b 3.515e-04 (max |delta Lambda| / |v| = 2 |f| b 1.722e-03); il gap 4.639e-01, il pavimento 2.156e-08
+    A1 D  |k| 0.640: |fase| per tick 9.304e-01 9.304e-01; a 2.823e-03 b 2.823e-03 (max |delta Lambda| / |v| = 2 |f| b 1.383e-02); il gap 4.551e-01, il pavimento 2.197e-08
+    A1 D  |k| 1.000: |fase| per tick 9.135e-01 9.135e-01; a 1.085e-02 b 1.085e-02 (max |delta Lambda| / |v| = 2 |f| b 5.313e-02); il gap 4.386e-01, il pavimento 2.280e-08
+    A1 D  |k| 1.500: |fase| per tick 8.799e-01 8.799e-01; a 3.710e-02 b 3.710e-02 (max |delta Lambda| / |v| = 2 |f| b 1.818e-01); il gap 4.059e-01, il pavimento 2.464e-08
+    A1 D  |k| 2.000: |fase| per tick 8.382e-01 8.382e-01; a 8.912e-02 b 8.912e-02 (max |delta Lambda| / |v| = 2 |f| b 4.366e-01); il gap 3.649e-01, il pavimento 2.741e-08
+    A1 D  |k| 2.500: |fase| per tick 7.933e-01 7.933e-01; a 1.745e-01 b 1.745e-01 (max |delta Lambda| / |v| = 2 |f| b 8.548e-01); il gap 3.206e-01, il pavimento 3.119e-08
+    A1 D  |k| 3.000: |fase| per tick 7.517e-01 7.517e-01; a 2.924e-01 b 2.924e-01 (max |delta Lambda| / |v| = 2 |f| b 1.432e+00); il gap 2.796e-01, il pavimento 3.577e-08
+    A1 D  |k| 3.500: |fase| per tick 7.209e-01 7.209e-01; a 4.184e-01 b 4.184e-01 (max |delta Lambda| / |v| = 2 |f| b 2.050e+00); il gap 2.490e-01, il pavimento 4.015e-08
+  ### A1 D  inf a 1.316e-08 (|k| 0.005), sup a 4.184e-01; inf b 1.635e-09 (|k| 0.005), sup b 4.184e-01; la pendenza in ln |k| sui primi 4: a +1.947, b +2.913
+  ### A1 D  la lettura scritta prima (Luca): SOPRA il pavimento a 12 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+    A1 G+Z |k| 0.005: a 9.999984e-01 b 9.999984e-01
+    A1 G+Z |k| 0.010: a 9.999938e-01 b 9.999938e-01
+    A1 G+Z |k| 0.020: a 9.999750e-01 b 9.999750e-01
+    A1 G+Z |k| 0.040: a 9.999000e-01 b 9.999000e-01
+    A1 G+Z |k| 0.080: a 9.996001e-01 b 9.996001e-01
+----------------------------------------------------------------------------------------------------------------------------------
+  30 gradi: il seguimento per continuita' (passi di |k| 0.005): il salto piu' grande di un autovalore fra due passi 4.341e-04
+    30 gradi Z  |k| 0.005: |fase| per tick 4.323e-13 9.469e-13 1.234e-09 1.237e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 7.509e-07, il pavimento 1.332e-02
+    30 gradi Z  |k| 0.010: |fase| per tick 9.143e-13 1.940e-12 1.234e-09 1.240e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 3.002e-06, il pavimento 3.332e-03
+    30 gradi Z  |k| 0.020: |fase| per tick 1.852e-12 3.904e-12 1.232e-09 1.243e-09; a 1.000e+00 b 1.000e+00 (max |delta Lambda| / |v| = 2 |f| b 4.899e+00); il gap 1.200e-05, il pavimento 8.330e-04
+    30 gradi Z  |k| 0.040: |fase| per tick 3.718e-12 7.819e-12 1.227e-09 1.248e-09; a 9.999e-01 b 9.999e-01 (max |delta Lambda| / |v| = 2 |f| b 4.898e+00); il gap 4.801e-05, il pavimento 2.083e-04
+    30 gradi Z  |k| 0.080: |fase| per tick 7.437e-12 1.564e-11 1.217e-09 1.259e-09; a 9.996e-01 b 9.996e-01 (max |delta Lambda| / |v| = 2 |f| b 4.897e+00); il gap 1.920e-04, il pavimento 5.208e-05
+    30 gradi Z  |k| 0.160: |fase| per tick 1.485e-11 3.126e-11 1.197e-09 1.282e-09; a 9.984e-01 b 9.984e-01 (max |delta Lambda| / |v| = 2 |f| b 4.891e+00); il gap 7.676e-04, il pavimento 1.303e-05
+    30 gradi Z  |k| 0.320: |fase| per tick 2.951e-11 6.232e-11 1.162e-09 1.332e-09; a 9.936e-01 b 9.936e-01 (max |delta Lambda| / |v| = 2 |f| b 4.868e+00); il gap 3.063e-03, il pavimento 3.265e-06
+    30 gradi Z  |k| 0.640: |fase| per tick 5.753e-11 1.230e-10 1.108e-09 1.437e-09; a 9.747e-01 b 9.747e-01 (max |delta Lambda| / |v| = 2 |f| b 4.775e+00); il gap 1.213e-02, il pavimento 8.247e-07
+    30 gradi Z  |k| 1.000: |fase| per tick 8.607e-11 1.871e-10 1.070e-09 1.552e-09; a 9.395e-01 b 9.395e-01 (max |delta Lambda| / |v| = 2 |f| b 4.602e+00); il gap 2.901e-02, il pavimento 3.447e-07
+    30 gradi Z  |k| 1.500: |fase| per tick 1.197e-10 2.629e-10 1.051e-09 1.675e-09; a 8.696e-01 b 8.696e-01 (max |delta Lambda| / |v| = 2 |f| b 4.260e+00); il gap 6.240e-02, il pavimento 1.603e-07
+    30 gradi Z  |k| 2.000: |fase| per tick 1.469e-10 3.123e-10 1.073e-09 1.731e-09; a 7.830e-01 b 7.830e-01 (max |delta Lambda| / |v| = 2 |f| b 3.836e+00); il gap 1.035e-01, il pavimento 9.659e-08
+    30 gradi Z  |k| 2.500: |fase| per tick 1.693e-10 3.214e-10 1.145e-09 1.711e-09; a 6.928e-01 b 6.928e-01 (max |delta Lambda| / |v| = 2 |f| b 3.394e+00); il gap 1.462e-01, il pavimento 6.840e-08
+    30 gradi Z  |k| 3.000: |fase| per tick 1.901e-10 2.888e-10 1.267e-09 1.624e-09; a 6.176e-01 b 6.176e-01 (max |delta Lambda| / |v| = 2 |f| b 3.025e+00); il gap 1.817e-01, il pavimento 5.505e-08
+    30 gradi Z  |k| 3.500: |fase| per tick 2.177e-10 2.388e-10 1.416e-09 1.492e-09; a 5.791e-01 b 5.791e-01 (max |delta Lambda| / |v| = 2 |f| b 2.837e+00); il gap 1.997e-01, il pavimento 5.008e-08
+  ### 30 gradi Z  inf a 5.791e-01 (|k| 3.500), sup a 1.000e+00; inf b 5.791e-01 (|k| 3.500), sup b 1.000e+00; la pendenza in ln |k| sui primi 4: a -0.000, b -0.000
+  ### 30 gradi Z  la lettura scritta prima (Luca): SOPRA il pavimento a 14 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+    30 gradi G  |k| 0.005: |fase| per tick 7.521e-07 7.521e-07; a 2.402e-03 b 2.121e-03 (max |delta Lambda| / |v| = 2 |f| b 1.039e-02); il gap 7.509e-07, il pavimento 1.332e-02
+    30 gradi G  |k| 0.010: |fase| per tick 3.003e-06 3.003e-06; a 6.020e-04 b 5.316e-04 (max |delta Lambda| / |v| = 2 |f| b 2.604e-03); il gap 3.002e-06, il pavimento 3.332e-03
+    30 gradi G  |k| 0.020: |fase| per tick 1.201e-05 1.201e-05; a 1.507e-04 b 1.330e-04 (max |delta Lambda| / |v| = 2 |f| b 6.517e-04); il gap 1.200e-05, il pavimento 8.330e-04
+    30 gradi G  |k| 0.040: |fase| per tick 4.802e-05 4.802e-05; a 3.775e-05 b 3.333e-05 (max |delta Lambda| / |v| = 2 |f| b 1.633e-04); il gap 4.801e-05, il pavimento 2.083e-04
+    30 gradi G  |k| 0.080: |fase| per tick 1.920e-04 1.920e-04; a 9.515e-06 b 8.393e-06 (max |delta Lambda| / |v| = 2 |f| b 4.112e-05); il gap 1.920e-04, il pavimento 5.208e-05
+    30 gradi G  |k| 0.160: |fase| per tick 7.676e-04 7.676e-04; a 2.452e-06 b 2.158e-06 (max |delta Lambda| / |v| = 2 |f| b 1.057e-05); il gap 7.676e-04, il pavimento 1.303e-05
+    30 gradi G  |k| 0.320: |fase| per tick 3.063e-03 3.063e-03; a 6.771e-07 b 5.922e-07 (max |delta Lambda| / |v| = 2 |f| b 2.901e-06); il gap 3.063e-03, il pavimento 3.265e-06
+    30 gradi G  |k| 0.640: |fase| per tick 1.213e-02 1.213e-02; a 2.094e-07 b 1.832e-07 (max |delta Lambda| / |v| = 2 |f| b 8.976e-07); il gap 1.213e-02, il pavimento 8.247e-07
+    30 gradi G  |k| 1.000: |fase| per tick 2.901e-02 2.901e-02; a 9.559e-08 b 8.666e-08 (max |delta Lambda| / |v| = 2 |f| b 4.245e-07); il gap 2.901e-02, il pavimento 3.447e-07
+    30 gradi G  |k| 1.500: |fase| per tick 6.241e-02 6.241e-02; a 3.667e-08 b 3.896e-08 (max |delta Lambda| / |v| = 2 |f| b 1.908e-07); il gap 6.240e-02, il pavimento 1.603e-07
+    30 gradi G  |k| 2.000: |fase| per tick 1.036e-01 1.036e-01; a 1.871e-08 b 2.377e-08 (max |delta Lambda| / |v| = 2 |f| b 1.165e-07); il gap 1.035e-01, il pavimento 9.659e-08
+    30 gradi G  |k| 2.500: |fase| per tick 1.463e-01 1.463e-01; a 2.357e-08 b 2.318e-08 (max |delta Lambda| / |v| = 2 |f| b 1.136e-07); il gap 1.462e-01, il pavimento 6.840e-08
+    30 gradi G  |k| 3.000: |fase| per tick 1.819e-01 1.819e-01; a 2.883e-08 b 2.480e-08 (max |delta Lambda| / |v| = 2 |f| b 1.215e-07); il gap 1.817e-01, il pavimento 5.505e-08
+    30 gradi G  |k| 3.500: |fase| per tick 2.000e-01 2.000e-01; a 3.087e-08 b 2.545e-08 (max |delta Lambda| / |v| = 2 |f| b 1.247e-07); il gap 1.997e-01, il pavimento 5.008e-08
+  ### 30 gradi G  inf a 1.871e-08 (|k| 2.000), sup a 2.402e-03; inf b 2.318e-08 (|k| 2.500), sup b 2.121e-03; la pendenza in ln |k| sui primi 4: a -1.997, b -1.997
+  ### 30 gradi G  la lettura scritta prima (Luca): max(a, b) ENTRO il pavimento a ogni |k|: il ramo NON E' VISTO dalla materia (il segnale di un modo spurio)
+  ### 30 gradi IS1-G il Goldstone a k -> 0 (Luca): a 2.402e-03 6.020e-04 1.507e-04 3.775e-05 9.515e-06; b 2.121e-03 5.316e-04 1.330e-04 3.333e-05 8.393e-06; le pendenze in ln |k| a -1.997 b -1.997
+    30 gradi P  |k| 0.005: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.768e-03 b 1.768e-03 (max |delta Lambda| / |v| = 2 |f| b 8.660e-03); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi P  |k| 0.010: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 3.536e-03 b 3.536e-03 (max |delta Lambda| / |v| = 2 |f| b 1.732e-02); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi P  |k| 0.020: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 7.071e-03 b 7.071e-03 (max |delta Lambda| / |v| = 2 |f| b 3.464e-02); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi P  |k| 0.040: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.414e-02 b 1.414e-02 (max |delta Lambda| / |v| = 2 |f| b 6.928e-02); il gap 4.668e-01, il pavimento 2.142e-08
+    30 gradi P  |k| 0.080: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 2.828e-02 b 2.828e-02 (max |delta Lambda| / |v| = 2 |f| b 1.385e-01); il gap 4.667e-01, il pavimento 2.143e-08
+    30 gradi P  |k| 0.160: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 5.652e-02 b 5.652e-02 (max |delta Lambda| / |v| = 2 |f| b 2.769e-01); il gap 4.661e-01, il pavimento 2.145e-08
+    30 gradi P  |k| 0.320: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 1.128e-01 b 1.128e-01 (max |delta Lambda| / |v| = 2 |f| b 5.525e-01); il gap 4.639e-01, il pavimento 2.156e-08
+    30 gradi P  |k| 0.640: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 2.234e-01 b 2.234e-01 (max |delta Lambda| / |v| = 2 |f| b 1.094e+00); il gap 4.551e-01, il pavimento 2.197e-08
+    30 gradi P  |k| 1.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 3.426e-01 b 3.426e-01 (max |delta Lambda| / |v| = 2 |f| b 1.678e+00); il gap 4.386e-01, il pavimento 2.280e-08
+    30 gradi P  |k| 1.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 4.938e-01 b 4.938e-01 (max |delta Lambda| / |v| = 2 |f| b 2.419e+00); il gap 4.060e-01, il pavimento 2.463e-08
+    30 gradi P  |k| 2.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 6.220e-01 b 6.220e-01 (max |delta Lambda| / |v| = 2 |f| b 3.047e+00); il gap 3.656e-01, il pavimento 2.735e-08
+    30 gradi P  |k| 2.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 7.211e-01 b 7.211e-01 (max |delta Lambda| / |v| = 2 |f| b 3.533e+00); il gap 3.235e-01, il pavimento 3.091e-08
+    30 gradi P  |k| 3.000: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 7.865e-01 b 7.865e-01 (max |delta Lambda| / |v| = 2 |f| b 3.853e+00); il gap 2.883e-01, il pavimento 3.468e-08
+    30 gradi P  |k| 3.500: |fase| per tick 4.712e-01 4.712e-01 4.712e-01 4.712e-01; a 8.153e-01 b 8.153e-01 (max |delta Lambda| / |v| = 2 |f| b 3.994e+00); il gap 2.704e-01, il pavimento 3.698e-08
+  ### 30 gradi P  inf a 1.768e-03 (|k| 0.005), sup a 8.153e-01; inf b 1.768e-03 (|k| 0.005), sup b 8.153e-01; la pendenza in ln |k| sui primi 4: a +1.000, b +1.000
+  ### 30 gradi P  la lettura scritta prima (Luca): SOPRA il pavimento a 14 |k| su 14: il ramo E' VISTO, partecipa alla dinamica
+    30 gradi D  |k| 0.005: |fase| per tick 9.425e-01 9.425e-01; a 1.309e-08 b 9.435e-10 (max |delta Lambda| / |v| = 2 |f| b 4.622e-09); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi D  |k| 0.010: |fase| per tick 9.425e-01 9.425e-01; a 1.309e-08 b 9.434e-10 (max |delta Lambda| / |v| = 2 |f| b 4.622e-09); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi D  |k| 0.020: |fase| per tick 9.425e-01 9.425e-01; a 1.309e-08 b 9.429e-10 (max |delta Lambda| / |v| = 2 |f| b 4.619e-09); il gap 4.669e-01, il pavimento 2.142e-08
+    30 gradi D  |k| 0.040: |fase| per tick 9.424e-01 9.424e-01; a 1.309e-08 b 9.410e-10 (max |delta Lambda| / |v| = 2 |f| b 4.610e-09); il gap 4.668e-01, il pavimento 2.142e-08
+    30 gradi D  |k| 0.080: |fase| per tick 9.423e-01 9.423e-01; a 1.309e-08 b 9.338e-10 (max |delta Lambda| / |v| = 2 |f| b 4.575e-09); il gap 4.667e-01, il pavimento 2.143e-08
+    30 gradi D  |k| 0.160: |fase| per tick 9.417e-01 9.417e-01; a 1.309e-08 b 9.095e-10 (max |delta Lambda| / |v| = 2 |f| b 4.455e-09); il gap 4.661e-01, il pavimento 2.145e-08
+    30 gradi D  |k| 0.320: |fase| per tick 9.394e-01 9.394e-01; a 1.307e-08 b 8.952e-10 (max |delta Lambda| / |v| = 2 |f| b 4.385e-09); il gap 4.639e-01, il pavimento 2.156e-08
+    30 gradi D  |k| 0.640: |fase| per tick 9.304e-01 9.304e-01; a 1.298e-08 b 1.709e-09 (max |delta Lambda| / |v| = 2 |f| b 8.372e-09); il gap 4.551e-01, il pavimento 2.197e-08
+    30 gradi D  |k| 1.000: |fase| per tick 9.135e-01 9.135e-01; a 1.274e-08 b 3.840e-09 (max |delta Lambda| / |v| = 2 |f| b 1.881e-08); il gap 4.386e-01, il pavimento 2.280e-08
+    30 gradi D  |k| 1.500: |fase| per tick 8.801e-01 8.801e-01; a 1.200e-08 b 7.557e-09 (max |delta Lambda| / |v| = 2 |f| b 3.702e-08); il gap 4.060e-01, il pavimento 2.463e-08
+    30 gradi D  |k| 2.000: |fase| per tick 8.389e-01 8.389e-01; a 1.067e-08 b 1.089e-08 (max |delta Lambda| / |v| = 2 |f| b 5.334e-08); il gap 3.656e-01, il pavimento 2.735e-08
+    30 gradi D  |k| 2.500: |fase| per tick 7.961e-01 7.961e-01; a 8.845e-09 b 1.289e-08 (max |delta Lambda| / |v| = 2 |f| b 6.313e-08); il gap 3.235e-01, il pavimento 3.091e-08
+    30 gradi D  |k| 3.000: |fase| per tick 7.606e-01 7.606e-01; a 6.992e-09 b 1.342e-08 (max |delta Lambda| / |v| = 2 |f| b 6.574e-08); il gap 2.883e-01, il pavimento 3.468e-08
+    30 gradi D  |k| 3.500: |fase| per tick 7.424e-01 7.424e-01; a 5.904e-09 b 1.328e-08 (max |delta Lambda| / |v| = 2 |f| b 6.505e-08); il gap 2.704e-01, il pavimento 3.698e-08
+  ### 30 gradi D  inf a 5.904e-09 (|k| 3.500), sup a 1.309e-08; inf b 8.952e-10 (|k| 0.320), sup b 1.342e-08; la pendenza in ln |k| sui primi 4: a -0.000, b -0.001
+  ### 30 gradi D  la lettura scritta prima (Luca): max(a, b) ENTRO il pavimento a ogni |k|: il ramo NON E' VISTO dalla materia (il segnale di un modo spurio)
+    30 gradi G+Z |k| 0.005: a 9.999984e-01 b 9.999984e-01
+    30 gradi G+Z |k| 0.010: a 9.999938e-01 b 9.999938e-01
+    30 gradi G+Z |k| 0.020: a 9.999750e-01 b 9.999750e-01
+    30 gradi G+Z |k| 0.040: a 9.999000e-01 b 9.999000e-01
+    30 gradi G+Z |k| 0.080: a 9.996001e-01 b 9.996001e-01
+==================================================================================================================================
+ESITO: 6/6 controlli passano; DEVE fallite: 0 []
