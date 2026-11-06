@@ -168,3 +168,21 @@
 - ### **`psi`** *(rispetto alla partenza, senza `U`)*: **nessun vortice dentro `20`** *(a `t 15000` due `+1` e un `-1` negli anelli `20`-`21`, dove la fase e' quasi tutta esclusa: `266` triangoli dell'anello `21`)*; **fuori i triangoli esclusi** *(la partenza li' e' sotto `1e-12` del massimo)*: `9898` e `9809` su `13122`.
 - ### **(r4) PER C, COME L'HO SCRITTA IN 13.3: SI'** *(il netto del vuoto dentro `20` e' `-4` e `+4`)*. ### ⚠ **MA E' IL MIO CRITERIO, E NON REGGE QUESTO CASO:** **l'ho scritto pensando a pochi vortici; il netto di `4` su `~550`, con il segno che si rovescia fra `15000` e `30000`, e' cio' che darebbe anche un gas di vortici SENZA verso preferito** *(una fluttuazione)*. ### **Non e' un DEVE fallito, quindi non e' un FERMO; ma la lettura «SI'» non la sostengo.** **La lettura, per Luca:** ### **il vuoto disturbato attorno al solitone e' un GAS DI VORTICI quasi neutro** *(la fase del vuoto rispetto a `c(t) F3` e' ruvida alla scala del reticolo)*, **la materia non ha vortici: nessun verso preferito dai vortici.** **(Un criterio che distingue una carica da una fluttuazione** -- per esempio il netto contro `sqrt(N)` -- **sarebbe un numero nuovo: decide Luca.)**
 - **Avanti con E** *(l'olonomia di `U`)*: **se `U` non e' banale, la parte di `psi` di C va rifatta con `U`** *(13.1)*.
+
+## 15. E, L'OLONOMIA DI `U` ATTORNO AI TRIANGOLI: **LE PREMESSE DAL CODICE E LA PROGETTAZIONE** *(scritte PRIMA del codice; Luca `21:39`, `2026-11-06`)*
+
+### 15.1 LE PREMESSE DAL CODICE
+- ### **DOVE STA `U`:** **`mot.geo.U`, una `2 x 2` per ARCO** *(`motore.Geometria`, che ne misura l'unitarieta' alla nascita)*; **lo spostamento porta lo spinore dalla coda alla testa con `U` e dalla testa alla coda con `U^dagger`** *(`flussi_parziali.hop_psi`: lato `1` nuovo `alpha v1 + beta U v0`, lato `0` nuovo `alpha v0 + beta U^dagger v1`)*.
+- ### **COSA VALE NELLA SCENA:** **`csv/_triangoli.scena_toro` costruisce `U = I` su ogni arco** *(`U[:, 0, 0] = U[:, 1, 1] = 1`)*, ### **e nel codice che gira nessun pezzo del tick la scrive** *(cercato: `geo.U[...] =` solo in `primo_ordine/_misura_spettro_l1.py`, uno strumento fuori dal tick)*: ### **la `U` dinamica non c'e'** *(Luca: «`U` e' FERMA finche' la `U` dinamica non si deriva»)*. ### **QUINDI MI ASPETTO L'OLONOMIA BANALE, PER COSTRUZIONE: uno zero garantito dalla scena, non una misura della fisica.** **La carta lo verifica sui numeri veri** *(non lo assume)* **e lo DICHIARA tale.**
+- **L'OLONOMIA:** **il giro antiorario `v -> v + p1 -> v + p2 -> v`** *(i triangoli di B)*: `W = U_{e3}^dagger U_{e2} U_{e1}` *(col verso: se il giro di `_triangoli` e' orario, `W^dagger`)*. **Le grandezze:** `max |W - I|`; **il flusso `U(1)`** `phi = arg(det W) / 2`; **l'angolo `SU(2)`** `a = 2 arccos(|Re tr(W / sqrt(det W))| / 2)`; **la loro media e dispersione, su e giu' separati.**
+- **Dove lo spin incontra la geometria oggi:** **nella moneta** *(`CAMM-MONETA-SPIN`, `exp(-i eps dtau sigma.n)` con `n` il versore dell'arco)*, **non in `U`**: lo scrivo, non lo misuro qui.
+
+### 15.2 I DEVE
+- **DEVE PASSARE (mio):** **una `U` di PURA GAUGE casuale** *(`U_e = g_testa g_coda^dagger`, `g` una `U(2)` casuale per nodo, seme `1`)* **da' `W = I` entro `1e-12` su ogni triangolo** -- ### **e' il controllo che PUO' FALLIRE: con l'ordine o il verso del prodotto sbagliati, non darebbe `I`.**
+- **DEVE FALLIRE (mio):** **una `U` casuale per arco, NON di gauge** *(seme `2`)*: **«`W = I` entro `1e-12`» non regge.**
+- **DEVE (mio):** **`U` della scena e' la stessa al bit prima e dopo il tick della corsa** *(dallo stato di `TBS` a `t 15000`)*.
+- **DEVE (Luca, la domanda):** **sul vuoto `F3` e nella scena del solitone** *(la stessa `U`: la scena e' una)*: **banale o no, uniforme o no** -- **stampato**, la lettura in 15.3.
+
+### 15.3 LA LETTURA, FISSATA PRIMA
+- **«BANALE»** se `max |W - I| <= 1e-12` su ogni triangolo; **«UNIFORME NON BANALE»** se no, e la dispersione di `phi` e di `a` e' sotto `1e-12`; **altrimenti «NON UNIFORME».** ### **Se «BANALE»: la parte di `psi` di C** *(senza `U`)* **E' GIA' quella con `U`, e non si rifa'.**
+- **La carta:** `python csv/solitone/carta_statiche.py --olonomia > doc/referti_l2/statica_olonomia.txt`.
