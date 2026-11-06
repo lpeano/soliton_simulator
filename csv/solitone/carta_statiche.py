@@ -4,6 +4,7 @@ r"""**LE TRE CARTE STATICHE: IL VUOTO, LA COPPIA, LA DIMENSIONE** *(Luca `2026-1
     python csv/solitone/carta_statiche.py --coppia > doc/referti_l2/statica_coppia.txt
     python csv/solitone/carta_statiche.py --dimensione > doc/referti_l2/statica_dimensione.txt
     python csv/solitone/carta_statiche.py --coppia-matura > doc/referti_l2/statica_coppia_matura.txt   # (Luca 2026-11-05 21:01) gli stati maturi di TBS
+    python csv/solitone/carta_statiche.py --circolazione > doc/referti_l2/statica_circolazione.txt   # (Luca 2026-11-05 21:20, 2026-11-06) B: la circolazione della materia dagli stati di TBS
 ### **La scena con `N` e `L` espliciti** *(`scena_con`: `V.N`, `V.L` in memoria e rimessi; poi `V.scena` e `V.partenza` come nella corsa)*; `CS0` *(mio)*: a `N 1e6`, `L 81` la partenza = quella senza
 `scena_con`, al bit. ### **`--vuoto`:** la risposta REALE-lineare di un tick vivo intero *(`AC.tick` dopo la rampa)* a un disturbo del vuoto `F3` con `psi = 0`, nel riferimento che gira *(`e^{-i omega}`)*;
 `12` gradi di liberta' reali per cella *(le `6` estremita' di un nodo, etichettate per direzione e lato)*; `T(k)` per `k` qualsiasi; i DEVE `VD-L` *(la linearita': `AMP` e `2 AMP` entro `TOLL_L`)*, `VD-T`, `VD-G`,
@@ -498,6 +499,247 @@ def coppia_matura():
     cm.__exit__(None, None, None)
 
 
+PAV_C = 10.0 * 1e-16           # ### --circolazione (il task history della rotazione, 9.1): il pavimento di J e di C_T, per max rho
+N_ANELLI = 41                  # ### anelli di larghezza 1 nodo da 0 a 40 (9.1)
+R_GAMMA = tuple(range(4, 41, 4))   # ### Gamma(R), la somma di C_T dentro R (9.1)
+FASCE_S = (0, 10, 20, 30, 40)  # ### il segno per settore: 6 settori di 60 gradi, fasce di 10 nodi (9.1)
+CONTIGUI = 3                   # ### la lettura (r4) di B (9.3): almeno 3 anelli contigui con un verso preferito dello stesso segno
+
+
+def _tick_correnti(z, t, K):
+    """### **Il tick `AC.tick(z, t, K)` della corsa, con le voci di `mot.operatori` avvolte IN MEMORIA** *(rimesse all'uscita)*: per ogni applicazione di
+    `spostamento_trasporto` la corrente dell'arco `J_a = |psi'_{2a+1}|^2 - |psi_{2a+1}|^2` *(dal nodo proprietario al vicino)* e lo scarto dalla coda;
+    per ogni altro pezzo la variazione della norma per nodo *(il task history della rotazione, 9.1)*."""
+    import _deriva_congelato as DC
+    import _screening_forme_s3 as SF
+    import _solitone_vuoto_congelato as VC
+    import _triangoli_bassa_energia as BE
+    from solitone import accensione as AC
+    inc, mot = z["inc"], z["mot"]
+    nodo = np.asarray(inc.nodo)
+    n = inc.n
+    rec = {"J": [], "unit": 0.0, "altri": {}}
+    veri = dict(mot.operatori)
+
+    def avvolgi(nome, f):
+        def g(s, p, fr):
+            a = np.sum(np.abs(s["psi_h"]) ** 2, axis=1)
+            out = f(s, p, fr)
+            d = np.sum(np.abs(s["psi_h"]) ** 2, axis=1) - a
+            if nome == "spostamento_trasporto":
+                rec["J"].append(d[1::2].copy())
+                rec["unit"] = max(rec["unit"], float(np.max(np.abs(d[1::2] + d[0::2]))))
+            else:
+                dn = float(np.max(np.abs(np.bincount(nodo, weights=d, minlength=n))))
+                rec["altri"][nome] = max(rec["altri"].get(nome, 0.0), dn)
+            return out
+        return g
+
+    for k_, f_ in veri.items():
+        mot.operatori[k_] = avvolgi(k_, f_)
+    try:
+        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+            AC.tick(z, t, K)
+    finally:
+        for k_, f_ in veri.items():
+            mot.operatori[k_] = f_
+    return rec
+
+
+def _triangoli(z, dirs, A1, A2):
+    """### **I triangoli su e giu' in `(m1, m2)`, con gli archi e il segno del giro ANTIORARIO** *(dall'area con le posizioni vere, non scritto a mano)*."""
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    nodo = np.asarray(inc.nodo)
+    v = np.arange(n)
+    m1, m2 = v // L, v % L
+
+    def nd(a, b):
+        return ((m1 + a) % L) * L + (m2 + b) % L
+
+    def arco(base, d):
+        a = 3 * base + dirs.index(d)
+        verso = ((base // L + d[0]) % L) * L + (base % L + d[1]) % L
+        assert np.array_equal(nodo[2 * a], base) and np.array_equal(nodo[2 * a + 1], verso), "l'arco NON va dove dice la direzione"
+        return a
+
+    out = {}
+    for nome, (p1, p2) in (("su", ((1, 0), (1, 1))), ("giu'", ((0, 1), (1, 1)))):
+        e1 = arco(v, p1)                                            # v -> v + p1
+        e2 = arco(nd(*p1), (p2[0] - p1[0], p2[1] - p1[1]))          # v + p1 -> v + p2
+        e3 = arco(v, p2)                                            # v -> v + p2 (percorso all'indietro)
+        o1 = p1[0] * A1 + p1[1] * A2
+        o2 = p2[0] * A1 + p2[1] * A2
+        area = float(o1[0] * o2[1] - o1[1] * o2[0])
+        assert area != 0.0
+        out[nome] = {"archi": (e1, e2, e3), "verso": 1.0 if area > 0 else -1.0, "off": (o1 + o2) / 3.0}
+    return out
+
+
+def _per_anelli(C, r, th, pav):
+    """### **Per anello** *(larghezza `1`)*: la media col segno, la media dei moduli, `N`, `sigma` della media, il verso preferito *(9.3)*."""
+    righe = []
+    for k in range(N_ANELLI):
+        m = (r >= k) & (r < k + 1)
+        if not m.any():
+            righe.append((k, 0, 0.0, 0.0, 0.0, 0))
+            continue
+        c = C[m]
+        me = float(np.mean(c))
+        sg = float(np.std(c) / math.sqrt(len(c))) if len(c) > 1 else float("inf")
+        pref = int(np.sign(me)) if (abs(me) > 3.0 * sg and abs(me) > pav) else 0
+        righe.append((k, int(m.sum()), me, float(np.mean(np.abs(c))), sg, pref))
+    return righe
+
+
+def _contigui(righe):
+    """### **Il massimo numero di anelli CONTIGUI con un verso preferito dello stesso segno, e il segno** *(9.3)*."""
+    best, seg, cur, cs = 0, 0, 0, 0
+    for _k, _n, _me, _ma, _sg, p in righe:
+        if p != 0 and p == cs:
+            cur += 1
+        else:
+            cur, cs = (1, p) if p != 0 else (0, 0)
+        if cur > best:
+            best, seg = cur, cs
+    return best, seg
+
+
+def _circola(z, dirs, A1, A2, tri, st, t, K, nome, stampa=True):
+    """### **La circolazione di uno stato:** il tick della corsa con le correnti, i DEVE dell'unitarieta', degli altri pezzi e della continuita', poi `C_T`."""
+    import _energia_del_legame as EL
+    from solitone import carta_forma as CF
+    from solitone import toro as TO
+    inc, L = z["inc"], z["L"]
+    n = inc.n
+    nodo = np.asarray(inc.nodo)
+    for k_, v_ in st.items():
+        z["st"][k_][...] = v_
+    rho0 = np.bincount(nodo, weights=np.sum(np.abs(z["st"]["psi_h"]) ** 2, axis=1), minlength=n)
+    rho_d, _lam = EL.densita(inc, {"psi_h": z["st"]["psi_h"], "phi_h": z["st"]["phi_h"]})
+    v = np.arange(n)
+    m1, m2 = v // L, v % L
+    rmax = float(rho0.max()) if rho0.max() > 0 else 1.0
+    pav = PAV_C * rmax
+    rec = _tick_correnti(z, t, K)
+    rho1 = np.bincount(nodo, weights=np.sum(np.abs(z["st"]["psi_h"]) ** 2, axis=1), minlength=n)
+    assert len(rec["J"]) == 2, "lo spostamento NON e' applicato due volte nel tick (il palindromo)"
+    J = rec["J"][0] + rec["J"][1]
+    pred = -np.bincount(nodo[0::2], weights=J, minlength=n) + np.bincount(nodo[1::2], weights=J, minlength=n)
+    e_cont = float(np.max(np.abs((rho1 - rho0) - pred)))
+    e_altri = max(rec["altri"].values()) if rec["altri"] else 0.0
+    c1, c2 = TO.centro(rho0, m1, m2, L)[:2] if rho0.sum() > 0 else (0.0, 0.0)
+    cen = c1 * A1 + c2 * A2
+    P = CF.posizioni(m1, m2, A1, A2)
+    res = {"pav": pav, "unit": rec["unit"], "altri": rec["altri"], "cont": e_cont, "rho_d": float(np.max(np.abs(rho_d - rho0))), "centro": (c1, c2)}
+    for meta, JJ in (("tick", J), ("prima meta'", rec["J"][0]), ("seconda meta'", rec["J"][1])):
+        Cs, rs, ths = [], [], []
+        for tn in ("su", "giu'"):
+            d = tri[tn]
+            e1, e2, e3 = d["archi"]
+            C = d["verso"] * (JJ[e1] + JJ[e2] - JJ[e3])
+            r, th = CF.spost(P + d["off"], cen, L, A1, A2)
+            Cs.append(C)
+            rs.append(r)
+            ths.append(th)
+            res[(meta, tn)] = _per_anelli(C, r, th, pav)
+        C, r, th = np.concatenate(Cs), np.concatenate(rs), np.concatenate(ths)
+        res[(meta, "tutti")] = _per_anelli(C, r, th, pav)
+        res[(meta, "Gamma")] = [(R, float(np.sum(C[r < R])), int(np.sum(r < R))) for R in R_GAMMA]
+        res[(meta, "settori")] = [(a, b, [float(np.mean(C[(r >= a) & (r < b) & (th >= s_ * math.pi / 3) & (th < (s_ + 1) * math.pi / 3)]))
+                                          if np.any((r >= a) & (r < b) & (th >= s_ * math.pi / 3) & (th < (s_ + 1) * math.pi / 3)) else float("nan") for s_ in range(6)])
+                                  for a, b in zip(FASCE_S[:-1], FASCE_S[1:])]
+        res[(meta, "max")] = float(np.max(np.abs(C)))
+    if stampa:
+        print("  ### %s: il centro (%.4f, %.4f); max rho %.6e; il pavimento di C_T %.3e; |J testa + J coda| max %.3e; gli altri pezzi, max |d rho_nodo| %s; la continuita' %.3e; rho dal libro - rho per nodo %.3e"
+              % (nome, c1, c2, rmax, pav, rec["unit"], ", ".join("%s %.2e" % kv for kv in sorted(rec["altri"].items())), e_cont, res["rho_d"]))
+        for meta in ("tick", "prima meta'", "seconda meta'"):
+            print("    %s: max |C_T| %.6e" % (meta, res[(meta, "max")]))
+        print("    %4s %6s %16s %14s %12s %5s | %16s %5s | %16s %5s   (tick intero; su, giu' a parte)" % ("anel", "N", "media C_T", "media |C_T|", "sigma", "verso", "su: media", "verso", "giu': media", "verso"))
+        for i, (k, nn, me, ma, sg, p) in enumerate(res[("tick", "tutti")]):
+            su, gi = res[("tick", "su")][i], res[("tick", "giu'")][i]
+            print("    %4d %6d %+16.6e %14.6e %12.3e %+5d | %+16.6e %+5d | %+16.6e %+5d" % (k, nn, me, ma, sg, p, su[2], su[5], gi[2], gi[5]))
+        for meta in ("prima meta'", "seconda meta'"):
+            print("    %s, la media per anello: %s" % (meta, " ".join("%+.2e" % x[2] for x in res[(meta, "tutti")])))
+        print("    Gamma(R) (tick): %s" % "; ".join("R %d: %+.6e (%d triangoli)" % g for g in res[("tick", "Gamma")]))
+        print("    il segno per settore (tick; i settori di 60 gradi da theta 0, la media di C_T):")
+        for a, b, ss in res[("tick", "settori")]:
+            print("      r %2d-%2d: %s" % (a, b, " ".join("%+.3e" % x for x in ss)))
+        cn, sg = _contigui(res[("tick", "tutti")])
+        print("    gli anelli contigui con un verso preferito dello stesso segno: %d (il segno %+d)" % (cn, sg))
+    return res
+
+
+def circolazione():
+    """### **B** *(Luca `2026-11-05` `21:20`; `2026-11-06`: avanti)*: **la circolazione della materia attorno ai triangoli, dagli stati di `TBS`** *(il task history della rotazione, 9)*."""
+    import _vuoto_vivo_B as V
+    from solitone import corsa_accensione as CA
+    from solitone import toro as TO
+    _sol, _v, s = V.CORSE[CA.NOME]
+    K = int(round(CA.CORSE["TF3"][0] / s))
+    righe = [V.LP.leggi(os.path.join(CA.dir_json("TBS"), f)) for f in sorted(os.listdir(CA.dir_json("TBS"))) if f.startswith("TBS_") and f.endswith(".jsonl")]
+    reg = {x["t"]: x for r in righe for x in (r.get("stati") or [])}
+    _r8, z, _p8, F3, _i8, cm = costruisci(V.N, 81)
+    A1, A2 = TO.vettori()
+    dirs = _ordine_archi(z)
+    tri = _triangoli(z, dirs, A1, A2)
+    print("  le direzioni degli archi %s; il verso antiorario: su %+d, giu' %+d; K %d; PAV_C %g; N_ANELLI %d; R_GAMMA %s; FASCE_S %s; CONTIGUI %d"
+          % (dirs, tri["su"]["verso"], tri["giu'"]["verso"], K, PAV_C, N_ANELLI, R_GAMMA, FASCE_S, CONTIGUI))
+    salvato = {k: v.copy() for k, v in z["st"].items() if isinstance(v, np.ndarray)}
+    stati = {}
+    eS = []
+    for t in STATI_MATURI:
+        f = reg[t]["file"]
+        with np.load(f) as d:
+            st = {k: d[k].copy() for k in d.files if k != "t"}
+        eS.append(all(SFM_sha(st[k]) == reg[t]["sha"][k] for k in reg[t]["sha"]))
+        stati[t] = st
+        print("  lo stato a t %.0f (tick %d): %s sha1 %s" % (t * s, t, f, hashlib.sha1(open(f, "rb").read()).hexdigest()))
+    esito("DEVE PASSARE: CI-S ogni stato caricato da' gli sha per chiave registrati nella corsa", all(eS), "%s" % eS)
+    # ### il DEVE di Luca: il vuoto F3 da solo (psi = 0) -- uno zero PER COSTRUZIONE (9.2)
+    st0 = {k: v.copy() for k, v in salvato.items()}
+    st0["psi_h"][...] = 0.0
+    st0["phi_h"][...] = F3
+    r0 = _circola(z, dirs, A1, A2, tri, st0, K + 1, K, "il vuoto F3 da solo", stampa=False)
+    esito("DEVE PASSARE: CI-0 (Luca) il vuoto F3 da solo (psi = 0, dopo la rampa) da' C_T = 0 -- uno zero PER COSTRUZIONE: controlla il percorso del codice", r0[("tick", "max")] == 0.0, "max |C_T| %.3e" % r0[("tick", "max")])
+    res = {}
+    for t in STATI_MATURI:
+        res[t] = _circola(z, dirs, A1, A2, tri, stati[t], t + 1, K, "TBS a t %.0f (il tick %d della corsa)" % (t * s, t + 1))
+    esito("DEVE PASSARE: CI-U (mio) l'unitarieta' del blocco: J dalla testa = -J dalla coda entro il pavimento, ogni applicazione, ogni stato",
+          all(res[t]["unit"] <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e (pav %.1e)" % (res[t]["unit"], res[t]["pav"]) for t in STATI_MATURI))
+    esito("DEVE PASSARE: CI-A (mio) i pezzi diversi dallo spostamento non cambiano la norma di nessun nodo, entro il pavimento",
+          all(max(res[t]["altri"].values()) <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e" % max(res[t]["altri"].values()) for t in STATI_MATURI))
+    esito("DEVE PASSARE: CI-C (mio) la continuita': rho(t + 1) - rho(t) = -div J entro il pavimento, ogni nodo, ogni stato",
+          all(res[t]["cont"] <= res[t]["pav"] for t in STATI_MATURI), "; ".join("%.3e" % res[t]["cont"] for t in STATI_MATURI))
+    # ### il DEVE FALLIRE di Luca: lo stato di t 0 per e^{+i theta} attorno al centro (9.2)
+    L = z["L"]
+    nodo = np.asarray(z["inc"].nodo)
+    v = np.arange(z["inc"].n)
+    from solitone import carta_forma as CF
+    c1, c2 = res[0]["centro"]
+    _r, thn = CF.spost(CF.posizioni(v // L, v % L, A1, A2), c1 * A1 + c2 * A2, L, A1, A2)
+    gam = {}
+    for sg in (+1, -1):
+        sts = {k: x.copy() for k, x in stati[0].items()}
+        sts["psi_h"] = sts["psi_h"] * np.exp(1j * sg * thn[nodo])[:, None]
+        rs = _circola(z, dirs, A1, A2, tri, sts, 1, K, "il sintetico: lo stato di t 0 per e^{%si theta}" % ("+" if sg > 0 else "-"))
+        gam[sg] = rs[("tick", "Gamma")]
+        if sg > 0:
+            cn, segno = _contigui(rs[("tick", "tutti")])
+            esito("DEVE FALLIRE: CI-F (Luca) il sintetico e^{+i theta}: \"nessun verso preferito\" (meno di %d anelli contigui con lo stesso verso)" % CONTIGUI,
+                  not (cn < CONTIGUI), "%d anelli contigui (il segno %+d)" % (cn, segno))
+    pavG = [res[0]["pav"] * g[2] for g in gam[1]]
+    ok = [(a[1] * b[1] < 0) for a, b, p in zip(gam[1], gam[-1], pavG) if abs(a[1]) > p and abs(b[1]) > p]
+    esito("DEVE PASSARE: CI-V (mio) Gamma(R) col sintetico e^{-i theta} ha il segno opposto a quello con e^{+i theta}, a ogni R dove entrambi sono sopra il pavimento",
+          len(ok) > 0 and all(ok), "%d raggi confrontati: %s" % (len(ok), "; ".join("R %d %+.3e / %+.3e" % (a[0], a[1], b[1]) for a, b in zip(gam[1], gam[-1]))))
+    for k_, v_ in salvato.items():
+        z["st"][k_][...] = v_
+    cm.__exit__(None, None, None)
+    print("  ### LA LETTURA (r4) DI B (il task history 9.3): gli anelli contigui con un verso preferito dello stesso segno, t 0 / 15000 / 30000: %s; la soglia %d"
+          % (" / ".join("%d (%+d)" % _contigui(res[t][("tick", "tutti")]) for t in STATI_MATURI), CONTIGUI))
+    print("  ### (r4) per B: %s" % ("SI'" if any(_contigui(res[t][("tick", "tutti")])[0] >= CONTIGUI for t in STATI_MATURI[1:]) else "NO"))
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -540,14 +782,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --vuoto | --coppia | --coppia-matura | --dimensione"
+    modo = "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --vuoto | --goldstone | --circolazione | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
