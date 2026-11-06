@@ -23900,3 +23900,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-06 — `cs`: **LA DECISIONE DI LUCA DELLE `14:06`: (r1), `cs` DAL TICK `K + 1`** *(il task history `2026-11-06_cs_col_solitone`, sez. `10`)*
 
 - **Col tick del nucleo cosi' com'e'; nella rampa `cs = 0.15` come oggi; (r2) e (r3) scartate.** ### **L'accensione a `t = K` e' un cambio brusco** *(dentro il solitone `cs` da `0.15` a `~0.004`)*: **il referto di `TCS` legge il transitorio** *(le prime `1000` unita')* **e il resto separatamente, contro `TB3`.**
+
+## 2026-11-06 — `C0` LUNGO SU `L 162`: **`2/2`** *(`c0_L162.txt`; il task history `2026-11-06_coppia_corse`, sez. `8`)*
+
+- **Il vuoto `F3` da solo su `L 162` segue la tabella `c(t)` di `L 81` entro `4.4e-14`** *(il residuo da `c F3` `4.3e-14`; `omega` al bit)* **su `7667` tick**; la tabella spostata di un tick fallisce come deve. **Avanti con le corse della coppia.**

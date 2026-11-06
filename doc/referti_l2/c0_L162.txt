@@ -1,0 +1,25 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE facde015  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_bordo.py  sha1-BYTE daf932d5  committato e pulito
+==================================================================================================================================
+IL TEST DEL BORDO (Luca 21:52): la riflessione di un pacchetto in banda B sul vuoto F3; BG-F-0.15 (s 0.15, eps 0.5); R_A 28 W 4 N_PAC 1 SOGLIA 0.01 GRIGLIA (0.0, 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1); omega 4.71238898038468967e-01 (fase_F3.npz)
+==================================================================================================================================
+### LE OPZIONI (Luca 2026-11-06 12:42): L 162, R_A 28, la griglia (0.0, 0.0001, 0.0003, 0.001, 0.003, 0.01, 0.03, 0.1), c0 True
+### C0 LUNGO (Luca 12:42): il vuoto F3 da solo su L 162, il tick della corsa per t = 1 .. 7667 (K 6667, dopo 1000); TOLL_C0 1e-12
+    t  1000: |c - c_81| 4.915e-15; il residuo 8.373e-15
+    t  2000: |c - c_81| 2.096e-14; il residuo 1.626e-14
+    t  3000: |c - c_81| 1.947e-14; il residuo 2.244e-14
+    t  4000: |c - c_81| 1.021e-14; il residuo 1.502e-14
+    t  5000: |c - c_81| 3.289e-14; il residuo 3.077e-14
+    t  6000: |c - c_81| 1.155e-14; il residuo 1.427e-14
+    t  7000: |c - c_81| 1.236e-14; il residuo 1.833e-14
+  ### omega su L 162: +4.71238898038468967e-01; su L 81 (fase_F3.npz): +4.71238898038468967e-01; la differenza 0.000e+00
+  ### il residuo |phi - c F3| / |F3|: il massimo 4.252e-14 (a t 17)
+  DEVE PASSARE: C0 (Luca) su L 162 c(t) = la tabella di L 81 entro 1e-12 a ogni t, e il residuo entro 1e-12                PASSA   max |c - c_81| 4.372e-14 (a t 662); residuo 4.252e-14
+  DEVE FALLIRE: C0-F la tabella spostata di un tick (c_81(t + 1)) entro 1e-12                                              PASSA   4.669e-01
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []
