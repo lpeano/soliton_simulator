@@ -23866,3 +23866,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Uno zero per costruzione, non una misura del vuoto:** **il flusso nei triangoli oggi non c'e'**; la circolazione di B e i vortici di C nascono senza flusso di fondo. **La parte di `psi` di C non si rifa'.**
 - ### **La chiusura** *(A, B, C, E; D sospesa)*: **la materia circola, senza un verso fisso; il vuoto e' un gas di vortici quasi neutro; nessun flusso di fondo.** **Aperti per Luca:** il criterio della carica di C, la serie fitta di B. **Le voci «precessione» e «flusso nei triangoli» non sono nella MAPPA** *(cercate)*: il rimando sta nella `3-quater`.
 - **Avanti con la coppia.**
+
+## 2026-11-06 — LE CORSE DELLA COPPIA: **FERMO PRIMA DEL CODICE, DUE PUNTI DEL BORDO E `C0`** *(il task history `2026-11-06_coppia_corse`)*
+
+- ### **«Il bordo di `TB3`» su `L 162` non e' una cosa sola:** **`R_B` e' la meta' del periodo** *(`40.5` su `L 81`, `81` su `L 162`)*: **la rampa di `TB3` e' `12.5` nodi, su `L 162` sarebbe `81 - R_A`.** **Proposta: tenere `R_B` = la meta' del periodo** *(nessun numero nuovo)*.
+- ### **`S162`:** **il riferimento di `C35`** *(centro nel punto medio, `R_A 47.5`, il solitone al posto di uno dei due: la decisione di prima)* **o il bordo di `TB3` centrato sul solitone** *(`R_A 28`)*? **Proposta: il primo.**
+- ### **`C0`:** un DEVE all'inizio di ogni corsa *(`200` tick dopo la rampa, entro `1e-12`: numeri miei)* o la rampa intera *(`~45` minuti in piu')*?
+- **Il costo stimato dai jsonl di `TB3`:** **`~7.3` ore per corsa, `~29` per le quattro**; `~121` MB di mappe e `~63` MB di stati per corsa. **Il numero vero dopo il primo pezzo.**
