@@ -195,3 +195,48 @@
   4. **col braccio vecchio** *(su tutto il toro)* **cuore e corona restavano sotto `1.7`.**
   ### **Le cautele:** **un solo seme per braccio** *(la dispersione del caos stesso NON e' misurata: un secondo seme la darebbe)*; **sette tempi** *(il `D` intero ha solo le righe stampate; gli inviluppi sono sugli stessi sette tempi per i due bracci)*.
 - ### **FERMO** *(Luca: se supera `2` anche col braccio localizzato, FERMO e riferire)*: **gli altri sei oggetti NON costruiti.**
+
+## 15. LA DECISIONE DI LUCA DEL `2026-11-07` `19:37`: **GLI STATI COMPLETI SENZA TAGLIO; IL TAGLIO RIMANDATO AI CLUSTER** *(il FERMO della sez. `14` CHIUSO)*
+
+### 15.1 LA DECISIONE, COME L'HA SCRITTA LUCA
+
+- **`L3` e' stata riformulata TRE volte DOPO i numeri** *(punto per punto, inviluppi, caos localizzato)*: **ogni correzione era motivata, ma continuare adatterebbe la prova al risultato. Ci si ferma.**
+- ### **La lettura di `b5d132db`, come FATTO MISURATO:** **il taglio a `R_t 32` e' una perturbazione COERENTE che anticipa la divergenza caotica di circa `55` unita' rispetto a un rumore bianco della stessa norma; dopo, tutto satura allo stesso livello** *(rapporto `~0.95`)*. **Non e' un difetto: e' la differenza fra rumore coerente e rumore bianco.**
+- **Il principio:** **in un sistema caotico il confronto fra due evoluzioni si fa sulle GRANDEZZE MEDIE, non sulle traiettorie.**
+- **LA DECISIONE:** **(1)** la libreria conserva gli **STATI COMPLETI, NON tagliati** *(tutto il toro: `psi`, `phi`, `D` e ogni grandezza registrata)*, per i sette tick di `TBS` `100000 .. 160000`; **per ciascuno basta `R2`** *(la ripartenza al bit, con `R2-F`)*; **`L3` NON si applica**; **(2)** l'oggetto ritagliato `TBS_100000_R32.npz` **resta su `E:` e nell'indice come «ritagliato, non validato»**, dichiarato; **(3)** **il TAGLIO si riprende con i CLUSTER**, col controllo scritto PRIMA dei numeri sulle grandezze medie *(15.4)*; **(4)** **`LIB1-P` con la soglia derivata `t_max omega eps` resta** *(e' una cura, non un criterio nuovo)*.
+
+### 15.2 LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **Gli stati di `TBS` ai sette tick ESISTONO GIA' completi** *(`E:\soliton_simulator\stati\TBS\TBS_stato_<tick>.npz`, con gli `sha` nel jsonl della corsa, letto con `CA.serie("TBS")`)*, **e per tutti e sette c'e' `dopo_stato`** *(gli `sha` dopo `100` tick: `LIB1-0` si fa su TUTTI e sette, non solo sul primo)*. ### **Quindi lo «stato completo» della libreria e' una COPIA di quello della corsa, piu' `D = phi - c(t) F3`, `c(t)`, il centro e il campione registrato a quel tick** *(il bordo: `M_ass`, `E_ass`, `V_ass`; la forma: `w`, `f_liscia`, l'alone)*: **dichiarato, non e' un oggetto nuovo.**
+- **Le chiavi dello stato** sono tutti gli array di `z["st"]` *(il ciclo della corsa e' `AC.tick` piu' `BO.assorbi`, e `LIB1-0` al bit sul primo oggetto dice che bastano)*. ### ⚠ **I contatori del bordo** *(`M_ass` accumulato)* **NON entrano nella dinamica** *(`BO.assorbi` li RESTITUISCE, non li legge)*: **si salvano come grandezze registrate, dal campione.** *(Se mi sbaglio, `LIB1-0` sugli altri sei tick lo dira'.)*
+- ### **`LIB1-P`, la soglia derivata** *(Luca `17:55`)*: **`t_max omega eps`** *(`t_max = 160000` tick, `omega` per tick dal file della fase, `eps = 2.22e-16`)*: **`~1.7e-11`.** **Il valore misurato in `9eda4121` e' `3.347e-12`** *(sotto la soglia di un fattore `~5`)*: ### **so gia' che passa** *(«DEVE contro la propria premessa»)*: **il controllo che puo' fallire e' `LIB1-P-F`** *(mio, dichiarato: un tick sfasato di `1`, la fase differisce di `omega`, `~0.47`, molto sopra la soglia)*.
+- ### **`LIB1-C` su uno stato completo e' banale CONTRO L'ORIGINALE** *(lo stato e' lo stesso al bit: la distanza dei centri e' `0` per costruzione, un FALSO-ZERO)*. ### **Lo faccio CONTRO I CENTRI REGISTRATI DALLA CORSA** *(`per.c1`, `per.c2` dei campioni, ogni `10` tick: `TO.misure` sulla densita' per nodo)*, **per `2000` tick dalla ripartenza**: **e' un controllo che la ripartenza dal FILE DELLA LIBRERIA rifa' la traiettoria che la corsa ha scritto.** ### ⚠ **Cosa NON so:** se la densita' di `per` e' la stessa del mio `centro()` *(`sum |psi_h|^2` per nodo)*: **il controllo di scala e' la distanza a `t = T0`** *(attesa `~0`; se no, e' un'altra densita', e lo dico)*.
+- **Non applicabili** *(riguardano il taglio o l'incollo in un vuoto diverso)*: **`LIB1-1`, `LIB1-F`, `L3`, `L3-F`, `LIB2`**: **si stampano «non applicabili», senza verdetto.** **`LIB1-U`** *(la fase globale commuta col tick)* **si fa su tutti e sette.**
+- **Il costo:** **per stato `3 x 100` tick** *(`R2` due volte, `R2-F`)* **`+ 2000`** *(`LIB1-C`)* **`+ 2`** *(`LIB1-U`)*: **`~16000` tick, `~30` minuti** *(`~0.1` s per tick, misurato con `L3`)*. **Il disco:** gli stati di `TBS` sono `~` qualche MB l'uno; `E:` ha `212` GB liberi, `C:` `22` GB.
+
+### 15.3 PROGETTAZIONE *(le letture fissate qui, PRIMA dei numeri)*
+
+- **Lo script nuovo `csv/solitone/libreria_stati.py`** *(non tocco `libreria.py`: i suoi referti restano rigirabili al loro commit)*: **per ciascuno dei sette tick:** `L0-S` *(lo stato della corsa ha gli `sha` del jsonl)*; **la scrittura** *(`E:\soliton_simulator\libreria\TBS_<tick>_completo.npz`: tutte le chiavi, `D`, `c_t`, il centro)*; **`R2-S`** *(il file riletto ridà gli `sha` del jsonl)*; **`R2`** *(due ripartenze dal file, `100` tick col ciclo della corsa: gli `sha` coincidono al bit)*; **`LIB1-0`** *(la ripartenza dal file ridà gli `sha` di `dopo_stato`)*; **`R2-F`** *(DEVE FALLIRE: `phi = c(t) F3` senza `D`)*; **`LIB1-U`/`LIB1-U-F`**; **`LIB1-C`** *(contro i centri registrati, `0.2` nodi, la soglia di Luca `00:32`)*. **Poi `LIB1-P` e `LIB1-P-F` sui sette.**
+- **L'indice** `doc/referti_l2/libreria_solitoni/indice.json`: **l'oggetto ritagliato resta, marcato «ritagliato, non validato (Luca 19:37)»; si aggiunge `stati_completi`** *(file, byte, sha1, tick, `sha` dello stato, centro, `c_t`, il campione registrato)*.
+- ### **COSA MI FA FERMARE:** **un DEVE che fallisce** *(`R2`, `LIB1-0`, `LIB1-P`, `LIB1-U`, `LIB1-C`, o un DEVE FALLIRE che passa)*: **committo lo stato e il fallimento, FERMO.** **In particolare `LIB1-0` sui sei tick nuovi**: se fallisce, la premessa «le chiavi di `z["st"]` bastano» e' sbagliata, e c'e' uno stato fuori da `st`.
+
+### 15.4 ⭐ IL TAGLIO RIMANDATO AI CLUSTER: **IL CONTROLLO SULLE GRANDEZZE MEDIE, SCRITTO ADESSO** *(Luca `19:37` (3), prima di qualunque numero)*
+
+- **Il confronto:** **l'oggetto RITAGLIATO incollato contro l'ORIGINALE**, **e la DISPERSIONE fra l'originale e `2`-`3` bracci del caos** *(semi diversi, la perturbazione della stessa norma del pezzo tolto)*.
+- **Le grandezze** *(Luca)*: **il raggio `w`; la massa del cuore; il periodo e l'ampiezza del respiro; il tasso d'assorbimento al bordo.**
+- **Il criterio** *(Luca)*: **per ciascuna grandezza, `|X(ritagliato) - X(originale)|` entro la dispersione fra l'originale e i bracci del caos.**
+- ### ⚠ **I PUNTI CHE IL TESTO DI LUCA NON FISSA, e che vanno decisi PRIMA della corsa dei cluster** *(numeri e scelte: di Luca; le mie sono PROPOSTE, dichiarate)*:
+  - **(p1) la finestra delle medie:** **proposta:** **dopo la decorrelazione** *(da `T0 + 550` unita', dove la differenza caotica arriva all'ordine `1`: la sez. `8.1`)*, **per una durata che contenga almeno `5` periodi del respiro**;
+  - **(p2) «entro la dispersione»:** **proposta:** **`|X_rit - X_orig| <= max_i |X_caos_i - X_orig|`** *(il caso peggiore dei bracci del caos; con `3` semi)* ### **contro l'alternativa** **`<= 2 sigma`** *(con `3` semi la `sigma` e' mal stimata)*;
+  - **(p3) i semi:** **`3`** *(`1`, `2`, `3`)*, **e la distribuzione della perturbazione** *(su tutto il toro o solo fuori da `R_t`: entrambe gia' misurate; proposta: **solo fuori da `R_t`**, dove agisce il taglio)*;
+  - **(p4) il periodo e l'ampiezza del respiro:** **da quale serie** *(`w(t)` o la massa del cuore)* **e con quale stimatore** *(la frequenza dal picco della FFT, l'ampiezza dalla deviazione standard sulla finestra)*;
+  - **(p5) il tasso d'assorbimento:** **la pendenza di `M_ass(t)` sulla finestra.**
+- **Il DEVE FALLIRE, proposto:** **col `D` ritagliato** *(la via vecchia, `|D - D_t| / |D| = 3.5e-03` a `R_t 32`)* **almeno una grandezza fuori dalla dispersione.** ### ⚠ **Contro la propria premessa:** **non so se fallira'** *(sulle medie il `D` ritagliato potrebbe essere innocuo)*: **se passa, il DEVE FALLIRE non separa, e va detto.**
+- **Il criterio di chiusura di questa sezione:** **(p1)-(p5) decisi da Luca e scritti qui, prima che si costruisca il primo cluster.**
+
+### 15.5 TODO
+
+1. `libreria_stati.py`, l'INVENTARIO col blob; commit e push **prima** di girarlo.
+2. Il processo separato della libreria: `python csv/solitone/libreria_stati.py > doc/referti_l2/libreria_stati.txt`.
+3. Il referto, l'indice, la relazione, la MAPPA, l'esito qui *(15.6)*; commit e push.
+4. Poi il successivo in coda: **la cura del tetto di `Omega`** *(il task history `2026-11-07_cura_tetto_omega`)*.
