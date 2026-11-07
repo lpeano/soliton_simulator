@@ -24164,3 +24164,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`energia_pesata.ulp_del_tetto(grado_max)`** = `(gamma_p + gamma_q) / (1 - gamma_q)`, `p = d + 7`, `q = d + 8` *(`27.000000 u` a `d = 6`)*; **`controlla_tetto` con `grado_max` obbligatorio.** **La scala del punto fisso NON cambia.**
 - **`TT-0`:** i tre collaudi con `cs` acceso identici riga per riga; la suite `65/65` -> `66/66`, l'unica riga nuova e' `D2-T`. ### **Un mio errore preso dalla suite prima del commit:** **il collaudo nuovo non era nella mappa dei moduli** *(`P-MOD`)*: curato.
 - **Dopo:** `TT-D` *(IS3 oltre l'`assert`)* e `TT-F` *(la scala vecchia deve ALZARE)*, poi la voce chiusa.
+
+## 2026-11-07 sera -- LA CURA DEL TETTO DI `Omega` CHIUSA: `TT-D` e `TT-F` `3/3` [[TETTO-OMEGA-SENZA-ARROTONDAMENTO]]
+
+- **`TT-D`** *(`_tetto_tt_d.py` `860c0f75`)*: **IS3 arriva in fondo**; `204` chiamate, il massimo `3.745 u tetto_k` *(entro `27`)*. **`TT-F`:** la scala vecchia alza, `6.067e+15 u`. **La voce CHIUSA** *(`b1685fc7`)*.
+- ### ⚠ **IS3 arriva in fondo e due DEVE DELLA CARTA falliscono** *(il pezzo dopo in coda)*: **`IS3-15` `1.475e-08`** -- **lo stesso controllo e lo stesso scarto di `IS2-15`, gia' coperto dalla soglia derivata di Luca per IS2**; **`IS3-R` `2.768e-07` contro `1e-8`** -- **col confronto con «oggi», SENZA `CAMM-FASE-VUOTO`: si rilegge col confronto (b) che Luca ha chiesto.**
