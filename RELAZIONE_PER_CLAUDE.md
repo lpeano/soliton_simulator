@@ -24044,3 +24044,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Le finestre da `t 0`; `E + E_ass` della coppia da sola; `tau_int` con la finestra di Sokal** *(`c = 5`, lo standard, dichiarato)*; **`TF3` dall'alone; `P` fisso dall'inizio dell'allungamento; `C50-0` `W = 6000` fino alla prima stima.**
 - ### ⚠ **`ST-S` su `S162` a `10000` non puo' dare «stazionario» per costruzione** *(il primo arresto possibile a `16500`)*: **lo stampo cosi', non come fallimento; se Luca lo vuole come DEVE che passa, servono finestre piu' corte su quella corsa.**
+
+## 2026-11-07 — IL PUNTO FISSO DI `cs` COL SOLITONE: IL TASK HISTORY DELLA DIAGNOSI *(Luca `11:13`; [[PUNTO-FISSO-CS-SOLITONE]]; `doc/TASK_HISTORY/2026-11-07_punto_fisso_cs_solitone.md`)*
+
+- ### ⚠ **Il fallimento del `27/10` NON e' il caso di `TCS`:** **`lambda_c = 6.0`** *(`RAPPORTO 1`: `cs` nel vuoto `0.5`)*, **la forma `S1`, il vuoto uniforme, lo zero `0.5`** *(`csv/_torsione_del_vuoto.py` `0c60cc94`)*; **`TCS` e' (P), `Lambda_c = 34`, la partenza `BG`, `F3`.** **La diagnosi si fa sulle scene di oggi; il `27/10` rifatto come DEVE FALLIRE (`PF-F`).** **Una lettura mia in piu', scritta prima: (pf0) a `34` l'iterazione semplice converge.**
+- **Dentro ogni giro c'e' il punto fisso di `Omega`**, **e il controllo del tetto non ancora curato puo' alzare prima**: ### **la diagnosi DOPO la cura del tetto.** **`TB3` non ha stati: lo stato a `t 0` si ricostruisce; in piu' `TBS` a `1500`** *(il piu' vicino a `K`, dove `cs` si accenderebbe)*.
+- **D0** *(il nucleo cosi' com'e')*, **D1** *(dove, per anelli)*, **D2** *(la jacobiana a differenze finite, `h = sqrt(eps) max|cs|`: il raggio spettrale e il segno, la contrazione per blocchi)*, **D3** *(Anderson o il rilassamento con `beta` derivato da D2, e Newton-Krylov)*, **D4** *(`Lambda_c = 34 x 2^k`, `k = 10 .. 0`: sposta anche `cs` del vuoto, dichiarato)*; **`PF-V`, `PF-E`, `PF-U`, `PF-F`.**
