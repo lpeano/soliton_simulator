@@ -9,7 +9,7 @@
 | `DOCUMENTAZIONE` | `2` | 1 |
 | `DOCUMENTAZIONE` | `ENTRAMBE` | 9 |
 | `FISICA` | `1` | 343 |
-| `FISICA` | `2` | 179 |
+| `FISICA` | `2` | 180 |
 | `FISICA` | `ENTRAMBE` | 21 |
 | `INFRASTRUTTURA` | `1` | 39 |
 | `INFRASTRUTTURA` | `2` | 27 |
@@ -926,6 +926,7 @@
 | `TERMOSTATO-E-FRENO` | MISURA | FISICA | 1 | ### **SOSPESA** |  | il termostato frena piu' di quanto rifornisca: togliergli il freno, non la sorge |
 | `TERRA-BUCONERO` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 3 volte, MAI definito in un registro) [TERRA-BUCONERO] |
 | `TETTO-CAUSALE-TEMPO-COORDINATO` | DIFETTO | FISICA | 1 | ### **SOSPESA** | SI | il tetto causale usa c_s LOCALE ma DT COORDINATO: dove r e piccolo permette moti |
+| `TETTO-OMEGA-SENZA-ARROTONDAMENTO` | DIFETTO | FISICA | 2 | ### **AGENDA** |  | controlla_tetto confronta /Omega/ col tetto senza tolleranza di arrotondamento:  |
 | `TORS-SPINTA` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | la spinta repulsiva di torsione: legge DINAMICA dentro mitosi(), con tre numeri  |
 | `TORS-W8-AVVOLGIMENTO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | _w8 ha periodo 8pi ma l avvolgimento di dph e di 4pi: il ramo TORS_4PI inietta - |
 | `TORSIONE-DEL-VUOTO` | MISURA | FISICA | 2 | ### **AGENDA** |  | la torsione del vuoto: in energia massima sul bordo della buca, senza freno; in  |

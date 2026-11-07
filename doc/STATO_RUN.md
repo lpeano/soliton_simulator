@@ -3105,3 +3105,11 @@ dei suoi **due termini separatamente**, e la **sorgente per nodo**, col suo refe
 - **Che cosa blocca:** ### **ogni misura con `cs` acceso e la materia presente.**
 - **La cura:** ### **non scelta:** ### **lo schema del punto fisso e' una decisione di Luca** *(la docstring di `tick.cs_al_centro`: relazionare, non scegliere)*.
 - **Criterio di chiusura:** ### **la decisione di Luca sullo schema, e una corsa col solitone in cui il punto fisso converge, o la decisione che `cs` col solitone si fa in un altro modo.**
+
+## `[[TETTO-OMEGA-SENZA-ARROTONDAMENTO]]` — `energia_pesata.controlla_tetto` senza tolleranza di arrotondamento: un ulp ferma IS3 *(aperto il 2026-11-07)*
+
+- **Trovato da:** ### **la carta IS3** *(`csv/solitone/carta_statiche.py --cs-onde` `97e31152`, `doc/referti_l2/statica_cs_onde.txt`, `b9b9ce7f`)*.
+- **Che cosa succede:** ### **`tick.tick_con_cs` sul vuoto `F3` disturbato** *(`AMP 1e-7`, `Lambda_c = 34`)* **ALZA in `controlla_tetto` («Omega finale»): `max_k(|Omega_k| - tetto_k) = 2.220e-16 > 0`.** **Il tetto e `Omega` sono due catene di operazioni diverse:** **in aritmetica esatta `|Omega| <= tetto`, in virgola mobile no, dove la disuguaglianza e' quasi stretta.**
+- **Che cosa blocca:** ### **IS3, e `TCS`** *(ogni tick con `cs` acceso passa da `EP.applica`)*. **Le corse col solitone girano a forma spenta: non lo toccano.**
+- **La cura** *(decisione di Luca del `2026-11-07` `10:06`)*: **una tolleranza di arrotondamento DERIVATA sulla scala del tetto** *(`c u tetto_k`, `c` contato dalle due catene)*, **un commit del nucleo a se', la suite intera** *(il task history `2026-11-07_cura_tetto_omega`)*.
+- **Criterio di chiusura:** ### **il commit della cura con `TT-D`** *(l'eccesso misurato sotto la derivazione)*, **`TT-F`** *(il tetto sbagliato di `_tolleranza_omega.py` alza ancora)* **e la suite al bit.**
