@@ -1,0 +1,11 @@
+[TIMBRO] _l3_rilettura.py  sha1-BYTE 754ee89f  committato e pulito
+L3 RILETTA (Luca 17:55, il criterio 1: D intero / caos <= 2 a ogni tempo campionato) dal referto libreria_solitoni.txt; 7 tempi stampati per braccio
+  t        D intero    D ritagliato caos        intero/caos
+  15.0     7.377e-09   1.160e-07    2.262e-06   0.003
+  165.0    2.759e-08   7.760e-08    2.846e-06   0.010
+  315.0    8.961e-07   2.047e-06    2.194e-06   0.408
+  465.0    3.986e-05   2.901e-05    8.588e-05   0.464
+  615.0    1.313e-04   2.581e-05    8.505e-06   15.438   ### SOPRA 2
+  765.0    1.124e-05   9.642e-06    1.072e-04   0.105
+  915.0    5.517e-04   2.414e-04    3.283e-04   1.680
+ESITO: il rapporto massimo 15.438; tempi sopra 2: 1 su 7 -> ### FALLISCE
