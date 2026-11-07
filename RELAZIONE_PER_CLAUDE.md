@@ -23995,3 +23995,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-07 — `C35-pi` LANCIATA *(`doc/TASK_HISTORY/2026-11-06_coppia_corse.md` sez. `13`)*
 
 - **Lo stesso driver, lo stesso blob di `corsa_accensione.py`** *(`12744a43`, pulito)*; **la stima `~7.3` ore.** **Durante la corsa: solo scrittura** *(il task history della carta della coppia e il suo codice, in un file nuovo che la corsa non importa)*; **la carta gira fra due corse.**
+
+## 2026-11-07 — IL REFERTO DELLA COPPIA: LA CARTA, PRIMA DEL CODICE *(`doc/TASK_HISTORY/2026-11-07_referto_coppia_C35.md`)*
+
+- **Con `C35-pi` in corsa: solo scrittura.** **Le misure `A`, `B`, `C` e parte di `D`** di `2026-11-05`, coi DEVE `A0`, `A0-F`, `A-S`, `C0`, `C0-F` *(le soglie come proposte, decise da Luca)*; **`E` e `F` vogliono `C50-0` e `C35-pi`.**
+- **Tre premesse dal codice che cambiano la lettura:**
+  - ### **la simmetria di scambio NON e' esatta a `t 0`** *(la partenza `BG` non e' simmetrica per `R180`)*: **`A-S` si misura dal suo valore a `t 0`**;
+  - **il secondo solitone e' `roll(p0, 35)`, intero:** **il riferimento del solitone `2` e' `S162` traslato**, col bordo nel posto sbagliato; ### **un DEVE nuovo, `C-T`:** il tick commuta con la traslazione *(senza il bordo)*;
+  - **il bordo toglie piu' energia alla coppia** *(`E_ass` `2.656e+04` contro `5.841e+03`)*: **`E_int` anche nella forma `E + E_ass`.**
+- **Tre domande a Luca** *(q1 la soglia di «una forza», q2 `A-S` dal valore a `t 0`, q3 il riferimento del solitone `2`)*: **il codice si scrive comunque**, perche' le risposte cambiano come si legge, non cio' che si misura.
