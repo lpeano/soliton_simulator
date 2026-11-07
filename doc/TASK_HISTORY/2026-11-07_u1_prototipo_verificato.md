@@ -166,3 +166,32 @@
   5. **B': resta come confronto e basta?**
 - ### **LA MIA LETTURA** *(non una decisione)*: **A costa meno e non tocca niente di fatto; B e' l'idea piu' profonda** *(materia e vuoto dalla stessa origine)* **ma, com'e', e' acausale a `cs` acceso e aggiunge un punto fisso; (d3) e' l'unica variante di B che da' il limite comune per costruzione, ed e' A e B INSIEME.**
 - **Il calcolo in coda:** **E1** *(con L1, dopo T4)*; **E3 (b), (c), (f) dopo E1**; **(e) solo progetto**; **tutto prima di T6a.**
+
+## 9. LE DUE STRADE SI MISURANO TUTTE E DUE *(Luca `2026-11-07` `14:12`)*: **LE RISPOSTE, LA FASCIA PER `U`, E UN ERRORE MIO**
+
+- **Le decisioni:** **la strada B NON si abbandona** *(«mi piace di piu'»)*: **si misurano A e B, e Luca sceglie DEFINITIVAMENTE dopo i referti.** **(1) il «c» bersaglio e' `v_b`**; **(2) A: `kappa` nella DERIVA, (alfa), `kappa = pi/4`; lo scarto `-0.46%` a `0.15` si ACCETTA come effetto del reticolo** *(si misura e si scrive)*; **(3) B: il battito `pi + Omega_k / dtau` va bene PER LE MISURE**; **(4) se E1 conferma l'acausalita': (d2) e (d3), prima sulla carta poi in memoria; (d1), (d4) solo righe della tabella**; **(5) B' solo confronto.** ### **IL BORDO PER `U`:** **una fascia assorbente anche per il campo, la STESSA `sin^2` della materia** *(`g_max 0.03`, la stessa larghezza)*, **nel prototipo in `csv/`: una legge in piu', dichiarata.** **L'ordine:** **dopo le cure e T1, T3, T4, T5: S1, S2, S3, S4, S5; poi la scelta; poi T6a, T6b; poi gli allungamenti.**
+
+### 9.1 ⛔ **UN ERRORE MIO, nella (d3) di `38076358`** *(da correggere prima di S4)*
+
+- **Avevo scritto `w = (omega_vuoto x / pi)^2 s_a^2 l/l*`.** **Col leapfrog `c_U = sqrt(w / (s_a^2 sqrt 3)) s_a`** *(sez. `7.2`)*, **quella `w` da' `c_U = (omega_vuoto x / pi) s_a`**: **a `omega_vuoto = pi` `c_U = s / 4`**, ### **mentre `v_b = omega_vuoto x s = (pi/4) s`**: **NON coincidono -- il `/ pi` e' sbagliato.**
+- ### **LA FORMA GIUSTA: `w = (omega_vuoto x)^2 s_a^2 l / l*`**, **cioe' `c_U = omega_vuoto x s_a`**: **a `cs` spento** *(`omega_vuoto = pi`)* **e' ESATTAMENTE la strada A** *(`kappa = pi x = pi/4`)*; **a `cs` acceso luce e materia scalano tutte e due col battito**: ### **il limite comune per costruzione, `v_b = c_U` nodo per nodo** *(i segnali `0.762 v_b` sotto)*. **Luca l'aveva copiata dal mio testo: l'errore e' mio.**
+
+### 9.2 (d2) E (d3) SULLA CARTA *(S4, la parte scritta)*
+
+- ### **(d2) il battito `1/x = 4`:** **a `cs` SPENTO vuol dire `theta = 4 s`, cioe' ESATTAMENTE B'** *(la variante `theta = s/x`)*: ### **il braccio `0` al bit NON puo' passare** *(cambia il solitone, il vuoto e ogni corsa fatta)*. **(d2) e' quindi «B' con il battito che si somma a `cs` acceso»**: **`theta = (4 + Omega_k / dtau) dtau`?** *(una forma da scrivere: con `Omega` il battito supera di nuovo `4` e la causalita' si rompe di nuovo, `4 + 5.34 = 9.34`)* -- ### **oppure il battito normalizzato** *(`theta = 4 (pi + Omega_k / dtau) / pi dtau`: a `cs` spento `4 s`, a `cs` acceso `10.8 s`: piu' veloce ancora)*. ### **Sulla carta (d2) non da' il limite comune a `cs` acceso**, **a meno che anche la luce legga il battito** *(cioe' (d3))*.
+- ### **(d3) la luce legge anche lei il battito** *(la forma corretta, 9.1)*: **la materia `theta = omega_k dtau`, la luce `w_a = (omega_a x)^2 s_a^2 l / l*`**, **`omega_a` il battito sull'arco** *(la media dei due capi, come `s_a` e' la media armonica: da scegliere, dichiarato)*:
+  - **Gauss:** **non dipende da `w`** *(la sorgente e la spinta non passano da `w`)*: **resta esatta**;
+  - **l'energia:** **`K = somma w_a E^2 / 2` con il `w_a` DEL TICK**; ### **ma `w_a` cambia nel tempo con `omega`** *(lo stato)*: **un peso che dipende dal tempo NON conserva `K + V`** *(un oscillatore con la frequenza che cambia: l'invariante adiabatico e' `K / omega`, non `K`)*: ### **la conservazione dell'energia e' un PROBLEMA APERTO di (d3)**;
+  - **la causalita':** **`v_b = omega x s = c_U` nodo per nodo**, **per costruzione**;
+  - **la reversibilita':** **`omega_k` dipende dallo stato** *(il punto fisso di B)* **anche nella deriva**: **un secondo punto fisso, sulla luce.**
+
+### 9.3 S1: LA FASCIA ASSORBENTE PER `U` *(il progetto, scritto PRIMA del codice)*
+
+- ### **SU QUALE GRANDEZZA** *(la proposta)*: **SOLO su `E`, dopo il tick, come il bordo della materia** *(`E_a <- E_a (1 - g_a)`)*:
+  - **la gauge:** **`E` e' gauge-INVARIANTE, `A` no**: **smorzare `A` romperebbe la gauge nella fascia** *(una `A` di pura gauge decadrebbe e cambierebbe la fase della materia)*; **smorzare `E` no**;
+  - **la reversibilita' fuori dalla fascia:** **`g_a = 0` fuori: la moltiplicazione per `1.0` e' esatta** *(il tick fuori resta reversibile al bit)*; **dentro il passo e' dissipativo per costruzione** *(come la materia)*;
+  - **il significato fisico:** ### **`E <- E (1 - g)` e' una corrente OHMICA `J_ohm = g E / e` in uno strato conduttore**: **un assorbitore noto** *(lo strato resistivo)*, **non una legge inventata**;
+  - **le alternative scartate:** **`A` ed `E`** *(rompe la gauge)*; **l'attrito dentro il leapfrog** *(tocca il passo del campo anche fuori dal bordo del palindromo: piu' invasivo)*.
+- **`g_a`:** ### **la media dei due capi dell'arco della `g` per nodo di `bordo.g_estremita`** *(la stessa `sin^2`, `g_max 0.03`, `R_A`, `R_B`)*: **dichiarato.**
+- ### **GAUSS, LA FORMA ESATTA** *(scritta prima)*: **dopo lo smorzamento `div E' = div E - div(g . E)`**, **e la materia assorbita toglie `rho_ass` per nodo**: ### **`G_t = div E_t - e (rho_t + R_t - mean(rho_0)) + C_t`**, **`R_t` la carica assorbita CUMULATA per nodo** *(`somma` sui tick di `|psi|^2 g` per estremita' raccolto sul nodo)*, **`C_t = somma_{tau <= t} div(g . E_tau)`** *(il campo assorbito per nodo, cumulato; `E_tau` prima dello smorzamento)*: ### **`G_t = G_0` entro la stima** *(`N 6 eps max|E| / (e max rho)`, come T6a)*; **la media: `mean(rho + R)` e' costante** *(la materia tolta resta contata)*.
+- **LA PROVA** *(S1)*: **un pacchetto d'onda di `U`** *(il ramo del fotone, a `k` piccolo, al centro, senza materia)* **verso la fascia**: **la frazione d'energia che torna dentro `R_A` dopo il transito** *(la «riflessione»)* **CONTRO quella della materia nella stessa fascia** *(`bordo_riflessione.txt`: a `g_max 0.03` il pavimento `~9e-3`)*; ### **DEVE FALLIRE: senza la fascia l'onda torna indietro** *(la frazione `~1`)*; **Gauss col conto entro la stima; il DEVE FALLIRE di Gauss: la formula SENZA `C_t`** *(deve fallire dove la fascia lavora)*.
