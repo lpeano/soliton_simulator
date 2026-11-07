@@ -3,6 +3,7 @@ r"""**LA LIBRERIA DEI SOLITONI MATURI** *(Luca `2026-11-07` `00:32`; le decision
 `doc/TASK_HISTORY/2026-11-07_libreria_solitoni_cluster.md`)*
 
     python csv/solitone/libreria.py > doc/referti_l2/libreria_solitoni.txt
+    python csv/solitone/libreria.py --caos-locale > doc/referti_l2/libreria_caos_locale.txt   # (Luca 18:22: il braccio del caos solo fuori da R_t)
 
 ### **Luca `16:43`: il criterio QUADRATICO per `psi`, il vuoto `D` INTERO; L3 la fisica del taglio sul primo oggetto, con il braccio del caos (mio).** ### **Un solo processo, in ordine:** `LIB0` *(il ritaglio dello stato di `TBS` a `t 15000`, il tick `100000`, per `R_t` in `16 .. 40` a passi di `4`)*; **la scelta di `R_t`**
 *(Luca `10:06`: il piu' piccolo con la massa fuori, l'energia fuori e i due salti sotto `1e-6`; se nessuno: FERMO)*; **la costruzione** *(sette oggetti dagli stati di `TBS`
@@ -39,6 +40,8 @@ BLOCCO2 = 100.0                                   # ### 2.4: unita' di tempo
 N_R2 = 100                                        # ### R2: i tick dopo la rilettura (mio)
 TOLL_U = 1e-12                                    # ### LIB1-U (2.3)
 SEME_CAOS = 1                                     # ### il braccio del caos (Luca 16:43, sez. 8.1: MIO)
+SEME_CAOS_LOC = 2                                 # ### il braccio del caos LOCALIZZATO (Luca 18:22): il seme dichiarato
+MODO = sys.argv[1] if len(sys.argv) > 1 else ""
 DIR_E = os.path.join("E:" + os.sep, "soliton_simulator", "libreria")
 DIR_REPO = os.path.join(solitone.RADICE, "doc", "referti_l2", "libreria_solitoni")
 OK = [0, 0]
@@ -181,6 +184,53 @@ def main():
                 print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
                 return 2
             print("### R_t scelto col criterio QUADRATICO di Luca (16:43: la massa fuori, l'energia fuori e il salto di psi AL QUADRATO sotto %g; D INTERO): %d" % (SOGLIA, scelto))
+            if MODO == "--caos-locale":
+                # ### Luca 2026-11-07 18:22 (la via 1, «il confronto onesto»): il braccio del caos con la STESSA norma del pezzo tolto e la STESSA distribuzione: solo FUORI da R_t.
+                # ### L'originale si rigira con lui (le sue serie per regione non erano salvate: deterministico, LIB1-0 al bit; dichiarato). Tutte le righe stampate (ogni 100 tick).
+                esito("DEVE PASSARE: L0-S lo stato al tick %d riletto" % T_LIB0, carica(T_LIB0), "")
+                st0 = {k: st[k].copy() for k in chiavi}
+                psi_t, _Dt, _D, c, r = ritaglio(T_LIB0, scelto)
+                fuori_h = (r >= scelto)[nodo]
+                norma_pezzo = float(np.linalg.norm(st0["psi_h"] - psi_t))
+                rng = np.random.default_rng(SEME_CAOS_LOC)
+                xi = rng.standard_normal(st0["psi_h"].shape) + 1j * rng.standard_normal(st0["psi_h"].shape)
+                xi[~fuori_h] = 0.0
+                xi *= norma_pezzo / float(np.linalg.norm(xi))
+                print("### IL BRACCIO DEL CAOS LOCALIZZATO: la perturbazione casuale (seme %d) solo fuori da R_t %d (%d estremita' su %d), la norma = |psi - psi_t| = %.6e (relativa %.6e)"
+                      % (SEME_CAOS_LOC, scelto, int(fuori_h.sum()), len(fuori_h), norma_pezzo, norma_pezzo / float(np.linalg.norm(st0["psi_h"]))))
+                cc = [x for x in camp if x["t"] == T_LIB0]
+                c0o = centro()
+                _k, r0 = CP.anelli(m1, m2, c0o[0], c0o[1], L, float("inf"))
+                w0 = float(cc[0]["per"]["w"])
+                regioni = {"cuore": r0 < w0, "corona": (r0 >= w0) & (r0 < bor["R_A"]), "fascia": r0 >= bor["R_A"]}
+
+                def per_reg():
+                    co = LCO.conti_per_nodo(inc, mot, st, e_K, V.LAM_ZERO, par)
+                    return {nm: (math.fsum(co["M"][m].tolist()), math.fsum(co["tot"][m].tolist())) for nm, m in regioni.items()}
+
+                def corri(con_xi):
+                    for k in chiavi:
+                        st[k][...] = st0[k]
+                    if con_xi:
+                        st["psi_h"] += xi
+                    out = []
+                    for j, t in enumerate(range(T_LIB0 + 1, T_LIB0 + N_LIB2 + 1)):
+                        ciclo(t)
+                        if j % 100 == 99:
+                            out.append(per_reg())
+                    return out
+                so, sl = corri(False), corri(True)
+                Mtot = sum(v[0] for v in so[0].values())
+                Etot = abs(sum(v[1] for v in so[0].values()))
+                print("### L3, IL BRACCIO DEL CAOS LOCALIZZATO contro l'originale: |M_reg - M_reg(orig)| / M e |E_reg - E_reg(orig)| / |E|, ogni 100 tick, TUTTE le righe (w %.4f, R_A %g)" % (w0, bor["R_A"]))
+                print("  caos locale    il massimo (le stesse grandezze di libreria_solitoni.txt)")
+                for i, (x, y) in enumerate(zip(sl, so)):
+                    dM = [abs(x[rg][0] - y[rg][0]) / Mtot for rg in regioni]
+                    dE = [abs(x[rg][1] - y[rg][1]) / Etot for rg in regioni]
+                    print("    t %7.1f  M %s  E %s" % ((i + 1) * 100 * s, " ".join("%s %.3e" % (rg, dM[q]) for q, rg in enumerate(regioni)), " ".join("%.3e" % v for v in dE)))
+                print("=" * 130)
+                print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+                return 0 if not FALLITE else 1
             os.makedirs(DIR_E, exist_ok=True)
             os.makedirs(DIR_REPO, exist_ok=True)
             indice = {"corsa": CORSA, "R_t": scelto, "criterio": "Luca 16:43: il piu' piccolo R_t con M fuori, E fuori e il salto di psi al quadrato sotto %g; D intero" % SOGLIA,
