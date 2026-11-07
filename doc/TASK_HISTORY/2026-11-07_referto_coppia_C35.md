@@ -61,3 +61,23 @@
 - **`E-0`, il controllo positivo mio:** il libro ricalcolato sullo stato della coppia a `t 0` deve ridare `E` del campione. **Senza, `E[0]` calcolato nello stesso modo non avrebbe un aggancio.**
 - ### ⚠ **Una premessa nuova, per `C50-0`:** **non c'e' un singolo col bordo di `C50`** *(`R_A 55`; `S162` ha quello di `C35`)*: **la carta rifiuta `--corsa C50-0`.** **Il referto di `C50-0` vuole una decisione di Luca** *(un `S162` col bordo di `C50`, cioe' un'altra corsa, oppure `S162` col bordo sbagliato, dichiarato)*.
 - **Avanti:** **a `C35-pi` finita**, `D6` ripuntato e la cassetta, poi la carta su `C35-0`.
+
+## 5. IL MANDATO DI LUCA DEL `2026-11-07` `10:20`: **IL REFERTO DI `C35-0` SUBITO** *(un'ECCEZIONE DICHIARATA da Luca alla regola «un calcolo alla volta»: una carta di lettura sui dati gia' salvati, pochi minuti, mentre `C35-pi` gira)*; **`C35-pi` a corsa finita, come previsto.** **In piu': I DUE CENTRI DEL VUOTO DISTURBATO**
+
+- **Il mandato:** **i centri delle zone con `dLambda > 0` dentro l'ovale, per semipiano, accanto ai centri della materia, nel tempo.** ### **La lettura del guardiano, dalle mappe** *(di Luca, scritta qui PRIMA dei numeri)*: **i due «nuclei» del vuoto restano quasi fermi** *(da `+-17.5` a circa `+-15`)*, **la materia oscilla fra loro e il centro.**
+- ### **Le premesse dal codice:**
+  1. **«L'ovale» lo leggo come la zona SENZA assorbimento:** **`r < R_A`** dal centro del bordo, **con la stessa distanza del bordo** *(`campo.anelli`, esatta in indici, come `bordo.g_estremita`)*; **sulla mappa per indice un disco del reticolo triangolare appare un ovale.** ### **Un'interpretazione MIA, dichiarata.** **Il centro del bordo `c0` e' il punto medio della coppia** *(`F-B` `0`)*.
+  2. **`dLambda` e' quello che la carta gia' usa:** **`Lambda(t) - Lambda(t 0)` della stessa corsa** *(le mappe float16)*.
+  3. **Il centro di una zona:** **la media di `X`** *(lo scarto cartesiano dal punto medio, `toro.scarti`)* **pesata con `max(dLambda, 0)`**, sui nodi dell'ovale nel semipiano *(`x < 0` per il solitone `1`, `x >= 0` per il `2`: la stessa maschera di `centri_semipiani`)*. **Dentro l'ovale `|X| < 47.5 < L/2`, quindi la media non piega sul toro.**
+  4. **I centri della materia:** **quelli dei semipiani gia' calcolati per `d(t)`** *(`cA`, `cB`)*, **portati in `X` dal punto medio.**
+  5. ### **In piu', MIO, dichiarato:** **anche i centri delle zone con `dLambda < 0`** *(il vuoto svuotato, il cuore)*: **`dLambda > 0` e' l'anello gonfio attorno, e le due zone possono muoversi in modo diverso.** **E la stessa colonna per `S162`** *(il semipiano `x < 0`, dove sta il singolo)*: **cio' che il singolo fa da solo.**
+- ### **I DEVE** *(il metodo, su mappe sintetiche)*:
+  - **`A-V`** *(DEVE PASSARE)*: **una mappa sintetica con due punte di valore `1` ai nodi piu' vicini a `(-15, 0)` e `(+15, 0)`**: **i due centri del vuoto = le `X` di quei nodi, entro `1e-12`.**
+  - **`A-V-F`** *(DEVE FALLIRE)*: **la stessa con una terza punta FUORI dall'ovale** *(il nodo piu' vicino a `(-60, 0)`, `r > R_A`)*, ### **il centro calcolato SENZA la maschera dell'ovale = la punta dentro, entro `1e-12`**: **deve fallire, perche' senza la maschera la punta fuori lo sposta.** **E' il controllo che la maschera fa qualcosa.**
+- ### **Le letture** *(fissate qui, PRIMA dei numeri)*:
+  - **(v1)** **i nuclei del vuoto quasi fermi** *(il loro `x` cambia meno di quello della materia)*, **la materia fra loro e il centro**: **la lettura del guardiano confermata;**
+  - **(v2)** **i nuclei si muovono quanto la materia** *(seguono il solitone)*;
+  - **(v3)** **altro** *(i due segni di `dLambda` raccontano storie diverse, o un nucleo sparisce)*.
+  **Il criterio:** **nessuna soglia mia;** **si stampano le escursioni** *(il minimo e il massimo dell'`x` per blocco)*, **e la lettura si dichiara.**
+- ### **D6 e la cassetta:** **l'eccezione di Luca copre UNA carta di lettura;** **la cassetta e' un calcolo in piu', quindi la giro a `C35-pi` finita** *(prima del referto di `C35-pi`)*, **dichiarato.** **Il timbro di `_presidio` controlla comunque che il blob della carta sia quello committato.**
+- **I passi:** questa sezione, un commit; **il codice** *(i centri del vuoto, `A-V`, `A-V-F`, l'INVENTARIO)*, un commit; **la carta su `C35-0`**; **il referto** `doc/referti_l2/coppia_C35-0.txt`, la relazione, questa sezione con l'esito.
