@@ -23991,3 +23991,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`F1`** sulle `667` istantanee *(il peggiore `M 3.33e-09` e `2.44e-09`)*; **`F3` contro lo stato completo a `t 0`** `2.642e-08`; **`F-B`** `17.5000` per il singolo *(`d/2`)* e `0.0000` per la coppia, coi rovesci che falliscono *(`63.5`, `81.0`)*.
 - **Il centro del bordo nel file:** `98.8738 81.3625`, `R_A 47.5`, `g_max 0.03`, lo stesso per tutte e due.
 - **Gli `.npz` aggiunti a forza** *(il `*.npz` di `.gitignore`)*, come quelli di `TB3` e `TBS`. **Avanti: `C35-pi`.**
+
+## 2026-11-07 — `C35-pi` LANCIATA *(`doc/TASK_HISTORY/2026-11-06_coppia_corse.md` sez. `13`)*
+
+- **Lo stesso driver, lo stesso blob di `corsa_accensione.py`** *(`12744a43`, pulito)*; **la stima `~7.3` ore.** **Durante la corsa: solo scrittura** *(il task history della carta della coppia e il suo codice, in un file nuovo che la corsa non importa)*; **la carta gira fra due corse.**
