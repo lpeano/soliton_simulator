@@ -24039,3 +24039,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### ⛔ **Le mappe hanno `t` in TICK:** **la carta lo ha preso per tempo** *(i blocchi, la rampa, `FIN_AS`, `TAU`, `d''`, i profili)*: ### **`A-S` e' da rifare** *(la pendenza per tick contro `1 / TAU` per unita': in unita' giuste potrebbe fallire)*. ### ⛔ **La chiave `psi` degli stati e' nulla**: la fase va da `psi_h`.
 - **Leggibile con la riserva:** **i nuclei del vuoto quasi fermi** *(`v+` escursione `4.35` / `3.74` contro `14.48` / `14.16` della materia; da `+-17.5` a `~+-16.5`-`17.4`)*, **la materia fra loro e il centro** *(`d` fino a `6.83`, poi `~10`-`33`)*: ### **la lettura `v1`.** **`E_int` fino a `-1.47e+04`, con `E_ass` fra `-38` e `+31`.**
 - **La cura:** unita' e `psi_h` *(errori di codice)*; **`A-S-I` decide Luca** *(l'ipotesi di Nyquist da verificare)*.
+
+## 2026-11-07 — L'ARRESTO PER STAZIONARIETA': LE DECISIONI DI LUCA DELLE `10:50` *(il task history `2026-11-07_allungamenti_coppia_30000` sez. `5`)*
+
+- **Le finestre da `t 0`; `E + E_ass` della coppia da sola; `tau_int` con la finestra di Sokal** *(`c = 5`, lo standard, dichiarato)*; **`TF3` dall'alone; `P` fisso dall'inizio dell'allungamento; `C50-0` `W = 6000` fino alla prima stima.**
+- ### ⚠ **`ST-S` su `S162` a `10000` non puo' dare «stazionario» per costruzione** *(il primo arresto possibile a `16500`)*: **lo stampo cosi', non come fallimento; se Luca lo vuole come DEVE che passa, servono finestre piu' corte su quella corsa.**

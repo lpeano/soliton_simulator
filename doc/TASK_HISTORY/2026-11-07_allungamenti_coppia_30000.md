@@ -90,3 +90,16 @@
 6. **(q-s6) `C50-0`, che parte da `0`:** **il periodo non si stima prima di avere la serie**: **`W = 6000` fino alla prima stima** *(dopo il pezzo che arriva a `10000`)*, **poi `3 P`?**
 
 - ### **Il codice degli allungamenti** *(la sez. `3`, punto `3`)* **ASPETTA queste risposte:** **l'arresto entra nello stesso codice.** **Il resto della coda (A) non dipende da qui, e va avanti.**
+
+## 5. LE DECISIONI DI LUCA DEL `2026-11-07` `10:50` *(il FERMO della sez. `4.3` CHIUSO)*
+
+1. ### **(q-s1) Le finestre contate da `t 0`, dopo la rampa** *(`t >= 1000`)*.
+2. ### **(q-s2) (a): `E + E_ass` della coppia da sola** *(«per la stazionarieta' basta che smetta di cambiare; i termini del singolo e del vuoto sono costanti o stazionari a loro volta»)*. **L'ordine degli allungamenti resta: `C35-0`, `C35-pi`, `S162`, `C50-0`.**
+3. ### **(q-s3) Il tempo di autocorrelazione integrato, col taglio automatico standard** *(la finestra di Sokal)*, **non i tre blocchi.** **Come lo scrivo nel codice** *(dichiarato qui, prima)*: **`tau_int(M) = 1/2 + somma_{k=1..M} rho(k)`**, **`M` il piu' piccolo con `M >= c tau_int(M)`**, ### **`c = 5`** *(il valore dato da Sokal, e quello di `emcee`: e' un numero, ma lo standard, non scelto da me sui dati)*; **l'errore della media `sigma sqrt(2 tau_int / N)`**, **`rho` dalla serie della finestra con la media tolta**, **i campioni ogni `10` tick** *(il passo dei jsonl)* **o ogni `100`** *(le mappe)*.
+4. ### **(q-s4) Per `TF3`: il ritmo di emissione dalla pendenza dell'alone.**
+5. ### **(q-s5) Il periodo `P` stimato una volta all'inizio dell'allungamento, poi fisso.**
+6. ### **(q-s6) `C50-0`: `W = 6000` fino alla prima stima di `P`** *(dopo il pezzo che arriva a `10000`)*, **poi `W = 3 P`.**
+- **Il resto come proposto:** **`ST-S` su `S162`, `TB3`, `TBS`** *(«devono risultare stazionari»)*, **`ST-F` su `TF3 + TF3C`** *(non stazionario l'intervallo con la partenza)*; **la lettura «stazionario da `t X` nella finestra osservata», mai «finito».**
+- ### ⚠ **Una nota onesta, da dire PRIMA del codice:** **per `S162` da `0` a `10000` lo `ST-S` NON PUO' dare «stazionario»** *(con `W = 6000` il primo arresto possibile e' a `16500`: la tabella della sez. `4.1`, premessa `5`)*. **Luca lo vuole «stazionario»:** ### **su `S162` a `10000` lo `ST-S` stampera' «non stazionario entro `10000`» PER COSTRUZIONE** *(e lo scrivero' accanto, non come fallimento)*; **su `TB3` e `TBS`** *(fino a `30000`)* **si puo'.** **Se Luca lo vuole come DEVE che passa su `S162`, servono finestre piu' corte su quella corsa: una sua decisione.**
+- ### ⚠ **E una dal referto di `C35-0`** *(sez. `6` del task history della coppia)*: **le mappe hanno `t` in TICK**: **il codice dell'arresto userà `t * s`** *(lo stesso errore non due volte)*.
+- **Avanti:** **il codice degli allungamenti con l'arresto** *(a `C35-pi` finita: `corsa_accensione.py` e' nel suo percorso; un file nuovo per l'arresto si puo' scrivere prima)*, **i DEVE, la cassetta, poi le corse.**
