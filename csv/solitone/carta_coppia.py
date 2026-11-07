@@ -6,7 +6,7 @@ il task history `doc/TASK_HISTORY/2026-11-07_referto_coppia_C35.md`)*
 ### **Solo lettura** delle mappe e degli stati su `E:` e dei jsonl nel repo, di `<corsa>` e del suo singolo di riferimento *(`RIF`: `S162` per `C35`)*; ### **il calcolo:**
 `E[0]` del vuoto `c(t) F3` su `L 162` a ogni campione, e **due tick** *(`C-T`)* da uno stato di `S162`.
 ### **I DEVE:** `R0` *(il singolo della coppia = il riferimento)*; `A0`, `A0-F` *(i due metodi sulla coppia sintetica, entro `TOLL_A0` nodi; l'asse spostato di `SPOST_A0F`)*;
-`A-S-I` *(`R180` due volte = l'identita')*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU`)*; `C0`, `C0-F` *(il difetto di
+`A-V`, `A-V-F` *(i centri del vuoto disturbato: due punte esatte; senza la maschera dell'ovale una punta fuori sposta il centro)*; `A-S-I` *(`R180` due volte = l'identita')*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU`)*; `C0`, `C0-F` *(il difetto di
 sovrapposizione sulla coppia sintetica, e con lo spostamento sbagliato di `1` nodo)*; `C-T`, `C-T-F` *(il tick commuta con la traslazione di `d`, entro `n eps`)*; `E-0` *(il libro ricalcolato a `t 0` = il campione, il controllo positivo di `E[0]`)*; `FA0`
 *(la fase relativa a `t 0` = il segno della coppia, entro il limite delle code incrociate)*.
 """
@@ -211,6 +211,7 @@ def main(argv):
 
     # ------------------------------------------------------------------ d(t), la forza, il baricentro, l'angolo; il singolo da solo
     dS, dG, ang, bar, nonc, M1, M2 = [], [], [], [], 0, [], []
+    matA, matB = [], []                         # ### i centri della materia in X dal punto medio (sez. 5)
     xa = [0.0, 0.0, float(d), 0.0]
     for i in range(len(tm)):
         g = rhoC[i]
@@ -220,6 +221,8 @@ def main(argv):
         ang.append(math.degrees(math.atan2(D[1], D[0])))
         pA = TO.scarti(np.array([cA[0]]), np.array([cA[1]]), c0[0], c0[1], L)[0]
         bar.append(pA + 0.5 * D)
+        matA.append(pA)
+        matB.append(pA + D)
         a, b, ok = due_gobbe(g, np.fft.fft2(rhoS[i].reshape(L, L)), L, xa)
         nonc += 0 if ok else 1
         xa = [a[0], a[1], b[0], b[1]]
@@ -251,6 +254,60 @@ def main(argv):
     terzo = tm >= tm[-1] * 2.0 / 3.0
     print("  (q1, la proposta, nessun verdetto) l'ultimo terzo: d - %d dalle due gobbe %+.5f, dai semipiani %+.5f; 3 volte la deviazione di 2 dx del singolo %.5f"
           % (d, dG[terzo].mean() - d, dS[terzo].mean() - d, 3 * (2 * dxS[terzo]).std()))
+    print("-" * 130)
+
+    # ------------------------------------------------------------------ i centri del vuoto disturbato (Luca 2026-11-07 10:20; il task history sez. 5)
+    from solitone import campo as CP
+    _kk, rB = CP.anelli(m1, m2, c0[0], c0[1], L, float("inf"))
+    ovale = rB < float(bor["R_A"])                  # ### "l'ovale": la zona senza assorbimento, con la distanza del bordo (mio, dichiarato)
+    sA, sB = x < 0, x >= 0
+
+    def centri_vuoto(q, msk):
+        """### `(2, 2)`: i centri in `X` di `q >= 0` pesato, sui nodi di `msk`, per semipiano (`x < 0`, `x >= 0`)."""
+        out = np.full((2, 2), np.nan)
+        for j, semi in enumerate((sA, sB)):
+            w = q * (msk & semi)
+            sw = float(w.sum())
+            if sw > 0.0:
+                out[j] = (X * w[:, None]).sum(axis=0) / sw
+        return out
+    iA, iB, iF = (int(np.argmin(np.hypot(x - px, y))) for px in (-15.0, 15.0, -60.0))
+    assert ovale[iA] and ovale[iB] and not ovale[iF], "le punte di A-V: due dentro l'ovale, una fuori"
+    q = np.zeros(n)
+    q[iA] = q[iB] = 1.0
+    cv = centri_vuoto(q, ovale)
+    eV = float(max(np.max(np.abs(cv[0] - X[iA])), np.max(np.abs(cv[1] - X[iB]))))
+    esito("DEVE PASSARE: A-V due punte ai nodi piu' vicini a (-15, 0) e (+15, 0): i centri del vuoto = le loro X entro 1e-12", eV <= 1e-12, "%.3e" % eV)
+    q[iF] = 1.0
+    cvF = centri_vuoto(q, np.ones(n, dtype=bool))
+    eVF = float(np.max(np.abs(cvF[0] - X[iA])))
+    esito("DEVE FALLIRE: A-V-F con una terza punta fuori dall'ovale (il nodo piu' vicino a (-60, 0)) e SENZA la maschera: il centro = la punta dentro entro 1e-12", not (eVF <= 1e-12), "%.3e" % eVF)
+    matA, matB = np.asarray(matA), np.asarray(matB)
+    dLC_, dLS_ = lamC - lamC[0], lamS - lamS[0]
+    vp, vn, vSp, vSn = (np.full((len(tm), 2, 2), np.nan) for _ in range(4))
+    for i in range(1, len(tm)):
+        vp[i] = centri_vuoto(np.maximum(dLC_[i], 0.0), ovale)
+        vn[i] = centri_vuoto(np.maximum(-dLC_[i], 0.0), ovale)
+        vSp[i] = centri_vuoto(np.maximum(dLS_[i], 0.0), ovale)
+        vSn[i] = centri_vuoto(np.maximum(-dLS_[i], 0.0), ovale)
+    dvp = np.hypot(*(vp[:, 1] - vp[:, 0]).T)
+    print("### i centri del vuoto disturbato (sez. 5): dentro l'ovale r < R_A = %g (%d nodi), per semipiano; x lungo l'asse dal punto medio, a blocchi di %g: la media e [il minimo, il massimo]" % (bor["R_A"], int(ovale.sum()), BLOCCO))
+    print("  mat = la materia (i centri dei semipiani di d(t)); v+ = dLambda > 0 (il mandato); v- = dLambda < 0 (mio); d v+ = la distanza dei due v+; %s = il singolo, semipiano x < 0 (mio)" % rif)
+    print("  %-17s %-27s %-27s %-27s %-27s %-8s %-9s %-9s" % ("il tempo", "mat x A", "mat x B", "v+ x A", "v+ x B", "d v+", "%s v+" % rif, "%s v-" % rif))
+    for b0 in np.arange(0.0, tm[-1] + 1e-9, BLOCCO):
+        k = (tm >= b0) & (tm < b0 + BLOCCO) & (tm > 0)
+        if not k.any():
+            continue
+
+        def col(a):
+            return "%+8.3f [%+8.3f %+8.3f]" % (np.mean(a), np.min(a), np.max(a))
+        print("  %7.0f .. %7.0f %s %s %s %s %8.3f %+9.3f %+9.3f   v- x A %+8.3f  v- x B %+8.3f"
+              % (b0, b0 + BLOCCO, col(matA[k, 0]), col(matB[k, 0]), col(vp[k, 0, 0]), col(vp[k, 1, 0]), dvp[k].mean(), vSp[k, 0, 0].mean(), vSn[k, 0, 0].mean(),
+                 vn[k, 0, 0].mean(), vn[k, 1, 0].mean()))
+    dopo = tm >= T_acc
+    print("  dopo la rampa (t >= %g), l'escursione di x (il massimo meno il minimo): mat A %.3f B %.3f; v+ A %.3f B %.3f; v- A %.3f B %.3f; %s v+ %.3f v- %.3f; nessuna soglia (le letture v1-v3)"
+          % (T_acc, np.ptp(matA[dopo, 0]), np.ptp(matB[dopo, 0]), np.ptp(vp[dopo, 0, 0]), np.ptp(vp[dopo, 1, 0]), np.ptp(vn[dopo, 0, 0]), np.ptp(vn[dopo, 1, 0]),
+             rif, np.ptp(vSp[dopo, 0, 0]), np.ptp(vSn[dopo, 0, 0])))
     print("-" * 130)
 
     # ------------------------------------------------------------------ A-S: l'asimmetria di scambio
