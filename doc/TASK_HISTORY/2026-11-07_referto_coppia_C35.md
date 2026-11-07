@@ -101,3 +101,9 @@
   2. **la fase relativa da `psi_h`** *(la maschera del semipiano per estremita': `np.repeat` della maschera per nodo sulle `6` estremita')*;
   3. **`A-S-I`:** **la verifica dell'ipotesi di Nyquist** *(il residuo con la componente di Nyquist tolta)*; **se e' quella, la rotazione si fa in modo esatto** *(tolto il modo di Nyquist prima, dichiarato)*, **oppure la soglia diventa derivata** *(il peso del modo di Nyquist nel campo)*: ### **la scelta e' di Luca.**
 - **Criterio di chiusura:** **la decisione di Luca sul punto `3`; poi la cura, un commit, e la carta rifatta su `C35-0`.**
+
+## 7. LA CURA DEGLI ERRORI (1) E (2) *(`carta_coppia.py` `54459239`, committata, NON girata)*: **IL TEMPO IN UNITA' DI TEMPO, LA FASE DA `psi_h`**
+
+- **(1)** **`tm, tmS = tm * s, tmS * s`** subito dopo il controllo che le mappe siano agli stessi `t`: **i blocchi, la rampa, `FIN_AS`, `TAU`, `d''` e i profili ora in unita' di tempo.**
+- **(2)** **`psi_h` invece di `psi`** per lo stato di riferimento e per gli stati della coppia; **le maschere dei semipiani per ESTREMITA'** *(il semipiano del nodo dell'estremita', `inc.nodo`)*; **la traslazione e' `rolla`, la stessa della partenza della coppia** *(`roll` di `(L, L, -1, ...)`)*.
+- ### **NESSUNA SOGLIA CAMBIATA.** **`A-S-I` resta con `1e-10`: decide Luca** *(la sez. `6`, punto `3`)*. **La carta si rigira su `C35-0` e poi su `C35-pi` DOPO la sua decisione.**

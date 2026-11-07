@@ -183,6 +183,8 @@ def main(argv):
     tm, rhoC, lamC, _cenC = carica_mappe(corsa)
     tmS, rhoS, lamS, cenS = carica_mappe(rif)
     assert np.array_equal(tm, tmS), "le mappe NON sono agli stessi t"
+    # ### la cura del 2026-11-07 (il task history sez. 6, l'errore (1)): il t delle mappe e' in TICK; tutta la carta lavora in unita' di tempo (t * s)
+    tm, tmS = tm * s, tmS * s
     n = L * L
     v = np.arange(n)
     m1, m2 = v // L, v % L
@@ -379,6 +381,7 @@ def main(argv):
         assert set(salvato) == set(stS), "le chiavi dello stato NON sono quelle della scena"
         assert all(vv.shape[0] % n == 0 for vv in salvato.values())
         phi_v = CA.vuoto_della_corsa(z, corsa)
+        nodo_h = np.asarray(z["inc"].nodo).copy()     # ### il nodo di ogni estremita' (la fase relativa da psi_h, la cura (2))
 
         def metti(st):
             for k, vv in st.items():
@@ -430,14 +433,14 @@ def main(argv):
     stC = [xx for rr in rrC for xx in (rr.get("stati") or [])]
     x0S = [xx for rr in rrS for xx in (rr.get("stati") or []) if xx["t"] == 0][0]
     with np.load(x0S["file"]) as dd_:
-        ref = dd_["psi"].copy()
-    refB = rolla(ref, d, L)
-    mA, mB = x < 0, x >= 0
+        ref = dd_["psi_h"].copy()                    # ### la cura (2): la chiave psi degli stati e' NULLA, lo stato vero e' psi_h per estremita'
+    refB = rolla(ref, d, L)                          # ### la stessa traslazione della partenza della coppia (roll di (L, L, -1, ...))
+    mA, mB = (x < 0)[nodo_h], (x >= 0)[nodo_h]       # ### il semipiano dell'estremita' e' quello del suo nodo
     print("### la fase relativa dei due: arg <roll(psi_S(0)) | psi_C>_B - arg <psi_S(0) | psi_C>_A sui semipiani, agli stati completi")
     fa = []
     for xx in stC:
         with np.load(xx["file"]) as dd_:
-            ps = dd_["psi"].copy()
+            ps = dd_["psi_h"].copy()
         pA = complex(np.sum(np.conj(ref[mA]) * ps[mA]))
         pB = complex(np.sum(np.conj(refB[mB]) * ps[mB]))
         f = math.atan2((pB / pA).imag, (pB / pA).real)
