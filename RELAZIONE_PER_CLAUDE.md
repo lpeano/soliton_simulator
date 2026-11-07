@@ -23978,3 +23978,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - ### **le attenzioni (1) e (3) sembravano scontrarsi** *(stati di tempi diversi in vuoti a fasi diverse, il cluster con un vuoto solo)*, **ma `omega = 3 pi / 20` torna alla stessa fase ogni `40` tick, e gli stati di `TBS` sono a multipli di `10000 = 250 x 40`: tutti alla stessa fase.** **Da verificare** *(`LIB1-P`, con la soglia derivata da `omega` misurato)*; **e per stati di altri tick, `LIB1-U`: la covarianza del tick per una fase globale comune.**
 - **Il costo di `LIB1` + `LIB2`: `~20`-`30` minuti, non «pochi»** *(`~12700` tick su `L 81`)*: **lo dico prima.**
 - ### **FERMO: le quattro domande della sez. `4`** *(la griglia, il criterio di `R_t`, il fattore di `LIB1-1`, i cluster)*.
+
+## 2026-11-07 — LA CORSA `C35-0` FINITA: `7` PEZZI, `7.33` ORE; I JSONL NEL REPO; IL REFERTO VUOLE UNA CARTA NUOVA *(`doc/TASK_HISTORY/2026-11-06_coppia_corse.md` sez. `12`)*
+
+- **`C0` breve passa** *(`3.968e-14`)*; **`26372` s in tutto, `3962` s per pezzo** *(`S162`: `4536`)*.
+- **Assorbite alla fine** *(relative a `M0`, `V0`, `E0`)*: **`M 1.002e-02`, `V 1.016e-01`, `E 2.705e-03`** *(`S162`: `4.339e-03`, `2.016e-02`, `1.253e-03`)*: **la coppia cede al bordo piu' del singolo**, **senza lettura** finche' non c'e' il referto.
+- ### ⚠ **`f_liscia`, `w` e l'alone del log NON parlano della coppia:** sono le misure del singolo attorno al centro periodico della densita' totale, **cioe' vicino al punto medio**. **`w` oscilla fra `12` e `19`: non lo leggo come un `d(t)`.**
+- **Il referto di `C35-0`:** **la carta della coppia** *(le misure `A`..`G` e i DEVE di `2026-11-05`)* **non esiste**: **la scrivo durante `C35-pi`**, e la giro fra due corse. **Adesso le mappe leggere** *(`S162`, poi `C35-0`)*, **poi `C35-pi`.**
