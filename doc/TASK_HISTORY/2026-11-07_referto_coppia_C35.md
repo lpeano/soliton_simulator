@@ -137,3 +137,9 @@
 - ### **La forma dell'involucro** *(ovale o no)*: **NON e' misurata da questa carta** *(nessuna misura della forma: da aggiungere, `carta_forma` sul singolo)*. **Lo dico invece di stimarla.**
 - ### **LA LETTURA, NON MIA MA DA SCRIVERE COME FATTO MISURATO** *(con la riserva di `A-S`)*: **in fase i due si avvicinano fino a `~13` e oscillano; in opposizione si allontanano di `~2` nodi in `10000` unita', la fase relativa resta `pi`, e la massa si sbilancia fra i due** *(`5%`)*. **Le letture di Luca sono sue.**
 - **Le mappe di `C35-pi` per il video NON sono fatte:** **`carta_campo --corsa C35-pi` alza `KeyError: 'C35-pi'`** *(le tabelle `PARTI` e `INDICI` della carta conoscono solo `C35-0`)*: **un errore mio, la cura e' un commit a se'** *(`doc/referti_l2/campo_C35-pi.txt` col traceback)*. **L'indice delle mappe di `C35-pi` e' fatto** *(`mappe_indice_C35-pi.txt`)*.
+
+## 10. LA DECISIONE DI LUCA DEL `2026-11-07` `17:55` SU `A-S` *(il FERMO della sez. `9` CHIUSO)*
+
+- ### **(3) `A-S` PASSA se la crescita del `log` dell'asimmetria non supera la crescita piu' rapida del caos gia' misurata, `1/25` per unita' di tempo** *(`D0R`)*, **invece di `1/TAU = 1/35`.** **DICHIARATO: la soglia fissata DOPO i numeri, ancorata al caos misurato PRIMA** *(`D0R`, `D5`)*. **La finestra resta `FIN_AS = 105`.** **Nel referto:** **«la simmetria della coppia si rompe alla velocita' del caos, a partire dall'asimmetria iniziale (`2.4e-04`), e non piu' in fretta».**
+- **Il codice:** **`TAU_CAOS = 25`** *(il limite di `A-S`; `TAU` resta per la finestra)*; **le due carte rigirate** *(i referti ufficiali)*.
+- **K3, la cura di `carta_campo`:** **`C35-pi` in `PARTI` e `INDICI`**; **il controllo: la carta rigirata su `C35-0` ridà AL BIT i file di prima** *(lo `sha1` di `mappe_leggere.npz` e `profili.npz` di `6ddd1bd3`)*; **poi `C35-pi`.**
