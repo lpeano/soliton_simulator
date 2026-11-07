@@ -24124,3 +24124,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`A-S-I` senza Nyquist `8.98e-16` / `1.08e-15`, `A-S-I-F` `1.237e-06`** *(il peso del modo fino a `3.3e-03`)*. ### **`A-S` FALLISCE: `2.975e-02` e `2.965e-02` contro `1/TAU = 2.857e-02`, alla prima finestra** *(un e-fold ogni `~33.6` unita': la scala del caos gia' misurato)*: **la soglia e' di Luca.**
 - ### **Il confronto:** **in fase `d` scende a `~13` e oscilla fra `~12` e `~32`; in opposizione `d` cresce piano fino a `~37`, la fase resta `pi`, la massa si sbilancia del `5%`.** **`E_int` alla fine `-1.47e+04` contro `-2.31e+03`; con `E_ass` `-37.8` contro `+3.3`.** **La forma dell'involucro non e' misurata.** **Le mappe di `C35-pi` per il video: un `KeyError` mio in `carta_campo`.**
+
+## 2026-11-07 — LA LIBRERIA: `R_t = 32`, IL PRIMO OGGETTO, `L3` FALLISCE PER IL CAOS (PREVISTO) *(task history `2026-11-07_libreria_solitoni_cluster` sez. `9`)*: **FERMO**
+
+- **`R2` al bit, `LIB1-0` al bit contro `dopo_stato`, `LIB1-U`, `LIB1-1`, `LIB1-C`, `LIB1-F` passano.** ### **`LIB1-P` fallisce per un errore MIO di soglia** *(`omega t` arrotonda a `1.67e-11`, la soglia `1e-14`; le fasi uguali entro `3.3e-12`)*.
+- ### **`L3`:** **col `D` intero il taglio parte a `~7e-09`, col `D` ritagliato `23` volte piu' in alto nella fascia; poi tutti e tre i bracci** *(compreso il caos)* **crescono allo stesso ritmo e a `t ~500` si confondono**: **il taglio e' innocuo quanto una perturbazione qualunque; il DEVE scritto non puo' passare con nessun taglio.** **`LIB2`: l'incollato assorbe `0.17` meno nel primo blocco: la massa tagliata.** **Due domande a Luca.**
