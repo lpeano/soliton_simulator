@@ -1,0 +1,15 @@
+[TIMBRO] _tetto_tt_m.py  sha1-BYTE 454712c5  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE cecd2c90  committato e pulito
+### IS3, cs SULLE ONDE DEL VUOTO (Luca 19:41-20:00): il tick tick_con_cs (cs dinamico e CAMM-FASE-VUOTO insieme) contro il tick di oggi, linearizzati attorno a F3; Lambda del vuoto 6.000000000000000, s 0.15 -> Lambda_c 34.000000000000000; nel vuoto cs 0.14999999999999999
+  il tick di oggi: omega 4.71238898038472354e-01 per tick, il residuo 3.401e-15
+  DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{+i omega} F3| / |F3| entro 1e-12                 PASSA   omega_cs 1.27234502470386501e+00 per tick, il residuo 1.512e-15; i giri del punto fisso [1]
+  IS3-0 (stampato): |tick_cs F3 - tick F3| / |F3| 7.799e-01; omega_cs - omega +8.011e-01
+==================================================================================================================================
+TT-M: 16 chiamate di controlla_tetto; u = eps/2 = 1.110e-16; l'assert ALZA: il TETTO di `Omega` NON e' un tetto (Omega finale): max_k(|Omega_k| - tetto_k) = 2.220e-16 > 0. ### La scala della tolleranza dev'essere un tetto PER COSTRUZION
+  il massimo su tutte le chiamate di (|Omega_k| - tetto_k) / (u tetto_k): 2.497; le chiamate con eccesso > 0: 1
+  #0 Omega di partenza: eccesso 0.000e+00 al nodo 0 (tetto_k 8.011061e-01, il tetto massimo 8.011061e-01), in u tetto_k 0.000; nodi sopra 0
+  #1 Omega finale: eccesso 0.000e+00 al nodo 0 (tetto_k 8.011061e-01, il tetto massimo 8.011061e-01), in u tetto_k 0.000; nodi sopra 0
+  #2 Omega di partenza: eccesso 0.000e+00 al nodo 0 (tetto_k 8.011061e-01, il tetto massimo 8.011061e-01), in u tetto_k 0.000; nodi sopra 0
+  #15 Omega finale: eccesso 2.220e-16 al nodo 6481 (tetto_k 8.011061e-01, il tetto massimo 8.011061e-01), in u tetto_k 2.497; nodi sopra 2
+     nrm_phi 6.00000000000000000e+00 pu_phi 0.000e+00 |per_nodo|/tn 1.00000000000000000; gli archi del nodo |arco|/ta ['1.00000000000000000', '1.00000000000000000', '1.00000000000000022', '1.00000000000000000', '1.00000000000000000', '1.00000000000000022'] cos(fase relativa) ['-1.000000', '-1.000000', '-1.000000', '-1.000000', '-1.000000', '-1.000000']; max|psi| 0.000e+00
+ESITO: misura, nessun verdetto (la lettura nel task history della cura)

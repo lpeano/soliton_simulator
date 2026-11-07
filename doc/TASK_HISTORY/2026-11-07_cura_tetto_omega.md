@@ -39,3 +39,37 @@
 3. **Numeri aggiunti:** **`c`, un INTERO CONTATO** *(le profondita' delle due catene)*, **non tarato.**
 4. **Verso EM-curvatura:** **sblocca `cs` sul vuoto** *(IS3, poi `TCS`)*, **il canale della gravita' nell'ipotesi del progetto.**
 5. **Emergente o imposto:** **non e' fisica: e' la verifica di un tetto vero per costruzione.**
+
+## 5. `TT-M`, L'ESITO *(`csv/solitone/_tetto_tt_m.py` `454712c5`, `doc/referti_l2/tetto_omega_tt_m.txt`; `energia_pesata.py` `cecd2c90`)*: **LA PREMESSA `3` CONFERMATA**
+
+- **`16` chiamate di `controlla_tetto`** sulla scena di IS3; **l'`assert` alza alla `16`-esima** *(«Omega finale», `2.220e-16`, come nel referto di IS3)*; **una sola chiamata con eccesso positivo**, su **`2` nodi**.
+- **Il nodo peggiore** *(`6481`)*: **`tetto_k = 8.011061e-01`** *(= il tetto massimo: il vuoto e' uniforme)*, ### **l'eccesso `2.497 u tetto_k`** *(`u = eps/2 = 1.110e-16`: un ulp del valore)*.
+- ### **Dove nasce:** **`nrm_phi = 6` esatto, `pu_phi = 0`** *(la somma di `F3` sul nodo e' nulla)*, **`|per_nodo| / tn = 1` esatto**, ### **e su TUTTI E SEI gli archi del nodo il coseno della fase relativa e' `-1`** *(fasi opposte)*: **il tetto e' ESATTO** *(la disuguaglianza triangolare e' un'uguaglianza)*. ### **L'eccesso nasce nel termine d'ARCO:** **`|arco| / ta = 1.00000000000000022`** su due dei sei archi *(un ulp sopra)*. **`psi = 0`.**
+- ### **Quindi:** **non e' l'errore `n.17`** *(una formula del tetto che non segue `omega()` darebbe un fattore, non un ulp)*: **e' arrotondamento dove il tetto e' esatto.**
+
+## 6. IL CONTO DI `c` *(scritto PRIMA del codice; la sez. `2`)*
+
+### 6.1 IL PRINCIPIO: **CONTANO SOLO LE OPERAZIONI DOPO LE FOGLIE COMUNI**
+
+- **`Omega` e il tetto partono da FOGLIE CALCOLATE UNA VOLTA SOLA** *(gli stessi bit)*: `nrm_psi`, `pu_psi`, `nrm_phi`, `pu_phi` *(tutte `>= 0`)*, `h`, `N`, `eps`; sugli archi `nrm_a`, `incro`, `S = |f0|^2 + |f1|^2` *(la stessa espressione, nello stesso ordine, in `arco_phi` e in `ta`)*, `dw`; **`csp` e' calcolato due volte con gli stessi ingressi e le stesse operazioni: stessi bit.**
+- ### **Sulle foglie comuni la disuguaglianza e' ESATTA in aritmetica reale:** **`|Omega_e| <= T_e`**, dove `Omega_e` e `T_e` sono le due espressioni valutate in aritmetica esatta SUI VALORI CALCOLATI delle foglie, e **`T_e` e' la somma dei valori assoluti dei termini di `Omega_e`**. Le due coppie non comuni: **`|Re(incro)| <= |incro|`** e **`|Re(conj f0 f1)| <= |f0| |f1|`**.
+- **L'errore in avanti** *(Higham, `|fl(E) - E| <= gamma_m sum |x_i|`, `gamma_m = m u / (1 - m u)`, `m` la PROFONDITA' della catena)*: **`|fl(Omega)| <= |Omega_e| + gamma_p T_e`**, **`fl(T) >= (1 - gamma_q) T_e`** ### **=> `|fl(Omega)| - fl(T) <= (gamma_p + gamma_q) / (1 - gamma_q) fl(T)`**: **un tetto PER COSTRUZIONE, non un numero scelto.**
+
+### 6.2 LE PROFONDITA', DAL CODICE *(`termini_di_h`, `omega`, `tetto_omega`; `d` il grado del nodo)*
+
+- **`p`, la catena di `Omega`:** **il ramo d'arco e' il piu' lungo**: `R = Re(conj f0 f1)` *(`2` operazioni: due prodotti e una somma, profondita' `2`)*, `S - 2R` *(`3`; `2R` e `/2` esatti)*, `arco_psi + arco_phi` *(`4`)*, `x (-pi)` *(`5`)*, `x dw` *(`6`)*, **la somma sul nodo con `np.add.at`** *(sequenziale, `d - 1` somme che arrotondano: la prima e' `0 + x`)*, `+ per_nodo` *(`d + 6`)*, `x csp` *(`d + 7`)*. **Il ramo di nodo:** `5` operazioni, piu' corto. ### **`p = d + 7`.**
+- **`q`, la catena del tetto:** **il ramo d'arco:** `|f0|`, `|f1|` *(`np.abs` di un complesso, `hypot`: ### **contato come `2`** -- un ulp, cioe' `<= 2u`, la garanzia della libm, **dichiarata**)*, `|f0| |f1|` *(`3`)*, `S + 2 |f0||f1|` *(`4`)*, `psi + phi` *(`5`)*, `x pi` *(`6`)*, `x |dw|` *(`7`)*, `np.add.at` *(`d - 1`)*, `+ tn` *(`d + 7`)*, `x |csp|` *(`d + 8`)*. ### **`q = d + 8`.**
+- ### **Con `d = 6`** *(i triangoli, ogni nodo)*: **`p = 13`, `q = 14`, `c = p + q = 27`**: **la tolleranza `(gamma_13 + gamma_14) / (1 - gamma_14) tetto_k ~ 27 u tetto_k ~ 3.0e-15 tetto_k`.** **`TT-M` misura `2.497 u tetto_k`: la derivazione la contiene di un fattore `~11`.**
+
+### 6.3 LA FORMA DELLA CURA, NEL CODICE
+
+- **`controlla_tetto(omega_k, tetto_k, grado_max, dove)`** *(un argomento in piu', OBBLIGATORIO: niente `default`, `P-R1`)*: **`eccesso = max_k(|Omega_k| - tetto_k - TOLL_k)`**, **`TOLL_k = (gamma_p + gamma_q) / (1 - gamma_q) tetto_k`**, **`p = grado_max + 7`, `q = grado_max + 8`** *(una funzione `ulp_del_tetto(grado_max)` che restituisce il fattore, per poterla collaudare)*. **`applica` passa `int(mot.inc.grado.max())`.** ### **`tetto_omega` e `entro_tolleranza` NON cambiano** *(la scala del punto fisso resta)*.
+- ### ⚠ **Due script vecchi chiamano `controlla_tetto` o lo sostituiscono** *(`csv/_diagnosi_d0.py`, `csv/_tolleranza_omega.py` `Q7`)*: **si rigirano al LORO commit** *(l'INVENTARIO)*; **`TT-F` copia la scala vecchia di `Q7`** *(dichiarato)* **con la firma nuova.**
+- ### **Il collaudo nel nucleo** *(se c'e' un collaudo di `controlla_tetto` lo estendo; se no, uno nuovo in `collauda.py`)*: **un eccesso di `1` ulp su un tetto esatto PASSA; un fattore `1 + 1e-12` ALZA.**
+
+### 6.4 I DEVE, FISSATI ADESSO *(la sez. `2`, coi numeri)*
+
+- **`TT-D`** *(DEVE PASSARE)*: **sulla scena di IS3 l'eccesso massimo `2.497 u tetto_k` `<=` la tolleranza** *(`~27 u`)*, ### **e IS3 gira OLTRE l'`assert`** *(fin dove arriva: se si ferma per un'ALTRA ragione, lo dico)*.
+- **`TT-F`** *(DEVE FALLIRE)*: **la scala vecchia di `7395cd9a`, messa APPOSTA, sulla scena di `C5` a `Lambda_c = 0.8`: il controllo curato ALZA**, **e l'eccesso stampato in unita' di `u tetto`** *(atteso `~10^15`: un fattore, non un ulp)*.
+- **`TT-0`** *(il braccio `0`)*: **la suite intera** *(`primo_ordine/collauda.py`)* **prima e dopo, le uscite IDENTICHE tolte le righe dei tempi**; **le corse vecchie al bit PER COSTRUZIONE** *(la premessa `4`: non e' un DEVE)*.
+- **Che cosa mi fa FERMARE:** **`TT-D` che non passa; `TT-F` che non alza; la suite che cambia una riga.**
