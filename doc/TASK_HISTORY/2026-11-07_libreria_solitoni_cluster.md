@@ -149,3 +149,21 @@
 ## 11. LA CORREZIONE DI LUCA DEL `2026-11-07` `18:02`: **L3 SUGLI INVILUPPI** *(l'errore `n.117` del guardiano: il criterio punto per punto; la premessa di `646c6620` era giusta)*
 
 - ### **IL CRITERIO 1 CORRETTO:** **l'INVILUPPO** *(il massimo corrente da `t 0` a `t`)* **col `D` intero non supera di piu' di un fattore `2` quello del braccio del caos, a ogni tempo campionato, per la massa e l'energia di ciascuna regione.** **DICHIARATO: fissato dopo i numeri, ancorato al braccio del caos.** **Lo script:** `_l3_rilettura.py` riscritto *(i valori, i due inviluppi, il rapporto, per ciascuna delle sei grandezze; e il `D` ritagliato senza verdetto)*. **Se supera `2`: FERMO.** **Se passa:** **gli altri sei oggetti** *(un modo della libreria che NON rigira i quattro bracci: K1, il braccio del caos solo del primo)*.
+
+## 12. L3 SUGLI INVILUPPI, L'ESITO *(`_l3_rilettura.py` `06c289bd`, `doc/referti_l2/libreria_l3_rilettura.txt`; Luca `18:02`-`18:13`)*: **PASSANO CINQUE GRANDEZZE SU SEI; FALLISCE L'ENERGIA DELLA FASCIA** -- **FERMO**
+
+- ### **Il campionamento e' RADO** *(Luca `18:13`, E1)*: **il referto di `9eda4121` stampa SETTE tempi per braccio** *(`t 15, 165, .., 915`: una riga ogni `10` campioni)*, **e i campioni ogni `100` tick NON sono salvati altrove**: **la rilettura vale su quei sette** *(non si rigira la libreria, Luca)*.
+- **I rapporti degli inviluppi `D intero / caos`, ai sette tempi:**
+
+| | `t 15` | `165` | `315` | `465` | `615` | `765` | `915` |
+|---|---|---|---|---|---|---|---|
+| **`M` cuore** | `0.000` | `0.008` | `0.325` | `0.468` | `1.534` | `1.294` | `1.667` |
+| **`M` corona** | `0.001` | `0.012` | `0.405` | `0.484` | `1.583` | `1.257` | `1.684` |
+| **`M` fascia** | `0.551` | `0.551` | `0.551` | `0.977` | `0.865` | `0.736` | `0.835` |
+| **`E` cuore** | `0.000` | `0.009` | `0.312` | `0.464` | `1.529` | `1.271` | `1.680` |
+| **`E` corona** | `0.000` | `0.012` | `0.389` | `0.478` | `1.574` | `1.219` | `1.695` |
+| ### **`E` fascia** | ### **`4.022`** | ### **`4.022`** | `0.251` | ### **`4.659`** | `0.996` | `0.780` | `0.780` |
+
+- **Il conto del guardiano** *(l'energia del cuore: `0.003, 0.01, 0.31, 0.46, 1.53, 1.22, 1.68`)*: **confermato dallo script entro la terza cifra** *(`1.271` contro `1.22` a `t 765`)*.
+- ### **FALLISCE L'ENERGIA DELLA FASCIA, a `t 15`, `165`, `465`** *(il massimo `4.659`)*: **col `D` intero `5.0e-09`, `5.0e-09`, `9.4e-08` contro il caos `1.3e-09`, `1.3e-09`, `2.0e-08`.** ### **Due cose da dire, senza scegliere:** **(1) il TAGLIO STA NELLA FASCIA** *(`R_t = 32 > R_A = 28`)*: **la differenza nella fascia all'inizio E' il taglio** *(il pezzo tolto e la risposta del vuoto)*, **e la perturbazione casuale del caos, sparsa su tutto il toro, ne mette meno li'**; **(2) i numeri sono a `1e-09`-`1e-07`, SOTTO la soglia del taglio di `LIB0`** *(`1e-6`)* **e sotto gli inviluppi delle altre regioni** *(`~3e-04` alla fine)*. **E il `D` ritagliato ha l'inviluppo dell'energia della fascia `1.16e-07` gia' a `t 15`** *(`23` volte quello col `D` intero)*.
+- ### **FERMO** *(Luca: se supera `2`, FERMO e riferire)*: **gli altri sei oggetti NON costruiti.** **Le cautele** *(E3)*: **il braccio del caos e' UNO, con UN seme** *(un secondo seme, `~11` minuti, darebbe la dispersione del caos stesso: un'opzione, decide Luca)*; **il campionamento e' rado** *(sette tempi)*.
