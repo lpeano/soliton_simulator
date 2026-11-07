@@ -24141,3 +24141,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-07 — I REFERTI UFFICIALI DELLA COPPIA, CHIUSI: `14/14` E `14/14`; LE MAPPE DI `C35-pi` *(task history `2026-11-07_referto_coppia_C35` sez. `11`)*
 
 - ### **`A-S` passa col limite del caos** *(`2.975e-02`, `2.965e-02` contro `1/25`)*: **la simmetria di scambio si rompe alla velocita' del caos, dall'asimmetria iniziale `2.4e-04`, e non piu' in fretta.** **In fase `d` fino a `~13` e oscillante, `E_int -1.47e+04`; in opposizione `d +2` nodi, la fase a `pi`, `E_int -2.31e+03`, lo sbilancio `5.2e-02`.** **`carta_campo` curata: su `C35-0` al bit, su `C35-pi` `9/9`** *(`67` mappe, `5655523` byte)*.
+
+## 2026-11-07 — IL BRACCIO DEL CAOS LOCALIZZATO *(Luca `18:22`; `doc/referti_l2/libreria_caos_locale.txt`, `libreria_l3_rilettura.txt`; task history della libreria sez. `14`)*: **FALLISCE IN PIU' PUNTI: FERMO**
+
+- **Cuore e corona `~4` a `t 465`, `~3` a `615`, poi `~0.95`; la fascia `24.7` a `t 15`** *(`5.0e-09` contro `2.0e-10`)*; **`inf` e `4.0` a `t 15` nel cuore sono rapporti fra zeri d'arrotondamento.** ### **Il taglio toglie un pezzo COERENTE del solitone, il caos aggiunge rumore bianco della stessa norma: non agiscono allo stesso modo**; **il caos localizzato cresce piu' piano perche' parte lontano dal cuore.** **Un solo seme per braccio, sette tempi.**

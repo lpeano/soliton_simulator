@@ -1,0 +1,94 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] libreria.py  sha1-BYTE ed67976c  committato e pulito
+==================================================================================================================================
+LA LIBRERIA DEI SOLITONI MATURI (Luca 00:32, 10:06, 16:01): dagli stati di TBS; R_t [16, 20, 24, 28, 32, 36, 40], la soglia 1e-06, LIB1-1 x 1.01, LIB1-C 0.2 nodi; il bordo c0 [40.5, 40.5] R_A 28 g_max 0.03; K 6667
+==================================================================================================================================
+  DEVE PASSARE: L0-S lo stato di TBS al tick 100000 ha gli sha del jsonl                                                 PASSA   E:\soliton_simulator\stati\TBS\TBS_stato_100000.npz
+### LIB0: il ritaglio dello stato al tick 100000 (t 15000): M 9.9504969590e+05, E 5.0332136176e+06
+  R_t   M fuori/M    E fuori      salto psi    salto D      |psi-psi_t|  |D-D_t|     
+  16    2.909171e-02 +3.158098e-02 3.626494e-01 6.592410e-01 1.705629e-01 5.599230e-01   salto psi^2 1.315146e-01
+  20    5.437378e-05 +6.905147e-05 1.352627e-01 7.862394e-01 7.373858e-03 2.484021e-01   salto psi^2 1.829599e-02
+  24    1.113102e-06 +6.637743e-07 1.339352e-03 4.826501e-02 1.055036e-03 1.643633e-02   salto psi^2 1.793864e-06
+  28    5.811779e-07 +3.577020e-07 1.268916e-03 2.382106e-02 7.623503e-04 7.298210e-03   salto psi^2 1.610148e-06
+  32    1.528518e-07 +9.457575e-08 9.167512e-04 8.124032e-03 3.909626e-04 3.501004e-03   salto psi^2 8.404328e-07
+  36    1.563732e-08 +9.316247e-09 3.650941e-04 4.272805e-03 1.250493e-04 1.122836e-03   salto psi^2 1.332937e-07
+  40    5.765328e-10 +3.107520e-10 1.140066e-04 1.081774e-03 2.401110e-05 2.315156e-04   salto psi^2 1.299750e-08
+### R_t scelto col criterio QUADRATICO di Luca (16:43: la massa fuori, l'energia fuori e il salto di psi AL QUADRATO sotto 1e-06; D INTERO): 32
+  DEVE PASSARE: L0-S lo stato al tick 100000 riletto                                                                     PASSA   
+### IL BRACCIO DEL CAOS LOCALIZZATO: la perturbazione casuale (seme 2) solo fuori da R_t 32 (17076 estremita' su 39366), la norma = |psi - psi_t| = 3.899937e-01 (relativa 3.909626e-04)
+### L3, IL BRACCIO DEL CAOS LOCALIZZATO contro l'originale: |M_reg - M_reg(orig)| / M e |E_reg - E_reg(orig)| / |E|, ogni 100 tick, TUTTE le righe (w 9.2928, R_A 28)
+  caos locale    il massimo (le stesse grandezze di libreria_solitoni.txt)
+    t    15.0  M cuore 0.000e+00 corona 1.097e-09 fascia 4.839e-09  E 9.252e-17 3.416e-10 2.042e-10
+    t    30.0  M cuore 3.339e-11 corona 1.510e-09 fascia 8.769e-10  E 3.715e-11 3.973e-10 3.818e-11
+    t    45.0  M cuore 1.038e-08 corona 9.117e-09 fascia 6.797e-10  E 1.048e-08 1.007e-08 8.860e-11
+    t    60.0  M cuore 5.440e-08 corona 5.410e-08 fascia 3.924e-10  E 5.624e-08 5.541e-08 3.750e-11
+    t    75.0  M cuore 2.596e-08 corona 2.694e-08 fascia 8.853e-10  E 2.602e-08 2.539e-08 5.115e-10
+    t    90.0  M cuore 9.880e-11 corona 1.737e-09 fascia 8.721e-10  E 1.023e-09 8.742e-11 4.875e-10
+    t   105.0  M cuore 1.244e-08 corona 1.460e-08 fascia 3.919e-10  E 1.159e-08 1.459e-08 3.314e-10
+    t   120.0  M cuore 5.421e-08 corona 5.186e-08 fascia 1.929e-10  E 5.560e-08 5.173e-08 2.944e-10
+    t   135.0  M cuore 4.260e-08 corona 4.517e-08 fascia 2.478e-10  E 4.453e-08 4.686e-08 5.203e-11
+    t   150.0  M cuore 9.598e-09 corona 6.641e-09 fascia 4.771e-10  E 9.478e-09 8.800e-09 2.835e-10
+    t   165.0  M cuore 3.836e-08 corona 3.560e-08 fascia 6.360e-11  E 4.107e-08 4.097e-08 3.478e-10
+    t   180.0  M cuore 6.953e-08 corona 7.197e-08 fascia 3.391e-10  E 6.397e-08 6.526e-08 4.893e-10
+    t   195.0  M cuore 4.074e-08 corona 3.819e-08 fascia 2.301e-11  E 4.582e-08 4.326e-08 3.170e-10
+    t   210.0  M cuore 1.290e-07 corona 1.264e-07 fascia 8.641e-12  E 1.349e-07 1.321e-07 1.342e-10
+    t   225.0  M cuore 1.541e-07 corona 1.518e-07 fascia 2.574e-10  E 1.574e-07 1.548e-07 5.874e-10
+    t   240.0  M cuore 1.640e-07 corona 1.657e-07 fascia 5.002e-10  E 1.603e-07 1.597e-07 1.131e-09
+    t   255.0  M cuore 3.326e-07 corona 3.340e-07 fascia 2.171e-10  E 3.520e-07 3.516e-07 1.000e-09
+    t   270.0  M cuore 9.435e-07 corona 9.457e-07 fascia 8.342e-10  E 9.618e-07 9.622e-07 1.042e-09
+    t   285.0  M cuore 4.021e-07 corona 3.977e-07 fascia 1.396e-09  E 4.112e-07 3.997e-07 9.773e-09
+    t   300.0  M cuore 5.998e-07 corona 6.046e-07 fascia 3.406e-10  E 5.825e-07 5.861e-07 2.344e-09
+    t   315.0  M cuore 5.770e-07 corona 5.813e-07 fascia 2.779e-10  E 6.166e-07 6.238e-07 2.109e-09
+    t   330.0  M cuore 1.170e-06 corona 1.175e-06 fascia 4.221e-10  E 1.221e-06 1.230e-06 4.608e-09
+    t   345.0  M cuore 6.535e-07 corona 6.566e-07 fascia 8.803e-10  E 7.570e-07 7.656e-07 3.710e-09
+    t   360.0  M cuore 1.287e-06 corona 1.289e-06 fascia 3.470e-10  E 1.317e-06 1.320e-06 2.476e-09
+    t   375.0  M cuore 1.350e-06 corona 1.352e-06 fascia 6.699e-10  E 1.349e-06 1.360e-06 6.430e-09
+    t   390.0  M cuore 3.154e-06 corona 3.151e-06 fascia 1.597e-09  E 3.152e-06 3.142e-06 2.337e-10
+    t   405.0  M cuore 1.088e-05 corona 1.090e-05 fascia 2.466e-09  E 1.122e-05 1.126e-05 2.449e-08
+    t   420.0  M cuore 7.075e-06 corona 7.073e-06 fascia 6.040e-09  E 7.467e-06 7.451e-06 2.216e-09
+    t   435.0  M cuore 6.952e-06 corona 6.923e-06 fascia 2.203e-08  E 6.914e-06 6.943e-06 2.495e-08
+    t   450.0  M cuore 5.059e-06 corona 5.013e-06 fascia 1.541e-08  E 5.239e-06 5.211e-06 1.784e-09
+    t   465.0  M cuore 9.458e-06 corona 9.525e-06 fascia 1.852e-08  E 9.221e-06 9.356e-06 1.070e-07
+    t   480.0  M cuore 4.537e-05 corona 4.546e-05 fascia 2.719e-08  E 4.638e-05 4.656e-05 1.287e-07
+    t   495.0  M cuore 2.814e-05 corona 2.825e-05 fascia 4.186e-08  E 2.955e-05 2.952e-05 8.027e-08
+    t   510.0  M cuore 5.435e-05 corona 5.448e-05 fascia 1.748e-08  E 5.569e-05 5.567e-05 1.821e-08
+    t   525.0  M cuore 6.378e-05 corona 6.393e-05 fascia 1.760e-08  E 6.464e-05 6.482e-05 8.028e-08
+    t   540.0  M cuore 3.915e-05 corona 3.925e-05 fascia 2.624e-08  E 3.972e-05 4.001e-05 7.892e-08
+    t   555.0  M cuore 2.084e-05 corona 2.076e-05 fascia 9.046e-09  E 2.147e-05 2.113e-05 1.181e-07
+    t   570.0  M cuore 3.937e-05 corona 3.945e-05 fascia 1.170e-08  E 3.910e-05 3.952e-05 1.060e-07
+    t   585.0  M cuore 2.462e-05 corona 2.469e-05 fascia 1.315e-08  E 2.482e-05 2.504e-05 9.258e-08
+    t   600.0  M cuore 4.297e-05 corona 4.298e-05 fascia 5.747e-08  E 4.482e-05 4.469e-05 1.757e-08
+    t   615.0  M cuore 4.021e-05 corona 4.017e-05 fascia 2.535e-08  E 4.113e-05 4.091e-05 1.273e-07
+    t   630.0  M cuore 2.301e-04 corona 2.301e-04 fascia 3.839e-10  E 2.346e-04 2.342e-04 2.024e-07
+    t   645.0  M cuore 1.839e-04 corona 1.839e-04 fascia 1.625e-08  E 1.877e-04 1.875e-04 1.470e-10
+    t   660.0  M cuore 1.581e-04 corona 1.581e-04 fascia 2.565e-08  E 1.621e-04 1.618e-04 6.799e-08
+    t   675.0  M cuore 1.259e-04 corona 1.259e-04 fascia 1.087e-08  E 1.301e-04 1.300e-04 1.460e-07
+    t   690.0  M cuore 3.327e-05 corona 3.330e-05 fascia 7.733e-09  E 3.411e-05 3.415e-05 1.602e-07
+    t   705.0  M cuore 1.452e-04 corona 1.452e-04 fascia 2.157e-08  E 1.505e-04 1.506e-04 2.390e-07
+    t   720.0  M cuore 9.225e-05 corona 9.230e-05 fascia 2.918e-08  E 9.537e-05 9.500e-05 2.661e-07
+    t   735.0  M cuore 1.269e-04 corona 1.270e-04 fascia 5.383e-08  E 1.296e-04 1.296e-04 2.280e-08
+    t   750.0  M cuore 7.615e-06 corona 7.462e-06 fascia 1.988e-07  E 9.955e-06 9.545e-06 3.382e-07
+    t   765.0  M cuore 1.315e-04 corona 1.313e-04 fascia 1.360e-08  E 1.354e-04 1.352e-04 2.720e-08
+    t   780.0  M cuore 5.931e-05 corona 5.955e-05 fascia 1.303e-08  E 5.989e-05 6.000e-05 9.504e-09
+    t   795.0  M cuore 6.189e-05 corona 6.210e-05 fascia 2.881e-08  E 6.430e-05 6.421e-05 6.745e-08
+    t   810.0  M cuore 8.841e-05 corona 8.866e-05 fascia 3.119e-08  E 8.853e-05 8.868e-05 3.336e-08
+    t   825.0  M cuore 3.234e-04 corona 3.237e-04 fascia 3.367e-08  E 3.333e-04 3.336e-04 2.071e-08
+    t   840.0  M cuore 1.982e-04 corona 1.986e-04 fascia 1.009e-08  E 2.048e-04 2.050e-04 3.014e-08
+    t   855.0  M cuore 2.772e-04 corona 2.775e-04 fascia 8.900e-09  E 2.823e-04 2.825e-04 1.006e-08
+    t   870.0  M cuore 7.627e-04 corona 7.632e-04 fascia 6.156e-08  E 7.807e-04 7.809e-04 2.584e-08
+    t   885.0  M cuore 7.485e-04 corona 7.489e-04 fascia 5.691e-08  E 7.696e-04 7.700e-04 1.085e-07
+    t   900.0  M cuore 7.263e-04 corona 7.267e-04 fascia 9.080e-09  E 7.408e-04 7.412e-04 1.063e-07
+    t   915.0  M cuore 5.719e-04 corona 5.724e-04 fascia 6.978e-08  E 5.860e-04 5.864e-04 1.634e-07
+    t   930.0  M cuore 3.816e-04 corona 3.824e-04 fascia 2.086e-07  E 3.870e-04 3.878e-04 2.049e-07
+    t   945.0  M cuore 6.350e-04 corona 6.359e-04 fascia 9.499e-08  E 6.523e-04 6.532e-04 1.386e-07
+    t   960.0  M cuore 7.593e-04 corona 7.601e-04 fascia 3.349e-08  E 7.820e-04 7.826e-04 2.011e-07
+    t   975.0  M cuore 7.848e-04 corona 7.854e-04 fascia 1.298e-07  E 8.010e-04 8.018e-04 6.348e-08
+    t   990.0  M cuore 9.481e-04 corona 9.489e-04 fascia 7.236e-08  E 9.699e-04 9.706e-04 1.315e-07
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []

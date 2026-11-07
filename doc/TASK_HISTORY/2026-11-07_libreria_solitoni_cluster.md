@@ -173,3 +173,25 @@
 - **La lettura di Luca:** **il taglio sta DENTRO la fascia; il braccio del caos su tutto il toro ne mette meno li': il confronto non e' equo** *(l'impronta del taglio a `t 15`, poi assorbita)*. ### **La via 1:** **si rigira SOLO il braccio del caos, con la STESSA norma del pezzo tolto e la STESSA distribuzione: solo fuori da `R_t`**; **il seme dichiarato; la stessa durata e gli stessi campioni.** **Il criterio NON cambia** *(gli inviluppi, il fattore `2`, le sei grandezze)*.
 - ### ⚠ **Una cosa dal codice, dichiarata:** **le differenze si misurano CONTRO L'ORIGINALE, e le serie per regione dell'originale NON erano salvate** *(il referto stampava sette righe)*: ### **l'originale si rigira insieme al braccio** *(e' deterministico: `LIB1-0` lo riproduce al bit)*: **il costo `~22` minuti, non `~11`.** **Il braccio vecchio resta accanto nella rilettura, dichiarato.** **Il nuovo referto stampa TUTTE le righe** *(ogni `100` tick)*; **la rilettura usa le sette `t` di `D intero`.** **Il seme: `2`** *(il primo braccio usava `1`)*.
 - **Il codice:** `libreria.py --caos-locale` *(`ed67976c`)*; `_l3_rilettura.py` *(`737e5969`: il riferimento localizzato se c'e', accanto il rapporto col vecchio)*.
+
+## 14. IL BRACCIO DEL CAOS LOCALIZZATO, L'ESITO *(`libreria.py --caos-locale` `ed67976c`, `doc/referti_l2/libreria_caos_locale.txt`; `_l3_rilettura.py` `737e5969`)*: **FALLISCE IN PIU' PUNTI, ANCHE PIU' DI PRIMA** -- **FERMO**
+
+- **Il braccio:** **il seme `2`, la perturbazione solo fuori da `R_t = 32`** *(`17076` estremita' su `39366`)*, **la norma `3.899937e-01`** *(relativa `3.909626e-04`, = il pezzo tolto)*; **l'originale rigirato con lui** *(`L0-S` al bit)*. **`2/2` controlli; `15` minuti.**
+- **I rapporti degli inviluppi `D intero / caos localizzato`** *(accanto quelli col braccio vecchio su tutto il toro)*:
+
+| | `t 15` | `165` | `315` | `465` | `615` | `765` | `915` |
+|---|---|---|---|---|---|---|---|
+| **`M` cuore** | ### `inf` | `0.587` | `1.553` | ### `4.165` | ### `3.208` | `0.981` | `0.932` |
+| **`M` corona** | `1.451` | `0.769` | `1.537` | ### `4.140` | ### `3.214` | `0.983` | `0.934` |
+| **`M` fascia** | `1.524` | `1.524` | `1.524` | `1.237` | ### `2.504` | ### `2.504` | `1.381` |
+| **`E` cuore** | ### `4.000` | `0.601` | `1.440` | ### `4.323` | ### `3.192` | `0.970` | `0.941` |
+| **`E` corona** | `0.091` | `0.673` | `1.410` | ### `4.244` | ### `3.195` | `0.967` | `0.940` |
+| **`E` fascia** | ### `24.721` | ### `14.514` | ### `2.394` | `0.876` | `0.736` | `1.255` | `0.978` |
+
+- ### **Cosa dicono i numeri, senza scegliere:**
+  1. **`t 15`, il cuore:** **`inf` e `4.000` sono rapporti fra ZERI d'arrotondamento** *(`D intero` `3.5e-16` contro `0.000`: la perturbazione fuori da `R_t` non ha ancora raggiunto il cuore in `100` tick)*: **non e' fisica.**
+  2. ### **la fascia all'inizio** *(`24.7`, `14.5`)*: **col `D` intero `5.0e-09`, col caos localizzato `2.0e-10`**: **il taglio toglie un pezzo COERENTE del solitone** *(la sua coda, con la sua fase)*, **il caos aggiunge rumore BIANCO della stessa norma, che si disperde**: **a parita' di norma non agiscono allo stesso modo.**
+  3. ### **`t 465`-`615`, cuore e corona `~3`-`4`:** **il caos localizzato cresce PIU' PIANO del braccio vecchio** *(parte lontano dal cuore)*, **e il `D` intero lo supera di `~4` volte per qualche centinaio di unita'; a `t 765` e `915` i due tornano allo stesso livello** *(`0.93`-`0.98`)*.
+  4. **col braccio vecchio** *(su tutto il toro)* **cuore e corona restavano sotto `1.7`.**
+  ### **Le cautele:** **un solo seme per braccio** *(la dispersione del caos stesso NON e' misurata: un secondo seme la darebbe)*; **sette tempi** *(il `D` intero ha solo le righe stampate; gli inviluppi sono sugli stessi sette tempi per i due bracci)*.
+- ### **FERMO** *(Luca: se supera `2` anche col braccio localizzato, FERMO e riferire)*: **gli altri sei oggetti NON costruiti.**
