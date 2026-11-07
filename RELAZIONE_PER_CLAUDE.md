@@ -24004,3 +24004,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il secondo solitone e' `roll(p0, 35)`, intero:** **il riferimento del solitone `2` e' `S162` traslato**, col bordo nel posto sbagliato; ### **un DEVE nuovo, `C-T`:** il tick commuta con la traslazione *(senza il bordo)*;
   - **il bordo toglie piu' energia alla coppia** *(`E_ass` `2.656e+04` contro `5.841e+03`)*: **`E_int` anche nella forma `E + E_ass`.**
 - **Tre domande a Luca** *(q1 la soglia di «una forza», q2 `A-S` dal valore a `t 0`, q3 il riferimento del solitone `2`)*: **il codice si scrive comunque**, perche' le risposte cambiano come si legge, non cio' che si misura.
+
+## 2026-11-07 — `carta_coppia.py` (NUOVA): IL REFERTO DELLA COPPIA, COMMITTATO PRIMA DI GIRARLO *(`doc/TASK_HISTORY/2026-11-07_referto_coppia_C35.md` sez. `4`)*
+
+- **Scritta con `C35-pi` in corsa** *(un file che la corsa non importa)*; **si gira a `C35-pi` finita**, dopo `D6` e la cassetta.
+- **Undici DEVE:** `R0`, `A0`, `A0-F`, `A-S-I`, `A-S`, `C0`, `C0-F`, `C-T`, `C-T-F`, `E-0`, `FA0`. **Due controlli miei in piu':** `E-0` *(il libro ricalcolato a `t 0` = il campione)* e `A-S-I`.
+- ### ⚠ **Per `C50-0` non c'e' un singolo col suo bordo:** **la carta rifiuta `C50-0`**, e **il suo referto vuole una decisione di Luca.**
