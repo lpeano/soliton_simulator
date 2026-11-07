@@ -1061,7 +1061,7 @@ TOLL_MUTO = 1e-15              # ### IS1-0: il modo muto
 TOLL_N = 1e-6                  # ### IS1-N: |T^H T - I| (il TOLL_G di VD-0)
 PASSI_S = (0.10, 0.15, 0.20)   # ### Luca 19:41: IS2 a tre s
 TOLL_E2 = 1e-12                # ### IS2-E: F3 autovettore del tick (il TOLL_C0)
-TOLL_W15 = 1e-15               # ### IS2-15: omega misurato a s 0.15 = quello di fase_F3.npz
+TOLL_W15 = 1e-15               # ### IS2-15: omega misurato a s 0.15 = quello di fase_F3.npz -- ### SUPERATA dal 2026-11-07 (Luca 10:06, la decisione 3): omega entro il residuo IS2-E dello stesso tick; resta per i referti vecchi
 TOLL_SEGUE = 1e-6              # ### IS2, la lettura del ramo piatto (l'annotazione 4.2 del task history, scritta prima della carta)
 
 
@@ -1299,6 +1299,12 @@ def brezzi():
     cm.__exit__(None, None, None)
 
 
+def _soglie_fasi(rif, pav):
+    """### **La soglia DERIVATA di ogni fase** *(Luca `2026-11-07` `10:06`, la decisione `3`; il task history `2026-11-06_brezzi_modi_vuoto`, sez. `10`, `13`)*:
+    ### **`2 pav` + la mezza unita' dell'ultima cifra STAMPATA del riferimento** *(scritto `%+.6e`: `0.5 x 10^(esponente - 6)`, letto dalla stringa)*. ### **DICHIARATA: cambiata DOPO aver visto i numeri.**"""
+    return np.array([2.0 * pav + 0.5 * 10.0 ** (int(x.lower().split("e")[1]) - 6) for x in rif])
+
+
 def _rif_fasi_vuoto(f_v):
     """### **Le `12` fasi per tick a `Gamma` della riga «oggi» di `statica_vuoto.txt`** *(l'ancoraggio di `IS2-15` e `IS3-15`)*: le stringhe, o `None`."""
     import re
@@ -1367,7 +1373,7 @@ def passo():
                 fs = np.sort(np.abs(np.angle(np.linalg.eigvals(T(np.array([kap, 0.0]))))))
                 wmax.append(float(fs[N_GOLD - 1]) / s)
             cf = np.polyfit(np.array(KAPPA_G), np.array(wmax), 2)
-            tab[s] = {"om": om, "fasi0": fasi0, "P": Pk, "D": Dk, "b": float(cf[0]), "v": float(cf[1]), "c0": float(cf[2])}
+            tab[s] = {"om": om, "res": res, "fasi0": fasi0, "P": Pk, "D": Dk, "b": float(cf[0]), "v": float(cf[1]), "c0": float(cf[2])}
             print("  s %.2f: le 12 fasi per tick a Gamma %s" % (s, " ".join("%+.6e" % x for x in fasi0)))
             print("  s %.2f: il ramo piatto P lungo A1, |fase| per tick da %.9e a %.9e, per unita' di tempo da %.9e a %.9e; theta = pi s %.9e per tick"
                   % (s, min(Pk), max(Pk), min(Pk) / s, max(Pk) / s, math.pi * s))
@@ -1379,9 +1385,15 @@ def passo():
         for k_, v in salvato.items():
             z["st"][k_][...] = v
     t15 = tab[0.15]
-    esito("DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro %g" % TOLL_W15, abs(t15["om"] - omega_npz) <= TOLL_W15, "%.3e" % abs(t15["om"] - omega_npz))
-    e15 = float(np.max(np.abs(t15["fasi0"] - np.array([float(x) for x in rif_fasi])))) if rif_fasi is not None and len(rif_fasi) == 12 else float("inf")
-    esito("DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (%.1e per tick; l'annotazione 4.4)" % pav, e15 <= pav, "lo scarto massimo %.3e" % e15)
+    # ### Luca 2026-11-07 10:06, la decisione 3: le soglie DERIVATE, DICHIARATE come cambiate DOPO aver visto i numeri (il task history, sez. 10 e 13)
+    esito("DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro il residuo IS2-E dello stesso tick (%.3e; la soglia derivata, Luca 10:06)" % t15["res"],
+          abs(t15["om"] - omega_npz) <= t15["res"], "%.3e" % abs(t15["om"] - omega_npz))
+    ok15 = rif_fasi is not None and len(rif_fasi) == 12
+    d15 = np.abs(t15["fasi0"] - np.array([float(x) for x in rif_fasi])) if ok15 else np.full(12, np.inf)
+    s15 = _soglie_fasi(rif_fasi, pav) if ok15 else np.zeros(12)
+    e15 = float(np.max(d15))
+    esito("DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt, ognuna entro 2 x %.1e + la mezza unita' della sua ultima cifra stampata (la soglia derivata, Luca 10:06)" % pav,
+          bool(np.all(d15 <= s15)), "lo scarto massimo %.3e; il rapporto scarto/soglia massimo %.3f" % (e15, float(np.max(d15 / s15)) if ok15 else float("inf")))
     pav_b = pav / 0.15 / KAPPA_G[-1] ** 2
     e_b = abs(t15["b"] - float(rif_b)) if rif_b is not None else float("inf")
     esito("DEVE PASSARE: IS2-15 a s 0.15 la b del Goldstone lungo A1 = statica_goldstone.txt al pavimento (%.1e = il pavimento in omega / |k|^2 piu' grande; 4.4)" % pav_b, e_b <= pav_b, "%+.6e, lo scarto %.3e" % (t15["b"], e_b))
@@ -1428,6 +1440,15 @@ def cs_onde():
     def tk(z_):
         AC.tick(z_, K + 1, K)
 
+    def tk_fase(z_):
+        """### **IS3 (b)** *(Luca `2026-11-07` `10:06`, la decisione `2`)*: ### **`CAMM-FASE-VUOTO` ACCESA** *(`mot.lambda_c = Lambda_c`, lo stesso di `tick_con_cs`)* **e `cs` FERMO al valore del vuoto** *(`mot.cs` della scena)*: **il tick di oggi. Il nucleo non si tocca.**"""
+        try:
+            z_["mot"].lambda_c = lc
+            AC.tick(z_, K + 1, K)
+        finally:
+            z_["mot"].lambda_c = lc_vero
+            assert np.all(z_["mot"].cs == cs_vero), "cs NON e' rimasto fermo nel tick con CAMM-FASE-VUOTO"
+
     def tk_cs(z_):
         try:
             giri.append(TK.tick_con_cs(z_["st"], z_["mot"], z_["par"], lc, ()))
@@ -1452,46 +1473,72 @@ def cs_onde():
           % (lam0, s, lc, lam0 / (lam0 + lc)))
     oms = {}
     phs = {}
-    for nome, fai in (("oggi", tk), ("cs", tk_cs)):
+    ress = {}
+    for nome, fai in (("oggi", tk), ("fase", tk_fase), ("cs", tk_cs)):
         ph = un_tick(fai)
         lam_ = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
         oms[nome] = math.atan2(lam_.imag, lam_.real)     # ### tick F3 = e^{+i omega} F3, la convenzione del repo (Luca 23:41)
         phs[nome] = ph
         res = float(np.linalg.norm(ph - np.exp(1j * oms[nome]) * F3) / np.linalg.norm(F3))
-        if nome == "cs":
+        ress[nome] = res
+        if nome == "fase":
+            esito("DEVE PASSARE: IS3-E-F F3 e' un autovettore del tick con CAMM-FASE-VUOTO e cs fisso: |tick F3 - e^{+i omega} F3| / |F3| entro %g" % TOLL_E2, res <= TOLL_E2,
+                  "omega_fase %.17e per tick, il residuo %.3e" % (oms[nome], res))
+        elif nome == "cs":
             esito("DEVE PASSARE: IS3-E F3 e' un autovettore del tick con cs: |tick F3 - e^{+i omega} F3| / |F3| entro %g" % TOLL_E2, res <= TOLL_E2, "omega_cs %.17e per tick, il residuo %.3e; i giri del punto fisso %s" % (oms[nome], res, giri[-1:]))
         else:
             print("  il tick di oggi: omega %.17e per tick, il residuo %.3e" % (oms[nome], res))
     print("  IS3-0 (stampato): |tick_cs F3 - tick F3| / |F3| %.3e; omega_cs - omega %+.3e" % (float(np.linalg.norm(phs["cs"] - phs["oggi"]) / np.linalg.norm(F3)), oms["cs"] - oms["oggi"]))
+    import flussi_parziali as FP
+    cs_v = FP.cs(lam, lc, np.empty(len(lam)))
+    esito("DEVE PASSARE: IS3-CS mot.cs della scena = FP.cs(Lambda del vuoto, Lambda_c) al bit (il tick a cs fisso e' il vuoto di tick_con_cs)", bool(np.all(cs_vero == cs_v)),
+          "%.17e contro %.17e" % (float(np.max(cs_vero)), float(np.max(cs_v))))
+    r0b = max(ress["cs"], ress["fase"])
+    e0b = float(np.linalg.norm(phs["cs"] - phs["fase"]) / np.linalg.norm(F3))
+    esito("DEVE PASSARE: IS3-0b sul vuoto uniforme cs dinamico = cs fisso: |tick_cs F3 - tick_fase F3| / |F3| e |omega_cs - omega_fase| entro il residuo dei due autovettori (%.3e)" % r0b,
+          e0b <= r0b and abs(oms["cs"] - oms["fase"]) <= r0b, "%.3e e %.3e" % (e0b, abs(oms["cs"] - oms["fase"])))
+    print("  IS3 (b): omega_fase - omega di oggi %+.3e per tick (la parte di CAMM-FASE-VUOTO); omega_cs - omega_fase %+.3e (la parte di cs)" % (oms["fase"] - oms["oggi"], oms["cs"] - oms["fase"]))
     T, _R = _T_vuoto(z, F3, K, np.exp(-1j * oms["oggi"]), dove, tk)
+    Tf, _Rf = _T_vuoto(z, F3, K, np.exp(-1j * oms["fase"]), dove, tk_fase)
     del giri[:]
     Tc, _Rc = _T_vuoto(z, F3, K, np.exp(-1j * oms["cs"]), dove, tk_cs)
     print("  i giri del punto fisso nei 13 tick della risposta con cs: da %s a %s" % (min(giri), max(giri)))
     assert np.all(mot.cs == cs_vero) and mot.lambda_c == lc_vero, "mot.cs e mot.lambda_c rimessi"
     f = _reali(F3[dove[0]])
     Jf = _reali(1j * F3[dove[0]])
-    T0, Tc0 = T(np.zeros(2)), Tc(np.zeros(2))
-    eR = float(np.linalg.norm(Tc0 @ Jf - T0 @ Jf) / np.linalg.norm(Jf))
-    eL = float(np.linalg.norm(Tc0 @ f - T0 @ f) / np.linalg.norm(f))
-    esito("DEVE PASSARE: IS3-R la rotazione globale J f non vede cs: |T_cs(0) J f - T(0) J f| / |J f| entro %.1e" % pav, eR <= pav, "%.3e" % eR)
-    esito("DEVE FALLIRE: IS3-L-F f (cambia Lambda, quindi cs): |T_cs(0) f - T(0) f| / |f| entro %.1e" % pav, not eL <= pav, "%.3e" % eL)
+    T0, Tc0, Tf0 = T(np.zeros(2)), Tc(np.zeros(2)), Tf(np.zeros(2))
+    # ### IS3 (b): il riferimento e' il tick con CAMM-FASE-VUOTO e cs fisso (Luca 10:06, la decisione 2); contro oggi, stampato accanto
+    eR = float(np.linalg.norm(Tc0 @ Jf - Tf0 @ Jf) / np.linalg.norm(Jf))
+    eL = float(np.linalg.norm(Tc0 @ f - Tf0 @ f) / np.linalg.norm(f))
+    print("  contro oggi (senza CAMM-FASE-VUOTO, stampato): |T_cs(0) J f - T(0) J f| / |J f| %.3e, |T_cs(0) f - T(0) f| / |f| %.3e"
+          % (float(np.linalg.norm(Tc0 @ Jf - T0 @ Jf) / np.linalg.norm(Jf)), float(np.linalg.norm(Tc0 @ f - T0 @ f) / np.linalg.norm(f))))
+    esito("DEVE PASSARE: IS3-R la rotazione globale J f non vede cs: |T_cs(0) J f - T_fase(0) J f| / |J f| entro %.1e" % pav, eR <= pav, "%.3e" % eR)
+    esito("DEVE FALLIRE: IS3-L-F f (cambia Lambda, quindi cs): |T_cs(0) f - T_fase(0) f| / |f| entro %.1e" % pav, not eL <= pav, "%.3e" % eL)
     print("  a Gamma le 12 fasi per tick, senza cs: %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(T0)))))
     rif_fasi = _rif_fasi_vuoto(os.path.join(DIR_REF, "statica_vuoto.txt"))
-    e15 = float(np.max(np.abs(np.sort(np.angle(np.linalg.eigvals(T0))) - np.array([float(x) for x in rif_fasi])))) if rif_fasi is not None and len(rif_fasi) == 12 else float("inf")
-    esito("DEVE PASSARE: IS3-15 l'ancoraggio (Luca 23:41): le 12 fasi a Gamma del T(k) di oggi = la riga oggi di statica_vuoto.txt al pavimento (%.1e per tick)" % pav, e15 <= pav, "lo scarto massimo %.3e" % e15)
+    # ### IS3-15 e' LO STESSO ancoraggio di IS2-15: la stessa soglia derivata (Luca 10:06, la decisione 3), DICHIARATO (il task history, sez. 13.1)
+    ok15 = rif_fasi is not None and len(rif_fasi) == 12
+    d15 = np.abs(np.sort(np.angle(np.linalg.eigvals(T0))) - np.array([float(x) for x in rif_fasi])) if ok15 else np.full(12, np.inf)
+    s15 = _soglie_fasi(rif_fasi, pav) if ok15 else np.zeros(12)
+    esito("DEVE PASSARE: IS3-15 l'ancoraggio (Luca 23:41): le 12 fasi a Gamma del T(k) di oggi = la riga oggi di statica_vuoto.txt, ognuna entro 2 x %.1e + la mezza unita' della sua ultima cifra stampata (la soglia di IS2-15)" % pav,
+          bool(np.all(d15 <= s15)), "lo scarto massimo %.3e; il rapporto scarto/soglia massimo %.3f" % (float(np.max(d15)), float(np.max(d15 / s15)) if ok15 else float("inf")))
+    print("  a Gamma le 12 fasi per tick, con CAMM-FASE-VUOTO e cs fisso: %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(Tf0)))))
     print("  a Gamma le 12 fasi per tick, con cs:   %s" % " ".join("%+.6e" % x for x in np.sort(np.angle(np.linalg.eigvals(Tc0)))))
     for nome_d, gradi in DIREZIONI_G:
         u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
-        gr, s0 = _rami(T, u, KAPPA_IS)
+        gr, s0 = _rami(Tf, u, KAPPA_IS)
         grc, s1 = _rami(Tc, u, KAPPA_IS)
+        gro, s2 = _rami(T, u, KAPPA_IS)
         print("-" * 130)
-        print("  %s: il salto piu' grande del seguimento senza cs %.3e, con cs %.3e" % (nome_d, s0, s1))
+        print("  %s (IS3 (b): senza cs = CAMM-FASE-VUOTO accesa e cs fisso; oggi accanto): il salto piu' grande del seguimento senza cs %.3e, con cs %.3e, oggi %.3e" % (nome_d, s0, s1, s2))
         for nome, quanti in GRUPPI_IS:
-            w0, w1 = [], []
+            w0, w1, wo = [], [], []
             for kap in KAPPA_IS:
-                assert gr[kap][nome][3] == quanti and grc[kap][nome][3] == quanti, (nome_d, nome, kap)
+                assert gr[kap][nome][3] == quanti and grc[kap][nome][3] == quanti and gro[kap][nome][3] == quanti, (nome_d, nome, kap)
                 w0.append(float(np.mean(np.abs(gr[kap][nome][0]))))
                 w1.append(float(np.mean(np.abs(grc[kap][nome][0]))))
+                wo.append(float(np.mean(np.abs(gro[kap][nome][0]))))
+            print("    %s %-2s |fase| media per unita' di tempo, oggi:     %s" % (nome_d, nome, " ".join("%.6e" % (x / s) for x in wo)))
             print("    %s %-2s |fase| media per unita' di tempo, senza cs: %s" % (nome_d, nome, " ".join("%.6e" % (x / s) for x in w0)))
             print("    %s %-2s |fase| media per unita' di tempo, con cs:   %s" % (nome_d, nome, " ".join("%.6e" % (x / s) for x in w1)))
             print("    %s %-2s la differenza (con - senza) per tick: %s; il massimo %.3e" % (nome_d, nome, " ".join("%+.2e" % (b - a) for a, b in zip(w0, w1)), max(abs(b - a) for a, b in zip(w0, w1))))
@@ -1500,7 +1547,7 @@ def cs_onde():
                 print("  ### %s P la pendenza (max - min della |fase| per tick lungo la griglia): senza cs %.3e, con cs %.3e; 10 x il pavimento %.1e" % (nome_d, p0_, p1_, 10 * pav))
                 print("  ### %s P la lettura scritta prima (Luca): %s" % (nome_d, "il ramo piatto ACQUISTA PENDENZA con cs: cs lo cura" if (p1_ > 10 * pav and p0_ <= 10 * pav)
                       else "RESTA PIATTO con cs: no" if p1_ <= 10 * pav else "non piatto gia' senza cs (%.3e): la lettura non si applica (dichiarato)" % p0_))
-        for nome_t, TT in (("senza cs", T), ("con cs", Tc)):
+        for nome_t, TT in (("oggi", T), ("senza cs", Tf), ("con cs", Tc)):
             wmax = []
             for kap in KAPPA_G:
                 fs = np.sort(np.abs(np.angle(np.linalg.eigvals(TT(kap * u)))))
