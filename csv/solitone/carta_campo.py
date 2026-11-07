@@ -34,9 +34,10 @@ PARTI = {"TM1000": (("TM1000", "TP1000"),),                      # ### la corsa:
          "TB3": (("TB3", "TB3"),),                               # ### Luca 2026-11-04 sera: TB3 ha le mappe e i campioni (nel repo) nella stessa corsa, nessuna gemella
          "TBS": (("TBS", "TBS"),),                              # ### Luca 2026-11-05 19:24: come TB3 (le mappe e i campioni nella stessa corsa)
          "S162": (("S162", "S162"),),                           # ### Luca 2026-11-06 23:38: come TB3, su L 162
-         "C35-0": (("C35-0", "C35-0"),)}                       # ### Luca 2026-11-06 23:38: come TB3, su L 162
+         "C35-0": (("C35-0", "C35-0"),),                       # ### Luca 2026-11-06 23:38: come TB3, su L 162
+         "C35-pi": (("C35-pi", "C35-pi"),)}                    # ### Luca 2026-11-07 16:25: come C35-0 (la cura del KeyError)
 INDICI = {"TM1000": ("mappe_indice.txt",), "TM3": ("mappe_indice_TM3.txt", "mappe_indice_TM3C.txt"), "TB3": ("mappe_indice_TB3.txt",), "TBS": ("mappe_indice_TBS.txt",),
-          "S162": ("mappe_indice_S162.txt",), "C35-0": ("mappe_indice_C35-0.txt",)}   # ### corsa_accensione.py --indice <nome>
+          "S162": ("mappe_indice_S162.txt",), "C35-0": ("mappe_indice_C35-0.txt",), "C35-pi": ("mappe_indice_C35-pi.txt",)}   # ### corsa_accensione.py --indice <nome>
 SOGLIE_RHO = (1e-3, 1e-4, 1e-5)   # ### Luca 18:26
 SOGLIA_L = 1e-3                # ### Luca 18:26
 TOLL = 1e-6                    # ### Luca 18:26 (come K2 di TM1000: float32)

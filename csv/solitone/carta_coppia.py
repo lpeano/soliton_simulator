@@ -6,7 +6,7 @@ il task history `doc/TASK_HISTORY/2026-11-07_referto_coppia_C35.md`)*
 ### **Solo lettura** delle mappe e degli stati su `E:` e dei jsonl nel repo, di `<corsa>` e del suo singolo di riferimento *(`RIF`: `S162` per `C35`)*; ### **il calcolo:**
 `E[0]` del vuoto `c(t) F3` su `L 162` a ogni campione, e **due tick** *(`C-T`)* da uno stato di `S162`.
 ### **I DEVE:** `R0` *(il singolo della coppia = il riferimento)*; `A0`, `A0-F` *(i due metodi sulla coppia sintetica, entro `TOLL_A0` nodi; l'asse spostato di `SPOST_A0F`)*;
-`A-V`, `A-V-F` *(i centri del vuoto disturbato: due punte esatte; senza la maschera dell'ovale una punta fuori sposta il centro)*; `A-S-I`, `A-S-I-F` *(`R180` due volte = l'identita' sul campo senza i modi di Nyquist; sul campo intero deve fallire)*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU`)*; `C0`, `C0-F` *(il difetto di
+`A-V`, `A-V-F` *(i centri del vuoto disturbato: due punte esatte; senza la maschera dell'ovale una punta fuori sposta il centro)*; `A-S-I`, `A-S-I-F` *(`R180` due volte = l'identita' sul campo senza i modi di Nyquist; sul campo intero deve fallire)*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU_CAOS`: la velocita' del caos, Luca `17:55`)*; `C0`, `C0-F` *(il difetto di
 sovrapposizione sulla coppia sintetica, e con lo spostamento sbagliato di `1` nodo)*; `C-T`, `C-T-F` *(il tick commuta con la traslazione di `d`, entro `n eps`)*; `E-0` *(il libro ricalcolato a `t 0` = il campione, il controllo positivo di `E[0]`)*; `FA0`
 *(la fase relativa a `t 0` = il segno della coppia, entro il limite delle code incrociate)*.
 """
@@ -26,6 +26,7 @@ RIF = {"C35-0": "S162", "C35-pi": "S162"}   # ### il singolo di riferimento (Luc
 TOLL_A0 = 0.05        # ### A0 (Luca 2026-11-05 15:28, come proposta): nodi
 SPOST_A0F = 5.0       # ### A0-F (come proposta): l'asse di separazione spostato di 5 nodi
 TAU = 35.0            # ### A-S (Luca 2026-11-05 15:28): un e-fold ogni tau
+TAU_CAOS = 25.0       # ### A-S, il limite (Luca 2026-11-07 17:55): la crescita piu' rapida del caos gia' misurata (D0R); fissato DOPO i numeri, ancorato a una misura fatta PRIMA (dichiarato)
 FIN_AS = 3.0 * TAU    # ### A-S: la finestra della pendenza (MIA, dichiarata: tre tau)
 TOLL_C0F = 1e-3       # ### C0-F (come proposta)
 BLOCCO = 500.0        # ### le tabelle a blocchi di 500 unita' (come carta_campo)
@@ -338,7 +339,7 @@ def main(argv):
     jm = int(np.argmax(pend))
     print("  l'asimmetria di scambio |rho - R180 rho| / |rho| attorno al punto medio: a t 0 %.4e (premessa 3: NON zero), alla fine %.4e; il massimo %.4e a t %.1f"
           % (asy[0], asy[-1], asy.max(), tm[int(np.argmax(asy))]))
-    esito("DEVE PASSARE: A-S la pendenza di log(asimmetria) su finestre di %g non supera 1/TAU = %.4e" % (FIN_AS, 1.0 / TAU), max(pend) <= 1.0 / TAU,
+    esito("DEVE PASSARE: A-S la pendenza di log(asimmetria) su finestre di %g non supera la crescita piu' rapida del caos, 1/TAU_CAOS = %.4e (Luca 17:55, D0R; dopo i numeri, dichiarato)" % (FIN_AS, 1.0 / TAU_CAOS), max(pend) <= 1.0 / TAU_CAOS,
           "il massimo %.4e alla finestra da t %.1f" % (max(pend), tm[jm]))
     for b0 in np.arange(0.0, tm[-1] + 1e-9, 2 * BLOCCO):
         k = (tm >= b0) & (tm < b0 + 2 * BLOCCO)
