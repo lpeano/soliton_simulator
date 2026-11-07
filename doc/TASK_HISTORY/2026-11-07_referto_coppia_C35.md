@@ -114,3 +114,26 @@
 - ### **Il perche', dal codice** *(la mia ipotesi della sez. `6`)*: **`r180` e' un'inversione esatta degli indici** *(`g[::-1, ::-1]` e un `roll`)* **seguita da uno spostamento FRAZIONARIO di `2 c` per trasformata**; **su `L = 162` pari, i modi a `k = L/2` sono REALI per un campo reale**, **e lo spostamento frazionario li rende complessi**: **`.real` butta la loro parte immaginaria** *(lo spostamento non e' piu' invertibile)*; ### **senza quei modi lo spettro resta coniugato-simmetrico e lo spostamento conserva la realta': `R180` due volte e' l'identita' all'arrotondamento** *(l'interpolazione a banda limitata esatta)*.
 - **Il codice** *(`carta_coppia.py`)*: **`senza_nyquist(g)`** *(la riga e la colonna `L/2` della trasformata a zero)*; **`A-S-I` sul campo senza Nyquist** *(DEVE PASSARE, entro `1e-10`)*; **`A-S-I-F` sul campo intero** *(DEVE FALLIRE: torna a `~1.2e-06`)*; **il peso `|g - g_N| / |g|`** *(stampato accanto all'asimmetria)*; ### **l'asimmetria di scambio misurata sul campo senza Nyquist** *(dichiarato)*.
 - **Poi, in sequenza:** **l'indice delle mappe di `C35-pi`; la carta su `C35-0`** *(il referto ufficiale, sostituisce il parziale)*; **la carta su `C35-pi`; il confronto; le mappe leggere di `C35-pi` per il video** *(`carta_campo --corsa C35-pi`)*. ### ⚠ **`D6` e la cassetta NON girate prima** *(il mandato: «subito, in sequenza»)*: **`carta_coppia` non e' nella cassetta; lo dichiaro.**
+
+## 9. I REFERTI UFFICIALI DI `C35-0` E `C35-pi` *(`carta_coppia.py` `255e2d02`; `doc/referti_l2/coppia_C35-0.txt`, `coppia_C35-pi.txt`; exit `1` tutti e due)*: **`13/14`; `A-S-I` CONFERMA NYQUIST; FALLISCE `A-S`** -- **FERMO su `A-S`**
+
+- ### **NYQUIST CONFERMATO** *(la lettura scritta prima)*: **`A-S-I` sul campo senza Nyquist `8.982e-16` (`C35-0`) e `1.078e-15` (`C35-pi`)**, **`A-S-I-F` sul campo intero `1.237e-06`** *(fallisce come deve)*. **Il peso del modo nel campo: a `t 0` `4.856e-06`, il massimo `3.316e-03` (`C35-0`) e `2.928e-03` (`C35-pi`)**, **accanto all'asimmetria a `t 0` `2.397e-04`.**
+- ### **FALLISCE `A-S`** *(la pendenza di `log` dell'asimmetria di scambio su finestre di `105` unita' sotto `1/TAU = 2.857e-02`, `TAU = 35` Luca `2026-11-05`)*: **il massimo `2.975e-02` (`C35-0`) e `2.965e-02` (`C35-pi`), tutti e due alla PRIMA finestra** *(`t 0 .. 105`)*: ### **`4%` sopra la soglia**; **un e-fold ogni `~33.6` unita' di tempo all'inizio** *(dall'asimmetria iniziale `2.4e-04`)*: **la stessa scala del caos gia' misurato** *(`D5`: `TBS` `~40`; `D0R` `~25`)*. **Non lo leggo: e' un DEVE fallito, la soglia e' di Luca.** **Il resto della corsa: l'asimmetria finisce a `1.03e-01` (`C35-0`, il massimo `4.16e-01`) e `1.04e-01` (`C35-pi`, il massimo `1.40e-01`).**
+- **Passano:** `R0`, `A0`, `A0-F`, `A-V`, `A-V-F`, `C0`, `C0-F`, `C-T` *(`1.346e-16`)*, `C-T-F`, `E-0` *(`0`)*, ### **`FA0`** *(la fase relativa a `t 0` = `0` e `pi`, `0.000e+00`)*.
+- ### **IL CONFRONTO, coi numeri delle carte** *(in unita' di tempo; da leggere con la riserva di `A-S`)*:
+
+| | `C35-0` *(in fase)* | `C35-pi` *(in opposizione)* |
+|---|---|---|
+| **`d` dai semipiani** | **da `35.0` a `~13` a `t 1500 .. 2000`, poi oscilla fra `~12` e `~32`** *(un ritmo di `~2000`-`2500`)* | ### **da `35.0` CRESCE piano: `36.0` a `2000`, `37.0` a `5000`, `36.9`-`37.4` alla fine** |
+| **l'ultimo terzo, `d - 35`** *(q1, nessun verdetto)* | **`-11.6`** *(semipiani)*, **`-12.1`** *(due gobbe)* | **`+2.17`**, **`+2.18`** |
+| **3 volte la deviazione di `2 dx` del singolo** | `0.698` | `0.698` |
+| **i nuclei del vuoto `v+`** *(l'escursione di `x` dopo la rampa)* | **`4.35` / `3.74`**, alla fine `~-16.4` / `+17.3` | **`1.40` / `1.14`**, alla fine `~-18.0` / `+17.8` |
+| **la materia** *(l'escursione)* | **`14.18` / `14.16`** | **`1.48` / `1.25`** |
+| **`E_int` per termini** *(l'ultimo blocco, `9500 .. 10000`)* | **`tot -1.472e+04`**, con `E_ass` `-37.8` | **`tot -2.308e+03`**, con `E_ass` `+3.30` |
+| **la fase relativa** *(agli stati)* | da `0` a `-0.20`, `+0.09` | **resta vicina a `pi`** *(`3.082`, `3.119`)* |
+| **`(M1 - M2) / M`** *(l'ultimo blocco)* | `+7.7e-03` | **`+5.2e-02`** *(cresce: `1e-05` -> `5e-02`)* |
+| **l'assorbito al bordo** *(dalle corse)* | **`M 1.002e-02`, `V 1.016e-01`, `E 2.705e-03`** | **`M 4.645e-03`, `V 4.198e-02`, `E 1.429e-03`** |
+
+- ### **La forma dell'involucro** *(ovale o no)*: **NON e' misurata da questa carta** *(nessuna misura della forma: da aggiungere, `carta_forma` sul singolo)*. **Lo dico invece di stimarla.**
+- ### **LA LETTURA, NON MIA MA DA SCRIVERE COME FATTO MISURATO** *(con la riserva di `A-S`)*: **in fase i due si avvicinano fino a `~13` e oscillano; in opposizione si allontanano di `~2` nodi in `10000` unita', la fase relativa resta `pi`, e la massa si sbilancia fra i due** *(`5%`)*. **Le letture di Luca sono sue.**
+- **Le mappe di `C35-pi` per il video NON sono fatte:** **`carta_campo --corsa C35-pi` alza `KeyError: 'C35-pi'`** *(le tabelle `PARTI` e `INDICI` della carta conoscono solo `C35-0`)*: **un errore mio, la cura e' un commit a se'** *(`doc/referti_l2/campo_C35-pi.txt` col traceback)*. **L'indice delle mappe di `C35-pi` e' fatto** *(`mappe_indice_C35-pi.txt`)*.

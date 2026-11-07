@@ -24119,3 +24119,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-07 — OGNI CORSA SALVA SEMPRE LO STATO COMPLETO: IL TASK HISTORY *(Luca `16:01`; `doc/TASK_HISTORY/2026-11-07_stato_completo.md`)*
 
 - **Cio' che c'e' gia':** **il file di ripresa, gli stati ai tempi di `STATI` con lo `sha` per chiave, `dopo_stato`** *(la prova di ripartenza della corsa)*. ### **Cio' che NON sta in `z["st"]`:** **gli accumulatori del bordo, `acc`, `giro`, `pst`** *(la corsa li porta nel jsonl uno per uno)* **e il campo `U(1)`**: **il registro li prende per costruzione.** **Ogni `1000` unita' di tempo, accanto agli `STATI`; R1, R2, R2-F** *(senza `phi_h` e senza gli accumulatori del bordo)*, **R3.** **`TM3` non ha stati su `E:`.**
+
+## 2026-11-07 — I REFERTI UFFICIALI DELLA COPPIA `C35-0` E `C35-pi` *(task history `2026-11-07_referto_coppia_C35` sez. `9`)*: **`13/14` CIASCUNO; NYQUIST CONFERMATO; FALLISCE `A-S`: FERMO**
+
+- **`A-S-I` senza Nyquist `8.98e-16` / `1.08e-15`, `A-S-I-F` `1.237e-06`** *(il peso del modo fino a `3.3e-03`)*. ### **`A-S` FALLISCE: `2.975e-02` e `2.965e-02` contro `1/TAU = 2.857e-02`, alla prima finestra** *(un e-fold ogni `~33.6` unita': la scala del caos gia' misurato)*: **la soglia e' di Luca.**
+- ### **Il confronto:** **in fase `d` scende a `~13` e oscilla fra `~12` e `~32`; in opposizione `d` cresce piano fino a `~37`, la fase resta `pi`, la massa si sbilancia del `5%`.** **`E_int` alla fine `-1.47e+04` contro `-2.31e+03`; con `E_ass` `-37.8` contro `+3.3`.** **La forma dell'involucro non e' misurata.** **Le mappe di `C35-pi` per il video: un `KeyError` mio in `carta_campo`.**

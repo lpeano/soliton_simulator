@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_campo.py", line 257, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_campo.py", line 85, in main
+    parti = PARTI[corsa]
+            ~~~~~^^^^^^^
+KeyError: 'C35-pi'

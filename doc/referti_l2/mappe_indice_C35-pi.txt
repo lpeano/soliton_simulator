@@ -1,0 +1,32 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA C35-pi (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_000000.npz  15967866 byte  sha1 e7e8211afe5dd544e92eca8d3b102b4914b6384d  tempo 0.00 .. 1500.00  101 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_010000.npz  17723749 byte  sha1 096e7a849b27152b88da70c00a78eed0c7a3bbbb  tempo 1515.00 .. 3000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_020000.npz  17581373 byte  sha1 ed772f0c1425620aba0c62239a12c65d82948d48  tempo 3015.00 .. 4500.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_030000.npz  17474451 byte  sha1 91764e996cb69a357d2a61897edd260979eecd7c  tempo 4515.00 .. 6000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_040000.npz  17416816 byte  sha1 a1d27aa21edfb0db7fb34adf1c97cdd9b148142f  tempo 6015.00 .. 7500.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_050000.npz  17352991 byte  sha1 53b5a4268a90b56d51873ad5d0892a5a4817a031  tempo 7515.00 .. 9000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-pi\C35-pi_060000.npz  11414744 byte  sha1 bf6b55ce15eaf367491f81b6468066858252a6c7  tempo 9015.00 .. 9990.00  66 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_000000.npz  9029646 byte  sha1 7b51f549ff469e37a4fbf876ed948ce9ede69ec3  tempo 0.00 (tick 0)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_010000.npz  9029646 byte  sha1 02b98cb01dd6551cd0551cc36096dd9d3dc38d07  tempo 1500.00 (tick 10000)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_020000.npz  9029646 byte  sha1 fa0101523663918e1afe3b9b6f4963cdd28c6b13  tempo 3000.00 (tick 20000)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_030000.npz  9029646 byte  sha1 c73c9ba12068a5ff06214b98c295f168be1d3d82  tempo 4500.00 (tick 30000)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_040000.npz  9029646 byte  sha1 ecd85ed9324c655c1d644ed28741994ea55a9033  tempo 6000.00 (tick 40000)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_050000.npz  9029646 byte  sha1 1b3c19e62f8cde74b5518b8551d4e965d5f1391b  tempo 7500.00 (tick 50000)
+  E:\soliton_simulator\stati\C35-pi\C35-pi_stato_060000.npz  9029646 byte  sha1 d5fa30ac5bd7a681f1d14ac82d0f4f1d256d2d12  tempo 9000.00 (tick 60000)
+### I PEZZI DEI CAMPIONI (jsonl interi; nel repo la versione rada in --)
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_000000.jsonl  2196281 byte  sha1 7c2b9c338087944b8fa2c52fa79d7714183f5020  tempo 0.00 .. 1500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_010000.jsonl  2233151 byte  sha1 83bf1615c23eab7e091674a5e4f17d763b4d9156  tempo 1500.00 .. 3000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_020000.jsonl  2231684 byte  sha1 6bc811de90912c8e668be588cbe3284745ca0615  tempo 3000.00 .. 4500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_030000.jsonl  2230463 byte  sha1 1d63f5e57d7e1ee08f1eca163d8c058424cb368b  tempo 4500.00 .. 6000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_040000.jsonl  2228750 byte  sha1 8eb1e56999f3662256cc6e5527d9c8bc701f97da  tempo 6000.00 .. 7500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_050000.jsonl  2229699 byte  sha1 415bc4f9c687128b9037105745a710edd24b22f0  tempo 7500.00 .. 9000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-pi_060000.jsonl  1485495 byte  sha1 0ab1e0f493066b0b5e0739419518857f728ff45a  tempo 9000.00 .. 10000.05
