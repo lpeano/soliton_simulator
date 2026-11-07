@@ -6,7 +6,7 @@ il task history `doc/TASK_HISTORY/2026-11-07_referto_coppia_C35.md`)*
 ### **Solo lettura** delle mappe e degli stati su `E:` e dei jsonl nel repo, di `<corsa>` e del suo singolo di riferimento *(`RIF`: `S162` per `C35`)*; ### **il calcolo:**
 `E[0]` del vuoto `c(t) F3` su `L 162` a ogni campione, e **due tick** *(`C-T`)* da uno stato di `S162`.
 ### **I DEVE:** `R0` *(il singolo della coppia = il riferimento)*; `A0`, `A0-F` *(i due metodi sulla coppia sintetica, entro `TOLL_A0` nodi; l'asse spostato di `SPOST_A0F`)*;
-`A-V`, `A-V-F` *(i centri del vuoto disturbato: due punte esatte; senza la maschera dell'ovale una punta fuori sposta il centro)*; `A-S-I` *(`R180` due volte = l'identita')*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU`)*; `C0`, `C0-F` *(il difetto di
+`A-V`, `A-V-F` *(i centri del vuoto disturbato: due punte esatte; senza la maschera dell'ovale una punta fuori sposta il centro)*; `A-S-I`, `A-S-I-F` *(`R180` due volte = l'identita' sul campo senza i modi di Nyquist; sul campo intero deve fallire)*, `A-S` *(la pendenza di `log` dell'asimmetria di scambio, su finestre di `FIN_AS`, sotto `1 / TAU`)*; `C0`, `C0-F` *(il difetto di
 sovrapposizione sulla coppia sintetica, e con lo spostamento sbagliato di `1` nodo)*; `C-T`, `C-T-F` *(il tick commuta con la traslazione di `d`, entro `n eps`)*; `E-0` *(il libro ricalcolato a `t 0` = il campione, il controllo positivo di `E[0]`)*; `FA0`
 *(la fase relativa a `t 0` = il segno della coppia, entro il limite delle code incrociate)*.
 """
@@ -85,6 +85,17 @@ def fasi(L, d1, d2):
 def sposta(G, L, d1, d2):
     """### **`g(m - delta)` dalla trasformata `G` di `g` su `(L, L)`** *(lo spostamento frazionario sul toro per indice; esatto per una funzione a banda limitata)*."""
     return np.fft.ifft2(G * fasi(L, d1, d2)).real
+
+
+def senza_nyquist(g):
+    """### **Il campo senza i modi di Nyquist** *(la riga e la colonna `L/2` della trasformata a zero; Luca `2026-11-07` `16:25`, la via (a))*: **su `L` pari lo spostamento
+    frazionario rende complessi quei modi e `.real` ne butta la parte immaginaria; senza, la rotazione e' esatta all'arrotondamento.**"""
+    L = g.shape[0]
+    assert g.shape == (L, L) and L % 2 == 0, "senza_nyquist vuole un toro L x L con L pari"
+    G = np.fft.fft2(g)
+    G[L // 2, :] = 0.0
+    G[:, L // 2] = 0.0
+    return np.fft.ifft2(G).real
 
 
 def r180(g, L, c1, c2):
@@ -314,9 +325,14 @@ def main(argv):
 
     # ------------------------------------------------------------------ A-S: l'asimmetria di scambio
     g0 = rhoC[0].reshape(L, L)
-    eI = float(np.max(np.abs(r180(r180(g0, L, c0[0], c0[1]), L, c0[0], c0[1]) - g0)) / np.max(np.abs(g0)))
-    esito("DEVE PASSARE: A-S-I R180 due volte attorno al punto medio = l'identita', entro 1e-10 del massimo (mio)", eI <= 1e-10, "%.3e" % eI)
-    asy = np.array([float(np.linalg.norm(rhoC[i].reshape(L, L) - r180(rhoC[i].reshape(L, L), L, c0[0], c0[1])) / np.linalg.norm(rhoC[i])) for i in range(len(tm))])
+    g0n = senza_nyquist(g0)
+    eI = float(np.max(np.abs(r180(r180(g0n, L, c0[0], c0[1]), L, c0[0], c0[1]) - g0n)) / np.max(np.abs(g0n)))
+    eIF = float(np.max(np.abs(r180(r180(g0, L, c0[0], c0[1]), L, c0[0], c0[1]) - g0)) / np.max(np.abs(g0)))
+    esito("DEVE PASSARE: A-S-I R180 due volte attorno al punto medio = l'identita' sul campo SENZA Nyquist, entro 1e-10 del massimo (Luca 16:25, la via (a))", eI <= 1e-10, "%.3e" % eI)
+    esito("DEVE FALLIRE: A-S-I-F lo stesso sul campo intero (con Nyquist): entro 1e-10", not (eIF <= 1e-10), "%.3e" % eIF)
+    peso_N = np.array([float(np.linalg.norm(rhoC[i] - senza_nyquist(rhoC[i].reshape(L, L)).reshape(-1)) / np.linalg.norm(rhoC[i])) for i in range(len(tm))])
+    print("  il peso del modo di Nyquist nel campo |rho - rho_N| / |rho|: a t 0 %.4e, il massimo %.4e (la rotazione si fa sul campo senza Nyquist: dichiarato)" % (peso_N[0], peso_N.max()))
+    asy = np.array([float(np.linalg.norm(senza_nyquist(rhoC[i].reshape(L, L)) - r180(senza_nyquist(rhoC[i].reshape(L, L)), L, c0[0], c0[1])) / np.linalg.norm(senza_nyquist(rhoC[i].reshape(L, L)))) for i in range(len(tm))])
     lg = np.log(asy)
     pend = [pendenza(tm[(tm >= t0) & (tm <= t0 + FIN_AS)], lg[(tm >= t0) & (tm <= t0 + FIN_AS)]) for t0 in tm if t0 + FIN_AS <= tm[-1]]
     jm = int(np.argmax(pend))
