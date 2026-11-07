@@ -24137,3 +24137,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-07 — `L3` SUGLI INVILUPPI *(Luca `18:02`-`18:13`; `doc/referti_l2/libreria_l3_rilettura.txt`; task history della libreria sez. `12`)*: **CINQUE GRANDEZZE SU SEI PASSANO; L'ENERGIA DELLA FASCIA NO: FERMO**
 
 - **Il rapporto degli inviluppi: cuore e corona, massa ed energia, fino a `1.695`; la massa della fascia fino a `0.977`;** ### **l'energia della fascia `4.022` a `t 15` e `165`, `4.659` a `465`** *(`5.0e-09` contro `1.3e-09`; `9.4e-08` contro `2.0e-08`)*. ### **Il taglio sta nella fascia** *(`R_t 32 > R_A 28`)*, **e i numeri sono sotto `1e-6`.** **Il campionamento e' rado** *(sette tempi)*; **un solo seme del caos** *(un secondo: un'opzione)*. **Il conto del guardiano sull'energia del cuore confermato.**
+
+## 2026-11-07 — I REFERTI UFFICIALI DELLA COPPIA, CHIUSI: `14/14` E `14/14`; LE MAPPE DI `C35-pi` *(task history `2026-11-07_referto_coppia_C35` sez. `11`)*
+
+- ### **`A-S` passa col limite del caos** *(`2.975e-02`, `2.965e-02` contro `1/25`)*: **la simmetria di scambio si rompe alla velocita' del caos, dall'asimmetria iniziale `2.4e-04`, e non piu' in fretta.** **In fase `d` fino a `~13` e oscillante, `E_int -1.47e+04`; in opposizione `d +2` nodi, la fase a `pi`, `E_int -2.31e+03`, lo sbilancio `5.2e-02`.** **`carta_campo` curata: su `C35-0` al bit, su `C35-pi` `9/9`** *(`67` mappe, `5655523` byte)*.

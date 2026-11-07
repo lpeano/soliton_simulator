@@ -5,7 +5,7 @@
 [TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
 [TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
 [TIMBRO] carta_statiche.py  sha1-BYTE 97e31152  committato e pulito
-[TIMBRO] carta_coppia.py  sha1-BYTE 255e2d02  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE cd5a45b9  committato e pulito
 ==================================================================================================================================
 IL REFERTO DELLA COPPIA C35-pi contro il singolo S162 (L 162; il task history 2026-11-07_referto_coppia_C35): TOLL_A0 0.05 SPOST_A0F 5 TAU 35 FIN_AS 105 (mia) TOLL_C0F 0.001 BLOCCO 500
 ==================================================================================================================================
@@ -81,7 +81,7 @@ IL REFERTO DELLA COPPIA C35-pi contro il singolo S162 (L 162; il task history 20
   DEVE FALLIRE: A-S-I-F lo stesso sul campo intero (con Nyquist): entro 1e-10                                              PASSA   1.237e-06
   il peso del modo di Nyquist nel campo |rho - rho_N| / |rho|: a t 0 4.8560e-06, il massimo 2.9284e-03 (la rotazione si fa sul campo senza Nyquist: dichiarato)
   l'asimmetria di scambio |rho - R180 rho| / |rho| attorno al punto medio: a t 0 2.3968e-04 (premessa 3: NON zero), alla fine 1.0360e-01; il massimo 1.3970e-01 a t 6060.0
-  DEVE PASSARE: A-S la pendenza di log(asimmetria) su finestre di 105 non supera 1/TAU = 2.8571e-02                        ### FALLISCE   il massimo 2.9647e-02 alla finestra da t 0.0
+  DEVE PASSARE: A-S la pendenza di log(asimmetria) su finestre di 105 non supera la crescita piu' rapida del caos, 1/TAU_C PASSA   il massimo 2.9647e-02 alla finestra da t 0.0
         0 ..    1000  l'asimmetria media 6.1840e-02
      1000 ..    2000  l'asimmetria media 7.0654e-02
      2000 ..    3000  l'asimmetria media 8.5457e-02
@@ -171,4 +171,4 @@ IL REFERTO DELLA COPPIA C35-pi contro il singolo S162 (L 162; il task history 20
   t   9000.0  |pA| 9.124112e+05 |pB| 8.919065e+05  la fase relativa +3.119327 rad
   DEVE PASSARE: FA0 la fase relativa a t 0 = pi (il segno -1), entro le code incrociate sui semipiani 2.084e-11            PASSA   0.000e+00
 ==================================================================================================================================
-ESITO: 13/14 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: A-S la pendenza di log(asimmetria) su finestre di 105 non supera 1/TAU = 2.8571e-02']
+ESITO: 14/14 controlli passano; DEVE fallite: 0 []

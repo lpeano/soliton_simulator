@@ -1,8 +1,59 @@
-Traceback (most recent call last):
-  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_campo.py", line 257, in <module>
-    sys.exit(main(sys.argv[1:]))
-             ~~~~^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\soliton_simulator\csv\solitone\carta_campo.py", line 85, in main
-    parti = PARTI[corsa]
-            ~~~~~^^^^^^^
-KeyError: 'C35-pi'
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 97e31152  committato e pulito
+[TIMBRO] carta_campo.py  sha1-BYTE afd8a201  committato e pulito
+==================================================================================================================================
+FIN DOVE ARRIVA IL CAMPO (Luca 2026-11-03 18:26): le mappe di C35-pi (al bit di C35-pi; il vuoto F3) su E:, solo lettura; SOGLIE_RHO (0.001, 0.0001, 1e-05) SOGLIA_L 0.001 TOLL 1e-06 BLOCCO 500 OGNI_LEGGERA 10 TETTO_MB 10
+  le definizioni (campo.py, dichiarate nel task history): gli anelli [k, k+1) fino alla meta' del periodo; la media al centro = l'anello 0; la portata: R_contiguo (il primo
+  anello che NON supera la soglia, il bordo interno; nan = mai entro R) e R_ultimo (il bordo esterno dell'ultimo che la supera); Lambda - Lambda(t 0) per nodo
+==================================================================================================================================
+  DEVE PASSARE: F0 lo sha1 di ogni file delle mappe = l'indice, e i file su E: sono quelli dell'indice                     PASSA   7 file nell'indice, 7 su E:
+  DEVE FALLIRE: F0-F lo sha1 del primo file = la riga del secondo                                                          PASSA   
+  DEVE PASSARE: F1 sum rho = M e sum Lambda = V del campione di C35-pi allo stesso t, entro 1e-06 relativo, ogni istantane PASSA   667 istantanee; il peggiore M 2.61e-09, V 5.51e-10; senza campione 0
+  DEVE FALLIRE: F1-F la seconda istantanea col nodo piu' denso raddoppiato: sum rho = M entro 1e-06                        PASSA   l'errore 2.54e-03
+  DEVE PASSARE: F2 Lambda(t 0) uniforme (la simmetria attesa, dichiarata): std / media entro 1e-06                         PASSA   0.000e+00 (la media 6.000000000, min 6.000000000, max 6.000000000)
+  DEVE PASSARE: F3 rho(t 0) della mappa = la densita' della partenza ricalcolata (lo stato completo a t 0 su E:), entro 1e PASSA   2.642e-08
+  il centro ricalcolato dalla rho float32 contro quello salvato nella mappa (dal campione): il massimo 5.934e-08 nodi (registrato)
+  DEVE PASSARE: F-B la distanza fra il centro della prima mappa e il centro del bordo (bordo.c0 del jsonl) = 0 (d 35, segn PASSA   0.0000; il centro del bordo (c1, c2) 98.8738 81.3625, R_A 47.5, g_max 0.03
+  DEVE FALLIRE: F-B-F lo stesso col centro del bordo spostato di L/2 lungo A1                                              PASSA   81.0000
+  DEVE PASSARE: F-TETTO mappe_leggere.npz entro 10 MB a una ogni 10 istantanee                                             PASSA   5655523 byte
+  ### profili.npz 780083 byte; mappe_leggere.npz 5655523 byte (67 mappe, una ogni 10 istantanee)
+  float16: rho fino a 5.0640e+03 (il massimo float16 65504); la precisione relativa float16 ~1e-3 (dichiarata)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA PORTATA, a blocchi di 500: la media sulle istantanee del blocco di R_contiguo e il massimo di R_ultimo (nodi); n = quante istantanee non scendono mai (R_contiguo nan)
+  blocco             ist  rho 1e-3 contig/ult (n)    rho 1e-4                   rho 1e-5                   |dLambda| 1e-3 di L(t0)   
+        0 ..     500   34   67.06 /  73.0 (0)          70.35 /  77.0 (0)          73.44 /  80.0 (0)          34.29 /  62.0 (0)        
+      500 ..    1000   33   66.06 /  69.0 (0)          70.33 /  73.0 (0)          73.88 /  76.0 (0)          67.97 /  70.0 (0)        
+     1000 ..    1500   33   61.76 /  65.0 (0)          67.06 /  69.0 (0)          71.00 /  73.0 (0)          68.39 /  69.0 (0)        
+     1500 ..    2000   34   58.35 /  61.0 (0)          65.03 /  67.0 (0)          69.32 /  71.0 (0)          67.62 /  68.0 (0)        
+     2000 ..    2500   33   55.15 /  60.0 (0)          63.64 /  66.0 (0)          68.21 /  70.0 (0)          66.91 /  67.0 (0)        
+     2500 ..    3000   33   51.67 /  58.0 (0)          62.85 /  65.0 (0)          67.61 /  69.0 (0)          66.39 /  67.0 (0)        
+     3000 ..    3500   34   51.15 /  58.0 (0)          62.59 /  64.0 (0)          67.47 /  69.0 (0)          65.85 /  66.0 (0)        
+     3500 ..    4000   33   40.45 /  53.0 (0)          60.85 /  63.0 (0)          66.30 /  67.0 (0)          64.91 /  66.0 (0)        
+     4000 ..    4500   33   40.55 /  56.0 (0)          60.48 /  63.0 (0)          66.03 /  68.0 (0)          64.94 /  66.0 (0)        
+     4500 ..    5000   34   43.94 /  56.0 (0)          61.09 /  63.0 (0)          66.41 /  68.0 (0)          64.71 /  65.0 (0)        
+     5000 ..    5500   33   38.58 /  40.0 (0)          58.55 /  61.0 (0)          64.79 /  66.0 (0)          63.82 /  65.0 (0)        
+     5500 ..    6000   33   39.06 /  46.0 (0)          57.70 /  61.0 (0)          64.48 /  67.0 (0)          63.42 /  64.0 (0)        
+     6000 ..    6500   34   39.00 /  39.0 (0)          57.06 /  60.0 (0)          63.97 /  65.0 (0)          63.24 /  64.0 (0)        
+     6500 ..    7000   33   39.00 /  39.0 (0)          54.76 /  59.0 (0)          63.21 /  65.0 (0)          63.00 /  64.0 (0)        
+     7000 ..    7500   33   38.94 /  39.0 (0)          52.76 /  58.0 (0)          62.67 /  64.0 (0)          62.67 /  63.0 (0)        
+     7500 ..    8000   34   39.00 /  39.0 (0)          52.29 /  58.0 (0)          62.44 /  64.0 (0)          62.12 /  63.0 (0)        
+     8000 ..    8500   33   39.06 /  40.0 (0)          51.30 /  58.0 (0)          62.55 /  64.0 (0)          62.21 /  63.0 (0)        
+     8500 ..    9000   33   39.00 /  39.0 (0)          54.09 /  58.0 (0)          62.88 /  64.0 (0)          61.97 /  63.0 (0)        
+     9000 ..    9500   34   39.15 /  40.0 (0)          46.15 /  57.0 (0)          61.26 /  64.0 (0)          61.59 /  63.0 (0)        
+     9500 ..   10000   33   39.24 /  40.0 (0)          46.97 /  55.0 (0)          61.45 /  63.0 (0)          60.97 /  62.0 (0)        
+----------------------------------------------------------------------------------------------------------------------------------
+### I PROFILI DI t 0, 3330, 6660, 9990 (rho e |Lambda - Lambda(t 0)| per anello, ogni 5 anelli)
+  tempo     0.00 rho 4.28e-05 6.33e+01 6.68e+02 1.21e+03 1.01e+03 3.03e+02 6.47e+00 2.91e-08 4.08e-18 5.41e-28 8.18e-38 3.36e-48 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+                 |dL| 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00 0.00e+00
+  tempo  3330.00 rho 3.70e+00 2.32e+02 6.59e+02 9.03e+02 8.31e+02 4.72e+02 1.25e+02 4.61e+00 6.06e-03 6.13e-03 4.88e-03 2.92e-03 7.65e-04 1.09e-04 6.86e-06 1.79e-07 5.65e-09
+                 |dL| 4.63e+00 3.13e+00 2.17e+00 1.75e+00 1.56e+00 1.36e+00 1.38e+00 8.68e-01 4.62e-02 4.52e-02 4.28e-02 2.96e-02 1.68e-02 5.65e-03 1.69e-03 3.01e-04 5.56e-05
+  tempo  6660.00 rho 4.56e+00 2.33e+02 6.70e+02 8.65e+02 7.97e+02 4.52e+02 1.41e+02 9.17e+00 2.29e-03 2.44e-03 1.76e-03 1.15e-03 2.75e-04 4.55e-05 3.00e-06 7.18e-08 2.08e-09
+                 |dL| 5.34e+00 3.32e+00 2.47e+00 2.13e+00 1.83e+00 1.56e+00 1.45e+00 1.13e+00 3.77e-02 2.52e-02 2.46e-02 1.84e-02 9.14e-03 3.77e-03 9.93e-04 2.10e-04 3.46e-05
+  tempo  9990.00 rho 1.19e+01 2.15e+02 6.21e+02 8.98e+02 8.15e+02 4.76e+02 1.47e+02 1.12e+01 1.91e-03 1.21e-03 9.90e-04 5.61e-04 1.42e-04 1.83e-05 1.35e-06 5.04e-08 1.51e-09
+                 |dL| 5.20e+00 3.41e+00 2.43e+00 2.09e+00 1.90e+00 1.55e+00 1.59e+00 1.19e+00 5.20e-02 1.81e-02 1.84e-02 1.38e-02 6.88e-03 2.45e-03 6.08e-04 1.20e-04 2.47e-05
+==================================================================================================================================
+ESITO: 9/9 controlli passano; DEVE fallite: 0 []
