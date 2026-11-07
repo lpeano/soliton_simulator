@@ -111,3 +111,58 @@
 - **L4, le conseguenze:** ### **T6a va girata CON il `kappa` finale** *(in (alfa) l'elettrostatica scala come `kappa^2`: `e` a parita' di `1%` va come `1/kappa`)*: **l'ordine e' L1-L3 PRIMA di T6a** *(T6a e' gia' committata con `w` di oggi: va ripresa col `kappa`, un commit a se')*; **Polyakov e `ln r`:** **il coefficiente del potenziale e' `e^2 x` il peso dell'elettrostatica** *(`kappa^2` in (alfa))* **e la massa di Polyakov dipende dall'accoppiamento effettivo nello stesso modo** *(`~ exp(- costante / (e^2 kappa^2))` in (alfa), la forma qualitativa)*: ### **con `e` fissata dall'`1%` DOPO `kappa`, la combinazione `e^2 kappa^2` e' la stessa: il potenziale non cambia, la massa di Polyakov nemmeno** *(da verificare, non supposto)*.
 - **L5** *(solo progetto)*: ### **sulla formula:** **la materia ha `theta = pi dtau_arco / dtau_rif`, lineare in `s_a`**, **la luce `w = kappa^2 s_a^2 l/l*`, quindi `c_U = kappa s_a`, lineare**: ### **con `cs` UNIFORME tutte e due scalano allo stesso modo, e il limite comune RESTA comune** *(verificato sulla formula)*. **Con `cs` NON uniforme:** **tutte e due vedono lo `s_a` LOCALE dell'arco** *(la media armonica `B-3`)*: **a livello di arco il limite resta comune; si separano solo per (v1) o (v2) di T8** *(sez. `4`)*: **la materia ESTESA** *(il solitone occupa piu' archi con `s_a` diversi)* **e la luce no.**
 - **L6:** **`kappa` resta una PROPOSTA finche' Luca non lo accoglie.**
+
+## 8. LE DUE STRADE PER UN SOLO LIMITE DI VELOCITA' *(Luca `2026-11-07` `13:45`: un giro ESPLORATIVO, nessuna adottata)*
+
+**STRADA A:** abbassare la luce *(`kappa`, la sez. `7`)*. **STRADA B** *(l'idea di Luca)*: **la luce resta a `1`, la materia legge il BATTITO DEL VUOTO LOCALE, `theta = omega_vuoto dtau` invece di `pi dtau`**, cosi' che `cs` dinamico cambi il limite della materia. **B'** *(solo confronto)*: la variante `theta = s/x`. ### **Tutto in memoria o in `csv/`; nessuna legge del nucleo cambia.**
+
+### 8.1 I FATTI DAL CODICE *(riconfermati)*
+
+1. **`theta = pi s_nodo frazione`** *(`flussi_parziali.z_nodo`: «`e^{i theta}` per nodo, con `theta = pi . s_nodo . frazione`»; `espi` calcola `sin(pi min(s, 1 - s))` per avere `sin(pi) = 0` esatto)*; **a `theta = pi` il Grover e' un'involuzione, `G^2 = I` al bit** *(`_collauda_motore`, la prova `(3)`)*. ### **Il vincolo `theta <= pi` e' `s <= 1`** *(`B-5`)*.
+2. **Il VUOTO usa lo STESSO angolo:** **`grover_scalare` e `spostamento_scalare` hanno lo stesso `theta = pi s`** *(il ramo `P` del vuoto «e' l'angolo del Grover `theta = pi s`», IS2)*: ### **il limite della materia** *(`pi x`, `x = 1/4`)* **e il ritmo del vuoto** *(`pi` per unita' di tempo)* **hanno la STESSA origine, e oggi nessuno legge l'altro.**
+3. ### **I numeri del battito:** **`F3` a `cs` spento gira a `omega = 4.71238898038472354e-01` per tick a `s = 0.15`** *(IS2)*: **`/ 0.15 = 3.14159...` = `pi` per unita' di tempo**; **con `cs` acceso a `omega_cs = 1.27234502470386501e+00` per tick** *(IS3-E)*: **`8.4823` per unita' di tempo**; **la differenza `0.801` per tick = `5.341` per unita' di tempo e' `CAMM-FASE-VUOTO`** *(IS3, sez. `11` del task history di Brezzi)*.
+4. **La variante B'** *(`u1_terzo`)*: **`theta = 4 s f`, `v_b / s -> 0.99999964`** *(a `s 0.001`)*, **`v_max / s -> 0.762189`.**
+
+### 8.2 E1: LA FORMA DELLA LEGGE DI VELOCITA' *(la misura in memoria; in coda con L1, dopo T4)*
+
+- **`theta = c s`, `c` in `{2, pi, 4, 8.48}`**, **`v_b / s` e `v_max / s` a `s -> 0`** *(il metodo di `u1_secondo.vb_di`, il fit di grado `2` in `s`)*, **con la variante di `u1_terzo`** *(`variante(K)`, `K = c / pi`: il codice c'e', non si riscrive)*.
+- ### **La mia previsione, scritta prima** *(dal codice)*: **(p) e' ESATTA nel limite:** **a `s -> 0` il tick e' `exp(i c s H)`** *(come in `u1_secondo` per `c = pi`)*, **quindi `v_b / s -> c x = c / 4` e `v_max / s -> 0.762 c / 4` per ogni `c`** -- **cioe' `v_max / v_b` costante `0.762`** *(viene dalle bande di `H`, non da `c`)*; ### **(q) un'altra forma** *(un arcotangente)* **puo' esserci solo a `s` FINITO** *(i termini `f2 s^2`)*, **non nel limite.** **Il vincolo `theta <= pi`:** **`c s <= pi`**, **per `c = 8.48` `s <= pi / 8.48 = 0.370`** *(a `s = 0.15`: `theta = 1.27`, dentro)*; **per `c = 4` `s <= 0.785`.**
+
+### 8.3 E3: LA STRADA B, `theta = omega_vuoto_locale dtau`
+
+- ### **(a) LA DEFINIZIONE PIU' SEMPLICE E LOCALE** *(la proposta)*: **`omega_vuoto_k = pi + Omega_k / dtau`**, **`Omega_k` il coefficiente della fase sul vuoto che il nucleo GIA' calcola per nodo** *(`energia_pesata.omega`: `Omega_k = cs'_k [H_k + somma dw H_a]`)*, **`pi` il battito del Grover.** **Perche' questa e non la fase di `phi` fra due tick:** **(i) e' gia' per nodo e gia' nel nucleo** *(nessuna seconda fonte)*; **(ii) a `cs` SPENTO il pezzo `CAMM-FASE-VUOTO` NON ESISTE** *(`applica` ritorna prima: `Omega = 0` per costruzione)*, ### **quindi `theta = pi dtau` ESATTO: il braccio `0` al bit e' possibile** -- **una fase misurata fra due tick NON darebbe `pi` al bit** *(l'arrotondamento: `omega` di IS2 e' `3.386e-15` dal npz)*; **(iii) somma esattamente il battito che il vuoto ha** *(`pi + 5.341 = 8.48` per unita' di tempo: la premessa `3`)*.
+  - ### **La reversibilita':** **`Omega_k` dipende dalle FASI di `phi` sullo stato** *(`pu_phi`, gli incroci d'arco)*: **un `theta` che dipende dallo stato va valutato al CENTRO del palindromo** *(come `cs`, `D2`)*: ### **un SECONDO punto fisso nel tick** *(oltre a quelli di `cs` e di `Omega`)*: **lo stesso problema della diagnosi di [[PUNTO-FISSO-CS-SOLITONE]]** *(se la mappa non contrae, non converge)*.
+  - **La gauge:** **`Omega_k` dipende da `phi` (neutro) e dalle NORME di `psi`** *(`nrm_psi`, `pu_psi`, `incro` con `U`)* **-- `incro` e' covariante con `U`, quindi `Omega` e' gauge-INVARIANTE**: **la gauge non si rompe** *(da verificare in T3)*.
+- **(b) il braccio `0`:** **a `cs` spento `Omega = 0` e `theta = pi dtau`: il tick IDENTICO al bit** *(gli `sha` dopo `N` tick, l'impronta)*; **DEVE FALLIRE: un `omega_vuoto` imposto diverso da `pi`** *(per esempio `pi (1 + 1e-12)`)* **deve cambiare il tick.**
+- ### **(c) il limite della materia col battito** *(da E1)*: **se vale (p), `v_b / s = omega_vuoto / 4`**: **per l'allineamento con la luce a `1` il battito dovrebbe essere `4` per unita' di tempo**; ### **con `cs` acceso oggi e' `8.48`: la materia andrebbe a `~2.12`, PIU' VELOCE DELLA LUCE** *(la PREVISIONE, da confermare o smentire con E1 a `c = 8.48`)*. ### **La causalita' e' rotta in tutto il vuoto lontano** *(dove `Omega` c'e')*: **con la forma (P) e `Lambda_c = 34`, la strada B senza altro e' ACAUSALE.**
+- **(d) cosa potrebbe fissare il battito a `4`** *(dal codice; nessuna scelta)*:
+  - **(d1) una legge di `cs`:** **`pi + Omega(Lambda_c) = 4`** *(un `Lambda_c` per cui il battito del vuoto lontano e' `4`)*: ### **ma e' scegliere `Lambda_c` per far tornare la causalita'** *(`A1`: un numero derivato da un principio, non tarato -- se Luca accetta la causalita' come principio)*;
+  - **(d2) il rapporto con la geometria:** **`4 = 1 / x`**: **un battito di `1 / x` per unita' di tempo vuol dire che la materia corre a UN ARCO PER UNITA' DI TEMPO** *(`c x = 1`)*, **la stessa velocita' della luce e del cono `B-5`**: **il «principio» che fisserebbe `4`, non un numero nuovo** *(ma oggi nessuna legge lo impone: e' lo stesso salto di B')*;
+  - **(d3) la luce che legge ANCHE lei il battito:** **`w = (omega_vuoto x / pi)^2 s_a^2 l / l*`** *(A e B insieme: tutte e due proporzionali al battito)*: ### **il limite comune per OGNI `cs`, per costruzione** -- **ma la luce cambierebbe con `cs` anche dove la materia non c'e'** *(e oggi `phi` non vede `U`)*;
+  - **(d4) un `theta` che satura** *(il vincolo `theta <= pi`, `B-5`)*: **non fissa `4`, impedisce solo oltre `pi / s`.**
+- **(e) il limite LOCALE** *(solo progetto)*: **un gradiente di `Lambda` imposto** *(come `csv/_forza_da_cs.py`)*, **`Omega_k` per nodo, `v_b` locale della materia** *(dal battito locale)* **e `c_U` locale** *(`s_a` locale)* **nodo per nodo**: ### **la causalita' `v_b <= c_U` NODO PER NODO** *(il DEVE)*; **il Courant locale.**
+- **(f) `cs` acceso:** **la misura vera aspetta la cura del punto fisso; prima, solo in memoria con un battito UNIFORME imposto** *(i valori di E1)*, **dichiarato.**
+
+### 8.4 E4: LA STRADA B' *(non si rigira: dalla tabella di `u1_terzo`)*
+
+- **`theta = 4 s f`**: **`v_b / s` `0.99999964`** *(`s 0.001`)*, `0.99996664` *(`0.01`)*, `0.99916463` *(`0.05`)*, `0.99663444` *(`0.1`)*, `0.96741629` *(`0.3`)*; **`v_max / s` `0.762189` .. `0.789198`**; **il cono di `B-4` diventa `s <= pi/4`.**
+
+### 8.5 E5: IL CONFRONTO *(nessuna raccomandazione come decisione)*
+
+| | A: la luce abbassata (`kappa`) | B: la materia legge il battito | B': `theta = s/x` |
+|---|---|---|---|
+| **che cosa cambia** | **solo `U(1)`** *(nuova, in `csv/`)* | **la legge della materia** *(`theta` dei pezzi di `psi`)* **e un punto fisso in piu'** | **la legge della materia** *(il fattore di `theta`)* |
+| **quali corse perdono valore** | **nessuna** | **a `cs` spento nessuna** *(il braccio `0` al bit, se passa)*; **le future con `cs`** | ### **TUTTE** *(`theta` cambia il solitone, il vuoto e ogni corsa)* |
+| **il limite comune, `cs` spento** | **`c_U = v_b = (pi/4) s`** *(lo scarto `-0.46%` a `0.15`, L2)* | ### **NON comune:** `v_b = (pi/4) s` contro `c_U = s` *(come oggi)* | **`v_b ~ c_U = s`** *(`0.9966` a `0.1`)* |
+| **il limite comune, `cs` acceso** | **comune per costruzione a `cs` uniforme** *(L5)*; **locale: (v1), (v2)** | ### **`v_b ~ 2.12 s` contro `c_U = s`: ACAUSALE** *(previsione, E1)* | **come `cs` spento a `cs` uniforme** |
+| **la causalita'** | **si'** *(i segnali `0.598 s` sotto `c_U = 0.785 s`; da misurare)* | ### **no con `Lambda_c = 34`** *(`2.12 > 1`)*; **si' solo con (d1)-(d3)** | **si'** *(`v_max / s 0.762 < 1`)* |
+| **L3** | **NON MISURATE** | **NON MISURATE** | **NON MISURATE** *(solo le velocita' di `u1_terzo`)* |
+
+- **Le domande aperte, a Luca:**
+  1. **Il «c» bersaglio** *(L1)*: **`v_b` o `v_max`?**
+  2. **A: dove sta `kappa`** *((alfa) la deriva, (beta) la spinta, (gamma) tutte e due)*, **e lo scarto `-0.46%` a `s = 0.15` basta?**
+  3. **B: la definizione del battito** *(`pi + Omega_k / dtau`, la mia proposta)* **ti va, sapendo che aggiunge un punto fisso al tick?**
+  4. **B: la causalita' a `cs` acceso** *(la previsione `2.12`)*: **se E1 la conferma, quale fra (d1)-(d4) va studiata, o B si chiude?**
+  5. **B': resta come confronto e basta?**
+- ### **LA MIA LETTURA** *(non una decisione)*: **A costa meno e non tocca niente di fatto; B e' l'idea piu' profonda** *(materia e vuoto dalla stessa origine)* **ma, com'e', e' acausale a `cs` acceso e aggiunge un punto fisso; (d3) e' l'unica variante di B che da' il limite comune per costruzione, ed e' A e B INSIEME.**
+- **Il calcolo in coda:** **E1** *(con L1, dopo T4)*; **E3 (b), (c), (f) dopo E1**; **(e) solo progetto**; **tutto prima di T6a.**
