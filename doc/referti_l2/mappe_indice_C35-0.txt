@@ -1,0 +1,32 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA C35-0 (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\mappe\C35-0\C35-0_000000.npz  15970861 byte  sha1 8cfde64a3c5b748f5ce6a4c4f1729c702d8104d5  tempo 0.00 .. 1500.00  101 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_010000.npz  17960338 byte  sha1 d74f739ca7888144038e37ea60511269edd37830  tempo 1515.00 .. 3000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_020000.npz  17878733 byte  sha1 17a2fb968bcef5e6ae946d47a6eaeaa3b28b8a80  tempo 3015.00 .. 4500.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_030000.npz  17802943 byte  sha1 65380f1cab39fd4bed122743da112991dfd16b55  tempo 4515.00 .. 6000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_040000.npz  17666097 byte  sha1 6ac66263203ef6fed73b73961ace9e04385691a2  tempo 6015.00 .. 7500.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_050000.npz  17724904 byte  sha1 2a5bc1246caf91d30ce16659c0d2d419459a902a  tempo 7515.00 .. 9000.00  100 istantanee
+  E:\soliton_simulator\mappe\C35-0\C35-0_060000.npz  11624819 byte  sha1 fb36e2e90e3402c4843a9b5e8a6dc221368f40bd  tempo 9015.00 .. 9990.00  66 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_000000.npz  9029646 byte  sha1 c340ce87da5cb9ea85a84e028432d026d817ad53  tempo 0.00 (tick 0)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_010000.npz  9029646 byte  sha1 eb9104f191ba389a2921750f7780eaa0dd149bff  tempo 1500.00 (tick 10000)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_020000.npz  9029646 byte  sha1 fb98d3ffd88234d798f409cac36f1ee0dee5365d  tempo 3000.00 (tick 20000)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_030000.npz  9029646 byte  sha1 f943a54367ba3ccc94726cbbb3f9ddd084818218  tempo 4500.00 (tick 30000)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_040000.npz  9029646 byte  sha1 dffc50d76b5c4800dbd6fb8c6ebb7586b3048350  tempo 6000.00 (tick 40000)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_050000.npz  9029646 byte  sha1 93728d6c1ad3edba3667bcb014f80bdd3f0692b7  tempo 7500.00 (tick 50000)
+  E:\soliton_simulator\stati\C35-0\C35-0_stato_060000.npz  9029646 byte  sha1 788c538adc842ea72fae9d52a887b0bb2a1bfedf  tempo 9000.00 (tick 60000)
+### I PEZZI DEI CAMPIONI (jsonl interi; nel repo la versione rada in --)
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_000000.jsonl  2195401 byte  sha1 749756af4fba397974616306f7dce0cd21f52dce  tempo 0.00 .. 1500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_010000.jsonl  2232408 byte  sha1 1e2e23d4019561eb207333fff7507bdc26529b09  tempo 1500.00 .. 3000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_020000.jsonl  2230941 byte  sha1 9ca4ba8cc2936c27d40861063dbf1d8309b027c0  tempo 3000.00 .. 4500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_030000.jsonl  2230118 byte  sha1 6a4e0e7233a2d7b8ee880eade621668e03864b0f  tempo 4500.00 .. 6000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_040000.jsonl  2230083 byte  sha1 b9d4c7e2db39f82a23b8b0ed58f44de2f888d7ca  tempo 6000.00 .. 7500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_050000.jsonl  2231982 byte  sha1 472612b560a22ca8ef78e4b87a4a265735bfbe48  tempo 7500.00 .. 9000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C35-0_060000.jsonl  1485412 byte  sha1 b68822a3958b56d12e4523b6c0dd7991e404fdbd  tempo 9000.00 .. 10000.05

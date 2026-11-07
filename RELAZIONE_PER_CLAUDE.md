@@ -23985,3 +23985,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Assorbite alla fine** *(relative a `M0`, `V0`, `E0`)*: **`M 1.002e-02`, `V 1.016e-01`, `E 2.705e-03`** *(`S162`: `4.339e-03`, `2.016e-02`, `1.253e-03`)*: **la coppia cede al bordo piu' del singolo**, **senza lettura** finche' non c'e' il referto.
 - ### ⚠ **`f_liscia`, `w` e l'alone del log NON parlano della coppia:** sono le misure del singolo attorno al centro periodico della densita' totale, **cioe' vicino al punto medio**. **`w` oscilla fra `12` e `19`: non lo leggo come un `d(t)`.**
 - **Il referto di `C35-0`:** **la carta della coppia** *(le misure `A`..`G` e i DEVE di `2026-11-05`)* **non esiste**: **la scrivo durante `C35-pi`**, e la giro fra due corse. **Adesso le mappe leggere** *(`S162`, poi `C35-0`)*, **poi `C35-pi`.**
+
+## 2026-11-07 — LE MAPPE LEGGERE DI `S162` E `C35-0` *(Luca `23:38`)*: **`9/9` E `9/9`; `67` MAPPE CIASCUNA, `5467506` E `5785427` BYTE** *(`doc/TASK_HISTORY/2026-11-06_mappe_leggere_S162_C35.md` sez. `4`)*
+
+- **`F1`** sulle `667` istantanee *(il peggiore `M 3.33e-09` e `2.44e-09`)*; **`F3` contro lo stato completo a `t 0`** `2.642e-08`; **`F-B`** `17.5000` per il singolo *(`d/2`)* e `0.0000` per la coppia, coi rovesci che falliscono *(`63.5`, `81.0`)*.
+- **Il centro del bordo nel file:** `98.8738 81.3625`, `R_A 47.5`, `g_max 0.03`, lo stesso per tutte e due.
+- **Gli `.npz` aggiunti a forza** *(il `*.npz` di `.gitignore`)*, come quelli di `TB3` e `TBS`. **Avanti: `C35-pi`.**

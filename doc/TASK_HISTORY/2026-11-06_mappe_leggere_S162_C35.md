@@ -29,3 +29,21 @@
 1. Questo task history, un commit.
 2. Il codice in `carta_campo.py` *(e l'INVENTARIO: i due comandi, il blob)*, un commit; `D6` ripuntato, un commit; la cassetta, un commit.
 3. **A `C35-0` finita** *(dopo la risposta di Luca al FERMO)*: gli indici `S162`, `C35-0`; `carta_campo.py --corsa S162`, poi `--corsa C35-0`, una alla volta; i referti `doc/referti_l2/campo_S162.txt`, `campo_C35-0.txt`; il commit coi byte e il numero delle mappe; la relazione, la MAPPA. **Poi `C35-pi`.**
+
+## 4. L'ESITO *(`carta_campo.py` `a58ee6b9`, `e45b8170`; gli indici da `corsa_accensione.py --indice`)*: **`S162` `9/9`, `C35-0` `9/9`**
+
+| | `S162` | `C35-0` |
+|---|---|---|
+| **`F1`** *(667 istantanee, il peggiore)* | `M 3.33e-09`, `V 4.68e-10` | `M 2.44e-09`, `V 5.47e-10` |
+| **`F1-F`** *(deve fallire)* | `5.07e-03` | `2.54e-03` |
+| **`F3`** *(contro lo stato a `t 0` su `E:`)* | `2.642e-08` | `2.642e-08` |
+| **`F-B`** *(atteso `d/2` = `17.5` il singolo, `0` la coppia)* | `17.5000` | `0.0000` |
+| **`F-B-F`** *(deve fallire)* | `63.5000` | `81.0000` |
+| **il centro del bordo** *(`c1`, `c2`; `R_A`, `g_max`)* | `98.8738 81.3625`; `47.5`, `0.03` | `98.8738 81.3625`; `47.5`, `0.03` |
+| **`mappe_leggere.npz`** *(`F-TETTO`, sotto `10` MB)* | **`5467506` byte, `67` mappe** | **`5785427` byte, `67` mappe** |
+| **`profili.npz`** | `761119` byte | `785874` byte |
+| **il massimo di `rho`** *(float16, tetto `65504`)* | `5.0640e+03` | `7.6200e+03` |
+
+- **Il punto di arresto «istantanee diverse» non scatta:** `667` per tutte e due. **Il centro del bordo e' lo stesso** *(il bordo di `C35` per `S162`, come deciso)*: **il controllo `F-B` dice che `S162` sta a `d/2` dal centro, e la coppia ci sta sopra.**
+- **Gli `.npz` sono sotto il `*.npz` di `.gitignore`:** **si aggiungono a forza** *(`git add -f`)*, **come quelli di `campo_TB3` e `campo_TBS`**.
+- **Avanti:** **`C35-pi`** *(lo stesso driver, lo stesso blob di `corsa_accensione.py`)*.
