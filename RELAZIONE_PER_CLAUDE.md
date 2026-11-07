@@ -24032,3 +24032,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La forma proposta:** **`|Omega_k| <= tetto_k + c u tetto_k`**, **`c` contato dalle profondita' delle due catene** *(l'analisi dell'errore in avanti: un tetto per costruzione)*; **il tetto e la scala del punto fisso NON cambiano.**
 - ### ⚠ **Due cose dal codice:** **(1) le corse col solitone girano a forma spenta** *(`applica` ritorna prima)*: **«le corse vecchie al bit» e' vero per costruzione, non un DEVE**; **il DEVE con materia e' sui collaudi con `cs` acceso e su IS3.** **(2) [[PUNTO-FISSO-CS-SOLITONE]]** *(AGENDA)*: ### **il punto fisso di `cs` non converge col solitone `S1` gia' al tick `0`**: ### **`TCS` e' proprio quel caso, e la cura del tetto non basta: da riprendere prima di `TCS`.**
 - **Il codice a `C35-pi` finita** *(`energia_pesata` e' nel percorso della corsa)*.
+
+## 2026-11-07 — LA CARTA DELLA COPPIA SU `C35-0`: **`A-S-I` FALLISCE, LA CARTA SI FERMA ALLA FASE RELATIVA, E TRE ERRORI MIEI** *(`doc/referti_l2/coppia_C35-0.txt`; task history `2026-11-07_referto_coppia_C35` sez. `6`)*: **FERMO**
+
+- **Passano `11` DEVE su `12` girati**; **`A-S-I` `1.237e-06` contro `1e-10` (mio)**; **`FA0` non girato.**
+- ### ⛔ **Le mappe hanno `t` in TICK:** **la carta lo ha preso per tempo** *(i blocchi, la rampa, `FIN_AS`, `TAU`, `d''`, i profili)*: ### **`A-S` e' da rifare** *(la pendenza per tick contro `1 / TAU` per unita': in unita' giuste potrebbe fallire)*. ### ⛔ **La chiave `psi` degli stati e' nulla**: la fase va da `psi_h`.
+- **Leggibile con la riserva:** **i nuclei del vuoto quasi fermi** *(`v+` escursione `4.35` / `3.74` contro `14.48` / `14.16` della materia; da `+-17.5` a `~+-16.5`-`17.4`)*, **la materia fra loro e il centro** *(`d` fino a `6.83`, poi `~10`-`33`)*: ### **la lettura `v1`.** **`E_int` fino a `-1.47e+04`, con `E_ass` fra `-38` e `+31`.**
+- **La cura:** unita' e `psi_h` *(errori di codice)*; **`A-S-I` decide Luca** *(l'ipotesi di Nyquist da verificare)*.
