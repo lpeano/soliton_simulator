@@ -24115,3 +24115,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-07 — LA LIBRERIA: `LIB0` FERMA LA COSTRUZIONE, NESSUN `R_t` PASSA IL CRITERIO *(`doc/referti_l2/libreria_solitoni.txt`; task history `2026-11-07_libreria_solitoni_cluster` sez. `7`)*: **FERMO**
 
 - **La massa e l'energia fuori sotto `1e-6` da `R_t = 28`; i salti mai** *(a `40`: `psi` `1.1e-04`, `D` `1.1e-03`)*. ### **Il salto e' un rapporto di ampiezze, la massa e' quadratica: il criterio chiede ai salti sei ordini in piu'.** **`D` e' la corona del vuoto, che arriva fino al bordo.** **Le strade (a)-(d) a Luca.**
+
+## 2026-11-07 — OGNI CORSA SALVA SEMPRE LO STATO COMPLETO: IL TASK HISTORY *(Luca `16:01`; `doc/TASK_HISTORY/2026-11-07_stato_completo.md`)*
+
+- **Cio' che c'e' gia':** **il file di ripresa, gli stati ai tempi di `STATI` con lo `sha` per chiave, `dopo_stato`** *(la prova di ripartenza della corsa)*. ### **Cio' che NON sta in `z["st"]`:** **gli accumulatori del bordo, `acc`, `giro`, `pst`** *(la corsa li porta nel jsonl uno per uno)* **e il campo `U(1)`**: **il registro li prende per costruzione.** **Ogni `1000` unita' di tempo, accanto agli `STATI`; R1, R2, R2-F** *(senza `phi_h` e senza gli accumulatori del bordo)*, **R3.** **`TM3` non ha stati su `E:`.**
