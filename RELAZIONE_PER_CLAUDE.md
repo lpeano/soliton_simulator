@@ -24010,3 +24010,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Scritta con `C35-pi` in corsa** *(un file che la corsa non importa)*; **si gira a `C35-pi` finita**, dopo `D6` e la cassetta.
 - **Undici DEVE:** `R0`, `A0`, `A0-F`, `A-S-I`, `A-S`, `C0`, `C0-F`, `C-T`, `C-T-F`, `E-0`, `FA0`. **Due controlli miei in piu':** `E-0` *(il libro ricalcolato a `t 0` = il campione)* e `A-S-I`.
 - ### ⚠ **Per `C50-0` non c'e' un singolo col suo bordo:** **la carta rifiuta `C50-0`**, e **il suo referto vuole una decisione di Luca.**
+
+## 2026-11-07 — LE DECISIONI DI LUCA DELLE `10:06` *(IS2, IS3, `TCS`, la libreria)*
+
+- **IS3 (a): l'`assert` di `controlla_tetto` e' UN DIFETTO DEL NUCLEO**: una tolleranza di arrotondamento DERIVATA sulla scala del tetto, un commit del nucleo a se', la suite intera, un DEVE *(corse e carte vecchie al bit)*, la voce del difetto. **IS3 (b):** `cs` isolato contro `CAMM-FASE-VUOTO` accesa e `cs` spento, se si fa senza toccare il nucleo; altrimenti contro «oggi», dichiarato. **IS2:** le soglie derivate, dichiarate come cambiate dopo i numeri. **`TCS`:** la tabella `c(t)` rimisurata col tick di `TCS` *(`omega_cs` `1.272` per tick)* e `C0` rifatto. **La libreria:** `R_t` `16 .. 40` a passi di `4`, il criterio proposto, `LIB1-1` a `1 + 1e-2`; **i cluster dopo `C35-pi` e `C50-0`.** **L'ordine:** cure, carte e `LIB0`-`LIB2` fra `C35-pi` e `C50-0`.
+- ### ⚠ **Due cose mie:** **(1) `energia_pesata` e' nel percorso della corsa** *(`motore._fase_vuoto`)*, **e ogni pezzo e' un processo nuovo: la cura del nucleo aspetta la fine di `C35-pi`.** **(2) «`C35-0` si e' fuso» non e' ancora misurato**: **il log porta le misure del singolo attorno al punto medio; lo dira' `d(t)` nel referto.**
+- **Ancora aperte:** q1-q3 del referto della coppia, e il singolo di riferimento per `C50-0`.

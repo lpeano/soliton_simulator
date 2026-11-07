@@ -74,3 +74,14 @@
 2. **Il criterio:** **il piu' piccolo `R_t` con massa fuori, energia fuori e salti sotto `1e-6`**?
 3. **`LIB1-1`:** **il fattore `1 + 1e-2`** sul pezzo tolto?
 4. **I cluster:** quali, e con quali fasi *(la tabella 2.6)*?
+
+## 5. LA DECISIONE DI LUCA DEL `2026-11-07` `10:06` *(le domande della sez. `4` CHIUSE)*
+
+1. ### **La griglia di `R_t`: `16, 20, 24, 28, 32, 36, 40`.**
+2. ### **Il criterio: il piu' piccolo `R_t` con massa fuori, energia fuori e salti sotto `1e-6`.**
+3. ### **`LIB1-1` col fattore `1 + 1e-2`.**
+4. ### **I cluster: RIMANDATI a dopo `C35-pi` e `C50-0`** *(nelle parole di Luca: «`C35-0` si e' fuso: la scelta dei cluster dipende da cosa fa l'opposizione di fase»)*.
+5. ### **L'ordine: `LIB0`-`LIB2` fra `C35-pi` e `C50-0`** *(un calcolo alla volta, insieme alle cure e alle carte IS2 e IS3)*.
+
+- ### ⚠ **Una nota onesta sul punto `4`:** **«`C35-0` si e' fuso» NON e' ancora una misura del repo.** **Il log di `C35-0` porta le misure del SINGOLO attorno al centro della densita' totale** *(il punto medio)*, **non una lettura della coppia** *(`coppia_corse`, sez. `12`)*: ### **lo dira' `d(t)` nel referto della coppia** *(`carta_coppia.py`, a `C35-pi` finita)*. **La decisione di rimandare i cluster non dipende da questo, e resta.**
+- **Durante `C35-pi`: il codice di `libreria.py`** *(un file nuovo, che la corsa non importa)*, **committato prima di girarlo; `LIB0` a corsa chiusa.**

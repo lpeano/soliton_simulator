@@ -70,3 +70,9 @@
 - ### **La strada (r1): `cs` acceso DOPO la rampa, dal tick `K + 1`, col tick del nucleo cosi' com'e'** *(`tick.tick_con_cs`)*; **nella rampa `cs = 0.15` uniforme come oggi.** **Scartate (r2)** *(un secondo percorso del tick)* **e (r3)** *(la variante che il codice dichiara sbagliata)*. **La decisione `3` delle `12:42` («dal tick `1`») e' sostituita da questa.**
 - ### **DICHIARATO, qui e nel referto:** **a `t = K` il vuoto e' gia' disturbato: l'accensione e' un CAMBIO BRUSCO** *(`cs` dentro il solitone da `0.15` fino a `~0.004`)*. ### **Il referto di `TCS` legge SEPARATAMENTE il transitorio** *(le prime `1000` unita' di tempo dopo l'accensione: l'emissione, la forma, il centro)* **e il resto, sempre contro `TB3` agli stessi tempi.**
 - **Il codice di `cs` si prepara durante la coppia, SENZA girarlo** *(su una copia: la regola del par. `5`)*.
+
+## 11. LA DECISIONE DI LUCA DEL `2026-11-07` `10:06`, PER `TCS` *(da IS3, `doc/TASK_HISTORY/2026-11-06_brezzi_modi_vuoto.md` sez. `11`)*
+
+- ### **Con `cs` acceso il vuoto `F3` ruota a `omega_cs`** *(`1.272` rad per tick, non `0.471`)*: ### **la tabella `c(t)` del bordo va RIMISURATA col tick di `TCS`** *(come `B0`)*, ### **e il controllo `C0` rifatto con quella.**
+- **Da dove viene la differenza:** **`tick_con_cs` accende insieme `CAMM-FASE-VUOTO`** *(l'eccezione dichiarata alle `12:42`, sez. `8.2`)*, **che sul vuoto puro aggiunge `+0.801` rad per tick.** ### **Senza la tabella nuova il bordo toglierebbe il vuoto con la fase sbagliata**: **il bordo stesso emetterebbe.**
+- **Ancora prima:** **la cura dell'`assert` del tetto di `Omega`** *(la decisione `1` delle `10:06`)*: **`TCS` passa da `EP.applica` a ogni tick, e un ulp sopra il tetto la fermerebbe.**
