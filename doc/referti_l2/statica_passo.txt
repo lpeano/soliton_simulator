@@ -4,7 +4,7 @@
 [TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
 [TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
 [TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
-[TIMBRO] carta_statiche.py  sha1-BYTE 97e31152  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 4613ce95  committato e pulito
 ==================================================================================================================================
 LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --passo; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
 ==================================================================================================================================
@@ -26,8 +26,8 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --passo; nessuna corsa; NN (25
   s 0.20: il ramo piatto P lungo A1, |fase| per tick da 6.283185310e-01 a 6.283185311e-01, per unita' di tempo da 3.141592655e+00 a 3.141592655e+00; theta = pi s 6.283185307e-01 per tick
   s 0.20: il ramo D lungo A1, |fase| per tick da 9.594850284e-01 a 1.256636058e+00, per unita' di tempo da 4.797425142e+00 a 6.283180291e+00
   s 0.20: il Goldstone lungo A1 (in unita' di tempo), la omega piu' grande delle 6: 5.074e-06 2.030e-05 8.123e-05 3.249e-04 1.299e-03; il fit c0 -2.299e-08 v +3.071950e-06 b +2.029949e-01
-  DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro 1e-15                                         ### FALLISCE   3.386e-15
-  DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (1.0e-08 per tick; l'a ### FALLISCE   lo scarto massimo 1.475e-08
+  DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro il residuo IS2-E dello stesso tick (3.401e-15 PASSA   3.386e-15
+  DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt, ognuna entro 2 x 1.0e-08 + la mezz PASSA   lo scarto massimo 1.475e-08; il rapporto scarto/soglia massimo 0.211
   DEVE PASSARE: IS2-15 a s 0.15 la b del Goldstone lungo A1 = statica_goldstone.txt al pavimento (1.0e-05 = il pavimento i PASSA   +1.999903e-01, lo scarto 2.000e-08
 ----------------------------------------------------------------------------------------------------------------------------------
   ### il ramo P (la media lungo A1): per tick 3.141592649e-01 4.712388983e-01 6.283185311e-01 (lo scarto relativo 5.000e-01); per unita' di tempo 3.141592649e+00 3.141592655e+00 3.141592655e+00 (lo scarto relativo 2.128e-09); omega(s) / s 3.141592654e+00 3.141592654e+00 3.141592654e+00
@@ -37,4 +37,4 @@ LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --passo; nessuna corsa; NN (25
   ### il Goldstone: b in unita' di tempo +1.979083e-01 +1.999903e-01 +2.029949e-01; lo scarto relativo 2.543e-02; la pendenza di ln b contro ln s +0.0359
   ### il Goldstone, la lettura scritta prima (mia, proposta): b cambia col passo oltre l'1%: dipende dal passo
 ==================================================================================================================================
-ESITO: 5/7 controlli passano; DEVE fallite: 2 ['DEVE PASSARE: IS2-15 a s 0.15 omega misurato = quello di fase_F3.npz entro 1e-15', "DEVE PASSARE: IS2-15 a s 0.15 le 12 fasi a Gamma = la riga oggi di statica_vuoto.txt al pavimento (1.0e-08 per tick; l'annotazione 4.4)"]
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []

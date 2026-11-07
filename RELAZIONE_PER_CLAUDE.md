@@ -24169,3 +24169,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`TT-D`** *(`_tetto_tt_d.py` `860c0f75`)*: **IS3 arriva in fondo**; `204` chiamate, il massimo `3.745 u tetto_k` *(entro `27`)*. **`TT-F`:** la scala vecchia alza, `6.067e+15 u`. **La voce CHIUSA** *(`b1685fc7`)*.
 - ### ⚠ **IS3 arriva in fondo e due DEVE DELLA CARTA falliscono** *(il pezzo dopo in coda)*: **`IS3-15` `1.475e-08`** -- **lo stesso controllo e lo stesso scarto di `IS2-15`, gia' coperto dalla soglia derivata di Luca per IS2**; **`IS3-R` `2.768e-07` contro `1e-8`** -- **col confronto con «oggi», SENZA `CAMM-FASE-VUOTO`: si rilegge col confronto (b) che Luca ha chiesto.**
+
+## 2026-11-07 sera -- IS2 `7/7` E IS3 `7/8` *(`carta_statiche.py` `4613ce95`; le decisioni `2` e `3` di Luca delle `10:06`)*: **`IS3-R` FALLISCE -- FERMO**
+
+- **IS2 `7/7`** con le soglie derivate *(il rapporto scarto/soglia massimo delle fasi `0.211`)*.
+- **IS3 (b) senza toccare il nucleo** *(il tick con `CAMM-FASE-VUOTO` e `cs` fisso)*: ### **sul vuoto uniforme `cs` dinamico = `cs` fisso** *(`2.398e-16`, `omega_cs - omega_fase = 0`)*: **il `+0.801` rad per tick e' TUTTO di `CAMM-FASE-VUOTO`.**
+- ### **`IS3-R` FALLISCE: `2.708e-07` contro `1e-8`** *(contro oggi `2.768e-07`: non viene da `CAMM-FASE-VUOTO`)*. **La mia lettura, non verificata:** **il secondo ordine della differenza finita** *(`J f` cambia `Lambda` solo a `AMP^2`; diviso per `AMP`: `~1e-7`)*; **la proposta: `eR` alle tre ampiezze di `VD-T`.**
+- ### **Dai rami:** **`CAMM-FASE-VUOTO` da sola rende `P` non piatto** *(pendenza `3.2e-02`)* **e apre un gap nel Goldstone** *(`5.86e-04` per unita' di tempo)*; ### **la lettura di prima «`cs` cura il ramo piatto» era sua, non di `cs`: caduta.**
+- **FERMO su (q1) `IS3-R` e (q2) la lettura del gap** *(il task history `2026-11-06_brezzi_modi_vuoto`, sez. `13.4`)*.
