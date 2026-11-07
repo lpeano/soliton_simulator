@@ -1,0 +1,23 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] libreria.py  sha1-BYTE 6c015f66  committato e pulito
+==================================================================================================================================
+LA LIBRERIA DEI SOLITONI MATURI (Luca 00:32, 10:06, 16:01): dagli stati di TBS; R_t [16, 20, 24, 28, 32, 36, 40], la soglia 1e-06, LIB1-1 x 1.01, LIB1-C 0.2 nodi; il bordo c0 [40.5, 40.5] R_A 28 g_max 0.03; K 6667
+==================================================================================================================================
+  DEVE PASSARE: L0-S lo stato di TBS al tick 100000 ha gli sha del jsonl                                                 PASSA   E:\soliton_simulator\stati\TBS\TBS_stato_100000.npz
+### LIB0: il ritaglio dello stato al tick 100000 (t 15000): M 9.9504969590e+05, E 5.0332136176e+06
+  R_t   M fuori/M    E fuori      salto psi    salto D      |psi-psi_t|  |D-D_t|     
+  16    2.909171e-02 +3.329581e-02 3.626494e-01 6.592410e-01 1.705629e-01 5.599230e-01
+  20    5.437378e-05 +5.731538e-05 1.352627e-01 7.862394e-01 7.373858e-03 2.484021e-01
+  24    1.113102e-06 +9.745127e-07 1.339352e-03 4.826501e-02 1.055036e-03 1.643633e-02
+  28    5.811779e-07 +4.594316e-07 1.268916e-03 2.382106e-02 7.623503e-04 7.298210e-03
+  32    1.528518e-07 -1.836379e-07 9.167512e-04 8.124032e-03 3.909626e-04 3.501004e-03
+  36    1.563732e-08 +1.650282e-08 3.650941e-04 4.272805e-03 1.250493e-04 1.122836e-03
+  40    5.765328e-10 -3.846529e-09 1.140066e-04 1.081774e-03 2.401110e-05 2.315156e-04
+### NESSUN R_t della griglia passa il criterio (la massa fuori, l'energia fuori e i due salti sotto 1e-06): FERMO (Luca 10:06: lo si dice, non lo si nasconde)
+ESITO: 1/1 controlli passano; DEVE fallite: 0 []

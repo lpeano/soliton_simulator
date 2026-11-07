@@ -93,3 +93,19 @@
 - **Le scelte, dichiarate:** **un processo solo, in ordine: `LIB0` -> la scelta di `R_t` col criterio di Luca -> la costruzione** *(sette oggetti, `TBS` ai tick `100000 .. 160000`)* **-> `R2` -> `LIB1` -> `LIB2`**; ### **l'oggetto si conserva nel riferimento della corsa d'origine** *(gli array interi, zero fuori da `R_t`, col centro: si trasla con `roll` esatto)* **invece che «in coordinate relative»** *(2.1)*; **`LIB1-0` contro gli `sha` di `dopo_stato`** *(`100` tick col ciclo della corsa: un confronto AL BIT, piu' forte dei campioni a `1e-12` di 2.3)*; **le chiavi derivate dello stato** *(`Lambda`, `rho`, `h_int`, `psi`)* **dell'incollato dallo stato d'origine.**
 - ### **`R2` sulla libreria** *(Luca: «se I1 non e' pronta, la libreria salva nel formato di R4 e fa la prova R2 su almeno un elemento»)*: **l'oggetto riletto dal file** *(lo `sha1` contro l'indice)* **e ripartito due volte per `100` tick: gli `sha` di ogni chiave al bit; il DEVE FALLIRE: senza il disturbo del vuoto `D`.** ### ⚠ **Il formato non e' ancora quello di R4** *(il commit e l'impronta nel file: li mette I1)*: **gli oggetti si registrano in I1 senza rigirarli** *(Luca)*.
 - **I1, I3, I4:** **sequenziali, dopo** *(il task history di I1 prima del codice)*.
+
+## 7. L'ESITO DI `LIB0` *(`doc/referti_l2/libreria_solitoni.txt`, `libreria.py` `6c015f66`; `10` s, exit `2`)*: **NESSUN `R_t` PASSA IL CRITERIO: FERMO** *(Luca `10:06`: «lo si dice, non lo si nasconde»)*
+
+| `R_t` | `M` fuori / `M` | `E` fuori | il salto di `psi` | il salto di `D` | `|psi - psi_t| / |psi|` | `|D - D_t| / |D|` |
+|---|---|---|---|---|---|---|
+| `16` | `2.909e-02` | `+3.330e-02` | `3.626e-01` | `6.592e-01` | `1.706e-01` | `5.599e-01` |
+| `20` | `5.437e-05` | `+5.732e-05` | `1.353e-01` | `7.862e-01` | `7.374e-03` | `2.484e-01` |
+| `24` | `1.113e-06` | `+9.745e-07` | `1.339e-03` | `4.827e-02` | `1.055e-03` | `1.644e-02` |
+| `28` | `5.812e-07` | `+4.594e-07` | `1.269e-03` | `2.382e-02` | `7.624e-04` | `7.298e-03` |
+| `32` | `1.529e-07` | `-1.836e-07` | `9.168e-04` | `8.124e-03` | `3.910e-04` | `3.501e-03` |
+| `36` | `1.564e-08` | `+1.650e-08` | `3.651e-04` | `4.273e-03` | `1.250e-04` | `1.123e-03` |
+| `40` | `5.765e-10` | `-3.847e-09` | `1.140e-04` | `1.082e-03` | `2.401e-05` | `2.315e-04` |
+
+- **La massa e l'energia fuori scendono sotto `1e-6` a `R_t = 28`** *(`5.8e-07`, `4.6e-07`)*; ### **i due SALTI no, a nessun `R_t`** *(a `40`: `psi` `1.1e-04`, `D` `1.1e-03`)*.
+- ### **Una cosa da dire, senza scegliere:** **il salto e' un rapporto di AMPIEZZE** *(`max |psi|` sull'anello / `max |psi|`)*, **la massa e l'energia sono QUADRATICHE**: **un salto di `1e-6` in ampiezza e' `1e-12` in densita'**: ### **il criterio scritto chiede ai salti sei ordini in piu' che alla massa.** **Con lo stesso ordine** *(il salto al quadrato sotto `1e-6`, cioe' il salto sotto `1e-3`)* **passerebbe `psi` da `R_t = 32` e `D` a nessuno** *(`1.08e-03` a `40`)*. **E `D` e' il disturbo del VUOTO**: **la corona del vuoto arriva fino al bordo di `TBS`** *(`R_A 28`, `R_B 40.5`)*: **il ritaglio taglia il vuoto disturbato, non la materia.**
+- ### **FERMO** *(la costruzione, `R2`, `LIB1`, `LIB2` non sono girati)*: **la decisione e' di Luca.** **Le strade che vedo** *(nessuna scelta)*: **(a)** il criterio dei salti QUADRATICO *(il salto al quadrato sotto `1e-6`)*, con `R_t` deciso da `psi` e `D` dichiarato come corona del vuoto che si ritaglia; **(b)** `R_t = 40` *(il massimo)*, dichiarando i salti; **(c)** l'oggetto con TUTTO `D`** *(il vuoto disturbato del toro intero, come `coppia_matura`)* **e `psi` ritagliato**; **(d)** un altro criterio.

@@ -24111,3 +24111,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`C0` breve `3.968e-14`.** **Assorbite, relative: `M 4.645e-03`, `V 4.198e-02`, `E 1.429e-03`** *(`C35-0` `1.002e-02`, `1.016e-01`, `2.705e-03`; `S162` `4.339e-03`, `2.016e-02`, `1.253e-03`)*: **in opposizione di fase la coppia cede al bordo meno materia che in fase, quasi quanto il singolo** *(un numero, non una lettura)*. **Le misure del log sono del singolo attorno al centro della densita' totale.**
 - **Avanti:** **la cura delle unita' e della fase di `carta_coppia`** *(errori miei, nessuna soglia: un commit)*; **il referto della coppia aspetta `A-S-I`** *(Luca)*.
+
+## 2026-11-07 — LA LIBRERIA: `LIB0` FERMA LA COSTRUZIONE, NESSUN `R_t` PASSA IL CRITERIO *(`doc/referti_l2/libreria_solitoni.txt`; task history `2026-11-07_libreria_solitoni_cluster` sez. `7`)*: **FERMO**
+
+- **La massa e l'energia fuori sotto `1e-6` da `R_t = 28`; i salti mai** *(a `40`: `psi` `1.1e-04`, `D` `1.1e-03`)*. ### **Il salto e' un rapporto di ampiezze, la massa e' quadratica: il criterio chiede ai salti sei ordini in piu'.** **`D` e' la corona del vuoto, che arriva fino al bordo.** **Le strade (a)-(d) a Luca.**
