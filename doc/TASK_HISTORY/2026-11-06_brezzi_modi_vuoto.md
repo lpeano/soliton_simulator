@@ -144,3 +144,35 @@
 4. ### **L'ORDINE:** `C35-pi` in volo; **le cure e le carte (IS2, IS3) fra `C35-pi` e `C50-0`** *(un calcolo alla volta)*.
 
 - ### ⚠ **Una premessa per la cura, dal codice, PRIMA di toccarla:** **`energia_pesata` e' nel percorso della corsa** *(`motore._fase_vuoto` la importa)*, **e il driver lancia un processo nuovo a ogni pezzo**: ### **modificarla durante `C35-pi` cambierebbe i pezzi successivi** *(par. `5`)*. **Quindi: durante `C35-pi` solo il task history della cura; il codice a corsa chiusa.**
+
+## 13. IS2 E IS3 DOPO LA CURA DEL TETTO *(le decisioni `2` e `3` di Luca delle `10:06`; la cura `b1685fc7`, chiusa in `dfbed655`)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+### 13.1 LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **IS2** *(`carta_statiche.passo`)*: **le due soglie mie** sono `TOLL_W15 = 1e-15` *(`omega` contro il npz)* e `pav = PAV_T / AMP = 1e-8` *(le `12` fasi a `Gamma` contro `statica_vuoto.txt`)*. **La decisione `3`:** **`omega` entro il residuo `IS2-E` dello stesso tick; ogni fase entro `2 PAV_T / AMP` + la mezza unita' dell'ultima cifra stampata** *(il riferimento e' scritto `%+.6e`: la mezza unita' e' `0.5 x 10^(esponente - 6)`, letta DALLA STRINGA)*. **I numeri gia' visti** *(sez. `10`)*: `3.386e-15 <= 3.401e-15`; `1.475e-08 <= 2e-8 + 5e-8`. ### **So gia' che passano** *(«DEVE contro la propria premessa»)*: **le soglie sono DICHIARATE come cambiate DOPO aver visto i numeri.**
+- ### **IS3-15 e' LO STESSO ANCORAGGIO di IS2-15** *(la stessa funzione `_rif_fasi_vuoto`, lo stesso `T(k)` di oggi, lo stesso scarto `1.475e-08`: `dfbed655`)*: **gli applico la STESSA soglia derivata della decisione `3`, dichiarato** *(non e' una soglia nuova: e' lo stesso controllo; se Luca la vuole diversa per IS3, lo dica)*.
+- ### **IS3 (b), dal codice: SI FA SENZA TOCCARE IL NUCLEO.** **`CAMM-FASE-VUOTO` gira se `mot.cs` non e' `None` E `mot.lambda_c` non e' `None`** *(`energia_pesata.applica`)*; **la scena ha `mot.cs` uniforme `= s = 0.15` e `mot.lambda_c` `None`** *(la forma spenta per la fase)*. **Il tick «`CAMM-FASE-VUOTO` accesa, `cs` spento»** = **`mot.lambda_c = Lambda_c`** *(lo stesso di `tick_con_cs`: `Lambda_vuoto (1 - s) / s = 34`)* **con `mot.cs` FERMO al valore del vuoto** *(`0.15`, che e' `FP.cs(6, 34) = 6/40` allo stesso bit: da verificare, `IS3-CS`)* **e il tick di oggi** *(`AC.tick(z, K + 1, K)`, cioe' `percorri_tick`)*; **poi `mot.lambda_c` rimesso.** **Non e' una legge nuova: e' la forma del nucleo con `cs` non aggiornato.**
+- ### **Che cosa mi aspetto, e perche'** *(le letture si fissano qui)*: **sul vuoto `F3` `Lambda` e' uniforme e il punto fisso converge in `1` giro, quindi `cs` dinamico = `cs` fisso: `tick_cs F3 = tick_fase F3` all'arrotondamento** *(`omega_cs - omega_fase ~ 1e-15`)*: ### **il `+0.801` rad per tick di IS3 sarebbe TUTTO di `CAMM-FASE-VUOTO`**, non di `cs`. **Sulle perturbazioni:** **`J f`** *(una rotazione di fase)* **non cambia `Lambda` al primo ordine, quindi non vede `cs`**; **`f`** *(cambia `Lambda`)* **lo vede.**
+- **Che cosa NON so:** **quanto vale la risposta di `cs` su `f`** *(se e' sotto il pavimento, `IS3-L-F` non separa, e va detto)*; **se `CAMM-FASE-VUOTO` a `cs` fisso converge** *(il punto medio di `Omega`)*.
+
+### 13.2 PROGETTAZIONE *(i DEVE e le letture, PRIMA dei numeri)*
+
+- **IS2:** `IS2-15` sulle soglie derivate *(due DEVE)*; il resto **invariato**.
+- **IS3, il riferimento nuovo `T_fase(k)`** *(il tick con `CAMM-FASE-VUOTO` e `cs` fisso)*; **«oggi» resta SOLO per l'ancoraggio `IS3-15` e stampato accanto.**
+  - **`IS3-CS`** *(DEVE PASSARE)*: **`mot.cs` della scena = `FP.cs(Lambda_vuoto, Lambda_c)` al bit** *(se no, il tick «a `cs` fisso» non e' il vuoto di `tick_con_cs`)*;
+  - **`IS3-E-F`** *(DEVE PASSARE)*: **`F3` autovettore del tick con `CAMM-FASE-VUOTO`, entro `1e-12`** *(come `IS3-E`)*;
+  - ### **`IS3-0b`** *(DEVE PASSARE, la premessa)*: **`|tick_cs F3 - tick_fase F3| / |F3|` e `|omega_cs - omega_fase|` entro il residuo dei due autovettori** *(`max` dei due `IS3-E`: la risoluzione di `omega`, come la decisione `3`)*. ### **Se fallisce: `cs` dinamico cambia il vuoto UNIFORME, e la premessa cade: FERMO.**
+  - **`IS3-R`** *(DEVE PASSARE)*: **`|T_cs(0) J f - T_fase(0) J f| / |J f|` entro `pav`**;
+  - **`IS3-L-F`** *(DEVE FALLIRE)*: **`|T_cs(0) f - T_fase(0) f| / |f|` entro `pav`** *(se PASSA, cioe' `cs` non si vede nemmeno su `f`: IS3 non separa, e lo dico)*;
+  - **`IS3-15`** *(DEVE PASSARE)*: l'ancoraggio di oggi, con la soglia derivata della decisione `3`;
+  - **i rami** *(`Z`, `G`, `P`, `D`, lungo `A1` e a `30` gradi)*: **«con `cs`» contro «con `CAMM-FASE-VUOTO`, `cs` fisso»**, stampati come prima *(senza verdetto)*, **e accanto la riga di oggi.**
+- **La lettura scritta prima** *(la sez. `5.2`, aggiornata)*: **cio' che resta fra `T_cs` e `T_fase` e' la risposta di `cs` alle variazioni di `Lambda`, e SOLO quella.** **I numeri della corsa di `dfbed655`** *(«con `cs`» contro oggi: `G` `+6.7e-04` per tick a `Gamma`, `P` fino a `3.4e-02` di pendenza)* **sono «`cs` + `CAMM-FASE-VUOTO`»**: **non si leggono come `cs`.**
+- **Che cosa mi fa FERMARE:** **`IS3-CS` o `IS3-0b` che falliscono; un `assert` del nucleo; IS2 sotto `7/7`.**
+
+### 13.3 TODO
+
+1. **Questo task history: commit e push.**
+2. **`carta_statiche.py`:** le soglie derivate di `IS2-15` e `IS3-15`; il tick `tk_fase` e il riferimento `T_fase` in `cs_onde`; i DEVE nuovi. **L'INVENTARIO col blob; commit e push PRIMA di girare.**
+3. `python csv/solitone/carta_statiche.py --passo > doc/referti_l2/statica_passo.txt`, poi `--cs-onde > doc/referti_l2/statica_cs_onde.txt` *(uno alla volta)*.
+4. I referti, l'esito qui *(13.4)*, la relazione, la MAPPA; commit e push.
+5. **Poi il successivo in coda: B1** *(il bilancio locale di norma ed energia su `TBS`)*.
