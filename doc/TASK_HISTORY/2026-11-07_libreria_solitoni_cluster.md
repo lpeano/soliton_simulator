@@ -240,3 +240,11 @@
 2. Il processo separato della libreria: `python csv/solitone/libreria_stati.py > doc/referti_l2/libreria_stati.txt`.
 3. Il referto, l'indice, la relazione, la MAPPA, l'esito qui *(15.6)*; commit e push.
 4. Poi il successivo in coda: **la cura del tetto di `Omega`** *(il task history `2026-11-07_cura_tetto_omega`)*.
+
+### 15.6 L'ESITO *(`libreria_stati.py` `967d360f`, `doc/referti_l2/libreria_stati.txt`)*: **`58/58`** -- **I SETTE STATI COMPLETI NELLA LIBRERIA**
+
+- **I file:** `E:\soliton_simulator\libreria\TBS_<tick>_completo.npz`, **`2889540` byte l'uno**, le chiavi `Lambda`, `h_int`, `phi_h`, `psi`, `psi_h`, `rho` *(tutte quelle di `z["st"]`)* piu' `D`, `c_t`, il centro; gli `sha1` nell'indice *(`ef7950af`, `d94566c4`, `b73237d8`, `01b8a330`, `4b9665bd`, `5d1625cb`, `96fb7acf`)*. **L'oggetto ritagliato `TBS_100000_R32.npz` resta, marcato «ritagliato, non validato».**
+- **Su tutti e sette:** `L0-S`, `R2-S`, `R2` *(`6` chiavi al bit)*, ### **`LIB1-0` al bit anche sui SEI tick nuovi** *(la premessa «le chiavi di `z["st"]` bastano» confermata: nessuno stato fuori da `st` per il ciclo della corsa)*, `R2-F` *(DEVE FALLIRE: fallisce)*, **`LIB1-U` da `6.791e-15` a `8.615e-15`**, `LIB1-U-F` `6.858e-01`.
+- ### **`LIB1-C`: la distanza dai centri REGISTRATI dalla corsa e' `0.000e+00` esatto, a `t 0` e per `2000` tick** *(`200` confronti per tick, `0` campioni mancanti)*: ### ⚠ **dichiarato:** **e' l'identita' al bit della traiettoria** *(il centro di `per` usa la stessa densita' per nodo, e la ripartenza e' deterministica)*: **dice che la ripartenza dal file rifa' la corsa, non misura una tolleranza** *(la soglia `0.2` non entra in gioco)*.
+- **`LIB1-P`:** **`3.347e-12` entro `t_max omega eps = 1.674e-11`** *(`omega` `0.471238898038469` per tick)*; **`LIB1-P-F`** *(un tick sfasato)* **`4.712e-01`: fallisce, come deve.**
+- **Non applicabili, stampati senza verdetto:** `LIB1-1`, `LIB1-F`, `L3`, `L3-F`, `LIB2`. **Il controllo dei cluster sulle grandezze medie: la sez. `15.4`, coi punti `p1`-`p5` da decidere.**

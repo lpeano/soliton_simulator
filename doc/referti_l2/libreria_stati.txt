@@ -1,0 +1,94 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 12744a43  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] libreria_stati.py  sha1-BYTE 967d360f  committato e pulito
+==================================================================================================================================
+LA LIBRERIA, GLI STATI COMPLETI SENZA TAGLIO (Luca 19:37): TBS ai tick [100000, 110000, 120000, 130000, 140000, 150000, 160000]; R2 100 tick, LIB1-C 0.2 nodi per 2000 tick, LIB1-U 1e-12; il bordo c0 [40.5, 40.5] R_A 28 g_max 0.03; K 6667
+### NON APPLICABILI (riguardano il taglio, Luca 19:37): LIB1-1, LIB1-F, L3, L3-F, LIB2 -- nessun verdetto
+==================================================================================================================================
+### IL TICK 100000 (t 15000)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 100000 ha gli sha del jsonl                                                 PASSA   TBS_stato_100000.npz
+  TBS_100000_completo.npz, 2889540 byte, sha1 ef7950afc6fe; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.1560, 40.3618); c(t) +0.987688340595 +0.156434465038i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   6.791e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 100000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 110000 (t 16500)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 110000 ha gli sha del jsonl                                                 PASSA   TBS_stato_110000.npz
+  TBS_110000_completo.npz, 2889540 byte, sha1 d94566c4eca8; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2553, 40.3394); c(t) +0.987688340595 +0.156434465039i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   7.572e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 110000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 120000 (t 18000)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 120000 ha gli sha del jsonl                                                 PASSA   TBS_stato_120000.npz
+  TBS_120000_completo.npz, 2889540 byte, sha1 b73237d80aaa; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2208, 40.3731); c(t) +0.987688340595 +0.156434465039i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   7.895e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 120000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 130000 (t 19500)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 130000 ha gli sha del jsonl                                                 PASSA   TBS_stato_130000.npz
+  TBS_130000_completo.npz, 2889540 byte, sha1 01b8a330fad5; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2008, 40.4272); c(t) +0.987688340595 +0.156434465040i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   8.615e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 130000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 140000 (t 21000)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 140000 ha gli sha del jsonl                                                 PASSA   TBS_stato_140000.npz
+  TBS_140000_completo.npz, 2889540 byte, sha1 4b9665bd81c9; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2054, 40.4154); c(t) +0.987688340595 +0.156434465041i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   7.144e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 140000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 150000 (t 22500)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 150000 ha gli sha del jsonl                                                 PASSA   TBS_stato_150000.npz
+  TBS_150000_completo.npz, 2889540 byte, sha1 5d1625cbfb09; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2424, 40.4214); c(t) +0.987688340595 +0.156434465041i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   7.725e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 150000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### IL TICK 160000 (t 24000)
+  DEVE PASSARE: L0-S lo stato di TBS al tick 160000 ha gli sha del jsonl                                                 PASSA   TBS_stato_160000.npz
+  TBS_160000_completo.npz, 2889540 byte, sha1 96fb7acf2a96; le chiavi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho']; il centro (40.2848, 40.4230); c(t) +0.987688340596 +0.156434465035i
+  DEVE PASSARE: R2-S il file della libreria riletto ridà gli sha del jsonl                                               PASSA   
+  DEVE PASSARE: R2 il file riletto e ripartito due volte per 100 tick col ciclo della corsa: gli sha di ogni chiave coincidono al bit PASSA   6 chiavi
+  DEVE PASSARE: LIB1-0 la ripartenza dal file per 100 tick ridà gli sha di dopo_stato della corsa al bit                 PASSA   
+  DEVE FALLIRE: R2-F lo stesso SENZA il disturbo del vuoto (phi = c(t) F3): gli sha coincidono                           PASSA   
+  DEVE PASSARE: LIB1-U la fase globale e^{i 0.7} su psi e phi (e sul vuoto di riferimento) commuta con un tick entro 1e-12 PASSA   7.906e-15
+  DEVE FALLIRE: LIB1-U-F la fase solo su psi: entro 1e-12                                                                PASSA   6.858e-01
+  LIB1-C il controllo di scala: la distanza al tick 160000 fra il centro dal file e quello registrato 0.000e+00 nodi; 200 confronti, 0 campioni mancanti
+  DEVE PASSARE: LIB1-C la ripartenza dal file: la distanza dal centro registrato dalla corsa entro 0.2 nodi per 2000 tick (ogni 10) PASSA   il massimo 0.000e+00
+### LIB1: c(t) ai tick [100000, 110000, 120000, 130000, 140000, 150000, 160000]: le fasi +0.157079632677 +0.157079632678 +0.157079632679 +0.157079632679 +0.157079632680 +0.157079632681 +0.157079632674; omega 0.471238898038469 per tick
+  DEVE PASSARE: LIB1-P tutti gli stati alla stessa fase di c(t) entro t_max omega eps = 1.674e-11 (Luca 17:55)           PASSA   3.347e-12
+  DEVE FALLIRE: LIB1-P-F lo stesso con l'ultimo tick sfasato di 1 (160001)                                               PASSA   4.712e-01
+### L'INDICE doc\referti_l2\libreria_solitoni\indice.json: 7 stati completi; l'oggetto ritagliato marcato «ritagliato, non validato»
+==================================================================================================================================
+ESITO: 58/58 controlli passano; DEVE fallite: 0 []
