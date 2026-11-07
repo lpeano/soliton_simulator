@@ -46,3 +46,10 @@
   - **(v1) materia e luce vedono `cs` DIVERSI:** **la materia sta dove `Lambda` non e' quello del vuoto** *(nel cuore `cs` fino a `~0.004`)*, **la luce viaggia sul vuoto** *(`cs = 0.15`)*: ### **la misura: la velocita' di un pacchetto di materia e di un'onda di `U` che attraversano la STESSA regione di `cs` non uniforme** *(un gradiente di `Lambda` imposto, come `_forza_da_cs`)*, **il rapporto locale contro `cs` locale**; **se le due velocita' seguono `cs` allo stesso modo, (v1) non c'e'.**
   - **(v2) la velocita' della materia viene dalla sua STRUTTURA INTERNA, non solo dal tick:** **un solitone ha una velocita' limite propria** *(la sua dispersione, `v_b` della coppia a `K` modificata dal legame)*: ### **la misura: `v_max` di un solitone** *(la sua risposta a una spinta)* **contro `v_max` del pacchetto libero, alla STESSA `cs`**; **se coincidono, (v2) non c'e'.**
 - ### **Se nessuna delle due:** **il rapporto non puo' cambiare con `cs`, e l'idea di Luca del `25/10` e' smentita PER COSTRUZIONE del tick** *(da scrivere cosi', prima di misurarla)*.
+
+## 5. T2, IL CODICE *(`csv/_u1_oggi.py`, `sha1-BYTE 06ef4fe9`; committato, NON girato)*
+
+- **Ripreso:** **`Campo`, `scrivi_U`, `avvolto`, `tick_campo`, `rovescia` IMPORTATI da `_u1_prototipo`** *(nessuna riga copiata)*.
+- **Nuovo:** **`tick(z, t, K, campo, sorgente)`** *(il tick intero della corsa, `accensione.tick`, fra due mezze spinte; ALZA nella rampa)*; **`campo_della_scena`** *(gli archi dalle estremita' `2a`, `2a + 1`, `s_a` da `FP.s_arco`)*; **`scena(e, forma)`** *(le chiamate di `corsa_accensione.ripartenza`; l'`assert` che la scena parta da `U = I`; `mot.geo.U` rimesso all'uscita)*.
+- ### **`e` e `forma` OBBLIGATORI** *(nessun valore predefinito: `A1`)*. **Controllato solo che si compili e si importi** *(nessuna scena costruita: e' un calcolo, in coda)*.
+- **Avanti, in coda dopo le cure:** **T1, T3, T4, T5**, ciascuno col suo script e il suo referto, committati prima di girarli.
