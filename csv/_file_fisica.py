@@ -90,6 +90,7 @@ FILE_FISICA = (
     'primo_ordine/tick.py',
     'primo_ordine/_collauda_cs.py',
     'primo_ordine/_collauda_cs_centro.py',
+    'primo_ordine/_collauda_tetto.py',
     'primo_ordine/_collauda_cs_l1.py',
     'primo_ordine/_misura_hw.py',
     'primo_ordine/_misura_strada_d.py',

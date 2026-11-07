@@ -73,3 +73,10 @@
 - **`TT-F`** *(DEVE FALLIRE)*: **la scala vecchia di `7395cd9a`, messa APPOSTA, sulla scena di `C5` a `Lambda_c = 0.8`: il controllo curato ALZA**, **e l'eccesso stampato in unita' di `u tetto`** *(atteso `~10^15`: un fattore, non un ulp)*.
 - **`TT-0`** *(il braccio `0`)*: **la suite intera** *(`primo_ordine/collauda.py`)* **prima e dopo, le uscite IDENTICHE tolte le righe dei tempi**; **le corse vecchie al bit PER COSTRUZIONE** *(la premessa `4`: non e' un DEVE)*.
 - **Che cosa mi fa FERMARE:** **`TT-D` che non passa; `TT-F` che non alza; la suite che cambia una riga.**
+
+## 7. LA CURA NEL NUCLEO *(`energia_pesata.py`; il collaudo `primo_ordine/_collauda_tetto.py`, `D2-T`)*
+
+- **`ulp_del_tetto(grado_max)`** *(il fattore della sez. `6.1`, `p = d + 7`, `q = d + 8`: `27.000000 u` a `d = 6`)* e **`controlla_tetto(omega_k, tetto_k, grado_max, dove)`** *(l'argomento nuovo, obbligatorio; `applica` passa `int(mot.inc.grado.max())`)*. **`tetto_omega`, `entro_tolleranza`, `omega`: invariati.**
+- **`D2-T` `7/7`:** il fattore `27.000000 u`; **un ulp sopra un tetto esatto NON alza**; **un fattore `1 + 1e-12` ALZA** *(DEVE FALLIRE)*; il confine a `0.5` e `2` volte la tolleranza; **il controllo vecchio sullo stesso caso alzava** *(il caso ha materia)*; il messaggio nomina la tolleranza e il grado. **Registrato in `collauda.py`, nella LISTA di `csv/_file_fisica.py` e nella mappa `primo_ordine/_mappa.yaml`.**
+- ### ⚠ **Un mio errore, preso dalla suite:** **la prima suite dopo la cura dava `P-MOD` FALLITO** *(il collaudo nuovo sul disco e non in mappa, poi la responsabilita' oltre una riga)*: **curato prima del commit** *(`P-MOD` `10/10`, `0` errori)*.
+- ### **`TT-0`, il braccio `0`:** **i tre collaudi con `cs` acceso** *(`_collauda_cs.py`, `_collauda_cs_centro.py`, `_collauda_cs_l1.py`)* **IDENTICI riga per riga prima e dopo** *(tolti i timbri)*; **la suite intera: prima `65/65`, dopo `66/66`; tolte le cifre dei tempi, l'unica differenza e' la riga di `D2-T`** *(e il conto)*. **Le corse vecchie: al bit PER COSTRUZIONE** *(la premessa `4`)*. **`TT-D` e `TT-F`: il commit dopo** *(lo script `_tetto_tt_d.py`, committato prima di girarlo)*.

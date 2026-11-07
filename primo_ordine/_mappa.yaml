@@ -290,6 +290,10 @@ moduli:
     responsabilita: cs al centro del palindromo a punto fisso -- i giri e il secondo ordine
     importa: [_presidio, composizione, deriva, flussi_parziali, tick]
 
+  - nome: _collauda_tetto.py
+    responsabilita: il tetto di Omega con la tolleranza derivata -- un ulp passa, un fattore alza
+    importa: [_presidio, energia_pesata]
+
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento
     importa: [_presidio, composizione, deriva, deriva_variabile, energia, materia_vuoto, motore, saturazione, tick]
