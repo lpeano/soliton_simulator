@@ -3,7 +3,7 @@ r"""**T1: I TRE SIGILLI DI GAUGE COL CRITERIO DELLA DECISIONE `(1)`** *(il task 
 
     python csv/solitone/u1_t1.py > doc/referti_l2/u1_t1.txt
 
-### **Rigirati AL LORO COMMIT in un `git worktree` staccato su `E:`** *(la cartella della corsa non cambia)*: `_u1_prototipo.py` a `0b6bfde8` *(il sigillo `(b)`)*,
+### **Rigirati AL LORO COMMIT in un `git worktree` staccato ACCANTO al repo** *(`C:\Users\lpeano\wt_t1`; su `E:` git lo rifiuta, `1c246469`; la cartella della corsa non cambia)*: `_u1_prototipo.py` a `0b6bfde8` *(il sigillo `(b)`)*,
 `_u1_secondo.py` a `64bb2328` *(`(b1)`, `(b2)`)*. ### **`T1-R`:** le righe rifatte = le righe dei referti committati. ### **`T1-b`, `T1-b1`, `T1-b2`** *(la decisione `(1)`)*:
 in ogni riga `|dE| / stima <= 1`, `rho <= 1e-12`, `eB <= 1e-12`. **`T1-F`** *(DEVE FALLIRE)*: lo stesso con la stima divisa per `10`. **I referti vecchi non si riscrivono.**
 """
@@ -18,7 +18,7 @@ if os.path.dirname(_QUI) not in sys.path:
     sys.path.insert(0, os.path.dirname(_QUI))
 import solitone  # noqa: E402,F401  (i percorsi)
 
-DIR_WT = os.path.join("E:" + os.sep, "soliton_simulator", "wt_t1")
+DIR_WT = os.path.join(os.path.dirname(solitone.RADICE), "wt_t1")   # ### accanto al repo, su C: (come st_main): su E: git rifiuta il worktree, E: non registra il proprietario (1c246469)
 TOLL_REL = 1e-12               # ### la decisione (1) di Luca: rho ed e B a 1e-12 relativo
 SIGILLI = (("u1_prototipo", "0b6bfde8", "csv/_u1_prototipo.py", "doc/referti_l2/u1_prototipo.txt",
             re.compile(r"^\s*(\S+) s ([\d.]+) (\S+)\s+e ([\d.]+) \| \(b\) rho (\S+) E (\S+) eB (\S+) \[fase globale: E (\S+); \|dE\| / stima (\S+)\]")),
