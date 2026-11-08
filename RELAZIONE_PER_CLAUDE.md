@@ -24427,3 +24427,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il periodo di `TB3`:** **`1500` anche a un altro passo, ma `768` DENTRO i pezzi: il `1500` e' la lunghezza di un pezzo, una cucitura delle riprese.**
 - **Le letture:** **le pendenze calano in modulo** *(verso uno stato fisso)* **tranne l'ALONE, che cresce; la vita estrapolata `~4e7` unita' per `TB3` e `TBS`, `~1e7` per `S162`.**
 - ### **LE DOMANDE:** **(r1) l'accelerazione costruita con un'ampiezza che il criterio DEVE vedere** *(almeno `3` errori della differenza: dall'errore, non da me)*; **(r2) le finestre col periodo dentro i pezzi** *(`768` per `TB3`)*; **(r3) la cucitura alle riprese: da guardare.**
+
+## 2026-11-08 (l'orologio: `20:05`) -- T3, d6' RIFATTO E d8: **`2/3` -- LA PROVA «REGGE» MA LA CURA COMPATTA NON CAMBIA NIENTE: L'ANGOLO CHE CRESCE NON E' IL MECCANISMO; FERMO SU T3** *(`doc/referti_l2/u1_t3f.txt`; il task history sez. `14.12`)*
+
+- ### **d6' rifatto** *(con `U = I`)*: **col campo / senza alla stessa norma: `1.14`, `2.06`, `835`** *(`x 1e-3`, `x 1e-1`, `x 1`)*: **il campo aggiunge irreversibilita' solo alla norma piena.**
+- ### **d8:** **la pendenza log-log `0.743`** *(«regge»)*, **ma fino a `N = 100` `G6` e' uguale al senza campo e il segnale e' tutto a `N = 300`: confuso con `N`.** ### **La cura** *(`e A` modulo `2 pi`)*: **`2.54e-10` contro `2.55e-10`: NIENTE. L'ipotesi dell'angolo cade per la cura.**
+- ### **LE DOMANDE:** **(t11) le mie ipotesi, e in che ordine: (i) la deriva in un passo al centro; (ii) l'amplificazione attraverso `e^2 rho`** *(lo stesso `e^2 rho` con `rho` e `e` diversi)*. **(t12) la catena `U(1)` resta ferma.**
