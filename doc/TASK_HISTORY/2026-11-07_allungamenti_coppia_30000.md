@@ -143,3 +143,10 @@
 
 - **`csv/_u1_oggi.py` e `csv/_u1_carica_e.py` importano la libreria da FUORI `csv/solitone/`** *(miei, `2026-11-07`, senza la cassetta dopo)*. **Gli altri `107` controlli passano**: **i test della libreria e il `D6` dei blob.**
 - ### **Il criterio della sez. `6.2` («la cassetta che non passa» mi ferma) era scritto per PROTEGGERE LA CORSA:** **la parte della cassetta che la protegge** *(i test della libreria al bit, nessun `.py` della libreria cambiato)* **PASSA.** **Quindi: lo stato e il fallimento committati; la cura** *(i due script in `csv/solitone/`)* **un commit a se'; `R-1` parte accanto, dichiarato.** **Se Luca la legge diversamente, mi fermo.**
+
+### 6.5 `R-1` SU `C35-0`: **`4/4` AL BIT** *(`doc/referti_l2/ripresa_C35-0.txt`; `corsa_accensione.py` `b7233aff`; `01:25`-`02:29`)* -- **E L'ALLUNGAMENTO PARTE**
+
+- **`R-0`** *(il file di ripresa a `66667` e lo stato completo a `60000` contro gli `sha` registrati)* **e `R-1`** *(l'ultimo pezzo rifatto da `corsa()` stessa in una sabbiera: `sha_fine`, campioni, `D`, `D_acc`, `dopo_stato`, bordo, `fermata`, `t_dis` e lo `sha1` delle mappe UGUALI AL BIT)* **passano; `R-1-F` fallisce come deve** *(contro `C35-pi`)*. ### **La ripresa e' la corsa ininterrotta.**
+- ### **IL RALLENTAMENTO** *(Luca: in tick al secondo)*: **il pezzo rifatto `0.5756` s per tick, l'originale `0.3900`: `1.737` contro `2.564` tick al secondo, `1.476` volte piu' lento**, **con accanto, a turno, la cassetta due volte, IS3 (q1) e B1** *(gli orari nei loro commit)*. **Sotto la soglia d'avviso del doppio** *(6.2)*.
+- ### **I FILE CHE NON SI TOCCANO MENTRE UNA CORSA GIRA: `61`** *(la lista nel referto: `34` di `csv/`, `10` di `csv/solitone/`, `17` di `primo_ordine/`)*. **`carta_statiche.py`, `bilancio_b1.py`, `collauda.py` NON ci sono**: **le prove corte e `D6` si possono fare.**
+- ### **L'ALLUNGAMENTO DI `C35-0` PARTE ALLE `02:30`** *(il driver dei pezzi, `--corsa C35-0` fino a «finita»; il semaforo `FERMA`)*: **`133333` tick; la stima d'arrivo `16:56` a `0.3900` s per tick, `23:49` a `0.5756`** *(oggi, `2026-11-08`)*. **La stima vera dopo il primo pezzo.**

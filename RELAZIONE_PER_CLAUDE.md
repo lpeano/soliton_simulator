@@ -24206,3 +24206,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'ENERGIA: (o4).** **Il totale oscilla di `134.4` in `100` tick; lo cambiano soprattutto `spostamento_trasporto` (`+256.3`) e `moneta_spin` (`-232.1`)**; **la sorgente per nodo piu' grande `0.054` dell'oscillazione, nel cuore.**
 - **Le due divisioni d'arco non fatte** *(una seconda fonte del libro dei conti)*: **la domanda (b1) a Luca.**
 - **Il tempo: `91` s, accanto a `R-1`.**
+
+## 2026-11-08 notte -- `R-1` SU `C35-0` `4/4` AL BIT, E L'ALLUNGAMENTO DI `C35-0` IN CORSO *(`doc/referti_l2/ripresa_C35-0.txt`)*
+
+- ### **La ripresa e' la corsa ininterrotta:** **l'ultimo pezzo `60000 -> 66667` rifatto da `corsa()` stessa dallo stato completo a `t 9000` da' `sha_fine`, campioni, `D`, `dopo_stato`, bordo e mappe AL BIT**; **`R-1-F` fallisce come deve.**
+- ### **Il rallentamento con le prove corte accanto:** **`1.737` tick al secondo contro `2.564`** *(`0.5756` contro `0.3900` s per tick: `x 1.476`)*.
+- **I file del percorso della corsa: `61`** *(la lista nel referto)*; **`carta_statiche.py` e `bilancio_b1.py` non ci sono.**
+- ### **`C35-0` da `10000` a `30000` partita alle `02:30`; l'arrivo stimato fra le `16:56` e le `23:49` di oggi.**
