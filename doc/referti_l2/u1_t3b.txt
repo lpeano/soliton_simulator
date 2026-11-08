@@ -1,0 +1,47 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3b.py  sha1-BYTE 728f428c  committato e pulito
+==================================================================================================================================
+T3, LA DIAGNOSI (d1, d2) E IL REGIME MODERATO (Luca 13:45): lo stato E:\soliton_simulator\libreria\TBS_100000_completo.npz; e ['0.1000', '0.3029']; N (10, 30, 100); TAU del caos 35 (la forchetta (25.0, 40.0)); N_B 100, N_D 500; nessun bordo
+==================================================================================================================================
+### d1, d2: lo stato di TBS; per N (10, 30, 100): G4 (chi per nodo), d1 (chi uniforme), G6 (N avanti, T, N avanti, T); t = N s per G4 e d1, 2 N s per G6
+  compatto    e 0.1000 N  10 (t   1.5): G4 rho 4.09e-15 eB 7.97e-16 |dE| 3.96e-13 | d1 rho 3.24e-15 eB 4.39e-16 |dE| 4.17e-13 | G6 psi 9.67e-15 phi 2.67e-14 A 2.61e-13 E 2.66e-13
+  compatto    e 0.1000 N  30 (t   4.5): G4 rho 4.94e-14 eB 5.51e-15 |dE| 1.09e-11 | d1 rho 5.89e-14 eB 4.13e-15 |dE| 8.60e-12 | G6 psi 2.99e-13 phi 3.98e-14 A 4.46e-13 E 5.29e-13
+  compatto    e 0.1000 N 100 (t  15.0): G4 rho 2.15e-09 eB 4.75e-08 |dE| 5.17e-06 | d1 rho 8.29e-10 eB 1.82e-08 |dE| 1.98e-06 | G6 psi 3.58e-07 phi 1.18e-09 A 1.52e-08 E 1.19e-07
+  compatto    e 0.1000: il tempo di e-fold (i tre N) G4 1.01, d1 1.09, G6 1.54; G4 da N 10 a 30 soltanto 1.20; contro il caos 35
+  compatto    e 0.3029 N  10 (t   1.5): G4 rho 9.34e-14 eB 5.75e-14 |dE| 4.23e-11 | d1 rho 6.81e-14 eB 8.72e-14 |dE| 4.18e-11 | G6 psi 6.39e-13 phi 2.34e-14 A 5.29e-13 E 1.20e-12
+  compatto    e 0.3029 N  30 (t   4.5): G4 rho 1.12e-10 eB 7.19e-10 |dE| 1.65e-07 | d1 rho 6.93e-11 eB 4.44e-10 |dE| 1.02e-07 | G6 psi 2.98e-09 phi 4.50e-12 A 2.83e-10 E 3.57e-09
+  compatto    e 0.3029 N 100 (t  15.0): G4 rho 3.96e-02 eB 1.91e-01 |dE| 4.94e+01 | d1 rho 2.27e-02 eB 1.31e-01 |dE| 1.80e+01 | G6 psi 7.51e-01 phi 1.77e-03 A 1.91e-02 E 3.85e-01
+  compatto    e 0.3029: il tempo di e-fold (i tre N) G4 0.51, d1 0.52, G6 1.00; G4 da N 10 a 30 soltanto 0.42; contro il caos 35
+  noncompatto e 0.1000 N  10 (t   1.5): G4 rho 3.58e-15 eB 7.69e-16 |dE| 3.77e-13 | d1 rho 3.07e-15 eB 4.30e-16 |dE| 3.38e-13 | G6 psi 9.94e-15 phi 2.19e-14 A 2.62e-13 E 2.56e-13
+  noncompatto e 0.1000 N  30 (t   4.5): G4 rho 3.50e-14 eB 4.31e-15 |dE| 8.43e-12 | d1 rho 4.49e-14 eB 4.92e-15 |dE| 9.19e-12 | G6 psi 3.47e-13 phi 3.25e-14 A 4.85e-13 E 5.78e-13
+  noncompatto e 0.1000 N 100 (t  15.0): G4 rho 3.50e-12 eB 6.27e-12 |dE| 3.27e-09 | d1 rho 2.81e-12 eB 4.34e-12 |dE| 1.44e-09 | G6 psi 3.50e-10 phi 3.90e-12 A 2.29e-11 E 1.29e-10
+  noncompatto e 0.1000: il tempo di e-fold (i tre N) G4 2.04, d1 2.10, G6 2.68; G4 da N 10 a 30 soltanto 1.32; contro il caos 35
+  noncompatto e 0.3029 N  10 (t   1.5): G4 rho 8.61e-14 eB 7.53e-14 |dE| 4.58e-11 | d1 rho 7.73e-14 eB 5.74e-14 |dE| 3.31e-11 | G6 psi 4.38e-13 phi 2.80e-14 A 3.62e-13 E 8.44e-13
+  noncompatto e 0.3029 N  30 (t   4.5): G4 rho 3.48e-11 eB 7.51e-11 |dE| 3.11e-08 | d1 rho 5.51e-11 eB 1.05e-10 |dE| 4.73e-08 | G6 psi 1.09e-09 phi 8.08e-13 A 1.15e-10 E 7.25e-10
+  noncompatto e 0.3029 N 100 (t  15.0): G4 rho 8.54e-06 eB 1.93e-05 |dE| 7.16e-03 | d1 rho 2.90e-06 eB 7.82e-06 |dE| 1.34e-03 | G6 psi 3.32e-04 phi 4.21e-07 A 1.17e-05 E 2.57e-04
+  noncompatto e 0.3029: il tempo di e-fold (i tre N) G4 0.76, d1 0.82, G6 1.40; G4 da N 10 a 30 soltanto 0.50; contro il caos 35
+### d2 LA LETTURA (Luca 13:45): (r1) e-fold fra 25 e 40 o piu' lento -> amplificazione sul caos; (r2) piu' veloce, o grande gia' a N 10 -> un difetto da cercare
+  compatto    e 0.1000: G4 e-fold 1.01 -> (r2); a N 10 G4 rho 4.1e-15 (2e+01 volte eps), d1 rho 3.2e-15; d1 all'arrotondamento (la parte LOCALE della gauge)
+  compatto    e 0.3029: G4 e-fold 0.51 -> (r2); a N 10 G4 rho 9.3e-14 (4e+02 volte eps), d1 rho 6.8e-14; d1 all'arrotondamento (la parte LOCALE della gauge)
+  noncompatto e 0.1000: G4 e-fold 2.04 -> (r2); a N 10 G4 rho 3.6e-15 (2e+01 volte eps), d1 rho 3.1e-15; d1 all'arrotondamento (la parte LOCALE della gauge)
+  noncompatto e 0.3029: G4 e-fold 0.76 -> (r2); a N 10 G4 rho 8.6e-14 (4e+02 volte eps), d1 rho 7.7e-14; d1 all'arrotondamento (la parte LOCALE della gauge)
+### U2, IL REGIME MODERATO: la corsa di prova a e 0.1 non compatto, 500 tick: max|e B| 5.8674e+00 -> e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (scelta di protocollo, Luca 13:45)
+  m1 TBS     compatto    e 0.013055 | G4 rho 1.10e-14 eB 2.18e-15 |dE| 5.31e-12 stima 1.46e-10 (0.036) | G6 psi 2.55e-10 phi 5.80e-11 A 3.38e-11 E 1.79e-10 | max|e B| 8.617e-02 | G2 2.2e-16 | G4-F rho 1.51e+00, G6-F 2.85e+00
+  m1 TBS     noncompatto e 0.013055 | G4 rho 9.79e-15 eB 2.07e-15 |dE| 5.73e-12 stima 1.46e-10 (0.039) | G6 psi 2.51e-10 phi 5.72e-11 A 3.35e-11 E 1.77e-10 | max|e B| 8.603e-02 | G2 2.2e-16 | G4-F rho 1.51e+00, G6-F 2.85e+00
+  m2 piccolo compatto    e 0.100000 | G4 rho 4.09e-15 eB 1.90e-15 |dE| 6.30e-13 stima 1.91e-11 (0.033) | G6 psi 2.75e-13 phi 1.82e-13 A 1.73e-13 E 3.49e-13 | max|e B| 8.391e-06 | G2 2.2e-16
+  m2 piccolo compatto    e 0.302862 | G4 rho 3.93e-15 eB 1.75e-15 |dE| 2.61e-13 stima 6.30e-12 (0.041) | G6 psi 2.79e-13 phi 1.94e-13 A 1.76e-13 E 3.49e-13 | max|e B| 7.696e-05 | G2 2.2e-16 | G4-F rho 5.35e-01, G6-F 2.04e+00
+  m2 piccolo noncompatto e 0.100000 | G4 rho 3.85e-15 eB 2.01e-15 |dE| 6.34e-13 stima 1.91e-11 (0.033) | G6 psi 2.76e-13 phi 1.82e-13 A 1.74e-13 E 3.41e-13 | max|e B| 8.391e-06 | G2 2.2e-16
+  m2 piccolo noncompatto e 0.302862 | G4 rho 4.75e-15 eB 1.87e-15 |dE| 2.23e-13 stima 6.30e-12 (0.035) | G6 psi 2.82e-13 phi 1.94e-13 A 1.75e-13 E 3.22e-13 | max|e B| 7.696e-05 | G2 2.2e-16 | G4-F rho 5.35e-01, G6-F 2.04e+00
+==================================================================================================================================
+  DEVE PASSARE: U2-G2 |U^dag U - I| <= 1e-12 a ogni tick, ogni configurazione del regime moderato                        PASSA   il massimo 2.22e-16
+  DEVE PASSARE: U2-G4 la gauge nel regime moderato (m1 TBS a e*, m2 lo stato piccolo): rho, eB <= 1e-12, |dE| <= la stim PASSA   rho max 1.1e-14, eB max 2.2e-15, |dE|/stima max 0.041
+  DEVE FALLIRE: U2-G4-F chi solo su psi: rho <= 1e-12                                                                    PASSA   rho min 5.35e-01
+  DEVE PASSARE: U2-G6 500 avanti, T, 500 avanti, T nel regime moderato: entro N 6 eps = 1.33e-12 (N = 1000), ogni config ### FALLISCE   il peggiore 2.55e-10
+  DEVE FALLIRE: U2-G6-F senza A -> -A: entro 1.33e-12                                                                    PASSA   il migliore 2.04e+00
+  registrato: max|e B| nelle corse a e* ['8.617e-02', '8.603e-02'] (atteso ~0.1)
+==================================================================================================================================
+ESITO: 4/5 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: U2-G6 500 avanti, T, 500 avanti, T nel regime moderato: entro N 6 eps = 1.33e-12 (N = 1000), ogni configurazione']
+exit 1 14:23:39
