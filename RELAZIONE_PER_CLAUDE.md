@@ -24261,3 +24261,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-08 `05:25` -- T1, IL PRIMO GIRO: **`T1-R` FALLISCE PER UN MIO ERRORE** *(il worktree su `E:`: git lo rifiuta, «dubious ownership», `E:` non registra il proprietario)*
 
 - **Gli script del `24/10` non hanno girato; la decisione `(1)` sulle righe dei referti committati PASSA** *(`|dE|/stima` max `0.160` e `0.146`; `rho`, `eB` `<= 6.5e-15`)*, **`T1-F` fallisce come deve.** **La cura, a se': il worktree su `C:`.**
+
+## 2026-11-08 mattina -- T1 DOPO LA CURA: **`6/6`** *(`doc/referti_l2/u1_t1.txt`)*
+
+- **I sigilli di gauge `(b)`, `(b1)`, `(b2)` rigirati AL LORO COMMIT ridanno le righe dei referti** *(`24` e `12`)*, **e la decisione `(1)` passa in ogni riga** *(`|dE|/stima` max `0.160` e `0.146`; `rho`, `eB` `<= 6.5e-15`)*; **`T1-F` fallisce come deve. Col criterio vecchio restano falliti, come deciso.** **Avanti: T3** *(i DEVE di base sul tick di oggi, col registro e `Campo` registrato)*.

@@ -271,3 +271,10 @@
 - ### **Gli script del `24/10` NON hanno girato** *(exit `3`, `0` righe)*: **nel worktree su `E:` il presidio dice «FUORI DA UN REPO GIT» e la barriera `P-BARRIERA` rifiuta** *(`core.hooksPath` «non impostato»)*. **La causa, verificata:** ### **`E:` e' un file system che NON registra il proprietario, e git rifiuta il worktree** *(«detected dubious ownership»)*. **Il mio progetto della sez. `12.2` metteva il worktree su `E:`: l'errore e' mio.**
 - **Il criterio sulle righe dei referti committati:** **`T1-b` passa** *(`|dE|/stima` max `0.160`, `rho` `6.5e-15`, `eB` `2.5e-15`)*, **`T1-b1-b2` passa** *(`0.146`, `5.4e-15`, `2.0e-15`)*, **`T1-F` fallisce come deve** *(`1.600`, `1.460`)* -- ### **ma senza `T1-R` non e' «rigirato al suo commit».**
 - **La cura, un commit a se':** **il worktree su `C:`, nello scratchpad della sessione** *(fuori dalla cartella della corsa; il proprietario c'e')*; **nessuna eccezione `safe.directory` nella configurazione globale** *(non tocco la configurazione di git di Luca)*.
+
+### 12.5 T1 DOPO LA CURA DEL WORKTREE *(`u1_t1.py` `6e332f52`, `524ea3c6`; `doc/referti_l2/u1_t1.txt`)*: **`6/6`**
+
+- ### **`T1-R` passa per tutti e due:** **rigirati al loro commit** *(`0b6bfde8`, `64bb2328`, nel worktree accanto al repo; i presidi «committato e pulito»)* **ridanno le stesse righe dei referti committati: `24` di `(b)`, `12` di `(b1)`/`(b2)`.**
+- ### **La decisione `(1)` passa in ogni riga:** **`(b)` `|dE|/stima` max `0.160`, `rho` `6.5e-15`, `eB` `2.5e-15`; `(b1)`, `(b2)` `0.146`, `5.4e-15`, `2.0e-15`.** **`T1-F` fallisce come deve** *(`1.600`, `1.460`)*.
+- **Gli script del `24/10` escono con `1`: il loro DEVE `(b)` col criterio VECCHIO resta fallito, come Luca ha deciso** *(i referti vecchi non si riscrivono)*. **Il worktree e' rimosso.**
+- **«Sul codice portato»: e' `G4` di T3, il pezzo dopo.**
