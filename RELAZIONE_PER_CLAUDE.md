@@ -24294,3 +24294,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La mia ipotesi, NON dimostrata e NON fra le letture scritte prima:** **l'arrotondamento AMPLIFICATO da una dinamica caotica**, non una legge rotta *(lo scarto cresce con `e` e col compatto, satura a `O(1)`, e su `10` tick `D6` e `G0` stanno all'arrotondamento)*. **Le letture scritte prima** *(l4: un pezzo non covariante; l3: una memoria nascosta)* **restano aperte.**
 - ### **LE DOMANDE A LUCA** *(il criterio di chiusura: le sue risposte nella sez. `13.5`)*: **(t1) la diagnosi (d1)-(d3)** *(la gauge globale; `G4`, `G6` a `N = 10 .. 100`; una perturbazione di `eps`: minuti)*: **si fa?** **(t2) T3 sulla materia della corsa cosi' com'e'** *(`rho` per nodo `~1e3`: accoppiamento effettivo enorme)* **o su una materia di norma `O(1)` come il prototipo?** **(t3) T4 e T5** *(la coda `U(1)`)* **aspettano la risposta: un sigillo fallito ferma la catena.**
 - **Continuano:** **`C35-0`** *(il pezzo `136667 -> 146667` in `4607` s contro `3930`)* **e la `R60`** *(il terzo lavoro, indipendente da T3, come da mandato)*.
+
+## 2026-11-08 `13:00` -- LA `R60`: **`13/13`, LA SIMMETRIA C'E' E LA `S` E' QUELLA DERIVATA** *(`doc/referti_l2/simmetria_r60.txt`; il task history `2026-11-08_simmetria_R60`, sez. `5`)*
+
+- ### **La `S` = la permutazione delle sei estremita' `x` `S60 = exp(-i (pi/6) sigma_z)`, unica a meno di una fase** *(il nucleo di dimensione `1`, coseno `1.000000000000000`; senza la moneta il nucleo e' `4`)*; **il tick intero commuta a `1.3e-15`** *(soglia `6.2e-13`)*; **F1, F2 falliscono come devono; `R180 x sigma_z` ritrovata.**
+- ### **(L) e (V) passano: `R60` PIENA.** ### ⚠ **Una mia premessa e' caduta:** **il vuoto ruotato `(pi, pi, 0)` E' `-F3`** *(`pi` su tutti gli assi e' il segno globale)*: **nessuna rottura spontanea.**
+- ### **`S^6 = -I`** *(la materia cambia segno dopo un giro; con `det S60 = 1`; una fase `e^{i pi/6}` lo porterebbe a `+I`)*. **`k^6`: leggi e vuoto hanno tutti e due la `R60`, quindi l'anisotropia parte da `k^6`; le due origini qui non si distinguono.**
+- **`13` s di calcolo; nessun file degli allungamenti ne' di T3 toccato.**

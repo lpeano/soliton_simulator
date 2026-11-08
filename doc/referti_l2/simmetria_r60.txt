@@ -1,0 +1,59 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] carta_r60.py  sha1-BYTE 43d1f684  committato e pulito
+==================================================================================================================================
+LA SIMMETRIA R60 DEL TICK SUGLI SPINORI (Luca 12:30): la scena di BG-F-0.15 a L 12 (s 0.15, eps 0.5, vuoto fondo, cs spento, U = I); N_T 10; SEMI (1, 2, 3, 4, 5); la soglia 2 x 14 x 10 x 10 eps = 6.217e-13; SV_REL 1e-10
+  l'ampiezza degli stati casuali: rho medio per nodo di TBS a 100000 = 1.516613e+02 (E:\soliton_simulator\libreria\TBS_100000_completo.npz)
+==================================================================================================================================
+  l'ordine del tick (14 posizioni): ['CAMM-MATERIA-VUOTO', 'CAMM-FASE-VUOTO', 'CAMM-MONETA-SPIN', 'CAMM-GROVER', 'CAMM-SPOSTAMENTO', 'CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO', 'CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO', 'CAMM-GROVER', 'CAMM-MONETA-SPIN', 'CAMM-FASE-VUOTO', 'CAMM-MATERIA-VUOTO']
+  la scena: L 12, 144 nodi, 432 archi, 864 estremita'; le chiavi {'Lambda': (144,), 'h_int': (144,), 'phi_h': (864,), 'psi': (144, 2), 'psi_h': (864, 2), 'rho': (144,)}; max|U - I| 0.0e+00
+  DEVE PASSARE: C1 R60 sulle estremita' e' una permutazione, manda archi in archi, e R60^6 = I                           PASSA   permutazione True, archi True
+  DEVE PASSARE: C2 n dell'estremita' immagine = R60 n (entro 8 eps)                                                      PASSA   3.18e-16; max|n_z| 0.0e+00
+  DEVE PASSARE: C3 dtau per nodo e s_a per arco invarianti sotto R60 (al bit)                                            PASSA   dtau 0.15 .. 0.15; s_a 0.15 .. 0.15
+  il vuoto della scena (V.scena) contro F3: |phi_scena - F3| / |F3| = 1.155e+00; phi <- F3 (le fasi (0.0, 0.0, 3.141592653589793) per gli assi ((0, 1), (1, 0), (1, 1)))
+  la parte lineare: l'ordine SENZA ('CAMM-MATERIA-VUOTO', 'CAMM-FASE-VUOTO')
+  DEVE PASSARE: C4 la parte lineare E' lineare: T(x + c y) = T x + c T y (entro 6.2e-13 relativo, la soglia della prova) PASSA   5.49e-16
+  R2 R60  il tick lineare       : il nucleo ha dimensione 1; i 6 valori singolari piu' piccoli / sigma_max ['2.4e-01', '2.4e-01', '1.8e-01', '1.1e-01', '1.1e-01', '7.1e-16']; |<S derivata, S trovata>| 1.000000000000000
+  R2 R120 il tick lineare       : il nucleo ha dimensione 1; i 6 valori singolari piu' piccoli / sigma_max ['2.4e-01', '2.4e-01', '1.8e-01', '1.1e-01', '1.1e-01', '7.2e-16']; |<S derivata, S trovata>| 1.000000000000000
+  R2 R180 il tick lineare       : il nucleo ha dimensione 1; i 6 valori singolari piu' piccoli / sigma_max ['2.4e-01', '2.4e-01', '1.8e-01', '1.1e-01', '1.1e-01', '7.4e-16']; |<S derivata, S trovata>| 1.000000000000000
+  R2 R60  senza CAMM-MONETA-SPIN: il nucleo ha dimensione 4; i 6 valori singolari piu' piccoli / sigma_max ['2.5e-01', '2.5e-01', '9.9e-16', '7.4e-16', '7.0e-16', '6.7e-16']; |<S derivata, S trovata>| 0.335466983676932
+  DEVE PASSARE: R2-a il nucleo di R60 ha dimensione 1 e il suo vettore e' la S derivata a meno di una fase (entro 1e-10) PASSA   dim 1, coseno 1.0
+  DEVE PASSARE: R3 lo stesso metodo ritrova R180 x sigma_z (dimensione 1, la S derivata con S60^3 = -i sigma_z)          PASSA   dim 1, coseno 1.0
+  R2 LETTURA: senza la moneta il nucleo di R60 ha dimensione 4 (con la moneta 1): la moneta e' cio' che fissa la S sullo spin
+  il seme 1: ||x|| 1.5088e+02; (L) r {'R60 x S60': '1.28e-15', 'R120 x S60^2': '1.25e-15', 'P: R180 x sigma_z': '6.57e-16', 'F1: R60 x I': '2.86e-01', 'F2: R60 x S60^dag': '4.95e-01'}
+             (V) r (psi, phi) {'R60 x S60': '1.28e-15 (1.3e-15, 2.6e-16)', 'R120 x S60^2': '1.26e-15 (1.2e-15, 2.5e-16)', 'P: R180 x sigma_z': '6.58e-16 (6.1e-16, 2.4e-16)', 'F1: R60 x I': '2.86e-01 (2.9e-01, 1.7e-03)', 'F2: R60 x S60^dag': '4.95e-01 (5.0e-01, 2.6e-03)'}
+  il seme 2: ||x|| 1.5155e+02; (L) r {'R60 x S60': '1.29e-15', 'R120 x S60^2': '1.24e-15', 'P: R180 x sigma_z': '6.74e-16', 'F1: R60 x I': '2.82e-01', 'F2: R60 x S60^dag': '4.89e-01'}
+             (V) r (psi, phi) {'R60 x S60': '1.28e-15 (1.3e-15, 2.5e-16)', 'R120 x S60^2': '1.24e-15 (1.2e-15, 2.8e-16)', 'P: R180 x sigma_z': '6.74e-16 (6.3e-16, 2.5e-16)', 'F1: R60 x I': '2.82e-01 (2.8e-01, 1.4e-03)', 'F2: R60 x S60^dag': '4.89e-01 (4.9e-01, 2.6e-03)'}
+  il seme 3: ||x|| 1.5128e+02; (L) r {'R60 x S60': '1.25e-15', 'R120 x S60^2': '1.26e-15', 'P: R180 x sigma_z': '6.64e-16', 'F1: R60 x I': '2.80e-01', 'F2: R60 x S60^dag': '4.84e-01'}
+             (V) r (psi, phi) {'R60 x S60': '1.26e-15 (1.2e-15, 2.7e-16)', 'R120 x S60^2': '1.25e-15 (1.2e-15, 2.6e-16)', 'P: R180 x sigma_z': '6.64e-16 (6.1e-16, 2.5e-16)', 'F1: R60 x I': '2.80e-01 (2.8e-01, 1.7e-03)', 'F2: R60 x S60^dag': '4.84e-01 (4.8e-01, 2.8e-03)'}
+  il seme 4: ||x|| 1.4915e+02; (L) r {'R60 x S60': '1.26e-15', 'R120 x S60^2': '1.26e-15', 'P: R180 x sigma_z': '6.69e-16', 'F1: R60 x I': '2.85e-01', 'F2: R60 x S60^dag': '4.94e-01'}
+             (V) r (psi, phi) {'R60 x S60': '1.26e-15 (1.2e-15, 2.9e-16)', 'R120 x S60^2': '1.27e-15 (1.2e-15, 2.7e-16)', 'P: R180 x sigma_z': '6.71e-16 (6.2e-16, 2.6e-16)', 'F1: R60 x I': '2.85e-01 (2.9e-01, 1.9e-03)', 'F2: R60 x S60^dag': '4.94e-01 (4.9e-01, 3.0e-03)'}
+  il seme 5: ||x|| 1.5083e+02; (L) r {'R60 x S60': '1.28e-15', 'R120 x S60^2': '1.27e-15', 'P: R180 x sigma_z': '7.02e-16', 'F1: R60 x I': '2.81e-01', 'F2: R60 x S60^dag': '4.87e-01'}
+             (V) r (psi, phi) {'R60 x S60': '1.27e-15 (1.2e-15, 2.6e-16)', 'R120 x S60^2': '1.27e-15 (1.2e-15, 2.7e-16)', 'P: R180 x sigma_z': '7.03e-16 (6.5e-16, 2.6e-16)', 'F1: R60 x I': '2.81e-01 (2.8e-01, 1.6e-03)', 'F2: R60 x S60^dag': '4.87e-01 (4.9e-01, 2.6e-03)'}
+  R60 F3 contro le 8 terne di fasi in {0, pi}^3 (gli assi ((0, 1), (1, 0), (1, 1))), a meno di una fase globale:
+    (0, 0, 0)                    |R60 F3 - c F| / |F| = 9.43e-01 (c = -0.333+0.000i)
+    (0, 0, pi)                   |R60 F3 - c F| / |F| = 1.00e-16 (c = -1.000+0.000i)
+    (0, pi, 0)                   |R60 F3 - c F| / |F| = 9.43e-01 (c = 0.333+0.000i)
+    (0, pi, pi)                  |R60 F3 - c F| / |F| = 9.43e-01 (c = -0.333+0.000i)
+    (pi, 0, 0)                   |R60 F3 - c F| / |F| = 9.43e-01 (c = 0.333+0.000i)
+    (pi, 0, pi)                  |R60 F3 - c F| / |F| = 9.43e-01 (c = -0.333-0.000i)
+    (pi, pi, 0)                  |R60 F3 - c F| / |F| = 5.77e-17 (c = 1.000+0.000i)
+    (pi, pi, pi)                 |R60 F3 - c F| / |F| = 9.43e-01 (c = 0.333+0.000i)
+  R60 F3 = ['(0, 0, pi)', '(pi, pi, 0)']; R180 F3 = c F3 con |R180 F3 - c F3| / |F3| = 0.00e+00
+  la quasi-energia del vuoto (psi = 0, 10 tick): F3 omega 0.157079632679490 (residuo 1.4e-15); R60 F3 omega 0.157079632679490 (residuo 1.4e-15)
+  R6: S^6 = -I (max|S^6 + I| 4.1e-16); R60 sei volte su uno stato: |R^6 y + y| / |y| = 5.6e-16; det S60 = 1.000000000000000+0.000000000000000i
+==================================================================================================================================
+  DEVE PASSARE: R6 S^6 = -I e R60^6 y = -y (entro 6.2e-13: la materia cambia segno dopo un giro, con det S60 = 1)        PASSA   4.1e-16, 5.6e-16
+  DEVE PASSARE: R60 x S60 commuta col tick INTERO, 10 tick, ogni seme: r <= 6.22e-13                                     PASSA   il massimo 1.29e-15
+  DEVE PASSARE: P R180 x sigma_z (la nota) col metodo nuovo e la STESSA soglia, ogni seme                                PASSA   il massimo 7.02e-16
+  DEVE FALLIRE: F1 R60 con la sola permutazione (S = I sullo spin): r <= soglia, un seme qualunque                       PASSA   il minimo 2.80e-01
+  DEVE FALLIRE: F2 R60 con S60^dag (il verso sbagliato): r <= soglia, un seme qualunque                                  PASSA   il minimo 4.84e-01
+  registrato: R120 x S60^2, il massimo 1.27e-15
+  (V) IL VUOTO F3 FISSO (si ruota solo psi): il massimo per caso {'R60 x S60': '1.28e-15', 'R120 x S60^2': '1.27e-15', 'P: R180 x sigma_z': '7.03e-16', 'F1: R60 x I': '2.86e-01', 'F2: R60 x S60^dag': '4.95e-01'}
+  LA LETTURA (sez. 4.2): (L) passa, (V) passa -> R60 piena, F3 invariante
+  DEVE PASSARE: P (V) R180 x sigma_z col vuoto F3 FISSO (R180 F3 = -F3, una fase globale), ogni seme                     PASSA   il massimo 7.03e-16
+  DEVE FALLIRE: F1-V la sola permutazione col vuoto fisso: r <= soglia                                                   PASSA   il minimo 2.80e-01
+  il tempo: 13 s
+==================================================================================================================================
+ESITO: 13/13 controlli passano; DEVE fallite: 0 []
+exit 0 12:56:38
