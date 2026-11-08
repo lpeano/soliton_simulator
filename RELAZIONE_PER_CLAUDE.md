@@ -24248,3 +24248,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-08 notte -- **CORREZIONE di un mio numero** *(il paragrafo di I3 qui sopra)*
 
 - ### **Ho scritto «i file di ripresa (`17` corse finite)»: il numero NON usciva da uno script** *(`L-NUMERI`)*. **Contati dalle righe del referto: `52` stati e `15` righe di ripresa** *(`14` riletti, `13` di corse finite piu' `TFI`; `1` non aperto, `C35-0` in volo)*: **`52 + 14 = 66`, i file del DEVE.**
+
+## 2026-11-08 notte -- J3, SULLA CARTA: **QUALE GRANDEZZA CONSERVA IL TICK** *(il task history `2026-11-08_bilancio_locale_B1`, sez. `5`)*; **e l'energia di oggi REGISTRATA come Luca ha deciso**
+
+- ### **Registrato:** **l'energia definita oggi oscilla di `134` sul totale in `100` tick** *(lo spostamento `+256`, la moneta `-232`)* **e non deriva; il bilancio locale come DEVE vale per la NORMA, per l'energia si stampa.**
+- **Dal codice:** **il tick e' un palindromo di pezzi LINEARI unitari** *(Grover, moneta, spostamenti)* **e di un pezzo NON LINEARE ma esatto** *(`CAMM-MATERIA-VUOTO`: una fase per nodo funzione di `rho_k`, `Lambda_k`, che il pezzo non cambia)*: **simplettico, norme esatte; un'energia esatta e locale in generale NON c'e'.**
+- ### **Le proposte:** **(E1) `E_T = -Im <Psi|T Psi>/tau`: ESATTA dove il tick e' lineare** *(`<T Psi|T|T Psi> = <Psi|T|Psi>`)*, **densita' per nodo locale, flusso dalla continuita' (non unico, dichiarato)**; **(E2) l'energia modificata `H_g + tau^2 H_3`** *(i commutatori doppi del palindromo: lo stesso calcolo di B3)*; **(E3) la quasi-energia di Floquet** *(esatta ma non locale: non per il DEVE)*.
+- ### **Le previsioni:** **(p1) sul vuoto `F3` `E_T` all'arrotondamento; (p2) su `TBS` `E_T` NON esatta ma con un'oscillazione minore di `134`; (p3) `H~_2` a `~0.2` se la serie converge a `theta = 0.47`.** **Prima di ogni DEVE locale dell'energia, il DEVE globale.**
+- **Le domande:** **(b2) quale** *(la mia proposta: (E1) prima)*; **(b3) la carta corta che la misura, si fa?**; **(b1) superata da (E1)?**
+- **`C35-0`: dopo il primo pezzo** *(`5055` s, `0.5055` s per tick)* **l'arrivo stimato alle `21:14` di oggi.**
