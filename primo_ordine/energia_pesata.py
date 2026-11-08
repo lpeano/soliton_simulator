@@ -127,7 +127,6 @@ def ulp_del_tetto(grado_max):
     mobile ### **`|fl(Omega)| - fl(tetto) <= (gamma_p + gamma_q) / (1 - gamma_q) fl(tetto)`**,
     `gamma_m = m u / (1 - m u)`, `m` la PROFONDITA' della catena dopo le foglie comuni.
     ### **CONTATE dal codice** *(`termini_di_h`, `omega`, `tetto_omega`)*: ### **`p = d + 7`**
-    ### ⚠ **Dal `2026-11-08` (lo zero simmetrico) il ramo d'arco e' PIU' CORTO** *(`pi (Re incro + Re(conj f0 f1))`)* **e il ramo di nodo ha la stessa profondita'** *(`0.5 *` e' esatto)*: **i conti qui sotto sono quelli della forma di prima, e restano un MAGGIORANTE.**
     *(il ramo d'arco di `Omega`: `Re(conj f0 f1)` `2`, `- 2R` `1`, `+ arco_psi` `1`, `x pi` `1`,
     `x dw` `1`, la somma sul nodo `d - 1`, `+ per_nodo` `1`, `x csp` `1`)* e ### **`q = d + 8`**
     *(il ramo d'arco del tetto: `hypot` contato `2` -- un ulp, la garanzia della libm --, il
@@ -204,10 +203,7 @@ def termini_di_h(mot, st, par):
     d = inc.grado.astype(float)
     pu_psi = (np.abs(S_psi[:, 0]) ** 2 + np.abs(S_psi[:, 1]) ** 2) / d
     pu_phi = np.abs(S_phi) ** 2 / d
-    # ### ⭐⭐ **LO ZERO SIMMETRICO** *(Luca `2026-11-08` `15:51`, z1: UNA convenzione nel nucleo)*: il Grover e' `exp(i theta (I - 2P)/2)`, quindi il suo
-    # ### generatore e' `-pi s (N - P - N/2)` *(`delta = 1/2`, come `_u1_prototipo.energia` per `"simm"`)*: ### **`-pi s (N/2 - P)`**, e `0.5 *` e' ESATTO
-    # ### *(la catena ha la profondita' di prima: la tolleranza di `ulp_del_tetto` resta un maggiorante)*.
-    per_nodo = -OMEGA_H * ((0.5 * nrm_psi - pu_psi) + (0.5 * nrm_phi - pu_phi))
+    per_nodo = -OMEGA_H * ((nrm_psi - pu_psi) + (nrm_phi - pu_phi))
     # ### la MONETA: `elicita` e' ### **GIA' SOMMATA PER NODO**, e il peso che legge e'
     # ### `dtau_nodo`, cioe' il peso del NODO.
     h = mot.elicita(st)
@@ -229,19 +225,23 @@ def termini_di_h(mot, st, par):
     v = psi.reshape(m, 2, 2)
     p0, p1 = v[:, 0, :], v[:, 1, :]
     incro = np.einsum("ai,aji,aj->a", np.conj(p0), np.conj(U), p1)
+    nrm_a = (np.abs(p0) ** 2).sum(axis=1) + (np.abs(p1) ** 2).sum(axis=1)
+    arco_psi = (nrm_a - 2.0 * np.real(incro)) / 2.0
     w = phi.reshape(m, 2)
     f0, f1 = w[:, 0], w[:, 1]
-    # ### ⭐⭐ **LO ZERO SIMMETRICO sull'arco:** `-pi s_a (P- - 1/2)` con `P- = (I - S)/2`: ### **`(nrm_a - 2 Re incro)/2 - nrm_a/2 = - Re incro`**
-    # ### ESATTO in aritmetica esatta -- e si scrive cosi', piu' corto *(meno arrotondamenti della forma di prima: la tolleranza resta un maggiorante)*.
-    per_arco = OMEGA_H * (np.real(incro) + np.real(np.conj(f0) * f1))
+    arco_phi = (np.abs(f0) ** 2 + np.abs(f1) ** 2
+                - 2.0 * np.real(np.conj(f0) * f1)) / 2.0
+    per_arco = -OMEGA_H * (arco_psi + arco_phi)
     # ### ⭐ **I TETTI, DAGLI STESSI PEZZI** *(errore `n.17`)*: la SOMMA DEI VALORI ASSOLUTI
     # ### dei termini, nei buffer del motore -- `per_nodo` e `per_arco` qui sopra
     # ### ### **non cambiano**, ne' nelle operazioni ne' nell'ordine.
     tn = mot._b("ep_tetto_nodo", (inc.n,), float)
-    tn[...] = (OMEGA_H * (0.5 * nrm_psi + pu_psi + 0.5 * nrm_phi + pu_phi) + abs(float(eps)) * np.abs(h)
+    tn[...] = (OMEGA_H * (nrm_psi + pu_psi + nrm_phi + pu_phi) + abs(float(eps)) * np.abs(h)
                + np.abs(N))
     ta = mot._b("ep_tetto_arco", (m,), float)
-    ta[...] = OMEGA_H * (np.abs(incro) + np.abs(f0) * np.abs(f1))   # ### lo zero simmetrico: |Re incro| <= |incro|, |Re(conj f0 f1)| <= |f0||f1|
+    ta[...] = OMEGA_H * ((nrm_a + 2.0 * np.abs(incro)) / 2.0
+                         + (np.abs(f0) ** 2 + np.abs(f1) ** 2
+                            + 2.0 * np.abs(f0) * np.abs(f1)) / 2.0)
     return per_nodo, per_arco
 
 
