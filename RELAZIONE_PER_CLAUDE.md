@@ -24468,3 +24468,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il controllo che DEVE passare** *(un seno a `2300` in un AR(1) col `phi = 0.9999` dello spostamento)* **NON e' ritrovato a `L 7000`: il metodo non vale, e la lettura (p2) che lo script stampa NON si legge.** **Il perche', mio: col `phi` di queste serie il tempo di correlazione e' meta' della serie.** ### **E un difetto del mio nullo:** **`E + E_ass` ha `phi` NEGATIVO, e l'AR(1) mette la soglia sotto lo spettro vero ai bin lenti.**
 - **Da guardare, non da leggere:** **`w` a `~530` in `TB3` e `TBS`, `8`-`25` volte la soglia.**
 - ### **La domanda a Luca: (q-a) sugli incrementi, (q-b) un nullo a piu' parametri, (q-c) nessun periodo e `W` dal `tau_int`; la mia proposta (q-a).** **M4** *(T3 (iii))* **gira intanto** *(indipendente; una prova corta accanto a `C35-pi`)*.
+
+## 2026-11-08 (l'orologio: `23:15`) -- M4, T3 (iii): **IL DIFETTO NON SCALA COME `e^2`: `D(e*) / D(e*/2) = 127`; RESTA SENZA SPIEGAZIONE; FERMO SU T3** *(`doc/referti_l2/u1_t3g.txt`; il task history del prototipo sez. `14.15`)*
+
+- ### **(0) uguale a `u1_t3f`; i controlli del classificatore come devono.** **L'assoluto di `psi` a norma piena: `e*` `5.27e-09`, `e*/2` `4.77e-11`, `e*/4` `6.84e-12`; senza campo `6.30e-12`.** **La lettura fissata: «non risolto»** *(`D(e*/4)` nel rumore)*; ### **ma il primo rapporto e' `127`** *(`e^2` darebbe `4`)*: **una SOGLIA fra `e*/2` e `e*`, non un accoppiamento a potenza bassa** *(una lettura, non una misura)*.
+- ### **La scelta di Luca: (a) continuare** *(la mia proposta: una scansione di `e` fra `e*/2` e `e*`)* **o (b) LIMITE NOTO coi numeri e passare a T4-T5. La mia raccomandazione: (b), con la scansione IN ATTESA.**
