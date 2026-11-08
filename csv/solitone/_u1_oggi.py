@@ -23,8 +23,10 @@ import sys
 import numpy as np
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
-if _QUI not in sys.path:
-    sys.path.insert(0, _QUI)
+_CSV = os.path.dirname(_QUI)   # ### dal 2026-11-08 in csv/solitone/ (la cassetta, D6: nessuno script FUORI importa la libreria); _u1_prototipo e gli strumenti in csv/
+for _p in (_QUI, _CSV):
+    if _p not in sys.path:
+        sys.path.insert(0, _p)
 import _u1_prototipo as U1  # noqa: E402  (Campo, scrivi_U, avvolto, tick_campo, rovescia: RIPRESI)
 
 Campo = U1.Campo

@@ -2,7 +2,9 @@
 r"""**T6a: IL VALORE DI `e`, PERTURBATIVO** *(Luca `2026-11-07` `13:26`: l'energia elettrostatica del solitone maturo `~1%` della sua energia; il task history
 `doc/TASK_HISTORY/2026-11-07_u1_prototipo_verificato.md` sez. `6`)*
 
-    python csv/_u1_carica_e.py > doc/referti_l2/u1_carica_e.txt
+    python csv/solitone/_u1_carica_e.py > doc/referti_l2/u1_carica_e.txt
+
+### *(dal `2026-11-08` in `csv/solitone/`: la cassetta, `D6`, vuole che nessuno script FUORI importi la libreria; fino a `9e7cb734` era `csv/_u1_carica_e.py`)*
 
 ### **Lo stato maturo:** `db/accensione_lenta/TB3.npz` *(la fine di `TB3`, tick `200000`)*, **gli `sha` contro `sha_fine` dell'ultima riga** *(`R0`)*.
 ### **`E_sol = E[TB3] - E[0]`** *(il libro dei conti della corsa, `tot`, meno il vuoto `c(t) F3` allo stesso `t`)*; **`Q = somma rho`** *(la norma)*.
@@ -20,7 +22,8 @@ import sys
 import numpy as np
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
-for _p in (_QUI, os.path.join(os.path.dirname(_QUI), "primo_ordine")):
+_CSV = os.path.dirname(_QUI)   # ### dal 2026-11-08 in csv/solitone/ (D6); _u1_prototipo e gli strumenti in csv/
+for _p in (_QUI, _CSV, os.path.join(os.path.dirname(_CSV), "primo_ordine")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
@@ -85,7 +88,7 @@ def main():
     from solitone import bordo as BO
     from solitone import corsa_accensione as CA
     for m in ("_u1_oggi.py", "_u1_prototipo.py"):
-        _presidio.avvia(os.path.join(_QUI, m))
+        _presidio.avvia(os.path.join(_QUI if m == "_u1_oggi.py" else _CSV, m))
     print("=" * 130)
     print("T6a: IL VALORE DI e PERTURBATIVO (Luca 13:26): l'energia elettrostatica del solitone maturo di TB3 = %g della sua energia; forma %s; e_1 %g; N_DIN %d (mio)" % (RAPPORTO, FORMA, E_1, N_DIN))
     print("=" * 130)
