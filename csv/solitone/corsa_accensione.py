@@ -110,11 +110,11 @@ STIMA["TBS"] = "TS"                 # ### la stima del disco dai jsonl di TS (la
 # ### fino a 10000 unita' di tempo; le mappe come TB3; gli stati completi ogni 1500 e a t 0; C0 breve (200 tick) all'inizio della prima corsa di ogni nome.
 LCORSA, COPPIA, BORDO_CORSA = {}, {}, {}
 for _n, _d, _sg in (("S162", 35, 0), ("C35-0", 35, 1), ("C35-pi", 35, -1), ("C50-0", 50, 1)):
-    CORSE[_n] = (1000.0, 10000.0)
+    CORSE[_n] = (1000.0, 30000.0)     # ### (Luca 2026-11-07 10:26, 2026-11-08 00:52) gli allungamenti fino a 30000: C35-0, C35-pi, S162 RIPRESI da 10000, C50-0 da 0
     VUOTI[_n] = "F3"
     BORDO[_n] = BORDO["TB3"]
     MAPPE = MAPPE + (_n,)
-    STATI[_n] = tuple(1500.0 * k for k in range(7))   # ### 0, 1500, ..., 9000 (Luca: ogni 1500 e a t 0)
+    STATI[_n] = tuple(1500.0 * k for k in range(21))  # ### 0, 1500, ..., 30000 (Luca: ogni 1500 e a t 0; fino a 9000 prima degli allungamenti)
     STIMA[_n] = "TB3"                 # ### la stima del disco dai jsonl di TB3 (le mappe scalano coi nodi)
     LCORSA[_n] = 162
     COPPIA[_n] = (_d, _sg)            # ### la seconda copia della partenza traslata di d lungo A1, per +1 / -1; 0: il singolo
@@ -1096,6 +1096,83 @@ def verifica_mappe(nome="TM1000"):
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
 
+def ripresa(nome):
+    """### **`R-0`, `R-1`, `R-1-F`: LA RIPRESA E' LA CORSA ININTERROTTA** *(Luca `2026-11-07` `10:26`, `2026-11-08` `00:52`; il task history
+    `2026-11-07_allungamenti_coppia_30000`, sez. `6`)*. ### **L'ULTIMO pezzo si rifa' con `corsa(nome)` STESSA** *(lo stesso tick, lo stesso bordo,
+    le stesse misure e mappe: niente ciclo ricopiato)* **in una SABBIERA su `E:`**: i jsonl fino al penultimo pezzo, lo stato completo salvato a `t0`
+    dell'ultimo come file di ripresa, la tabella di `c(t)` e lo stato a `T_acc`, e `CORSE[nome]` col `t_fine` DELL'ULTIMA RIGA. Le cartelle vere si
+    rimettono nel `finally`. Stampa i file del repo importati: quelli che NON si toccano mentre una corsa gira."""
+    global DIR_NPZ
+    import shutil
+    import _stato_fermo as SFM
+    import _vuoto_vivo_B as V
+    ff = nomi(nome)
+    assert len(ff) >= 2, "la ripresa vuole almeno due pezzi"
+    rr = [V.LP.leggi(os.path.join(dir_json(nome), n)) for n in ff]
+    ult, pen = rr[-1], rr[-2]
+    t0 = ult["t0"]
+    assert pen["t1"] == t0, "il penultimo pezzo NON finisce dove l'ultimo comincia"
+    T_acc, _fine = CORSE[nome]
+    _sol, _vuoto, s = V.CORSE[NOME]
+    print("### R-0, R-1, R-1-F su %s: l'ultimo pezzo %d -> %d (t_fine %d) rifatto da corsa() dallo stato completo a %d" % (nome, t0, ult["t1"], ult["t_fine"], t0))
+
+    def shas_npz(f):
+        with np.load(f) as d:
+            return int(d["t"]), {k: SFM.sha(d[k]) for k in sorted(d.files) if k != "t"}
+    t_r, sh_r = shas_npz(os.path.join(DIR_NPZ, nome + ".npz"))
+    esito("DEVE PASSARE: R-0 il file di ripresa di %s e' a t1 dell'ultima riga e i suoi sha = sha_fine dell'ultima riga (al bit, ogni chiave)" % nome,
+          t_r == ult["t1"] and sh_r == ult["sha_fine"], "t %d" % t_r)
+    st0 = [x for r in rr for x in (r.get("stati") or []) if x["t"] == t0]
+    assert len(st0) == 1, "lo stato completo a %d non c'e' (o c'e' due volte)" % t0
+    t_s, sh_s = shas_npz(st0[0]["file"])
+    esito("DEVE PASSARE: R-0 lo stato completo a %d (%s) = lo sha registrato = sha_fine del pezzo che finisce a %d (al bit, ogni chiave)" % (t0, os.path.basename(st0[0]["file"]), t0),
+          t_s == t0 and sh_s == st0[0]["sha"] == pen["sha_fine"], "")
+    sab = os.path.join(RADICE_E, "ripresa_R1", "%s_%s" % (nome, time.strftime("%Y%m%d_%H%M%S")))
+    sj, sn, se = os.path.join(sab, "json"), os.path.join(sab, "npz"), os.path.join(sab, "e")
+    for d_ in (sj, sn, se):
+        os.makedirs(d_)
+    for n in ff[:-1]:
+        shutil.copyfile(os.path.join(dir_json(nome), n), os.path.join(sj, n))
+    shutil.copyfile(st0[0]["file"], os.path.join(sn, nome + ".npz"))
+    shutil.copyfile(os.path.join(DIR_NPZ, FASE), os.path.join(sn, FASE))
+    f_acc = os.path.join(DIR_NPZ, nome + "_acc.npz")
+    if os.path.exists(f_acc):
+        shutil.copyfile(f_acc, os.path.join(sn, nome + "_acc.npz"))
+    vero = (DIRS.get(nome), DIR_NPZ, BASE_E.get(nome), CORSE[nome])
+    print("  la sabbiera %s; CORSE[%s] per il pezzo rifatto: (%g, %.6f) (il t_fine %d dell'ultima riga)" % (sab, nome, T_acc, ult["t_fine"] * s, ult["t_fine"]))
+    s0 = time.time()
+    try:
+        DIRS[nome], DIR_NPZ, BASE_E[nome], CORSE[nome] = sj, sn, se, (T_acc, ult["t_fine"] * s)
+        rc = corsa(nome)
+    finally:
+        for k_, v_ in ((DIRS, vero[0]), (BASE_E, vero[2])):
+            if v_ is None:
+                k_.pop(nome, None)
+            else:
+                k_[nome] = v_
+        DIR_NPZ, CORSE[nome] = vero[1], vero[3]
+    nuova = V.LP.leggi(os.path.join(sj, "%s_%06d.jsonl" % (nome, t0)))
+    print("  il pezzo rifatto: exit %d, %.0f s (%.4f s per tick; l'originale %.0f s, %.4f s per tick)"
+          % (rc, time.time() - s0, nuova["secondi"] / (nuova["t1"] - t0), ult["secondi"], ult["secondi"] / (ult["t1"] - t0)))
+    uguali = {k: nuova.get(k) == ult.get(k) for k in ("t1", "sha_fine", "campioni", "D", "D_acc", "dopo_stato", "bordo", "fermata", "t_dis")}
+    um = (nuova.get("mappe") or {}).get("sha1") == (ult.get("mappe") or {}).get("sha1")
+    print("  uguali al bit: %s; lo sha1 del file delle mappe: %s" % (uguali, um))
+    esito("DEVE PASSARE: R-1 il pezzo %d rifatto dallo stato a %d ha sha_fine = quello della corsa (al bit, ogni chiave) e campioni, D, dopo_stato, bordo, mappe uguali" % (t0, t0),
+          rc == 0 and all(uguali.values()) and um, "")
+    altra = "C35-pi" if nome != "C35-pi" else "C35-0"
+    fa = nomi(altra)
+    sha_a = V.LP.leggi(os.path.join(dir_json(altra), fa[-1]))["sha_fine"] if fa else None
+    esito("DEVE FALLIRE: R-1-F lo sha_fine rifatto = quello dell'ultima riga di %s (un'altra corsa)" % altra, not nuova["sha_fine"] == sha_a, "")
+    radice = os.path.normcase(os.path.abspath(solitone.RADICE))
+    imp = sorted({os.path.relpath(m.__file__, solitone.RADICE).replace(os.sep, "/") for m in list(sys.modules.values())
+                  if getattr(m, "__file__", None) and os.path.normcase(os.path.abspath(m.__file__)).startswith(radice)})
+    print("  ### I FILE DEL REPO IMPORTATI DAL PROCESSO (%d): NON SI TOCCANO MENTRE UNA CORSA GIRA (par. 5)" % len(imp))
+    for f_ in imp:
+        print("    %s" % f_)
+    print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
+    return 0 if not FALLITE else 1
+
+
 def main(argv):
     import _presidio
     for m in ("__init__", "misure", "protetto", "accensione", "toro", "mappe"):
@@ -1103,6 +1180,8 @@ def main(argv):
     _presidio.avvia(__file__)
     if "--corsa" in argv:
         sys.exit(corsa(argv[argv.index("--corsa") + 1]))
+    elif "--ripresa" in argv:
+        sys.exit(ripresa(argv[argv.index("--ripresa") + 1]))
     elif "--referto" in argv:
         referto()
     elif "--mappe" in argv:
