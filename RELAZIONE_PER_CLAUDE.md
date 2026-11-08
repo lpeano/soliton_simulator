@@ -24433,3 +24433,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **d6' rifatto** *(con `U = I`)*: **col campo / senza alla stessa norma: `1.14`, `2.06`, `835`** *(`x 1e-3`, `x 1e-1`, `x 1`)*: **il campo aggiunge irreversibilita' solo alla norma piena.**
 - ### **d8:** **la pendenza log-log `0.743`** *(«regge»)*, **ma fino a `N = 100` `G6` e' uguale al senza campo e il segnale e' tutto a `N = 300`: confuso con `N`.** ### **La cura** *(`e A` modulo `2 pi`)*: **`2.54e-10` contro `2.55e-10`: NIENTE. L'ipotesi dell'angolo cade per la cura.**
 - ### **LE DOMANDE:** **(t11) le mie ipotesi, e in che ordine: (i) la deriva in un passo al centro; (ii) l'amplificazione attraverso `e^2 rho`** *(lo stesso `e^2 rho` con `rho` e `e` diversi)*. **(t12) la catena `U(1)` resta ferma.**
+
+## 2026-11-08 (l'orologio: `20:50`) -- **`C35-0` FINITA A `30000`** *(`200000` tick, `21` pezzi; la fine alle `20:48:31`)*: **I JSONL DEI PEZZI COMMITTATI**
+
+- **L'ultimo pezzo** *(`196667 -> 200000`)* **in `1914` s; il bordo: lo spostamento `1.168`; assorbite `M` `2.2815e4`, `V` `1.8089e4`, `E` `3.1576e4`** *(relative a `M0`, `V0`, `E0`: `1.141e-2`, `1.14e-1`, ...)*. **I `14` jsonl dei pezzi dell'allungamento** *(da `66667` a `196667`)* **in questo commit.**
+- ### **Che cosa viene ora** *(l'ordine di Luca)*: **C0 sta girando** *(la cucitura; importa il nucleo)*: **il merge di v2 aspetta che finisca** *(nessun file del percorso di una corsa si tocca mentre gira)*; **poi il merge di v2 con la suite, l'`R-1` di `C35-pi` sul nucleo nuovo, e l'allungamento di `C35-pi`.** **Il referto (r-a) di `C35-0` dopo la cucitura e la risoluzione del criterio** *(Luca `19:21`)*.
