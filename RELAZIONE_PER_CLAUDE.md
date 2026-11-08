@@ -24365,3 +24365,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## 2026-11-08 `16:45` -- LA DECISIONE DI LUCA DELLE `15:36`: **IL LIMITE DEL `pre-commit` DA `500` A `1800` s, UNA SCELTA, NON UNA CURA** *(il valore di quel giorno: `456.0` s)*
 
 - **Scritta in `primo_ordine/collauda.BUDGET`, nella voce `SUITE-NEL-COMMIT` e nel task history** *(`2026-11-08_zero_simmetrico_nel_nucleo`, sez. `7`)*. **La suite girata intera: TUTTA VERDE, il `pre-commit` `429.8` s su `1800`** *(`24%`)*, **`831.9` s in tutto.** **Il segnale di Luca: oltre `900` s, i tempi per collaudo a lui.**
+
+## 2026-11-08 `16:40` -- T3, d4: **LA LETTURA (m2), LA `U(1)` AGGIUNGE IRREVERSIBILITA' ANCHE A CAMPO DEBOLE -- FERMO SU T3** *(`doc/referti_l2/u1_t3c.txt`; il task history sez. `14.6`)*
+
+- ### **Senza il campo `G6` su `TBS` vale `1.10e-12`** *(sotto la soglia assoluta `1.33e-12`)*; **col campo a `e* = 0.013` `2.55e-10` e `2.52e-10`: `~230` volte.** ### **La mia ipotesi della materia caotica e' CADUTA.**
+- **Sullo stato piccolo `G6` passa** *(`2.8e-13`, anche a `e = 0.3029`)*: **lo scarto cresce con la CARICA, non con `e B`.** **La mia ipotesi, non provata: l'arrotondamento della sorgente `e J`, con `J` differenza di due numeri di ordine `rho` (`~1e3`).**
+- ### **LE DOMANDE:** **(t4) (d5) `G6` su `TBS` col campo e la sorgente SPENTA, e (d6) la norma riscalata: si fanno** *(minuti)*? **(t5) la catena `U(1)` resta ferma fino ad allora?**
