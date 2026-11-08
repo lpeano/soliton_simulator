@@ -81,7 +81,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E LE CORSE DELLA COPPIA**.
 # ### **E LE CARTE IS1, IS2, IS3 E IL REFERTO DI S162**.
 # ### **E LA CURA DEL SEGNO, IS1 A 17 GRADI, LE MAPPE LEGGERE SU L 162**.
-LIBRERIA_RIFERITA = "e45b8170"
+# ### **E LA RIPRESA DEGLI ALLUNGAMENTI E IS3 ALLE TRE AMPIEZZE**.
+LIBRERIA_RIFERITA = "e726ae0e"
 
 
 def vecchi():
