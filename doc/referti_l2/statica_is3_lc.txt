@@ -1,0 +1,22 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 8852b65f  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --is3-lc; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS3 (q5), Luca 02:13: Lambda del vuoto 6.000000000000000; Lambda_c 34 (la scena) e Lambda_c' = Lambda = 6; cs fisso 0.14999999999999999; omega per tick oggi 4.71238898038472354e-01, fase 1.27234502470386501e+00, fase' 2.04203522483336908e+00
+  DEVE PASSARE: IS3-LC-E F3 e' un autovettore del tick con CAMM-FASE-VUOTO a Lambda_c' = Lambda e cs fisso: il residuo ent PASSA   3.552e-15
+  DEVE PASSARE: IS3-LC-O Omega_0' tau = Omega_0 tau x cs'(Lambda; Lambda_c') / cs'(Lambda; Lambda_c) entro 1e-6 (la previs PASSA   misurato 1.570796327, previsto 1.570796327 (Omega_0 tau 0.801106127, il rapporto 1.960784)
+  a_f a Lambda_c 34: 1.121548576 (previsto 1.121549); a Lambda_c' 6: 1.971e-08 (previsto 0)
+  DEVE PASSARE: IS3-LC-A a_f' a Lambda_c' = Lambda entro 1e-6 (la scala torna esatta: il blocco di Jordan sparisce)        PASSA   1.971e-08
+  DEVE FALLIRE: IS3-LC-A-F a_f a Lambda_c 34 entro 1e-6 (il controllo positivo)                                            PASSA   1.121549
+  la coppia G a Gamma (la |fase| piu' grande delle 6 piu' piccole, per tick): oggi 1.936264e-09, fase 8.789411e-05, fase' 3.576413e-09 (previsto: all'arrotondamento, come oggi)
+  ### A1 la pendenza di P: a Lambda_c 34 3.174279e-02, a Lambda_c' 6 1.096577e-01; il rapporto 3.454570 contro 1.960784 (se scala con Omega_0) -> la lettura scritta prima (16.2): nessuna delle due
+  ### 30 gradi la pendenza di P: a Lambda_c 34 6.058790e-02, a Lambda_c' 6 1.581390e-01; il rapporto 2.610075 contro 1.960784 (se scala con Omega_0) -> la lettura scritta prima (16.2): nessuna delle due
+==================================================================================================================================
+ESITO: 5/5 controlli passano; DEVE fallite: 0 []

@@ -24222,3 +24222,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La proposta di cura (NON applicata), collegata a [[PUNTO-FISSO-CS-SOLITONE]]:** **i punti fissi di `cs` e di `Omega` fermati quando lo scarto non scende piu'** *(senza numero, `GIRI_MAX` come rete)*, **o con la tolleranza derivata dall'errore in avanti.** **Sulle corse l'effetto e' `~1e-15` per tick.**
 - ### **(q4), come Luca ha deciso:** **il gap del Goldstone e' un ARTEFATTO della misura** *(la coppia `G` a `Gamma`: `8.789e-05`, `5.279e-06`, `1.298e-11` alle tre ampiezze; con `cs` `6.742e-04`, `2.675e-04`, `1.542e-10`; `gap ~ sqrt(a e)`)*; **la pendenza di `P`, `3.174279e-02`, e' un FATTO di `CAMM-FASE-VUOTO`.** **I referti sono uscite di script e non si correggono a mano: la registrazione sta qui e nel task history** *(sez. `15.5`)*. **Aperto: il fattore `2` di `Omega_0`.**
 - **Avanti: (q5), il secondo `Lambda_c`** *(la previsione nella sez. `16`, poi la carta)*.
+
+## 2026-11-08 notte -- IS3 (q5): IL SECONDO `Lambda_c = Lambda`: **`5/5`**; **IL GAP SPARISCE COL BLOCCO DI JORDAN; IL FATTORE `2` DERIVATO** *(`doc/referti_l2/statica_is3_lc.txt`)*
+
+- ### **`Omega_0' tau = pi / 2`, `a_f' = 1.97e-08`: le previsioni tengono.** ### **La coppia `G` a `Gamma` a `Lambda_c = Lambda`: `3.58e-09`** *(come oggi)*: **dove il blocco di Jordan sparisce, sparisce il gap.**
+- ### **La pendenza di `P`: nessuna delle due ipotesi scritte prima** *(il rapporto `3.45` lungo `A1`, `2.61` a `30` gradi, contro `1.96`; non torna piatto)*: **dipende dalla direzione; un fatto aperto.**
+- ### **Il fattore `2`:** **sul vuoto `F3` il nodo e gli archi danno ciascuno `-pi Lambda`: `|Omega_0| tau = 2 pi Lambda cs'`** *(entro `4.6e-15`)*, **mentre `omega_oggi = pi cs`: il `2` e' energia contro quasi-energia** *(`H` non e' il generatore del tick)*. **Il mio errore era `omega = cs H / Lambda`.**
+- **IS3 e' chiusa per cio' che Luca ha chiesto** *(q1-q5)*; **aperti per Luca: la cura dei punti fissi** *(proposta, sez. `15.4`)*; **la pendenza di `P`.**
