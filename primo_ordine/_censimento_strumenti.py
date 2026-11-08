@@ -43,7 +43,7 @@ def _tutti_i_py():
 # ### 📌 **E <<materializzare un ALBERO>> non e' <<leggere un file da un commit>>:**
 # ### `12` strumenti leggono TESTO da un commit *(documenti, indice)* e fanno girare
 # ### ### **i comandi di OGGI** -- e quelli non hanno questo problema.
-CONFRONTANO_ESEGUENDO = ("primo_ordine/_misura_mb1.py",)
+CONFRONTANO_ESEGUENDO = ("csv/solitone/u1_t1.py", "primo_ordine/_misura_mb1.py")   # ### u1_t1.py dal 2026-11-08 (05ca52ce): i sigilli di gauge rigirati al loro commit in un git worktree
 
 
 def _censimento():

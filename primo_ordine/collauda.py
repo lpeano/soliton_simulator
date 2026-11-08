@@ -246,6 +246,8 @@ COLLAUDI = (
      "primo_ordine/_collauda_cs_centro.py", "pre-commit"),
     ("`D2-T` il tetto di `Omega`, la tolleranza derivata",
      "primo_ordine/_collauda_tetto.py", "pre-commit"),
+    ("`R60` le rotazioni del reticolo commutano col tick di oggi",
+     "primo_ordine/_collauda_r60.py", "pre-commit"),
     # ### ⚠ **`solo-CI` E NON <<pre-commit>>, e non per il tempo:** il CENSIMENTO dei
     # ### rami ### **non e- un presidio e non blocca niente** *(lo dice il mandato)*,
     # ### quindi ### **non ha una riga nel hook** -- e scrivere `pre-commit` qui sarebbe
