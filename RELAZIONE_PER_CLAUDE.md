@@ -24315,3 +24315,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Le previsioni scritte:** **(a) tre lobi, poi un esagono; (b) una coppia fusa e un terzo debole; (c) la mia, debole: un oggetto che RUOTA.** **(c) e (c') sono legate da una riflessione che NON e' provata sugli spinori: una carta statica come la R60, minuti, prima delle corse.**
 - ### **I costi:** **`7.3` ore per `10000` unita' su `L 162` da sola, `8.5` accanto** *(da `C35-0` di oggi)*; **`16` corse, `~117` ore.** **La mia proposta d'ordine: la carta della riflessione, T-0 (a), T-0 (c) con `C35-2pi/3`, T-0 (b), (c') se serve.**
 - **Le domande** *(il criterio di chiusura: le risposte nel task history)*: **(q1) il bordo e il toro; (q2) l'ordine; (q3) su quale configurazione i bracci del caos; (q4) la parita' di bordo per `w_123`.** **Nessun codice.**
+
+## 2026-11-08 `13:55` -- LE DECISIONI DI LUCA DELLE `13:45` *(chiudono il FERMO di `386d35b5` e `feb3cfbb`)*: **IL TASK HISTORY DI U1-U2** *(`2026-11-07_u1_prototipo_verificato`, sez. `14`)*
+
+- ### **Una previsione che i numeri di `386d35b5` gia' fanno:** **nel compatto `rho` cresce di un e-fold ogni `~0.9` unita'** *(`e = 0.1`)* **e `~0.4`** *(`e = 0.3029`)*: **`40`-`90` volte piu' veloce del caos** *(`25`-`40`)*. **Se d2 lo conferma, e' la lettura «difetto da cercare» -- o un'instabilita' del campo forte, che il regime moderato separa.**
+- **`e*` per il regime moderato: una corsa di prova a `e0 = 0.1`, `e* = e0 sqrt(0.1 / max|e0 B|)`** *(nel non compatto `e B` va come `e^2`)*, **stampato.** **Lo stato piccolo: il pacchetto dei sigilli del `24/10` sulla scena di oggi, col vuoto di `TBS`.**
+- ### **La R60 registrata come fatto** *(Luca)*: **`S` = la permutazione `x exp(-i pi/6 sigma_z)`, unica a meno di una fase; `R60 F3 = -F3`; `S^6 = -I` con `det S = 1`. La `S` e' nella libreria** *(`csv/solitone/carta_r60.py`: `S_derivata`, `applica`, `mappa_nodi`)*; **`D6` a `R60` al prossimo tocco di `u1_t3.py`, a T3 chiuso.**
+- **D0-D4: prova corta dopo T3. `C35-pi` subito dopo `C35-0`.**
