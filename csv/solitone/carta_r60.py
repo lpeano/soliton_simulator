@@ -155,6 +155,13 @@ def main():
             mot.chiudi_tick()
             return st["psi_h"].copy()
 
+        # ### il vuoto F3 ESPLICITO (la versione 1 usava quello della scena: non dimostrato F3, la sez. 4.4 del task history)
+        import _solitone_dal_fondo as SDF
+        F3 = CA.vuoto_della_corsa(z, "TBS")
+        assert CA.fasi_vuoto("TBS") == tuple(dict(SDF.FASI)["F3"]), CA.fasi_vuoto("TBS")
+        print("  il vuoto della scena (V.scena) contro F3: |phi_scena - F3| / |F3| = %.3e; phi <- F3 (le fasi %s per gli assi %s)"
+              % (float(np.linalg.norm(st["phi_h"] - F3) / np.linalg.norm(F3)), CA.fasi_vuoto("TBS"), SDF.DIREZIONI))
+        st["phi_h"][...] = F3
         base = {k: st[k].copy() for k in chiavi}
 
         def rimetti():
@@ -234,6 +241,7 @@ def main():
         sig = math.sqrt(rho_tbs / 12.0)
         casi = (("R60 x S60", 1, S60), ("R120 x S60^2", 2, S60 @ S60), ("P: R180 x sigma_z", 3, SZ), ("F1: R60 x I", 1, np.eye(2, dtype=complex)), ("F2: R60 x S60^dag", 1, np.conj(S60).T))
         res = {n_: [] for n_, _k, _s in casi}
+        resV = {n_: [] for n_, _k, _s in casi}
         for seme in SEMI:
             rg = np.random.default_rng(seme)
             x = ((rg.normal(size=st["psi_h"].shape) + 1j * rg.normal(size=st["psi_h"].shape)) * sig / math.sqrt(2.0), base["phi_h"].copy())
@@ -246,15 +254,70 @@ def main():
                 b = R(Tx, k, spin)
                 r = math.sqrt(float(np.sum(np.abs(a[0] - b[0]) ** 2) + np.sum(np.abs(a[1] - b[1]) ** 2))) / nx
                 res[nome].append(r)
-            print("  il seme %d: ||x|| %.4e; r %s" % (seme, nx, {n_: "%.2e" % res[n_][-1] for n_ in res}))
+                # ### (V): phi FISSO (F3), si ruota solo psi
+                rimetti()
+                aV = tick_n((R(x, k, spin)[0], x[1]))
+                bV = R(Tx, k, spin)
+                rp = math.sqrt(float(np.sum(np.abs(aV[0] - bV[0]) ** 2))) / nx
+                cf = np.vdot(bV[1], aV[1]) / np.vdot(bV[1], bV[1])     # ### phi: contro R T phi A MENO DI UNA FASE GLOBALE (per R180: R F3 = -F3)
+                rf = math.sqrt(float(np.sum(np.abs(aV[1] - cf * bV[1]) ** 2))) / nx
+                resV[nome].append((math.hypot(rp, rf), rp, rf))
+            print("  il seme %d: ||x|| %.4e; (L) r %s" % (seme, nx, {n_: "%.2e" % res[n_][-1] for n_ in res}))
+            print("             (V) r (psi, phi) %s" % ({n_: "%.2e (%.1e, %.1e)" % resV[n_][-1] for n_ in resV}))
             sys.stdout.flush()
         rimetti()
+        # ------------------------------------------------------------------ il vuoto ruotato, le quasi-energie
+        RF3 = R((np.zeros_like(base["psi_h"]), F3), 1, S60)[1]
+        print("  R60 F3 contro le 8 terne di fasi in {0, pi}^3 (gli assi %s), a meno di una fase globale:" % (SDF.DIREZIONI,))
+        uguale = []
+        for terna in [(a, b, c) for a in (0.0, math.pi) for b in (0.0, math.pi) for c in (0.0, math.pi)]:
+            F = SDF.fondo_con_fasi(inc, L, terna)
+            cc = np.vdot(F, RF3) / np.vdot(F, F)
+            d_ = float(np.linalg.norm(RF3 - cc * F) / np.linalg.norm(RF3))
+            if d_ <= 1e-12:
+                uguale.append(terna)
+            print("    %-28s |R60 F3 - c F| / |F| = %.2e (c = %.3f%+.3fi)" % ("(%s)" % ", ".join("pi" if v else "0" for v in terna), d_, cc.real, cc.imag))
+        print("  R60 F3 = %s; R180 F3 = c F3 con |R180 F3 - c F3| / |F3| = %.2e"
+              % (["(%s)" % ", ".join("pi" if v else "0" for v in tt) for tt in uguale] or "nessuna delle 8",
+                 float(np.linalg.norm(R((np.zeros_like(base["psi_h"]), F3), 3, SZ)[1] + F3) / np.linalg.norm(F3))))
+
+        def qe(F):
+            rimetti()
+            y = tick_n((np.zeros_like(base["psi_h"]), F))[1]
+            lam = np.vdot(F, y) / np.vdot(F, F)
+            return -math.atan2(lam.imag, lam.real) / N_T, float(np.linalg.norm(y - lam * F) / np.linalg.norm(F))
+        q3, r3 = qe(F3)
+        qr, rr_ = qe(RF3)
+        print("  la quasi-energia del vuoto (psi = 0, %d tick): F3 omega %.15f (residuo %.1e); R60 F3 omega %.15f (residuo %.1e)" % (N_T, q3, r3, qr, rr_))
+        rimetti()
+        # ------------------------------------------------------------------ R6: S^6
+        Sd = S_derivata(1, S60)
+        S6 = np.linalg.matrix_power(Sd, 6)
+        rg = np.random.default_rng(SEMI[0])
+        y = rg.normal(size=base["psi_h"].shape) + 1j * rg.normal(size=base["psi_h"].shape)
+        y0 = y.copy()
+        nm1_ = mappa_nodi(L, 1)
+        for _ in range(6):
+            y = applica(y, ext, nm1_, 1, Sd)
+        d6m = float(np.max(np.abs(S6 + np.eye(12))))
+        d6s = float(np.linalg.norm(y + y0) / np.linalg.norm(y0))
+        print("  R6: S^6 = -I (max|S^6 + I| %.1e); R60 sei volte su uno stato: |R^6 y + y| / |y| = %.1e; det S60 = %.15f%+.15fi"
+              % (d6m, d6s, np.linalg.det(S60).real, np.linalg.det(S60).imag))
     print("=" * 130)
+    esito("DEVE PASSARE: R6 S^6 = -I e R60^6 y = -y (entro %.1e: la materia cambia segno dopo un giro, con det S60 = 1)" % SOGLIA, d6m <= SOGLIA and d6s <= SOGLIA, "%.1e, %.1e" % (d6m, d6s))
     esito("DEVE PASSARE: R60 x S60 commuta col tick INTERO, %d tick, ogni seme: r <= %.2e" % (N_T, SOGLIA), max(res["R60 x S60"]) <= SOGLIA, "il massimo %.2e" % max(res["R60 x S60"]))
     esito("DEVE PASSARE: P R180 x sigma_z (la nota) col metodo nuovo e la STESSA soglia, ogni seme", max(res["P: R180 x sigma_z"]) <= SOGLIA, "il massimo %.2e" % max(res["P: R180 x sigma_z"]))
     esito("DEVE FALLIRE: F1 R60 con la sola permutazione (S = I sullo spin): r <= soglia, un seme qualunque", not min(res["F1: R60 x I"]) <= SOGLIA, "il minimo %.2e" % min(res["F1: R60 x I"]))
     esito("DEVE FALLIRE: F2 R60 con S60^dag (il verso sbagliato): r <= soglia, un seme qualunque", not min(res["F2: R60 x S60^dag"]) <= SOGLIA, "il minimo %.2e" % min(res["F2: R60 x S60^dag"]))
     print("  registrato: R120 x S60^2, il massimo %.2e" % max(res["R120 x S60^2"]))
+    print("  (V) IL VUOTO F3 FISSO (si ruota solo psi): il massimo per caso %s" % {n_: "%.2e" % max(v[0] for v in resV[n_]) for n_ in resV})
+    vL = max(res["R60 x S60"]) <= SOGLIA
+    vV = max(v[0] for v in resV["R60 x S60"]) <= SOGLIA
+    print("  LA LETTURA (sez. 4.2): (L) %s, (V) %s -> %s" % ("passa" if vL else "NON passa", "passa" if vV else "NON passa",
+          "R60 piena, F3 invariante" if vL and vV else ("ROTTURA SPONTANEA: le leggi R60, il vuoto F3 no" if vL else "le leggi stesse rompono R60 (la lettura (b))")))
+    esito("DEVE PASSARE: P (V) R180 x sigma_z col vuoto F3 FISSO (R180 F3 = -F3, una fase globale), ogni seme", max(v[0] for v in resV["P: R180 x sigma_z"]) <= SOGLIA,
+          "il massimo %.2e" % max(v[0] for v in resV["P: R180 x sigma_z"]))
+    esito("DEVE FALLIRE: F1-V la sola permutazione col vuoto fisso: r <= soglia", not min(v[0] for v in resV["F1: R60 x I"]) <= SOGLIA, "il minimo %.2e" % min(v[0] for v in resV["F1: R60 x I"]))
     print("  il tempo: %.0f s" % (time.time() - t_ini))
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
