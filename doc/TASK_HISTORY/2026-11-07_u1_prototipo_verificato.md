@@ -440,3 +440,8 @@
   - ⚠ **Se `D(e*/4)` scende sotto `2` volte `G6(senza)`, il rapporto non si legge** *(il difetto e' nel rumore del senza campo)*: **scritto, e la classe e' «non risolto».**
 - ### **I CONTROLLI DEL CLASSIFICATORE, prima dei numeri veri:** **DEVE PASSARE `C-E2`:** **un `D` costruito che va come `e^2`** *(i rapporti `4, 4`)* **classificato `e^2`; DEVE FALLIRE `C-E1`:** **un `D` che va come `e`** *(`2, 2`)* **classificato `e^2`** *(se passa, il classificatore non distingue)*.
 - ### **COSA MI FAREBBE FERMARE:** **(0) non al bit** *(la scena non e' quella)*; **un DEVE che fallisce**; ### **e alla fine, se (ii) cade e (iii) non dice `e^2`: FERMO, e la scelta (a) o (b) e' di Luca.**
+
+### 14.14 LA DECISIONE DI LUCA DELLE `21:49` SU (ii) E (iii)
+
+- ### **(ii) NON SI GIRA** *(Luca: «se (ii) e' vuota per costruzione -- lo dice il codice -- si scrive e non si gira»)*: **la premessa della sez. `14.13` e' il suo esito** *(i due mezzi della deriva sono uno dopo l'altro con lo stesso `E`: un passo e due mezzi differiscono di un arrotondamento per arco e per tick)*. **`u1_t3g.py` non la contiene.**
+- ### **(iii) SI' GIRA** *(`e*`, `e* / 2`, `e* / 4`, le letture della sez. `14.13`)*. **Se il difetto resta senza spiegazione: FERMO, e Luca sceglie fra continuare e dichiararlo limite noto.**

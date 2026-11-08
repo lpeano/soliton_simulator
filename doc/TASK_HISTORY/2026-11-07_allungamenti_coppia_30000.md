@@ -227,3 +227,8 @@
   - **Un picco sopra la soglia in un'ALTRA grandezza, non nello spostamento, si scrive** *(con la stessa regola)* **ma non decide il `1500`, che veniva dallo spostamento.**
   - ### **Dopo (p1):** **`W` per le finestre di stazionarieta' non si prende piu' dal picco: lo propongo dal `tau_int`** *(per esempio `W = 20 tau_int`)*, **e la scelta e' di Luca.** **Dopo (p2):** **`W = 3 P` con il `P` di Welch e il suo errore.**
 - ### **COSA MI FAREBBE FERMARE:** **`PE-P` che fallisce o `PE-N` che passa** *(il metodo non vale)*; **il caso ambiguo** *(lo stesso periodo in `TB3` e `TBS`)*.
+
+### 7.10 LA DECISIONE DI LUCA DELLE `21:49` SUL PERIODO DI `TB3`
+
+- ### **La lettura «`1500` = il bin `k = 6` di una finestra di `9000`» va VERIFICATA con Welch contro il nullo AR(1)** *(la misura della sez. `7.9`)*. **Se confermata: il periodo si scrive col suo errore, o «nessun picco significativo».** **Poi la risoluzione del criterio e il DEVE FALLIRE sopra la risoluzione** *(la decisione delle `19:21`)*.
+- **L'ordine sul principale, come prove corte** *(Luca, F3)*: **M3** *(Welch)*, **poi il referto parziale di `C35-0` (r-a), poi M4** *(T3 (iii))*. **Una corsa lunga e una prova corta alla volta, sommando i due rami.**
