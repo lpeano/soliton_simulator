@@ -1,0 +1,32 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 4d7c3e97  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --is3-ampiezze; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS3 (q1), Luca 00:47: eR alle tre ampiezze di VD-T (1e-07, 1e-06, 1e-05), la differenza IN AVANTI; Lambda del vuoto 6.000000000000000, Lambda_c 34.000000000000000, s 0.15; omega per tick oggi 4.71238898038472354e-01, fase 1.27234502470386501e+00, cs 1.27234502470386501e+00
+  amp 1e-07: eR = |T_cs(0) J f - T_fase(0) J f| / |J f| 2.708283e-07; |T_fase(0) J f - T(0) J f| / |J f| 1.160960e-08; |T_cs(0) J f - T(0) J f| / |J f| 2.768375e-07; il pavimento PAV_T / amp 1.0e-08
+  amp 1e-07: eL = |T_cs(0) f - T_fase(0) f| / |f| 8.011066e-01; a_f = |T_fase(0) f - T(0) f| / |f| 1.121549e+00; a_c = |T_cs(0) f - T(0) f| / |f| 1.922655e+00
+  amp 1e-07: la coppia G a Gamma (la |fase| piu' grande delle 6 piu' piccole, per tick): oggi 1.936264e-09, fase 8.789411e-05, cs 6.741926e-04; la pendenza di P lungo A1: fase 3.174279e-02, cs 3.401108e-02
+  amp 1e-06: eR = |T_cs(0) J f - T_fase(0) J f| / |J f| 4.882293e-08; |T_fase(0) J f - T(0) J f| / |J f| 5.879410e-09; |T_cs(0) J f - T(0) J f| / |J f| 4.774928e-08; il pavimento PAV_T / amp 1.0e-09
+  amp 1e-06: eL = |T_cs(0) f - T_fase(0) f| / |f| 8.011061e-01; a_f = |T_fase(0) f - T(0) f| / |f| 1.121549e+00; a_c = |T_cs(0) f - T(0) f| / |f| 1.922655e+00
+  amp 1e-06: la coppia G a Gamma (la |fase| piu' grande delle 6 piu' piccole, per tick): oggi 2.686529e-11, fase 5.278784e-06, cs 2.674798e-04; la pendenza di P lungo A1: fase 3.174279e-02, cs 3.401110e-02
+  amp 1e-05: eR = |T_cs(0) J f - T_fase(0) J f| / |J f| 2.154711e-07; |T_fase(0) J f - T(0) J f| / |J f| 5.909860e-08; |T_cs(0) J f - T(0) J f| / |J f| 1.576297e-07; il pavimento PAV_T / amp 1.0e-10
+  amp 1e-05: eL = |T_cs(0) f - T_fase(0) f| / |f| 8.011061e-01; a_f = |T_fase(0) f - T(0) f| / |f| 1.121549e+00; a_c = |T_cs(0) f - T(0) f| / |f| 1.922655e+00
+  amp 1e-05: la coppia G a Gamma (la |fase| piu' grande delle 6 piu' piccole, per tick): oggi 2.059224e-11, fase 1.297592e-11, cs 1.541901e-10; la pendenza di P lungo A1: fase 3.174279e-02, cs 3.401110e-02
+  la pendenza di ln eR contro ln amp -0.0497; di ln eL -0.0000; eR sopra il pavimento a ogni ampiezza: True
+  DEVE PASSARE: IS3-A (r1) eR proporzionale all'ampiezza: la pendenza in log 1 entro 0.3 (TOLL_PEND_T di VD-T, presa in pr ### FALLISCE   pendenza -0.0497
+  DEVE FALLIRE: IS3-A-F eL (il primo ordine: f cambia Lambda) proporzionale all'ampiezza: la pendenza in log 1 entro 0.3   PASSA   pendenza -0.0000
+  ### (r2): eR NON scala come l'ampiezza: non e' la differenza finita (Luca 00:47: FERMO)
+  ### la coppia G a Gamma, oggi: 1.936264e-09 2.686529e-11 2.059224e-11; la pendenza in log -0.9866 -> la lettura scritta prima (sez. 14.2): nessuna delle due
+  ### la coppia G a Gamma, fase: 8.789411e-05 5.278784e-06 1.297592e-11; la pendenza in log -3.4154 -> la lettura scritta prima (sez. 14.2): nessuna delle due
+  ### la coppia G a Gamma, cs: 6.741926e-04 2.674798e-04 1.541901e-10; la pendenza in log -3.3204 -> la lettura scritta prima (sez. 14.2): nessuna delle due
+  la carta (sez. 14.1): a_f previsto 2 (Lambda_c - Lambda) / (Lambda + Lambda_c) (omega_fase - omega_oggi) = 1.121549; a_c - a_f previsto 2 Lambda_c / (Lambda + Lambda_c) omega_oggi = 0.801106
+==================================================================================================================================
+ESITO: 2/3 controlli passano; DEVE fallite: 1 ["DEVE PASSARE: IS3-A (r1) eR proporzionale all'ampiezza: la pendenza in log 1 entro 0.3 (TOLL_PEND_T di VD-T, presa in prestito) ed eR sopra il pavimento a ogni ampiezza"]
+exit 1
