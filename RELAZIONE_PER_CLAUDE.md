@@ -24234,3 +24234,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **IS3 e' chiusa per q1-q5** *(`93c89377`)*; **B1 `5/5`** *(`e0c370bb`)*; **`R-1` `4/4` e `C35-0` da `10000` a `30000` in corsa dalle `02:30`** *(`f15ab596`)*.
 - ### **I1, il pezzo dopo in coda, vuole un flag in `corsa_accensione.py`: e' uno dei `61` file del percorso della corsa** *(par. `5`)*. **Le strade: (i1) I1 aspetta gli allungamenti; (i2, la mia proposta) il registro e i suoi test ORA su una corsa corta, il flag dopo; (i3) gli allungamenti fermati fra due corse per il flag.** **La decisione e' di Luca.**
+
+## 2026-11-08 notte -- I1 (i2): IL REGISTRO DELLO STATO COMPLETO, **`7/7`** *(`doc/referti_l2/stato_completo.txt`)*
+
+- **Salvare non tocca la corsa (`R1`); sporcato e ricaricato ridà la corsa mai interrotta AL BIT (`R2`); senza `phi_h` o senza gli accumulatori del bordo NON torna (`R2-F`: senza gli accumulatori `M + M_ass` sbaglia di `3.0e-01` con `z["st"]` identico); `carica` ALZA con una voce in piu', in meno, o con una tabella cambiata (`R3`).**
+- **`corsa_accensione.py` non e' toccato** *(il flag a fine allungamenti)*. **Avanti: I3, poi la carta di B1 (J3).**

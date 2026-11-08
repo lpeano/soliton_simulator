@@ -1,0 +1,21 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] stato_completo.py  sha1-BYTE 13ca7433  committato e pulito
+[TIMBRO] test_stato_completo.py  sha1-BYTE 0d4e54ef  committato e pulito
+==================================================================================================================================
+I1 (i2), IL REGISTRO DELLO STATO COMPLETO (Luca 03:47): TBS da E:\soliton_simulator\libreria\TBS_100000_completo.npz, N 100 tick, il salvataggio dopo 50; i file in E:\soliton_simulator\stati_prova; HEAD 157f3b3f
+==================================================================================================================================
+  DEVE PASSARE: R0 lo stato della libreria = lo stato di TBS registrato a 100000 (al bit, ogni chiave)                   PASSA   
+  la corsa mai interrotta: M_ass 6.19076900766231120e-01, V_ass 6.88681272316898685e-01, E_ass 5.65641932189464569e-01
+  DEVE PASSARE: R1 100 tick con il salvataggio a 50 = 100 tick senza: ogni chiave di z[st] e gli accumulatori del bordo  PASSA   9 chiavi salvate, 2262246 byte
+  DEVE PASSARE: R2 sporcato (z[st] allo stato vecchio a TICK0, gli accumulatori a zero), ricaricato dal file a 100050, 5 PASSA   il meta: tick 100050, commit 157f3b3f, registrati ['bordo', 'st']
+  DEVE FALLIRE: R2-F (a) il registro SENZA phi_h (la fase del vuoto): la ripartenza = la corsa mai interrotta            PASSA   le chiavi diverse: ['Lambda', 'phi_h', 'psi_h', 'rho']
+  R2-F (b): M + M_ass a 100100 con gli accumulatori ripartiti da zero 9.95049395968508092e+05; nella corsa mai interrotta 9.95049695904986584e+05 (lo stato z[st] e' lo stesso: True)
+  DEVE FALLIRE: R2-F (b) il registro SENZA gli accumulatori del bordo: M + M_ass a 100100 = quello della corsa mai inter PASSA   
+  DEVE PASSARE: R3 il file elenca i registrati (st, bordo) e lo sha1 di ogni chiave, e la tabella c_t                    PASSA   9 sha1
+  DEVE PASSARE: R3 carica ALZA con una grandezza registrata in PIU', con una in MENO, e con una tabella cambiata         PASSA   i registrati del file E:\soliton_simulator\stati_p | i registrati del file E:\soliton_simulator\stati_p | una tabella COSTANTE e' cambiata: nel file {'c_t':
+==================================================================================================================================
+ESITO: 7/7 controlli passano; DEVE fallite: 0 []

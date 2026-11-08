@@ -58,3 +58,10 @@
 2. **`stato_completo.py`, `test_stato_completo.py`:** l'INVENTARIO; commit; `D6`, la cassetta *(il test dentro la cassetta? NO: la cassetta gira i test dei moduli di oggi; il test nuovo si gira a se', dichiarato)*; commit.
 3. `python csv/solitone/test_stato_completo.py > doc/referti_l2/stato_completo.txt`; il referto, la relazione; commit.
 4. **I3:** lo script, il referto; commit.
+
+### 5.4 L'ESITO DI I1 (i2) *(`stato_completo.py` `13ca7433`, `test_stato_completo.py` `0d4e54ef`; `doc/referti_l2/stato_completo.txt`)*: **`7/7`**
+
+- **`R0`:** lo stato della libreria = `TBS` a `100000`. ### **`R1`:** **`100` tick con il salvataggio a `50` = `100` senza: ogni chiave e gli accumulatori AL BIT** *(il file: `9` chiavi, `2262246` byte)*. ### **`R2`:** **sporcato allo stato vecchio, ricaricato, `50` tick: = la corsa mai interrotta, AL BIT.**
+- ### **`R2-F` fallisce le due volte come deve:** **(a) senza `phi_h` divergono `Lambda`, `phi_h`, `psi_h`, `rho`**; **(b) senza gli accumulatori `M + M_ass` a `100100` e' `9.95049395968508092e+05` contro `9.95049695904986584e+05`, con `z["st"]` UGUALE AL BIT** *(cio' che `z["st"]` da solo perderebbe)*.
+- **`R3`:** **il file elenca `bordo`, `st` e i `9` `sha1`, e la tabella `c_t`; `carica` ALZA con una voce in piu', una in meno e una tabella cambiata.**
+- ### **Il registro e' provato: T1-T5 lo useranno** *(I4: `Campo` registrato)*; **il flag in `corsa_accensione.py` a fine allungamenti.**
