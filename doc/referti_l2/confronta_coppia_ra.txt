@@ -1,0 +1,4 @@
+[TIMBRO] confronta_coppia_ra.py  sha1-BYTE 8a17860a  committato e pulito
+  DEVE PASSARE: K1 la parte comune del referto a 30000 = il referto ufficiale di C35-0 a 10000, al carattere         PASSA   164 righe confrontate
+  DEVE FALLIRE: K2 la stessa parte comune = il referto di C35-pi (un'altra corsa)                                    ### FALLISCE   1 righe confrontate; la prima diversa, riga 1: 'IL REFERTO DELLA COPPIA C35-0 contro il singolo S162 (L 162; il task history 2026-11-07_re' contro 'IL REFERTO DELLA COPPIA C35-pi contro il singolo S162 (L 162; il task history 2026-11-07_r'
+### 2 su 2 come devono

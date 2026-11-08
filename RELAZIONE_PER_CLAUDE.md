@@ -24473,3 +24473,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **(0) uguale a `u1_t3f`; i controlli del classificatore come devono.** **L'assoluto di `psi` a norma piena: `e*` `5.27e-09`, `e*/2` `4.77e-11`, `e*/4` `6.84e-12`; senza campo `6.30e-12`.** **La lettura fissata: «non risolto»** *(`D(e*/4)` nel rumore)*; ### **ma il primo rapporto e' `127`** *(`e^2` darebbe `4`)*: **una SOGLIA fra `e*/2` e `e*`, non un accoppiamento a potenza bassa** *(una lettura, non una misura)*.
 - ### **La scelta di Luca: (a) continuare** *(la mia proposta: una scansione di `e` fra `e*/2` e `e*`)* **o (b) LIMITE NOTO coi numeri e passare a T4-T5. La mia raccomandazione: (b), con la scansione IN ATTESA.**
+
+## 2026-11-09 (l'orologio: `00:12`) -- (r-a), IL REFERTO PARZIALE DI `C35-0` A `30000`: **`14/14` E K1 AL CARATTERE; LA COPPIA RESTA LEGATA E OSCILLA SENZA DERIVA; LA MIA LETTURA FISSATA ERA SBAGLIATA** *(`doc/referti_l2/coppia_C35-0_30000.txt`; il task history del referto della coppia sez. `13`)*
+
+- ### **La parte comune** *(fino a `10000`)* **= il referto ufficiale al carattere** *(K1, `164` righe)*; **K2 fallisce come deve ma gia' all'intestazione: un DEVE FALLIRE debole, dichiarato.**
+- ### **Oltre `10000`:** **`d` oscilla fra `~13` e `~33` attorno a `~23`, la stessa oscillazione di prima, la stessa ampiezza fino a `30000`; la deriva `-8.9e-6 +- 1.8e-4`: zero.** **`E + E_ass` della coppia relativa `~2e-6`; `A-S` `2.9753e-02`, come il referto ufficiale.**
+- ### ⚠ **La mia lettura fissata («entro `3` deviazioni dall'ultimo blocco») presupponeva `d` fermo: stampa «si sposta» per l'oscillazione. Non la cambio dopo i numeri: la scrivo.** **La domanda: il periodo e lo smorzamento di `d` ora o con (r-b)? La mia proposta: con (r-b).**
