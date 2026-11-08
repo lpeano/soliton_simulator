@@ -149,6 +149,73 @@ def curvatura(t, y):
     return 2.0 * float(p[0]), 2.0 * math.sqrt(max(0.0, float(cov[0, 0])))
 
 
+def oltre(campC, t_c, tm, rhoC, nm, stC, s, L, d, m1, m2, x, c0, M, ref, refB, mA, mB):
+    """### **(r-a) OLTRE il `t` comune: la coppia DA SOLA** *(il task history sez. `12`)*: **solo STAMPE**, nessun DEVE. `d` dai semipiani, l'angolo, il baricentro,
+    `(M1 - M2) / M` dalle mappe; `E + E_ass` della coppia dai campioni; `A-S` sulla serie intera; la fase relativa agli stati oltre `t_c`. **`E_int` e la forza NON ci sono:
+    senza il singolo non si calcolano.**"""
+    from solitone import toro as TO
+    tc_u = t_c * s
+    tm = np.asarray(tm, dtype=float) * s          # ### il t delle mappe e' in TICK (la cura del 2026-11-07): qui in unita' di tempo, come il resto della carta
+    print("-" * 130)
+    print("### OLTRE t %.1f (il t comune col singolo): LA COPPIA DA SOLA (r-a, Luca 2026-11-08 17:57) -- solo stampe; E_int e la forza NON ci sono senza il singolo" % tc_u)
+    dS, ang, bar, dM = [], [], [], []
+    for i in range(len(tm)):
+        g = rhoC[i]
+        cA, cB = centri_semipiani(g, m1, m2, L, x, 0.0)
+        D = vettore(cA, cB, L)
+        dS.append(float(np.hypot(*D)))
+        ang.append(math.degrees(math.atan2(D[1], D[0])))
+        pA = TO.scarti(np.array([cA[0]]), np.array([cA[1]]), c0[0], c0[1], L)[0]
+        bar.append(pA + 0.5 * D)
+        dM.append(float(g[x < 0].sum() - g[x >= 0].sum()) / M)
+    dS, ang, bar, dM = map(np.asarray, (dS, ang, bar, dM))
+    tt = np.array([c["t"] for c in campC], dtype=float) * s
+    Ea = np.array([c["E"]["totale"]["tot"] + c["bordo"]["E_ass"] for c in campC])
+    print("  %-17s %4s %-21s %-10s %-18s %-11s %-4s %-26s" % ("il tempo", "ist", "d semipiani", "angolo", "baricentro", "(M1-M2)/M", "camp", "E + E_ass della coppia"))
+    for b0 in np.arange(0.0, tm[-1] + 1e-9, BLOCCO):
+        k = (tm >= b0) & (tm < b0 + BLOCCO)
+        q = (tt >= b0) & (tt < b0 + BLOCCO)
+        if not k.any():
+            continue
+        print("  %7.0f .. %7.0f %4d %9.5f +- %8.5f %+10.4f %+8.4f %+8.4f %+11.3e %4d %.10e +- %.2e%s"
+              % (b0, b0 + BLOCCO, k.sum(), dS[k].mean(), dS[k].std(), ang[k].mean(), bar[k, 0].mean(), bar[k, 1].mean(), dM[k].mean(), q.sum(),
+                 Ea[q].mean() if q.any() else float("nan"), Ea[q].std() if q.any() else float("nan"), "" if b0 + BLOCCO > tc_u else "   (la parte comune)"))
+    # ### la lettura fissata (sez. 12): d dai semipiani oltre t_c contro il suo valore nell'ultimo blocco comune, entro 3 deviazioni per blocco; e la deriva col suo errore
+    ult = (tm >= tc_u - BLOCCO) & (tm <= tc_u)
+    dopo = tm > tc_u
+    blocchi = [(b0, dS[(tm >= b0) & (tm < b0 + BLOCCO)]) for b0 in np.arange(tc_u, tm[-1] + 1e-9, BLOCCO)]
+    blocchi = [(b0 + 0.5 * BLOCCO, v.mean(), v.std()) for b0, v in blocchi if len(v) > 1]
+    sig = float(np.mean([b[2] for b in blocchi])) if blocchi else float("nan")
+    fuori = [b for b in blocchi if abs(b[1] - dS[ult].mean()) > 3.0 * sig]
+    tb, mb = np.array([b[0] for b in blocchi]), np.array([b[1] for b in blocchi])
+    A = np.vstack([tb - tb.mean(), np.ones_like(tb)]).T
+    coef, res, _r, _sv = np.linalg.lstsq(A, mb, rcond=None)
+    sres = float(np.sqrt(np.sum((mb - A @ coef) ** 2) / max(len(mb) - 2, 1)))
+    epend = sres / float(np.sqrt(np.sum((tb - tb.mean()) ** 2)))
+    print("  LA LETTURA (sez. 12): d dai semipiani nell'ultimo blocco comune %.5f; oltre, %d blocchi, la deviazione media per blocco %.5f; blocchi fuori da 3 deviazioni: %d%s"
+          % (dS[ult].mean(), len(blocchi), sig, len(fuori), (" (" + ", ".join("%.0f: %.5f" % (b[0], b[1]) for b in fuori) + ")") if fuori else ""))
+    print("  la deriva di d oltre t_c (la retta sulle medie dei blocchi): %+.4e +- %.1e per unita' di tempo; il valore medio oltre %.5f" % (coef[0], epend, dS[dopo].mean()))
+    print("  => %s" % ("la coppia NON si muove oltre t_c, entro il rumore (nessun blocco fuori da 3 deviazioni)" if not fuori else "d si sposta oltre t_c (vedi i blocchi fuori e la deriva)"))
+    asy = np.array([float(np.linalg.norm(senza_nyquist(rhoC[i].reshape(L, L)) - r180(senza_nyquist(rhoC[i].reshape(L, L)), L, c0[0], c0[1])) / np.linalg.norm(senza_nyquist(rhoC[i].reshape(L, L)))) for i in range(len(tm))])
+    lg = np.log(asy)
+    pend = [pendenza(tm[(tm >= t0) & (tm <= t0 + FIN_AS)], lg[(tm >= t0) & (tm <= t0 + FIN_AS)]) for t0 in tm if t0 + FIN_AS <= tm[-1]]
+    print("  A-S sulla serie INTERA (stampa): la pendenza di log(asimmetria) massima %.4e (il limite del caos 1/TAU_CAOS %.4e); l'asimmetria alla fine %.4e" % (max(pend), 1.0 / TAU_CAOS, asy[-1]))
+    for b0 in np.arange(tc_u, tm[-1] + 1e-9, 2 * BLOCCO):
+        k = (tm >= b0) & (tm < b0 + 2 * BLOCCO)
+        if k.any():
+            print("  %7.0f .. %7.0f  l'asimmetria media %.4e" % (b0, b0 + 2 * BLOCCO, asy[k].mean()))
+    print("### la fase relativa oltre t_c (stampa), agli stati completi della coppia")
+    for xx in stC:
+        if xx["t"] <= t_c:
+            continue
+        with np.load(xx["file"]) as dd_:
+            ps = dd_["psi_h"].copy()
+        pA = complex(np.sum(np.conj(ref[mA]) * ps[mA]))
+        pB = complex(np.sum(np.conj(refB[mB]) * ps[mB]))
+        f = math.atan2((pB / pA).imag, (pB / pA).real)
+        print("  t %8.1f  |pA| %.6e |pB| %.6e  la fase relativa %+.6f rad" % (xx["t"] * s, abs(pA), abs(pB), f))
+
+
 def main(argv):
     corsa = argv[argv.index("--corsa") + 1]
     if corsa not in RIF:
@@ -181,6 +248,14 @@ def main(argv):
     print("=" * 130)
     rrC, campC = CA.serie(corsa)[:2]
     rrS, campS = CA.serie(rif)[:2]
+    # ### (r-a, Luca 2026-11-08 17:57; il task history sez. 12): il t COMUNE. I campioni del singolo devono essere un PREFISSO di quelli della coppia;
+    # ### tutte le sezioni di sempre girano sulla coppia TAGLIATA a t_c (identiche a prima quando il singolo e' lungo quanto la coppia), e oltre t_c
+    # ### una sezione nuova stampa la coppia DA SOLA.
+    campC_tutti = campC
+    nS = len(campS)
+    assert len(campC_tutti) >= nS and [c["t"] for c in campC_tutti[:nS]] == [c["t"] for c in campS], "i campioni del singolo NON sono un prefisso di quelli della coppia"
+    campC = campC_tutti[:nS]
+    t_c = int(campS[-1]["t"])                   # ### il t comune, in tick
     cop, copS, bor = rrC[0]["coppia"], rrS[0]["coppia"], rrC[0]["bordo"]
     d, segno = int(cop["d"]), int(cop["segno"])
     c0 = np.array(bor["c0"], dtype=float)
@@ -194,6 +269,10 @@ def main(argv):
     # ------------------------------------------------------------------ le mappe
     tm, rhoC, lamC, _cenC = carica_mappe(corsa)
     tmS, rhoS, lamS, cenS = carica_mappe(rif)
+    tm_tutti, rhoC_tutti = tm, rhoC                # ### (r-a) le mappe intere della coppia; le sezioni di sempre sul prefisso comune
+    nm = len(tmS)
+    assert len(tm) >= nm and np.array_equal(tm[:nm], tmS), "le mappe del singolo NON sono un prefisso di quelle della coppia"
+    tm, rhoC, lamC = tm[:nm], rhoC[:nm], lamC[:nm]
     assert np.array_equal(tm, tmS), "le mappe NON sono agli stessi t"
     # ### la cura del 2026-11-07 (il task history sez. 6, l'errore (1)): il t delle mappe e' in TICK; tutta la carta lavora in unita' di tempo (t * s)
     tm, tmS = tm * s, tmS * s
@@ -447,7 +526,8 @@ def main(argv):
         print("  %7.0f .. %7.0f %s %+.5e" % (b0, b0 + BLOCCO, " ".join("%+.5e" % Ei[c][k].mean() for c in CONTI), Ea[k].mean()))
     print("  a t 0: E_int %+.6e (E[S] %.10e: relativa %.3e)" % (Ei["tot"][0], campS[0]["E"]["totale"]["tot"], Ei["tot"][0] / campS[0]["E"]["totale"]["tot"]))
     print("-" * 130)
-    stC = [xx for rr in rrC for xx in (rr.get("stati") or [])]
+    stC_tutti = [xx for rr in rrC for xx in (rr.get("stati") or [])]
+    stC = [xx for xx in stC_tutti if xx["t"] <= t_c]        # ### (r-a) la parte comune
     x0S = [xx for rr in rrS for xx in (rr.get("stati") or []) if xx["t"] == 0][0]
     with np.load(x0S["file"]) as dd_:
         ref = dd_["psi_h"].copy()                    # ### la cura (2): la chiave psi degli stati e' NULLA, lo stato vero e' psi_h per estremita'
@@ -469,6 +549,8 @@ def main(argv):
     dfa = abs(((fa[0] - atteso + math.pi) % (2 * math.pi)) - math.pi)
     esito("DEVE PASSARE: FA0 la fase relativa a t 0 = %s (il segno %+d), entro le code incrociate sui semipiani %.3e" % ("0" if segno > 0 else "pi", segno, cA_ + cB_), dfa <= cA_ + cB_,
           "%.3e" % dfa)
+    if len(campC_tutti) > nS:
+        oltre(campC_tutti, t_c, tm_tutti, rhoC_tutti, nm, stC_tutti, s, L, d, m1, m2, x, c0, M, ref, refB, mA, mB)
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
