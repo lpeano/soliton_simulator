@@ -1,0 +1,43 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] carta_impulso.py  sha1-BYTE a855c74a  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3.py  sha1-BYTE 9e49d711  committato e pulito
+==================================================================================================================================
+T3, I DEVE DI BASE DELL'INNESTO U(1) SUL TICK DI OGGI: la scena di _u1_oggi, lo stato E:\soliton_simulator\libreria\TBS_100000_completo.npz (tick 100000); e ['0.1000', '0.3029']; forme ('compatto', 'noncompatto'); N_B 100, N_C 1000, N_D 500, N_D6 10; nessun bordo
+  l'impronta della composizione: 2e7f795d2a52fbe7 (attesa 2e7f795d2a52fbe7)
+==================================================================================================================================
+  DEVE PASSARE: G0-I l'impronta della composizione e' quella della sez. 2                                                PASSA   2e7f795d2a52fbe7
+  G0 il riferimento: la scena della corsa, 100 tick da 100000: 6 chiavi
+  DEVE PASSARE: G0 (i) la scena di _u1_oggi col campo scritto (U = I), il tick NON avvolto, 100 tick = la scena della co PASSA   diverse []
+  DEVE PASSARE: G0 (ii) il campo ACCESO a e = 0 (non compatto), il tick avvolto con la sorgente, 100 tick: la materia AL PASSA   diverse []; max|A| 0.0e+00 max|E| 0.0e+00
+  DEVE FALLIRE: G0-F e = 0.1000: la materia AL BIT del riferimento                                                       PASSA   diverse ['Lambda', 'phi_h', 'psi_h', 'rho']; max|A| 5.9e+02 max|E| 4.0e+02
+  DEVE FALLIRE: G2-F U scritta con un modulo 1 + 1e-06: |U^dag U - I| <= 1e-12                                           PASSA   2.000e-06
+  compatto    e 0.1000 | G4 rho 2.2e-09 eB 4.7e-08 |dE| 5.17e-06 stima 2.31e-10 (|dE|/stima 22355.061) | G5 1.69e-10 stima 6.13e-10 (max|E| 4.60e+02, e max rho 2.62e+02, max|drho| 1.23e+04) | G6 psi 2.5e+00 phi 1.3e+00 A 6.3e-01 E 1.1e+00 (max|A| 6.3e+03 max|E| 4.0e+02) | G2 2.2e-16
+  compatto    e 0.3029 | G4 rho 4.0e-02 eB 1.9e-01 |dE| 4.94e+01 stima 2.44e-10 (|dE|/stima 202024542150.870) | G5 5.36e-10 stima 1.19e-09 (max|E| 8.92e+02, e max rho 7.94e+02, max|drho| 2.85e+03) | G6 psi 2.4e+00 phi 1.3e+00 A 6.3e-01 E 9.4e-01 (max|A| 7.2e+03 max|E| 5.9e+02) | G2 2.2e-16
+  compatto    e 0.3029 | G4-F (solo psi) rho 6.56e-01 | G5-F (sorgente spenta) 9.96e+01, la chiave |G - G0 + e(rho - rho0)| 2.69e-11, max|drho| 3.29e+02 | G6-F (senza A -> -A) psi 2.5e+00 A 2.5e+00
+  noncompatto e 0.1000 | G4 rho 3.5e-12 eB 6.3e-12 |dE| 3.27e-09 stima 1.92e-10 (|dE|/stima 17.049) | G5 1.56e-10 stima 5.92e-10 (max|E| 4.45e+02, e max rho 2.62e+02, max|drho| 1.27e+04) | G6 psi 4.1e-05 phi 3.5e-07 A 7.3e-07 E 2.9e-05 (max|A| 2.1e+03 max|E| 2.1e+02) | G2 2.2e-16
+  noncompatto e 0.3029 | G4 rho 8.5e-06 eB 1.9e-05 |dE| 7.16e-03 stima 1.34e-10 (|dE|/stima 53570330.725) | G5 4.43e-10 stima 1.06e-09 (max|E| 4.41e+02, e max rho 7.94e+02, max|drho| 2.51e+03) | G6 psi 2.3e+00 phi 1.2e+00 A 6.4e-01 E 1.2e+00 (max|A| 1.2e+03 max|E| 2.4e+02) | G2 2.2e-16
+  noncompatto e 0.3029 | G4-F (solo psi) rho 5.94e-01 | G5-F (sorgente spenta) 9.96e+01, la chiave |G - G0 + e(rho - rho0)| 2.69e-11, max|drho| 3.29e+02 | G6-F (senza A -> -A) psi 2.3e+00 A 2.1e+00
+  DEVE PASSARE: D6-C l'arco k e' del nodo k // 3 (la premessa di carta_impulso.rotazione)                                PASSA   gli assi [(1, 0), (0, 1), (1, 1)]
+  D6 compatto    e 0.1000 U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '2.4e-15', 'h_int': '0.0e+00', 'phi_h': '3.7e-15', 'psi': '0.0e+00', 'psi_h': '1.7e-15', 'rho': '9.5e-16', 'A': '4.7e-14', 'E': '6.8e-14'}; il massimo 6.794e-14 (max|A| 6.5e-01)
+  D6 compatto    e 0.3029 U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '2.7e-15', 'h_int': '0.0e+00', 'phi_h': '4.2e-15', 'psi': '0.0e+00', 'psi_h': '2.8e-14', 'rho': '1.3e-14', 'A': '9.6e-15', 'E': '3.5e-14'}; il massimo 3.516e-14 (max|A| 1.8e+01)
+  D6 compatto    e 0.3029 U 1 : |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '1.6e-03', 'h_int': '0.0e+00', 'phi_h': '2.0e-03', 'psi': '0.0e+00', 'psi_h': '4.5e-01', 'rho': '8.5e-02', 'A': '5.5e-02', 'E': '2.2e-01'}; il massimo 4.475e-01 (max|A| 1.8e+01)
+  D6 noncompatto e 0.1000 U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '2.5e-15', 'h_int': '0.0e+00', 'phi_h': '3.7e-15', 'psi': '0.0e+00', 'psi_h': '1.7e-15', 'rho': '9.6e-16', 'A': '4.6e-14', 'E': '6.7e-14'}; il massimo 6.691e-14 (max|A| 6.5e-01)
+  D6 noncompatto e 0.3029 U sz: |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '2.4e-15', 'h_int': '0.0e+00', 'phi_h': '4.1e-15', 'psi': '0.0e+00', 'psi_h': '3.3e-14', 'rho': '2.1e-14', 'A': '9.8e-15', 'E': '4.4e-14'}; il massimo 4.360e-14 (max|A| 1.8e+01)
+  D6 noncompatto e 0.3029 U 1 : |T^10(R x) - R T^10(x)| relativo per chiave {'Lambda': '1.6e-03', 'h_int': '0.0e+00', 'phi_h': '2.0e-03', 'psi': '0.0e+00', 'psi_h': '5.9e-01', 'rho': '9.7e-02', 'A': '5.9e-02', 'E': '2.2e-01'}; il massimo 5.875e-01 (max|A| 1.8e+01)
+==================================================================================================================================
+  DEVE PASSARE: G2 |U^dag U - I| <= 1e-12 a ogni tick di ogni corsa (G4, G5, G6), ogni configurazione                    PASSA   il massimo 2.22e-16
+  DEVE PASSARE: G4 la gauge: rho ed e B <= 1e-12 relativo, |dE| <= N 6 eps max|A'| / A_p, ogni configurazione (la decisi ### FALLISCE   rho max 4.0e-02, eB max 1.9e-01, |dE|/stima max 202024542150.870
+  DEVE FALLIRE: G4-F chi solo su psi (U non trasformata): rho <= 1e-12, nelle due forme a e 0.3029                       PASSA   rho min 5.94e-01
+  DEVE PASSARE: G5 Gauss: max|(div E - e rho)(t) - (div E - e rho)(0)| <= N_C 6 eps max(max|E|, e max rho) per 1000 tick PASSA   il rapporto max 0.451
+  DEVE FALLIRE: G5-F la sorgente spenta: Gauss tiene -- e fallisce PER LA CHIAVE GIUSTA: la materia si muove e G - G0 =  PASSA   rotto ['1.0e+02', '1.0e+02'], chiave ['2.7e-11', '2.7e-11']
+  DEVE PASSARE: G6 500 avanti, T, 500 avanti, T: psi, phi, A, E di partenza entro N 6 eps = 1.33e-12 relativo (N = 1000) ### FALLISCE   il peggiore 2.47e+00
+  DEVE FALLIRE: G6-F senza A -> -A: lo stato di partenza entro 1.33e-12, nelle due forme a e 0.3029                      PASSA   il migliore 2.34e+00
+  DEVE PASSARE: D6 il tick col campo commuta con R180 x sigma_z (entro 1e-12, ogni chiave, A ed E compresi), ogni config PASSA   il massimo 6.79e-14
+  DEVE FALLIRE: D6-F lo stesso con U = 1: commuta entro 1e-12, nelle due forme a e 0.3029                                PASSA   il minimo 4.47e-01
+==================================================================================================================================
+ESITO: 13/15 controlli passano; DEVE fallite: 2 ["DEVE PASSARE: G4 la gauge: rho ed e B <= 1e-12 relativo, |dE| <= N 6 eps max|A'| / A_p, ogni configurazione (la decisione (1))", 'DEVE PASSARE: G6 500 avanti, T, 500 avanti, T: psi, phi, A, E di partenza entro N 6 eps = 1.33e-12 relativo (N = 1000), ogni configurazione']
+exit 1 12:41:04
