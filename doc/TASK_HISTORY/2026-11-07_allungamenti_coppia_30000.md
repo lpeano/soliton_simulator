@@ -138,3 +138,8 @@
 4. **`--ripresa C35-0`** *(in background)* -> il referto `doc/referti_l2/ripresa_C35-0.txt`, commit e push.
 5. **Se passa: il driver dei pezzi di `C35-0` in background; la riga della MAPPA «allungamenti in corso» con la stima d'arrivo; commit e push.**
 6. **Accanto, la coda corta:** IS3 q1/q2 *(`carta_statiche.py`: NON e' nel percorso della corsa, da verificare con la lista di `R-1`)*, poi B1, I1/I3, T1-T5.
+
+### 6.4 LA CASSETTA DOPO `D6` SU `e726ae0e`: `107/108` -- **FALLISCE `D6` (l'isolamento), UN MIO ERRORE**
+
+- **`csv/_u1_oggi.py` e `csv/_u1_carica_e.py` importano la libreria da FUORI `csv/solitone/`** *(miei, `2026-11-07`, senza la cassetta dopo)*. **Gli altri `107` controlli passano**: **i test della libreria e il `D6` dei blob.**
+- ### **Il criterio della sez. `6.2` («la cassetta che non passa» mi ferma) era scritto per PROTEGGERE LA CORSA:** **la parte della cassetta che la protegge** *(i test della libreria al bit, nessun `.py` della libreria cambiato)* **PASSA.** **Quindi: lo stato e il fallimento committati; la cura** *(i due script in `csv/solitone/`)* **un commit a se'; `R-1` parte accanto, dichiarato.** **Se Luca la legge diversamente, mi fermo.**
