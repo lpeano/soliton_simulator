@@ -14,7 +14,7 @@ diventando una ragione per dare `--no-verify`>>** — ed è il difetto che `A9` 
 ### **arrivato dal lato del tempo.**
 
 ### 📌 **IL BUDGET È UNA SOGLIA DI LAVORO, DECISA DA LUCA il `2026-10-12`: `500`
-secondi.** È ### **quanto è disposto ad aspettare a ogni commit sulla sua macchina**, e
+secondi** *(dal `2026-11-08` `15:36`: `1800` s, una scelta di Luca col `pre-commit` a `456` s)*. È ### **quanto è disposto ad aspettare a ogni commit sulla sua macchina**, e
 ### **non si deriva da niente** — non è una grandezza del sistema.
 ### ⚠ **E QUI PRIMA C'ERA SCRITTO <<DICHIARATO E NON SCELTO: `120` secondi, il valore
 che questo repo ha già misurato>>, e NON ERA VERO:** quel `120` veniva dalla
@@ -68,7 +68,10 @@ PRESIDIO = "P-TEMPI"
 # ### disposto ad aspettare a ogni commit sulla sua macchina.** ### **Non si deriva da
 # ### niente, e non deve: non e- una grandezza del sistema.**
 # ### ✅ **E RESTA UN SEGNALE, NON UN RIFIUTO**, esattamente come prima.
-BUDGET = 500.0
+# ### ⛔ **DAL `2026-11-08` `15:36`: `1800` s, UNA SCELTA DI LUCA, NON UNA CURA** *(il valore di quel giorno: il
+# ### `pre-commit` a `456.0` s su `500`, la suite di `7bbd1b71`)*. ### **Oltre `900` s** *(la meta')* **si dice a
+# ### Luca coi tempi per collaudo: allora decide se separare una suite lenta.**
+BUDGET = 1800.0
 
 # ### ⚠ **I COLLAUDI, DICHIARATI UNO A UNO.** ### **Non si scoprono con un `glob`:**
 # ### un `glob` prenderebbe ### **anche un file nuovo che nessuno ha ancora guardato**, e
