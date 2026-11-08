@@ -24438,3 +24438,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **L'ultimo pezzo** *(`196667 -> 200000`)* **in `1914` s; il bordo: lo spostamento `1.168`; assorbite `M` `2.2815e4`, `V` `1.8089e4`, `E` `3.1576e4`** *(relative a `M0`, `V0`, `E0`: `1.141e-2`, `1.14e-1`, ...)*. **I `14` jsonl dei pezzi dell'allungamento** *(da `66667` a `196667`)* **in questo commit.**
 - ### **Che cosa viene ora** *(l'ordine di Luca)*: **C0 sta girando** *(la cucitura; importa il nucleo)*: **il merge di v2 aspetta che finisca** *(nessun file del percorso di una corsa si tocca mentre gira)*; **poi il merge di v2 con la suite, l'`R-1` di `C35-pi` sul nucleo nuovo, e l'allungamento di `C35-pi`.** **Il referto (r-a) di `C35-0` dopo la cucitura e la risoluzione del criterio** *(Luca `19:21`)*.
+
+## 2026-11-08 (l'orologio: `20:55`) -- C0 E C1: **`2/2`, NESSUN IMPULSO ALLA RIPRESA** *(`doc/referti_l2/c0_cucitura.txt`; il task history degli allungamenti, sez. `7.8`)*
+
+- ### **Il ciclo CONTINUO attraverso il confine `110000` arriva a `120000` AL BIT della corsa vera ripresa al confine, ogni chiave; gli accumulatori del bordo con scarto `0`.** **La ripresa e' invisibile alla dinamica** *(l'errore n.120 del guardiano chiuso dalla misura)*.
+- **C1:** **nessun campione doppio o mancante, nessun salto di `E + E_ass` o della norma ai `19` confini di `TB3` e `TBS`** *(il massimo `2.1` volte la mediana)*. ### **La cucitura del picco a `1500` sta in un'ALTRA grandezza della serie** *(lo spostamento, l'alone, `w`, l'emissione)*: **il prossimo passo.**

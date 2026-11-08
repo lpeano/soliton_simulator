@@ -1,0 +1,23 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] c0_cucitura.py  sha1-BYTE 0938b317  committato e pulito
+==================================================================================================================================
+LA CUCITURA ALLE RIPRESE (Luca 19:25): C0 il ciclo della corsa CONTINUO da 100000 a 120000 attraverso il confine 110000, contro la corsa vera di TBS ripresa al confine; C1 i salti
+==================================================================================================================================
+### C1 (l'indizio, dai jsonl)
+  C1 TB3: 20001 campioni, il passo 10 tick; campioni doppi 0; passi diversi dal passo 0 []; 19 confini
+     E + E_ass  la mediana di |dx| 9.551e+01; il salto al confine / la mediana: il massimo 1.76, la media 0.90; oltre 5: nessuno
+     la norma   la mediana di |dx| 5.821e-09; il salto al confine / la mediana: il massimo 1.12, la media 1.00; oltre 5: nessuno
+  C1 TBS: 20001 campioni, il passo 10 tick; campioni doppi 0; passi diversi dal passo 0 []; 19 confini
+     E + E_ass  la mediana di |dx| 1.017e+02; il salto al confine / la mediana: il massimo 2.08, la media 0.96; oltre 5: nessuno
+     la norma   la mediana di |dx| 5.821e-09; il salto al confine / la mediana: il massimo 1.10, la media 0.99; oltre 5: nessuno
+### C0: lo stato di TBS a 100000 dalla libreria = lo stato registrato: True
+  DEVE PASSARE: C0-A il ciclo continuo a 110000 (PRIMA del confine) = lo sha_fine registrato del pezzo 100000 -> 110000, PASSA   diverse []
+  DEVE PASSARE: C0 il ciclo continuo a 120000 (DOPO il confine 110000) = lo stato registrato dalla corsa vera ripresa al PASSA   6 chiavi; diverse []
+  gli accumulatori del bordo (continui) contro i campioni del jsonl, ogni 1000 tick: lo scarto relativo massimo 0.000e+00 (20 campioni; al confine e dopo: {109000: '0.0e+00', 110000: '0.0e+00', 111000: '0.0e+00', 112000: '0.0e+00'})
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []
+exit 0 20:50:21
