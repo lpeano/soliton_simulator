@@ -265,3 +265,9 @@
 2. **`u1_t1.py`; l'INVENTARIO; commit; `D6`, la cassetta; commit.**
 3. `python csv/solitone/u1_t1.py > doc/referti_l2/u1_t1.txt`; il referto, l'esito *(12.4)*, la relazione; commit.
 4. **Poi T3.**
+
+### 12.4 IL PRIMO GIRO DI T1 *(`u1_t1.py` `875e8e55`; `doc/referti_l2/u1_t1.txt`)*: **`4/6` -- `T1-R` FALLISCE PER UN MIO ERRORE DI PROGETTO, NON DEI SIGILLI**
+
+- ### **Gli script del `24/10` NON hanno girato** *(exit `3`, `0` righe)*: **nel worktree su `E:` il presidio dice «FUORI DA UN REPO GIT» e la barriera `P-BARRIERA` rifiuta** *(`core.hooksPath` «non impostato»)*. **La causa, verificata:** ### **`E:` e' un file system che NON registra il proprietario, e git rifiuta il worktree** *(«detected dubious ownership»)*. **Il mio progetto della sez. `12.2` metteva il worktree su `E:`: l'errore e' mio.**
+- **Il criterio sulle righe dei referti committati:** **`T1-b` passa** *(`|dE|/stima` max `0.160`, `rho` `6.5e-15`, `eB` `2.5e-15`)*, **`T1-b1-b2` passa** *(`0.146`, `5.4e-15`, `2.0e-15`)*, **`T1-F` fallisce come deve** *(`1.600`, `1.460`)* -- ### **ma senza `T1-R` non e' «rigirato al suo commit».**
+- **La cura, un commit a se':** **il worktree su `C:`, nello scratchpad della sessione** *(fuori dalla cartella della corsa; il proprietario c'e')*; **nessuna eccezione `safe.directory` nella configurazione globale** *(non tocco la configurazione di git di Luca)*.

@@ -24257,3 +24257,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Le previsioni:** **(p1) sul vuoto `F3` `E_T` all'arrotondamento; (p2) su `TBS` `E_T` NON esatta ma con un'oscillazione minore di `134`; (p3) `H~_2` a `~0.2` se la serie converge a `theta = 0.47`.** **Prima di ogni DEVE locale dell'energia, il DEVE globale.**
 - **Le domande:** **(b2) quale** *(la mia proposta: (E1) prima)*; **(b3) la carta corta che la misura, si fa?**; **(b1) superata da (E1)?**
 - **`C35-0`: dopo il primo pezzo** *(`5055` s, `0.5055` s per tick)* **l'arrivo stimato alle `21:14` di oggi.**
+
+## 2026-11-08 `05:25` -- T1, IL PRIMO GIRO: **`T1-R` FALLISCE PER UN MIO ERRORE** *(il worktree su `E:`: git lo rifiuta, «dubious ownership», `E:` non registra il proprietario)*
+
+- **Gli script del `24/10` non hanno girato; la decisione `(1)` sulle righe dei referti committati PASSA** *(`|dE|/stima` max `0.160` e `0.146`; `rho`, `eB` `<= 6.5e-15`)*, **`T1-F` fallisce come deve.** **La cura, a se': il worktree su `C:`.**
