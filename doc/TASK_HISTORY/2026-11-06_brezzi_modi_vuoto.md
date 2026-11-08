@@ -291,3 +291,33 @@
 - ### **LA PENDENZA DEL RAMO `P` E' UN FATTO DELLA LEGGE `CAMM-FASE-VUOTO`:** **`3.174279e-02` lungo `A1`** *(identica alle tre ampiezze; `6.059e-02` a `30` gradi, `3871ba84`)*; **oggi il ramo e' piatto** *(`1.8e-10`)*.
 - **La lettura del giro di `dfbed655`, «`cs` cura il ramo piatto»: CADUTA** *(era `CAMM-FASE-VUOTO`)*.
 - ### **APERTO, da DERIVARE: il fattore `2` dell'identita' `Omega_0 tau = omega_oggi x 2 Lambda_c / (Lambda_0 + Lambda_c)`** *(vera a `1.0e-14`; il mio conto ne da' la meta')*.
+
+## 16. (q5): IL CONTROLLO A UN SECONDO `Lambda_c` *(Luca `02:13`: «SI', DOPO q3; la previsione di `a_f(Lambda_c)` e della pendenza di `P` scritta prima, una sola carta statica, nessuna corsa»)*: **LA PREVISIONE, PRIMA DEL CODICE**
+
+### 16.1 LE PREMESSE *(dal codice e dalla carta della sez. `14.5`)*
+
+- **Il secondo valore: `Lambda_c' = Lambda` del vuoto** *(`6`, LETTO dalla scena, non scritto)*: **e' dove la carta dice `a_f = 0`** *(la proposta della sez. `14.5`, accolta da Luca)*. **Nessun numero scelto.**
+- ### **Solo il tick con `CAMM-FASE-VUOTO` e `cs` FISSO** *(`mot.cs` del vuoto `0.15`, `mot.lambda_c = Lambda_c'`)*: **`Lambda_c` entra SOLO in `cs'(Lambda)` di `Omega`** *(`energia_pesata.omega`)*: **i pesi `dw` e i termini di `H` restano quelli** *(`cs` fisso uniforme)*. ### **Il tick con `cs` dinamico NON si fa:** **a `Lambda_c' = 6` `cs` del vuoto sarebbe `0.5`, non `0.15`: un altro vuoto** *(dichiarato)*.
+- ### **LE PREVISIONI** *(lo script `conti_q5`, stampato qui; `cs'(Lambda) = Lambda_c / (Lambda + Lambda_c)^2`)*:
+  - **`Omega_0' tau = Omega_0 tau x cs'(6; 6) / cs'(6; 34) = 0.801106 x 1.960784 = 1.570796`** *(`Omega` e' LINEARE in `cs'` a stato fermo)*;
+  - ### **`a_f' = 2 (Lambda_c' - Lambda) / (Lambda + Lambda_c') x Omega_0' tau = 0`** *(la scala torna esatta: il blocco di Jordan sparisce)*;
+  - **la coppia `G` a `Gamma`: senza blocco di Jordan, all'arrotondamento** *(come oggi, `~1e-9` ad `AMP 1e-7`)*;
+  - ### **la pendenza di `P`, UN'IPOTESI** *(la carta non la deriva)*: **proporzionale a `Omega_0`: `3.174279e-02 x 1.960784 = 6.224e-02`.**
+- **Che cosa NON so:** **se la pendenza di `P` dipende da `Omega_0` o da `a_f`** *(con `a_f' = 0`, se dipendesse da `a_f` il ramo tornerebbe PIATTO: le due ipotesi danno numeri molto diversi, e la carta li separa)*.
+
+### 16.2 PROGETTAZIONE *(i DEVE e le letture, prima dei numeri)*
+
+- **`carta_statiche.py --is3-lc`, ad `AMP 1e-7`, la differenza in avanti:** `T` di oggi, `T_fase` a `Lambda_c = 34` *(il riferimento, rifatto nella stessa corsa)* e `T_fase'` a `Lambda_c' = 6`.
+  - **`IS3-LC-E`** *(DEVE PASSARE)*: **`F3` autovettore di `tick_fase'` entro `TOLL_E2`**;
+  - **`IS3-LC-O`** *(DEVE PASSARE)*: **`|Omega_0' tau - 1.570796...| <= 1e-6`** *(la previsione da `Omega_0 tau` misurato nella stessa corsa; `1e-6` = la settima cifra con cui `a_f` torno' alla sez. `14.4`: mio, dichiarato)*;
+  - ### **`IS3-LC-A`** *(DEVE PASSARE)*: **`a_f' <= 1e-6`**;
+  - **`IS3-LC-A-F`** *(DEVE FALLIRE, il controllo positivo)*: **`a_f` a `Lambda_c = 34` `<= 1e-6`** *(e' `1.121549`)*.
+- **LA LETTURA DELLA PENDENZA DI `P`** *(stampata, senza verdetto)*: **il rapporto `P'/P` contro `1.960784`**: **entro l'`1%` = «scala con `Omega_0`»** *(l'`1%` e' mio)*; **`P'` sotto `10 pav` = «scala con `a_f`»** *(il ramo torna piatto)*; **altro = nessuna delle due.**
+- **Che cosa mi fa FERMARE:** **un DEVE che fallisce; un `assert` del nucleo.**
+
+### 16.3 TODO
+
+1. **Questa sezione: commit e push.**
+2. **`carta_statiche.py`:** il modo `--is3-lc`; l'INVENTARIO; commit; `D6` e la cassetta; commit.
+3. `--is3-lc > doc/referti_l2/statica_is3_lc.txt`; l'esito *(16.4)*, la relazione; commit e push.
+4. **Poi il successivo in coda: I1/I3** *(il registro degli stati completi)*.
