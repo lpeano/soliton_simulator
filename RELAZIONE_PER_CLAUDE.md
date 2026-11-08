@@ -24413,3 +24413,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Gli strumenti passano** *(`ST-P`, `ST-B` Sokal `9.85` contro `9.50`, `ST-I`)*. ### **Ma `TB3` e `TBS` fino a `30000` risultano «NON stazionari»** *(tu: «devono risultare stazionari»)*: **boccia l'ALONE** *(`13`/`14`, `16`/`17` controlli)*, **poi l'emissione e `w`; `E + E_ass` regge.** ### ⚠ **E `ST-F` passa solo perche' il criterio non arresta mai: un FALSO-UNO.**
 - ### **LE DOMANDE:** **(s1) l'alone e l'emissione restano nell'arresto** *(«non stazionario» e' la risposta)*; **(s2) escono dall'arresto e restano stampati come «ancora in crescita»** *(la mia proposta)*; **(s3) un altro criterio per le grandezze che derivano** *(la pendenza contro il suo errore)*.
+
+## 2026-11-08 (l'orologio: `18:47`) -- T3, d5', d6', d7: **`2/3` -- LA `J` BILINEARE NON CURA, NON E' LA SORGENTE SOLA; E UN MIO ERRORE CHE INVALIDA d6' E IL d6 DI `d27c4350`** *(`doc/referti_l2/u1_t3e.txt`; il task history sez. `14.10`)*
+
+- ### **d7:** **la `J` bilineare** *(uguale a quella di oggi entro `0.7 eps rho_max`)* **da' `G6` `2.62e-10` contro `2.52e-10`: nessun miglioramento. La cura non serve.**
+- ### **d5':** **la sorgente spenta su un campo gia' acceso: `4.5e-11`** *(accesa `1.2e-11`)*: **non e' la sorgente sola.**
+- ### ⚠ **IL MIO ERRORE:** **nei bracci «senza campo» a norma ridotta non rimettevo `U = I`: giravano con la `U` dell'ultima corsa col campo** *(«senza campo» a `x 1e-3` da' `1.2` di errore ASSOLUTO)*. **Sbagliati i «senza campo» di d6' e del d6 di `d27c4350`, e la mia lettura di allora** *(«senza campo peggiora a norma ridotta»)*. **Giusti i «col campo» e il (0).** **La cura: una riga, a se'.**
+- ### **LE DOMANDE:** **(t8) d6' rifatto con la cura** *(minuti)*; **(t9) l'ipotesi del leapfrog** *(la deriva in UN passo al centro invece di due mezzi)* **o quella dell'amplificazione attraverso `e^2 rho`: quale si prova?** **(t10) la catena `U(1)` resta ferma.**
