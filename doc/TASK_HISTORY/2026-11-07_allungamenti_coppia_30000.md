@@ -150,3 +150,24 @@
 - ### **IL RALLENTAMENTO** *(Luca: in tick al secondo)*: **il pezzo rifatto `0.5756` s per tick, l'originale `0.3900`: `1.737` contro `2.564` tick al secondo, `1.476` volte piu' lento**, **con accanto, a turno, la cassetta due volte, IS3 (q1) e B1** *(gli orari nei loro commit)*. **Sotto la soglia d'avviso del doppio** *(6.2)*.
 - ### **I FILE CHE NON SI TOCCANO MENTRE UNA CORSA GIRA: `61`** *(la lista nel referto: `34` di `csv/`, `10` di `csv/solitone/`, `17` di `primo_ordine/`)*. **`carta_statiche.py`, `bilancio_b1.py`, `collauda.py` NON ci sono**: **le prove corte e `D6` si possono fare.**
 - ### **L'ALLUNGAMENTO DI `C35-0` PARTE ALLE `02:30`** *(il driver dei pezzi, `--corsa C35-0` fino a «finita»; il semaforo `FERMA`)*: **`133333` tick; la stima d'arrivo `16:56` a `0.3900` s per tick, `23:49` a `0.5756`** *(oggi, `2026-11-08`)*. **La stima vera dopo il primo pezzo.**
+
+## 7. IL CODICE DELLA LETTURA DI STAZIONARIETA' E IL REFERTO DI `C35-0` A `30000` *(prima del codice; i criteri sono quelli decisi da Luca nella sez. `5`)*
+
+### 7.1 LE PREMESSE DAL CODICE
+
+1. ### **I campioni dei jsonl** *(`corsa_accensione.serie`)*: **uno ogni `10` tick, `t` in TICK** *(per `C35-0`: `16667` campioni fino a `166660`)*; **le chiavi: `E.totale.tot`, `bordo.E_ass`, `bordo.M_ass`, `w`, `alone`, `x`, `y`, ...** **Le grandezze della COPPIA** *(la distanza dei nuclei del vuoto, dei centri della materia, l'allungamento)* **vengono dalle MAPPE** *(ogni `100` tick)* **e le calcola `carta_coppia`.**
+2. ### ⚠ **`carta_coppia` confronta coi campioni del singolo `S162` agli STESSI `t`** *(`assert` «i campioni NON sono agli stessi t»)*: **`S162` e' a `10000` fino al suo allungamento** *(dopo `C35-pi`, l'ordine di Luca)*. ### **Quindi il referto di `C35-0` a `30000`: `E_int` e le grandezze «coppia meno singolo» SOLO fino all'ultimo `t` comune** *(`10000`)*, **dichiarato; oltre, le grandezze della coppia da sola** *(`E + E_ass`, la decisione q-s2 (a))*. **Un cambio di `carta_coppia.py`, committato prima di girarla.**
+3. **I tempi dei profili:** **`TEMPI_PROFILI = (0, 3330, 6660, 9990)` diventano `0 .. 29970` a passo `3330`** *(`10` profili: lo stesso passo, mia scelta dichiarata)*.
+
+### 7.2 PROGETTAZIONE *(le letture fissate PRIMA)*
+
+- ### **`csv/solitone/stazionarieta.py`** *(nuovo)*: **(i) `tau_int`: `1/2 + somma_{k=1..M} rho(k)`, `M` il piu' piccolo con `M >= 5 tau_int(M)`** *(Sokal, `c = 5`: la decisione q-s3)*, **`rho` dall'FFT della serie con la media tolta; (ii) l'errore della media `sigma sqrt(2 tau_int / N)`; (iii) il periodo `P`: il picco del periodogramma della serie, tolta la retta, fra `t 1000` e `t 10000`** *(stimato UNA volta, poi fisso: q-s5)*, **col passo del periodogramma come errore; (iv) le finestre `W = 3 P`** *(`6000` se `P` non si stima)*, **contate da `t 1000`** *(q-s1)*; **(v) il criterio: due finestre adiacenti `[T - 2W, T - W]`, `[T - W, T]` con medie che differiscono meno di `2 sqrt(e1^2 + e2^2)`, per TUTTE le grandezze; «stazionario da `t X`» quando vale per TRE controlli di fila, ai `T` delle fini dei pezzi** *(`10000` tick = `1500` unita')*; **(vi) l'allungamento: `sqrt(l_max / l_min)` del tensore d'inerzia della densita'.**
+- ### **LE GRANDEZZE:** **per un singolo** *(`S162`, `TB3`, `TBS`, `TF3`)*: **`E + E_ass`** *(`E` solo, senza bordo)*, **`w`, `alone`, la distanza del centro `(x, y)` dalla partenza** *(sul toro)*, **il ritmo di emissione = l'incremento di `M_ass` per campione** *(per `TF3` senza bordo: la pendenza dell'alone, q-s4 -- cioe' l'`alone` stesso nel criterio delle medie)*; **per la coppia:** **in piu' le tre distanze e l'allungamento di `carta_coppia`.**
+- ### **I DEVE** *(sez. `4.2` e `5`)*: **`ST-P`** *(un `sin` di periodo noto piu' rumore: il periodo entro il passo del periodogramma)*; ### **`ST-B`, con Sokal invece dei blocchi** *(la decisione q-s3 ha cambiato lo strumento: `ST-B` diventa la sua prova)*: **un AR(1) con `phi = 0.9`, `tau_int` teorico `(1 + phi) / (2 (1 - phi)) = 9.5`: la stima entro un fattore `1.5`** *(un numero mio, dichiarato)*; **`ST-I`** *(un'ellisse sintetica di rapporto `2`: entro `1%`, mio)*; **`ST-S`** *(STAMPA dove avrebbe fermato: `S162` a `10000` -- «non stazionario» per costruzione, sez. `5`; `TB3`, `TBS` fino a `30000`)*; **`ST-F`, DEVE FALLIRE** *(su `TF3 + TF3C`: nessun arresto con `t - 2W <= 16000 <= t`)*.
+- **La lettura nel referto:** **«stazionario da `t X` entro la finestra osservata», mai «finito».**
+
+### 7.3 TODO
+
+1. **Questa sezione, committata prima del codice.**
+2. **`stazionarieta.py` coi suoi DEVE** *(un referto suo: `doc/referti_l2/stazionarieta.txt`)*; **`carta_coppia.py` esteso** *(i profili, il taglio al `t` comune con `S162`, la chiamata alla lettura)*; **l'INVENTARIO; `D6` della cassetta; la cassetta.**
+3. **A fine `C35-0`:** **prima `C35-pi` in volo** *(la decisione z4 e l'ordine: subito)*, **poi `carta_coppia --corsa C35-0`.**
