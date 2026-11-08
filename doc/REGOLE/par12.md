@@ -267,3 +267,11 @@ portato dentro `energia`, `corrente`, `deriva_serie`, `deriva_variabile`.**
 | `②` | un `default` in una firma del nucleo | ### **DEVE fallire** *(tetto zero)* |
 | `③` | un file che ### **ENTRA nel nucleo PER IMPORT** e porta rami non dichiarati | ### **DEVE fallire** — e il braccio misura ### **`0` errori nuovi senza l'import, `1` con l'import**: ### **il file e' lo STESSO, cambia solo CHI LO IMPORTA** |
 | `(c)` | un ramo nuovo in un ### **COLLAUDO fuori dal nucleo** | ### **DEVE PASSARE**, altrimenti *«fuori dal nucleo non si applica»* ### **sarebbe una frase e non un fatto** |
+
+## `H-NUCLEO-CONGELATO` -- IL NUCLEO DEL PRINCIPALE CONGELATO *(decisione di Luca, 2026-11-08 21:47-21:49)*
+
+- **Perche':** dal revert `de46816d` i rami sono **due**: `primo-ordine` (il nucleo SENZA v2) e `zero-nel-nucleo` (CON v2, nel worktree `C:\Users\lpeano\wt_zero`). **Ogni modifica del nucleo si fa SOLO sul laterale e arriva sul principale con la riunione.** Luca: *«E' IMPOSTO da un controllo automatico, non dalla memoria».*
+- **Il meccanismo:** `csv/_nucleo_congelato.py --pre-commit`, **IN TESTA** al `pre-commit`; sul ramo `primo-ordine`, finche' `doc/NUCLEO_CONGELATO.md` dice `stato: CONGELATO` *(se manca: chiuso per difetto)*, **un file sotto `primo_ordine/` nel commit RIFIUTA.** **Nessuna via d'uscita nel messaggio.**
+- **Lo sblocco:** solo il file a uno stato diverso **con** una riga `decisione_di_luca:` non vuota.
+- **I collaudi:** `--collaudo` *(8 casi sulla funzione pura `decidi`, uno DEVE FALLIRE)*; `--prova-git` *(il DEVE e il DEVE FALLIRE di Luca con COMMIT VERI in un clone di prova: rifiutato su `primo-ordine`, passa su `zero-nel-nucleo`)*.
+- **Il limite** *(`A9`)*: **una testa staccata non ha ramo, e il presidio non la vede; e il presidio impedisce di DIMENTICARE, non di scrivere la riga di sblocco senza la decisione.**

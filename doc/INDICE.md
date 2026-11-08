@@ -15,7 +15,7 @@
 | `INFRASTRUTTURA` | `2` | 27 |
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
-| `METODO` | `2` | 27 |
+| `METODO` | `2` | 28 |
 | `METODO` | `ENTRAMBE` | 95 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
@@ -425,6 +425,7 @@
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
 | `H-INDICE-IGNORA-I-VOCABOLARI` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | H-INDICE legge solo le voci: un ID di legge, variabile, assioma o decisione risu |
 | `H-NON-TRACCIATI` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | l undicesimo hook: BLOCCA se ci sono file non tracciati e non ignorati sotto csv |
+| `H-NUCLEO-CONGELATO` | PRESIDIO | METODO | 2 | ### **AGENDA** |  | il nucleo del principale CONGELATO: su primo-ordine un commit che tocca primo_or |
 | `H-P1-bis` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto committato senza toccare la relazione |
 | `H-P3` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un sigillo che configura il modulo A MANO invece di passare d |
 | `H-P5` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un referto che non dichiara la configurazione INTERA |

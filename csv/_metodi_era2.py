@@ -166,6 +166,9 @@ METODI = {
     "H-INDICE": ("un ID citato che non e- nell-indice fa rifiutare il commit: vale per "
                  "gli ID dell-era 2 come per gli altri",
                  "`.githooks/commit-msg`", "PORTATO"),
+    "H-NUCLEO-CONGELATO": ("sul ramo `primo-ordine` un commit che tocca `primo_ordine/` e- RIFIUTATO finche- "
+                           "`doc/NUCLEO_CONGELATO.md` dice CONGELATO: vale SOLO per l-era 2, il nucleo e- il suo",
+                           "`.githooks/pre-commit` + `csv/_nucleo_congelato.py`", "PORTATO"),
     "H-NON-TRACCIATI": ("file non tracciati e non ignorati sotto `csv/` o `doc/` "
                         "BLOCCANO: ha bloccato questo mandato piu- volte",
                         "`.githooks/commit-msg`", "PORTATO"),

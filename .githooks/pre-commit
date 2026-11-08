@@ -34,6 +34,11 @@ R="$(git rev-parse --show-toplevel)"
 # ### ### **mi ha rifiutato DUE commit oggi** per una lista che era giusta quando
 # ### l-avevo generata. ### **Il comando resta disponibile a mano.**
 
+#  `H-NUCLEO-CONGELATO` (decisione di Luca, 2026-11-08 21:47-21:49): sul ramo primo-ordine
+#  ### NESSUN commit tocca primo_ordine/ finche' doc/NUCLEO_CONGELATO.md dice CONGELATO.
+#  ### IN TESTA, prima di tutto: un rifiuto che non dipende da nessun altro presidio. NESSUNA via d'uscita.
+python "$(git rev-parse --show-toplevel)/csv/_nucleo_congelato.py" --pre-commit || exit 1
+
 python "$(git rev-parse --show-toplevel)/csv/_hook_presidi.py" --pre-commit || exit 1
 # `P-E1`..`P-E5` e `P-E7` (era 2): la biiezione tabella <-> file <-> registro <-> scheda,
 # le impronte, le variabili, le importazioni, e gli osservatori in sola lettura.
