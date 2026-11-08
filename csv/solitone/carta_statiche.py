@@ -1645,6 +1645,115 @@ def is3_ampiezze():
     sc["cm"].__exit__(None, None, None)
 
 
+def is3_giri():
+    """### **IS3 (q3), Luca `2026-11-08` `02:13`:** ### **il residuo della colonna `J f` accanto ai GIRI dei punti fissi, per ciascuno dei `13` tick della risposta**
+    *(il task history `2026-11-06_brezzi_modi_vuoto`, sez. `15`)*. **Nel `tick_fase` gira il punto medio di `Omega`; nel `tick_cs` quello di `cs` e, dentro, quello di `Omega`:**
+    `flussi_parziali.cs` e `energia_pesata.entro_tolleranza` **registrati in memoria e rimessi.** Ad `AMP`, la differenza in avanti *(il caso di `IS3-R`)*."""
+    import energia_pesata as EP
+    import flussi_parziali as FP
+    import tick as TKm
+    sc = _is3_scena()
+    z, F3, K, s, dove, pav = sc["z"], sc["F3"], sc["K"], sc["s"], sc["dove"], sc["pav"]
+    tk, tk_fase, tk_cs, un_tick, giri = sc["tk"], sc["tk_fase"], sc["tk_cs"], sc["un_tick"], sc["giri"]
+    oms = {}
+    for nome, fai in (("oggi", tk), ("fase", tk_fase), ("cs", tk_cs)):
+        ph = un_tick(fai)
+        lam_ = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
+        oms[nome] = math.atan2(lam_.imag, lam_.real)
+    reg = {"cs": [], "om": []}
+    vero_cs, vero_et = FP.cs, EP.entro_tolleranza
+
+    def cs_reg(lam, lc, fuori):
+        out = vero_cs(lam, lc, fuori)
+        reg["cs"].append(np.array(out, copy=True))
+        return out
+
+    def et_reg(scarto, scala):
+        ok = vero_et(scarto, scala)
+        reg["om"].append((float(scarto), float(scala), bool(ok)))
+        return ok
+    recs = {"fase": [], "cs": []}
+
+    def avvolto(nome, fai):
+        def f(z_):
+            del reg["cs"][:]
+            del reg["om"][:]
+            n_g = len(giri)
+            fai(z_)
+            cs_l, om = list(reg["cs"]), list(reg["om"])
+            chiamate, cur = [], []
+            for x in om:
+                cur.append(x)
+                if x[2]:
+                    chiamate.append(cur)
+                    cur = []
+            recs[nome].append({"giri_cs": (giri[-1][0] if isinstance(giri[-1], tuple) else giri[-1]) if nome == "cs" and len(giri) > n_g else None,
+                               "scarti_cs": [float(np.max(np.abs(b - a))) for a, b in zip(cs_l, cs_l[1:])],
+                               "tol_cs": TKm.EPS_CS * float(np.max(np.abs(cs_l[-1]))) if cs_l else None, "cs_fin": cs_l[-1] if cs_l else None,
+                               "om_giri": [len(c) for c in chiamate], "om_ultimo": [c[-1][0] / (EP.EPS_OMEGA * c[-1][1]) for c in chiamate], "om_scala": [c[-1][1] for c in chiamate], "om_aperte": len(cur)})
+        return f
+    try:
+        FP.cs, EP.entro_tolleranza = cs_reg, et_reg
+        T, R0 = _T_vuoto(z, F3, K, np.exp(-1j * oms["oggi"]), dove, tk, AMP, False)
+        Tf, _Rf = _T_vuoto(z, F3, K, np.exp(-1j * oms["fase"]), dove, avvolto("fase", tk_fase), AMP, False)
+        Tc, _Rc = _T_vuoto(z, F3, K, np.exp(-1j * oms["cs"]), dove, avvolto("cs", tk_cs), AMP, False)
+    finally:
+        FP.cs, EP.entro_tolleranza = vero_cs, vero_et
+    assert FP.cs is vero_cs and EP.entro_tolleranza is vero_et, "rimessi"
+    f = _reali(F3[dove[0]])
+    Jf = _reali(1j * F3[dove[0]])
+    nJ = float(np.linalg.norm(Jf))
+    T0, Tf0, Tc0 = T(np.zeros(2)), Tf(np.zeros(2)), Tc(np.zeros(2))
+    eR = float(np.linalg.norm((Tc0 - Tf0) @ Jf)) / nJ
+    eRf = float(np.linalg.norm((Tf0 - T0) @ Jf)) / nJ
+    n_nz = int(np.count_nonzero(np.any(np.abs(R0) > 0.0, axis=(0, 2))))
+    print("### IS3 (q3), Luca 02:13: AMP %g, la differenza in avanti; i punti fissi: nel tick_fase Omega (EPS_OMEGA %.3e x max tetto, GIRI_MAX_OMEGA %d); nel tick_cs cs (EPS_CS %.3e x max cs, GIRI_MAX %d) e Omega dentro"
+          % (AMP, EP.EPS_OMEGA, EP.GIRI_MAX_OMEGA, TKm.EPS_CS, TKm.GIRI_MAX))
+    esito("DEVE PASSARE: IS3-RG0 eR coi tick avvolti = quello di statica_is3_ampiezze.txt ad AMP 1e-7 (2.708283e-07, le sette cifre stampate)", "%.6e" % eR == "2.708283e-07", "%.6e" % eR)
+    print("  eR = |T_cs(0) J f - T_fase(0) J f| / |J f| %.6e; |T_fase(0) J f - T(0) J f| / |J f| %.6e; il pavimento PAV_T / AMP %.1e; i nodi del supporto di T(0) %d" % (eR, eRf, pav, n_nz))
+    cs_b = recs["cs"][0]["cs_fin"]
+    righe = {}
+    for nome, TT, TR in (("cs", Tc0, Tf0), ("fase", Tf0, T0)):
+        rr_ = recs[nome]
+        b = rr_[0]
+        print("  ### il tick %s (13 tick: la base, poi le 12 colonne): i giri di cs, l'ultimo scarto di cs / la sua tolleranza, i giri di Omega per chiamata, l'ultimo scarto di Omega / la sua scala per chiamata, max|cs - cs_base|, il contributo a %s"
+              % (nome, "eR" if nome == "cs" else "|T_fase - T| J f"))
+        contr = []
+        for i, x in enumerate(rr_):
+            if i == 0:
+                cc = float("nan")
+            else:
+                c = i - 1
+                cc = abs(Jf[c]) * float(np.linalg.norm(TT[:, c] - TR[:, c])) / nJ
+                contr.append((c, cc, x["giri_cs"] != b["giri_cs"] or x["om_giri"] != b["om_giri"]))
+            dcs = float(np.max(np.abs(x["cs_fin"] - cs_b))) if (nome == "cs" and x["cs_fin"] is not None) else float("nan")
+            print("    %-6s giri cs %-4s scarto/tol %-9s Omega giri %-22s scarto/scala %-40s max|cs - cs_base| %-9s il contributo %s"
+                  % ("base" if i == 0 else "c %2d" % (i - 1), x["giri_cs"], ("%.3f" % (x["scarti_cs"][-1] / x["tol_cs"])) if (nome == "cs" and x["scarti_cs"]) else "-",
+                     x["om_giri"], " ".join("%.2f" % q for q in x["om_ultimo"]), "%.2e" % dcs if dcs == dcs else "-", "%.3e" % cc if cc == cc else "-"))
+        tot_ = sum(cc for _c, cc, _d in contr)
+        div = [cc for _c, cc, d in contr if d]
+        alt = [cc for _c, cc, d in contr if not d]
+        quota = (sum(div) / tot_) if tot_ > 0 else float("nan")
+        s1g = bool(div) and quota >= 0.5 and (max(alt) if alt else 0.0) <= pav
+        e_ = eR if nome == "cs" else eRf
+        if nome == "cs":
+            tol_, dw = TKm.EPS_CS * float(np.max(np.abs(cs_b))), oms["oggi"] / s
+        else:
+            tol_, dw = EP.EPS_OMEGA * max(rr_[0]["om_scala"]), float(z["mot"].dtau[0])
+        prop = n_nz * abs(tol_) * abs(dw)
+        A_ = e_ * AMP
+        s1t = 0.1 <= A_ / prop <= 10.0 if prop > 0 else False
+        righe[nome] = (s1g, s1t)
+        print("  ### %s (s1-g) le colonne coi giri DIVERSI dalla base: %d su 12, la loro quota della somma dei contributi %.3f; il massimo delle altre %.3e (il pavimento %.1e) -> %s"
+              % (nome, len(div), quota, max(alt) if alt else 0.0, pav, "SEGUE I GIRI" if s1g else "non li segue"))
+        print("  ### %s (s1-t) il pavimento assoluto A = residuo x AMP %.3e contro n_nz x tolleranza x |d omega / d parametro| = %d x %.3e x %.4f = %.3e: il rapporto %.3e -> %s"
+              % (nome, A_, n_nz, abs(tol_), abs(dw), prop, A_ / prop if prop > 0 else float("nan"), "ALL'ORDINE DELLA TOLLERANZA (entro 10)" if s1t else "non all'ordine"))
+    for nome in ("cs", "fase"):
+        s1g, s1t = righe[nome]
+        print("  ### LA LETTURA (sez. 15.2), %s: %s" % (nome, "(s1): la convergenza del punto fisso (%s)" % ("i giri" if s1g else "la tolleranza") if (s1g or s1t) else "(s2): FERMO"))
+    sc["cm"].__exit__(None, None, None)
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -1687,14 +1796,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--is3-ampiezze" if "--is3-ampiezze" in argv else "--cs-onde" if "--cs-onde" in argv else "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --is3-ampiezze | --cs-onde | --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
+    modo = "--is3-giri" if "--is3-giri" in argv else "--is3-ampiezze" if "--is3-ampiezze" in argv else "--cs-onde" if "--cs-onde" in argv else "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --is3-giri | --is3-ampiezze | --cs-onde | --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--is3-ampiezze": is3_ampiezze, "--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--is3-giri": is3_giri, "--is3-ampiezze": is3_ampiezze, "--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
