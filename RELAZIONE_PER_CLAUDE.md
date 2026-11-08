@@ -24301,3 +24301,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **(L) e (V) passano: `R60` PIENA.** ### ⚠ **Una mia premessa e' caduta:** **il vuoto ruotato `(pi, pi, 0)` E' `-F3`** *(`pi` su tutti gli assi e' il segno globale)*: **nessuna rottura spontanea.**
 - ### **`S^6 = -I`** *(la materia cambia segno dopo un giro; con `det S60 = 1`; una fase `e^{i pi/6}` lo porterebbe a `+I`)*. **`k^6`: leggi e vuoto hanno tutti e due la `R60`, quindi l'anisotropia parte da `k^6`; le due origini qui non si distinguono.**
 - **`13` s di calcolo; nessun file degli allungamenti ne' di T3 toccato.**
+
+## 2026-11-08 `13:15` -- **FERMO, E PERCHE'** *(Luca `11:56`: «se ti serve una mia decisione, scrivilo chiaramente»)*
+
+- ### **LA CODA `U(1)` E' FERMA SU T3** *(`386d35b5`: `G4` e `G6` falliti)*: **T4, T5, S1-S5 sono tutti della catena `U(1)` e aspettano le risposte (t1) la diagnosi d1-d3, (t2) su quale materia, (t3) se la catena riparte** *(il paragrafo di T3 qui sopra)*.
+- ### **LA DIAGNOSI D0-D4 DEL PUNTO FISSO DI `cs`** *(MAPPA `5-P`)* **e' scritta per girare «fra due corse»**: **oggi gli allungamenti vanno in fila** *(`C35-0`, poi `C35-pi` subito, come da mandato delle `00:52`)*: ### **se va fra `C35-0` e `C35-pi`** *(ritardando `C35-pi`)* **o accanto alla corsa lunga come prova corta, lo decidi tu.**
+- **Chiuso senza fermare niente:** **la `R60`** *(`13/13`, `6c0ea0b1`)*. **In volo:** **`C35-0`** *(l'arrivo stimato fra le `18:13` e le `19:13`: `5.33` pezzi dopo le `12:24`, da `3930` o da `4607` s, la durata degli ultimi due)*. **A fine corsa: il referto, poi `C35-pi`, senza aspettare.**
