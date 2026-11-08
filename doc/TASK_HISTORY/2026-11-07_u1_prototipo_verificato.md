@@ -241,3 +241,27 @@
 
 - **In S5: le righe «bilancio locale» e «scarto dei limiti su `s_a`» per A, B (d3), (d5) e B'.**
 - **L'ordine:** **le cure, B1, T1-T5, S1** *(con B2)*, **S2, S3, S4, S5** *(B3 coi numeri in C1/C2)*.
+
+## 12. T1, I TRE SIGILLI DI GAUGE COL CRITERIO DELLA DECISIONE `(1)` *(la coda dopo J1-J3 di Luca `2026-11-08` `03:47`)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+### 12.1 LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **I sigilli:** **`(b)` di `_u1_prototipo`** *(il referto `u1_prototipo.txt`, committato in `0b6bfde8`; lo script `sha1-BYTE d073761c`)* **e `(b1)`, `(b2)` di `_u1_secondo`** *(`u1_secondo.txt`, `64bb2328`; `ab015054`)*. **Falliti col criterio di allora** *(`TOLL_REL = 1e-12` relativo anche su `E`)*. ### **I referti stampano GIA', riga per riga, `rho`, `eB`, `E` e `|dE| / stima`** *(la stima `N 6 eps max|A'| / A_p`: `_u1_secondo.py`, riga della `stima`)*: **`24` righe di `(b)`, `12` di `(b1)` e `(b2)`.**
+- ### **Come si rigira AL SUO COMMIT senza toccare la corsa:** **un `git worktree` staccato su `E:`** *(`E:\soliton_simulator\wt_t1\<commit>`)*: **la cartella della corsa non cambia** *(il par. `5`)*; **lo script del commit, coi moduli del commit.** **Il confronto: ogni riga di `(b)`, `(b1)`, `(b2)` della corsa nuova = la riga del referto committato** *(il testo dei campi, senza i secondi)*: ### **se non coincide, il sigillo non e' rigirabile al suo commit: un difetto nuovo** *(par. `6`)*.
+- **Che cosa NON so:** **se gli script del `24/10` girano nel worktree** *(se leggessero file di `db/`, non tracciati, non li troverebbero: si stampa e si dice)*; **i tempi** *(il referto dice `~14` s per riga: `~6` minuti per `_u1_prototipo`)*.
+
+### 12.2 PROGETTAZIONE
+
+- **`csv/solitone/u1_t1.py`:** **per ciascuno dei due commit:** il worktree, lo script con l'uscita su `E:`, il worktree rimosso; **poi, sulle righe:**
+  - **`T1-R`** *(DEVE PASSARE)*: **le righe di `(b)`/`(b1)`/`(b2)` rifatte = quelle committate** *(la rigirabilita')*;
+  - ### **`T1-b`, `T1-b1`, `T1-b2`** *(DEVE PASSARE, la decisione `(1)`)*: **in OGNI riga `|dE| / stima <= 1`, `rho <= 1e-12`, `eB <= 1e-12`**;
+  - **`T1-F`** *(DEVE FALLIRE, il controllo che il criterio legge le righe)*: **lo stesso criterio con la stima divisa per `10`** *(atteso: fallisce, perche' i rapporti arrivano a `0.16`)*.
+- ### **I referti vecchi NON si riscrivono:** **«falliti col criterio vecchio» resta vero.** **«Sul codice portato» (T2)** *(Luca, sez. `2`)*: **e' `G4` di T3** *(la stessa gauge, lo stesso criterio, sul tick di oggi)*: **si fa li', dichiarato.**
+- **Che cosa mi fa FERMARE:** **`T1-R` che fallisce** *(un sigillo non rigirabile)*; **`T1-F` che passa.**
+
+### 12.3 TODO
+
+1. **Questa sezione: commit e push.**
+2. **`u1_t1.py`; l'INVENTARIO; commit; `D6`, la cassetta; commit.**
+3. `python csv/solitone/u1_t1.py > doc/referti_l2/u1_t1.txt`; il referto, l'esito *(12.4)*, la relazione; commit.
+4. **Poi T3.**
