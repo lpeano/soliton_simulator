@@ -1,0 +1,35 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] bilancio_b1.py  sha1-BYTE 1c5bd4a2  committato e pulito
+==================================================================================================================================
+B1, IL BILANCIO LOCALE (il task history 2026-11-08_bilancio_locale_B1): TBS dallo stato completo E:\soliton_simulator\libreria\TBS_100000_completo.npz, N 100 tick col ciclo della corsa; la stima N 6 eps max rho; EPS_F 1e-06
+==================================================================================================================================
+  DEVE PASSARE: B1-R0 lo stato della libreria = lo stato di TBS registrato a 100000 (al bit, ogni chiave)                PASSA   TBS_100000_completo.npz
+  la stima: N 100 x 6 x eps x max rho = 3.492e-10 (M), x max Lambda = 1.915e-12 (V); max rho 2.620776e+03, max Lambda 1.437374e+01; il cuore 649 nodi, la fascia 3721, il resto 2191
+  DEVE PASSARE: B1-0 i 100 tick AVVOLTI da 100000 = dopo_stato[100000] di TBS (al bit, ogni chiave): gli avvolgimenti so PASSA   i pezzi per tick {'CAMM-FASE-VUOTO': 2, 'CAMM-MATERIA-VUOTO': 2, 'bordo': 1, 'grover': 2, 'grover_scalare': 2, 'moneta_spin': 2, 'spostamento_scalare': 2, 'spostamento_trasporto': 2}
+  DEVE PASSARE: B1-n1 i pezzi per nodo conservano M_k e V_k: max_k |somma Delta M_k| entro 3.492e-10, |somma Delta V_k|  PASSA   M 5.184e-11 (0.148 della stima), V 1.021e-13 (0.053)
+  DEVE PASSARE: B1-n2 gli spostamenti conservano la norma dell'arco: max_a |somma Delta (capo 0 + capo 1)| entro 3.492e- PASSA   psi 4.127e-11 (0.118), phi 4.405e-13 (0.230)
+  il residuo del tick meno il flusso meno il bordo (= B1-n1, non contato due volte): max_k M 5.184e-11, V 1.021e-13; contro B1-n1: 1.021e-14, 5.773e-15
+  il bordo: M_ass totale 6.190769e-01 (somma per nodo, segno: tolto), V 6.886813e-01; il flusso per nodo: somma_k 4.329e-08 (M), 1.469e-09 (V) -- un flusso puro somma a zero
+### B1-e L'ENERGIA (stampata, senza verdetto: la premessa 4): E_tot da 5.033213618e+06 a 5.033237357e+06; l'oscillazione (max - min) sui 100 tick 1.344e+02
+    (e1) CAMM-FASE-VUOTO          somma_k Delta tot_k sui 100 tick +0.000000e+00 (200 chiamate; rapporto all'oscillazione +0.000)
+    (e1) CAMM-MATERIA-VUOTO       somma_k Delta tot_k sui 100 tick +1.072569e+01 (200 chiamate; rapporto all'oscillazione +0.080)
+    (e1) bordo                    somma_k Delta tot_k sui 100 tick -5.656419e-01 (100 chiamate; rapporto all'oscillazione -0.004)
+    (e1) grover                   somma_k Delta tot_k sui 100 tick -7.927529e+00 (200 chiamate; rapporto all'oscillazione -0.059)
+    (e1) grover_scalare           somma_k Delta tot_k sui 100 tick +6.260520e+00 (200 chiamate; rapporto all'oscillazione +0.047)
+    (e1) moneta_spin              somma_k Delta tot_k sui 100 tick -2.321481e+02 (200 chiamate; rapporto all'oscillazione -1.727)
+    (e1) spostamento_scalare      somma_k Delta tot_k sui 100 tick -8.882363e+00 (200 chiamate; rapporto all'oscillazione -0.066)
+    (e1) spostamento_trasporto    somma_k Delta tot_k sui 100 tick +2.562766e+02 (200 chiamate; rapporto all'oscillazione +1.906)
+    (e2) la sorgente dei pezzi per nodo, cuore  : max_k |.| 7.320e+00, somma |.| 1.273e+03, somma -4.489e+02; i pezzi d'arco: somma -3.125e+03; il bordo: somma -1.774e-11
+    (e2) la sorgente dei pezzi per nodo, fascia : max_k |.| 2.160e-01, somma |.| 6.686e+01, somma -1.003e+00; i pezzi d'arco: somma +2.617e+00; il bordo: somma -5.787e-01
+    (e2) la sorgente dei pezzi per nodo, resto  : max_k |.| 5.963e+00, somma |.| 1.041e+03, somma +2.268e+02; i pezzi d'arco: somma +3.370e+03; il bordo: somma +1.305e-02
+    (e3) max_k |sorgente| / oscillazione del totale 0.054; somma_k |sorgente| / oscillazione 17.711
+  ### LE DUE DIVISIONI D'ARCO (meta' e meta'; tutto al nodo di coda): NON FATTE -- vorrebbero per_nodo riscritto, una seconda fonte del libro dei conti (il task history, premessa 4): chiedo
+  B1-F: 0.00262078 di norma (EPS_F x M_i) dal nodo 3198 (il cuore, M 2.620776e+03) al nodo 6478 (agli antipodi, M 9.872043e-06) fra i tick 100001 e 100002; il totale di M cambia di 0.000e+00
+  DEVE FALLIRE: B1-F col trasferimento a mano B1-n1 passa: max_k |somma Delta M_k| entro la stima di 2 tick 6.983e-12    PASSA   2.621e-03 ai nodi [3198, 6478]
+==================================================================================================================================
+ESITO: 5/5 controlli passano; DEVE fallite: 0 []
+exit 0

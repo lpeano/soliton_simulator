@@ -24199,3 +24199,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La lettura del giro di prima, «`cs` cura il ramo piatto», resta CADUTA** *(era `CAMM-FASE-VUOTO`)*.
 - **La carta di (q2) b)** *(il task history `2026-11-06_brezzi_modi_vuoto`, sez. `14.5`)*: **la simmetria rotta e' la scala; il gap esatto e' `0`, la legge predice un Goldstone LINEARE in `|k|`** *(un suono)*; **con `cs` sale perche' `a_c > a_f` e il residuo e' piu' grande**; **`a_f` si annulla a `Lambda_c = Lambda`.** ### ⚠ **Il fattore `2` dell'identita' `Omega_0 tau = 2 Lambda_c / (Lambda + Lambda_c) omega_oggi` non lo ricavo ancora.**
 - ### **FERMO su IS3; le domande** *(q3)* **la strada per il residuo** *(la proposta: i giri del punto fisso di `cs` per ciascuno dei `13` tick)*, *(q4)* **il gap registrato come artefatto?**, *(q5)* **il controllo a un secondo `Lambda_c`?** **La coda corta prosegue** *(B1)*.
+
+## 2026-11-08 notte -- B1, IL BILANCIO LOCALE SU `TBS`: **`5/5`** *(`doc/referti_l2/bilancio_b1.txt`, `bilancio_b1.py` `1c5bd4a2`)*
+
+- **Le NORME si chiudono ovunque** *(i pezzi per nodo `0.148` e `0.053` della stima `N 6 eps max rho`; gli spostamenti `0.118` e `0.230`)*; **`B1-0` al bit contro `dopo_stato`**; **`B1-F` vede il trasferimento a mano ESATTAMENTE ai due nodi** *(`2.621e-03`), il totale no (`0`)*.
+- ### **L'ENERGIA: (o4).** **Il totale oscilla di `134.4` in `100` tick; lo cambiano soprattutto `spostamento_trasporto` (`+256.3`) e `moneta_spin` (`-232.1`)**; **la sorgente per nodo piu' grande `0.054` dell'oscillazione, nel cuore.**
+- **Le due divisioni d'arco non fatte** *(una seconda fonte del libro dei conti)*: **la domanda (b1) a Luca.**
+- **Il tempo: `91` s, accanto a `R-1`.**
