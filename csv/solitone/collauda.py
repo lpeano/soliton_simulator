@@ -85,7 +85,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E LA CURA DI D6: I DUE SCRIPT U(1) IN csv/solitone/**.
 # ### **E B1, IL BILANCIO LOCALE**.
 # ### **E IS3 (q3), I GIRI DEI PUNTI FISSI**.
-LIBRERIA_RIFERITA = "bb916552"
+# ### **E IS3 (q5), IL SECONDO LAMBDA_C**.
+LIBRERIA_RIFERITA = "f5ec7c4c"
 
 
 def vecchi():
