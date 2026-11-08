@@ -24213,3 +24213,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il rallentamento con le prove corte accanto:** **`1.737` tick al secondo contro `2.564`** *(`0.5756` contro `0.3900` s per tick: `x 1.476`)*.
 - **I file del percorso della corsa: `61`** *(la lista nel referto)*; **`carta_statiche.py` e `bilancio_b1.py` non ci sono.**
 - ### **`C35-0` da `10000` a `30000` partita alle `02:30`; l'arrivo stimato fra le `16:56` e le `23:49` di oggi.**
+
+## 2026-11-08 notte -- IS3 (q3): I GIRI DEI PUNTI FISSI -- **(s1) PER TUTTI E DUE I TICK, CON TRE AVVERTENZE**; (q4) REGISTRATO *(`doc/referti_l2/statica_is3_giri.txt`, `carta_statiche.py` `22d68b64`)*
+
+- **`IS3-RG0`: coi tick avvolti `eR = 2.708283e-07`, come prima.**
+- ### **`tick_cs`: (s1), la convergenza del punto fisso di `cs`:** **la base `1` giro, ogni colonna `6`; il pavimento `A = 2.708e-14` = `4.62` volte `7 x 2.665e-16 x 3.14`.** ### **`tick_fase`: (s1), la tolleranza del punto fisso di `Omega`** *(l'unico che gira li': `1` giro per chiamata, l'ultimo scarto fino a `0.31` della tolleranza)*: **`A = 1.161e-15` = `0.117` volte `7 x 1.423e-15`.**
+- ### ⚠ **Le avvertenze:** **(1) per `cs` (s1-g) e' un FALSO-UNO** *(tutte le colonne hanno giri diversi dalla base: il criterio non poteva fallire; regge (s1-t))*; **(2) il supporto di `T(0)` e' di `7` nodi, non del reticolo** *(una mia premessa caduta)*; **(3) `cs` del centro cambia AL PRIMO ORDINE anche per le colonne `Im` (`4.82e-10`)**: **`eR` e' il resto della cancellazione di `6` contributi `~3e-07`.**
+- ### **La proposta di cura (NON applicata), collegata a [[PUNTO-FISSO-CS-SOLITONE]]:** **i punti fissi di `cs` e di `Omega` fermati quando lo scarto non scende piu'** *(senza numero, `GIRI_MAX` come rete)*, **o con la tolleranza derivata dall'errore in avanti.** **Sulle corse l'effetto e' `~1e-15` per tick.**
+- ### **(q4), come Luca ha deciso:** **il gap del Goldstone e' un ARTEFATTO della misura** *(la coppia `G` a `Gamma`: `8.789e-05`, `5.279e-06`, `1.298e-11` alle tre ampiezze; con `cs` `6.742e-04`, `2.675e-04`, `1.542e-10`; `gap ~ sqrt(a e)`)*; **la pendenza di `P`, `3.174279e-02`, e' un FATTO di `CAMM-FASE-VUOTO`.** **I referti sono uscite di script e non si correggono a mano: la registrazione sta qui e nel task history** *(sez. `15.5`)*. **Aperto: il fattore `2` di `Omega_0`.**
+- **Avanti: (q5), il secondo `Lambda_c`** *(la previsione nella sez. `16`, poi la carta)*.

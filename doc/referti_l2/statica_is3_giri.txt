@@ -1,0 +1,50 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_forma.py  sha1-BYTE 50c3ba88  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 22d68b64  committato e pulito
+==================================================================================================================================
+LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): --is3-giri; nessuna corsa; NN (250000.0, 500000.0, 1000000.0, 2000000.0, 4000000.0) L_COPPIA 162 DD 24 .. 80; AMP 1e-07 TOLL_L 1e-06 TOLL_A 1e-12 TOLL_G 1e-06 TOLL_E 1e-12 GAP_ZERO 1e-06
+==================================================================================================================================
+  DEVE PASSARE: CS0 a N 1e+06, L 81 la partenza costruita con scena_con = quella di V.scena / V.partenza, al bit           PASSA   743fa920bd1cf7da67ef118a21975afa6e84c1de
+### IS3 (q3), Luca 02:13: AMP 1e-07, la differenza in avanti; i punti fissi: nel tick_fase Omega (EPS_OMEGA 1.776e-15 x max tetto, GIRI_MAX_OMEGA 200); nel tick_cs cs (EPS_CS 1.776e-15 x max cs, GIRI_MAX 120) e Omega dentro
+  DEVE PASSARE: IS3-RG0 eR coi tick avvolti = quello di statica_is3_ampiezze.txt ad AMP 1e-7 (2.708283e-07, le sette cifre PASSA   2.708283e-07
+  eR = |T_cs(0) J f - T_fase(0) J f| / |J f| 2.708283e-07; |T_fase(0) J f - T(0) J f| / |J f| 1.160960e-08; il pavimento PAV_T / AMP 1.0e-08; i nodi del supporto di T(0) 7
+  ### il tick cs (13 tick: la base, poi le 12 colonne): i giri di cs, l'ultimo scarto di cs / la sua tolleranza, i giri di Omega per chiamata, l'ultimo scarto di Omega / la sua scala per chiamata, max|cs - cs_base|, il contributo a eR
+    base   giri cs 1    scarto/tol 0.208     Omega giri [1, 1, 1]              scarto/scala 0.00 0.00 0.08                           max|cs - cs_base| 0.00e+00  il contributo -
+    c  0   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.23 0.23 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.26e-09  il contributo 0.000e+00
+    c  1   giri cs 6    scarto/tol 0.625     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.23 0.16 0.23 0.23 0.23 0.23 0.23 0.23  max|cs - cs_base| 4.82e-10  il contributo 3.594e-07
+    c  2   giri cs 6    scarto/tol 0.417     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.00 0.23 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.26e-09  il contributo 0.000e+00
+    c  3   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.16 0.23 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.82e-10  il contributo 2.949e-07
+    c  4   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.23 0.23 0.23 0.23 0.23 0.23 0.23 0.23  max|cs - cs_base| 4.26e-09  il contributo 0.000e+00
+    c  5   giri cs 6    scarto/tol 0.625     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.23 0.08 0.23 0.23 0.23 0.23 0.23 0.23  max|cs - cs_base| 4.82e-10  il contributo 3.856e-07
+    c  6   giri cs 6    scarto/tol 0.729     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.00 0.16 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.26e-09  il contributo 0.000e+00
+    c  7   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.16 0.23 0.16 0.23 0.23 0.23 0.23 0.23  max|cs - cs_base| 4.82e-10  il contributo 2.839e-07
+    c  8   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.00 0.23 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.26e-09  il contributo 1.635e-17
+    c  9   giri cs 6    scarto/tol 0.417     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.23 0.16 0.23 0.23 0.23 0.23 0.23 0.23  max|cs - cs_base| 4.82e-10  il contributo 2.981e-07
+    c 10   giri cs 6    scarto/tol 0.417     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.08 0.23 0.23 0.23 0.23 0.23 0.23 0.31  max|cs - cs_base| 4.26e-09  il contributo 1.635e-17
+    c 11   giri cs 6    scarto/tol 0.521     Omega giri [1, 1, 1, 1, 1, 1, 1, 1] scarto/scala 0.00 0.16 0.23 0.23 0.23 0.16 0.23 0.23  max|cs - cs_base| 4.82e-10  il contributo 3.716e-07
+  ### cs (s1-g) le colonne coi giri DIVERSI dalla base: 12 su 12, la loro quota della somma dei contributi 1.000; il massimo delle altre 0.000e+00 (il pavimento 1.0e-08) -> SEGUE I GIRI
+  ### cs (s1-t) il pavimento assoluto A = residuo x AMP 2.708e-14 contro n_nz x tolleranza x |d omega / d parametro| = 7 x 2.665e-16 x 3.1416 = 5.860e-15: il rapporto 4.622e+00 -> ALL'ORDINE DELLA TOLLERANZA (entro 10)
+  ### il tick fase (13 tick: la base, poi le 12 colonne): i giri di cs, l'ultimo scarto di cs / la sua tolleranza, i giri di Omega per chiamata, l'ultimo scarto di Omega / la sua scala per chiamata, max|cs - cs_base|, il contributo a |T_fase - T| J f
+    base   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.00                                max|cs - cs_base| -         il contributo -
+    c  0   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.23                                max|cs - cs_base| -         il contributo 0.000e+00
+    c  1   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.16                                max|cs - cs_base| -         il contributo 8.389e-09
+    c  2   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.23                                max|cs - cs_base| -         il contributo 0.000e+00
+    c  3   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.31                                max|cs - cs_base| -         il contributo 9.611e-09
+    c  4   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.23                                max|cs - cs_base| -         il contributo 0.000e+00
+    c  5   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.16                                max|cs - cs_base| -         il contributo 1.019e-08
+    c  6   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.23                                max|cs - cs_base| -         il contributo 0.000e+00
+    c  7   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.16                                max|cs - cs_base| -         il contributo 9.582e-09
+    c  8   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.16                                max|cs - cs_base| -         il contributo 2.289e-17
+    c  9   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.16                                max|cs - cs_base| -         il contributo 1.096e-08
+    c 10   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.00 0.23                                max|cs - cs_base| -         il contributo 2.289e-17
+    c 11   giri cs None scarto/tol -         Omega giri [1, 1]                 scarto/scala 0.08 0.16                                max|cs - cs_base| -         il contributo 8.580e-09
+  ### fase (s1-g) le colonne coi giri DIVERSI dalla base: 0 su 12, la loro quota della somma dei contributi 0.000; il massimo delle altre 1.096e-08 (il pavimento 1.0e-08) -> non li segue
+  ### fase (s1-t) il pavimento assoluto A = residuo x AMP 1.161e-15 contro n_nz x tolleranza x |d omega / d parametro| = 7 x 1.423e-15 x 1.0000 = 9.961e-15: il rapporto 1.165e-01 -> ALL'ORDINE DELLA TOLLERANZA (entro 10)
+  ### LA LETTURA (sez. 15.2), cs: (s1): la convergenza del punto fisso (i giri)
+  ### LA LETTURA (sez. 15.2), fase: (s1): la convergenza del punto fisso (la tolleranza)
+==================================================================================================================================
+ESITO: 2/2 controlli passano; DEVE fallite: 0 []
