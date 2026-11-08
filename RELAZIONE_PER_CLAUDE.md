@@ -24244,3 +24244,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Gli stati completi su `E:`** *(`C35-0` `8`, `C35-pi` `7`, `D0R` `3`, `DG1000` `3`, `S162` `7`, `TBS` `21`, `TM1000` `3`)* **e i file di ripresa** *(`17` corse finite)* **riletti dal disco: ogni chiave = lo `sha` registrato.** **`I3-F` fallisce come deve.**
 - **`C35-0` e' in volo:** **il suo file di ripresa NON si apre** *(su Windows un file aperto farebbe fallire l'`os.replace` della corsa)*; **lo stato a `80000` c'e' gia' su `E:` e la riga del pezzo non ancora: elencato come non registrato.** **`TFI` non e' finita** *(a `1500`: la corsa condizionata del `2026-11-03`)*.
+
+## 2026-11-08 notte -- **CORREZIONE di un mio numero** *(il paragrafo di I3 qui sopra)*
+
+- ### **Ho scritto «i file di ripresa (`17` corse finite)»: il numero NON usciva da uno script** *(`L-NUMERI`)*. **Contati dalle righe del referto: `52` stati e `15` righe di ripresa** *(`14` riletti, `13` di corse finite piu' `TFI`; `1` non aperto, `C35-0` in volo)*: **`52 + 14 = 66`, i file del DEVE.**
