@@ -295,8 +295,8 @@ moduli:
     importa: [_presidio, energia_pesata]
 
   - nome: _collauda_r60.py
-    responsabilita: le rotazioni R60 e R180 del reticolo commutano col tick di oggi
-    importa: [_presidio, composizione, tick]
+    responsabilita: le rotazioni R60 e R180 del reticolo commutano col tick del nucleo
+    importa: [_presidio, composizione, scena_l2, tick]
 
   - nome: _collauda_deriva.py
     responsabilita: il collaudo della deriva, e presidia il FALSO-ZERO del termine spento

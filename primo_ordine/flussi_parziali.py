@@ -314,8 +314,8 @@ def z_arco(mot, frazione):
 
 
 # ====================================================================== I DUE FLUSSI
-def grover(mot, vista, frazione):
-    """### `G(theta) = P_u + e^{i theta} (I - P_u)` sul NODO, ### **IN POSTO.**
+def _grover_mezzo(mot, vista, frazione):
+    """### `G(theta) = P_u + e^{i theta} (I - P_u)` sul NODO, ### **IN POSTO** -- ### **META' del pezzo simmetrico** *(`grover` la chiama due volte a `f/2`)*.
 
     ### ⭐ **Una funzione per `psi` E per `phi`**, perche' la forma e' **la stessa**: cio'
     che cambia e' solo **quante componenti ha il campo** — `2` per lo spinore, `1` per il
@@ -375,8 +375,8 @@ def _alfa_beta(mot, z):
     return al, be
 
 
-def hop_psi(mot, psi, frazione):
-    """### `hop(theta)` sull'arco **CON trasporto**: ### **`alpha I + beta S_U`.**
+def _hop_psi_mezzo(mot, psi, frazione):
+    """### `hop(theta)` sull'arco **CON trasporto**: ### **`alpha I + beta S_U`** -- ### **META' del pezzo simmetrico** *(`hop_psi` la chiama due volte a `f/2`)*.
 
     ### ⛔ **E SERVONO DUE COPIE, non una come oggi:** oggi lo spostamento e' una
     PERMUTAZIONE, e per scambiare due lati basta salvarne **uno**. ### **Qui ogni lato
@@ -408,8 +408,8 @@ def hop_psi(mot, psi, frazione):
     return psi
 
 
-def hop_phi(mot, phi, frazione):
-    """### `hop(theta)` sull'arco **SENZA trasporto**: il vuoto e' **NEUTRO.**
+def _hop_phi_mezzo(mot, phi, frazione):
+    """### `hop(theta)` sull'arco **SENZA trasporto**: il vuoto e' **NEUTRO** -- ### **META' del pezzo simmetrico** *(`hop_phi` la chiama due volte a `f/2`)*.
 
     ### ⛔ **E il <<senza `U`>> non e' una semplificazione:** `phi` non ha carica da
     trasportare, e dargli una `U` vorrebbe dire ### **dargli una carica che non ha.**
@@ -432,3 +432,46 @@ def hop_phi(mot, phi, frazione):
     np.multiply(v[:, 1], a1, out=v[:, 1])
     np.add(v[:, 1], tm, out=v[:, 1])
     return phi
+
+
+# ====================================================================== LO ZERO SIMMETRICO
+# ### ⭐⭐ **DAL `2026-11-08` (Luca `14:19`, «ORA»): IL PEZZO E' `exp(i theta (I - 2P)/2)`**,
+# ### cioe' ### **il pezzo di prima a `f/2`, POI il pezzo di prima a `f/2` per `conj(z)`**
+# ### *(`z = e^{i theta}` a `f/2`, per nodo o per arco)*: ### **in aritmetica esatta
+# ### `e^{-i theta/2} G(theta)`, la stessa legge per una fase**, e ### **lo zero
+# ### dell'energia che la MAPPA chiama <<quello fisico>>.**
+# ### ⛔ **LE OPERAZIONI SONO QUELLE, NELLO STESSO ORDINE, di
+# ### `csv/_zero_simmetrico.convenzione_simmetrica` composta con
+# ### `csv/_gravita_collettiva.convenzione_alternativa`** -- ### **che fino a oggi
+# ### avvolgevano QUESTE funzioni in memoria in OGNI corsa**: ### **il braccio `0` e' il
+# ### confronto AL BIT con quell'avvolgimento** *(il task history
+# ### `2026-11-08_zero_simmetrico_nel_nucleo`)*. ### **NON `G(theta)` per
+# ### `e^{-i theta/2}`: sarebbe un'altra somma in virgola mobile.**
+def grover(mot, vista, frazione):
+    """### **Il Grover simmetrico:** `G(theta/2)`, `G(theta/2)`, poi `conj(z_nodo(f/2))` per estremita'."""
+    h = 0.5 * _frazione_valida(frazione)   # ### la frazione INTERA si valida PRIMA di dimezzarla (1.5 deve alzare: il collaudo del motore)
+    _grover_mezzo(mot, vista, h)
+    out = _grover_mezzo(mot, vista, h)
+    z = z_nodo(mot, h)
+    vista *= np.conj(z[mot.inc.nodo])
+    return out
+
+
+def hop_psi(mot, psi, frazione):
+    """### **Lo spostamento simmetrico con trasporto:** `hop(theta/2)` due volte, poi `conj(z_arco(f/2))` sulle due estremita' di ogni arco."""
+    h = 0.5 * _frazione_valida(frazione)   # ### la frazione INTERA si valida PRIMA di dimezzarla (1.5 deve alzare: il collaudo del motore)
+    _hop_psi_mezzo(mot, psi, h)
+    out = _hop_psi_mezzo(mot, psi, h)
+    zz = np.repeat(np.conj(z_arco(mot, h)), 2, axis=0)
+    psi *= zz
+    return out
+
+
+def hop_phi(mot, phi, frazione):
+    """### **Lo spostamento simmetrico del vuoto:** `hop(theta/2)` due volte, poi `conj(z_arco(f/2))` sulle due estremita' di ogni arco."""
+    h = 0.5 * _frazione_valida(frazione)   # ### la frazione INTERA si valida PRIMA di dimezzarla (1.5 deve alzare: il collaudo del motore)
+    _hop_phi_mezzo(mot, phi, h)
+    out = _hop_phi_mezzo(mot, phi, h)
+    zz = np.repeat(np.conj(z_arco(mot, h)), 2, axis=0)
+    phi *= zz[:, 0]
+    return out
