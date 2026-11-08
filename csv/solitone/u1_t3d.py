@@ -129,6 +129,7 @@ def main():
                 T_senza()
             else:
                 T_con(c, True)
+            a_, b_ = SF.forma(VC.FORMA), BE.conv(DC.ZERO)   # ### NUOVI: un gestore di contesto da generatore si usa UNA volta (il mio errore di 2b7394bc)
             with a_, b_:
                 for t in range(TICK0 + N_D + 1, TICK0 + 2 * N_D + 1):
                     if c is None:
