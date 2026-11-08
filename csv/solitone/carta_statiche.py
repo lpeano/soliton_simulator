@@ -1754,6 +1754,66 @@ def is3_giri():
     sc["cm"].__exit__(None, None, None)
 
 
+def is3_lc():
+    """### **IS3 (q5), Luca `2026-11-08` `02:13`:** ### **il tick con `CAMM-FASE-VUOTO` e `cs` fisso a un SECONDO `Lambda_c = Lambda` del vuoto** *(letto, `6`: dove la
+    carta dice `a_f = 0`; il task history `2026-11-06_brezzi_modi_vuoto`, sez. `16`)*. **Il tick con `cs` dinamico NON si fa** *(a `Lambda_c = 6` il vuoto avrebbe `cs` `0.5`)*."""
+    from solitone import accensione as AC
+    sc = _is3_scena()
+    z, F3, K, s, dove, pav = sc["z"], sc["F3"], sc["K"], sc["s"], sc["dove"], sc["pav"]
+    lam0, lc, cs_vero, lc_vero = sc["lam0"], sc["lc"], sc["cs_vero"], sc["lc_vero"]
+    tk, tk_fase, un_tick = sc["tk"], sc["tk_fase"], sc["un_tick"]
+    lc2 = lam0
+
+    def tk_fase2(z_):
+        try:
+            z_["mot"].lambda_c = lc2
+            AC.tick(z_, K + 1, K)
+        finally:
+            z_["mot"].lambda_c = lc_vero
+            assert np.all(z_["mot"].cs == cs_vero), "cs NON e' rimasto fermo"
+
+    def csp(l_):
+        return l_ / (lam0 + l_) ** 2
+    oms, res = {}, {}
+    for nome, fai in (("oggi", tk), ("fase", tk_fase), ("fase2", tk_fase2)):
+        ph = un_tick(fai)
+        lam_ = complex(np.vdot(F3, ph) / np.vdot(F3, F3))
+        oms[nome] = math.atan2(lam_.imag, lam_.real)
+        res[nome] = float(np.linalg.norm(ph - np.exp(1j * oms[nome]) * F3) / np.linalg.norm(F3))
+    O1, O2 = oms["fase"] - oms["oggi"], oms["fase2"] - oms["oggi"]
+    O2p = O1 * csp(lc2) / csp(lc)
+    print("### IS3 (q5), Luca 02:13: Lambda del vuoto %.15f; Lambda_c %g (la scena) e Lambda_c' = Lambda = %g; cs fisso %.17f; omega per tick oggi %.17e, fase %.17e, fase' %.17e"
+          % (lam0, lc, lc2, float(np.max(cs_vero)), oms["oggi"], oms["fase"], oms["fase2"]))
+    esito("DEVE PASSARE: IS3-LC-E F3 e' un autovettore del tick con CAMM-FASE-VUOTO a Lambda_c' = Lambda e cs fisso: il residuo entro %g" % TOLL_E2, res["fase2"] <= TOLL_E2, "%.3e" % res["fase2"])
+    esito("DEVE PASSARE: IS3-LC-O Omega_0' tau = Omega_0 tau x cs'(Lambda; Lambda_c') / cs'(Lambda; Lambda_c) entro 1e-6 (la previsione, sez. 16.1)", abs(O2 - O2p) <= 1e-6,
+          "misurato %.9f, previsto %.9f (Omega_0 tau %.9f, il rapporto %.6f)" % (O2, O2p, O1, csp(lc2) / csp(lc)))
+    T = _T_vuoto(z, F3, K, np.exp(-1j * oms["oggi"]), dove, tk, AMP, False)[0]
+    Tf = _T_vuoto(z, F3, K, np.exp(-1j * oms["fase"]), dove, tk_fase, AMP, False)[0]
+    Tf2 = _T_vuoto(z, F3, K, np.exp(-1j * oms["fase2"]), dove, tk_fase2, AMP, False)[0]
+    f = _reali(F3[dove[0]])
+    nf = float(np.linalg.norm(f))
+    T0, Tf0, Tf20 = T(np.zeros(2)), Tf(np.zeros(2)), Tf2(np.zeros(2))
+    af = float(np.linalg.norm(Tf0 @ f - T0 @ f)) / nf
+    af2 = float(np.linalg.norm(Tf20 @ f - T0 @ f)) / nf
+    print("  a_f a Lambda_c %g: %.9f (previsto %.6f); a Lambda_c' %g: %.3e (previsto 0)" % (lc, af, 2.0 * (lc - lam0) / (lam0 + lc) * O1, lc2, af2))
+    esito("DEVE PASSARE: IS3-LC-A a_f' a Lambda_c' = Lambda entro 1e-6 (la scala torna esatta: il blocco di Jordan sparisce)", af2 <= 1e-6, "%.3e" % af2)
+    esito("DEVE FALLIRE: IS3-LC-A-F a_f a Lambda_c %g entro 1e-6 (il controllo positivo)" % lc, not af <= 1e-6, "%.6f" % af)
+    g = {nm: float(np.sort(np.abs(np.angle(np.linalg.eigvals(TT))))[N_GOLD - 1]) for nm, TT in (("oggi", T0), ("fase", Tf0), ("fase'", Tf20))}
+    print("  la coppia G a Gamma (la |fase| piu' grande delle %d piu' piccole, per tick): oggi %.6e, fase %.6e, fase' %.6e (previsto: all'arrotondamento, come oggi)" % (N_GOLD, g["oggi"], g["fase"], g["fase'"]))
+    for nome_d, gradi in DIREZIONI_G:
+        u = np.array([math.cos(math.radians(gradi)), math.sin(math.radians(gradi))])
+        pp = []
+        for TT in (Tf, Tf2):
+            gr, _salto = _rami(TT, u, KAPPA_IS)
+            w_ = [float(np.mean(np.abs(gr[kap]["P"][0]))) for kap in KAPPA_IS]
+            pp.append(max(w_) - min(w_))
+        rap = pp[1] / pp[0]
+        let = ("scala con Omega_0" if abs(rap / (csp(lc2) / csp(lc)) - 1.0) <= 0.01 else "scala con a_f (il ramo torna piatto)" if pp[1] <= 10 * pav else "nessuna delle due")
+        print("  ### %s la pendenza di P: a Lambda_c %g %.6e, a Lambda_c' %g %.6e; il rapporto %.6f contro %.6f (se scala con Omega_0) -> la lettura scritta prima (16.2): %s"
+              % (nome_d, lc, pp[0], lc2, pp[1], rap, csp(lc2) / csp(lc), let))
+    sc["cm"].__exit__(None, None, None)
+
+
 def SFM_sha(x):
     import _stato_fermo as SFM
     return SFM.sha(x)
@@ -1796,14 +1856,14 @@ def main(argv):
     for m in ("__init__", "corsa_accensione", "accensione", "toro", "carta_forma", "protetto"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(__file__)
-    modo = "--is3-giri" if "--is3-giri" in argv else "--is3-ampiezze" if "--is3-ampiezze" in argv else "--cs-onde" if "--cs-onde" in argv else "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
-    assert modo, "uso: --is3-giri | --is3-ampiezze | --cs-onde | --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
+    modo = "--is3-lc" if "--is3-lc" in argv else "--is3-giri" if "--is3-giri" in argv else "--is3-ampiezze" if "--is3-ampiezze" in argv else "--cs-onde" if "--cs-onde" in argv else "--brezzi" if "--brezzi" in argv else "--passo" if "--passo" in argv else "--olonomia" if "--olonomia" in argv else "--vortici" if "--vortici" in argv else "--circolazione" if "--circolazione" in argv else "--goldstone" if "--goldstone" in argv else "--vuoto" if "--vuoto" in argv else "--coppia-matura" if "--coppia-matura" in argv else "--coppia" if "--coppia" in argv else "--dimensione" if "--dimensione" in argv else None
+    assert modo, "uso: --is3-lc | --is3-giri | --is3-ampiezze | --cs-onde | --brezzi | --passo | --vuoto | --goldstone | --circolazione | --vortici | --olonomia | --coppia | --coppia-matura | --dimensione"
     print("=" * 130)
     print("LE CARTE STATICHE (Luca 2026-11-05 15:28, 15:42): %s; nessuna corsa; NN %s L_COPPIA %d DD %d .. %d; AMP %g TOLL_L %g TOLL_A %g TOLL_G %g TOLL_E %g GAP_ZERO %g"
           % (modo, NN, L_COPPIA, DD[0], DD[-1], AMP, TOLL_L, TOLL_A, TOLL_G, TOLL_E, GAP_ZERO))
     print("=" * 130)
     cs0()
-    {"--is3-giri": is3_giri, "--is3-ampiezze": is3_ampiezze, "--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
+    {"--is3-lc": is3_lc, "--is3-giri": is3_giri, "--is3-ampiezze": is3_ampiezze, "--cs-onde": cs_onde, "--brezzi": brezzi, "--passo": passo, "--vuoto": vuoto, "--goldstone": lambda: vuoto(goldstone=True), "--circolazione": circolazione, "--vortici": vortici, "--olonomia": olonomia, "--coppia": coppia, "--coppia-matura": coppia_matura, "--dimensione": dimensione}[modo]()
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
