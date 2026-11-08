@@ -24239,3 +24239,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Salvare non tocca la corsa (`R1`); sporcato e ricaricato ridà la corsa mai interrotta AL BIT (`R2`); senza `phi_h` o senza gli accumulatori del bordo NON torna (`R2-F`: senza gli accumulatori `M + M_ass` sbaglia di `3.0e-01` con `z["st"]` identico); `carica` ALZA con una voce in piu', in meno, o con una tabella cambiata (`R3`).**
 - **`corsa_accensione.py` non e' toccato** *(il flag a fine allungamenti)*. **Avanti: I3, poi la carta di B1 (J3).**
+
+## 2026-11-08 notte -- I3, L'INVENTARIO DEGLI STATI: **`66` FILE SU `66` AL BIT** *(`doc/referti_l2/inventario_stati.txt`)*
+
+- **Gli stati completi su `E:`** *(`C35-0` `8`, `C35-pi` `7`, `D0R` `3`, `DG1000` `3`, `S162` `7`, `TBS` `21`, `TM1000` `3`)* **e i file di ripresa** *(`17` corse finite)* **riletti dal disco: ogni chiave = lo `sha` registrato.** **`I3-F` fallisce come deve.**
+- **`C35-0` e' in volo:** **il suo file di ripresa NON si apre** *(su Windows un file aperto farebbe fallire l'`os.replace` della corsa)*; **lo stato a `80000` c'e' gia' su `E:` e la riga del pezzo non ancora: elencato come non registrato.** **`TFI` non e' finita** *(a `1500`: la corsa condizionata del `2026-11-03`)*.
