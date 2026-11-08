@@ -90,7 +90,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **E I3, L'INVENTARIO DEGLI STATI**.
 # ### **E T1, I SIGILLI DI GAUGE**.
 # ### **E LA CURA DI T1-R, IL WORKTREE SU C**.
-LIBRERIA_RIFERITA = "524ea3c6"
+# ### **T3, I DEVE DI BASE DELL'INNESTO U(1)**.
+LIBRERIA_RIFERITA = "1de1f9bb"
 
 
 def vecchi():
