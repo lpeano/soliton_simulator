@@ -24322,3 +24322,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`e*` per il regime moderato: una corsa di prova a `e0 = 0.1`, `e* = e0 sqrt(0.1 / max|e0 B|)`** *(nel non compatto `e B` va come `e^2`)*, **stampato.** **Lo stato piccolo: il pacchetto dei sigilli del `24/10` sulla scena di oggi, col vuoto di `TBS`.**
 - ### **La R60 registrata come fatto** *(Luca)*: **`S` = la permutazione `x exp(-i pi/6 sigma_z)`, unica a meno di una fase; `R60 F3 = -F3`; `S^6 = -I` con `det S = 1`. La `S` e' nella libreria** *(`csv/solitone/carta_r60.py`: `S_derivata`, `applica`, `mappa_nodi`)*; **`D6` a `R60` al prossimo tocco di `u1_t3.py`, a T3 chiuso.**
 - **D0-D4: prova corta dopo T3. `C35-pi` subito dopo `C35-0`.**
+
+## 2026-11-08 `14:30` -- LA REVISIONE DEL NUCLEO *(Luca `13:51`, sola lettura)*: **`doc/REVISIONE_NUCLEO.md`, `15` VOCI** *(MAPPA `5-REV`)*
+
+- **La raccolta l'ha fatta un agente in sola lettura; le affermazioni che decidono classe e stato le ho ricontrollate io dal codice** *(elencate nel documento)*.
+- ### **PRONTE:** **`R180 x sigma_z` e `R60 x S60` come COLLAUDI del nucleo** *(nessuna corsa cambia; `7/7`, `13/13`)*.
+- ### **QUASI PRONTE:** ### **(1) LO ZERO SIMMETRICO** -- **attivo in OGNI corsa via `_triangoli_bassa_energia.conv(DC.ZERO = "simm")`, ma fuori dal nucleo** *(la MAPPA: «il simmetrico e' quello fisico; il nucleo non si tocca ORA»)*: **manca il «quando» e il braccio 0** *(il tick del nucleo = il tick avvolto, al bit)*; **(2) il bordo come opzione della SCENA** *(non una legge)*, **dopo le decisioni aperte sul bordo.**
+- **Non pronte:** **l'accensione lenta** *(un secondo percorso del tick, vuole un'interfaccia)*, **l'arresto dei punti fissi e il punto fisso di `cs`** *(D0-D4)*, **`CAMM-FASE-VUOTO` accesa, `U(1)`, `CAMM-FORMA-D`, `log1p`.** **Gia' dentro: la cura del tetto.** **Infrastruttura: resta nella libreria.**
+- **Le domande v1-v4** *(nel documento)*. **Nessun file del nucleo toccato.**
