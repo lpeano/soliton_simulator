@@ -1,0 +1,56 @@
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE ace9ae3d  committato e pulito
+==================================================================================================================================
+LA LETTURA DI STAZIONARIETA' (Luca q-s1..q-s6): Sokal c 5; finestre da t 1000; P su (1000.0, 10000.0); W = 3P (ripiego 6000); controlli ogni 1500; 3 di fila; s 0.15
+==================================================================================================================================
+  DEVE PASSARE: ST-P il periodo di un sin di periodo 137 piu' rumore, entro il passo del periodogramma                   PASSA   P 136.993 passo 0.938
+  DEVE PASSARE: ST-B tau_int di Sokal su un AR(1) phi 0.9: il teorico 9.50 entro un fattore 1.5                          PASSA   9.848 (M 50)
+  DEVE PASSARE: ST-I l'allungamento di un'ellisse gaussiana di rapporto 2 entro 0.01                                     PASSA   1.9903
+### ST-S (STAMPA, non un DEVE): dove il criterio avrebbe fermato
+  S162     fino a t 9999; P 1285.7 (passo 183.7); W 3857; le grandezze ['E + E_ass', 'alone', 'emissione', 'spostamento', 'w']
+    T    9000  no di fila 0  E + E_ass NO(3)  alone NO(2.1)  emissione NO(2.5)  spostamento ok  w NO(3.7)
+    LA LETTURA: NON stazionario entro t 9999 (la finestra osservata)
+  TB3      fino a t 30000; P 1500.0 (passo 250.0); W 4500; le grandezze ['E + E_ass', 'alone', 'emissione', 'spostamento', 'w']
+    T   10500  no di fila 0  E + E_ass NO(3.5)  alone ok  emissione NO(2.5)  spostamento ok  w NO(4.1)
+    T   12000  no di fila 0  E + E_ass NO(2.2)  alone NO(3.7)  emissione NO(3.7)  spostamento ok  w NO(3.9)
+    T   13500  no di fila 0  E + E_ass ok  alone NO(3.7)  emissione NO(4.5)  spostamento ok  w NO(3.5)
+    T   15000  no di fila 0  E + E_ass ok  alone NO(3.9)  emissione NO(3.4)  spostamento NO(2.6)  w NO(4.1)
+    T   16500  no di fila 0  E + E_ass ok  alone NO(4)  emissione NO(3.7)  spostamento NO(2.5)  w NO(4.8)
+    T   18000  no di fila 0  E + E_ass ok  alone NO(4.2)  emissione NO(2.6)  spostamento ok  w NO(3.9)
+    T   19500  no di fila 0  E + E_ass ok  alone NO(4)  emissione ok  spostamento NO(2.6)  w NO(4.1)
+    T   21000  no di fila 0  E + E_ass ok  alone NO(4.3)  emissione ok  spostamento NO(5.3)  w NO(5)
+    T   22500  no di fila 0  E + E_ass NO(2.2)  alone NO(4.7)  emissione ok  spostamento NO(3.4)  w NO(5.1)
+    T   24000  no di fila 0  E + E_ass ok  alone NO(4.7)  emissione ok  spostamento ok  w NO(4.5)
+    T   25500  no di fila 0  E + E_ass ok  alone NO(4.9)  emissione NO(3.5)  spostamento NO(2.5)  w NO(4.7)
+    T   27000  no di fila 0  E + E_ass ok  alone NO(4.1)  emissione ok  spostamento NO(2.9)  w NO(4.3)
+    T   28500  no di fila 0  E + E_ass ok  alone NO(4.2)  emissione NO(2.7)  spostamento NO(2)  w NO(3.6)
+    T   30000  no di fila 0  E + E_ass ok  alone NO(4.5)  emissione NO(5)  spostamento ok  w NO(3.9)
+    LA LETTURA: NON stazionario entro t 30000 (la finestra osservata)
+  TBS      fino a t 30000; P 692.3 (passo 53.3); W 2077; le grandezze ['E + E_ass', 'alone', 'emissione', 'spostamento', 'w']
+    T    6000  no di fila 0  E + E_ass ok  alone NO(3.1)  emissione NO(3.7)  spostamento NO(3.3)  w NO(4)
+    T    7500  no di fila 0  E + E_ass ok  alone ok  emissione NO(4.5)  spostamento ok  w NO(4.3)
+    T    9000  no di fila 0  E + E_ass ok  alone NO(3.9)  emissione NO(2.7)  spostamento NO(2.3)  w NO(4.5)
+    T   10500  no di fila 0  E + E_ass ok  alone NO(4.1)  emissione NO(3.8)  spostamento ok  w NO(4.3)
+    T   12000  no di fila 0  E + E_ass ok  alone NO(2.4)  emissione NO(3.1)  spostamento ok  w NO(3.4)
+    T   13500  no di fila 0  E + E_ass ok  alone NO(4)  emissione NO(4.2)  spostamento ok  w NO(3.1)
+    T   15000  no di fila 0  E + E_ass ok  alone NO(5.3)  emissione NO(10)  spostamento ok  w ok
+    T   16500  no di fila 0  E + E_ass ok  alone NO(2.8)  emissione ok  spostamento ok  w ok
+    T   18000  no di fila 0  E + E_ass ok  alone NO(3.2)  emissione ok  spostamento ok  w NO(2.4)
+    T   19500  no di fila 0  E + E_ass ok  alone NO(5.1)  emissione NO(4.4)  spostamento NO(2.2)  w ok
+    T   21000  no di fila 0  E + E_ass ok  alone NO(5.4)  emissione NO(3.9)  spostamento ok  w ok
+    T   22500  no di fila 0  E + E_ass ok  alone NO(5.4)  emissione ok  spostamento ok  w ok
+    T   24000  no di fila 0  E + E_ass ok  alone NO(4)  emissione ok  spostamento ok  w NO(2.3)
+    T   25500  no di fila 0  E + E_ass ok  alone NO(4.1)  emissione NO(4.5)  spostamento ok  w NO(2.4)
+    T   27000  no di fila 0  E + E_ass ok  alone NO(2.8)  emissione ok  spostamento ok  w ok
+    T   28500  no di fila 0  E + E_ass ok  alone NO(7.8)  emissione ok  spostamento ok  w NO(2.2)
+    T   30000  no di fila 0  E + E_ass ok  alone NO(3.1)  emissione NO(3.2)  spostamento ok  w ok
+    LA LETTURA: NON stazionario entro t 30000 (la finestra osservata)
+### ST-F (DEVE FALLIRE): TF3 + TF3C, nessun arresto con t - 2W <= 16000 <= t
+  TF3+TF3C fino a t 30000; P 4500.0 (passo 2250.0); W 13500; le grandezze ['E', 'alone', 'spostamento', 'w']
+    T   28500  no di fila 0  E NO(1.4e+02)  alone NO(3)  spostamento NO(4.7)  w NO(4)
+    T   30000  no di fila 0  E NO(4.8)  alone NO(4)  spostamento NO(4.6)  w NO(5.8)
+    LA LETTURA: NON stazionario entro t 30000 (la finestra osservata)
+  DEVE FALLIRE: ST-F un arresto con la partenza di TF3C (16000) dentro le due finestre                                   PASSA   arresti a cavallo []
+==================================================================================================================================
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
+exit 0 17:57:45
