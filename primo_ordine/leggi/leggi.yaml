@@ -386,6 +386,13 @@ leggi:
       ### AZIONE `nodo`: e' il SOLO pezzo che mescola estremita' diverse dello stesso
       nodo, ed e' per questo che NON si puo' scrivere come espressione in questo formato
       (un termine di nodo non vede i vicini): e' il posto `P4` del piano.
+      ### ⭐⭐ DAL 2026-11-08 LO ZERO SIMMETRICO (Luca 14:19, <<ORA>>; la revisione del nucleo, voce 1):
+      il Grover e' `exp(i theta (I - 2P)/2)`, cioe' la forma qui sopra a `theta/2`, DUE VOLTE, poi
+      `conj(z)` (`z = e^{i theta}` a `theta/2`, per nodo): in aritmetica esatta `e^{-i theta/2}` per la
+      forma di prima, la STESSA legge per una fase, e lo zero dell'energia che la MAPPA chiama <<quello
+      fisico>>. ### E' cio' che OGNI corsa dell'era 2 faceva gia' in memoria (`_zero_simmetrico`):
+      `flussi_parziali.grover` fa le stesse operazioni nello stesso ordine, e il braccio 0 lo prova AL BIT.
+      ### A `theta = pi` NON torna piu' il pezzo di prima AL BIT: torna `-i` volte quello.
 
   # ---------------------------------------------------------------- F1 e F2: lo spostamento
       ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
@@ -419,6 +426,13 @@ leggi:
       ### E `A13` c'e' perche' la SCALA MINIMA E' UN ARCO: sotto l'arco non esiste
       niente, nemmeno una distanza.
       ### AZIONE `arco`: scambia le due estremita' dello stesso arco.
+      ### ⭐⭐ DAL 2026-11-08 LO ZERO SIMMETRICO (Luca 14:19, <<ORA>>; la revisione del nucleo, voce 1):
+      lo spostamento e' `exp(i theta (I - 2P)/2)`, cioe' la forma qui sopra a `theta/2`, DUE VOLTE, poi
+      `conj(z)` (`z = e^{i theta}` a `theta/2`, per arco): in aritmetica esatta `e^{-i theta/2}` per la
+      forma di prima, la STESSA legge per una fase, e lo zero dell'energia che la MAPPA chiama <<quello
+      fisico>>. ### E' cio' che OGNI corsa dell'era 2 faceva gia' in memoria (`_zero_simmetrico`):
+      `flussi_parziali.hop_psi` fa le stesse operazioni nello stesso ordine, e il braccio 0 lo prova AL BIT.
+      ### A `theta = pi` NON torna piu' il pezzo di prima AL BIT: torna `-i` volte quello.
 
   # ---------------------------------------------------------------- F4: il vuoto
       ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
@@ -442,6 +456,13 @@ leggi:
       componente, perche' `P_u + e^{i theta}(I - P_u)` non dipende da quante componenti ha
       il campo.
       ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1.
+      ### ⭐⭐ DAL 2026-11-08 LO ZERO SIMMETRICO (Luca 14:19, <<ORA>>; la revisione del nucleo, voce 1):
+      il Grover del vuoto e' `exp(i theta (I - 2P)/2)`, cioe' la forma qui sopra a `theta/2`, DUE VOLTE, poi
+      `conj(z)` (`z = e^{i theta}` a `theta/2`, per nodo): in aritmetica esatta `e^{-i theta/2}` per la
+      forma di prima, la STESSA legge per una fase, e lo zero dell'energia che la MAPPA chiama <<quello
+      fisico>>. ### E' cio' che OGNI corsa dell'era 2 faceva gia' in memoria (`_zero_simmetrico`):
+      `flussi_parziali.grover` fa le stesse operazioni nello stesso ordine, e il braccio 0 lo prova AL BIT.
+      ### A `theta = pi` NON torna piu' il pezzo di prima AL BIT: torna `-i` volte quello.
 
   - id: CAMM-SPOSTAMENTO-VUOTO
     tipo: pezzo_unitario
@@ -462,6 +483,13 @@ leggi:
       torna lo scambio di prima AL BIT.
       ### ⚠ E <<in posto con una fetta rovesciata>> NON SI PUO' PIU': ogni lato nuovo
       dipende da ENTRAMBI i lati vecchi, non solo dall'altro.
+      ### ⭐⭐ DAL 2026-11-08 LO ZERO SIMMETRICO (Luca 14:19, <<ORA>>; la revisione del nucleo, voce 1):
+      lo spostamento del vuoto e' `exp(i theta (I - 2P)/2)`, cioe' la forma qui sopra a `theta/2`, DUE VOLTE, poi
+      `conj(z)` (`z = e^{i theta}` a `theta/2`, per arco): in aritmetica esatta `e^{-i theta/2}` per la
+      forma di prima, la STESSA legge per una fase, e lo zero dell'energia che la MAPPA chiama <<quello
+      fisico>>. ### E' cio' che OGNI corsa dell'era 2 faceva gia' in memoria (`_zero_simmetrico`):
+      `flussi_parziali.hop_phi` fa le stesse operazioni nello stesso ordine, e il braccio 0 lo prova AL BIT.
+      ### A `theta = pi` NON torna piu' il pezzo di prima AL BIT: torna `-i` volte quello.
 
   # ---------------------------------------------------------------- F5: la saturazione
       ### ⭐ IL SUO POSTO NEL PASSO, dal 2026-10-15 (ordine PALINDROMO): compare DUE VOLTE a frazione 0.5 invece di UNA a frazione 1, ED E' IL PEZZO CENTRALE: i suoi due mezzi si toccano al centro della sequenza, e NON SONO STATI FUSI in un intero -- il palindromo si definisce coi mezzi, e un'equivalenza entro l'ulp non e' un'identita'.
