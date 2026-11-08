@@ -24,3 +24,9 @@
 2. **`stato_completo.py` e i test R1, R2, R2-F, R3** *(committati prima di girarli; la corsa corta)*; **poi il flag nella corsa, `D6`, la cassetta.**
 3. **I3: lo script dell'inventario, il referto.**
 4. **I4: `Campo` registrato in `_u1_oggi`; la prova R2 col campo dentro T3.**
+
+## 4. IL CONFLITTO CON GLI ALLUNGAMENTI *(`2026-11-08` `03:25`)*: **IL FLAG DI I1 STA IN UN FILE CHE OGGI NON SI TOCCA -- FERMO SU I1, LA DECISIONE E' DI LUCA**
+
+- ### **Il passo `2` di I1 e' «il flag nella corsa»: un cambio di `csv/solitone/corsa_accensione.py`.** **Quel file e' fra i `61` del percorso della corsa** *(`doc/referti_l2/ripresa_C35-0.txt`)*, **e il par. `5` dice: durante un run nessun file del percorso si modifica.** **Gli allungamenti** *(Luca `00:52`: `C35-0`, `C35-pi`, `S162`, `C50-0` in sequenza, uno dopo l'altro)* **lo tengono fermo per `~3` giorni** *(`C35-0` fino alle `17`-`24` di oggi; poi le altre tre)*.
+- **Le strade** *(la scelta e' di Luca)*: **(i1) I1 aspetta la fine degli allungamenti** *(e T1-T5, che Luca vuole DOPO I1, aspettano con lui)*; **(i2) `stato_completo.py` e i suoi test R1, R2, R2-F, R3 si fanno ORA, su una corsa corta che chiama il ciclo del tick direttamente** *(nessun cambio di `corsa_accensione.py`)*, **e solo il flag nella corsa aspetta la fine degli allungamenti**; **(i3) gli allungamenti si fermano fra due corse** *(per esempio dopo `C35-0`)* **per il commit del flag, e ripartono** *(con `R-1` rifatto per la corsa successiva)*. ### **La mia proposta: (i2)** *(il registro si prova subito; nessun file del percorso cambia)*.
+- **I3** *(l'inventario degli stati gia' esistenti, sola lettura)* **non dipende da questo.**
