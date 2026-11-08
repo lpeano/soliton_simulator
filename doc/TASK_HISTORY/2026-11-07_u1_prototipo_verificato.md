@@ -306,3 +306,12 @@
 2. **`csv/solitone/u1_t3.py`** *(nuovo: nella libreria, la cassetta `D6` lo vuole li')*: **`G0` per primo, poi `G2` dentro ogni corsa, `G4`, `G5`, `G6`, e `D6` se la mappa si estende** *(premessa `6`)*; **l'INVENTARIO col blob; D6 della cassetta ripuntato; la cassetta.**
 3. **La corsa** *(`python csv/solitone/u1_t3.py > doc/referti_l2/u1_t3.txt`)*, **il referto, la relazione, questo task history con l'esito.**
 4. **La domanda a Luca su `R60` e la riflessione** *(la premessa `6`)*: **non ferma T3.**
+
+### 13.4 ANNOTAZIONI DI PROTOCOLLO, SCRITTE PRIMA DEL CODICE *(scrivendo lo script; nessun numero e' stato visto)*
+
+- ### **`G5`, LA SCALA DELLA STIMA:** **la sez. `2` dice `N 6 eps max|E|`**; ### **ma l'arrotondamento che si ACCUMULA in `E` viene da `E -= e J`, con `J` una differenza di `|v|^2`: la sua scala e' `e rho`, non `|E|`.** **Se `max|E| < e max rho` la stima della sez. `2` sarebbe piu' stretta dell'arrotondamento** *(un FALSO fallimento)*. **La stima usata: `N_C 6 eps max(max|E|, e max rho)`, entrambe stampate.** **Il prototipo misurava gia' contro `e max rho`** *(`gauss_energia`: `scala = e max rho`)*.
+- ### **`G5-F`, LA CHIAVE:** **con la sorgente spenta `E` resta `0`, quindi `max|E| = 0`: la stessa scala `max(max|E|, e max rho)`.** **`G5-F` passa** *(cioe' fallisce come deve)* **se Gauss si rompe oltre la stima, la materia si muove, e `G - G0 = -e(rho - rho0)` entro la stima.**
+- ### **`G6`, CHE COSA E' `N`:** **`N = 2 N_D = 1000`, i tick in tutto** *(la soglia `1.33e-12`)*. ⚠ **Il prototipo, a `N_D = 500 + 500`, aveva il peggiore `6.89e-13`: il margine e' `~2`, e il tick di oggi ha `14` pezzi.** **Se `G6` fallisce di POCO** *(sotto `10` volte la soglia)*, **la lettura e' «la stima e' stretta», non «non reversibile»: si scrive e si FERMA, non si allarga la soglia da solo.**
+- **`G0 (ii)` solo NON COMPATTO:** **a `e = 0` il compatto e' `sin(e B) / (e A_p) = 0/0`** *(non definito)*.
+- **`D6`:** **`N_D6 = 10`** *(il `N_TICK` di `carta_d0`)*, **soglia `CI.TOLL_UGUALE = 1e-12`** *(la sua)*; **il campo reso NON nullo con `10` tick prima della prova** *(da `A = E = 0` la rotazione di `A` sarebbe banale)*; **la mappa degli archi da `CI.rotazione`:** **l'arco `k` va nell'arco `dove[2k] // 2`, ROVESCIATO** *(`dove[2k]` dispari: la testa)*, **quindi `A`, `E` cambiano segno** *(lo script ALZA se la mappa non e' una permutazione con tutte le teste dispari)*.
+- **`G2` si misura a ogni tick di `G4`, `G5`, `G6`** *(non in una corsa a se')*.
