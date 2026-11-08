@@ -37,3 +37,10 @@
 - **(v2) lo zero simmetrico** *(voce `1`)*: **«ora» e' arrivato?** **E' la voce piu' importante: le corse girano su un tick fuori dal nucleo.**
 - **(v3) il bordo come opzione della scena del nucleo, o resta nella libreria finche' le decisioni sul bordo non sono chiuse?**
 - **(v4) l'accensione lenta: un'interfaccia nuova del nucleo, o resta un percorso della libreria** *(dichiarato)*?
+
+## 4. LE DECISIONI DI LUCA DEL `2026-11-08` `14:19` *(chiudono v1-v4)*
+
+- **(v1) SI':** `R180 x sigma_z` e `R60 x S60` nella suite di `primo_ordine/collauda.py`, coi DEVE FALLIRE; **subito, perche' `collauda.py` NON e' nel percorso della corsa in volo** *(`ripresa_C35-0.txt`)*.
+- ### **(v2) LO ZERO SIMMETRICO NEL NUCLEO, «ORA»:** **in un worktree su `C:`; il braccio `0` al bit dallo stato di `TBS` piu' la suite; i collaudi allo zero «oggi» dichiarati e rifatti; l'avvolgimento tolto dalla libreria nello stesso giro; il merge SOLO fra la fine di `C35-0` e la partenza di `C35-pi`, poi `R-1` di `C35-pi` al bit, se no indietro e FERMO.**
+- **(v3)** il bordo resta nella libreria finche' le decisioni aperte non sono chiuse. **(v4)** l'accensione lenta entrera' come parametro della scena, DOPO lo zero, con lo stesso protocollo. **La voce `12`:** insieme a v2 se tocca gli stessi file *(no: `_screening_forme_s3.py`, non `flussi_parziali.py`)*, **altrimenti al prossimo tocco della libreria.**
+- **Il task history:** `doc/TASK_HISTORY/2026-11-08_zero_simmetrico_nel_nucleo.md`.
