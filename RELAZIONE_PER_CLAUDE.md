@@ -24420,3 +24420,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **d5':** **la sorgente spenta su un campo gia' acceso: `4.5e-11`** *(accesa `1.2e-11`)*: **non e' la sorgente sola.**
 - ### ⚠ **IL MIO ERRORE:** **nei bracci «senza campo» a norma ridotta non rimettevo `U = I`: giravano con la `U` dell'ultima corsa col campo** *(«senza campo» a `x 1e-3` da' `1.2` di errore ASSOLUTO)*. **Sbagliati i «senza campo» di d6' e del d6 di `d27c4350`, e la mia lettura di allora** *(«senza campo peggiora a norma ridotta»)*. **Giusti i «col campo» e il (0).** **La cura: una riga, a se'.**
 - ### **LE DOMANDE:** **(t8) d6' rifatto con la cura** *(minuti)*; **(t9) l'ipotesi del leapfrog** *(la deriva in UN passo al centro invece di due mezzi)* **o quella dell'amplificazione attraverso `e^2 rho`: quale si prova?** **(t10) la catena `U(1)` resta ferma.**
+
+## 2026-11-08 (l'orologio: `19:08`) -- LA STAZIONARIETA', VERSIONE 2: **`5/6` -- IL DEVE FALLIRE DELL'ACCELERAZIONE FALLISCE; IL PERIODO `1500` DI `TB3` E' UNA CUCITURA DEI PEZZI** *(`doc/referti_l2/stazionarieta.txt`; il task history degli allungamenti, sez. `7.6`)*
+
+- ### **Il criterio del regime non vede l'accelerazione che avevo costruito:** **la pendenza cambia di `2.1e-4` fra due finestre, l'errore e' `~4e-4`.** **L'ampiezza era mia, senza principio: il caso non metteva alla prova niente. FERMO sul criterio.**
+- ### **Il periodo di `TB3`:** **`1500` anche a un altro passo, ma `768` DENTRO i pezzi: il `1500` e' la lunghezza di un pezzo, una cucitura delle riprese.**
+- **Le letture:** **le pendenze calano in modulo** *(verso uno stato fisso)* **tranne l'ALONE, che cresce; la vita estrapolata `~4e7` unita' per `TB3` e `TBS`, `~1e7` per `S162`.**
+- ### **LE DOMANDE:** **(r1) l'accelerazione costruita con un'ampiezza che il criterio DEVE vedere** *(almeno `3` errori della differenza: dall'errore, non da me)*; **(r2) le finestre col periodo dentro i pezzi** *(`768` per `TB3`)*; **(r3) la cucitura alle riprese: da guardare.**
