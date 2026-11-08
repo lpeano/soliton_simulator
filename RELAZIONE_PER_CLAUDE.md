@@ -24371,3 +24371,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Senza il campo `G6` su `TBS` vale `1.10e-12`** *(sotto la soglia assoluta `1.33e-12`)*; **col campo a `e* = 0.013` `2.55e-10` e `2.52e-10`: `~230` volte.** ### **La mia ipotesi della materia caotica e' CADUTA.**
 - **Sullo stato piccolo `G6` passa** *(`2.8e-13`, anche a `e = 0.3029`)*: **lo scarto cresce con la CARICA, non con `e B`.** **La mia ipotesi, non provata: l'arrotondamento della sorgente `e J`, con `J` differenza di due numeri di ordine `rho` (`~1e3`).**
 - ### **LE DOMANDE:** **(t4) (d5) `G6` su `TBS` col campo e la sorgente SPENTA, e (d6) la norma riscalata: si fanno** *(minuti)*? **(t5) la catena `U(1)` resta ferma fino ad allora?**
+
+## 2026-11-08 `17:50` -- LE DECISIONI DI LUCA DELLE `15:51` SU v2 *(z1 si', z4 si')*, **E IL WORKTREE: `H_w` `8/8` CON LO ZERO SIMMETRICO ANCHE NELL'ENERGIA** *(il task history dello zero, sez. `8`)*
+
+- ### **Con `energia_pesata` allo zero simmetrico** *(nodo `-pi (N/2 - P)`, arco `+pi Re`)* **`H_w` a `cs` congelato non uniforme torna a pendenza `2.041`** *(era `0.025`)*, **e il DEVE FALLIRE nuovo** *(l'energia di prima col tick simmetrico)* **da' `0.025`: la convenzione unica e' coerente.** **Il motore `47/47`; `_collauda_r60` sul nucleo `5/5`, senza `csv/`.** **Numeri di codice non ancora committato: si rifanno al commit.**
+- ### ⚠ **UN MIO ERRORE DI QUESTO POMERIGGIO:** **ti avevo scritto «il budget e' committato» senza aver visto l'hash: `H-INDICE` l'aveva rifiutato** *(il messaggio citava `C35-0` e `PRE-COMMIT` senza `[SENZA-INDICE]`)*, **e a catena e' caduto anche il primo commit di d4.** **Rifatti tutti e due: `b7b09808` e `adbe0990`, controllati su `origin`.** **D'ora in poi un commit e' fatto solo quando ne ho letto l'hash.**
