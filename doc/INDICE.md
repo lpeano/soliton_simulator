@@ -908,7 +908,7 @@
 | `STORICO-COMMIT-STRUTTURALE` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il commit di una riga di storico si pretendeva SCRITTO, e nessun clone poteva av |
 | `STRUMENTI-SULLA-LEGGE-VECCHIA` | DIFETTO | METODO | 2 | ### **AGENDA** |  | 20 coppie file/simbolo misurano, saltano o sostituiscono la legge che NON gira |
 | `STRUMENTO-LEGGE-DALLA-TABELLA` | STANDARD | METODO | 2 | ### **AGENDA** |  | uno strumento non CONTIENE una legge: la legge si LEGGE dalla tabella, o ALZA |
-| `SUITE-NEL-COMMIT` | STANDARD | METODO | 2 | ### **AGENDA** |  | ogni commit che tocca il nucleo gira la SUITE, e il messaggio ne porta l-esito ( |
+| `SUITE-NEL-COMMIT` | STANDARD | METODO | 2 | ### **AGENDA** |  | ogni commit che cambia un file sorvegliato dalla suite, nucleo O libreria, gira  |
 | `SYNCDB-HEADLESS` | DIFETTO | INFRASTRUTTURA | 1 | ### **SOSPESA** |  | `--sync-db` in headless CARICA ma non SALVA: lo dice il docstring del driver |
 | `T0` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | (CITATO 32 volte, MAI definito in un registro) |
 | `T1` | NON_DEFINITA | DA_CLASSIFICARE | DA_CLASSIFICARE | ### **DA_CLASSIFICARE** |  | OMONIMO `T1`: 34 definizioni con significati DIVERSI |

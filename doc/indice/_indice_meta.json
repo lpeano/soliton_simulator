@@ -6854,7 +6854,7 @@
   "Non usare l-associazione senza verificare lo storico: prima di una diagnosi o di una cura si RILEGGE DAL DISCO || regola scritta": [
    "P1"
   ],
-  "Ogni commit che tocca il nucleo (primo_ordine/ e gli strumenti che il passo importa) gira primo_ordine/collauda.py, e il messaggio ne porta l-esito in una riga SUITE: || regola scritta": [
+  "Ogni commit che cambia un file SORVEGLIATO dalla suite (il nucleo O la libreria: csv/, csv/solitone/) gira primo_ordine/collauda.py, e il messaggio ne porta l-esito in una riga SUITE: || regola scritta": [
    "SUITE-NEL-COMMIT"
   ],
   "Ogni numero scritto in un commit o in un referto esce da uno script: un numero ricopiato NON HA PROVENIENZA || regola scritta": [
