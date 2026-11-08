@@ -1,0 +1,11 @@
+[TIMBRO] zero_nel_nucleo.py  sha1-BYTE 78941ac5  committato e pulito
+==================================================================================================================================
+v2, IL BRACCIO 0 DELLO ZERO SIMMETRICO NEL NUCLEO: il padre C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/z0_padre.json (C:\Users\lpeano\wt_zero_padre), il nuovo C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/z0_nuovo.json (C:\Users\lpeano\wt_zero), il doppio C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/z0_doppio.json; N_D 100 dal tick 100000 di TBS, N_R 50 nella rampa
+==================================================================================================================================
+  DEVE PASSARE: Z0-D il nucleo NUOVO senza avvolgimento = il VECCHIO con l'avvolgimento, AL BIT, ogni chiave: do PASSA   6 chiavi; diverse []
+  DEVE FALLIRE: Z0-F-D il nucleo nuovo CON l'avvolgimento di prima (lo zero due volte) = il vecchio: dopo la ram PASSA   diverse ['Lambda', 'phi_h', 'psi_h', 'rho']
+  DEVE PASSARE: Z0-R il nucleo NUOVO senza avvolgimento = il VECCHIO con l'avvolgimento, AL BIT, ogni chiave: ne PASSA   6 chiavi; diverse []
+  DEVE FALLIRE: Z0-F-R il nucleo nuovo CON l'avvolgimento di prima (lo zero due volte) = il vecchio: nella rampa PASSA   diverse ['Lambda', 'phi_h', 'psi_h', 'rho']
+==================================================================================================================================
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
+exit 0 16:35:52
