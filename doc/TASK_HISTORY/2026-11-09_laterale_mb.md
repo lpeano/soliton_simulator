@@ -399,3 +399,13 @@
   - **(F1-F) DEVE FALLIRE:** **lo stesso F1-I con la regola esplicita** *(`cs_{n+1} = cs_n + r (L - cs_n)`, senza il trapezio)* **e l'inversa del trapezio** *(l'inversa sbagliata: deve dare uno scarto oltre `1e-10`)*.
 - **Le letture** *(le `k1`-`k3` della sez. `16.4`)*: **(k1) arriva in fondo coi DEVE: candidata; (k2) esce dal dominio o alza; (k3) arriva ma cresce: col fattore misurato.**
 - **Il costo:** **`~0.3` s per tick: `200` tick x `2` modi x `2` corse `~4` minuti; i DEVE `~1` minuto.**
+
+### 18.7 ANNOTAZIONE PRIMA DEL CODICE *(`csv/solitone/carta_f1.py`)*
+
+- ### **F1-I si STRINGE:** **non «`5` tick avanti e `5` indietro»**, **ma l'inversa del trapezio al confine** *(`1000` terne a caso di `cs`, `L`, `r`: entro `1e-14` relativo)*.
+  - **Perche':** **dentro il tick `cs` e' costante, e la reversibilita' del tick a `cs` costante e' quella del NUCLEO** *(collaudata dalla suite)*;
+  - **il pezzo NUOVO di F1 e' solo l'aggiornamento al confine:** **e' quello che va provato.**
+  - **F1-F diventa:** **la regola esplicita invertita col trapezio** *(deve sbagliare)*.
+- **`r = omega_v`** *(la rotazione di fase del vuoto nel tick appena fatto, per nodo)* **puo' superare `2`** *(fino a `pi`)*: **li' il trapezio non e' piu' una media a pesi positivi.** **Il referto stampa `r` minimo e massimo.**
+- **Il calore della memoria = `g_pesata(cs nuovo) - g_pesata(cs vecchio)` sullo stesso stato, sommato.**
+- **Il fattore di crescita:** **due corse, con `cs` iniziale perturbato di `1e-8` sui nodi del centro** *(`r < 1`)*, **la differenza tick per tick e il rapporto mediano sui primi `20`.**
