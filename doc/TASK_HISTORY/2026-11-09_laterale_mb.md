@@ -454,3 +454,22 @@
 - ### **I DEVE:** **F1-V al BIT** *(il vuoto F3, `50` tick: `cs == s`, ogni nodo, ogni tick)*; **F1-I** *(l'inversa nuova, `1e-14` relativo)*; **F1-F** *(DEVE FALLIRE: la regola invertita col trapezio)*.
 - ### **LA PREVISIONE, scritta prima** *(di Luca)*: **dove `r` valeva `~0.47`, ora `~0.37`** *(`1 - e^{-0.471} = 0.376`)*; **la crescita di (q2) scende**; **ma la stabilita' vuole `r < ~0.1`** *(la mia stima, sez. `18.5`)*: ### **se la perturbazione cresce ancora: FERMO, con la proposta di un tempo di memoria piu' lento** *(per esempio la risposta di `Lambda`)* **e le sue letture.**
 - **La prova:** **(q2) solo; `200` tick; se la differenza a `200` resta sotto `1e-4`, si va a `1000`** *(«e oltre, se stabile»: la soglia `1e-4` e' mia, dichiarata)*.
+
+## 22. L'ESITO DI F1 COL RILASSAMENTO ESATTO: **`2/3` -- F1-V FALLISCE ANCORA (`7.8e-16`: E' `Lambda` DEL VUOTO CHE CAMBIA AGLI ULTIMI BIT); `r` MAX `0.81`; LA PERTURBAZIONE CRESCE ANCORA (`1e-8` -> `6.3e-5` A `200`, `5.4e-2` A `1000` TICK): FERMO, LA PROPOSTA DI UN TEMPO DI MEMORIA PIU' LENTO** *(`doc/referti_l2/carta_f1.txt`; il codice a `d2689b81`, blob `b0b5deb1`; `19:43`-`19:49`)*
+
+- **I DEVE:** **F1-I passa** *(l'inversa del rilassamento `6.1e-15`)*; **F1-F fallisce come deve** *(`5.2`)*.
+- ### **F1-V FALLISCE:** **nel vuoto F3, in `50` tick, `cs` si sposta dal suo valore iniziale di `7.772e-16`** *(`~5` ulp di `s`; prima, col trapezio e (q2) assente, `1.7e-15`)*.
+  - **La forma `cs + r (L - cs)` da' `cs` al bit SOLO se `L = cs` al bit:** **ma `L` si ricalcola a ogni tick da `Lambda` del vuoto DOPO il tick**, **e `Lambda` del vuoto F3 cambia agli ultimi bit da un tick all'altro** *(l'arrotondamento del tick stesso)*.
+  - ### **Quindi il vuoto «al bit» con F1 chiede che `Lambda` del vuoto sia costante al bit lungo i tick:** **una proprieta' del tick, non di F1.** **Da misurare a parte** *(la deriva di `Lambda` del vuoto F3 tick per tick, a `cs` spento)*.
+- ### **LA SCENA, (q2), `r = 1 - e^{-omega}`:**
+  - **`r` va da `0` a `0.81`** *(prima `1.70`)*: **la previsione «`0.47` -> `0.37`» vale per il vuoto; vicino al solitone il battito e' piu' alto;**
+  - **arriva a `200` tick, la norma conservata a `2e-15` relativo;** **`cs` min `0.0012` a `200` tick, `0.0003` a `1000`;**
+  - ### **la perturbazione `1e-8` sul centro: `5.7e-9`, `4.5e-9`, `8.7e-9`, `6.4e-8`, `5.1e-8`, `4.4e-6`, `6.3e-5`** *(i tick `1`, `5`, `10`, `20`, `50`, `100`, `200`)*; **poi `4.3e-3`, `7.3e-3`, `5.0e-2`, `5.4e-2`** *(`400`, `600`, `800`, `1000`)*.
+  - ### **CRESCE ANCORA:** **un fattore `~5e6` in `1000` tick** *(lento: in media `~1.016` per tick)*. **La previsione della sez. `18.5` era un fattore `~5` per tick: SBAGLIATA in eccesso** *(la stima lineare da `|J|` di D2 non vale per la memoria)*; **ma la crescita c'e'.**
+  - **Il calore della memoria:** **`-5.2e4` in `200` tick.**
+- ### **LA LETTURA:** **(k3), arriva ma cresce** *(lentamente)*. **La regola di Luca delle `18:46`: «se la perturbazione cresce ancora, FERMO, con la proposta di un tempo di memoria piu' lento».**
+- ### **LA PROPOSTA: il tempo di memoria dalla RISPOSTA DI `Lambda`** *(la scelta e' di Luca)*:
+  - **`r = 1 - e^{-dtau / tau_Lambda}`**, **`tau_Lambda` il tempo con cui `Lambda` del vuoto risponde a un disturbo, PER NODO**;
+  - **da dove: la `tau_int` di Sokal della serie di `Lambda` al nodo** *(dalle mappe leggere di `TB3`/`TBS`, o da una corsa corta)*, **oppure il tempo di rilassamento di `Lambda` dopo un disturbo imposto** *(una misura)*;
+  - ### **LE LETTURE, scritte prima:** **(t1) `tau_Lambda` molto piu' lungo di `1/omega`** *(`r < ~0.1` vicino al solitone)*: **F1 con quel `r`, e la crescita va rimisurata**; **(t2) `tau_Lambda ~ 1/omega`:** **il tempo di memoria lento non c'e' nella dinamica, e F1 da sola non basta: F2 o F4.**
+- ### **E LA DOMANDA SU F1-V:** **«il vuoto al bit» con F1 e' possibile solo se `Lambda` del vuoto e' costante al bit:** **la misuro** *(una prova di un minuto)* **prima di qualunque altra cosa su F1?**
