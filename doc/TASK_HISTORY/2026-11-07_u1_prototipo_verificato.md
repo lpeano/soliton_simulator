@@ -864,3 +864,27 @@
 - ### **LA LETTURA: (i1).** **La frase giusta e' «l'anisotropia D6 e' `k^6` in `Delta omega` assoluta, e `k^4` in `|v_g|`», non «`k^6` nella frazione `Delta omega / omega`».**
 - ### **La prova della dipendenza dallo zero, nello stesso referto:** **il triangolare con `omega(Gamma) = 0` ha lo STESSO `Delta omega` assoluto dell'altro** *(`5.993`)*, **ma la pendenza relativa `4.005` invece di `5.875`**: **lo zero sposta il denominatore.** **Il punto di P2 era giusto; la forma assoluta regge.**
 - **Il fotone di T4** *(`omega(0) = 0`, lo zero fissato dalla gauge)*: **la pendenza relativa `4.01` vuol dire `Delta omega ~ k^5`** *(`omega ~ k`)*, **coerente con `k^6` in `omega^2`** *(la derivazione della sez. `15`)*.
+
+### 25. T5, IL RIFERIMENTO DEI DUE OROLOGI A `cs` SPENTO, RISCRITTO SU `v_max` *(Luca `12:40` e `18:46`: «T5 e' il prossimo»; il progetto della sez. `2`, riletto dopo P1)*: **LE PREMESSE, LA MISURA, LE LETTURE -- PRIMA DEL CODICE**
+
+- ### **IL CAMBIO RISPETTO ALLA SEZ. `2`, dopo P1** *(`39021fdb`)*: **`v_b` dipende dallo zero dell'energia, NON e' un osservabile: si stampa, senza letture.** **Il numero della materia e' `v_max/s`** *(`0.5850` nel limite, `0.5881` al passo delle corse, `eps 0.5`)*. **Le letture (o1)/(o2) della sez. `2` («`0.785` e `0.598`») vanno riscritte: qui sotto.**
+
+- ### **LE PREMESSE DAL CODICE** *(LETTE)*:
+  - **`_u1_terzo.vb_eps(eps, s)`:** **`v_b` dei due rami della coppia a `K`** *(il fit `omega^2 - omega0^2 = v_b^2 k^2 + b k^4` sul ramo lungo, `_triangoli_fattore.ramo_lungo`)*, **sul tick dei triangoli a VUOTO NULLO** *(`_triangoli_bassa_energia.matrice`: `matrice_tick` con `dtau = s`, `eps` e' il parametro della MONETA, `EPS_MONETA`, non il vuoto)*.
+  - **`_triangoli_forza.v_max(matrice_L(eps, s))`:** **`v_max`, la velocita' di gruppo piu' grande dei segnali.**
+  - **`c_U / s`:** **da T4** *(`omega / (s |k|)` a `0.005 k_M`: `0.9999966`-`0.9999978`; il limite `1` per costruzione del tempo d'arco)*.
+  - ### ⚠ **NON SO, e decide la parte B:** **queste funzioni lavorano sul vuoto NULLO**; **il progetto della sez. `2` dice «sul vuoto F3, la camminata col tick intero».** **Sul vuoto F3 non c'e' una matrice a blocchi gia' scritta.** **F3 e' uniforme** *(una fase che ruota a `omega = 4.712e-01` per tick a `s 0.15`, IS2)*: **il tick linearizzato in `psi` attorno a F3 e' quindi invariante per traslazione, e il suo blocco `12 x 12` a `k` si puo' MISURARE applicando un tick a onde piane di `psi` piccole sul toro con F3** *(la stessa idea del banco di T4-B)*. **Da leggere prima del codice:** **come si mette F3 su un toro piccolo** *(`corsa_accensione.vuoto_della_corsa`, IS2)* **e se `psi` piccola resta lineare** *(`CAMM-MATERIA-VUOTO` accoppia materia e vuoto: il vuoto si muove al secondo ordine in `psi`?)*.
+- ### **LA MISURA:**
+  - **(A) il riferimento a vuoto nullo** *(le funzioni che ci sono)*: **`v_b / s` dei due rami e `v_max / s` a `s` `0.001`, `0.01`, `0.05`, `0.1`, `0.3`** *(`S_VAR` di `_u1_terzo`)*, **a `eps` `0` e `0.5`**; **il limite a `s -> 0` col fit di grado `2` in `s`**, **e la dispersione fra i fit di grado `1`, `2`, `3`.**
+  - **(B) sul vuoto F3:** **il blocco `12 x 12` del tick intero a `k`, misurato con onde piane di `psi` di ampiezza piccola** *(due ampiezze, la linearita' controllata come T4B-L')*, **il ramo lungo attorno a `K`, lo stesso fit**, **a `s` `0.15`** *(la corsa)* **e `0.05`.**
+  - **I rapporti `v_b / c_U` e `v_max / c_U`.**
+- ### **I DEVE, fissati ora:**
+  - **(T5-R) DEVE:** **(A) a `s 0.15`, `eps 0.5` riproduce `v_max/s = 0.588137` di P1 entro `1e-6`** *(il controllo del banco)*;
+  - **(T5-L) DEVE:** **(B) lineare: il blocco alle due ampiezze uguale entro `1e-6` relativo**;
+  - **(T5-N) DEVE:** **(B) col vuoto F3 SPENTO** *(il vuoto nullo nello stesso banco)* **ridà (A) a `s 0.15` entro `1e-6`** *(il banco di (B) e' giusto)*;
+  - **(T5-F) DEVE FALLIRE:** **T5-L con un'ampiezza di `psi` GRANDE** *(norma `1` su un nodo: fuori dal regime lineare)*: **se passa anche li', T5-L non sa dire di no.** *(Non uso come DEVE FALLIRE «F3 non cambia niente»: sarebbe la lettura (o1), un risultato possibile, non un caso che deve fallire.)*
+- ### **LE LETTURE, scritte prima** *(quelle della sez. `2`)*:
+  - **(o1)** **`v_max/s` sul vuoto F3** *(B)* **uguale a quello sul vuoto nullo** *(A: `0.5881` a `s 0.15`, `eps 0.5`)* **entro `1e-6`**: **il vuoto F3 non cambia il limite della materia;**
+  - **(o2)** **il vuoto F3** *(e `CAMM-MATERIA-VUOTO`)* **lo cambia:** **(B) diverso da (A) oltre `1e-6`, e si scrive di quanto** *(e il rapporto `v_max/c_U` col numero nuovo)*.
+  - **`v_b` stampato accanto, coi due zeri** *(`+- pi s / 2`)*, **senza lettura.**
+- **Lo script: `csv/solitone/u1_t5.py`** *(nuovo)*; **il referto `doc/referti_l2/u1_t5.txt`.** **Prima del codice di (B): la lettura del codice di F3 sul toro, scritta qui come annotazione.** ### **Il codice DOPO R-1 di `S162`** *(`csv/solitone/` e' sul percorso della corsa: un file nuovo si', ma lo committo a corsa partita, e la suite in un altro albero)*.
