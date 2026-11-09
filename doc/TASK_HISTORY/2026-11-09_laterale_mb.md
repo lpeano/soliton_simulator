@@ -194,3 +194,35 @@
 - ### **R3:** **il fattore `|J v|_anello / |v|`, con `v` uniforme sull'ANELLO `[r_min - 2, r_min + 2]`**, **accanto ai dischi di oggi.**
 - ### **R4** *(solo se (g1))*: **le cure candidate** *(la memoria `A15`, una legge di `cs` meno sensibile a `Lambda` piccolo, `cs` dal tick precedente)* **si valutano sapendo che la zona critica e' un guscio sottile dove `Lambda` scende fino a `~0.1`-`0.2` e `cs/s` fino a `~0.03`.** **Nel referto, R4 e' una stampa** *(`Lambda` e `cs/s` minimi sul guscio, a ogni scena)*, **non una cura.**
 - **Il resto di (r-D5) non cambia** *(la sez. `12`)*. **R1-R3 entrano in `carta_punto_fisso_r.py` PRIMA del suo commit** *(non era ancora committato)*, **e si fanno su ognuna delle quattro scene, prima di D3-R.**
+
+## 14. L'ESITO DI (r-D5): **`7/7` -- IL GUSCIO C'E' (R1), MA LA DIREZIONE INSTABILE STA AL CENTRO (R2: (g2) SU TUTTE LE SCENE MATURE); IL GUSCIO CONTRAE (R3); LA LEGGE INTERNA E IL DOMINIO `s > 0` CEDONO PRIMA DEL PUNTO FISSO: (d3); FERMO SUL RIMEDIO** *(`doc/referti_l2/punto_fisso_cs_r.txt`; il codice a `1fcc9e9b`, blob `f13be46a`; `13:09`-`14:25`, `4622` s)*
+
+- **I DEVE:** **R-V `3/3`**, **R-B `2/2`** *(al bit sul vuoto e a `Lambda_c 272`)*, **R-E-F fallisce come deve** *(`2.578e-02` sul punto di partenza)*, **PF-F fallisce come deve.**
+- ### **R1, IL GUSCIO, CONFERMATO** *(il fatto del guardiano)*:
+
+| scena | `w` | `r_min` di `Lambda` | sul guscio `[r_min - 2, r_min + 2]`: `Lambda` min, `cs/s` min | al centro (`r < 1`): `Lambda`, `cs/s` |
+|---|---|---|---|---|
+| `TBS` `0` | `6.65` | *(nessun guscio: `Lambda = 6` ovunque)* | `6.0`, `1.00` | `6.0`, `1.00` |
+| `TBS` `10000` | `8.25` | `16` | `0.444`, `0.086` | `6.60`, `1.08` |
+| `TBS` `100000` | `9.29` | `18` | `0.147`, `0.029` | `8.51`, `1.33` |
+| `TBS` `200000` | `9.64` | `18` | `0.121`, `0.024` | `9.53`, `1.46` |
+
+  - **A `t 0` il vuoto non e' ancora disturbato: `r_min = 0` e la lettura R2 (g-a) e' degenere** *(un difetto della mia definizione di `r_min` su un profilo costante: la scena a `0` non ha un guscio)*.
+- ### **R2, DOVE STA LA DIREZIONE INSTABILE: AL CENTRO** *((g2) a `10000`, `100000`, `200000`)*:
+  - **il massimo del profilo di `v^2` a `r` `2`, `0`, `0`**;
+  - **la quota di `|v|^2` dentro (`r < r_min - 2`) `1.000`, sul guscio `0.000`**;
+  - **il profilo cade di `10` ordini fra `r 0` e `r 10`.**
+  - ### **La lettura di Luca (g2): «la mappa del guardiano non spiega l'instabilita'».** **Il rallentamento sta sul guscio, ma la non-contrazione nasce al CENTRO**, **dove `cs/s` e' `1.1`-`1.5`** *(il tempo un po' piu' veloce)* **e `Lambda` e' il piu' alto** *(`6.6`-`9.5`)*.
+- ### **R3: il guscio CONTRAE FORTE:** **`|Jv|_anello / |v|` `0.058`, `0.026`, `0.030`** *(contro `11.5`-`13.5` della direzione dominante)*.
+- ### **D4-R, LA CONTINUAZIONE FINE A `10000`:**
+  - **NK segue il ramo a `228.7` e `192.3`** *(`|Jv|/|v|` `0.554`, `0.641`, negativi; `cs` min `0.0019`-`0.0023`)*;
+  - **a `161.7` muore per un `s <= 0`**, **con `|Jv|/|v| = 0.92` al passo prima: SOTTO `1`.**
+  - ### **Il ramo esce dal DOMINIO prima di un punto di svolta:** **(d3), non (d2).**
+- ### **D3-R A `34`, CON `F` DEFINITA:**
+  - **Anderson muore a ogni scena alla seconda valutazione: «il punto medio di `Omega` non esiste qui»** *(anche l'NK interno non converge: `Omega robusto` `0` volte, `non esiste` `4` volte)*;
+  - **NK esterno: non converge** *(`8452`, `8514` valutazioni)* **o porta un `s` sotto zero** *(`100000`, `200000`)*.
+- ### **LE LETTURE** *(sez. `12`)*: **(d3): la legge interna** *(`Omega`)* **e il dominio** *(`s > 0`)* **cedono PRIMA del punto fisso di `cs`.** **(pf5) confermata.** **(pf1), (pf2), (pf4) restano NON distinguibili:** **il punto fisso a `34`, se c'e', sta fuori da dove `F` e' definita lungo ogni strada provata.**
+- ### **FERMO SUL RIMEDIO** *(la regola del progetto)*: **le letture per Luca:**
+  - **il guscio NON e' la causa** *(contrae)*; **la causa sta al CENTRO** *(coerente col revisore, P4: «il modo al centro», a densita' alte)*;
+  - **i candidati delle `09:59`** *(R4: la memoria `A15`, una legge di `cs` meno sensibile a `Lambda` piccolo, `cs` dal tick precedente)* **vanno riletti cosi':** **una legge «meno sensibile a `Lambda` PICCOLO» cura il guscio, che gia' contrae: NON e' la cura.**
+  - ### **La mia proposta** *(la scelta e' di Luca)*: **P4 del revisore come prova successiva** *(il pacchetto senza guscio alla stessa massa: se la mappa NON contrae neanche li', la causa e' la densita' al centro, non il guscio)*; **e la memoria `A15`** *(`cs` che RILASSA verso `cs(Lambda)`)* **come il candidato che toglie il punto fisso del tick** *(e con esso il dominio che cede)*, **da valutare dopo P4.**
