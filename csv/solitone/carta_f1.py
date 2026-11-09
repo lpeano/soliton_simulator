@@ -67,7 +67,7 @@ def cs_primo_zero(attivo):
 def omega_v(st0_phi, st1_phi, nodo, n):
     """### la rotazione di fase del vuoto nel tick, per nodo: l'angolo di `somma conj(phi0) phi1` sulle estremita' del nodo."""
     z = np.zeros(n, dtype=complex)
-    np.add.at(z, nodo, np.sum(np.conj(st0_phi) * st1_phi, axis=1))
+    np.add.at(z, nodo, np.conj(st0_phi) * st1_phi)      # ### la cura (sez. 19): phi_h ha UNA dimensione, una fase per estremita'
     return np.abs(np.angle(z))
 
 
