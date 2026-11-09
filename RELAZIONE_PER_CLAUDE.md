@@ -24825,3 +24825,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **R-1-F** *(contro `C35-pi`, un'altra corsa)* **fallisce come deve.**
 - **Il pezzo rifatto in `3937` s** *(`0.59` s per tick; l'originale `0.39`: la macchina condivisa con le suite e le prove del laterale)*.
 - ### **L'allungamento di `S162` e' partito alle `21:15`** *(il driver dei pezzi dello scratchpad, `bash driver_corsa.sh S162`)*. **Poi `C50-0`; il referto (r-b) dopo `S162`** *(con U2)*.
+
+### 2026-11-09 23:35 -- D1 SUL PRINCIPALE: (w1) -- LA DERIVA DI `Lambda` DEL VUOTO E' LA STESSA DEL LATERALE: DEL TICK DI SEMPRE, NON DEL v2 *(`doc/referti_l2/lambda_vuoto_deriva_principale.txt`; il task history `2026-11-09_d1_deriva_lambda_principale.md`, sez. `5`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Lo script del laterale copiato sul principale come file nuovo** *(l'eccezione di Luca a U1)*, **con cinque modifiche dichiarate; i numeri del laterale LETTI dal suo referto.**
+- **Nel vuoto F3 a `cs` spento, sul nucleo congelato: `+2.228e-12` in `1000` tick** *(`2508` ulp)*, **la pendenza `0.985`: UGUALE al laterale a tutte le cifre stampate** *(il rapporto `0.999799`, l'arrotondamento del referto del laterale)*. **T1-F fallisce come deve.**
+- ### **La causa sta nel tick condiviso:** **una correzione toccherebbe anche il nucleo congelato. La scelta e' di Luca.**
+- **Fermo su questo tema; D2 parte sul laterale** *(«in quale pezzo del tick nasce la deriva»)*.

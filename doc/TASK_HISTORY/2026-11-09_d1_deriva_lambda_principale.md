@@ -40,3 +40,17 @@
 2. Lo script `csv/solitone/lambda_vuoto_deriva_principale.py`; la suite in `wt_zero_padre`; commit e push.
 3. La corsa; il referto `doc/referti_l2/lambda_vuoto_deriva_principale.txt`; l'esito qui (sez. 5); una riga nella RELAZIONE; se (w2), la riga nella sezione U1.
 4. **Dopo D1: fermo su questo tema.** **In coda, sul laterale: D2** *(il mandato di Luca delle `23:02`, «in quale pezzo del tick nasce la deriva»)*, **che parte solo con D1 su origin.**
+
+## 5. L'ESITO *(la corsa dalle `23:28:50` alle `23:31:29`, a `2bb45ecf`; il referto `doc/referti_l2/lambda_vuoto_deriva_principale.txt`)*
+
+- **La scena come quella del laterale:** **`6561` nodi, `mot.cs` min e max `0.15`, `Lambda` all'inizio `6`;** **il divieto P3 attivo, e non e' scattato** *(`lambda_c = None`)*.
+- **T1-F fallisce come deve** *(`9.397e-13` dopo il tick `500`)*: **la misura vede.**
+- **La tabella, principale e laterale ACCANTO** *(i numeri del laterale letti dal suo referto a `81c690a8`)*: **UGUALI A TUTTE LE CIFRE STAMPATE:**
+  - `|Delta Lambda|` per tick: **max `1.066e-14` (`12.0` ulp), media `2.499e-15` (`2.81` ulp); `273` tick su `1000` senza cambiamento** *(tutti e due)*;
+  - la deriva al tick `1`: `+1.776e-15`; al tick `10`: `+2.400e-14`; al tick `100`: `+2.256e-13`; al tick `1000`: **`+2.228e-12` (`2508` ulp)**, **max = media = rms** *(tutti e due)*;
+  - **la pendenza della rms fra i tick `10` e `1000`: `0.985`** *(tutti e due)*.
+- **La deriva media per tick:** **il principale `+2.2276e-15`, il laterale `+2.2280e-15`; il rapporto `0.999799`.**
+  ### ⚠ **Lo scarto `2e-4` e' l'arrotondamento del referto del laterale** *(quattro cifre: `2.228e-12`)*, **non una differenza misurata.** **Non dico «al bit»:** **i due stati non sono stati confrontati byte per byte.**
+- ### **LA LETTURA: (w1)** — **la stessa deriva: e' del tick di sempre, non del v2.** **A `cs` spento il v2 non entra nel vuoto** *(la premessa NON SO della sez. `1`: la risposta e' qui, per misura)*.
+- ### **La conseguenza, scritta per D2:** **la causa sta nel tick CONDIVISO** *(`tick.py` `d9a59ff9` e i pezzi del vuoto)*: **una correzione eventuale toccherebbe anche il nucleo congelato del principale. La decisione e' di Luca.**
+- **Fermo su questo tema** *(il mandato)*. **D2 parte sul laterale** *(D1 e' su origin)*.
