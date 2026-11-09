@@ -316,3 +316,25 @@
   - **In `TBS` boccia SOLO il CUORE, a ogni controllo** *(da `2.3` a `12.3` volte la risoluzione)*, **con l'emissione a volte.**
   - **In `TB3` boccia il cuore quasi sempre** *(da `2.6` a `9.7`)*, **e `E + E_ass`, lo spostamento e l'emissione a tratti.**
   - ### **Da notare, senza concludere:** **col `W` per grandezza l'ALONE passa quasi ovunque** *(`TBS` boccia una sola volta, a `28500`)*. **Il «non stazionario» delle `18:08` era detto soprattutto dall'alone, con un `W` unico** *(`3 x 1500` o `3 x 692`)*: **adesso viene dal cuore, che ha un periodo corto** *(`311`)* **o nessuno.**
+
+### 7.17 IL CUORE CHE BOCCIA SEMPRE: LA PROVA DEL CAMPIONAMENTO *(Luca `2026-11-09` `12:02`)* -- **LE PREMESSE, LA MISURA, LE LETTURE, PRIMA DEL CODICE**
+
+- ### **LA DECISIONE** *(Luca)*:
+  - **la stessa analisi di `stazionarieta_v3` SOLO per il cuore** *(`M_dentro`)*, **con `W = 6 P` e `W = 10 P`**;
+  - **`P = 311` per `TB3`, «il valore del referto» per `TBS`;**
+  - **dichiarata come prova del CAMPIONAMENTO**;
+  - **una prova corta, dopo T4-B (t-b).**
+- ### ⚠ **UNA PREMESSA DAL REFERTO, CHE VA DETTA PRIMA** *(`f3dd15b1`)*: **per `TBS` il metodo di M3 NON ha trovato un periodo del cuore** *(«`P` nessuno», i piu' forti `2334` a `0.74` e `4750` a `1.05` della soglia, non allo stesso periodo alle due lunghezze)*: **il `W` usato era il ripiego `6000`.**
+  - **Quindi per `TBS` «`6 P`, `10 P`» non e' definito, e scegliere io un `P` sarebbe una decisione di Luca presa al suo posto.**
+  - ### **Come procedo, dichiarato:** **per `TBS` stampo la lettura del cuore coi `W` di `TB3`** *(`6 x 311`, `10 x 311`)* **E col ripiego `6000`**, **SENZA verdetto:** **la domanda «quale `P` per `TBS`» va a Luca.**
+- ### **LA MISURA:**
+  - **il cuore di `TB3` e di `TBS` fino a `30000`**, **i controlli ogni `1500`, `3` di fila** *(come v3)*;
+  - **con `W = 6 x 311 = 1866` e `W = 10 x 311 = 3110`**;
+  - **lo scarto delle pendenze in unita' della risoluzione, a ogni controllo.**
+- ### **LE LETTURE** *(di Luca, scritte prima)*:
+  - **(c1) con `W` lunga il cuore passa** *(il regime raggiunto)*: **la finestra era troppo corta**;
+  - **(c2) boccia ancora:** **il cuore DERIVA davvero a `30000`**, e si stampano:
+    - **la sua pendenza nell'ultima finestra, con l'errore** *(`stazionarieta.pendenza`)*;
+    - **la VITA estrapolata del cuore,** **`M_dentro / |dM_dentro / dt|`** *(una ESTRAPOLAZIONE, dichiarata)*.
+- **Un controllo positivo, perche' la misura possa dire di no:** **ST-F-C e ST-R della v3 rigirati coi due `W` nuovi sulla base** *(il seno di `1450`)*: **ST-F-C DEVE dare il regime, ST-R DEVE FALLIRE**, **se no la finestra lunga non sa distinguere.**
+- **Lo script: `csv/solitone/stazionarieta_cuore.py`** *(nuovo; importa `stazionarieta_v3.py`)*; **il referto `doc/referti_l2/stazionarieta_cuore.txt`.**
