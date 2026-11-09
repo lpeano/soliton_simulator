@@ -888,3 +888,12 @@
   - **(o2)** **il vuoto F3** *(e `CAMM-MATERIA-VUOTO`)* **lo cambia:** **(B) diverso da (A) oltre `1e-6`, e si scrive di quanto** *(e il rapporto `v_max/c_U` col numero nuovo)*.
   - **`v_b` stampato accanto, coi due zeri** *(`+- pi s / 2`)*, **senza lettura.**
 - **Lo script: `csv/solitone/u1_t5.py`** *(nuovo)*; **il referto `doc/referti_l2/u1_t5.txt`.** **Prima del codice di (B): la lettura del codice di F3 sul toro, scritta qui come annotazione.** ### **Il codice DOPO R-1 di `S162`** *(`csv/solitone/` e' sul percorso della corsa: un file nuovo si', ma lo committo a corsa partita, e la suite in un altro albero)*.
+
+### 25.1 ANNOTAZIONE A T5, PRIMA DEL CODICE: **IL BLOCCO SUL VUOTO F3 C'E' GIA'** *(e una correzione d'orario)*
+
+- ### **La premessa «NON SO» della sez. `25` (come mettere F3 su un toro e se `psi` piccola resta lineare) ha una risposta nel codice che c'e':**
+  - **`csv/solitone/carta_isotropia.py` costruisce il tick CONGELATO sul vuoto F3** *(`SD.fondo_con_fasi(inc, L, F3)`, `DV.matrice(z, F3, DV.AMP)`)*, **lineare in `psi` per costruzione** *(il vuoto congelato)*, **e ne misura le `12` bande della materia, col controllo di traslazione DI-T e di griglia DI-G** *(`5.6e-17`, `1.7e-16` nel suo referto)*;
+  - **`fasi_B` e `matrice_k`** *(il blocco a `k` qualunque dal supporto della risposta di un tick)* **danno la dispersione sul vuoto F3 a ogni `k`.**
+  - ### **Quindi T5 (B) = `v_max` della materia da QUELLA matrice** *(la velocita' di gruppo massima sulle bande della materia, a `eps 0.5`)*, **non un banco nuovo.** **Il controllo T5-N** *(F3 spento -> il vuoto nullo, (A))* **si fa con lo stesso codice e `phi = 0`.**
+  - ### ⚠ **Il «congelato» e' una scelta da dichiarare:** **il vuoto non risponde alla materia** *(il tick linearizzato col vuoto fisso)*: **e' (B) al primo ordine in `psi`, che e' quello che T5 chiede.**
+- **La correzione:** **l'allungamento di `S162` e' partito alle `21:13:37`** *(`orari_prove`)*, **non alle `21:15` come scritto nella relazione di `731526b1`.**
