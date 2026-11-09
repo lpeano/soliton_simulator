@@ -494,3 +494,24 @@
 - **Lo script: `csv/solitone/lambda_vuoto_deriva.py`** *(nuovo)*; **il referto `doc/referti_l2/lambda_vuoto_deriva.txt`.**
 
 - ### **IL RIMANDO, U1** *(Luca `2026-11-09` `20:16`)*: **l'unificazione dei due rami solo a lavori chiusi** *(`S162` e (r-b), `C50-0`, F1 con la decisione di Luca)*; **fino ad allora nessun merge, rebase, cherry-pick o porting.** **Il dettaglio sul principale:** `doc/TASK_HISTORY/2026-11-08_zero_simmetrico_nel_nucleo.md`, **sez. `10`** *(`e103636f`)*.
+
+### 23.1 L'ESITO DI T1: **(v3) -- `Lambda` DEL VUOTO F3 A `cs` SPENTO DERIVA IN MODO SISTEMATICO E UNIFORME: `+2.2e-15` PER TICK, LA PENDENZA DELLA rms `0.985`; UN FATTO DEL TICK, NON DI F1: FERMO** *(`doc/referti_l2/lambda_vuoto_deriva.txt`; il codice a `141711d3`, blob `b4610021`; `20:51`-`20:53`)*
+
+- **La scena:** **`6561` nodi** *(il toro `81 x 81` di `TBS`)*, **`mot.cs` = `0.15` ovunque, `mot.lambda_c = None`, `Lambda = 6` all'inizio.**
+- **`|Delta Lambda|` per tick:** **max `1.066e-14`** *(`12` ulp)*, **media `2.499e-15`** *(`2.8` ulp)*; **i tick in cui NESSUN nodo cambia: `273` su `1000`.**
+- ### **LA DERIVA CUMULATA `Lambda(t) - Lambda(0)`:**
+
+| tick | max | media | rms |
+|---|---|---|---|
+| `1` | `1.776e-15` *(`2` ulp)* | `+1.776e-15` | `1.776e-15` |
+| `10` | `2.487e-14` *(`28` ulp)* | `+2.400e-14` | `2.400e-14` |
+| `100` | `2.256e-13` *(`254` ulp)* | `+2.256e-13` | `2.256e-13` |
+| `1000` | `2.228e-12` *(`2508` ulp)* | `+2.228e-12` | `2.228e-12` |
+
+- ### **La pendenza in log-log della rms fra `t 10` e `1000`: `0.985`: LINEARE.** **E max = media = rms: la deriva e' UGUALE su tutti i nodi e sempre POSITIVA** *(il vuoto cresce di `~2.2e-15` per tick: `3.7e-16` relativo, `~1.7` ulp relativi per tick)*.
+- **T1-F fallisce come deve:** **lo spostamento di `1e-12` al tick `500` si vede** *(`9.4e-13`)*.
+- ### **LA LETTURA: (v3), una deriva SISTEMATICA di `Lambda` del vuoto, a `cs` SPENTO, nel nucleo del laterale.** **E' un fatto del TICK, non di F1** *(F1-V falliva con `7.8e-16` in `50` tick: `~1e-13` di deriva di `Lambda` in `50` tick, coerente)*.
+- ### **FERMO** *(la regola del mandato delle `20:13`)*. **T2 e T3 NON partono.** **Le cose per Luca:**
+  - **una deriva lineare e uniforme di `Lambda` del vuoto, `+3.7e-16` relativo per tick:** **non e' una passeggiata casuale; e' un arrotondamento con un SEGNO** *(per esempio una norma che non si conserva al bit in un pezzo del tick, sempre per eccesso)*;
+  - **da cercare: in quale pezzo del tick nasce** *(il tick pezzo per pezzo, la norma del vuoto dopo ciascuno)*: **una diagnosi, se Luca la vuole**;
+  - **e se c'e' anche sul PRINCIPALE** *(senza v2)*: **la stessa misura col nucleo del principale** *(il principale e' congelato: si misura, non si tocca)*.
