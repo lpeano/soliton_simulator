@@ -492,3 +492,5 @@
   - **(v3) `Lambda` deriva in modo SISTEMATICO** *(la pendenza `>= 0.75`: lineare)*: **un fatto del tick, non di F1: una nota separata, e FERMO.**
   - **I due sotto-casi di (v2), per scriverli:** **limitata** *(pendenza `< 0.25`)*, **passeggiata casuale** *(fra `0.25` e `0.75`)*.
 - **Lo script: `csv/solitone/lambda_vuoto_deriva.py`** *(nuovo)*; **il referto `doc/referti_l2/lambda_vuoto_deriva.txt`.**
+
+- ### **IL RIMANDO, U1** *(Luca `2026-11-09` `20:16`)*: **l'unificazione dei due rami solo a lavori chiusi** *(`S162` e (r-b), `C50-0`, F1 con la decisione di Luca)*; **fino ad allora nessun merge, rebase, cherry-pick o porting.** **Il dettaglio sul principale:** `doc/TASK_HISTORY/2026-11-08_zero_simmetrico_nel_nucleo.md`, **sez. `10`** *(`e103636f`)*.
