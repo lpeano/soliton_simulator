@@ -24772,3 +24772,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`cs' = 0` dentro il tick;**
   - **`r = 1 - e^{-omega dtau}`** *(il rilassamento esatto: `0.47` diventa `~0.37`)*.
   - **La forma che uso:** **`cs + r (L - cs)`**, **che a `L = cs` da' `cs` al bit** *(la mia lettura dei punti `4` e `6` insieme: dichiarata)*.
+
+### 2026-11-09 19:10 -- P2: `2/2`, (i1) -- L'ANISOTROPIA D6 E' `k^6` IN `Delta omega` ASSOLUTA (`6.004`) E `k^4` IN `|v_g|` (`3.9`), PER QUALUNQUE ZERO *(il task history del prototipo, sez. `23.1`; `doc/referti_l2/isotropia_p2.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **La materia:** **`Delta omega` assoluta `~ k^6.004`**, **`|v_g|` relativa `~ k^3.9`.**
+- **Il punto di P2 era giusto:** **il triangolare di prova con `omega(Gamma) = 0` ha lo stesso `Delta omega` assoluto ma la pendenza relativa `4.0` invece di `5.9`.**
+- ### **La forma da scrivere: «`k^6` in `Delta omega` assoluta».**

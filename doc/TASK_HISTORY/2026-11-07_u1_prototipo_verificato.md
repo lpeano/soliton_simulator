@@ -849,3 +849,18 @@
   - **il reticolo per vedere una convergenza LENTA:** **una legge logaritmica vuole scale su almeno `1`-`2` decadi** *(dalla lunghezza d'onda di qualche nodo a centinaia di nodi: tori fino a `L ~ 500`-`1000`)*;
   - **la durata:** **dal costo per tick del tick accoppiato, misurato in T4-B** *(un tick su `24 x 24` in frazioni di secondo)*, **scalato coi nodi;**
   - **a quale `e`:** **la regola dell'`1%` di T6a, piu' un valore piu' grande DICHIARATO, se all'`1%` l'effetto sta sotto la risoluzione** *(sapendo che T3 e' limite noto sopra `e*/2`)*.
+
+### 23.1 L'ESITO DI P2: **`2/2` -- (i1): L'ANISOTROPIA D6 E' `k^6` IN `Delta omega` ASSOLUTA (`6.004`) E `k^4` IN `|v_g|` (`3.92`, `3.90`): VALE PER QUALUNQUE ZERO; E IL RETICOLO DI PROVA «tri3» MOSTRA LA DIPENDENZA DALLO ZERO IN CHIARO** *(`doc/referti_l2/isotropia_p2.txt`; il codice a `639efe18`, blob `668b8ef7`; `19:01`-`19:05`)*
+
+| | `esc` *(`Delta omega` assoluta)* | `a_v` *(`|v_g|` relativa)* | `a_om` *(relativa: dipende dallo zero)* |
+|---|---|---|---|
+| **la materia, banda `10`** | **`6.004`** | **`3.918`** | `6.015` |
+| **la materia, banda `11`** | **`6.004`** | **`3.899`** | `6.015` |
+| il triangolare di prova *(`omega0 4`)* | `5.993` | `4.014` | `5.875` |
+| il quadrato di prova | `3.991` | `2.009` | `3.909` |
+| ### il triangolare con `omega0 3` *(`omega(Gamma) = 0`)* | ### **`5.993`** | **`4.014`** | ### **`4.005`** |
+
+- **I DEVE:** **P2-P passa** *(`5.993`)*; **P2-F fallisce come deve** *(il quadrato `3.991`)*.
+- ### **LA LETTURA: (i1).** **La frase giusta e' «l'anisotropia D6 e' `k^6` in `Delta omega` assoluta, e `k^4` in `|v_g|`», non «`k^6` nella frazione `Delta omega / omega`».**
+- ### **La prova della dipendenza dallo zero, nello stesso referto:** **il triangolare con `omega(Gamma) = 0` ha lo STESSO `Delta omega` assoluto dell'altro** *(`5.993`)*, **ma la pendenza relativa `4.005` invece di `5.875`**: **lo zero sposta il denominatore.** **Il punto di P2 era giusto; la forma assoluta regge.**
+- **Il fotone di T4** *(`omega(0) = 0`, lo zero fissato dalla gauge)*: **la pendenza relativa `4.01` vuol dire `Delta omega ~ k^5`** *(`omega ~ k`)*, **coerente con `k^6` in `omega^2`** *(la derivazione della sez. `15`)*.
