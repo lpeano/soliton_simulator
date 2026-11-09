@@ -25,3 +25,7 @@ _PO = os.path.join(RADICE, "primo_ordine")
 for _p in (CSV, _PO, os.path.join(_PO, "leggi")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
+
+# ### P3 (Luca 2026-11-09 13:16; il task history del prototipo, sez. 20): sul ramo primo-ordine congelato, cs ACCESO e' vietato (energia_pesata.applica alza)
+from solitone import ramo as _ramo  # noqa: E402
+_ramo.vieta_cs()
