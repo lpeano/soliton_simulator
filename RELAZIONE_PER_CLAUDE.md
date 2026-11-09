@@ -24624,3 +24624,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **la stazionarieta' v3** *(pochi minuti: in corsa)*;
   2. **T4-B (t-b), dopo la sua suite**;
   3. **(r-D5) sul laterale** *(`~1`-`2` ore; il codice e' a `1fcc9e9b`)*.
+
+### 2026-11-09 11:45 -- LA STAZIONARIETA' COL PERIODO VERO: `3/3`, IL CRITERIO PROVATO ALLA SUA RISOLUZIONE; `TB3` E `TBS` NON STAZIONARI A `30000`, BOCCIA IL CUORE *(il task history degli allungamenti, sez. `7.16`; `doc/referti_l2/stazionarieta_v3.txt`)* [[PIANO-2D-3D]]
+
+- **La risoluzione della pendenza e' `1.07e-3`** *(sulla base AR(1) piu' il seno di `1450`, `W 4350`)*.
+- **L'accelerazione a `5` volte la risoluzione NON risulta stazionaria** *(come deve)*; **quella a `0.5` volte si', ed e' dichiarata «non risolvibile».**
+- ### **La decisione delle `19:21` e' chiusa.**
+- **`W = 3 P` per grandezza, col metodo di M3.**
+- ### **Ne' `TB3` ne' `TBS` raggiungono il regime entro `t 30000`:** **boccia soprattutto il CUORE.** **L'alone, col suo `W`, ora passa quasi sempre.**

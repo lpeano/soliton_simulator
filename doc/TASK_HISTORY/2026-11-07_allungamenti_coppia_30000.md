@@ -292,3 +292,27 @@
   - **(st2) ST-R passa** *(un'accelerazione `5` volte sopra la risoluzione non si vede)*: **il criterio ha un difetto oltre la risoluzione: FERMO**;
   - **(st3) ST-F-C fallisce:** **il criterio e' troppo stretto anche per un caso stazionario costruito: FERMO.**
 - **Lo script: `csv/solitone/stazionarieta_v3.py`** *(nuovo; importa `stazionarieta.py` e `periodo_tb3.py`, che non si toccano)*; **il referto `doc/referti_l2/stazionarieta_v3.txt`.** **Una prova corta** *(pochi minuti: solo i jsonl)*.
+
+### 7.16 L'ESITO DELLA STAZIONARIETA' COL PERIODO VERO: **`3/3` -- (st1): IL CRITERIO E' PROVATO ALLA SUA RISOLUZIONE; `TB3` E `TBS` NON STAZIONARI A `30000`, E CHI BOCCIA ORA E' SOPRATTUTTO IL CUORE** *(`doc/referti_l2/stazionarieta_v3.txt`; il codice a `5577df0b`, blob `c2b8f303`; finito alle `11:33`)*
+
+- ### **I DEVE:**
+  - **la risoluzione della pendenza sulla base** *(`W 4350`)*: **`1.0657e-03`**;
+  - **ST-F-C** *(la deriva costante)*: **il regime da `t 13500`**; **ST-F-P** *(la pendenza)*: **`4.93e-4 +- 2.2e-5` contro `5e-4`**;
+  - **ST-R, l'accelerazione a `5` volte la risoluzione:** **«nel regime» MAI** *(il cambio misurato `4.24` volte la risoluzione, la mediana)*: **fallisce come deve**;
+  - **ST-R-N, a `0.5`:** **«nel regime» da `t 13500`** *(il cambio `0.57`: NON RISOLVIBILE, dichiarato)*.
+  - ### **La decisione delle `19:21` si chiude:** **il DEVE FALLIRE ora sta SOPRA la risoluzione, e il criterio lo vede.**
+- **I periodi, col metodo di M3, e i `W = 3 P`:**
+
+| grandezza | `TB3` | `TBS` |
+|---|---|---|
+| `E + E_ass` | nessuno (`W 6000`) | `514` |
+| l'alone | `549` | `549` |
+| il cuore | `311` | nessuno (`W 6000`) |
+| l'emissione | `311` | `323` |
+| lo spostamento | `1492` | `754` |
+| `w` | `533` | `533` |
+
+- ### **LA LETTURA: «il regime NON raggiunto entro `t 30000`», in tutte e due.**
+  - **In `TBS` boccia SOLO il CUORE, a ogni controllo** *(da `2.3` a `12.3` volte la risoluzione)*, **con l'emissione a volte.**
+  - **In `TB3` boccia il cuore quasi sempre** *(da `2.6` a `9.7`)*, **e `E + E_ass`, lo spostamento e l'emissione a tratti.**
+  - ### **Da notare, senza concludere:** **col `W` per grandezza l'ALONE passa quasi ovunque** *(`TBS` boccia una sola volta, a `28500`)*. **Il «non stazionario» delle `18:08` era detto soprattutto dall'alone, con un `W` unico** *(`3 x 1500` o `3 x 692`)*: **adesso viene dal cuore, che ha un periodo corto** *(`311`)* **o nessuno.**

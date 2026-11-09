@@ -1,0 +1,57 @@
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] periodo_tb3.py  sha1-BYTE fcb6b95f  committato e pulito
+[TIMBRO] stazionarieta_v3.py  sha1-BYTE c2b8f303  committato e pulito
+==================================================================================================================================
+LA STAZIONARIETA' COL PERIODO VERO (sez. 7.15): W = 3 P per grandezza (M3 sugli incrementi, L (7000.0, 9500.0); ripiego 6000); controlli ogni 1500, 3 di fila, FATTORE_DIFF 2; la base AR(1) phi 0.9 + 2 sin(2 pi t / 1450)
+==================================================================================================================================
+  ST-R-0 (stampa) la risoluzione della pendenza sulla base, W 4350: FATTORE_DIFF x sig, la mediana su 13 controlli = 1.0657e-03
+  DEVE PASSARE: ST-F-C la deriva COSTANTE 0.0005 piu' la base: il regime raggiunto                                       PASSA   da t 13500.0
+  DEVE PASSARE: ST-F-P la pendenza misurata ritrova la deriva entro 2 volte il suo errore                                PASSA   4.9325e-04 +- 2.2e-05
+  DEVE FALLIRE: ST-R l'accelerazione a 5 volte la risoluzione risulta nel regime                                         ### FALLISCE   c 6.124e-07; il cambio misurato / la risoluzione: mediana 4.24; nel regime da t None
+  ST-R-N (stampa, NON RISOLVIBILE) l'accelerazione a 0.5 volte la risoluzione: c 6.124e-08; il cambio misurato / la risoluzione: mediana 0.57; nel regime da t 13500.0
+----------------------------------------------------------------------------------------------------------------------------------
+### TB3 fino a t 30000: i periodi (M3 sugli incrementi) e i W
+    E + E_ass: P nessuno -> W 6000 (L 7000 il piu' forte 1167 a 0.84; L 9500 il piu' forte 1056 a 0.97)
+    alone: P 549 -> W 1646 (L 7000 il piu' forte 538 a 1.57; L 9500 il piu' forte 559 a 1.77)
+    cuore: P 311 -> W 932 (L 7000 il piu' forte 304 a 2.17; L 9500 il piu' forte 317 a 1.34)
+    emissione: P 311 -> W 932 (L 7000 il piu' forte 304 a 2.26; L 9500 il piu' forte 317 a 2.03)
+    spostamento: P 1492 -> W 4475 (L 7000 il piu' forte 1400 a 2.32; L 9500 il piu' forte 1583 a 2.33)
+    w: P 533 -> W 1599 (L 7000 il piu' forte 538 a 3.02; L 9500 il piu' forte 528 a 2.99)
+    T   13500  no di fila 0  E + E_ass NO(2.0; ris 3.1e+00)  alone ok(0.9; ris 2.3e-09)  cuore NO(9.7; ris 1.4e-03)  emissione ok(0.8; ris 1.1e-05)  spostamento ok(0.3; ris 4.2e-05)  w ok(0.8; ris 2.0e-05)
+    T   15000  no di fila 0  E + E_ass NO(1.4; ris 2.9e+00)  alone ok(0.5; ris 3.9e-09)  cuore ok(0.5; ris 1.5e-03)  emissione ok(0.0; ris 1.5e-05)  spostamento ok(0.8; ris 3.2e-05)  w ok(0.3; ris 1.9e-05)
+    T   16500  no di fila 0  E + E_ass NO(1.0; ris 2.7e+00)  alone ok(0.5; ris 5.6e-09)  cuore NO(3.2; ris 9.4e-04)  emissione ok(0.3; ris 1.2e-05)  spostamento ok(0.3; ris 3.2e-05)  w ok(0.4; ris 2.2e-05)
+    T   18000  no di fila 0  E + E_ass ok(0.9; ris 2.6e+00)  alone ok(0.8; ris 5.7e-09)  cuore NO(3.8; ris 1.5e-03)  emissione NO(2.8; ris 1.1e-05)  spostamento NO(2.1; ris 3.1e-05)  w NO(1.1; ris 2.3e-05)
+    T   19500  no di fila 0  E + E_ass ok(1.0; ris 2.4e+00)  alone ok(0.3; ris 1.2e-08)  cuore NO(2.6; ris 1.0e-03)  emissione ok(0.9; ris 8.4e-06)  spostamento NO(2.9; ris 3.2e-05)  w ok(0.8; ris 2.7e-05)
+    T   21000  no di fila 0  E + E_ass NO(1.2; ris 2.3e+00)  alone ok(0.1; ris 1.7e-08)  cuore NO(6.7; ris 1.2e-03)  emissione ok(0.5; ris 2.5e-05)  spostamento ok(0.9; ris 3.8e-05)  w ok(0.5; ris 3.0e-05)
+    T   22500  no di fila 0  E + E_ass NO(1.4; ris 2.2e+00)  alone ok(0.1; ris 1.7e-08)  cuore NO(3.6; ris 1.9e-03)  emissione NO(3.5; ris 9.9e-06)  spostamento NO(2.2; ris 3.9e-05)  w ok(0.8; ris 3.1e-05)
+    T   24000  no di fila 0  E + E_ass NO(1.5; ris 2.1e+00)  alone ok(0.4; ris 1.7e-08)  cuore NO(3.6; ris 1.3e-03)  emissione NO(1.4; ris 1.2e-05)  spostamento NO(2.9; ris 4.2e-05)  w ok(0.2; ris 3.2e-05)
+    T   25500  no di fila 0  E + E_ass NO(1.5; ris 2.1e+00)  alone ok(0.4; ris 1.1e-08)  cuore NO(6.4; ris 6.5e-04)  emissione NO(1.4; ris 9.3e-06)  spostamento ok(1.0; ris 4.8e-05)  w ok(0.0; ris 3.6e-05)
+    T   27000  no di fila 0  E + E_ass NO(1.3; ris 2.0e+00)  alone ok(0.4; ris 1.4e-08)  cuore NO(5.8; ris 1.0e-03)  emissione ok(0.6; ris 1.0e-05)  spostamento ok(0.8; ris 5.0e-05)  w ok(0.4; ris 3.5e-05)
+    T   28500  no di fila 0  E + E_ass ok(1.0; ris 2.0e+00)  alone ok(0.7; ris 1.5e-08)  cuore NO(9.0; ris 5.0e-04)  emissione ok(0.4; ris 1.0e-05)  spostamento ok(1.0; ris 5.2e-05)  w ok(0.0; ris 3.5e-05)
+    T   30000  no di fila 0  E + E_ass ok(0.8; ris 1.9e+00)  alone ok(0.3; ris 1.5e-08)  cuore NO(1.3; ris 1.4e-03)  emissione ok(0.8; ris 1.3e-05)  spostamento ok(0.0; ris 5.2e-05)  w ok(0.2; ris 3.6e-05)
+    LA LETTURA TB3: il regime NON raggiunto entro t 30000 (la finestra osservata)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS fino a t 30000: i periodi (M3 sugli incrementi) e i W
+    E + E_ass: P 514 -> W 1542 (L 7000 il piu' forte 500 a 2.05; L 9500 il piu' forte 528 a 2.20)
+    alone: P 549 -> W 1646 (L 7000 il piu' forte 538 a 2.75; L 9500 il piu' forte 559 a 2.68)
+    cuore: P nessuno -> W 6000 (L 7000 il piu' forte 2334 a 0.74; L 9500 il piu' forte 4750 a 1.05)
+    emissione: P 323 -> W 969 (L 7000 il piu' forte 318 a 1.01; L 9500 il piu' forte 328 a 1.04)
+    spostamento: P 754 -> W 2263 (L 7000 il piu' forte 778 a 3.18; L 9500 il piu' forte 731 a 5.07)
+    w: P 533 -> W 1599 (L 7000 il piu' forte 538 a 3.76; L 9500 il piu' forte 528 a 4.20)
+    T   13500  no di fila 0  E + E_ass ok(0.2; ris 4.8e+00)  alone ok(0.1; ris 9.4e-09)  cuore NO(3.3; ris 4.3e-02)  emissione NO(1.4; ris 1.4e-05)  spostamento ok(0.1; ris 9.2e-05)  w ok(0.3; ris 1.2e-04)
+    T   15000  no di fila 0  E + E_ass ok(0.1; ris 4.2e+00)  alone ok(0.6; ris 1.2e-08)  cuore NO(4.6; ris 1.8e-02)  emissione NO(2.3; ris 9.4e-06)  spostamento ok(0.5; ris 9.4e-05)  w ok(0.1; ris 1.2e-04)
+    T   16500  no di fila 0  E + E_ass ok(0.2; ris 4.2e+00)  alone ok(0.9; ris 1.8e-08)  cuore NO(5.7; ris 9.9e-03)  emissione NO(1.8; ris 1.5e-05)  spostamento ok(0.1; ris 1.4e-04)  w ok(0.1; ris 1.2e-04)
+    T   18000  no di fila 0  E + E_ass ok(0.1; ris 4.6e+00)  alone ok(0.3; ris 1.9e-08)  cuore NO(5.9; ris 6.8e-03)  emissione ok(0.1; ris 1.0e-05)  spostamento ok(0.5; ris 1.6e-04)  w ok(0.0; ris 1.2e-04)
+    T   19500  no di fila 0  E + E_ass ok(0.1; ris 4.8e+00)  alone ok(0.2; ris 1.9e-08)  cuore NO(4.8; ris 5.7e-03)  emissione NO(1.0; ris 1.1e-05)  spostamento ok(0.5; ris 1.6e-04)  w ok(0.1; ris 1.2e-04)
+    T   21000  no di fila 0  E + E_ass ok(0.0; ris 4.7e+00)  alone ok(0.2; ris 1.8e-08)  cuore NO(3.4; ris 5.5e-03)  emissione ok(0.7; ris 7.4e-06)  spostamento ok(0.3; ris 1.4e-04)  w ok(0.1; ris 1.1e-04)
+    T   22500  no di fila 0  E + E_ass ok(0.1; ris 4.5e+00)  alone ok(0.4; ris 1.9e-08)  cuore NO(5.1; ris 2.9e-03)  emissione ok(0.3; ris 6.9e-06)  spostamento ok(0.3; ris 9.0e-05)  w ok(0.1; ris 1.1e-04)
+    T   24000  no di fila 0  E + E_ass ok(0.2; ris 4.2e+00)  alone ok(0.4; ris 2.3e-08)  cuore NO(12.3; ris 9.9e-04)  emissione ok(0.1; ris 7.4e-06)  spostamento ok(0.1; ris 9.5e-05)  w ok(0.4; ris 1.1e-04)
+    T   25500  no di fila 0  E + E_ass ok(0.2; ris 3.9e+00)  alone ok(0.5; ris 3.1e-08)  cuore NO(5.2; ris 2.0e-03)  emissione ok(1.0; ris 8.8e-06)  spostamento ok(0.6; ris 8.7e-05)  w ok(0.3; ris 1.0e-04)
+    T   27000  no di fila 0  E + E_ass ok(0.1; ris 3.5e+00)  alone ok(0.6; ris 3.6e-08)  cuore NO(2.3; ris 2.9e-03)  emissione NO(1.1; ris 8.1e-06)  spostamento ok(0.0; ris 9.0e-05)  w ok(0.2; ris 1.0e-04)
+    T   28500  no di fila 0  E + E_ass ok(0.1; ris 3.2e+00)  alone NO(1.2; ris 3.5e-08)  cuore NO(3.3; ris 1.1e-03)  emissione NO(2.0; ris 5.8e-06)  spostamento ok(0.6; ris 7.7e-05)  w ok(0.1; ris 1.0e-04)
+    T   30000  no di fila 0  E + E_ass ok(0.0; ris 3.3e+00)  alone ok(0.0; ris 4.0e-08)  cuore NO(4.6; ris 9.6e-04)  emissione ok(0.0; ris 6.3e-06)  spostamento ok(0.2; ris 7.0e-05)  w ok(0.1; ris 1.1e-04)
+    LA LETTURA TBS: il regime NON raggiunto entro t 30000 (la finestra osservata)
+==================================================================================================================================
+ESITO: 3/3 controlli come devono; fallite: 0 []
+exit 0 11:33:45
