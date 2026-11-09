@@ -1,0 +1,10 @@
+[TIMBRO] fusione_v2.py  sha1-BYTE 2cd7c913  committato e pulito
+==================================================================================================================================
+IL LATERALE HA v2? (Luca 01:31, la regola 3): atteso senza; HEAD 61c173fb; 17 file di v2 (dal revert de46816d)
+==================================================================================================================================
+  F-B: uguali a 16d2ebdb 0, diversi 17 ['csv/_simmetrie_reticolo.py', 'csv/_triangoli_bassa_energia.py', 'csv/_triangoli_forza.py', 'csv/_zero_simmetrico.py', 'csv/solitone/zero_nel_nucleo.py', 'primo_ordine/_collauda_motore.py', 'primo_ordine/_collauda_r60.py', 'primo_ordine/_mappa.yaml', 'primo_ordine/_misura_hw.py', 'primo_ordine/_misura_mb2.py', 'primo_ordine/energia_pesata.py', 'primo_ordine/flussi_parziali.py', 'primo_ordine/leggi/leggi.yaml', 'primo_ordine/termini/camm_grover.py', 'primo_ordine/termini/camm_grover_vuoto.py', 'primo_ordine/termini/camm_spostamento.py', 'primo_ordine/termini/camm_spostamento_vuoto.py']
+  DEVE FALLIRE: F-B i file di v2 nel lavoro = quelli di 16d2ebdb (il principale con v2), ogni byte                   ### FALLISCE   0 su 17
+  F-K: e_K della scena di C35-pi -4.7122750003546425 (con v2 -1.5706823467648499, senza -4.7122750003546425)
+  DEVE FALLIRE: F-K e_K = quello CON v2                                                                              ### FALLISCE   -4.7122750003546425
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []
