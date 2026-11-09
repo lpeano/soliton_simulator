@@ -24845,3 +24845,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il nucleo del disco: `-2.3128e-15` per tick; il laterale `+2.2280e-15`** *(il rapporto `-1.038`)*. **Uniforme, lineare.** **Senza interpretare.**
 - ### ⚠ **Mio errore:** **la riga SUITE di `77c07d04` ha orari scritti da me** *(«`23:59:34`-`00:13:42`»)*; **quelli veri `23:43:00`-`23:56:53`, `67` su `67`.**
 - **Ora D2 sul laterale.**
+
+### 2026-11-10 00:50 -- IL RIMANDO AL LATERALE (REGOLA 2): D2 -- LA DERIVA DI `Lambda` NASCE NEI QUATTRO MEZZI SPOSTAMENTI DEL VUOTO: `alpha + beta` IN VIRGOLA MOBILE NON E' `1`; FERMO, DUE PROPOSTE *(`36f364e8` su `zero-nel-nucleo`, sez. `24.5`-`24.7`; il referto `doc/referti_l2/lambda_deriva_pezzi.txt` LI')* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **`Lambda` ESATTO** *(in `Fraction`)* **su `9` nodi dopo ognuno dei `14` pezzi e dei sotto-pezzi del vuoto:**
+  - **i pezzi di `psi`, `materia_vuoto` e `fase_vuoto` danno ZERO ESATTO;**
+  - **i quattro mezzi spostamenti** *(`7a`, `7b`, `8a`, `8b`)* **danno `~+1.04e-16` relativo per tick ciascuno;**
+  - **i mezzi Grover e le fasi `conj(z)` del v2 danno contributi piccoli e negativi.**
+- **D2.3:** **il mezzo spostamento ha `|alpha + beta|^2 - 1 = +1.110e-16`** *(espansivo)*; **la fase del v2 `-5.1e-18`; il Grover `< 0`.**
+- **D2.4 fallisce come deve; D2.5 chiude** *(`+2.2276e-15` contro T1 `+2.2280e-15`)*.
+- ### **La lettura per etichetta, come scritta: (p2)** *(quattro etichette sul `28%`)*; **per tipo, che e' informazione, le quattro sono lo stesso coefficiente: la forma di (p1).**
+- ### **Non e' il v2:** **il mezzo spostamento c'e' anche sul principale.** **L'ipotesi** *(dal codice, non misurata)*: **`1 + z_re` si arrotonda, `1 - z_re` no; il segno dipende da `z`, e sul principale `z` e' un altro** *(D1-bis: il segno opposto)*.
+- ### **FERMO.** **Le proposte a Luca:**
+  1. **D2-bis: la stessa D2.3 sul `z` del principale;**
+  2. **la forma `I - beta (I - S)`** *(il valore proprio `1` esatto sulla parte simmetrica; il prezzo: `M-B1` al bit cade)*.
+- **La scelta e' di Luca: tocca il nucleo condiviso dei due rami.**
