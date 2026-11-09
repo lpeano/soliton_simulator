@@ -24733,3 +24733,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **fotone e ottica la vedono solo attraverso lo sfondo, all'ordine `e^3`** *(`< 2e-10`)*.
 - ### **T4-B e' chiuso.**
 - ### **T5:** **il suo progetto usava `pi/4` e `0.598`, ora riletti da P1** *(`v_b` dipende dallo zero; il «`c`» e' `v_max`)*: **lo riscrivo su `v_max` prima del codice.**
+
+### 2026-11-09 16:25 -- LE DECISIONI DI LUCA DELLE `16:18`: IL BERSAGLIO E' `v_max/s`; LE DUE STRADE DA RIFORMULARE; E1 PRIMA; LA CURA DI `cs` COMINCIA DA F1 *(il task history del prototipo, sez. `21`; il laterale, sez. `17`)* [[U1-PROTOTIPO-TRIANGOLI]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Il «`c`» della materia e' `v_max/s`** *(`0.5850` nel limite, `0.5881` alla corsa)*; **la luce va a `1`.**
+- **La premessa di B** *(«battito `pi` x geometria `1/4`»)* **cade;** **le letture del guardiano su `pi` e `1/4` sono ritirate.**
+- ### **E1:** **`v_max/s` per `theta = c s`, `c` in {`2`, `pi`, `4`, `8.48`}, a `eps 0.5`.** **Le letture (e-p)/(e-n), scritte prima.**
+- ### **La cura di `cs`:** **F1 per prima, sul laterale; il progetto dettagliato prima del codice.**
+- **L'ordine delle prove corte:** **E1, poi F1** *(il progetto, il codice, la prova)*; **poi P2, P4, T5** *(riscritto su `v_max`)*; **L1, L2, L4; P3 a `C35-pi` chiusa.**

@@ -742,3 +742,28 @@
 - ### **T4-B E' CHIUSO** *(Luca `12:40`)*:
   - **campo e materia si vedono al primo ordine nei versi (→) e (← ampiezza), su fotone e ottica, a ogni `k`** *(T4B-L', T4B-P', `f243996b`)*;
   - **la fase e' dichiarata qui.**
+
+### 21. LE DECISIONI DI LUCA DELLE `16:18`, DOPO P1; **E1, LA MISURA DI `v_max/s` IN FUNZIONE DI `theta` -- LE LETTURE PRIMA DEL CODICE**
+
+- ### **REGISTRATO** *(Luca)*:
+  - **`pi/4` NON e' un numero della materia;**
+  - **il «`c`» della materia e' `v_max/s`:** **`0.5850` nel limite** *(`eps 0.5`)*, **`0.5881` al passo delle corse**;
+  - **la luce del prototipo va a `1`**; **i due limiti restano diversi, e il bersaglio e' `v_max/s`.**
+- ### **LE DUE STRADE (S1-S5), da riformulare PRIMA di riprenderle:**
+  - **A: `kappa ~ v_max/s`** *(da dire quale dei due valori e perche')*;
+  - **B: la premessa «il limite = il battito `pi` x la geometria `1/4`» CADE con `pi/4`.** **Prima E1.**
+  - **(d3) e (d5) riderivate sul numero giusto.**
+  - ### **Le letture del guardiano «`pi` per la rotazione, `1/4` per la geometria» sono RITIRATE.**
+- ### **E1, LA PREMESSA DAL CODICE** *(LETTA in `_u1_terzo.variante`)*:
+  - **il tick di oggi ha `theta = pi s`** *(`flussi_parziali.espi(s)`)*;
+  - **la variante sostituisce `espi(s)` con `espi(K s)`, cioe' `theta = pi K s`, e svuota le cache dei blocchi entrando e uscendo.**
+  - ### **Quindi `theta = c s` e' `K = c / pi`:** **`c` `2`, `pi`, `4`, `8.48` -> `K` `0.6366`, `1`, `1.2732`, `2.6993`.**
+- ### **LA MISURA:** **`v_max/s` a `eps 0.5`** *(la moneta della tabella)*, **per i quattro `c`**, **a `s` `0.01`, `0.005`, `0.001`** *(il limite col fit di grado `2`, come P1)* **e a `0.15`** *(il passo delle corse)*.
+- ### **I DEVE:**
+  - **(E1-R)** **a `c = pi`, `s 0.15`: `v_max/s = 0.588137` di P1 entro `1e-6`** *(la variante a `K = 1` e' il tick di oggi)*;
+  - **(E1-F) DEVE FALLIRE:** **lo stesso contro il valore a `eps 0`** *(`0.601963`: la moneta conta)*.
+- ### **LE LETTURE** *(di Luca, scritte prima; il criterio numerico e' mio, dichiarato)*:
+  - **(e-p) `v_max/s` PROPORZIONALE a `c`:** **il rapporto `(v_max/s) / c` uguale per i quattro `c` entro `2%`** *(nel limite)*: **B ha ancora senso, con un battito necessario diverso da `4`;**
+  - **(e-n) no:** **B va ripensata.**
+  - **Stampo anche la legge che i numeri suggeriscono** *(una potenza `c^a`, o una saturazione)*, **senza verdetto.**
+- **Lo script: `csv/solitone/u1_e1.py`** *(nuovo)*; **il referto `doc/referti_l2/u1_e1.txt`.**
