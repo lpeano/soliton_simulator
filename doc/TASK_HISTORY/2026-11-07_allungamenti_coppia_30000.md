@@ -254,10 +254,41 @@
 - ### **IL RESTO** *(stampato, la stessa regola)*: **`w` a `~533` in `TB3` E in `TBS`** *(`3.0`-`4.2` volte la soglia)*, **l'alone a `~549` in tutti e due**, **l'emissione e il cuore a `~311`-`323`**; **`E + E_ass` di `TBS` a `~514`.** **Un'oscillazione comune a `~530`-`550` in `w` e nell'alone, in tutte e due le corse.**
 - ### **IL PROSSIMO PASSO** *(Luca `19:21` e `01:31`)*: **la risoluzione del criterio e il DEVE FALLIRE sopra la risoluzione, con `W = 3 P` e `P = 1450 +- 72` per `TB3`** *(e il `P` di `TBS`, `763 +- 20`)*. **Non (q-c): `PE-P` e' passato.**
 
-### 7.11 LA DECISIONE DI LUCA DEL `2026-11-09` `08:56` SU M3: **UN FATTO, E LA STAZIONARIETA' SI CHIUDE ORA**
+### 7.14 *(numerata `7.11` per errore in `cb62dd92`: il `7.11` c'era gia')* LA DECISIONE DI LUCA DEL `2026-11-09` `08:56` SU M3: **UN FATTO, E LA STAZIONARIETA' SI CHIUDE ORA**
 
 - ### **REGISTRATO COME FATTO** *(`0bebbe94`)*: **lo spostamento di `TB3` oscilla a `1450 +- 72`, di `TBS` a `763 +- 20`; `w` e l'alone a `~530`-`550` in tutti e due.** **Il fattore `~2` fra `TB3` e `TBS`: scritto senza concludere.**
 - ### **IL PROSSIMO:**
   - **il periodo vero si usa per le finestre di stazionarieta': `W = 3 P` sulla GRANDEZZA CHE SI GUARDA** *(non un `W` unico)*;
   - **la risoluzione del criterio col DEVE FALLIRE sopra la risoluzione** *(`19:21`)* **si chiude ora.**
   - **Il progetto in una sezione sua, prima del codice** *(l'ordine di esecuzione nella relazione: dopo T4-B e (r-D5))*.
+
+### 7.15 LA STAZIONARIETA' CHIUSA COL PERIODO VERO E LA RISOLUZIONE DEL CRITERIO *(Luca `2026-11-09` `08:56`; la decisione delle `19:21`)*: **LE PREMESSE, IL PROGETTO, LE LETTURE -- PRIMA DEL CODICE**
+
+- ### **LE PREMESSE DAL CODICE** *(LETTE in `csv/solitone/stazionarieta.py` e `periodo_tb3.py`)*:
+  - **`lettura(t, serie, W, t_controlli)`:** **un `W` UNICO per tutte le grandezze** *(oggi `3 P` dello spostamento, `P` dal periodogramma intero fra `1000` e `10000`)*.
+  - **Ai controlli ogni `1500`, due finestre `[T - 2W, T - W]` e `[T - W, T]`:**
+    - **le CONSERVATE** *(`E + E_ass`)* **con le medie**;
+    - **le altre con le PENDENZE**;
+    - **«diverse» se lo scarto e' oltre `FATTORE_DIFF = 2` volte `sig = sqrt(e1^2 + e2^2)`**;
+    - **«nel regime» con `3` controlli di fila.**
+  - ### **La RISOLUZIONE e' quindi `2 sig`, in unita' della grandezza** *(della media o della pendenza)*: **il cambio piu' piccolo che il criterio puo' vedere.**
+  - **Il periodo vero:** **M3 (q-a), cioe' `periodo_tb3.picchi` sugli incrementi, Welch, la soglia AR(1) al `99%` con Bonferroni, e `stesso_periodo` alle due lunghezze `7000` e `9500`** *(`PE-P` passato: il metodo ha potenza)*.
+  - ### ⚠ **Il periodo di oggi in `stazionarieta.py` NON e' quello vero:** **e' il periodogramma intero, quello che dava il `1500` della cucitura** *(caduta)*.
+- ### **LE SCELTE, dichiarate:**
+  - **`W = 3 P` PER GRANDEZZA** *(Luca: «sulla grandezza che si guarda»)*, **con `P` dal metodo di M3 su QUELLA grandezza;**
+  - **se il metodo non trova un periodo** *(nessun picco allo stesso periodo alle due lunghezze)*, **`W = W_RIPIEGO = 6000`** *(la regola che c'era, sez. `4.2`)*;
+  - **i controlli dove TUTTE le grandezze hanno le loro due finestre** *(`T - 2 W_max >= 1000`)*.
+- ### **I DEVE** *(sui casi costruiti, la base: un AR(1) `phi 0.9` piu' `2 sin(2 pi t / 1450)`, il periodo di `TB3`, `W = 3 x 1450`)*:
+  - **(ST-R-0) STAMPA:** **la risoluzione `2 sig` della pendenza sulla base**, **la mediana sui controlli** *(il numero da cui sono COSTRUITE le due accelerazioni sotto: non e' scelto)*;
+  - **(ST-F-C) DEVE:** **la deriva costante `5e-4` piu' la base: il regime raggiunto**, **e (ST-F-P) la pendenza ritrovata entro `2` errori** *(come la versione `2`)*;
+  - **(ST-R) DEVE FALLIRE:** **un'accelerazione con un cambio di pendenza fra le due finestre di `5` volte la risoluzione risulta «nel regime»** *(`x = base + c t^2`, il cambio `2 c W = 5 x 2 sig`)*;
+  - **(ST-R-N) STAMPA, «non risolvibile»:** **la stessa a `0.5` volte la risoluzione** *(il limite dello strumento, dichiarato: puo' dare «regime» senza che sia un errore)*.
+- ### **LA MISURA:** **`TB3` e `TBS` fino a `30000`**:
+  - **il periodo di OGNI grandezza col metodo di M3**, **e il suo `W`**;
+  - **la lettura ai controlli**, **con la risoluzione di ogni grandezza stampata accanto allo scarto**;
+  - **«stazionario da `t X` entro la finestra osservata», o «non raggiunto».**
+- ### **LE LETTURE, scritte prima:**
+  - **(st1) ST-F-C passa e ST-R fallisce come deve:** **il criterio e' PROVATO alla sua risoluzione**, **e il verdetto su `TB3` e `TBS` si scrive coi `W` per grandezza** *(atteso, dai fatti delle `18:08`: «non stazionario», l'alone che cresce)*;
+  - **(st2) ST-R passa** *(un'accelerazione `5` volte sopra la risoluzione non si vede)*: **il criterio ha un difetto oltre la risoluzione: FERMO**;
+  - **(st3) ST-F-C fallisce:** **il criterio e' troppo stretto anche per un caso stazionario costruito: FERMO.**
+- **Lo script: `csv/solitone/stazionarieta_v3.py`** *(nuovo; importa `stazionarieta.py` e `periodo_tb3.py`, che non si toccano)*; **il referto `doc/referti_l2/stazionarieta_v3.txt`.** **Una prova corta** *(pochi minuti: solo i jsonl)*.
