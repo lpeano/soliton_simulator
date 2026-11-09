@@ -132,3 +132,39 @@
 - ### **IL FATTO, registrato:** **a `Lambda_c 34` il punto fisso di `cs` col solitone NON si trova con nessun metodo su nessuna scena** *(`|Jv|/|v|` `11.5`-`15.2`; l'autovalore dominante negativo a `t 0`: un'oscillazione divergente, localizzata nel cuore)*. **Converge solo a `Lambda_c` `136`-`272`, abbassando `cs` anche nel vuoto: con `s` fisica cambierebbe la fisica dappertutto.** ### **Nessun rimedio si applica prima di (r-D5).**
 - ### **(r-D5) SI', qui, senza toccare il nucleo:** **`F` resa definita** *(il punto medio di `Omega` risolto con un metodo robusto dentro la mappa di prova, oppure `F` ristretta a `s > 0`, dichiarato quale)*, **e D3 rifatto a `Lambda_c 34`, per distinguere (pf1), (pf2), (pf4).** **Le letture scritte prima** *(la sezione dopo, prima del codice)*.
 - ### **PER DOPO, SOLO COME IDEA** *(Luca; nessun lavoro ora)*: **se il punto fisso non esiste, `cs` come MEMORIA** *(`A15`: dinamica, locale, col tempo di memoria ricavato dalla dinamica locale)* **che RILASSA verso `cs(Lambda)` invece di essere risolto a ogni tick.** **Da valutare dopo (r-D5), con le sue conseguenze sul palindromo e sulla reversibilita'** *(una legge con memoria non e' piu' un punto fisso del tick: il palindromo va ripensato, e il rovescio del tempo deve portare la memoria con se')*.
+
+## 12. (r-D5): **`F` RESA DEFINITA, D3 RIFATTO A `34` -- LE PREMESSE, IL PROGETTO, LE LETTURE, PRIMA DEL CODICE** *(Luca `2026-11-09` `08:56`)*
+
+- ### **LE PREMESSE DAL CODICE** *(LETTE)*:
+  - **`F` e' `Mappa.__call__` di `carta_punto_fisso.py`:** **una copia dello stato, `mot.cs = x`, `TK.percorri_tick` col mezzo palindromo, poi `FP.cs` della densita' del vuoto.**
+  - **Dentro il tick, `CAMM-FASE-VUOTO` e' `motore._fase_vuoto`, che chiama `energia_pesata.applica`** *(per nome del modulo: `import energia_pesata as EP; EP.applica(...)`)*.
+  - **`applica` risolve il punto medio di `Omega` con l'iterazione semplice:** **`GIRI_MAX_OMEGA = 200` giri, il criterio `entro_tolleranza`** *(`EPS_OMEGA` per il massimo del tetto)*, **i controlli del tetto all'inizio e alla fine; se non converge ALZA.**
+  - **E' questo che uccide Anderson su tutte le scene** *(gli scarti `9e2`-`1.2e7`)*.
+  - **L'altra causa: `flussi_parziali` alza con un `s <= 0`** *(«un tempo proprio nullo o negativo»)* *(NK alle scene a `100000` e `200000`)*.
+  - **D4 ha gia' fatto una continuazione** *(NK partito dal punto del `k` prima)*, **ma a passi di un fattore `2`: perso fra `272` e `136`.**
+- ### **LA SCELTA DICHIARATA** *(Luca: «dichiarato quale»)*: **il punto medio di `Omega` risolto con un metodo ROBUSTO dentro la mappa di prova.**
+  - **Prima l'iterazione semplice del nucleo, IDENTICA** *(le stesse righe: dove converge, `F` e' quella del nucleo AL BIT)*.
+  - **Se non converge in `GIRI_MAX_OMEGA`, Newton-Krylov su `omega(fase a meta' con w) - w`**, partendo dall'`Omega` di partenza, con lo stesso criterio *(`EPS_OMEGA` per la scala)* **e gli stessi controlli del tetto.**
+  - **Se anche quello non converge, `F` NON E' DEFINITA in quel `x`:** **si alza un'eccezione SUA** *(«il punto medio di `Omega` non esiste qui»)*, **contata.**
+  - ### **`s > 0` NON si impone:** **un `x` che porta un `s <= 0` resta fuori dal dominio, contato, e il metodo esterno muore li'.** **Imporlo sarebbe il pavimento di `A11`** *(la sez. `10`)*.
+  - **Il nucleo non si tocca:** **`EP.applica` sostituita SOLO dentro la mappa di prova** *(un `with`, rimessa all'uscita)*.
+- ### **LA MISURA:**
+  - **D3-R:** **Anderson e NK esterni, con `F` definita**, **a `Lambda_c 34`, sulle quattro scene di `TBS`** *(`0`, `10000`, `100000`, `200000` tick; `maxiter 200` come D3)*.
+  - **D4-R, la continuazione FINE sulla scena a `10000`:** **NK da `Lambda_c 272`** *(dove D4 converge)* **giu' fino a `34` a passi di `2^{-1/4}`** *(`12` passi)*, **ogni passo partito dal punto del passo prima.**
+  - **Per ogni passo:** **converge? `|Jv|/|v|` col metodo della potenza** *(D2)*, **e il minimo di `s`.**
+  - **Il costo:** **le valutazioni di `F`, quante col NK interno, il tempo.**
+- ### **I DEVE, fissati ora:**
+  - **(R-B) DEVE:** **`F` con l'`Omega` robusto = `F` del nucleo, AL BIT, dove il nucleo converge** *(sul vuoto F3 e sul punto di D4 a `272`)*;
+  - **(R-V) DEVE:** **PF-V coi tre metodi, con `F` definita**;
+  - **(PF-E) DEVE, per ogni punto trovato:** **`|F(x) - x| <= 8 eps |x|_inf`**;
+  - **(R-E-F) DEVE FALLIRE:** **PF-E applicato al punto di PARTENZA `x0` a `34`** *(che non e' un punto fisso: il controllo che PF-E sa dire di no)*;
+  - **(PF-F) DEVE FALLIRE, come prima:** **la scena del `27/10`.**
+- ### **LE LETTURE, scritte prima:**
+  - **(d1) D3-R converge a `34`** *(PF-E passa)*, **o D4-R arriva a `34`:** ### **il punto fisso ESISTE, la mappa non contrae: (pf1), si cura col METODO.** **Il costo per tick del metodo dal referto**, e **se i due metodi danno lo stesso punto, PF-U.**
+  - **(d2) D4-R perde il ramo a un `Lambda_c*` fra `34` e `272`, con `|Jv|/|v|` o il passo di Newton che esplode li'** *(un punto di svolta)*, **e D3-R non converge:** ### **il punto fisso esiste solo sopra `Lambda_c*`: (pf2)**, **col numero `Lambda_c*`.**
+  - **(d3) D4-R e D3-R muoiono per «`Omega` non esiste qui» o per `s <= 0`, PRIMA di un punto di svolta:** ### **(pf5) confermata: la legge interna cede prima di quella esterna**, **e il punto fisso di `cs` non e' una domanda ben posta finche' `Omega` non lo e'.**
+  - **(d4) tutti i metodi girano dentro il dominio senza convergere e senza un punto di svolta:** **(pf4) resta possibile.**
+  - **(d5) altro.**
+- **COSA MI FAREBBE FERMARE:** **R-B o R-V che falliscono** *(la mappa di prova non e' piu' quella del nucleo)*.
+- ### **Il costo previsto:** **`~1`-`2` ore** *(D3 erano `~22` minuti per scena a `0.15` s per valutazione; il NK interno costa di piu' dove serve)*. **La prova corta della regola `4`, mentre gira `C35-pi`.**
+- **Lo script:** **`csv/solitone/carta_punto_fisso_r.py`** *(nuovo; importa `carta_punto_fisso.py`, che non si tocca)*; **il referto `doc/referti_l2/punto_fisso_cs_r.txt`.**
