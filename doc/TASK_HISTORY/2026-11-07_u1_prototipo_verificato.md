@@ -625,3 +625,14 @@
   - **La mia proposta** *(la scelta e' di Luca: e' una soglia rivista dopo i numeri)*: **rileggere (t-b) col pavimento della scala dello sfondo** *(`1000 eps_macchina 1.222e-3 / eps`, lo stesso dello sfondo vero)*, **con gli stessi giri** *(CORRETTO nel commit dopo: avevo scritto «dagli stessi numeri, lo script stampa i `V`», ed e' FALSO: stampa solo `p` e `L`, e i `V` solo dei `k` al pavimento. Serve uno script che stampi i `V` o li rilegga con l'altro pavimento: un giro di `~1` minuto)*;
   - **e dichiarare la fase cosi':** **«trasversalmente invisibile all'ordine `e`; con lo sfondo dell'onda piana, visibile all'ordine `e^3` sotto `2e-10`; senza sfondo, sotto il rumore»** -- **se la rilettura lo conferma.**
   - ### **La decisione per T5 resta tua:** **T4-B chiuso sui due versi fisici e la fase dichiarata, oppure la fase come limite noto, come T3.**
+
+### 16.6 LA DECISIONE DI LUCA DELLE `12:40`: **(t-b) RILETTO COL PAVIMENTO DELLO SFONDO VERO; POI LA FASE SI DICHIARA, E T4-B E' CHIUSO; T5 NON ASPETTA ALTRO**
+
+- ### **LA SOGLIA RIVISTA, dichiarata come tale** *(Luca: «una soglia rivista dopo i numeri, ancorata a quella dello sfondo vero»)*: **il pavimento di (←) con lo sfondo azzerato e' `1000 eps_macchina x 1.222e-3 / eps`**, **lo stesso dello sfondo vero.**
+- **«Dagli stessi numeri»:** **il giro e' deterministico** *(lo stesso banco, gli stessi `eps`, nessun seme)*, **quindi rigirarlo ridà gli stessi `V`.** ### **Il controllo che lo dice:** **la rilettura ristampa le pendenze `p` col pavimento di prima, e DEVONO coincidere con quelle di `69af2417` al carattere** *(R-S)*.
+- ### **LE LETTURE** *(le stesse della sez. `16.4`, col pavimento nuovo)*:
+  - **(b-s) fotone e ottica in fase al pavimento a ogni `k`:** **la parte che restava e' dello sfondo**;
+  - **(b-m) no:** **e' della risposta della materia al campo.**
+- **La fase si DICHIARA per quello che i numeri dicono, e T4-B e' chiuso** *(Luca)*.
+- **Lo script: `csv/solitone/u1_t4b_rilettura.py`** *(nuovo; importa `u1_t4b_sfondo.py`; stampa i `V`)*; **il referto `doc/referti_l2/u1_t4b_rilettura.txt`.**
+- ### **L'ORDINE DELLE PROVE CORTE, registrato** *(una alla volta, sui due rami)*: **la prova sul cuore** *(fatta: `f5e10f4b`)*; **(r-D5) sul laterale** *(partita alle `13:10`: SCAMBIATA con la rilettura, che deve prima passare da una sua suite di `~15` minuti)*; **la rilettura di (t-b)** *(dopo (r-D5): una alla volta)*; **T5** *(il progetto mentre gira (r-D5))*; **L1, L2, L4.**
