@@ -1,0 +1,66 @@
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] periodo_tb3.py  sha1-BYTE fcb6b95f  committato e pulito
+==================================================================================================================================
+IL PERIODO DI TB3 (Luca 20:57, M3): da t 1000; Welch Hann segmenti (7000.0, 9500.0) a meta'; periodi da 300 a L/2; il nullo AR(1) al 99% con Bonferroni; s 0.15
+### (q-a, Luca 01:31) sugli INCREMENTI: un'oscillazione di periodo P resta, attenuata di 2 sin(pi dt / P): a dt 1.5, P 2300 -> 0.00410, P 1500 -> 0.00628 (dichiarato)
+==================================================================================================================================
+### I CONTROLLI (AR(1) con phi 0.9999, 19334 campioni, dt 1.50, come lo spostamento di TB3)
+  DEVE PASSARE: PE-P l'AR(1) piu' un seno di periodo 2300: ritrovato SOPRA la soglia entro un bin, a tutte e due le lunghezze  PASSA   L 7000: 2334 (5.45); L 9500: 2375 (5.46)
+  DEVE FALLIRE: PE-N l'AR(1) PURO: un picco sopra la soglia                                                                    ### FALLISCE   L 7000: il piu' forte P 438 a 0.60 della soglia; L 9500: il piu' forte P 452 a 0.64 della soglia
+  STAMPA: PE-W il metodo vecchio (stazionarieta.periodo su (1000.0, 10000.0)) su 20 AR(1) puri: un 'periodo' in 9 su 20: 4500, 4500, 4500, -, -, 4500, 3000, -, -, 3000, -, -, -, -, -, 2250, 4500, 3000, -, -
+### TB3: fino a t 30000, 20001 campioni
+    E + E_ass    (m1) intera: il picco P 29000 (passo 29000)
+                 (m2) L 7000 K 7 nu 13.4 phi -0.9734: il piu' forte P 1167 (passo 194) a 0.84 della soglia; sopra la soglia NESSUNO
+                 (m2) L 9500 K 5 nu 9.6 phi -0.9734: il piu' forte P 1056 (passo 117) a 0.97 della soglia; sopra la soglia NESSUNO
+    alone        (m1) intera: il picco P 547 (passo 10)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.5259: il piu' forte P 538 (passo 41) a 1.57 della soglia; sopra la soglia 538 (1.57)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.5259: il piu' forte P 559 (passo 33) a 1.77 della soglia; sopra la soglia 559 (1.77)
+    cuore        (m1) intera: il picco P 29000 (passo 29000)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.9947: il piu' forte P 304 (passo 13) a 2.17 della soglia; sopra la soglia 304 (2.17)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.9947: il piu' forte P 317 (passo 11) a 1.34 della soglia; sopra la soglia 317 (1.34)
+    emissione    (m1) intera: il picco P 29000 (passo 29000)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.9477: il piu' forte P 304 (passo 13) a 2.26 della soglia; sopra la soglia 304 (2.26)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.9477: il piu' forte P 317 (passo 11) a 2.03 della soglia; sopra la soglia 317 (2.03)
+    spostamento  (m1) intera: il picco P 1450 (passo 72)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.7958: il piu' forte P 1400 (passo 280) a 2.32 della soglia; sopra la soglia 1400 (2.32), 700 (1.26)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.7958: il piu' forte P 1583 (passo 264) a 2.33 della soglia; sopra la soglia 1583 (2.33), 731 (1.68)
+    w            (m1) intera: il picco P 547 (passo 10)
+                 (m2) L 7000 K 7 nu 13.4 phi -0.7697: il piu' forte P 538 (passo 41) a 3.02 della soglia; sopra la soglia 538 (3.02)
+                 (m2) L 9500 K 5 nu 9.6 phi -0.7697: il piu' forte P 528 (passo 29) a 2.99 della soglia; sopra la soglia 528 (2.99)
+### TBS: fino a t 30000, 20001 campioni
+    E + E_ass    (m1) intera: il picco P 509 (passo 9)
+                 (m2) L 7000 K 7 nu 13.4 phi -0.9865: il piu' forte P 500 (passo 36) a 2.05 della soglia; sopra la soglia 500 (2.05)
+                 (m2) L 9500 K 5 nu 9.6 phi -0.9865: il piu' forte P 528 (passo 29) a 2.20 della soglia; sopra la soglia 528 (2.20)
+    alone        (m1) intera: il picco P 547 (passo 10)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.5375: il piu' forte P 538 (passo 41) a 2.75 della soglia; sopra la soglia 538 (2.75)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.5375: il piu' forte P 559 (passo 33) a 2.68 della soglia; sopra la soglia 559 (2.68)
+    cuore        (m1) intera: il picco P 29000 (passo 29000)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.9931: il piu' forte P 2334 (passo 778) a 0.74 della soglia; sopra la soglia NESSUNO
+                 (m2) L 9500 K 5 nu 9.6 phi 0.9931: il piu' forte P 4750 (passo 2375) a 1.05 della soglia; sopra la soglia 4750 (1.05)
+    emissione    (m1) intera: il picco P 29000 (passo 29000)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.9538: il piu' forte P 318 (passo 14) a 1.01 della soglia; sopra la soglia 318 (1.01)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.9538: il piu' forte P 328 (passo 11) a 1.04 della soglia; sopra la soglia 328 (1.04), 528 (1.00)
+    spostamento  (m1) intera: il picco P 763 (passo 20)
+                 (m2) L 7000 K 7 nu 13.4 phi 0.9960: il piu' forte P 778 (passo 86) a 3.18 della soglia; sopra la soglia 778 (3.18)
+                 (m2) L 9500 K 5 nu 9.6 phi 0.9960: il piu' forte P 731 (passo 56) a 5.07 della soglia; sopra la soglia 731 (5.07)
+    w            (m1) intera: il picco P 537 (passo 10)
+                 (m2) L 7000 K 7 nu 13.4 phi -0.2803: il piu' forte P 538 (passo 41) a 3.76 della soglia; sopra la soglia 538 (3.76)
+                 (m2) L 9500 K 5 nu 9.6 phi -0.2803: il piu' forte P 528 (passo 29) a 4.20 della soglia; sopra la soglia 528 (4.20)
+### LE LETTURE (fissate nella sez. 7.9 prima della misura)
+  TB3  E + E_ass    un picco sopra la soglia allo STESSO periodo alle due lunghezze: no
+  TB3  alone        un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 549
+  TB3  cuore        un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 311
+  TB3  emissione    un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 311
+  TB3  spostamento  un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 1492
+  TB3  w            un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 533
+  TBS  E + E_ass    un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 514
+  TBS  alone        un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 549
+  TBS  cuore        un picco sopra la soglia allo STESSO periodo alle due lunghezze: no
+  TBS  emissione    un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 323
+  TBS  spostamento  un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 754
+  TBS  w            un picco sopra la soglia allo STESSO periodo alle due lunghezze: SI', P 533
+  LA LETTURA: (p2) FISICA: TB3 a P 1492, TBS a un periodo DIVERSO (754)
+==================================================================================================================================
+### 2 su 2   TUTTI COME DEVONO
+exit 0 02:40:11

@@ -24500,3 +24500,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **`Delta vuo = pi V` a `t0` e alla fine** *(il rapporto `pi` a un ulp)*; **`Delta tot = pi (M0 + V0)` a scarto `0`; `E_ass` porta `pi` per la norma assorbita; `E + E_ass` spostato di `pi (M0 + V0)`, costante** *(la soglia da accumulatore, fissata prima: passa)*.
 - ### **La lettura di Luca (R-M, la costante del vuoto proporzionale alla norma della MATERIA) CADE** *(detto prima: il `+0.1129` era `pi V / M`)*; **la formula da dichiarare alla riunione e' `pi (M + V)`.**
+
+## 2026-11-09 (l'orologio: `02:44`) -- M3 (q-a), SUGLI INCREMENTI: **`2/2`; (p2) FISICA -- `TB3` A `1450 +- 72`, `TBS` A `763 +- 20`** *(`doc/referti_l2/periodo_tb3_incrementi.txt`; gli allungamenti sez. `7.13`)*
+
+- ### **Sugli incrementi il metodo ha potenza: `PE-P` passa** *(il seno ritrovato a `5.5` volte la soglia)* **e `PE-N` fallisce come deve.** **Lo spostamento: `TB3` `~1492` alle due lunghezze di Welch** *(il periodogramma intero `1450 +- 72`)*, **`TBS` `~754`** *(`763 +- 20`)*: **la lettura fissata, (p2) fisica.** ### **Da notare senza concludere: `754` e' circa la meta' di `1492`.** **E `w` e l'alone a `~530`-`550` in tutte e due le corse.**
+- ### **Il prossimo: la risoluzione del criterio di stazionarieta' e il DEVE FALLIRE sopra la risoluzione, con `W = 3 P`.**
