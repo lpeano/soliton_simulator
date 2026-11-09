@@ -86,3 +86,43 @@
 - ### **`TBS` a `t 0`:** **D0: l'iterazione semplice NON converge in `120` giri** *(gli scarti fermi a `~3.6e-2`, senza calare)*; **`tick.cs_al_centro` ALZA allo stesso modo** *(D0-N passa: la copia e' la mappa del nucleo)*. **D1: lo scarto e' tutto entro `2 w`** *(`r < w` `30%`, `w`-`2 w` `70%`, oltre `0`)*. ### **D2: l'autovalore dominante `~ -15.2`** *(`|J v| / |v| = 15.22`, `<v, J v> / <v, v> = -15.22`)*: **NON una contrazione, e NEGATIVO** *(l'iterazione oscilla)*; **i dischi: il centro `1.56`, `r = w` `1.41`, `2 w` `0.096`, il vuoto `0.004`: la non-contrazione sta nel CUORE.**
 - ### **D3: Anderson e' morto al secondo passo** *(il punto medio di `Omega` -- l'altro punto fisso, dentro il tick -- NON converge al `cs` di prova di Anderson: scarto `8.7e3`)* **e Newton-Krylov subito dopo, ma per il MIO difetto:** ### **un'eccezione dentro `percorri_tick` lascia il tick del motore APERTO** *(`mot.cresciute_nel_tick`)*, **e la valutazione dopo alza «un tick e' gia' aperto»: il NK di questa scena NON e' una misura, e la seconda scena e' morta li'.**
 - ### **LA CURA** *(il commit dopo, a se')*: **in `Mappa.__call__`, se `percorri_tick` alza, il tick si richiude** *(`cresciute_nel_tick = -1`, senza contare un tick)* **e l'eccezione risale.** **Nessuna lettura cambia.**
+
+## 10. L'ESITO DI D0-D4: **`8/8` -- A `Lambda_c = 34` NESSUN METODO TROVA IL PUNTO FISSO, SU NESSUNA DELLE QUATTRO SCENE; LA CONTINUAZIONE LO RITROVA SOLO SOPRA `Lambda_c` FRA `136` E `272`, DOVE `cs` NEL VUOTO E' GIA' `0.042`-`0.022` INVECE DI `s = 0.15`; FERMO SUL RIMEDIO** *(`doc/referti_l2/punto_fisso_cs.txt`; il codice a `3faa4858`, blob `9ea68434`; finito alle `06:03`, `4712` s)*
+
+- **I DEVE:** **PF-V `3/3`** *(il vuoto F3 da solo: `cs = s` coi tre metodi, `5.6e-17`)*; **D0-N `4/4`** *(la copia della mappa = il nucleo: tutti e due non convergono, su ogni scena)*; **PF-F fallisce come deve** *(la scena del `27/10`: il nucleo alza, scarto `1.698e-01`)*.
+- ### ⚠ **PF-E e PF-U NON HANNO AVUTO MATERIA a `34`:** **D3 non ha trovato nessun punto fisso, quindi non c'era niente da controllare** *(nessun verdetto stampato: lo dico, perche' `8/8` non li contiene)*. **Nella continuazione, dove converge, la distanza NK-semplice e' `1e-19`-`2e-17`** *(stampata, senza verdetto: il progetto la voleva solo a `34`)*.
+
+| scena | D0, l'ultimo scarto dopo `120` giri | D2, `|Jv|/|v|` e `<v,Jv>/<v,v>` | D2, i dischi: centro, `w`, `2w`, vuoto | D3 Anderson | D3 Newton-Krylov |
+|---|---|---|---|---|---|
+| `TBS` `0` | `3.58e-02` | `15.22`, `-15.22` | `1.56`, `1.41`, `0.096`, `0.004` | il punto medio di `Omega` alza (`8.7e3`) | non converge (`8601` valutazioni) |
+| `TBS` `10000` | `7.56e-02` | `13.50`, `+13.50` | `1.57`, `0.93`, `0.043`, `0.004` | `Omega` alza (`9.3e2`) | non converge (`8668`) |
+| `TBS` `100000` | `5.93e-02` | `12.71`, `+12.71` | `1.75`, `0.97`, `0.014`, `0.004` | `Omega` alza (`1.2e7`) | arriva a un `s` NEGATIVO (`-0.0079`) e alza (`5817`) |
+| `TBS` `200000` | `7.64e-02` | `11.46`, `+11.43` | `2.21`, `0.79`, `0.018`, `0.004` | `Omega` alza (`2.8e4`) | `s` negativo (`-0.051`) e alza (`2192`) |
+
+- **D1, dove sta lo scarto:** **tutto entro `2 w`, e sempre `0` oltre**; **fra `w` e `2 w` la quota e' `0.70`, `0.71`, `0.41`, `0.22`** *(con `Lambda` medio dell'anello `6.0`, `4.63`, `3.01`, `2.61`: l'anello dove `Lambda` scende sotto il vuoto)*, **dentro `w` `0.30`, `0.29`, `0.59`, `0.78`.** **Col tempo lo scarto migra dall'anello al centro.**
+- ### **D4 sulla scena a `10000`** *(`Lambda_c = 34 x 2^k`)*: **la semplice converge per `k >= 3`** *(`4`, `5`, `5`, `6`, `7`, `10`, `14`, `41` giri, da `k = 10` a `k = 3`)*, **e NK ridà lo stesso punto** *(entro `2e-17`)*; **a `k = 2` (`136`) non convergono ne' l'una ne' l'altro** *(`|Jv|/|v| = 1.31`)*. **`|Jv|/|v|` cresce con continuita':** `0.0001` ... `0.0999` (`544`), `0.478` (`272`), `1.31` (`136`), `4.86` (`68`), `13.41` (`34`). **Il segno cambia due volte** *(`+` fino a `544`, `-` a `272`, `136`, `68`, `+` a `34`)*.
+- ### ⚠ **LA TRAPPOLA DI D4, scritta perche' cambia la lettura:** **alzare `Lambda_c` abbassa `cs` OVUNQUE, vuoto compreso** *(`cs` del vuoto `0.000172` a `k = 10`, `0.0216` a `272`, `0.0423` a `136`, `0.150` a `34`)*. **Quindi D4 NON separa «il cuore troppo forte» da «`cs` troppo forte dappertutto»:** ### **dice solo che la mappa contrae quando `cs` e' piccolo DAPPERTUTTO.** **E `Lambda_c = 34` non e' una scelta:** **e' quello che da' `cs = s` nel vuoto** *(la decisione (P))*. **Un `Lambda_c` piu' grande romperebbe `cs_vuoto = s`: NON E' UN RIMEDIO** *(`A1`)*, **e' solo una misura del margine.**
+
+### **LE LETTURE** *(quelle del progetto, sez. `1`-`3` del task history del `2026-11-07`)*
+
+- **(pf0) CADE:** **a `34` l'iterazione semplice non converge su nessuna delle quattro scene.**
+- **(pf1) NON E' DIMOSTRATA:** **(pf1) chiede un punto fisso che ESISTE**, e **nessuno dei due metodi robusti lo trova.** ### **Anderson non e' mai arrivato al terzo passo:** **muore DENTRO `F`, nel punto medio di `Omega`** *(il punto fisso interno del tick)*, **su tutte e quattro le scene.** **NK fa migliaia di valutazioni senza convergere e, alle due scene tarde, porta un tempo proprio sotto zero.**
+- **(pf2) E' COMPATIBILE con D4, ma non dimostrata:** **la convergenza torna solo sopra una soglia fra `136` e `272`**, **e per la trappola qui sopra quella soglia NON e' «il cuore che sta nel dominio»: e' «tutto il `cs` abbassato di `4`-`7` volte».**
+- **(pf3)** **nessun indizio** *(nessun metodo ha trovato due punti)*. **(pf4)** **non si puo' escludere:** **a `34` non abbiamo trovato nessun punto fisso.**
+- ### **(pf5), LA MIA, DAI NUMERI:** **`F` NON E' DEFINITA DAPPERTUTTO.** **Il tick ha DUE punti fissi annidati** *(`cs` fuori, il punto medio di `Omega` dentro)*, **e appena `cs` esce di poco dalla traiettoria del nucleo il punto interno non converge** *(gli scarti di `Omega` `9e2`-`1.2e7`)*, **oppure `s` va sotto zero.** ### **Allora «il punto fisso di `cs` esiste?» non e' ancora una domanda ben posta: prima va detto su che insieme `F` e' definita.**
+- **Il controllo che mi doveva FERMARE c'e' stato:** **«l'inner di `Omega` che non converge (e' un altro punto fisso: lo riporto)»** *(sez. `1`)*: **lo riporto qui, su tutte le scene.**
+
+### **IL COSTO PER TICK** *(dal referto)*
+
+- **una valutazione di `F` = mezzo tick = `0.143`-`0.163` s** su `TBS`.
+- **dove converge** *(D4, `k >= 3`)*: **la semplice `4`-`41` valutazioni** *(`41` a `272`)*, **NK `32`-`104`.**
+- **a `34`: nessun metodo provato converge in `120` giri** *(la semplice)* **o in `2192`-`8668` valutazioni** *(NK)*. **Un rimedio di METODO oggi non ha un costo: non ha un metodo.**
+
+### **FERMO SUL RIMEDIO: LA PROPOSTA E LE ALTERNATIVE** *(la scelta e' di Luca)*
+
+1. ### **LA MIA RACCOMANDAZIONE: (r-D5), UN'ALTRA DIAGNOSI PRIMA DI UN RIMEDIO, senza toccare il nucleo.** **Rendere `F` definita** *(il punto medio di `Omega` risolto con un metodo robusto ANCHE lui, dentro la mappa di prova, oppure `F` ristretta a `s > 0`)* **e rifare D3 a `34`.** **Perche':** **(pf1), (pf2) e (pf4) si distinguono solo su una `F` definita**, e oggi D3 muore prima di poter rispondere. **Il costo:** **la diagnosi su una scena `~30`-`40` min** *(come una scena di oggi)*; **tocca solo `carta_punto_fisso.py`, sul laterale.**
+2. **(pf2) DI FORMA, SUBITO:** **il minimo per `Lambda` della voce `35`** *(la (e) di Luca)*: **e' un NUMERO e un PAVIMENTO** *(`A1`, `A11`)*, ### **ammissibile solo DERIVATO** *(dal quanto di olonomia, la (g), che oggi non c'e')*. **D4 non da' un numero da usare:** **la sua soglia abbassa `cs` anche nel vuoto.**
+3. **(pf4), LA LEGGE IMPLICITA RIPENSATA:** **`cs` esplicito** *(dal `Lambda` del tick precedente, non dello stesso)*: **niente punto fisso, niente costo**; **cambia la legge** *(una decisione di fisica)*, **e la simmetria del palindromo va riverificata.**
+4. **(pf1) DI METODO A PRESCINDERE** *(NK con la ricerca sul tratto e `s > 0` imposto)*: **lo sconsiglio adesso:** ### **imporre `s > 0` dentro un risolutore e' un pavimento che protegge da un errore** *(`A11`)*, **e oggi non sappiamo se il punto fisso esiste.**
+
+- **Che cosa blocca:** **[[PUNTO-FISSO-CS-SOLITONE]] blocca ancora `TCS`, la coppia con `cs` e la mitosi «dove gli orologi differiscono».** **Non blocca niente del principale** *(`cs` e' spento in tutte le corse)*.

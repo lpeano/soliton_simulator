@@ -1,0 +1,79 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+==================================================================================================================================
+D0-D4, IL PUNTO FISSO DI cs COL SOLITONE (il laterale): TBS a (0, 10000, 100000, 200000) tick; D4 a 10000, k (10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0); N_POT 30 R_DISCO 2; EPS_CS 1.776e-15 GIRI_MAX 120
+==================================================================================================================================
+### Lambda_c = Lambda_vuoto (1 - s) / s = 6.000000000000 x 5.666666666667 = 34.000000000000 (la decisione (P); atteso 34)
+  PF-V, il vuoto F3: l'iterazione semplice 1 giri; cs min 0.150000000000000 max 0.150000000000000
+  DEVE PASSARE: PF-V l'iterazione semplice sul vuoto F3 da solo: cs = s ovunque entro 8 eps relativo                     PASSA   5.551e-17
+C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\scipy\optimize\_nonlin.py:376: RuntimeWarning: invalid value encountered in scalar divide
+  and dx_norm/self.x_rtol <= x_norm))
+  DEVE PASSARE: PF-V Anderson sul vuoto F3: cs = s ovunque entro 8 eps relativo                                          PASSA   0.000e+00 (3 valutazioni)
+  DEVE PASSARE: PF-V Newton-Krylov sul vuoto F3: cs = s ovunque entro 8 eps relativo                                     PASSA   5.551e-17 (10 valutazioni)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS a 0 tick (t 0): lo stato = lo sha registrato: True
+  D0: l'iterazione semplice NON converge in 120 giri; tick.cs_al_centro ALZA (il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 3.584e-02): il mandato dice di RELAZIONARE coi numeri e N); 0.143 s per valutazione di F
+      gli scarti, giro per giro (i primi 8 e gli ultimi 8): 2.58e-02 3.67e-02 3.69e-02 3.79e-02 2.53e-02 3.44e-02 4.92e-02 3.92e-02 ... 3.96e-02 3.73e-02 3.90e-02 3.73e-02 3.97e-02 3.55e-02 3.42e-02 3.58e-02
+  DEVE PASSARE: D0-N la copia della mappa = il nucleo: lo stesso numero di giri (o tutti e due non convergono)           PASSA   copia None, nucleo None
+  D1 (w 6.646): r < w: 162 nodi, quota 0.302, max 2.85e-02, Lambda 6.0000 cs 0.14996 rho 3.682e+03; w..2w: 476 nodi, quota 0.698, max 3.58e-02, Lambda 6.0000 cs 0.14944 rho 8.436e+02; 2w..4w: 1934 nodi, quota 0.000, max 5.44e-04, Lambda 6.0000 cs 0.15011 rho 1.010e+00; > 4w: 3989 nodi, quota 0.000, max 0.00e+00, Lambda 6.0000 cs 0.15000 rho 2.065e-26
+  D2 (a) la potenza, 30 prodotti: |J v|/|v| 15.221511, <v, J v>/<v, v> -15.219433
+  D2 (b) i dischi di raggio 2: centro (19 nodi) 1.5640 (tutto 2.5687); r = w (19 nodi) 1.4092 (tutto 1.6701); r = 2w (19 nodi) 0.0958 (tutto 0.1207); vuoto (7 nodi) 0.0038 (tutto 0.0047)
+  D3 Anderson: NON converge (2 valutazioni): AssertionError: il punto medio di `Omega` NON CONVERGE in 200 giri (ultimo scarto 8.663e+03): la
+  D3 Newton-Krylov: NON converge (8601 valutazioni): NoConvergence: [0.15000002 0.14999999 0.15000001 ... 0.15000002 0.15000001 0.15000003]
+  (TBS a 0: 8759 valutazioni di F, 1270 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS a 10000 tick (t 1500): lo stato = lo sha registrato: True
+  D0: l'iterazione semplice NON converge in 120 giri; tick.cs_al_centro ALZA (il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 7.559e-02): il mandato dice di RELAZIONARE coi numeri e N); 0.154 s per valutazione di F
+      gli scarti, giro per giro (i primi 8 e gli ultimi 8): 3.50e-02 6.77e-02 5.69e-02 8.68e-02 9.56e-02 8.89e-02 9.20e-02 8.43e-02 ... 8.19e-02 8.40e-02 8.02e-02 7.92e-02 8.61e-02 8.55e-02 7.81e-02 7.56e-02
+  DEVE PASSARE: D0-N la copia della mappa = il nucleo: lo stesso numero di giri (o tutti e due non convergono)           PASSA   copia None, nucleo None
+  D1 (w 8.249): r < w: 242 nodi, quota 0.287, max 4.34e-02, Lambda 6.6235 cs 0.16242 rho 2.402e+03; w..2w: 747 nodi, quota 0.713, max 7.56e-02, Lambda 4.6305 cs 0.11607 rho 5.547e+02; 2w..4w: 2963 nodi, quota 0.000, max 5.71e-06, Lambda 5.8025 cs 0.14529 rho 4.703e-01; > 4w: 2609 nodi, quota 0.000, max 1.39e-16, Lambda 6.0007 cs 0.15001 rho 6.356e-04
+  D2 (a) la potenza, 30 prodotti: |J v|/|v| 13.497533, <v, J v>/<v, v> +13.497500
+  D2 (b) i dischi di raggio 2: centro (19 nodi) 1.5657 (tutto 2.2197); r = w (17 nodi) 0.9295 (tutto 1.3625); r = 2w (17 nodi) 0.0430 (tutto 0.0548); vuoto (9 nodi) 0.0038 (tutto 0.0046)
+  D3 Anderson: NON converge (2 valutazioni): AssertionError: il punto medio di `Omega` NON CONVERGE in 200 giri (ultimo scarto 9.341e+02): la
+  D3 Newton-Krylov: NON converge (8668 valutazioni): NoConvergence: [0.14982402 0.14983676 0.15018422 ... 0.14987728 0.1498009  0.15008098]
+  D4, la continuazione in Lambda_c = 34.000000 x 2^k (questa scena):
+    k 10 Lambda_c   34816.0000: semplice 4 giri; |J v|/|v| 0.0001 <v,Jv>/<v,v> +0.0001; cs vuoto 0.000172; NK 32 valutazioni, da D0 1.08e-19
+    k  9 Lambda_c   17408.0000: semplice 5 giri; |J v|/|v| 0.0003 <v,Jv>/<v,v> +0.0003; cs vuoto 0.000345; NK 36 valutazioni, da D0 5.42e-19
+    k  8 Lambda_c    8704.0000: semplice 5 giri; |J v|/|v| 0.0007 <v,Jv>/<v,v> +0.0007; cs vuoto 0.000689; NK 36 valutazioni, da D0 1.08e-18
+    k  7 Lambda_c    4352.0000: semplice 6 giri; |J v|/|v| 0.0029 <v,Jv>/<v,v> +0.0029; cs vuoto 0.001377; NK 36 valutazioni, da D0 2.82e-18
+    k  6 Lambda_c    2176.0000: semplice 7 giri; |J v|/|v| 0.0110 <v,Jv>/<v,v> +0.0110; cs vuoto 0.002750; NK 69 valutazioni, da D0 2.60e-18
+    k  5 Lambda_c    1088.0000: semplice 10 giri; |J v|/|v| 0.0370 <v,Jv>/<v,v> +0.0370; cs vuoto 0.005485; NK 69 valutazioni, da D0 1.39e-17
+    k  4 Lambda_c     544.0000: semplice 14 giri; |J v|/|v| 0.0999 <v,Jv>/<v,v> +0.0996; cs vuoto 0.010910; NK 83 valutazioni, da D0 1.04e-17
+    k  3 Lambda_c     272.0000: semplice 41 giri; |J v|/|v| 0.4781 <v,Jv>/<v,v> -0.4781; cs vuoto 0.021585; NK 104 valutazioni, da D0 2.08e-17
+    k  2 Lambda_c     136.0000: semplice NON converge (ultimo scarto 3.81e-03); |J v|/|v| 1.3054 <v,Jv>/<v,v> -1.3053; cs vuoto 0.042258; NK non converge (AssertionError)
+    k  1 Lambda_c      68.0000: semplice NON converge (ultimo scarto 2.44e-02); |J v|/|v| 4.8601 <v,Jv>/<v,v> -4.7398; cs vuoto 0.081090; NK non converge (AssertionError)
+    k  0 Lambda_c      34.0000: semplice NON converge (ultimo scarto 7.56e-02); |J v|/|v| 13.4095 <v,Jv>/<v,v> +13.3970; cs vuoto 0.150014; NK non converge (AssertionError)
+  (TBS a 10000: 8826 valutazioni di F, 2058 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS a 100000 tick (t 15000): lo stato = lo sha registrato: True
+  D0: l'iterazione semplice NON converge in 120 giri; tick.cs_al_centro ALZA (il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 5.926e-02): il mandato dice di RELAZIONARE coi numeri e N); 0.163 s per valutazione di F
+      gli scarti, giro per giro (i primi 8 e gli ultimi 8): 4.31e-02 8.27e-02 6.10e-02 5.49e-02 6.06e-02 8.06e-02 7.36e-02 5.82e-02 ... 8.24e-02 7.60e-02 8.03e-02 6.79e-02 8.13e-02 7.14e-02 7.67e-02 5.93e-02
+  DEVE PASSARE: D0-N la copia della mappa = il nucleo: lo stesso numero di giri (o tutti e due non convergono)           PASSA   copia None, nucleo None
+  D1 (w 9.293): r < w: 314 nodi, quota 0.587, max 5.81e-02, Lambda 6.5788 cs 0.15974 rho 1.885e+03; w..2w: 941 nodi, quota 0.413, max 5.93e-02, Lambda 3.0051 cs 0.07778 rho 4.270e+02; 2w..4w: 3759 nodi, quota 0.000, max 9.26e-09, Lambda 5.7443 cs 0.14381 rho 4.065e-01; > 4w: 1547 nodi, quota 0.000, max 1.67e-16, Lambda 6.0000 cs 0.15000 rho 4.204e-06
+  D2 (a) la potenza, 30 prodotti: |J v|/|v| 12.709119, <v, J v>/<v, v> +12.709006
+  D2 (b) i dischi di raggio 2: centro (19 nodi) 1.7502 (tutto 2.0591); r = w (19 nodi) 0.9651 (tutto 1.1901); r = 2w (17 nodi) 0.0139 (tutto 0.0182); vuoto (7 nodi) 0.0038 (tutto 0.0050)
+  D3 Anderson: NON converge (2 valutazioni): AssertionError: il punto medio di `Omega` NON CONVERGE in 200 giri (ultimo scarto 1.225e+07): la
+  D3 Newton-Krylov: NON converge (5817 valutazioni): AssertionError: un `s` del nodo vale -0.0078592023901424835 <= 0: un tempo proprio nullo o negat
+  (TBS a 100000: 5975 valutazioni di F, 976 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS a 200000 tick (t 30000): lo stato = lo sha registrato: True
+  D0: l'iterazione semplice NON converge in 120 giri; tick.cs_al_centro ALZA (il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 7.639e-02): il mandato dice di RELAZIONARE coi numeri e N); 0.158 s per valutazione di F
+      gli scarti, giro per giro (i primi 8 e gli ultimi 8): 5.00e-02 7.43e-02 6.86e-02 6.39e-02 6.69e-02 5.68e-02 6.50e-02 6.02e-02 ... 7.66e-02 5.67e-02 7.42e-02 6.07e-02 7.09e-02 6.35e-02 7.57e-02 7.64e-02
+  DEVE PASSARE: D0-N la copia della mappa = il nucleo: lo stesso numero di giri (o tutti e due non convergono)           PASSA   copia None, nucleo None
+  D1 (w 9.643): r < w: 337 nodi, quota 0.779, max 7.64e-02, Lambda 6.6056 cs 0.15958 rho 1.740e+03; w..2w: 1010 nodi, quota 0.221, max 4.35e-02, Lambda 2.6140 cs 0.06857 rho 4.027e+02; 2w..4w: 4049 nodi, quota 0.000, max 4.85e-09, Lambda 5.7579 cs 0.14412 rho 3.397e-01; > 4w: 1165 nodi, quota 0.000, max 1.67e-16, Lambda 6.0000 cs 0.15000 rho 6.374e-07
+  D2 (a) la potenza, 30 prodotti: |J v|/|v| 11.457371, <v, J v>/<v, v> +11.432261
+  D2 (b) i dischi di raggio 2: centro (19 nodi) 2.2148 (tutto 2.5348); r = w (17 nodi) 0.7870 (tutto 0.9793); r = 2w (17 nodi) 0.0178 (tutto 0.0235); vuoto (8 nodi) 0.0038 (tutto 0.0047)
+  D3 Anderson: NON converge (2 valutazioni): AssertionError: il punto medio di `Omega` NON CONVERGE in 200 giri (ultimo scarto 2.809e+04): la
+  D3 Newton-Krylov: NON converge (2192 valutazioni): AssertionError: un `s` del nodo vale -0.05147608134228239 <= 0: un tempo proprio nullo o negativ
+  (TBS a 200000: 2350 valutazioni di F, 390 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### PF-F la scena del 27/10 (S1, N 1e5, L 48, lambda_c 6.000000): tick.cs_al_centro ALZA (il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scarto 1.698e-01): il mandato dice di RELAZIONARE coi numeri e N)
+  DEVE FALLIRE: PF-F l'iterazione semplice del nucleo sulla scena del 27/10 converge                                     ### FALLISCE   il punto fisso di `cs` NON CONVERGE in 120 giri (ultimo scar
+==================================================================================================================================
+ESITO: 8/8 controlli come devono; fallite: 0 []; 4712 s in tutto
+exit 0 06:03:19
