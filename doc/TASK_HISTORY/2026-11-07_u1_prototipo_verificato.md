@@ -659,3 +659,24 @@
   - **(r-D5) deve dire, sul solitone vero:** **dove sta il modo instabile** *(il guscio o il centro: R2, gia' nello script in corsa)*, **e un confronto con un pacchetto SENZA guscio alla stessa massa** *(se contrae, la causa e' il guscio)*: **un pezzo nuovo, dopo (r-D5).**
 - **P5** *(la stazionarieta' versione `2`)*: **nel task history degli allungamenti, sez. `7.19`.**
 - ### **L'ORDINE, registrato:** **P1** *(sola lettura e un calcolo corto)*; **P3** *(il controllo)*; **poi P2 e P4, prove corte**; **T5 dopo P1** *(il suo progetto usa `pi/4` e `0.598`)*; **la rilettura di (t-b) e L1, L2, L4 restano in coda.**
+
+### 19. P1, LA PROVENIENZA DEL LIMITE DI VELOCITA' DELLA MATERIA *(Luca `13:16`)*: **LA LETTURA DEL CODICE, LA MISURA CORTA, LE LETTURE -- PRIMA DEL CALCOLO**
+
+- ### **LA LETTURA DEL CODICE** *(`_u1_secondo.parte_3` e `vb_di`; il referto `doc/referti_l2/u1_secondo.txt`, parte `3`)*:
+  - **`v_b` e' il coefficiente di `k^2` nel fit `omega^2 - omega0^2 = v_b^2 k^2 + b k^4`**, **sul RAMO LUNGO della coppia a `K`** *(`_triangoli_fattore.ramo_lungo`, `k_max = 0.1` in unita' di `k`, `200` punti; i due rami della coppia)*;
+  - **a `eps 0`, cioe' SENZA la moneta** *(`TF.blocchi(0.0, s)`, `TF.coppia_K(0.0, s)`)*; **la coppia e' scelta nello zero simmetrico** *(`coppia_K` usa `"simm"`)*, **il ramo lungo nella convenzione attiva** *(nessun contesto in `vb_di`: quella di default)*;
+  - **`v_max` e' la velocita' di gruppo piu' grande, `TF.v_max(TF.matrice_L(0.0, s))`: anche lui a `eps 0`.**
+  - ### **Quindi `pi/4` NON e' la velocita' di gruppo di una banda:** **e' il parametro della forma IPERBOLICA attorno a `K`** *(come `c` in `omega^2 = m^2 + c^2 k^2`)*; **la velocita' di gruppo vera a `k -> 0` e' zero** *(una banda con massa)*, **e quella massima e' `v_max`.** **Coerente con quello che il revisore non ritrova.**
+  - ### ⚠ **E UNA COSA IN PIU', dalla formula:** **`omega^2 - omega0^2` DIPENDE DALLO ZERO dell'energia** *(`(omega + c)^2 - (omega0 + c)^2 = omega^2 - omega0^2 + 2 c (omega - omega0)`)*: **`v_b` cambia con la convenzione dello zero, come l'anisotropia di P2.** **`v_max`** *(una derivata)* **no.**
+- ### **LA MISURA CORTA** *(`csv/solitone/u1_p1.py`)*:
+  - **`v_b/s` e `v_max/s` a `eps 0` e `0.5`**, **alle `s` di `_u1_secondo`** *(`0.02` .. `0.001`, e `0.05`)* **e a `s 0.15`** *(la corsa)*;
+  - **in tre convenzioni:** **come `vb_di`** *(nessun contesto)*, **`simm`, `oggi`**;
+  - **il limite a `s -> 0`** *(il fit di grado `2`)*.
+- ### **I DEVE:**
+  - **(P1-R)** **a `eps 0`, `s 0.05`, come `vb_di`: `0.784994` di `7daa8840` entro `1e-6`** *(il banco)*;
+  - **(P1-F) DEVE FALLIRE:** **lo stesso contro il valore della VARIANTE** *(`0.99916463`, `u1_terzo`)*.
+- ### **LE LETTURE, scritte prima:**
+  - **(v1)** **a `eps 0.5` `v_b/s -> pi/4` come a `eps 0`, e non dipende dalla convenzione:** **`pi/4` confermato, con la provenienza scritta qui** *(un parametro iperbolico, non una velocita' di gruppo)*;
+  - **(v2)** **`v_b/s` a `eps 0.5` diverso, o diverso fra le convenzioni:** **`pi/4` NON e' un numero della materia nel regime delle corse**, **e si scrive quale e' «il `c`»;**
+  - ### **«il `c` della materia nel regime delle corse», la mia proposta, da confermare coi numeri:** **`v_max/s` a `eps 0.5`, `s 0.15`** *(la velocita' di gruppo massima: non dipende dallo zero)*; **il revisore trova `0.5856` a `eps 0.5`**, **e la misura lo deve ritrovare o dire perche' no.**
+- **Il calcolo gira DOPO (r-D5)** *(una prova corta alla volta)*. **S1-S5 e T5 restano fermi finche' P1 non e' chiuso.**
