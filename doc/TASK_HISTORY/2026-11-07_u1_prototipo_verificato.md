@@ -579,3 +579,30 @@
   - **(t-a)** **la fase si DICHIARA:** **«trasversalmente invisibile all'ordine `e`, visibile all'ordine `e^3`»**, e **T4B-L e T4B-P si rifanno sui versi (→) e (← ampiezza), col pavimento con la scala**;
   - **(t-b)** **prima una prova dell'ipotesi nuova:** **la stessa misura con lo sfondo del campo AZZERATO a ogni tick** *(niente `A_sfondo`)*: **se fotone e ottica in fase vanno al pavimento, la parte `e^3` e' dello sfondo.**
   - ### **La mia raccomandazione: (t-b)**, **pochi minuti, e decide la (t-a) coi numeri.**
+
+### 16.4 LA DECISIONE DI LUCA DELLE `10:47` *(chiude il FERMO di `b8204650`)*: **(t-b), POI (t-a)** -- **LE PREMESSE, LA MISURA, LE LETTURE, PRIMA DEL CODICE**
+
+- ### **REGISTRATO** *(Luca)*:
+  - **l'ipotesi «gauge della sola materia al primo ordine» e' CADUTA**;
+  - **il `2.98` di T4B-L era rumore sotto il pavimento.**
+  - **Se dopo (t-b) e (t-a) T4-B non si chiude: FERMO, e Luca decide** se T4-B blocca T5 o si dichiara LIMITE NOTO, come T3.
+- ### **(t-b), COME AZZERO LO SFONDO DEL CAMPO** *(la mia scelta, dichiarata)*:
+  - **lo sfondo del campo e' quello che la sorgente dell'onda piana `psi_0` genera dentro il tick** *(`E <- E - e J` a ogni spostamento: `max|E| 2.9e-5`, `max|A| 6.7e-7` dopo un tick, T4-B)*;
+  - ### **lo tolgo cosi':** **un tick di RIFERIMENTO senza perturbazione registra la sorgente `J_rif` di ogni spostamento, in ordine**;
+  - **nei tick perturbati il campo riceve `E <- E - e (J - J_rif)`** *(la sola sorgente della perturbazione, a ogni sotto-passo)*;
+  - **cosi' `A_sfondo = 0` per costruzione**, **e la perturbazione vede solo se stessa.**
+  - **E' una copia di `_u1_prototipo.avvolto` con quella riga cambiata:** **il prototipo non si tocca.**
+- ### **LA MISURA:**
+  - **lo stesso banco, `e*`, i `24` `k`, i tre `eps`**, **i versi (← fase), (← ampiezza), (→)**, **con lo sfondo azzerato;**
+  - **la stessa pendenza `p`**;
+  - ### **il pavimento, con lo sfondo azzerato, e' RELATIVO:** **in (←) si sottrae la sola risposta alla perturbazione** *(`~ eps x V` totale)*, **quindi il pavimento a ogni `k` e `eps` e' `1000 eps_macchina x (V fotone + V ottica + V gauge)`.** **Una scala FISSA presa al `eps` piu' grande sovrastimerebbe il pavimento ai `eps` piccoli** *(fino a `16` volte)* **e spingerebbe verso (b-s): l'ho visto scrivendo il codice, e lo scrivo.**
+- ### **LA LETTURA DI (t-b)** *(di Luca, scritta prima)*:
+  - **(b-s) fotone e ottica in fase vanno al pavimento a ogni `k`:** **la parte che restava e' dello SFONDO**;
+  - **(b-m) no:** **e' della risposta della materia al campo, e si scrive coi numeri.**
+- ### **(t-a), dagli stessi giri, sullo sfondo VERO** *(non azzerato: e' il sistema)*:
+  - **(T4B-L') DEVE:** **la linearita' sui versi (→) e (← ampiezza), fotone e ottica**, **`eps` `1e-4` contro `5e-5`, entro `1e-6` relativo, a ogni `k` sopra il pavimento con la scala;**
+  - **(T4B-P') DEVE:** **il minimo su `k` di `V` del fotone in (→) e in (← ampiezza) sopra `1000` volte il pavimento con la scala;**
+  - **(T4B-F') DEVE FALLIRE:** **lo stesso T4B-L' applicato al verso della fase** *(dove i valori stanno al pavimento: deve fallire, se no T4B-L' non sa dire di no)*;
+  - **la fase si DICHIARA per quello che (t-b) dice**, **nell'esito, coi numeri.**
+- **COSA MI FAREBBE FERMARE:** **T4B-L' o T4B-P' che falliscono** *(T4-B non si chiude: la regola di Luca)*.
+- **Lo script: `csv/solitone/u1_t4b_sfondo.py`** *(nuovo; importa `u1_t4b.py` e `u1_t4b_fase.py`, che non si toccano)*; **il referto `doc/referti_l2/u1_t4b_sfondo.txt`.**
