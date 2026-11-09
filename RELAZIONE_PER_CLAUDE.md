@@ -24515,3 +24515,23 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **La pendenza dell'anisotropia del fotone `4.01` a ogni `s`** *(la mia derivazione: `4`; la `D2` costruita da' `2` e fallisce come deve)*; **`D6` a `4e-13`; `omega / (s |k|) = 0.999997`; il Courant `2 / sqrt 24`, `s = 0.45` instabile.** **L'anisotropia supera l'`1%` solo sotto `2.5` nodi di lunghezza d'onda.**
 - ### **Il prossimo: T4-B** *(Brezzi, la visibilita' delle bande di `U` alla materia: un task history prima)*, **poi T5; sul laterale D0-D4.**
+
+### 2026-11-09 06:10 -- IL RIMANDO AL LATERALE (REGOLA 2): D0-D4, IL PUNTO FISSO DI `cs` COL SOLITONE, `8/8`; FERMO SUL RIMEDIO *(`1cf4ecb4` su `zero-nel-nucleo`; il task history del laterale, sez. `10`; il referto `doc/referti_l2/punto_fisso_cs.txt` LI')* [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **A `Lambda_c = 34` nessun metodo trova il punto fisso**, su nessuna delle quattro scene di `TBS` *(`0`, `10000`, `100000`, `200000` tick)*:
+  - **la semplice non converge**;
+  - **`|Jv|/|v|` vale `15.2`, `13.5`, `12.7`, `11.5`**, localizzato entro `2 w`;
+  - **Anderson muore dentro `F`, nel punto medio di `Omega`**;
+  - **NK non converge**, e alle due scene tarde porta `s` sotto zero.
+- **D4** *(`Lambda_c = 34 x 2^k`)*: la convergenza torna solo **sopra una soglia fra `136` e `272`**.
+  - ### ⚠ **Ma alzare `Lambda_c` abbassa `cs` anche nel vuoto** *(`0.042` a `136`)*: **non e' un rimedio** *(`A1`)* **e non separa il cuore dal resto.**
+- **Le letture:**
+  - **(pf0) cade**;
+  - **(pf1) non e' dimostrata** *(nessun punto fisso trovato)*;
+  - **(pf2) e' compatibile, ma non dimostrata**;
+  - **(pf4) non si esclude**;
+  - **(pf5), la mia:** **`F` non e' definita dappertutto** *(il punto fisso interno di `Omega` cede appena `cs` esce dalla traiettoria del nucleo)*.
+- ### **LA MIA RACCOMANDAZIONE (la scelta e' di Luca):** **(r-D5), una diagnosi ancora, senza toccare il nucleo.**
+  - Rendere `F` definita *(`Omega` robusto dentro la mappa di prova)* e rifare D3 a `34`, circa `30`-`40` min per scena.
+  - **Le alternative:** il minimo per `Lambda` *(solo derivato: `A1`, `A11`)*; `cs` esplicito dal tick precedente *(cambia la legge)*; il metodo con `s > 0` imposto *(lo sconsiglio: un pavimento, `A11`)*.
+- **Non blocca niente del principale** *(`cs` e' spento nelle corse)*; **blocca `TCS`.**
