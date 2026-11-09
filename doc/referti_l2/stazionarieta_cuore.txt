@@ -1,0 +1,33 @@
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] stazionarieta_v3.py  sha1-BYTE c2b8f303  committato e pulito
+[TIMBRO] stazionarieta_cuore.py  sha1-BYTE 4d5a8619  committato e pulito
+==================================================================================================================================
+IL CUORE, LA PROVA DEL CAMPIONAMENTO (sez. 7.17): W [1866.0, 3110.0] (= (6.0, 10.0) x P 311 del cuore di TB3); per TBS anche il ripiego 6000, senza verdetto
+==================================================================================================================================
+  W 1866: la risoluzione sulla base 3.3974e-03
+  DEVE PASSARE: ST-F-C a W 1866: la deriva costante piu' la base, il regime raggiunto                                    PASSA   da t 9000.0
+  DEVE FALLIRE: ST-R a W 1866: l'accelerazione a 5 volte la risoluzione risulta nel regime                               ### FALLISCE   da t None
+  W 3110: la risoluzione sulla base 1.6544e-03
+  DEVE PASSARE: ST-F-C a W 3110: la deriva costante piu' la base, il regime raggiunto                                    PASSA   da t 10500.0
+  DEVE FALLIRE: ST-R a W 3110: l'accelerazione a 5 volte la risoluzione risulta nel regime                               ### FALLISCE   da t None
+----------------------------------------------------------------------------------------------------------------------------------
+### TB3, il cuore, W 1866
+    6000:NO(4.8)  7500:NO(5.8)  9000:NO(6.9)  10500:NO(11.5)  12000:NO(2.7)  13500:NO(5.5)  15000:NO(3.2)  16500:ok(0.9)  18000:NO(2.1)  19500:NO(1.1)  21000:ok(1.0)  22500:NO(3.5)  24000:ok(0.2)  25500:ok(0.5)  27000:NO(4.4)  28500:NO(2.0)  30000:ok(0.9)
+    LA LETTURA: c2: il cuore DERIVA a 30000; la pendenza nell'ultima finestra -2.3416e-02 +- 2.8e-04 per unita'; M_dentro 9.9497e+05; la VITA estrapolata del cuore 4.249e+07 unita' (una ESTRAPOLAZIONE)
+### TB3, il cuore, W 3110
+    7500:NO(3.6)  9000:NO(5.1)  10500:NO(6.3)  12000:NO(9.2)  13500:NO(4.0)  15000:NO(14.2)  16500:NO(3.9)  18000:ok(0.3)  19500:NO(1.3)  21000:ok(0.3)  22500:NO(1.2)  24000:NO(3.8)  25500:NO(1.3)  27000:NO(1.9)  28500:NO(9.0)  30000:NO(3.0)
+    LA LETTURA: c2: il cuore DERIVA a 30000; la pendenza nell'ultima finestra -2.3968e-02 +- 1.7e-04 per unita'; M_dentro 9.9497e+05; la VITA estrapolata del cuore 4.151e+07 unita' (una ESTRAPOLAZIONE)
+----------------------------------------------------------------------------------------------------------------------------------
+### TBS, il cuore, W 1866
+    6000:NO(5.3)  7500:NO(20.6)  9000:NO(4.8)  10500:NO(6.0)  12000:NO(3.5)  13500:NO(5.3)  15000:NO(15.7)  16500:NO(5.1)  18000:NO(2.2)  19500:NO(6.1)  21000:NO(5.2)  22500:NO(3.7)  24000:ok(0.6)  25500:NO(7.3)  27000:NO(1.0)  28500:NO(3.0)  30000:NO(3.5)
+    LA LETTURA: (senza verdetto: il P del cuore di TBS non c'e', la domanda a Luca) c2: il cuore DERIVA a 30000; la pendenza nell'ultima finestra -1.9796e-02 +- 1.7e-04 per unita'; M_dentro 9.9463e+05; la VITA estrapolata del cuore 5.024e+07 unita' (una ESTRAPOLAZIONE)
+### TBS, il cuore, W 3110
+    7500:NO(3.9)  9000:NO(5.3)  10500:NO(4.4)  12000:NO(8.8)  13500:NO(5.7)  15000:NO(7.4)  16500:NO(4.5)  18000:ok(0.1)  19500:NO(2.9)  21000:NO(8.1)  22500:NO(3.0)  24000:NO(2.0)  25500:NO(1.6)  27000:NO(6.3)  28500:NO(1.4)  30000:NO(5.8)
+    LA LETTURA: (senza verdetto: il P del cuore di TBS non c'e', la domanda a Luca) c2: il cuore DERIVA a 30000; la pendenza nell'ultima finestra -2.0554e-02 +- 2.1e-04 per unita'; M_dentro 9.9463e+05; la VITA estrapolata del cuore 4.839e+07 unita' (una ESTRAPOLAZIONE)
+### TBS, il cuore, W 6000 (il ripiego, senza verdetto)
+    13500:NO(3.3)  15000:NO(4.6)  16500:NO(5.7)  18000:NO(5.9)  19500:NO(4.8)  21000:NO(3.4)  22500:NO(5.1)  24000:NO(12.3)  25500:NO(5.2)  27000:NO(2.3)  28500:NO(3.3)  30000:NO(4.6)
+    LA LETTURA: (senza verdetto: il P del cuore di TBS non c'e', la domanda a Luca) c2: il cuore DERIVA a 30000; la pendenza nell'ultima finestra -2.3101e-02 +- 4.2e-04 per unita'; M_dentro 9.9463e+05; la VITA estrapolata del cuore 4.306e+07 unita' (una ESTRAPOLAZIONE)
+==================================================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []
+exit 0 12:59:21

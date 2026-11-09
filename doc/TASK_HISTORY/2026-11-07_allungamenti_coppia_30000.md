@@ -338,3 +338,16 @@
     - **la VITA estrapolata del cuore,** **`M_dentro / |dM_dentro / dt|`** *(una ESTRAPOLAZIONE, dichiarata)*.
 - **Un controllo positivo, perche' la misura possa dire di no:** **ST-F-C e ST-R della v3 rigirati coi due `W` nuovi sulla base** *(il seno di `1450`)*: **ST-F-C DEVE dare il regime, ST-R DEVE FALLIRE**, **se no la finestra lunga non sa distinguere.**
 - **Lo script: `csv/solitone/stazionarieta_cuore.py`** *(nuovo; importa `stazionarieta_v3.py`)*; **il referto `doc/referti_l2/stazionarieta_cuore.txt`.**
+
+### 7.18 L'ESITO DELLA PROVA DEL CUORE: **`4/4` -- (c2): IL CUORE DERIVA DAVVERO A `30000`, ANCHE CON `W = 6` E `10 x 311`; E IL «CUORE» E' `M_dentro`, CIOE' QUASI TUTTA LA MASSA DENTRO IL BORDO: LA SUA DERIVA E' IL RITMO DI EMISSIONE CHE CAMBIA** *(`doc/referti_l2/stazionarieta_cuore.txt`; il codice a `3ca6c9a9`, blob `4d5a8619`; `12:59`)*
+
+- **Il controllo positivo:** **ST-F-C da' il regime** *(da `t 9000` a `W 1866`, da `10500` a `W 3110`)*, **ST-R fallisce come deve coi due `W`** *(le risoluzioni `3.40e-3` e `1.65e-3`)*.
+- ### **`TB3`: il cuore boccia quasi ovunque, con `W 1866` e con `W 3110`** *(fino a `14.2` volte la risoluzione)*: **(c2), il cuore DERIVA a `30000`.**
+  - **La pendenza nell'ultima finestra:** **`-2.34e-2 +- 2.8e-4`** *(`W 1866`)* **e `-2.40e-2 +- 1.7e-4`** *(`W 3110`)* **per unita' di tempo**;
+  - **la vita estrapolata** `M_dentro / |pendenza|`: **`4.25e7` e `4.15e7` unita'** *(una ESTRAPOLAZIONE)*.
+- **`TBS`, senza verdetto** *(il suo `P` non c'e')*: **boccia anche lui con tutti e tre i `W`**; **la pendenza `-1.98e-2`, `-2.06e-2`, `-2.31e-2`**; **la vita `5.0e7`, `4.8e7`, `4.3e7`.**
+- ### ⚠ **UN FATTO CHE CAMBIA LA LETTURA:**
+  - **`M_dentro` vale `9.95e5`, quasi tutta la massa del solitone** *(l'assorbito al bordo e' dell'ordine di `1e4`)*: **e' la massa DENTRO IL BORDO, non il cuore** *(il mio dubbio della legge della durata, sez. `1`)*;
+  - **e la sua pendenza** *(`-0.024`)* **coincide col ritmo di emissione della versione `2`** *(`dM_ass/dt` `0.0245` per `TB3`, `0.0231` per `TBS`)*.
+  - ### **Quindi «il cuore che deriva» significa: il RITMO DI EMISSIONE CAMBIA nel tempo** *(il criterio guarda il cambio di pendenza)*, **non che il cuore si svuota.**
+  - ### **Per la legge della durata (L1, L2) serve una grandezza che sia il cuore DAVVERO** *(per esempio la massa dentro `w` o dentro un raggio fisso)*: **da leggere dal codice, prima di L1.**

@@ -24665,3 +24665,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **poi dichiarare la fase**;
   - **e scegliere per T5:** chiuso sui due versi fisici, oppure la fase come limite noto.
 - **Avanti con la coda, che questo non blocca:** **la prova sul cuore, (r-D5), poi L1, L2, L4.**
+
+### 2026-11-09 13:05 -- LA PROVA DEL CUORE: `4/4`, (c2): IL CUORE DERIVA A `30000` ANCHE CON `W` LUNGA; MA IL «CUORE» E' `M_dentro`, QUASI TUTTA LA MASSA: LA SUA DERIVA E' IL RITMO DI EMISSIONE CHE CAMBIA *(il task history degli allungamenti, sez. `7.18`)* [[PIANO-2D-3D]]
+
+- **`TB3` con `W 1866` e `3110`:** **il cuore boccia quasi ovunque**; **la pendenza `-2.4e-2 +- 2e-4` per unita'; la vita estrapolata `~4.2e7`.**
+- **`TBS`, senza verdetto** *(il suo `P` non c'e')*: **lo stesso.**
+- ### **`M_dentro` vale `9.95e5`: e' la massa dentro il bordo, non il cuore.**
+  - **La sua pendenza coincide col ritmo di emissione** *(`0.0245`)*.
+  - **«Il cuore che deriva» vuol dire: l'emissione cambia ritmo.**
+- ### **Per L1 e L2 della legge della durata serve il cuore vero, da leggere dal codice.**
+- ### **La domanda a Luca, ancora aperta:** **quale `P` del cuore per `TBS`** *(il metodo non ne trova)*.
