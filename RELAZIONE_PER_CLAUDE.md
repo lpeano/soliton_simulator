@@ -24817,3 +24817,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **cercare in quale pezzo del tick nasce la deriva** *(una diagnosi pezzo per pezzo)*?
   2. **la stessa misura sul principale** *(senza v2: si misura, non si tocca)*?
 - **R-1 di `S162` e' ancora in corsa** *(dalle `20:07`)*.
+
+### 2026-11-09 21:20 -- R-1 DI `S162` SUL NUCLEO DI OGGI: `4/4` AL BIT; L'ALLUNGAMENTO DI `S162` PARTITO *(`doc/referti_l2/ripresa_S162.txt`)* [[PIANO-2D-3D]]
+
+- **R-0 passa due volte** *(il file di ripresa e lo stato a `60000` = quelli registrati)*.
+- **R-1:** **il pezzo `60000 -> 66667` rifatto dallo stato a `60000` ha lo `sha_fine` della corsa, AL BIT.**
+- **R-1-F** *(contro `C35-pi`, un'altra corsa)* **fallisce come deve.**
+- **Il pezzo rifatto in `3937` s** *(`0.59` s per tick; l'originale `0.39`: la macchina condivisa con le suite e le prove del laterale)*.
+- ### **L'allungamento di `S162` e' partito alle `21:15`** *(il driver dei pezzi dello scratchpad, `bash driver_corsa.sh S162`)*. **Poi `C50-0`; il referto (r-b) dopo `S162`** *(con U2)*.
