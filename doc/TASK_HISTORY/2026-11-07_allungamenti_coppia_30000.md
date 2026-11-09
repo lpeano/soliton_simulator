@@ -253,3 +253,11 @@
 - ### ⚠ **DA NOTARE, senza concludere:** **`754` e' circa META' di `1492`** *(`763 x 2 = 1526`, dentro l'errore di `TB3`)*: **potrebbe essere la stessa oscillazione, in `TBS` alla seconda armonica.** **La lettura fissata dice «diverso», e lo scrivo; la coincidenza col fattore `2` la scrivo accanto.** ### **E il `1500` dei pezzi:** **`1450 +- 72` lo contiene appena** *(`1500` e' a `0.7` passi)*: **la cucitura e' esclusa da C0 e C1, ma la coincidenza resta.**
 - ### **IL RESTO** *(stampato, la stessa regola)*: **`w` a `~533` in `TB3` E in `TBS`** *(`3.0`-`4.2` volte la soglia)*, **l'alone a `~549` in tutti e due**, **l'emissione e il cuore a `~311`-`323`**; **`E + E_ass` di `TBS` a `~514`.** **Un'oscillazione comune a `~530`-`550` in `w` e nell'alone, in tutte e due le corse.**
 - ### **IL PROSSIMO PASSO** *(Luca `19:21` e `01:31`)*: **la risoluzione del criterio e il DEVE FALLIRE sopra la risoluzione, con `W = 3 P` e `P = 1450 +- 72` per `TB3`** *(e il `P` di `TBS`, `763 +- 20`)*. **Non (q-c): `PE-P` e' passato.**
+
+### 7.11 LA DECISIONE DI LUCA DEL `2026-11-09` `08:56` SU M3: **UN FATTO, E LA STAZIONARIETA' SI CHIUDE ORA**
+
+- ### **REGISTRATO COME FATTO** *(`0bebbe94`)*: **lo spostamento di `TB3` oscilla a `1450 +- 72`, di `TBS` a `763 +- 20`; `w` e l'alone a `~530`-`550` in tutti e due.** **Il fattore `~2` fra `TB3` e `TBS`: scritto senza concludere.**
+- ### **IL PROSSIMO:**
+  - **il periodo vero si usa per le finestre di stazionarieta': `W = 3 P` sulla GRANDEZZA CHE SI GUARDA** *(non un `W` unico)*;
+  - **la risoluzione del criterio col DEVE FALLIRE sopra la risoluzione** *(`19:21`)* **si chiude ora.**
+  - **Il progetto in una sezione sua, prima del codice** *(l'ordine di esecuzione nella relazione: dopo T4-B e (r-D5))*.

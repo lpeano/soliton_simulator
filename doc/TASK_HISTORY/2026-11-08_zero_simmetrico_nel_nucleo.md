@@ -90,3 +90,12 @@
 
 - ### **Alla PRIMA fusione del principale nel laterale, e PRIMA di D0-D4:** **`git merge primo-ordine` sul laterale** *(un avanzamento veloce: porta il revert `de46816d`)*, **e SUBITO `git revert de46816d` sul laterale** *(il revert del revert: v2 torna)*. **Le fusioni successive sono normali** *(il revert e' gia' nella storia di tutti e due)*; **alla riunione il revert del revert arriva da se'** *(la via R1)*.
 - ### **IL DEVE:** **dopo la fusione e il revert del revert, il laterale ha v2: il braccio 0 di v2 ripetuto, `4/4` al bit contro il nucleo avvolto** *(`csv/solitone/zero_nel_nucleo.py`)*. **IL DEVE FALLIRE:** **senza il revert del revert, il laterale NON ha v2** *(lo stesso braccio 0 sull'albero dopo la sola fusione: `Z0-D` NON passa)*.
+
+## 9. LA CONVERSIONE DELL'ENERGIA FRA LE DUE CONVENZIONI, PER I REFERTI DOPO LA RIUNIONE *(Luca `2026-11-09` `08:56`; la misura: (mb-a) sul laterale, `d4d6816a`, `doc/referti_l2/mb_costante_v.txt` LI')*
+
+- ### **`E_nuovo = E_vecchio + pi (M + V)`, a scarto zero** *(`M` la norma della materia, `V` quella del vuoto; misurato: `Delta tot - pi (M0 + V0) = 0`)*:
+  - **per termine:** `cost` prende `pi M` *(attraverso `e_K + pi`)*, `vuo` prende `pi V`, `cin` e `leg` `0`;
+  - **e `E + E_ass` resta spostato della costante `pi (M0 + V0)` nel tempo.**
+- **Come si usa:** **un referto di una corsa fatta COL NUCLEO DI PRIMA** *(tutte quelle del principale fino alla riunione)* **confrontato con una corsa fatta CON v2 si porta nella convenzione nuova sommando `pi (M + V)`**, con `M` e `V` del campione stesso *(non quelli iniziali, se l'assorbimento li ha cambiati)*.
+- ### ⚠ **Vale a `cs` SPENTO:** **con `cs` acceso v2 cambia `Omega`, quindi la dinamica** *(la sez. `8`)*: **li' non c'e' conversione, ci sono due fisiche diverse.**
+- **La lettura R-M** *(«solo `pi M`», del guardiano)* **e' caduta: l'errore n.`122` del guardiano** *(Luca)*.

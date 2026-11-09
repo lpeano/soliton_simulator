@@ -24551,3 +24551,29 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **FERMO:**
   - **la cura proposta:** T4B-L stampato per verso, e (← fase) a tre `eps`;
   - **il criterio della fase rovesciato** *(«invisibile»)* **solo con una decisione di Luca**, perche' sarebbe una soglia cambiata dopo aver visto i numeri.
+
+### 2026-11-09 09:05 -- LE DECISIONI DI LUCA DEL MATTINO (`08:56`): (r-D5), T4-B, M3, mb -- REGISTRATE; L'ORDINE DI ESECUZIONE
+
+- **(r-D5) SI', sul laterale, senza toccare il nucleo:**
+  - **`F` resa definita, dichiarato come** *(il punto medio di `Omega` risolto con un metodo robusto dentro la mappa di prova, oppure `F` ristretta a `s > 0`)*;
+  - **D3 rifatto a `Lambda_c 34`**, per distinguere (pf1), (pf2), (pf4); **le letture scritte prima.**
+- ### **IL FATTO (D0-D4), registrato:** **a `Lambda_c 34` il punto fisso di `cs` col solitone NON si trova con nessun metodo su nessuna scena** *(`|Jv|/|v|` `11.5`-`15.2`, localizzato nel cuore)*.
+  - **Converge solo con `Lambda_c` `136`-`272`**, abbassando `cs` anche nel vuoto: **con `s` fisica cambierebbe la fisica dappertutto.**
+  - **Nessun rimedio si applica prima di (r-D5).**
+- **PER DOPO, SOLO UN'IDEA** *(scritta nel task history di D0-D4, nessun lavoro ora)*: **`cs` come MEMORIA** *(`A15`: dinamica, locale, il tempo di memoria ricavato dalla dinamica locale)* **che rilassa verso `cs(Lambda)`.** **Da valutare dopo (r-D5)**, con le conseguenze sul palindromo e sulla reversibilita'.
+- **T4-B: SI' alla diagnosi:**
+  - **(← fase) a tre `eps`** *(`1e-4`, `5e-5`, `2.5e-5`)*;
+  - **se fotone e ottica scalano come `eps^2`, l'ipotesi «la fase e' una gauge della sola materia al primo ordine» regge**, e **la cura dello strumento e' mia** *(T4B-L stampato per verso)*;
+  - **le letture scritte prima.**
+- ### **M3 (`0bebbe94`), un FATTO:** **lo spostamento di `TB3` oscilla a `1450 +- 72`, di `TBS` a `763 +- 20`; `w` e l'alone a `~530`-`550` in tutti e due.**
+  - **Il fattore `~2` fra `TB3` e `TBS`: scritto senza concludere.**
+  - **Il periodo vero si usa per le finestre di stazionarieta'** *(`W = 3 P` sulla grandezza che si guarda)*, **e la risoluzione del criterio col DEVE FALLIRE sopra la risoluzione** *(`19:21`)* **SI CHIUDE ORA.**
+- ### **mb (`d4d6816a`), registrato:** **`E_nuovo = E_vecchio + pi (M + V)`, a scarto zero.**
+  - **La lettura R-M** *(del guardiano)* **e' caduta: l'errore n.`122` del guardiano.**
+  - **La conversione si scrive nel task history di v2**, per i referti dopo la riunione *(fatto: `2026-11-08_zero_simmetrico_nel_nucleo.md`, la sezione in coda)*.
+- ### **L'ORDINE DI ESECUZIONE, registrato** *(una corsa lunga, `C35-pi`, e UNA prova corta alla volta, sommate sui due rami)*:
+  1. **T4-B, la diagnosi** *(pochi minuti: prima, perche' la piu' corta)*;
+  2. **(r-D5) sul laterale** *(`~1`-`2` ore)*;
+  3. **la stazionarieta' col periodo vero** *(il progetto mentre gira (r-D5), la corsa dopo)*;
+  4. **T5.**
+  - **Il TODO di Luca mette (r-D5) per primo:** **lo scambio con T4-B e' solo d'ordine, perche' T4-B dura pochi minuti, e lo dichiaro qui.**

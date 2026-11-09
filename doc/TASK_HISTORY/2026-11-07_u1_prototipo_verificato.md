@@ -535,3 +535,25 @@
     - **lo strumento:** **T4B-L stampato PER VERSO, per banda e per `k`**;
     - **la diagnosi:** **(← fase) a tre `eps`** *(`1e-4`, `5e-5`, `2.5e-5`)*: **se fotone e ottica scalano come `eps^2`, l'ipotesi regge.**
   - ### **Solo dopo, e con la tua decisione:** **il criterio di T4B-P per la fase rovesciato** *(«invisibile»)*, **perche' cambiarlo dopo aver visto i numeri e' cambiare una soglia a posteriori.**
+
+### 16.2 LA DECISIONE DI LUCA DEL `2026-11-09` `08:56` SU T4-B, E LE LETTURE DELLA DIAGNOSI, PRIMA DEL CODICE
+
+- ### **LA DECISIONE:**
+  - **SI' alla diagnosi:** **(← fase) a tre `eps`** *(`1e-4`, `5e-5`, `2.5e-5`)*;
+  - **se fotone e ottica scalano come `eps^2`, l'ipotesi «la fase e' una gauge della sola materia al primo ordine» regge**, **e la cura del progetto e' mia** *(T4B-L stampato per verso)*.
+- ### **LA MISURA:**
+  - **lo stesso banco di `u1_t4b.py`**, **solo il verso (← fase)**, **a `e*`**, **i `24` `k`**;
+  - **`V(eps)` per fotone, ottica e gauge, ai tre `eps`**;
+  - **la pendenza `p` di `ln V` contro `ln eps`** *(`V = |la parte della banda| / (2 eps |dpsi|)`: se la risposta della banda e' di terzo ordine, `V ~ eps^2`, `p = 2`; se e' di primo ordine, `p = 0`)*.
+  - **In piu', la stessa pendenza per (← ampiezza) e per (→)** *(il controllo positivo: li' deve venire `p = 0`)*, **e T4B-L stampato PER VERSO, PER BANDA, PER `k`.**
+- ### **I DEVE, fissati ora:**
+  - **(D-G) DEVE:** **fotone e ottica in fase: `|p - 2| <= 0.1` a ogni `k` dove `V` e' sopra `1000` volte l'arrotondamento** *(`eps_macchina / eps`; sotto, il `k` si stampa come «al pavimento»)*;
+  - **(D-G0) DEVE:** **la gauge in fase: `|p| <= 0.01`** *(primo ordine)*;
+  - **(D-P) il controllo positivo, DEVE:** **(→) e (← ampiezza) per il fotone: `|p| <= 0.01`** *(primo ordine)*;
+  - **(D-F) DEVE FALLIRE:** **lo stesso test (D-G) applicato alla GAUGE in fase** *(che e' di primo ordine: `p = 2` deve fallire)*.
+- ### **LE LETTURE, scritte prima:**
+  - **(g1) (D-G) e (D-G0) passano:** **l'ipotesi regge**, **T4B-L e T4B-P si rifanno col verso della fase dichiarato come INVISIBILE per le bande fisiche**, ### **e quel criterio rovesciato lo propongo a Luca, non lo scelgo io** *(una soglia cambiata dopo i numeri)*;
+  - **(g2) `p` fra `0` e `2`, o diverso da banda a banda:** **l'ipotesi non regge**, e la risposta di fase **e' un ordine misto**: si stampa, FERMO;
+  - **(g3) `p = 0` per fotone e ottica:** **la risposta di fase e' di primo ordine ma piccola**: **l'ipotesi cade**, e il `5e-16` di T4B-P e' fisica: FERMO.
+- **E il sospetto su `n = 12`** *(fotone, ottica e gauge E tutti a `3.3373e-05` in (→))*: **lo stampo con le parti reale e immaginaria di `u`**, **senza verdetto.**
+- **Lo script: `csv/solitone/u1_t4b_fase.py`** *(nuovo; `u1_t4b.py` non si tocca: il suo referto resta quello del suo blob)*.
