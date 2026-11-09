@@ -24784,3 +24784,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I pezzi da `66667` a `200000` tick:** **`14` jsonl** *(`C35-pi_066667` .. `C35-pi_196667`)*, **l'ultimo da `196667` a `200000`** *(`2105` s)*.
 - **Alla fine:** **`w 21.25`, l'alone `0.523`;** **l'assorbito al bordo `M 1.067e4`, `V 8.20e3`, `E 1.532e4`** *(relativi a `M0`, `V0`, `E0`: `5.3e-3`, `5.2e-2`, `1.6e-3`)*.
 - ### **Avanti, nell'ordine di Luca** *(`21:47` del `2026-11-08`)*: **P3** *(il controllo di `cs` sul principale, che aspettava la fine di `C35-pi`)*, **poi l'allungamento di `S162`, poi `C50-0`; il referto (r-b) dopo `S162`.**
+
+### 2026-11-09 20:05 -- P3 FATTO (`4/4`): `cs` ACCESO ALZA SUL PRINCIPALE; E IL RIMANDO AL LATERALE PER F1 (`2/3`, LA PERTURBAZIONE CRESCE ANCORA: FERMO) *(`doc/referti_l2/p3_ramo.txt`; il laterale `a4ddc0f4`, sez. `22`)* [[H-NUCLEO-CONGELATO]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- ### **P3:** **sul ramo `primo-ordine` congelato, ogni script che importa `solitone` ha `energia_pesata.applica` che ALZA con `cs` acceso.**
+  - **P3-D passa; P3-0 passa** *(a `cs` spento la funzione vera)*; **P3-F fallisce come deve** *(sul laterale non vieta)*; **P3-S passa** *(lo sblocco)*.
+  - **Il limite** *(`A9`)*: **gli script che non importano `solitone`, e la testa staccata.**
+  - **`carta_statiche.py` (IS3) sul principale ora alza: e' il divieto voluto.**
+- ### **F1 col rilassamento esatto** *(sul laterale)*:
+  - **F1-V fallisce ancora** *(`7.8e-16`: e' `Lambda` del vuoto che cambia agli ultimi bit da un tick all'altro)*;
+  - **`r` massimo `0.81`;**
+  - **la perturbazione cresce ancora** *(`1e-8` diventa `6.3e-5` a `200` tick, `5.4e-2` a `1000`)*.
+  - ### **FERMO, come previsto da Luca.** **La proposta:** **`r` dalla risposta di `Lambda`** *(`tau_Lambda`, le letture t1/t2)*, **e prima una misura di un minuto: `Lambda` del vuoto e' costante al bit lungo i tick?**
+- **Avanti:** **l'allungamento di `S162`** *(la corsa lunga, dopo `C35-pi`)*; **T5; P4; L1, L2, L4.**

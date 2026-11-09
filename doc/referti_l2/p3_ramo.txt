@@ -1,0 +1,13 @@
+[TIMBRO] ramo.py  sha1-BYTE b8c91161  committato e pulito
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] p3_ramo.py  sha1-BYTE 6afdb191  committato e pulito
+==================================================================================================================================
+P3, IL DIVIETO DI cs SUL PRINCIPALE: il ramo 'primo-ordine'; NUCLEO_CONGELATO presente; il divieto attivo: True
+==================================================================================================================================
+  DEVE PASSARE: P3-D sul principale, cs acceso (mot.cs e mot.lambda_c non None): energia_pesata.applica ALZA             PASSA   P3 (Luca 2026-11-09 13:16): `cs` ACCESO sul ramo primo-ordine (mot.cs e mot.lambda_c non N
+  DEVE PASSARE: P3-0 a cs spento la vera energia_pesata.applica ritorna lo stato, senza alzare (il braccio 0)            PASSA   
+  DEVE FALLIRE: P3-F la decisione pura col ramo zero-nel-nucleo e lo stato CONGELATO: vieta                              ### FALLISCE   
+  DEVE PASSARE: P3-S la decisione pura col principale SBLOCCATO (con la decisione di Luca): non vieta                    PASSA   
+==================================================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []
+exit 0
