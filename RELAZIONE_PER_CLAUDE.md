@@ -24577,3 +24577,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   3. **la stazionarieta' col periodo vero** *(il progetto mentre gira (r-D5), la corsa dopo)*;
   4. **T5.**
   - **Il TODO di Luca mette (r-D5) per primo:** **lo scambio con T4-B e' solo d'ordine, perche' T4-B dura pochi minuti, e lo dichiaro qui.**
+
+### 2026-11-09 09:50 -- T4-B, LA DIAGNOSI DEL VERSO DELLA FASE: `4/6`, D-G FALLISCE; LA LETTURA (g3); FERMO *(il task history del prototipo, sez. `16.3`; `doc/referti_l2/u1_t4b_fase.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **Passano:**
+  - **D-G0** *(la gauge risponde alla fase al primo ordine)*;
+  - **D-P** *(il fotone in (→) e (← ampiezza): `p = 0` entro `8e-9`)*;
+  - **D-F** *(fallisce come deve)*.
+- ### **Fallisce D-G:**
+  - **fotone e ottica in fase stanno quasi tutti sotto il pavimento**;
+  - **dove si misurano, `p = 0`:** **primo ordine in `eps`, non terzo.**
+- **La lettura fissata e' (g3): l'ipotesi «gauge della sola materia al primo ordine» cade com'era scritta.**
+- ### **Dai numeri, senza concludere:**
+  - **la risposta e' di primo ordine in `eps` ma di terzo in `e`** *(`V / e ~ e^2`)*;
+  - **l'ipotesi nuova:** la parte trasversa nasce dal campo dello sfondo, `~e`.
+- ### **Il `2.98` di T4B-L in T4-B era rumore sotto il pavimento.** **Sopra il pavimento:** `5e-9` per (→), `7e-9` per (← ampiezza).
+- ### **FERMO. La proposta** *(la scelta e' di Luca)*:
+  - **(t-a) la fase dichiarata**: «invisibile all'ordine `e`, visibile all'ordine `e^3`»;
+  - **(t-b) prima la prova con lo sfondo del campo azzerato.**
+  - **La mia raccomandazione: (t-b).**

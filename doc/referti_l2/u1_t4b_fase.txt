@@ -1,0 +1,48 @@
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t4b.py  sha1-BYTE d0bfffa1  committato e pulito
+[TIMBRO] u1_t4b_fase.py  sha1-BYTE 08f1c860  committato e pulito
+==================================================================================================================================
+T4-B, LA DIAGNOSI DEL VERSO DELLA FASE (sez. 16.2): L 24, s 0.15, e* 0.3028619041, eps (0.0001, 5e-05, 2.5e-05), conv oggi; k = 2 pi n d / L, n [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], d ((1, 0), (1, 1))
+==================================================================================================================================
+### le scale del pavimento: il campo dello sfondo dopo un tick 1.222e-03, psi 1.000000
+  STAMPA d (1, 0) n 12, fotone: u reale +0.0000 +0.0000 +0.0000 +0.0000 +0.9956 -0.0000 | u immaginaria -0.0000 -0.0936 +0.0000 +0.0000 +0.0000 +0.0000
+  STAMPA d (1, 0) n 12, ottica: u reale +0.0000 -0.0000 -0.0000 +0.7055 +0.0000 -0.7055 | u immaginaria -0.0480 -0.0000 +0.0480 +0.0000 -0.0000 +0.0000
+  STAMPA d (1, 1) n 12, fotone: u reale +0.0000 +0.0000 +0.0000 +0.0000 +0.0000 +0.9956 | u immaginaria -0.0000 -0.0000 -0.0936 +0.0000 +0.0000 +0.0000
+  STAMPA d (1, 1) n 12, ottica: u reale -0.0000 -0.0000 +0.0000 +0.7055 -0.7055 +0.0000 | u immaginaria +0.0480 -0.0480 +0.0000 +0.0000 +0.0000 -0.0000
+----------------------------------------------------------------------------------------------------------------------------------
+### p = la pendenza di ln V contro ln eps ("pav" = sotto 1000 x l'arrotondamento a qualche eps: eps_macchina x la scala / eps); T4B-L = |V(1e-4) - V(5e-5)| / V(1e-4)
+       d   n | <-fase fotone         | <-fase ottica         | <-fase gauge          | <-ampiezza fotone     | <-ampiezza ottica     | <-ampiezza gauge      | -> fotone            
+     1,0   1 | pav (V 1.8e-13)       | pav (V 2.5e-13)       | p -0.000 L 3.7e-12    | p +0.000 L 2.3e-11    | p -0.000 L 4.7e-13    | p +0.000 L 1.8e-11    | p +0.000 L 5.3e-12   
+     1,0   2 | pav (V 3.5e-13)       | pav (V 5.0e-13)       | p +0.000 L 6.5e-12    | p +0.000 L 6.2e-12    | p +0.000 L 2.1e-13    | p +0.000 L 1.3e-12    | p +0.000 L 3.2e-11   
+     1,0   3 | pav (V 5.1e-13)       | pav (V 7.4e-13)       | p -0.000 L 1.8e-12    | p -0.000 L 1.3e-11    | p -0.000 L 4.8e-13    | p +0.000 L 5.9e-12    | p -0.000 L 1.1e-10   
+     1,0   4 | pav (V 6.5e-13)       | pav (V 9.7e-13)       | p +0.000 L 1.1e-13    | p +0.000 L 2.7e-12    | p -0.000 L 3.3e-13    | p -0.000 L 3.2e-13    | p -0.000 L 2.0e-10   
+     1,0   5 | pav (V 7.8e-13)       | pav (V 1.2e-12)       | p -0.000 L 1.5e-12    | p +0.000 L 6.6e-13    | p +0.000 L 4.1e-13    | p +0.000 L 2.1e-12    | p -0.000 L 3.4e-11   
+     1,0   6 | pav (V 8.7e-13)       | pav (V 1.4e-12)       | p -0.000 L 1.5e-12    | p +0.000 L 1.1e-12    | p -0.000 L 4.1e-13    | p +0.000 L 5.0e-12    | p -0.000 L 6.7e-10   
+     1,0   7 | pav (V 9.3e-13)       | pav (V 1.6e-12)       | p -0.000 L 5.1e-13    | p +0.000 L 6.7e-13    | p -0.000 L 6.7e-13    | p -0.000 L 1.8e-12    | p +0.000 L 1.3e-10   
+     1,0   8 | pav (V 9.3e-13)       | pav (V 1.8e-12)       | p +0.000 L 6.9e-13    | p +0.000 L 8.5e-13    | p -0.000 L 2.3e-13    | p +0.000 L 1.4e-12    | p -0.000 L 4.8e-11   
+     1,0   9 | pav (V 8.7e-13)       | pav (V 2.0e-12)       | p -0.000 L 1.1e-12    | p -0.000 L 1.6e-12    | p -0.000 L 7.0e-13    | p +0.000 L 5.0e-12    | p +0.000 L 3.9e-10   
+     1,0  10 | pav (V 7.0e-13)       | pav (V 2.2e-12)       | p -0.000 L 3.4e-13    | p +0.000 L 5.9e-13    | p -0.000 L 2.5e-12    | p -0.000 L 3.9e-13    | p +0.000 L 2.0e-13   
+     1,0  11 | pav (V 4.1e-13)       | pav (V 2.3e-12)       | p -0.000 L 2.5e-13    | p +0.000 L 1.6e-13    | p -0.000 L 1.3e-12    | p +0.000 L 5.1e-13    | p -0.000 L 4.3e-12   
+     1,0  12 | pav (V 1.3e-15)       | pav (V 2.3e-12)       | p -0.000 L 6.8e-13    | p -0.000 L 2.3e-12    | pav (V 1.1e-15)       | p -0.000 L 6.4e-12    | p +0.000 L 5.3e-09   
+     1,1   1 | pav (V 1.9e-12)       | pav (V 1.0e-12)       | p +0.000 L 1.1e-12    | p +0.000 L 4.0e-11    | p +0.000 L 6.6e-13    | p -0.000 L 6.7e-12    | p -0.000 L 7.4e-11   
+     1,1   2 | pav (V 3.8e-12)       | pav (V 2.1e-12)       | p +0.000 L 2.0e-12    | p +0.000 L 1.5e-10    | p +0.000 L 1.2e-13    | p +0.000 L 5.0e-12    | p +0.000 L 1.5e-10   
+     1,1   3 | pav (V 5.6e-12)       | pav (V 3.0e-12)       | p -0.000 L 1.7e-12    | p -0.000 L 3.1e-10    | p -0.000 L 9.7e-13    | p +0.000 L 1.1e-12    | p +0.000 L 2.5e-10   
+     1,1   4 | pav (V 7.3e-12)       | pav (V 3.8e-12)       | p +0.000 L 7.3e-13    | p -0.000 L 1.7e-09    | p -0.000 L 5.1e-13    | p -0.000 L 1.1e-12    | p -0.000 L 7.3e-10   
+     1,1   5 | pav (V 8.8e-12)       | pav (V 4.5e-12)       | p -0.000 L 1.7e-12    | p +0.000 L 1.3e-09    | p +0.000 L 6.9e-13    | p +0.000 L 2.0e-12    | p +0.000 L 6.2e-10   
+     1,1   6 | pav (V 1.0e-11)       | pav (V 4.9e-12)       | p +0.000 L 1.9e-12    | p +0.000 L 5.9e-10    | p -0.000 L 1.8e-12    | p -0.000 L 3.1e-12    | p +0.000 L 5.9e-10   
+     1,1   7 | p +0.000 L 9.4e-05    | pav (V 5.1e-12)       | p +0.000 L 1.1e-12    | p +0.000 L 1.7e-09    | p +0.000 L 1.9e-12    | p +0.000 L 7.4e-13    | p +0.000 L 2.6e-10   
+     1,1   8 | p -0.000 L 2.9e-04    | p -0.000 L 4.7e-05    | p +0.000 L 3.8e-12    | p -0.000 L 3.9e-13    | p +0.000 L 3.0e-10    | p -0.000 L 7.8e-13    | p -0.000 L 2.8e-10   
+     1,1   9 | pav (V 4.3e-12)       | p +0.000 L 2.5e-04    | p -0.000 L 3.9e-13    | p -0.000 L 1.1e-12    | p -0.000 L 6.8e-10    | p +0.000 L 5.1e-13    | p -0.000 L 5.7e-10   
+     1,1  10 | pav (V 3.3e-12)       | p +0.000 L 9.4e-05    | p +0.000 L 7.0e-13    | p +0.000 L 1.2e-12    | p -0.000 L 2.3e-09    | p +0.000 L 1.4e-12    | p +0.000 L 1.5e-10   
+     1,1  11 | pav (V 1.8e-12)       | p +0.000 L 1.8e-04    | p -0.000 L 1.9e-12    | p +0.000 L 1.9e-12    | p +0.000 L 7.4e-09    | p +0.000 L 1.8e-12    | p +0.000 L 2.7e-10   
+     1,1  12 | pav (V 5.2e-16)       | p +0.000 L 3.7e-04    | p -0.000 L 3.7e-12    | p +0.000 L 5.0e-13    | pav (V 6.5e-16)       | p -0.000 L 4.0e-12    | p +0.000 L 2.6e-09   
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: D-G fotone in fase: |p - 2| <= 0.1 a ogni k sopra il pavimento                                           ### FALLISCE   2 k sopra il pavimento su 24; il peggiore |p - 2| 2.000
+  DEVE PASSARE: D-G ottica in fase: |p - 2| <= 0.1 a ogni k sopra il pavimento                                           ### FALLISCE   5 k sopra il pavimento su 24; il peggiore |p - 2| 2.000
+  DEVE PASSARE: D-G0 la gauge in fase: |p| <= 0.01 a ogni k (primo ordine)                                               PASSA   il peggiore |p| 5.93e-12
+  DEVE PASSARE: D-P il fotone (->): |p| <= 0.01 a ogni k sopra il pavimento (primo ordine)                               PASSA   24 k su 24; il peggiore |p| 8.09e-09
+  DEVE PASSARE: D-P il fotone (<-ampiezza): |p| <= 0.01 a ogni k sopra il pavimento (primo ordine)                       PASSA   24 k su 24; il peggiore |p| 1.90e-09
+  DEVE FALLIRE: D-F il test D-G applicato alla gauge in fase: |p - 2| <= 0.1                                             ### FALLISCE   il peggiore |p - 2| 2.000
+==================================================================================================================================
+ESITO: 4/6 controlli come devono; fallite: 2 ['D-G fotone in fase: |p - 2| <= 0.1 a ogni k sopra il pavimento', 'D-G ottica in fase: |p - 2| <= 0.1 a ogni k sopra il pavimento']
+exit 1 09:42:12

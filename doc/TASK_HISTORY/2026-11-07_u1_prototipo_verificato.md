@@ -558,3 +558,24 @@
 - **E il sospetto su `n = 12`** *(fotone, ottica e gauge E tutti a `3.3373e-05` in (→))*: **lo stampo con le parti reale e immaginaria di `u`**, **senza verdetto.**
 - ### ⚠ **ANNOTAZIONE, PRIMA DI GIRARE** *(il commit del codice)*: **il pavimento scritto sopra, `eps_macchina / eps`, e' SBAGLIATO:** **ignora la SCALA di cio' che si sottrae.** **Nel verso (←) si sottraggono due campi dopo un tick, di scala `|X_sfondo|` molto sotto `1`** *(il campo dello sfondo, `max|E| ~3e-5` nel referto di T4-B)*: **l'arrotondamento vero e' `eps_macchina |X_sfondo| / eps`.** **Con la formula di sopra ogni valore della fase starebbe sotto il pavimento** *(`2.2e-9` contro i `1e-12`-`1e-10` gia' visti in T4-B)*, **e `D-G` non avrebbe materia.** ### **Lo correggo cosi', dichiarato:** **il pavimento e' `1000 x eps_macchina x scala / eps`, con la scala `|X_sfondo|_2` per (←) e `|psi|_2 = 1` per (→)**, **stampata nel referto.** ### **Lo vedo PERCHE' ho visto i numeri di T4-B: lo scrivo.**
 - **Lo script: `csv/solitone/u1_t4b_fase.py`** *(nuovo; `u1_t4b.py` non si tocca: il suo referto resta quello del suo blob)*.
+
+### 16.3 L'ESITO DELLA DIAGNOSI: **`4/6` -- D-G FALLISCE: DOVE SI MISURA, FOTONE E OTTICA RISPONDONO ALLA FASE AL PRIMO ORDINE IN `eps` (`p = 0`), NON AL TERZO; L'IPOTESI «GAUGE DELLA SOLA MATERIA» CADE COM'ERA SCRITTA; T4B-L DI T4-B ERA RUMORE SOTTO IL PAVIMENTO; FERMO (g3)** *(`doc/referti_l2/u1_t4b_fase.txt`; il codice a `165a8426`, blob `08f1c860`; `09:38`-`09:42`)*
+
+- **I DEVE:**
+  - **D-G0 passa** *(la gauge in fase di primo ordine: `|p| <= 5.9e-12`)*;
+  - **D-P passa** *(il fotone in (→) e in (← ampiezza): `p = 0` entro `8e-9`, `24` `k` su `24`)*;
+  - **D-F fallisce come deve** *(`|p - 2| = 2.000` sulla gauge)*.
+- ### **D-G FALLISCE, e per un motivo preciso:**
+  - **fotone e ottica in fase stanno quasi tutti SOTTO il pavimento** *(`V` `1e-13`-`1e-11`, il pavimento `2.7e-12`-`1.1e-11` ai tre `eps`; la scala dello sfondo `1.222e-03`)*;
+  - **i pochi `k` sopra** *(fotone a `(1,1)` `n` `7`, `8`; ottica a `(1,1)` `n` `8`-`12`)* **danno `p = 0.000`: PRIMO ordine in `eps`, non terzo.**
+- ### **LA LETTURA FISSATA: (g3)** *(«`p = 0` per fotone e ottica: la risposta di fase e' di primo ordine ma piccola; l'ipotesi cade; FERMO»)*. **Con due precisazioni dai numeri, da non leggere come conclusione:**
+  - ### **la piccolezza viene da `e`:** **in T4-B `V / e` della fase scala come `e^2`** *(il rapporto `4.0` fra `e*` e `e*/2`)*, **quindi la risposta e' di primo ordine in `eps` ma di TERZO ordine in `e`**, **contro il primo ordine in `e` della gauge.** **Un'ipotesi nuova, mia, non verificata:** **la fase e' una gauge della sola materia all'ordine `e`; la parte trasversa nasce dal campo dello sfondo** *(`A_sfondo ~ e`, la sorgente dell'onda piana)* **all'ordine `e^3`.**
+  - ### **il fallimento di T4B-L in T4-B (`2.98`) era RUMORE:** **i valori della fase SOTTO il pavimento, dove lo scarto relativo e' `O(1)`.** **Sopra il pavimento T4B-L e':**
+    - **`<= 5.3e-9` per (→)**;
+    - **`<= 7.4e-9` per (← ampiezza)**;
+    - **`<= 3.7e-4` per la fase** *(i pochi `k` sopra il pavimento, a `20`-`100` volte il pavimento: il rumore che resta)*.
+- **E `n = 12`** *(`t = pi`)*: **gli autovettori di fotone e ottica hanno la parte reale su un solo arco o su due** *(stampati)*. **La parte reale di `u e^{i pi r}` e' reale, quindi la perturbazione non si annulla.** ### **Il `3.3373e-05` uguale a gauge E resta da capire: lo scrivo, senza verdetto.**
+- ### **FERMO** *(g3)*. **La proposta, la decisione e' di Luca:**
+  - **(t-a)** **la fase si DICHIARA:** **«trasversalmente invisibile all'ordine `e`, visibile all'ordine `e^3`»**, e **T4B-L e T4B-P si rifanno sui versi (→) e (← ampiezza), col pavimento con la scala**;
+  - **(t-b)** **prima una prova dell'ipotesi nuova:** **la stessa misura con lo sfondo del campo AZZERATO a ogni tick** *(niente `A_sfondo`)*: **se fotone e ottica in fase vanno al pavimento, la parte `e^3` e' dello sfondo.**
+  - ### **La mia raccomandazione: (t-b)**, **pochi minuti, e decide la (t-a) coi numeri.**
