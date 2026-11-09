@@ -2,6 +2,10 @@
 r"""**D1, LA DERIVA DI `Lambda` DEL VUOTO SUL NUCLEO CONGELATO DEL PRINCIPALE** *(Luca `2026-11-09` `23:02`; il task history `doc/TASK_HISTORY/2026-11-09_d1_deriva_lambda_principale.md`)*. [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
 
     python csv/solitone/lambda_vuoto_deriva_principale.py > doc/referti_l2/lambda_vuoto_deriva_principale.txt
+    python csv/solitone/lambda_vuoto_deriva_principale.py --senza-avvolgimento > doc/referti_l2/lambda_vuoto_deriva_principale_nucleo.txt
+
+### **D1-bis** *(il task history di D1, sez. `6`: la correzione di un mio errore)*: **con `--senza-avvolgimento` la scena si costruisce IDENTICA, ma i tick girano con `contextlib.nullcontext()`
+### al posto di `BE.conv(DC.ZERO)`**, che sul principale AVVOLGE in memoria `grover`/`hop_psi`/`hop_phi` con lo zero simmetrico: **cosi' gira il nucleo congelato com'e' sul disco.**
 
 ### **LA COPIA, SUL PRINCIPALE, di `csv/solitone/lambda_vuoto_deriva.py` del laterale** *(`141711d3`, blob `b4610021`, sha1 dei byte grezzi; l'eccezione di Luca a U1)*, **con le cinque modifiche
 ### della sez. `2` del task history:** `CORSA` scritta qui *(`carta_punto_fisso` non c'e')*; i timbri *(`ramo.py`)*; questa docstring; **i numeri del laterale LETTI dal suo referto committato**; **le letture w1/w2/w3.**
@@ -11,6 +15,8 @@ r"""**D1, LA DERIVA DI `Lambda` DEL VUOTO SUL NUCLEO CONGELATO DEL PRINCIPALE** 
 **A ogni tick, per nodo, `Delta Lambda` in valore e in ulp; la deriva cumulata ai tick `1`, `10`, `100`, `1000`; la pendenza in log-log della rms fra `10` e `1000`.**
 **T1-F** *(DEVE FALLIRE)*: **in una seconda corsa, `Lambda` di un nodo spostato di `1e-12` al tick `500`; «la misura non lo vede».** **Le letture:** `v1` / `v2` *(limitata, passeggiata)* / `v3`.
 """
+import contextlib
+import hashlib
 import os
 import sys
 import time
@@ -24,6 +30,7 @@ import solitone  # noqa: E402,F401  (i percorsi)
 
 CORSA = "TBS"                  # ### D1 (1): il valore di carta_punto_fisso.CORSA sul laterale (il file non c'e' sul principale)
 LATERALE = ("zero-nel-nucleo", "81c690a8", "doc/referti_l2/lambda_vuoto_deriva.txt")   # ### D1 (4): il referto di T1, letto con git show
+SENZA = "--senza-avvolgimento" in sys.argv[1:]   # ### D1-bis (sez. 6)
 TOLL_W1 = 0.10                 # ### D1 (5): «entro il 10%» (Luca)
 N_TICK = 1000                  # ### sez. 23
 T_INIEZIONE = 500              # ### sez. 23
@@ -109,8 +116,15 @@ def main():
         st["psi_h"][...] = 0.0
         st["phi_h"][...] = phi_v
         foto = {k: v.copy() for k, v in st.items() if isinstance(v, np.ndarray)}
+        hs = hashlib.sha1()
+        for k in sorted(foto):
+            hs.update(k.encode("utf-8"))
+            hs.update(np.ascontiguousarray(foto[k]).tobytes())
+        print("### D1-bis: lo sha1 dei byte dello stato di partenza (tutte le chiavi ndarray, in ordine): %s; la modalita': %s" % (hs.hexdigest()[:16], "SENZA avvolgimento (il nucleo del disco)" if SENZA else "con BE.conv(DC.ZERO) (come T1)"))
         print("### la scena: %d nodi; mot.cs %s; Lambda all'inizio min %.17g max %.17g" % (mot.inc.n, "None" if mot.cs is None else "array (min %.6g, max %.6g)" % (float(np.min(mot.cs)), float(np.max(mot.cs))), float(mot.densita_vuoto(st).min()), float(mot.densita_vuoto(st).max())))
-        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+        import flussi_parziali as FP
+        with SF.forma(VC.FORMA), (contextlib.nullcontext() if SENZA else BE.conv(DC.ZERO)):
+            print("### D1-bis, il controllo positivo: dentro i tick FP.grover e' %s.%s, FP.hop_phi e' %s.%s" % (FP.grover.__module__, FP.grover.__qualname__, FP.hop_phi.__module__, FP.hop_phi.__qualname__))
             L = corsa(st, mot, par, foto, False)
             Li = corsa(st, mot, par, foto, True)
     ulp = np.spacing(np.abs(L[0]))
