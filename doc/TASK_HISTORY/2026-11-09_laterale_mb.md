@@ -231,3 +231,112 @@
 
 - **Le note di progetto «la gravita' nel modello»** *(G1-G8: il guscio di `cs`, perche' una `cs` locale non da' portata, la `U(1)`, le strade, il limite delle `2+1` dimensioni, il piano 2D poi 3D)* **stanno SUL PRINCIPALE:** `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md` *(`5f4b5216`, `93254ada`)*.
 - **Il legame con questo task history:** **G1 e' il guscio di R1** *(confermato qui, sez. `14`)*; **G5.3** *(una `cs` che si diffonde)* **e' uno dei candidati della cura.**
+
+## 16. LA CURA DI `cs`: QUATTRO FORME A CONFRONTO, CON LE PREVISIONI SCRITTE PRIMA *(Luca `2026-11-09` `14:53`-`15:01`; SOLO PROGETTO: nessun codice, nessuna corsa, nessuna legge cambiata)*
+
+### 16.1 IL FATTO DI PARTENZA E UNA PRECISAZIONE DAL REFERTO
+
+- **(r-D5)** *(`0f639f12`, `7/7`)*:
+  - **il guscio** di `Lambda` svuotato c'e' *(`r` `16`-`18`, `cs/s` minimo da `0.086` a `0.024`)*, **ma CONTRAE** *(`0.03`-`0.06`)*;
+  - **la direzione instabile sta al CENTRO in tutte le scene mature** *(g2; lo conferma il revisore, con un pacchetto senza guscio, a densita' `3`-`10` volte maggiori)*;
+  - **il meccanismo e' (d3):** **scendendo da `Lambda_c 272`, a `161.7` la mappa esce dal dominio** *(`s <= 0`)* **dove ancora contrarrebbe** *(`|Jv| 0.92`)*; **e il punto medio di `Omega` non esiste.**
+- **La legge di oggi `cs = Lambda / (Lambda + Lambda_c)` sta in `[0, 1)` per costruzione** *(`Lambda >= 0`)*: **`s <= 0` non e' una previsione della legge, e' il segno che dentro la legge non c'e' un `cs` coerente** *(Luca)*.
+- ### ⚠ **LA PRECISAZIONE, dal referto:**
+  - **gli `s <= 0` nascono nei punti di PROVA dei metodi** *(NK propone un `x` libero in `R^n`, anche negativo, e il tick alza)*;
+  - **`F(x)`, cioe' la legge applicata, e' SEMPRE in `[0, 1)`.**
+  - **Quindi il muro (d3) e' un muro del DOMINIO DI `F`, non dei valori della legge:** **la mappa non sa dove portarsi senza uscire.** **Conta per F3** *(che allarga il dominio)* **e per F1** *(che non cerca punti di prova)*.
+
+### 16.2 LE QUATTRO FORME
+
+#### F1. LA MEMORIA (`A15`)
+
+- **La formula:** **`cs_nuovo = cs_vecchio + (cs_legge(Lambda) - cs_vecchio) r`**, **`r` in `(0, 1]`.**
+- **Da che cosa si ricava `r`** *(`A15`: non un numero scelto; le proposte, la scelta e' di Luca)*:
+  - **(r-a) dal battito locale del vuoto:** **`r = 1 - e^{-omega_v dtau}`** *(`omega_v` la frequenza del vuoto locale, IS2: `0.471` per tick a `s 0.15`; `r ~ 0.38`)*;
+  - **(r-b) dal tempo di risposta di `Lambda`:** **`r = dtau / tau_Lambda`**, **con `tau_Lambda` misurato** *(il tempo di rilassamento di `Lambda` dopo un disturbo: una misura da fare)*;
+  - **(r-c) `r = s`** *(il quanto di tempo stesso)*: **il piu' semplice, ma e' una coincidenza dichiarata, non una derivazione.**
+- **Cura:**
+  - **nessun punto fisso da cercare, quindi nessuna divergenza;**
+  - **`cs` resta positivo per costruzione** *(una media pesata di due numeri positivi, con `r` in `(0, 1]`)*.
+- ### **NON cura, o da progettare:**
+  - ### **C1, LA REVERSIBILITA':** **un rilassamento del primo ordine NON e' reversibile** *(dimentica: e' dissipativo)*. **Due strade, da scrivere prima del codice:**
+    - **(m1)** **l'aggiornamento SIMMETRICO a meta' tick** *(`cs` letto da `Lambda` del punto medio, come fa oggi il punto fisso, ma ESPLICITO dal tick prima)*, **con l'inversa scritta: tornare indietro vuol dire riapplicare la stessa formula col segno di `dtau` cambiato** *(va verificato che la composizione sia l'identita': in generale NON lo e' per un rilassamento)*;
+    - **(m2)** **`cs` come variabile dinamica col suo coniugato** *(un oscillatore smorzato: il secondo ordine e' reversibile se lo smorzamento e' uno scambio con il vuoto e non una perdita)*: **piu' stati, ma il palindromo resta.**
+  - ### **C4, L'ENERGIA:** **cio' che la memoria dimentica diventa CALORE DEL VUOTO LOCALE** *(`A15`)*: **un termine nuovo nel bilancio, da scrivere nella forma.**
+- **Le previsioni, scritte prima:**
+  - **la corsa col solitone e `cs` acceso arriva fino in fondo** *(niente punto fisso, niente dominio)*;
+  - **vicino al solitone `cs` segue `Lambda` con un ritardo di circa `1/r` tick**;
+  - **la direzione instabile al centro DIVENTA un modo smorzato** *(un fattore `(1 - r) + r J`: con `|J| ~ 13` e `r` `~0.4` il fattore e' `~5`: NON contrae per forza)*. ### ⚠ **Quindi F1 da sola NON garantisce la stabilita' della dinamica:** **toglie il punto fisso, ma l'amplificazione al centro puo' tornare come instabilita' NEL TEMPO.** **Da misurare.**
+
+#### F2. LO SMUSSAMENTO NELLO SPAZIO
+
+- **La formula:** **`cs` dalla media di `Lambda` sul primo anello** *(i `6` vicini piu' il nodo, la localita' minima)*: **`cs = cs_legge(<Lambda>_1)`**; **il secondo anello solo come variante dichiarata.**
+- **Cura:** **attenua le variazioni rapide da nodo a nodo**, **di cui e' fatta la direzione instabile al centro** *(R2: il profilo di `v^2` cade di `10` ordini in `10` nodi)*.
+- **NON cura:** **resta un punto fisso da risolvere, e il bordo del dominio resta.**
+- **La previsione da misurare:** **di quanto scende `|Jv|/|v|` al centro con la media a `6`** *(D2)*. **La mia stima, scritta prima:** **una media su `7` nodi abbassa il modo piu' corto di un fattore fino a `~7`** *(da `~13` a `~2`: ancora sopra `1`)*: **da sola probabilmente NON basta.**
+- **Il legame con la gravita'** *(G5 delle note)*: **un orologio che sente un INTORNO, non un punto.**
+- **C2:** **nel vuoto uniforme la media e' il valore stesso: `cs = s` al bit** *(se la media si calcola nello stesso ordine: da verificare)*.
+
+#### F3. LA RAMPA SIMMETRICA RISPETTO ALLO ZERO *(Luca `14:58`)*
+
+- **Le forme:**
+  - **la razionale simmetrica:** **`cs = (Lambda - Lambda*) / (|Lambda - Lambda*| + Lambda_c)`**, **in `(-1, 1)`**;
+  - **la tangente iperbolica:** **`cs = c_max tanh((Lambda - Lambda*) / Lambda_c)`.**
+- ### **IL VINCOLO DEL VUOTO** *(C2: `cs(Lambda_v = 6) = s = 0.15`)*, **scritto:**
+  - **per la razionale:** **`Lambda_c = (6 - Lambda*) (1 - s) / s = 5.667 (6 - Lambda*)`**: **ogni `Lambda*` in `[0, 6)` lo soddisfa, con `Lambda_c` aggiustato.** ### **Il vincolo del vuoto NON fissa `Lambda*`: lascia una famiglia a un parametro.**
+  - ### **E UN FATTO DELLA FORMA:** **a `Lambda* = 0` la razionale simmetrica E' la legge di oggi** *(per `Lambda >= 0`, `|Lambda| = Lambda`)*: **non cambia niente.** **F3 cambia qualcosa SOLO con `Lambda* > 0`.**
+  - **Con `Lambda*` sopra il minimo del guscio** *(`0.12`-`0.44`)*, **il guscio avrebbe il tempo NEGATIVO.**
+- **Da che cosa derivare `Lambda*`** *(le proposte; la scelta e' di Luca)*:
+  - **(l-a) dal vuoto:** **il `Lambda` sotto cui il vuoto F3 non e' piu' un vuoto** *(da misurare: la densita' minima di un vuoto stabile)*;
+  - **(l-b) da un rapporto delle leggi:** **il `Lambda` dove `cs` e la sua derivata danno lo stesso ritmo** *(da scrivere)*;
+  - **(l-c) dal quanto di olonomia** *(la (g) della voce `35`)*, **che oggi non c'e'.**
+- **Cura:** **toglie il bordo del dominio** *(il muro di (d3))*: **il tick con `s < 0` e' il tick INVERSO, che esiste ed e' reversibile** *(il palindromo con `dtau` negativo)*. ### ⚠ **Ma il nucleo oggi ALZA con `s <= 0`** *(`flussi_parziali`)*: **F3 chiede di togliere quell'assert, nel nucleo: un cambio del nucleo, sul laterale.**
+- **NON cura da sola:** **l'amplificazione al centro** *(`|J| > 1`)*.
+- ### **LE CONSEGUENZE, SCRITTE COME PREVISIONI, NON COME SCOPERTE:**
+  - **dove `cs = 0` il tempo si ferma:** **una SUPERFICIE dove niente evolve, fra una regione a tempo in avanti e una a tempo all'indietro** *(un muro, simile a un orizzonte)*;
+  - **la materia nella regione a tempo negativo, letta con Feynman-Stueckelberg, come ANTIMATERIA**;
+  - **la causalita':** **un segnale non attraversa la superficie a `cs = 0`** *(la velocita' locale va a zero)*; **ai due lati le frecce del tempo sono opposte**;
+  - **l'energia:** **col tempo che cambia segno, l'energia locale `H dtau` cambia segno**: **da scrivere se il bilancio si chiude attraverso il muro** *(C4)*.
+
+#### F4. LA COMBINAZIONE: F3 COME LEGGE, F1 COME MODO DI ARRIVARCI
+
+- **`cs_nuovo = cs_vecchio + (cs_F3(Lambda) - cs_vecchio) r`.**
+- **F3 toglie il muro del dominio, F1 toglie la divergenza del punto fisso.**
+- **Le proprieta' buone di tutte e due:**
+  - **il dominio: si'** *(con F3 `cs` puo' passare per zero senza uscire)*;
+  - ### ⚠ **la positivita' di F1 si PERDE** *(con F3 la legge e' negativa sotto `Lambda*`)*: **non serve piu', perche' il tempo negativo e' ammesso;**
+  - **la reversibilita': quella di F1 (C1), da risolvere comunque;**
+  - **l'amplificazione al centro: non curata da nessuna delle due** *(vedi F1: un fattore `~5` nel tempo)*.
+
+### 16.3 I CRITERI DI SCELTA *(C1-C6, per la decisione di Luca)*
+
+| | **F1 la memoria** | **F2 lo smussamento** | **F3 la rampa simmetrica** | **F4 F3 + F1** |
+|---|---|---|---|---|
+| **C1 il tick reversibile e unitario** | ### **no, se del primo ordine**; (m1) da verificare, (m2) si' | si' *(e' ancora il punto fisso di oggi)* | si', **col tick inverso a `s < 0`** *(e l'assert del nucleo tolto)* | come F1 |
+| **C2 il vuoto `cs = s` al bit** | si' *(`cs_legge(6) = s`: il rilassamento resta fermo)* | si', da verificare l'ordine della media | si', **col vincolo su `Lambda_c`** | si' |
+| **C3 il solitone maturo fino in fondo** | **probabile, non garantito** *(l'amplificazione nel tempo)* | **improbabile** *(resta il punto fisso, `|J|` `~2`)* | **no da sola** *(resta il punto fisso con `|J| ~13`)* | probabile, non garantito |
+| **C4 il bilancio dell'energia** | **un termine nuovo: il calore della memoria** | chiuso come oggi | **da scrivere attraverso il muro** | tutti e due |
+| **C5 i parametri nuovi** | **`r`, da derivare** | **nessuno** *(il primo anello)* | **`Lambda*`, da derivare** | `r` e `Lambda*` |
+| **C6 il legame con la gravita'** | un punto, con memoria | **un intorno** | un punto | un punto, con memoria |
+
+### 16.4 LA PROVA CHE DECIDERA' *(da progettare, NON da fare)*
+
+- **La scena:** **quella di (r-D5)** *(`TBS` maturo dalla libreria, `Lambda_c 34`)*.
+- **Per ciascuna forma:**
+  - **D2:** **`|Jv|/|v|` al centro, al guscio, nel vuoto** *(per F1 e F4: il fattore del rilassamento `(1 - r) + r J`, non `J`)*;
+  - **una corsa corta con `cs` acceso:** **`1000` tick** *(`150` unita')*, **la norma, l'energia e il minimo di `cs` stampati a ogni `10` tick.**
+- **Le letture, scritte prima:**
+  - **(k1) la forma arriva in fondo, col vuoto al bit:** **candidata**;
+  - **(k2) esce dal dominio o alza:** **scartata, col tick in cui succede**;
+  - **(k3) arriva in fondo, ma una grandezza cresce senza limite** *(l'amplificazione nel tempo)*: **instabile, con il ritmo di crescita.**
+- **Il costo stimato** *(dal referto di (r-D5): `0.15` s per mezzo tick sulla scena di `TBS`)*:
+  - **D2: `~1` minuto per forma;**
+  - **la corsa corta: `1000` tick x `~0.3` s = `~5` minuti per forma** *(F2 e F3 col punto fisso: fino a `120` giri per tick, quindi fino a `~10` ore se non converge; si ferma al primo tick che non converge)*;
+  - **in tutto, le quattro forme: `~1` ora, se F2 e F3 si fermano presto.**
+
+### 16.5 LE DOMANDE A LUCA *(il criterio di chiusura: la sua risposta, registrata qui)*
+
+1. **Quale forma, o quale combinazione, provare per PRIMA?** *(la mia raccomandazione: F1 con (m2), o F4, perche' sono le sole che tolgono il punto fisso; F2 come misura accessoria, a costo nullo di parametri)*
+2. **Da che cosa ricavare `r`** *(F1: (r-a) il battito del vuoto, (r-b) il tempo di risposta di `Lambda`, (r-c) `s`)*?
+3. **Da che cosa ricavare `Lambda*`** *(F3: (l-a), (l-b), (l-c))*, **sapendo che il vincolo del vuoto lascia una famiglia e che a `Lambda* = 0` F3 e' la legge di oggi?**
+4. **C1:** **la memoria del primo ordine NON e' reversibile:** **e' accettabile un termine dissipativo dichiarato** *(il calore del vuoto)*, **o si vuole (m2)** *(`cs` col suo coniugato)*?
