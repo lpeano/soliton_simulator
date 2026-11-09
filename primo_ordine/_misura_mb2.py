@@ -102,17 +102,19 @@ def h_tot(inc, mot, st, par):
     d = inc.grado.astype(float)
     pu_psi = (np.abs(S_psi[:, 0]) ** 2 + np.abs(S_psi[:, 1]) ** 2) / d
     pu_phi = np.abs(S_phi) ** 2 / d
-    nodo = -OMEGA * float(np.sum((nrm_psi - pu_psi) + (nrm_phi - pu_phi)))
+    # ### ⭐⭐ LO ZERO SIMMETRICO (Luca 2026-11-08 15:51, z1): `delta = 1/2` per i pezzi parziali, scritto nella forma LUNGA (`N - P - N/2`, `arco - nrm/2`): la SECONDA FONTE resta indipendente da `energia_pesata` (che usa la forma corta) e il braccio 0 di `_misura_hw` le confronta.
+    nodo = -OMEGA * float(np.sum((nrm_psi - pu_psi - 0.5 * nrm_psi) + (nrm_phi - pu_phi - 0.5 * nrm_phi)))
     # ------------------------------------------------- i due pezzi di ARCO
     v = psi.reshape(m, 2, 2)
     p0, p1 = v[:, 0, :], v[:, 1, :]
     incro = np.einsum("ai,aji,aj->a", np.conj(p0), np.conj(U), p1)
     nrm_a = (np.abs(p0) ** 2).sum(axis=1) + (np.abs(p1) ** 2).sum(axis=1)
-    arco_psi = float(np.sum(nrm_a - 2.0 * np.real(incro))) / 2.0
+    arco_psi = float(np.sum(nrm_a - 2.0 * np.real(incro))) / 2.0 - 0.5 * float(np.sum(nrm_a))
     w = phi.reshape(m, 2)
     f0, f1 = w[:, 0], w[:, 1]
-    arco_phi = float(np.sum(np.abs(f0) ** 2 + np.abs(f1) ** 2
-                            - 2.0 * np.real(np.conj(f0) * f1))) / 2.0
+    arco_phi = (float(np.sum(np.abs(f0) ** 2 + np.abs(f1) ** 2
+                             - 2.0 * np.real(np.conj(f0) * f1))) / 2.0
+                - 0.5 * float(np.sum(np.abs(f0) ** 2 + np.abs(f1) ** 2)))
     arco = -OMEGA * (arco_psi + arco_phi)
     # ------------------------------------------------- la moneta di spin
     h = mot.elicita(st).copy()
@@ -172,7 +174,8 @@ def pezzi_di_h(inc, mot, st, par):
     d = inc.grado.astype(float)
     pu_psi = (np.abs(S_psi[:, 0]) ** 2 + np.abs(S_psi[:, 1]) ** 2) / d
     pu_phi = np.abs(S_phi) ** 2 / d
-    per_nodo = -OMEGA * ((nrm_psi - pu_psi) + (nrm_phi - pu_phi))
+    # ### ⭐⭐ LO ZERO SIMMETRICO (Luca 2026-11-08 15:51, z1): `delta = 1/2` per i pezzi parziali, scritto nella forma LUNGA (`N - P - N/2`, `arco - nrm/2`): la SECONDA FONTE resta indipendente da `energia_pesata` (che usa la forma corta) e il braccio 0 di `_misura_hw` le confronta.
+    per_nodo = -OMEGA * ((nrm_psi - pu_psi - 0.5 * nrm_psi) + (nrm_phi - pu_phi - 0.5 * nrm_phi))
     # ### la MONETA: `elicita` e' ### **GIA' SOMMATA PER NODO** *(letto dal sorgente:
     # ### `motore.elicita` fa `np.add.at(h, inc.nodo, sn)` e torna `(n,)`)*, quindi
     # ### ### **non si raccoglie una seconda volta** -- e il peso che la moneta
@@ -192,11 +195,11 @@ def pezzi_di_h(inc, mot, st, par):
     p0, p1 = v[:, 0, :], v[:, 1, :]
     incro = np.einsum("ai,aji,aj->a", np.conj(p0), np.conj(U), p1)
     nrm_a = (np.abs(p0) ** 2).sum(axis=1) + (np.abs(p1) ** 2).sum(axis=1)
-    arco_psi = (nrm_a - 2.0 * np.real(incro)) / 2.0
+    arco_psi = (nrm_a - 2.0 * np.real(incro)) / 2.0 - 0.5 * nrm_a
     w = phi.reshape(m, 2)
     f0, f1 = w[:, 0], w[:, 1]
-    arco_phi = (np.abs(f0) ** 2 + np.abs(f1) ** 2
-                - 2.0 * np.real(np.conj(f0) * f1)) / 2.0
+    arco_phi = ((np.abs(f0) ** 2 + np.abs(f1) ** 2
+                 - 2.0 * np.real(np.conj(f0) * f1)) / 2.0 - 0.5 * (np.abs(f0) ** 2 + np.abs(f1) ** 2))
     per_arco = -OMEGA * (arco_psi + arco_phi)
     return per_nodo, per_arco
 
