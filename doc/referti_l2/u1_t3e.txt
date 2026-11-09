@@ -1,0 +1,27 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3e.py  sha1-BYTE 59f4109c  committato e pulito
+==================================================================================================================================
+T3, d5', d6', d7 (Luca 17:57): E:\soliton_simulator\libreria\TBS_100000_completo.npz; N_D 500; le norme (0.001, 0.1, 1.0); la soglia assoluta 1.332e-12; il fattore del braccio di controllo 2
+==================================================================================================================================
+  (0) SENZA il campo: relativo 1.099e-12; assoluto psi 6.303e-12 phi 2.877e-12
+  e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (come u1_t3b)
+  (d5') il campo dopo 500 tick con la sorgente: max|A| 7.352e+02 max|E| 8.114e+01 max|e B| 3.462e-02
+  (d5') dal campo maturo, la sorgente SPENTA: relativo 4.542e-11; assoluto psi 4.847e-11 phi 1.166e-10
+  (d5') dal campo maturo, la sorgente ACCESA: relativo 1.155e-11; assoluto psi 9.760e-11 phi 2.964e-11
+  (d6') la norma x 0.001: assoluto psi col campo 1.833e-10 senza 1.202e+00 (rapporto 0.00); phi col 3.592e-10 senza 3.028e+00 (rapporto 0.00)
+  (d6') la norma x 0.1: assoluto psi col campo 1.763e-11 senza 1.377e-11 (rapporto 1.28); phi col 5.155e-11 senza 3.620e-11 (rapporto 1.42)
+  (d6') la norma x 1: assoluto psi col campo 5.266e-09 senza 9.135e-11 (rapporto 57.65); phi col 1.497e-10 senza 7.560e-11 (rapporto 1.98)
+  (d7) il servizio: J bilineare contro J di oggi su un tick, 2 spostamenti: max|dJ| 4.194e-13 (rho_max 2.623e+03, 0.7 eps rho_max)
+  (d7) G6 col campo a e* e la J BILINEARE: relativo 2.618e-10; assoluto psi 5.482e-09 phi 1.513e-10
+  (d7) G6 col campo a e* e la J di OGGI: relativo 2.515e-10; assoluto psi 5.266e-09 phi 1.497e-10
+==================================================================================================================================
+  LA LETTURA (d5', Luca 17:57): NON la sorgente sola: spenta su un campo acceso, G6 resta lontano
+  DEVE PASSARE: d7-S la J bilineare = la J di oggi su un tick entro 64 eps rho_max                                       PASSA   0.7 eps rho_max
+  DEVE PASSARE: d7 G6 su TBS col campo a e* e la J bilineare sotto 1.33e-12 o entro 2 volte (0)                          ### FALLISCE   2.618e-10 (0: 1.099e-12)
+  DEVE FALLIRE: d7-F la J di oggi: sotto 1.33e-12 o entro 2 volte (0)                                                    PASSA   2.515e-10
+==================================================================================================================================
+ESITO: 2/3 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: d7 G6 su TBS col campo a e* e la J bilineare sotto 1.33e-12 o entro 2 volte (0)']
+exit 1 18:43:24

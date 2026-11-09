@@ -93,7 +93,8 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **T3, I DEVE DI BASE DELL'INNESTO U(1)**.
 # ### **LA R60, carta_r60.py VERSIONE 2**.
 # ### **T3, LA DIAGNOSI E IL REGIME MODERATO**.
-LIBRERIA_RIFERITA = "319786bc"
+# ### **LA STAZIONARIETA' VERSIONE 2, u1_t3d, u1_t3e**.
+LIBRERIA_RIFERITA = "654292f2"
 
 
 def vecchi():

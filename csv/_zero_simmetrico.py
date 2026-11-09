@@ -62,19 +62,28 @@ def f_(x, fm="%+.4e"):
 
 @contextlib.contextmanager
 def convenzione_simmetrica():
-    """### **Dal `2026-11-08` NULLA: lo zero simmetrico e' NEL NUCLEO** *(`primo_ordine/flussi_parziali`: le stesse operazioni che questa funzione faceva in memoria --
-    il pezzo di prima a `f/2`, poi quello di `_gravita_collettiva.convenzione_alternativa` a `f/2` -- nello stesso ordine; il braccio `0` AL BIT,
-    `csv/solitone/zero_nel_nucleo.py`)*. ### **Applicarla ancora darebbe lo zero DUE volte.**"""
-    yield
+    """### **`exp(i theta (I - 2P)/2)`** per ogni pezzo parziale: ### **il pezzo di oggi a `f/2`, poi quello dell'ALTERNATIVA a `f/2`** *(le funzioni prese dentro
+    `convenzione_alternativa()`, il suo meccanismo)*."""
+    import _gravita_collettiva as GC
+    import flussi_parziali as FP
+    g0, hp0, hf0 = FP.grover, FP.hop_psi, FP.hop_phi
+    with GC.convenzione_alternativa():
+        ga, hpa, hfa = FP.grover, FP.hop_psi, FP.hop_phi
 
+    def comp(oggi, alt):
+        def f(mot, x, frazione):
+            oggi(mot, x, 0.5 * frazione)
+            return alt(mot, x, 0.5 * frazione)
+        return f
+    FP.grover, FP.hop_psi, FP.hop_phi = comp(g0, ga), comp(hp0, hpa), comp(hf0, hfa)
+    try:
+        yield
+    finally:
+        FP.grover, FP.hop_psi, FP.hop_phi = g0, hp0, hf0
 
 
 def conv(nome):
-    """### **Dal `2026-11-08` lo zero simmetrico e' NEL NUCLEO** *(`primo_ordine/flussi_parziali.grover`, `hop_psi`, `hop_phi`; Luca `14:19`)*: ### **`"simm"` non avvolge
-    piu' niente; ogni altro nome ALZA** -- **lo zero di prima non esiste piu' nel nucleo, e un sigillo che lo chiedeva si rigira AL SUO commit** *(darlo in silenzio
-    col simmetrico sarebbe un'altra fisica sotto lo stesso nome)*."""
-    assert nome == "simm", ("lo zero %r non esiste piu': dal 2026-11-08 il nucleo ha lo zero simmetrico; un sigillo vecchio si rigira al suo commit" % (nome,))
-    return contextlib.nullcontext()
+    return convenzione_simmetrica() if nome == "simm" else contextlib.nullcontext()
 
 
 def nome_curv(rg):

@@ -1,0 +1,26 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+### R-0, R-1, R-1-F su C35-pi: l'ultimo pezzo 60000 -> 66667 (t_fine 66667) rifatto da corsa() dallo stato completo a 60000
+  DEVE PASSARE: R-0 il file di ripresa di C35-pi e' a t1 dell'ultima riga e i suoi sha = sha_fine dell'ultima ri PASSA   t 66667
+  DEVE PASSARE: R-0 lo stato completo a 60000 (C35-pi_stato_060000.npz) = lo sha registrato = sha_fine del pezzo PASSA   
+  la sabbiera E:\soliton_simulator\ripresa_R1\C35-pi_20261108_211629; CORSE[C35-pi] per il pezzo rifatto: (1000, 10000.050000) (il t_fine 66667 dell'ultima riga)
+  la corsa C35-pi su L 162: mu 4.161868161822480, w_in 6.643741075297 (BG-F-0.15 su L 81: 4.161868161822483, 6.643741075297)
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1197, in <module>
+    main(sys.argv[1:])
+    ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1184, in main
+    sys.exit(ripresa(argv[argv.index("--ripresa") + 1]))
+             ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1146, in ripresa
+    rc = corsa(nome)
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 408, in corsa
+    assert testa["info"]["mu"] == mu and testa["w_in"] == w_in and testa["e_K"] == e_K, "la scena NON e' quella del primo pezzo"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: la scena NON e' quella del primo pezzo
+exit 1 21:16:50

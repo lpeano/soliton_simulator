@@ -1,0 +1,111 @@
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+==================================================================================================================================
+LA LETTURA DI STAZIONARIETA' (Luca q-s1..q-s6): Sokal c 5; finestre da t 1000; P su (1000.0, 10000.0); W = 3P (ripiego 6000); controlli ogni 1500; 3 di fila; s 0.15
+==================================================================================================================================
+  DEVE PASSARE: ST-P il periodo di un sin di periodo 137 piu' rumore, entro il passo del periodogramma                   PASSA   P 136.993 passo 0.938
+  DEVE PASSARE: ST-B tau_int di Sokal su un AR(1) phi 0.9: il teorico 9.50 entro un fattore 1.5                          PASSA   9.848 (M 50)
+  DEVE PASSARE: ST-I l'allungamento di un'ellisse gaussiana di rapporto 2 entro 0.01                                     PASSA   1.9903
+### ST-S (STAMPA, non un DEVE): dove il criterio avrebbe fermato
+  S162     fino a t 9999; P 1285.7 (passo 183.7); W 3857; le grandezze ['E + E_ass', 'alone', 'cuore', 'emissione', 'spostamento', 'w']
+    T    9000  no di fila 0  E + E_ass NO(3)  alone NO(5.3)  cuore NO(7.6)  emissione NO(4.7)  spostamento ok  w NO(9.2)
+    LA LETTURA: il regime NON raggiunto entro t 9999 (la finestra osservata)
+    (s3) E + E_ass    la pendenza nella finestra, nel tempo: 6000:-2.238e-03(1.4e-03)  7500:-1.174e-03(1.4e-03)  9000:-8.483e-04(1.3e-03)
+    (s3) E + E_ass    la pendenza della pendenza +4.633e-07 +- 8.2e-08: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) alone        la pendenza nella finestra, nel tempo: 6000:-6.554e-09(8.2e-10)  7500:-2.068e-09(5.3e-10)  9000:+2.574e-10(1.7e-10)
+    (s3) alone        la pendenza della pendenza +2.271e-12 +- 2.4e-13: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) cuore        la pendenza nella finestra, nel tempo: 6000:-2.165e-01(1.5e-02)  7500:-1.358e-01(6.5e-03)  9000:-9.500e-02(4.2e-03)
+    (s3) cuore        la pendenza della pendenza +4.051e-05 +- 4.4e-06: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) emissione    la pendenza nella finestra, nel tempo: 6000:-1.208e-04(1.5e-05)  7500:-5.642e-05(7.0e-06)  9000:-3.171e-05(2.9e-06)
+    (s3) emissione    la pendenza della pendenza +2.971e-08 +- 4.4e-09: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) spostamento  la pendenza nella finestra, nel tempo: 6000:-1.057e-05(2.6e-05)  7500:-2.179e-05(2.5e-05)  9000:-8.728e-06(1.8e-05)
+    (s3) spostamento  la pendenza della pendenza +6.137e-10 +- 2.7e-09: COSTANTE entro l'errore
+    (s3) w            la pendenza nella finestra, nel tempo: 6000:+1.240e-04(1.3e-05)  7500:+7.026e-05(4.4e-06)  9000:+4.940e-05(4.4e-06)
+    (s3) w            la pendenza della pendenza -2.488e-08 +- 3.7e-09: CALA in modulo (si avvicina a uno stato fisso)
+  TB3      fino a t 30000; P 1500.0 (passo 250.0); W 4500; le grandezze ['E + E_ass', 'alone', 'cuore', 'emissione', 'spostamento', 'w']
+    T   10500  no di fila 0  E + E_ass NO(3.5)  alone NO(7)  cuore NO(6.9)  emissione NO(4.5)  spostamento ok  w NO(7.8)
+    T   12000  no di fila 0  E + E_ass NO(2.2)  alone NO(6.7)  cuore NO(12)  emissione NO(4.6)  spostamento ok  w NO(22)
+    T   13500  no di fila 0  E + E_ass ok  alone NO(8.8)  cuore NO(14)  emissione NO(8.8)  spostamento ok  w NO(6)
+    T   15000  no di fila 0  E + E_ass ok  alone NO(10)  cuore NO(10)  emissione NO(6.8)  spostamento ok  w NO(5.1)
+    T   16500  no di fila 0  E + E_ass ok  alone NO(8.3)  cuore NO(11)  emissione NO(3.9)  spostamento ok  w NO(2.7)
+    T   18000  no di fila 0  E + E_ass ok  alone NO(8.2)  cuore NO(9.6)  emissione NO(6.3)  spostamento NO(4.1)  w ok
+    T   19500  no di fila 0  E + E_ass ok  alone NO(6.9)  cuore NO(2.7)  emissione NO(3.3)  spostamento NO(5.7)  w NO(5.7)
+    T   21000  no di fila 0  E + E_ass ok  alone NO(6.4)  cuore NO(2.7)  emissione ok  spostamento ok  w NO(5.5)
+    T   22500  no di fila 0  E + E_ass NO(2.2)  alone NO(4.5)  cuore ok  emissione ok  spostamento NO(4.5)  w ok
+    T   24000  no di fila 0  E + E_ass ok  alone NO(2.2)  cuore NO(5.3)  emissione ok  spostamento NO(5.9)  w NO(2.8)
+    T   25500  no di fila 0  E + E_ass ok  alone ok  cuore NO(10)  emissione ok  spostamento NO(2.1)  w NO(5.4)
+    T   27000  no di fila 0  E + E_ass ok  alone NO(2)  cuore NO(5.8)  emissione ok  spostamento ok  w NO(5.4)
+    T   28500  no di fila 0  E + E_ass ok  alone NO(2.2)  cuore NO(8.5)  emissione ok  spostamento NO(2.1)  w NO(4.6)
+    T   30000  no di fila 0  E + E_ass ok  alone NO(3)  cuore NO(18)  emissione ok  spostamento ok  w ok
+    LA LETTURA: il regime NON raggiunto entro t 30000 (la finestra osservata)
+    (s3) E + E_ass    la pendenza nella finestra, nel tempo: 6000:-2.716e-03(1.1e-03)  7500:-1.723e-03(1.1e-03)  9000:-1.121e-03(1.0e-03)  10500:-5.405e-04(9.6e-04)  12000:-3.772e-04(8.8e-04)  13500:-3.786e-04(7.8e-04)  15000:-3.399e-04(7.0e-04)  16500:-3.433e-04(6.6e-04)  18000:-5.308e-04(6.6e-04)  19500:-6.444e-04(6.8e-04)  21000:-5.877e-04(6.9e-04)  22500:-4.983e-04(6.6e-04)  24000:-4.125e-04(6.4e-04)  25500:-2.354e-04(6.0e-04)  27000:-1.729e-04(5.6e-04)  28500:-1.020e-04(5.3e-04)  30000:-1.470e-04(5.0e-04)
+    (s3) E + E_ass    la pendenza della pendenza +6.179e-08 +- 1.5e-08: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) alone        la pendenza nella finestra, nel tempo: 6000:-3.456e-09(7.7e-10)  7500:+7.672e-11(3.5e-10)  9000:+1.493e-09(1.8e-10)  10500:+1.901e-09(7.3e-11)  12000:+2.622e-09(1.5e-10)  13500:+3.826e-09(2.0e-10)  15000:+5.438e-09(3.3e-10)  16500:+7.378e-09(5.5e-10)  18000:+9.575e-09(6.7e-10)  19500:+1.382e-08(1.2e-09)  21000:+1.618e-08(1.3e-09)  22500:+1.811e-08(1.8e-09)  24000:+1.852e-08(1.8e-09)  25500:+1.763e-08(1.9e-09)  27000:+2.307e-08(1.6e-09)  28500:+2.417e-08(1.8e-09)  30000:+2.565e-08(1.9e-09)
+    (s3) alone        la pendenza della pendenza +1.216e-12 +- 4.5e-14: CRESCE in modulo
+    (s3) cuore        la pendenza nella finestra, nel tempo: 6000:-2.485e-01(2.3e-02)  7500:-1.526e-01(7.1e-03)  9000:-1.151e-01(4.2e-03)  10500:-8.619e-02(4.2e-03)  12000:-6.398e-02(2.7e-03)  13500:-5.054e-02(1.5e-03)  15000:-4.050e-02(1.6e-03)  16500:-3.516e-02(1.6e-04)  18000:-3.588e-02(2.8e-04)  19500:-3.625e-02(2.9e-04)  21000:-3.616e-02(3.3e-04)  22500:-3.482e-02(5.1e-04)  24000:-3.238e-02(6.8e-04)  25500:-3.100e-02(3.8e-04)  27000:-2.949e-02(7.8e-04)  28500:-2.496e-02(5.5e-04)  30000:-2.343e-02(1.8e-04)
+    (s3) cuore        la pendenza della pendenza +5.989e-06 +- 1.7e-06: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) emissione    la pendenza nella finestra, nel tempo: 6000:-1.675e-04(3.1e-05)  7500:-5.088e-05(6.3e-06)  9000:-2.974e-05(1.5e-06)  10500:-2.711e-05(1.7e-06)  12000:-1.707e-05(3.7e-06)  13500:-1.069e-05(1.6e-06)  15000:-8.269e-06(2.2e-06)  16500:-2.090e-06(1.3e-06)  18000:+1.316e-06(1.1e-06)  19500:+2.062e-07(1.3e-06)  21000:+2.076e-07(1.5e-06)  22500:-2.378e-06(1.9e-06)  24000:-1.654e-06(2.0e-06)  25500:+3.362e-07(1.4e-06)  27000:-4.514e-06(7.1e-07)  28500:-2.793e-06(1.2e-06)  30000:-6.909e-07(8.5e-07)
+    (s3) emissione    la pendenza della pendenza +3.375e-09 +- 1.3e-09: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) spostamento  la pendenza nella finestra, nel tempo: 6000:+2.734e-05(1.7e-05)  7500:+1.250e-05(1.6e-05)  9000:-2.254e-06(1.7e-05)  10500:+4.684e-06(1.1e-05)  12000:+3.070e-06(1.2e-05)  13500:-1.785e-05(1.3e-05)  15000:-2.269e-05(1.2e-05)  16500:+1.174e-05(1.0e-05)  18000:+4.544e-05(8.9e-06)  19500:+6.827e-05(1.1e-05)  21000:+4.303e-05(1.6e-05)  22500:-4.115e-05(1.7e-05)  24000:-5.402e-05(1.8e-05)  25500:-6.909e-06(1.8e-05)  27000:-2.414e-06(1.8e-05)  28500:-1.156e-06(1.9e-05)  30000:-2.854e-06(1.9e-05)
+    (s3) spostamento  la pendenza della pendenza -8.275e-10 +- 9.6e-10: COSTANTE entro l'errore
+    (s3) w            la pendenza nella finestra, nel tempo: 6000:+1.447e-04(1.3e-05)  7500:+1.007e-04(2.5e-06)  9000:+7.194e-05(7.4e-06)  10500:+3.944e-05(3.0e-06)  12000:+2.641e-05(2.1e-06)  13500:+2.570e-05(1.8e-06)  15000:+2.152e-05(1.8e-06)  16500:+1.932e-05(1.6e-06)  18000:+2.945e-05(2.3e-06)  19500:+3.754e-05(2.2e-06)  21000:+3.548e-05(2.5e-06)  22500:+3.232e-05(2.5e-06)  24000:+2.717e-05(2.9e-06)  25500:+1.636e-05(2.5e-06)  27000:+1.233e-05(2.7e-06)  28500:+8.945e-06(2.6e-06)  30000:+1.173e-05(2.7e-06)
+    (s3) w            la pendenza della pendenza -3.448e-09 +- 8.7e-10: CALA in modulo (si avvicina a uno stato fisso)
+  TBS      fino a t 30000; P 692.3 (passo 53.3); W 2077; le grandezze ['E + E_ass', 'alone', 'cuore', 'emissione', 'spostamento', 'w']
+    T    6000  no di fila 0  E + E_ass ok  alone NO(9.6)  cuore NO(11)  emissione NO(9.7)  spostamento ok  w NO(2.4)
+    T    7500  no di fila 0  E + E_ass ok  alone NO(3.7)  cuore NO(17)  emissione ok  spostamento ok  w ok
+    T    9000  no di fila 0  E + E_ass ok  alone NO(5.3)  cuore NO(7.3)  emissione NO(4.2)  spostamento ok  w ok
+    T   10500  no di fila 0  E + E_ass ok  alone ok  cuore NO(12)  emissione ok  spostamento ok  w ok
+    T   12000  no di fila 0  E + E_ass ok  alone ok  cuore NO(10)  emissione ok  spostamento ok  w ok
+    T   13500  no di fila 0  E + E_ass ok  alone ok  cuore NO(15)  emissione ok  spostamento ok  w ok
+    T   15000  no di fila 0  E + E_ass ok  alone ok  cuore NO(39)  emissione NO(2.4)  spostamento ok  w ok
+    T   16500  no di fila 0  E + E_ass ok  alone ok  cuore NO(3.4)  emissione NO(5.4)  spostamento ok  w ok
+    T   18000  no di fila 0  E + E_ass ok  alone ok  cuore ok  emissione NO(13)  spostamento ok  w ok
+    T   19500  no di fila 0  E + E_ass ok  alone ok  cuore NO(13)  emissione ok  spostamento ok  w ok
+    T   21000  no di fila 0  E + E_ass ok  alone ok  cuore NO(11)  emissione NO(5.9)  spostamento ok  w ok
+    T   22500  no di fila 0  E + E_ass ok  alone ok  cuore NO(5)  emissione NO(2.2)  spostamento ok  w ok
+    T   24000  no di fila 0  E + E_ass ok  alone ok  cuore NO(3.1)  emissione NO(3.3)  spostamento ok  w ok
+    T   25500  no di fila 0  E + E_ass ok  alone ok  cuore NO(15)  emissione ok  spostamento ok  w ok
+    T   27000  no di fila 0  E + E_ass ok  alone ok  cuore ok  emissione NO(4.4)  spostamento ok  w ok
+    T   28500  no di fila 0  E + E_ass ok  alone ok  cuore NO(3)  emissione NO(4.7)  spostamento ok  w ok
+    T   30000  no di fila 0  E + E_ass ok  alone ok  cuore NO(11)  emissione NO(2)  spostamento ok  w ok
+    LA LETTURA: il regime NON raggiunto entro t 30000 (la finestra osservata)
+    (s3) E + E_ass    la pendenza nella finestra, nel tempo: 4500:-2.345e-03(3.5e-03)  6000:-1.618e-03(3.6e-03)  7500:-7.250e-04(3.6e-03)  9000:-1.052e-03(3.4e-03)  10500:-6.273e-04(3.0e-03)  12000:-8.474e-04(2.7e-03)  13500:-2.647e-04(2.3e-03)  15000:-7.802e-05(2.0e-03)  16500:-5.186e-04(2.2e-03)  18000:-4.628e-04(2.4e-03)  19500:-4.480e-04(2.5e-03)  21000:-1.506e-04(2.4e-03)  22500:-2.132e-04(2.3e-03)  24000:-5.396e-04(2.1e-03)  25500:-3.019e-04(1.9e-03)  27000:-4.087e-04(1.7e-03)  28500:-2.305e-04(1.6e-03)  30000:+1.332e-06(1.7e-03)
+    (s3) E + E_ass    la pendenza della pendenza +5.353e-08 +- 1.3e-08: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) alone        la pendenza nella finestra, nel tempo: 4500:-3.453e-09(2.3e-10)  6000:+1.753e-10(2.0e-10)  7500:+2.043e-09(5.3e-10)  9000:+3.754e-09(6.0e-10)  10500:+5.709e-09(2.3e-09)  12000:+1.064e-08(2.3e-09)  13500:+8.743e-09(2.2e-09)  15000:+2.875e-09(3.8e-09)  16500:+1.790e-08(4.7e-09)  18000:+2.264e-08(4.4e-09)  19500:+1.691e-08(5.2e-09)  21000:+1.428e-08(5.1e-09)  22500:+1.675e-08(5.3e-09)  24000:+2.826e-08(6.0e-09)  25500:+2.851e-08(9.5e-09)  27000:+3.658e-08(9.2e-09)  28500:+4.846e-09(9.3e-09)  30000:+2.118e-08(1.0e-08)
+    (s3) alone        la pendenza della pendenza +1.053e-12 +- 2.2e-13: CRESCE in modulo
+    (s3) cuore        la pendenza nella finestra, nel tempo: 4500:-2.550e-01(1.2e-02)  6000:-1.610e-01(2.8e-03)  7500:-1.093e-01(1.5e-03)  9000:-9.185e-02(1.2e-03)  10500:-7.220e-02(1.8e-03)  12000:-6.066e-02(1.3e-03)  13500:-4.880e-02(1.0e-03)  15000:-3.534e-02(2.6e-04)  16500:-4.300e-02(7.3e-04)  18000:-3.738e-02(7.3e-04)  19500:-2.932e-02(4.3e-04)  21000:-2.592e-02(3.1e-04)  22500:-2.802e-02(2.8e-04)  24000:-2.818e-02(2.4e-04)  25500:-2.411e-02(3.1e-04)  27000:-2.541e-02(2.1e-04)  28500:-2.255e-02(4.7e-04)  30000:-1.998e-02(1.9e-04)
+    (s3) cuore        la pendenza della pendenza +5.965e-06 +- 1.4e-06: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) emissione    la pendenza nella finestra, nel tempo: 4500:-1.746e-04(8.3e-06)  6000:-4.138e-05(9.5e-06)  7500:-2.860e-05(6.5e-06)  9000:-1.598e-05(4.8e-06)  10500:-2.002e-05(5.0e-06)  12000:-1.345e-05(3.5e-06)  13500:-1.268e-05(2.0e-06)  15000:-1.544e-06(2.1e-06)  16500:+6.894e-06(3.6e-06)  18000:-1.210e-05(1.1e-06)  19500:-6.078e-06(1.8e-06)  21000:+2.751e-06(1.0e-06)  22500:+2.455e-06(1.1e-06)  24000:-2.340e-06(9.4e-07)  25500:-3.938e-06(1.2e-06)  27000:+1.818e-06(1.2e-06)  28500:-5.011e-06(9.3e-07)  30000:-2.591e-06(7.7e-07)
+    (s3) emissione    la pendenza della pendenza +2.967e-09 +- 1.1e-09: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) spostamento  la pendenza nella finestra, nel tempo: 4500:-9.951e-07(2.1e-05)  6000:-1.207e-06(2.5e-05)  7500:+6.254e-05(3.6e-05)  9000:+1.097e-05(4.8e-05)  10500:+9.216e-06(4.2e-05)  12000:+3.206e-05(4.1e-05)  13500:+1.804e-05(3.8e-05)  15000:+3.198e-05(4.1e-05)  16500:+4.979e-05(6.9e-05)  18000:+3.881e-05(7.0e-05)  19500:-5.110e-08(3.9e-05)  21000:+2.529e-05(3.6e-05)  22500:+7.414e-06(2.9e-05)  24000:+2.527e-05(3.8e-05)  25500:-2.084e-05(3.6e-05)  27000:-2.217e-05(3.5e-05)  28500:+2.638e-05(3.1e-05)  30000:-5.855e-06(2.7e-05)
+    (s3) spostamento  la pendenza della pendenza -8.386e-10 +- 6.4e-10: COSTANTE entro l'errore
+    (s3) w            la pendenza nella finestra, nel tempo: 4500:+1.359e-04(1.7e-05)  6000:+1.087e-04(2.0e-05)  7500:+7.153e-05(2.4e-05)  9000:+8.027e-05(2.7e-05)  10500:+4.621e-05(2.7e-05)  12000:+4.664e-05(2.8e-05)  13500:-2.028e-06(2.9e-05)  15000:-1.435e-05(3.0e-05)  16500:+2.080e-05(2.7e-05)  18000:+4.129e-05(2.8e-05)  19500:+4.424e-05(2.8e-05)  21000:+2.412e-06(2.6e-05)  22500:-9.502e-06(2.8e-05)  24000:+4.003e-05(2.5e-05)  25500:+4.028e-05(2.5e-05)  27000:+1.545e-05(2.4e-05)  28500:-1.095e-06(2.5e-05)  30000:+2.056e-05(2.7e-05)
+    (s3) w            la pendenza della pendenza -3.444e-09 +- 9.9e-10: CALA in modulo (si avvicina a uno stato fisso)
+### (s3) IL RITMO DI PERDITA E LA VITA (una ESTRAPOLAZIONE: la massa dentro il bordo diviso il ritmo di M_ass nell'ultima finestra)
+  S162     dM_ass/dt nell'ultima finestra di 6000: 1.0086e-01 +- 6.5e-03; M dentro 9.9566e+05; la vita estrapolata 9.872e+06 unita'
+  TB3      dM_ass/dt nell'ultima finestra di 6000: 2.4478e-02 +- 3.6e-04; M dentro 9.9497e+05; la vita estrapolata 4.065e+07 unita'
+  TBS      dM_ass/dt nell'ultima finestra di 6000: 2.3117e-02 +- 4.2e-04; M dentro 9.9463e+05; la vita estrapolata 4.302e+07 unita'
+### IL PERIODO DI TB3 (Luca 18:08: il sospetto che 1500 sia il passo dei controlli; mio: o la lunghezza di un pezzo)
+  il campionamento a 1000 tick: P 1500.0 (passo 250.0)
+  il campionamento a 700 tick: P 1505.0 (passo 250.8)
+  DENTRO I PEZZI (le serie spezzate alle riprese, 20 pezzi, la potenza mediata): il picco a P 768.0
+### ST-F SU CASI COSTRUITI (Luca 18:42): una deriva COSTANTE piu' l'AR(1) DEVE dare il regime e la pendenza ritrovata; una deriva che ACCELERA DEVE dare non ancora
+  DEVE PASSARE: ST-F-C la deriva COSTANTE di 0.0005 piu' l'AR(1) e un'oscillazione: il regime raggiunto                  PASSA   da t 9000.0
+  DEVE PASSARE: ST-F-P la pendenza misurata ritrova la deriva entro 2 volte il suo errore                                PASSA   4.9124e-04 +- 1.6e-05
+  DEVE FALLIRE: ST-F la deriva che ACCELERA risulta nel regime                                                           ### FALLISCE   da t 9000.0
+### TF3 + TF3C (stampa, come prima)
+  TF3+TF3C fino a t 30000; P 4500.0 (passo 2250.0); W 13500; le grandezze ['E', 'alone', 'spostamento', 'w']
+    T   28500  no di fila 0  E NO(1.4e+02)  alone NO(5.6)  spostamento ok  w NO(6)
+    T   30000  no di fila 0  E NO(4.8)  alone NO(3.7)  spostamento NO(3.3)  w NO(3.1)
+    LA LETTURA: il regime NON raggiunto entro t 30000 (la finestra osservata)
+    (s3) E            la pendenza nella finestra, nel tempo: 15000:+6.269e-03(1.5e-04)  16500:+8.502e-03(1.4e-04)  18000:+1.135e-02(1.3e-04)  19500:+1.303e-02(1.1e-04)  21000:+1.298e-02(1.0e-04)  22500:+1.109e-02(1.1e-04)  24000:+8.406e-03(1.1e-04)  25500:+5.662e-03(1.1e-04)  27000:+3.371e-03(1.2e-04)  28500:+1.618e-03(1.3e-04)  30000:+5.182e-04(1.2e-04)
+    (s3) E            la pendenza della pendenza -6.032e-07 +- 2.0e-07: CALA in modulo (si avvicina a uno stato fisso)
+    (s3) alone        la pendenza nella finestra, nel tempo: 15000:+2.245e-06(8.2e-08)  16500:+2.374e-06(4.2e-08)  18000:+1.714e-05(7.9e-06)  19500:+1.521e-05(7.1e-06)  21000:+1.801e-05(7.2e-06)  22500:+4.178e-05(1.2e-05)  24000:+6.791e-05(1.6e-05)  25500:+8.630e-05(1.6e-05)  27000:+9.436e-05(1.4e-05)  28500:+8.872e-05(1.5e-05)  30000:+7.261e-05(1.9e-05)
+    (s3) alone        la pendenza della pendenza +6.794e-09 +- 8.5e-10: CRESCE in modulo
+    (s3) spostamento  la pendenza nella finestra, nel tempo: 15000:+4.609e-04(2.9e-05)  16500:+4.006e-04(5.1e-05)  18000:+7.430e-04(1.8e-04)  19500:+1.966e-03(6.4e-04)  21000:+2.320e-03(5.8e-04)  22500:+1.927e-03(6.3e-04)  24000:+1.464e-03(7.5e-04)  25500:+9.557e-04(8.3e-04)  27000:+3.877e-04(8.2e-04)  28500:-3.124e-04(6.9e-04)  30000:-1.177e-03(4.7e-04)
+    (s3) spostamento  la pendenza della pendenza -9.083e-08 +- 5.8e-08: COSTANTE entro l'errore
+    (s3) w            la pendenza nella finestra, nel tempo: 15000:+1.302e-04(5.0e-05)  16500:+1.916e-04(4.5e-05)  18000:+7.454e-04(2.6e-04)  19500:+8.747e-04(2.4e-04)  21000:+1.202e-03(2.4e-04)  22500:+1.787e-03(3.1e-04)  24000:+2.258e-03(3.0e-04)  25500:+2.531e-03(2.6e-04)  27000:+2.523e-03(2.6e-04)  28500:+2.171e-03(3.4e-04)  30000:+1.555e-03(4.4e-04)
+    (s3) w            la pendenza della pendenza +1.500e-07 +- 2.9e-08: CRESCE in modulo
+==================================================================================================================================
+ESITO: 5/6 controlli passano; DEVE fallite: 1 ['DEVE FALLIRE: ST-F la deriva che ACCELERA risulta nel regime']
+exit 1 19:05:27

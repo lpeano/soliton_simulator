@@ -286,6 +286,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[H-ID-OBBLIGATORIO]]`** | un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` | **`H-ID-OBBLIGATORIO`** |
 | **`[[H-INDICE]]`** | un ID citato CHE NON E- nell-indice | **`H-INDICE`** |
 | **`[[H-NON-TRACCIATI]]`** | file NON TRACCIATI e NON ignorati sotto `csv/` o `doc/`: BLOCCA, non avvisa | **`H-NON-TRACCIATI`** |
+| **`[[H-NUCLEO-CONGELATO]]`** | sul ramo `primo-ordine`, un commit che tocca `primo_ordine/` finche- `doc/NUCLEO_CONGELATO.md` dice CONGELATO: nessuna via d-uscita | **`H-NUCLEO-CONGELATO`** |
 | **`[[H-P1-bis]]`** | un referto committato SENZA toccare la relazione | **`H-P1-bis`** |
 | **`[[H-P3]]`** | un sigillo che configura il modulo A MANO invece di passare dal CLI | **`H-P3`** |
 | **`[[H-P5]]`** | un referto che non dichiara LA CONFIGURAZIONE INTERA | **`H-P5`** |
@@ -301,7 +302,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
 | **`[[P-TAB]]`** | un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei | **`P-TAB`** |
 
-> ### ⚠ **`0` di queste `19` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `20` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

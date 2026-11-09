@@ -190,11 +190,9 @@ def main(argv):
     m1.operatori["grover"](s1, {}, 1)
     m1.operatori["grover"](s1, {}, 1)
     m1.chiudi_tick()
-    # ### ⭐⭐ **DAL `2026-11-08` LO ZERO SIMMETRICO** *(Luca `15:51`, z1)*: il Grover e' `e^{-i theta/2} G(theta)`, quindi a `theta = pi` e' `-i G(pi)` e
-    # ### ### **`G_s^2 = -I`** *(DICHIARATO prima: il task history `2026-11-08_zero_simmetrico_nel_nucleo`, sez. `1.4`)*. ### **Il controllo e' lo stesso, col segno.**
-    scarto = float(np.max(np.abs(s1["psi_h"] + prima)))
+    scarto = float(np.max(np.abs(s1["psi_h"] - prima)))
     scala = float(np.max(np.abs(prima)))
-    esito("### (3) a `theta = pi` il Grover simmetrico al quadrato e' `-I` (`-i G(pi)`, e `G(pi)` e' un'involuzione)",
+    esito("### (3) a `theta = pi` il Grover e' un'INVOLUZIONE: `G^2 = I`",
           scarto <= 64 * eps_m * scala,
           "### scarto %.3e su scala %.3e, cioe' %.1f ulp"
           % (scarto, scala, scarto / (eps_m * scala)))

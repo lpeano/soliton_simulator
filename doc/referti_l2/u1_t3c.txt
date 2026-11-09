@@ -1,0 +1,20 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3c.py  sha1-BYTE 66072d22  committato e pulito
+==================================================================================================================================
+T3, d4: G6 SULLO STATO DI TBS SENZA IL CAMPO (il braccio di controllo) E COL CAMPO A e* (Luca 14:39): E:\soliton_simulator\libreria\TBS_100000_completo.npz; N_D 500; il criterio (1)/(0) <= 2; la soglia assoluta 1.332e-12
+==================================================================================================================================
+  (0) SENZA il campo (U = I): 500 avanti, T, 500 avanti, T: max(psi, phi) relativo 1.099e-12 (la soglia assoluta 1.332e-12)
+  LA LETTURA (Luca 14:39): (m2) -- la U(1) aggiunge irreversibilita': FERMO
+  e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (come u1_t3b)
+  (1) compatto    e* 1.305499e-02: G6 2.553e-10 (rapporto a (0) 232.242); senza A -> -A 1.825e+00
+  (1) noncompatto e* 1.305499e-02: G6 2.515e-10 (rapporto a (0) 228.806); senza A -> -A 1.825e+00
+==================================================================================================================================
+  DEVE PASSARE: d4 la lettura e' (m1): senza il campo l'errore NON e' vicino alla soglia assoluta (> 10 x 1.33e-12)      ### FALLISCE   1.099e-12
+  DEVE PASSARE: G6-C su TBS: (1) col campo a e* / (0) senza <= 2, nelle due forme (il criterio di Luca 14:39)            ### FALLISCE   {'compatto': '232.242', 'noncompatto': '228.806'}
+  DEVE FALLIRE: G6-C-F lo stesso rapporto senza A -> -A: <= 2                                                            PASSA   {'compatto': '1.66e+12', 'noncompatto': '1.66e+12'}
+==================================================================================================================================
+ESITO: 1/3 controlli passano; DEVE fallite: 2 ["DEVE PASSARE: d4 la lettura e' (m1): senza il campo l'errore NON e' vicino alla soglia assoluta (> 10 x 1.33e-12)", 'DEVE PASSARE: G6-C su TBS: (1) col campo a e* / (0) senza <= 2, nelle due forme (il criterio di Luca 14:39)']
+exit 1 15:40:05

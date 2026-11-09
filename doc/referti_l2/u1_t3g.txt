@@ -1,0 +1,24 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3g.py  sha1-BYTE 2179c7f9  committato e pulito
+==================================================================================================================================
+T3, (iii) (Luca 20:57 e 21:49): E:\soliton_simulator\libreria\TBS_100000_completo.npz; N_D 500; i divisori di e* (1, 2, 4); la soglia assoluta 1.332e-12
+==================================================================================================================================
+  (0) SENZA il campo: relativo 1.099e-12; assoluto psi 6.303e-12 phi 2.877e-12
+  e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (come u1_t3b)
+  (0) senza campo, norma piena: assoluto psi 6.303209200199874e-12 (u1_t3f 6.303e-12)
+  (iii) e* / 1: assoluto psi 5.266247892371371e-09; phi 1.497e-10; relativo 2.515e-10
+  (iii) e* / 2: assoluto psi 4.774101161891557e-11; phi 4.742e-12; relativo 2.280e-12
+  (iii) e* / 4: assoluto psi 6.842270370734197e-12; phi 3.061e-12; relativo 1.169e-12
+==================================================================================================================================
+  DEVE PASSARE: (0) senza campo = u1_t3f alle cifre stampate                                                                   PASSA   6.303e-12
+  DEVE PASSARE: (0) col campo a e* coi due mezzi = u1_t3f alle cifre stampate                                                  PASSA   5.266e-09
+  DEVE PASSARE: C-E2 un D costruito come e^2 (rapporti 4, 4) classificato e^2                                                  PASSA   e^2
+  DEVE FALLIRE: C-E1 un D costruito come e (rapporti 2, 2) classificato e^2                                                    ### FALLISCE   lineare
+  (iii) D(e*) 5.260e-09, D(e*/2) 4.144e-11, D(e*/4) 5.391e-13; G6(senza) 6.303e-12
+  LA LETTURA (iii): NON RISOLTO: D(e*/4) sotto 2 volte G6(senza)
+==================================================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []
+exit 0 23:12:43

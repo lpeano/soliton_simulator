@@ -708,6 +708,7 @@
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
    "H-NON-TRACCIATI",
+   "H-NUCLEO-CONGELATO",
    "H-P1-bis",
    "H-P3",
    "H-P5",
@@ -2445,6 +2446,7 @@
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-NON-TRACCIATI",
+   "H-NUCLEO-CONGELATO",
    "H-P1-bis",
    "H-P3",
    "H-P5",
@@ -3533,6 +3535,7 @@
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
    "H-NON-TRACCIATI",
+   "H-NUCLEO-CONGELATO",
    "H-P1-bis",
    "H-P3",
    "H-P5",
@@ -4389,6 +4392,7 @@
    "GRAFO-PESATO-TUTTI-I-VICINI",
    "GRAVITA-POTENZIALE",
    "GRIGLIA-A-TRIANGOLI",
+   "H-NUCLEO-CONGELATO",
    "I1",
    "INDIRIZZO-MASSA-COLLETTIVA",
    "INVARIANZA-LOCALE-CS",
@@ -6026,6 +6030,7 @@
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-NON-TRACCIATI",
+   "H-NUCLEO-CONGELATO",
    "H-P1-bis",
    "H-P3",
    "H-P5",
@@ -6889,6 +6894,9 @@
   ],
   "ogni ramo del NUCLEO della fisica e- dichiarato col suo ruolo e il suo perche-, e i `default` nelle firme sono VIETATI (tetto zero) -- e il nucleo e- la CHIUSURA DEGLI IMPORT dalle radici, non una lista || P-R1": [
    "P-R1"
+  ],
+  "sul ramo `primo-ordine`, un commit che tocca `primo_ordine/` finche- `doc/NUCLEO_CONGELATO.md` dice CONGELATO: nessuna via d-uscita || H-NUCLEO-CONGELATO": [
+   "H-NUCLEO-CONGELATO"
   ],
   "un ID citato CHE NON E- nell-indice || H-INDICE": [
    "H-INDICE"
@@ -8236,6 +8244,7 @@
    "GRAFO-PESATO-TUTTI-I-VICINI",
    "GRAVITA-POTENZIALE",
    "GRIGLIA-A-TRIANGOLI",
+   "H-NUCLEO-CONGELATO",
    "I1",
    "INDIRIZZO-MASSA-COLLETTIVA",
    "INVARIANZA-LOCALE-CS",

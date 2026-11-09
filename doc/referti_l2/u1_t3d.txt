@@ -1,0 +1,23 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3d.py  sha1-BYTE 26ed3097  committato e pulito
+==================================================================================================================================
+T3, d5 E d6: LA SORGENTE SPENTA E LA NORMA RISCALATA (Luca 16:40): E:\soliton_simulator\libreria\TBS_100000_completo.npz; N_D 500; le norme (0.001, 0.1, 1.0); la soglia assoluta 1.332e-12
+==================================================================================================================================
+  (0) SENZA il campo: 1.099e-12 (la soglia assoluta 1.332e-12)
+  e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (come u1_t3b)
+  (1) col campo e la sorgente: 2.515e-10 (228.8 volte (0))
+  (d5) col campo e la SORGENTE SPENTA: 1.099e-12 (1.0 volte (0))
+  (d6) la norma x 0.001: col campo 2.768e-10, senza campo 1.245e-09
+  (d6) la norma x 0.1: col campo 1.970e-11, senza campo 3.416e-10
+  (d6) la norma x 1: col campo 2.515e-10, senza campo 1.099e-12
+  (d6) la pendenza di log10(scarto) contro log10(f): -0.094 (fra 0.5 e 1.5: scala con la norma)
+==================================================================================================================================
+  LA LETTURA (Luca 16:40): (d5) la sorgente: senza, G6 torna vicino alla soglia; (d6) lo scarto NON scala con la norma
+  DEVE PASSARE: d5 senza la sorgente G6 su TBS col campo e' vicino alla soglia (entro 10 x 1.33e-12)                     PASSA   1.099e-12
+  DEVE PASSARE: d6 lo scarto col campo scala con la norma (la pendenza fra 0.5 e 1.5)                                    ### FALLISCE   -0.094
+==================================================================================================================================
+ESITO: 1/2 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: d6 lo scarto col campo scala con la norma (la pendenza fra 0.5 e 1.5)']
+exit 1 17:33:06

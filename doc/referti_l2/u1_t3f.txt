@@ -1,0 +1,27 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] u1_t3f.py  sha1-BYTE c1a7a389  committato e pulito
+==================================================================================================================================
+T3, d6' RIFATTO E d8 (Luca 19:10): E:\soliton_simulator\libreria\TBS_100000_completo.npz; N_D 500; le norme (0.001, 0.1, 1.0); N di d8 (10, 30, 100, 300); la soglia assoluta 1.332e-12; il fattore 2
+==================================================================================================================================
+  (0) SENZA il campo: relativo 1.099e-12; assoluto psi 6.303e-12 phi 2.877e-12
+  e* = 0.1 sqrt(0.1 / 5.8674e+00) = 1.305499e-02 (come u1_t3b)
+  (d6') la norma x 0.001: assoluto psi col campo 1.833e-10 senza 1.607e-10 (rapporto 1.14); phi col 3.592e-10 senza 3.025e-10 (rapporto 1.19); relativo col 2.768e-10 senza 2.427e-10
+  (d6') la norma x 0.1: assoluto psi col campo 1.763e-11 senza 8.572e-12 (rapporto 2.06); phi col 5.155e-11 senza 2.357e-11 (rapporto 2.19); relativo col 1.970e-11 senza 9.004e-12
+  (d6') la norma x 1: assoluto psi col campo 5.266e-09 senza 6.303e-12 (rapporto 835.49); phi col 1.497e-10 senza 2.877e-12 (rapporto 52.04); relativo col 2.515e-10 senza 1.099e-12
+  (d8) compatto, N  10: G6 relativo 2.646e-14 con max|e A| 8.100e-04 (senza campo 2.610e-14)
+  (d8) compatto, N  30: G6 relativo 4.029e-14 con max|e A| 5.927e-03 (senza campo 4.044e-14)
+  (d8) compatto, N 100: G6 relativo 8.695e-14 con max|e A| 5.185e-02 (senza campo 7.113e-14)
+  (d8) compatto, N 300: G6 relativo 8.819e-12 con max|e A| 2.295e+00 (senza campo 4.306e-13)
+  (d8) la pendenza di log10(G6) contro log10(max|e A|): 0.743
+  la cura (compatto, e A ridotto modulo 2 pi): G6 relativo 2.537e-10 (max|e A| 3.142e+00); senza la riduzione 2.553e-10 (max|e A| 9.598e+00)
+==================================================================================================================================
+  LA LETTURA (d8, Luca 19:10): l'errore cresce con max|e A|: l'ipotesi del potenziale che cresce REGGE
+  DEVE PASSARE: d8 la pendenza log-log di G6 contro max|e A| fra 0.5 e 2                                                 PASSA   0.743
+  DEVE PASSARE: d8-C la cura compatta (e A modulo 2 pi): G6 entro 2 volte (0)                                            ### FALLISCE   2.537e-10 (0: 1.099e-12)
+  DEVE FALLIRE: d8-F senza la riduzione: G6 entro 2 volte (0)                                                            PASSA   2.553e-10
+==================================================================================================================================
+ESITO: 2/3 controlli passano; DEVE fallite: 1 ['DEVE PASSARE: d8-C la cura compatta (e A modulo 2 pi): G6 entro 2 volte (0)']
+exit 1 20:02:46
