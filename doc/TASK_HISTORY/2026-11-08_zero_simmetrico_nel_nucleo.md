@@ -99,3 +99,14 @@
 - **Come si usa:** **un referto di una corsa fatta COL NUCLEO DI PRIMA** *(tutte quelle del principale fino alla riunione)* **confrontato con una corsa fatta CON v2 si porta nella convenzione nuova sommando `pi (M + V)`**, con `M` e `V` del campione stesso *(non quelli iniziali, se l'assorbimento li ha cambiati)*.
 - ### ⚠ **Vale a `cs` SPENTO:** **con `cs` acceso v2 cambia `Omega`, quindi la dinamica** *(la sez. `8`)*: **li' non c'e' conversione, ci sono due fisiche diverse.**
 - **La lettura R-M** *(«solo `pi M`», del guardiano)* **e' caduta: l'errore n.`122` del guardiano** *(Luca)*.
+
+## 10. L'UNIFICAZIONE DEI DUE RAMI: LA DATA E IL DIVIETO *(Luca `2026-11-09` `20:16`)*
+
+- ### **I due rami** *(`primo-ordine` e `zero-nel-nucleo`)* **si uniscono SOLO dopo che sono CHIUSI:**
+  - **l'allungamento di `S162` e il referto (r-b);**
+  - **l'allungamento di `C50-0`;**
+  - **F1 sul laterale** *(T1-T3 del mandato delle `20:13`)*, **con la decisione di Luca che ne segue.**
+- **La data indicativa:** **la fine della settimana, o l'inizio della settimana del `16` novembre.**
+- ### **Fino ad allora: nessun merge, rebase, cherry-pick o porting di codice fra i due rami.** **Nessuna preparazione del merge di mia iniziativa.**
+- **Il mandato dell'unificazione lo scrive il guardiano a lavori chiusi**, **con le costanti di riferimento aggiornate** *(`e_K`, il controllo all'apertura di `C35-pi`, la cassetta)*.
+- **Sul laterale: una riga di rimando nel suo task history.**

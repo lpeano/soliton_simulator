@@ -24797,3 +24797,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la perturbazione cresce ancora** *(`1e-8` diventa `6.3e-5` a `200` tick, `5.4e-2` a `1000`)*.
   - ### **FERMO, come previsto da Luca.** **La proposta:** **`r` dalla risposta di `Lambda`** *(`tau_Lambda`, le letture t1/t2)*, **e prima una misura di un minuto: `Lambda` del vuoto e' costante al bit lungo i tick?**
 - **Avanti:** **l'allungamento di `S162`** *(la corsa lunga, dopo `C35-pi`)*; **T5; P4; L1, L2, L4.**
+
+### 2026-11-09 20:25 -- LE DUE AGGIUNTE DI LUCA DELLE `20:16`: U1 L'UNIFICAZIONE DEI RAMI (LA DATA E IL DIVIETO); U2 LA DISTANZA DI `C35-pi` NEL REFERTO (r-b) *(il task history di v2, sez. `10`; quello della coppia, sez. `15`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **U1:** **i due rami si uniscono SOLO a lavori chiusi** *(`S162` e (r-b), `C50-0`, F1 con la decisione di Luca)*; **la data indicativa: fine settimana o inizio della settimana del `16` novembre.**
+  - **Fino ad allora: nessun merge, rebase, cherry-pick o porting fra i rami, e nessuna preparazione di mia iniziativa.**
+  - **Il mandato dell'unificazione lo scrive il guardiano.**
+- **U2:** **la distanza di `C35-pi` per terzo di corsa** *(min, max, media, ampiezza, periodo, la pendenza con l'errore)*, **accanto a `C35-0`, nel referto (r-b)**; **le letture d1-d3 scritte prima.**
+- ### **In corsa:** **R-1 di `S162`** *(dalle `20:07:32`; nel commit `201e912d` avevo scritto «`20:10`»: l'ora vera e' questa)*. **Sul laterale: T1, poi T2, poi T3.**

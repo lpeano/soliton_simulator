@@ -179,3 +179,18 @@
 ## 14. LA DECISIONE DI LUCA DELLE `01:31` SU (r-a)
 
 - ### **REGISTRATO COME FATTO:** **oltre `10000` la coppia in fase (`C35-0`) resta LEGATA; `d` oscilla fra circa `13` e `33` senza deriva.** **La lettura «`d` fermo» della sez. `12` e' CADUTA.**
+
+## 15. U2: LA DISTANZA DELLA COPPIA `C35-pi` NEL REFERTO (r-b) *(Luca `2026-11-09` `20:16`)*: **LE LETTURE PRIMA DEI NUMERI**
+
+- **Nel referto (r-b)** *(dopo `S162`)*, **per `C35-pi`, su tutti i `21` pezzi** *(`0` -> `200000` tick)*:
+  - **la distanza fra i due centri `d(t)`, con la grandezza dei campioni DICHIARATA** *(che cosa misura `x`: se e' la meta' della distanza)*;
+  - **per terzo di corsa** *(`0`-`66667`, `66667`-`133333`, `133333`-`200000` tick)*: **`d` min, max, media, l'ampiezza dell'oscillazione, il periodo dominante;**
+  - **la pendenza di una retta su tutta la corsa, con l'errore** *(Sokal, come la stazionarieta')*.
+- **Accanto, la stessa tabella per `C35-0`** *(fra `13` e `33`, senza deriva, finora)*.
+- **La prima lettura del guardiano, da confermare o smentire con la grandezza giusta:** **l'oscillazione si allarga nell'ultimo terzo** *(`x` da `16.8`-`17.7` a `15.6`-`18.2`; la pendenza `~ -0.46` per `100k` tick)*.
+- ### **LE LETTURE, scritte prima** *(di Luca)*:
+  - **(d1) l'ampiezza CRESCE terzo dopo terzo:** **una deriva della coppia, da registrare;**
+  - **(d2) l'ampiezza resta entro l'errore:** **un battimento lento, non una deriva;**
+  - **(d3) la media SCENDE in modo significativo:** **la coppia si avvicina** *(lo si segnala, senza estrapolare)*.
+- ### **Il criterio di «entro l'errore» e «significativo»** *(mio, dichiarato)*: **due volte l'errore della media o dell'ampiezza** *(l'errore con la `tau_int` di Sokal dentro ogni terzo)*.
+- **U2 entra nel referto (r-b), senza un referto separato.**
