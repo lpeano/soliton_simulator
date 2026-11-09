@@ -24505,3 +24505,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **Sugli incrementi il metodo ha potenza: `PE-P` passa** *(il seno ritrovato a `5.5` volte la soglia)* **e `PE-N` fallisce come deve.** **Lo spostamento: `TB3` `~1492` alle due lunghezze di Welch** *(il periodogramma intero `1450 +- 72`)*, **`TBS` `~754`** *(`763 +- 20`)*: **la lettura fissata, (p2) fisica.** ### **Da notare senza concludere: `754` e' circa la meta' di `1492`.** **E `w` e l'alone a `~530`-`550` in tutte e due le corse.**
 - ### **Il prossimo: la risoluzione del criterio di stazionarieta' e il DEVE FALLIRE sopra la risoluzione, con `W = 3 P`.**
+
+## 2026-11-09 (l'orologio: `03:30`) -- IL LATERALE: **LA FUSIONE DEL PRINCIPALE COL REVERT DEL REVERT, FATTA; X SENZA v2, Y CON v2, IL BRACCIO 0 `4/4`** -- *rimando a `c17ca56e` (`zero-nel-nucleo`): la fusione `ebe2f13c`, il revert del revert `8cfda2f1`, i referti `fusione_v2_X/Y.txt` e `zero_nel_nucleo_Y.txt`, il task history del laterale sez. `6`-`7`* (la regola `2`)
+
+- ### ⚠ **Un limite del controllo di Luca, detto PRIMA:** **il braccio 0 di v2 non distingue «con v2» da «senza»** *(la dinamica e' la stessa per costruzione)*: **il DEVE FALLIRE e' stato fatto sui BLOB dei `17` file di v2 e su `e_K`** *(`fusione_v2.py`)*. **X: `0/17`, `e_K -4.71227500`; Y: `17/17`, `e_K -1.57068235`, il braccio 0 `4/4` al bit, la suite `67/67`.**
+- **Il laterale ha ora la libreria di oggi E v2: D0-D4 li'.**
