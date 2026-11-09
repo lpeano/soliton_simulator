@@ -823,3 +823,29 @@
   - **(i2) altro:** **si scrive coi numeri.**
   - **E il fotone di T4** *(`omega(0) = 0`, lo zero fissato dalla banda di gauge)*: **la sua pendenza relativa `4` vuol dire `Delta omega ~ k^5`** *(`omega ~ k`)*: **lo scrivo accanto, senza misura nuova.**
 - **Lo script: `csv/solitone/isotropia_p2.py`** *(nuovo)*; **il referto `doc/referti_l2/isotropia_p2.txt`.**
+
+### 24. LE DECISIONI DI LUCA DELLE `18:37`-`18:46`: **LA STRADA 4, IL LIMITE COMUNE COME CONVERGENZA PER INTERAZIONE; A SOLO COME RIPIEGO; S1-S5 NELLA FORMA DI A ANNULLATE** -- **E IL PROGETTO DELLA MISURA** *(solo scrittura; la misura dopo T6)*
+
+- ### **LA SCELTA** *(Luca `18:46`)*: **la strada 4.** **I due limiti NON si allineano per decreto: si MISURA se l'interazione fra materia e campo `U(1)` li fa convergere da sola a grande scala.**
+  - **L'ipotesi di Chadha-Nielsen** *(1983: l'invarianza di Lorentz come punto d'arrivo della dinamica a grande scala)*; **l'esempio misurato in 2D:** **la velocita' degli elettroni del grafene che cresce, in modo logaritmico, per l'interazione col campo elettromagnetico.**
+  - **E' l'idea di Luca del `25/10`** *(«i due orologi si allineeranno da soli»)*, **resa misurabile.**
+  - ### **E' un'IPOTESI DA MISURARE, non una legge:** **le leggi restano quelle di oggi; la materia nuda ha `v_max/s 0.5881`** *(al passo delle corse)*, **la luce nuda `1`.**
+- ### **A e la 4 si ESCLUDONO:** **con i due limiti gia' uguali non ci sarebbe niente da veder convergere.** **A resta SOLO come RIPIEGO, se la 4 fallisce.** ### **S1-S5 nella forma di A NON si fanno.**
+- **B** *(il battito)* **resta solo sulla carta** *((d1), un battito derivato)*: **nessuna misura.**
+- **La catena `U(1)`:** **T5 e' il prossimo; T3 resta limite noto, con la condizione sulla soglia di `e` per T6a; poi T6.**
+
+#### 24.1 IL PROGETTO DELLA MISURA DELLA STRADA 4 *(solo scrittura; la misura DOPO T6, quando il solitone girera' col campo)*
+
+- ### **CHE COSA E' LA «VELOCITA' VESTITA»:** **la velocita' massima di gruppo della materia ACCOPPIATA al campo `U(1)`**, **col campo dinamico e la carica = la norma**, **misurata a SCALE crescenti.**
+  - **Due modi, da scegliere quando T6 ci sara':**
+    - **(v-a) nelle lunghezze d'onda:** **la dispersione della materia vestita** *(il blocco del tick accoppiato a `k`, attorno a uno sfondo di materia, come il banco di T4-B)*, **`v_g` massima a `k` sempre piu' piccoli**;
+    - **(v-b) nella dimensione del pacchetto:** **la velocita' del fronte di pacchetti di materia sempre piu' larghi**, **sul toro col campo.**
+- ### **LE LETTURE, scritte prima** *(di Luca)*:
+  - **(c1) la velocita' vestita CRESCE verso `1` con la scala** *(convergenza)*: **con che legge** *(logaritmica come nel grafene, che e' in `3+1` per il campo; o diversa, perche' in `2+1` l'accoppiamento `e^2` ha dimensione e la convergenza potrebbe essere piu' rapida)*;
+  - **(c2) NON cambia entro l'errore:** **la 4 cade, si torna ad A**;
+  - **(c3) si ALLONTANA da `1`:** **lo si scrive.**
+- ### **IL DEVE FALLIRE:** **con `e = 0` la velocita' vestita = quella nuda** *(`0.5881`)*, **a ogni scala** *(il controllo che la misura vede l'interazione e non altro)*.
+- ### **I COSTI, da stimare quando T6 ci sara':**
+  - **il reticolo per vedere una convergenza LENTA:** **una legge logaritmica vuole scale su almeno `1`-`2` decadi** *(dalla lunghezza d'onda di qualche nodo a centinaia di nodi: tori fino a `L ~ 500`-`1000`)*;
+  - **la durata:** **dal costo per tick del tick accoppiato, misurato in T4-B** *(un tick su `24 x 24` in frazioni di secondo)*, **scalato coi nodi;**
+  - **a quale `e`:** **la regola dell'`1%` di T6a, piu' un valore piu' grande DICHIARATO, se all'`1%` l'effetto sta sotto la risoluzione** *(sapendo che T3 e' limite noto sopra `e*/2`)*.

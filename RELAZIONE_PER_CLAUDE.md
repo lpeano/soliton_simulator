@@ -24760,3 +24760,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **la deriva del vuoto `1e-15`** *(o una forma del trapezio esatta per `L = cs`)*;
   2. **(q1) o (q2)** *(che cosa e' `cs'` quando `cs` e' una memoria: una scelta di fisica)*;
   3. **`r` oltre `2`.**
+
+### 2026-11-09 18:55 -- LE DECISIONI DI LUCA DELLE `18:37`-`18:46`: LA STRADA 4 (IL LIMITE COMUNE COME CONVERGENZA PER INTERAZIONE); A SOLO RIPIEGO; F1 CON IL RILASSAMENTO ESATTO *(il task history del prototipo, sez. `24`; il laterale, sez. `21`)* [[U1-PROTOTIPO-TRIANGOLI]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- ### **La strada 4:** **si misura se l'interazione col campo `U(1)` fa convergere la velocita' della materia verso quella della luce, a grande scala** *(Chadha-Nielsen; il grafene)*.
+  - **E' un'ipotesi, non una legge.**
+  - **A e' solo il ripiego; S1-S5 nella forma di A non si fanno; B resta sulla carta.**
+- **Il progetto della misura** *(la velocita' vestita, le letture c1-c3, il DEVE FALLIRE a `e = 0`, i costi)* **e' scritto; la misura dopo T6.** **T5 e' il prossimo.**
+- ### **F1, sul laterale:**
+  - **il vuoto AL BIT;**
+  - **`cs' = 0` dentro il tick;**
+  - **`r = 1 - e^{-omega dtau}`** *(il rilassamento esatto: `0.47` diventa `~0.37`)*.
+  - **La forma che uso:** **`cs + r (L - cs)`**, **che a `L = cs` da' `cs` al bit** *(la mia lettura dei punti `4` e `6` insieme: dichiarata)*.
