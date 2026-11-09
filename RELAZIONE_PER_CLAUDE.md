@@ -24699,3 +24699,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **poi la memoria `A15` come il candidato che toglie il punto fisso del tick.**
   - **Una legge meno sensibile a `Lambda` piccolo curerebbe il guscio, che gia' contrae: NON e' la cura.**
 - **Sul laterale anche il rimando alle note sulla gravita'** *(X2, sez. `15`)*.
+
+### 2026-11-09 15:20 -- P1 (PARZIALE) E IL RIMANDO ALLE QUATTRO FORME DELLA CURA DI `cs` *(il task history del prototipo, sez. `19.1`; il laterale `91736100`, sez. `16`)* [[U1-PROTOTIPO-TRIANGOLI]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- ### **P1, la risposta** *(dalla parte completa del primo giro; il resto e' morto per un difetto mio nella convenzione `simm`)*:
+  - **`pi/4` e' il coefficiente di `k^2` del fit iperbolico attorno a `K`, non la velocita' di una banda**, **e vale ANCHE a `eps 0.5`** *(`0.78539797` a `s 0.001`)*;
+  - **`v_max/s` a `eps 0.5`: `0.5854` a `s 0.05`, il limite `0.58504`** *(il revisore: `0.5856`)*: **il `0.598` era a `eps 0`;**
+  - ### **alla corsa** *(`eps 0.5`, `s 0.15`)*: **`v_max/s = 0.588`, `v_b/s = 0.781`.**
+  - **Resta la dipendenza dallo zero di `v_b`:** **la cura dello script, un commit a se'.**
+- ### **La cura di `cs`, quattro forme** *(solo progetto, sul laterale)*:
+  - **F1 la memoria `A15`; F2 lo smussamento sul primo anello; F3 la rampa simmetrica; F4 F3 + F1**;
+  - **i criteri C1-C6 in tabella; la prova che decidera'; le domande a Luca.**
+  - **Due cose dai numeri:**
+    - **a `Lambda* = 0` la rampa simmetrica E' la legge di oggi**, **e il vincolo del vuoto lascia una famiglia;**
+    - **la memoria del primo ordine toglie il punto fisso ma non e' reversibile, e non garantisce la stabilita' nel tempo** *(il fattore `~5`)*.
