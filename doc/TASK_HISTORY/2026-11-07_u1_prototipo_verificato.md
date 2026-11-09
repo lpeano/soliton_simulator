@@ -507,3 +507,31 @@
 - **COSA MI FAREBBE FERMARE:** **(T4B-L) che fallisce** *(la misura non e' lineare: il resto non si legge)*; **la sorgente dello sfondo che fa esplodere il campo in un tick.**
 - **Il costo:** **`24 x 6 x 2 x 2` + `24 x 2 x 2 x 2` tick a `e*`, lo stesso a `e*/2` e a `e = 0`: `~2300` tick su `24 x 24`, qualche minuto.** **Una prova corta, mentre gira `C35-pi`** *(la regola `4` di Luca: una lunga e una corta)*.
 - ### **IL CODICE:** **`csv/solitone/u1_t4b.py`, il referto `doc/referti_l2/u1_t4b.txt`; committato PRIMA di girarlo.** **Il nucleo non si tocca.**
+
+### 16.1 L'ESITO DI T4-B: **`5/7` -- T4B-L (LA LINEARITA') FALLISCE A `2.98` RELATIVO E T4B-P FALLISCE NEL VERSO DELLA FASE; LA SEZ. `16` DICE «T4B-L CHE FALLISCE: IL RESTO NON SI LEGGE»: FERMO** *(`doc/referti_l2/u1_t4b.txt`; il codice a `2a051126`, blob `d0bfffa1`; `06:42`-`06:46`)*
+
+- **I DEVE che passano:**
+  - **T4B-S** *(`s_a = s` esatto)*;
+  - **T4B-R** *(il banco al bit)*;
+  - **T4B-F** *(a `e = 0` ogni `V` e' `0` ESATTO: fallisce come deve)*;
+  - **T4B-P nei versi (→) e (← ampiezza)** *(i minimi `3.34e-5` e `9.59e-7`)*.
+- ### **I DUE CHE FALLISCONO:**
+  - **T4B-L, il peggiore `2.983` relativo.** ### ⚠ **Lo script stampa solo il MASSIMO sui tre versi, non DOVE cade: e' un difetto mio dello strumento, e non so ancora quale verso lo dia.**
+  - **T4B-P (← fase): il minimo `5.2e-16`.**
+- ### **QUELLO CHE SI VEDE, SENZA LEGGERLO COME RISULTATO** *(la sez. `16` dice che senza T4B-L il resto non si legge)*:
+  - **(→) e (← ampiezza): `V / e` UGUALE a `e*` e a `e*/2` entro `1e-6`** *(il rapporto dei minimi `1.000000`)*: **questi due versi si comportano da primo ordine.**
+  - ### **(← fase): fotone e ottica fra `1e-16` e `2e-10`, la gauge `1e-4`-`1e-3`; e il fotone e l'ottica scalano come `e^2`, non come `e`** *(il rapporto dei massimi `4.0`)*.
+  - **La quota catturata da `+-k` e' `1.0000` ovunque.**
+- ### **LA MIA IPOTESI, DA VERIFICARE** *(non e' una lettura)*:
+  - **una modulazione di FASE di `psi` e', al primo ordine, una trasformazione di gauge della SOLA materia** *(`psi -> e^{i eps cos(kr)} psi`)*;
+  - **la corrente che genera e' longitudinale**, quindi **muove solo il settore di Gauss** *(la gauge)*, e **fotone e ottica la vedono solo dal terzo ordine** *(`~eps^2`, `~e^2`)*;
+  - **cosi' i loro `V` sono numeri piccoli che dipendono da `eps`, e T4B-L fallisce su di loro.**
+  - ### **Se e' cosi', l'errore e' MIO, nel progetto:** **T4B-P nel verso della fase chiedeva una cosa che l'invarianza di gauge vieta.** **Il controllo giusto sarebbe all'opposto:** **fotone e ottica INVISIBILI alla fase, la gauge visibile.**
+- ### **ALTRE DUE COSE DA GUARDARE:**
+  - **(→) a `n = 12`** *(i punti `t = pi`, dove `+k = -k`)*: **fotone, ottica e gauge E danno lo stesso `3.3373e-05`.** **Sospetto un difetto di costruzione** *(la parte reale di `u e^{i pi r}`)* **piu' che fisica.**
+  - **(← ampiezza) lungo `(1,1)`:** **il fotone fra `1e-6` e `2e-5` fino a `n = 8`, poi `5.6e-4` e oltre**; **e l'ottica a `n >= 8` scende a `1e-6`.**
+- ### **FERMO** *(la regola del par. `5`: il sigillo fallito si committa, e la correzione e' un commit a se')*.
+  - **La cura che propongo, in due pezzi:**
+    - **lo strumento:** **T4B-L stampato PER VERSO, per banda e per `k`**;
+    - **la diagnosi:** **(← fase) a tre `eps`** *(`1e-4`, `5e-5`, `2.5e-5`)*: **se fotone e ottica scalano come `eps^2`, l'ipotesi regge.**
+  - ### **Solo dopo, e con la tua decisione:** **il criterio di T4B-P per la fase rovesciato** *(«invisibile»)*, **perche' cambiarlo dopo aver visto i numeri e' cambiare una soglia a posteriori.**

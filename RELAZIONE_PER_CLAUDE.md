@@ -24535,3 +24535,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - Rendere `F` definita *(`Omega` robusto dentro la mappa di prova)* e rifare D3 a `34`, circa `30`-`40` min per scena.
   - **Le alternative:** il minimo per `Lambda` *(solo derivato: `A1`, `A11`)*; `cs` esplicito dal tick precedente *(cambia la legge)*; il metodo con `s > 0` imposto *(lo sconsiglio: un pavimento, `A11`)*.
 - **Non blocca niente del principale** *(`cs` e' spento nelle corse)*; **blocca `TCS`.**
+
+### 2026-11-09 06:55 -- T4-B, LA VISIBILITA' ALLA BREZZI: `5/7`, T4B-L FALLISCE (`2.98` RELATIVO) E T4B-P FALLISCE NEL VERSO DELLA FASE; FERMO *(il task history del prototipo, sez. `16.1`; `doc/referti_l2/u1_t4b.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **Passano:**
+  - **T4B-S e T4B-R** *(i controlli di servizio)*;
+  - **T4B-F** *(a `e = 0` ogni `V` e' zero esatto: fallisce come deve)*;
+  - **T4B-P nei versi (→) e (← ampiezza)** *(minimi `3.3e-5` e `9.6e-7`)*.
+- **Fallisce T4B-L**, la linearita': **il peggiore e' `2.98` relativo**, e **lo strumento non dice in quale verso** *(un difetto mio)*.
+- **Fallisce T4B-P nel verso della fase:** **il minimo e' `5e-16`.**
+- **Quello che si vede**, senza leggerlo come risultato:
+  - **(→) e (← ampiezza)** si comportano da primo ordine *(`V / e` uguale a `e*` e a `e*/2`)*;
+  - **(← fase):** **fotone e ottica fra `1e-16` e `2e-10`**, con `V ~ e^3`.
+- ### **La mia ipotesi:** **una modulazione di fase e', al primo ordine, una gauge della sola materia: tocca solo il settore di Gauss.** **Se e' cosi', l'errore e' mio, nel progetto.**
+- ### **FERMO:**
+  - **la cura proposta:** T4B-L stampato per verso, e (← fase) a tre `eps`;
+  - **il criterio della fase rovesciato** *(«invisibile»)* **solo con una decisione di Luca**, perche' sarebbe una soglia cambiata dopo aver visto i numeri.
