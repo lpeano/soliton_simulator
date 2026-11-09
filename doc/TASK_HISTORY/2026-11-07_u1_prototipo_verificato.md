@@ -806,3 +806,20 @@
   1. **A: `kappa = 0.5881`** *(al passo delle corse)*: **si'?**
   2. **B: dato che la materia supera la luce col battito di oggi, B resta aperta con (d1)** *(il battito portato a `~5.3` da una legge derivata)* **o si chiude?**
   3. **Quando riprendere S1-S5.**
+
+### 23. P2, L'ISOTROPIA SU GRANDEZZE CHE NON DIPENDONO DALLO ZERO *(Luca `13:16`)*: **LE PREMESSE, LA MISURA, LE LETTURE -- PRIMA DEL CODICE**
+
+- ### **LE PREMESSE DAL CODICE E DAL REFERTO** *(`csv/solitone/carta_isotropia.py`; `doc/referti_l2/isotropia_dispersione.txt`)*:
+  - **la lettura «`k^6`» e' la pendenza di `a_om = (max - min) / |media di omega|` sul cerchio:** **la media di `omega` DIPENDE dallo zero** *(lo spostamento cambia il denominatore)*, **quindi la pendenza relativa dipende dallo zero** *(P2: giusto)*;
+  - ### **ma lo stesso referto ha GIA' una grandezza che non dipende dallo zero: `a_v`, l'anisotropia di `|v_g|`:** **pendenza `3.918` e `3.899`** *(le bande `10` e `11`)*, **attesa `4`;**
+  - **e calcola gia' l'escursione ASSOLUTA `esc = max - min` di `omega`** *(che non dipende dallo zero)*, **senza fittarla.**
+- ### **IL CONTO, scritto prima:** **se la parte anisotropa di `omega` e' `g k^6 cos 6 theta`** *(la simmetria D6)*, **allora `Delta omega` assoluta `~ k^6` e `|v_g|` relativa `~ k^4`** *(`v_g ~ 2 a k + 6 g k^5`)*: **le due pendenze ATTESE sono `6` e `4`, per qualunque zero.**
+- ### **LA MISURA:** **`carta_isotropia.main` rigirato tale e quale** *(i cerchi catturati, senza toccare il modulo)*; **la pendenza di `esc` e di `a_v` per le bande della materia e per i reticoli di prova** *(il triangolare `omega0 4`, il quadrato)*.
+- ### **I DEVE:**
+  - **(P2-P)** **il triangolare di prova: la pendenza di `esc` = `6` entro `0.5`**;
+  - **(P2-F) DEVE FALLIRE:** **il quadrato di prova: la pendenza di `esc` = `6` entro `0.5`** *(il quadrato ha D4: `4`)*.
+- ### **LE LETTURE, scritte prima:**
+  - **(i1) la materia: `esc ~ k^6` e `a_v ~ k^4`, entro `0.5`:** **l'anisotropia D6 e' `k^6` in `Delta omega` ASSOLUTA: la lettura vale in una forma che non dipende dallo zero** *(e la frase «`k^6` nella frazione `Delta omega / omega`» va scritta come «`k^6` in `Delta omega`»)*;
+  - **(i2) altro:** **si scrive coi numeri.**
+  - **E il fotone di T4** *(`omega(0) = 0`, lo zero fissato dalla banda di gauge)*: **la sua pendenza relativa `4` vuol dire `Delta omega ~ k^5`** *(`omega ~ k`)*: **lo scrivo accanto, senza misura nuova.**
+- **Lo script: `csv/solitone/isotropia_p2.py`** *(nuovo)*; **il referto `doc/referti_l2/isotropia_p2.txt`.**
