@@ -636,3 +636,26 @@
 - **La fase si DICHIARA per quello che i numeri dicono, e T4-B e' chiuso** *(Luca)*.
 - **Lo script: `csv/solitone/u1_t4b_rilettura.py`** *(nuovo; importa `u1_t4b_sfondo.py`; stampa i `V`)*; **il referto `doc/referti_l2/u1_t4b_rilettura.txt`.**
 - ### **L'ORDINE DELLE PROVE CORTE, registrato** *(una alla volta, sui due rami)*: **la prova sul cuore** *(fatta: `f5e10f4b`)*; **(r-D5) sul laterale** *(partita alle `13:10`: SCAMBIATA con la rilettura, che deve prima passare da una sua suite di `~15` minuti)*; **la rilettura di (t-b)** *(dopo (r-D5): una alla volta)*; **T5** *(il progetto mentre gira (r-D5))*; **L1, L2, L4.**
+
+### 18. IL MANDATO DI LUCA DELLE `13:16`, DOPO LA REVISIONE INDIPENDENTE: **P1-P5, REGISTRATI; LE DUE STRADE (sez. `8`-`9`) FERME SU P1**
+
+- **Un revisore indipendente** *(una sessione separata, codice suo; il referto e' di Luca, fuori dal repo, e io non lo leggo)* **ha ricalcolato V1-V6. Coincidono:**
+  - **R60 e S60** *(`5e-16` su tutti e due i rami, `S^6 = -I`, `det 1`)*;
+  - **la luce del prototipo** *(`-> 1` per `k -> 0`, l'anisotropia `k^4`, il Courant `0.408`)*;
+  - **lo spostamento `pi (M + V)` a `cs` spento.**
+- ### **P1, LA PRIORITA', PRIMA di S1-S5: la PROVENIENZA del limite di velocita' della materia.**
+  - **Il revisore NON ricostruisce `pi/4` come velocita' di nessuna banda.**
+  - **E trova `v_max/s 0.598` calcolato a `eps 0`** *(senza la moneta)*: **a `eps 0.5`** *(la tabella)* **vale `0.5856`.**
+  - ### **Fino alla chiusura di P1, `pi/4` (`0.785`) e `0.598` sono DA RICONFERMARE** *(la premessa `1` della sez. `1`, le sez. `8`-`9`, la riga `4` di (A) e la `3` di (B) della MAPPA)*. **S1-S5 sono FERME su questo punto.**
+  - **Da fare:** **sola lettura, piu' un calcolo corto:** **da dove viene `v_b/s -> pi/4` in `_u1_secondo`** *(quale banda, quale moneta, quale formula del fit, quale `eps`)*; **il ricalcolo con la moneta della tabella** *(`eps 0.5`)*; **quale numero e' il «`c`» della materia nel regime delle corse.**
+- ### **P2, L'ISOTROPIA:** **la lettura «anisotropia `k^6`» dipende dallo ZERO dell'energia** *(la frazione `Delta omega / omega` cambia con uno spostamento dello zero)*.
+  - **Si rimisura su grandezze che non dipendono dallo zero:** **la velocita' di gruppo, o `Delta omega` assoluta.** **Le letture, prima.**
+  - **La spiegazione del guardiano «`k^6` e' la firma della R60» e' RITIRATA** *(l'errore n.`125` del guardiano)*; **la R60 resta vera.**
+- ### **P3, `cs` SUL PRINCIPALE E' VIETATO:** **sul principale `CAMM-FASE-VUOTO` legge l'energia SENZA lo zero simmetrico**, **quindi a `cs` acceso il tick differisce da quello del laterale** *(`phi` fino a `0.17` dopo un tick, dal revisore)*.
+  - **Finche' i rami non sono riuniti, nessuna corsa ne' prova con `cs` acceso sul principale.**
+  - **Un controllo automatico:** **un assert all'accensione di `cs` sul principale, NELLA LIBRERIA** *(il nucleo resta congelato)*, **col suo DEVE e il DEVE FALLIRE.**
+- ### **P4, IL PUNTO FISSO DI `cs`:** **il revisore, con un pacchetto gaussiano alla densita' del solitone, trova una mappa che CONTRAE** *(`0.36`)*; **smette solo a densita' `3`-`10` volte maggiori, col modo al centro.**
+  - **Non smentisce D0-D4** *(lo stato e' diverso)*.
+  - **(r-D5) deve dire, sul solitone vero:** **dove sta il modo instabile** *(il guscio o il centro: R2, gia' nello script in corsa)*, **e un confronto con un pacchetto SENZA guscio alla stessa massa** *(se contrae, la causa e' il guscio)*: **un pezzo nuovo, dopo (r-D5).**
+- **P5** *(la stazionarieta' versione `2`)*: **nel task history degli allungamenti, sez. `7.19`.**
+- ### **L'ORDINE, registrato:** **P1** *(sola lettura e un calcolo corto)*; **P3** *(il controllo)*; **poi P2 e P4, prove corte**; **T5 dopo P1** *(il suo progetto usa `pi/4` e `0.598`)*; **la rilettura di (t-b) e L1, L2, L4 restano in coda.**

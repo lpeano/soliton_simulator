@@ -351,3 +351,12 @@
   - **e la sua pendenza** *(`-0.024`)* **coincide col ritmo di emissione della versione `2`** *(`dM_ass/dt` `0.0245` per `TB3`, `0.0231` per `TBS`)*.
   - ### **Quindi «il cuore che deriva» significa: il RITMO DI EMISSIONE CAMBIA nel tempo** *(il criterio guarda il cambio di pendenza)*, **non che il cuore si svuota.**
   - ### **Per la legge della durata (L1, L2) serve una grandezza che sia il cuore DAVVERO** *(per esempio la massa dentro `w` o dentro un raggio fisso)*: **da leggere dal codice, prima di L1.**
+
+### 7.19 P5 DEL MANDATO DI LUCA DELLE `13:16`: **UN DIFETTO DI PROCEDURA NELLA VERSIONE `2` (`654292f2`), REGISTRATO**
+
+- ### **Il revisore indipendente segnala:** **nella versione `2` della stazionarieta' un DEVE FALLIRE e' diventato un DEVE PASSARE SENZA il task history prima del codice.** **ST-F sulla deriva costante** *(il caso costruito «stazionario»)* **diventa ST-F-C, che DEVE passare.**
+- **Il motivo dichiarato allora:** **l'intenzione di Luca** *(le `18:42`: il regime di un DECADIMENTO LENTO, non la stazionarieta' stretta)*.
+- ### **Il difetto e' di procedura, e di due:**
+  - **del guardiano**, che ha scritto il cambio nel mandato delle `18:42`;
+  - **e mio, per l'ordine:** **il cambio andava scritto nel task history PRIMA del codice, e non lo e' stato.**
+- **Nessun numero cambia; la versione `3` resta** *(`5577df0b`, `f3dd15b1`: ST-F-C e' li' una lettura scritta prima, sez. `7.15`)*.

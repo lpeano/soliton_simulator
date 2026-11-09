@@ -24675,3 +24675,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **«Il cuore che deriva» vuol dire: l'emissione cambia ritmo.**
 - ### **Per L1 e L2 della legge della durata serve il cuore vero, da leggere dal codice.**
 - ### **La domanda a Luca, ancora aperta:** **quale `P` del cuore per `TBS`** *(il metodo non ne trova)*.
+
+### 2026-11-09 13:25 -- IL MANDATO DI LUCA DELLE `13:16`, DOPO LA REVISIONE INDIPENDENTE: P1-P5, REGISTRATI *(il task history del prototipo, sez. `18`; quello degli allungamenti, sez. `7.19`; la MAPPA)*
+
+- **Il revisore conferma V1-V6.**
+- ### **P1 prima di tutto:** **la provenienza di `pi/4` e di `v_max/s 0.598`** *(calcolato a `eps 0`; a `eps 0.5`, il revisore: `0.5856`)*.
+  - **Fino ad allora tutti e due sono «da riconfermare»** *(nella MAPPA e nelle due strade)*, **e S1-S5 sono ferme.**
+- **P3: `cs` acceso vietato sul principale**, **con un controllo nella libreria.**
+- **P2** *(l'anisotropia su grandezze che non dipendono dallo zero)* **e P4** *(il pacchetto senza guscio, dopo (r-D5))*: **prove corte, in coda.**
+- **P5: il difetto di procedura della stazionarieta' versione `2`, registrato.**
+- ### **L'ordine:** **P1, P3, poi P2 e P4; T5 dopo P1** *(il suo progetto usa i due numeri da riconfermare)*.
