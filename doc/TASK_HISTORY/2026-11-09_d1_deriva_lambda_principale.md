@@ -54,3 +54,16 @@
 - ### **LA LETTURA: (w1)** — **la stessa deriva: e' del tick di sempre, non del v2.** **A `cs` spento il v2 non entra nel vuoto** *(la premessa NON SO della sez. `1`: la risposta e' qui, per misura)*.
 - ### **La conseguenza, scritta per D2:** **la causa sta nel tick CONDIVISO** *(`tick.py` `d9a59ff9` e i pezzi del vuoto)*: **una correzione eventuale toccherebbe anche il nucleo congelato del principale. La decisione e' di Luca.**
 - **Fermo su questo tema** *(il mandato)*. **D2 parte sul laterale** *(D1 e' su origin)*.
+
+## 6. ⚠ UNA PREMESSA CADUTA, MIO ERRORE: D1 NON HA MISURATO IL PRINCIPALE «SENZA v2» *(annotazione, non riscrittura: le sez. `1` e `5` restano come erano)*
+
+- **Lo script, come quello del laterale, gira il tick dentro `BE.conv(DC.ZERO)`** *(`_deriva_congelato.ZERO = "simm"`)*. **Letto dal codice dei due rami:**
+  - **sul principale** `csv/_zero_simmetrico.conv("simm")` **= `convenzione_simmetrica()`, che AVVOLGE IN MEMORIA `flussi_parziali.grover`, `hop_psi`, `hop_phi`:** **il pezzo di oggi a `f/2`, poi quello di `convenzione_alternativa` a `f/2`;**
+  - **sul laterale** **la stessa chiamata non avvolge NIENTE** *(dal `2026-11-08` lo zero simmetrico e' NEL nucleo: `flussi_parziali.grover` ecc. fanno quelle stesse operazioni, nello stesso ordine, e il braccio `0` di `zero_nel_nucleo` e' AL BIT)*.
+- ### **Quindi D1 ha confrontato il v2 nel nucleo col v2 in memoria: l'uguaglianza era attesa per costruzione.** **La sez. `1` ha guardato gli sha1 dei file e NON l'avvolgimento in memoria** *(la premessa «NON SO» non lo nominava)*.
+- ### **Che cosa resta vero di (w1):** **le corse del principale, che girano lo zero simmetrico in memoria, hanno la stessa deriva del laterale.** **Che cosa CADE:** **«del tick di sempre, non del v2»** **e** **«a `cs` spento il v2 non entra nel vuoto»** *(sez. `5`)*: **non e' stato misurato.** **Anche «la causa sta nel tick condiviso» non e' dimostrato.**
+- ### **LA CORREZIONE, un lavoro a se': D1-bis** *(e' la domanda di Luca come l'ha scritta: «c'e' anche sul nucleo del principale, senza v2?»)*:
+  - **lo stesso script con un argomento `--senza-avvolgimento`:** **la scena costruita IDENTICA** *(dentro `BE.conv(DC.ZERO)` come prima, e lo script stampa lo sha1 dei byte dello stato di partenza: deve coincidere fra le due modalita')*, **i tick girati con `contextlib.nullcontext()` al posto di `BE.conv(DC.ZERO)`:** **il tick del nucleo congelato com'e' sul disco;**
+  - **il referto `doc/referti_l2/lambda_vuoto_deriva_principale_nucleo.txt`;** **le letture w1/w2/w3 con gli STESSI criteri della sez. `3`** *(scritte li', prima)*;
+  - **il controllo positivo che l'avvolgimento c'e' davvero:** **lo script stampa se `FP.grover` e' la funzione del modulo o un avvolgimento, nelle due modalita'.**
+- **Poi D2 sul laterale** *(che misura pezzo per pezzo anche la fase `conj(z)` del v2: risponde direttamente)*.

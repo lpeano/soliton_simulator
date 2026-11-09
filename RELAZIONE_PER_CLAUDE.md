@@ -24832,3 +24832,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Nel vuoto F3 a `cs` spento, sul nucleo congelato: `+2.228e-12` in `1000` tick** *(`2508` ulp)*, **la pendenza `0.985`: UGUALE al laterale a tutte le cifre stampate** *(il rapporto `0.999799`, l'arrotondamento del referto del laterale)*. **T1-F fallisce come deve.**
 - ### **La causa sta nel tick condiviso:** **una correzione toccherebbe anche il nucleo congelato. La scelta e' di Luca.**
 - **Fermo su questo tema; D2 parte sul laterale** *(«in quale pezzo del tick nasce la deriva»)*.
+
+### 2026-11-09 23:55 -- ⚠ CORREZIONE A D1, MIO ERRORE: NON HA MISURATO IL PRINCIPALE «SENZA v2» *(il task history di D1, sez. `6`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Lo script gira il tick dentro `BE.conv(DC.ZERO)`:** **sul principale questo AVVOLGE in memoria `grover`, `hop_psi`, `hop_phi` con lo zero simmetrico** *(le stesse operazioni del v2, al bit)*; **sul laterale non avvolge niente.** **D1 ha confrontato il v2 col v2.**
+- ### **Resta vero:** **le corse del principale** *(che girano lo zero simmetrico in memoria)* **hanno la stessa deriva.** **CADE:** **«del tick di sempre, non del v2»**, **e la conseguenza «la causa sta nel tick condiviso».**
+- **La correzione, D1-bis:** **lo stesso script con `--senza-avvolgimento`** *(la scena identica, i tick senza l'avvolgimento)*, **le stesse letture.** **Poi D2.**
