@@ -578,3 +578,33 @@
 2. **Lo script `csv/solitone/lambda_deriva_pezzi.py`; la suite in `wt_zero`; commit e push.**
 3. **La corsa; il referto `doc/referti_l2/lambda_deriva_pezzi.txt`; l'esito in `24.5`; il rimando nella RELAZIONE del principale.**
 4. **Poi FERMO:** **niente T2, T3, ne' correzioni senza la decisione di Luca.**
+
+### 24.5 L'ESITO *(la corsa dalle `00:38:14` alle `00:42:10` del `2026-11-10`, a `cd10786c`, blob dello script `a6201067`; il referto `doc/referti_l2/lambda_deriva_pezzi.txt`)*
+
+- **La scena di T1** *(`6561` nodi, `cs 0.15`, `Lambda 6`; i `9` nodi del campione di grado `6`)*; **il controllo positivo: `FP.grover` e `FP.hop_phi` sono quelli del modulo** *(nessun avvolgimento)*.
+- **D2.2, per pezzo** *(`Delta Lambda / Lambda` esatto, media su `1000` tick e `9` nodi; i nodi tutti uguali, min = max)*:
+  - **posizioni `1`, `2`, `3`, `4`, `5`, `10`-`14`: ZERO ESATTO in ogni tick e nodo** *(le due premesse NON SO della sez. `24.1`: i pezzi di `psi` non toccano `phi`; `beta` di `materia_vuoto` a `rho = 0` vale `0` e il fattore e' `1` esatto)*;
+  - ### **i quattro MEZZI SPOSTAMENTI del vuoto:** **`7a` `+1.0420e-16`, `7b` `+1.0391e-16`, `8a` `+1.0166e-16`, `8b` `+1.0247e-16`** *(positivi nell'`88`-`90%` dei tick; i pesi `0.2807`, `0.2799`, `0.2738`, `0.2760`)*;
+  - **i mezzi Grover** *(`6a` `-6.15e-18`, `6b` `-2.15e-18`, `9a` `-2.19e-18`, `9b` `-5.91e-18`)* **e le fasi `conj(z)` del v2** *(`6c` `-3.01e-18`, `7c` `-8.55e-18`, `8c` `-6.62e-18`, `9c` `-6.41e-18`)*: **piccoli, negativi, positivi in circa meta' dei tick** *(`0.46`-`0.50`)*.
+- **D2.3, i coefficienti esatti** *(`h = 0.25`, un solo `z` per nodo e per arco: `0.993068 + 0.117537j`; grado `6`)*:
+  - **mezzo Grover:** `|lambda|^2 - 1` = `-1.735e-18`, `-5.123e-18`; `sigma_max - 1 = -8.674e-19`;
+  - ### **mezzo spostamento:** **`|alpha + beta|^2 - 1 = +1.110e-16`**, `|alpha - beta|^2 - 1 = +1.051e-16`; **`sigma_max - 1 = +5.551e-17`: ESPANSIVO;**
+  - **le fasi `conj(z_arco)`, `conj(z_nodo)`:** `-5.123e-18`; **`materia_vuoto`:** il fattore `1` esatto.
+- **D2.4** *(`fl(1 + 1e-15)` dopo la posizione `1`)* **FALLISCE COME DEVE:** **la piu' pesante e' la `1`, l'aumento `2.2453e-15` contro l'atteso `|fl(1+1e-15)|^2 - 1`** *(il rapporto `1.0112`)*.
+- **D2.5 PASSA:** **la somma dei contributi esatti, per tick, `+2.2276e-15`** *(relativa `+3.7126e-16`, per `Lambda 6`)* **contro T1 `+2.2280e-15`** *(il rapporto `0.999799`: l'arrotondamento del referto di T1)*; **la deriva in float di `densita_vuoto` di questa corsa: `+2.2276e-15`.**
+- ### **LA LETTURA, COME SCRITTA PRIMA (per etichetta): (p2)** — **nessuna etichetta oltre il `90%`:** **`7a` `0.2807`, `7b` `0.2799`, `8b` `0.2760`, `8a` `0.2738`;** **poi `7c` `-0.0230`, `8c` `-0.0178`, `9c` `-0.0173`, `6a` `-0.0166`, `9b` `-0.0159`.**
+- ### **PER TIPO** *(informazione, non decide: dichiarato prima nella docstring)*: **le quattro etichette pesanti sono LO STESSO COEFFICIENTE, il mezzo spostamento del vuoto: peso `1.1104`, `sigma_max - 1 = +5.551e-17 > 0`.** **Se il pezzo si conta per tipo, e' la forma di (p1).** **Gli altri tipi pesano meno di zero** *(`-0.044` il Grover, `-0.041` e `-0.025` le due fasi del v2)*.
+- ### **La sospettata del guardiano NON e' lei:** **la fase `e^{-i theta/2}` del v2 ha `|z|^2 - 1 = -5.1e-18` e pesa meno di zero;** **il `1/d` del Grover ha `sigma_max - 1 < 0`.** **La deriva e' nel mezzo spostamento, che non e' del v2** *(il principale lo fa a `f` intera, una volta per pezzo)*.
+
+### 24.6 LA LETTURA DEL MECCANISMO *(dal codice; un'ipotesi da verificare, NON una misura)*
+
+- **`_alfa_beta`:** **`beta = fl((1 - z)/2)`, `alpha = fl((1 + z)/2)`.** **`1 - z_re` e' ESATTO** *(Sterbenz: `z_re` in `[0.5, 2]`)*; **`1 + z_re` NO** *(in `[1, 2)` l'ulp e' `2^-52`)*. **Quindi `alpha + beta = 1 + delta` con `delta` l'arrotondamento di `1 + z_re`, e la parte immaginaria si cancella esatta:** **`|alpha + beta|^2 - 1 ~ 2 delta`.**
+- **Il vuoto F3, sui due lati di un arco, e' quasi tutto nella combinazione SIMMETRICA** *(da verificare)*: **ogni mezzo spostamento lo allunga di `~|alpha + beta|^2 - 1 = 1.110e-16`** *(misurato `~1.04e-16`: compatibile con una piccola parte antisimmetrica)*.
+- ### **IL SEGNO DIPENDE DA `z`:** **cioe' da come si arrotonda `1 + cos(pi s f)`.** **Sul principale lo spostamento gira a `f` intera** *(un altro `z`)*, **e D1-bis ha dato il segno OPPOSTO:** **COMPATIBILE con questo meccanismo, NON verificato.**
+- **E l'avvolgimento in memoria del principale** *(D1)* **fa gli stessi mezzi pezzi del laterale:** **per questo la deriva e' la stessa.**
+
+### 24.7 LE PROPOSTE, A LUCA *(NON applicate: il nucleo e' condiviso, e quello del principale e' congelato)*
+
+1. **(D2-bis, una verifica di poco costo)** **D2.3 sul `z` del principale** *(`f` intera)*: **se `|alpha + beta|^2 - 1 < 0` li', il segno di D1-bis e' spiegato; e la stessa misura per pezzi sul principale senza avvolgimento.**
+2. **(la correzione possibile, una scelta di Luca)** **lo spostamento scritto come `I - beta (I - S)`:** `nuovo_0 = v0 - beta (v0 - v1)`, `nuovo_1 = v1 - beta (v1 - v0)`. **Sulla combinazione simmetrica `v0 - v1 = 0` esatto, quindi il valore proprio `1` e' ESATTO** *(e' la forma `I + (e^{i theta} - 1) P-` del commento di `_alfa_beta`)*. ### ⚠ **Il prezzo, scritto:** **a `theta = pi` (`beta = 1`) `v0 - (v0 - v1)` NON e' `v1` al bit**, **e `M-B1`** *(l'identita' al bit col vecchio spostamento)* **cadrebbe.** **Le alternative ne hanno altri** *(`alpha = 1 - beta`: il commento di `_alfa_beta` lo vieta, col suo motivo)*. **La scelta della forma e' di Luca;** **qualunque forma tocca `primo_ordine/flussi_parziali.py` su tutti e due i rami.**
+- ### **FERMO** *(il mandato)*: **ne' T2, ne' T3, ne' correzioni senza la decisione di Luca.**
