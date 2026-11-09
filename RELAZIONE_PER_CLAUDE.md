@@ -24510,3 +24510,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### ⚠ **Un limite del controllo di Luca, detto PRIMA:** **il braccio 0 di v2 non distingue «con v2» da «senza»** *(la dinamica e' la stessa per costruzione)*: **il DEVE FALLIRE e' stato fatto sui BLOB dei `17` file di v2 e su `e_K`** *(`fusione_v2.py`)*. **X: `0/17`, `e_K -4.71227500`; Y: `17/17`, `e_K -1.57068235`, il braccio 0 `4/4` al bit, la suite `67/67`.**
 - **Il laterale ha ora la libreria di oggi E v2: D0-D4 li'.**
+
+## 2026-11-09 (l'orologio: `04:02`) -- T4, LE CARTE STATICHE DEL CAMPO `U`: **`12/12` -- ISOTROPO COME DEVE** *(`doc/referti_l2/u1_t4.txt`; il task history del prototipo sez. `15.1`)*
+
+- ### **La pendenza dell'anisotropia del fotone `4.01` a ogni `s`** *(la mia derivazione: `4`; la `D2` costruita da' `2` e fallisce come deve)*; **`D6` a `4e-13`; `omega / (s |k|) = 0.999997`; il Courant `2 / sqrt 24`, `s = 0.45` instabile.** **L'anisotropia supera l'`1%` solo sotto `2.5` nodi di lunghezza d'onda.**
+- ### **Il prossimo: T4-B** *(Brezzi, la visibilita' delle bande di `U` alla materia: un task history prima)*, **poi T5; sul laterale D0-D4.**

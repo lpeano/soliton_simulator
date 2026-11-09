@@ -474,3 +474,10 @@
   - **STAMPA:** **la lunghezza d'onda in nodi sotto cui l'anisotropia supera l'`1%` e lo `0.1%`** *(`SOGLIE` di `carta_isotropia`)*; **i sei lobi.**
   - **(T4-B) la visibilita' alla Brezzi** *(la premessa `6`: la risposta della materia a ogni banda di `U` attorno all'onda piana di `psi` a `K`)*: ### **NON in questo script: accoppia materia e campo, e vuole un progetto suo** *(il prossimo task history, prima di T5)*.
 - ### **LE `s`:** **`0.05`, `0.15`, `0.3`** *(`0.15` e' quello delle corse)*. **COSA MI FAREBBE FERMARE:** **un DEVE che fallisce** *(la diagnosi prima della soglia)*.
+
+### 15.1 L'ESITO DI T4: **`12/12` -- IL CAMPO `U` LIBERO E' ISOTROPO COME DEVE: LA PENDENZA DELL'ANISOTROPIA `4.01` (LA DERIVAZIONE REGGE), `D6` A `4e-13`, `omega / (s |k|) = 0.999997`, IL COURANT `2 / sqrt 24`** *(`doc/referti_l2/u1_t4.txt`; il codice a `6a88784d`; dall'orologio `03:58`-`04:00`)*
+
+- ### **(T4-P) la pendenza di `ln` anisotropia di `omega` contro `ln |k|`: `4.013`, `4.013`, `4.014`** *(a `s` `0.05`, `0.15`, `0.3`; `26` raggi fra `0.02` e `0.2 k_M`)*: **`4` come la derivazione della sez. `15`** *(`D6`: il primo termine anisotropo `k^6 cos 6 theta` in `omega^2`)*. **(T4-P-F) la dispersione `D2` costruita da' `2.000`: fallisce come deve.**
+- ### **(T4-D6)** **la rotazione di `60` gradi e le armoniche non multiple di `6`: `3.8e-13`, `3.2e-13`, `1.4e-13` assoluti.** **(T4-C)** **`omega / (s |k|)` a `0.005 k_M`: `0.9999966`, `0.9999969`, `0.9999978`.** **(T4-CO)** **il Courant `0.40824829` = `2 / sqrt 24`; `s = 0.45` instabile** *(`max|lambda| 2.452` a `Gamma`)*.
+- ### **STAMPA, a tutte e tre le `s`:** **l'anisotropia di `omega` supera l'`1%` sotto una lunghezza d'onda di `2.48` nodi, lo `0.1%` sotto `3.89`; quella di `|v_g|` sotto `3.55` e `6.09` nodi.** **Il campo `U` e' isotropo a ogni scala piu' lunga di qualche nodo** *(come la materia, `carta_isotropia`)*.
+- ### **IL PROSSIMO:** **T4-B, la visibilita' alla Brezzi** *(accoppia materia e campo: un progetto suo, un task history prima)*; **poi T5.**
