@@ -89,9 +89,9 @@ def misura(out, N):
 
         def conti():
             co = LC.conti_per_nodo(inc, mot, st, e_K, V.LAM_ZERO, par)
-            return {c: math.fsum(co[c].tolist()) for c in CONTI}, math.fsum(co["M"].tolist())
+            return {c: math.fsum(co[c].tolist()) for c in CONTI}, math.fsum(co["M"].tolist()), math.fsum(co["V"].tolist())   # ### (mb-a) anche V, la norma del vuoto
 
-        c_0, M_0 = conti()
+        c_0, M_0, V_0 = conti()
         E0 = c_0["tot"] + bor["E_ass"]
         a_, b_ = SF.forma(VC.FORMA), BE.conv(DC.ZERO)
         with a_, b_:
@@ -102,10 +102,10 @@ def misura(out, N):
                 bor["M_ass"] += dM
                 bor["V_ass"] += dV
                 bor["E_ass"] += e_pr - float(np.sum(LC.conti_per_nodo(inc, mot, st, e_K, V.LAM_ZERO, par)["tot"]))
-        c_1, M_1 = conti()
+        c_1, M_1, V_1 = conti()
         E1 = c_1["tot"] + bor["E_ass"]
         sh = V.shas(z)
-    dati = {"N": N, "e_K": e_K, "M0": M_0, "M1": M_1, "E0": E0, "E1": E1, "M_ass": bor["M_ass"], "E_ass": bor["E_ass"],
+    dati = {"N": N, "e_K": e_K, "M0": M_0, "M1": M_1, "V0": V_0, "V1": V_1, "E0": E0, "E1": E1, "M_ass": bor["M_ass"], "E_ass": bor["E_ass"],
             "c0": c_0, "c1": c_1, "sha": sh}
     with open(out, "w", encoding="utf-8") as f:
         json.dump(dati, f, indent=1)
@@ -136,9 +136,22 @@ def confronta(fn, fv, fvN):
             cl = "0" if abs(dlt) <= TOLL_L2 * EPS * scala else ("pi" if abs(dlt - math.pi * M) <= TOLL_L2 * EPS * scala else "ALTRO")
             print("  (L2) %s %-4s nuovo %+.15e vecchio %+.15e: (nuovo - vecchio)/M %+.15e -> %s" % ("t0  " if fase == "c0" else "fine", c, a[fase][c], b[fase][c], q, cl))
             esito("(L2) %s il termine %s: (nuovo - vecchio) = 0 o pi M, entro %g eps del termine" % ("t0" if fase == "c0" else "alla fine", c, TOLL_L2), cl != "ALTRO", "%+.6e" % (q - (math.pi if cl == "pi" else 0.0)))
+    if "V0" in a:
+        # ### (mb-a, Luca 2026-11-09 01:31; il task history sez. 4): il termine del vuoto contro la norma della materia (R-M, Luca) e contro pi V (R-V, mia)
+        print("  la norma del vuoto V a t0: nuovo %r vecchio %r; alla fine %r %r" % (a["V0"], b["V0"], a["V1"], b["V1"]))
+        dv0, dv1 = a["c0"]["vuo"] - b["c0"]["vuo"], a["c1"]["vuo"] - b["c1"]["vuo"]
+        rm0, rm1 = dv0 / a["M0"], dv1 / a["M1"]
+        esito("(R-M) Delta vuo / M lo STESSO a t0 e alla fine, entro %g eps relativi (la lettura di Luca)" % TOLL_L2, abs(rm1 - rm0) <= TOLL_L2 * EPS * abs(rm0),
+              "%.15e e %.15e (scarto relativo %.3e)" % (rm0, rm1, (rm1 - rm0) / rm0))
+        for fase, dv, Vv, sc in (("t0", dv0, a["V0"], max(abs(a["c0"]["vuo"]), abs(b["c0"]["vuo"]))), ("alla fine", dv1, a["V1"], max(abs(a["c1"]["vuo"]), abs(b["c1"]["vuo"])))):
+            esito("(R-V) %s: Delta vuo = pi V, entro %g eps di vuo (la mia ipotesi)" % (fase, TOLL_L2), abs(dv - math.pi * Vv) <= TOLL_L2 * EPS * sc,
+                  "Delta vuo %+.15e, pi V %+.15e; (R-V') Delta vuo / V %+.15e" % (dv, math.pi * Vv, dv / Vv))
     d0, d1 = a["E0"] - b["E0"], a["E1"] - b["E1"]
     print("  (L3) E + E_ass nuovo - vecchio: a t0 %+.15e (/M0 %+.15e), alla fine %+.15e (/M0 %+.15e); E_ass nuovo - vecchio %+.6e; M_ass %r" % (d0, d0 / a["M0"], d1, d1 / a["M0"], a["E_ass"] - b["E_ass"], a["M_ass"]))
     esito("(L3) E + E_ass: la STESSA costante a t0 e alla fine, entro %g eps di E" % TOLL_L2, abs(d1 - d0) <= TOLL_L2 * EPS * abs(a["E0"]), "scarto %.3e (soglia %.3e)" % (d1 - d0, TOLL_L2 * EPS * abs(a["E0"])))
+    if "V0" in a:
+        sog = TOLL_L2 * EPS * abs(a["E0"]) * math.sqrt(2.0 * a["N"])
+        esito("(L3, mb-a) la stessa, con la soglia da ACCUMULATORE 64 eps E sqrt(2 N), fissata nella sez. 4", abs(d1 - d0) <= sog, "scarto %.3e (soglia %.3e)" % (d1 - d0, sog))
     print("=" * 130)
     print("ESITO: %d/%d controlli come devono; fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
