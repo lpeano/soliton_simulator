@@ -695,3 +695,21 @@
   - **(P3-F) DEVE FALLIRE:** **lo stesso sul laterale** *(la stessa prova nel worktree `wt_zero`: NON alza)*;
   - **(P3-0)** **a `cs` spento sul principale il tick e' AL BIT quello di prima** *(il braccio `0`: il divieto non tocca niente quando `cs` e' spento)*.
 - ### **PERCHE' NON ADESSO:** **`csv/solitone/__init__.py` e `corsa_accensione.py` sono sul percorso di `C35-pi`, che gira:** **durante un run nessun file del percorso si modifica** *(par. `5`)*. **Il codice e la prova a `C35-pi` chiusa** *(la stima `18:30`-`20:00`)*. **Fino ad allora: NESSUNA prova con `cs` acceso sul principale** *(non ne ho in coda: (r-D5) e' sul laterale)*.
+
+### 19.1 P1, IL PRIMO GIRO: **INTERROTTO DA UN DIFETTO MIO NELLA CONVENZIONE `simm`; MA LA PARTE «COME `vb_di`» E' COMPLETA, E RISPONDE A P1** *(`doc/referti_l2/u1_p1_interrotto.txt`; il codice a `a1e07198`, blob `d41c6a8f`; `15:00`-`15:12`)*
+
+- ### **IL DIFETTO MIO:** **sotto `TF.conv("simm")` la scelta della coppia a `K`** *(`_triangoli_forza.coppia_K`: i livelli diversi da `0` e da `-pi s`)* **trova i gruppi `[2, 4, 2]` invece di `[2, 2]`, e alza.** **Lo zero spostato cambia quali livelli sono «diversi da `0`».** **I DEVE P1-R e P1-F NON sono girati.** **E `TF.conv("oggi")` e' `nullcontext`: identico a «come `vb_di`», quindi la terza convenzione non aggiungeva niente.**
+- ### **LA RISPOSTA A P1, dalla parte completa** *(come `vb_di`, nessun contesto)*:
+
+| `s` | `eps 0`: `v_b/s` | `eps 0`: `v_max/s` | `eps 0.5`: `v_b/s` (i due rami) | `eps 0.5`: `v_max/s` |
+|---|---|---|---|---|
+| `0.05` | `0.78499381` | `0.59885898` | `0.78497505`, `0.78492954` | `0.58539003` |
+| `0.02` | `0.78533353` | `0.59853015` | `0.78533052`, `0.78532326` | `0.58509783` |
+| `0.01` | `0.78538199` | `0.59848313` | `0.78538124`, `0.78537942` | `0.58505603` |
+| `0.001` | `0.78539798` | `0.59846761` | `0.78539797`, `0.78539795` | `0.58504224` |
+| **`0.15`** *(la corsa)* | `0.78171589` | `0.60196296` | **`0.78154880`, `0.78113091`** | **`0.58813743`** |
+
+  - **`v_b/s -> pi/4` ANCHE a `eps 0.5`:** **la moneta non cambia il limite** *(`0.78539797` a `s 0.001`)*. **`pi/4` e' il coefficiente di `k^2` del fit iperbolico attorno a `K`, non la velocita' di una banda.**
+  - ### **`v_max/s` a `eps 0.5` vale `0.5854` a `s 0.05` e tende a `~0.58504`:** **il `0.598` era a `eps 0`, come dice il revisore** *(che trova `0.5856`: `0.5854` a `s 0.05` e' a `2e-4` da lui)*.
+  - ### **«Il `c` della materia nel regime delle corse»** *(`eps 0.5`, `s 0.15`)*: **`v_max/s = 0.588`** *(la velocita' di gruppo massima)*; **il parametro iperbolico `v_b/s = 0.781`.**
+- **Resta da misurare: la DIPENDENZA DALLO ZERO di `v_b`** *(la sez. `19`)*. ### **La cura proposta** *(un commit a se')*: **non `TF.conv("simm")`, ma lo spostamento dello zero applicato ai livelli gia' trovati:** **`(omega + c)^2 - (omega0 + c)^2`, con `c = pi s / 2`** *(lo zero simmetrico: `omega0/s` passa da `-1.5696` a `~0`)*, **e lo stesso fit.**

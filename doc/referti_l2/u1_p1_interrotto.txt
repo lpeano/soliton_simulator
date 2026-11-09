@@ -1,0 +1,34 @@
+[TIMBRO] _u1_secondo.py  sha1-BYTE ab015054  committato e pulito
+[TIMBRO] _triangoli_forza.py  sha1-BYTE d0c0b981  committato e pulito
+[TIMBRO] u1_p1.py  sha1-BYTE d41c6a8f  committato e pulito
+==================================================================================================================================
+P1, LA PROVENIENZA DEL LIMITE DI VELOCITA' DELLA MATERIA (sez. 19): eps (0.0, 0.5); s (0.05, 0.02, 0.01, 0.005, 0.002, 0.001, 0.15); KMAX3 0.1 NK3 200 (come _u1_secondo); le convenzioni: nessuna (come vb_di), simm, oggi
+==================================================================================================================================
+  come vb_di eps 0.0 s 0.05  : v_b/s 0.78499381 0.78499381 (omega0/s -1.569585 +1.569585) | v_max/s 0.59885898
+  come vb_di eps 0.0 s 0.02  : v_b/s 0.78533353 0.78533353 (omega0/s -1.570603 +1.570603) | v_max/s 0.59853015
+  come vb_di eps 0.0 s 0.01  : v_b/s 0.78538199 0.78538199 (omega0/s -1.570748 +1.570748) | v_max/s 0.59848313
+  come vb_di eps 0.0 s 0.005 : v_b/s 0.78539410 0.78539410 (omega0/s -1.570784 +1.570784) | v_max/s 0.59847137
+  come vb_di eps 0.0 s 0.002 : v_b/s 0.78539750 0.78539750 (omega0/s -1.570794 +1.570794) | v_max/s 0.59846808
+  come vb_di eps 0.0 s 0.001 : v_b/s 0.78539798 0.78539798 (omega0/s -1.570796 +1.570796) | v_max/s 0.59846761
+  come vb_di eps 0.0 s 0.15  : v_b/s 0.78171589 0.78171589 (omega0/s -1.559858 +1.559858) | v_max/s 0.60196296
+  come vb_di eps 0.5 s 0.05  : v_b/s 0.78497505 0.78492954 (omega0/s -1.647463 +1.647030) | v_max/s 0.58539003
+  come vb_di eps 0.5 s 0.02  : v_b/s 0.78533052 0.78532326 (omega0/s -1.648296 +1.648226) | v_max/s 0.58509783
+  come vb_di eps 0.5 s 0.01  : v_b/s 0.78538124 0.78537942 (omega0/s -1.648415 +1.648397) | v_max/s 0.58505603
+  come vb_di eps 0.5 s 0.005 : v_b/s 0.78539392 0.78539346 (omega0/s -1.648444 +1.648440) | v_max/s 0.58504558
+  come vb_di eps 0.5 s 0.002 : v_b/s 0.78539747 0.78539739 (omega0/s -1.648453 +1.648452) | v_max/s 0.58504266
+  come vb_di eps 0.5 s 0.001 : v_b/s 0.78539797 0.78539795 (omega0/s -1.648454 +1.648454) | v_max/s 0.58504224
+  come vb_di eps 0.5 s 0.15  : v_b/s 0.78154880 0.78113091 (omega0/s -1.639502 +1.635589) | v_max/s 0.58813743
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\u1_p1.py", line 102, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\u1_p1.py", line 78, in main
+    r = vb(eps, s)
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\u1_p1.py", line 48, in vb
+    for b in TF.coppia_K(eps, s):
+             ~~~~~~~~~~~^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_triangoli_forza.py", line 221, in coppia_K
+    assert [len(g) for g in gruppi] == [2, 2], "la coppia a K a eps 0: gruppi %s" % [len(g) for g in gruppi]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: la coppia a K a eps 0: gruppi [2, 4, 2]
+exit 1 15:12:14
