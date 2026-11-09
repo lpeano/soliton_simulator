@@ -680,3 +680,18 @@
   - **(v2)** **`v_b/s` a `eps 0.5` diverso, o diverso fra le convenzioni:** **`pi/4` NON e' un numero della materia nel regime delle corse**, **e si scrive quale e' «il `c`»;**
   - ### **«il `c` della materia nel regime delle corse», la mia proposta, da confermare coi numeri:** **`v_max/s` a `eps 0.5`, `s 0.15`** *(la velocita' di gruppo massima: non dipende dallo zero)*; **il revisore trova `0.5856` a `eps 0.5`**, **e la misura lo deve ritrovare o dire perche' no.**
 - **Il calcolo gira DOPO (r-D5)** *(una prova corta alla volta)*. **S1-S5 e T5 restano fermi finche' P1 non e' chiuso.**
+
+### 20. P3, `cs` VIETATO SUL PRINCIPALE *(Luca `13:16`)*: **IL PROGETTO DEL CONTROLLO; IL CODICE A `C35-pi` CHIUSA**
+
+- ### **LE PREMESSE DAL CODICE** *(LETTE)*:
+  - **`cs` e' «acceso» quando `CAMM-FASE-VUOTO` lavora**, **cioe' quando `mot.cs` e `mot.lambda_c` sono tutti e due non `None`** *(`energia_pesata.applica`: con uno dei due `None` la funzione ritorna senza fare niente, «la forma spenta»)*.
+  - **Le strade che lo accendono:** **`flussi_parziali.accendi_cs`** *(il nucleo: `_ciclo_cs`, `_controllo_passo`, `_costo_punti_fissi`, `_diagnosi_d0`, `_fattore_omega`, ...)*, **`tick.cs_al_centro`** *(il nucleo)*, **e `mot.lambda_c = ...` scritto a mano** *(`carta_statiche`, IS3)*. **Il nucleo e' congelato: il controllo non puo' stare li'.**
+- ### **IL PROGETTO** *(la scelta mia, dichiarata)*:
+  - **nella libreria, un modulo `csv/solitone/ramo.py` con `vieta_cs()`:** **sostituisce `energia_pesata.applica` con una funzione che ALZA se `mot.cs` e `mot.lambda_c` sono tutti e due non `None`, e altrimenti chiama quella vera** *(lo stesso aggancio per nome del modulo che usa `carta_punto_fisso_r`)*;
+  - **l'interruttore e' `doc/NUCLEO_CONGELATO.md`:** **`stato: CONGELATO` vuol dire «principale, senza v2» -> il divieto attivo**; **sul laterale il file dice altro, o il divieto si spegne** *(da leggere sul laterale prima del codice)*;
+  - **`vieta_cs()` si chiama all'import del pacchetto `solitone`** *(`csv/solitone/__init__.py`)*: **copre ogni script di `csv/solitone/`**. ### ⚠ **NON copre gli script di `csv/` che non importano `solitone`** *(`A9`: lo scrivo, e li elenco nel referto)*.
+- ### **I DEVE:**
+  - **(P3-D)** **sul principale, una scena con `accendi_cs` e un tick: ALZA, col messaggio del divieto**;
+  - **(P3-F) DEVE FALLIRE:** **lo stesso sul laterale** *(la stessa prova nel worktree `wt_zero`: NON alza)*;
+  - **(P3-0)** **a `cs` spento sul principale il tick e' AL BIT quello di prima** *(il braccio `0`: il divieto non tocca niente quando `cs` e' spento)*.
+- ### **PERCHE' NON ADESSO:** **`csv/solitone/__init__.py` e `corsa_accensione.py` sono sul percorso di `C35-pi`, che gira:** **durante un run nessun file del percorso si modifica** *(par. `5`)*. **Il codice e la prova a `C35-pi` chiusa** *(la stima `18:30`-`20:00`)*. **Fino ad allora: NESSUNA prova con `cs` acceso sul principale** *(non ne ho in coda: (r-D5) e' sul laterale)*.
