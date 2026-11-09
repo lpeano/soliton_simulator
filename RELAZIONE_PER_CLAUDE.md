@@ -24632,3 +24632,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La decisione delle `19:21` e' chiusa.**
 - **`W = 3 P` per grandezza, col metodo di M3.**
 - ### **Ne' `TB3` ne' `TBS` raggiungono il regime entro `t 30000`:** **boccia soprattutto il CUORE.** **L'alone, col suo `W`, ora passa quasi sempre.**
+
+### 2026-11-09 11:39 -- IL CONTROLLO DELLO STATO CHIESTO DA LUCA (`11:37`): LA RISPOSTA
+
+1. **Le decisioni delle `08:56`:** ricevute, registrate in `cb62dd92` *(laterale `1f811b6c`)*.
+2. **L'integrazione delle `09:59`:** ricevuta, registrata in `c28597cd`. **R1-R3 sono dentro `carta_punto_fisso_r.py` a `1fcc9e9b`**; R4 c'e' come stampa.
+3. **Le note G1-G7:** fatte in `5f4b5216`. **Manca il rimando dal task history di D0-D4 sul laterale** *(X2)*: in coda.
+4. **T4-B delle `10:47`:** ricevuta. **Il task history `16.4` era scritto ma NON committato alle `11:39`** *(fatto in `b66f6af7`)*; **lo script scritto, non ancora committato ne' girato.**
+5. **Le `11:17`:** ricevute, registrate in `93254ada`.
+6. ### **«Ogni messaggio a Luca in italiano» (`22:30` del `2026-11-08`): NON RICEVUTA** *(non c'e' in `CLAUDE.md`)*. **Da ora scrivo comunque in italiano.**
+7. **`C35-pi`:**
+   - **il log dice finito il pezzo `136667 -> 146667`** *(`5079` s)*;
+   - **l'ultimo jsonl sul disco e' `C35-pi_136667.jsonl`, delle `10:02`**;
+   - **il ritmo `~1.8`-`2.5` tick al secondo**;
+   - **la stima della fine `18:30`-`20:00`, se il tetto e' `200000`** *(da riconfermare: numeri dal log, non da uno script)*.
+8. **Le prove corte:** **alle `11:39` non ne girava nessuna** *(la stazionarieta' v3 finita alle `11:33`, `3/3`)*.
+   - **In coda sul principale:** T4-B (t-b)/(t-a) *(la suite, il codice, la corsa)*.
+   - **In coda sul laterale:** (r-D5), poi il rimando alla gravita'.
+9. **Il congelamento:** `doc/NUCLEO_CONGELATO.md` dice `stato: CONGELATO`; **`core.hooksPath = .githooks` sul principale.**
