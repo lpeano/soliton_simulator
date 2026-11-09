@@ -24598,3 +24598,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **La mia raccomandazione: (t-b).**
 
 ### 2026-11-09 10:25 -- LA GRAVITA' NEL MODELLO: LE NOTE DI PROGETTO G1-G7 *(Luca `09:59`-`10:17`, sola documentazione)*: `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md` -- il guscio di `cs` *(dal guardiano, da riconfermare con R1-R3)*, perche' una `cs` locale non da' portata, perche' la `U(1)` da' il meccanismo ma non la gravita', le strade *(un `Lambda` che si propaga, `SU(2)`, una `cs` che si diffonde)*, **il limite delle `2+1` dimensioni** *(niente attrazione fra masse ferme: un difetto conico)*, **e tre domande a Luca.** [[PIANO-2D-3D]]
+
+### 2026-11-09 10:35 -- IL RIMANDO AL LATERALE (REGOLA 2): L'INTEGRAZIONE DI LUCA DELLE `09:59` A (r-D5), REGISTRATA (sez. `13` del laterale, `c28597cd`); E UN ERRORE MIO [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Il fatto nuovo** *(dal guardiano, da verificare)*: **la zona sensibile e' un GUSCIO sul bordo del solitone** *(`~17`-`20` nodi)*, **non il centro.**
+- **R1-R3 entrano nello script di (r-D5) prima del suo commit:**
+  - **R1:** il profilo radiale di `Lambda` e di `cs/s`, e il raggio del minimo `r_min`;
+  - **R2:** la forma della direzione instabile, con le letture (g1) guscio, (g2) centro;
+  - **R3:** il fattore sull'anello `[r_min - 2, r_min + 2]`.
+- **R1, dal codice:** **i dischi di D2 sono di raggio `2`, intorno ai nodi piu' vicini a `r 0`, `w`, `2 w`, e al piu' lontano** *(il centro e' quello di `rho`)*. **Nessuno stava sul guscio.**
+- ### ⚠ **IL MIO ERRORE:** **nel referto di D0-D4 e nel rimando `d8fff8a9` ho scritto «localizzato nel cuore».**
+  - **Veniva dai dischi** *(il centro `1.56`-`2.21`)*;
+  - **ma D1 diceva gia' `70%` dello scarto fra `w` e `2 w`.**
+  - ### **«Nel cuore» va letto come NON DIMOSTRATO**, finche' R2 non lo dice.
