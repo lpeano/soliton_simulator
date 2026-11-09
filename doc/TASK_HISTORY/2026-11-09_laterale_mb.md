@@ -415,3 +415,29 @@
 - **F1-I passa** *(l'inversa del trapezio `2.41e-15`)*; **F1-F fallisce come deve** *(`3.71e+01`)*.
 - ### **IL DIFETTO MIO:** **`omega_v` somma `conj(phi0) phi1` sull'asse `1`, ma `phi_h` ha UNA dimensione** *(una fase per estremita' d'arco, non un vettore come `psi_h`)*: **`AxisError` al primo tick del vuoto.** **Nessuna corsa di F1 e' avvenuta.**
 - **La cura** *(un commit a se')*: **`np.add.at(z, nodo, conj(phi0) phi1)` senza la somma.** **Nessuna lettura cambia.**
+
+## 20. L'ESITO DI F1: **`2/3` -- F1-V FALLISCE (IL VUOTO SI SPOSTA DI `1.7e-15` IN `50` TICK); LA SCENA ARRIVA A `200` TICK NEI DUE MODI; (q1) E' SENSIBILISSIMO (`1e-8` -> `3e-2` IN `5` TICK) E `r` ARRIVA A `3.14`; (q2) CRESCE PIANO (`1e-8` -> `7e-6` IN `200` TICK); FERMO** *(`doc/referti_l2/carta_f1.txt`; il codice a `f5f0c47c`, blob `6040448a`; `18:23`-`18:27`)*
+
+- **I DEVE:** **F1-I passa** *(`2.41e-15`)*; **F1-F fallisce come deve** *(`37.1`)*.
+- ### **F1-V FALLISCE:** **nel vuoto F3, in `50` tick, `cs` si sposta da `s` di `1.721e-15`, contro la soglia `8 eps s = 2.7e-16`** *(una soglia mia, scritta prima: `8 eps` RELATIVO)*.
+  - **Lo scarto e' `~60` ulp di `s`:** **l'arrotondamento del trapezio e del ciclo `cs -> tick -> L` si ACCUMULA nei `50` tick.**
+  - ### **Lo scrivo come fallimento, e non lo rileggo:** **C2 chiedeva il vuoto «al bit con oggi»; F1 lo tiene a `1e-15`, non al bit.** **Una soglia per tick, o la deriva in funzione del numero di tick, sono una decisione di Luca, non mia.**
+- ### **LA SCENA** *(`TBS` a `10000` tick)*, **`200` tick, la norma conservata a `1e-15` relativo nei due modi:**
+
+| | **(q1) `cs'` della legge** | **(q2) `cs' = 0`** |
+|---|---|---|
+| **arriva a `200` tick** | **si'** | **si'** |
+| **`max|cs - L|`** *(tick `1`, `200`)* | `4.5e-2`, `3.8e-2` | `2.3e-2`, `2.2e-2` |
+| **`cs` min, max** *(tick `200`)* | `0.0041`, `0.454` | `0.0013`, `0.475` |
+| **`r` max** *(il battito del vuoto)* | ### **`3.14`: oltre `2`, il trapezio NON e' piu' una media a pesi positivi** | **`1.70`** |
+| **la perturbazione `1e-8` sul centro, la differenza ai tick `1`, `5`, `20`, `200`** | ### **`9.7e-8`, `3.1e-2`, `1.8e-1`, `3.3e-1`: satura a `O(1)` in pochi tick** | **`5.6e-9`, `4.5e-9`, `6.1e-8`, `6.9e-6`** |
+| **il calore della memoria** *(la somma, `200` tick)* | `-2.62e5` | `-3.60e4` |
+
+- ### **LE LETTURE** *(sez. `16.4`, `k1`-`k3`)*:
+  - **(q1): (k3), arriva ma e' INSTABILE:** **una perturbazione di `1e-8` diventa di ordine `1` in meno di `10` tick.** **La previsione scomoda della sez. `18.5` e' confermata in (q1).** **E `r` oltre `2` rompe la positivita' del trapezio** *(il battito del vuoto con `cs` acceso arriva quasi a `pi` per tick)*.
+  - ### **(q2): quasi (k1):** **arriva, e la perturbazione cresce di un fattore `~1000` in `200` tick** *(dopo i primi `20` quasi ferma)*: **una crescita lenta, molto sotto la previsione.** **Ma F1-V fallisce, quindi NON la chiamo candidata.**
+  - **Il calore della memoria e' grande e NEGATIVO in tutti e due** *(l'energia pesata cala a ogni aggiornamento)*: **da confrontare con l'energia della scena** *(non stampata: un difetto dello strumento)*.
+- ### **FERMO** *(un DEVE che fallisce)*. **Le domande a Luca:**
+  1. **F1-V:** **una deriva di `~1e-15` in `50` tick nel vuoto e' accettabile** *(una soglia per tick, dichiarata)*, **o il vuoto deve restare al bit** *(e allora il trapezio va scritto in modo che con `L = cs` dia `cs` esatto: per esempio `cs + r (L - cs) / (1 + r/2)`, che a `L = cs` da' `cs` al bit)*?
+  2. ### **(q1) contro (q2):** **che cosa e' `cs'` quando `cs` e' una memoria?** **I numeri dicono: con `cs'` della legge e' instabile, con `cs' = 0` no.** **E' una scelta di fisica.**
+  3. **`r` oltre `2`** *(in (q1))*: **il battito del vuoto come tempo di memoria va limitato, o ricavato diversamente?**
