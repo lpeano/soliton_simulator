@@ -24838,3 +24838,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Lo script gira il tick dentro `BE.conv(DC.ZERO)`:** **sul principale questo AVVOLGE in memoria `grover`, `hop_psi`, `hop_phi` con lo zero simmetrico** *(le stesse operazioni del v2, al bit)*; **sul laterale non avvolge niente.** **D1 ha confrontato il v2 col v2.**
 - ### **Resta vero:** **le corse del principale** *(che girano lo zero simmetrico in memoria)* **hanno la stessa deriva.** **CADE:** **«del tick di sempre, non del v2»**, **e la conseguenza «la causa sta nel tick condiviso».**
 - **La correzione, D1-bis:** **lo stesso script con `--senza-avvolgimento`** *(la scena identica, i tick senza l'avvolgimento)*, **le stesse letture.** **Poi D2.**
+
+### 2026-11-10 00:10 -- D1-bis SUL PRINCIPALE: (w3) -- SENZA L'AVVOLGIMENTO IL NUCLEO DERIVA ANCHE LUI, IN MODO SISTEMATICO, MA COL SEGNO OPPOSTO (`-2.313e-12` IN `1000` TICK, LA PENDENZA `1.004`) *(i referti `lambda_vuoto_deriva_principale_nucleo.txt` e `_controllo.txt`; il task history di D1, sez. `7`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **La scena identica** *(lo sha1 dello stato di partenza `d0d6336fed005f50` nelle due modalita')*; **il controllo positivo dice quale `grover` gira**; **con l'avvolgimento i numeri di D1 tornano.**
+- **Il nucleo del disco: `-2.3128e-15` per tick; il laterale `+2.2280e-15`** *(il rapporto `-1.038`)*. **Uniforme, lineare.** **Senza interpretare.**
+- ### ⚠ **Mio errore:** **la riga SUITE di `77c07d04` ha orari scritti da me** *(«`23:59:34`-`00:13:42`»)*; **quelli veri `23:43:00`-`23:56:53`, `67` su `67`.**
+- **Ora D2 sul laterale.**

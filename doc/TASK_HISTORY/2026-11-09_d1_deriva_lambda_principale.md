@@ -67,3 +67,29 @@
   - **il referto `doc/referti_l2/lambda_vuoto_deriva_principale_nucleo.txt`;** **le letture w1/w2/w3 con gli STESSI criteri della sez. `3`** *(scritte li', prima)*;
   - **il controllo positivo che l'avvolgimento c'e' davvero:** **lo script stampa se `FP.grover` e' la funzione del modulo o un avvolgimento, nelle due modalita'.**
 - **Poi D2 sul laterale** *(che misura pezzo per pezzo anche la fase `conj(z)` del v2: risponde direttamente)*.
+
+## 7. L'ESITO DI D1-bis *(a `77c07d04`, blob dello script `f28be212`; le due corse dalle `00:01:19` alle `00:02:49` e dalle `00:03:12` alle `00:05:46` del `2026-11-10`)*
+
+- **I referti:** `doc/referti_l2/lambda_vuoto_deriva_principale_nucleo.txt` *(`--senza-avvolgimento`)* **e** `doc/referti_l2/lambda_vuoto_deriva_principale_controllo.txt` *(con l'avvolgimento, lo stesso blob)*.
+- **I controlli della sez. `6`:**
+  - **lo sha1 dei byte dello stato di partenza e' lo STESSO nelle due modalita':** `d0d6336fed005f50`;
+  - **il controllo positivo:** **con l'avvolgimento `FP.grover` e `FP.hop_phi` sono `_zero_simmetrico.convenzione_simmetrica.<locals>.comp.<locals>.f`; senza, `flussi_parziali.grover` e `flussi_parziali.hop_phi`;**
+  - **la modalita' con l'avvolgimento ridà i numeri di D1** *(`+2.228e-12` al tick `1000`, la pendenza `0.985`, il rapporto `0.999799`)*;
+  - **T1-F fallisce come deve in tutte e due** *(senza: `9.477e-13`)*.
+- **IL NUCLEO DEL PRINCIPALE, SENZA L'AVVOLGIMENTO** *(i numeri del laterale accanto, dal suo referto)*:
+
+| | il principale, nucleo del disco | il laterale *(T1)* |
+|---|---|---|
+| `|Delta Lambda|` per tick, max | `7.105e-15` (`8.0` ulp) | `1.066e-14` (`12.0` ulp) |
+| `|Delta Lambda|` per tick, media | `2.371e-15` (`2.67` ulp) | `2.499e-15` (`2.81` ulp) |
+| i tick senza cambiamento | `114` su `1000` | `273` su `1000` |
+| la deriva al tick `1` *(media; max = rms)* | `-4.441e-15` | `+1.776e-15` |
+| al tick `10` | `-2.220e-14` | `+2.400e-14` |
+| al tick `100` | `-2.354e-13` | `+2.256e-13` |
+| al tick `1000` | **`-2.313e-12`** (`2604` ulp) | **`+2.228e-12`** (`2508` ulp) |
+| la pendenza della rms, tick `10`-`1000` | `1.004` | `0.985` |
+| la deriva media per tick | **`-2.3128e-15`** | **`+2.2280e-15`** |
+
+- ### **LA LETTURA: (w3)** — **una deriva diversa: SISTEMATICA anche sul nucleo del principale** *(la pendenza `1.004`, max = media = rms: uniforme)*, **ma di SEGNO OPPOSTO** *(`Lambda` cala)*, **e il modulo il `3.8%` piu' grande** *(il rapporto `-1.038068`)*. **Senza interpretare** *(il mandato)*.
+- ### **Che cosa cambia per D2:** **il fatto «la deriva c'e' anche senza il v2» e' misurato; «e' la stessa» no.** **D2 sul laterale misura i sotto-pezzi `a`, `b`** *(i mezzi pezzi)* **e `c`** *(la fase `conj(z)` del v2)* **separatamente.**
+- ### ⚠ **UN ALTRO MIO ERRORE, nel commit `77c07d04`:** **la riga SUITE dice «dalle `23:59:34` alle `00:13:42`»: orari SCRITTI DA ME, non letti.** **Quelli veri, dall'uscita della suite: dalle `23:43:00` alle `23:56:53`, `67` su `67`.** **L'esito (`67` su `67`) e' quello vero.** *(`L-NUMERI`: un numero ricopiato non ha provenienza, e uno inventato meno ancora.)*

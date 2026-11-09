@@ -1,0 +1,31 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] ramo.py  sha1-BYTE b8c91161  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE 1461182f  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE cfaff204  committato e pulito
+[TIMBRO] lambda_vuoto_deriva_principale.py  sha1-BYTE f28be212  committato e pulito
+### D1: il ramo 'primo-ordine'; il divieto P3 attivo: True (alza solo con mot.cs E mot.lambda_c non None; qui lambda_c = None)
+==================================================================================================================================
+T1, LA DERIVA DI Lambda DEL VUOTO A cs SPENTO (sez. 23): il vuoto F3 della corsa TBS, 1000 tick; T1-F: 1e-12 su un nodo al tick 500
+==================================================================================================================================
+### D1-bis: lo sha1 dei byte dello stato di partenza (tutte le chiavi ndarray, in ordine): d0d6336fed005f50; la modalita': con BE.conv(DC.ZERO) (come T1)
+### la scena: 6561 nodi; mot.cs array (min 0.15, max 0.15); Lambda all'inizio min 6 max 6
+### D1-bis, il controllo positivo: dentro i tick FP.grover e' _zero_simmetrico.convenzione_simmetrica.<locals>.comp.<locals>.f, FP.hop_phi e' _zero_simmetrico.convenzione_simmetrica.<locals>.comp.<locals>.f
+  |Delta Lambda| per tick (tutti i nodi, tutti i tick): max 1.066e-14 (12.0 ulp), media 2.499e-15 (2.81 ulp); i tick con Delta Lambda = 0 ovunque: 273 su 1000
+    ACCANTO, il laterale (81c690a8, doc/referti_l2/lambda_vuoto_deriva.txt): max 1.066e-14 (12.0 ulp), media 2.499e-15 (2.81 ulp); i tick fermi 273 su 1000
+  la deriva Lambda(t) - Lambda(0) al tick    1: max 1.776e-15 (2.0 ulp), media +1.776e-15, rms 1.776e-15
+    ACCANTO, il laterale al tick    1: max 1.776e-15 (2.0 ulp), media +1.776e-15, rms 1.776e-15
+  la deriva Lambda(t) - Lambda(0) al tick   10: max 2.487e-14 (28.0 ulp), media +2.400e-14, rms 2.400e-14
+    ACCANTO, il laterale al tick   10: max 2.487e-14 (28.0 ulp), media +2.400e-14, rms 2.400e-14
+  la deriva Lambda(t) - Lambda(0) al tick  100: max 2.256e-13 (254.0 ulp), media +2.256e-13, rms 2.256e-13
+    ACCANTO, il laterale al tick  100: max 2.256e-13 (254.0 ulp), media +2.256e-13, rms 2.256e-13
+  la deriva Lambda(t) - Lambda(0) al tick 1000: max 2.228e-12 (2508.0 ulp), media +2.228e-12, rms 2.228e-12
+    ACCANTO, il laterale al tick 1000: max 2.228e-12 (2508.0 ulp), media +2.228e-12, rms 2.228e-12
+  la pendenza in log-log della rms della deriva fra t 10 e t 1000: 0.985
+    ACCANTO, il laterale: 0.985
+  la deriva media per tick (al tick 1000, diviso 1000): il principale +2.2276e-15, il laterale +2.2280e-15; il rapporto principale/laterale 0.999799
+  DEVE FALLIRE: T1-F la misura NON vede lo spostamento di 1e-12 al tick 500 (max|Lambda_iniettata - Lambda| < 5e-13 dopo ### FALLISCE   9.397e-13
+  LA LETTURA: (w1: la stessa deriva entro il 10% (il rapporto 0.999799, la pendenza 0.985): del tick di sempre, non del v2)
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite: 0 []; 153 s in tutto
