@@ -24611,3 +24611,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Veniva dai dischi** *(il centro `1.56`-`2.21`)*;
   - **ma D1 diceva gia' `70%` dello scarto fra `w` e `2 w`.**
   - ### **«Nel cuore» va letto come NON DIMOSTRATO**, finche' R2 non lo dice.
+
+### 2026-11-09 11:30 -- LA DECISIONE DI LUCA DELLE `11:17`: IL PIANO 2D, POI 3D -- REGISTRATA *(G8 delle note sulla gravita'; la riga `2` della MAPPA)* [[PIANO-2D-3D]]
+
+- **Prima la fisica del 2D fino in fondo, poi il 3D:** **il 2D e' la prima tappa, non un modello rivale.**
+- **Nel 2D la gravita' si cerca come un campo che si propaga**, **con l'energia come sorgente, attrattivo**, **col potenziale logaritmico atteso.**
+  - **E' una direzione, non una legge:** **la forma si progetta dopo la cura del punto fisso di `cs`.**
+- **Le differenze attese 2D/3D sono scritte come previsioni** *(il potenziale `ln r` contro `1/r`; una polarizzazione del fotone contro due; niente maree ne' onde di Einstein in `2+1`)*.
+- **Nessun lavoro sul 3D ora.**
+- **Di G7 resta aperta la domanda 3** *(la cura di `cs` verso una memoria che si diffonde?)*.
+- ### **E L'ORDINE DI ESECUZIONE DELLE PROVE CORTE, registrato:**
+  1. **la stazionarieta' v3** *(pochi minuti: in corsa)*;
+  2. **T4-B (t-b), dopo la sua suite**;
+  3. **(r-D5) sul laterale** *(`~1`-`2` ore; il codice e' a `1fcc9e9b`)*.

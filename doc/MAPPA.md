@@ -140,7 +140,7 @@
 | | che cosa | dove |
 |---|---|---|
 | 1 | ### **la seconda meta' della gravita': la materia che curva lo spazio** *(la regola della mitosi)*; ### **senza, ne' la legge di Newton nel suo limite ne' le onde gravitazionali** | `doc/PROGETTO_MITOSI.md`, [[PROGETTO-MITOSI]]; ### **la sezione `2`, riga `6`** |
-| 2 | ### **il `3+1`: tutto e' in 2D** | `doc/PIANO_2D_3D.md` *([[PIANO-2D-3D]])*, `doc/PROGETTO_FCC.md` |
+| 2 | ### **il `3+1`: tutto e' in 2D** -- ### **il 2D prima, fino in fondo; il 3D dopo** *(Luca `2026-11-09` `11:17`; nessun lavoro sul 3D ora; le differenze attese 2D/3D come previsioni in G8 delle note sulla gravita')* | `doc/PIANO_2D_3D.md` *([[PIANO-2D-3D]])*, `doc/PROGETTO_FCC.md`, `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md` (G8) |
 | 3 | ### **l'invarianza di Lorentz:** ### **i due coni** *(`v_b = pi/4`)*; ### **le fette** *(i nodi ciascuno al proprio ritmo)* | ### **la sezione `2`, riga `4`** *(`b0edae62`, `afba052b`)*; ### **la lista in attesa, riga `6`** |
 | 4 | ### **il dizionario con le unita' fisiche** | [[DECISIONE-L1-NATURA-A-SIMULATORE-B]] |
 | 5 | ### **le altre forze:** ### **la debole** *(la sola che distingue la chiralita')*; ### **la forte;** ### **il fork `SU(2)` dell'era `1` come inizio** | ### **il ramo `fork-su2`;** [[DOMANDA-CHIRALITA]] |

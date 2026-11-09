@@ -60,6 +60,25 @@
 2. **Quando affrontare il passaggio a `3D`?**
 3. **La cura del punto fisso di `cs` deve gia' andare nella direzione di una memoria che si DIFFONDE?** *(oggi (r-D5) e' solo una diagnosi, e non sceglie)*
 
+### G8. LA DECISIONE DI LUCA DEL `2026-11-09` `11:17`: **IL PIANO 2D, POI 3D**
+
+- ### **Prima LA FISICA DEL 2D (`2+1`) fino in fondo, con le leggi che il 2D permette; poi il 3D (`3+1`) e la fisica del 3D.** **Non sono due modelli rivali: il 2D e' la prima tappa.**
+- ### **Nel 2D la gravita' NON puo' essere quella di Einstein** *(in `2+1` non attrae a distanza: spazio piatto fuori dalla materia, solo difetti conici; G6)*.
+  - **Nel 2D la gravita' del modello si cerca come un campo che SI PROPAGA, con l'ENERGIA come sorgente e ATTRATTIVO** *(la strada scalare: Nordstrom, o un `Lambda` che si propaga; G5.1)*, **con un potenziale LOGARITMICO atteso.**
+  - ### **E' una DIREZIONE, non ancora una legge:** **la forma si progetta DOPO la cura del punto fisso di `cs`.**
+- **Nel 3D, piu' avanti: la gravita' di Einstein diventa possibile** *(maree, onde, attrazione `1/r`)*. **Nessun lavoro sul 3D ora.**
+- ### **LE DIFFERENZE ATTESE FRA 2D E 3D, scritte come PREVISIONI** *(cosi' il passaggio a 3D e' un confronto, non una sorpresa)*:
+
+| | **2D (`2+1`)** | **3D (`3+1`)** |
+|---|---|---|
+| **il potenziale di una massa** *(un campo scalare che si propaga, sorgente l'energia)* | **logaritmico**, `~ ln r` *(la forza `~ 1/r`)* | **`~ 1/r`** *(la forza `~ 1/r^2`)* |
+| **la gravita' di Einstein** | **nessuna attrazione fra masse ferme:** spazio piatto fuori dalla materia, un difetto conico | **possibile:** l'attrazione `1/r`, le maree, le onde |
+| **il fotone** *(la `U(1)`)* | **una polarizzazione** | **due polarizzazioni** |
+| **le maree nel vuoto** | **nessuna** *(per la gravita' di Einstein; per lo scalare del 2D: da derivare)* | **si'** |
+| **le onde gravitazionali** | **nessuna** *(per Einstein)* | **si'** |
+
+- **Per G7:** **le domande 1 e 2 hanno una risposta di Luca** *(la strada nel 2D e' lo scalare che si propaga; il 3D dopo il 2D)*; **resta la 3** *(se la cura del punto fisso di `cs` deve gia' andare verso una memoria che si diffonde)*.
+
 ## 3. TODO
 
 - **Niente da fare finche' Luca non risponde a G7.** **G1 si aggiorna col referto di (r-D5)** *(R1-R3)*, **con una riga qui.**
