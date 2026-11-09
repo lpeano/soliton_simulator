@@ -24596,3 +24596,5 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(t-a) la fase dichiarata**: «invisibile all'ordine `e`, visibile all'ordine `e^3`»;
   - **(t-b) prima la prova con lo sfondo del campo azzerato.**
   - **La mia raccomandazione: (t-b).**
+
+### 2026-11-09 10:25 -- LA GRAVITA' NEL MODELLO: LE NOTE DI PROGETTO G1-G7 *(Luca `09:59`-`10:17`, sola documentazione)*: `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md` -- il guscio di `cs` *(dal guardiano, da riconfermare con R1-R3)*, perche' una `cs` locale non da' portata, perche' la `U(1)` da' il meccanismo ma non la gravita', le strade *(un `Lambda` che si propaga, `SU(2)`, una `cs` che si diffonde)*, **il limite delle `2+1` dimensioni** *(niente attrazione fra masse ferme: un difetto conico)*, **e tre domande a Luca.** [[PIANO-2D-3D]]
