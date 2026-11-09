@@ -24749,3 +24749,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Ma la crescita e' quasi lineare** *(la pendenza `1.033`)*: **il coefficiente e' `~0.19`, non `1/4`.**
 - **A `c = 8.48` la materia supera la luce** *(`1.61`)*.
 - **S1-S5 restano ferme: la riformulazione delle due strade e' di Luca.**
+
+### 2026-11-09 18:35 -- IL RIMANDO AL LATERALE (REGOLA 2): F1, LA MEMORIA: `2/3`; FERMO *(il laterale, sez. `20`; il referto `doc/referti_l2/carta_f1.txt` LI')* [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **F1-V fallisce:** **nel vuoto `cs` si sposta di `1.7e-15` in `50` tick** *(la soglia `2.7e-16`)*.
+- **La scena arriva a `200` tick nei due modi** *(la norma conservata)*:
+  - **(q1) `cs'` della legge: INSTABILE** *(`1e-8` diventa `3e-2` in `5` tick)*, **e `r` arriva a `3.14`, oltre `2`;**
+  - ### **(q2) `cs' = 0`: cresce piano** *(`1e-8` diventa `7e-6` in `200` tick)*.
+- ### **FERMO. Le domande a Luca:**
+  1. **la deriva del vuoto `1e-15`** *(o una forma del trapezio esatta per `L = cs`)*;
+  2. **(q1) o (q2)** *(che cosa e' `cs'` quando `cs` e' una memoria: una scelta di fisica)*;
+  3. **`r` oltre `2`.**
