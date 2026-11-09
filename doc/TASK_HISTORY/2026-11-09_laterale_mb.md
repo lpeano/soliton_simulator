@@ -409,3 +409,9 @@
 - **`r = omega_v`** *(la rotazione di fase del vuoto nel tick appena fatto, per nodo)* **puo' superare `2`** *(fino a `pi`)*: **li' il trapezio non e' piu' una media a pesi positivi.** **Il referto stampa `r` minimo e massimo.**
 - **Il calore della memoria = `g_pesata(cs nuovo) - g_pesata(cs vecchio)` sullo stesso stato, sommato.**
 - **Il fattore di crescita:** **due corse, con `cs` iniziale perturbato di `1e-8` sui nodi del centro** *(`r < 1`)*, **la differenza tick per tick e il rapporto mediano sui primi `20`.**
+
+## 19. F1, IL PRIMO GIRO: **INTERROTTO DA UN DIFETTO MIO** *(`doc/referti_l2/carta_f1_interrotto.txt`; il codice a `f406890d`, blob `3a488d55`; `17:50`)*
+
+- **F1-I passa** *(l'inversa del trapezio `2.41e-15`)*; **F1-F fallisce come deve** *(`3.71e+01`)*.
+- ### **IL DIFETTO MIO:** **`omega_v` somma `conj(phi0) phi1` sull'asse `1`, ma `phi_h` ha UNA dimensione** *(una fase per estremita' d'arco, non un vettore come `psi_h`)*: **`AxisError` al primo tick del vuoto.** **Nessuna corsa di F1 e' avvenuta.**
+- **La cura** *(un commit a se')*: **`np.add.at(z, nodo, conj(phi0) phi1)` senza la somma.** **Nessuna lettura cambia.**

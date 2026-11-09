@@ -1,0 +1,35 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] carta_f1.py  sha1-BYTE 3a488d55  committato e pulito
+==================================================================================================================================
+F1, LA MEMORIA (sez. 18): TBS a 10000 tick; 200 tick per modo (q1, q2); il vuoto 50 tick; la perturbazione 1e-08 sul centro
+==================================================================================================================================
+  DEVE PASSARE: F1-I l'inversa del trapezio al confine ridà cs entro 1e-14 relativo (1000 terne a caso)                  PASSA   2.41e-15
+  DEVE FALLIRE: F1-F la regola ESPLICITA invertita col trapezio ridà cs entro 1e-14                                      ### FALLISCE   3.71e+01
+### Lambda_c = 34.000000000000
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_zero\csv\solitone\carta_f1.py", line 197, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\carta_f1.py", line 157, in main
+    sv = corsa(st, mot, par, lc, cs0, N_VUOTO, False, False)
+  File "C:\Users\lpeano\wt_zero\csv\solitone\carta_f1.py", line 89, in corsa
+    r = omega_v(phi0, st["phi_h"], mot.inc.nodo, mot.inc.n)
+  File "C:\Users\lpeano\wt_zero\csv\solitone\carta_f1.py", line 70, in omega_v
+    np.add.at(z, nodo, np.sum(np.conj(st0_phi) * st1_phi, axis=1))
+                       ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py", line 2465, in sum
+    return _wrapreduction(
+        a, np.add, 'sum', axis, dtype, out,
+        keepdims=keepdims, initial=initial, where=where
+    )
+  File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy\_core\fromnumeric.py", line 86, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy.exceptions.AxisError: axis 1 is out of bounds for array of dimension 1
+exit 1 17:50:54
