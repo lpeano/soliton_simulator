@@ -349,3 +349,53 @@
   - **il bilancio locale.**
 - **F3** *(la rampa simmetrica)* **dopo, o dentro F4, quando F1 avra' detto qualcosa**; **`Lambda*` da derivare.**
 - **L'ordine:** **il progetto dettagliato di F1 nella sezione dopo, poi il codice, poi la prova sulla scena di (r-D5).**
+
+## 18. F1, LA MEMORIA (`A15`): IL PROGETTO DETTAGLIATO, PRIMA DEL CODICE *(Luca `16:18`)*
+
+### 18.1 LE PREMESSE DAL CODICE
+
+- **Oggi `cs` del tick e' il PUNTO FISSO di `tick.cs_al_centro`:** **`cs = FP.cs(Lambda(x), Lambda_c)` con `Lambda` del vuoto al CENTRO del palindromo, avanzato di mezzo tick con `mot.cs = x`.** **E' quello che non si trova** *(r-D5)*.
+- **Dentro il tick `cs` e' costante** *(un array per nodo)*: **il palindromo usa lo stesso `cs` in tutte e due le meta'.**
+- ### **NON SO, e va letto prima del codice:** **che cosa usa `CAMM-FASE-VUOTO` oltre a `mot.cs`** *(`energia_pesata.applica` legge anche `mot.lambda_c` e `cs_primo`: la derivata `dcs/dLambda` della legge)*. **Con F1 `cs` non e' piu' una funzione istantanea di `Lambda`:** **che cosa diventa `cs'`?** **Due possibilita':** **(q1) `cs'` resta la derivata della LEGGE** *(il valore a cui `cs` tende)*; **(q2) `cs'` e' zero** *(`cs` e' una variabile di stato, non una funzione)*. **La scelta e' di fisica: la porto a Luca coi numeri della prova, misurata nei due modi.**
+
+### 18.2 LA FORMA PROPOSTA
+
+- ### **DOVE: al CONFINE fra due tick, non dentro.**
+  - **Nel tick `n + 1` `cs` e' COSTANTE** *(il palindromo resta intatto: niente punto fisso dentro il tick)*;
+  - **al confine, dallo stato del confine** *(che e' lo stesso andando avanti e tornando indietro)*, **si aggiorna `cs`.**
+- ### **COME: la regola del TRAPEZIO** *(Crank-Nicolson)*, **che e' simmetrica nel tempo:**
+  - **`cs_{n+1} = cs_n + r (L - (cs_n + cs_{n+1}) / 2)`**, **cioe' `cs_{n+1} = [cs_n (1 - r/2) + r L] / (1 + r/2)`**, **con `L = FP.cs(Lambda_confine, Lambda_c)`.**
+  - ### **L'INVERSA, scritta:** **`cs_n = [cs_{n+1} (1 + r/2) - r L] / (1 - r/2)`**, **con lo STESSO `L`** *(lo stato del confine)*. **Esiste per `r < 2`.**
+  - **Il tick all'indietro:** **il tick inverso con `cs_{n+1}`, poi l'inversa al confine.** **Esatta in aritmetica esatta; in virgola mobile entro l'arrotondamento** *(NON al bit: lo dico prima)*.
+- ### **`cs` resta positivo:** **con `cs_n > 0`, `L > 0` e `r < 2`, `cs_{n+1}` e' una combinazione a pesi positivi** *(`(1 - r/2)/(1 + r/2)` e `r/(1 + r/2)`)*.
+
+### 18.3 DA CHE COSA SI RICAVA `r` *(`A15`: non un numero scelto)*
+
+- ### **La proposta: dal BATTITO LOCALE DEL VUOTO:** **`r = omega_v dtau`**, **con `omega_v` la rotazione di fase del vuoto per tick, misurata PER NODO dallo stato** *(nel vuoto F3 a `s 0.15`: `0.471` per tick, IS2)*. **E' il tempo di risposta piu' naturale del vuoto locale: un giro di fase per `1/omega_v` tick.**
+- **Le alternative, scritte:** **`r` dal tempo di risposta di `Lambda`** *(da misurare)*; **`r = s`** *(una coincidenza, non una derivazione)*.
+
+### 18.4 IL BILANCIO LOCALE *(`A15`: cio' che la memoria dimentica diventa calore del vuoto)*
+
+- **Al confine lo stato non cambia, cambia `cs`:** **l'energia pesata cambia di `Delta E = H(stato, cs_{n+1}) - H(stato, cs_n)`.**
+- ### **Quel `Delta E` e' il CALORE DELLA MEMORIA:** **un termine nuovo del bilancio, contato per nodo e sommato** *(un accumulatore, come quelli del bordo)*. **La prova lo stampa.**
+
+### 18.5 LE PREVISIONI, SCRITTE PRIMA *(incluse quelle scomode)*
+
+- **C2, il vuoto:** **nel vuoto F3 `L = s` ovunque, e con `cs_n = s` il trapezio da' `cs_{n+1} = s`** *(in aritmetica esatta)*. **In virgola mobile entro `8 eps`, NON al bit garantito.**
+- ### **C3, LA STABILITA' NEL TEMPO, LA PREVISIONE SCOMODA:**
+  - **una perturbazione `delta cs` cresce, da un tick all'altro, di un fattore `~ (1 - r/2 + r J_t) / (1 + r/2)`**, **con `J_t` la risposta di `L` a `cs` in UN tick** *(dell'ordine del `|J| ~ 11`-`15` di D2, che e' su mezzo tick: forse il doppio)*;
+  - **con `r ~ 0.47` e `J_t ~ 13`-`26` il fattore e' `~5`-`10` per tick:** **la memoria CRESCEREBBE in poche decine di tick** *(la lettura (k3))*;
+  - ### **la condizione di stabilita' e' circa `r |J_t| < 2`, cioe' `r < ~0.1`:** **piu' piccolo del battito del vuoto.** **Se la prova lo conferma, F1 col `r` derivato NON basta da sola**, **e la scelta e' di Luca:** **un `r` piu' piccolo ha bisogno di un'altra derivazione** *(non di una scelta)*, **oppure F1 va con F2** *(lo smussamento abbassa `J`)*.
+- **Vicino al solitone, se stabile:** **`cs` segue `L` con un ritardo di `~1/r` tick.**
+
+### 18.6 LA PROVA *(il codice dopo questa sezione, poi la corsa)*
+
+- **La scena:** **`TBS` a `10000` tick dalla libreria** *(lo stato di (r-D5))*, **`Lambda_c 34`, `cs` iniziale = `L` dello stato.**
+- **`200` tick con F1** *(due modi di `cs'`: (q1) e (q2))*, **stampando ogni tick:** **`max|cs - L|`, `min cs`, la norma, l'energia, il calore della memoria.**
+- **E il fattore di crescita MISURATO:** **due corse con `cs` iniziale diverso di `1e-8` sul centro:** **la differenza tick per tick.**
+- **I DEVE:**
+  - **(F1-V)** **il vuoto F3 da solo, `50` tick: `cs = s` entro `8 eps`** *(C2)*;
+  - **(F1-I)** **l'inversa al confine: `5` tick avanti e `5` indietro ridanno lo stato e `cs` entro `1e-10`** *(C1)*;
+  - **(F1-F) DEVE FALLIRE:** **lo stesso F1-I con la regola esplicita** *(`cs_{n+1} = cs_n + r (L - cs_n)`, senza il trapezio)* **e l'inversa del trapezio** *(l'inversa sbagliata: deve dare uno scarto oltre `1e-10`)*.
+- **Le letture** *(le `k1`-`k3` della sez. `16.4`)*: **(k1) arriva in fondo coi DEVE: candidata; (k2) esce dal dominio o alza; (k3) arriva ma cresce: col fattore misurato.**
+- **Il costo:** **`~0.3` s per tick: `200` tick x `2` modi x `2` corse `~4` minuti; i DEVE `~1` minuto.**
