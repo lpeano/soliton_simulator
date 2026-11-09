@@ -168,3 +168,29 @@
 - **COSA MI FAREBBE FERMARE:** **R-B o R-V che falliscono** *(la mappa di prova non e' piu' quella del nucleo)*.
 - ### **Il costo previsto:** **`~1`-`2` ore** *(D3 erano `~22` minuti per scena a `0.15` s per valutazione; il NK interno costa di piu' dove serve)*. **La prova corta della regola `4`, mentre gira `C35-pi`.**
 - **Lo script:** **`csv/solitone/carta_punto_fisso_r.py`** *(nuovo; importa `carta_punto_fisso.py`, che non si tocca)*; **il referto `doc/referti_l2/punto_fisso_cs_r.txt`.**
+
+## 13. L'INTEGRAZIONE DI LUCA DELLE `09:59` A (r-D5): **LA ZONA SENSIBILE E' UN GUSCIO SUL BORDO DEL SOLITONE, NON IL CENTRO** -- R1-R4, LE LETTURE PRIMA DEL CODICE
+
+- ### **IL FATTO NUOVO** *(dal guardiano, DA VERIFICARE)*:
+  - **la mappa di `cs(Lambda)/s = Lambda / (Lambda + 34) / s`, calcolata dalle mappe leggere di `TB3`** *(`doc/referti_l2/campo_TB3/mappe_leggere.npz`, `Lambda = 6 + dLambda`)*: **l'orologio senza la sua reazione, non una corsa con `cs` acceso.**
+  - **Al centro `cs/s` e' `~1`, fino a `~2`.** **Il rallentamento e' un GUSCIO sul bordo dell'esagono, a `~17`-`20` nodi dal centro** *(`cs/s` minimo `0.063` a `t 3000`, `0.030` a `t 30000`)*. **Oltre il guscio `cs/s` torna a `1`.**
+  - **Gli errori n.`123` e n.`124` del guardiano** *(l'autovalore negativo solo a `t 0`; il «cuore»)*.
+  - ### **E UN ERRORE MIO, nella sez. `10` e nel rimando del principale:** **«localizzata nel CUORE» viene dai dischi di D2** *(il centro `1.56`-`2.21`)*, **ma D1 diceva gia' che lo scarto sta per il `70%` fra `w` e `2 w`.** **Ho letto i dischi e non D1.**
+- ### **R1, CHE COSA SONO I DISCHI DI D2** *(dal codice, `carta_punto_fisso.main` e `dischi`)*:
+  - **il centro e' quello periodico della densita' di materia `rho`** *(`toro.centro`)*, **e `r` la distanza di ogni nodo da li'** *(`toro.scarti`, l'immagine piu' vicina, in unita' del lato)*;
+  - **`w = sqrt(somma rho r^2 / somma rho)`** *(`6.65`, `8.25`, `9.29`, `9.64` alle quattro scene)*;
+  - **i quattro centri dei dischi sono il nodo piu' vicino a `r = 0`, a `r = w`, a `r = 2 w`, e il nodo piu' lontano** *(«il vuoto»)*;
+  - **ogni disco ha raggio `R_DISCO = 2` intorno al suo nodo** *(`17`-`19` nodi)*, **e la perturbazione e' uniforme sul disco.**
+  - ### **Quindi nessun disco stava sul guscio di Luca** *(`17`-`20` nodi)*: **`2 w` e' `13`-`19`, e un disco di raggio `2` attorno a UN nodo non e' un anello.**
+  - **Il profilo radiale di `Lambda` e di `cs/s` lo stampa il codice a ogni scena:** **anelli di `1` nodo, la media per anello**, **e il raggio del minimo di `Lambda`, `r_min`.**
+- ### **R2, LA FORMA DELLA DIREZIONE INSTABILE:**
+  - **l'autovettore dominante di D2** *(la stessa potenza: `30` prodotti, lo stesso seme, dallo stesso `x` di D2)*;
+  - **il suo profilo radiale: la media di `v^2` per nodo, per anello**;
+  - **e la quota di `|v|^2` nel guscio `[r_min - 2, r_min + 2]`, dentro (`r < r_min - 2`) e fuori.**
+  - ### **LE LETTURE** *(di Luca, scritte prima; il criterio e' mio, dichiarato)*:
+    - **(g1) il massimo del profilo di `v^2` per nodo cade nel guscio `[r_min - 2, r_min + 2]`:** **la non-contrazione nasce dove `cs` e' minimo e varia piu' in fretta**;
+    - **(g2) il massimo cade dentro, `r < r_min - 2`:** **la mappa del guardiano non spiega l'instabilita': lo scrivo**;
+    - **(g-a) altrove** *(fuori dal guscio)*: **lo scrivo coi numeri.**
+- ### **R3:** **il fattore `|J v|_anello / |v|`, con `v` uniforme sull'ANELLO `[r_min - 2, r_min + 2]`**, **accanto ai dischi di oggi.**
+- ### **R4** *(solo se (g1))*: **le cure candidate** *(la memoria `A15`, una legge di `cs` meno sensibile a `Lambda` piccolo, `cs` dal tick precedente)* **si valutano sapendo che la zona critica e' un guscio sottile dove `Lambda` scende fino a `~0.1`-`0.2` e `cs/s` fino a `~0.03`.** **Nel referto, R4 e' una stampa** *(`Lambda` e `cs/s` minimi sul guscio, a ogni scena)*, **non una cura.**
+- **Il resto di (r-D5) non cambia** *(la sez. `12`)*. **R1-R3 entrano in `carta_punto_fisso_r.py` PRIMA del suo commit** *(non era ancora committato)*, **e si fanno su ognuna delle quattro scene, prima di D3-R.**
