@@ -61,3 +61,5 @@ prosegue — il turno si chiude e il lavoro **si ferma** fino al messaggio succe
 ### **E' successo il 2026-10-04 dopo `9bb1df8`, e sono andate perse due ore.** Se un controllo
 o una decisione fermano il lavoro, si chiude con **`FERMO: <motivo>`**; altrimenti **si
 continua fino alla fine.**
+
+### **LA LINGUA** *(Luca `2026-11-09` `12:02`)*: **ogni messaggio a Luca, anche i brevi messaggi di stato fra un comando e l'altro, e' in ITALIANO.** **La richiesta era del `2026-11-08` `22:30` e NON era arrivata** *(il controllo dello stato delle `11:37`, punto `6`)*: **fino al `2026-11-09` mattina avevo scritto a Luca in inglese.**

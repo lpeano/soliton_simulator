@@ -101,6 +101,8 @@ domanda aperta ha un **criterio di chiusura**. **ANCHE A META' RUN.**
 > NON prosegue:** se un controllo o una decisione fermano il lavoro si chiude con
 > **`FERMO: <motivo>`**, altrimenti **si continua fino alla fine**.
 
+> ### 📌 **Ogni messaggio a Luca, anche i brevi messaggi di stato fra un comando e l'altro, è in ITALIANO. I commit, i task history e i referti restano in italiano come oggi.** *(Luca `2026-11-09` `12:02`)*
+
 > **IL DETTAGLIO:** **`doc/REGOLE/par4.md`**.
 
 ## 5. POLITICHE DI COMMIT
