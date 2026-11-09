@@ -606,3 +606,22 @@
   - **la fase si DICHIARA per quello che (t-b) dice**, **nell'esito, coi numeri.**
 - **COSA MI FAREBBE FERMARE:** **T4B-L' o T4B-P' che falliscono** *(T4-B non si chiude: la regola di Luca)*.
 - **Lo script: `csv/solitone/u1_t4b_sfondo.py`** *(nuovo; importa `u1_t4b.py` e `u1_t4b_fase.py`, che non si toccano)*; **il referto `doc/referti_l2/u1_t4b_sfondo.txt`.**
+
+### 16.5 L'ESITO DI (t-b) E (t-a): **`7/7` -- (t-a) CHIUDE T4-B SUI VERSI (→) E (← AMPIEZZA); LA LETTURA (t-b) CHE LO SCRIPT STAMPA, (b-m), E' UN ARTEFATTO DEL MIO PAVIMENTO; FERMO SULLA DICHIARAZIONE DELLA FASE** *(`doc/referti_l2/u1_t4b_sfondo.txt`; il codice a `f243996b`, blob `b293a575`; `12:19`-`12:20`)*
+
+- ### **(t-a), sullo sfondo vero, PASSA:**
+  - **T4B-L'**: **la linearita' entro `5.3e-9`** *((→) fotone)*, **`2.7e-9`** *((→) ottica)*, **`1.7e-9`** *((← ampiezza) fotone)*, **`7.4e-9`** *((← ampiezza) ottica, `22` `k` su `24`: `n 12` al pavimento)*;
+  - **T4B-P'**: **il fotone sopra il pavimento a ogni `k`** *(i minimi `3.34e-5` in (→), `9.59e-7` in (← ampiezza))*;
+  - **T4B-F' fallisce come deve** *(la fase, `7` `k` sopra il pavimento, il peggiore `3.7e-4`)*.
+  - ### **T4-B si chiude sui versi (→) e (← ampiezza):** **il campo e la materia si vedono al primo ordine in tutti e due i versi, su fotone e ottica, a ogni `k` delle due direzioni** *(il minimo della visibilita' del fotone `3.3e-5` in (→), `9.6e-7` in (← ampiezza))*.
+- **(t-b), lo sfondo azzerato:** **il campo del riferimento dopo un tick e' `0` esatto** *(`A_sfondo = 0` per costruzione: la costruzione regge)*.
+- ### **LA LETTURA STAMPATA E' (b-m), MA E' UN ARTEFATTO, ED E' UN ERRORE MIO:**
+  - **con lo sfondo azzerato, fotone e ottica in fase danno `p` fra `-0.3` e `-1.9` e `L` intorno a `1`, a quasi ogni `k`** *(`45` su `48` «sopra il pavimento»)*;
+  - ### **`p ~ -1` con `L ~ 1` e' la FIRMA DEL RUMORE:** **`|X+ - X-|` non dipende da `eps`, quindi `V ~ 1/eps`.**
+  - ### **Il perche':** **`J - J_rif` sottrae due sorgenti della scala dello SFONDO** *(`~1e-3`)*: **la cancellazione lascia un rumore assoluto `~ eps_macchina x |J_sfondo|`, che non scala con `eps`.**
+  - **Il pavimento «relativo alla risposta totale» della sez. `16.4`** *(che avevo introdotto per non spingere verso (b-s))* **ignora proprio quella scala: e' TROPPO BASSO, e chiama «segnale» il rumore.**
+  - ### **Quindi (t-b) NON dice (b-m).** **Dice che, tolto lo sfondo, la risposta trasversa alla fase sparisce sotto il rumore della sottrazione:** **compatibile con (b-s), ma non dimostrato con la soglia scritta prima.**
+- ### **FERMO** *(la regola di Luca: «se dopo (t-b) e (t-a) T4-B non si chiude: FERMO»)*. **T4-B e' chiuso sui versi (→) e (← ampiezza); resta aperta SOLO la dichiarazione della fase.**
+  - **La mia proposta** *(la scelta e' di Luca: e' una soglia rivista dopo i numeri)*: **rileggere (t-b) col pavimento della scala dello sfondo** *(`1000 eps_macchina 1.222e-3 / eps`, lo stesso dello sfondo vero)*, **dagli stessi numeri** *(un giro di `1` minuto: lo script stampa i `V`)*;
+  - **e dichiarare la fase cosi':** **«trasversalmente invisibile all'ordine `e`; con lo sfondo dell'onda piana, visibile all'ordine `e^3` sotto `2e-10`; senza sfondo, sotto il rumore»** -- **se la rilettura lo conferma.**
+  - ### **La decisione per T5 resta tua:** **T4-B chiuso sui due versi fisici e la fase dichiarata, oppure la fase come limite noto, come T3.**

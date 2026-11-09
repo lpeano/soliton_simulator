@@ -24650,3 +24650,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
    - **In coda sul principale:** T4-B (t-b)/(t-a) *(la suite, il codice, la corsa)*.
    - **In coda sul laterale:** (r-D5), poi il rimando alla gravita'.
 9. **Il congelamento:** `doc/NUCLEO_CONGELATO.md` dice `stato: CONGELATO`; **`core.hooksPath = .githooks` sul principale.**
+
+### 2026-11-09 12:30 -- T4-B, (t-b) E (t-a): `7/7`; (t-a) CHIUDE T4-B SUI VERSI (→) E (← AMPIEZZA); LA LETTURA (t-b) STAMPATA E' UN ARTEFATTO MIO; FERMO SULLA DICHIARAZIONE DELLA FASE *(il task history del prototipo, sez. `16.5`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **(t-a) passa:**
+  - **la linearita' entro `7.4e-9`** sui versi (→) e (← ampiezza), fotone e ottica;
+  - **il fotone visibile sopra il pavimento a ogni `k`** *(minimi `3.3e-5` e `9.6e-7`)*.
+- ### **(t-b): lo script stampa (b-m), ma e' un artefatto mio.**
+  - **Con lo sfondo azzerato, la fase da' `p ~ -1` e `L ~ 1`: la firma del rumore** *(`|X+ - X-|` costante in `eps`)*.
+  - **La causa: `J - J_rif` cancella due sorgenti della scala dello sfondo, e il mio pavimento «relativo» era troppo basso.**
+  - **Compatibile con (b-s), non dimostrato.**
+- ### **FERMO:** **resta aperta solo la dichiarazione della fase.** **La proposta** *(la decide Luca)*:
+  - **rileggere (t-b) col pavimento della scala dello sfondo, dagli stessi numeri**;
+  - **poi dichiarare la fase**;
+  - **e scegliere per T5:** chiuso sui due versi fisici, oppure la fase come limite noto.
+- **Avanti con la coda, che questo non blocca:** **la prova sul cuore, (r-D5), poi L1, L2, L4.**
