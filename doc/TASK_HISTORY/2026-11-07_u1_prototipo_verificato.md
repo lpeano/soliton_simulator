@@ -520,11 +520,11 @@
   - **T4B-P (← fase): il minimo `5.2e-16`.**
 - ### **QUELLO CHE SI VEDE, SENZA LEGGERLO COME RISULTATO** *(la sez. `16` dice che senza T4B-L il resto non si legge)*:
   - **(→) e (← ampiezza): `V / e` UGUALE a `e*` e a `e*/2` entro `1e-6`** *(il rapporto dei minimi `1.000000`)*: **questi due versi si comportano da primo ordine.**
-  - ### **(← fase): fotone e ottica fra `1e-16` e `2e-10`, la gauge `1e-4`-`1e-3`; e il fotone e l'ottica scalano come `e^2`, non come `e`** *(il rapporto dei massimi `4.0`)*.
+  - ### **(← fase): fotone e ottica fra `1e-16` e `2e-10`, la gauge `1e-4`-`1e-3`; e per fotone e ottica `V / e` scala come `e^2`, cioe' `V` come `e^3`, non come `e`** *(il rapporto di `V / e` fra `e*` e `e*/2`: `4.000` sui massimi del fotone, `4.012` sui minimi dell'ottica)* *(CORRETTO nel commit dopo: prima diceva «`e^2`» per `V`, e il `4` e' il rapporto di `V / e`)*.
   - **La quota catturata da `+-k` e' `1.0000` ovunque.**
 - ### **LA MIA IPOTESI, DA VERIFICARE** *(non e' una lettura)*:
   - **una modulazione di FASE di `psi` e', al primo ordine, una trasformazione di gauge della SOLA materia** *(`psi -> e^{i eps cos(kr)} psi`)*;
-  - **la corrente che genera e' longitudinale**, quindi **muove solo il settore di Gauss** *(la gauge)*, e **fotone e ottica la vedono solo dal terzo ordine** *(`~eps^2`, `~e^2`)*;
+  - **la corrente che genera e' longitudinale**, quindi **muove solo il settore di Gauss** *(la gauge)*, e **fotone e ottica la vedono solo dal terzo ordine** *(`V ~ eps^2`, e piu' di una potenza di `e`)*;
   - **cosi' i loro `V` sono numeri piccoli che dipendono da `eps`, e T4B-L fallisce su di loro.**
   - ### **Se e' cosi', l'errore e' MIO, nel progetto:** **T4B-P nel verso della fase chiedeva una cosa che l'invarianza di gauge vieta.** **Il controllo giusto sarebbe all'opposto:** **fotone e ottica INVISIBILI alla fase, la gauge visibile.**
 - ### **ALTRE DUE COSE DA GUARDARE:**
