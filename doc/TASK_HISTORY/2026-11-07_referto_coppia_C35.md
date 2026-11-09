@@ -175,3 +175,7 @@
 - ### **IL RESTO, stampato:** **`E + E_ass` della coppia da `9.82003e6` a `9.82001e6`** *(relativa `~2e-6` su `20000` unita'; il bordo conserva)*; **`(M1 - M2) / M` entro `+- 0.3`; l'angolo entro `+- 1.7` gradi; il baricentro entro `~1` nodo dal punto medio**; **`A-S` sulla serie intera: la pendenza massima `2.9753e-02`, la stessa del referto ufficiale** *(sotto `1 / TAU_CAOS = 4e-2`)*; **l'asimmetria di scambio fra `0.13` e `0.30` a blocchi, senza crescita.** **La fase relativa all'unico stato completo oltre `10000`** *(`t 10500`)*: **`+0.061` rad.**
 - ### **LA LETTURA, onesta e senza verdetto di fisica** *(cosi' la sez. `12`)*: **fino a `30000` la coppia in fase (`C35-0`) resta LEGATA e oscilla attorno a `d ~ 23` fra `~13` e `~33`, senza deriva e senza che l'oscillazione si smorzi o cresca.** **La forza e `E_int` oltre `10000` NON si leggono** *(senza il singolo)*: **(r-b) dopo l'allungamento di `S162`.**
 - ### **LA DOMANDA A LUCA** *(il criterio di chiusura: la sua risposta qui)*: **il periodo e lo smorzamento dell'oscillazione di `d` si misurano** *(un adattamento a un seno smorzato sui `20000` di oltre, con l'errore; o un conteggio dei massimi)* **ora, o con (r-b)?** **La mia proposta: con (r-b)** *(la stessa carta intera; una sola misura)*.
+
+## 14. LA DECISIONE DI LUCA DELLE `01:31` SU (r-a)
+
+- ### **REGISTRATO COME FATTO:** **oltre `10000` la coppia in fase (`C35-0`) resta LEGATA; `d` oscilla fra circa `13` e `33` senza deriva.** **La lettura «`d` fermo» della sez. `12` e' CADUTA.**
