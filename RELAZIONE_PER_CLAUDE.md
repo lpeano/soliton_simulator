@@ -24685,3 +24685,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **P2** *(l'anisotropia su grandezze che non dipendono dallo zero)* **e P4** *(il pacchetto senza guscio, dopo (r-D5))*: **prove corte, in coda.**
 - **P5: il difetto di procedura della stazionarieta' versione `2`, registrato.**
 - ### **L'ordine:** **P1, P3, poi P2 e P4; T5 dopo P1** *(il suo progetto usa i due numeri da riconfermare)*.
+
+### 2026-11-09 14:35 -- IL RIMANDO AL LATERALE (REGOLA 2): (r-D5) `7/7` -- IL GUSCIO C'E', MA LA DIREZIONE INSTABILE STA AL CENTRO; (d3); FERMO SUL RIMEDIO *(`0f639f12` su `zero-nel-nucleo`, sez. `14`; il referto `doc/referti_l2/punto_fisso_cs_r.txt` LI')* [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **R1 conferma il guscio del guardiano:** **`r_min` `16`-`18` nodi; `cs/s` minimo `0.086`, `0.029`, `0.024`** *(a `10000`, `100000`, `200000` tick)*; **al centro `cs/s` `1.08`-`1.46`.**
+- ### **R2 dice (g2) su tutte le scene mature:** **la direzione instabile sta al CENTRO** *(la quota di `|v|^2` dentro `1.000`)*.
+  - **Il guscio CONTRAE** *(R3 `0.03`-`0.06`)*.
+  - **La mappa del guardiano non spiega l'instabilita'.** **«Nel cuore», che avevo corretto stamattina come non dimostrato** *(`2971b0da`)*, **ora e' misurato.**
+- **D4-R:** **il ramo esce dal dominio** *(un `s <= 0`)* **a `Lambda_c` `161.7`, con `|Jv|/|v| = 0.92`:** **(d3).**
+- **D3-R:** **«`Omega` non esiste» su ogni scena** *(Anderson)*; **NK non converge o porta `s < 0`.**
+- ### **FERMO sul rimedio. La proposta** *(la scelta e' di Luca)*:
+  - **P4 del revisore come prossima prova** *(il pacchetto senza guscio alla stessa massa)*;
+  - **poi la memoria `A15` come il candidato che toglie il punto fisso del tick.**
+  - **Una legge meno sensibile a `Lambda` piccolo curerebbe il guscio, che gia' contrae: NON e' la cura.**
+- **Sul laterale anche il rimando alle note sulla gravita'** *(X2, sez. `15`)*.
