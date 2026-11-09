@@ -340,3 +340,12 @@
 2. **Da che cosa ricavare `r`** *(F1: (r-a) il battito del vuoto, (r-b) il tempo di risposta di `Lambda`, (r-c) `s`)*?
 3. **Da che cosa ricavare `Lambda*`** *(F3: (l-a), (l-b), (l-c))*, **sapendo che il vincolo del vuoto lascia una famiglia e che a `Lambda* = 0` F3 e' la legge di oggi?**
 4. **C1:** **la memoria del primo ordine NON e' reversibile:** **e' accettabile un termine dissipativo dichiarato** *(il calore del vuoto)*, **o si vuole (m2)** *(`cs` col suo coniugato)*?
+
+## 17. LA DECISIONE DI LUCA DELLE `16:18` SULLA CURA DI `cs`: **SI PROVA PER PRIMA F1, LA MEMORIA (`A15`)**
+
+- **Da proporre e scrivere PRIMA del codice:**
+  - **da che cosa si ricava `r`** *(il tempo di memoria: non un numero scelto)*;
+  - **dove si aggiorna `cs` nel palindromo, e come si inverte**;
+  - **il bilancio locale.**
+- **F3** *(la rampa simmetrica)* **dopo, o dentro F4, quando F1 avra' detto qualcosa**; **`Lambda*` da derivare.**
+- **L'ordine:** **il progetto dettagliato di F1 nella sezione dopo, poi il codice, poi la prova sulla scena di (r-D5).**
