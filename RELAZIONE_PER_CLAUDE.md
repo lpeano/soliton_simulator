@@ -24713,3 +24713,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Due cose dai numeri:**
     - **a `Lambda* = 0` la rampa simmetrica E' la legge di oggi**, **e il vincolo del vuoto lascia una famiglia;**
     - **la memoria del primo ordine toglie il punto fisso ma non e' reversibile, e non garantisce la stabilita' nel tempo** *(il fattore `~5`)*.
+
+### 2026-11-09 16:00 -- P1 CHIUSO: (v2) -- `v_b` DIPENDE DALLO ZERO, `pi/4` NON E' UN NUMERO DELLA MATERIA; IL «`c`» E' `v_max/s` (`0.585` NEL LIMITE, `0.588` ALLA CORSA) *(il task history del prototipo, sez. `19.2`; `doc/referti_l2/u1_p1.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **Lo zero spostato di `+- pi s / 2`:**
+  - **`v_b/s` passa da `0.785` a `1.10`-`1.11` su un ramo e a `0.16`-`0.17`** *(o NaN)* **sull'altro.**
+  - ### **`pi/4` e' una proprieta' della scelta dello zero.**
+- **`v_max/s` non dipende dallo zero:** **`0.5850` nel limite a `eps 0.5`, `0.5881` alla corsa** *(il revisore: `0.5856`)*.
+- ### **La decisione per Luca:**
+  - **il «`c`» bersaglio delle due strade era `v_b`** *(la sua decisione del `2026-11-07` `14:12`)*: **diventa `v_max`?**
+  - **S1-S5 restano ferme fino alla risposta.**

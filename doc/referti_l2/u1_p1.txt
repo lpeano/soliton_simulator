@@ -1,0 +1,31 @@
+[TIMBRO] _u1_secondo.py  sha1-BYTE ab015054  committato e pulito
+[TIMBRO] _triangoli_forza.py  sha1-BYTE d0c0b981  committato e pulito
+[TIMBRO] u1_p1.py  sha1-BYTE 7293e056  committato e pulito
+==================================================================================================================================
+P1, LA PROVENIENZA DEL LIMITE DI VELOCITA' DELLA MATERIA (sez. 19): eps (0.0, 0.5); s (0.05, 0.02, 0.01, 0.005, 0.002, 0.001, 0.15); KMAX3 0.1 NK3 200 (come _u1_secondo); le convenzioni: nessuna (come vb_di), simm, oggi
+==================================================================================================================================
+  come vb_di eps 0.0 s 0.05  : v_b/s 0.78499381 0.78499381 (omega0/s -1.569585 +1.569585) | lo zero spostato di +pi s/2: nan 1.11036297, di -pi s/2: 1.11036297 nan | v_max/s 0.59885898
+  come vb_di eps 0.0 s 0.02  : v_b/s 0.78533353 0.78533353 (omega0/s -1.570603 +1.570603) | lo zero spostato di +pi s/2: nan 1.11066343, di -pi s/2: 1.11066343 nan | v_max/s 0.59853015
+  come vb_di eps 0.0 s 0.01  : v_b/s 0.78538199 0.78538199 (omega0/s -1.570748 +1.570748) | lo zero spostato di +pi s/2: nan 1.11070627, di -pi s/2: 1.11070627 nan | v_max/s 0.59848313
+  come vb_di eps 0.0 s 0.005 : v_b/s 0.78539410 0.78539410 (omega0/s -1.570784 +1.570784) | lo zero spostato di +pi s/2: nan 1.11071698, di -pi s/2: 1.11071698 nan | v_max/s 0.59847137
+  come vb_di eps 0.0 s 0.002 : v_b/s 0.78539750 0.78539750 (omega0/s -1.570794 +1.570794) | lo zero spostato di +pi s/2: nan 1.11071998, di -pi s/2: 1.11071998 nan | v_max/s 0.59846808
+  come vb_di eps 0.0 s 0.001 : v_b/s 0.78539798 0.78539798 (omega0/s -1.570796 +1.570796) | lo zero spostato di +pi s/2: 0.00039104 1.11072041, di -pi s/2: 1.11072041 0.00039104 | v_max/s 0.59846761
+  come vb_di eps 0.0 s 0.15  : v_b/s 0.78171589 0.78171589 (omega0/s -1.559858 +1.559858) | lo zero spostato di +pi s/2: nan 1.10744941, di -pi s/2: 1.10744941 nan | v_max/s 0.60196296
+  come vb_di eps 0.5 s 0.05  : v_b/s 0.78497505 0.78492954 (omega0/s -1.647463 +1.647030) | lo zero spostato di +pi s/2: 0.16933755 1.09713774, di -pi s/2: 1.09713100 0.16887139 | v_max/s 0.58539003
+  come vb_di eps 0.5 s 0.02  : v_b/s 0.78533052 0.78532326 (omega0/s -1.648296 +1.648226) | lo zero spostato di +pi s/2: 0.17028873 1.09749360, di -pi s/2: 1.09749251 0.17021469 | v_max/s 0.58509783
+  come vb_di eps 0.5 s 0.01  : v_b/s 0.78538124 0.78537942 (omega0/s -1.648415 +1.648397) | lo zero spostato di +pi s/2: 0.17042417 1.09754434, di -pi s/2: 1.09754407 0.17040568 | v_max/s 0.58505603
+  come vb_di eps 0.5 s 0.005 : v_b/s 0.78539392 0.78539346 (omega0/s -1.648444 +1.648440) | lo zero spostato di +pi s/2: 0.17045802 1.09755702, di -pi s/2: 1.09755696 0.17045340 | v_max/s 0.58504558
+  come vb_di eps 0.5 s 0.002 : v_b/s 0.78539747 0.78539739 (omega0/s -1.648453 +1.648452) | lo zero spostato di +pi s/2: 0.17046749 1.09756057, di -pi s/2: 1.09756056 0.17046675 | v_max/s 0.58504266
+  come vb_di eps 0.5 s 0.001 : v_b/s 0.78539797 0.78539795 (omega0/s -1.648454 +1.648454) | lo zero spostato di +pi s/2: 0.17046885 1.09756108, di -pi s/2: 1.09756108 0.17046866 | v_max/s 0.58504224
+  come vb_di eps 0.5 s 0.15  : v_b/s 0.78154880 0.78113091 (omega0/s -1.639502 +1.635589) | lo zero spostato di +pi s/2: 0.15999266 1.09369077, di -pi s/2: 1.09363586 0.15547183 | v_max/s 0.58813743
+----------------------------------------------------------------------------------------------------------------------------------
+  il limite a s -> 0 (come vb_di eps 0.0) vb0 : f0 0.7853981409 (contro pi/4 -2.255e-08)
+  il limite a s -> 0 (come vb_di eps 0.0) vmax: f0 0.5984674498 (contro pi/4 -1.869e-01)
+  il limite a s -> 0 (come vb_di eps 0.5) vb0 : f0 0.7853981407 (contro pi/4 -2.269e-08)
+  il limite a s -> 0 (come vb_di eps 0.5) vmax: f0 0.5850420984 (contro pi/4 -2.004e-01)
+  DEVE PASSARE: P1-R a eps 0, s 0.05 (come vb_di): v_b/s = 0.784994 di 7daa8840 entro 1e-06, i due rami                  PASSA   1.9e-07
+  DEVE FALLIRE: P1-F lo stesso contro il valore della VARIANTE theta = s/x (0.99916463)                                  ### FALLISCE   2.1e-01
+  STAMPA il c della materia nel regime delle corse (eps 0.5, s 0.15): v_b/s 0.781549 0.781131; con lo zero spostato 0.159993 1.093691 e 1.093636 0.155472; v_max/s 0.588137
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []
+exit 0 15:53:57

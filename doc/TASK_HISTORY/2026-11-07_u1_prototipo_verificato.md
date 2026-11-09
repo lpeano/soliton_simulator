@@ -713,3 +713,17 @@
   - ### **`v_max/s` a `eps 0.5` vale `0.5854` a `s 0.05` e tende a `~0.58504`:** **il `0.598` era a `eps 0`, come dice il revisore** *(che trova `0.5856`: `0.5854` a `s 0.05` e' a `2e-4` da lui)*.
   - ### **«Il `c` della materia nel regime delle corse»** *(`eps 0.5`, `s 0.15`)*: **`v_max/s = 0.588`** *(la velocita' di gruppo massima)*; **il parametro iperbolico `v_b/s = 0.781`.**
 - **Resta da misurare: la DIPENDENZA DALLO ZERO di `v_b`** *(la sez. `19`)*. ### **La cura proposta** *(un commit a se')*: **non `TF.conv("simm")`, ma lo spostamento dello zero applicato ai livelli gia' trovati:** **`(omega + c)^2 - (omega0 + c)^2`, con `c = pi s / 2`** *(lo zero simmetrico: `omega0/s` passa da `-1.5696` a `~0`)*, **e lo stesso fit.**
+
+### 19.2 L'ESITO DI P1: **`2/2` -- (v2): `v_b` DIPENDE DALLO ZERO DELL'ENERGIA, `pi/4` NON E' UN NUMERO DELLA MATERIA; IL «`c`» DELLA MATERIA E' `v_max/s`: `0.585` NEL LIMITE, `0.588` ALLA CORSA** *(`doc/referti_l2/u1_p1.txt`; il codice a `8a32ab29`, blob `7293e056`; `15:44`-`15:53`)*
+
+- **I DEVE:** **P1-R passa** *(`1.9e-7` da `0.784994` di `7daa8840`)*; **P1-F fallisce come deve** *(`2.1e-1` dalla variante)*.
+- ### **LA DIPENDENZA DALLO ZERO** *(lo spostamento `+- pi s / 2` applicato ai livelli della coppia, lo stesso fit)*:
+  - **a `eps 0`: `v_b/s` passa da `0.7854` a `1.1107` su un ramo e diventa NaN sull'altro** *(il coefficiente di `k^2` negativo)*;
+  - **a `eps 0.5`: da `0.7854` a `1.0976` e a `0.1705`** *(`s 0.001`)*; **alla corsa** *(`s 0.15`)*: **da `0.7815`, `0.7811` a `1.0937`/`0.1600` e `1.0936`/`0.1555`.**
+  - ### **Quindi `pi/4` e' una proprieta' della SCELTA DELLO ZERO** *(quella di default, con `omega0/s = -+1.5696` per i due rami)*, **non della materia:** **la lettura (v2).** **Coerente col revisore, che non lo ricostruisce come velocita' di nessuna banda.**
+- ### **`v_max/s` NON dipende dallo zero** *(una velocita' di gruppo)*: **il limite a `s -> 0` e' `0.5984674` a `eps 0` e `0.5850421` a `eps 0.5`**; **alla corsa** *(`eps 0.5`, `s 0.15`)*: **`0.588137`.**
+  - ### **«Il `c` della materia nel regime delle corse» e' `v_max/s = 0.588`** *(la mia proposta della sez. `19`, confermata dai numeri; il revisore: `0.5856` a `eps 0.5`)*.
+- ### **LE CONSEGUENZE, da decidere con Luca:**
+  - **ogni riga che usa `pi/4` come velocita' della materia** *(la premessa `1` della sez. `1`; le due strade, sez. `8`-`9`, con «il `c` bersaglio e' `v_b`»; la riga `4` di (A) e la `3` di (B) della MAPPA)* **va riletta:** **`v_b` non e' un osservabile.**
+  - ### **La decisione delle `14:12` del `2026-11-07`** *(«(1) il "`c`" bersaglio e' `v_b`»)* **e' di Luca: se il bersaglio diventa `v_max`, le due strade A e B vanno riscritte su `v_max`.** **S1-S5 restano ferme fino a quella decisione.**
+- **Una nota sul referto:** **la testata dice ancora «le convenzioni: nessuna, simm, oggi»** *(una stringa non aggiornata dalla cura)*: **il giro ne usa una sola, «come `vb_di`».**
