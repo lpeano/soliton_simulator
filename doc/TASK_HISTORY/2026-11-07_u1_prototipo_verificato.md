@@ -784,3 +784,25 @@
   - **la pendenza di `ln v_max` contro `ln c` e' `1.033`:** **QUASI proporzionale, con un rapporto che cresce piano** *(da `0.180` a `0.190`)*. **Il `2%` era una soglia mia:** **la legge vicina e' `v_max/s ~ 0.18-0.19 c`, non `c/4`.**
   - ### **a `c = 8.48` `v_max/s = 1.61`: la materia supera la luce del prototipo** *(`1`)*. **La materia raggiungerebbe la luce a `c ~ 5.3`** *(per interpolazione: da misurare, non da usare)*.
 - ### **Per Luca:** **B va ripensata secondo la lettura scritta;** **i numeri dicono che il limite della materia CRESCE quasi come il battito, con un coefficiente `~0.19`, non `1/4`.** **(d3) e (d5) da riderivare su questi.** **S1-S5 restano ferme.**
+
+### 22. LE DUE STRADE RIFORMULATE SU `v_max/s` *(Luca `16:18`; SOLO SCRITTURA: S1-S5 restano FERME fino alla decisione di Luca)*
+
+- ### **IL NUMERO GIUSTO:** **il «`c`» della materia e' `v_max/s`** *(P1, `39021fdb`)*; **E1** *(`8b0dda97`)*: **`v_max/s` ~ `0.18`-`0.19 c` per `theta = c s`** *(la pendenza in `ln c` `1.033`; non proporzionale entro il `2%`)*.
+- ### **A, LA LUCE ABBASSATA:** **`kappa = v_max/s` AL PASSO DELLE CORSE, `0.588137`** *(`eps 0.5`, `s 0.15`)*, **non il limite `0.585042`.**
+  - **Perche':** **`s` e' FISICA** *(la correzione di Luca del `2026-11-07` `14:39`: il tick e' il quanto di tempo)*: **il limite `s -> 0` non si realizza mai, e il valore a `s 0.15` e' l'osservabile.**
+  - **Il prezzo:** **`kappa` dipende da `s`; con `s` fisso e' un numero solo.**
+  - **Lo scarto «`-0.46%` a `s 0.15`»** *(della sez. `9`, calcolato su `pi/4`)* **va RIFATTO sul numero nuovo.**
+- ### **B, LA MATERIA LEGGE IL BATTITO:** **la premessa «il limite = il battito `pi` x la geometria `1/4`» CADE** *(Luca)*. **Quello che i numeri dicono al suo posto:**
+  - **`v_max/s ~ 0.186 c`** *(a `c = pi`; il coefficiente cresce piano con `c`, `0.180`-`0.190`)*;
+  - ### **la materia raggiunge la luce** *(`v_max/s = 1`)* **a `c ~ 5.3`** *(per interpolazione fra `c = 4` e `8.48`: un numero da misurare, non da usare)*;
+  - ### **col battito di oggi a `cs` acceso** *(`8.48`)* **la materia va a `1.61` nel limite, `1.67` a `s 0.15`: PIU' VELOCE DELLA LUCE.** **La previsione «ACAUSALE» della sez. `8.3` (c) e' CONFERMATA** *(con `1.61`, non con `2.12`, che veniva da `pi/4`)*.
+- ### **(d1)-(d5), RIDERIVATI SUL NUMERO GIUSTO** *(solo il conto, nessuna scelta)*:
+  - **(d1) una legge di `cs` che porta il battito a `~5.3`:** **un `Lambda_c` derivato dalla causalita'** *(se Luca accetta la causalita' come principio)*; **il numero non e' piu' `4`.**
+  - **(d2) «`4 = 1/x`» CADE** *(veniva da `pi/4`)*. **Il numero geometrico al suo posto sarebbe `1/0.186 ~ 5.4`** *(il rapporto `v_max/(s c)` a `c = pi`)*, **e NON e' costante in `c`** *(E1)*: **non e' una costante geometrica pulita.**
+  - **(d3) la luce che legge anche lei il battito:** **resta possibile, con il coefficiente `0.186` al posto di `1/4`** *(e lo stesso difetto: la luce cambierebbe con `cs` anche dove la materia non c'e')*.
+  - **(d4) un `theta` che satura:** **invariato** *(non fissa il numero)*.
+  - **(d5)** *(la variante della luce della sez. `11`)*: **da riderivare con `0.186` al posto di `pi/4`** *(il conto nella ripresa di S1-S5)*.
+- ### **LE DOMANDE A LUCA** *(il criterio di chiusura: la sua risposta)*:
+  1. **A: `kappa = 0.5881`** *(al passo delle corse)*: **si'?**
+  2. **B: dato che la materia supera la luce col battito di oggi, B resta aperta con (d1)** *(il battito portato a `~5.3` da una legge derivata)* **o si chiude?**
+  3. **Quando riprendere S1-S5.**
