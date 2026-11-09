@@ -1,0 +1,18 @@
+[TIMBRO] _u1_terzo.py  sha1-BYTE dbcf49c4  committato e pulito
+[TIMBRO] _triangoli_forza.py  sha1-BYTE d0c0b981  committato e pulito
+[TIMBRO] u1_e1.py  sha1-BYTE 8fd59c0e  committato e pulito
+==================================================================================================================================
+E1, v_max/s IN FUNZIONE DI theta = c s (sez. 21): c ['2.000000', '3.141593', '4.000000', '8.480000'] (K = c/pi), eps 0.5, s (0.01, 0.005, 0.001) (il limite) e 0.15
+==================================================================================================================================
+  c 2.000000 (K 0.636620): v_max/s 0.36089094 0.36088879 0.36088810 | a s 0.15: 0.36152607 | il limite 0.36088808 | il limite / c 0.18044404
+  c 3.141593 (K 1.000000): v_max/s 0.58505603 0.58504558 0.58504224 | a s 0.15: 0.58813743 | il limite 0.58504210 | il limite / c 0.18622468
+  c 4.000000 (K 1.273240): v_max/s 0.75134149 0.75131885 0.75131161 | a s 0.15: 0.75797700 | il limite 0.75131131 | il limite / c 0.18782783
+  c 8.480000 (K 2.699268): v_max/s 1.61060594 1.61037814 1.61030523 | a s 0.15: 1.67344333 | il limite 1.61030218 | il limite / c 0.18989413
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: E1-R a c = pi, s 0.15: v_max/s = 0.588137 di P1 entro 1e-06 (la variante a K = 1 e' il tick di oggi)     PASSA   0.58813743
+  DEVE FALLIRE: E1-F lo stesso contro il valore a eps 0 (0.601963)                                                       ### FALLISCE   0.58813743
+  il rapporto (v_max/s) / c nel limite: 0.180444 0.186225 0.187828 0.189894; la dispersione (max - min) / media 0.0508; la pendenza di ln v_max contro ln c 1.0332
+  LA LETTURA: (e-n: NON proporzionale a c (la dispersione 0.051): B va ripensata)
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []
+exit 0 17:13:58

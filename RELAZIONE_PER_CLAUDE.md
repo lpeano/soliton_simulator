@@ -24741,3 +24741,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **E1:** **`v_max/s` per `theta = c s`, `c` in {`2`, `pi`, `4`, `8.48`}, a `eps 0.5`.** **Le letture (e-p)/(e-n), scritte prima.**
 - ### **La cura di `cs`:** **F1 per prima, sul laterale; il progetto dettagliato prima del codice.**
 - **L'ordine delle prove corte:** **E1, poi F1** *(il progetto, il codice, la prova)*; **poi P2, P4, T5** *(riscritto su `v_max`)*; **L1, L2, L4; P3 a `C35-pi` chiusa.**
+
+### 2026-11-09 17:20 -- E1: `2/2`, (e-n) COL CRITERIO SCRITTO PRIMA; MA `v_max/s ~ 0.18-0.19 c` (LA PENDENZA IN `ln c` `1.033`), E A `c = 8.48` LA MATERIA SUPERA LA LUCE *(il task history del prototipo, sez. `21.1`; `doc/referti_l2/u1_e1.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **`v_max/s` nel limite:** **`0.361`** *(`c = 2`)*, **`0.585`** *(`pi`)*, **`0.751`** *(`4`)*, **`1.610`** *(`8.48`)*.
+- **Il rapporto con `c` va da `0.180` a `0.190`:** **la dispersione e' `5%`, oltre il `2%` scritto prima** *(la lettura e' (e-n), «B va ripensata»)*.
+- ### **Ma la crescita e' quasi lineare** *(la pendenza `1.033`)*: **il coefficiente e' `~0.19`, non `1/4`.**
+- **A `c = 8.48` la materia supera la luce** *(`1.61`)*.
+- **S1-S5 restano ferme: la riformulazione delle due strade e' di Luca.**

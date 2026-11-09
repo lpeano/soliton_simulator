@@ -767,3 +767,20 @@
   - **(e-n) no:** **B va ripensata.**
   - **Stampo anche la legge che i numeri suggeriscono** *(una potenza `c^a`, o una saturazione)*, **senza verdetto.**
 - **Lo script: `csv/solitone/u1_e1.py`** *(nuovo)*; **il referto `doc/referti_l2/u1_e1.txt`.**
+
+### 21.1 L'ESITO DI E1: **`2/2` -- (e-n) COL CRITERIO SCRITTO PRIMA (LA DISPERSIONE `5.1%` CONTRO `2%`), MA LA PENDENZA IN `ln c` E' `1.033`: QUASI PROPORZIONALE; E A `c = 8.48` LA MATERIA VA PIU' VELOCE DELLA LUCE** *(`doc/referti_l2/u1_e1.txt`; il codice a `b1b43aeb`, blob `8fd59c0e`; `17:12`-`17:14`)*
+
+- **I DEVE:** **E1-R passa** *(`0.58813743`: la variante a `K = 1` e' il tick di oggi)*; **E1-F fallisce come deve.**
+
+| `c` *(`theta = c s`)* | `v_max/s` nel limite | `v_max/s` a `s 0.15` | il limite / `c` |
+|---|---|---|---|
+| `2` | `0.360888` | `0.361526` | `0.180444` |
+| `pi` *(oggi)* | `0.585042` | `0.588137` | `0.186225` |
+| `4` | `0.751311` | `0.757977` | `0.187828` |
+| `8.48` | `1.610302` | `1.673443` | `0.189894` |
+
+- ### **LA LETTURA FISSATA: (e-n)** *(la dispersione del rapporto `0.0508`, oltre il `2%` scritto prima)*: **«B va ripensata».**
+- ### **Accanto, senza concludere:**
+  - **la pendenza di `ln v_max` contro `ln c` e' `1.033`:** **QUASI proporzionale, con un rapporto che cresce piano** *(da `0.180` a `0.190`)*. **Il `2%` era una soglia mia:** **la legge vicina e' `v_max/s ~ 0.18-0.19 c`, non `c/4`.**
+  - ### **a `c = 8.48` `v_max/s = 1.61`: la materia supera la luce del prototipo** *(`1`)*. **La materia raggiungerebbe la luce a `c ~ 5.3`** *(per interpolazione: da misurare, non da usare)*.
+- ### **Per Luca:** **B va ripensata secondo la lettura scritta;** **i numeri dicono che il limite della materia CRESCE quasi come il battito, con un coefficiente `~0.19`, non `1/4`.** **(d3) e (d5) da riderivare su questi.** **S1-S5 restano ferme.**
