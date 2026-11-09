@@ -727,3 +727,18 @@
   - **ogni riga che usa `pi/4` come velocita' della materia** *(la premessa `1` della sez. `1`; le due strade, sez. `8`-`9`, con «il `c` bersaglio e' `v_b`»; la riga `4` di (A) e la `3` di (B) della MAPPA)* **va riletta:** **`v_b` non e' un osservabile.**
   - ### **La decisione delle `14:12` del `2026-11-07`** *(«(1) il "`c`" bersaglio e' `v_b`»)* **e' di Luca: se il bersaglio diventa `v_max`, le due strade A e B vanno riscritte su `v_max`.** **S1-S5 restano ferme fino a quella decisione.**
 - **Una nota sul referto:** **la testata dice ancora «le convenzioni: nessuna, simm, oggi»** *(una stringa non aggiornata dalla cura)*: **il giro ne usa una sola, «come `vb_di`».**
+
+### 16.7 L'ESITO DELLA RILETTURA DI (t-b): **`1/1` -- (b-s): LA PARTE CHE RESTAVA E' DELLO SFONDO; LA FASE SI DICHIARA, E T4-B E' CHIUSO** *(`doc/referti_l2/u1_t4b_rilettura.txt`; il codice a `028d6143`, blob `2db0a8f3`; `15:59`-`16:00`)*
+
+- **R-S passa:** **le `24` righe col pavimento di prima = il referto di `69af2417`, al carattere** *(lo stesso giro)*.
+- ### **Col pavimento rivisto** *(`1000 eps_macchina 1.222e-3 / eps = 2.71e-12` a `eps 1e-4`, lo sfondo vero; una soglia rivista dopo i numeri, dichiarata, decisione di Luca delle `12:40`)*:
+  - **fotone e ottica in fase, sfondo azzerato: `V` fra `6e-17` e `9e-15`, SOTTO il pavimento a ogni `k`** *(`0` su `48`)*;
+  - **la gauge in fase: `1.6e-4`-`1.3e-3`** *(primo ordine, come sempre)*.
+  - ### **La lettura: (b-s), la parte che restava e' dello SFONDO.**
+- ### **LA FASE, DICHIARATA** *(per quello che i numeri dicono)*:
+  - **una modulazione di FASE di `psi` muove solo il settore di Gauss** *(la gauge)* **al primo ordine in `eps` e in `e`;**
+  - **fotone e ottica la vedono SOLO attraverso il campo dello sfondo dell'onda piana** *(`A_sfondo ~ e`)*: **all'ordine `e^3`, sotto `2e-10`**;
+  - **tolto lo sfondo, sotto l'arrotondamento** *(`<= 9e-15`)*.
+- ### **T4-B E' CHIUSO** *(Luca `12:40`)*:
+  - **campo e materia si vedono al primo ordine nei versi (→) e (← ampiezza), su fotone e ottica, a ogni `k`** *(T4B-L', T4B-P', `f243996b`)*;
+  - **la fase e' dichiarata qui.**

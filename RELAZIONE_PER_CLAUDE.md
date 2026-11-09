@@ -24723,3 +24723,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **La decisione per Luca:**
   - **il «`c`» bersaglio delle due strade era `v_b`** *(la sua decisione del `2026-11-07` `14:12`)*: **diventa `v_max`?**
   - **S1-S5 restano ferme fino alla risposta.**
+
+### 2026-11-09 16:05 -- T4-B CHIUSO: LA RILETTURA DI (t-b) DA' (b-s) *(il task history del prototipo, sez. `16.7`; `doc/referti_l2/u1_t4b_rilettura.txt`)* [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **R-S passa:** lo stesso giro, al carattere.
+- **Col pavimento dello sfondo vero** *(`2.7e-12`)*, **fotone e ottica in fase a sfondo azzerato stanno a `6e-17`-`9e-15`: sotto, a ogni `k`.**
+- ### **La fase, dichiarata:**
+  - **muove solo Gauss al primo ordine**;
+  - **fotone e ottica la vedono solo attraverso lo sfondo, all'ordine `e^3`** *(`< 2e-10`)*.
+- ### **T4-B e' chiuso.**
+- ### **T5:** **il suo progetto usava `pi/4` e `0.598`, ora riletti da P1** *(`v_b` dipende dallo zero; il «`c`» e' `v_max`)*: **lo riscrivo su `v_max` prima del codice.**
