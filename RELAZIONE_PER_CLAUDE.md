@@ -24778,3 +24778,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La materia:** **`Delta omega` assoluta `~ k^6.004`**, **`|v_g|` relativa `~ k^3.9`.**
 - **Il punto di P2 era giusto:** **il triangolare di prova con `omega(Gamma) = 0` ha lo stesso `Delta omega` assoluto ma la pendenza relativa `4.0` invece di `5.9`.**
 - ### **La forma da scrivere: «`k^6` in `Delta omega` assoluta».**
+
+### 2026-11-09 19:30 -- L'ALLUNGAMENTO DI `C35-pi` E' FINITO: `200000` TICK (`t 30000`), `21` PEZZI; I `14` PEZZI NUOVI COMMITTATI *(il driver dalle `22:40` del `2026-11-08` alle `19:19`)* [[PIANO-2D-3D]]
+
+- **I pezzi da `66667` a `200000` tick:** **`14` jsonl** *(`C35-pi_066667` .. `C35-pi_196667`)*, **l'ultimo da `196667` a `200000`** *(`2105` s)*.
+- **Alla fine:** **`w 21.25`, l'alone `0.523`;** **l'assorbito al bordo `M 1.067e4`, `V 8.20e3`, `E 1.532e4`** *(relativi a `M0`, `V0`, `E0`: `5.3e-3`, `5.2e-2`, `1.6e-3`)*.
+- ### **Avanti, nell'ordine di Luca** *(`21:47` del `2026-11-08`)*: **P3** *(il controllo di `cs` sul principale, che aspettava la fine di `C35-pi`)*, **poi l'allungamento di `S162`, poi `C50-0`; il referto (r-b) dopo `S162`.**
