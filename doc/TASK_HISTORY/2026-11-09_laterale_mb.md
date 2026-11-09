@@ -473,3 +473,22 @@
   - **da dove: la `tau_int` di Sokal della serie di `Lambda` al nodo** *(dalle mappe leggere di `TB3`/`TBS`, o da una corsa corta)*, **oppure il tempo di rilassamento di `Lambda` dopo un disturbo imposto** *(una misura)*;
   - ### **LE LETTURE, scritte prima:** **(t1) `tau_Lambda` molto piu' lungo di `1/omega`** *(`r < ~0.1` vicino al solitone)*: **F1 con quel `r`, e la crescita va rimisurata**; **(t2) `tau_Lambda ~ 1/omega`:** **il tempo di memoria lento non c'e' nella dinamica, e F1 da sola non basta: F2 o F4.**
 - ### **E LA DOMANDA SU F1-V:** **«il vuoto al bit» con F1 e' possibile solo se `Lambda` del vuoto e' costante al bit:** **la misuro** *(una prova di un minuto)* **prima di qualunque altra cosa su F1?**
+
+## 23. LE DECISIONI DI LUCA DELLE `20:13` SU F1, E T1: LA DERIVA DI `Lambda` DEL VUOTO A `cs` SPENTO -- **LE LETTURE PRIMA DELLA MISURA**
+
+- **REGISTRATO** *(Luca)*:
+  - **tre test brevi sul laterale, uno alla volta: T1** *(la deriva di `Lambda` del vuoto)*, **T2** *(F1 allungata)*, **T3** *(`tau_Lambda`)*; **poi FERMO: niente F2, F3, F4 senza la sua decisione;**
+  - **il fattore `/(1 + r/2)` del mandato delle `18:46` era ridondante con `r = 1 - e^{-omega dtau}`:** **la forma `cs + r (L - cs)` resta quella giusta** *(l'errore e' del guardiano)*;
+  - **se una lettura chiede di cambiare una regola (F1-V compreso): FERMO e la proposta.**
+- ### **T1, LA MISURA:**
+  - **il vuoto F3 da solo, il nucleo del laterale, `cs` SPENTO** *(`mot.lambda_c = None`)*, **`1000` tick** *(`tick.tick`)*;
+  - **a ogni tick, per nodo: `Delta Lambda = Lambda(t+1) - Lambda(t)`, in valore e in ulp di `Lambda`** *(`np.spacing`)*;
+  - **il max e la media di `|Delta Lambda|`; la deriva cumulata `Lambda(t) - Lambda(0)`** *(max, media, rms)* **ai tick `1`, `10`, `100`, `1000`;**
+  - **la forma: la pendenza in log-log della rms della deriva fra `t 10` e `t 1000`.**
+- ### **IL DEVE FALLIRE** *(Luca)*: **a meta' corsa** *(tick `500`)* **un `Lambda` di un nodo spostato di `1e-12`** *(la fase del vuoto di quel nodo scalata di `sqrt(1 + 1e-12 / Lambda)`: `Lambda` e' una densita', quadratica nelle fasi)*, **in una seconda corsa**: **T1-F: «la misura NON vede lo spostamento»** *(`max|Lambda_iniettata - Lambda| < 0.5e-12` dopo il tick `500`)* **DEVE FALLIRE.**
+- ### **LE LETTURE, scritte prima** *(di Luca; i criteri numerici sono miei, dichiarati)*:
+  - **(v1) `Lambda` costante AL BIT** *(`Delta Lambda = 0` a ogni tick, ogni nodo)*: **F1-V fallisce per colpa di F1: cerco la causa nella formula e mi fermo con la proposta.**
+  - **(v2) `Lambda` oscilla di pochi ulp, limitata o `~sqrt(t)`** *(la pendenza della rms `< 0.75`)*: **F1-V va riformulato come «`cs` non deriva piu' di quanto deriva `Lambda`»: propongo il criterio, la decisione e' di Luca;** **intanto T2 e T3, con F1-V come lettura e non come cancello.**
+  - **(v3) `Lambda` deriva in modo SISTEMATICO** *(la pendenza `>= 0.75`: lineare)*: **un fatto del tick, non di F1: una nota separata, e FERMO.**
+  - **I due sotto-casi di (v2), per scriverli:** **limitata** *(pendenza `< 0.25`)*, **passeggiata casuale** *(fra `0.25` e `0.75`)*.
+- **Lo script: `csv/solitone/lambda_vuoto_deriva.py`** *(nuovo)*; **il referto `doc/referti_l2/lambda_vuoto_deriva.txt`.**
