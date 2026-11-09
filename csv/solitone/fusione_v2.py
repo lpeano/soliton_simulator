@@ -53,7 +53,8 @@ def main():
     print("=" * 130)
     uguali, diversi = [], []
     for f in file_v2:
-        rif = git("show", "%s:%s" % (COMMIT_V2, f))
+        r_ = subprocess.run(["git", "show", "%s:%s" % (COMMIT_V2, f)], cwd=RADICE, capture_output=True)
+        rif = r_.stdout if r_.returncode == 0 else None        # ### la cura: un file CANCELLATO da v2 (in 16d2ebdb non c'e') e' None, come sul disco quando manca
         p = os.path.join(RADICE, f)
         disco = open(p, "rb").read() if os.path.exists(p) else None
         (uguali if disco == rif else diversi).append(f)
