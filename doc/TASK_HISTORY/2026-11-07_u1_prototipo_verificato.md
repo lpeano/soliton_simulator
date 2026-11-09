@@ -897,3 +897,19 @@
   - ### **Quindi T5 (B) = `v_max` della materia da QUELLA matrice** *(la velocita' di gruppo massima sulle bande della materia, a `eps 0.5`)*, **non un banco nuovo.** **Il controllo T5-N** *(F3 spento -> il vuoto nullo, (A))* **si fa con lo stesso codice e `phi = 0`.**
   - ### ⚠ **Il «congelato» e' una scelta da dichiarare:** **il vuoto non risponde alla materia** *(il tick linearizzato col vuoto fisso)*: **e' (B) al primo ordine in `psi`, che e' quello che T5 chiede.**
 - **La correzione:** **l'allungamento di `S162` e' partito alle `21:13:37`** *(`orari_prove`)*, **non alle `21:15` come scritto nella relazione di `731526b1`.**
+
+### 25.2 ANNOTAZIONE A T5, PRIMA DEL CODICE: **A `cs` SPENTO LA LETTURA (o1) E' GARANTITA DALLA COSTRUZIONE** *(un FALSO-UNO: FERMO su T5, una domanda a Luca)*
+
+- **Letto dal codice** *(`csv/_dove_va_la_materia.un_tick`, `csv/_deriva_congelato.tick_congelato`, `primo_ordine/materia_vuoto.alpha_s1`/`beta_s1`, `csv/_screening_forme_s3.forma`)*:
+  - **il tick congelato di (B)** **salta i pezzi del vuoto** *(`_solitone_vuoto_congelato.VUOTO`: `CAMM-GROVER-VUOTO`, `CAMM-SPOSTAMENTO-VUOTO`, `CAMM-FASE-VUOTO`)* **e rimette `phi = F3` dopo ogni tick;** **su `psi` restano `CAMM-MATERIA-VUOTO`, la moneta, il Grover e lo spostamento;**
+  - **la moneta, il Grover e lo spostamento di `psi`** **leggono `dtau_nodo` e `s_nodo`, cioe' `mot.dtau` e `mot.cs`:** **a `lambda_c = None` `mot.cs` resta `s` ovunque, qualunque sia il vuoto;**
+  - ### **`CAMM-MATERIA-VUOTO` con la forma S1** *(quella delle corse, `VC.FORMA`)*: **`psi -> psi e^{-i alpha dtau f}` con `alpha = x^2/(1 + x^2)`, `x = rho/Lambda`, `rho = |psi|^2`:** **il termine e' `~ |psi|^4 psi / Lambda^2`, del QUINTO ordine in `psi`.**
+- ### **Quindi, al primo ordine in `psi` e a `cs` spento, il vuoto F3 NON ENTRA nella dinamica della materia:** **(B) e' il tick di `psi` sul vuoto nullo** *(a meno di `(rho/Lambda)^2`)*, **e (o1) e' GARANTITA dalla costruzione, non misurata** *(un FALSO-UNO: un verdetto che non parla del merito)*.
+  - ### ⚠ **E T5-N, scritto nella sez. `25`** *(«col vuoto F3 SPENTO ridà (A)»)*, **non si puo' fare come scritto:** **con S1 a `Lambda = 0` `alpha = 1` dove `rho > 0`** *(il limite della saturazione)*, **cioe' il vuoto nullo NON e' il limite del vuoto piccolo;** **e il motore rifiuta il vuoto nullo** *(`_vieta_vuoto_nullo`, decisione di Luca del `2026-10-17`)*.
+  - **Il vuoto entrerebbe al primo ordine solo attraverso `cs(Lambda)`** *(`cs` acceso)*, **e sul principale `cs` acceso e' VIETATO** *(P3)*.
+- ### **La sez. `25.1` diceva «lineare in `psi` per costruzione (il vuoto congelato)»:** **giusto per la linearita', ma per lo stesso motivo il vuoto non conta.** **Non l'avevo visto.**
+- ### **FERMO su T5. La domanda a Luca, con una raccomandazione:**
+  - **(t5-a, la mia raccomandazione)** **T5 si chiude per DERIVAZIONE:** **a `cs` spento il limite della materia non dipende dal vuoto al primo ordine** *(la riga di sopra, scritta)*; **(A) si fa da sola** *(il limite di `v_max/s` a `s -> 0`, utile alle due strade)*, **e il confronto col vuoto si sposta dove il vuoto entra davvero: `cs` acceso, cioe' sul laterale o dopo l'unificazione** *(U1)*;
+  - **(t5-b)** **T5 come scritto, dichiarando (o1) garantita:** **(B) diventa un controllo del banco, non una misura;**
+  - **(t5-c)** **un banco col vuoto VIVO** *(il tick linearizzato in `psi` e `phi` insieme)*: **al primo ordine i due blocchi si separano** *(`phi` risponde a `psi` al secondo ordine)*, **quindi darebbe lo stesso risultato:** **lo scrivo per completezza, non lo raccomando.**
+- **Intanto la coda prosegue senza T5:** **L1, L2, L4** *(la legge della durata)*.

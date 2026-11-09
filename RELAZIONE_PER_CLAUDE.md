@@ -24860,3 +24860,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **D2-bis: la stessa D2.3 sul `z` del principale;**
   2. **la forma `I - beta (I - S)`** *(il valore proprio `1` esatto sulla parte simmetrica; il prezzo: `M-B1` al bit cade)*.
 - **La scelta e' di Luca: tocca il nucleo condiviso dei due rami.**
+
+### 2026-11-10 01:05 -- T5, PRIMA DEL CODICE: A `cs` SPENTO LA LETTURA (o1) E' GARANTITA DALLA COSTRUZIONE (UN FALSO-UNO); FERMO SU T5, UNA DOMANDA *(il task history del prototipo, sez. `25.2`)* [[PIANO-2D-3D]] [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **Nel tick congelato di (B) il vuoto F3 tocca `psi` in due modi soltanto:**
+  - **`CAMM-MATERIA-VUOTO` con S1:** **`alpha = (rho/Lambda)^2/(1 + ...)`, cioe' un termine del QUINTO ordine in `psi`;**
+  - **`cs`, che a `lambda_c = None` resta `s`.**
+- ### **Al primo ordine, a `cs` spento, il vuoto NON ENTRA:** **(o1) e' garantita, non misurata.**
+- **T5-N non si puo' fare come scritto:** **con S1 a `Lambda = 0` `alpha = 1`; e il motore rifiuta il vuoto nullo.**
+- ### **FERMO su T5. La domanda a Luca:**
+  - **(t5-a, la mia raccomandazione)** **chiudere T5 per derivazione;** **fare (A) da sola** *(il limite di `v_max/s`)*; **spostare il confronto col vuoto a `cs` acceso** *(laterale, o dopo U1)*;
+  - **(t5-b)** **T5 come scritto, con (o1) dichiarata garantita;**
+  - **(t5-c)** **il banco col vuoto vivo:** **al primo ordine darebbe lo stesso risultato.**
+- **La coda prosegue con L1, L2, L4.**
