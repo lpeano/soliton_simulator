@@ -515,3 +515,66 @@
   - **una deriva lineare e uniforme di `Lambda` del vuoto, `+3.7e-16` relativo per tick:** **non e' una passeggiata casuale; e' un arrotondamento con un SEGNO** *(per esempio una norma che non si conserva al bit in un pezzo del tick, sempre per eccesso)*;
   - **da cercare: in quale pezzo del tick nasce** *(il tick pezzo per pezzo, la norma del vuoto dopo ciascuno)*: **una diagnosi, se Luca la vuole**;
   - **e se c'e' anche sul PRINCIPALE** *(senza v2)*: **la stessa misura col nucleo del principale** *(il principale e' congelato: si misura, non si tocca)*.
+
+## 24. D2, IN QUALE PEZZO DEL TICK NASCE LA DERIVA DI `Lambda` *(Luca `2026-11-09` `23:02`)*: IL PROGETTO, PRIMA DEL CODICE
+
+### 24.0 DA DOVE PARTE
+
+- **D1 del principale e' su origin** *(`b34f6836`, poi la correzione `115a288d`)*. ### ⚠ **L'esito (w1) NON vale come «senza v2»:** **lo script girava il tick dentro `BE.conv(DC.ZERO)`, che SUL PRINCIPALE avvolge in memoria `grover`/`hop_psi`/`hop_phi` con lo zero simmetrico** *(le stesse operazioni del v2 di qui)*. **Quindi la frase del mandato «se D1 ha dato (w1), la causa e' nel tick condiviso» NON si puo' dichiarare oggi.** **D1-bis** *(`2bb5ee52`: i tick senza l'avvolgimento, la scena identica)* **ha dato (w3): il nucleo del principale deriva ANCHE LUI, sistematico e uniforme, ma col SEGNO OPPOSTO** *(`-2.313e-12` in `1000` tick, la pendenza `1.004`; qui `+2.228e-12`)*. **Questa misura separa la fase `conj(z)` del v2 dai due mezzi pezzi.**
+- **La lettura del guardiano, da verificare:** **in un vuoto uniforme ogni nodo fa gli stessi conti, quindi l'errore e' uguale ovunque** *(T1: max = media = rms al tick `1000`: coerente)*; **un pezzo in virgola mobile non esattamente unitario allunga la norma.** **I sospetti:** **un coefficiente non esatto** *(`1/d` del Grover)*; **la fase `e^{-i theta/2}` del v2.**
+
+### 24.1 I PEZZI DEL TICK, DAL CODICE, NELL'ORDINE *(D2.1)*
+
+**`tick.tick` = `percorri_tick(st, mot, par, (), None, 14)`:** **`mot.apri_tick()`, i `14` pezzi di `composizione.ORDINE` ciascuno con `frazione 0.5`, `mot.chiudi_tick()`** *(apri e chiudi contano le crescite: non toccano lo stato)*.
+
+| pos | id | operatore | su che cosa, **nel vuoto F3 con `psi = 0` e `lambda_c = None`** |
+|---|---|---|---|
+| `1` | `CAMM-MATERIA-VUOTO` | `materia_vuoto.applica` | `psi *= e^{-i alpha dtau f}`, `phi *= e^{-i beta dtau f}` con `alpha`, `beta` da `pezzi(rho, Lambda)`; **a `rho = 0` mi aspetto `beta = 0` e il fattore `exp(0) = 1` esatto** *(da misurare)* |
+| `2` | `CAMM-FASE-VUOTO` | `energia_pesata.applica` | **ritorna subito:** `mot.lambda_c is None` *(riga «`if mot.cs is None or mot.lambda_c is None`»)* |
+| `3` | `CAMM-MONETA-SPIN` | `_moneta_spin` | **solo `psi`** |
+| `4` | `CAMM-GROVER` | `FP.grover` su `psi` | **solo `psi`** |
+| `5` | `CAMM-SPOSTAMENTO` | `FP.hop_psi` | **solo `psi`** |
+| `6` | `CAMM-GROVER-VUOTO` | `FP.grover` su `phi.reshape(-1, 1)` | **(6a)** `_grover_mezzo(h)`, **(6b)** `_grover_mezzo(h)`, **(6c)** `phi *= conj(z_nodo(h))`, con `h = f/2 = 0.25` |
+| `7` | `CAMM-SPOSTAMENTO-VUOTO` | `FP.hop_phi` | **(7a)** `_hop_phi_mezzo(h)`, **(7b)** `_hop_phi_mezzo(h)`, **(7c)** `phi *= conj(z_arco(h))` sulle due estremita' |
+| `8` | `CAMM-SPOSTAMENTO-VUOTO` | come `7` | **(8a)**, **(8b)**, **(8c)** |
+| `9` | `CAMM-GROVER-VUOTO` | come `6` | **(9a)**, **(9b)**, **(9c)** |
+| `10` | `CAMM-SPOSTAMENTO` | `FP.hop_psi` | solo `psi` |
+| `11` | `CAMM-GROVER` | `FP.grover` su `psi` | solo `psi` |
+| `12` | `CAMM-MONETA-SPIN` | `_moneta_spin` | solo `psi` |
+| `13` | `CAMM-FASE-VUOTO` | `energia_pesata.applica` | ritorna subito |
+| `14` | `CAMM-MATERIA-VUOTO` | `materia_vuoto.applica` | come `1` |
+
+- **I coefficienti, dal codice** *(`primo_ordine/flussi_parziali.py`)*:
+  - **`z = e^{i pi s h}`** da `espi` *(`cos` di `pi s`, `sin` di `pi min(s, 1 - s)`)*, **per nodo** *(`z_nodo`)* **o per arco** *(`z_arco`, `s` la media armonica)*;
+  - **il mezzo Grover:** `nuovo_i = w · Somma_j v_j + z · v_i`, **`w = (1 - z)/d`** *(`d` il grado; la divisione e' in virgola mobile)*: **la matrice `z I + w J`, normale: valori propri `z + d w` e `z`;**
+  - **il mezzo spostamento:** `[[alpha, beta], [beta, alpha]]`, **`alpha = (1 + z)/2`, `beta = (1 - z)/2`:** **valori propri `alpha + beta` e `alpha - beta`;**
+  - **la fase del v2:** `conj(z)`, **modulo `|z|`.**
+- ### **NON SO:** **se i pezzi di `psi` toccano `phi`** *(dal codice no; la misura lo dice: devono dare zero)*; **se il coefficiente `beta` di `materia_vuoto` a `rho = 0` e' zero esatto.**
+
+### 24.2 LA MISURA *(D2.2-D2.5)*
+
+- **La scena di T1, identica** *(il codice di `lambda_vuoto_deriva.py`: vuoto F3 di TBS, `81 x 81`, `mot.cs 0.15`, `lambda_c = None`, `1000` tick, dentro `SF.forma` e `BE.conv(DC.ZERO)`, che QUI non avvolge niente)*.
+- **Gli strumenti, in memoria e solo per la corsa:** **ogni operatore di `mot.operatori` avvolto** *(il numero della posizione `1`-`14` nel tick)*; **dentro le posizioni `6`-`9` anche `FP._grover_mezzo` e `FP._hop_phi_mezzo`** *(i sotto-pezzi `a`, `b`; il `c` e' la differenza fra la fine dell'operatore e la fine di `b`)*.
+- ### **CHE COSA SI MISURA, e perche' ESATTO:** **la deriva per tick e' `~2.2e-15` su `Lambda 6`, cioe' `~2.5` ulp: una misura in virgola mobile di `Lambda` dopo ogni pezzo avrebbe un errore dello stesso ordine, E UGUALE su tutti i nodi** *(il vuoto e' uniforme: l'errore di misura non si media)*. **Quindi:**
+  - **`Lambda` ESATTO** *(somma di `re^2 + im^2` in `fractions.Fraction`, dai float di `phi`)* **su un campione di `9` nodi** *(gli indici `0`-`8`: una scelta dichiarata, non tarata; il periodo di F3 e' `3`, e la deriva di T1 e' uguale su tutti i nodi)*, **dopo ogni pezzo e sotto-pezzo;**
+  - **accanto, la norma totale in virgola mobile** *(`np.sum(|phi|^2)` su tutti i nodi: solo stampata)*.
+- **Per ogni pezzo** *(D2.2)*: **la variazione relativa media per tick** `<Delta Lambda / Lambda>` *(media sui `1000` tick e sui `9` nodi)*, **il segno, la frazione dei tick con variazione positiva;** **la dispersione fra i `9` nodi.**
+- **D2.3, i coefficienti in virgola mobile, ESATTI:** **per ogni valore distinto di `z` nella scena** *(per nodo a `h`, per arco a `h`)*, **in `Fraction`:** **`|lambda|^2 - 1` per ogni valore proprio** *(la matrice e' normale: `||U^dagger U - I|| = max ||lambda|^2 - 1|`, `sigma_max - 1 = max |lambda| - 1`)*, **e `| |conj z| - 1 |`;** **e il fattore di `materia_vuoto`.**
+- **D2.4 DEVE FALLIRE:** **una seconda corsa con `phi *= fl(1 + 1e-15)` subito dopo il pezzo in posizione `1`** *(`CAMM-MATERIA-VUOTO`, scelto PRIMA di vedere i numeri)*: **il controllo «la diagnosi NON indica la posizione `1` come la piu' pesante, con l'aumento atteso `|fl(1 + 1e-15)|^2 - 1` entro il `10%`» DEVE FALLIRE.**
+- **D2.5, la chiusura:** **la somma dei contributi medi per tick** *(esatti, sul campione)* **contro la deriva di T1 per tick** *(letta dal referto a `81c690a8`: `2.228e-12 / 1000`)* **entro il `10%`;** **e accanto la deriva in virgola mobile di `densita_vuoto` di questa corsa.** ### ⚠ **Che cosa NON dice:** **la somma dei pezzi esatti e' telescopica sulla `Lambda` esatta** *(chiude per costruzione)*: **il confronto vero e' fra la `Lambda` ESATTA e quella di `densita_vuoto` di T1.**
+
+### 24.3 LE LETTURE, SCRITTE PRIMA *(quelle di Luca, rese operative)*
+
+- **Il peso di un pezzo = il suo contributo medio diviso la somma dei contributi.**
+- **(p1)** **un pezzo pesa oltre il `90%` E il suo `sigma_max - 1 > 0` in D2.3:** **causa trovata;** **la proposta di correzione scritta, NON applicata.**
+- **(p2)** **nessun pezzo oltre il `90%`:** **tutti quelli col peso, in ordine.**
+- **(p3)** **un pezzo oltre il `90%` ma coi coefficienti non espansivi** *(`sigma_max - 1 <= 0`)*, **oppure D2.5 non chiude:** **la deriva sta nell'ARITMETICA dell'applicazione** *(l'ordine delle operazioni, le somme)*, **non nei coefficienti:** **lo scrivo e mi fermo con una proposta di diagnosi piu' fine.**
+- ### **Ogni lettura dice anche:** **se il pezzo pesante e' la fase `conj(z)` del v2** *(i sotto-pezzi `c`)* **o un mezzo pezzo** *(`a`, `b`: comuni al principale, che li fa a `f` intera e non a `f/2`)*.
+- **Il costo** *(stima)*: **`~3` minuti per corsa, due corse:** **`~6`-`8` minuti accanto a S162.**
+
+### 24.4 TODO
+
+1. **Questa sezione: commit e push** *(dopo D1-bis sul principale: un test breve alla volta)*.
+2. **Lo script `csv/solitone/lambda_deriva_pezzi.py`; la suite in `wt_zero`; commit e push.**
+3. **La corsa; il referto `doc/referti_l2/lambda_deriva_pezzi.txt`; l'esito in `24.5`; il rimando nella RELAZIONE del principale.**
+4. **Poi FERMO:** **niente T2, T3, ne' correzioni senza la decisione di Luca.**
