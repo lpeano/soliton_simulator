@@ -3,7 +3,7 @@ r"""**F1, LA MEMORIA (`A15`): LA PROVA** *(sul ramo laterale; Luca `2026-11-09` 
 
     python csv/solitone/carta_f1.py > doc/referti_l2/carta_f1.txt
 
-**`cs` costante dentro il tick** *(`mot.cs`, `mot.lambda_c`, `tick.percorri_tick` intero)*; **al confine il trapezio** `cs' = [cs (1 - r/2) + r L] / (1 + r/2)`, `L = FP.cs(Lambda, Lambda_c)`,
+**`cs` costante dentro il tick** *(`mot.cs`, `mot.lambda_c`, `tick.percorri_tick` intero)*; **al confine il rilassamento esatto** `cs' = cs + r (L - cs)`, `r = 1 - e^{-omega}` *(Luca 18:46, sez. 21; prima il trapezio)*, `L = FP.cs(Lambda, Lambda_c)`,
 `r = omega_v` *(la rotazione di fase del vuoto nel tick appena fatto, per nodo)*. **(q1)** `cs'` della legge; **(q2)** `cs_primo = 0`. **Il calore della memoria:** `g_pesata(cs') - g_pesata(cs)` sullo stesso stato.
 **I DEVE:** `F1-V` *(il vuoto: `cs = s` entro `8 eps`)*; `F1-I` *(l'inversa del trapezio al confine entro `1e-14` relativo)*; `F1-F` *(DEVE FALLIRE: la regola esplicita invertita col trapezio)*.
 """
@@ -24,6 +24,8 @@ from solitone import carta_punto_fisso as CPF  # noqa: E402
 N_TICK = 200                   # ### sez. 18.6
 N_VUOTO = 50                   # ### sez. 18.6
 DELTA = 1e-8                   # ### sez. 18.6: la perturbazione sul centro
+SOGLIA_OLTRE = 1e-4            # ### sez. 21: «e oltre, se stabile» (mia, dichiarata)
+N_OLTRE = 1000                 # ### sez. 21
 EPS = CPF.EPS
 OK = [0, 0]
 FALLITE = []
@@ -44,8 +46,17 @@ def trapezio(cs, L, r):
     return (cs * (1.0 - 0.5 * r) + r * L) / (1.0 + 0.5 * r)
 
 
-def inversa(cs1, L, r):
+def inversa_trapezio(cs1, L, r):
     return (cs1 * (1.0 + 0.5 * r) - r * L) / (1.0 - 0.5 * r)
+
+
+def rilassa(cs, L, r):
+    """### Luca 18:46 (sez. 21): il rilassamento ESATTO su un passo, cs + r (L - cs), r = 1 - e^{-omega}: a L = cs da' cs AL BIT."""
+    return cs + r * (L - cs)
+
+
+def inversa(cs1, L, r):
+    return (cs1 - r * L) / (1.0 - r)
 
 
 @contextlib.contextmanager
@@ -86,10 +97,10 @@ def corsa(st, mot, par, lc, cs0, n_tick, q2, stampa):
             mot.cs = cs.copy()
             mot.lambda_c = float(lc)
             TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
-            r = omega_v(phi0, st["phi_h"], mot.inc.nodo, mot.inc.n)
+            r = 1.0 - np.exp(-omega_v(phi0, st["phi_h"], mot.inc.nodo, mot.inc.n))     # ### sez. 21: r = 1 - e^{-omega dtau}
             L = FP.cs(mot.densita_vuoto(st), lc, fp).copy()
             g0 = EP.g_pesata(mot, st, par)
-            cs1 = trapezio(cs, L, r)
+            cs1 = rilassa(cs, L, r)
             mot.cs = cs1.copy()
             g1 = EP.g_pesata(mot, st, par)
             calore += float(g1 - g0)
@@ -131,11 +142,11 @@ def main():
     cs_ = rg.uniform(0.01, 0.3, 1000)
     L_ = rg.uniform(0.01, 0.3, 1000)
     r_ = rg.uniform(0.0, 1.5, 1000)
-    d1 = float(np.max(np.abs(inversa(trapezio(cs_, L_, r_), L_, r_) - cs_) / cs_))
-    esito("F1-I l'inversa del trapezio al confine ridà cs entro 1e-14 relativo (1000 terne a caso)", d1 <= 1e-14, "%.2e" % d1)
-    esplicita = cs_ + r_ * (L_ - cs_)
-    d2 = float(np.max(np.abs(inversa(esplicita, L_, r_) - cs_) / cs_))
-    esito("F1-F la regola ESPLICITA invertita col trapezio ridà cs entro 1e-14", d2 <= 1e-14, "%.2e" % d2, deve=False)
+    r_ = 1.0 - np.exp(-r_)
+    d1 = float(np.max(np.abs(inversa(rilassa(cs_, L_, r_), L_, r_) - cs_) / cs_))
+    esito("F1-I l'inversa del rilassamento al confine ridà cs entro 1e-14 relativo (1000 terne a caso)", d1 <= 1e-14, "%.2e" % d1)
+    d2 = float(np.max(np.abs(inversa_trapezio(rilassa(cs_, L_, r_), L_, r_) - cs_) / cs_))
+    esito("F1-F il rilassamento invertito col TRAPEZIO ridà cs entro 1e-14", d2 <= 1e-14, "%.2e" % d2, deve=False)
     with CA.con_L(CA.LCORSA.get(CPF.CORSA)), V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             DC.forma(z, rec["larghezza"])
@@ -154,12 +165,13 @@ def main():
         print("### Lambda_c = %.12f" % lc)
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             cs0 = FP.cs(mot.densita_vuoto(st), lc, np.zeros(inc.n)).copy()
-            sv = corsa(st, mot, par, lc, cs0, N_VUOTO, False, False)
+            sv = corsa(st, mot, par, lc, cs0, N_VUOTO, True, False)      # ### sez. 21: (q2) anche nel vuoto
         dv = max(float(np.max(np.abs(c - s))) for c in sv)
-        esito("F1-V il vuoto F3 da solo, %d tick: cs = s entro 8 eps relativo" % N_VUOTO, dv <= 8 * EPS * s, "%.3e" % dv)
+        esito("F1-V il vuoto F3 da solo, %d tick: cs = il suo valore iniziale FP.cs(Lambda_vuoto) AL BIT, ogni nodo, ogni tick (Luca 18:46)" % N_VUOTO, all(np.array_equal(c, cs0) for c in sv),
+              "max|cs - cs0| %.3e; max|cs - s| %.3e" % (max(float(np.max(np.abs(c - cs0))) for c in sv), dv))
         # ------------------------------------------------------------------ la scena
         xs = stati[CPF.TICK_D4]
-        for modo, q2 in (("(q1) cs' della legge", False), ("(q2) cs' = 0", True)):
+        for modo, q2 in (("(q2) cs' = 0", True),):        # ### Luca 18:46 (sez. 21): (q2) solo
             ris = []
             for pert in (0.0, DELTA):
                 with np.load(xs["file"]) as d:
@@ -188,6 +200,19 @@ def main():
                 print("  %s: la differenza fra le due corse, tick per tick (1, 2, 5, 10, 20, 50, 100, 200): %s" % (modo, " ".join("%.2e" % dd[k - 1] for k in (1, 2, 5, 10, 20, 50, 100, 200) if k <= len(dd))))
                 cr = [dd[k] / dd[k - 1] for k in range(1, min(len(dd), 20)) if dd[k - 1] > 0]
                 print("  %s: il fattore di crescita per tick, la mediana sui primi 20: %.4f" % (modo, float(np.median(cr)) if cr else float("nan")))
+                if dd[-1] < SOGLIA_OLTRE:
+                    print("  ### la differenza a %d tick %.2e < %g: si va a %d (sez. 21)" % (N_TICK, dd[-1], SOGLIA_OLTRE, N_OLTRE))
+                    ris2 = []
+                    for pert in (0.0, DELTA):
+                        with np.load(xs["file"]) as d:
+                            for k in chiavi:
+                                st[k][...] = d[k]
+                        with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
+                            cs0 = FP.cs(mot.densita_vuoto(st), lc, np.zeros(inc.n)).copy()
+                            cs0[rr_ < 1.0] += pert
+                            ris2.append(corsa(st, mot, par, lc, cs0, N_OLTRE, q2, False))
+                    dd2 = [float(np.max(np.abs(a - b))) for a, b in zip(ris2[0], ris2[1])]
+                    print("  %s fino a %d: la differenza ai tick 200, 400, 600, 800, 1000: %s; cs min %.6f" % (modo, N_OLTRE, " ".join("%.2e" % dd2[k - 1] for k in (200, 400, 600, 800, 1000)), float(ris2[0][-1].min())))
     print("=" * 130)
     print("ESITO: %d/%d controlli come devono; fallite: %d %s; %.0f s in tutto" % (OK[0], OK[1], len(FALLITE), FALLITE, time.time() - t00))
     return 0 if not FALLITE else 1
