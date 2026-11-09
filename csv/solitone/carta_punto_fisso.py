@@ -65,7 +65,12 @@ class Mappa:
         self.mot.lambda_c = self.lc
         copia = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in self.st.items()}
         self.mot.cs = np.asarray(x, dtype=float).copy()
-        self.TK.percorri_tick(copia, self.mot, self.par, (), None, self.meta)
+        try:
+            self.TK.percorri_tick(copia, self.mot, self.par, (), None, self.meta)
+        except Exception:
+            # ### la cura del difetto mio (sez. 9): se il tick alza dentro (il punto medio di Omega), si RICHIUDE senza contarlo, e l'eccezione risale
+            self.mot.cresciute_nel_tick = -1
+            raise
         return self.FP.cs(self.mot.densita_vuoto(copia), self.lc, self.fp).copy()
 
 
