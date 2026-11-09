@@ -24805,3 +24805,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Il mandato dell'unificazione lo scrive il guardiano.**
 - **U2:** **la distanza di `C35-pi` per terzo di corsa** *(min, max, media, ampiezza, periodo, la pendenza con l'errore)*, **accanto a `C35-0`, nel referto (r-b)**; **le letture d1-d3 scritte prima.**
 - ### **In corsa:** **R-1 di `S162`** *(dalle `20:07:32`; nel commit `201e912d` avevo scritto «`20:10`»: l'ora vera e' questa)*. **Sul laterale: T1, poi T2, poi T3.**
+
+### 2026-11-09 21:00 -- IL RIMANDO AL LATERALE (REGOLA 2): T1, (v3) -- `Lambda` DEL VUOTO F3 A `cs` SPENTO DERIVA IN MODO SISTEMATICO; FERMO *(`81c690a8` su `zero-nel-nucleo`, sez. `23.1`; il referto `doc/referti_l2/lambda_vuoto_deriva.txt` LI')* [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Nel vuoto F3 a `cs` spento, nel nucleo del laterale, `Lambda` cresce di `~2.2e-15` per tick, UGUALE su tutti i nodi:**
+  - **`+2.228e-12` in `1000` tick** *(`2508` ulp)*;
+  - **la pendenza della rms `0.985`: lineare, non una passeggiata casuale.**
+- **T1-F fallisce come deve** *(lo spostamento di `1e-12` si vede)*.
+- ### **E' un fatto del TICK, non di F1:** **spiega F1-V** *(`7.8e-16` in `50` tick)*.
+- ### **FERMO: T2 e T3 non partono.** **Le domande a Luca:**
+  1. **cercare in quale pezzo del tick nasce la deriva** *(una diagnosi pezzo per pezzo)*?
+  2. **la stessa misura sul principale** *(senza v2: si misura, non si tocca)*?
+- **R-1 di `S162` e' ancora in corsa** *(dalle `20:07`)*.
