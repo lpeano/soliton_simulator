@@ -2,6 +2,7 @@
 r"""**IL PERIODO DI `TB3`: METODO (p1) O FISICA (p2)?** *(Luca `2026-11-08` `20:57`, M3; il task history `doc/TASK_HISTORY/2026-11-07_allungamenti_coppia_30000.md`, sez. `7.9`)*. [[PIANO-2D-3D]]
 
     python csv/solitone/periodo_tb3.py > doc/referti_l2/periodo_tb3.txt
+    python csv/solitone/periodo_tb3.py --incrementi > doc/referti_l2/periodo_tb3_incrementi.txt     (q-a, Luca 2026-11-09 01:31: la serie differenziata; sez. 7.12)
 
 **Sulle serie INTERE di `TB3` e `TBS`** *(da `t 1000` alla fine)*, **per ognuna delle sei grandezze di `stazionarieta.serie_singolo`, tolta la retta:**
 **(m1) il periodogramma della serie intera** *(il picco, stampato)*; **(m2) Welch, finestra di Hann, segmenti di `7000` e di `9500` unita'** *(nessuno multiplo di `1500`)*
@@ -45,6 +46,16 @@ def esito(che, passa, nota="", deve=True):
 
 def togli_retta(t, x):
     return x - np.polyval(np.polyfit(t, x, 1), t)
+
+
+INCR = [False]                 # ### (q-a, Luca 2026-11-09 01:31): --incrementi, la serie DIFFERENZIATA (sez. 7.12)
+
+
+def prepara(t, x):
+    """### la serie che entra nel metodo: tolta la retta *(come prima)*, o i suoi INCREMENTI *(`--incrementi`: la retta diventa una costante, che Welch toglie per segmento)*."""
+    if INCR[0]:
+        return t[1:], np.diff(x)
+    return t, togli_retta(t, x)
 
 
 def welch(x, dt, L):
@@ -101,7 +112,7 @@ def ar1(n, phi, rg):
 def leggi(nome, t, x):
     """### stampa (m1), (m2) per una grandezza; rende `{L: (sopra, forte, passo)}`."""
     sel = t >= T_DA
-    tt, xx = t[sel], togli_retta(t[sel], x[sel])
+    tt, xx = prepara(t[sel], x[sel])
     dt = float(np.median(np.diff(tt)))
     p1 = np.abs(np.fft.rfft(xx)) ** 2
     f1 = np.fft.rfftfreq(len(xx), dt)
@@ -144,6 +155,9 @@ def main():
     print("=" * 130)
     print("IL PERIODO DI TB3 (Luca 20:57, M3): da t %g; Welch Hann segmenti %s a meta'; periodi da %g a L/2; il nullo AR(1) al %g%% con Bonferroni; s %g"
           % (T_DA, SEGMENTI, P_MIN, 100 * (1 - ALFA), s))
+    if INCR[0]:
+        print("### (q-a, Luca 01:31) sugli INCREMENTI: un'oscillazione di periodo P resta, attenuata di 2 sin(pi dt / P): a dt 1.5, P %g -> %.5f, P 1500 -> %.5f (dichiarato)"
+              % (P_SENO, 2 * math.sin(math.pi * 1.5 / P_SENO), 2 * math.sin(math.pi * 1.5 / 1500.0)))
     print("=" * 130)
     # ------------------------------------------------------------ i controlli, sulla lunghezza e il phi dello spostamento di TB3
     t3, s3 = ST.serie_singolo("TB3", s)
@@ -159,7 +173,7 @@ def main():
     ok_p = True
     note = []
     for L in SEGMENTI:
-        sopra, forte, passo, _phi, _nu, _K = picchi(tt, togli_retta(tt, seno), L)
+        sopra, forte, passo, _phi, _nu, _K = picchi(*prepara(tt, seno), L)
         trovato = bool(sopra) and abs(sopra[0][0] - P_SENO) <= sopra[0][0] ** 2 / L   # ### il massimo PIU' FORTE, entro un bin
         ok_p = ok_p and trovato
         note.append("L %.0f: %s" % (L, ", ".join("%.0f (%.2f)" % q for q in sopra) or "nessuno"))
@@ -167,7 +181,7 @@ def main():
     falso = False
     note = []
     for L in SEGMENTI:
-        sopra, forte, passo, _phi, _nu, _K = picchi(tt, togli_retta(tt, rum), L)
+        sopra, forte, passo, _phi, _nu, _K = picchi(*prepara(tt, rum), L)
         falso = falso or bool(sopra)
         note.append("L %.0f: il piu' forte P %.0f a %.2f della soglia" % (L, forte[0], forte[1]))
     esito("PE-N l'AR(1) PURO: un picco sopra la soglia", falso, "; ".join(note), deve=False)
@@ -206,4 +220,5 @@ def main():
 
 
 if __name__ == "__main__":
+    INCR[0] = "--incrementi" in sys.argv[1:]
     sys.exit(main())
