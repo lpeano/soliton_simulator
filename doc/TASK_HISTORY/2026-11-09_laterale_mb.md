@@ -441,3 +441,16 @@
   1. **F1-V:** **una deriva di `~1e-15` in `50` tick nel vuoto e' accettabile** *(una soglia per tick, dichiarata)*, **o il vuoto deve restare al bit** *(e allora il trapezio va scritto in modo che con `L = cs` dia `cs` esatto: per esempio `cs + r (L - cs) / (1 + r/2)`, che a `L = cs` da' `cs` al bit)*?
   2. ### **(q1) contro (q2):** **che cosa e' `cs'` quando `cs` e' una memoria?** **I numeri dicono: con `cs'` della legge e' instabile, con `cs' = 0` no.** **E' una scelta di fisica.**
   3. **`r` oltre `2`** *(in (q1))*: **il battito del vuoto come tempo di memoria va limitato, o ricavato diversamente?**
+
+## 21. LE DECISIONI DI LUCA DELLE `18:46` SU F1, E LA FORMA CHE NE SEGUE *(prima del codice)*
+
+- **REGISTRATO** *(Luca)*:
+  - **(4) il vuoto resta AL BIT;**
+  - **(5) `cs'` dentro il tick: (q2), `cs' = 0`**; **la memoria si aggiorna solo al confine** *(`A15`)*;
+  - **(6) `r` NON si limita a mano: si DERIVA dal rilassamento ESATTO su un passo** *(`dcs/dt = omega (L - cs)` integrato su `dtau`: `cs_nuovo = L + (cs - L) e^{-omega dtau}`, cioe' `r = 1 - e^{-omega dtau}`, sempre in `(0, 1)`)*; **`omega` il battito locale del vuoto.**
+- ### **LA FORMA, la mia lettura di (4) e (6) insieme** *(dichiarata)*: **`cs_nuovo = cs + r (L - cs)`, `r = 1 - e^{-omega}`** *(`omega` la rotazione del vuoto nel tick: gia' «per tick»)*.
+  - **E' il rilassamento esatto di (6)**, **e a `L = cs` da' `cs` AL BIT** *(`r x 0 = 0`: (4))*. **La forma del trapezio esatta di (4)** *(`cs + r (L - cs) / (1 + r/2)`)* **e' del trapezio, non del rilassamento esatto: con (6) non serve.**
+  - **L'inversa:** **`cs = (cs_nuovo - r L) / (1 - r)`** *(esiste: `r < 1`)*.
+- ### **I DEVE:** **F1-V al BIT** *(il vuoto F3, `50` tick: `cs == s`, ogni nodo, ogni tick)*; **F1-I** *(l'inversa nuova, `1e-14` relativo)*; **F1-F** *(DEVE FALLIRE: la regola invertita col trapezio)*.
+- ### **LA PREVISIONE, scritta prima** *(di Luca)*: **dove `r` valeva `~0.47`, ora `~0.37`** *(`1 - e^{-0.471} = 0.376`)*; **la crescita di (q2) scende**; **ma la stabilita' vuole `r < ~0.1`** *(la mia stima, sez. `18.5`)*: ### **se la perturbazione cresce ancora: FERMO, con la proposta di un tempo di memoria piu' lento** *(per esempio la risposta di `Lambda`)* **e le sue letture.**
+- **La prova:** **(q2) solo; `200` tick; se la differenza a `200` resta sotto `1e-4`, si va a `1000`** *(«e oltre, se stabile»: la soglia `1e-4` e' mia, dichiarata)*.
