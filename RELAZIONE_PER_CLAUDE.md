@@ -24981,3 +24981,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **`C35-0` (in fase): (d2)** *(l'ampiezza `7.97`, `7.00`, `6.71` entro `2` errori; la media `24.09`, `23.34`, `23.02`; la pendenza `-1.04 +- 1.37` per `100000` tick)*: **un battimento lento, non una deriva.**
 - ### **`C35-pi` (in opposizione): un caso FUORI dalle letture scritte:** **l'ampiezza si STRINGE** *(`0.76`, `0.29`, `0.15`)* **e la media SALE** *(`36.53`, `37.55`, `37.98`; la pendenza `+1.15 +- 0.20` per `100000` tick)*: **si allontana piano e si calma** *(lettura mia)*. **La prima lettura del guardiano era su `x`, il centro periodico di tutta la `rho`, non sulla distanza: `d/2` la smentisce.**
 - **Il passo successivo: `C50-0`.**
+
+### 2026-11-10 18:05 -- `C50-0` PARTITA, DA `0` A `200000` TICK *(l'ultimo allungamento della coda; il task history `2026-11-07_allungamenti_coppia_30000`, punto `5`)* [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **Il driver dei pezzi** *(`bash driver_corsa.sh C50-0`, col file-semaforo `FERMA`)*, **dalle `18:02:21`** *(`orari_prove`)*, **a `2ba73a25`;** **il `C0` breve all'inizio, come le altre.** **La stima del task history: `~22` ore** *(`200000` tick)*; **la stima vera dopo il primo pezzo.**
+- **Prima di partire** *(dall'uscita di `df` e `psutil`, `18:02:09`)*: **`C:` `11` GB liberi su `476`** *(qui solo i jsonl, `~2` MB a pezzo)*; **`E:` `211` GB liberi** *(le mappe e gli stati: `S162` ne ha usati `322` MB e `182` MB)*; **la RAM libera `11.2` GB su `34.1`; `12` CPU logiche.**
+- ### **Il suo referto vuole ancora una decisione di Luca:** **il singolo di riferimento col bordo di `C50`** *(`R_A 55`: `S162` ha quello di `C35`; la carta rifiuta `C50-0`)*.
+- **Sul laterale: FERMO su H4** *(il DEVE di (v0) fallito, `2389b8e2`)*.
