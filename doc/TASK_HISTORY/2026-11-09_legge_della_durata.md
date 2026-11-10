@@ -64,3 +64,28 @@
 
 1. **Questo task history, committato.** **La riga nella MAPPA e nella voce `35`.**
 2. **Dopo la prova sul cuore e (r-D5):** **L1** *(prima la lettura del codice su `M_dentro`)*, **L2, L4**, **ciascuno col suo script e il suo referto, committati prima di girarli.**
+
+## 4. ANNOTAZIONE PRIMA DEL CODICE DI L1 *(`2026-11-10`)*: **IL CUORE VERO, DAL CODICE, E IL CRITERIO PRECISATO**
+
+### 4.1 IL CUORE VERO
+
+- **Letto dal codice:** **`csv/solitone/misure.campione`** *(chiamato dalla corsa a ogni campione, ogni `10` tick)* **da' `f_liscia`:**
+  - **la frazione della massa `rho` entro `w_in` dal BARICENTRO del momento** *(che si muove col solitone)*,
+  - **con una rampa larga un arco** *(`clip((w_in + h/2 - d)/h, 0, 1)`: senza i salti di un nodo che attraversa il bordo)*,
+  - **`w_in` la larghezza iniziale** *(`DC.forma(z, w0)[0]`, `corsa_accensione`)*.
+- ### **E' gia' il «cuore» della corsa:** **la tabella a blocchi di `corsa_accensione.tabella` lo stampa con quel nome.**
+- **`f_liscia` e' una FRAZIONE di `M`, la massa sul toro** *(che cala con l'assorbimento al bordo)*. ### **Il cuore vero, in massa: `M_cuore(t) = f_liscia(t) · bordo.M(t)`**, **dagli stessi campioni** *(`campioni[i]["f_liscia"]` e `campioni[i]["bordo"]["M"]` dei jsonl)*.
+- **`M_dentro`** *(la prova del cuore)* **resta quello che e': la massa dentro il bordo, cioe' tutto cio' che non e' ancora assorbito.**
+
+### 4.2 IL CRITERIO, PRECISATO PRIMA DEI NUMERI *(la sez. `2`, L1, resta: qui solo cio' che mancava)*
+
+- **I dati:** **`TB3` e `TBS`, i jsonl `doc/referti_l2/accensione_lenta/<nome>_<tick>.jsonl`** *(`20` pezzi ciascuno, `t` da `0` a `200000` tick, `s 0.15`: `30000` unita')*; **il tempo in unita' `t · s`.**
+- **Le medie su finestre consecutive di `P = 311` unita'** *(per tutti e due, come scritto)*, **da `t 1000`:** **ogni finestra intera dentro i dati; il punto e' (la media del tempo, la media di `M_cuore`).**
+- **I tre fit:** **minimi quadrati sulle medie** *(`scipy.optimize.curve_fit`; il lineare in forma chiusa)*; **`k` = `2` per l'esponenziale e il lineare, `3` per la potenza.**
+- ### **`N_eff`:** **`tau_int` di Sokal** *(la finestra automatica: il primo `W` con `W >= 5 tau_int(W)`)* **dei residui di CIASCUN modello;** **`N_eff = N / (2 tau_int)`, e per il confronto si usa il PIU' PICCOLO dei tre** *(il piu' prudente: AIC piu' vicini)*.
+- ### **`AIC_m = N_eff · ln(RSS_m / N) + 2 k_m`** *(l'AIC dei minimi quadrati, coi punti efficaci)*. **Le soglie `10` e `2` come scritte.**
+- ### **IL CONTROLLO DI SCALA E I DEVE** *(per «una misura vuole un controllo di scala»)*:
+  - **(L1-P) DEVE PASSARE:** **una serie SINTETICA esponenziale** *(sugli stessi tempi delle medie, `tau` = un terzo della finestra osservata, piu' i residui del fit esponenziale dei dati come rumore)*: **il criterio dichiara vincitore l'esponenziale;**
+  - **(L1-F) DEVE FALLIRE:** **una serie sintetica LINEARE** *(stessa pendenza iniziale, stessi residui)*: **«vince l'esponenziale» deve fallire;**
+  - **(L1-S, stampato)** **la sensibilita':** **lo scarto massimo fra il fit esponenziale e quello lineare dei dati, in unita' della deviazione dei residui:** **se e' sotto `1`, la finestra NON PUO' distinguere le forme, e lo si scrive accanto alla lettura.**
+- **Lo script `csv/solitone/durata_l1.py`** *(nuovo, non nel percorso di S162)*, **il referto `doc/referti_l2/durata_l1.txt`.**
