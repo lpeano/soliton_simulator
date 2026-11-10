@@ -160,3 +160,8 @@
 9. ### **`DEC-D7-DIVISIONE`: `presa: False`, e la nota dice «da CANDIDATA a PRESA».** ### ⚠ *(ANNOTATO il `2026-10-25`, dopo la conferma di Luca delle `20:44`: NON e' un errore dell'albero. La stessa nota, piu' sotto, dice che `D7` dipende da `DEC-FC-COESIONE`, non presa, e che `P-ALB` rifiuta; l'avevo scritto senza leggere quella riga. Provato di nuovo: [[DOMANDA-D7-DIPENDE-DA-FC]].)*
 10. ### **IL MANDATO:** ### **«il tempo proprio `tau = 1 + |torsione|/PHI_CRIT` e `KERNEL_ALPHA`»: il kernel usa `|tw|/PHI_CRIT` SENZA l'`1`** *(`6251`)*; ### **«la soglia locale pilotata dal gradiente di tempo proprio»: TOLTA il `2026-10-06`** *(`8417`-`8428`)*.
 11. ### **due commenti scaduti dell'era `2`:** ### **`motore.cresci`** *(«a zero» a `330`, il codice scrive `iniziali`)*.
+
+## 7. IL TEMPO A EVENTI E L'ETA' DEI NODI *(`2026-11-10`)*
+
+- **L'analisi di Luca e del guardiano del `2026-11-10`** *(`14:05`-`14:24`, solo scrittura)*: **`doc/TASK_HISTORY/2026-11-10_tempo_a_eventi_e_mitosi.md`**. **Il tick come scalino** *(Luca `14:05`)*; **due specie di eventi, lo scambio e la nascita** *(Luca `14:18`)*; **l'eta' di un nodo appena nato: i figli ereditano il conteggio del padre, `+1`** *(proposta del guardiano, ORIENTAMENTO di Luca `14:22`, non una decisione)*; **la conservazione locale dell'energia come REQUISITO** *(Luca `14:22`)*: **lo scalino della mitosi come costo locale di un nodo nuovo** *(proposta)*.
+- ### **Le forme del par. `3` restano come sono: NESSUNA scelta.**

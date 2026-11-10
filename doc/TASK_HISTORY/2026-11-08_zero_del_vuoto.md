@@ -22,6 +22,7 @@
 - **Con O1 l'energia del vuoto per nodo e' costante** *(`epsilon_v`, dal battito `-pi s` per norma)* **e il totale cresce col numero dei nodi `N`.** ### **SE il tasso di mitosi fosse legato all'energia del vuoto per nodo** *(una DENSITA' costante)*: **`dN/dt = Gamma(epsilon_v) N`**, quindi ### **`N(t) = N_0 exp(Gamma t)`: l'espansione ESPONENZIALE** *(de Sitter)*, **l'energia del vuoto, piccola localmente, motore della crescita globale.**
 - ### ⚠ **Le cautele, scritte:** **(1) in relativita' conta la DENSITA', non il totale: il meccanismo e' LOCALE** *(ogni pezzo di spazio spinge un poco)*; **(2) `Gamma(epsilon_v)` NON e' derivato: oggi sarebbe una costante scelta** *(`A1`)*, **e va derivato dal bilancio della mitosi** *(la voce `35`)* **prima di poter dire «esponenziale» come previsione.**
 - **Con O2 e O4 questo motore non c'e': serve un ALTRO motore per l'espansione.**
+- **(`2026-11-10`)** **il tasso `Gamma` derivabile dal costo locale della nascita:** vedi `doc/TASK_HISTORY/2026-11-10_tempo_a_eventi_e_mitosi.md`, sez. `5`.
 
 ## 4. LA MISURA PER SCEGLIERE *(da progettare, non da fare)*
 
