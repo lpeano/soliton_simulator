@@ -937,3 +937,63 @@
   2. **Confermare il FALSO-UNO di F1-V:** **(v0) con `F3` a fase `1`, con e senza un seme `1e-14`?**
   3. **F4 e la sua scena:** **con un vuoto F1 instabile da solo, la rampa di F4 ha ancora senso, o serve prima capire l'instabilita'** *(il suo tasso `~0.16` per tick contro le scale del tick)*?
 - ### **LA TABELLA H1-H4** *(provvisoria: (i-q) manca)*: **H1 non regge; H2 non misurata; H3 non regge; H4 REGGE** *(u1)*, **e piu' forte di come era scritta: non servono nemmeno i disturbi, basta l'arrotondamento.**
+
+## 28. IL VUOTO COL TEMPO LOCALE E' INSTABILE: PERCHE'? *(Luca `2026-11-10` `19:37`, dopo H4 `2389b8e2`)*: **S0, E S1/S2 PRIMA DEL CODICE**
+
+### 28.0 S0: LE RISPOSTE DI LUCA ALLE TRE DOMANDE DI 27.11, E LA TABELLA H1-H4 DEFINITIVA
+
+- **Le risposte di Luca** *(`19:37`)*:
+  1. ### **(i-q) NON si fa: (v0) basta.**
+  2. ### **Il FALSO-UNO di F1-V si conferma: S1.**
+  3. ### **F4 ASPETTA: prima si capisce l'instabilita' (S2).**
+- ### **E una lettura mia che NON era giustificata, scritta da Luca:** **«e1» (pochi nodi, dalla media lontana di `cs` in (i))** **non si usa:** **la media di una distribuzione cosi' storta la tirano su i nodi con `Lambda` alto.** *(Il mio errore: una media letta come un indizio sulla forma della distribuzione.)*
+- **I vincoli del mandato:** **nessuna modifica al nucleo, nessuna TARATURA;** **le scansioni di S2 su `Lambda_c`, `s`, `Lambda` sono una MAPPA: non si sceglie nessun valore;** **il vuoto F3;** **un test breve alla volta** *(sul principale gira `C50-0`)*; **le suite aspettano se girano gia' due processi.**
+- ### **LA TABELLA H1-H4, DEFINITIVA:**
+
+| | l'ipotesi | l'esito | dove |
+|---|---|---|---|
+| **H1** | la storia del bordo | **NON REGGE** | 27.5-27.7, 27.9 |
+| **H2** | l'antipodo | **NON MISURATA, SUPERATA** *(H4 spiega la discesa senza il bordo)* | 27.8, 27.9 |
+| **H3** | lo shock dell'accensione | **NON REGGE** | 27.6, 27.9 |
+| **H4** | il vuoto col tempo locale non regge i disturbi | ### **REGGE, e piu' forte di come era scritta:** **basta l'arrotondamento, senza disturbo** | 27.11 |
+
+### 28.1 S1, IL FALSO-UNO DI F1-V: **LE PREMESSE DAL CODICE, IL PROGETTO, LE LETTURE** *(prima del codice)*
+
+- **Dal codice** *(`csv/solitone/corsa_accensione.py` `vuoto_della_corsa` -> `_solitone_dal_fondo.fondo_con_fasi`)*: **F3 e' un flusso costante PER DIREZIONE** *(la coda `+e^{i theta_d}`, la testa `-e^{i theta_d}`)*: **lo stesso valore in ogni cella, a meno della direzione** *(quindi un vuoto invariante per traslazione di un nodo)*. **«A fase `1`» = `phi_v` com'e', «`c(10000) F3`» = `phi_v` per la fase globale `c` della tabella `fase_F3.npz`.** **Se le componenti di F3 a fase `1` siano reali, lo stampa lo script** *(`max |Im phi_v|`)*: **in 27.11 l'ho scritto senza stamparlo.**
+- **Le corse** *(un solo script, `csv/solitone/s1_falso_uno.py`; F1 come T2 e H4: il rilassamento esatto, (q2), il bordo spento, `Lambda_c` = quello di T2)*:
+  - **(v0a)** **F3 a fase `1`, senza seme, `1000` tick;**
+  - **(v0b)** **lo stesso piu' un seme `1e-14`:** **un rumore gaussiano complesso BIANCO** *(per estremita', seme fisso `CPF.SEME`)*, **reso ortogonale a F3 e riscalato a rms `1e-14` per estremita'; la norma conservata come in H4** *(`phi = alpha F3 + delta`, `alpha = sqrt(1 - |delta|^2/|F3|^2)`)*; **`1000` tick;**
+  - **(v0c)** **`c(10000) F3` senza seme, `400` tick:** ### **DEVE ridare (v0) di H4 AL BIT:** **(1) lo stato `phi` ai tick `200` e `400` uguale al bit a quello di `h4_vuoto.corsa`** *(il codice che ha prodotto (v0), importato e rigirato a `200` e a `400` tick)*; **(2) le righe ai tick `200` e `400`, nel formato di `h4_vuoto.stampa`, uguali AL CARATTERE a quelle di `doc/referti_l2/h4_vuoto_disturbato.txt`.**
+- **Ogni `10` tick:** **la rms di `Lambda`, `cs` min, la frazione dei nodi sotto `1e-2`** *(e accanto, `cs` medio e `Lambda` medio)*.
+- **Il tasso** *(fissato qui)*: **la pendenza di `ln` della rms di `Lambda` contro il tick, sui campioni con la rms fra `1e-12` e `1e-4`** *(la crescita lineare: sopra il seme, sotto la saturazione)*; **il tasso di (v0) e' quello di (v0c) con la stessa finestra** *(e accanto il `0.158` di 27.11, che era a passo `50`)*.
+- ### **LE LETTURE (di Luca):**
+  - **(z1)** **(v0a) resta uniforme** *(la rms di `Lambda` sotto `1e-13` per `1000` tick)* **E (v0b) cresce col tasso di (v0) entro il `5%`:** ### **il falso-uno e' confermato; l'instabilita' c'era anche in T2, senza seme.**
+  - **(z2)** **altrimenti: si scrive senza interpretare.**
+- **Le conseguenze, da elencare nell'esito** *(dal codice, gia' letto)*: **F1-V di T2** *(`carta_f1_lunga.py`: `st["phi_h"][...] = phi_v`, fase `1`)*; **F1-V di (i)** *(`b1_profilo.py`: lo stesso)*; **F1-V di `d2689b81`** *(`carta_f1.py` a quel commit: `phi_v`, «`cs = s` al bit» -- e FALLIVA, sez. 22)*; **T1** *(`lambda_vuoto_deriva.py`: `phi_v`, ma a `cs` FISSO `0.15` e `lambda_c = None`: senza la legge di `cs` l'instabilita' non c'e' per costruzione)*.
+
+### 28.2 S2.0: LO SPETTRO DI STABILITA' LINEARE DEL VUOTO CON LA LEGGE DI `cs` -- **LE PREMESSE DAL CODICE** *(prima del codice)*
+
+- **(a) Le variabili.** **`phi`: `6` complessi per cella** *(le `6` estremita' dei `3` archi del nodo, arc-major: 27.4.6)*, **cioe' `12` reali;** **`cs`: `1` reale per nodo** *(con F1 `cs` ha memoria: e' una variabile; con la legge istantanea e' una funzione di `Lambda`, ma la tengo nel vettore -- vedi (L-ist))*. **`psi`: `12` complessi per cella** *(`6` estremita' x `2` spin)*. ### **`psi` a `psi = 0`: NON lo so dal codice** *(i flussi materia-vuoto, posizioni `0` e `13`, `CAMM-MATERIA-VUOTO`, non li ho letti per intero)*: **lo MISURO** -- **la risposta di `phi`, `cs` a un `delta psi` e di `psi` a `delta phi`, `delta cs`, con le differenze simmetriche** *(un termine quadratico in `psi` si cancella esattamente nella differenza simmetrica)*. **Se le due risposte incrociate sono zero** *(sotto `1e-12` relativo)*, **`psi` si stacca al primo ordine e si toglie** *(dichiarato, con lo spettro del suo blocco stampato accanto)*; **altrimenti resta nel vettore** *(`37` reali per cella)*.
+- **(b) Il riferimento che gira.** **`c F3` e' un autostato del tick a meno della fase `e^{-i omega}`** *(C0 di `C50-0`: lo scarto da `c(t) F3` `3.968e-14` a `200` tick)*. **La mappa linearizzata e' quella di un tick seguito dalla rotazione `e^{+i omega}` di `phi`;** **`e^{-i omega}` si misura sulla base** *(`<phi_0, phi_1> / |<phi_0, phi_1>|`, un tick)*. **Il residuo della base** *(`|e^{i omega} phi_1 - phi_0|`, `|cs_1 - cs_0|`)* **si stampa per ogni punto:** ### **se un punto della mappa NON e' un punto fisso** *(il residuo oltre `1e-10` relativo)*, **la linearizzazione li' non vale, e lo dico** *(non lo correggo)*.
+- **(c) La rappresentazione reale:** **`cs` dipende da `|phi|^2`, quindi la mappa NON e' lineare in senso complesso;** **il vettore della cella: `Re phi` (`6`), `Im phi` (`6`), `cs` (`1`) = `13` reali** *(piu' `psi` se (a) lo tiene)*.
+- **(d) L'invarianza per traslazione:** **la risposta `R(x)` a un impulso in ognuna delle `13` direzioni della cella del nodo `0`, con differenze simmetriche** *(`a = 1e-6` relativo alla scala della componente: `|phi|` per estremita', `cs` della base)*; **`A(k) = somma_x R(x) e^{-i k x}`** *(`fft2` sulla griglia `L x L`)*, **`13 x 13` per ognuno dei `6561` `k`.** **I controlli:** **la linearita' `|R(2a) - R(a)| / max|R|` sotto `1e-6`** *(per ogni punto)*; **l'invarianza: la risposta a un impulso in un altro nodo, traslata, uguale a quella del nodo `0`** *(sotto `1e-9` relativo)*.
+- **I casi** *(S2.1)*:
+  - **(L-F1)** **F1 come nelle corse:** **`cs' = cs + r (L(Lambda') - cs)`, `r = 1 - e^{-omega_v}`, (q2)** *(`cs_primo_zero`)*;
+  - **(L-ist)** **la legge istantanea:** ### **la stessa mappa con `r = 1`** *(`cs' = L(Lambda')`: il `cs` del tick dopo e' quello di `Lambda` all'inizio di quel tick, senza memoria)*, **e (q2) come (L-F1)**: ### **una SCELTA MIA, dichiarata:** **cosi' (L-ist) e (L-F1) differiscono SOLO per la memoria.** **La legge istantanea DEL NUCLEO** *(`tick.tick_con_cs`: `cs` al centro del palindromo a punto fisso, col termine `CAMM-FASE-VUOTO` acceso)* **e' un ALTRO oggetto, e qui NON si misura** *(lo segnalo a Luca)*.
+  - **Il caso di oggi:** **`Lambda = 6`, `Lambda_c` di T2** *(`34`, dalla media di `Lambda`)*, **`s = 0.15`.**
+- **La mappa** *(S2.2, senza scegliere niente)*: **`Lambda_c` in `{8.5, 17, 34, 68, 136, 340}` a `Lambda = 6`** *(`cs` del vuoto `6/(6 + Lambda_c)`, stampato)*; **`s` in `{0.05, 0.15, 0.3}` con `Lambda_c = (6 - 0)(1 - s)/s`** *(`114`, `34`, `14`)*; **`Lambda` del vuoto in `{6, 3, 1, 0.5, 0.1}` a `Lambda_c = 34`** *(`phi = c F3 sqrt(Lambda/6)`)*. **I punti ripetuti si contano una volta:** **`12` punti, per (L-F1) e (L-ist).**
+- **Per ogni punto:** **`|lambda|_max` e `ln |lambda|_max` per tick; il `k` dove sta** *(`|k|` con l'immagine minima, la direzione in gradi, e quanti `k` equivalenti)*; **l'autovettore:** **la frazione in `cs` e in `phi`;** **la banda di `phi`:** **i pesi della parte `phi` sugli autovettori del blocco `phi -> phi`** *(il tick a `cs` congelato, unitario)*, **coi due pesi piu' grandi e la loro `omega`;** **`k = 0` o `k` finito.**
+- **Il meccanismo, dalla matrice al `k` piu' instabile** *(una LETTURA della matrice)*: **per l'autovalore `lambda` vale `lambda - A_cc = g(lambda)`, `g = A_cphi (lambda - A_phiphi)^{-1} A_phic`;** **`g` si scompone per bande:** **`g = somma_b (A_cphi e_b)(e_b^H A_phic) / (lambda - lambda_b)`;** **stampo `A_cc` (`= 1 - r` atteso), le norme di `A_cphi` e `A_phic`, e i contributi di bande piu' grandi con `lambda - lambda_b`.**
+- **I DEVE:**
+  - **a `cs` spento lo spettro e' unitario:** **`max ||lambda| - 1|` sotto `1e-9`** *(`12` reali per cella, `mot.cs = None`, `mot.lambda_c = None`)*;
+  - **nel caso di oggi (L-F1) il tasso piu' grande riproduce `0.158` per tick entro il `5%`** *(il `0.158` di 27.11)*;
+  - **un'onda piana seminata nella simulazione sul `k` piu' instabile** *(la parte reale dell'autovettore per `e^{i k x}`, ampiezza massima `1e-11`; la simulazione di F1 vera, `100` tick, contro un gemello senza onda)* **cresce col tasso dello spettro entro il `5%`** *(la pendenza di `ln` della differenza fra il tick `20` e il `100`)*;
+  - ### **DEVE FALLIRE:** **a `cs` spento, un fattore `(1 + 1e-3)` su `phi` dopo il tick** *(il «pezzo» e' l'ultimo: lo applico a TUTTA `phi`, quindi il modo giusto sono TUTTI -- una scelta mia, dichiarata)*: **deve comparire `|lambda| = 1.001` entro `1e-9`, su ogni `k`;** **e il DEVE dell'unitarieta' su quella mappa DEVE FALLIRE.**
+- ### **LE LETTURE (di Luca):**
+  - **(w1)** **(L-ist) e' gia' instabile nel caso di oggi:** **la colpa e' della LEGGE, non della memoria;**
+  - **(w2)** **(L-ist) stabile e (L-F1) instabile:** **la colpa e' della MEMORIA di F1;**
+  - **(w3)** **nella mappa esistono zone stabili:** **le riporto come mappa** *(`Lambda_c`, `s`, `Lambda`)*, **coi confini. NESSUNA scelta;**
+  - **(w4)** **instabile in tutta la mappa:** **il vuoto con questa legge del tempo locale e' instabile per costruzione.** ### **FERMO: la decisione e' di Luca.**
+  - **«Stabile»** *(il mio dettaglio, dichiarato)*: **`|lambda|_max - 1` sotto `1e-9`** *(la soglia del DEVE unitario)*.
+- **Il costo** *(stima: `~0.16` s per tick)*: **`53` tick per punto e caso** *(la base e `13 x 4` differenze)*, **`24` linearizzazioni, piu' `psi`, i controlli, l'onda piana:** **~`2000` tick, ~`6` minuti.** **Il referto `doc/referti_l2/s2_spettro_vuoto_cs.txt`; lo script `csv/solitone/s2_spettro.py`.**
+- ### **DOPO S2: FERMO.** **F4, la forma della legge, e qualunque cambio di `Lambda_c` o di `s` sono di Luca.**
