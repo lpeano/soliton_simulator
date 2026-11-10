@@ -752,3 +752,53 @@
 3. **b2** *(`L 162`)*: **resta com'e' scritta**, ma **col bordo acceso o spento va detto**: con la premessa caduta, **non e' piu' «un'altra via per (c1)»**.
 
 **Il criterio di chiusura della domanda:** **la decisione di Luca su 1-3** *(o un disegno suo)*.
+
+
+### 27.4 B1.0-bis *(Luca `2026-11-10` `13:42`)*: **B1 RIDISEGNATO, PRIMA DEL CODICE**
+
+**La decisione di Luca:** **la corsa col bordo acceso (la proposta 1 della sez. `27.3`) NON si fa.** **Tre ipotesi, una per corsa:** **H1** la storia del bordo; **H2** il toro finito *(l'antipodo a `40.5`)*; **H3** il colpo dell'accensione di F1. **L'ordine: (i), (iv), (ii), (iii).** **F1 come in T2** *(il rilassamento esatto, (q2); F1-V come lettura)*; **nessuna modifica al nucleo; vuoto F3.**
+
+#### 27.4.1 LE VELOCITA' CON CUI CONFRONTARE UN FRONTE *(in nodi per tick, con la provenienza)*
+
+| | la velocita' | la provenienza |
+|---|---|---|
+| **il cono del tick** | **`1` nodo per tick** *(dal codice; MISURATO dallo script (i): il supporto della risposta a un impulso dopo un tick)* | **`composizione.ORDINE`, 14 posizioni:** **`psi` salta in `4` e `9`** *(`hop_psi`: `alpha I + beta S_U` sull'arco, due mezzi sugli STESSI archi)* **e fra `4` e `9` nessun pezzo rimescola `psi` sul nodo** *(`5`-`8` sono del vuoto)*: **netto, un arco;** **`phi` salta in `6` e `7`, consecutivi, sugli stessi archi:** un arco; **materia e vuoto si scambiano solo in `0` e `13`** *(i flussi, sul posto)*: **nessun cammino fa due archi in un tick.** |
+| **`v_max` della materia** | **`0.08819` nodi per tick** *(`0.58795` per unita' di tempo `x` `s 0.15`)* | **`doc/referti_l2/bordo_riflessione.txt`** *(`carta_bordo.py`, la scena di `TB3`, `cs` SPENTO, il tick congelato di `DV.matrice`)*: **`|v_g|` piu' grande della banda `B`, `0.58795`.** *(Coincide con `v_max/s` di P1/T5, `0.588137` a `s 0.15`, `eps 0.5`, sul principale.)* ### ⚠ **E' a `cs` spento e sulle sole bande `B`:** **la materia sotto F1 nel vuoto** *(dove `cs = s` al bit, F1-V)* **la MISURA lo script (i)** *(sotto)*. |
+| **la velocita' di gruppo piu' grande del vuoto F3** | **non c'e' nel repo:** **la MISURA lo script (i)** | **Il metodo, fissato qui:** **la risposta lineare del tick INTERO** *(F1, (q2), `cs` = quello del vuoto)* **attorno a `psi = 0`, `phi = F3`:** **`R_c(x) = (tick(stato + a e_c) - tick(stato)) / a`** per ognuna delle `18` componenti del nodo `0` *(`12` di `psi`, `6` di `phi`)*, `a = 1e-6`; **`A(k) = sum_x R(x) e^{-i k.d(x)}`** *(`d(x)` lo scarto cartesiano dal nodo `0`, l'immagine piu' vicina)*; **`omega_n(k) = -arg lambda_n`**, **`v_n = d omega_n / dk` per Hellmann-Feynman** *(`dlambda = <u_n| dA |v_n> / <u_n|v_n>`, coi vettori sinistri e destri: niente differenze finite, niente salti fra bande)*. **Il massimo di `|v_n|`, separato per le bande di `psi` e di `phi`.** **I controlli:** **la linearita'** *(`R(2a)/2` e `R(i a)/i` contro `R(a)`, stampati)*; **il cono** *(la distanza piu' grande con `R != 0`)*; **`A(k)` unitaria** *(`|lambda| = 1`, stampato)*. **Se la risposta NON e' lineare in senso complesso** *(oltre `1e-6` relativo)*: **la velocita' del vuoto non si legge da `A(k)`, lo si scrive, e il confronto (f1) si fa con le altre due.** |
+
+#### 27.4.2 IL PROFILO E IL FRONTE *(per le quattro corse; le mie scelte, dichiarate)*
+
+- **Gli anelli:** **`campo.anelli` dal centro di `rho` allo stato di partenza** *(`TO.centro`, come T2; il centro resta fisso nella corsa)*; **l'anello `k = floor(r)`.** **Ogni `50` tick, per ogni anello:** **`cs` min, `cs` medio, `Lambda` medio** *(stampati per intero)*; **e `cs` min col suo raggio** *(il raggio di T2: `hypot` di `TO.scarti`; lo script stampa lo scarto massimo fra le due metriche)*.
+- ### **IL RAGGIO DEL FRONTE `r_f(t)`:** **l'anello col `cs` MEDIO piu' basso** *(il profilo medio: il minimo globale salta fra nodi, T2 lo mostra; stampato accanto anche l'anello del minimo globale)*.
+- ### **IL TRATTO IN MOTO:** **dal primo campione** *(tick `50`)* **al primo campione in cui `r_f` tocca il suo massimo della corsa;** **un fit lineare `r_f(t)`** sul tratto: **`v_f`**, **l'errore** *(l'errore standard della pendenza, dai residui)*, **il RMS dei residui**, **il passo all'indietro piu' grande** *(in anelli)*.
+- ### **LE LETTURE (f1)/(f2)** *(Luca; le soglie in anelli sono mie: `1` anello e' la risoluzione del profilo)*:
+  - **(f1) c'e' un fronte:** **il tratto ha almeno `3` campioni, il RMS dei residui `<= 1` anello, nessun passo all'indietro `> 1` anello, e `v_f` entro il `20%` di una delle velocita' di 27.4.1** *(si dice di quale)*;
+  - **(f2) niente fronte:** **il tratto ha meno di `3` campioni** *(il minimo non viaggia)*, **oppure il RMS `> 2` anelli, oppure un passo all'indietro `> 2` anelli** *(salti)*;
+  - **in mezzo** *(continuo ma `v_f` lontana da tutte, o RMS fra `1` e `2`)*: **caso intermedio, scritto cosi'.**
+- **La pendenza di `ln(cs min)` nell'ultimo terzo:** **la definizione di T2** *(`carta_f1_lunga.pendenza` sui campioni ai multipli di `100` oltre i due terzi)*.
+
+#### 27.4.3 LE QUATTRO CORSE *(un solo script, `csv/solitone/b1_profilo.py --corsa i|iv|ii`; (iii) dopo, col suo controllo del raccordo)*
+
+- **(i) b0, T2 rifatto col profilo:** **lo stato di `TBS` a `10000`, F1, `5000` tick** *(il tetto di 60 minuti come in T2)*; **prima, il vuoto F3 da solo `5000` tick per F1-V** *(come T2)*.
+  - **DEVE PASSARE (i-B):** **il ciclo nuovo ridà AL BIT, ai tick `100` e `1000`, l'array `cs` INTERO di `carta_f1_lunga.corsa`** *(il codice di T2, importato, girato `1000` tick sulla stessa partenza)*, **e le stringhe di `cs` min e del raggio uguali a quelle del referto di T2** *(`%.6f`, `%.2f`)*.
+  - **DEVE FALLIRE (i-F):** **`cs` disturbato di `1e-12` sul nodo del centro al tick `0`:** **lo stesso controllo al tick `1000` deve dire di no.**
+  - **Il fronte, (f1)/(f2).**
+- **(iv) F1 acceso piano (H3):** **il valore verso cui F1 rilassa, `L~_k = s + lambda_k (L - s)`, `lambda_k = sin^2(pi k / (2K))`, `K = 1000`;** **per `k >= K` si usa `L` STESSO** *(F1 pieno: non `s + 1·(L - s)`, che puo' differire di un ulp)*. **`cs` al tick `1` e' `L~_1` dello stato di partenza; dopo il tick `k`, `cs <- cs + r (L~_{k+1} - cs)`.** `5000` tick, lo stesso profilo.
+  - ### ⚠ **IL DEVE DI LUCA «con `K = 1` ridà (i)» sarebbe un FALSO-UNO** se confrontato con (i): **a `K = 1` il ciclo E' quello di (i), lo stesso codice.** **Quindi (iv-B) confronta `K = 1` col codice di T2** *(`carta_f1_lunga.corsa`, `1000` tick, AL BIT ai tick `100` e `1000`)*: **e' il controllo indipendente.** **E un controllo che la rampa agisca:** **a `K = 1000`, `max|cs - s|` al tick `1` stampato** *(deve essere `lambda_1 = sin^2(pi / 2000)` volte quello di (i), entro l'arrotondamento: stampato)*.
+  - **Le letture (q1)/(q2) di Luca** *(la pendenza di (i) letta dal referto di (i))*.
+- **(ii) la partenza mai assorbita (H1):** **`TBS_stato_000000.npz`, F1 acceso tutto insieme come in T2, bordo spento, `5000` tick.**
+  - **Il limite di Luca:** **non e' lo stesso istante.**
+  - ### ⚠ **UN SECONDO LIMITE, DAL CODICE** *(`accensione.tick`)*: **a `t 0` `TBS` e' all'INIZIO della rampa del vuoto:** **`K = T_acc / s = 1000 / 0.15 = 6667` tick in cui i pezzi di `VC.VUOTO`** *(`CAMM-GROVER-VUOTO`, `CAMM-SPOSTAMENTO-VUOTO`, `CAMM-FASE-VUOTO`)* **girano con la frazione `x lam_k`.** **Con `TK.percorri_tick`** *(«come in T2»)* **il vuoto si accende TUTTO INSIEME insieme a F1:** **un secondo colpo.** **La corsa si fa come scritta** *(e' il mandato)*; **se la discesa c'e', (h1) e' scritta con questo limite accanto** *(la discesa puo' venire dal colpo del vuoto)*. **La variante con la rampa del vuoto** *(`AC.tick` fino a `6667`, piu' F1)* **e' una proposta a Luca, non si fa.**
+  - **Le letture (h1)/(h2) di Luca.**
+- **(iii) il toro `L 162`** *(H2)*: **dopo (ii), con la sua sezione** *(27.7)*. **Prima del codice, dal codice:** **il periodo di F3 sulla griglia** *(se lo spostamento del blocco `81 x 81` non e' un multiplo del periodo, il raccordo salta per costruzione)*; **la fase `c(10000)`** *(`bordo.c_di`, la tabella `fase_F3.npz`)*; **il salto di `phi` al confine** *(e di `psi`, stampato)*. **Oltre `1e-12`: dichiarato, e (iii) si salta** *(Luca)*. ### ⚠ **Una stima che dico ORA** *(non misurata)*: **sul bordo del blocco** *(`R ~ 40`, nella fascia dove il bordo di `TBS` toglieva le onde)* **`phi` e' `c(t) F3` piu' le onde attenuate da `g_max 0.03`: e' probabile che il salto superi `1e-12`.**
+
+#### 27.4.4 IL COSTO *(stima, dai tempi di T2: `824` s per `5000` tick)*
+
+**(i): ~`30` minuti** *(il vuoto `5000`, il riferimento di T2 `1000`, il disturbato `1000`, la base `5000`)*; **(iv): ~`20`** *(`K = 1` e T2 `1000` ciascuno, la rampa `5000`)*; **(ii): ~`14`.**
+
+#### 27.4.5 TODO
+
+1. **Questa sezione, committata.**
+2. **`csv/solitone/b1_profilo.py`** *(modi `i`, `iv`, `ii`)* **e l'inventario; la suite in `wt_zero`; il commit.**
+3. **(i) → referto `doc/referti_l2/b1_i_profilo.txt`, sez. `27.5`;** **(iv) → `b1_iv_rampa.txt`, `27.6`;** **(ii) → `b1_ii_t0.txt`, `27.7`;** **(iii) → il suo progetto e `b1_iii_l162.txt`, `27.8`.**
+4. **La tabella H1/H2/H3, e FERMO.**
