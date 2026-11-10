@@ -24899,3 +24899,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **(z2), senza interpretare.** **Un'osservazione:** **il contributo di ogni pezzo e' vicino a `|z|^2 - 1`.**
 - **I passi in archivio stampati** *(`s 0.075` e `0.15`, `f 0.5` e `0.25`)*.
 - **Ora, nell'ordine di Luca: T2 e T3 sul laterale.**
+
+### 2026-11-10 03:35 -- IL RIMANDO AL LATERALE (REGOLA 2): T2, F1 A `5000` TICK -- (s1) AL MARGINE, (s4) LA DISCESA DI `cs` min CONTINUA; F1-V ENTRO UN FATTORE `2` *(`b19798f5` su `zero-nel-nucleo`, sez. `25.4`; il referto `doc/referti_l2/carta_f1_lunga.txt` LI')* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Due perturbazioni sul centro** *(`1e-8`, `1e-10`)* **contro la stessa base:**
+  - **la differenza si stabilizza sullo stesso livello** *(`0.27` e `0.22` nell'ultimo terzo)*;
+  - **Lyapunov `~0.046` per tick;**
+  - ### **(s1), al margine:** **la pendenza di `1e-10` vale `0.098`, la soglia `0.1`.**
+- ### **(s4):** **`cs` min scende ancora** *(`-0.40` in `ln` per `1000` tick; il minimo `6.0e-5`)*, **e sta ai raggi `26`-`39`, vicino o oltre il bordo, non al centro.** **Nessun muro in `5000` tick.**
+- **F1-V, col criterio di Luca:** **entro un fattore `2` ai tick `50`, `1000`, `5000`** *(i rapporti `1.10`, `0.84`, `1.41`)*.
+  - **Un fatto:** **con F1 la deriva di `Lambda` del vuoto resta `~1e-14`, non lineare;** **a `cs` spento era `+2.2e-12` a `1000` tick.**
+- **Ora T3.**
