@@ -1030,3 +1030,24 @@
 - **Se S2 da' (w4)** *(instabile in tutta la mappa)*: **questa opzione e' la candidata naturale.**
 - **Se S2 da' (w3)** *(zone stabili)*: **resta un'alternativa da CONFRONTARE.**
 - ### **In ogni caso la scelta e' di LUCA.**
+
+### 28.3 L'ESITO DI S1 *(la corsa dalle `20:10:44` alle `20:18:29` del `2026-11-10`, a `00dedc5b`; il referto `doc/referti_l2/s1_falso_uno.txt`; `5/5`)*: **(z1) IL FALSO-UNO DI F1-V E' CONFERMATO**
+
+- ### **(v0c) ridà (v0) di H4 AL BIT:** **`sha(phi)` di S1 = quello di `h4_vuoto.corsa` rigirato ai tick `200` e `400`** *(`2cd09149fc766d1c`, `2377b9f3cbb34336`)*; **le righe = quelle del referto di H4 al carattere** *(al tick `200` la rms di `Lambda` `1.467e-09`, al `400` `7.313e+00`)*; **il controllo che deve fallire fallisce.**
+- ### **(v0a)** *(F3 a fase `1`, senza seme)*: **la rms di `Lambda` resta fra `0` e `1.776e-15` per `1000` tick** *(un ulp di `6` e' `8.88e-16`)*, **senza crescere; `cs` min `0.15` per tutta la corsa.**
+- ### **(v0b)** *(lo stesso, seme bianco `1e-14`)*: **cresce col tasso `0.15497` per tick** *(`12` campioni, dal tick `40` al `150`)* **contro `0.15868` di (v0c)** *(dal `160` al `270`)*: **il rapporto `0.97666`, lo scarto `2.3%` (sotto il `5%`).** **(v0c) contro il `0.158` di 27.11: `1.0043`.** **Turbolento dal tick ~`210`; al tick `430` il `59%` dei nodi sotto `cs 1e-2`, come (v0).**
+- ### **LA LETTURA COL CRITERIO SCRITTO: (z1).** **Senza seme il vuoto F3 a fase `1` resta uniforme; con un seme di `1e-14` cresce col tasso di (v0): l'instabilita' c'era anche in T2, senza seme.**
+- ### ⚠ **DUE CORREZIONI A 27.11, dall'uscita:**
+  1. **F3 «a fase `1`» NON ha componenti reali al bit:** **`max |Im phi_v| = 1.225e-16`** *(`e^{i theta_d}` in virgola mobile)*. **Avevo scritto «componenti reali, `+-1`» senza stamparlo.**
+  2. **(v0a) NON e' uniforme al bit:** **la rms di `Lambda` e' `0`-`1.8e-15`, cioe' non-uniformita' di un ulp, che NON cresce.** ### **Quindi «senza seme» non vuol dire «non-uniformita' zero»: vuol dire che l'arrotondamento di F3 a fase `1` non ha componente sul modo instabile** *(un'IPOTESI mia, non misurata: S2 dice dove sta il modo; la proiezione dell'arrotondamento su quel modo non l'ho misurata)*, **mentre quello di `c(10000) F3` ce l'ha** *(cresce da ~`5e-15`)*.
+- ### **LE CONSEGUENZE DEL FALSO-UNO** *(dal codice, gia' letto in 28.1)*:
+
+| il controllo | la partenza | che cosa diceva | che cosa dice davvero |
+|---|---|---|---|
+| **F1-V di T2** *(`carta_f1_lunga.py`)* | **`phi_v`, fase `1`, senza seme** | **«F1-V regge»** *(la deriva di `cs` entro un fattore `2`)* | ### **solo che il vuoto SENZA SEME resta uniforme: NON la stabilita'.** **Un FALSO-UNO.** |
+| **F1-V di (i)** *(`b1_profilo.py`)* | **lo stesso** | **lo stesso** | ### **lo stesso FALSO-UNO** |
+| **F1-V di `d2689b81`** *(`carta_f1.py`, sez. `22`)* | **`phi_v`, fase `1`** | **FALLIVA** *(`cs = s` al bit: `7.8e-16`, la deriva di `Lambda` agli ultimi bit)* | **il suo fallimento era la deriva di un ulp, uniforme: NON l'instabilita'** *(da quella partenza non poteva vederla)* |
+| **T1** *(`lambda_vuoto_deriva.py`)* | **`phi_v`, fase `1`, ma `cs` FISSO `0.15` e `lambda_c = None`** | **la deriva di `Lambda` a `cs` spento, `+2.2e-15` per tick** | ### **NON e' toccato:** **senza la legge di `cs` l'instabilita' non c'e' per costruzione** *(H4 (v2) e lo spettro a `cs` spento di S2)*; **il suo risultato resta.** |
+
+  **E una cosa da guardare, non una conclusione:** **la crescita della perturbazione nella scena col solitone delle sez. `20` e `22`** *(`1e-8` -> `6.3e-5` in `200` tick, `5.4e-2` a `1000`)* **potrebbe essere la stessa instabilita'** *(non misurato)*.
+- **Il passo successivo: S2** *(lo script, provato dallo scratchpad, si committa dopo la sua suite)*.
