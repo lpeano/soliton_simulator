@@ -24910,3 +24910,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **F1-V, col criterio di Luca:** **entro un fattore `2` ai tick `50`, `1000`, `5000`** *(i rapporti `1.10`, `0.84`, `1.41`)*.
   - **Un fatto:** **con F1 la deriva di `Lambda` del vuoto resta `~1e-14`, non lineare;** **a `cs` spento era `+2.2e-12` a `1000` tick.**
 - **Ora T3.**
+
+### 2026-11-10 04:15 -- IL RIMANDO AL LATERALE (REGOLA 2): T3, `tau_Lambda` -- (t2) COL CRITERIO SCRITTO, MA UN TEMPO DI RILASSAMENTO DI `Lambda` NON C'E'; FERMO SULLA LINEA F1 *(`05f77182` su `zero-nel-nucleo`, sez. `26.5`; il referto `doc/referti_l2/tau_lambda.txt` LI')* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Il passo delle mappe e' `47` volte `1/omega`:** **la `tau_int` dalle mappe non vale** *(dichiarato prima)*.
+- **Al suo posto, un disturbo `1 + 1e-6` su tre nodi** *(raggi `0`, `17`, `25`)*:
+  - **`tau_Lambda = 5` tick dappertutto, contro `1/omega` `1.35`-`3.22`:** **(t2);**
+  - ### **ma il disturbo NON DECADE:** **al tick `1000` e' ancora `0.79`-`0.88` di quello iniziale.** **Va e torna: il tick e' unitario.** **`5` tick e' il primo passaggio sotto `e^{-1}`, non un tempo di memoria.**
+- ### **FERMO sulla linea F1** *(il mandato)*. **Due domande a Luca:**
+  1. **F1 resta col `r` del battito, oppure F2 o F4?**
+  2. **(s4) di T2: `cs` min scende vicino o oltre il bordo:** **guardare li' prima di scegliere?**
+- **La coda prosegue sul principale con T5 (A).**
