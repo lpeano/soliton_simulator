@@ -93,3 +93,36 @@
 - ### **LA LETTURA: (w3)** — **una deriva diversa: SISTEMATICA anche sul nucleo del principale** *(la pendenza `1.004`, max = media = rms: uniforme)*, **ma di SEGNO OPPOSTO** *(`Lambda` cala)*, **e il modulo il `3.8%` piu' grande** *(il rapporto `-1.038068`)*. **Senza interpretare** *(il mandato)*.
 - ### **Che cosa cambia per D2:** **il fatto «la deriva c'e' anche senza il v2» e' misurato; «e' la stessa» no.** **D2 sul laterale misura i sotto-pezzi `a`, `b`** *(i mezzi pezzi)* **e `c`** *(la fase `conj(z)` del v2)* **separatamente.**
 - ### ⚠ **UN ALTRO MIO ERRORE, nel commit `77c07d04`:** **la riga SUITE dice «dalle `23:59:34` alle `00:13:42`»: orari SCRITTI DA ME, non letti.** **Quelli veri, dall'uscita della suite: dalle `23:43:00` alle `23:56:53`, `67` su `67`.** **L'esito (`67` su `67`) e' quello vero.** *(`L-NUMERI`: un numero ricopiato non ha provenienza, e uno inventato meno ancora.)*
+
+## 8. D2-bis, IL SEGNO DELLA DERIVA SUL NUCLEO DEL PRINCIPALE *(Luca `2026-11-10` `01:22`)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+### 8.1 LE PREMESSE DAL CODICE
+
+- **L'eccezione di Luca a U1** *(la stessa di D1)*: **lo script del laterale `csv/solitone/lambda_deriva_pezzi.py`** *(`cd10786c`, blob `a6201067`)* **si copia qui come file NUOVO, `csv/solitone/lambda_deriva_pezzi_principale.py`.** **Nessun altro file.**
+- **Che cosa e' diverso sul principale** *(letto: `git show primo-ordine:primo_ordine/flussi_parziali.py`)*:
+  - **`grover`, `hop_psi`, `hop_phi` sono il pezzo INTERO a `f`:** **non ci sono `_grover_mezzo` ne' `_hop_phi_mezzo`, ne' la fase `conj(z)`;**
+  - **lo spostamento del vuoto usa `_alfa_beta(z_arco(f))` con `f = 0.5`** *(sul laterale `h = 0.25`, due volte)*;
+  - **`s_arco` a `s` uniforme e' `s` AL BIT** *(la forma `S/2 - D^2/(2S)`, il commento del codice)*; **`dtau_rif = 1`.**
+- **Le modifiche rispetto al blob `a6201067`, dichiarate:**
+  1. **`CORSA = "TBS"` scritto qui** *(`carta_punto_fisso` non c'e')*;
+  2. **i sotto-pezzi tolti:** **le posizioni `6`-`9` sono pezzi interi** *(`6`, `9` il Grover del vuoto; `7`, `8` lo spostamento del vuoto)*;
+  3. **i tick SENZA avvolgimento** *(`contextlib.nullcontext()` al posto di `BE.conv(DC.ZERO)`, come D1-bis)*, **la scena costruita come D1-bis; il controllo positivo stampato** *(`FP.grover`, `FP.hop_phi` del modulo)*;
+  4. **D2.3 per il mezzo** *(`h = 0.25`)* **E per l'intero** *(`f = 0.5`)*: **il Grover** *(`z + d w`, `z`)*, **lo spostamento** *(`alpha + beta`, `alpha - beta`)*, **la fase** *(`|z|`)*; **e la tabella di `|alpha + beta|^2 - 1` per i passi delle corse in archivio** *(`_vuoto_vivo_B.CORSE`: `s` `0.075` e `0.15`)* **a `f` `0.5` e `0.25`, senza letture;**
+  5. **D2.5 contro D1-bis:** **la deriva media al tick `1000` letta dal referto `doc/referti_l2/lambda_vuoto_deriva_principale_nucleo.txt` a `2bb5ee52`** *(`-2.313e-12`, cioe' `-2.3128e-15` per tick)*;
+  6. **le letture z1/z2 al posto di p1-p3.**
+- **Tutto il resto identico:** **`1000` tick, i nodi `0`-`8`, `Lambda` esatto in `Fraction`, D2.4 con `fl(1 + 1e-15)` dopo la posizione `1`.**
+
+### 8.2 LE LETTURE, SCRITTE PRIMA *(quelle di Luca, rese operative)*
+
+- **Il peso per TIPO** *(qui ogni tipo ha due posizioni: lo spostamento `7` + `8`)*.
+- **(z1)** **`|alpha + beta|^2 - 1 < 0` sul `z` del principale** *(`f = 0.5`)* **E lo spostamento pesa oltre il `90%` della deriva:** **il segno opposto e' spiegato dallo stesso meccanismo** *(l'arrotondamento di `1 + z_re`)*.
+- **(z2)** **altrimenti:** **lo scrivo senza interpretare.**
+- **D2.5 DEVE PASSARE** *(entro il `10%`)*; **D2.4 DEVE FALLIRE.**
+- **Il costo** *(stima)*: **due corse da `~2` minuti.**
+
+### 8.3 TODO
+
+1. **Questa sezione, commit e push.**
+2. **Lo script; la suite in `wt_zero_padre`; commit e push.**
+3. **La corsa; il referto `doc/referti_l2/lambda_deriva_pezzi_principale.txt`; l'esito qui (`8.4`); una riga nella RELAZIONE.**
+4. **Poi, nell'ordine di Luca: T2 e T3 di F1 sul laterale.**
