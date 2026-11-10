@@ -110,3 +110,10 @@
 - ### **Fino ad allora: nessun merge, rebase, cherry-pick o porting di codice fra i due rami.** **Nessuna preparazione del merge di mia iniziativa.**
 - **Il mandato dell'unificazione lo scrive il guardiano a lavori chiusi**, **con le costanti di riferimento aggiornate** *(`e_K`, il controllo all'apertura di `C35-pi`, la cassetta)*.
 - **Sul laterale: una riga di rimando nel suo task history.**
+
+### 10.1 LE VOCI APERTE PER IL MOMENTO DELL'UNIFICAZIONE *(Luca `2026-11-10` `01:22`)*
+
+1. ### **LA FORMA DELLO SPOSTAMENTO** *(la deriva di `Lambda` del vuoto: D2 del laterale, `36f364e8`, sez. `24.5`-`24.7` del suo task history; D1-bis del principale)*:
+   - **`alpha + beta` in virgola mobile non e' `1`** *(sul laterale `|alpha + beta|^2 - 1 = +1.110e-16`)*;
+   - ### **la decisione di Luca: NESSUNA forma nuova di `_alfa_beta` o dello spostamento adesso.** **La scelta della forma** *(`I - beta (I - S)`, o un'altra, col suo prezzo su `M-B1`)* **si fa all'unificazione, quando il nucleo si tocca comunque.**
+2. ### **IL CONFRONTO DEL LIMITE DELLA MATERIA COL VUOTO A `cs` ACCESO** *(T5: a `cs` spento il vuoto non entra al primo ordine, sez. `25.3` del task history del prototipo)*: **si fa dopo l'unificazione, dove il vuoto entra davvero.**

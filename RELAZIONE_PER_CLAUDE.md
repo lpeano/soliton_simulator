@@ -24881,3 +24881,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **L1-S `0.189` e `0.177`: la finestra non distingue le forme.**
 - ### **Il «vince potenza» non e' una lettura.** **Il fit a potenza e' degenere** *(`t0 ~ 0.002`)*. **Due cure possibili a Luca** *(sez. `5`)*.
 - **L1 e' girato prima del mandato delle `01:22`, che lo mette ultimo.** **Ora D2-bis.**
+
+### 2026-11-10 01:35 -- LE DECISIONI DI LUCA DELLE `01:22`, REGISTRATE: T5 CHIUSO PER DERIVAZIONE (SOLO (A)); LA CORREZIONE DELLO SPOSTAMENTO RIMANDATA ALL'UNIFICAZIONE; L'ORDINE DELLA CODA *(il task history del prototipo sez. `25.3`; quello dello zero nel nucleo sez. `10.1`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **T5:** **(o1) garantita dalla costruzione, non si misura; T5-N decade; si fa solo (A), con T5-R.** **Il confronto col vuoto a `cs` acceso: dopo U1** *(voce aperta)*.
+- **Lo spostamento:** **nessuna forma nuova adesso; la scelta all'unificazione** *(voce aperta, col prezzo su `M-B1`)*.
+- ### **L'ordine dei test brevi, su tutti e due i rami:** **D2-bis (qui) -> T2 e T3 di F1 (laterale) -> T5 (A) (qui) -> L1 (qui)** *(L1 e' gia' girato una volta prima di questo ordine, ed e' FERMO: `09e6c2c2`)*.

@@ -913,3 +913,13 @@
   - **(t5-b)** **T5 come scritto, dichiarando (o1) garantita:** **(B) diventa un controllo del banco, non una misura;**
   - **(t5-c)** **un banco col vuoto VIVO** *(il tick linearizzato in `psi` e `phi` insieme)*: **al primo ordine i due blocchi si separano** *(`phi` risponde a `psi` al secondo ordine)*, **quindi darebbe lo stesso risultato:** **lo scrivo per completezza, non lo raccomando.**
 - **Intanto la coda prosegue senza T5:** **L1, L2, L4** *(la legge della durata)*.
+
+### 25.3 LA DECISIONE DI LUCA *(`2026-11-10` `01:22`)*: **T5 CHIUSO PER DERIVAZIONE** *(la proposta t5-a)*
+
+- ### **A `cs` spento il vuoto F3 entra nella dinamica della materia solo al QUINTO ordine in `psi`** *(`CAMM-MATERIA-VUOTO` con S1, sez. `25.2`)*. **Il limite della materia non dipende dal vuoto al primo ordine:** **(o1) e' garantita dalla costruzione, quindi NON si misura.** **T5-N decade.**
+- **Si fa SOLO (A)** *(nell'ordine della coda: dopo D2-bis e dopo T2 e T3 del laterale)*:
+  - **`v_max/s` e `v_b/s`** *(`v_b` stampato, senza letture)* **a `s` `0.001`, `0.01`, `0.05`, `0.1`, `0.3`, con `eps` `0` e `0.5`;**
+  - **il limite a `s -> 0` col fit di grado `2`, e la dispersione fra i fit di grado `1`, `2`, `3`;**
+  - **T5-R DEVE PASSARE:** **`0.588137` a `s 0.15`, `eps 0.5`, entro `1e-6`.**
+- ### **Il confronto col vuoto si sposta dove il vuoto entra davvero, `cs` acceso: DOPO L'UNIFICAZIONE** *(U1)*: **una voce aperta, scritta nella sez. `10` del task history `2026-11-08_zero_simmetrico_nel_nucleo.md`.**
+- **Il referto di (A): `doc/referti_l2/u1_t5.txt`; lo script `csv/solitone/u1_t5.py`.**
