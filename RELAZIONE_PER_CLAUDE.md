@@ -24921,3 +24921,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **F1 resta col `r` del battito, oppure F2 o F4?**
   2. **(s4) di T2: `cs` min scende vicino o oltre il bordo:** **guardare li' prima di scegliere?**
 - **La coda prosegue sul principale con T5 (A).**
+
+### 2026-11-10 04:50 -- T5 (A): IL LIMITE A `s -> 0` DI `v_max/s` E' `0.598461` A `eps 0` E `0.585034` A `eps 0.5`; T5-R PASSA; T5 CHIUSO *(`doc/referti_l2/u1_t5.txt`; il task history del prototipo, sez. `25.5`)* [[PIANO-2D-3D]] [[U1-PROTOTIPO-TRIANGOLI]]
+
+- **`v_max/s` a vuoto nullo** *(`s` `0.001`-`0.3`)*: **da `0.5985` a `0.6120` a `eps 0`; da `0.5850` a `0.5969` a `eps 0.5`.**
+- **Il limite** *(grado `2`)*: **`0.598461` e `0.585034`.** **La dispersione `~1.1e-3` la fa il grado `1`;** **i gradi `2` e `3` coincidono entro `1e-5`.**
+- **`v_b/s` stampato senza letture** *(il limite `~0.78539`, e dipende dallo zero)*.
+- **T5-R passa** *(`0.58813743`, lo scarto `4.33e-07`)*; **T5-F fallisce come deve.**
+- ### **La coda di Luca:** **D2-bis, T2, T3 e T5 (A) sono fatti.** **L1 e' l'ultima voce, ed e' FERMO** *(L1-P fallito, `09e6c2c2`: aspetta la sua decisione)*.

@@ -1,0 +1,31 @@
+[TIMBRO] u1_p1.py  sha1-BYTE 7293e056  committato e pulito
+[TIMBRO] _u1_terzo.py  sha1-BYTE dbcf49c4  committato e pulito
+[TIMBRO] _triangoli_forza.py  sha1-BYTE d0c0b981  committato e pulito
+[TIMBRO] u1_t5.py  sha1-BYTE 5dd3bd11  committato e pulito
+==================================================================================================================================
+T5 (A), IL LIMITE DELLA MATERIA A VUOTO NULLO (sez. 25.3-25.4): eps (0.0, 0.5); s (0.001, 0.01, 0.05, 0.1, 0.3) piu' 0.15; il limite col fit di grado 2, la dispersione fra i gradi (1, 2, 3)
+==================================================================================================================================
+  eps 0.0 s 0.001 : v_max/s 0.59846761 | v_b/s dei due rami 0.785398, 0.785398 (lo zero spostato di +pi s/2: 0.000391, 1.110720; di -pi s/2: 1.110720, 0.000391) | 21 s
+  eps 0.0 s 0.01  : v_max/s 0.59848313 | v_b/s dei due rami 0.785382, 0.785382 (lo zero spostato di +pi s/2: nan, 1.110706; di -pi s/2: 1.110706, nan) | 23 s
+  eps 0.0 s 0.05  : v_max/s 0.59885898 | v_b/s dei due rami 0.784994, 0.784994 (lo zero spostato di +pi s/2: nan, 1.110363; di -pi s/2: 1.110363, nan) | 23 s
+  eps 0.0 s 0.1   : v_max/s 0.60002897 | v_b/s dei due rami 0.783774, 0.783774 (lo zero spostato di +pi s/2: nan, 1.109281; di -pi s/2: 1.109281, nan) | 23 s
+  eps 0.0 s 0.3   : v_max/s 0.61200222 | v_b/s dei due rami 0.770088, 0.770088 (lo zero spostato di +pi s/2: nan, 1.096921; di -pi s/2: 1.096921, nan) | 23 s
+  eps 0.0 s 0.15  : v_max/s 0.60196296 | v_b/s dei due rami 0.781716, 0.781716 (lo zero spostato di +pi s/2: nan, 1.107449; di -pi s/2: 1.107449, nan) | 23 s
+  eps 0.5 s 0.001 : v_max/s 0.58504224 | v_b/s dei due rami 0.785398, 0.785398 (lo zero spostato di +pi s/2: 0.170469, 1.097561; di -pi s/2: 1.097561, 0.170469) | 24 s
+  eps 0.5 s 0.01  : v_max/s 0.58505603 | v_b/s dei due rami 0.785381, 0.785379 (lo zero spostato di +pi s/2: 0.170424, 1.097544; di -pi s/2: 1.097544, 0.170406) | 25 s
+  eps 0.5 s 0.05  : v_max/s 0.58539003 | v_b/s dei due rami 0.784975, 0.784930 (lo zero spostato di +pi s/2: 0.169338, 1.097138; di -pi s/2: 1.097131, 0.168871) | 33 s
+  eps 0.5 s 0.1   : v_max/s 0.58642794 | v_b/s dei due rami 0.783699, 0.783515 (lo zero spostato di +pi s/2: 0.165895, 1.095857; di -pi s/2: 1.095831, 0.163980) | 33 s
+  eps 0.5 s 0.3   : v_max/s 0.59686399 | v_b/s dei due rami 0.769441, 0.767657 (lo zero spostato di +pi s/2: 0.123372, 1.081281; di -pi s/2: 1.081137, 0.097088) | 33 s
+  eps 0.5 s 0.15  : v_max/s 0.58813743 | v_b/s dei due rami 0.781549, 0.781131 (lo zero spostato di +pi s/2: 0.159993, 1.093691; di -pi s/2: 1.093636, 0.155472) | 34 s
+----------------------------------------------------------------------------------------------------------------------------------
+  eps 0.0: v_max/s, il limite a s -> 0 (grado 2) 0.598461; le intercette grado 1 0.597262, grado 2 0.598461, grado 3 0.598468; la dispersione 1.206e-03
+  eps 0.0: v_b/s del ramo 0 (STAMPATO, senza letture: dipende dallo zero), il limite 0.785389; la dispersione 1.410e-03
+  eps 0.0: v_b/s del ramo 1 (STAMPATO, senza letture: dipende dallo zero), il limite 0.785389; la dispersione 1.410e-03
+  eps 0.5: v_max/s, il limite a s -> 0 (grado 2) 0.585034; le intercette grado 1 0.583995, grado 2 0.585034, grado 3 0.585043; la dispersione 1.048e-03
+  eps 0.5: v_b/s del ramo 0 (STAMPATO, senza letture: dipende dallo zero), il limite 0.785390; la dispersione 1.467e-03
+  eps 0.5: v_b/s del ramo 1 (STAMPATO, senza letture: dipende dallo zero), il limite 0.785388; la dispersione 1.634e-03
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: T5-R v_max/s a s 0.15, eps 0.5 = 0.588137 (P1) entro 1e-06                                               PASSA   0.58813743 (lo scarto 4.33e-07)
+  DEVE FALLIRE: T5-F lo stesso controllo contro 0.588137 + 1e-05                                                         ### FALLISCE   lo scarto -9.57e-06
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; 317 s in tutto

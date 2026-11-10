@@ -933,3 +933,23 @@
   - **(T5-R) DEVE PASSARE:** **`|v_max/s(0.15, 0.5) - 0.588137| <= 1e-6`** *(`0.588137` e' a sei cifre: l'arrotondamento `<= 5e-7`)*;
   - ### **(T5-F) DEVE FALLIRE** *(nuovo: il T5-F della sez. `25` era di (B), che e' decaduta)*: **lo stesso controllo contro `0.588137 + 1e-5`:** **la tolleranza deve saper dire di no.**
 - **Lo script `csv/solitone/u1_t5.py`, il referto `doc/referti_l2/u1_t5.txt`.** **Il costo** *(stima)*: **`12` volte `v_max` e `vb`, qualche minuto.**
+
+### 25.5 L'ESITO DI T5 (A) *(la corsa dalle `04:42:46` alle `04:48:05` del `2026-11-10`, a `f8acfdef`, blob `5dd3bd11`; il referto `doc/referti_l2/u1_t5.txt`)*
+
+- **`v_max/s`:**
+
+| `s` | `eps 0` | `eps 0.5` |
+|---|---|---|
+| `0.001` | `0.59846761` | `0.58504224` |
+| `0.01` | `0.59848313` | `0.58505603` |
+| `0.05` | `0.59885898` | `0.58539003` |
+| `0.1` | `0.60002897` | `0.58642794` |
+| `0.15` | `0.60196296` | `0.58813743` |
+| `0.3` | `0.61200222` | `0.59686399` |
+
+- ### **IL LIMITE A `s -> 0`** *(l'intercetta del grado `2` sui cinque punti di `S_VAR`)*: **`eps 0`: `0.598461`; `eps 0.5`: `0.585034`.**
+  - **Le intercette:** **`eps 0`: grado `1` `0.597262`, `2` `0.598461`, `3` `0.598468`;** **`eps 0.5`: `0.583995`, `0.585034`, `0.585043`.**
+  - **La dispersione** *(max - min)*: **`1.206e-03` e `1.048e-03`:** **la fa il grado `1`; i gradi `2` e `3` coincidono entro `1e-5`.**
+- **`v_b/s`** *(stampato, SENZA letture: dipende dallo zero)*: **il limite `~0.78539`** *(`0.785389` a `eps 0`; `0.785390` e `0.785388` a `eps 0.5`)*; **con lo zero spostato di `+- pi s/2` i rami vanno a `~1.11` e a `~0.0004`-`0.17`** *(o `nan`: il fit non definito)*. **Come in P1.**
+- **T5-R PASSA:** **`0.58813743` contro `0.588137`** *(lo scarto `4.33e-07`)*. **T5-F FALLISCE COME DEVE** *(lo scarto `-9.57e-06` contro `0.588137 + 1e-5`)*.
+- **T5 e' chiuso** *(per derivazione la parte (B), con questa misura la (A))*. **Il confronto col vuoto a `cs` acceso: dopo U1** *(la voce aperta, sez. `10.1` del task history dello zero nel nucleo)*.
