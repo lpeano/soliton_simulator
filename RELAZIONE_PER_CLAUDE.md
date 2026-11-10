@@ -24887,3 +24887,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **T5:** **(o1) garantita dalla costruzione, non si misura; T5-N decade; si fa solo (A), con T5-R.** **Il confronto col vuoto a `cs` acceso: dopo U1** *(voce aperta)*.
 - **Lo spostamento:** **nessuna forma nuova adesso; la scelta all'unificazione** *(voce aperta, col prezzo su `M-B1`)*.
 - ### **L'ordine dei test brevi, su tutti e due i rami:** **D2-bis (qui) -> T2 e T3 di F1 (laterale) -> T5 (A) (qui) -> L1 (qui)** *(L1 e' gia' girato una volta prima di questo ordine, ed e' FERMO: `09e6c2c2`)*.
+
+### 2026-11-10 02:05 -- D2-bis SUL PRINCIPALE: (z2) -- SUL `z` DEL PRINCIPALE `|alpha + beta|^2 - 1 = 0` ESATTO; LA DERIVA NEGATIVA SI DIVIDE A META' FRA GROVER E SPOSTAMENTO *(`doc/referti_l2/lambda_deriva_pezzi_principale.txt`; il task history di D1, sez. `8.4`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Il nucleo del principale, senza avvolgimento:**
+  - **il Grover `-9.70e-17` e `-9.56e-17` per tick;**
+  - **lo spostamento `-9.76e-17` e `-9.53e-17`;**
+  - **i pesi per tipo `0.4997` e `0.5003`.**
+- **D2.3 a `f 0.5`:** **`|alpha + beta|^2 - 1 = 0` esatto; `|alpha - beta|^2 - 1 = |z|^2 - 1 = -9.671e-17`.**
+- **D2.5 chiude** *(`-2.3128e-15` contro D1-bis)*; **D2.4 fallisce come deve.**
+- ### **(z2), senza interpretare.** **Un'osservazione:** **il contributo di ogni pezzo e' vicino a `|z|^2 - 1`.**
+- **I passi in archivio stampati** *(`s 0.075` e `0.15`, `f 0.5` e `0.25`)*.
+- **Ora, nell'ordine di Luca: T2 e T3 sul laterale.**

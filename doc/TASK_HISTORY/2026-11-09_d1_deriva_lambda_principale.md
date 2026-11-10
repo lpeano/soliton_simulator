@@ -126,3 +126,19 @@
 2. **Lo script; la suite in `wt_zero_padre`; commit e push.**
 3. **La corsa; il referto `doc/referti_l2/lambda_deriva_pezzi_principale.txt`; l'esito qui (`8.4`); una riga nella RELAZIONE.**
 4. **Poi, nell'ordine di Luca: T2 e T3 di F1 sul laterale.**
+
+### 8.4 L'ESITO DI D2-bis *(la corsa dalle `02:00:03` alle `02:02:24` del `2026-11-10`, a `b550b9ba`, blob dello script `aae792bc`; il referto `doc/referti_l2/lambda_deriva_pezzi_principale.txt`)*
+
+- **La scena di T1** *(`6561` nodi, `cs 0.15`, `Lambda 6`, grado `6`)*; **il controllo positivo: `FP.grover` e `FP.hop_phi` del modulo** *(nessun avvolgimento)*.
+- **D2.3, i coefficienti esatti:**
+  - **al mezzo `h 0.25`** *(il `z` del laterale, `0.993068 + 0.117537j`)*: **gli stessi numeri del laterale** *(lo spostamento `+1.110e-16`, `+1.051e-16`)*;
+  - ### **all'intero `f 0.5`** *(il `z` del principale, `0.972370 + 0.233445j`)*: **il Grover `-6.939e-18`, `-9.671e-17`; la fase `|z|^2 - 1 = -9.671e-17`; lo spostamento `|alpha + beta|^2 - 1 = +0.000e+00` (ZERO ESATTO), `|alpha - beta|^2 - 1 = -9.671e-17`, `sigma_max - 1 = 0`;** **`materia_vuoto` `1` esatto;**
+  - **i passi in archivio:** **`s 0.075`: `f 0.5` `+1.110e-16` / `+1.051e-16`; `f 0.25` `+1.110e-16` / `+1.932e-16`;** **`s 0.15`: `f 0.5` `+0.000e+00` / `-9.671e-17`; `f 0.25` `+1.110e-16` / `+1.051e-16`** *(`|alpha+beta|^2 - 1` / `|alpha-beta|^2 - 1`)*.
+- **D2.2, per pezzo** *(esatto, `1000` tick, `9` nodi tutti uguali)*: **ZERO ESATTO nelle posizioni `1`-`5`, `10`-`14`;**
+  - **`6` Grover `-9.7000e-17`** *(negativo nell'`88.7%` dei tick)*, **`9` Grover `-9.5604e-17`** *(`88.3%`)*;
+  - **`7` spostamento `-9.7611e-17`** *(`77.9%`)*, **`8` spostamento `-9.5255e-17`** *(`77.4%`)*.
+- **Per tipo:** **lo spostamento `-1.9287e-16`, peso `0.5003`; il Grover `-1.9260e-16`, peso `0.4997`.**
+- **D2.5 PASSA:** **la somma `-2.3128e-15` per tick contro D1-bis `-2.3130e-15`** *(dal referto, a quattro cifre: il rapporto `0.999921`)*; **la deriva in float di questa corsa `-2.3128e-15`.**
+- **D2.4 FALLISCE COME DEVE** *(la piu' pesante e' la `1`, l'aumento `2.2592e-15`, il rapporto `1.0175`)*.
+- ### **LA LETTURA: (z2)** — **`|alpha + beta|^2 - 1 = 0` esatto sul `z` del principale, e lo spostamento porta il `50%`, non oltre il `90%`:** **non e' il meccanismo del laterale.** **Senza interpretare.**
+- ### **Un'osservazione, NON una lettura** *(i numeri accostati, da verificare)*: **sul principale ogni pezzo pesante perde `~-9.6e-17`, e `|z|^2 - 1 = |alpha - beta|^2 - 1 = -9.671e-17`** *(il modulo del `z` calcolato da `espi` a `f 0.5`)*. **Il valore proprio del Grover sul sottospazio non uniforme e' `z`, quello dello spostamento sull'antisimmetrico e' `alpha - beta`.**
