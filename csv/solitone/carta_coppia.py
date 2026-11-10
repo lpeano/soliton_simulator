@@ -216,6 +216,52 @@ def oltre(campC, t_c, tm, rhoC, nm, stC, s, L, d, m1, m2, x, c0, M, ref, refB, m
         print("  t %8.1f  |pA| %.6e |pB| %.6e  la fase relativa %+.6f rad" % (xx["t"] * s, abs(pA), abs(pB), f))
 
 
+TERZI = (66667, 133333)   # ### U2 (Luca 2026-11-09 20:16; il task history sez. 15-16): i confini dei terzi, in tick
+X_U2 = 5                  # ### U2: gli istanti a cui si stampa x dei campioni accanto a d/2 (sez. 16.1)
+
+
+def u2(tm, dS, campC, s):
+    """### **U2, la distanza per terzo di corsa** *(il task history sez. `15`-`16`)*: `d` dai semipiani; per terzo min, max, media, l'ampiezza *(la deviazione
+    standard, dichiarata)*, il periodo dominante *(il periodogramma di `stazionarieta`)*; gli errori con `N_eff = N / (2 tau_int)` di Sokal; la pendenza su
+    tutta la corsa con l'errore gonfiato di `sqrt(2 tau_int)` dei residui; `x` dei campioni accanto a `d/2`; le letture d1-d3 col criterio di `2` errori."""
+    from solitone import stazionarieta as SZ
+    tm, dS = np.asarray(tm, float), np.asarray(dS, float)
+    conf = [0.0] + [k * s for k in TERZI] + [tm[-1] + 1e-9]
+    print("### U2 (Luca 2026-11-09 20:16): la distanza d dai SEMIPIANI per terzo di corsa (i confini %s tick); l'ampiezza = la deviazione standard (dichiarata); gli errori con N_eff = N / (2 tau_int) di Sokal" % (TERZI,))
+    print("  %-19s %5s %9s %9s %9s %9s %9s %9s %8s %10s" % ("il terzo (unita')", "N", "min", "max", "media", "+-", "ampiezza", "+-", "tau_int", "periodo"))
+    tab = []
+    for a, b in zip(conf[:-1], conf[1:]):
+        k = (tm >= a) & (tm < b)
+        x = dS[k]
+        tau = float(SZ.tau_int(x)[0])
+        ne = len(x) / (2.0 * max(tau, 0.5))
+        sd = float(np.std(x))
+        P = SZ.periodo(tm[k], x, a, b)[0]
+        tab.append((float(x.mean()), sd / math.sqrt(ne), sd, sd / math.sqrt(2.0 * ne)))
+        print("  %8.1f .. %8.1f %5d %9.4f %9.4f %9.4f %9.4f %9.4f %9.4f %8.2f %10s" % (a, min(b, tm[-1]), len(x), x.min(), x.max(), tab[-1][0], tab[-1][1], sd, tab[-1][3], tau, "%.1f" % P if P else "-"))
+    p, cov = np.polyfit(tm, dS, 1, cov=True)
+    res = dS - np.polyval(p, tm)
+    tr = float(SZ.tau_int(res)[0])
+    ep = math.sqrt(cov[0, 0]) * math.sqrt(2.0 * max(tr, 0.5))
+    print("  la pendenza su tutta la corsa: %+.4e +- %.1e per unita' di tempo (%+.4f +- %.4f per 100000 tick; tau_int dei residui %.2f)" % (p[0], ep, p[0] * s * 1e5, ep * s * 1e5, tr))
+    per = {c["t"]: c["per"]["x"] for c in campC}
+    print("  x dei campioni (il centro PERIODICO di tutta la rho, NON meta' distanza) accanto a d/2, a %d istanti:" % X_U2)
+    for i in np.linspace(0, len(tm) - 1, X_U2).astype(int):
+        tt = int(round(tm[i] / s))
+        print("    t %8.1f (tick %6d): x %s; d/2 %.4f" % (tm[i], tt, "%.4f" % per[tt] if tt in per else "-", dS[i] / 2.0))
+    (m1, e1, a1, ea1), (m2, e2, a2, ea2), (m3, e3, a3, ea3) = tab
+    cresce = (a2 - a1) > 2.0 * math.hypot(ea1, ea2) and (a3 - a2) > 2.0 * math.hypot(ea2, ea3)
+    ferma = abs(a2 - a1) <= 2.0 * math.hypot(ea1, ea2) and abs(a3 - a2) <= 2.0 * math.hypot(ea2, ea3) and abs(a3 - a1) <= 2.0 * math.hypot(ea1, ea3)
+    scende = (m1 - m3) > 2.0 * math.hypot(e1, e3)
+    if cresce:
+        print("  LA LETTURA: (d1) l'ampiezza CRESCE terzo dopo terzo (%.4f, %.4f, %.4f, ogni passo oltre 2 errori): una deriva della coppia" % (a1, a2, a3))
+    elif ferma:
+        print("  LA LETTURA: (d2) l'ampiezza resta entro 2 errori (%.4f, %.4f, %.4f): un battimento lento, non una deriva" % (a1, a2, a3))
+    else:
+        print("  LA LETTURA: l'ampiezza, caso intermedio (%.4f +- %.4f, %.4f +- %.4f, %.4f +- %.4f)" % (a1, ea1, a2, ea2, a3, ea3))
+    print("  LA LETTURA: %s (la media %.4f +- %.4f, %.4f +- %.4f, %.4f +- %.4f)" % ("(d3) la media SCENDE oltre 2 errori: la coppia si avvicina" if scende else "la media NON scende oltre 2 errori (non d3)", m1, e1, m2, e2, m3, e3))
+
+
 def main(argv):
     corsa = argv[argv.index("--corsa") + 1]
     if corsa not in RIF:
@@ -551,6 +597,9 @@ def main(argv):
           "%.3e" % dfa)
     if len(campC_tutti) > nS:
         oltre(campC_tutti, t_c, tm_tutti, rhoC_tutti, nm, stC_tutti, s, L, d, m1, m2, x, c0, M, ref, refB, mA, mB)
+    if len(campC_tutti) == nS and int(round(tm[-1] / s)) >= TERZI[-1]:    # ### U2 (sez. 16): solo sulla carta intera, (r-b)
+        print("-" * 130)
+        u2(tm, dS, campC, s)
     print("=" * 130)
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
     return 0 if not FALLITE else 1
