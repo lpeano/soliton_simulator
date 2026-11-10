@@ -802,3 +802,10 @@
 2. **`csv/solitone/b1_profilo.py`** *(modi `i`, `iv`, `ii`)* **e l'inventario; la suite in `wt_zero`; il commit.**
 3. **(i) → referto `doc/referti_l2/b1_i_profilo.txt`, sez. `27.5`;** **(iv) → `b1_iv_rampa.txt`, `27.6`;** **(ii) → `b1_ii_t0.txt`, `27.7`;** **(iii) → il suo progetto e `b1_iii_l162.txt`, `27.8`.**
 4. **La tabella H1/H2/H3, e FERMO.**
+
+#### 27.4.6 ANNOTAZIONE, PRIMA DELLE CORSE: **LA DEFINIZIONE DEL FRONTE CORRETTA** *(dopo una PROVA dello script a `200` tick, nello scratchpad, NON una corsa del mandato)*
+
+- ### **IL MIO ERRORE nella 27.4.2:** **«l'anello col `cs` MEDIO piu' basso» misura il GUSCIO, non il fronte.** **Nella prova** *(lo stato di `TBS` a `10000`, (i))* **e' l'anello `16` a ogni campione** *(il `Lambda` medio dell'anello `16` e' `~1.6`, il vuoto svuotato attorno alla materia)*, **mentre il minimo globale va da `19` a `26`:** **con la mia scelta (f2) usciva per costruzione** *(un FALSO-ZERO del fronte)*.
+- ### **LA DEFINIZIONE, QUELLA DI LUCA** *(«il raggio del minimo del profilo di `cs`»; il suo indizio di H3 e' il raggio di `cs` min)*: **`r_f` = l'anello del minimo del profilo di `cs` MIN** *(cioe' l'anello del nodo di `cs` min)*. **L'anello col `cs` medio piu' basso resta stampato accanto** *(`r_med`)*. **Il resto della 27.4.2** *(il tratto, il fit, le soglie, le letture)* **non cambia.**
+- **Cosa ha detto la prova, oltre a questo** *(numeri della prova, non letture)*: **il cono `1.000000` nodi per tick** *(misurato)*; **la linearita' `2.4e-10` e quella complessa `2.9e-10`** *(sotto `1e-6`: le velocita' si leggono da `A(k)`)*; **`|v_g|` massimo `0.088272` nodi per tick per le bande di `psi`, `0.090371` per quelle di `phi`;** **(i-B) passa al bit al tick `100`, (i-F) fallisce come deve** *(`8.9e-11`)*. **Le corse vere ristampano tutto.**
+- **E la struttura delle estremita'** *(un'altra premessa caduta, nella prova)*: **non sono in ordine di nodo ma di ARCO, `3` archi per nodo** *(gli archi che partono da `x`, con un'estremita' in `x` e una in un vicino)*: **la cella di `12 + 6` componenti e' quella di `DV.matrice`;** **il cono si misura sui nodi VERI delle estremita'.**
