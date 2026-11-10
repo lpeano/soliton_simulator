@@ -1051,3 +1051,8 @@
 
   **E una cosa da guardare, non una conclusione:** **la crescita della perturbazione nella scena col solitone delle sez. `20` e `22`** *(`1e-8` -> `6.3e-5` in `200` tick, `5.4e-2` a `1000`)* **potrebbe essere la stessa instabilita'** *(non misurato)*.
 - **Il passo successivo: S2** *(lo script, provato dallo scratchpad, si committa dopo la sua suite)*.
+
+### 28.4 S2, DUE ANNOTAZIONI AL PROGETTO PRIMA DELLA CORSA *(28.2 non si riscrive: si annota)*
+
+- ### **(d) L'impulso: `a = 1e-4` relativo, e `R = (4 R(a) - R(2a)) / 3`** *(l'estrapolazione di Richardson, che toglie il termine in `a^2`)*, **invece di `a = 1e-6` con la sola differenza simmetrica.** **Perche':** **una prova breve dallo scratchpad** *(non un referto)* **con `a = 1e-6` dava a `cs` spento `max ||lambda| - 1| = 2.753e-09`, sopra la soglia di Luca `1e-9`, per l'arrotondamento** *(~`1e-16 / 1e-6` per elemento)* **e non per la fisica** *(a `cs` spento la mappa e' lineare: la differenza simmetrica e' esatta a meno dell'arrotondamento)*; **con `1e-4` e Richardson: `2.892e-11`.** **Il controllo di linearita' resta `|R(2a) - R(a)| / max|R|` sotto `1e-6`** *(nella prova: `2.4e-09`-`2.6e-09` coi punti accesi, `3.75e-12` a `cs` spento)*. **E la traslazione si controlla con lo stesso `R` di Richardson.**
+- ### ⚠ **LA PROVA BREVE MI HA GIA' MOSTRATO NUMERI** *(il caso di oggi, `Lambda_c 340` e `Lambda 0.1`; l'onda a `60` tick)*: **lo dichiaro.** **Le letture (w1)-(w4) e le soglie sono quelle scritte in 28.2 PRIMA della prova, e non cambiano.** **Il referto e' la corsa al commit dello script, non la prova.**
