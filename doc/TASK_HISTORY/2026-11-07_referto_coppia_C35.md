@@ -194,3 +194,39 @@
   - **(d3) la media SCENDE in modo significativo:** **la coppia si avvicina** *(lo si segnala, senza estrapolare)*.
 - ### **Il criterio di «entro l'errore» e «significativo»** *(mio, dichiarato)*: **due volte l'errore della media o dell'ampiezza** *(l'errore con la `tau_int` di Sokal dentro ogni terzo)*.
 - **U2 entra nel referto (r-b), senza un referto separato.**
+
+## 16. IL REFERTO (r-b): **LE PREMESSE, IL PROGETTO, LE LETTURE -- PRIMA DEL CODICE** *(`S162` finita a `200000` tick il `2026-11-10` alle `15:26:25`; `037126ae`)*
+
+### 16.1 LE PREMESSE DAL CODICE *(lette; `csv/solitone/carta_coppia.py` a `215fbf37` e `corsa_accensione.py`)*
+
+- **(r-b) e' lo STESSO codice di (r-a)** *(sez. `12`)*: **con `S162` lungo quanto le coppie, `t_c` e' la fine, «OLTRE» non stampa niente, e tutte le sezioni di sempre girano sulla corsa INTERA** *(`0` -> `200000` tick, `30000` unita')*.
+- ### **GLI INDICI DELLE MAPPE DI `S162` E `C35-pi` SONO VECCHI:** **`mappe_indice_S162.txt` e `mappe_indice_C35-pi.txt` si fermano al pezzo `60000`** *(`32` righe)*; **quello di `C35-0` arriva a `196667`** *(`74` righe)*. **`carta_coppia.carica_mappe` legge SOLO l'indice:** **senza rigenerarli, la carta vedrebbe `S162` a `66667` e fallirebbe sul prefisso.** **Si rigenerano col comando di sempre:** `python csv/solitone/corsa_accensione.py --indice S162 > doc/referti_l2/mappe_indice_S162.txt` *(e `C35-pi`)*.
+- **La memoria:** **le mappe sono ogni `100` tick** *(`mappe.OGNI`)*: **`2001` istantanee per corsa, `rho` e `Lambda` in `float64` su `162 x 162`: ~`0.84` GB per corsa, ~`1.7` GB per la coppia col singolo** *(stima; la RAM libera `9.4` GB)*.
+- ### **CHE COSA MISURA `x` DEI CAMPIONI** *(U2 chiede di dichiararlo)*: **`campione["per"]["x"]` e' la coordinata `x` del CENTRO PERIODICO di TUTTA la `rho` della coppia** *(`corsa_accensione.periodiche` -> `TO.misure`)*: **NON e' la meta' della distanza.** **La distanza della carta e' `d` dai SEMIPIANI** *(`centri_semipiani` sulle mappe: i due baricentri di `x < 0` e `x >= 0` dal punto medio)*, **con A0/A0-F che la controllano.** **U2 usa `d` dai semipiani**, e **stampa accanto `x` dei campioni e `d/2` agli stessi `t`** *(cinque istanti)*, **cosi' la prima lettura del guardiano** *(«`x` da `16.8`-`17.7` a `15.6`-`18.2`»)* **si confronta con la grandezza giusta.**
+- **NON SO:** **il tempo della carta su `200000` tick** *(le due gobbe per ogni istantanea: (r-a) `22` minuti con la coppia a `30000` e il singolo a `10000`; stimo ~`40`-`60` minuti per corsa)*.
+
+### 16.2 IL PROGETTO
+
+1. **Gli indici di `S162` e `C35-pi` rigenerati e committati** *(un commit a se')*.
+2. **`carta_coppia.py`: una sezione NUOVA, U2, alla fine** *(solo stampe e letture, nessun DEVE nuovo; le sezioni di sempre non cambiano)*:
+   - **`d(t)` dai semipiani per i TRE TERZI** *(`0`-`66667`, `66667`-`133333`, `133333`-`200000` tick)*: **min, max, media, l'AMPIEZZA** *(la deviazione standard di `d` nel terzo: la mia scelta, dichiarata)*, **il PERIODO dominante** *(il massimo del periodogramma di `stazionarieta`)*;
+   - **l'errore della media e dell'ampiezza:** **`N_eff = N / (2 tau_int)`** *(la `tau_int` di Sokal di `stazionarieta`, dentro ogni terzo)*: **la media `+- sigma / sqrt(N_eff)`, l'ampiezza `+- sigma / sqrt(2 N_eff)`;**
+   - **la pendenza della retta su tutta la corsa, con l'errore** *(l'errore standard dei minimi quadrati gonfiato di `sqrt(2 tau_int)` dei residui)*;
+   - **`x` dei campioni e `d/2` a cinque `t`** *(16.1)*.
+3. **I referti in file NUOVI:** **`doc/referti_l2/coppia_C35-0_rb.txt` e `coppia_C35-pi_rb.txt`** *(gli ufficiali a `10000` e (r-a) restano)*; **la stessa sezione U2 su tutte e due** *(«accanto, la stessa tabella per `C35-0`»)*.
+4. **(K-rb) il controllo che il taglio non cambi il passato:** **le righe delle tabelle a blocchi con `t < 10000` del referto (r-b) = quelle del referto ufficiale a `10000`, al carattere** *(come K1; uno script di confronto, con un DEVE FALLIRE contro l'altra coppia)*. **Se le tabelle a blocchi non sono confrontabili riga per riga, lo dichiaro e non lo invento.**
+
+### 16.3 LE LETTURE *(quelle di Luca della sez. `15`, col MIO criterio dichiarato li')*
+
+- **(d1) l'ampiezza CRESCE terzo dopo terzo** *(ogni passo oltre `2` errori)*: **una deriva della coppia;**
+- **(d2) l'ampiezza resta entro l'errore** *(`2` errori)*: **un battimento lento, non una deriva;**
+- **(d3) la media SCENDE in modo significativo** *(dal primo al terzo terzo oltre `2` errori)*: **la coppia si avvicina** *(senza estrapolare)*.
+- **Fra le soglie:** **un caso intermedio, scritto cosi'.** **(d3) si legge insieme a (d1) o (d2), non in alternativa.**
+
+### 16.4 COSA MI FAREBBE FERMARE
+
+- **un DEVE di sempre che fallisce sulla corsa intera** *(si committa e mi fermo)*; **la memoria** *(se non bastasse, lo chiedo)*; **K-rb che fallisce.**
+
+### 16.5 TODO
+
+1. **Questa sezione, committata.** 2. **Gli indici.** 3. **La sezione U2 e lo script K-rb; la suite; il commit.** 4. **Le due carte** *(una alla volta)*, **K-rb, il referto, la sez. `17`.** 5. **Poi `C50-0`.**
