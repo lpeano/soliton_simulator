@@ -679,3 +679,24 @@
 2. **Lo script `csv/solitone/tau_lambda.py`; la suite in `wt_zero` DOPO T2; commit e push.**
 3. **La corsa; il referto `doc/referti_l2/tau_lambda.txt`; l'esito in `26.5`; il rimando nella RELAZIONE.**
 4. **Poi FERMO** *(il mandato)*: **niente F2, F3, F4, niente `tau_Lambda` dentro F1.**
+
+### 25.4 L'ESITO DI T2 *(la corsa dalle `02:33:59` alle `03:29:22` del `2026-11-10`, a `2d996ae0`, blob `f77f58f5`; il referto `doc/referti_l2/carta_f1_lunga.txt`)*
+
+- **Il costo:** **`0.1541` s per tick sui primi `100` del vuoto; la proiezione `3083` s: sotto il tetto, `5000` tick.** **Le tre corse: `824`, `818`, `815` s; `3321` s in tutto.**
+- **F1-I passa** *(`6.08e-15`)*; **F1-F fallisce come deve** *(`5.20e+00`)*.
+- ### **F1-V, LA LETTURA COL CRITERIO DI LUCA** *(`dcs/dLambda = 2.125e-02`)*: **ENTRO UN FATTORE `2` a tutti e tre i tick:**
+  - **tick `50`:** la deriva di `Lambda` `+2.8422e-14`; di `cs` misurata `+6.6613e-16`, attesa `+6.0396e-16`; il rapporto `1.1029`;
+  - **tick `1000`:** `+4.1744e-14`; `+7.4940e-16` contro `+8.8707e-16`; `0.8448`;
+  - **tick `5000`:** `+2.2204e-14`; `+6.6613e-16` contro `+4.7184e-16`; `1.4118`.
+  - ### **Un fatto da notare, non una lettura:** **con F1 acceso la deriva di `Lambda` del vuoto NON e' lineare e resta `~1e-14`** *(`+4.2e-14` a `1000`, `+2.2e-14` a `5000`)*; **a `cs` spento T1 dava `+2.228e-12` a `1000`.**
+- **La base** *(`TBS` a `10000`, (q2))*, **ai tick `100`, `200`, `500`, `1000`, `2000`, `3000`, `4000`, `5000`:**
+  - **`cs` min:** `0.001942`, `0.001212`, `0.000485`, `0.000301`, `0.000141`, `0.000109`, `0.000094`, `0.000065` *(il minimo su tutti i campioni `0.000060`)*;
+  - **il raggio del nodo di `cs` min:** `26.28`, `26.13`, `37.71`, `39.04`, `29.19`, `35.77`, `35.77`, `38.91` ### *(vicino o OLTRE il bordo di `TBS`, `R_A 28`: non al centro)*;
+  - **`r` max:** da `0.7771` a `0.8618`; **la norma:** da `996944.862393052084` a `996944.862393003423`; **il calore della memoria:** da `-3.098200e+04` a `-7.271386e+03`.
+- **La differenza perturbata/base** *(`max|cs_pert - cs_base|`)*:
+  - **`1e-8`:** `4.444e-06` (100), `6.302e-05` (200), `3.008e-02` (500), `5.369e-02` (1000), `2.372e-01` (2000), `2.631e-01` (3000), `2.689e-01` (4000), `2.716e-01` (5000);
+  - **`1e-10`:** `4.444e-08`, `6.300e-07`, `6.862e-04`, `3.303e-02`, `2.424e-02`, `5.620e-02`, `2.233e-01`, `2.399e-01`.
+- **Il tasso di crescita** *(stima di Lyapunov, fino alla differenza `1e-4`)*: **`1e-8`: `0.04554` per tick** *(il fattore `1.04659`, dal tick `1` al `204`)*; **`1e-10`: `0.04711`** *(`1.04823`, dal `1` al `279`)*.
+- **L'ultimo terzo:** **`1e-8`: il livello `2.699e-01`, la pendenza `+0.0055` decadi per `1000` tick;** **`1e-10`: `2.157e-01`, `+0.0982`.**
+- ### **LA LETTURA: (s1)** — **si stabilizza sullo stesso livello per le due ampiezze** *(il rapporto `1.251`)*: **caotica ma limitata.** ### ⚠ **AL MARGINE:** **la pendenza di `1e-10` (`0.0982`) sta appena sotto la soglia `0.1`** *(la sua differenza sale ancora fra `3000` e `4000`)*.
+- ### **LA LETTURA: (s4)** — **la discesa di `cs` min CONTINUA:** **la pendenza di `ln(cs min)` nell'ultimo terzo `-0.3998` per `1000` tick** *(il minimo `0.000060`)*. **Nessun muro (s3) in `5000` tick.**
