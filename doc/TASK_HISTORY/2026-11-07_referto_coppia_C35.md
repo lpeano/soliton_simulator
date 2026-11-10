@@ -230,3 +230,27 @@
 ### 16.5 TODO
 
 1. **Questa sezione, committata.** 2. **Gli indici.** 3. **La sezione U2 e lo script K-rb; la suite; il commit.** 4. **Le due carte** *(una alla volta)*, **K-rb, il referto, la sez. `17`.** 5. **Poi `C50-0`.**
+
+## 17. L'ESITO DEL REFERTO (r-b) *(`carta_coppia.py` a `642c9e77`, blob `3adbbe11`; `C35-0` dalle `16:14:31` alle `17:17:50`, `C35-pi` dalle `17:18:07` alle `17:56:37` del `2026-11-10`; K-rb alle `17:57:06`)*
+
+- ### **`14/14` E `14/14`** *(i DEVE di sempre, sulla corsa INTERA fino a `200000` tick: `doc/referti_l2/coppia_C35-0_rb.txt`, `coppia_C35-pi_rb.txt`)*. **K-rb `3/3`** *(`confronta_coppia_rb.txt`)*: **le `99` righe a blocchi fino a `10000` = quelle dei referti ufficiali, al carattere, per tutte e due;** **K-rb-F fallisce come deve** *(gia' alla riga `0`, un numero: `34.97810` contro l'altra corsa)*.
+- ### **U2, `C35-0`** *(in fase)*:
+
+| il terzo (unita') | min | max | media `+-` | ampiezza `+-` | `tau_int` | periodo |
+|---|---|---|---|---|---|---|
+| `0`-`10000` | `6.5275` | `35.0003` | `24.0918 +- 1.5072` | `7.9685 +- 1.0658` | `11.93` | `2001.0` |
+| `10000`-`20000` | `11.5926` | `33.3097` | `23.3354 +- 1.3080` | `6.9998 +- 0.9249` | `11.64` | `2001.0` |
+| `20000`-`30000` | `12.2530` | `33.1404` | `23.0216 +- 1.2685` | `6.7118 +- 0.8970` | `11.91` | `2001.0` |
+
+  **La pendenza `-1.0354 +- 1.3719` per `100000` tick** *(zero entro l'errore)*. ### **(d2): l'ampiezza entro `2` errori, un battimento lento, non una deriva;** **non (d3).** **Il periodo `2001` unita' e' la risoluzione del periodogramma nel terzo** *(`10000 / 5`)*: **grossolano, dichiarato.**
+- ### **U2, `C35-pi`** *(in opposizione)*:
+
+| il terzo (unita') | min | max | media `+-` | ampiezza `+-` | `tau_int` | periodo |
+|---|---|---|---|---|---|---|
+| `0`-`10000` | `34.9653` | `37.6021` | `36.5272 +- 0.3569` | `0.7632 +- 0.2524` | `72.93` | `-` |
+| `10000`-`20000` | `36.9334` | `38.0792` | `37.5483 +- 0.1301` | `0.2854 +- 0.0920` | `69.26` | `1429.3` |
+| `20000`-`30000` | `37.7081` | `38.3324` | `37.9777 +- 0.0247` | `0.1510 +- 0.0174` | `8.89` | `1429.3` |
+
+  **La pendenza `+1.1483 +- 0.2019` per `100000` tick** *(`5.7` errori)*. ### **Col criterio scritto: l'ampiezza un CASO INTERMEDIO, e la media non scende (non d3).** ### **Ma il caso non e' fra le letture scritte, e lo dico:** **l'ampiezza SI STRINGE** *(`0.76` -> `0.29` -> `0.15`)* **e la media SALE** *(`36.53` -> `37.55` -> `37.98`)*: **la coppia in opposizione si ALLONTANA piano e si calma** *(una lettura mia, non di Luca: nessuna delle tre la prevede)*.
+- ### **LA PRIMA LETTURA DEL GUARDIANO** *(«`x` da `16.8`-`17.7` a `15.6`-`18.2`», sez. `15`)* **era su `x` dei campioni, il centro PERIODICO di tutta la `rho`, non sulla distanza:** **accanto, `x` e `d/2` agli stessi istanti** *(il referto: per `C35-pi` `x` `17.69`, `17.02`, `17.93`, `16.72`, `18.43` contro `d/2` `17.50`, `18.80`, `18.75`, `18.86`, `18.96`)*: ### **`x` oscilla, `d/2` cresce piano:** **la grandezza giusta smentisce «l'oscillazione si allarga».**
+- **(r-b) e' chiuso.** **Il passo successivo della coda: `C50-0`.**

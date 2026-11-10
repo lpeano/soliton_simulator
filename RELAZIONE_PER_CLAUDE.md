@@ -24974,3 +24974,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **(v1), (v3)** *(il vuoto disturbato con l'ampiezza dell'alone `A_h = 3.31e-2`, e `A_h / 10`, con F1)*: **turbolenti** *(`cs` min `4.3e-5` e `7.0e-5`; la frazione dei nodi sotto `1e-3` da `~3.5e-2` a `~2.1e-1`)*. **(v2)** *(lo stesso disturbo, `cs` SPENTO)*: **calmo** *(la rms di `Lambda` entro `0.7%`, il gemello non cresce)*. **(u1): H4 regge, il solitone non serve.**
 - ### ⛔ **(v0), il vuoto `c(10000) F3` SENZA disturbo, con F1: la rms di `Lambda` cresce dall'arrotondamento** *(`5.0e-15` al tick `100`, `1.2e-2` al `300`, `7.3` al `400`)*, **col tasso `0.158` per tick;** **al `5000` il `60%` dei nodi ha `cs < 1e-2`.** **Il DEVE F1-V fallisce.** **Ipotesi mia:** **F1-V di T2 passava perche' `F3` a fase `1` resta uniforme al bit** *(nessun seme)*: **un FALSO-UNO, da confermare.**
 - **FERMO** *(un DEVE fallito)*: **(i-q) non e' girata;** **tre domande a Luca** *(sez. `27.11`)*.
+
+### 2026-11-10 18:00 -- IL REFERTO (r-b) CHIUSO: `14/14` E `14/14`, K-rb `3/3`; U2: `C35-0` (d2), `C35-pi` SI ALLONTANA PIANO E SI CALMA [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **Le carte intere fino a `200000` tick** *(il task history della coppia, sez. `17`)*: **`14/14` e `14/14`; K-rb: le `99` righe a blocchi fino a `10000` uguali ai referti ufficiali al carattere.**
+- ### **`C35-0` (in fase): (d2)** *(l'ampiezza `7.97`, `7.00`, `6.71` entro `2` errori; la media `24.09`, `23.34`, `23.02`; la pendenza `-1.04 +- 1.37` per `100000` tick)*: **un battimento lento, non una deriva.**
+- ### **`C35-pi` (in opposizione): un caso FUORI dalle letture scritte:** **l'ampiezza si STRINGE** *(`0.76`, `0.29`, `0.15`)* **e la media SALE** *(`36.53`, `37.55`, `37.98`; la pendenza `+1.15 +- 0.20` per `100000` tick)*: **si allontana piano e si calma** *(lettura mia)*. **La prima lettura del guardiano era su `x`, il centro periodico di tutta la `rho`, non sulla distanza: `d/2` la smentisce.**
+- **Il passo successivo: `C50-0`.**

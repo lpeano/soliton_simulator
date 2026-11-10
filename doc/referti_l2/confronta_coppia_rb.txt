@@ -1,0 +1,5 @@
+[TIMBRO] confronta_coppia_rb.py  sha1-BYTE 8f63d85b  committato e pulito
+  DEVE PASSARE: K-rb C35-0: le righe a blocchi fino a 10000 del referto (r-b) = quelle del referto ufficiale, al car PASSA   99 righe confrontate (99 e 99)
+  DEVE PASSARE: K-rb C35-pi: lo stesso per C35-pi                                                                    PASSA   99 righe confrontate (99 e 99)
+  DEVE FALLIRE: K-rb-F il referto (r-b) di C35-0 contro l'ufficiale di C35-pi (un'altra corsa)                       ### FALLISCE   0 righe confrontate (99 e 99); la prima diversa, riga 0: '        0 ..     500   34  34.97810 +-  0.01836  34.97895 +-  0.01961      0.09519    -0.0' contro '        0 ..     500   34  34.98091 +-  0.01267  34.98199 +-  0.01369      0.09519    -0.0'
+### 3 su 3 come devono
