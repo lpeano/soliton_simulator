@@ -107,6 +107,7 @@
    SCELTA fra i tre limiti)*.
 9. ### **LE DOMANDE APERTE:** ### **il fattore `2.26`** *(non `1`; `cbcb99c7`: non viene dalla velocita', viene dalla forma della banda)*; ### **lo spostamento di `lambda*` con la moneta**; ### **perche' la
    bipartizione inverte il segno.**
+10. ### **LA LEGGE COMANDATA DALLA MATERIA (M-rho, M-Phi)** *(Luca `2026-11-10` `19:47`; un'OPZIONE, nessuna decisione)*: **vedi il task history del laterale, sez. `29`** *(`doc/TASK_HISTORY/2026-11-09_laterale_mb.md` sul ramo `zero-nel-nucleo`, `1d69828d`)*. **M-Phi e' la gravita' scalare che si propaga del 2D, col tempo locale dentro.**
 
 ## G. IL BILANCIO DEL `2026-10-22`/`23`
 

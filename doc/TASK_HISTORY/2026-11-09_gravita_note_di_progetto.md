@@ -79,6 +79,8 @@
 
 - **Per G7:** **le domande 1 e 2 hanno una risposta di Luca** *(la strada nel 2D e' lo scalare che si propaga; il 3D dopo il 2D)*; **resta la 3** *(se la cura del punto fisso di `cs` deve gia' andare verso una memoria che si diffonde)*.
 
+- ### **LA LEGGE COMANDATA DALLA MATERIA (M-rho, M-Phi)** *(Luca `2026-11-10` `19:47`, un'OPZIONE, nessuna decisione)*: **vedi il task history del laterale, sez. `29`** *(`doc/TASK_HISTORY/2026-11-09_laterale_mb.md` sul ramo `zero-nel-nucleo`, `1d69828d`)*. **M-Phi e' la strada G5.1 col tempo locale dentro.**
+
 ## 3. TODO
 
 - **Niente da fare finche' Luca non risponde a G7.** **G1 si aggiorna col referto di (r-D5)** *(R1-R3)*, **con una riga qui.**
