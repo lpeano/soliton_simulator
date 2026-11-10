@@ -89,3 +89,24 @@
   - **(L1-F) DEVE FALLIRE:** **una serie sintetica LINEARE** *(stessa pendenza iniziale, stessi residui)*: **«vince l'esponenziale» deve fallire;**
   - **(L1-S, stampato)** **la sensibilita':** **lo scarto massimo fra il fit esponenziale e quello lineare dei dati, in unita' della deviazione dei residui:** **se e' sotto `1`, la finestra NON PUO' distinguere le forme, e lo si scrive accanto alla lettura.**
 - **Lo script `csv/solitone/durata_l1.py`** *(nuovo, non nel percorso di S162)*, **il referto `doc/referti_l2/durata_l1.txt`.**
+
+## 5. L1, L'ESITO: **IL CONTROLLO POSITIVO L1-P FALLISCE: FERMO SU L1** *(la corsa a `ac8d6755`, dalle `01:24:56` alle `01:25:01` del `2026-11-10`; il referto `doc/referti_l2/durata_l1.txt`)*
+
+- **I dati:** **`TB3` e `TBS`, `20001` campioni ciascuno** *(da `0` a `30000`)*, **`93` finestre di `311`.** **`M_cuore`:** **`TB3` da `5.916360e+05` a `3.367760e+05`; `TBS` da `5.917844e+05` a `3.293141e+05`.**
+- **I fit, `TB3`:**
+  - esponenziale: `M0 397450`, `tau 141109`; AIC `+199.897`;
+  - potenza: `1.28568e+06`, `t0 0.00180223`, `a 0.0815467`; AIC `+175.826`;
+  - lineare: `395168`, la pendenza `2.4791`; AIC `+200.758`;
+  - `N_eff 10.6`; il margine `24.071`: «vince potenza».
+- **I fit, `TBS`:**
+  - esponenziale: `394793`, `142727`; AIC `+184.920`;
+  - potenza: `1.20194e+06`, `0.00348523`, `0.0810101`; AIC `+169.661`;
+  - lineare: `392540`, `2.43575`; AIC `+185.627`;
+  - `N_eff 9.8`; il margine `15.259`: «vince potenza».
+- ### **L1-P DEVE PASSARE e FALLISCE:** **sulla sintetica esponenziale** *(`tau 9537.5`, i residui di `TBS` come rumore)* **il criterio da' «potenza preferito, non deciso»** *(il margine `7.05`)*. **L1-F si comporta come deve** *(«vince lineare», il margine `31.81`)*.
+- ### **L1-S:** **`0.189` (`TB3`) e `0.177` (`TBS`):** **la differenza fra il fit esponenziale e quello lineare sta sotto la deviazione dei residui: la finestra NON PUO' distinguere le forme.**
+- ### **Quindi il «vince potenza» dei dati NON e' una lettura:** **il criterio non riconosce nemmeno un esponenziale sintetico ben curvo.** **Il fit a potenza ha `t0 ~ 0.002-0.003` unita': e' degenere** *(la potenza diventa `~ t^-a` con `a ~ 0.08`, che segue la curva iniziale dopo la rampa, non una legge)*. **Questa e' una lettura mia, da verificare.**
+- ### **FERMO su L1** *(la regola: un sigillo che fallisce si committa e ci si ferma; la correzione e' un commit a se')*. **Le cure possibili, a Luca:**
+  1. **la potenza con `t0` vincolato** *(`t0 >= T_DA`)*: **cambia un modello, e' una scelta;**
+  2. **AIC coi punti efficaci e' troppo severo con `N_eff ~ 10`:** **un altro criterio** *(la validazione incrociata a blocchi)*.
+- **E l'ordine:** **L1 e' girato PRIMA che arrivasse il mandato delle `01:22`** *(che lo mette ultimo nella coda)*. **Era la voce successiva della coda di prima.**

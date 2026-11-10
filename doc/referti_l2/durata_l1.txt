@@ -1,0 +1,30 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] durata_l1.py  sha1-BYTE 724ee4b0  committato e pulito
+==================================================================================================================================
+L1, LA FORMA DEL DECADIMENTO DEL CUORE (M_cuore = f_liscia x bordo.M): ('TB3', 'TBS'); le finestre P 311 da t 1000; AIC = N_eff ln(RSS/N) + 2k; vince sopra 10, preferito sopra 2
+==================================================================================================================================
+### TB3: 20001 campioni, t da 0.0 a 30000.0; M_cuore a t 0 5.916360e+05, all'ultimo 3.367760e+05; 93 finestre
+  TB3    N 93 medie; tau_int dei residui esponenziale 4.28, lineare 4.38, potenza 3.56; N_eff 10.6 (il piu' piccolo)
+    esponenziale  parametri 397450, 141109; rms dei residui 1.0057e+04; AIC +199.897
+    potenza       parametri 1.28568e+06, 0.00180223, 0.0815467; rms dei residui 2.9499e+03; AIC +175.826
+    lineare       parametri 395168, 2.4791; rms dei residui 1.0473e+04; AIC +200.758
+    l'ordine potenza < esponenziale < lineare; il margine 24.071: vince potenza
+    L1-S la sensibilita': max |fit esponenziale - fit lineare| / dev. dei residui = 0.1894 (sotto 1: la finestra NON PUO' distinguere le forme)
+### TBS: 20001 campioni, t da 0.0 a 30000.0; M_cuore a t 0 5.917844e+05, all'ultimo 3.293141e+05; 93 finestre
+  TBS    N 93 medie; tau_int dei residui esponenziale 4.70, lineare 4.77, potenza 0.11; N_eff 9.8 (il piu' piccolo)
+    esponenziale  parametri 394793, 142727; rms dei residui 1.0654e+04; AIC +184.920
+    potenza       parametri 1.20194e+06, 0.00348523, 0.0810101; rms dei residui 4.3986e+03; AIC +169.661
+    lineare       parametri 392540, 2.43575; rms dei residui 1.1048e+04; AIC +185.627
+    l'ordine potenza < esponenziale < lineare; il margine 15.259: vince potenza
+    L1-S la sensibilita': max |fit esponenziale - fit lineare| / dev. dei residui = 0.1769 (sotto 1: la finestra NON PUO' distinguere le forme)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: L1-P una sintetica ESPONENZIALE (tau 9537.5 = 1/3 della finestra, i residui di TBS come rumore): vince l ### FALLISCE   potenza preferito, non deciso (il margine 7.05)
+  DEVE FALLIRE: L1-F una sintetica LINEARE (la stessa pendenza iniziale, gli stessi residui): vince l'esponenziale       ### FALLISCE   vince lineare (il margine 31.81)
+----------------------------------------------------------------------------------------------------------------------------------
+  LA LETTURA, TB3: (f2) vince potenza; il margine 24.071; ### L1-S 0.189: la finestra non puo' distinguere
+  LA LETTURA, TBS: (f2) vince potenza; il margine 15.259; ### L1-S 0.177: la finestra non puo' distinguere
+  la stessa forma in TB3 e TBS: si'
+==================================================================================================================================
+ESITO: 1/2 controlli come devono; fallite: 1 ["L1-P una sintetica ESPONENZIALE (tau 9537.5 = 1/3 della finestra, i residui di TBS come rumore): vince l'esponenziale"]

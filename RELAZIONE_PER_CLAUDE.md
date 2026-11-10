@@ -24873,3 +24873,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(t5-b)** **T5 come scritto, con (o1) dichiarata garantita;**
   - **(t5-c)** **il banco col vuoto vivo:** **al primo ordine darebbe lo stesso risultato.**
 - **La coda prosegue con L1, L2, L4.**
+
+### 2026-11-10 01:30 -- L1: IL CONTROLLO POSITIVO L1-P FALLISCE; FERMO SU L1 *(`doc/referti_l2/durata_l1.txt`; il task history della durata, sez. `5`)* [[PIANO-2D-3D]]
+
+- **Sui dati `TB3` e `TBS` il criterio dice «vince potenza»** *(i margini `24.071` e `15.259`)*.
+- ### **Ma L1-P fallisce:** **su una sintetica esponenziale** *(`tau 9537.5`)* **il criterio non riconosce l'esponenziale** *(«potenza preferito», il margine `7.05`)*.
+- **L1-S `0.189` e `0.177`: la finestra non distingue le forme.**
+- ### **Il «vince potenza» non e' una lettura.** **Il fit a potenza e' degenere** *(`t0 ~ 0.002`)*. **Due cure possibili a Luca** *(sez. `5`)*.
+- **L1 e' girato prima del mandato delle `01:22`, che lo mette ultimo.** **Ora D2-bis.**
