@@ -608,3 +608,41 @@
 1. **(D2-bis, una verifica di poco costo)** **D2.3 sul `z` del principale** *(`f` intera)*: **se `|alpha + beta|^2 - 1 < 0` li', il segno di D1-bis e' spiegato; e la stessa misura per pezzi sul principale senza avvolgimento.**
 2. **(la correzione possibile, una scelta di Luca)** **lo spostamento scritto come `I - beta (I - S)`:** `nuovo_0 = v0 - beta (v0 - v1)`, `nuovo_1 = v1 - beta (v1 - v0)`. **Sulla combinazione simmetrica `v0 - v1 = 0` esatto, quindi il valore proprio `1` e' ESATTO** *(e' la forma `I + (e^{i theta} - 1) P-` del commento di `_alfa_beta`)*. ### ⚠ **Il prezzo, scritto:** **a `theta = pi` (`beta = 1`) `v0 - (v0 - v1)` NON e' `v1` al bit**, **e `M-B1`** *(l'identita' al bit col vecchio spostamento)* **cadrebbe.** **Le alternative ne hanno altri** *(`alpha = 1 - beta`: il commento di `_alfa_beta` lo vieta, col suo motivo)*. **La scelta della forma e' di Luca;** **qualunque forma tocca `primo_ordine/flussi_parziali.py` su tutti e due i rami.**
 - ### **FERMO** *(il mandato)*: **ne' T2, ne' T3, ne' correzioni senza la decisione di Luca.**
+
+## 25. T2, LA CARTA F1 ALLUNGATA *(Luca `2026-11-09` `20:13`, ripartito `2026-11-10` `01:22`)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+### 25.0 DA DOVE PARTE
+
+- **La deriva di `Lambda` del vuoto e' spiegata** *(D2, sez. `24.5`: i quattro mezzi spostamenti, `+3.7e-16` relativo per tick)*: **un arrotondamento del tick, non di F1.** **La correzione dello spostamento e' RIMANDATA all'unificazione** *(Luca)*: **non si anticipa.**
+- ### **F1-V NON E' PIU' UN CANCELLO: E' UNA LETTURA** *(il criterio di Luca)*: **«`cs` nel vuoto non deriva piu' di quanto il rilassamento esatto gli impone dalla deriva di `Lambda`».**
+  - **La deriva attesa:** **`dcs/dLambda = Lambda_c/(Lambda + Lambda_c)^2`** *(`34/(Lambda + 34)^2`)* **per la deriva MISURATA di `Lambda` nella stessa corsa;**
+  - **F1-V passa se la deriva media di `cs` sta entro un fattore `2` da quella attesa;** **ai tick `50`, `1000` e alla fine.**
+- **D2-bis del principale e' su origin** *(`126eb630`)*.
+
+### 25.1 LE PREMESSE DAL CODICE
+
+- **Lo script nuovo `csv/solitone/carta_f1_lunga.py`, dalla `carta_f1.py`** *(blob `b0b5deb1`: il rilassamento esatto `cs + r (L - cs)`, `r = 1 - e^{-omega_v}`, (q2))*. **`carta_f1.py` resta com'e'** *(si rigira al suo commit)*.
+- **Le modifiche, dichiarate:**
+  1. **`5000` tick** *(il mandato)*; **il tetto dei `60` minuti:** **dopo i primi `100` tick della prima corsa, i secondi per tick per `4` corse da `5000`** *(il vuoto, la base, `1e-8`, `1e-10`)*: **se la proiezione supera `3600` s, TUTTE le corse a `3000`, dichiarato nel referto;**
+  2. **due ampiezze sul centro, `1e-8` e `1e-10`, in corse separate, contro la stessa corsa base** *(la base tiene `cs` di ogni tick in memoria: `5000 x 6561` float, `~262` MB, stima)*;
+  3. **ogni `100` tick:** **la differenza `max|cs_pert - cs_base|`; `cs` min e il RAGGIO del suo nodo** *(dal centro di `rho` dello stato di partenza, `toro.centro`)*; **`r` max; la norma; il calore della memoria;**
+  4. **il tasso di crescita** *(stima di Lyapunov)*: **la pendenza di `ln(differenza)` sui tick, dal tick `1` al primo con la differenza oltre `1e-4`** *(la soglia di «e oltre, se stabile» della sez. `21`: la stessa, non scelta ora)*, **per ciascuna ampiezza;**
+  5. **F1-V: il vuoto F3 da solo, (q2), fino alla fine;** **la lettura col criterio di Luca ai tick `50`, `1000` e alla fine;**
+  6. **F1-I e F1-F restano** *(l'aritmetica dell'inversa)*; **il vecchio F1-V «AL BIT» non c'e' piu'.**
+
+### 25.2 LE LETTURE, SCRITTE PRIMA *(di Luca; i criteri numerici miei, dichiarati)*
+
+- **«l'ultimo terzo» = i campioni ogni `100` tick nell'ultimo terzo della corsa.**
+- **(s1)** **la differenza si STABILIZZA:** **la pendenza di `log10(differenza)` nell'ultimo terzo sotto `0.1` decadi per `1000` tick in valore assoluto, E i livelli delle due ampiezze** *(la media geometrica dell'ultimo terzo)* **entro un fattore `2`:** **caotica ma limitata.**
+- **(s2)** **la differenza continua a CRESCERE:** **la pendenza `>= 0.1` decadi per `1000` tick:** **instabilita' vera.**
+  - **Se la pendenza e' sotto `0.1` ma i livelli differiscono oltre un fattore `2`:** **lo scrivo cosi', fra (s1) e (s2).**
+- **(s3)** **`cs` min `<= 0`, oppure il dominio o `Omega` cedono** *(un'eccezione: `s <= 0`)*: **FERMO SUBITO;** **il tick, il raggio, `Lambda` locale:** **il muro `cs = 0`.**
+- **(s4)** **la discesa di `cs` min** *(`0.0012` a `200`, `0.0003` a `1000`)*: **si ARRESTA se la pendenza di `ln(cs min)` nell'ultimo terzo e' sotto `0.05` per `1000` tick in valore assoluto;** **allora il tick in cui `cs` min entra per la prima volta entro il `5%` del suo minimo;** **altrimenti la pendenza.**
+- **F1-V, come lettura:** **«entro un fattore `2`» o «fuori», ai tre tick.**
+
+### 25.3 TODO
+
+1. **Questa sezione, commit e push.**
+2. **Lo script; la suite in `wt_zero`; commit e push.**
+3. **La corsa** *(stima `~48` minuti, in background)*; **il referto `doc/referti_l2/carta_f1_lunga.txt`; l'esito in `25.4`; il rimando nella RELAZIONE del principale.**
+4. **Poi T3** *(sez. `26`)*; **dopo T3 FERMO.**
