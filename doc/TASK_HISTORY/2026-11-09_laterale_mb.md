@@ -719,3 +719,36 @@
 - ### **FERMO** *(il mandato: dopo T3)*. **Niente F2, F3, F4, niente `tau_Lambda` dentro F1.** **Le domande a Luca:**
   1. **con (t2) e la premessa caduta:** **F1 resta col `r` del battito** *(T2: (s1) al margine, (s4) `cs` min che scende ancora)*, **oppure F2 o F4?**
   2. **(s4):** **`cs` min scende ai raggi `26`-`39`, vicino o oltre il bordo di `TBS`:** **guardare li' prima di scegliere?**
+
+
+## 27. B1, LA DISCESA DI `cs` MIN E' DEL BORDO? *(Luca `2026-11-10` `08:42`)*: **B1.0, LE PREMESSE DAL CODICE, PRIMA DELLA MISURA**
+
+### 27.1 COME AGISCE IL BORDO DI `TBS` *(letto dal codice, `wt_zero` a `05f77182`)*
+
+- **E' un'operazione FUORI dal nucleo, DOPO ogni tick** *(`csv/solitone/bordo.py`, la docstring; chiamata da `corsa_accensione.corsa`: `AC.tick(z, t, K)`, poi `BO.assorbi(z["st"], gfa[0], rif)`)*.
+- **Dove:** i nodi a distanza periodica `R >= R_A` dal centro `bor["c0"]` *(`campo.anelli`: la distanza in indici, `|a A1 + b A2|`, l'immagine piu' vicina fra le `9`)*. **Per `TBS`:** `R_A = 28` *(`BO.R_A`; `TBS` non e' in `BORDO_CORSA`)*, `g_max = 0.03` *(`BORDO["TBS"] = BORDO["TB3"]`)*, `R_B = 40.5` *(la meta' del periodo, `TO.meta_periodo(81)`)*.
+- **Il profilo:** `g(R) = g_max sin^2(pi/2 (R - R_A)/(R_B - R_A))` fra `R_A` e `R_B`, `g_max` oltre *(i nodi negli angoli del rombo, fino a `L/sqrt 3 ~ 46.8`)*. **`g` per estremita' e' quello del suo nodo.**
+- **Che cosa toglie:** `psi -> psi (1 - g)`; `phi -> phi0 + (phi - phi0)(1 - g)` con `phi0 = c(t) F3` *(il vuoto di riferimento che gira, `c_di(t, tab_c, K, omega)`, `omega = 3 pi/20`)*. **Toglie le onde del vuoto attorno a `phi0`, non il vuoto:** se `phi = phi0` sulla fascia, il bordo non fa niente su `phi`.
+- **`cs` ne dipende?** **Solo per la via di `phi`:** `cs` di F1 rilassa verso `L = FP.cs(Lambda, Lambda_c)`, e `Lambda = mot.densita_vuoto(st)` si legge da `phi`. **Il bordo non tocca `cs` direttamente.**
+- **Il centro del bordo rispetto al centro di `rho`:** `bor["c0"] = (40.5, 40.5)` *(il centro periodico del campione `0` di `TBS`)*; **a `10000` tick il centro di `rho` e' `(40.50359, 40.50231)`, lo spostamento `X = (0.00243, 0.00200)`** *(dal jsonl di `TBS`, pezzo `0`-`10000`, letto con `CA.serie("TBS")`)*. **I raggi di T2** *(dal centro di `rho` a `10000`, `TO.scarti` + `hypot`, la stessa metrica)* **coincidono con quelli del bordo entro ~`0.004`.**
+- **Fino a `10000` il bordo di `TBS` ha tolto `M 3.055e+03`, `V 1.456e+03`** *(lo stesso jsonl)*.
+
+### 27.2 ⚠ **LA PREMESSA DEL MANDATO CADE: T2 GIRAVA COL BORDO SPENTO**
+
+- **`carta_f1_lunga.corsa`** *(e `carta_f1.corsa`, e `tau_lambda.py`)* **chiamano SOLO `TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))`.** **Nessuno dei tre chiama `BO.assorbi`, ne' importa `bordo`** *(grep di `assorbi`, `bordo`, `BO.`, `g_estremita` nei quattro file: zero righe)*. **Il referto di T2 non nomina il bordo.**
+- ### **Quindi la base di T2 e' gia' il toro `81 x 81` PURO:** **lo stato di `TBS` a `10000`** *(nato COL bordo, `10000` tick di assorbimento)* **lasciato andare SENZA il bordo, `5000` tick.** **E' la corsa che il mandato chiama (b1), non (b0).**
+- **E la discesa di `cs` min c'e' col bordo spento:** **T2 base** *(il referto, la tabella della base)*: **tick `50` `0.004596` al raggio `19.22`; `100` `0.001942` a `26.28`; `1000` `0.000301` a `39.04`; `3000` `0.000109` a `35.77`; `5000` `0.000065` a `38.91`;** **la pendenza di `ln(cs min)` nell'ultimo terzo `-0.3998` per `1000` tick.**
+- **Cosa NON si puo' piu' leggere com'era scritto:**
+  - **B1.1 (b0)** *(«lo script nuovo, col bordo ACCESO, ridà al bit `cs` min di T2»)*: **fallirebbe per costruzione**, perche' T2 non aveva il bordo.
+  - **(c1)/(c2)** sono formulate su (b1) = bordo spento, **cioe' su T2 stessa**: **(c1) e' gia' esclusa da T2** *(`cs` min `6.0e-5`, sotto `1e-3`; pendenza `-0.40`)*, **ma (c2) chiede la discesa DENTRO `r < R_A`, e T2 non separa le zone.**
+- **Cosa resta aperto, ed e' l'ipotesi del bordo in un'altra forma:** **la STORIA del bordo.** **Lo stato a `10000` porta `10000` tick di assorbimento sulla fascia `R >= 28`:** **togliendo il bordo, la fascia puo' rilassare da quello stato, e la discesa puo' essere quel rilassamento** *(ipotesi mia, non misurata)*.
+
+### 27.3 **FERMO SU B1: IL DISEGNO E' DI LUCA** *(nessuna corsa, nessuno script)*
+
+**Le mie proposte, con la raccomandazione** *(la scelta e' di Luca)*:
+
+1. **(raccomandata) Rovesciare i ruoli, senza cambiare la domanda:** **(b0) = T2 com'e'** *(bordo spento; il controllo positivo: lo script nuovo ridà al bit `cs` min e il raggio di T2 ai tick `100` e `1000`)*; **(b1) = la stessa corsa col bordo ACCESO** *(`BO.assorbi` dopo ogni tick, `c0 (40.5, 40.5)`, `R_A 28`, `g_max 0.03`, `phi0 = c(10000 + k) F3`)*, **5000 tick, il tetto di 60 minuti;** **B1.4 per entrambe** *(rifacendo (b0), che costa ~`824` s)*. **Le letture andrebbero riscritte per Luca:** il criterio di (c1) diventerebbe *«col bordo acceso la discesa e' piu' rapida, e il nodo di `cs` min sta in `R >= R_A`»*. ### ⚠ **Un controllo in piu' che serve:** **con F1 acceso, `phi0 = c(t) F3` e' ancora il vuoto giusto sulla fascia?** **F1-V di T2 dice che il vuoto F3 sotto F1 deriva in `Lambda` di `~1e-14`, ma la FASE `c(t)` non e' stata controllata sotto F1:** **un C0 breve sotto F1 prima di (b1)** *(come `CA.c0_breve`)*.
+2. **(complementare) La storia senza bordo:** **`TS`** *(la stessa partenza, MAI assorbita: `STIMA["TBS"] = "TS"`)* **NON ha stati su disco** *(`CA.serie("TS")`: nessuno; `STATI` non ha `TS`)*. **`TBS` ha lo stato a `t 0`** *(`TBS_stato_000000.npz`, PRIMA di ogni assorbimento)*: **sotto F1 col bordo spento, `5000` tick, e' una partenza mai assorbita**, ma **non e' lo stesso istante** *(la materia a `t 0` non ha i `10000` tick di dinamica)*. **Lo stato di `TS` a `10000` vorrebbe una corsa di `TS` da rifare** *(costo non stimato)*. **Se la discesa c'e' anche partendo da `t 0`, la storia del bordo non basta a spiegarla.**
+3. **b2** *(`L 162`)*: **resta com'e' scritta**, ma **col bordo acceso o spento va detto**: con la premessa caduta, **non e' piu' «un'altra via per (c1)»**.
+
+**Il criterio di chiusura della domanda:** **la decisione di Luca su 1-3** *(o un disegno suo)*.
