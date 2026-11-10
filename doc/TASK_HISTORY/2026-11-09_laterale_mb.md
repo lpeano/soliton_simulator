@@ -906,3 +906,34 @@
 #### 27.10.6 IL COSTO E L'ORDINE *(stima: `~0.16` s per tick, da (i))*
 
 **(v0) ~`14` min, (v1) e (v2) col gemello ~`27` ciascuna, (v3) ~`14`: ~`80` minuti in un processo; (i-q) ~`14`.** **Sul principale gira la carta (r-b): due processi, e una suite pre-commit aspetta che uno finisca** *(Luca)*.
+
+### 27.11 L'ESITO DI H4, IL VUOTO DISTURBATO *(la corsa dalle `16:44:08` alle `17:40:27` del `2026-11-10`, a `a54a3ee4`, blob `7f9ffb9b`; il referto `doc/referti_l2/h4_vuoto_disturbato.txt`; exit `1`)*: **(u1) H4 REGGE -- E IL DEVE DI (v0) FALLISCE: IL VUOTO UNIFORME CON F1 E' INSTABILE DA SOLO. FERMO.**
+
+- **Lo strumento:** **la frazione sotto `1e-3` sullo stato di prova `1.524158e-03` = `10/6561`** *(DEVE PASSA)*; **«zero» fallisce come deve.**
+- **`A_h = 3.308833e-02`** *(la rms di `|phi - c F3|` su `30654` estremita' a `r > 20` di `TBS` a `10000`; `|F3|` per estremita' `1`)*; **la proiezione sulla zona `a = 0.98762 + 0.15668 i` contro `c = 0.98769 + 0.15643 i`** *(il residuo e' quasi tutto onde, non fase)*. **Lo spettro: il picco al bin `3`** *(`|k| 0.2687`)*.
+- ### **(v1)** *(`A_h`, F1)*: **`cs` min `4.274e-05`; la frazione sotto `1e-3` dal primo terzo `3.559e-02` all'ultimo `2.137e-01`;** **il gemello: Lyapunov `0.02475` per tick** *(dal tick `1` al `387`)*, **la differenza di `Lambda` a `2.630` alla fine.**
+- ### **(v2)** *(`A_h`, `cs` SPENTO)*: **CALMO:** **la rms di `Lambda` `1.164e-01`, lo scarto massimo `0.0069` relativo;** **il gemello NON cresce** *(la differenza `~5e-10` per tutti i `5000` tick: Lyapunov `0.00000`)*.
+- **(v3)** *(`A_h / 10`, F1)*: **turbolento come (v1)** *(`cs` min `6.966e-05`; la frazione sotto `1e-3` da `3.506e-02` a `2.176e-01`)*.
+- ### **LA LETTURA COL CRITERIO SCRITTO: (u1) H4 REGGE** *(«il vuoto col tempo locale non regge i disturbi, e il solitone non serve»)*. **(u3) non c'e'** *(anche `A_h / 10` e' turbolento: nessuna soglia fra `A_h / 10` e `A_h`)*.
+- ### ⛔ **IL DEVE DI (v0) FALLISCE** *(F1-V: ai tick `1000` e `5000` la deriva di `cs` medio e' `-3.07e-02` e `-3.21e-02` contro `-3.5e-15` e `-4.1e-15` attese)*. **(v0) e' il vuoto `c(10000) F3` SENZA disturbo, con F1:** **la rms di `Lambda` cresce da sola:**
+
+| tick | rms di `Lambda` | `cs` min | la frazione sotto `1e-2` |
+|---|---|---|---|
+| `100` | `5.037e-15` | `0.150` | `0` |
+| `150` | `5.527e-13` | `0.150` | `0` |
+| `200` | `1.467e-09` | `0.150` | `0` |
+| `250` | `4.136e-06` | `0.150` | `0` |
+| `300` | `1.190e-02` | `0.148` | `0` |
+| `400` | `7.313` | `2.600e-03` | `3.88e-01` |
+| `1000` | `7.986` | `3.030e-04` | `5.58e-01` |
+| `5000` | `8.203` | `8.432e-05` | `6.05e-01` |
+
+  - **Il tasso di crescita** *(dalle righe del referto, `python -c`)*: **`0.1577` per tick fra `150` e `200`, `0.1589` fra `200` e `250`:** **un'instabilita' LINEARE del vuoto uniforme con F1, un fattore `e` ogni ~`6` tick, seminata dall'arrotondamento** *(`~5e-15`)*.
+  - **Al tick `5000` la mediana di `cs` e' `4.875e-03`** *(`s = 0.15`)* **e il `60%` dei nodi sta sotto `1e-2`:** **e' il vuoto INTERO che si svuota.**
+- ### **PERCHE' T2 E (i) NON LO VEDEVANO** *(un'ipotesi mia, NON misurata)*: **il loro F1-V partiva da `F3` a fase `1`** *(componenti reali, `+-1`)*: **il vuoto resta uniforme AL BIT e l'instabilita' non ha un seme** *(in (i) la rms non era stampata; la deriva di `Lambda` `~1e-14` per `5000` tick)*. **Con `c(10000) F3`** *(una fase complessa)* **l'arrotondamento rompe l'uniformita' a `~5e-15`, e dopo ~`300` tick il vuoto e' turbolento.** ### **Quindi «F1-V regge» di T2 era un FALSO-UNO** *(un controllo che passava perche' il seme era zero, non perche' il vuoto fosse stabile)*: **da confermare** *(per esempio: (v0) con `F3` a fase `1` piu' un disturbo `1e-14`)*.
+- ### **CHE COSA VUOL DIRE PER B1** *(lettura mia)*: **la discesa di `cs` min di T2, (i), (iv), (ii) e' questa instabilita' del vuoto con F1, seminata dalle onde del solitone:** **il solitone non serve** *(u1)*; **e il fondo comune `~5e-5`-`1e-4` e' quello del vuoto turbolento** *(in (v0) a `5000`: `8.4e-5`)*.
+- ### ⛔ **FERMO** *(la regola: un DEVE che fallisce si committa, e ci si ferma)*. **(i-q) NON e' girata.** **Le domande a Luca:**
+  1. **(i-q) serve ancora** *(la distribuzione della scena del solitone)*, **o il risultato di (v0) basta?**
+  2. **Confermare il FALSO-UNO di F1-V:** **(v0) con `F3` a fase `1`, con e senza un seme `1e-14`?**
+  3. **F4 e la sua scena:** **con un vuoto F1 instabile da solo, la rampa di F4 ha ancora senso, o serve prima capire l'instabilita'** *(il suo tasso `~0.16` per tick contro le scale del tick)*?
+- ### **LA TABELLA H1-H4** *(provvisoria: (i-q) manca)*: **H1 non regge; H2 non misurata; H3 non regge; H4 REGGE** *(u1)*, **e piu' forte di come era scritta: non servono nemmeno i disturbi, basta l'arrotondamento.**
