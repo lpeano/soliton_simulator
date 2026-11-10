@@ -848,3 +848,21 @@
 - ### **E IL PROFILO MOSTRA DA DOVE PARTE** *(i minimi per zona, dalle righe del profilo di `cs` MIN)*: **al tick `50` e' scesa solo la zona della materia** *(`r < 20`: `5.62e-03`; `20`-`27`: `1.06e-01`; oltre `28`: `1.50e-01`, cioe' ancora `s`)*; **al `1000` tutte** *(`5.50e-04`, `4.32e-04`, `2.31e-04`)*; **al `5000` tutte attorno a `1e-4`** *(`1.07e-04`, `1.23e-04`, `9.34e-05`)*. **La discesa NASCE dove c'e' la materia e si allarga a tutto il dominio.**
 - **Il fronte: (f2)** *(il RMS `4.378` anelli, un passo all'indietro di `12`; sul tratto `50`-`750` `v_f 0.0382 +- 0.0056` nodi per tick, il `~43%` di `v_g`, non entro il `20%`)*.
 - ### **LA MIA LETTURA, da confermare:** **la storia del bordo NON serve a spiegare la discesa** *(da uno stato MAI assorbito `cs` min arriva a `~1e-4` come da quello a `10000`)*, **con il limite del vuoto acceso tutto insieme** *(un colpo in piu', che non posso separare con questa corsa)*. **H1, cosi' com'era, non regge.**
+
+### 27.8 (iii) IL TORO `L 162`: **IL RACCORDO NON REGGE, (iii) SI SALTA** *(il controllo dalle `16:03:17` alle `16:03:34` del `2026-11-10`, a `4052a546`, `csv/solitone/b1_raccordo.py` blob `f1c70287`; il referto `doc/referti_l2/b1_iii_l162.txt`)*
+
+- **Il blocco `81 x 81` dello stato di `TBS` spostato di `40` nel toro `162`, riempito con `c(t) F3`:** **`19360` archi portati, `952` toccano l'orlo.**
+- **Il controllo positivo PASSA:** **a `t 0` il salto sull'orlo e' `1.110e-16`** *(lo stato mai assorbito e' `F3` esatto sull'orlo)*.
+- ### **A `t 10000` IL SALTO E' `3.853e-02`** *(`max|phi - c F3|` sull'orlo)*, **e `max|psi|` sull'orlo `4.989e-02`**: **oltre `1e-12` di Luca: (iii) SI SALTA, dichiarato.** **Il motivo e' fisico:** **sull'orlo del blocco** *(la fascia assorbente di `TBS`, `R >= 28`)* **ci sono le onde del vuoto e la materia emessa** *(non assorbite del tutto)*: **un raccordo esatto con `c(t) F3` non c'e'.**
+
+### 27.9 LA TABELLA H1/H2/H3, E IL FERMO *(il mandato: «dopo le quattro corse: fermo»)*
+
+| | l'ipotesi | la corsa | che cosa dice | regge? |
+|---|---|---|---|---|
+| **H1** | **la storia del bordo** | **(ii)** `TBS` a `t 0`, mai assorbita | **`cs` min scende a `9.0e-5`** *(al `4900`)*, **come in (i)** *(`6.5e-5` al `5000`)*; **la discesa nasce nella zona della materia e si allarga a tutto il dominio** | ### **NON REGGE** *(lettura mia; col criterio scritto: caso intermedio, la pendenza `-0.139`)*. **Il limite: il vuoto si accende tutto insieme a `t 0`** |
+| **H2** | **il toro finito, l'antipodo** | **(iii)** `L 162` | **NON FATTA:** il raccordo salta di `3.85e-2` | ### **NON MISURATA.** **Gli indizi contro** *(non una misura di H2)*: **in (i) `cs` min scende in OGNI anello, anche a `r < 20`** *(da `4.6e-3` a `2.3e-4`)*; **in (ii) parte dalla materia, non dall'antipodo** |
+| **H3** | **il colpo dell'accensione** | **(iv)** la rampa `K 1000` | **acceso piano, F1 porta `cs` min allo STESSO FONDO** *(`~5e-5`)*, **prima, e li' si ferma** | ### **NON REGGE** *(lettura mia; col criterio scritto: caso intermedio)* |
+
+- **Il fronte:** **(f2) in tutte e tre le corse** *(il minimo salta fra anelli lontani; le velocita' di confronto misurate: il cono `1`, `|v_g|` `0.0883` e `0.0904` nodi per tick)*.
+- ### **CHE COSA RESTA, DETTO COME IPOTESI E NON COME MISURA:** **la discesa sembra della DINAMICA con F1, in tutto il dominio, verso un fondo `~5e-5`-`1e-4`.** **Una stima** *(non misurata)*: **col `cs` di F1 che rilassa verso `L = FP.cs(Lambda)`, `cs ~ 6e-5` vorrebbe `Lambda` dell'ordine di `1e-3` in quel nodo:** **il vuoto quasi VUOTO in nodi isolati.** **Il profilo stampa `Lambda` MEDIO per anello, non il minimo:** **la coda bassa di `Lambda` non e' misurata.** **Se interessa, la misura naturale e' la distribuzione di `Lambda` per nodo** *(il minimo e i quantili bassi nel tempo)* **sulle stesse corse:** **una proposta, non la faccio.**
+- ### **FERMO** *(il mandato)*: **la scena di F4 e il passo dopo li decide Luca.** **F4 resta in coda dietro questa decisione** *(il mandato delle `08:48`: con (c1)/(c2) di B1 vecchio; il caso di oggi e' piu' vicino a «della dinamica», ma la scelta della scena e' sua)*.

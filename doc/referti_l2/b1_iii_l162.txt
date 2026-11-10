@@ -1,0 +1,18 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_statiche.py  sha1-BYTE 8852b65f  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] b1_raccordo.py  sha1-BYTE f1c70287  committato e pulito
+==================================================================================================================================
+B1 (iii), IL RACCORDO (sez. 27.8): lo stato di TBS nel toro L 162, spostato di 40; il riempimento c(t) F3 (fase_F3.npz, K 6667, omega 0.47123889803846897); TOLL 1e-12
+==================================================================================================================================
+### lo stato a t 0: TBS_stato_000000.npz (sha di phi_h e psi_h come registrati)
+### lo stato a t 10000: TBS_stato_010000.npz (sha di phi_h e psi_h come registrati)
+  t     0: c(t) +1.000000000000 +0.000000000000i; 19360 archi del blocco portati, 952 toccano l'orlo; IL SALTO max|phi - c F3| sull'orlo 1.110e-16; max|psi| sull'orlo 1.104e-19
+  t 10000: c(t) +0.987688340595 +0.156434465040i; 19360 archi del blocco portati, 952 toccano l'orlo; IL SALTO max|phi - c F3| sull'orlo 3.853e-02; max|psi| sull'orlo 4.989e-02
+  DEVE PASSARE: il controllo positivo: a t 0 (prima di ogni assorbimento) il salto sull'orlo entro 1e-12                 PASSA   1.110e-16
+----------------------------------------------------------------------------------------------------------------------------------
+  ### IL SALTO a t 10000 e' 3.853e-02, oltre 1e-12: (iii) SI SALTA (Luca), dichiarato
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite: 0 []
