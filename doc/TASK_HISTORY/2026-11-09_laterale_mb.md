@@ -839,3 +839,12 @@
   - **(i) a `5000` e' a `6.5e-5` e scende ancora:** **le due corse vanno verso LO STESSO FONDO**, **(iv) ci arriva prima e si ferma.**
 - ### **LA MIA LETTURA, da confermare** *(non quella di Luca)*: **il colpo dell'accensione NON spiega la discesa:** **acceso piano, F1 porta `cs` min allo stesso livello** *(`~5e-5`)*; **cambia solo QUANDO.** **La pendenza diversa nell'ultimo terzo viene dal fatto che (iv) ha gia' raggiunto il fondo e (i) no.** **H3, cosi' com'era, non regge.**
 - **Il fronte:** **(f2) anche qui** *(RMS `9.351` anelli, un passo all'indietro di `10`)*.
+
+### 27.7 L'ESITO DI (ii), LA PARTENZA MAI ASSORBITA *(la corsa dalle `15:43:58` alle `15:57:29` del `2026-11-10`, a `a1708087`, blob `6b575a6b`; il referto `doc/referti_l2/b1_ii_t0.txt`)*
+
+- **La partenza:** `TBS_stato_000000.npz` *(t `0`)*, **il centro di `rho` `(40.5, 40.5)`.** **I due limiti** *(27.4.3)*: **non e' lo stesso istante; e il vuoto si accende TUTTO INSIEME con F1** *(a `t 0` `TBS` era all'inizio della rampa del vuoto)*.
+- ### **LA LETTURA COL CRITERIO SCRITTO: CASO INTERMEDIO** *(la pendenza di `ln(cs min)` nell'ultimo terzo `-0.1387` per `1000` tick, fra `-0.2` e `-0.05`)*.
+- ### **MA `cs` MIN SCENDE ALLO STESSO LIVELLO DI (i)** *(le righe del referto)*: **`0.005623` @ `12.62` al tick `50`; `0.000852` @ `16.90` a `250`; `0.000231` @ `31.78` a `1000`; `0.000121` a `3000`; `0.000093` @ `31.78` a `5000`** *(il minimo `9.005e-05` al tick `4900`)*. **(i) a `5000`: `6.5e-5`.**
+- ### **E IL PROFILO MOSTRA DA DOVE PARTE** *(i minimi per zona, dalle righe del profilo di `cs` MIN)*: **al tick `50` e' scesa solo la zona della materia** *(`r < 20`: `5.62e-03`; `20`-`27`: `1.06e-01`; oltre `28`: `1.50e-01`, cioe' ancora `s`)*; **al `1000` tutte** *(`5.50e-04`, `4.32e-04`, `2.31e-04`)*; **al `5000` tutte attorno a `1e-4`** *(`1.07e-04`, `1.23e-04`, `9.34e-05`)*. **La discesa NASCE dove c'e' la materia e si allarga a tutto il dominio.**
+- **Il fronte: (f2)** *(il RMS `4.378` anelli, un passo all'indietro di `12`; sul tratto `50`-`750` `v_f 0.0382 +- 0.0056` nodi per tick, il `~43%` di `v_g`, non entro il `20%`)*.
+- ### **LA MIA LETTURA, da confermare:** **la storia del bordo NON serve a spiegare la discesa** *(da uno stato MAI assorbito `cs` min arriva a `~1e-4` come da quello a `10000`)*, **con il limite del vuoto acceso tutto insieme** *(un colpo in piu', che non posso separare con questa corsa)*. **H1, cosi' com'era, non regge.**
