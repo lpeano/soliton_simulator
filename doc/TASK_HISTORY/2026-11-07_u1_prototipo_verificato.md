@@ -923,3 +923,13 @@
   - **T5-R DEVE PASSARE:** **`0.588137` a `s 0.15`, `eps 0.5`, entro `1e-6`.**
 - ### **Il confronto col vuoto si sposta dove il vuoto entra davvero, `cs` acceso: DOPO L'UNIFICAZIONE** *(U1)*: **una voce aperta, scritta nella sez. `10` del task history `2026-11-08_zero_simmetrico_nel_nucleo.md`.**
 - **Il referto di (A): `doc/referti_l2/u1_t5.txt`; lo script `csv/solitone/u1_t5.py`.**
+
+### 25.4 T5 (A), PRIMA DEL CODICE *(dopo T3 del laterale, nell'ordine di Luca)*
+
+- **Le funzioni:** **`csv/solitone/u1_p1.vb(eps, s)`** *(`v_b` dei due rami della coppia a `K` col fit di `_u1_secondo.vb_di`, gli spostamenti dello zero `+- pi s/2`, e `v_max` = `_triangoli_forza.v_max(matrice_L(eps, s))`)*: **le stesse di P1, che hanno dato `0.588137`.**
+- **I punti:** **`s` in `0.001`, `0.01`, `0.05`, `0.1`, `0.3`** *(`_u1_terzo.S_VAR`)* **e `0.15`** *(per T5-R)*, **`eps` `0` e `0.5`.**
+- **Il limite a `s -> 0`:** **`np.polyfit` di `v_max/s` contro `s` sui cinque punti di `S_VAR`, gradi `1`, `2`, `3`:** **il limite e' l'intercetta del grado `2`; la dispersione e' max - min delle tre intercette.** **Lo stesso per `v_b/s`, stampato, senza letture.**
+- **I DEVE:**
+  - **(T5-R) DEVE PASSARE:** **`|v_max/s(0.15, 0.5) - 0.588137| <= 1e-6`** *(`0.588137` e' a sei cifre: l'arrotondamento `<= 5e-7`)*;
+  - ### **(T5-F) DEVE FALLIRE** *(nuovo: il T5-F della sez. `25` era di (B), che e' decaduta)*: **lo stesso controllo contro `0.588137 + 1e-5`:** **la tolleranza deve saper dire di no.**
+- **Lo script `csv/solitone/u1_t5.py`, il referto `doc/referti_l2/u1_t5.txt`.** **Il costo** *(stima)*: **`12` volte `v_max` e `vb`, qualche minuto.**
