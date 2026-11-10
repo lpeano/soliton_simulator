@@ -110,3 +110,62 @@
   1. **la potenza con `t0` vincolato** *(`t0 >= T_DA`)*: **cambia un modello, e' una scelta;**
   2. **AIC coi punti efficaci e' troppo severo con `N_eff ~ 10`:** **un altro criterio** *(la validazione incrociata a blocchi)*.
 - **E l'ordine:** **L1 e' girato PRIMA che arrivasse il mandato delle `01:22`** *(che lo mette ultimo nella coda)*. **Era la voce successiva della coda di prima.**
+
+## 6. LA DECISIONE DI LUCA *(`2026-11-10` `08:42`)*: **L1 NON DECIDIBILE SU `30000` UNITA'**
+
+### 6.1 L1.a, LA DECISIONE, REGISTRATA
+
+> ### **«L1 non decidibile su `30000` tick (`TB3`, `TBS`); nessuna forma della durata si sceglie su questi dati; nessun cambio di modello o di criterio.»** *(Luca, `08:42`)*
+
+- **Il «vince potenza» della sez. `5` resta scritto come NON-LETTURA:** **il criterio non riconosce un esponenziale sintetico** *(L1-P fallito)*, **e la differenza fra le forme sta sotto il rumore dei residui** *(L1-S `0.189`, `0.177`)*.
+- **Le due cure della sez. `5`** *(la potenza con `t0` vincolato; la validazione incrociata a blocchi)* **NON si fanno:** **nessuna crea l'informazione che manca** *(Luca)*.
+- *(Nota sulla parola: la finestra e' di `30000` UNITA' di tempo, `t · s`, cioe' `200000` tick a `s 0.15`; la decisione di Luca dice «tick», e si intende la stessa finestra.)*
+
+### 6.2 L1.b, QUANTO DOVREBBE ESSERE LUNGA UNA CORSA PERCHE' L1-S PASSI `1` *(UNA STIMA, nessuna corsa)*
+
+- **Le supposizioni** *(dichiarate)*: **i dati oltre `30000` seguono il fit esponenziale di adesso** *(`tau 141109` `TB3`, `142727` `TBS`, dal referto)*; **la deviazione dei residui resta quella di adesso;** **le medie su finestre di `311` da `t 1000`, come in L1.**
+- **Il conto:** **L1-S(T) = L1-S(oggi) · D(T) / D(oggi)**, **`D(T)` lo scarto massimo fra `e^{-t/tau}` e la sua retta dei minimi quadrati sui centri delle finestre fino a `T`** *(`M0` si semplifica)*. **Lo script** *(nel solo scratchpad, perche' e' aritmetica sui numeri del referto; il testo intero qui sotto, per rifarlo)*:
+
+```python
+import numpy as np
+P, DA, S = 311.0, 1000.0, 0.15
+CASI = {"TB3": (141109.0, 0.1894), "TBS": (142727.0, 0.1769)}   # tau del fit esponenziale, L1-S
+def D(tau, nfin):
+    t = DA + P * (np.arange(nfin) + 0.5)
+    y = np.exp(-t / tau)
+    a, b = np.polyfit(t, y, 1)
+    return float(np.max(np.abs(y - (a * t + b))))
+for nome, (tau, s0) in CASI.items():
+    d0 = D(tau, 93); n = 93
+    while s0 * D(tau, n) / d0 < 1.0:
+        n += 1
+    print(nome, n, DA + P * n, (DA + P * n) / S)
+```
+
+- **L'uscita** *(girato alle `08:49:48`, dall'uscita di `date`)*:
+  - **`TB3`:** **L1-S `>= 1` a `224` finestre: la fine a `t 70664` unita'** *(`471093` tick a `s 0.15`)*, **`2.41` volte la finestra di oggi;**
+  - **`TBS`:** **`233` finestre: `t 73463`** *(`489753` tick)*, **`2.51` volte.**
+  - *(La sola legge `T^2` della curvatura darebbe `67459` e `69767`: il resto e' l'ordine superiore di `e^{-t/tau}` a `T/tau ~ 0.5`.)*
+- ### ⚠ **E' UNA STIMA, e solo una CONDIZIONE NECESSARIA:** **L1-S `>= 1` dice che la finestra POTREBBE distinguere esponenziale e lineare;** **non dice che L1-P passerebbe** *(il criterio AIC con `N_eff ~ 10` resta da provare su una sintetica alla nuova lunghezza)*, **ne' che la potenza si distinguerebbe** *(non stimato)*. **Se i dati futuri curvano meno del fit esponenziale, la corsa dovrebbe essere piu' lunga.**
+
+### 6.3 L1.c, L2 E L4: LE LORO PREMESSE, RILETTE
+
+- ### **L2 SI FERMA:** **presuppone una forma.** **La sez. `2`, L2: «la vita estrapolata col modello che vince L1 (se nessuno vince: con tutti e tre, e la dispersione e' l'errore di modello)».** **La fine primaria** *(il cuore sotto meta' del valore a `t 1000`)* **non e' dentro la finestra** *(`M_cuore` di `TBS` finisce a `3.293e+05`, sez. `5`; la meta' di quello a `t 1000` sta sotto)*: **e' un'estrapolazione, e su questi dati le tre forme si estrapolano a vite che non hanno niente in comune** *(il tempo in cui il fit scende a meta' del suo valore a `t 1000`, dai parametri della sez. `5`; lo script `l1c.py` qui sotto, girato alle `08:50:51`):* **`TB3`: esponenziale `t 9.881e+04`, lineare `8.02e+04`, potenza `4.915e+06`;** **`TBS`: `9.993e+04`, `8.108e+04`, `5.199e+06` unita'** *(un fattore `~60` fra le forme)*. **Con la decisione di Luca** *(«nessuna forma si sceglie»)* **la «dispersione come errore di modello» non e' una misura, e' la decisione mancante.** **L2 resta FERMO finche' una forma non e' decidibile** *(il criterio di chiusura: una corsa lunga come in 6.2, decisa da Luca, o un'altra definizione della vita che non estrapoli)*.
+  - **Lo script `l1c.py`** *(aritmetica sui parametri del referto)*:
+
+```python
+import math
+# L2 estrapolata coi fit di L1 (sez. 5): il tempo in cui M_cuore scende a meta' del valore del fit a t 1000.
+FIT = {"TB3": ((397450.0, 141109.0), (1.28568e+06, 0.00180223, 0.0815467), (395168.0, 2.4791)),
+       "TBS": ((394793.0, 142727.0), (1.20194e+06, 0.00348523, 0.0810101), (392540.0, 2.43575))}
+for n, ((M0e, tau), (M0p, t0, a), (M0l, r)) in FIT.items():
+    te = 1000.0 + tau * math.log(2.0)
+    tp = (1.0 + 1000.0 / t0) * 2.0 ** (1.0 / a) * t0 - t0
+    ml = M0l - r * 1000.0
+    tl = (M0l - 0.5 * ml) / r
+    print("%s: la meta' del valore a t 1000: esponenziale t %.4g, lineare t %.4g, potenza t %.4g (unita')" % (n, te, tl, tp))
+```
+
+- ### **L4 E' INDIPENDENTE, e resta in coda** *(dopo i test gia' ordinati: B1 sul laterale prima)*: **confronta i ritmi di perdita del cuore** *(in fase, in opposizione, da solo)* **SULLE STESSE FINESTRE di tempo:** **non estrapola, e un ritmo misurato su una finestra comune non chiede la forma.** **Due cose da scrivere PRIMA del suo codice:**
+  1. **il ritmo senza modello** *(la pendenza media di `M_cuore` sulla finestra comune, con l'errore dai residui e `N_eff`)*: **NON il parametro di un fit di L1;**
+  2. **la lettura dal codice gia' scritta nella sez. `2`:** **se le carte della coppia danno il cuore di ciascun solitone separato** *(`carta_coppia`)*.

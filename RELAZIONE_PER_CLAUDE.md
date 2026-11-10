@@ -24929,3 +24929,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`v_b/s` stampato senza letture** *(il limite `~0.78539`, e dipende dallo zero)*.
 - **T5-R passa** *(`0.58813743`, lo scarto `4.33e-07`)*; **T5-F fallisce come deve.**
 - ### **La coda di Luca:** **D2-bis, T2, T3 e T5 (A) sono fatti.** **L1 e' l'ultima voce, ed e' FERMO** *(L1-P fallito, `09e6c2c2`: aspetta la sua decisione)*.
+
+### 2026-11-10 08:52 -- I TRE MANDATI DI LUCA DELLE 08:42-08:48: B1 FERMO SULLA PREMESSA (T2 GIRAVA COL BORDO SPENTO); L1 NON DECIDIBILE, REGISTRATO; F4 IN CODA DIETRO B1 [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- ### **IL RIMANDO AL LATERALE (regola 2): B1.0, `963bb1b6`** *(il task history del laterale, sez. `27`)*. **Il bordo di `TBS` e' `BO.assorbi` DOPO ogni tick, fuori dal nucleo** *(`R_A 28` da `c0 (40.5, 40.5)`, `g_max 0.03`, `R_B 40.5`; toglie le onde attorno a `c(t) F3`; `cs` ne dipende solo via `Lambda`)*. ### ⚠ **LA PREMESSA DEL MANDATO CADE: T2 NON AVEVA IL BORDO** *(`carta_f1_lunga.corsa` chiama solo `TK.percorri_tick`; zero righe di `assorbi`/`bordo` nei tre script di F1)*: **la base di T2 E' gia' il toro puro** *(lo stato di `TBS` a `10000`, nato col bordo, lasciato andare senza)*, **e la discesa di `cs` min c'e' li'.** **B1.1 come scritto fallirebbe per costruzione.** **FERMO su B1:** **tre proposte a Luca** *(raccomandata: rovesciare i ruoli, (b0) = T2 senza bordo, (b1) = col bordo acceso, con un C0 breve sotto F1 prima)*.
+- ### **F4** *(il mandato delle `08:48`)*: **in coda. Parte SOLO dopo B1, e la sua scena dipende dall'esito di B1:** **con B1 fermo, F4 aspetta.**
+- ### **L1** *(il mandato delle `08:42`; il task history della durata, sez. `6`)*:
+  - **L1.a** **registrata la decisione: «L1 non decidibile su 30000 (`TB3`, `TBS`); nessuna forma si sceglie; nessun cambio di modello o di criterio».** **Il «vince potenza» resta una NON-lettura.**
+  - **L1.b, UNA STIMA** *(i dati futuri supposti uguali al fit esponenziale, i residui uguali)*: **L1-S passa `1` con la fine a `t 70664` (`TB3`) e `73463` (`TBS`) unita'** *(`~471000`-`490000` tick a `s 0.15`)*, **`2.41` e `2.51` volte la finestra di oggi.** **Solo una condizione necessaria.**
+  - **L1.c:** **L2 SI FERMA** *(estrapola con la forma: le vite a meta' del valore a `t 1000` vanno da `8.0e4` (lineare) a `~1e5` (esponenziale) a `~5e6` (potenza) unita')*; **L4 e' INDIPENDENTE** *(ritmi sulle stesse finestre, senza estrapolare)* **e resta in coda dopo B1,** **col ritmo definito senza modello, prima del codice.**
