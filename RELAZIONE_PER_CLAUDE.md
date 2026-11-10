@@ -24949,3 +24949,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **(i), T2 rifatto col profilo** *(il task history del laterale, sez. `27.5`; il referto `b1_i_profilo.txt`)*: **(i-B) al bit contro il codice di T2, (i-F) fallisce come deve.** **Il cono `1` nodo per tick, `|v_g|` massimo `0.0883` (`psi`) e `0.0904` (`phi`) nodi per tick** *(misurati)*.
 - ### **(f2):** **il minimo di `cs` salta fra anelli lontani** *(RMS `6.2` anelli; `v_f 0.0043`, `~1/20` di `v_g`)*, **perche' `cs` min scende in OGNI anello** *(dentro `r < 20` da `4.6e-3` a `2.3e-4`, oltre `28` da `7.1e-3` a `6.6e-5`, dal tick `50` al `5000`)*: **il minimo globale sta fuori per un margine piccolo.**
 - **Lo script del raccordo di (iii), `06cc9516`:** **gira al suo turno, dopo (ii).** **In corsa: (iv).**
+
+### 2026-11-10 15:35 -- `S162` FINITA: L'ALLUNGAMENTO DA `66667` A `200000` TICK, `14` PEZZI, COMMITTATI *(i jsonl `doc/referti_l2/accensione_lenta/S162_066667.jsonl` ... `S162_196667.jsonl`)* [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **Dalle `21:13:37` del `2026-11-09`** *(a `9cc1bf42`, `orari_prove`)* **alle `15:26:25` del `2026-11-10`** *(l'uscita del driver)*: **`21` pezzi in tutto, «finita».**
+- **Dal log del driver:** **all'ultimo pezzo** *(`196667` -> `200000`)* **`f_liscia 0.32793`** *(all'inizio `0.59164`)*, **`w 9.6332`, l'alone `0.00030`;** **il bordo** *(`g_max 0.03`, `R_A 47.5`)*: **lo spostamento `17.3927`; assorbite `M 5.001677e+03`, `V 4.046011e+03`, `E 6.062743e+03`** *(relative `5.002e-03`, `2.569e-02`, `1.300e-03`)*.
+- ### **Il passo successivo della coda del principale: il referto (r-b)** *(`carta_coppia` intera con `S162` lungo quanto le coppie, e U2: la distanza di `C35-pi` per terzo di corsa, le letture d1-d3 della sez. `15` del task history della coppia)*; **prima il progetto, poi il codice.** **Poi `C50-0`.**
