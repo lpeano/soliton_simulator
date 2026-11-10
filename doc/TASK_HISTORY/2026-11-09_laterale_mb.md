@@ -997,3 +997,36 @@
   - **«Stabile»** *(il mio dettaglio, dichiarato)*: **`|lambda|_max - 1` sotto `1e-9`** *(la soglia del DEVE unitario)*.
 - **Il costo** *(stima: `~0.16` s per tick)*: **`53` tick per punto e caso** *(la base e `13 x 4` differenze)*, **`24` linearizzazioni, piu' `psi`, i controlli, l'onda piana:** **~`2000` tick, ~`6` minuti.** **Il referto `doc/referti_l2/s2_spettro_vuoto_cs.txt`; lo script `csv/solitone/s2_spettro.py`.**
 - ### **DOPO S2: FERMO.** **F4, la forma della legge, e qualunque cambio di `Lambda_c` o di `s` sono di Luca.**
+
+## 29. LA LEGGE COMANDATA DALLA MATERIA *(Luca `2026-11-10` `19:47`, aggiunta al mandato delle `19:37`)*: **UN'OPZIONE, SOLO SCRITTURA** *(nessun codice, nessuna corsa, nessuna scelta; nessuna voce dell'indice cambia stato)*
+
+### 29.1 L'OSSERVAZIONE *(di LUCA, `19:44`)*
+
+> ### **«Nello spazio vuoto il tempo dovrebbe essere libero di fluire, non fermarsi e rallentare. Dovrebbe rallentare nello spazio vicino alla materia.»**
+
+- **La legge di oggi** *(`FP.cs`: `cs = Lambda / (Lambda + Lambda_c)`)* **lega l'orologio alla densita' del VUOTO:** **anche il vuoto da solo fa da orologio,** **e l'instabilita' di H4 (v0) nasce da li'.** ### **E' un'IPOTESI (di Luca), da confermare con S2, non un fatto** *(S2 dice SE il vuoto con la legge di oggi e' instabile e per quale meccanismo; non dice che una legge senza `Lambda` sarebbe stabile)*.
+- **Il riferimento fisico** *(Luca)*: **in relativita', lontano da ogni massa gli orologi vanno al ritmo pieno; rallentano vicino alla materia, e anche INTORNO, con una portata, attraverso un POTENZIALE e non attraverso la densita' locale.**
+- **Un fatto gia' scritto che va nella stessa direzione** *(G1 delle note sulla gravita', `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md` sul principale)*: **con la legge di oggi, al centro del solitone `cs/s` e' `~1` (fino a `~2`)** *(il tempo un po' piu' VELOCE)* **e il rallentamento e' un guscio sul bordo:** **il contrario di un orologio comandato dalla materia.**
+- ### ⚠ **Una correzione della citazione del mandato:** **«un `cs` locale non ha portata» non sta in G1** *(G1 e' il fatto del guscio)*: **sta in G3** *(«una legge puramente locale cosi' non puo' dare un effetto che sente tutta la materia intorno»)* **e in G5.3** *(«la mancanza di portata»)*.
+
+### 29.2 IL PRINCIPIO, E LE DUE FORME *(PROPOSTE DEL GUARDIANO; nessuna e' decisa)*
+
+- ### **IL PRINCIPIO** *(dall'osservazione di Luca)*: **nel vuoto puro (`psi = 0`) `cs = s` ESATTAMENTE, per costruzione.** **Il vuoto non fa da orologio, e non puo' destabilizzare il tempo: il rallentamento lo comanda la materia.**
+- ### **PROPOSTA (M-rho), la forma LOCALE:** **`cs = s / (1 + rho / rho_c)`**, **`rho` la densita' di materia del nodo** *(`somma |psi|^2` sulle sue estremita')*. **Semplice; a `psi = 0` da' `s` al bit.** ### **Il suo limite:** **rallenta solo DENTRO la materia, non intorno** *(il limite di G3: un `cs` locale non ha portata)*.
+- ### **PROPOSTA (M-Phi), la forma CON PORTATA:** **`cs = s (1 + Phi)`**, **`Phi` un potenziale SCALARE che si PROPAGA, con sorgente `rho`** *(un'equazione d'onda sul reticolo)*. **Il rallentamento si estende intorno al solitone e cala con la distanza;** **in 2D ci si aspetta un andamento LOGARITMICO** *(il potenziale di una sorgente puntiforme in due dimensioni; un'attesa, non una misura)*. ### **E' la «gravita' scalare che si propaga» del piano 2D -> 3D** *(G5.1, la gravita' di Nordstrom)*: **tempo locale e gravita' diventerebbero LA STESSA COSA.**
+
+### 29.3 LE DOMANDE APERTE *(senza risposte)*
+
+| | (M-rho) | (M-Phi) |
+|---|---|---|
+| **il segno e la scala** *(da RICAVARE, non da tarare: `A1`)* | **`rho_c`: da che cosa?** *(una scala del solitone? del vuoto?)* | **l'accoppiamento della sorgente in `Phi`, e la velocita' dell'onda di `Phi`** *(il cono di `1` nodo per tick? `cs` stesso?)*; **il segno: `Phi <= 0` vicino alla materia** |
+| **il bilancio dell'energia con `cs` variabile** *(C4: `H dtau`)* | **`cs` dipende da `psi`: il generatore pesato `G` acquista un termine in `psi`** *(come `CAMM-FASE-VUOTO` per `Lambda`)* | **`Phi` e' un campo con la sua energia: entra in `G`?** |
+| **il limite `cs >= 0`** | **`cs > 0` per costruzione** *(`rho >= 0`)* | ### **`Phi` puo' portare `cs` a zero? Allora c'e' un ORIZZONTE** *(come nella rampa F3)*: **e' fisica o e' un difetto?** |
+| **il rapporto con F1** *(serve ancora una memoria?)* **e con F3/F4** *(la rampa simmetrica ha ancora senso?)* | **senza `Lambda` nella legge, la memoria di F1 serve ancora?** | **`Phi` E' gia' una memoria che si propaga** *(G5.3)*: **F1 si scioglie dentro `Phi`?**; **la rampa di F4 lega `cs` a `Lambda`: con queste forme non c'e' piu' `Lambda` nella legge** |
+| **come verificarla per PRIMA** | ### **il vuoto puro deve restare STABILE PER COSTRUZIONE** *(il contrario di (v0)): `cs = s` al bit, nessuna variabile `cs` da linearizzare* | **lo stesso; e poi il profilo di `Phi` attorno a un solitone fermo** *(il logaritmo atteso in 2D)* |
+
+### 29.4 IL LEGAME CON S2
+
+- **Se S2 da' (w4)** *(instabile in tutta la mappa)*: **questa opzione e' la candidata naturale.**
+- **Se S2 da' (w3)** *(zone stabili)*: **resta un'alternativa da CONFRONTARE.**
+- ### **In ogni caso la scelta e' di LUCA.**
