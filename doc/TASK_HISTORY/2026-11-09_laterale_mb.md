@@ -646,3 +646,36 @@
 2. **Lo script; la suite in `wt_zero`; commit e push.**
 3. **La corsa** *(stima `~48` minuti, in background)*; **il referto `doc/referti_l2/carta_f1_lunga.txt`; l'esito in `25.4`; il rimando nella RELAZIONE del principale.**
 4. **Poi T3** *(sez. `26`)*; **dopo T3 FERMO.**
+
+## 26. T3, IL TEMPO DI MEMORIA `tau_Lambda` *(Luca `2026-11-09` `20:13`, ripartito `2026-11-10` `01:22`)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+### 26.1 IL PASSO DELLE MAPPE, CONTROLLATO PRIMA *(il mandato)*
+
+- **`csv/solitone/mappe.py`: `OGNI = 100`** *(un'istantanea ogni `100` tick, `15` unita')*.
+- **`1/omega` del vuoto F3 a `s 0.15`:** **`omega_v = 0.471` per tick** *(IS2)*, **cioe' `1/omega ~ 2` tick.**
+- ### **Il passo delle mappe e' ~`50` volte `1/omega`: la `tau_int` di Sokal dalle mappe NON VALE** *(lo dichiaro, come chiede il mandato)*. **Al posto suo: il rilassamento di `Lambda` dopo un disturbo imposto.**
+  - **Vicino al solitone `omega` cambia** *(in F1 `r` va da `~1e-4` a `0.81`)*: **la misura lo stampa per nodo.**
+
+### 26.2 LA MISURA *(una corsa corta, il nucleo del laterale, `cs` SPENTO)*
+
+- **Lo stato: `TBS` a `10000` tick dalla libreria** *(lo stesso di F1 e di (r-D5))*; **`mot.lambda_c = None`, `mot.cs` quello dello stato.**
+- **Il centro: `toro.centro` di `rho`** *(come in F1)*. **Tre nodi, scelti PRIMA:** **il nodo piu' vicino al raggio `0` (centro), `17` (il guscio di (r-D5), `16`-`18`), `25` (il vuoto, dentro il bordo di `TBS`, `R_A 28`)**, **lungo la direzione `+x` dal centro.**
+- **Il disturbo:** **`Lambda` del nodo scalato di `1 + 1e-6`** *(la `phi` delle sue estremita' per `sqrt(1 + 1e-6)`: `Lambda` e' quadratica nelle fasi)*, **al tick `0`.** **Quattro corse:** **la base, e una per nodo disturbato.** **`1000` tick ciascuna** *(stima `~10` minuti in tutto)*.
+- **Per ogni nodo disturbato:**
+  - **`DeltaLambda(t)` sul nodo** *(disturbata meno base)*, **relativo al disturbo iniziale;**
+  - ### **`tau_Lambda` = il primo tick con `|DeltaLambda(t)| <= e^{-1} |DeltaLambda(0)|`** *(se non arriva entro `1000`: «oltre `1000`»)*;
+  - **`omega_v` del nodo** *(dal primo tick della base, la funzione di `carta_f1`)* **e `1/omega`;** **il rapporto `tau_Lambda / (1/omega)`.**
+- ### **IL CONTROLLO DI SCALA:** **(T3-P) DEVE PASSARE:** **la base contro se stessa da' `DeltaLambda = 0` esatto** *(la misura non inventa un rilassamento)*; **(T3-F) DEVE FALLIRE:** **«il disturbo NON si vede»** *(`|DeltaLambda(0)| / Lambda` del nodo sotto `1e-9`, per ognuno dei tre nodi)*.
+
+### 26.3 LE LETTURE *(le mie della sez. `22`, gia' scritte)*
+
+- **(t1)** **`tau_Lambda` molto piu' lungo di `1/omega`** *(il rapporto oltre `10`, mio, dichiarato)*: **un tempo di memoria lento esiste: F1 con quel `r`** *(NON applicata: la scelta e' di Luca)*.
+- **(t2)** **`tau_Lambda ~ 1/omega`** *(il rapporto entro `10`)*: **il tempo di memoria lento non c'e' nella dinamica: F1 da sola non basta** *(F2 o F4: la scelta e' di Luca)*.
+- **La lettura per ognuno dei tre nodi** *(il profilo radiale)*.
+
+### 26.4 TODO
+
+1. **Questa sezione, commit e push** *(durante T2: non tocca il suo percorso)*.
+2. **Lo script `csv/solitone/tau_lambda.py`; la suite in `wt_zero` DOPO T2; commit e push.**
+3. **La corsa; il referto `doc/referti_l2/tau_lambda.txt`; l'esito in `26.5`; il rimando nella RELAZIONE.**
+4. **Poi FERMO** *(il mandato)*: **niente F2, F3, F4, niente `tau_Lambda` dentro F1.**
