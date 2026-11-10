@@ -866,3 +866,43 @@
 - **Il fronte:** **(f2) in tutte e tre le corse** *(il minimo salta fra anelli lontani; le velocita' di confronto misurate: il cono `1`, `|v_g|` `0.0883` e `0.0904` nodi per tick)*.
 - ### **CHE COSA RESTA, DETTO COME IPOTESI E NON COME MISURA:** **la discesa sembra della DINAMICA con F1, in tutto il dominio, verso un fondo `~5e-5`-`1e-4`.** **Una stima** *(non misurata)*: **col `cs` di F1 che rilassa verso `L = FP.cs(Lambda)`, `cs ~ 6e-5` vorrebbe `Lambda` dell'ordine di `1e-3` in quel nodo:** **il vuoto quasi VUOTO in nodi isolati.** **Il profilo stampa `Lambda` MEDIO per anello, non il minimo:** **la coda bassa di `Lambda` non e' misurata.** **Se interessa, la misura naturale e' la distribuzione di `Lambda` per nodo** *(il minimo e i quantili bassi nel tempo)* **sulle stesse corse:** **una proposta, non la faccio.**
 - ### **FERMO** *(il mandato)*: **la scena di F4 e il passo dopo li decide Luca.** **F4 resta in coda dietro questa decisione** *(il mandato delle `08:48`: con (c1)/(c2) di B1 vecchio; il caso di oggi e' piu' vicino a «della dinamica», ma la scelta della scena e' sua)*.
+
+### 27.10 H4, IL VUOTO COL TEMPO LOCALE REGGE I DISTURBI? *(Luca `2026-11-10` `16:06`)*: **H4.0, PRIMA DEL CODICE**
+
+*(Il mandato chiama questa sezione «27.9»: la `27.9` c'e' gia', ed e' la tabella H1/H2/H3 di B1 (`93579fe7`). **H4.0 e' la `27.10`, l'esito la `27.11`**: dichiarato.)*
+
+#### 27.10.1 LA SCENA DEL SOLO VUOTO *(dal codice)*
+
+- **Il motore ammette `psi = 0`:** **F1-V di T2 e di (i) gira cosi'** *(`st["psi_h"][...] = 0`, `st["phi_h"][...] = phi_v`, il tick intero)*. **Il vuoto: `c(10000) F3`** *(`bordo.c_di(10000, tab, K, omega)`, la tabella `fase_F3.npz`, `K 6667`; `F3` = `CA.vuoto_della_corsa`)*. **`Lambda_c` quello di T2** *(dalla media di `Lambda` del vuoto)*.
+- **`cs` SPENTO** *(per (v2))*: **`mot.cs = None` e `mot.lambda_c = None` a ogni tick** *(T3, `tau_lambda.corsa`, spegne con `lambda_c = None`; la scena nuova ha `mot.cs = None`)*. **Per (v2) la «distribuzione di `cs`» e' quella di `L = FP.cs(Lambda, Lambda_c)`, il `cs` che la legge DAREBBE** *(dichiarato: a `cs` spento non c'e' un `cs`)*.
+
+#### 27.10.2 L'AMPIEZZA DELL'ALONE `A_h` E LO SPETTRO *(misurati dallo script, PRIMA delle corse; stampati nel referto)*
+
+- **Lo stato di `TBS` a `10000`:** **il residuo `r = phi - c(10000) F3` sulle estremita' il cui nodo sta a `r > 20` dal centro di `rho`** *(il centro come in (i))*. **`A_h` = la rms di `|r|` su quelle estremita'.** **Accanto, stampata: la proiezione `a = <F3, phi> / |F3|^2` sulla stessa zona** *(se `a` non e' `c`, una parte del residuo e' di fase o di ampiezza del vuoto stesso)*.
+- **Lo spettro:** **il residuo con la zona `r <= 20` messa a zero, nella cella** *(`phi` come `(L, L, 6)`: i `3` archi del nodo, 27.4.6)*, **`fft2` per componente, la potenza sommata sulle `6` e mediata per anelli di `|k|`** *(la larghezza del passo della griglia in `k`)*. **La maschera altera lo spettro** *(dichiarato)*: **e' «quello che si ricava facilmente».**
+
+#### 27.10.3 IL DISTURBO *(seme fisso `2026`, `CPF.SEME`)*
+
+- **Per ognuna delle `6` componenti della cella:** **un rumore gaussiano complesso in `k` per la radice dello spettro radiale di 27.10.2, `ifft2`;** **`delta` reso ORTOGONALE a `F3`** *(tolta la proiezione)* **e riscalato a rms `A` sulle estremita'** *(`A = A_h` per (v1), (v2); `A_h / 10` per (v3))*.
+- ### **`phi = c (alpha F3 + delta)`, `alpha = sqrt(1 - |delta|^2 / |F3|^2)`:** **la NORMA di `phi` e' quella del vuoto** *(entro l'arrotondamento: stampata)*, **quindi `Lambda` MEDIO e' conservato** *(`= norma / n`)* **e `Lambda_c` non cambia;** **la proiezione su `F3` scende da `c` a `c alpha`** *(stampato `1 - alpha`)*: **conservare insieme la norma e la proiezione non si puo'** *(dichiarato)*.
+
+#### 27.10.4 LE CORSE E LE MISURE *(un solo script, `csv/solitone/h4_vuoto.py`)*
+
+- **(v0)** il vuoto SENZA disturbo, F1; **(v1)** con `A_h`, F1; **(v2)** con `A_h`, `cs` spento; **(v3)** con `A_h / 10`, F1: **`5000` tick ciascuna, in un solo processo, il referto `doc/referti_l2/h4_vuoto_disturbato.txt`.**
+- **(i-q):** ### **gli stati e le mappe di (i) NON bastano** *(lo script di (i) non ne ha salvati: la corsa si RIFA' con lo strumento della distribuzione)*; **il referto `doc/referti_l2/h4_distribuzione.txt`** *(`--corsa iq`)*.
+- **Ogni `50` tick:** **`cs` min; i quantili di `cs` `0.1%`, `1%`, `10%`, `50%`; la frazione dei nodi con `cs < 1e-3` e `< 1e-2`; `Lambda` min e la rms di `Lambda - Lambda` medio; la norma di `phi` e di `psi`.**
+- **Il gemello di (v1) e (v2)** *(la stima di Lyapunov, come T2)*: **`phi` delle `6` estremita' della cella del nodo `0` per `(1 + 1e-10)`;** **la differenza `max|Lambda - Lambda_gemello|` a ogni tick** *(la base tiene `Lambda` di ogni tick)*; **il tasso: la pendenza di `ln` della differenza dal tick `1` al primo tick sopra `1e-4`** *(la soglia di T2)*. **Disturbare `phi` e non `cs` e' una mia scelta** *(a `cs` spento non c'e' `cs` da disturbare; la stessa per le due corse)*.
+- **I DEVE:**
+  - **(v0) F1-V:** **la deriva di `cs` medio entro un fattore `2` da `dcs/dLambda` per la deriva di `Lambda` medio, ai tick `50`, `1000`, `5000`** *(il criterio di Luca, come in T2)*;
+  - **lo strumento della distribuzione su uno stato di prova** *(il vuoto `F3` con `10` nodi a `Lambda = 0.002`: `phi` di quei nodi riscalato)*: **DEVE PASSARE la frazione sotto `1e-3` = `10/6561` esatta;** **DEVE FALLIRE «la frazione sotto `1e-3` e' zero (il vuoto calmo)»** *(lo strumento sa dire di no)*.
+
+#### 27.10.5 LE LETTURE *(di Luca; i dettagli miei, dichiarati)*
+
+- **(u1)** **in (v1) `cs` min scende sotto `1e-3` E la frazione sotto `1e-3` cresce nel tempo** *(mio: la media dell'ultimo terzo oltre quella del primo)*, **mentre in (v2) la rms di `Lambda` resta entro il `10%` della sua iniziale** *(a ogni campione)*: **H4 regge.**
+- **(u2)** **(v1) resta calmo** *(`cs` min sopra `0.7 s` per tutti i `5000` tick)*: **H4 cade.**
+- **(u3)** **(v1) turbolento e (v3) calmo:** **una soglia, fra `A_h / 10` e `A_h`.**
+- **(e1)** **in (i-q) la frazione sotto `1e-3` resta sotto `1e-3` per tutta la corsa:** **pochi nodi, valori estremi;** **(e2)** **cresce oltre `1e-2`:** **e' il vuoto intero che si svuota.** **Fra le soglie: caso intermedio.**
+
+#### 27.10.6 IL COSTO E L'ORDINE *(stima: `~0.16` s per tick, da (i))*
+
+**(v0) ~`14` min, (v1) e (v2) col gemello ~`27` ciascuna, (v3) ~`14`: ~`80` minuti in un processo; (i-q) ~`14`.** **Sul principale gira la carta (r-b): due processi, e una suite pre-commit aspetta che uno finisca** *(Luca)*.
