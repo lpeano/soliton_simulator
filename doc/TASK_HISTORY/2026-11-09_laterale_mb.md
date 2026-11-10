@@ -819,3 +819,23 @@
 - ### **E IL PROFILO DICE PERCHE': LA DISCESA E' DI TUTTO IL DOMINIO, NON DI UNA ZONA** *(le righe del profilo di `cs` MIN nel referto)*: **dal tick `50` al `5000` `cs` min scende in OGNI anello:** **dentro `r < 20` da `4.60e-03` a `2.33e-04`; nella corona `20`-`27` da `5.23e-03` a `1.11e-04`; oltre `28` da `7.12e-03` a `6.55e-05`.** **Al tick `1000` i tre minimi sono `3.23e-04`, `3.12e-04`, `3.01e-04`: quasi uguali.** ### **Il minimo GLOBALE sta fuori per un margine piccolo, e per questo salta fra anelli lontani:** **«il raggio di `cs` min» era il posto dove un abbassamento GENERALE tocca per primo il fondo, non un luogo speciale.**
 - **La pendenza di `ln(cs min)` nell'ultimo terzo: `-0.3998` per `1000` tick** *(come T2)*; **il minimo `5.979e-05` al tick `4800`, il raggio `38.91`.**
 - ### **Per H3, l'indizio cade cosi' com'era:** **il raggio di `cs` min «da `19.2` a `26.3` a `39.0`» non e' un fronte** *(i primi `50` tick vanno da `19` a `26`, poi il minimo salta)*. **(iv) mette alla prova H3 per l'altra via** *(la rampa)*. **Per H2:** **la discesa anche a `r < 20`** *(lontano dall'antipodo)* **e' gia' un'indicazione contro l'antipodo come causa** *(una lettura mia, non quella di (iii))*.
+
+### 27.6 L'ESITO DI (iv), F1 ACCESO PIANO *(la corsa dalle `15:16:54` alle `15:38:17` del `2026-11-10`, a `e340476c`, blob `6b575a6b`; il referto `doc/referti_l2/b1_iv_rampa.txt`)*
+
+- **I controlli:** **(iv-B) AL BIT** *(`K = 1` contro il codice di T2, ai tick `100` e `1000`: `max|diff| 0`)*. **La rampa agisce:** **al tick `1` il rapporto `max|cs - s| / max|L - s|` e' `2.467399e-06` = `lambda_1 = sin^2(pi / 2000)`.**
+- ### **LA LETTURA COL CRITERIO SCRITTO: CASO INTERMEDIO.** **(q1) no:** **`cs` min scende a `5.078e-05`** *(al tick `3950`, il raggio `33.57`)*, **sotto `1e-3`.** **(q2) no:** **la pendenza nell'ultimo terzo e' `+0.0347` per `1000` tick contro `-0.3998` di (i)** *(fuori dal `30%`)*.
+- ### **E I NUMERI DICONO PERCHE'** *(le righe di `cs` min nei due referti)*:
+
+| tick | (i) `cs` min @ raggio | (iv) `cs` min @ raggio |
+|---|---|---|
+| `50` | `0.004596` @ `19.22` | `0.149197` @ `15.74` |
+| `500` | `0.000485` @ `37.71` | `0.078431` @ `10.12` |
+| `1000` | `0.000301` @ `39.04` | `0.000407` @ `41.30` |
+| `1500` | `0.000216` @ `35.77` | `0.000089` @ `41.30` |
+| `3000` | `0.000109` @ `35.77` | `0.000063` @ `41.30` |
+| `5000` | `0.000065` @ `38.91` | `0.000052` @ `32.54` |
+
+  - **Durante la rampa `cs` min resta alto** *(`0.149` -> `0.078`)*; **a `K = 1000`, quando F1 e' pieno, cade a `4.1e-4`** *(come (i) allo stesso tick)*, **e a `1500` e' gia' SOTTO (i).** **Poi si ferma su un piano attorno a `5e-5`** *(`5.4e-5` a `3500`, `5.2e-5` a `5000`)*.
+  - **(i) a `5000` e' a `6.5e-5` e scende ancora:** **le due corse vanno verso LO STESSO FONDO**, **(iv) ci arriva prima e si ferma.**
+- ### **LA MIA LETTURA, da confermare** *(non quella di Luca)*: **il colpo dell'accensione NON spiega la discesa:** **acceso piano, F1 porta `cs` min allo stesso livello** *(`~5e-5`)*; **cambia solo QUANDO.** **La pendenza diversa nell'ultimo terzo viene dal fatto che (iv) ha gia' raggiunto il fondo e (i) no.** **H3, cosi' com'era, non regge.**
+- **Il fronte:** **(f2) anche qui** *(RMS `9.351` anelli, un passo all'indietro di `10`)*.
