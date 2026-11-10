@@ -700,3 +700,22 @@
 - **L'ultimo terzo:** **`1e-8`: il livello `2.699e-01`, la pendenza `+0.0055` decadi per `1000` tick;** **`1e-10`: `2.157e-01`, `+0.0982`.**
 - ### **LA LETTURA: (s1)** — **si stabilizza sullo stesso livello per le due ampiezze** *(il rapporto `1.251`)*: **caotica ma limitata.** ### ⚠ **AL MARGINE:** **la pendenza di `1e-10` (`0.0982`) sta appena sotto la soglia `0.1`** *(la sua differenza sale ancora fra `3000` e `4000`)*.
 - ### **LA LETTURA: (s4)** — **la discesa di `cs` min CONTINUA:** **la pendenza di `ln(cs min)` nell'ultimo terzo `-0.3998` per `1000` tick** *(il minimo `0.000060`)*. **Nessun muro (s3) in `5000` tick.**
+
+### 26.5 L'ESITO DI T3 *(la corsa dalle `04:02:58` alle `04:09:27` del `2026-11-10`, a `46e4ba95`, blob `7102b17c`; il referto `doc/referti_l2/tau_lambda.txt`)*
+
+- **Il passo delle mappe:** **`OGNI = 100` tick; `omega_v` del vuoto** *(la mediana oltre il raggio `30`)* **`0.471235` per tick, `1/omega` `2.122` tick: il passo e' `47.1` volte `1/omega`.** **La `tau_int` dalle mappe non vale** *(come dichiarato nella sez. `26.1`)*.
+- **T3-P passa** *(la base contro se stessa: `0` esatto)*; **T3-F fallisce come deve sui tre nodi** *(il disturbo si vede: `1.000e-06`)*.
+- **I tre nodi** *(lungo `+x` dal centro di `rho`)*:
+
+| raggio | nodo | `Lambda` | `omega_v` per tick | `1/omega` | `DeltaLambda / DeltaLambda(0)` ai tick `1`, `2`, `5`, `10`, `50`, `100`, `1000` | `tau_Lambda` | il rapporto |
+|---|---|---|---|---|---|---|---|
+| `0` | `3362` | `5.425885` | `0.739647` | `1.352` | `+0.947` `+0.811` `+0.256` `+0.407` `+0.442` `+0.009` `+0.807` | `5` | `3.698` |
+| `17` | `4739` | `2.061094` | `0.310652` | `3.219` | `+0.950` `+0.808` `+0.269` `+0.406` `+0.488` `+1.089` `+0.875` | `5` | `1.553` |
+| `25` | `5387` | `6.040594` | `0.470457` | `2.126` | `+0.945` `+0.797` `+0.218` `+0.388` `+0.421` `+0.012` `+0.788` | `5` | `2.352` |
+
+- ### **LA LETTURA COL CRITERIO SCRITTO: (t2) sui tre nodi** *(`tau_Lambda` entro `10` volte `1/omega`)*.
+- ### ⚠ **MA LA PREMESSA DEL RILASSAMENTO CADE** *(i numeri della tabella)*: **`DeltaLambda` sul nodo NON DECADE.** **Scende sotto `e^{-1}` al tick `5`, risale a `~0.4` al tick `10`, passa vicino a `0` al tick `100` e torna a `0.79`-`0.88` al tick `1000`** *(al raggio `17` e' `1.089` al tick `100`)*. **Il tick e' unitario, e il disturbo di `Lambda` non si dissipa: si allontana e torna** *(un'onda sul toro: stima, non misurata)*. ### **Quindi `tau_Lambda = 5` e' il primo passaggio sotto `e^{-1}`, NON un tempo di memoria:** **un tempo di rilassamento di `Lambda`, in questa dinamica, non c'e'.**
+- **Cio' va nella stessa direzione di (t2)** *(«il tempo di memoria lento non c'e' nella dinamica»)*, **ma per un motivo diverso da quello scritto: non «veloce», bensi' «assente».**
+- ### **FERMO** *(il mandato: dopo T3)*. **Niente F2, F3, F4, niente `tau_Lambda` dentro F1.** **Le domande a Luca:**
+  1. **con (t2) e la premessa caduta:** **F1 resta col `r` del battito** *(T2: (s1) al margine, (s4) `cs` min che scende ancora)*, **oppure F2 o F4?**
+  2. **(s4):** **`cs` min scende ai raggi `26`-`39`, vicino o oltre il bordo di `TBS`:** **guardare li' prima di scegliere?**
