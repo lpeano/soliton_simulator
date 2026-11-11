@@ -1671,3 +1671,15 @@
   - **lo stesso se non converge su una perturbazione della risposta lineare.**
 - **Poi lo spettro come da progetto** *(le letture l1-l3, il `cs` congelato come riferimento, il DEVE FALLIRE senza reazione)*, **col banco di OGGI.** **Il referto: `doc/referti_l2/s5_lapse_spettro_v2.txt`, accanto al primo.**
 - ### ⚠ **Il costo:** **circa `2` ore** *(stima)*: **finira' dopo mezzanotte, e il riavvio forzato di Windows probabilmente la interrompera'.** **Se si interrompe, si rilancia dal suo commit.**
+- ### **T-L4b, L'ESITO: `7/7`** *(dalle `22:54:44` alle `22:59:49`, a `127d5018`; `doc/referti_l2/s5_caduta_segno.txt`)*: **LA FORMA (a) DA' IL VERSO GIUSTO, MA NON (f1).**
+  - **A `N = 1` la forma (a) e' il tick di oggi AL BIT** *(lo sha `f0f1b32de935a9f2` dopo `400` tick)*.
+  - ### **Il verso: verso `N` piu' BASSO** *(il tempo piu' lento)* **per tutti e quattro i `gamma`, e si rovescia col gradiente.**
+  - **L'ampiezza:** **`-3.24e-08`** *(`gamma 0.01`, `2.6` errori)* **e `-6.54e-08`** *(`gamma 0.02`, `5.8` errori)* **per tick al quadrato:** **circa `670` volte meno della forma di oggi** *(`2.19e-05`, `4.36e-05`)*.
+  - **La previsione:** **all'ordine zero `-4.78e-08`** *(il rapporto `~0.68`)*; **con la mia correzione della larghezza `-7.23e-08`** *(il rapporto `0.45`-`0.47`)*: ### **NON (f1)** *(fuori dal `15%`)*.
+  - ### **IL PRINCIPIO DI EQUIVALENZA PASSA:** **`sigma 8`, `sigma 8` con l'ampiezza doppia, `sigma 12`: la stessa accelerazione entro il `3.4%`** *(`-6.542e-08`, `-6.542e-08`, `-6.767e-08`)*.
+    - ### **La mia ATTESA era sbagliata** *(31.22: «mi aspetto che fallisca»)*: **la dipendenza dalla larghezza che avevo previsto non c'e'.** **Quindi anche la mia «previsione con la larghezza» e' sbagliata, e il confronto giusto e' con l'ordine zero** *(`0.68`)*.
+  - **Accanto, la forma di oggi su `400` tick:** **il rapporto con la previsione `0.864`-`0.871`** *(lo scarto di T-L4, ora `~13%` anche a `400` tick)*.
+  - ### **LA LETTURA COL CRITERIO SCRITTO: ne' (f1)** *(l'ampiezza fuori)*, **ne' (f2), ne' (f3)** *(a `gamma 0.02` `5.8` errori)*: **il VERSO e' quello della gravita', l'ampiezza `~0.68` della previsione all'ordine zero.**
+- ### **Conseguenze per il mandato:**
+  - **il punto 4** *(lo scarto)* **si fa sul banco di T-L4** *(«(a) di T-L4b se da' (f1), altrimenti sul banco di T-L4»)*;
+  - **il punto 5** *(T-L3 con la forma nuova)* **NON si fa** *(«solo se T-L4b da' (f1)»)*: **lo scrivo.**

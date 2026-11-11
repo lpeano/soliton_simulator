@@ -1,0 +1,41 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] s5_caduta_segno.py  sha1-BYTE a3998276  committato e pulito
+==================================================================================================================================
+S5.2-bis T-L4b (sez. 31.22): la caduta col segno dell'inerzia, la forma (a); s 0.15; gamma (0.01, -0.01, 0.02, -0.02); sigma 8; rho max 0.001; 400 tick; dk 0.02; h_cs 0.0001
+==================================================================================================================================
+### la coppia piu' alta a Gamma: eps 0.476726628572, 0.476726628572 (la differenza 5.55e-17); q = la prima colonna
+    la banda 0: eps(0) +0.4767266286; d eps/dk -9.7145e-15; d2 eps/dk2 -5.923495e-02; d eps/d cs +3.172173; il peso di q a k = dk 0.8978
+    la banda 1: eps(0) +0.4767266286; d eps/dk -1.3878e-15; d2 eps/dk2 -5.923495e-02; d eps/d cs +3.172173; il peso di q a k = dk 0.1022
+### il pacchetto: centrato sul nodo 40 (i1 0, i2 40), rho max 1.000e-03, la norma 2.321663e-01; |grad N| / gamma = 0.089570 lungo B_0
+### la forma (a): eps_top = 0.4767266286 per tick (la cima della coppia a Gamma); s d eps/d cs = 0.475826; la differenza -9.0072e-04
+  gamma 0 (N = 1): oggi a -1.7583e-10 +- 2.2e-09, sha f0f1b32de935a9f2; la forma (a) a -1.7583e-10 +- 2.2e-09, sha f0f1b32de935a9f2
+  DEVE PASSARE: T-L4b: a N = 1 la forma (a) e' il tick di oggi AL BIT (lo sha di psi dopo 400 tick)                      PASSA   
+  DEVE PASSARE: T-L4b: a N = 1 l'accelerazione della forma (a) = quella di oggi                                          PASSA   -1.7583e-10, -1.7583e-10
+  oggi  gamma +0.010: lo spostamento a 100, 200, 400 tick +0.39194 +0.72414 +2.04504; a +2.193736e-05 +- 1.2e-08 (1791.4 errori); prevista +2.524587e-05 (ordine zero) e +2.522136e-05 (con la larghezza); il rapporto 0.8698; verso N piu' ALTO
+  oggi  gamma -0.010: lo spostamento a 100, 200, 400 tick +0.17476 -0.15679 -1.47903; a -2.196869e-05 +- 1.1e-08 (1995.7 errori); prevista -2.524587e-05 (ordine zero) e -2.522136e-05 (con la larghezza); il rapporto 0.8710; verso N piu' ALTO
+  oggi  gamma +0.020: lo spostamento a 100, 200, 400 tick +0.50134 +1.16613 +3.79127; a +4.355807e-05 +- 1.7e-08 (2585.2 errori); prevista +5.049174e-05 (ordine zero) e +5.044272e-05 (con la larghezza); il rapporto 0.8635; verso N piu' ALTO
+  oggi  gamma -0.020: lo spostamento a 100, 200, 400 tick +0.06544 -0.59838 -3.22870; a -4.368063e-05 +- 1.5e-08 (2950.4 errori); prevista -5.049174e-05 (ordine zero) e -5.044272e-05 (con la larghezza); il rapporto 0.8659; verso N piu' ALTO
+  DEVE PASSARE: T-L4b oggi: col gradiente rovesciato il verso si rovescia (gamma +0.01)                                  PASSA   +2.194e-05, -2.197e-05
+  DEVE PASSARE: T-L4b oggi: col gradiente rovesciato il verso si rovescia (gamma +0.02)                                  PASSA   +4.356e-05, -4.368e-05
+  a     gamma +0.010: lo spostamento a 100, 200, 400 tick +0.28116 +0.28173 +0.28156; a -3.240894e-08 +- 1.2e-08 (2.6 errori); prevista -4.778935e-08 (ordine zero) e -7.229628e-08 (con la larghezza); il rapporto 0.4483; verso N piu' BASSO
+  a     gamma -0.010: lo spostamento a 100, 200, 400 tick +0.28553 +0.28557 +0.28579; a +3.256412e-08 +- 1.1e-08 (2.9 errori); prevista +4.778935e-08 (ordine zero) e +7.229628e-08 (con la larghezza); il rapporto 0.4504; verso N piu' BASSO
+  a     gamma +0.020: lo spostamento a 100, 200, 400 tick +0.27981 +0.28133 +0.27810; a -6.541921e-08 +- 1.1e-08 (5.8 errori); prevista -9.557870e-08 (ordine zero) e -1.445926e-07 (con la larghezza); il rapporto 0.4524; verso N piu' BASSO
+  a     gamma -0.020: lo spostamento a 100, 200, 400 tick +0.28691 +0.28620 +0.28952; a +6.733384e-08 +- 1.1e-08 (6.2 errori); prevista +9.557870e-08 (ordine zero) e +1.445926e-07 (con la larghezza); il rapporto 0.4657; verso N piu' BASSO
+  DEVE PASSARE: T-L4b a: col gradiente rovesciato il verso si rovescia (gamma +0.01)                                     PASSA   -3.241e-08, +3.256e-08
+  DEVE PASSARE: T-L4b a: col gradiente rovesciato il verso si rovescia (gamma +0.02)                                     PASSA   -6.542e-08, +6.733e-08
+### IL PRINCIPIO DI EQUIVALENZA, la forma (a), gamma 0.02: tre pacchetti
+    sigma 8                     a -6.541921e-08 +- 1.1e-08; prevista con la larghezza -1.445926e-07
+    sigma 8, l'ampiezza doppia  a -6.541992e-08 +- 1.1e-08; prevista con la larghezza -1.445926e-07
+    sigma 12                    a -6.767042e-08 +- 7.5e-09; prevista con la larghezza -1.173626e-07
+  DEVE PASSARE: T-L4b: il principio di equivalenza, i tre pacchetti con la stessa accelerazione entro il 5%              PASSA   lo scarto piu' grande 0.0344
+----------------------------------------------------------------------------------------------------------------------------------
+  LA LETTURA: verso giusto ma NON (f1): l'ampiezza fuori dal 15%; il pacchetto va verso N piu' BASSO; i rapporti con la previsione (con la larghezza) 0.448, 0.450, 0.452, 0.466
+  la forma (b) (il segno della materia rovesciato tutto insieme): (f2) per costruzione, non corsa (sez. 31.22)
+==================================================================================================================================
+ESITO: 7/7 controlli come devono; fallite: 0 []; 304 s in tutto
