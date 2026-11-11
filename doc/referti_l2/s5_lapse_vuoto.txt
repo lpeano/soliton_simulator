@@ -1,0 +1,23 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE ae9ad9d6  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s5_prove.py  sha1-BYTE 2b68dee3  committato e pulito
+==================================================================================================================================
+S5.2 (sez. 31.15), la prova L1: s 0.15; w_in 6.643741
+==================================================================================================================================
+### rho_0 = la rho media del centro (r < w_in) di TBS_stato_010000.npz: 2655.072818
+    tick    1: oggi psi 6d03849e176cd903 phi 9337db7439325779; il banco psi 6d03849e176cd903 phi 9337db7439325779
+    tick   10: oggi psi 6d03849e176cd903 phi 7bf6c742b8a6599e; il banco psi 6d03849e176cd903 phi 7bf6c742b8a6599e
+    tick  100: oggi psi 6d03849e176cd903 phi 4e762655be5e908e; il banco psi 6d03849e176cd903 phi 4e762655be5e908e
+    tick 1000: oggi psi 6d03849e176cd903 phi 2a62634b2b4be5f1; il banco psi 6d03849e176cd903 phi 2a62634b2b4be5f1
+  DEVE PASSARE: T-L1: il vuoto, il banco (rho_c = rho_0 / 0.01) = il tick di oggi AL BIT ai tick (1, 10, 100, 1000)      PASSA   
+  DEVE PASSARE: T-L1: il vuoto resta calmo, la rms di Lambda al tick 1000 sotto 1e-13                                    PASSA   1.776e-15
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; 354 s in tutto
