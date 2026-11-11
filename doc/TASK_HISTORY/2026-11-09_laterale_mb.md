@@ -1470,3 +1470,47 @@
   - **DEVE: l'accelerazione del baricentro** *(una parabola su `200` tick -- mio)* **= la previsione entro il `5%`;** **DEVE: col gradiente rovesciato** *(`gamma -> -gamma`)* **il verso si rovescia;** **e il verso, scritto: verso `N` piu' basso o piu' alto.**
 - **Il costo** *(il banco ~`0.15`-`0.6` s per tick)*: **T-L1 ~`10` min; T-L2 ~`4` ore; T-L3 ~`2` ore; T-L4 ~`30` min.** **Un test alla volta, coi suoi script:** **`s5_prove.py --prova L1|L2|L4`** *(i referti `s5_lapse_energia.txt` per L1 e L2, `s5_lapse_caduta.txt` per L4)*, **e `s4_materia_mrho.py --lapse`** *(`s5_lapse_spettro.txt`)*.
 - ### **DOPO S5.2: FERMO, con la tabella delle prove.** **Lo zero, la forma di `N`, la scala e l'ingresso nel nucleo sono di Luca.**
+
+### 31.16 S5.0 (f), LA SORGENTE MISTA DELL'OROLOGIO *(Luca `2026-11-11` `16:44`)*: **f.0, PRIMA DEL CODICE** *(il mandato la chiama «31.14»: la `31.14` e la `31.15` ci sono gia' -- l'esito di S5.1 e il progetto di S5.2 --, quindi f.0 e' la `31.16`, l'esito la `31.17`, f.2 la `31.18`; dichiarato)*
+
+- ### **LA DECISIONE DI LUCA:** **`S` = l'energia della MATERIA con lo zero di O1** *(comprende `pi M`, l'analogo dell'energia di riposo)* **+ l'energia del VUOTO con lo zero LOCALE di O4** *(la media dei `6` vicini tolta nodo per nodo)*. **Il vuoto calmo e uniforme non pesa; le sue FLUTTUAZIONI pesano col loro segno** *(come nell'effetto Casimir)*; **la materia pesa con tutta la sua energia.**
+- ### ⛔ **E LE PROVE DEL BANCO (S5.2) ASPETTANO la decisione di Luca sulla forma di `N`** *(`rho` o `S`)*: **lo script `s5_prove.py` e' committato, NON si gira** *(la precedenza: il mandato delle `16:44` viene dopo quello delle `13:22`)*.
+
+#### (a) LA SCOMPOSIZIONE DI `h_k` *(dal codice: `energia_pesata.termini_di_h`; per nodo, il nodo piu' meta' dei suoi archi)*
+
+| il termine | la parte |
+|---|---|
+| **il Grover di `psi`:** `-pi (nrm_psi/2 - |somma psi|^2 / d)` | **MATERIA** |
+| **la moneta:** `eps * elicita` *(di `psi`)* | **MATERIA** |
+| **lo spostamento di `psi`:** `pi Re <psi_0 | U | psi_1>` *(meta' a ciascun capo)* | **MATERIA** |
+| **il Grover di `phi`:** `-pi (nrm_phi/2 - |somma phi|^2 / d)` | **VUOTO** |
+| **lo spostamento di `phi`:** `pi Re (conj phi_0 phi_1)` *(meta' a ciascun capo)* | **VUOTO** |
+| **l'accoppiamento `N(rho, Lambda) = Lambda (x - arctan x)`** *(`CAMM-MATERIA-VUOTO`)* | ### **il codice NON lo impone:** **tre attribuzioni, misurate tutte e tre accanto: (A-m) alla materia; (A-v) al vuoto; (A-mv) meta' e meta'** |
+
+- **Che cosa dice il codice sull'accoppiamento** *(un fatto, non una scelta)*: **`N` dipende da `rho` E da `Lambda`; e' `0` dove `rho = 0`** *(il vuoto puro non lo vede)*; **le sue derivate mettono una fase su `psi` (`alpha`) e una su `phi` (`beta`).**
+
+#### (b) GLI ZERI
+
+- **La materia con O1:** **i termini di `psi` come li da' `termini_di_h`, che usa GIA' lo zero simmetrico O1** *(Luca `2026-11-08`)*. ### **Come leggo «lo spostamento `pi rho` del nodo (O1)»:** **e' la differenza fra lo zero di prima e O1** *(`-pi s (X - 1/2)` contro `-pi s X`: `pi/2` per unita' di norma e per pezzo)*; **`termini_di_h` lo contiene gia', quindi NON lo aggiungo** *(dichiarato: se Luca intende un `+ pi rho` in piu', e' una riga)*.
+- **Il vuoto con O4:** **`e_k^vuoto - media_{j in N1(k)} e_j^vuoto`, i `6` vicini** *(`doc/TASK_HISTORY/2026-11-08_zero_del_vuoto.md`, sez. `2`)*.
+
+#### (c) LE PROPRIETA' ATTESE, E UNA PREMESSA DA DIRE
+
+- **`S = 0` esatto dove `psi = 0` e il vuoto e' uniforme:** **la materia e' `0`** *(i termini di `psi` sono `0`, e `N(0, Lambda) = 0` in tutte e tre le attribuzioni)*; **il vuoto uniforme con O4 e' `0`.** **DEVE: entro `1e-12` per nodo.**
+- ### ⚠ **«`S` non cambia se si sposta lo zero GLOBALE»: dipende da QUALE spostamento.**
+  - **Una costante PER NODO** *(`E_k -> E_k + C`)*: **la materia, riportata a O1, non cambia; il vuoto con O4 la toglie ESATTAMENTE.** **DEVE: `S` identica entro `1e-12`.**
+  - **La conversione fra le convenzioni del nucleo e' invece una costante PER UNITA' DI NORMA** *(`c` per pezzo: `E_k -> E_k + c (norma del pezzo)`)*: **la materia, riportata a O1, non cambia; ma il vuoto con O4 cambia di `c (Lambda_k - media_j Lambda_j)`, che e' zero solo dove `Lambda` e' uniforme o lineare.** ### **Quindi in quel caso `S` NON e' identica nel solitone** *(un DEVE contro la sua premessa)*: **misuro lo scarto e DEVE: lo scarto = `c (Lambda_k - media_j Lambda_j)` entro `1e-12`** *(l'identita' prevista)*, **con `c = -pi/2`** *(il passaggio dallo zero di prima a O1, per Grover e arco)*.
+- **DEVE FALLIRE** *(Luca)*: **il vuoto con lo zero di O1 invece di O4, sul vuoto uniforme: `S = -6 pi` per nodo.**
+
+#### f.1, LA MISURA *(lo script `csv/solitone/s5_sorgente.py`, il referto `doc/referti_l2/s5_sorgente_mista.txt`)*
+
+- **`TBS` a `10000`**, **le zone dal centro di `rho`:** **il centro `r < w_in`; l'interno `w_in <= r < 16`** *(mio: la corona fra il centro e il guscio di Luca, perche' nessun nodo resti fuori)*; **il guscio `16 <= r < 18`** *(Luca)*; **l'alone `18 <= r <= 30`** *(mio)*; **il vuoto lontano `r > 30`** *(Luca)*.
+  - **Per zona e per attribuzione: la media di `S`, il minimo, la frazione dei nodi con `S < 0` PESATA con `rho`** *(`somma_{S<0} rho / somma rho`)*; **il totale di `S` e il rapporto con `M`** *(la norma di materia)*.
+- **Il vuoto uniforme** *(`c(10000) F3`, `psi = 0`: la scena di H4 (v0) a `t 0`)*: **`S` per nodo.**
+- **Il vuoto con onde** *(la scena di H4 (v1): il disturbo `A_h` costruito come in `h4_vuoto.py`, lo stesso seme)*: **`S` per nodo, la media, la rms, la frazione negativa.** **DEVE: `A_h` = quello del referto di H4** *(`3.308833e-02`, alla settima cifra)*.
+- ### **LE LETTURE** *(di Luca; per ciascuna attribuzione)*:
+  - **(g1)** **`S >= 0` nel centro, nel guscio e nell'alone** *(la frazione negativa pesata sotto l'`1%`)* **e il totale positivo, circa proporzionale a `M`: la sorgente e' sana;**
+  - **(g2)** **restano zone negative nel guscio, ma il totale e' positivo:** **la lettura dell'energia di LEGAME** *(negativa localmente)*; **quanto pesa rispetto al totale;**
+  - **(g3)** **il totale e' negativo, o il vuoto uniforme non da' zero: FERMO;**
+  - **sul vuoto con onde, nessuna lettura: i numeri.**
+- **Poi f.2 su carta** *(la coerenza con la conservazione)*, **e FERMO.**
