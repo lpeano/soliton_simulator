@@ -1683,3 +1683,33 @@
 - ### **Conseguenze per il mandato:**
   - **il punto 4** *(lo scarto)* **si fa sul banco di T-L4** *(«(a) di T-L4b se da' (f1), altrimenti sul banco di T-L4»)*;
   - **il punto 5** *(T-L3 con la forma nuova)* **NON si fa** *(«solo se T-L4b da' (f1)»)*: **lo scrivo.**
+
+### 31.24 S5.2-bis, PUNTO 6: T-L5, LA REVERSIBILITA' -- **SU CARTA, PRIMA DEL CODICE** *(Luca la riapre; il nucleo non si tocca)*
+
+- ### **L'INVERSO DEL TICK, FUORI DAL NUCLEO, SOLO COME STRUMENTO DI PROVA** *(dichiarato: una SECONDA FONTE della legge, ammessa da Luca solo per questo uso, mai importata dalle corse)*.
+- **Come si costruisce:**
+  1. ### **il tick di oggi e' un palindromo di `14` pezzi** *(`composizione.ORDINE`)*, **ciascuno UNITARIO o una FASE ESATTA** *(i flussi materia-vuoto)*.
+     - **L'inverso del prodotto e' il prodotto degli inversi in ordine inverso.** **Ma il palindromo e' simmetrico:** **l'ordine inverso e' lo stesso ordine.**
+     - **Quindi l'inverso e' lo stesso palindromo con ogni pezzo sostituito dal suo inverso:** **`exp(-i theta X)` -> `exp(+i theta X)`, cioe' il pezzo col tempo `-dtau`.**
+  2. ### **Il nucleo VIETA `s <= 0`** *(`_nel_cono`)*: **il pezzo inverso non si puo' chiedere al nucleo.**
+     - **Ogni pezzo e' `exp(i pi s G)` con `G` un'involuzione o una fase** *(`espi`)*: **il suo inverso e' il COMPLESSO CONIUGATO della sua fase, `exp(-i pi s G)`.**
+     - **Lo strumento lo ottiene coniugando lo stato:** **per pezzi a coefficienti REALI** *(i Grover, gli spostamenti senza `U`)*, **`U^{-1} psi = (U conj(psi))^*`.**
+     - ### ⚠ **E i pezzi con coefficienti complessi** *(la moneta con `eps`, lo spostamento con la `U(1)` `U`, le fasi dei flussi)* **NON commutano con la coniugazione:** **per loro il trucco non vale, e l'inverso va scritto pezzo per pezzo** *(una copia del pezzo col segno della fase rovesciato: la seconda fonte, dichiarata)*.
+  3. **La reazione e il punto fisso di `cs`** *(col lapse)*: **il punto medio implicito e' simmetrico** *(la reazione a meta' passo: la sua inversa e' la stessa con `-dtau`, a punto fisso)*; **il `cs` al centro del palindromo e' lo stesso andando e tornando** *(lo stato al centro e' lo stesso)*.
+- ### **Perche' e' esatto:** **ogni pezzo inverso e' l'inverso ESATTO del suo pezzo** *(fasi e involuzioni)*, **quindi l'inverso del tick e' esatto all'arrotondamento;** **col lapse, entro la tolleranza dei punti fissi** *(`EPS_CS` e `1e-14`)*.
+- ### ⚠ **IL COSTO E IL RISCHIO, da dire a Luca prima del codice:** **scrivere l'inverso pezzo per pezzo dei `7` tipi di pezzo** *(con la moneta, la `U`, i due Grover, i due spostamenti, il flusso materia-vuoto)* **e' una copia di mezzo nucleo fuori dal nucleo.** **E' la «seconda fonte della legge» che Luca ammette solo per questa prova; il suo DEVE** *(`N = 1`: avanti e indietro `1000` tick entro `1e-12`)* **e il suo DEVE FALLIRE** *(un pezzo sbagliato apposta)* **controllano che la copia sia fedele.**
+- **Le prove** *(Luca)*: **il DEVE a `N = 1`; poi col lapse acceso** *(la scena di T-L2, i tre rapporti)*, **la lettura: entro `1e-10` = reversibile; oltre = di quanto, e dove nasce;** **DEVE FALLIRE: un inverso con un pezzo sbagliato apposta.** **Il referto `doc/referti_l2/s5_reversibilita.txt`.**
+
+### 31.25 S5.2-bis, PUNTO 4: LO SCARTO DEL `13%` DELLA CADUTA -- **IL PROGETTO, PRIMA DEL CODICE**
+
+- **Sul banco di T-L4** *(la forma di oggi)*: **T-L4b non ha dato (f1), quindi la regola del mandato dice «altrimenti sul banco di T-L4».**
+- **I tre candidati, uno per volta, con la lettura scritta prima:**
+  - **(s1) il pacchetto non esattamente a `k = 0`:** **il `k` medio vero del pacchetto** *(dalla trasformata di Fourier di `psi`, l'immagine minima)* **e la previsione col suo `k` medio.** **La lettura:** **se `<k>` lungo `B_0` e' `0` entro `1e-6`, (s1) e' escluso** *(il pacchetto e' una gaussiana reale per `q`: `<k> = 0` per costruzione, atteso)*.
+  - **(s2) la parabola:** **lo stesso fit sui primi `100`, `200`, `400` tick** *(`gamma 0.01` e `0.02`)*. **La lettura:** **se il rapporto con la previsione va a `1` entro il `3%` in una delle finestre, (s2) e' la causa.**
+  - **(s3) il primo ordine nel gradiente:** **`gamma` in `{0.0025, 0.005, 0.01, 0.02}`** *(`200` tick)*; **il secondo ordine:** **il pacchetto si sposta di `d` e la pendenza di `sin` cala di `cos(2 pi d |grad i1| / L)`:** **stampato.** **La lettura:** **se il rapporto va a `1` entro il `3%` quando `gamma -> 0`, (s3) e' la causa.**
+- **La lettura finale** *(Luca)*: **lo scarto sparisce entro il `3%` con uno dei tre, e quello e' la causa; oppure resta in tutti, e si registra come una correzione NON spiegata.**
+- **Lo script `csv/solitone/s5_caduta_scarto.py`, il referto `doc/referti_l2/s5_caduta_scarto.txt`.** **Si gira DOPO T-L3 rifatta** *(una prova alla volta)*.
+
+### 31.26 S5.2-bis, PUNTO 5: **NON SI FA**
+
+- **«T-L3 con la forma nuova, solo se T-L4b da' (f1)»: T-L4b ha dato il verso giusto ma NON (f1)** *(l'ampiezza `0.68` della previsione all'ordine zero)*. **Quindi il punto 5 non si fa** *(Luca)*.
