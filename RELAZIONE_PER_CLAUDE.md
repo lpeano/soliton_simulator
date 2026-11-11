@@ -25199,3 +25199,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`18:25`: la stessa scelta, con le prove UNA ALLA VOLTA; dopo S5.2 fermo con la tabella.**
 - **Il codice che mancava** *(T-L3: `s4_materia_mrho.py --lapse`; T-L4: lo script nuovo `s5_caduta.py`)*: **`a82ca3d0`, la suite `67` su `67`** *(dalle `18:25:58` alle `18:44:47`)*. **Le corse in sequenza sono partite:** **T-L1, T-L2** *(~`4` ore)*, **T-L3, T-L4.**
 - **`C50-0`:** **in corsa, la fine verso le `20:30`** *(stima)*; **poi i pezzi, l'indice delle mappe e il referto senza singolo.**
+
+### 2026-11-11 20:50 -- UNA REGOLA DI LUCA: NIENTE ATTESE IN BACKGROUND, OGNI PROVA CHIUSA SI COMMITTA SUBITO; LO STATO DI S5.2 *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- ### **LA REGOLA DI LUCA** *(`2026-11-11` sera)*: **niente cicli di attesa in background su una corsa;** **ogni prova o pezzo chiuso si committa e si pusha SUBITO;** **per sapere se una corsa e' finita si controlla quando Luca lo chiede, non con attese ripetute.**
+- ### ⚠ **IL MIO ERRORE:**
+  - **ho accumulato una decina di attese su `C50-0` e sulla catena delle prove;**
+  - **la sessione non prendeva piu' prompt;**
+  - **T-L1, chiusa alle `18:55:45`, e' rimasta senza commit fino alle `20:4x`.**
+  - **Le attese sono fermate** *(solo le mie: la catena delle prove e `C50-0` restano vive)*. **La regola e' nella memoria della sessione.**
+- **S5.2, lo stato** *(dai file)*:
+  - **T-L1 chiusa: `2/2`** *(`18c198e8`: il banco = il tick di oggi al bit sul vuoto; calmo)*.
+  - **T-L2 in corsa dalle `18:55:45`, con due rapporti chiusi su tre** *(il referto non e' ancora finito)*:
+    - **`r = 1e-3`: nessuna deriva** *(`1.89` errori)*, **le norme `3.6e-14`;**
+    - **`r = 1e-2`: nessuna deriva** *(`0.48` errori)*, **le norme `2.1e-14`.**
+  - **Poi in sequenza: T-L3, T-L4** *(e i DEVE FALLIRE dentro T-L2 e T-L3)*.
+- **`C50-0`:** **chiuso il pezzo `180000 -> 190000`; l'ultimo in corsa.**
