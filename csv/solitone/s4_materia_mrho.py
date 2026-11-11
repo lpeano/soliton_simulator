@@ -4,6 +4,10 @@ r"""**S4: LA LEGGE M-rho HA UN'INSTABILITA' NELLA MATERIA?** *(sul ramo laterale
     python csv/solitone/s4_materia_mrho.py > doc/referti_l2/s4_spettro_materia_mrho.txt
     python csv/solitone/s4_materia_mrho.py --v2 > doc/referti_l2/s4_spettro_materia_mrho_v2.txt
     python csv/solitone/s4_materia_mrho.py --lapse > doc/referti_l2/s5_lapse_spettro.txt
+    python csv/solitone/s4_materia_mrho.py --lapse2 > doc/referti_l2/s5_lapse_spettro_v2.txt
+
+**`--lapse2`** *(S5.2-bis punto 3, sez. `31.23`)*: **come `--lapse`, col punto fisso di `cs` del banco SMORZATO** *(`omega 0.5`, fino a `1000` giri: lo strumento, non la legge)*; **per ogni punto la storia degli scarti della base;**
+**DEVE: dove il metodo di prima convergeva, lo stesso `cs` entro `1e-14`; un punto che non converge nemmeno cosi' si riporta e si toglie dalla mappa** *(dichiarato)*.
 
 **`--lapse`** *(T-L3 di S5.2, sez. `31.15`)*: **la mappa e' il BANCO DEL LAPSE** *(`tick_lapse.tick`, la colonna «M-rho» e' il lapse)* **contro il `cs` congelato** *(il fondo passato identico, come `--v2`)*; **niente `A = F + P Q`** *(la reazione non e' un solo numero per nodo)*; **DEVE FALLIRE: il banco senza la reazione a `rho_0 1e-2`; le letture (l1)-(l3).**
 
@@ -41,7 +45,10 @@ RAPPORTI = (1e-3, 1e-2, 1e-1, 1.0, 10.0)   # ### Luca: rho_0 / rho_c
 RHO0 = (1e-4, 1e-2, 1.0)                   # ### Luca: rho_0, in unita' della norma per nodo
 S_SCAN = (0.05, 0.15, 0.3)                 # ### Luca
 MEZZO = (1e-2, 1e-1, 0.15)                 # ### mio: il punto della traslazione (rho_0, rapporto, s)
-LAPSE = "--lapse" in sys.argv               # ### T-L3 (sez. 31.15)
+LAPSE2 = "--lapse2" in sys.argv             # ### S5.2-bis punto 3 (sez. 31.23)
+LAPSE = "--lapse" in sys.argv or LAPSE2     # ### T-L3 (sez. 31.15)
+OMEGA_L, GIRI_L = (0.5, 1000) if LAPSE2 else (1.0, None)   # ### Luca (punto 3): omega 0.5, fino a 1000 giri
+TOLL_CS_NUOVO = 1e-14                      # ### Luca (punto 3)
 V2 = "--v2" in sys.argv or LAPSE            # ### S4.7 (sez. 30.7); --lapse usa il fondo unico
 SENZA_RHO0 = 1e-2                          # ### sez. 31.15: il DEVE FALLIRE a rho_0 1e-2
 JEANS_K, RETICOLO_K = 1.0, 2.0             # ### sez. 31.15 (miei): |k| < 1 la firma di Jeans, |k| > 2 la scala del reticolo
@@ -152,7 +159,7 @@ def main():
             st["phi_h"][...] = phi
             if legge[0] == "lapse":
                 assert dcs is None, "il lapse non ha un impulso di cs"
-                TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3])
+                TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3], omega=OMEGA_L, giri_max=GIRI_L)
                 return st["psi_h"].reshape(n, 12) * np.conj(u_psi) * fattore, st["phi_h"] * np.conj(u_phi) * fattore
             cs = cs_di(psi, legge)
             if dcs is not None:
@@ -290,6 +297,47 @@ def main():
             # ============================================================== le basi: (m4) prima di tutto
             print("### LE BASI (S4.0 a): il residuo sotto %g" % TOLL_PF)
             basi = {}
+            tolti = set()
+
+            def diagnosi_cs(rho0, ra, s):
+                """### **Il punto fisso di `cs` della base** *(il fondo uniforme)* **col metodo di prima e col nuovo; la storia degli scarti.** `None` se il nuovo non converge."""
+                rc = rho0 / ra
+                Mg = np.zeros((12, 12), dtype=complex)
+                for cc in range(12):
+                    pp = np.zeros((n, 12), dtype=complex)
+                    pp[:, cc] = math.sqrt(rho0)
+                    p1, _ = mappa(pp, phi_b, ("cost", s / (1.0 + rho0 / rc)), 1.0, 1.0)
+                    Mg[:, cc] = p1[0] / math.sqrt(rho0)
+                lam, Vv = np.linalg.eig(Mg)
+                E = -np.angle(lam)
+                o = np.argsort(E)
+                Qm = np.linalg.qr(Vv[:, [int(o[-2]), int(o[-1])]])[0]
+                qq = math.cos(th) * Qm[:, 0] + np.exp(1j * fi) * math.sin(th) * Qm[:, 1]
+                psi = np.tile(math.sqrt(rho0) * qq / np.linalg.norm(qq), (n, 1))
+                ris = {}
+                for nome, om, gm in (("prima", 1.0, None), ("nuovo", OMEGA_L, GIRI_L)):
+                    for k in chiavi:
+                        st[k][...] = salvato[k]
+                    st["psi_h"][...] = psi.reshape(forma_psi)
+                    st["phi_h"][...] = phi_b
+                    stor = []
+                    try:
+                        cs_, g_ = TL.cs_al_centro(mot, st, par, s, ("rho_c", rc), False, omega=om, giri_max=gm, storia=stor)
+                        ris[nome] = (cs_.copy(), g_, stor)
+                    except AssertionError:
+                        ris[nome] = (None, len(stor), stor)
+                    sc = ris[nome][2]
+                    print("    il punto fisso di cs, rho_0 %g, rapporto %g, s %g, %s (omega %g): %s in %d giri; gli scarti %s ... %s" % (
+                        rho0, ra, s, nome, om, "converge" if ris[nome][0] is not None else "### NON converge", len(sc),
+                        " ".join("%.2e" % x for x in sc[:3]), " ".join("%.2e" % x for x in sc[-3:])))
+                if ris["nuovo"][0] is None:
+                    print("    ### il punto (rho_0 %g, rapporto %g, s %g) NON converge nemmeno col metodo nuovo (lo scarto finale %.3e): si TOGLIE dalla mappa (dichiarato)" % (rho0, ra, s, ris["nuovo"][2][-1]))
+                    return None
+                if ris["prima"][0] is not None:
+                    d = float(np.max(np.abs(ris["prima"][0] - ris["nuovo"][0])))
+                    confronti.append(d)
+                return ris
+            confronti = []
             for s in S_SCAN:
                 basi[(0.0, None, s)] = base(0.0, L0(s))
                 stampa_base("rho_0 0, M-rho, s %g" % s, basi[(0.0, None, s)])
@@ -299,6 +347,11 @@ def main():
                         stampa_base("rho_0 %g, la legge spenta, s %g" % (rho0, s), basi[(rho0, "spenta", s)])
                     for ra in RAPPORTI:
                         legge = ("lapse", s, rho0 / ra, False) if LAPSE else ("mrho", s, rho0 / ra)
+                        if LAPSE2:
+                            dia = diagnosi_cs(rho0, ra, s)
+                            if dia is None:
+                                tolti.add((rho0, ra, s))
+                                continue
                         basi[(rho0, ra, s)] = base(rho0, legge)
                         stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, M-rho" % (rho0, ra, s), basi[(rho0, ra, s)])
                         basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
@@ -307,6 +360,9 @@ def main():
             if V2:
                 sb = max(float(np.max(np.abs(basi[k]["psi"] - basi[(k[0], k[1][1], k[2])]["psi"]))) for k in basi if isinstance(k[1], tuple))
                 esito("(S4.7) lo scarto fra il fondo di M-rho e quello del cs congelato < %g, in tutti i punti" % TOLL_BASI, sb < TOLL_BASI, "%.3e" % sb)
+            if LAPSE2:
+                print("    i punti tolti: %d %s" % (len(tolti), sorted(tolti)))
+                esito("(punto 3) dove il metodo di prima converge, lo stesso cs col nuovo entro %g (%d punti)" % (TOLL_CS_NUOVO, len(confronti)), bool(confronti) and max(confronti) <= TOLL_CS_NUOVO, "%.3e" % (max(confronti) if confronti else float("nan")))
             peggio = max(max(b["res_p"], b["res_f"]) for b in basi.values())
             print("    il residuo piu' grande fra le %d basi: %.3e" % (len(basi), peggio))
             if not esito("(S4.0 a) ogni base e' un punto fisso nel riferimento che gira (il residuo < %g)" % TOLL_PF, peggio < TOLL_PF, "%.3e" % peggio):
@@ -351,10 +407,20 @@ def main():
                 for rho0 in RHO0:
                     for ra in RAPPORTI:
                         legge = ("lapse", s, rho0 / ra, False) if LAPSE else ("mrho", s, rho0 / ra)
+                        if (rho0, ra, s) in tolti:
+                            print("  IL PUNTO rho_0 %g, rho_0/rho_c %g, s %g: TOLTO (il punto fisso di cs non converge)" % (rho0, ra, s))
+                            continue
                         b = basi[(rho0, ra, s)]
                         bc = basi[(rho0, ("cong", ra), s)]
                         print("  IL PUNTO rho_0 %g, rho_0/rho_c %g (rho_c %.4e), s %g: cs del fondo %.10f" % (rho0, ra, rho0 / ra, s, b["cs0"]))
-                        R, dev = risposta(b, legge)
+                        try:
+                            R, dev = risposta(b, legge)
+                        except AssertionError as ex:
+                            if not LAPSE2:
+                                raise
+                            print("    ### il punto (rho_0 %g, rapporto %g, s %g) NON converge su una perturbazione: TOLTO (dichiarato): %s" % (rho0, ra, s, str(ex)[:150]))
+                            tolti.add((rho0, ra, s))
+                            continue
                         sp = spettro(R)
                         esito("rho_0 %g, rapporto %g, s %g: la linearita' < %g" % (rho0, ra, s, TOLL_LIN), dev < TOLL_LIN, "%.2e" % dev)
                         d_ = descrivi(sp, "M-rho")
@@ -403,10 +469,18 @@ def main():
                 print("### T-L3, DEVE FALLIRE: il banco SENZA la reazione a rho_0 %g, contro il cs congelato" % SENZA_RHO0)
                 for s in S_SCAN:
                     for ra in RAPPORTI:
+                        if (SENZA_RHO0, ra, s) in tolti:
+                            continue
                         b = basi[(SENZA_RHO0, ra, s)]
                         ls = ("lapse", s, SENZA_RHO0 / ra, True)
-                        bs = base(SENZA_RHO0, ls, psi_dato=b["psi"])
-                        R, dev = risposta(bs, ls)
+                        try:
+                            bs = base(SENZA_RHO0, ls, psi_dato=b["psi"])
+                            R, dev = risposta(bs, ls)
+                        except AssertionError as ex:
+                            if not LAPSE2:
+                                raise
+                            print("    ### senza reazione, rapporto %g, s %g: il punto fisso di cs NON converge: saltato (dichiarato): %s" % (ra, s, str(ex)[:150]))
+                            continue
                         sp = spettro(R)
                         del R
                         d_ = descrivi(sp, "senza reazione")

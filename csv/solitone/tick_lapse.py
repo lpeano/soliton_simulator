@@ -80,11 +80,13 @@ def reazione(mot, st, par, s, legge, frazione):
     return giri
 
 
-def cs_al_centro(mot, st, par, s, legge, senza_reazione):
-    """### **`cs` dallo stato al CENTRO, a punto fisso:** la copia fa la mezza reazione e mezzo palindromo *(come `tick.cs_al_centro`)*. `(cs, giri)`."""
+def cs_al_centro(mot, st, par, s, legge, senza_reazione, omega=1.0, giri_max=None, storia=None):
+    """### **`cs` dallo stato al CENTRO, a punto fisso:** la copia fa la mezza reazione e mezzo palindromo *(come `tick.cs_al_centro`)*. `(cs, giri)`.
+    ### **S5.2-bis punto 3** *(lo strumento curato, non la legge)*: `omega < 1` **smorza** l'iterazione *(`cs <- cs + omega (cs_calcolato - cs)`)*; `giri_max` **il tetto** *(predefinito `tick.GIRI_MAX`)*;
+    `storia` **una lista in cui si scrive lo scarto a ogni giro.** **A `omega = 1` e' lo stesso codice di prima** *(il ramo `prec = nuovo`)*."""
     meta = TK.meta_del_palindromo()
     prec = cs_di(mot, st, s, legge)
-    for giri in range(1, TK.GIRI_MAX + 1):
+    for giri in range(1, (TK.GIRI_MAX if giri_max is None else giri_max) + 1):
         copia = {k: (v.copy() if hasattr(v, "copy") else v) for k, v in st.items()}
         mot.cs = prec
         mot.lambda_c = None
@@ -93,15 +95,17 @@ def cs_al_centro(mot, st, par, s, legge, senza_reazione):
         TK.percorri_tick(copia, mot, par, (), None, meta)
         nuovo = cs_di(mot, copia, s, legge)
         scarto = float(np.max(np.abs(nuovo - prec)))
+        if storia is not None:
+            storia.append(scarto)
         if scarto <= TK.EPS_CS * float(np.max(np.abs(nuovo))):
             return nuovo, giri
-        prec = nuovo
-    raise AssertionError("il punto fisso di cs del lapse NON converge in %d giri (ultimo scarto %.3e)" % (TK.GIRI_MAX, scarto))
+        prec = nuovo if omega == 1.0 else prec + omega * (nuovo - prec)
+    raise AssertionError("il punto fisso di cs del lapse NON converge in %d giri (ultimo scarto %.3e)" % (giri, scarto))
 
 
-def tick(mot, st, par, s, legge, senza_reazione=False):
-    """### **UN tick col lapse.** `{"giri_cs", "giri_r1", "giri_r2"}`."""
-    cs, giri = cs_al_centro(mot, st, par, s, legge, senza_reazione)
+def tick(mot, st, par, s, legge, senza_reazione=False, omega=1.0, giri_max=None, storia=None):
+    """### **UN tick col lapse.** `{"giri_cs", "giri_r1", "giri_r2"}`; `omega`, `giri_max`, `storia`: vedi `cs_al_centro` *(S5.2-bis punto 3)*."""
+    cs, giri = cs_al_centro(mot, st, par, s, legge, senza_reazione, omega=omega, giri_max=giri_max, storia=storia)
     mot.cs = cs
     mot.lambda_c = None
     g1 = 0 if senza_reazione else reazione(mot, st, par, s, legge, 0.5)
