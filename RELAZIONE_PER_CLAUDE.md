@@ -25276,3 +25276,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **I punti 4 e 6 sono progettati** *(`b1e69bbe`, `18b589ef`)*; **lo script del punto 4 e' scritto ma non committato ne' girato.**
   - ### **LA DOMANDA A LUCA:** **`2.5e-10` e' un punto fisso mancato o l'arrotondamento della coppia quasi degenere? La soglia `1e-12` non la cambio io** *(`A1`)*. **Il criterio di chiusura: la decisione di Luca sulla soglia, o una prova che separi le due cose.**
 - **In coda, ora:** **le mappe leggere delle corse intere** *(Luca `23:31`)*.
+
+### 2026-11-12 00:20 -- LE MAPPE LEGGERE DELLE CORSE INTERE *(Luca `2026-11-11` `23:31`)*; E IL MANDATO S5.3 PARTITO SUL LATERALE [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **`csv/solitone/mappe_leggere_intere.py`** *(il codice a `893095b7`; le estrazioni dalle `00:00:57` alle `00:01:20`)*: **`doc/referti_l2/campo_<corsa>/mappe_leggere_intere.npz`, `101` fotogrammi da `0` a `200000`, uno ogni `2000` tick, `np.savez_compressed`.**
+  - **Le dimensioni:** **`C35-0` `8406048` byte, `C35-pi` `8343612`, `S162` `8078344`, `C50-0` `8859403`** *(tutti sotto i `15 MB`)*.
+  - ### **IL DEVE DI LUCA PASSA, ed e' piu' che «entro float16»: ai `34` tick comuni** *(`0`-`66000`)* **`rho`, `dLambda` e `centro` coincidono AL BIT con `mappe_leggere.npz`** *(lo stesso calcolo di `carta_campo.py`)*; **lo stesso confronto spostato di un fotogramma FALLISCE, come deve.** **`F0`: lo `sha1` di ogni file su `E:` = l'indice.**
+  - **Per `C50-0` non c'e' un `mappe_leggere.npz` vecchio:** **il confronto non si puo' fare** *(dichiarato nel referto)*; **la cartella `campo_C50-0/` e' nuova.**
+  - **I referti:** `doc/referti_l2/mappe_leggere_intere_<corsa>.txt`.
+- **Sul laterale, S5.3** *(Luca `23:42`-`23:45`)*: **la sez. `32` del task history** *(`31009be8`)*; **il codice di A** *(`a5f9a514`: la forma (a) nel banco del lapse, `--lapse3` con la soglia delle basi `1e-9`)*; **le due corse di A in parallelo** *(il banco di oggi e la forma (a))*.

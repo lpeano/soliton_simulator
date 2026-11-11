@@ -1,0 +1,16 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] mappe_leggere_intere.py  sha1-BYTE 41f98a76  committato e pulito
+==================================================================================================================================
+LE MAPPE LEGGERE INTERE (Luca 23:31) di C50-0: da E: (solo lettura), un fotogramma ogni 2000 tick da 0 a 200000; s 0.15; float16 (eps 0.000976562); il tetto 15 MB
+==================================================================================================================================
+  DEVE PASSARE: F0 lo sha1 di ogni file delle mappe = l'indice, e i file su E: sono quelli dell'indice                         PASSA   20 file
+  DEVE PASSARE: i fotogrammi: 101, da 0 a 200000 ogni 2000                                                                     PASSA   101, da 0 a 200000
+  ### nessun mappe_leggere.npz per C50-0: il confronto ai tick comuni NON si puo' fare (dichiarato)
+  il file doc\referti_l2\campo_C50-0\mappe_leggere_intere.npz: 8859403 byte (8.86 MB); 101 fotogrammi; rho fino a 5.0640e+03; |dLambda| fino a 1.4391e+01
+  DEVE PASSARE: il file sotto 15 MB                                                                                            PASSA   8859403 byte
+  lo sha1 del file: b8ab1adb8ea0b484b7da93d897f4cbfded1401ee
+==================================================================================================================================
+ESITO: 3/3 controlli come devono; fallite: 0 []

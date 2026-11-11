@@ -1,0 +1,19 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] mappe_leggere_intere.py  sha1-BYTE 41f98a76  committato e pulito
+==================================================================================================================================
+LE MAPPE LEGGERE INTERE (Luca 23:31) di S162: da E: (solo lettura), un fotogramma ogni 2000 tick da 0 a 200000; s 0.15; float16 (eps 0.000976562); il tetto 15 MB
+==================================================================================================================================
+  DEVE PASSARE: F0 lo sha1 di ogni file delle mappe = l'indice, e i file su E: sono quelli dell'indice                         PASSA   21 file
+  DEVE PASSARE: i fotogrammi: 101, da 0 a 200000 ogni 2000                                                                     PASSA   101, da 0 a 200000
+  i tick comuni con mappe_leggere.npz: 34 (da 0 a 66000); lo scarto relativo piu' grande rho 0.000e+00, dLambda 0.000e+00, centro 0.000e+00; al bit: rho True, dLambda True, centro True
+  DEVE PASSARE: (Luca) ai tick comuni rho, dLambda e centro = mappe_leggere.npz entro la precisione di float16                 PASSA   rho 0.00e+00 dLambda 0.00e+00 centro 0.00e+00
+  DEVE PASSARE: d1, d2, L, centro_bordo, R_A, g_max = mappe_leggere.npz (d1, d2, L, centro_bordo, R_A, g_max)                  PASSA   
+  DEVE FALLIRE: lo stesso confronto spostato di un fotogramma (t contro t - 2000)                                              ### FALLISCE   
+  il file doc\referti_l2\campo_S162\mappe_leggere_intere.npz: 8078344 byte (8.08 MB); 101 fotogrammi; rho fino a 5.0640e+03; |dLambda| fino a 1.2828e+01
+  DEVE PASSARE: il file sotto 15 MB                                                                                            PASSA   8078344 byte
+  lo sha1 del file: a1683f65f0047e1b1ac9cc74c9ac6206382d879f
+==================================================================================================================================
+ESITO: 6/6 controlli come devono; fallite: 0 []
