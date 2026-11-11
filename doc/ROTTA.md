@@ -13,6 +13,8 @@
 | **4** | ### **L'OROLOGIO CHE CONSERVA L'ENERGIA** *(il lapse: `E_N = somma di N h`, la dinamica derivata da `E_N`)*: **il banco e le prove sul laterale ORA** *(S5, fuori dal nucleo)*; **nel nucleo dopo l'unificazione, se passa le prove.** ### **M-rho istantanea e' SUPERATA** *(S4: instabile per l'anello a senso unico)*. | laterale *(S5, sez. `31`)*, poi il nucleo dopo il passo `3` | il banco ora; il nucleo dopo l'unificazione | le prove di S5 passate, e la decisione di Luca |
 | **5** | ### **M-Phi, che coincide con l'INIZIO DELLA GRAVITA' in 2D, ora come l'ESTENSIONE CON PORTATA DEL LAPSE** *(`doc/PIANO_2D_3D.md`)*: **il potenziale che si propaga, sorgente `rho`.** | dopo il passo `4` | - | da scrivere quando si apre |
 
+> ### **PASSO 5, DECISIONE DI LUCA (`2026-11-11` `13:29`): LA SORGENTE DI `Phi` E' L'ENERGIA LOCALE, non la densita' di materia.** **Come nella relativita' generale, gravita l'energia: anche il vuoto, se ha energia, gravita, e la sua energia fa da costante cosmologica.** ### **Conseguenza: lo ZERO dell'energia (O1 o O4) diventa fisico e va scelto PRIMA del passo 5.** **Le misure che servono a sceglierlo: il triangolo** *(S5.0 (e), il segno di `h_k` nel solitone per ciascuno zero)* **e la caduta** *(T-L4, il verso per ciascuno zero)*. **La scelta dello zero resta di Luca.**
+
 **Dove sono le cose:** S0-S2 nella sez. `28` del task history del laterale; **M-rho e M-Phi** *(proposte del guardiano sull'osservazione di Luca delle `19:44`)* nella sez. `29`; **le note sulla gravita'** in `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md`; **il piano 2D -> 3D** in `doc/PIANO_2D_3D.md`.
 
 **Lo storico delle decisioni di Luca su questo file:**
@@ -20,3 +22,6 @@
 - `2026-11-11` `09:17`: **Luca anticipa, solo come studio di stabilita' lineare sul laterale (S4), la prova di M-rho attorno a un fondo di materia uniforme; nessuna modifica al nucleo; l'ordine dei passi non cambia.**
 - `2026-11-11` `09:22`: **il referto di `C50-0` senza il singolo di riferimento; il singolo col bordo di `C50` rimandato a dopo l'unificazione, se servira'.**
 - `2026-11-11` `11:33`: **Luca decide di implementare e provare l'orologio che conserva l'energia** *(S5, banco fuori dal nucleo)*; **l'ordine dei passi `2` e `3` non cambia.**
+- `2026-11-11` `13:22`: **lo schema palindromo** *(`N` a meta' passo, la reazione col punto medio implicito)*, **la media ARMONICA del nucleo, la prova del vuoto con la reazione (V-R) dentro S5; gli errori n.136 e n.137 del guardiano; l'ordine dei passi non cambia.**
+- `2026-11-11` `13:25`-`13:28` *(Luca)*: **il campo con vita propria** *(M-Phi, il passo `5`)* **si costruisce sul LAPSE DELLA MATERIA di S5** *(`N` comandato dalla materia, con la reazione che conserva l'energia; il vuoto libero)*, **NON sulla legge del vuoto** *(`cs` da `Lambda`)*, **qualunque sia l'esito della prova V-R. V-R e' un'informazione, non una base.**
+- `2026-11-11` `13:29`: **la sorgente di `Phi` e' l'energia locale** *(decisione di Luca; la riga sotto il passo `5`; corregge la «domanda aperta» delle `13:28`, che non entra)*.

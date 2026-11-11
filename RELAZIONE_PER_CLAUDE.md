@@ -25093,3 +25093,25 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **I `~10` GB non sono nelle mie cartelle** *(lo scratchpad `11` MB, `TEMP` `1.6` GB, i worktree come ieri)*: **non cancello niente.**
   - **`C50-0` scrive su `C:` solo i jsonl** *(`~2` MB a pezzo)*; **le mappe e gli stati vanno su `E:`** *(`210` GB liberi)*.
   - ### **Ma le prossime suite falliranno su `M-B1` finche' lo spazio non torna: una decisione di Luca.**
+
+### 2026-11-11 13:40 -- LE DECISIONI DI LUCA DELLE `13:22`-`13:29`: LO SCHEMA, L'ARCO, V-R, IL PASSO `5` SUL LAPSE DELLA MATERIA, LA SORGENTE DI `Phi` E' L'ENERGIA *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **`13:22`, S5:**
+  - **lo schema e' il PALINDROMO** *(`N` a meta' passo, la reazione col punto medio implicito)*;
+  - **l'arco usa la media ARMONICA del nucleo;**
+  - **la prova del vuoto con la reazione accesa (V-R) si fa dentro S5, come informazione;**
+  - **T-L2 ha il criterio NUOVO:** **nessuna deriva** *(la pendenza entro `3` errori di Sokal)*, **l'escursione che va come `dtau^2`, la norma entro `1e-13`;**
+  - **T-L4 riporta il verso con O1 e con O4.**
+- ### **Gli errori del guardiano n.136 e n.137** *(scritti nel task history del laterale)*:
+  - **n.136:** **(q2) l'ho messo io nel mandato F1, e ha spento la reazione: T2, B1, H4 e S2 hanno provato un orologio A SENSO UNICO, non la legge del nucleo;**
+  - **n.137:** **la soglia `1e-11` di T-L2 era impossibile.**
+- **`13:25`-`13:28`:** **il passo `5`** *(M-Phi)* **si costruisce sul LAPSE DELLA MATERIA, non sulla legge del vuoto, qualunque sia l'esito di V-R.**
+- ### **`13:29`, DECISIONE: la sorgente di `Phi` e' l'ENERGIA LOCALE** *(come nella relativita' generale; anche il vuoto gravita, e la sua energia fa da costante cosmologica)*. **Lo zero dell'energia** *(O1 o O4)* **diventa fisico e va scelto prima del passo `5`; la scelta resta di Luca.**
+  - **Nella ROTTA:** **la riga sotto il passo `5` e tre righe nello storico.** **La «domanda aperta» delle `13:28` e' sostituita dalla decisione delle `13:29`.**
+- **In coda sul laterale:**
+  1. **(e)** *(in corsa)*, **poi il segno di `h_k` nel solitone per ciascuno zero** *(uno script piccolo, committato prima)*;
+  2. **S5.0-bis;**
+  3. **V-R;**
+  4. **il banco;**
+  5. **le prove.**
+- **Sul principale, in coda:** **il referto di `C50-0`.**
