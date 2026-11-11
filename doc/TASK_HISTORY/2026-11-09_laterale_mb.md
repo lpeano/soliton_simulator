@@ -1117,3 +1117,47 @@
 
 - **La rotta del tempo locale e dell'unificazione** *(Luca `2026-11-10` `20:08`)* **e' `doc/ROTTA.md` sul principale** *(`4f8bb34b`)*.
 - **Su questo ramo:** **dopo S2 nessuna nuova cura della legge sul vuoto, e F1-F4 sono archiviate** *(S2 non ha trovato zone stabili)*.
+
+## 30. S4, LA LEGGE M-rho HA UN'INSTABILITA' NELLA MATERIA? *(Luca `2026-11-11` `09:17`)*: **S4.0, PRIMA DEL CODICE**
+
+**SOLO uno studio di stabilita' lineare:** **nessuna modifica al nucleo, nessuna corsa lunga, nessuna scelta di `rho_c`** *(la scansione e' una MAPPA)*. **M-rho e' ISTANTANEA** *(F1-F4 archiviate)*. **Lo strumento e' quello di S2, esteso a `psi`.** **Il codice si committa PRIMA di qualunque esecuzione, senza prove fuori dal repo** *(il criterio di Luca, e il mio errore di S2)*.
+
+### 30.1 (a) IL FONDO DI MATERIA UNIFORME *(dal codice)*
+
+- ### **LA BANDA DEI SOLITONI, dal codice:** **`_consolida_B.coppia` prende `A[0, 0]`, cioe' il blocco del tick di `psi` a `k = 0` (`Gamma`), e ne tiene le DUE bande piu' alte** *(`E = -arg lambda / S`, gli ultimi due dopo l'ordinamento)*, **ortonormalizzate (`q1`, `q2`).** **Il solitone BG e' l'inviluppo di `q = cos theta q1 + e^{i phi} sin theta q2`, con `theta`, `phi` dal minimo di `griglia.json` a `eps 0.5`** *(`theta = pi/4`, `phi = 5 pi / 4`)*. **La coppia e' degenere entro `~1e-15`** *(`degenere` nei referti: `8.9e-16`-`5.3e-15`)*, **quindi `q` e' un autovettore.**
+- ### **IL FONDO:** **`psi_0` = `sqrt(rho_0) q` in OGNI cella, con `|q| = 1`.** **Ogni nodo riceve un'estremita' di ciascuno dei `6` posti della cella** *(i tre archi in uscita e i tre in entrata)*: **quindi `rho` per nodo = `rho_0 |q|^2 = rho_0` esatto** *(stampato: il min e il max di `rho`)*. **`phi_0` = `c F3`, il vuoto di S2** *(`Lambda = 6`)*. **`rho_0` e' in unita' della norma per nodo, la stessa di `Lambda`.**
+- ### **`q1`, `q2` si RICALCOLANO in ogni punto:** **il blocco `M` di `psi` a `Gamma` cambia col `cs` del punto** *(`cs = cs(rho_0)` uniforme moltiplica i tempi dei pezzi)*: **`M` dalle colonne `tick(sqrt(rho_0) e_c) / sqrt(rho_0)`** *(un `psi` uniforme con una sola componente ha ancora `rho = rho_0` per nodo, quindi il `cs` e la fase della materia sono quelli del fondo)*, **le due bande piu' alte come in `coppia`, la stessa combinazione `theta`, `phi`.**
+- ### **DUE FASI:** **`CAMM-MATERIA-VUOTO`** *(la forma `S1` della scena: `alpha = x^2/(1+x^2)` su `psi`, `beta = x - arctan x - x^3/(1+x^2)` su `phi`, `x = rho / Lambda`)* **mette fasi DIVERSE su `psi` e su `phi`, e i pezzi di `psi` e di `phi` girano con frequenze diverse:** **il riferimento che gira ha DUE fasi, `u_psi` e `u_phi`, misurate sulla base** *(`<psi_0, psi_1>` e `<phi_0, phi_1>`, un tick)*. ### **Il residuo della base** *(`|u_psi^* psi_1 - psi_0| / max|psi_0|`, e lo stesso per `phi`)* **DEVE stare sotto `1e-12`** *(Luca)*: **se non ci sta, (m4): FERMO prima dello spettro.**
+- **I flussi materia-vuoto sono FASI esatte** *(la scheda: «una fase NON CAMBIA ne' `rho` ne' `Lambda`»)*: **non spostano norma, quindi un fondo uniforme PUO' essere un punto fisso.** **Lo dice il residuo, non io.**
+
+### 30.2 (b) LE VARIABILI, E LA LEGGE M-rho NELLA MAPPA
+
+- **`psi`: `24` reali per cella; `phi`: `12`. `36` in tutto.** **`cs` NON e' una variabile.**
+- ### **M-rho, come la scrivo nella mappa** *(scelte MIE, dichiarate)*:
+  - **`cs_k = s / (1 + rho_k / rho_c)`, con `rho_k` dallo stato all'INIZIO del tick** *(la legge istantanea, come (L-ist) di S2)*;
+  - **`mot.cs` = quel vettore, `mot.lambda_c = None`:** **cosi' `CAMM-FASE-VUOTO` non c'e'** *(e' la derivata della legge su `Lambda`, che qui non esiste)*. ### **Il termine analogo per M-rho** *(il gradiente di `G` attraverso `cs(rho)`, una fase su `psi`)* **NON ESISTE nel codice, e qui non lo scrivo:** **e' una mancanza dichiarata** *(come (q2) per F1)*.
+- **«La legge spenta» del mandato:** **`mot.cs = s` ovunque, `mot.lambda_c = None`** *(come T1)*.
+- **«Il `cs` congelato»** *(mio, per il meccanismo)*: **`mot.cs = cs(rho_0)` uniforme e costante.** **E' la mappa M-rho SENZA l'anello:** **la differenza fra le due e' il pezzo che passa per `cs`.**
+
+### 30.3 (c) LA MAPPA
+
+- **`rho_0 / rho_c` in `{1e-3, 1e-2, 1e-1, 1, 10}`; `rho_0` in `{1e-4, 1e-2, 1}`; `s` in `{0.05, 0.15, 0.3}`: `45` punti.** **Tutte le combinazioni hanno senso col codice** *(`rho_c = rho_0 / rapporto > 0`)*. **Per ogni punto: M-rho e il `cs` congelato** *(`90` linearizzazioni)*; **per ogni (`rho_0`, `s`): la legge spenta** *(`9`)*; **`rho_0 = 0` con M-rho per ogni `s`** *(`3`)*.
+
+### 30.4 S4.1, LO SPETTRO, I DEVE, IL MECCANISMO
+
+- **Come S2:** **la risposta a un impulso nella cella del nodo `0` per ognuna delle `36` direzioni, differenze simmetriche con Richardson, `a = 1e-4` per la scala del blocco** *(`psi`: la rms delle componenti di `psi_0` della cella; `phi`: `|phi|` per estremita'; a `rho_0 = 0` per `psi` la scala di `phi`)*; **`A(k)` con `fft2`, `36 x 36` per ogni `k`.** **Per ogni punto: `|lambda|_max`, `ln |lambda|_max`, il `k`** *(`|k|`, la direzione, quanti equivalenti)*, **la frazione dell'autovettore in `psi` e in `phi`, la banda** *(i pesi sugli autovettori del blocco del `cs` congelato allo stesso `k`)*.
+- ### **IL MECCANISMO** *(l'anello `rho -> cs -> (psi, phi) -> rho`)*: **il `cs` entra solo come un numero per nodo, quindi `A(k) = F(k) + P(k) Q(k)`:** **`F` il `cs` congelato; `P` (`36 x 1`) la risposta a un impulso di `cs` nel nodo `0`** *(misurata, Richardson)*; **`Q` (`1 x 36`) la risposta di `cs` del nodo a un impulso dello stato** *(dalla legge, con differenze simmetriche)*. **Un controllo:** **`|A - F - P Q| / |A|` al `k` piu' instabile sotto `1e-6`.** **L'autovalore soddisfa `Q (lambda - F)^{-1} P = 1`; il guadagno `g(lambda) = Q (lambda - F)^{-1} P` si scompone per bande di `F`, come in S2.**
+- **I DEVE** *(Luca)*:
+  - **`rho_0 = 0` con M-rho: lo spettro e' unitario entro la precisione di S2** *(`max ||lambda| - 1| < 1e-10`; S2 dava `2.9e-11`)*: **il vuoto stabile per costruzione;**
+  - **la legge spenta (`cs = s`), `rho_0 > 0`: lo spettro e' unitario** *(la stessa soglia)*: **la materia senza orologio e' stabile;**
+  - **un'onda piana seminata nella simulazione sul `k` piu' instabile** *(se c'e')*: **cresce col tasso dello spettro entro il `5%`** *(`100` tick, M-rho vera, un gemello; la pendenza dal tick `20`; al punto piu' instabile della mappa)*;
+  - **DEVE FALLIRE:** **il fattore `1 + 1e-3` su `psi` e `phi` dopo il tick** *(a `rho_0 = 0`, M-rho)* **compare come `|lambda| = 1.001`** *(entro `1e-9`)*, **e l'unitarieta' su quella mappa fallisce.**
+  - **I controlli di S2:** **la linearita' `|R(2a) - R(a)| / max|R| < 1e-6` per ogni linearizzazione;** **l'invarianza per traslazione** *(un impulso in un altro nodo, al punto di mezzo della mappa)*.
+- ### ⚠ **UNA COSA CHE MI ASPETTO, scritta prima** *(un'ATTESA, non una misura)*: **il fondo di materia ha gia' una fase che dipende da `rho`** *(`alpha = x^2/(1+x^2)`, una auto-fase)*. **Se e' FOCALIZZANTE** *(e i solitoni brillanti esistono: e' il caso tipico)*, **un fondo uniforme e' instabile per MODULAZIONE anche senza orologio** *(l'instabilita' di Benjamin-Feir, nell'equazione di Schrodinger non lineare)*. ### **Allora il DEVE «la legge spenta e' unitaria» FALLIREBBE.** **Se fallisce:** **lo committo, riporto lo spettro di tutti e tre i casi** *(spenta, congelato, M-rho)* **e la differenza M-rho meno congelato, e mi FERMO senza leggere (m1)-(m3)** *(che presuppongono un riferimento stabile)*.
+- ### **LE LETTURE** *(di Luca; «stabile» = `|lambda|_max - 1 < 1e-9`)*:
+  - **(m1)** **stabile in tutta la mappa:** **M-rho passa la prova lineare nella materia;**
+  - **(m2)** **instabile solo oltre una soglia di `rho_0 / rho_c`** *(per ogni `rho_0`, `s`: stabile sotto, instabile sopra)*: **la soglia, il `k`, la banda;**
+  - **(m3)** **instabile in tutta la mappa:** **anche l'anello nella materia si chiude in fase. FERMO: la decisione e' di Luca;**
+  - **(m4)** **il fondo uniforme non e' un punto fisso:** **FERMO prima dello spettro.**
+- **Il costo** *(stima, `~0.14` s per tick da S2)*: **`~160` tick per linearizzazione, `~103` linearizzazioni: ~`40` minuti, un processo.** **Il referto `doc/referti_l2/s4_spettro_materia_mrho.txt`; lo script `csv/solitone/s4_materia_mrho.py`.**
+- ### **DOPO S4: FERMO.** **La scelta di `rho_c` e il passo dopo sono di Luca.**
