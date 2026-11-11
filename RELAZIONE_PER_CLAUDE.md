@@ -25073,3 +25073,23 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Il passo `5` resta come l'estensione con portata del lapse; nello storico la riga delle `11:33`.**
 - **In coda, sul laterale:** **S4.7** *(in corsa)*; **il progetto S5.0** *(a)-(e)*, **prima del codice;** **lo script dell'ottimizzazione di (e).**
 - **Sul principale:** **il referto di `C50-0`** *(lo script e' pronto, `e3531a7f`; a corsa chiusa)*.
+
+### 2026-11-11 13:05 -- S4.7 CHIUSO, S5.0 SCRITTO, (e) IN CORSA; E IL DISCO `C:` QUASI PIENO *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **S4.7** *(`3cdc8ccd`; dalle `12:06:21` alle `12:34:17`; `101/101`)*: **lo strumento e' curato.**
+  - **Col fondo passato identico, `A = F + P Q` passa in tutti i `45` punti** *(fino a `5e-09`)*: **il difetto di 30.5 era `q` non unico nella coppia degenere.**
+  - **I punti a `rho_0` `1e-4` e `1e-2` ridanno 30.5** *(`3.6e-06`)*.
+  - **A `rho_0 = 1` gli spettri sono quelli di 30.5:** **era sbagliato il controllo.**
+  - **«M-rho meno congelato» e' negativa in `14` punti su `15`:** **l'orologio M-rho abbassa (I-mod)** *(sale solo a `rho_0/rho_c = 1`, `s 0.3`)*.
+- **S5.0** *(sez. `31`, `de4abd5e`)*:
+  - ### **(a) regge:** **ogni pezzo ha un generatore locale, e il nucleo ha GIA' `G = somma cs H`.**
+  - ### **Per la legge su `Lambda` il nucleo ha anche la reazione** *(`tick_con_cs` piu' `CAMM-FASE-VUOTO`)*, **mai provata sul vuoto:** **S2, H4 e F1 giravano con (q2), la reazione spenta.**
+  - **(b) la media d'arco del nucleo e' l'ARMONICA** *(non l'aritmetica ne' la geometrica del mandato)*.
+  - **(c) il termine di reazione `Omega^psi`, e il verso della forza dipende dallo zero.**
+  - ### **(d) il palindromo NON conserva `E_N` al bit nemmeno a `N = 1`** *(`hw_energia_pesata.txt`: l'escursione va come `dtau^2`, la pendenza `1.996`)*: **la soglia `1e-11` di T-L2 e' contro la premessa.** **La scelta e' di Luca.**
+- **(e), il triangolo:** **lo script `a2137e0d`, committato senza esecuzioni prima; la corsa e' partita.**
+- ### ⚠ **IL DISCO `C:`: `1.5` GB liberi su `476`** *(`df`; ieri sera `11` GB)*.
+  - **La suite delle `12:34:40` ha dato `66` su `67`:** **`M-B1` e' fallito con «No space left on device» mentre creava il suo worktree temporaneo.**
+  - **I `~10` GB non sono nelle mie cartelle** *(lo scratchpad `11` MB, `TEMP` `1.6` GB, i worktree come ieri)*: **non cancello niente.**
+  - **`C50-0` scrive su `C:` solo i jsonl** *(`~2` MB a pezzo)*; **le mappe e gli stati vanno su `E:`** *(`210` GB liberi)*.
+  - ### **Ma le prossime suite falliranno su `M-B1` finche' lo spazio non torna: una decisione di Luca.**
