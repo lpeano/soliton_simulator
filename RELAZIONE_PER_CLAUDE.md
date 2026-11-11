@@ -25267,3 +25267,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Due vie come ipotesi:** **(v1) il flusso netto** *(vicina alla legge del vuoto instabile in S2 e V-R)*; **(v2) lo scalino che dipende dal posto** *(si perde la costante unica)*.
   - **Accanto, un fatto: in T-L4 anche il pacchetto va verso il tempo piu' veloce.**
 - **Una correzione mia:** **il referto di `C50-0` e' girato dalle `22:10:05` alle `22:11:05` a `5e4aafcb`** *(non «`22:0x`» e «`6dadf561`», come avevo scritto nel commit `63f65f7d`)*.
+
+### 2026-11-11 23:30 -- S5.2-bis: T-L4b `7/7`; T-L3 RIFATTA `2/3`, UN DEVE FALLITO, FERMO [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Sul laterale** *(`zero-nel-nucleo`; il task history `2026-11-09_laterale_mb`, sez. `31.21`-`31.26`)*:
+  - **T-L4b `7/7`** *(`f16cadf8`)*: **la forma (a) va verso `N` piu' BASSO, ma l'ampiezza e' `0.68` della previsione: non (f1); il principio di equivalenza passa (`3.4%`).** **Il punto 5 non si fa.**
+  - **T-L3 rifatta `2/3`** *(`00bfa203`)*: **`40` punti su `45` col punto fisso in `1` giro, lo stesso `cs` coi due metodi; `5` punti, tutti a `rho_0/rho_c >= 1`, non convergono nemmeno con `omega 0.5` e `1000` giri** *(lo scarto si ferma su un piano: instabile, non oscillante)*, **e si tolgono;** ### **(S4.0 a) FALLISCE: il residuo di una base `2.492e-10` sopra `1e-12`** *(`rho_0/rho_c 1`, `s 0.15`, una coppia quasi degenere)*: **(m4), FERMO prima dello spettro.**
+  - **I punti 4 e 6 sono progettati** *(`b1e69bbe`, `18b589ef`)*; **lo script del punto 4 e' scritto ma non committato ne' girato.**
+  - ### **LA DOMANDA A LUCA:** **`2.5e-10` e' un punto fisso mancato o l'arrotondamento della coppia quasi degenere? La soglia `1e-12` non la cambio io** *(`A1`)*. **Il criterio di chiusura: la decisione di Luca sulla soglia, o una prova che separi le due cose.**
+- **In coda, ora:** **le mappe leggere delle corse intere** *(Luca `23:31`)*.
