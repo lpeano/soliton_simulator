@@ -25056,3 +25056,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Le conseguenze:** **a `rho_0 = 1` la differenza M-rho meno congelato e le bande non valgono.**
   - **La cura da decidere:** **un `q` univoco dentro la coppia.**
 - **FERMO sul laterale, tre domande a Luca** *(sez. `30.5`)*: **la cura del difetto; quale riferimento usare** *(la legge spenta o il `cs` congelato)*; **la scelta di `rho_c`.**
+
+### 2026-11-11 12:10 -- S4.6, S4.7 E S5: L'OROLOGIO CHE CONSERVA L'ENERGIA *(Luca `11:33`, l'aggiunta (e) delle `11:46`; la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **S4.6** *(sez. `30.6` del laterale, `fa646abc`)*: **le due instabilita' di S4 sono separate.**
+  - **(I-mod)** **e' la modulazione della materia senza orologio:** **e' fisica, l'origine dei solitoni.**
+  - **(I-cs)** **e' l'anello dell'orologio M-rho, quasi tutto in `phi`, vicino a `K`, col tasso indipendente da `rho_0`:** **non e' fisica.**
+  - **Il criterio per il futuro, di tipo Jeans:** **`k` piccolo; il tasso che cresce con la materia; l'autovettore nella materia.**
+  - ### **L'errore n.135 e' mio:** **il DEVE «la legge spenta e' unitaria» era sbagliato; il riferimento e' il `cs` congelato.**
+- **S4.7, la cura dello strumento** *(il progetto in `30.7`, lo script `59c562f0`; la suite `67` su `67`, dalle `11:41:45` alle `12:01:12`)*.
+  - **Il fondo di M-rho passa identico al congelato, e i `45` punti si rifanno.**
+  - **La corsa e' partita;** **il referto andra' ACCANTO al primo.**
+- ### **LA ROTTA** *(S5.3)*: **il passo `4` e' ora L'OROLOGIO CHE CONSERVA L'ENERGIA** *(il lapse, `E_N = somma di N h`)*.
+  - **Il banco e le prove si fanno sul laterale ORA; nel nucleo entra dopo l'unificazione, se passa.**
+  - **M-rho istantanea e' superata.**
+  - **Il passo `5` resta come l'estensione con portata del lapse; nello storico la riga delle `11:33`.**
+- **In coda, sul laterale:** **S4.7** *(in corsa)*; **il progetto S5.0** *(a)-(e)*, **prima del codice;** **lo script dell'ottimizzazione di (e).**
+- **Sul principale:** **il referto di `C50-0`** *(lo script e' pronto, `e3531a7f`; a corsa chiusa)*.
