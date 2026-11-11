@@ -103,14 +103,29 @@ def cs_al_centro(mot, st, par, s, legge, senza_reazione, omega=1.0, giri_max=Non
     raise AssertionError("il punto fisso di cs del lapse NON converge in %d giri (ultimo scarto %.3e)" % (giri, scarto))
 
 
-def tick(mot, st, par, s, legge, senza_reazione=False, omega=1.0, giri_max=None, storia=None):
-    """### **UN tick col lapse.** `{"giri_cs", "giri_r1", "giri_r2"}`; `omega`, `giri_max`, `storia`: vedi `cs_al_centro` *(S5.2-bis punto 3)*."""
+def fase_a(mot, st, legge, eps_a, senza_reazione):
+    """### **La forma (a)** *(S5.3 A, sez. `32.1`)*: `E_N - eps_a somma_k (N_k - 1) rho_k`; **mezza fase per nodo** `e^{+i eps_a [(N_k - 1) + N'_k rho_k] / 2}` su `psi`
+    *(la derivata del termine rispetto a `rho_k`; senza la reazione il termine in `N'` cade, come le altre reazioni)*. **A `N = 1` e' zero.**"""
+    rho = rho_di(mot, st)
+    g = N_di(rho, legge) - 1.0
+    if not senza_reazione:
+        g = g + Np_di(rho, legge) * rho
+    st["psi_h"][...] = st["psi_h"] * np.exp(0.5j * float(eps_a) * g)[mot.inc.nodo][:, None]
+
+
+def tick(mot, st, par, s, legge, senza_reazione=False, omega=1.0, giri_max=None, storia=None, eps_a=None):
+    """### **UN tick col lapse.** `{"giri_cs", "giri_r1", "giri_r2"}`; `omega`, `giri_max`, `storia`: vedi `cs_al_centro` *(S5.2-bis punto 3)*.
+    ### `eps_a` *(S5.3 A)*: **la forma (a)**, mezza fase PRIMA e mezza DOPO, fuori dal palindromo *(`fase_a`)*; `None` = lo stesso codice di prima."""
+    if eps_a is not None:
+        fase_a(mot, st, legge, eps_a, senza_reazione)
     cs, giri = cs_al_centro(mot, st, par, s, legge, senza_reazione, omega=omega, giri_max=giri_max, storia=storia)
     mot.cs = cs
     mot.lambda_c = None
     g1 = 0 if senza_reazione else reazione(mot, st, par, s, legge, 0.5)
     TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
     g2 = 0 if senza_reazione else reazione(mot, st, par, s, legge, 0.5)
+    if eps_a is not None:
+        fase_a(mot, st, legge, eps_a, senza_reazione)
     return {"giri_cs": giri, "giri_r1": g1, "giri_r2": g2}
 
 

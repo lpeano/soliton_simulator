@@ -34,7 +34,7 @@ from solitone import carta_punto_fisso as CPF  # noqa: E402
 A_REL = 1e-4                   # ### come S2 (sez. 28.4): l'impulso relativo, Richardson
 TOLL_LIN = 1e-6                # ### Luca (S2): |R(2a) - R(a)| / max|R|
 TOLL_TRASL = 1e-9              # ### come S2
-TOLL_PF = 1e-12                # ### Luca (S4.0 a): il residuo della base
+TOLL_PF = 1e-9 if "--lapse3" in sys.argv else 1e-12   # ### Luca (S4.0 a): il residuo della base; con --lapse3 1e-9 (Luca 2026-11-11 23:42, S5.3 A, scritta prima)
 TOLL_UNIT = 1e-10              # ### sez. 30.4: la precisione di S2 (2.9e-11)
 STABILE = 1e-9                 # ### Luca: stabile se |lambda|_max - 1 sotto 1e-9
 TOLL_APQ = 1e-6                # ### mio (sez. 30.4): |A - F - P Q| / |A|
@@ -45,7 +45,10 @@ RAPPORTI = (1e-3, 1e-2, 1e-1, 1.0, 10.0)   # ### Luca: rho_0 / rho_c
 RHO0 = (1e-4, 1e-2, 1.0)                   # ### Luca: rho_0, in unita' della norma per nodo
 S_SCAN = (0.05, 0.15, 0.3)                 # ### Luca
 MEZZO = (1e-2, 1e-1, 0.15)                 # ### mio: il punto della traslazione (rho_0, rapporto, s)
-LAPSE2 = "--lapse2" in sys.argv             # ### S5.2-bis punto 3 (sez. 31.23)
+LAPSE3 = "--lapse3" in sys.argv             # ### S5.3 A (sez. 32.1): come --lapse2, con la soglia delle basi 1e-9
+LAPSE2 = "--lapse2" in sys.argv or LAPSE3   # ### S5.2-bis punto 3 (sez. 31.23)
+FORMA_A = "--forma-a" in sys.argv           # ### S5.3 A (sez. 32.1): il banco del lapse con la forma (a) (tick_lapse.fase_a); eps_a = la cima della coppia a Gamma del tick di oggi a cs = s
+A_EPS = 1e-6                               # ### l'ampiezza delle colonne per eps_a (come A_IMP di T-L4b)
 LAPSE = "--lapse" in sys.argv or LAPSE2     # ### T-L3 (sez. 31.15)
 OMEGA_L, GIRI_L = (0.5, 1000) if LAPSE2 else (1.0, None)   # ### Luca (punto 3): omega 0.5, fino a 1000 giri
 TOLL_CS_NUOVO = 1e-14                      # ### Luca (punto 3)
@@ -151,6 +154,8 @@ def main():
                 return legge[1] / (1.0 + rho_di(psi) / legge[2])
             return np.full(n, float(legge[1]))
 
+        EPS_A = {}                     # ### S5.3 A: eps_a per s (si riempie prima delle basi, con --forma-a)
+
         def mappa(psi, phi, legge, u_psi, u_phi, dcs=None, fattore=1.0):
             """### UN tick: `(u_psi^* psi', u_phi^* phi')`; il `cs` dallo stato di INIZIO tick, `mot.lambda_c = None`."""
             for k in chiavi:
@@ -159,7 +164,7 @@ def main():
             st["phi_h"][...] = phi
             if legge[0] == "lapse":
                 assert dcs is None, "il lapse non ha un impulso di cs"
-                TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3], omega=OMEGA_L, giri_max=GIRI_L)
+                TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3], omega=OMEGA_L, giri_max=GIRI_L, eps_a=(EPS_A[legge[1]] if FORMA_A else None))
                 return st["psi_h"].reshape(n, 12) * np.conj(u_psi) * fattore, st["phi_h"] * np.conj(u_phi) * fattore
             cs = cs_di(psi, legge)
             if dcs is not None:
@@ -295,6 +300,19 @@ def main():
         tab_ = []
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
             # ============================================================== le basi: (m4) prima di tutto
+            if FORMA_A:                # ### S5.3 A: eps_a(s) = la cima della coppia piu' alta a Gamma del tick di oggi (cs = s), dalle 12 colonne uniformi (come T-L4b)
+                for s_ in S_SCAN:
+                    Mg = np.zeros((12, 12), dtype=complex)
+                    for cc in range(12):
+                        u = []
+                        for f_ in (1.0, -1.0):
+                            p = np.zeros((n, 12), dtype=complex)
+                            p[:, cc] = f_ * A_EPS
+                            u.append(mappa(p, phi_b, ("cost", s_), 1.0, 1.0)[0][0])
+                        Mg[:, cc] = (u[0] - u[1]) / (2 * A_EPS)
+                    E_ = np.sort(-np.angle(np.linalg.eigvals(Mg)))
+                    EPS_A[s_] = 0.5 * float(E_[-1] + E_[-2])
+                    print("### LA FORMA (a), s %g: eps_a = %.12f per tick (la coppia piu' alta a Gamma del tick di oggi: %.12f, %.12f)" % (s_, EPS_A[s_], E_[-2], E_[-1]))
             print("### LE BASI (S4.0 a): il residuo sotto %g" % TOLL_PF)
             basi = {}
             tolti = set()
