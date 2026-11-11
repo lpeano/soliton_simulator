@@ -1,0 +1,72 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+L'INDICE DEI FILE SU E: DELLA CORSA C50-0 (Luca 15:49 e dopo 3e3277a2): il percorso, la dimensione, lo sha1 (dei byte), l'intervallo di tempo
+### LE MAPPE (rho e Lambda in float32, ogni 100 tick)
+  E:\soliton_simulator\mappe\C50-0\C50-0_000000.npz  16186803 byte  sha1 1ba91c22a2a2fec0adf80941088b7331dcaf6bae  tempo 0.00 .. 1500.00  101 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_010000.npz  17930119 byte  sha1 27085887ff1e146f0361ba121da18e01609c01f3  tempo 1515.00 .. 3000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_020000.npz  17785440 byte  sha1 6123b03cc59938c514fa416e3050850a11d47277  tempo 3015.00 .. 4500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_030000.npz  17731508 byte  sha1 e3c0e9cec4014e45467050e4b7fdd0c4367e9d40  tempo 4515.00 .. 6000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_040000.npz  17647916 byte  sha1 fb1364dc9e13430947f45e4e4a958c1dd3002819  tempo 6015.00 .. 7500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_050000.npz  17586618 byte  sha1 5a7bd4858eadad75b8926baec6fc1a672e2b502d  tempo 7515.00 .. 9000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_060000.npz  17561305 byte  sha1 0712788cb6d461b326d306b3ae62139946f8e7d4  tempo 9015.00 .. 10500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_070000.npz  17529432 byte  sha1 7af20d857b4b82dc72fb3d2de0f1abd501bb3fd9  tempo 10515.00 .. 12000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_080000.npz  17527092 byte  sha1 d7025f5586bdd6e3679f9e10f281787cb4ce9e64  tempo 12015.00 .. 13500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_090000.npz  17518499 byte  sha1 dc272f5c1de8d769d9d6d79edfe9341218a31504  tempo 13515.00 .. 15000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_100000.npz  17533470 byte  sha1 2b64c10e4387974d7926333ddd973bdabb898b46  tempo 15015.00 .. 16500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_110000.npz  17514958 byte  sha1 c887d1fb2bcd04da57fa9c30cba2b3ff5fe54906  tempo 16515.00 .. 18000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_120000.npz  17496229 byte  sha1 0e04a9b8a2a9517e4b47408fa98493eadf7804c4  tempo 18015.00 .. 19500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_130000.npz  17484387 byte  sha1 1a2bd43fc82ad6ab45651dc078cd664c0b3f74b0  tempo 19515.00 .. 21000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_140000.npz  17437407 byte  sha1 5a2bd09dd8a4b476fa610d28b969deb5bdf09083  tempo 21015.00 .. 22500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_150000.npz  17434819 byte  sha1 f211331bd18afcbbb3b5511556f64201bf076f18  tempo 22515.00 .. 24000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_160000.npz  17395619 byte  sha1 1eab8bdb11859f1a30d38b648adbadd0251336bb  tempo 24015.00 .. 25500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_170000.npz  17369213 byte  sha1 7cceb0bcb93affd902f919bd4a589fbf80853da1  tempo 25515.00 .. 27000.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_180000.npz  17356468 byte  sha1 e159073853b6dcd81598b21466ff369e6e75fea1  tempo 27015.00 .. 28500.00  100 istantanee
+  E:\soliton_simulator\mappe\C50-0\C50-0_190000.npz  17322753 byte  sha1 53c023c21a1ddc1a339b95e143bf32a3229e89f0  tempo 28515.00 .. 30000.00  100 istantanee
+### GLI STATI COMPLETI (ogni chiave dello stato, per ripartire al bit)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_000000.npz  9029646 byte  sha1 4d3aad5ac59fa5fdefbd7f8dd29ef3eef4312a9b  tempo 0.00 (tick 0)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_010000.npz  9029646 byte  sha1 f91228bd7d3824c8656899a8ce321741690c6bf6  tempo 1500.00 (tick 10000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_020000.npz  9029646 byte  sha1 c21476dce98c794797cd49bbcf5ac53c788b4935  tempo 3000.00 (tick 20000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_030000.npz  9029646 byte  sha1 8000591b5c7f72365a4174eef4ed3f57e14f08e3  tempo 4500.00 (tick 30000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_040000.npz  9029646 byte  sha1 49a2f8a7a1e9a8c107cfdb80b0d4bd601f0a7b5d  tempo 6000.00 (tick 40000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_050000.npz  9029646 byte  sha1 ff710332d91f77db33d4e0b8a20760d757f07761  tempo 7500.00 (tick 50000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_060000.npz  9029646 byte  sha1 c7643502a4f3ec67e4f988549dcde1aa3ffd52cc  tempo 9000.00 (tick 60000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_070000.npz  9029646 byte  sha1 58dcaae1204f06e860516012f8d233fb005c0bb6  tempo 10500.00 (tick 70000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_080000.npz  9029646 byte  sha1 b1f5d6b218ec66446e692054ddfe53d7e5ed5e87  tempo 12000.00 (tick 80000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_090000.npz  9029646 byte  sha1 753723875156336b5290428ccfc339de70b5b04d  tempo 13500.00 (tick 90000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_100000.npz  9029646 byte  sha1 513a9774f3004a8dac84f3031eb3fb8bc7eaaf39  tempo 15000.00 (tick 100000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_110000.npz  9029646 byte  sha1 76ed50bbed88843d188047fa4b4a5ba8dfde0ddd  tempo 16500.00 (tick 110000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_120000.npz  9029646 byte  sha1 4c0b393e8b0585b0855088261db3b9a21a8610f6  tempo 18000.00 (tick 120000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_130000.npz  9029646 byte  sha1 1637711689e94f0fdf173aee110f7e2f619c3217  tempo 19500.00 (tick 130000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_140000.npz  9029646 byte  sha1 ad52e4770cea62ab629b1c2bb2f5ca70f91f6dcd  tempo 21000.00 (tick 140000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_150000.npz  9029646 byte  sha1 95dcf897444fa2197e15d72e96dadc97fcb87460  tempo 22500.00 (tick 150000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_160000.npz  9029646 byte  sha1 18c396a24cb130d19f0ec456a160c20f6779c0e5  tempo 24000.00 (tick 160000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_170000.npz  9029646 byte  sha1 5ef0408242f35f9728eb9880604ce907443f55ff  tempo 25500.00 (tick 170000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_180000.npz  9029646 byte  sha1 029fd8816f181835724db12ae2ad2377d53a9d02  tempo 27000.00 (tick 180000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_190000.npz  9029646 byte  sha1 f0acdc0829a655835a2f14b81713a1958ce8e704  tempo 28500.00 (tick 190000)
+  E:\soliton_simulator\stati\C50-0\C50-0_stato_200000.npz  9029646 byte  sha1 b11214109170c9ff0cdbd26d830fb0d52c15ccea  tempo 30000.00 (tick 200000)
+### I PEZZI DEI CAMPIONI (jsonl interi; nel repo la versione rada in --)
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_000000.jsonl  2202758 byte  sha1 43f74e7192fb61027f4eeca6ac7f5167b991210e  tempo 0.00 .. 1500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_010000.jsonl  2239238 byte  sha1 eb8eb37a12762dc0fc5ff902bff531e3a4069655  tempo 1500.00 .. 3000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_020000.jsonl  2240394 byte  sha1 4b73ff43954927f265e53712a5735a0d10ddcb75  tempo 3000.00 .. 4500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_030000.jsonl  2241136 byte  sha1 868c660acaddd2194928e67193906d5ff8dee0f9  tempo 4500.00 .. 6000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_040000.jsonl  2239485 byte  sha1 7c3586d1acbec2e9879ff780bf828b2127a0ff25  tempo 6000.00 .. 7500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_050000.jsonl  2239400 byte  sha1 dd7c1392e446b3b619d72417a343fd75a85e7f55  tempo 7500.00 .. 9000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_060000.jsonl  2240749 byte  sha1 0ce1694d1fc2dd2c1cb9a45f4aa3ad8f81b33379  tempo 9000.00 .. 10500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_070000.jsonl  2241332 byte  sha1 01b109686f4e9d002eaac124fc3a60583a4888af  tempo 10500.00 .. 12000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_080000.jsonl  2242604 byte  sha1 44d3ecc2eb271d6fe3703ce363d4885bf27188a5  tempo 12000.00 .. 13500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_090000.jsonl  2242889 byte  sha1 cb2ba51834f68a1507df66dce330caae3944e0fe  tempo 13500.00 .. 15000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_100000.jsonl  2245236 byte  sha1 c46c90b3ffce6b04003619527bb6b7e1d517c1f2  tempo 15000.00 .. 16500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_110000.jsonl  2246043 byte  sha1 a6ae7b1efe9257c05cae143e35b6224d4f42652e  tempo 16500.00 .. 18000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_120000.jsonl  2246418 byte  sha1 5fbb025ea611d9d067c4f8cf0b2433d5fdc2f629  tempo 18000.00 .. 19500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_130000.jsonl  2246790 byte  sha1 2bee1c5b40e35f23d623a3cda4ab6004cef0e1bf  tempo 19500.00 .. 21000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_140000.jsonl  2246363 byte  sha1 3fd013a8c31c1e684bcc3b653cf3179ca2d436e5  tempo 21000.00 .. 22500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_150000.jsonl  2246688 byte  sha1 f57a6e4b89c489e86433cd1e46a58f050bdb47dc  tempo 22500.00 .. 24000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_160000.jsonl  2247587 byte  sha1 cc12c683d9fc49049f9e2491e5f84d8721ecec70  tempo 24000.00 .. 25500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_170000.jsonl  2247677 byte  sha1 72e7ca20a811a01dfdf05e86013a8e686d431446  tempo 25500.00 .. 27000.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_180000.jsonl  2247869 byte  sha1 f360230d5c2eb25ebf216e4158ee3881c2e6209b  tempo 27000.00 .. 28500.00
+  C:\Users\lpeano\soliton_simulator\doc\referti_l2\accensione_lenta\C50-0_190000.jsonl  2248325 byte  sha1 367991796ccdb9c600ef666a23d4c824a538f516  tempo 28500.00 .. 30000.00

@@ -25215,3 +25215,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
     - **`r = 1e-2`: nessuna deriva** *(`0.48` errori)*, **le norme `2.1e-14`.**
   - **Poi in sequenza: T-L3, T-L4** *(e i DEVE FALLIRE dentro T-L2 e T-L3)*.
 - **`C50-0`:** **chiuso il pezzo `180000 -> 190000`; l'ultimo in corsa.**
+
+### 2026-11-11 21:30 -- `C50-0` FINITA A `200000` TICK: I `20` PEZZI E L'INDICE DELLE MAPPE COMMITTATI; IL REFERTO DOPO LA CATENA S5.2 [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **`C50-0` e' finita alle `21:24:36`** *(il log del driver: «finita (20 pezzi)», exit `0`)*.
+  - **L'ultimo pezzo, `190000 -> 200000`:** **`5444` s, `w 26.7172`, l'alone `0.80672`.**
+  - **Il bordo alla fine ha assorbito:** **M `1.016046e+04`, V `8.277039e+03`, E `1.247561e+04`** *(relative a M0, V0, E0: `5.080e-03`, `5.256e-02`, `1.270e-03`)*.
+- **Committati i `20` jsonl e l'indice delle mappe `doc/referti_l2/mappe_indice_C50-0.txt`** *(`python csv/solitone/corsa_accensione.py --indice C50-0`, dalle `21:25:07` alle `21:25:12`)*.
+- ### **Il referto senza singolo** *(`carta_coppia_ss.py`, gia' committato a `e3531a7f`)* **parte DOPO la catena S5.2** *(Luca: una prova breve alla volta)*. **Con quel referto il passo `2` della ROTTA si chiude.**
