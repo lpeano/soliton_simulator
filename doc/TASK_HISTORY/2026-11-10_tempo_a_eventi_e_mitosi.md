@@ -93,3 +93,18 @@
   1. **che cosa diventa un solitone con POCHI quanti;**
   2. **come lo scalino si lega alla soglia della mitosi** *(sez. `5`: lo scalino della mitosi e' il costo locale di un nodo nuovo)*;
   3. **se lo scalino del tempo e quello della mitosi sono LO STESSO.**
+
+### 8.1 IL NODO DEL VERSO -- **LA DOMANDA APERTA PIU' IMPORTANTE DI QUESTA SEZIONE** *(Luca `22:07`-`22:10`; la sezione che il mandato chiama «7» e' la `8`)*
+
+- **Lo scalino e' UNIVERSALE** *(lo stesso in ogni punto)*; **il RITMO degli scatti e' LOCALE:** **dove scorre piu' energia gli scatti sono piu' fitti, dove ne scorre meno piu' radi.** **Il tempo non si accumula allo stesso modo ovunque: ogni punto ha il suo conto** *(come `h` universale e la frequenza propria di ogni luce)*.
+- ### **IL PROBLEMA** *(osservazione di Luca, `22:07`; lettura del guardiano)*:
+  - **se il tempo e' il numero degli scatti e gli scatti vengono dal flusso di energia, dove scorre piu' energia il tempo corre PIU' VELOCE.**
+  - **La natura fa il contrario: vicino alla materia** *(all'energia)* **il tempo RALLENTA.**
+  - ### **Cosi' com'e', l'idea da' il SEGNO SBAGLIATO.**
+- **Due vie per raddrizzarlo** *(IPOTESI, NON scelte)*:
+  - **(v1) conta il FLUSSO NETTO, non la quantita':**
+    - **la materia e' energia LEGATA** *(molta energia, poco flusso fra i nodi)*, **il vuoto scorre libero;** **vicino alla materia gli scatti sarebbero piu' radi.**
+    - ⚠ **Attenzione: e' vicina alla legge «il vuoto comanda l'orologio»** *(`cs` da `Lambda`)*, **instabile in S2 e in V-R:** **andrebbe costruita con la reazione e il prezzo pagato** *(la lezione di S5)*.
+  - **(v2) lo scalino dipende dal posto** *(piu' alto vicino alla materia)*: **ma allora non e' piu' universale, e si perde la costante di Planck unica.**
+- ### **LA DOMANDA: «come fa il conto degli scatti a rallentare vicino alla materia?»**
+- **Un fatto accanto, dal laterale** *(non una risposta)*: **in T-L4 di S5.2** *(`e924de02`)* **un pacchetto della banda dei solitoni, con lo zero O1 dei pezzi, va verso il tempo piu' VELOCE** *(la cima della banda: una massa efficace negativa)*. **Anche li' il verso e' il contrario di quello della gravita'.**

@@ -297,7 +297,7 @@
 - **Accanto, il confronto QUALITATIVO con `C35-0`** *(il battimento lento, (d2))* **e `C35-pi`** *(si allontana e si calma)*: **senza estrapolare.**
 - ### **Con il referto di `C50-0` committato, il passo `2` della ROTTA e' CHIUSO: lo scrivo, e mi FERMO.** **Il passo `3`** *(l'unificazione)* **parte col mandato del guardiano.**
 
-## 19. L'ESITO DEL REFERTO DI `C50-0` SENZA SINGOLO *(`carta_coppia_ss.py` a `e3531a7f`; la corsa dalle `22:0x` alle `22:11:05` del `2026-11-11`, a `6dadf561`; il referto `doc/referti_l2/coppia_C50-0_ss.txt`; `8/8`)*: **(c1) LA COPPIA RESTA LEGATA. IL PASSO `2` DELLA ROTTA E' CHIUSO.**
+## 19. L'ESITO DEL REFERTO DI `C50-0` SENZA SINGOLO *(`carta_coppia_ss.py` a `e3531a7f`; la corsa dalle `22:10:05` alle `22:11:05` del `2026-11-11`, a `5e4aafcb`; il referto `doc/referti_l2/coppia_C50-0_ss.txt`; `8/8`)*: **(c1) LA COPPIA RESTA LEGATA. IL PASSO `2` DELLA ROTTA E' CHIUSO.**
 
 - **I controlli:**
   - **A-V e A-V-F** *(i centri del vuoto)*;

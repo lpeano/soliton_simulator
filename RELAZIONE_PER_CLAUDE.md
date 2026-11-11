@@ -25258,3 +25258,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`8/8`** *(`doc/referti_l2/coppia_C50-0_ss.txt`; il task history `2026-11-07_referto_coppia_C35`, sez. `19`)*: **la distanza per terzo `50.07`, `50.11`, `50.02`; l'ampiezza `0.27` -> `0.18`; la pendenza `-0.05 +- 0.03` per `100000` tick.**
 - **`C35-0` e `C35-pi`, ricalcolati, = i referti (r-b) al carattere.**
 - ### **Il passo `2` della ROTTA e' chiuso.** **Il passo `3` parte dopo S5** *(Luca `18:24`)*, **col mandato del guardiano.**
+
+### 2026-11-11 22:25 -- IL NODO DEL VERSO *(Luca `22:07`-`22:10`; solo scrittura)* [[PIANO-2D-3D]]
+
+- **Nel task history `2026-11-10_tempo_a_eventi_e_mitosi`, sez. `8.1`, la domanda aperta piu' importante del quanto:**
+  - **lo scalino e' universale, il ritmo degli scatti e' locale;**
+  - **ma dove scorre piu' energia il tempo correrebbe piu' VELOCE, e la natura fa il contrario: il SEGNO SBAGLIATO.**
+  - **Due vie come ipotesi:** **(v1) il flusso netto** *(vicina alla legge del vuoto instabile in S2 e V-R)*; **(v2) lo scalino che dipende dal posto** *(si perde la costante unica)*.
+  - **Accanto, un fatto: in T-L4 anche il pacchetto va verso il tempo piu' veloce.**
+- **Una correzione mia:** **il referto di `C50-0` e' girato dalle `22:10:05` alle `22:11:05` a `5e4aafcb`** *(non «`22:0x`» e «`6dadf561`», come avevo scritto nel commit `63f65f7d`)*.
