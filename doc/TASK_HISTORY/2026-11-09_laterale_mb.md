@@ -1765,3 +1765,14 @@
     1. **la base che non converge con `--lapse2/3` si TOGLIE, dichiarata, come gli altri punti;**
     2. **con `--forma-a` il congelato porta la fase statica della forma (a)** *(`N_0 = N(rho_0)`)*.
   - **Intanto: il progetto e il codice di G1** *(nessuna corsa: una prova alla volta)*.
+- ### **32.2, IL PROGETTO DI DETTAGLIO DI G1, PRIMA DEL CODICE** *(`csv/solitone/s5_caduta_solitone.py`)*:
+  - **La scena:** **quella di T-L4b** *(`V.scena`, `DC.forma`, `L 81`)* **con lo stato di TBS a `10000` caricato al bit** *(lo `sha` del jsonl)*; **il bordo spento** *(nessun `assorbi`)*.
+  - **`N = 1 + gamma sin(2 pi (i1 - c1)/L)`:** ### **lo zero del seno sul centro del solitone** *(`c1` del suo centro periodico)* **invece che sul nodo `0`** *(dichiarato: cosi' il gradiente e' massimo dove sta il corpo, come in T-L4 per il pacchetto)*.
+  - **`h_k = dE/dN_k` a `N = 1`:** **`s (H_k + somma_a dw_a/dcs_k H_a)`, la struttura di `tick_lapse.omega_psi`;** **`E_g = somma_k (h_k - eps_top rho_k)`.**
+    - ### **IL CONTROLLO DI SCALA** *(prima di credere a `E_g` del solitone)*: **sul pacchetto lineare di T-L4b `somma h / somma rho` DEVE dare `s d eps / d cs` entro l'`1%`; DEVE FALLIRE contro il doppio.**
+  - **Il cuore:** **i nodi con `rho > 0.5 rho max`; la frequenza per tick `-arg <psi_t, psi_t+1>` sul cuore, nei primi `20` tick a `N = 1`; lo spostamento di legame `omega - eps_top`.**
+  - **DEVE: il tick del banco a `N = 1`** *(`cs = s`, `lambda_c None`)* **= il tick della corsa** *(`accensione.tick`, col motore della scena)* **per `20` tick, entro `1e-12`.** **Se fallisce, FERMO:** **la caduta non sarebbe sul tick di TBS.**
+  - **DEVE: a `N = 1` il centro non accelera:** **la parabola sul centro, `|a| <= 3` errori; la deriva propria e' la parte LINEARE e non si sottrae** *(la mia lettura di «oltre la sua deriva propria»: dichiarata)*. **Le accelerazioni dei `gamma` si danno AL NETTO di quella a `N = 1`.**
+  - **Accanto, la forma di oggi** *(un'aggiunta dichiarata)*.
+  - **Le letture (e1)-(e3) contro la forma (a) di T-L4b, letta dal suo referto** *(`a` e l'errore per ogni `gamma`)*. ### ⚠ **A `gamma 0.01` T-L4b ha un errore del `37%`: il criterio del `10%` e' piu' stretto della misura di riferimento** *(lo scrivo prima)*.
+  - **Il tetto:** **`60` minuti; una caduta non parte se il tempo dell'ultima la porterebbe oltre** *(dichiarato nel referto)*.
