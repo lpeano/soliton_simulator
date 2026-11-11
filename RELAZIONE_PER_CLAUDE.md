@@ -25191,3 +25191,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - ### **FERMO: la decisione e' di Luca.**
 - **La ROTTA:** **la riga delle `16:44` nello storico.**
 - **`C50-0`:** **chiuso il pezzo `160000 -> 170000`; la fine verso le `20:30`** *(stima)*; **poi i pezzi, l'indice delle mappe e il referto senza singolo** *(lo script e' gia' committato)*.
+
+### 2026-11-11 18:45 -- LE DECISIONI DI LUCA DELLE `18:17`, `18:24` E `18:25`: IL BANCO TIENE `N(rho)`, LE PROVE S5.2 PARTONO; L'UNIFICAZIONE DOPO LA CHIUSURA DI S5 *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **`18:17`, la scelta 5:** **il banco tiene `N(rho)`; `S` entra al passo `5` come sorgente di `Phi`** *(M-Phi)*. **Le prove S5.2 partono:** **T-L1, T-L2, T-L3, T-L4 con O1, il DEVE FALLIRE senza la reazione; T-L5 fuori.** *(Il task history del laterale, sez. `31.19`, `1e596438`, coi dettagli di T-L4 scritti prima del codice.)*
+- ### **`18:24`: l'unificazione** *(il passo `3` della ROTTA)* **parte DOPO la chiusura di S5** *(la forma di `N` e le prove del banco)*. **Nella ROTTA:** **la condizione al passo `3`, e nello storico le righe delle `18:17` e delle `18:24`.**
+- **`18:25`: la stessa scelta, con le prove UNA ALLA VOLTA; dopo S5.2 fermo con la tabella.**
+- **Il codice che mancava** *(T-L3: `s4_materia_mrho.py --lapse`; T-L4: lo script nuovo `s5_caduta.py`)*: **`a82ca3d0`, la suite `67` su `67`** *(dalle `18:25:58` alle `18:44:47`)*. **Le corse in sequenza sono partite:** **T-L1, T-L2** *(~`4` ore)*, **T-L3, T-L4.**
+- **`C50-0`:** **in corsa, la fine verso le `20:30`** *(stima)*; **poi i pezzi, l'indice delle mappe e il referto senza singolo.**
