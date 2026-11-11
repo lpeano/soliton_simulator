@@ -25115,3 +25115,50 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   4. **il banco;**
   5. **le prove.**
 - **Sul principale, in coda:** **il referto di `C50-0`.**
+
+### 2026-11-11 16:20 -- LO SPAZIO SU `C:` DOPO LA PULIZIA DI LUCA; (e) E V-R CHIUSI; IL SEGNO DI `h_k`; IL BANCO *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]] [[VUOTO-SUL-FONDO]]
+
+- ### **LO SPAZIO** *(`df`, dopo la pulizia di Luca)*: **`C:` `12` GB liberi su `476`; `E:` `210` GB liberi su `239`.**
+- ### **DOVE SONO FINITI I ~`10` GB** *(sola lettura, niente cancellato)*: **i file modificati dal `2026-11-10` `12:00` sotto `C:\Users\lpeano` sommano `~7` GB** *(`find`, per cartella)*:
+  - ### **`AppData\Local` `4.58` GB**, di cui:
+    - **`Programs\Microsoft` `1.24` GB;**
+    - **`Microsoft\OneDrive` `0.75` GB;**
+    - **`Google\Chrome` `0.59` GB;**
+    - **Teams `0.34` GB;**
+    - **`Microsoft\Olk` `0.34` GB;**
+    - **`Temp\vscode-stable-user-x64` `0.27` GB;**
+    - **`Temp\Diagnostics` `0.19` GB;**
+    - **`vscode-cpptools` `0.16` GB;**
+    - **`Terminal` `0.14` GB;**
+    - **Outlook `0.21` GB.**
+  - **`.vscode\extensions` `0.70` GB; `AppData\Roaming` `0.56` GB.**
+  - ### **Del repo:**
+    - **`soliton_simulator\.git` `0.69` GB** *(gli oggetti sciolti dei commit di oggi: la `RELAZIONE` e' `2.4` MB e ogni commit ne fa una copia; un `git gc` li impaccherebbe -- una decisione di Luca)*;
+    - **i referti `~0.1` GB;**
+    - **`db\accensione_lenta` `22` MB;**
+    - **`.claude\projects` `0.15` GB.**
+  - **Nessun file recente sopra `50` MB; nessun resto dei worktree temporanei di `M-B1`** *(`%TEMP%\mb1c_*`)*.
+  - ### **Quindi la parte grande sono aggiornamenti e cache di programmi** *(Office, OneDrive, Chrome, Teams, VS Code)*, **non le corse;** **il resto fino a `10` GB non sta fra i file recenti della cartella utente** *(o era gia' stato tolto da Luca)*.
+  - **Le dimensioni intere dei repo sono quelle di stamattina:** **il principale `6.5` GB** *(`.git` `4.7`)*, **`wt_zero` `0.69`, `wt_zero_padre` `0.74`, `st_main` `0.07`.**
+  - ### ⚠ **Due errori miei nella ricerca, corretti qui:** **(1) ho creduto che `find -xdev` sotto Git Bash non scendesse nelle cartelle: era solo LENTA;** **(2) ho letto il file della seconda ricerca prima che finisse** *(dava `1.7` GB e senza i repo)*. **I numeri qui sopra vengono dalle ricerche FINITE.**
+- ### **CHI SCRIVE DOVE:**
+  - **`C50-0`: le mappe** *(`268` MB)* **e gli stati** *(`147` MB)* **su `E:\soliton_simulator`** *(`corsa_accensione.RADICE_E`)*.
+  - **Su `C:` scrive solo:**
+    - **i jsonl** *(`doc\referti_l2\accensione_lenta`, `~2.2` MB a pezzo)*;
+    - **`db\accensione_lenta\C50-0.npz`** *(`9` MB, riscritto a ogni pezzo)*;
+    - **`C50-0_acc.npz`** *(`5` MB, una volta)*;
+    - **il log del driver nello scratchpad.**
+  - **Il referto di `C50-0`** *(`carta_coppia_ss.py`)* **legge le mappe da `E:` e scrive solo il referto.**
+  - **Gli script del laterale** *(S2, S4, S5)* **non scrivono archivi: solo lo stdout del referto.**
+  - **La suite:** **`M-B1` crea worktree di commit vecchi in `%TEMP%` su `C:`** *(`tempfile.mkdtemp`)* **e li toglie.**
+- ### **LA SUITE RIFATTA: `67` su `67`, `M-B1` di nuovo VERDE** *(`73.15` s; dalle `14:55:26` alle `15:18:39`, nel laterale)*.
+- **(e), il triangolo** *(`5aaaa97b`)*: **l'energia e' limitata dal basso e dall'alto con O1 e con O4** *(per unita' di norma `[-3.22, +3.34]` e `[-2.15, +2.23]`)*; **`N` non arriva a `0`.**
+- **V-R** *(`a9be8c20`)*: **caso intermedio.**
+  - **Col vuoto che comanda e la reazione accesa, l'instabilita' resta in `24` punti su `24`.**
+  - **La reazione rallenta molto dove `cs` e' alto** *(la legge del nucleo e' quasi marginale, `~2e-5` per tick)*.
+  - **Oggi, a `cs 0.15`, la legge del nucleo com'e' fa `0.154` per tick.**
+- **Il segno di `h_k`** *(`a9be8c20`)*:
+  - **con O1 e' positivo nel centro e nel guscio, negativo fuori;**
+  - **con O4 e' misto** *(il guscio negativo in media)*.
+- **Il banco del lapse** *(il progetto `df4aad6a`; il codice `9344cc65`, la suite `67` su `67` dalle `15:54:28` alle `16:16:41`)*: **la corsa del DEVE `N = 1` al bit e' partita.**
+- **`C50-0`: il pezzo `150000 -> 160000` chiuso; ~`66` minuti a pezzo, quindi la fine verso le `20:00`** *(stima)*.
