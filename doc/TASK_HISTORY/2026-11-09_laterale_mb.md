@@ -1056,3 +1056,64 @@
 
 - ### **(d) L'impulso: `a = 1e-4` relativo, e `R = (4 R(a) - R(2a)) / 3`** *(l'estrapolazione di Richardson, che toglie il termine in `a^2`)*, **invece di `a = 1e-6` con la sola differenza simmetrica.** **Perche':** **una prova breve dallo scratchpad** *(non un referto)* **con `a = 1e-6` dava a `cs` spento `max ||lambda| - 1| = 2.753e-09`, sopra la soglia di Luca `1e-9`, per l'arrotondamento** *(~`1e-16 / 1e-6` per elemento)* **e non per la fisica** *(a `cs` spento la mappa e' lineare: la differenza simmetrica e' esatta a meno dell'arrotondamento)*; **con `1e-4` e Richardson: `2.892e-11`.** **Il controllo di linearita' resta `|R(2a) - R(a)| / max|R|` sotto `1e-6`** *(nella prova: `2.4e-09`-`2.6e-09` coi punti accesi, `3.75e-12` a `cs` spento)*. **E la traslazione si controlla con lo stesso `R` di Richardson.**
 - ### ⚠ **LA PROVA BREVE MI HA GIA' MOSTRATO NUMERI** *(il caso di oggi, `Lambda_c 340` e `Lambda 0.1`; l'onda a `60` tick)*: **lo dichiaro.** **Le letture (w1)-(w4) e le soglie sono quelle scritte in 28.2 PRIMA della prova, e non cambiano.** **Il referto e' la corsa al commit dello script, non la prova.**
+
+### 28.5 L'ESITO DI S2 *(la corsa dalle `08:50:31` alle `08:52:51` del `2026-11-11`, a `015f5ee2`; il referto `doc/referti_l2/s2_spettro_vuoto_cs.txt`; `20/20`)*: **(w1) E (w4) -- IL VUOTO CON LA LEGGE DI `cs` E' INSTABILE PER COSTRUZIONE, IN TUTTA LA MAPPA; LA COLPA E' DELLA LEGGE, NON DELLA MEMORIA. FERMO.**
+
+- ### **I DEVE, tutti come devono:**
+  - **a `cs` spento lo spettro e' unitario** *(`max ||lambda| - 1| 2.892e-11`)*;
+  - **il fattore `1 + 1e-3` compare come `|lambda| = 1.001` su ogni `k`** *(entro `3.0e-11`)*, **e l'unitarieta' su quella mappa FALLISCE come deve;**
+  - **`psi` si stacca** *(le risposte incrociate `0` esatto; il blocco `psi -> psi` unitario)*;
+  - **la traslazione `5.334e-12`; la linearita' `2.1e-09`-`4.1e-09` su tutti i punti;**
+  - **oggi (L-F1) `ln |lambda|_max = 0.160987` contro `0.158`** *(il rapporto `1.0189`)*;
+  - ### **l'onda piana nella simulazione F1 vera cresce a `0.16099` per tick** *(dal tick `20` al `100`; il rapporto con lo spettro `1.0000`)*.
+  - **I residui delle basi sono `<= 4.9e-15`: tutti i punti sono punti fissi.**
+- ### **IL MODO:** **in TUTTI i `24` casi il `k` piu' instabile e' `(m1, m2) = (27, 27)`, `|k| = 4.18879 = 4 pi / 3`, con il suo opposto** *(`2` `k` equivalenti)*.
+  - **E' l'angolo della zona di Brillouin del reticolo triangolare** *(il modulo `4 pi / 3` e' quello del punto `K`; la lettura «punto `K`» e' mia)*.
+  - **L'autovalore e' REALE** *(`arg 0`)*: **nel riferimento che gira, il modo cresce senza oscillare.**
+- ### **LA MAPPA** *(`ln |lambda|_max` per tick; (L-F1) e (L-ist))*:
+
+| il punto | `Lambda` | `Lambda_c` | `cs` del vuoto | (L-F1) | (L-ist) |
+|---|---|---|---|---|---|
+| `Lambda_c 8.5` | `6` | `8.5` | `0.4138` | `0.139276` | `0.181390` |
+| `Lambda_c 17` | `6` | `17` | `0.2609` | `0.218835` | `0.276258` |
+| **oggi** | `6` | `34` | `0.1500` | **`0.160987`** | **`0.211198`** |
+| `Lambda_c 68` | `6` | `68` | `0.0811` | `0.096343` | `0.131230` |
+| `Lambda_c 136` | `6` | `136` | `0.0423` | `0.052583` | `0.073490` |
+| `Lambda_c 340` | `6` | `340` | `0.0173` | `0.022153` | `0.031535` |
+| `s 0.05` | `6` | `114` | `0.0500` | `0.061685` | `0.085748` |
+| `s 0.3` | `6` | `14` | `0.3000` | `0.221038` | `0.277441` |
+| `Lambda 3` | `3` | `34` | `0.0811` | `0.096343` | `0.131230` |
+| `Lambda 1` | `1` | `34` | `0.0286` | `0.036083` | `0.050931` |
+| `Lambda 0.5` | `0.5` | `34` | `0.0145` | `0.018567` | `0.026488` |
+| `Lambda 0.1` | `0.1` | `34` | `0.0029` | `0.003799` | `0.005470` |
+
+  - **Instabili `24` su `24`** *(la soglia `1e-9`)*. **Nessuna zona stabile: NON (w3).**
+  - ### **Un fatto della tabella** *(non una lettura)*:
+    - **`Lambda_c 68` e `Lambda 3` hanno lo STESSO `cs` del vuoto** *(`0.0811`)* **e lo stesso tasso fino alla `12`ma cifra** *(`0.096343` per tutti e due i casi)*: **in questi punti il tasso dipende da `Lambda / Lambda_c`, non dai due separati.**
+    - **Il tasso cresce con `cs` del vuoto fino a `0.26`-`0.30`** *(`0.2188`, `0.2210`)* **e scende a `0.41`** *(`0.1393`)*.
+    - **Verso `cs -> 0` va a zero** *(`0.0038` a `cs 0.0029`)*, **ma non diventa mai stabile.**
+  - ### **Una cosa da segnalare, non da interpretare:** **a `k = 0` `|lambda|` e' sopra `1` in quattro punti:**
+    - `1.0000019` a `Lambda_c 17`;
+    - `1.0000010` a `s 0.05`;
+    - `1.0000008` a `Lambda 3`;
+    - `1.0000006` a `Lambda 0.5`.
+
+    **Negli altri punti e' `1 + O(1e-11)`.** **Questi valori stanno sopra la precisione dello strumento a `cs` spento** *(`2.9e-11`)*, **ma molto sotto il modo a `K`.** **Non so se sia un modo vero o l'arrotondamento del modo neutro a `k = 0`.**
+- ### **IL MECCANISMO, letto dalla matrice nel caso di oggi:**
+  - **L'autovettore e' quasi tutto `phi`** *(`99.61%`; `cs` `0.39%`)*, **diviso a meta' fra le due bande di `phi` a `omega_b = +-0.237260`** *(`0.4976` e `0.4976`)*. **E' una sovrapposizione delle due onde a `+K` e `-K` che modula `|phi|^2`, cioe' `Lambda`, sul passo del reticolo** *(lettura mia della composizione)*.
+  - **`lambda - A_cc = g(lambda)` regge** *(lo scarto `3.2e-15`)*: **(L-F1) `A_cc = 0.6499`, `g = 0.5248`; (L-ist) `A_cc = 0.0682`, `g = 1.1670`.**
+  - **`g` e' REALE e POSITIVO, e il `96%` viene dalle due bande `+-0.237260`** *(`0.2527 + 0.2527` su `0.5248`)*: **l'anello `phi -> Lambda -> cs -> phi` si chiude IN FASE, una retroazione positiva.**
+  - **Le due braccia dell'anello:** **`|A_phi,c| = 5.03`** *(quanto un `delta cs` sposta `phi`)*, **contro `|A_c,phi| = 0.039`** *(F1)* **e `0.104`** *(ist)*.
+  - ### **Perche' la memoria non salva:** **la memoria di F1 abbassa `A_c,phi`** *(da `0.104` a `0.039`)* **ma porta `A_cc` a `0.65`, vicino a `1`:** **il guadagno dell'anello resta sopra la soglia** *(il tasso scende da `0.211` a `0.161`, non a zero)*. **In tutta la mappa (L-F1) e' piu' lento di (L-ist), mai stabile.**
+- ### **LE LETTURE COL CRITERIO SCRITTO:**
+  - ### **(w1): (L-ist) e' gia' instabile nel caso di oggi** *(`0.211198` per tick)*: **la colpa e' della LEGGE, non della memoria;**
+  - ### **(w4): instabile in tutta la mappa** *(`24` su `24`)*: **il vuoto con questa legge del tempo locale e' instabile per costruzione.**
+- ### ⛔ **FERMO** *(il mandato: «dopo S2: fermo»)*.
+  - **F4, la forma della legge, e qualunque cambio di `Lambda_c` o di `s` sono di Luca.**
+  - **Per la ROTTA** *(`doc/ROTTA.md`, passo `1`)*: **S2 chiude la diagnosi; (w3) non c'e', quindi F1-F4 si archiviano.**
+  - **La sez. `29`** *(M-rho, M-Phi)* **e' la candidata naturale per (w4), come scritto li': la scelta e' di Luca.**
+
+### 28.6 IL RIMANDO ALLA ROTTA *(la regola `2`)*
+
+- **La rotta del tempo locale e dell'unificazione** *(Luca `2026-11-10` `20:08`)* **e' `doc/ROTTA.md` sul principale** *(`4f8bb34b`)*.
+- **Su questo ramo:** **dopo S2 nessuna nuova cura della legge sul vuoto, e F1-F4 sono archiviate** *(S2 non ha trovato zone stabili)*.

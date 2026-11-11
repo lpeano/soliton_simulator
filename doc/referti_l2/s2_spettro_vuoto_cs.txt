@@ -1,0 +1,187 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] carta_f1.py  sha1-BYTE b0b5deb1  committato e pulito
+[TIMBRO] carta_f1_lunga.py  sha1-BYTE f77f58f5  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s2_spettro.py  sha1-BYTE c293ec98  !! MODIFICATO rispetto a HEAD (blob-git 547425bf) -- i byte che girano NON sono quelli committati
+==================================================================================================================================
+S2 (sez. 28.2): lo spettro lineare del vuoto c(10000) F3 con la legge di cs; a 0.0001 relativo; la linearita' 1e-06; stabile se |lambda|_max - 1 < 1e-09
+==================================================================================================================================
+### Lambda del vuoto 6; Lambda_c di T2 34.000000000000; s 0.15; psi 24 reali per cella (complex128)
+### A cs SPENTO (mot.cs = None, mot.lambda_c = None): 12 reali per cella
+    la base: omega 3.1415926536 per tick; il residuo di phi 7.022e-16
+    la linearita' 3.75e-12; |lambda| fra 0.999999999971083 e 1.000000000007998; max ||lambda| - 1| 2.892e-11
+  DEVE PASSARE: cs spento: lo spettro e' unitario, max ||lambda| - 1| < 1e-09                                            PASSA   2.892e-11
+  DEVE PASSARE: cs spento: la linearita' |R(2a) - R(a)| / max|R| < 1e-06                                                 PASSA   3.75e-12
+### IL DEVE FALLIRE: lo stesso, con phi per (1 + 0.001) dopo il tick (tutta phi: il modo giusto sono tutti)
+    |lambda| fra 1.000999999969870 e 1.001000000007521
+  DEVE PASSARE: il fattore: |lambda| = 1.001 entro 1e-9 su ogni k                                                        PASSA   7.521e-12, -3.013e-11
+  DEVE FALLIRE: il fattore: lo spettro e' unitario, max ||lambda| - 1| < 1e-09                                           ### FALLISCE   1.000e-03
+### IL CASO DI OGGI: Lambda 6, Lambda_c 34.000000, cs del vuoto 0.150000000000; omega 0.4712388980; r 0.3757715664; i residui della base: phi 3.032e-15, cs (F1) 5.551e-16, cs (ist) 1.480e-15
+### (a) psi a psi = 0: la risposta di phi, cs a un impulso di psi del nodo 0 (le 24 direzioni reali), e di psi a phi, cs
+    max |d(phi, cs)/d psi| 0.000e+00; max |d psi/d(phi, cs)| 0.000e+00 (la soglia 1e-12); il blocco psi -> psi: |lambda| fra 1.000000000000 e 1.000000000000
+    ### psi SI STACCA al primo ordine: si toglie dal vettore (13 reali per cella)
+  DEVE PASSARE: (a) psi si stacca al primo ordine (le due risposte incrociate sotto 1e-12)                               PASSA   0.000e+00, 0.000e+00
+  DEVE PASSARE: (d) l'invarianza per traslazione: l'impulso nel nodo 3247 = quello del nodo 0 traslato (le direzioni 0 e PASSA   5.334e-12
+### LA MAPPA: 12 punti (Lambda_c 34 e s 0.15 sono il caso di oggi, con Lambda_c di T2 34.000000000000; Lambda 6 e' il caso di oggi)
+  IL PUNTO oggi: Lambda 6, Lambda_c 34.000000, cs del vuoto 0.1500000000; omega 0.4712388980, r 0.3757715664; i residui: phi 3.032e-15, cs (F1) 5.551e-16, cs (ist) 1.480e-15; la linearita' 2.43e-09
+  DEVE PASSARE: oggi: la linearita' < 1e-06                                                                              PASSA   2.43e-09
+    (L-F1): |lambda|_max 1.174669993614, ln 0.160987 per tick, lambda +1.17466999 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000002
+      l'autovettore: la frazione in cs 3.8855e-03, in phi 0.996115; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.81e-11): i pesi piu' grandi 0.4976 (omega_b -0.237260); 0.4976 (omega_b +0.237260); 0.0024 (omega_b -0.705218)
+      il meccanismo: A_cc +0.64985332 +0.00000000i; |A_c,phi| 3.9119e-02, |A_phi,c| 5.0302e+00; lambda - A_cc = +5.248167e-01 -9.314627e-13i, g(lambda) = +5.248167e-01 -9.293087e-13i (lo scarto 3.17e-15)
+      i contributi di banda piu' grandi: omega_b +0.237260: +2.5274e-01 +9.3901e-02i (lambda - lambda_b = +2.027e-01 +2.350e-01i); omega_b -0.237260: +2.5274e-01 -9.3901e-02i (lambda - lambda_b = +2.027e-01 -2.350e-01i); omega_b -0.705218: +9.6659e-03 +5.1596e-03i (lambda - lambda_b = +4.132e-01 -6.482e-01i)
+    (L-ist): |lambda|_max 1.235156395436, ln 0.211198 per tick, lambda +1.23515640 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000002
+      l'autovettore: la frazione in cs 5.0120e-03, in phi 0.994988; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.81e-11): i pesi piu' grandi 0.4972 (omega_b +0.237260); 0.4972 (omega_b -0.237260); 0.0028 (omega_b +0.705218)
+      il meccanismo: A_cc +0.06819273 +0.00000000i; |A_c,phi| 1.0410e-01, |A_phi,c| 5.0302e+00; lambda - A_cc = +1.166964e+00 -1.400945e-12i, g(lambda) = +1.166964e+00 -1.399976e-12i (lo scarto 1.05e-14)
+      i contributi di banda piu' grandi: omega_b +0.237260: +5.5807e-01 +2.9474e-01i (lambda - lambda_b = +2.632e-01 +2.350e-01i); omega_b -0.237260: +5.5807e-01 -2.9474e-01i (lambda - lambda_b = +2.632e-01 -2.350e-01i); omega_b -0.705218: +2.5415e-02 +1.1556e-02i (lambda - lambda_b = +4.737e-01 -6.482e-01i)
+  IL PUNTO Lambda_c 8.5: Lambda 6, Lambda_c 8.500000, cs del vuoto 0.4137931034; omega 1.2999693739, r 0.7274598603; i residui: phi 4.847e-16, cs (F1) 0.000e+00, cs (ist) 0.000e+00; la linearita' 4.14e-09
+  DEVE PASSARE: Lambda_c 8.5: la linearita' < 1e-06                                                                      PASSA   4.14e-09
+    (L-F1): |lambda|_max 1.149441858727, ln 0.139276 per tick, lambda +1.14944186 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000019
+      l'autovettore: la frazione in cs 2.4199e-02, in phi 0.975801; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 7.24e-12): i pesi piu' grandi 0.4999 (omega_b +0.685158); 0.4999 (omega_b -0.685158); 0.0001 (omega_b +1.914781)
+      il meccanismo: A_cc +0.47284828 -0.00000000i; |A_c,phi| 1.4408e-01, |A_phi,c| 4.6735e+00; lambda - A_cc = +6.765936e-01 -2.118067e-13i, g(lambda) = +6.765936e-01 -2.122469e-13i (lo scarto 7.08e-16)
+      i contributi di banda piu' grandi: omega_b +0.685158: +3.3931e-01 -1.8213e-01i (lambda - lambda_b = +3.751e-01 +6.328e-01i); omega_b -0.685158: +3.3931e-01 +1.8213e-01i (lambda - lambda_b = +3.751e-01 -6.328e-01i); omega_b +1.914781: -1.0092e-03 -3.3201e-03i (lambda - lambda_b = +1.487e+00 +9.414e-01i)
+    (L-ist): |lambda|_max 1.198882333972, ln 0.181390 per tick, lambda +1.19888233 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000019
+      l'autovettore: la frazione in cs 2.5921e-02, in phi 0.974079; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 7.24e-12): i pesi piu' grandi 0.4999 (omega_b +0.685158); 0.4999 (omega_b -0.685158); 0.0001 (omega_b +1.914781)
+      il meccanismo: A_cc +0.27535284 -0.00000000i; |A_c,phi| 1.9806e-01, |A_phi,c| 4.6735e+00; lambda - A_cc = +9.235295e-01 +2.183401e-12i, g(lambda) = +9.235295e-01 +2.181869e-12i (lo scarto 1.72e-15)
+      i contributi di banda piu' grandi: omega_b +0.685158: +4.6305e-01 -2.1618e-01i (lambda - lambda_b = +4.246e-01 +6.328e-01i); omega_b -0.685158: +4.6305e-01 +2.1618e-01i (lambda - lambda_b = +4.246e-01 -6.328e-01i); omega_b +1.914781: -1.2893e-03 -4.4771e-03i (lambda - lambda_b = +1.536e+00 +9.414e-01i)
+  IL PUNTO Lambda_c 17: Lambda 6, Lambda_c 17.000000, cs del vuoto 0.2608695652; omega 0.8195459096, r 0.5593683043; i residui: phi 4.877e-15, cs (F1) 0.000e+00, cs (ist) 0.000e+00; la linearita' 2.07e-09
+  DEVE PASSARE: Lambda_c 17: la linearita' < 1e-06                                                                       PASSA   2.07e-09
+    (L-F1): |lambda|_max 1.244625616609, ln 0.218835 per tick, lambda +1.24462562 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000001913143
+      l'autovettore: la frazione in cs 1.1403e-02, in phi 0.988597; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 2.15e-11): i pesi piu' grandi 0.4986 (omega_b +0.418462); 0.4986 (omega_b -0.418462); 0.0014 (omega_b +1.220630)
+      il meccanismo: A_cc +0.53349484 -0.00000000i; |A_c,phi| 8.8064e-02, |A_phi,c| 4.9138e+00; lambda - A_cc = +7.111308e-01 -1.967883e-12i, g(lambda) = +7.111308e-01 -1.969046e-12i (lo scarto 1.17e-15)
+      i contributi di banda piu' grandi: omega_b +0.418462: +3.5022e-01 +1.9538e-02i (lambda - lambda_b = +3.309e-01 +4.064e-01i); omega_b -0.418462: +3.5022e-01 -1.9538e-02i (lambda - lambda_b = +3.309e-01 -4.064e-01i); omega_b -1.220630: +5.3476e-03 +9.6791e-03i (lambda - lambda_b = +9.016e-01 -9.393e-01i)
+    (L-ist): |lambda|_max 1.318188022553, ln 0.276258 per tick, lambda +1.31818802 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000001913093
+      l'autovettore: la frazione in cs 1.3615e-02, in phi 0.986385; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 2.15e-11): i pesi piu' grandi 0.4985 (omega_b +0.418462); 0.4985 (omega_b -0.418462); 0.0015 (omega_b +1.220630)
+      il meccanismo: A_cc +0.16601432 -0.00000000i; |A_c,phi| 1.5743e-01, |A_phi,c| 4.9138e+00; lambda - A_cc = +1.152174e+00 -1.138760e-12i, g(lambda) = +1.152174e+00 -1.138516e-12i (lo scarto 3.56e-15)
+      i contributi di banda piu' grandi: omega_b +0.418462: +5.6625e-01 +8.8701e-02i (lambda - lambda_b = +4.045e-01 +4.064e-01i); omega_b -0.418462: +5.6625e-01 -8.8701e-02i (lambda - lambda_b = +4.045e-01 -4.064e-01i); omega_b -1.220630: +9.8381e-03 +1.6266e-02i (lambda - lambda_b = +9.751e-01 -9.393e-01i)
+  IL PUNTO Lambda_c 68: Lambda 6, Lambda_c 68.000000, cs del vuoto 0.0810810811; omega 0.2547237287, r 0.2248693853; i residui: phi 1.047e-15, cs (F1) 3.423e-16, cs (ist) 1.198e-15; la linearita' 2.52e-09
+  DEVE PASSARE: Lambda_c 68: la linearita' < 1e-06                                                                       PASSA   2.52e-09
+    (L-F1): |lambda|_max 1.101137185020, ln 0.096343 per tick, lambda +1.10113719 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000017
+      l'autovettore: la frazione in cs 1.1239e-03, in phi 0.998876; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 5.82e-12): i pesi piu' grandi 0.4971 (omega_b -0.127620); 0.4971 (omega_b +0.127620); 0.0029 (omega_b -0.381827)
+      il meccanismo: A_cc +0.78010422 +0.00000000i; |A_c,phi| 1.3680e-02, |A_phi,c| 5.0723e+00; lambda - A_cc = +3.210330e-01 +2.694251e-13i, g(lambda) = +3.210330e-01 +2.735338e-13i (lo scarto 4.75e-15)
+      i contributi di banda piu' grandi: omega_b +0.127620: +1.5283e-01 +8.7098e-02i (lambda - lambda_b = +1.093e-01 +1.273e-01i); omega_b -0.127620: +1.5283e-01 -8.7098e-02i (lambda - lambda_b = +1.093e-01 -1.273e-01i); omega_b -0.381827: +7.6890e-03 +1.0658e-03i (lambda - lambda_b = +1.732e-01 -3.726e-01i)
+    (L-ist): |lambda|_max 1.140230431730, ln 0.131230 per tick, lambda +1.14023043 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000033
+      l'autovettore: la frazione in cs 1.5234e-03, in phi 0.998477; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 5.82e-12): i pesi piu' grandi 0.4964 (omega_b -0.127620); 0.4964 (omega_b +0.127620); 0.0036 (omega_b -0.381827)
+      il meccanismo: A_cc +0.02211773 -0.00000000i; |A_c,phi| 6.0835e-02, |A_phi,c| 5.0723e+00; lambda - A_cc = +1.118113e+00 +3.158131e-13i, g(lambda) = +1.118113e+00 +3.192084e-13i (lo scarto 1.44e-14)
+      i contributi di banda piu' grandi: omega_b +0.127620: +5.2603e-01 +4.1703e-01i (lambda - lambda_b = +1.484e-01 +1.273e-01i); omega_b -0.127620: +5.2603e-01 -4.1703e-01i (lambda - lambda_b = +1.484e-01 -1.273e-01i); omega_b -0.381827: +3.3026e-02 +1.8172e-03i (lambda - lambda_b = +2.122e-01 -3.726e-01i)
+  IL PUNTO Lambda_c 136: Lambda 6, Lambda_c 136.000000, cs del vuoto 0.0422535211; omega 0.1327433516, r 0.1243101923; i residui: phi 3.679e-15, cs (F1) 0.000e+00, cs (ist) 1.642e-16; la linearita' 2.53e-09
+  DEVE PASSARE: Lambda_c 136: la linearita' < 1e-06                                                                      PASSA   2.53e-09
+    (L-F1): |lambda|_max 1.053989744029, ln 0.052583 per tick, lambda +1.05398974 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000010
+      l'autovettore: la frazione in cs 3.0110e-04, in phi 0.999699; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 9.32e-12): i pesi piu' grandi 0.4969 (omega_b +0.066408); 0.4969 (omega_b -0.066408); 0.0031 (omega_b +0.199078)
+      il meccanismo: A_cc +0.87647421 +0.00000000i; |A_c,phi| 4.1075e-03, |A_phi,c| 5.0852e+00; lambda - A_cc = +1.775155e-01 -1.603535e-14i, g(lambda) = +1.775155e-01 -1.650530e-14i (lo scarto 2.05e-15)
+      i contributi di banda piu' grandi: omega_b +0.066408: +8.4124e-02 +5.7927e-02i (lambda - lambda_b = +5.619e-02 +6.636e-02i); omega_b -0.066408: +8.4124e-02 -5.7927e-02i (lambda - lambda_b = +5.619e-02 -6.636e-02i); omega_b +0.199078: +4.6333e-03 +2.7034e-04i (lambda - lambda_b = +7.374e-02 +1.978e-01i)
+    (L-ist): |lambda|_max 1.076258301691, ln 0.073490 per tick, lambda +1.07625830 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000025
+      l'autovettore: la frazione in cs 4.1972e-04, in phi 0.999580; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 9.32e-12): i pesi piu' grandi 0.4961 (omega_b -0.066408); 0.4961 (omega_b +0.066408); 0.0039 (omega_b -0.199078)
+      il meccanismo: A_cc +0.00631003 +0.00000000i; |A_c,phi| 3.3042e-02, |A_phi,c| 5.0852e+00; lambda - A_cc = +1.069948e+00 -2.653380e-13i, g(lambda) = +1.069948e+00 -2.638228e-13i (lo scarto 5.11e-15)
+      i contributi di banda piu' grandi: omega_b +0.066408: +4.9955e-01 +4.8359e-01i (lambda - lambda_b = +7.846e-02 +6.636e-02i); omega_b -0.066408: +4.9955e-01 -4.8359e-01i (lambda - lambda_b = +7.846e-02 -6.636e-02i); omega_b +0.199078: +3.5425e-02 +5.4749e-03i (lambda - lambda_b = +9.601e-02 +1.978e-01i)
+  IL PUNTO Lambda_c 340: Lambda 6, Lambda_c 340.000000, cs del vuoto 0.0173410405; omega 0.0544784853, r 0.0530211174; i residui: phi 2.647e-15, cs (F1) 0.000e+00, cs (ist) 0.000e+00; la linearita' 2.51e-09
+  DEVE PASSARE: Lambda_c 340: la linearita' < 1e-06                                                                      PASSA   2.51e-09
+    (L-F1): |lambda|_max 1.022400386736, ln 0.022153 per tick, lambda +1.02240039 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000021
+      l'autovettore: la frazione in cs 5.0144e-05, in phi 0.999950; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 9.39e-12): i pesi piu' grandi 0.4968 (omega_b -0.027242); 0.4968 (omega_b +0.027242); 0.0032 (omega_b +0.081715)
+      il meccanismo: A_cc +0.94703684 +0.00000000i; |A_c,phi| 7.3770e-04, |A_phi,c| 5.0892e+00; lambda - A_cc = +7.536355e-02 +6.976341e-16i, g(lambda) = +7.536355e-02 -1.301910e-15i (lo scarto 3.20e-15)
+      i contributi di banda piu' grandi: omega_b -0.027242: +3.5646e-02 -2.7406e-02i (lambda - lambda_b = +2.277e-02 -2.724e-02i); omega_b +0.027242: +3.5646e-02 +2.7406e-02i (lambda - lambda_b = +2.277e-02 +2.724e-02i); omega_b -0.081715: +2.0354e-03 -3.7642e-04i (lambda - lambda_b = +2.574e-02 -8.162e-02i)
+    (L-ist): |lambda|_max 1.032037296133, ln 0.031535 per tick, lambda +1.03203730 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000021
+      l'autovettore: la frazione in cs 7.1155e-05, in phi 0.999929; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 9.39e-12): i pesi piu' grandi 0.4959 (omega_b -0.027242); 0.4959 (omega_b +0.027242); 0.0041 (omega_b -0.081715)
+      il meccanismo: A_cc +0.00109312 +0.00000000i; |A_c,phi| 1.3913e-02, |A_phi,c| 5.0892e+00; lambda - A_cc = +1.030944e+00 +3.101629e-14i, g(lambda) = +1.030944e+00 +3.988129e-14i (lo scarto 2.54e-14)
+      i contributi di banda piu' grandi: omega_b +0.027242: +4.7944e-01 +5.2529e-01i (lambda - lambda_b = +3.241e-02 +2.724e-02i); omega_b -0.027242: +4.7944e-01 -5.2529e-01i (lambda - lambda_b = +3.241e-02 -2.724e-02i); omega_b -0.081715: +3.6029e-02 -1.0609e-02i (lambda - lambda_b = +3.537e-02 -8.162e-02i)
+  IL PUNTO s 0.05: Lambda 6, Lambda_c 114.000000, cs del vuoto 0.0500000000; omega 0.1570796327, r 0.1453640008; i residui: phi 3.485e-15, cs (F1) 0.000e+00, cs (ist) 4.163e-16; la linearita' 2.53e-09
+  DEVE PASSARE: s 0.05: la linearita' < 1e-06                                                                            PASSA   2.53e-09
+    (L-F1): |lambda|_max 1.063627595097, ln 0.061685 per tick, lambda +1.06362760 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000001008236
+      l'autovettore: la frazione in cs 4.2295e-04, in phi 0.999577; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.44e-11): i pesi piu' grandi 0.4970 (omega_b +0.078600); 0.4970 (omega_b -0.078600); 0.0030 (omega_b +0.235559)
+      il meccanismo: A_cc +0.85590852 +0.00000000i; |A_c,phi| 5.6377e-03, |A_phi,c| 5.0832e+00; lambda - A_cc = +2.077191e-01 -2.816077e-13i, g(lambda) = +2.077191e-01 -2.821725e-13i (lo scarto 3.38e-15)
+      i contributi di banda piu' grandi: omega_b -0.078600: +9.8513e-02 -6.5447e-02i (lambda - lambda_b = +6.672e-02 -7.852e-02i); omega_b +0.078600: +9.8513e-02 +6.5447e-02i (lambda - lambda_b = +6.672e-02 +7.852e-02i); omega_b +0.235559: +5.3467e-03 +1.0345e-04i (lambda - lambda_b = +9.124e-02 +2.334e-01i)
+    (L-ist): |lambda|_max 1.089531251584, ln 0.085748 per tick, lambda +1.08953125 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000001008170
+      l'autovettore: la frazione in cs 5.8629e-04, in phi 0.999414; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.44e-11): i pesi piu' grandi 0.4961 (omega_b +0.078600); 0.4961 (omega_b -0.078600); 0.0039 (omega_b +0.235559)
+      il meccanismo: A_cc +0.00875401 -0.00000000i; |A_c,phi| 3.8784e-02, |A_phi,c| 5.0832e+00; lambda - A_cc = +1.080777e+00 +2.280100e-13i, g(lambda) = +1.080777e+00 +2.247967e-13i (lo scarto 3.37e-14)
+      i contributi di banda piu' grandi: omega_b +0.078600: +5.0531e-01 +4.7046e-01i (lambda - lambda_b = +9.262e-02 +7.852e-02i); omega_b -0.078600: +5.0531e-01 -4.7046e-01i (lambda - lambda_b = +9.262e-02 -7.852e-02i); omega_b +0.235559: +3.5081e-02 +3.9408e-03i (lambda - lambda_b = +1.171e-01 +2.334e-01i)
+  IL PUNTO s 0.3: Lambda 6, Lambda_c 14.000000, cs del vuoto 0.3000000000; omega 0.9424777961, r 0.6103388626; i residui: phi 1.495e-15, cs (F1) 3.701e-16, cs (ist) 5.551e-16; la linearita' 2.47e-09
+  DEVE PASSARE: s 0.3: la linearita' < 1e-06                                                                             PASSA   2.47e-09
+    (L-F1): |lambda|_max 1.247371249101, ln 0.221038 per tick, lambda +1.24737125 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000018
+      l'autovettore: la frazione in cs 1.4677e-02, in phi 0.985323; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 6.79e-12): i pesi piu' grandi 0.4990 (omega_b -0.484495); 0.4990 (omega_b +0.484495); 0.0010 (omega_b -1.400460)
+      il meccanismo: A_cc +0.51182116 +0.00000000i; |A_c,phi| 1.0465e-01, |A_phi,c| 4.8600e+00; lambda - A_cc = +7.355501e-01 +3.513439e-12i, g(lambda) = +7.355501e-01 +3.512636e-12i (lo scarto 1.04e-15)
+      i contributi di banda piu' grandi: omega_b -0.484495: +3.6485e-01 +2.3906e-02i (lambda - lambda_b = +3.625e-01 -4.658e-01i); omega_b +0.484495: +3.6485e-01 -2.3906e-02i (lambda - lambda_b = +3.625e-01 +4.658e-01i); omega_b -1.400460: +2.9273e-03 +9.4557e-03i (lambda - lambda_b = +1.078e+00 -9.855e-01i)
+    (L-ist): |lambda|_max 1.319748035366, ln 0.277441 per tick, lambda +1.31974804 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000018
+      l'autovettore: la frazione in cs 1.7064e-02, in phi 0.982936; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 6.79e-12): i pesi piu' grandi 0.4989 (omega_b -0.484495); 0.4989 (omega_b +0.484495); 0.0011 (omega_b -1.400460)
+      il meccanismo: A_cc +0.20015115 +0.00000000i; |A_c,phi| 1.7146e-01, |A_phi,c| 4.8600e+00; lambda - A_cc = +1.119597e+00 +2.246465e-12i, g(lambda) = +1.119597e+00 +2.246476e-12i (lo scarto 3.77e-15)
+      i contributi di banda piu' grandi: omega_b -0.484495: +5.5469e-01 -1.3499e-02i (lambda - lambda_b = +4.348e-01 -4.658e-01i); omega_b +0.484495: +5.5469e-01 +1.3499e-02i (lambda - lambda_b = +4.348e-01 +4.658e-01i); omega_b -1.400460: +5.1038e-03 +1.4781e-02i (lambda - lambda_b = +1.150e+00 -9.855e-01i)
+  IL PUNTO Lambda 3: Lambda 3, Lambda_c 34.000000, cs del vuoto 0.0810810811; omega 0.2547237287, r 0.2248693853; i residui: phi 4.379e-15, cs (F1) 3.423e-16, cs (ist) 1.369e-15; la linearita' 2.52e-09
+  DEVE PASSARE: Lambda 3: la linearita' < 1e-06                                                                          PASSA   2.52e-09
+    (L-F1): |lambda|_max 1.101137185021, ln 0.096343 per tick, lambda +1.10113719 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000767280
+      l'autovettore: la frazione in cs 2.2453e-03, in phi 0.997755; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.31e-11): i pesi piu' grandi 0.4971 (omega_b -0.127620); 0.4971 (omega_b +0.127620); 0.0029 (omega_b -0.381827)
+      il meccanismo: A_cc +0.78010422 +0.00000000i; |A_c,phi| 1.9346e-02, |A_phi,c| 3.5867e+00; lambda - A_cc = +3.210330e-01 +2.158194e-13i, g(lambda) = +3.210330e-01 +2.161014e-13i (lo scarto 1.69e-15)
+      i contributi di banda piu' grandi: omega_b -0.127620: +1.5283e-01 -8.7098e-02i (lambda - lambda_b = +1.093e-01 -1.273e-01i); omega_b +0.127620: +1.5283e-01 +8.7098e-02i (lambda - lambda_b = +1.093e-01 +1.273e-01i); omega_b -0.381827: +7.6890e-03 +1.0658e-03i (lambda - lambda_b = +1.732e-01 -3.726e-01i)
+    (L-ist): |lambda|_max 1.140230431731, ln 0.131230 per tick, lambda +1.14023043 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000767268
+      l'autovettore: la frazione in cs 3.0422e-03, in phi 0.996958; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.31e-11): i pesi piu' grandi 0.4964 (omega_b -0.127620); 0.4964 (omega_b +0.127620); 0.0036 (omega_b -0.381827)
+      il meccanismo: A_cc +0.02211773 -0.00000000i; |A_c,phi| 8.6033e-02, |A_phi,c| 3.5867e+00; lambda - A_cc = +1.118113e+00 +1.724414e-13i, g(lambda) = +1.118113e+00 +1.740942e-13i (lo scarto 1.50e-14)
+      i contributi di banda piu' grandi: omega_b +0.127620: +5.2603e-01 +4.1703e-01i (lambda - lambda_b = +1.484e-01 +1.273e-01i); omega_b -0.127620: +5.2603e-01 -4.1703e-01i (lambda - lambda_b = +1.484e-01 -1.273e-01i); omega_b -0.381827: +3.3026e-02 +1.8172e-03i (lambda - lambda_b = +2.122e-01 -3.726e-01i)
+  IL PUNTO Lambda 1: Lambda 1, Lambda_c 34.000000, cs del vuoto 0.0285714286; omega 0.0897597901, r 0.0858492530; i residui: phi 7.455e-16, cs (F1) 1.214e-16, cs (ist) 1.457e-15; la linearita' 2.52e-09
+  DEVE PASSARE: Lambda 1: la linearita' < 1e-06                                                                          PASSA   2.52e-09
+    (L-F1): |lambda|_max 1.036741513082, ln 0.036083 per tick, lambda +1.03674151 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000011
+      l'autovettore: la frazione in cs 8.2056e-04, in phi 0.999179; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 7.77e-12): i pesi piu' grandi 0.4969 (omega_b -0.044891); 0.4969 (omega_b +0.044891); 0.0031 (omega_b -0.134628)
+      il meccanismo: A_cc +0.91440237 -0.00000000i; |A_c,phi| 4.7655e-03, |A_phi,c| 2.0771e+00; lambda - A_cc = +1.223391e-01 +8.294776e-13i, g(lambda) = +1.223391e-01 +8.311365e-13i (lo scarto 2.30e-15)
+      i contributi di banda piu' grandi: omega_b +0.044891: +5.7909e-02 +4.2402e-02i (lambda - lambda_b = +3.775e-02 +4.488e-02i); omega_b -0.044891: +5.7909e-02 -4.2402e-02i (lambda - lambda_b = +3.775e-02 -4.488e-02i); omega_b -0.134628: +3.2601e-03 -4.1571e-04i (lambda - lambda_b = +4.579e-02 -1.342e-01i)
+    (L-ist): |lambda|_max 1.052250268123, ln 0.050931 per tick, lambda +1.05225027 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000007
+      l'autovettore: la frazione in cs 1.1548e-03, in phi 0.998845; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 7.77e-12): i pesi piu' grandi 0.4959 (omega_b -0.044891); 0.4959 (omega_b +0.044891); 0.0041 (omega_b -0.134628)
+      il meccanismo: A_cc +0.00293104 +0.00000000i; |A_c,phi| 5.5510e-02, |A_phi,c| 2.0771e+00; lambda - A_cc = +1.049319e+00 +1.293299e-13i, g(lambda) = +1.049319e+00 +1.346041e-13i (lo scarto 9.95e-15)
+      i contributi di banda piu' grandi: omega_b +0.044891: +4.8881e-01 +5.0659e-01i (lambda - lambda_b = +5.326e-02 +4.488e-02i); omega_b -0.044891: +4.8881e-01 -5.0659e-01i (lambda - lambda_b = +5.326e-02 -4.488e-02i); omega_b -0.134628: +3.5854e-02 -8.2614e-03i (lambda - lambda_b = +6.130e-02 -1.342e-01i)
+  IL PUNTO Lambda 0.5: Lambda 0.5, Lambda_c 34.000000, cs del vuoto 0.0144927536; omega 0.0455303283, r 0.0445093763; i residui: phi 7.338e-16, cs (F1) 0.000e+00, cs (ist) 9.576e-16; la linearita' 2.53e-09
+  DEVE PASSARE: Lambda 0.5: la linearita' < 1e-06                                                                        PASSA   2.53e-09
+    (L-F1): |lambda|_max 1.018740554006, ln 0.018567 per tick, lambda +1.01874055 -0.00000000i (arg -0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000565243
+      l'autovettore: la frazione in cs 4.1954e-04, in phi 0.999580; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.65e-11): i pesi piu' grandi 0.4968 (omega_b +0.022767); 0.4968 (omega_b -0.022767); 0.0032 (omega_b -0.068294)
+      il meccanismo: A_cc +0.95552471 +0.00000000i; |A_c,phi| 1.7981e-03, |A_phi,c| 1.4692e+00; lambda - A_cc = +6.321584e-02 -3.711572e-17i, g(lambda) = +6.321584e-02 -1.714666e-16i (lo scarto 1.77e-15)
+      i contributi di banda piu' grandi: omega_b -0.022767: +2.9896e-02 -2.3267e-02i (lambda - lambda_b = +1.900e-02 -2.276e-02i); omega_b +0.022767: +2.9896e-02 +2.3267e-02i (lambda - lambda_b = +1.900e-02 +2.276e-02i); omega_b -0.068294: +1.7122e-03 -3.4184e-04i (lambda - lambda_b = +2.107e-02 -6.824e-02i)
+    (L-ist): |lambda|_max 1.026841995983, ln 0.026488 per tick, lambda +1.02684200 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000565284
+      l'autovettore: la frazione in cs 5.9644e-04, in phi 0.999404; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 1.65e-11): i pesi piu' grandi 0.4958 (omega_b -0.022767); 0.4958 (omega_b +0.022767); 0.0042 (omega_b -0.068294)
+      il meccanismo: A_cc +0.00076585 -0.00000000i; |A_c,phi| 4.0398e-02, |A_phi,c| 1.4692e+00; lambda - A_cc = +1.026076e+00 +1.950440e-13i, g(lambda) = +1.026076e+00 +1.773859e-13i (lo scarto 6.36e-14)
+      i contributi di banda piu' grandi: omega_b +0.022767: +4.7699e-01 +5.3000e-01i (lambda - lambda_b = +2.710e-02 +2.276e-02i); omega_b -0.022767: +4.7699e-01 -5.3000e-01i (lambda - lambda_b = +2.710e-02 -2.276e-02i); omega_b -0.068294: +3.6047e-02 -1.1212e-02i (lambda - lambda_b = +2.917e-02 -6.824e-02i)
+  IL PUNTO Lambda 0.1: Lambda 0.1, Lambda_c 34.000000, cs del vuoto 0.0029325513; omega 0.0092128817, r 0.0091705731; i residui: phi 4.102e-16, cs (F1) 0.000e+00, cs (ist) 1.035e-15; la linearita' 2.60e-09
+  DEVE PASSARE: Lambda 0.1: la linearita' < 1e-06                                                                        PASSA   2.60e-09
+    (L-F1): |lambda|_max 1.003806521827, ln 0.003799 per tick, lambda +1.00380652 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000001
+      l'autovettore: la frazione in cs 8.5400e-05, in phi 0.999915; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 2.06e-11): i pesi piu' grandi 0.4968 (omega_b -0.004606); 0.4968 (omega_b +0.004606); 0.0032 (omega_b -0.013819)
+      il meccanismo: A_cc +0.99082972 +0.00000000i; |A_c,phi| 1.6959e-04, |A_phi,c| 6.5711e-01; lambda - A_cc = +1.297680e-02 +4.005379e-17i, g(lambda) = +1.297680e-02 +8.177188e-16i (lo scarto 1.85e-15)
+      i contributi di banda piu' grandi: omega_b +0.004606: +6.1336e-03 +5.0115e-03i (lambda - lambda_b = +3.817e-03 +4.606e-03i); omega_b -0.004606: +6.1336e-03 -5.0115e-03i (lambda - lambda_b = +3.817e-03 -4.606e-03i); omega_b +0.013819: +3.5484e-04 +9.2299e-05i (lambda - lambda_b = +3.902e-03 +1.382e-02i)
+    (L-ist): |lambda|_max 1.005484656198, ln 0.005470 per tick, lambda +1.00548466 +0.00000000i (arg 0.000000); al k (m1, m2) = (27, 27), |k| 4.18879, la direzione 180.00 gradi; 2 k con lo stesso |lambda| (entro 1e-9); |lambda| max a k = 0: 1.000000000001
+      l'autovettore: la frazione in cs 1.2242e-04, in phi 0.999878; le bande di phi (il blocco phi -> phi, cs congelato: max ||lambda_b| - 1| 2.06e-11): i pesi piu' grandi 0.4957 (omega_b -0.004606); 0.4957 (omega_b +0.004606); 0.0043 (omega_b +0.013819)
+      il meccanismo: A_cc +0.00003174 +0.00000000i; |A_c,phi| 1.8493e-02, |A_phi,c| 6.5711e-01; lambda - A_cc = +1.005453e+00 -8.531054e-13i, g(lambda) = +1.005453e+00 -7.941460e-13i (lo scarto 1.55e-13)
+      i contributi di banda piu' grandi: omega_b -0.004606: +4.6672e-01 -5.4902e-01i (lambda - lambda_b = +5.495e-03 -4.606e-03i); omega_b +0.004606: +4.6672e-01 +5.4902e-01i (lambda - lambda_b = +5.495e-03 +4.606e-03i); omega_b +0.013819: +3.6011e-02 +1.3680e-02i (lambda - lambda_b = +5.580e-03 +1.382e-02i)
+  DEVE PASSARE: oggi (L-F1): il tasso piu' grande 0.16099 riproduce 0.158 entro il 5%                                    PASSA   il rapporto 1.0189
+### L'ONDA PIANA: al k (27, 27), la parte reale dell'autovettore, l'ampiezza massima 1e-11; F1 vero, 100 tick, contro un gemello senza onda
+    la differenza ai tick 1, 10, 20, 50, 100: 2.254e-09 9.596e-09 4.800e-08 6.008e-06 1.882e-02; la pendenza di ln dal tick 20 al 100: 0.16099 per tick
+  DEVE PASSARE: l'onda piana cresce col tasso dello spettro 0.16099 entro il 5%                                          PASSA   0.16099, il rapporto 1.0000
+----------------------------------------------------------------------------------------------------------------------------------
+  LA MAPPA:
+  il punto           Lambda     Lambda_c     cs vuoto   caso     |lambda|_max  ln per tick       |k|      dir  neq frazione cs     la banda   p.f.
+  oggi                    6    34.000000   0.15000000   L-F1   1.174669993614     0.160987   4.18879   180.00    2  3.885e-03    -0.237260     si
+  oggi                    6    34.000000   0.15000000  L-ist   1.235156395436     0.211198   4.18879   180.00    2  5.012e-03     0.237260     si
+  Lambda_c 8.5            6     8.500000   0.41379310   L-F1   1.149441858727     0.139276   4.18879   180.00    2  2.420e-02     0.685158     si
+  Lambda_c 8.5            6     8.500000   0.41379310  L-ist   1.198882333972     0.181390   4.18879   180.00    2  2.592e-02     0.685158     si
+  Lambda_c 17             6    17.000000   0.26086957   L-F1   1.244625616609     0.218835   4.18879   180.00    2  1.140e-02     0.418462     si
+  Lambda_c 17             6    17.000000   0.26086957  L-ist   1.318188022553     0.276258   4.18879   180.00    2  1.361e-02     0.418462     si
+  Lambda_c 68             6    68.000000   0.08108108   L-F1   1.101137185020     0.096343   4.18879   180.00    2  1.124e-03    -0.127620     si
+  Lambda_c 68             6    68.000000   0.08108108  L-ist   1.140230431730     0.131230   4.18879   180.00    2  1.523e-03    -0.127620     si
+  Lambda_c 136            6   136.000000   0.04225352   L-F1   1.053989744029     0.052583   4.18879   180.00    2  3.011e-04     0.066408     si
+  Lambda_c 136            6   136.000000   0.04225352  L-ist   1.076258301691     0.073490   4.18879   180.00    2  4.197e-04    -0.066408     si
+  Lambda_c 340            6   340.000000   0.01734104   L-F1   1.022400386736     0.022153   4.18879   180.00    2  5.014e-05    -0.027242     si
+  Lambda_c 340            6   340.000000   0.01734104  L-ist   1.032037296133     0.031535   4.18879   180.00    2  7.115e-05    -0.027242     si
+  s 0.05                  6   114.000000   0.05000000   L-F1   1.063627595097     0.061685   4.18879   180.00    2  4.229e-04     0.078600     si
+  s 0.05                  6   114.000000   0.05000000  L-ist   1.089531251584     0.085748   4.18879   180.00    2  5.863e-04     0.078600     si
+  s 0.3                   6    14.000000   0.30000000   L-F1   1.247371249101     0.221038   4.18879   180.00    2  1.468e-02    -0.484495     si
+  s 0.3                   6    14.000000   0.30000000  L-ist   1.319748035366     0.277441   4.18879   180.00    2  1.706e-02    -0.484495     si
+  Lambda 3                3    34.000000   0.08108108   L-F1   1.101137185021     0.096343   4.18879   180.00    2  2.245e-03    -0.127620     si
+  Lambda 3                3    34.000000   0.08108108  L-ist   1.140230431731     0.131230   4.18879   180.00    2  3.042e-03    -0.127620     si
+  Lambda 1                1    34.000000   0.02857143   L-F1   1.036741513082     0.036083   4.18879   180.00    2  8.206e-04    -0.044891     si
+  Lambda 1                1    34.000000   0.02857143  L-ist   1.052250268123     0.050931   4.18879   180.00    2  1.155e-03    -0.044891     si
+  Lambda 0.5            0.5    34.000000   0.01449275   L-F1   1.018740554006     0.018567   4.18879   180.00    2  4.195e-04     0.022767     si
+  Lambda 0.5            0.5    34.000000   0.01449275  L-ist   1.026841995983     0.026488   4.18879   180.00    2  5.964e-04    -0.022767     si
+  Lambda 0.1            0.1    34.000000   0.00293255   L-F1   1.003806521827     0.003799   4.18879   180.00    2  8.540e-05    -0.004606     si
+  Lambda 0.1            0.1    34.000000   0.00293255  L-ist   1.005484656198     0.005470   4.18879   180.00    2  1.224e-04    -0.004606     si
+  instabili (|lambda|_max - 1 > 1e-09): 24 su 24; stabili: nessuno
+  LA LETTURA: (w1) (L-ist) e' gia' instabile nel caso di oggi: la colpa e' della LEGGE, non della memoria
+  LA LETTURA: (w4) instabile in tutta la mappa: il vuoto con questa legge del tempo locale e' instabile per costruzione. FERMO: la decisione e' di Luca
+==================================================================================================================================
+ESITO: 20/20 controlli come devono; fallite: 0 []; 138 s in tutto
