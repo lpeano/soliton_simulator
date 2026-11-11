@@ -165,3 +165,4 @@
 
 - **L'analisi di Luca e del guardiano del `2026-11-10`** *(`14:05`-`14:24`, solo scrittura)*: **`doc/TASK_HISTORY/2026-11-10_tempo_a_eventi_e_mitosi.md`**. **Il tick come scalino** *(Luca `14:05`)*; **due specie di eventi, lo scambio e la nascita** *(Luca `14:18`)*; **l'eta' di un nodo appena nato: i figli ereditano il conteggio del padre, `+1`** *(proposta del guardiano, ORIENTAMENTO di Luca `14:22`, non una decisione)*; **la conservazione locale dell'energia come REQUISITO** *(Luca `14:22`)*: **lo scalino della mitosi come costo locale di un nodo nuovo** *(proposta)*.
 - ### **Le forme del par. `3` restano come sono: NESSUNA scelta.**
+- **(`2026-11-11`) IL QUANTO:** **lo scalino del tempo a scatti come quanto d'azione** *(Luca `21:54`)*, **e la domanda se lo scalino della mitosi sia lo stesso:** vedi `doc/TASK_HISTORY/2026-11-10_tempo_a_eventi_e_mitosi.md`, sez. `8`.

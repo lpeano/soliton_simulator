@@ -69,3 +69,27 @@
 
 1. **Questo file; i rimandi in `doc/PROGETTO_MITOSI.md`** *(una sezione nuova, le forme del par. `3` come sono)*, **`doc/MAPPA.md`** *(voci `21` e `35`)*, **`doc/TASK_HISTORY/2026-11-08_zero_del_vuoto.md`** *(una riga in O-ESP)*; **un paragrafo nella relazione.** **Nessuna voce dell'indice cambia stato.**
 2. **Niente altro finche' Luca non apre la mitosi.**
+
+## 8. IL QUANTO: LO SCALINO DEL TEMPO E' IL QUANTO D'AZIONE *(`2026-11-11`; Luca `21:03` e `21:54`)* -- **SOLO SCRITTURA**
+
+*(Il mandato la chiama «7»: la `7` c'e' gia', ed e' il TODO. Questa e' la `8`; dichiarato.)*
+
+- ### **LA DOMANDA DI LUCA** *(`21:03`)*: **se il flusso di energia fra due nodi e' sempre uguale da un tick all'altro, e' un quanto?**
+- ### **LA RISPOSTA PER IL SIMULATORE DI OGGI** *(lettura del guardiano)*: **no.**
+  - **Il flusso fra due vicini dipende dall'ampiezza, dalla fase e dall'interferenza:** **e' un numero CONTINUO, anche negativo.**
+  - **In uno stato stazionario e' costante nel tempo, ma il suo VALORE dipende dallo stato.** **Un quanto deve essere UNIVERSALE** *(lo stesso per ogni stato)*, **non solo costante.**
+  - **C'e' solo un TETTO: da un nodo non esce piu' di quanto contiene.**
+- ### **LA RISPOSTA PER LA TEORIA DEL TEMPO A SCATTI** *(sez. `1`, Luca `2026-11-10` `14:05`)*: **si', per costruzione.**
+  - **Ogni scatto trasporta sempre la STESSA quantita': lo scalino.**
+  - **Il tempo di un nodo e' il numero dei suoi scatti;** **quindi energia e tempo diventano la stessa cosa contata in due modi.**
+- ### **LA PROPOSTA** *(Luca `21:54`, sulla lettura del guardiano)*: **LO SCALINO DEL TEMPO E' IL QUANTO D'AZIONE, la costante di Planck del modello.** **Con uno scalino `epsilon` e una frequenza di scatti `nu`, l'energia che fluisce per unita' di tempo e' `epsilon nu`: la forma `E = h nu` nasce da sola.**
+- ### **UN'INDICAZIONE DAI NUMERI DI OGGI** *(una STIMA del guardiano, NON una misura)*:
+  - **se il modello a scatti dovesse riprodurre il simulatore attuale, lo scalino sarebbe dell'ordine di `pi` per unita' di norma.**
+  - **Le fonti:**
+    - **l'energia di un quanto di materia: `S/M` fra `3.2` e `4.2`** *(`doc/referti_l2/s5_sorgente_mista.txt` sul ramo laterale; con l'accoppiamento al vuoto `3.175`)*;
+    - **il tetto del triangolo `+3.34` per unita' di norma con O1** *(`s5_triangolo.txt`)*.
+  - **In questa lettura il solitone di `TBS`** *(norma `~1e6`)* **e' un CONDENSATO di circa un milione di quanti, non una particella singola.**
+- ### **LE DOMANDE APERTE** *(senza risposte)*:
+  1. **che cosa diventa un solitone con POCHI quanti;**
+  2. **come lo scalino si lega alla soglia della mitosi** *(sez. `5`: lo scalino della mitosi e' il costo locale di un nodo nuovo)*;
+  3. **se lo scalino del tempo e quello della mitosi sono LO STESSO.**

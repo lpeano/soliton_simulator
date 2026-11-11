@@ -25223,3 +25223,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Il bordo alla fine ha assorbito:** **M `1.016046e+04`, V `8.277039e+03`, E `1.247561e+04`** *(relative a M0, V0, E0: `5.080e-03`, `5.256e-02`, `1.270e-03`)*.
 - **Committati i `20` jsonl e l'indice delle mappe `doc/referti_l2/mappe_indice_C50-0.txt`** *(`python csv/solitone/corsa_accensione.py --indice C50-0`, dalle `21:25:07` alle `21:25:12`)*.
 - ### **Il referto senza singolo** *(`carta_coppia_ss.py`, gia' committato a `e3531a7f`)* **parte DOPO la catena S5.2** *(Luca: una prova breve alla volta)*. **Con quel referto il passo `2` della ROTTA si chiude.**
+
+### 2026-11-11 22:00 -- IL QUANTO DEL TEMPO A SCATTI *(Luca `21:03`, `21:54`; solo scrittura)* [[PIANO-2D-3D]]
+
+- **Nel task history `2026-11-10_tempo_a_eventi_e_mitosi.md`, la sez. `8`** *(il mandato diceva «7»: la `7` e' il TODO)*: **lo scalino del tempo e' il QUANTO D'AZIONE** *(la proposta di Luca)*.
+  - **Nel simulatore di oggi il flusso fra due nodi e' continuo, non un quanto.**
+  - **Nella teoria a scatti lo e' per costruzione, e `E = h nu` nasce da sola.**
+  - **La stima** *(non una misura)*: **lo scalino e' dell'ordine di `pi` per unita' di norma, e il solitone di `TBS` e' un condensato di `~1e6` quanti.**
+  - **Tre domande aperte.**
+- **Un rimando in `doc/PROGETTO_MITOSI.md`, sez. `7`.**
