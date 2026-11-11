@@ -2,6 +2,9 @@
 r"""**S2: LO SPETTRO DI STABILITA' LINEARE DEL VUOTO CON LA LEGGE DI `cs`** *(sul ramo laterale; Luca `2026-11-10` `19:37`; il task history `doc/TASK_HISTORY/2026-11-09_laterale_mb.md`, sez. `28.2`)*. [[PUNTO-FISSO-CS-SOLITONE]]
 
     python csv/solitone/s2_spettro.py > doc/referti_l2/s2_spettro_vuoto_cs.txt
+    python csv/solitone/s2_spettro.py --reazione > doc/referti_l2/s5_vuoto_reazione.txt
+
+**`--reazione`** *(V-R, sez. `31.8`; Luca `2026-11-11` `13:22`)*: **dopo la mappa di S2 (q2), la stessa con la reazione ACCESA (q1: `cs_primo` della legge, `CAMM-FASE-VUOTO`)**; **accanto (L-nuc), la legge del nucleo com'e'** *(`tick.tick_con_cs`)*; **il DEVE (q2) contro il referto di S2; le letture (r1)-(r3).**
 
 **La mappa di un tick nel riferimento che gira col vuoto** *(`phi -> e^{i omega} phi'`)*, **in rappresentazione reale** *(`Re phi`, `Im phi` delle `6` estremita' della cella, `cs` del nodo: `13` reali)*;
 **la risposta a un impulso nel nodo `0` con differenze simmetriche** *(il controllo di linearita' `R(2a)` contro `R(a)`)*, **`A(k)` con `fft2`, gli autovalori per ogni `k`.**
@@ -36,6 +39,10 @@ STABILE = 1e-9                 # ### mio (sez. 28.2): stabile se |lambda|_max - 
 LC_SCAN = (8.5, 17.0, 34.0, 68.0, 136.0, 340.0)   # ### Luca
 S_SCAN = (0.05, 0.15, 0.3)                       # ### Luca
 LAM_SCAN = (6.0, 3.0, 1.0, 0.5, 0.1)             # ### Luca
+REAZIONE = "--reazione" in sys.argv              # ### V-R (sez. 31.8)
+Q2 = [True]                                      # ### (q2) la reazione spenta, come S2; V-R la accende
+TOLL_S2 = 1e-3                                   # ### Luca (V-R): alla terza cifra (mio: 1e-3 relativo)
+REF_S2 = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "doc", "referti_l2", "s2_spettro_vuoto_cs.txt")
 OK = [0, 0]
 FALLITE = []
 
@@ -130,7 +137,11 @@ def main():
                 mot.lambda_c = None
                 TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
                 return st["phi_h"] * np.conj(u) * fattore, None, None, st["psi_h"].copy()
-            with F1.cs_primo_zero(True):
+            if caso == "nuc":
+                # ### (L-nuc, sez. 31.8): la legge del nucleo com'e' -- cs al centro del palindromo a punto fisso, la reazione accesa
+                TK.tick_con_cs(st, mot, par, lc, ())
+                return st["phi_h"] * np.conj(u) * fattore, None, None, st["psi_h"].copy()
+            with F1.cs_primo_zero(Q2[0]):
                 p0 = ph.copy()
                 mot.cs = cs.copy()
                 mot.lambda_c = float(lc)
@@ -148,7 +159,7 @@ def main():
 
         def base(lam_v, lc, caso):
             ph = c * phi_v * math.sqrt(lam_v / LAM)
-            cs = None if caso == "spento" else FP.cs(mot.densita_vuoto((vuoto_con(ph), st)[1]), lc, fp).copy()
+            cs = None if caso in ("spento", "nuc") else FP.cs(mot.densita_vuoto((vuoto_con(ph), st)[1]), lc, fp).copy()
             p1, cf, ci, _ = mappa(ph, cs, lc, 1.0, caso)
             zz = complex(np.vdot(ph, p1))
             u = zz / abs(zz)
@@ -344,6 +355,35 @@ def main():
             t_onda = F1L.pendenza(tt[sel], np.log(D[sel]))
             print("    la differenza ai tick 1, 10, 20, 50, 100: %s; la pendenza di ln dal tick %d al %d: %.5f per tick" % (" ".join("%.3e" % D[t - 1] for t in (1, 10, 20, 50, 100) if t <= ONDA_N), ONDA_DA, ONDA_N, t_onda))
             esito("l'onda piana cresce col tasso dello spettro %.5f entro il %g%%" % (t_oggi, 100 * TOLL_ONDA), abs(t_onda / t_oggi - 1.0) <= TOLL_ONDA, "%.5f, il rapporto %.4f" % (t_onda, t_onda / t_oggi))
+            tab_q1, tab_nuc = [], []
+            if REAZIONE:
+                print("### V-R (sez. 31.8): LA REAZIONE ACCESA (q1: cs_primo della legge, CAMM-FASE-VUOTO col suo punto medio implicito), gli stessi %d punti" % len(punti))
+                Q2[0] = False
+                for nome, lv, lc in punti:
+                    b = base(lv, lc, "cs")
+                    R, dev, _ = risposta(b, lc, "cs")
+                    print("  IL PUNTO %s (q1): cs del vuoto %.10f; omega %.10f; i residui: phi %.3e, cs (F1) %.3e, cs (ist) %.3e; la linearita' %.2e" % (nome, float(b["cs"][0]), b["omega"], b["res_phi"], b["res_cf"], b["res_ci"], dev))
+                    esito("V-R %s (q1): la linearita' < %g" % (nome, TOLL_LIN), dev < TOLL_LIN, "%.2e" % dev)
+                    for caso in ("F1", "ist"):
+                        sp = spettro(R[caso])
+                        d_ = descrivi(sp, "(L-%s, q1)" % caso)
+                        tab_q1.append({"punto": nome, "caso": caso, "max": sp["max"], "d": d_, "pf": max(b["res_phi"], b["res_cf"], b["res_ci"]) <= TOLL_PF})
+                        del sp
+                    del R
+                Q2[0] = True
+                print("### V-R, ACCANTO (mio, sez. 31.8): (L-nuc), la legge del nucleo com'e' (tick.tick_con_cs: cs al centro a punto fisso, la reazione accesa); 12 reali per cella")
+                for nome, lv, lc in punti:
+                    try:
+                        b = base(lv, lc, "nuc")
+                        R, dev, _ = risposta(b, lc, "nuc")
+                        sp = spettro(R["spento"])
+                        print("  IL PUNTO %s (L-nuc): omega %.10f; il residuo di phi %.3e; la linearita' %.2e" % (nome, b["omega"], b["res_phi"], dev))
+                        d_ = descrivi(sp, "(L-nuc)")
+                        tab_nuc.append({"punto": nome, "max": sp["max"], "res": b["res_phi"], "dev": dev, "d": d_})
+                        del R, sp
+                    except AssertionError as ex:
+                        print("  IL PUNTO %s (L-nuc): ### ALZA: %s" % (nome, str(ex)[:300]))
+                        tab_nuc.append({"punto": nome, "max": float("nan"), "res": float("nan"), "dev": float("nan"), "d": None})
     # ================================================================== la tabella e le letture
     print("-" * 130)
     print("  LA MAPPA:")
@@ -362,6 +402,47 @@ def main():
         print("  LA LETTURA: (w3) nella mappa esistono punti stabili (qui sopra): una MAPPA, nessuna scelta")
     else:
         print("  LA LETTURA: (w4) instabile in tutta la mappa: il vuoto con questa legge del tempo locale e' instabile per costruzione. FERMO: la decisione e' di Luca")
+    if REAZIONE:
+        print("-" * 130)
+        rif = {}
+        with open(REF_S2, encoding="utf-8") as f:
+            dentro = False
+            for riga in f:
+                if riga.startswith("  LA MAPPA:"):
+                    dentro = True
+                    continue
+                if dentro and len(riga) > 20:
+                    resto = riga[18:].split()
+                    if len(resto) >= 6 and resto[3] in ("L-F1", "L-ist"):
+                        rif[(riga[2:18].strip(), resto[3][2:])] = float(resto[5])
+        q2 = {(r_["punto"], r_["caso"]): math.log(r_["max"]) for r_ in tab_}
+        sc = max(abs(q2[k] / rif[k] - 1.0) for k in q2)
+        esito("V-R (q2): i numeri di S2 alla terza cifra (%d righe del referto di S2, entro %g relativo)" % (len(rif), TOLL_S2), sc < TOLL_S2, "%.3e" % sc)
+        sf = abs(q2[("oggi", "F1")] / rif[("Lambda_c 8.5", "F1")] - 1.0)
+        esito("V-R: il controllo sa dire di no: oggi (L-F1) contro la riga Lambda_c 8.5 (L-F1) di S2 entro %g" % TOLL_S2, sf < TOLL_S2, "%.3e" % sf, deve=False)
+        print("  V-R, LA MAPPA (ln |lambda|_max per tick): (q2) come S2, (q1) la reazione accesa; (L-nuc) accanto")
+        print("  %-16s %6s %13s %13s %10s %9s %8s %13s" % ("il punto", "caso", "(q2)", "(q1)", "q1/q2", "|k| q1", "dir q1", "(L-nuc)"))
+        nuc = {r_["punto"]: r_ for r_ in tab_nuc}
+        for r_ in tab_q1:
+            k_ = (r_["punto"], r_["caso"])
+            l1 = math.log(r_["max"])
+            ln_ = nuc[r_["punto"]]["max"]
+            print("  %-16s %6s %13.6e %13.6e %10.4f %9.5f %8.2f %13s" % (r_["punto"], "L-" + r_["caso"], q2[k_], l1, l1 / q2[k_], r_["d"]["k"], r_["d"]["dir"],
+                  ("%.6e" % math.log(ln_)) if ln_ == ln_ else "ALZA"))
+        stab = [r_["max"] - 1.0 <= STABILE for r_ in tab_q1]
+        rap = [math.log(r_["max"]) / q2[(r_["punto"], r_["caso"])] for r_ in tab_q1]
+        if all(stab):
+            print("  LA LETTURA: (r1) STABILE in tutta la mappa con la reazione: l'instabilita' di S2 era tutta del senso unico; il vuoto che comanda l'orologio, se paga la sua reazione, regge")
+        elif not any(stab) and all(abs(x - 1.0) <= 0.10 for x in rap):
+            print("  LA LETTURA: (r3) instabile come S2 (q1/q2 fra %.4f e %.4f, entro il 10%%): la reazione non conta, e il problema e' che sia il vuoto a comandare" % (min(rap), max(rap)))
+        elif not any(stab) and all(x < 1.0 for x in rap):
+            print("  LA LETTURA: (r2) instabile, ma piu' lento di S2 in ogni punto (q1/q2 fra %.4f e %.4f): la reazione aiuta e non basta" % (min(rap), max(rap)))
+        else:
+            print("  LA LETTURA: caso intermedio (stabili %d su %d; q1/q2 fra %.4f e %.4f)" % (sum(stab), len(stab), min(rap), max(rap)))
+        nn = [r_ for r_ in tab_nuc if r_["max"] == r_["max"]]
+        print("  (L-nuc), accanto: %d punti su %d calcolati; instabili %d; ln |lambda|_max fra %s" % (len(nn), len(tab_nuc), sum(1 for r_ in nn if r_["max"] - 1.0 > STABILE),
+              ("%.4e e %.4e" % (min(math.log(r_["max"]) for r_ in nn), max(math.log(r_["max"]) for r_ in nn))) if nn else "-"))
+        print("  (V-R non riapre F1-F4 e non cambia la ROTTA: un'informazione per Luca)")
     print("=" * 130)
     print("ESITO: %d/%d controlli come devono; fallite: %d %s; %.0f s in tutto" % (OK[0], OK[1], len(FALLITE), FALLITE, time.time() - t00))
     return 0 if not FALLITE else 1
