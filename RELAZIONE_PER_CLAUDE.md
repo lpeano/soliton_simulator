@@ -25285,3 +25285,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Per `C50-0` non c'e' un `mappe_leggere.npz` vecchio:** **il confronto non si puo' fare** *(dichiarato nel referto)*; **la cartella `campo_C50-0/` e' nuova.**
   - **I referti:** `doc/referti_l2/mappe_leggere_intere_<corsa>.txt`.
 - **Sul laterale, S5.3** *(Luca `23:42`-`23:45`)*: **la sez. `32` del task history** *(`31009be8`)*; **il codice di A** *(`a5f9a514`: la forma (a) nel banco del lapse, `--lapse3` con la soglia delle basi `1e-9`)*; **le due corse di A in parallelo** *(il banco di oggi e la forma (a))*.
+
+### 2026-11-12 01:00 -- S5.3 SUL LATERALE: A CON LA FORMA (a) INTERROTTA, UN MIO ERRORE DI PROGETTO; G1 PRONTO; LA TABELLA DELLE LEGGI PROVATE [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **A col banco di oggi** *(`--lapse3`, la soglia delle basi `1e-9`)*: **in corsa dalle `00:16:50`, a `a5f9a514`.**
+- ### **A con la forma (a): INTERROTTA** *(`00:16:50`-`00:21:32`; registrata a `1000a48f`)*: **la base a `(rho_0 1e-4, rho_0/rho_c 0.1, s 0.15)` non ha il punto fisso di `cs` con la forma (a)** *(`1000` giri, `3.0e-03`)*, **mentre senza la forma (a) converge in `1` giro.**
+  - ### **UN MIO ERRORE nella sez. `32.1` del laterale:** **avevo scritto che col `cs` congelato la fase della forma (a) e' globale. NON lo e': agisce solo su `psi`, e `psi` e' accoppiato a `phi`.**
+  - **La cura** *(due commit, dopo la fine della corsa col banco di oggi, che usa lo stesso file)*: **le basi senza punto fisso tolte e dichiarate; il congelato della forma (a) con la sua fase statica.**
+- **G1:** **il progetto** *(`f01c2c80`)* **e il codice** *(`0c7abd11`)*; **la corsa dopo A, una prova alla volta.**
+- **T:** **`doc/LEGGI_PROVATE.md` sul laterale** *(`e1045dde`)*:
+  - **la legge di `cs` da `Lambda` e F1: SCARTATE** *(proposto)*;
+  - **M-rho istantanea: SCARTATA** *(proposto)*;
+  - **il lapse `N(rho)` e la forma (a): CANDIDATE.**
