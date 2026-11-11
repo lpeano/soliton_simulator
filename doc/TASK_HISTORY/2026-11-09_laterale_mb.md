@@ -1606,3 +1606,13 @@
 | **T-L3** | **INTERROTTA:** **il punto fisso di `cs` del banco non converge nelle basi** |
 | **T-L4** | **`2/6`:** **il verso si rovescia col gradiente; con O1 il pacchetto va verso `N` piu' ALTO;** **l'ampiezza `0.874` della prevista** |
 | **T-L5** | **FUORI** *(la voce aperta)* |
+
+### 31.21 S5.2-bis, PUNTO 1: T-L2 REGISTRATO *(Luca `2026-11-11` `22:26`-`22:28`)*
+
+- ### **GLI ERRORI DEL GUARDIANO (n.138)** *(scritti da Luca)*:
+  - **(a)** **il criterio «l'escursione scende come `dtau^2`» era sbagliato in partenza:** **`s` e' FISICO** *(Luca)*: **dimezzarlo cambia la fisica, non solo la precisione;** **non puo' controllare l'ordine dello schema;**
+  - **(b)** **il criterio «senza reazione, la pendenza deve essere diversa da zero» non era abbastanza sensibile:** **su `5000` tick nemmeno senza reazione c'e' deriva.**
+- ### **I due controlli NON si ridichiarano «passati».** **I FATTI:**
+  - **col lapse nessuna deriva in tutti e tre i rapporti** *(la pendenza a `1.89`, `0.48`, `1.01` errori)*, **le norme entro `3.6e-14`;**
+  - **senza reazione l'escursione di `E_N` e' `27` volte piu' grande** *(`1.06e+04` contro `3.84e+02` a `r = 1e-2`)*: **un'OSSERVAZIONE, non un criterio scritto prima.**
+- **L'ordine del mandato:** **1, 2** *(T-L4b)*, **3** *(T-L3 rifatta)*, **4** *(lo scarto del `13%`)*, **5** *(T-L3 con la forma nuova, solo se T-L4b da' (f1))*, **6** *(T-L5)*; **dopo ogni punto commit e push** *(il riavvio forzato di Windows dopo mezzanotte)*; **niente cicli di attesa.**
