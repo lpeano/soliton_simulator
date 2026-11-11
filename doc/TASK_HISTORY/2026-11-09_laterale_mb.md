@@ -1161,3 +1161,36 @@
   - **(m4)** **il fondo uniforme non e' un punto fisso:** **FERMO prima dello spettro.**
 - **Il costo** *(stima, `~0.14` s per tick da S2)*: **`~160` tick per linearizzazione, `~103` linearizzazioni: ~`40` minuti, un processo.** **Il referto `doc/referti_l2/s4_spettro_materia_mrho.txt`; lo script `csv/solitone/s4_materia_mrho.py`.**
 - ### **DOPO S4: FERMO.** **La scelta di `rho_c` e il passo dopo sono di Luca.**
+
+### 30.5 L'ESITO DI S4 *(la corsa dalle `09:54:51` alle `10:28:39` del `2026-11-11`, a `e51dd24c`; il referto `doc/referti_l2/s4_spettro_materia_mrho.txt`; `102/116`, exit `1`)*: **LA LEGGE SPENTA NON E' UNITARIA (L'INSTABILITA' DI MODULAZIONE ATTESA, A `rho_0 = 1`): (m1)-(m3) NON SI LEGGONO. M-rho INSTABILE IN `45` PUNTI SU `45`. E UN DIFETTO MIO NEL CONTROLLO `A = F + P Q`. FERMO.**
+
+- ### **Che cosa passa:**
+  - **ogni base e' un punto fisso** *(il residuo piu' grande `7.6e-15`)*: **NON (m4);**
+  - ### **il vuoto con M-rho e' unitario** *(`rho_0 = 0`: `1.8e-11`, `1.9e-11`, `1.2e-11` a `s` `0.05`, `0.15`, `0.3`)*: **il vuoto stabile per costruzione, alla prova lineare;**
+  - **il fattore `1.001`** *(entro `1.7e-11`)* **e il DEVE FALLIRE;**
+  - **la linearita' e la traslazione;**
+  - ### **l'onda piana:** **al punto piu' instabile della mappa** *(`rho_0 1`, `rho_0/rho_c 1e-3`, `s 0.3`, `k (4, 2)`)* **cresce a `1.467927e-02` per tick contro lo spettro `1.467819e-02`** *(il rapporto `1.0001`)*.
+- ### **Che cosa fallisce, `14`:**
+  - ### **LA LEGGE SPENTA, `6` su `9`:**
+    - **a `rho_0 = 1`, nettamente:** **`ln |lambda|_max` `2.601e-03`, `7.808e-03`, `1.562e-02` per tick a `s` `0.05`, `0.15`, `0.3`;** **a `|k| 0.4987`** *(`12` `k` equivalenti)*, **l'autovettore per il `77%` in `psi`.** ### **E' l'instabilita' di MODULAZIONE del fondo di materia, SENZA orologio, che avevo scritto come attesa in 30.4:** **la materia del solitone ha un'auto-fase focalizzante.**
+    - **a `rho_0 = 0.01`** *(`s 0.15`, `0.3`)*: **`2.4e-09` e `2.3e-09`, a `k = 0`** *(un solo `k`; il `96%`-`99%` in `psi`)*; **a `rho_0 = 1e-4`, `s 0.3`: `1.03e-10`, appena sopra la soglia.** **Non so se siano modi veri o il modo neutro di `k = 0` arrotondato** *(come i `1.000001` di S2 a `k = 0`)*.
+  - ### **`A = F + P Q`, `8` su `45`:** **tutti a `rho_0 = 1`, `s 0.15` e `0.3`** *(fino a `8.5e-03`)*; **gli altri `37` passano** *(fino a `3e-10`)*. ### **UN DIFETTO MIO, probabilmente** *(un'ipotesi, NON verificata)*: **`q` e' una combinazione della COPPIA DEGENERE, e la base della coppia viene da `np.linalg.eig`, che dentro un autospazio degenere non e' unica.** **La base di M-rho e quella del `cs` congelato possono avere un `q` DIVERSO** *(lo stesso autospazio, un altro vettore)*: **dove la non linearita' conta** *(`rho_0 = 1`)*, **`F` e' linearizzata attorno a un altro fondo.** ### **Quindi a `rho_0 = 1` la colonna «M-rho - congelato» e la scomposizione per bande NON valgono;** **lo spettro di ciascuna mappa vale per il SUO fondo.** **La cura** *(da decidere)*: **fissare `q` in modo univoco dentro la coppia** *(per esempio con gli autostati di `sigma_z`, come il ritratto di `griglia.json`)*.
+- ### **LA MAPPA** *(`ln |lambda|_max` per tick, il referto)*: **M-rho e' instabile in `45` punti su `45`.** **Dove la legge spenta e il congelato sono unitari** *(`rho_0` `1e-4` e `1e-2`)*, **l'instabilita' viene dall'anello di `cs`:**
+
+| `rho_0 / rho_c` | `s 0.05` | `s 0.15` | `s 0.3` |
+|---|---|---|---|
+| `1e-3` | `3.49e-06` | `3.11e-05` | `1.20e-04` |
+| `1e-2` | `3.39e-05` | `3.02e-04` | `1.17e-03` |
+| `1e-1` | `2.59e-04` | `2.31e-03` | `8.95e-03` |
+| `1` | `3.92e-04` | `3.52e-03` | `1.39e-02` |
+| `10` | `2.10e-05` | `1.89e-04` | `7.56e-04` |
+
+  - ### **Un fatto della tabella:** **a `rho_0 = 1e-4` e a `rho_0 = 1e-2` il tasso e' lo STESSO alla terza cifra** *(per esempio `3.49006e-06` e `3.48964e-06`; `3.51812e-03` e `3.51813e-03`)*: **dipende da `rho_0 / rho_c` e da `s`, NON dalla quantita' di materia.** **Anche una materia rarissima destabilizza, se il rallentamento che comanda e' forte.**
+  - **Il modo:** **`|k|` fra `3.18` e `4.19`** *(vicino all'angolo `4 pi / 3` di S2, non sempre su di esso)*; **l'autovalore COMPLESSO** *(il modo oscilla)*; ### **l'autovettore e' quasi tutto `phi`** *(la frazione in `psi` `0.000`-`0.01`; `0.41`-`0.50` solo a `rho_0/rho_c = 1e-3`, `rho_0 = 1e-2`)*.
+  - ### **Il meccanismo, dove `A = F + P Q` regge** *(`rho_0 1e-2`, `rho_0/rho_c 1`, `s 0.05`: lo scarto `3.1e-10`; `g(lambda) = 1.0000`)*: **il `96%` dell'autovettore sta in UNA banda di `phi`** *(`omega_b -0.0392`)*, **e quella banda da' il contributo maggiore a `g`** *(`+1.29`, contro `-0.24` della banda opposta)*: **il `cs` comandato da `rho` muove la fase di `phi`** *(`|P| = 5.1`)*, **e `phi` torna su `rho` attraverso la fase della materia** *(`CAMM-MATERIA-VUOTO`)*. **Una lettura mia della matrice, non una dimostrazione.**
+  - **A `rho_0 = 1` la tabella e' dominata dall'instabilita' di modulazione** *(la legge spenta: `2.6e-3`-`1.56e-2`)*; **M-rho la ABBASSA in `14` punti su `15`** *(sale solo a `rho_0/rho_c 1`, `s 0.3`: `+6.2e-03`)* *(la differenza M-rho meno congelato e' negativa, ma vedi il difetto sopra)*.
+- ### **LE LETTURE COL CRITERIO SCRITTO (30.4):** **la legge spenta non e' unitaria, quindi (m1)-(m3) NON si leggono.** **Fuori dal criterio, i fatti:** **M-rho e' instabile in tutta la mappa, anche dove la materia senza orologio e' stabile;** **il tasso va col rapporto `rho_0/rho_c` e con `s`, ed e' massimo a `rho_0/rho_c ~ 1`.**
+- ### ⛔ **FERMO** *(il mandato: «dopo S4: fermo»; e i DEVE falliti si committano e ci si ferma)*. **Le domande a Luca:**
+  1. **la cura del mio difetto** *(`q` univoco dentro la coppia)* **e il rifacimento dei punti a `rho_0 = 1`?**
+  2. **la legge spenta a `rho_0 = 1` e' instabile per modulazione:** **il riferimento giusto per M-rho e' il `cs` congelato allo stesso `cs`, non la legge spenta?** *(la sez. 30 l'ha gia' misurato accanto)*
+  3. **M-rho istantanea ha un anello in fase attraverso la fase della materia:** **la scelta di `rho_c` e il passo dopo sono suoi.**
