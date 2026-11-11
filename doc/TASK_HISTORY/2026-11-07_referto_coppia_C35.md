@@ -254,3 +254,45 @@
   **La pendenza `+1.1483 +- 0.2019` per `100000` tick** *(`5.7` errori)*. ### **Col criterio scritto: l'ampiezza un CASO INTERMEDIO, e la media non scende (non d3).** ### **Ma il caso non e' fra le letture scritte, e lo dico:** **l'ampiezza SI STRINGE** *(`0.76` -> `0.29` -> `0.15`)* **e la media SALE** *(`36.53` -> `37.55` -> `37.98`)*: **la coppia in opposizione si ALLONTANA piano e si calma** *(una lettura mia, non di Luca: nessuna delle tre la prevede)*.
 - ### **LA PRIMA LETTURA DEL GUARDIANO** *(«`x` da `16.8`-`17.7` a `15.6`-`18.2`», sez. `15`)* **era su `x` dei campioni, il centro PERIODICO di tutta la `rho`, non sulla distanza:** **accanto, `x` e `d/2` agli stessi istanti** *(il referto: per `C35-pi` `x` `17.69`, `17.02`, `17.93`, `16.72`, `18.43` contro `d/2` `17.50`, `18.80`, `18.75`, `18.86`, `18.96`)*: ### **`x` oscilla, `d/2` cresce piano:** **la grandezza giusta smentisce «l'oscillazione si allarga».**
 - **(r-b) e' chiuso.** **Il passo successivo della coda: `C50-0`.**
+
+## 18. IL REFERTO DI `C50-0` SENZA IL SINGOLO DI RIFERIMENTO *(Luca `2026-11-11` `09:22`)*: **LE PREMESSE, IL PROGETTO, LE LETTURE -- PRIMA DEL CODICE**
+
+### 18.1 LE PREMESSE *(dal codice e dai jsonl)*
+
+- **`C50-0`:** **`d 50`, `segno +1`** *(`coppia` nel jsonl)*; **il bordo `R_A 55`, `g_max 0.03`, `c0` `(106.374, 81.363)`;** **`L 162`; `200000` tick** *(la corsa finisce verso le `16:40`, stima)*.
+- **La decisione di Luca:** **il referto SENZA singolo; il singolo col bordo di `C50` NON si fa ora** *(dopo l'unificazione, se servira')*. **`carta_coppia.py` rifiuta `C50-0`** *(`RIF`)*.
+- ### **IL CODICE: uno script NUOVO, `csv/solitone/carta_coppia_ss.py`** *(«senza singolo»)*, **che IMPORTA le funzioni di `carta_coppia.py`** *(`carica_mappe`, `centri_semipiani`, `vettore`, `senza_nyquist`, `r180`, `pendenza`)* **senza toccarlo:** **cosi' i referti (r-b) di `C35` restano rigirabili al loro blob.**
+- **Le mappe di `C50-0` si leggono dal loro indice:** **a corsa chiusa `python csv/solitone/corsa_accensione.py --indice C50-0`** *(come `7cd561f3` per `S162` e `C35-pi`)*.
+
+### 18.2 CHE COSA SI TOGLIE DALLA CARTA *(ogni pezzo chiede il singolo)*
+
+| il pezzo di `carta_coppia.py` | perche' chiede il singolo |
+|---|---|
+| **R0** | **confronta il singolo della coppia col riferimento** |
+| **A0, A0-F** | **la coppia sintetica e' il singolo piu' il singolo traslato** |
+| **`d` dalle due gobbe** | **l'adattamento usa la forma del singolo allo stesso `t`** |
+| **la forza** *(`d''` per blocco, `F = mu d''`)* | **si calcola sulle due gobbe** |
+| **`2 |dx|` del singolo** *(la colonna)* | **e' lo spostamento del singolo da solo** |
+| **le colonne `v+`, `v-` del singolo nei centri del vuoto** | **sono del singolo** |
+| **C0, C0-F, il difetto di sovrapposizione `D`, la lente, i profili «singoli»** | **sottraggono i due singoli** |
+| **C-T, C-T-F** | **lo stato del singolo a `10000`** |
+| **E-0 ed `E_int`** | **`E[C] - 2 E[S] + E[0]`** |
+| **FA0 e la fase relativa** | **il riferimento e' `psi` del singolo a `t 0`** |
+| **`oltre`** *(la coppia oltre il `t` comune)* | **non c'e' un `t` comune: la corsa intera** |
+
+### 18.3 CHE COSA RESTA, E CHE COSA SI AGGIUNGE
+
+- **Resta** *(chiede solo la coppia)*: **`d` dai semipiani, l'angolo, il baricentro, `(M1 - M2)/M` a blocchi di `500`; i centri del vuoto della coppia** *(A-V, A-V-F, `v+`, `v-`, la materia)*; **l'asimmetria di scambio** *(A-S-I, A-S-I-F, A-S)*.
+- ### **U2 per `C50-0`:** **la distanza `d` dai semipiani per terzo di corsa** *(i confini `66667`, `133333` tick)*: **min, max, media, ampiezza** *(la deviazione standard)*, **periodo, con gli errori di Sokal; la pendenza su tutta la corsa** *(il calcolo di `carta_coppia.u2`, rifatto in una funzione che RITORNA le righe)*.
+- ### **ACCANTO, nella stessa tabella: `C35-0` e `C35-pi`**, **RICALCOLATI con la stessa funzione dalle loro mappe:** **DEVE PASSARE: le loro righe = quelle dei referti (r-b)** *(`coppia_C35-0_rb.txt`, `coppia_C35-pi_rb.txt`)* **al carattere;** **DEVE FALLIRE: le righe di `C35-0` contro il referto di `C35-pi`.**
+- ### **IL BILANCIO del bordo:** **la materia, il vuoto e l'energia assorbiti** *(`M_ass/M0`, `V_ass/V0`, `E_ass/E0` dal campo `bordo` dei jsonl: cumulativi)*, **ai tick `50000`, `100000`, `150000`, `200000`, per `C50-0`, `C35-0`, `C35-pi`, `S162`.**
+
+### 18.4 LE LETTURE *(di Luca; i dettagli miei, dichiarati)*
+
+- **Le medie per terzo `m1`, `m2`, `m3` con gli errori `e1`, `e2`, `e3`; le ampiezze `a1`, `a2`, `a3` con gli errori; la pendenza `p +- ep`.**
+- **(c2)** **la coppia si ALLONTANA: `m3 - m1 > 3 sqrt(e1^2 + e3^2)`;**
+- **(c3)** **la coppia si AVVICINA: `m1 - m3 > 3 sqrt(e1^2 + e3^2)`;**
+- **(c1)** **la coppia resta LEGATA: ne' (c2) ne' (c3), E la pendenza entro `3 ep`, E l'ampiezza limitata** *(mio: `a3 - a1 <= 3 sqrt(ea1^2 + ea3^2)`)*;
+- **altrimenti: caso intermedio, scritto coi numeri.**
+- **Accanto, il confronto QUALITATIVO con `C35-0`** *(il battimento lento, (d2))* **e `C35-pi`** *(si allontana e si calma)*: **senza estrapolare.**
+- ### **Con il referto di `C50-0` committato, il passo `2` della ROTTA e' CHIUSO: lo scrivo, e mi FERMO.** **Il passo `3`** *(l'unificazione)* **parte col mandato del guardiano.**
