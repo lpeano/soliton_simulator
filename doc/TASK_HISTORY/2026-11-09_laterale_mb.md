@@ -1591,3 +1591,18 @@
   - **Accanto: `N = 1`, l'escursione `2.77e+02`** *(il lapse a `r = 1e-2` `1.39` volte tanto)*; **M-rho istantanea: l'escursione `1.00e+04`** *(`26` volte il lapse)*, **ma la pendenza a `0.31` errori.**
   - ### **FALLISCE IL DEVE FALLIRE:** **senza la reazione la pendenza e' a `0.69` errori** *(il criterio «nessuna deriva» non la vede)*, **MA l'escursione e' `1.06e+04`, `27` volte quella col lapse, e l'energia finisce `+0.26%` sopra l'inizio.** ### **Il criterio della pendenza con l'errore di Sokal e' troppo debole per questa differenza** *(`tau_int` `25`: le oscillazioni lente gonfiano l'errore)*: **lo dico, non lo cambio.**
 - ### **T-L3: INTERROTTA, exit `1`** *(dalle `21:54:18` alle `21:55:05`, a `a82ca3d0`; `doc/referti_l2/s5_lapse_spettro.txt`)*: **il punto fisso di `cs` del banco NON converge in `120` giri** *(l'ultimo scarto `4.224e-04`)* **gia' nel calcolo delle basi, prima di qualunque spettro.** **Il referto non dice a quale punto** *(un difetto dello strumento)*. **Da capire: dove** *(probabilmente `rho_0 / rho_c` grande, dove `N'` e' forte)* **e se e' un risultato o un difetto del banco.**
+- ### **T-L4: `2/6`, exit `1`** *(dalle `21:55:05` alle `21:56:02`, a `a82ca3d0`; `doc/referti_l2/s5_lapse_caduta.txt`)*:
+  - **La coppia a `Gamma`: `eps = 0.4767266` per tick, degenere a `5.6e-17`;** **le due bande: `d2 eps/dk2 = -0.05923`** *(la CIMA della banda: una massa efficace NEGATIVA)*, **`d eps/d cs = +3.172`;** **il peso di `q` a `k = dk` `0.898` e `0.102`.**
+  - ### **IL VERSO, con O1: il pacchetto va verso `N` piu' ALTO** *(il tempo piu' VELOCE)* **per tutti e quattro i `gamma`;** **col gradiente rovesciato il verso si rovescia** *(PASSA)*; **l'accelerazione va come `gamma`** *(`2.205e-05` e `4.410e-05`)*.
+  - ### **FALLISCE l'ampiezza:** **la misurata e' `0.8735` della prevista, la stessa per tutti e quattro i `gamma`** *(`2.205e-05` contro `2.525e-05` a `gamma 0.01`)*: **uno scarto SISTEMATICO del `13%`, non rumore.** **Non interpretato** *(candidati da controllare: il pacchetto largo `8` non e' a `k = 0`; la parabola su `200` tick; la previsione al primo ordine nel gradiente)*.
+  - **O4, solo previsto:** **una pendenza costante non da' forza; resta un termine `~ (a^2/4) lapl(cs)`.**
+  - **Un fatto da dire:** **con O1 la materia della banda dei solitoni CADE verso il tempo piu' veloce** *(la massa efficace e' negativa e `d eps / d cs > 0`)*: **l'opposto della gravita'.**
+- ### ⛔ **S5.2 FINITA, CON DEVE FALLITI: FERMO.** **La tabella delle prove:**
+
+| la prova | l'esito |
+|---|---|
+| **T-L1** | **`2/2`:** **il banco = il tick di oggi al bit sul vuoto; calmo** |
+| **T-L2** | **`6/8`:** **nessuna deriva col lapse, le norme `3.6e-14`;** **FALLISCE `dtau^2`** *(il rapporto `1.82`)*; **FALLISCE il DEVE FALLIRE senza reazione** *(la pendenza non la vede; l'escursione `27` volte piu' grande)* |
+| **T-L3** | **INTERROTTA:** **il punto fisso di `cs` del banco non converge nelle basi** |
+| **T-L4** | **`2/6`:** **il verso si rovescia col gradiente; con O1 il pacchetto va verso `N` piu' ALTO;** **l'ampiezza `0.874` della prevista** |
+| **T-L5** | **FUORI** *(la voce aperta)* |

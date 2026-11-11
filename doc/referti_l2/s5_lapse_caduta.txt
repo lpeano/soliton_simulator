@@ -1,0 +1,28 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] s5_caduta.py  sha1-BYTE 2ec920b4  committato e pulito
+==================================================================================================================================
+S5.2 T-L4 (sez. 31.19): la caduta; s 0.15; gamma (0.01, -0.01, 0.02, -0.02); sigma 8; rho max 0.001; 200 tick; dk 0.02; h_cs 0.0001
+==================================================================================================================================
+### la coppia piu' alta a Gamma: eps 0.476726628572, 0.476726628572 (la differenza 5.55e-17); q = la prima colonna
+    la banda 0: eps(0) +0.4767266286; d eps/dk -9.7145e-15; d2 eps/dk2 -5.923495e-02; d eps/d cs +3.172173; il peso di q a k = dk 0.8978
+    la banda 1: eps(0) +0.4767266286; d eps/dk -1.3878e-15; d2 eps/dk2 -5.923495e-02; d eps/d cs +3.172173; il peso di q a k = dk 0.1022
+### il pacchetto: centrato sul nodo 40 (i1 0, i2 40), rho max 1.000e-03, la norma 2.321663e-01; |grad N| / gamma = 0.089570 lungo B_0
+  gamma +0.010: lo spostamento lungo B_0 a 50, 100, 200 tick: +0.31200 +0.39194 +0.72414; a misurata +2.205305e-05, prevista +2.524587e-05 (il rapporto 0.8735); la velocita' iniziale +4.172e-06; verso N piu' ALTO
+  DEVE PASSARE: T-L4 gamma +0.010: l'accelerazione = la previsione del raggio entro il 5%                                ### FALLISCE   il rapporto 0.8735
+  gamma -0.010: lo spostamento lungo B_0 a 50, 100, 200 tick: +0.25539 +0.17476 -0.15679; a misurata -2.205697e-05, prevista -2.524587e-05 (il rapporto 0.8737); la velocita' iniziale -2.712e-06; verso N piu' ALTO
+  DEVE PASSARE: T-L4 gamma -0.010: l'accelerazione = la previsione del raggio entro il 5%                                ### FALLISCE   il rapporto 0.8737
+  gamma +0.020: lo spostamento lungo B_0 a 50, 100, 200 tick: +0.34026 +0.50134 +1.16613; a misurata +4.409934e-05, prevista +5.049174e-05 (il rapporto 0.8734); la velocita' iniziale +8.057e-06; verso N piu' ALTO
+  DEVE PASSARE: T-L4 gamma +0.020: l'accelerazione = la previsione del raggio entro il 5%                                ### FALLISCE   il rapporto 0.8734
+  gamma -0.020: lo spostamento lungo B_0 a 50, 100, 200 tick: +0.22719 +0.06544 -0.59838; a misurata -4.410564e-05, prevista -5.049174e-05 (il rapporto 0.8735); la velocita' iniziale -5.305e-06; verso N piu' ALTO
+  DEVE PASSARE: T-L4 gamma -0.020: l'accelerazione = la previsione del raggio entro il 5%                                ### FALLISCE   il rapporto 0.8735
+  DEVE PASSARE: T-L4: col gradiente rovesciato il verso si rovescia (gamma +0.01 contro -0.01)                           PASSA   +2.205e-05, -2.206e-05
+  DEVE PASSARE: T-L4: col gradiente rovesciato il verso si rovescia (gamma +0.02 contro -0.02)                           PASSA   +4.410e-05, -4.411e-05
+  O4 (solo previsto, sez. 31.19): con lo zero locale una pendenza costante di N non da' potenziale; la forza lineare sparisce, resta un termine ~ (a^2/4) lapl(cs)
+==================================================================================================================================
+ESITO: 2/6 controlli come devono; fallite: 4 ["T-L4 gamma +0.010: l'accelerazione = la previsione del raggio entro il 5%", "T-L4 gamma -0.010: l'accelerazione = la previsione del raggio entro il 5%", "T-L4 gamma +0.020: l'accelerazione = la previsione del raggio entro il 5%", "T-L4 gamma -0.020: l'accelerazione = la previsione del raggio entro il 5%"]; 55 s in tutto
