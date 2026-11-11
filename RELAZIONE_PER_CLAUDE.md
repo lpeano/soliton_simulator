@@ -25027,3 +25027,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Per la ROTTA il passo `1` e' chiuso:** **(w3) non c'e', quindi F1-F4 si archiviano.**
   - **M-rho e M-Phi** *(sez. `29` del laterale)* **sono le candidate naturali per (w4); la scelta e' di Luca.**
   - **Il passo `2` e' `C50-0`, in corsa.**
+
+### 2026-11-11 09:55 -- DUE DECISIONI DI LUCA NELLA ROTTA: S4 (09:17) E IL REFERTO DI `C50-0` SENZA SINGOLO (09:22) *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]] [[VUOTO-SUL-FONDO]]
+
+- **S4, sul laterale** *(Luca `09:17`)*: **la legge M-rho ha un'instabilita' nella materia?** **Solo uno studio di stabilita' lineare attorno a un fondo di materia uniforme; nessuna modifica al nucleo; l'ordine della ROTTA non cambia.**
+  - **Il progetto e' nella sez. `30` del task history del laterale** *(`6eb6c747`)*: **il fondo e' `sqrt(rho_0) q`, con `q` la combinazione del solitone BG della coppia piu' alta a `Gamma`** *(`_consolida_B.coppia`, degenere entro `1e-15`)*, **piu' `c F3`, con due fasi.**
+  - ### **Un'attesa scritta prima:** **la materia ha gia' un'auto-fase** *(`alpha = x^2/(1+x^2)`)*: **se e' focalizzante, il fondo uniforme e' instabile per modulazione anche SENZA orologio, e il DEVE «la legge spenta e' unitaria» fallirebbe.**
+  - **Lo script `e51dd24c`** *(la suite `67` su `67`, dalle `09:29:57` alle `09:49:55`)*, **committato SENZA nessuna esecuzione prima** *(il criterio di Luca)*; **la corsa e' partita.**
+- **Il referto di `C50-0` si fa SENZA il singolo di riferimento** *(Luca `09:22`)*; **il singolo col bordo di `C50` e' rimandato a dopo l'unificazione, se servira'.**
+- **La ROTTA:** **al passo `2` il criterio di chiusura e' ora «il referto di `C50-0` committato, SENZA singolo»; nello storico le due righe del `2026-11-11`** *(`09:17` e `09:22`)*.
+- **In coda:** **S4** *(in corsa)*, **poi il progetto del referto di `C50-0`** *(le letture c1-c3 nel task history, PRIMA del codice)* **e il codice; la corsa finisce verso le `16:40`** *(stima)*.
