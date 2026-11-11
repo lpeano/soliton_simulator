@@ -25037,3 +25037,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il referto di `C50-0` si fa SENZA il singolo di riferimento** *(Luca `09:22`)*; **il singolo col bordo di `C50` e' rimandato a dopo l'unificazione, se servira'.**
 - **La ROTTA:** **al passo `2` il criterio di chiusura e' ora «il referto di `C50-0` committato, SENZA singolo»; nello storico le due righe del `2026-11-11`** *(`09:17` e `09:22`)*.
 - **In coda:** **S4** *(in corsa)*, **poi il progetto del referto di `C50-0`** *(le letture c1-c3 nel task history, PRIMA del codice)* **e il codice; la corsa finisce verso le `16:40`** *(stima)*.
+
+### 2026-11-11 10:50 -- S4 SUL LATERALE: `102/116`, FERMO -- LA MATERIA E' INSTABILE PER MODULAZIONE ANCHE SENZA OROLOGIO; M-rho INSTABILE OVUNQUE; UN DIFETTO MIO *(la regola `2`)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **S4** *(`3a13c64f`; lo script `e51dd24c`; dalle `09:54:51` alle `10:28:39`)*: **lo spettro lineare di un fondo uniforme di materia** *(la combinazione del solitone BG)* **piu' il vuoto `c F3`, con M-rho istantanea, con la legge spenta** *(`cs = s`)*, **e col `cs` congelato.**
+- **Passano:**
+  - **le basi sono punti fissi** *(`7.6e-15`)*;
+  - ### **il vuoto con M-rho e' unitario** *(`1.2e-11`-`1.9e-11`)*: **stabile per costruzione;**
+  - **l'onda piana cresce col tasso dello spettro** *(il rapporto `1.0001`)*.
+- ### **Fallisce il DEVE della legge spenta:** **a `rho_0 = 1` la materia SENZA orologio e' instabile per MODULAZIONE** *(`2.6e-3`-`1.56e-2` per tick, `|k| 0.4987`, il `77%` in `psi`)*. **Lo avevo scritto come attesa:** **l'auto-fase della materia e' focalizzante.** **Quindi (m1)-(m3) NON si leggono.**
+- ### **I fatti fuori dal criterio:**
+  - **M-rho e' instabile in `45` punti su `45`, anche dove la materia senza orologio e' stabile** *(`rho_0` `1e-4` e `1e-2`)*.
+  - **Il tasso dipende da `rho_0 / rho_c` e da `s`, non da `rho_0`:** **da `3.5e-6`** *(rapporto `1e-3`, `s 0.05`)* **a `1.4e-2`** *(rapporto `1`, `s 0.3`)*.
+  - **Il modo e' quasi tutto `phi`, vicino all'angolo della zona** *(`|k|` `3.2`-`4.2`)*, **e oscilla.**
+  - **Il meccanismo, dove il controllo regge:** **una banda di `phi`; il `cs` comandato da `rho` muove la fase di `phi`, e `phi` torna su `rho` attraverso la fase della materia.**
+- ### ⚠ **UN DIFETTO MIO:** **il controllo `A = F + P Q` fallisce in `8` punti, tutti a `rho_0 = 1`.**
+  - **L'ipotesi** *(non verificata)*: **il `q` del fondo viene da una coppia DEGENERE via `eig`, quindi non e' univoco: il `cs` congelato puo' essere linearizzato attorno a un altro fondo.**
+  - **Le conseguenze:** **a `rho_0 = 1` la differenza M-rho meno congelato e le bande non valgono.**
+  - **La cura da decidere:** **un `q` univoco dentro la coppia.**
+- **FERMO sul laterale, tre domande a Luca** *(sez. `30.5`)*: **la cura del difetto; quale riferimento usare** *(la legge spenta o il `cs` congelato)*; **la scelta di `rho_c`.**
