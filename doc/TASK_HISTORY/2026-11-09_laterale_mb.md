@@ -1726,3 +1726,34 @@
   - ### **LA LETTURA SCRITTA: (m4) il fondo uniforme non e' un punto fisso: FERMO prima dello spettro.** **Lo spettro col banco di oggi NON e' stato calcolato.**
   - **Cosa non so** *(e non scelgo io)*: **se `2.5e-10` sia un punto fisso mancato o l'arrotondamento di una coppia quasi degenere** *(la soglia `1e-12` e' quella di S4.0, scritta per i fondi senza lapse)*. **Allargare la soglia sarebbe tarare un numero: la decisione e' di Luca.**
   - **Per il mandato:** **il punto 3 si ferma qui; i punti 4 e 6 sono progettati** *(31.24, 31.25 e la sua annotazione)*, **lo script del punto 4 e' scritto ma NON committato e NON girato** *(fermo per la regola: un sigillo fallito ferma)*.
+
+## 32. S5.3, LA GRAVITA' DEI SOLITONI VERI *(il mandato di Luca delle `23:42`-`23:45` del `2026-11-11`)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **L'ordine** *(Luca)*: **A** *(T-L3 sbloccata)*, **G1** *(la caduta di un solitone vero)*, **G2** *(due solitoni vicini)*, **T** *(`doc/LEGGI_PROVATE.md`)*, **N** *(l'ingresso nel nucleo su carta, solo se A da' (l1) per la forma (a) E G1 da' (e1))*, **poi i punti 4 e 6 del mandato delle `22:28`.** **Il nucleo non si tocca; nessuna taratura.**
+- **La lettura di Luca:** **una forza minuscola NON e' un difetto; conta che SI SOMMI e che arrivi LONTANO** *(la portata arriva con M-Phi, passo `5`)*. **L'ipotesi del guardiano:** **un solitone vero, contato dalla cima della banda, gravita con la sua energia di LEGAME** *(l'analogo del difetto di massa)*.
+
+### 32.1 A: T-L3 SBLOCCATA -- **IL PROGETTO, PRIMA DEL CODICE**
+
+- ### **LA SOGLIA NUOVA, scritta prima** *(Luca)*: **il residuo delle basi sotto `1e-9`** *(prima `1e-12`)*: **la base a `2.492e-10` si ACCETTA, dichiarata.** **I `5` punti senza punto fisso restano tolti e dichiarati.**
+- **`s4_materia_mrho.py --lapse3`:** **come `--lapse2`** *(`omega 0.5`, `1000` giri, le storie, i punti tolti)* **con `TOLL_PF = 1e-9`;** **poi lo spettro come da progetto** *(31.15: le letture (l1)-(l3), il `cs` congelato, il DEVE FALLIRE senza reazione)*.
+- ### **E ACCANTO, `--lapse3 --forma-a`: lo stesso banco con la forma (a).**
+  - **Cosa e':** **`E_N - eps_a somma_k (N_k - 1) rho_k`;** **la sua derivata rispetto a `rho_k` da' una fase per nodo** `e^{+i eps_a [(N_k - 1) + N'_k rho_k]}` **per tick, divisa in due meta', PRIMA e DOPO il tick del lapse, fuori dal palindromo** *(`tick_lapse.fase_a`)*.
+  - ### **Il termine `N'_k rho_k` e' NUOVO rispetto a T-L4b** *(li' `N` era esterno, `N' = 0`)*: **non e' una scelta, e' la derivata della stessa energia quando `N` dipende da `rho`.** **Senza la reazione cade, come le altre reazioni** *(il DEVE FALLIRE)*.
+  - **`eps_a(s)`:** **la cima della coppia piu' alta a `Gamma` del tick di oggi a `cs = s`, dalle `12` colonne uniformi** *(la definizione di T-L4b, sul banco uniforme)*: **misurata, non scelta.**
+  - **Il `cs` congelato resta il riferimento di oggi:** **col `cs` congelato `N` e' uniforme e la fase della forma (a) e' una fase GLOBALE, che non cambia i moduli dello spettro** *(dichiarato)*.
+  - **A `N = 1` la fase e' zero:** **il tick di oggi.**
+- **Le letture, le stesse di 31.15, per ciascuna delle due forme:** **(l1) il lapse non supera il congelato oltre `1e-9` in tutta la mappa;** **(l2) la firma di Jeans** *(`|k| < 1`, nella materia)*; **(l3) la scala del reticolo: FERMO.**
+- **Il referto: `doc/referti_l2/s5_lapse_spettro_v3.txt`** *(le due corse una dopo l'altra nello stesso file)*. **Il costo: stimato `~2` ore ciascuna; le due corse in parallelo** *(due processi)*.
+
+### 32.2 G1: LA CADUTA DI UN SOLITONE VERO -- **le letture di Luca, scritte prima** *(il progetto di dettaglio prima del suo codice)*
+
+- **La scena:** **lo stato di TBS a `10000`** *(`L 81`, bordo spento)*, **nello stesso `N` ESTERNO di T-L4** *(gli stessi `gamma`)*, **con la forma (a)**; **il centro ogni `20` tick; `2000` tick o meno col tetto di `60` minuti.**
+- **Prima della corsa:** **`E_g = somma_k (h_k - eps_top rho_k)`, per unita' di norma, accanto al pacchetto di T-L4b; la frequenza del cuore contro `eps_top`.**
+- **DEVE:** **il verso si rovescia col gradiente; a `N = 1` il centro non accelera** *(oltre la deriva propria, sottratta)*.
+- **(e1) verso `N` piu' basso con la STESSA accelerazione dei pacchetti di T-L4b entro il `10%`; (e2) verso `N` piu' basso, un'altra accelerazione: il rapporto; (e3) verso `N` piu' alto o nessuna caduta.**
+
+### 32.3 G2: DUE SOLITONI VICINI -- **le letture di Luca, scritte prima**
+
+- **La scena:** **lo stato di C35-pi a `66000`** *(`L 162`)*; **(on) il lapse `N(rho)` con la forma (a); (off) `N = 1`; fino a `5000` tick o meno col tetto di `60` minuti.**
+- **Ogni `50` tick `d` dai semipiani** *(come U2)* **e la velocita'; `d_on - d_off` con la parabola e l'errore.** **DEVE: (off) ridà C35-pi alla stessa ora entro la precisione delle mappe.**
+- **(p1) `d_on - d_off` scende oltre `3` errori: un'attrazione in piu'; (p2) nessuna differenza; (p3) sale: una repulsione.**
