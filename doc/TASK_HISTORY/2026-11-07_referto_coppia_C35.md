@@ -296,3 +296,37 @@
 - **altrimenti: caso intermedio, scritto coi numeri.**
 - **Accanto, il confronto QUALITATIVO con `C35-0`** *(il battimento lento, (d2))* **e `C35-pi`** *(si allontana e si calma)*: **senza estrapolare.**
 - ### **Con il referto di `C50-0` committato, il passo `2` della ROTTA e' CHIUSO: lo scrivo, e mi FERMO.** **Il passo `3`** *(l'unificazione)* **parte col mandato del guardiano.**
+
+## 19. L'ESITO DEL REFERTO DI `C50-0` SENZA SINGOLO *(`carta_coppia_ss.py` a `e3531a7f`; la corsa dalle `22:0x` alle `22:11:05` del `2026-11-11`, a `6dadf561`; il referto `doc/referti_l2/coppia_C50-0_ss.txt`; `8/8`)*: **(c1) LA COPPIA RESTA LEGATA. IL PASSO `2` DELLA ROTTA E' CHIUSO.**
+
+- **I controlli:**
+  - **A-V e A-V-F** *(i centri del vuoto)*;
+  - **A-S-I e A-S-I-F;**
+  - **A-S** *(la pendenza di `log` dell'asimmetria al piu' `2.99e-02`, sotto `1/TAU_CAOS = 4e-02`)*;
+  - ### **le righe di U2 di `C35-0` e `C35-pi`, ricalcolate dalle loro mappe, = quelle dei referti (r-b) AL CARATTERE** *(e il controllo incrociato fallisce come deve)*.
+- ### **U2, `C50-0`** *(`d 50`, segno `+1`, il bordo `R_A 55`)*:
+
+| il terzo (unita') | min | max | media `+-` | ampiezza `+-` | `tau_int` | periodo |
+|---|---|---|---|---|---|---|
+| `0`-`10000` | `49.5723` | `50.6180` | `50.0685 +- 0.0430` | `0.2666 +- 0.0304` | `8.67` | `1429.3` |
+| `10000`-`20000` | `49.7337` | `50.4389` | `50.1123 +- 0.0299` | `0.1830 +- 0.0212` | `8.92` | `1667.5` |
+| `20000`-`30000` | `49.7179` | `50.3553` | `50.0150 +- 0.0288` | `0.1823 +- 0.0203` | `8.31` | `1667.5` |
+
+  - **La pendenza su tutta la corsa: `-0.0537 +- 0.0349` per `100000` tick** *(`1.54` errori)*.
+  - **`m3 - m1 = -0.0534`** *(`3` errori `0.1552`)*; **`a3 - a1 = -0.0843`** *(`3` errori `0.1097`)*.
+  - ### **LA LETTURA COL CRITERIO SCRITTO: (c1) la coppia resta LEGATA:** **nessuna tendenza oltre `3` errori, l'ampiezza limitata.**
+- **Accanto** *(qualitativo, senza estrapolare)*:
+  - **`C50-0`: la distanza ferma a `50.0`-`50.1`, un'oscillazione piccola** *(`0.27` -> `0.18`)*;
+  - **`C35-0`: il battimento lento** *(media `24.1` -> `23.0`, ampiezza `~7`)*;
+  - **`C35-pi`: si allontana piano e si calma** *(`36.5` -> `38.0`)*.
+- **IL BILANCIO del bordo a `200000`** *(relativi a `M0`, `V0`, `E0`)*:
+
+| la corsa | `M_ass` | `V_ass` | `E_ass` |
+|---|---|---|---|
+| `C50-0` | `5.08e-03` | `5.26e-02` | `1.27e-03` |
+| `C35-0` | `1.14e-02` | `1.15e-01` | `3.22e-03` |
+| `C35-pi` | `5.33e-03` | `5.21e-02` | `1.56e-03` |
+| `S162` | `5.00e-03` | `2.57e-02` | `1.30e-03` |
+
+  - **Il bilancio di `C35` e `S162` ha dei «-» a `100000` e `150000`:** **i loro pezzi finiscono a `96667` e `146667`, non a quei tick** *(dichiarato)*.
+- ### **IL PASSO `2` DELLA ROTTA E' CHIUSO** *(il referto di `C50-0` committato, senza singolo: Luca `2026-11-11` `09:22`)*. **Il passo `3`** *(l'unificazione)* **parte dopo la chiusura di S5** *(Luca `18:24`)*, **col mandato del guardiano.**

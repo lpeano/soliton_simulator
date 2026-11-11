@@ -25252,3 +25252,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   4. **lo scarto sistematico del `13%` di T-L4;**
   5. **il verso «verso il tempo piu' veloce» con O1.**
 - ### **Il referto di `C50-0` senza singolo e' partito** *(nessuna prova S5.2 in corso)*: **l'esito si committa appena chiude.**
+
+### 2026-11-11 22:20 -- IL REFERTO DI `C50-0`: (c1) LA COPPIA RESTA LEGATA; IL PASSO `2` DELLA ROTTA E' CHIUSO [[PIANO-2D-3D]] [[VUOTO-SUL-FONDO]]
+
+- **`8/8`** *(`doc/referti_l2/coppia_C50-0_ss.txt`; il task history `2026-11-07_referto_coppia_C35`, sez. `19`)*: **la distanza per terzo `50.07`, `50.11`, `50.02`; l'ampiezza `0.27` -> `0.18`; la pendenza `-0.05 +- 0.03` per `100000` tick.**
+- **`C35-0` e `C35-pi`, ricalcolati, = i referti (r-b) al carattere.**
+- ### **Il passo `2` della ROTTA e' chiuso.** **Il passo `3` parte dopo S5** *(Luca `18:24`)*, **col mandato del guardiano.**

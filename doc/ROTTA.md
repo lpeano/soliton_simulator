@@ -29,3 +29,4 @@
 - `2026-11-11` `18:17`: **la scelta 5: il banco tiene `N(rho)`; `S` entra al passo `5` come sorgente di `Phi`** *(M-Phi)*; **le prove del banco S5.2 partono** *(T-L5 fuori)*.
 - `2026-11-11` `18:24`: **l'unificazione** *(il passo `3`)* **parte DOPO la chiusura di S5 sul laterale** *(la forma di `N` e le prove del banco S5.2)*.
 - `2026-11-11` `18:25`: **la scelta 5 confermata** *(il banco tiene `N(rho)`, `S` al passo `5`)*; **le prove del banco S5.2 UNA ALLA VOLTA** *(T-L5 fuori)*; **dopo S5.2 fermo, con la tabella delle prove.**
+- `2026-11-11` `22:20`: ### **IL PASSO `2` E' CHIUSO:** **il referto di `C50-0` senza singolo committato** *(`8/8`, (c1): la coppia resta legata)*.
