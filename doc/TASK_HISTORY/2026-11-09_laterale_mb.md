@@ -1309,3 +1309,42 @@
 
   **Negativa in `14` punti su `15`:** **a `rho_0 = 1` l'orologio M-rho ABBASSA il tasso di (I-mod);** **solo a `rho_0/rho_c = 1`, `s 0.3` lo alza** *(`1.40e-02` contro `7.81e-03`, al `|k| 4.11`, l'autovettore al `14%` in `psi`: la firma di (I-cs), non di (I-mod))*. **A `rho_0` `1e-4` e `1e-2`, dove il congelato e' unitario, (I-cs) e' l'unica instabilita'** *(la tabella di 30.5)*.
 - **Nessuna lettura nuova** *(sez. 30.7)*.
+
+### 31.7 S5.0-bis: LE DECISIONI DI LUCA DELLE `13:22`, GLI ERRORI n.136 E n.137, CHE COSA E' STATO PROVATO *(il mandato la chiama «31.6»: la `31.6` c'e' gia', ed e' la coda di S5.0; dichiarato)*
+
+- ### **LE DECISIONI DI LUCA:**
+  - **(a) LO SCHEMA:** **il PALINDROMO con `N` a meta' passo** *(come `tick_con_cs`)* **e la reazione col punto medio implicito; NON il gradiente discreto;**
+  - **(b) L'ARCO:** **la media ARMONICA del nucleo** *(`FP.s_arco`)*; **nessuna seconda fonte della legge;**
+  - **(c) LA PROVA DEL VUOTO CON LA REAZIONE ACCESA:** **si fa, come nota di completezza DENTRO S5** *(V-R)*, **non come ramo nuovo.**
+- ### **GLI ERRORI DEL GUARDIANO** *(scritti da Luca)*:
+  - **n.136:** **«q2» (`cs' = 0`) l'ha messo il guardiano nel mandato F1; ha spento la reazione.** **T2, B1, H4 e S2 hanno quindi provato un orologio A SENSO UNICO, non la legge del nucleo.**
+  - **n.137:** **la soglia di T-L2** *(`|Delta E_N / E_N| < 1e-11`)* **era impossibile:** **il palindromo non conserva `H` al bit nemmeno a `N = 1`** *(l'errore e' `O(dtau^2)`, limitato, senza deriva)*.
+- ### **CHE COSA E' STATO PROVATO, com'e':**
+
+| | col solitone | sul vuoto da solo |
+|---|---|---|
+| **la legge del nucleo CON la reazione** *(`CAMM-FASE-VUOTO`)* | **provata:** **D0-D5, nessun punto fisso; r-D5, il guscio si contrae, il centro instabile, il dominio cede a `Lambda_c ~ 162`** | ### **MAI** |
+| **l'orologio a senso unico (q2)** | **T2, B1: instabile** | **H4, S2: instabile** |
+
+  ### **La conclusione «la colpa e' della LEGGE» di S2 (w1) vale SOLO per il senso unico.**
+
+### 31.8 V-R, IL VUOTO CON LA REAZIONE ACCESA: **IL PROGETTO, PRIMA DEL CODICE**
+
+- **Lo strumento di S2** *(`csv/solitone/s2_spettro.py`)*, **con un argomento `--reazione`:** **la mappa di S2** *(i `12` punti)*, **coi casi (L-ist) e (L-F1), DUE volte:** **(q2)** *(`cs_primo_zero`, come S2)* **e (q1)** *(la reazione del nucleo ACCESA: `cs_primo` della legge; `CAMM-FASE-VUOTO` gira col suo punto medio implicito)*. **Il referto `doc/referti_l2/s5_vuoto_reazione.txt`.**
+- ### **ACCANTO, un terzo caso MIO, dichiarato: (L-nuc), la legge del nucleo COM'E'** *(`tick.tick_con_cs`: `cs` al centro del palindromo a punto fisso, con la reazione)*. **Perche':** **(L-ist) con (q1) prende `cs` dallo stato all'inizio del tick, e non e' ancora la legge del nucleo;** **e la tabella qui sopra dice che la legge del nucleo sul vuoto non e' MAI stata provata.** **(L-nuc) ha solo `phi` come variabile** *(`12` reali per cella)*. **Le letture si leggono su (L-ist) e (L-F1), come il mandato; (L-nuc) e' accanto.** **Se il punto fisso di `tick_con_cs` alza** *(non converge)*, **lo scrivo e vado avanti.**
+- **I DEVE:**
+  - **con (q2) i numeri di S2 alla terza cifra:** **`ln |lambda|_max` contro la tabella del referto di S2, entro `1e-3` relativo;** **DEVE FALLIRE: lo stesso contro la riga di un altro punto;**
+  - **a `cs` spento lo spettro unitario** *(come in S2)*; **il fattore `1.001`; la linearita'; le basi punti fissi.**
+- ### **LE LETTURE** *(di Luca; su (L-ist) e (L-F1) con (q1))*:
+  - **(r1)** **stabile in tutta la mappa** *(`|lambda|_max - 1 < 1e-9`)*: **l'instabilita' di S2 era tutta del senso unico; il vuoto che comanda l'orologio, se paga la sua reazione, regge;**
+  - **(r2)** **instabile, ma piu' lento di S2 in OGNI punto: la reazione aiuta e non basta;**
+  - **(r3)** **instabile come S2** *(entro il `10%` in ogni punto)*: **la reazione non conta, e il problema e' che sia il vuoto a comandare;**
+  - **altrimenti: caso intermedio, coi numeri.**
+- **Se (r1): lo scrivo IN CIMA al referto e proseguo** *(Luca)*. ### **Il risultato NON riapre F1-F4 e NON cambia la ROTTA: e' un'informazione per Luca.**
+
+### 31.9 (e)-bis: IL SEGNO DI `h_k` NEL SOLITONE, PER CIASCUNO ZERO *(Luca `13:22`)*: **IL PROGETTO**
+
+- **Lo script `s5_triangolo.py` e' gia' committato** *(`a2137e0d`)* **e in corsa:** **il segno di `h_k` va in uno script PICCOLO a parte, `csv/solitone/s5_segno_h.py`, committato prima di girarlo.**
+- **`h_k` e' l'energia del nodo** *(`per_nodo` piu' meta' dei suoi archi, da `termini_di_h`)*: **con `cs` uniforme e' esattamente il coefficiente della reazione** *(`H_k(nodo) + somma (dw/dcs_k) H_a`, con `dw/dcs_k = 1/2`)*. **Con O1 e con O4** *(il nodo meno la media dei `6` vicini)*.
+- **Lo stato: `TBS` a `10000`** *(il file e lo sha come in H4)*. **Le zone, dal centro di `rho`** *(come in (i))*: **il centro `r < w_in`; il guscio `w_in <= r < 3 w_in`; l'alone `3 w_in <= r < R_ZONA`; e il vuoto lontano `r >= R_ZONA`** *(`w_in` dal jsonl di `TBS`; `R_ZONA = 20` come H4; le soglie sono quelle gia' in uso, dichiarate)*. **Per zona: la media, il min, il max di `h_k`, la frazione dei nodi con `h_k > 0`, e `h_k` meno il valore del vuoto `c F3`.**
+- **Accanto, il verso della forza atteso** *(31.3: `V_k = s N'(rho) h_k`, `N' < 0`)*: **`h_k > 0` spinge verso `N` piu' basso, `h_k < 0` verso `N` piu' alto.** ### **Nessuna scelta dello zero: e' di Luca.**
