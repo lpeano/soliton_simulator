@@ -1291,3 +1291,21 @@
 ### 31.6 LA CODA DOPO S5.0
 
 **(1) S4.7** *(in corsa)*; **(2) lo script di (e), la suite, il commit, la corsa;** ### **(3) FERMO: la scelta dello schema (31.4) e della media d'arco (31.2) e' di Luca;** **il banco** *(S5.1)* **e le prove** *(S5.2)* **dopo.**
+
+### 30.8 L'ESITO DI S4.7 *(la corsa dalle `12:06:21` alle `12:34:17` del `2026-11-11`, a `59c562f0`; il referto `doc/referti_l2/s4_spettro_materia_mrho_v2.txt`, ACCANTO al primo; `101/101`)*: **LO STRUMENTO E' CURATO; IL DIFETTO ERA QUELLO DI 30.5**
+
+- ### **Il fondo passato IDENTICO al congelato** *(lo scarto `0.000e+00`)*: **`A = F + P Q` PASSA in TUTTI i `45` punti** *(fino a `5.0e-09`; a `rho_0 = 1` fino a `7.0e-11`, contro `8.5e-03` di 30.5)*. ### **L'ipotesi di 30.5 era giusta: `q` non era unico dentro la coppia degenere, e il congelato era linearizzato attorno a un altro fondo.**
+- **I punti a `rho_0` `1e-4` e `1e-2` ridanno 30.5:** **lo scarto relativo piu' grande di `ln |lambda|_max` e' `3.6e-06`** *(la soglia `1e-3`)*; **il controllo incrociato fallisce come deve** *(`0.897`)*.
+- **Restano:** **le basi** *(`7.6e-15`)*, **il vuoto con M-rho unitario, il fattore `1.001`, la traslazione** *(`2.0e-12`)*, **l'onda piana** *(il rapporto `1.0001`)*.
+- ### **A `rho_0 = 1` gli spettri sono gli STESSI di 30.5** *(M-rho e congelato, alle `6` cifre stampate)*: **era sbagliato il CONTROLLO, non gli spettri.** **La colonna «M-rho meno congelato» ora vale:**
+
+| `rho_0/rho_c` | `s 0.05` | `s 0.15` | `s 0.3` |
+|---|---|---|---|
+| `1e-3` | `-1.49e-04` | `-4.52e-04` | `-9.31e-04` |
+| `1e-2` | `-1.54e-03` | `-4.61e-03` | `-9.14e-03` |
+| `1e-1` | `-2.12e-03` | `-4.89e-03` | `-5.72e-03` |
+| `1` | `-9.06e-04` | `-3.65e-04` | **`+6.20e-03`** |
+| `10` | `-2.16e-04` | `-5.23e-04` | `-6.72e-04` |
+
+  **Negativa in `14` punti su `15`:** **a `rho_0 = 1` l'orologio M-rho ABBASSA il tasso di (I-mod);** **solo a `rho_0/rho_c = 1`, `s 0.3` lo alza** *(`1.40e-02` contro `7.81e-03`, al `|k| 4.11`, l'autovettore al `14%` in `psi`: la firma di (I-cs), non di (I-mod))*. **A `rho_0` `1e-4` e `1e-2`, dove il congelato e' unitario, (I-cs) e' l'unica instabilita'** *(la tabella di 30.5)*.
+- **Nessuna lettura nuova** *(sez. 30.7)*.
