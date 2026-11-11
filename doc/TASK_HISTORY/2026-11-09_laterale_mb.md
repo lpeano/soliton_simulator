@@ -1776,3 +1776,18 @@
   - **Accanto, la forma di oggi** *(un'aggiunta dichiarata)*.
   - **Le letture (e1)-(e3) contro la forma (a) di T-L4b, letta dal suo referto** *(`a` e l'errore per ogni `gamma`)*. ### ⚠ **A `gamma 0.01` T-L4b ha un errore del `37%`: il criterio del `10%` e' piu' stretto della misura di riferimento** *(lo scrivo prima)*.
   - **Il tetto:** **`60` minuti; una caduta non parte se il tempo dell'ultima la porterebbe oltre** *(dichiarato nel referto)*.
+- ### **32.3, IL PROGETTO DI DETTAGLIO DI G2, PRIMA DEL CODICE -- E DUE PREMESSE DEL MANDATO CHE NON TORNANO** *(le domande a Luca)*:
+  - ### ⚠ **(D1) LO STATO DI C35-pi A `66000` NON ESISTE:** **gli stati completi su `E:\soliton_simulator\stati\C35-pi\` sono ogni `10000` tick** *(`0`, `10000`, ..., `200000`, letti dalla cartella; nel jsonl della corsa fino a `60000`)*; **a `66000` ci sono solo le MAPPE** *(`rho` e `Lambda` in `float32`: non bastano per ripartire, manca la fase)*.
+    - **La proposta:** **partire da `60000`** *(lo stato del jsonl, controllato con lo `sha`)*: **due solitoni distinti, gli aloni che si toccano, come a `66000`** *(`d` della coppia `~35`)*.
+    - **L'alternativa:** **`70000`** *(il primo stato degli allungamenti, fuori dal jsonl della corsa)*.
+    - **Il criterio di chiusura: la scelta di Luca.**
+  - ### ⚠ **(D2) IL `rho_c` DEL LAPSE NON E' NEL MANDATO** *(`N = 1/(1 + rho/rho_c)`: e' un numero da scegliere, `A1`)*.
+    - **La proposta:** **quella di T-L2, `rho_c = rho_0 / 1e-2`, con `rho_0` la `rho` media del centro** *(`r < w_in`)*, **il rapporto centrale dei tre di Luca** *(T-L2 lo usa gia' per il confronto `dtau^2`)*.
+    - **Il criterio di chiusura: la scelta di Luca.**
+    - ### **G2 NON gira finche' Luca non risponde a (D1) e (D2)** *(il codice si scrive con le due proposte come costanti dichiarate)*.
+  - **Il bordo:** **C35-pi ha il bordo** *(`g_max 0.03`, `R_A 47.5`, il centro nel punto medio)*: **(on) e (off) lo tengono TUTTI E DUE, dopo ogni tick, come la corsa** *(`BO.assorbi` col riferimento `c(t) F3`)*; **senza, (off) non potrebbe ridare C35-pi.**
+  - **(off):** **il tick della corsa** *(`accensione.tick`)* **+ il bordo.** **(on):** **`tick_lapse.tick` con `eps_a`** *(la forma (a), `eps_a = eps_top`, la stessa di T-L4b)* **+ il bordo.**
+  - **`d` dai semipiani come U2** *(`carta_coppia.centri_semipiani`, lo scarto `x` lungo `A1` dal centro del bordo)* **ogni `50` tick; la velocita' dalla differenza centrata.**
+  - **DEVE: (off) contro le mappe di C35-pi** *(ogni `100` tick)*: **`d` entro `1e-5`** *(le mappe sono `float32`: la precisione relativa `~6e-8` su `rho`; il mio margine su `d`, dichiarato)*.
+  - **Il fit:** **`d_on - d_off` con la parabola** *(`carta_coppia.curvatura`)* **e il suo errore;** **le letture (p1)-(p3) di Luca a `3` errori.**
+  - **Il tetto:** **`60` minuti PER CORSA; la durata scende** *(dichiarata)* **se il tempo dei primi `50` tick di (on) lo chiede.**
