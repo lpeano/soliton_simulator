@@ -2,6 +2,9 @@
 r"""**S4: LA LEGGE M-rho HA UN'INSTABILITA' NELLA MATERIA?** *(sul ramo laterale; Luca `2026-11-11` `09:17`; il task history `doc/TASK_HISTORY/2026-11-09_laterale_mb.md`, sez. `30`)*. [[PUNTO-FISSO-CS-SOLITONE]]
 
     python csv/solitone/s4_materia_mrho.py > doc/referti_l2/s4_spettro_materia_mrho.txt
+    python csv/solitone/s4_materia_mrho.py --v2 > doc/referti_l2/s4_spettro_materia_mrho_v2.txt
+
+**`--v2`** *(S4.7, sez. `30.7`)*: **il fondo `psi_0` calcolato UNA volta sulla mappa M-rho e passato IDENTICO al `cs` congelato; niente legge spenta** *(non e' il riferimento: l'errore n.135)*; **il DEVE contro la tabella del referto di 30.5.**
 
 **Il fondo uniforme** `psi_0 = sqrt(rho_0) q` *(`q` la combinazione del solitone BG della coppia piu' alta a `Gamma`, ricalcolata in ogni punto)*, `phi_0 = c F3`; **due fasi** `u_psi`, `u_phi`.
 **M-rho istantanea:** `cs = s / (1 + rho / rho_c)` col `rho` di inizio tick, `mot.lambda_c = None`. **La legge spenta:** `cs = s`. **Il `cs` congelato:** `cs = cs(rho_0)` costante.
@@ -35,6 +38,10 @@ RAPPORTI = (1e-3, 1e-2, 1e-1, 1.0, 10.0)   # ### Luca: rho_0 / rho_c
 RHO0 = (1e-4, 1e-2, 1.0)                   # ### Luca: rho_0, in unita' della norma per nodo
 S_SCAN = (0.05, 0.15, 0.3)                 # ### Luca
 MEZZO = (1e-2, 1e-1, 0.15)                 # ### mio: il punto della traslazione (rho_0, rapporto, s)
+V2 = "--v2" in sys.argv                     # ### S4.7 (sez. 30.7)
+TOLL_BASI = 1e-14                          # ### Luca (S4.7): lo scarto fra le basi
+TOLL_30_5 = 1e-3                           # ### mio (sez. 30.7): «alla terza cifra»
+REF_30_5 = os.path.join(os.path.dirname(os.path.dirname(_QUI)), "doc", "referti_l2", "s4_spettro_materia_mrho.txt")
 OK = [0, 0]
 FALLITE = []
 
@@ -144,10 +151,12 @@ def main():
             f = phi.reshape(n, 6)
             return np.concatenate([p.real, p.imag, f.real, f.imag], axis=1)
 
-        def base(rho0, legge):
-            """### il fondo, le due fasi, i residui; `q` dalla coppia piu' alta a `Gamma` del blocco di `psi` in QUESTO punto."""
+        def base(rho0, legge, psi_dato=None):
+            """### il fondo, le due fasi, i residui; `q` dalla coppia piu' alta a `Gamma` del blocco di `psi` in QUESTO punto; `psi_dato` (S4.7): il fondo passato com'e'."""
             out = {"rho0": rho0, "legge": legge}
-            if rho0 > 0.0:
+            if psi_dato is not None:
+                psi = psi_dato.copy()
+            elif rho0 > 0.0:
                 Mg = np.zeros((12, 12), dtype=complex)
                 rr = []
                 for cc in range(12):
@@ -269,13 +278,19 @@ def main():
                 basi[(0.0, None, s)] = base(0.0, ("mrho", s, 1.0))
                 stampa_base("rho_0 0, M-rho, s %g" % s, basi[(0.0, None, s)])
                 for rho0 in RHO0:
-                    basi[(rho0, "spenta", s)] = base(rho0, ("cost", s))
-                    stampa_base("rho_0 %g, la legge spenta, s %g" % (rho0, s), basi[(rho0, "spenta", s)])
+                    if not V2:
+                        basi[(rho0, "spenta", s)] = base(rho0, ("cost", s))
+                        stampa_base("rho_0 %g, la legge spenta, s %g" % (rho0, s), basi[(rho0, "spenta", s)])
                     for ra in RAPPORTI:
                         legge = ("mrho", s, rho0 / ra)
                         basi[(rho0, ra, s)] = base(rho0, legge)
                         stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, M-rho" % (rho0, ra, s), basi[(rho0, ra, s)])
-                        basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]))
+                        basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
+                        if V2:
+                            stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, il cs congelato (il fondo di M-rho)" % (rho0, ra, s), basi[(rho0, ("cong", ra), s)])
+            if V2:
+                sb = max(float(np.max(np.abs(basi[k]["psi"] - basi[(k[0], k[1][1], k[2])]["psi"]))) for k in basi if isinstance(k[1], tuple))
+                esito("(S4.7) lo scarto fra il fondo di M-rho e quello del cs congelato < %g, in tutti i punti" % TOLL_BASI, sb < TOLL_BASI, "%.3e" % sb)
             peggio = max(max(b["res_p"], b["res_f"]) for b in basi.values())
             print("    il residuo piu' grande fra le %d basi: %.3e" % (len(basi), peggio))
             if not esito("(S4.0 a) ogni base e' un punto fisso nel riferimento che gira (il residuo < %g)" % TOLL_PF, peggio < TOLL_PF, "%.3e" % peggio):
@@ -299,9 +314,10 @@ def main():
             esito("il fattore: lo spettro e' unitario (< %g)" % TOLL_UNIT, sp["dev_unit"] < TOLL_UNIT, "%.3e" % sp["dev_unit"], deve=False)
             del R
             # ============================================================== la legge spenta
-            print("### LA LEGGE SPENTA (cs = s), rho_0 > 0: la materia senza orologio")
+            if not V2:
+                print("### LA LEGGE SPENTA (cs = s), rho_0 > 0: la materia senza orologio")
             spenta = {}
-            for s in S_SCAN:
+            for s in (S_SCAN if not V2 else ()):
                 for rho0 in RHO0:
                     b = basi[(rho0, "spenta", s)]
                     R, dev = risposta(b, ("cost", s))
@@ -361,7 +377,7 @@ def main():
                             "; ".join("%.4f (omega_b %+.6f, |lambda_b| %.9f)" % (pes[q_], -np.angle(wb[q_]), abs(wb[q_])) for q_ in op[:3]),
                             "; ".join("%+.4e %+.4ei (omega_b %+.6f)" % (contr[q_].real, contr[q_].imag, -np.angle(wb[q_])) for q_ in oc[:3])))
                         esito("rho_0 %g, rapporto %g, s %g: A = F + P Q al k piu' instabile (< %g)" % (rho0, ra, s, TOLL_APQ), apq < TOLL_APQ, "%.2e" % apq)
-                        tab_.append({"rho0": rho0, "ra": ra, "s": s, "cs0": b["cs0"], "max": sp["max"], "cong": spc["max"], "spenta": spenta[(rho0, s)][0], "d": d_, "dc": dc})
+                        tab_.append({"rho0": rho0, "ra": ra, "s": s, "cs0": b["cs0"], "max": sp["max"], "cong": spc["max"], "spenta": spenta[(rho0, s)][0] if not V2 else float("nan"), "d": d_, "dc": dc})
                         if migliore is None or sp["max"] > migliore[0]:
                             migliore = (sp["max"], rho0, ra, s, d_, b, legge)
                         del sp, spc
@@ -396,11 +412,37 @@ def main():
     print("  LA MAPPA (ln |lambda|_max per tick; 0 = unitario entro %g):" % STABILE)
     print("  %8s %8s %6s %12s %13s %13s %13s %13s %9s %8s %8s" % ("rho_0", "rho0/rhoc", "s", "cs fondo", "M-rho", "cs congelato", "legge spenta", "M-rho - cong", "|k|", "dir", "f psi"))
     for r_ in tab_:
-        print("  %8g %8g %6g %12.8f %13.5e %13.5e %13.5e %13.5e %9.5f %8.2f %8.4f" % (r_["rho0"], r_["ra"], r_["s"], r_["cs0"], math.log(r_["max"]), math.log(r_["cong"]), math.log(r_["spenta"]),
+        print("  %8g %8g %6g %12.8f %13.5e %13.5e %13.5e %13.5e %9.5f %8.2f %8.4f" % (r_["rho0"], r_["ra"], r_["s"], r_["cs0"], math.log(r_["max"]), math.log(r_["cong"]), (math.log(r_["spenta"]) if r_["spenta"] == r_["spenta"] else float("nan")),
               math.log(r_["max"]) - math.log(r_["cong"]), r_["d"]["k"], r_["d"]["dir"], r_["d"]["fpsi"]))
     inst = {(r_["rho0"], r_["ra"], r_["s"]): r_["max"] - 1.0 > STABILE for r_ in tab_}
     print("  M-rho instabili: %d su %d" % (sum(inst.values()), len(inst)))
-    if not spenta_ok:
+    if V2:
+        vecchi = {}
+        with open(REF_30_5, encoding="utf-8") as f:
+            dentro = False
+            for riga in f:
+                if "LA MAPPA (ln |lambda|_max" in riga:
+                    dentro = True
+                    continue
+                if dentro:
+                    p_ = riga.split()
+                    if len(p_) == 11:
+                        try:
+                            vecchi[(float(p_[0]), float(p_[1]), float(p_[2]))] = float(p_[4])
+                        except ValueError:
+                            pass
+        peggio_v = 0.0
+        for r_ in tab_:
+            if r_["rho0"] < 1.0:
+                vv = vecchi[(r_["rho0"], r_["ra"], r_["s"])]
+                peggio_v = max(peggio_v, abs(math.log(r_["max"]) / vv - 1.0))
+        print("  (S4.7) i punti a rho_0 1e-4 e 1e-2 contro la tabella di 30.5 (%d righe lette): lo scarto relativo piu' grande di ln |lambda|_max %.3e" % (len(vecchi), peggio_v))
+        esito("(S4.7) i punti a rho_0 1e-4 e 1e-2 ridanno 30.5 entro %g relativo" % TOLL_30_5, peggio_v < TOLL_30_5, "%.3e" % peggio_v)
+        r0_ = [r_ for r_ in tab_ if (r_["rho0"], r_["ra"], r_["s"]) == (1e-4, 1e-3, 0.05)][0]
+        sf = abs(math.log(r0_["max"]) / vecchi[(1e-4, 1e-2, 0.05)] - 1.0)
+        esito("(S4.7) il controllo sa dire di no: il punto (1e-4, 1e-3, 0.05) contro la riga (1e-4, 1e-2, 0.05) di 30.5 entro %g" % TOLL_30_5, sf < TOLL_30_5, "%.3e" % sf, deve=False)
+        print("  (S4.7) nessuna lettura nuova (sez. 30.7): la colonna M-rho - cong dice quanto (I-cs) aggiunge sopra (I-mod)")
+    elif not spenta_ok:
         print("  ### LA LEGGE SPENTA NON E' UNITARIA (sopra): la materia e' instabile anche senza orologio; le letture (m1)-(m3) presuppongono un riferimento stabile e NON si leggono (sez. 30.4). FERMO")
     else:
         soglie = {}
