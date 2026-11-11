@@ -1514,3 +1514,52 @@
   - **(g3)** **il totale e' negativo, o il vuoto uniforme non da' zero: FERMO;**
   - **sul vuoto con onde, nessuna lettura: i numeri.**
 - **Poi f.2 su carta** *(la coerenza con la conservazione)*, **e FERMO.**
+
+### 31.17 LE RISPOSTE DI LUCA DELLE `17:22`, E L'ESITO DI f.1 *(la corsa dalle `17:36:34` alle `17:36:50` del `2026-11-11`, a `e81c5081`; il referto `doc/referti_l2/s5_sorgente_mista.txt`; `11/11`)*
+
+- ### **LE RISPOSTE DI LUCA** *(`17:22`, ai punti di 31.15 e 31.16)*:
+  1. **nessun «`+ pi rho`» in piu':** **la materia con lo zero O1 e' quella dei pezzi del nucleo, come l'ho letta;**
+  2. **lo zero globale: la correzione va bene;** **si misura lo scarto previsto `c (Lambda_k - media_j Lambda_j)` e si verifica l'identita' entro `1e-12`;**
+  3. ### **T-L5 resta FUORI, come voce aperta:** **niente modifiche al nucleo, niente tick inverso scritto fuori;**
+  4. **T-L4: simulata con O1; per O4 solo il verso previsto, accanto.**
+- ### **f.1, I DEVE:**
+  - **il vuoto uniforme: `S = 0`** *(`max |S| = 3.6e-15`, tutte e tre le attribuzioni)*;
+  - **il vuoto contato con O1 invece di O4 FALLISCE come deve** *(`S = -18.849556 = -6 pi` per nodo)*;
+  - **lo zero globale PER NODO** *(`-6 pi`)*: **`S` identica, lo scarto `3.6e-12`;**
+  - **lo zero PER UNITA' DI NORMA** *(`c = -pi/2`)*: **`S` cambia fino a `11.21` nel solitone, ESATTAMENTE di `c (Lambda_k - media_j Lambda_j)`** *(l'identita' entro `4.4e-12`-`5.3e-12`)*.
+    - ⚠ **In ASSOLUTO l'identita' e' a `~5e-12`, non sotto `1e-12`:** **`S` arriva a `1.4e4` nel centro, e l'arrotondamento di numeri cosi' e' gia' `~2e-12`.** **In RELATIVO e' `~4e-16`.** **Il DEVE e' relativo alla scala di `S`** *(dichiarato nel commit dello script)*: **lo dico a Luca, che aveva scritto «entro `1e-12`».**
+  - **`A_h` = quello di H4** *(`3.308833e-02`)*.
+- ### **f.1, `TBS` a `10000`** *(`M = 996944.86`)*:
+  - **le parti per nodo, sommate:** **la materia `3.1655e+06`** *(`3.175 M`: circa `pi M`, che sarebbe `3.1320e+06`)*; **il vuoto con O1 `-1.1619e+05`; l'accoppiamento `9.887`.**
+
+| la zona | nodi | `rho` medio | (A-m) `S` medio | (A-v) `S` medio | (A-mv) `S` medio | `f(S<0)` pesata, (A-m)/(A-v)/(A-mv) |
+|---|---|---|---|---|---|---|
+| **il centro** *(`r < w_in`)* | `162` | `2655` | `+1.108e+04` | `+8.456e+03` | `+9.768e+03` | `0` / `0` / `0` |
+| **l'interno** *(`w_in`-`16`)* | `760` | `741` | `+3.083e+03` | `+2.349e+03` | `+2.716e+03` | `0` / `0` / `0` |
+| **il guscio** *(`16`-`18`)* | `254` | `15.3` | `+62.8` | `+42.6` | `+52.7` | `0.0013` / `0.0115` / `0.0047` |
+| **l'alone** *(`18`-`30`)* | `2090` | `0.0186` | `-0.082` | `-0.099` | `-0.090` | `0.40` / `0.47` / `0.44` |
+| **il vuoto lontano** *(`> 30`)* | `3295` | `0.0017` | `+0.0044` | `+0.0044` | `+0.0044` | `0.43` / `0.43` / `0.43` |
+
+  - **Il totale di `S`:** **(A-m) `+4.154e+06`** *(`S/M = 4.167`)*; **(A-v) `+3.166e+06`** *(`3.175`)*; **(A-mv) `+3.660e+06`** *(`3.671`)*. **Le parti negative valgono `0.0002`-`0.0003` del totale positivo.**
+  - ### **LA LETTURA COL CRITERIO SCRITTO: (g2) con tutte e tre le attribuzioni.**
+    - **Nel centro e nell'interno `S > 0` dappertutto; nel guscio la frazione negativa pesata e' `0.13%`-`1.2%`.**
+    - **Nell'alone `40%`-`47%` e' negativo:** **li' `rho` e' `0.019` e `S` e' quasi tutto il VUOTO con O4** *(le onde emesse, col loro segno)*.
+    - **Il totale e' positivo e circa proporzionale a `M`:** **con (A-v) `S/M = 3.175`, quasi `pi`** *(l'energia «di riposo» `pi M`)*.
+- **f.1, il vuoto con le onde di H4 (v1)** *(nessuna lettura)*: **`S` per nodo con la media `+6e-18`** *(O4 somma a zero per costruzione)*, **la rms `0.206`, il min `-0.765`, il max `+0.820`, la frazione negativa `0.498`;** **accanto, il vuoto con O1: la media `-18.836`, la rms `0.325`.**
+
+### 31.18 f.2, LA COERENZA CON LA CONSERVAZIONE *(su carta)*: **LE SCELTE CHE IL CODICE NON IMPONE -- FERMO**
+
+- ### **Se l'orologio e' comandato da `S`, `E_N` e la sua reazione si scrivono con la STESSA scomposizione.**
+  - **I pezzi del tick pesano i loro generatori col `cs` del nodo** *(e con la media armonica sugli archi)*. **Quindi `E_N = somma_k s N_k H_k(nodo) + somma_a w_a H_a(arco)`, con lo zero O1 DENTRO i pezzi** *(31.1)*.
+  - **La reazione e' `i d/dt = dE_N / d(campo)^*`.**
+  - **Con `N = N(S)`, `S` dipende da TUTTO lo stato della cella** *(i Grover, la moneta, gli spostamenti; per il vuoto con O4, anche da `phi` dei `6` vicini)*. **Quindi:**
+    - **la reazione sulla MATERIA non e' piu' una fase per nodo** *(come con `N(rho)`)*: **e' `somma_k s N'(S_k) h_k dS_k / d psi*`, un operatore che mescola le estremita' e i nodi vicini;**
+    - ### **ora anche il VUOTO sente la reazione** *(`dS_k / d phi*` non e' zero: le fluttuazioni pesano, quindi rispondono)*, **e a raggio del primo anello** *(O4)*;
+    - **la reazione non e' una fase, quindi non conserva da sola la norma per costruzione:** **il punto medio implicito resta reversibile, ma la norma esatta va dimostrata** *(con un `E_N` reale e invariante sotto la fase globale, il flusso esatto conserva la norma; lo schema, da verificare)*.
+- ### **LE SCELTE CHE IL CODICE NON IMPONE** *(di Luca)*:
+  1. **la forma di `N(S)`:** **`S` puo' essere NEGATIVO** *(l'alone, il guscio, le fluttuazioni)*: **`1/(1 + S/S_c)` diverge a `S = -S_c` e supera `1` per `S < 0`, e allora `cs = s N` puo' uscire dal cono** *(`s N <= 1`)*. **Serve una forma definita anche per `S < 0`.**
+  2. **che cosa moltiplica `N` in `E_N`:** **l'energia dei pezzi** *(zero O1: allora il vuoto con `N != 1` porta il suo `-6 pi` per nodo come potenziale)* **o `S` stessa** *(`E_N = somma N(S) S`: ma il tick pesa i pezzi, non `S`)*;
+  3. **l'attribuzione dell'accoppiamento** *(A-m, A-v, A-mv)*: **cambia `S` del `24%` nel centro;**
+  4. **lo schema della reazione non locale** *(sulla materia E sul vuoto, al primo anello)*: **il punto medio implicito sull'intera cella, o un altro;**
+  5. ### **o `S` entra solo al passo `5`** *(come sorgente di `Phi`, M-Phi)*, **e il banco tiene `N(rho)`** *(la reazione una fase, gia' provata in S5.1)*.
+- ### ⛔ **FERMO** *(Luca: «poi fermo per la decisione su `N(rho)` o `N(S)`»)*. **Le prove del banco** *(S5.2: `s5_prove.py` committato, non girato; T-L3 e T-L4 da scrivere)* **partono con la sua decisione.**
