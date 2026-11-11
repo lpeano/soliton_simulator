@@ -1578,3 +1578,9 @@
   - **La misura:** **`200` tick; il baricentro lungo `B_0` pesato con `rho`; una parabola** *(l'accelerazione)*. **`gamma` in `{+0.01, -0.01, +0.02, -0.02}`.**
   - **I DEVE:** **l'accelerazione = la previsione entro il `5%`, per ogni `gamma`;** **col gradiente rovesciato il verso si rovescia;** **e il verso, scritto: verso `N` piu' basso o piu' alto.**
   - **O4, solo previsto:** **con lo zero locale una pendenza COSTANTE di `N` non da' potenziale** *(il nodo sta sulla media dei vicini: la tabella di `2026-11-08_zero_del_vuoto`, O4)*: **la forza lineare sparisce; resta un termine `~ (a^2/4) lapl(cs)`, a cortissimo raggio.**
+
+### 31.20 LA CONFERMA DI LUCA DELLE `18:25`, E LA DECISIONE DELLE `18:24`
+
+- **`18:25`: la scelta 5 di 31.18, ripetuta:** **il banco tiene `N(rho)`** *(la reazione una fase per nodo, gia' provata in S5.1)*; **`S` entra al passo `5` come sorgente di `Phi`** *(M-Phi)*. ### **Le prove S5.2 UNA ALLA VOLTA:** **T-L1, T-L2** *(il criterio senza deriva)*, **T-L3** *(col `cs` congelato)*, **T-L4** *(con O1; per O4 il verso previsto, accanto)*, **il DEVE FALLIRE senza reazione; T-L5 fuori.** **Dopo S5.2: FERMO, con la tabella delle prove.**
+- ### **Il codice di T-L3 e T-L4: `a82ca3d0`** *(la suite `67` su `67`, dalle `18:25:58` alle `18:44:47`)*. **Le corse in SEQUENZA in un solo processo:** **T-L1, T-L2, T-L3, T-L4** *(gli orari in `orari_prove`, letti dall'uscita)*.
+- **`18:24`** *(sul principale)*: **l'unificazione** *(il passo `3`)* **parte DOPO la chiusura di S5.**
