@@ -1616,3 +1616,40 @@
   - **col lapse nessuna deriva in tutti e tre i rapporti** *(la pendenza a `1.89`, `0.48`, `1.01` errori)*, **le norme entro `3.6e-14`;**
   - **senza reazione l'escursione di `E_N` e' `27` volte piu' grande** *(`1.06e+04` contro `3.84e+02` a `r = 1e-2`)*: **un'OSSERVAZIONE, non un criterio scritto prima.**
 - **L'ordine del mandato:** **1, 2** *(T-L4b)*, **3** *(T-L3 rifatta)*, **4** *(lo scarto del `13%`)*, **5** *(T-L3 con la forma nuova, solo se T-L4b da' (f1))*, **6** *(T-L5)*; **dopo ogni punto commit e push** *(il riavvio forzato di Windows dopo mezzanotte)*; **niente cicli di attesa.**
+
+### 31.22 S5.2-bis, PUNTO 2: T-L4b, LA CADUTA COL SEGNO DELL'INERZIA -- **T-L4b.0, PRIMA DEL CODICE**
+
+- **La premessa** *(Luca)*:
+  - **in T-L4 la forza c'e' ed e' proporzionale al gradiente, ma il pacchetto va verso `N` piu' ALTO:** **la banda dei solitoni sta in CIMA** *(`d2 eps/dk2 = -0.05923`: una massa efficace negativa)*.
+  - **La lettura del guardiano, da verificare:** **la massa che sente la gravita' e quella che resiste alla spinta hanno SEGNI OPPOSTI;** **nella fisica vera hanno lo stesso segno** *(il principio di equivalenza; anche l'antimateria cade verso il basso: ALPHA-g, CERN, 2023)*.
+  - **LA DECISIONE DI LUCA: provare un orologio che pesa l'energia della materia col SEGNO DELL'INERZIA.**
+- ### **LA FORMA (a)** *(del guardiano)*: **l'energia della materia contata DALLA CIMA della sua banda.**
+  - **Per rispettare il vincolo (iii)** *(a `N = 1` il tick di oggi AL BIT)* **la scrivo come**
+    **`E_N = somma_k N_k h_k - eps_top somma_k (N_k - 1) rho_k`**,
+    **che differisce da `somma N_k (h_k - eps_top rho_k)` per `eps_top M`, una costante** *(`M` si conserva)*. **Quindi la dinamica e' la stessa, e a `N = 1` il termine nuovo e' zero esatto.**
+  - **`eps_top = 0.4767266` per tick** *(la quasi-energia della cima a `Gamma`, da T-L4, a `cs = s`)*.
+  - **I vincoli:** **(i)** **dove `psi = 0` il termine nuovo e' zero:** **il vuoto e' invariato;** **(ii)** **la reazione si deriva da `E_N`;** **(iii)** **vedi sopra;** **(iv)** **il peso della materia, `h - eps_top rho`, e' `<= 0` nella banda: il segno dell'inerzia.**
+  - **LA REAZIONE CHE NE ESCE:**
+    - **con `N` ESTERNO** *(T-L4b)*: **una fase per nodo su `psi`, `e^{+i eps_top (N_k - 1) dtau}`** *(statica: esatta, due mezzi passi)*;
+    - **col lapse `N(rho)`:** **`Omega^psi_k` cambia di `-eps_top (N_k - 1 + N'_k rho_k)`** *(una fase per nodo, come oggi: cambia solo il coefficiente)*.
+    - **Rispetto al banco di oggi: un termine in piu' in `Omega`, nient'altro.**
+- ### **LA FORMA (b)** *(il segno della materia rovesciato tutto insieme)*: **NON SERVE CORRERLA, si vede dalla carta.**
+  - **Rovesciare il generatore della materia cambia `eps -> -eps`: la cima diventa un fondo** *(`eps'' -> -eps''`)* **e `d eps/d cs -> -d eps/d cs`.**
+  - **L'accelerazione** *(31.19: `a = -eps'' (d eps/d cs) s dN/dx`)* **e' il prodotto dei due, quindi NON CAMBIA SEGNO:** ### **(b) da' (f2) per costruzione.** **Lo scrivo e non la corro** *(il mandato: «se costa poco»; costa zero saperlo)*.
+- ### **LA PREVISIONE PER (a), scritta prima** *(un'ATTESA dal raggio, non una misura)*:
+  - **`Omega(x, k) = eps(k; s N(x)) - eps_top (N(x) - 1)`, quindi `dk/dt = -(s d eps/d cs - eps_top) dN/dx`.**
+  - **Da T-L4: `s d eps/d cs = 0.15 x 3.172173 = 0.475826`, contro `eps_top = 0.476727`:** **la differenza e' `-9.0e-04`, cioe' `~1/500` della forza di T-L4.** **E' quanto `eps` NON e' lineare in `cs`** *(lo spezzamento del tick)*.
+  - **In piu' il pacchetto non e' tutto a `k = 0`:** **`<eps> - eps_top ~ eps'' / (2 sigma^2)`** *(una gaussiana di larghezza `sigma` in `2` dimensioni, la curvatura supposta uguale nelle due direzioni)*: **`-4.6e-04` a `sigma 8`, `-2.1e-04` a `sigma 12`.** **Stesso ordine del primo.**
+  - ### **Quindi:** **con (a) la forza scende di `~300` volte e cambia VERSO** *(verso `N` piu' BASSO: i due termini sono negativi e `eps'' < 0`)*; **ma dipende dalla LARGHEZZA del pacchetto** *(il secondo termine)*. ### **Il principio di equivalenza** *(`sigma 8` contro `12`)* **mi aspetto che FALLISCA.** **E' un'attesa: la corsa la verifica.**
+- **T-L4b.1, LA CORSA** *(lo script nuovo `csv/solitone/s5_caduta_segno.py`; il referto `doc/referti_l2/s5_caduta_segno.txt`)*:
+  - **la scena di T-L4** *(lo stesso `N` esterno, i quattro `gamma`, il pacchetto `sigma 8`, `rho` massima `1e-3`)*, **con la forma (a);** ### **`400` tick invece di `200`** *(la forza e' `~300` volte piu' piccola: mio, dichiarato)*;
+  - **la previsione:** **all'ordine zero** *(`k = 0`)* **e con la correzione della larghezza, stampate tutte e due;** **le letture sulla seconda;**
+  - **accanto, il banco di T-L4** *(la forma di oggi)* **sugli stessi `400` tick, per confronto.**
+- **I DEVE:**
+  - **col gradiente rovesciato il verso si rovescia;**
+  - **a `N = 1`** *(`gamma = 0`)* **la forma (a) e' il tick di oggi AL BIT** *(gli sha dopo `400` tick)*, **e il pacchetto ha l'accelerazione di T-L4 a `N = 1`;**
+  - ### **IL PRINCIPIO DI EQUIVALENZA:** **tre pacchetti** *(`sigma 8`; `sigma 8` con l'ampiezza doppia; `sigma 12`)* **nello stesso gradiente** *(`gamma 0.02`)*: **l'accelerazione la stessa entro il `5%`.**
+- **LE LETTURE** *(Luca)*:
+  - **(f1)** **verso `N` piu' BASSO** *(il tempo piu' lento)*, **l'accelerazione entro il `15%` della prevista: la gravita' ha il verso giusto;**
+  - **(f2)** **ancora verso `N` piu' alto: il segno dell'inerzia non basta;**
+  - **(f3)** **nessuna forza misurabile** *(mio: l'accelerazione sotto `3` volte il suo errore della parabola)*: **lo scrivo.**
