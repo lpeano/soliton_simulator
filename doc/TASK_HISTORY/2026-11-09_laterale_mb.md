@@ -1348,3 +1348,35 @@
 - **`h_k` e' l'energia del nodo** *(`per_nodo` piu' meta' dei suoi archi, da `termini_di_h`)*: **con `cs` uniforme e' esattamente il coefficiente della reazione** *(`H_k(nodo) + somma (dw/dcs_k) H_a`, con `dw/dcs_k = 1/2`)*. **Con O1 e con O4** *(il nodo meno la media dei `6` vicini)*.
 - **Lo stato: `TBS` a `10000`** *(il file e lo sha come in H4)*. **Le zone, dal centro di `rho`** *(come in (i))*: **il centro `r < w_in`; il guscio `w_in <= r < 3 w_in`; l'alone `3 w_in <= r < R_ZONA`; e il vuoto lontano `r >= R_ZONA`** *(`w_in` dal jsonl di `TBS`; `R_ZONA = 20` come H4; le soglie sono quelle gia' in uso, dichiarate)*. **Per zona: la media, il min, il max di `h_k`, la frazione dei nodi con `h_k > 0`, e `h_k` meno il valore del vuoto `c F3`.**
 - **Accanto, il verso della forza atteso** *(31.3: `V_k = s N'(rho) h_k`, `N' < 0`)*: **`h_k > 0` spinge verso `N` piu' basso, `h_k < 0` verso `N` piu' alto.** ### **Nessuna scelta dello zero: e' di Luca.**
+
+### 31.10 L'ESITO DI S5.0 (e), IL TRIANGOLO *(la corsa dalle `12:59:33` alle `14:55:09` del `2026-11-11`, a `a2137e0d`; il referto `doc/referti_l2/s5_triangolo.txt`; `3/3`)*: **L'ENERGIA E' LIMITATA DAL BASSO E DALL'ALTO, CON TUTTI E DUE GLI ZERI**
+
+- **La scena:** **`TBS` a `L 81`, il triangolo dei nodi `0, 1, 82`** *(`18` estremita', i `3` archi interni)*; **la norma di materia della scena `996944.86`;** **un'energia costa `0.019` s.** **Le energie sono in unita' di `H`** *(`termini_di_h` non pesa: a `N = 1` `G = s H`)*. **Il vuoto `c F3`: `-18.8496` per nodo** *(`-6 pi`, con O1)*.
+- ### **IL LIMITE DEL TEMPO:** **le quasi-energie del tick lineare:**
+  - **`psi`: `eps` fra `-0.4827` e `+0.4767` per tick** *(il `15.3%` della finestra `(-pi, pi]`; `|lambda| = 1` alla dodicesima cifra)*;
+  - **`phi`: `+-0.4712`** *(`+-0.15 pi`; il `15.0%`)*.
+  - **La forma quadratica** *(senza `N`)* **per unita' di norma:** **un nodo `[-2.0708, +1.6485]`; un triangolo `[-3.2192, +2.3430]`** *(la polarizzazione riproduce la forma a `3.4e-12`)*.
+- **IL LIMITE DELLO SPAZIO:** **`N / rho` a `Lambda = 6` cresce da `~1e-8`** *(`rho = 0.001`)* **a `0.215`** *(`rho = 6`)* **e a `0.984`** *(`rho = 600`)*: ### **`0 <= N <= rho`.**
+- ### **IL TRIANGOLO a norma per nodo fissata** *(`phi` fisso; `8` partenze; tutte le ottimizzazioni convergono)*, **per unita' di norma, tolto il vuoto:**
+
+| `nu` | O1 min | O1 max | O4 min | O4 max |
+|---|---|---|---|---|
+| `0.001` | `-3.1275` | `+2.3280` | `-2.0444` | `+1.4860` |
+| `0.0631` | `-3.2192` | `+2.3428` | `-2.1460` | `+1.5619` |
+| `3.976` | `-3.2034` | `+2.3588` | `-2.1356` | `+1.5725` |
+| `18` | `-3.0046` | `+2.5576` | `-2.0031` | `+1.7051` |
+| `250.7` | `-2.3268` | `+3.2354` | `-1.5512` | `+2.1569` |
+| `1.58e4` | `-2.2210` | `+3.3412` | `-1.4806` | `+2.2275` |
+| `9.97e5` | `-2.2192` | `+3.3430` | `-1.4795` | `+2.2287` |
+
+  - **Lo stato del MINIMO: la norma tutta sulle `6` estremita' dei `3` archi INTERNI del triangolo** *(`0.167` ciascuna)*; **del MASSIMO: sparsa su tutte le `18`.**
+  - **Il minimo e il massimo SALGONO tutti e due di `~+1.0` per unita' di norma dalle norme piccole alle grandi** *(O1: da `-3.22` a `-2.22` e da `+2.34` a `+3.34`)*, **perche' la parte `N` cresce come `rho`** *(`N/rho -> 1`)*: **la forma ottima non cambia** *(lo stesso stato)*.
+  - ### **A `nu = 0.001` il minimo di O1** *(`-3.1275`)* **e' sopra quello di `nu = 0.063`** *(`-3.2192`, il valore della forma quadratica)*: **l'ottimizzazione a `nu` piccolo si e' fermata prima** *(`7` giri)*: **un limite del metodo, dichiarato** *(i giri sono pochi perche' il gradiente e' `~nu`)*.
+- ### **LE DOMANDE, senza scegliere:**
+  1. ### **Si': `E_N` e' limitata dal basso e dall'alto a norma conservata, con O1 e con O4.** **Per unita' di norma `[-3.22, +3.34]` con O1, `[-2.15, +2.23]` con O4** *(su `nu` da `1e-3` a `1e6`)*. **Con O1 il vuoto ha `-6 pi` per nodo; con O4 il vuoto ha `0`** *(e la somma di O4 sul toro e' zero per costruzione)*.
+  2. **`rho_max` per nodo del triangolo = `M / 3 = 332314.95`** *(tutta la materia della scena nei `3` nodi)*: **`N_min = 1 / (1 + rho_max / rho_c) > 0` per ogni `rho_c > 0`: `N` NON arriva a `0` a norma finita.**
+  3. **Le scale per `rho_c`** *(NESSUNA scelta)*:
+     - **`rho_max = 332315`;**
+     - **`Lambda = 6`** *(dove `x = 1`, `N/rho = 0.215`)*;
+     - **il tetto del tick:** **l'energia per unita' di norma resta sotto `3.4`, mentre il tetto `pi / dtau` in unita' di `H` e' `pi / s = 20.9` a `s 0.15`:** **il triangolo lo toccherebbe solo a `s >= ~0.94`.**
+- **Nessuna fermata:** **l'energia e' limitata con tutti e due gli zeri.** **Il passo dopo: il segno di `h_k`** *(31.9)*.
