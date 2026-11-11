@@ -3,6 +3,9 @@ r"""**S4: LA LEGGE M-rho HA UN'INSTABILITA' NELLA MATERIA?** *(sul ramo laterale
 
     python csv/solitone/s4_materia_mrho.py > doc/referti_l2/s4_spettro_materia_mrho.txt
     python csv/solitone/s4_materia_mrho.py --v2 > doc/referti_l2/s4_spettro_materia_mrho_v2.txt
+    python csv/solitone/s4_materia_mrho.py --lapse > doc/referti_l2/s5_lapse_spettro.txt
+
+**`--lapse`** *(T-L3 di S5.2, sez. `31.15`)*: **la mappa e' il BANCO DEL LAPSE** *(`tick_lapse.tick`, la colonna «M-rho» e' il lapse)* **contro il `cs` congelato** *(il fondo passato identico, come `--v2`)*; **niente `A = F + P Q`** *(la reazione non e' un solo numero per nodo)*; **DEVE FALLIRE: il banco senza la reazione a `rho_0 1e-2`; le letture (l1)-(l3).**
 
 **`--v2`** *(S4.7, sez. `30.7`)*: **il fondo `psi_0` calcolato UNA volta sulla mappa M-rho e passato IDENTICO al `cs` congelato; niente legge spenta** *(non e' il riferimento: l'errore n.135)*; **il DEVE contro la tabella del referto di 30.5.**
 
@@ -38,7 +41,15 @@ RAPPORTI = (1e-3, 1e-2, 1e-1, 1.0, 10.0)   # ### Luca: rho_0 / rho_c
 RHO0 = (1e-4, 1e-2, 1.0)                   # ### Luca: rho_0, in unita' della norma per nodo
 S_SCAN = (0.05, 0.15, 0.3)                 # ### Luca
 MEZZO = (1e-2, 1e-1, 0.15)                 # ### mio: il punto della traslazione (rho_0, rapporto, s)
-V2 = "--v2" in sys.argv                     # ### S4.7 (sez. 30.7)
+LAPSE = "--lapse" in sys.argv               # ### T-L3 (sez. 31.15)
+V2 = "--v2" in sys.argv or LAPSE            # ### S4.7 (sez. 30.7); --lapse usa il fondo unico
+SENZA_RHO0 = 1e-2                          # ### sez. 31.15: il DEVE FALLIRE a rho_0 1e-2
+JEANS_K, RETICOLO_K = 1.0, 2.0             # ### sez. 31.15 (miei): |k| < 1 la firma di Jeans, |k| > 2 la scala del reticolo
+
+
+def L0(s):
+    """### la legge del vuoto (`rho_0 = 0`): il lapse con `--lapse`, M-rho senza."""
+    return ("lapse", s, 1.0, False) if LAPSE else ("mrho", s, 1.0)
 TOLL_BASI = 1e-14                          # ### Luca (S4.7): lo scarto fra le basi
 TOLL_30_5 = 1e-3                           # ### mio (sez. 30.7): «alla terza cifra»
 REF_30_5 = os.path.join(os.path.dirname(os.path.dirname(_QUI)), "doc", "referti_l2", "s4_spettro_materia_mrho.txt")
@@ -70,7 +81,8 @@ def main():
     from solitone import bordo as BO
     from solitone import corsa_accensione as CA
     from solitone import toro as TO
-    for m in ("__init__", "corsa_accensione", "toro", "bordo", "carta_punto_fisso", "carta_f1_lunga"):
+    from solitone import tick_lapse as TL
+    for m in ("__init__", "corsa_accensione", "toro", "bordo", "carta_punto_fisso", "carta_f1_lunga", "tick_lapse"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     for m in ("tick", "flussi_parziali", "energia_pesata"):
         _presidio.avvia(os.path.join(os.path.dirname(os.path.dirname(_QUI)), "primo_ordine", m + ".py"))
@@ -128,7 +140,7 @@ def main():
 
         def cs_di(psi, legge):
             """### `legge`: `("mrho", s, rho_c)` o `("cost", valore)`."""
-            if legge[0] == "mrho":
+            if legge[0] in ("mrho", "lapse"):
                 return legge[1] / (1.0 + rho_di(psi) / legge[2])
             return np.full(n, float(legge[1]))
 
@@ -138,6 +150,10 @@ def main():
                 st[k][...] = salvato[k]
             st["psi_h"][...] = psi.reshape(forma_psi)
             st["phi_h"][...] = phi
+            if legge[0] == "lapse":
+                assert dcs is None, "il lapse non ha un impulso di cs"
+                TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3])
+                return st["psi_h"].reshape(n, 12) * np.conj(u_psi) * fattore, st["phi_h"] * np.conj(u_phi) * fattore
             cs = cs_di(psi, legge)
             if dcs is not None:
                 cs = cs + dcs
@@ -275,14 +291,14 @@ def main():
             print("### LE BASI (S4.0 a): il residuo sotto %g" % TOLL_PF)
             basi = {}
             for s in S_SCAN:
-                basi[(0.0, None, s)] = base(0.0, ("mrho", s, 1.0))
+                basi[(0.0, None, s)] = base(0.0, L0(s))
                 stampa_base("rho_0 0, M-rho, s %g" % s, basi[(0.0, None, s)])
                 for rho0 in RHO0:
                     if not V2:
                         basi[(rho0, "spenta", s)] = base(rho0, ("cost", s))
                         stampa_base("rho_0 %g, la legge spenta, s %g" % (rho0, s), basi[(rho0, "spenta", s)])
                     for ra in RAPPORTI:
-                        legge = ("mrho", s, rho0 / ra)
+                        legge = ("lapse", s, rho0 / ra, False) if LAPSE else ("mrho", s, rho0 / ra)
                         basi[(rho0, ra, s)] = base(rho0, legge)
                         stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, M-rho" % (rho0, ra, s), basi[(rho0, ra, s)])
                         basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
@@ -302,13 +318,13 @@ def main():
             print("### rho_0 = 0 CON M-rho (il vuoto stabile per costruzione)")
             for s in S_SCAN:
                 b = basi[(0.0, None, s)]
-                R, dev = risposta(b, ("mrho", s, 1.0))
+                R, dev = risposta(b, L0(s))
                 sp = spettro(R)
                 print("    s %g: la linearita' %.2e; max ||lambda| - 1| %.3e" % (s, dev, sp["dev_unit"]))
                 esito("rho_0 0, M-rho, s %g: lo spettro e' unitario (< %g)" % (s, TOLL_UNIT), sp["dev_unit"] < TOLL_UNIT, "%.3e" % sp["dev_unit"])
             b = basi[(0.0, None, 0.15)]
             print("### IL DEVE FALLIRE: rho_0 0, M-rho, s 0.15, psi e phi per (1 + %g) dopo il tick" % FATT_F)
-            R, _ = risposta(b, ("mrho", 0.15, 1.0), fattore=1.0 + FATT_F)
+            R, _ = risposta(b, L0(0.15), fattore=1.0 + FATT_F)
             sp = spettro(R)
             esito("il fattore: |lambda| = %.3f entro 1e-9 su ogni k" % (1 + FATT_F), abs(sp["max"] - 1 - FATT_F) < 1e-9 and abs(sp["min"] - 1 - FATT_F) < 1e-9, "%.3e, %.3e" % (sp["max"] - 1 - FATT_F, sp["min"] - 1 - FATT_F))
             esito("il fattore: lo spettro e' unitario (< %g)" % TOLL_UNIT, sp["dev_unit"] < TOLL_UNIT, "%.3e" % sp["dev_unit"], deve=False)
@@ -334,7 +350,7 @@ def main():
             for s in S_SCAN:
                 for rho0 in RHO0:
                     for ra in RAPPORTI:
-                        legge = ("mrho", s, rho0 / ra)
+                        legge = ("lapse", s, rho0 / ra, False) if LAPSE else ("mrho", s, rho0 / ra)
                         b = basi[(rho0, ra, s)]
                         bc = basi[(rho0, ("cong", ra), s)]
                         print("  IL PUNTO rho_0 %g, rho_0/rho_c %g (rho_c %.4e), s %g: cs del fondo %.10f" % (rho0, ra, rho0 / ra, s, b["cs0"]))
@@ -356,31 +372,48 @@ def main():
                         spc = spettro(Rc)
                         del Rc
                         dc = descrivi(spc, "il cs congelato")
-                        a1, a2 = d_["m"]
-                        Pk, Qk = risposta_cs(b, legge)
-                        A = sp["Ak"][a1, a2]
-                        Fk = spc["Ak"][a1, a2]
-                        PQ = np.outer(Pk[a1, a2], Qk[a1, a2])
-                        apq = float(np.linalg.norm(A - Fk - PQ) / np.linalg.norm(A))
-                        wb, eb = np.linalg.eig(Fk)
-                        inv = np.linalg.inv(eb)
-                        lam_ = d_["lam"]
-                        contr = np.array([(Qk[a1, a2] @ eb[:, q_]) * (inv[q_, :] @ Pk[a1, a2]) / (lam_ - wb[q_]) for q_ in range(36)])
-                        g = complex(np.sum(contr))
-                        coef = inv @ d_["v"]
-                        pes = np.abs(coef) ** 2 / np.sum(np.abs(coef) ** 2)
-                        oc = np.argsort(-np.abs(contr))
-                        op = np.argsort(-pes)
-                        print("      il meccanismo al k di M-rho: |A - F - P Q| / |A| %.2e; g(lambda) = %+.6e %+.6ei (deve essere 1: lambda non e' un autovalore di F); |P| %.3e, |Q| %.3e; il cs congelato a quel k: max|lambda_b| %.12f"
-                              % (apq, g.real, g.imag, float(np.linalg.norm(Pk[a1, a2])), float(np.linalg.norm(Qk[a1, a2])), float(np.max(np.abs(wb)))))
-                        print("      le bande del cs congelato: i pesi piu' grandi %s; i contributi a g piu' grandi %s" % (
-                            "; ".join("%.4f (omega_b %+.6f, |lambda_b| %.9f)" % (pes[q_], -np.angle(wb[q_]), abs(wb[q_])) for q_ in op[:3]),
-                            "; ".join("%+.4e %+.4ei (omega_b %+.6f)" % (contr[q_].real, contr[q_].imag, -np.angle(wb[q_])) for q_ in oc[:3])))
-                        esito("rho_0 %g, rapporto %g, s %g: A = F + P Q al k piu' instabile (< %g)" % (rho0, ra, s, TOLL_APQ), apq < TOLL_APQ, "%.2e" % apq)
+                        if not LAPSE:
+                            a1, a2 = d_["m"]
+                            Pk, Qk = risposta_cs(b, legge)
+                            A = sp["Ak"][a1, a2]
+                            Fk = spc["Ak"][a1, a2]
+                            PQ = np.outer(Pk[a1, a2], Qk[a1, a2])
+                            apq = float(np.linalg.norm(A - Fk - PQ) / np.linalg.norm(A))
+                            wb, eb = np.linalg.eig(Fk)
+                            inv = np.linalg.inv(eb)
+                            lam_ = d_["lam"]
+                            contr = np.array([(Qk[a1, a2] @ eb[:, q_]) * (inv[q_, :] @ Pk[a1, a2]) / (lam_ - wb[q_]) for q_ in range(36)])
+                            g = complex(np.sum(contr))
+                            coef = inv @ d_["v"]
+                            pes = np.abs(coef) ** 2 / np.sum(np.abs(coef) ** 2)
+                            oc = np.argsort(-np.abs(contr))
+                            op = np.argsort(-pes)
+                            print("      il meccanismo al k di M-rho: |A - F - P Q| / |A| %.2e; g(lambda) = %+.6e %+.6ei (deve essere 1: lambda non e' un autovalore di F); |P| %.3e, |Q| %.3e; il cs congelato a quel k: max|lambda_b| %.12f"
+                                  % (apq, g.real, g.imag, float(np.linalg.norm(Pk[a1, a2])), float(np.linalg.norm(Qk[a1, a2])), float(np.max(np.abs(wb)))))
+                            print("      le bande del cs congelato: i pesi piu' grandi %s; i contributi a g piu' grandi %s" % (
+                                "; ".join("%.4f (omega_b %+.6f, |lambda_b| %.9f)" % (pes[q_], -np.angle(wb[q_]), abs(wb[q_])) for q_ in op[:3]),
+                                "; ".join("%+.4e %+.4ei (omega_b %+.6f)" % (contr[q_].real, contr[q_].imag, -np.angle(wb[q_])) for q_ in oc[:3])))
+                            esito("rho_0 %g, rapporto %g, s %g: A = F + P Q al k piu' instabile (< %g)" % (rho0, ra, s, TOLL_APQ), apq < TOLL_APQ, "%.2e" % apq)
                         tab_.append({"rho0": rho0, "ra": ra, "s": s, "cs0": b["cs0"], "max": sp["max"], "cong": spc["max"], "spenta": spenta[(rho0, s)][0] if not V2 else float("nan"), "d": d_, "dc": dc})
                         if migliore is None or sp["max"] > migliore[0]:
                             migliore = (sp["max"], rho0, ra, s, d_, b, legge)
                         del sp, spc
+            senza = []
+            if LAPSE:
+                print("### T-L3, DEVE FALLIRE: il banco SENZA la reazione a rho_0 %g, contro il cs congelato" % SENZA_RHO0)
+                for s in S_SCAN:
+                    for ra in RAPPORTI:
+                        b = basi[(SENZA_RHO0, ra, s)]
+                        ls = ("lapse", s, SENZA_RHO0 / ra, True)
+                        bs = base(SENZA_RHO0, ls, psi_dato=b["psi"])
+                        R, dev = risposta(bs, ls)
+                        sp = spettro(R)
+                        del R
+                        d_ = descrivi(sp, "senza reazione")
+                        cg = [r_ for r_ in tab_ if (r_["rho0"], r_["ra"], r_["s"]) == (SENZA_RHO0, ra, s)][0]["cong"]
+                        senza.append((s, ra, math.log(sp["max"]) - math.log(cg), d_))
+                        print("    rapporto %g, s %g: il residuo della base %.3e; la linearita' %.2e; ln |lambda|_max senza reazione meno il congelato %+.4e" % (ra, s, max(bs["res_p"], bs["res_f"]), dev, senza[-1][2]))
+                        del sp
             # ============================================================== l'onda piana al punto piu' instabile
             if migliore[0] - 1.0 > STABILE:
                 mx, rho0, ra, s, d_, b, legge = migliore
@@ -416,7 +449,27 @@ def main():
               math.log(r_["max"]) - math.log(r_["cong"]), r_["d"]["k"], r_["d"]["dir"], r_["d"]["fpsi"]))
     inst = {(r_["rho0"], r_["ra"], r_["s"]): r_["max"] - 1.0 > STABILE for r_ in tab_}
     print("  M-rho instabili: %d su %d" % (sum(inst.values()), len(inst)))
-    if V2:
+    if LAPSE:
+        dif = [math.log(r_["max"]) - math.log(r_["cong"]) for r_ in tab_]
+        sopra = [(r_, d) for r_, d in zip(tab_, dif) if d > STABILE]
+        print("  T-L3: il lapse sopra il congelato oltre %g in %d punti su %d; la differenza piu' grande %+.4e" % (STABILE, len(sopra), len(tab_), max(dif)))
+        ssopra = [x for x in senza if x[2] > STABILE]
+        print("  T-L3-F, senza la reazione (rho_0 %g): sopra il congelato in %d punti su %d; il massimo %+.4e" % (SENZA_RHO0, len(ssopra), len(senza), max(x[2] for x in senza) if senza else float("nan")))
+        esito("T-L3-F: senza la reazione il banco NON supera il congelato oltre %g in nessun punto" % STABILE, len(ssopra) == 0, "%d punti sopra" % len(ssopra), deve=False)
+        if not sopra:
+            print("  LA LETTURA: (l1) (I-cs) SPARISCE: il lapse non supera il congelato oltre %g in tutta la mappa" % STABILE)
+        else:
+            ret = [r_ for r_, d in sopra if r_["d"]["k"] > RETICOLO_K]
+            jea = [r_ for r_, d in sopra if r_["d"]["k"] < JEANS_K and r_["d"]["fpsi"] > 0.5]
+            for r_, d in sopra:
+                print("    sopra: rho_0 %g, rapporto %g, s %g: %+.4e, |k| %.5f, la frazione in psi %.4f" % (r_["rho0"], r_["ra"], r_["s"], d, r_["d"]["k"], r_["d"]["fpsi"]))
+            if ret:
+                print("  LA LETTURA: (l3) un'instabilita' alla scala del reticolo (|k| > %g) in %d punti: FERMO" % (RETICOLO_K, len(ret)))
+            elif len(jea) == len(sopra):
+                print("  LA LETTURA: (l2) la firma di Jeans (|k| < %g, l'autovettore nella materia) in tutti i %d punti sopra il congelato: CANDIDATA GRAVITA' (il tasso per rho_0 e k qui sopra)" % (JEANS_K, len(sopra)))
+            else:
+                print("  LA LETTURA: caso intermedio (sopra il congelato %d punti: %d con la firma di Jeans, %d alla scala del reticolo)" % (len(sopra), len(jea), len(ret)))
+    if V2 and not LAPSE:
         vecchi = {}
         with open(REF_30_5, encoding="utf-8") as f:
             dentro = False
@@ -442,6 +495,8 @@ def main():
         sf = abs(math.log(r0_["max"]) / vecchi[(1e-4, 1e-2, 0.05)] - 1.0)
         esito("(S4.7) il controllo sa dire di no: il punto (1e-4, 1e-3, 0.05) contro la riga (1e-4, 1e-2, 0.05) di 30.5 entro %g" % TOLL_30_5, sf < TOLL_30_5, "%.3e" % sf, deve=False)
         print("  (S4.7) nessuna lettura nuova (sez. 30.7): la colonna M-rho - cong dice quanto (I-cs) aggiunge sopra (I-mod)")
+    elif LAPSE:
+        pass
     elif not spenta_ok:
         print("  ### LA LEGGE SPENTA NON E' UNITARIA (sopra): la materia e' instabile anche senza orologio; le letture (m1)-(m3) presuppongono un riferimento stabile e NON si leggono (sez. 30.4). FERMO")
     else:
