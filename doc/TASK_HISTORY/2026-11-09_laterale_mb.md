@@ -1194,3 +1194,35 @@
   1. **la cura del mio difetto** *(`q` univoco dentro la coppia)* **e il rifacimento dei punti a `rho_0 = 1`?**
   2. **la legge spenta a `rho_0 = 1` e' instabile per modulazione:** **il riferimento giusto per M-rho e' il `cs` congelato allo stesso `cs`, non la legge spenta?** *(la sez. 30 l'ha gia' misurato accanto)*
   3. **M-rho istantanea ha un anello in fase attraverso la fase della materia:** **la scelta di `rho_c` e il passo dopo sono suoi.**
+
+### 30.6 S4.6: LE DUE INSTABILITA' DI S4, SEPARATE *(Luca `2026-11-11` `11:33`)*
+
+| | (I-mod) | (I-cs) |
+|---|---|---|
+| **che cos'e'** | **la modulazione della materia SENZA orologio** | **l'anello dell'orologio M-rho** |
+| **dove** | **`rho_0 = 1`** *(la legge spenta e il congelato)* | **anche dove (I-mod) non c'e'** *(`rho_0` `1e-4`, `1e-2`)* |
+| **il `k`** | **`|k| 0.4987`** *(`12` equivalenti)* | **vicino a `K`** *(`|k|` `3.2`-`4.2`)* |
+| **l'autovettore** | **il `77%` in `psi`** | **quasi tutto in `phi`** |
+| **il tasso** | **cresce con `s`** *(`2.6e-3`, `7.8e-3`, `1.56e-2`)* | **dipende da `rho_0 / rho_c` e `s`, NON da `rho_0`** |
+| ### **il giudizio** *(Luca)* | ### **CORRETTA: e' l'origine dei solitoni** | ### **NON fisica** |
+
+- ### **IL CRITERIO PER IL FUTURO** *(Luca: la firma di un'instabilita' fisica accettabile, tipo Jeans)*: **su scale LUNGHE** *(`k` piccolo)*; **piu' rapida dove c'e' PIU' materia; l'autovettore nella MATERIA.** **(I-cs) li viola tutti e tre.**
+- ### **L'ERRORE DEL GUARDIANO (n.`135`)** *(scritto da Luca)*: **il DEVE «la legge spenta e' unitaria» era SBAGLIATO:** **la materia senza orologio ha (I-mod), che e' fisica.** ### **Il riferimento giusto e' il `cs` CONGELATO.** **L'attesa l'avevo scritta io stesso in 30.4, e il DEVE l'ho tenuto lo stesso:** **un DEVE contro la propria premessa.**
+- ### **LE RISPOSTE DI LUCA alle tre domande di 30.5:**
+  1. **lo strumento si cura** *(S4.7)*;
+  2. **il riferimento e' il congelato;**
+  3. **`rho_c` NON si sceglie** *(si scansiona come mappa)*.
+- ### **LA DIAGNOSI DEL GUARDIANO, accolta da Luca** *(`11:33`)*: **l'orologio di oggi agisce A SENSO UNICO:** **la materia rallenta il tempo del vuoto senza nessuna reazione su di se', quindi la dinamica non viene da un'energia conservata, e l'anello fa da POMPA** *(una risonanza parametrica: l'autovalore complesso)*. **La decisione di Luca: l'orologio che CONSERVA L'ENERGIA PER COSTRUZIONE** *(S5, sez. `31`)*.
+
+### 30.7 S4.7: LA CURA DELLO STRUMENTO *(prima di S5)*: **IL PROGETTO, PRIMA DEL CODICE**
+
+- ### **`q` UNICO:** **in ogni punto (`rho_0`, `rho_0/rho_c`, `s`) `q` si calcola UNA volta** *(sulla mappa M-rho, come in 30.1)* **e il fondo `psi_0` si passa IDENTICO al `cs` congelato** *(lo stesso array)*: **lo scarto fra le due basi e' `0`** *(stampato; il DEVE: sotto `1e-14`)*. **Il residuo della base del congelato si ricontrolla col SUO tick** *(sotto `1e-12`)*.
+- **Lo script `csv/solitone/s4_materia_mrho.py` si cambia** *(il referto di 30.5 resta rigirabile a `e51dd24c`)*: **un argomento `--v2`** *(il fondo unico; niente legge spenta, che non e' il riferimento)*; **il referto NUOVO `doc/referti_l2/s4_spettro_materia_mrho_v2.txt`, accanto al primo.**
+- **Si rifanno TUTTI i `45` punti** *(anche `1e-4` e `1e-2`, per il DEVE)*, **con la colonna «M-rho meno congelato».**
+- **I DEVE:**
+  - **`A = F + P Q` sotto `1e-6` in TUTTI i `45` punti;**
+  - **lo scarto fra le basi di M-rho e del congelato sotto `1e-14`** *(per costruzione `0`)*;
+  - ### **i punti a `rho_0` `1e-4` e `1e-2` ridanno 30.5 alla terza cifra:** **`ln |lambda|_max` di M-rho, letto dalla tabella del referto di 30.5, entro `1e-3` relativo** *(il mio modo di dire «alla terza cifra»)*;
+  - **DEVE FALLIRE:** **lo stesso confronto contro la riga di un altro punto** *(lo strumento sa dire di no)*;
+  - **restano: le basi, il vuoto con M-rho unitario, il fattore `1.001`, la linearita', la traslazione.**
+- **Non c'e' una lettura nuova:** **S4.7 cura uno strumento; i numeri a `rho_0 = 1` si riportano, e la colonna «M-rho meno congelato» dice quanto (I-cs) aggiunge sopra (I-mod).**
