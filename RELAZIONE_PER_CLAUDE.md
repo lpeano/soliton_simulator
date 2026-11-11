@@ -25232,3 +25232,23 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **La stima** *(non una misura)*: **lo scalino e' dell'ordine di `pi` per unita' di norma, e il solitone di `TBS` e' un condensato di `~1e6` quanti.**
   - **Tre domande aperte.**
 - **Un rimando in `doc/PROGETTO_MITOSI.md`, sez. `7`.**
+
+### 2026-11-11 22:10 -- S5.2 FINITA CON DEVE FALLITI: LA TABELLA DELLE PROVE; FERMO *(la regola `2` per il laterale)*; IL REFERTO DI `C50-0` PARTITO [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]] [[VUOTO-SUL-FONDO]]
+
+- **La catena e' finita alle `21:56:02`.** **Quattro commit, uno per prova** *(T-L1 `18c198e8`, T-L2 `1402041e`, T-L3 `ea5c2cb9`, T-L4 `e924de02`)*.
+
+| la prova | l'esito |
+|---|---|
+| **T-L1** | **`2/2`:** **sul vuoto il banco e' il tick di oggi AL BIT; calmo** |
+| **T-L2** | **`6/8`:** **nessuna deriva col lapse ai tre rapporti, le norme `3.6e-14`;** ### **FALLISCE `dtau^2`** *(il rapporto `s` contro `s/2` e' `1.82`)*; ### **FALLISCE il DEVE FALLIRE** *(senza reazione la pendenza e' a `0.69` errori, ma l'escursione e' `27` volte quella col lapse: il criterio della pendenza e' troppo debole)* |
+| **T-L3** | ### **INTERROTTA:** **il punto fisso di `cs` del banco non converge in `120` giri nelle basi** *(lo scarto `4.2e-04`)* |
+| **T-L4** | **`2/6`:** **il verso si rovescia col gradiente;** ### **con O1 il pacchetto va verso `N` piu' ALTO** *(il tempo piu' veloce: la cima della banda, massa efficace negativa)*; **l'ampiezza e' `0.874` della prevista, la stessa per i quattro `gamma`** |
+| **T-L5** | **FUORI** |
+
+- ### **FERMO: i DEVE falliti si committano e ci si ferma.** **Le domande sono nel task history del laterale, sez. `31.20`:**
+  1. **perche' l'escursione va come `dtau`;**
+  2. **un criterio di deriva che veda il senza-reazione;**
+  3. **dove e perche' non converge il punto fisso di T-L3;**
+  4. **lo scarto sistematico del `13%` di T-L4;**
+  5. **il verso «verso il tempo piu' veloce» con O1.**
+- ### **Il referto di `C50-0` senza singolo e' partito** *(nessuna prova S5.2 in corso)*: **l'esito si committa appena chiude.**
