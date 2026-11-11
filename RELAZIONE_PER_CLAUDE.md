@@ -25162,3 +25162,32 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **con O4 e' misto** *(il guscio negativo in media)*.
 - **Il banco del lapse** *(il progetto `df4aad6a`; il codice `9344cc65`, la suite `67` su `67` dalle `15:54:28` alle `16:16:41`)*: **la corsa del DEVE `N = 1` al bit e' partita.**
 - **`C50-0`: il pezzo `150000 -> 160000` chiuso; ~`66` minuti a pezzo, quindi la fine verso le `20:00`** *(stima)*.
+
+### 2026-11-11 17:50 -- LA SORGENTE MISTA (f): (g2), IL TOTALE POSITIVO ~`pi M`; f.2 DICE CHE `N(S)` CHIEDE SCELTE; FERMO SULLA FORMA DI `N` *(la regola `2` per il laterale)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Le risposte di Luca delle `17:22`:**
+  - **niente `+ pi rho`;**
+  - **lo zero globale corretto;**
+  - **T-L5 resta fuori, voce aperta;**
+  - **T-L4 con O1 simulata, O4 solo prevista.**
+- **S5.2:** **lo script `s5_prove.py` e' committato** *(`b7d78c69`)* **e NON girato:** **le prove del banco aspettano la decisione su `N(rho)` o `N(S)`** *(il mandato delle `16:44`)*.
+- **f.1** *(`e362d4bd`; lo script `e81c5081`; `11/11`)*:
+  - **sul vuoto uniforme `S = 0`** *(`3.6e-15`)*; **contato con O1 darebbe `-6 pi` per nodo.**
+  - ### **Su `TBS` la lettura e' (g2) con tutte e tre le attribuzioni:**
+    - **il totale e' positivo, `S/M` fra `3.18` e `4.17`** *(con l'accoppiamento al vuoto `3.175`, quasi `pi`: l'energia «di riposo» `pi M`)*;
+    - **nel centro e nell'interno `S > 0` ovunque;**
+    - **nel guscio `0.1%`-`1.2%` e' negativo** *(pesato con `rho`)*;
+    - **nell'alone `40%`-`47%`:** **li' `rho ~ 0.02`, e sono le fluttuazioni del vuoto con O4.**
+  - **Il vuoto con le onde di H4:** **la media `0`, la rms `0.206`, la meta' dei nodi negativa.**
+  - ⚠ **L'identita' dello zero per unita' di norma regge a `~5e-12` in assoluto** *(`~4e-16` relativo: `S` arriva a `1.4e4`)*, **non sotto `1e-12` come avevi scritto.**
+- ### **f.2, su carta:** **con `N(S)` la reazione non e' piu' una fase per nodo:**
+  - **tocca anche il VUOTO, al primo anello;**
+  - **chiede cinque scelte:**
+    1. **una forma di `N` per `S < 0`** *(oggi diverge e puo' uscire dal cono)*;
+    2. **che cosa moltiplica `N`;**
+    3. **l'attribuzione dell'accoppiamento** *(`24%` nel centro)*;
+    4. **lo schema della reazione non locale;**
+    5. **oppure `S` solo al passo `5`, col banco a `N(rho)`.**
+  - ### **FERMO: la decisione e' di Luca.**
+- **La ROTTA:** **la riga delle `16:44` nello storico.**
+- **`C50-0`:** **chiuso il pezzo `160000 -> 170000`; la fine verso le `20:30`** *(stima)*; **poi i pezzi, l'indice delle mappe e il referto senza singolo** *(lo script e' gia' committato)*.
