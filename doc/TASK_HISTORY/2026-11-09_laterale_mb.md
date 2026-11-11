@@ -1440,3 +1440,10 @@
   - **Il confronto:** **lo `sha1` di `psi_h` e `phi_h` ai tick `1`, `10`, `100`, `1000`, fra le due corse.**
   - ### **DEVE FALLIRE:** **lo stesso con `rho_c = 1e6`** *(`N` vicino a `1` ma NON uguale)*: **lo `sha1` deve DIFFERIRE gia' al tick `1`** *(lo strumento vede una differenza piccola)*.
 - **Lo script del DEVE: `csv/solitone/s5_banco.py`** *(il referto `doc/referti_l2/s5_banco.txt`)*. **Poi il progetto di S5.2 per esteso** *(le prove, le letture, PRIMA del codice)*.
+
+### 31.14 L'ESITO DI S5.1 *(la corsa dalle `16:22:12` alle `16:26:42` del `2026-11-11`, a `9344cc65`; il referto `doc/referti_l2/s5_banco.txt`; `2/2`)*: **IL BANCO CON `N = 1` E' IL TICK DI OGGI AL BIT**
+
+- ### **DEVE PASSA:** **lo `sha1` di `psi_h` e `phi_h` del banco con `N = 1` = quello del tick di oggi ai tick `1`, `10`, `100`, `1000`** *(per esempio al `1000`: `psi 04e053354db5fcda`, `phi d706b57deb94b48b`)*. **Il punto fisso di `cs` converge in `1` giro a ogni tick.**
+- **DEVE FALLIRE fallisce come deve:** **con `rho_c = 1e6` lo stato al tick `1` e' diverso** *(i giri: `cs` `4`, la reazione `3` e `3`)*.
+- **`E_N` sullo stato di `TBS` a `10000`:** **`6.0570146942e+05` a `N = 1`** *(`= s H`)*, **`6.0455115762e+05` a `rho_c = 1e6`.**
+- **Il costo:** **il tick di oggi `102` s per `1000` tick; il banco a `N = 1` `154` s** *(il mezzo palindromo del punto fisso in piu')*.
