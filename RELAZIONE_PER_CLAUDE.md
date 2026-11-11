@@ -25012,3 +25012,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **S2:** **la suite dello script era verde ieri sera** *(`67` su `67`, dalle `20:29:34` alle `20:45:16`)*; **lo script committato stamattina, `015f5ee2`; la corsa partita** *(l'orario nell'esito)*.
 - ### ⚠ **UN ERRORE MIO, che il criterio nuovo di Luca nomina:** **«le prove fuori dal repo (scratchpad) prima del commit del codice non si fanno: il codice si committa prima di qualunque esecuzione che dia numeri».** **Ieri ho provato S1 e S2 da copie nello scratchpad PRIMA del commit:** **la prova di S2 mi ha mostrato i numeri del caso di oggi** *(e di `Lambda_c 340`, `Lambda 0.1`)* **prima della corsa, e lo strumento l'ho cambiato DOPO** *(`a = 1e-4` con Richardson: l'ho dichiarato in 28.4, `cd58145d`, ma l'ordine codice -> numeri non e' piu' verificabile da git)*. **Le letture (w1)-(w4) sono quelle di 28.2, scritte prima.** **Da ora: nessuna prova prima del commit** *(nella memoria della sessione)*.
 - **La ROTTA:** **`doc/ROTTA.md`** *(scritto ieri sera, committato qui)*; **la riga in cima; F1-F4 marcate archiviate nella voce `5-PF` di `doc/MAPPA.md`; la riga nel task history del laterale.**
+
+### 2026-11-11 09:05 -- S2 CHIUSO SUL LATERALE: (w1) E (w4), IL VUOTO CON LA LEGGE DI `cs` E' INSTABILE PER COSTRUZIONE; FERMO *(la regola `2`; il passo `1` della ROTTA chiuso)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **S2** *(`2ea8a25f`; lo script `015f5ee2`; la corsa dalle `08:50:31` alle `08:52:51`, `20/20`)*: **lo spettro lineare di un tick attorno al vuoto `c F3` con la legge di `cs`, nel riferimento che gira.**
+  - **I controlli:** **a `cs` spento unitario** *(`2.9e-11`)*; **il fattore `1.001` visto** *(il DEVE FALLIRE fallisce)*; **`psi` si stacca;** **oggi `0.160987` per tick contro `0.158`;** ### **un'onda piana seminata nella simulazione vera cresce a `0.16099`** *(il rapporto `1.0000`)*.
+  - ### **Instabili `24` su `24`** *(`12` punti: `Lambda_c` da `8.5` a `340`, `s` `0.05` e `0.3`, `Lambda` da `6` a `0.1`; F1 e la legge istantanea)*. **Nessuna zona stabile.**
+  - **Il modo sta sempre a `|k| = 4 pi / 3`** *(l'angolo della zona di Brillouin)*, **con un autovalore reale.**
+  - **La legge istantanea e' gia' instabile oggi** *(`0.211`)*: **la memoria di F1 rallenta** *(`0.161`)* **ma non salva.**
+  - **Il meccanismo, dalla matrice:** **l'anello `phi -> Lambda -> cs -> phi` si chiude in fase, attraverso le due bande di `phi` a `+-0.2373`.**
+  - **Il tasso dipende da `Lambda / Lambda_c`** *(`Lambda_c 68` = `Lambda 3` alla `12`ma cifra)* **e va a zero con `cs` del vuoto senza mai diventare stabile.**
+  - **Da segnalare:** **`|lambda|` a `k = 0` fra `1.0000006` e `1.0000019` in quattro punti** *(non interpretato)*.
+- ### **LE LETTURE: (w1) la colpa e' della LEGGE; (w4) instabile per costruzione. FERMO: la decisione e' di Luca.**
+  - **Per la ROTTA il passo `1` e' chiuso:** **(w3) non c'e', quindi F1-F4 si archiviano.**
+  - **M-rho e M-Phi** *(sez. `29` del laterale)* **sono le candidate naturali per (w4); la scelta e' di Luca.**
+  - **Il passo `2` e' `C50-0`, in corsa.**
