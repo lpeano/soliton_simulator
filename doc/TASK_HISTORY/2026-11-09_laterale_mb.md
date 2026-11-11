@@ -1423,3 +1423,20 @@
   - **con O4: nel centro verso `N` piu' basso, nel guscio verso `N` piu' alto** *(in media; i segni sono misti)*.
 - ⚠ **L'alone fra `3 w_in = 19.9` e `20` ha solo `12` nodi:** **una zona sottile** *(le soglie erano gia' in uso: dichiarato)*.
 - ### **Nessuna scelta dello zero: e' di Luca** *(e per la decisione delle `13:29` lo zero diventa fisico prima del passo `5`)*.
+
+### 31.13 S5.1, IL BANCO DEL LAPSE: **IL PROGETTO, PRIMA DEL CODICE** *(le scelte di Luca delle `13:22`: il palindromo, la media armonica)*
+
+- **Il modulo `csv/solitone/tick_lapse.py`, FUORI dal nucleo:** **usa `tick.percorri_tick`, `tick.meta_del_palindromo`, `tick.EPS_CS`, `tick.GIRI_MAX`, `energia_pesata.termini_di_h`, `energia_pesata.d_peso_arco`, `energia_pesata.pesi`, `flussi_parziali.s_arco`** *(attraverso `mot.cs`)* **senza modificarli.**
+- ### **IL TICK COL LAPSE** *(lo schema (a))*:
+  1. **`N` a meta' passo:** **`cs = s N(rho)` dallo stato al CENTRO del palindromo, a punto fisso** *(la stessa iterazione di `tick.cs_al_centro`: mezzo palindromo su una COPIA, `rho` della copia, fino a `EPS_CS` relativo; se non converge entro `GIRI_MAX`, ALZA)*;
+  2. **la reazione sulla materia, MEZZO passo prima e MEZZO dopo il palindromo** *(Strang; il palindromo resta simmetrico, quindi il tick resta reversibile)*: **`psi_h -> e^{-i Omega^psi_k dtau/2} psi_h`, con `Omega^psi_k = s N'(rho_k) [ H_k(nodo) + somma_{a in k} (dw_a/dcs_k) H_a(arco) ]`** *(31.3; `termini_di_h` e `d_peso_arco` del nucleo)*, **col PUNTO MEDIO IMPLICITO a punto fisso** *(`Omega` dallo stato a meta' del mezzo passo; `rho` non cambia, perche' e' una fase; fino a `1e-14` relativo, o ALZA)*;
+  3. **il palindromo intero di oggi con `mot.cs` = quel `cs`, `mot.lambda_c = None`** *(niente `CAMM-FASE-VUOTO`: `N` non dipende da `Lambda`)*.
+  - ### **Il POSTO della reazione e' una scelta MIA, dichiarata:** **fuori dal palindromo** *(agli estremi)*, **non dentro come `CAMM-FASE-VUOTO`** *(posizioni `1` e `12`)*, **perche' il banco non puo' cambiare `composizione.ORDINE` senza toccare il nucleo.** **Lo schema resta simmetrico e del secondo ordine.**
+- **`N(rho) = 1 / (1 + rho / rho_c)`, `N'(rho) = -(1/rho_c) / (1 + rho/rho_c)^2`.** **`rho_c` si passa sempre** *(nessun valore predefinito)*; **`N = 1` esatto dove `psi = 0`** *(`rho = 0` da' `1.0` al bit)*.
+- ### **`E_N`, l'osservabile:** **`somma_k w_k H_k(nodo) + somma_a w_a H_a(arco)`, coi pesi DELLO STATO** *(`mot.cs = s N(rho di adesso)` per il tempo della lettura, poi `energia_pesata.pesi`)*: **lo stesso principio di `energia_pesata.g_dello_stato`** *(errore n.12: i pesi dello stato, non quelli del passo)*. **A `N = 1` e' `s H`.**
+- ### **IL DEVE DI S5.1:** **con `N = 1` ovunque il banco ridà il tick di oggi AL BIT per `1000` tick, sulla scena di `TBS` a `10000`.**
+  - **«Il tick di oggi»:** **`tick.percorri_tick` con `mot.cs = s` uniforme e `mot.lambda_c = None`** *(come T1, H4 (v2), S4 «la legge spenta»)*.
+  - **«`N = 1` ovunque»:** **`N` costante `1`** *(un `N` che non dipende da `rho`, quindi `N' = 0`, e la reazione e' `e^{0} = 1` esatto)*.
+  - **Il confronto:** **lo `sha1` di `psi_h` e `phi_h` ai tick `1`, `10`, `100`, `1000`, fra le due corse.**
+  - ### **DEVE FALLIRE:** **lo stesso con `rho_c = 1e6`** *(`N` vicino a `1` ma NON uguale)*: **lo `sha1` deve DIFFERIRE gia' al tick `1`** *(lo strumento vede una differenza piccola)*.
+- **Lo script del DEVE: `csv/solitone/s5_banco.py`** *(il referto `doc/referti_l2/s5_banco.txt`)*. **Poi il progetto di S5.2 per esteso** *(le prove, le letture, PRIMA del codice)*.
