@@ -1226,3 +1226,68 @@
   - **DEVE FALLIRE:** **lo stesso confronto contro la riga di un altro punto** *(lo strumento sa dire di no)*;
   - **restano: le basi, il vuoto con M-rho unitario, il fattore `1.001`, la linearita', la traslazione.**
 - **Non c'e' una lettura nuova:** **S4.7 cura uno strumento; i numeri a `rho_0 = 1` si riportano, e la colonna «M-rho meno congelato» dice quanto (I-cs) aggiunge sopra (I-mod).**
+
+## 31. S5, L'OROLOGIO CHE CONSERVA L'ENERGIA *(Luca `2026-11-11` `11:33`; l'aggiunta (e) delle `11:46`)*: **S5.0, IL PROGETTO SU CARTA, PRIMA DEL CODICE**
+
+**Il banco e' FUORI dal nucleo; il nucleo non si tocca; nessuna taratura** *(`rho_c` come mappa)*. **Le fermate:** **se (a) fallisce; se (e) trova un'energia non limitata dal basso; se una lettura lo dice; comunque dopo S5.2.**
+
+### 31.1 (a) L'ENERGIA DEL TICK DI OGGI, PEZZO PER PEZZO *(dal codice: `primo_ordine/energia_pesata.py`, `termini_di_h`; `flussi_parziali.py`)*
+
+| il pezzo (`composizione.ORDINE`) | il generatore locale | il peso (il «lapse» di oggi) |
+|---|---|---|
+| **`CAMM-GROVER`** *(`psi`, nodo)* | **`-pi (N_k/2 - P_k)`** *(lo zero simmetrico O1: `0.5 nrm_psi - |somma_h psi_h|^2 / d`)* | **`cs_k`** *(`z_nodo`)* |
+| **`CAMM-GROVER-VUOTO`** *(`phi`, nodo)* | **lo stesso su `phi`** | **`cs_k`** |
+| **`CAMM-MONETA-SPIN`** *(`psi`, nodo)* | **`eps * elicita_k`** *(`eps` dal `par`)* | **`cs_k`** *(`dtau_nodo`)* |
+| **`CAMM-MATERIA-VUOTO`** *(nodo)* | **`N_k = Lambda_k (x - arctan x)`, `x = rho_k / Lambda_k`** *(la forma `S1`)* | **`cs_k`** |
+| **`CAMM-SPOSTAMENTO`** *(`psi`, arco)* | **`pi Re <psi_0 | U | psi_1>`** | **`w_a`, la media ARMONICA dei due `cs`** *(`s_arco`, `B-3`)* |
+| **`CAMM-SPOSTAMENTO-VUOTO`** *(`phi`, arco)* | **`pi Re (conj phi_0 phi_1)`** | **`w_a`** |
+| **`CAMM-FASE-VUOTO`** *(`phi`, nodo)* | ### **NON e' un addendo di `H`: e' la parte del gradiente di `G` che passa per i PESI** *(`Omega_k phi_h`, quando `cs = cs(Lambda)`)* | **assente a `mot.lambda_c = None`** |
+
+- ### **(a) REGGE: ogni pezzo ha un generatore LOCALE** *(di nodo o di arco)*, **e l'energia del tick e' gia' scritta nel nucleo come**
+  **`G = somma_k cs_k H_k(nodo) + somma_a w_a H_a(arco)`** *(la decisione di Luca del `2026-10-18` `00:07`; il modulo e' «l'unica fonte dei termini di `H`»)*. **Il controllo esiste gia':** **`hw_energia_pesata.txt` (0): a forma spenta `H_w = h_tot` entro `0.7` ulp.**
+- ### ⭐ **UNA SCOPERTA DAL CODICE, da dire a Luca:** **il nucleo ha GIA' l'orologio che conserva l'energia per la legge su `Lambda`:** **`tick.tick_con_cs`** *(`cs` al centro del palindromo, a punto fisso)* **piu' `CAMM-FASE-VUOTO`** *(la reazione `dG/dphi*` attraverso `cs(Lambda)`)*. ### **S2, H4 e F1 hanno girato con (q2), cioe' con `cs_primo = 0`: la reazione SPENTA.** **L'orologio a senso unico misurato in S2 NON e' la legge del nucleo:** **la legge del nucleo, con la sua reazione, sul vuoto non e' mai stata provata** *(in 28.2 l'avevo scritto: «un ALTRO oggetto, qui NON si misura»)*.
+
+### 31.2 (b) LA FORMA COL LAPSE
+
+- **`E_N = somma_k s N_k H_k(nodo) + somma_a w_a(s N) H_a(arco)`, cioe' `cs_k = s N_k`.** **`N(rho) = 1 / (1 + rho / rho_c)`** *(la forma di M-rho)*, **`N = 1` esatto dove `psi = 0`.**
+- ### **L'ARCO: il mandato propone la media aritmetica o la geometrica. I pezzi del nucleo usano la media ARMONICA** *(`FP.s_arco`, scritta `S/2 - D^2/(2S)` perche' dia `d` al bit quando i due capi sono uguali)*. **Tutte e tre mantengono l'hermiticita'** *(`w_a` e' un numero reale, simmetrico nei due capi, che moltiplica un `H_a` hermitiano)*. ### **Ma usare l'aritmetica o la geometrica vorrebbe dire cambiare `FP.s_arco` (il nucleo: VIETATO) o riscrivere il peso fuori dal nucleo (una SECONDA FONTE della legge: `STRUMENTO-LEGGE-DALLA-TABELLA`).** **La proposta: l'ARMONICA del nucleo** *(e la sua derivata c'e' gia': `energia_pesata.d_peso_arco`, verificata a `1.3e-07`)*. **Una decisione di Luca.**
+
+### 31.3 (c) LE EQUAZIONI DA `E_N` *(per esteso, nel discreto)*
+
+- **Il vuoto:** **`i d phi_h / d tau = dE_N / d phi*_h`:** **i pezzi del vuoto coi pesi `s N`** *(Grover-vuoto `cs_k`, spostamento-vuoto `w_a`, la fase `beta` di `CAMM-MATERIA-VUOTO` pesata `cs_k`)*; **nessuna reazione, perche' `N` non dipende da `Lambda`.**
+- **La materia:** **`i d psi_h / d tau = (i pezzi della materia coi pesi `s N`) + Omega^psi_k psi_h`**, **con**
+  **`Omega^psi_k = s N'(rho_k) [ H_k(nodo) + somma_{a in k} (dw_a / dcs_k) H_a(arco) ]`, `N'(rho) = -(1/rho_c) / (1 + rho/rho_c)^2`.**
+  - ### **E' il termine di reazione** *(`dN/drho` `h`)*: **una FASE uguale per tutte le estremita' del nodo, la stessa forma di `CAMM-FASE-VUOTO` con `rho` al posto di `Lambda` e `psi` al posto di `phi`.** **Non cambia `rho`** *(e' una fase)*; **la forza nasce dalla fase che dipende dal posto:** **un pacchetto sente `Omega^psi` come un potenziale `V_k = s N'(rho) h_k`.**
+  - ### ⚠ **IL VERSO DELLA FORZA DIPENDE DAL SEGNO DI `h_k`, quindi dallo ZERO dell'energia** *(O1 o O4)*: **con `h_k > 0` la materia scende verso `N` piu' basso; con `h_k < 0`, verso `N` piu' alto.** **E' la domanda (1) di (e).**
+
+### 31.4 (d) LO SCHEMA CHE CONSERVA `E_N`
+
+| | il palindromo con `N` a meta' passo *(come `tick_con_cs`, punto fisso a `8` ulp)* + la reazione col punto medio implicito *(come `CAMM-FASE-VUOTO`)* | un gradiente discreto *(per esempio il campo vettoriale medio)* |
+|---|---|---|
+| **la norma** | **esatta all'arrotondamento** *(pezzi unitari e fasi pure)* | **NON esatta in generale** |
+| **reversibile** | **si'** *(palindromo, punto medio simmetrico)* | **si'** *(se simmetrico)* |
+| **`E_N`** | ### **NON al bit: l'errore e' `O(dtau^2)`, limitato, senza deriva** | **al bit** *(a meno dell'arrotondamento)* |
+| **dai pezzi del nucleo** | **si'** | ### **NO:** **una soluzione implicita globale; il nucleo non ha i pezzi per farlo** |
+
+- ### ⛔ **IL PUNTO DA DIRE A LUCA PRIMA DEL CODICE** *(un DEVE contro la sua premessa)*: **gia' OGGI, a `cs` uniforme e costante** *(`N = 1`)*, **il tick NON conserva `H` al bit:** **`hw_energia_pesata.txt` (b), `cs` uniforme `0.450304`: l'escursione di `H_w` e' `8.71e-01` a `dtau 0.5`, `2.19e-01` a `0.25`, ... `3.44e-03` a `0.03125`, la pendenza `1.996`** *(il secondo ordine dello spezzamento)*. ### **Quindi la soglia di T-L2** *(`|Delta E_N / E_N| < 1e-11` alla fine)* **NON si puo' raggiungere col palindromo, nemmeno a `N = 1`.** **Le strade:** **(d1) il palindromo, e T-L2 diventa «nessuna deriva secolare; l'escursione dello stesso ordine di `N = 1`; la pendenza `2` nel dimezzamento di `dtau`»** *(il criterio di `hw_energia_pesata`)*; **(d2) un gradiente discreto, fuori dai pezzi del nucleo, con la norma non esatta.** ### **La scelta e' di Luca: FERMO prima del banco** *(S5.1)*.
+
+### 31.5 (e) QUANTA ENERGIA PUO' CONTENERE UN TRIANGOLO *(Luca `11:46`)*: **IL PROGETTO DELLA MISURA**
+
+- **Lo script `csv/solitone/s5_triangolo.py`** *(la scena di `TBS` a `L 81`, il vuoto `c F3`, `cs = s = 0.15` uniforme: `N = 1`)*; **l'energia SI LEGGE da `energia_pesata.termini_di_h`** *(la fonte unica: nessuna formula ricopiata)*, **come `somma per_nodo + somma per_arco` e come energia per nodo** *(il nodo piu' meta' dei suoi archi)*.
+- ### **IL LIMITE DEL TEMPO:**
+  - **la finestra delle quasi-energie del tick:** **`(-pi/dtau, +pi/dtau)` per unita' di norma, `dtau = 1` tick;** **le bande dal tick lineare** *(`psi` e `phi`, `A(k)` come in S2, gli autovalori `e^{-i eps}`)*: **il minimo e il massimo di `eps`, e quanto la finestra e' piena;**
+  - **l'energia LINEARE** *(le parti quadratiche di `H`: i Grover, la moneta, gli spostamenti)* **come forma quadratica: i suoi autovalori estremi per unita' di norma, ristretta a UN nodo** *(le sue `6` estremita')* **e a UN triangolo** *(le estremita' dei suoi `3` nodi)*; **la matrice per polarizzazione** *(`E(u + v) - E(u - v)`, esatta per una forma quadratica)*.
+- ### **IL LIMITE DELLO SPAZIO:**
+  - **la parte NON lineare** *(`N = Lambda (x - arctan x)`)* **in funzione di `rho`** *(a `Lambda = 6`)*: **una tabella;**
+  - ### **il minimo e il massimo dell'energia di UN triangolo a norma fissata:** **`psi` sulle estremita' dei `3` nodi del triangolo, la norma per nodo FISSATA** *(`nu / 3` ciascuno)*, **`phi = c F3` dappertutto, fisso;** **`nu` da `1e-3`** *(il limite lineare)* **a `18`** *(la norma del vuoto di un triangolo, `3 x 6`)* **fino a TUTTA la norma di materia della scena** *(letta dalla scena)*: **`6` valori geometrici;** **l'ottimizzazione vincolata** *(`scipy`, il vincolo per costruzione: i blocchi di nodo rinormalizzati)*, **`8` partenze casuali** *(seme fisso)*; **il minimo e il massimo trovati, e lo stato che li realizza** *(la norma per spin e per estremita')*.
+  - **Con DUE zeri:** **O1** *(lo zero simmetrico di oggi: quello che `termini_di_h` gia' usa)* **e O4** *(lo zero locale: per nodo `e_k - media_{j in N1(k)} e_j`, il primo anello di `6`; sommato sui `3` nodi del triangolo)*.
+  - **Il costo:** **ogni energia e' un `termini_di_h` sul toro intero** *(~ms)*; ### **un tetto di `60` minuti: se la stima dopo la prima ottimizzazione lo supera, le partenze scendono a `4`** *(dichiarato nel referto)*.
+- ### **LE DOMANDE, senza scegliere:**
+  1. **`E_N` e' limitata dal basso e dall'alto a norma conservata? Con quale zero?** *(Su un toro finito ogni forma quadratica e' limitata e `0 <= N <= rho`: mi aspetto «si'» con tutti e due gli zeri; la misura dice QUANTO.)*
+  2. **`rho_max` per triangolo, e il minimo di `N = 1/(1 + rho_max/rho_c)`:** **`N` puo' arrivare a `0`?** *(A norma finita `rho <= M`, quindi `N >= 1/(1 + M/rho_c) > 0`: `N = 0` solo nel limite `rho_c -> 0`.)*
+  3. **Le scale naturali per `rho_c`, elencate:** **`rho_max`; `Lambda = 6`** *(dove `x = 1`)*; **`rho` al quale l'energia del triangolo tocca il tetto `pi/dtau` per unita' di norma; `rho` al quale la parte non lineare uguaglia la larghezza della banda.** ### **NESSUNA scelta.**
+- **Se l'energia NON e' limitata dal basso con nessuno zero: FERMO prima del banco.**
+
+### 31.6 LA CODA DOPO S5.0
+
+**(1) S4.7** *(in corsa)*; **(2) lo script di (e), la suite, il commit, la corsa;** ### **(3) FERMO: la scelta dello schema (31.4) e della media d'arco (31.2) e' di Luca;** **il banco** *(S5.1)* **e le prove** *(S5.2)* **dopo.**
