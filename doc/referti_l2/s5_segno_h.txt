@@ -1,0 +1,31 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] materia_vuoto.py  sha1-BYTE 9d4ec6ca  committato e pulito
+[TIMBRO] s5_segno_h.py  sha1-BYTE e7b95aba  committato e pulito
+==================================================================================================================================
+S5.0 (e)-bis (sez. 31.9): il segno di h_k nel solitone di TBS a 10000; cs = s = 0.15 uniforme, mot.lambda_c = None; w_in 6.643741; le zone r < w_in, < 3 w_in, < 20, oltre
+==================================================================================================================================
+### il vuoto c F3: h_k (O1) da -1.8849555922e+01 a -1.8849555922e+01; (O4) da 3.553e-15 a 3.553e-15; il totale -1.2367193640e+05
+  DEVE PASSARE: la somma di h_k = il totale (entro 1e-9 relativo)                                                        PASSA   0.000e+00
+  DEVE PASSARE: O4: la somma su tutto il toro e' zero (entro 1e-9 del totale O1)                                         PASSA   8.924e-12
+### TBS_stato_010000.npz: rho totale 996944.862393; il centro di rho (40.50359, 40.50231); il totale E 4.0380097962e+06 (il vuoto -1.2367193640e+05)
+  la zona              nodi  zero        media h          min h          max h   f(h>0) media h - vuoto  rho medio
+  il centro             162    O1  +1.106102e+04  +8.604753e+03  +1.396182e+04   1.0000  +1.107987e+04 2.6551e+03
+  il centro             162    O4  +8.566843e+01  -3.267305e+02  +4.495511e+02   0.6543  +8.566843e+01 2.6551e+03
+  il guscio            1278    O1  +1.833065e+03  -2.682169e+01  +9.174503e+03   0.7300  +1.851915e+03 4.4350e+02
+  il guscio            1278    O4  -1.086569e+01  -3.334491e+02  +3.628153e+02   0.2997  -1.086569e+01 4.4350e+02
+  l'alone                12    O1  -1.907862e+01  -1.969334e+01  -1.865194e+01   0.0000  -2.290604e-01 1.1892e-02
+  l'alone                12    O4  +9.192249e-03  -4.564518e-01  +3.965290e-01   0.6667  +9.192249e-03 1.1892e-02
+  il vuoto lontano     5109    O1  -1.885003e+01  -1.972123e+01  -1.791726e+01   0.0000  -4.759465e-04 5.3925e-03
+  il vuoto lontano     5109    O4  +1.556427e-03  -1.054006e+00  +1.050701e+00   0.4991  +1.556427e-03 5.3925e-03
+  IL VERSO ATTESO DELLA FORZA (31.3: V_k = s N'(rho) h_k, N' < 0): h_k > 0 spinge verso N piu' basso (dove c'e' piu' materia), h_k < 0 verso N piu' alto
+    il centro          O1: la media +1.1061e+04 (verso N piu' basso); O4: la media +8.5668e+01 (verso N piu' basso)
+    il guscio          O1: la media +1.8331e+03 (verso N piu' basso); O4: la media -1.0866e+01 (verso N piu' alto)
+    l'alone            O1: la media -1.9079e+01 (verso N piu' alto); O4: la media +9.1922e-03 (verso N piu' basso)
+  (nessuna scelta dello zero: e' di Luca)
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; 10 s in tutto

@@ -1380,3 +1380,46 @@
      - **`Lambda = 6`** *(dove `x = 1`, `N/rho = 0.215`)*;
      - **il tetto del tick:** **l'energia per unita' di norma resta sotto `3.4`, mentre il tetto `pi / dtau` in unita' di `H` e' `pi / s = 20.9` a `s 0.15`:** **il triangolo lo toccherebbe solo a `s >= ~0.94`.**
 - **Nessuna fermata:** **l'energia e' limitata con tutti e due gli zeri.** **Il passo dopo: il segno di `h_k`** *(31.9)*.
+
+### 31.11 L'ESITO DI V-R, IL VUOTO CON LA REAZIONE ACCESA *(la corsa dalle `15:24:20` alle `15:39:14` del `2026-11-11`, a `e6798e4a`; il referto `doc/referti_l2/s5_vuoto_reazione.txt`; `34/34`)*: **CASO INTERMEDIO -- CON LA REAZIONE IL VUOTO RESTA INSTABILE IN TUTTA LA MAPPA; LA REAZIONE RALLENTA MOLTO DOVE `cs` E' ALTO, E ACCELERA F1 DOVE E' BASSO**
+
+- **I DEVE:** **(q2) ridà S2 alla terza cifra** *(`7.8e-05` relativo, `24` righe)*, **il controllo incrociato fallisce come deve** *(`0.156`)*; **`cs` spento unitario, il fattore `1.001`, la linearita', le basi, l'onda piana: come S2.**
+- ### **LA MAPPA** *(`ln |lambda|_max` per tick; sempre a `|k| = 4 pi / 3`)*:
+
+| il punto | `cs` del vuoto | (L-F1) q2 | (L-F1) q1 | (L-ist) q2 | (L-ist) q1 | (L-nuc) |
+|---|---|---|---|---|---|---|
+| `Lambda_c 8.5` | `0.414` | `0.1393` | `0.0357` | `0.1814` | `0.0402` | `2.13e-05` |
+| `s 0.3` | `0.300` | `0.2210` | `0.0308` | `0.2774` | `0.0314` | `2.18e-05` |
+| `Lambda_c 17` | `0.261` | `0.2188` | `0.0286` | `0.2763` | `0.0273` | `1.48e-05` |
+| **oggi** | **`0.150`** | **`0.1610`** | **`0.1452`** | **`0.2112`** | **`0.1495`** | **`0.1540`** |
+| `Lambda_c 68`, `Lambda 3` | `0.081` | `0.0963` | `0.1120` | `0.1312` | `0.1133` | `0.1138` |
+| `Lambda_c 136` | `0.042` | `0.0526` | `0.0672` | `0.0735` | `0.0674` | `0.0674` |
+| `s 0.05` | `0.050` | `0.0617` | `0.0775` | `0.0857` | `0.0778` | `0.0779` |
+| `Lambda 1` | `0.029` | `0.0361` | `0.0475` | `0.0509` | `0.0474` | `0.0474` |
+| `Lambda_c 340` | `0.017` | `0.0222` | `0.0298` | `0.0315` | `0.0297` | `0.0297` |
+| `Lambda 0.5` | `0.014` | `0.0186` | `0.0251` | `0.0265` | `0.0250` | `0.0250` |
+| `Lambda 0.1` | `0.003` | `0.0038` | `0.0053` | `0.0055` | `0.0052` | `0.0052` |
+
+- ### **LA LETTURA COL CRITERIO SCRITTO: CASO INTERMEDIO** *(stabili `0` su `24`; `q1/q2` fra `0.099` e `1.385`)*: **ne' (r1)** *(nessun punto stabile)*, **ne' (r2)** *(in `8` casi (L-F1) q1 e' piu' VELOCE di q2)*, **ne' (r3)** *(lo scarto supera il `10%`)*.
+- ### **I fatti, senza interpretare:**
+  - **con la reazione, dove `cs` del vuoto e' ALTO** *(`0.26`-`0.41`)* **il tasso scende di un fattore `4`-`10`;** **la legge del nucleo com'e' (L-nuc) li' e' QUASI marginale** *(`1.5e-05`-`2.2e-05` per tick)*;
+  - **dove `cs` e' BASSO** *(`< 0.15`)* **(L-ist) q1 e (L-nuc) coincidono quasi alla terza cifra** *(oggi differiscono del `3%`)*, e (L-F1) q1 e' piu' veloce di (L-F1) q2:** **la memoria di F1 aiutava, la reazione la toglie;**
+  - ### **oggi** *(`cs 0.15`)*: **(L-nuc) `0.154` per tick, quasi come S2.**
+- ### **NON (r1): niente da scrivere in cima al referto.** **V-R non riapre F1-F4 e non cambia la ROTTA** *(Luca: il passo `5` si costruisce sul lapse della materia qualunque sia l'esito)*.
+
+### 31.12 L'ESITO DEL SEGNO DI `h_k` *(la corsa dalle `15:39` alle `15:39:46` del `2026-11-11`, a `5aaaa97b`; il referto `doc/referti_l2/s5_segno_h.txt`; `2/2`)*
+
+- **Lo stato: `TBS` a `10000`** *(`rho` totale `996944.86`; il centro `(40.504, 40.502)`; `w_in 6.644`)*; **il vuoto `c F3`: O1 `-18.8496` per nodo** *(`-6 pi`)*, **O4 `3.6e-15`.** **I controlli:** **la somma di `h_k` = il totale** *(`0.0`)*; **O4 somma a zero sul toro** *(`8.9e-12`)*.
+
+| la zona | nodi | `rho` medio | O1 media | O1 `f(h>0)` | O4 media | O4 `f(h>0)` |
+|---|---|---|---|---|---|---|
+| **il centro** *(`r < w_in`)* | `162` | `2655` | **`+1.106e+04`** | **`1.00`** | **`+85.7`** | `0.65` |
+| **il guscio** *(`< 3 w_in`)* | `1278` | `443` | **`+1.833e+03`** | `0.73` | **`-10.9`** | `0.30` |
+| **l'alone** *(`< 20`)* | `12` | `0.012` | `-19.08` | `0.00` | `+0.009` | `0.67` |
+| **il vuoto lontano** | `5109` | `0.005` | `-18.85` | `0.00` | `+0.002` | `0.50` |
+
+- ### **Il verso atteso della forza** *(31.3: `h_k > 0` verso `N` piu' basso)*:
+  - **con O1: nel centro e nel guscio verso `N` piu' basso** *(verso la materia)*; **fuori, `h_k < 0` e la forza va verso `N` piu' alto** *(ma li' `rho ~ 0`, `N' ~ -1/rho_c` e `N ~ 1`)*;
+  - **con O4: nel centro verso `N` piu' basso, nel guscio verso `N` piu' alto** *(in media; i segni sono misti)*.
+- ⚠ **L'alone fra `3 w_in = 19.9` e `20` ha solo `12` nodi:** **una zona sottile** *(le soglie erano gia' in uso: dichiarato)*.
+- ### **Nessuna scelta dello zero: e' di Luca** *(e per la decisione delle `13:29` lo zero diventa fisico prima del passo `5`)*.
