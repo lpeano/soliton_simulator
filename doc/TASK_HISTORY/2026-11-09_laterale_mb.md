@@ -1563,3 +1563,18 @@
   4. **lo schema della reazione non locale** *(sulla materia E sul vuoto, al primo anello)*: **il punto medio implicito sull'intera cella, o un altro;**
   5. ### **o `S` entra solo al passo `5`** *(come sorgente di `Phi`, M-Phi)*, **e il banco tiene `N(rho)`** *(la reazione una fase, gia' provata in S5.1)*.
 - ### ⛔ **FERMO** *(Luca: «poi fermo per la decisione su `N(rho)` o `N(S)`»)*. **Le prove del banco** *(S5.2: `s5_prove.py` committato, non girato; T-L3 e T-L4 da scrivere)* **partono con la sua decisione.**
+
+### 31.19 LA DECISIONE DI LUCA DELLE `18:17`: **LA SCELTA 5 -- IL BANCO TIENE `N(rho)`; `S` ENTRA AL PASSO `5` COME SORGENTE DI `Phi`** *(M-Phi)*
+
+- **Le prove del banco S5.2 partono:** **T-L1, T-L2, T-L3, T-L4 con O1, e il DEVE FALLIRE senza la reazione; T-L5 fuori** *(la voce aperta delle `17:22`)*.
+- **L'ordine** *(un test alla volta dove serve la suite; le suite non partono con due processi gia' in corsa)*:
+  1. **il codice che manca, committato prima:** **T-L3** *(l'argomento `--lapse` di `s4_materia_mrho.py`, il progetto in 31.15)*; **T-L4** *(uno script NUOVO, `csv/solitone/s5_caduta.py`, perche' `s5_prove.py` sara' in uso da T-L2)*;
+  2. **la suite;**
+  3. **le corse: T-L1, poi T-L2, T-L3 e T-L4.**
+- ### **T-L4, i dettagli che 31.15 non fissava** *(miei, dichiarati prima del codice)*:
+  - **`N(x) = 1 + gamma sin(2 pi i1 / L)`** *(`i1` l'indice lungo `A1`)*: **il gradiente sta lungo il vettore reciproco `B_0`** *(perpendicolare ad `A2`)*, **`|grad N| = gamma (2 pi / L)(2/sqrt 3)` dove il seno passa per zero;** **lo spostamento si misura lungo `B_0`.**
+  - **Il pacchetto:** **`q` = la prima colonna della coppia piu' alta a `Gamma`** *(come `_consolida_B.coppia`)*, **l'inviluppo gaussiano di larghezza `8` nodi, `rho` massima `1e-3`, centrato su un nodo con `i1 = 0`** *(`N = 1`, la pendenza massima)*.
+  - ### **La previsione, in forma di raggio e SENZA supporre `epsilon` lineare in `cs`:** **`Omega(x, k) = epsilon(k; s N(x))`, quindi `dk/dt = -(d epsilon / d cs) s dN/dx` e `a = (d^2 epsilon / dk^2) dk/dt = -(d^2 epsilon / dk^2)(d epsilon / d cs) s dN/dx`** *(per tick al quadrato)*. **`epsilon = -arg lambda` della banda del pacchetto** *(quella con la sovrapposizione piu' grande con `q`)*; **le derivate con differenze centrali dal tick lineare di `psi`** *(`A(k)` per `k` lungo `B_0`, `dk = 0.02`; `cs` a `s (1 +- 1e-4)`)*.
+  - **La misura:** **`200` tick; il baricentro lungo `B_0` pesato con `rho`; una parabola** *(l'accelerazione)*. **`gamma` in `{+0.01, -0.01, +0.02, -0.02}`.**
+  - **I DEVE:** **l'accelerazione = la previsione entro il `5%`, per ogni `gamma`;** **col gradiente rovesciato il verso si rovescia;** **e il verso, scritto: verso `N` piu' basso o piu' alto.**
+  - **O4, solo previsto:** **con lo zero locale una pendenza COSTANTE di `N` non da' potenziale** *(il nodo sta sulla media dei vicini: la tabella di `2026-11-08_zero_del_vuoto`, O4)*: **la forza lineare sparisce; resta un termine `~ (a^2/4) lapl(cs)`, a cortissimo raggio.**
