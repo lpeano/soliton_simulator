@@ -1653,3 +1653,21 @@
   - **(f1)** **verso `N` piu' BASSO** *(il tempo piu' lento)*, **l'accelerazione entro il `15%` della prevista: la gravita' ha il verso giusto;**
   - **(f2)** **ancora verso `N` piu' alto: il segno dell'inerzia non basta;**
   - **(f3)** **nessuna forza misurabile** *(mio: l'accelerazione sotto `3` volte il suo errore della parabola)*: **lo scrivo.**
+
+### 31.23 S5.2-bis, PUNTO 3: T-L3 RIFATTA, LO STRUMENTO CURATO -- **IL PROGETTO, PRIMA DEL CODICE**
+
+- **Prima:** **il punto fisso di `cs` del banco non converge in `120` giri** *(lo scarto `4.224e-04`)* **gia' nelle basi, e il referto non diceva DOVE.**
+- ### **LA CURA DELLO STRUMENTO** *(dichiarata: non cambia la legge, solo come si cerca il punto fisso)*:
+  - **`tick_lapse.cs_al_centro` riceve tre argomenti opzionali:**
+    - **`omega`, lo smorzamento** *(`cs <- cs + omega (cs_calcolato - cs)`)*;
+    - **`giri_max`, il tetto** *(predefinito `tick.GIRI_MAX`)*;
+    - **`storia`, lo scarto a ogni giro.**
+  - **A `omega = 1` resta lo stesso codice di prima** *(il ramo `prec = nuovo`)*: **le corse gia' fatte restano valide al loro commit.**
+  - **`s4_materia_mrho.py --lapse2`:** **come `--lapse`, con `omega 0.5` e fino a `1000` giri** *(Luca)*.
+- **Per OGNI punto della mappa:** **il punto fisso del fondo col metodo di prima e col nuovo, e la storia degli scarti** *(i primi `3` e gli ultimi `3`)*, **nel referto.**
+- **I DEVE e le regole:**
+  - **DEVE: dove il metodo di prima converge, lo stesso `cs` col nuovo entro `1e-14`;**
+  - **un punto che non converge nemmeno col metodo nuovo si riporta** *(`rho_0`, `rho_0/rho_c`, `s`, lo scarto finale)* **e si TOGLIE dalla mappa, dichiarato** *(«un fondo uniforme che non ha un punto fisso e' gia' un risultato»)*;
+  - **lo stesso se non converge su una perturbazione della risposta lineare.**
+- **Poi lo spettro come da progetto** *(le letture l1-l3, il `cs` congelato come riferimento, il DEVE FALLIRE senza reazione)*, **col banco di OGGI.** **Il referto: `doc/referti_l2/s5_lapse_spettro_v2.txt`, accanto al primo.**
+- ### ⚠ **Il costo:** **circa `2` ore** *(stima)*: **finira' dopo mezzanotte, e il riavvio forzato di Windows probabilmente la interrompera'.** **Se si interrompe, si rilancia dal suo commit.**
