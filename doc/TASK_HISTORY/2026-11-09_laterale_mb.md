@@ -1798,3 +1798,42 @@
 - ### **IL RIAVVIO E L'ORDINE NUOVO** *(Luca `2026-11-12`, dopo il riavvio di Windows dopo le `2`)*:
   - **A col banco di oggi e' stata INTERROTTA dal riavvio** *(l'uscita parziale scritta l'ultima volta alle `02:10:52`, `333` righe, arrivata nella mappa a `s 0.3`, `(rho_0 0.01, rapporto 0.01)`; nessuna riga d'uscita in `orari_prove`)*: **un esito a meta' NON si committa: si rifa' da capo.**
   - ### **L'ORDINE NUOVO** *(Luca)*: **G1, poi G2** *(brevi e piu' importanti)*, **poi A da capo** *(il banco di oggi; e la forma (a) con TUTTE E DUE le cure, il codice committato prima)*, **poi N** *(se A da' (l1) per la forma (a) e G1 da' (e1))*, **il punto 4** *(lo script committato prima)*, **il punto 6.** **Una prova oltre `60` minuti: lo si dice una volta e si continua.**
+- ### **G1, L'ESITO: `6/8`, DUE DEVE FALLITI -- LA LETTURA (e3): IL SOLITONE VA VERSO `N` PIU' ALTO** *(dalle `09:35:03` alle `09:59:44`, a `e31bdef4` (il codice di `0c7abd11`), `1478 s`; `doc/referti_l2/s5_caduta_solitone.txt`)*
+  - **Passano:** **il tick del banco a `N = 1` = il tick della corsa, AL BIT** *(`20` tick)*; **il verso si rovescia col gradiente, per la forma (a) e per quella di oggi, ai due `gamma`.**
+  - ### **FALLISCE IL CONTROLLO DI SCALA DI `E_g`:** **sul pacchetto lineare `somma h / somma rho = -79902.5`, contro `s d eps/d cs = 0.4758`.**
+    - ### **La mia `h_k` NON e' l'energia della materia:** **`termini_di_h` contiene anche i termini del VUOTO** *(`phi`, che sul pacchetto domina: la norma del pacchetto e' `0.23`)*.
+    - **Quindi `E_g` del solitone** *(`+1.30e+05`, `+0.131` per unita' di norma)* **NON si legge.**
+    - **Il controllo ha fatto il suo lavoro:** **ha fermato un numero sbagliato** *(errore mio di definizione)*.
+  - ### **FALLISCE «a `N = 1` il centro non accelera»:** **`a = -1.36e-08 +- 1.0e-10`** *(`137` errori)*.
+    - **Il solitone ha una sua accelerazione propria, piccola** *(lo `0.3%` di quella a `gamma 0.01`)* **ma ben misurata.**
+    - **Le accelerazioni sotto sono al netto di questa.**
+  - **IL CUORE:** **la frequenza `0.62604` per tick** *(stabile entro `5e-4` su `20` tick)*, **SOPRA la cima della banda** *(`eps_top 0.47673`)*: **lo spostamento di legame `+0.1493`.**
+  - ### **LA CADUTA, al netto di `N = 1`:**
+
+| `gamma` | la forma (a) | la forma di oggi | T-L4b (il pacchetto, forma (a)) |
+|---|---|---|---|
+| `+0.01` | **`+5.14e-06 +- 3.8e-08`** | `+5.87e-06` | `-3.24e-08` |
+| `-0.01` | **`-5.14e-06 +- 3.6e-08`** | `-5.86e-06` | `+3.26e-08` |
+| `+0.02` | **`+8.90e-06 +- 1.4e-07`** | `-1.92e-05` | `-6.54e-08` |
+| `-0.02` | **`-8.91e-06 +- 1.4e-07`** | `+1.93e-05` | `+6.73e-08` |
+
+  - ### **LA LETTURA COL CRITERIO SCRITTO: (e3), VERSO `N` PIU' ALTO.**
+    - **Il segno e' opposto a quello del pacchetto di T-L4b, e il modulo e' circa `130`-`160` volte piu' grande.**
+    - **Quindi N non si fa** *(la condizione era (e1))*.
+  - ### ⚠ **UN LIMITE DELLA MISURA, scritto adesso:**
+    - **in `2000` tick il solitone si sposta di `12`-`22` nodi** *(`32` con la forma di oggi)*, **una frazione grande della lunghezza d'onda del seno** *(`L = 81`)*;
+    - **quindi il gradiente NON e' costante sul percorso, e la parabola su `2000` tick e' distorta** *(con la forma di oggi a `gamma 0.02` l'accelerazione cambia perfino segno)*;
+    - **i numeri a `gamma 0.01` sono i piu' affidabili.**
+  - ### **UNA LETTURA A POSTERIORI** *(NON scritta prima: un'osservazione, non una prova)*:
+    - **Il rapporto fra lo spostamento di legame del solitone e quello del pacchetto** *(`(omega - eps_top) / (s d eps/d cs - eps_top) = 0.1493 / -9.007e-04 = -165.8`)* **e' vicino al rapporto MISURATO delle accelerazioni** *(`-158.6 +- 58.7`, `-157.7 +- 53.3` a `gamma 0.01`)*.
+    - **Se non e' un caso, il solitone gravita con la sua energia di legame, come diceva l'ipotesi del guardiano, ma col segno ROVESCIATO: il suo cuore sta SOPRA la cima della banda.**
+    - ### **Contro questa lettura:** **la forma di oggi da' quasi la stessa caduta della forma (a)** *(il rapporto `0.875`)*, **mentre col solo spostamento di legame mi aspetterei la forma (a) molto piu' piccola** *(`0.149` contro `0.626`)*.
+    - **Non lo interpreto oltre: e' una domanda per Luca.** *(I numeri da uno script sul referto.)*
+  - ### **FERMO** *(due DEVE falliti)*.
+    - **La cura del controllo di scala sarebbe definire `h_k` della sola materia** *(i termini di `termini_di_h` che contengono `psi`)*.
+    - **La decisione di rifare G1 e' di Luca.**
+  - ### ⚠ **UN ERRORE MIO, durante la suite della cura 2 di A:**
+    - **ho scritto questo esito e la riga di G1 in `doc/LEGGI_PROVATE.md` MENTRE la suite girava** *(dalle `09:57:36` alle `10:11:56`)*;
+    - **la suite ha visto i file cambiati come «sporcati», ne ha rimesso a posto i byte ed e' uscita col codice `1`** *(i `67` collaudi passano)*;
+    - **riscritti dopo; la suite della cura 2 si rigira sull'albero pulito.**
+    - ### **La regola, per me: durante una suite NESSUN file tracciato si tocca, nemmeno un documento.**

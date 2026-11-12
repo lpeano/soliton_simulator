@@ -1,0 +1,45 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s5_caduta_solitone.py  sha1-BYTE f606ed39  committato e pulito
+==================================================================================================================================
+S5.3 G1 (sez. 32.2): la caduta di un solitone vero, la forma (a); lo stato di TBS a 10000 (E:\soliton_simulator\stati\TBS\TBS_stato_010000.npz); s 0.15; gamma (0.01, -0.01, 0.02, -0.02); 2000 tick, il centro ogni 20; il tetto 3600 s
+==================================================================================================================================
+### la scena: L 81; il cs del motore della scena un array; lambda_c None
+### eps_top = 0.4767266286 per tick (la coppia 0.476726628572, 0.476726628572); s d eps/d cs = 0.475826
+### IL PACCHETTO DI T-L4b: la norma 2.321663e-01; somma h / somma rho = -79902.546259 (s d eps/d cs 0.475826); E_g / norma = -7.990302e+04 (atteso s d eps/d cs - eps_top = -9.007181e-04)
+  DEVE PASSARE: il controllo di scala: per il pacchetto lineare somma h / somma rho = s d eps/d cs entro l'1%            ### FALLISCE   il rapporto -167923.907690
+  DEVE FALLIRE: il controllo di scala: lo stesso con s d eps/d cs raddoppiato                                            ### FALLISCE   
+### IL SOLITONE (TBS a 10000): la norma 9.969449e+05; rho max 3.3497e+03; il centro (c1, c2) 40.5036 40.5023; il cuore 240 nodi (rho > 0.5 rho max)
+    somma h = +6.057015e+05; E_g = somma (h - eps_top rho) = +1.304313e+05; per unita' di norma +1.308310e-01 (il pacchetto di T-L4b: -7.990302e+04; il rapporto -0.0000)
+  DEVE PASSARE: il tick del banco a N = 1 (cs = s, lambda_c None) = il tick della corsa (accensione.tick), 20 tick, entr PASSA   0.000e+00 (al bit: True)
+### IL CUORE: la frequenza per tick 0.6260382538 (min 0.6257793369, max 0.6263193914 su 20 tick); eps_top 0.4767266286; lo spostamento di legame omega - eps_top = +1.493116e-01
+  a     gamma +0.000: lo spostamento lungo B_0 a 500, 1000, 2000 tick +0.00175 +0.00026 -0.01251; la velocita' iniziale +7.2001e-06; a -1.361661e-08 +- 1.0e-10 (136.8 errori); 148 s
+  a     gamma +0.010: lo spostamento lungo B_0 a 500, 1000, 2000 tick +0.86695 +3.32596 +11.80828; la velocita' iniziale +9.0038e-04; a +5.125830e-06 +- 3.8e-08 (136.6 errori); 158 s
+  a     gamma -0.010: lo spostamento lungo B_0 a 500, 1000, 2000 tick -0.86334 -3.32045 -11.82055; la velocita' iniziale -8.7838e-04; a -5.148922e-06 +- 3.6e-08 (142.0 errori); 188 s
+  a     gamma +0.020: lo spostamento lungo B_0 a 500, 1000, 2000 tick +1.73152 +6.59588 +21.95921; la velocita' iniziale +2.6411e-03; a +8.885796e-06 +- 1.4e-07 (63.0 errori); 200 s
+  a     gamma -0.020: lo spostamento lungo B_0 a 500, 1000, 2000 tick -1.72808 -6.58943 -21.97677; la velocita' iniziale -2.6117e-03; a -8.920026e-06 +- 1.4e-07 (64.0 errori); 165 s
+  oggi  gamma +0.010: lo spostamento lungo B_0 a 500, 1000, 2000 tick +3.63132 +13.34306 +32.29114; la velocita' iniziale +1.2941e-02; a +5.857431e-06 +- 7.4e-07 (8.0 errori); 139 s
+  oggi  gamma -0.010: lo spostamento lungo B_0 a 500, 1000, 2000 tick -3.62861 -13.33667 -32.29018; la velocita' iniziale -1.2926e-02; a -5.871388e-06 +- 7.4e-07 (8.0 errori); 163 s
+  oggi  gamma +0.020: lo spostamento lungo B_0 a 500, 1000, 2000 tick +7.15191 +23.28255 +28.01359; la velocita' iniziale +3.9178e-02; a -1.923647e-05 +- 1.7e-06 (11.2 errori); 166 s
+  oggi  gamma -0.020: lo spostamento lungo B_0 a 500, 1000, 2000 tick -7.14709 -23.27566 -27.94805; la velocita' iniziale -3.9201e-02; a +1.926848e-05 +- 1.7e-06 (11.2 errori); 134 s
+  DEVE PASSARE: a N = 1 il centro non accelera: |a| <= 3 errori (la deriva propria e' la parte lineare)                  ### FALLISCE   a -1.362e-08 +- 1.0e-10
+  DEVE PASSARE: a: col gradiente rovesciato il verso si rovescia (gamma +0.01), al netto di N = 1                        PASSA   +5.139e-06, -5.135e-06
+  DEVE PASSARE: a: col gradiente rovesciato il verso si rovescia (gamma +0.02), al netto di N = 1                        PASSA   +8.899e-06, -8.906e-06
+  DEVE PASSARE: oggi: col gradiente rovesciato il verso si rovescia (gamma +0.01), al netto di N = 1                     PASSA   +5.871e-06, -5.858e-06
+  DEVE PASSARE: oggi: col gradiente rovesciato il verso si rovescia (gamma +0.02), al netto di N = 1                     PASSA   -1.922e-05, +1.928e-05
+----------------------------------------------------------------------------------------------------------------------------------
+### LE ACCELERAZIONI NETTE (meno N = 1) CONTRO T-L4b (la forma (a), il pacchetto)
+    gamma +0.010: il solitone +5.139447e-06 +- 3.8e-08 (verso N piu' ALTO); T-L4b -3.240894e-08 +- 1.2e-08; il rapporto -158.5812 +- 58.7290; la forma di oggi +5.871047e-06
+    gamma -0.010: il solitone -5.135306e-06 +- 3.6e-08 (verso N piu' ALTO); T-L4b +3.256412e-08 +- 1.1e-08; il rapporto -157.6983 +- 53.2813; la forma di oggi -5.857772e-06
+    gamma +0.020: il solitone +8.899413e-06 +- 1.4e-07 (verso N piu' ALTO); T-L4b -6.541921e-08 +- 1.1e-08; il rapporto -136.0367 +- 22.9754; la forma di oggi -1.922286e-05
+    gamma -0.020: il solitone -8.906409e-06 +- 1.4e-07 (verso N piu' ALTO); T-L4b +6.733384e-08 +- 1.1e-08; il rapporto -132.2724 +- 21.7076; la forma di oggi +1.928210e-05
+  LA LETTURA: (e3) verso N piu' ALTO
+==================================================================================================================================
+ESITO: 6/8 controlli come devono; fallite: 2 ["il controllo di scala: per il pacchetto lineare somma h / somma rho = s d eps/d cs entro l'1%", "a N = 1 il centro non accelera: |a| <= 3 errori (la deriva propria e' la parte lineare)"]; 1478 s in tutto

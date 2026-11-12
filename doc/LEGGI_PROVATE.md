@@ -88,7 +88,7 @@
 |---|---|---|
 | **T-L4b** | **`7/7`:** ### **il verso GIUSTO** *(verso `N` piu' basso, si rovescia col gradiente)*; **l'ampiezza `~670` volte piu' piccola della forma di oggi, `0.68` della previsione all'ordine zero** *(non (f1))*; **il principio di equivalenza fra tre pacchetti entro il `3.4%`** | `127d5018` *(il referto a `f16cadf8`)* |
 | **A, forma (a)** | **interrotta:** **la base a `(1e-4, 0.1, 0.15)` senza punto fisso con la forma (a)** *(converge in `1` giro senza)*; ### **e un mio errore di progetto: la fase su `psi` non e' globale, `psi` e' accoppiato a `phi`** | `a5f9a514` *(registrata a `1000a48f`)* |
-| **G1** | **da correre** | `0c7abd11` |
+| **G1** | **`6/8`:** ### **(e3) il solitone vero (TBS a `10000`) va verso `N` piu' ALTO** *(`+5.14e-06` a `gamma 0.01`, al netto di `N = 1`; il pacchetto di T-L4b andava al contrario)*; **FALLISCONO il controllo di scala di `E_g`** *(la mia `h_k` contiene il vuoto)* **e la caduta nulla a `N = 1`** *(`-1.36e-08`, `137` errori)*; **il cuore `0.1493` SOPRA la cima della banda** | `0c7abd11` *(corsa a `e31bdef4`)* |
 
 - **Lo stato: CANDIDATA** *(proposto)*.
   - **La lettura di Luca:** **la forza minuscola non e' un difetto; conta che si sommi e che arrivi lontano** *(la portata con M-Phi, passo `5`)*.
