@@ -1,0 +1,19 @@
+U4 DELL'UNIFICAZIONE: I CONTROLLI, UNO ALLA VOLTA (Luca 2026-11-12; il task history doc/TASK_HISTORY/2026-11-12_unificazione.md, sez. 6)
+Il ramo unificazione; il nucleo unificato = quello di zero-nel-nucleo (v2); il vecchio = pre-unificazione-principale (fca1dd26), nel worktree E:\soliton_simulator\wt_pre_unificazione.
+
+(1) LA SUITE COMPLETA, python primo_ordine/collauda.py: 67 su 67 (12:30:28-12:43:36, sull'albero di 6c97a2e3; e ad ogni commit di codice dopo).
+(2) LA CASSETTA, python csv/solitone/collauda.py:
+    107/108 a 6c97a2e3 (D6 scaduta su tutti e due i rami dall'8 novembre; doc/referti_l2/unificazione_cassetta.txt);
+    D6 riallineato a 6c97a2e3 (Luca; 9e32c88d); 108/108 (13:13:51-13:15:01; doc/referti_l2/unificazione_cassetta_bis.txt). P3 della cassetta con e_K convertito.
+(3) P3 (vieta_cs): P3-F e P3-S, la decisione pura, come devono; P3-D in U5 sul primo-ordine locale (doc/referti_l2/unificazione_p3.txt).
+(4) R-1 DI C35-pi, IL PEZZO 60000 -> 66667 (Luca):
+    rifatto (13:44:54-14:38:16, a 27e9bb7e; doc/referti_l2/unificazione_r1_60000.txt): la dinamica al bit, il bordo e l'apertura a 66667 passano; le energie per regione no (lo zero di v2 sposta energia fra archi e nodi);
+    riletto coi criteri di Luca (15:14:22-15:14:46, a a393e310; doc/referti_l2/unificazione_r1_60000_riletto.txt): 4/4 -- la dinamica al bit; il totale convertito 2.3e-16 della scala; M e V per regione e settore al bit; il bordo 1.1e-14; l'apertura a 66667 (e_K + pi); R-1-V e R-1-F falliscono come devono.
+(5) LA RIPRODUZIONE (15:19:43-15:36:02, a 01763cf7; doc/referti_l2/unificazione_riproduzione.txt): 9/9 -- C35-pi da 60000 e TBS da 10000, 1000 tick: rho e gli sha di ogni chiave AL BIT, la norma e la distanza uguali, l'energia convertita entro 1.1e-16.
+(6) IL BANCO E LA U(1):
+    il banco del lapse a N = 1 = il tick del nucleo unificato AL BIT ai tick 1, 10, 100, 1000; il DEVE FALLIRE (rho_c 1e6) come deve: 2/2 (15:36:27-15:39:47, a 01763cf7; doc/referti_l2/unificazione_banco.txt);
+    T1 della U(1), i sigilli di gauge: 6/6 (15:39:47-15:53:03; doc/referti_l2/unificazione_u1_t1.txt). T4 non girato (non breve).
+(7) IL DEVE FALLIRE SENZA CONVERSIONE: dentro (5) (l'energia senza conversione 4.1e-01 e 3.9e-01: fallisce come deve) e dentro (4) (R-1-V).
+IN PIU': U3, il braccio 0 di v2 contro il nucleo vecchio, 4/4 al bit (doc/referti_l2/unificazione_zero_nel_nucleo.txt); l'energia di TBS a 100000, nuovo - vecchio = pi (M + V) con scarto 0.
+
+ESITO: U4 VERDE (dopo il riallineamento di D6 e i criteri corretti di R-1, decisi da Luca).

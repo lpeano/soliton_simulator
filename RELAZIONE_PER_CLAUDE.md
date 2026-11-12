@@ -25436,3 +25436,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le componenti:** **`c = 2 (2 k + e) + sigma`;** **l'arco `k = 0, 1, 2` a `0`, `120`, `60` gradi;** **`e` l'estremita';** **`sigma` lo spin del nucleo.**
 - **I DEVE:** **la somma delle `12` = `rho` di `fc96390e` entro `9.7e-08` e `8.6e-08`;** **il centro entro `7e-15`;** **la norma costante;** **le sole prime `11` falliscono come devono.**
 - **Le frazioni della norma** *(nel referto, a `0`, `1000`, `1800`, `2000` tick)*: **solo numeri, nessuna lettura.**
+
+### 2026-11-12 15:58 -- L'UNIFICAZIONE: U4 VERDE [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **(6):** **il banco a `N = 1` al bit; T1 della U(1) `6/6`.** **(7):** **il DEVE FALLIRE senza conversione dentro (5) e dentro R-1.**
+- ### **U4 VERDE** *(`doc/referti_l2/unificazione_controlli.txt`)*. **In coda:** **i mandati delle `15:12` e delle `15:43`** *(solo scrittura)*, **poi U5.**

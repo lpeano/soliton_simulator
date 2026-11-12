@@ -269,3 +269,6 @@
   - ### **`rho` e gli sha di OGNI chiave AL BIT** *(la rms `0.000e+00`)*, **la norma, `V`, la distanza della coppia** *(`37.428755539897566`)* **uguali;**
   - **l'energia convertita entro `1.1e-16`** *(la soglia di Luca `1e-10`)*;
   - **senza conversione `4.1e-01` e `3.9e-01`: il DEVE FALLIRE fallisce come deve.**
+- ### **(6) IL BANCO E LA U(1):** **il banco a `N = 1` = il tick del nucleo unificato AL BIT** *(`2/2`, dalle `15:36:27` alle `15:39:47`)*; **T1 della U(1) `6/6`** *(dalle `15:39:47` alle `15:53:03`)*. **T4 non girato** *(non breve)*.
+- ### **(7) IL DEVE FALLIRE SENZA CONVERSIONE:** **dentro (5) e dentro R-1 riletto** *(R-1-V)*: **fallisce come deve.**
+- ### **U4 VERDE.** **Il referto riassuntivo: `doc/referti_l2/unificazione_controlli.txt`.**
