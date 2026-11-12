@@ -255,3 +255,12 @@
        - **le energie per regione e per settore NON si confrontano** *(dichiarato: il confine sposta energia fra archi e nodi)*, **ma le loro `M` e `V` al bit;**
     2. **R-1-V col verso giusto** *(`not ...`, come R-1-F)*;
     3. **un commit a se', con la suite;** **e R-1 si rifa'** *(circa `53` minuti)*, **oppure si rilegge dai due jsonl gia' scritti** *(la sabbiera `E:\soliton_simulator\ripresa_R1\C35-pi_20261112_134456`)*.
+- ### **LA DECISIONE DI LUCA** *(`14:55`, ripetuta alle `15:08`)*: **la proposta accettata, con la tolleranza `1e-14` relativa a `max(|tot|, pi (M + V))`** *(il pavimento dell'arrotondamento della costante aggiunta, non una taratura)*; **R-1 si RILEGGE dai jsonl gia' scritti.** **Errore del guardiano `n.141`** *(nella MAPPA, accanto ai miei: la conversione per regione, la contabilita' di R-1-V)*.
+- **Il codice dei criteri** *(`a393e310`, la suite `67` su `67`)*.
+- ### **(4) R-1 RILETTO: `4/4`** *(dalle `15:14:22` alle `15:14:46`, a `a393e310`; `doc/referti_l2/unificazione_r1_60000_riletto.txt`)*:
+  - **la dinamica al bit;**
+  - **i campioni: il TOTALE convertito entro `2.3e-16` della scala, `M` e `V` per regione e per settore al bit, ogni altra chiave al bit;**
+  - **il bordo convertito `1.1e-14`;**
+  - **R-1-V e R-1-F falliscono come devono;**
+  - ### **l'apertura a `66667` PASSA.**
+- **La nota in `doc/LEGGI_PROVATE.md`, sez. `6`:** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il totale, `M` e `V`.**

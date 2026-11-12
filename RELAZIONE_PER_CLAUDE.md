@@ -25417,3 +25417,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il totale convertito con la tolleranza relativa a `|tot|`;**
   - **per regione solo `M` e `V`;**
   - **R-1-V col verso giusto.**
+
+### 2026-11-12 15:20 -- L'UNIFICAZIONE, U4 (4): R-1 RILETTO COI CRITERI CORRETTI `4/4`; ERRORE DEL GUARDIANO n.141 [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **I criteri accettati da Luca** *(`a393e310`)*: **il totale convertito entro `1e-14 max(|tot|, pi (M + V))`; per regione e per settore solo `M` e `V`; R-1-V col verso giusto.**
+- ### **R-1 riletto dai jsonl della sabbiera: `4/4`** *(la dinamica al bit, il totale `2.3e-16` della scala, il bordo `1.1e-14`, l'apertura a `66667`; R-1-V e R-1-F come devono)*.
+- **`doc/LEGGI_PROVATE.md`, sez. `6`:** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il totale, `M` e `V`.**
+- **L'errore `n.141` nella MAPPA.** **Si prosegue con (5), la riproduzione.**

@@ -93,3 +93,8 @@
 - **Lo stato: CANDIDATA** *(proposto)*.
   - **La lettura di Luca:** **la forza minuscola non e' un difetto; conta che si sommi e che arrivi lontano** *(la portata con M-Phi, passo `5`)*.
   - **La condizione per «PRONTA PER IL NUCLEO»** *(il mandato, punto N)*: **A da' (l1) per la forma (a) E G1 da' (e1).**
+
+## 6. IL NUCLEO UNIFICATO E LE ENERGIE DEI REFERTI VECCHI *(Luca `2026-11-12` `14:55`, `15:08`)*
+
+- ### **Le energie per regione e per settore dipendono dalla scelta dello zero;** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il TOTALE** *(convertito: `+ pi (M + V)`, entro `1e-14 max(|tot|, pi (M + V))`)*, **`M` e `V`.**
+- **Il perche':** **lo zero di v2** *(`energia_pesata.termini_di_h`)* **sposta energia fra archi e nodi; sul toro intero si compensa, al confine di una regione no** *(R-1 di C35-pi, `doc/TASK_HISTORY/2026-11-12_unificazione.md`, sez. `6`)*.

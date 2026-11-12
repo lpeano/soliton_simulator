@@ -1,0 +1,11 @@
+### R-1 RILETTO su C35-pi: il pezzo 60000 -> 66667 rifatto nella sabbiera E:\soliton_simulator\ripresa_R1\C35-pi_20261112_134456 (C35-pi_060000.jsonl, 3180 s); il registrato C35-pi_060000.jsonl
+  uguali al bit: {'t1': True, 'sha_fine': True, 'campioni': False, 'D': True, 'D_acc': True, 'dopo_stato': True, 'bordo': False, 'fermata': True, 't_dis': True}; lo sha1 del file delle mappe: True
+  ### le energie CONVERTITE a v2 (conversione_v2: il TOTALE entro TOLL 1e-14 max(|tot|, pi (M + V)); regioni e settori solo M e V al bit; E_ass da accumulatore): i campioni True (lo scarto del totale / la scala 2.253e-16; diverse []); il bordo True (1.075e-14)
+  DEVE FALLIRE: R-1-V lo stesso confronto SENZA conversione (i campioni e il bordo al bit)                       PASSA   
+  DEVE PASSARE: R-1 il pezzo 60000 rifatto dallo stato a 60000 ha sha_fine = quello della corsa (al bit, ogni ch PASSA   
+  DEVE FALLIRE: R-1-F lo sha_fine rifatto = quello dell'ultima riga di C35-0 (un'altra corsa)                    PASSA   
+  la corsa C35-pi su L 162: mu 4.161868161822480, w_in 6.643741075297 (BG-F-0.15 su L 81: 4.161868161822483, 6.643741075297)
+  la corsa C35-pi: e_K della testa -4.7122750003546425 (il nucleo vecchio) + pi = -1.5706823467648499 entro 1e-14 (conversione_v2): la testa e' quella, il nucleo e' v2
+  la corsa C35-pi: APERTURA a 66667 PASSATA (mu e w_in al bit, e_K convertito, lo stato di ripresa = sha_fine del pezzo prima): ci si ferma qui, senza tick
+  DEVE PASSARE: R-A l'apertura del pezzo dopo, a 66667: la testa (mu e w_in al bit, e_K convertito) e lo stato d PASSA   
+ESITO: 4/4 controlli passano; DEVE fallite: 0 []
