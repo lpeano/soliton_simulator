@@ -144,6 +144,30 @@
 | **P9** | **le bande a `Gamma` e un solitone in fondo a una banda a massa positiva** *(i punti B e C del mandato del `2026-11-11` `23:36`)* | **da scrivere** |
 | **P10** | **lo spettro di stabilita' di G, di U e di G + U insieme** | **da scrivere** |
 
+### 7.1 LE DECISIONI DI LUCA DELLE `15:12` *(dopo G1, `f0affd34`, e G1 col campo)*
+
+- ### **a. `E_g`** *(il controllo di scala fallito di G1: la `h_k` conteneva il vuoto)*:
+  - **si corregge la DEFINIZIONE di `h_k`: la sola materia, l'energia del vuoto F3 tolta nodo per nodo;**
+  - **si rifa' SOLO il controllo di scala sul pacchetto di T-L4b;**
+  - **i risultati della forma (a), che non usa `h_k`, restano VALIDI;**
+  - ### **quelli della forma di oggi sono PROVVISORI fino alla correzione.**
+- ### **b. La caduta a `N = 1`** *(`-1.36e-08`, `137` errori)*:
+  - **resta SOTTRATTA nelle accelerazioni nette** *(come in G1)*;
+  - ### **e' un'ANOMALIA APERTA:** **un'accelerazione senza campo, circa lo `0.3%` dei segnali;**
+  - **si studia dentro P1.**
+- ### **c. L'ORDINE DOPO L'UNIFICAZIONE:**
+  1. **P1** *(con l'anomalia a `N = 1`)*;
+  2. **P9;**
+  3. **accanto a P1 e P9, come prove brevi:**
+     - **G1 lunga** *(la forma (a), `gamma +0.02`, `5000` tick, `rho` ogni `20`)*;
+     - **il solitone fermo sul massimo di `N`** *(i punti c, f, g della sez. `8`)*;
+  4. **P4/P5;**
+  5. **P6;**
+  6. **P10;**
+  7. **poi i resti di S5** *(A, lo scarto del `13%`, T-L5)* **con `h_k` corretta.**
+- ### **d. Il motivo, di Luca:** **se dopo P1 e P9 l'inerzia resta negativa, cambia la lettura di G, U e G + U: va saputo PRIMA.**
+- **Le prove registrate restano NON FATTE fino a un mandato che le avvia.**
+
 ## 8. LE OSSERVAZIONI DEL VIDEO DI G1 COL CAMPO *(guardiano, `14:20`-`15:05`; ANALISI e IPOTESI, non misure del repo salvo dove e' detto)*
 
 > **I dati:** `doc/referti_l2/campo_g1/g1_campo_gamma000.npz` e `g1_campo_gamma020.npz` *(`fc96390e`)*; **il profilo radiale da** `doc/referti_l2/campo_TBS/mappe_leggere.npz`.
