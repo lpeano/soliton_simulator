@@ -6,6 +6,31 @@ stato: CONGELATO
 > modifica file in `primo_ordine/`** *(il nucleo, le leggi, i collaudi del nucleo, `collauda.py` compreso)* **finche'
 > `zero-nel-nucleo` non e' riunito al principale per decisione di Luca.** [[H-NUCLEO-CONGELATO]]
 
+## LA RIUNIONE *(Luca `2026-11-12` `10:39`: il passo `3` della ROTTA; U0 confermato da Luca; `doc/TASK_HISTORY/2026-11-12_unificazione.md`)*
+
+- ### **Il nucleo del principale DIVENTA quello del laterale** *(con v2, lo zero simmetrico)*: **la fusione di `zero-nel-nucleo` a `986440d6` sul ramo `unificazione`** *(i tag `pre-unificazione-principale` `fca1dd26`, `pre-unificazione-laterale` `986440d6`)*.
+- ### **Lo stato resta `CONGELATO`**, e **alla fine di U5 si RICONGELA sul nucleo UNIFICATO** *(la decisione di Luca)*.
+  - **Il presidio non ha sha da aggiornare:** **blocca OGNI file sotto `primo_ordine/` sul ramo `primo-ordine`, qualunque contenuto.**
+  - **Sul ramo `unificazione` non agisce** *(guarda il nome del ramo)*: **cosi' la fusione porta il nucleo.**
+- **Il nucleo unificato, i file che cambiano rispetto al principale** *(`sha1-BYTE`, i byte grezzi)*:
+
+| il file | prima *(`fca1dd26`)* | il nucleo unificato |
+|---|---|---|
+| `primo_ordine/_collauda_motore.py` | `e4526319` | `4d60d2f2` |
+| `primo_ordine/_collauda_r60.py` | `2c972bfe` | `1ee3f0eb` |
+| `primo_ordine/_mappa.yaml` | `1eb339be` | `f3bb3fdc` |
+| `primo_ordine/_misura_hw.py` | `a28e1413` | `98c1d34b` |
+| `primo_ordine/_misura_mb2.py` | `266b5600` | `48269077` |
+| `primo_ordine/energia_pesata.py` | `cfaff204` | `43bce8ad` |
+| `primo_ordine/flussi_parziali.py` | `1461182f` | `d43b1cf8` |
+| `primo_ordine/leggi/leggi.yaml` | `809d7fdb` | `1c0eac29` |
+| `primo_ordine/termini/camm_grover.py` | `925a9103` | `10b70489` |
+| `primo_ordine/termini/camm_grover_vuoto.py` | `60ef8476` | `8f88bc20` |
+| `primo_ordine/termini/camm_spostamento.py` | `4123e139` | `d58a753f` |
+| `primo_ordine/termini/camm_spostamento_vuoto.py` | `a98c4267` | `a58a55ea` |
+
+- **La tabella dei due rami qui sotto e le regole 1-7 sono la STORIA fino alla riunione;** **dopo U5 c'e' un ramo solo.**
+
 ## Che cosa lo impone
 
 **Il presidio `H-NUCLEO-CONGELATO`** *(`csv/_nucleo_congelato.py`, chiamato dal `pre-commit` in testa)*: sul ramo

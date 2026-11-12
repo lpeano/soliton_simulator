@@ -1,0 +1,36 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE ae9ad9d6  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] stazionarieta.py  sha1-BYTE 43137784  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s5_prove.py  sha1-BYTE 2b68dee3  committato e pulito
+==================================================================================================================================
+S5.2 (sez. 31.15), la prova L2: s 0.15; w_in 6.643741
+==================================================================================================================================
+### rho_0 = la rho media del centro (r < w_in) di TBS_stato_010000.npz: 2655.072818
+### T-L2: l'energia E_N / s (coi pesi dello stato), 5000 tick, ogni 10; rho_c = rho_0 / r
+  il lapse, r 0.001: 5000 tick (2810 s); E_N/s all'inizio 4.0351173550e+06, alla fine 4.0350428451e+06; l'escursione 2.4773e+02 (relativa 6.139e-05); la pendenza -2.1321e-02 +- 1.1e-02 per unita' di tempo (1.89 errori; tau_int -0.48); le norme: psi 3.57e-14, phi 4.88e-15
+  DEVE PASSARE: T-L2 r 0.001: nessuna deriva, la pendenza entro 3 errori                                                 PASSA   1.89 errori
+  DEVE PASSARE: T-L2 r 0.001: le norme di psi e phi entro 1e-13                                                          PASSA   3.57e-14
+  il lapse, r 0.01: 5000 tick (2511 s); E_N/s all'inizio 4.0093070154e+06, alla fine 4.0094244139e+06; l'escursione 3.8439e+02 (relativa 9.587e-05); la pendenza -2.8998e-02 +- 6.1e-02 per unita' di tempo (0.48 errori; tau_int 12.08); le norme: psi 2.07e-14, phi 2.89e-15
+  DEVE PASSARE: T-L2 r 0.01: nessuna deriva, la pendenza entro 3 errori                                                  PASSA   0.48 errori
+  DEVE PASSARE: T-L2 r 0.01: le norme di psi e phi entro 1e-13                                                           PASSA   2.07e-14
+  il lapse, r 0.1: 5000 tick (3122 s); E_N/s all'inizio 3.7712551160e+06, alla fine 3.7739899019e+06; l'escursione 3.1708e+03 (relativa 8.408e-04); la pendenza +2.4508e-01 +- 2.4e-01 per unita' di tempo (1.01 errori; tau_int 6.28); le norme: psi 1.81e-14, phi 1.89e-15
+  DEVE PASSARE: T-L2 r 0.1: nessuna deriva, la pendenza entro 3 errori                                                   PASSA   1.01 errori
+  DEVE PASSARE: T-L2 r 0.1: le norme di psi e phi entro 1e-13                                                            PASSA   1.81e-14
+  il lapse a s, r 0.01: 1000 tick (366 s); E_N/s all'inizio 4.0093070154e+06, alla fine 4.0094065511e+06; l'escursione 3.8439e+02 (relativa 9.587e-05); la pendenza +6.3239e-01 +- 2.2e-01 per unita' di tempo (2.83 errori; tau_int 0.17); le norme: psi 3.77e-15, phi 2.22e-15
+  il lapse a s/2, r 0.01: 2000 tick (695 s); E_N/s all'inizio 4.0093070154e+06, alla fine 4.0094004621e+06; l'escursione 2.1150e+02 (relativa 5.275e-05); la pendenza +1.8588e-01 +- 7.0e-02 per unita' di tempo (2.67 errori; tau_int -0.11); le norme: psi 3.11e-15, phi 2.66e-15
+  DEVE PASSARE: T-L2: l'escursione scende come dtau^2: il rapporto (s contro s/2, lo stesso tempo fisico) fra 3.2 e 4.8  ### FALLISCE   1.8174
+  N = 1 (il tick di oggi): 5000 tick (228 s); E_N/s all'inizio 4.0380097962e+06, alla fine 4.0380173042e+06; l'escursione 2.7664e+02 (relativa 6.851e-05); la pendenza -6.2232e-03 +- 1.7e-02 per unita' di tempo (0.37 errori; tau_int -0.49); le norme: psi 2.91e-12, phi 1.91e-12
+    l'escursione del lapse (r 0.01) contro N = 1: 1.3895
+  M-rho istantanea, r 0.01: 5000 tick (232 s); E_N/s all'inizio 4.0093070154e+06, alla fine 4.0186570286e+06; l'escursione 1.0026e+04 (relativa 2.501e-03); la pendenza +1.0668e+00 +- 3.4e+00 per unita' di tempo (0.31 errori; tau_int 25.29); le norme: psi 1.83e-14, phi 4.66e-15
+    M-rho istantanea: la pendenza a 0.31 errori (attesa diversa da zero)
+  il lapse SENZA la reazione, r 0.01: 5000 tick (736 s); E_N/s all'inizio 4.0093070154e+06, alla fine 4.0198908770e+06; l'escursione 1.0584e+04 (relativa 2.640e-03); la pendenza +2.4343e+00 +- 3.5e+00 per unita' di tempo (0.69 errori; tau_int 25.33); le norme: psi 1.89e-14, phi 4.00e-15
+  DEVE FALLIRE: T-L2-F: senza la reazione, nessuna deriva (la pendenza entro 3 errori)                                   PASSA   0.69 errori
+==================================================================================================================================
+ESITO: 6/8 controlli come devono; fallite: 2 ["T-L2: l'escursione scende come dtau^2: il rapporto (s contro s/2, lo stesso tempo fisico) fra 3.2 e 4.8", 'T-L2-F: senza la reazione, nessuna deriva (la pendenza entro 3 errori)']; 10709 s in tutto

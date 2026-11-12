@@ -64,8 +64,11 @@ def av(x):
 
 
 def conv(nome):
-    import _zero_simmetrico as ZS
-    return ZS.convenzione_simmetrica() if nome == "simm" else contextlib.nullcontext()
+    """### **Dal `2026-11-08` lo zero simmetrico e' NEL NUCLEO** *(`primo_ordine/flussi_parziali.grover`, `hop_psi`, `hop_phi`; Luca `14:19`)*: ### **`"simm"` non avvolge
+    piu' niente; ogni altro nome ALZA** -- **lo zero di prima non esiste piu' nel nucleo, e un sigillo che lo chiedeva si rigira AL SUO commit** *(darlo in silenzio
+    col simmetrico sarebbe un'altra fisica sotto lo stesso nome)*."""
+    assert nome == "simm", ("lo zero %r non esiste piu': dal 2026-11-08 il nucleo ha lo zero simmetrico; un sigillo vecchio si rigira al suo commit" % (nome,))
+    return contextlib.nullcontext()
 
 
 def matrice(eps, s, lato, nome="simm"):

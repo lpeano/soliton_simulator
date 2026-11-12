@@ -1,0 +1,109 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] carta_f1_lunga.py  sha1-BYTE f77f58f5  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s4_materia_mrho.py  sha1-BYTE adc29b30  committato e pulito
+==================================================================================================================================
+S4 (sez. 30): M-rho nella materia; il fondo sqrt(rho_0) q, q = cos(0.785398) q1 + e^{i 3.926991} sin(0.785398) q2 (griglia.json, e05); a 0.0001; stabile se |lambda|_max - 1 < 1e-09
+==================================================================================================================================
+### la scena: s 0.15 (la scena), la forma materia-vuoto S1, eps 0.5; psi (39366, 2) complex128; Lambda del vuoto per nodo da 5.999999999999868 a 5.999999999999868
+### LA FORMA (a), s 0.05: eps_a = 0.159040441068 per tick (la coppia piu' alta a Gamma del tick di oggi: 0.159040441068, 0.159040441068)
+### LA FORMA (a), s 0.15: eps_a = 0.476726628572 per tick (la coppia piu' alta a Gamma del tick di oggi: 0.476726628572, 0.476726628572)
+### LA FORMA (a), s 0.3: eps_a = 0.950612138576 per tick (la coppia piu' alta a Gamma del tick di oggi: 0.950612138576, 0.950612138576)
+### LE BASI (S4.0 a): il residuo sotto 1e-09
+    rho_0 0, M-rho, s 0.05: rho da 0.000000e+00 a 0.000000e+00; cs del fondo 0.0500000000; omega_psi -0.0000000000, omega_phi -0.1570796327; i residui psi 0.000e+00, phi 4.017e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.001, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.001, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0499500500; omega_psi +3.1269562997, omega_phi -0.1569227100; i residui psi 8.808e-16, phi 4.304e-15; E delle due bande alte 3.127012430101, 3.127012430101 (la differenza 4.44e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0499500500; omega_psi +0.0038712360, omega_phi -0.1569227100; i residui psi 3.483e-15, phi 4.304e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.01, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.01, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0495049505; omega_psi -1.6980129929, omega_phi -0.1555243888; i residui psi 1.734e-15, phi 1.051e-15; E delle due bande alte -1.695940486513, -1.695940486513 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0495049505; omega_psi +0.1574660996, omega_phi -0.1555243888; i residui psi 6.606e-16, phi 1.051e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.1, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.1, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0454545455; omega_psi -0.0486669368, omega_phi -0.1427996661; i residui psi 1.543e-12, phi 2.093e-15; E delle due bande alte -0.031194505788, -0.031194505788 (la differenza 8.93e-15); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0454545455; omega_psi +0.1445847768, omega_phi -0.1427996661; i residui psi 1.380e-13, phi 2.041e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 1, s 0.05, prima (omega 1): ### NON converge in 120 giri; gli scarti 1.80e-16 2.83e-15 5.27e-14 ... 7.37e-04 6.89e-04 6.83e-04
+    il punto fisso di cs, rho_0 0.0001, rapporto 1, s 0.05, nuovo (omega 0.5): ### NON converge in 1000 giri; gli scarti 1.80e-16 1.33e-15 1.33e-14 ... 5.74e-04 5.60e-04 5.34e-04
+    ### il punto (rho_0 0.0001, rapporto 1, s 0.05) NON converge nemmeno col metodo nuovo (lo scarto finale 5.340e-04): si TOGLIE dalla mappa (dichiarato)
+    il punto fisso di cs, rho_0 0.0001, rapporto 10, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 2.60e-18 ... 2.60e-18
+    il punto fisso di cs, rho_0 0.0001, rapporto 10, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 2.60e-18 ... 2.60e-18
+    rho_0 0.0001, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0045454545; omega_psi -0.0486680425, omega_phi -0.0142799666; i residui psi 1.150e-12, phi 1.132e-15; E delle due bande alte -0.031195604007, -0.031195604007 (la differenza 6.05e-15); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0045454545; omega_psi +0.0144596813, omega_phi -0.0142799666; i residui psi 9.355e-14, phi 1.159e-15
+    il punto fisso di cs, rho_0 0.01, rapporto 0.001, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.01, rapporto 0.001, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.01, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0499500500; omega_psi +0.2531001625, omega_phi -0.1569227101; i residui psi 2.051e-15, phi 2.695e-15; E delle due bande alte 0.253311156688, 0.253311156688 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0499500500; omega_psi +0.1588817306, omega_phi -0.1569227101; i residui psi 2.268e-15, phi 2.695e-15
+    il punto fisso di cs, rho_0 0.01, rapporto 0.01, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.01, rapporto 0.01, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.01, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0495049505; omega_psi +1.0829479972, omega_phi -0.1555243889; i residui psi 5.962e-15, phi 1.460e-15; E delle due bande alte 1.085020503581, 1.085020503581 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0495049505; omega_psi +0.1574662371, omega_phi -0.1555243889; i residui psi 1.157e-15, phi 1.460e-15
+    il punto fisso di cs, rho_0 0.01, rapporto 0.1, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.01, rapporto 0.1, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.01, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0454545455; omega_psi +1.6649291785, omega_phi -0.1427996662; i residui psi 1.954e-15, phi 2.584e-15; E delle due bande alte 1.682401609520, 1.682401609520 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0454545455; omega_psi +0.1445849030, omega_phi -0.1427996662; i residui psi 1.455e-15, phi 2.584e-15
+    il punto fisso di cs, rho_0 0.01, rapporto 1, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 3.47e-18 ... 3.47e-18
+    il punto fisso di cs, rho_0 0.01, rapporto 1, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 3.47e-18 ... 3.47e-18
+    rho_0 0.01, rho_0/rho_c 1, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0250000000; omega_psi -1.4117537997, omega_phi -0.0785398164; i residui psi 4.330e-15, phi 1.939e-15; E delle due bande alte -1.358899675353, -1.358899675353 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0250000000; omega_psi +0.0795263628, omega_phi -0.0785398164; i residui psi 3.981e-15, phi 1.939e-15
+    il punto fisso di cs, rho_0 0.01, rapporto 10, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 1.73e-18 ... 1.73e-18
+    il punto fisso di cs, rho_0 0.01, rapporto 10, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 1.73e-18 ... 1.73e-18
+    rho_0 0.01, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0045454545; omega_psi +1.6649279592, omega_phi -0.0142799666; i residui psi 2.706e-15, phi 2.262e-15; E delle due bande alte 1.682400397677, 1.682400397677 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0045454545; omega_psi +0.0144596940, omega_phi -0.0142799666; i residui psi 2.246e-15, phi 2.289e-15
+    il punto fisso di cs, rho_0 1, rapporto 0.001, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 1, rapporto 0.001, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 1, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0499500500; omega_psi +0.1613305999, omega_phi -0.1570718866; i residui psi 2.198e-15, phi 2.112e-15; E delle due bande alte 0.161541594096, 0.161541594096 (la differenza 2.78e-17); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0499500500; omega_psi +0.1602315932, omega_phi -0.1570718866; i residui psi 2.545e-15, phi 2.112e-15
+    il punto fisso di cs, rho_0 1, rapporto 0.01, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 1, rapporto 0.01, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 1, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0495049505; omega_psi +0.1696131800, omega_phi -0.1556722361; i residui psi 1.519e-15, phi 2.284e-15; E delle due bande alte 0.171685686373, 0.171685686373 (la differenza 1.94e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0495049505; omega_psi +0.1588040712, omega_phi -0.1556722361; i residui psi 1.410e-15, phi 2.284e-15
+    il punto fisso di cs, rho_0 1, rapporto 0.1, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 1, rapporto 0.1, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 1, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0454545455; omega_psi +0.2381232605, omega_phi -0.1429354168; i residui psi 1.318e-15, phi 1.071e-15; E delle due bande alte 0.255595691493, 0.255595691493 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0454545455; omega_psi +0.1458132780, omega_phi -0.1429354168; i residui psi 1.063e-15, phi 1.071e-15
+    il punto fisso di cs, rho_0 1, rapporto 1, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 1, rapporto 1, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 1, rho_0/rho_c 1, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0250000000; omega_psi +0.3952237447, omega_phi -0.0786144792; i residui psi 2.105e-15, phi 2.938e-15; E delle due bande alte 0.448077869073, 0.448077869073 (la differenza 1.11e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0250000000; omega_psi +0.0802019691, omega_phi -0.0786144792; i residui psi 8.946e-16, phi 2.938e-15
+    il punto fisso di cs, rho_0 1, rapporto 10, s 0.05, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 1, rapporto 10, s 0.05, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 1, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0045454545; omega_psi +0.2370165037, omega_phi -0.0142935417; i residui psi 3.093e-15, phi 3.433e-16; E delle due bande alte 0.254488942180, 0.254488942180 (la differenza 3.89e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0045454545; omega_psi +0.0145825315, omega_phi -0.0142935417; i residui psi 7.754e-16, phi 3.433e-16
+    rho_0 0, M-rho, s 0.15: rho da 0.000000e+00 a 0.000000e+00; cs del fondo 0.1500000000; omega_psi -0.0000000000, omega_phi -0.4712388980; i residui psi 0.000e+00, phi 6.445e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.001, s 0.15, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.001, s 0.15, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1498501499; omega_psi +3.0974953327, omega_phi -0.4707681299; i residui psi 6.697e-16, phi 2.972e-15; E delle due bande alte 3.097663720175, 3.097663720175 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1498501499; omega_psi +0.0114262334, omega_phi -0.4707681299; i residui psi 1.227e-15, phi 2.972e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.01, s 0.15, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.01, s 0.15, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1485148515; omega_psi +1.1887559089, omega_phi -0.4665731664; i residui psi 3.788e-15, phi 2.505e-15; E delle due bande alte 1.194973118042, 1.194973118042 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1485148515; omega_psi +0.4720153462, omega_phi -0.4665731664; i residui psi 3.037e-15, phi 2.696e-15
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.1, s 0.15, prima (omega 1): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+    il punto fisso di cs, rho_0 0.0001, rapporto 0.1, s 0.15, nuovo (omega 0.5): converge in 1 giri; gli scarti 0.00e+00 ... 0.00e+00
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 617, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 373, in main
+    basi[(rho0, ra, s)] = base(rho0, legge)
+                          ~~~~^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 208, in base
+    p1, f1 = mappa(psi, phi_b, legge, 1.0, 1.0)
+             ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 167, in mappa
+    TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3], omega=OMEGA_L, giri_max=GIRI_L, eps_a=(EPS_A[legge[1]] if FORMA_A else None))
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\tick_lapse.py", line 121, in tick
+    cs, giri = cs_al_centro(mot, st, par, s, legge, senza_reazione, omega=omega, giri_max=giri_max, storia=storia)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\tick_lapse.py", line 103, in cs_al_centro
+    raise AssertionError("il punto fisso di cs del lapse NON converge in %d giri (ultimo scarto %.3e)" % (giri, scarto))
+AssertionError: il punto fisso di cs del lapse NON converge in 1000 giri (ultimo scarto 3.028e-03)

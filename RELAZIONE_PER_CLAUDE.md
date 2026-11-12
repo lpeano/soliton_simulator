@@ -25351,3 +25351,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **i numeri interni di oggi.**
 - **La voce `42` della MAPPA.**
 - **Scritto sul `primo-ordine`** *(l'unificazione e' ancora a U0, in attesa della conferma di Luca)*.
+
+### 2026-11-12 11:50 -- L'UNIFICAZIONE: U1 E U2 *(sul ramo `unificazione`; `primo-ordine` non si tocca fino a U5)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **U1** *(`ec279221`)*: **i tag `pre-unificazione-principale` `fca1dd26` e `pre-unificazione-laterale` `986440d6`, sugli ultimi commit su origin; il ramo `unificazione`.**
+- **U2, la fusione di `zero-nel-nucleo`:**
+  - **un solo conflitto, l'inventario, risolto unendo i due blocchi** *(`592 + 19 + 26 = 637` voci)*;
+  - **ogni altro file = il lato che l'ha cambiato** *(`205` su `205`)*;
+  - **il nucleo e' quello del laterale** *(v2)*; **`NUCLEO_CONGELATO` resta `CONGELATO`;**
+  - **la suite sull'albero fuso: `67` su `67`.**

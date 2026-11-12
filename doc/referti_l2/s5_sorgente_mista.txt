@@ -1,0 +1,55 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] h4_vuoto.py  sha1-BYTE 7f9ffb9b  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] materia_vuoto.py  sha1-BYTE 9d4ec6ca  committato e pulito
+[TIMBRO] s5_sorgente.py  sha1-BYTE 1f8ba293  committato e pulito
+==================================================================================================================================
+S5.0 (f) (sez. 31.16): la sorgente mista S = materia (O1) + vuoto (O4); le attribuzioni dell'accoppiamento ('A-m', 'A-v', 'A-mv'); cs = s = 0.15 uniforme
+==================================================================================================================================
+### IL VUOTO UNIFORME c(10000) F3 (psi = 0): la materia max |.| 0.000e+00; l'accoppiamento max 0.000e+00; il vuoto (O1) da -1.8849555922e+01 a -1.8849555922e+01
+  DEVE PASSARE: il vuoto uniforme, A-m: S = 0 entro 1e-12 per nodo                                                       PASSA   max |S| 3.553e-15
+  DEVE PASSARE: il vuoto uniforme, A-v: S = 0 entro 1e-12 per nodo                                                       PASSA   max |S| 3.553e-15
+  DEVE PASSARE: il vuoto uniforme, A-mv: S = 0 entro 1e-12 per nodo                                                      PASSA   max |S| 3.553e-15
+  DEVE FALLIRE: il vuoto uniforme col vuoto contato con O1 (non O4): S = 0 entro 1e-12                                   ### FALLISCE   S medio -18.849556 (-6 pi = -18.849556)
+### TBS_stato_010000.npz: M = la norma di materia 996944.862393; il centro di rho (40.50359, 40.50231); w_in 6.643741; per nodo: la materia (O1) somma 3.165504e+06, il vuoto (O1) somma -1.161893e+05, l'accoppiamento somma 9.886948e+05
+  la zona             nodi   attr        S medio          S min          S max   f(S<0) rho      rho medio
+  il centro            162    A-m  +1.108063e+04  +8.623007e+03  +1.398031e+04   0.0000e+00     2.6551e+03
+  l'interno            760    A-m  +3.083335e+03  +1.232749e+02  +9.193698e+03   0.0000e+00     7.4066e+02
+  il guscio            254    A-m  +6.283463e+01  -4.900241e+00  +3.009842e+02   1.2746e-03     1.5270e+01
+  l'alone             2090    A-m  -8.216212e-02  -9.891892e+00  +6.473741e+00   4.0445e-01     1.8550e-02
+  il vuoto lontano    3295    A-m  +4.444362e-03  -8.088044e-01  +6.016756e-01   4.2572e-01     1.7013e-03
+    A-m: il totale di S +4.154199e+06; S / M +4.166930; la somma delle parti negative -6.730532e+02 (0.0002 del totale positivo)
+  DEVE PASSARE: A-m: S identica dopo lo spostamento dello zero globale di -18.8496 PER NODO (entro 1.39803e-08)          PASSA   3.638e-12
+    A-m, lo zero per unita' di norma (c = -1.5708): lo scarto di S max 1.121e+01 (previsto c (Lambda_k - media Lambda_j), max 1.121e+01)
+  DEVE PASSARE: A-m: lo scarto per unita' di norma = c (Lambda_k - media_j Lambda_j) entro 1.39803e-08                   PASSA   4.363e-12
+  il centro            162    A-v  +8.456343e+03  +6.523997e+03  +1.068475e+04   0.0000e+00     2.6551e+03
+  l'interno            760    A-v  +2.348605e+03  +7.810919e+01  +7.074017e+03   0.0000e+00     7.4066e+02
+  il guscio            254    A-v  +4.263356e+01  -7.146992e+00  +2.300837e+02   1.1534e-02     1.5270e+01
+  l'alone             2090    A-v  -9.869511e-02  -9.892025e+00  +5.445168e+00   4.6656e-01     1.8550e-02
+  il vuoto lontano    3295    A-v  +4.444356e-03  -8.088044e-01  +6.016756e-01   4.2572e-01     1.7013e-03
+    A-v: il totale di S +3.165504e+06; S / M +3.175205; la somma delle parti negative -7.965600e+02 (0.0003 del totale positivo)
+  DEVE PASSARE: A-v: S identica dopo lo spostamento dello zero globale di -18.8496 PER NODO (entro 1.06847e-08)          PASSA   3.638e-12
+    A-v, lo zero per unita' di norma (c = -1.5708): lo scarto di S max 1.121e+01 (previsto c (Lambda_k - media Lambda_j), max 1.121e+01)
+  DEVE PASSARE: A-v: lo scarto per unita' di norma = c (Lambda_k - media_j Lambda_j) entro 1.06847e-08                   PASSA   5.264e-12
+  il centro            162   A-mv  +9.768486e+03  +7.573502e+03  +1.233253e+04   0.0000e+00     2.6551e+03
+  l'interno            760   A-mv  +2.715970e+03  +1.006920e+02  +8.133857e+03   0.0000e+00     7.4066e+02
+  il guscio            254   A-mv  +5.273409e+01  -4.993663e+00  +2.655339e+02   4.6574e-03     1.5270e+01
+  l'alone             2090   A-mv  -9.042862e-02  -9.891958e+00  +5.959454e+00   4.4047e-01     1.8550e-02
+  il vuoto lontano    3295   A-mv  +4.444359e-03  -8.088044e-01  +6.016756e-01   4.2572e-01     1.7013e-03
+    A-mv: il totale di S +3.659852e+06; S / M +3.671067; la somma delle parti negative -7.038054e+02 (0.0002 del totale positivo)
+  DEVE PASSARE: A-mv: S identica dopo lo spostamento dello zero globale di -18.8496 PER NODO (entro 1.23325e-08)         PASSA   3.638e-12
+    A-mv, lo zero per unita' di norma (c = -1.5708): lo scarto di S max 1.121e+01 (previsto c (Lambda_k - media Lambda_j), max 1.121e+01)
+  DEVE PASSARE: A-mv: lo scarto per unita' di norma = c (Lambda_k - media_j Lambda_j) entro 1.23325e-08                  PASSA   5.264e-12
+  DEVE PASSARE: A_h = quello di H4 (3.308833e-02, alla settima cifra)                                                    PASSA   3.308833e-02
+### IL VUOTO CON LE ONDE di H4 (v1) (A_h 3.308833e-02, 1 - alpha 5.476e-04): S per nodo (le tre attribuzioni coincidono: psi = 0): la media +5.956386e-18, la rms 2.062158e-01, il min -7.654491e-01, il max +8.197857e-01, la frazione negativa 0.4976; la somma +3.907985e-14
+  accanto, il vuoto con O1 sulla stessa scena: la media -1.883580e+01, la rms 3.251650e-01
+----------------------------------------------------------------------------------------------------------------------------------
+  LA LETTURA, A-m: (g2) zone negative (la frazione pesata: il centro 0.0000, il guscio 0.0013, l'alone 0.4045), il totale positivo (+4.154199e+06): l'energia di LEGAME; le parti negative valgono 0.0002 del totale positivo
+  LA LETTURA, A-v: (g2) zone negative (la frazione pesata: il centro 0.0000, il guscio 0.0115, l'alone 0.4666), il totale positivo (+3.165504e+06): l'energia di LEGAME; le parti negative valgono 0.0003 del totale positivo
+  LA LETTURA, A-mv: (g2) zone negative (la frazione pesata: il centro 0.0000, il guscio 0.0047, l'alone 0.4405), il totale positivo (+3.659852e+06): l'energia di LEGAME; le parti negative valgono 0.0002 del totale positivo
+==================================================================================================================================
+ESITO: 11/11 controlli come devono; fallite: 0 []; 11 s in tutto

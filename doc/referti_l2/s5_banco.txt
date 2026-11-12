@@ -1,0 +1,22 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE ae9ad9d6  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s5_banco.py  sha1-BYTE 104d3bb6  committato e pulito
+==================================================================================================================================
+S5.1 (sez. 31.13): il banco del lapse con N = 1 contro il tick di oggi (cs = s = 0.15, lambda_c None), 1000 tick, gli sha ai tick (1, 10, 100, 1000); il DEVE FALLIRE rho_c 1e+06
+==================================================================================================================================
+### lo stato TBS_stato_010000.npz: E_N con N = 1 (= s H) 6.0570146942e+05; con rho_c 1e+06 6.0455115762e+05
+### il tick di oggi 102 s; il banco con N = 1 154 s (i giri del punto fisso di cs: da 1 a 1)
+    tick    1: oggi psi ca4fb129d56b23d1 phi 2cf8f9b544f028eb; il banco psi ca4fb129d56b23d1 phi 2cf8f9b544f028eb
+    tick   10: oggi psi 3ac560a5583deb6c phi a26c649360967934; il banco psi 3ac560a5583deb6c phi a26c649360967934
+    tick  100: oggi psi 673b50b6c43077f2 phi 131fb9d3a8c5aeca; il banco psi 673b50b6c43077f2 phi 131fb9d3a8c5aeca
+    tick 1000: oggi psi 04e053354db5fcda phi d706b57deb94b48b; il banco psi 04e053354db5fcda phi d706b57deb94b48b
+  DEVE PASSARE: S5.1: il banco con N = 1 = il tick di oggi AL BIT ai tick (1, 10, 100, 1000) (psi_h e phi_h)             PASSA   
+### il DEVE FALLIRE: rho_c 1e+06, un tick: psi f9aede34445466b7 phi 7ab78e68e1d22e69; i giri: cs 4, la reazione 3 e 3
+  DEVE FALLIRE: S5.1-F: con rho_c 1e+06 lo stato al tick 1 = quello del tick di oggi al bit                              ### FALLISCE   
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; 266 s in tutto

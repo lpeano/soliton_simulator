@@ -1,0 +1,37 @@
+[TIMBRO] mb_costante.py  sha1-BYTE 2c292a71  committato e pulito
+==================================================================================================================================
+(m-b) IL NUCLEO NUOVO (C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/mbv_nuovo.json) CONTRO IL VECCHIO (C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/mbv_vecchio.json), dallo stato di TBS a 100000, N 200
+==================================================================================================================================
+  DEVE PASSARE: (L0) la dinamica: gli sha dello stato alla fine uguali, ogni chiave                                  PASSA   6 chiavi; diverse []
+  DEVE FALLIRE: (L0-F) contro il vecchio con N 199: gli sha uguali                                                   ### FALLISCE   diverse ['Lambda', 'phi_h', 'psi_h', 'rho']
+  DEVE PASSARE: (L1) e_K nuovo - vecchio = pi entro 4 eps pi                                                         PASSA   3.1415926535897927 (scarto -4.441e-16)
+  la norma M a t0: nuovo 995049.6959049285 vecchio 995049.6959049285; alla fine 995048.4429856299 995048.4429856299
+  (L2) t0   cin  nuovo +5.718476216851755e+06 vecchio +5.718476216851754e+06: (nuovo - vecchio)/M +9.359558406462357e-16 -> 0
+  DEVE PASSARE: (L2) t0 il termine cin: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                       PASSA   +9.359558e-16
+  (L2) t0   vuo  nuovo +2.792413371056760e+03 vecchio -1.095775091106338e+05: (nuovo - vecchio)/M +1.129289551508259e-01 -> ALTRO
+  DEVE PASSARE: (L2) t0 il termine vuo: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                       ### FALLISCE   +1.129290e-01
+  (L2) t0   leg  nuovo +9.872219013428938e+05 vecchio +9.872219013428938e+05: (nuovo - vecchio)/M +0.000000000000000e+00 -> 0
+  DEVE PASSARE: (L2) t0 il termine leg: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                       PASSA   +0.000000e+00
+  (L2) t0   cost nuovo +1.563133823100078e+06 vecchio -1.562906991511603e+06: (nuovo - vecchio)/M +3.141592653589793e+00 -> pi
+  DEVE PASSARE: (L2) t0 il termine cost: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                      PASSA   +0.000000e+00
+  (L2) t0   tot  nuovo +8.271624354665783e+06 vecchio +5.033213617572412e+06: (nuovo - vecchio)/M +3.254521608740619e+00 -> ALTRO
+  DEVE PASSARE: (L2) t0 il termine tot: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                       ### FALLISCE   +3.254522e+00
+  (L2) fine cin  nuovo +5.718407370389438e+06 vecchio +5.718407370389437e+06: (nuovo - vecchio)/M +9.359570191588434e-16 -> 0
+  DEVE PASSARE: (L2) alla fine il termine cin: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                PASSA   +9.359570e-16
+  (L2) fine vuo  nuovo +2.799590193039474e+03 vecchio -1.095654179875659e+05: (nuovo - vecchio)/M +1.129241585901643e-01 -> ALTRO
+  DEVE PASSARE: (L2) alla fine il termine vuo: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                ### FALLISCE   +1.129242e-01
+  (L2) fine leg  nuovo +9.872025852738646e+05 vecchio +9.872025852738646e+05: (nuovo - vecchio)/M +0.000000000000000e+00 -> 0
+  DEVE PASSARE: (L2) alla fine il termine leg: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                PASSA   +0.000000e+00
+  (L2) fine cost nuovo +1.563131854876238e+06 vecchio -1.562905023573379e+06: (nuovo - vecchio)/M +3.141592653589793e+00 -> pi
+  DEVE PASSARE: (L2) alla fine il termine cost: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine               PASSA   -4.440892e-16
+  (L2) fine tot  nuovo +8.271541400732580e+06 vecchio +5.033139514102357e+06: (nuovo - vecchio)/M +3.254516812179957e+00 -> ALTRO
+  DEVE PASSARE: (L2) alla fine il termine tot: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine                ### FALLISCE   +3.254517e+00
+  la norma del vuoto V a t0: nuovo 35768.45723562832 vecchio 35768.45723562832; alla fine 35766.89296500919 35766.89296500919
+  DEVE PASSARE: (R-M) Delta vuo / M lo STESSO a t0 e alla fine, entro 64 eps relativi (la lettura di Luca)           ### FALLISCE   1.129289551508259e-01 e 1.129241585901643e-01 (scarto relativo -4.247e-05)
+  DEVE PASSARE: (R-V) t0: Delta vuo = pi V, entro 64 eps di vuo (la mia ipotesi)                                     PASSA   Delta vuo +1.123699224816906e+05, pi V +1.123699224816906e+05; (R-V') Delta vuo / V +3.141592653589793e+00
+  DEVE PASSARE: (R-V) alla fine: Delta vuo = pi V, entro 64 eps di vuo (la mia ipotesi)                              PASSA   Delta vuo +1.123650081806053e+05, pi V +1.123650081806053e+05; (R-V') Delta vuo / V +3.141592653589794e+00
+  (L3) E + E_ass nuovo - vecchio: a t0 +3.238410737093371e+06 (/M0 +3.254521608740619e+00), alla fine +3.238410737093734e+06 (/M0 +3.254521608740983e+00); E_ass nuovo - vecchio +8.850464e+00; M_ass 4951.55707243213
+  DEVE PASSARE: (L3) E + E_ass: la STESSA costante a t0 e alla fine, entro 64 eps di E                               ### FALLISCE   scarto 3.623e-07 (soglia 1.176e-07)
+  DEVE PASSARE: (L3, mb-a) la stessa, con la soglia da ACCUMULATORE 64 eps E sqrt(2 N), fissata nella sez. 4         PASSA   scarto 3.623e-07 (soglia 2.353e-06)
+==================================================================================================================================
+ESITO: 12/18 controlli come devono; fallite: 6 ['(L2) t0 il termine vuo: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine', '(L2) t0 il termine tot: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine', '(L2) alla fine il termine vuo: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine', '(L2) alla fine il termine tot: (nuovo - vecchio) = 0 o pi M, entro 64 eps del termine', '(R-M) Delta vuo / M lo STESSO a t0 e alla fine, entro 64 eps relativi (la lettura di Luca)', '(L3) E + E_ass: la STESSA costante a t0 e alla fine, entro 64 eps di E']

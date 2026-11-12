@@ -1,0 +1,70 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] materia_vuoto.py  sha1-BYTE 9d4ec6ca  committato e pulito
+[TIMBRO] s5_triangolo.py  sha1-BYTE 0165bb9f  committato e pulito
+==================================================================================================================================
+S5.0 (e) (sez. 31.5): quanta energia puo' contenere un triangolo; cs = s = 0.15 uniforme (N = 1), mot.lambda_c = None; le partenze 8 (ripiego sopra 3600 s: quante ne stanno, almeno 1)
+==================================================================================================================================
+### la scena: L 81, 6561 nodi, i gradi [6]; il triangolo [0, 1, 82] (18 estremita', 6 per nodo; gli archi interni [1, 2, 3]); la norma di materia di TBS_stato_010000.npz a 10000: 996944.862393
+### NOTA: termini_di_h da' H NON pesato; con N = 1 e cs = s uniforme G = s H: le energie qui sono in unita' di H
+### il vuoto c F3 (psi = 0): E totale -1.2367193640e+05; per nodo da -1.8849555922e+01 a -1.8849555922e+01; un'energia costa 0.0187 s
+  DEVE PASSARE: la somma delle energie per nodo = il totale (entro 1e-9 relativo)                                        PASSA   -4.366e-11
+### IL LIMITE DEL TEMPO: le quasi-energie eps = -arg(lambda) del tick lineare (per tick; la finestra (-pi, pi])
+    psi: |lambda| fra 1.000000000000 e 1.000000000000; eps fra -0.482676 e +0.476727 (la finestra (-pi, pi]: occupata 0.1527); per unita' di tempo (eps / s) fra -3.217841 e +3.178178
+    phi: |lambda| fra 0.999999999791 e 1.000000002260; eps fra -0.471239 e +0.471239 (la finestra (-pi, pi]: occupata 0.1500); per unita' di tempo (eps / s) fra -3.141593 e +3.141593
+### LA FORMA QUADRATICA (i Grover, la moneta, gli spostamenti; senza N) per unita' di norma, per polarizzazione
+    un nodo (24 reali): l'energia per unita' di norma fra -2.0707963268 e +1.6484541547; il controllo su un vettore a caso 3.42e-12
+  DEVE PASSARE: un nodo: la polarizzazione riproduce la forma su un vettore a caso (entro 1e-9)                          PASSA   3.42e-12
+    il triangolo (72 reali): l'energia per unita' di norma fra -3.2191818841 e +2.3430066438; il controllo su un vettore a caso 3.48e-12
+  DEVE PASSARE: il triangolo: la polarizzazione riproduce la forma su un vettore a caso (entro 1e-9)                     PASSA   3.48e-12
+### IL LIMITE DELLO SPAZIO: N(rho, Lambda = 6) per nodo (la forma S1), e N / rho
+    rho      0.001: N +9.2592590496e-12, N / rho +0.0000000093
+    rho       0.01: N +9.2592438274e-09, N / rho +0.0000009259
+    rho        0.1: N +9.2577163555e-06, N / rho +0.0000925772
+    rho          1: N +9.1079355122e-03, N / rho +0.0091079355
+    rho          6: N +1.2876110196e+00, N / rho +0.2146018366
+    rho         60: N +5.1173233954e+01, N / rho +0.8528872326
+    rho        600: N +5.9063522004e+02, N / rho +0.9843920334
+### IL TRIANGOLO: il minimo e il massimo dell'energia a norma per nodo fissata (nu / 3), phi = c F3 fisso; le norme nu 0.001, 0.06306, 3.976, 18, 250.7, 1.581e+04, 9.969e+05
+    il vuoto (psi = 0): il triangolo vale O1 -5.6548667765e+01, O4 +1.0658141036e-14
+    nu      0.001, O1, min: -5.6551795242e+01 (per unita' di norma, tolto il vuoto -3.127477); 7 giri, converge; lo stato: la norma per estremita' [0.003 0.206 0.168 0.113 0.150 0.147 0.168 0.002 0.001 0.004 0.003 0.006 0.002 0.004 0.004 0.009 0.006 0.003], sigma_z -0.1078
+    nu      0.001, O1, max: -5.6546339783e+01 (per unita' di norma, tolto il vuoto +2.327982); 8 giri, converge; lo stato: la norma per estremita' [0.040 0.091 0.093 0.112 0.079 0.110 0.086 0.035 0.040 0.035 0.035 0.048 0.039 0.047 0.029 0.026 0.029 0.026], sigma_z -0.0626
+    nu      0.001, O4, min: -2.0444180187e-03 (per unita' di norma, tolto il vuoto -2.044418); 6 giri, converge; lo stato: la norma per estremita' [0.006 0.164 0.159 0.149 0.146 0.142 0.178 0.007 0.010 0.003 0.004 0.003 0.001 0.002 0.008 0.003 0.012 0.004], sigma_z +0.0633
+    nu      0.001, O4, max: +1.4860352471e-03 (per unita' di norma, tolto il vuoto +1.486035); 4 giri, converge; lo stato: la norma per estremita' [0.034 0.075 0.072 0.087 0.106 0.105 0.087 0.042 0.043 0.043 0.042 0.038 0.029 0.031 0.046 0.034 0.037 0.048], sigma_z -0.7304
+    nu    0.06306, O1, min: -5.6751658391e+01 (per unita' di norma, tolto il vuoto -3.219154); 28 giri, converge; lo stato: la norma per estremita' [0.000 0.166 0.166 0.167 0.165 0.167 0.168 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z -0.9380
+    nu    0.06306, O1, max: -5.6400935865e+01 (per unita' di norma, tolto il vuoto +2.342826); 14 giri, converge; lo stato: la norma per estremita' [0.039 0.090 0.103 0.098 0.100 0.102 0.091 0.030 0.033 0.039 0.039 0.038 0.031 0.034 0.032 0.035 0.031 0.036], sigma_z -0.8703
+    nu    0.06306, O4, min: -1.3532341128e-01 (per unita' di norma, tolto il vuoto -2.146044); 27 giri, converge; lo stato: la norma per estremita' [0.000 0.166 0.167 0.167 0.167 0.166 0.166 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z -0.9381
+    nu    0.06306, O4, max: +9.8491976712e-02 (per unita' di norma, tolto il vuoto +1.561948); 13 giri, converge; lo stato: la norma per estremita' [0.034 0.096 0.100 0.095 0.101 0.096 0.098 0.033 0.033 0.036 0.036 0.034 0.033 0.032 0.036 0.037 0.035 0.037], sigma_z -0.9512
+    nu      3.976, O1, min: -6.9285940175e+01 (per unita' di norma, tolto il vuoto -3.203376); 44 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu      3.976, O1, max: -4.7169554327e+01 (per unita' di norma, tolto il vuoto +2.358812); 50 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z +0.9763
+    nu      3.976, O4, min: -8.4915148653e+00 (per unita' di norma, tolto il vuoto -2.135584); 32 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9390
+    nu      3.976, O4, max: +6.2527421934e+00 (per unita' di norma, tolto il vuoto +1.572541); 51 giri, converge; lo stato: la norma per estremita' [0.035 0.097 0.098 0.097 0.098 0.097 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu         18, O1, min: -1.1063110850e+02 (per unita' di norma, tolto il vuoto -3.004580); 46 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z -0.9389
+    nu         18, O1, max: -1.0511715140e+01 (per unita' di norma, tolto il vuoto +2.557608); 58 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu         18, O4, min: -3.6054960533e+01 (per unita' di norma, tolto il vuoto -2.003053); 63 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu         18, O4, max: +3.0691301567e+01 (per unita' di norma, tolto il vuoto +1.705072); 49 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu      250.7, O1, min: -6.3994381613e+02 (per unita' di norma, tolto il vuoto -2.326806); 78 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z -0.9389
+    nu      250.7, O1, max: +7.5465209711e+02 (per unita' di norma, tolto il vuoto +3.235383); 56 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu      250.7, O4, min: -3.8893009898e+02 (per unita' di norma, tolto il vuoto -1.551204); 59 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu      250.7, O4, max: +5.4080050974e+02 (per unita' di norma, tolto il vuoto +2.156922); 49 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu  1.581e+04, O1, min: -3.5170475319e+04 (per unita' di norma, tolto il vuoto -2.220969); 50 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu  1.581e+04, O1, max: +5.2768746096e+04 (per unita' di norma, tolto il vuoto +3.341220); 48 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+    nu  1.581e+04, O4, min: -2.3409284463e+04 (per unita' di norma, tolto il vuoto -1.480646); 58 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z -0.9389
+    nu  1.581e+04, O4, max: +3.5216863124e+04 (per unita' di norma, tolto il vuoto +2.227480); 44 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z +0.9763
+    nu  9.969e+05, O1, min: -2.2124867994e+06 (per unita' di norma, tolto il vuoto -2.219210); 43 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu  9.969e+05, O1, max: +3.3327084723e+06 (per unita' di norma, tolto il vuoto +3.342978); 51 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z +0.9763
+    nu  9.969e+05, O4, min: -1.4749535004e+06 (per unita' di norma, tolto il vuoto -1.479473); 57 giri, converge; lo stato: la norma per estremita' [0.000 0.167 0.167 0.167 0.167 0.167 0.167 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000 0.000], sigma_z +0.9389
+    nu  9.969e+05, O4, max: +2.2218433462e+06 (per unita' di norma, tolto il vuoto +2.228652); 61 giri, converge; lo stato: la norma per estremita' [0.035 0.098 0.098 0.098 0.098 0.098 0.098 0.034 0.035 0.034 0.035 0.034 0.035 0.034 0.035 0.035 0.034 0.034], sigma_z -0.9763
+----------------------------------------------------------------------------------------------------------------------------------
+  LE DOMANDE (sez. 31.5), senza scegliere:
+  (1) con O1: il minimo trovato su tutte le norme -2.212487e+06, il massimo +3.332708e+06
+  (1) con O4: il minimo trovato su tutte le norme -1.474954e+06, il massimo +2.221843e+06
+  (2) rho_max per nodo del triangolo (tutta la materia della scena nel triangolo) = M / 3 = 332314.954131; N_min = 1/(1 + rho_max/rho_c) > 0 per ogni rho_c > 0
+  (3) le scale (NESSUNA scelta): rho_max 332314.954131; Lambda 6; vedi le tabelle sopra per N / rho e per le bande
+==================================================================================================================================
+ESITO: 3/3 controlli come devono; fallite: 0 []; 6931 s in tutto

@@ -160,7 +160,7 @@ def pesi_dal_passo(mot, aritmetica=False):
     return w_nodo, ar_con / ar_senza
 
 
-def h_w(inc, mot, st, par, aritmetica=False):
+def h_w(inc, mot, st, par, aritmetica=False, zero_oggi=False):
     """### `H_w` ### **coi pesi che il passo usa** *(`mot.cs`)*.
 
     ### ⛔⛔ **E QUESTA E' L'OSSERVABILE GIUSTA PER I MODI A PESO CONGELATO**, e
@@ -175,6 +175,15 @@ def h_w(inc, mot, st, par, aritmetica=False):
     usa ### **`energia_pesata.g_dello_stato`.**
     """
     per_nodo, per_arco = MB2.pezzi_di_h(inc, mot, st, par)
+    if zero_oggi:
+        # ### ⛔ **`(e)`, IL CASO CHE DEVE FALLIRE** *(Luca `2026-11-08` `15:51`, z1)*: **l'energia allo zero di PRIMA** *(`delta = 0`)* **col tick allo zero
+        # ### simmetrico**: `-pi (N - P)` = il simmetrico `- (pi/2) N` per nodo, `- (pi/2) nrm` per arco *(`psi` e `phi`)*.
+        psi, phi = st["psi_h"], st["phi_h"]
+        nn = np.zeros(inc.n)
+        np.add.at(nn, inc.nodo, np.abs(psi[:, 0]) ** 2 + np.abs(psi[:, 1]) ** 2 + np.abs(phi) ** 2)
+        na = (np.abs(psi) ** 2).sum(axis=1).reshape(inc.m, 2).sum(axis=1) + (np.abs(phi) ** 2).reshape(inc.m, 2).sum(axis=1)
+        per_nodo = per_nodo - MB2.OMEGA * 0.5 * nn
+        per_arco = per_arco - MB2.OMEGA * 0.5 * na
     w_nodo, w_arco = pesi_dal_passo(mot, aritmetica)
     return float(np.sum(w_nodo * per_nodo)) + float(np.sum(w_arco * per_arco))
 
@@ -199,7 +208,7 @@ def corsa(dtau, tick, modo, c_uniforme=None, aritmetica=False):
     lc = lambda_c_di(mot, st)
     if modo == "uniforme":
         mot.cs = np.full(mot.inc.n, float(c_uniforme))
-    elif modo in ("congelato", "aritmetica"):
+    elif modo in ("congelato", "aritmetica", "zero_oggi"):
         # ### ⛔ **UNA VOLTA SOLA, dallo stato INIZIALE:** e' cio' che <<congelato>>
         # ### vuol dire, e ### **`mot.cs` sopravvive al tick** *(verificato: `chiudi_tick`
         # ### non lo tocca)*.
@@ -235,7 +244,7 @@ def corsa(dtau, tick, modo, c_uniforme=None, aritmetica=False):
     def _fun(i_, m_, s_, p_):
         if modo == "dinamico":
             return _EP.g_dello_stato(m_, s_, p_)
-        return h_w(i_, m_, s_, p_, arit)
+        return h_w(i_, m_, s_, p_, arit, modo == "zero_oggi")
     w0 = _fun(inc, mot, st, par)
     t0 = MB2.h_tot(inc, mot, st, par)
     peggio_w, peggio_t, peggio_fonte = 0.0, 0.0, 0.0
@@ -382,6 +391,17 @@ def braccio_aritmetica():
     return pw
 
 
+def braccio_zero_oggi():
+    """### `(e)` **DEVE FALLIRE: l'energia allo zero di PRIMA col tick allo zero simmetrico** *(Luca `2026-11-08` `15:51`, z1)*: `cs` congelato non uniforme, come `(a)`."""
+    print()
+    print("### (e) DEVE FALLIRE: l'energia allo zero di PRIMA (delta 0) col tick allo zero SIMMETRICO, `cs` congelato come (a)")
+    pw, _pt, righe, _dim, _f = pendenze("zero_oggi")
+    stampa_righe(righe)
+    esito("### (e) DEVE fallire: allo zero di PRIMA la pendenza di `H_w` NON arriva a `%.1f`" % PENDENZA_MIN, pw < PENDENZA_MIN,
+          "pendenza %.3f: se fosse `>= %.1f` la misura NON vedrebbe lo zero" % (pw, PENDENZA_MIN))
+    return pw
+
+
 def main(argv):
     import _presidio
     _presidio.avvia(__file__)
@@ -404,6 +424,7 @@ def main(argv):
     pw_a, pt_a = braccio_congelato()
     pw_c, pt_c = braccio_dinamico()
     pw_d = braccio_aritmetica()
+    pw_z = braccio_zero_oggi()
     print()
     print("=" * 100)
     print("### IL QUADRO, in una tabella")

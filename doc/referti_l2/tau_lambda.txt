@@ -1,0 +1,29 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] carta_f1.py  sha1-BYTE b0b5deb1  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] tau_lambda.py  sha1-BYTE 7102b17c  committato e pulito
+==================================================================================================================================
+T3, IL TEMPO DI MEMORIA tau_Lambda (sez. 26): TBS a 10000 tick, cs spento; il disturbo 1 + 1e-06 su un nodo ai raggi (0.0, 17.0, 25.0); 1000 tick
+==================================================================================================================================
+### i nodi: raggio 0 -> nodo 3362 (x +0.25, y +0.43); raggio 17 -> nodo 4739 (x +17.25, y +0.43); raggio 25 -> nodo 5387 (x +25.25, y +0.43)
+### la base: 76 s
+  DEVE PASSARE: T3-P la base rifatta contro se stessa: DeltaLambda = 0 esatto sul nodo del centro a ogni tick            PASSA   max 0.000e+00
+### il disturbo al raggio 0 (nodo 3362): 77 s
+### il disturbo al raggio 17 (nodo 4739): 76 s
+### il disturbo al raggio 25 (nodo 5387): 79 s
+----------------------------------------------------------------------------------------------------------------------------------
+  IL PASSO DELLE MAPPE: mappe.OGNI = 100 tick; omega_v del vuoto (la mediana sui nodi oltre il raggio 30, il primo tick della base) 0.471235 per tick, 1/omega 2.122 tick: il passo e' 47.1 volte 1/omega
+  DEVE FALLIRE: T3-F il disturbo NON si vede sul nodo al raggio 0 (|DeltaLambda(0)|/Lambda sotto 1e-09)                  ### FALLISCE   1.000e-06
+  raggio     0 (nodo 3362): Lambda 5.425885; omega_v 0.739647 per tick, 1/omega 1.352 tick; DeltaLambda/DeltaLambda(0) ai tick 1, 2, 5, 10, 50, 100, 1000: +9.470e-01 +8.113e-01 +2.558e-01 +4.069e-01 +4.416e-01 +9.451e-03 +8.066e-01; tau_Lambda 5 tick; il rapporto tau/(1/omega) 3.698: (t2)
+  DEVE FALLIRE: T3-F il disturbo NON si vede sul nodo al raggio 17 (|DeltaLambda(0)|/Lambda sotto 1e-09)                 ### FALLISCE   1.000e-06
+  raggio    17 (nodo 4739): Lambda 2.061094; omega_v 0.310652 per tick, 1/omega 3.219 tick; DeltaLambda/DeltaLambda(0) ai tick 1, 2, 5, 10, 50, 100, 1000: +9.500e-01 +8.077e-01 +2.688e-01 +4.060e-01 +4.882e-01 +1.089e+00 +8.749e-01; tau_Lambda 5 tick; il rapporto tau/(1/omega) 1.553: (t2)
+  DEVE FALLIRE: T3-F il disturbo NON si vede sul nodo al raggio 25 (|DeltaLambda(0)|/Lambda sotto 1e-09)                 ### FALLISCE   1.000e-06
+  raggio    25 (nodo 5387): Lambda 6.040594; omega_v 0.470457 per tick, 1/omega 2.126 tick; DeltaLambda/DeltaLambda(0) ai tick 1, 2, 5, 10, 50, 100, 1000: +9.453e-01 +7.966e-01 +2.177e-01 +3.877e-01 +4.206e-01 +1.161e-02 +7.879e-01; tau_Lambda 5 tick; il rapporto tau/(1/omega) 2.352: (t2)
+==================================================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []; 387 s in tutto

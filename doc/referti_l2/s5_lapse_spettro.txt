@@ -1,0 +1,75 @@
+[TIMBRO] __init__.py  sha1-BYTE 255d40b2  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE b7233aff  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] carta_f1_lunga.py  sha1-BYTE f77f58f5  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE ae9ad9d6  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] s4_materia_mrho.py  sha1-BYTE 0ec93ce5  committato e pulito
+==================================================================================================================================
+S4 (sez. 30): M-rho nella materia; il fondo sqrt(rho_0) q, q = cos(0.785398) q1 + e^{i 3.926991} sin(0.785398) q2 (griglia.json, e05); a 0.0001; stabile se |lambda|_max - 1 < 1e-09
+==================================================================================================================================
+### la scena: s 0.15 (la scena), la forma materia-vuoto S1, eps 0.5; psi (39366, 2) complex128; Lambda del vuoto per nodo da 5.999999999999868 a 5.999999999999868
+### LE BASI (S4.0 a): il residuo sotto 1e-12
+    rho_0 0, M-rho, s 0.05: rho da 0.000000e+00 a 0.000000e+00; cs del fondo 0.0500000000; omega_psi -0.0000000000, omega_phi -0.1570796327; i residui psi 0.000e+00, phi 4.017e-15
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0499500500; omega_psi +3.1266386953, omega_phi -0.1569227100; i residui psi 1.120e-15, phi 4.304e-15; E delle due bande alte 3.126694825705, 3.126694825705 (la differenza 4.44e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0499500500; omega_psi +0.0038712360, omega_phi -0.1569227100; i residui psi 8.386e-16, phi 4.304e-15
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0495049505; omega_psi -1.7011467179, omega_phi -0.1555243888; i residui psi 1.957e-15, phi 1.051e-15; E delle due bande alte -1.699074211506, -1.699074211506 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0495049505; omega_psi +0.1574660996, omega_phi -0.1555243888; i residui psi 3.828e-15, phi 1.051e-15
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0454545455; omega_psi -0.0762689968, omega_phi -0.1427996661; i residui psi 3.294e-15, phi 2.041e-15; E delle due bande alte -0.058796565808, -0.058796565808 (la differenza 1.67e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0454545455; omega_psi +0.1445847768, omega_phi -0.1427996661; i residui psi 3.279e-15, phi 2.041e-15
+    rho_0 0.0001, rho_0/rho_c 1, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0250000000; omega_psi +0.0397621383, omega_phi -0.0785398163; i residui psi 6.917e-13, phi 2.021e-15; E delle due bande alte 0.092616262723, 0.092616262723 (la differenza 5.47e-14); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0250000000; omega_psi +0.0795262934, omega_phi -0.0785398163; i residui psi 6.918e-13, phi 2.021e-15
+    rho_0 0.0001, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0045454545; omega_psi -0.2063940998, omega_phi -0.0142799666; i residui psi 7.811e-13, phi 1.159e-15; E delle due bande alte -0.188921661264, -0.188921661264 (la differenza 2.09e-14); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0045454545; omega_psi +0.0144596813, omega_phi -0.0142799666; i residui psi 1.241e-13, phi 1.159e-15
+    rho_0 0.01, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0499500500; omega_psi +0.2527825581, omega_phi -0.1569227101; i residui psi 7.395e-16, phi 2.695e-15; E delle due bande alte 0.252993552292, 0.252993552292 (la differenza 4.44e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0499500500; omega_psi +0.1588817306, omega_phi -0.1569227101; i residui psi 7.778e-16, phi 2.695e-15
+    rho_0 0.01, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0495049505; omega_psi +1.0798142722, omega_phi -0.1555243889; i residui psi 1.227e-15, phi 1.460e-15; E delle due bande alte 1.081886778588, 1.081886778588 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0495049505; omega_psi +0.1574662371, omega_phi -0.1555243889; i residui psi 1.042e-15, phi 1.460e-15
+    rho_0 0.01, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0454545455; omega_psi +1.6373271185, omega_phi -0.1427996662; i residui psi 1.880e-15, phi 2.584e-15; E delle due bande alte 1.654799549500, 1.654799549500 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0454545455; omega_psi +0.1445849030, omega_phi -0.1427996662; i residui psi 2.257e-15, phi 2.584e-15
+    rho_0 0.01, rho_0/rho_c 1, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0250000000; omega_psi -1.5310341305, omega_phi -0.0785398164; i residui psi 6.305e-15, phi 1.888e-15; E delle due bande alte -1.478180006154, -1.478180006154 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0250000000; omega_psi +0.0795263628, omega_phi -0.0785398164; i residui psi 2.317e-15, phi 1.939e-15
+    rho_0 0.01, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0045454545; omega_psi +1.5072019019, omega_phi -0.0142799666; i residui psi 4.599e-15, phi 2.289e-15; E delle due bande alte 1.524674340419, 1.524674340419 (la differenza 2.22e-16); rho dei vettori della base: lo scarto 1.73e-18
+    rho_0 0.01, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e-02 a 1.000000e-02; cs del fondo 0.0045454545; omega_psi +0.0144596940, omega_phi -0.0142799666; i residui psi 2.044e-15, phi 2.289e-15
+    rho_0 1, rho_0/rho_c 0.001, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0499500500; omega_psi +0.1610129955, omega_phi -0.1570718866; i residui psi 2.427e-15, phi 2.112e-15; E delle due bande alte 0.161223989699, 0.161223989699 (la differenza 5.55e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.001, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0499500500; omega_psi +0.1602315932, omega_phi -0.1570718866; i residui psi 1.487e-15, phi 2.112e-15
+    rho_0 1, rho_0/rho_c 0.01, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0495049505; omega_psi +0.1664794550, omega_phi -0.1556722361; i residui psi 2.315e-15, phi 2.284e-15; E delle due bande alte 0.168551961380, 0.168551961380 (la differenza 5.00e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.01, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0495049505; omega_psi +0.1588040712, omega_phi -0.1556722361; i residui psi 8.570e-16, phi 2.284e-15
+    rho_0 1, rho_0/rho_c 0.1, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0454545455; omega_psi +0.2105212005, omega_phi -0.1429354168; i residui psi 2.299e-15, phi 1.071e-15; E delle due bande alte 0.227993631473, 0.227993631473 (la differenza 5.83e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 0.1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0454545455; omega_psi +0.1458132780, omega_phi -0.1429354168; i residui psi 2.337e-15, phi 1.071e-15
+    rho_0 1, rho_0/rho_c 1, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0250000000; omega_psi +0.2759434139, omega_phi -0.0786144792; i residui psi 8.596e-16, phi 2.938e-15; E delle due bande alte 0.328797538272, 0.328797538272 (la differenza 1.67e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 1, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0250000000; omega_psi +0.0802019691, omega_phi -0.0786144792; i residui psi 2.016e-15, phi 2.938e-15
+    rho_0 1, rho_0/rho_c 10, s 0.05, M-rho: rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0045454545; omega_psi +0.0792904464, omega_phi -0.0142935417; i residui psi 7.060e-16, phi 3.433e-16; E delle due bande alte 0.096762884923, 0.096762884923 (la differenza 7.08e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 1, rho_0/rho_c 10, s 0.05, il cs congelato (il fondo di M-rho): rho da 1.000000e+00 a 1.000000e+00; cs del fondo 0.0045454545; omega_psi +0.0145825315, omega_phi -0.0142935417; i residui psi 1.448e-15, phi 3.433e-16
+    rho_0 0, M-rho, s 0.15: rho da 0.000000e+00 a 0.000000e+00; cs del fondo 0.1500000000; omega_psi -0.0000000000, omega_phi -0.4712388980; i residui psi 0.000e+00, phi 6.445e-15
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1498501499; omega_psi +3.0965433078, omega_phi -0.4707681299; i residui psi 1.417e-15, phi 2.972e-15; E delle due bande alte 3.096711695193, 3.096711695193 (la differenza 0.00e+00); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.001, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1498501499; omega_psi +0.0114262334, omega_phi -0.4707681299; i residui psi 1.610e-15, phi 2.972e-15
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1485148515; omega_psi +1.1793625110, omega_phi -0.4665731664; i residui psi 3.116e-15, phi 2.505e-15; E delle due bande alte 1.185579720106, 1.185579720106 (la differenza 4.44e-16); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.01, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1485148515; omega_psi +0.4720153462, omega_phi -0.4665731664; i residui psi 3.507e-15, phi 2.696e-15
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1363636364; omega_psi -0.2291007698, omega_phi -0.4283989982; i residui psi 3.272e-15, phi 7.590e-15; E delle due bande alte -0.176685325475, -0.176685325475 (la differenza 8.33e-17); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 0.1, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.1363636364; omega_psi +0.4334587023, omega_phi -0.4283989982; i residui psi 2.878e-15, phi 7.606e-15
+    rho_0 0.0001, rho_0/rho_c 1, s 0.15, M-rho: rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0750000000; omega_psi +0.1192382286, omega_phi -0.2356194490; i residui psi 2.492e-10, phi 3.255e-15; E delle due bande alte 0.277800099294, 0.277800099294 (la differenza 1.66e-13); rho dei vettori della base: lo scarto 0.00e+00
+    rho_0 0.0001, rho_0/rho_c 1, s 0.15, il cs congelato (il fondo di M-rho): rho da 1.000000e-04 a 1.000000e-04; cs del fondo 0.0750000000; omega_psi +0.2385301913, omega_phi -0.2356194490; i residui psi 2.600e-12, phi 3.255e-15
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 525, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 302, in main
+    basi[(rho0, ra, s)] = base(rho0, legge)
+                          ~~~~^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 196, in base
+    p1, f1 = mappa(psi, phi_b, legge, 1.0, 1.0)
+             ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\s4_materia_mrho.py", line 155, in mappa
+    TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3])
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\tick_lapse.py", line 104, in tick
+    cs, giri = cs_al_centro(mot, st, par, s, legge, senza_reazione)
+               ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_zero\csv\solitone\tick_lapse.py", line 99, in cs_al_centro
+    raise AssertionError("il punto fisso di cs del lapse NON converge in %d giri (ultimo scarto %.3e)" % (TK.GIRI_MAX, scarto))
+AssertionError: il punto fisso di cs del lapse NON converge in 120 giri (ultimo scarto 4.224e-04)
