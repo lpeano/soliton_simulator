@@ -192,3 +192,7 @@
 - **Due inciampi dell'ambiente, curati:**
   - **git rifiuta il worktree su `E:`** *(«dubious ownership»: il filesystem non registra il proprietario)*, **e il presidio `P-BARRIERA` rifiutava di girare:** **l'eccezione `safe.directory` passata SOLO per variabile d'ambiente** *(`GIT_CONFIG_COUNT`)*, **la configurazione globale non e' toccata;**
   - **`db/accensione_lenta/fase_F3.npz`** *(non tracciato)* **mancava nel worktree:** **copiato, lo sha `4beb01d95a98` uguale nel principale e nel laterale.**
+- ### **LA DECISIONE DI LUCA SU U3** *(`2026-11-12`)*: **U3 ACCETTATO.**
+  - **Il DEVE FALLIRE sull'energia col doppio zero era sbagliato in partenza:** **ERRORE DEL GUARDIANO `n.139`** *(l'energia e' una formula, l'involucro tocca solo il tick)*.
+  - **Il doppio zero e' gia' riconosciuto dalla dinamica** *(le `4` chiavi diverse di Z0-F), **e basta.**
+  - **Si procede con U4, fermandosi al primo controllo che fallisce.**
