@@ -416,3 +416,13 @@
    - **La parabola finta del DEVE FALLIRE: «dell'ordine atteso per (U)» con questo atteso sarebbe enorme e banale da rilevare;** ### **la proposta: l'accelerazione finta = `3` errori del fit di (0)** *(il piu' piccolo che il fit DEVE vedere)*, **dichiarata** *(da confermare da Luca)*.
 - **Il resto della sez. `11` come scritto:** **`e*` di T3, non compatta; `rho_c` come G2; C35-pi a `60000`; fino a `5000` tick o il tetto di `60` minuti per braccio.**
 - **Codice prima, poi i bracci UNO ALLA VOLTA dopo G2; commit e push dopo ogni braccio.**
+
+### 11.8 LE DECISIONI DI LUCA DELLE `20:45`
+
+1. ### **L'accelerazione finta del DEVE FALLIRE: `10` errori del fit di (0)**, dichiarata *(`3` sono al limite della rilevazione)*.
+2. ### **PRIMA dei quattro bracci, dopo G2: una PROVA BREVE del solo braccio (U):**
+   - **`200` tick, `d(t)` ogni `10` tick;**
+   - **l'ordine di grandezza VERO dell'accelerazione e il rapporto con l'atteso `4.27e-02`;**
+   - ### **se la coppia si FONDE, ESPLODE, o il campo CRESCE SENZA LIMITE in quei `200` tick: FERMO, e si decide `e*` prima dei bracci.**
+3. **Nel referto della prova breve:** **l'energia del campo U e quella della materia ogni `10` tick, e la norma.**
+- **Poi, se la prova breve e' sensata, i bracci come approvati.**
