@@ -231,3 +231,27 @@
       - **Su C35-pi il pezzo `60000 -> 66667`:** **`2739 s` all'originale** *(circa `46` minuti)*; **e' quello su cui la prima fusione non passo'** *(`doc/referti_l2/ripresa_C35-pi_v2_non_passa.txt`)*.
       - **Un commit a se', con la suite, poi R-1.**
     - **(b)** **solo l'apertura** *(l'assert della testa, senza rifare il pezzo)*, **e la riproduzione** *(il controllo (5), `1000` tick da `60000`)* **al posto del pezzo intero.**
+- ### **(4) R-1 DI C35-pi SUL PEZZO `60000 -> 66667`** *(Luca `2026-11-12`; dalle `13:44:54` alle `14:38:16`, a `27e9bb7e`, codice `1`; `3181 s`, l'originale `2739 s`; `doc/referti_l2/unificazione_r1_60000.txt`)*:
+  - ### **PASSA LA DINAMICA, AL BIT:** **`sha_fine`, D, `D_acc`, `dopo_stato`, `t1`, lo sha1 del file delle mappe.**
+  - ### **PASSA IL BORDO CONVERTITO** *(`E_ass` da accumulatore: `1.1e-14`)*.
+  - ### **PASSA L'APERTURA A `66667`** *(R-A: `mu` e `w_in` al bit, `e_K -4.7122750003546425 + pi = -1.5706823467648499` entro `1e-14`, lo stato di ripresa = `sha_fine` del pezzo rifatto)*: **il controllo che fece fallire la prima fusione.**
+  - ### **NON PASSANO I CAMPIONI CONVERTITI** *(diverse `E` e `per`)*. **La diagnosi, dai jsonl:**
+    - **sul toro intero** *(`E.totale`)* **la conversione regge:** **`cin`, `cost`, `tot` entro `1.6e-16`;** **`vuo` a `1.29e-14`, appena SOPRA `1e-14` relativo AL TERMINE** *(`vuo` e' piccolo, `5652`, la differenza di termini molto piu' grandi)*;
+    - ### **per REGIONE** *(`vicino`, `lontano`)* **e per settore** *(`per.E_set`)* **NO:**
+      - **anche `cin` cambia** *(`3e-4`, di segno opposto nelle due regioni, il totale uguale)*;
+      - **le maschere sono le stesse:** **la massa della regione vicina e' al bit in ogni campione;**
+    - ### **IL PERCHE'** *(dal codice di `energia_pesata.termini_di_h`)*:
+      - **lo zero di v2 sposta un pezzo dell'energia dagli ARCHI ai NODI** *(sul nodo `0.5 nrm - pu`, sull'arco `- Re incro`)*;
+      - **sul toro intero i due spostamenti si compensano;**
+      - **in una regione gli archi che attraversano il confine NON si compensano;**
+      - ### **quindi «`cin` uguale, `cost + pi M`» vale per il TOTALE, non per regione: la mia conversione per regione era SBAGLIATA** *(un errore mio)*, **e quella dei settori di `per` non c'era.**
+  - ### **UN ERRORE MIO DI CONTABILITA':** **R-1-V** *(il DEVE FALLIRE senza conversione)* **e' contato fra i falliti, ma va come deve** *(i campioni e il bordo non sono uguali al bit)*: **`corsa_accensione.esito` non ha l'argomento `deve`, e l'ho chiamato come un DEVE PASSARE.**
+  - ### **FERMO** *(il mandato: al primo controllo che fallisce)*. **`primo-ordine` e' com'era.**
+  - **La proposta, la decisione e' di Luca:**
+    1. **per un pezzo registrato col nucleo vecchio, R-1 controlla:**
+       - **la dinamica al bit;**
+       - **il bordo convertito;**
+       - **le energie del TOTALE convertite, con la tolleranza `1e-14` relativa alla SCALA DELL'ENERGIA** *(`|tot|`)* **invece che al termine;**
+       - **le energie per regione e per settore NON si confrontano** *(dichiarato: il confine sposta energia fra archi e nodi)*, **ma le loro `M` e `V` al bit;**
+    2. **R-1-V col verso giusto** *(`not ...`, come R-1-F)*;
+    3. **un commit a se', con la suite;** **e R-1 si rifa'** *(circa `53` minuti)*, **oppure si rilegge dai due jsonl gia' scritti** *(la sabbiera `E:\soliton_simulator\ripresa_R1\C35-pi_20261112_134456`)*.

@@ -1,0 +1,83 @@
+### R-0, R-1, R-1-F su C35-pi: l'ultimo pezzo 60000 -> 66667 (t_fine 66667) rifatto da corsa() dallo stato completo a 60000
+  DEVE PASSARE: R-0 il file di ripresa di C35-pi e' a t1 dell'ultima riga e i suoi sha = sha_fine dell'ultima ri PASSA   t 200000
+  DEVE PASSARE: R-0 lo stato completo a 60000 (C35-pi_stato_060000.npz) = lo sha registrato = sha_fine del pezzo PASSA   
+  la sabbiera E:\soliton_simulator\ripresa_R1\C35-pi_20261112_134456; CORSE[C35-pi] per il pezzo rifatto: (1000, 10000.050000) (il t_fine 66667 dell'ultima riga)
+  la corsa C35-pi su L 162: mu 4.161868161822480, w_in 6.643741075297 (BG-F-0.15 su L 81: 4.161868161822483, 6.643741075297)
+  la corsa C35-pi: e_K della testa -4.7122750003546425 (il nucleo vecchio) + pi = -1.5706823467648499 entro 1e-14 (conversione_v2): la testa e' quella, il nucleo e' v2
+  la corsa C35-pi: il pezzo 60000 -> 66667; lam 1.0000; f_liscia 0.01311 (all'inizio 0.00340), w 20.7283, alone 0.49928; 3180 s
+  la corsa C35-pi: il bordo (g_max 0.03, R_A 47.5): lo spostamento 0.9126; assorbite M 9.290698e+03, V 6.609626e+03, E 1.494242e+04 (relative a M0, V0, E0: 4.645e-03, 4.198e-02, 1.522e-03)
+  il pezzo rifatto: exit 0, 3181 s (0.4770 s per tick; l'originale 2739 s, 0.4108 s per tick)
+  uguali al bit: {'t1': True, 'sha_fine': True, 'campioni': False, 'D': True, 'D_acc': True, 'dopo_stato': True, 'bordo': False, 'fermata': True, 't_dis': True}; lo sha1 del file delle mappe: True
+  ### le energie CONVERTITE a v2 (conversione_v2, TOLL 1e-14, E_ass da accumulatore): i campioni False (la differenza relativa piu' grande 1.188e-02; diverse ['E', 'per']); il bordo True (1.075e-14)
+  DEVE FALLIRE: R-1-V lo stesso confronto SENZA conversione (i campioni e il bordo al bit)                       ### FALLISCE   
+  DEVE PASSARE: R-1 il pezzo 60000 rifatto dallo stato a 60000 ha sha_fine = quello della corsa (al bit, ogni ch ### FALLISCE   
+  DEVE FALLIRE: R-1-F lo sha_fine rifatto = quello dell'ultima riga di C35-0 (un'altra corsa)                    PASSA   
+  la corsa C35-pi su L 162: mu 4.161868161822480, w_in 6.643741075297 (BG-F-0.15 su L 81: 4.161868161822483, 6.643741075297)
+  la corsa C35-pi: e_K della testa -4.7122750003546425 (il nucleo vecchio) + pi = -1.5706823467648499 entro 1e-14 (conversione_v2): la testa e' quella, il nucleo e' v2
+  la corsa C35-pi: APERTURA a 66667 PASSATA (mu e w_in al bit, e_K convertito, lo stato di ripresa = sha_fine del pezzo prima): ci si ferma qui, senza tick
+  DEVE PASSARE: R-A l'apertura del pezzo dopo, a 66667: la testa (mu e w_in al bit, e_K convertito) e lo stato d PASSA   
+  ### I FILE DEL REPO IMPORTATI DAL PROCESSO (63): NON SI TOCCANO MENTRE UNA CORSA GIRA (par. 5)
+    csv/_bande_piatte.py
+    csv/_barriera.py
+    csv/_chiudere_le_uscite.py
+    csv/_congelato_lungo.py
+    csv/_consolida_B.py
+    csv/_coppia_di_B.py
+    csv/_deriva_congelato.py
+    csv/_diagnosi_s4.py
+    csv/_dove_va_la_materia.py
+    csv/_energia_del_legame.py
+    csv/_gravita_collettiva.py
+    csv/_libro_dei_conti.py
+    csv/_livelli_piatti.py
+    csv/_massimo_di_B.py
+    csv/_materia_leggera.py
+    csv/_modi_pi_e_solitoni.py
+    csv/_modo_al_variare_di_s.py
+    csv/_modo_lento.py
+    csv/_nucleo_congelato.py
+    csv/_presidio.py
+    csv/_salti_nel_cuore.py
+    csv/_scomposizione_solitone.py
+    csv/_screening_forme_s3.py
+    csv/_solitone_con_la_buca.py
+    csv/_solitone_dal_fondo.py
+    csv/_solitone_vuoto_congelato.py
+    csv/_solitoni_triangoli.py
+    csv/_stato_fermo.py
+    csv/_strada_b_lati.py
+    csv/_strada_b_r.py
+    csv/_triangoli.py
+    csv/_triangoli_bassa_energia.py
+    csv/_triangoli_forza.py
+    csv/_vuoto_vivo_B.py
+    csv/solitone/__init__.py
+    csv/solitone/accensione.py
+    csv/solitone/bordo.py
+    csv/solitone/campo.py
+    csv/solitone/conversione_v2.py
+    csv/solitone/corsa_accensione.py
+    csv/solitone/mappe.py
+    csv/solitone/misure.py
+    csv/solitone/protetto.py
+    csv/solitone/ramo.py
+    csv/solitone/toro.py
+    csv/solitone/vuoto.py
+    primo_ordine/_deriva_forme_l2.py
+    primo_ordine/composizione.py
+    primo_ordine/corrente.py
+    primo_ordine/energia.py
+    primo_ordine/energia_pesata.py
+    primo_ordine/flussi_parziali.py
+    primo_ordine/grafo.py
+    primo_ordine/incidenza.py
+    primo_ordine/materia_vuoto.py
+    primo_ordine/motore.py
+    primo_ordine/saturazione.py
+    primo_ordine/scena_l2.py
+    primo_ordine/stato.py
+    primo_ordine/termini/__init__.py
+    primo_ordine/termini/camm_materia_vuoto.py
+    primo_ordine/termini/camm_moneta_spin.py
+    primo_ordine/tick.py
+ESITO: 4/6 controlli passano; DEVE fallite: 2 ['DEVE FALLIRE: R-1-V lo stesso confronto SENZA conversione (i campioni e il bordo al bit)', 'DEVE PASSARE: R-1 il pezzo 60000 rifatto dallo stato a 60000 ha sha_fine = quello della corsa (al bit, ogni chiave) e campioni, D, dopo_stato, bordo, mappe uguali']

@@ -25400,3 +25400,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **alla QUINTA cifra coincidono tutti.**
 - **La norma costante** *(`1.2e-12`, `6.7e-14`)*; **il DEVE FALLIRE col `gamma` scambiato fallisce come deve.**
 - ### **FERMO** *(il mandato: un DEVE che non va come deve, senza correggere)*. **La decisione su come leggerlo e' di Luca.**
+- ### **LA DECISIONE DI LUCA** *(`2026-11-12`)*: **G1 col campo ACCETTATA;** **«entro `1e-6`» falliva solo per l'arrotondamento a `5` decimali del referto di G1** *(ERRORE DEL GUARDIANO `n.140`, nella MAPPA)*; **vale il confronto alla quinta cifra, dichiarato prima.**
+
+### 2026-11-12 14:50 -- L'UNIFICAZIONE, U4 (4): R-1 DI C35-pi SUL PEZZO `60000 -> 66667` -- LA DINAMICA AL BIT, IL BORDO E L'APERTURA PASSANO; LE ENERGIE PER REGIONE NON SI CONVERTONO CON UNA COSTANTE (UN ERRORE MIO); FERMO [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **Passano:**
+  - **la dinamica al bit** *(`sha_fine`, D, `dopo_stato`, le mappe)*;
+  - **il bordo convertito;**
+  - ### **l'apertura a `66667`** *(`e_K` + `pi` entro `1e-14`: il controllo che fece fallire la prima fusione)*.
+- ### **Non passano i campioni convertiti:**
+  - **sul toro intero la conversione regge** *(`vuo` a `1.29e-14`, appena sopra `1e-14` relativo al termine)*;
+  - **per regione e per settore no:** **lo zero di v2 sposta energia fra archi e nodi, e al confine di una regione non si compensa;**
+  - ### **la mia conversione per regione era sbagliata.**
+- **E un errore di contabilita':** **R-1-V va come deve, ma e' contato fra i falliti.**
+- ### **FERMO.** **La proposta** *(`doc/TASK_HISTORY/2026-11-12_unificazione.md`, sez. `6`)*:
+  - **il totale convertito con la tolleranza relativa a `|tot|`;**
+  - **per regione solo `M` e `V`;**
+  - **R-1-V col verso giusto.**
