@@ -322,3 +322,16 @@
 - **«Cambia la fisica oltre l'arrotondamento» se la rms di `rho` relativa dopo `1000` tick supera `1e-10`** *(la soglia di U4)*.
 - **«Rompe M-B1» o «rompe la cassetta» se un loro controllo fallisce.**
 - ### **FERMO dopo le misure: la scelta della forma e' di Luca, sui numeri.** **Nessuna modifica al nucleo prima.**
+
+### 8.5 LE PRECISAZIONI DI LUCA DELLE `17:37`, PRIMA DI LEGGERE LE MISURE *(scritte mentre le misure girano, prima dei numeri)*
+
+1. ### **La soglia «cura la deriva»:** **8.4 diceva «sotto `1e-17` relativa (un decimo di quella di oggi)», ma oggi e' `3.7e-16` relativa: un decimo e' `3.7e-17`.**
+   - **Si usa `3.7e-17`, e si riporta anche il RAPPORTO con oggi.**
+   - **Un errore mio nella carta** *(il numero non era il decimo che dicevo)*.
+2. ### **M-B1:**
+   - **se la forma migliore risulta k2** *(che contraddice il motivo per cui oggi `alpha` e `beta` si calcolano separatamente)*, **prima della scelta si rigira M-B1 con k2 su una copia del nucleo in un ramo temporaneo, fuori da `primo-ordine`;**
+   - **nel referto, accanto a ogni forma, la riga «M-B1 non verificato in memoria».**
+- **Il banco** *(`fd9bb653`)* **NON si tocca mentre le misure girano** *(il confronto e' il loro ultimo passo)*. **Dopo:**
+  - **la soglia `3.7e-17`, il rapporto con oggi e la riga di M-B1 per forma nel codice del confronto;**
+  - **la suite, il commit;**
+  - **il confronto rifatto sulle stesse uscite.**
