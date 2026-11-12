@@ -94,7 +94,10 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **LA R60, carta_r60.py VERSIONE 2**.
 # ### **T3, LA DIAGNOSI E IL REGIME MODERATO**.
 # ### **LA STAZIONARIETA' VERSIONE 2, u1_t3d, u1_t3e**.
-LIBRERIA_RIFERITA = "654292f2"
+# ### **L'UNIFICAZIONE, D6 RIALLINEATO** *(Luca `2026-11-12`; il task history `2026-11-12_unificazione`, sez. `6`)*: **la cassetta era SCADUTA su tutti e due i rami dall'8 novembre**
+# ### *(da `654292f2` il principale aveva cambiato `26` `.py` di `csv/solitone/`, il laterale `32`)*, **non per la fusione.** **Il riferimento e' `6c97a2e3`, il commit su cui la
+# ### cassetta ha passato `107/108` (tutto tranne D6) col nucleo unificato** *(non il commit della fusione: in mezzo c'e' il codice dei controlli)*.
+LIBRERIA_RIFERITA = "6c97a2e3"
 
 
 def vecchi():
