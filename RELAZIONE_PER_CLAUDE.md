@@ -25513,3 +25513,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **C35-pi a `60000`, `1500` tick** *(il tetto di `60` minuti)*: **(off) = le mappe entro `1.3e-08`;** ### **`d_on - d_off` SALE fino a `+0.458`, l'accelerazione relativa `+8.68e-07 +- 5.4e-08` per tick^2** *(`16` errori)*: **(p3), una REPULSIONE.**
 - **Poi:** **la prova breve di (U) aspetta la conferma di Luca sul calcolo di Gauss; la G1 lunghissima parte adesso.**
+
+### 2026-11-12 22:20 -- IL PENDOLO INTERO: `4/4`; IL PERIODO `~6390` TICK, MOLTO REGOLARE; L'AMPIEZZA CALA E IL CALO ACCELERA; L'ANELLO VECCHIO SI SVUOTA *(Luca `21:20`)* [[PUNTO-FISSO-CS-SOLITONE]] [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/campo_g1_lunghissima/`** *(lo script a `2bd838ca`, dalle `22:03:59` alle `22:16:48`)*: **`g1_lunghissima.npz` `20.14 MB`; `referto.txt`.** **I primi `5000` tick = `0a275348` al bit; la norma `5.3e-13`.**
+- ### **Le inversioni:** **`3280` `+15.15`, `6500` `-14.53`, `9680` `+13.13`, `12880` `-11.26`** *(la distanza dalla cresta)*; **i mezzi periodi `3220`, `3180`, `3200`; i periodi `6400`, `6380`.**
+- ### **I rapporti fra ampiezze consecutive: `0.959`, `0.904`, `0.858`:** **il calo ACCELERA.** **La lettura coi criteri scritti: caso intermedio** *((p1) chiedeva ogni rapporto sotto `0.95`; il primo e' `0.959`)*.
+- ### **L'anello vecchio si SVUOTA:** **la profondita' da `-4.47`** *(`2000`)* **a `-1.00`** *(`14000`)*, **il deficit da `1228` a `842`;** **la materia ripassa vicino all'anello verso `6000`-`7000` tick** *(un fatto da tenere accanto)*.
+- **Da leggere da Luca.**
