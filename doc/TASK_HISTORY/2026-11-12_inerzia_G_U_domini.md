@@ -501,3 +501,11 @@
   - ### **DEVE: (off) ridà C35-pi: `d` dalle mappe alla stessa ora entro `1e-5`: PASSA, `1.278e-08` su `16` tick;**
   - **DEVE FALLIRE: lo stesso confronto con `d` spostato di `0.01`: fallisce come deve.**
 - **Il referto intero e la lettura nel prossimo commit.**
+
+### 11.11 G2, L'ESITO: `2/2`, (p3) UNA REPULSIONE *(il referto `doc/referti_l2/s5_coppia_lapse.txt`)*
+
+- **La scena:** **C35-pi a `60000`, `d 37.5692`; `rho_0` dei due centri `2270.59`, `rho_c 227058.57`.**
+- **La durata: `1500` tick** *(il lapse costa `2.363` s per tick: RIDOTTA dal tetto di `3600` s, dichiarato)*.
+- **`d`:** **(off) da `37.5692` a `37.3171`; (on) da `37.5692` a `37.7747`.**
+- ### **`d_on - d_off` SALE:** **`0`, `-0.0093`, `+0.0498`, `+0.4576`** *(ogni `500` tick)*; **la parabola: `+8.684e-07 +- 5.4e-08` per tick^2** *(`16.2` errori)*.
+- ### **LA LETTURA COL CRITERIO SCRITTO: (p3), UNA REPULSIONE** *(la lettura di Luca delle `20:15`, scritta prima: «con l'inerzia negativa G respinge: `d_on - d_off` cresce»)*.

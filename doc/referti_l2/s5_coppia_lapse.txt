@@ -1,0 +1,18 @@
+==================================================================================================================================
+S5.3 G2 (sez. 32.3): due solitoni vicini; lo stato di C35-pi a 60000 (E:\soliton_simulator\stati\C35-pi\C35-pi_stato_060000.npz; ### T0 e R_LAPSE proposte (D1), (D2)); s 0.15; rho_c = rho_0 / 0.01; eps_a 0.4767266286 (T-L4b); fino a 5000 tick, d ogni 50; il tetto 3600 s per corsa
+  il bordo della corsa: c0 [98.87378070359784, 81.36252985852764], R_A 47.5, g_max 0.03
+==================================================================================================================================
+### a t 60000: d 37.569220; i centri (indici) [80.0253 81.4533], [117.314   80.8984]; w_in 6.643741; rho_0 = la rho media dei due centri (r < w_in) 2270.585749; rho_c 227058.574864
+### (on): 2.363 s per tick nei primi 50; la durata 1500 tick (### ridotta dal tetto di 3600 s, dichiarato)
+### (off): 1500 tick in 494 s; d da 37.569220 a 37.317082
+### (on): 1500 tick in 3378 s; d da 37.569220 a 37.774659
+  (off) contro le mappe di C35-pi: 16 tick comuni (ogni 100), lo scarto piu' grande di d 1.278e-08
+  DEVE PASSARE: (off) ridà C35-pi: d dalle mappe alla stessa ora entro 1e-05                                             PASSA   1.278e-08 su 16 tick
+  DEVE FALLIRE: lo stesso confronto con d spostato di 0.01                                                               ### FALLISCE   1.000e-02
+----------------------------------------------------------------------------------------------------------------------------------
+### d_on - d_off ogni 50 tick (ogni 500 stampati): +0.000e+00 -9.316e-03 +4.976e-02 +4.576e-01
+    la velocita' relativa in piu' (differenza centrata, a meta' e alla fine): +9.231e-05, +1.051e-03 per tick
+    la parabola: l'accelerazione relativa in piu' +8.684167e-07 +- 5.4e-08 per tick^2 (16.2 errori)
+  LA LETTURA: (p3) d_on - d_off sale oltre 3 errori: una repulsione
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; 4007 s in tutto

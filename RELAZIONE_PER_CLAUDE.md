@@ -25508,3 +25508,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la profondita' rispetto a quella a `2000`:** **`0.99`, `0.97`, `0.97`, `0.99` fino a `4000`; `0.92` a `4500`, `0.89` a `5000`.**
   - ### **La lettura col criterio scritto: (v3) RESIDUO** *(`4500` e `5000` entro il `5%`)*.
   - ### **LA RISERVA:** **il calo e' ancora in corso e coincide col RITORNO della materia** *(a `5000` a circa `18.5` nodi dalla posizione iniziale, vicino all'anello)*: **il calo tardivo puo' venire dalla materia che rientra, non dall'evaporazione.** **Da leggere da Luca.**
+
+### 2026-11-12 21:45 -- G2: CON L'INERZIA NEGATIVA IL LAPSE RESPINGE (p3), COME SCRITTO PRIMA *(Luca `20:15`)* [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **C35-pi a `60000`, `1500` tick** *(il tetto di `60` minuti)*: **(off) = le mappe entro `1.3e-08`;** ### **`d_on - d_off` SALE fino a `+0.458`, l'accelerazione relativa `+8.68e-07 +- 5.4e-08` per tick^2** *(`16` errori)*: **(p3), una REPULSIONE.**
+- **Poi:** **la prova breve di (U) aspetta la conferma di Luca sul calcolo di Gauss; la G1 lunghissima parte adesso.**
