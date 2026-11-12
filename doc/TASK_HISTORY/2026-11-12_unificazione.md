@@ -207,3 +207,14 @@
   - ### **D6 NON dipende dalla fusione:** **da `654292f2`** *(`2026-11-08` `19:00`)* **il principale da solo ha cambiato `26` `.py` di `csv/solitone/`, il laterale `32`** *(`git diff --name-only`, escluso `collauda.py`)*; **l'ultimo referto della cassetta e' `fbccc445` dello stesso giorno.** **D6 fallirebbe anche sul principale di prima: la cassetta e' scaduta su tutti e due i rami.**
   - ### **FERMO** *(il mandato: al primo controllo che fallisce)*. **`primo-ordine` e' com'era** *(`fca1dd26`)*.
   - **La proposta, la decisione e' di Luca:** **D6 si riallinea alla libreria del nucleo unificato** *(`LIBRERIA_RIFERITA` = il commit della fusione)*, **un commit a se', con la suite;** **oppure si accetta D6 fallito come scadenza nota e si prosegue con (3).**
+- ### **D6 RIALLINEATO** *(Luca `2026-11-12`; `9e32c88d`, la suite `67` su `67`)*: **`LIBRERIA_RIFERITA = 6c97a2e3`** *(il commit su cui la cassetta aveva passato `107/108`)*; **il motivo scritto nel collaudo: la cassetta era scaduta su tutti e due i rami dall'8 novembre, non per la fusione.**
+- ### **(2) LA CASSETTA RIFATTA: `108/108`** *(dalle `13:13:51` alle `13:15:01`, a `9e32c88d`; `doc/referti_l2/unificazione_cassetta_bis.txt`)*.
+- ### **(3) P3** *(`doc/referti_l2/unificazione_p3.txt`)*:
+  - **lo script `p3_ramo.py` su `unificazione` NON arriva a P3-F e P3-S:**
+    - **il divieto non e' attivo** *(il ramo non e' `primo-ordine`)*;
+    - **quindi P3-D chiama la `energia_pesata.applica` VERA col motore finto del test, che si rompe** *(`'Finto' object has no attribute 'dtau'`)*;
+    - **e' cio' che il piano prevedeva** *(1.7: P3-D in U5, sul `primo-ordine` locale prima del push)*;
+  - ### **P3-F e P3-S, la decisione pura** *(la funzione committata `ramo.decidi`, chiamata direttamente)*: **come devono:**
+    - **`zero-nel-nucleo` CONGELATO: non vieta;**
+    - **`primo-ordine` SBLOCCATO: non vieta;**
+    - **`primo-ordine` CONGELATO: vieta.**

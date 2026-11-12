@@ -1,0 +1,19 @@
+==================================================================================================================================
+P3, IL DIVIETO DI cs SUL PRINCIPALE: il ramo 'unificazione'; NUCLEO_CONGELATO presente; il divieto attivo: False
+==================================================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\p3_ramo.py", line 67, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\p3_ramo.py", line 52, in main
+    EP.applica(Finto(np.ones(3), 34.0), st, None, 0.5)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\energia_pesata.py", line 416, in applica
+    tau = float(mot.dtau[0]) * float(frazione)
+                ^^^^^^^^
+AttributeError: 'Finto' object has no attribute 'dtau'
+---- la decisione pura (python -c sulla funzione committata csv/solitone/ramo.decidi, a 9e32c88d, 13:15) ----
+P3-F (DEVE FALLIRE: zero-nel-nucleo CONGELATO vieta): False -> come deve
+P3-S (principale SBLOCCATO non vieta): True -> come deve
+la decisione pura per primo-ordine CONGELATO vieta: True
+il ramo di adesso: unificazione ; il divieto attivo: False
