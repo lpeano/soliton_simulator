@@ -25297,3 +25297,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la legge di `cs` da `Lambda` e F1: SCARTATE** *(proposto)*;
   - **M-rho istantanea: SCARTATA** *(proposto)*;
   - **il lapse `N(rho)` e la forma (a): CANDIDATE.**
+
+### 2026-11-12 01:45 -- LE RISPOSTE DI LUCA DELLE `01:40` SU G2 E SULLA TABELLA DELLE LEGGI [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **(D1) C35-pi a `60000`; (D2) `rho_c` come T-L2** *(`rho_0/rho_c = 1e-2`)*: **i valori sono gia' nel codice di G2** *(`ef4c1c10` sul laterale, la suite `67` su `67`)*.
+- **La legge di `cs` da `Lambda`, F1, M-rho istantanea: SCARTATE, confermate** *(`doc/LEGGI_PROVATE.md` sul laterale, `c146f5ac`)*.
+- **L'ordine: A col banco di oggi** *(in corsa dalle `00:16:50`)*, **poi G1, poi G2.**
