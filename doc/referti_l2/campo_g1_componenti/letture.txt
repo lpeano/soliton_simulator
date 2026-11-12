@@ -1,0 +1,52 @@
+==================================================================================================================================
+LE LETTURE DELLE COMPONENTI E DEL VUOTO DI G1 (Luca 2026-11-12 16:10), RICALCOLATE DAGLI npz di e5c4b62b; nessun tick; A1 (np.float64(1.0), np.float64(0.0)), A2 (np.float64(-0.5), np.float64(0.8660254037844386))
+==================================================================================================================================
+  ### dal codice della scena (s5_caduta_solitone_componenti.py, come G1): ogni tick e' tick.percorri_tick con TUTTO l'ordine (len(composizione.ORDINE)):
+  ### i pezzi del vuoto girano, phi EVOLVE con la legge piena; cs = s N per tutti i nodi; la forma (a) aggiunge una fase alla sola psi
+### gamma +0.00: g1_comp_gamma000.npz, 51 fotogrammi, L 81
+  tick    0 (il centro 40.504 40.502): R  0- 6: sigma1 0.0051, k 0.333 0.333 0.333, dphi +0.585; R  6-12: sigma1 0.0056, k 0.333 0.333 0.333, dphi +0.657; R 12-16: sigma1 0.0055, k 0.333 0.333 0.334, dphi -2.315; R 16-19: sigma1 0.0078, k 0.334 0.333 0.333, dphi -2.353; R 19-25: sigma1 0.0294, k 0.335 0.334 0.331, dphi +0.039; R 30-40: sigma1 0.0276, k 0.336 0.325 0.339, dphi +0.003
+  tick 1000 (il centro 40.504 40.501): R  0- 6: sigma1 0.0051, k 0.333 0.333 0.333, dphi +0.427; R  6-12: sigma1 0.0053, k 0.333 0.333 0.333, dphi +0.667; R 12-16: sigma1 0.0064, k 0.334 0.333 0.333, dphi -2.312; R 16-19: sigma1 0.0077, k 0.331 0.333 0.336, dphi -2.639; R 19-25: sigma1 0.0269, k 0.338 0.325 0.337, dphi +0.070; R 30-40: sigma1 0.0274, k 0.326 0.335 0.338, dphi +0.027
+  tick 1800 (il centro 40.493 40.497): R  0- 6: sigma1 0.0048, k 0.333 0.333 0.333, dphi +0.528; R  6-12: sigma1 0.0053, k 0.333 0.333 0.333, dphi +0.693; R 12-16: sigma1 0.0065, k 0.334 0.333 0.333, dphi -2.366; R 16-19: sigma1 0.0079, k 0.331 0.334 0.335, dphi -2.892; R 19-25: sigma1 0.0289, k 0.332 0.336 0.332, dphi +0.101; R 30-40: sigma1 0.0270, k 0.332 0.334 0.334, dphi +0.045
+  tick 2000 (il centro 40.489 40.495): R  0- 6: sigma1 0.0060, k 0.333 0.333 0.333, dphi +0.446; R  6-12: sigma1 0.0055, k 0.333 0.333 0.333, dphi +0.706; R 12-16: sigma1 0.0050, k 0.334 0.333 0.333, dphi -2.397; R 16-19: sigma1 0.0082, k 0.333 0.332 0.335, dphi -2.890; R 19-25: sigma1 0.0279, k 0.334 0.332 0.334, dphi +0.099; R 30-40: sigma1 0.0276, k 0.331 0.331 0.338, dphi +0.045
+  la norma per sigma: sigma0 0.99459, sigma1 0.00541 (tick 0)
+  tick    0: il centro c1 della materia 40.504, del buco 40.399 (c2 40.502, 40.337); il deficit 2243.0, l'eccesso 787.4; dphi minimo -5.556
+  tick  480: il centro c1 della materia 40.506, del buco 40.559 (c2 40.503, 40.479); il deficit 2363.4, l'eccesso 907.8; dphi minimo -5.693
+  tick 1000: il centro c1 della materia 40.504, del buco 40.538 (c2 40.501, 40.552); il deficit 2466.3, l'eccesso 1010.8; dphi minimo -5.704
+  tick 1480: il centro c1 della materia 40.498, del buco 40.431 (c2 40.500, 40.324); il deficit 2550.8, l'eccesso 1095.3; dphi minimo -5.565
+  tick 1800: il centro c1 della materia 40.493, del buco 40.512 (c2 40.497, 40.412); il deficit 2591.5, l'eccesso 1136.0; dphi minimo -5.647
+  tick 2000: il centro c1 della materia 40.489, del buco 40.541 (c2 40.495, 40.464); il deficit 2600.0, l'eccesso 1144.4; dphi minimo -5.593
+  tick    0: il deficit entro R < 20 dalla posizione INIZIALE 2159.0, dall'ATTUALE 2159.0; la norma entro R < 12 dalla iniziale 0.88747
+  tick 1000: il deficit entro R < 20 dalla posizione INIZIALE 2259.9, dall'ATTUALE 2259.9; la norma entro R < 12 dalla iniziale 0.87702
+  tick 1800: il deficit entro R < 20 dalla posizione INIZIALE 2336.2, dall'ATTUALE 2336.2; la norma entro R < 12 dalla iniziale 0.87724
+  tick 2000: il deficit entro R < 20 dalla posizione INIZIALE 2341.7, dall'ATTUALE 2341.7; la norma entro R < 12 dalla iniziale 0.87773
+### gamma +0.02: g1_comp_gamma020.npz, 51 fotogrammi, L 81
+  tick    0 (il centro 40.504 40.502): R  0- 6: sigma1 0.0051, k 0.333 0.333 0.333, dphi +0.585; R  6-12: sigma1 0.0056, k 0.333 0.333 0.333, dphi +0.657; R 12-16: sigma1 0.0055, k 0.333 0.333 0.334, dphi -2.315; R 16-19: sigma1 0.0078, k 0.334 0.333 0.333, dphi -2.353; R 19-25: sigma1 0.0294, k 0.335 0.334 0.331, dphi +0.039; R 30-40: sigma1 0.0276, k 0.336 0.325 0.339, dphi +0.003
+  tick 1000 (il centro 48.120 44.263): R  0- 6: sigma1 0.0054, k 0.333 0.335 0.333, dphi +0.475; R  6-12: sigma1 0.0054, k 0.333 0.335 0.333, dphi -0.724; R 12-16: sigma1 0.0057, k 0.333 0.335 0.333, dphi -0.852; R 16-19: sigma1 0.0077, k 0.331 0.336 0.333, dphi -0.777; R 19-25: sigma1 0.0330, k 0.337 0.326 0.338, dphi -0.803; R 30-40: sigma1 0.0582, k 0.330 0.333 0.336, dphi +0.035
+  tick 1800 (il centro 62.078 51.193): R  0- 6: sigma1 0.0055, k 0.331 0.337 0.332, dphi -0.911; R  6-12: sigma1 0.0055, k 0.332 0.336 0.332, dphi -0.416; R 12-16: sigma1 0.0066, k 0.331 0.339 0.330, dphi -0.466; R 16-19: sigma1 0.1085, k 0.339 0.336 0.324, dphi -0.467; R 19-25: sigma1 0.1262, k 0.333 0.356 0.311, dphi -0.310; R 30-40: sigma1 0.0878, k 0.327 0.343 0.330, dphi -0.125
+  tick 2000 (il centro 65.860 53.045): R  0- 6: sigma1 0.0055, k 0.332 0.337 0.332, dphi +0.216; R  6-12: sigma1 0.0055, k 0.332 0.335 0.333, dphi -0.666; R 12-16: sigma1 0.0070, k 0.330 0.339 0.331, dphi -0.464; R 16-19: sigma1 0.1068, k 0.335 0.347 0.318, dphi -0.443; R 19-25: sigma1 0.1154, k 0.335 0.336 0.328, dphi -0.236; R 30-40: sigma1 0.0992, k 0.332 0.337 0.331, dphi -0.211
+  la norma per sigma: sigma0 0.99459, sigma1 0.00541 (tick 0)
+  tick    0: il centro c1 della materia 40.504, del buco 40.399 (c2 40.502, 40.337); il deficit 2243.0, l'eccesso 787.4; dphi minimo -5.556
+  tick  480: il centro c1 della materia 42.348, del buco 40.518 (c2 41.406, 40.371); il deficit 2349.0, l'eccesso 893.5; dphi minimo -5.619
+  tick 1000: il centro c1 della materia 48.120, del buco 40.622 (c2 44.263, 40.612); il deficit 2573.8, l'eccesso 1118.3; dphi minimo -5.670
+  tick 1480: il centro c1 della materia 56.006, del buco 40.756 (c2 48.193, 41.378); il deficit 3052.8, l'eccesso 1597.2; dphi minimo -5.640
+  tick 1800: il centro c1 della materia 62.078, del buco 42.276 (c2 51.193, 41.868); il deficit 3448.9, l'eccesso 1993.3; dphi minimo -5.752
+  tick 2000: il centro c1 della materia 65.860, del buco 42.844 (c2 53.045, 42.059); il deficit 3587.1, l'eccesso 2131.6; dphi minimo -5.784
+  tick    0: il deficit entro R < 20 dalla posizione INIZIALE 2159.0, dall'ATTUALE 2159.0; la norma entro R < 12 dalla iniziale 0.88747
+  tick 1000: il deficit entro R < 20 dalla posizione INIZIALE 2320.7, dall'ATTUALE 1706.1; la norma entro R < 12 dalla iniziale 0.70377
+  tick 1800: il deficit entro R < 20 dalla posizione INIZIALE 2756.0, dall'ATTUALE 1459.8; la norma entro R < 12 dalla iniziale 0.00651
+  tick 2000: il deficit entro R < 20 dalla posizione INIZIALE 2790.8, dall'ATTUALE 1374.8; la norma entro R < 12 dalla iniziale 0.00063
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CONFRONTO COI NUMERI DEL GUARDIANO
+  DEVE PASSARE: mat, gamma +0.02, tick 0: il guardiano 40.5, CC 40.504                                                   PASSA   la differenza +0.004
+  DEVE PASSARE: mat, gamma +0.02, tick 2000: il guardiano 65.9, CC 65.860                                                PASSA   la differenza -0.040
+  DEVE PASSARE: buco, gamma +0.02, tick 0: il guardiano 40.4, CC 40.399                                                  PASSA   la differenza -0.001
+  DEVE PASSARE: buco, gamma +0.02, tick 2000: il guardiano 42.8, CC 42.844                                               PASSA   la differenza +0.044
+  DEVE PASSARE: def_ini, gamma +0.02, tick 0: il guardiano 2159, CC 2159.006                                             PASSA   la differenza +0.006 (0.00%)
+  DEVE PASSARE: def_ini, gamma +0.02, tick 2000: il guardiano 2791, CC 2790.846                                          PASSA   la differenza -0.154 (-0.01%)
+  DEVE PASSARE: def_att, gamma +0.02, tick 2000: il guardiano 1375, CC 1374.828                                          PASSA   la differenza -0.172 (-0.01%)
+  DEVE PASSARE: def_att, gamma +0.00, tick 0: il guardiano 2243, CC 2159.006                                             ### FALLISCE   la differenza -83.994 (-3.74%)
+  DEVE PASSARE: def_att, gamma +0.00, tick 2000: il guardiano 2600, CC 2341.656                                          ### FALLISCE   la differenza -258.344 (-9.94%)
+  DEVE PASSARE: il controllo: il centro c1 del buco fra 40.4 e 40.6 (entro 0.05)                                         PASSA   da 40.399 a 40.559
+  DEVE FALLIRE: il centro del buco calcolato con la MATERIA al posto del deficit = 42.8 entro 0.05 (gamma +0.02, tick 20 ### FALLISCE   65.860 (la materia)
+==================================================================================================================================
+ESITO: 9/11 controlli come devono; fallite: 2 ['def_att, gamma +0.00, tick 0: il guardiano 2243, CC 2159.006', 'def_att, gamma +0.00, tick 2000: il guardiano 2600, CC 2341.656']

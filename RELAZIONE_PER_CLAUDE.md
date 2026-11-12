@@ -25449,3 +25449,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Il nucleo RICONGELATO sul nucleo unificato** *(v2)*; **il passo `3` della ROTTA CHIUSO.**
 - **La sessione del laterale da ora lavora sul principale.**
 - ### **Da decidere:** **la riga sulla relazione del laterale** *(un commit su `zero-nel-nucleo`, contro la regola «niente commit sul laterale fino alla fine di U5»)*. **Il tag `laterale-archiviato` si mette** *(non e' un commit)*.
+
+### 2026-11-12 16:50 -- LE COMPONENTI E IL VUOTO DI G1, RICALCOLATI: IL BUCO NON SEGUE IL SOLITONE CHE CADE *(Luca `16:10`; osservazioni di UNA corsa)* [[PUNTO-FISSO-CS-SOLITONE]] [[PIANO-2D-3D]]
+
+- **Il ricalcolo dagli npz** *(`90c00a7f`; `doc/referti_l2/campo_g1_componenti/letture.txt`)*: **`9/11`; i due falliti sono un mio errore di mappatura** *(il deficit del controllo e' quello TOTALE: `2243.0` e `2600.0` uguali al guardiano)*; **gli altri entro lo `0.01%`.**
+- **La sez. `9` del documento sull'inerzia:**
+  - ### **`sigma = 1` e' il `10`-`13%` nella materia rimasta indietro** *(contro lo `0.5%` del cuore)*: **l'osservazione di Luca confermata per lo spin;**
+  - **un anello svuotato nel vuoto sul fronte della materia;**
+  - ### **il buco del vuoto resta al posto iniziale** *(`c1` `40.40` -> `42.84`, la materia `40.50` -> `65.86`)*: **un'IPOTESI contro il guscio che si muove con la materia;**
+  - **P1 deve misurare anche dove va il buco;**
+  - **il vuoto evolve con la legge piena** *(dal codice)*.

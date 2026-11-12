@@ -234,3 +234,43 @@
     - **un respiro piu' piccolo, prima:** **`2.04` a `1420`, `1.65` a `1580`.**
   - **IPOTESI del guardiano: una messa a fuoco temporanea, non una transizione di stato.**
   - ### **La corsa lunga la distingue:** **se al ripasso sulla cresta si riaccende allo stesso modo, e' una LENTE; se resta cambiato, e' una TRANSIZIONE.**
+
+## 9. LE COMPONENTI E IL VUOTO DI G1 *(guardiano `16:00`; ricalcolati da CC)*
+
+> **OSSERVAZIONI e IPOTESI di UNA corsa** *(`N` imposto, la forma (a), `2000` tick; gli npz di `e5c4b62b`)*, **non leggi.**
+> **I numeri sono quelli del RICALCOLO di CC** *(`csv/solitone/s5_g1_componenti_letture.py`, a `90c00a7f`; `doc/referti_l2/campo_g1_componenti/letture.txt`, `9/11`)*.
+> ### **I due DEVE falliti del ricalcolo sono un errore mio di MAPPATURA:**
+> - **«il controllo, il deficit da `2243` a `2600`» l'avevo letto come il deficit entro `R < 20` dalla posizione** *(CC `2159.0`, `2341.7`)*;
+> - **e' il deficit TOTALE della tabella (c): CC `2243.0` a `0` tick e `2600.0` a `2000`, uguali;**
+> - **tutti gli altri numeri del guardiano tornano entro lo `0.01%`** *(i centri entro `0.044`)*.
+
+- ### **a. La composizione:**
+  - **`sigma = 0` porta il `99.46%` della norma** *(`sigma = 1` lo `0.54%`, a `0` tick)*.
+  - **`sigma = 1` per anello** *(`gamma 0`, `0` tick)*:
+    - **`0.51%` nel cuore** *(`R 0`-`6`)*;
+    - **`0.78%` sul fronte** *(`R 16`-`19`)*;
+    - **`2.9%` nel fondo** *(`R 19`-`25`)*.
+  - ### **Nel solitone che cade** *(`gamma +0.02`)*, **la materia rimasta indietro** *(`R 16`-`25` a `1800`-`2000` tick)* **ha il `10.7`-`12.6%` di `sigma = 1`.**
+  - **Le tre direzioni `k`:**
+    - **nel cuore quasi uguali** *(`0.333` ciascuna)*;
+    - **fuori dal corpo, nel caso che cade, `k = 1`** *(l'arco a `120` gradi, la direzione della cresta)* **un poco di piu':** **fino a `0.356`** *(`R 19`-`25`, `1800` tick)*.
+  - ### **L'osservazione di Luca** *(`14:40`-`14:46`)*: **«la materia esterna ha una composizione diversa»: CONFERMATA per lo spin.**
+- ### **b. Il vuoto:**
+  - **un ANELLO svuotato sul fronte della materia** *(`R 12`-`19`: `dphi` `-2.32`/`-2.35` su `6` a `0` tick, fino a `-2.89` a `2000` nel controllo; il minimo `-5.56`)*;
+  - **dentro il corpo un piccolo eccesso** *(`+0.59` nel cuore, `+0.66` a `R 6`-`12`)*.
+  - ### **Il fronte netto della materia coincide con una parete nel vuoto: due domini separati da una parete.**
+- ### **c. Il buco NON segue il solitone che cade** *(`gamma +0.02`)*:
+  - **la materia va da `c1 40.50` a `65.86`, il centro del buco da `40.40` a `42.84`;**
+  - **il deficit attorno al posto INIZIALE** *(`R < 20`)* **cresce da `2159` a `2791`, mentre la materia li'** *(`R < 12`)* **scende dall'`88.7%` allo `0.06%` della norma;**
+  - **attorno alla posizione nuova si forma un anello piu' debole** *(il deficit entro `R < 20` `1375` a `2000` tick)*;
+  - **il deficit totale da `2243` a `3587`, l'eccesso da `787` a `2132`.**
+  - **Nel controllo il buco resta col solitone** *(`c1` del buco fra `40.40` e `40.56`)* **e il deficit totale cresce piano** *(`2243` -> `2600`)*.
+- ### **d. LA LETTURA del guardiano, IPOTESI:**
+  - **con la forma (a) e su `2000` tick il vuoto NON veste il solitone in moto: il corpo che si muove e' la materia, il guscio resta come impronta;**
+  - ### **e' CONTRO la versione dell'ipotesi dei domini in cui il guscio di vuoto si muove con la materia e raddrizza l'inerzia.**
+  - **Restano aperte:**
+    - **un buco di inerzia molto grande, che non riesce a seguire;**
+    - **una dipendenza dalla legge del vuoto.**
+  - ### **P1 resta la prova che decide** *(la spinta sulla sola materia contro la spinta su materia e vuoto)*; **da aggiungere a P1: misurare anche dove va il buco.**
+- **e. Il vuoto e' DINAMICO in questa scena** *(si forma l'anello nuovo)*: **il buco che resta non e' un vuoto congelato.**
+  - ### **CONFERMATO dal codice della scena:** **ogni tick e' `tick.percorri_tick` con TUTTO l'ordine** *(`len(composizione.ORDINE)`)*, **quindi `phi` evolve con la legge piena;** **`cs = s N` per tutti i nodi; la forma (a) aggiunge una fase alla sola `psi`.**
