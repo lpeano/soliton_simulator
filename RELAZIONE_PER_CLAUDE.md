@@ -25378,3 +25378,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **NON dipende dalla fusione:** **da `654292f2` il principale da solo ha cambiato `26` file, il laterale `32`.**
   - **La cassetta e' scaduta su tutti e due i rami dal `2026-11-08`.**
 - ### **FERMO: `primo-ordine` e' com'era.** **La proposta: D6 riallineato al commit della fusione, un commit a se'.**
+
+### 2026-11-12 13:25 -- L'UNIFICAZIONE, U4: LA CASSETTA `108/108`, P3 COME DA PIANO; R-1 DI C35-pi INTERROTTO (L'ULTIMO PEZZO NON COMINCIA SU UNO STATO); FERMO [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **D6 riallineato a `6c97a2e3`** *(`9e32c88d`)*; **la cassetta `108/108`; P3-F e P3-S come devono, P3-D in U5** *(`7e8cbdf3`)*.
+- ### **R-1 di C35-pi:** **R-0 passa; poi «lo stato completo a `196667` non c'e'»:**
+  - **`ripresa` rifa' l'ULTIMO pezzo** *(dopo gli allungamenti `196667 -> 200000`)*, **e gli stati sono ogni `10000`;**
+  - **il controllo all'apertura non e' stato fatto.**
+- ### **FERMO.** **La proposta:** **R-1 sul pezzo `60000 -> 66667`** *(lo stato a `60000`; circa `46` minuti; quello della prima fusione)*, **con `ripresa` che sceglie il pezzo: un commit a se'.**

@@ -218,3 +218,16 @@
     - **`zero-nel-nucleo` CONGELATO: non vieta;**
     - **`primo-ordine` SBLOCCATO: non vieta;**
     - **`primo-ordine` CONGELATO: vieta.**
+- ### **(4) R-1 DI C35-pi: INTERROTTO PRIMA DI RIFARE IL PEZZO** *(alle `13:19:16`-`13:19:18`, a `7e8cbdf3`, codice `1`; `doc/referti_l2/unificazione_r1_interrotta.txt`)*:
+  - **R-0 PASSA:** **il file di ripresa e' a `200000` e i suoi sha = `sha_fine` dell'ultima riga, al bit.**
+  - ### **POI R-1 SI FERMA: «lo stato completo a `196667` non c'e'».**
+    - **`ripresa` rifa' sempre l'ULTIMO pezzo, e dopo gli allungamenti l'ultimo pezzo di C35-pi e' `196667 -> 200000`;**
+    - **ma gli stati completi sono ogni `10000` tick** *(`0`, ..., `200000`)*.
+  - ### **I pezzi che cominciano su uno stato:** **solo quelli fino a `60000 -> 66667`** *(gli allungamenti partono da `66667`, `76667`, ...)*.
+  - ### **Il controllo di Luca** *(«il controllo all'apertura di C35-pi, quello che fece fallire la prima fusione»)* **NON e' stato fatto:** **l'assert della testa sta dentro `corsa()`, che non e' partita.**
+  - ### **FERMO** *(il mandato: al primo controllo che fallisce)*. **`primo-ordine` e' com'era.**
+  - **La proposta, la decisione e' di Luca:**
+    - ### **(a)** **`ripresa(nome, t0=...)`: R-1 sul pezzo che comincia a `t0`** *(i jsonl fino al pezzo prima, lo stato a `t0`)*.
+      - **Su C35-pi il pezzo `60000 -> 66667`:** **`2739 s` all'originale** *(circa `46` minuti)*; **e' quello su cui la prima fusione non passo'** *(`doc/referti_l2/ripresa_C35-pi_v2_non_passa.txt`)*.
+      - **Un commit a se', con la suite, poi R-1.**
+    - **(b)** **solo l'apertura** *(l'assert della testa, senza rifare il pezzo)*, **e la riproduzione** *(il controllo (5), `1000` tick da `60000`)* **al posto del pezzo intero.**

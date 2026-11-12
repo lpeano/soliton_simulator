@@ -1,0 +1,13 @@
+### R-0, R-1, R-1-F su C35-pi: l'ultimo pezzo 196667 -> 200000 (t_fine 200000) rifatto da corsa() dallo stato completo a 196667
+  DEVE PASSARE: R-0 il file di ripresa di C35-pi e' a t1 dell'ultima riga e i suoi sha = sha_fine dell'ultima ri PASSA   t 200000
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1211, in <module>
+    main(sys.argv[1:])
+    ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1198, in main
+    sys.exit(ripresa(argv[argv.index("--ripresa") + 1]))
+             ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\corsa_accensione.py", line 1130, in ripresa
+    assert len(st0) == 1, "lo stato completo a %d non c'e' (o c'e' due volte)" % t0
+           ^^^^^^^^^^^^^
+AssertionError: lo stato completo a 196667 non c'e' (o c'e' due volte)
