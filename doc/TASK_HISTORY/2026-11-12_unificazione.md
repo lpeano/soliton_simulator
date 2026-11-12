@@ -285,3 +285,40 @@
   - **il mandato di U5 chiede su `zero-nel-nucleo` il tag `laterale-archiviato` E una riga in cima alla sua relazione;**
   - **la decisione di Luca dopo U0 dice «fino alla fine di U5 NON committare niente su `zero-nel-nucleo`»;**
   - ### **il tag non e' un commit e lo metto; la riga e' un commit sul laterale: aspetta la decisione di Luca.**
+
+## 8. U6, LA CORREZIONE DEI COEFFICIENTI: LE OPZIONI MISURATE, POI LA SCELTA DI LUCA -- **U6.0, SU CARTA, PRIMA DEL CODICE**
+
+### 8.1 Le premesse dal codice *(`primo_ordine/flussi_parziali.py` del nucleo unificato)*
+
+- **`z_arco` e `z_nodo`:** **`z = espi(pi s f)`, cioe' `(cos, sin)` calcolati: `|z| = 1` solo all'arrotondamento.**
+- **`_alfa_beta`:**
+  - **`beta = fl((1 - z)/2)`, `alpha = fl((1 + z)/2)`, calcolati SEPARATAMENTE** *(il commento: «NON si ricava `alpha = 1 - beta`», per `M-B1`)*;
+  - **`hop = alpha I + beta S`.**
+- **Il fatto misurato** *(D2, `36f364e8`, sez. `24.5` del laterale)*:
+  - ### **il mezzo spostamento del vuoto e' ESPANSIVO:** **`|alpha + beta|^2 - 1 = +1.110e-16`, `sigma_max - 1 = +5.551e-17`;**
+  - **da li' nasce la deriva di `Lambda` del vuoto F3 a `cs` spento:** **`+2.228e-15` per tick** *(T1, relativa `+3.7e-16`)*.
+- **Il meccanismo** *(sez. `24.6` del laterale, un'ipotesi)*: **`1 - z_re` e' esatto** *(Sterbenz)*, **`1 + z_re` no;** **quindi `alpha + beta = 1 + delta`.**
+
+### 8.2 Le tre forme *(sul banco, FUORI dal nucleo: un avvolgimento in memoria di `FP._alfa_beta` o dei mezzi spostamenti, dichiarato come seconda fonte di sola prova)*
+
+- **(k1) `|z| = 1`:** **`z` calcolato come `(cos, sin)` e normalizzato** *(`z / |z|`)*; **`alpha`, `beta` come oggi.**
+- **(k2) `alpha + beta = 1`:** **`beta = (1 - z)/2` esatto, `alpha = 1 - beta`** *(la somma `1` al bit nella parte reale e `0` nell'immaginaria; cio' che il commento di oggi rifiuta per `M-B1`)*.
+- **(k3) `I - beta (I - S)`** *(la proposta di D2, sez. `24.7` del laterale)*: **`nuovo_0 = v0 - beta (v0 - v1')`, `nuovo_1 = v1 - beta (v1 - v0')`** *(`'` col trasporto `U` per `psi`)*.
+  - **Sulla combinazione simmetrica `v0 - v1 = 0` esatto: il valore proprio `1` e' ESATTO.**
+- **Accanto: OGGI** *(il nucleo com'e')*.
+- ### **DEVE FALLIRE: una forma sbagliata apposta** *(`alpha` moltiplicato per `1 + 1e-12`)*: **deve dare una deriva VISIBILE** *(l'atteso: `~1e-12` relativa per mezzo spostamento)*.
+
+### 8.3 Le misure, per ciascuna forma
+
+1. **la deriva di `Lambda` del vuoto F3 per tick** *(la scena di T1, `lambda_vuoto_deriva.py`: `1000` tick, la media di `Delta Lambda / Lambda` per tick)*;
+2. **la dinamica al bit contro oggi?** *(gli sha dopo `1` e `100` tick sulla scena di T1)*;
+3. **l'effetto sulla fisica oltre l'arrotondamento:** **`1000` tick da TBS a `10000`** *(il ciclo della corsa)*, **la rms di `rho` relativa contro oggi;**
+4. **il costo in tempo:** **i secondi per tick, contro oggi;**
+5. **l'effetto su M-B1 e sulla cassetta:** **la cassetta e il collaudo M-B1 rigirati con la forma avvolta in memoria** *(lo strumento li esegue nello stesso processo dopo l'avvolgimento)*.
+
+### 8.4 Le letture, scritte prima
+
+- **Una forma «cura la deriva» se la deriva media di `Lambda` per tick scende sotto `1e-17` relativa** *(un decimo di quella di oggi)*, **o cambia segno senza crescere.**
+- **«Cambia la fisica oltre l'arrotondamento» se la rms di `rho` relativa dopo `1000` tick supera `1e-10`** *(la soglia di U4)*.
+- **«Rompe M-B1» o «rompe la cassetta» se un loro controllo fallisce.**
+- ### **FERMO dopo le misure: la scelta della forma e' di Luca, sui numeri.** **Nessuna modifica al nucleo prima.**
