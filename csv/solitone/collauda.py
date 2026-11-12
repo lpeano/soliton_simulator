@@ -97,7 +97,9 @@ REFERTI_VECCHI = (("eps 0", "csv/_livelli_piatti.py", "doc/referti_l2/livelli_pi
 # ### **L'UNIFICAZIONE, D6 RIALLINEATO** *(Luca `2026-11-12`; il task history `2026-11-12_unificazione`, sez. `6`)*: **la cassetta era SCADUTA su tutti e due i rami dall'8 novembre**
 # ### *(da `654292f2` il principale aveva cambiato `26` `.py` di `csv/solitone/`, il laterale `32`)*, **non per la fusione.** **Il riferimento e' `6c97a2e3`, il commit su cui la
 # ### cassetta ha passato `107/108` (tutto tranne D6) col nucleo unificato** *(non il commit della fusione: in mezzo c'e' il codice dei controlli)*.
-LIBRERIA_RIFERITA = "6c97a2e3"
+# ### **D6 RIALLINEATO DI NUOVO** *(Luca `2026-11-12` `18:28`, la stessa decisione del mattino: la cassetta scade quando la libreria cambia)*: **dopo `6c97a2e3` sono entrati
+# ### nella libreria `s5_caduta_solitone_campo`, `s5_caduta_solitone_componenti`, `s5_g1_componenti_letture`, `u6_coefficienti` e altri; il riferimento e' `cd89b710`, l'ultimo commit di U6.**
+LIBRERIA_RIFERITA = "cd89b710"
 
 
 def vecchi():
