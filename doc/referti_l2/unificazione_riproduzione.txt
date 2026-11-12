@@ -1,0 +1,22 @@
+==================================================================================================================================
+U4, LA RIPRODUZIONE: 1000 tick col nucleo vecchio e col nucleo unificato dallo stesso stato; la rms di rho relativa < 1e-10, l'energia convertita entro 1e-10
+==================================================================================================================================
+### C35-pi da 60000, 1000 tick: il vecchio E:/soliton_simulator/wt_pre_unificazione, il nuovo C:/Users/lpeano/soliton_simulator
+    rho: la rms relativa 0.000e+00; AL BIT (rho e gli sha di ogni chiave): True; la norma vecchio 1990827.0523486652 nuovo 1990827.0523486652; V 150977.92766773904 150977.92766773904
+    la distanza della coppia: vecchio 37.428755539897566 nuovo 37.428755539897566
+    tot: vecchio 9806083.011504343, convertito 16534761.802145913, nuovo 16534761.802145911; lo scarto relativo convertito 1.127e-16, senza conversione 4.069e-01; e_K -4.7122750003546425 -> -1.5706823467648499
+  DEVE PASSARE: C35-pi: la rms di rho relativa < 1e-10                                                                   PASSA   0.000e+00
+  DEVE PASSARE: C35-pi: la norma M e V uguali entro 1e-10                                                                PASSA   
+  DEVE PASSARE: C35-pi: la distanza della coppia uguale entro 1e-10 relativo                                             PASSA   37.428755539897566 37.428755539897566
+  DEVE PASSARE: C35-pi: l'energia CONVERTITA (tot + pi (M + V)) entro 1e-10 relativo                                     PASSA   1.127e-16
+  DEVE FALLIRE: C35-pi: l'energia SENZA conversione entro 1e-10 relativo                                                 ### FALLISCE   4.069e-01
+### TBS da 10000, 1000 tick: il vecchio E:/soliton_simulator/wt_pre_unificazione, il nuovo C:/Users/lpeano/soliton_simulator
+    rho: la rms relativa 0.000e+00; AL BIT (rho e gli sha di ogni chiave): True; la norma vecchio 996833.6466843241 nuovo 996833.6466843241; V 37790.72671122932 37790.72671122932
+    la distanza della coppia: vecchio nan nuovo nan
+    tot: vecchio 5034782.648936973, convertito 8285150.979621386, nuovo 8285150.979621387; lo scarto relativo convertito 1.124e-16, senza conversione 3.923e-01; e_K -4.7122750003546425 -> -1.5706823467648499
+  DEVE PASSARE: TBS: la rms di rho relativa < 1e-10                                                                      PASSA   0.000e+00
+  DEVE PASSARE: TBS: la norma M e V uguali entro 1e-10                                                                   PASSA   
+  DEVE PASSARE: TBS: l'energia CONVERTITA (tot + pi (M + V)) entro 1e-10 relativo                                        PASSA   1.124e-16
+  DEVE FALLIRE: TBS: l'energia SENZA conversione entro 1e-10 relativo                                                    ### FALLISCE   3.923e-01
+==================================================================================================================================
+ESITO: 9/9 controlli come devono; fallite: 0 []

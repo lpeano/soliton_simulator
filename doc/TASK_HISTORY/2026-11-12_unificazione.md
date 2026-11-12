@@ -264,3 +264,8 @@
   - **R-1-V e R-1-F falliscono come devono;**
   - ### **l'apertura a `66667` PASSA.**
 - **La nota in `doc/LEGGI_PROVATE.md`, sez. `6`:** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il totale, `M` e `V`.**
+- ### **(5) LA RIPRODUZIONE: `9/9`** *(dalle `15:19:43` alle `15:36:02`, a `01763cf7`; il vecchio nel worktree `E:\soliton_simulator\wt_pre_unificazione`; `doc/referti_l2/unificazione_riproduzione.txt`)*:
+  - **C35-pi da `60000` e TBS da `10000`, `1000` tick del ciclo della corsa** *(col bordo)*;
+  - ### **`rho` e gli sha di OGNI chiave AL BIT** *(la rms `0.000e+00`)*, **la norma, `V`, la distanza della coppia** *(`37.428755539897566`)* **uguali;**
+  - **l'energia convertita entro `1.1e-16`** *(la soglia di Luca `1e-10`)*;
+  - **senza conversione `4.1e-01` e `3.9e-01`: il DEVE FALLIRE fallisce come deve.**

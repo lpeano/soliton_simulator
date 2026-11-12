@@ -25424,3 +25424,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **R-1 riletto dai jsonl della sabbiera: `4/4`** *(la dinamica al bit, il totale `2.3e-16` della scala, il bordo `1.1e-14`, l'apertura a `66667`; R-1-V e R-1-F come devono)*.
 - **`doc/LEGGI_PROVATE.md`, sez. `6`:** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il totale, `M` e `V`.**
 - **L'errore `n.141` nella MAPPA.** **Si prosegue con (5), la riproduzione.**
+
+### 2026-11-12 15:45 -- L'UNIFICAZIONE, U4 (5): LA RIPRODUZIONE `9/9`, AL BIT [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **C35-pi da `60000` e TBS da `10000`, `1000` tick, il nucleo vecchio e l'unificato:** **`rho` e gli sha di ogni chiave AL BIT;** **la norma e la distanza della coppia uguali;** **l'energia convertita entro `1.1e-16`;** **senza conversione fallisce** *(come deve)*.
+- **In corsa:** **(6) il banco a `N = 1` e T1 della U(1); accanto, G1 con le componenti** *(lo script a `f6a044c2`)*.
