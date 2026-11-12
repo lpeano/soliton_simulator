@@ -161,3 +161,34 @@
   - **`pre-unificazione-laterale` -> `986440d6`** *(`986440d6b54533a09e06e35b79568678b702db97`)*;
   - **il ramo `unificazione` da `primo-ordine` a `fca1dd26`, pushato;**
   - **dopo i tag `origin/zero-nel-nucleo` e' ancora a `986440d6`.**
+
+## 5. U2 E U3
+
+- **U2** *(`d9b1f943`)*: **la fusione; un solo conflitto, l'inventario, risolto unendo i due blocchi; ogni altro file = il lato che l'ha cambiato; la suite sull'albero fuso `67` su `67`.**
+- ### **U3, IL BRACCIO 0 DI v2: `4/4`** *(dalle `12:10:16` alle `12:11:06`, a `f9784206`; `doc/referti_l2/unificazione_zero_nel_nucleo.txt`)*:
+  - **il padre e' il worktree temporaneo `E:\soliton_simulator\wt_pre_unificazione`, a `pre-unificazione-principale`;**
+  - **Z0-D e Z0-R: il tick del nucleo unificato = il tick del VECCHIO con l'avvolgimento, AL BIT, `6` chiavi su `6`** *(dopo la rampa e nella rampa)*;
+  - **Z0-F-D e Z0-F-R, lo zero DUE volte: `4` chiavi diverse** *(`Lambda`, `phi_h`, `psi_h`, `rho`)*, **come deve.**
+  - ### **Il doppio zero e' spento: entrato con la fusione.**
+    - **Il censimento:** **`convenzione_simmetrica` non applica niente; `BE.conv` e' un'identita' con l'assert;**
+    - **solo `zero_nel_nucleo.doppio_avvolgimento` rimette l'avvolgimento, ed e' lo strumento del DEVE FALLIRE.**
+- ### **U3, L'ENERGIA** *(i json dello strumento `energia_doppio_zero.py`, a `f9784206`; i numeri da uno script sui json)*:
+  - **lo stato di TBS a `100000`: `M0 995049.6959049285`, `V0 35768.45723562832` UGUALI nei due nuclei;**
+  - ### **E0 vecchio `5039901.153070251`, nuovo `8278311.890163623`: il nuovo meno il vecchio `3238410.7370933713` = `pi (M + V)` ESATTO** *(lo scarto `0.000e+00`)*;
+  - **`e_K` nuovo meno vecchio meno `pi`: `-4.4e-16`;**
+  - **gli sha dello stato dopo `20` tick: UGUALI.**
+- ### ⚠ **UNA PREMESSA DEL MANDATO CHE NON REGGE** *(U3, il DEVE FALLIRE sull'energia)*:
+  - **«riattivando l'involucro sul nucleo unificato, il controllo dell'energia di uno stato di riferimento deve vedere lo spostamento doppio, `2 pi (M + V)`».**
+  - ### **Dal codice:**
+    - **l'energia di uno stato si calcola con una formula esplicita, `primo_ordine/energia_pesata.termini_di_h`, ed e' LI' che v2 ha messo lo zero simmetrico** *(`-pi s (N/2 - P)` sul nodo, `- Re incro` sull'arco)*;
+    - **l'avvolgimento di prima sostituisce SOLO le funzioni del tick** *(`FP.grover`, `hop_psi`, `hop_phi`)*.
+  - ### **Quindi rimettere l'avvolgimento NON puo' spostare l'energia di uno stato:** **sposta la fase della dinamica, ed e' cio' che Z0-F vede.**
+  - **Lo spostamento `pi (M + V)` sta nella FORMULA dell'energia, non nel tick.**
+  - **Un difetto mio nello strumento:** **`energia_doppio_zero.py --doppio` avvolge tutta la misura, anche la costruzione della scena, e li' le bande col doppio zero si rompono** *(`ValueError` in `_materia_leggera.bande_coppia`)*.
+    - **Non lo curo adesso:** **anche curato misurerebbe una cosa che non puo' cambiare.**
+  - ### **FERMO: la decisione e' di Luca.** **La proposta:**
+    - **il DEVE FALLIRE di U3 e' Z0-F** *(lo zero due volte, visto sulla dinamica, `4` chiavi)*;
+    - **il DEVE FALLIRE dell'energia sta in U4** *(il confronto SENZA la conversione deve fallire, ed e' gia' nel piano)*.
+- **Due inciampi dell'ambiente, curati:**
+  - **git rifiuta il worktree su `E:`** *(«dubious ownership»: il filesystem non registra il proprietario)*, **e il presidio `P-BARRIERA` rifiutava di girare:** **l'eccezione `safe.directory` passata SOLO per variabile d'ambiente** *(`GIT_CONFIG_COUNT`)*, **la configurazione globale non e' toccata;**
+  - **`db/accensione_lenta/fase_F3.npz`** *(non tracciato)* **mancava nel worktree:** **copiato, lo sha `4beb01d95a98` uguale nel principale e nel laterale.**

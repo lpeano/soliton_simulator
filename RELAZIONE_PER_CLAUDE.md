@@ -25360,3 +25360,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **ogni altro file = il lato che l'ha cambiato** *(`205` su `205`)*;
   - **il nucleo e' quello del laterale** *(v2)*; **`NUCLEO_CONGELATO` resta `CONGELATO`;**
   - **la suite sull'albero fuso: `67` su `67`.**
+
+### 2026-11-12 12:20 -- L'UNIFICAZIONE, U3: IL BRACCIO 0 `4/4`; L'ENERGIA `pi (M + V)` ESATTO; UNA PREMESSA CHE NON REGGE; FERMO [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Il tick del nucleo unificato = il vecchio con l'avvolgimento, AL BIT** *(`6` chiavi)*; **lo zero due volte: `4` chiavi diverse, come deve.**
+- **L'energia di TBS a `100000`: il nuovo meno il vecchio = `pi (M + V)` con scarto `0`.**
+- ### **La premessa di U3 «col doppio avvolgimento l'energia si sposta di `2 pi (M + V)`» NON regge:**
+  - **l'energia e' una formula esplicita** *(`energia_pesata.termini_di_h`)* **e l'avvolgimento tocca solo il tick;**
+  - **la proposta: il DEVE FALLIRE di U3 e' Z0-F** *(sulla dinamica)*, **e quello dell'energia sta in U4.**
+- **FERMO per la decisione di Luca.** *(`doc/TASK_HISTORY/2026-11-12_unificazione.md`, sez. `5`.)*
