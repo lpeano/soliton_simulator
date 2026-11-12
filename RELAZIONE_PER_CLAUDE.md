@@ -25316,3 +25316,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le cure di A col codice prima della corsa:** **la 1** *(`779f0ff6`)*, **la 2** *(`986440d6`)*.
 - ### **UN MIO ERRORE:** **ho scritto documenti tracciati mentre girava una suite; la suite li ha rimessi a posto ed e' uscita col codice `1`.** **Riscritti, la suite rigirata pulita; la regola in memoria.**
 - **FERMO: la decisione su G1** *(rifarlo con `h_k` della sola materia, o passare a G2)* **e' di Luca.**
+
+### 2026-11-12 11:15 -- L'UNIFICAZIONE DEI DUE RAMI (Luca `10:39`): U0, IL PIANO; FERMO PER LA CONFERMA [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Il piano:** `doc/TASK_HISTORY/2026-11-12_unificazione.md`.
+- **Lo stato:** **il principale e' a `ff0602dd`, il laterale a `986440d6`** *(il mandato diceva `9c8dc888` e `f0affd34`: dopo sono venuti due commit miei)*.
+- **I fatti dal repo:**
+  - **un solo conflitto atteso, `doc/INVENTARIO_strumenti.md`;**
+  - **il nucleo e' cambiato solo sul laterale** *(`12` file)*;
+  - ### **il doppio zero e' GIA' spento sul laterale** *(`convenzione_simmetrica` non applica niente, `BE.conv` e' un'identita' con l'assert)*: **entra con la fusione, e U3 diventa una verifica.**
+- ### **Due cose da decidere:**
+  - **la conversione delle costanti NON e' al bit** *(`e_K + pi` differisce di `4.4e-16` dal misurato)*: **la proposta, una tolleranza `1e-14` relativa;**
+  - ### **P3** *(`vieta_cs`)* **e P3-D dipendono dal NOME del ramo `primo-ordine`:** **sul ramo `unificazione` P3-D fallirebbe per il nome.** **La proposta: P3-D in U5, sul `primo-ordine` avanzato in locale prima del push.**
+- **La domanda su G1 resta in coda.**

@@ -1,0 +1,148 @@
+# 2026-11-12 -- L'UNIFICAZIONE DEI DUE RAMI *(il passo `3` della ROTTA; Luca `10:39`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+> **La decisione di Luca** *(`2026-11-12` `10:39`)*: **la condizione «dopo la chiusura di S5» e' tolta.**
+> - **S5 non ha mai toccato il nucleo** *(tutto nel banco, fuori)*.
+> - **La prossima domanda** *(la gravita' G insieme alla `U(1)`)* **vuole i due rami insieme.**
+>
+> **Il mandato:** **U0** il piano *(questo file)*, **FERMO** per la conferma; **U1** i segnaposto; **U2** la fusione; **U3** il doppio zero; **U4** i controlli; **U5** l'unificazione; **U6** i coefficienti, su carta e misurati.
+>
+> ### ⚠ **La domanda aperta su G1** *(rifarlo con `h_k` della sola materia, o passare a G2)* **resta in coda:** **questo mandato viene prima.**
+
+## 1. LE PREMESSE DAL CODICE *(U0: cosa credo prima di toccare, e cosa NON so)*
+
+### 1.1 Lo stato *(da `git fetch`, `11:0x`)*
+
+- ### **Il principale e' a `ff0602dd`, il laterale a `986440d6`**:
+  - **il mandato dice `9c8dc888` e `f0affd34`;**
+  - **dopo sono venuti, sul laterale, la cura 2 di A** *(`986440d6`)* **e, sul principale, la relazione di G1** *(`ff0602dd`)*;
+  - **nessuna corsa in atto.**
+- **La base comune: `0bebbe94`** *(`2026-11-09` `02:40`)*. **Dopo la base: `113` commit sul principale, `115` sul laterale.**
+- ### **La prima fusione e' gia' «sciolta» sul laterale:**
+  - **il laterale ha fuso il principale** *(lo stato X, `ebe2f13c`, col revert `de46816d` dentro)*;
+  - **poi ha rifatto `git revert de46816d`** *(lo stato Y, `8cfda2f1`)*.
+  - **Quindi un `git merge origin/zero-nel-nucleo` sul principale PORTA v2** *(il revert del revert e' un commit del laterale che il principale non ha)*.
+
+### 1.2 I file che differiscono *(`git diff --name-only origin/primo-ordine origin/zero-nel-nucleo`; «chi» = il lato che l'ha cambiato dalla base)*
+
+| la categoria | i file | chi |
+|---|---|---|
+| **il nucleo** *(`primo_ordine/`)* | **`12`** *(la tabella 1.3)* | **TUTTI dal laterale** |
+| **gli strumenti** *(`csv/`, fuori dal nucleo)* | **`4`** in `csv/` *(`_simmetrie_reticolo`, `_triangoli_bassa_energia`, `_triangoli_forza`, `_zero_simmetrico`)* **+ `46`** in `csv/solitone/` | **`csv/`: laterale.** **`csv/solitone/`: `26` laterale, `20` principale** |
+| **i documenti** | `CLAUDE.md`, `RELAZIONE_PER_CLAUDE.md`, `doc/MAPPA.md`, `doc/PIANO_2D_3D.md`, `doc/PROGETTO_MITOSI.md`, `doc/REGOLE/par4.md`, `doc/ROTTA.md` | **principale** |
+| | `doc/LEGGI_PROVATE.md`, `doc/indice/leggi.jsonl`, `doc/indice/storico_era2.jsonl`, `doc/leggi_era2/CAMM-*.md` *(4)*, `db_era2/stato_0bc547638e.npz.timbro.json` | **laterale** |
+| | **`doc/INVENTARIO_strumenti.md`** | ### **TUTTI E DUE: l'unico conflitto atteso** |
+| **i task history** | **`11`** | **`10` principale, `1` laterale** *(`2026-11-09_laterale_mb.md`)* |
+| **i referti** *(`doc/referti_l2/`)* | **`117`** | **`81` principale, `36` laterale** |
+
+### 1.3 Il nucleo: lo sha dei due lati *(### **`sha1-BYTE`, lo sha1 dei byte grezzi**, NON `git hash-object`)*
+
+| il file | principale `ff0602dd` | laterale `986440d6` |
+|---|---|---|
+| `primo_ordine/_collauda_motore.py` | `e4526319` | `4d60d2f2` |
+| `primo_ordine/_collauda_r60.py` | `2c972bfe` | `1ee3f0eb` |
+| `primo_ordine/_mappa.yaml` | `1eb339be` | `f3bb3fdc` |
+| `primo_ordine/_misura_hw.py` | `a28e1413` | `98c1d34b` |
+| `primo_ordine/_misura_mb2.py` | `266b5600` | `48269077` |
+| `primo_ordine/energia_pesata.py` | `cfaff204` | `43bce8ad` |
+| `primo_ordine/flussi_parziali.py` | `1461182f` | `d43b1cf8` |
+| `primo_ordine/leggi/leggi.yaml` | `809d7fdb` | `1c0eac29` |
+| `primo_ordine/termini/camm_grover.py` | `925a9103` | `10b70489` |
+| `primo_ordine/termini/camm_grover_vuoto.py` | `60ef8476` | `8f88bc20` |
+| `primo_ordine/termini/camm_spostamento.py` | `4123e139` | `d58a753f` |
+| `primo_ordine/termini/camm_spostamento_vuoto.py` | `a98c4267` | `a58a55ea` |
+
+**`primo_ordine/tick.py` e gli altri: uguali nei due rami.**
+
+### 1.4 I conflitti attesi, e come si risolvono
+
+- **Il nucleo: nessun conflitto atteso** *(il principale non l'ha toccato: e' congelato)*. **Se ne compare uno: vince il LATERALE.**
+- ### **`doc/INVENTARIO_strumenti.md`: si UNISCONO le righe dei due lati** *(niente si perde)*; **per una voce cambiata da tutti e due, la riga del lato che ha il blob del file nel ramo fuso, e una nota.**
+- **I documenti cambiati da un lato solo** *(RELAZIONE, MAPPA, ROTTA, CLAUDE, i task history)*: **git li prende senza conflitto.** **Li controllo uno per uno dopo la fusione** *(nessuna riga persa: il conto delle righe contro i due lati)*.
+- **I referti: i due insiemi insieme** *(nessun nome in comune fra i file cambiati)*.
+
+### 1.5 Il doppio zero *(lo zero simmetrico in memoria)*
+
+- ### **SUL LATERALE E' GIA' SPENTO** *(dal `2026-11-08`, `7c181cc4`, poi il revert del revert `8cfda2f1`)*:
+  - **`csv/_zero_simmetrico.convenzione_simmetrica()` non applica NULLA** *(un `yield` solo, col testo «applicarla ancora darebbe lo zero DUE volte»)*;
+  - **`csv/_triangoli_bassa_energia.conv(nome)` e' un'IDENTITA' DICHIARATA:** **`assert nome == "simm"` e `nullcontext()`** *(«lo zero di prima non esiste piu' nel nucleo»)*.
+- **Gli usi:**
+  - **`BE.conv(DC.ZERO)` in `~100` file di `csv/`** *(fra cui `csv/solitone/corsa_accensione.py`, `5` volte)*: **passano tutti da `BE.conv`, un punto solo;**
+  - **`ZS.convenzione_simmetrica()` usata direttamente in `csv/_segno_gravita.py`, `csv/_modi_pi_e_solitoni.py`, `csv/_scomposizione_zero_lambda.py`:** **anche loro ora non applicano niente.**
+- **Sul principale le due funzioni AVVOLGONO davvero.**
+  - **La fusione porta le versioni del laterale** *(cambiate solo li')*: ### **lo spegnimento ENTRA CON LA FUSIONE, non va scritto.**
+  - **U3 diventa una VERIFICA:**
+    - **nessun file del ramo fuso applica lo zero in memoria;**
+    - ### **DEVE: il tick della corsa = il tick del nucleo** *(il braccio `0` di v2, `csv/solitone/zero_nel_nucleo.py`, gia' `4/4` al bit sul laterale: `Z0-D`, `Z0-R`)*;
+    - ### **DEVE FALLIRE: lo zero applicato DUE volte** *(`Z0-F-D`, `Z0-F-R` dello stesso strumento: `4` chiavi diverse)*;
+    - **l'energia di uno stato col doppio zero spostata di `2 pi (M + V)` invece di `pi (M + V)`:** **una misura da aggiungere** *(e' la richiesta di Luca; lo strumento di oggi guarda le chiavi della dinamica, non l'energia)*.
+
+### 1.6 Le costanti da convertire *(`E_nuovo = E_vecchio + pi (M + V)`; per unita' di norma `e_K_nuovo = e_K_vecchio + pi`)*
+
+- ### ⚠ **LA CONVERSIONE NON E' AL BIT:** **`-4.7122750003546425 + pi = -1.5706823467648494`, mentre `e_K` misurato con v2 e' `-1.5706823467648499`** *(lo scarto `4.4e-16`, da `python`)*. **Quindi le costanti convertite si confrontano con una tolleranza:** **la proposta `1e-14` relativo** *(`~45` ulp: dichiarata, non tarata su un risultato)*.
+
+| dove | che cosa confronta | vecchio | nuovo | la formula |
+|---|---|---|---|---|
+| **`csv/solitone/corsa_accensione.py`** *(`corsa`, l'assert della testa)* | `testa["e_K"] == e_K` | `-4.7122750003546425` *(C35-pi; ogni corsa ha il suo)* | `-1.5706823467648499` | **`e_K == testa["e_K"] + pi` entro `1e-14`** |
+| **`csv/solitone/corsa_accensione.py`** *(`ripresa`, R-1: «il controllo all'apertura di C35-pi»)* | `campioni` uguali al pezzo registrato | **le energie dei campioni** *(`E`, nel jsonl)* | **`E + pi (M + V)`** | **le chiavi della dinamica al bit; le energie convertite entro `1e-14`** |
+| **`csv/solitone/test_protetto.py`** *(la cassetta, P3)* | `e_K == ref["e_K"]` *(BG-F-0.15, il primo pezzo)* | il `e_K` del jsonl | `+ pi` | **come sopra** |
+| **`csv/_respiro_congelato.py`, `csv/_respiro_sul_fondo.py`** | `e_K == testa["e_K"]` | | `+ pi` | **come sopra** *(sigilli vecchi: si rigirano al loro commit; li elenco, non li tocco se non sono nella suite)* |
+
+- ### **Cosa NON so:**
+  - **se altri referti usati come riferimento portino energie assolute** *(`carta_coppia`, `carta_statiche`, `libreria`, `_u1_carica_e` leggono `e_K` dai jsonl, ma per SCALARE: `N |e_K|`; il cambio di `e_K` cambia la scala, non un confronto)*;
+  - ### **se la cassetta oggi passi sul laterale:** **il suo ultimo referto e' `fbccc445`, PRIMA di v2.** **La misuro in U4.**
+
+### 1.7 P3 *(`vieta_cs`)*: **un punto che non torna col ramo `unificazione`**
+
+- **`csv/solitone/ramo.py`:**
+  - **il divieto e' acceso solo sul ramo `primo-ordine` e con `doc/NUCLEO_CONGELATO.md` a `CONGELATO`;**
+  - **`csv/solitone/p3_ramo.py`** *(P3-D)* **PRETENDE `ramo == "primo-ordine"`.**
+- ### **Sul ramo `unificazione` il divieto NON e' attivo, e P3-D FALLIREBBE per il nome del ramo, non per la fisica.**
+- **La proposta:**
+  - **in U4, su `unificazione`, P3-F e P3-S** *(la decisione pura)*;
+  - ### **P3-D in U5, sul `primo-ordine` avanzato in LOCALE, PRIMA del push:** **se fallisce, il puntatore torna indietro** *(`git reset` del solo ramo locale al vecchio hash, il push non avviene)*.
+- **Anche il presidio `H-NUCLEO-CONGELATO` guarda il nome del ramo:** **su `unificazione` non blocca** *(cosi' la fusione puo' portare il nucleo)*; **il fast-forward di U5 non e' un commit: il presidio non lo vede.**
+
+## 2. PROGETTAZIONE DEL RAGIONAMENTO *(i passi, cosa decide ciascuno, cosa mi fa FERMARE)*
+
+- **U1:**
+  - **due tag annotati** *(`pre-unificazione-principale` a `origin/primo-ordine`, `pre-unificazione-laterale` a `origin/zero-nel-nucleo`)*, **pushati;**
+  - **il ramo `unificazione` da `primo-ordine`, pushato.**
+- **U2:**
+  - **`git merge --no-ff origin/zero-nel-nucleo` su `unificazione`** *(il messaggio coi conflitti e le risoluzioni)*;
+  - **`doc/NUCLEO_CONGELATO.md`: il nucleo unificato** *(la tabella 1.3, il lato laterale)* **e la decisione di Luca delle `10:39`;**
+  - **lo stato resta `CONGELATO`** *(sul `primo-ordine` di oggi non si committa niente nel nucleo; su `unificazione` il presidio non agisce)*.
+  - ### **FERMO se: un conflitto nel nucleo** *(non atteso)*, **o una riga persa nei documenti.**
+- **U3** *(la verifica di 1.5)*:
+  - **un censimento** *(`git grep`)* **che nessun file applichi lo zero in memoria;**
+  - **`zero_nel_nucleo.py`** *(i DEVE e i DEVE FALLIRE di Luca)*;
+  - **la misura dell'energia col doppio zero** *(uno script nuovo, il codice committato prima)*.
+- **U4** *(uno alla volta; al PRIMO che fallisce: FERMO, `primo-ordine` com'era)*:
+  1. **la suite completa** *(`primo_ordine/collauda.py`: `67` collaudi, `~12`-`18` minuti; dentro R60 `1.3 s`, M-B1 `28 s`)*;
+  2. **la cassetta con le costanti convertite** *(`csv/solitone/collauda.py`; la durata da misurare)*;
+  3. **`zero_nel_nucleo.py`; P3-F e P3-S;**
+  4. ### **il controllo all'apertura di C35-pi** *(R-1 di `ripresa`, con le energie convertite)*: **DEVE passare;**
+  5. ### **la riproduzione:**
+     - **da C35-pi a `60000` e da TBS a `10000`, `1000` tick col nucleo unificato e `1000` tick col codice di `pre-unificazione-principale`** *(un worktree temporaneo su `E:`, cancellato dopo)*;
+     - **la rms di `rho` relativa sotto `1e-10`, la norma, la distanza della coppia, l'energia convertita entro `1e-10` relativo;**
+     - **se coincidono al bit, lo scrivo;**
+  6. **il banco del lapse a `N = 1` = il tick del nucleo unificato al bit** *(S5.1, `s5_banco.py`)*; **il prototipo `U(1)`: i suoi collaudi T1** *(e T4 se breve)*;
+  7. ### **DEVE FALLIRE: il confronto della riproduzione SENZA la conversione dell'energia.**
+  - **Il referto: `doc/referti_l2/unificazione_controlli.txt`.**
+- **U5:**
+  - **`primo-ordine` avanza in locale a `unificazione`** *(fast-forward)*; **P3-D;** **poi il push;**
+  - **il tag `laterale-archiviato` e la riga in cima alla relazione del laterale;**
+  - **la ROTTA** *(il passo `3` chiuso, lo storico)*; **`doc/LEGGI_PROVATE.md`** *(entra con la fusione)*; **la RELAZIONE.**
+- **U6:** **le tre forme dei coefficienti** *((k1) `|z| = 1`, (k2) `alpha + beta = 1`, (k3) `I - beta (I - S)`)* **su carta, poi una misura breve ciascuna fuori dal nucleo;** **DEVE FALLIRE una forma sbagliata apposta; FERMO per la scelta di Luca.**
+
+### 2.1 Il piano di ritorno indietro
+
+- **Fino a U5 `primo-ordine` NON si muove:** **tornare indietro = cancellare il ramo `unificazione`** *(i tag restano)*.
+- **Dopo U5:** **`primo-ordine` si riporta a `pre-unificazione-principale`** *(un `git reset` del ramo + push forzato: SOLO con la decisione di Luca)*.
+- **`zero-nel-nucleo` non si cancella mai** *(il tag `pre-unificazione-laterale`)*.
+
+## 3. TODO DEL NEXT STEP
+
+1. **commit e push di questo piano; FERMO per la conferma di Luca** *(una riga)*, **anche sulle due proposte:**
+   - **la tolleranza `1e-14` per le costanti convertite** *(1.6)*;
+   - **P3-D in U5 sul `primo-ordine` locale prima del push** *(1.7)*;
+2. **dopo la conferma: U1.**
