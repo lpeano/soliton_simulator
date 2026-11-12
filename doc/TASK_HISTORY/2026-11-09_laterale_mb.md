@@ -1795,3 +1795,6 @@
   - **(D1) si': C35-pi a `60000`;** **(D2) si': `rho_c` come in T-L2** *(`rho_0/rho_c = 1e-2`)*. **Le costanti `T0` e `R_LAPSE` di `s5_coppia_lapse.py` hanno GIA' questi valori** *(a `ef4c1c10`)*: **il codice non cambia** *(i commenti dicono ancora «proposta in attesa di Luca»: la risposta e' qui)*.
   - **La tabella delle leggi:** **la legge di `cs` da `Lambda`, F1 e M-rho istantanea: SCARTATE, confermate.**
   - **L'ordine:** **A col banco di oggi, poi G1, poi G2; commit e push dopo ciascuno.**
+- ### **IL RIAVVIO E L'ORDINE NUOVO** *(Luca `2026-11-12`, dopo il riavvio di Windows dopo le `2`)*:
+  - **A col banco di oggi e' stata INTERROTTA dal riavvio** *(l'uscita parziale scritta l'ultima volta alle `02:10:52`, `333` righe, arrivata nella mappa a `s 0.3`, `(rho_0 0.01, rapporto 0.01)`; nessuna riga d'uscita in `orari_prove`)*: **un esito a meta' NON si committa: si rifa' da capo.**
+  - ### **L'ORDINE NUOVO** *(Luca)*: **G1, poi G2** *(brevi e piu' importanti)*, **poi A da capo** *(il banco di oggi; e la forma (a) con TUTTE E DUE le cure, il codice committato prima)*, **poi N** *(se A da' (l1) per la forma (a) e G1 da' (e1))*, **il punto 4** *(lo script committato prima)*, **il punto 6.** **Una prova oltre `60` minuti: lo si dice una volta e si continua.**
