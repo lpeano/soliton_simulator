@@ -39,25 +39,48 @@ def conti(E):
     return out
 
 
-def uguali_conti(nuovo, vecchio):
-    """### `nuovo` *(v2)* **contro `vecchio` CONVERTITO:** `M`, `V`, `cin`, `leg` al bit; `cost`, `vuo`, `tot` entro `TOLL`. `(ok, la differenza relativa piu' grande)`."""
-    cv = conti(vecchio)
-    ok, peggio = set(nuovo) == set(cv), 0.0
-    for reg in cv:
-        for k, v in cv[reg].items():
-            a = nuovo.get(reg, {}).get(k)
-            if k in ("M", "V", "cin", "leg"):
-                ok = ok and a == v
-            else:
-                ok = ok and a is not None and vicino(a, v)
-                if a is not None:
-                    peggio = max(peggio, abs(a - v) / max(abs(a), abs(v), 1e-300))
+def scala(c):
+    """### **la scala della tolleranza del TOTALE** *(Luca `2026-11-12` `14:55`)*: `max(|tot|, pi (M + V))`, il pavimento dell'arrotondamento della costante aggiunta."""
+    return max(abs(c["tot"]), math.pi * (c["M"] + c["V"]))
+
+
+def uguale_totale(a, b):
+    """### **i conti del TOTALE** *(il toro intero)*: `M` e `V` al bit; `cin`, `cost`, `leg`, `tot`, `vuo` del vecchio CONVERTITI entro `TOLL max(|tot|, pi (M + V))`. `(ok, scarto / scala)`."""
+    cv = conti({"t": b})["t"]
+    ok = set(a) == set(cv) and a["M"] == cv["M"] and a["V"] == cv["V"]
+    sc = scala(a)
+    peggio = 0.0
+    for k in ("cin", "cost", "leg", "tot", "vuo"):
+        d = abs(a[k] - cv[k])
+        ok = ok and d <= TOLL * sc
+        peggio = max(peggio, d / sc)
     return ok, peggio
 
 
+def conti_like(d):
+    return isinstance(d, dict) and {"M", "V", "cin", "tot"} <= set(d)
+
+
+def uguale_regione(a, b):
+    """### **i conti di una REGIONE o di un SETTORE:** solo `M` e `V` al bit *(Luca `14:55`: le energie per regione dipendono dalla scelta dello zero -- lo zero di v2 sposta energia
+    fra archi e nodi, e al confine di una regione non si compensa)*."""
+    return isinstance(a, dict) and set(a) == set(b) and a["M"] == b["M"] and a["V"] == b["V"]
+
+
+def uguale_ricorsivo(a, b):
+    """### al bit, tranne i dizionari di conti *(regioni, settori)*: per loro `uguale_regione`."""
+    if conti_like(b):
+        return uguale_regione(a, b)
+    if isinstance(b, dict):
+        return isinstance(a, dict) and set(a) == set(b) and all(uguale_ricorsivo(a[k], b[k]) for k in b)
+    if isinstance(b, list):
+        return isinstance(a, list) and len(a) == len(b) and all(uguale_ricorsivo(x, y) for x, y in zip(a, b))
+    return a == b
+
+
 def uguali_campioni(nuovi, vecchi, M_ass0, V_ass0, n_tick):
-    """### **I campioni di un pezzo rifatto con v2 contro quelli registrati col vecchio:** ogni chiave AL BIT, tranne `E` *(i conti, convertiti)* e nel campione del bordo
-    `E` *(`+ pi (M + V)`)* ed `E_ass` *(`+ pi ((M_ass - M_ass0) + (V_ass - V_ass0))`: dall'inizio del pezzo l'accumulatore conta col nucleo nuovo)*. `(ok, la differenza relativa piu' grande, le chiavi diverse)`."""
+    """### **I campioni di un pezzo rifatto con v2 contro quelli registrati col vecchio** *(Luca `14:55`)*: **`E["totale"]` convertito** *(`uguale_totale`)*; **le altre regioni e i settori
+    di `per` solo `M` e `V` al bit**; **il campione del bordo:** `E` convertito, `E_ass` da accumulatore; **ogni altra chiave AL BIT.** `(ok, il peggio scarto/scala del totale, le chiavi diverse)`."""
     if len(nuovi) != len(vecchi):
         return False, float("inf"), ["il numero dei campioni"]
     ok, peggio, div = True, 0.0, []
@@ -68,13 +91,18 @@ def uguali_campioni(nuovi, vecchi, M_ass0, V_ass0, n_tick):
             continue
         for k in a:
             if k == "E":
-                o, p = uguali_conti(a[k], b[k])
-                peggio = max(peggio, p)
+                o = set(a[k]) == set(b[k])
+                for reg in b[k]:
+                    if reg == "totale":
+                        o2, p = uguale_totale(a[k][reg], b[k][reg])
+                        peggio = max(peggio, p)
+                    else:
+                        o2 = uguale_regione(a[k].get(reg), b[k][reg])
+                    o = o and o2
             elif k == "bordo" and isinstance(b[k], dict):
-                o, p = uguale_bordo(a[k], b[k], M_ass0, V_ass0, n_tick, campione=True)
-                peggio = max(peggio, p)
+                o, _p = uguale_bordo(a[k], b[k], M_ass0, V_ass0, n_tick, campione=True)
             else:
-                o = a[k] == b[k]
+                o = uguale_ricorsivo(a[k], b[k])
             if not o:
                 ok = False
                 div.append(k)
@@ -97,6 +125,10 @@ def uguale_bordo(a, b, M_ass0, V_ass0, n_tick, campione=False, scala_E=None):
             continue
         elif k == "E" and campione:
             v = b[k] + math.pi * (b["M"] + b["V"])
+            sc = max(abs(a[k]), math.pi * (a["M"] + a["V"]))   # ### Luca 14:55: la scala del totale
+            ok = ok and abs(a[k] - v) <= TOLL * sc
+            peggio = max(peggio, abs(a[k] - v) / sc)
+            continue
         else:
             ok = ok and a[k] == b[k]
             continue
