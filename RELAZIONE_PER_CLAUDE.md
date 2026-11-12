@@ -25303,3 +25303,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **(D1) C35-pi a `60000`; (D2) `rho_c` come T-L2** *(`rho_0/rho_c = 1e-2`)*: **i valori sono gia' nel codice di G2** *(`ef4c1c10` sul laterale, la suite `67` su `67`)*.
 - **La legge di `cs` da `Lambda`, F1, M-rho istantanea: SCARTATE, confermate** *(`doc/LEGGI_PROVATE.md` sul laterale, `c146f5ac`)*.
 - **L'ordine: A col banco di oggi** *(in corsa dalle `00:16:50`)*, **poi G1, poi G2.**
+
+### 2026-11-12 10:35 -- S5.3 DOPO IL RIAVVIO: G1 `6/8`, (e3) IL SOLITONE VA VERSO `N` PIU' ALTO; LE DUE CURE DI A COMMITTATE; UN MIO ERRORE DURANTE UNA SUITE; FERMO [[PIANO-2D-3D]] [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **Il riavvio di Windows dopo le `2`** ha interrotto A col banco di oggi *(l'uscita parziale fino alle `02:10:52`: non committata, si rifa')*. **L'ordine nuovo di Luca:** **G1, G2, A da capo, N, il punto 4, il punto 6** *(`e31bdef4` sul laterale)*.
+- ### **G1, `6/8`** *(`09:35:03`-`09:59:44`; l'esito a `f0affd34` sul laterale)*:
+  - **la lettura scritta prima e' (e3): il solitone vero va verso `N` piu' ALTO** *(`+5.14e-06` a `gamma 0.01`, al netto di `N = 1`)*, **il contrario del pacchetto di T-L4b; quindi N non si fa;**
+  - **FALLISCE il controllo di scala di `E_g`:** **la mia `h_k` contiene anche il vuoto** *(sul pacchetto `-79902` invece di `0.476`)*: **un errore mio di definizione, fermato dal controllo;**
+  - **FALLISCE la caduta nulla a `N = 1`:** **`-1.36e-08`, `137` errori;**
+  - **il cuore del solitone a `0.626` per tick, `0.149` SOPRA la cima della banda;**
+  - **una lettura a posteriori, non una prova:** **il rapporto degli spostamenti di legame `-165.8` e' vicino a quello delle accelerazioni** *(`-158.6 +- 58.7`)*.
+- **Le cure di A col codice prima della corsa:** **la 1** *(`779f0ff6`)*, **la 2** *(`986440d6`)*.
+- ### **UN MIO ERRORE:** **ho scritto documenti tracciati mentre girava una suite; la suite li ha rimessi a posto ed e' uscita col codice `1`.** **Riscritti, la suite rigirata pulita; la regola in memoria.**
+- **FERMO: la decisione su G1** *(rifarlo con `h_k` della sola materia, o passare a G2)* **e' di Luca.**
