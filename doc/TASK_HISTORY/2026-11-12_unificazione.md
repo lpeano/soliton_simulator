@@ -335,3 +335,26 @@
   - **la soglia `3.7e-17`, il rapporto con oggi e la riga di M-B1 per forma nel codice del confronto;**
   - **la suite, il commit;**
   - **il confronto rifatto sulle stesse uscite.**
+
+### 8.6 U6, LE MISURE *(dalle `17:33:05` alle `17:54:29`, a `fd9bb653`; le uscite grezze `925e1f70`; il confronto corretto `8fe5ce82`; `doc/referti_l2/u6_coefficienti.txt`)*
+
+| la forma | la deriva di `Lambda` per tick | il rapporto con oggi | la rms di `rho` dopo `1000` tick | gli sha = oggi | s per tick | la cassetta |
+|---|---|---|---|---|---|---|
+| **oggi** | `+3.7133e-16` | `1` | `0` | si' | `0.0769` | `107/108` *(D6)* |
+| **k1** | `-2.2933e-15` | `-6.18` | `9.9e-13` | no | `0.0739` | `99/108` |
+| **k2** | `+3.7133e-16` | `+1.0000` | `0` | ### **si'** | `0.0573` | `107/108` *(D6)* |
+| **k3** | `-2.0800e-17` | `-0.056` | `4.4e-13` | no | `0.0679` | `99/108` |
+| **sbagliata** | `+7.9733e-12` | `+21470` | `8.0e-09` | no | `0.0641` | **interrotta** *(un'asserzione del residuo)* |
+
+- ### **LE LETTURE** *(le soglie di 8.4 e delle `17:37`)*:
+  - **k1: NON curata** *(la deriva cambia segno ma cresce di `6` volte)*;
+  - ### **k2: NON curata, e IDENTICA a oggi al bit** *(la deriva, gli sha, `rho`)*;
+  - ### **k3: CURATA** *(`-2.08e-17`, sotto `3.7e-17`: un ventesimo di oggi, il segno cambiato)*.
+  - **Tutte e tre: la fisica uguale entro l'arrotondamento** *(la rms `<= 1e-12`, la soglia `1e-10`)*.
+  - **La cassetta: k1 e k3 fanno fallire `8` controlli AL BIT oltre a D6** *(U1, P1, P2, P3, M1, M2: i referti registrati col nucleo di prima)*; **k2 nessuno.**
+  - **La forma sbagliata: la deriva `21470` volte oggi, il DEVE FALLIRE fallisce come deve.**
+- ### **LA CORREZIONE DELLE `17:37` NON CAMBIA L'ESITO DI NESSUNA LETTURA.**
+- **D6 fallisce in tutte le forme, oggi compresa:** **dopo `6c97a2e3` sono entrati nella libreria script nuovi.**
+- **M-B1: non verificato in memoria, per nessuna forma.**
+- ### **UN FATTO DA DIRE, non una lettura:** **k2 e' identica a oggi al bit su queste scene:** **`alpha = 1 - beta` da' gli stessi bit di `(1 + z)/2` per questi `z`.** **Quindi la deriva di oggi NON viene da `alpha + beta != 1` nella parte che k2 corregge;** **k3, che toglie `alpha` del tutto, la cura.**
+- ### **FERMO: la scelta della forma e' di Luca.** **Se sceglie k2: M-B1 su una copia del nucleo in un ramo temporaneo, prima** *(la precisazione delle `17:37`)*.

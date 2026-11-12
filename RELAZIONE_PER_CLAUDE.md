@@ -25471,3 +25471,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **T1, la cassetta e i `1000` tick di TBS per `oggi`, `k1`, `k2`, `k3`, `sbagliata`;**
   - **`confronto_vecchio.txt`, il confronto col codice di `fd9bb653`** *(la soglia `1e-17`)*.
 - **Poi:** **la correzione del confronto** *(un commit a se')* **e il confronto rifatto, il vecchio e il corretto uno accanto all'altro.**
+
+### 2026-11-12 18:30 -- U6: LE FORME DEI COEFFICIENTI MISURATE; FERMO PER LA SCELTA DI LUCA [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Il confronto vecchio e quello corretto sulle stesse uscite grezze** *(`doc/referti_l2/u6_coefficienti.txt`)*: ### **la correzione delle `17:37` non cambia l'esito di nessuna lettura.**
+- ### **k3** *(`I - beta (I - S)`)* **cura la deriva di `Lambda`** *(`-2.08e-17` per tick, `-0.056` volte oggi)*:
+  - **la fisica uguale entro l'arrotondamento** *(la rms di `rho` `4.4e-13`)*;
+  - **`0.88` volte il tempo;**
+  - **la cassetta perde `8` controlli al bit** *(i referti del nucleo di prima)*.
+- **k1 non la cura** *(`-6.2` volte oggi)*.
+- ### **k2 e' identica a oggi AL BIT su queste scene** *(non cambia niente)*.
+- **La forma sbagliata: `21470` volte, come deve.**
+- **M-B1 non verificato in memoria.**
+- ### **FERMO per la scelta di Luca.**
