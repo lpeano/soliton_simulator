@@ -426,3 +426,20 @@
    - ### **se la coppia si FONDE, ESPLODE, o il campo CRESCE SENZA LIMITE in quei `200` tick: FERMO, e si decide `e*` prima dei bracci.**
 3. **Nel referto della prova breve:** **l'energia del campo U e quella della materia ogni `10` tick, e la norma.**
 - **Poi, se la prova breve e' sensata, i bracci come approvati.**
+
+### 11.9 LA CORREZIONE DI LUCA DELLE `20:52`, PRIMA DEI BRACCI *(al posto della `11.8`)*
+
+- ### **LA PREMESSA:** **`_u1_oggi.campo_della_scena` parte da `A = E = 0`:** **la legge di Gauss conservata con `E = 0` NEUTRALIZZA le cariche iniziali, quindi fra due solitoni fermi NON c'e' campo di Coulomb** *(solo effetti delle correnti)*: **l'atteso newtoniano non si applica.**
+  - **`e*` di T3 e' stato scelto in quel regime** *(`|e B|` circa `0.1` col campo da zero)*: **con il Coulomb acceso la carica `e N` darebbe l'assurdo `4.27e-02`.**
+  - ### **ERRORE DEL GUARDIANO `n.146`** *(ha approvato `e*` di T3 e la formula senza controllare come entra la carica)*.
+- ### **LE DECISIONI DI LUCA:**
+  1. **nei bracci (U) e (G+U) il campo `E` si inizializza con la SOLUZIONE DI GAUSS: `div E = e (rho - media di rho)`** *(come `_u1_prototipo.gauss_energia`: `lstsq` su `matrice_div`; lo sfondo neutralizzante DICHIARATO)*; **il residuo di Gauss iniziale nel referto;**
+  2. ### **`e` si sceglie per un'accelerazione attesa di circa `1e-6` nodi per tick^2** *(la formula della sez. `3`, `mu` dalla banda, dichiarato)*: **`e = 6.315414e-05`** *(da uno script: `e = sqrt(a 2 pi mu d / N)` con `d 37.4288`, `N 9.954135e+05`, `mu 16.8819`; il controllo ridà `a = 1.0000e-06`)*. **Una scelta di protocollo, non una taratura;**
+  3. **una PROVA BREVE del solo braccio (U)** *(`200` tick; `d(t)`, l'energia del campo, della materia e la norma ogni `10`; il residuo di Gauss)*: **il rapporto misurato / atteso;** ### **se la coppia si fonde, esplode o il campo cresce senza limite: FERMO;**
+  4. **l'accelerazione finta del DEVE FALLIRE: `10` errori del fit di (0);**
+  5. **il braccio (U) col campo da zero** *(`A = E = 0`)* **resta come braccio IN PIU', dichiarato: misura i soli effetti delle correnti.**
+- ### ⚠ **UN OSTACOLO DAL CODICE, sulla decisione 1:**
+  - **`_u1_prototipo.Campo.matrice_div` costruisce la matrice DENSA nodi x archi:** **a `L 162` sono `26244 x 78732`, circa `16.5 GB`.** **`lstsq` su quella matrice non gira** *(il prototipo la usava su un toro piccolo, `L_MAT`)*.
+  - ### **La proposta:** **`lstsq` da' la soluzione di NORMA MINIMA, `E = D^T (D D^T)^+ b`;** **`D D^T` e' il LAPLACIANO del grafo, sparso:** **si risolve `D D^T phi = b`** *(`b` a media nulla)* **e `E = D^T phi`.** **La STESSA soluzione, un altro calcolo.**
+  - ### **Il DEVE che lo controlla:** **su un toro piccolo** *(dove `lstsq` gira)* **le due soluzioni uguali entro `1e-10` relativo;** **e a `L 162` il residuo di Gauss nel referto.**
+  - **Da confermare da Luca prima del codice.**
