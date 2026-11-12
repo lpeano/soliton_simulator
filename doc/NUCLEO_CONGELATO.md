@@ -29,6 +29,7 @@ stato: CONGELATO
 | `primo_ordine/termini/camm_spostamento.py` | `4123e139` | `d58a753f` |
 | `primo_ordine/termini/camm_spostamento_vuoto.py` | `a98c4267` | `a58a55ea` |
 
+- ### **U5, FATTO** *(`2026-11-12`)*: **`primo-ordine` avanzato al ramo `unificazione`** *(U4 verde)*; **P3-D sul `primo-ordine` locale, prima del push: `4/4`** *(`doc/referti_l2/unificazione_p3_U5.txt`)*. ### **IL NUCLEO E' RICONGELATO SUL NUCLEO UNIFICATO** *(lo stato `CONGELATO`, il presidio attivo sul ramo `primo-ordine`)*.
 - **La tabella dei due rami qui sotto e le regole 1-7 sono la STORIA fino alla riunione;** **dopo U5 c'e' un ramo solo.**
 
 ## Che cosa lo impone

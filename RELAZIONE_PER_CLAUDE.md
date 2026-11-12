@@ -25441,3 +25441,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **(6):** **il banco a `N = 1` al bit; T1 della U(1) `6/6`.** **(7):** **il DEVE FALLIRE senza conversione dentro (5) e dentro R-1.**
 - ### **U4 VERDE** *(`doc/referti_l2/unificazione_controlli.txt`)*. **In coda:** **i mandati delle `15:12` e delle `15:43`** *(solo scrittura)*, **poi U5.**
+
+### 2026-11-12 16:15 -- L'UNIFICAZIONE, U5: `primo-ordine` E' IL RAMO UNIFICATO; IL NUCLEO RICONGELATO; IL PASSO `3` DELLA ROTTA CHIUSO [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **`primo-ordine` avanzato al ramo `unificazione`** *(da `fca1dd26`, `137` commit; U4 verde)*.
+- **P3-D sul `primo-ordine` locale prima del push: `4/4`.**
+- ### **Il nucleo RICONGELATO sul nucleo unificato** *(v2)*; **il passo `3` della ROTTA CHIUSO.**
+- **La sessione del laterale da ora lavora sul principale.**
+- ### **Da decidere:** **la riga sulla relazione del laterale** *(un commit su `zero-nel-nucleo`, contro la regola «niente commit sul laterale fino alla fine di U5»)*. **Il tag `laterale-archiviato` si mette** *(non e' un commit)*.

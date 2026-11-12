@@ -272,3 +272,16 @@
 - ### **(6) IL BANCO E LA U(1):** **il banco a `N = 1` = il tick del nucleo unificato AL BIT** *(`2/2`, dalle `15:36:27` alle `15:39:47`)*; **T1 della U(1) `6/6`** *(dalle `15:39:47` alle `15:53:03`)*. **T4 non girato** *(non breve)*.
 - ### **(7) IL DEVE FALLIRE SENZA CONVERSIONE:** **dentro (5) e dentro R-1 riletto** *(R-1-V)*: **fallisce come deve.**
 - ### **U4 VERDE.** **Il referto riassuntivo: `doc/referti_l2/unificazione_controlli.txt`.**
+
+## 7. U5, L'UNIFICAZIONE
+
+- **Dopo U4 verde** *(`893cf560`)* **e i mandati di scrittura delle `15:12` e delle `15:43`** *(`27d76b9e`, `0fa7792d`)*.
+- ### **`primo-ordine` avanzato IN LOCALE al ramo `unificazione`** *(`git merge --ff-only`, da `fca1dd26` a `0fa7792d`; `137` commit)*.
+- ### **P3-D, sul `primo-ordine` locale, PRIMA del push: `4/4`** *(alle `16:09:20`; `doc/referti_l2/unificazione_p3_U5.txt`)*: **il divieto di `cs` attivo; `energia_pesata.applica` alza a `cs` acceso, a `cs` spento ritorna lo stato.**
+- **La ROTTA:** **il passo `3` CHIUSO il `2026-11-12`; lo storico** *(«`10:39`: Luca toglie la condizione dopo S5 e unifica; la nave unica»)*.
+- **`doc/NUCLEO_CONGELATO.md`:** **il nucleo RICONGELATO sul nucleo unificato** *(lo stato `CONGELATO`)*.
+- **`doc/LEGGI_PROVATE.md`:** **e' sul principale** *(entrato con la fusione)*.
+- ### ⚠ **UNA COSA DA DECIDERE:**
+  - **il mandato di U5 chiede su `zero-nel-nucleo` il tag `laterale-archiviato` E una riga in cima alla sua relazione;**
+  - **la decisione di Luca dopo U0 dice «fino alla fine di U5 NON committare niente su `zero-nel-nucleo`»;**
+  - ### **il tag non e' un commit e lo metto; la riga e' un commit sul laterale: aspetta la decisione di Luca.**
