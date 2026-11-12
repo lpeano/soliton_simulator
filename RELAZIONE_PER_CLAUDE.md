@@ -25492,3 +25492,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'unificazione e' CHIUSA** *(la ROTTA)*.
 - **La correzione del guardiano `n.144`** *(nella sez. `9` del documento sull'inerzia e nella MAPPA)*: **attorno alla posizione nuova non c'e' un anello: il vuoto lascia una SCIA dietro la materia.**
 - **Poi:** **D6 riallineato, la cassetta; la coda: le bande piatte, P1, accanto la G1 lunga e il solitone fermo, poi P9.**
+
+### 2026-11-12 19:00 -- LA CASSETTA `108/108` COL NUCLEO UNIFICATO E LA FORMA DI OGGI *(D6 riallineato a `cd89b710`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **D6 riallineato all'ultimo commit di U6** *(`a5b8a75f`, la suite `67` su `67`)*; **la cassetta `108/108`** *(dalle `18:53:48` alle `18:55:19`; `doc/referti_l2/cassetta_solitone.txt`)*.
+- **Il mandato delle `18:28` e' chiuso.** **Poi la coda:** **la prova delle bande piatte sul buco del vuoto.**
