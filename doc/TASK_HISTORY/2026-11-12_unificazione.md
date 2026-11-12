@@ -146,3 +146,18 @@
    - **la tolleranza `1e-14` per le costanti convertite** *(1.6)*;
    - **P3-D in U5 sul `primo-ordine` locale prima del push** *(1.7)*;
 2. **dopo la conferma: U1.**
+
+## 4. LA CONFERMA DI LUCA E U1
+
+- ### **U0 CONFERMATO** *(Luca `2026-11-12`, dopo `fca1dd26`)*. **Le sue decisioni:**
+  1. **la tolleranza `1e-14` relativa per le costanti convertite** *(l'ultimo bit della conversione, dichiarato)*; **P3-D in U5, sul `primo-ordine` locale prima del push;**
+  2. **fino alla fine di U5: NIENTE commit su `zero-nel-nucleo` e nessuna prova; tutto il lavoro sul ramo `unificazione`;**
+  3. **i tag sugli ULTIMI commit su origin, verificati con `git fetch`;** **se dopo i tag compare un commit nuovo su `origin/zero-nel-nucleo`: FERMO;**
+  4. **il codice di prova per le costanti convertite** *(la cassetta, R-1 di `ripresa`)* **si committa su `unificazione` PRIMA di girare i controlli;**
+  5. **U1-U4** *(fermo al primo controllo che fallisce)*, **poi U5 e U6; commit, push e hash dopo ogni fase; niente cicli di attesa;**
+  6. **dopo U5 il laterale e' archiviato; si lavora solo sul `primo-ordine` unificato** *(`wt_zero` resta finche' Luca non decide)*.
+- ### **U1, FATTO** *(i tag annotati, pushati)*:
+  - **`pre-unificazione-principale` -> `fca1dd26`** *(`fca1dd26144835470a8e0f983fc14d6762ceece9`)*;
+  - **`pre-unificazione-laterale` -> `986440d6`** *(`986440d6b54533a09e06e35b79568678b702db97`)*;
+  - **il ramo `unificazione` da `primo-ordine` a `fca1dd26`, pushato;**
+  - **dopo i tag `origin/zero-nel-nucleo` e' ancora a `986440d6`.**
