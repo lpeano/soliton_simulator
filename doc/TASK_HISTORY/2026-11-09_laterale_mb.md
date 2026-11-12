@@ -1791,3 +1791,7 @@
   - **DEVE: (off) contro le mappe di C35-pi** *(ogni `100` tick)*: **`d` entro `1e-5`** *(le mappe sono `float32`: la precisione relativa `~6e-8` su `rho`; il mio margine su `d`, dichiarato)*.
   - **Il fit:** **`d_on - d_off` con la parabola** *(`carta_coppia.curvatura`)* **e il suo errore;** **le letture (p1)-(p3) di Luca a `3` errori.**
   - **Il tetto:** **`60` minuti PER CORSA; la durata scende** *(dichiarata)* **se il tempo dei primi `50` tick di (on) lo chiede.**
+- ### **LE RISPOSTE DI LUCA DELLE `01:40` DEL `2026-11-12`** *(chiudono (D1) e (D2) della 32.3)*:
+  - **(D1) si': C35-pi a `60000`;** **(D2) si': `rho_c` come in T-L2** *(`rho_0/rho_c = 1e-2`)*. **Le costanti `T0` e `R_LAPSE` di `s5_coppia_lapse.py` hanno GIA' questi valori** *(a `ef4c1c10`)*: **il codice non cambia** *(i commenti dicono ancora «proposta in attesa di Luca»: la risposta e' qui)*.
+  - **La tabella delle leggi:** **la legge di `cs` da `Lambda`, F1 e M-rho istantanea: SCARTATE, confermate.**
+  - **L'ordine:** **A col banco di oggi, poi G1, poi G2; commit e push dopo ciascuno.**

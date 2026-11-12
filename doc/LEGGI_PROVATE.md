@@ -25,7 +25,7 @@
   - **(r-D5) `7/7`** *(sez. `14`, a `1fcc9e9b`)*: **(d3), la legge interna e il dominio `s > 0` cedono prima del punto fisso;**
   - **S2 `20/20`** *(sez. `28.5`, a `015f5ee2`)*: **(w1) e (w4), il vuoto con la legge di `cs` e' INSTABILE PER COSTRUZIONE in tutta la mappa;**
   - **V-R `34/34`** *(sez. `31.11`, a `e6798e4a`)*: **con la reazione il vuoto resta instabile in tutta la mappa.**
-- **Lo stato: SCARTATA** *(proposto)*:
+- **Lo stato: SCARTATA** *(confermata da Luca, `2026-11-12` `01:40`)*:
   - **il vuoto da solo fa da orologio, ed e' instabile** *(S2, V-R)*;
   - **Luca alle `18:17` ha scelto `N(rho)`** *(la scelta 5, sez. `31.19`)*.
 
@@ -41,7 +41,7 @@
   - **H4** *(sez. `27.11`, a `a54a3ee4`)*: **il DEVE di (v0) FALLISCE, il vuoto uniforme con F1 e' instabile da solo;**
   - **S1 `5/5`** *(sez. `28.3`, a `00dedc5b`)*: **il falso-uno di F1-V confermato;**
   - **S2** *(sez. `28.5`)*: **«la colpa e' della LEGGE, non della memoria».**
-- **Lo stato: SCARTATA come cura** *(proposto)*: **non cura l'instabilita', che sta nella legge del §1** *(S2)*.
+- **Lo stato: SCARTATA come cura** *(confermata da Luca, `2026-11-12` `01:40`)*: **non cura l'instabilita', che sta nella legge del §1** *(S2)*.
 
 ## 3. M-rho ISTANTANEA
 
@@ -51,7 +51,7 @@
   - **S4 `102/116`** *(sez. `30.5`, a `e51dd24c`)*: **un difetto dello strumento;**
   - **S4.7 `101/101`** *(sez. `30.8`, a `59c562f0`)*: **lo strumento curato; «M-rho meno congelato» NEGATIVA in `14` punti su `15` a `rho_0 = 1`; a `rho_0` `1e-4`, `1e-2` l'instabilita' (I-cs) e' l'unica;**
   - **T-L2, accanto** *(sez. `31.20`, a `a82ca3d0`)*: **l'escursione dell'energia `1.00e+04`, `26` volte il lapse.**
-- **Lo stato: SCARTATA come forma istantanea** *(proposto)*: **non conserva l'energia** *(T-L2)*; **la sua forma conservativa e' il lapse del §4.**
+- **Lo stato: SCARTATA come forma istantanea** *(confermata da Luca, `2026-11-12` `01:40`)*: **non conserva l'energia** *(T-L2)*; **la sua forma conservativa e' il lapse del §4.**
 
 ## 4. IL LAPSE `N(rho)` DI OGGI *(il banco, fuori dal nucleo)*
 
