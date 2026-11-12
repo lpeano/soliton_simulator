@@ -405,7 +405,11 @@ def corsa(nome):
                 z["st"]["phi_h"][...] = phi_v
         else:
             t0 = prec["t1"]
-            assert testa["info"]["mu"] == mu and testa["w_in"] == w_in and testa["e_K"] == e_K, "la scena NON e' quella del primo pezzo"
+            from solitone import conversione_v2 as CV
+            k_eK = CV.e_K(testa["e_K"], e_K)   # ### l'unificazione (U4, Luca 2026-11-12): e_K registrato col nucleo vecchio = e_K + pi entro CV.TOLL; mu e w_in AL BIT
+            assert testa["info"]["mu"] == mu and testa["w_in"] == w_in and k_eK is not None, "la scena NON e' quella del primo pezzo"
+            if k_eK == "convertito":
+                print("  la corsa %s: e_K della testa %r (il nucleo vecchio) + pi = %r entro %g (conversione_v2): la testa e' quella, il nucleo e' v2" % (nome, testa["e_K"], e_K, CV.TOLL))
             with np.load(f_rip_da) as dati:
                 assert int(dati["t"]) == t0
                 for k in z["st"]:
@@ -1157,6 +1161,16 @@ def ripresa(nome):
     uguali = {k: nuova.get(k) == ult.get(k) for k in ("t1", "sha_fine", "campioni", "D", "D_acc", "dopo_stato", "bordo", "fermata", "t_dis")}
     um = (nuova.get("mappe") or {}).get("sha1") == (ult.get("mappe") or {}).get("sha1")
     print("  uguali al bit: %s; lo sha1 del file delle mappe: %s" % (uguali, um))
+    if not (uguali["campioni"] and uguali["bordo"]) and ult.get("bordo") and pen.get("bordo"):
+        # ### l'unificazione (U4, Luca 2026-11-12): un pezzo registrato col nucleo VECCHIO, rifatto con v2: le energie si confrontano CONVERTITE (conversione_v2), il resto al bit
+        from solitone import conversione_v2 as CV
+        n_t = ult["t1"] - t0
+        m0, v0 = pen["bordo"]["M_ass"], pen["bordo"]["V_ass"]
+        okc, pc, divc = CV.uguali_campioni(nuova.get("campioni") or [], ult.get("campioni") or [], m0, v0, n_t)
+        okb, pb = CV.uguale_bordo(nuova["bordo"], ult["bordo"], m0, v0, n_t, scala_E=ult["bordo"]["E0"])
+        print("  ### le energie CONVERTITE a v2 (conversione_v2, TOLL %g, E_ass da accumulatore): i campioni %s (la differenza relativa piu' grande %.3e; diverse %s); il bordo %s (%.3e)"
+              % (CV.TOLL, okc, pc, divc, okb, pb))
+        uguali["campioni"], uguali["bordo"] = okc, okb
     esito("DEVE PASSARE: R-1 il pezzo %d rifatto dallo stato a %d ha sha_fine = quello della corsa (al bit, ogni chiave) e campioni, D, dopo_stato, bordo, mappe uguali" % (t0, t0),
           rc == 0 and all(uguali.values()) and um, "")
     altra = "C35-pi" if nome != "C35-pi" else "C35-0"

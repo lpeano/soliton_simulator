@@ -55,6 +55,7 @@ def gira(esito):
     esito("DEVE FALLIRE: P2 col partner della scelta al posto della scelta: lo sha = robusta_N3e5_000000.jsonl", SFM.sha(p_sb) != ref["sha_partenza"], "")
     # ### P3: B a Gamma con s come argomento: la partenza di BG-F-0.15 (_vuoto_vivo_B, la scena col vuoto del fondo)
     sol, vuoto, s = V.CORSE["BG-F-0.15"]
+    from . import conversione_v2 as CV   # ### l'unificazione (U4, Luca 2026-11-12): e_K del jsonl (il nucleo vecchio) + pi entro CV.TOLL; il controllo positivo (acceso) deve restare DIVERSO anche convertito
     ref = primo(os.path.join(V.DIR_JSON, "BG-F-0.15_000000.jsonl"))
     with P.scena_vuoto(N, L, V.EPS, s, FORMA, vuoto) as (rec, z, phi0, pK):
         w0 = rec["larghezza"]
@@ -72,8 +73,8 @@ def gira(esito):
     inf = ref["info"]
     esito("DEVE PASSARE: P3 BG-F-0.15 (s %g, il vuoto %s): mu, il residuo, w_in, h, e_K (legame spento) = il primo pezzo di _vuoto_vivo_B AL BIT;"
           " e_K col legame acceso (S1) diverso" % (s, vuoto),
-          mu == inf["mu"] and r == inf["residuo"] and w_in == ref["w_in"] and h == ref["h"] and e_K == ref["e_K"] and e_K_acceso != ref["e_K"],
-          "mu %+.9f e_K %+.17g, acceso %+.17g" % (mu, e_K, e_K_acceso))
+          mu == inf["mu"] and r == inf["residuo"] and w_in == ref["w_in"] and h == ref["h"] and CV.e_K(ref["e_K"], e_K) is not None and CV.e_K(ref["e_K"], e_K_acceso) is None,
+          "mu %+.9f e_K %+.17g (%s, conversione_v2), acceso %+.17g" % (mu, e_K, CV.e_K(ref["e_K"], e_K), e_K_acceso))
     print("    P3, E0: qui %+.17g (fase/s); _vuoto_vivo_B %+.17g (E0 * CB.S / s); la differenza %.1e (la conversione fatta una volta)" % (E0, inf["E0"], E0 - inf["E0"]))
     # ### D5: le decisioni di Luca (01:27) per le prove nuove (01:28, punto 6)
     print("### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)")
