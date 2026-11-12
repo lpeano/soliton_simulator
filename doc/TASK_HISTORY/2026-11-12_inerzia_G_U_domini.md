@@ -143,3 +143,52 @@
 | **P8** | **la scala di Polyakov** *(la distanza oltre la quale la forma `1/r` cambia)* **e le forze magnetiche alle velocita' del modello** | **da scrivere** |
 | **P9** | **le bande a `Gamma` e un solitone in fondo a una banda a massa positiva** *(i punti B e C del mandato del `2026-11-11` `23:36`)* | **da scrivere** |
 | **P10** | **lo spettro di stabilita' di G, di U e di G + U insieme** | **da scrivere** |
+
+## 8. LE OSSERVAZIONI DEL VIDEO DI G1 COL CAMPO *(guardiano, `14:20`-`15:05`; ANALISI e IPOTESI, non misure del repo salvo dove e' detto)*
+
+> **I dati:** `doc/referti_l2/campo_g1/g1_campo_gamma000.npz` e `g1_campo_gamma020.npz` *(`fc96390e`)*; **il profilo radiale da** `doc/referti_l2/campo_TBS/mappe_leggere.npz`.
+> **I numeri di questa sezione sono quelli del guardiano** *(il mandato di Luca delle `15:08`)*: **ricopiati, NON rimisurati qui.**
+
+- **a. `gamma +0.02`, il passaggio del massimo:**
+  - **il centro attraversa il massimo di `N`** *(`i1 60.75`)* **verso il tick `1730`;**
+  - **la velocita' e' massima a `1760`-`1800`** *(`0.0193` nodi per tick lungo `i1`)* **e poi cala** *(`0.0184` a `2000`)*;
+  - **a `2000` il centro e' circa `5` nodi oltre;**
+  - ### **la parabola di G1 a `gamma 0.02` non vale oltre circa `1700` tick;**
+  - **la forma di oggi in G1 a `gamma 0.02`** *(`7.15`, `23.28`, `28.01` a `500`, `1000`, `2000`)* **frena prima: l'oscillazione e' quasi intera.**
+- **b. `gamma +0.02`, la forma:**
+  - **`rho` massima da `3350` a `9362`** *(tick `1800`)*, **poi `7984`;**
+  - **i nodi di partecipazione da `393`** *(`1400`)* **a `230`** *(`1900`-`1920`)*, **poi `239`;**
+  - **entro `12` nodi dal centro, dall'`88%` al `98.8%` della norma.**
+  - **Nel controllo** *(`gamma 0`)*: **`rho` massima fra `3069` e `3350`, i nodi di partecipazione `549`-`555`.**
+  - **Dietro al corpo una nuvola rada:** **sotto l'`1%` di `rho` massima c'e' lo `0.53%` della norma a `2000`, contro lo `0.2%` del controllo.**
+- **c. IPOTESI del guardiano: una MAREA a segno rovesciato.**
+  - **La coda, piu' lontana dal massimo, e' spinta piu' della testa: e' coerente con l'inerzia negativa.**
+  - **L'ALTERNATIVA: la larghezza propria cambia col `cs` locale `s N`.**
+  - ### **La prova che le separa, REGISTRATA E NON FATTA:** **il solitone fermo sul massimo di `N`.**
+    - **Se e' la marea:** **stretto solo lungo il gradiente, e oscillante.**
+    - **Se e' `cs`:** **senza direzione preferita.**
+- **d. Il profilo radiale del solitone** *(dalle mappe leggere di TBS, `rho` medio per anello)*:
+  - **un CORPO liscio;**
+  - **un FRONTE netto** *(`2`-`3` ordini di grandezza in `2`-`3` nodi)* **che avanza restando ripido** *(circa `R 14`-`15` a `0` tick, `17`-`18` a `10000`, `20`-`21` a `200000`)*;
+  - **un FONDO uniforme nato all'accensione** *(circa `0.05` a `1000` tick su tutto il toro)* **che si diluisce;**
+  - **il centro da `5060` a `2370` in `200000` tick;**
+  - ### **le fasce di colore del video sono la tavolozza, non strutture.**
+- **e. La domanda di Luca:** **dentro il corpo, e sul fronte, ci sono parti di tipo diverso?**
+  - **La densita' totale non lo dice.**
+  - **Da qui la prova con le componenti** *(`csv/solitone/s5_caduta_solitone_componenti.py`)*.
+- **f. Le larghezze** *(i secondi momenti di `rho` attorno al centro)*:
+  - ### **lungo il gradiente da `5.39`** *(`1200`)* **a `3.34`** *(`1920`, il minimo, circa `190` tick dopo il passaggio)*, **poi `3.38` a `2000`: comincia a RIALLARGARSI** *(l'osservazione di Luca)*;
+  - **lungo la cresta, dove `N` e' costante, si stringe SEMPRE:** **da `5.69` a `4.92`** *(`-14%`)*, **senza ritorno.** ### **Una marea pura non lo spiega.**
+  - **Nel controllo `5.88`-`5.95` in tutte e due le direzioni.**
+  - **IPOTESI del guardiano:** **due effetti insieme, la marea lungo il gradiente e una contrazione senza direzione** *(il `cs` locale)*.
+  - ### **REGISTRATA E NON FATTA:** **la stessa corsa lunga `4000`-`6000` tick, per vedere il ritorno attraverso la cresta.**
+- **g. L'accensione sulla cresta** *(l'osservazione di Luca)*:
+  - **il nodo di `rho` massima sta DIETRO al centro fino a circa `1700`** *(a `1600` il centro a `i1 58.2`, il massimo a `i1 55`)*;
+  - ### **a `1800`, il picco, il massimo e' sul nodo `i1 61`, la linea di `N` massimo, con il centro gia' a `62.1`;**
+  - **poi riparte col centro** *(fino a `i1 66` a `2000`)*.
+  - **Il rapporto `rho` massima / densita' media del corpo** *(`rho` massima per i nodi di partecipazione, sulla norma)*:
+    - **sale da `1.65`** *(`1580`)* **a `2.29`** *(`1800`)* **e ricade a `1.91`** *(`2000`)*;
+    - **nel controllo `1.77`-`1.83`;**
+    - **un respiro piu' piccolo, prima:** **`2.04` a `1420`, `1.65` a `1580`.**
+  - **IPOTESI del guardiano: una messa a fuoco temporanea, non una transizione di stato.**
+  - ### **La corsa lunga la distingue:** **se al ripasso sulla cresta si riaccende allo stesso modo, e' una LENTE; se resta cambiato, e' una TRANSIZIONE.**
