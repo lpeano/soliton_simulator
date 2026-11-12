@@ -166,13 +166,23 @@ def main():
                 assert dcs is None, "il lapse non ha un impulso di cs"
                 TL.tick(mot, st, par, legge[1], ("rho_c", legge[2]), senza_reazione=legge[3], omega=OMEGA_L, giri_max=GIRI_L, eps_a=(EPS_A[legge[1]] if FORMA_A else None))
                 return st["psi_h"].reshape(n, 12) * np.conj(u_psi) * fattore, st["phi_h"] * np.conj(u_phi) * fattore
+            fa = None
+            if legge[0] == "cost_a":       # ### S5.3 A (sez. 32.1, la cura): il congelato della forma (a), la fase STATICA e^{+i eps_a (N_0 - 1)} per tick, a meta' prima e dopo
+                fa = np.exp(0.5j * EPS_A[legge[2]] * (legge[1] / legge[2] - 1.0))
+                st["psi_h"][...] = st["psi_h"] * fa
             cs = cs_di(psi, legge)
             if dcs is not None:
                 cs = cs + dcs
             mot.cs = cs
             mot.lambda_c = None
             TK.percorri_tick(st, mot, par, (), None, len(CM.ORDINE))
+            if fa is not None:
+                st["psi_h"][...] = st["psi_h"] * fa
             return st["psi_h"].reshape(n, 12) * np.conj(u_psi) * fattore, st["phi_h"] * np.conj(u_phi) * fattore
+
+        def cong(cs0, s):
+            """### la legge del `cs` congelato: `("cost", cs0)`; con `--forma-a` `("cost_a", cs0, s)` *(la fase statica della forma (a))*."""
+            return ("cost_a", cs0, s) if FORMA_A else ("cost", cs0)
 
         def cella(psi, phi):
             p = psi.reshape(n, 12)
@@ -379,7 +389,7 @@ def main():
                             tolti.add((rho0, ra, s))
                             continue
                         stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, M-rho" % (rho0, ra, s), basi[(rho0, ra, s)])
-                        basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
+                        basi[(rho0, ("cong", ra), s)] = base(rho0, cong(basi[(rho0, ra, s)]["cs0"], s), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
                         if V2:
                             stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, il cs congelato (il fondo di M-rho)" % (rho0, ra, s), basi[(rho0, ("cong", ra), s)])
             if V2:
@@ -459,7 +469,7 @@ def main():
                             esito("l'invarianza per traslazione al punto %s (le direzioni 0 e 24) < %g" % (MEZZO, TOLL_TRASL), dtr < TOLL_TRASL, "%.3e" % dtr)
                             del Rx
                         del R
-                        Rc, devc = risposta(bc, ("cost", b["cs0"]))
+                        Rc, devc = risposta(bc, cong(b["cs0"], s))
                         spc = spettro(Rc)
                         del Rc
                         dc = descrivi(spc, "il cs congelato")
