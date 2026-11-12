@@ -25386,3 +25386,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`ripresa` rifa' l'ULTIMO pezzo** *(dopo gli allungamenti `196667 -> 200000`)*, **e gli stati sono ogni `10000`;**
   - **il controllo all'apertura non e' stato fatto.**
 - ### **FERMO.** **La proposta:** **R-1 sul pezzo `60000 -> 66667`** *(lo stato a `60000`; circa `46` minuti; quello della prima fusione)*, **con `ripresa` che sceglie il pezzo: un commit a se'.**
+
+### 2026-11-12 14:15 -- G1 COL CAMPO, PER L'ANIMAZIONE: `5/7`, FALLISCE IL CRITERIO «ENTRO `1e-6`» PER IL SOLO ARROTONDAMENTO DEL REFERTO DI G1 (DICHIARATO PRIMA); FERMO [[PUNTO-FISSO-CS-SOLITONE]] [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/campo_g1/`** *(lo script a `29caec51`, dalle `14:06:03` alle `14:10:59`, sul ramo `unificazione`, accanto a R-1)*:
+  - **`g1_campo_gamma000.npz`** *(`2446809` byte)* **e `g1_campo_gamma020.npz`** *(`2443455`)*: **`101` fotogrammi di `rho`** *(`float32`, `81 x 81`)*, **il centro, `N`;**
+  - **`referto.txt`.**
+- **Gli spostamenti a `500`, `1000`, `2000` tick:**
+  - **`gamma 0`: `+0.0017527`, `+0.0002649`, `-0.0125131`;**
+  - **`gamma +0.02`: `+1.7315212`, `+6.5958795`, `+21.9592130`.**
+- ### **«Entro `1e-6`» dal referto di G1 FALLISCE** *(gli scarti `4.87e-6` e `3.04e-6`)*: **il referto di G1 ha `5` decimali, l'arrotondamento fino a `5e-6`.**
+  - **Era DICHIARATO PRIMA della corsa** *(`29caec51`)*;
+  - **alla QUINTA cifra coincidono tutti.**
+- **La norma costante** *(`1.2e-12`, `6.7e-14`)*; **il DEVE FALLIRE col `gamma` scambiato fallisce come deve.**
+- ### **FERMO** *(il mandato: un DEVE che non va come deve, senza correggere)*. **La decisione su come leggerlo e' di Luca.**

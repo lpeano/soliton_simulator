@@ -1,0 +1,26 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 613c8867  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_punto_fisso.py  sha1-BYTE 9ea68434  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] s5_caduta_solitone.py  sha1-BYTE f606ed39  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] s5_caduta_solitone_campo.py  sha1-BYTE cd0636c7  committato e pulito
+==================================================================================================================================
+G1 COL CAMPO (Luca 2026-11-12): lo stato di TBS a 10000; s 0.15; gamma (0.0, 0.02); 2000 tick, rho e il centro ogni 20; la forma (a)
+==================================================================================================================================
+### eps_top = 0.4767266286 per tick (la coppia 0.476726628572, 0.476726628572)
+### il centro di partenza (c1, c2) 40.5036 40.5023
+  gamma +0.000: lo spostamento lungo B_0 a 500, 1000, 2000 tick +0.00175 +0.00026 -0.01251; 101 fotogrammi; doc\referti_l2\campo_g1\g1_campo_gamma000.npz, 2446809 byte; 149 s
+  gamma +0.020: lo spostamento lungo B_0 a 500, 1000, 2000 tick +1.73152 +6.59588 +21.95921; 101 fotogrammi; doc\referti_l2\campo_g1\g1_campo_gamma020.npz, 2443455 byte; 132 s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: gamma +0.00: gli spostamenti a 500, 1000, 2000 = il referto di G1 entro 1e-06 (come scritto da Luca)     ### FALLISCE   lo scarto piu' grande 4.87e-06
+  DEVE PASSARE: gamma +0.00: gli spostamenti a 500, 1000, 2000 = il referto di G1 alla QUINTA cifra (%+.5f, il formato d PASSA   +0.0017527 +0.0002649 -0.0125131
+  DEVE PASSARE: gamma +0.00: la norma di rho per fotogramma costante entro 1e-10 relativo                                PASSA   1.16e-12
+  DEVE PASSARE: gamma +0.02: gli spostamenti a 500, 1000, 2000 = il referto di G1 entro 1e-06 (come scritto da Luca)     ### FALLISCE   lo scarto piu' grande 3.04e-06
+  DEVE PASSARE: gamma +0.02: gli spostamenti a 500, 1000, 2000 = il referto di G1 alla QUINTA cifra (%+.5f, il formato d PASSA   +1.7315212 +6.5958795 +21.9592130
+  DEVE PASSARE: gamma +0.02: la norma di rho per fotogramma costante entro 1e-10 relativo                                PASSA   6.66e-14
+  DEVE FALLIRE: gli spostamenti di gamma +0.02 contro i valori di gamma 0, entro 1e-06                                   ### FALLISCE   2.20e+01
+==================================================================================================================================
+ESITO: 5/7 controlli come devono; fallite: 2 ['gamma +0.00: gli spostamenti a 500, 1000, 2000 = il referto di G1 entro 1e-06 (come scritto da Luca)', 'gamma +0.02: gli spostamenti a 500, 1000, 2000 = il referto di G1 entro 1e-06 (come scritto da Luca)']; 292 s in tutto
