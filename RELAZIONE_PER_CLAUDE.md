@@ -25497,3 +25497,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **D6 riallineato all'ultimo commit di U6** *(`a5b8a75f`, la suite `67` su `67`)*; **la cassetta `108/108`** *(dalle `18:53:48` alle `18:55:19`; `doc/referti_l2/cassetta_solitone.txt`)*.
 - **Il mandato delle `18:28` e' chiuso.** **Poi la coda:** **la prova delle bande piatte sul buco del vuoto.**
+
+### 2026-11-12 19:45 -- LA G1 LUNGA COL VUOTO: `5/5`; IL SOLITONE TORNA INDIETRO; L'ANELLO VECCHIO RESTA FINO A `4000` TICK, POI CALA (v3 COL CRITERIO SCRITTO, CON UNA RISERVA) [[PUNTO-FISSO-CS-SOLITONE]] [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/campo_g1_lunga/`** *(lo script a `af19b962`, dalle `19:31:26` alle `19:38:17`)*: **`g1_lunga.npz` `14.33 MB`** *(`251` fotogrammi di `rho`, `51` di `phi`)*; **`referto.txt`.**
+- **I DEVE:** **i primi `2000` tick = `e5c4b62b`** *(`rho` `8.6e-08`, `|phi_j|^2` al bit)*; **la norma `2.2e-13`; i fotogrammi spostati falliscono come devono.**
+- ### **IL SOLITONE TORNA INDIETRO:** **il centro `c1` sale fino a `77.87`** *(il tick `3500`)* **e ridiscende a `59.02`** *(il tick `5000`)*: **un'oscillazione attraverso il massimo di `N`** *(un fatto, non letto)*.
+- ### **L'anello vecchio** *(il semipiano opposto al moto, `R 10`-`22`)*:
+  - **il minimo sempre a `R 16.5`;**
+  - **la profondita' rispetto a quella a `2000`:** **`0.99`, `0.97`, `0.97`, `0.99` fino a `4000`; `0.92` a `4500`, `0.89` a `5000`.**
+  - ### **La lettura col criterio scritto: (v3) RESIDUO** *(`4500` e `5000` entro il `5%`)*.
+  - ### **LA RISERVA:** **il calo e' ancora in corso e coincide col RITORNO della materia** *(a `5000` a circa `18.5` nodi dalla posizione iniziale, vicino all'anello)*: **il calo tardivo puo' venire dalla materia che rientra, non dall'evaporazione.** **Da leggere da Luca.**
