@@ -25484,3 +25484,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La forma sbagliata: `21470` volte, come deve.**
 - **M-B1 non verificato in memoria.**
 - ### **FERMO per la scelta di Luca.**
+
+### 2026-11-12 18:35 -- U6 CHIUSO: LA FORMA DI OGGI; k3 CURA PRONTA; L'UNIFICAZIONE CHIUSA; LA CORREZIONE n.144 *(Luca `18:28`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **Si tiene la forma di oggi** *(la continuita' al bit coi riferimenti)*; **k3 e' la cura pronta; k1 e k2 scartate** *(`doc/LEGGI_PROVATE.md`, sez. `7`)*.
+- **k2 identica a oggi al bit: l'ipotesi della sez. `24.6` del laterale cade.**
+- ### **L'unificazione e' CHIUSA** *(la ROTTA)*.
+- **La correzione del guardiano `n.144`** *(nella sez. `9` del documento sull'inerzia e nella MAPPA)*: **attorno alla posizione nuova non c'e' un anello: il vuoto lascia una SCIA dietro la materia.**
+- **Poi:** **D6 riallineato, la cassetta; la coda: le bande piatte, P1, accanto la G1 lunga e il solitone fermo, poi P9.**

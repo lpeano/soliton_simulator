@@ -98,3 +98,15 @@
 
 - ### **Le energie per regione e per settore dipendono dalla scelta dello zero;** **fra referti del nucleo vecchio e del nucleo unificato si confrontano solo il TOTALE** *(convertito: `+ pi (M + V)`, entro `1e-14 max(|tot|, pi (M + V))`)*, **`M` e `V`.**
 - **Il perche':** **lo zero di v2** *(`energia_pesata.termini_di_h`)* **sposta energia fra archi e nodi; sul toro intero si compensa, al confine di una regione no** *(R-1 di C35-pi, `doc/TASK_HISTORY/2026-11-12_unificazione.md`, sez. `6`)*.
+
+## 7. I COEFFICIENTI DEL MEZZO SPOSTAMENTO *(U6 dell'unificazione; Luca `2026-11-12` `18:28`)*
+
+- **La forma:** **`hop = alpha I + beta S`, `alpha = (1 + z)/2`, `beta = (1 - z)/2` calcolati a parte** *(`primo_ordine/flussi_parziali._alfa_beta`)*.
+- **Il codice delle prove:** `csv/solitone/u6_coefficienti.py` *(le forme avvolte in memoria, fuori dal nucleo)*; **il referto** `doc/referti_l2/u6_coefficienti.txt` *(`cd89b710`; le uscite grezze `925e1f70`)*.
+
+| la forma | la deriva di `Lambda` per tick | il rapporto con oggi | la rms di `rho` dopo `1000` tick | la cassetta | lo stato |
+|---|---|---|---|---|---|
+| **oggi** | `+3.7e-16` | `1` | `0` | `107/108` *(D6)* | ### **IN USO** *(Luca: la continuita' al bit coi riferimenti)* |
+| **k1** `|z| = 1` | `-2.3e-15` | `-6.18` | `9.9e-13` | `99/108` | **SCARTATA** *(peggio)* |
+| **k2** `alpha + beta = 1` | `+3.7e-16` | `+1.0000` | `0` *(al bit)* | `107/108` | **SCARTATA** *(identica a oggi)* |
+| **k3** `I - beta (I - S)` | `-2.1e-17` | `-0.056` | `4.4e-13` | `99/108` *(8 confronti al bit coi riferimenti registrati)* | ### **CURA PRONTA** *(quando la deriva pesa, o si rifa' la base; con la ri-registrazione dichiarata dei riferimenti)* |

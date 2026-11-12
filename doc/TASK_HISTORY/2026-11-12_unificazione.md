@@ -358,3 +358,17 @@
 - **M-B1: non verificato in memoria, per nessuna forma.**
 - ### **UN FATTO DA DIRE, non una lettura:** **k2 e' identica a oggi al bit su queste scene:** **`alpha = 1 - beta` da' gli stessi bit di `(1 + z)/2` per questi `z`.** **Quindi la deriva di oggi NON viene da `alpha + beta != 1` nella parte che k2 corregge;** **k3, che toglie `alpha` del tutto, la cura.**
 - ### **FERMO: la scelta della forma e' di Luca.** **Se sceglie k2: M-B1 su una copia del nucleo in un ramo temporaneo, prima** *(la precisazione delle `17:37`)*.
+
+### 8.7 LA SCELTA DI LUCA *(`2026-11-12` `18:28`)*: **SI TIENE LA FORMA DI OGGI; k3 E' LA CURA PRONTA; U6 CHIUSO**
+
+- ### **Si TIENE LA FORMA DI OGGI.** **I motivi** *(Luca)*:
+  - **la deriva di oggi e' circa `4e-10` su un milione di tick, sotto ogni prova in vista;**
+  - **la continuita' AL BIT coi riferimenti registrati** *(su cui hanno lavorato R-1, la riproduzione, U3)* **vale piu' della cura.**
+- ### **k3 e' la CURA PRONTA:**
+  - **si adotta quando una corsa lunga mostra che la deriva pesa, o quando si rifa' comunque la base** *(per esempio il passaggio al 3D)*;
+  - **allora con la ri-registrazione dichiarata dei riferimenti.**
+- ### **k2 identica a oggi al bit:** **per questi coefficienti `alpha + beta` non porta il `delta` ipotizzato** *(sez. `24.6` del laterale: IPOTESI CADUTA)*;
+  - **la deriva nasce altrove;**
+  - **k3, che tocca la combinazione dei mezzi spostamenti, la cura.**
+- **M-B1 non serve rigirarlo** *(k2 non scelta)*.
+- ### **U6 CHIUSO.** **L'unificazione CHIUSA.**

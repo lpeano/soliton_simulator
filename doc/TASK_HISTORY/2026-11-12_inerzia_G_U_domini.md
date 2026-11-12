@@ -263,6 +263,11 @@
   - **la materia va da `c1 40.50` a `65.86`, il centro del buco da `40.40` a `42.84`;**
   - **il deficit attorno al posto INIZIALE** *(`R < 20`)* **cresce da `2159` a `2791`, mentre la materia li'** *(`R < 12`)* **scende dall'`88.7%` allo `0.06%` della norma;**
   - **attorno alla posizione nuova si forma un anello piu' debole** *(il deficit entro `R < 20` `1375` a `2000` tick)*;
+    - ### ⚠ **LA CORREZIONE DEL GUARDIANO `n.144`** *(Luca `18:28`; i numeri sono del guardiano, NON rimisurati qui)*: **attorno alla posizione nuova NON si forma un anello:**
+      - **nel semipiano davanti il vuoto e' normale** *(`dphi` da `-0.4` a `+1.1`, nessun minimo)*;
+      - **il deficit `1375` entro `R < 20` dalla posizione attuale e' quasi tutto la SCIA dietro:** **a `2000` tick `dphi` medio nel disco `R < 6` lungo il percorso: la partenza `-0.04`, il tick `1000` `-0.25`, il tick `1480` `-1.55`, il tick `1800` `-0.83`, la posizione attuale `+0.22`;**
+      - ### **il vuoto non accompagna la materia: si svuota DOPO il suo passaggio e resta svuotato (una SCIA);**
+      - **da misurare in P1: l'energia che va nella scia.**
   - **il deficit totale da `2243` a `3587`, l'eccesso da `787` a `2132`.**
   - **Nel controllo il buco resta col solitone** *(`c1` del buco fra `40.40` e `40.56`)* **e il deficit totale cresce piano** *(`2243` -> `2600`)*.
 - ### **d. LA LETTURA del guardiano, IPOTESI:**
