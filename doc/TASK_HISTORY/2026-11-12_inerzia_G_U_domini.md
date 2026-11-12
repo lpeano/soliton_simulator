@@ -340,3 +340,57 @@
 ### 10.6 FERMO
 
 - **Le letture, i criteri e le due premesse** *(`k0` commensurabile; (ii) sul vuoto intero o solo nel guscio)* **li approvano Luca e il guardiano, prima di qualunque codice.**
+
+## 11.0 LA DECISIONE DI LUCA DELLE `20:15` E G2
+
+- ### **Si tiene il solitone com'e'** *(inerzia negativa)* **e si prova G + U su questo.** **P1, il video triplo e le bande piatte restano IN CODA, fermi, dopo G + U.**
+- ### **G2 ORA, come scritto** *(`csv/solitone/s5_coppia_lapse.py`, `ef4c1c10`; C35-pi a `60000`, `rho_0 / rho_c = 1e-2`)*: **il codice gira sul nucleo unificato** *(la suite verde; i DEVE del suo docstring: (off) = le mappe di C35-pi entro `1e-5`)*.
+- ### **LA LETTURA DI LUCA, scritta PRIMA della corsa:** **con l'inerzia negativa G RESPINGE: la distanza `d_on - d_off` CRESCE** *(la (p3) del docstring di G2)*.
+
+## 11. P6, G + U SULLA COPPIA -- **SU CARTA, PRIMA DEL CODICE** *(Luca `2026-11-12` `20:15`: si tiene il solitone com'e', inerzia negativa, e si prova G + U; FERMO per l'approvazione)*
+
+### 11.1 La scena e i quattro bracci *(dal codice esistente)*
+
+- **La coppia di G2:** **lo stato di C35-pi a `60000`** *(il jsonl, lo `sha`)*, **`L 162`, il bordo della corsa dopo ogni tick** *(`csv/solitone/s5_coppia_lapse.py`, `ef4c1c10`)*.
+- **I quattro bracci, dalla stessa partenza e per la stessa durata:**
+  - **(0) NIENTE:** **il tick della corsa** *(`accensione.tick` e il bordo; il braccio (off) di G2)*;
+  - **(G) SOLO IL LAPSE:** **come (on) di G2** *(`tick_lapse.tick` con `rho_c = rho_0 / 1e-2` e la forma (a), `eps_a = eps_top`)*;
+  - **(U) SOLO LA U(1):** **il prototipo `csv/solitone/_u1_oggi.py`** *(che riprende `csv/_u1_prototipo.py`: `Campo`, `avvolto`, `tick_campo`)*:
+    - **il campo `A`, `E` per arco, fuori dallo stato;**
+    - **l'ACCOPPIAMENTO:** **la carica = la NORMA della materia** *(la corrente d'arco `J_a = |v0'|^2 - |v0|^2`, Ampere discreta dentro lo spostamento: `E <- E - e J`)*; **il trasporto `U_a = e^{i e A_a}` nello spostamento di `psi`;**
+    - **COME ENTRA NEL TICK:** **`_u1_oggi.tick(z, t, K, campo, sorgente)`: il tick INTERO della corsa avvolto, con la spinta del campo a meta' ai due estremi e la deriva dopo il primo spostamento scalare** *(il leapfrog reversibile)*; **solo dopo la rampa** *(`t >= K`: a `60000` lo e')*;
+    - **la forma del campo:** **«compatto» o «noncompatto», un argomento** *(T3 usa il NON compatto)*;
+  - **(G+U) TUTTI E DUE:** **`tick_lapse.tick` dentro l'avvolgimento della U(1)** *(da verificare dal codice: `_u1_oggi.tick` avvolge `accensione.tick`; per (G+U) serve lo stesso avvolgimento attorno al tick del lapse -- un adattatore di prova, dichiarato)*.
+
+### 11.2 Le misure
+
+- **La distanza `d(t)` ogni `50` tick, dai semipiani** *(come U2 e G2: `carta_coppia.centri_semipiani`)*.
+- **`d(t)` di ogni braccio MENO quella di (0).**
+- **L'accelerazione relativa** *(la parabola, `carta_coppia.curvatura`)* **col suo errore, e il suo SEGNO.**
+- ### **Per (G+U): se esiste una distanza dove l'accelerazione cambia segno** *(l'EQUILIBRIO)*: **con una sola distanza iniziale non si vede; serve una serie di distanze** *(11.3)*.
+
+### 11.3 Le scelte da decidere *(Luca)*, con una proposta
+
+- **`e`, la carica:** **la proposta: `e*` di T3** *(il regime «moderato»: `e* = E0_PROVA sqrt(0.1 / eb0)`, come `u1_t3b`/`u1_t3d`)*, **lo stesso valore per (U) e (G+U); la forma NON compatta, come T3.** *(Oggi la U(1) e' fissata a circa l'`1%` dell'energia del solitone: una scelta, non una misura.)*
+- **`rho_c`:** **come G2** *(`rho_0 / rho_c = 1e-2`, Luca `01:40`)*.
+- **La distanza iniziale:** **C35-pi a `60000`** *(`d ~ 35`-`37`, gli aloni che si toccano)*; ### **per l'equilibrio, la proposta: una SERIE di distanze dallo stesso singolo** *(le partenze di `S162` traslate: `d = 25, 35, 50`; `C50-0` a `d 50` esiste gia')*, **dopo il primo esito.**
+- **La durata:** **come G2: fino a `5000` tick, o meno col tetto di `60` minuti per corsa** *(dichiarato)*.
+
+### 11.4 Le letture, scritte PRIMA
+
+- **(G) si ALLONTANANO** *(con l'inerzia negativa il lapse respinge)*.
+- **(U) si AVVICINANO, con `a ~ 1/d`** *(la forma newtoniana nel piano, sez. `3`)*.
+- **(G+U):**
+  - **(gu1) attrazione da lontano e repulsione da vicino: una distanza di EQUILIBRIO;**
+  - **(gu2) un solo segno a tutte le distanze** *(dire quale)*.
+
+### 11.5 I DEVE
+
+- **(0) riproduce la corsa registrata AL BIT** *(le mappe di C35-pi, come il DEVE di G2)*.
+- **Ciascun campo SPENTO riproduce (0):** **(G) a `N = 1`** *(il banco S5.1)*; **(U) a `e = 0`** *(il campo resta nullo)*.
+- **DEVE FALLIRE:** **lo stesso confronto di (G+U) con (0) entro la precisione delle mappe** *(devono essere diversi)*.
+
+### 11.6 Dopo
+
+- **Le varianti di spin, fase e rotazione** *(sez. `7.2`)* **restano per dopo il primo esito.**
+- **FERMO: le scelte e le letture le approvano Luca e il guardiano.**
