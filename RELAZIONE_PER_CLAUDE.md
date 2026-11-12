@@ -25369,3 +25369,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **l'energia e' una formula esplicita** *(`energia_pesata.termini_di_h`)* **e l'avvolgimento tocca solo il tick;**
   - **la proposta: il DEVE FALLIRE di U3 e' Z0-F** *(sulla dinamica)*, **e quello dell'energia sta in U4.**
 - **FERMO per la decisione di Luca.** *(`doc/TASK_HISTORY/2026-11-12_unificazione.md`, sez. `5`.)*
+
+### 2026-11-12 12:55 -- L'UNIFICAZIONE, U4: LA SUITE `67/67`; LA CASSETTA `107/108`, FALLISCE D6 (SCADUTA SU TUTTI E DUE I RAMI); FERMO [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **Il codice dei controlli committato prima** *(`6c97a2e3`: la conversione delle energie a v2 nel controllo, entro `1e-14`)*.
+- **(1) La suite completa: `67` su `67`.**
+- **(2) La cassetta: P3 PASSA con la conversione** *(`e_K` + `pi`, il controllo positivo diverso)*; ### **FALLISCE D6** *(«nessun `.py` della libreria cambiato da `654292f2`»)*.
+  - **NON dipende dalla fusione:** **da `654292f2` il principale da solo ha cambiato `26` file, il laterale `32`.**
+  - **La cassetta e' scaduta su tutti e due i rami dal `2026-11-08`.**
+- ### **FERMO: `primo-ordine` e' com'era.** **La proposta: D6 riallineato al commit della fusione, un commit a se'.**

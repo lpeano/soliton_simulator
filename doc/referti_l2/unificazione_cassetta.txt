@@ -1,0 +1,161 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] vuoto.py  sha1-BYTE 2b504206  committato e pulito
+[TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] partenza.py  sha1-BYTE 7e744e24  committato e pulito
+[TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
+[TIMBRO] test_protetto.py  sha1-BYTE 82414364  committato e pulito
+[TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
+[TIMBRO] test_vuoto.py  sha1-BYTE 7fb138df  committato e pulito
+[TIMBRO] test_respiro.py  sha1-BYTE 810ee3ff  committato e pulito
+[TIMBRO] test_accensione.py  sha1-BYTE 4e204147  committato e pulito
+[TIMBRO] test_toro.py  sha1-BYTE 2b3cf382  committato e pulito
+[TIMBRO] test_mappe.py  sha1-BYTE b56209c1  committato e pulito
+[TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
+[TIMBRO] test_simmetrica.py  sha1-BYTE 63cefa24  committato e pulito
+[TIMBRO] test_bordo.py  sha1-BYTE 38a247e6  committato e pulito
+[TIMBRO] test_partenza.py  sha1-BYTE 6da26dfb  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE 725839c2  committato e pulito
+======================================================================================================================================================
+LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
+======================================================================================================================================================
+### LE USCITE (csv/solitone/uscite.py)
+  DEVE PASSARE: le costanti = quelle degli strumenti (GRUPPI, W, TOLL_RES_REL, Omega a s 0.15)                                       PASSA   
+  DEVE PASSARE: U1 e05 (eps 0.5), E0, le bande e le 24 uscite = previsioni.json AL BIT                                               PASSA   E0 +3.178178; diverse []
+  DEVE PASSARE: U1 e05, le aperte e il margine = previsioni.json                                                                     PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e05 con g spostato di 1e-3, le uscite = previsioni.json                                                           PASSA   
+  DEVE PASSARE: U1 e0 (eps 0), E0, le bande e le 24 uscite = previsioni.json AL BIT                                                  PASSA   E0 +3.141593; diverse []
+  DEVE PASSARE: U1 e0, le aperte e il margine = previsioni.json                                                                      PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e0 con g spostato di 1e-3, le uscite = previsioni.json                                                            PASSA   
+  DEVE PASSARE: U2 eps 0, mu -0.56602: (n2) P0 + Ppi = la riga di chiudere_le_uscite.txt                                             PASSA   0.00955
+  DEVE PASSARE: U3 r 1.5247 dalla scena (famiglia sb): il residuo e le bande libere = le righe di scatola/uscite.txt                 PASSA   1.685968e-10 contro 1.685968e-10
+  DEVE FALLIRE: U3 r 1.5247 nella scena della famiglia SBAGLIATA (lp), l'errore di c6ad04ac: stato_nella_scena lo accetta            PASSA   i pesi della scena NON sono quelli dello stato: il residuo 7.912611e-02 contro il registra
+### IL SOLITONE PROTETTO (csv/solitone/protetto.py)
+  DEVE PASSARE: GRIGLIA e' il griglia.json di _coppia_di_B                                                                           PASSA   
+  DEVE PASSARE: P1 A a K (N 1e+06, L 81, eps 0.5): lo sha e mu = lunga_AK_00000.jsonl (a8e0e43b) AL BIT                              PASSA   mu -0.565633409457
+  DEVE PASSARE: P2 B a Gamma, l'inviluppo a N 3e5: lo sha, E0, bloch, mu, il residuo = robusta_N3e5_000000.jsonl AL BIT              PASSA   E0 +3.178177524 mu +4.148998947 residuo 4.393046e-02
+  DEVE FALLIRE: P2 col partner della scelta al posto della scelta: lo sha = robusta_N3e5_000000.jsonl                                PASSA   
+  DEVE PASSARE: P3 BG-F-0.15 (s 0.15, il vuoto fondo): mu, il residuo, w_in, h, e_K (legame spento) = il primo pezzo di _vuoto_vivo_ PASSA   mu +4.161868162 e_K -1.5706823467648499 (convertito, conversione_v2), acceso -0.57068234676484986
+    P3, E0: qui +3.178177523812364 (fase/s); _vuoto_vivo_B +3.178177523812364 (E0 * CB.S / s); la differenza 0.0e+00 (la conversione fatta una volta)
+### D5: LE DECISIONI PER LE PROVE NUOVE (eps dalla tabella, ridotto=True dichiarato; la forma S1; il costruttore su B a Gamma)
+  DEVE PASSARE: D5 eps della prova = 0.5 della tabella (la decisione (7)); ridotto=True = 0, dichiarato                              PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN) | CASO RIDOTTO: eps 0 (la moneta spenta), non il modello
+  DEVE PASSARE: D5 la forma predefinita = S1 (la decisione (1), da _solitone_vuoto_congelato.FORMA)                                  PASSA   S1
+  DEVE PASSARE: D5 la scena della prova (BG-F-0.15) ha eps 0.5, e il costruttore predefinito = la partenza di P3 AL BIT (B a Gamma)  PASSA   eps 0.5 dalla tabella (CAMM-MONETA-SPIN); la forma S1
+  DEVE FALLIRE: D5 il costruttore predefinito = A a K                                                                                PASSA   
+### LE MISURE (csv/solitone/misure.py)
+  DEVE PASSARE: le costanti = quelle degli strumenti (SOGLIA_VITA, SIGMA_FORMA, GRUPPI_LIMITE)                                       PASSA   
+  DEVE PASSARE: M1 w_in, h e il campione a t 0 (x, y, w, f_win, f_liscia) = rig_000000.jsonl AL BIT                                  PASSA   f_liscia 0.618068063360118
+  DEVE PASSARE: M1 il punto a t 0 (w, f_win, f_3w0, picco, M) = lunga_B_00000.jsonl (a8e0e43b) AL BIT                                PASSA   alone 4.441e-16
+  DEVE FALLIRE: M1 la finestra netta = la liscia (f_win = f_liscia)                                                                  PASSA   0.620386 contro 0.618068
+  DEVE PASSARE: M2 BG-F-0.15 a tick 20000: il campione e l'alone = l'ultimo campione AL BIT                                          PASSA   f_liscia 0.509523 alone 0.005512
+  DEVE PASSARE: M2 la riga D (|D|/|psi0| e le frazioni di banda) = l'ultima riga D AL BIT                                            PASSA   nD 1.028041 B 0.991594
+  DEVE PASSARE: M3 il limite del tasso (piatte, A) = limite_3000.json AL BIT                                                         PASSA   piatte 4.529e-04 A 4.170e-04
+  DEVE PASSARE: M4 |D| = 1e-8 t -> lineare, = la riga di livelli_piatti.txt                                                          PASSA   lineare; 100 campioni > 0; gamma -0.00062 +- 0.00012, gamma t_ultimo -0.185, b 1.0621 +- 0.0043
+  DEVE PASSARE: M4 la serie VERA di breve_R_1e6 -> lineare, = la riga di livelli_piatti.txt                                          PASSA   lineare; 400 campioni > 0; gamma -0.00031 +- 0.00011, gamma t_ultimo -0.092, b 1.0495 +- 0.0021
+  DEVE PASSARE: M4 |D| = 1e-8 e^{0.06 t} -> esponenziale, = la riga di livelli_piatti.txt                                            PASSA   esponenziale; 100 campioni > 0; gamma 0.06000 +- 0.00000, gamma t_ultimo 13.680, b -0.0000 +- 0.0000
+  DEVE PASSARE: M4 |D| = 1e-8 (t + e^{0.0331 t}) -> esponenziale, = la riga di livelli_piatti.txt                                    PASSA   esponenziale; 100 campioni > 0; gamma 0.01803 +- 0.00106, gamma t_ultimo 5.356, b 0.6941 +- 0.0397
+  DEVE PASSARE: M4 |D| = 1e-8 (il caso nullo -> potenza t^0, = la riga di livelli_piatti.txt                                         PASSA   potenza t^0; 100 campioni > 0; gamma 0.00000 +- 0.00000, gamma t_ultimo 0.000, b 0.0000 +- 0.0000
+  DEVE PASSARE: M5 la vita di r 1 (s 0.3; 03142636) = la riga di modo_di_R.txt                                                       PASSA   OSSERVATO 142.2
+  DEVE PASSARE: M5 la vita di r 1.5247 (s 0.15; 03142636) = la riga di modo_di_R.txt                                                 PASSA   OSSERVATO 621.8
+  DEVE PASSARE: M6 un periodo vero di 99 tick (33 passi) letto giusto (entro la risoluzione 2.49e-02)                                PASSA   letto 99.0124
+  DEVE PASSARE: M6 un periodo vero di 3.3 tick (1.1 passi, sotto Nyquist 6): NON letto giusto, ma il vero fra gli alias              PASSA   letto 33.0000; gli alias 1.4348 1.5714 2.7500 3.3000
+  DEVE FALLIRE: M6 il periodo SENZA il passo                                                                                         PASSA   
+### IL VUOTO SULLA CARTA (csv/solitone/vuoto.py): la scena di BG-F-0.15, il tick intero con psi = 0; SEME 20261102 TOLL_LIN 1e-10 TOLL_RIC 1e-12 TOLL_UNI 1e-12 TOLL_BORDO 1e-09
+  DEVE PASSARE: V0 il vuoto della scena e' F0 (_vuoto_sul_fondo.fondo_uniforme) AL BIT                                               PASSA   
+  DEVE PASSARE: V1 con psi = 0 il tick sul vuoto e' lineare: |T(F0 + e) - T(F0) - T(e)|/|T(e)| <= 1e-10                              PASSA   4.30e-16
+  DEVE PASSARE: V2 A_v ricostruisce il tick: |T(g) - ifft(A_v fft(g))|/|T(g)| <= 1e-12                                               PASSA   7.66e-16
+  DEVE PASSARE: V5 la freccia di F0 e' (2, 2 sqrt3) su ogni nodo (modulo 4, a 60 gradi) entro 1e-12                                  PASSA   max scarto 0.00e+00
+  DEVE PASSARE: V5-N la freccia di F3 (fasi 0, 0, pi) e' nulla su ogni nodo entro 1e-12                                              PASSA   max 2.12e-16
+  DEVE PASSARE: V5-I la freccia dell'ibrido (0, 0, pi/2) ha il modulo 4 cos(pi/4) = 2 sqrt2 su ogni nodo entro 1e-12                 PASSA   modulo 2.828427124746191, scarto 1.46e-13
+  DEVE FALLIRE: V5-F la freccia dell'ibrido e' quella di F0 entro 1e-12                                                              PASSA   max 2.449
+  DEVE PASSARE: V3 A_v(k) unitaria a ogni k entro 1e-12; F0 autostato del tick, residuo e |lambda| - 1 <= 1e-12                      PASSA   max|A^H A - I| 4.44e-16; F0: residuo 7.55e-15, |lambda| - 1 -6.4e-15, nu 38.746309394274
+  DEVE PASSARE: V4 il rivelatore trova nu di F0 dentro o sul bordo di una banda (margine <= 1e-09)                                   PASSA   fuori, margine +1.421e-14, bande []
+  DEVE FALLIRE: V4-F il mezzo del gap piu' largo e' dentro una banda                                                                 PASSA   margine +17.802358 (il gap e' largo 35.604717)
+### IL RESPIRO SULLA CARTA (csv/solitone/respiro.py): PASSO 0.15 N_TICK 4000 PERIODO_PROVA 4.07 OGNI_RADO 10 TOLL_FREQ 1e-06 TOLL_SOMMA 1e-15 FRAZIONE 0.1 FRAZIONE_F 0.0333333 SEME 20261102 SIGNIF 3 TOLL_QUOTA 0.01; PERIODI_MIN 10
+  DEVE PASSARE: R1 omega ritrova un seno noto (periodo 4.07, a ogni tick, con una tendenza quadratica) entro 1e-06 sulla frequenza   PASSA   periodo 4.070000029, errore 7.0e-09, ampiezza 2.000000e-03; cambi 4.0704
+  DEVE FALLIRE: R1-F un seno di periodo 2.3755 (sotto il Nyquist dei campioni radi) campionato ogni 10 tick ridà la frequenza vera e PASSA   a ogni tick 2.375486; ogni 10 tick letto 4.070000 (l'alias); gli alias dai cambi 0.6334 0.9192 1.0964 2.3738
+  DEVE PASSARE: R2 margine_mod su un intervallo che passa per lo zero del cerchio: dentro e fuori, il margine col segno, il cerchio  PASSA   -1.500 -0.500 +1.000 +1.000 -20.944
+  DEVE PASSARE: R3 somma e opposto contro il conto a mano                                                                            PASSA   (1.75, 4.25) (-0.5, 1.25)
+  DEVE PASSARE: R4 elenco a 0.1 (primi 1) su tre seni di ampiezza 1, 0.15, 0.05: i primi due entro 1 canale, non il terzo, nessun do PASSA   2 picchi nell'elenco (4 massimi rifiniti): 4.0700 0.9900
+  DEVE FALLIRE: R4-F elenco a 0.0333 NON contiene il terzo seno (periodo 19.5)                                                       PASSA   3 picchi: 4.0700 0.9900 19.5032
+  DEVE PASSARE: R5 presenza: un seno di ampiezza 3e-4 nel rumore gaussiano di sigma 1e-3 ha significativita' >= 3                    PASSA   significativita' 9.39, ampiezza 3.098e-04, quota 0.0451
+  DEVE FALLIRE: R5-F presenza: sul solo rumore la significativita' alla stessa frequenza e' >= 3                                     PASSA   significativita' 1.25, ampiezza 4.112e-05
+  DEVE PASSARE: R5-Q la quota: il seno puro di R1 ha quota 1 entro 0.01; il seno di R5 nel rumore ha quota a^2/2/(sigma^2 + a^2/2) = PASSA   seno puro 1.000419 (ampiezza 2.000000e-03); nel rumore 0.0451
+### L'ACCENSIONE LENTA (csv/solitone/accensione.py): la scena di BG-F-0.15 dalla partenza; TICK 20 TOLL_PSI_A2 1e-12 LAM_MEZZO 0.5
+  DEVE PASSARE: A1 con lam = 1 il tick dell'accensione e' il tick intero (tick.percorri_tick) AL BIT, 20 tick, ogni chiave           PASSA   chiavi diverse: nessuna
+  DEVE PASSARE: A2 (la decisione (i)) con lam = 0 phi resta phi0 AL BIT a ogni tick, e psi = _congelato_lungo.avanza entro 1e-12 (20 PASSA   phi al bit True; |dpsi|/|psi| 1.71e-16 (la causa: la rotazione di beta e il ritorno a phi0 nel congelato, un ulp sul modulo)
+  DEVE FALLIRE: A0 con lam = 0.5 psi coincide col tick intero o col congelato entro 1e-12                                            PASSA   |dpsi| dal tick intero 2.410e+00, dal congelato 1.649e+00
+### LA VITA A BLOCCHI E L'ALONE (accensione.vita_a_blocchi, tempo_alone): serie a mano; TOLL_ESATTO 1e-09
+  DEVE PASSARE: A7 un cuore lineare: la vita estrapolata dalle medie a blocchi e' quella esatta (entro 1e-09)                        PASSA   estrapolata 10250.124999999993, attesa 10250.125000; il riferimento 0.975012500 (atteso 0.975012500)
+  DEVE PASSARE: A7-M un cuore che scende sotto meta' nel blocco 3000 .. 4000: misurata al suo centro, 3500                           PASSA   misurata 3500.0
+  DEVE PASSARE: A7-B i campioni fino a 6000 dal blocco 1000: 5 blocchi completi (6000 .. 7000 ha un campione solo, fuori)            PASSA   blocchi [(1000.0, 2000.0), (2000.0, 3000.0), (3000.0, 4000.0), (4000.0, 5000.0), (5000.0, 6000.0)]
+  DEVE FALLIRE: A7-F un cuore che SALE da' una vita (misurata o estrapolata)                                                         PASSA   misurata None estrapolata None pendenza +5.0000e-02
+  DEVE PASSARE: A8 un alone lineare 0.001 + 2.5e-3 per 1000: il 10% a 39600 (entro 1e-09)                                            PASSA   tempo 39600.0, pendenza +2.5000e-03
+  DEVE FALLIRE: A8-F un alone che CALA da' un tempo al 10%                                                                           PASSA   tempo None, pendenza -1.0000e-03
+### A3 DELLE CORSE LUNGHE (accensione.a3): serie a mano; A3_TICK_LUNGA 100000 A3_PENDENZA 1e-11, la tolleranza 1e-10
+  DEVE PASSARE: A9 la deriva di DG1000 (+3.87e-12 per 1000, 1.55e-10 a 40000), 266667 tick                                           PASSA   lunga (266667 tick): la pendenza +3.875e-12 per 1000 (il tetto 1e-11), il residuo 1.11e-16 (la tolleranza 1e-10)
+  DEVE FALLIRE: A9-F una deriva di 2e-11 per 1000                                                                                    PASSA   lunga (266667 tick): la pendenza +2.000e-11 per 1000 (il tetto 1e-11), il residuo 1.11e-16 (la tolleranza 1e-10)
+  DEVE FALLIRE: A9-S un salto di 2.4e-10 a 20000 (la pendenza da sola starebbe sotto: ~9e-12 per 1000; il residuo ~1.2e-10)          PASSA   lunga (266667 tick): la pendenza +8.999e-12 per 1000 (il tetto 1e-11), il residuo 1.20e-10 (la tolleranza 1e-10)
+  DEVE FALLIRE: A9-C una corsa corta (100000 tick) con 1.6e-10 a 16000: il criterio di prima                                         PASSA   corta (100000 tick): max 1.60e-10 (la tolleranza 1e-10)
+### LE MISURE SUL TORO (csv/solitone/toro.py): SIGMA 6.6 FONDO 0.0001 MEZZO 40 TOLL_ARR 1e-12 TOLL_C 1e-09 SETTORI 8
+  DEVE PASSARE: T0 le posizioni della scena sono (m1 - L//2) A1 + (m2 - L//2) A2, AL BIT (L 81)                                      PASSA   
+  DEVE PASSARE: T3 la meta' del periodo piu' corto del toro e' L/2 (i periodi L A1, L A2, L (A1 + A2) sono lunghi L)                 PASSA   40.500000000000
+  DEVE PASSARE: T1 la gaussiana spostata di (40, 0) indici: le misure periodiche uguali entro 1e-12, il centro spostato di (40, 0) e PASSA   il peggiore relativo 1.73e-14, il centro 0.00e+00
+  DEVE PASSARE: T1 la gaussiana spostata di (0, 40) indici: le misure periodiche uguali entro 1e-12, il centro spostato di (0, 40) e PASSA   il peggiore relativo 1.73e-14, il centro 0.00e+00
+  DEVE PASSARE: T1 la gaussiana spostata di (40, 40) indici: le misure periodiche uguali entro 1e-12, il centro spostato di (40, 40) PASSA   il peggiore relativo 2.22e-16, il centro 0.00e+00
+  DEVE FALLIRE: T1-F le misure EUCLIDEE della gaussiana spostata di (40, 0) uguali entro 1e-12                                       PASSA   il peggiore relativo 7.65e+01 (w 36.7895 contro 9.4448, il cuore 0.00005 contro 0.39337)
+  DEVE PASSARE: T2 la gaussiana al centro: il centro periodico e l'euclideo entro 1e-09, cuore, f_win, alone entro 1e-12 (w no: le d PASSA   il centro 1.51e-15, il peggiore relativo 1.11e-16; w periodico 9.424822, euclideo 9.444804
+  DEVE PASSARE: T4 l'alone per settore somma all'alone (entro 1e-12)                                                                 PASSA   la somma 1.287884424284354e-02, l'alone 1.287884424284336e-02
+### LE MAPPE (csv/solitone/mappe.py): RADICE E:\soliton_simulator\mappe OGNI 100 VOLTE_SPAZIO 10; TOLL 1e-06 QUANTE 1067
+  DEVE PASSARE: K1 il disco E:\soliton_simulator\mappe esiste, e' scrivibile, e ha almeno 10 volte la stima (1067 istantanee, 560046 PASSA   libero 223618400256 byte, richiesti 560046960 (10 x la stima)
+  DEVE FALLIRE: K1-F il disco basta per una stima di 10 volte meno lo spazio libero piu' 1 byte                                      PASSA   libero 223618400256 byte, richiesti 223618400260 (10 x la stima)
+  DEVE PASSARE: K0 l'istantanea non tocca lo stato (gli sha di ogni chiave prima e dopo)                                             PASSA   
+  DEVE PASSARE: K2 riletta, sum rho = M e sum Lambda = V entro 1e-06 relativo (float32)                                              PASSA   M 1000000.000000 errore 1.09e-09; V 39366.000000 errore 0.00e+00; il file 21944 byte
+  DEVE FALLIRE: K2-F con il nodo piu' denso raddoppiato, sum rho = M entro 1e-06                                                     PASSA   errore 5.06e-03
+  DEVE PASSARE: K3 la riga dell'indice ha la dimensione e lo sha1 del file (hashlib sui byte letti a parte)                          PASSA   E:\soliton_simulator\mappe\_prova\_prova_000000.npz  21944 byte  sha1 32a86e53007b1f56029c6336ee2be3598a341244  tempo 0.00 .. 0.00  2 istantanee
+### I PROFILI AD ANELLI (csv/solitone/campo.py): ELLE 3 SOGLIE (0.001, 0.0001, 1e-05) TOLL_ARR 1e-12; la gaussiana di test_toro (SIGMA 6.6)
+  DEVE PASSARE: C1 ogni nodo dell'anello k ha k <= r < k + 1 e r < R (R 40.50, 41 anelli); oltre R l'anello -1                       PASSA   5935 nodi negli anelli, 626 oltre
+  DEVE PASSARE: C2 la gaussiana spostata di mezzo lato (tre versi), col centro ricalcolato: lo stesso profilo entro 1e-12            PASSA   il peggiore relativo 6.66e-16
+  DEVE FALLIRE: C2-F la distanza EUCLIDEA (senza l'immagine piu' vicina) sulla gaussiana spostata di (40, 0): lo stesso profilo entr PASSA   il peggiore relativo 1.60e-02
+  DEVE PASSARE: C3 la portata di exp(-r / 3) entro 1 anello da ELLE ln(1/f), per le tre soglie                                       PASSA   0.001: contiguo 21 ultimo 21, ELLE ln(1/f) 20.723; 0.0001: contiguo 28 ultimo 28, ELLE ln(1/f) 27.631; 1e-05: contiguo 35 ultimo 35, ELLE ln(1/f) 34.539
+  DEVE PASSARE: C4 il campo cos(2 (theta - -30)) entro 14: l'asse del quadrupolo -30 gradi entro 1e-09                               PASSA   l'asse -30.000000000000, il relativo 0.7844, 721 nodi
+  DEVE PASSARE: C5 il campo r cos(theta - 47) entro 14: l'asse del dipolo 47 gradi entro 1e-09                                       PASSA   l'asse 47.000000000000, il relativo 0.7853
+  DEVE FALLIRE: C4-F il campo ISOTROPO exp(-r / 3) ha un quadrupolo col relativo sopra 1e-12                                         PASSA   il relativo 1.17e-17
+### LA PARTENZA SIMMETRICA (protetto.q_simmetrica, partenza_simmetrica): TOLL 1e-12 N_TICK 10 T_STATO 13333
+  DEVE PASSARE: S0 il vuoto F3 ruotato (attorno a (81, 81) / 2) e' +-F3 entro 1e-12                                                  PASSA   F0: c_v -1.000000000000 +0.0e+00i, |R phi - c_v phi| / |phi| 1.11e-16; F3: c_v -1.000000000000 +0.0e+00i, |R phi - c_v phi| / |phi| 1.11e-16
+  DEVE PASSARE: S1 la partenza simmetrica: |R psi - c psi| / |psi| entro 1e-12 e c = 1 entro 1e-12                                   PASSA   8.325e-16, c +1.000000000000000 -4.0e-20i; m2 (81, 81)
+  DEVE FALLIRE: S1-F la partenza DI OGGI (V.partenza) e' simmetrica entro 1e-12                                                      PASSA   9.946e-01
+  DEVE PASSARE: S2 la norma della partenza simmetrica e' N = 1e+06 entro 1e-12 relativo                                              PASSA   0.000e+00
+  DEVE PASSARE: S3 q+ e' nella coppia (|G q - <G> q| entro 1e-12) e P q+ = q+ (entro 1e-12)                                          PASSA   Bloch 5.92e-16, |P q - q| 8.17e-16, l'autovalore +1.000000000000000
+  DEVE PASSARE: S4 il tick VIVO commuta con phi -> -phi (10 tick nella rampa da TS su F3 e 10 dopo da TM1000 a 13333), ogni chiave e PASSA   il peggiore 0.000e+00 (c_v di F3 -1.000: S4 necessario)
+  DEVE FALLIRE: S4-F lo stesso con phi -> 1.1 phi                                                                                    PASSA   il peggiore 2.102e-01
+### IL BORDO ASSORBENTE (csv/solitone/bordo.py): R_A 28 G_PROVA 0.1 TOLL 1e-12
+  DEVE PASSARE: G0 il profilo: 0 dentro R_A 28, g_max da R_B 40.50, crescente, la derivata nulla a R_A                               PASSA   g(R_A + 1e-6) 1.58e-15
+  DEVE PASSARE: G1 il bilancio: M dopo + dM = M prima, V dopo + dV = V prima, entro 1e-12 relativo                                   PASSA   M 0.00e+00, V 0.00e+00; dM / M0 6.654e-02
+  DEVE FALLIRE: G1-F senza dM, M dopo = M prima entro 1e-12                                                                          PASSA   6.654e-02
+  DEVE PASSARE: G3 dentro R_A (g = 0) lo stato resta AL BIT                                                                          PASSA   17142 estremita' dentro, 22224 nella fascia
+  DEVE PASSARE: G2 con psi = 0 e phi = phi0 lo stato resta AL BIT (si assorbono le onde, non il vuoto)                               PASSA   dM 0 dV 0
+  DEVE PASSARE: G4 fase_fascia: phi = rif da' d 0 e a 1; phi = e^{i 0.01} rif da' arg a = 0.01, |a - 1| = |e^{i 0.01} - 1|, r 0 (ent PASSA   arg a 0.010000000000000, d medio 1.000e-02, r 3.3e-15
+  DEVE PASSARE: G5 c_di: la tabella fino a K, poi c(K) e^{i omega (t - K)} (continua a K)                                            PASSA   c_di(13) -0.725932304200140 -0.687766159183974i
+### LA PARTENZA E L'ARRESTO (csv/solitone/partenza.py): SOGLIA 5 PASSO 1000 DOPO 2000; ATTESO 16000
+  DEVE PASSARE: PA0 su TF3 + TF3C (dai jsonl) la partenza cade nel blocco 16000 .. 17000 (il referto di TF3)                         PASSA   la partenza 16000.0; la corsa si sarebbe fermata a 18000.0
+  DEVE PASSARE: PA1 le velocita' per blocco del modulo = quelle di carta_deriva.finestre, AL BIT                                     PASSA   30 blocchi in comune (la tabella 30, il modulo 30); diversi: 0
+  DEVE FALLIRE: PA0-F su TB3 (ferma) c'e' una partenza                                                                               PASSA   la velocita' massima per blocco 0.802
+### D6: LA LIBRERIA E' QUELLA DI 654292f2 (escluso collauda.py); i tre referti vecchi (eps 0: csv/_livelli_piatti.py -> doc/referti_l2/livelli_piatti.txt; eps 0.5: csv/_massimo_di_B.py -> doc/referti_l2/massimo_di_B.txt; A a K: csv/_coppia_di_B.py -> doc/referti_l2/coppia_di_B.txt) si rigirano al loro commit
+  DEVE PASSARE: D6 nessun .py della libreria cambiato da 654292f2 a HEAD (escluso collauda.py), e niente di non committato           ### FALLISCE   cambiati ['csv/solitone/__init__.py', 'csv/solitone/b1_profilo.py', 'csv/solitone/b1_raccordo.py', 'csv/solitone/c0_cucitura.py', 'csv/solitone/carta_coppia.py', 'csv/solitone/carta_coppia_ss.py', 'csv/solitone/carta_f1.py', 'csv/solitone/carta_f1_lunga.py', 'csv/solitone/carta_punto_fisso.py', 'csv/solitone/carta_punto_fisso_r.py', 'csv/solitone/confronta_coppia_ra.py', 'csv/solitone/confronta_coppia_rb.py', 'csv/solitone/conversione_v2.py', 'csv/solitone/corsa_accensione.py', 'csv/solitone/durata_l1.py', 'csv/solitone/energia_doppio_zero.py', 'csv/solitone/fusione_v2.py', 'csv/solitone/h4_vuoto.py', 'csv/solitone/isotropia_p2.py', 'csv/solitone/lambda_deriva_pezzi.py', 'csv/solitone/lambda_deriva_pezzi_principale.py', 'csv/solitone/lambda_vuoto_deriva.py', 'csv/solitone/lambda_vuoto_deriva_principale.py', 'csv/solitone/mappe_leggere_intere.py', 'csv/solitone/mb_costante.py', 'csv/solitone/p3_ramo.py', 'csv/solitone/periodo_tb3.py', 'csv/solitone/ramo.py', 'csv/solitone/riproduzione_unificazione.py', 'csv/solitone/s1_falso_uno.py', 'csv/solitone/s2_spettro.py', 'csv/solitone/s4_materia_mrho.py', 'csv/solitone/s5_banco.py', 'csv/solitone/s5_caduta.py', 'csv/solitone/s5_caduta_segno.py', 'csv/solitone/s5_caduta_solitone.py', 'csv/solitone/s5_coppia_lapse.py', 'csv/solitone/s5_prove.py', 'csv/solitone/s5_segno_h.py', 'csv/solitone/s5_sorgente.py', 'csv/solitone/s5_triangolo.py', 'csv/solitone/stazionarieta_cuore.py', 'csv/solitone/stazionarieta_v3.py', 'csv/solitone/tau_lambda.py', 'csv/solitone/test_protetto.py', 'csv/solitone/tick_lapse.py', 'csv/solitone/u1_e1.py', 'csv/solitone/u1_p1.py', 'csv/solitone/u1_t3f.py', 'csv/solitone/u1_t3g.py', 'csv/solitone/u1_t4.py', 'csv/solitone/u1_t4b.py', 'csv/solitone/u1_t4b_fase.py', 'csv/solitone/u1_t4b_rilettura.py', 'csv/solitone/u1_t4b_sfondo.py', 'csv/solitone/u1_t5.py', 'csv/solitone/zero_nel_nucleo.py'], non committati nessuno
+  DEVE PASSARE: D6 nessuno script fuori da csv/solitone/ importa la libreria                                                         PASSA   []
+    i .py fuori dalla libreria cambiati da 9180fd38: 40 (il nucleo); i tre script vecchi:
+    csv/_livelli_piatti.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_massimo_di_B.py: il blob a 9180fd38 e a HEAD uguali
+    csv/_coppia_di_B.py: il blob a 9180fd38 e a HEAD uguali
+------------------------------------------------------------------------------------------------------------------------------------------------------
+  i tempi: uscite 20 s; protetto 15 s; misure 5 s; vuoto 3 s; respiro 1 s; accensione 7 s; toro 2 s; mappe 2 s; campo 2 s; simmetrica 6 s; bordo 2 s; partenza 2 s
+ESITO: 107/108 controlli passano; fallite: 1 ['DEVE PASSARE: D6 nessun .py della libreria cambiato da 654292f2 a HEAD (escluso collauda.py), e niente di non committato']

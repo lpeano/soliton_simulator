@@ -196,3 +196,14 @@
   - **Il DEVE FALLIRE sull'energia col doppio zero era sbagliato in partenza:** **ERRORE DEL GUARDIANO `n.139`** *(l'energia e' una formula, l'involucro tocca solo il tick)*.
   - **Il doppio zero e' gia' riconosciuto dalla dinamica** *(le `4` chiavi diverse di Z0-F), **e basta.**
   - **Si procede con U4, fermandosi al primo controllo che fallisce.**
+
+## 6. U4, I CONTROLLI (uno alla volta; FERMO al primo che fallisce)
+
+- **Il codice dei controlli PRIMA** *(`6c97a2e3`)*: `conversione_v2.py`; l'assert della testa e R-1 in `corsa_accensione.py`; P3 in `test_protetto.py`; `riproduzione_unificazione.py`.
+- ### **(1) LA SUITE COMPLETA: `67` su `67`** *(dalle `12:30:28` alle `12:43:36`, sull'albero di `6c97a2e3`)*.
+- ### **(2) LA CASSETTA: `107/108`, FALLISCE D6** *(dalle `12:47:30` alle `12:48:42`, a `6c97a2e3`; `doc/referti_l2/unificazione_cassetta.txt`)*:
+  - ### **P3 PASSA con la conversione:** **`mu`, il residuo, `w_in`, `h` AL BIT; `e_K -1.5706823467648499` = il primo pezzo di BG-F-0.15 + `pi` entro `1e-14`; il controllo positivo** *(il legame acceso, `-0.5706823467648499`)* **resta diverso anche convertito.**
+  - ### **FALLISCE D6:** **«nessun `.py` della libreria cambiato da `654292f2` a HEAD»** *(`cambiati ['csv/solitone/__init__.py', 'csv/solitone/b1_profilo.py', 'csv/solitone/b1_raccordo.py', 'csv/solitone/c0_cucitura.py', 'csv/solitone/carta_coppia.py', 'csv/solitone/carta_coppia_ss.py', 'csv/solitone/carta_f1.py', 'csv/solitone/carta_f1_lunga.py', 'csv/solitone/carta_punto_fisso.py', 'csv/solitone/carta_punto_fisso_r.py', 'csv/solitone/confronta_coppia_ra.py', 'csv/solitone/confronta_co ...`)*.
+  - ### **D6 NON dipende dalla fusione:** **da `654292f2`** *(`2026-11-08` `19:00`)* **il principale da solo ha cambiato `26` `.py` di `csv/solitone/`, il laterale `32`** *(`git diff --name-only`, escluso `collauda.py`)*; **l'ultimo referto della cassetta e' `fbccc445` dello stesso giorno.** **D6 fallirebbe anche sul principale di prima: la cassetta e' scaduta su tutti e due i rami.**
+  - ### **FERMO** *(il mandato: al primo controllo che fallisce)*. **`primo-ordine` e' com'era** *(`fca1dd26`)*.
+  - **La proposta, la decisione e' di Luca:** **D6 si riallinea alla libreria del nucleo unificato** *(`LIBRERIA_RIFERITA` = il commit della fusione)*, **un commit a se', con la suite;** **oppure si accetta D6 fallito come scadenza nota e si prosegue con (3).**
