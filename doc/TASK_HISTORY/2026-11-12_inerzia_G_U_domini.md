@@ -480,4 +480,17 @@
   - **In natura una forza VETTORIALE proporzionale alla quantita' di materia corrisponde a una quinta forza sul numero barionico, cercata e non trovata** *(o molto piu' debole della gravita'; da verificare)*.
 - ### **d. IL LEGAME CON LA META LONTANA** *(la ROTTA, «il primo numero puro»)*: **con G e U topologica il numero e' il rapporto fra gravita' ed elettromagnetismo** *(in natura circa `1e-36`)*, **due accoppiamenti che nascono dal reticolo.**
 - **e. Le domande sulla U(1) topologica:** **quelle della sez. `12`** *(a-d)*, **da chiarire PRIMA di qualunque prova.**
+- ### **f. G E LA U NEWTONIANA COME UNA SOLA GRAVITA'** *(IPOTESI: l'idea di Luca `21:03`, un «gravitone» che unisce due forze; la versione del guardiano `21:07`)*:
+  - **Il riferimento:** **il gravitoelettromagnetismo** *(la relativita' generale a campo debole: il pezzo temporale della metrica = il ritmo del tempo, cioe' il lapse; il pezzo misto = un potenziale vettoriale accoppiato alle correnti di massa, il trascinamento dei riferimenti; il pezzo spaziale = la curvatura dello spazio, che raddoppia la deflessione della luce; da verificare)*.
+  - ### **La corrispondenza:** **G <-> il pezzo SCALARE** *(il tempo)*; **la U newtoniana <-> il pezzo VETTORIALE** *(le correnti di materia)*;
+    - ### **il pezzo SPAZIALE** *(la curvatura dello spazio)* **NEL MODELLO MANCA:** **il modello curva solo il tempo, e prevede META' della deflessione della luce** *(gia' annotato a ottobre)*.
+  - ### **LA PROVA che la renderebbe vera:** **G e la U newtoniana dovrebbero avere UNA sola sorgente** *(l'energia e l'impulso)* **e UN solo accoppiamento: il rapporto fra i loro accoppiamenti FISSO, nato dal modello, non scelto.**
+    - **Oggi `rho_c`** *(per G)* **ed `e`** *(per U)* **si scelgono SEPARATAMENTE: e' il segno che non sono ancora unificati.**
+  - ### **LA DIFFERENZA col gravitoelettromagnetismo:**
+    - **la' l'attrazione statica la fa il pezzo scalare e il vettoriale agisce sui corpi in moto;**
+    - **nel mondo con l'inerzia NEGATIVA e' il contrario** *(G respinge, l'attrazione statica la fa U)*;
+    - **con l'inerzia POSITIVA tornerebbe come in relativita'.** **Lo stesso bivio del piano.**
+  - **La U topologica NON entra in questa unione:** **resta la candidata dell'elettromagnetismo** *(due segni, la luce senza carica)*.
+  - ### **In P6** *(sez. `11`)*, **una misura in piu' da registrare nel referto, senza cambiare i bracci:** **il RAPPORTO fra la forza di (G) e quella di (U) alla stessa distanza** *(le accelerazioni nette dei due bracci)*, **con gli accoppiamenti usati** *(`rho_c`, `e`)* **scritti accanto.**
+  - **L'ipotesi resta NON VERIFICATA fino a un mandato che la mette alla prova.**
 - **Tutto resta NON FATTO fino a un mandato che lo avvia.**

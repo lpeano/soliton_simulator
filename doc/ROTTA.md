@@ -64,6 +64,7 @@
   - **se esiste un solitone con inerzia positiva:** **il mondo G + U topologica** *(+ U newtoniana debole o spenta)*;
   - **se no:** **il mondo G + U newtoniana di P6, col problema dell'elettromagnetismo rovesciato scritto accanto.**
 - **E. Le tre forze insieme sulla scelta del bivio; il rapporto fra gli accoppiamenti** *(la meta lontana)*.
+  - **G e la U newtoniana come una sola gravita':** **si verifica cercando un rapporto FISSO fra i loro accoppiamenti che nasca dal modello** *(Luca `21:08`; il documento sull'inerzia, sez. `12.1` f)*.
 - **F. Il passo `5`** *(`Phi` dalla materia, la sorgente l'energia locale)* **resta il passo della ROTTA per G, in tutti e due i mondi.**
 - **Le altre prove gia' in coda** *(il video triplo, le bande piatte, P10, i resti di S5, la taglia doppia)* **restano nella coda come decise: il piano non le cambia.**
 - ### **Tutte le strade restano NON FATTE fino a un mandato che le avvia.**
