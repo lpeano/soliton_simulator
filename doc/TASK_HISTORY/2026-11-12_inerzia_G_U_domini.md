@@ -443,3 +443,19 @@
   - ### **La proposta:** **`lstsq` da' la soluzione di NORMA MINIMA, `E = D^T (D D^T)^+ b`;** **`D D^T` e' il LAPLACIANO del grafo, sparso:** **si risolve `D D^T phi = b`** *(`b` a media nulla)* **e `E = D^T phi`.** **La STESSA soluzione, un altro calcolo.**
   - ### **Il DEVE che lo controlla:** **su un toro piccolo** *(dove `lstsq` gira)* **le due soluzioni uguali entro `1e-10` relativo;** **e a `L 162` il residuo di Gauss nel referto.**
   - **Da confermare da Luca prima del codice.**
+
+## 12. LA U(1) TOPOLOGICA, STRADA ALTERNATIVA *(Luca `20:53`; SOLO SCRITTURA, NON FATTA)*
+
+- ### **L'osservazione di Luca** *(`20:53`)*: **la U(1) di P6 ha la carica = la NORMA** *(un solo segno, proporzionale alla materia)*; **nell'era 1 c'era un altro modo, TOPOLOGICO:** **la carica = il segno del FOGLIO della doppia copertura dello spinore.**
+  - **I riferimenti dell'era 1:** `doc/FISICA_geometria_e_carica.md`, `doc/GEOM_SENZA_VERSO.md` *(`perc_chi = sign(Re <canon(nb) | psi_spinor>)`: `+1` materia, `-1` antimateria; le cariche che generano il campo `B` del passo spinoriale)*.
+- ### **ANALISI del guardiano:**
+  - **con la carica = norma la forza ha la forma NEWTONIANA nel limite lento** *(sez. `3`: l'accelerazione non dipende dal corpo che cade, perche' la carica e' proporzionale alla massa)*;
+  - **con la carica TOPOLOGICA** *(`+-1` per oggetto, quantizzata, indipendente dalla massa)* **la forza somiglia all'ELETTROMAGNETISMO, non alla gravita':** **l'accelerazione dipende dalla massa del corpo; due segni;** **con l'inerzia negativa cariche uguali si attrarrebbero e opposte si respingerebbero.**
+  - ### **IPOTESI:** **le DUE insieme** *(una U(1) dalla norma, una topologica)* **somiglierebbero di piu' al mondo osservato** *(una forza legata alla quantita' di materia, una a una carica quantizzata con due segni)*.
+  - **La doppia copertura e' la stessa cosa della rotazione di `360` gradi** *(la variante d di P6)*.
+- ### **LE DOMANDE DA CHIARIRE PRIMA DI QUALUNQUE PROVA** *(voci aperte)*:
+  - **a. nel nucleo dell'era 2 la doppia copertura esiste?** **La moneta di spin `2 x 2` e' la legge `CAMM-MONETA-SPIN`** *(il codice generato `primo_ordine/termini/camm_moneta_spin.py`; per estremita', `exp(-i eps dtau sigma.n)`)*. **Come si legge il foglio di un solitone** *(quale grandezza, su quali componenti)*? **Da chiarire dal codice, con file e funzione.**
+  - **b. il segno e' una proprieta' STABILE del solitone** *(si conserva nel tempo)* **o cambia?**
+  - **c. come genererebbe un campo** *(quale corrente, quale accoppiamento)* **senza aggiungere costanti nuove?**
+  - **d. il confronto con la U(1) dalla norma: cosa prevede ciascuna per due solitoni UGUALI e per due OPPOSTI.**
+- **La strada resta NON FATTA fino a un mandato che la avvia.**
