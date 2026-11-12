@@ -138,7 +138,7 @@
 | **P3** | **l'inerzia del solo guscio di vuoto:** **il segno e la grandezza rispetto a quella della materia** | **da scrivere** |
 | **P4** | **U da sola, due solitoni lontani** *(lo stato di `C50-0`)*: **U accesa e spenta, la distanza nel tempo** | **da scrivere** |
 | **P5** | **G da sola, due solitoni vicini** *(G2, gia' pronto: `ef4c1c10`)* | **(p1)-(p3) della sez. `32.3` del laterale** |
-| **P6** | **G + U insieme:** **compare una distanza di equilibrio?** | **da scrivere** |
+| **P6** | **G + U insieme:** **compare una distanza di equilibrio?** ### **Le varianti di Luca** *(`15:43`)*: **lo SPIN relativo uguale e opposto; la FASE relativa `0` e `pi`; la distanza di equilibrio e la forza a distanza corta** *(sez. `7.2`)* | **(x1)-(x4), sez. `7.2`** *(da approvare da Luca)* |
 | **P7** | **alte energie:** **un solitone veloce contro uno fermo** *(attrae di piu'?)*; **due coppie in moto parallele e opposte** *(il rapporto delle attrazioni: un quadrato o no?)*; **un'onda del campo U vicino a un solitone** *(si curva?)* | **da scrivere** |
 | **P8** | **la scala di Polyakov** *(la distanza oltre la quale la forma `1/r` cambia)* **e le forze magnetiche alle velocita' del modello** | **da scrivere** |
 | **P9** | **le bande a `Gamma` e un solitone in fondo a una banda a massa positiva** *(i punti B e C del mandato del `2026-11-11` `23:36`)* | **da scrivere** |
@@ -167,6 +167,24 @@
   7. **poi i resti di S5** *(A, lo scarto del `13%`, T-L5)* **con `h_k` corretta.**
 - ### **d. Il motivo, di Luca:** **se dopo P1 e P9 l'inerzia resta negativa, cambia la lettura di G, U e G + U: va saputo PRIMA.**
 - **Le prove registrate restano NON FATTE fino a un mandato che le avvia.**
+
+### 7.2 P6 CON LO SPIN E LA FASE RELATIVI *(Luca `2026-11-12` `15:39`-`15:43`; P6 resta NON FATTA)*
+
+- **L'osservazione di Luca** *(`15:39`)*: **la repulsione da vicino ricorda un principio di esclusione.**
+- **ANALISI del guardiano:**
+  - **il principio di esclusione non e' una forza ma un vincolo di simmetria;**
+  - **nel modello la repulsione vicina verrebbe dal lapse con inerzia negativa** *(un nocciolo duro)*;
+  - **diventa simile a un'esclusione solo se dipende dallo SPIN relativo;**
+  - **e fra onde non lineari la FASE relativa da sola cambia il segno dell'interazione** *(in fase tendono ad attrarsi, in controfase a respingersi)*: **va separata dallo spin.**
+- ### **LE VARIANTI DI P6, decise da Luca:**
+  - **a. due solitoni uguali con lo SPIN relativo uguale e opposto, a fase relativa fissata;**
+  - **b. due solitoni uguali con la FASE relativa `0` e `pi`, a spin relativo fissato;**
+  - **c. per ogni variante: la distanza di equilibrio** *(se c'e')* **e la forza alle distanze corte, dove gli aloni si toccano.**
+- ### **LE LETTURE, scritte PRIMA della misura** *(del guardiano, da far approvare a Luca prima della prova)*:
+  - **(x1) la repulsione vicina dipende dallo spin relativo e non dalla fase: un comportamento simile all'esclusione;**
+  - **(x2) dipende dalla fase e non dallo spin: l'interazione nota delle onde non lineari;**
+  - **(x3) non dipende da nessuna delle due: un nocciolo duro del lapse;**
+  - **(x4) dipende da tutte e due: si separano i contributi.**
 
 ## 8. LE OSSERVAZIONI DEL VIDEO DI G1 COL CAMPO *(guardiano, `14:20`-`15:05`; ANALISI e IPOTESI, non misure del repo salvo dove e' detto)*
 
