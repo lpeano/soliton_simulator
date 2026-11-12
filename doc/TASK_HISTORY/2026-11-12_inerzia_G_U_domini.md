@@ -289,3 +289,54 @@
   - **Nella G1 lunga, accanto a `rho`:** **le `6` `|phi_j|^2` e `dLambda` ogni `100` tick** *(`float32`, come in `e5c4b62b`)*; **nel referto, ogni `500` tick, il profilo dell'anello vecchio nel SOLO semipiano opposto al moto, `R 10`-`22` dalla posizione iniziale della materia: il raggio del minimo, la profondita', il deficit.**
   - ### **LE LETTURE, scritte PRIMA:** **(v1) RESTA: la profondita' entro il `5%` di quella a `2000` tick fino a `5000`; (v2) EVAPORA: cala in modo regolare, con un tempo di vita stimato; (v3) RESIDUO: cala e poi si ferma.**
   - **I criteri:** **DEVE i primi `2000` tick uguali a quelli di `e5c4b62b`** *(`rho` e `|phi_j|^2` entro `1e-6` relativo negli stessi tick)*; **oltre `60 MB` per npz: fermo prima del commit.**
+
+## 10. P1, L'INERZIA DEL SOLITONE INTERO -- **SU CARTA, PRIMA DEL CODICE** *(Luca `2026-11-12` `19:05`; FERMO per l'approvazione di Luca e del guardiano)*
+
+### 10.1 Le premesse dal codice *(con file e funzione)*
+
+- **Lo stato:** **TBS a `10000`** *(lo stato completo del jsonl, controllato con lo `sha`; come G1: `csv/solitone/s5_caduta_solitone.py`)*.
+- **La scena:** **quella di G1** *(`V.scena`, `DC.forma`, `L 81`, `s 0.15`)* **a `N = 1`:**
+  - **il tick di oggi** *(`tick.percorri_tick` con tutto l'ordine, `mot.cs = s`, `mot.lambda_c = None`)*;
+  - **NESSUNA forma (a), nessun gradiente.**
+- **Dove stanno i campi:**
+  - **`psi_h` ha una riga per ESTREMITA' d'arco** *(`(6 n, 2)`: la riga `6 x + 2 k + e`, lo spin nella colonna)*, **e `inc.nodo[riga]` e' il nodo dove l'estremita' sta** *(`csv/solitone/s5_caduta_solitone_componenti.py`, il controllo «una estremita' per `(k, e)`»)*;
+  - **`phi_h` ha la stessa struttura, senza spin** *(`(6 n,)`)*.
+- ### **La spinta:** **una FASE `e^{i k0 . (x - x_c)}` per riga**, **`x` la posizione del nodo dell'estremita'** *(`toro.scarti`, l'immagine piu' vicina)*, **`x_c` il centro della materia** *(`toro.centro`)*.
+  - **Applicata UNA volta allo stato iniziale, PRIMA del primo tick** *(fuori dal tick: il nucleo non si tocca)*.
+  - ### **(i) NUDO:** **solo su `psi_h`** *(tutte e `12` le componenti)*.
+  - ### **(ii) VESTITO:** **su `psi_h` e su `phi_h` insieme.**
+- ### ⚠ **UNA PREMESSA DA DECIDERE** *(Luca)*: **sul toro una fase su TUTTO `phi` e' continua solo se `k0` e' COMMENSURABILE:** **`k0 = m B_0 / L`.**
+  - **Il piu' piccolo e' `|B_0| / L = 0.0896` radianti per unita' di lunghezza** *(lungo `B_0`; il valore di `|grad N| / gamma` in T-L4b)*.
+  - **Per `psi`, che e' localizzato, l'immagine piu' vicina basta; per `phi`, che riempie il toro, no.**
+  - **La proposta:** **`k0 = |B_0| / L` lungo `B_0` per tutti e due i casi** *(lo stesso `k0`, commensurabile)*.
+  - **L'alternativa:** **(ii-b) la fase su `phi` solo dentro il guscio** *(`R < 20` dal centro, con una finestra liscia)*: **non piu' una fase pura sul toro, dichiarata.**
+- **L'ampiezza piccola:** **e' `k0` stesso** *(la fase non cambia la norma)*; **con la banda** *(`eps'' = -0.0592`)* **la velocita' attesa e' `~ eps'' k0 = -0.0053` nodi per tick** *(circa `10` nodi in `2000` tick)*: **misurabile, e lontana dal bordo** *(`L/2 = 40`)*.
+
+### 10.2 Le misure
+
+- **Il centro della materia ogni `20` tick per `2000` tick** *(`toro.centro`)*; **la velocita' iniziale** *(la retta sui primi `200` tick)* **e il suo segno rispetto a `k0`.**
+- **Il centro del buco del vuoto** *(come in `90c00a7f`: `toro.centro` del deficit, `dphi = somma |phi_j|^2 - 6`)*.
+- ### **L'energia che va nella SCIA:** **il deficit FUORI dal corpo** *(la somma di `max(-dphi, 0)` sui nodi a `R > 20` dal centro ATTUALE della materia, dichiarato)*.
+- **E dove va il buco** *(la decisione delle `15:12`)*.
+
+### 10.3 L'anomalia a `N = 1`
+
+- **La stessa scena SENZA spinta** *(`k0 = 0`)* **e' il RIFERIMENTO:** **il suo moto** *(la deriva propria e l'accelerazione `-1.36e-08` di G1)* **si SOTTRAE** *(il centro meno quello del riferimento, tick per tick)*.
+
+### 10.4 Le letture, scritte PRIMA *(per (i) e per (ii))*
+
+- **(pos) il moto nel VERSO di `k0`: inerzia POSITIVA;**
+- **(neg) il moto CONTRO `k0`: inerzia NEGATIVA;**
+- **(zero) nessun moto oltre `3` errori.**
+- ### **La massa efficace:** **`v / k0`** *(per tick, per radiante e per unita' di lunghezza)*, **confrontata con `eps'' = -0.0592` della banda.**
+- ### **Il confronto (i) contro (ii):** **se (ii) cambia il SEGNO rispetto a (i), il vuoto raddrizza l'inerzia** *(l'ipotesi dei domini)*; **se lo stesso segno, no.**
+
+### 10.5 I DEVE
+
+- **`k0 = 0` riproduce il riferimento AL BIT** *(la spinta col fattore `1` esatto)*.
+- **La spinta rovesciata** *(`-k0`)* **rovescia il moto** *(il segno della velocita' netta)*.
+- **DEVE FALLIRE: sul riferimento** *(`k0 = 0`)* **«il moto nel verso di `k0`» oltre `3` errori.**
+
+### 10.6 FERMO
+
+- **Le letture, i criteri e le due premesse** *(`k0` commensurabile; (ii) sul vuoto intero o solo nel guscio)* **li approvano Luca e il guardiano, prima di qualunque codice.**
