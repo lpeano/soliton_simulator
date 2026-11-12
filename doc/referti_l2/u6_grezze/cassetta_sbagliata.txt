@@ -1,0 +1,62 @@
+[U6] la forma sbagliata: flussi_parziali._alfa_beta ab_sb, _hop_psi_mezzo _hop_psi_mezzo, _hop_phi_mezzo _hop_phi_mezzo
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] uscite.py  sha1-BYTE 78055413  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] misure.py  sha1-BYTE 05af8f3b  committato e pulito
+[TIMBRO] vuoto.py  sha1-BYTE 2b504206  committato e pulito
+[TIMBRO] respiro.py  sha1-BYTE ff649423  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] campo.py  sha1-BYTE 2acee7a0  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] partenza.py  sha1-BYTE 7e744e24  committato e pulito
+[TIMBRO] test_uscite.py  sha1-BYTE 980b590e  committato e pulito
+[TIMBRO] test_protetto.py  sha1-BYTE 82414364  committato e pulito
+[TIMBRO] test_misure.py  sha1-BYTE 3011e387  committato e pulito
+[TIMBRO] test_vuoto.py  sha1-BYTE 7fb138df  committato e pulito
+[TIMBRO] test_respiro.py  sha1-BYTE 810ee3ff  committato e pulito
+[TIMBRO] test_accensione.py  sha1-BYTE 4e204147  committato e pulito
+[TIMBRO] test_toro.py  sha1-BYTE 2b3cf382  committato e pulito
+[TIMBRO] test_mappe.py  sha1-BYTE b56209c1  committato e pulito
+[TIMBRO] test_campo.py  sha1-BYTE c5c0a3d9  committato e pulito
+[TIMBRO] test_simmetrica.py  sha1-BYTE 63cefa24  committato e pulito
+[TIMBRO] test_bordo.py  sha1-BYTE 38a247e6  committato e pulito
+[TIMBRO] test_partenza.py  sha1-BYTE 6da26dfb  committato e pulito
+[TIMBRO] collauda.py  sha1-BYTE cc5c3087  committato e pulito
+======================================================================================================================================================
+LA CASSETTA DEGLI ATTREZZI DEL SOLITONE (Luca 01:22): csv/solitone/ (uscite, protetto, misure); i test ridanno AL BIT i numeri gia' committati
+  LE LETTURE DI LUCA, SCRITTE PRIMA: (t1) ogni modulo rida' al bit i numeri committati; (t2) un modulo non li rida': quale, perche'
+======================================================================================================================================================
+### LE USCITE (csv/solitone/uscite.py)
+  DEVE PASSARE: le costanti = quelle degli strumenti (GRUPPI, W, TOLL_RES_REL, Omega a s 0.15)                                       PASSA   
+  DEVE PASSARE: U1 e05 (eps 0.5), E0, le bande e le 24 uscite = previsioni.json AL BIT                                               ### FALLISCE   E0 +3.178178; diverse ['(c0) A + A', '(c0) A + B', '(c1) A + A', '(c1) A + B', '(c2) A + A', '(c2) A + B', '(n0) mu in A', '(n1) P0', '(n1) Ppi', '(n2) P0 + P0', '(n2) P0 + Ppi', '(n2) Ppi + Ppi', '(n2-misto) P0 + A', '(n2-misto) P0 + B', '(n2-misto) Ppi + A', '(n2-misto) Ppi + B', '(n3) P0 + P0 + P0', '(n3) P0 + P0 + Ppi', '(n3) P0 + Ppi + Ppi', '(n3) Ppi + Ppi + Ppi']
+  DEVE PASSARE: U1 e05, le aperte e il margine = previsioni.json                                                                     PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e05 con g spostato di 1e-3, le uscite = previsioni.json                                                           PASSA   
+  DEVE PASSARE: U1 e0 (eps 0), E0, le bande e le 24 uscite = previsioni.json AL BIT                                                  ### FALLISCE   E0 +3.141593; diverse ['(c0) A + A', '(c0) A + B', '(c1) A + A', '(c1) A + B', '(c2) A + A', '(c2) A + B', '(n0) mu in A', '(n1) P0', '(n1) Ppi', '(n2) P0 + P0', '(n2) P0 + Ppi', '(n2) Ppi + Ppi', '(n2-misto) P0 + A', '(n2-misto) P0 + B', '(n2-misto) Ppi + A', '(n2-misto) Ppi + B', '(n3) P0 + P0 + P0', '(n3) P0 + P0 + Ppi', '(n3) P0 + Ppi + Ppi', '(n3) Ppi + Ppi + Ppi']
+  DEVE PASSARE: U1 e0, le aperte e il margine = previsioni.json                                                                      PASSA   (c1) B + B -1.0000
+  DEVE FALLIRE: U1 e0 con g spostato di 1e-3, le uscite = previsioni.json                                                            PASSA   
+  DEVE PASSARE: U2 eps 0, mu -0.56602: (n2) P0 + Ppi = la riga di chiudere_le_uscite.txt                                             PASSA   0.00955
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\u6_coefficienti.py", line 192, in <module>
+    sys.exit(esegui(forma, a[i + 1], a[i + 2:]))
+             ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\u6_coefficienti.py", line 110, in esegui
+    runpy.run_path(script, run_name="__main__")
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "csv/solitone/collauda.py", line 192, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "csv/solitone/collauda.py", line 149, in main
+    test_uscite.gira(esito)
+    ~~~~~~~~~~~~~~~~^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\test_uscite.py", line 56, in gira
+    sp, res = U.stato_nella_scena(z, phi0, psi, mu, LP.S, LP.FORMA, res_reg)
+              ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\solitone\uscite.py", line 124, in stato_nella_scena
+    assert abs(r / res_registrato - 1.0) < TOLL_RES_REL, "i pesi della scena NON sono quelli dello stato: il residuo %.6e contro il registrato %.6e" % (r, res_registrato)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: i pesi della scena NON sono quelli dello stato: il residuo 1.686450e-10 contro il registrato 1.685968e-10

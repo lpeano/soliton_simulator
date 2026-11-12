@@ -1,0 +1,8 @@
+[U6] la forma k3: flussi_parziali._alfa_beta _alfa_beta, _hop_psi_mezzo hp_k3, _hop_phi_mezzo hf_k3
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] _triangoli_bassa_energia.py  sha1-BYTE 896d5ff2  committato e pulito
+scritto C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/u6/tbs_k3.npz: TBS da 10000, 1000 tick; M 996833.6466838818, tot 8285150.979617709, d nan, e_K -1.5706823467648499
+[U6] la forma k3: 1000 tick in 67.9 s

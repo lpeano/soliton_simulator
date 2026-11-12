@@ -1,0 +1,19 @@
+[TIMBRO] u6_coefficienti.py  sha1-BYTE fcbf9964  committato e pulito
+==================================================================================================================================
+U6, LE FORME DEI COEFFICIENTI SUL BANCO (la carta: il task history dell'unificazione, sez. 8): oggi, k1, k2, k3, sbagliata; le uscite in C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad/u6
+==================================================================================================================================
+  la forma   la deriva Lambda/tick    la rms di rho vs oggi  sha = oggi     s per tick   cassetta  
+  oggi       +3.7133e-16              0.000e+00            True           0.0769          107/108
+  k1         -2.2933e-15              9.902e-13            False          0.0739          99/108
+  k2         +3.7133e-16              0.000e+00            True           0.0573          107/108
+  k3         -2.0800e-17              4.439e-13            False          0.0679          99/108
+  sbagliata  +7.9733e-12              7.973e-09            False          0.0641          ?
+----------------------------------------------------------------------------------------------------------------------------------
+  LA LETTURA (k1): la deriva NON curata; la fisica uguale entro l'arrotondamento (rms <= 1e-10); la cassetta 99/108; il tempo 0.96 volte oggi
+  LA LETTURA (k2): la deriva NON curata; la fisica uguale entro l'arrotondamento (rms <= 1e-10); la cassetta 107/108; il tempo 0.75 volte oggi
+  LA LETTURA (k3): la deriva CURATA (sotto 1e-17 o col segno cambiato senza crescere); la fisica uguale entro l'arrotondamento (rms <= 1e-10); la cassetta 99/108; il tempo 0.88 volte oggi
+  DEVE FALLIRE: la forma sbagliata: la deriva entro 100 volte quella di oggi (deve essere VISIBILE, oltre)               ### FALLISCE   +7.973e-12 contro +3.713e-16
+  M-B1: NON misurato sul banco (lancia sottoprocessi su alberi materializzati; l'avvolgimento in memoria non ci arriva): sulla forma scelta da Luca, in un albero temporaneo
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite: 0 []
+### FERMO: la scelta della forma e' di Luca, sui numeri.

@@ -25464,3 +25464,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **Il laterale archiviato col tag `laterale-archiviato` (`986440d6`); nessun commit sul ramo `zero-nel-nucleo` dopo U5** *(Luca: un commit farebbe divergere la punta dal tag; la nota solo qui e nella ROTTA)*.
 - **Registrata, DOPO U6:** **la prova delle bande piatte sul buco del vuoto** *(il documento sull'inerzia, in fondo; le letture (b1)-(b3) scritte prima)*.
+
+### 2026-11-12 18:20 -- U6: LE USCITE GREZZE DELLE MISURE, COME SONO STATE SCRITTE *(Luca `18:13`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- **`doc/referti_l2/u6_grezze/`:** **le uscite delle misure di U6** *(dalle `17:33:05` alle `17:54:29`, a `fd9bb653`)* **copiate al byte dallo scratchpad:**
+  - **T1, la cassetta e i `1000` tick di TBS per `oggi`, `k1`, `k2`, `k3`, `sbagliata`;**
+  - **`confronto_vecchio.txt`, il confronto col codice di `fd9bb653`** *(la soglia `1e-17`)*.
+- **Poi:** **la correzione del confronto** *(un commit a se')* **e il confronto rifatto, il vecchio e il corretto uno accanto all'altro.**
