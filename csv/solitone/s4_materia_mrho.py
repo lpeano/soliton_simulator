@@ -370,7 +370,14 @@ def main():
                             if dia is None:
                                 tolti.add((rho0, ra, s))
                                 continue
-                        basi[(rho0, ra, s)] = base(rho0, legge)
+                        try:
+                            basi[(rho0, ra, s)] = base(rho0, legge)
+                        except AssertionError as ex:
+                            if not LAPSE2:
+                                raise
+                            print("    ### il punto (rho_0 %g, rapporto %g, s %g): la BASE non si costruisce (il punto fisso di cs del tick non converge): si TOGLIE dalla mappa (dichiarato): %s" % (rho0, ra, s, str(ex)[:150]))
+                            tolti.add((rho0, ra, s))
+                            continue
                         stampa_base("rho_0 %g, rho_0/rho_c %g, s %g, M-rho" % (rho0, ra, s), basi[(rho0, ra, s)])
                         basi[(rho0, ("cong", ra), s)] = base(rho0, ("cost", basi[(rho0, ra, s)]["cs0"]), psi_dato=basi[(rho0, ra, s)]["psi"] if V2 else None)
                         if V2:
