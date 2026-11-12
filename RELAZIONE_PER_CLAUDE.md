@@ -25429,3 +25429,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - ### **C35-pi da `60000` e TBS da `10000`, `1000` tick, il nucleo vecchio e l'unificato:** **`rho` e gli sha di ogni chiave AL BIT;** **la norma e la distanza della coppia uguali;** **l'energia convertita entro `1.1e-16`;** **senza conversione fallisce** *(come deve)*.
 - **In corsa:** **(6) il banco a `N = 1` e T1 della U(1); accanto, G1 con le componenti** *(lo script a `f6a044c2`)*.
+
+### 2026-11-12 15:50 -- G1 CON LE COMPONENTI E IL VUOTO: `11/11` *(Luca `14:55`, `15:08`; SOLO NUMERI)* [[PUNTO-FISSO-CS-SOLITONE]] [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/campo_g1_componenti/`** *(lo script a `f6a044c2`, dalle `15:41:57` alle `15:47:41`)*: **`g1_comp_gamma000.npz` `23.13 MB`, `g1_comp_gamma020.npz` `23.15 MB`; `referto.txt`.**
+- **Le componenti:** **`c = 2 (2 k + e) + sigma`;** **l'arco `k = 0, 1, 2` a `0`, `120`, `60` gradi;** **`e` l'estremita';** **`sigma` lo spin del nucleo.**
+- **I DEVE:** **la somma delle `12` = `rho` di `fc96390e` entro `9.7e-08` e `8.6e-08`;** **il centro entro `7e-15`;** **la norma costante;** **le sole prime `11` falliscono come devono.**
+- **Le frazioni della norma** *(nel referto, a `0`, `1000`, `1800`, `2000` tick)*: **solo numeri, nessuna lettura.**
