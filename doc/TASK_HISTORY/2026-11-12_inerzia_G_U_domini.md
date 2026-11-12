@@ -394,3 +394,25 @@
 
 - **Le varianti di spin, fase e rotazione** *(sez. `7.2`)* **restano per dopo il primo esito.**
 - **FERMO: le scelte e le letture le approvano Luca e il guardiano.**
+
+### 11.7 P6 APPROVATA, CON LE CORREZIONI DI LUCA *(`2026-11-12` `20:36`)*
+
+1. ### **Il DEVE di (0):** **o gli sha della dinamica AL BIT** *(come R-1)* **o le mappe ENTRO la loro precisione** *(come G2, `1e-5`)*, **dichiarato; NON «al bit contro le mappe».**
+   - **La scelta per il codice:** **gli sha della dinamica al bit contro (0) rifatto** *(il braccio (0) gira due volte)*, **e accanto le mappe di C35-pi entro `1e-5`.**
+2. ### **DEVE PASSARE: (0) contro (0) rifatto, l'accelerazione relativa entro `3` errori.**
+   - ### **DEVE FALLIRE: sul braccio (0) un'accelerazione FINTA aggiunta a `d(t)`** *(una parabola dichiarata, dell'ordine atteso per (U))* **DEVE essere rilevata dal fit.**
+   - **Il vecchio «(G+U) diverso da (0)» resta come CONTROLLO, non come DEVE FALLIRE.**
+3. ### **La misura in piu':** **(G+U) - (0) contro [(G) - (0)] + [(U) - (0)]: la differenza e il suo errore** *(se i due campi si parlano)*.
+4. ### **Prima della corsa, scritto: l'ordine di grandezza atteso dell'accelerazione di (U)** *(la sez. `3`: `a = e^2 N / (2 pi mu d)`)*, **e nel referto il rapporto misurato / atteso.**
+   - **I numeri** *(da uno script sui referti, non ricopiati)*:
+     - **`e* = 1.305499e-02`** *(`doc/referti_l2/u1_t3b.txt`)*;
+     - **`d = 37.4288`, `N = M/2 = 9.954e+05`** *(`doc/referti_l2/unificazione_riproduzione.txt`)*;
+     - **`mu = 1/|eps''| = 16.88`** *(`eps'' = -0.05924`, T-L4b; una STIMA, dichiarata)*.
+   - ### **L'atteso: `a = 4.27e-02` nodi per tick^2.**
+   - ### ⚠ **E' ASSURDO PRESO ALLA LETTERA:** **in `1000` tick darebbe `2.1e+04` nodi** *(il toro e' `L 162`)*.
+     - **O le unita' della U(1)** *(il campo `E` per arco, `e`, il tempo in tick o in `s`)* **non sono quelle che ho supposto;**
+     - **o il solitone non si muove come un punto di massa `mu N` con la carica `N`.**
+     - ### **Lo scrivo PRIMA, cosi': il rapporto misurato / atteso del referto dira' di quanto.**
+   - **La parabola finta del DEVE FALLIRE: «dell'ordine atteso per (U)» con questo atteso sarebbe enorme e banale da rilevare;** ### **la proposta: l'accelerazione finta = `3` errori del fit di (0)** *(il piu' piccolo che il fit DEVE vedere)*, **dichiarata** *(da confermare da Luca)*.
+- **Il resto della sez. `11` come scritto:** **`e*` di T3, non compatta; `rho_c` come G2; C35-pi a `60000`; fino a `5000` tick o il tetto di `60` minuti per braccio.**
+- **Codice prima, poi i bracci UNO ALLA VOLTA dopo G2; commit e push dopo ogni braccio.**
