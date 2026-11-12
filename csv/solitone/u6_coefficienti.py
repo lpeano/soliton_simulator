@@ -35,7 +35,7 @@ import solitone  # noqa: E402,F401  (i percorsi)
 
 FORME = ("oggi", "k1", "k2", "k3", "sbagliata")
 SBAGLIO = 1e-12                # ### il DEVE FALLIRE (la carta, sez. 8.2)
-SOGLIA_CURA = 1e-17            # ### la carta, sez. 8.4: la deriva relativa per tick sotto 1e-17
+SOGLIA_CURA = 3.7e-17          # ### Luca 17:37 (sez. 8.5): un decimo della deriva di oggi (3.7e-16 relativa); la carta diceva 1e-17, un errore mio
 SOGLIA_FISICA = 1e-10          # ### la carta, sez. 8.4: la rms di rho relativa
 VISIBILE = 100.0               # ### mio (dichiarato): «visibile» = oltre 100 volte la deriva di oggi
 LAMBDA_V = 6.0                 # ### Lambda del vuoto F3 per nodo (T1: «Lambda 6»)
@@ -167,13 +167,14 @@ def confronta(cart):
     for f in ("k1", "k2", "k3"):
         r = ris[f]
         cura = abs(r["deriva"]) < SOGLIA_CURA or (r["deriva"] * o["deriva"] < 0 and abs(r["deriva"]) <= abs(o["deriva"]))
-        print("  LA LETTURA (%s): la deriva %s; la fisica %s; la cassetta %s; il tempo %.2f volte oggi" % (
-            f, "CURATA (sotto %g o col segno cambiato senza crescere)" % SOGLIA_CURA if cura else "NON curata",
+        print("  LA LETTURA (%s): la deriva %s (il rapporto con oggi %+.4f); la fisica %s; la cassetta %s; il tempo %.2f volte oggi; M-B1 non verificato in memoria" % (
+            f, "CURATA (sotto %g o col segno cambiato senza crescere)" % SOGLIA_CURA if cura else "NON curata", r["deriva"] / o["deriva"],
             "CAMBIATA oltre l'arrotondamento (rms > %g)" % SOGLIA_FISICA if r["rms"] > SOGLIA_FISICA else "uguale entro l'arrotondamento (rms <= %g)" % SOGLIA_FISICA,
             r["cassetta"], r["tempo"] / o["tempo"]))
     sb = ris["sbagliata"]
     esito("la forma sbagliata: la deriva entro %g volte quella di oggi (deve essere VISIBILE, oltre)" % VISIBILE, abs(sb["deriva"]) <= VISIBILE * abs(o["deriva"]),
           "%+.3e contro %+.3e" % (sb["deriva"], o["deriva"]), deve=False)
+    print("  la cassetta: D6 FALLISCE in tutte le forme, OGGI compresa (dal riferimento 6c97a2e3 sono entrati nella libreria script nuovi): il confronto fra le forme e' rispetto a oggi; la forma sbagliata la interrompe")
     print("  M-B1: NON misurato sul banco (lancia sottoprocessi su alberi materializzati; l'avvolgimento in memoria non ci arriva): sulla forma scelta da Luca, in un albero temporaneo")
     print("=" * 130)
     print("ESITO: %d/%d controlli come devono; fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
