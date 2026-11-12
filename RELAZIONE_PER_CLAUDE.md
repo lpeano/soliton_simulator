@@ -25341,3 +25341,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **l'ipotesi dei domini** *(la parola di Luca delle `10:58`)*;
   - **le prove P1-P10, dopo l'unificazione.**
 - **Scritto sul `primo-ordine`:** **l'unificazione e' a U0** *(nessun tag, nessun ramo `unificazione`, nessun merge in corso)*; **resta in attesa della conferma di Luca su U0.**
+
+### 2026-11-12 11:40 -- LA META LONTANA: IL PRIMO NUMERO PURO *(Luca `11:09`-`11:16`; SOLO SCRITTURA)* [[PIANO-2D-3D]]
+
+- **In `doc/ROTTA.md`, dopo il passo `5`** *(non un passo con una data)*:
+  - **non la `G` in unita' di misura, che con la scelta delle unita' viene qualunque** *(un'analisi del guardiano)*;
+  - **ma il RAPPORTO fra le due forze a lunga portata, un numero puro;**
+  - **i quattro pezzi che servono;**
+  - **i numeri interni di oggi.**
+- **La voce `42` della MAPPA.**
+- **Scritto sul `primo-ordine`** *(l'unificazione e' ancora a U0, in attesa della conferma di Luca)*.

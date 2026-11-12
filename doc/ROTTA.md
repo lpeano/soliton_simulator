@@ -15,6 +15,24 @@
 
 > ### **PASSO 5, DECISIONE DI LUCA (`2026-11-11` `13:29`): LA SORGENTE DI `Phi` E' L'ENERGIA LOCALE, non la densita' di materia.** **Come nella relativita' generale, gravita l'energia: anche il vuoto, se ha energia, gravita, e la sua energia fa da costante cosmologica.** ### **Conseguenza: lo ZERO dell'energia (O1 o O4) diventa fisico e va scelto PRIMA del passo 5.** **Le misure che servono a sceglierlo: il triangolo** *(S5.0 (e), il segno di `h_k` nel solitone per ciascuno zero)* **e la caduta** *(T-L4, il verso per ciascuno zero)*. **La scelta dello zero resta di Luca.**
 
+## META LONTANA: IL PRIMO NUMERO PURO *(Luca `2026-11-12` `11:09`-`11:16`; NON e' un passo con una data: nessun lavoro ora)*
+
+- ### **LA DOMANDA** *(Luca, `11:09`-`11:16`)*: **se dal modello emergesse la `G` osservata.**
+- ### **IL CHIARIMENTO** *(ANALISI del guardiano)*:
+  - **`G` ha le unita' di misura** *(`m^3 kg^-1 s^-2`)*; **nel modello esce in unita' di reticolo.**
+  - **Per confrontarla bisogna scegliere quanto valgono un passo, un tick e un'unita' di norma:** **con quelle scelte si ottiene QUALUNQUE `G`** *(con le unita' di Planck viene giusta per definizione)*.
+  - ### **Non e' una previsione.** **Cio' che puo' EMERGERE davvero sono i NUMERI PURI.**
+- ### **IL NUMERO:** **il rapporto fra l'intensita' della forza che attrae tutto e quella della forza che distingue le cariche.** **In natura, fra due protoni, la gravita' e' `~1e-36` volte la repulsione elettrica** *(il «problema della gerarchia», aperto)*.
+- **I PEZZI CHE SERVONO, in ordine:**
+  1. **M-Phi** *(il passo `5`)*: **G con una legge a lunga portata e una sua costante;**
+  2. **una costante della `U(1)` che venga dal MODELLO e non da una scelta** *(oggi `e` e' fissata all'`1%` dell'energia del solitone)*;
+  3. **le due forze DISTINTE e presenti insieme** *(se la gravita' fosse la `U(1)` con l'inerzia rovesciata, mancherebbe la seconda forza)*;
+  4. **le `3+1` dimensioni** *(in `2+1` le leggi delle forze sono diverse e i rapporti non si confrontano direttamente)*.
+- ### **QUANDO SI POTRA' CONTARE:** **con (1), (2) e (3), anche in 2D, il rapporto delle costanti delle due leggi a lunga portata e' un numero puro del modello: il PRIMO che abbia senso confrontare con la natura.**
+- **OGGI SI CONTANO SOLO NUMERI INTERNI** *(utili per capire il modello, non per la natura)*:
+  - **l'energia della `U(1)` rispetto al solitone** *(`~1%`, una scelta)*;
+  - **la forza del lapse con la forma (a) rispetto a quella con l'energia piena** *(`~1/670`, T-L4b)*.
+
 **Dove sono le cose:** S0-S2 nella sez. `28` del task history del laterale; **M-rho e M-Phi** *(proposte del guardiano sull'osservazione di Luca delle `19:44`)* nella sez. `29`; **le note sulla gravita'** in `doc/TASK_HISTORY/2026-11-09_gravita_note_di_progetto.md`; **il piano 2D -> 3D** in `doc/PIANO_2D_3D.md`.
 
 **Lo storico delle decisioni di Luca su questo file:**
