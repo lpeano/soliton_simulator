@@ -25521,3 +25521,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **I rapporti fra ampiezze consecutive: `0.959`, `0.904`, `0.858`:** **il calo ACCELERA.** **La lettura coi criteri scritti: caso intermedio** *((p1) chiedeva ogni rapporto sotto `0.95`; il primo e' `0.959`)*.
 - ### **L'anello vecchio si SVUOTA:** **la profondita' da `-4.47`** *(`2000`)* **a `-1.00`** *(`14000`)*, **il deficit da `1228` a `842`;** **la materia ripassa vicino all'anello verso `6000`-`7000` tick** *(un fatto da tenere accanto)*.
 - **Da leggere da Luca.**
+
+### 2026-11-12 23:30 -- P6, LA PROVA BREVE DI (U): `6/6`; (b1) SI AVVICINANO, IL RAPPORTO MISURATO / ATTESO `0.0178`; IL CAMPO NON CRESCE; FERMO PER I BRACCI *(Luca `22:52`)* [[PIANO-2D-3D]]
+
+- **Il referto `doc/referti_l2/p6_u_breve.txt`** *(lo script a `f3f9d8c5`, dalle `23:18:33` alle `23:21:57`)*: ### **`6/6` controlli come devono; il FERMO NON e' scattato.**
+- **P0:** **`e` ricalcolato dai referti `6.3154143e-05` = la decisione alle `7` cifre.**
+- **P1, Gauss sul toro `L 24`:** **la sparsa = `lstsq` entro `1.429e-14`;** **la stessa piu' un rotore soddisfa Gauss** *(`2.077e-14`)* **ma dista da `lstsq` `1.063e-06`: il DEVE FALLIRE fallisce per la chiave giusta.**
+- **P2:** **il residuo di Gauss iniziale a `L 162`: `|D E - b| / |b|` `1.329e-12`, `max` `2.582e-11`;** **`d0` `37.569220`; l'atteso `d'' = -2 a = -1.992522e-06` per tick^2.**
+- **P3:** **(0) contro le mappe di C35-pi a `60100` e `60200`: `8.728e-09`.** **P4:** ### **(U) a `e = 0` = (0) AL BIT** *(gli sha di ogni chiave)*; **col suo `e` cambiano `Lambda`, `phi_h`, `psi_h`, `rho`.**
+- ### **P6, LA LETTURA (b1): SI AVVICINANO.** **`d_U - d_0` scende come una parabola** *(`-1.783e-04` a `100` tick, `-7.104e-04` a `200`: il rapporto `3.985`, quasi `4`)*; **`d''` in piu' `-3.538e-08 +- 2.3e-11` per tick^2** *(`1528` errori)*.
+  - ### **IL RAPPORTO MISURATO / ATTESO: `0.0178`** *(l'attrazione e' `56` volte PIU' DEBOLE della formula della sez. `3`)*. **Il verso e' quello scritto; la grandezza no.**
+  - **Le cause possibili, NON verificate** *(guardiano, IPOTESI)*: **`mu` e' la curvatura della banda di un pacchetto** *(la condizione (c2) della sez. `3`: il segno e la grandezza di `mu` sul solitone INTERO non sono misurati)*; **la carica efficace puo' non essere tutta la norma** *(la parte del solitone che si muove insieme)*; **il potenziale `ln r` sul toro `L 162` con lo sfondo neutralizzante non e' quello del piano infinito.**
+- **Il campo:** ### **`K + V` da `22.51599` a `22.50493`** *(`-4.9e-04` relativo; NON cresce)*; **`max |e B|` circa `7e-09` rad;** **`M_U / M_0 - 1` fino a `3.2e-11`;** **`max rho` fra `2.75e3` e `2.94e3`** *(come (0))*.
+- **L'energia della materia `tot`:** **la differenza da (0) oscilla fra `-0.073` e `+0.174` su `1.6535e+07`.**
+- ### **Gauss nel tempo:** **sul bordo `|G - G0| / (e max rho0)` fino a `1.44e-06`** *(l'assorbimento toglie materia senza corrente, come scritto nella sez. `11.12`)*; **fuori dal bordo fino a `7.32e-08`, e cresce in modo lineare.**
+  - ### **La causa, dai numeri** *(da uno script)*: **il bordo toglie `dM = 5.3564` di norma in `200` tick, e la media di `rho` nel termine `e (rho - media rho)` si sposta di `(dM / n) / max rho0 = 7.323e-08`: lo stesso numero.** **Fuori dal bordo Gauss NON si rompe: e' lo sfondo neutralizzante che segue la norma tolta dal bordo.**
+- **I nodi «sul bordo»** *(`g_e > 0` su un'estremita')*: **`18056` su `26244`** *(l'assorbimento e' graduale e copre la maggior parte del toro)*.
+- **Il costo:** **(U) `0.299` s per tick** *((0) `57` s per `200` tick, (U) `60` s)*.
+- ### **FERMO: i bracci aspettano l'approvazione di Luca** *(la decisione `22:52`, `2`)*.

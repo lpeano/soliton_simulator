@@ -1,0 +1,66 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] mappe.py  sha1-BYTE a1f55857  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 8daeb4da  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+==================================================================================================================================
+P6, LA PROVA BREVE DI (U) (sez. 11.9, 11.12): lo stato di C35-pi a 60000; 200 tick, d ogni 10; il campo noncompatto, E da Gauss (lo sfondo neutralizzante -e media rho, DICHIARATO)
+==================================================================================================================================
+### P0: d 37.428756, N = M/2 9.954135e+05 (unificazione_riproduzione.txt); eps'' -5.923495e-02, mu = 1/|eps''| 16.881925 (s5_caduta_segno.txt); e = sqrt(a 2 pi mu d / N) con a 1e-06: 6.3154143e-05; la decisione 6.3154140e-05
+  DEVE PASSARE: P0: e ricalcolato dai referti = la decisione 6.315414e-05 alle 7 cifre                                   PASSA   6.3154143e-05
+### P1, il toro L 24 (seme 0): max|E_sparsa - E_lstsq| / max|E_lstsq| 1.429e-14; il residuo di Gauss della sparsa max|D E - b| / max|b| 2.077e-14
+  DEVE PASSARE: P1: la soluzione di Gauss sparsa = lstsq denso entro 1e-10 relativo (toro L 24)                          PASSA   1.429e-14
+    la stessa piu' un rotore (1e-06 della norma): il residuo di Gauss 2.077e-14 (Gauss resta vera), lo scarto da lstsq 1.063e-06
+  DEVE PASSARE: P1: la chiave del DEVE FALLIRE: la stessa piu' un rotore soddisfa Gauss entro 1e-10                      PASSA   2.077e-14
+  DEVE FALLIRE: P1: la stessa piu' un rotore (Gauss vera, NON di norma minima) = lstsq entro 1e-10                       ### FALLISCE   1.063e-06
+### P2: a t 60000 d0 37.569220 (i semipiani); L 162, 26244 nodi (18056 sul bordo); e_K -1.5706823468; M 1.990852e+06, max rho 2.787236e+03
+    L'ATTESO (sez. 3, sez. 11.12): a di un corpo = e^2 N / (2 pi mu d0) = 9.962611e-07; d'' = -2 a = -1.992522e-06 per tick^2 (alla d della decisione, 37.428756: a 9.999999e-07)
+### P3 (0): 200 tick in 57 s; d da 37.569220 a 37.555567
+### P4 (U) a e = 0: 200 tick in 61 s; d da 37.569220 a 37.555567
+### P5 (U) a e 6.3154140e-05: 200 tick in 60 s (0.299 s per tick); d da 37.569220 a 37.554857
+----------------------------------------------------------------------------------------------------------------------------------
+  (0) contro le mappe di C35-pi: 2 tick comuni [np.int64(60100), np.int64(60200)], lo scarto piu' grande di d 8.728e-09
+  DEVE PASSARE: P3: (0) ridà C35-pi: d dalle mappe alla stessa ora entro 1e-05                                           PASSA   8.728e-09 su 2 tick
+  DEVE PASSARE: P4: (U) a e = 0 riproduce (0) AL BIT: gli sha di ogni chiave dello stato a 60200                         PASSA   diverse: []
+  controllo: (U) col suo e cambia lo stato (gli sha diversi da (0)): ['Lambda', 'phi_h', 'psi_h', 'rho']
+----------------------------------------------------------------------------------------------------------------------------------
+### P5, IL RESIDUO DI GAUSS INIZIALE a L 162: |D E - b| / |b| 1.329e-12; max|D E - b| / max|b| 2.582e-11
+### P5, ogni 10 tick: d_U, d_U - d_0, K + V del campo, l'energia della materia (tot; e la differenza da (0)), M_U / M_0 - 1, V, max rho, max|e B|, Gauss |G - G0| / (e max rho0) fuori e sul bordo
+    t  60000  d 37.569220  dd +0.0000e+00  K+V 2.251599e+01  E_mat 1.6535113140e+07 (+0.0000e+00)  M +0.000e+00  V 1.510027e+05  rmax 2.7872e+03  eB 0.000e+00  G 0.00e+00 / 0.00e+00
+    t  60010  d 37.569148  dd -1.8649e-06  K+V 2.251288e+01  E_mat 1.6534994588e+07 (+2.3299e-02)  M +5.773e-15  V 1.510024e+05  rmax 2.7553e+03  eB 3.714e-09  G 3.80e-09 / 1.96e-07
+    t  60020  d 37.568146  dd -7.1461e-06  K+V 2.251431e+01  E_mat 1.6535114837e+07 (+1.1616e-02)  M +4.441e-14  V 1.510021e+05  rmax 2.7956e+03  eB 3.644e-09  G 7.62e-09 / 3.73e-07
+    t  60030  d 37.567649  dd -1.6140e-05  K+V 2.251375e+01  E_mat 1.6534981320e+07 (+8.3220e-03)  M +1.457e-13  V 1.510019e+05  rmax 2.8160e+03  eB 3.715e-09  G 1.15e-08 / 5.06e-07
+    t  60040  d 37.566751  dd -2.8553e-05  K+V 2.251551e+01  E_mat 1.6535201578e+07 (+2.1562e-02)  M +3.375e-13  V 1.510016e+05  rmax 2.8580e+03  eB 4.811e-09  G 1.53e-08 / 6.09e-07
+    t  60050  d 37.566799  dd -4.4685e-05  K+V 2.251037e+01  E_mat 1.6534893883e+07 (+4.0105e-02)  M +6.470e-13  V 1.510013e+05  rmax 2.8931e+03  eB 5.402e-09  G 1.91e-08 / 7.12e-07
+    t  60060  d 37.565465  dd -6.4238e-05  K+V 2.251398e+01  E_mat 1.6535191873e+07 (-4.0236e-04)  M +1.096e-12  V 1.510011e+05  rmax 2.9142e+03  eB 6.324e-09  G 2.29e-08 / 7.99e-07
+    t  60070  d 37.565157  dd -8.7480e-05  K+V 2.251159e+01  E_mat 1.6534906085e+07 (+3.1806e-02)  M +1.710e-12  V 1.510008e+05  rmax 2.9430e+03  eB 6.611e-09  G 2.67e-08 / 8.63e-07
+    t  60080  d 37.564181  dd -1.1413e-04  K+V 2.251400e+01  E_mat 1.6535233811e+07 (+2.7516e-02)  M +2.508e-12  V 1.510005e+05  rmax 2.8979e+03  eB 6.605e-09  G 3.05e-08 / 9.15e-07
+    t  60090  d 37.564164  dd -1.4451e-04  K+V 2.250822e+01  E_mat 1.6534853339e+07 (+7.4966e-02)  M +3.508e-12  V 1.510003e+05  rmax 2.8640e+03  eB 7.084e-09  G 3.42e-08 / 9.66e-07
+    t  60100  d 37.562707  dd -1.7826e-04  K+V 2.251260e+01  E_mat 1.6535207946e+07 (-3.3155e-02)  M +4.730e-12  V 1.510000e+05  rmax 2.8492e+03  eB 7.994e-09  G 3.79e-08 / 1.01e-06
+    t  60110  d 37.562272  dd -2.1571e-04  K+V 2.250984e+01  E_mat 1.6534904453e+07 (+8.5087e-02)  M +6.188e-12  V 1.509998e+05  rmax 2.8512e+03  eB 7.673e-09  G 4.15e-08 / 1.06e-06
+    t  60120  d 37.561368  dd -2.5652e-04  K+V 2.251142e+01  E_mat 1.6535191781e+07 (+1.7408e-02)  M +7.899e-12  V 1.509995e+05  rmax 2.8504e+03  eB 7.257e-09  G 4.52e-08 / 1.12e-06
+    t  60130  d 37.561035  dd -3.0109e-04  K+V 2.250670e+01  E_mat 1.6534881552e+07 (+1.1727e-01)  M +9.879e-12  V 1.509992e+05  rmax 2.8432e+03  eB 7.370e-09  G 4.87e-08 / 1.18e-06
+    t  60140  d 37.559691  dd -3.4896e-04  K+V 2.251028e+01  E_mat 1.6535153313e+07 (-6.9380e-02)  M +1.214e-11  V 1.509990e+05  rmax 2.8242e+03  eB 8.058e-09  G 5.23e-08 / 1.21e-06
+    t  60150  d 37.558986  dd -4.0054e-04  K+V 2.250866e+01  E_mat 1.6534970780e+07 (+1.4604e-01)  M +1.471e-11  V 1.509987e+05  rmax 2.8194e+03  eB 6.720e-09  G 5.58e-08 / 1.23e-06
+    t  60160  d 37.558327  dd -4.5541e-04  K+V 2.250817e+01  E_mat 1.6535089288e+07 (+1.1856e-02)  M +1.759e-11  V 1.509985e+05  rmax 2.8504e+03  eB 6.547e-09  G 5.93e-08 / 1.26e-06
+    t  60170  d 37.557529  dd -5.1402e-04  K+V 2.250590e+01  E_mat 1.6534966810e+07 (+1.3461e-01)  M +2.080e-11  V 1.509982e+05  rmax 2.8253e+03  eB 7.425e-09  G 6.28e-08 / 1.31e-06
+    t  60180  d 37.556398  dd -5.7592e-04  K+V 2.250757e+01  E_mat 1.6535049496e+07 (-7.3231e-02)  M +2.432e-11  V 1.509979e+05  rmax 2.8073e+03  eB 7.331e-09  G 6.63e-08 / 1.36e-06
+    t  60190  d 37.555275  dd -6.4141e-04  K+V 2.250802e+01  E_mat 1.6535074295e+07 (+1.7442e-01)  M +2.815e-11  V 1.509977e+05  rmax 2.7966e+03  eB 7.232e-09  G 6.98e-08 / 1.40e-06
+    t  60200  d 37.554857  dd -7.1036e-04  K+V 2.250493e+01  E_mat 1.6534963698e+07 (+4.3989e-02)  M +3.230e-11  V 1.509974e+05  rmax 2.8011e+03  eB 6.776e-09  G 7.32e-08 / 1.44e-06
+    e (0): E_mat da 1.6535113140e+07 a 1.6534963654e+07; M da 1.9908522548e+06 a 1.9908468984e+06
+----------------------------------------------------------------------------------------------------------------------------------
+### P6: d_U - d_0 ogni 10 tick: +0.000e+00 -1.865e-06 -7.146e-06 -1.614e-05 -2.855e-05 -4.469e-05 -6.424e-05 -8.748e-05 -1.141e-04 -1.445e-04 -1.783e-04 -2.157e-04 -2.565e-04 -3.011e-04 -3.490e-04 -4.005e-04 -4.554e-04 -5.140e-04 -5.759e-04 -6.414e-04 -7.104e-04
+    la parabola: d'' in piu' -3.538161e-08 +- 2.3e-11 per tick^2 (1527.6 errori); l'atteso -1.992522e-06; il rapporto misurato / atteso 0.0178
+  LA LETTURA: (b1) d'' negativo oltre 3 errori: si avvicinano, il verso dell'atteso
+==================================================================================================================================
+ESITO: 6/6 controlli come devono; fallite: 0 []; FERMO del campo: no; 200 s in tutto
