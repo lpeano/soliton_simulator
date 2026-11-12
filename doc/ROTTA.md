@@ -54,3 +54,16 @@
 - `2026-11-12` `17:00`: **il laterale archiviato col tag `laterale-archiviato` (`986440d6`); nessun commit sul ramo `zero-nel-nucleo` dopo U5** *(Luca: un commit farebbe divergere la punta dal tag; la nota solo sul principale)*.
 - `2026-11-12` `18:28`: ### **U6 CHIUSO: si TIENE LA FORMA DI OGGI** *(la continuita' al bit coi riferimenti; la deriva `~4e-10` su un milione di tick)*; **k3 la CURA PRONTA** *(quando la deriva pesa o si rifa' la base, con la ri-registrazione dichiarata)*. ### **L'UNIFICAZIONE CHIUSA.** **La coda decisa:** **la prova delle bande piatte sul buco del vuoto; P1** *(con l'anomalia a `N = 1` e dove va il buco)*; **accanto la G1 lunga col vuoto e il solitone fermo sul massimo di `N`; poi P9.**
 - `2026-11-12` `21:00`: **registrata, non fatta: la U(1) TOPOLOGICA** *(la carica = il foglio della doppia copertura dello spinore, l'era 1)*: **su carta dopo il primo esito di P6** *(`doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`, sez. `12`)*.
+
+## IL PIANO DELLE TRE FORZE *(Luca `2026-11-12` `21:03`; il documento `doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`, sez. `12`)*
+
+- **A. P6, G + U newtoniana sul solitone di oggi** *(inerzia negativa)*: ### **IN CORSO** *(G2, la prova breve di U, i quattro bracci)*.
+- **B. La ricerca dell'inerzia POSITIVA:** **P1** *(il solitone vestito dal vuoto; la carta in `3de28902`)* **e P9** *(il solitone in fondo a una banda)*. ### **Da non lasciare indietro: decide quale dei due mondi.**
+- **C. La U(1) topologica SU CARTA:** **le domande della sez. `12`; dopo il primo esito di P6.**
+- ### **D. IL BIVIO, sui numeri di A, B, C** *(lo decide Luca)*:
+  - **se esiste un solitone con inerzia positiva:** **il mondo G + U topologica** *(+ U newtoniana debole o spenta)*;
+  - **se no:** **il mondo G + U newtoniana di P6, col problema dell'elettromagnetismo rovesciato scritto accanto.**
+- **E. Le tre forze insieme sulla scelta del bivio; il rapporto fra gli accoppiamenti** *(la meta lontana)*.
+- **F. Il passo `5`** *(`Phi` dalla materia, la sorgente l'energia locale)* **resta il passo della ROTTA per G, in tutti e due i mondi.**
+- **Le altre prove gia' in coda** *(il video triplo, le bande piatte, P10, i resti di S5, la taglia doppia)* **restano nella coda come decise: il piano non le cambia.**
+- ### **Tutte le strade restano NON FATTE fino a un mandato che le avvia.**

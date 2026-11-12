@@ -459,3 +459,25 @@
   - **c. come genererebbe un campo** *(quale corrente, quale accoppiamento)* **senza aggiungere costanti nuove?**
   - **d. il confronto con la U(1) dalla norma: cosa prevede ciascuna per due solitoni UGUALI e per due OPPOSTI.**
 - **La strada resta NON FATTA fino a un mandato che la avvia.**
+
+### 12.1 LE TRE FORZE E I DUE MONDI *(Luca `20:53`-`21:01`; il mandato delle `21:03` si AGGIUNGE alla sez. `12`; le idee sono di Luca, le analisi e le corrispondenze con la natura del guardiano: ANALISI e IPOTESI)*
+
+- ### **a. LE TRE FORZE:**
+  - **G, il lapse:** **si accoppia all'ENERGIA** *(il ritmo del tempo)*; **dal passo `5` nasce dalla materia** *(`Phi`, la sorgente = l'energia locale)*.
+  - **U NEWTONIANA:** **la U(1) dalla NORMA** *(la simmetria di fase globale resa locale; la carica = la quantita' di materia, un segno)*; **la forma newtoniana nel limite lento** *(sez. `3`)*; **e' quella di P6.**
+  - **U TOPOLOGICA:** **la carica = il segno del foglio della doppia copertura dello spinore** *(l'era 1: `doc/FISICA_geometria_e_carica.md`, `doc/GEOM_SENZA_VERSO.md`)*, **`+-1` per oggetto, quantizzata, indipendente dalla massa, due segni;** **la doppia copertura = la rotazione di `360` gradi** *(la variante d di P6)*.
+- ### **b. LA TABELLA DEI DUE MONDI** *(ANALISI del guardiano)*:
+
+| | inerzia NEGATIVA *(il solitone di oggi)* | inerzia POSITIVA *(se P1 o P9 la trovano)* |
+|---|---|---|
+| **G** | **respinge** | **attrae verso il tempo lento: la gravita' osservata** |
+| **U newtoniana** | **attrae: la forma di Newton** | **respinge: una «quinta forza» accoppiata alla quantita' di materia, che gli esperimenti vogliono debolissima o assente** |
+| **U topologica** | **uguali si attraggono, opposte si respingono: elettricita' al contrario** *(gli atomi non starebbero insieme)* | **uguali si respingono, opposte si attraggono: l'elettromagnetismo osservato** |
+
+- ### **c. LA LETTURA** *(guardiano, IPOTESI)*:
+  - **con l'inerzia POSITIVA le tre forze cadono al loro posto:** **G la gravita', U topologica l'elettromagnetismo, U newtoniana quasi spenta;**
+  - **con l'inerzia NEGATIVA funziona una sola corrispondenza** *(U newtoniana come gravita')*; **G respinge e l'elettromagnetismo e' rovesciato.**
+  - **In natura una forza VETTORIALE proporzionale alla quantita' di materia corrisponde a una quinta forza sul numero barionico, cercata e non trovata** *(o molto piu' debole della gravita'; da verificare)*.
+- ### **d. IL LEGAME CON LA META LONTANA** *(la ROTTA, «il primo numero puro»)*: **con G e U topologica il numero e' il rapporto fra gravita' ed elettromagnetismo** *(in natura circa `1e-36`)*, **due accoppiamenti che nascono dal reticolo.**
+- **e. Le domande sulla U(1) topologica:** **quelle della sez. `12`** *(a-d)*, **da chiarire PRIMA di qualunque prova.**
+- **Tutto resta NON FATTO fino a un mandato che lo avvia.**
