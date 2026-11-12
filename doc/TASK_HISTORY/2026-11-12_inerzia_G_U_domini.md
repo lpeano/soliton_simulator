@@ -494,3 +494,10 @@
   - ### **In P6** *(sez. `11`)*, **una misura in piu' da registrare nel referto, senza cambiare i bracci:** **il RAPPORTO fra la forza di (G) e quella di (U) alla stessa distanza** *(le accelerazioni nette dei due bracci)*, **con gli accoppiamenti usati** *(`rho_c`, `e`)* **scritti accanto.**
   - **L'ipotesi resta NON VERIFICATA fino a un mandato che la mette alla prova.**
 - **Tutto resta NON FATTO fino a un mandato che lo avvia.**
+
+### 11.10 G2, IL CONTROLLO SUL NUCLEO UNIFICATO *(il primo pezzo, Luca `20:31`)*
+
+- ### **Il codice di G2 gira sul nucleo unificato** *(`csv/solitone/s5_coppia_lapse.py` a `ef4c1c10`, la corsa a `5f0c309f`, dalle `20:33:08` alle `21:39:59`)*:
+  - ### **DEVE: (off) ridà C35-pi: `d` dalle mappe alla stessa ora entro `1e-5`: PASSA, `1.278e-08` su `16` tick;**
+  - **DEVE FALLIRE: lo stesso confronto con `d` spostato di `0.01`: fallisce come deve.**
+- **Il referto intero e la lettura nel prossimo commit.**
