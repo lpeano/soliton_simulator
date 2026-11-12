@@ -55,6 +55,7 @@ GEMELLE["TM1000"] = "TP1000"
 MAPPE = ("TM1000",)            # ### le corse che salvano le mappe (mappe.OGNI tick) su E:
 STATI = {"TM1000": (2000.0, 6000.0, 10000.0)}   # ### Luca dopo 3e3277a2: lo stato completo a questi tempi (il tick piu' vicino)
 DOPO_STATO = 100               # ### Luca dopo 3e3277a2: ripartendo da ogni stato per 100 tick si ritrova lo stato della corsa al bit
+APERTURA_SOLA = [False]        # ### l'unificazione (U4, Luca 2026-11-12): corsa() si ferma DOPO i controlli dell'apertura (la testa, lo stato di ripresa), senza tick; solo ripresa(..., t0=...) lo accende
 RADICE_E = r"E:\soliton_simulator"   # ### Luca 15:49: il disco esterno degli archivi
 DIRS = {"TM1000": os.path.join(RADICE_E, "mappe", "TM1000", "campioni")}   # ### i campioni di TM1000 su E: (doppioni al bit di TP1000; sez. 12)
 CORSE["DG1000"] = (1000.0, 40000.0)   # ### (Luca 18:05) due giri del toro: TP1000 continuata da 16000; il tetto: t 40000 dalla partenza (sez. 13)
@@ -416,6 +417,9 @@ def corsa(nome):
                     if isinstance(z["st"][k], np.ndarray):
                         z["st"][k][...] = dati[k]
             assert V.shas(z) == prec["sha_fine"], "lo stato di ripresa NON e' la fine del pezzo prima (al bit, ogni chiave)"
+            if APERTURA_SOLA[0]:
+                print("  la corsa %s: APERTURA a %d PASSATA (mu e w_in al bit, e_K %s, lo stato di ripresa = sha_fine del pezzo prima): ci si ferma qui, senza tick" % (nome, t0, k_eK))
+                return 0
             fonti = ([os.path.join(dir_json(da), n) for n in nomi(da)] if da else []) + [os.path.join(dir_json(nome), n) for n in fatti]
             accs = [r["acc"] for r in (V.LP.leggi(f) for f in fonti) if r.get("acc")]
             if accs:
@@ -1100,7 +1104,7 @@ def verifica_mappe(nome="TM1000"):
     print("ESITO: %d/%d controlli passano; DEVE fallite: %d %s" % (OK[0], OK[1], len(FALLITE), FALLITE))
 
 
-def ripresa(nome):
+def ripresa(nome, t0_scelto=None):
     """### **`R-0`, `R-1`, `R-1-F`: LA RIPRESA E' LA CORSA ININTERROTTA** *(Luca `2026-11-07` `10:26`, `2026-11-08` `00:52`; il task history
     `2026-11-07_allungamenti_coppia_30000`, sez. `6`)*. ### **L'ULTIMO pezzo si rifa' con `corsa(nome)` STESSA** *(lo stesso tick, lo stesso bordo,
     le stesse misure e mappe: niente ciclo ricopiato)* **in una SABBIERA su `E:`**: i jsonl fino al penultimo pezzo, lo stato completo salvato a `t0`
@@ -1113,6 +1117,11 @@ def ripresa(nome):
     ff = nomi(nome)
     assert len(ff) >= 2, "la ripresa vuole almeno due pezzi"
     rr = [V.LP.leggi(os.path.join(dir_json(nome), n)) for n in ff]
+    fine_vera = rr[-1]
+    if t0_scelto is not None:   # ### l'unificazione (U4, Luca 2026-11-12): il pezzo che comincia a t0_scelto (su uno stato completo), non l'ultimo
+        i_s = [i for i, r in enumerate(rr) if r["t0"] == t0_scelto]
+        assert len(i_s) == 1 and i_s[0] >= 1, "il pezzo che comincia a %d non c'e' (o e' il primo)" % t0_scelto
+        ff, rr = ff[:i_s[0] + 1], rr[:i_s[0] + 1]
     ult, pen = rr[-1], rr[-2]
     t0 = ult["t0"]
     assert pen["t1"] == t0, "il penultimo pezzo NON finisce dove l'ultimo comincia"
@@ -1125,7 +1134,7 @@ def ripresa(nome):
             return int(d["t"]), {k: SFM.sha(d[k]) for k in sorted(d.files) if k != "t"}
     t_r, sh_r = shas_npz(os.path.join(DIR_NPZ, nome + ".npz"))
     esito("DEVE PASSARE: R-0 il file di ripresa di %s e' a t1 dell'ultima riga e i suoi sha = sha_fine dell'ultima riga (al bit, ogni chiave)" % nome,
-          t_r == ult["t1"] and sh_r == ult["sha_fine"], "t %d" % t_r)
+          t_r == fine_vera["t1"] and sh_r == fine_vera["sha_fine"], "t %d" % t_r)
     st0 = [x for r in rr for x in (r.get("stati") or []) if x["t"] == t0]
     assert len(st0) == 1, "lo stato completo a %d non c'e' (o c'e' due volte)" % t0
     t_s, sh_s = shas_npz(st0[0]["file"])
@@ -1170,6 +1179,7 @@ def ripresa(nome):
         okb, pb = CV.uguale_bordo(nuova["bordo"], ult["bordo"], m0, v0, n_t, scala_E=ult["bordo"]["E0"])
         print("  ### le energie CONVERTITE a v2 (conversione_v2, TOLL %g, E_ass da accumulatore): i campioni %s (la differenza relativa piu' grande %.3e; diverse %s); il bordo %s (%.3e)"
               % (CV.TOLL, okc, pc, divc, okb, pb))
+        esito("DEVE FALLIRE: R-1-V lo stesso confronto SENZA conversione (i campioni e il bordo al bit)", uguali["campioni"] and uguali["bordo"], "")
         uguali["campioni"], uguali["bordo"] = okc, okb
     esito("DEVE PASSARE: R-1 il pezzo %d rifatto dallo stato a %d ha sha_fine = quello della corsa (al bit, ogni chiave) e campioni, D, dopo_stato, bordo, mappe uguali" % (t0, t0),
           rc == 0 and all(uguali.values()) and um, "")
@@ -1177,6 +1187,26 @@ def ripresa(nome):
     fa = nomi(altra)
     sha_a = V.LP.leggi(os.path.join(dir_json(altra), fa[-1]))["sha_fine"] if fa else None
     esito("DEVE FALLIRE: R-1-F lo sha_fine rifatto = quello dell'ultima riga di %s (un'altra corsa)" % altra, not nuova["sha_fine"] == sha_a, "")
+    if t0_scelto is not None:
+        # ### l'unificazione (U4, Luca 2026-11-12): l'APERTURA del pezzo dopo (l'allungamento) nella stessa sabbiera: la testa (mu, w_in al bit, e_K + pi) e lo stato di ripresa, senza tick
+        vero2 = (DIRS.get(nome), DIR_NPZ, BASE_E.get(nome), CORSE[nome])
+        oka = False
+        try:
+            DIRS[nome], DIR_NPZ, BASE_E[nome], CORSE[nome] = sj, sn, se, (T_acc, fine_vera["t_fine"] * s)
+            APERTURA_SOLA[0] = True
+            try:
+                oka = corsa(nome) == 0
+            except AssertionError as ex:
+                print("  ### l'apertura a %d NON passa: %s" % (ult["t1"], ex))
+        finally:
+            APERTURA_SOLA[0] = False
+            for k_, v_ in ((DIRS, vero2[0]), (BASE_E, vero2[2])):
+                if v_ is None:
+                    k_.pop(nome, None)
+                else:
+                    k_[nome] = v_
+            DIR_NPZ, CORSE[nome] = vero2[1], vero2[3]
+        esito("DEVE PASSARE: R-A l'apertura del pezzo dopo, a %d: la testa (mu e w_in al bit, e_K convertito) e lo stato di ripresa = sha_fine del pezzo rifatto" % ult["t1"], oka, "")
     radice = os.path.normcase(os.path.abspath(solitone.RADICE))
     imp = sorted({os.path.relpath(m.__file__, solitone.RADICE).replace(os.sep, "/") for m in list(sys.modules.values())
                   if getattr(m, "__file__", None) and os.path.normcase(os.path.abspath(m.__file__)).startswith(radice)})
@@ -1195,7 +1225,7 @@ def main(argv):
     if "--corsa" in argv:
         sys.exit(corsa(argv[argv.index("--corsa") + 1]))
     elif "--ripresa" in argv:
-        sys.exit(ripresa(argv[argv.index("--ripresa") + 1]))
+        sys.exit(ripresa(argv[argv.index("--ripresa") + 1], int(argv[argv.index("--dal") + 1]) if "--dal" in argv else None))
     elif "--referto" in argv:
         referto()
     elif "--mappe" in argv:
