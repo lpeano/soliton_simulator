@@ -25329,3 +25329,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la conversione delle costanti NON e' al bit** *(`e_K + pi` differisce di `4.4e-16` dal misurato)*: **la proposta, una tolleranza `1e-14` relativa;**
   - ### **P3** *(`vieta_cs`)* **e P3-D dipendono dal NOME del ramo `primo-ordine`:** **sul ramo `unificazione` P3-D fallirebbe per il nome.** **La proposta: P3-D in U5, sul `primo-ordine` avanzato in locale prima del push.**
 - **La domanda su G1 resta in coda.**
+
+### 2026-11-12 11:30 -- L'INERZIA DELLA MATERIA, G E U INSIEME, L'IPOTESI DEI DOMINI *(Luca `10:50`-`11:01`; SOLO SCRITTURA)* [[PIANO-2D-3D]]
+
+- **`doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`:**
+  - **i fatti** *(T-L4, T-L4b, G1)*;
+  - **un'anomalia sola, l'inerzia negativa** *(un'analisi)*;
+  - **la risultante nel limite lento** *(una derivazione: la forma di Newton nel piano, con le condizioni (c1)-(c4))*;
+  - **le alte energie;**
+  - **cosa corrisponde e cosa no;**
+  - **l'ipotesi dei domini** *(la parola di Luca delle `10:58`)*;
+  - **le prove P1-P10, dopo l'unificazione.**
+- **Scritto sul `primo-ordine`:** **l'unificazione e' a U0** *(nessun tag, nessun ramo `unificazione`, nessun merge in corso)*; **resta in attesa della conferma di Luca su U0.**

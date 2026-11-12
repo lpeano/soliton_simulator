@@ -30,3 +30,4 @@
 - `2026-11-11` `18:24`: **l'unificazione** *(il passo `3`)* **parte DOPO la chiusura di S5 sul laterale** *(la forma di `N` e le prove del banco S5.2)*.
 - `2026-11-11` `18:25`: **la scelta 5 confermata** *(il banco tiene `N(rho)`, `S` al passo `5`)*; **le prove del banco S5.2 UNA ALLA VOLTA** *(T-L5 fuori)*; **dopo S5.2 fermo, con la tabella delle prove.**
 - `2026-11-11` `22:20`: ### **IL PASSO `2` E' CHIUSO:** **il referto di `C50-0` senza singolo committato** *(`8/8`, (c1): la coppia resta legata)*.
+- `2026-11-12` `11:01`: **le considerazioni sull'inerzia, su G e U e l'ipotesi dei domini registrate** *(`doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`)*; **le prove P1-P10 dopo l'unificazione, l'ordine di Luca.**
