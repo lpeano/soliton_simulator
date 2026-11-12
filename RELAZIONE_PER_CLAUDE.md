@@ -25459,3 +25459,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - ### **il buco del vuoto resta al posto iniziale** *(`c1` `40.40` -> `42.84`, la materia `40.50` -> `65.86`)*: **un'IPOTESI contro il guscio che si muove con la materia;**
   - **P1 deve misurare anche dove va il buco;**
   - **il vuoto evolve con la legge piena** *(dal codice)*.
+
+### 2026-11-12 17:05 -- IL LATERALE ARCHIVIATO COL SOLO TAG; LA PROVA DELLE BANDE PIATTE DOPO U6 *(Luca `17:00`)* [[PIANO-2D-3D]] [[H-NUCLEO-CONGELATO]]
+
+- ### **Il laterale archiviato col tag `laterale-archiviato` (`986440d6`); nessun commit sul ramo `zero-nel-nucleo` dopo U5** *(Luca: un commit farebbe divergere la punta dal tag; la nota solo qui e nella ROTTA)*.
+- **Registrata, DOPO U6:** **la prova delle bande piatte sul buco del vuoto** *(il documento sull'inerzia, in fondo; le letture (b1)-(b3) scritte prima)*.

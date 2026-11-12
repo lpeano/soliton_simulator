@@ -274,3 +274,8 @@
   - ### **P1 resta la prova che decide** *(la spinta sulla sola materia contro la spinta su materia e vuoto)*; **da aggiungere a P1: misurare anche dove va il buco.**
 - **e. Il vuoto e' DINAMICO in questa scena** *(si forma l'anello nuovo)*: **il buco che resta non e' un vuoto congelato.**
   - ### **CONFERMATO dal codice della scena:** **ogni tick e' `tick.percorri_tick` con TUTTO l'ordine** *(`len(composizione.ORDINE)`)*, **quindi `phi` evolve con la legge piena;** **`cs = s N` per tutti i nodi; la forma (a) aggiunge una fase alla sola `psi`.**
+
+- ### **LA PROVA DELLE BANDE PIATTE SUL BUCO DEL VUOTO** *(Luca `2026-11-12` `17:00`; DOPO U6, fuori dal nucleo; NON FATTA)*:
+  - **L'IPOTESI del guardiano** *(`16:09`)*: **il buco del vuoto resta fermo perche' e' fatto in gran parte di componenti delle bande PIATTE della moneta di Grover** *(`P0`/`Ppi`, velocita' di gruppo nulla; Higuchi, Konno, Sato, Segawa `2014`, da verificare; le stesse del `31` ottobre)*; **con le bande piatte il guscio di vuoto avrebbe inerzia infinita.** **L'ALTERNATIVA: un anello scuro non lineare che si regge da solo.**
+  - **La prova:** **`csv/solitone/s5_vuoto_bande_piatte.py`: dallo stato di TBS a `10000` e dopo `2000` tick della scena di G1 a `gamma +0.02`, `dphi_c = phi - phi_F3` proiettato sulle bande piatte e sul resto, dentro l'anello iniziale** *(`R 12`-`19` dalla posizione iniziale)* **e attorno alla posizione nuova.**
+  - ### **LE LETTURE, scritte PRIMA:** **(b1) piu' del `90%` sulle piatte all'anello vecchio: le bande piatte; (b2) meno del `50%`: non sono le piatte; (b3) fra `50` e `90%`: misto, da separare.**
