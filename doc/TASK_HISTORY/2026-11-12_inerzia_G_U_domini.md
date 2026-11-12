@@ -509,3 +509,36 @@
 - **`d`:** **(off) da `37.5692` a `37.3171`; (on) da `37.5692` a `37.7747`.**
 - ### **`d_on - d_off` SALE:** **`0`, `-0.0093`, `+0.0498`, `+0.4576`** *(ogni `500` tick)*; **la parabola: `+8.684e-07 +- 5.4e-08` per tick^2** *(`16.2` errori)*.
 - ### **LA LETTURA COL CRITERIO SCRITTO: (p3), UNA REPULSIONE** *(la lettura di Luca delle `20:15`, scritta prima: «con l'inerzia negativa G respinge: `d_on - d_off` cresce»)*.
+
+### 11.12 LA PROVA BREVE DI (U): LE PREMESSE E IL PROGETTO *(Luca `2026-11-12` `22:52`; scritto e committato PRIMA del codice)*
+
+- ### **LE DECISIONI DI LUCA DELLE `22:52`:**
+  1. **la soluzione di Gauss col Laplaciano SPARSO e' approvata** *(`D D^T phi = b`, `b` a media nulla, `E = D^T phi`: la stessa soluzione di norma minima di `lstsq`)*, **col DEVE su un toro piccolo** *(le due soluzioni uguali entro `1e-10` relativo)* **e il residuo di Gauss a `L 162` nel referto;**
+  2. ### **ora SOLO la prova breve di (U)** *(`200` tick, come deciso alle `20:52`)*; **commit e push del referto; poi FERMO per l'approvazione dei bracci;**
+  3. **per i bracci, dopo:** **ciascuno salva `rho` (float32) ogni `50` tick, `|phi_j|^2` e `dLambda` ogni `250`, i due centri ogni `50`** *(per un video a quattro pannelli)*; **npz sotto `60` MB ciascuno.**
+- ### **LE PREMESSE DAL CODICE** *(cosa credo prima di guardare)*:
+  - **La legge di Gauss conservata** *(`_u1_prototipo.gauss_energia`)*: **`G = div E - e (rho - media rho)` resta costante con la sorgente accesa;** **`div` = entra meno esce** *(`Campo.div`, `matrice_div`: `+1` su `jj`, `-1` su `ii`)*.
+  - **La sorgente e' SOLO la materia** *(`avvolto`: `J_a` dalla norma di `psi_h` sulla prima estremita' dell'arco)*: **`rho` = la norma di `psi_h` per nodo, il vuoto `phi_h` non porta carica.**
+  - ### **Il bordo ROMPE Gauss dove toglie materia:** **`bordo.assorbi` moltiplica `psi` per `1 - g_e` senza una corrente.** **La materia sul bordo e' piccola; il residuo di Gauss nel tempo si stampa SEPARATO dentro e fuori dal bordo.**
+  - ### **L'atteso:** **la formula della sez. `3` e' l'accelerazione di UN corpo** *(`a = e^2 N / (2 pi mu d)`)*; **per due corpi uguali che si attraggono `d'' = -2 a`.** **Lo dichiaro: l'atteso di `d''` e' `-2 a`, con `d` = la `d0` misurata dai semipiani a `60000`** *(G2: `37.5692`; la decisione delle `20:52` usava `37.4288`, la distanza di U4: le due si stampano)*.
+  - **L'energia della materia:** **`_libro_dei_conti.conti_per_nodo`** *(`tot`, con `e_K` della scena)*; ### **NON so se legge `mot.geo.U`** *(cioe' se vede il trasporto del campo)*: **la stampo come e', dichiarata.**
+  - ### **COSA NON SO:** **il costo per tick del tick avvolto a `L 162`;** **quanto e' grande il campo dello sfondo neutralizzante** *(`-e media rho` su `26244` nodi)*.
+- ### **IL PROGETTO** *(`csv/solitone/p6_u_breve.py`; le letture fissate QUI)*:
+  - **P0.** **`e` ricalcolato dai referti** *(`d`, `N = M/2` da `unificazione_riproduzione.txt`; `eps''` da `s5_caduta_segno.txt`)* **e confrontato con la decisione `6.315414e-05` alle `7` cifre;** **si usa il valore deciso.**
+  - **P1. Il DEVE di Gauss sul toro piccolo** *(`L 24`, `b` casuale a media nulla, seme `0`, dichiarato)*: **la soluzione sparsa = `lstsq` denso entro `1e-10` relativo.**
+    - ### **DEVE FALLIRE:** **la stessa soluzione PIU' un rotore** *(`C^T g`, `g` casuale, `1e-6` della norma)*: **Gauss resta soddisfatta, ma non e' quella di norma minima: il confronto entro `1e-10` DEVE fallire** *(il test distingue la norma minima, non solo Gauss)*.
+  - **P2. La scena di G2** *(C35-pi a `60000`, `L 162`, il bordo dopo ogni tick)*; **il campo NON compatto, `E` dalla soluzione sparsa di Gauss, `A = 0`;** **il residuo iniziale `|D E - b| / |b|` nel referto.**
+  - **P3. (0):** **`200` tick del tick della corsa e del bordo, `d` ogni `10`;** **DEVE: le mappe di C35-pi entro `1e-5`** *(a `60100` e `60200`, come G2)*.
+  - **P4. (U) a `e = 0`:** **`200` tick avvolti;** ### **DEVE: lo stato a `200` uguale a (0) AL BIT** *(gli sha di ogni chiave)*: **il campo spento riproduce (0)** *(la sez. `11.5`)*; **e come controllo gli sha di (U) col suo `e` DIVERSI.**
+  - **P5. (U) con `e`:** **`200` tick; ogni `10`: `d`, l'energia del campo `K + V`, quella della materia, la norma `M` e `V`, `max |e B|`, il residuo di Gauss** *(`max |G - G0|` relativo a `e max rho0`, dentro e fuori dal bordo)*.
+  - **P6. La parabola di `d_U - d_0`** *(`carta_coppia.curvatura`)*, **il suo errore, e il rapporto misurato / atteso.**
+  - ### **IL FERMO** *(le soglie sono MIE e dichiarate, non numeri di fisica: servono a dire «fonde, esplode, cresce senza limite»)*:
+    - **si fonde:** **`d < d0 / 2`;**
+    - **esplode:** **`|M_U / M_0 - 1| > 1e-3` allo stesso tick, o `max rho > 2` volte quella iniziale;**
+    - **il campo cresce senza limite:** **`K + V > 10` volte il valore iniziale, o `max |e B| > 1` rad** *(la soglia di Luca delle `13:26` per T6a)*.
+    - **Se scatta, la corsa di (U) si ferma li', il referto lo dice, e FERMO.**
+  - ### **LE LETTURE, scritte prima:**
+    - **(b1) `d''` NEGATIVO oltre `3` errori:** **si avvicinano, il verso dell'atteso;** **il rapporto misurato / atteso stampato;**
+    - **(b2) entro `3` errori:** **in `200` tick non si misura niente** *(l'atteso darebbe circa `0.04` nodi)*;
+    - **(b3) POSITIVO oltre `3` errori:** **si allontanano, contro l'atteso.**
+- ### **TODO:** **il codice, l'inventario, la suite, il commit; la corsa; il referto e la relazione; commit e push; FERMO per l'approvazione dei bracci.**
