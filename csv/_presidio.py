@@ -56,14 +56,21 @@ def _git(args, cwd):
         return (-1, "git non eseguibile: %s" % e)
 
 
+def _normalizza(b):
+    """### **I fine riga normalizzati** *(Luca `2026-11-13`, dopo il falso allarme n.149)*: `CRLF -> LF`. ### **«Modificato» si intende DOPO questa normalizzazione:**
+    un file che differisce dal blob SOLO per i fine riga ha lo stesso contenuto *(`.gitattributes` mette tutto in LF nel repo; sul disco puo' essere CRLF)*."""
+    return b.replace(b"\r\n", b"\n")
+
+
 def timbro(percorso):
     """Stato git dello script, misurato sui BYTE GREZZI. Non solleva mai."""
     p = os.path.abspath(percorso)
     d = os.path.dirname(p)
     out = {"path": p, "sha1": None, "tracciato": None, "blob_head": None,
-           "dirty": None, "repo": None}
+           "dirty": None, "repo": None, "solo_fine_riga": False}
     try:
-        out["sha1"] = hashlib.sha1(open(p, "rb").read()).hexdigest()
+        grezzi = open(p, "rb").read()
+        out["sha1"] = hashlib.sha1(grezzi).hexdigest()
     except Exception:
         return out
     rc, radice = _git(["rev-parse", "--show-toplevel"], d)
@@ -85,7 +92,13 @@ def timbro(percorso):
         try:
             q = subprocess.run(["git", "cat-file", "-p", "HEAD:%s" % rel],
                                cwd=radice, capture_output=True)
-            out["dirty"] = (hashlib.sha1(q.stdout).hexdigest() != out["sha1"]) if q.returncode == 0 else None
+            # ### Luca 2026-11-13: il confronto DOPO aver normalizzato i fine riga (_normalizza); i byte grezzi diversi
+            # ### ma il contenuto uguale si DICE (solo_fine_riga), non si chiama "modificato".
+            if q.returncode == 0:
+                out["dirty"] = _normalizza(q.stdout) != _normalizza(grezzi)
+                out["solo_fine_riga"] = (not out["dirty"]) and (q.stdout != grezzi)
+            else:
+                out["dirty"] = None
         except Exception:
             out["dirty"] = None
     return out
@@ -112,6 +125,8 @@ def avvia(percorso, silenzioso=False):
             (t["blob_head"] or "?")[:8])
     elif t["dirty"] is None:
         stato = "tracciato, confronto con HEAD NON RIUSCITO"
+    elif t.get("solo_fine_riga"):
+        stato = "committato e pulito (i fine riga diversi dal blob, CRLF/LF: il contenuto e' quello committato)"
     else:
         stato = "committato e pulito"
     if not silenzioso:

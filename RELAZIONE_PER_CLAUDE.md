@@ -25669,3 +25669,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'ENERGIA DEL TORO INTERO** *(meno (0), su `2000` tick)*: **`Grampa`: `tot -5545`, di cui `cin -2541`, `leg -4052`, `vuo +1068`;** **`GUrampa` simile** *(`tot -5506`)*; **(U): `tot +0.14`** *(e `K + V` da `22.516` a `22.554`)*; **(U) da zero `-0.38`.** **In `GUrampa` il campo `K + V` scende da `22.52` a `17.97` mentre i solitoni si allargano.**
 - ### **IL TEMPO PROPRIO** *(`Grampa`)*: **ai due centri `tau - t` arriva a `-9.44` e `-9.28` in `2000` tick** *(gli orologi dei solitoni indietro dello `0.47%`)*; **lontano `-3.3e-07`.**
 - ### **FERMO per Luca** *(il mandato delle `18:58`: dopo il referto dei bracci)*: **la serie di distanze si decide sui numeri; poi la voce `7-bis`.**
+
+### 2026-11-14 00:20 -- IL TIMBRO COI FINE RIGA NORMALIZZATI *(Luca, dopo il falso allarme n.149 del guardiano)*
+
+- **La segnalazione** *(«(MG) e' girato con `mattone.py` non committato»)* **era un FALSO ALLARME** *(n.149, nella MAPPA)*: **i byte differivano SOLO per i fine riga** *(CRLF sul disco del worktree, LF nel blob per `.gitattributes`)*; **il contenuto era quello committato.** **La copia `.gz` dei byte** *(ramo mattone, `d83cb363`)* **era superflua: resta, nessuna riscrittura.**
+- ### **IL TIMBRO CAMBIATO** *(`csv/_presidio.py`, una funzione nuova `_normalizza`: `CRLF -> LF`)*: **«modificato» si confronta DOPO aver normalizzato i fine riga;** **i byte grezzi diversi ma il contenuto uguale si DICONO** *(«committato e pulito (i fine riga diversi dal blob ...)»)*; **lo sha1 stampato resta quello dei byte grezzi.** **Il collaudo nuovo `csv/test_timbro_eol.py`** *(su un repo git temporaneo: CRLF pulito, un byte cambiato modificato)*.
+- ### **ATTENZIONE: e' il rovescio di una scelta del `2026-09-16`** *(il commento in `timbro`: «confronto sui BYTE ... la trappola misurata il 2026-09-16»)*: **deciso da Luca.**
