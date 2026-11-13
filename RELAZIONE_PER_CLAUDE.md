@@ -25644,3 +25644,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **L'uscita parziale in `doc/referti_l2/p6_bracci/GU_fermato.txt`:** ### **il DEVE dell'adattatore a `e = 0` PASSATO** *(`20` tick, le chiavi diverse `[]`, `136` s)*; **il residuo di Gauss iniziale `1.329e-12`; l'ultima riga scritta tick `60050`** *(`165` s; lo stdout era bufferizzato, il punto vero e' oltre)*. **Nessun npz** *(si scrive alla fine)*.
   - **Il ritmo:** **`3.3` s per tick** *(`50` tick in circa `165 - 136` s dopo l'adattatore... la stima vera viene dal braccio rifatto)*; **col tetto di `5400` s, `1500` tick ci stanno.**
 - **L'ORDINE** *(Luca `17:24`, al posto di quello delle `17:22`)*: **(G+U) da capo col tetto nuovo; poi (Uzero); poi (G) rifatto da solo col tetto nuovo.**
+
+### 2026-11-13 20:05 -- P6: (0) E (U) RIFATTI DA CAPO A `2000` TICK, I PRIMI `1500` = I VECCHI AL BIT; LA SECONDA NAVE PARTITA; UN INCIDENTE: `committa.py` SPARITO DALLO SCRATCHPAD [[PIANO-2D-3D]]
+
+- **`0_2000`** *(dalle `19:29:55` alle `19:46:17`)*: **`2000` tick in `938` s; `d` da `37.569220` a `37.213093`; i primi `1500` = `0.npz` AL BIT** *(`18` chiavi; il controllo veloce, il DEVE nel referto)*.
+- **`U_2000`** *(dalle `19:46:40` alle `20:03:01`, accanto alla suite del ramo mattone)*: **`2000` tick in `942` s; `d` da `37.569220` a `37.154406`; i primi `1500` = `U.npz` AL BIT** *(`22` chiavi)*; **una tappa: `0.458` s per tick, la memoria libera `8.32` GB.**
+- **Il codice** *(la rampa, la durata comune, il tetto `18000` s, le tappe col tempo e la memoria)*: **`2329ecfa`, suite `67/67`.**
+- ### **LA SECONDA NAVE** *(Luca `18:47`, `18:58`)*: **il ramo `strumento-mattone` nel worktree `C:\Users\lpeano\soliton_simulator_mattone`** *(`3164d8b7` il task history e il registro; `f8e289fb` il codice `mattone.py`, il collaudo, suite `67/67`)*. **Il controllo S1: il TBS di `L 81`** *(la stessa moneta e lo stesso zero di C35-pi; la partenza SIMMETRIZZATA, dichiarata)*.
+- ### **UN INCIDENTE:** **lo script dei commit `committa.py` era SPARITO dallo scratchpad dopo le `18:20`** *(l'ultimo commit riuscito con lui: `e11b8bb7`)*; **la causa non e' nota;** **riscritto identico alle `19:20`** *(piu' la radice del worktree da una variabile d'ambiente)*. **Un commit e' fallito per questo** *(il codice della rampa, rifatto in `2329ecfa`)*.
+- **Poi:** **`Grampa`** *(col lapse; accanto il collaudo del mattone e (MG): R4 sospesa)*.
