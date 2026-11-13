@@ -25539,3 +25539,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I nodi «sul bordo»** *(`g_e > 0` su un'estremita')*: **`18056` su `26244`** *(l'assorbimento e' graduale e copre la maggior parte del toro)*.
 - **Il costo:** **(U) `0.299` s per tick** *((0) `57` s per `200` tick, (U) `60` s)*.
 - ### **FERMO: i bracci aspettano l'approvazione di Luca** *(la decisione `22:52`, `2`)*.
+
+### 2026-11-13 10:30 -- IL CONTROLLO DELLA RIPRESA DOPO IL RIAVVIO *(il mandato di Luca delle `10:20`, punto `1`; solo lettura)*: TUTTO COME ATTESO, TRANNE LA CACHE DEL COMMIT-GRAPH DI GIT: FERMO
+
+- **a. git:** **l'albero pulito; `HEAD` = `origin/primo-ordine` = `d2647965`** *(2026-11-12 23:22:57)*.
+- ### **a-bis. DIVERSO DALL'ATTESO: la catena del commit-graph cita un file che NON c'e'.** **Ogni comando git stampa `warning: unable to find all commit-graph files`;** **`git fsck --connectivity-only` dice `error: one or more commit-graph chain files could not be loaded`** *(e un solo `dangling blob`, nient'altro)*.
+  - **`.git/objects/info/commit-graphs/commit-graph-chain`** *(scritto alle `23:22` di ieri, col commit del referto)* **elenca `3bca7d01`, `2a58b772`, `1c8287af`;** ### **`graph-1c8287af...` NON esiste;** **c'e' invece `graph-04c38024...`, scritto OGGI alle `09:59`** *(prima di questa sessione; da chi, non lo so: un fetch automatico dell'editor e' un'ipotesi)*.
+  - **Il commit-graph e' una CACHE** *(i dati sono negli oggetti, e `HEAD` = `origin` lo conferma)*: **la cura proposta e' `git commit-graph write --reachable`, che riscrive la catena dagli oggetti.** ### **Non la faccio da solo: la decide Luca.**
+- **b. file a meta':** **nessun npz parziale, temporaneo o lock nel repo** *(`csv/_barriera.lock` e `primo_ordine/versioni.lock` sono file TRACCIATI di ottobre e novembre, non lucchetti rimasti)*; **il lucchetto dei commit dello scratchpad non c'e';** **su `E:\soliton_simulator` nessun file nuovo dopo le `20:00` di ieri, nessun lock.**
+  - **`55` file del repo hanno l'ora fra `23:23:42` e `23:26:51` di ieri, ma `git status` e' pulito:** **sono i file che gli hook riscrivono identici all'ultimo commit.**
+- **c. gli orari:** **l'ultima riga di `orari_prove.txt` e' `G1lunghissima exit 0 22:16:48`;** **dopo, la suite e la prova breve hanno scritto i loro orari in due file a parte** *(la suite `22:59:43`-`23:14:12`, la prova breve `23:18:33`-`23:21:57`, uscita `0`)*: ### **nessuna corsa iniziata e non finita.** *(Due file di orari invece di uno: e' il limite che il registro dell'era 2 deve togliere.)*
+- **d. processi:** **nessun processo `python` vivo.**
+- ### **FERMO: la cache del commit-graph. Il resto del mandato aspetta la decisione di Luca su `git commit-graph write --reachable`.**
