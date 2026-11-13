@@ -2,13 +2,17 @@
 r"""**P6, I BRACCI: (0) DUE VOLTE, (G), (U), (G+U), (U) COL CAMPO DA ZERO** *(Luca `2026-11-13` `09:45`; il task history `doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`, sez. `11`, `11.14`)*. [[PIANO-2D-3D]]
 
     python csv/solitone/p6_bracci.py --braccio 0 --registro p6-0 > <scratchpad>/p6_0.txt        (poi copiato in doc/referti_l2/p6_bracci/0.txt)
-    ... --braccio 0bis | G | U | GU | Uzero
+    ... --braccio 0bis | G | U | GU | Uzero | Grif     (Grif: il (G) rifatto da solo, Luca 17:24; G da 1150 tick resta)
     python csv/solitone/p6_bracci.py --referto > doc/referti_l2/p6_bracci.txt
 
 **La scena di G2 e della prova breve** *(C35-pi a `60000`, `L 162`, il bordo dopo ogni tick)*. **I tick:** (0) `accensione.tick`; (G) `tick_lapse.tick` *(`rho_c = rho_0 / 1e-2`, la forma (a); le
 costanti e `eps_top_tl4b` IMPORTATE da `s5_coppia_lapse.py`)*; (U) `_u1_oggi.tick` col campo di Gauss *(`p6_u_breve.gauss_sparso`)*; (Uzero) lo stesso col campo `A = E = 0`;
 ### **(GU) l'ADATTATORE** *(sez. `11.14`)*: **il corpo di `tick_lapse.tick` con `avvolto` SOLO attorno al `percorri_tick` vero** *(le copie del punto fisso di `cs` non fanno sorgere il campo)*,
 la spinta a meta' ai due estremi; **il suo DEVE: a `e = 0`, `20` tick = (G) al bit.** **Le uscite** in `doc/referti_l2/p6_bracci/<braccio>.npz` *(alla fine)*; **le misure, i DEVE e le letture: `--referto`.**
+### **IL TEMPO PROPRIO PER NODO** *(Luca `2026-11-13` `17:34`)*, **nei bracci col lapse** *((G+U), `Grif`; e (G) se rifatto)*: **`tau_k - t = somma sui tick di (N_k - 1)`, con l'N EFFETTIVAMENTE usato nel
+tick vero:** **`N = mot.cs / s` dopo il tick** *(`tick_lapse.tick` e `tick_GU` mettono in `mot.cs` il `cs` del punto fisso al centro del palindromo, `tick_lapse.cs_al_centro`, PRIMA del
+`percorri_tick` vero; `tick.percorri_tick` non riassegna `mot.cs`)*; **accumulato come somma di `N - 1`** *(la stessa grandezza di `tau - t`, piu' precisa)*; **`float64` `L x L` ogni `50` tick.**
+**Il suo DEVE:** **`20` tick del tick del lapse con la legge `uno`** *(`N = 1`)*: **`tau - t = 0` ESATTAMENTE in ogni nodo.** **I bracci senza lapse: `N = 1`, `tau = t` per costruzione** *(dichiarato)*.
 ### **L'ENERGIA DEL TORO INTERO ogni `50` tick** *(Luca `2026-11-13` `13:43`)*: **i termini del libro dei conti** *(`_libro_dei_conti.conti_per_nodo`, sommati su TUTTO il toro: `cost`, `cin`, `leg`, `vuo`, `tot`, `M`, `V`)*,
 **SOLO il toro intero** *(le regioni dipendono dallo zero)*; **`e_K` della scena** *(`protetto.e_K`)*; **col lapse, il `cs` del tick** *(quello che `tick_lapse.tick` lascia in `mot.cs`)*, dichiarato.
 """
@@ -31,13 +35,19 @@ import solitone  # noqa: E402,F401  (i percorsi)
 import s5_coppia_lapse as G2  # noqa: E402  (CORSA, T0, R_LAPSE, TETTO_S, TOLL_D, N_ERR, eps_top_tl4b: RIPRESI)
 import p6_u_breve as PB  # noqa: E402  (E_DECISO, FORMA, gauss_sparso, rho_nodi, dati_di_e, le soglie del FERMO: RIPRESI)
 
-BRACCI = ("0", "0bis", "G", "U", "GU", "Uzero")
+BRACCI = ("0", "0bis", "G", "U", "GU", "Uzero", "Grif")
+MISURA = ("0", "0bis", "Grif", "U", "GU", "Uzero")   # ### Luca 17:24: Grif (il (G) rifatto, da solo) fa da (G) nelle misure; G (1150 tick, 5f0f70f1) resta e si confronta con Grif al bit
+COL_LAPSE = ("G", "GU", "Grif")
+TETTO_LAPSE_S = 5400.0             # ### DECISIONE DI LUCA (2026-11-13 17:24): il tetto dei bracci col lapse da 60 a 90 minuti; gli altri restano a G2.TETTO_S (3600 s)
 N_TICK = 1500                       # ### Luca 09:45
 OGNI, OGNI_PHI = 50, 250            # ### Luca 22:52 e 09:45: rho e i centri ogni 50; |phi_j|^2 e dLambda ogni 250
 N_ADATT = 20                        # ### il DEVE dell'adattatore (mio, dichiarato): 20 tick a e = 0
 TETTO_MB = 60.0                     # ### Luca 22:52
 TAPPA_S = 600.0                     # ### la skill registro-corse: una tappa ogni circa 10 minuti
 N_FINTA = 10.0                      # ### Luca 20:45: l'accelerazione finta = 10 errori del fit di (0)
+N_CTRL_TAU = 20                     # ### Luca 17:34: il controllo di tau a N = 1, 20 tick
+R_LONTANO = 25.0                    # ### Luca 17:34: il valore lontano = la mediana fuori da R 25 dai due centri
+OGNI_TAU_REF = 250                  # ### Luca 17:34: nel referto ogni 250 tick
 RADICE = os.path.dirname(_CSV)
 DIR_OUT = os.path.join(RADICE, "doc", "referti_l2", "p6_bracci")
 REF = os.path.join(RADICE, "doc", "referti_l2")
@@ -108,6 +118,7 @@ def braccio(nome, registro):
         _presidio.avvia(os.path.join(RADICE, "primo_ordine", m + ".py"))
     _presidio.avvia(__file__)
     assert nome in BRACCI
+    tetto = TETTO_LAPSE_S if nome in COL_LAPSE else G2.TETTO_S
     t00 = time.time()
     e = PB.E_DECISO
     e0 = G2.eps_top_tl4b()
@@ -127,8 +138,8 @@ def braccio(nome, registro):
         with np.load(f0) as d:
             rif0 = dict(zip([int(x) for x in d["t"]], [float(x) for x in d["M"]]))
     print("=" * 130)
-    print("P6, IL BRACCIO (%s) (sez. 11.14): lo stato di %s a %d; fino a %d tick (il tetto %g s); rho e i centri ogni %d, |phi_j|^2 e dLambda ogni %d; e %.7e; eps_a %.10f; R_LAPSE %g; il registro %s"
-          % (nome, G2.CORSA, G2.T0, N_TICK, G2.TETTO_S, OGNI, OGNI_PHI, e, e0, G2.R_LAPSE, registro))
+    print("P6, IL BRACCIO (%s) (sez. 11.14, 11.16): lo stato di %s a %d; fino a %d tick (il tetto %g s%s); rho e i centri ogni %d, |phi_j|^2 e dLambda ogni %d; e %.7e; eps_a %.10f; R_LAPSE %g; il registro %s"
+          % (nome, G2.CORSA, G2.T0, N_TICK, tetto, ", Luca 17:24: 90 minuti col lapse" if nome in COL_LAPSE else "", OGNI, OGNI_PHI, e, e0, G2.R_LAPSE, registro))
     print("=" * 130)
     with CA.con_L(CA.LCORSA.get(G2.CORSA)), V.scena(s, vuoto, V.EPS) as (rec, z, phi0, pK):
         with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
@@ -220,6 +231,16 @@ def braccio(nome, registro):
                     out["fermo"] = "l'adattatore a e = 0 non riproduce (G): %s" % diverse
                     salva(nome, out, None)
                     return 1
+            # ---------------------------------------------------------------- il DEVE del tempo proprio a N = 1 (Luca 17:34)
+            if nome in COL_LAPSE:
+                metti_stato()
+                tmt = np.zeros(n)
+                for k in range(1, N_CTRL_TAU + 1):
+                    TL.tick(mot, st, par, s, ("uno",), eps_a=e0)
+                    tmt += np.asarray(mot.cs, dtype=float) / float(s) - 1.0
+                    BO.assorbi(st, g_e, BO.c_di(G2.T0 + k, tab_c, K, omega) * phi_v)
+                out["tau_N1_max"] = float(np.max(np.abs(tmt)))
+                print("### il tempo proprio a N = 1 (la legge uno, %d tick): max |tau - t| %r" % (N_CTRL_TAU, out["tau_N1_max"]))
             # ---------------------------------------------------------------- il braccio
             metti_stato()
             campo, b0, scala, G0 = None, None, None, None
@@ -234,7 +255,8 @@ def braccio(nome, registro):
                 scala = e * float(r0.max())
             S = {k: [] for k in ("t", "d", "cA", "cB", "M", "V", "rmax", "KV", "eB", "G_in", "G_bordo") + tuple("E_" + c for c in LC.CONTI)}
             SP = {"t": [], "phi2": [], "dLambda": []}
-            RH = []
+            RH, TAU = [], []
+            tau_meno_t = np.zeros(n)
             lam0 = phi2_di().sum(axis=0)
 
             def misura(t):
@@ -248,6 +270,8 @@ def braccio(nome, registro):
                 S["V"].append(float(np.sum(np.abs(st["phi_h"]) ** 2)))
                 S["rmax"].append(float(rho.max()))
                 RH.append(rho.reshape(L, L).astype(np.float32))
+                if nome in COL_LAPSE:
+                    TAU.append(tau_meno_t.reshape(L, L).copy())     # ### Luca 17:34: tau - t, float64
                 conti = LC.conti_per_nodo(inc, mot, st, e_K, V.LAM_ZERO, par)     # ### Luca 13:43: il toro INTERO, per termini
                 for c in LC.CONTI:
                     S["E_" + c].append(float(np.sum(conti[c])))
@@ -273,12 +297,14 @@ def braccio(nome, registro):
                 t = G2.T0 + k
                 if nome in ("0", "0bis"):
                     AC.tick(z, t, K)
-                elif nome == "G":
+                elif nome in ("G", "Grif"):
                     TL.tick(mot, st, par, s, legge, eps_a=e0)
                 elif nome in ("U", "Uzero"):
                     UO.tick(z, t, K, campo, True)
                 else:
                     tick_GU(z, s, legge, e0, campo)
+                if nome in COL_LAPSE:
+                    tau_meno_t += np.asarray(mot.cs, dtype=float) / float(s) - 1.0     # ### l'N del tick vero (mot.cs dopo il tick)
                 BO.assorbi(st, g_e, BO.c_di(t, tab_c, K, omega) * phi_v)
                 fatti = k
                 if k % OGNI == 0:
@@ -308,14 +334,14 @@ def braccio(nome, registro):
                         t_tappa = adesso
                     blocco = adesso - t_blocco
                     t_blocco = adesso
-                    if k < N_TICK and (adesso - t1) + blocco > G2.TETTO_S:
+                    if k < N_TICK and (adesso - t1) + blocco > tetto:
                         print("### il tetto: %.0f s fatti, il prossimo blocco di %d tick (%.0f s) lo supererebbe: ci si ferma a %d tick (dichiarato)" % (adesso - t1, OGNI, blocco, k))
                         break
             secondi = time.time() - t1
-            out.update(tick_fatti=fatti, secondi=secondi, fermo=fermo, sha=V.shas(z))
+            out.update(tick_fatti=fatti, secondi=secondi, fermo=fermo, sha=V.shas(z), tetto=tetto)
             print("### (%s): %d tick in %.0f s (%.3f s per tick); d da %.6f a %.6f" % (nome, fatti, secondi, secondi / max(1, fatti), S["d"][0], S["d"][-1]))
         mot.geo.U[...] = U0
-    salva(nome, out, (S, SP, RH))
+    salva(nome, out, (S, SP, RH, TAU))
     print("### %.0f s in tutto" % (time.time() - t00))
     return 0
 
@@ -325,10 +351,12 @@ def salva(nome, out, serie):
     f = os.path.join(DIR_OUT, nome + ".npz")
     dati = {"meta": np.array(json.dumps(out, default=str))}
     if serie is not None:
-        S, SP, RH = serie
+        S, SP, RH, TAU = serie
         dati.update(t=np.array(S["t"]), d=np.array(S["d"]), cA=np.array(S["cA"], dtype=np.float64), cB=np.array(S["cB"], dtype=np.float64),
                     M=np.array(S["M"]), V=np.array(S["V"]), rmax=np.array(S["rmax"]), rho=np.stack(RH),
                     t_phi=np.array(SP["t"]), phi2=np.stack(SP["phi2"]), dLambda=np.stack(SP["dLambda"]))
+        if TAU:
+            dati["tau_meno_t"] = np.stack(TAU)
         for k in ("KV", "eB", "G_in", "G_bordo") + tuple(x for x in S if x.startswith("E_")):
             if S[k]:
                 dati[k] = np.array(S[k])
@@ -345,7 +373,7 @@ def leggi(nome):
     if not os.path.exists(f):
         return None
     with np.load(f) as d:
-        out = {k: d[k].copy() for k in d.files if k not in ("rho", "phi2", "dLambda")}
+        out = {k: d[k].copy() for k in d.files if k not in ("rho", "phi2", "dLambda", "tau_meno_t")}
         out["meta"] = json.loads(str(d["meta"]))
     return out
 
@@ -359,19 +387,19 @@ def referto():
     B = {b: leggi(b) for b in BRACCI}
     mancano = [b for b in BRACCI if B[b] is None]
     print("=" * 130)
-    print("P6, I BRACCI: IL REFERTO (sez. 11.14): %s; mancano %s" % (", ".join("(%s) %d tick" % (b, B[b]["meta"].get("tick_fatti", 0)) for b in BRACCI if B[b] is not None), mancano))
+    print("P6, I BRACCI: IL REFERTO (sez. 11.14, 11.15, 11.16): %s; mancano %s" % (", ".join("(%s) %d tick" % (b, B[b]["meta"].get("tick_fatti", 0)) for b in BRACCI if B[b] is not None), mancano))
     print("=" * 130)
     assert not mancano, "mancano dei bracci: %s" % mancano
     d0 = B["0"]["meta"]["d0"]
-    n_com = min(len(B[b]["t"]) for b in BRACCI)
+    n_com = min(len(B[b]["t"]) for b in MISURA)     # ### la durata comune dei bracci delle MISURE (G da 1150 tick fuori: Luca 17:24)
     tt = B["0"]["t"][:n_com]
-    for b in BRACCI:
+    for b in MISURA:
         assert np.array_equal(B[b]["t"][:n_com], tt), "i tick dei bracci non coincidono"
     tf = (tt - G2.T0).astype(float)
     print("### la durata COMUNE: %d tick (%d punti ogni %d); per braccio: %s" % (int(tf[-1]), n_com, OGNI, ", ".join("(%s) %d" % (b, B[b]["meta"]["tick_fatti"]) for b in BRACCI)))
     for b in BRACCI:
         m = B[b]["meta"]
-        print("    (%s): %d tick in %.0f s; d da %.6f a %.6f; il FERMO %s" % (b, m["tick_fatti"], m["secondi"], B[b]["d"][0], B[b]["d"][-1], m.get("fermo")))
+        print("    (%s): %d tick in %.0f s (il tetto %s s); d da %.6f a %.6f; il FERMO %s" % (b, m["tick_fatti"], m["secondi"], m.get("tetto", G2.TETTO_S), B[b]["d"][0], B[b]["d"][-1], m.get("fermo")))
     print("-" * 130)
     # ---------------------------------------------------------------- i DEVE
     L = int(B["0"]["meta"]["L"])
@@ -402,10 +430,21 @@ def referto():
     g_off = float(re.search(r"### \(off\): 1500 tick in [0-9]+ s; d da [0-9.]+ a ([0-9.]+)", testo).group(1))
     if B["0"]["meta"]["tick_fatti"] == 1500:
         esito("(0) riproduce (off) di G2: d a 1500 tick = %.6f entro 1e-6" % g_off, abs(B["0"]["d"][-1] - g_off) <= 1e-6, "%.6f" % B["0"]["d"][-1], True)
-    if B["G"]["meta"]["tick_fatti"] == 1500:
-        esito("(G) riproduce (on) di G2: d a 1500 tick = %.6f entro 1e-6" % g_on, abs(B["G"]["d"][-1] - g_on) <= 1e-6, "%.6f" % B["G"]["d"][-1], True)
+    if B["Grif"]["meta"]["tick_fatti"] == 1500:
+        esito("(G) rifatto (Grif) riproduce (on) di G2: d a 1500 tick = %.6f entro 1e-6" % g_on, abs(B["Grif"]["d"][-1] - g_on) <= 1e-6, "%.6f" % B["Grif"]["d"][-1], True)
     else:
-        print("  (G) NON arriva a 1500 tick (%d): il confronto con G2 non si fa" % B["G"]["meta"]["tick_fatti"])
+        esito("(G) rifatto (Grif) arriva a 1500 tick (per il confronto con G2)", False, "%d tick" % B["Grif"]["meta"]["tick_fatti"], True)
+    nG = len(B["G"]["t"])
+    with np.load(os.path.join(DIR_OUT, "G.npz")) as dg, np.load(os.path.join(DIR_OUT, "Grif.npz")) as dr:
+        chiavi_bit = [k for k in dg.files if k not in ("meta",) and k in dr.files]
+        diverse_bit = []
+        for k in chiavi_bit:
+            a, b = dg[k], dr[k]
+            m = min(len(a), len(b))
+            if not np.array_equal(a[:m], b[:m]):
+                diverse_bit.append(k)
+    esito("(G) da %d tick (5f0f70f1) = (G) rifatto AL BIT ai tick comuni (d, i centri, M, V, rho float32, |phi_j|^2, dLambda, l'energia per termini)" % (int(B["G"]["t"][-1]) - G2.T0),
+          not diverse_bit and np.array_equal(B["G"]["t"], B["Grif"]["t"][:nG]), "%d chiavi; diverse: %s" % (len(chiavi_bit), diverse_bit), True)
     with open(os.path.join(REF, "p6_u_breve.txt"), encoding="utf-8") as f:
         pb = float(re.search(r"t  60200  d ([0-9.]+) ", f.read()).group(1))
     iu = list(B["U"]["t"]).index(G2.T0 + 200)
@@ -424,7 +463,7 @@ def referto():
     ris = {}
     print("### d_X - d_0, la parabola (d'' in piu', per tick^2):")
     for b in ("G", "U", "GU", "Uzero"):
-        y = B[b]["d"][:n_com] - dd0
+        y = B["Grif" if b == "G" else b]["d"][:n_com] - dd0     # ### (G) nelle misure = Grif (Luca 17:24)
         a, ea = CC.curvatura(tf, y)
         ris[b] = (a, ea, y)
         print("    (%-5s) %+.6e +- %.1e (%6.1f errori); d_X - d_0 alla fine %+.4e; ogni %d tick: %s" % (b, a, ea, abs(a) / ea if ea else float("inf"), y[-1], 5 * OGNI, " ".join("%+.2e" % v for v in y[::5])))
@@ -439,14 +478,35 @@ def referto():
     termini = [k[2:] for k in B["0"] if k.startswith("E_")]
     print("### L'ENERGIA DEL TORO INTERO per termini (il libro dei conti), la variazione dal tick %d al tick %d (la durata comune); e_K %.10f" % (G2.T0, int(tt[-1]), B["0"]["meta"]["e_K"]))
     print("    %-6s %s" % ("", "  ".join("%16s" % c for c in termini)))
-    for b in BRACCI:
+    for b in MISURA:
         print("    (%-5s)  all'inizio %s" % (b, "  ".join("%16.9e" % B[b]["E_" + c][0] for c in termini)))
         print("    (%-5s)  la variazione %s" % (b, "  ".join("%+16.9e" % (B[b]["E_" + c][n_com - 1] - B[b]["E_" + c][0]) for c in termini)))
-    for b in ("G", "U", "GU", "Uzero"):
+    for b in ("Grif", "U", "GU", "Uzero"):
         print("    (%-5s) meno (0), la variazione %s" % (b, "  ".join("%+16.9e" % ((B[b]["E_" + c][n_com - 1] - B[b]["E_" + c][0]) - (B["0"]["E_" + c][n_com - 1] - B["0"]["E_" + c][0])) for c in termini)))
     for b in ("U", "GU", "Uzero"):
         if "KV" in B[b]:
             print("    (%-5s) il campo K + V: da %.6e a %.6e" % (b, B[b]["KV"][0], B[b]["KV"][n_com - 1]))
+    # ---------------------------------------------------------------- il tempo proprio (Luca 17:34)
+    print("-" * 130)
+    print("### IL TEMPO PROPRIO PER NODO: tau - t = somma di (N - 1), N = mot.cs / s del tick vero. I bracci senza lapse ((0), (0bis), (U), (Uzero)): N = 1 e tau = t per costruzione (dichiarato).")
+    for b in ("Grif", "GU"):
+        esito("(%s) il controllo a N = 1 (la legge uno, %d tick): tau - t = 0 ESATTAMENTE in ogni nodo" % (b, N_CTRL_TAU), B[b]["meta"].get("tau_N1_max") == 0.0, "max |tau - t| %r" % B[b]["meta"].get("tau_N1_max"), True)
+    for b in ("Grif", "GU"):
+        with np.load(os.path.join(DIR_OUT, b + ".npz")) as d:
+            TAU = d["tau_meno_t"]
+        tb = B[b]["t"]
+        print("    (%s) ogni %d tick: tau - t al centro di A e di B, lontano (la mediana fuori da R %g dai due centri), il minimo e il massimo sul toro" % (b, OGNI_TAU_REF, R_LONTANO))
+        for i in range(len(tb)):
+            if (int(tb[i]) - G2.T0) % OGNI_TAU_REF:
+                continue
+            tm = TAU[i].reshape(-1)
+            cA, cB = B[b]["cA"][i], B[b]["cB"][i]
+            dA = np.hypot(*TO.scarti(m1, m2, cA[0], cA[1], L).T[:2])
+            dB = np.hypot(*TO.scarti(m1, m2, cB[0], cB[1], L).T[:2])
+            fuori = (dA > R_LONTANO) & (dB > R_LONTANO)
+            print("      t %6d  A %+.6e  B %+.6e  lontano %+.6e  min %+.6e  max %+.6e" % (int(tb[i]), tm[int(np.argmin(dA))], tm[int(np.argmin(dB))], float(np.median(tm[fuori])), float(tm.min()), float(tm.max())))
+        if b == "GU":
+            esito("(G+U): tau - t identicamente zero su tutto il toro e in tutti i tick", float(np.max(np.abs(TAU))) == 0.0, "max |tau - t| %.6e" % float(np.max(np.abs(TAU))), False)
     # ---------------------------------------------------------------- l'additivita' e il rapporto delle forze
     D = ris["GU"][2] - ris["G"][2] - ris["U"][2]
     aD, eaD = CC.curvatura(tf, D)
@@ -454,7 +514,7 @@ def referto():
     print("### L'ADDITIVITA': [(G+U) - (0)] - [(G) - (0)] - [(U) - (0)]: d'' %+.6e +- %.1e (%.1f errori); alla fine %+.4e; la somma attesa (G) + (U) %+.6e, misurata (G+U) %+.6e"
           % (aD, eaD, abs(aD) / eaD if eaD else float("inf"), D[-1], ris["G"][0] + ris["U"][0], ris["GU"][0]))
     print("### IL RAPPORTO DELLE FORZE (sez. 12.1 f): a_G / a_U = %+.4f (a_G %+.4e, a_U %+.4e), con rho_c %.6f (rho_0 / %g) ed e %.7e"
-          % (ris["G"][0] / ris["U"][0], ris["G"][0], ris["U"][0], B["G"]["meta"]["rho_c"], G2.R_LAPSE, m["e"]))
+          % (ris["G"][0] / ris["U"][0], ris["G"][0], ris["U"][0], B["Grif"]["meta"]["rho_c"], G2.R_LAPSE, m["e"]))
     # ---------------------------------------------------------------- le letture
     print("-" * 130)
 
