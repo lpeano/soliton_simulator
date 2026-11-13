@@ -635,3 +635,13 @@
   - **Il costo:** **`2000` tick a `2.25`-`2.4` s sono `4500`-`4800` s, piu' i controlli iniziali:** **vicino al tetto di `5400` s; se il tetto li ferma, lo dice il referto.**
 - ### **MI FERMO SE:** **un DEVE non va come deve** *(referto, FERMO, senza correggere)*.
 - ### **L'ORDINE:** **questo; il codice e la suite** *(niente accanto)*; **`Grampa`, `GUrampa`, `Uzero`, uno alla volta; il referto; FERMO.** **Poi la voce `7-bis`** *(la partenza a caldo)*.
+
+### 11.19 LE DECISIONI DI LUCA DELLE `18:27`-`18:58`: LA DURATA COMUNE, IL TETTO, LE DUE NAVI IN PARALLELO
+
+- ### **LA DURATA COMUNE** *(`18:27`, `18:58`)*: **(0) e (U) RIFATTI DA CAPO a `2000` tick** *(i bracci `0_2000`, `U_2000`; i file accanto ai vecchi, che restano)*; ### **DEVE: i primi `1500` tick = `0.npz` e `U.npz` AL BIT** *(tutte le chiavi)*; **(Uzero) direttamente a `2000`;** **tutte le misure contro (0) su `2000` tick** *(`1500` dopo la rampa)*.
+- ### **IL TETTO delle corse col lapse: `18000` s** *(`5` ore; prima `5400`)*, **su tutti e due i rami** *(`18:57`)*.
+- ### **LE DUE NAVI IN PARALLELO** *(`18:57`)*: **le corse col lapse del principale e del mattone POSSONO girare insieme:** **SOSPESE la regola R4 del mattone e quella delle `17:22`** *(«niente accanto a un braccio col lapse»)*.
+  - **LA PROTEZIONE** *(del guardiano)*: **a ogni tappa il tempo per tick e la memoria libera** *(`psutil.virtual_memory().available`)*; **sotto `2` GB si ferma la corsa del MATTONE** *(il principale ha la precedenza)*, **col motivo scritto.** **Le tappe in coppia dicono se il parallelo conviene.**
+- **Il riavvio** *(`18:57`)*: **le corse interrotte si chiudono come INTERROTTE DAL RIAVVIO e si rifanno DA CAPO;** **nessun codice di ripartenza.**
+- **L'ordine:** **il codice della rampa e del tetto, la suite, il commit; `0_2000`, `U_2000`; `Grampa`, `GUrampa`, `Uzero`; il referto con la tabella dei tempi; FERMO; poi la voce `7-bis`.** **Il ramo mattone accanto, col mandato delle `18:47`.**
+- **Una nota sull'ordine del lavoro:** **la suite delle `18:43` girava sul codice coi nomi `0L`/`UL` e il tetto a `5400`: cambiato dopo il mandato delle `18:58`, si RIGIRA.**
