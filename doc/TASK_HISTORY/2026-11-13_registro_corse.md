@@ -65,3 +65,21 @@
   - **`forza` vuota e il riavvio senza `visto_da_luca` rifiutati; il riavvio con `visto_da_luca` chiude `FERMATO` a `tick 750`** *(l'ultima tappa)*; **i rifiuti non scrivono** *(`3` eventi)*; **il registro cresce solo in coda** *(`5` scritture)*; **il registro vero non toccato** *(`088b14a3` prima e dopo)*.
 - ### **Le skill viste da una sessione NUOVA** *(Luca `12:15`, punto 2)*: **una sessione `claude.exe -p` dell'estensione `2.1.323`, nel repo, senza strumenti, un turno:** ### **`registro-corse` e `ripresa-dopo-riavvio` sono le PRIME due dell'elenco delle skill disponibili** *(l'uscita intera in `skill_sessione_nuova.txt` nello scratchpad)*.
 - ### **Il punto (1) delle `12:15`** *(la suite che ignora il registro)* **resta FERMO sul nucleo congelato:** **la domanda nella sez. `4`; intanto nessuna suite con una corsa aperta.**
+
+## 6. LA DECISIONE DI LUCA (b): LE TAPPE FUORI DAL REPO *(Luca `12:58`; il messaggio delle `12:22` NON mi e' arrivato)*
+
+- ### **LA DECISIONE:** **le TAPPE in un file FUORI dal repo** *(`E:\soliton_simulator\registro_tappe\<nome>.txt`)*, **copiate nel registro alla CHIUSURA;** **`apri()` e `chiudi()` nel repo;** **nessun file in `primo_ordine/` si tocca.** **Finche' il video triplo era aperto, nessuna suite** *(rispettato: il video e' finito alle `12:49:42`, chiuso e committato in `102814bd`; nessuna suite e' girata nel frattempo)*.
+- ### ⚠ **«I DEVE delle `12:22`»: il messaggio delle `12:22` non mi e' arrivato.** **Uso quelli delle `12:15`, adattati a (b), e lo DICHIARO;** **se quelli delle `12:22` sono diversi, si rifanno.**
+- ### **IL PROGETTO:**
+  - **`tappa(nome, punto)`:** **la voce dev'essere APERTA nel registro;** **una riga** *(`{ora, punto}` in JSON)* **in FONDO al file delle tappe** *(apertura in append, `fsync`)*; ### **il registro del repo NON si tocca.**
+  - **`chiudi(nome, esito, punto)`:** **le tappe del file esterno COPIATE nel registro** *(un evento `TAPPA` per ciascuna, col campo `copiata_alla_chiusura`)*, **poi `CHIUSO`, in UNA scrittura atomica;** **il file delle tappe spostato in `<nome>.chiuso.<ora>.txt`** *(non si cancella)*.
+  - **`apri`:** **se il file delle tappe di quel nome esiste gia'** *(una chiusura caduta a meta')*, ### **RIFIUTA:** **va guardato, non sovrascritto.**
+  - **`aperte()`:** **le voci aperte dal SOLO registro;** **l'ultima tappa dal file esterno** *(serve al riavvio)*. **`chiudi_dopo_riavvio`:** **copia anche lui le tappe, poi `FERMATO` all'ultima.**
+  - **La cartella delle tappe si punta altrove nel collaudo** *(come il registro: `su_file`)*.
+- ### **I DEVE** *(le `12:15` adattate a (b), dichiarate)*:
+  - **nel collaudo** *(su un registro e una cartella TEMPORANEI)*: **una tappa NON cambia il registro** *(lo sha prima e dopo)* **e scrive nel file esterno;** **la chiusura copia le tappe nel registro, nell'ordine, e sposta il file;** **la prova a secco, la `breve` accanto alla `lunga`, i rifiuti** *(come prima)*;
+  - ### **con la SUITE vera** *(un driver che lancia `primo_ordine/collauda.py`, legge la sua uscita e AGISCE appena la suite ha preso la fotografia dell'albero, la riga «TUTTI I COLLAUDI, CON I TEMPI»)*:
+    - **DEVE PASSARE:** **una tappa scritta durante la suite: la suite esce con `0`, il registro del repo non cambia, la tappa e' nel file esterno;**
+    - **DEVE FALLIRE:** **una riga aggiunta a un altro file TRACCIATO durante la suite: la suite esce con `1`** *(e lo rimette: si controlla che dopo l'albero sia pulito)*.
+  - **L'ordine:** **il codice, l'inventario, la suite normale e il commit; poi il collaudo; poi le due corse della suite col driver** *(ciascuna circa `15` minuti, una dopo l'altra)*; **poi i bracci di P6.**
+- **La regola provvisoria della sez. `4`** *(nessuna suite con una corsa aperta)* **cade quando i DEVE con la suite vera passano;** **la skill si aggiorna nello stesso commit del codice, con la regola nuova.**
