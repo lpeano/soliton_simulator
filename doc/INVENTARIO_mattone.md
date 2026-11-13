@@ -1,0 +1,6 @@
+# L'INVENTARIO DEL RAMO strumento-mattone *(R1: solo file nuovi; alla riunione le voci vanno in `doc/INVENTARIO_strumenti.md`)*
+
+| il file | il comando | che cosa misura | il blob | l'uscita |
+|---|---|---|---|---|
+| `csv/solitone/mattone.py` | `python csv/solitone/mattone.py prepara --caso MG|MU|MGU --registro mattone-<caso>`; `python csv/solitone/mattone.py controllo --caso ... --registro mattone-ctrl-<caso>`; `python csv/solitone/mattone.py registro apri|chiudi|aperte ...` | lo strumento mattone (Luca 18:47; S1-S8 del guardiano): la preparazione su TBS a `10000`, `L 81`, la rampa `sin^2` in `4000` tick + `1000` pieni, (MG) il lapse, (MU) la U(1) con `e(k)`, (MGU) le due; la correzione del bordo per Gauss; il francobollo (S6) e il controllo del metodo su `L 162` (S7) | `sha1-BYTE e0ea8957` | gli stati su `E:/soliton_simulator/mattone`; `doc/referti_l2/mattone/` |
+| `csv/solitone/test_mattone.py` | `python csv/solitone/test_mattone.py > doc/referti_l2/mattone/collaudo.txt` | il collaudo: la rampa spenta (MG) = `tick_lapse.tick` al bit per `20` tick; `e = 0` (MU) = `accensione.tick` al bit; il francobollo nello stesso toro entro `1e-12`; DEVE FALLIRE la fase non allineata | `sha1-BYTE c64c1058` | `doc/referti_l2/mattone/collaudo.txt` |
