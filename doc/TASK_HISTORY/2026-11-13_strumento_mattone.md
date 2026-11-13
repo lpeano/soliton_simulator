@@ -66,3 +66,9 @@
 - **`5000` tick in `864` s;** **gli ultimi `1000` tick: il respiro `0.0918`** *(la soglia `0.30`)*, **il centro al piu' `0.0232` nodi** *(`0.2`)*: ### **CALMO.**
 - ### **Gauss: il residuo massimo sui controlli ogni `250` tick `2.703e-12`** *(il DEVE: sotto `1e-10`)*; **`K + V` a `5000` `5.89`; il residuo a `5000` `2.67e-12`.**
 - **Dopo (MU):** **`mattone.py` riscritto coi byte del blob** *(`git cat-file -p HEAD:...`, in binario)*: **sul disco `sha1-BYTE c2107885` = il commit; `test_mattone.py` `c64c1058`, `doc/INVENTARIO_mattone.md` `b7f77fec` uguali;** **l'indice rinfrescato** *(`git add` del file identico)*. ### **(MGU) si apre coi byte committati.**
+
+## 7. (MGU): CALMO; I TRE MATTONI CALMI *(i byte di `mattone.py` `c2107885` = il commit; dalle `21:43:51` alle `22:34:50`, in coppia con `p6-Grampa` poi `p6-GUrampa`)*
+
+- **`5000` tick in `3059` s;** **gli ultimi `1000` tick: il respiro `0.0738`, il centro al piu' `0.0739` nodi:** ### **CALMO;** **Gauss: il massimo `5.684e-12`** *(sotto `1e-10`)*; **`K + V` a `4000` `4.19`.**
+- ### **I TRE MATTONI** *(gli ultimi `1000` tick)*: **(MG) il respiro `0.0711`, il centro `0.0680`; (MU) `0.0918`, `0.0232`; (MGU) `0.0738`, `0.0739`** *(la soglia `0.30` e `0.2`)*. **Poi i controlli del metodo** *(S7)*, **uno alla volta.**
+- **Un'annotazione al punto `5`** *(Luca, dopo `0818afe1`)*: ### **la segnalazione sui byte di `mattone.py` era un FALSO ALLARME del guardiano** *(errore n.149)*: **il contenuto che ha girato = quello committato** *(CRLF contro LF)*; **la copia `.gz` di `d83cb363` era quindi superflua** *(resta: nessuna riscrittura)*. **La regola resta, ma «modificato» si intende DOPO aver normalizzato i fine riga: il timbro si cambia sul principale** *(una funzione nuova in `csv/_presidio.py`, col suo DEVE)*, **quando le corse che lo usano sono chiuse.**
