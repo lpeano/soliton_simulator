@@ -1,0 +1,25 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] s5_coppia_lapse.py  sha1-BYTE 344015e0  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 8daeb4da  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 4d8a9f8c  committato e pulito
+==================================================================================================================================
+P6, IL BRACCIO (GU) (sez. 11.14): lo stato di C35-pi a 60000; fino a 1500 tick (il tetto 3600 s); rho e i centri ogni 50, |phi_j|^2 e dLambda ogni 250; e 6.3154140e-05; eps_a 0.4767266286; R_LAPSE 0.01; il registro p6-GU
+==================================================================================================================================
+### a t 60000: d0 37.569220; rho_0 (i due centri, r < w_in 6.643741) 2270.585749; rho_c 227058.574864; M 1.9908522548e+06; max rho 2.787236e+03; 18056 nodi sul bordo
+### l'adattatore a e = 0 contro (G), 20 tick (136 s): le chiavi diverse []
+### il campo di Gauss: il residuo iniziale |D E - b| / |b| 1.329e-12
+    t  60050  d 37.566777  M 1.9908508556e+06  rmax 2.8637e+03  K+V 2.248445e+01  eB 5.40e-09  G 1.91e-08 / 7.12e-07  (165 s)

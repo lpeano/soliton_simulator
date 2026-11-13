@@ -25637,3 +25637,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-13 17:16 -- P6, IL BRACCIO (U): `1500` TICK IN `478` s; `d` DA `37.569220` A `37.281888` *((0): `37.317082`)*; IL CAMPO STABILE [[PIANO-2D-3D]]
 
 - **`doc/referti_l2/p6_bracci/U.npz`** *(`7.08` MB)* **e `U.txt`; dalle `17:07:10` alle `17:15:39`; nel registro `p6-U`.** **Il residuo di Gauss iniziale `1.329e-12`; `d` a `60200` `37.554857`** *(= la prova breve)*; **`K + V` da `22.516` a `22.491`; `max |e B|` circa `8e-09`; Gauss fuori dal bordo fino a `5.15e-07`** *(lo sfondo che segue la norma tolta dal bordo, come nella prova breve)*. **Poi (G+U), da solo.**
+
+### 2026-11-13 17:28 -- P6: (G+U) FERMATO PER DECISIONE DI LUCA (`17:24`); IL DEVE DELL'ADATTATORE A `e = 0` PASSATO PRIMA DELLO STOP; IL TETTO DEI BRACCI COL LAPSE A `90` MINUTI [[PIANO-2D-3D]]
+
+- ### **(G+U) FERMATO** *(Luca `17:24`, «ferma subito»)*: **partito alle `17:21:00` col tetto di `3600` s; fermato alle `17:27` con `TaskStop`** *(dopo, nessun processo `python` vivo)*; **la voce `p6-GU` chiusa `FERMATO`.**
+  - **L'uscita parziale in `doc/referti_l2/p6_bracci/GU_fermato.txt`:** ### **il DEVE dell'adattatore a `e = 0` PASSATO** *(`20` tick, le chiavi diverse `[]`, `136` s)*; **il residuo di Gauss iniziale `1.329e-12`; l'ultima riga scritta tick `60050`** *(`165` s; lo stdout era bufferizzato, il punto vero e' oltre)*. **Nessun npz** *(si scrive alla fine)*.
+  - **Il ritmo:** **`3.3` s per tick** *(`50` tick in circa `165 - 136` s dopo l'adattatore... la stima vera viene dal braccio rifatto)*; **col tetto di `5400` s, `1500` tick ci stanno.**
+- **L'ORDINE** *(Luca `17:24`, al posto di quello delle `17:22`)*: **(G+U) da capo col tetto nuovo; poi (Uzero); poi (G) rifatto da solo col tetto nuovo.**

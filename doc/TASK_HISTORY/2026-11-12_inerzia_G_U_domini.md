@@ -599,3 +599,10 @@
 3. ### **Nessuna corsa «breve» e nessuna suite ACCANTO a un braccio col lapse;** **la suite di un commit di codice si fa prima o dopo, non durante.**
 4. ### **Il DEVE «(G) riproduce G2 a `1500` tick» vale per `Grif`;** **nel referto, (G) da `1150` contro `Grif` ai tick comuni: AL BIT** *(`d`, `M`, `rho` float32 ogni `50`, l'energia per termini: la stessa dinamica, solo piu' lenta)*.
 - ### **L'ORDINE, e un fatto:** **(G+U) e' partito alle `17:16` col tetto VECCHIO di `3600` s** *(prima della decisione)*; **il codice in corso non si tocca: la modifica si prepara su una COPIA e va nel file a corsa chiusa.** **Se (G+U) si ferma sotto i `1500` tick per il tetto vecchio, si RIFA' col tetto nuovo** *(come (G))*. **Poi la modifica, la suite, il commit; poi (Uzero) e `Grif`, da soli.**
+
+### 11.16 (G+U) FERMATO (Luca `17:24`); L'ORDINE NUOVO
+
+- ### **(G+U) FERMATO** *(Luca `17:24`, «ferma subito»)*: **partito alle `17:21:00` col tetto di `3600` s; fermato alle `17:27` con `TaskStop`** *(dopo, nessun processo `python` vivo)*; **la voce `p6-GU` chiusa `FERMATO`.**
+  - **L'uscita parziale in `doc/referti_l2/p6_bracci/GU_fermato.txt`:** ### **il DEVE dell'adattatore a `e = 0` PASSATO** *(`20` tick, le chiavi diverse `[]`, `136` s)*; **il residuo di Gauss iniziale `1.329e-12`; l'ultima riga scritta tick `60050`** *(`165` s; lo stdout era bufferizzato, il punto vero e' oltre)*. **Nessun npz** *(si scrive alla fine)*.
+  - **Il ritmo:** **`3.3` s per tick** *(`50` tick in circa `165 - 136` s dopo l'adattatore... la stima vera viene dal braccio rifatto)*; **col tetto di `5400` s, `1500` tick ci stanno.**
+- **L'ORDINE** *(Luca `17:24`, al posto di quello delle `17:22`)*: **(G+U) da capo col tetto nuovo; poi (Uzero); poi (G) rifatto da solo col tetto nuovo.**
