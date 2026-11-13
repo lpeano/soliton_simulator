@@ -1,0 +1,36 @@
+[TIMBRO] mattone.py  sha1-BYTE e0ea8957  !! MODIFICATO rispetto a HEAD (blob-git 40cd47f7) -- i byte che girano NON sono quelli committati
+==================================================================================================================================
+IL MATTONE (MU): TBS a 10000, L 81; la rampa sin^2 in 4000 tick, poi 1000 a campi pieni; rho_c ASSOLUTO 227058.574864 (p6_bracci/0.npz); e* 6.3154140e-05; stati ogni 1000 su E:\soliton_simulator\mattone; il registro mattone-MU
+==================================================================================================================================
+    k   250  r 0.009607  e 6.0674e-07  c (40.505, 40.503)  rmax 3.3021e+03  respiro 1.8092  M 9.9691679747e+05  E 8.2859249960e+06  K+V 5.5244e-04  Gauss 2.41e-12  (41 s)
+    k   500  r 0.038060  e 2.4037e-06  c (40.506, 40.503)  rmax 3.1017e+03  respiro 1.7186  M 9.9688833220e+05  E 8.2857230317e+06  K+V 8.6173e-03  Gauss 2.57e-12  (78 s)
+    k   750  r 0.084265  e 5.3217e-06  c (40.505, 40.503)  rmax 3.1845e+03  respiro 1.7778  M 9.9686121194e+05  E 8.2854508247e+06  K+V 4.2069e-02  Gauss 2.51e-12  (122 s)
+    k  1000  r 0.146447  e 9.2487e-06  c (40.504, 40.502)  rmax 3.1343e+03  respiro 1.7534  M 9.9683364667e+05  E 8.2851509774e+06  K+V 1.2689e-01  Gauss 2.56e-12  (158 s)
+### lo stato a k 1000: E:\soliton_simulator\mattone\MU_01000.npz (sha di psi_h 42f876976f8413a08e07dfa337498f9f99a64734)
+    k  1250  r 0.222215  e 1.4034e-05  c (40.502, 40.501)  rmax 3.2243e+03  respiro 1.7988  M 9.9680504631e+05  E 8.2848987313e+06  K+V 2.9261e-01  Gauss 2.50e-12  (195 s)
+    k  1500  r 0.308658  e 1.9493e-05  c (40.497, 40.501)  rmax 3.1000e+03  respiro 1.7185  M 9.9677279448e+05  E 8.2847089832e+06  K+V 5.6631e-01  Gauss 2.60e-12  (232 s)
+    k  1750  r 0.402455  e 2.5417e-05  c (40.492, 40.498)  rmax 3.3441e+03  respiro 1.8405  M 9.9674909732e+05  E 8.2846295600e+06  K+V 9.6615e-01  Gauss 2.42e-12  (271 s)
+    k  2000  r 0.500000  e 3.1577e-05  c (40.485, 40.495)  rmax 3.2672e+03  respiro 1.7903  M 9.9672576814e+05  E 8.2845114623e+06  K+V 1.4938e+00  Gauss 2.48e-12  (308 s)
+### lo stato a k 2000: E:\soliton_simulator\mattone\MU_02000.npz (sha di psi_h b5e2db4fc774a5fb604ed5fdf95bfc35e426b970)
+    k  2250  r 0.597545  e 3.7737e-05  c (40.479, 40.492)  rmax 3.4475e+03  respiro 1.8913  M 9.9670616083e+05  E 8.2843327800e+06  K+V 2.1326e+00  Gauss 2.36e-12  (346 s)
+    k  2500  r 0.691342  e 4.3661e-05  c (40.472, 40.488)  rmax 3.1771e+03  respiro 1.7543  M 9.9668588053e+05  E 8.2840668961e+06  K+V 2.8448e+00  Gauss 2.57e-12  (382 s)
+    k  2750  r 0.777785  e 4.9120e-05  c (40.466, 40.483)  rmax 3.2872e+03  respiro 1.8332  M 9.9666552796e+05  E 8.2838097005e+06  K+V 3.5819e+00  Gauss 2.49e-12  (420 s)
+    k  3000  r 0.853553  e 5.3905e-05  c (40.459, 40.478)  rmax 3.1921e+03  respiro 1.8003  M 9.9664579398e+05  E 8.2836389088e+06  K+V 4.2869e+00  Gauss 2.57e-12  (457 s)
+### lo stato a k 3000: E:\soliton_simulator\mattone\MU_03000.npz (sha di psi_h 66d8463581c8949d91ade984f4025126304bb123)
+    k  3250  r 0.915735  e 5.7832e-05  c (40.452, 40.473)  rmax 3.1542e+03  respiro 1.7982  M 9.9662793396e+05  E 8.2835860447e+06  K+V 4.9067e+00  Gauss 2.61e-12  (499 s)
+    k  3500  r 0.961940  e 6.0750e-05  c (40.447, 40.467)  rmax 3.0867e+03  respiro 1.7741  M 9.9660364809e+05  E 8.2835146485e+06  K+V 5.3923e+00  Gauss 2.67e-12  (545 s)
+    k  3750  r 0.990393  e 6.2547e-05  c (40.444, 40.462)  rmax 3.0828e+03  respiro 1.7771  M 9.9658423424e+05  E 8.2834253801e+06  K+V 5.7056e+00  Gauss 2.68e-12  (594 s)
+    k  4000  r 1.000000  e 6.3154e-05  c (40.442, 40.456)  rmax 3.0672e+03  respiro 1.7651  M 9.9656731114e+05  E 8.2832553279e+06  K+V 5.8206e+00  Gauss 2.70e-12  (641 s)
+### lo stato a k 4000: E:\soliton_simulator\mattone\MU_04000.npz (sha di psi_h f18b2dc46c00e88da37ec5f6b99c49290f7a0d77)
+    k  4250  r 1.000000  e 6.3154e-05  c (40.441, 40.449)  rmax 3.1115e+03  respiro 1.7820  M 9.9654674038e+05  E 8.2829973180e+06  K+V 5.8356e+00  Gauss 2.67e-12  (694 s)
+    k  4500  r 1.000000  e 6.3154e-05  c (40.442, 40.445)  rmax 3.2238e+03  respiro 1.8334  M 9.9652894708e+05  E 8.2827788678e+06  K+V 5.8584e+00  Gauss 2.59e-12  (747 s)
+    k  4750  r 1.000000  e 6.3154e-05  c (40.446, 40.442)  rmax 3.1840e+03  respiro 1.7971  M 9.9650811859e+05  E 8.2826269771e+06  K+V 5.8788e+00  Gauss 2.63e-12  (798 s)
+    k  5000  r 1.000000  e 6.3154e-05  c (40.453, 40.440)  rmax 3.2978e+03  respiro 1.8534  M 9.9648910460e+05  E 8.2825609560e+06  K+V 5.8918e+00  Gauss 2.67e-12  (850 s)
+### lo stato a k 5000: E:\soliton_simulator\mattone\MU_05000.npz (sha di psi_h 05ca37e8c1b78677101255c8d823b8930c83d292)
+----------------------------------------------------------------------------------------------------------------------------------
+### (MU) 5000 tick in 864 s; il FERMO None
+    gli ultimi 1000 tick: il respiro (picco-picco) 0.0918 (la soglia 0.30, meta' di (B) del video triplo 0.594); il centro si sposta al piu' di 0.0232 nodi (la soglia 0.2)
+    il residuo di Gauss: il massimo sui controlli ogni 250 tick 2.703e-12 (il DEVE: sotto 1e-10)
+  LA LETTURA (S5): CALMO
+==================================================================================================================================
+ESITO: calmo True; Gauss sotto 1e-10: True

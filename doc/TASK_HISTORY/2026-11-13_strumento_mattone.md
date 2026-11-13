@@ -60,3 +60,9 @@
 - ### **I BYTE CHE HANNO GIRATO, COMMITTATI** *(CLAUDE.md sez. `7`, lo stato 2: una COPIA ESATTA accanto ai dati)*: **`doc/referti_l2/mattone/mattone_girato_e0ea8957.py.gz`** *(gzip con `mtime 0`: un file di TESTO non puo' tenere i CR nel repo, per `.gitattributes`; i byte scompattati del blob nell'indice danno `sha1-BYTE e0ea8957`, verificato)*.
 - **(MU)** *(dalle `21:17`, in corsa)* **gira con gli STESSI byte `e0ea8957`** *(il suo timbro)*.
 - ### **LA REGOLA, da qui** *(Luca)*: **nessuna corsa del ramo mattone si apre con file modificati:** **prima di `apri` lo `sha1-BYTE` dal disco di ogni file del ramo contro il blob committato** *(non `git status`)*. **A (MU) finito, `mattone.py` si riscrive in LF dal blob** *(`git cat-file -p HEAD:csv/solitone/mattone.py`, in binario)* **e si ricontrolla il timbro prima di (MGU).**
+
+## 6. (MU): CALMO *(i byte di `mattone.py` `e0ea8957`, la copia in `d83cb363`; dalle `21:22:55` alle `21:37:20`, accanto a `p6-Grampa`)*
+
+- **`5000` tick in `864` s;** **gli ultimi `1000` tick: il respiro `0.0918`** *(la soglia `0.30`)*, **il centro al piu' `0.0232` nodi** *(`0.2`)*: ### **CALMO.**
+- ### **Gauss: il residuo massimo sui controlli ogni `250` tick `2.703e-12`** *(il DEVE: sotto `1e-10`)*; **`K + V` a `5000` `5.89`; il residuo a `5000` `2.67e-12`.**
+- **Dopo (MU):** **`mattone.py` riscritto coi byte del blob** *(`git cat-file -p HEAD:...`, in binario)*: **sul disco `sha1-BYTE c2107885` = il commit; `test_mattone.py` `c64c1058`, `doc/INVENTARIO_mattone.md` `b7f77fec` uguali;** **l'indice rinfrescato** *(`git add` del file identico)*. ### **(MGU) si apre coi byte committati.**
