@@ -11,12 +11,15 @@ dell'albero, `_prima`: cio' che cambia da li' in poi la suite lo vede)*:
 - **`registro`:** **una TAPPA scritta nel registro DEL REPO** *(`doc/REGISTRO_CORSE.md`, una riga `- {json}` in fondo: il modo di prima della decisione (b))*: ### **DEVE FALLIRE: «la suite esce
   con `0`»** *(la suite se ne accorge e deve uscire con `1`, come oggi)*; **e dopo il registro e' rimesso com'era** *(lo sha prima e dopo; la suite lo rimette con `git checkout`)*.
 **L'uscita intera della suite va in `--log`** *(fuori dal repo)*; **qui le righe del verdetto.** **Nessun `sleep`, nessun polling: si agisce sulla riga.**
+### ⚠ **LA SUITE GIRA CON `python -u`** *(la cura di `df993eb5`)*: **senza, il suo stdout nella pipe e' BUFFERIZZATO e la riga arriva solo alla FINE** *(un falso passa: il driver agiva
+dopo il controllo dei file sporcati)*; ### **e un DEVE lo controlla: l'azione almeno `ANTICIPO_S` secondi PRIMA della fine della suite.**
 """
 import argparse
 import json
 import os
 import subprocess
 import sys
+import time
 
 _QUI = os.path.dirname(os.path.abspath(__file__))
 _CSV = os.path.dirname(_QUI)
@@ -26,6 +29,7 @@ for _p in (_QUI, _CSV):
 import _registro_corse as RC  # noqa: E402
 
 RIGA_FOTO = "TUTTI I COLLAUDI, CON I TEMPI"      # ### primo_ordine/collauda.py, main: stampata subito dopo _prima = _sporchi()
+ANTICIPO_S = 60.0                                # ### mio, dichiarato: la suite dura ~15 minuti, i collaudi girano tutti DOPO la riga
 TRACCIATO = RC.REGISTRO[0]           # ### Luca 12:22: il DEVE FALLIRE scrive una tappa nel registro DEL REPO
 OK = [0, 0]
 FALLITE = []
@@ -59,9 +63,9 @@ def main(argv):
     print("IL REGISTRO E LA SUITE VERA, il modo %s: l'albero all'inizio %s; il registro %s; il file toccato nel modo registro %s %s" % (
         x.modo, "PULITO" if not st0.strip() else "con %d righe di stato" % len(st0.splitlines()), sha_reg[:8], os.path.relpath(TRACCIATO, RC.RADICE), sha_tr[:8]))
     print("=" * 120)
-    agito = None
+    agito, t_agito = None, None
     with open(x.log, "w", encoding="utf-8") as log:
-        pr = subprocess.Popen([sys.executable, os.path.join(RC.RADICE, "primo_ordine", "collauda.py")], cwd=RC.RADICE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+        pr = subprocess.Popen([sys.executable, "-u", os.path.join(RC.RADICE, "primo_ordine", "collauda.py")], cwd=RC.RADICE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                               encoding="utf-8", errors="replace")
         for riga in pr.stdout:
             log.write(riga)
@@ -74,15 +78,19 @@ def main(argv):
                     with open(TRACCIATO, "ab") as f:
                         f.write(("- " + json.dumps(finta, ensure_ascii=False, sort_keys=True) + "\n").encode("utf-8"))
                     agito = "una tappa scritta in fondo al registro del repo %s" % os.path.relpath(TRACCIATO, RC.RADICE)
+                t_agito = time.time()
                 log.write("### [IL DRIVER] %s\n" % agito)
                 log.flush()
             if "TUTTI I COLLAUDI PASSANO" in riga or "COLLAUDI FALLISCONO" in riga or "LA SUITE HA SPORCATO" in riga or "RIMESSI A POSTO" in riga:
                 print("  la suite: %s" % riga.rstrip())
         rc = pr.wait()
-    print("  il driver ha agito: %s; la suite e' uscita con %d" % (agito, rc))
+    t_fine = time.time()
+    anticipo = (t_fine - t_agito) if t_agito is not None else None
+    print("  il driver ha agito: %s; la suite e' uscita con %d; l'azione %s s prima della fine della suite" % (agito, rc, "%.0f" % anticipo if anticipo is not None else "--"))
     sha_reg2, sha_tr2 = RC.sha1_byte(RC.REGISTRO[0]), RC.sha1_byte(TRACCIATO)
     st1 = subprocess.check_output(["git", "status", "--porcelain"], cwd=RC.RADICE).decode("utf-8", "replace")
     esito("il driver ha agito DOPO la fotografia dell'albero (la riga %r)" % RIGA_FOTO, agito is not None, str(agito), True)
+    esito("e DENTRO la suite: almeno %g s prima della sua fine (lo stdout non bufferizzato)" % ANTICIPO_S, anticipo is not None and anticipo >= ANTICIPO_S, "%s s" % ("%.0f" % anticipo if anticipo is not None else "--"), True)
     if x.modo == "tappa":
         tt = RC.tappe_di(x.nome)
         esito("una tappa scritta durante la suite: la suite esce con 0, il registro del repo uguale, la tappa nel file esterno",
