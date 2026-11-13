@@ -1,0 +1,69 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] s5_coppia_lapse.py  sha1-BYTE 344015e0  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 8daeb4da  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+==================================================================================================================================
+P6, IL BRACCIO (GUrampa) (sez. 11.14, 11.16): lo stato di C35-pi a 60000; fino a 2000 tick (il tetto 18000 s, Luca 18:57: 5 ore col lapse, la RAMPA di 500 tick); rho e i centri ogni 50, |phi_j|^2 e dLambda ogni 250; e 6.3154140e-05; eps_a 0.4767266286; R_LAPSE 0.01; il registro p6-GUrampa
+==================================================================================================================================
+### a t 60000: d0 37.569220; rho_0 (i due centri, r < w_in 6.643741) 2270.585749; rho_c 227058.574864; M 1.9908522548e+06; max rho 2.787236e+03; 18056 nodi sul bordo
+### l'adattatore a e = 0 contro (G), 20 tick (121 s): le chiavi diverse []
+### la rampa spenta (r = 1 dall'inizio) contro il tick di oggi, 20 tick: le chiavi diverse []
+### il tempo proprio a N = 1 (la legge uno, 20 tick): max |tau - t| 0.0
+### il campo di Gauss: il residuo iniziale |D E - b| / |b| 1.329e-12
+    t  60050  d 37.566800  M 1.9908508556e+06  rmax 2.8918e+03  K+V 2.250947e+01  eB 5.40e-09  G 1.91e-08 / 7.12e-07  (106 s)
+    t  60100  d 37.562686  M 1.9908494827e+06  rmax 2.8406e+03  K+V 2.250556e+01  eB 8.01e-09  G 3.79e-08 / 1.01e-06  (232 s)
+    t  60150  d 37.559015  M 1.9908481711e+06  rmax 2.7945e+03  K+V 2.248473e+01  eB 6.73e-09  G 5.58e-08 / 1.23e-06  (361 s)
+    t  60200  d 37.554777  M 1.9908468985e+06  rmax 2.7510e+03  K+V 2.244946e+01  eB 6.75e-09  G 7.32e-08 / 1.44e-06  (489 s)
+    t  60250  d 37.548881  M 1.9908456554e+06  rmax 2.6678e+03  K+V 2.239775e+01  eB 7.36e-09  G 9.02e-08 / 1.54e-06  (617 s)
+    t  60300  d 37.543294  M 1.9908444625e+06  rmax 2.6105e+03  K+V 2.231859e+01  eB 8.67e-09  G 1.07e-07 / 1.67e-06  (745 s)
+    t  60350  d 37.536848  M 1.9908433177e+06  rmax 2.6333e+03  K+V 2.221636e+01  eB 8.78e-09  G 1.22e-07 / 1.94e-06  (872 s)
+    t  60400  d 37.530101  M 1.9908421602e+06  rmax 2.4873e+03  K+V 2.208076e+01  eB 8.67e-09  G 1.38e-07 / 2.01e-06  (1016 s)
+    t  60450  d 37.522115  M 1.9908409370e+06  rmax 2.3107e+03  K+V 2.191939e+01  eB 8.70e-09  G 1.55e-07 / 2.07e-06  (1188 s)
+    t  60500  d 37.513433  M 1.9908396619e+06  rmax 2.2339e+03  K+V 2.172840e+01  eB 9.00e-09  G 1.72e-07 / 2.32e-06  (1326 s)
+    t  60550  d 37.503917  M 1.9908383844e+06  rmax 2.1791e+03  K+V 2.150485e+01  eB 8.97e-09  G 1.90e-07 / 2.52e-06  (1472 s)
+    t  60600  d 37.492416  M 1.9908371261e+06  rmax 1.9909e+03  K+V 2.126663e+01  eB 9.61e-09  G 2.07e-07 / 2.76e-06  (1598 s)
+    t  60650  d 37.481954  M 1.9908358760e+06  rmax 1.8772e+03  K+V 2.100465e+01  eB 1.02e-08  G 2.24e-07 / 2.84e-06  (1719 s)
+    t  60700  d 37.469970  M 1.9908346441e+06  rmax 1.7729e+03  K+V 2.073300e+01  eB 1.12e-08  G 2.41e-07 / 2.95e-06  (1833 s)
+    t  60750  d 37.456711  M 1.9908334572e+06  rmax 1.7109e+03  K+V 2.046052e+01  eB 1.04e-08  G 2.57e-07 / 3.05e-06  (1945 s)
+    t  60800  d 37.443735  M 1.9908322813e+06  rmax 1.5909e+03  K+V 2.018432e+01  eB 1.08e-08  G 2.73e-07 / 3.12e-06  (2054 s)
+    t  60850  d 37.429914  M 1.9908310389e+06  rmax 1.4856e+03  K+V 1.991623e+01  eB 9.44e-09  G 2.90e-07 / 3.22e-06  (2161 s)
+    t  60900  d 37.418117  M 1.9908296965e+06  rmax 1.4212e+03  K+V 1.965572e+01  eB 9.03e-09  G 3.08e-07 / 3.25e-06  (2268 s)
+    t  60950  d 37.408344  M 1.9908282778e+06  rmax 1.3645e+03  K+V 1.940635e+01  eB 8.80e-09  G 3.28e-07 / 3.29e-06  (2375 s)
+    t  61000  d 37.400644  M 1.9908268166e+06  rmax 1.2779e+03  K+V 1.917140e+01  eB 7.10e-09  G 3.48e-07 / 3.40e-06  (2500 s)
+    t  61050  d 37.394866  M 1.9908253428e+06  rmax 1.1960e+03  K+V 1.895179e+01  eB 7.97e-09  G 3.68e-07 / 3.47e-06  (2649 s)
+    t  61100  d 37.391649  M 1.9908238639e+06  rmax 1.1436e+03  K+V 1.875271e+01  eB 7.96e-09  G 3.88e-07 / 3.62e-06  (2787 s)
+    t  61150  d 37.392622  M 1.9908223538e+06  rmax 1.1238e+03  K+V 1.856971e+01  eB 8.92e-09  G 4.09e-07 / 3.80e-06  (2908 s)
+    t  61200  d 37.396690  M 1.9908207787e+06  rmax 1.1664e+03  K+V 1.840606e+01  eB 1.09e-08  G 4.30e-07 / 4.00e-06  (3023 s)
+    t  61250  d 37.405920  M 1.9908191262e+06  rmax 1.1517e+03  K+V 1.826189e+01  eB 1.23e-08  G 4.53e-07 / 4.29e-06  (3146 s)
+    t  61300  d 37.419293  M 1.9908174321e+06  rmax 1.1683e+03  K+V 1.813222e+01  eB 1.21e-08  G 4.76e-07 / 4.77e-06  (3285 s)
+    t  61350  d 37.434928  M 1.9908157724e+06  rmax 1.1852e+03  K+V 1.802316e+01  eB 1.38e-08  G 4.99e-07 / 5.00e-06  (3433 s)
+    t  61400  d 37.454301  M 1.9908141590e+06  rmax 1.1716e+03  K+V 1.793098e+01  eB 1.30e-08  G 5.21e-07 / 5.01e-06  (3576 s)
+    t  61450  d 37.475176  M 1.9908125291e+06  rmax 1.1736e+03  K+V 1.785536e+01  eB 1.26e-08  G 5.43e-07 / 5.05e-06  (3722 s)
+    t  61500  d 37.497759  M 1.9908108761e+06  rmax 1.2181e+03  K+V 1.779722e+01  eB 1.33e-08  G 5.66e-07 / 5.18e-06  (3844 s)
+    t  61550  d 37.522940  M 1.9908092257e+06  rmax 1.2437e+03  K+V 1.775357e+01  eB 1.17e-08  G 5.88e-07 / 5.19e-06  (3983 s)
+    t  61600  d 37.550019  M 1.9908075540e+06  rmax 1.2368e+03  K+V 1.772693e+01  eB 1.19e-08  G 6.11e-07 / 5.20e-06  (4107 s)
+    t  61650  d 37.579872  M 1.9908058144e+06  rmax 1.2425e+03  K+V 1.771343e+01  eB 1.18e-08  G 6.35e-07 / 5.28e-06  (4223 s)
+    t  61700  d 37.612013  M 1.9908039455e+06  rmax 1.2256e+03  K+V 1.771495e+01  eB 1.31e-08  G 6.60e-07 / 5.87e-06  (4348 s)
+    t  61750  d 37.646666  M 1.9908019244e+06  rmax 1.1819e+03  K+V 1.772961e+01  eB 1.29e-08  G 6.88e-07 / 6.09e-06  (4470 s)
+    t  61800  d 37.683613  M 1.9907997889e+06  rmax 1.2335e+03  K+V 1.775356e+01  eB 1.30e-08  G 7.17e-07 / 6.13e-06  (4566 s)
+    t  61850  d 37.721112  M 1.9907975342e+06  rmax 1.2544e+03  K+V 1.779199e+01  eB 1.17e-08  G 7.48e-07 / 6.40e-06  (4665 s)
+    t  61900  d 37.760023  M 1.9907951081e+06  rmax 1.2390e+03  K+V 1.784036e+01  eB 1.25e-08  G 7.81e-07 / 6.75e-06  (4760 s)
+    t  61950  d 37.799384  M 1.9907925328e+06  rmax 1.2940e+03  K+V 1.789959e+01  eB 1.39e-08  G 8.16e-07 / 7.09e-06  (4862 s)
+    t  62000  d 37.837987  M 1.9907898942e+06  rmax 1.2485e+03  K+V 1.797235e+01  eB 1.28e-08  G 8.53e-07 / 7.51e-06  (4975 s)
+### (GUrampa): 2000 tick in 4975 s (2.487 s per tick); d da 37.569220 a 37.837987
+### doc\referti_l2\p6_bracci\GUrampa.npz: 14.96 MB
+### 5257 s in tutto
