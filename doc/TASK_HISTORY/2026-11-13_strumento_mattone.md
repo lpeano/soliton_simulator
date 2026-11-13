@@ -36,3 +36,10 @@
 - **`controllo(caso)`:** **S7.**
 - **Il collaudo `csv/solitone/test_mattone.py`:** **i DEVE di sopra che non vogliono una preparazione intera** *(la rampa spenta `20` tick; `e = 0`; il francobollo senza spostamento entro `1e-12`; il DEVE FALLIRE della fase su un francobollo incollato)*.
 - ### **IL CALENDARIO** *(R4 e la decisione di Luca delle `17:22`: niente accanto a una corsa col lapse)*: **il codice si scrive mentre il principale corre; le suite e le preparazioni (MG), (MGU) SOLO quando il principale non ha una corsa col lapse aperta** *(il principale: `0L`, `UL` senza lapse; poi `Grampa`, `GUrampa` col lapse; poi `Uzero`)*; **(MU) non ha lapse: puo' girare accanto a un braccio SENZA lapse.**
+
+## 3. IL COLLAUDO: `4/4` *(il codice a `f8e289fb`; dalle `20:21:02` alle `20:22:31`, accanto a `p6-Grampa` del principale)*
+
+- **(MG) la rampa spenta = `tick_lapse.tick` AL BIT per `20` tick; (MU) `e = 0` = `accensione.tick` AL BIT** *(col bordo)*.
+- **Il francobollo di TBS a `10000`:** **`R_t = 28`** *(l'anello del vuoto, il `|dphi|` medio massimo, e' il primo: `11.7`; il `|dphi|` resta fra `6` e `9` fino all'anello `17`, poi `3.3`, `0.80`, `0.35` e scende sotto il `2%` oltre il `25`)*; **`3697` nodi; incollato nello stesso stato: dentro `R_t` `psi` uguale, `phi` entro `8.9e-20`** *(il DEVE `1e-12`)*.
+- **La fase del vuoto su `L 162`** *(incollato a `[80, 80]`, tick `60000`)*: **il salto di energia allineato `-52.54778`, NON allineato `-52.54783`: il DEVE FALLIRE fallisce come deve,**
+  - ### ⚠ **MA E' DEBOLE:** **`Delta = 7.4e-05` rad soltanto:** **la fase del vuoto `c(t)` gira di `3 pi / 20` per tick, e fra il tick `10000` di TBS e il `60000` passano `50000` tick = `3750` giri INTERI: le due fasi coincidono gia'.** **Lo stesso nel controllo S7** *(dal mattone a `15000` al `60000`: `45000` tick, `3375` giri)*. ### **Il controllo non distingue a questi tick; per uno sensibile: incollare a un tick NON congruente** *(per esempio `60001`)*. **Un'osservazione, non un cambio del codice ora.**
