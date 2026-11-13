@@ -25603,3 +25603,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`doc/referti_l2/p6_bracci/0.npz`** *(`7.08` MB)* **e `0.txt`** *(lo stdout copiato dallo scratchpad)*; **il codice a `d6d8ccc4`, la corsa a `032d7265`, dalle `15:33:55` alle `15:44:05`; nel registro `p6-0`** *(«lunga»; nessuna tappa: meno di `10` minuti)*.
 - **`0.383` s per tick** *(con le misure ogni `50`, l'energia del toro compresa)*; **`M` da `1.9908522548e+06` a `1.9908146222e+06`** *(il bordo)*; **`d` a `60200` `37.555567`** *(come la prova breve)*.
 - **I DEVE e le misure: nel referto dei bracci, quando ci sono tutti.** **Poi (0bis).**
+
+### 2026-11-13 15:58 -- P6, IL BRACCIO (0bis): = (0) AL BIT *(gli sha di ogni chiave alla fine)*; `1500` TICK IN `450` s [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/p6_bracci/0bis.npz`** *(`7.08` MB)* **e `0bis.txt`; la corsa dalle `15:44:31` alle `15:57:29`; nel registro `p6-0bis`.** **`d` da `37.569220` a `37.317082`, come (0).** **Poi (G)** *(il lapse, circa un'ora)*.
