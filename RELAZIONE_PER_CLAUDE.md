@@ -25570,3 +25570,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **IL RESPIRO** *(il picco-picco di `rho max / la densita' media del corpo`)*: **(A) `0.6080`, (B) `0.5940`** *(il rapporto `0.977`: SIMILE)*, **(C) `0.4802`** *(il rapporto con (A) `0.790`)*.
   - **La lettura scritta:** **(B) simile ad (A): il respiro viene dall'accensione brusca o dal campo stesso, non dal pendolo;** **(C) non meno della meta' di (A): l'accensione brusca NON ne spiega la parte maggiore** *(la rampa di `500` tick lo riduce del `21%`)*.
 - **Da leggere da Luca** *(il video si monta dagli npz)*.
+
+### 2026-11-13 13:45 -- IL REGISTRO CON LE TAPPE FUORI DAL REPO (b): IL COLLAUDO `12/12` *(Luca `12:58`, il testo delle `12:22` arrivato alle `13:00`; il codice a `afdb29fc`)*
+
+- **La decisione (b):** **le tappe in `E:/soliton_simulator/registro_tappe/<nome>.txt`, fuori dal repo; `chiudi` le copia nel registro con la chiusura, in una scrittura atomica;** **nessun file in `primo_ordine/`.** **L'errore del guardiano `n.147`** *(la (a) consigliata senza vedere che il controllo e' nel nucleo congelato)* **nella MAPPA.**
+- ### **Il collaudo** *(`doc/referti_l2/registro_corse_collaudo.txt`)*: **`12/12`:** **una tappa NON cambia il registro** *(lo sha uguale)* **e va nel file esterno;** **la chiusura la COPIA** *(`copiata_alla_chiusura`)* **e sposta il file in `.chiuso.`;** **la prova a secco `APERTO`, `TAPPA`, `CHIUSO` `FINITO` a `tick 10`;** **la `breve` accanto alla `lunga` ACCETTATA; la seconda `lunga` e lo stesso nome RIFIUTATI** *(i DEVE FALLIRE falliscono)*; **un file di tappe rimasto rifiutato; il riavvio copia le tappe e chiude `FERMATO` a `tick 750`; il registro vero e le tappe vere non toccati.**
+- **La prima suite di (b)** *(`13:05:48`-`13:21:17`)* **era sul codice prima delle differenze delle `12:22`: rigirata** *(`13:22:19`-`13:38:00`, `67/67`)*.
+- **Poi:** **il driver con la suite vera, nei due modi** *(una tappa esterna: la suite DEVE uscire con `0`; una tappa nel registro del repo: DEVE FALLIRE, la suite esce con `1`)*; **poi i bracci di P6.**

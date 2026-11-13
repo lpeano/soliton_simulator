@@ -1,21 +1,23 @@
-[TIMBRO] _registro_corse.py  sha1-BYTE e7b18318  committato e pulito
-[TIMBRO] test_registro_corse.py  sha1-BYTE 02605521  committato e pulito
+[TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
+[TIMBRO] test_registro_corse.py  sha1-BYTE 67232971  committato e pulito
 ========================================================================================================================
-IL COLLAUDO DEL REGISTRO DELLE CORSE DELL'ERA 2: su un registro temporaneo; il registro vero doc\REGISTRO_CORSE.md sha1-BYTE 088b14a3
+IL COLLAUDO DEL REGISTRO DELLE CORSE DELL'ERA 2 (la decisione (b): le tappe fuori dal repo): su un registro e una cartella temporanei; il registro vero doc\REGISTRO_CORSE.md sha1-BYTE fd6e3e99; le tappe vere in E:\soliton_simulator\registro_tappe
 ========================================================================================================================
-  APERTO: {'nome': 'secco-lunga', 'tipo': 'lunga', 'ora': '2026-11-13T12:24:02+01:00', 'comando': 'python finto.py --tick 10'}
-    HEAD 83907a19, file modificati 0; il nucleo: 12 file, uguali alla tabella: True
+  APERTO: {'nome': 'secco-lunga', 'tipo': 'lunga', 'ora': '2026-11-13T13:42:31+01:00', 'comando': 'python finto.py --tick 10'}
+    HEAD afdb29fc, file modificati 1; il nucleo: 12 file, uguali alla tabella: True; le tappe in registro_tappe\secco-lunga.txt
+  DEVE PASSARE: una tappa NON cambia il registro e scrive nel file esterno                                       PASSA   il registro uguale: True; le tappe esterne ['tick 5']
   DEVE PASSARE: una breve aperta mentre una lunga e' aperta: ACCETTATA                                           PASSA   
   DEVE FALLIRE: apri: una seconda lunga con una lunga aperta e' accettata                                        ### FALLISCE   c'e' gia' una corsa lunga aperta: ['secco-lunga'] (al piu' una lunga e una breve insieme)
-  DEVE FALLIRE: apri: lo stesso nome aperto due volte e' accettato                                               ### FALLISCE   la voce 'secco-lunga' e' gia' APERTA (dalle 2026-11-13T12:24:02+01:00)
+  DEVE FALLIRE: apri: lo stesso nome aperto due volte e' accettato                                               ### FALLISCE   la voce 'secco-lunga' e' gia' APERTA (dalle 2026-11-13T13:42:31+01:00)
   DEVE PASSARE: controllo: forza senza il testo della decisione rifiuta                                          PASSA   forza senza il testo della decisione di Luca
   DEVE PASSARE: controllo: il riavvio senza visto_da_luca rifiuta                                                PASSA   una voce rimasta aperta dopo un riavvio si chiude SOLO dopo che Luca l'ha vista: manca visto_da_luca
-  gli eventi della lunga finta: [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]; la chiusura: FINITO a tick 10
-  gli eventi dopo i rifiuti 3 (i rifiuti non scrivono: 3 attesi = APERTO, TAPPA, APERTO della breve)
-  DEVE PASSARE: la prova a secco: una lunga finta di 10 tick, APERTO, una tappa, FINITO a tick 10, e poi nessuna PASSA   [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]
-  DEVE PASSARE: i rifiuti non scrivono niente nel registro                                                       PASSA   3 eventi
-  DEVE PASSARE: il registro cresce solo in coda (ogni contenuto comincia col precedente)                         PASSA   5 scritture
-  DEVE PASSARE: controllo: il riavvio con visto_da_luca chiude FERMATO all'ultima tappa                          PASSA   FERMATO a tick 750
-  DEVE PASSARE: il registro vero NON toccato (lo sha1-BYTE prima e dopo)                                         PASSA   088b14a3
+  gli eventi della lunga finta: [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]; la tappa copiata: [('tick 5', True)]; la chiusura: FINITO a tick 10; il file delle tappe dopo: ['secco-lunga.chiuso.20261113_134232.txt']
+  gli eventi dopo i rifiuti 2 (i rifiuti e le tappe non scrivono nel registro: 2 attesi = APERTO della lunga, APERTO della breve)
+  DEVE PASSARE: la prova a secco: APERTO, la tappa COPIATA alla chiusura, FINITO a tick 10; il file delle tappe  PASSA   [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]
+  DEVE PASSARE: i rifiuti e le tappe non scrivono niente nel registro                                            PASSA   2 eventi
+  DEVE PASSARE: il registro cresce solo in coda (ogni contenuto comincia col precedente)                         PASSA   4 scritture
+  DEVE PASSARE: controllo: apri rifiuta se il file delle tappe di quel nome c'e' gia'                            PASSA   il file delle tappe C:\Users\lpeano\AppData\Local\Temp\collaudo_registro__du7km8v\registro_tappe\secco-rimasto.txt esiste gia' (una chiusura caduta a meta'?): va guardato, non sovrascritto
+  DEVE PASSARE: controllo: il riavvio con visto_da_luca copia le tappe e chiude FERMATO all'ultima               PASSA   l'ultima tappa letta tick 750; le copiate ['tick 500', 'tick 750']; FERMATO a tick 750
+  DEVE PASSARE: il registro vero e la cartella vera delle tappe NON toccati                                      PASSA   fd6e3e99; le tappe vere None
 ========================================================================================================================
-ESITO: 10/10 controlli come devono; fallite: 0 []
+ESITO: 12/12 controlli come devono; fallite: 0 []
