@@ -85,3 +85,12 @@
 - ### **I DEVE:** **con UN solo francobollo, la somma e il prodotto = l'incollatura di S6 AL BIT** *(`psi` e `phi`)*; **il residuo di Gauss sotto `1e-10` a ogni controllo** *(ogni `250` tick)*.
 - **Il referto:** **l'accelerazione relativa in quattro finestre** *(`0-500`, `500-1000`, `1000-1500`, `1500-2000`: la parabola di `d` in ciascuna; forza costante o colpetto?)*; **il picco dei due solitoni contro quello del mattone** *(gli ultimi `1000` tick di (MGU))*.
 - **Il codice:** **un file NUOVO, `csv/solitone/mattone_coppia.py`** *(importa `mattone.py`, che in quel momento serve al controllo S7 in corsa: non si tocca)*. **Poi la riunione** *(R5)* **e FERMO su tutti e due i rami.**
+
+## 9. IL CONTROLLO DEL METODO DI (MG): FALLISCE -- FERMO DELLA CATENA DEL MATTONE *(il codice a `f8e289fb`, i byte `c2107885`; dalle `22:39:41` alle `23:21:27`, in coppia con `p6-GUrampa`)*
+
+- **Il francobollo di `MG_05000.npz`:** **`R_t = 32`** *(l'anello del vuoto il `5`; quello di TBS a `10000` era `28`: il solitone sotto il lapse e' piu' largo)*, **`4693` nodi; incollato a `[80, 80]` nella scena di S162** *(il suo solitone a `(81.58, 81.34)`)*.
+- **Il salto di energia all'incollatura:** **`+11.18239` allineato** *(`Delta = 1.39e-04`)*, **`+11.18238` non allineato** *(la fase quasi nulla: i tick congruenti, sez. `3`)*.
+- ### **`1000` tick in `2471` s:** **il centro si sposta al piu' di `0.0785` nodi** *(la soglia `0.2`: PASSA)*; ### **il respiro `0.1068` contro quello del mattone `0.0711`: il rapporto `1.502`, la tolleranza `25%`: FALLISCE.**
+- ### **FERMO** *(il mandato delle `18:47`: «FERMO SOLO SE un controllo del metodo S7 fallisce»)*: **NON si fanno i controlli di (MU) e (MGU), NON la coppia di mattoni** *(anche la decisione delle `22:54` si ferma su un S7 fallito)*, **NON la riunione.** **Nessuna correzione.**
+- **Una lettura possibile, NON verificata** *(guardiano, per Luca)*: **su `L 162` il mattone si trova in una scena diversa** *(il bordo di S162, piu' largo; il vuoto di `L 162`; il francobollo tagliato a `R_t + 4` con la coda raccordata)*; **un respiro piu' ampio del `50%` dice che l'incollatura lo scuote: il «mattone calmo» non resta calmo trapiantato.** **Quanto pesino il taglio, il raccordo o la scena, non lo so.**
+- **Continuano, perche' non dipendono da S7:** **il mandato delle `23:22`** *(perche' il lapse allarga il solitone: `mattone_rhoc.py`, (MGx2), (MG/2))* **e il ramo principale.**
