@@ -25621,3 +25621,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(b) FUORI DAL REPO, UNA COPIA INTERA** *(un secondo disco o un servizio esterno)*: **`E:\soliton_simulator` e `E:\soliton_archivio`** *(`8.088` GB)*, **piu' `db/` del repo** *(`0.769` GB)*.
   - **(c) LO SPAZIO:** **(a) circa `23` MB nel repo** *(piu' la fase)*; **(b) circa `8.9` GB per la copia.**
 - ### **FERMO per la decisione di Luca sull'inventario;** **i bracci di P6 continuano.**
+
+### 2026-11-13 16:56 -- L'INVENTARIO DI E:: LA DECISIONE DI LUCA, NESSUNA AZIONE PER ORA
+
+- ### **LA DECISIONE DI LUCA** *(`2026-11-13` `16:55`)*: **letto; per ora NESSUNA azione** *(niente stati nel repo, niente copia, niente NTFS)*; **la proposta resta registrata nel referto per una decisione futura.** **La coda continua: i bracci di P6.**
