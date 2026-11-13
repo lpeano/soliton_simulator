@@ -645,3 +645,19 @@
 - **Il riavvio** *(`18:57`)*: **le corse interrotte si chiudono come INTERROTTE DAL RIAVVIO e si rifanno DA CAPO;** **nessun codice di ripartenza.**
 - **L'ordine:** **il codice della rampa e del tetto, la suite, il commit; `0_2000`, `U_2000`; `Grampa`, `GUrampa`, `Uzero`; il referto con la tabella dei tempi; FERMO; poi la voce `7-bis`.** **Il ramo mattone accanto, col mandato delle `18:47`.**
 - **Una nota sull'ordine del lavoro:** **la suite delle `18:43` girava sul codice coi nomi `0L`/`UL` e il tetto a `5400`: cambiato dopo il mandato delle `18:58`, si RIGIRA.**
+
+### 11.20 IL REFERTO DEI BRACCI: `15/15`
+
+- **Il referto `doc/referti_l2/p6_bracci.txt`** *(il codice a `2329ecfa`; i bracci in `doc/referti_l2/p6_bracci/`)*: ### **`15/15` controlli come devono.**
+  - **I DEVE:** **(0) = le mappe di C35-pi** *(`1.26e-08`)*; **(0) rifatto = (0) al bit; (0) = (off) di G2 a `1500`; (U) = la prova breve a `60200`; `0_2000` e `U_2000`: i primi `1500` = (0) e (U) al bit** *(`18` e `22` chiavi)*; **l'adattatore di (G+U) a `e = 0` = (G) al bit; la rampa spenta al bit in `Grampa` e `GUrampa`; `tau - t = 0` a `N = 1`;** **DEVE FALLIRE, e falliscono: la finta di `10` errori VISTA; `Grampa` diverso da (G) brusco** *(`0.117`)*; **`tau - t` non nullo in (G+U)** *(`9.5`)*; **l'energia dopo la rampa: l'escursione di `Grampa` `632` contro (G) brusco `783`** *(la mia lettura del DEVE)*.
+- ### **LE ACCELERAZIONI RELATIVE IN PIU'** *(la parabola di `d_X - d_0` su `2000` tick, la rampa compresa)*:
+  - **(G) = `Grampa`: `+7.18e-07 +- 3.4e-08`** *(`21` errori)*: **si ALLONTANANO** *(alla fine `+0.687` nodi)*;
+  - **(U) = `U_2000`: `-2.55e-08 +- 3.4e-10`** *(`75` errori)*: **si AVVICINANO;** **il rapporto con l'atteso `-2 a`: `0.0128`** *(la prova breve: `0.0178`)*;
+  - **(G+U) = `GUrampa`: `+6.89e-07 +- 3.4e-08`** *(`20` errori)*: **si allontanano;**
+  - **(U) col campo da zero: `-8.45e-10 +- 3.3e-11`** *(`25` errori)*: **un'attrazione piccolissima, dalle sole correnti;**
+  - **(0) da solo** *(l'interazione propria della coppia, senza campi)*: **`d'' = -7.34e-08 +- 5.8e-09`.**
+- ### **LA FORMA NEL TEMPO** *(Luca `18:16`)*: **in `Grampa` `d - d_0` scende fino a `-0.018` a `900` tick, poi SALE;** **la velocita' relativa cresce da `+8.8e-05` (`900`) a `+1.04e-03` (`1800`), ma i suoi incrementi per `150` tick CALANO** *(`1.8e-04`, `2.4e-04`, `1.7e-04`, `1.35e-04`, `1.23e-04`, `1.0e-04`)*: **una spinta che si affievolisce, non una forza costante** *(una lettura, non un DEVE)*. **`GUrampa` ha la stessa forma.** **Il (G) brusco: la velocita' gia' a `+4.1e-04` a `900`.**
+- ### **L'ADDITIVITA':** **`[(G+U) - (0)] - [(G) - (0)] - [(U) - (0)] = -3.25e-09 +- 6.0e-10`** *(`5.4` errori: i due campi «si parlano» secondo il criterio scritto)*, **ma e' lo `0.5%` di (G).** **IL RAPPORTO DELLE FORZE `a_G / a_U = -28.1`** *(con `rho_c 227058.57` ed `e 6.315e-05`)*.
+- ### **L'ENERGIA DEL TORO INTERO** *(meno (0), su `2000` tick)*: **`Grampa`: `tot -5545`, di cui `cin -2541`, `leg -4052`, `vuo +1068`;** **`GUrampa` simile** *(`tot -5506`)*; **(U): `tot +0.14`** *(e `K + V` da `22.516` a `22.554`)*; **(U) da zero `-0.38`.** **In `GUrampa` il campo `K + V` scende da `22.52` a `17.97` mentre i solitoni si allargano.**
+- ### **IL TEMPO PROPRIO** *(`Grampa`)*: **ai due centri `tau - t` arriva a `-9.44` e `-9.28` in `2000` tick** *(gli orologi dei solitoni indietro dello `0.47%`)*; **lontano `-3.3e-07`.**
+- ### **FERMO per Luca** *(il mandato delle `18:58`: dopo il referto dei bracci)*: **la serie di distanze si decide sui numeri; poi la voce `7-bis`.**

@@ -1,0 +1,108 @@
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+==================================================================================================================================
+P6, I BRACCI: IL REFERTO (sez. 11.14-11.18): (0) 1500 tick, (0bis) 1500 tick, (G) 1150 tick, (U) 1500 tick, (Uzero) 2000 tick, (Grampa) 2000 tick, (GUrampa) 2000 tick, (0_2000) 2000 tick, (U_2000) 2000 tick; mancano []
+  (0) nelle misure = 0_2000, (U) = U_2000 (rifatti da capo a 2000 tick, Luca 18:27, 18:58); (G) = Grampa, (G+U) = GUrampa (il lapse acceso piano, Luca 18:16); (G) brusco da 1150 tick (5f0f70f1) a parte; (G+U) brusco fermato due volte, Grif NON fatto
+==================================================================================================================================
+### la durata COMUNE delle misure: 2000 tick (41 punti ogni 50)
+    (0      ) 1500 tick in 574 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.317082; il FERMO None
+    (0bis   ) 1500 tick in 450 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.317082; il FERMO None
+    (G      ) 1150 tick in 3511 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.530355; il FERMO None
+    (U      ) 1500 tick in 478 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.281888; il FERMO None
+    (Uzero  ) 2000 tick in 699 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.211968; il FERMO None
+    (Grampa ) 2000 tick in 5983 s (il tetto 18000.0 s, la rampa 500); d da 37.569220 a 37.899997; il FERMO None
+    (GUrampa) 2000 tick in 4975 s (il tetto 18000.0 s, la rampa 500); d da 37.569220 a 37.837987; il FERMO None
+    (0_2000 ) 2000 tick in 938 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.213093; il FERMO None
+    (U_2000 ) 2000 tick in 942 s (il tetto 3600.0 s, la rampa 0); d da 37.569220 a 37.154406; il FERMO None
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: (0) contro le mappe di C35-pi: d alla stessa ora entro 1e-05                                             PASSA   1.262e-08 su 15 tick
+  DEVE PASSARE: (0) rifatto = (0) AL BIT (gli sha di ogni chiave alla fine)                                              PASSA   diverse: []
+  DEVE PASSARE: (0) riproduce (off) di G2: d a 1500 tick = 37.317082 entro 1e-6                                          PASSA   37.317082
+  DEVE PASSARE: (U) riproduce la prova breve: d a 60200 = 37.554857 entro 1e-6                                           PASSA   37.554857
+  DEVE PASSARE: (0_2000) allungato: i primi 1500 tick = (0) gia' fatto AL BIT (le serie, rho float32, |phi_j|^2, dLambda PASSA   18 chiavi; diverse: []
+  DEVE PASSARE: (U_2000) allungato: i primi 1500 tick = (U) gia' fatto AL BIT (le serie, rho float32, |phi_j|^2, dLambda PASSA   22 chiavi; diverse: []
+  DEVE PASSARE: l'adattatore di (G+U) a e = 0 = (G) al bit (20 tick, nel braccio GUrampa)                                PASSA   diverse: []
+  DEVE PASSARE: (Grampa) la rampa spenta (r = 1 dall'inizio) = il tick di oggi AL BIT per 20 tick                        PASSA   diverse: []
+  DEVE PASSARE: (GUrampa) la rampa spenta (r = 1 dall'inizio) = il tick di oggi AL BIT per 20 tick                       PASSA   diverse: []
+----------------------------------------------------------------------------------------------------------------------------------
+### la parabola di d_0 da sola: d'' -7.335525e-08 +- 5.8e-09 (L'INTERAZIONE PROPRIA DELLA COPPIA, senza campi; l'errore del fit: la scala della finta)
+  DEVE FALLIRE: (0) rifatto + una finta di 10 errori (5.784e-08), meno (0): compatibile con zero entro 3 max(errore, err ### FALLISCE   misurata +5.784e-08 +- 4.4e-21
+### d_X - d_0, la parabola sulla durata comune (d'' in piu', per tick^2):
+    (G     = Grampa ) +7.175065e-07 +- 3.4e-08 (  21.1 errori); alla fine +6.8690e-01
+    (U     = U_2000 ) -2.554235e-08 +- 3.4e-10 (  75.1 errori); alla fine -5.8687e-02
+    (GU    = GUrampa) +6.887181e-07 +- 3.4e-08 (  20.3 errori); alla fine +6.2489e-01
+    (Uzero = Uzero  ) -8.446714e-10 +- 3.3e-11 (  25.4 errori); alla fine -1.1257e-03
+    (U) contro l'atteso d'' = -2 a = -1.992522e-06: il rapporto 0.0128 (la prova breve: 0.0178)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA FORMA NEL TEMPO (Luca 18:16): d - d_0 ogni 150 tick, e la velocita' relativa a finestre di 150 tick ((d - d_0)(t + 150) - (d - d_0)(t)) / 150
+    (una forza costante da' una velocita' che cresce in modo LINEARE; un'accensione un'altra forma)
+    (G      ) d - d_0 : 0:+0.0000  150:+0.0000  300:-0.0018  450:-0.0074  600:-0.0158  750:-0.0125  900:+0.0127  1050:+0.0741
+    (G      ) v       : 0:+1.73e-07  150:-1.24e-05  300:-3.71e-05  450:-5.62e-05  600:+2.23e-05  750:+1.68e-04  900:+4.09e-04
+    (Grampa ) d - d_0 : 0:+0.0000  150:+0.0000  300:-0.0002  450:-0.0017  600:-0.0055  750:-0.0120  900:-0.0181  1050:-0.0049  1200:+0.0356  1350:+0.1125  1500:+0.2149  1650:+0.3376  1800:+0.4787  1950:+0.6341
+    (Grampa ) v       : 0:+1.89e-07  150:-1.47e-06  300:-9.76e-06  450:-2.58e-05  600:-4.33e-05  750:-4.08e-05  900:+8.83e-05  1050:+2.70e-04  1200:+5.13e-04  1350:+6.83e-04  1500:+8.18e-04  1650:+9.41e-04  1800:+1.04e-03
+    (GUrampa) d - d_0 : 0:+0.0000  150:-0.0004  300:-0.0018  450:-0.0052  600:-0.0117  750:-0.0215  900:-0.0316  1050:-0.0228  1200:+0.0126  1350:+0.0842  1500:+0.1807  1650:+0.2962  1800:+0.4293  1950:+0.5757
+    (GUrampa) v       : 0:-2.48e-06  150:-9.37e-06  300:-2.27e-05  450:-4.34e-05  600:-6.51e-05  750:-6.74e-05  900:+5.83e-05  1050:+2.36e-04  1200:+4.77e-04  1350:+6.43e-04  1500:+7.70e-04  1650:+8.87e-04  1800:+9.76e-04
+    (G) brusco contro Grampa ai tick comuni DOPO la rampa (500-1150): max |d_G - d_Grampa| 1.1657e-01
+  DEVE FALLIRE: (Grampa) uguale a (G) brusco entro 1e-6 ai tick comuni dopo la rampa                                     ### FALLISCE   1.166e-01
+----------------------------------------------------------------------------------------------------------------------------------
+### L'ENERGIA DEL TORO INTERO per termini (il libro dei conti), la variazione sulla durata comune (dal tick 60000 al 62000); e_K -1.5706823468
+                          cost               cin               leg               vuo               tot                 M                 V
+    (0_2000 ) all'inizio  3.127450326e+06   1.142716212e+07   1.974810363e+06   5.690329510e+03   1.653511314e+07   1.990852255e+06   1.510026635e+05
+    (0_2000 ) la variazione -7.800653909e+01  -1.182227208e+02  -3.210535472e+01  -1.479308576e+01  -2.431277004e+02  -4.965690196e+01  -5.144935412e+01
+    (U_2000 ) all'inizio  3.127450326e+06   1.142716212e+07   1.974810363e+06   5.690329510e+03   1.653511314e+07   1.990852255e+06   1.510026635e+05
+    (U_2000 ) la variazione -7.823564053e+01  -1.235558061e+02  -3.088395169e+01  -1.031254685e+01  -2.429879451e+02  -4.980274188e+01  -5.137826993e+01
+    (Uzero  ) all'inizio  3.127450326e+06   1.142716212e+07   1.974810363e+06   5.690329510e+03   1.653511314e+07   1.990852255e+06   1.510026635e+05
+    (Uzero  ) la variazione -7.800829030e+01  -1.194069881e+02  -3.328977815e+01  -1.280746132e+01  -2.435125179e+02  -4.965801673e+01  -5.145236556e+01
+    (Grampa ) all'inizio  3.127450326e+06   1.142716212e+07   1.974810363e+06   5.690329510e+03   1.653511314e+07   1.990852255e+06   1.510026635e+05
+    (Grampa ) la variazione -9.709795985e+01  -2.659619561e+03  -4.083834785e+03  +1.052852065e+03  -5.787700241e+03  -6.180999604e+01  -1.362419465e+02
+    (GUrampa) all'inizio  3.127450326e+06   1.142716212e+07   1.974810363e+06   5.690329510e+03   1.653511314e+07   1.990852255e+06   1.510026635e+05
+    (GUrampa) la variazione -9.796278466e+01  -2.617797381e+03  -4.036149518e+03  +1.002456166e+03  -5.749453518e+03  -6.236052067e+01  -1.321388143e+02
+    (Grampa ) meno (0), la variazione -1.909142075e+01  -2.541396840e+03  -4.051729431e+03  +1.067645151e+03  -5.544572540e+03  -1.215309408e+01  -8.479259239e+01
+    (U_2000 ) meno (0), la variazione -2.291014353e-01  -5.333085243e+00  +1.221403035e+00  +4.480538914e+00  +1.397552751e-01  -1.458399210e-01  +7.108419007e-02
+    (GUrampa) meno (0), la variazione -1.995624557e+01  -2.499574660e+03  -4.004044164e+03  +1.017249252e+03  -5.506325817e+03  -1.270361871e+01  -8.068946019e+01
+    (Uzero  ) meno (0), la variazione -1.751201693e-03  -1.184267281e+00  -1.184423427e+00  +1.985624437e+00  -3.848174661e-01  -1.114768442e-03  -3.011441499e-03
+    (U_2000 ) il campo K + V: da 2.251599e+01 a 2.255391e+01
+    (GUrampa) il campo K + V: da 2.251599e+01 a 1.797235e+01
+    (Uzero  ) il campo K + V: da 0.000000e+00 a 1.224726e-02
+    l'energia DOPO la rampa (la mia lettura, sez. 11.18): l'escursione di E_tot(X) - E_tot(0) attorno alla sua retta, tick 500-1150: (G) brusco 7.826668e+02, Grampa 6.319356e+02
+  DEVE PASSARE: (Grampa) l'energia dopo la rampa entro la tolleranza del braccio senza rampa (l'escursione non oltre que PASSA   6.319e+02 contro 7.827e+02
+----------------------------------------------------------------------------------------------------------------------------------
+### IL TEMPO PROPRIO PER NODO: tau - t = somma di (N_eff - 1), N_eff = mot.cs / s del tick vero (con la rampa). I bracci senza lapse ((0), (0bis), (U), (Uzero)): N = 1 e tau = t per costruzione (dichiarato).
+  DEVE PASSARE: (Grampa) il controllo a N = 1 (la legge uno, 20 tick): tau - t = 0 ESATTAMENTE in ogni nodo              PASSA   max |tau - t| 0.0
+  DEVE PASSARE: (GUrampa) il controllo a N = 1 (la legge uno, 20 tick): tau - t = 0 ESATTAMENTE in ogni nodo             PASSA   max |tau - t| 0.0
+    (Grampa) ogni 250 tick: tau - t al centro di A e di B, lontano (la mediana fuori da R 25 dai due centri), il minimo e il massimo sul toro
+      t  60000  A +0.000000e+00  B +0.000000e+00  lontano +0.000000e+00  min +0.000000e+00  max +0.000000e+00
+      t  60250  A -7.479747e-01  B -7.063209e-01  lontano -8.696152e-09  min -7.499701e-01  max +0.000000e+00
+      t  60500  A -2.732292e+00  B -2.587965e+00  lontano -3.382949e-08  min -2.732292e+00  max +0.000000e+00
+      t  60750  A -4.802915e+00  B -4.586024e+00  lontano -6.946510e-08  min -4.802915e+00  max +0.000000e+00
+      t  61000  A -6.321694e+00  B -6.107418e+00  lontano -1.082217e-07  min -6.321694e+00  max +0.000000e+00
+      t  61250  A -7.467465e+00  B -7.219882e+00  lontano -1.503616e-07  min -7.467465e+00  max +0.000000e+00
+      t  61500  A -8.251271e+00  B -7.991362e+00  lontano -2.016296e-07  min -8.251271e+00  max +0.000000e+00
+      t  61750  A -8.791460e+00  B -8.541820e+00  lontano -2.574718e-07  min -8.791460e+00  max +0.000000e+00
+      t  62000  A -9.442159e+00  B -9.282200e+00  lontano -3.269920e-07  min -9.488494e+00  max +0.000000e+00
+    (GUrampa) ogni 250 tick: tau - t al centro di A e di B, lontano (la mediana fuori da R 25 dai due centri), il minimo e il massimo sul toro
+      t  60000  A +0.000000e+00  B +0.000000e+00  lontano +0.000000e+00  min +0.000000e+00  max +0.000000e+00
+      t  60250  A -7.481547e-01  B -7.064874e-01  lontano -8.696126e-09  min -7.501469e-01  max +0.000000e+00
+      t  60500  A -2.734473e+00  B -2.589940e+00  lontano -3.382888e-08  min -2.734473e+00  max +0.000000e+00
+      t  60750  A -4.809027e+00  B -4.591758e+00  lontano -6.944169e-08  min -4.809027e+00  max +0.000000e+00
+      t  61000  A -6.332351e+00  B -6.117464e+00  lontano -1.081833e-07  min -6.332351e+00  max +0.000000e+00
+      t  61250  A -7.482776e+00  B -7.234862e+00  lontano -1.502218e-07  min -7.482776e+00  max +0.000000e+00
+      t  61500  A -8.270694e+00  B -8.009452e+00  lontano -2.026172e-07  min -8.270694e+00  max +0.000000e+00
+      t  61750  A -8.813340e+00  B -8.562508e+00  lontano -2.559558e-07  min -8.813340e+00  max +0.000000e+00
+      t  62000  A -9.494539e+00  B -9.308722e+00  lontano -3.259726e-07  min -9.515529e+00  max +0.000000e+00
+  DEVE FALLIRE: (G+U): tau - t identicamente zero su tutto il toro e in tutti i tick                                     ### FALLISCE   max |tau - t| 9.515529e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### L'ADDITIVITA': [(GUrampa) - (0_2000)] - [(Grampa) - (0_2000)] - [(U_2000) - (0_2000)]: d'' -3.246058e-09 +- 6.0e-10 (5.4 errori); alla fine -3.3231e-03; la somma (G) + (U) +6.919642e-07, misurata (G+U) +6.887181e-07
+### IL RAPPORTO DELLE FORZE (sez. 12.1 f): a_G / a_U = -28.0909 (a_G +7.1751e-07, a_U -2.5542e-08), con rho_c 227058.574864 (rho_0 / 0.01) ed e 6.3154140e-05 (sulla durata comune, la rampa compresa)
+----------------------------------------------------------------------------------------------------------------------------------
+### I TEMPI DELLE CORSE COL LAPSE (dalle uscite: il tempo per tick a ogni blocco di 50 tick; le tappe nel registro portano la memoria libera)
+    (G      ) 1150 tick in 3511 s: 3.053 s per tick in media
+    (Grampa ) 2000 tick in 5983 s: 2.992 s per tick in media
+    (GUrampa) 2000 tick in 4975 s: 2.487 s per tick in media
+    (da sola o in coppia, e la memoria minima: le tappe nel registro, la tabella nella relazione)
+----------------------------------------------------------------------------------------------------------------------------------
+  LE LETTURE (sez. 11.4, a 3 errori, sulla parabola): (G) +; (U) -; (G+U) +; (U) da zero -   [+ si allontanano, - si avvicinano, 0 niente oltre 3 errori]
+  L'ADDITIVITA': OLTRE 3 errori: i due campi si parlano
+  (G+U) da una sola distanza: il segno netto + ((gu1) o (gu2) si decidono con la serie di distanze)
+  ### la parabola sui bracci con la rampa comprende la rampa: la FORMA nel tempo (sopra) dice se e' una forza costante
+==================================================================================================================================
+ESITO: 15/15 controlli come devono; fallite: 0 []
