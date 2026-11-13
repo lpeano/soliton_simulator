@@ -25597,3 +25597,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **I DEVE delle `12:22`, tutti come devono:** **la prova a secco con le tappe nel file esterno e copiate alla chiusura** *(il collaudo `12/12`)*; **la suite esce con `0` mentre una corsa scrive tappe nel file esterno** *(`4/4`, la tappa `953` s prima della fine)*; **una tappa nel registro del repo durante la suite: la suite esce con `1`** *(`5/5`)*.
 - **La regola provvisoria della sez. `4` cade:** **una corsa scrive le sue tappe mentre gira la suite;** **`apri` e `chiudi` mai durante la suite** *(la skill)*.
 - **Poi: i bracci di P6, nell'ordine** *(il primo, (0), aperto come «lunga»)*. **La voce `9`** *(le bande piatte)* **aspetta Luca sui proiettori del vuoto** *(`6` componenti, quelli del `31` ottobre sono per la materia)*.
+
+### 2026-11-13 15:46 -- P6, IL BRACCIO (0): `1500` TICK IN `574` s; `d` DA `37.569220` A `37.317082` *(= (off) di G2)* [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/p6_bracci/0.npz`** *(`7.08` MB)* **e `0.txt`** *(lo stdout copiato dallo scratchpad)*; **il codice a `d6d8ccc4`, la corsa a `032d7265`, dalle `15:33:55` alle `15:44:05`; nel registro `p6-0`** *(«lunga»; nessuna tappa: meno di `10` minuti)*.
+- **`0.383` s per tick** *(con le misure ogni `50`, l'energia del toro compresa)*; **`M` da `1.9908522548e+06` a `1.9908146222e+06`** *(il bordo)*; **`d` a `60200` `37.555567`** *(come la prova breve)*.
+- **I DEVE e le misure: nel referto dei bracci, quando ci sono tutti.** **Poi (0bis).**

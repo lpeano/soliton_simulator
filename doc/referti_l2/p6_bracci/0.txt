@@ -1,0 +1,55 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] s5_coppia_lapse.py  sha1-BYTE 344015e0  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 8daeb4da  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 4d8a9f8c  committato e pulito
+==================================================================================================================================
+P6, IL BRACCIO (0) (sez. 11.14): lo stato di C35-pi a 60000; fino a 1500 tick (il tetto 3600 s); rho e i centri ogni 50, |phi_j|^2 e dLambda ogni 250; e 6.3154140e-05; eps_a 0.4767266286; R_LAPSE 0.01; il registro p6-0
+==================================================================================================================================
+### a t 60000: d0 37.569220; rho_0 (i due centri, r < w_in 6.643741) 2270.585749; rho_c 227058.574864; M 1.9908522548e+06; max rho 2.787236e+03; 18056 nodi sul bordo
+    t  60050  d 37.566844  M 1.9908508556e+06  rmax 2.8930e+03  (16 s)
+    t  60100  d 37.562886  M 1.9908494827e+06  rmax 2.8489e+03  (33 s)
+    t  60150  d 37.559386  M 1.9908481711e+06  rmax 2.8188e+03  (50 s)
+    t  60200  d 37.555567  M 1.9908468984e+06  rmax 2.8002e+03  (67 s)
+    t  60250  d 37.550168  M 1.9908456553e+06  rmax 2.7530e+03  (85 s)
+    t  60300  d 37.545071  M 1.9908444623e+06  rmax 2.7581e+03  (110 s)
+    t  60350  d 37.539545  M 1.9908433174e+06  rmax 2.8492e+03  (129 s)
+    t  60400  d 37.533620  M 1.9908421602e+06  rmax 2.8063e+03  (152 s)
+    t  60450  d 37.527295  M 1.9908409382e+06  rmax 2.6916e+03  (177 s)
+    t  60500  d 37.519876  M 1.9908396650e+06  rmax 2.7496e+03  (198 s)
+    t  60550  d 37.512570  M 1.9908383896e+06  rmax 2.7982e+03  (224 s)
+    t  60600  d 37.504100  M 1.9908371333e+06  rmax 2.6994e+03  (243 s)
+    t  60650  d 37.494920  M 1.9908358859e+06  rmax 2.6629e+03  (264 s)
+    t  60700  d 37.487114  M 1.9908346598e+06  rmax 2.6564e+03  (289 s)
+    t  60750  d 37.478164  M 1.9908334881e+06  rmax 2.7100e+03  (310 s)
+    t  60800  d 37.468551  M 1.9908323384e+06  rmax 2.6509e+03  (334 s)
+    t  60850  d 37.459833  M 1.9908311092e+06  rmax 2.7003e+03  (355 s)
+    t  60900  d 37.449678  M 1.9908297674e+06  rmax 2.7313e+03  (374 s)
+    t  60950  d 37.439123  M 1.9908283912e+06  rmax 2.7099e+03  (394 s)
+    t  61000  d 37.428756  M 1.9908270523e+06  rmax 2.6675e+03  (411 s)
+    t  61050  d 37.417680  M 1.9908257477e+06  rmax 2.6711e+03  (427 s)
+    t  61100  d 37.406676  M 1.9908244525e+06  rmax 2.7298e+03  (443 s)
+    t  61150  d 37.395401  M 1.9908231659e+06  rmax 2.7440e+03  (462 s)
+    t  61200  d 37.384045  M 1.9908218917e+06  rmax 2.6984e+03  (480 s)
+    t  61250  d 37.373144  M 1.9908206254e+06  rmax 2.7663e+03  (496 s)
+    t  61300  d 37.361427  M 1.9908193635e+06  rmax 2.7422e+03  (512 s)
+    t  61350  d 37.350754  M 1.9908181187e+06  rmax 2.7346e+03  (527 s)
+    t  61400  d 37.340127  M 1.9908169151e+06  rmax 2.6710e+03  (543 s)
+    t  61450  d 37.328051  M 1.9908157560e+06  rmax 2.6736e+03  (559 s)
+    t  61500  d 37.317082  M 1.9908146222e+06  rmax 2.7565e+03  (574 s)
+### (0): 1500 tick in 574 s (0.383 s per tick); d da 37.569220 a 37.317082
+### doc\referti_l2\p6_bracci\0.npz: 7.08 MB
+### 602 s in tutto
