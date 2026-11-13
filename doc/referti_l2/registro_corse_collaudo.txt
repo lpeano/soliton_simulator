@@ -1,0 +1,21 @@
+[TIMBRO] _registro_corse.py  sha1-BYTE e7b18318  committato e pulito
+[TIMBRO] test_registro_corse.py  sha1-BYTE 02605521  committato e pulito
+========================================================================================================================
+IL COLLAUDO DEL REGISTRO DELLE CORSE DELL'ERA 2: su un registro temporaneo; il registro vero doc\REGISTRO_CORSE.md sha1-BYTE 088b14a3
+========================================================================================================================
+  APERTO: {'nome': 'secco-lunga', 'tipo': 'lunga', 'ora': '2026-11-13T12:24:02+01:00', 'comando': 'python finto.py --tick 10'}
+    HEAD 83907a19, file modificati 0; il nucleo: 12 file, uguali alla tabella: True
+  DEVE PASSARE: una breve aperta mentre una lunga e' aperta: ACCETTATA                                           PASSA   
+  DEVE FALLIRE: apri: una seconda lunga con una lunga aperta e' accettata                                        ### FALLISCE   c'e' gia' una corsa lunga aperta: ['secco-lunga'] (al piu' una lunga e una breve insieme)
+  DEVE FALLIRE: apri: lo stesso nome aperto due volte e' accettato                                               ### FALLISCE   la voce 'secco-lunga' e' gia' APERTA (dalle 2026-11-13T12:24:02+01:00)
+  DEVE PASSARE: controllo: forza senza il testo della decisione rifiuta                                          PASSA   forza senza il testo della decisione di Luca
+  DEVE PASSARE: controllo: il riavvio senza visto_da_luca rifiuta                                                PASSA   una voce rimasta aperta dopo un riavvio si chiude SOLO dopo che Luca l'ha vista: manca visto_da_luca
+  gli eventi della lunga finta: [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]; la chiusura: FINITO a tick 10
+  gli eventi dopo i rifiuti 3 (i rifiuti non scrivono: 3 attesi = APERTO, TAPPA, APERTO della breve)
+  DEVE PASSARE: la prova a secco: una lunga finta di 10 tick, APERTO, una tappa, FINITO a tick 10, e poi nessuna PASSA   [('APERTO', 'secco-lunga'), ('TAPPA', 'secco-lunga'), ('CHIUSO', 'secco-lunga')]
+  DEVE PASSARE: i rifiuti non scrivono niente nel registro                                                       PASSA   3 eventi
+  DEVE PASSARE: il registro cresce solo in coda (ogni contenuto comincia col precedente)                         PASSA   5 scritture
+  DEVE PASSARE: controllo: il riavvio con visto_da_luca chiude FERMATO all'ultima tappa                          PASSA   FERMATO a tick 750
+  DEVE PASSARE: il registro vero NON toccato (lo sha1-BYTE prima e dopo)                                         PASSA   088b14a3
+========================================================================================================================
+ESITO: 10/10 controlli come devono; fallite: 0 []

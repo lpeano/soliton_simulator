@@ -25551,3 +25551,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **c. gli orari:** **l'ultima riga di `orari_prove.txt` e' `G1lunghissima exit 0 22:16:48`;** **dopo, la suite e la prova breve hanno scritto i loro orari in due file a parte** *(la suite `22:59:43`-`23:14:12`, la prova breve `23:18:33`-`23:21:57`, uscita `0`)*: ### **nessuna corsa iniziata e non finita.** *(Due file di orari invece di uno: e' il limite che il registro dell'era 2 deve togliere.)*
 - **d. processi:** **nessun processo `python` vivo.**
 - ### **FERMO: la cache del commit-graph. Il resto del mandato aspetta la decisione di Luca su `git commit-graph write --reachable`.**
+
+### 2026-11-13 12:30 -- IL REGISTRO DELLE CORSE DELL'ERA 2: IL COLLAUDO `10/10`; LE SKILL VISTE DA UNA SESSIONE NUOVA; LA RIPRESA CHIUSA; LA SUITE CHE CANCELLEREBBE LE TAPPE: UNA DOMANDA A LUCA
+
+- **La ripresa** *(Luca `11:50`)*: **`git fsck --no-dangling` pulito** *(uscita `0`, nessuna riga)*; **`git commit-graph write --reachable` e `verify` uscita `0`; l'avviso SPARITO.**
+- ### **La suite rimette con `git checkout --` i file tracciati sporcati DURANTE la suite** *(`primo_ordine/collauda.py`, `main`)*: **una tappa scritta allora sarebbe CANCELLATA;** **la cura chiesta tocca il nucleo congelato: la domanda e le due strade nella sez. `4` del task history `2026-11-13_registro_corse.md`.**
+- **Il collaudo** *(`doc/referti_l2/registro_corse_collaudo.txt`, il codice a `83907a19`)*: ### **`10/10` controlli come devono.**
+  - **la prova a secco** *(una `lunga` finta di `10` tick)*: **`APERTO`, `TAPPA`, `CHIUSO` `FINITO` a `tick 10`, poi nessuna voce aperta;** **l'apertura registra `HEAD 83907a19`, `0` file modificati, il nucleo `12` file uguali alla tabella;**
+  - **una `breve` accanto alla `lunga`: ACCETTATA;** ### **DEVE FALLIRE, e fallisce: una seconda `lunga` RIFIUTATA, lo stesso nome due volte RIFIUTATO;**
+  - **`forza` vuota e il riavvio senza `visto_da_luca` rifiutati; il riavvio con `visto_da_luca` chiude `FERMATO` a `tick 750`** *(l'ultima tappa)*; **i rifiuti non scrivono** *(`3` eventi)*; **il registro cresce solo in coda** *(`5` scritture)*; **il registro vero non toccato** *(`088b14a3` prima e dopo)*.
+- ### **Le skill viste da una sessione NUOVA** *(Luca `12:15`, punto 2)*: **una sessione `claude.exe -p` dell'estensione `2.1.323`, nel repo, senza strumenti, un turno:** ### **`registro-corse` e `ripresa-dopo-riavvio` sono le PRIME due dell'elenco delle skill disponibili** *(l'uscita intera in `skill_sessione_nuova.txt` nello scratchpad)*.

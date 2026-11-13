@@ -56,3 +56,12 @@
   - **(b) nessuna modifica, una regola scritta:** **nessuna suite mentre una corsa e' aperta nel registro** *(oggi costa poco: i bracci, il video triplo e le bande piatte non richiedono una suite mentre girano; i referti si committano senza suite)*.
 - ### **INTANTO** *(fino alla decisione)*: **vale (b), come regola mia e conservativa** *(scritta nella skill `registro-corse`)*: **non decide niente al posto di Luca, evita solo di perdere una tappa.**
 - **Il punto (2)** *(le skill viste da una sessione nuova)* **si fa dopo il commit, e non dipende da (1).**
+
+## 5. GLI ESITI: IL COLLAUDO `10/10`; LE SKILL VISTE DA UNA SESSIONE NUOVA
+
+- **Il collaudo** *(`doc/referti_l2/registro_corse_collaudo.txt`, il codice a `83907a19`)*: ### **`10/10` controlli come devono.**
+  - **la prova a secco** *(una `lunga` finta di `10` tick)*: **`APERTO`, `TAPPA`, `CHIUSO` `FINITO` a `tick 10`, poi nessuna voce aperta;** **l'apertura registra `HEAD 83907a19`, `0` file modificati, il nucleo `12` file uguali alla tabella;**
+  - **una `breve` accanto alla `lunga`: ACCETTATA;** ### **DEVE FALLIRE, e fallisce: una seconda `lunga` RIFIUTATA, lo stesso nome due volte RIFIUTATO;**
+  - **`forza` vuota e il riavvio senza `visto_da_luca` rifiutati; il riavvio con `visto_da_luca` chiude `FERMATO` a `tick 750`** *(l'ultima tappa)*; **i rifiuti non scrivono** *(`3` eventi)*; **il registro cresce solo in coda** *(`5` scritture)*; **il registro vero non toccato** *(`088b14a3` prima e dopo)*.
+- ### **Le skill viste da una sessione NUOVA** *(Luca `12:15`, punto 2)*: **una sessione `claude.exe -p` dell'estensione `2.1.323`, nel repo, senza strumenti, un turno:** ### **`registro-corse` e `ripresa-dopo-riavvio` sono le PRIME due dell'elenco delle skill disponibili** *(l'uscita intera in `skill_sessione_nuova.txt` nello scratchpad)*.
+- ### **Il punto (1) delle `12:15`** *(la suite che ignora il registro)* **resta FERMO sul nucleo congelato:** **la domanda nella sez. `4`; intanto nessuna suite con una corsa aperta.**
