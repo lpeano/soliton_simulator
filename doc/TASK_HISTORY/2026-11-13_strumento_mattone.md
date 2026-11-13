@@ -43,3 +43,11 @@
 - **Il francobollo di TBS a `10000`:** **`R_t = 28`** *(l'anello del vuoto, il `|dphi|` medio massimo, e' il primo: `11.7`; il `|dphi|` resta fra `6` e `9` fino all'anello `17`, poi `3.3`, `0.80`, `0.35` e scende sotto il `2%` oltre il `25`)*; **`3697` nodi; incollato nello stesso stato: dentro `R_t` `psi` uguale, `phi` entro `8.9e-20`** *(il DEVE `1e-12`)*.
 - **La fase del vuoto su `L 162`** *(incollato a `[80, 80]`, tick `60000`)*: **il salto di energia allineato `-52.54778`, NON allineato `-52.54783`: il DEVE FALLIRE fallisce come deve,**
   - ### ⚠ **MA E' DEBOLE:** **`Delta = 7.4e-05` rad soltanto:** **la fase del vuoto `c(t)` gira di `3 pi / 20` per tick, e fra il tick `10000` di TBS e il `60000` passano `50000` tick = `3750` giri INTERI: le due fasi coincidono gia'.** **Lo stesso nel controllo S7** *(dal mattone a `15000` al `60000`: `45000` tick, `3375` giri)*. ### **Il controllo non distingue a questi tick; per uno sensibile: incollare a un tick NON congruente** *(per esempio `60001`)*. **Un'osservazione, non un cambio del codice ora.**
+
+## 4. (MG): CALMO *(il codice a `f8e289fb`; dalle `20:29:06` alle `21:17:02`, IN COPPIA con `p6-Grampa` del principale)*
+
+- **`5000` tick in `2875` s** *(`0.55`-`0.57` s per tick in coppia; la memoria libera sempre sopra `8.2` GB nelle tappe del mattone)*; **gli stati su `E:\soliton_simulator\mattone\MG_01000` ... `MG_05000.npz`** *(lo sha di `psi_h` a `5000`: `15faeeb4`)*.
+- ### **GLI ULTIMI `1000` TICK: il respiro `0.0711`** *(la soglia `0.30`)*, **il centro si sposta al piu' di `0.0680` nodi** *(la soglia `0.2`)*: ### **CALMO** *(S5)*.
+- **Sotto il lapse il solitone si allarga:** **`rho max` da `3083` a `1388`;** **il rapporto del respiro scende da circa `1.71` a circa `1.43` durante la rampa;** **il centro scivola di circa `0.2` nodi lungo la seconda coordinata durante la rampa** *(da `40.503` a `40.698`)*; **`M` cala di `3.5e-4` relativo** *(il bordo)*.
+- ### **IN COPPIA** *(la misura del parallelo, Luca `18:58`)*: **`Grampa` del principale nelle stesse ore `2.67`-`3.43` s per tick** *(le sue tappe)* **contro i `2.25`-`2.4` da solo; il mattone `0.55`-`0.57`.**
+- **Poi (MU) e (MGU)** *(S8)*.
