@@ -68,3 +68,17 @@
 - **F. Il passo `5`** *(`Phi` dalla materia, la sorgente l'energia locale)* **resta il passo della ROTTA per G, in tutti e due i mondi.**
 - **Le altre prove gia' in coda** *(il video triplo, le bande piatte, P10, i resti di S5, la taglia doppia)* **restano nella coda come decise: il piano non le cambia.**
 - ### **Tutte le strade restano NON FATTE fino a un mandato che le avvia.**
+
+## La coda *(Luca `2026-11-13` `10:20`, il mandato di ripresa, voci `7`-`13`; lo stato a ogni pezzo chiuso)*
+
+> **L'ordine:** **le voci `7`-`9` si eseguono in quest'ordine** *(la `8` e la `9` sono «brevi» e possono stare accanto a una corsa «lunga»)*; **le voci `10`-`12` si fermano su carta per Luca; la voce `13` resta ferma.** ### **Ogni corsa nel registro** *(`doc/REGISTRO_CORSE.md`, la skill `registro-corse`)*.
+
+| voce | che cosa | lo stato |
+|---|---|---|
+| **`7`** | **I BRACCI DI P6** *(Luca `09:45`)*: **la prova breve di (U) ACCETTATA** *((b1); il rapporto misurato / atteso `0.0178` e' una DOMANDA APERTA: la geometria del toro con lo sfondo e le immagini, l'inerzia sotto U diversa da quella sotto G, una schermatura -- tre ipotesi, nessuna verificata)*; **i bracci (0) due volte, (G), (U), (G+U), (U) col campo da zero; `e = 6.315414e-05`; `1500` tick per braccio** *(il tetto di `60` minuti resta)*; **ciascuno salva `rho` (float32) ogni `50`, `\|phi_j\|^2` e `dLambda` ogni `250`, i due centri ogni `50`** *(npz sotto `60` MB)*; **le misure e i DEVE della sez. `11` come corretti; ognuno «lunga» nel registro, commit e push dopo ognuno; poi il referto e FERMO** *(la serie di distanze si decide sui numeri)* | **PRONTA: la prossima** |
+| **`8`** | **IL VIDEO TRIPLO** *(il codice in `bea419ba`, mai girato)*: **(A) la partenza sul pendio, (B) la cresta sul centro iniziale, (C) il campo acceso con la rampa di `500` tick; `4000` tick; i DEVE e le letture del mandato delle `20:10` del `2026-11-12`** | **PRONTA, «breve»: puo' girare accanto ai bracci** |
+| **`9`** | **LA PROVA DELLE BANDE PIATTE SUL BUCO DEL VUOTO** *(il mandato delle `17:00` del `2026-11-12`, TODO `2`-`4`, le letture b1-b3)* | **«breve», dopo il video triplo** *(la proposta di calcolare prima le bande del VUOTO, 6 componenti, aspetta ancora Luca)* |
+| **`10`** | **P1** *(la carta in `3de28902`)*: **le correzioni del guardiano** *(`k0 = \|B_0\| / L` lungo `B_0`; il vestito in due varianti; per (i) anche `k0/2` con la linearita' entro il `10%`; l'attrito su finestre di `200` tick; (ii) con lo STESSO segno di (i))* | **FERMO prima del codice: aspetta la decisione di Luca** |
+| **`11`** | **P9, il solitone in fondo a una banda** | **solo SU CARTA, poi FERMO** |
+| **`12`** | **LA U(1) TOPOLOGICA** *(le quattro domande della sezione delle tre forze)* | **solo SU CARTA, dopo il referto dei bracci di P6; poi FERMO** |
+| **`13`** | **P10** *(la stabilita')*; **i resti di S5** *(`h_k` corretta, A, lo scarto del `13%`, T-L5)*; **la taglia doppia** *(`L 162`: fisica o reticolo)*; **la serie di distanze di P6; le varianti di P6** *(spin, fase, rotazione di `360` gradi)* | **GIA' REGISTRATI: NON si avviano senza un mandato** |
