@@ -83,3 +83,12 @@
     - **DEVE FALLIRE:** **una riga aggiunta a un altro file TRACCIATO durante la suite: la suite esce con `1`** *(e lo rimette: si controlla che dopo l'albero sia pulito)*.
   - **L'ordine:** **il codice, l'inventario, la suite normale e il commit; poi il collaudo; poi le due corse della suite col driver** *(ciascuna circa `15` minuti, una dopo l'altra)*; **poi i bracci di P6.**
 - **La regola provvisoria della sez. `4`** *(nessuna suite con una corsa aperta)* **cade quando i DEVE con la suite vera passano;** **la skill si aggiorna nello stesso commit del codice, con la regola nuova.**
+
+## 7. IL TESTO DELLE `12:22`, ARRIVATO ALLE `13:00`: DUE DIFFERENZE DA CIO' CHE AVEVO SCRITTO, PORTATE NEL CODICE
+
+- **Coincide con la sez. `6`:** **`apri` e `chiudi` nel registro del repo, mai durante la suite; le tappe in `E:\soliton_simulator\registro_tappe\<nome>.txt`, append-only, che la suite non vede; `chiudi` le copia insieme alla chiusura; nessun file in `primo_ordine/`.**
+- ### **LE DUE DIFFERENZE:**
+  1. **il DEVE FALLIRE scrive una TAPPA nel registro DEL REPO durante la suite** *(non una riga in un altro file tracciato)*: **il driver ha il modo `registro` al posto di `tracciato`** *(una riga `- {json}` `TAPPA` in fondo a `doc/REGISTRO_CORSE.md`)*;
+  2. **la skill della ripresa legge, per ogni voce APERTA, anche il SUO FILE DELLE TAPPE** *(quante, la prima, l'ultima, l'ora)*; **e un file di tappe senza voce aperta e' una chiusura caduta a meta': FERMO.**
+- **ERRORE DEL GUARDIANO `n.147`** *(Luca)*: **aveva consigliato la (a) senza controllare che il controllo sta nel nucleo congelato** *(nella MAPPA)*.
+- ### **L'ORDINE:** **la suite girata sul codice di prima** *(`13:05:48`-`13:21:17`, `67/67`)* **non vale per il codice cambiato: si RIGIRA, poi il commit;** **poi il collaudo; poi il driver nei due modi; poi i bracci di P6.**

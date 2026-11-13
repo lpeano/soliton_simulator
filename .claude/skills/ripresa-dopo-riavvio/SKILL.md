@@ -22,6 +22,8 @@ description: Usare all'inizio di ogni sessione dopo un riavvio o una caduta: con
    python csv/solitone/_registro_corse.py aperte
    ```
    Per ogni voce APERTA: **il nome, il tipo, da quando, l'ultima tappa, il comando.**
+   - ### **E IL FILE DELLE TAPPE di ciascuna** *(la decisione (b) di Luca, `2026-11-13` `12:22`/`13:00`)*: **`E:\soliton_simulator\registro_tappe\<nome>.txt`** *(fuori dal repo, una riga JSON per tappa; il campo `tappe_in` dell'`APERTO`)*: **quante tappe, la prima e l'ultima, e l'ora dell'ultima** *(dice fin dove la corsa e' arrivata prima della caduta)*.
+   - **Un file di tappe SENZA una voce aperta** *(non `.chiuso.`)*: **una chiusura caduta a meta': FERMO, si chiede a Luca.**
 4. **Gli orari dello scratchpad** *(`orari_prove.txt` e i file di orari accanto)*: l'ultima riga e la sua ora; **una corsa iniziata e non finita?**
 5. **I processi del repo ancora vivi** *(`tasklist`, i `python`)*. ### **Mai uccidere processi che non sono miei.**
 6. **La coda:** `doc/ROTTA.md`, la sezione **«La coda»**: **che cosa e' pronto, che cosa aspetta Luca.**

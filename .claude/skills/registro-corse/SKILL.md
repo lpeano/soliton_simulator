@@ -22,7 +22,7 @@ description: Usare a ogni corsa del simulatore: aprire, aggiornare e chiudere la
    - c'e' gia' una **`breve`** aperta e si apre un'altra **`breve`**.
    **Quindi al piu' una lunga e una breve insieme.** Un rifiuto **non si aggira**: si chiude la voce giusta, o si chiede a Luca.
 3. **`--forza "<testo>"` SOLO con una decisione di Luca**, e il testo e' **la decisione stessa** *(chi, quando, cosa)*: resta scritto nella voce. Con `forza` le regole sui tipi non bloccano; **lo stesso nome due volte resta vietato.**
-4. **Le tappe:** a **ogni pezzo salvato**, o **ogni circa 10 minuti**:
+4. **Le tappe:** a **ogni pezzo salvato**, o **ogni circa 10 minuti**. ### **Vanno in un file FUORI dal repo** *(la decisione (b) di Luca, `12:58`: `E:/soliton_simulator/registro_tappe/<nome>.txt`)*: **il registro del repo NON si tocca;** **alla chiusura il modulo le COPIA nel registro.**
    ```
    python csv/solitone/_registro_corse.py tappa --nome <nome> --punto "tick <t>"
    ```
@@ -44,9 +44,8 @@ description: Usare a ogni corsa del simulatore: aprire, aggiornare e chiudere la
   git add doc/REGISTRO_CORSE.md      # SOLO questo file
   ```
   ### ⛔ **MAI `git add -A` o `git add .` con una corsa attiva:** si committerebbero file a meta'.
-- **Le tappe** si committano insieme alla chiusura *(o a un checkpoint)*, non una per una.
-- ### ⚠ **Il registro e' un file TRACCIATO, e la suite** *(`primo_ordine/collauda.py`)* **RIMETTE con `git checkout --` i file tracciati che cambiano mentre gira** *(ed esce con `1`)*: ### **una tappa scritta durante la suite verrebbe CANCELLATA.**
-  - ### **LA REGOLA, finche' Luca non decide** *(la domanda delle `12:15`, il task history `2026-11-13_registro_corse.md` sez. `4`)*: **nessuna suite mentre una corsa e' APERTA nel registro;** **niente `apri`, `tappa`, `chiudi` mentre gira la suite.**
+- **Le tappe non si committano:** **stanno fuori dal repo, ed entrano nel registro con la chiusura** *(quindi col commit dopo `chiudi`)*.
+- ### ⚠ **La suite** *(`primo_ordine/collauda.py`)* **RIMETTE con `git checkout --` i file tracciati che cambiano mentre gira** *(ed esce con `1`)*. **Le tappe sono fuori dal repo, quindi una corsa puo' scriverle mentre gira la suite** *(il DEVE della suite vera, `csv/solitone/prova_suite_registro.py`)*; ### **ma `apri` e `chiudi` scrivono il registro del repo: MAI mentre gira la suite.**
 - **Il registro e' APPEND-ONLY:** si scrive **solo col modulo**, mai a mano; il modulo controlla che ogni scrittura **aggiunga in coda**.
 
 ## Che cosa NON si tocca
