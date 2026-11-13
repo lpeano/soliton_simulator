@@ -1,12 +1,13 @@
 [TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
-[TIMBRO] prova_suite_registro.py  sha1-BYTE 86c64224  committato e pulito
+[TIMBRO] prova_suite_registro.py  sha1-BYTE e0b143e9  committato e pulito
 ========================================================================================================================
-IL REGISTRO E LA SUITE VERA, il modo tappa: l'albero all'inizio PULITO; il registro 5571175c; il file toccato nel modo registro doc\REGISTRO_CORSE.md 5571175c
+IL REGISTRO E LA SUITE VERA, il modo tappa: l'albero all'inizio PULITO; il registro f78e5936; il file toccato nel modo registro doc\REGISTRO_CORSE.md f78e5936
 ========================================================================================================================
   la suite:   ### TUTTI I COLLAUDI PASSANO: 67 su 67
-  il driver ha agito: una tappa di prova-suite-tappa nel file esterno; la suite e' uscita con 0
-  DEVE PASSARE: il driver ha agito DOPO la fotografia dell'albero (la riga 'TUTTI I COLLAUDI, CON I TEMPI')          PASSA   una tappa di prova-suite-tappa nel file esterno
-  DEVE PASSARE: una tappa scritta durante la suite: la suite esce con 0, il registro del repo uguale, la tappa nel f PASSA   uscita 0; il registro 5571175c -> 5571175c; le tappe 0 -> 1
+  il driver ha agito: una tappa di prova-suite-tappa-2 nel file esterno; la suite e' uscita con 0; l'azione 953 s prima della fine della suite
+  DEVE PASSARE: il driver ha agito DOPO la fotografia dell'albero (la riga 'TUTTI I COLLAUDI, CON I TEMPI')          PASSA   una tappa di prova-suite-tappa-2 nel file esterno
+  DEVE PASSARE: e DENTRO la suite: almeno 60 s prima della sua fine (lo stdout non bufferizzato)                     PASSA   953 s
+  DEVE PASSARE: una tappa scritta durante la suite: la suite esce con 0, il registro del repo uguale, la tappa nel f PASSA   uscita 0; il registro f78e5936 -> f78e5936; le tappe 0 -> 1
   DEVE PASSARE: l'albero alla fine come all'inizio (git status)                                                      PASSA   0 righe -> 0 righe
 ========================================================================================================================
-ESITO: 3/3 controlli come devono; fallite: 0 []
+ESITO: 4/4 controlli come devono; fallite: 0 []

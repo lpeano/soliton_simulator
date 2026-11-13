@@ -25585,3 +25585,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **ERRORE MIO:** **non ho controllato che l'azione cadesse DENTRO la suite** *(il caso: una suite di `15` minuti, l'azione a `0` s dalla fine)*.
 - **La voce `prova-suite-tappa` chiusa `FALLITO`** *(il punto lo dice)*.
 - ### **LA CURA** *(un commit a se', con la suite)*: **la suite lanciata con `python -u`** *(lo stdout non bufferizzato)*; ### **un DEVE nuovo: l'azione almeno `60` s PRIMA della fine della suite** *(le ore registrate dal driver)*; **poi il modo tappa RIFATTO, poi il modo registro.**
+
+### 2026-11-13 15:10 -- IL DRIVER, IL MODO TAPPA RIFATTO DOPO LA CURA: `4/4`, E QUESTA VOLTA VALE *(la cura `d08e97e0`; il DEVE PASSARE delle `12:22`)*
+
+- **`doc/referti_l2/registro_suite_tappa.txt`** *(sostituisce quello di `df993eb5`; il driver dalle `14:52:14` alle `15:08:16`)*: **la suite `67/67`, uscita `0`;** ### **la tappa nel file esterno alle `14:52:23`, `953` s PRIMA della fine della suite** *(il DEVE nuovo: almeno `60` s)*; **il registro del repo `f78e5936` uguale prima e dopo; l'albero pulito.**
+- ### **Una corsa puo' scrivere le sue tappe mentre gira la suite.** **Poi il modo registro** *(il DEVE FALLIRE: una tappa nel registro del repo durante la suite)*, **poi i bracci di P6.**
