@@ -104,3 +104,9 @@
 - ### **I DEVE:** **col `rho_c` di (MG) i primi `20` tick del ciclo = (MG) AL BIT;** **`N` al centro a piena rampa coerente con la legge entro `1e-3`** *(mio, dichiarato)* **e vicino ai valori di Luca** *((MG/2) `0.974`, (MGx2) `0.993`, entro `0.005`, mio)*.
 - **L'ordine:** **il collaudo, la suite, il commit; il raggio di (MG) dagli stati; (MGx2) poi (MG/2) quando c'e' un posto col lapse** *(il principale: `GUrampa` in corsa)*; **il referto unico; FERMO solo per questa voce.**
 - **La catena del mattone resta FERMA** *(sez. `9`: il controllo S7 di (MG) fallito)*: **questa voce non dipende da S7.**
+
+## 11. `rho_c`: IL COLLAUDO `3/3` E IL RAGGIO DI (MG) *(il codice a `9aa5ed96`; alle `00:04`-`00:05`)*
+
+- **Il collaudo:** **col `rho_c` di (MG) i primi `20` tick del ciclo di `mattone_rhoc` = (MG) AL BIT;** **`N` al centro a piena rampa** *(la legge sul nodo del centro di TBS a `10000`, `rho` `3338.45`)*: **`MGdoppio` `0.992703` contro la legge `0.992702`** *(Luca: circa `0.993`)*; **`MGmezzo` `0.971435` contro `0.971434`** *(Luca: circa `0.974`; il centro ha `rho 3338`, non `3000`)*.
+- ### **IL RAGGIO DI (MG)** *(dagli stati salvati, dentro `R 28`)*: **`8.249` (`k 0`), `8.569`, `9.724`, `10.607`, `10.851`, `11.268` (`k 5000`)** *(1.37 volte)*; **il picco `3350 -> 2909 -> 1897 -> 1544 -> 1510 -> 1388`; `N_eff` al centro dalla legge `1.000 -> 0.9939`.**
+- **Poi `MGdoppio`, poi `MGmezzo`** *(quando c'e' un posto col lapse)*.

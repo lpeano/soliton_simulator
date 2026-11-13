@@ -1,0 +1,13 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] test_mattone_rhoc.py  sha1-BYTE 4a8a4db0  committato e pulito
+========================================================================================================================
+IL COLLAUDO DI mattone_rhoc: 20 tick; N al centro a piena rampa
+========================================================================================================================
+  DEVE PASSARE: col rho_c di (MG): i primi 20 tick del ciclo di mattone_rhoc = (MG) AL BIT                           PASSA   diverse: []
+    MGdoppio: rho al centro 3338.4507; N dalla legge 0.992702; N del tick vero (r = 1, 1 tick) 0.992703; circa (Luca) 0.993
+  DEVE PASSARE: (MGdoppio) N al centro a piena rampa coerente con la legge entro 0.001 (e circa 0.993 entro 0.005)   PASSA   0.992703 contro 0.992702
+    MGmezzo: rho al centro 3338.4507; N dalla legge 0.971434; N del tick vero (r = 1, 1 tick) 0.971435; circa (Luca) 0.974
+  DEVE PASSARE: (MGmezzo) N al centro a piena rampa coerente con la legge entro 0.001 (e circa 0.974 entro 0.005)    PASSA   0.971435 contro 0.971434
+========================================================================================================================
+ESITO: 3/3 controlli come devono; fallite: 0 []
