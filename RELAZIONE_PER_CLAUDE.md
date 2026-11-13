@@ -25590,3 +25590,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`doc/referti_l2/registro_suite_tappa.txt`** *(sostituisce quello di `df993eb5`; il driver dalle `14:52:14` alle `15:08:16`)*: **la suite `67/67`, uscita `0`;** ### **la tappa nel file esterno alle `14:52:23`, `953` s PRIMA della fine della suite** *(il DEVE nuovo: almeno `60` s)*; **il registro del repo `f78e5936` uguale prima e dopo; l'albero pulito.**
 - ### **Una corsa puo' scrivere le sue tappe mentre gira la suite.** **Poi il modo registro** *(il DEVE FALLIRE: una tappa nel registro del repo durante la suite)*, **poi i bracci di P6.**
+
+### 2026-11-13 15:30 -- IL REGISTRO (b) COLLAUDATO: IL MODO REGISTRO `5/5` -- UNA TAPPA NEL REGISTRO DEL REPO DURANTE LA SUITE: LA SUITE ESCE CON `1` E LO RIMETTE (IL DEVE FALLIRE FALLISCE); PARTONO I BRACCI DI P6
+
+- **`doc/referti_l2/registro_suite_registro.txt`** *(il codice a `d08e97e0`, la corsa a `475b018d`, dalle `15:13:03` alle `15:29:01`)*: **`5/5`:** **la tappa scritta in fondo a `doc/REGISTRO_CORSE.md` `956` s prima della fine della suite;** ### **la suite `67/67` ma «HA SPORCATO 1 FILE»: uscita `1`** *(il DEVE FALLIRE fallisce come deve)*; **il registro RIMESSO** *(`574de696` prima e dopo)*; **l'albero pulito.**
+- ### **I DEVE delle `12:22`, tutti come devono:** **la prova a secco con le tappe nel file esterno e copiate alla chiusura** *(il collaudo `12/12`)*; **la suite esce con `0` mentre una corsa scrive tappe nel file esterno** *(`4/4`, la tappa `953` s prima della fine)*; **una tappa nel registro del repo durante la suite: la suite esce con `1`** *(`5/5`)*.
+- **La regola provvisoria della sez. `4` cade:** **una corsa scrive le sue tappe mentre gira la suite;** **`apri` e `chiudi` mai durante la suite** *(la skill)*.
+- **Poi: i bracci di P6, nell'ordine** *(il primo, (0), aperto come «lunga»)*. **La voce `9`** *(le bande piatte)* **aspetta Luca sui proiettori del vuoto** *(`6` componenti, quelli del `31` ottobre sono per la materia)*.

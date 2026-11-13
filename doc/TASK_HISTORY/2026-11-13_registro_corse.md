@@ -100,3 +100,10 @@
 - ### **ERRORE MIO:** **non ho controllato che l'azione cadesse DENTRO la suite** *(il caso: una suite di `15` minuti, l'azione a `0` s dalla fine)*.
 - **La voce `prova-suite-tappa` chiusa `FALLITO`** *(il punto lo dice)*.
 - ### **LA CURA** *(un commit a se', con la suite)*: **la suite lanciata con `python -u`** *(lo stdout non bufferizzato)*; ### **un DEVE nuovo: l'azione almeno `60` s PRIMA della fine della suite** *(le ore registrate dal driver)*; **poi il modo tappa RIFATTO, poi il modo registro.**
+
+## 9. IL REGISTRO (b) COLLAUDATO
+
+- **`doc/referti_l2/registro_suite_registro.txt`** *(il codice a `d08e97e0`, la corsa a `475b018d`, dalle `15:13:03` alle `15:29:01`)*: **`5/5`:** **la tappa scritta in fondo a `doc/REGISTRO_CORSE.md` `956` s prima della fine della suite;** ### **la suite `67/67` ma «HA SPORCATO 1 FILE»: uscita `1`** *(il DEVE FALLIRE fallisce come deve)*; **il registro RIMESSO** *(`574de696` prima e dopo)*; **l'albero pulito.**
+- ### **I DEVE delle `12:22`, tutti come devono:** **la prova a secco con le tappe nel file esterno e copiate alla chiusura** *(il collaudo `12/12`)*; **la suite esce con `0` mentre una corsa scrive tappe nel file esterno** *(`4/4`, la tappa `953` s prima della fine)*; **una tappa nel registro del repo durante la suite: la suite esce con `1`** *(`5/5`)*.
+- **La regola provvisoria della sez. `4` cade:** **una corsa scrive le sue tappe mentre gira la suite;** **`apri` e `chiudi` mai durante la suite** *(la skill)*.
+- **Poi: i bracci di P6, nell'ordine** *(il primo, (0), aperto come «lunga»)*. **La voce `9`** *(le bande piatte)* **aspetta Luca sui proiettori del vuoto** *(`6` componenti, quelli del `31` ottobre sono per la materia)*.
