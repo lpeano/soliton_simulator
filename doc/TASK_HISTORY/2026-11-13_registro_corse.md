@@ -42,3 +42,17 @@
 2. **Il modulo, il registro, il collaudo; il referto del collaudo; le skill; l'inventario; la suite; il commit.**
 3. **La coda in `doc/ROTTA.md`** *(le voci `7`-`13` del mandato)*: **un commit a se'.**
 4. **I bracci di P6** *(la voce `7`)*: **il task history, il codice, la suite, i bracci UNO ALLA VOLTA nel registro.**
+
+## 4. LA RICHIESTA DI LUCA DELLE `12:15` SULLA SUITE: IL PUNTO (1) SI FERMA SUL NUCLEO CONGELATO
+
+- **La richiesta:** **(1) la suite IGNORA `doc/REGISTRO_CORSE.md` nel controllo dei file tracciati cambiati** *(l'unica eccezione, dichiarata nella suite e nella skill)*, **con un DEVE PASSARE** *(una riga aggiunta al registro durante la suite: uscita `0`)* **e un DEVE FALLIRE** *(una riga aggiunta a un altro file tracciato: uscita `1`)*; **(2) verificare che una sessione nuova veda le skill.**
+- ### **DAL CODICE** *(`primo_ordine/collauda.py`, `main`, cercato per nome: `_sporchi`, `_sporcati`)*:
+  - **la suite prende `git status --porcelain` PRIMA** *(`_prima`)* **e DOPO;** **i file sporcati DURANTE la suite** *(`_sporchi() - _prima`)* ### **si RIMETTONO con `git checkout --`** **e la suite esce con `1`.**
+  - ### ⚠ **QUINDI E' PEGGIO DI UN'USCITA `1`:** **una tappa scritta nel registro mentre gira la suite verrebbe CANCELLATA** *(il `checkout` riporta il registro all'ultimo commit)*. **Se il registro era GIA' sporco quando la suite e' partita, e' in `_prima` e non si tocca.**
+- ### **IL CONFLITTO:** **`collauda.py` sta in `primo_ordine/`:** **`doc/NUCLEO_CONGELATO.md` dice `stato: CONGELATO` e nomina «`collauda.py` compreso»; il presidio `H-NUCLEO-CONGELATO` rifiuta OGNI commit che tocca `primo_ordine/`, senza via d'uscita;** **e il mandato delle `10:20` dice «nessun file del nucleo cambiato in tutto il mandato».**
+  - ### **Non lo sblocco da solo** *(ci vuole una decisione SCRITTA di Luca in `doc/NUCLEO_CONGELATO.md`)*: **FERMO su questo punto, la domanda a Luca.**
+- ### **LE STRADE, per la decisione di Luca:**
+  - **(a) lo sblocco dichiarato per UNA modifica di `collauda.py`** *(l'eccezione del registro nel calcolo di `_sporcati`, piu' il collaudo DEVE PASSARE / DEVE FALLIRE)*, **poi di nuovo `CONGELATO`;** **la proposta del guardiano;**
+  - **(b) nessuna modifica, una regola scritta:** **nessuna suite mentre una corsa e' aperta nel registro** *(oggi costa poco: i bracci, il video triplo e le bande piatte non richiedono una suite mentre girano; i referti si committano senza suite)*.
+- ### **INTANTO** *(fino alla decisione)*: **vale (b), come regola mia e conservativa** *(scritta nella skill `registro-corse`)*: **non decide niente al posto di Luca, evita solo di perdere una tappa.**
+- **Il punto (2)** *(le skill viste da una sessione nuova)* **si fa dopo il commit, e non dipende da (1).**
