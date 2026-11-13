@@ -25625,3 +25625,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-13 16:56 -- L'INVENTARIO DI E:: LA DECISIONE DI LUCA, NESSUNA AZIONE PER ORA
 
 - ### **LA DECISIONE DI LUCA** *(`2026-11-13` `16:55`)*: **letto; per ora NESSUNA azione** *(niente stati nel repo, niente copia, niente NTFS)*; **la proposta resta registrata nel referto per una decisione futura.** **La coda continua: i bracci di P6.**
+
+### 2026-11-13 17:03 -- P6, IL BRACCIO (G): `1150` TICK, FERMATO DAL TETTO -- RALLENTATO DA ME *(la suite e l'inventario accanto)*; `d` DA `37.569220` A `37.530355` [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/p6_bracci/G.npz`** *(`5.23` MB)* **e `G.txt`; la corsa dalle `16:02:54` alle `17:01:58`; nel registro `p6-G`, `5` tappe nel file esterno.**
+- ### **ERRORE MIO DI STIMA:** **ho girato ACCANTO a (G) la suite** *(`16:02:54`-`16:24:40`)* **e l'inventario di E:** *(`16:31`-`16:38`)*, **credendo che con `12` core non pesassero:** ### **(G) ha fatto `3.053` s per tick contro i `2.25` di G2** *(nei primi `200` tick circa `4.8`)*, **e il tetto di `3600` s l'ha fermato a `1150` tick invece di `1500`.**
+  - **Le conseguenze:** **le misure fra i bracci si fanno sulla durata COMUNE** *(al piu' `1150` tick)*; **il DEVE «(G) = (on) di G2 a `1500` tick» non si fa** *(lo script lo dice e lo salta)*.
+  - ### **LA PROPOSTA:** **rifare (G) DA SOLO dopo gli altri bracci** *(un'ora; nulla accanto)*; **decide Luca.** **Da qui in poi nessuna corsa accanto a un braccio col lapse.**
+- **`max rho` scende da `2787` a circa `1150` sotto il lapse** *(un fatto; la lettura nel referto dei bracci)*. **Poi (U).**

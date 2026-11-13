@@ -1,0 +1,49 @@
+[TIMBRO] __init__.py  sha1-BYTE e2fc3791  committato e pulito
+[TIMBRO] corsa_accensione.py  sha1-BYTE 3409042a  committato e pulito
+[TIMBRO] accensione.py  sha1-BYTE 613d878b  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] toro.py  sha1-BYTE 4fac2236  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] s5_coppia_lapse.py  sha1-BYTE 344015e0  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] _registro_corse.py  sha1-BYTE 8d98a3e3  committato e pulito
+[TIMBRO] protetto.py  sha1-BYTE 0b2b6983  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] _libro_dei_conti.py  sha1-BYTE 8daeb4da  committato e pulito
+[TIMBRO] tick.py  sha1-BYTE d9a59ff9  committato e pulito
+[TIMBRO] flussi_parziali.py  sha1-BYTE d43b1cf8  committato e pulito
+[TIMBRO] energia_pesata.py  sha1-BYTE 43bce8ad  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 4d8a9f8c  committato e pulito
+==================================================================================================================================
+P6, IL BRACCIO (G) (sez. 11.14): lo stato di C35-pi a 60000; fino a 1500 tick (il tetto 3600 s); rho e i centri ogni 50, |phi_j|^2 e dLambda ogni 250; e 6.3154140e-05; eps_a 0.4767266286; R_LAPSE 0.01; il registro p6-G
+==================================================================================================================================
+### a t 60000: d0 37.569220; rho_0 (i due centri, r < w_in 6.643741) 2270.585749; rho_c 227058.574864; M 1.9908522548e+06; max rho 2.787236e+03; 18056 nodi sul bordo
+    t  60050  d 37.566821  M 1.9908508556e+06  rmax 2.8637e+03  (153 s)
+    t  60100  d 37.562673  M 1.9908494827e+06  rmax 2.7450e+03  (306 s)
+    t  60150  d 37.559412  M 1.9908481711e+06  rmax 2.6060e+03  (487 s)
+    t  60200  d 37.554716  M 1.9908468984e+06  rmax 2.4883e+03  (672 s)
+    t  60250  d 37.549004  M 1.9908456553e+06  rmax 2.3069e+03  (915 s)
+    t  60300  d 37.543231  M 1.9908444627e+06  rmax 2.1987e+03  (1092 s)
+    t  60350  d 37.536543  M 1.9908433174e+06  rmax 2.1215e+03  (1258 s)
+    t  60400  d 37.529041  M 1.9908421543e+06  rmax 1.9283e+03  (1453 s)
+    t  60450  d 37.519894  M 1.9908409148e+06  rmax 1.8035e+03  (1623 s)
+    t  60500  d 37.510560  M 1.9908396139e+06  rmax 1.6548e+03  (1793 s)
+    t  60550  d 37.499288  M 1.9908383057e+06  rmax 1.6067e+03  (1972 s)
+    t  60600  d 37.488268  M 1.9908370091e+06  rmax 1.4608e+03  (2118 s)
+    t  60650  d 37.479457  M 1.9908356953e+06  rmax 1.3830e+03  (2284 s)
+    t  60700  d 37.471288  M 1.9908343561e+06  rmax 1.3366e+03  (2439 s)
+    t  60750  d 37.465676  M 1.9908330019e+06  rmax 1.2479e+03  (2560 s)
+    t  60800  d 37.461957  M 1.9908316005e+06  rmax 1.1731e+03  (2672 s)
+    t  60850  d 37.460305  M 1.9908301268e+06  rmax 1.1592e+03  (2781 s)
+    t  60900  d 37.462385  M 1.9908286095e+06  rmax 1.1403e+03  (2887 s)
+    t  60950  d 37.468295  M 1.9908270934e+06  rmax 1.1543e+03  (2993 s)
+    t  61000  d 37.478516  M 1.9908256085e+06  rmax 1.1373e+03  (3139 s)
+    t  61050  d 37.491777  M 1.9908241486e+06  rmax 1.1656e+03  (3287 s)
+    t  61100  d 37.508980  M 1.9908226893e+06  rmax 1.1383e+03  (3406 s)
+    t  61150  d 37.530355  M 1.9908212049e+06  rmax 1.1542e+03  (3511 s)
+### il tetto: 3511 s fatti, il prossimo blocco di 50 tick (105 s) lo supererebbe: ci si ferma a 1150 tick (dichiarato)
+### (G): 1150 tick in 3511 s (3.053 s per tick); d da 37.569220 a 37.530355
+### doc\referti_l2\p6_bracci\G.npz: 5.23 MB
+### 3540 s in tutto
