@@ -25,3 +25,17 @@
 ## 3. TODO
 
 1. **Questo, committato.** 2. **Lo script, l'inventario, la suite, il commit.** 3. **La corsa nel registro; il referto `doc/referti_l2/inventario_E.txt`; la relazione; commit e push.** 4. **FERMO per Luca; i bracci continuano.**
+
+## 4. L'ESITO E LA PROPOSTA
+
+- **Il referto `doc/referti_l2/inventario_E.txt`** *(il codice a `a0da5ee1`, dalle `16:31` alle `16:38:04`; nel registro `inventario-E`, «breve», accanto a `p6-G`)*: **nessun problema negli stati di partenza.**
+- ### **IL VOLUME E: `exFAT`, `256.0` GB, liberi `224.3` GB.** ### ⚠ **exFAT NON ha un journal** *(una scrittura interrotta da uno stacco o da un riavvio forzato puo' lasciare il file system incoerente; da verificare per questo disco)*: **una ragione in piu' per la copia.**
+- **Le cartelle di E: nominate nel codice: DUE.** **`E:\soliton_simulator` `2.776` GB in `360` file** *(le mappe `1623` MB, gli stati `820` MB, `ripresa_R1` `189` MB, `due_giri` `115` MB, `libreria` `23` MB)*; **`E:\soliton_archivio` `5.313` GB in `197` file** *(l'era 1: `csv/_test_fork` `3693` MB, `csv/_seal_fork` `1511` MB, `spostati_2026-09-22` `108` MB)*. ### **Nessun file oltre `50` MB.**
+- **Gli stati delle corse:** **`114` registrati, TUTTI su E:, `0.826` GB, nessuno mancante.**
+- ### **GLI STATI DI PARTENZA** *(dichiarati dagli script)*: **C35-pi `60000` `9.0` MB `d5fa30ac`; TBS `10000` `2.3` MB `ae69c52d`; TM1000 `13333` `2.3` MB `b0126349`; S162 `10000` `9.0` MB `7a2bdc7e`** *(sha1 dei byte)*: **ciascuno ha gli sha per chiave UGUALI al jsonl** *(`6` chiavi)*, **e lo sha1 dei byte e' gia' citato negli indici delle mappe** *(`doc/referti_l2/mappe_indice*.txt`)*.
+- ### **UN'OSSERVAZIONE FUORI DAL MANDATO** *(non inventariata: e' sul disco del repo, non su E:)*: **`db/` del repo e' IGNORATO da git e pesa `769` MB** *(fra cui `db/accensione_lenta`, da cui le corse leggono la tabella della fase `c(t)`: `corsa_accensione.DIR_NPZ`)*: **anche quello e' in UNA sola copia.**
+- ### **LA PROPOSTA** *(NON eseguita; la decisione e' di Luca)*:
+  - **(a) NEL REPO, DIRETTI** *(tutti sotto `50` MB: Git LFS NON serve)*: **i `4` stati di partenza** *(`22.6` MB)* **e la tabella della fase** *(`db/accensione_lenta`, il file `CA.FASE`, da misurare)*: **sono i file senza i quali i referti delle prove non si rigirano.** **Tutti i `114` stati** *(`0.826` GB)* **nel repo li porterebbe in ogni clone per sempre: NON lo propongo.**
+  - **(b) FUORI DAL REPO, UNA COPIA INTERA** *(un secondo disco o un servizio esterno)*: **`E:\soliton_simulator` e `E:\soliton_archivio`** *(`8.088` GB)*, **piu' `db/` del repo** *(`0.769` GB)*.
+  - **(c) LO SPAZIO:** **(a) circa `23` MB nel repo** *(piu' la fase)*; **(b) circa `8.9` GB per la copia.**
+- ### **FERMO per la decisione di Luca sull'inventario;** **i bracci di P6 continuano.**

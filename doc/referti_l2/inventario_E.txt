@@ -1,0 +1,88 @@
+[TIMBRO] inventario_E.py  sha1-BYTE 7505152b  committato e pulito
+==================================================================================================================================
+L'INVENTARIO DEI DATI DEL REPO SU E: (Luca 2026-11-13 15:35; SOLO LETTURA)
+==================================================================================================================================
+### 1. IL VOLUME E: il file system exFAT; la dimensione 256.0 GB; lo spazio libero 224.3 GB
+----------------------------------------------------------------------------------------------------------------------------------
+### 2. LE CARTELLE DI E: NOMINATE NEL CODICE (le stringhe E:\... in csv, primo_ordine): 2
+    E:\soliton_archivio            esiste True   nominata da 4 file: csv/_analisi_ramoD.py, csv/_sposta_archivi.py, csv/_sposta_su_E.py, csv/_test_fork/_video_val600.py
+    E:\soliton_simulator           esiste True   nominata da 3 file: csv/solitone/_registro_corse.py, csv/solitone/corsa_accensione.py, csv/solitone/mappe.py
+  E:\soliton_archivio: 5.313 GB in 197 file
+    csv                                                                        5204.5 MB      187 file
+    csv\_seal_fork                                                             1511.1 MB       60 file
+    csv\_test_fork                                                             3693.4 MB      127 file
+    spostati_2026-09-22                                                         108.2 MB       10 file
+    spostati_2026-09-22\_g4_controllo                                            36.2 MB        5 file
+    spostati_2026-09-22\_g4_corto                                                35.8 MB        4 file
+    spostati_2026-09-22\_g4_inerzia                                              36.2 MB        1 file
+  E:\soliton_simulator: 2.776 GB in 360 file
+    due_giri                                                                    114.6 MB       35 file
+    due_giri\campioni                                                            32.4 MB       16 file
+    due_giri\mappe                                                               75.4 MB       16 file
+    due_giri\stati                                                                6.8 MB        3 file
+    libreria                                                                     22.7 MB        8 file
+    mappe                                                                      1623.4 MB      145 file
+    mappe\C35-0                                                                 346.9 MB       21 file
+    mappe\C35-pi                                                                343.9 MB       21 file
+    mappe\C50-0                                                                 349.4 MB       20 file
+    mappe\S162                                                                  335.6 MB       21 file
+    mappe\TB3                                                                    90.8 MB       20 file
+    mappe\TBS                                                                    90.4 MB       20 file
+    mappe\TM1000                                                                 66.6 MB       22 file
+    mappe\_prova                                                                  0.0 MB        0 file
+    registro_tappe                                                                0.0 MB        3 file
+    ripresa_R1                                                                  189.3 MB       53 file
+    ripresa_R1\C35-0_20261108_012526                                             40.7 MB       11 file
+    ripresa_R1\C35-pi_20261108_211629                                            27.5 MB        9 file
+    ripresa_R1\C35-pi_20261108_213524                                            40.4 MB       11 file
+    ripresa_R1\C35-pi_20261112_134456                                            40.4 MB       11 file
+    ripresa_R1\S162_20261109_200733                                              40.3 MB       11 file
+    stati                                                                       819.5 MB      111 file
+    stati\C35-0                                                                 189.6 MB       21 file
+    stati\C35-pi                                                                189.6 MB       21 file
+    stati\C50-0                                                                 189.6 MB       21 file
+    stati\D0R                                                                     6.8 MB        3 file
+    stati\S162                                                                  189.6 MB       21 file
+    stati\TBS                                                                    47.4 MB       21 file
+    stati\TM1000                                                                  6.8 MB        3 file
+    stati_prova                                                                   6.2 MB        3 file
+    wt_t1                                                                         0.0 MB        2 file
+  I FILE OLTRE 50 MB: 0 (oltre 100 MB: 0), 0.000 GB in tutto
+----------------------------------------------------------------------------------------------------------------------------------
+### 3. GLI STATI DELLE CORSE (gli `stati` dei jsonl di corsa_accensione)
+    114 stati registrati; per disco: E: 114 stati, 0.826 GB, 0 MANCANTI
+    E:\soliton_simulator\due_giri\stati\DG1000                                           3 stati        6.8 MB
+    E:\soliton_simulator\stati\C35-0                                                    21 stati      189.6 MB
+    E:\soliton_simulator\stati\C35-pi                                                   21 stati      189.6 MB
+    E:\soliton_simulator\stati\C50-0                                                    21 stati      189.6 MB
+    E:\soliton_simulator\stati\D0R                                                       3 stati        6.8 MB
+    E:\soliton_simulator\stati\S162                                                     21 stati      189.6 MB
+    E:\soliton_simulator\stati\TBS                                                      21 stati       47.4 MB
+    E:\soliton_simulator\stati\TM1000                                                    3 stati        6.8 MB
+  GLI STATI DI PARTENZA DELLE PROVE (dichiarati in PARTENZE, dagli script):
+    C35-pi   a  60000 (G2, P6 (s5_coppia_lapse, p6_u_breve, p6_bracci))
+        E:\soliton_simulator\stati\C35-pi\C35-pi_stato_060000.npz  9.0 MB  sha1-BYTE d5fa30ac5bd7a681f1d14ac82d0f4f1d256d2d12
+        lo sha1 dei byte nei referti (i primi 12 caratteri): doc\referti_l2\mappe_indice_C35-pi.txt
+        gli sha per chiave contro il jsonl: 6 chiavi, TUTTE uguali
+    TBS      a  10000 (le G1, il video triplo (s5_caduta_solitone, s5_g1_lunga, s5_g1_tre_partenze))
+        E:\soliton_simulator\stati\TBS\TBS_stato_010000.npz  2.3 MB  sha1-BYTE ae69c52d0eedfb8bd4bab4e26f201560bc793c04
+        lo sha1 dei byte nei referti (i primi 12 caratteri): doc\referti_l2\mappe_indice_TBS.txt
+        gli sha per chiave contro il jsonl: 6 chiavi, TUTTE uguali
+    TM1000   a  13333 (carta_d0, test_simmetrica)
+        E:\soliton_simulator\stati\TM1000\TM1000_stato_013333.npz  2.3 MB  sha1-BYTE b01263490c3e042f1c69583b26b63aa9c773ef0d
+        lo sha1 dei byte nei referti (i primi 12 caratteri): doc\referti_l2\mappe_indice.txt
+        gli sha per chiave contro il jsonl: 6 chiavi, TUTTE uguali
+    S162     a  10000 (carta_coppia)
+        E:\soliton_simulator\stati\S162\S162_stato_010000.npz  9.0 MB  sha1-BYTE 7a2bdc7e502389c3d0dbabcb0491f6e982d8e90e
+        lo sha1 dei byte nei referti (i primi 12 caratteri): doc\referti_l2\mappe_indice_S162.txt
+        gli sha per chiave contro il jsonl: 6 chiavi, TUTTE uguali
+----------------------------------------------------------------------------------------------------------------------------------
+### 4. LA PROPOSTA (NON eseguita: la decisione e' di Luca)
+  (a) NEL REPO: gli stati di PARTENZA delle prove (4 file, 22.6 MB; 4 sotto 50 MB, 0 sopra):
+      - sotto 50 MB DIRETTI nel repo (git li tiene in ogni clone, per sempre: 22.6 MB);
+      - sopra 50 MB con Git LFS (0.0 MB; il piano gratuito di GitHub ha una quota di spazio e di banda per LFS: da verificare prima).
+      Il dato di una prova si rifa' dal suo comando SOLO se esiste lo stato di partenza: sono questi i file senza i quali i referti non si rigirano.
+  (b) FUORI DAL REPO, una COPIA INTERA di E:\soliton_simulator e di E:\soliton_archivio (8.088 GB) su un secondo disco o un servizio esterno; e gli stati sul disco del repo IGNORATI da git (nessuno).
+  (c) LO SPAZIO: (a) 22.6 MB nel repo o in LFS; (b) 8.088 GB per la copia di E: (+ gli stati sul disco del repo); tutti gli stati registrati delle corse insieme 0.826 GB.
+==================================================================================================================================
+ESITO: NESSUN problema negli stati di partenza
