@@ -1,0 +1,11 @@
+[TIMBRO] _presidio.py  sha1-BYTE efa7a69d  committato e pulito
+[TIMBRO] test_timbro_eol.py  sha1-BYTE 15eb5a86  committato e pulito
+==============================================================================================================
+IL TIMBRO COI FINE RIGA NORMALIZZATI, su un repo git temporaneo
+==============================================================================================================
+  DEVE PASSARE: il file com'e' (LF): pulito                                                                PASSA   dirty False, solo_fine_riga False
+  DEVE PASSARE: lo stesso file in CRLF: pulito (solo i fine riga)                                          PASSA   dirty False, solo_fine_riga True
+  DEVE FALLIRE: un byte cambiato davvero (x = 2), in CRLF: pulito                                          ### FALLISCE   dirty True
+  DEVE FALLIRE: un byte cambiato davvero (x = 2), in LF: pulito                                            ### FALLISCE   dirty True
+==============================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []
