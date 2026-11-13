@@ -92,3 +92,11 @@
   2. **la skill della ripresa legge, per ogni voce APERTA, anche il SUO FILE DELLE TAPPE** *(quante, la prima, l'ultima, l'ora)*; **e un file di tappe senza voce aperta e' una chiusura caduta a meta': FERMO.**
 - **ERRORE DEL GUARDIANO `n.147`** *(Luca)*: **aveva consigliato la (a) senza controllare che il controllo sta nel nucleo congelato** *(nella MAPPA)*.
 - ### **L'ORDINE:** **la suite girata sul codice di prima** *(`13:05:48`-`13:21:17`, `67/67`)* **non vale per il codice cambiato: si RIGIRA, poi il commit;** **poi il collaudo; poi il driver nei due modi; poi i bracci di P6.**
+
+## 8. IL DRIVER, IL MODO TAPPA: UN FALSO PASSA (ERRORE MIO), LA CURA
+
+- **Il referto** `doc/referti_l2/registro_suite_tappa.txt` *(il codice a `afdb29fc`, il driver dalle `13:51:23` alle `14:07:44`)*: **`3/3`, la suite `67/67` uscita `0`, il registro `5571175c` uguale, una tappa nel file esterno, l'albero pulito.**
+- ### ⚠ **MA IL DEVE NON VALE:** **la tappa nel file esterno porta l'ora `14:07:44`, LA STESSA della fine della suite.** **Lo stdout di `primo_ordine/collauda.py` passa da una PIPE ed e' BUFFERIZZATO:** ### **il driver ha letto la riga «TUTTI I COLLAUDI, CON I TEMPI» solo quando la suite ha scaricato il buffer, cioe' alla FINE, DOPO il controllo dei file sporcati.** **Il DEVE «agito dopo la fotografia» passava per costruzione: un FALSO PASSA** *(non poteva fallire per la ragione giusta)*.
+- ### **ERRORE MIO:** **non ho controllato che l'azione cadesse DENTRO la suite** *(il caso: una suite di `15` minuti, l'azione a `0` s dalla fine)*.
+- **La voce `prova-suite-tappa` chiusa `FALLITO`** *(il punto lo dice)*.
+- ### **LA CURA** *(un commit a se', con la suite)*: **la suite lanciata con `python -u`** *(lo stdout non bufferizzato)*; ### **un DEVE nuovo: l'azione almeno `60` s PRIMA della fine della suite** *(le ore registrate dal driver)*; **poi il modo tappa RIFATTO, poi il modo registro.**
