@@ -590,3 +590,12 @@
 - ### **LE LETTURE** *(sez. `11.4`, scritte prima)*: **(G) si allontanano; (U) si avvicinano; (G+U): (gu1) attrazione da lontano e repulsione da vicino** *(da una sola distanza non si vede: si leggera' il SEGNO netto)*, **(gu2) un solo segno** *(quale)*; **l'additivita' entro `3` errori: i due campi non si parlano; oltre: si parlano.**
 - ### **MI FERMO SE:** **un DEVE non va come deve** *(referto, FERMO, senza correggere)*; **scatta il FERMO di un braccio col campo;** **un npz supera `60` MB.**
 - ### **TODO:** **questo, committato; il codice, l'inventario, la suite, il commit; i bracci `0`, `0bis`, `G`, `U`, `GU`, `Uzero`, uno alla volta, ciascuno nel registro, commit e push dopo ognuno; il referto; FERMO per Luca.**
+
+### 11.15 LE DECISIONI DI LUCA DELLE `17:22` SUI BRACCI *(dopo (G) a `1150` tick, `5f0f70f1`)*
+
+1. ### **(G) SI RIFA' DA SOLO** *(dopo (U), (G+U), (Uzero), o subito dopo (U), come conviene)*; **il braccio da `1150` tick RESTA nel repo, non si cancella.**
+   - **Nel codice:** **il (G) rifatto e' il braccio `Grif`** *(lo stesso tick di (G); l'npz `Grif.npz`, cosi' `G.npz` resta com'e')*; **nel referto `Grif` fa da (G) per le misure.**
+2. ### **IL TETTO dei bracci col lapse, (G) e (G+U), passa da `60` a `90` minuti** *(`5400` s)*, **dichiarato nel codice e nel commit; gli altri restano a `60`.**
+3. ### **Nessuna corsa «breve» e nessuna suite ACCANTO a un braccio col lapse;** **la suite di un commit di codice si fa prima o dopo, non durante.**
+4. ### **Il DEVE «(G) riproduce G2 a `1500` tick» vale per `Grif`;** **nel referto, (G) da `1150` contro `Grif` ai tick comuni: AL BIT** *(`d`, `M`, `rho` float32 ogni `50`, l'energia per termini: la stessa dinamica, solo piu' lenta)*.
+- ### **L'ORDINE, e un fatto:** **(G+U) e' partito alle `17:16` col tetto VECCHIO di `3600` s** *(prima della decisione)*; **il codice in corso non si tocca: la modifica si prepara su una COPIA e va nel file a corsa chiusa.** **Se (G+U) si ferma sotto i `1500` tick per il tetto vecchio, si RIFA' col tetto nuovo** *(come (G))*. **Poi la modifica, la suite, il commit; poi (Uzero) e `Grif`, da soli.**
