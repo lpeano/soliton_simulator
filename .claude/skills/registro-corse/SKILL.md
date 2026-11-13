@@ -30,6 +30,7 @@ description: Usare a ogni corsa del simulatore: aprire, aggiornare e chiudere la
    ```
    python csv/solitone/_registro_corse.py chiudi --nome <nome> --esito FINITO|FERMATO|FALLITO --punto "tick <t>"
    ```
+5-bis. ### **LA REGOLA DEI CONTI** *(R-CONTI, Luca `2026-11-13` `23:47`; la ROTTA, «La regola dei conti»)*: **una corsa NUOVA** *(il codice scritto dopo che `csv/solitone/conti.py` esiste)* **stampa la tabella dei conti** *(i pezzi all'inizio, ogni `500` tick e alla fine; il residuo; la massa uscita dal bordo)*, **e con due o piu' solitoni la tabella delle forze** *(finestre di `500` tick)*, **con uno solo la deriva, il picco e il raggio.** ### **SENZA le tabelle non si chiude `FINITO`:** **si chiude «FINITA SENZA CONTI», col motivo** *(finche' il modulo non ha l'esito apposito: `--esito FINITO --punto "SENZA CONTI: <il motivo>; ..."`)*. **Le corse gia' scritte o in fila prima della regola NON si riscrivono.**
 6. **Le voci aperte** si leggono **SOLO** dal registro: `python csv/solitone/_registro_corse.py aperte`.
 7. **Dopo un riavvio**, una voce rimasta APERTA **si chiude come `FERMATO (riavvio)` all'ultima tappa SOLO dopo che Luca l'ha vista**:
    ```
