@@ -25633,3 +25633,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Le conseguenze:** **le misure fra i bracci si fanno sulla durata COMUNE** *(al piu' `1150` tick)*; **il DEVE «(G) = (on) di G2 a `1500` tick» non si fa** *(lo script lo dice e lo salta)*.
   - ### **LA PROPOSTA:** **rifare (G) DA SOLO dopo gli altri bracci** *(un'ora; nulla accanto)*; **decide Luca.** **Da qui in poi nessuna corsa accanto a un braccio col lapse.**
 - **`max rho` scende da `2787` a circa `1150` sotto il lapse** *(un fatto; la lettura nel referto dei bracci)*. **Poi (U).**
+
+### 2026-11-13 17:16 -- P6, IL BRACCIO (U): `1500` TICK IN `478` s; `d` DA `37.569220` A `37.281888` *((0): `37.317082`)*; IL CAMPO STABILE [[PIANO-2D-3D]]
+
+- **`doc/referti_l2/p6_bracci/U.npz`** *(`7.08` MB)* **e `U.txt`; dalle `17:07:10` alle `17:15:39`; nel registro `p6-U`.** **Il residuo di Gauss iniziale `1.329e-12`; `d` a `60200` `37.554857`** *(= la prova breve)*; **`K + V` da `22.516` a `22.491`; `max |e B|` circa `8e-09`; Gauss fuori dal bordo fino a `5.15e-07`** *(lo sfondo che segue la norma tolta dal bordo, come nella prova breve)*. **Poi (G+U), da solo.**
