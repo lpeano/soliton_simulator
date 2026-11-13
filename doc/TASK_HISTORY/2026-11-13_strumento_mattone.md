@@ -51,3 +51,12 @@
 - **Sotto il lapse il solitone si allarga:** **`rho max` da `3083` a `1388`;** **il rapporto del respiro scende da circa `1.71` a circa `1.43` durante la rampa;** **il centro scivola di circa `0.2` nodi lungo la seconda coordinata durante la rampa** *(da `40.503` a `40.698`)*; **`M` cala di `3.5e-4` relativo** *(il bordo)*.
 - ### **IN COPPIA** *(la misura del parallelo, Luca `18:58`)*: **`Grampa` del principale nelle stesse ore `2.67`-`3.43` s per tick** *(le sue tappe)* **contro i `2.25`-`2.4` da solo; il mattone `0.55`-`0.57`.**
 - **Poi (MU) e (MGU)** *(S8)*.
+
+## 5. LA TRAPPOLA CRLF: IL COLLAUDO, (MG) E (MU) HANNO GIRATO CON `mattone.py` A BYTE NON COMMITTATI *(Luca, la segnalazione dopo `7d42ad11`; ERRORE MIO)*
+
+- **Il timbro di `_presidio`** *(nelle uscite del collaudo, di (MG), di (MU))*: **`mattone.py sha1-BYTE e0ea8957 !! MODIFICATO rispetto a HEAD`** *(il blob committato: `sha1-BYTE c2107885`)*. ### **Non l'ho letto prima di lanciare.**
+- ### **LA CAUSA:** **sul disco `mattone.py` ha le righe CRLF; nel commit `f8e289fb` git l'ha salvato LF** *(`.gitattributes`: `text eol=lf`, la decisione di Luca del `2026-09-16`)*. **Avevo ritoccato il file nello scratchpad con un `open(p, "w")` in modo testo su Windows, che scrive CRLF, e l'ho copiato cosi' nel worktree.** **`git status` era PULITO** *(git normalizza le newline nel confronto)*: **e' lo stato «stesso CONTENUTO, byte DIVERSI» di CLAUDE.md sez. `7`.**
+- ### **IL DIFF, spiegato:** **SOLO le newline:** **`tr -d '\r' < mattone.py` e il blob di `f8e289fb` sono IDENTICI** *(`diff` vuoto)*; **nessuna istruzione diversa.** **`test_mattone.py` e `doc/INVENTARIO_mattone.md` hanno i byte uguali al commit** *(`c64c1058`, `b7f77fec`)*.
+- ### **I BYTE CHE HANNO GIRATO, COMMITTATI** *(CLAUDE.md sez. `7`, lo stato 2: una COPIA ESATTA accanto ai dati)*: **`doc/referti_l2/mattone/mattone_girato_e0ea8957.py.gz`** *(gzip con `mtime 0`: un file di TESTO non puo' tenere i CR nel repo, per `.gitattributes`; i byte scompattati del blob nell'indice danno `sha1-BYTE e0ea8957`, verificato)*.
+- **(MU)** *(dalle `21:17`, in corsa)* **gira con gli STESSI byte `e0ea8957`** *(il suo timbro)*.
+- ### **LA REGOLA, da qui** *(Luca)*: **nessuna corsa del ramo mattone si apre con file modificati:** **prima di `apri` lo `sha1-BYTE` dal disco di ogni file del ramo contro il blob committato** *(non `git status`)*. **A (MU) finito, `mattone.py` si riscrive in LF dal blob** *(`git cat-file -p HEAD:csv/solitone/mattone.py`, in binario)* **e si ricontrolla il timbro prima di (MGU).**
