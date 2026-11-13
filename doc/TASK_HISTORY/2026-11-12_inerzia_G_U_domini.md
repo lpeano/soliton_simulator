@@ -615,3 +615,23 @@
 - **Accumulato come somma di `N - 1`** *(la stessa grandezza di `tau - t`; senza sottrarre due numeri grandi)*.
 - ### **I DEVE:** **DEVE PASSARE: `20` tick del tick del lapse con la legge `uno`** *(`N = 1`; lo STESSO codice del braccio)*: **`tau - t = 0` ESATTAMENTE in ogni nodo** *(prima di ogni braccio col lapse)*; **DEVE FALLIRE: nel braccio (G+U) `tau - t` identicamente zero.**
 - **Nello stesso commit del tetto a `90` minuti** *(Luca)*, **prima che ripartano i bracci col lapse.**
+
+### 11.18 IL LAPSE ACCESO PIANO *(Luca `2026-11-13` `18:16`)*: LE PREMESSE, IL PROGETTO, E UN FATTO DEL BRACCIO (0)
+
+- ### **LE PREMESSE DI LUCA:** **in (G) da `1150` tick `d_G - d_0` va `-0.002` (`300`), `-0.016` (`600`), `-0.012` (`750`), `+0.013` (`900`), `+0.074` (`1050`), la velocita' relativa cresce sempre:** **NON una forza costante;** **IPOTESI del guardiano: in gran parte la risposta all'ACCENSIONE BRUSCA del lapse** *(come il respiro del video triplo)*. **La parabola di (G) non e' leggibile.**
+- **(G+U)** *(`p6-GU-2`, dalle `18:04:29`)* **FERMATO alle `18:15`** *(tick `60150` almeno)*; **prima dello stop l'adattatore a `e = 0` e il tempo proprio a `N = 1` erano PASSATI** *(l'uscita parziale nello scratchpad, non un braccio)*.
+- ### **UN FATTO DEL BRACCIO (0)** *(il punto 5 del mandato; SOLO SCRITTURA)*: **la coppia SENZA campi si AVVICINA:** **`d` da `37.569` a `37.317` in `1500` tick** *(`0a`, `0bis` al bit)*, **un'accelerazione di circa `-1.26e-7` per tick^2** *(il numero di Luca; quello dello script nel referto dei bracci)*, **circa QUATTRO volte quella di (U).** **Un'interazione PROPRIA della coppia.**
+  - ### **LA DOMANDA APERTA:** **da cosa viene** *(i bordi dei due solitoni che si toccano? il vuoto fra loro?)* **e fino a che distanza arriva:** **la serie di distanze dovra' misurarla anche per (0).**
+- ### **LE PREMESSE DAL CODICE** *(cercate per nome)*:
+  - **`tick_lapse` legge N SOLO attraverso `N_di` e `Np_di`** *(funzioni del modulo, chiamate da `cs_di`, `omega_psi`, `fase_a`, `cs_al_centro`, `reazione`)*: **la rampa si mette nello SCRIPT con un adattatore che le avvolge durante il tick** *(`N_eff = 1 + r (N - 1)`, `N'_eff = r N'`)*; ### **cosi' vale nel tick vero E nelle copie del punto fisso, e nella forma (a)** *(il termine `- eps_a somma r (N - 1) rho`)*; **`tick_lapse.py` NON si tocca.**
+  - **`r = 1` esattamente: l'adattatore rende `N_di` e `Np_di` ORIGINALI** *(nessuna aritmetica in piu': `1 + (N - 1)` non e' `N` al bit)*. ### **Il DEVE «rampa di `0` tick = il braccio di oggi al bit per `20` tick» controlla il meccanismo dell'avvolgimento** *(che non cambi nient'altro)*, **dichiarato.**
+- ### **IL PROGETTO** *(`csv/solitone/p6_bracci.py`)*:
+  - **`r(k) = min(1, k / 500)` al tick `k` del braccio** *(`k = 1, 2, ...`: al primo tick `r = 0.002`; da `k = 500` in poi `r = 1`)*, **dichiarato;**
+  - **i bracci nuovi `Grampa`, `GUrampa`: `2000` tick** *(`500` di rampa + `1500`)*, **tetto `5400` s, il tempo proprio** *(con l'N EFFETTIVO, `mot.cs / s`)*, **i campi come deciso;** **`Uzero` come previsto;** ### **`Grif` NON si fa** *(per il confronto col brusco vale (G) da `1150` tick)*;
+  - **il DEVE della rampa spenta:** **`20` tick con la rampa di `0` tick contro `20` tick di `tick_lapse.tick`: AL BIT;**
+  - **nel referto, per (G), `Grampa`, `GUrampa`:** **la parabola; la velocita' relativa a finestre di `150` tick e `d - d_0` ogni `150` tick;** **(G) brusco contro `Grampa` ai tick comuni DOPO la rampa** *(DEVE FALLIRE: uguali entro `1e-6`)*;
+  - ### **l'energia dopo la rampa** *(«entro la stessa tolleranza dei bracci senza rampa»; LA MIA LETTURA, dichiarata, da correggere se Luca intendeva altro)*: **l'escursione di `E_tot(X) - E_tot(0)`** *(il libro dei conti, il toro intero: il bordo si toglie quasi tutto con la differenza da (0))* **attorno alla sua retta, nella finestra DOPO la rampa comune con (G)** *(tick `500`-`1150`)*: ### **DEVE: quella di `Grampa` non oltre quella di (G) brusco nella stessa finestra.**
+  - ### ⚠ **LA DURATA COMUNE:** **(0), (U), (Uzero) hanno `1500` tick, i bracci con la rampa `2000`:** **le misure contro (0) si fermano a `1500` tick** *(`1000` dopo la rampa)*. **Allungare (0) e (U) a `2000` tick costa circa `10` minuti l'uno, senza lapse:** **lo chiedo a Luca, non lo decido.**
+  - **Il costo:** **`2000` tick a `2.25`-`2.4` s sono `4500`-`4800` s, piu' i controlli iniziali:** **vicino al tetto di `5400` s; se il tetto li ferma, lo dice il referto.**
+- ### **MI FERMO SE:** **un DEVE non va come deve** *(referto, FERMO, senza correggere)*.
+- ### **L'ORDINE:** **questo; il codice e la suite** *(niente accanto)*; **`Grampa`, `GUrampa`, `Uzero`, uno alla volta; il referto; FERMO.** **Poi la voce `7-bis`** *(la partenza a caldo)*.
