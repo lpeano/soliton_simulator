@@ -25561,3 +25561,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **una `breve` accanto alla `lunga`: ACCETTATA;** ### **DEVE FALLIRE, e fallisce: una seconda `lunga` RIFIUTATA, lo stesso nome due volte RIFIUTATO;**
   - **`forza` vuota e il riavvio senza `visto_da_luca` rifiutati; il riavvio con `visto_da_luca` chiude `FERMATO` a `tick 750`** *(l'ultima tappa)*; **i rifiuti non scrivono** *(`3` eventi)*; **il registro cresce solo in coda** *(`5` scritture)*; **il registro vero non toccato** *(`088b14a3` prima e dopo)*.
 - ### **Le skill viste da una sessione NUOVA** *(Luca `12:15`, punto 2)*: **una sessione `claude.exe -p` dell'estensione `2.1.323`, nel repo, senza strumenti, un turno:** ### **`registro-corse` e `ripresa-dopo-riavvio` sono le PRIME due dell'elenco delle skill disponibili** *(l'uscita intera in `skill_sessione_nuova.txt` nello scratchpad)*.
+
+### 2026-11-13 12:55 -- IL VIDEO TRIPLO: `8/8`; LA CRESTA E' L'EQUILIBRIO; IL RESPIRO NON VIENE DAL PENDOLO; LA RAMPA LO RIDUCE A `0.79` *(la voce `8` della coda; il mandato del `2026-11-12` `20:10`)* [[PUNTO-FISSO-CS-SOLITONE]]
+
+- **`doc/referti_l2/campo_g1_tre/`** *(il codice a `bea419ba`, la corsa a `6bf2dc94`, dalle `12:38:39` alle `12:49:42`; nel registro come «breve», `video-triplo`)*: **`g1_tre_A.npz` `11.48` MB, `g1_tre_B.npz` `11.41` MB, `g1_tre_C.npz` `11.47` MB; `referto.txt`** *(lo stdout copiato dallo scratchpad a corsa finita, dichiarato nella voce del registro)*.
+- **I DEVE:** **(A) = `0a275348` nei primi `4000` tick** *(`0.00e+00`, `201` tick)*; **la norma costante in tutte e tre** *(`1.36e-13`, `3.47e-13`, `1.20e-13`)*; **gli npz sotto `60` MB;** **DEVE FALLIRE (B) contro (A): fallisce** *(`1.08e+05`)*.
+- ### **(B), LA CRESTA SUL CENTRO: la distanza massima dalla cresta `0.054` nodi in `4000` tick: la cresta e' l'EQUILIBRIO** *(la lettura scritta prima)*.
+- ### **IL RESPIRO** *(il picco-picco di `rho max / la densita' media del corpo`)*: **(A) `0.6080`, (B) `0.5940`** *(il rapporto `0.977`: SIMILE)*, **(C) `0.4802`** *(il rapporto con (A) `0.790`)*.
+  - **La lettura scritta:** **(B) simile ad (A): il respiro viene dall'accensione brusca o dal campo stesso, non dal pendolo;** **(C) non meno della meta' di (A): l'accensione brusca NON ne spiega la parte maggiore** *(la rampa di `500` tick lo riduce del `21%`)*.
+- **Da leggere da Luca** *(il video si monta dagli npz)*.
