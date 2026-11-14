@@ -1,0 +1,14 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE 36031d91  committato e pulito
+==================================================================================================================================
+LA CONVERGENZA, IL DEVE SU L 81 (Luca 15:20): (MU) da MU_05000 caricato com'e' (U ricostruito), 50 tick col ciclo di convergenza.py contro mattone_cottura.Corsa
+==================================================================================================================================
+### il caricamento di E:\soliton_simulator\mattone\MU_05000.npz: U ricostruito dal campo salvato (max |U - I| 2.899e-03)
+### il caricamento di E:\soliton_simulator\mattone\MU_05000.npz: U ricostruito dal campo salvato (max |U - I| 2.899e-03)
+  DEVE PASSARE: (MU) su L 81: 50 tick col ciclo di convergenza.py = mattone_cottura.Corsa AL BIT (esclusa h_int)     PASSA   diverse: []
+ESITO: 1/1; fallite []

@@ -1,0 +1,15 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE 36031d91  committato e pulito
+==================================================================================================================================
+LA CONVERGENZA (MU su L 243; Luca 15:20): il mattone E:\soliton_simulator\mattone\MU_05000.npz (cotto su L 81, il picco 3.2978e+03) al vertice A, sul vuoto fresco al tick 60000; 2000 tick; il tetto 28800 s
+==================================================================================================================================
+### la scena: L 243, 59049 nodi; il bordo: il centro [121, 121], R_A 100.500, g_max 0.03; il vertice A [133, 145] (a 20.7846 dal centro del bordo)
+  DEVE PASSARE: (L 243) il vuoto fresco: |phi_j|^2 = 1 fuori dal bordo (36601 nodi) entro 1e-12                      PASSA   2.220e-14
+  DEVE PASSARE: (L 243) il vuoto fresco: lo stesso disegno di fase ogni 3 nodi entro 1e-12                           ### FALLISCE   2.000e+00
+ESITO: ### FERMO (la scena di L 243): 1/2; fallite ['(L 243) il vuoto fresco: lo stesso disegno di fase ogni 3 nodi entro 1e-12']
