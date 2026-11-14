@@ -25753,3 +25753,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I numeri copiati dai referti citati:** **`8ca61a34`** *(G `+7.175065e-07 +- 3.4e-08`, U `-2.554235e-08 +- 3.4e-10` = `0.0128` dell'atteso, G+U `+6.887181e-07`, l'additivita' `-3.246058e-09`, `Uzero` `-8.446714e-10`, `d_G - d_0` a `2000` tick `+0.6869`)*; **`102814bd`** *(il respiro `0.6080`, `0.5940`, `0.4802`; la cresta `0.054` nodi)*; **`703b1e63`** *(il peso di (C))*.
 - **Un rimando MIO in piu', dichiarato nella voce `13`:** **anche «(b) la legge efficace» passa alla voce `17`** *(sono i suoi passi `2`-`4`)*. **Restano nella `13`: P10, i resti di S5, la rotazione di `360` gradi, il lapse esplicito.**
 - **Il TODO `9`** *(il registro coi nomi dei file modificati)* **e' scritto nella voce `16`: si fa alla riunione, con la stessa suite.**
+
+### 2026-11-14 13:42 -- IL RAMO MATTONE: (MGU) COTTO A k 10000 (LA RIPARTENZA CON U RICOSTRUITO PASSA; S5' 0.1067); IL RAGGIO CRESCE ANCORA E IL RESIDUO DEI CONTI SCENDE; S7'' IN CORSA
+
+- **Sul ramo** *(`aa0606f7`; la sez. `16.9` del suo task history)*: **il DEVE della ripartenza `04000` -> `05000` con `U` ricostruito PASSA** *(`h_int` esclusa e comunque uguale)*; **COTTO al pezzo `5`** *(il picco medio `1291.6`, il raggio medio `11.947`; contro il pezzo prima `0.0063` e `0.0066`)*; **S5' `0.1067`.**
+- ### ⚠ **Il raggio cresce ancora** *(`11.229` -> `12.024` da `5000` a `10000`)*: **«cotto» per il criterio sulle medie, non fermo.** ### **Il residuo dei conti scende** *(`-514.5` su `8.28e6` a `10000`, circa `-0.1` per tick)*: **non letto oltre.**
+- **S7'' di (MGU) in corsa** *(`b03eb508`, dalle `13:40`)*.
