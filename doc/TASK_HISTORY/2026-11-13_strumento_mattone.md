@@ -336,3 +336,18 @@
 - ### **DEVE:** **i primi `50` tick di (MGU) lunga = gli stessi rifatti con `mattone_cottura.Corsa` e `mattone_cottura_U.carica_U` AL BIT** *(esclusa `h_int`)*, **nella stessa corsa; la somma dei pezzi dei conti esatta a ogni pezzo** *(`conti.pezzi`)*.
 - **I posti:** **(MGU) lunga col lapse + S7'' in corsa = due; B2 aspetta che S7'' chiuda.** **(MU) senza lapse.**
 - **TODO:** **il codice, la suite, il commit; le due corse nel registro; il referto unico col png.**
+
+## 18. IL TRIANGOLO: TRE SOLITONI INSIEME PERDONO MENO DI UNO SOLO? (Luca `2026-11-14` `14:22`, T1-T6) -- LA CARTA PRIMA DEL CODICE
+
+- **Luca: provare SUBITO se tre solitoni in triangolo frenano la fase lenta** *(il raggio che cresce, la massa che cala)*. **Due corse, G+U a campi pieni, `L 162`, `2000` tick: (T-fase) tre copie di `MGU_10000`; (T-sfasati) `MGU_08000`, `MGU_09000`, `MGU_10000`.**
+- **LE PREMESSE DAL CODICE:** **il bordo e' un assorbitore ad anello attorno al suo centro `c0`** *(`bordo.profilo`: zero dentro `R_A`, poi la rampa)*; **nella scena di C35-pi e di S162 `R_A = d/2 + 30` attorno al punto medio della coppia di C35** *(`corsa_accensione.BORDO_CORSA`)*. **S7'' e' nella scena di S162: il solitone a circa `18.8` nodi da `c0`.**
+- ### **LE SCELTE MIE, dichiarate:**
+  - **la scena: quella di S162** *(il bordo, il vuoto fresco al tick `60000`, l'origine dei tick: come S7'', il riferimento isolato)*; **il triangolo CENTRATO SUL CENTRO DEL BORDO** *(«centrato nel toro» del mandato: sul toro conta il bordo; il raggio del triangolo `37.6 / sqrt 3 = 21.7`, contro i `18.8` dell'isolato)*;
+  - **la massa di ogni solitone: il suo PEZZO** *(i nodi entro `28` dal centro piu' vicino, `conti.etichette`: una partizione, niente contato due volte)*; **i centri aggiornati a ogni tick col centro periodico di `rho` sul pezzo; il raggio entro `28`** *(con i vicini a `37.6` ci entra la coda degli altri)*;
+  - ### **IL DEVE di (T-fase) «la stessa massa entro `1e-10`»: sulle masse dei tre francobolli incollati DA SOLI** *(le masse dei pezzi dipendono dalle code sovrapposte e dai nodi arrotondati: si scrivono a parte)*;
+  - ### **IL CONFRONTO CON L'ISOLATO:** **la perdita: S7'' misura la massa del TORO** *(un solo solitone)*: **la si confronta con la perdita del pezzo E con la massa uscita dal bordo divisa per tre; IL RAGGIO: S7'' NON lo misura** *(`mattone_ctrl3` non lo salva)*: **il riferimento del raggio e' la cottura lunga di (MGU)** *(`MGU_10000` da solo su `L 81`, gli stessi tick dalla partenza)*, **quando c'e'.**
+  - **la fase dei respiri: il ritardo della massima correlazione incrociata dei picchi per tick** *(senza la retta)*, **entro `+-150` tick, sui primi e sugli ultimi `500` tick.**
+  - **`U`: col campo rifatto con `A = 0`, `scrivi_U` da' `I`** *(d9318470)*: **lo si chiama e lo si ASSERISCE.**
+- **IL CODICE: `csv/solitone/mattone_triangolo.py`** *(nuovo; usa `mattone`, `mattone_cottura.Corsa`, `conti`; la somma e il prodotto come `mattone_coppia`, riscritti per tre)*.
+- **I POSTI** *(T5)*: **al piu' TRE corse col lapse, per prova; l'ordine: (T-fase), B2, (T-sfasati); se una va a piu' di `2` volte il suo tempo da sola o la memoria scende sotto `2` GB, si torna a DUE** *(la piu' recente aspetta)*.
+- **Una cosa mia, fatta:** **la suite di `mattone_lunga.py` partita alle `14:23` l'ho FERMATA** *(per farne UNA sola coi due file nuovi)*: **ha lasciato `doc/indice/_lotti/_prova_atomicita.jsonl`** *(un file temporaneo di un collaudo, non tracciato)*: **tolto.**
