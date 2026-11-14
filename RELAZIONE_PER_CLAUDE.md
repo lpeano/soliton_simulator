@@ -25742,3 +25742,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **G4:** **(MU) senza ricostruzione fallisce, con `U` ricostruito UGUALE AL BIT; (MG) e (MGU) con `U` ricostruito diversi SOLO in `h_int`** *(`2.2e+02` relativo)*. ### **`h_int` e' riscritto da `motore.elicita` da `psi_h`: `prepara` lo salvava dopo la misura dell'energia; tutte le altre chiavi uguali al bit dopo `1000` tick: non porta stato** *(la mia lettura)*.
 - ### **Il bivio (a') delle `12:00` dice «al bit»: alla lettera NON passa. La cottura NON riparte: decide Luca.** **Il peso** *(`200` tick di `GUrampa`, oggi e C)* **in corsa, come informazione.**
 - **Un mio commit respinto da `H-NON-TRACCIATI`** *(la sez. `16.5` mentre le prove scrivevano i referti)*: **rifatto insieme ai referti** *(`45455a50`)*.
+
+### 2026-11-14 12:35 -- IL PIANO DEI CLUSTER (Luca 12:31): LA VOCE 17 DELLA ROTTA, SOLO SU CARTA; E LA GEOMETRIA NASCOSTA: (a') VALE (Luca 12:19), IL PESO DI (C) 2.6e-08 SU d A 200 TICK
+
+- **La voce `17`** *(i cluster: le coppie a piu' distanze, le triplette, il modello a particelle, la prova del nove)* **e la carta `doc/TASK_HISTORY/2026-11-14_cluster.md`:** **la campagna del guardiano delle `22:49`, mai inviata, estesa; parte dopo la riunione, la voce `16` e il verdetto di B2.**
+- **La geometria nascosta, sul ramo** *(`703b1e63`)*: **Luca alle `12:19`: `h_int` e' una chiave di servizio, (a') vale. Il peso: (oggi) = `GUrampa` al bit; (C) contro (oggi) a `200` tick `d` `-2.6e-08`, `rho max` `+1.8e-07` relativo, in crescita.** **La cottura di (MGU) col caricamento che ricostruisce `U`** *(`csv/solitone/mattone_cottura_U.py`)* **parte dopo la suite.**
+
+### 2026-11-14 12:50 -- LA ROTTA IN PARI (Luca 12:43): CHIUSE LE VOCI 7 (P6, 15/15) E 8 (IL VIDEO TRIPLO, 8/8); PRONTE LA 9 E LA 12; IL RIMANDO DELLA 13; LA SECONDA NAVE IN CIMA; NUOVE LA 18 (QUALE CAMPO VEDONO LE COPIE) E LA 19 (IL DOCUMENTO DI STATO); IL REGISTRO COI NOMI DEI FILE ALLA RIUNIONE
+
+- **I numeri copiati dai referti citati:** **`8ca61a34`** *(G `+7.175065e-07 +- 3.4e-08`, U `-2.554235e-08 +- 3.4e-10` = `0.0128` dell'atteso, G+U `+6.887181e-07`, l'additivita' `-3.246058e-09`, `Uzero` `-8.446714e-10`, `d_G - d_0` a `2000` tick `+0.6869`)*; **`102814bd`** *(il respiro `0.6080`, `0.5940`, `0.4802`; la cresta `0.054` nodi)*; **`703b1e63`** *(il peso di (C))*.
+- **Un rimando MIO in piu', dichiarato nella voce `13`:** **anche «(b) la legge efficace» passa alla voce `17`** *(sono i suoi passi `2`-`4`)*. **Restano nella `13`: P10, i resti di S5, la rotazione di `360` gradi, il lapse esplicito.**
+- **Il TODO `9`** *(il registro coi nomi dei file modificati)* **e' scritto nella voce `16`: si fa alla riunione, con la stessa suite.**
