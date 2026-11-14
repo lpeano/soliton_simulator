@@ -25759,3 +25759,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`aa0606f7`; la sez. `16.9` del suo task history)*: **il DEVE della ripartenza `04000` -> `05000` con `U` ricostruito PASSA** *(`h_int` esclusa e comunque uguale)*; **COTTO al pezzo `5`** *(il picco medio `1291.6`, il raggio medio `11.947`; contro il pezzo prima `0.0063` e `0.0066`)*; **S5' `0.1067`.**
 - ### ⚠ **Il raggio cresce ancora** *(`11.229` -> `12.024` da `5000` a `10000`)*: **«cotto» per il criterio sulle medie, non fermo.** ### **Il residuo dei conti scende** *(`-514.5` su `8.28e6` a `10000`, circa `-0.1` per tick)*: **non letto oltre.**
 - **S7'' di (MGU) in corsa** *(`b03eb508`, dalle `13:40`)*.
+
+### 2026-11-14 15:00 -- IL RAMO MATTONE: S7'' DI (MGU) NON PASSA (IL PICCO MEDIO -4.3% IN 500 TICK SU L 162); FERMO DI B2; LUCA 14:54: IL MATTONE SI CUOCE SUL TORO DOVE SI USA, (T-solo) E' LA COTTURA SU L 162; UN MIO ERRORE CON LA SUITE
+
+- **S7''** *(`88af00fb`)*: **`3/4`; il picco medio `1224.3` -> `1171.2` (`0.0434`, la soglia `0.02`): NON PASSA; S5' `0.0968` contro `0.1067`, il centro `0.0395`, Gauss `2.917e-11` passano.** **FERMO di B2 e della riunione.**
+- **Luca `14:32`: il triangolo si confronta con (T-solo)** *(un solo `MGU_10000`, la stessa scena e gli stessi tick)*; **`14:54`: (T-solo) e' anche la cottura su `L 162`; quando e' cotto, B2 lo usa e la catena riprende** *(S7'' superato su `L 162`, dichiarato)*. **Nella voce `17`: i mattoni si cuociono sul toro dove si usano; e nelle coppie e triplette si misurano sempre la perdita, il raggio e la fase del respiro.**
+- ### **ERRORE MIO:** **ho scritto la chiusura di S7'' e la sez. `18.1` MENTRE girava la suite: la suite le ha rimesse ed e' uscita con `1`** *(i `67/67` passavano)*; **riscritte. E due suite fermate da me per i cambi di codice delle `14:22`, `14:32`, `14:54`.**
