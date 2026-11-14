@@ -145,3 +145,47 @@
 - ### **IL GIUDIZIO S7'** *(tick `250`-`1250`)*: **il respiro `0.1193` contro il mattone `0.0711`: il rapporto `1.677`, la tolleranza `25%`: NON PASSA;** **il centro `0.0839`** *(passa)*.
 - ### **UN'OSSERVAZIONE, che NON cambia il verdetto** *(guardiano, per Luca)*: **finestra per finestra il respiro e' simile o PIU' PICCOLO di quello del mattone, e cala nell'ultima** *(`0.0425`)*; **sui `1000` tick e' grande perche' il LIVELLO MEDIO del rapporto si sposta piano** *(`1.42` -> `1.51`, ogni `250` tick)*: **un'oscillazione lenta, piu' lunga di `250` tick. Il mattone su `L 81` misurava il picco-picco degli ultimi `1000` tick: le due misure contano la stessa cosa solo se l'oscillazione lenta e' uguale nei due tori.**
 - ### **FERMO DELLA CATENA** *(il bivio A2: «se (MG) NON PASSA S7': referto col respiro per finestre e FERMO; nessun rodaggio, nessun mattone nuovo senza Luca»)*: **NON si fanno S7' per (MU) e (MGU), NON la coppia, NON la riunione.**
+
+## 15. IL MATTONE BEN COTTO, LE DUE COPPIE, LA RIUNIONE (Luca `2026-11-14` `09:34`): LE PREMESSE E IL PROGETTO, PRIMA DEL CODICE
+
+- **Il FERMO della catena** *(sez. `14`, `94259b8f`)* **e' SCIOLTO dal mandato delle `09:34`, nei modi scritti li'.** **Le scelte di dettaglio sono del guardiano** *(Luca)*; **quelle che restano a me sono scritte qui sotto come MIE.**
+- ### **GLI ERRORI DEL GUARDIANO, come scritti nel mandato:** **n.155** *(il respiro «da picco a picco su `1000` tick» mescola l'oscillazione con la deriva lenta)*; **n.156** *(la lettura L4 costruita su `A`, che satura a `1`, invece che sul raggio)*; **n.157** *(la tolleranza della massa `1e-12`: e' del principale)*. **Le correzioni sono decise DOPO aver visto i risultati, e si scrivono cosi'.**
+
+### 15.1 LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **Gli stati di (MG) e (MGU) a `4000` e `5000` ci sono su E:** *(`MG_04000.npz` ... `MGU_05000.npz`; `campo_A`, `campo_E` per (MGU))*. **A `k >= 4000` `r_di(k) = 1`:** **i tick `4001`-`5000` di `mattone.prepara` sono gia' a campi pieni**, **quindi la ripartenza da `04000` deve ridare `05000` AL BIT** *(il DEVE del mandato)*.
+- ### **COSA NON SO:** **se il tick col lapse tiene uno stato che NON sta nel npz** *(`mot.cs`: il bilancio lo salvava a parte, «il cs del tick»)*. **Se `tick_lapse` lo ricalcola a ogni tick dallo stato, la ripartenza e' esatta; se no, il DEVE fallisce, e allora: referto e FERMO.** **Per (MGU): `campo.e` e `e_prec` si rimettono a `e*`** *(cosi' `E *= e / e_prec` moltiplica per `1.0` esatto, come in `prepara`)*.
+- **Il respiro:** **la serie e' `rho max x (somma rho) / somma rho^2`** *(`mattone.respiro`: il picco diviso la densita' media pesata del corpo)*, **quella del mandato.**
+- **Il raggio:** **`mattone_rhoc.raggio`** *(la radice del secondo momento di `rho` entro `28` nodi dal centro, come R-CONTI-3)*, **ripreso, non riscritto.**
+- **`conti.py` sta SOLO sul principale** *(`db57e4df`)*: **R-CONTI vuole le tabelle dei conti nelle corse nuove** *(la cottura, S7'', le coppie)*. ### **MIA SCELTA: lo COPIO identico sul ramo** *(lo stesso blob `sha1-BYTE d57ce3d4`)*: **alla riunione due file uguali non fanno conflitto.**
+
+### 15.2 IL PROGETTO *(le scelte MIE sono marcate)*
+
+- **A1, `csv/solitone/mattone_cottura.py`** *(nuovo; importa `mattone.py`, che NON si tocca)*: **`cuoci --caso MG|MGU`:**
+  1. ### **IL DEVE della ripartenza, PRIMA della cottura e nella stessa corsa:** **da `<caso>_04000` `1000` tick = `<caso>_05000` AL BIT** *(tutte le chiavi dello stato, e `campo_A`, `campo_E` per (MGU))*. **Se fallisce: la corsa si ferma, referto e FERMO.**
+  2. **da `<caso>_05000`, a pezzi di `1000` tick, lo stato a fine pezzo su E:** *(`<caso>_06000.npz`, ...; il meta dice il codice)*; **«COTTO» quando, fra due pezzi CONSECUTIVI DELLA COTTURA, la media del picco cambia meno del `2%` E la media del raggio meno dell'`1%`;** **al piu' `10` pezzi** *(`10000` tick)*. ### **MIA SCELTA: i pezzi confrontati sono SOLO quelli della cottura** *(il pezzo `4000`-`5000` di `prepara` non ha la serie del raggio per (MGU))*: **il primo giudizio dopo `2000` tick.**
+  3. ### **MIA SCELTA: il respiro, il picco, il raggio, il centro ogni `10` tick** *(non `50`: una finestra di `250` tick con `6` punti da' un picco-picco grezzo)*; **S5' si scrive ANCHE sulla serie presa ogni `50`, per il confronto coi mattoni vecchi.**
+  4. **le tabelle R-CONTI** *(un solitone: la deriva del centro, il picco, il raggio ogni `500` tick; i conti all'inizio, ogni `500` e alla fine: la materia del solitone e fuori, il vuoto del solitone e lontano, `K + V`, `tot`, l'energia uscita dal bordo, il residuo `tot(t) - tot(0) + bordo`)*; ### **l'energia come MEDIA sugli ultimi `100` tick** *(C5; a `k 0` il valore del tick, dichiarato)*: **`tot` e i pezzi per nodo a OGNI tick** *(serve comunque per il bordo)*.
+  5. **lo stato cotto si scrive in `doc/referti_l2/mattone/cottura_<caso>.json`** *(il file, `k`, la serie)* **e lo leggono S7'' e le coppie.**
+- **A2, S5':** **la serie del respiro; in ogni finestra di `250` tick** *(gli estremi COMPRESI, come `mattone_ctrl2`)* **si toglie la RETTA dei minimi quadrati di QUELLA finestra** ### *(MIA LETTURA di «la tendenza lineare tolta»: la retta per finestra, non una sola su tutta la serie)*, **poi il picco-picco; il respiro e' il MASSIMO delle ultime quattro finestre.** **`mattone_cottura.py letture`: S5' dalle serie salvate** *((MG), (MU), (MGU), `MGdoppio`, `MGmezzo`, e `ctrl2_MG` sui tick `250`-`1250`)*, **accanto ai vecchi numeri; nessuna corsa.**
+  - ### **DEVE:** **S5' di (MG) a `5000` ricalcolato dalla serie salvata, scritto accanto al vecchio `0.0711`.**
+  - **C6 (sul ramo, perche' il referto e' qui):** **le stesse `letture` stampano il paragrafo del raggio** *(n.156)*: **gli aumenti del raggio di `MGdoppio`, (MG), `MGmezzo` dalle serie, i rapporti per raddoppio di `rho_c`, la potenza** *(`log2` del rapporto)*. ### **MIA SCELTA: il paragrafo sta in un file ACCANTO** *(`doc/referti_l2/mattone/rhoc_raggio.txt`)* **e `rhoc.txt` resta l'uscita del suo comando** *(un referto si rigenera con un comando: un paragrafo a mano dentro non avrebbe provenienza)*.
+- **A3, S7'', `csv/solitone/mattone_ctrl3.py`** *(nuovo; come `mattone_ctrl2`)*: **il francobollo del mattone COTTO su `L 162`, `1250` tick, i primi `250` l'assestamento; il giudizio sui `250`-`1250`: S5' entro il `25%` di S5' del mattone cotto** *(le ultime quattro finestre della cottura)*; **il centro fermo entro `0.2` nodi; la media del picco fra `250`-`750` e `750`-`1250` cambia meno del `2%`.** **(MG) e (MGU) in parallelo. (MU) si salta** *(non serve alle coppie)*. **Le tabelle R-CONTI come nella cottura.**
+- **B, le due coppie, `csv/solitone/mattone_coppia.py`** *(c1740faa, MAI girato: si modifica, dichiarato)*: **`--mondo G|GU`:** **G = due (MG) cotti, `Campi` col caso `MG` a `r = 1`; GU = due (MGU) cotti, il caso `MGU`.** **I centri di C35-pi a `60000`, il nodo piu' vicino multiplo di `3`; `d0` vera stampata; la materia per somma, il vuoto per prodotto; `2000` tick; `d` e i centri ogni `10` tick** ### *(MIA SCELTA, come sopra)*.
+  - ### **LA TABELLA DELLE FORZE in finestre di `250` tick** *(il mandato; R-CONTI-2 diceva `500`: per queste corse vale il mandato, dichiarato)*, **la prima l'assestamento.**
+  - ### **B3, LA LETTURA** *(le soglie del guardiano, dichiarate nel mandato)*: **`d''` dalla parabola di `d` sui tick `250`-`2000`** *(`carta_coppia.curvatura`, come i bracci)*; **«G E' UNA FORZA» se positiva oltre `3` errori E almeno il `30%` di `Grampa`; «ERA IL COLPETTO DELL'ALLARGAMENTO» se in valore assoluto sotto il `10%`; in mezzo «INDECISO».** **I riferimenti `Grampa` e `U_2000` si LEGGONO dal referto dei bracci del principale** *(`git show 8ca61a34:doc/referti_l2/p6_bracci.txt`, non ricopiati)*. ### ⚠ **I due numeri non sono omogenei:** **`Grampa` e' `d_G - d_0` (tolta la coppia senza campi); la coppia di mattoni e' `d''` CRUDO** *(non c'e' la coppia di mattoni senza campi)*: **il confronto vale per il SEGNO e l'ORDINE di grandezza** *(come dice il mandato per il TBS)*.
+  - **In GU: la stessa lettura, e l'additivita': `d''(GU) - d''(G)` contro `(U) = U_2000 - 0_2000`, scritta.**
+  - **DEVE: un solo francobollo, la somma e il prodotto = l'incollatura di S6 AL BIT, nei due mondi; il residuo di Gauss sotto `1e-10` in GU.**
+- **D, la riunione:** **quando S7'' e' passato per (MG) e (MGU) e B1, B2 hanno il referto: il merge del ramo in `primo-ordine`, la suite, una riga nella ROTTA; poi FERMO.**
+
+### 15.3 COSA MI FAREBBE FERMARE
+
+- **il DEVE della ripartenza fallisce; un mattone non e' cotto dopo `10000` tick; S7'' fallisce per (MG) o (MGU); un DEVE delle coppie fallisce; un conflitto alla riunione.** **In ognuno: il referto, senza correggere, e FERMO.**
+
+### 15.4 TODO
+
+1. questo task history, commit e push;
+2. il codice: `conti.py` copiato, `mattone_cottura.py`, `mattone_ctrl3.py`, `mattone_coppia.py` modificato, l'inventario; la suite; commit e push;
+3. `letture` *(A2, C6)*; le corse `cottura-MG` e `cottura-MGU` insieme, col registro;
+4. S7'' di (MG) e (MGU) insieme; poi B1 e B2 insieme;
+5. i referti; la riunione; FERMO.
