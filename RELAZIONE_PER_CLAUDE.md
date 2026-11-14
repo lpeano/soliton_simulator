@@ -25707,3 +25707,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Gli errori del guardiano scritti nel mandato:** **n.155** *(il respiro picco-picco su `1000` tick mescola l'oscillazione con la deriva)*, **n.156** *(la lettura L4 su `A` invece che sul raggio)*, **n.157** *(la tolleranza della massa `1e-12` troppo stretta)*; **le correzioni decise DOPO i risultati, e scritte cosi'.**
 - **L'ordine:** **C** *(la chiusura della voce `15`, solo lettura, sul principale: la carta nella sez. `8` di `doc/TASK_HISTORY/2026-11-14_bilancio_energie.md`)*; **sul ramo `strumento-mattone`** *(la carta nella sez. `15` del suo task history)*: **A1 la cottura di (MG) e (MGU), A2 il respiro S5', A3 il controllo S7'', B1 e B2 le due coppie** *(G e G+U)*, **D la riunione; poi FERMO.**
 - **Le mie scelte, scritte nelle carte:** **`conti.py` copiato identico sul ramo** *(R-CONTI)*; **il respiro, il picco, il raggio ogni `10` tick nelle corse nuove; S5' con la retta tolta PER FINESTRA; il paragrafo del raggio (C6) in un file accanto a `rhoc.txt`; il rumore della media su `100` tick dalla dispersione delle `20` medie di `(0)_2000`.**
+
+### 2026-11-14 10:00 -- LA DECISIONE DELLE 09:38: SOLO IL MONDO G+U; LA SUITE DEL RAMO FERMATA E RIFATTA SUL CODICE NUOVO
+
+- **Luca alle `09:38`: si tolgono la cottura e S7'' di (MG) e la coppia B1; restano la cottura e S7'' di (MGU), S5', la coppia B2 con la lettura B3 contro `GUrampa` (forza) e `U_2000` (colpetto).**
+- **La suite del ramo, partita alle `09:48:43` sul codice di prima, l'ho FERMATA** *(TaskStop; nessun python rimasto; il worktree con le sole mie modifiche)*: **il codice cambia, e una suite si gira sul codice che si committa.**
+- **Mia scelta:** **«entro `3` errori da `U_2000`» con l'errore della differenza in quadratura; il comando dell'additivita' tolto** *(senza B1 non c'e')*. **Scritto nella sez. `15.5` del task history del ramo.**
+
+### 2026-11-14 10:25 -- LA COTTURA DI (MGU): IL DEVE DELLA RIPARTENZA FALLISCE, FERMO DELLA CATENA DEL MATTONE; IL MANDATO DELLE 10:19 (I DATI NEL REPO) IN CODA, VOCE 16
+
+- **La cottura di (MGU)** *(il ramo, `cef29e39`; dalle `10:11:02` alle `10:18:56`)*: ### **il DEVE della ripartenza FALLISCE** *(da `MGU_04000` `1000` tick NON ridanno `MGU_05000`: diverse `Lambda`, `phi_h`, `psi_h`, `rho`, `campo_A`, `campo_E`)*; **la cottura NON partita; `cottura-MGU` CHIUSA FALLITO; il referto e la sez. `15.6` del task history del ramo.**
+- ### **UNA LETTURA DAL CODICE, NON VERIFICATA:** **`_u1_prototipo.avvolto` riscrive `mot.geo.U` dal campo e all'uscita NON lo rimette; il npz non ha `U`; alla ripartenza `mattone.scena.metti` rimette l'`U` della scena** *(il nucleo tratta `geo.U` come stato: `_collauda_checkpoint.py`)*. **La cura sarebbe salvare `U`** *(o rifarlo dal campo)*: **NON fatta.**
+- ### **FERMO DELLA CATENA** *(la cottura, S7'' di (MGU), B2, la riunione)*. **Continuano C** *(la voce `15`)* **e A2/C6** *(le letture)*: **non dipendono dalla cottura.**
+- **Il mandato delle `10:19`** *(i dati nel repo, `_dove.py`)*: **registrato come voce `16` della ROTTA; si esegue dopo la riunione D1; oggi D1 non arriva, quindi ASPETTA la prossima riunione.**
