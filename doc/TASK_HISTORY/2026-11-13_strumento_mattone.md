@@ -322,3 +322,17 @@
   - **il raggio cresce ancora** *(`11.229` a `5000`, `12.024` a `10000` dagli stati ogni `500`)*: **il criterio «cotto» e' sulle MEDIE fra due pezzi, ed e' passato al primo pezzo in cui le due medie stanno vicine; il pezzo `3` -> `4` aveva `0.0172`.** **Un mattone «cotto» per il criterio, non fermo.**
   - ### **il residuo dei conti scende** *(`-33.8` a `5500`, `-514.5` a `10000`, su `8.28e6`: circa `-0.1` per tick, `6e-05` relativo)*: **il bordo toglie `6789` di energia in `5000` tick e il residuo non torna a zero** *(nel bilancio di (0) la media su `100` tick stava ferma a `-46`)*. **NON letto oltre.**
 - **Il prossimo passo:** **S7'' di (MGU)** *(`csv/solitone/mattone_ctrl3.py --caso MGU`)*.
+
+## 17. LA COTTURA LUNGA: IL MATTONE SI FERMA O SI DISSOLVE? (Luca `2026-11-14` `14:13`, L1-L7) -- LA CARTA PRIMA DEL CODICE
+
+- **Luca: cuocere (MGU) «fino all'inverosimile», `5` ore, almeno finche' il solitone esiste.** **NON cambia il mattone delle coppie:** **S7'' e B2 usano `MGU_10000`.** **In piu' (il guardiano): la stessa cottura lunga per (MU), SENZA lapse, da `MU_05000`, come confronto.**
+- **LE PREMESSE DAL CODICE:** **il caricamento di `mattone_cottura_U` ricostruisce `U` anche per (MU)** *(ha il campo; `geometria_ripartenza_MU_U.txt` UGUALE AL BIT)*; **`mattone_cottura.Corsa` da' i conti per tick; `mattone_rhoc.raggio` il raggio entro `28` nodi** ### *(se il raggio si avvicina a `28`, la misura si SATURA: L4 ferma a `20`, prima)*.
+- **IL CODICE: `csv/solitone/mattone_lunga.py`** *(nuovo; nessun file esistente toccato)*: **`corsa --caso MGU|MU`; `referto`** *(L5, e il png `lunga_raggio_massa.png`)*.
+- ### **LE SCELTE MIE, dichiarate:**
+  - **«(MU) si ferma allo STESSO numero di tick di (MGU)»:** **(MU) e' circa tre volte piu' veloce e girano INSIEME; senza attese** *(niente polling)* **(MU) controlla a ogni pezzo il json di (MGU) e si ferma al primo pezzo in cui ha fatto ALMENO i suoi tick, se (MGU) e' finita; se no, al tetto.** **Il referto confronta i pezzi COMUNI.**
+  - **L4 per (MU): il picco sotto il `10%` del SUO picco di partenza** *(il `1291.6` del mandato e' di (MGU))*.
+  - **il respiro a OGNI tick** *(L3: S5' «sulla serie a ogni tick»)*; **il picco, il raggio, la massa, il centro ogni `50`.**
+  - **la lettura L5:** **la velocita' per pezzo; RALLENTA / COSTANTE / ACCELERA con la retta delle velocita' contro il tempo, soglia `+-25%` di variazione sull'intervallo; il raggio di arrivo stimato con una velocita' che cala esponenzialmente** *(una stima grezza, dichiarata)*.
+- ### **DEVE:** **i primi `50` tick di (MGU) lunga = gli stessi rifatti con `mattone_cottura.Corsa` e `mattone_cottura_U.carica_U` AL BIT** *(esclusa `h_int`)*, **nella stessa corsa; la somma dei pezzi dei conti esatta a ogni pezzo** *(`conti.pezzi`)*.
+- **I posti:** **(MGU) lunga col lapse + S7'' in corsa = due; B2 aspetta che S7'' chiuda.** **(MU) senza lapse.**
+- **TODO:** **il codice, la suite, il commit; le due corse nel registro; il referto unico col png.**
