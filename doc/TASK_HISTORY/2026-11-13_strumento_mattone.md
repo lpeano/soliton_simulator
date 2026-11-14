@@ -121,3 +121,17 @@
 - ### **A2, IL BIVIO:** **se (MG) PASSA S7': S7' per (MU) e (MGU); poi la coppia di mattoni** *(i primi `250` tick dichiarati come assestamento nella tabella delle forze)*; **poi la riunione** *(R5, con la suite)*; **poi FERMO.** **Se NON passa: il referto col respiro per finestre e FERMO della catena** *(nessun rodaggio, nessun mattone nuovo senza Luca)*.
 - **A3:** **i mattoni con `rho_c` diverso continuano** *(`MGdoppio` in corsa dalle `00:43`, poi `MGmezzo`)*.
 - **C1:** **al piu' DUE corse col lapse alla volta fra i due rami; il principale ha la precedenza** *(il bilancio di `Grampa` prima di S7')*.
+
+## 13. PERCHE' IL LAPSE ALLARGA IL SOLITONE: IL REFERTO UNICO *(`doc/referti_l2/mattone/rhoc.txt`; `MGmezzo` dalle `01:34:46` alle `02:18:59`, in coppia con `bilancio-Grampa`)*
+
+| il caso | `rho_c` | il picco `k 0` -> `5000` | il raggio | `N` al centro alla fine | `A(f)` | il respiro |
+|---|---|---|---|---|---|---|
+| (MG) | `227058.575` | `3350 -> 1388` | `8.249 -> 11.268` | `0.9939` | `0.5856` | `0.0711` |
+| (MGx2) `MGdoppio` | `454117.150` | `3350 -> 1840` | `8.249 -> 10.136` | `0.9961` | `0.4506` | `0.0765` |
+| (MG/2) `MGmezzo` | `113529.287` | `3350 -> 1035` | `8.249 -> 13.080` | `0.9919` | `0.6910` | `0.0813` |
+
+- **La massa quasi ferma in tutti e tre** *(da `9.9694e+05` a `9.9625`-`9.9643e+05`: il bordo)*.
+- ### **LA LETTURA L4** *(le soglie del guardiano `0.75` e `0.6`, dichiarate)*: **`A(MGx2) / A(MG) = 0.7695`: RISPOSTA A SOGLIA** *(compatibile col bilico)*; ### ⚠ **a `0.02` dal limite** *(`0.75`)*: **una lettura al confine, non netta.**
+- **(MG/2): NESSUN collasso** *(il picco non cresce: si allarga di piu', `A = 0.691`)*.
+- **Un fatto, non una lettura:** **raddoppiando `rho_c` il lapse al centro alla fine si dimezza circa** *(`1 - N`: `0.0061`, `0.0039`, `0.0081`)* **mentre `A` cambia meno** *(`0.586`, `0.451`, `0.691`)*: **l'allargamento riduce `rho` e quindi il lapse che il solitone sente.**
+- ### **FERMO per questa voce** *(il mandato delle `23:22`)*. **Il resto del ramo continua:** **S7' di (MG).**

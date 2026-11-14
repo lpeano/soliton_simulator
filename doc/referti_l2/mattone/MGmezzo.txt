@@ -1,0 +1,34 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+==================================================================================================================================
+IL MATTONE MGmezzo (Luca 23:22): come (MG) salvo rho_c 113529.287432 (quello di (MG) 227058.574864, il rapporto 0.500); la rampa sin^2 in 4000 tick + 1000 pieni; il raggio dentro R 28; N al centro
+==================================================================================================================================
+    k   250  r 0.009607  c (40.505, 40.503)  rmax 3.2990e+03  raggio 8.3083  N_c 0.999734  respiro 1.8084  M 9.9691679747e+05  (101 s)
+    k   500  r 0.038060  c (40.506, 40.503)  rmax 3.0655e+03  raggio 8.3747  N_c 0.999000  respiro 1.7109  M 9.9688833599e+05  (207 s)
+    k   750  r 0.084265  c (40.505, 40.503)  rmax 3.0189e+03  raggio 8.4994  N_c 0.997845  respiro 1.7423  M 9.9686138920e+05  (343 s)
+    k  1000  r 0.146447  c (40.504, 40.502)  rmax 2.7329e+03  raggio 8.7337  N_c 0.996682  respiro 1.6761  M 9.9683388382e+05  (501 s)
+### lo stato a k 1000: E:\soliton_simulator\mattone\MGmezzo_01000.npz
+    k  1250  r 0.222215  c (40.502, 40.500)  rmax 2.4648e+03  raggio 9.1034  N_c 0.995395  respiro 1.6561  M 9.9680585312e+05  (668 s)
+    k  1500  r 0.308658  c (40.500, 40.499)  rmax 1.9957e+03  raggio 9.6016  N_c 0.994903  respiro 1.4997  M 9.9677517397e+05  (830 s)
+    k  1750  r 0.402455  c (40.499, 40.499)  rmax 1.7645e+03  raggio 10.1594  N_c 0.994310  respiro 1.4840  M 9.9674599040e+05  (960 s)
+    k  2000  r 0.500000  c (40.502, 40.498)  rmax 1.5058e+03  raggio 10.7041  N_c 0.994152  respiro 1.3995  M 9.9672100369e+05  (1077 s)
+### lo stato a k 2000: E:\soliton_simulator\mattone\MGmezzo_02000.npz
+    k  2250  r 0.597545  c (40.508, 40.496)  rmax 1.3531e+03  raggio 11.1476  N_c 0.994004  respiro 1.3556  M 9.9669857136e+05  (1206 s)
+    k  2500  r 0.691342  c (40.517, 40.492)  rmax 1.2409e+03  raggio 11.4804  N_c 0.993686  respiro 1.3162  M 9.9667552541e+05  (1350 s)
+    k  2750  r 0.777785  c (40.528, 40.488)  rmax 1.2157e+03  raggio 11.7002  N_c 0.992677  respiro 1.3410  M 9.9665014089e+05  (1513 s)
+    k  3000  r 0.853553  c (40.541, 40.484)  rmax 1.1900e+03  raggio 11.8281  N_c 0.991471  respiro 1.3440  M 9.9662074023e+05  (1675 s)
+### lo stato a k 3000: E:\soliton_simulator\mattone\MGmezzo_03000.npz
+    k  3250  r 0.915735  c (40.554, 40.479)  rmax 1.2020e+03  raggio 11.9251  N_c 0.990897  respiro 1.3824  M 9.9658684149e+05  (1821 s)
+    k  3500  r 0.961940  c (40.564, 40.480)  rmax 1.2202e+03  raggio 12.0286  N_c 0.991228  respiro 1.4279  M 9.9654429017e+05  (1941 s)
+    k  3750  r 0.990393  c (40.577, 40.490)  rmax 1.1515e+03  raggio 12.1801  N_c 0.991140  respiro 1.3811  M 9.9650283934e+05  (2062 s)
+    k  4000  r 1.000000  c (40.592, 40.507)  rmax 1.1027e+03  raggio 12.3901  N_c 0.991255  respiro 1.3688  M 9.9645781832e+05  (2175 s)
+### lo stato a k 4000: E:\soliton_simulator\mattone\MGmezzo_04000.npz
+    k  4250  r 1.000000  c (40.603, 40.528)  rmax 1.0925e+03  raggio 12.6076  N_c 0.991879  respiro 1.3992  M 9.9640902750e+05  (2292 s)
+    k  4500  r 1.000000  c (40.612, 40.550)  rmax 1.0645e+03  raggio 12.8133  N_c 0.992282  respiro 1.4035  M 9.9635330921e+05  (2407 s)
+    k  4750  r 1.000000  c (40.621, 40.569)  rmax 1.0101e+03  raggio 12.9737  N_c 0.992302  respiro 1.3613  M 9.9629933300e+05  (2521 s)
+    k  5000  r 1.000000  c (40.631, 40.585)  rmax 1.0351e+03  raggio 13.0801  N_c 0.991937  respiro 1.4171  M 9.9624567524e+05  (2634 s)
+### lo stato a k 5000: E:\soliton_simulator\mattone\MGmezzo_05000.npz
+----------------------------------------------------------------------------------------------------------------------------------
+### (MGmezzo) 5000 tick in 2645 s; il FERMO None
+    il picco da 3.3497e+03 a 1.0351e+03: A = 1 - finale/iniziale = 0.6910; il raggio da 8.2487 a 13.0801; N al centro a piena rampa (k 4000) 0.991255; il respiro negli ultimi 1000 tick 0.0813; la massa da 9.9694486239e+05 a 9.9624567524e+05
+==================================================================================================================================
