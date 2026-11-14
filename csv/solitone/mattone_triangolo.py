@@ -5,7 +5,7 @@ r"""**IL TRIANGOLO: TRE SOLITONI INSIEME PERDONO MENO DI UNO SOLO?** *(Luca `202
     python csv/solitone/mattone_triangolo.py referto > doc/referti_l2/mattone/triangolo.txt
 
 ### **`corsa`:** **tre francobolli di (MGU)** *((T-fase): tre copie di `MGU_10000`; (T-sfasati): `MGU_08000`, `MGU_09000`, `MGU_10000`; (T-solo), Luca `14:32`: UN solo `MGU_10000` al vertice A, il riferimento isolato)* **nella scena di S162** *(la scena e il bordo di S7'', il vuoto fresco al tick
-`60000`)*, **in un triangolo equilatero di lato `37.6` centrato sul centro del BORDO** *(mio: il bordo assorbe fuori da `R_A` attorno a quel centro)*, **i centri al nodo piu'
+`60000`)*, **in un triangolo equilatero di lato `37.6` centrato sul centro del BORDO** *(mio: il bordo assorbe fuori da `R_A` attorno a quel centro)*; ### **il bordo da `R_A = 60`** *(Luca `15:49`, n.161; quello della scena e' `47.5`)*, **i centri al nodo piu'
 vicino con lo spostamento multiplo di `3`; la materia per SOMMA, il vuoto per PRODOTTO** *(`mattone_coppia`, `c1740faa`)*; **G+U a campi pieni dal tick `0`, U con Gauss** *(`A = 0`, e `U` dal campo con
 `_u1_prototipo.scrivi_U`, `d9318470`: con `A = 0` e' `I`)*; **`2000` tick col tick di `mattone_cottura.Corsa`** *(i conti R-CONTI)*.
 **T3:** **per ogni solitone ogni `50` tick la massa del suo pezzo** *(i nodi entro `28` dal centro PIU' VICINO: una partizione, `conti.etichette`)*, **il raggio** *(`mattone_rhoc.raggio`, entro `28`: con i vicini a `37.6`
@@ -42,6 +42,7 @@ PROTEGGE, PEGGIORA = 0.70, 1.30          # ### T4: le soglie del guardiano
 TOLL_MASSA0 = 1e-10                      # ### il DEVE di (T-fase)
 COTTO_L162, PIU_L162, PEZZO_L162 = 0.02, 4000, 1000   # ### Luca 14:54: (T-solo) e' anche la COTTURA SU L 162 (il picco medio fra le ultime due finestre di 500 entro il 2%; al piu' 4000 tick in piu', a pezzi di 1000)
 NOMI = ("A", "B", "C")
+R_A_SCENA = 60.0                         # ### Luca 15:49 (n.161): il bordo da R_A 60 dal centro del bordo della scena (R_B la meta' del periodo, 81); bordo.py NON si tocca
 TETTO_S = 28800.0                        # ### Luca 15:22: le corse col lapse in parallelo, il tetto 8 ore
 DIR_LAVORO = os.path.join(MT.DIR_E, "lavoro")   # ### il json della cottura su L 162 FUORI dal repo (copiato a corsa chiusa)
 OK = [0, 0]
@@ -154,6 +155,10 @@ def corsa(variante, nome_reg):
     with MT.scena(MT.CORSA_162, MT.T_162) as Z:
         st, L = Z["st"], Z["L"]
         c0 = Z["bordo"]["c0"]
+        from solitone import bordo as BO
+        from solitone import toro as TO
+        print("### IL BORDO (Luca 15:49): quello della scena di S162 ha R_A %.3f; QUI R_A %g attorno allo STESSO centro, R_B %g, g_max %g (bordo.g_estremita, l'argomento)" % (Z["bordo"]["R_A"], R_A_SCENA, TO.meta_periodo(L), Z["bordo"]["g_max"]))
+        Z["g_e"] = BO.g_estremita(Z["z"], c0[0], c0[1], R_A_SCENA, Z["bordo"]["g_max"])[0]
         centri = posti(c0, frs, L)
         lati = [MT.distanza(L, centri[a], centri[b]) for a, b in ((0, 1), (1, 2), (2, 0))] if tre else []
         print("### il centro del bordo %s (R_A %.3f); i vertici (i nodi, lo spostamento multiplo di 3): %s; i lati VERI %s; la distanza minima dalle copie oltre il bordo %.3f"
