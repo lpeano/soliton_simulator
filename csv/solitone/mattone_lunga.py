@@ -33,9 +33,10 @@ import mattone_rhoc as MR  # noqa: E402
 PARTENZA = {"MGU": 10000, "MU": 5000}     # ### L1
 PICCO_COTTO_MGU = 1291.6                  # ### L4 (Luca 14:13): il picco medio dell'ultimo pezzo della cottura (aa0606f7)
 PEZZO, OGNI, N_DEVE = 1000, 50, 50
-TETTO_S = 18000.0                         # ### L2
+TETTO_S = 28800.0                         # ### L2; Luca 15:22: le corse col lapse in parallelo, il tetto 8 ore
 SOGLIA_PICCO, SOGLIA_MASSA, RAGGIO_MAX = 0.10, 0.50, 20.0   # ### L4
 DIR_REF = MT.DIR_REF
+DIR_LAVORO = os.path.join(MT.DIR_E, "lavoro")   # ### i file di LAVORO della corsa (il json a ogni pezzo, la serie) FUORI dal repo: nel repo si copiano a corsa chiusa (un non tracciato sotto doc/ blocca i commit e le suite)
 OK = [0, 0]
 FALLITE = []
 
@@ -51,7 +52,7 @@ def esito(che, passa, nota, deve):
 
 
 def json_di(caso):
-    return os.path.join(DIR_REF, "lunga_%s.json" % caso)
+    return os.path.join(DIR_LAVORO, "lunga_%s.json" % caso)
 
 
 def corsa(caso, nome_reg):
@@ -66,6 +67,7 @@ def corsa(caso, nome_reg):
     rho_c = MT.rho_c_assoluto()
     e = MT.PB.E_DECISO
     k0 = PARTENZA[caso]
+    os.makedirs(DIR_LAVORO, exist_ok=True)
     print("=" * 130)
     print("LA COTTURA LUNGA (%s; Luca 14:13): da %s_%05d, campi pieni, nessun arresto per cotto; pezzi di %d tick, lo stato con il prefisso lunga_; il tetto %g s; L4: il picco sotto %g, la massa sotto %g, il raggio oltre %g"
           % (caso, caso, k0, PEZZO, TETTO_S, SOGLIA_PICCO, SOGLIA_MASSA, RAGGIO_MAX))
@@ -183,8 +185,8 @@ def corsa(caso, nome_reg):
                 if jm.get("finita") and (k - k0) >= (jm["k"] - jm["k0"]):
                     fine = "(MU) ha fatto %d tick, almeno quelli di (MGU) finita (%d)" % (k - k0, jm["k"] - jm["k0"])
     esito("la somma dei pezzi dei conti esatta a ogni pezzo (%d pezzi)" % len(P), all(p["esatta"] for p in P) and len(P) > 0, "", True)
-    os.makedirs(DIR_REF, exist_ok=True)
-    np.savez_compressed(os.path.join(DIR_REF, "lunga_%s_serie.npz" % caso), resp_k=np.array(RESP["k"]), resp=np.array(RESP["resp"]), **{x: np.array(v) for x, v in S.items()})
+    os.makedirs(DIR_LAVORO, exist_ok=True)
+    np.savez_compressed(os.path.join(DIR_LAVORO, "lunga_%s_serie.npz" % caso), resp_k=np.array(RESP["k"]), resp=np.array(RESP["resp"]), **{x: np.array(v) for x, v in S.items()})
     with open(json_di(caso), "w", encoding="utf-8", newline="\n") as fh:
         json.dump({"caso": caso, "k0": k0, "k": k, "finita": True, "fine": fine, "arresto": arresto, "pezzi": P}, fh, indent=1)
     print("=" * 130)
@@ -219,7 +221,7 @@ def referto():
     for caso in ("MGU", "MU"):
         with open(json_di(caso), encoding="utf-8") as fh:
             J[caso] = json.load(fh)
-        SR[caso] = np.load(os.path.join(DIR_REF, "lunga_%s_serie.npz" % caso))
+        SR[caso] = np.load(os.path.join(DIR_LAVORO, "lunga_%s_serie.npz" % caso))
         print("### (%s) da k %d a k %d (%d tick); la fine: %s" % (caso, J[caso]["k0"], J[caso]["k"], J[caso]["k"] - J[caso]["k0"], J[caso]["fine"]))
     n_com = min(len(J["MGU"]["pezzi"]), len(J["MU"]["pezzi"]))
     print("### i pezzi COMUNI: %d (il confronto si fa su questi)" % n_com)

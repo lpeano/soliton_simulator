@@ -42,6 +42,8 @@ PROTEGGE, PEGGIORA = 0.70, 1.30          # ### T4: le soglie del guardiano
 TOLL_MASSA0 = 1e-10                      # ### il DEVE di (T-fase)
 COTTO_L162, PIU_L162, PEZZO_L162 = 0.02, 4000, 1000   # ### Luca 14:54: (T-solo) e' anche la COTTURA SU L 162 (il picco medio fra le ultime due finestre di 500 entro il 2%; al piu' 4000 tick in piu', a pezzi di 1000)
 NOMI = ("A", "B", "C")
+TETTO_S = 28800.0                        # ### Luca 15:22: le corse col lapse in parallelo, il tetto 8 ore
+DIR_LAVORO = os.path.join(MT.DIR_E, "lavoro")   # ### il json della cottura su L 162 FUORI dal repo (copiato a corsa chiusa)
 OK = [0, 0]
 FALLITE = []
 
@@ -247,8 +249,8 @@ def corsa(variante, nome_reg):
                 mem = MT.memoria_gb()
                 MT.tappa(nome_reg, "k %d; %.3f s per tick; la memoria libera %.2f GB" % (k, (adesso - t1) / k, mem))
                 t_tappa = adesso
-            if adesso - t1 > MT.TETTO_S:
-                fermo = "il tetto di %g s a k %d" % (MT.TETTO_S, k)
+            if adesso - t1 > TETTO_S:
+                fermo = "il tetto di %g s a k %d" % (TETTO_S, k)
                 print("### FERMO: %s" % fermo)
                 break
         print("-" * 130)
@@ -263,7 +265,8 @@ def corsa(variante, nome_reg):
     print("### la massa uscita dal bordo in tutto %.6e" % bordoM)
     if variante == "solo":
         kf = int(S["k"][-1])
-        with open(os.path.join(MT.DIR_REF, "cottura_L162_MGU.json"), "w", encoding="utf-8", newline=chr(10)) as fh:
+        os.makedirs(DIR_LAVORO, exist_ok=True)
+        with open(os.path.join(DIR_LAVORO, "cottura_L162_MGU.json"), "w", encoding="utf-8", newline=chr(10)) as fh:
             json.dump({"caso": "MGU", "scena": MT.CORSA_162, "k": kf, "t": t0 + kf, "file": os.path.join(MT.DIR_E, "L162_MGU_%05d.npz" % kf), "cotto": bool(cotto162), "picchi": picchi162,
                        "da": frs[0]["file"], "codice": "csv/solitone/mattone_triangolo.py"}, fh, indent=1)
         print("### (T-solo) LA COTTURA SU L 162: %s a k %d (%s)" % ("COTTO" if cotto162 else "### NON COTTO dopo %d tick in piu'" % PIU_L162, kf, picchi162))
