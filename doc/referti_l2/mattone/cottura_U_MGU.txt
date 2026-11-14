@@ -1,0 +1,53 @@
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+### LA COTTURA COL CARICAMENTO CHE RICOSTRUISCE U (Luca 12:00, 12:19): mattone_cottura.carica e uguale_al_file SOSTITUITE IN MEMORIA; le chiavi di servizio:
+    h_int: una CACHE diagnostica: motore.elicita la riscrive per intero da psi_h (h.fill(0), poi la somma); la misura dell'energia la riscrive; dopo 1000 tick di ripartenza tutte le altre chiavi sono uguali AL BIT (geometria_ripartenza_MG.txt, geometria_ripartenza_MGU_U.txt): non entra nel tick
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+==================================================================================================================================
+LA COTTURA (MGU; Luca 09:34, A1): da MGU_05000 a campi pieni su L 81, pezzi di 1000 tick, al piu' 10; COTTO: il picco medio entro 0.02 e il raggio medio entro 0.01 fra due pezzi; rho_c 227058.574864; e 6.3154140e-05
+==================================================================================================================================
+### il caricamento di E:\soliton_simulator\mattone\MGU_04000.npz: U ricostruito dal campo salvato (max |U - I| 1.528e-03)
+### il confronto col file: le chiavi di servizio ESCLUSE ['h_int']; fra queste diverse: []
+### la ripartenza: E:\soliton_simulator\mattone\MGU_04000.npz -> 1000 tick (403 s) -> confrontato con E:\soliton_simulator\mattone\MGU_05000.npz
+  DEVE PASSARE: la ripartenza da MGU_04000 per 1000 tick = MGU_05000 AL BIT (tutte le chiavi e il campo)             PASSA   diverse: []
+### il caricamento di E:\soliton_simulator\mattone\MGU_05000.npz: U ricostruito dal campo salvato (max |U - I| 2.227e-03)
+### il pezzo 1 (fino a k 6000, 401 s): il picco medio 1.4097e+03, il raggio medio 11.3071, S5' 0.1077; lo stato E:\soliton_simulator\mattone\MGU_06000.npz
+### il pezzo 2 (fino a k 7000, 802 s): il picco medio 1.3948e+03, il raggio medio 11.4216, S5' 0.1058; lo stato E:\soliton_simulator\mattone\MGU_07000.npz; contro il pezzo prima: il picco 0.0106, il raggio 0.0101 -> non ancora
+### il pezzo 3 (fino a k 8000, 1192 s): il picco medio 1.3264e+03, il raggio medio 11.6689, S5' 0.0914; lo stato E:\soliton_simulator\mattone\MGU_08000.npz; contro il pezzo prima: il picco 0.0491, il raggio 0.0217 -> non ancora
+### il pezzo 4 (fino a k 9000, 1594 s): il picco medio 1.2998e+03, il raggio medio 11.8691, S5' 0.1115; lo stato E:\soliton_simulator\mattone\MGU_09000.npz; contro il pezzo prima: il picco 0.0200, il raggio 0.0172 -> non ancora
+### il pezzo 5 (fino a k 10000, 2006 s): il picco medio 1.2916e+03, il raggio medio 11.9473, S5' 0.1067; lo stato E:\soliton_simulator\mattone\MGU_10000.npz; contro il pezzo prima: il picco 0.0063, il raggio 0.0066 -> COTTO
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+       5000   8.276153e+06   8.263388e+01   3.5178e+03   1.4390e+01  3.9752e+00    8279767.963345       +0.0000       +0.0000    0.0000e+00
+       5500   8.275510e+06   9.523925e+01   3.5716e+03   1.5243e+01  3.9332e+00    8279192.402505     +605.8012      -33.8116    7.6196e+01
+       6000   8.274854e+06   9.908983e+01   3.5939e+03   1.4524e+01  3.9089e+00    8278561.741673    +1198.8592      -69.8274    1.5089e+02
+       6500   8.274140e+06   1.104062e+02   3.6151e+03   1.5108e+01  3.8821e+00    8277880.094088    +1848.9018     -109.9302    2.3351e+02
+       7000   8.273285e+06   1.095472e+02   3.6427e+03   1.6506e+01  3.8271e+00    8277053.848357    +2597.5733     -187.4406    3.2983e+02
+       7500   8.272447e+06   1.129390e+02   3.6578e+03   1.3819e+01  3.7479e+00    8276232.060208    +3323.4232     -280.2729    4.2383e+02
+       8000   8.271640e+06   1.222862e+02   3.6969e+03   1.6443e+01  3.6758e+00    8275475.261780    +4003.0631     -364.4366    5.1215e+02
+       8500   8.270837e+06   1.136690e+02   3.7233e+03   1.5714e+01  3.6331e+00    8274689.285721    +4722.7429     -425.2597    6.0468e+02
+       9000   8.270080e+06   1.140654e+02   3.7550e+03   1.5532e+01  3.6216e+00    8273965.027358    +5432.4711     -443.3363    6.9577e+02
+       9500   8.269377e+06   1.109090e+02   3.7579e+03   1.4671e+01  3.6053e+00    8273260.231505    +6113.5125     -466.1923    7.8402e+02
+      10000   8.268667e+06   1.065684e+02   3.7414e+03   1.4752e+01  3.5662e+00    8272530.125695    +6789.4693     -514.5099    8.7058e+02
+### R-CONTI-3: la deriva del centro, il picco, il raggio ogni 500 tick
+    k   5000  il centro (40.4628, 40.5367), la deriva da k 5000 0.0000 nodi; il picco 1.3959e+03; il raggio 11.2293; la massa 9.9635935060e+05
+    k   5500  il centro (40.3791, 40.5106), la deriva da k 5000 0.0741 nodi; il picco 1.3684e+03; il raggio 11.3127; la massa 9.9628315502e+05
+    k   6000  il centro (40.3097, 40.5005), la deriva da k 5000 0.1385 nodi; il picco 1.4124e+03; il raggio 11.3558; la massa 9.9620846047e+05
+    k   6500  il centro (40.2615, 40.4969), la deriva da k 5000 0.1846 nodi; il picco 1.3764e+03; il raggio 11.4104; la massa 9.9612583945e+05
+    k   7000  il centro (40.2488, 40.4846), la deriva da k 5000 0.1933 nodi; il picco 1.3755e+03; il raggio 11.5216; la massa 9.9602952412e+05
+    k   7500  il centro (40.2336, 40.4925), la deriva da k 5000 0.2106 nodi; il picco 1.3013e+03; il raggio 11.6692; la massa 9.9593552547e+05
+    k   8000  il centro (40.2315, 40.5192), la deriva da k 5000 0.2230 nodi; il picco 1.2935e+03; il raggio 11.8000; la massa 9.9584720492e+05
+    k   8500  il centro (40.2466, 40.5414), la deriva da k 5000 0.2186 nodi; il picco 1.3310e+03; il raggio 11.8819; la massa 9.9575467316e+05
+    k   9000  il centro (40.3024, 40.5476), la deriva da k 5000 0.1661 nodi; il picco 1.3007e+03; il raggio 11.9019; la massa 9.9566358330e+05
+    k   9500  il centro (40.3642, 40.5440), la deriva da k 5000 0.1024 nodi; il picco 1.3005e+03; il raggio 11.9348; la massa 9.9557532601e+05
+    k  10000  il centro (40.4161, 40.5501), la deriva da k 5000 0.0546 nodi; il picco 1.2674e+03; il raggio 12.0236; la massa 9.9548876928e+05
+### S5' del mattone cotto (le ultime quattro finestre): 9000-9250 0.0806 9250-9500 0.1067 9500-9750 0.0789 9750-10000 0.1011 -> 0.1067; sulla serie presa ogni 50 tick 0.0730
+==================================================================================================================================
+ESITO: COTTO a k 10000 (5000 tick in piu'); 1/1 controlli come devono; fallite []; 2417 s in tutto

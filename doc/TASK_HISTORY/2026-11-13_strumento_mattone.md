@@ -312,3 +312,13 @@
 | `60200` | `-2.615e-08` | `+1.796e-07` |
 
 - **La differenza cresce in fretta** *(circa `x15`, `x5`, `x3` ogni `50` tick: col campo che sale)*; **a `200` tick e' `2.6e-08` su `d`, mentre `d_GU - d_0` di `GUrampa` a `2000` tick e' `+0.625`.** **Che cosa devono vedere le copie resta a Luca, per le corse future** *(la decisione delle `12:00`)*.
+
+### 16.9 LA COTTURA DI (MGU): COTTO A `10000` *(il codice a `d9318470`; dalle `12:56:12` alle `13:36:30`; `doc/referti_l2/mattone/cottura_U_MGU.txt`)*
+
+- ### **DEVE della ripartenza** *(`U` ricostruito; `h_int` esclusa come chiave di servizio, e comunque NON diversa: `Corsa` misura i conti a ogni tick)*: **PASSA** *(`1000` tick in `403` s)*.
+- **I pezzi:** **il picco medio `1409.7`, `1394.8`, `1326.4`, `1299.8`, `1291.6`; il raggio medio `11.307`, `11.422`, `11.669`, `11.869`, `11.947`; COTTO al pezzo `5`** *(il picco `0.0063`, il raggio `0.0066` contro il pezzo `4`)*.
+- **S5' del mattone cotto `0.1067`** *(le finestre `0.0806`, `0.1067`, `0.0789`, `0.1011`; presa ogni `50` tick `0.0730`)*. **Il centro: la deriva al piu' `0.223` nodi** *(a `8000`)*, **torna a `0.055` a `10000`.**
+- ### ⚠ **DUE COSE DA GUARDARE, che non cambiano il verdetto:**
+  - **il raggio cresce ancora** *(`11.229` a `5000`, `12.024` a `10000` dagli stati ogni `500`)*: **il criterio «cotto» e' sulle MEDIE fra due pezzi, ed e' passato al primo pezzo in cui le due medie stanno vicine; il pezzo `3` -> `4` aveva `0.0172`.** **Un mattone «cotto» per il criterio, non fermo.**
+  - ### **il residuo dei conti scende** *(`-33.8` a `5500`, `-514.5` a `10000`, su `8.28e6`: circa `-0.1` per tick, `6e-05` relativo)*: **il bordo toglie `6789` di energia in `5000` tick e il residuo non torna a zero** *(nel bilancio di (0) la media su `100` tick stava ferma a `-46`)*. **NON letto oltre.**
+- **Il prossimo passo:** **S7'' di (MGU)** *(`csv/solitone/mattone_ctrl3.py --caso MGU`)*.
