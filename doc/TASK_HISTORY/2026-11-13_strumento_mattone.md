@@ -518,3 +518,10 @@
 
 - **B2-`pi`** *(partita alle `23:4x`)*; **L1 con la corsa della scena vuota; il trifoglio lungo** *(quando finisce il video)*; **le distanze `50` e `65`; poi `L 243`.** **Al piu' `5` processi.**
 - **FERMO SOLO SE un DEVE non va come deve.**
+
+### 21.3 B2 SI ATTRAE (LA PREVISIONE (a) CONFERMATA); LA FASE DI (T-sfasati): DUE IN FASE E UNO IN OPPOSIZIONE (LA PREVISIONE (c) NON CONFERMATA) *(B2: il codice a `c7568c40`, dalle `21:09:03` alle `23:42:01`; la lettura e la fase: `d4248bf2`, alle `23:44`-`23:46`)*
+
+- **B2** *(due mattoni cotti su `L 162`, la fase relativa `0`, il bordo da `60`)*: **il francobollo su `L 162` ha `R_t 41.0`** *(`7333` nodi)*; **i nodi a `36.0` nodi** *(multipli di `3`)*, **`d0` vera `35.057`; `d` scende a `33.015` in `2000` tick.** ### **`d''` sui tick `250`-`2000` `-1.010e-06 +- 5.2e-09` (`195.5` errori): ATTRAE** *(la lettura delle `22:45`)*; **la previsione (a) CONFERMATA.** **B3 vecchia: «INDECISO»** *(non prevedeva l'attrazione: n.165)*. **Gauss `6.53e-11`.** **Le masse: A `+0.35%`, B `-0.41%`** *(uno scambio piccolo)*; **i picchi scendono** *(A `1283` -> `1096`, B `1280` -> `1108`)*.
+- ### **LA FASE RELATIVA (c):** **(T-fase), il controllo: `0` esatto sullo stesso centro; nel triangolo `+0.6`, `+0.4`, `+4.0` gradi: IN FASE.** **(T-sfasati): B** *(`MGU_09000`)* **a `-178.9` e `+179.4` gradi da A** *(`08000`)* **e C** *(`10000`)* **sullo stesso centro** *(nel triangolo `-169.7`, `-175.6`)*; **A e C in fase** *(`+0.5` gradi; nel triangolo `-5.2`)*. ### **La previsione (c) «fra `0` e `pi`» NON CONFERMATA: (T-sfasati) e' DUE IN FASE E UNO IN OPPOSIZIONE.** **Una lettura, non misurata: la fase interna del mattone gira di circa `pi` ogni `1000` tick.**
+  - **Un fatto per l'ipotesi:** **in (T-sfasati) B** *(quello in opposizione)* **e' il solitone che cresce di massa del `5%`** *(la sintesi del guardiano)*: **da leggere col referto unico dei triangoli.**
+- **Lo stato della controprova:** **B2-`pi` in corsa dalle `23:4x`** *(la previsione (b): RESPINGE)*.

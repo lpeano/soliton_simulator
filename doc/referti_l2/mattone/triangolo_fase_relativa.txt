@@ -1,0 +1,21 @@
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] coppia_fase.py  sha1-BYTE af68f86c  committato e pulito
+==================================================================================================================================
+LA FASE RELATIVA DEI MATTONI DEI TRIANGOLI (Luca 22:44, (c); solo lettura)
+==================================================================================================================================
+### (T-fase): ['E:\\soliton_simulator\\mattone\\MGU_10000.npz', 'E:\\soliton_simulator\\mattone\\MGU_10000.npz', 'E:\\soliton_simulator\\mattone\\MGU_10000.npz']
+    (i)  A-B sullo stesso centro (4693 nodi): arg <psi_i, psi_j> -0.0000 rad (-0.0 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 1.0000
+    (i)  B-C sullo stesso centro (4693 nodi): arg <psi_i, psi_j> -0.0000 rad (-0.0 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 1.0000
+    (i)  A-C sullo stesso centro (4693 nodi): arg <psi_i, psi_j> -0.0000 rad (-0.0 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 1.0000
+    (ii) A-B nel triangolo (i vertici [112, 107], [73, 68]; la sovrapposizione 9432 estremita'): arg <psi_i, psi_j> +0.0110 rad (+0.6 gradi); |<psi_i, psi_j>| 6.0776e+03
+    (ii) B-C nel triangolo (i vertici [73, 68], [112, 68]; la sovrapposizione 9864 estremita'): arg <psi_i, psi_j> +0.0077 rad (+0.4 gradi); |<psi_i, psi_j>| 5.2780e+03
+    (ii) A-C nel triangolo (i vertici [112, 107], [112, 68]; la sovrapposizione 9864 estremita'): arg <psi_i, psi_j> +0.0706 rad (+4.0 gradi); |<psi_i, psi_j>| 5.7073e+03
+### (T-sfasati): ['E:\\soliton_simulator\\mattone\\MGU_08000.npz', 'E:\\soliton_simulator\\mattone\\MGU_09000.npz', 'E:\\soliton_simulator\\mattone\\MGU_10000.npz']
+    (i)  A-B sullo stesso centro (4693 nodi): arg <psi_i, psi_j> -3.1220 rad (-178.9 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 0.9957
+    (i)  B-C sullo stesso centro (4693 nodi): arg <psi_i, psi_j> +3.1305 rad (+179.4 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 0.9957
+    (i)  A-C sullo stesso centro (4693 nodi): arg <psi_i, psi_j> +0.0085 rad (+0.5 gradi); |<psi_i, psi_j>| / (|psi_i| |psi_j|) 0.9947
+    (ii) A-B nel triangolo (i vertici [112, 107], [73, 68]; la sovrapposizione 9678 estremita'): arg <psi_i, psi_j> -2.9612 rad (-169.7 gradi); |<psi_i, psi_j>| 3.0128e+03
+    (ii) B-C nel triangolo (i vertici [73, 68], [112, 68]; la sovrapposizione 10476 estremita'): arg <psi_i, psi_j> -3.0646 rad (-175.6 gradi); |<psi_i, psi_j>| 4.2847e+03
+    (ii) A-C nel triangolo (i vertici [112, 107], [112, 68]; la sovrapposizione 9864 estremita'): arg <psi_i, psi_j> -0.0901 rad (-5.2 gradi); |<psi_i, psi_j>| 4.0989e+03
+  LA PREVISIONE (c) (sez. 20): la fase relativa di (T-sfasati) fra 0 e pi; il controllo: (T-fase) (i) = 0
+==================================================================================================================================
