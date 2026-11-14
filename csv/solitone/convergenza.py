@@ -4,6 +4,7 @@ r"""**LA CONVERGENZA: QUANTO CONTA LA SCATOLA** *(Luca `2026-11-14` `15:20`, C1-
     python csv/solitone/convergenza.py deve81 > <scratchpad>/conv_deve81.txt                                         (il DEVE su L 81, (MU))
     python csv/solitone/convergenza.py corsa --mondo U|GU --L 162|243 [--bordo28] --registro conv-<mondo>-L<L>[b28] > <scratchpad>/conv_<mondo>_L<L>[b28].txt
     python csv/solitone/convergenza.py referto > doc/referti_l2/mattone/convergenza.txt
+    python csv/solitone/convergenza.py vuoto --L 81|162|243 > doc/referti_l2/mattone/conv_vuoto_L<L>.txt          (Luca 19:40: il controllo del disegno di fase, solo lettura)
 
 ### **`corsa`:** **il mattone cotto su `L 81`** *((MU): `MU_05000`; (MGU): `MGU_10000`)* **incollato su `L 162`** *(la scena di S162)* **o su `L 243`** *(la scena COSTRUITA qui, `scena_L`: la sez. `19`)*,
 **al vertice A del triangolo** *(lo stesso posto di (T-solo): `mattone_triangolo.posti`)*, **sul vuoto fresco al tick `60000`; il campo rifatto con Gauss** *(`A = 0`, `U` dal campo = `I`)*; **`2000` tick col
@@ -246,7 +247,7 @@ def corsa(mondo, L, nome_reg, bordo28=False):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(os.path.join(_CSV, "_u1_prototipo.py"))
     _presidio.avvia(__file__)
-    assert mondo in MONDI and L in (162, 243) and (not bordo28 or (L == 162 and mondo == "U"))
+    assert mondo in MONDI and L in (162, 243) and (not bordo28 or L == 162)        # ### Luca 19:40: --bordo28 anche col mondo G+U
     tag = "L%d%s" % (L, "b28" if bordo28 else "")
     t00 = time.time()
     rho_c = MT.rho_c_assoluto()
@@ -380,9 +381,40 @@ def referto():
     return 0
 
 
+def vuoto(L):
+    """### **Luca `19:40`: il controllo del disegno di fase sulla scena di `L`** *(`81`: TBS; `162`: S162; `243`: `scena_L`)*, **solo lettura:** **il vuoto fresco al tick `60000` e `controlla_vuoto`;
+    in piu' il massimo di `|phi(v + 3 a) - phi(v)|` per direzione e per componente, e il nodo dove sta.**"""
+    import _presidio
+    from solitone import bordo as BO
+    _presidio.avvia(__file__)
+    print("=" * 130)
+    print("IL CONTROLLO DEL DISEGNO DI FASE (Luca 19:40, solo lettura): la scena di L %d, il vuoto fresco al tick %d" % (L, MT.G2.T0))
+    print("=" * 130)
+    scena = {81: lambda: MT.scena(MT.CORSA_BASE, MT.T_BASE), 162: lambda: MT.scena(MT.CORSA_162, MT.T_162), 243: lambda: scena_L(243, R_A_243)}[L]()
+    with scena as Z:
+        if "g_nodo" not in Z:
+            b = Z["bordo"]
+            Z["g_nodo"] = BO.g_estremita(Z["z"], b["c0"][0], b["c0"][1], b["R_A"], b["g_max"])[1]
+        MT.vuoto_fresco(Z, MT.G2.T0)
+        e1, e3, nd = controlla_vuoto(Z)
+        print("### |phi_j|^2 - 1 fuori dal bordo (%d nodi): %.3e; il disegno ogni 3 nodi (A1 e A2): %.3e" % (nd, e1, e3))
+        ph = Z["st"]["phi_h"][Z["righe"]]
+        m1, m2 = Z["m1"], Z["m2"]
+        for nome, d1, d2 in (("A1", 3, 0), ("A2", 0, 3), ("A1 + A2", 3, 3)):
+            w = ((m1 + d1) % L) * L + (m2 + d2) % L
+            D = np.abs(ph[w] - ph).reshape(Z["n"], 6, -1).max(axis=2)
+            v, c = np.unravel_index(int(np.argmax(D)), D.shape)
+            print("    %-8s il massimo %.3e al nodo %d (m1 %d, m2 %d), la componente %d; per componente: %s; i nodi con scarto oltre 1e-12: %d"
+                  % (nome, float(D.max()), v, m1[v], m2[v], c, " ".join("%.2e" % x for x in D.max(axis=0)), int((D.max(axis=1) > 1e-12).sum())))
+    print("=" * 130)
+    return 0
+
+
 def main(argv):
     if argv and argv[0] in ("deve81", "referto"):
         return deve81() if argv[0] == "deve81" else referto()
+    if argv and argv[0] == "vuoto":
+        return vuoto(int(argv[argv.index("--L") + 1]))
     ap = argparse.ArgumentParser()
     ap.add_argument("azione", choices=("corsa",))
     ap.add_argument("--mondo", required=True, choices=sorted(MONDI))

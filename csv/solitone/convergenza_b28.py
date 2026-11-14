@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**LA CORSA DI SEPARAZIONE COL BORDO UGUALE A QUELLO DI `L 81`** *(Luca `2026-11-14` `17:02`, (1); la carta `doc/TASK_HISTORY/2026-11-13_strumento_mattone.md`, sez. `19.6`)*.
 
-    python csv/solitone/convergenza_b28.py --registro conv-U-L162b28 > <scratchpad>/conv_U_L162b28.txt
+    python csv/solitone/convergenza_b28.py --mondo U|GU --registro conv-<mondo>-L162b28 > <scratchpad>/conv_<mondo>_L162b28.txt   (Luca 19:40: anche G+U)
 
 ### **(MU) su `L 162` col bordo UGUALE a quello di `L 81` IN TUTTO:** **`R_A = 28`, `R_B = 40.5`** *(la rampa `sin^2` ripida da `28` a `40.5`)*, **`g_max` oltre `40.5` fino agli angoli;** **calcolato con
 `bordo.profilo(r, 28, 40.5, g_max)` sugli anelli di `campo.anelli`** *(le righe di `bordo.g_estremita` con `R_B` dato invece della meta' del periodo)*. **`bordo.py` e `convergenza.py` NON si toccano**
@@ -42,10 +42,13 @@ def main(argv):
         return gn[z["inc"].nodo], gn, r
     vero = BO.g_estremita
     BO.g_estremita = g_estremita_81
-    print("### LA CORSA DI SEPARAZIONE (Luca 17:02): bordo.g_estremita SOSTITUITA in memoria: il profilo sin^2 da R_A %g a R_B %g (come L 81), g_max oltre; poi convergenza.py --mondo U --L 162 --bordo28" % (R_A_81, R_B_81))
+    print("### LA CORSA DI SEPARAZIONE (Luca 17:02): bordo.g_estremita SOSTITUITA in memoria: il profilo sin^2 da R_A %g a R_B %g (come L 81), g_max oltre; poi convergenza.py --mondo %s --L 162 --bordo28" % (R_A_81, R_B_81, argv[list(argv).index("--mondo") + 1]))
     print("### (la riga di convergenza.py che stampa «R_B ... la meta' del periodo» dice il valore di TO.meta_periodo: il bordo VERO di questa corsa e' quello sopra)")
     try:
-        return CV.main(["corsa", "--mondo", "U", "--L", "162", "--bordo28"] + list(argv))
+        i = list(argv).index("--mondo")
+        mondo = argv[i + 1]
+        resto = list(argv[:i]) + list(argv[i + 2:])
+        return CV.main(["corsa", "--mondo", mondo, "--L", "162", "--bordo28"] + resto)
     finally:
         BO.g_estremita = vero
 
