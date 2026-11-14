@@ -1,0 +1,39 @@
+[TIMBRO] convergenza.py  sha1-BYTE 36031d91  committato e pulito
+[TIMBRO] convergenza_b28.py  sha1-BYTE d1c3a560  committato e pulito
+### LA CORSA DI SEPARAZIONE (Luca 17:02): bordo.g_estremita SOSTITUITA in memoria: il profilo sin^2 da R_A 28 a R_B 40.5 (come L 81), g_max oltre; poi convergenza.py --mondo U --L 162 --bordo28
+### (la riga di convergenza.py che stampa «R_B ... la meta' del periodo» dice il valore di TO.meta_periodo: il bordo VERO di questa corsa e' quello sopra)
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE 36031d91  committato e pulito
+==================================================================================================================================
+LA CONVERGENZA (MU su L 162, IL BORDO A 28 (Luca 15:40); Luca 15:20): il mattone E:\soliton_simulator\mattone\MU_05000.npz (cotto su L 81, il picco 3.2978e+03) al vertice A, sul vuoto fresco al tick 60000; 2000 tick; il tetto 28800 s
+==================================================================================================================================
+### la scena: L 162, 26244 nodi; il bordo: il centro [98.87378070359784, 81.36252985852764], R_A 47.500, g_max 0.03; il vertice A [112, 106] (a 21.3519 dal centro del bordo)
+### IL BORDO A 28 (Luca 15:40): centrato sul mattone [112, 106], R_A 28, R_B 81 (la meta' del periodo), g_max 0.03
+### incollato a [112, 106] (Delta 0.000544); il picco SUBITO DOPO l'incollatura 3.2978e+03 (su L 81 3.2978e+03); il residuo di Gauss iniziale 2.088e-13
+    k    250  il picco 3.2150e+03  il raggio 8.4667  la massa 9.9647171020e+05  (353 s)
+    k    500  il picco 3.1755e+03  il raggio 8.5121  la massa 9.9645549383e+05  (703 s)
+    k    750  il picco 3.0969e+03  il raggio 8.5638  la massa 9.9643535055e+05  (1044 s)
+    k   1000  il picco 2.9407e+03  il raggio 8.6057  la massa 9.9641818913e+05  (1399 s)
+    k   1250  il picco 3.0791e+03  il raggio 8.6294  la massa 9.9640293693e+05  (1830 s)
+    k   1500  il picco 2.9601e+03  il raggio 8.6268  la massa 9.9638792569e+05  (2174 s)
+    k   1750  il picco 3.0325e+03  il raggio 8.5998  la massa 9.9637370612e+05  (2510 s)
+    k   2000  il picco 3.0628e+03  il raggio 8.5751  la massa 9.9635905617e+05  (2846 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.279675e+06   7.040918e-02   2.8468e+03  -5.5835e-01  1.0598e+01    8282521.258741       -0.0000       -0.0000    0.0000e+00
+        500   8.279474e+06   3.680700e+01   2.8520e+03   5.6171e+00  1.0532e+01    8282368.112850     +190.4671      +15.4567    2.4879e+01
+       1000   8.279189e+06   4.270961e+01   2.8527e+03   4.9891e+00  1.0450e+01    8282089.020582     +470.2782      +13.4122    6.2184e+01
+       1500   8.278957e+06   3.686907e+01   2.8590e+03   5.4070e+00  1.0425e+01    8281858.427366     +698.7646      +12.7043    9.2447e+01
+       2000   8.278745e+06   3.002083e+01   2.8555e+03   4.7984e+00  1.0466e+01    8281634.998678     +919.3759      +14.6834    1.2132e+02
+### S5' (le ultime quattro finestre): 1000-1250 0.1030 1250-1500 0.0782 1500-1750 0.1015 1750-2000 0.0639 -> 0.1030
+### la massa uscita dal bordo in tutto 1.213169e+02
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo                                                     PASSA   il massimo 1.203e-12
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite []; finita; 2899 s in tutto

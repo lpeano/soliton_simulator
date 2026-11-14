@@ -427,3 +427,10 @@
 - **Il vertice A `[112, 106]` a `21.35` dal centro del bordo; il picco subito dopo l'incollatura `3297.8`** *(= su `L 81`)*; **Gauss `1.21e-12`** *(PASSA)*.
 - **Il picco ogni `250` tick: `3215.0`, `3175.5`, `3097.0`, `2940.6`, `3079.4`, `2960.6`, `3031.3`, `3063.1`; il raggio `8.467` -> `8.629` (`1250`) -> `8.575` (`2000`); la massa uscita dal bordo `91.3`; S5' `0.1029`.**
 - **Una lettura NON fatta qui:** **il confronto con (MU) su `L 81` e su `L 243` sta nel referto C5, quando ci sono tutti e tre i punti.**
+
+### 19.8 LA CORSA DI SEPARAZIONE COL BORDO DI `L 81`: FINITA *(il codice a `753b9751`; dalle `18:00:19` alle `18:48:41`; `doc/referti_l2/mattone/conv_U_L162b28.txt`)*
+
+- **Gauss `1.20e-12`** *(PASSA)*. **Il picco e il raggio UGUALI a quelli di (MU) su `L 162` col bordo da `60` a `4` cifre** *(a `2000`: il picco `3062.8` contro `3063.1`, il raggio `8.5751` contro `8.5750`)*; **la massa uscita dal bordo `121.3` contro `91.3`; S5' `0.1030` contro `0.1029`.**
+- ### **UN FATTO, non ancora la lettura C5:** **su `L 162` il bordo vicino o lontano NON cambia la forma del mattone in `2000` tick; toglie solo piu' massa dalla coda.** **Il confronto con (MU) su `L 81` nel referto della convergenza.**
+- **Una nota sul rito:** **la corsa e' partita mentre il commit dell'apertura nel registro** *(`4156e990`)* **era ancora nei hook** *(il codice era gia' committato e i timbri puliti)*: **scritto nella chiusura.**
+- **La riga stampata «R_B 81 (la meta' del periodo)» e' quella di `convergenza.py`; il bordo VERO** *(`R_B 40.5`)* **lo stampa la prima riga di `convergenza_b28.py`** *(dichiarato nella sez. `19.6`)*.
