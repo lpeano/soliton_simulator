@@ -414,3 +414,10 @@
 - **Fermate alle `15:5x`, prima di `k 250`:** **`triangolo-solo` e `triangolo-fase` chiuse FERMATO col motivo nel registro.**
 - **IL CODICE** *(mio, dichiarato)*: **`mattone_triangolo.R_A_SCENA = 60`: `Z["g_e"]` rifatto con `bordo.g_estremita` attorno allo STESSO centro del bordo della scena.** ### **E la convergenza, MIA SCELTA:** **su `L 162` (MU) col bordo da `60` come (T-solo)** *(il suo punto di (MGU) E' (T-solo): la stessa scena)*; **su `L 243` la stessa fascia fra `R_A` e `R_B` di `L 162`: `R_A = 121.5 - 21 = 100.5`** *(prima `88.0`)*; **il caso col bordo a `28` resta.**
 - **In coda, solo lettura** *(Luca)*: **per G1 e il pendolo su `L 81`, a che distanza stava il bordo dalla coda del solitone.**
+
+### 19.6 LA DECISIONE DI LUCA DELLE `17:02` (1): LA CORSA DI SEPARAZIONE COL BORDO UGUALE A QUELLO DI `L 81` IN TUTTO
+
+- **`R_A = 28`, `R_B = 40.5`** *(la rampa `sin^2` ripida)*, **`g_max` oltre fino agli angoli; con `bordo.profilo(r, 28, 40.5, g_max)` sugli anelli di `campo.anelli`; `bordo.py` NON si tocca; dichiarato. Cosi' l'unica differenza con `L 81` restano le copie periodiche.**
+- **La corsa col bordo `28 -> 81` NON era partita** *(in fila dietro a `conv-U-L162`)*: **niente da fermare.**
+- ### **IL CODICE, MIO:** **`convergenza.py` e' IN USO da `conv-U-L162`: non si tocca. Un file NUOVO `csv/solitone/convergenza_b28.py`: sostituisce `bordo.g_estremita` IN MEMORIA** *(le sue righe con `R_B = 40.5` dato)* **e chiama `convergenza.main` con `--bordo28`.** **La riga di `convergenza.py` che stampa «`R_B` ... la meta' del periodo» stampa il valore del toro: il bordo VERO lo stampa `convergenza_b28.py` prima.**
+- **I posti:** **la suite di `convergenza_b28.py` e la corsa aspettano un posto** *(oggi `5` aperti)*; **la corsa prima del DEVE su `L 81`.**
