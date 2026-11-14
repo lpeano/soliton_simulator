@@ -1,0 +1,31 @@
+LA FOTOGRAFIA DELLA MACCHINA, 2026-11-14 17:14:53 (Luca 17:03; solo lettura; lo strumento: psutil 7.2.2, wmic per la temperatura)
+======================================================================================================================================================
+### 1. I PROCESSI DELLE CORSE APERTE (la CPU media su 10 s; 100% = un core logico)
+    la corsa                 PID    CPU %     RSS GB    gira da  lo script
+    triangolo-fase-60      25852     98.7       0.39      48 min  csv/solitone/mattone_triangolo.py
+    lunga-MU               28148     99.1       0.26      87 min  csv/solitone/mattone_lunga.py
+    triangolo-solo-60      28428     99.1       0.36      48 min  csv/solitone/mattone_triangolo.py
+    lunga-MGU              36104     99.2       0.27      87 min  csv/solitone/mattone_lunga.py
+    conv-U-L162            40936     99.1       0.35      48 min  csv/solitone/convergenza.py
+    processi di calcolo delle corse: 5 (il limite: 6 core fisici meno uno = 5)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+### 2. LA CPU DELLA MACCHINA (media su 10 s): 63.2% in tutto; per core logico: 79 86 98 99 41 47 43 49 45 47 63 60
+    la frequenza: attuale 2592 MHz, massima 2592 MHz (il rapporto 1.00)
+    la temperatura (wmic MSAcpi_ThermalZoneTemperature, senza installare niente): non disponibile (FileNotFoundError)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+### 3. LA MEMORIA: totale 34.1 GB, usata 20.0 GB, libera 14.1 GB (59% usata)
+------------------------------------------------------------------------------------------------------------------------------------------------------
+### 4. IL DISCO C:\: libero 16.0 GB su 510.2 GB
+### 4. IL DISCO E:\: libero 223.8 GB su 256.0 GB
+    E:\soliton_simulator\mattone: oggi 45 file nuovi o riscritti, 0.12 GB
+------------------------------------------------------------------------------------------------------------------------------------------------------
+### 5. DALLE TAPPE: il tempo per tick ADESSO, da sola, il rapporto, la fine stimata
+    la corsa                    a k   s per tick    da sola rapporto  la fine stimata
+    triangolo-fase-60           496        4.865   non nota       --  19:10 (2000 tick, 1504 tick ancora)
+    lunga-MU                  26000        0.239   non nota       --  quando finisce (MGU) lunga (si ferma ai suoi tick) o al tetto
+    triangolo-solo-60           501        4.811       3.00     1.60  19:08 (2000 tick (fino a 6000 se non cotto su L 162), 1499 tick ancora)
+                         (da sola: S7'' (MGU) su L 162 (Luca))
+    lunga-MGU                 15000        0.833       0.48     1.74  23:48 (il tetto 28800 s dalla partenza)
+                         (da sola: la cottura (MGU) su L 81 (Luca))
+    conv-U-L162                1554        1.546   non nota       --  17:19 (2000 tick, 446 tick ancora)
+======================================================================================================================================================
