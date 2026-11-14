@@ -222,3 +222,47 @@
 - **Con S5' il controllo S7' di (MG) darebbe il rapporto `1.278`** *(descrittivo: oltre il `25%` anche cosi'; S7' e' chiuso, e (MG) e' tolto dalle `09:38`)*.
 - ### ⚠ **Le serie vecchie sono prese ogni `50` tick: una finestra di `250` ha `6` punti, e il picco-picco senza la retta e' GROSSOLANO** *(le finestre di (MGU) vanno da `0.0173` a `0.0646`)*. **Le corse nuove le prendono ogni `10`** *(sez. `15.2`)*.
 - **C6, il raggio** *(n.156)*: **gli aumenti `+1.887` (MGx2), `+3.019` (MG), `+4.831` (MG/2); il rapporto per ogni dimezzamento di `rho_c` `1.600` e `1.600`, la potenza `0.678`:** **la risposta e' GRADUALE; l'ipotesi «in bilico» NON e' confermata.** **Il file accanto a `rhoc.txt`, che resta l'uscita del suo comando.**
+
+## 16. LA GEOMETRIA NASCOSTA: PERDITA VERA O SOLO RIPARTENZA? (Luca `2026-11-14` `11:26`) -- LA CARTA G1, DAL CODICE, PRIMA DELLE PROVE
+
+- **Il FERMO della catena** *(`60940fc4`)* **e' SCIOLTO SOLO per questo mandato.** **Le scelte di dettaglio sono del guardiano; le mie sono marcate.**
+
+### 16.1 LE PREMESSE DAL CODICE *(cercate per nome di funzione)*
+
+- **CHE COSA E' `mot.geo.U`:** **il trasporto `2 x 2` di ogni ARCO** *(`primo_ordine/motore.py`, `Geometria`)*. **Nelle scene di C35-pi e di TBS e' l'IDENTITA'** *(`p6_bracci.braccio` lo asserisce: «la scena NON ha `U = I`»)*.
+- **DOVE LO SCRIVE `avvolto`** *(`csv/_u1_prototipo.py`)*: **nel `spostamento_scalare` avvolto, alla PRIMA chiamata del tick e poi a ogni chiamata dispari** *(`conta % 2 == 1`)*: **`campo.deriva(0.5)` due volte** *(`A += w E`)* **e `scrivi_U(mot, campo)`: `U[a, 0, 0] = U[a, 1, 1] = exp(i e A_a)`** *(la diagonale; i fuori diagonale restano `0`)*. ### **All'uscita `avvolto` rimette SOLO `mot.operatori`; il docstring del prototipo dice «`mot.geo.U` rimesso a FINE CORSA»: la persistenza fra i tick e' di PROGETTO nel prototipo.**
+- **CHI LO LEGGE:** **`flussi_parziali.hop_psi`** *(lo `spostamento_trasporto`: TUTTI i passi di trasporto della materia)*; **`energia.py` ed `energia_pesata.py`** *(l'energia: quindi anche i conti e `mattone.energia`)*. **`bordo.assorbi` no** *(non lo nomina)*.
+- **QUANDO, DENTRO UN TICK DI `p6_bracci.tick_GU`:**
+  1. **`campo.spinta(0.5)`; `fase_a`;**
+  2. ### **`tick_lapse.cs_al_centro`: le COPIE del punto fisso girano `TK.percorri_tick` SENZA `avvolto`, con l'`U` LASCIATO DAL TICK PRIMA** *(`exp(i e A)` di allora, non `I`)*;
+  3. **la reazione; il tick vero avvolto: i passi PRIMA del primo `spostamento_scalare` usano ANCHE LORO l'`U` del tick prima; poi `U` rifatto dal campo;**
+  4. **la reazione, `fase_a`, `campo.spinta(0.5)`.**
+  - **L'ordine dei passi** *(`composizione.ORDINE`, letto)*: **`14` posizioni; `CAMM-SPOSTAMENTO` alla `5` e alla `10`, `CAMM-SPOSTAMENTO-VUOTO` alla `7` e alla `8`:** ### **il PRIMO trasporto della materia di ogni tick usa l'`U` del tick prima, il SECONDO quello nuovo** *(la `7` riscrive, la `8` no: `conta` pari)*.
+- ### **LA MIA LETTURA, PRIMA DELLE PROVE:** **la possibilita' (2) del guardiano, «le copie del punto fisso vedono l'`U` del campo», e' VERA PER COSTRUZIONE dal secondo tick in poi** *(lo dice il punto 2: niente rimette `I` prima di `cs_al_centro`)*. **Il contatore G3 lo deve mostrare: zero solo al primo tick dopo un caricamento.**
+- ### ⚠ **UN PUNTO DEL BIVIO CHE SEGNALO AL GUARDIANO** *(non lo cambio: lo scrivo)*: **anche nel mondo SOLO U** *(`_u1_oggi.tick`: `avvolto` attorno al tick intero)* **i passi prima del primo `spostamento_scalare` leggono l'`U` del tick prima:** ### **la ripartenza di (MU) PERDE `U` ANCHE LEI, e io prevedo che FALLISCA per la stessa causa.** **Allora il ramo (c) «lo stato nascosto non e' (solo) `U`» sarebbe una conclusione sbagliata.** **Per distinguere:** ### **MIA SCELTA: G4 si fa ANCHE con `U` RICOSTRUITO dal campo salvato al caricamento** *(`scrivi_U(mot, campo)`: dopo l'ultimo `spostamento_scalare` dispari il tick non tocca piu' `A`, solo `E` con la spinta: l'`U` lasciato e' `exp(i e A_finale)`, ESATTO)*: **(MU) e (MGU).** **Se con `U` ricostruito passano, lo stato nascosto e' SOLO `U`.**
+- **E (MG)?** **Nessun `avvolto`, `U` resta `I`; `cs_al_centro` riparte da `cs_di(stato)`:** **prevedo che la ripartenza di (MG) PASSI.**
+- ### **COSA NON SO:** **quanto pesa** *(l'additivita' dice: poco)*; **se il primo segmento del tick vero col vecchio `U` sia voluto** *(un integratore a salti: `U` di `A` a meta' del tick prima)* **o un difetto: e' una domanda di fisica, per Luca.**
+
+### 16.2 IL PROGETTO *(`csv/solitone/geometria_nascosta.py`, NUOVO; nessun file esistente cambia)*
+
+- **`perdita`** *(G3)*: **da `MGU_05000` su `L 81`, G+U a campi pieni, `20` tick, quattro bracci dallo STESSO stato:**
+  - **(oggi)** **`mattone.Campi.tick` cosi' com'e';**
+  - **(oggi+contatore)** **lo stesso, con `tick_lapse.cs_al_centro` avvolto da un CONTATORE** *(chiamate e giri in cui `U != I`; il contatore NON cambia i conti)*;
+  - **(R)** **dopo OGNI tick vero `U` rimesso al valore di prima del tick** *(il mandato; da un caricamento e' `I`)*;
+  - **(C)** ### **MIA SCELTA, in piu': SOLO le copie del punto fisso con `U = I`** *(attorno a `cs_al_centro`; il tick vero com'e')*: **«il campo solo sul tick vero» del progetto `914c1248`.**
+  - ### **DEVE** *(il mandato: «senza variante = il codice di oggi»)*: **(oggi+contatore) = (oggi) AL BIT su tutte le chiavi e il campo.** ### ⚠ **LA MIA LETTURA DEL DEVE, dichiarata:** **«gli stessi byte della corsa MGU originale fra `4000` e `4020`» NON si puo' fare cosi': gli stati sono ogni `1000` tick, e la ripartenza da `04000` inciampa proprio nel difetto in esame.** **Il senso del DEVE** *(lo strumento senza variante E' il codice di oggi)* **lo dice il confronto con `mattone.Campi.tick` stesso.**
+  - **Il controllo che PUO' fallire:** **il contatore in (R) DEVE dare zero** *(se no il contatore non conta quello che dice)*.
+  - **IL BIVIO del guardiano:** **(R) = (oggi) al bit E contatore zero: (a); se no: (b).** **(C) e' scritto accanto.**
+- **`ripartenza --caso MG|MU|MGU [--ricostruisci]`** *(G4 e la mia aggiunta)*: **da `<caso>_04000` `1000` tick col tick di `mattone.Campi`, contro `<caso>_05000` chiave per chiave; con `--ricostruisci` `U` rifatto dal campo salvato al caricamento** *(solo MU, MGU)*.
+- **`peso --variante oggi|C`** *(il ramo (b))*: **`200` tick di `GUrampa` dallo stato iniziale** *(la scena di C35-pi a `60000`, `U = I`, Gauss, la rampa del lapse `min(1, k/500)`, `p6_bracci.tick_GU`)*; **`d` e `rho max` a `50`, `100`, `150`, `200`.** ### **DEVE** *(il controllo positivo)*: **(oggi) = `GUrampa.npz`** *(`git show 8ca61a34`)* **AL BIT a quei tick.** ### **MIA SCELTA: «la variante corretta» e' (C)** *(il progetto: il campo solo sul tick vero)*; **(R) butta via il campo anche nel primo segmento del tick vero.**
+
+### 16.3 COSA MI FAREBBE FERMARE
+
+- **il DEVE della `perdita` o del `peso` che fallisce; il contatore di (R) diverso da zero; il ramo (b) o (c) del bivio** *(referto, FERMO)*.
+
+### 16.4 TODO
+
+1. questa carta, commit e push;
+2. `geometria_nascosta.py`, l'inventario, la suite, commit;
+3. il registro; `perdita` e `ripartenza` (MG, MU, MU ricostruita) insieme *(due col lapse al piu')*; poi MGU ricostruita;
+4. il bivio: (a) la cottura col caricamento che ricostruisce `U`; (b) il `peso`, il referto, FERMO.
