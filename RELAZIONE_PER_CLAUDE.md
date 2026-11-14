@@ -25733,3 +25733,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`6bf3e481`; la sez. `15.7` del suo task history)*: **S5' dalle serie salvate: (MG) `0.0481`, (MU) `0.0572`, (MGU) `0.0646`, `MGdoppio` `0.0419`, `MGmezzo` `0.0522`; S7' di (MG) `0.0615`, il rapporto `1.278`** *(oltre il `25%` anche cosi')*. ### ⚠ **Le serie vecchie ogni `50` tick: `6` punti per finestra, S5' grossolano.**
 - **C6:** **il raggio cresce `1.600` volte per ogni raddoppio del lapse** *(potenza `0.678`)*: **risposta graduale; l'ipotesi «in bilico» del guardiano non e' confermata.**
 - ### **FERMO DELLA CATENA DEL MATTONE** *(la cottura di (MGU): il DEVE della ripartenza fallito; la lettura su `mot.geo.U` fuori dal npz, non verificata)*: **aspetto Luca.** **La voce `16` aspetta la prossima riunione.**
+
+### 2026-11-14 12:15 -- LA GEOMETRIA NASCOSTA (Luca 11:26, 12:00): LE COPIE DEL PUNTO FISSO VEDONO L'U DEL TICK PRIMA (19 SU 20); (MU) CON U RICOSTRUITO UGUALE AL BIT; (MG) E (MGU) CON U RICOSTRUITO DIVERSI SOLO IN h_int (UNA CACHE); IL BIVIO (a') ALLA LETTERA NON PASSA
+
+- **Sul ramo** *(la carta `58841b21`, il codice `947cf45e`, i referti `45455a50`; le sez. `16`-`16.6` del suo task history)*.
+- **`mot.geo.U`** *(il trasporto per arco, `I` nelle scene)* **lo riscrive `avvolto` con `exp(i e A)` e NON lo rimette; lo leggono il trasporto della materia e l'energia. Il primo trasporto di ogni tick usa l'`U` del tick prima** *(`composizione.ORDINE`: posizioni `5` e `7`)*.
+- **G3:** **il contatore: `19` chiamate di `cs_al_centro` su `20` con `U != I`. (C)** *(le copie con `U = I`)* **contro (oggi) dopo `20` tick: `psi_h` `1.75e-06` relativo.**
+- **G4:** **(MU) senza ricostruzione fallisce, con `U` ricostruito UGUALE AL BIT; (MG) e (MGU) con `U` ricostruito diversi SOLO in `h_int`** *(`2.2e+02` relativo)*. ### **`h_int` e' riscritto da `motore.elicita` da `psi_h`: `prepara` lo salvava dopo la misura dell'energia; tutte le altre chiavi uguali al bit dopo `1000` tick: non porta stato** *(la mia lettura)*.
+- ### **Il bivio (a') delle `12:00` dice «al bit»: alla lettera NON passa. La cottura NON riparte: decide Luca.** **Il peso** *(`200` tick di `GUrampa`, oggi e C)* **in corsa, come informazione.**
+- **Un mio commit respinto da `H-NON-TRACCIATI`** *(la sez. `16.5` mentre le prove scrivevano i referti)*: **rifatto insieme ai referti** *(`45455a50`)*.
