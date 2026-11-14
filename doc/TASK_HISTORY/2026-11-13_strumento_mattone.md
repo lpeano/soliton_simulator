@@ -400,3 +400,9 @@
 ### 19.3 I POSTI *(`15:22`)*
 
 - **Adesso:** **(T-solo), (T-fase), la cottura lunga di (MGU) e di (MU): `4` processi.** **Quando `convergenza.py` e' committato: la parte A su `L 162`** *(il quinto)*; **la parte A e la B su `L 243` aspettano un posto** *(nell'ordine: prima della cottura lunga, che e' «il resto», ma le corse gia' aperte NON si fermano)*.
+
+### 19.4 LA DECISIONE DI LUCA DELLE `15:40`: (MU) SU `L 162` COL BORDO A `28` NODI DAL CENTRO DEL MATTONE
+
+- **Alla parte A si aggiunge (MU) su `L 162` col bordo a `28` nodi dal centro del mattone** *(come su `L 81`)*, **`2000` tick, senza lapse, le stesse misure: separa l'effetto del bordo da quello delle copie periodiche.** **Come (MU) su `L 81`: il colpevole e' il bordo; come (MU) su `L 162` normale: le copie.**
+- ### **IL BORDO «A 28», DICHIARATO:** **`bordo.g_estremita(z, centro del mattone, R_A = 28, g_max di S162)`, le stesse funzioni della scena di S162; MA `R_B` e' la meta' del periodo del toro: la rampa va da `28` a `81` su `L 162`, contro `28` -> `40.5` su `L 81`** *(la rampa piu' dolce: un assorbimento meno brusco)*. **Non lo cambio: `R_B` lo fissa la funzione.**
+- **Il codice:** **`convergenza.py corsa --mondo U --L 162 --bordo28`** *(la suite di `convergenza.py` partita alle `15:4x` FERMATA da me per questo cambio, e rifatta)*. **Il referto: D1 e D2 col bordo a `28` contro `L 81` e `L 162` normale.**
