@@ -189,3 +189,11 @@
 3. `letture` *(A2, C6)*; le corse `cottura-MG` e `cottura-MGU` insieme, col registro;
 4. S7'' di (MG) e (MGU) insieme; poi B1 e B2 insieme;
 5. i referti; la riunione; FERMO.
+
+### 15.5 LA DECISIONE DI LUCA DELLE `09:38`: SOLO IL MONDO G+U *(arrivata durante la prima suite del codice, che ho FERMATO: girava sul codice di prima)*
+
+- **Si tolgono: la cottura di (MG), S7'' di (MG), la coppia B1.** **Resta: la cottura di (MGU) (A1), S5' (A2, anche per i mattoni gia' fatti), S7'' di (MGU) (A3), la coppia B2.**
+- ### **B3 applicata a B2** *(Luca)*: **`d''` sui tick `250`-`2000`: «G E' UNA FORZA» se positiva oltre `3` errori E almeno il `30%` di `GUrampa` *(`+6.89e-07`)*; «ERA IL COLPETTO DELL'ALLARGAMENTO» se entro `3` errori da `U_2000` *(`-2.55e-08`)*; altrimenti «INDECISO».**
+  - ### **MIA SCELTA: «entro `3` errori da `U_2000`» con l'errore della differenza IN QUADRATURA** *(quello della coppia e quello di `U_2000`; il secondo e' `3.4e-10`, trascurabile)*. **I riferimenti `GUrampa`, `U_2000` letti col `git show` dal referto dei bracci a `8ca61a34`.**
+  - **L'additivita' con B1 cade** *(B1 non c'e')*: **il comando `--mondo additivita` tolto.**
+- **La riunione D1: quando S7'' di (MGU) e' passato e B2 ha il referto. C ed E invariati.** **Una sola corsa col lapse sul ramo alla volta, quindi niente `--forza` sul registro.**
