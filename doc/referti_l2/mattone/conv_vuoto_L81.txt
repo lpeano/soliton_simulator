@@ -1,0 +1,9 @@
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DEL DISEGNO DI FASE (Luca 19:40, solo lettura): la scena di L 81, il vuoto fresco al tick 60000
+==================================================================================================================================
+### |phi_j|^2 - 1 fuori dal bordo (2840 nodi): 2.220e-14; il disegno ogni 3 nodi (A1 e A2): 2.000e+00
+    A1       il massimo 2.000e+00 al nodo 0 (m1 0, m2 0), la componente 0; per componente: 2.00e+00 2.00e+00 2.00e+00 2.00e+00 1.11e-16 2.00e+00; i nodi con scarto oltre 1e-12: 162
+    A2       il massimo 2.000e+00 al nodo 0 (m1 0, m2 0), la componente 0; per componente: 2.00e+00 2.00e+00 2.00e+00 1.11e-16 2.00e+00 2.00e+00; i nodi con scarto oltre 1e-12: 162
+    A1 + A2  il massimo 2.000e+00 al nodo 0 (m1 0, m2 0), la componente 1; per componente: 2.00e+00 2.00e+00 2.00e+00 2.00e+00 2.00e+00 2.00e+00; i nodi con scarto oltre 1e-12: 320
+==================================================================================================================================

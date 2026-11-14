@@ -455,3 +455,15 @@
 - ### **Per la decisione delle `14:54`: la catena delle `09:34` riprende da B2, con S7'' considerato SUPERATO su `L 162`** *(dichiarato)*; **B2 ha la precedenza su ogni corsa che aspetta** *(`15:22`)*.
 - ### **IL CODICE, MIO** *(il pezzo annunciato nella sez. `18.3`)*: **`csv/solitone/mattone_coppia_L162.py`, NUOVO: il ciclo di `mattone_coppia.py` COPIATO, con due cambi: il francobollo ritagliato da `L162_MGU_03000` NELLA SCENA DI S162** *(il vuoto fresco al tick `63000`, lo stesso `mattone.ritaglia`)*; **il bordo da `R_A = 60` attorno al centro del bordo della scena di C35-pi** *(`15:49`)*. **I picchi del mattone di confronto: gli ultimi `1000` tick di (T-solo).** **`mattone_coppia.py` non si tocca.**
 - **I posti:** **oggi `5` aperti** *(le due cotture lunghe, (T-sfasati), (MGU) col bordo a `28`, il controllo del vuoto)*: **la suite e poi B2 ai primi posti liberi.**
+
+### 19.12 IL CONTROLLO DEL DISEGNO DI FASE SU `L 81`, `L 162`, `L 243`: LO STESSO ESITO -- E' IL CONTROLLO, NON LA SCENA *(il codice a `c3de10ac`; dalle `20:24:54` alle `20:27:01`; `conv_vuoto_L81.txt`, `_L162`, `_L243`)*
+
+| `L` | `|phi_j|^2 - 1` fuori dal bordo | il disegno ogni `3` nodi | i nodi oltre `1e-12` (`A1`, `A2`, `A1 + A2`) | dove |
+|---|---|---|---|---|
+| `81` | `2.22e-14` (`2840` nodi) | `2.0` | `162`, `162`, `320` | il nodo `0`, `(0, 0)` |
+| `162` | `2.22e-14` (`8188`) | `2.0` | `324`, `324`, `644` | il nodo `0` |
+| `243` | `2.22e-14` (`36601`) | `2.0` | `486`, `486`, `968` | il nodo `0` |
+
+- ### **LA LETTURA:** **lo scarto `2.0`** *(la fase ribaltata)* **sta su `2L` nodi per direzione: le DUE RIGHE della cucitura del toro, su TUTTI i tori; altrove il disegno si ripete ogni `3` nodi.** **Il disegno F3 cambia segno attraversando la cucitura periodica: una proprieta' del vuoto di oggi, la stessa su `L 81` e `L 162`.** ### **Il DEVE della sez. `19.9` era SBAGLIATO NEL CONTROLLO** *(errore MIO: scritto senza provarlo su una scena buona)*; **la scena di `L 243` si comporta come le altre e NON va corretta.**
+- **La componente `4` lungo `A1` e la `3` lungo `A2` NON cambiano** *(`1.1e-16`)*.
+- ### **PER RIPARTIRE CON `L 243`: decide Luca** *(la proposta: il DEVE riscritto come «lo stesso esito delle scene buone»: `|phi_j|^2 = 1` e lo scarto solo sui `2L` nodi della cucitura)*.
