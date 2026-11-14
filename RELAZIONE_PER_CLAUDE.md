@@ -25727,3 +25727,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La perdita di energia della materia sotto G e' quasi tutta fra i tick `400` e `1300`** *(l'allargamento)*, **poi risale appena** *(`+147` da `1600` a `2000`)*.
 - ### **ERRORE MIO:** **la frase C4 stampata dice «la coppia B1»; dopo le `09:38` e' B2; scritto nel task history.**
 - **C5: R-CONTI-6** *(l'energia nelle tabelle dei conti e' la media su `100` tick)* **nella ROTTA e nella skill.**
+
+### 2026-11-14 10:45 -- IL RAMO MATTONE, A2 E C6: S5' (MG) 0.0481 CONTRO IL VECCHIO 0.0711; S7' DI (MG) CON S5' 1.278; IL RAGGIO 1.600 VOLTE PER RADDOPPIO DEL LAPSE (POTENZA 0.678, GRADUALE); FERMO DELLA CATENA
+
+- **Sul ramo** *(`6bf3e481`; la sez. `15.7` del suo task history)*: **S5' dalle serie salvate: (MG) `0.0481`, (MU) `0.0572`, (MGU) `0.0646`, `MGdoppio` `0.0419`, `MGmezzo` `0.0522`; S7' di (MG) `0.0615`, il rapporto `1.278`** *(oltre il `25%` anche cosi')*. ### ⚠ **Le serie vecchie ogni `50` tick: `6` punti per finestra, S5' grossolano.**
+- **C6:** **il raggio cresce `1.600` volte per ogni raddoppio del lapse** *(potenza `0.678`)*: **risposta graduale; l'ipotesi «in bilico» del guardiano non e' confermata.**
+- ### **FERMO DELLA CATENA DEL MATTONE** *(la cottura di (MGU): il DEVE della ripartenza fallito; la lettura su `mot.geo.U` fuori dal npz, non verificata)*: **aspetto Luca.** **La voce `16` aspetta la prossima riunione.**
