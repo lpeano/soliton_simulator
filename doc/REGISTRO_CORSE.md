@@ -71,3 +71,12 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-0_2000", "ora": "2026-11-14T01:35:07+01:00", "punto": "tick 60890; 0.675 s per tick; la memoria libera 14.07 GB"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-0_2000", "ora": "2026-11-14T01:45:08+01:00", "punto": "tick 61789; 0.671 s per tick; la memoria libera 14.13 GB"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "bilancio-0_2000", "ora": "2026-11-14T01:48:15+01:00", "punto": "2000 tick in 1370 s (0.685 s per tick), uscita 0 alle 01:47:57; d e M = p6_bracci/0_2000.npz al bit (41 punti); gli stati ogni 250 su E:/soliton_simulator/bilancio"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T01:35:11+01:00", "punto": "tick 60190; 3.178 s per tick; la memoria libera 14.20 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T01:45:12+01:00", "punto": "tick 60373; 3.229 s per tick; la memoria libera 14.03 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T01:55:14+01:00", "punto": "tick 60551; 3.279 s per tick; la memoria libera 12.86 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:05:14+01:00", "punto": "tick 60742; 3.244 s per tick; la memoria libera 15.06 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:15:14+01:00", "punto": "tick 61013; 2.969 s per tick; la memoria libera 15.11 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:25:16+01:00", "punto": "tick 61275; 2.831 s per tick; la memoria libera 14.99 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:35:18+01:00", "punto": "tick 61542; 2.731 s per tick; la memoria libera 15.09 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:45:19+01:00", "punto": "tick 61809; 2.660 s per tick; la memoria libera 15.17 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "bilancio-Grampa", "ora": "2026-11-14T02:52:48+01:00", "punto": "2000 tick in 5242 s (2.621 s per tick), uscita 0 alle 02:52:30; d e M = p6_bracci/Grampa.npz al bit (41 punti); in coppia con mattone-MGmezzo e mattone-ctrl2-MG"}
