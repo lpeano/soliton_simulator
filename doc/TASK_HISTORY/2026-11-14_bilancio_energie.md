@@ -109,3 +109,12 @@
 1. questo task history e la relazione, commit e push;
 2. `bilancio_chiusura.py`, l'inventario, la suite, commit e push;
 3. il referto `doc/referti_l2/bilancio_chiusura.txt`, la relazione, la ROTTA, la skill: commit e push.
+
+## 9. LA CHIUSURA: `2/2` *(il codice a `81b14985`; alle `10:37`; `doc/referti_l2/bilancio_chiusura.txt`)*
+
+- **C1, la massa di `(0)_2000`:** **il peggiore `1.17e-12`, entro `1e-11`** *(n.157, rivista DOPO il risultato)*: **PASSA.** **In `Grampa` il peggiore `9.01e-15`** *(descrittivo)*.
+- **C2, il rumore:** **per tick `123.78`; la deviazione delle `20` medie su `100` tick di `(0)_2000` `s_w = 2.09`** *(il rapporto `0.017`: l'oscillazione e' VELOCE rispetto a `100` tick, la media la toglie)*. **La premessa «cosa NON so» della sez. `8.1`: risolta.** **Le medie di `(0)_2000` stanno ferme attorno a `-46`** *(fra `-50.4` e `-42.96`: uno scarto COSTANTE dal primo tick, non una deriva; il perche' NON l'ho guardato)*.
+- **C3, il lavoro dell'accensione di G** *(`Grampa` meno `(0)_2000`, finestra per finestra)*: **`+0.05` nei primi `100` tick, `-780` a `401`-`500`, `-4308` a `901`-`1000`, il minimo `-5433` a `1501`-`1600`, poi risale piano a `-5286` a `1901`-`2000`.** **`W = D(1250) - D(500) = -4175.6`, il rumore `2 s_w = 4.18`: `998` volte. Il DEVE FALLIRE fallisce come deve.** **Nella rampa `D(500) - D(50) = -1097.7`; dopo l'allargamento `D(1950) - D(1250) = -12.6`.**
+- ### **C4:** **il bilancio non risolve l'energia del moto** *(qualche unita', sotto il rumore anche mediato? il rumore della media e' `2.1`: la stima del moto `-2.9` a `2000` e' DELL'ORDINE del rumore)*; **la domanda forza/colpetto passa alla coppia.** ### ⚠ **ERRORE MIO:** **la frase stampata dice «la coppia B1»** *(il mandato delle `09:34`)*; **dopo la decisione delle `09:38` la coppia e' B2** *(G+U)*: **il codice non e' stato aggiornato; il referto resta com'e', la correzione e' scritta qui.** **E la coppia oggi e' FERMA** *(la cottura di (MGU) fallita sul ramo)*.
+- **C5:** **R-CONTI-6 nella ROTTA e la riga `5-ter` nella skill `registro-corse`.** **C6:** **sul ramo mattone** *(le letture)*.
+- ### **LA VOCE `15` E' CHIUSA.**

@@ -25720,3 +25720,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **UNA LETTURA DAL CODICE, NON VERIFICATA:** **`_u1_prototipo.avvolto` riscrive `mot.geo.U` dal campo e all'uscita NON lo rimette; il npz non ha `U`; alla ripartenza `mattone.scena.metti` rimette l'`U` della scena** *(il nucleo tratta `geo.U` come stato: `_collauda_checkpoint.py`)*. **La cura sarebbe salvare `U`** *(o rifarlo dal campo)*: **NON fatta.**
 - ### **FERMO DELLA CATENA** *(la cottura, S7'' di (MGU), B2, la riunione)*. **Continuano C** *(la voce `15`)* **e A2/C6** *(le letture)*: **non dipendono dalla cottura.**
 - **Il mandato delle `10:19`** *(i dati nel repo, `_dove.py`)*: **registrato come voce `16` della ROTTA; si esegue dopo la riunione D1; oggi D1 non arriva, quindi ASPETTA la prossima riunione.**
+
+### 2026-11-14 10:40 -- LA CHIUSURA DELLA VOCE 15: 2/2 -- LA MASSA 1.17e-12 ENTRO 1e-11; IL RUMORE DA 124 PER TICK A 2.1 PER MEDIA SU 100 TICK; IL LAVORO DELL'ACCENSIONE DI G SUI TICK 500-1250 -4176 (998 VOLTE IL RUMORE); LA VOCE 15 CHIUSA
+
+- **Il referto `doc/referti_l2/bilancio_chiusura.txt`** *(il codice a `81b14985`)*: **i numeri e le letture nella sez. `9` di `doc/TASK_HISTORY/2026-11-14_bilancio_energie.md`.**
+- **La perdita di energia della materia sotto G e' quasi tutta fra i tick `400` e `1300`** *(l'allargamento)*, **poi risale appena** *(`+147` da `1600` a `2000`)*.
+- ### **ERRORE MIO:** **la frase C4 stampata dice «la coppia B1»; dopo le `09:38` e' B2; scritto nel task history.**
+- **C5: R-CONTI-6** *(l'energia nelle tabelle dei conti e' la media su `100` tick)* **nella ROTTA e nella skill.**

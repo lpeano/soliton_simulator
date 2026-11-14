@@ -1,0 +1,41 @@
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] bilancio_corsa.py  sha1-BYTE f54cb654  committato e pulito
+[TIMBRO] bilancio_chiusura.py  sha1-BYTE f825116b  committato e pulito
+==================================================================================================================================
+LA CHIUSURA DELLA VOCE 15 (Luca 09:34, C1-C4): l'energia in MEDIA su 100 tick; il lavoro dell'accensione di G = Grampa meno (0)_2000; la massa entro 1e-11 (n.157, RIVISTA dopo il risultato)
+==================================================================================================================================
+### (Grampa) tot(0) 1.6535113140e+07, la massa all'inizio 1.9908522548e+06; il residuo per tick: da -5.527e+03 a +1.534e+02
+### (0_2000) tot(0) 1.6535113140e+07, la massa all'inizio 1.9908522548e+06; il residuo per tick: da -2.424e+02 a +1.616e+02
+----------------------------------------------------------------------------------------------------------------------------------
+### C2-C3: il residuo MEDIO per finestra di 100 tick, i due bracci e la differenza (il lavoro dell'accensione di G, finestra per finestra)
+    i tick               (0)_2000           Grampa     Grampa - (0)
+        1-  100          -42.9568         -42.9115          +0.0453
+      101-  200          -47.4290         -61.8604         -14.4314
+      201-  300          -48.1356        -144.4694         -96.3338
+      301-  400          -46.6899        -371.8872        -325.1973
+      401-  500          -44.0102        -823.8513        -779.8411
+      501-  600          -46.3416       -1514.7111       -1468.3695
+      601-  700          -50.4133       -2307.0942       -2256.6809
+      701-  800          -44.7823       -3086.1418       -3041.3596
+      801-  900          -44.5464       -3780.8562       -3736.3098
+      901- 1000          -48.2575       -4355.9974       -4307.7399
+     1001- 1100          -48.1203       -4802.4747       -4754.3545
+     1101- 1200          -46.1540       -5116.4160       -5070.2620
+     1201- 1300          -43.8185       -5317.0600       -5273.2415
+     1301- 1400          -49.2496       -5427.3090       -5378.0594
+     1401- 1500          -48.8423       -5472.0761       -5423.2338
+     1501- 1600          -43.7958       -5476.9128       -5433.1169
+     1601- 1700          -46.2031       -5452.5267       -5406.3237
+     1701- 1800          -48.2051       -5412.5541       -5364.3490
+     1801- 1900          -48.1976       -5373.5886       -5325.3910
+     1901- 2000          -44.5445       -5330.3905       -5285.8460
+    il rumore di UNA media (la deviazione delle 20 medie di (0)_2000): s_w 2.0916; per tick, senza media: 123.7845 (il rapporto 0.017)
+### C3: D(500) -1097.6206; D(1250) -5273.2415; W = D(1250) - D(500) = -4175.6208; il rumore 2 s_w = 4.1832 (998.2 volte)
+    il lavoro nella rampa (0-500): D(500) - D(50) = -1097.6659; dopo l'allargamento (1250-2000): D(1950) - D(1250) = -12.6045
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: (0)_2000 la massa: Delta M + la massa tolta dal bordo = 0 entro 1e-11 relativo a ogni tick (n.157, R PASSA   il peggiore 1.17e-12
+  DEVE FALLIRE: Grampa - (0)_2000: il lavoro W sui tick 500-1250 nullo entro 3 volte il rumore (RILETTO dopo il risu ### FALLISCE   4.176e+03 contro 3 x 4.183e+00
+    (Grampa) la massa: il peggiore 9.01e-15 (descrittivo)
+==================================================================================================================================
+### C4: IL BILANCIO NON RISOLVE L'ENERGIA DEL MOTO (SOTTO IL RUMORE); LA DOMANDA FORZA/COLPETTO PASSA ALLA COPPIA B1.
+ESITO: 2/2 controlli come devono; fallite: 0 []
