@@ -365,3 +365,11 @@
   - ### **MIA SCELTA:** **(T-solo) al vertice A del triangolo** *(lo stesso nodo, la stessa distanza dal centro del bordo dei tre del triangolo)*.
   - **L'ordine dei posti: (T-solo) e (T-fase) insieme appena ci sono due posti, poi B2** *(oggi FERMO: S7'')*, **poi (T-sfasati); al piu' tre col lapse.**
 - ### **ERRORE MIO:** **la chiusura di S7'' nel registro e la sez. `18.1` le avevo scritte MENTRE girava la suite** *(dalle `14:30:55`)*: **la suite le ha RIMESSE com'erano ed e' uscita con `1`** *(«LA SUITE HA SPORCATO 3 FILE»; i `67/67` passavano)*. **E' la regola nella memoria «niente file tracciati durante la suite»: violata. Riscritte entrambe adesso; la suite si rifa' sul codice finale.**
+
+### 18.3 LA DECISIONE DI LUCA DELLE `14:54`: IL MATTONE DIPENDE DAL TORO SU CUI E' COTTO; (T-solo) E' ANCHE LA COTTURA SU `L 162`
+
+- **S7'' di (MGU) non passa per la deriva del picco su `L 162`** *(`-4.3%` ogni `500` tick, contro circa `-0.3%` sull'ultimo pezzo su `L 81`)*: **il mattone dipende dal toro su cui e' cotto.**
+- ### **(T-solo) diventa anche LA COTTURA SU `L 162`:** **lo stato ogni `500` tick e alla fine col prefisso `L162_MGU_`; a `2000` tick, se il picco medio fra le ultime due finestre di `500` cambia meno del `2%`, lo stato finale e' il mattone (MGU) COTTO SU `L 162`, e B2 lo usa** *(la catena delle `09:34` riprende da B2, con S7'' considerato SUPERATO su `L 162`, dichiarato)*; **se no, (T-solo) prosegue a pezzi di `1000` tick, al piu' `4000` in piu'.**
+- **Il codice** *(`mattone_triangolo.py`, non ancora committato: la suite fermata alle `14:5x` e rifatta)*: **`doc/referti_l2/mattone/cottura_L162_MGU.json`** *(il file, `k`, COTTO, le due medie)*.
+- ### ⚠ **Per B2, un pezzo da scrivere DOPO:** **`mattone_coppia.py` ritaglia il francobollo dalla scena di TBS (`L 81`); il mattone su `L 162` va ritagliato nella scena di S162** *(lo stesso `mattone.ritaglia`, il vuoto fresco al tick dello stato)*: **un file nuovo o un argomento, quando (T-solo) e' cotto.**
+- **Nella voce `17` (i cluster), sul principale: «i mattoni si cuociono SUL TORO dove si usano».** **(T-fase) e (T-sfasati) restano come deciso** *(da `MGU_10000`, cotto su `L 81`)*.
