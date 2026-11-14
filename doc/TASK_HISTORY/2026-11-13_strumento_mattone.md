@@ -291,3 +291,24 @@
 
 - ### **`h_int`, LETTO DAL CODICE:** **`motore.elicita(st)` lo RISCRIVE per intero da `psi_h` e `geo.n`** *(`h.fill(0)`, poi la somma)*, **e lo chiamano un passo del tick** *(`motore.py`, la moneta)* **e l'energia pesata** *(`energia_pesata.py`)*; **`csv/_stabilita_lineare.py` lo elenca fra le CACHE.** **`prepara` misurava l'energia ogni `50` tick, quindi anche a `5000` PRIMA di salvare: lo `h_int` salvato e' quello della MISURA; la ripartenza di G4 non misura l'energia, e il suo `h_int` e' quello dell'ultimo passo del tick.** ### **Il fatto: dopo `1000` tick tutte le altre chiavi sono uguali AL BIT: `h_int` NON porta stato.** *(Nella cottura delle `10:11` `h_int` NON era fra le diverse: `Corsa` chiama i conti a ogni tick.)*
 - ### **IL BIVIO (a') ALLA LETTERA NON E' SODDISFATTO** *(«passa AL BIT»: `h_int` differisce)*. **La mia lettura: nessun altro stato nascosto.** ### **Decidere che `h_int` non conta e' di Luca: la cottura NON riparte.** **Il peso** *(«in ogni caso, non bloccante»)* **si fa.**
+
+### 16.7 LA DECISIONE DI LUCA DELLE `12:19`: `h_int` E' UNA CHIAVE DI SERVIZIO; (a') VALE; LA COTTURA RIPARTE
+
+- **«`h_int` e' una cache diagnostica** *(riscritta dalla misura dell'energia)*, **non uno stato della dinamica: dopo `1000` tick tutte le altre chiavi sono uguali AL BIT.»** **Il confronto delle ripartenze la ESCLUDE, dichiarato nel referto e nel codice** *(una lista «chiavi di servizio» col motivo)*. **Con questo la ripartenza di (MGU) con `U` ricostruito PASSA: (a') vale.**
+- **Il codice: `csv/solitone/mattone_cottura_U.py`** *(nuovo; il progetto della sez. `16.5`)*: **`mattone_cottura.cuoci` com'e', con `carica` e `uguale_al_file` sostituite IN MEMORIA; `CHIAVI_SERVIZIO = {h_int: il motivo}`.**
+- **L'ordine:** **il peso finisce** *(due corse col lapse: il massimo)*; **la suite; il commit; la cottura di (MGU); poi S7'', B2, D come da `09:34` con `09:38`.**
+- ### ⚠ **Una nota per S7'' e B2:** **partono da francobolli col campo rifatto con `A = 0`, quindi `U = I` e' gia' quello giusto** *(`exp(0) = 1`)*; **ma `E_sol` del francobollo si misura sullo stato di `L 81` con `U = I` invece di `exp(i e A)` del mattone** *(l'energia legge `U`)*: **un numero stampato, non un criterio.**
+
+### 16.8 IL PESO, COME INFORMAZIONE *(dalle `12:15:03` alle `12:24:57`, due corse insieme; `geometria_peso_oggi.txt`, `geometria_peso_C.txt`)*
+
+- ### **DEVE: (oggi) = `GUrampa.npz` di `8ca61a34` AL BIT** *(`d` e `rho max` a `60000`, `60050`, ..., `60200`)*: **PASSA.**
+- **(C)** *(le copie del punto fisso con `U = I`)* **contro `GUrampa`:**
+
+| `t` | `d` (C) - `d` (oggi) | `rho max`, relativa |
+|---|---|---|
+| `60050` | `-1.073e-10` | `+1.132e-09` |
+| `60100` | `-1.663e-09` | `+1.415e-08` |
+| `60150` | `-8.371e-09` | `+6.200e-08` |
+| `60200` | `-2.615e-08` | `+1.796e-07` |
+
+- **La differenza cresce in fretta** *(circa `x15`, `x5`, `x3` ogni `50` tick: col campo che sale)*; **a `200` tick e' `2.6e-08` su `d`, mentre `d_GU - d_0` di `GUrampa` a `2000` tick e' `+0.625`.** **Che cosa devono vedere le copie resta a Luca, per le corse future** *(la decisione delle `12:00`)*.

@@ -1,0 +1,25 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] geometria_nascosta.py  sha1-BYTE 15321405  committato e pulito
+==================================================================================================================================
+IL PESO (C; Luca 11:26, il ramo (b)): 200 tick di GUrampa dalla scena di C35-pi a 60000; la rampa min(1, k/500); rho_c 227058.57486393457 (il meta di 8ca61a34:doc/referti_l2/p6_bracci/GUrampa.npz); e 6.3154140e-05
+==================================================================================================================================
+    t 60050  d 37.5667996510  rmax 2.8918252946e+03  (132 s)
+    t 60100  d 37.5626864337  rmax 2.8406246728e+03  (288 s)
+    t 60150  d 37.5590145499  rmax 2.7945223364e+03  (424 s)
+    t 60200  d 37.5547765485  rmax 2.7510075916e+03  (557 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 200 tick in 557 s
+### CONTRO GUrampa (8ca61a34): t        d                    d GUrampa            d - rif      rmax                 rmax GUrampa         relativa    
+       60000 37.569219917149 37.569219917149 +0.000e+00 2.787235692470e+03 2.787235692470e+03 +0.000e+00
+       60050 37.566799650969 37.566799651076 -1.073e-10 2.891825294561e+03 2.891825291289e+03 +1.132e-09
+       60100 37.562686433707 37.562686435370 -1.663e-09 2.840624672777e+03 2.840624632585e+03 +1.415e-08
+       60150 37.559014549856 37.559014558227 -8.371e-09 2.794522336364e+03 2.794522163101e+03 +6.200e-08
+       60200 37.554776548525 37.554776574671 -2.615e-08 2.751007591625e+03 2.751007097519e+03 +1.796e-07
+### (C) contro GUrampa: DIVERSO (le differenze sopra)
+==================================================================================================================================
+ESITO: 0/0 controlli come devono; fallite []; 592 s in tutto
