@@ -25788,3 +25788,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Alle `18:23:32`** *(psutil, la CPU media su `10` s; lo script nello scratchpad)*: **`conv-U-L162b28` PID `28380` `99.4%` (k `750`); `lunga-MGU` PID `36104` `99.5%` (il pezzo fino a k `20000`); `lunga-MU` PID `28148` `98.9%` (fino a k `42000`); `triangolo-fase-60` PID `25852` `98.9%` (k `1250`); `triangolo-solo-60` PID `28428` `99.0%` (k `1250`).** **Sul principale nessuna corsa aperta.**
 - **Perche' se ne vedono tre, una lettura:** **Gestione attivita' raggruppa i python e mostra la CPU su `12` core logici** *(circa `8%` l'una)*; **le uscite scrivono una riga ogni `250` tick nei triangoli** *(circa `20` minuti)* **e ogni `1000` tick nelle cotture lunghe.** **(MU) lunga non aspetta: si ferma solo a fine pezzo quando (MGU) e' finita.**
+
+### 2026-11-14 19:45 -- IL BORDO E LA CODA (n.161, n.162): SU L 81 G1 CON IL CAMPO E IL PENDOLO (A), (C) CADONO DENTRO L'ASSORBITORE (FINO AL 74% DELLA MASSA OLTRE R_A 28): LE LORO FASI TARDE SONO DOMINATE DAL BORDO; I BRACCI DI P6 NO (MASSA OLTRE R_A 47.5 SOTTO 5e-06); IN PIU': (T-fase) 3/3, LA SCENA DI L 243 FERMA AL SUO DEVE
+
+- **Il referto `doc/referti_l2/bordo_coda_L81.txt`** *(`8afff283`; la carta e la sez. `4` in `doc/TASK_HISTORY/2026-11-14_bordo_coda_L81.md`)*.
+- ### **G1 gamma `0.2`, G1 lunga, G1 lunghissima, il pendolo (A) e (C): il solitone si sposta fino a `32` nodi dal centro del bordo, e fino al `74%` della massa sta oltre `R_A = 28`** *(da circa `t 2000`)*: **le fasi tarde di quelle corse sono dominate dall'assorbitore.** **G1 senza campo e il pendolo (B) restano al centro: il bordo non li tocca** *(oltre `R_A` al piu' `5.4e-04`)*.
+- **I bracci di P6** *(C35-pi, `R_A` vero `47.5`)*: **la massa oltre `R_A` fra `1.9e-06` e `4.3e-06`: non toccati.**
+- **Sul ramo:** **(T-fase) col bordo da `60` FINITO `3/3`** *(il lato vero `39.0`, non `37.6`)*; **il DEVE della convergenza su `L 81` PASSA; la scena di `L 243` si ferma al suo DEVE** *(il disegno di fase ogni `3` nodi: `2.0`; il controllo mai provato su una scena buona: la proposta e' provarlo su `L 162` e `L 81`)*; **FERMO di `L 243`, decide Luca.**

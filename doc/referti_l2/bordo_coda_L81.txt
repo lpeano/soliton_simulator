@@ -1,0 +1,57 @@
+[TIMBRO] bordo_coda_L81.py  sha1-BYTE c1eca1f7  committato e pulito
+==================================================================================================================================
+IL BORDO E LA CODA DEL SOLITONE SU L 81 (Luca 15:49, solo lettura): il bordo di TBS, il centro [40.5, 40.5], R_A 28, R_B 40.5, g_max 0.03
+==================================================================================================================================
+    la corsa                t        d      R99     R999    d + R99   d + R999  M oltre R_A
+    G1 gamma 0              0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    G1 gamma 0            500    0.005   15.324   16.864     15.329     16.869    5.497e-05
+    G1 gamma 0           1000    0.003   15.500   16.935     15.504     16.939    8.675e-05
+    G1 gamma 0           1500    0.002   15.501   16.980     15.503     16.981    1.223e-04
+    G1 gamma 0           2000    0.009   15.589   17.030     15.599     17.040    1.494e-04
+                     il peggiore: t 1940, d + R999 17.199 (R_A 28: fuori dalla rampa), la massa oltre R_A 1.460e-04
+    G1 gamma 0.2            0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    G1 gamma 0.2          500    1.735   15.507   17.297     17.241     19.032    5.611e-05
+    G1 gamma 0.2         1000    6.599   16.245   18.661     22.845     25.261    1.005e-04
+    G1 gamma 0.2         1500   13.747   13.322   15.654     27.070     29.401    2.534e-04
+    G1 gamma 0.2         2000   21.963   12.138   20.135     34.100     42.097    4.268e-02
+                     il peggiore: t 2000, d + R999 42.097 (R_A 28: DENTRO la rampa), la massa oltre R_A 4.268e-02
+    G1 lunga                0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    G1 lunga             1240    9.798   14.867   17.178     24.665     26.976    1.456e-04
+    G1 lunga             2500   28.637   13.442   25.934     42.079     54.572    5.723e-01
+    G1 lunga             3760   31.136   17.601   31.009     48.736     62.144    6.645e-01
+    G1 lunga             5000   16.049   13.837   34.572     29.886     50.621    2.417e-03
+                     il peggiore: t 3280, d + R999 63.202 (R_A 28: DENTRO la rampa), la massa oltre R_A 7.416e-01
+    G1 lunghissima          0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    G1 lunghissima       3480   32.422   17.109   30.636     49.531     63.058    7.233e-01
+    G1 lunghissima       7000    4.529   20.517   37.812     25.047     42.341    2.797e-03
+    G1 lunghissima      10520   27.161   22.646   39.915     49.806     67.076    4.284e-01
+    G1 lunghissima      14000   11.827   26.187   40.597     38.014     52.424    6.847e-03
+                     il peggiore: t 9680, d + R999 70.628 (R_A 28: DENTRO la rampa), la massa oltre R_A 6.500e-01
+    pendolo (A)             0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    pendolo (A)          1000    6.599   16.245   18.661     22.845     25.261    1.005e-04
+    pendolo (A)          2000   21.963   12.138   20.135     34.100     42.097    4.268e-02
+    pendolo (A)          3000   32.164   15.469   29.001     47.633     61.166    7.251e-01
+    pendolo (A)          4000   29.261   17.482   31.785     46.743     61.047    5.763e-01
+                     il peggiore: t 3280, d + R999 63.202 (R_A 28: DENTRO la rampa), la massa oltre R_A 7.416e-01
+    pendolo (B)             0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    pendolo (B)          1000    0.016   14.745   16.586     14.761     16.602    1.296e-04
+    pendolo (B)          2000    0.029   15.800   17.385     15.830     17.414    3.074e-04
+    pendolo (B)          3000    0.095   15.633   17.592     15.728     17.687    3.616e-04
+    pendolo (B)          4000    0.192   15.485   17.957     15.677     18.148    5.386e-04
+                     il peggiore: t 4000, d + R999 18.148 (R_A 28: fuori dalla rampa), la massa oltre R_A 5.386e-04
+    pendolo (C)             0    0.003   15.254   16.712     15.257     16.715    1.048e-05
+    pendolo (C)          1000    3.943   16.096   18.617     20.039     22.561    8.773e-05
+    pendolo (C)          2000   17.902   12.635   15.749     30.537     33.652    2.524e-03
+    pendolo (C)          3000   30.757   14.400   27.884     45.158     58.641    6.859e-01
+    pendolo (C)          4000   30.985   16.918   31.685     47.903     62.670    6.734e-01
+                     il peggiore: t 3640, d + R999 63.541 (R_A 28: DENTRO la rampa), la massa oltre R_A 7.402e-01
+----------------------------------------------------------------------------------------------------------------------------------
+### la scena di C35-pi (L 162): il centro del bordo [98.87378070359784, 81.36252985852764], R_A VERO 47.5, R_B 81 (la meta' del periodo), g_max 0.03
+### la scena di S162 (L 162): il centro del bordo [98.87378070359784, 81.36252985852764], R_A VERO 47.5, R_B 81 (la meta' del periodo), g_max 0.03
+    (Grampa) k    0: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 2.478e-06 (relativa); rho massimo oltre R_A / rho massimo 2.792e-06
+    (Grampa) k 1000: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 2.635e-06 (relativa); rho massimo oltre R_A / rho massimo 9.995e-06
+    (Grampa) k 2000: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 4.346e-06 (relativa); rho massimo oltre R_A / rho massimo 1.517e-05
+    (0_2000) k    0: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 2.478e-06 (relativa); rho massimo oltre R_A / rho massimo 2.792e-06
+    (0_2000) k 1000: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 2.361e-06 (relativa); rho massimo oltre R_A / rho massimo 4.295e-06
+    (0_2000) k 2000: la massa dei due solitoni oltre R_A 47.5 dal centro del bordo 1.935e-06 (relativa); rho massimo oltre R_A / rho massimo 2.994e-06
+==================================================================================================================================
