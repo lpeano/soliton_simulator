@@ -110,3 +110,14 @@
 - **Il collaudo:** **col `rho_c` di (MG) i primi `20` tick del ciclo di `mattone_rhoc` = (MG) AL BIT;** **`N` al centro a piena rampa** *(la legge sul nodo del centro di TBS a `10000`, `rho` `3338.45`)*: **`MGdoppio` `0.992703` contro la legge `0.992702`** *(Luca: circa `0.993`)*; **`MGmezzo` `0.971435` contro `0.971434`** *(Luca: circa `0.974`; il centro ha `rho 3338`, non `3000`)*.
 - ### **IL RAGGIO DI (MG)** *(dagli stati salvati, dentro `R 28`)*: **`8.249` (`k 0`), `8.569`, `9.724`, `10.607`, `10.851`, `11.268` (`k 5000`)** *(1.37 volte)*; **il picco `3350 -> 2909 -> 1897 -> 1544 -> 1510 -> 1388`; `N_eff` al centro dalla legge `1.000 -> 0.9939`.**
 - **Poi `MGdoppio`, poi `MGmezzo`** *(quando c'e' un posto col lapse)*.
+
+## 12. LA GIORNATA (Luca `2026-11-14` `00:53`): IL FERMO SCIOLTO; S7' RIVISTO DOPO IL FALLIMENTO; IL BIVIO
+
+- **Il FERMO della catena** *(sez. `9`, `dbfbaf31`)* **e' SCIOLTO dal mandato delle `00:53`, nei modi scritti li'.**
+- ### **ERRORE DEL GUARDIANO n.154:** **S7 confrontava i `1000` tick SUBITO dopo l'incollatura** *(con l'assestamento dentro)* **con gli ultimi `1000` tick gia' calmi del mattone: due misure NON omogenee.**
+- ### **LA REVISIONE S7'** *(decisa dal guardiano su delega di Luca alle `00:53`, DOPO aver visto il fallimento; scritta esattamente cosi')*: **il francobollo incollato su `L 162`, `1250` tick; i primi `250` sono l'ASSESTAMENTO** *(misurati e scritti, non giudicati)*; **il giudizio sui tick `250`-`1250`: il respiro entro il `25%` di quello del mattone negli ultimi `1000` tick della preparazione, il centro fermo entro `0.2` nodi.**
+- **A1:** **la serie del respiro di `ctrl_MG` NON e' salvata** *(`mattone.controllo` la teneva in memoria e stampava solo il finale)*: **si RIFA' il controllo di (MG) con S7' in un file NUOVO, `csv/solitone/mattone_ctrl2.py`** *(il ciclo di `mattone.controllo` COPIATO; `mattone.py` non si tocca: e' in uso da `mattone_rhoc`)*, **`1250` tick, la serie del respiro e del centro ogni `50` in `doc/referti_l2/mattone/ctrl2_<caso>_serie.npz`;** **il respiro in quattro finestre da `250` tick** *(cinque: `0`-`1250`)*.
+  - ### **DEVE** *(la riproducibilita')*: **i primi `1000` tick = il controllo S7 di prima** *(il respiro `0.1068`, lo spostamento `0.0785`, a tutte le cifre stampate)*.
+- ### **A2, IL BIVIO:** **se (MG) PASSA S7': S7' per (MU) e (MGU); poi la coppia di mattoni** *(i primi `250` tick dichiarati come assestamento nella tabella delle forze)*; **poi la riunione** *(R5, con la suite)*; **poi FERMO.** **Se NON passa: il referto col respiro per finestre e FERMO della catena** *(nessun rodaggio, nessun mattone nuovo senza Luca)*.
+- **A3:** **i mattoni con `rho_c` diverso continuano** *(`MGdoppio` in corsa dalle `00:43`, poi `MGmezzo`)*.
+- **C1:** **al piu' DUE corse col lapse alla volta fra i due rami; il principale ha la precedenza** *(il bilancio di `Grampa` prima di S7')*.
