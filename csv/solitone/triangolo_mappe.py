@@ -2,6 +2,7 @@
 r"""**LE MAPPE DEL TRIANGOLO (T-fase)** *(Luca `2026-11-14` `21:37`, (1): SOLO LETTURA, nessuna corsa; per il video del guardiano)*.
 
     python csv/solitone/triangolo_mappe.py > doc/referti_l2/mattone/triangolo_fase_mappe.txt     (e doc/referti_l2/mattone/triangolo_fase_mappe.npz)
+    python csv/solitone/triangolo_mappe.py --variante sfasati > doc/referti_l2/mattone/triangolo_sfasati_mappe.txt   (Luca 2026-11-15 00:05; senza argomento: fase, come il comando gia' girato)
 
 **Dagli stati salvati di (T-fase)** *(`E:/soliton_simulator/mattone/triangolo_fase_00500` ... `02000`, la corsa a `4944c640`)* **e dallo stato INIZIALE** *(NON salvato dalla corsa: RICOSTRUITO con le righe
 dell'incollatura di `mattone_triangolo.corsa`, i francobolli, i vertici, la somma e il prodotto, il campo di Gauss con `A = 0`; nessun tick; dichiarato)*: **tre mappe per stato, `float32`:**
@@ -26,7 +27,7 @@ import mattone_triangolo as MTR  # noqa: E402
 TICK = (0, 500, 1000, 1500, 2000)
 
 
-def main():
+def main(variante):
     import _presidio
     from solitone import toro as TO
     for m in ("mattone", "mattone_triangolo"):
@@ -35,10 +36,10 @@ def main():
     rho_c = MT.rho_c_assoluto()
     e = MT.PB.E_DECISO
     t0 = MT.G2.T0
-    serie = np.load(os.path.join(MT.DIR_REF, "triangolo_fase_serie.npz"))
-    frs = [MTR.francobollo(k) for k in MTR.VARIANTI["fase"]]
+    serie = np.load(os.path.join(MT.DIR_REF, "triangolo_%s_serie.npz" % variante))
+    frs = [MTR.francobollo(k) for k in MTR.VARIANTI[variante]]
     print("=" * 130)
-    print("LE MAPPE DEL TRIANGOLO (T-fase) (Luca 21:37, solo lettura): rho, |phi - phi0|, |E| ai tick %s; lo stato 0 RICOSTRUITO (le righe dell'incollatura di mattone_triangolo.corsa)" % (TICK,))
+    print("LE MAPPE DEL TRIANGOLO (T-%s) (Luca 21:37; 00:05 per sfasati; solo lettura): rho, |phi - phi0|, |E| ai tick %s; lo stato 0 RICOSTRUITO (le righe dell'incollatura di mattone_triangolo.corsa)" % (variante, TICK))
     print("=" * 130)
     out = {}
     with MT.scena(MT.CORSA_162, MT.T_162) as Z:
@@ -71,7 +72,7 @@ def main():
         print("### lo stato 0 ricostruito: i vertici %s; la massa %.10e (la serie della corsa a k 0: le masse dei pezzi %s)"
               % (centri, float(rho.sum()), ["%.10e" % serie["M_" + q][0] for q in "ABC"]))
         for k in TICK[1:]:
-            f = os.path.join(MT.DIR_E, "triangolo_fase_%05d.npz" % k)
+            f = os.path.join(MT.DIR_E, "triangolo_%s_%05d.npz" % (variante, k))
             with np.load(f) as d:
                 stati[k] = ({x: d[x].copy() for x in Z["chiavi"]}, d["campo_E"].copy())
                 print("### lo stato %d: %s (lo sha di psi_h nel meta %s)" % (k, f, json.loads(str(d["meta"]))["sha"].get("psi_h")))
@@ -94,7 +95,7 @@ def main():
             print("    k %4d: rho max %.4e, somma %.6e; |phi - phi0| max %.4e; |E| max %.4e; i centri %s" % (k, rho.max(), rho.sum(), dphi_nodo.max(), E_nodo.max(), [list(map(float, c)) for c in cen]))
         Z["metti"]()
     out["tick"] = np.array(TICK, dtype=np.int16)
-    f = os.path.join(MT.DIR_REF, "triangolo_fase_mappe.npz")
+    f = os.path.join(MT.DIR_REF, "triangolo_%s_mappe.npz" % variante)
     np.savez_compressed(f, **out)
     print("### %s: %.2f MB" % (f, os.path.getsize(f) / 1e6))
     print("=" * 130)
@@ -102,4 +103,5 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    a = sys.argv[1:]
+    sys.exit(main(a[a.index("--variante") + 1] if "--variante" in a else "fase"))
