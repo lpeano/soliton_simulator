@@ -1,0 +1,35 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] mattone_ctrl3.py  sha1-BYTE e91e321d  committato e pulito
+==================================================================================================================================
+S7'' (MGU; Luca 09:34, A3): il francobollo del mattone COTTO (E:\soliton_simulator\mattone\MGU_10000.npz, k 10000; S5' 0.1067) su L 162 nella scena di S162; 1250 tick, i primi 250 l'ASSESTAMENTO
+==================================================================================================================================
+### il francobollo: R_t 32.0 (l'anello del vuoto 6); 4693 nodi; il centro d'origine (40, 41); E_sol 8.272438e+06
+### incollato a [82, 80]; il salto di energia all'incollatura 9.508644e+00 (Delta 0.000044)
+    k   250  il respiro 1.4809  il picco 1.2380e+03  il centro (82.418, 79.585)  (644 s)
+    k   500  il respiro 1.4924  il picco 1.2276e+03  il centro (82.433, 79.598)  (1188 s)
+    k   750  il respiro 1.4284  il picco 1.1621e+03  il centro (82.441, 79.608)  (1735 s)
+    k  1000  il respiro 1.4225  il picco 1.1515e+03  il centro (82.450, 79.615)  (2464 s)
+    k  1250  il respiro 1.4537  il picco 1.1727e+03  il centro (82.459, 79.623)  (3262 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 1250 tick in 3262 s
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.268575e+06   8.922446e+01   3.7438e+03   3.9285e+01  8.0423e+00    8272447.064994       +0.0000       +0.0000    0.0000e+00
+        500   8.267888e+06   4.523214e+02   3.7388e+03   8.3361e+01  7.9313e+00    8272162.141061     +230.6728      -97.9893    2.9215e+01
+       1000   8.267122e+06   5.659671e+02   3.7556e+03   9.4242e+01  7.8586e+00    8271537.567525     +803.5121     -163.4450    1.0222e+02
+       1250   8.266766e+06   5.793531e+02   3.7613e+03   9.3507e+01  7.8495e+00    8271200.218693    +1142.2528     -175.3229    1.4596e+02
+### R-CONTI-3: la deriva del centro, il picco ogni 500 tick
+    k     0  il centro (82.3970, 79.5739), la deriva 0.0000 nodi; il picco 1.2674e+03; la massa 9.9548642131e+05
+    k   500  il centro (82.4330, 79.5981), la deriva 0.0318 nodi; il picco 1.2276e+03; la massa 9.9545720632e+05
+    k  1000  il centro (82.4502, 79.6154), la deriva 0.0484 nodi; il picco 1.1515e+03; la massa 9.9538420266e+05
+### S5' PER FINESTRE (la retta tolta): 0-250 0.1064 250-500 0.0967 500-750 0.0738 750-1000 0.0741 1000-1250 0.0968   (la prima e' l'ASSESTAMENTO: scritta, non giudicata)
+### IL GIUDIZIO S7'' (tick 250-1250): S5' 0.0968 contro il mattone cotto 0.1067 (il rapporto 0.907; la tolleranza 0.25); il centro 0.0395 (la soglia 0.2); il picco medio 1.2243e+03 -> 1.1712e+03 (0.0434; la soglia 0.02)
+    il residuo di Gauss: il massimo 2.917e-11 (sotto 1e-10)
+  DEVE PASSARE: S7'': S5' entro il 25% del mattone cotto                                                             PASSA   0.0968 contro 0.1067
+  DEVE PASSARE: S7'': il centro fermo entro 0.2 nodi sui tick 250-1250                                               PASSA   0.0395
+  DEVE PASSARE: S7'': la media del picco fra 250-750 e 750-1250 cambia meno del 0.02                                 ### FALLISCE   0.0434
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo                                                     PASSA   2.917e-11
+==================================================================================================================================
+ESITO: S7'' ### NON PASSA; 3/4 controlli come devono; fallite: ["S7'': la media del picco fra 250-750 e 750-1250 cambia meno del 0.02"]; 3304 s in tutto

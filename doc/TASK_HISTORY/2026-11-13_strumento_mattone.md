@@ -351,3 +351,17 @@
 - **IL CODICE: `csv/solitone/mattone_triangolo.py`** *(nuovo; usa `mattone`, `mattone_cottura.Corsa`, `conti`; la somma e il prodotto come `mattone_coppia`, riscritti per tre)*.
 - **I POSTI** *(T5)*: **al piu' TRE corse col lapse, per prova; l'ordine: (T-fase), B2, (T-sfasati); se una va a piu' di `2` volte il suo tempo da sola o la memoria scende sotto `2` GB, si torna a DUE** *(la piu' recente aspetta)*.
 - **Una cosa mia, fatta:** **la suite di `mattone_lunga.py` partita alle `14:23` l'ho FERMATA** *(per farne UNA sola coi due file nuovi)*: **ha lasciato `doc/indice/_lotti/_prova_atomicita.jsonl`** *(un file temporaneo di un collaudo, non tracciato)*: **tolto.**
+
+### 18.1 S7'' DI (MGU): NON PASSA -- FERMO DELLA CATENA DELLE `09:34` *(il codice a `cef29e39`; dalle `13:44:00` alle `14:39:06`; `doc/referti_l2/mattone/ctrl3_MGU.txt`)*
+
+- **Il francobollo di `MGU_10000`: `R_t 32.0`, `4693` nodi; incollato a `[82, 80]`; il salto di energia `+9.51`.**
+- ### **`3/4`:** **S5' `0.0968` contro `0.1067` del mattone cotto** *(`0.907`; PASSA)*; **il centro `0.0395` nodi** *(PASSA)*; **Gauss `2.917e-11`** *(PASSA)*; ### **IL PICCO MEDIO `1224.3` (tick `250`-`750`) -> `1171.2` (`750`-`1250`): `0.0434`, la soglia `0.02`: FALLISCE.**
+- **Un fatto da leggere, non una lettura:** **su `L 81` il mattone cotto perdeva circa lo `0.6%` di picco medio ogni `1000` tick** *(i pezzi `4` -> `5` della cottura)*; **qui `4.3%` in `500` tick. Il residuo dei conti `-175` a `1250`, il bordo toglie `146` di massa** *(S5' per finestre `0.1064`, `0.0967`, `0.0738`, `0.0741`, `0.0968`)*.
+- ### **FERMO DELLA CATENA** *(il mandato delle `09:34`: «FERMO SOLO SE ... S7'' fallisce»)*: **NON si fanno la coppia B2 e la riunione** *(e quindi nemmeno la voce `16`)*. ### **La cottura lunga e il triangolo NON dipendono da S7''** *(sono mandati a parte, `14:13` e `14:22`)*: **continuano.**
+
+### 18.2 LA CORREZIONE DEL TRIANGOLO (il guardiano, DECISIONE DI LUCA `14:32`); E UN MIO ERRORE
+
+- **Il riferimento isolato NON e' la cottura lunga** *(`L 81`: un'altra scatola)* **ne' S7''** *(non misura il raggio)*: **una terza corsa (T-solo), UN solo `MGU_10000` con `mattone_triangolo.py`, nella stessa scena, `2000` tick, le stesse misure; e' anche il DEVE del codice con un francobollo. Le letture T4 contro (T-solo).**
+  - ### **MIA SCELTA:** **(T-solo) al vertice A del triangolo** *(lo stesso nodo, la stessa distanza dal centro del bordo dei tre del triangolo)*.
+  - **L'ordine dei posti: (T-solo) e (T-fase) insieme appena ci sono due posti, poi B2** *(oggi FERMO: S7'')*, **poi (T-sfasati); al piu' tre col lapse.**
+- ### **ERRORE MIO:** **la chiusura di S7'' nel registro e la sez. `18.1` le avevo scritte MENTRE girava la suite** *(dalle `14:30:55`)*: **la suite le ha RIMESSE com'erano ed e' uscita con `1`** *(«LA SUITE HA SPORCATO 3 FILE»; i `67/67` passavano)*. **E' la regola nella memoria «niente file tracciati durante la suite»: violata. Riscritte entrambe adesso; la suite si rifa' sul codice finale.**
