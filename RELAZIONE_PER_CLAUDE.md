@@ -25676,3 +25676,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **IL TIMBRO CAMBIATO** *(`csv/_presidio.py`, una funzione nuova `_normalizza`: `CRLF -> LF`)*: **«modificato» si confronta DOPO aver normalizzato i fine riga;** **i byte grezzi diversi ma il contenuto uguale si DICONO** *(«committato e pulito (i fine riga diversi dal blob ...)»)*; **lo sha1 stampato resta quello dei byte grezzi.** **Il collaudo nuovo `csv/test_timbro_eol.py`** *(su un repo git temporaneo: CRLF pulito, un byte cambiato modificato)*.
 - ### **ATTENZIONE: e' il rovescio di una scelta del `2026-09-16`** *(il commento in `timbro`: «confronto sui BYTE ... la trappola misurata il 2026-09-16»)*: **deciso da Luca.**
 - **Il collaudo del timbro** *(`doc/referti_l2/timbro_eol.txt`, il codice a `8435d454`)*: **`4/4`: il file LF pulito; in CRLF pulito con `solo_fine_riga`; un byte cambiato davvero MODIFICATO, in CRLF e in LF** *(i DEVE FALLIRE falliscono)*.
+
+### 2026-11-14 01:20 -- IL BILANCIO DELLE ENERGIE: `conti.py` E IL SUO COLLAUDO `3/3` *(la voce `15`, Luca `23:47`, `00:53`)*
+
+- **Il codice** *(`db57e4df`, suite `67/67`)*: **`csv/solitone/conti.py`** *(i pezzi B1 coi conti per nodo esistenti)*, **`csv/solitone/bilancio_corsa.py`** *(`Grampa` e `(0)_2000` rifatti con gli stati ogni `250`)*, **`csv/solitone/test_conti.py`.**
+- **Il collaudo** *(`doc/referti_l2/bilancio/collaudo_conti.txt`)*: **`3/3`: la somma dei pezzi = il totale ESATTA** *(C35-pi a `60000`: la materia A `8.462e+06`, B `8.067e+06`, fuori `66.3`; il vuoto A `2890`, B `2782`, lontano `18.1`; `tot - pezzi` `-4.7e-11`, l'arrotondamento di `em = cost + cin`)*; **`K + V` al bit con la serie di (MGU) a `5000`: `3.975213299381323`;** **DEVE FALLIRE con `E` cambiato di `1e-9`: fallisce** *(`3.975213299384365`)*.
+- **Poi:** **`Grampa` e `(0)_2000` del bilancio** *(col lapse il primo, in coppia con `MGmezzo` del ramo: C1)*.

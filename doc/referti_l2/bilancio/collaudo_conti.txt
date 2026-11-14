@@ -1,0 +1,11 @@
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] test_conti.py  sha1-BYTE 6e16ca0a  committato e pulito
+========================================================================================================================
+IL COLLAUDO DI conti.py
+========================================================================================================================
+### C35-pi a 60000: la materia A 8.461984e+06 B 8.067373e+06 fuori 6.631776e+01; il vuoto A 2.890184e+03 B 2.782040e+03 lontano 1.810571e+01; tot 1.6535113140e+07; tot - pezzi (l'arrotondamento di em = cost + cin) -4.70e-11
+  DEVE PASSARE: la somma dei pezzi = il totale ESATTA (razionale)                                                    PASSA   
+  DEVE PASSARE: K + V di conti.pezzi = la serie di (MGU) a k 5000 AL BIT (strumento-mattone:doc/referti_l2/mattone/M PASSA   3.975213299381323 contro 3.975213299381323
+  DEVE FALLIRE: lo stesso col campo E cambiato di 1e-9 relativo nell'arco piu' grande                                ### FALLISCE   3.975213299384365 contro 3.975213299381323
+========================================================================================================================
+ESITO: 3/3 controlli come devono; fallite: 0 []
