@@ -60,3 +60,10 @@
 1. **Questa carta; la regola nella ROTTA e nella skill; la voce `15` nella coda** *(adesso)*.
 2. **Quando arriva la voce `15`:** **`csv/solitone/conti.py`, il collaudo, la suite, il commit; l'esito `FINITO_SENZA_CONTI` nel modulo del registro.**
 3. **Il bilancio di `Grampa` e di `(0)_2000`** *(rifatti con gli stati ogni `250`)*; **il referto con le letture B4; FERMO.**
+
+## 6. IL CODICE, ARRIVATA LA VOCE `15` *(Luca `2026-11-14` `00:53`, B1-B2: subito)*
+
+- **`csv/solitone/conti.py`:** **i pezzi per solitone: i nodi entro `R_PEZZO = 28` dal centro PIU' VICINO** *(una partizione: ogni nodo in un pezzo; i due dischi si toccano, `d ~ 37.6`)*, **fuori: `-1`;** **la somma ESATTA dei pezzi con `fractions.Fraction`** *(il DEVE «al bit» della divisione)*; ### **`tot` per nodo e' `em + vuo + leg` e `cost + cin = em` solo a meno dell'arrotondamento: la differenza `tot - pezzi` si STAMPA** *(dichiarato)*; **`scena` COPIATA da `mattone.scena`** *(il ramo mattone non e' ancora riunito)*.
+- **`csv/solitone/bilancio_corsa.py`:** **`Grampa` e `(0)_2000` rifatti** *(il ciclo di `p6_bracci` COPIATO; `rho_c` dal meta di `Grampa.npz`)*, **la massa e `tot` prima e dopo il bordo a ogni tick, lo stato ogni `250` su E:; DEVE: `d` e `M` = `p6_bracci` AL BIT.** ### **Il costo: due conti per nodo a ogni tick** *(per l'energia tolta dal bordo)*: **la corsa piu' lenta dei bracci** *(da misurare)*.
+- **Il residuo:** **`tot(t) - tot(0) + l'energia tolta dal bordo`** *(Grampa non ha U)*; **la variazione di `tot` DENTRO ogni tick** *(senza il bordo)*: **nella rampa contro il rumore del dopo-rampa** *(il DEVE FALLIRE)*.
+- **`csv/solitone/test_conti.py`:** **`K + V` al bit con la serie di (MGU) del ramo** *(`git show strumento-mattone:...`)* **sullo stato `MGU_05000.npz`.**
