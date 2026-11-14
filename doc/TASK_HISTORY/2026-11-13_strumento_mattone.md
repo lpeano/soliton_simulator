@@ -373,3 +373,30 @@
 - **Il codice** *(`mattone_triangolo.py`, non ancora committato: la suite fermata alle `14:5x` e rifatta)*: **`doc/referti_l2/mattone/cottura_L162_MGU.json`** *(il file, `k`, COTTO, le due medie)*.
 - ### ⚠ **Per B2, un pezzo da scrivere DOPO:** **`mattone_coppia.py` ritaglia il francobollo dalla scena di TBS (`L 81`); il mattone su `L 162` va ritagliato nella scena di S162** *(lo stesso `mattone.ritaglia`, il vuoto fresco al tick dello stato)*: **un file nuovo o un argomento, quando (T-solo) e' cotto.**
 - **Nella voce `17` (i cluster), sul principale: «i mattoni si cuociono SUL TORO dove si usano».** **(T-fase) e (T-sfasati) restano come deciso** *(da `MGU_10000`, cotto su `L 81`)*.
+
+## 19. LA CONVERGENZA: QUANTO CONTA LA SCATOLA (Luca `2026-11-14` `15:20`, C1-C8) E I POSTI (Luca `15:22`) -- LA CARTA C3, PRIMA DEL CODICE
+
+- **Luca `15:20`: lo stesso mattone su tori di grandezza diversa, SUBITO e IN PARALLELO, senza fermare niente.** **`15:22`: il PC e' dedicato; tutte le corse in parallelo, col lapse o senza, sui due rami; L'UNICO limite: i processi di calcolo aperti non oltre i core FISICI meno uno, la memoria libera sopra `2` GB; l'ordine di chi aspetta: B2** *(quando (T-solo) e' cotto)*, **(T-solo) e (T-fase), la convergenza (A e B), (T-sfasati), il resto; il tempo per tick si SCRIVE ma non ferma; il tetto col lapse `28800` s; i thread NON si toccano.**
+- ### **LA MACCHINA** *(letta con `psutil`, alle `15:2x`)*: **`6` core fisici, `12` logici; `34.1` GB, `15.8` liberi:** **AL PIU' `5` PROCESSI DI CALCOLO APERTI.**
+- **Il tetto a `28800` s:** **un commit a se'** *(`mattone_lunga.py`, `mattone_triangolo.py`)*, **con i file di LAVORO delle corse su `E:/soliton_simulator/mattone/lavoro`** *(il json a ogni pezzo e le serie: un non tracciato sotto `doc/` blocca i commit e le suite per ore; si copiano nel repo a corsa chiusa)*.
+
+### 19.1 LA CARTA C3: LA SCENA DI `L 243`, DAL CODICE
+
+- **`mattone.scena(corsa, t)` vuole una CORSA di `corsa_accensione`** *(lo stato salvato a `t`, il suo sha, il suo bordo)*: **per `L 243` NON ce n'e'.**
+- **Le righe che servono sono tutte FUORI dal nucleo:** **`corsa_accensione.con_L(L)`** *(mette `V.L` in memoria)*, **`_vuoto_vivo_B.scena`** *(costruisce il toro di lato `V.L`: `DC.nuovo`)*, **la forma, `V.partenza`, `protetto.e_K`, `_dove_va_la_materia.autovettori`, `corsa_accensione.vuoto_della_corsa`** *(il vuoto F3 dalle fasi della corsa: `fondo_con_fasi(inc, L, ...)`)*; **`c(t)` dalla tabella `fase_F3.npz`** *(dipende da `K`, non da `L`)*; **il bordo: `bordo.g_estremita(z, c1, c2, R_A, g_max)`, con `R_B` = la meta' del periodo del toro.**
+- ### **IL PIANO:** **`convergenza.scena_L(L, R_A)` = le righe di `mattone.scena` nello stesso ordine, SENZA lo stato della corsa** *(lo stato della scena e' quello che `V.scena` costruisce; si sostituisce col vuoto fresco)*; **`K`, il vuoto F3 e `g_max` dalla corsa S162.** **Nessun file del nucleo.**
+- ### **IL BORDO DI `L 243`, MIO:** **il centro `(121, 121)`; `R_A = 88.0`: la STESSA fascia fra `R_A` e `R_B` di S162** *(`81 - 47.5 = 33.5`; `R_B(243) = 121.5`)*: **la zona libera cresce col toro, la fascia che assorbe no.**
+- ### ⚠ **UN FATTO CHE SPOSTA LA DOMANDA:** **su `L 81` (TBS) il bordo comincia a `R_A = 28` dal CENTRO DEL MATTONE** *(`bordo.R_A`)*, **e il francobollo ha `R_t = 32`: la coda del mattone cotto su `L 81` sta DENTRO l'assorbitore.** **Su S162 l'anello comincia a `30` nodi dal solitone dal lato vicino e a `65` da quello lontano.** **Quindi «la scatola» e' DUE cose: le copie periodiche E la distanza dall'assorbitore; la convergenza di oggi le cambia INSIEME** *(lo scrivo; separarle sarebbe un'altra corsa)*.
+- **COSA NON SO:** **se `DV.autovettori` e `V.partenza` reggono su `L 243`** *(`59049` nodi)* **e quanta memoria chiedono; lo dice la corsa: se non si costruisce, FERMO SOLO di `L 243`.**
+
+### 19.2 IL PROGETTO *(`csv/solitone/convergenza.py`, nuovo; nessun file esistente toccato)*
+
+- **`deve81`** *(il DEVE del mandato, LETTO COSI', mio)*: **«(MU) su `L 81` incollato su `L 81` nella sua scena»: lo stato `MU_05000` CARICATO COM'E'** *(un francobollo incollato non ridarebbe mai la cottura al bit: il raccordo e il campo rifatto con `A = 0`)*; **`50` tick col ciclo di `convergenza.py` = `50` tick di `mattone_cottura.Corsa` AL BIT** *(esclusa `h_int`)*.
+- **`corsa --mondo U|GU --L 162|243`:** **il mattone cotto su `L 81`** *((MU) `MU_05000`, (MGU) `MGU_10000`)* **al VERTICE A del triangolo** *(lo stesso posto di (T-solo))*, **il vuoto fresco al tick `60000`, Gauss con `A = 0`, `2000` tick.** **Le misure C4.** **(MGU) su `L 162` E' (T-solo): non si rifa'.**
+- **I punti di `L 81`:** **le cotture lunghe di (MU) e (MGU)** *(i primi `2000` tick dalla partenza)*.
+- **`referto`** *(C5)*: **`D1` = la deriva relativa del picco per `500` tick sui tick `250`-`2000` (la retta); `D2` = il picco medio di arrivo** *(MIO: gli ultimi `500` tick)*; **`|D(243) - D(162)| / |D(162) - D(81)|`: sotto `0.3` CONVERGE, sopra `0.7` NON CONVERGE, in mezzo INDECISO; per (MU) e (MGU).**
+- ### **DEVE:** **`deve81`; Gauss sotto `1e-10`; su `L 243` il vuoto fresco: `|phi_j|^2 = 1` fuori dal bordo entro `1e-12` e lo stesso disegno ogni `3` nodi entro `1e-12`.**
+
+### 19.3 I POSTI *(`15:22`)*
+
+- **Adesso:** **(T-solo), (T-fase), la cottura lunga di (MGU) e di (MU): `4` processi.** **Quando `convergenza.py` e' committato: la parte A su `L 162`** *(il quinto)*; **la parte A e la B su `L 243` aspettano un posto** *(nell'ordine: prima della cottura lunga, che e' «il resto», ma le corse gia' aperte NON si fermano)*.
