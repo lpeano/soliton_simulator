@@ -135,3 +135,13 @@
 - **(MG/2): NESSUN collasso** *(il picco non cresce: si allarga di piu', `A = 0.691`)*.
 - **Un fatto, non una lettura:** **raddoppiando `rho_c` il lapse al centro alla fine si dimezza circa** *(`1 - N`: `0.0061`, `0.0039`, `0.0081`)* **mentre `A` cambia meno** *(`0.586`, `0.451`, `0.691`)*: **l'allargamento riduce `rho` e quindi il lapse che il solitone sente.**
 - ### **FERMO per questa voce** *(il mandato delle `23:22`)*. **Il resto del ramo continua:** **S7' di (MG).**
+
+## 14. S7' DI (MG): NON PASSA -- FERMO DELLA CATENA (A2) *(il codice a `24c6dfd2`; dalle `02:23:54` alle `03:07:21`, in coppia con `bilancio-Grampa`)*
+
+- **S7' dichiarato come revisione decisa DOPO il fallimento di S7** *(Luca `00:53`; sez. `12`)*.
+- **Il francobollo come in S7** *(`R_t 32`, `4693` nodi, incollato a `[80, 80]`; il salto di energia `+11.18`)*; **`1250` tick in `2573` s.**
+- ### **DEVE, la riproducibilita': PASSA** *(i primi `1000` tick: il respiro `0.1068`, il centro `0.0785`, come S7 a `4` cifre)*.
+- ### **IL RESPIRO PER FINESTRE DI `250` TICK:** **`0`-`250` `0.0749`** *(l'assestamento, non giudicato)*; **`250`-`500` `0.0677`; `500`-`750` `0.0792`; `750`-`1000` `0.0635`; `1000`-`1250` `0.0425`;** **il centro sempre entro `0.024` nodi per finestra.**
+- ### **IL GIUDIZIO S7'** *(tick `250`-`1250`)*: **il respiro `0.1193` contro il mattone `0.0711`: il rapporto `1.677`, la tolleranza `25%`: NON PASSA;** **il centro `0.0839`** *(passa)*.
+- ### **UN'OSSERVAZIONE, che NON cambia il verdetto** *(guardiano, per Luca)*: **finestra per finestra il respiro e' simile o PIU' PICCOLO di quello del mattone, e cala nell'ultima** *(`0.0425`)*; **sui `1000` tick e' grande perche' il LIVELLO MEDIO del rapporto si sposta piano** *(`1.42` -> `1.51`, ogni `250` tick)*: **un'oscillazione lenta, piu' lunga di `250` tick. Il mattone su `L 81` misurava il picco-picco degli ultimi `1000` tick: le due misure contano la stessa cosa solo se l'oscillazione lenta e' uguale nei due tori.**
+- ### **FERMO DELLA CATENA** *(il bivio A2: «se (MG) NON PASSA S7': referto col respiro per finestre e FERMO; nessun rodaggio, nessun mattone nuovo senza Luca»)*: **NON si fanno S7' per (MU) e (MGU), NON la coppia, NON la riunione.**
