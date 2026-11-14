@@ -1,0 +1,16 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] geometria_nascosta.py  sha1-BYTE 15321405  committato e pulito
+==================================================================================================================================
+G4, LA RIPARTENZA (MGU, U RICOSTRUITO dal campo (mio); Luca 11:26): da MGU_04000 1000 tick col tick di mattone.Campi, contro MGU_05000 chiave per chiave
+==================================================================================================================================
+### U ricostruito dal campo salvato: max |U - I| 1.528e-03
+### 1000 tick in 447 s
+    contro E:\soliton_simulator\mattone\MGU_05000.npz: 8 chiavi, diverse 1 ['h_int']
+        h_int      la differenza relativa massima 2.163e+02
+  DEVE PASSARE: (MGU, U ricostruito) la ripartenza da MGU_04000 per 1000 tick = MGU_05000 AL BIT                     ### FALLISCE   diverse: ['h_int']
+==================================================================================================================================
+ESITO: 0/1 controlli come devono; fallite ['(MGU, U ricostruito) la ripartenza da MGU_04000 per 1000 tick = MGU_05000 AL BIT']; 455 s in tutto

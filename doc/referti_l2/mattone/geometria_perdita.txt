@@ -1,0 +1,41 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] geometria_nascosta.py  sha1-BYTE 15321405  committato e pulito
+==================================================================================================================================
+G3, LA PERDITA (Luca 11:26): da MGU_05000 su L 81, G+U a campi pieni, 20 tick; (oggi), (oggi+contatore), (R) U rimesso dopo ogni tick, (C) le copie con U = I
+==================================================================================================================================
+### la scena: 19683 archi; max |U - I| 0.0
+### (oggi) 20 tick in 9 s; max |U - I| alla fine 2.241e-03; max |e A| 2.241e-03; il contatore --
+### (oggi+contatore) 20 tick in 9 s; max |U - I| alla fine 2.241e-03; max |e A| 2.241e-03; il contatore {'chiamate': 20, 'giri': 80, 'chiamate_U': 19, 'giri_U': 76, 'max_U': 0.0022402171589438907}
+### (R) 20 tick in 9 s; max |U - I| alla fine 0.000e+00; max |e A| 2.241e-03; il contatore {'chiamate': 20, 'giri': 80, 'chiamate_U': 0, 'giri_U': 0, 'max_U': 0.0}
+### (C) 20 tick in 9 s; max |U - I| alla fine 2.241e-03; max |e A| 2.241e-03; il contatore --
+----------------------------------------------------------------------------------------------------------------------------------
+### I CONFRONTI CON (oggi), chiave per chiave (geo_U compreso dove ha senso):
+    (oggi+contatore): 9 chiavi, diverse 0 []
+    (R): 8 chiavi, diverse 7 ['Lambda', 'campo_A', 'campo_E', 'h_int', 'phi_h', 'psi_h', 'rho']
+        Lambda     la differenza relativa massima 2.136e-04
+        campo_A    la differenza relativa massima 6.184e-07
+        campo_E    la differenza relativa massima 1.855e-04
+        h_int      la differenza relativa massima 3.162e-04
+        phi_h      la differenza relativa massima 8.703e-04
+        psi_h      la differenza relativa massima 2.711e-04
+        rho        la differenza relativa massima 2.471e-04
+    (C): 9 chiavi, diverse 8 ['Lambda', 'campo_A', 'campo_E', 'geo_U', 'h_int', 'phi_h', 'psi_h', 'rho']
+        Lambda     la differenza relativa massima 1.932e-07
+        campo_A    la differenza relativa massima 1.420e-10
+        campo_E    la differenza relativa massima 7.030e-08
+        geo_U      la differenza relativa massima 3.181e-13
+        h_int      la differenza relativa massima 4.128e-07
+        phi_h      la differenza relativa massima 9.786e-07
+        psi_h      la differenza relativa massima 1.746e-06
+        rho        la differenza relativa massima 3.816e-07
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: lo strumento senza variante (oggi+contatore) = mattone.Campi.tick (oggi) AL BIT, 20 tick             PASSA   diverse: []
+  DEVE PASSARE: il contatore conta: in (R) le copie del punto fisso vedono sempre U = I (zero chiamate con U diverso PASSA   {'chiamate': 20, 'giri': 80, 'chiamate_U': 0, 'giri_U': 0, 'max_U': 0.0}
+### IL CONTATORE di (oggi): 20 chiamate di cs_al_centro, 19 con U != I (76 giri su 80); max |U - I| visto dalle copie 2.240e-03
+==================================================================================================================================
+### IL BIVIO DEL GUARDIANO: (R) = (oggi) al bit: False; il contatore di (oggi) zero: False -> (b) PERDITA VERA
+ESITO: 2/2 controlli come devono; fallite []; 44 s in tutto

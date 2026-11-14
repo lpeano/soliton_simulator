@@ -266,3 +266,28 @@
 2. `geometria_nascosta.py`, l'inventario, la suite, commit;
 3. il registro; `perdita` e `ripartenza` (MG, MU, MU ricostruita) insieme *(due col lapse al piu')*; poi MGU ricostruita;
 4. il bivio: (a) la cottura col caricamento che ricostruisce `U`; (b) il `peso`, il referto, FERMO.
+
+### 16.5 LA CORREZIONE DEL BIVIO (il guardiano, errore n.159; DECISIONE DI LUCA `12:00`), arrivata con le prove in corsa
+
+- **(R) cambia ANCHE il primo trasporto della materia del tick vero** *(il passo `5`, lo schema sfalsato: sez. `16.1`)*: **«(R) = (oggi)» NON puo' essere il criterio.**
+- ### **IL BIVIO NUOVO:** **(a') se la ripartenza di (MGU) con `U` RICOSTRUITO passa AL BIT: la cottura riparte SUBITO col caricamento che ricostruisce `U` e lo schema di OGGI** *(le copie come oggi, come tutte le corse G+U fatte)*, **e la catena delle `09:34` (con `09:38`) continua.**
+- **NON bloccante, nel referto come informazione: (C) contro (oggi) dopo `20` tick, per chiave; il peso** *(`200` tick di `GUrampa`, oggi contro C)*. **Che cosa devono vedere le copie** *(`I`, il campo del tick prima, quello del tick corrente)* **resta a Luca, per le corse future.**
+- **FERMO solo se la ripartenza con `U` ricostruito NON passa al bit, o un DEVE non va come deve.**
+- ### **IL PROGETTO DEL RAMO (a'), mio:** **`mattone_cottura.py` NON si tocca** *(e' importato da `geometria_nascosta`, in corsa)*: **un file NUOVO `csv/solitone/mattone_cottura_U.py` con un `carica` che dopo il caricamento chiama `_u1_prototipo.scrivi_U(mot, campo)`** *(lo stesso della prova `--ricostruisci`)* **e che rimette questo `carica` al posto di quello di `mattone_cottura` IN MEMORIA prima di `cuoci`** *(dichiarato)*. **Il DEVE della ripartenza dentro `cuoci` diventa la prova.** **S7'' e la coppia NON ne hanno bisogno:** **partono da un francobollo col campo rifatto con `A = 0`, dove `exp(i e A) = I` = l'`U` della scena.**
+
+### 16.6 I RISULTATI DI G3 E G4 *(il codice a `947cf45e`; dalle `11:55:14` alle `12:06:18`; `doc/referti_l2/mattone/geometria_*.txt`)*
+
+- **G3** *(`2/2`: lo strumento senza variante = `mattone.Campi.tick` al bit; il contatore di (R) zero)*: ### **il contatore di (oggi): `19` chiamate di `cs_al_centro` su `20` con `U != I`** *(`76` giri su `80`; tutte tranne la prima dopo il caricamento, come previsto in `16.1`)*; **`max |U - I|` visto dalle copie `2.24e-03`.**
+  - **(R) contro (oggi) dopo `20` tick: diverse `7` chiavi** *(`psi_h` `2.7e-04` relativo, `phi_h` `8.7e-04`, `campo_E` `1.9e-04`)* **-- non e' un criterio** *(n.159)*.
+  - ### **(C) contro (oggi), L'INFORMAZIONE CHIESTA:** **`psi_h` `1.75e-06`, `phi_h` `9.8e-07`, `rho` `3.8e-07`, `Lambda` `1.9e-07`, `campo_E` `7.0e-08`, `campo_A` `1.4e-10` relativo dopo `20` tick.**
+- **G4, le ripartenze `04000` -> `05000`:**
+
+| il caso | le chiavi diverse | |
+|---|---|---|
+| (MG) | **SOLO `h_int`** *(`2.2e+02` relativo)* | |
+| (MU) | `Lambda`, `campo_A`, `campo_E`, `phi_h`, `psi_h`, `rho` | **come previsto in `16.1`** |
+| (MU), `U` ricostruito | **NESSUNA: UGUALE AL BIT** | **lo stato nascosto della U e' SOLO `U`** |
+| (MGU), `U` ricostruito | **SOLO `h_int`** *(`2.2e+02` relativo)* | |
+
+- ### **`h_int`, LETTO DAL CODICE:** **`motore.elicita(st)` lo RISCRIVE per intero da `psi_h` e `geo.n`** *(`h.fill(0)`, poi la somma)*, **e lo chiamano un passo del tick** *(`motore.py`, la moneta)* **e l'energia pesata** *(`energia_pesata.py`)*; **`csv/_stabilita_lineare.py` lo elenca fra le CACHE.** **`prepara` misurava l'energia ogni `50` tick, quindi anche a `5000` PRIMA di salvare: lo `h_int` salvato e' quello della MISURA; la ripartenza di G4 non misura l'energia, e il suo `h_int` e' quello dell'ultimo passo del tick.** ### **Il fatto: dopo `1000` tick tutte le altre chiavi sono uguali AL BIT: `h_int` NON porta stato.** *(Nella cottura delle `10:11` `h_int` NON era fra le diverse: `Corsa` chiama i conti a ogni tick.)*
+- ### **IL BIVIO (a') ALLA LETTERA NON E' SODDISFATTO** *(«passa AL BIT»: `h_int` differisce)*. **La mia lettura: nessun altro stato nascosto.** ### **Decidere che `h_int` non conta e' di Luca: la cottura NON riparte.** **Il peso** *(«in ogni caso, non bloccante»)* **si fa.**
