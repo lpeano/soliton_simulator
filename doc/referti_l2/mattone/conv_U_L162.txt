@@ -1,0 +1,35 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE 36031d91  committato e pulito
+==================================================================================================================================
+LA CONVERGENZA (MU su L 162; Luca 15:20): il mattone E:\soliton_simulator\mattone\MU_05000.npz (cotto su L 81, il picco 3.2978e+03) al vertice A, sul vuoto fresco al tick 60000; 2000 tick; il tetto 28800 s
+==================================================================================================================================
+### la scena: L 162, 26244 nodi; il bordo: il centro [98.87378070359784, 81.36252985852764], R_A 47.500, g_max 0.03; il vertice A [112, 106] (a 21.3519 dal centro del bordo)
+### IL BORDO (Luca 15:49): R_A 60 attorno al centro del bordo della scena (quello della scena 47.500)
+### incollato a [112, 106] (Delta 0.000544); il picco SUBITO DOPO l'incollatura 3.2978e+03 (su L 81 3.2978e+03); il residuo di Gauss iniziale 2.088e-13
+    k    250  il picco 3.2150e+03  il raggio 8.4667  la massa 9.9648032982e+05  (428 s)
+    k    500  il picco 3.1755e+03  il raggio 8.5121  la massa 9.9647595102e+05  (870 s)
+    k    750  il picco 3.0970e+03  il raggio 8.5637  la massa 9.9646644361e+05  (1228 s)
+    k   1000  il picco 2.9406e+03  il raggio 8.6056  la massa 9.9645143464e+05  (1580 s)
+    k   1250  il picco 3.0794e+03  il raggio 8.6294  la massa 9.9643595614e+05  (1925 s)
+    k   1500  il picco 2.9606e+03  il raggio 8.6268  la massa 9.9641956952e+05  (2308 s)
+    k   1750  il picco 3.0313e+03  il raggio 8.5997  la massa 9.9640345409e+05  (2756 s)
+    k   2000  il picco 3.0631e+03  il raggio 8.5750  la massa 9.9638907750e+05  (3200 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.279675e+06   7.040918e-02   2.8468e+03  -5.5835e-01  1.0598e+01    8282521.258741       -0.0000       -0.0000    0.0000e+00
+        500   8.279473e+06   1.643017e+02   2.8519e+03   2.4575e+01  1.0532e+01    8282514.229874      +33.7058      +15.4634    4.4220e+00
+       1000   8.279187e+06   2.659822e+02   2.8526e+03   3.3085e+01  1.0450e+01    8282338.938903     +219.0966      +13.4281    2.8938e+01
+       1500   8.278955e+06   2.546054e+02   2.8586e+03   3.3831e+01  1.0425e+01    8282102.073159     +457.2379      +12.7267    6.0804e+01
+       2000   8.278741e+06   2.394266e+02   2.8554e+03   3.4607e+01  1.0466e+01    8281870.686710     +688.1681      +14.7151    9.1296e+01
+### S5' (le ultime quattro finestre): 1000-1250 0.1029 1250-1500 0.0778 1500-1750 0.1010 1750-2000 0.0636 -> 0.1029
+### la massa uscita dal bordo in tutto 9.129556e+01
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo                                                     PASSA   il massimo 1.210e-12
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite []; finita; 3251 s in tutto

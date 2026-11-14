@@ -421,3 +421,9 @@
 - **La corsa col bordo `28 -> 81` NON era partita** *(in fila dietro a `conv-U-L162`)*: **niente da fermare.**
 - ### **IL CODICE, MIO:** **`convergenza.py` e' IN USO da `conv-U-L162`: non si tocca. Un file NUOVO `csv/solitone/convergenza_b28.py`: sostituisce `bordo.g_estremita` IN MEMORIA** *(le sue righe con `R_B = 40.5` dato)* **e chiama `convergenza.main` con `--bordo28`.** **La riga di `convergenza.py` che stampa «`R_B` ... la meta' del periodo» stampa il valore del toro: il bordo VERO lo stampa `convergenza_b28.py` prima.**
 - **I posti:** **la suite di `convergenza_b28.py` e la corsa aspettano un posto** *(oggi `5` aperti)*; **la corsa prima del DEVE su `L 81`.**
+
+### 19.7 LA CONVERGENZA, (MU) SU `L 162` COL BORDO DA `60`: FINITA *(il codice a `4944c640`; dalle `16:26:49` alle `17:21:02`; `doc/referti_l2/mattone/conv_U_L162.txt`)*
+
+- **Il vertice A `[112, 106]` a `21.35` dal centro del bordo; il picco subito dopo l'incollatura `3297.8`** *(= su `L 81`)*; **Gauss `1.21e-12`** *(PASSA)*.
+- **Il picco ogni `250` tick: `3215.0`, `3175.5`, `3097.0`, `2940.6`, `3079.4`, `2960.6`, `3031.3`, `3063.1`; il raggio `8.467` -> `8.629` (`1250`) -> `8.575` (`2000`); la massa uscita dal bordo `91.3`; S5' `0.1029`.**
+- **Una lettura NON fatta qui:** **il confronto con (MU) su `L 81` e su `L 243` sta nel referto C5, quando ci sono tutti e tre i punti.**
