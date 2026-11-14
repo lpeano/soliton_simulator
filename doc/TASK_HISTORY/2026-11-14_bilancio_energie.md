@@ -78,3 +78,34 @@
 - ### **LE LETTURE B4** *(descrittive)*: **in `Grampa` `tot` scende di `-1124` nella rampa, poi di altri `-3463` fra `500` e `1000`, di `-736` fra `1000` e `1250`, poi resta circa ferma** *(`-5322` a `1250`, `-5275` a `2000`)*: **la perdita e' nell'ALLARGAMENTO** *(`500`-`1250`)*. **Il vuoto attorno ai due solitoni CRESCE** *(A `2890 -> 3393`, B `2782 -> 3295`)*; **la materia di A sale, quella di B scende** *(`+38900`, `-45900`)*.
   - ### **IL MOTO:** **le velocita' dei centri crescono dopo `1250`** *(`4.0e-04` e `4.3e-04` a `2000`)*, **ma la stima `M_in v^2 / 2` vale `-2.9`** *(con l'inerzia negativa)*: ### **l'energia persa nell'allargamento** *(circa `5000`)* **NON torna come moto secondo quella stima** *(mille volte piu' piccola)*. **La stima e' un'IPOTESI dichiarata: con un'altra inerzia il conto cambierebbe.**
 - ### **FERMO per la voce `15`** *(un DEVE non va come deve; e il mandato: FERMO dopo il referto)*. **Le domande per Luca:** **(1) quale energia il tick conserva tick per tick** *(e quindi su che cosa fare il bilancio)*; **(2) la soglia della massa** *(`1e-12` su `2000` tick o una stima dell'arrotondamento accumulato)*; **(3) come misurare il lavoro della rampa** *(un confronto con lo stesso braccio senza rampa? la variazione della SOLA parte del lapse?)*.
+
+## 8. LA CHIUSURA DELLA VOCE `15` (Luca `2026-11-14` `09:34`, C1-C6): LE PREMESSE E IL PROGETTO, PRIMA DEL CODICE
+
+- **Il FERMO della voce `15`** *(`003dd8de`)* **e' SCIOLTO dal mandato delle `09:34`.** **Solo lettura delle serie gia' salvate, nessuna corsa.**
+- ### **L'ERRORE DEL GUARDIANO n.157:** **la tolleranza della massa `1e-12` e' troppo stretta per una somma di circa `1e5` numeri in doppia precisione.** **C1: `1e-11` relativo, RIVISTA DOPO il risultato** *(dichiarato cosi' nel referto)*.
+
+### 8.1 LE PREMESSE DAL CODICE *(cosa credo, e cosa NON so)*
+
+- **`doc/referti_l2/bilancio/<braccio>_corsa.npz` ha, per OGNI tick, `E_pt = (tot prima del bordo, tot dopo)` e `M_pt` uguale per la massa** *(`bilancio_corsa.corsa`)*: **bastano per la media su `100` tick, il residuo, il rumore e la differenza fra i due bracci; nessuno stato in piu'.**
+- **`tot(0)` e la massa all'inizio vengono dallo stato `0` su E:** *(`bilancio/<braccio>_00000.npz`, coi conti per nodo, come il referto)*.
+- **I pezzi per solitone ci sono solo ogni `250` tick** *(gli stati)*: **NON si possono mediare su `100` tick; restano istantanei, dichiarato.**
+- ### **COSA NON SO:** **se il «rumore» di `(0)_2000` mediato su `100` tick e' piccolo** *(se l'oscillazione e' veloce rispetto a `100` tick la media la toglie; se e' lenta, no)*. **Lo dice il numero.**
+
+### 8.2 IL PROGETTO *(`csv/solitone/bilancio_chiusura.py`, nuovo; `bilancio_corsa.py` resta com'e', il suo referto si rigira al suo commit)*
+
+- **C2:** **il residuo per tick `r(k) = tot(k) - tot(0) + l'energia tolta dal bordo fino a k`; la MEDIA in `20` finestre di `100` tick** *(`1`-`100`, ..., `1901`-`2000`)*, **per i due bracci.** ### **MIA SCELTA, il rumore di UNA media:** **`s_w` = la deviazione standard delle `20` medie di `(0)_2000`** *(senza lapse; la deriva, se c'e', finisce nel rumore: dichiarato)*.
+- **C3:** **il lavoro dell'accensione, finestra per finestra: `D_w` = la media di `Grampa` meno quella di `(0)_2000`.** ### **IL DEVE FALLIRE riletto sui tick `500`-`1250`** *(dove avviene; dichiarato come riletto DOPO il risultato)*: **`W = D(1250) - D(500)`, con `D(c)` la media sui tick `c - 49` ... `c + 50`; il rumore di `W` = `2 s_w`** *(due finestre, ciascuna differenza di due bracci: MIA SCELTA, dichiarata)*; **DEVE FALLIRE: «`|W|` entro `3` volte il rumore».**
+- **C1:** **la massa di `(0)_2000`: `Delta M` + la massa tolta dal bordo, entro `1e-11` relativo a ogni tick** *(il DEVE riletto; tick per tick, NON mediato: la massa si conserva per costruzione)*.
+- **C4:** **il referto chiude con la frase del mandato: il bilancio non risolve l'energia del moto** *(sotto il rumore)*; **la domanda forza/colpetto passa alla coppia B1** *(il ramo mattone)*.
+- **C5:** **R-CONTI: l'energia nelle tabelle dei conti e' la MEDIA su `100` tick** *(una riga nella ROTTA e nella skill `registro-corse`)*.
+- **C6:** **il paragrafo del raggio va sul ramo mattone** *(il referto `rhoc.txt` e' li': sez. `15` del task history del ramo)*.
+
+### 8.3 COSA MI FAREBBE FERMARE
+
+- **la massa oltre `1e-11`; il DEVE FALLIRE che passa** *(`W` dentro il rumore)*: **referto, senza correggere, FERMO della voce.**
+
+### 8.4 TODO
+
+1. questo task history e la relazione, commit e push;
+2. `bilancio_chiusura.py`, l'inventario, la suite, commit e push;
+3. il referto `doc/referti_l2/bilancio_chiusura.txt`, la relazione, la ROTTA, la skill: commit e push.

@@ -25700,3 +25700,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Un'osservazione per Luca:** **per finestre di `250` tick il respiro e' `0.068`, `0.079`, `0.064`, `0.043`** *(simile o sotto il mattone)*; **sui `1000` tick l'ampiezza viene da un'oscillazione LENTA del livello medio** *(`1.42` -> `1.51`)*.
 - **I mattoni con `rho_c` diverso** *(`cf67eb9c`)*: **`A` = `0.586` (MG), `0.451` (`rho_c` doppio), `0.691` (`rho_c` meta'); `A(MGx2)/A(MG) = 0.7695`: risposta a SOGLIA secondo il criterio scritto, a `0.02` dal limite; (MG/2) nessun collasso.** **FERMO per la voce.**
 - **Il bilancio** *(sopra, `003dd8de`)*: **`2/4`, FERMO.** **P6: FERMO** *(la serie di distanze, la voce `7-bis`)*.
+
+### 2026-11-14 09:40 -- IL MANDATO DELLE 09:34: IL MATTONE BEN COTTO, LE DUE COPPIE, LA CHIUSURA DEL BILANCIO, LA RIUNIONE; I FERMO DI STANOTTE SCIOLTI
+
+- **Luca alle `09:34`: si va avanti, le scelte di dettaglio sono del guardiano.** **I FERMO di stanotte** *(la catena del mattone `94259b8f`, la voce `15` `003dd8de`, la relazione `6d9a6912`)* **sono SCIOLTI nei modi del mandato.**
+- **Gli errori del guardiano scritti nel mandato:** **n.155** *(il respiro picco-picco su `1000` tick mescola l'oscillazione con la deriva)*, **n.156** *(la lettura L4 su `A` invece che sul raggio)*, **n.157** *(la tolleranza della massa `1e-12` troppo stretta)*; **le correzioni decise DOPO i risultati, e scritte cosi'.**
+- **L'ordine:** **C** *(la chiusura della voce `15`, solo lettura, sul principale: la carta nella sez. `8` di `doc/TASK_HISTORY/2026-11-14_bilancio_energie.md`)*; **sul ramo `strumento-mattone`** *(la carta nella sez. `15` del suo task history)*: **A1 la cottura di (MG) e (MGU), A2 il respiro S5', A3 il controllo S7'', B1 e B2 le due coppie** *(G e G+U)*, **D la riunione; poi FERMO.**
+- **Le mie scelte, scritte nelle carte:** **`conti.py` copiato identico sul ramo** *(R-CONTI)*; **il respiro, il picco, il raggio ogni `10` tick nelle corse nuove; S5' con la retta tolta PER FINESTRA; il paragrafo del raggio (C6) in un file accanto a `rhoc.txt`; il rumore della media su `100` tick dalla dispersione delle `20` medie di `(0)_2000`.**
