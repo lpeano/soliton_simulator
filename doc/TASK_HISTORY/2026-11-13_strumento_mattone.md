@@ -206,3 +206,19 @@
   - **Se e' cosi', la cura sarebbe salvare `mot.geo.U` nel npz** *(o rifarlo dal campo alla ripartenza)*: ### **NON la faccio** *(il mandato: un DEVE che fallisce = referto senza correggere, e FERMO)*. **E vale anche per (MG)?** **No per questa via:** **in (MG) non c'e' `avvolto`; non e' provato** *((MG) e' tolto dalle `09:38`)*.
   - ### ⚠ **Una conseguenza da guardare:** **anche S7', la coppia di `c1740faa` e ogni incollatura in G+U partono con l'`U` della scena** *(col campo rifatto con Gauss e `A = 0`: se l'`U` della scena coincide con quello di `A = 0` NON l'ho verificato; il caso che rompe di sicuro e' la ripartenza da uno stato con `A != 0`)*.
 - ### **FERMO DELLA CATENA** *(il mandato: «FERMO SOLO SE un DEVE non va come deve»)*: **NON si fanno la cottura, S7'' di (MGU), la coppia B2, la riunione.** **Il resto che NON dipende dalla cottura continua:** **C** *(la chiusura della voce `15`, sul principale)* **e A2/C6** *(le letture dalle serie salvate)*.
+
+### 15.7 A2 E C6: LE LETTURE DALLE SERIE SALVATE *(il codice a `cef29e39`; alle `10:42`; `doc/referti_l2/mattone/s5p_letture.txt`, `rhoc_raggio.txt`)*
+
+| il mattone | S5' a `5000` | il vecchio *(picco-picco su `1000` tick)* |
+|---|---|---|
+| (MG) | `0.0481` | `0.0711` |
+| (MU) | `0.0572` | `0.0918` |
+| (MGU) | `0.0646` | `0.0738` |
+| `MGdoppio` | `0.0419` | `0.0765` |
+| `MGmezzo` | `0.0522` | `0.0813` |
+| S7' di (MG), tick `250`-`1250` | `0.0615` | `0.1193` |
+
+- ### **DEVE: S5' di (MG) a `5000` accanto al vecchio `0.0711` (riletto dalla stessa serie): PASSA** *(`1/1`)*.
+- **Con S5' il controllo S7' di (MG) darebbe il rapporto `1.278`** *(descrittivo: oltre il `25%` anche cosi'; S7' e' chiuso, e (MG) e' tolto dalle `09:38`)*.
+- ### ⚠ **Le serie vecchie sono prese ogni `50` tick: una finestra di `250` ha `6` punti, e il picco-picco senza la retta e' GROSSOLANO** *(le finestre di (MGU) vanno da `0.0173` a `0.0646`)*. **Le corse nuove le prendono ogni `10`** *(sez. `15.2`)*.
+- **C6, il raggio** *(n.156)*: **gli aumenti `+1.887` (MGx2), `+3.019` (MG), `+4.831` (MG/2); il rapporto per ogni dimezzamento di `rho_c` `1.600` e `1.600`, la potenza `0.678`:** **la risposta e' GRADUALE; l'ipotesi «in bilico» NON e' confermata.** **Il file accanto a `rhoc.txt`, che resta l'uscita del suo comando.**
