@@ -1,6 +1,5 @@
 ========================================================================================================================
-W2: LA SUITE DEL REPO CON IL MOTORE NUMBA ACCESO IN OGNI PROCESSO DEI COLLAUDI (Luca 2026-11-15 19:12; lo strumento E:\python
-umba_suite\sitecustomize.py, fuori dal repo; 1 filo)
+W2: LA SUITE DEL REPO CON IL MOTORE NUMBA ACCESO IN OGNI PROCESSO DEI COLLAUDI (Luca 2026-11-15 19:12; lo strumento E:\python\numba_suite\sitecustomize.py, fuori dal repo; 1 filo)
 ========================================================================================================================
 ### la suite: E:\python\py3132\python.exe primo_ordine/collauda.py nel clone (330d3718), 22:03:40 - 22:26:25, uscita 0
   ### TUTTI I COLLAUDI PASSANO: 67 su 67

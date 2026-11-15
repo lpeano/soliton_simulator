@@ -103,3 +103,11 @@
 - **La suite col motore ACCESO** *(`1` filo, lo strumento che aspetta i moduli interi)*: **`67/67`** *(`22:03:40`-`22:26:25`)*. **`10` processi accesi: quelli che fanno girare il tick** *(`_collauda_deriva`, `_tempo_proprio`, `_cs`, `_scala`, `_cs_centro`, `_r60`, `_mb1` -- i BYTE, N3 --, e tre misure)*; **`1112982` chiamate al ciclo, `0` ripieghi.**
 - **Un processo NON acceso:** **`_misura_mb1.py --scrivi`, che M-B1 gira in una COPIA dell'albero a un commit VECCHIO** *(`8c7b9288`, senza `motore_numba.py`)*: **col motore di oggi** *(atteso)*. **Gli altri processi non fanno girare il tick.**
 - **Il primo passo e' CHIUSO** *(D2 `36/36` AL BIT, W2 `67/67`)*. **Il prossimo: W3, il secondo passo.**
+
+## 12. IL SECONDO PASSO (W3): LA CARTA, PRIMA DEL CODICE
+
+- **Le tre funzioni:** **`flussi_parziali._grover_mezzo`, `flussi_parziali._hop_psi_mezzo`, `motore.Motore._ruota_attorno_a_n`, sostituite in memoria da `accendi_secondo_passo()`** *(una chiamata ESPLICITA in piu', col primo passo gia' acceso; atomica; `spegni()` rimette tutto)*.
+- ### **LA REGOLA DEL BIT** *(N1)*: **in numpy restano i PESI** *(`z_nodo`, `w = (1 - z)/grado`, `z_arco`, `_alfa_beta`)* **e `sin`/`cos`** *(le chiamate di oggi: niente libm contro numpy)*; **nel ciclo numba SOLO prodotti e somme complesse NELL'ORDINE di numpy: il reale reso complesso `(x + 0j)` dove numpy lo promuove** *(`nz * p0`, `p0 * c`, `-1j * s`)*, **l'`einsum` a due fattori accumulato da zero** *(`0 + p0 + p1`)*. **Che cosa NON so:** **se i cicli SIMD di numpy per il prodotto complesso usano una FMA o un altro ordine: lo dice D2** *(se non al bit: la differenza relativa massima e il perche')*.
+- **Che cosa resta FUORI, dichiarato:** **la parte per elemento di `termini_di_h` e di `elicita`** *(`np.abs` complesso = `hypot`; l'`einsum` a TRE fattori di `termini_di_h`)*: **il passo dopo, se i numeri di D5 lo chiedono.**
+- **La mappa:** **`motore_numba.py` importa ora anche `flussi_parziali`** *(una dipendenza VERA in piu', in `_mappa.yaml`; P-MOD `0` errori)*. **La tabella del nucleo: `_mappa.yaml` `26f2abaf`, `motore_numba.py` `eea1d3b0`** *(questo commit)*.
+- **La prova:** **`csv/solitone/prova_numba_d2b.py`** *(le tre funzioni oggi contro numba sugli stessi ingressi, lo stato vero e `psi` casuale, `1` e `6` fili; i tempi)*.
