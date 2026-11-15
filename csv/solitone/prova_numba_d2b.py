@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 r"""**D2 DEL SECONDO PASSO (W3): `_grover_mezzo`, `_hop_psi_mezzo`, `_ruota_attorno_a_n`** *(Luca `2026-11-15` `19:12`, W3; la carta `doc/TASK_HISTORY/2026-11-15_motore_numba.md`, sez. `12`)*.
 
-    E:\python\py3132\python.exe csv/solitone/prova_numba_d2b.py > doc/referti_l2/motore_numba_d2b.txt     (NUMBA_CACHE_DIR su E:, PYTHONNOUSERSITE=1, TMP su E:)
+    E:\python\py3132\python.exe csv/solitone/prova_numba_d2b.py --fma no > doc/referti_l2/motore_numba_d2b.txt      (H1, Luca 23:36: --fma si > motore_numba_d2b_fma.txt)
+       (NUMBA_CACHE_DIR su E:, PYTHONNOUSERSITE=1, TMP su E:)
 
 **Nella scena di S162 col mattone di `L 162`** *(`L162_MGU_03000`, `U` dal campo)*: **per ognuna delle tre funzioni, la versione di oggi e quella del secondo passo sugli STESSI ingressi** *(copie dello stato vero; piu' un `psi` casuale)*,
 **a `1` e a `6` fili: AL BIT, o la differenza relativa massima** *(N1: il perche' da scrivere)*. **I tempi** *(la compilazione a parte, N6)*.
@@ -32,7 +33,9 @@ def confronta(nome, a, b):
     sys.stdout.flush()
 
 
-def main():
+def main(argv):
+    assert len(argv) == 2 and argv[0] == "--fma" and argv[1] in ("si", "no"), "--fma si|no, obbligatorio"
+    fma = argv[1] == "si"
     import _presidio
     import _u1_prototipo as U1
     _presidio.avvia(__file__)
@@ -41,7 +44,7 @@ def main():
     with open(os.path.join(MT.DIR_REF, "cottura_L162_MGU.json"), encoding="utf-8") as fh:
         ct = json.load(fh)
     print("=" * 130)
-    print("D2 DEL SECONDO PASSO (Luca 19:12, W3): %s; sys.executable %s" % (ct["file"], sys.executable))
+    print("D2 DEL SECONDO PASSO (Luca 19:12, W3): %s; fma %s (fastmath={'contract'} se vero); sys.executable %s" % (ct["file"], fma, sys.executable))
     print("=" * 130)
     with MT.scena(MT.CORSA_162, MT.T_162) as Z:
         import flussi_parziali as FP
@@ -80,7 +83,7 @@ def main():
         for fili in (1, 6):
             MN.accendi_numba(fili)
             t = time.time()
-            MN.accendi_secondo_passo()
+            MN.accendi_secondo_passo(fma)
             gira(fili)
             print("### a %d fili: la prima chiamata (la compilazione o la cache) %.2f s" % (fili, time.time() - t))
             nuovo = gira(fili)
@@ -99,7 +102,7 @@ def main():
                     fn()
                 t_np = (time.perf_counter() - t) / 10
                 MN.accendi_numba(fili)
-                MN.accendi_secondo_passo()
+                MN.accendi_secondo_passo(fma)
                 print("    %d fili, %-20s oggi %.4f s, numba %.4f s, il rapporto %.2f (le copie dello stato comprese; la macchina CARICA)" % (fili, nome, t_np, t_nb, t_np / t_nb))
             MN.spegni()
         rimesse = FP._grover_mezzo is orig["g"] and FP._hop_psi_mezzo is orig["h"] and MO.Motore._ruota_attorno_a_n is orig["r"]
@@ -112,4 +115,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

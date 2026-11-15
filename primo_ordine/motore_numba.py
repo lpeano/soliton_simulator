@@ -129,6 +129,7 @@ def spegni():
         if modulo in sys.modules:
             sys.modules[modulo].__dict__.pop("_MN_add_at", None)
     _STATO["secondo"] = False
+    _STATO["fma"] = None
     MOTORE = "nucleo"
 
 
@@ -136,7 +137,7 @@ def stato():
     """### Per il registro *(M4)*: il motore, i fili, le chiamate del ciclo, i ripieghi, `sys.executable`."""
     import sys
     return {"motore": MOTORE, "fili": _STATO["fili"], "chiamate": _STATO["chiamate"], "ripieghi": _STATO["ripieghi"], "numba_importato": "numba" in sys.modules, "sys.executable": sys.executable,
-            "secondo_passo": _STATO.get("secondo", False)}
+            "secondo_passo": _STATO.get("secondo", False), "fma": _STATO.get("fma")}
 
 
 # =====================================================================================
@@ -146,10 +147,14 @@ def stato():
 # ### LA REGOLA DEL BIT (N1, W3): in numpy restano i PESI (`z`, `w = (1 - z)/grado`, `alpha`, `beta`) e `sin`/`cos` (le stesse
 # ### chiamate di oggi); nel ciclo numba SOLO prodotti e somme complesse, nell'ORDINE di numpy, con il reale reso complesso
 # ### `(x + 0j)` dove numpy lo promuove, e l'einsum accumulato da zero. Se D2 non e' al bit: la differenza e il perche'.
-def _costruisci2():
+# ### LA PROVA DI H1 (Luca 2026-11-15 23:36): `fma` vero compila i tre cicli con fastmath={'contract'} -- SOLO la fusione in FMA,
+# ### nessun'altra licenza (niente reassoc, nnan, ninf, nsz, arcp, afn); la cache solo per la versione senza.
+def _costruisci2(fma):
     from numba import njit, prange
+    fm = {"contract"} if fma else False
+    ca = not fma
 
-    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    @njit(parallel=True, fastmath=fm, error_model="numpy", cache=ca)
     def k_grover(vista, S, w, z, nodo):
         c = vista.shape[1]
         for e in prange(vista.shape[0]):
@@ -159,7 +164,7 @@ def _costruisci2():
                 v = vista[e, q] * z[kk, 0]
                 vista[e, q] = presa + v
 
-    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    @njit(parallel=True, fastmath=fm, error_model="numpy", cache=ca)
     def k_hop(v, U, al, be):
         for a in prange(v.shape[0]):
             t0 = v[a, 0, 0]
@@ -189,7 +194,7 @@ def _costruisci2():
             v[a, 1, 0] = v[a, 1, 0] * A + n0
             v[a, 1, 1] = v[a, 1, 1] * A + n1
 
-    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    @njit(parallel=True, fastmath=fm, error_model="numpy", cache=ca)
     def k_ruota(psi, nn, s, c):
         uno_j = 1j
         meno_j = -1j
@@ -214,14 +219,16 @@ def _costruisci2():
     return k_grover, k_hop, k_ruota
 
 
-def accendi_secondo_passo():
+def accendi_secondo_passo(fma):
     """### **IL SECONDO PASSO** *(W3)*: con il motore numba GIA' acceso, sostituisce `_grover_mezzo`, `_hop_psi_mezzo`, `Motore._ruota_attorno_a_n`. Atomico; `spegni()` rimette tutto."""
     import flussi_parziali as FP                                 # ### una dipendenza VERA in piu' (la mappa)
     import motore
     assert MOTORE == "numba", "il secondo passo vuole il primo acceso (accendi_numba)"
-    if _STATO.get("k2") is None:
-        _STATO["k2"] = _costruisci2()
-    kg, kh, kr = _STATO["k2"]
+    assert isinstance(fma, bool), "fma: True o False, scritto da chi chiama"
+    k2 = _STATO.setdefault("k2", {})
+    if fma not in k2:
+        k2[fma] = _costruisci2(fma)
+    kg, kh, kr = k2[fma]
     np = _numpy
 
     def _grover_mezzo(mot, vista, frazione):
@@ -256,4 +263,5 @@ def accendi_secondo_passo():
         spegni()
         raise
     _STATO["secondo"] = True
+    _STATO["fma"] = fma
     return {"secondo_passo": ["flussi_parziali._grover_mezzo", "flussi_parziali._hop_psi_mezzo", "motore.Motore._ruota_attorno_a_n"]}
