@@ -963,3 +963,8 @@
   - **P1-bis (B2, in fase): `d` torna a un MINIMO fra `27.5` e `30.5`, fra `k 13500` e `k 16000`, poi risale; il mezzo periodo** *(dal massimo di `k 9950` al minimo)* **fra `3500` e `6000` tick. CADE se `d` scende sotto `27.5`** *(verso la fusione)*, **o non ha un minimo entro `16000`.**
   - **P2'' (B2-pi, in antifase): `d` resta fra `38.5` e `42.5` da `k 8818` a `18000`** *(legata intorno a `40`)*. **CADE se `d` esce da quella fascia.**
   - **Come lo leggo** *(fissato qui)*: **il minimo come in `legati.lettura`** *(la serie lisciata su `11` punti, il minimo entro `+-1000`)*; **la fascia di P2'' sulla serie NON lisciata** *(ogni `50` tick)*. **Le soglie NON si rivedono; se si rivedono: post-hoc, dichiarato.**
+
+### 24.27 R1 PASSA: ALLO STESSO TICK LA MASSA PERSA = IL BORDO ENTRO `1.9e-08` (LA SOGLIA `1e-6`); `legati-GU-2` APERTA
+
+- **`massa_stesso_tick.py`** *(`ddf2fc02`; `massa_stesso_tick.txt`; l'interprete di E:)*: **`legati-GU`: `13` tick comuni** *(`6500` ... `12500`)*, **il massimo `1.495e-08`** *(a `12500`: persa `1320.8002`, bordo `1320.8000`)*; **`legati-GUpi`: `13` tick comuni** *(`2500` ... `8500`)*, **il massimo `1.856e-08`.** **PASSANO** *(la stessa soglia `1e-6`; il resto e' l'arrotondamento della tabella a `5` cifre)*. ### **La causa confermata: il controllo di `legati.py` su due istanti diversi, non la fisica.**
+- **R2:** **`legati-GU-2` aperta** *(da `12000`, gli stati `11950` e `12000`; l'interprete di C:)*; **`legati-GUpi-2` alla chiusura di `triangolo-ruotato`.**
