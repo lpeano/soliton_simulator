@@ -25892,3 +25892,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I verdetti:** **PULITI il buco a gamma `0` e il respiro (B); TOCCATO il respiro (C) fino a `2000`; DA NON ATTRIBUIRE tutto oltre `1820` in (A) e in G1** *(la lente e lo smorzamento)*.
 - ### **Il buco nel vuoto:** **anche a gamma `0` il `14%` del deficit di `Lambda` sta oltre `R_A`: la sua forma oltre `R_A` e' del bordo.**
 - **Le note «RILETTO 2026-11-14» nella ROTTA e nel task history di G1** *(Luca `20:26` (1))*. **Due mie correzioni:** **le finestre «prima dell'`1%`» sono `0`-`1800` e `0`-`2060`, non `0`-`2000`; «G1 gamma `0.2`» e' G1 gamma `0.02`** *(anche nel referto di `8afff283`)*.
+
+### 2026-11-15 12:00 -- IL REFERTO UNICO DEI TRIANGOLI (T4): NESSUN EFFETTO CHIARO SULLA PERDITA (0.79 E 0.84 L'ISOLATO); LE LETTURE PER PEZZO NON SI LEGGONO
+
+- **Sul ramo** *(`55feac79`; la sez. `22.16`)*: **la massa uscita dal bordo PER SOLITONE contro (T-solo): `0.794` (T-fase), `0.840` (T-sfasati)**: **fra `0.7` e `1.3`, NESSUN EFFETTO CHIARO.**
+- ### **Le etichette per pezzo del referto** *(«PROTEGGE», «FA PERDERE»)* **NON si leggono: i pezzi si scambiano massa** *(i rapporti da `-136` a `+97`)*.
+- **Il moto:** **(T-fase) si stringe** *(`38.7` -> `35.2`)*; **(T-sfasati) quasi fermo.** **In corsa: B1, B2, B3 (la fase 1).**
