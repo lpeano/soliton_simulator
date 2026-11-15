@@ -97,3 +97,9 @@
 
 - **La suite a switch acceso** *(`20:41:14`-`21:03:00`; lo strumento `E:\python\numba_suite\sitecustomize.py`, `1` filo)*: **`67/67`, MA IL MOTORE NON ERA ACCESO: `148` processi, `0` accesi del tutto; in `11` l'accensione e' caduta A META'** *(`energia_pesata` senza `_per_nodo`: lo strumento scattava mentre il modulo era ancora a meta' dell'import)*: **le funzioni di `motore` sostituite** *(`538063` chiamate al ciclo)*, **quelle di `energia_pesata` no.** ### **Il primo giro NON prova W2: si rifa'.**
 - **Le due correzioni:** **(1) `accendi_numba` ATOMICA** *(se una sostituzione cade, `spegni()` rimette TUTTE le originali e l'errore sale: mai un motore a meta')*; **(2) lo strumento aspetta i moduli INTERI** *(`motore.Motore.densita_vuoto` e `energia_pesata._per_nodo`, `termini_di_h` presenti)*. **La suite a switch spento sul codice nuovo, poi W2 di nuovo.**
+
+## 11. W2 RIFATTA: `67/67` A SWITCH ACCESO *(`doc/referti_l2/motore_numba_w2.txt`)*
+
+- **La suite col motore ACCESO** *(`1` filo, lo strumento che aspetta i moduli interi)*: **`67/67`** *(`22:03:40`-`22:26:25`)*. **`10` processi accesi: quelli che fanno girare il tick** *(`_collauda_deriva`, `_tempo_proprio`, `_cs`, `_scala`, `_cs_centro`, `_r60`, `_mb1` -- i BYTE, N3 --, e tre misure)*; **`1112982` chiamate al ciclo, `0` ripieghi.**
+- **Un processo NON acceso:** **`_misura_mb1.py --scrivi`, che M-B1 gira in una COPIA dell'albero a un commit VECCHIO** *(`8c7b9288`, senza `motore_numba.py`)*: **col motore di oggi** *(atteso)*. **Gli altri processi non fanno girare il tick.**
+- **Il primo passo e' CHIUSO** *(D2 `36/36` AL BIT, W2 `67/67`)*. **Il prossimo: W3, il secondo passo.**
