@@ -652,3 +652,14 @@
   - **i tre pezzi si scambiano massa:** **la materia di A da `8.799e+06` a `9.085e+06`** *(`x 1.0325`)*, **quella di C da `8.456e+06` a `8.125e+06`** *(`x 0.9608`)*: **«solitone grande» dice la forma dell'insieme, non che i tre si siano fusi** *(le mappe ogni `100` tick lo dicono: non ancora guardate)*;
   - **la massa uscita dal bordo `1891`** *(il `6e-4` del totale)*.
 - *(I rapporti da un calcolo `python -c` sui numeri del referto.)*
+
+### 22.11 LA COPPIA A `66` NODI SU `L 243`: IL DEVE DI GAUSS FALLISCE (`2.28e-10` CONTRO `1e-10`); FERMATA DAL TETTO DI `18000 s` A `k 1814` (ERRORE MIO); NESSUNA CORREZIONE, FERMO
+
+- **coppia-d65** *(`coppia_distanze.py --d 65`, `L 243`, bordo `100.5`; `coppia_GUd65_L243.txt`; `02:21:07`-`07:23:21`, uscita `1`; CHIUSA FERMATO alle `07:2x`)*:
+  - ### **IL DEVE DI GAUSS FALLISCE:** **il residuo al massimo `2.284e-10` contro la soglia `1e-10`; quello INIZIALE era gia' `2.146e-10`** *(su `L 162`, d50: `6.256e-11`; su `L 243` la (MU) di `conv_U_L243`: `3.641e-11` iniziale)*. **Il residuo non cresce nella corsa** *(da `2.146e-10` a `2.284e-10` al massimo)*: **nasce all'incollatura.**
+  - ### **ERRORE MIO:** **la corsa si e' FERMATA al tetto di `18000 s` a `k 1814`** *(`MT.TETTO_S` di `mattone.py`, letto da `mattone_coppia_L162`)*: **Luca alle `15:22` ha dato `28800`, e `coppia_distanze.py` non lo sostituisce** *(gli altri miei script si')*. **L'ultima finestra e' `1750`-`1814`, non `1750`-`2000`.**
+  - **I numeri, che NON si leggono** *(il DEVE fallito)*: **`d0` VERA `66.000026`; `d''` sui tick `250`-`1814` `-1.337978e-08 +- 9.3e-11`; la massa oltre `R_A 100.5` a `1500` `1.533e-05`** *(sotto `1e-4`)*.
+  - ### **Per la regola: il referto, NESSUNA correzione, FERMO su questa corsa.** **Che cosa deve decidere Luca:** **(a) la soglia `1e-10` e' stata fissata su `L 81`/`L 162`; su `L 243` si deve scalare** *(con il numero dei nodi? una proposta, non una scelta)* **o il residuo iniziale di `2e-10` e' un difetto dell'incollatura in questa scena** *(la scena di `convergenza.scena_L` con DUE francobolli)*; **(b) se rifare la corsa col tetto di `28800`.**
+  - **La stessa scena gira ora con un mattone** *(conv-GU-L243)*: **il suo residuo iniziale dira' se il `2e-10` e' della scena o della coppia.**
+  - **Il nome della serie:** **`coppia_GUd65_L162_serie.npz` porta `L162` nel nome** *(il prefisso di `mattone_coppia_L162`)*, **ma la scena e' `L 243`: dichiarato.**
+  - **La risposta parziale** *(dal referto in corsa di conv-GU-L243, la prima riga)*: **UN mattone (MGU) su `L 243`: il residuo iniziale `9.860e-11`, appena SOTTO `1e-10`; DUE: `2.146e-10`.** **Il residuo cresce col numero dei mattoni e con la scena** *(su `L 162` due mattoni: `6.3e-11`)*: **la soglia fissa `1e-10` su `L 243` e' al limite gia' con uno** *(conv-GU-L243 puo' fallire anche lei)*. **Una lettura, non una misura dedicata.**
