@@ -25824,3 +25824,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La fabbrica dei solitoni grandi** *(Luca `01:54`; la sez. `22`)*: **il 3x e' il trifoglio gia' in corsa** *(il collasso e l'esplosione si leggono dopo dalle serie)*; **il 2x: B2 prosegue da `02000`.**
 - **Dentro il triangolo** *(Luca `00:58`)*: **il flusso per nodo: il nucleo NON lo da'; FERMO di quel punto** *(fuori dal nucleo la sorgente `J_a` di `_u1_prototipo`: una scelta di Luca)*; **le fasi in `7` punti: `triangolo_dentro.py`.**
 - **Un mio errore:** **`legame.py fase` caduta** *(le scene annidate)*; **la correzione in `fase_nel_tempo.py`** *(`legame.py` in uso: non toccato)*.
+
+### 2026-11-15 02:20 -- B2-pi SI RESPINGE (+3.6e-07, 52.7 ERRORI): LA PREVISIONE (b) CONFERMATA; CON B2 (-1.0e-06): IN FASE ATTRAE, IN OPPOSIZIONE RESPINGE; LA CONVERGENZA (MU) SU L 243 COME SU L 162; DENTRO (T-fase) NESSUN VORTICE
+
+- **Sul ramo** *(`ba712ff6`; la sez. `22.1`)*: ### **B2-`pi`: `d''` sui tick `250`-`2000` `+3.605e-07 +- 6.8e-09`: RESPINGE** *(la previsione (b) delle `22:45`, CONFERMATA)*. **Con B2 in fase** *(`-1.010e-06`, ATTRAE)*: **lo stesso mattone e le stesse condizioni; cambia solo la fase relativa.** **Cautele:** **B3 vecchia lo legge «G E' UNA FORZA»** *(n.165)*; **la riserva della simmetria di fase** *(a meno dell'arrotondamento, non al bit)*.
+- **La convergenza (MU) su `L 243`:** **il picco e il raggio a `2000` come su `L 162`** *(`3061.7` e `8.5748` contro `3063.1` e `8.5750`)*.
+- **Dentro (T-fase):** **nessun vortice** *(il giro `0` in tutte le `12` componenti)*, **nessuna antifase; le meta' dei lati e il centro in ritardo di fase** *(a `500` circa `-30` e `-67` gradi)*. **La fase nel tempo: (T-fase) resta in fase** *(fino a circa `-10` gradi)*; **(T-sfasati) B scivola da `180` a circa `165`.**
+- **In corsa:** **il trifoglio lungo, la scena vuota, le distanze `50` e `65`, la parte B su `L 243`.** **Da scrivere:** **le frecce del flusso con `J_a`** *(Luca `01:58`)* **e il 2x** *(B2 che prosegue)*.
