@@ -116,3 +116,7 @@
 - **R-DIPENDENZE-2:** **lo SPOSTAMENTO dell'ambiente delle corse su E: e' una voce in coda** *(una corsa di prova e la suite AL BIT nell'ambiente su E: prima di usarlo; MAI con corse aperte)*; **il mandato lo da' Luca.**
 - **R-DIPENDENZE-3:** **alla ripresa dopo un riavvio: controllare che E: sia collegato PRIMA di aprire corse che usano un ambiente su E:** *(lo SKILL della ripresa)*.
 - **Il primo ambiente:** **`E:\python\venv_numba`** *(Python `3.13.2`, numpy `2.3.0`, scipy `1.17.1` come le corse; numba `0.68.1`; il referto `doc/referti_l2/numba_installazione.txt`)*.
+
+## LE REGOLE DEI COMMIT *(R-COMMIT; Luca `2026-11-15` `15:30`)*
+
+- ### **R-COMMIT** *(Luca `2026-11-15` `15:30`, da ora per sempre, tutti e due i rami)*: **R1** prima: nessun `index.lock`; il lucchetto di `committa` o assente o del processo VIVO (residuo: si toglie e si scrive nel messaggio); mai due commit insieme. **R2** l'ambiente: `TMP`/`TEMP` su C:, nessuna `GIT_CONFIG_*` (solo per la suite su E:), stampato. **R3** il limite `15` minuti, i hook in un log, l'ultima riga leggibile; se scade: si ferma, si scrive, R5, e si chiede a Luca. **R4** mai interrompere un commit a meta'. **R5** dopo: HEAD cambiato, push fatto, `HEAD == origin/<ramo>`, lo stage vuoto, nessun lucchetto, nessun `git.exe` del commit vivo: «COMMIT OK: <sha>, origin uguale, stage vuoto». *(Lo strumento: `committa2.py` nello scratchpad, fuori dal repo: i controlli R1, R2, R3, R5.)*
