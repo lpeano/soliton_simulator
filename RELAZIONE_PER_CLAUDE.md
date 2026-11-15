@@ -25920,3 +25920,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **`E:\python\py3132`, `TMP` su E:** *(P3)*: **`14:19:17`-`14:38:33`, uscita `1`, `65/67`.** ### **Cadono `M-B1` e i controlli sullo STAGE: tutti e due creano repo git TEMPORANEI in `TMP`, e git rifiuta i repo su exFAT** *(«dubious ownership ... does not record ownership»: verificato con `git init` in `E:\python\tmp`)*. **Gli altri `65` uguali riga per riga all'ambiente delle corse.** **Col venv delle `12:32`** *(TMP su C:)*: **`67/67`.**
 - ### **FERMO della parte C** *(il criterio: `67/67`)*. **Da decidere:** **(a) la suite con l'interprete di E: e `TMP` su C:** *(la mia proposta: l'interprete resta isolato, sul C: solo le temporanee della suite)*; **(b) `safe.directory` globale** *(sconsigliata)*; **(c) un volume NTFS.**
+
+### 2026-11-15 16:10 -- LA SUITE CON L'INTERPRETE DI E: 67/67 E AL BIT (GIT: SAFE.DIRECTORY SOLO NEL PROCESSO); DA ORA LE CORSE NUOVE SU E:; R-COMMIT E R-AMBIENTE NELLA ROTTA; IL CLONE PER IL MOTORE NUMBA SU E:
+
+- **La suite** *(`E:\python\py3132`, `TMP` su E:, `safe.directory` solo nel processo: git `2.45.1` non capisce `E:/python/tmp/*`, provato)*: **`15:43:41`-`16:05:26`, `67/67`, uscita `0`; le righe UGUALI a quelle dell'ambiente delle corse.** ### **La condizione delle `15:46` e' soddisfatta: le corse NUOVE con l'interprete di E:.**
+- **R-COMMIT** *(`2a27c535`)* **e R-AMBIENTE** *(`a5cdb23c`)* **nella ROTTA e negli skill.** **I tempi dei passi dei hook** *(Luca `15:36`)*: **il commit `a5cdb23c` in `355 s`; i passi piu' lenti `107.8 s` dopo `_albero_era2.py`, `68.2 s`, `66.3 s` dopo `H-NUCLEO-CONGELATO`, `53.3 s` dopo `_stage.py`** *(il log nello scratchpad; nessun hook cambiato)*.
+- **Il motore numba** *(Luca `15:50`, `15:53`)*: **il clone `E:\soliton_simulator_numba` da origin** *(`16:01`-`16:07`)*; **una riga `safe.directory` globale col percorso esatto del clone.** **La carta, poi FERMO per Luca.**

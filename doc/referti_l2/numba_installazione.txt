@@ -38,4 +38,9 @@ LA PROVA CHE NUMBA FUNZIONA (Luca 12:32, C4): Python 3.13.2; numpy 2.3.0 (E:\pyt
     ### E PER R-DIPENDENZE: un ambiente su E: va bene per il CALCOLO; gli strumenti che creano repo git temporanei NON possono avere TMP su exFAT.
 ### P6 LO SPAZIO: C: 16100507648 byte prima (13:50), 16099880960 dopo (-0.6 MB); E: 220735995904 prima, 218627964928 dopo (-2.1 GB: i due ambienti e la cache)
 ### LA NUMPY DELLE CORSE riletta dopo: 2.3.0 in C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy: UGUALE
+### LA SUITE RIFATTA (Luca 14:41 e 15:45): git 2.45.1.windows.1 NON capisce safe.directory = E:/python/tmp/* (la prova: git init in E:\python\tmp\prova_sd, git status rifiutato con E:/python/tmp/*, accettato col percorso esatto): la configurazione GLOBALE non toccata per tmp; il modo PER PROCESSO, solo nel comando della suite: GIT_CONFIG_COUNT=1, GIT_CONFIG_KEY_0=safe.directory, GIT_CONFIG_VALUE_0=*
+    la suite: E:\python\py3132\python.exe primo_ordine/collauda.py nel worktree del ramo (3de7e841), PYTHONNOUSERSITE=1, TMP=TEMP=E:\python\tmp: 15:43:41-16:05:26, USCITA 0, ### TUTTI I COLLAUDI PASSANO: 67 su 67
+    AL BIT con l'ambiente delle corse: le righe della suite UGUALI riga per riga alla suite delle 12:50 (l'interprete di C:), tolti i tempi e i timbri; i 65 collaudi numerici erano gia' identici al primo giro, i 2 caduti allora erano collaudi di git sull'exFAT (Luca 14:41, (3))
+    ### LA CONDIZIONE DI R-AMBIENTE (Luca 15:46) E' SODDISFATTA: da ora le corse NUOVE con l'interprete di E: (a5cdb23c, la ROTTA)
+    la configurazione globale di git: UNA riga aggiunta per il clone del motore numba (Luca 15:53, M1): safe.directory = E:/soliton_simulator_numba (il percorso esatto); le 22 righe safe.directory gia' presenti (E:/GIT/..., E:/workloads/...) NON mie, non toccate
 ==================================================================================================================
