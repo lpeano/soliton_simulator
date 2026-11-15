@@ -25926,3 +25926,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La suite** *(`E:\python\py3132`, `TMP` su E:, `safe.directory` solo nel processo: git `2.45.1` non capisce `E:/python/tmp/*`, provato)*: **`15:43:41`-`16:05:26`, `67/67`, uscita `0`; le righe UGUALI a quelle dell'ambiente delle corse.** ### **La condizione delle `15:46` e' soddisfatta: le corse NUOVE con l'interprete di E:.**
 - **R-COMMIT** *(`2a27c535`)* **e R-AMBIENTE** *(`a5cdb23c`)* **nella ROTTA e negli skill.** **I tempi dei passi dei hook** *(Luca `15:36`)*: **il commit `a5cdb23c` in `355 s`; i passi piu' lenti `107.8 s` dopo `_albero_era2.py`, `68.2 s`, `66.3 s` dopo `H-NUCLEO-CONGELATO`, `53.3 s` dopo `_stage.py`** *(il log nello scratchpad; nessun hook cambiato)*.
 - **Il motore numba** *(Luca `15:50`, `15:53`)*: **il clone `E:\soliton_simulator_numba` da origin** *(`16:01`-`16:07`)*; **una riga `safe.directory` globale col percorso esatto del clone.** **La carta, poi FERMO per Luca.**
+
+### 2026-11-15 17:15 -- LE LETTURE CON L'INTERPRETE DI E:: IL RIUSO DI GAUSS AL BIT, I GIRI DEL PUNTO FISSO, IL PROFILO FINE, LA GIRANDOLA E IL CAMPO B; LA CARTA DEL MOTORE NUMBA (FERMO PER LUCA)
+
+- **Sul ramo** *(`ce4dde10` i codici, la suite su E: `67/67`; `1d913fd1`, `259ae269` i referti)*:
+  - ### **Gauss** *(Luca `15:07`)*: **il riuso della fattorizzazione AL BIT** *(`50` tick, tutte le chiavi; una fattorizzazione)*: **per le corse NUOVE.** **Il tempo `4.60` contro `4.79 s` per tick: nessun guadagno visibile con la macchina carica** *(dichiarato)*.
+  - ### **I giri** *(Luca `14:23`)*: **non fissi: `EPS_CS = 8 eps`; sempre `4`; fermandosi al giro `3` lo stato e' entro `4.5e-15` dopo un tick, al giro `2` entro `1.2e-12`.** **`3` giri: decide Luca.**
+  - **Il profilo fine:** **la REAZIONE del lapse `47%` del tick** *(`termini_di_h` `24` volte per tick)*, **`gauss_sparso` `14%`, `np.add.at` `14%`.**
+  - ### **La girandola e B** *(Luca `14:22`, `13:56`)*: **la materia gira a spirale, il vuoto e' fermo, `B` al centro di segno costante** *(la previsione confermata)*; **i numeri del guardiano hanno il segno opposto** *(uno specchio di convenzione)*; **le masse `0.64%` -> `2.07%`** *(non `0.5%`)*. **La sezione nelle considerazioni, il rimando nella voce `17` della ROTTA.**
+- ### **Il motore numba** *(Luca `15:50`, `15:53`)*: **la carta sul ramo `motore-numba` del clone su E:** *(`29ed592a`; E: forzato e controllato; i timbri del nucleo `12/12`)*. **FERMO per Luca prima del codice.**
