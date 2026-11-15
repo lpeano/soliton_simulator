@@ -754,3 +754,28 @@
 - ### **P2' = B2-pi si allontana e NON torna entro `18000` tick** *(non legata)*. **Lo stesso rischio per P3** *(il triangolo a `120` gradi che si allarga)*. **P1 resta.**
 - **P2 e P2' restano scritte tutte e due; il referto le confronta tutte e due.** **Le corse non si toccano.**
 - **La lettura di P2'** *(mia, fissata QUI)*: **CONFERMATA se fino a `18000` non c'e' un massimo di `d` seguito da un ritorno** *(nessuna inversione «max» sulla serie lisciata, come in 23.3)* **e `d` alla fine e' il piu' grande.** ### **`legati.py` e' IN USO** *(le tre corse lo hanno importato)*: **la lettura di P2' andra' in un file NUOVO** *(o nel referto a mano con i numeri della lettura, dichiarato)*, **non in `legati.py`.**
+
+## 24. LA PARTENZA A CALDO DEL LAPSE (7-bis), POI I PORTI GRANDI *(il mandato di Luca `2026-11-15` `12:04`; la precisazione delle `12:09`)*
+
+### 24.1 LA PARTE A: LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **Il punto fisso:** **`tick_lapse.cs_al_centro`** *(`csv/solitone/`, NON il nucleo)*: **parte da `prec = cs_di(mot, st, s, legge)`** *(`s N(rho)` dello stato all'INIZIO del tick)*; **ogni giro: una copia dello stato, mezza reazione e mezzo palindromo, `nuovo = cs_di` della copia; si ferma a `max |nuovo - prec| <= EPS_CS max |nuovo|`** *(`EPS_CS = 8 eps`, circa `1.8e-15`; `GIRI_MAX = 120`: `primo_ordine/tick.py`, il nucleo, NON si tocca)*.
+- **Chi lo chiama:** **per (MGU) `p6_bracci.tick_GU` chiama `TL.cs_al_centro` attraverso il modulo** *(e per (MG) `tick_lapse.tick`, che lo chiama per nome nel suo modulo)*: **un adattatore che sostituisce `TL.cs_al_centro` IN MEMORIA basta: il nucleo non serve, la parte A NON ha FERMO.**
+- **L'adattatore** *(un file NUOVO, `csv/solitone/lapse_caldo.py`)*: **lo stesso corpo di `cs_al_centro`, la stessa tolleranza, lo stesso `GIRI_MAX`; cambia SOLO la partenza: `prec` = il `cs` a cui e' arrivato il punto fisso del tick PRECEDENTE** *(al primo tick, che non ne ha uno: la partenza di oggi)*; **conta i giri di ogni tick, a caldo e a freddo** *(a freddo: l'originale avvolto, che conta e basta)*.
+- ### **NON so se si guadagna:** **la partenza di oggi e' lo stato all'inizio del tick, cioe' MEZZO tick prima del centro; il `cs` del tick precedente sta al centro di quel tick, cioe' UN tick intero prima del centro nuovo.** **La partenza a caldo puo' anche costare PIU' giri.** **La prova lo dice; se il guadagno manca, si scrive** *(A3)*.
+- **Non al bit:** **due partenze diverse arrivano a due `cs` che stanno entro `EPS_CS` l'uno dall'altro, non allo stesso: le corse a caldo NON sono uguali al bit a quelle a freddo** *(Luca, A3: dichiarato)*.
+- **La ripartenza:** **il `cs` del tick precedente fa parte dello stato: si SALVA accanto allo stato** *(una chiave in piu', `cs_prec`)* **e si rimette alla ripartenza** *(A2 (iii))*.
+
+### 24.2 LA PARTE A: LE PROVE E LA SOGLIA *(fissate QUI, prima dei numeri)*
+
+- **La scena:** **il mattone di `L 162`** *(`L162_MGU_03000`, `U` dal campo)* **da solo nella scena di S162, il bordo da `R_A 60`, G+U, il tick di `mattone.Campi`** *(come `fase_simmetria.py`)*.
+- **(i)** **`200` tick a freddo e `200` a caldo dallo stesso stato:** **la differenza relativa massima per chiave** *(`psi_h`, `phi_h`, `rho`, `Lambda`, `campo_E`, `campo_A`; `h_int` esclusa)* **SCRITTA; DEVE: il picco, il raggio** *(`mattone_rhoc.raggio`)* **e il centro uguali entro `1e-8` relativo.**
+- **(ii)** **il numero MEDIO di giri del punto fisso per tick, a caldo contro a freddo** *(Luca `12:09`: LA MISURA CHE DECIDE)*; **il tempo per tick accanto, dichiarato come misurato con la macchina CARICA** *(tre corse lunghe in giro)*.
+- **(iii)** **la ripartenza al bit a caldo:** **lo stato e il `cs_prec` salvati al tick `150` della corsa a caldo; da li' `50` tick = il tick `200` della corsa a caldo AL BIT** *(esclusa `h_int`)*. **DEVE.**
+- ### **A3** *(Luca `12:09`)*: **se il rapporto dei giri** *(a freddo / a caldo)* **e' almeno `1.3`, la partenza a caldo diventa quella di TUTTE le corse col lapse NUOVE** *(dichiarato: non al bit con le vecchie)*; **se e' sotto `1.3`, si scrive e la parte B parte col codice di oggi.**
+- **FERMO SOLO SE** **(i) o (iii) non vanno come devono** *(il referto, senza correggere)*.
+- **Un file per le prove: `csv/solitone/prova_caldo.py`.** **Il registro: una corsa breve** *(`prova-caldo`)*.
+
+### 24.3 TODO DELLA PARTE A
+
+1. **questa carta: commit e push;** 2. **`lapse_caldo.py`, `prova_caldo.py`; la suite; il commit;** 3. **la prova; il referto `doc/referti_l2/mattone/prova_caldo.txt`; la decisione A3; la relazione;** 4. **la parte B: la sua carta PRIMA del codice** *(la scena di `L 324`, il mattone, le cinque corse, le previsioni P1, P2', P3, P4)*.
