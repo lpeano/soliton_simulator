@@ -1,0 +1,15 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] conservazione_flussi.py  sha1-BYTE 66d41de1  committato e pulito
+==================================================================================================================================
+LA CONSERVAZIONE CON J_a (Luca 03:19, (2)): (I) l'identita' su un passo; (II) la dinamica: le mappe a k -+ 20 contro 2 x (- div J) a k; il video, k (500, 1000, 1500)
+==================================================================================================================================
+### k 500 (I) L'IDENTITA' su un passo: max |drho vero - (- div J)| / max |drho vero| = 1.066e-13   TORNA
+    (II) la dinamica, 4897 nodi: la correlazione 0.3003; |2 (- div J)| / |drho/dt| = 2.6602; il segno uguale nel 61.1% dei nodi
+### k 1000 (I) L'IDENTITA' su un passo: max |drho vero - (- div J)| / max |drho vero| = 8.690e-14   TORNA
+    (II) la dinamica, 5024 nodi: la correlazione 0.2916; |2 (- div J)| / |drho/dt| = 2.7434; il segno uguale nel 59.7% dei nodi
+### k 1500 (I) L'IDENTITA' su un passo: max |drho vero - (- div J)| / max |drho vero| = 1.195e-13   TORNA
+    (II) la dinamica, 5047 nodi: la correlazione 0.3186; |2 (- div J)| / |drho/dt| = 2.6465; il segno uguale nel 59.9% dei nodi
+----------------------------------------------------------------------------------------------------------------------------------
+### IL SEGNO: J_a = la variazione della CODA dell'arco a (negativa se la materia la lascia); - div J per nodo = somma(J delle code) - somma(J delle teste)
+==================================================================================================================================
