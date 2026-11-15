@@ -1,0 +1,35 @@
+==================================================================================================================
+PYTHON E NUMBA SU E:, ISOLATI (Luca 2026-11-15 12:32 parte C; 13:43 il COME; lo stato alle 14:06)
+==================================================================================================================
+### L'AMBIENTE DELLE CORSE (letto, NON toccato): Python 3.13.2 in C:\Users\lpeano\AppData\Local\Programs\Python\Python313; numpy 2.3.0, scipy 1.17.1; pip freeze 261 pacchetti (sha1 del file 324c62c1)
+### P1 L'INTERPRETE: il pacchetto NuGet ufficiale python 3.13.2 (https://www.nuget.org/api/v2/package/python/3.13.2; 14297314 byte; sha256 a8f8f67d36c098787e845079c53f0e760d2841186d1a3f87c2ec6468527c1017),
+    la cartella tools/ scompattata in E:\python\py3132 (1288 file); NESSUN installatore, NESSUN registro, NESSUN PATH; la stessa build delle corse (tags/v3.13.2:4f8bb39, MSC v.1942)
+### P2 L'AMBIENTE: i pacchetti DIRETTAMENTE in E:\python\py3132 (la seconda scelta di P2: l'interprete e' gia' isolato; E:\python\venv_numba delle 12:32, fatto con l'interprete di C:, e' in uso dalla sua suite)
+### P3 L'ISOLAMENTO, in ogni comando: PYTHONNOUSERSITE=1; PYTHONHOME e PYTHONPATH tolti; PIP_CACHE_DIR=E:\python\pip_cache; TMP=TEMP=E:\python\tmp; solo nella shell del comando
+### P4 I PACCHETTI: le 16 righe di pip freeze delle corse che il repo importa (matplotlib, mpmath, numpy, psutil, scipy, sympy, yaml e le dipendenze) con ==: COINCIDONO; poi numba col vincolo numpy==2.3.0, scipy==1.17.1:
+    numba 0.68.1, llvmlite 0.50.0; numpy resta 2.3.0. pip su exFAT: 'Permission denied' su un lanciatore .exe per giro (isympy, f2py, fonttools): lo stesso comando ripetuto, riuscito al quarto (dichiarato)
+### P5 (i):
+(i) la versione 3.13.2 ; sys.executable E:\python\py3132\python.exe ; sys.prefix E:\python\py3132 ; base_prefix E:\python\py3132
+    ENABLE_USER_SITE False
+    sys.path: ''
+    sys.path: 'E:\\python\\py3132\\python313.zip'
+    sys.path: 'E:\\python\\py3132\\DLLs'
+    sys.path: 'E:\\python\\py3132\\Lib'
+    sys.path: 'E:\\python\\py3132'
+    sys.path: 'E:\\python\\py3132\\Lib\\site-packages'
+    le voci fuori da E: [] -> SOLO E:
+    numpy 2.3.0 E:\python\py3132\Lib\site-packages\numpy\__init__.py
+    scipy 1.17.1 ; numba 0.68.1
+### P5 (ii) prova_numba.py (494989e1) con E:\python\py3132\python.exe:
+==============================================================================================================
+LA PROVA CHE NUMBA FUNZIONA (Luca 12:32, C4): Python 3.13.2; numpy 2.3.0 (E:\python\py3132\Lib\site-packages\numpy); numba 0.68.1; la macchina CARICA
+==============================================================================================================
+    @njit                            la prima chiamata 0.939 s (con la compilazione), la seconda 0.0356 s; il risultato 1.999804974919262e+07, contro numpy 1.108e-13 relativo; due chiamate uguali al bit: True
+    @njit(parallel=True) + prange    la prima chiamata 0.781 s (con la compilazione), la seconda 0.0107 s; il risultato 1.999804974919025e+07, contro numpy 7.824e-15 relativo; due chiamate uguali al bit: True
+    numpy np.sum(np.abs(z) ** 2): 0.1646 s
+### i fili: numba.get_num_threads() 12; NUMBA_NUM_THREADS 12; lo strato omp; os.cpu_count() 12
+==============================================================================================================
+### P5 (iii) LA SUITE con l'interprete di E:: NON ANCORA GIRATA (aspetta la fine della suite col venv delle 12:32, partita alle 13:49 nello stesso worktree: due suite insieme danno rossi falsi)
+### P6 LO SPAZIO: C: 16100507648 byte prima (13:50), 16099880960 dopo (-0.6 MB); E: 220735995904 prima, 218627964928 dopo (-2.1 GB: i due ambienti e la cache)
+### LA NUMPY DELLE CORSE riletta dopo: 2.3.0 in C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy: UGUALE
+==================================================================================================================
