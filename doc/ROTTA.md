@@ -103,3 +103,9 @@
 - **R-CONTI-4:** **le corse gia' scritte o gia' in fila** *(i bracci di P6, i controlli S7, la coppia di mattoni, i mattoni con `rho_c` diverso)* **NON si riscrivono per la regola.**
 - ### **R-CONTI-5:** **una corsa nuova senza le tabelle NON si chiude come `FINITO` ma come «FINITA SENZA CONTI», col motivo** *(la skill `registro-corse`; finche' il modulo del registro non ha l'esito apposito: `FINITO` col punto che comincia con «SENZA CONTI:»)*.
 - ### **R-CONTI-6** *(Luca `2026-11-14` `09:34`, C5)*: **l'energia nelle tabelle dei conti e' la MEDIA su `100` tick** *(il valore per tick oscilla di `+-200` su `1.65e7` anche senza campi: `doc/referti_l2/bilancio_chiusura.txt`, la deviazione per tick `124`, quella di una media su `100` tick `2.1`)*.
+
+## LA REGOLA DELLA SCATOLA *(R-SCATOLA; Luca `2026-11-15` `12:01`, da ora per sempre)*
+
+- ### **R-SCATOLA-1:** **la scatola deve essere ALMENO `3` VOLTE l'oggetto piu' grande che contiene, compresa la sua deformazione del vuoto:** **il raggio dell'oggetto `R_ogg` e' il raggio oltre il quale `|phi - phi0|` medio per anello scende sotto il `2%` del suo massimo;** **la distanza dal centro al lato piu' vicino del toro `>= 3 R_ogg`, e il bordo** *(`R_A`)* **che comincia oltre `2 R_ogg`.**
+- **R-SCATOLA-2:** **ogni corsa NUOVA stampa all'inizio e alla fine i due rapporti** *(il lato piu' vicino / `R_ogg`, `R_A` / `R_ogg`)* **e se la regola e' rispettata.**
+- **R-SCATOLA-3:** **il perche'** *(Luca)*: **il trifoglio col suo vuoto ha un raggio di circa `45` nodi; su `L 162` il bordo comincia a `60` e il lato a circa `70`: lo spazio e' circa `1.5` volte l'oggetto, e gli oggetti grandi non stanno nel porto.**

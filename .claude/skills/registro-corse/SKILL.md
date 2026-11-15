@@ -39,6 +39,12 @@ description: Usare a ogni corsa del simulatore: aprire, aggiornare e chiudere la
    ```
    **Fino ad allora la voce blocca le corse del suo tipo, come deve.**
 
+## LA REGOLA DELLA SCATOLA *(R-SCATOLA; Luca `2026-11-15` `12:01`, da ora per sempre; anche nella ROTTA)*
+
+- ### **R-SCATOLA-1:** **la scatola deve essere ALMENO `3` VOLTE l'oggetto piu' grande che contiene, compresa la sua deformazione del vuoto:** **il raggio dell'oggetto `R_ogg` e' il raggio oltre il quale `|phi - phi0|` medio per anello scende sotto il `2%` del suo massimo;** **la distanza dal centro al lato piu' vicino del toro `>= 3 R_ogg`, e il bordo** *(`R_A`)* **che comincia oltre `2 R_ogg`.**
+- **R-SCATOLA-2:** **ogni corsa NUOVA stampa all'inizio e alla fine i due rapporti** *(il lato piu' vicino / `R_ogg`, `R_A` / `R_ogg`)* **e se la regola e' rispettata.**
+- **All'`apri` di una corsa nuova, nelle note:** **`R_ogg`, il lato piu' vicino e `R_A`, coi due rapporti.**
+
 ## Il commit del registro
 
 - **Subito dopo `apri` e subito dopo `chiudi`:** commit e push **del solo registro**:
