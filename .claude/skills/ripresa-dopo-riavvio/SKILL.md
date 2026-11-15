@@ -33,6 +33,11 @@ description: Usare all'inizio di ogni sessione dopo un riavvio o una caduta: con
 - **Prima di aprire una corsa che usa un ambiente in `E:\python`** *(per esempio `E:\python\venv_numba`)*: **controllare che E: sia collegato** *(`ls E:/python`)* **e che l'ambiente si avvii** *(`E:\python\<ambiente>\Scripts\python.exe -c "import numpy"`)*. **Se non c'e': niente corse su quell'ambiente; si scrive e si chiede a Luca.**
 - **L'ambiente delle corse su C: e' CONGELATO** *(R-DIPENDENZE-1)*: **niente installazioni.**
 
+## L'INTERPRETE DI E: PRIMA DELLE CORSE NUOVE *(R-AMBIENTE; Luca `2026-11-15` `15:46`)*
+
+- **Alla ripresa, PRIMA di aprire una corsa nuova:** **E: collegato e `E:\python\py3132\python.exe -c "import numpy, scipy; print(numpy.__version__, scipy.__version__)"` che parte** *(numpy `2.3.0`, scipy `1.17.1`)*. **Se no: la corsa NON parte, scritto, e si chiede a Luca: MAI un ripiego su C:** *(R-AMBIENTE-3)*.
+- **Le prosecuzioni delle corse nate su C:** *(`legati-GU`, `legati-GUpi`, `legati-t120`)* **ripartono su C:** *(R-AMBIENTE-1)*.
+
 ## La regola
 
 ### ⛔ **Se c'e' una voce APERTA nel registro o un file a meta': FERMO, e si chiede a Luca. Niente si rilancia da soli.**

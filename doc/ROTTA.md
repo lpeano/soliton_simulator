@@ -120,3 +120,11 @@
 ## LE REGOLE DEI COMMIT *(R-COMMIT; Luca `2026-11-15` `15:30`)*
 
 - ### **R-COMMIT** *(Luca `2026-11-15` `15:30`, da ora per sempre, tutti e due i rami)*: **R1** prima: nessun `index.lock`; il lucchetto di `committa` o assente o del processo VIVO (residuo: si toglie e si scrive nel messaggio); mai due commit insieme. **R2** l'ambiente: `TMP`/`TEMP` su C:, nessuna `GIT_CONFIG_*` (solo per la suite su E:), stampato. **R3** il limite `15` minuti, i hook in un log, l'ultima riga leggibile; se scade: si ferma, si scrive, R5, e si chiede a Luca. **R4** mai interrompere un commit a meta'. **R5** dopo: HEAD cambiato, push fatto, `HEAD == origin/<ramo>`, lo stage vuoto, nessun lucchetto, nessun `git.exe` del commit vivo: «COMMIT OK: <sha>, origin uguale, stage vuoto». *(Lo strumento: `committa2.py` nello scratchpad, fuori dal repo: i controlli R1, R2, R3, R5.)*
+
+## L'AMBIENTE DELLE CORSE NUOVE *(R-AMBIENTE; Luca `2026-11-15` `15:46`)*
+
+- ### **R-AMBIENTE-1:** **DA ORA tutte le corse NUOVE girano con l'interprete di E:** *(`E:\python\py3132\python.exe`)*; **le corse gia' in corsa e le loro PROSECUZIONI** *(`legati-GU`, `legati-GUpi`, `legati-t120` e le ripartenze dal tetto o dal riavvio)* **restano sull'ambiente di C: con cui sono nate** *(dichiarato)*. **La CONDIZIONE: la suite con l'interprete di E: `67/67` e AL BIT; finche' non c'e', le corse nuove restano su C:.**
+- **R-AMBIENTE-2:** **ogni corsa nuova scrive nel registro, all'apertura** *(nelle note di `registro apri`)*, **l'interprete** *(il percorso, la versione, numpy e scipy)* **e l'ambiente** *(`PYTHONNOUSERSITE=1`, `TMP`/`TEMP`)*.
+- ### **R-AMBIENTE-3:** **se E: non c'e' o l'interprete di E: non parte, la corsa NON parte** *(FERMO di quella corsa, scritto)*: **MAI un ripiego silenzioso su C:.**
+- **R-AMBIENTE-4:** **anche le SUITE e i collaudi del codice nuovo con l'interprete di E:** *(git accetta i repo temporanei su E: SOLO per il processo della suite: `GIT_CONFIG_COUNT=1`, `GIT_CONFIG_KEY_0=safe.directory`, `GIT_CONFIG_VALUE_0=*`; git `2.45.1` NON capisce `E:/python/tmp/*`: provato il `2026-11-15`)*.
+- **R-AMBIENTE-5:** **l'ambiente di C: resta CONGELATO** *(R-DIPENDENZE-1)*: **solo per le prosecuzioni sopra e su decisione di Luca.**
