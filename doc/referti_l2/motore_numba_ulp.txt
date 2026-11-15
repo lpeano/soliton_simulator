@@ -1,0 +1,40 @@
+[TIMBRO] prova_numba_ulp.py  sha1-BYTE ae43a338  committato e pulito
+==================================================================================================================================
+IL PERCHE' DELL'ULP (sez. 13): numpy 2.3.0, numba 0.68.1; sys.executable E:\python\py3132\python.exe
+### la CPU e numpy: np.show_runtime() (le estensioni SIMD trovate e quelle usate)
+WARNING: `threadpoolctl` not found in system! Install it by `pip install threadpoolctl`. Once installed, try `np.show_runtime` again for more detailed build information
+[{'numpy_version': '2.3.0',
+  'python': '3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 '
+            '64 bit (AMD64)]',
+  'uname': uname_result(system='Windows', node='DESKTOP-4E4VJPI', release='11', version='10.0.26300', machine='AMD64')},
+ {'simd_extensions': {'baseline': ['SSE', 'SSE2', 'SSE3'],
+                      'found': ['SSSE3',
+                                'SSE41',
+                                'POPCNT',
+                                'SSE42',
+                                'AVX',
+                                'F16C',
+                                'FMA3',
+                                'AVX2'],
+                      'not_found': ['AVX512F',
+                                    'AVX512CD',
+                                    'AVX512_SKX',
+                                    'AVX512_CLX',
+                                    'AVX512_CNL',
+                                    'AVX512_ICL']}}]
+==================================================================================================================================
+### H1, IL PRODOTTO COMPLESSO, vettori lunghi (200000):
+  numpy contro la formula semplice:   la parte reale 150465 su 200000 uguali (49535 diversi); l'immaginaria 150972 su 200000 uguali (49028 diversi)
+  numpy contro le FMA (i primi 20000):   reale fma(ar,br,-ai*bi) 20000 su 20000 uguali (0 diversi); fma(-ai,bi,ar*br) 13439 su 20000 uguali (6561 diversi)
+                                      immag fma(ar,bi,ai*br) 20000 su 20000 uguali (0 diversi); fma(ai,br,ar*bi) 13420 su 20000 uguali (6580 diversi)
+  numba contro la formula semplice:   reale 200000 su 200000 uguali (0 diversi); immag 200000 su 200000 uguali (0 diversi)
+  numba contro numpy:                 112588 su 200000 uguali (87412 diversi)
+  Python scalare contro semplice:     reale 20000 su 20000 uguali (0 diversi); immag 20000 su 20000 uguali (0 diversi)
+  numpy CORTO (1 elemento) contro numpy lungo: 2000 su 2000 uguali (0 diversi); contro la formula semplice: reale 1508 su 2000 uguali (492 diversi)
+  ### H1 VERA: numpy = una variante FMA in tutti gli elementi del campione; numba = la formula semplice in tutti
+### H3, REALE x COMPLESSO: numpy contro (x*br, x*bi): reale 200000 su 200000 uguali (0 diversi); immag 200000 su 200000 uguali (0 diversi)
+  numba complex(x,0)*b contro numpy: 200000 su 200000 uguali (0 diversi)
+### H2, L'EINSUM aij,aj->ai (50000): contro (0 + U0 v0) + U1 v1 in numpy: 56828 su 100000 uguali (43172 diversi)
+  il ciclo numba contro l'einsum: 100000 su 100000 uguali (0 diversi); contro (0 + U0 v0) + U1 v1 in numpy: 56828 su 100000 uguali (43172 diversi)
+==================================================================================================================================
+ESITO: H1 VERA: numpy = una variante FMA in tutti gli elementi del campione; numba = la formula semplice in tutti
