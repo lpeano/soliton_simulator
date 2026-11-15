@@ -1,0 +1,152 @@
+[TIMBRO] tempi_suite_conta.py  sha1-BYTE 4a1488fc  committato e pulito
+==================================================================================================================================
+I TEMPI DEI COMMIT E DELLA SUITE (Luca 2026-11-15 23:49): SOLO LETTURA; il registro REGISTRO_CORSE_mattone.md (sha1 525b63cd)
+==================================================================================================================================
+### 1. I COMMIT: 42 log di committa2.py (il primo commit_log_153231.txt, l'ultimo commit_log_234714.txt)
+  l'ora    il ramo              il commit   totale    hook   fuori  aperte i 3 passi piu' lenti
+  15:32:31 primo-ordine         00a4a108       304     0.0   304.0  3      
+  15:38:02 primo-ordine         2a27c535       299     0.0   299.0  3      
+  16:01:00 primo-ordine         a5cdb23c       355   354.4     0.6  3      [TIMBRO] _stage.py 137.8; [TIMBRO] _albero_era2.py 108.1; [H-NUCLEO-CONGELATO] 66.3
+  16:08:35 primo-ordine         10c5494d       323   322.9     0.1  3      [TIMBRO] _stage.py 130.9; [TIMBRO] _albero_era2.py 99.9; [H-NUCLEO-CONGELATO] 52.8
+  16:14:40 strumento-mattone    683f17eb       288   287.5     0.5  3      [TIMBRO] _stage.py 120.4; [TIMBRO] _albero_era2.py 84.5; [H-NUCLEO-CONGELATO] 45.0
+  16:40:21 strumento-mattone    ce4dde10       290   288.8     1.2  3      [TIMBRO] _stage.py 121.5; [TIMBRO] _albero_era2.py 84.5; [H-NUCLEO-CONGELATO] 45.4
+  16:45:33 strumento-mattone    4f4ca5a1       289   288.5     0.5  8      [TIMBRO] _stage.py 121.1; [TIMBRO] _albero_era2.py 84.6; [H-NUCLEO-CONGELATO] 44.4
+  16:53:33 motore-numba         NON OK         392   392.1    -0.1  8      [TIMBRO] _stage.py 189.5; [TIMBRO] _albero_era2.py 99.1; [H-NUCLEO-CONGELATO] 57.3
+  17:01:25 strumento-mattone    1d913fd1       289   288.9     0.1  5      [TIMBRO] _stage.py 122.1; [TIMBRO] _albero_era2.py 84.8; [H-NUCLEO-CONGELATO] 45.0
+  17:07:45 strumento-mattone    259ae269       286   285.2     0.8  3      [TIMBRO] _stage.py 120.3; [TIMBRO] _albero_era2.py 83.5; [H-NUCLEO-CONGELATO] 44.3
+  17:13:01 primo-ordine         dc831f8e       323   321.9     1.1  3      [TIMBRO] _stage.py 131.1; [TIMBRO] _albero_era2.py 100.4; [H-NUCLEO-CONGELATO] 51.6
+  17:39:16 strumento-mattone    aed31248       289   288.8     0.2  3      [TIMBRO] _stage.py 121.3; [TIMBRO] _albero_era2.py 84.3; [H-NUCLEO-CONGELATO] 45.6
+  17:44:26 strumento-mattone    20bb8afe       289   288.5     0.5  5      [TIMBRO] _stage.py 121.1; [TIMBRO] _albero_era2.py 85.4; [H-NUCLEO-CONGELATO] 44.5
+  17:52:41 strumento-mattone    224f2061       287   286.2     0.8  4      [TIMBRO] _stage.py 121.4; [TIMBRO] _albero_era2.py 83.7; [H-NUCLEO-CONGELATO] 43.9
+  17:57:54 primo-ordine         c503b81b       352   351.0     1.0  4      [TIMBRO] _stage.py 140.0; [TIMBRO] _albero_era2.py 114.2; [H-NUCLEO-CONGELATO] 54.6
+  18:12:58 motore-numba         ef724b73       360   359.5     0.5  4      [TIMBRO] _stage.py 168.0; [TIMBRO] _albero_era2.py 98.1; [H-NUCLEO-CONGELATO] 50.4
+  18:19:30 motore-numba         5b08a90e       368   368.1    -0.1  4      [TIMBRO] _stage.py 169.7; [TIMBRO] _albero_era2.py 100.0; [H-NUCLEO-CONGELATO] 53.2
+  18:27:40 strumento-mattone    88005322       291   291.2    -0.2  3      [TIMBRO] _stage.py 122.4; [TIMBRO] _albero_era2.py 85.7; [H-NUCLEO-CONGELATO] 45.6
+  18:33:58 primo-ordine         722fb8bd       321   320.9     0.1  3      [TIMBRO] _stage.py 131.6; [TIMBRO] _albero_era2.py 101.0; [H-NUCLEO-CONGELATO] 50.8
+  18:39:36 strumento-mattone    8818445b       288   287.4     0.6  3      [TIMBRO] _stage.py 121.1; [TIMBRO] _albero_era2.py 85.2; [H-NUCLEO-CONGELATO] 44.5
+  18:44:51 strumento-mattone    db57a540       291   291.1    -0.1  4      [TIMBRO] _stage.py 122.2; [TIMBRO] _albero_era2.py 86.3; [H-NUCLEO-CONGELATO] 45.4
+  18:49:59 primo-ordine         9ca55e8d       361   360.7     0.3  4      [TIMBRO] _stage.py 146.4; [TIMBRO] _albero_era2.py 115.1; [H-NUCLEO-CONGELATO] 55.9
+  18:56:36 motore-numba         417e7818       363   362.8     0.2  4      [TIMBRO] _stage.py 169.1; [TIMBRO] _albero_era2.py 98.1; [H-NUCLEO-CONGELATO] 50.9
+  19:26:53 motore-numba         93acca61       361   360.6     0.4  4      [TIMBRO] _stage.py 168.2; [TIMBRO] _albero_era2.py 98.2; [H-NUCLEO-CONGELATO] 50.6
+  19:34:40 strumento-mattone    7f01286a       331   330.3     0.7  4      [TIMBRO] _stage.py 139.2; [TIMBRO] _albero_era2.py 96.9; [H-NUCLEO-CONGELATO] 52.1
+  20:01:19 strumento-mattone    b6e7dad7       297   297.0     0.0  4      [TIMBRO] _stage.py 124.3; [TIMBRO] _albero_era2.py 86.4; [H-NUCLEO-CONGELATO] 48.0
+  20:07:06 strumento-mattone    ffa4fa82       338   337.9     0.1  4      [TIMBRO] _stage.py 148.5; [TIMBRO] _albero_era2.py 89.5; [H-NUCLEO-CONGELATO] 57.8
+  20:20:22 strumento-mattone    fcb5dcf6       312   311.3     0.7  3      [TIMBRO] _stage.py 124.5; [TIMBRO] _albero_era2.py 91.0; [H-NUCLEO-CONGELATO] 57.1
+  20:27:13 motore-numba         e1df85c3       326   325.8     0.2  3      [TIMBRO] _stage.py 152.0; [TIMBRO] _albero_era2.py 87.0; [H-NUCLEO-CONGELATO] 46.5
+  20:34:44 motore-numba         8402c74e       340   339.8     0.2  3      [TIMBRO] _stage.py 164.8; [TIMBRO] _albero_era2.py 88.1; [H-NUCLEO-CONGELATO] 45.6
+  20:45:00 strumento-mattone    15308c40       342   341.7     0.3  3      [TIMBRO] _stage.py 146.8; [TIMBRO] _albero_era2.py 106.6; [H-NUCLEO-CONGELATO] 47.0
+  21:23:58 strumento-mattone    ddf2fc02       293   292.4     0.6  3      [TIMBRO] _stage.py 124.4; [TIMBRO] _albero_era2.py 84.7; [H-NUCLEO-CONGELATO] 46.1
+  21:29:25 strumento-mattone    4e6ad2c9       290   289.8     0.2  4      [TIMBRO] _stage.py 121.9; [TIMBRO] _albero_era2.py 86.1; [H-NUCLEO-CONGELATO] 44.4
+  21:57:16 motore-numba         330d3718       364   364.3    -0.3  4      [TIMBRO] _stage.py 170.8; [TIMBRO] _albero_era2.py 98.2; [H-NUCLEO-CONGELATO] 51.2
+  22:27:15 motore-numba         007e9af1       367   366.5     0.5  4      [TIMBRO] _stage.py 170.4; [TIMBRO] _albero_era2.py 98.4; [H-NUCLEO-CONGELATO] 52.2
+  22:36:43 motore-numba         f743185e       364   363.6     0.4  4      [TIMBRO] _stage.py 168.7; [TIMBRO] _albero_era2.py 98.1; [H-NUCLEO-CONGELATO] 52.4
+  22:46:36 strumento-mattone    aedf6e51       335   334.7     0.3  4      [TIMBRO] _stage.py 142.8; [TIMBRO] _albero_era2.py 106.5; [H-NUCLEO-CONGELATO] 45.5
+  22:54:52 primo-ordine         be408f31       424   422.7     1.3  4      [TIMBRO] _stage.py 175.8; [TIMBRO] _albero_era2.py 130.8; [H-NUCLEO-CONGELATO] 64.7
+  23:07:28 motore-numba         5b33b7f5       363   362.7     0.3  4      [TIMBRO] _stage.py 167.4; [TIMBRO] _albero_era2.py 99.0; [H-NUCLEO-CONGELATO] 51.7
+  23:15:43 motore-numba         7be17e3f       363   362.6     0.4  4      [TIMBRO] _stage.py 169.6; [TIMBRO] _albero_era2.py 97.3; [H-NUCLEO-CONGELATO] 51.0
+  23:22:49 primo-ordine         1537b583       390   389.9     0.1  4      [TIMBRO] _stage.py 157.7; [TIMBRO] _albero_era2.py 119.2; [H-NUCLEO-CONGELATO] 62.8
+  23:47:14 motore-numba         52143b43       376   375.8     0.2  4      [TIMBRO] _stage.py 171.6; [TIMBRO] _albero_era2.py 102.0; [H-NUCLEO-CONGELATO] 55.0
+  (le corse aperte per nome sono nel registro; 'fuori' = il totale R3 meno l'ultima riga del log: i lucchetti, git commit, il push)
+----------------------------------------------------------------------------------------------------------------------------------
+### OGNI PASSO DEI HOOK, su tutti i log (in ordine della mediana): il passo, quante volte, la mediana, il massimo, la quota della mediana sul totale mediano dei hook 328.0 s
+  [TIMBRO] _stage.py                                40    139.6    189.5   42.6%
+  [H-NUCLEO-CONGELATO]                              40     50.7     66.3   15.5%
+  [TIMBRO] _albero_era2.py                          80     41.9    130.8   12.8%
+  [TIMBRO] _strumento_dalla_tabella.py              40     10.1     12.9    3.1%
+  [TIMBRO] _collauda_passo.py                       40      6.7      8.8    2.0%
+  [TIMBRO] _collauda_regole.py                      40      4.2      6.1    1.3%
+  [TIMBRO] _rif_nel_codice.py                       40      3.9      5.1    1.2%
+  [TIMBRO] _replay_registri.py                      40      3.5      4.7    1.1%
+  [TIMBRO] _un_solo_esecutore.py                    40      2.3      3.0    0.7%
+  [TIMBRO] _modularita_era2.py                      40      1.3      1.7    0.4%
+  [TIMBRO] _forma_referti.py                        40      1.2      1.9    0.4%
+  [TIMBRO] _controlli_nell_indice.py                40      1.1      1.4    0.3%
+  [TIMBRO] _citazioni_strutturate.py                40      0.7      0.8    0.2%
+  [TIMBRO] _rami_era2.py                            40      0.7      0.8    0.2%
+  [TIMBRO] _presidi_era2.py                         40      0.7      0.9    0.2%
+  [TIMBRO] _registri_indice.py                      40      0.6      1.4    0.2%
+  [TIMBRO] _testo_e_metadati.py                     40      0.6      0.9    0.2%
+  [TIMBRO] _collauda_schema_camminata.py            40      0.5      0.6    0.1%
+  [TIMBRO] _collauda_tempo_proprio.py               40      0.4      0.6    0.1%
+  [H-ID-OBBLIGATORIO]                                3      0.4      0.4    0.1%
+  [TIMBRO] _metodi_era2.py                          40      0.4      1.0    0.1%
+  [TIMBRO] _confronti_e_dati.py                     40      0.3      0.5    0.1%
+  [H-NON-TRACCIATI]                                 40      0.3      0.7    0.1%
+  [H-FILE]                                          40      0.2      0.3    0.1%
+  [H-INDICE]                                        22      0.0      0.0    0.0%
+==================================================================================================================================
+### 2. I COLLAUDI: dalle tabelle di 25 suite del 2026-11-15: suite_E.txt (67), suite_bc5.txt (67), suite_caldo.txt (67), suite_cf.txt (65), suite_cf2.txt (67), suite_codici7.txt (67), suite_fl.txt (67), suite_legati.txt (67), suite_ms.txt (67), suite_mst.txt (67), suite_notte.txt (67), suite_numba1.txt (66), suite_numba2.txt (67), suite_numba3.txt (67), suite_porto.txt (67), suite_py3132.txt (65), suite_py3132b.txt (67), suite_ruot.txt (67), suite_tetto.txt (67), suite_tre2.txt (67), suite_ulp.txt (67), suite_vel.txt (67), suite_w2.txt (67), suite_w2b.txt (67), suite_w3.txt (67)
+  il collaudo                                                    dove          n  mediana      max  quota  esatta  il file
+  i controlli sullo STAGE e non sul disco                        solo-CI      23   292.56   374.31  23.7%  no      csv/_stage.py
+  la corrente locale costruita                                   pre-commit   25   198.72   230.34  16.1%  no      primo_ordine/_collauda_corrente.py
+  il referto dell-infrastruttura (LENTO)                         solo-CI      25   105.56   124.73   8.6%  no      csv/_referto_infrastruttura_era2.py
+  `P-ALB` l-albero delle scelte                                  pre-commit   25    89.04   110.46   7.2%  no      csv/_albero_era2.py
+  `M-B1` PUO- fallire, ed e- provato                             solo-CI      24    76.50   115.99   6.2%  no      primo_ordine/_collauda_mb1.py
+  le letture del guscio e del moto                               solo-CI      25    52.16    58.98   4.2%  no      proto_camminata/_collauda_guscio.py
+  la deriva di `E` e la sorgente                                 pre-commit   25    51.46    61.29   4.2%  no      primo_ordine/_collauda_deriva.py
+  i presidi dell-indice, nei due versi                           pre-commit   25    44.51    57.97   3.6%  no      csv/_collaudo_presidi_indice.py
+  il banco del legame                                            solo-CI      25    44.42    53.43   3.6%  no      proto_camminata/_collauda_legame.py
+  i controlli della migrazione                                   pre-commit   25    43.30    64.88   3.5%  no      csv/_controlli_indice_v2.py
+  la misura COMPLETA di `L2`, su piu- stati                      solo-CI      25    32.83    41.14   2.7%  no      primo_ordine/_misura_completa_l2.py
+  `H_w`: l-energia PESATA, e se il passo con `cs` la conserva    pre-commit   25    27.95    35.61   2.3%  no      primo_ordine/_misura_hw.py
+  i presidi dell-indice                                          pre-commit   25    13.14    15.29   1.1%  no      csv/_presidio_indice.py
+  `P-ES1` un solo esecutore                                      pre-commit   25    12.62    14.87   1.0%  no      csv/_un_solo_esecutore.py
+  il determinismo                                                pre-commit   25    11.60    16.11   0.9%  no      primo_ordine/_collauda_determinismo.py
+  `P-T2` il replay dei registri                                  pre-commit   25    11.11    12.94   0.9%  no      csv/_replay_registri.py
+  la FORMA dei testi generati                                    pre-commit   25    10.50    13.85   0.9%  no      csv/_forma_referti.py
+  `P-RIF` un ID nel codice e- un costrutto                       pre-commit   25    10.45    12.27   0.8%  no      csv/_rif_nel_codice.py
+  `P-TAB` la legge si legge dalla tabella                        pre-commit   25     9.61    11.91   0.8%  no      csv/_strumento_dalla_tabella.py
+  `D0` la forma `cs` spenta e' il passo di oggi                  pre-commit   25     9.47    11.49   0.8%  no      primo_ordine/_collauda_cs.py
+  il checkpoint e la ripresa                                     pre-commit   25     8.33    11.24   0.7%  no      primo_ordine/_collauda_checkpoint.py
+  `P-MOD` la modularita-                                         pre-commit   24     7.34     9.18   0.6%  no      csv/_modularita_era2.py
+  il banco del v4                                                pre-commit   25     6.01     7.42   0.5%  no      proto_camminata/_collauda_banco4.py
+  `D1` l-invarianza di scala                                     pre-commit   25     5.50     7.93   0.4%  no      primo_ordine/_collauda_scala.py
+  la catena                                                      pre-commit   25     5.43     7.61   0.4%  no      primo_ordine/_collauda_passo.py
+  il confronto tabella / banco                                   pre-commit   25     5.15     6.83   0.4%  no      primo_ordine/_collauda_confronto.py
+  il generatore                                                  pre-commit   25     4.11     6.06   0.3%  no      primo_ordine/_collauda_genera.py
+  `D2` `cs` al centro, a punto fisso                             pre-commit   25     3.51     5.46   0.3%  no      primo_ordine/_collauda_cs_centro.py
+  la GUIDA, eseguita                                             pre-commit   25     2.90     4.33   0.2%  no      primo_ordine/_collauda_guida.py
+  `P-R1` ogni ramo e- dichiarato                                 pre-commit   25     2.66     3.18   0.2%  no      csv/_rami_era2.py
+  la memoria: `m1`..`m4`                                         pre-commit   25     2.53     3.49   0.2%  no      primo_ordine/_collauda_memoria.py
+  la simmetria `(P Theta)` sulla parte LINEARE                   pre-commit   25     2.31     3.16   0.2%  no      primo_ordine/_misura_theta_n.py
+  `P-C1` i controlli nell-indice                                 pre-commit   25     2.28     2.81   0.2%  no      csv/_controlli_nell_indice.py
+  il modello di sigillo                                          pre-commit   25     2.23     4.22   0.2%  no      primo_ordine/sigilli/_modello.py
+  le simmetrie e le conservazioni                                pre-commit   25     2.17     3.00   0.2%  no      primo_ordine/_collauda_simmetrie.py
+  `P-T3` le citazioni strutturate                                pre-commit   25     1.75     2.04   0.1%  no      csv/_citazioni_strutturate.py
+  `R60` le rotazioni del reticolo commutano col tick di oggi     pre-commit   25     1.67     2.95   0.1%  no      primo_ordine/_collauda_r60.py
+  `P-T1` il testo non si interpreta                              pre-commit   25     1.31     1.84   0.1%  no      csv/_testo_e_metadati.py
+  il banco della camminata v3                                    pre-commit   25     1.28     1.69   0.1%  no      proto_camminata/_collauda_banco3.py
+  il banco della camminata v2                                    pre-commit   25     1.21     1.62   0.1%  no      proto_camminata/_collauda_banco2.py
+  il banco della camminata                                       pre-commit   25     1.16     1.60   0.1%  no      proto_camminata/_collauda_banco.py
+  lo schema della tabella                                        pre-commit   25     1.12     1.71   0.1%  no      primo_ordine/leggi/_collauda_schema.py
+  `P-REG` le regole di gestione                                  pre-commit   25     1.10     1.41   0.1%  no      csv/_collauda_regole.py
+  `P-E1`..`P-E5` i presidi dell-era 2                            pre-commit   25     0.96     1.12   0.1%  no      csv/_presidi_era2.py
+  la barriera dei hook                                           pre-commit   25     0.90     1.19   0.1%  no      csv/_barriera.py
+  la `(P Theta)` col termine NON lineare, e `cs` nei due modi    pre-commit   25     0.85     2.26   0.1%  no      primo_ordine/_misura_theta_nonlineare.py
+  la pulizia delle temporanee                                    pre-commit   24     0.81     0.97   0.1%  no      csv/_pulizia.py
+  `P-ID` un id che nasce                                         pre-commit   25     0.74     1.27   0.1%  no      csv/_id_nuovo.py
+  il grafo valido                                                pre-commit   25     0.73     1.04   0.1%  no      primo_ordine/_collauda_grafo.py
+  l-arbitro fra le due vie                                       pre-commit   25     0.62     1.17   0.1%  no      csv/_registri_indice.py
+  il rinominamento, sul piano                                    pre-commit   25     0.61     0.91   0.0%  no      csv/_rinomina.py
+  il flusso materia-vuoto                                        pre-commit   25     0.58     1.03   0.0%  no      primo_ordine/_collauda_materia_vuoto.py
+  il presidio sullo STOP                                         pre-commit   25     0.57     1.18   0.0%  no      csv/_stop_coda.py
+  il tempo proprio in TUTTE le leggi                             pre-commit   25     0.56     1.89   0.0%  no      primo_ordine/_collauda_tempo_proprio.py
+  il motore: contenitore e pezzi unitari                         pre-commit   25     0.54     0.73   0.0%  SI      primo_ordine/_collauda_motore.py
+  le forme del legame                                            pre-commit   25     0.50     0.69   0.0%  no      primo_ordine/_collauda_forme.py
+  il censimento dei rami (NON blocca)                            solo-CI      25     0.50     0.70   0.0%  no      csv/_censimento_rami.py
+  chi la suite NON gira (NON blocca)                             pre-commit   25     0.48     0.56   0.0%  no      csv/_censimento_suite.py
+  il flusso di saturazione                                       pre-commit   25     0.47     0.68   0.0%  no      primo_ordine/_collauda_saturazione.py
+  la struttura compatta delle estremita-                         pre-commit   25     0.46     0.61   0.0%  no      primo_ordine/_collauda_incidenza.py
+  `P3` l-energia e la corrente                                   pre-commit   25     0.46     0.67   0.0%  no      primo_ordine/_collauda_energia.py
+  `D2-T` il tetto di `Omega`, la tolleranza derivata             pre-commit   25     0.43     0.51   0.0%  no      primo_ordine/_collauda_tetto.py
+  `P-M1` il documento dei metodi                                 pre-commit   25     0.37     0.43   0.0%  no      csv/_metodi_era2.py
+  `P-AB` i confronti e i dati                                    pre-commit   25     0.34     0.40   0.0%  no      csv/_confronti_e_dati.py
+  lo schema della camminata                                      pre-commit   25     0.29     0.46   0.0%  no      primo_ordine/_collauda_schema_camminata.py
+  lo schema della configurazione                                 pre-commit   25     0.29     0.38   0.0%  no      primo_ordine/config/schema_config.py
+  `@rif` byte-inerte                                             pre-commit   25     0.28     0.39   0.0%  no      primo_ordine/_rif.py
+----------------------------------------------------------------------------------------------------------------------------------
+### IN TUTTO (le mediane) 1233.9 s; il pre-commit 629.4 s, solo-CI 604.5 s; I PRIMI 5: 762.4 s, il 61.8% del totale
+### la somma "esatta" nel file del collaudo: 1 su 67 (il motore: contenitore e pezzi unitari)
+### IN FILA O IN PARALLELO: dal codice di collauda.py: un ciclo `for nome, cmd, dove in scelti: ... gira(cmd)` (True) e gira() fa subprocess.run (True), che ASPETTA la fine: IN FILA, uno alla volta
+### i file letti, sha1: REGISTRO_CORSE_mattone.md 525b63cd, collauda.py c90f9aef
+==================================================================================================================================
