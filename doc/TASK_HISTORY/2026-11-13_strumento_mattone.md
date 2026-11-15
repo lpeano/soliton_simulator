@@ -968,3 +968,9 @@
 
 - **`massa_stesso_tick.py`** *(`ddf2fc02`; `massa_stesso_tick.txt`; l'interprete di E:)*: **`legati-GU`: `13` tick comuni** *(`6500` ... `12500`)*, **il massimo `1.495e-08`** *(a `12500`: persa `1320.8002`, bordo `1320.8000`)*; **`legati-GUpi`: `13` tick comuni** *(`2500` ... `8500`)*, **il massimo `1.856e-08`.** **PASSANO** *(la stessa soglia `1e-6`; il resto e' l'arrotondamento della tabella a `5` cifre)*. ### **La causa confermata: il controllo di `legati.py` su due istanti diversi, non la fisica.**
 - **R2:** **`legati-GU-2` aperta** *(da `12000`, gli stati `11950` e `12000`; l'interprete di C:)*; **`legati-GUpi-2` alla chiusura di `triangolo-ruotato`.**
+
+### 24.28 IL TRIANGOLO RUOTATO: (S) SI', (L) NO: IL VUOTO RESTA DOVE NASCE (`+0.04` GRADI IN `2000` TICK), I CENTRI GIRANO (`+4.21`); `legati-GUpi-2` APERTA
+
+- **triangolo-ruotato** *(`triangolo_ruotato.py`, `b6e7dad7`; `triangolo_ruotato.txt`, le mappe `9.8 MB`, il giro e la serie forzati nel repo; `20:13:41`-`22:45:53`, uscita `0`, l'interprete di E:; CHIUSA FINITO)*: **i DEVE `3/3` e `2/2`; i vertici ruotati sui nodi buoni sono di nuovo ESATTAMENTE equilateri, lato `40.3609`** *(non `39`)*; **a `2000` i lati `40.78`-`40.84`; il giro `+1` in tutte e `12` le componenti a ogni controllo; Gauss `5.961e-11`.**
+- ### **LA LETTURA** *(`triangolo_ruotato_lettura.txt`)*: **il vuoto entro `40` da `-15.15` a `-15.12` gradi** *(`+0.04`)*; **i centri da `-15.06` a `-10.85`** *(`+4.21`, circa `2.1` ogni `1000` tick, come il triangolo non ruotato)*. ### **(S) SI'** *(entro `2` gradi)*; **(L) NO** *(non va verso `-30` ne' verso `0`)*. **Il vuoto NON e' bloccato dal reticolo: resta DOVE NASCE, e la materia gli gira dentro.** *(Se sia la scatola, come dice (S), non lo dice questa prova: dice solo che il reticolo non tira.)*
+- **R3:** **`legati-GUpi-2` aperta** *(da `8000`, gli stati `7950` e `8000`; l'interprete di C:)*.

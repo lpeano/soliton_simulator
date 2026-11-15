@@ -1,0 +1,16 @@
+[TIMBRO] triangolo_ruotato.py  sha1-BYTE 9acb516b  committato e pulito
+==================================================================================================================================
+IL TRIANGOLO RUOTATO, LA LETTURA (Luca 18:45): l'orientamento a tre punte del vuoto (entro 40) e dei centri, ogni 60 tick, attorno al baricentro dei centri al tick 0 (99.531, 80.694)
+==================================================================================================================================
+    k     0: il vuoto   -15.15   i centri   -15.06
+    k   300: il vuoto   -14.99   i centri   -14.35
+    k   600: il vuoto   -14.87   i centri   -13.70
+    k   900: il vuoto   -14.96   i centri   -13.04
+    k  1200: il vuoto   -14.86   i centri   -12.47
+    k  1500: il vuoto   -14.81   i centri   -11.79
+    k  1800: il vuoto   -15.05   i centri   -11.20
+    k  1980: il vuoto   -15.12   i centri   -10.85
+----------------------------------------------------------------------------------------------------------------------------------
+### il vuoto da -15.15 a -15.12 (+0.04 gradi); i centri da -15.06 a -10.85 (+4.21)
+### LA PREVISIONE (sez. 24.23, nella convenzione del codice): (S) il vuoto resta entro 2 gradi dalla partenza -> SI'; (L) il vuoto va verso le direzioni del reticolo di almeno 5 gradi -> NO
+==================================================================================================================================
