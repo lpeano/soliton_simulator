@@ -25856,3 +25856,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Un mio errore:** **la corsa si e' fermata al tetto di `18000 s`** *(`MT.TETTO_S`)* **a `k 1814`: `coppia_distanze.py` non lo porta al `28800` di Luca `15:22`.**
 - **I numeri, che NON si leggono:** **`d0 66.000`, `d''` sui tick `250`-`1814` `-1.34e-08 +- 9.3e-11`; la massa oltre `R_A` `1.5e-05`.**
 - ### **FERMO, due decisioni di Luca:** **(a) la soglia `1e-10` su `L 243`** *(si scala con la scena e coi mattoni, o il `2e-10` e' un difetto da cercare)*; **(b) se rifare la corsa col tetto di `28800`.**
+
+### 2026-11-15 07:55 -- LA PARTE B SU L 243 (MGU): IL DEVE DI GAUSS FALLISCE DI POCO (1.045e-10); LA MIA LETTURA DELLE 07:30 CORRETTA: IL RESIDUO DIPENDE DALLA SCENA, NON SOLO DALLA GRANDEZZA
+
+- **Sul ramo** *(`965c2e3c`; la sez. `22.12`)*: **i DEVE del vuoto passano; ### Gauss FALLISCE: `1.045e-10`** *(l'iniziale `9.86e-11`)*. **Non si legge:** **il raggio a `2000` `12.596` contro `12.257` su `L 162`** *(`+2.8%`, quando (MU) tornava a `4` cifre)*.
+- ### **Correzione della mia lettura delle `07:30`:** **un mattone su `L 162` nella scena di S162 ha il residuo `5e-13`; due nella scena di C35-pi su `L 162` `6.3e-11`; su `L 243` uno `9.9e-11`, due `2.1e-10`.** **Dipende da come la scena e' costruita** *(un fattore `100` fra due scene di `L 162`)*; **la causa non la so: da cercare** *(`A11`)*, **non da coprire spostando la soglia.**
+- **FERMO anche su questa corsa** *(si aggiunge alle decisioni (a) e (b) delle `07:30`)*. **In corsa resta solo il 2x.**
