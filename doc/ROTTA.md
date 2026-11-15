@@ -121,6 +121,12 @@
 
 - ### **R-COMMIT** *(Luca `2026-11-15` `15:30`, da ora per sempre, tutti e due i rami)*: **R1** prima: nessun `index.lock`; il lucchetto di `committa` o assente o del processo VIVO (residuo: si toglie e si scrive nel messaggio); mai due commit insieme. **R2** l'ambiente: `TMP`/`TEMP` su C:, nessuna `GIT_CONFIG_*` (solo per la suite su E:), stampato. **R3** il limite `15` minuti, i hook in un log, l'ultima riga leggibile; se scade: si ferma, si scrive, R5, e si chiede a Luca. **R4** mai interrompere un commit a meta'. **R5** dopo: HEAD cambiato, push fatto, `HEAD == origin/<ramo>`, lo stage vuoto, nessun lucchetto, nessun `git.exe` del commit vivo: «COMMIT OK: <sha>, origin uguale, stage vuoto». *(Lo strumento: `committa2.py` nello scratchpad, fuori dal repo: i controlli R1, R2, R3, R5.)*
 
+
+## LE NAVI NON SI RIUNISCONO DA SOLE *(R-NAVI; Luca `2026-11-15` `18:28`, da ora per sempre)*
+
+- ### **R-NAVI:** **NESSUN merge fra rami** *(in nessuna direzione, compresi i rami di lavoro)* **senza un mandato di Luca che lo NOMINI.** **Se serve un dato di un altro ramo: si LEGGE in sola lettura dal suo worktree** *(il percorso pieno scritto nel referto)* **o si COPIA come dato fuori dal repo** *(su E:)* **con lo sha1 scritto.**
+- **Perche':** **il `2026-11-15` il merge di `strumento-mattone` in `motore-numba`** *(`5b08a90e`, `18:19`, `147` file, nessuno sotto `primo_ordine/`)* **e' stato fatto senza mandato** *(«scelta mia»: un errore)*; **TENUTO per decisione di Luca delle `18:28`** *(annullarlo costava piu' che tenerlo: niente push forzato, niente revert)*.
+
 ## L'AMBIENTE DELLE CORSE NUOVE *(R-AMBIENTE; Luca `2026-11-15` `15:46`)*
 
 - ### **R-AMBIENTE-1:** **DA ORA tutte le corse NUOVE girano con l'interprete di E:** *(`E:\python\py3132\python.exe`)*; **le corse gia' in corsa e le loro PROSECUZIONI** *(`legati-GU`, `legati-GUpi`, `legati-t120` e le ripartenze dal tetto o dal riavvio)* **restano sull'ambiente di C: con cui sono nate** *(dichiarato)*. **La CONDIZIONE: la suite con l'interprete di E: `67/67` e AL BIT; finche' non c'e', le corse nuove restano su C:.**
