@@ -816,3 +816,9 @@
 - **D** *(da ora per sempre)*: **la regola nella ROTTA e nello SKILL della ripresa.**
 
 - **Lo spazio su C: dopo l'installazione** *(C2)*: **alle `12:4x` `15596687360` byte** *(`-483 MB`)*; **a suite finita `16171479040`** *(`+91 MB` sul prima)*: **il calo era lo stage temporaneo della suite in `%TEMP%`, non pip** *(la cache pip di C: ferma alle `12:06`)*. **C: invariato.**
+
+### 24.8 B3, LA FASE 1 DEL TRIANGOLO A `120` GRADI SU `L 162`: `5/5`; IL LATO CRESCE PIANO (`39` -> `39.94`), IL GIRO `+1` IN TUTTE LE `12` COMPONENTI A OGNI CONTROLLO
+
+- **legati-t120-a** *(`triangolo_120.py corsa`; `triangolo_t120.txt`, le mappe `29.1 MB`, il giro e la serie forzati nel repo; `11:08:57`-`13:34:47`, uscita `0`; CHIUSA FINITO)*: **i DEVE del tick `0` `5/5`** *(i lati `39` al bit, antiorari, le masse a `4.7e-16`, il giro `+1`, il vuoto senza materia)*; **Gauss al massimo `5.808e-11`; la massa oltre `R_A` al massimo `2.055e-05`; la massa uscita dal bordo `642.7`.**
+- **I numeri** *(la lettura con P1-P3 e P2' alla fine di B3, in `legati.py lettura` o in un file nuovo)*: **i lati a `2000` `39.9035`, `39.9658`, `39.9549`; il giro della componente piu' grande `+1` a OGNI controllo, e tutte le `12` a `+1`; la densita' al centro `28.6` a `0`, `20.4` a `500` e `1000`, `22.2` a `1500`, `30.7` a `2000`.**
+- **La fase 2** *(`legati-t120`, da `2000` a `6000`)* **aperta alle `13:35`: c'e' il posto** *(B6 delle `12:04`: la parte B non ha ancora bisogno del posto; la cottura di `L 324` non e' partita)*.
