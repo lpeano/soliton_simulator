@@ -1,0 +1,14 @@
+{
+ "caso": "MGU",
+ "scena": "S162",
+ "k": 3000,
+ "t": 63000,
+ "file": "E:\\soliton_simulator\\mattone\\L162_MGU_03000.npz",
+ "cotto": true,
+ "picchi": [
+  1241.6593945720754,
+  1260.5066983618256
+ ],
+ "da": "E:\\soliton_simulator\\mattone\\MGU_10000.npz",
+ "codice": "csv/solitone/mattone_triangolo.py"
+}

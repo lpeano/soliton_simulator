@@ -1,0 +1,104 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] profilo_nucleo.py  sha1-BYTE 754142aa  committato e pulito
+============================================================================================================================================
+LA PROFILAZIONE FINE DEL TICK (Luca 15:50, M2 (a)): E:\soliton_simulator\mattone\L162_MGU_03000.npz, (MGU), 20 tick; cProfile; le funzioni del nucleo e delle librerie del tick; la macchina CARICA: le FRAZIONI
+============================================================================================================================================
+### il tempo totale 83.55 s, 4.177 s per tick
+--------------------------------------------------------------------------------------------------------------------------------------------
+### (1) PER TEMPO PROPRIO: le funzioni del nucleo e delle librerie del tick (le prime 30); la frazione del totale
+    frazione chiamate  proprio s   cumul. s  la funzione
+      0.1064      480      8.893     25.843  primo_ordine\energia_pesata.py:182(termini_di_h)
+      0.0805      480      6.724      7.144  primo_ordine\motore.py:542(elicita)
+      0.0737      120      6.154     39.279  csv\solitone\tick_lapse.py:58(reazione)
+      0.0521      240      4.350      7.113  primo_ordine\flussi_parziali.py:378(_hop_psi_mezzo)
+      0.0386      120      3.228      3.231  primo_ordine\motore.py:484(_ruota_attorno_a_n)
+      0.0296      480      2.471     10.074  primo_ordine\flussi_parziali.py:317(_grover_mezzo)
+      0.0265      620      2.212      4.526  csv\solitone\tick_lapse.py:39(rho_di)
+      0.0180      120      1.501      3.222  primo_ordine\materia_vuoto.py:210(applica)
+      0.0132      480      1.103      1.682  primo_ordine\energia_pesata.py:267(d_peso_arco)
+      0.0129      240      1.075     11.299  primo_ordine\flussi_parziali.py:450(grover)
+      0.0118     1440      0.984      0.984  primo_ordine\flussi_parziali.py:246(espi)
+      0.0114      240      0.953      2.199  primo_ordine\flussi_parziali.py:411(_hop_phi_mezzo)
+      0.0095      480      0.791     32.895  csv\solitone\tick_lapse.py:49(omega_psi)
+      0.0082      720      0.686      1.990  primo_ordine\flussi_parziali.py:184(s_arco)
+      0.0070      480      0.584      0.588  primo_ordine\flussi_parziali.py:355(_alfa_beta)
+      0.0050      120      0.416      8.144  primo_ordine\flussi_parziali.py:460(hop_psi)
+      0.0047      120      0.397      0.820  primo_ordine\motore.py:565(densita_materia)
+      0.0044       20      0.367      0.409  csv\solitone\bordo.py:34(assorbi)
+      0.0044      480      0.367      0.420  primo_ordine\materia_vuoto.py:123(N_s1)
+      0.0039       40      0.328      0.642  csv\solitone\tick_lapse.py:106(fase_a)
+      0.0031       40      0.260      3.221  csv\_u1_prototipo.py:218(sp)
+      0.0025      120      0.210      0.302  primo_ordine\motore.py:582(densita_vuoto)
+      0.0021      120      0.176      3.003  primo_ordine\flussi_parziali.py:470(hop_phi)
+      0.0021     1680      0.173      0.199  primo_ordine\flussi_parziali.py:76(dtau_nodo)
+      0.0017       40      0.141      0.284  csv\solitone\p6_u_breve.py:97(rho_nodi)
+      0.0016    14160      0.136      0.172  primo_ordine\motore.py:369(_b)
+      0.0014      520      0.119      0.119  csv\solitone\tick_lapse.py:32(Np_di)
+      0.0011       40      0.089      0.089  csv\_u1_prototipo.py:153(B)
+      0.0010      960      0.086      0.086  primo_ordine\incidenza.py:213(grado)
+      0.0010       20      0.081     46.331  csv\solitone\tick_lapse.py:83(cs_al_centro)
+--------------------------------------------------------------------------------------------------------------------------------------------
+### (2) PER TEMPO CUMULATO: le funzioni del nucleo e delle librerie del tick (le prime 30); la frazione del totale
+    frazione chiamate  proprio s   cumul. s  la funzione
+      0.8483       20      0.042     70.874  csv\solitone\p6_bracci.py:82(tick_GU)
+      0.5546       20      0.081     46.331  csv\solitone\tick_lapse.py:83(cs_al_centro)
+      0.4701      120      6.154     39.279  csv\solitone\tick_lapse.py:58(reazione)
+      0.3937      480      0.791     32.895  csv\solitone\tick_lapse.py:49(omega_psi)
+      0.3553      100      0.014     29.684  primo_ordine\tick.py:68(percorri_tick)
+      0.3093      480      8.893     25.843  primo_ordine\energia_pesata.py:182(termini_di_h)
+      0.1427       20      0.017     11.919  csv\solitone\p6_u_breve.py:82(gauss_sparso)
+      0.1352      240      1.075     11.299  primo_ordine\flussi_parziali.py:450(grover)
+      0.1206      480      2.471     10.074  primo_ordine\flussi_parziali.py:317(_grover_mezzo)
+      0.0977      120      0.023      8.166  primo_ordine\motore.py:520(_spostamento_trasporto)
+      0.0975      120      0.416      8.144  primo_ordine\flussi_parziali.py:460(hop_psi)
+      0.0885      120      0.001      7.396  primo_ordine\motore.py:429(_grover)
+      0.0855      480      6.724      7.144  primo_ordine\motore.py:542(elicita)
+      0.0851      240      4.350      7.113  primo_ordine\flussi_parziali.py:378(_hop_psi_mezzo)
+      0.0542      620      2.212      4.526  csv\solitone\tick_lapse.py:39(rho_di)
+      0.0468      120      0.002      3.907  primo_ordine\motore.py:450(_grover_scalare)
+      0.0412      120      0.015      3.444  primo_ordine\motore.py:464(_moneta_spin)
+      0.0396      480      0.004      3.312  primo_ordine\motore.py:391(_somma_per_nodo)
+      0.0387      120      3.228      3.231  primo_ordine\motore.py:484(_ruota_attorno_a_n)
+      0.0386      120      0.002      3.224  primo_ordine\motore.py:635(_materia_vuoto)
+      0.0386      120      1.501      3.222  primo_ordine\materia_vuoto.py:210(applica)
+      0.0386       40      0.260      3.221  csv\_u1_prototipo.py:218(sp)
+      0.0362      120      0.022      3.024  primo_ordine\motore.py:678(_spostamento_scalare)
+      0.0359      120      0.176      3.003  primo_ordine\flussi_parziali.py:470(hop_phi)
+      0.0332      720      0.024      2.771  primo_ordine\flussi_parziali.py:305(z_arco)
+      0.0263      240      0.953      2.199  primo_ordine\flussi_parziali.py:411(_hop_phi_mezzo)
+      0.0238      720      0.686      1.990  primo_ordine\flussi_parziali.py:184(s_arco)
+      0.0201      480      1.103      1.682  primo_ordine\energia_pesata.py:267(d_peso_arco)
+      0.0141       40      0.003      1.180  csv\_u1_prototipo.py:227(sv)
+      0.0118     1440      0.984      0.984  primo_ordine\flussi_parziali.py:246(espi)
+--------------------------------------------------------------------------------------------------------------------------------------------
+### (3) LE FUNZIONI NATIVE CHE PESANO E CHI LE CHIAMA (pstats.print_callers)
+    --- gssv
+         Ordered by: internal time
+      {built-in method scipy.sparse.linalg._dsolve._superlu.gssv}  <-      20   11.283   11.283  E:\python\py3132\Lib\site-packages\scipy\sparse\linalg\_dsolve\linsolve.py:134(spsolve)
+    --- 'at' of 'numpy.ufunc'
+         Ordered by: internal time
+      {method 'at' of 'numpy.ufunc' objects}  <-      40    0.033    0.033  C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\p6_u_breve.py:97(rho_nodi)
+                                                     620    0.549    0.549  C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\tick_lapse.py:39(rho_di)
+                                                     480    0.404    0.404  C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\tick_lapse.py:49(omega_psi)
+                                                     960    0.743    0.743  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\energia_pesata.py:175(_per_nodo)
+                                                     960    5.266    5.266  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\energia_pesata.py:182(termini_di_h)
+                                                     480    3.225    3.225  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:391(_somma_per_nodo)
+                                                     480    0.386    0.386  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:542(elicita)
+                                                     120    0.103    0.103  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:565(densita_materia)
+                                                     120    0.088    0.088  C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:582(densita_vuoto)
+    --- 'take' of 'numpy.ndarray'
+         Ordered by: internal time
+      {method 'take' of 'numpy.ndarray' objects}  <-    3000    6.074    6.074  E:\python\py3132\Lib\site-packages\numpy\_core\fromnumeric.py:51(_wrapfunc)
+    --- c_einsum
+         Ordered by: internal time
+      {built-in method numpy._core._multiarray_umath.c_einsum}  <-     960    4.645    4.645  E:\python\py3132\Lib\site-packages\numpy\_core\einsumfunc.py:1057(einsum)
+    --- 'reduce' of 'numpy.ufunc'
+         Ordered by: internal time
+      {method 'reduce' of 'numpy.ufunc' objects}  <-      80    0.011    0.011  E:\python\py3132\Lib\site-packages\numpy\_core\_methods.py:41(_amax)
+                                                          80    0.007    0.007  E:\python\py3132\Lib\site-packages\numpy\_core\_methods.py:45(_amin)
+                                                          20    0.001    0.001  E:\python\py3132\Lib\site-packages\numpy\_core\_methods.py:49(_sum)
+                                                          40    0.002    0.002  E:\python\py3132\Lib\site-packages\numpy\_core\_methods.py:117(_mean)
+                                                        4720    2.373    2.373  E:\python\py3132\Lib\site-packages\numpy\_core\fromnumeric.py:69(_wrapreduction)
+                                                         720    0.011    0.011  E:\python\py3132\Lib\site-packages\numpy\_core\fromnumeric.py:89(_wrapreduction_any_all)
+============================================================================================================================================

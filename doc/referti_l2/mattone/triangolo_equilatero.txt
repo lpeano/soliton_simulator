@@ -1,0 +1,17 @@
+[TIMBRO] triangolo_equilatero.py  sha1-BYTE 14ef2563  committato e pulito
+==================================================================================================================================
+I TRIANGOLI ESATTAMENTE EQUILATERI (Luca 02:08): P (112, 107); la rotazione di 60 gradi nella convenzione del codice R(a, b) = (a - b, a)
+==================================================================================================================================
+    (a, b) = (13, 0): i vertici [[112, 107], [151, 107], [151, 146]]; i lati veri ['39.000000000000', '39.000000000000', '39.000000000000']; il lato atteso 39.000000000
+  DEVE PASSARE: (a, b) = (13, 0): i tre lati uguali entro 1e-9 e i vertici sui nodi buoni                            PASSA   max - min 0.000e+00; buoni True
+    (a, b) = (0, 13): i vertici [[112, 107], [112, 146], [73, 107]]; i lati veri ['39.000000000000', '39.000000000000', '39.000000000000']; il lato atteso 39.000000000
+  DEVE PASSARE: (a, b) = (0, 13): i tre lati uguali entro 1e-9 e i vertici sui nodi buoni                            PASSA   max - min 0.000e+00; buoni True
+    (a, b) = (13, 13): i vertici [[112, 107], [151, 146], [112, 146]]; i lati veri ['39.000000000000', '39.000000000000', '39.000000000000']; il lato atteso 39.000000000
+  DEVE PASSARE: (a, b) = (13, 13): i tre lati uguali entro 1e-9 e i vertici sui nodi buoni                           PASSA   max - min 0.000e+00; buoni True
+    (a, b) = (8, 5): i vertici [[112, 107], [136, 122], [121, 131]]; i lati veri ['21.000000000000', '21.000000000000', '21.000000000000']; il lato atteso 21.000000000
+  DEVE PASSARE: (a, b) = (8, 5): i tre lati uguali entro 1e-9 e i vertici sui nodi buoni                             PASSA   max - min 0.000e+00; buoni True
+    (a, b) = (-13, 0): i vertici [[112, 107], [73, 107], [73, 68]]; i lati veri ['39.000000000000', '39.000000000000', '39.000000000000']; il lato atteso 39.000000000
+  DEVE PASSARE: (a, b) = (-13, 0): i tre lati uguali entro 1e-9 e i vertici sui nodi buoni                           PASSA   max - min 0.000e+00; buoni True
+  DEVE FALLIRE: l'altra convenzione (-b, a + b) a (8, 5): i lati uguali                                              ### FALLISCE   i lati ['21.0000', '55.0727', '48.2804']
+==================================================================================================================================
+ESITO: 6/6 controlli come devono; fallite []

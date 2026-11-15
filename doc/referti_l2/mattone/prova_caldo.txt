@@ -1,0 +1,34 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_caldo.py  sha1-BYTE 2c2b39ff  committato e pulito
+==================================================================================================================================
+LA PARTENZA A CALDO (7-bis; Luca 12:04, A2; 12:09): E:\soliton_simulator\mattone\L162_MGU_03000.npz da solo nella scena di S162, il bordo da R_A 60, G+U; 200 tick a freddo e a caldo; la ripartenza da 150; la soglia dei giri 1.3
+### la macchina CARICA (tre corse lunghe in giro): il tempo per tick si scrive, non decide (Luca 12:09)
+==================================================================================================================================
+### A FREDDO: 200 tick, 4.501 s per tick; i giri: la media 4.0000 (min 4, max 4)
+### A CALDO: 200 tick, 4.443 s per tick; i giri: la media 4.0000 (min 4, max 4); senza il primo tick (che parte a freddo) 4.0000; il primo tick 4
+----------------------------------------------------------------------------------------------------------------------------------
+### (i) LO STATO FINALE, a caldo contro a freddo: la differenza relativa massima per chiave (max |caldo - freddo| / max |freddo|)
+    psi_h     1.175e-14
+    phi_h     4.098e-14
+    rho       9.356e-15
+    Lambda    2.630e-14
+    campo_E   4.004e-12
+    campo_A   3.975e-15
+  DEVE PASSARE: (i) il picco a caldo = a freddo entro 1e-08 relativo                                                 PASSA   3.819e-16 (1.1908287494e+03 contro 1.1908287494e+03)
+  DEVE PASSARE: (i) il raggio a caldo = a freddo entro 1e-08 relativo                                                PASSA   0.000e+00 (12.4249254251 contro 12.4249254251)
+  DEVE PASSARE: (i) il centro a caldo = a freddo entro 1e-08 (la distanza / il raggio, mia)                          PASSA   1.144e-15 (la distanza 1.421e-14)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: (iii) la ripartenza a caldo dal tick 150 (lo stato, il campo e cs_prec) per 50 tick = il tick 200 de PASSA   diverse: []
+----------------------------------------------------------------------------------------------------------------------------------
+### (ii) I GIRI: a freddo 4.0000 per tick, a caldo 4.0000 (senza il primo); IL RAPPORTO 1.0000 (la soglia 1.3); il tempo per tick 4.501 contro 4.443 s, il rapporto 1.0131 (la macchina CARICA: non decide)
+### (ii) LA DISTRIBUZIONE DEI GIRI (Luca 12:12)
+    a freddo: 200 tick; il minimo 4, la media 4.0000, il massimo 4; la distribuzione: 4 giri: 200 tick
+    a caldo (senza il primo tick): 199 tick; il minimo 4, la media 4.0000, il massimo 4; la distribuzione: 4 giri: 199 tick
+### A3: IL RAPPORTO DEI GIRI E' SOTTO 1.3: la parte B col codice di oggi
+==================================================================================================================================
+ESITO: 4/4 controlli come devono; fallite []

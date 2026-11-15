@@ -1,0 +1,10 @@
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+==================================================================================================================================
+I MATTONI CON rho_c DIVERSO, LA LETTURA SUL RAGGIO (Luca 09:34, C6; l'errore del guardiano n.156: la lettura L4 era costruita su A, che satura a 1)
+==================================================================================================================================
+    (MGdoppio) rho_c   454117.150: il raggio da 8.249 a 10.136, l'aumento +1.887
+    (MG      ) rho_c   227058.575: il raggio da 8.249 a 11.268, l'aumento +3.019
+    (MGmezzo ) rho_c   113529.287: il raggio da 8.249 a 13.080, l'aumento +4.831
+    il rapporto degli aumenti per OGNI dimezzamento di rho_c (cioe' per ogni raddoppio del lapse): (MG)/(MGx2) 1.600, (MG/2)/(MG) 1.600; la potenza log2: 0.678 e 0.678
+    ### LA LETTURA DEL GUARDIANO (n.156): la risposta del raggio e' GRADUALE, circa 1.60 volte per raddoppio (la potenza circa 0.68), molto sensibile, senza collasso; l'ipotesi «in bilico» NON e' confermata.
+==================================================================================================================================

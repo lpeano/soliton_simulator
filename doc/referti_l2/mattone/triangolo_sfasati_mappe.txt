@@ -1,0 +1,18 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_mappe.py  sha1-BYTE cd10ffc2  committato e pulito
+==================================================================================================================================
+LE MAPPE DEL TRIANGOLO (T-sfasati) (Luca 21:37; 00:05 per sfasati; solo lettura): rho, |phi - phi0|, |E| ai tick (0, 500, 1000, 1500, 2000); lo stato 0 RICOSTRUITO (le righe dell'incollatura di mattone_triangolo.corsa)
+==================================================================================================================================
+### lo stato 0 ricostruito: i vertici [[112, 107], [73, 68], [112, 68]]; la massa 2.9806855512e+06 (la serie della corsa a k 0: le masse dei pezzi ['9.9651879500e+05', '9.8828321627e+05', '9.9585796623e+05'])
+### lo stato 500: E:\soliton_simulator\mattone\triangolo_sfasati_00500.npz (lo sha di psi_h nel meta 31991653c6bede99185621f9280cdd91ddbb03d8)
+### lo stato 1000: E:\soliton_simulator\mattone\triangolo_sfasati_01000.npz (lo sha di psi_h nel meta 3a55a48cece1d818c3507b068e1c81e40ef88d41)
+### lo stato 1500: E:\soliton_simulator\mattone\triangolo_sfasati_01500.npz (lo sha di psi_h nel meta b3d9ddd2c140f6da4a06c8a229f54cb4212f15e7)
+### lo stato 2000: E:\soliton_simulator\mattone\triangolo_sfasati_02000.npz (lo sha di psi_h nel meta 3dbfea50cc6acfe6e724824a4886dea679e38135)
+    k    0: rho max 1.3008e+03, somma 2.980686e+06; |phi - phi0| max 5.7763e+00; |E| max 5.2789e-01; i centri [[112.29345703125, 106.5069351196289], [73.16094207763672, 67.48661041259766], [112.48047637939453, 67.6598892211914]]
+    k  500: rho max 1.3858e+03, somma 2.980626e+06; |phi - phi0| max 5.5208e+00; |E| max 5.1350e-01; i centri [[112.46955871582031, 106.45966339111328], [73.10945129394531, 67.4896469116211], [112.58734130859375, 67.65457153320312]]
+    k 1000: rho max 1.4693e+03, somma 2.980458e+06; |phi - phi0| max 5.4384e+00; |E| max 5.1296e-01; i centri [[112.70138549804688, 106.39636993408203], [73.09127044677734, 67.46458435058594], [112.84553527832031, 67.78509521484375]]
+    k 1500: rho max 1.3912e+03, somma 2.980264e+06; |phi - phi0| max 5.6231e+00; |E| max 5.1829e-01; i centri [[112.97557067871094, 106.35220336914062], [73.1044921875, 67.45792388916016], [113.15581512451172, 68.07061004638672]]
+    k 2000: rho max 1.3121e+03, somma 2.980063e+06; |phi - phi0| max 5.6305e+00; |E| max 5.1095e-01; i centri [[113.29414367675781, 106.33248138427734], [73.21652221679688, 67.50436401367188], [113.48943328857422, 68.44702911376953]]
+### C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_sfasati_mappe.npz: 1.34 MB
+==================================================================================================================================

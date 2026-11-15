@@ -1,0 +1,46 @@
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+### IL VIDEO DEL TRIANGOLO (Luca 21:46): mattone_triangolo.corsa con la variante video, il francobollo di L 162 e la Corsa con le mappe ogni 20 tick, SOSTITUITI in memoria
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+==================================================================================================================================
+IL TRIANGOLO (T-video; Luca 14:22): ['MGU_10000', 'MGU_10000', 'MGU_10000'] nella scena di S162 (il vuoto fresco al tick 60000); il lato 37.6; G+U a campi pieni; rho_c 227058.574864, e 6.3154140e-05; 2000 tick
+==================================================================================================================================
+### il francobollo A (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### il francobollo B (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### il francobollo C (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### IL BORDO (Luca 15:49): quello della scena di S162 ha R_A 47.500; QUI R_A 60 attorno allo STESSO centro, R_B 81, g_max 0.03 (bordo.g_estremita, l'argomento)
+### il centro del bordo [98.87378070359784, 81.36252985852764] (R_A 47.500); i vertici (i nodi, lo spostamento multiplo di 3): [[113, 107], [74, 68], [110, 68]]; i lati VERI ['39.0000', '36.0000', '37.5899']; la distanza minima dalle copie oltre il bordo 123.000
+  DEVE PASSARE: un solo francobollo: la somma e il prodotto = l'incollatura di S6 AL BIT (come c1740faa)             PASSA   diverse: []
+### le masse dei francobolli incollati DA SOLI: ['9.950108931447e+05', '9.950108931447e+05', '9.950108931447e+05']
+### Delta ['-0.000075', '-0.000074', '-0.000074']; il residuo di Gauss iniziale 5.667e-11
+### le masse dei tre pezzi al tick 0 (la partizione, descrittive): ['1.0192647498e+06', '1.0512774664e+06', '1.0312476227e+06']
+    k   250  lati 38.1904 34.8041 36.6986  masse 1.021341e+06 1.041940e+06 1.038435e+06  raggi 16.0119 16.3440 16.5018  Gauss 5.71e-11  (1081 s)
+    k   500  lati 38.0081 34.6821 36.5185  masse 1.020444e+06 1.042880e+06 1.038319e+06  raggi 16.3576 16.5958 16.8078  Gauss 5.60e-11  (2382 s)
+    k   750  lati 37.7012 34.4805 36.2749  masse 1.021387e+06 1.043537e+06 1.036627e+06  raggi 16.7825 16.9063 17.0775  Gauss 6.18e-11  (3452 s)
+    k  1000  lati 37.2955 34.2266 35.9673  masse 1.022076e+06 1.044782e+06 1.034598e+06  raggi 17.1282 17.2216 17.3354  Gauss 6.00e-11  (4668 s)
+    k  1250  lati 36.8798 33.9161 35.5565  masse 1.025826e+06 1.040965e+06 1.034558e+06  raggi 17.3835 17.4085 17.5283  Gauss 6.05e-11  (5696 s)
+    k  1500  lati 36.3556 33.5904 35.1225  masse 1.032674e+06 1.040704e+06 1.027890e+06  raggi 17.5332 17.5706 17.6297  Gauss 5.97e-11  (6717 s)
+    k  1750  lati 35.8485 33.3340 34.5099  masse 1.056811e+06 1.024261e+06 1.020095e+06  raggi 17.6203 17.7015 17.7516  Gauss 6.35e-11  (7780 s)
+    k  2000  lati 35.3869 32.9073 34.0243  masse 1.059115e+06 1.024109e+06 1.017850e+06  raggi 17.7186 17.7605 17.8192  Gauss 6.22e-11  (8795 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 2000 tick in 8795 s
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B      materia C  materia fuori      vuoto A      vuoto B      vuoto C  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.485978e+06   8.629844e+06   8.654706e+06   5.162147e+02   3.4393e+03   3.4020e+03   3.3424e+03   2.5537e+02  3.4735e+01   25781482.523444       +0.0000       +0.0000    0.0000e+00
+        500   8.476683e+06   8.662819e+06   8.629465e+06   8.726709e+02   3.4909e+03   3.3621e+03   3.3866e+03   3.0017e+02  3.4363e+01   25780379.107159     +716.5465     -490.5126    9.3192e+01
+       1000   8.489337e+06   8.681163e+06   8.596558e+06   1.115344e+03   3.5392e+03   3.3714e+03   3.4075e+03   3.1885e+02  3.4088e+01   25778809.527611    +1895.8379     -906.8166    2.4592e+02
+       1500   8.575233e+06   8.641611e+06   8.548594e+06   1.126001e+03   3.5115e+03   3.4697e+03   3.3784e+03   3.2766e+02  3.4367e+01   25777252.041305    +3319.4346    -1059.4431    4.3194e+02
+       2000   8.793898e+06   8.511500e+06   8.458541e+06   1.219473e+03   3.5719e+03   3.4632e+03   3.3576e+03   3.4503e+02  3.5224e+01   25775895.985133    +4711.7381    -1015.5774    6.1230e+02
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo (ogni 250 tick)                                     PASSA   il massimo 6.354e-11 (l'iniziale 5.667e-11)
+### la massa uscita dal bordo in tutto 6.122952e+02
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite []; finita; 8929 s in tutto
+### LE MAPPE: 101 fotogrammi (k 0 ... 2000) in C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_video_mappe.npz, 29.1 MB

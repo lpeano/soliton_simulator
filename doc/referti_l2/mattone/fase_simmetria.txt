@@ -1,0 +1,37 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] fase_simmetria.py  sha1-BYTE c91321b5  committato e pulito
+==================================================================================================================================
+LA FASE DEL MATTONE E' UNA SIMMETRIA? (Luca 01:12): E:\soliton_simulator\mattone\L162_MGU_03000.npz da solo nella scena di S162, il bordo da R_A 60, G+U, 20 tick; (i) com'e', (ii) psi x exp(i theta)
+==================================================================================================================================
+### theta = pi: psi_h contro exp(i theta) psi_h(i): AL BIT False; la differenza relativa massima 3.328e-15
+  DEVE PASSARE: theta pi: psi_h = exp(i theta) psi_h(i) AL BIT                                                       ### FALLISCE   3.328e-15
+### theta = pi: psi contro exp(i theta) psi(i): AL BIT True; la differenza relativa massima 0.000e+00
+  DEVE PASSARE: theta pi: psi = exp(i theta) psi(i) AL BIT                                                           PASSA   0.000e+00
+    Lambda     uguale AL BIT False; la differenza relativa massima 7.045e-15
+  DEVE PASSARE: theta pi: Lambda uguale AL BIT                                                                       ### FALLISCE   7.045e-15
+    campo_A    uguale AL BIT False; la differenza relativa massima 2.104e-16
+  DEVE PASSARE: theta pi: campo_A uguale AL BIT                                                                      ### FALLISCE   2.104e-16
+    campo_E    uguale AL BIT False; la differenza relativa massima 3.739e-13
+  DEVE PASSARE: theta pi: campo_E uguale AL BIT                                                                      ### FALLISCE   3.739e-13
+    phi_h      uguale AL BIT False; la differenza relativa massima 1.490e-14
+  DEVE PASSARE: theta pi: phi_h uguale AL BIT                                                                        ### FALLISCE   1.490e-14
+    rho        uguale AL BIT False; la differenza relativa massima 3.233e-15
+  DEVE PASSARE: theta pi: rho uguale AL BIT                                                                          ### FALLISCE   3.233e-15
+### theta = 2 pi / 3: psi_h contro exp(i theta) psi_h(i): AL BIT False; la differenza relativa massima 4.575e-15
+  DEVE PASSARE: theta 2 pi / 3: psi_h = exp(i theta) psi_h(i) entro 1e-12 relativo (dichiarato)                      PASSA   4.575e-15
+### theta = 2 pi / 3: psi contro exp(i theta) psi(i): AL BIT True; la differenza relativa massima 0.000e+00
+  DEVE PASSARE: theta 2 pi / 3: psi = exp(i theta) psi(i) entro 1e-12 relativo (dichiarato)                          PASSA   0.000e+00
+    Lambda     uguale AL BIT False; la differenza relativa massima 8.988e-15
+  DEVE PASSARE: theta 2 pi / 3: Lambda uguale AL BIT                                                                 ### FALLISCE   8.988e-15
+    campo_A    uguale AL BIT False; la differenza relativa massima 6.313e-16
+  DEVE PASSARE: theta 2 pi / 3: campo_A uguale AL BIT                                                                ### FALLISCE   6.313e-16
+    campo_E    uguale AL BIT False; la differenza relativa massima 5.466e-13
+  DEVE PASSARE: theta 2 pi / 3: campo_E uguale AL BIT                                                                ### FALLISCE   5.466e-13
+    phi_h      uguale AL BIT False; la differenza relativa massima 1.737e-14
+  DEVE PASSARE: theta 2 pi / 3: phi_h uguale AL BIT                                                                  ### FALLISCE   1.737e-14
+    rho        uguale AL BIT False; la differenza relativa massima 3.613e-15
+  DEVE PASSARE: theta 2 pi / 3: rho uguale AL BIT                                                                    ### FALLISCE   3.613e-15
+==================================================================================================================================
+ESITO: 3/14 controlli come devono; fallite ['theta pi: psi_h = exp(i theta) psi_h(i) AL BIT', 'theta pi: Lambda uguale AL BIT', 'theta pi: campo_A uguale AL BIT', 'theta pi: campo_E uguale AL BIT', 'theta pi: phi_h uguale AL BIT', 'theta pi: rho uguale AL BIT', 'theta 2 pi / 3: Lambda uguale AL BIT', 'theta 2 pi / 3: campo_A uguale AL BIT', 'theta 2 pi / 3: campo_E uguale AL BIT', 'theta 2 pi / 3: phi_h uguale AL BIT', 'theta 2 pi / 3: rho uguale AL BIT']

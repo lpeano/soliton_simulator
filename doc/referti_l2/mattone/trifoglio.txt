@@ -1,0 +1,35 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] trifoglio.py  sha1-BYTE 8003ce29  committato e pulito
+==================================================================================================================================
+IL TRIFOGLIO LUNGO (Luca 23:32, L2-L4): il video da k 2000 per 4000 tick in piu'; la scena di S162, il bordo da R_A 60, G+U; le mappe ogni 100, lo stato ogni 1000
+==================================================================================================================================
+  DEVE PASSARE: la ripartenza da E:\soliton_simulator\mattone\triangolo_video_01500.npz per 500 tick = E:\soliton_simulator\mattone\triangolo_video_02000.npz AL BIT (esclusa h_int)   PASSA   diverse: []
+    k  2000  il raggio 24.1598  A3 0.2028  la massa 3.101251e+06  |E| sull'anello 3.5283e-01 (A3 0.0642)  Gauss 6.22e-11  (2455 s)
+    k  2500  il raggio 23.6143  A3 0.1922  la massa 3.101069e+06  |E| sull'anello 3.5251e-01 (A3 0.0581)  Gauss 6.25e-11  (4703 s)
+    k  3000  il raggio 22.9127  A3 0.1860  la massa 3.100893e+06  |E| sull'anello 3.5221e-01 (A3 0.0461)  Gauss 5.75e-11  (7138 s)
+    k  3500  il raggio 22.2339  A3 0.1655  la massa 3.100693e+06  |E| sull'anello 3.5256e-01 (A3 0.0370)  Gauss 5.75e-11  (9543 s)
+    k  4000  il raggio 21.7709  A3 0.1466  la massa 3.100438e+06  |E| sull'anello 3.5229e-01 (A3 0.0258)  Gauss 5.47e-11  (11922 s)
+    k  4500  il raggio 21.5921  A3 0.1197  la massa 3.100091e+06  |E| sull'anello 3.5231e-01 (A3 0.0191)  Gauss 5.62e-11  (14235 s)
+    k  5000  il raggio 21.6714  A3 0.0796  la massa 3.099839e+06  |E| sull'anello 3.5229e-01 (A3 0.0116)  Gauss 5.58e-11  (16078 s)
+    k  5500  il raggio 21.9006  A3 0.0283  la massa 3.099604e+06  |E| sull'anello 3.5214e-01 (A3 0.0087)  Gauss 5.59e-11  (17837 s)
+    k  6000  il raggio 22.2376  A3 0.0250  la massa 3.099360e+06  |E| sull'anello 3.5197e-01 (A3 0.0107)  Gauss 5.48e-11  (19597 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B      materia C  materia fuori      vuoto A      vuoto B      vuoto C  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+       2000   8.799111e+06   8.508317e+06   8.456421e+06   1.213220e+03   3.5717e+03   3.4729e+03   3.3488e+03   3.4408e+02  3.5325e+01   25775799.758135       +0.0000       +0.0000    0.0000e+00
+       2500   8.823240e+06   8.526585e+06   8.412804e+06   1.211550e+03   3.5501e+03   3.4929e+03   3.3575e+03   3.2616e+02  3.6439e+01   25774567.153984    +1411.4742      +34.7620    1.8191e+02
+       3000   8.855122e+06   8.512963e+06   8.393495e+06   1.324700e+03   3.5174e+03   3.4721e+03   3.3933e+03   3.3925e+02  3.8023e+01   25773627.311361    +2769.3614     +458.4930    3.5850e+02
+       3500   8.837958e+06   8.483714e+06   8.438800e+06   1.456118e+03   3.5009e+03   3.4211e+03   3.3997e+03   3.8541e+02  3.9545e+01   25772635.821355    +4295.0820     +973.9738    5.5776e+02
+       4000   8.756977e+06   8.539165e+06   8.462090e+06   2.188442e+03   3.4561e+03   3.3560e+03   3.3489e+03   5.1270e+02  4.0600e+01   25771094.509505    +6288.6274    +1341.7876    8.1286e+02
+       4500   8.752747e+06   8.516928e+06   8.486518e+06   1.727554e+03   3.4322e+03   3.3313e+03   3.3104e+03   4.0757e+02  4.1026e+01   25768402.367071    +8942.9621    +1326.1295    1.1596e+03
+       5000   8.779807e+06   8.511471e+06   8.462998e+06   1.615680e+03   3.3974e+03   3.3050e+03   3.3026e+03   3.9864e+02  4.0822e+01   25766295.084097   +10831.5589    +1148.7235    1.4118e+03
+       5500   8.957720e+06   8.587568e+06   8.206958e+06   1.639298e+03   3.4272e+03   3.3174e+03   3.2879e+03   3.9184e+02  4.0181e+01   25764310.071995   +12598.6823     +945.1945    1.6473e+03
+       6000   9.085033e+06   8.539792e+06   8.124964e+06   1.967325e+03   3.3973e+03   3.3868e+03   3.2544e+03   4.0130e+02  3.9240e+01   25762196.738395   +14429.7177     +655.2336    1.8906e+03
+### L4: A3 per finestra di 1000 tick ['0.1927', '0.1651', '0.1169', '0.0364']; il raggio ['23.555', '22.242', '21.633', '21.934']; fra le ultime due: A3 0.6882, il raggio 0.0139 -> SI ARROTONDA IN UN SOLITONE GRANDE
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo   PASSA   il massimo 6.378e-11
+==================================================================================================================================
+ESITO: SI ARROTONDA IN UN SOLITONE GRANDE; 19598 s in tutto
