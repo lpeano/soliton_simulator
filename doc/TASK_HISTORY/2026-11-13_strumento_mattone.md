@@ -542,3 +542,16 @@
   - **`csv/solitone/legame.py`: `vuota`** *(la scena vuota per `E0`)*, **`lettura`** *(`B = E3 - 3 E1 + 2 E0` con l'energia `tot + K + V` dalle tabelle R-CONTI)*, **`fase`** *(la fase relativa negli stati salvati: il pezzo di `i` entro `14` nodi SPOSTATO sul vertice di `j`)*.
   - **`csv/solitone/trifoglio.py`: il video prosegue da `02000` per `4000` tick** *(il DEVE: da `01500` `500` tick = `02000`)*, **le misure L3, le mappe ogni `100`, lo stato ogni `1000`, la lettura L4** *(le soglie mie: `A3` almeno il `25%` della prima finestra; la forma entro il `2%`)*.
 - **Le mappe di (T-sfasati)** *(Luca `00:05`; `1a9d431a`, alle `00:31`-`00:32`)*: **`1.34` MB; B fermo** *(`73.16, 67.49` -> `73.22, 67.50`)*, **A e C scivolano di circa `1` nodo; in (T-fase) i tre centri si muovevano di circa `2` nodi verso l'interno.**
+
+### 21.6 LA FASE RELATIVA NEL TEMPO: UN MIO ERRORE E LA CORREZIONE IN UN FILE NUOVO
+
+- **`legame.py fase` e' caduta alle `01:07`** *(`ValueError` in `mattone.scena.metti`)*: ### **ERRORE MIO: i francobolli** *(la scena di TBS, `L 81`)* **si facevano DENTRO la scena di S162 aperta, e lo stato del modulo** *(`V.L`)* **si rompeva** *(in `coppia_fase.py` li avevo fatti fuori: qui no)*.
+- **La correzione voleva cambiare `legame.py`: il controllo dei permessi l'ha FERMATA, e aveva ragione: `legame.py` e' in uso da `scena-vuota`** *(la regola: nessuno script in uso da una corsa aperta si modifica)*. **Il worktree e' rimasto intatto.** **La correzione: un file NUOVO, `csv/solitone/fase_nel_tempo.py`** *(la funzione `fase` copiata, i francobolli PRIMA della scena)*.
+
+### 21.7 DENTRO IL TRIANGOLO: I FLUSSI E LE FASI (Luca `2026-11-15` `00:58`) -- LA CARTA
+
+- **Luca: la materia di (T-fase) lascia i vertici e va a meta' dei lati e al centro; le culle restano ferme; un «flusso» lungo i lati, grumi a meta' dei lati: sono in ANTIFASE?** **Il guardiano: nella materia TOTALE no** *(nessuna linea di densita' nulla; il centro pieno)*; **ma con `12` componenti un'antifase o un vortice possono stare in ALCUNE componenti.**
+- ### **TODO 1, IL FLUSSO PER NODO: il nucleo NON lo da'** *(`primo_ordine/flussi_parziali.py`: `hop_psi`, `hop_phi`, `grover`, gli operatori del passo, unitari; `primo_ordine/energia_pesata.py`: i pesi e l'energia)*: **FERMO SOLO DI QUESTO PUNTO** *(il mandato)*. **Fuori dal nucleo esiste la sorgente del campo U, `_u1_prototipo.avvolto`: `J_a = |v0'|^2 - |v0|^2` per arco** *(la materia che il passo di trasporto sposta lungo ogni arco)*: **calcolarla da uno stato salvato vuol dire applicare quel passo a una COPIA: una scelta di Luca.**
+- **TODO 2, LE FASI, IL CODICE MIO: `csv/solitone/triangolo_dentro.py`** *(nuovo, solo lettura)*: **le `12` componenti = le `6` estremita' per le `2` dello spinore** *(l'ordine di `argsort(nodo)`)*; **i `7` punti: i centri dei solitoni della serie a quel tick, le meta' dei lati, il baricentro; la fase della SOMMA su un disco di raggio `2`, riferita al vertice A, col modulo; la componente piu' grande per norma; il giro fra le meta' dei lati.** **Lo stato `0` ricostruito come in `triangolo_mappe.py`.**
+- **TODO 3: gia' fatto** *(le mappe di (T-sfasati), `eb3f8988`)*.
+- **I posti: una sola suite per `fase_nel_tempo.py` e `triangolo_dentro.py`** *(la suite di `fase_nel_tempo.py`, partita alle `01:1x`, FERMATA da me per farne una)*.
