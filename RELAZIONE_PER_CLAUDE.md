@@ -25862,3 +25862,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`965c2e3c`; la sez. `22.12`)*: **i DEVE del vuoto passano; ### Gauss FALLISCE: `1.045e-10`** *(l'iniziale `9.86e-11`)*. **Non si legge:** **il raggio a `2000` `12.596` contro `12.257` su `L 162`** *(`+2.8%`, quando (MU) tornava a `4` cifre)*.
 - ### **Correzione della mia lettura delle `07:30`:** **un mattone su `L 162` nella scena di S162 ha il residuo `5e-13`; due nella scena di C35-pi su `L 162` `6.3e-11`; su `L 243` uno `9.9e-11`, due `2.1e-10`.** **Dipende da come la scena e' costruita** *(un fattore `100` fra due scene di `L 162`)*; **la causa non la so: da cercare** *(`A11`)*, **non da coprire spostando la soglia.**
 - **FERMO anche su questa corsa** *(si aggiunge alle decisioni (a) e (b) delle `07:30`)*. **In corsa resta solo il 2x.**
+
+### 2026-11-15 10:00 -- IL 2x: B2 A 6000 TICK; I DUE SI AVVICINANO FINO A 28.72 (k 5100) E POI SI ALLONTANANO; NESSUN COLLASSO NE' ESPLOSIONE; «NON SI FERMA / ANCORA DUE»
+
+- **Sul ramo** *(`76cf7d09`; la sez. `22.13`)*: **i DEVE passano** *(la ripartenza AL BIT, Gauss `6.4e-11`, la massa persa = uscita dal bordo a `9e-15`)*.
+- ### **`d`: `33.02` a `2000`, il minimo `28.72` a `k 5100`, `29.05` a `6000`: si avvicinano e poi si allontanano.** **Un solo giro: rimbalzo o oscillazione non si distinguono** *(una corsa piu' lunga: decide Luca)*.
+- **`A2` da `0.38` a `0.27`** *(non una palla)*; **il picco al massimo `1338`** *(nessun collasso)*; **la massa oltre `R_A` `2e-05`** *(nessuna esplosione)*. **Le culle quasi ferme** *(`42.09` -> `41.43`, in indici)*.
+- **Nessuna corsa aperta.** **FERMO: le decisioni (a) e (b) delle `07:30`/`07:55`.**
