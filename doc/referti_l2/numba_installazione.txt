@@ -29,7 +29,13 @@ LA PROVA CHE NUMBA FUNZIONA (Luca 12:32, C4): Python 3.13.2; numpy 2.3.0 (E:\pyt
     numpy np.sum(np.abs(z) ** 2): 0.1646 s
 ### i fili: numba.get_num_threads() 12; NUMBA_NUM_THREADS 12; lo strato omp; os.cpu_count() 12
 ==============================================================================================================
-### P5 (iii) LA SUITE con l'interprete di E:: NON ANCORA GIRATA (aspetta la fine della suite col venv delle 12:32, partita alle 13:49 nello stesso worktree: due suite insieme danno rossi falsi)
+### P5 (iii) LA SUITE con l'interprete di E: (E:\python\py3132\python.exe primo_ordine/collauda.py, il worktree del ramo a 3de7e841; PYTHONNOUSERSITE=1, TMP=TEMP=E:\python	mp): 14:19:17-14:38:33, USCITA 1: 65 SU 67
+    ### I DUE CHE CADONO sono collaudi di GIT, non di calcolo: `M-B1` PUO- fallire (primo_ordine/_collauda_mb1.py: la copia in TMP 'FUORI DA UN REPO GIT', P-BARRIERA rifiuta) e i controlli sullo STAGE (csv/_stage.py --collaudo: 5 su 8, il caso SANO fallisce)
+    ### LA CAUSA (verificata): TMP su E:, che e' exFAT: git rifiuta i repo su exFAT ('detected dubious ownership ... is on a file system that does not record ownership': una prova con git init in E:\python	mp).
+    ### Gli altri 65: le righe della suite UGUALI riga per riga a quelle dell'ambiente delle corse (la suite delle 12:50 sul ramo; tolti i tempi e i timbri); il bit vero lo controllano i collaudi stessi (il determinismo, il checkpoint, il confronto tabella/banco, contro i riferimenti nel repo): passano.
+    ### LA SUITE COL VENV DELLE 12:32 (E:\pythonenv_numba, l'interprete di C:, TMP su C:): 13:49:35-14:11:11, 67/67, uscita 0.
+    ### PER IL CRITERIO DEL MANDATO (67/67): FERMO DELLA PARTE C. La scelta e' di Luca: (a) la suite con l'interprete di E: e TMP sul C: (solo le cartelle temporanee della suite, che la suite cancella; l'interprete resta isolato); (b) git config safe.directory (una modifica della configurazione GLOBALE di git: sconsigliata); (c) un volume NTFS per le temporanee (oggi c'e' solo C:).
+    ### E PER R-DIPENDENZE: un ambiente su E: va bene per il CALCOLO; gli strumenti che creano repo git temporanei NON possono avere TMP su exFAT.
 ### P6 LO SPAZIO: C: 16100507648 byte prima (13:50), 16099880960 dopo (-0.6 MB); E: 220735995904 prima, 218627964928 dopo (-2.1 GB: i due ambienti e la cache)
 ### LA NUMPY DELLE CORSE riletta dopo: 2.3.0 in C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\site-packages\numpy: UGUALE
 ==================================================================================================================
