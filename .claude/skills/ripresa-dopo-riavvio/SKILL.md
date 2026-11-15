@@ -28,6 +28,11 @@ description: Usare all'inizio di ogni sessione dopo un riavvio o una caduta: con
 5. **I processi del repo ancora vivi** *(`tasklist`, i `python`)*. ### **Mai uccidere processi che non sono miei.**
 6. **La coda:** `doc/ROTTA.md`, la sezione **«La coda»**: **che cosa e' pronto, che cosa aspetta Luca.**
 
+## E: PRIMA DI APRIRE CORSE SU UN AMBIENTE DI E: *(R-DIPENDENZE-3; Luca `2026-11-15` `12:32`)*
+
+- **Prima di aprire una corsa che usa un ambiente in `E:\python`** *(per esempio `E:\python\venv_numba`)*: **controllare che E: sia collegato** *(`ls E:/python`)* **e che l'ambiente si avvii** *(`E:\python\<ambiente>\Scripts\python.exe -c "import numpy"`)*. **Se non c'e': niente corse su quell'ambiente; si scrive e si chiede a Luca.**
+- **L'ambiente delle corse su C: e' CONGELATO** *(R-DIPENDENZE-1)*: **niente installazioni.**
+
 ## La regola
 
 ### ⛔ **Se c'e' una voce APERTA nel registro o un file a meta': FERMO, e si chiede a Luca. Niente si rilancia da soli.**

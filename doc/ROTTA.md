@@ -109,3 +109,10 @@
 - ### **R-SCATOLA-1:** **la scatola deve essere ALMENO `3` VOLTE l'oggetto piu' grande che contiene, compresa la sua deformazione del vuoto:** **il raggio dell'oggetto `R_ogg` e' il raggio oltre il quale `|phi - phi0|` medio per anello scende sotto il `2%` del suo massimo;** **la distanza dal centro al lato piu' vicino del toro `>= 3 R_ogg`, e il bordo** *(`R_A`)* **che comincia oltre `2 R_ogg`.**
 - **R-SCATOLA-2:** **ogni corsa NUOVA stampa all'inizio e alla fine i due rapporti** *(il lato piu' vicino / `R_ogg`, `R_A` / `R_ogg`)* **e se la regola e' rispettata.**
 - **R-SCATOLA-3:** **il perche'** *(Luca)*: **il trifoglio col suo vuoto ha un raggio di circa `45` nodi; su `L 162` il bordo comincia a `60` e il lato a circa `70`: lo spazio e' circa `1.5` volte l'oggetto, e gli oggetti grandi non stanno nel porto.**
+
+## LA REGOLA DELLE DIPENDENZE *(R-DIPENDENZE; Luca `2026-11-15` `12:32`, da ora per sempre)*
+
+- ### **R-DIPENDENZE-1:** **tutte le dipendenze Python NUOVE si installano SOLO negli ambienti in `E:\python`; pip con la cache e le cartelle temporanee su E:** *(`--cache-dir E:\python\pip_cache`; `TMP`/`TEMP` `E:\python\tmp`)*. **L'ambiente di oggi su C: e' CONGELATO:** **nessuna installazione nuova; resta quello delle corse finche' Luca non decide di spostarlo.**
+- **R-DIPENDENZE-2:** **lo SPOSTAMENTO dell'ambiente delle corse su E: e' una voce in coda** *(una corsa di prova e la suite AL BIT nell'ambiente su E: prima di usarlo; MAI con corse aperte)*; **il mandato lo da' Luca.**
+- **R-DIPENDENZE-3:** **alla ripresa dopo un riavvio: controllare che E: sia collegato PRIMA di aprire corse che usano un ambiente su E:** *(lo SKILL della ripresa)*.
+- **Il primo ambiente:** **`E:\python\venv_numba`** *(Python `3.13.2`, numpy `2.3.0`, scipy `1.17.1` come le corse; numba `0.68.1`; il referto `doc/referti_l2/numba_installazione.txt`)*.
