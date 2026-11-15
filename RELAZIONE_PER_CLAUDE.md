@@ -25849,3 +25849,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`5a5c53ed`; la sez. `22.10`)*: **`4000` tick in piu'** *(da `2000` a `6000`)*, **la ripartenza AL BIT, Gauss sotto `1e-10`.** **`A3` per finestra di `1000` tick `0.193`, `0.165`, `0.117`, `0.036`: l'ultima al `19%` della prima, sotto il `25%`: SI ARROTONDA IN UN SOLITONE GRANDE** *(la soglia mia, fissata prima)*.
 - ### **Ma non e' fermo:** **`A3` cala ancora** *(`0.080` a `5000`, `0.025` a `6000`)*; **il raggio ha un minimo a `4500`** *(`21.59`)* **e ricresce** *(`22.24`)*; **A e C si scambiano massa** *(A `x 1.033`, C `x 0.961`)*: **la forma dell'insieme e' tonda, non vuol dire che i tre si siano fusi** *(le mappe: non ancora guardate)*. **Massa uscita dal bordo `6e-4` del totale.**
 - **Il 2x** *(Luca `01:54`, F2)*: **`coppia-lunga` aperta e partita alle `06:40`** *(B2 prosegue da `2000` per `4000` tick)*. **In corsa anche la coppia a `65` e la parte B su `L 243`.**
+
+### 2026-11-15 07:30 -- LA COPPIA A 66 NODI SU L 243: IL DEVE DI GAUSS FALLISCE (2.28e-10 CONTRO 1e-10, GIA' ALL'INCOLLATURA); FERMATA DAL TETTO DI 18000 s A k 1814 (ERRORE MIO); FERMO: DUE DECISIONI DI LUCA
+
+- **Sul ramo** *(`1232567c`; la sez. `22.11`)*: ### **il residuo di Gauss iniziale `2.146e-10`, al massimo `2.284e-10`, la soglia `1e-10`: FALLISCE.** **Non cresce nella corsa: nasce all'incollatura.** **Su `L 162` due mattoni `6.3e-11`; su `L 243` UN mattone** *(conv-GU-L243, in corsa)* **`9.86e-11`, al limite.**
+- ### **Un mio errore:** **la corsa si e' fermata al tetto di `18000 s`** *(`MT.TETTO_S`)* **a `k 1814`: `coppia_distanze.py` non lo porta al `28800` di Luca `15:22`.**
+- **I numeri, che NON si leggono:** **`d0 66.000`, `d''` sui tick `250`-`1814` `-1.34e-08 +- 9.3e-11`; la massa oltre `R_A` `1.5e-05`.**
+- ### **FERMO, due decisioni di Luca:** **(a) la soglia `1e-10` su `L 243`** *(si scala con la scena e coi mattoni, o il `2e-10` e' un difetto da cercare)*; **(b) se rifare la corsa col tetto di `28800`.**
