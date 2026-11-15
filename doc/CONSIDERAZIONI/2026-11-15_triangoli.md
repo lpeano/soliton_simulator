@@ -61,3 +61,32 @@
 - **I bracci di P6 non toccati dal bordo** *(la massa oltre `R_A 47.5` sotto `4.3e-06`: `22317f86`)*.
 
 - ### **LE FRECCE NON SI LEGGONO** *(Luca `2026-11-15` `10:29`, A4)*: **le frecce di `J_a` e il video delle frecce NON sono leggibili come flusso di materia** *(`22eca9ce`: su un passo `J_a` torna a `1e-13`, sul tick no: la correlazione `0.3`, il rapporto `2.7`)*. **`triangolo_flussi.npz` resta nel repo come dato.**
+
+## IL TRIANGOLO A 120 GRADI: LA GIRANDOLA *(Luca `2026-11-15` `14:22`; ogni affermazione col suo STATO e il suo commit)*
+
+> **Perche' questa sezione:** **perche' nessuno legga il triangolo a `120` gradi come una scoperta che non e'.** **Gli stati: MISURATO / GIA' NOTO / PROPRIO DEL MODELLO / DA PROVARE.**
+
+### MISURATO *(la fase 1, `0`-`2000` tick, `f8304136`; le misure rifatte `girandola.txt`, `triangoli_magnetico.txt`)*
+
+- **Il giro della fase `+1` in TUTTE e `12` le componenti, e nella loro somma, a OGNI controllo** *(ogni `100` tick)*. **MISURATO** *(`f8304136`)*.
+- **La densita' al centro tra circa `15` e `31`** *(`28.6` al tick `0`, minimo `15.4` a `200`, `30.7` a `2000`)*; **nel triangolo IN FASE** *(il video, lo stesso mattone)* **sale da `199` a circa `1000`-`1110`.** **MISURATO** *(`girandola.txt`)*.
+- **Il lato medio da `39.26` a `39.94` in `2000` tick** *(i centri della partizione: al tick `0` `39.26`, non `39.00` come i vertici incollati)*, **la crescita che RALLENTA** *(per finestra di `500`: `39.34`, `39.56`, `39.78`, `39.91`)*; **nessuna fusione.** **MISURATO.**
+- ### **Le masse dei tre pezzi NON uguali entro lo `0.5%`:** **la dispersione `(max - min) / max` e' `0.64%` al tick `0` e arriva al `2.07%`** *(a `1850`)*. **MISURATO** *(`girandola.txt`; il numero del mandato corretto)*.
+- **Le previsioni P3** *(si allarga, non si fonde, il vortice)*: **CONFERMATE sulla fase 1** *(la fase 2 fino a `6000` in corsa)*.
+- **LA ROTAZIONE** *(`girandola.txt`; l'orientamento a tre punte, `arg(somma f e^{3 i theta}) / 3`, attorno al baricentro dei centri al tick `0`)*: **la materia gira** *(entro `32`: `-30.00` -> `-18.96`, `+11.0` gradi in `2000` tick)*; **la SPIRALE: l'interno gira piu' dell'esterno** *(`rho` `8-14`: `+41.1` gradi; `14-20` `+26.8`; `20-26` `+13.4`; `26-32` `+4.0`)*; **il campo `|E|` gira** *(`4-12` `+16.1`; `30-45` `+5.4`)*; **il VUOTO e' FERMO** *(`|phi - phi0|` entro `45`: `-30.07` -> `-30.13`)*; **il peso a tre punte di `|E|` circa `0.25`.** **In fase: nessuna rotazione** *(`-31.32` -> `-31.60`)*, **il peso di `|E|` da `0.127` a `0.018`.** **MISURATO.**
+  - ### **Il verso:** **nella convenzione del codice** *(`A1 = (1, 0)`, `A2 = (-1/2, sqrt 3 / 2)`; i vertici A, B, C ANTIORARI, le fasi `0`, `120`, `240` che crescono in senso antiorario)* **la materia gira in senso ANTIORARIO, nel verso in cui cresce la fase.** **I numeri del guardiano hanno gli stessi moduli e il segno OPPOSTO** *(`30.1` -> `-11.0` contro `-30.11` -> `+10.99`)*: **uno specchio di convenzione** *(l'asse `y`)*, **non una misura diversa.** ### **Una differenza VERA:** **la materia intera `+11.0` gradi, il guardiano `6.3`: il disco dove si misura** *(il mio: entro `32`)* **conta; dichiarato.**
+- **IL CAMPO MAGNETICO** *(`triangoli_magnetico.txt`; `B` = il rotore di `A` del prototipo U, per placchetta, antiorario positivo; nessuna definizione nuova)*: **a `120` gradi `B` medio nel disco di raggio `8` NEGATIVO a ogni stato** *(`-6.2e-04`, `-6.3e-04`, `-1.0e-03`, `-1.26e-03` a `500` ... `2000`)*; **in fase circa zero e di segno che cambia** *(`+1.6e-06`, `-3.1e-06`, `+4.8e-06`, `-5.5e-06`: circa `200` volte meno)*. **La previsione del guardiano** *(diverso da zero e di segno costante; in fase circa zero)*: **CONFERMATA. MISURATO.** *(Il segno: `B < 0` e' una circolazione di `A` ORARIA, contraria alla rotazione della materia: annotato, non interpretato.)*
+
+### GIA' NOTO NELLA FISICA *(i riferimenti come li da' Luca; non li ho verificati io: dichiarato)*
+
+- **I gruppi di solitoni ROTANTI con passo di fase `2 pi / N` e gli AZIMUTONI** *(nelle onde di tipo Schrodinger non lineare: l'ottica non lineare, i condensati)*: **portano momento angolare, hanno un vortice al centro, non si fondono; nei mezzi semplici in genere NON sono stabili.** **Riferimenti:** **A. S. Desyatnikov, Yu. S. Kivshar, «Rotating optical soliton clusters», arXiv nlin/0112039; A. S. Desyatnikov et al., «Azimuthons: spatially modulated vortex solitons» (2005); i cluster di vortici azimutali nei condensati di Bose-Einstein.**
+- ### **Il triangolo a `120` gradi e' il caso `N = 3`: la sua GIRANDOLA E' ATTESA da quella teoria.** **NON e' una scoperta.**
+
+### PROPRIO DEL NOSTRO MODELLO
+
+- **Un cammino quantistico su reticolo con uno spinore a `12` componenti, un vuoto separato, il lapse e la U riproduce il comportamento di una teoria di campo nota: un CONTROLLO DI COERENZA.**
+- **In piu':** **le culle nel vuoto FERME mentre la materia gira** *(nella Schrodinger non lineare non c'e' un vuoto separato)*; **le `12` componenti tutte col giro `+1`; il campo U che ruota con la materia** *(`|E|`)*; **un campo `B` al centro di segno costante: il possibile MOMENTO MAGNETICO** *(MISURATO il campo; il momento come grandezza: DA PROVARE)*.
+
+### LA DOMANDA CHE PUO' DARE UN RISULTATO NUOVO: LA STABILITA'
+
+- **Se il triangolo si FERMA** *(la fase 2 fino a `6000` tick, in corsa; poi il porto grande `L 324`)*, **qualcosa del nostro modello lo stabilizza dove la teoria classica in genere non ci riesce: DA PROVARE.**

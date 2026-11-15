@@ -1,0 +1,22 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] triangoli_magnetico.py  sha1-BYTE 343ee7ba  committato e pulito
+==================================================================================================================================
+IL CAMPO MAGNETICO NEI TRIANGOLI (Luca 13:56; solo lettura): B = il rotore di A (_u1_prototipo.Campo.B, per placchetta, antiorario positivo); il disco di raggio 8, il flusso entro 30
+### la previsione del guardiano (prima): a 120 gradi B al centro diverso da zero e di segno costante; in fase B circa zero
+==================================================================================================================================
+    la corsa              k  il centro                   B medio (8)  segno    B min (8)    B max (8)  flusso (30)  max |B| ovunque
+    T120                  0  --                                    0      0            0            0            0  (A = 0 al tick 0: B = 0)
+    T120                500  (  99.536,   80.702)        -6.2247e-04      -  -8.7264e-04  -3.9212e-04  -6.2774e-01  8.7264e-04
+    T120               1000  (  99.537,   80.716)        -6.3308e-04      -  -8.9747e-04  -3.9719e-04  -2.4858e-01  8.9747e-04
+    T120               1500  (  99.481,   80.654)        -1.0073e-03      -  -1.3027e-03  -7.0864e-04  -9.6564e-01  1.3027e-03
+    T120               2000  (  99.451,   80.669)        -1.2583e-03      -  -1.5566e-03  -9.6986e-04  -8.2900e-01  1.5566e-03
+----------------------------------------------------------------------------------------------------------------------------------
+    T-fase (video)        0  --                                    0      0            0            0            0  (A = 0 al tick 0: B = 0)
+    T-fase (video)      500  (  98.617,   80.737)        +1.6360e-06      +  -4.6884e-05  +5.7442e-05  +8.0420e-03  1.8682e-04
+    T-fase (video)     1000  (  98.645,   80.724)        -3.1450e-06      -  -5.5474e-05  +5.1714e-05  -1.2453e-02  2.3719e-04
+    T-fase (video)     1500  (  98.605,   80.592)        +4.7582e-06      +  -4.0874e-05  +6.0236e-05  +1.4596e-02  2.2485e-04
+    T-fase (video)     2000  (  98.411,   80.285)        -5.5209e-06      -  -5.2714e-05  +3.4252e-05  +4.6153e-03  2.9574e-04
+----------------------------------------------------------------------------------------------------------------------------------
+    (il flusso su TUTTO il toro e' zero per costruzione: ogni arco sta in due placchette con segni opposti)
+==================================================================================================================================
