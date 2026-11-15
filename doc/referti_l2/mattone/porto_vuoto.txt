@@ -1,0 +1,30 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (Luca 15:07; AL BIT, prova_gauss.txt)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] triangolo_equilatero.py  sha1-BYTE 14ef2563  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+==================================================================================================================================
+IL PORTO GRANDE, LA SCENA (Luca 12:04, B1): L 324; il vuoto fresco al tick 60000; il mattone di L 162 al centro; R_A = 2 R_ogg; la soglia di Gauss = 10 volte il residuo iniziale (mia)
+==================================================================================================================================
+### la scena: L 324, 104976 nodi; il centro del bordo [162, 162]; la meta' del periodo 162.0; R_A provvisorio 135
+### LA CUCITURA (Luca 20:47) lungo A1: 648 nodi (la riga 0 e quella che si confronta con lei); lo scarto oltre 1e-12 su 648 di essi (al piu' 2L = 648); FUORI dalla cucitura il massimo 0.000e+00
+### LA CUCITURA (Luca 20:47) lungo A2: 648 nodi (la riga 0 e quella che si confronta con lei); lo scarto oltre 1e-12 su 648 di essi (al piu' 2L = 648); FUORI dalla cucitura il massimo 0.000e+00
+  DEVE PASSARE: (L 324) il vuoto fresco: |phi_j|^2 = 1 fuori dal bordo (66085 nodi) entro 1e-12                                PASSA   2.220e-14
+  DEVE PASSARE: (L 324) il vuoto fresco: lo stesso disegno di fase ogni 3 nodi entro 1e-12 (la cucitura esclusa)               PASSA   0.000e+00
+### R-SCATOLA (il mattone di L 162 incollato): R_ogg 44.0 (il baricentro 160.53, 160.70); la distanza al lato 140.30 = 3.19 R_ogg (>= 3: True); R_A 88.0 = 2.00 R_ogg (>= 2: True); la fascia 52.3 (>= 30: True); la meta' del periodo 162.0 (accanto) -> RISPETTATA
+  DEVE PASSARE: R-SCATOLA per il mattone (le tre condizioni, Luca 13:23)                                                       PASSA   R_ogg 44.0
+### incollato a [161, 161] (Delta -0.000074); R_ogg 44.0, R_A 88.0; IL RESIDUO DI GAUSS INIZIALE 1.750e-10 -> LA SOGLIA SU L 324 1.750e-09 (10 volte, mia); C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\porto_gauss.json
+==================================================================================================================================
+ESITO: 3/3 controlli come devono; fallite []
