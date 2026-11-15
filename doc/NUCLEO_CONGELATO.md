@@ -80,6 +80,6 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 | `primo_ordine/termini/camm_grover_vuoto.py` | `8f88bc20` | `8f88bc20` |
 | `primo_ordine/termini/camm_spostamento.py` | `d58a753f` | `d58a753f` |
 | `primo_ordine/termini/camm_spostamento_vuoto.py` | `a58a55ea` | `a58a55ea` |
-| `primo_ordine/motore_numba.py` | *(non c'e')* | `40d05c43` **(NUOVO)** |
+| `primo_ordine/motore_numba.py` | *(non c'e')* | `8c7bc873` **(NUOVO; `40d05c43` a `e1df85c3`, cambiato a `accendi_numba` ATOMICA)** |
 
 - **Gli altri `11` file della tabella: IDENTICI** *(`sha1-BYTE` misurati nel clone).* **Il guardiano verifica questo ramo contro questa tabella.**

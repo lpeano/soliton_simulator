@@ -102,14 +102,18 @@ def accendi_numba(fili):
     if _STATO["nucleo"] is None:
         _STATO["nucleo"] = _costruisci()
     righe = []
-    for modulo, classe, nome in SOSTITUITE:
-        mod = moduli[modulo]
-        mod.__dict__["_MN_add_at"] = add_at
-        orig, nuova, n = _ricompila(mod, nome if classe is None else "%s.%s" % (classe, nome))
-        bersaglio = mod if classe is None else getattr(mod, classe)
-        _STATO["originali"].append((bersaglio, nome, orig))
-        setattr(bersaglio, nome, nuova)
-        righe.append("%s.%s%s (%d np.add.at)" % (modulo, "" if classe is None else classe + ".", nome, n))
+    try:                                                        # ### ATOMICA (W2, 2026-11-15): se una sostituzione cade, si rimettono TUTTE le originali e l'errore sale
+        for modulo, classe, nome in SOSTITUITE:
+            mod = moduli[modulo]
+            mod.__dict__["_MN_add_at"] = add_at
+            orig, nuova, n = _ricompila(mod, nome if classe is None else "%s.%s" % (classe, nome))
+            bersaglio = mod if classe is None else getattr(mod, classe)
+            _STATO["originali"].append((bersaglio, nome, orig))
+            setattr(bersaglio, nome, nuova)
+            righe.append("%s.%s%s (%d np.add.at)" % (modulo, "" if classe is None else classe + ".", nome, n))
+    except Exception:
+        spegni()
+        raise
     MOTORE = "numba"
     return {"motore": MOTORE, "fili": _STATO["fili"], "numba": numba.__version__, "sostituite": righe}
 
