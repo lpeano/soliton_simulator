@@ -25869,3 +25869,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **`d`: `33.02` a `2000`, il minimo `28.72` a `k 5100`, `29.05` a `6000`: si avvicinano e poi si allontanano.** **Un solo giro: rimbalzo o oscillazione non si distinguono** *(una corsa piu' lunga: decide Luca)*.
 - **`A2` da `0.38` a `0.27`** *(non una palla)*; **il picco al massimo `1338`** *(nessun collasso)*; **la massa oltre `R_A` `2e-05`** *(nessuna esplosione)*. **Le culle quasi ferme** *(`42.09` -> `41.43`, in indici)*.
 - **Nessuna corsa aperta.** **FERMO: le decisioni (a) e (b) delle `07:30`/`07:55`.**
+
+### 2026-11-15 10:20 -- LA DECISIONE DI LUCA DELLE 10:10: LE DUE CORSE SU L 243 SI LEGGONO (GAUSS 1e-9); (MGU) SU L 243 NON TORNA SU L 162 (+2.76%); IL TETTO 28800; E UNA PREMESSA DI (3) CHE I NUMERI NON CONFERMANO
+
+- **La decisione** *(Luca `10:10`; la sez. `22.14` sul ramo, `576184e7`)*: **(1) Gauss `1e-9` su `L 243`** *(rivista dopo il risultato, dichiarato)*; **(2) il tetto `28800` ovunque; (3) la coppia a `65` non si rifa'; (4) le frecce di `J_a` NON leggibili come flusso di materia.**
+- **conv-GU-L243 passa e si legge:** ### **(MGU) su `L 243` NON torna su `L 162`: il raggio a `2000` `12.596` contro `12.257`** *(`+2.76%`; (MU) tornava a `4` cifre)*: **il mondo con U sente la scatola.**
+- **coppia-d65 passa e si legge: `d''` `-1.34e-08 +- 9.3e-11` (`144` errori): ATTRAE.**
+- ### **La premessa di (3) che i numeri non confermano:** **da `35` a `51` la forza cala di `38.6` volte, da `51` a `66` di `1.95`; con `39` volte ci si aspettava `6.8e-10`, la misura da' `1.34e-08`.** **«A corto raggio» non e' sostenuto dai tre punti** *(con le riserve: `66` su un'altra scatola, che per (MGU) conta; `d''` per finestra molto variabile; un punto per distanza)*. **Non rifaccio nulla: la conclusione la riconsidera Luca.**
+- **Il tetto:** **`MT.TETTO_S` di `mattone.py` a `28800`** *(la suite, poi il commit)*; **`p6_bracci` e `s5_coppia_lapse` non toccati** *(strumenti di misure chiuse; dichiarato)*.
