@@ -70,7 +70,7 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 |---|---|---|
 | `primo_ordine/_collauda_motore.py` | `4d60d2f2` | `4d60d2f2` |
 | `primo_ordine/_collauda_r60.py` | `1ee3f0eb` | `1ee3f0eb` |
-| `primo_ordine/_mappa.yaml` | `f3bb3fdc` | `3dbf10ef` **(CAMBIA)** |
+| `primo_ordine/_mappa.yaml` | `f3bb3fdc` | `26f2abaf` **(CAMBIA; `3dbf10ef` a `e1df85c3`, poi la dipendenza `flussi_parziali` del secondo passo)** |
 | `primo_ordine/_misura_hw.py` | `98c1d34b` | `98c1d34b` |
 | `primo_ordine/_misura_mb2.py` | `48269077` | `48269077` |
 | `primo_ordine/energia_pesata.py` | `43bce8ad` | `43bce8ad` |
@@ -80,6 +80,6 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 | `primo_ordine/termini/camm_grover_vuoto.py` | `8f88bc20` | `8f88bc20` |
 | `primo_ordine/termini/camm_spostamento.py` | `d58a753f` | `d58a753f` |
 | `primo_ordine/termini/camm_spostamento_vuoto.py` | `a58a55ea` | `a58a55ea` |
-| `primo_ordine/motore_numba.py` | *(non c'e')* | `8c7bc873` **(NUOVO; `40d05c43` a `e1df85c3`, cambiato a `accendi_numba` ATOMICA)** |
+| `primo_ordine/motore_numba.py` | *(non c'e')* | `eea1d3b0` **(NUOVO; `40d05c43` a `e1df85c3`, `8c7bc873` a `330d3718`, poi il secondo passo W3)** |
 
 - **Gli altri `11` file della tabella: IDENTICI** *(`sha1-BYTE` misurati nel clone).* **Il guardiano verifica questo ramo contro questa tabella.**

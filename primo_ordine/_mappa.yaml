@@ -203,8 +203,8 @@ moduli:
     importa: [energia_pesata, flussi_parziali, incidenza, materia_vuoto, saturazione]
 
   - nome: motore_numba.py
-    responsabilita: lo switch del motore numba, spento per difetto -- sostituisce in memoria le funzioni con np.add.at
-    importa: [energia_pesata, motore]
+    responsabilita: lo switch del motore numba, spento per difetto -- sostituisce in memoria funzioni del tick
+    importa: [energia_pesata, flussi_parziali, motore]
 
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick

@@ -128,10 +128,132 @@ def spegni():
     for modulo in sorted(set(m for m, _c, _n in SOSTITUITE)):
         if modulo in sys.modules:
             sys.modules[modulo].__dict__.pop("_MN_add_at", None)
+    _STATO["secondo"] = False
     MOTORE = "nucleo"
 
 
 def stato():
     """### Per il registro *(M4)*: il motore, i fili, le chiamate del ciclo, i ripieghi, `sys.executable`."""
     import sys
-    return {"motore": MOTORE, "fili": _STATO["fili"], "chiamate": _STATO["chiamate"], "ripieghi": _STATO["ripieghi"], "numba_importato": "numba" in sys.modules, "sys.executable": sys.executable}
+    return {"motore": MOTORE, "fili": _STATO["fili"], "chiamate": _STATO["chiamate"], "ripieghi": _STATO["ripieghi"], "numba_importato": "numba" in sys.modules, "sys.executable": sys.executable,
+            "secondo_passo": _STATO.get("secondo", False)}
+
+
+# =====================================================================================
+#   IL SECONDO PASSO (W3, Luca 2026-11-15 19:12): i cicli elemento per elemento
+# =====================================================================================
+# ### Le TRE funzioni: `flussi_parziali._grover_mezzo`, `flussi_parziali._hop_psi_mezzo`, `motore.Motore._ruota_attorno_a_n`.
+# ### LA REGOLA DEL BIT (N1, W3): in numpy restano i PESI (`z`, `w = (1 - z)/grado`, `alpha`, `beta`) e `sin`/`cos` (le stesse
+# ### chiamate di oggi); nel ciclo numba SOLO prodotti e somme complesse, nell'ORDINE di numpy, con il reale reso complesso
+# ### `(x + 0j)` dove numpy lo promuove, e l'einsum accumulato da zero. Se D2 non e' al bit: la differenza e il perche'.
+def _costruisci2():
+    from numba import njit, prange
+
+    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    def k_grover(vista, S, w, z, nodo):
+        c = vista.shape[1]
+        for e in prange(vista.shape[0]):
+            kk = nodo[e]
+            for q in range(c):
+                presa = S[kk, q] * w[kk, 0]
+                v = vista[e, q] * z[kk, 0]
+                vista[e, q] = presa + v
+
+    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    def k_hop(v, U, al, be):
+        for a in prange(v.shape[0]):
+            t0 = v[a, 0, 0]
+            t1 = v[a, 0, 1]
+            A = al[a, 0]
+            B = be[a, 0]
+            # ### lato 0 nuovo: alpha v0 + beta (U^dagger v1); l'einsum "aji,aj->ai": per i, la somma su j da zero
+            m0 = 0j
+            m0 = m0 + U[a, 0, 0].conjugate() * v[a, 1, 0]
+            m0 = m0 + U[a, 1, 0].conjugate() * v[a, 1, 1]
+            m1 = 0j
+            m1 = m1 + U[a, 0, 1].conjugate() * v[a, 1, 0]
+            m1 = m1 + U[a, 1, 1].conjugate() * v[a, 1, 1]
+            m0 = m0 * B
+            m1 = m1 * B
+            v[a, 0, 0] = t0 * A + m0
+            v[a, 0, 1] = t1 * A + m1
+            # ### lato 1 nuovo: alpha v1 + beta (U v0), v0 dalla copia; l'einsum "aij,aj->ai"
+            n0 = 0j
+            n0 = n0 + U[a, 0, 0] * t0
+            n0 = n0 + U[a, 0, 1] * t1
+            n1 = 0j
+            n1 = n1 + U[a, 1, 0] * t0
+            n1 = n1 + U[a, 1, 1] * t1
+            n0 = n0 * B
+            n1 = n1 * B
+            v[a, 1, 0] = v[a, 1, 0] * A + n0
+            v[a, 1, 1] = v[a, 1, 1] * A + n1
+
+    @njit(parallel=True, fastmath=False, error_model="numpy", cache=True)
+    def k_ruota(psi, nn, s, c):
+        uno_j = 1j
+        meno_j = -1j
+        for e in prange(psi.shape[0]):
+            nx = complex(nn[e, 0], 0.0)
+            ny = complex(nn[e, 1], 0.0)
+            nz = complex(nn[e, 2], 0.0)
+            p0 = psi[e, 0]
+            p1 = psi[e, 1]
+            a0 = nz * p0
+            a0 = a0 + (nx - uno_j * ny) * p1
+            a1 = (nx + uno_j * ny) * p0
+            a1 = a1 - nz * p1
+            m = meno_j * complex(s[e], 0.0)
+            a0 = a0 * m
+            a1 = a1 * m
+            cc = complex(c[e], 0.0)
+            p0 = p0 * cc
+            p1 = p1 * cc
+            psi[e, 0] = p0 + a0
+            psi[e, 1] = p1 + a1
+    return k_grover, k_hop, k_ruota
+
+
+def accendi_secondo_passo():
+    """### **IL SECONDO PASSO** *(W3)*: con il motore numba GIA' acceso, sostituisce `_grover_mezzo`, `_hop_psi_mezzo`, `Motore._ruota_attorno_a_n`. Atomico; `spegni()` rimette tutto."""
+    import flussi_parziali as FP                                 # ### una dipendenza VERA in piu' (la mappa)
+    import motore
+    assert MOTORE == "numba", "il secondo passo vuole il primo acceso (accendi_numba)"
+    if _STATO.get("k2") is None:
+        _STATO["k2"] = _costruisci2()
+    kg, kh, kr = _STATO["k2"]
+    np = _numpy
+
+    def _grover_mezzo(mot, vista, frazione):
+        n, nodo = mot.inc.n, mot.inc.nodo
+        c = vista.shape[1]
+        S = mot._b("fp_S_campo_%d" % c, (n, c), vista.dtype)
+        mot._somma_per_nodo(vista, S)
+        z = FP.z_nodo(mot, frazione)
+        w = mot._b("fp_w_grover", (n, 1), complex)
+        np.subtract(1.0, z, out=w)
+        np.divide(w, mot.inc.grado.reshape(-1, 1), out=w)
+        kg(vista, S, w, z, nodo)
+        return vista
+
+    def _hop_psi_mezzo(mot, psi, frazione):
+        m = mot.inc.m
+        al, be = FP._alfa_beta(mot, FP.z_arco(mot, frazione))
+        kh(psi.reshape(m, 2, 2), mot.geo.U, al, be)
+        return psi
+
+    def _ruota_attorno_a_n(self, psi, ang):
+        s = self._b("sin", ang.shape, float)
+        np.sin(ang, out=s)
+        c = ang
+        np.cos(ang, out=c)
+        kr(psi, self.geo.n, s, c)
+    try:
+        for bersaglio, nome, nuova in ((FP, "_grover_mezzo", _grover_mezzo), (FP, "_hop_psi_mezzo", _hop_psi_mezzo), (motore.Motore, "_ruota_attorno_a_n", _ruota_attorno_a_n)):
+            _STATO["originali"].append((bersaglio, nome, getattr(bersaglio, nome)))
+            setattr(bersaglio, nome, nuova)
+    except Exception:
+        spegni()
+        raise
+    _STATO["secondo"] = True
+    return {"secondo_passo": ["flussi_parziali._grover_mezzo", "flussi_parziali._hop_psi_mezzo", "motore.Motore._ruota_attorno_a_n"]}
