@@ -202,6 +202,10 @@ moduli:
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
     importa: [energia_pesata, flussi_parziali, incidenza, materia_vuoto, saturazione]
 
+  - nome: motore_numba.py
+    responsabilita: lo switch del motore numba, spento per difetto -- sostituisce in memoria le funzioni con np.add.at
+    importa: [energia_pesata, motore]
+
   - nome: _collauda_motore.py
     responsabilita: il collaudo del motore -- zero allocazioni, unitarieta-, regola del tick
     importa: [_presidio, incidenza, motore, stato]

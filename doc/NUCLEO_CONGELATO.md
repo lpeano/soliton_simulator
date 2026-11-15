@@ -61,3 +61,25 @@ RIFIUTATO.** **Se questo file manca, il nucleo e' CONGELATO lo stesso** *(chiuso
 `decisione_di_luca: <data, ora, il testo o il riferimento>`. **Senza quella riga, uno stato diverso da `CONGELATO`
 RIFIUTA ogni commit sul principale.** ### ⚠ **Il limite** *(`A9`)*: **il presidio impedisce di DIMENTICARE, non di
 scrivere la riga senza la decisione: quella resta una regola.** **E una testa staccata non ha ramo: il presidio non la vede.**
+
+## IL RAMO `motore-numba` *(decisione di Luca 2026-11-15 15:50, 18:08, 19:12, 19:57; la carta `doc/TASK_HISTORY/2026-11-15_motore_numba.md`)*
+
+- **Sul ramo `motore-numba` il nucleo cambia per decisione di Luca: UN file nuovo** *(`primo_ordine/motore_numba.py`)* **e UNA voce nella mappa** *(`primo_ordine/_mappa.yaml`, la strada (a) delle `19:57`: P-MOD vuole ogni modulo in mappa)*; **nessun file di fisica del nucleo cambia.** *(`H-NUCLEO-CONGELATO` blocca solo il ramo `primo-ordine`.)*
+
+| il file | il nucleo di oggi | il ramo `motore-numba` |
+|---|---|---|
+| `primo_ordine/_collauda_motore.py` | `4d60d2f2` | `4d60d2f2` |
+| `primo_ordine/_collauda_r60.py` | `1ee3f0eb` | `1ee3f0eb` |
+| `primo_ordine/_mappa.yaml` | `f3bb3fdc` | `3dbf10ef` **(CAMBIA)** |
+| `primo_ordine/_misura_hw.py` | `98c1d34b` | `98c1d34b` |
+| `primo_ordine/_misura_mb2.py` | `48269077` | `48269077` |
+| `primo_ordine/energia_pesata.py` | `43bce8ad` | `43bce8ad` |
+| `primo_ordine/flussi_parziali.py` | `d43b1cf8` | `d43b1cf8` |
+| `primo_ordine/leggi/leggi.yaml` | `1c0eac29` | `1c0eac29` |
+| `primo_ordine/termini/camm_grover.py` | `10b70489` | `10b70489` |
+| `primo_ordine/termini/camm_grover_vuoto.py` | `8f88bc20` | `8f88bc20` |
+| `primo_ordine/termini/camm_spostamento.py` | `d58a753f` | `d58a753f` |
+| `primo_ordine/termini/camm_spostamento_vuoto.py` | `a58a55ea` | `a58a55ea` |
+| `primo_ordine/motore_numba.py` | *(non c'e')* | `40d05c43` **(NUOVO)** |
+
+- **Gli altri `11` file della tabella: IDENTICI** *(`sha1-BYTE` misurati nel clone).* **Il guardiano verifica questo ramo contro questa tabella.**
