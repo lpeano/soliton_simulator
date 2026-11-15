@@ -740,3 +740,10 @@
 4. **il registro: `legati-GU`, `legati-GUpi`, `legati-t120-a` aperte** *(`--forza`: Luca `15:22` e `10:29`)*; **le tre corse insieme;**
 5. **alla fine di `legati-t120-a`: `legati-t120`** *(la fase 2)*; **se il tetto ferma una corsa: la ripresa dall'ultimo stato;**
 6. **i referti, `legati.py lettura`, il task history, una riga nella relazione per ognuna.**
+
+### 22.16 IL REFERTO UNICO DEI TRIANGOLI (T4; IN CODA DAL `2026-11-14`): PER SOLITONE IL BORDO NE PORTA VIA `0.79` E `0.84` VOLTE L'ISOLATO: NESSUN EFFETTO CHIARO; LE LETTURE PER PEZZO NON SI LEGGONO
+
+- **`mattone_triangolo.py referto`** *(solo lettura delle serie; `doc/referti_l2/mattone/triangolo.txt`)*: **(T-fase) e (T-sfasati) col mattone di `L 81`, contro (T-solo), sui tick `250`-`1250`.**
+- ### **LA LETTURA CHE VALE:** **la massa uscita dal bordo PER SOLITONE contro (T-solo): `0.794` (T-fase), `0.840` (T-sfasati)** *(fra le soglie `0.7` e `1.3`: NESSUN EFFETTO CHIARO; per (T-fase) vicino alla soglia di protezione)*.
+- ### **LE LETTURE PER PEZZO NON SI LEGGONO** *(dichiarato)*: **i tre pezzi della partizione si scambiano massa** *(in (T-sfasati) B guadagna `+23.4` per tick, A e C perdono: i rapporti contro (T-solo) da `-135.7` a `+96.9`)*: **«PROTEGGE» o «FA PERDERE» per pezzo e' lo scambio, non la perdita.** **La somma delle perdite dei pezzi `-0.385` e `-0.379` per tick** *(contro `-0.172` dell'isolato: dentro ci sono anche le code che passano da un pezzo al bordo della partizione)*.
+- **Il moto:** **(T-fase) si stringe** *(il lato medio da `38.70` a `35.15`, `d''` `-1.16e-06`, `56` errori)*; **(T-sfasati) quasi fermo** *(da `39.08` a `39.09`, `d''` `-2.34e-07`; i lati alla fine `39.5`, `39.8`, `38.0`)*. **I respiri: nessun aggancio di fase chiaro** *(le correlazioni fra `0.27` e `0.59`)*.
