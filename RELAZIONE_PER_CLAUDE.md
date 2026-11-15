@@ -25843,3 +25843,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Un mio errore** *(la sez. `22.9` sul ramo)*: **alle `04:40` ho scritto che `triangolo_flussi.py` non si gira: era GIA' girato alle `03:10`** *(`2e4289fe`)*. **La frase giusta: le frecce gia' prodotte NON si leggono** *(la conservazione sul tick non torna)*.
 - **coppia-d50** *(L 162, bordo `60`; uscita `0`, chiusa FINITO)*: **`d0` vera `51.006`; `d''` sui tick `250`-`2000` `-2.616e-08 +- 5.8e-10` (`45` errori): ATTRAE.** **B2 a `35.06`: `-1.010e-06`, circa `39` volte di piu'.** **Due punti non fanno una legge** *(e `65` gira su un'altra scatola, `L 243`)*; **per finestre `d''` cambia segno due volte.** **La massa oltre `R_A 60` al massimo `1.9e-05`, sotto `1e-4`.**
 - **Dichiarato:** **`coppia_fase.py lettura` non accetta `GUd50`** *(il docstring lo promette: errore mio)*; **il numero e' lo stesso** *(la curvatura `250`-`2000` del referto)*.
+
+### 2026-11-15 06:45 -- IL TRIFOGLIO LUNGO (IL 3x): PER LA SOGLIA FISSATA PRIMA SI ARROTONDA (A3 AL 19%), MA NON E' FERMO; PARTITO IL 2x
+
+- **Sul ramo** *(`5a5c53ed`; la sez. `22.10`)*: **`4000` tick in piu'** *(da `2000` a `6000`)*, **la ripartenza AL BIT, Gauss sotto `1e-10`.** **`A3` per finestra di `1000` tick `0.193`, `0.165`, `0.117`, `0.036`: l'ultima al `19%` della prima, sotto il `25%`: SI ARROTONDA IN UN SOLITONE GRANDE** *(la soglia mia, fissata prima)*.
+- ### **Ma non e' fermo:** **`A3` cala ancora** *(`0.080` a `5000`, `0.025` a `6000`)*; **il raggio ha un minimo a `4500`** *(`21.59`)* **e ricresce** *(`22.24`)*; **A e C si scambiano massa** *(A `x 1.033`, C `x 0.961`)*: **la forma dell'insieme e' tonda, non vuol dire che i tre si siano fusi** *(le mappe: non ancora guardate)*. **Massa uscita dal bordo `6e-4` del totale.**
+- **Il 2x** *(Luca `01:54`, F2)*: **`coppia-lunga` aperta e partita alle `06:40`** *(B2 prosegue da `2000` per `4000` tick)*. **In corsa anche la coppia a `65` e la parte B su `L 243`.**
