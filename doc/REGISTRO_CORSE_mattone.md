@@ -507,3 +507,21 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:36:30+01:00", "punto": "k 1896; 9.913 s per tick; la memoria libera 14.87 GB"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:46:36+01:00", "punto": "k 1973; 9.834 s per tick; la memoria libera 14.91 GB"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "conv-GU-L243", "ora": "2026-11-15T07:50:25+01:00", "punto": "2000 tick in 19611 s (02:21:07-07:50:05), uscita 1; il DEVE di Gauss FALLISCE: il massimo 1.045e-10 (l'iniziale 9.860e-11) contro 1e-10; i due DEVE del vuoto PASSANO; il raggio 12.5960 a 2000, il picco 1.1750e+03; la massa uscita dal bordo 154.74"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T06:54:42+01:00", "punto": "k 1653; 3.944 s per tick; la memoria libera 14.20 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T07:04:44+01:00", "punto": "k 1828; 3.674 s per tick; la memoria libera 14.42 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T07:24:43+01:00", "punto": "k 2173; 3.493 s per tick; la memoria libera 12.30 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T07:34:46+01:00", "punto": "k 2328; 3.681 s per tick; la memoria libera 14.72 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T07:44:47+01:00", "punto": "k 2513; 3.524 s per tick; la memoria libera 14.88 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T07:54:50+01:00", "punto": "k 2701; 3.439 s per tick; la memoria libera 14.90 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:04:51+01:00", "punto": "k 2930; 3.238 s per tick; la memoria libera 15.20 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:14:53+01:00", "punto": "k 3210; 2.987 s per tick; la memoria libera 15.16 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:24:56+01:00", "punto": "k 3490; 2.830 s per tick; la memoria libera 15.06 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:34:58+01:00", "punto": "k 3769; 2.724 s per tick; la memoria libera 15.10 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:44:59+01:00", "punto": "k 4049; 2.645 s per tick; la memoria libera 15.22 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T08:54:59+01:00", "punto": "k 4328; 2.586 s per tick; la memoria libera 15.09 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T09:05:00+01:00", "punto": "k 4608; 2.539 s per tick; la memoria libera 15.19 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T09:15:03+01:00", "punto": "k 4888; 2.501 s per tick; la memoria libera 15.18 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T09:25:05+01:00", "punto": "k 5163; 2.474 s per tick; la memoria libera 15.06 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T09:35:08+01:00", "punto": "k 5442; 2.449 s per tick; la memoria libera 14.92 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-lunga", "ora": "2026-11-15T09:45:08+01:00", "punto": "k 5722; 2.426 s per tick; la memoria libera 14.93 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "coppia-lunga", "ora": "2026-11-15T09:55:43+01:00", "punto": "4000 tick da 2000 a 6000 in 11458 s (06:44:04-09:55:04), uscita 0; i DEVE PASSANO (la ripartenza AL BIT; Gauss 6.394e-11; la massa persa = uscita dal bordo, 9.204e-15); d 33.0152 -> minimo 28.7157 a k 5100 -> 29.0477; A2 0.3797 0.3514 0.3010 0.2662; LA LETTURA: NON SI FERMA / ANCORA DUE"}

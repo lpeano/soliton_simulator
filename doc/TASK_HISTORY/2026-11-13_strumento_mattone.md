@@ -675,3 +675,10 @@
   - **`convergenza.scena_L(243)`, un mattone: `9.860e-11`; due** *(coppia-d65)*: **`2.146e-10`.**
   - ### **Il residuo dipende da COME la scena e' costruita** *(un fattore `100` fra due scene di `L 162`)*, **non solo dalla grandezza.** **Le cause NON le so** *(il solutore di Gauss, la tolleranza, il vuoto della scena: da cercare, con `A11`: cercare l'errore, non spostare la soglia)*. **Le due decisioni di 22.11 restano di Luca, e questa corsa si aggiunge al FERMO.**
 - *(I rapporti da un calcolo `python -c` sui numeri dei referti.)*
+
+### 22.13 IL 2x (B2 PROSEGUE A `6000`): I DUE SI AVVICINANO FINO A `28.72` A `k 5100`, POI SI ALLONTANANO; NESSUN COLLASSO, NESSUNA ESPLOSIONE; LA LETTURA «NON SI FERMA / ANCORA DUE»
+
+- **coppia-lunga** *(`coppia_lunga.py`; `coppia_lunga.txt`, le mappe e la serie forzate nel repo; `06:44:04`-`09:55:04`, uscita `0`; CHIUSA FINITO)*: **i DEVE PASSANO: la ripartenza AL BIT; Gauss al massimo `6.394e-11`; la massa persa = la massa uscita dal bordo** *(`1143.818`, la differenza relativa `9.204e-15`)*.
+- **`d`** *(dai semipiani)*: **`33.0152` a `2000`, il MINIMO `28.7157` a `k 5100`** *(dalla serie ogni `50` tick)*, **`29.0477` a `6000`.** ### **Si avvicinano e poi si ALLONTANANO: un rimbalzo o un'oscillazione** *(un solo giro: NON si dice quale; per saperlo serve una corsa piu' lunga, decide Luca)*.
+- **La forma:** **`A2` per finestra di `1000` tick `0.3797`, `0.3514`, `0.3010`, `0.2662`** *(sopra il `5%`: NON una palla)*; **il raggio `20.838`, `19.915`, `19.582`, `19.816`**; **il picco al massimo `1.3376e+03`** *(sotto `2500`: NESSUN collasso)*; **la massa oltre `R_A` al massimo `2.058e-05`** *(NESSUNA esplosione)*. **Per le soglie del guardiano** *(F1, fissate prima)*: **NON SI FERMA / ANCORA DUE.**
+- **Le culle:** **la distanza fra i centri delle due culle da `42.086` a `41.426`** *(IN INDICI dei nodi, non in distanza vera: dichiarato)*: **le culle si muovono molto meno dei solitoni.**

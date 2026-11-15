@@ -1,0 +1,35 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] coppia_lunga.py  sha1-BYTE 3cae7b3c  committato e pulito
+==================================================================================================================================
+LA FABBRICA, IL 2x (Luca 01:54, F2): B2 da k 2000 per 4000 tick in piu'; la scena di C35-pi, il bordo da R_A 60, G+U
+==================================================================================================================================
+  DEVE PASSARE: la ripartenza da E:\soliton_simulator\mattone\coppiaGU_L162_01500.npz per 500 tick = E:\soliton_simulator\mattone\coppiaGU_L162_02000.npz AL BIT (esclusa h_int)   PASSA   diverse: []
+    k  2000  d 33.0152  il raggio 21.3031  A2 0.3912  il picco 1.1076e+03  la massa 2.049037e+06  oltre R_A 1.824e-05  Gauss 6.39e-11  (1834 s)
+    k  2500  d 32.0327  il raggio 20.8777  A2 0.3814  il picco 1.1444e+03  la massa 2.048894e+06  oltre R_A 1.669e-05  Gauss 6.19e-11  (3600 s)
+    k  3000  d 31.0186  il raggio 20.3627  A2 0.3721  il picco 1.2561e+03  la massa 2.048761e+06  oltre R_A 1.681e-05  Gauss 5.64e-11  (4997 s)
+    k  3500  d 30.1020  il raggio 19.9019  A2 0.3542  il picco 1.2337e+03  la massa 2.048620e+06  oltre R_A 1.707e-05  Gauss 5.74e-11  (6074 s)
+    k  4000  d 29.4045  il raggio 19.6160  A2 0.3276  il picco 1.1898e+03  la massa 2.048481e+06  oltre R_A 1.789e-05  Gauss 5.95e-11  (7149 s)
+    k  4500  d 28.9126  il raggio 19.5558  A2 0.3019  il picco 1.1826e+03  la massa 2.048328e+06  oltre R_A 1.978e-05  Gauss 5.99e-11  (8224 s)
+    k  5000  d 28.7180  il raggio 19.6519  A2 0.2761  il picco 1.1119e+03  la massa 2.048182e+06  oltre R_A 1.696e-05  Gauss 6.37e-11  (9308 s)
+    k  5500  d 28.8068  il raggio 19.8051  A2 0.2648  il picco 1.1251e+03  la massa 2.048031e+06  oltre R_A 1.740e-05  Gauss 6.30e-11  (10388 s)
+    k  6000  d 29.0477  il raggio 19.9835  A2 0.2630  il picco 1.1586e+03  la massa 2.047893e+06  oltre R_A 1.629e-05  Gauss 6.11e-11  (11458 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B  materia fuori      vuoto A      vuoto B  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+       2000   8.519285e+06   8.501431e+06   1.066458e+03   3.6193e+03   3.6151e+03   7.0877e+02  1.9911e+01   17029725.004632       +0.0000       +0.0000    0.0000e+00
+       2500   8.519594e+06   8.500209e+06   1.021371e+03   3.6058e+03   3.6456e+03   6.8484e+02  2.0352e+01   17028759.976601    +1106.8849      +37.7436    1.4273e+02
+       3000   8.530718e+06   8.488264e+06   1.030939e+03   3.5880e+03   3.6591e+03   6.9064e+02  2.0942e+01   17027950.459914    +2122.4440     +246.4894    2.7549e+02
+       3500   8.519064e+06   8.499082e+06   9.899291e+02   3.5540e+03   3.6531e+03   6.9477e+02  2.1427e+01   17027037.810622    +3200.5172     +404.4938    4.1660e+02
+       4000   8.553031e+06   8.464060e+06   1.072076e+03   3.5568e+03   3.5802e+03   7.1101e+02  2.1643e+01   17026010.364719    +4272.1549     +440.4970    5.5527e+02
+       4500   8.541181e+06   8.474634e+06   1.097999e+03   3.5585e+03   3.5416e+03   7.0504e+02  2.1563e+01   17024718.314255    +5453.9201     +319.0744    7.0858e+02
+       5000   8.522179e+06   8.492330e+06   1.109385e+03   3.5467e+03   3.5289e+03   7.0343e+02  2.1307e+01   17023397.153860    +6562.4173     +137.5676    8.5450e+02
+       5500   8.534648e+06   8.478625e+06   1.064313e+03   3.5370e+03   3.5500e+03   6.9285e+02  2.1037e+01   17022117.525942    +7706.9191      -10.8773    1.0058e+03
+       6000   8.553117e+06   8.459020e+06   1.031053e+03   3.5172e+03   3.5607e+03   6.9531e+02  2.0813e+01   17020941.927924    +8759.6899     -122.9812    1.1438e+03
+### LA MASSA: persa 1.143818e+03, uscita dal bordo 1.143818e+03, la differenza relativa 9.204e-15 (il DEVE: entro 1e-6)
+### LA LETTURA: A2 per finestra ['0.3797', '0.3514', '0.3010', '0.2662']; il raggio ['20.838', '19.915', '19.582', '19.816']; il picco max 1.3376e+03; la massa oltre R_A max 2.058e-05; d da 33.0152 a 29.0477; la distanza fra le culle da 42.086 a 41.426 (in indici) -> NON SI FERMA / ANCORA DUE
+  DEVE PASSARE: Gauss sotto 1e-10 (il massimo 6.394e-11) e la massa persa = la massa uscita dal bordo entro 1e-6: PASSA
+==================================================================================================================================
+ESITO: NON SI FERMA / ANCORA DUE; 11459 s in tutto
