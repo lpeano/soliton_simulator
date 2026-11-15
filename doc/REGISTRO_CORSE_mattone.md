@@ -410,3 +410,36 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:43:01+01:00", "punto": "k 1783; 4.731 s per tick; la memoria libera 13.90 GB"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:53:01+01:00", "punto": "k 1910; 4.731 s per tick; la memoria libera 13.89 GB"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "coppia-d50", "ora": "2026-11-15T04:59:43+01:00", "punto": "2000 tick in 9391 s (02:21:07-04:58:57), uscita 0; d0 51.005871 -> 50.952416; d'' 250-2000 -2.615720e-08 +- 5.8e-10 (45.2 errori): ATTRAE; Gauss max 6.632e-11; la massa oltre R_A 60 1.915e-05 (sotto 1e-4)"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T01:17:58+01:00", "punto": "k 1622; 4.943 s per tick; la memoria libera 14.18 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T01:27:58+01:00", "punto": "k 1747; 4.871 s per tick; la memoria libera 14.23 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T01:37:59+01:00", "punto": "k 1872; 4.850 s per tick; la memoria libera 12.06 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T01:47:59+01:00", "punto": "k 1997; 4.837 s per tick; la memoria libera 12.06 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T01:58:20+01:00", "punto": "k 2122; 4.953 s per tick; la memoria libera 12.95 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:08:21+01:00", "punto": "k 2248; 4.858 s per tick; la memoria libera 14.18 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:18:21+01:00", "punto": "k 2404; 4.468 s per tick; la memoria libera 14.95 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:28:23+01:00", "punto": "k 2533; 4.515 s per tick; la memoria libera 13.92 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:38:28+01:00", "punto": "k 2652; 4.619 s per tick; la memoria libera 13.00 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:48:30+01:00", "punto": "k 2782; 4.621 s per tick; la memoria libera 11.99 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T02:58:30+01:00", "punto": "k 2903; 4.667 s per tick; la memoria libera 13.72 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:08:31+01:00", "punto": "k 3025; 4.698 s per tick; la memoria libera 13.64 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:18:34+01:00", "punto": "k 3149; 4.716 s per tick; la memoria libera 13.74 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:28:38+01:00", "punto": "k 3277; 4.716 s per tick; la memoria libera 11.96 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:38:41+01:00", "punto": "k 3393; 4.756 s per tick; la memoria libera 14.02 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:48:44+01:00", "punto": "k 3529; 4.728 s per tick; la memoria libera 13.83 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T03:58:47+01:00", "punto": "k 3654; 4.734 s per tick; la memoria libera 12.50 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:08:48+01:00", "punto": "k 3778; 4.742 s per tick; la memoria libera 13.82 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:18:48+01:00", "punto": "k 3907; 4.736 s per tick; la memoria libera 11.96 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:28:53+01:00", "punto": "k 4035; 4.736 s per tick; la memoria libera 12.63 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:38:58+01:00", "punto": "k 4159; 4.744 s per tick; la memoria libera 13.81 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:49:01+01:00", "punto": "k 4275; 4.767 s per tick; la memoria libera 13.78 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T04:59:05+01:00", "punto": "k 4422; 4.727 s per tick; la memoria libera 14.40 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:09:06+01:00", "punto": "k 4559; 4.709 s per tick; la memoria libera 12.26 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:19:06+01:00", "punto": "k 4724; 4.644 s per tick; la memoria libera 14.42 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:29:09+01:00", "punto": "k 4896; 4.576 s per tick; la memoria libera 14.51 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:39:12+01:00", "punto": "k 5066; 4.519 s per tick; la memoria libera 14.57 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:49:13+01:00", "punto": "k 5236; 4.468 s per tick; la memoria libera 14.38 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T05:59:13+01:00", "punto": "k 5408; 4.418 s per tick; la memoria libera 14.45 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T06:09:14+01:00", "punto": "k 5578; 4.376 s per tick; la memoria libera 14.39 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T06:19:15+01:00", "punto": "k 5749; 4.337 s per tick; la memoria libera 14.46 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "trifoglio", "ora": "2026-11-15T06:29:17+01:00", "punto": "k 5920; 4.301 s per tick; la memoria libera 14.52 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "trifoglio", "ora": "2026-11-15T06:34:45+01:00", "punto": "4000 tick da 2000 a 6000 in 19598 s (01:07:20-06:33:59), uscita 0; DEVE ripartenza AL BIT; L4: A3 per finestra 0.1927 0.1651 0.1169 0.0364 (0.189 della prima): SI ARROTONDA; il raggio 23.555 22.242 21.633 21.934; Gauss max 6.378e-11"}

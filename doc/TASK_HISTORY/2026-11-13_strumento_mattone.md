@@ -642,3 +642,13 @@
   - **Le finestre da `250`: `d''` cambia SEGNO** *(`+9.4e-09` a `1250`-`1500`, `+2.8e-08` a `1750`-`2000`)*: **la curvatura su `250`-`2000` e' una media su un moto non regolare; dichiarato.**
   - **La massa oltre `R_A 60`: al massimo `1.915e-05`, SOTTO `1e-4`**; **Gauss al massimo `6.632e-11`** *(`2/2` DEVE)*.
   - ### **Due cose dichiarate:** **(a) `coppia_fase.py lettura --mondo GUd50` NON funziona** *(accetta solo `GU`, `GUpi`: il docstring di `coppia_distanze.py` lo promette, ERRORE MIO)*; **il numero e' lo stesso: la riga «B3 SU B2» del referto e' `carta_coppia.curvatura` sui tick `250`-`2000`, come `coppia_fase.lettura`;** **(b) la scritta «ERA IL COLPETTO DELL'ALLARGAMENTO» del referto confronta con `GUrampa` di `L 81`: su questa scena NON si legge.**
+
+### 22.10 IL TRIFOGLIO LUNGO (IL 3x): PER LA SOGLIA FISSATA PRIMA SI ARROTONDA (`A3` AL `19%`); MA NON E' FERMO
+
+- **trifoglio** *(`trifoglio.py corsa`; `trifoglio.txt`, le mappe e la serie forzate nel repo; `01:07:20`-`06:33:59`, uscita `0`; CHIUSA FINITO)*: **il DEVE della ripartenza AL BIT; Gauss al massimo `6.378e-11`.**
+- **L4** *(le soglie mie, fissate PRIMA nel docstring)*: **`A3` per finestra di `1000` tick `0.1927`, `0.1651`, `0.1169`, `0.0364`: l'ultima e' il `18.9%` della prima, sotto il `25%`: SI ARROTONDA IN UN SOLITONE GRANDE.**
+- ### **Le riserve, scritte accanto:**
+  - **non e' fermo:** **`A3` cala ancora nell'ultima finestra** *(`0.0796` a `5000`, `0.0250` a `6000`)*; **il raggio ha un MINIMO a `4500`** *(`21.59`)* **e poi RICRESCE** *(`22.24` a `6000`)*: **fra le ultime due finestre il raggio cambia dell'`1.4%`, `A3` del `69%`;**
+  - **i tre pezzi si scambiano massa:** **la materia di A da `8.799e+06` a `9.085e+06`** *(`x 1.0325`)*, **quella di C da `8.456e+06` a `8.125e+06`** *(`x 0.9608`)*: **«solitone grande» dice la forma dell'insieme, non che i tre si siano fusi** *(le mappe ogni `100` tick lo dicono: non ancora guardate)*;
+  - **la massa uscita dal bordo `1891`** *(il `6e-4` del totale)*.
+- *(I rapporti da un calcolo `python -c` sui numeri del referto.)*
