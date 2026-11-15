@@ -2,6 +2,7 @@
 r"""**A CHE DISTANZA STAVA IL BORDO DALLA CODA DEL SOLITONE, SU `L 81`** *(Luca `2026-11-14` `15:49`, in coda, SOLO LETTURA; l'errore del guardiano n.161)*.
 
     python csv/solitone/bordo_coda_L81.py > doc/referti_l2/bordo_coda_L81.txt
+    python csv/solitone/bordo_coda_L81.py letture > doc/referti_l2/bordo_letture_G1.txt     (Luca 20:26: le letture di G1 rilette col bordo)
 
 **Le corse su `L 81` nella scena di TBS** *(il bordo di TBS: `R_A = 28` dal suo centro, la rampa `sin^2` fino a `R_B` = la meta' del periodo, `40.5`)*: **G1** *(`campo_g1`, `campo_g1_lunga`, `campo_g1_lunghissima`)* **e il «pendolo»** *(il video triplo, `campo_g1_tre` A, B, C)*.
 **Per ogni mappa di `rho` salvata:** **la distanza del centro del solitone dal centro del bordo; i raggi `R99` e `R999`** *(dal centro del solitone, la massa entro il `99%` e il `99.9%`)*; **la coda verso il bordo: `d + R99` e `d + R999`** *(il punto
@@ -89,5 +90,89 @@ def main():
     return 0
 
 
+# =====================================================================================
+#   Luca 20:26 (1)-(2): LE LETTURE DI G1 RILETTE COL BORDO
+# =====================================================================================
+PULITA, TOCCATA = 1e-3, 1e-2           # ### la massa oltre R_A: sotto 1e-3 PULITA (mia), fino a 1e-2 TOCCATA (mia), oltre 1e-2 DA NON ATTRIBUIRE (Luca 20:26: l'1%)
+
+
+def letture():
+    import _presidio
+    from solitone import corsa_accensione as CA
+    from solitone import toro as TO
+    _presidio.avvia(__file__)
+    L = 81
+    bor = CA.serie("TBS")[0][-1]["bordo"]
+    c0 = bor["c0"]
+    R_A = float(bor["R_A"])
+    v = np.arange(L * L)
+    m1, m2 = v // L, v % L
+    r_c0 = np.hypot(*TO.scarti(m1, m2, c0[0], c0[1], L).T[:2])
+
+    def d_di(c):
+        return float(np.hypot(*TO.scarti(np.array([c[0]]), np.array([c[1]]), c0[0], c0[1], L)[0][:2]))
+
+    def serie(f):
+        with np.load(os.path.join(REF, f)) as dd:
+            if "rho" in dd.files:
+                t = dd["t_rho"] if "t_rho" in dd.files else dd["t"]
+                rho = np.asarray(dd["rho"], dtype=float)
+            else:
+                t, rho = dd["t"], np.asarray(dd["psi2"], dtype=float).sum(axis=1)      # ### le componenti: rho = la somma delle 12
+            dl = np.asarray(dd["dLambda"], dtype=float) if "dLambda" in dd.files and len(dd["dLambda"]) == len(t) else None
+        return np.asarray(t, dtype=float), rho.reshape(len(t), -1), (dl.reshape(len(t), -1) if dl is not None else None)
+
+    def finestra(f, a, b):
+        t, rho, _dl = serie(f)
+        out = []
+        for i in np.nonzero((t >= a) & (t <= b))[0]:
+            r = rho[i]
+            out.append((t[i], d_di(TO.centro(r, m1, m2, L)[:2]), float(r[r_c0 > R_A].sum() / r.sum())))
+        return out
+
+    def verdetto(x):
+        return "PULITA (dentro R_A)" if x < PULITA else ("TOCCATA (la coda nella fascia)" if x < TOCCATA else "DA NON ATTRIBUIRE (oltre l'1% nella fascia)")
+    print("=" * 130)
+    print("LE LETTURE DI G1 RILETTE COL BORDO (Luca 20:26, solo lettura): il bordo di TBS, il centro %s, R_A %g; la massa oltre R_A: sotto %g PULITA, fino a %g TOCCATA (mie), oltre DA NON ATTRIBUIRE (Luca: 1%%)" % (c0, R_A, PULITA, TOCCATA))
+    print("### NOTA (Luca 20:26): l'assorbitore riporta anche il VUOTO verso phi0 nella fascia: una scia che sparisce dentro la fascia NON e' una scia che evapora.")
+    print("=" * 130)
+    print("### (1) IL PRIMO TICK IN CUI LA MASSA OLTRE R_A SUPERA L'1% (e lo 0.1%)")
+    for nome, f in (("pendolo (A)", "campo_g1_tre/g1_tre_A.npz"), ("pendolo (B)", "campo_g1_tre/g1_tre_B.npz"), ("pendolo (C)", "campo_g1_tre/g1_tre_C.npz"),
+                    ("G1 gamma 0.2", "campo_g1/g1_campo_gamma020.npz"), ("G1 lunga", "campo_g1_lunga/g1_lunga.npz"), ("G1 lunghissima", "campo_g1_lunghissima/g1_lunghissima.npz")):
+        w = finestra(f, -1, 1e9)
+        p1 = [x for x in w if x[2] > TOCCATA]
+        p01 = [x for x in w if x[2] > PULITA]
+        print("    %-16s lo 0.1%%: %s; l'1%%: %s; i fotogrammi ogni %g tick" % (nome, ("t %.0f (d %.2f)" % p01[0][:2]) if p01 else "mai", ("t %.0f (d %.2f)" % p1[0][:2]) if p1 else "mai", w[1][0] - w[0][0] if len(w) > 1 else float("nan")))
+    print("-" * 130)
+    print("### (2) LE LETTURE: la finestra in cui sono state misurate, la distanza massima del solitone dal centro del bordo, la massa oltre R_A massima, il verdetto")
+    voci = (("il buco nel vuoto e la scia, gamma 0", "campo_g1_componenti/g1_comp_gamma000.npz", 0, 2000),
+            ("il buco nel vuoto e la scia, gamma 0.02", "campo_g1_componenti/g1_comp_gamma020.npz", 0, 2000),
+            ("il respiro (A) (tutta la corsa)", "campo_g1_tre/g1_tre_A.npz", 0, 4000),
+            ("il respiro (A) prima dell'1%", "campo_g1_tre/g1_tre_A.npz", 0, 2000),
+            ("il respiro (B)", "campo_g1_tre/g1_tre_B.npz", 0, 4000),
+            ("il respiro (C) (tutta la corsa)", "campo_g1_tre/g1_tre_C.npz", 0, 4000),
+            ("il respiro (C) prima dell'1%", "campo_g1_tre/g1_tre_C.npz", 0, 2000),
+            ("l'oscillazione attorno al massimo di N, G1 lunga", "campo_g1_lunga/g1_lunga.npz", 0, 2000),
+            ("la lente e lo smorzamento, G1 lunga", "campo_g1_lunga/g1_lunga.npz", 2000, 1e9),
+            ("la lente e lo smorzamento, G1 lunghissima", "campo_g1_lunghissima/g1_lunghissima.npz", 2000, 1e9))
+    print("    %-52s %13s %8s %12s  %s" % ("la lettura", "i tick", "d max", "M oltre R_A", "il verdetto"))
+    for nome, f, a, b in voci:
+        w = finestra(f, a, b)
+        mx = max(x[2] for x in w)
+        print("    %-52s %6.0f-%6.0f %8.2f %12.3e  %s" % (nome, w[0][0], w[-1][0], max(x[1] for x in w), mx, verdetto(mx)))
+    print("-" * 130)
+    print("### IL BUCO NEL VUOTO E LA SCIA: il deficit del vuoto (dLambda < 0) -- il suo centro, la sua distanza dal centro del bordo, la frazione del deficit oltre R_A")
+    for nome, f in (("gamma 0", "campo_g1_componenti/g1_comp_gamma000.npz"), ("gamma 0.02", "campo_g1_componenti/g1_comp_gamma020.npz")):
+        t, _rho, dl = serie(f)
+        for i in sorted(set([0, len(t) // 4, len(t) // 2, 3 * len(t) // 4, len(t) - 1])):
+            deficit = np.maximum(-dl[i], 0.0)
+            cd = TO.centro(deficit, m1, m2, L)[:2]
+            print("    %-10s t %5.0f: il centro del deficit a d %.2f dal centro del bordo; il deficit oltre R_A %.3e del totale" % (nome, t[i], d_di(cd), float(deficit[r_c0 > R_A].sum() / deficit.sum())))
+    print("=" * 130)
+    return 0
+
+
 if __name__ == "__main__":
+    if len(sys.argv) > 1 and sys.argv[1] == "letture":
+        sys.exit(letture())
     sys.exit(main())
