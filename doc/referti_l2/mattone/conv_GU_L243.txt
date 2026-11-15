@@ -1,0 +1,42 @@
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+### LA CONVERGENZA SU L 243 (Luca 20:47): convergenza.controlla_vuoto e convergenza.francobollo SOSTITUITE in memoria (dichiarato)
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+==================================================================================================================================
+LA CONVERGENZA (MGU su L 243; Luca 15:20): il mattone E:\soliton_simulator\mattone\L162_MGU_03000.npz (cotto su L 81, il picco 1.1927e+03) al vertice A, sul vuoto fresco al tick 60000; 2000 tick; il tetto 28800 s
+==================================================================================================================================
+### la scena: L 243, 59049 nodi; il bordo: il centro [121, 121], R_A 100.500, g_max 0.03; il vertice A [134, 146] (a 21.6564 dal centro del bordo)
+### LA CUCITURA (Luca 20:47) lungo A1: 486 nodi (la riga 0 e quella che si confronta con lei); lo scarto oltre 1e-12 su 486 di essi (al piu' 2L = 486); FUORI dalla cucitura il massimo 0.000e+00
+### LA CUCITURA (Luca 20:47) lungo A2: 486 nodi (la riga 0 e quella che si confronta con lei); lo scarto oltre 1e-12 su 486 di essi (al piu' 2L = 486); FUORI dalla cucitura il massimo 0.000e+00
+  DEVE PASSARE: (L 243) il vuoto fresco: |phi_j|^2 = 1 fuori dal bordo (36601 nodi) entro 1e-12                      PASSA   2.220e-14
+  DEVE PASSARE: (L 243) il vuoto fresco: lo stesso disegno di fase ogni 3 nodi entro 1e-12                           PASSA   0.000e+00
+### incollato a [134, 146] (Delta -0.000074); il picco SUBITO DOPO l'incollatura 1.1927e+03 (su L 81 1.1927e+03); il residuo di Gauss iniziale 9.860e-11
+    k    250  il picco 1.2325e+03  il raggio 12.4626  la massa 9.9501089314e+05  (2941 s)
+    k    500  il picco 1.1555e+03  il raggio 12.5671  la massa 9.9501087943e+05  (5784 s)
+    k    750  il picco 1.1355e+03  il raggio 12.6601  la massa 9.9500704806e+05  (8686 s)
+    k   1000  il picco 1.1516e+03  il raggio 12.7175  la massa 9.9498760509e+05  (11040 s)
+    k   1250  il picco 1.1298e+03  il raggio 12.7284  la massa 9.9496050578e+05  (13139 s)
+    k   1500  il picco 1.1435e+03  il raggio 12.7124  la massa 9.9493007492e+05  (15275 s)
+    k   1750  il picco 1.1253e+03  il raggio 12.6641  la massa 9.9489430768e+05  (17506 s)
+    k   2000  il picco 1.1750e+03  il raggio 12.5960  la massa 9.9485615799e+05  (19611 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.264485e+06   2.823818e+02   3.7184e+03   2.3086e+02  1.0630e+01    8268716.403077       -0.0000       -0.0000    0.0000e+00
+        500   8.263863e+06   7.552246e+02   3.7191e+03   2.8549e+02  1.0520e+01    8268622.651683       +0.1276      -93.8397    1.3714e-02
+       1000   8.263217e+06   1.142881e+03   3.7120e+03   3.2497e+02  1.0426e+01    8268397.156528     +182.3733     -172.3375    2.3288e+01
+       1500   8.262618e+06   1.294736e+03   3.7132e+03   3.3385e+02  1.0421e+01    8267959.660258     +628.9129     -177.8517    8.0818e+01
+       2000   8.262070e+06   1.334286e+03   3.7065e+03   3.3307e+02  1.0483e+01    8267444.169383    +1195.9961     -133.9864    1.5474e+02
+### S5' (le ultime quattro finestre): 1000-1250 0.1319 1250-1500 0.1142 1500-1750 0.0975 1750-2000 0.1272 -> 0.1319
+### la massa uscita dal bordo in tutto 1.547352e+02
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo                                                     ### FALLISCE   il massimo 1.045e-10
+==================================================================================================================================
+ESITO: 2/3 controlli come devono; fallite ['il residuo di Gauss sotto 1e-10 a ogni controllo']; finita; 19736 s in tutto

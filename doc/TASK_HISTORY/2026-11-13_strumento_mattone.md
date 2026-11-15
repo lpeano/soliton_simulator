@@ -663,3 +663,15 @@
   - **La stessa scena gira ora con un mattone** *(conv-GU-L243)*: **il suo residuo iniziale dira' se il `2e-10` e' della scena o della coppia.**
   - **Il nome della serie:** **`coppia_GUd65_L162_serie.npz` porta `L162` nel nome** *(il prefisso di `mattone_coppia_L162`)*, **ma la scena e' `L 243`: dichiarato.**
   - **La risposta parziale** *(dal referto in corsa di conv-GU-L243, la prima riga)*: **UN mattone (MGU) su `L 243`: il residuo iniziale `9.860e-11`, appena SOTTO `1e-10`; DUE: `2.146e-10`.** **Il residuo cresce col numero dei mattoni e con la scena** *(su `L 162` due mattoni: `6.3e-11`)*: **la soglia fissa `1e-10` su `L 243` e' al limite gia' con uno** *(conv-GU-L243 puo' fallire anche lei)*. **Una lettura, non una misura dedicata.**
+
+### 22.12 LA PARTE B SU `L 243` (MGU): IL DEVE DI GAUSS FALLISCE DI POCO (`1.045e-10`); E UNA CORREZIONE DELLA MIA LETTURA IN 22.11
+
+- **conv-GU-L243** *(`convergenza_243.py --mondo GU`; `conv_GU_L243.txt`; `02:21:07`-`07:50:05`, `2000` tick, uscita `1`; CHIUSA FINITO col DEVE fallito)*:
+  - **i due DEVE del vuoto PASSANO** *(`2.220e-14`, `0`; la cucitura esclusa come deciso alle `20:47`)*; ### **il DEVE di Gauss FALLISCE: il massimo `1.045e-10`** *(l'iniziale `9.860e-11`)* **contro `1e-10`.**
+  - **I numeri, che NON si leggono:** **a `2000` il raggio `12.5960`** *(su `L 162` col bordo di `L 81`, conv-GU-L162b28: `12.2572`; il rapporto `1.0276`)*, **la massa `9.94856e+05`** *(contro `9.95149e+05`)*, **il picco `1.1750e+03`; la massa uscita dal bordo `154.7`.** ### **Se valesse, sarebbe una scena NON convergente per (MGU)** *(il `2.8%` sul raggio, quando (MU) tornava a `4` cifre)*: **un'altra ragione per cercare il residuo prima di leggere.**
+- ### **CORREZIONE della mia lettura in 22.11** *(«il residuo cresce col numero dei mattoni e con la scena»)*: **UN mattone su `L 162` nella scena di S162** *((T-solo), conv-GU-L162b28)* **ha il residuo `5e-13`, non `1e-10`.** **I residui iniziali:**
+  - **scena di S162, `L 162`, un mattone: `5.085e-13`;**
+  - **scena di C35-pi su `L 162`** *(`mattone_coppia_L162`)*, **due mattoni: `6.256e-11`;**
+  - **`convergenza.scena_L(243)`, un mattone: `9.860e-11`; due** *(coppia-d65)*: **`2.146e-10`.**
+  - ### **Il residuo dipende da COME la scena e' costruita** *(un fattore `100` fra due scene di `L 162`)*, **non solo dalla grandezza.** **Le cause NON le so** *(il solutore di Gauss, la tolleranza, il vuoto della scena: da cercare, con `A11`: cercare l'errore, non spostare la soglia)*. **Le due decisioni di 22.11 restano di Luca, e questa corsa si aggiunge al FERMO.**
+- *(I rapporti da un calcolo `python -c` sui numeri dei referti.)*

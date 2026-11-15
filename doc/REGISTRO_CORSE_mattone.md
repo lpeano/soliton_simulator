@@ -474,3 +474,36 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d65", "ora": "2026-11-15T07:05:35+01:00", "punto": "k 1687; 10.043 s per tick; la memoria libera 14.54 GB"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d65", "ora": "2026-11-15T07:15:40+01:00", "punto": "k 1759; 9.976 s per tick; la memoria libera 14.49 GB"}
 - {"esito": "FERMATO", "ev": "CHIUSO", "nome": "coppia-d65", "ora": "2026-11-15T07:24:03+01:00", "punto": "il tetto di 18000 s (MT.TETTO_S, non il 28800 di Luca 15:22: errore mio) a k 1814, 18131 s (02:21:07-07:23:21), uscita 1; il DEVE di Gauss FALLISCE: il massimo 2.284e-10 (l'iniziale 2.146e-10) contro 1e-10; d0 66.000026; d'' 250-1814 -1.337978e-08 +- 9.3e-11; la massa oltre R_A 100.5 1.533e-05 a 1500"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T02:33:16+01:00", "punto": "k 48; 12.549 s per tick; la memoria libera 12.00 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T02:43:25+01:00", "punto": "k 100; 12.113 s per tick; la memoria libera 13.71 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T02:53:37+01:00", "punto": "k 155; 11.762 s per tick; la memoria libera 11.86 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:03:45+01:00", "punto": "k 208; 11.686 s per tick; la memoria libera 13.89 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:13:56+01:00", "punto": "k 258; 11.789 s per tick; la memoria libera 13.54 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:23:58+01:00", "punto": "k 313; 11.641 s per tick; la memoria libera 13.83 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:34:11+01:00", "punto": "k 364; 11.696 s per tick; la memoria libera 11.95 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:44:20+01:00", "punto": "k 420; 11.586 s per tick; la memoria libera 13.80 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T03:54:32+01:00", "punto": "k 472; 11.606 s per tick; la memoria libera 12.29 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:04:37+01:00", "punto": "k 524; 11.608 s per tick; la memoria libera 12.16 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:14:45+01:00", "punto": "k 580; 11.537 s per tick; la memoria libera 12.05 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:24:49+01:00", "punto": "k 632; 11.543 s per tick; la memoria libera 14.02 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:34:58+01:00", "punto": "k 684; 11.556 s per tick; la memoria libera 13.85 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:45:02+01:00", "punto": "k 736; 11.560 s per tick; la memoria libera 12.16 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T04:55:05+01:00", "punto": "k 792; 11.504 s per tick; la memoria libera 13.92 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:05:10+01:00", "punto": "k 853; 11.390 s per tick; la memoria libera 13.81 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:15:16+01:00", "punto": "k 915; 11.280 s per tick; la memoria libera 14.52 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:25:24+01:00", "punto": "k 987; 11.074 s per tick; la memoria libera 14.52 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:35:30+01:00", "punto": "k 1059; 10.894 s per tick; la memoria libera 14.43 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:45:37+01:00", "punto": "k 1132; 10.727 s per tick; la memoria libera 14.62 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T05:55:44+01:00", "punto": "k 1204; 10.590 s per tick; la memoria libera 14.61 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:05:52+01:00", "punto": "k 1276; 10.468 s per tick; la memoria libera 14.51 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:15:53+01:00", "punto": "k 1347; 10.363 s per tick; la memoria libera 14.55 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:26:00+01:00", "punto": "k 1419; 10.265 s per tick; la memoria libera 14.55 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:36:00+01:00", "punto": "k 1489; 10.185 s per tick; la memoria libera 12.83 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:46:02+01:00", "punto": "k 1550; 10.173 s per tick; la memoria libera 12.11 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T06:56:09+01:00", "punto": "k 1616; 10.133 s per tick; la memoria libera 14.47 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:06:16+01:00", "punto": "k 1688; 10.061 s per tick; la memoria libera 14.51 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:16:17+01:00", "punto": "k 1759; 9.996 s per tick; la memoria libera 14.50 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:26:22+01:00", "punto": "k 1829; 9.944 s per tick; la memoria libera 13.18 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:36:30+01:00", "punto": "k 1896; 9.913 s per tick; la memoria libera 14.87 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L243", "ora": "2026-11-15T07:46:36+01:00", "punto": "k 1973; 9.834 s per tick; la memoria libera 14.91 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "conv-GU-L243", "ora": "2026-11-15T07:50:25+01:00", "punto": "2000 tick in 19611 s (02:21:07-07:50:05), uscita 1; il DEVE di Gauss FALLISCE: il massimo 1.045e-10 (l'iniziale 9.860e-11) contro 1e-10; i due DEVE del vuoto PASSANO; il raggio 12.5960 a 2000, il picco 1.1750e+03; la massa uscita dal bordo 154.74"}
