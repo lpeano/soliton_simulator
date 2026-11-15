@@ -25898,3 +25898,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`55feac79`; la sez. `22.16`)*: **la massa uscita dal bordo PER SOLITONE contro (T-solo): `0.794` (T-fase), `0.840` (T-sfasati)**: **fra `0.7` e `1.3`, NESSUN EFFETTO CHIARO.**
 - ### **Le etichette per pezzo del referto** *(«PROTEGGE», «FA PERDERE»)* **NON si leggono: i pezzi si scambiano massa** *(i rapporti da `-136` a `+97`)*.
 - **Il moto:** **(T-fase) si stringe** *(`38.7` -> `35.2`)*; **(T-sfasati) quasi fermo.** **In corsa: B1, B2, B3 (la fase 1).**
+
+### 2026-11-15 12:05 -- LA PREVISIONE P2 RIVISTA (LUCA 11:43, PRIMA DEI RISULTATI): P2' = B2-pi NON TORNA ENTRO 18000 TICK (ERRORE DEL GUARDIANO n.167)
+
+- **Sul ramo** *(`72e1fad3`; la sez. `23.5`, scritta alle `12:05` con le corse in moto e nessun numero di B2 oltre il DEVE)*: **`44`-`49` e' l'equilibrio, non il punto di fermata; P2' = B2-pi si allontana e non torna entro `18000`; lo stesso rischio per P3; P1 resta.** **P2 e P2' tutte e due nel referto.** **`legati.py` e' in uso: la lettura di P2' andra' in un file nuovo.**
