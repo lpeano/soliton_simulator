@@ -1,0 +1,56 @@
+[TIMBRO] prova_numba_d2.py  sha1-BYTE 7f40c622  committato e pulito
+==================================================================================================================================
+D2, IL MOTORE NUMBA FUNZIONE PER FUNZIONE (Luca 18:08, N1): E:\soliton_simulator\mattone\L162_MGU_03000.npz; sys.executable E:\python\py3132\python.exe; NUMBA_CACHE_DIR E:\python\numba_cache
+==================================================================================================================================
+### dopo l'import di motore_numba a switch spento: 'numba' in sys.modules = False (D1: deve essere False)
+  DEVE PASSARE: a switch spento numba NON importato (D1)                                                             PASSA   
+  DEVE PASSARE: W1: a switch acceso le 6 funzioni SOSTITUITE (non gli stessi oggetti)                                PASSA   
+### accendi_numba(1): {'motore': 'numba', 'fili': 1, 'numba': '0.68.1', 'sostituite': ['motore.Motore._somma_per_nodo (1 np.add.at)', 'motore.Motore.elicita (1 np.add.at)', 'motore.Motore.densita_materia (1 np.add.at)', 'motore.Motore.densita_vuoto (1 np.add.at)', 'energia_pesata._per_nodo (1 np.add.at)', 'energia_pesata.termini_di_h (2 np.add.at)']}
+### la prima chiamata (la compilazione o la cache): 3.03 s (N6: esclusa dai tempi)
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) |psi|^2, fuori da zero, 1 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) |psi|^2, fuori da casuale, 1 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) psi, fuori da zero, 1 fili                          PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) psi, fuori da casuale, 1 fili                       PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m,) phi, fuori da zero, 1 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m,) phi, fuori da casuale, 1 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) casuale, fuori da zero, 1 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) casuale, fuori da casuale, 1 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) casuale, fuori da zero, 1 fili                      PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) casuale, fuori da casuale, 1 fili                   PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) |psi|^2, fuori da zero, 6 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) |psi|^2, fuori da casuale, 6 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) psi, fuori da zero, 6 fili                          PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) psi, fuori da casuale, 6 fili                       PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m,) phi, fuori da zero, 6 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m,) phi, fuori da casuale, 6 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) casuale, fuori da zero, 6 fili                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: reale (2m,) casuale, fuori da casuale, 6 fili                         PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) casuale, fuori da zero, 6 fili                      PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (a) add_at = np.add.at AL BIT: complesso (2m, 2) casuale, fuori da casuale, 6 fili                   PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: W1: spegni() rimette gli oggetti funzione ORIGINALI (is)                                             PASSA   
+  DEVE PASSARE: W1: spegni() toglie _MN_add_at dai moduli                                                            PASSA   
+### (b) a 1 fili: le chiamate del ciclo 9, i ripieghi 0
+  DEVE PASSARE: (b) termini_di_h.per_nodo: switch acceso (1 fili) = spento AL BIT                                    PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) termini_di_h.per_arco: switch acceso (1 fili) = spento AL BIT                                    PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) elicita: switch acceso (1 fili) = spento AL BIT                                                  PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) densita_materia: switch acceso (1 fili) = spento AL BIT                                          PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) densita_vuoto: switch acceso (1 fili) = spento AL BIT                                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) _somma_per_nodo: switch acceso (1 fili) = spento AL BIT                                          PASSA   max |diff| 0.000e+00
+### (b) a 6 fili: le chiamate del ciclo 9, i ripieghi 0
+  DEVE PASSARE: (b) termini_di_h.per_nodo: switch acceso (6 fili) = spento AL BIT                                    PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) termini_di_h.per_arco: switch acceso (6 fili) = spento AL BIT                                    PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) elicita: switch acceso (6 fili) = spento AL BIT                                                  PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) densita_materia: switch acceso (6 fili) = spento AL BIT                                          PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) densita_vuoto: switch acceso (6 fili) = spento AL BIT                                            PASSA   max |diff| 0.000e+00
+  DEVE PASSARE: (b) _somma_per_nodo: switch acceso (6 fili) = spento AL BIT                                          PASSA   max |diff| 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### (c) I TEMPI di np.add.at contro add_at (la compilazione esclusa; la macchina CARICA)
+    1 fili, reale (2m,) |psi|^2        np.add.at 0.0002 s, add_at 0.0003 s, il rapporto 0.7
+    1 fili, complesso (2m, 2) psi      np.add.at 0.0094 s, add_at 0.0017 s, il rapporto 5.5
+    1 fili, complesso (2m,) phi        np.add.at 0.0008 s, add_at 0.0008 s, il rapporto 0.9
+    6 fili, reale (2m,) |psi|^2        np.add.at 0.0003 s, add_at 0.0001 s, il rapporto 2.3
+    6 fili, complesso (2m, 2) psi      np.add.at 0.0089 s, add_at 0.0003 s, il rapporto 32.4
+    6 fili, complesso (2m,) phi        np.add.at 0.0006 s, add_at 0.0001 s, il rapporto 6.0
+### lo stato: {'motore': 'nucleo', 'fili': 6, 'chiamate': 159, 'ripieghi': 0, 'numba_importato': True, 'sys.executable': 'E:\\python\\py3132\\python.exe'}
+==================================================================================================================================
+ESITO: 36/36 controlli come devono; fallite []
