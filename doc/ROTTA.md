@@ -54,6 +54,7 @@
 - `2026-11-12` `17:00`: **il laterale archiviato col tag `laterale-archiviato` (`986440d6`); nessun commit sul ramo `zero-nel-nucleo` dopo U5** *(Luca: un commit farebbe divergere la punta dal tag; la nota solo sul principale)*.
 - `2026-11-12` `18:28`: ### **U6 CHIUSO: si TIENE LA FORMA DI OGGI** *(la continuita' al bit coi riferimenti; la deriva `~4e-10` su un milione di tick)*; **k3 la CURA PRONTA** *(quando la deriva pesa o si rifa' la base, con la ri-registrazione dichiarata)*. ### **L'UNIFICAZIONE CHIUSA.** **La coda decisa:** **la prova delle bande piatte sul buco del vuoto; P1** *(con l'anomalia a `N = 1` e dove va il buco)*; **accanto la G1 lunga col vuoto e il solitone fermo sul massimo di `N`; poi P9.**
 - `2026-11-12` `21:00`: **registrata, non fatta: la U(1) TOPOLOGICA** *(la carica = il foglio della doppia copertura dello spinore, l'era 1)*: **su carta dopo il primo esito di P6** *(`doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`, sez. `12`)*.
+- `2026-11-14` `20:26` *(scritto il `2026-11-15`)*: ### **G1 RILETTO 2026-11-14 COL BORDO** *(`doc/referti_l2/bordo_letture_G1.txt`)*: **VALIDA l'oscillazione attorno al massimo di `N` prima dell'`1%` della massa oltre `R_A`** *(`t 1820`; (C) `2080`)*; **NON ATTRIBUIBILI lo smorzamento** *(`0.959`, `0.904`, `0.858`)* **e le fasi tarde di (A) e (C)**; **VALIDI G1 senza campo, il pendolo (B), P6.** **Il pendolo pulito: la voce `21`.**
 
 ## IL PIANO DELLE TRE FORZE *(Luca `2026-11-12` `21:03`; il documento `doc/TASK_HISTORY/2026-11-12_inerzia_G_U_domini.md`, sez. `12`)*
 

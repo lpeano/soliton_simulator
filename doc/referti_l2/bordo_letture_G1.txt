@@ -1,0 +1,40 @@
+[TIMBRO] bordo_coda_L81.py  sha1-BYTE c59324aa  committato e pulito
+C:\Users\lpeano\soliton_simulator\csv\solitone\bordo_coda_L81.py:170: RuntimeWarning: invalid value encountered in scalar divide
+  print("    %-10s t %5.0f: il centro del deficit a d %.2f dal centro del bordo; il deficit oltre R_A %.3e del totale" % (nome, t[i], d_di(cd), float(deficit[r_c0 > R_A].sum() / deficit.sum())))
+==================================================================================================================================
+LE LETTURE DI G1 RILETTE COL BORDO (Luca 20:26, solo lettura): il bordo di TBS, il centro [40.5, 40.5], R_A 28; la massa oltre R_A: sotto 0.001 PULITA, fino a 0.01 TOCCATA (mie), oltre DA NON ATTRIBUIRE (Luca: 1%)
+### NOTA (Luca 20:26): l'assorbitore riporta anche il VUOTO verso phi0 nella fascia: una scia che sparisce dentro la fascia NON e' una scia che evapora.
+==================================================================================================================================
+### (1) IL PRIMO TICK IN CUI LA MASSA OLTRE R_A SUPERA L'1% (e lo 0.1%)
+    pendolo (A)      lo 0.1%: t 1720 (d 17.35); l'1%: t 1820 (d 19.02); i fotogrammi ogni 20 tick
+    pendolo (B)      lo 0.1%: mai; l'1%: mai; i fotogrammi ogni 20 tick
+    pendolo (C)      lo 0.1%: t 1960 (d 17.24); l'1%: t 2080 (d 19.23); i fotogrammi ogni 20 tick
+    G1 gamma 0.2     lo 0.1%: t 1720 (d 17.35); l'1%: t 1820 (d 19.02); i fotogrammi ogni 20 tick
+    G1 lunga         lo 0.1%: t 1720 (d 17.35); l'1%: t 1820 (d 19.02); i fotogrammi ogni 20 tick
+    G1 lunghissima   lo 0.1%: t 1720 (d 17.35); l'1%: t 1840 (d 19.35); i fotogrammi ogni 40 tick
+----------------------------------------------------------------------------------------------------------------------------------
+### (2) LE LETTURE: la finestra in cui sono state misurate, la distanza massima del solitone dal centro del bordo, la massa oltre R_A massima, il verdetto
+    la lettura                                                  i tick    d max  M oltre R_A  il verdetto
+    il buco nel vuoto e la scia, gamma 0                      0-  2000     0.01    1.494e-04  PULITA (dentro R_A)
+    il buco nel vuoto e la scia, gamma 0.02                   0-  2000    21.96    4.268e-02  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    il respiro (A) (tutta la corsa)                           0-  4000    32.70    7.418e-01  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    il respiro (A) prima dell'1%                              0-  2000    21.96    4.268e-02  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    il respiro (B)                                            0-  4000     0.19    5.390e-04  PULITA (dentro R_A)
+    il respiro (C) (tutta la corsa)                           0-  4000    32.61    7.469e-01  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    il respiro (C) prima dell'1%                              0-  2000    17.90    2.524e-03  TOCCATA (la coda nella fascia)
+    l'oscillazione attorno al massimo di N, G1 lunga          0-  2000    21.96    4.268e-02  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    la lente e lo smorzamento, G1 lunga                    2000-  5000    32.70    7.418e-01  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+    la lente e lo smorzamento, G1 lunghissima              2000- 14000    32.70    7.416e-01  DA NON ATTRIBUIRE (oltre l'1% nella fascia)
+----------------------------------------------------------------------------------------------------------------------------------
+### IL BUCO NEL VUOTO E LA SCIA: il deficit del vuoto (dLambda < 0) -- il suo centro, la sua distanza dal centro del bordo, la frazione del deficit oltre R_A
+    gamma 0    t     0: il centro del deficit a d 40.50 dal centro del bordo; il deficit oltre R_A nan del totale
+    gamma 0    t   480: il centro del deficit a d 0.42 dal centro del bordo; il deficit oltre R_A 1.443e-01 del totale
+    gamma 0    t  1000: il centro del deficit a d 0.20 dal centro del bordo; il deficit oltre R_A 1.408e-01 del totale
+    gamma 0    t  1520: il centro del deficit a d 0.09 dal centro del bordo; il deficit oltre R_A 1.524e-01 del totale
+    gamma 0    t  2000: il centro del deficit a d 0.23 dal centro del bordo; il deficit oltre R_A 1.462e-01 del totale
+    gamma 0.02 t     0: il centro del deficit a d 40.50 dal centro del bordo; il deficit oltre R_A nan del totale
+    gamma 0.02 t   480: il centro del deficit a d 0.57 dal centro del bordo; il deficit oltre R_A 1.328e-01 del totale
+    gamma 0.02 t  1000: il centro del deficit a d 0.89 dal centro del bordo; il deficit oltre R_A 1.369e-01 del totale
+    gamma 0.02 t  1520: il centro del deficit a d 1.68 dal centro del bordo; il deficit oltre R_A 1.246e-01 del totale
+    gamma 0.02 t  2000: il centro del deficit a d 4.22 dal centro del bordo; il deficit oltre R_A 1.705e-01 del totale
+==================================================================================================================================

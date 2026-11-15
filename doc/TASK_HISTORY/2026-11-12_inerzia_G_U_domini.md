@@ -661,3 +661,11 @@
 - ### **L'ENERGIA DEL TORO INTERO** *(meno (0), su `2000` tick)*: **`Grampa`: `tot -5545`, di cui `cin -2541`, `leg -4052`, `vuo +1068`;** **`GUrampa` simile** *(`tot -5506`)*; **(U): `tot +0.14`** *(e `K + V` da `22.516` a `22.554`)*; **(U) da zero `-0.38`.** **In `GUrampa` il campo `K + V` scende da `22.52` a `17.97` mentre i solitoni si allargano.**
 - ### **IL TEMPO PROPRIO** *(`Grampa`)*: **ai due centri `tau - t` arriva a `-9.44` e `-9.28` in `2000` tick** *(gli orologi dei solitoni indietro dello `0.47%`)*; **lontano `-3.3e-07`.**
 - ### **FERMO per Luca** *(il mandato delle `18:58`: dopo il referto dei bracci)*: **la serie di distanze si decide sui numeri; poi la voce `7-bis`.**
+
+### RILETTO 2026-11-14 *(Luca `2026-11-14` `20:26`, (1); scritto il `2026-11-15`; i numeri in `doc/referti_l2/bordo_letture_G1.txt` e in `doc/TASK_HISTORY/2026-11-14_bordo_coda_L81.md`, sez. `4` e `5`)*
+
+- ### **IL BORDO DI TBS** *(`R_A 28` su `L 81`)*: **in G1 col campo e nel pendolo (A) e (C) il solitone cade verso il bordo e ENTRA nell'assorbitore** *(la massa oltre `R_A` fino al `74%`)*.
+- **VALIDA:** **l'oscillazione attorno al massimo di `N` PRIMA del tick in cui la massa oltre `R_A` supera l'`1%`** *(`t 1820` per (A) e G1 gamma `0.02`, G1 lunga; `1840` G1 lunghissima; `2080` per (C))*.
+- ### **NON ATTRIBUIBILI:** **lo smorzamento** *(`0.959`, `0.904`, `0.858`)* **e le fasi tarde di (A) e (C)** *(oltre quei tick: dominate dal bordo, non dal campo)*.
+- **RESTANO VALIDE:** **G1 senza campo** *(gamma `0`)*, **il pendolo (B)** *(mai oltre lo `0.1%`)* **e P6** *(i bracci: la massa oltre `R_A 47.5` sotto `4.3e-06`)*.
+- **Il buco nel vuoto:** **il `14%` del deficit di `Lambda` sta oltre `R_A` anche a gamma `0`: la sua forma oltre `R_A` e' del bordo** *(l'assorbitore riporta il vuoto verso `phi0`)*. **Il pendolo pulito: la voce `21` della ROTTA.**
