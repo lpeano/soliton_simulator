@@ -10,7 +10,7 @@ r"""**I PORTI GRANDI: `L 324`** *(Luca `2026-11-15` `12:04`, parte B; la regola 
 stato incollato al tick `0`** *(`r_ogg`: attorno al baricentro di TUTTA la materia, `|phi - phi0|` per nodo, la media per anello; il primo raggio oltre l'anello massimo da cui resta sotto il `2%` del massimo fino alla
 meta' del lato; R-SCATOLA-1)*; **la regola stampata all'inizio e alla fine** *(R-SCATOLA-2; Luca `13:23`: la distanza al LATO della cella, circa `140` su `L 324`, `>= 3 R_ogg`; `R_A >= 2 R_ogg`; almeno `30` nodi fra `R_A` e il lato; se no la corsa NON parte)*.
 ### **LA SOGLIA DI GAUSS SU `L 324`** *(`vuoto`)*: **`10` volte il residuo del mattone incollato al tick `0`** *(MIA, dichiarata: la scena vuota non ha un residuo definito)*, **scritta in `porto_gauss.json` PRIMA di ogni corsa.**
-### **LA PARTENZA A CALDO** *(7-bis)*: **`CALDO`** *(la decisione A3, sez. `24`)*; **`cs_prec` salvato accanto a ogni stato.** **Gli stati a `k % 1000 == 0` e `950`: ogni ripartenza rifa' `50` tick AL BIT** *(esclusa `h_int`)*.
+### **LA PARTENZA A CALDO** *(7-bis)*: **`CALDO`** *(la decisione A3, sez. `24`: spenta)*; **IL RIUSO DI GAUSS: `GAUSS_RIUSO`** *(Luca `15:07`: acceso, AL BIT)*; **l'interprete stampato** *(R-AMBIENTE)*; **`cs_prec` salvato accanto a ogni stato.** **Gli stati a `k % 1000 == 0` e `950`: ogni ripartenza rifa' `50` tick AL BIT** *(esclusa `h_int`)*.
 ### **`cuoci`:** **il francobollo di `L 162` al nodo buono piu' vicino al centro del bordo, G+U, Gauss; COTTO quando il picco medio fra le ultime due finestre di `500` tick cambia meno del `2%`** *(controllato ogni
 `1000` da `2000`; al piu' `6000`)*; **`cottura_L324_MGU.json`.**
 ### **`corsa`:** **(coppia-fase, coppia-pi) due francobolli di `L 324` a `d = 35` lungo `A1` attorno al centro del bordo** *(coppia-pi: il secondo per `-1`)*; **(t120, trifoglio, misto) il triangolo di `triangolo_equilatero`,
@@ -36,6 +36,7 @@ for _p in (_QUI, _CSV):
         sys.path.insert(0, _p)
 import convergenza as CV  # noqa: E402
 import convergenza_243 as C243  # noqa: E402
+import gauss_riuso as GR  # noqa: E402
 import lapse_caldo as LC  # noqa: E402
 import legati as LG  # noqa: E402
 import mattone as MT  # noqa: E402
@@ -54,6 +55,7 @@ FATTORE_R_A = 2.0                               # ### Luca 13:23 (n.168 del guar
 FASCIA_MIN = 30.0                               # ### Luca 13:23: almeno 30 nodi di bordo che assorbe fra R_A e la distanza al lato
 FATTORE_GAUSS = 10.0                            # ### MIO, dichiarato
 CALDO = False                                   # ### la decisione A3 (sez. 24): si scrive nel commit di questo file
+GAUSS_RIUSO = True                              # ### Luca 15:07: AL BIT (prova_gauss.txt, 1d913fd1): il riuso della fattorizzazione per le corse NUOVE
 COTTO, MAX_COTTURA, PRIMO_CONTROLLO, OGNI_CONTROLLO = 0.02, 6000, 2000, 1000
 D_COPPIA, AB = 35.0, (13, 0)
 TIPI = {"coppia-fase": (0.0, 0.0), "coppia-pi": (0.0, math.pi), "t120": T120.FASI, "trifoglio": (0.0, 0.0, 0.0), "misto": (0.0, math.pi, 0.0)}
@@ -77,7 +79,12 @@ def esito(che, passa, nota):
 
 def presidi():
     import _presidio
-    for m in ("convergenza", "convergenza_243", "lapse_caldo", "legati", "mattone", "mattone_cottura", "mattone_cottura_U", "mattone_rhoc", "mattone_triangolo", "triangolo_120", "triangolo_equilatero"):
+    if GAUSS_RIUSO:
+        GR.accendi()                                            # ### p6_u_breve.gauss_sparso -> la fattorizzazione riusata (in memoria; spenta all'uscita del processo)
+        print("### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (Luca 15:07; AL BIT, prova_gauss.txt)")
+    import sys as _s
+    print("### L'INTERPRETE: %s (Python %s); PYTHONNOUSERSITE %s; TMP %s (R-AMBIENTE)" % (_s.executable, _s.version.split()[0], os.environ.get("PYTHONNOUSERSITE"), os.environ.get("TMP")))
+    for m in ("convergenza", "convergenza_243", "gauss_riuso", "lapse_caldo", "legati", "mattone", "mattone_cottura", "mattone_cottura_U", "mattone_rhoc", "mattone_triangolo", "triangolo_120", "triangolo_equilatero"):
         _presidio.avvia(os.path.join(_QUI, m + ".py"))
     _presidio.avvia(os.path.join(_CSV, "_u1_prototipo.py"))
     _presidio.avvia(__file__)
