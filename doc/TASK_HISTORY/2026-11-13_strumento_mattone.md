@@ -632,3 +632,13 @@
   - **(T-fase): `b` da `+9.36e-04` a `+5.69e-04`** *(`k 0` -> `2000`)*, **`B_m` da `+2826` a `+1718`** *(il `B` di `0a512f08`, `+2.86e+05`, e' quasi tutto la massa in piu': `M3 = 1.01142 x 3 M1` a `k 0`)*;
   - **(T-sfasati): `b` da `+1.70e-04` a `+6.30e-05`**, **`B_m` da `+506` a `+188`** *(`M3 = 0.99807 x 3 M1`; il `B` di `0a512f08` era `-4.7e+04`: il segno era tutto della massa)*.
   - ### **La lettura:** **a massa uguale tutti e due i triangoli hanno PIU' energia per unita' di massa del mattone solo** *(`b > 0`)*, **e `b` cala nel tempo in tutti e due; (T-fase) piu' alto di (T-sfasati).** ### **L'errore NON c'e'** *(dichiarato)*: **NON si dice «legato» ne' «slegato».** *(I rapporti delle masse da un calcolo `python -c` sui numeri del referto.)*
+
+### 22.9 LA COPPIA A `51` NODI ATTRAE (`-2.6e-08`, `45` ERRORI; B2 A `35`: `-1.0e-06`); UN MIO ERRORE IN 22.8
+
+- ### **ERRORE MIO in 22.8:** **ho scritto «`triangolo_flussi.py` NON si gira»: era GIA' girato e committato alle `03:10`** *(`2e4289fe`, `triangolo_flussi.npz` e `.txt`)*, **prima della carta delle `03:19`.** **La frase giusta: le frecce GIA' PRODOTTE non si leggono** *(la conservazione sul tick non torna)*.
+- **coppia-d50** *(`coppia_distanze.py --d 50`, L 162, bordo `60`; `coppia_GUd50_L162.txt`, la serie forzata nel repo; `02:21:07`-`04:58:57`, uscita `0`; CHIUSA FINITO alle `04:59`)*:
+  - **`d0` VERA `51.005871`** *(non `50`: il nodo multiplo di `3`)*; **a `2000` `50.952416`**; **`d''` sui tick `250`-`2000` `-2.615720e-08 +- 5.8e-10` (`45.2` errori): per la regola di `coppia_fase.lettura` ATTRAE.**
+  - **Con B2** *(`d0 35.057476`, `d'' -1.010266e-06 +- 5.2e-09`)*: **a `51` l'accelerazione e' circa `39` volte piu' piccola** *(il rapporto da un calcolo `python -c` sui due referti)*. ### **NON si legge una legge con due punti** *(e `65` su un'ALTRA scatola, `L 243`)*.
+  - **Le finestre da `250`: `d''` cambia SEGNO** *(`+9.4e-09` a `1250`-`1500`, `+2.8e-08` a `1750`-`2000`)*: **la curvatura su `250`-`2000` e' una media su un moto non regolare; dichiarato.**
+  - **La massa oltre `R_A 60`: al massimo `1.915e-05`, SOTTO `1e-4`**; **Gauss al massimo `6.632e-11`** *(`2/2` DEVE)*.
+  - ### **Due cose dichiarate:** **(a) `coppia_fase.py lettura --mondo GUd50` NON funziona** *(accetta solo `GU`, `GUpi`: il docstring di `coppia_distanze.py` lo promette, ERRORE MIO)*; **il numero e' lo stesso: la riga «B3 SU B2» del referto e' `carta_coppia.curvatura` sui tick `250`-`2000`, come `coppia_fase.lettura`;** **(b) la scritta «ERA IL COLPETTO DELL'ALLARGAMENTO» del referto confronta con `GUrampa` di `L 81`: su questa scena NON si legge.**

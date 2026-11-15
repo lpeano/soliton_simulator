@@ -394,3 +394,19 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:46:11+01:00", "punto": "k 1870; 4.507 s per tick; la memoria libera 12.19 GB"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:56:11+01:00", "punto": "k 1977; 4.566 s per tick; la memoria libera 13.74 GB"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "conv-GU-L162b28", "ora": "2026-11-15T03:32:10+01:00", "punto": "2000 tick in 9158 s (20:24:54-22:58:22), uscita 0; Gauss 5.321e-13; il raggio 12.2572 a 2000 (T-solo col bordo da 60: 12.2577); la massa uscita dal bordo 337.4; CHIUSA ALLE 03:2x: un mio errore, la notifica delle 22:58 non seguita"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T02:32:27+01:00", "punto": "k 117; 5.135 s per tick; la memoria libera 11.91 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T02:42:28+01:00", "punto": "k 240; 5.011 s per tick; la memoria libera 13.78 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T02:52:33+01:00", "punto": "k 377; 4.795 s per tick; la memoria libera 12.05 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:02:35+01:00", "punto": "k 506; 4.762 s per tick; la memoria libera 13.64 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:12:38+01:00", "punto": "k 626; 4.813 s per tick; la memoria libera 11.89 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:22:40+01:00", "punto": "k 760; 4.756 s per tick; la memoria libera 12.60 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:32:43+01:00", "punto": "k 883; 4.776 s per tick; la memoria libera 12.90 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:42:43+01:00", "punto": "k 1012; 4.760 s per tick; la memoria libera 13.67 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T03:52:48+01:00", "punto": "k 1141; 4.752 s per tick; la memoria libera 11.77 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:02:53+01:00", "punto": "k 1269; 4.749 s per tick; la memoria libera 12.63 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:12:55+01:00", "punto": "k 1404; 4.722 s per tick; la memoria libera 12.61 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:22:55+01:00", "punto": "k 1528; 4.731 s per tick; la memoria libera 14.05 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:32:57+01:00", "punto": "k 1654; 4.735 s per tick; la memoria libera 14.08 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:43:01+01:00", "punto": "k 1783; 4.731 s per tick; la memoria libera 13.90 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "coppia-d50", "ora": "2026-11-15T04:53:01+01:00", "punto": "k 1910; 4.731 s per tick; la memoria libera 13.89 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "coppia-d50", "ora": "2026-11-15T04:59:43+01:00", "punto": "2000 tick in 9391 s (02:21:07-04:58:57), uscita 0; d0 51.005871 -> 50.952416; d'' 250-2000 -2.615720e-08 +- 5.8e-10 (45.2 errori): ATTRAE; Gauss max 6.632e-11; la massa oltre R_A 60 1.915e-05 (sotto 1e-4)"}
