@@ -58,3 +58,5 @@ LA COPPIA GUd65 COL MATTONE COTTO SU L 162 (Luca 09:34, B2; 14:54; 15:49 il bord
 ESITO: 1/2 controlli come devono; fallite: 1 ['il residuo di Gauss sotto 1e-10 a ogni controllo (ogni 250 tick)']; la lettura INDECISO; FERMO il tetto di 18000 s a k 1814; 18131 s in tutto
 ### LA MASSA OLTRE R_A 100.5 DAL CENTRO DEL BORDO (relativa; la soglia 0.0001): k 0 0.000e+00 k 500 3.181e-06 k 1000 9.726e-06 k 1500 1.533e-05
     SOTTO la soglia
+
+### AGGIUNTA DOPO LA CORSA (Luca 2026-11-15 10:10 e 10:29, A1; la sez. 22.14-22.15 del task history del ramo): la soglia di Gauss su L 243 e' 1e-9 (rivista DOPO il risultato, dichiarato): il massimo 2.284e-10 PASSA; il referto si legge (d'' sui tick 250-1814 -1.337978e-08 +- 9.3e-11: ATTRAE).

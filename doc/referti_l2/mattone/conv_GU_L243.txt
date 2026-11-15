@@ -40,3 +40,5 @@ LA CONVERGENZA (MGU su L 243; Luca 15:20): il mattone E:\soliton_simulator\matto
   DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo                                                     ### FALLISCE   il massimo 1.045e-10
 ==================================================================================================================================
 ESITO: 2/3 controlli come devono; fallite ['il residuo di Gauss sotto 1e-10 a ogni controllo']; finita; 19736 s in tutto
+
+### AGGIUNTA DOPO LA CORSA (Luca 2026-11-15 10:10 e 10:29, A1; la sez. 22.14-22.15 del task history del ramo): la soglia di Gauss su L 243 e' 1e-9 (rivista DOPO il risultato, dichiarato): il massimo 1.045e-10 PASSA; il referto si legge.

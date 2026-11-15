@@ -59,3 +59,5 @@
 - **G1 riletto col bordo:** **su `L 81` le fasi tarde di G1 col campo e del pendolo (A), (C) stanno nell'assorbitore** *(fino al `74%` della massa oltre `R_A 28`: `22317f86` sul principale)*: **lo smorzamento del pendolo NON e' attribuibile alla fisica.** *(Le note «RILETTO 2026-11-14» nella ROTTA e nel task history di G1 aspettano la lettura dei tick dell'`1%`, `bordo_coda_L81.py letture`: in coda.)*
 - **Il bordo NON deforma un solitone stretto:** **(MU) su `L 162` col bordo di `L 81` = col bordo da `60` a `4` cifre nel picco e nel raggio** *(`9bb2c341`)*.
 - **I bracci di P6 non toccati dal bordo** *(la massa oltre `R_A 47.5` sotto `4.3e-06`: `22317f86`)*.
+
+- ### **LE FRECCE NON SI LEGGONO** *(Luca `2026-11-15` `10:29`, A4)*: **le frecce di `J_a` e il video delle frecce NON sono leggibili come flusso di materia** *(`22eca9ce`: su un passo `J_a` torna a `1e-13`, sul tick no: la correlazione `0.3`, il rapporto `2.7`)*. **`triangolo_flussi.npz` resta nel repo come dato.**
