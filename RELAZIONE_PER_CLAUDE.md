@@ -25935,3 +25935,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Il profilo fine:** **la REAZIONE del lapse `47%` del tick** *(`termini_di_h` `24` volte per tick)*, **`gauss_sparso` `14%`, `np.add.at` `14%`.**
   - ### **La girandola e B** *(Luca `14:22`, `13:56`)*: **la materia gira a spirale, il vuoto e' fermo, `B` al centro di segno costante** *(la previsione confermata)*; **i numeri del guardiano hanno il segno opposto** *(uno specchio di convenzione)*; **le masse `0.64%` -> `2.07%`** *(non `0.5%`)*. **La sezione nelle considerazioni, il rimando nella voce `17` della ROTTA.**
 - ### **Il motore numba** *(Luca `15:50`, `15:53`)*: **la carta sul ramo `motore-numba` del clone su E:** *(`29ed592a`; E: forzato e controllato; i timbri del nucleo `12/12`)*. **FERMO per Luca prima del codice.**
+
+### 2026-11-15 18:00 -- IL PORTO GRANDE L 324: LA SCENA 3/3, LA SOGLIA DI GAUSS 1.75e-09; IL MATTONE DA SOLO HA R_ogg = 44: LE CORSE A DUE E A TRE PROBABILMENTE NON STANNO SU L 324; LA COTTURA PARTITA
+
+- **Sul ramo** *(`aed31248` il riuso di Gauss in `porto.py`, la suite su E: `67/67`; `224f2061` il referto)*: **la scena di `L 324`: i DEVE del vuoto passano; il residuo di Gauss iniziale `1.75e-10`, la soglia `1.75e-09`** *(`10` volte, mia)*.
+- ### **Il mattone da solo ha `R_ogg = 44`** *(il `2%` di `|phi - phi0|`: la deformazione del vuoto e' larga)*: **`140.3 / 44 = 3.19`: ci sta appena.** ### **Una coppia a `35` o un triangolo di lato `39` avranno `R_ogg` circa `60`-`67`** *(stima)*: **su `L 324` la regola** *(il lato `>= 3 R_ogg`)* **probabilmente NON regge, e `porto.py corsa` non parte; servirebbe `L` circa `464`. Decide Luca.**
+- **La cottura** *(porto-cottura, il mattone da solo)* **partita alle `17:58`, l'interprete di E:, il riuso di Gauss acceso.**
