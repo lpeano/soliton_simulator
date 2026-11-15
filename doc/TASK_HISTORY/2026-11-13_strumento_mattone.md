@@ -850,3 +850,50 @@
   - ### **(ii) I GIRI: `4` in OGNI tick, a freddo** *(`200` su `200`)* **e a caldo** *(`199` su `199`, senza il primo)*: **la media `4.0000` tutte e due, IL RAPPORTO `1.0000`.** **Un giro solo non basta mai** *(niente oltre il `90%`)*. **Il tempo per tick `4.501` contro `4.443 s`** *(la macchina CARICA: non decide)*.
   - ### **A3: SOTTO `1.3`: la partenza a caldo NON si adotta; la parte B col codice di oggi** *(`porto.py`: `CALDO = False`)*. **La lettura** *(un'ipotesi)*: **partire dal `cs` del tick prima non accorcia la strada: la tolleranza e' `8 eps`, e da qualunque partenza vicina servono gli stessi `4` giri per arrivarci** *(la premessa della 24.1 «puo' costare di piu'»: non costa di piu', non costa di meno)*.
   - **La profilazione dice dove sta il tempo** *(24.9)*: **il `56%` nel punto fisso** *(`4` giri, ognuno una copia del tick)*; **la strada per la velocita' NON e' la partenza: e' il costo di ogni giro** *(e la risoluzione sparsa di Gauss rifattorizzata a ogni tick)*. **Le tecniche: decide Luca.**
+
+### 24.12 IL CAMPO MAGNETICO NEI TRIANGOLI *(Luca `2026-11-15` `13:56`; SOLO LETTURA)*: LA CARTA, PRIMA DEL CODICE
+
+- **Dal codice:** **`_u1_prototipo.Campo.B` = il rotore di `A` per PLACCHETTA** *(`2 n` placchette: «su» `p = v`, gli archi `a1` da `v`, `a2` da `v + a1`, `-(a1 + a2)` da `v`; «giu» `p = n + v`, `a1 + a2` da `v`, `-a1` da `v + a2`, `-a2` da `v`)*: **tutte e due percorse in senso ANTIORARIO** *(controllato sui vettori `A1 = (1, 0)`, `A2 = (-1/2, sqrt 3 / 2)`)*: **`B > 0` = la circolazione di `A` antioraria.** **Nessuna definizione nuova.**
+- **«Sui nodi»** *(mia lettura)*: **`B` per placchetta al suo baricentro** *(«su» `(m1 + 2/3, m2 + 1/3)`, «giu» `(m1 + 1/3, m2 + 2/3)`)*. **Il centro del triangolo: la media dei tre centri della serie.** **Il disco di raggio `8`: `B` medio, il segno, il minimo e il massimo; il cerchio di raggio `30`: il flusso `somma B`.** **Al tick `0` `A = 0`** *(le corse partono da `A = 0`)*: **`B = 0`, scritto senza calcolo.**
+- **Gli stati:** **T120 fase 1** *(`triangolo_t120_00500` ... `02000`)* **e (T-fase) col mattone di `L 162`** *(il video, `triangolo_video_00500` ... `02000`)*.
+- ### **LA PREVISIONE DEL GUARDIANO** *(scritta prima, Luca `13:56`)*: **a `120` gradi `B` al centro diverso da zero e di segno COSTANTE** *(la materia che gira e' una corrente circolare)*; **in fase `B` circa zero.** **La lettura** *(mia)*: **«di segno costante» = il segno di `B` medio uguale nei quattro stati; «circa zero» in fase = `|B medio|` di (T-fase) sotto un decimo di quello di T120 agli stessi tick.**
+- **Un file nuovo: `csv/solitone/triangoli_magnetico.py`.**
+
+### 24.13 LA GIRANDOLA E LE CONSIDERAZIONI *(Luca `2026-11-15` `14:22`; SOLO SCRITTURA E LETTURA)*: LA CARTA, PRIMA DEL CODICE
+
+- **Il punto `1`** *(`csv/solitone/girandola.py`, nuovo, solo lettura delle mappe)*: **l'orientamento a tre punte `arg(somma f e^{3 i theta}) / 3` di `rho`, `|phi - phi0|`, `|E|` attorno al baricentro dei centri al tick `0`** *(fisso)*, **ogni `200` tick; per anelli; il peso `|m3| / m0` di `|E|` in `4-12`.** **Mie, dichiarate: i dischi interi** *(`rho` entro `32`, il vuoto e `|E|` entro `45`)*; **l'angolo modulo `120` srotolato col salto piu' corto.** **I numeri del guardiano** *(scritti prima)* **stampati accanto; se differiscono, di quanto e perche'.**
+- ### **Le affermazioni «MISURATO» del mandato si VERIFICANO, non si ricopiano:** **la densita' al centro** *(«circa `15-30`; in fase circa `1000`»)*, **il lato** *(«da `39.00` a `39.94`, la crescita che rallenta»)*, **le masse** *(«uguali entro lo `0.5%`»)*: **`girandola.py` le stampa.** ### **Una che gia' NON torna coi numeri del referto `f8304136`:** **le masse dei tre pezzi a `2000` sono `9.7506e+05`, `9.8885e+05`, `9.9341e+05`: la dispersione e' circa l'`1.8%`, non lo `0.5%`** *(dal referto; il numero esatto da `girandola.py`)*. **Nella sezione si scrive il numero misurato.**
+- **Il punto `2`** *(il campo magnetico)*: **la sez. `24.12`.** **Il punto `3`: la sezione nelle considerazioni, ogni affermazione col suo stato** *(MISURATO / GIA' NOTO / PROPRIO DEL MODELLO / DA PROVARE)* **e il suo commit; i riferimenti del mandato** *(Desyatnikov, Kivshar, nlin/0112039; gli azimutoni 2005; i cluster di vortici nei condensati)* **riportati come li da' Luca** *(non li ho verificati io: dichiarato)*. **Il punto `4`: la voce `17` della ROTTA e la relazione.**
+
+### 24.14 I GIRI DEL PUNTO FISSO: BASTANO 2 O 3? *(Luca `2026-11-15` `14:23`; SOLO LETTURA)*: LA CARTA, PRIMA DEL CODICE
+
+- **(1) dal codice** *(la risposta, letta)*: **i `4` giri NON sono un numero fisso: `tick_lapse.cs_al_centro` itera finche' `max |nuovo - prec| <= EPS_CS max |nuovo|`; `EPS_CS = 8 eps`** *(circa `1.78e-15`, `primo_ordine/tick.py`, riga `39`, il nucleo)*; **`GIRI_MAX = 120`** *(riga `113`)*.
+- **(2)** **`csv/solitone/giri_lapse.py`** *(nuovo; una copia di `cs_al_centro` riga per riga che tiene il `cs` di ogni giro e si puo' fermare al giro `g`, in memoria)*: **il mattone di `L 162` da solo, `20` tick; in ogni tick `max |cs_g - cs_finale|` e lo stato dopo il tick fermandosi al giro `1, 2, 3`** *(lo stesso tick rifatto da una copia di stato, campo e `U`)* **contro quello vero: la differenza relativa per chiave.** **La corsa prosegue col tick vero.**
+- **Che cosa decide** *(la lettura, mia, fissata qui)*: **se fermarsi al giro `g` lascia lo stato entro la differenza gia' accettata fra caldo e freddo** *(`campo_E` `4e-12`, `psi_h` `1e-14` dopo `200` tick: `prova_caldo.txt`)* **in UN tick, allora `g` giri bastano «per l'arrotondamento»; se no, no.** **Ma un tick a `g` giri NON e' piu' al bit con le corse fatte: e' una decisione di Luca.**
+
+### 24.15 IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS *(il mandato delle `14:05`, non arrivato, ripetuto da Luca alle `15:07`)*: LA CARTA, PRIMA DEL CODICE
+
+- **Dal codice** *(`p6_u_breve.gauss_sparso`)*: **a ogni chiamata `D = matrice_div_sparsa(campo)`** *(`+1` sull'arrivo `jj`, `-1` sulla partenza `ii`: SOLO la topologia)*, **`Lap = D D^T`, `spsolve(Lap[1:, 1:], b[1:])`** *(SuperLU, `gssv`: fattorizza e risolve)*. **Lo chiama `mattone.Campi.gauss`, a ogni tick dalla correzione del bordo.**
+- **L'adattatore** *(`csv/solitone/gauss_riuso.py`, nuovo)*: **lo stesso conto riga per riga; `D` e `scipy.sparse.linalg.factorized(Lap[1:, 1:])` UNA volta per campo, poi riusati.** **In memoria, come `lapse_caldo`; nessun file del nucleo, nessuno script in uso.**
+- **NON so se e' AL BIT:** **`spsolve` e `factorized` usano tutti e due SuperLU con la permutazione `COLAMD` di default; se le altre opzioni coincidono, la fattorizzazione e' la stessa e il risultato anche. La prova lo dice.**
+- **La prova** *(`csv/solitone/prova_gauss.py`)*: **il mattone di `L 162` da solo, `50` tick com'e' e `50` col riuso dallo stesso stato; DEVE: AL BIT tutte le chiavi** *(`h_int` esclusa)*; **una sola fattorizzazione; il tempo per tick accanto** *(la macchina carica)*. **Se AL BIT: il riuso per tutte le corse NUOVE** *(Luca `15:07`; le aperte non si toccano)*; **se no: il perche', e non si usa.**
+
+### 24.16 LA PROFILAZIONE FINE DEL TICK *(Luca `15:50`/`15:53`, M3 (a))*: LA CARTA, PRIMA DEL CODICE
+
+- **`csv/solitone/profilo_nucleo.py`** *(nuovo, SOLO LETTURA)*: **il mattone di `L 162` da solo, (MGU), `20` tick, `cProfile`; le funzioni di `primo_ordine/` e delle librerie del tick** *(`tick_lapse`, `p6_bracci`, `p6_u_breve`, `_u1_oggi`, `_u1_prototipo`, `bordo`)* **per tempo proprio e cumulato; per le native che pesano** *(`gssv`, `ufunc.at`, `take`, `einsum`, `reduce`)* **chi le chiama.**
+- ### **Con l'interprete di E:** *(R-AMBIENTE: la condizione e' soddisfatta, `10c5494d`)*, **`TMP` su E:, `PYTHONNOUSERSITE=1`; DAL worktree del mattone** *(su C:: la scena del mattone c'e' solo su questo ramo; il repo e' solo LETTO; dichiarato, Luca `15:53` M2)*. **Il referto serve alla carta del motore numba** *(il clone su E:, ramo `motore-numba`)*.
+
+### 24.17 IL CONTROLLO DELLE `15:58`/`16:00` *(Luca)*: LA TABELLA
+
+| voce | ricevuto | stato alle `16:15` | commit |
+|---|---|---|---|
+| (1) i tempi dei passi dei hook | `15:36` | FATTO: nello strumento di commit (nessun hook cambiato); il primo log `a5cdb23c` *(`355 s`; `107.8`, `68.2`, `66.3`, `53.3 s`)* | `a5cdb23c` |
+| (2) safe.directory e la suite `67/67` su E: | `14:41`, `15:45` | FATTO: git `2.45.1` NON capisce `/*`: per processo; la suite `67/67`, uscita `0`, uguale riga per riga | `10c5494d` |
+| (3) la regola delle corse su E: | `15:46` | FATTO: ROTTA e due skill; la condizione soddisfatta | `a5cdb23c` |
+| (4) la carta del motore numba | `15:50`, `15:53` | IN CORSO: il clone `E:\soliton_simulator_numba` fatto; la carta dopo la profilazione fine | -- |
+| (5) Gauss | `14:05` NON ricevuto, `15:07` | IN CODA: il codice in questo giro (24.15) | -- |
+| (5) i `4` giri | `14:23` | IN CODA: il codice in questo giro (24.14) | -- |
+| (5) la girandola, il campo B | `14:22`, `13:56` | IN CODA: il codice in questo giro (24.12, 24.13) | -- |
+
+- **Le corse** *(le tappe)*: **`legati-GU` k `9124` alle `15:50` (`4.05 s`); `legati-GUpi` k `5682` alle `15:54` (`4.09 s`); `legati-t120` k `3957` alle `15:58` (`4.00 s`): VIVE.**
+- **I posti:** **`3` corse; la suite del codice nuovo `1`; poi le letture brevi due alla volta** *(al piu' `5`)*.
