@@ -1,0 +1,29 @@
+[TIMBRO] prova_numba_d2b.py  sha1-BYTE 2e04b2bb  committato e pulito
+==================================================================================================================================
+D2 DEL SECONDO PASSO (Luca 19:12, W3): E:\soliton_simulator\mattone\L162_MGU_03000.npz; sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### a 1 fili: la prima chiamata (la compilazione o la cache) 4.35 s
+  _grover_mezzo, psi vero, 1 fili                                                            AL BIT False la differenza relativa massima 2.578e-16
+  _hop_psi_mezzo, psi vero, 1 fili                                                           AL BIT False la differenza relativa massima 2.521e-16
+  _ruota_attorno_a_n, psi vero, 1 fili                                                       AL BIT False la differenza relativa massima 1.801e-16
+  _grover_mezzo, psi casuale, 1 fili                                                         AL BIT False la differenza relativa massima 1.778e-16
+  _hop_psi_mezzo, psi casuale, 1 fili                                                        AL BIT False la differenza relativa massima 1.928e-16
+  _ruota_attorno_a_n, psi casuale, 1 fili                                                    AL BIT False la differenza relativa massima 1.967e-16
+  _grover_mezzo, phi vero (2m, 1), 1 fili                                                    AL BIT False la differenza relativa massima 1.701e-16
+    1 fili, _grover_mezzo        oggi 0.0264 s, numba 0.0058 s, il rapporto 4.57 (le copie dello stato comprese; la macchina CARICA)
+    1 fili, _hop_psi_mezzo       oggi 0.0309 s, numba 0.0088 s, il rapporto 3.51 (le copie dello stato comprese; la macchina CARICA)
+    1 fili, _ruota_attorno_a_n   oggi 0.0401 s, numba 0.0100 s, il rapporto 4.00 (le copie dello stato comprese; la macchina CARICA)
+### a 6 fili: la prima chiamata (la compilazione o la cache) 0.06 s
+  _grover_mezzo, psi vero, 6 fili                                                            AL BIT False la differenza relativa massima 2.578e-16
+  _hop_psi_mezzo, psi vero, 6 fili                                                           AL BIT False la differenza relativa massima 2.521e-16
+  _ruota_attorno_a_n, psi vero, 6 fili                                                       AL BIT False la differenza relativa massima 1.801e-16
+  _grover_mezzo, psi casuale, 6 fili                                                         AL BIT False la differenza relativa massima 1.778e-16
+  _hop_psi_mezzo, psi casuale, 6 fili                                                        AL BIT False la differenza relativa massima 1.928e-16
+  _ruota_attorno_a_n, psi casuale, 6 fili                                                    AL BIT False la differenza relativa massima 1.967e-16
+  _grover_mezzo, phi vero (2m, 1), 6 fili                                                    AL BIT False la differenza relativa massima 1.701e-16
+    6 fili, _grover_mezzo        oggi 0.0350 s, numba 0.0046 s, il rapporto 7.63 (le copie dello stato comprese; la macchina CARICA)
+    6 fili, _hop_psi_mezzo       oggi 0.0372 s, numba 0.0097 s, il rapporto 3.84 (le copie dello stato comprese; la macchina CARICA)
+    6 fili, _ruota_attorno_a_n   oggi 0.0406 s, numba 0.0087 s, il rapporto 4.66 (le copie dello stato comprese; la macchina CARICA)
+### spegni() rimette le tre originali (is): True
+==================================================================================================================================
+ESITO: 0 su 14 AL BIT; la differenza relativa massima fra quelli non al bit: 2.578e-16
