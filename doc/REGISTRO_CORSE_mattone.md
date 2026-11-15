@@ -378,3 +378,19 @@
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "scena-vuota", "ora": "2026-11-15T02:08:02+01:00", "punto": "k 1531; 2.355 s per tick"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "scena-vuota", "ora": "2026-11-15T02:18:04+01:00", "punto": "k 1854; 2.270 s per tick"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "scena-vuota", "ora": "2026-11-15T02:28:22+01:00", "punto": "2000 tick in 4545 s (01:07:20-02:23:05), uscita 0; la massa 0; l'energia della scena vuota 0 entro circa 1e-12 a ogni tick; la serie in doc/referti_l2/mattone/scena_vuota_serie.npz"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T20:35:43+01:00", "punto": "k 125; 4.805 s per tick; la memoria libera 14.10 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T20:45:47+01:00", "punto": "k 267; 4.512 s per tick; la memoria libera 12.04 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T20:55:48+01:00", "punto": "k 399; 4.523 s per tick; la memoria libera 14.39 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:05:52+01:00", "punto": "k 529; 4.554 s per tick; la memoria libera 13.37 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:15:54+01:00", "punto": "k 643; 4.683 s per tick; la memoria libera 14.07 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:25:56+01:00", "punto": "k 782; 4.620 s per tick; la memoria libera 14.15 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:35:57+01:00", "punto": "k 922; 4.570 s per tick; la memoria libera 14.11 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:46:00+01:00", "punto": "k 1049; 4.592 s per tick; la memoria libera 14.35 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T21:56:01+01:00", "punto": "k 1184; 4.576 s per tick; la memoria libera 14.33 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:06:04+01:00", "punto": "k 1325; 4.545 s per tick; la memoria libera 13.14 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:16:07+01:00", "punto": "k 1462; 4.531 s per tick; la memoria libera 13.08 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:26:09+01:00", "punto": "k 1590; 4.545 s per tick; la memoria libera 14.05 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:36:10+01:00", "punto": "k 1732; 4.519 s per tick; la memoria libera 14.01 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:46:11+01:00", "punto": "k 1870; 4.507 s per tick; la memoria libera 12.19 GB"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "conv-GU-L162b28", "ora": "2026-11-14T22:56:11+01:00", "punto": "k 1977; 4.566 s per tick; la memoria libera 13.74 GB"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "conv-GU-L162b28", "ora": "2026-11-15T03:32:10+01:00", "punto": "2000 tick in 9158 s (20:24:54-22:58:22), uscita 0; Gauss 5.321e-13; il raggio 12.2572 a 2000 (T-solo col bordo da 60: 12.2577); la massa uscita dal bordo 337.4; CHIUSA ALLE 03:2x: un mio errore, la notifica delle 22:58 non seguita"}
