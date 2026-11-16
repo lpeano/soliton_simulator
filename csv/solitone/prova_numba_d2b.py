@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**D2 DEL SECONDO PASSO (W3): `_grover_mezzo`, `_hop_psi_mezzo`, `_ruota_attorno_a_n`** *(Luca `2026-11-15` `19:12`, W3; la carta `doc/TASK_HISTORY/2026-11-15_motore_numba.md`, sez. `12`)*.
 
-    E:\python\py3132\python.exe csv/solitone/prova_numba_d2b.py --fma no > doc/referti_l2/motore_numba_d2b.txt      (H1, Luca 23:36: --fma si > motore_numba_d2b_fma.txt)
+    E:\python\py3132\python.exe csv/solitone/prova_numba_d2b.py --fma no > doc/referti_l2/motore_numba_d2b.txt      (H1, Luca 23:36: --fma si > motore_numba_d2b_fma.txt; la FMA esplicita, Luca 2026-11-16 08:57: --fma esplicita > motore_numba_d2b_esplicita.txt)
        (NUMBA_CACHE_DIR su E:, PYTHONNOUSERSITE=1, TMP su E:)
 
 **Nella scena di S162 col mattone di `L 162`** *(`L162_MGU_03000`, `U` dal campo)*: **per ognuna delle tre funzioni, la versione di oggi e quella del secondo passo sugli STESSI ingressi** *(copie dello stato vero; piu' un `psi` casuale)*,
@@ -34,8 +34,8 @@ def confronta(nome, a, b):
 
 
 def main(argv):
-    assert len(argv) == 2 and argv[0] == "--fma" and argv[1] in ("si", "no"), "--fma si|no, obbligatorio"
-    fma = argv[1] == "si"
+    assert len(argv) == 2 and argv[0] == "--fma" and argv[1] in ("si", "no", "esplicita"), "--fma si|no|esplicita, obbligatorio"
+    fma = {"no": "semplice", "si": "contract", "esplicita": "esplicita"}[argv[1]]                 # ### il modo di motore_numba.accendi_secondo_passo: no -> semplice, si -> contract
     import _presidio
     import _u1_prototipo as U1
     _presidio.avvia(__file__)
@@ -44,7 +44,7 @@ def main(argv):
     with open(os.path.join(MT.DIR_REF, "cottura_L162_MGU.json"), encoding="utf-8") as fh:
         ct = json.load(fh)
     print("=" * 130)
-    print("D2 DEL SECONDO PASSO (Luca 19:12, W3): %s; fma %s (fastmath={'contract'} se vero); sys.executable %s" % (ct["file"], fma, sys.executable))
+    print("D2 DEL SECONDO PASSO (Luca 19:12, W3): %s; il modo %s (semplice | contract = fastmath={'contract'} | esplicita = la FMA vera nel prodotto complesso); sys.executable %s" % (ct["file"], fma, sys.executable))
     print("=" * 130)
     with MT.scena(MT.CORSA_162, MT.T_162) as Z:
         import flussi_parziali as FP

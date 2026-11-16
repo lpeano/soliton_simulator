@@ -2,7 +2,8 @@
 r"""**D1, D3, D4, D5 DEL MOTORE NUMBA INTERO** *(il primo passo e il secondo; la carta `doc/TASK_HISTORY/2026-11-15_motore_numba.md`, sez. `4` e `14`)*.
 
     E:\python\py3132\python.exe csv/solitone/prova_numba_motore.py tempi > doc/referti_l2/motore_numba_tempi.txt     (NUMBA_CACHE_DIR su E:, PYTHONNOUSERSITE=1, TMP su E:)
-    ... d3 --fma si|no > motore_numba_d3.txt ;  ... d4 --fma si|no > motore_numba_d4.txt ;  ... d1 > motore_numba_d1.txt
+    ... d3 --fma si|no|esplicita > motore_numba_d3.txt ;  ... d4 --fma si|no|esplicita > motore_numba_d4.txt ;  ... d1 > motore_numba_d1.txt
+    ... tempi_fma > motore_numba_tempi_fma.txt   (Luca 2026-11-16 08:57, C2: (a) e (c) semplice ed esplicita, a 2 fili, alternati)
 
 **La scena:** **il mattone di `L 162`** *(`L162_MGU_03000`, `t 63000`; `A`, `E` dal file, `U` dal campo)* **nella scena di S162, il bordo da `R_A 60`; il tick di `mattone.Campi`** *(`MGU`: G+U col lapse; `MU`: senza lapse)*.
 **Ogni corsa riparte dal FILE** *(lo stato, `A`, `E`, `e`, `U`)*.
@@ -27,7 +28,8 @@ for _p in (_QUI, _CSV):
 import mattone as MT  # noqa: E402
 
 FILI_MOLTI = 6
-FMA = [None]       # ### d1, d3, d4: --fma si|no dalla riga di comando (H1, Luca 23:36)
+SOLO_FMA = [False]  # ### tempi_fma (C2)
+FMA = [None]       # ### d3, d4: --fma si|no|esplicita dalla riga di comando (H1, Luca 23:36; esplicita: Luca 2026-11-16 08:57): il MODO di accendi_secondo_passo
 GIRI = []
 
 
@@ -140,7 +142,9 @@ def d3(Z, ct, rho_c):
           % (max(a), pb, pa, sb, sa, cb, ca, oss))
     print("  DEVE: la differenza relativa per chiave alla fine sotto 1e-10 (h_int esclusa): %.3e  %s" % (peggio_fine, "PASSA" if peggio_fine < 1e-10 else "### FALLISCE"))
     print("  DEVE: il picco, il respiro, il centro entro 1e-8: %.3e  %s" % (oss, "PASSA" if oss < 1e-8 else "### FALLISCE"))
-    return peggio_fine < 1e-10 and oss < 1e-8
+    # ### la FMA esplicita (C2): AL BIT ATTESO, quindi per quel modo il bit e' un DEVE; per gli altri si stampa e basta
+    bit = confronta_al_bit("D3 al bit, numba (%s) contro numpy" % FMA[0], b, a)
+    return peggio_fine < 1e-10 and oss < 1e-8 and (bit or FMA[0] != "esplicita")
 
 
 def d4(Z, ct, rho_c):
@@ -211,9 +215,17 @@ def tempi(Z, ct, rho_c):
     conf = [("(a) il motore di oggi", 0, None)]
     for f in (1, 2, FILI_MOLTI):
         conf.append(("(b) il primo passo, %d fili" % f, f, "primo"))
-    for fma in (True, False):
-        for f in (1, 2, FILI_MOLTI):
-            conf.append(("(c) i due passi, fma %s, %d fili" % (fma, f), f, fma))
+    if SOLO_FMA[0]:
+        # ### C2 (Luca 2026-11-16 08:57): (a), poi (c) semplice ed esplicita a 2 fili, ALTERNATI due volte (un carico che cambia si vede)
+        conf = [("(a) il motore di oggi", 0, None)]
+        for _g in (1, 2):
+            for modo in ("semplice", "esplicita"):
+                conf.append(("(c) i due passi, %s, 2 fili, giro %d" % (modo, _g), 2, modo))
+        conf.append(("(a) il motore di oggi, di nuovo", 0, None))
+    else:
+        for modo in ("contract", "semplice"):
+            for f in (1, 2, FILI_MOLTI):
+                conf.append(("(c) i due passi, %s, %d fili" % (modo, f), f, modo))
     righe = []
     for nome, fili, passo in conf:
         comp = 0.0
@@ -242,6 +254,8 @@ def tempi(Z, ct, rho_c):
         sys.stdout.flush()
     print("-" * 130)
     a_med, a_f, a_tick = righe[0][1], righe[0][2], righe[0][3]
+    if SOLO_FMA[0]:
+        print("### (a) all'inizio %.3f s, alla fine %.3f s: la deriva del carico %.1f%%" % (righe[0][1], righe[-1][1], 100.0 * (righe[-1][1] - righe[0][1]) / righe[0][1]))
     print("### IL PESO NEL TICK DI (a)  (il tempo inclusivo per tick / il tick con gli orologi %.3f s):" % a_tick)
     for k in sorted(a_f, key=lambda x: -a_f[x]):
         print("    %-22s %.3f s  %5.1f%%" % (k, a_f[k], 100.0 * a_f[k] / a_tick))
@@ -250,6 +264,9 @@ def tempi(Z, ct, rho_c):
         print("    %-36s %.2fx    %s" % (nome, a_med / med, ", ".join("%s %.1fx" % (k, a_f[k] / f[k]) for k in sorted(f) if f[k] > 0)))
     b1 = [med for nome, med, _f, _t in righe if nome.startswith("(b)")]
     c1 = [med for nome, med, _f, _t in righe if nome.startswith("(c)")]
+    if SOLO_FMA[0]:
+        print("### IL CARICO, alla fine: %s" % carico())
+        return True
     print("### LE ATTESE W4 (scritte prima, non riviste): il primo passo al piu' 1.16x -> il migliore %.2fx; i due passi 1.5-2.5x -> da %.2fx a %.2fx"
           % (a_med / min(b1), a_med / max(c1), a_med / min(c1)))
     print("### IL CARICO, alla fine: %s" % carico())
@@ -260,10 +277,13 @@ def main(argv):
     import _presidio
     _presidio.avvia(__file__)
     parte = argv[0]
-    assert parte in ("d1", "d3", "d4", "tempi")
+    assert parte in ("d1", "d3", "d4", "tempi", "tempi_fma")
     if parte in ("d3", "d4"):
-        assert len(argv) == 3 and argv[1] == "--fma" and argv[2] in ("si", "no"), "d3, d4: --fma si|no"
-        FMA[0] = argv[2] == "si"
+        assert len(argv) == 3 and argv[1] == "--fma" and argv[2] in ("si", "no", "esplicita"), "d3, d4: --fma si|no|esplicita"
+        FMA[0] = {"no": "semplice", "si": "contract", "esplicita": "esplicita"}[argv[2]]
+    SOLO_FMA[0] = parte == "tempi_fma"
+    if parte == "tempi_fma":
+        parte = "tempi"
     ct = leggi_cottura()
     rho_c = MT.rho_c_assoluto()
     print("=" * 130)
