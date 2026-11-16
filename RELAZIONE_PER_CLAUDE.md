@@ -26037,3 +26037,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il primo lancio** *(`07:05:42`-`07:18:26`, uscita `1`)*: **il controllo d'avvio al bit PASSA, poi alla prima tappa `_registro_corse.Rifiuto: la voce 'legati-GUpi-3' non e' APERTA`.** **La voce si apre a mano con `mattone.py registro apri` PRIMA del lancio, e io non l'avevo fatto.**
 - **Nessun danno:** **gli stati `legati_GUpi_16950` e `_17000` hanno l'ora di GUpi-2** *(`06:56`, `06:58`)*: **la corsa morta non ha scritto niente.** **Il suo output e' tenuto a parte** *(`legati_GUpi_17000_morta.txt` nello scratchpad)*.
 - **Voce aperta alle `07:19:07`** *(la nota dichiara l'errore)*, **corsa rilanciata con lo stesso comando.** **Costo: circa `13` minuti di macchina.**
+
+### 2026-11-16 08:00 -- B2-pi FINO A 18000: P2'' SI' (d SULLA SERIE GREZZA FRA 39.89 E 42.42, DENTRO 38.5-42.5); LE DUE COPPIE SONO CHIUSE; I MINIMI E I MASSIMI SALGONO
+
+- **Sul ramo** *(`e124aef7`, sez. `24.35`)*: **legati-GUpi-3 finita** *(`17000` -> `18000`, `3/3`, la massa `2.5e-15`, Gauss `6.4e-11`)*. ### **P2'' SI': la serie grezza fra `39.8906` e `42.4156`** *(il massimo a `k 12350`, a `0.084` dal bordo della fascia)*.
+- **Le inversioni lisciate di B2-pi:** **max `41.20` (`4350`), min `39.87` (`7750`), max `42.41` (`12350`), min `41.16` (`15850`): il periodo circa `7667` tick** *(B2 in fase: circa `9700`)*.
+- **Annotato, non una previsione:** **in antifase minimi e massimi salgono entrambi** *(circa `1.2` in `8000` tick)*; **in fase il secondo minimo era piu' alto del primo.** **Da due cicli non si dice se e' una deriva.**
+- **Nessuna corsa aperta.**
