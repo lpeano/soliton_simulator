@@ -26031,3 +26031,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`51163dff`, sez. `24.34`)*: **legati-GUpi-2: `9042` tick in `28800 s`, il tetto a `k 17042`; `2/3`** *(la ripartenza al bit e Gauss `6.4e-11` PASSANO; la massa `4.256e-06` FALLISCE: la massa a `17000` contro il bordo a `17042`)*. ### **R1** *(`massa_stesso_tick.py`)*: **`18` tick comuni, il massimo `2.520e-08`, la soglia `1e-6`: PASSA.** **Per R2 si riparte senza FERMO: `legati-GUpi-3` da `17000` a `18000`** *(l'interprete di C:, una prosecuzione)*.
 - **`d`** *(ogni `500`)*: **`39.89` a `8000`, il massimo `42.4156` a `k 12350`, `41.47` a `17000`.** **P2''** *(fascia `38.5`-`42.5` sulla serie non lisciata)* **si legge a `18000`: il massimo fin qui e' a `0.08` dal bordo della fascia.**
 - **Annotato, non letto:** **nella tabella dei conti la materia di A cresce** *(`8.0335e6` -> `8.0797e6`)* **e quella di B cala** *(`7.9817e6` -> `7.9198e6`)*.
+
+### 2026-11-16 07:20 -- UN MIO ERRORE: IL PRIMO LANCIO DI legati-GUpi-3 E' MORTO ALLA PRIMA TAPPA, PERCHE' NON AVEVO APERTO LA SUA VOCE NEL REGISTRO; RILANCIATA ALLE 07:19
+
+- **Il primo lancio** *(`07:05:42`-`07:18:26`, uscita `1`)*: **il controllo d'avvio al bit PASSA, poi alla prima tappa `_registro_corse.Rifiuto: la voce 'legati-GUpi-3' non e' APERTA`.** **La voce si apre a mano con `mattone.py registro apri` PRIMA del lancio, e io non l'avevo fatto.**
+- **Nessun danno:** **gli stati `legati_GUpi_16950` e `_17000` hanno l'ora di GUpi-2** *(`06:56`, `06:58`)*: **la corsa morta non ha scritto niente.** **Il suo output e' tenuto a parte** *(`legati_GUpi_17000_morta.txt` nello scratchpad)*.
+- **Voce aperta alle `07:19:07`** *(la nota dichiara l'errore)*, **corsa rilanciata con lo stesso comando.** **Costo: circa `13` minuti di macchina.**
