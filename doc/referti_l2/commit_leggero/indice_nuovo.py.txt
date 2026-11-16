@@ -1468,7 +1468,7 @@ def _storico_da_git():
         # ### \u2b50 **S2 (Luca `2026-11-16` `08:57`): LA MEMORIA PER SHA1 DEL BLOB.** Di ogni
         # ### versione serve SOLO il numero di righe, e un blob di git non cambia mai a sha1
         # ### fisso: ### **`--batch-check` da' lo sha1 senza leggere il contenuto**, e si
-        # ### leggono ### **solo i blob che la memoria non ha.** Prima: TUTTE le versioni
+        # ### leggono ### **solo i blob che la memoria non ha.** Senza la memoria: TUTTE le versioni
         # ### a ogni `valida` *(331 il 2026-11-16, 1.8 GB)*.
         dentro = NL.join("%s:%s" % (c, rel) for c in sha) + NL
         bc = subprocess.run(["git", "cat-file", "--batch-check"], cwd=RADICE,
@@ -1477,14 +1477,14 @@ def _storico_da_git():
         blob = []
         for i in range(len(sha)):
             testa = teste[i].split() if i < len(teste) else []
-            # ### lo stesso `break` di prima: un oggetto mancante e- `<nome> missing`
+            # ### lo stesso `break` del codice senza memoria: un oggetto mancante e- `<nome> missing`
             if len(testa) < 3:
                 break
             blob.append(testa[0])
         conto = _righe_dei_blob(blob)
         prec = 0
         for c, b in zip(sha, blob):
-            # ### un contenuto che git non ha dato: lo stesso `break` di prima
+            # ### un contenuto che git non ha dato: lo stesso `break` del codice senza memoria
             if b not in conto:
                 break
             n = conto[b]

@@ -1465,21 +1465,29 @@ def _storico_da_git():
     sha = [c for c in (q.stdout or "").split() if c]
     per_riga = []
     if sha:
+        # ### \u2b50 **S2 (Luca `2026-11-16` `08:57`): LA MEMORIA PER SHA1 DEL BLOB.** Di ogni
+        # ### versione serve SOLO il numero di righe, e un blob di git non cambia mai a sha1
+        # ### fisso: ### **`--batch-check` da' lo sha1 senza leggere il contenuto**, e si
+        # ### leggono ### **solo i blob che la memoria non ha.** Senza la memoria: TUTTE le versioni
+        # ### a ogni `valida` *(331 il 2026-11-16, 1.8 GB)*.
         dentro = NL.join("%s:%s" % (c, rel) for c in sha) + NL
-        b = subprocess.run(["git", "cat-file", "--batch"], cwd=RADICE,
-                           input=dentro.encode("utf-8"), capture_output=True)
-        dati, pos, prec = b.stdout, 0, 0
-        for c in sha:
-            fine = dati.find(b"\n", pos)
-            if fine < 0:
-                break
-            testa = dati[pos:fine].decode("utf-8", "replace").split()
+        bc = subprocess.run(["git", "cat-file", "--batch-check"], cwd=RADICE,
+                            input=dentro.encode("utf-8"), capture_output=True)
+        teste = bc.stdout.decode("utf-8", "replace").split(NL)
+        blob = []
+        for i in range(len(sha)):
+            testa = teste[i].split() if i < len(teste) else []
+            # ### lo stesso `break` del codice senza memoria: un oggetto mancante e- `<nome> missing`
             if len(testa) < 3:
                 break
-            lung = int(testa[2])
-            corpo = dati[fine + 1:fine + 1 + lung].decode("utf-8", "replace")
-            pos = fine + 1 + lung + 1
-            n = _righe(corpo)
+            blob.append(testa[0])
+        conto = _righe_dei_blob(blob)
+        prec = 0
+        for c, b in zip(sha, blob):
+            # ### un contenuto che git non ha dato: lo stesso `break` del codice senza memoria
+            if b not in conto:
+                break
+            n = conto[b]
             # ### \u26a0 **SOLO IN AGGIUNTA, e la premessa SI VERIFICA:** se un commit
             # ### ### **togliesse** righe la derivazione sarebbe sbagliata, e allora
             # ### ### **si FERMA** invece di scrivere numeri falsi.
@@ -1488,6 +1496,106 @@ def _storico_da_git():
             per_riga.extend([c] * (n - prec))
             prec = n
     return per_riga, _quante("HEAD"), _quante("")
+
+
+_MEMORIA_NOME = "indice_storico_righe.json"
+
+
+def _memoria_percorso():
+    """### Dove sta la memoria: ### **nella cartella COMUNE di git** *(fuori dall-albero di
+    lavoro, mai tracciata; `C:` per il principale, `E:` per il clone)*. `None` se git non la da-."""
+    r = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=RADICE,
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    d = (r.stdout or "").strip()
+    if r.returncode != 0 or not d:
+        return None
+    if not os.path.isabs(d):
+        d = os.path.join(RADICE, d)
+    return os.path.join(d, _MEMORIA_NOME)
+
+
+def _impronta_memoria(righe):
+    import hashlib
+    return hashlib.sha1(json.dumps(righe, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def _memoria_leggi(f):
+    """### La memoria `{sha1 del blob: righe}`, ### **o `{}` se manca o e- ROTTA** *(mai usata
+    rotta: la forma, i tipi e l-impronta del contenuto devono tornare; se no si ricostruisce)*."""
+    if f is None or not os.path.exists(f):
+        return {}
+    try:
+        with io.open(f, encoding="utf-8") as h:
+            m = json.load(h)
+        righe = m["righe"]
+        ok = (m.get("versione") == 1 and isinstance(righe, dict)
+              and all(isinstance(k, str) and len(k) == 40 and isinstance(v, int) and v >= 0
+                      for k, v in righe.items())
+              and m.get("impronta") == _impronta_memoria(righe))
+    except Exception:
+        ok = False
+    if not ok:
+        sys.stderr.write("[indice: la memoria delle righe dello storico e- ROTTA: non si usa, si ricostruisce]" + NL)
+        return {}
+    return righe
+
+
+def _memoria_scrivi(f, righe):
+    if f is None:
+        return
+    try:
+        tmp = f + ".%d.tmp" % os.getpid()
+        with io.open(tmp, "w", encoding="utf-8", newline="") as h:
+            json.dump({"versione": 1, "righe": righe, "impronta": _impronta_memoria(righe)}, h,
+                      sort_keys=True, separators=(",", ":"))
+        os.replace(tmp, f)
+    except OSError as x:
+        sys.stderr.write("[indice: la memoria delle righe dello storico NON scritta: %r]" % (x,) + NL)
+
+
+def _leggi_righe_da_git(blob):
+    """### `{sha1: righe non vuote}` leggendo i contenuti con UN `git cat-file --batch`."""
+    out = {}
+    if not blob:
+        return out
+    b = subprocess.run(["git", "cat-file", "--batch"], cwd=RADICE,
+                       input=(NL.join(blob) + NL).encode("utf-8"), capture_output=True)
+    dati, pos = b.stdout, 0
+    for x in blob:
+        fine = dati.find(b"\n", pos)
+        if fine < 0:
+            break
+        testa = dati[pos:fine].decode("utf-8", "replace").split()
+        if len(testa) < 3:
+            break
+        lung = int(testa[2])
+        corpo = dati[fine + 1:fine + 1 + lung].decode("utf-8", "replace")
+        pos = fine + 1 + lung + 1
+        out[x] = len([r for r in corpo.split(NL) if r.strip()])
+    return out
+
+
+def _righe_dei_blob(blob):
+    """### `{sha1: righe}` per OGNI blob della lista: dalla memoria, e da git quelli nuovi.
+
+    ### \u26d4 **IL CONTROLLO DI COERENZA A OGNI LETTURA** *(oltre a forma e impronta)*: il blob
+    PIU- RECENTE fra quelli presi dalla memoria si ### **rilegge da git**, e il conto deve
+    coincidere; se no ### **la memoria si butta e si rifa- da zero.**"""
+    f = _memoria_percorso()
+    mem = _memoria_leggi(f)
+    dalla_memoria = [b for b in blob if b in mem]
+    if dalla_memoria:
+        ultimo = dalla_memoria[-1]
+        if _leggi_righe_da_git([ultimo]).get(ultimo) != mem[ultimo]:
+            sys.stderr.write("[indice: la memoria delle righe dello storico NON torna con git: si butta e si ricostruisce]" + NL)
+            mem = {}
+    nuovi = sorted(set(b for b in blob if b not in mem))
+    letti = _leggi_righe_da_git(nuovi)
+    if letti:
+        mem = dict(mem)
+        mem.update(letti)
+        _memoria_scrivi(f, mem)
+    return mem
 
 
 def _f5_storico(voci, vive=None, da_git=None):
