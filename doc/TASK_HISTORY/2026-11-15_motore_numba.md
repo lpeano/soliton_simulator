@@ -223,3 +223,22 @@
 - ### **`14/14` AL BIT, la differenza massima `0`:** **il prodotto complesso x complesso scritto come lo fa numpy su questa macchina** *(la FMA vera via `llvm.fma.f64`: `math.fma` numba non lo compila)* **rende le tre funzioni del secondo passo uguali a numpy al bit.** ### **H1 confermata anche per COSTRUZIONE** *(la sez. `16` l'aveva provata per misura).*
 - **I tempi delle tre funzioni** *(la macchina carica: la prova A3 sul principale)*: **i rapporti fra `2.95` e `5.49`, come nel modo semplice** *(il braccio 0: `2.61`-`4.82`)*: **la FMA esplicita non costa.**
 - **Per la carta** *(sez. `20`, C2)*: **si fanno D1, D3** *(il bit come DEVE per il modo esplicita)*, **D4; poi i tempi (a) / (c) a `2` fili in una finestra ferma.** ### **Il limite** *(C3)*: **il bit vale su una CPU con FMA, come il motore di riferimento.**
+
+## 23. NUMBA NEL PRINCIPALE, LA FASE 1 (Luca `2026-11-16` `13:58`): LA CARTA, PRIMA DEL CODICE
+
+### LE CONDIZIONI V1-V5 *(del guardiano, scritte nel mandato PRIMA dei risultati; non si rivedono)*
+
+- **V1** D1: switch spento, la suite `67/67`; `1000` tick col lapse e `1000` senza = il motore di oggi AL BIT; `numba` non in `sys.modules`. **V2** D3 coi due passi (FMA esplicita), `1000` tick, AL BIT a ogni controllo. **V3** D4: due corse uguali AL BIT fra loro, a `1` e a `6` fili. **V4** la suite a switch ACCESO coi due passi: `67/67`, le chiamate e i ripieghi scritti. **V5** i tempi (a) / (c) a `2` e a `6` fili, col carico fermo; nessuna soglia.
+
+### LE PREMESSE DAL CODICE E DAI REFERTI
+
+- **V2 e' gia' misurata** *(sez. `22` e il giro delle `10:44`, `0d7cfa0f`... `011377eb`)*: **D3 `--fma esplicita`: `9` chiavi su `9` AL BIT a OGNI controllo da `k 100` a `1000`; PASSA** *(`7133 s`)*. **Il referto si copia; non si rigira.**
+- **D1 e' in corsa** *(dalle `12:48`, al commit `011377eb`, `prova_numba_motore.py` `802ee321`)*: **`MGU` col lapse e `MU` senza, `1000` tick, mai importato contro importato e spento: e' la parte di V1 sui tick.**
+- **D4 e' MORTO al primo giro** *(il codice `127` dopo il timbro, nessun traceback: la causa non la so)*: **si rigira DA SOLO, dopo D1** *(un processo numba alla volta)*.
+- **V4: lo strumento della W2** *(`E:\python\numba_suite\sitecustomize.py`, fuori dal repo)* **accende SOLO il primo passo.** **Uno strumento NUOVO, in una cartella nuova** *(`E:\python\numba_suite2\`)*: **lo stesso, piu' `accendi_secondo_passo("esplicita")` dopo `accendi_numba`; il conto scrive anche `secondo_passo`, `fma`, `via_fma`.** **La sua copia ESATTA si committa accanto al referto** *(`doc/referti_l2/motore_numba_suite2_sitecustomize.py.txt`, con lo sha1)*. **Il limite della W2 resta:** **un collaudo che importa il nucleo come pacchetto non vede la sostituzione; e M-B1 gira una copia a un commit vecchio** *(col motore di oggi: atteso)*.
+- **V5: `tempi_fma` misura solo a `2` fili; il mandato vuole `2` e `6`.** **Il codice cambia** *(i fili `(2, FILI_MOLTI)`, alternati)*: **quel commit porta la suite a switch SPENTO, che e' la prima meta' di V1.** **I tempi si misurano DOPO D1, D4 e la suite accesa, in una finestra ferma** *(nessun mio commit, hook o suite mentre girano)*.
+- **La prova a secco della riunione** *(punto 2)*: **`git merge-tree` di `origin/motore-numba` in `origin/primo-ordine`; i due antenati comuni** *(il merge `5b08a90e` di `strumento-mattone` in `motore-numba` del `15`, e la base)* **dichiarati; l'elenco dei file fuori da `doc/referti_l2` e `doc/TASK_HISTORY` con una riga sul perche'; `csv/_presidio.py`, `csv/_file_fisica.py`, `.claude/skills/*` contro i hook nuovi del principale** *(S1, S2)*.
+
+### COSA MI FA FERMARE
+
+- **Una delle V1-V4 che cade: FERMO, niente fase 2, scritto quale.** **La fase 2 SOLO dopo «VIA ALLA FASE 2» di Luca.**
