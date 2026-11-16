@@ -26025,3 +26025,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Sul ramo** *(`08a15845`, sez. `24.33`)*: **legati-GU-2 finita** *(`12000` -> `18000`, `3/3`, la massa `2.8e-14`, Gauss `7.1e-11`)*. ### **P1-bis SI': il minimo lisciato `29.399` a `k 14750`** *(dentro `27.5`-`30.5` e `13500`-`16000`)*, **risale a `31.915`; il mezzo periodo `4800`** *(dentro `3500`-`6000`)*.
 - **`d`: `28.73` (`k 5050`), `33.75` (`9950`), `29.40` (`14750`): il periodo circa `9700` tick. Il secondo minimo piu' alto del primo: due minimi non bastano a dire uno smorzamento.**
 - **Aperta: `legati-GUpi-2`** *(il tetto verso le `06:47`; P2'' alla fine)*.
+
+### 2026-11-16 07:05 -- B2-pi FERMATA DAL TETTO A k 17042: IL DEVE DELLA MASSA FALLISCE PER I DUE ISTANTI (4.256e-06), R1 ALLO STESSO TICK PASSA (2.520e-08); SI RIPARTE DA 17000 FINO A 18000
+
+- **Sul ramo** *(`51163dff`, sez. `24.34`)*: **legati-GUpi-2: `9042` tick in `28800 s`, il tetto a `k 17042`; `2/3`** *(la ripartenza al bit e Gauss `6.4e-11` PASSANO; la massa `4.256e-06` FALLISCE: la massa a `17000` contro il bordo a `17042`)*. ### **R1** *(`massa_stesso_tick.py`)*: **`18` tick comuni, il massimo `2.520e-08`, la soglia `1e-6`: PASSA.** **Per R2 si riparte senza FERMO: `legati-GUpi-3` da `17000` a `18000`** *(l'interprete di C:, una prosecuzione)*.
+- **`d`** *(ogni `500`)*: **`39.89` a `8000`, il massimo `42.4156` a `k 12350`, `41.47` a `17000`.** **P2''** *(fascia `38.5`-`42.5` sulla serie non lisciata)* **si legge a `18000`: il massimo fin qui e' a `0.08` dal bordo della fascia.**
+- **Annotato, non letto:** **nella tabella dei conti la materia di A cresce** *(`8.0335e6` -> `8.0797e6`)* **e quella di B cala** *(`7.9817e6` -> `7.9198e6`)*.
