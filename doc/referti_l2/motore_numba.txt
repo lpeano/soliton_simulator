@@ -1,0 +1,64 @@
+IL MOTORE NUMBA -- NUMBA NEL PRINCIPALE, LA FASE 1 (Luca 2026-11-16 13:58): LE CONDIZIONI V1-V5 E LA PROVA A SECCO DELLA RIUNIONE
+=============================================================================================================================
+
+Ogni numero viene dai referti elencati accanto (prodotti da script committati); qui sono riassunti, non ricalcolati.
+Le condizioni V1-V5 sono del guardiano, scritte nel mandato PRIMA dei risultati; non sono state riviste.
+Il ramo: motore-numba, nel clone E:\soliton_simulator_numba. L'interprete: E:\python\py3132\python.exe.
+
+V1. D1: SWITCH SPENTO = IL MOTORE DI OGGI AL BIT                                                           SI'
+    - D1 (motore_numba_d1.txt; 011377eb; 12:48:47-14:52:33): MGU col lapse e MU senza, 1000 tick ciascuno,
+      "mai importato" contro "importato e spento": 20 controlli su 20 AL BIT; numba NON in sys.modules.
+    - la suite a switch SPENTO: 67/67 (15:16:40-15:32:37, il codice a9932b8d).
+
+V2. D3: SWITCH ACCESO COI DUE PASSI (FMA ESPLICITA) = IL MOTORE DI OGGI AL BIT A OGNI CONTROLLO             SI'
+    - D3 --fma esplicita (motore_numba_d3_esplicita.txt; 10:44:28-12:43:23): dal mattone di L162 col lapse e G+U,
+      1000 tick; 9 chiavi su 9 AL BIT a ogni controllo, da k 100 a k 1000.
+
+V3. D4: DUE CORSE UGUALI COL MOTORE NUMBA, AL BIT FRA LORO, A 1 E A 6 FILI                                 SI'
+    - D4 --fma esplicita (motore_numba_d4_esplicita.txt; 14:52:52-15:16:04): 6 fili contro 6 fili rigirati e
+      1 filo contro 6 fili, AL BIT a ogni controllo fino a k 200.
+    - il PRIMO giro (motore_numba_d4_esplicita_giro1.txt; 12:43:23-12:48:46) e' MORTO dopo il timbro col codice
+      127, senza traceback: non si e' ripetuto; la causa NON la so.
+
+V4. LA SUITE A SWITCH ACCESO COI DUE PASSI                                                                 SI'
+    - motore_numba_v4_suite.txt e motore_numba_v4_conti.txt (35f84e04; 14:05:48-14:26:48; 2 fili; lo strumento
+      E:\python\numba_suite2\sitecustomize.py, sha1 55f5d0e5, la copia motore_numba_suite2_sitecustomize.py.txt):
+      67/67; 151 processi, 10 ACCESI tutti coi due passi (il modo esplicita, la FMA via llvm.fma.f64);
+      1112982 chiamate al ciclo numba, 0 ripieghi su numpy; 1 accensione caduta: _misura_mb1.py, che M-B1 gira in
+      una copia dell'albero a un commit vecchio, senza motore_numba.py (come nella W2: atteso).
+
+V5. I TEMPI, COL CARICO FERMO (nessuna soglia: col bit il guadagno e' gratis)                             SCRITTO
+    - motore_numba_tempi_v5.txt (a9932b8d; 15:45:27-16:00:32; 1 processo python vivo all'inizio e alla fine; il
+      carico di (a) cambiato dell'1.6% fra inizio e fine); la mediana di 50 tick dopo 10 di riscaldamento:
+        (a) il motore di oggi                  2.138 s (alla fine 2.172 s)
+        (c) i due passi, esplicita, 2 fili     1.997 s e 1.992 s     il guadagno 1.07x e 1.07x
+        (c) i due passi, esplicita, 6 fili     2.162 s e 2.059 s     il guadagno 0.99x e 1.04x
+    - le funzioni sostituite accelerano da 2.7 a 9.9 volte (_grover_mezzo, _hop_psi_mezzo, _ruota_attorno_a_n,
+      _somma_per_nodo); ma con numba acceso altre funzioni di numpy RALLENTANO (elicita 0.7-0.8x, densita_materia
+      0.6-0.7x, nei giri a 6 fili anche termini_di_h): il tick intero guadagna poco.
+    - IL CONFRONTO con la notte (motore_numba_tempi_3.txt): 1.33x con 3 processi in corsa, quando anche (a) era
+      piu' lento (2.80 s). A macchina ferma il guadagno e' 1.07x. La mia lettura, NON provata: i fili di numba in
+      attesa attiva tolgono CPU a numpy fra un ciclo e l'altro.
+
+IL VERDETTO DELLA FASE 1: V1, V2, V3, V4 PASSANO; V5 e' scritta. Per la regola del mandato: la PROPOSTA «via alla fase 2».
+    Con un'avvertenza per Luca: il guadagno di velocita' misurato a macchina ferma e' 1.07x (2 fili), non 1.33x.
+
+LA PROVA A SECCO DELLA RIUNIONE (solo lettura; git merge-tree origin/primo-ordine origin/motore-numba, dopo f2e721c9)
+    - i due antenati comuni: 224f2061 (dal merge di strumento-mattone in motore-numba del 2026-11-15, 5b08a90e, fatto
+      senza mandato e tenuto da Luca) e 10c5494d (il principale): dichiarati. Il merge-tree: NESSUN conflitto.
+    - sul principale cambierebbero 19 file: 16 nuovi, 3 modificati. Fuori da doc/referti_l2 e doc/TASK_HISTORY:
+        M csv/_file_fisica.py            una riga: primo_ordine/motore_numba.py nella LISTA dei file di fisica
+                                         (H-FISICA-FUORI-LISTA lo vuole per un .py sotto primo_ordine/)
+        M doc/NUCLEO_CONGELATO.md        la sezione del ramo motore-numba e la sua tabella degli sha1
+        M primo_ordine/_mappa.yaml       la voce motore_numba.py (la strada (a), Luca 2026-11-15 19:57; P-MOD)
+        A primo_ordine/motore_numba.py   il motore numba con lo switch, spento per difetto
+        A csv/solitone/prova_numba_d2.py, prova_numba_d2b.py, prova_numba_motore.py, prova_numba_ulp.py
+                                         le prove D1-D5, H1, i tempi
+    - csv/_presidio.py, .claude/skills/*, csv/indice.py, csv/_hook_presidi.py: il ramo NON li tocca. Con i hook nuovi
+      del principale (S1, S2: indice.py, _hook_presidi.py) NON si pestano i piedi.
+    - H-NUCLEO-CONGELATO: il merge tocca primo_ordine/ (_mappa.yaml, motore_numba.py), e sul principale il presidio
+      RIFIUTA finche' doc/NUCLEO_CONGELATO.md dice "stato: CONGELATO". La procedura ESISTE (csv/_nucleo_congelato.py,
+      decidi): lo stato "SBLOCCATO" con una riga "decisione_di_luca:"; poi si ricongela. Per la fase 2 (punto 5): il
+      «VIA ALLA FASE 2» di Luca e' quella riga.
+
+FERMO per Luca: la fase 2 SOLO dopo «VIA ALLA FASE 2».
