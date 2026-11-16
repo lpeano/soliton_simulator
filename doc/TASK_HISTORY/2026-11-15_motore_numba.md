@@ -185,3 +185,29 @@
 - ### **W4** *(le attese del `19:12`, non riviste)*: **il primo passo al piu' `1.16x` -> `1.10x`: CONFERMATA; i due passi `1.5`-`2.5x` -> `1.20`-`1.34x`: SMENTITA.**
 - ### **IL PERCHE', da Amdahl** *(i pesi nel tick di (a), il tempo inclusivo)*: **il secondo passo copre il `24.4%`** *(`_grover_mezzo` `12.3%`, `_hop_psi_mezzo` `8.2%`, `_ruota_attorno_a_n` `3.9%`)*: **anche azzerandolo, il tick guadagnerebbe al piu' `1/(1 - 0.244) = 1.32x`** *(piu' il poco del primo passo)*: **`1.33`-`1.34x` e' quasi il TETTO.** **Il resto del tick: `termini_di_h` `31.9%`** *(la parte per elemento con `np.abs` e l'`einsum` a tre fattori: la sez. `12` l'ha lasciata fuori)*, **`elicita` `8.8%`, e cio' che gli orologi non vedono** *(circa il `30%`: il punto fisso, le copie, numpy fuori dalle `9` funzioni)*. ### **La mia stima W4 era sbagliata: non avevo fatto il conto di Amdahl prima.**
 - **Le strade, per Luca** *(nessuna presa)*: **(i) tenere il solo primo passo** *(al bit, `1.07`-`1.10x`: poco)*; **(ii) portare in numba anche `termini_di_h` ed `elicita`** *(il `40%` del tick; il bit li' e' piu' difficile: `hypot` e l'`einsum` a tre fattori, N1)*; **(iii) fermare il motore numba qui** *(il guadagno non vale il rischio dell'ulp)*. **E i fili: a `6` piu' lento che a `1`-`2` su questa macchina carica** *(le funzioni sono piccole: il costo di avviare i fili supera il lavoro)*.
+
+## 20. LA FMA ESPLICITA (Luca `2026-11-16` `08:57`, (C)): LA CARTA, PRIMA DEL CODICE
+
+### LE PREMESSE DAL CODICE *(cosa credo prima di guardare, e cosa NON so)*
+
+- **Il prodotto complesso di numpy su questa macchina** *(sez. `13`-`16`, `59dd8dc1`)*: **reale = `fma(ar, br, -(ai*bi))`, immaginaria = `fma(ar, bi, ai*br)`** *(`20000/20000`)*; **numba, senza `fastmath`, fa la formula semplice; `contract` NON riproduce numpy** *(D2b con `contract`: non al bit)*; **l'`einsum` e il prodotto reale x complesso sono gia' al bit.**
+- **Le moltiplicazioni complesso x complesso nelle tre funzioni di numpy** *(dal codice di `flussi_parziali.py` e `motore.py`)*:
+  - **`_grover_mezzo`**: `presa * w[nodo]` e `vista * z[nodo]` *(due `np.multiply` complessi)*;
+  - **`_hop_psi_mezzo`**: `tm * be` *(due volte)*, `t0 * al`, `v1 * al` *(quattro `np.multiply` complessi)*; **le due `einsum` NO** *(al bit con la formula semplice: si lasciano cosi')*;
+  - **`_ruota_attorno_a_n`**: `(nx - 1j ny) * p1`, `(nx + 1j ny) * p0`, `a0 * (-1j s)`, `a1 * (-1j s)` *(complessi)*; `nz * p0`, `nz * p1`, `p * c` *(reale x complesso: la formula semplice e la fma danno lo stesso, perche' la parte immaginaria del reale e' `0`)*; **`1j * ny` e `-1j * s`** *(scalare complesso x reale: esatti)*.
+- **Cosa NON so:** **se numba compila `math.fma`** *(Python `3.13`: lo provo, e scrivo quale via ha girato)*; **se `llvm.fma.f64` sotto numba diventa una `vfmadd`** *(la CPU ha FMA3)* **o una chiamata alla libreria** *(il risultato e' lo stesso, il tempo no)*; **se `-(ai*bi)` dentro la fma viene contratto da LLVM** *(senza `fastmath` non dovrebbe)*.
+
+### PROGETTAZIONE DEL RAGIONAMENTO
+
+- **C1, il codice** *(solo `primo_ordine/motore_numba.py`, e la tabella degli sha1 in `doc/NUCLEO_CONGELATO.md` del ramo)*: **un aiutante `_cmul(a, b)` compilato in linea, con la FMA VERA** *(`math.fma` se numba lo compila, altrimenti l'intrinseco `llvm.fma.f64` via `numba.extending.intrinsic`)*, **usato SOLO nei prodotti complesso x complesso elencati sopra; `fastmath` SPENTO.** ### **Lo switch:** **`accendi_secondo_passo(modo)` con `modo` in `"semplice"`, `"contract"`, `"esplicita"`** *(oggi `fma` booleano: `False` -> `"semplice"`, `True` -> `"contract"`; nessun default, P-R1)*; **chi chiama si aggiorna nello stesso commit** *(`prova_numba_d2b.py`, `prova_numba_motore.py`: `--fma no|contract|esplicita`)*.
+- **C2, la prova:** **D2b a `1` e `6` fili, `--fma esplicita`: quanti dei `14` confronti al bit.** **Se `14/14`: D1, D3 (al bit atteso), D4; poi i tempi del tick intero (a) / (c esplicita) a `2` fili, col carico fermo** *(nessun commit, hook o suite miei mentre gira)*. **Se NON `14/14`: si tiene il solo primo passo** *(la decisione di `03:45`)*, **scritto, e FERMO.**
+- **C3, il limite, scritto PRIMA:** **il bit vale su una CPU con FMA** *(questa: FMA3, AVX2)*, **come il motore di riferimento stesso: numpy usa la fma perche' la CPU ce l'ha.** **Su una CPU senza FMA numpy farebbe un'altra cosa, e `llvm.fma` cadrebbe nella libreria: lo stesso risultato della fma, quindi DIVERSO da quel numpy.**
+- **C4:** **se tutto al bit, la PROPOSTA a Luca di adottare i due passi** *(il guadagno misurato; atteso circa `1.33x`, il tetto di Amdahl della sez. `19`)*; **altrimenti il solo primo passo. FERMO per Luca nei due casi.**
+- **Cosa mi farebbe FERMARE:** **un confronto D2b non al bit con la fma vera** *(allora la mia lettura delle operazioni di numpy e' sbagliata in un punto: si scrive quale funzione, e non si cerca a tentativi)*; **numba che non compila ne' `math.fma` ne' l'intrinseco.**
+
+### TODO DEL NEXT STEP
+
+1. `_cmul` con la fma vera; lo switch a tre modi; le due prove aggiornate; lo sha1 nella tabella del ramo.
+2. Commit e push; D2b `--fma esplicita` -> `doc/referti_l2/motore_numba_d2b_esplicita.txt`.
+3. Se `14/14`: D1, D3, D4 con `--fma esplicita`; i tempi (a) / (c) a `2` fili in una finestra ferma.
+4. Il referto `doc/referti_l2/motore_numba.txt` (la sezione FMA esplicita); la proposta o il solo primo passo; FERMO.
