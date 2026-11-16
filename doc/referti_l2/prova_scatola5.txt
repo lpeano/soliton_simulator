@@ -1,0 +1,72 @@
+R-SCATOLA AL 5%, LA PROVA SUL MATTONE DA SOLO (Luca 2026-11-16 16:17; la correzione 16:58; il criterio del controllo finale 17:52): IL REFERTO
+La carta: doc/TASK_HISTORY/2026-11-16_scatola5.md (sez. 3 le soglie, fissate PRIMA; sez. 7 la correzione; sez. 8 il criterio di Luca; sez. 10-11 la ripresa).
+La configurazione: csv/solitone/prova_scatola5.py (9aa7e7f9) corsa --L 186 --da 0 --fino 3000 --registro prova-scatola5-L186-b; l'interprete E:/python/py3132/python.exe (Python 3.13.2), PYTHONNOUSERSITE=1, TMP/TEMP E:/python/tmp_letture; il motore di oggi (numba spento); G+U col lapse, il riuso di Gauss acceso; il bordo da R_A 50 = 2 R_ogg; L 186.
+L'uscita: doc/referti_l2/prova_scatola5_L186_00000.txt; la lettura: doc/referti_l2/prova_scatola5_L186_lettura.txt (prova_scatola5.py lettura --L 186); la diagnosi: doc/referti_l2/scatola5_periodo_diagnosi.txt.
+
+=== LA CORSA (dall'uscita) ===
+R-SCATOLA AL 5%, LA PROVA SUL MATTONE DA SOLO (Luca 16:17): L 186; da k 0 a k 3000; il tetto 28800 s; le mappe ogni 100
+### R-SCATOLA AL 5% (a k 0): R_ogg 25.0; la distanza al lato del rombo 80.54 = 3.22 R_ogg (>= 3: True); R_A 50.0 = 2.00 R_ogg (>= 2: True); la fascia 30.54 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 93.00
+### il residuo di Gauss iniziale 3.150e-11 -> la soglia 3.150e-10 (10 volte, come il porto)
+### 3000 tick in 12744 s (4.248 s per tick); finita
+### R-SCATOLA AL 5% (alla fine): R_ogg 25.0; la distanza al lato del rombo 80.54 = 3.22 R_ogg (>= 3: True); R_A 50.0 = 2.00 R_ogg (>= 2: True); la fascia 30.54 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 93.00
+### LA MASSA (alla stessa ultima misura, k 3000): persa 4.087196e+02, uscita dal bordo 4.087196e+02, la differenza relativa 1.802e-14
+  DEVE PASSARE: Gauss sotto la soglia (3.150e-10) a ogni controllo                                                             PASSA   il massimo 3.339e-11
+  DEVE PASSARE: la massa persa = la massa uscita dal bordo entro 1e-6 relativo                                                 PASSA   1.802e-14
+ESITO: 2/2 controlli come devono; fallite []; finita; 12811 s in tutto
+
+=== IL CONTROLLO FINALE DI R-SCATOLA COL CRITERIO DI LUCA (17:52) ===
+    R_ogg al 5% alla fine 25.0 (non 26, non 27): le tre clausole RISPETTATE; il caso MARGINALE non si presenta.
+
+=== LE SOGLIE DELLA CARTA (dalla lettura) ===
+### il periodo del respiro (tick 250-1750): L 186 125.08, L 324 187.62 tick; la differenza 33.333%
+### il raggio del 5% del vuoto a k 950: L 186 25, L 324 25
+### il raggio del 5% del vuoto a k 1000: L 186 25, L 324 25
+### il raggio del 5% del vuoto a k 2000: L 186 26, L 243 26
+  DEVE PASSARE: il raggio della materia contro L 243 entro l'1% a ogni tick comune                                             PASSA   il peggio 0.005%
+  DEVE PASSARE: il picco contro L 243 entro il 2% a ogni tick comune                                                           PASSA   il peggio 0.132%
+  DEVE PASSARE: il raggio della materia contro L 324 entro l'1% a ogni tick comune                                             PASSA   il peggio 0.005%
+  DEVE PASSARE: il picco contro L 324 entro il 2% a ogni tick comune                                                           PASSA   il peggio 0.049%
+  DEVE PASSARE: il periodo del respiro contro L 324 entro il 3%                                                                ### FALLISCE   125.08 contro 187.62
+  DEVE PASSARE: il raggio del 5% del vuoto a k 950 contro L 324 entro 1 nodo                                                   PASSA   25 contro 25
+  DEVE PASSARE: il raggio del 5% del vuoto a k 1000 contro L 324 entro 1 nodo                                                  PASSA   25 contro 25
+  DEVE PASSARE: il raggio del 5% del vuoto a k 2000 contro L 243 entro 1 nodo                                                  PASSA   26 contro 26
+    (la massa: il DEVE della corsa, nel suo referto)
+ESITO: 7/8 soglie; fallite ['il periodo del respiro contro L 324 entro il 3%'] -> R-SCATOLA al 5% ### NON ADOTTATA: FERMO
+
+=== LA DIAGNOSI DEL PERIODO (DOPO il verdetto; il verdetto NON cambia) ===
+### L 186, i tick 250-1750 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n  12  il periodo   125.08 tick  l'ampiezza 5.0690e+03  (1.000 della prima)
+    n  21  il periodo    71.48 tick  l'ampiezza 4.3621e+03  (0.861 della prima)
+    n  26  il periodo    57.73 tick  l'ampiezza 4.1424e+03  (0.817 della prima)
+    n  19  il periodo    79.00 tick  l'ampiezza 4.0689e+03  (0.803 della prima)
+    n  25  il periodo    60.04 tick  l'ampiezza 3.9713e+03  (0.783 della prima)
+    n  17  il periodo    88.29 tick  l'ampiezza 3.7823e+03  (0.746 della prima)
+### L 324, i tick 250-1750 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n   8  il periodo   187.62 tick  l'ampiezza 1.3111e+04  (1.000 della prima)
+    n  17  il periodo    88.29 tick  l'ampiezza 1.2314e+04  (0.939 della prima)
+    n   3  il periodo   500.33 tick  l'ampiezza 1.1827e+04  (0.902 della prima)
+    n  13  il periodo   115.46 tick  l'ampiezza 1.1821e+04  (0.902 della prima)
+    n   1  il periodo  1501.00 tick  l'ampiezza 1.1622e+04  (0.886 della prima)
+    n   6  il periodo   250.17 tick  l'ampiezza 1.1593e+04  (0.884 della prima)
+### L 186, i tick 1000-2500 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n  17  il periodo    88.29 tick  l'ampiezza 6.2898e+03  (1.000 della prima)
+    n  22  il periodo    68.23 tick  l'ampiezza 5.5019e+03  (0.875 della prima)
+    n  26  il periodo    57.73 tick  l'ampiezza 5.3518e+03  (0.851 della prima)
+    n  19  il periodo    79.00 tick  l'ampiezza 4.9378e+03  (0.785 della prima)
+    n  20  il periodo    75.05 tick  l'ampiezza 4.7027e+03  (0.748 della prima)
+    n  13  il periodo   115.46 tick  l'ampiezza 3.4639e+03  (0.551 della prima)
+    LETTURA (mia): lo spettro non ha una riga dominante (la prima componente 1.16 volte la seconda su L 186, 1.06 su L 324; spostando la finestra di L 186 a 1000-2500 l'argmax passa a 88.29): il periodo come argmax e' un numero preso nel rumore. E' un difetto della MISURA scritta nella carta (mia), non una differenza provata fra L 186 e L 324. Le altre 7 soglie passano largamente (il raggio 0.005%, il picco 0.13% contro soglie 1% e 2%; il 5% del vuoto uguale).
+
+=== R-SCATOLA-U (Luca 16:17), LA TABELLA: doc/referti_l2/scatola5_u.txt ===
+    il mattone da solo            0.0       25.0    L 162    1.338e-08    1.294e-09      9.67%   ### SOPRA
+    il mattone da solo            0.0       25.0  L 185 *    1.338e-08    9.163e-10      6.85%   ### SOPRA  (nessun compagno: l'immagine di se' a L; il riferimento F(66), la forza piu' piccola misurat
+    il mattone da solo            0.0       25.0    L 186    1.338e-08    9.036e-10      6.75%   ### SOPRA
+    il mattone da solo            0.0       25.0    L 243    1.338e-08    4.508e-10      3.37%   SOTTO
+    il mattone da solo            0.0       25.0    L 324    1.338e-08    2.133e-10      1.59%   SOTTO
+    (* = il toro minimo di R-SCATOLA al 5% per quella scena, con le TRE clausole: la distanza al lato del rombo L sqrt(3)/4 >= max(3 R_ogg, 2 R_ogg + 30))
+    (il mattone da solo: le sei copie si ANNULLANO per simmetria, nessuna forza netta, solo una marea: il rapporto e' un riferimento CONVENZIONALE, non un blocco -- Luca)
+
+=== IL TEMPO PER TICK VERO SU L 186: 4.248 s (12744 s per 3000 tick, con 3-5 processi di calcolo sulla macchina dalle 21:00) ===
+=== GLI STATI 950 E 1000 RISCRITTI DA QUESTA CORSA: sha1 bf95772f e f392e6d9, GLI STESSI della corsa morta col riavvio (la carta sez. 10): la corsa si riproduce al bit ===
+
+### IL VERDETTO DELLA CARTA: 7/8 soglie; cade il periodo del respiro -> R-SCATOLA al 5% NON ADOTTATA: FERMO per Luca (nella ROTTA). Per delega di Luca (20:35) le fasi 1 e 3 continuano, e i loro referti lo scrivono.

@@ -26118,3 +26118,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Misurate con un audit hook** (ogni `open` del processo) in tre casi: coppia avvio+2 tick, triangolo avvio+2 tick, `verifica_coppie` fino alla scrittura finale. **I non tracciati che servono: 4, tutti presenti** -- `db/accensione_lenta/fase_F3.npz` (4beb01d9), `doc/referti_l2/mattone/triangolo_solo_serie.npz` (0abb19a0, l'unico che stava SOLO nel worktree del mattone: copiato alle 21:03), su E: `L162_MGU_03000.npz` (6bf50730) e `S162_stato_010000.npz` (7a2bdc7e). Referto `doc/referti_l2/notte_dipendenze.txt`; la carta notte sez. 5.
 - **La prova della ripresa sul triangolo (L 339): 8/8** (704c5baf); 19-23 s per tick.
 - **V-B2 e V-B2pi erano partiti alle 21:36, prima del mandato delle 21:35 arrivato dopo**: non fermati (i loro file erano gia' provati dalla R2 della coppia; l'elenco lo conferma). **Ora partono V-T120 e F-66.**
+
+### 2026-11-17 00:0x -- LA FASE 0 FINITA: R-SCATOLA AL 5% NON ADOTTATA (7/8, CADE IL PERIODO DEL RESPIRO), FERMO PER LUCA; MA IL PERIODO DELLA CARTA ERA MAL DEFINITO
+
+- `prova-scatola5-L186-b` finita alle 23:52 (3000 tick, 4.248 s per tick): DEVE 2/2; R-SCATOLA alla fine RISPETTATA (R_ogg 25.0); gli stati 950 e 1000 con lo stesso sha1 della corsa morta.
+- Le soglie: raggio, picco, 5% del vuoto PASSANO largamente; **il periodo del respiro 125.08 contro 187.62 (L 324): CADE -> NON ADOTTATA, FERMO** (la ROTTA).
+- **La diagnosi (dopo il verdetto):** lo spettro del picco non ha una riga dominante (1.16 e 1.06 il rapporto fra le prime due componenti); l'argmax e' preso nel rumore. **Errore mio nella carta**: la grandezza non era controllata prima. **Decisione di Luca**: adottare o no R-SCATOLA al 5% sulle altre 7 soglie, o rifare la misura del periodo con un metodo definito (carta nuova).
+- **La notte continua** (delega 20:35): al posto della fase 0 e' partita A-66 (23:53).

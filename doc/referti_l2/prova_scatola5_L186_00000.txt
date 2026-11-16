@@ -1,0 +1,53 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp_letture (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+R-SCATOLA AL 5%, LA PROVA SUL MATTONE DA SOLO (Luca 16:17): L 186; da k 0 a k 3000; il tetto 28800 s; le mappe ogni 100
+==================================================================================================================================
+### la scena: L 186, 34596 nodi; il centro del bordo [93, 93]; il raggio inscritto 93.0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### incollato a [92, 92] (Delta -0.000074); i raggi a k 0: 10% 24.0, 5% 25.0, 2% 44.0, 1% 44.0; il baricentro (91.53, 91.70)
+### R-SCATOLA AL 5% (a k 0): R_ogg 25.0; la distanza al lato del rombo 80.54 = 3.22 R_ogg (>= 3: True); R_A 50.0 = 2.00 R_ogg (>= 2: True); la fascia 30.54 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 93.00
+### il residuo di Gauss iniziale 3.150e-11 -> la soglia 3.150e-10 (10 volte, come il porto)
+    k     0  il picco 1.1927e+03  il raggio 12.3657  la massa 9.9501089314e+05  oltre R_A 0.000e+00  il 5% del vuoto 25.0  Gauss 3.15e-11  (66 s)
+    k   250  il picco 1.2325e+03  il raggio 12.4626  la massa 9.9500864110e+05  oltre R_A 1.991e-05  il 5% del vuoto 25.0  Gauss 3.05e-11  (935 s)
+    k   500  il picco 1.1555e+03  il raggio 12.5672  la massa 9.9497907464e+05  oltre R_A 3.004e-05  il 5% del vuoto 43.0  Gauss 3.25e-11  (1631 s)
+    k   750  il picco 1.1355e+03  il raggio 12.6602  la massa 9.9494074686e+05  oltre R_A 2.712e-05  il 5% del vuoto 25.0  Gauss 3.31e-11  (2325 s)
+    k  1000  il picco 1.1516e+03  il raggio 12.7177  la massa 9.9490399714e+05  oltre R_A 3.172e-05  il 5% del vuoto 25.0  Gauss 3.26e-11  (3201 s)
+    k  1250  il picco 1.1297e+03  il raggio 12.7286  la massa 9.9486465028e+05  oltre R_A 2.785e-05  il 5% del vuoto 25.0  Gauss 3.33e-11  (4258 s)
+    k  1500  il picco 1.1437e+03  il raggio 12.7127  la massa 9.9482695113e+05  oltre R_A 3.040e-05  il 5% del vuoto 25.0  Gauss 3.28e-11  (5359 s)
+    k  1750  il picco 1.1252e+03  il raggio 12.6644  la massa 9.9478816031e+05  oltre R_A 2.838e-05  il 5% del vuoto 25.0  Gauss 3.34e-11  (6437 s)
+    k  2000  il picco 1.1735e+03  il raggio 12.5966  la massa 9.9474988495e+05  oltre R_A 3.198e-05  il 5% del vuoto 26.0  Gauss 3.20e-11  (7663 s)
+    k  2250  il picco 1.2189e+03  il raggio 12.5381  la massa 9.9470812771e+05  oltre R_A 2.851e-05  il 5% del vuoto 25.0  Gauss 3.08e-11  (8959 s)
+    k  2500  il picco 1.2409e+03  il raggio 12.5055  la massa 9.9467262218e+05  oltre R_A 2.694e-05  il 5% del vuoto 25.0  Gauss 3.03e-11  (10244 s)
+    k  2750  il picco 1.1922e+03  il raggio 12.4956  la massa 9.9463591923e+05  oltre R_A 2.709e-05  il 5% del vuoto 25.0  Gauss 3.15e-11  (11520 s)
+    k  3000  il picco 1.2080e+03  il raggio 12.5255  la massa 9.9460217359e+05  oltre R_A 2.296e-05  il 5% del vuoto 25.0  Gauss 3.11e-11  (12809 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 3000 tick in 12744 s (4.248 s per tick); finita
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.264485e+06   2.823043e+02   3.7183e+03   2.3095e+02  8.7869e+00    8268716.403077       -0.0000       -0.0000    0.0000e+00
+        500   8.263863e+06   5.885121e+02   3.7191e+03   2.5944e+02  8.6785e+00    8268430.068184     +247.9344      -93.8710    3.1819e+01
+       1000   8.263217e+06   5.903688e+02   3.7120e+03   2.5304e+02  8.5862e+00    8267772.678175     +830.0623     -172.4181    1.0690e+02
+       1500   8.262618e+06   5.940043e+02   3.7135e+03   2.5402e+02  8.5818e+00    8267179.118444    +1419.0907     -178.0031    1.8394e+02
+       2000   8.262066e+06   6.079119e+02   3.7094e+03   2.5140e+02  8.6429e+00    8266634.945147    +2009.7106     -134.3609    2.6101e+02
+       2500   8.261584e+06   5.616721e+02   3.6918e+03   2.4548e+02  8.7018e+00    8266083.345138    +2598.2124      -85.5484    3.3827e+02
+       3000   8.261129e+06   5.061191e+02   3.6608e+03   2.4575e+02  8.6953e+00    8265541.994658    +3133.4219      -87.6044    4.0872e+02
+### R-SCATOLA AL 5% (alla fine): R_ogg 25.0; la distanza al lato del rombo 80.54 = 3.22 R_ogg (>= 3: True); R_A 50.0 = 2.00 R_ogg (>= 2: True); la fascia 30.54 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 93.00
+### LE MAPPE: 31 fotogrammi in C:\Users\lpeano\soliton_simulator\doc\referti_l2\prova_scatola5_L186_mappe_00000.npz, 7.8 MB
+### LA MASSA (alla stessa ultima misura, k 3000): persa 4.087196e+02, uscita dal bordo 4.087196e+02, la differenza relativa 1.802e-14
+  DEVE PASSARE: Gauss sotto la soglia (3.150e-10) a ogni controllo                                                             PASSA   il massimo 3.339e-11
+  DEVE PASSARE: la massa persa = la massa uscita dal bordo entro 1e-6 relativo                                                 PASSA   1.802e-14
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite []; finita; 12811 s in tutto

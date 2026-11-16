@@ -1,0 +1,26 @@
+[TIMBRO] scatola5_periodo_diagnosi.py  sha1-BYTE 4878c011  committato e pulito
+==============================================================================================================
+IL PERIODO DEL RESPIRO, LA DIAGNOSI (lo stesso calcolo di prova_scatola5.periodo; le prime 6 componenti invece del solo argmax)
+==============================================================================================================
+### L 186, i tick 250-1750 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n  12  il periodo   125.08 tick  l'ampiezza 5.0690e+03  (1.000 della prima)
+    n  21  il periodo    71.48 tick  l'ampiezza 4.3621e+03  (0.861 della prima)
+    n  26  il periodo    57.73 tick  l'ampiezza 4.1424e+03  (0.817 della prima)
+    n  19  il periodo    79.00 tick  l'ampiezza 4.0689e+03  (0.803 della prima)
+    n  25  il periodo    60.04 tick  l'ampiezza 3.9713e+03  (0.783 della prima)
+    n  17  il periodo    88.29 tick  l'ampiezza 3.7823e+03  (0.746 della prima)
+### L 324, i tick 250-1750 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n   8  il periodo   187.62 tick  l'ampiezza 1.3111e+04  (1.000 della prima)
+    n  17  il periodo    88.29 tick  l'ampiezza 1.2314e+04  (0.939 della prima)
+    n   3  il periodo   500.33 tick  l'ampiezza 1.1827e+04  (0.902 della prima)
+    n  13  il periodo   115.46 tick  l'ampiezza 1.1821e+04  (0.902 della prima)
+    n   1  il periodo  1501.00 tick  l'ampiezza 1.1622e+04  (0.886 della prima)
+    n   6  il periodo   250.17 tick  l'ampiezza 1.1593e+04  (0.884 della prima)
+### L 186, i tick 1000-2500 (1501 campioni; la risoluzione: i periodi 1501/n):
+    n  17  il periodo    88.29 tick  l'ampiezza 6.2898e+03  (1.000 della prima)
+    n  22  il periodo    68.23 tick  l'ampiezza 5.5019e+03  (0.875 della prima)
+    n  26  il periodo    57.73 tick  l'ampiezza 5.3518e+03  (0.851 della prima)
+    n  19  il periodo    79.00 tick  l'ampiezza 4.9378e+03  (0.785 della prima)
+    n  20  il periodo    75.05 tick  l'ampiezza 4.7027e+03  (0.748 della prima)
+    n  13  il periodo   115.46 tick  l'ampiezza 3.4639e+03  (0.551 della prima)
+==============================================================================================================

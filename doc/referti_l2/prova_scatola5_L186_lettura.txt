@@ -1,0 +1,27 @@
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+R-SCATOLA AL 5%, LA LETTURA (la carta, sez. 3: le soglie fissate PRIMA)
+==================================================================================================================================
+### la corsa: L 186 (C:\Users\lpeano\soliton_simulator\doc\referti_l2\prova_scatola5_L186_serie_*.npz)
+### L 243: i tick comuni 8 (250 ... 2000)
+    il raggio della materia: il peggio 0.005% (a k 2000)
+    il picco: il peggio 0.132%
+### L 324: i tick comuni 35 (50 ... 1750)
+    il raggio della materia: il peggio 0.005% (a k 1750)
+    il picco: il peggio 0.049%
+### il periodo del respiro (tick 250-1750): L 186 125.08, L 324 187.62 tick; la differenza 33.333%
+### il raggio del 5% del vuoto a k 950: L 186 25, L 324 25
+### il raggio del 5% del vuoto a k 1000: L 186 25, L 324 25
+### il raggio del 5% del vuoto a k 2000: L 186 26, L 243 26
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE PASSARE: il raggio della materia contro L 243 entro l'1% a ogni tick comune                                             PASSA   il peggio 0.005%
+  DEVE PASSARE: il picco contro L 243 entro il 2% a ogni tick comune                                                           PASSA   il peggio 0.132%
+  DEVE PASSARE: il raggio della materia contro L 324 entro l'1% a ogni tick comune                                             PASSA   il peggio 0.005%
+  DEVE PASSARE: il picco contro L 324 entro il 2% a ogni tick comune                                                           PASSA   il peggio 0.049%
+  DEVE PASSARE: il periodo del respiro contro L 324 entro il 3%                                                                ### FALLISCE   125.08 contro 187.62
+  DEVE PASSARE: il raggio del 5% del vuoto a k 950 contro L 324 entro 1 nodo                                                   PASSA   25 contro 25
+  DEVE PASSARE: il raggio del 5% del vuoto a k 1000 contro L 324 entro 1 nodo                                                  PASSA   25 contro 25
+  DEVE PASSARE: il raggio del 5% del vuoto a k 2000 contro L 243 entro 1 nodo                                                  PASSA   26 contro 26
+    (la massa: il DEVE della corsa, nel suo referto)
+==================================================================================================================================
+ESITO: 7/8 soglie; fallite ['il periodo del respiro contro L 324 entro il 3%'] -> R-SCATOLA al 5% ### NON ADOTTATA: FERMO
