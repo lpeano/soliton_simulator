@@ -1,0 +1,54 @@
+# -*- coding: utf-8 -*-
+"""### STRUMENTO DI PROVA, NON lo switch (Luca 2026-11-15 19:12, W2; la versione 2 per V4, Luca 2026-11-16 13:58: ANCHE il secondo passo, MOTORE_NUMBA_PASSO2 obbligatoria): la suite del repo con il motore numba ACCESO in ogni processo dei collaudi.
+
+Attivo SOLO se MOTORE_NUMBA_SUITE=1 (e questa cartella in PYTHONPATH, solo per quella suite). Non importa niente all'avvio: quando il processo
+ha importato da se' `motore` ed `energia_pesata`, chiama `motore_numba.accendi_numba(MOTORE_NUMBA_FILI)`. All'uscita scrive in questa cartella
+`conti_<pid>.json`: argv, se acceso, le chiamate passate al ciclo numba e i ripieghi su numpy.
+"""
+import os
+import sys
+
+if os.environ.get("MOTORE_NUMBA_SUITE") == "1":
+    import atexit
+    import builtins
+    import json
+
+    _QUI = os.path.dirname(os.path.abspath(__file__))
+    _ORIG = builtins.__import__
+    _S = {"acceso": False, "errore": None}
+
+    def _forse_accendi():
+        if _S["acceso"] or _S["errore"] or "motore" not in sys.modules or "energia_pesata" not in sys.modules:
+            return
+        _mo, _ep = sys.modules["motore"], sys.modules["energia_pesata"]
+        if not (hasattr(_mo, "Motore") and hasattr(_mo.Motore, "densita_vuoto") and hasattr(_ep, "_per_nodo") and hasattr(_ep, "termini_di_h")):
+            return                                                  # ### i moduli ancora a meta' dell'import: si aspetta (il primo giro di W2: 11 processi caduti qui)
+        try:
+            builtins.__import__ = _ORIG
+            import motore_numba as MN
+            MN.accendi_numba(int(os.environ.get("MOTORE_NUMBA_FILI", "1")))
+            MN.accendi_secondo_passo(os.environ["MOTORE_NUMBA_PASSO2"])      # ### V4 (Luca 2026-11-16 13:58): anche il secondo passo, il modo scritto da chi lancia
+            _S["acceso"] = True
+        except Exception as x:                                      # ### scritto nel conto, mai taciuto
+            _S["errore"] = repr(x)
+        finally:
+            if not _S["acceso"] and not _S["errore"]:
+                builtins.__import__ = _imp
+
+    def _imp(name, *a, **k):
+        m = _ORIG(name, *a, **k)
+        _forse_accendi()
+        return m
+
+    builtins.__import__ = _imp
+
+    def _scrivi():
+        d = {"argv": sys.argv, "acceso": _S["acceso"], "errore": _S["errore"]}
+        if "motore_numba" in sys.modules:
+            d.update(sys.modules["motore_numba"].stato())
+        try:
+            with open(os.path.join(_QUI, "conti_%d.json" % os.getpid()), "w", encoding="utf-8") as fh:
+                json.dump(d, fh)
+        except OSError:
+            pass
+    atexit.register(_scrivi)
