@@ -92,17 +92,21 @@ def tracciato(rel):
 
 def elenco(dentro):
     lib = norm(os.path.dirname(os.path.dirname(os.__file__)))
-    letti = {}
+    letti, pyc = {}, set()
     for f in dentro:
         c = os.path.basename(f)[4:-5]
         for p, mode, scrive in json.load(open(f, encoding="utf-8")):
             if scrive or norm(p).startswith(lib) or "\\notte\\DIP-" in p or os.path.isdir(p):
+                continue
+            if "__pycache__" in p:
+                pyc.add(p)
                 continue
             letti.setdefault(p, set()).add(c)
     print("=" * 130)
     print("LE DIPENDENZE DI notte.py E verifica_coppie.py DAI FILE (Luca 2026-11-16 21:35): MISURATE con un audit hook (l'evento open), fuori dalla libreria di Python (%s)" % lib)
     print("=" * 130)
     print("    %-86s %-10s %-9s %-9s %-26s %s" % ("il file", "dove", "tracciato", "sha1", "nel worktree del mattone", "i casi"))
+    print("    (i .pyc di __pycache__ letti: %d, DERIVATI dai sorgenti da Python, non dipendenze: fuori dalla tabella)" % len(pyc))
     non_tr = []
     for p in sorted(letti, key=lambda q: (not norm(q).startswith(norm(RADICE)), q.endswith(".py"), q)):
         dentro_repo = norm(p).startswith(norm(RADICE))
@@ -139,7 +143,9 @@ def elenco(dentro):
             continue
         dentro_repo = norm(p).startswith(norm(RADICE))
         rel = os.path.relpath(p, RADICE).replace("\\", "/") if dentro_repo else p
-        ex = os.path.exists(p)
+        if os.path.isdir(p):
+            continue
+        ex = os.path.isfile(p)
         print("    %-24s %-8s %-70s %s%s" % (m, d, rel, ("esiste sha1 %s" % sha1(p)) if ex else "### NON esiste", ("; tracciato %s" % ("SI" if tracciato(rel) else "NO")) if dentro_repo and ex else ""))
     print("=" * 130)
     return 0
