@@ -26044,3 +26044,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le inversioni lisciate di B2-pi:** **max `41.20` (`4350`), min `39.87` (`7750`), max `42.41` (`12350`), min `41.16` (`15850`): il periodo circa `7667` tick** *(B2 in fase: circa `9700`)*.
 - **Annotato, non una previsione:** **in antifase minimi e massimi salgono entrambi** *(circa `1.2` in `8000` tick)*; **in fase il secondo minimo era piu' alto del primo.** **Da due cicli non si dice se e' una deriva.**
 - **Nessuna corsa aperta.**
+
+### 2026-11-16 09:30 -- IL MANDATO DI 08:57 (S1 + S2, LA RIUNIONE, LA FMA ESPLICITA): LE DUE CARTE PRIMA DEL CODICE
+
+- **(A) e (B):** `doc/TASK_HISTORY/2026-11-16_commit_leggero_e_riunione.md`. **(C):** la sez. `20` del task history del clone *(`2b2d98bd`)*.
+- **A1, la mia lettura PRIMA della prova:** **la vista del disco NON si perde togliendo il `valida` di `_hook_presidi`: P-ALB** *(`_albero_era2 --collaudo`, dopo nello stesso pre-commit)* **lancia `valida` sul DISCO e pretende che passi.** **Si perde la GUARDIA davanti ai due generatori che scrivono e mettono in stage; lo misura il caso F3** *(un indice rotto solo sul disco)*.
+- ### **Un dubbio da dire subito, sul costo di A3:** **il pre-commit intero vecchio e nuovo sui `40` commit e' circa `7` ore.** **Propongo, dichiarato nella carta, di girare su ognuno TUTTI i comandi che usano `indice.py` o `_hook_presidi.py`** *(gli altri hanno gli stessi byte prima e dopo)*, **piu' il pre-commit INTERO su `3` dei `40` come controllo della riduzione.** **Se Luca vuole la prova intera, si fa.**
