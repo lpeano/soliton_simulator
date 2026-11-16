@@ -1,0 +1,42 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (Luca 15:07; AL BIT, prova_gauss.txt)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] triangolo_equilatero.py  sha1-BYTE 14ef2563  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+==================================================================================================================================
+IL PORTO GRANDE, LA COTTURA (Luca 12:04, B2): da k 0 a k 6000; COTTO se il picco medio fra le ultime due finestre di 500 cambia meno del 0.02 (ogni 1000 da 2000, al piu' 6000); Gauss sotto 1.750e-09; CALDO False
+==================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### R-SCATOLA (all'inizio): R_ogg 44.0 (il baricentro 160.53, 160.70); la distanza al lato 140.30 = 3.19 R_ogg (>= 3: True); R_A 88.0 = 2.00 R_ogg (>= 2: True); la fascia 52.3 (>= 30: True); la meta' del periodo 162.0 (accanto) -> RISPETTATA
+    k     0  il picco 1.1927e+03  il raggio 12.3657  la massa 9.9501089314e+05  oltre R_A 0.000e+00  Gauss 1.75e-10  (176 s)
+    k   250  il picco 1.2325e+03  il raggio 12.4626  la massa 9.9501089314e+05  oltre R_A 9.931e-32  Gauss 1.69e-10  (4253 s)
+    k   500  il picco 1.1555e+03  il raggio 12.5671  la massa 9.9501089314e+05  oltre R_A 1.976e-08  Gauss 1.81e-10  (8231 s)
+    k   750  il picco 1.1355e+03  il raggio 12.6600  la massa 9.9500934684e+05  oltre R_A 1.561e-05  Gauss 1.84e-10  (11931 s)
+    k  1000  il picco 1.1517e+03  il raggio 12.7175  la massa 9.9499138293e+05  oltre R_A 3.030e-05  Gauss 1.81e-10  (15847 s)
+    k  1250  il picco 1.1299e+03  il raggio 12.7283  la massa 9.9496148882e+05  oltre R_A 3.476e-05  Gauss 1.85e-10  (20169 s)
+    k  1500  il picco 1.1435e+03  il raggio 12.7122  la massa 9.9492792366e+05  oltre R_A 3.957e-05  Gauss 1.83e-10  (24780 s)
+    k  1750  il picco 1.1253e+03  il raggio 12.6638  la massa 9.9489063451e+05  oltre R_A 4.123e-05  Gauss 1.85e-10  (28901 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 1755 tick in 28804 s (16.412 s per tick); il tetto di 28800 s a k 1755 (si riparte da 1000); i giri del punto fisso: la media 4.0000
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k    materia sol  materia fuori    vuoto sol  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.264485e+06   2.823818e+02   3.7184e+03   2.3086e+02  1.2635e+01    8268716.403077       -0.0000       -0.0000    0.0000e+00
+        500   8.263863e+06   7.552399e+02   3.7191e+03   2.8549e+02  1.2524e+01    8268622.692018       +0.0001      -93.8219    7.3293e-06
+       1000   8.263217e+06   1.171521e+03   3.7120e+03   3.2911e+02  1.2429e+01    8268429.986673     +152.8853     -172.2880    1.9510e+01
+       1500   8.262618e+06   1.284390e+03   3.7131e+03   3.3198e+02  1.2424e+01    8267947.421376     +646.0097     -177.7517    8.2969e+01
+       1755   8.262315e+06   1.315409e+03   3.7117e+03   3.3301e+02  1.2450e+01    8267675.103545     +937.5435     -160.8870    1.2101e+02
+### R-SCATOLA (alla fine): R_ogg 61.0 (il baricentro 160.53, 160.70); la distanza al lato 140.30 = 2.30 R_ogg (>= 3: False); R_A 88.0 = 1.44 R_ogg (>= 2: False); la fascia 52.3 (>= 30: True); la meta' del periodo 162.0 (accanto) -> ### NON RISPETTATA
+  DEVE PASSARE: Gauss sotto la soglia di L 324 (1.750e-09) a ogni controllo                                                    PASSA   il massimo 1.855e-10
+==================================================================================================================================
+ESITO: 1/1 controlli come devono; fallite []; il tetto di 28800 s a k 1755 (si riparte da 1000); 28980 s in tutto
