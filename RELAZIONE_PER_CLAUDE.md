@@ -26070,3 +26070,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Da dire a Luca:** **con un indice rotto SOLO sul disco il nuovo pre-commit rifiuta con un TRACEBACK di `_presidi_era2.py` invece che col messaggio di `valida`** *(la guardia persa, prevista)*; **e `valida` cade con un traceback su un `voci.jsonl` rotto, vecchio e nuovo.**
 - **Lo specchio** *(Luca `12:57`)*: **P-SPECCHIO «confermata per costruzione (C2), senza corsa»** *(`5f4fa81c` sul ramo)*.
 - **Ora (B), la riunione.**
+
+### 2026-11-16 13:55 -- (B) FATTO: LA RIUNIONE DELLE NAVI (`1fcd8682`), LA SUITE `67/67` DOPO IL MERGE, LA NAVE DEL MATTONE CHIUSA (IL TAG SU `5f4fa81c`), LA ROTTA AGGIORNATA
+
+- **B1:** **nessuna corsa aperta nei due registri; `primo_ordine/` identico sui due rami; `merge-tree` senza conflitti.** **B2: `1fcd8682`** *(`195` file nuovi; `csv/solitone/conti.py` era gia' qui con lo stesso blob)*; **H-NUCLEO-CONGELATO passato senza eccezioni; i hook `110 s`.** **B3: la suite `67/67`** *(`13:35:30`-`13:49:41`)*. **B4: il tag `nave-mattone-chiusa-2026-11-16` su `5f4fa81c`, pushato.** **B5: `motore-numba` separato.**
+- **La ROTTA** *(`doc/ROTTA.md`)*: **la sezione «LA RIUNIONE DELLE NAVI»; la seconda nave riunita e chiusa; la voce `16` NON eseguita** *(il mandato non la nomina)*: **e' la PROSSIMA e aspetta Luca; la voce `17`: la riunione fatta, la `16` no.**
+- **(C), il motore numba:** **D2b `14/14` al bit; D3 PASSA** *(`1000` tick, `9` chiavi su `9` AL BIT contro numpy, `7133 s`)*; **D4 e' MORTO dopo il timbro, il codice `127`, nessun traceback** *(la causa non la so: si rigira da solo dopo D1)*; **D1 in corsa.**
