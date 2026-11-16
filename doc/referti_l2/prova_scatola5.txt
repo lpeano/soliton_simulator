@@ -70,3 +70,8 @@ ESITO: 7/8 soglie; fallite ['il periodo del respiro contro L 324 entro il 3%'] -
 === GLI STATI 950 E 1000 RISCRITTI DA QUESTA CORSA: sha1 bf95772f e f392e6d9, GLI STESSI della corsa morta col riavvio (la carta sez. 10): la corsa si riproduce al bit ===
 
 ### IL VERDETTO DELLA CARTA: 7/8 soglie; cade il periodo del respiro -> R-SCATOLA al 5% NON ADOTTATA: FERMO per Luca (nella ROTTA). Per delega di Luca (20:35) le fasi 1 e 3 continuano, e i loro referti lo scrivono.
+
+=== LA DECISIONE DI LUCA (2026-11-17 00:20), POST-HOC E DICHIARATA ===
+R-SCATOLA al 5% ADOTTATA. La soglia del periodo del respiro (3%) era MAL POSTA: la finestra di 1501 tick e' lunga quanto il respiro; lo spettro senza riga dominante (1.06-1.16); 125.08 e 187.62 sono caselle della FFT (1501/12 e 1501/8): errore della carta e del guardiano n.182.
+Al suo posto, il CONFRONTO DIRETTO DELLE SERIE sui tick comuni (dalla lettura, sopra): il picco, la differenza massima 0.132% contro L 243 (8 tick comuni) e 0.049% contro L 324 (35 tick comuni); il raggio della materia 0.005% contro entrambi; il raggio del 5% del vuoto uguale (25/25 a k 950 e 1000 con L 324, 26/26 a k 2000 con L 243).
+Il verdetto della carta resta scritto com'era, sopra (7/8, NON ADOTTATA): la decisione lo sostituisce, non lo cancella.

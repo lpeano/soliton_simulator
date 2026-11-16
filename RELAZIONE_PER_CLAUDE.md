@@ -26126,3 +26126,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La diagnosi (dopo il verdetto):** lo spettro del picco non ha una riga dominante (1.16 e 1.06 il rapporto fra le prime due componenti); l'argmax e' preso nel rumore. **Errore mio nella carta**: la grandezza non era controllata prima. **Decisione di Luca**: adottare o no R-SCATOLA al 5% sulle altre 7 soglie, o rifare la misura del periodo con un metodo definito (carta nuova).
 - **La notte continua** (delega 20:35): al posto della fase 0 e' partita A-66 (23:53).
 - **00:0x -- V-T120 a k 250: R-SCATOLA al 5% NON rispettata** (R_ogg al 5% da 47 a 59; distanza al lato 2.49 R_ogg, R_A 1.65 R_ogg): la corsa continua (N5), il referto lo scrivera'. Le coppie restano a 42. A-66 partita alle 23:53 (R-SCATOLA a k 0 rispettata).
+
+### 2026-11-17 00:2x -- LE DECISIONI DI LUCA (00:20): R-SCATOLA AL 5% ADOTTATA (POST-HOC DICHIARATO); V-T120 FERMATA, IL POSTO A F-51
+
+- **R-SCATOLA al 5% ADOTTATA**: la soglia del periodo era mal posta (le caselle della FFT 1501/12 e 1501/8; errore della carta e del guardiano n.182); al suo posto il confronto diretto delle serie (il picco 0.049-0.132%, il raggio 0.005%, il 5% del vuoto uguale). Nella ROTTA col verdetto della carta accanto; il bordo delle scene future da 2 R_ogg + 2 nodi.
+- **V-T120 fermata** (la voce chiusa alle 00:21; salva ed esce alla tappa successiva); il posto a F-51. Il triangolo si rilancia con un mandato, su un toro scelto dopo la misura della crescita di R_ogg (il piano).

@@ -50,6 +50,7 @@
   - **P-V4** *(V-B2pi, la piu' a rischio)*: **la distanza ESCE dalla fascia `38.5`-`42.5` in cui stava su `L 162`** *(l'equilibrio intorno a `40` era in parte della scatola)*. **Cade se resta nella fascia fino a `10000`.**
   - **P-V5** *(V-T120)*: **resta legato** *(il lato con un minimo fra `30` e `35`)*; **il giro `+1` in tutte le `12` a ogni controllo; la forma gira in verso antiorario; B al centro negativo.**
   - **P-V6** *(l'IPOTESI DI LUCA sulla scatola, `2026-11-15` `18:43`)*: **il GUSCIO del vuoto** *(la m=3 di `|phi - phi0|` fra `30` e `45` nodi)* **NON resta fermo: a `k 12000` ha girato almeno un TERZO della rotazione dei lobi** *(su `L 162`: `1`-`2` gradi contro `+98`)*. **Cade se gira meno di un terzo.**
+- ### **V-T120 FERMATA** *(Luca `2026-11-17` `00:20`)*: **R-SCATOLA al `5%` non rispettata da `k 250`** *(R_ogg al `5%` da `47` a `59`: la distanza al lato `2.49` R_ogg, R_A `1.65` R_ogg)*; **gli stati restano su E:** *(`E:/soliton_simulator/notte/V-T120`)*; **il posto va a F-51.** **Il triangolo si RILANCIA piu' avanti, con un mandato di Luca, su un toro scelto DOPO aver misurato quanto cresce R_ogg al `5%` del triangolo** *(dalle serie della corsa fermata e da quelle di `L 162`)*.
 - **Le letture alla fine di ognuna: le stesse dei referti di `L 162`** *(la serie, le mappe, la girandola, B, gli anelli)*, **con lo stesso codice.**
 
 ## I COSTI *(la stima del mandato; i numeri veri dalla fase `0` nella fase `2`)*
