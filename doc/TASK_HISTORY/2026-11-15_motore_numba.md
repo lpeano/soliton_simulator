@@ -211,3 +211,9 @@
 2. Commit e push; D2b `--fma esplicita` -> `doc/referti_l2/motore_numba_d2b_esplicita.txt`.
 3. Se `14/14`: D1, D3, D4 con `--fma esplicita`; i tempi (a) / (c) a `2` fili in una finestra ferma.
 4. Il referto `doc/referti_l2/motore_numba.txt` (la sezione FMA esplicita); la proposta o il solo primo passo; FERMO.
+
+## 21. D2b COL MODO `esplicita`: LA COMPILAZIONE CADE (UN MIO ERRORE NELL'INTRINSECO); IL BRACCIO 0 (`--fma no`) IDENTICO A IERI *(`0d7cfa0f`; `10:04:59`-`10:06:11`)*
+
+- **Il braccio 0** *(`doc/referti_l2/motore_numba_d2b_braccio0.txt`)*: **i `14` confronti con le STESSE differenze massime di `motore_numba_d2b.txt`** *(da `1.701e-16` a `2.578e-16`, riga per riga)*: **il modo `semplice`, ora attraverso l'aiutante in linea, non e' cambiato.**
+- ### **`--fma esplicita`: CADE alla compilazione** *(`doc/referti_l2/motore_numba_d2b_esplicita.txt`)*: **`math.fma` non lo compila numba** *(la via e' passata all'intrinseco: lo dice il fatto che l'errore e' nell'intrinseco)*; **l'intrinseco: `RuntimeError: Intrinsic called with incompatible signature ... call double @llvm.fma.f64(double, double, double)`.**
+- ### **LA CAUSA, mia:** **`builder.module.declare_intrinsic("llvm.fma", [ir.DoubleType()])` SENZA il tipo della funzione: llvmlite non ricava la firma a tre argomenti.** **NON e' il caso «numba non compila ne' `math.fma` ne' l'intrinseco» della carta** *(sez. `20`)*: **l'intrinseco non era scritto giusto.** ### **La cura, un commit a se' con la sua suite:** **`fnty = ir.FunctionType(double, [double, double, double])`.**
