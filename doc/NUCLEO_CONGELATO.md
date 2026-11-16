@@ -80,6 +80,6 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 | `primo_ordine/termini/camm_grover_vuoto.py` | `8f88bc20` | `8f88bc20` |
 | `primo_ordine/termini/camm_spostamento.py` | `d58a753f` | `d58a753f` |
 | `primo_ordine/termini/camm_spostamento_vuoto.py` | `a58a55ea` | `a58a55ea` |
-| `primo_ordine/motore_numba.py` | *(non c'e')* | `a43a3a3c` **(NUOVO; `40d05c43` a `e1df85c3`, `8c7bc873` a `330d3718`, `eea1d3b0` a `5b33b7f5` il secondo passo W3, `92113af2` a `c87fad26` l'argomento `fma` di H1, poi il modo `esplicita`: la FMA vera, Luca 2026-11-16 08:57)** |
+| `primo_ordine/motore_numba.py` | *(non c'e')* | `61a3e756` **(NUOVO; `40d05c43` a `e1df85c3`, `8c7bc873` a `330d3718`, `eea1d3b0` a `5b33b7f5` il secondo passo W3, `92113af2` a `c87fad26` l'argomento `fma` di H1, `a43a3a3c` a `0d7cfa0f` il modo `esplicita`: la FMA vera, Luca 2026-11-16 08:57, poi la firma dell'intrinseco)** |
 
 - **Gli altri `11` file della tabella: IDENTICI** *(`sha1-BYTE` misurati nel clone).* **Il guardiano verifica questo ramo contro questa tabella.**

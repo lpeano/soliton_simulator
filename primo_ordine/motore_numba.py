@@ -180,7 +180,9 @@ def _fma_numba():
         sig = types.float64(types.float64, types.float64, types.float64)
 
         def codegen(context, builder, signature, args):
-            f = builder.module.declare_intrinsic("llvm.fma", [ir.DoubleType()])
+            # ### la FIRMA a tre argomenti si scrive: senza, llvmlite dichiara una firma sbagliata (D2b del 2026-11-16, 7fa1094c)
+            d = ir.DoubleType()
+            f = builder.module.declare_intrinsic("llvm.fma", [d], ir.FunctionType(d, [d, d, d]))
             return builder.call(f, args)
         return sig, codegen
 
