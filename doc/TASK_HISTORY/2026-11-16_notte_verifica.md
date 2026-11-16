@@ -65,3 +65,8 @@
   - `E:/soliton_simulator/mattone/L162_MGU_03000.npz` *(il mattone cotto di `L 162`, sha1 `6bf50730`; su E:, fuori dai repo)*;
   - `E:/soliton_simulator/stati/S162/S162_stato_010000.npz` *(sha1 `7a2bdc7e`; su E:)*.
 - **I file NOMINATI nei sorgenti che i tre casi non aprono:** rami non toccati o file che si SCRIVONO *(gli esiti di `triangolo_120`, `porto`)*; **nessuno manca su un cammino che la notte percorre.** **Il verdetto: nessuna corsa resta ferma per un file.** *(Il caso `verifica` ha fatto il tick `1` ed e' arrivato alla SCRITTURA finale, bloccata: le sue letture sono tutte.)*
+
+## 6. IL DIARIO, SEGUE
+
+- **`23:52` la fase 0 finita** *(la carta scatola5 sez. `12`, `abd5b9c3`: R-SCATOLA al `5%` NON adottata per la carta, il periodo mal definito; FERMO per Luca sulla regola)*; **`23:53` A-66 nel posto libero** *(R-SCATOLA a `k 0` RISPETTATA: R_ogg `57.0`, `3.05` R_ogg, R_A `2.04` R_ogg, fascia `58.07`; uguale a F-66)*.
+- ### **V-T120 a `k 250`: R-SCATOLA al `5%` NON RISPETTATA** *(N5: la corsa CONTINUA, il referto lo scrive)*: **R_ogg al `5%` da `47.0` a `k 0` a `59.0` a `k 250`** *(la distanza al lato `2.49` R_ogg, R_A `1.65` R_ogg)*. **Le coppie restano a `42.0`** *(V-B2 a `250` e `500`, V-B2pi a `250`)*. **Lettura possibile** *(da verificare, non un risultato)*: **la deformazione del vuoto del triangolo si allarga nei primi tick** *(il guscio di P-V6?)*; **con la regola al `5%` il toro `L 339` sarebbe troppo piccolo per V-T120 gia' a `k 250`.** Si guarda alle prossime tappe.

@@ -26125,3 +26125,4 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - Le soglie: raggio, picco, 5% del vuoto PASSANO largamente; **il periodo del respiro 125.08 contro 187.62 (L 324): CADE -> NON ADOTTATA, FERMO** (la ROTTA).
 - **La diagnosi (dopo il verdetto):** lo spettro del picco non ha una riga dominante (1.16 e 1.06 il rapporto fra le prime due componenti); l'argmax e' preso nel rumore. **Errore mio nella carta**: la grandezza non era controllata prima. **Decisione di Luca**: adottare o no R-SCATOLA al 5% sulle altre 7 soglie, o rifare la misura del periodo con un metodo definito (carta nuova).
 - **La notte continua** (delega 20:35): al posto della fase 0 e' partita A-66 (23:53).
+- **00:0x -- V-T120 a k 250: R-SCATOLA al 5% NON rispettata** (R_ogg al 5% da 47 a 59; distanza al lato 2.49 R_ogg, R_A 1.65 R_ogg): la corsa continua (N5), il referto lo scrivera'. Le coppie restano a 42. A-66 partita alle 23:53 (R-SCATOLA a k 0 rispettata).
