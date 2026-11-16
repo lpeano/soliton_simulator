@@ -6,7 +6,8 @@ r"""**R-SCATOLA-U, UN CONTO** *(Luca `2026-11-16` `16:17`; la carta `doc/TASK_HI
 **Le forze:** `d''` dalla riga «sui tick `250`-`2000`» e `d0` dalla riga «d0 VERA» di tre referti delle coppie *(letti dal file)*.
 **La legge di coda:** `|F| = A d^(-n)`: la potenza LONTANA sui punti `51`-`66` *(per `d >= 51`)*, la potenza VICINA sui punti `35`-`51` *(per `d < 51`)*.
 **Le copie:** una scena di estensione `d` su un toro `L`: l'immagine piu' vicina del compagno a `L - d`; il rapporto `F(L - d) / F(d)` sotto il `5%`.
-**I tori minimi di R-SCATOLA al 5%:** `R_ogg = r_scena + 25` *(il raggio dell'oggetto: meta' della coppia, il raggio circoscritto del triangolo; piu' il raggio del 5% del vuoto del mattone)*; `L = 6 R_ogg` *(il raggio inscritto `L/2` almeno `3 R_ogg`)*, intero per eccesso.
+**I tori minimi di R-SCATOLA al 5%:** `R_ogg = r_scena + 25` *(il raggio dell'oggetto: meta' della coppia, il raggio circoscritto del triangolo; piu' il raggio del 5% del vuoto del mattone)*; **le TRE clausole** *(la correzione di Luca `16:58`, `porto.regola`)*: **la distanza dal centro al LATO del rombo `L sqrt(3)/4` almeno `max(3 R_ogg, 2 R_ogg + 30)`** *(`R_A = 2 R_ogg`, la fascia `>= 30`)*, `L` intero per eccesso. *(La prima versione usava `L = 6 R_ogg`, col raggio inscritto `L/2`: sbagliato, Luca `17:3x`.)*
+**Il mattone da solo** *(Luca)*: **le sei copie si annullano per simmetria** *(nessuna forza netta, solo una marea)*: **il rapporto e' un riferimento CONVENZIONALE, non un blocco.**
 """
 import math
 import os
@@ -63,15 +64,17 @@ def main():
     print("    %-24s %8s %10s %8s %12s %12s %10s   %s" % ("la scena", "d", "R_ogg", "L min", "F(d)", "F(L - d)", "rapporto", ""))
     for nome, d, rs, nota in scene:
         Rg = rs + R5_MATTONE
-        Lm = int(math.ceil(6.0 * Rg))
-        for L in sorted(set([Lm, 162, 243, 324])):
+        lato_min = max(3.0 * Rg, 2.0 * Rg + 30.0)
+        Lm = int(math.ceil(lato_min * 4.0 / math.sqrt(3.0)))
+        for L in sorted(set([Lm, 162, 243, 324] + ([186] if d == 0.0 else []))):
             if d == 0.0:
                 fd, fc = F(d3), F(float(L))
             else:
                 fd, fc = F(d), F(L - d)
             q = fc / fd
             print("    %-24s %8.1f %10.1f %8s %12.3e %12.3e %9.2f%%   %s%s" % (nome, d, Rg, ("L %d" % L) + (" *" if L == Lm else ""), fd, fc, 100 * q, "SOTTO" if q < SOGLIA else "### SOPRA", ("  (" + nota + ")") if L == Lm else ""))
-    print("    (* = il toro minimo di R-SCATOLA al 5% per quella scena)")
+    print("    (* = il toro minimo di R-SCATOLA al 5% per quella scena, con le TRE clausole: la distanza al lato del rombo L sqrt(3)/4 >= max(3 R_ogg, 2 R_ogg + 30))")
+    print("    (il mattone da solo: le sei copie si ANNULLANO per simmetria, nessuna forza netta, solo una marea: il rapporto e' un riferimento CONVENZIONALE, non un blocco -- Luca)")
     print("=" * 130)
     return 0
 
