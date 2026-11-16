@@ -1,0 +1,79 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] specchio_carta.py  sha1-BYTE 8ca8f96b  committato e pulito
+==================================================================================================================================
+LA CARTA DELLO SPECCHIO, C1 E C2 (Luca 2026-11-16 10:43; solo calcoli); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### LO SPECCHIO: la retta a 30.0000 gradi per il nodo (73, 68) (il vertice A a k 0 = (73.43, 67.62)); lo scarto massimo della mappa dei nodi 4.26e-14
+    il vertice A (73.43, 67.62) -> (73.43, 68.81)
+    il vertice B (112.65, 67.64) -> (112.65, 108.01)
+    il vertice C (112.68, 106.93) -> (112.68, 68.74)
+    il centro del bordo c0 (98.874, 81.363) -> (98.874, 80.511): la distanza 0.851 nodi
+### gli archi della passeggiata: 78732, rovesciati 26244
+    i versori: max |n[h'] - M n[h]| (nel piano, z uguale) 3.331e-16; max |n[h'] - M n[h]| con z -> -z 3.331e-16
+    il bordo g_e riflesso contro g_e: max |differenza| 1.909e-03 (max g_e 3.000e-02)
+### C1: phi_v riflesso (per estremita') contro:
+    phi_v                                la differenza relativa 2.000e+00
+    -phi_v                               la differenza relativa 1.225e-16
+    conj(phi_v)                          la differenza relativa 2.000e+00
+    -conj(phi_v)                         la differenza relativa 1.225e-16
+    e^{i alpha} phi_v, alpha = 3.141593  la differenza relativa 2.449e-16
+### C2: gli archi del campo 78732, rovesciati 26244; lo stato triangolo_t120_00500 (t 60500); {'Lambda': (26244,), 'h_int': (26244,), 'phi_h': (157464,), 'psi': (26244, 2), 'psi_h': (157464, 2), 'rho': (26244,)}
+    il confronto si stampa su TUTTO il toro e, a parte, entro 40 nodi dal baricentro (99.58, 80.73) (lontano dal bordo, che non e' simmetrico)
+    un tick dallo stato vero: 5.1 s
+    T I             coniugio False phi +1 A +1: dopo 1 tick psi_h 1.336e-01 (entro 40: 1.336e-01), phi_h 2.301e-02 (1.329e-04), A 5.262e-08
+    T I             coniugio False phi +1 A -1: dopo 1 tick psi_h 1.336e-01 (entro 40: 1.336e-01), phi_h 2.301e-02 (1.368e-04), A 2.239e-06
+    T I             coniugio False phi -1 A +1: dopo 1 tick psi_h 1.336e-01 (entro 40: 1.336e-01), phi_h 1.759e-04 (1.329e-04), A 5.262e-08
+    T I             coniugio False phi -1 A -1: dopo 1 tick psi_h 1.336e-01 (entro 40: 1.336e-01), phi_h 1.804e-04 (1.368e-04), A 2.239e-06
+    T I             coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.158e+00 (entro 40: 1.158e+00), phi_h 1.138e+00 (1.138e+00), A 2.170e-06
+    T I             coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.158e+00 (entro 40: 1.158e+00), phi_h 1.138e+00 (1.138e+00), A 4.797e-07
+    T I             coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.158e+00 (entro 40: 1.158e+00), phi_h 1.138e+00 (1.138e+00), A 2.170e-06
+    T I             coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.158e+00 (entro 40: 1.158e+00), phi_h 1.138e+00 (1.138e+00), A 4.797e-07
+    T sigma_x       coniugio False phi +1 A +1: dopo 1 tick psi_h 6.717e-02 (entro 40: 6.717e-02), phi_h 2.301e-02 (1.995e-04), A 2.762e-08
+    T sigma_x       coniugio False phi +1 A -1: dopo 1 tick psi_h 6.717e-02 (entro 40: 6.717e-02), phi_h 2.301e-02 (1.995e-04), A 2.259e-06
+    T sigma_x       coniugio False phi -1 A +1: dopo 1 tick psi_h 6.717e-02 (entro 40: 6.717e-02), phi_h 1.995e-04 (1.995e-04), A 2.762e-08
+    T sigma_x       coniugio False phi -1 A -1: dopo 1 tick psi_h 6.717e-02 (entro 40: 6.717e-02), phi_h 1.995e-04 (1.995e-04), A 2.259e-06
+    T sigma_x       coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.186e-06
+    T sigma_x       coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.731e-07
+    T sigma_x       coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.186e-06
+    T sigma_x       coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.731e-07
+    T sigma_y       coniugio False phi +1 A +1: dopo 1 tick psi_h 1.163e-01 (entro 40: 1.163e-01), phi_h 2.301e-02 (1.726e-04), A 4.815e-08
+    T sigma_y       coniugio False phi +1 A -1: dopo 1 tick psi_h 1.163e-01 (entro 40: 1.163e-01), phi_h 2.301e-02 (1.805e-04), A 2.223e-06
+    T sigma_y       coniugio False phi -1 A +1: dopo 1 tick psi_h 1.163e-01 (entro 40: 1.163e-01), phi_h 2.899e-04 (1.726e-04), A 4.815e-08
+    T sigma_y       coniugio False phi -1 A -1: dopo 1 tick psi_h 1.163e-01 (entro 40: 1.163e-01), phi_h 2.981e-04 (1.805e-04), A 2.223e-06
+    T sigma_y       coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.161e+00 (entro 40: 1.161e+00), phi_h 1.138e+00 (1.138e+00), A 2.164e-06
+    T sigma_y       coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.161e+00 (entro 40: 1.161e+00), phi_h 1.138e+00 (1.138e+00), A 4.830e-07
+    T sigma_y       coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.161e+00 (entro 40: 1.161e+00), phi_h 1.138e+00 (1.138e+00), A 2.164e-06
+    T sigma_y       coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.161e+00 (entro 40: 1.161e+00), phi_h 1.138e+00 (1.138e+00), A 4.830e-07
+    T sigma_z       coniugio False phi +1 A +1: dopo 1 tick psi_h 1.164e-01 (entro 40: 1.164e-01), phi_h 2.301e-02 (1.684e-04), A 4.855e-08
+    T sigma_z       coniugio False phi +1 A -1: dopo 1 tick psi_h 1.164e-01 (entro 40: 1.164e-01), phi_h 2.301e-02 (1.762e-04), A 2.243e-06
+    T sigma_z       coniugio False phi -1 A +1: dopo 1 tick psi_h 1.164e-01 (entro 40: 1.164e-01), phi_h 1.684e-04 (1.684e-04), A 4.855e-08
+    T sigma_z       coniugio False phi -1 A -1: dopo 1 tick psi_h 1.164e-01 (entro 40: 1.164e-01), phi_h 1.762e-04 (1.762e-04), A 2.243e-06
+    T sigma_z       coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.155e+00 (entro 40: 1.155e+00), phi_h 1.138e+00 (1.138e+00), A 2.181e-06
+    T sigma_z       coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.155e+00 (entro 40: 1.155e+00), phi_h 1.138e+00 (1.138e+00), A 4.761e-07
+    T sigma_z       coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.155e+00 (entro 40: 1.155e+00), phi_h 1.138e+00 (1.138e+00), A 2.181e-06
+    T sigma_z       coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.155e+00 (entro 40: 1.155e+00), phi_h 1.138e+00 (1.138e+00), A 4.761e-07
+    T sigma.l       coniugio False phi +1 A +1: dopo 1 tick psi_h 7.747e-06 (entro 40: 1.403e-15), phi_h 2.301e-02 (4.699e-15), A 2.280e-16
+    T sigma.l       coniugio False phi +1 A -1: dopo 1 tick psi_h 1.821e-04 (entro 40: 1.821e-04), phi_h 2.301e-02 (7.870e-06), A 2.256e-06
+    T sigma.l       coniugio False phi -1 A +1: dopo 1 tick psi_h 7.747e-06 (entro 40: 1.403e-15), phi_h 5.490e-05 (4.699e-15), A 2.280e-16
+    T sigma.l       coniugio False phi -1 A -1: dopo 1 tick psi_h 1.821e-04 (entro 40: 1.821e-04), phi_h 5.490e-05 (7.870e-06), A 2.256e-06
+    T sigma.l       coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.181e-06
+    T sigma.l       coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.751e-07
+    T sigma.l       coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.181e-06
+    T sigma.l       coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.751e-07
+    T sigma.l_perp  coniugio False phi +1 A +1: dopo 1 tick psi_h 1.343e-01 (entro 40: 1.343e-01), phi_h 2.301e-02 (2.430e-04), A 5.279e-08
+    T sigma.l_perp  coniugio False phi +1 A -1: dopo 1 tick psi_h 1.343e-01 (entro 40: 1.343e-01), phi_h 2.301e-02 (2.454e-04), A 2.226e-06
+    T sigma.l_perp  coniugio False phi -1 A +1: dopo 1 tick psi_h 1.343e-01 (entro 40: 1.343e-01), phi_h 2.754e-04 (2.430e-04), A 5.279e-08
+    T sigma.l_perp  coniugio False phi -1 A -1: dopo 1 tick psi_h 1.343e-01 (entro 40: 1.343e-01), phi_h 2.836e-04 (2.454e-04), A 2.226e-06
+    T sigma.l_perp  coniugio True  phi +1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.170e-06
+    T sigma.l_perp  coniugio True  phi +1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.810e-07
+    T sigma.l_perp  coniugio True  phi -1 A +1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 2.170e-06
+    T sigma.l_perp  coniugio True  phi -1 A -1: dopo 1 tick psi_h 1.159e+00 (entro 40: 1.159e+00), phi_h 1.138e+00 (1.138e+00), A 4.810e-07
+### I MIGLIORI su 10 tick:
+    T sigma.l       coniugio False phi +1 A +1: dopo 10 tick psi_h 7.374e-05 (entro 40: 3.510e-14), phi_h 1.961e-01 (1.406e-14), A 1.172e-09
+    T sigma.l       coniugio False phi -1 A +1: dopo 10 tick psi_h 7.374e-05 (entro 40: 3.510e-14), phi_h 5.198e-04 (1.477e-14), A 1.172e-09
+### entro 40 nodi dal baricentro, il migliore: T sigma.l, coniugio False, phi +1, A +1: 3.510e-14
+----------------------------------------------------------------------------------------------------------------------------------
+### C2, LA LETTURA (fissata prima: esiste se dopo 10 tick la differenza relativa < 1e-10): NON ESISTE FRA QUESTI CANDIDATI: il migliore T sigma.l, coniugio False, phi -1, A +1 da' 5.198e-04
+    (il tempo 407 s)
+==================================================================================================================================
