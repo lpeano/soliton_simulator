@@ -1,0 +1,10 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DEL METODO (MG, S7): il francobollo del mattone (E:\soliton_simulator\mattone\MG_05000.npz) su L 162 nella scena di S162; 1000 tick coi campi pieni; il respiro del mattone negli ultimi 1000 tick 0.0711
+==================================================================================================================================
+### il francobollo: R_t 32.0 (l'anello del vuoto 5); 4693 nodi; il centro d'origine (41, 41); E_sol = E(mattone) - E(vuoto fresco a L 81) = 8.279771e+06
+### incollato a [80, 80] (S162: il solitone a (81.58, 81.34)); il salto di energia all'incollatura E - E(vuoto 162) - E_sol: allineato 1.118239e+01 (Delta 0.000139), NON allineato 1.118238e+01
+----------------------------------------------------------------------------------------------------------------------------------
+### 1000 tick in 2471 s: il centro si sposta al piu' di 0.0785 nodi (la soglia 0.2); il respiro 0.1068 contro il mattone 0.0711 (il rapporto 1.502; la tolleranza 0.25)
+==================================================================================================================================
+ESITO: il controllo del metodo ### FALLISCE

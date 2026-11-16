@@ -1,0 +1,21 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] triangolo_flussi.py  sha1-BYTE 4f282062  committato e pulito
+==================================================================================================================================
+LE FRECCE DEL FLUSSO (Luca 01:58): la sorgente J_a di _u1_prototipo (fuori dal nucleo), un spostamento_trasporto a frazione 0.5 su una COPIA di ogni stato, U dal campo, il cs della scena
+==================================================================================================================================
+### (T-fase)
+    k    0: somma J_a -1.191e+02 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.2502e+00 al nodo 18243 (m1 112, m2 99); la somma dei moduli 4.9882e+03
+    k  500: somma J_a -1.135e+02 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.7035e+00 al nodo 11236 (m1 69, m2 58); la somma dei moduli 5.7804e+03
+    k 1000: somma J_a -1.080e+02 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 6.1917e+00 al nodo 11577 (m1 71, m2 75); la somma dei moduli 5.9750e+03
+    k 1500: somma J_a -9.032e+01 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.9198e+00 al nodo 19545 (m1 120, m2 105); la somma dei moduli 5.6025e+03
+    k 2000: somma J_a -6.689e+01 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.8324e+00 al nodo 17068 (m1 105, m2 58); la somma dei moduli 5.6685e+03
+### (T-sfasati)
+    k    0: somma J_a -9.264e+01 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.3896e+00 al nodo 19552 (m1 120, m2 112); la somma dei moduli 4.8830e+03
+    k  500: somma J_a +2.494e+01 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 5.2089e+00 al nodo 13354 (m1 82, m2 70); la somma dei moduli 5.3273e+03
+    k 1000: somma J_a +7.904e+01 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 4.7796e+00 al nodo 18207 (m1 112, m2 63); la somma dei moduli 5.4817e+03
+    k 1500: somma J_a +1.417e+02 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 5.3792e+00 al nodo 11885 (m1 73, m2 59); la somma dei moduli 5.4923e+03
+    k 2000: somma J_a +1.444e+02 (la materia che lascia le code degli archi; non e' zero per forza); |J| per nodo il massimo 5.2992e+00 al nodo 11073 (m1 68, m2 57); la somma dei moduli 5.8040e+03
+### C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_flussi.npz: 4.45 MB
+==================================================================================================================================

@@ -1,0 +1,19 @@
+[TIMBRO] mattone.py  sha1-BYTE e0ea8957  !! MODIFICATO rispetto a HEAD (blob-git 40cd47f7) -- i byte che girano NON sono quelli committati
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] s5_coppia_lapse.py  sha1-BYTE 344015e0  committato e pulito
+[TIMBRO] tick_lapse.py  sha1-BYTE c3476292  committato e pulito
+[TIMBRO] _u1_oggi.py  sha1-BYTE 36914c8d  committato e pulito
+[TIMBRO] bordo.py  sha1-BYTE 6962e206  committato e pulito
+[TIMBRO] test_mattone.py  sha1-BYTE c64c1058  committato e pulito
+========================================================================================================================
+IL COLLAUDO DEL MATTONE: TBS a 10000 (L 81), S162 (L 162); 20 tick; rho_c 227058.574864
+========================================================================================================================
+  DEVE PASSARE: (MG) la rampa spenta: 20 tick del mattone = tick_lapse.tick AL BIT (col bordo)                       PASSA   diverse: []
+  DEVE PASSARE: (MU) e = 0: 20 tick del mattone = accensione.tick AL BIT (col bordo)                                 PASSA   diverse: []
+### il francobollo di TBS a 10000: R_t 28.0 (l'anello del vuoto 1); 3697 nodi; il centro (41, 41); il |dphi| medio per anello: 11.6 11.7 11.5 10.8 9.66 7.81 4.5 4.94 9.49 8.65 7.6 7.76 7.53 7.21 6.69 6.58 6.69 6.2 3.31 0.795 0.349 0.294 0.28 0.268 0.253 0.236 0.244 0.241 0.228 0.22 0.206 0.184 0.159 0.135
+  DEVE PASSARE: il francobollo ritagliato e incollato SENZA spostarlo nello stesso stato: dentro R_t lo stato entro  PASSA   psi 0.00e+00, phi 8.86e-20; Delta 1.3297191128460154e-19
+### su L 162 a [80, 80] (tick 60000): il salto di energia E - E(vuoto) - E_sol: allineato -5.254778e+01 (Delta 0.000074), non allineato -5.254783e+01
+  DEVE FALLIRE: il francobollo SENZA allineare la fase del vuoto: il salto di energia non maggiore di quello allinea ### FALLISCE   5.255e+01 contro 5.255e+01
+========================================================================================================================
+ESITO: 4/4 controlli come devono; fallite: 0 []

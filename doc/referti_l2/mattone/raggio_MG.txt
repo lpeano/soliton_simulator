@@ -1,0 +1,12 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+==============================================================================================================
+IL RAGGIO DI (MG) DAGLI STATI SALVATI (L3; nessuna corsa): dentro R 28; N al centro dalla legge 1/(1 + rho max / rho_c), rho_c 227058.574864 (dichiarato: (MG) non salvava cs)
+==============================================================================================================
+    k     0  r 0.000000  il picco 3.3497e+03  il raggio 8.2487  N_eff al centro (la legge) 1.000000  la massa 9.9694486239e+05
+    k  1000  r 0.146447  il picco 2.9094e+03  il raggio 8.5691  N_eff al centro (la legge) 0.998147  la massa 9.9683375212e+05
+    k  2000  r 0.500000  il picco 1.8973e+03  il raggio 9.7239  N_eff al centro (la legge) 0.995857  la massa 9.9671878267e+05
+    k  3000  r 0.853553  il picco 1.5443e+03  il raggio 10.6067  N_eff al centro (la legge) 0.994234  la massa 9.9661343318e+05
+    k  4000  r 1.000000  il picco 1.5103e+03  il raggio 10.8506  N_eff al centro (la legge) 0.993393  la massa 9.9649665090e+05
+    k  5000  r 1.000000  il picco 1.3880e+03  il raggio 11.2680  N_eff al centro (la legge) 0.993924  la massa 9.9636355756e+05
+==============================================================================================================

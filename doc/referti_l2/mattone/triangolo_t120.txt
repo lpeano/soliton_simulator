@@ -1,0 +1,81 @@
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] triangolo_equilatero.py  sha1-BYTE 14ef2563  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+==================================================================================================================================
+IL TRIANGOLO A 120 GRADI, LA FASE 1 (Luca 10:29, B3): il francobollo E:\soliton_simulator\mattone\L162_MGU_03000.npz; i vertici [[74, 68], [113, 68], [113, 107]] (A 0, B 120, C 240 gradi); i lati ['39.000000000000', '39.000000000000', '39.000000000000']; l'area con segno +658.6123 (positiva: ANTIORARIO); il baricentro (100.0, 81.0), il centro del bordo [98.87378070359784, 81.36252985852764] (a 1.345)
+==================================================================================================================================
+  DEVE PASSARE: i tre lati uguali entro 1e-09 al tick 0 (il lato atteso 39.000000000)                                PASSA   max - min 0.000e+00
+  DEVE PASSARE: i vertici A, B, C in senso antiorario (l'area con segno positiva)                                    PASSA   +658.6123
+### mattone_triangolo.corsa con la variante t120, il francobollo di L 162, i vertici equilateri, le fasi 0, 120, 240 e la Corsa con le misure di B3, SOSTITUITI in memoria
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+==================================================================================================================================
+IL TRIANGOLO (T-t120; Luca 14:22): ['MGU_00000', 'MGU_00000', 'MGU_00000'] nella scena di S162 (il vuoto fresco al tick 60000); il lato 37.6; G+U a campi pieni; rho_c 227058.574864, e 6.3154140e-05; 2000 tick
+==================================================================================================================================
+### il francobollo A (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### il francobollo B (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### il francobollo C (E:\soliton_simulator\mattone\L162_MGU_03000.npz): R_t 41.0; 7333 nodi; il centro d'origine (113, 107); il raggio a L 81 12.3657
+### IL BORDO (Luca 15:49): quello della scena di S162 ha R_A 47.500; QUI R_A 60 attorno allo STESSO centro, R_B 81, g_max 0.03 (bordo.g_estremita, l'argomento)
+### il centro del bordo [98.87378070359784, 81.36252985852764] (R_A 47.500); i vertici (i nodi, lo spostamento multiplo di 3): [[74, 68], [113, 68], [113, 107]]; i lati VERI ['39.0000', '39.0000', '39.0000']; la distanza minima dalle copie oltre il bordo 123.000
+  DEVE PASSARE: un solo francobollo: la somma e il prodotto = l'incollatura di S6 AL BIT (come c1740faa)             PASSA   diverse: []
+### le masse dei francobolli incollati DA SOLI: ['9.950108931447e+05', '9.950108931447e+05', '9.950108931447e+05']
+### Delta ['-0.000074', '-0.000075', '-0.000075']; il residuo di Gauss iniziale 5.808e-11
+### le masse dei tre pezzi al tick 0 (la partizione, descrittive): ['9.8893622909e+05', '9.8657711215e+05', '9.8256454694e+05']
+    [giro] k     0: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.8641e+01; il cerchio r 11.333; oltre R_A 2.739e-06
+  DEVE PASSARE: le tre masse dei francobolli da soli uguali entro 1e-10 relativo al tick 0                           PASSA   4.680e-16 (['9.950108931446826e+05', '9.950108931446825e+05', '9.950108931446830e+05'])
+  DEVE PASSARE: il giro della componente piu' grande al tick 0 = +1                                                  PASSA   +1.000000 (la somma +1.000000)
+  DEVE PASSARE: il vuoto senza materia (max |psi_h| = 0 prima dell'incollatura)                                      PASSA   0.000e+00
+    [giro] k   100: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.1088e+01; il cerchio r 11.338; oltre R_A 6.295e-06
+    [giro] k   200: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.5409e+01; il cerchio r 11.347; oltre R_A 8.817e-06
+    k   250  lati 39.3132 39.3053 39.3506  masse 9.846577e+05 9.865717e+05 9.867749e+05  raggi 15.0620 15.0399 14.9855  Gauss 5.63e-11  (1026 s)
+    [giro] k   300: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.3933e+01; il cerchio r 11.357; oltre R_A 1.117e-05
+    [giro] k   400: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2554e+01; il cerchio r 11.369; oltre R_A 1.181e-05
+    [giro] k   500: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0389e+01; il cerchio r 11.383; oltre R_A 1.090e-05
+    k   500  lati 39.4342 39.4181 39.4411  masse 9.842189e+05 9.855967e+05 9.881172e+05  raggi 14.9526 14.8519 14.8741  Gauss 5.51e-11  (2073 s)
+    [giro] k   600: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.7567e+01; il cerchio r 11.397; oltre R_A 1.159e-05
+    [giro] k   700: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.1415e+01; il cerchio r 11.411; oltre R_A 1.345e-05
+    k   750  lati 39.5693 39.5742 39.5180  masse 9.847905e+05 9.833658e+05 9.896856e+05  raggi 14.8618 14.8954 14.8748  Gauss 5.31e-11  (3186 s)
+    [giro] k   800: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.5082e+01; il cerchio r 11.425; oltre R_A 1.557e-05
+    [giro] k   900: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.7704e+01; il cerchio r 11.438; oltre R_A 1.549e-05
+    [giro] k  1000: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0395e+01; il cerchio r 11.451; oltre R_A 1.436e-05
+    k  1000  lati 39.6747 39.7049 39.6260  masse 9.838503e+05 9.842616e+05 9.896369e+05  raggi 14.9623 14.9329 14.9331  Gauss 5.33e-11  (4294 s)
+    [giro] k  1100: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.1712e+01; il cerchio r 11.463; oltre R_A 1.377e-05
+    [giro] k  1200: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0153e+01; il cerchio r 11.476; oltre R_A 1.492e-05
+    k  1250  lati 39.7706 39.8089 39.7360  masse 9.812762e+05 9.853871e+05 9.909873e+05  raggi 15.0929 14.9762 15.0583  Gauss 5.58e-11  (5353 s)
+    [giro] k  1300: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2581e+01; il cerchio r 11.487; oltre R_A 1.605e-05
+    [giro] k  1400: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.1085e+01; il cerchio r 11.496; oltre R_A 1.624e-05
+    [giro] k  1500: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2152e+01; il cerchio r 11.504; oltre R_A 1.499e-05
+    k  1500  lati 39.8806 39.8753 39.8006  masse 9.784637e+05 9.837712e+05 9.953201e+05  raggi 15.2281 15.1596 15.2010  Gauss 5.36e-11  (6345 s)
+    [giro] k  1600: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2378e+01; il cerchio r 11.511; oltre R_A 1.349e-05
+    [giro] k  1700: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0511e+01; il cerchio r 11.517; oltre R_A 1.698e-05
+    k  1750  lati 39.9130 39.9255 39.8741  masse 9.773686e+05 9.842565e+05 9.958079e+05  raggi 15.3714 15.2491 15.2927  Gauss 5.46e-11  (7389 s)
+    [giro] k  1800: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.5830e+01; il cerchio r 11.522; oltre R_A 1.940e-05
+    [giro] k  1900: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.4248e+01; il cerchio r 11.527; oltre R_A 2.055e-05
+    [giro] k  2000: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.0706e+01; il cerchio r 11.530; oltre R_A 1.911e-05
+    k  2000  lati 39.9035 39.9658 39.9549  masse 9.750604e+05 9.888529e+05 9.934146e+05  raggi 15.5787 15.4276 15.5179  Gauss 5.50e-11  (8517 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 2000 tick in 8517 s
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B      materia C  materia fuori      vuoto A      vuoto B      vuoto C  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.192589e+06   8.199073e+06   8.179615e+06   5.280467e+02   3.5107e+03   3.5525e+03   3.5125e+03   7.9792e+01  2.9556e+01   24582459.861972       -0.0000       -0.0000    0.0000e+00
+        500   8.176334e+06   8.189872e+06   8.204009e+06   8.548332e+02   3.4911e+03   3.5559e+03   3.5478e+03   1.3509e+02  2.9255e+01   24581800.269074     +744.9807      -21.7936    9.7831e+01
+       1000   8.175741e+06   8.179873e+06   8.212978e+06   1.027256e+03   3.4952e+03   3.5909e+03   3.5722e+03   1.5523e+02  2.8836e+01   24580432.747880    +1973.8380     -191.8813    2.5780e+02
+       1500   8.133158e+06   8.176214e+06   8.257613e+06   1.092891e+03   3.5784e+03   3.6188e+03   3.5386e+03   1.6494e+02  2.8452e+01   24578978.531820    +3352.0808     -275.6522    4.3681e+02
+       2000   8.104838e+06   8.203659e+06   8.256517e+06   1.284449e+03   3.5996e+03   3.5861e+03   3.5475e+03   1.9937e+02  2.8032e+01   24577231.453257    +4931.0829     -485.7655    6.4269e+02
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo (ogni 250 tick)                                     PASSA   il massimo 5.808e-11 (l'iniziale 5.808e-11)
+### la massa uscita dal bordo in tutto 6.426908e+02
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite []; finita; 8649 s in tutto
+==================================================================================================================================
+### LE MAPPE: 101 fotogrammi in C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_t120_mappe.npz, 29.1 MB
+### IL GIRO, LA MASSA TOTALE E OLTRE R_A in C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_t120_giro.npz; oltre R_A 60 il massimo 2.055e-05 (Luca 10:29, B4: qui solo scritta)
+==================================================================================================================================
+ESITO (triangolo_120): 5/5 controlli come devono; fallite []; mattone_triangolo.corsa ha reso 0

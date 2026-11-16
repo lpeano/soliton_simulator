@@ -1,0 +1,25 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] legame.py  sha1-BYTE 910f44cb  committato e pulito
+==================================================================================================================================
+LA SCENA VUOTA (Luca 23:32, L1): S162, il bordo da R_A 60, il vuoto fresco al tick 60000, psi = 0, G+U, 2000 tick
+==================================================================================================================================
+### la massa 0.000e+00 (zero); il massimo di rho 0.000e+00
+    k   250  tot 0.000000  K+V 0.0000e+00  (601 s)
+    k   500  tot 0.000000  K+V 0.0000e+00  (1186 s)
+    k   750  tot -0.000000  K+V 0.0000e+00  (1765 s)
+    k  1000  tot -0.000000  K+V 0.0000e+00  (2346 s)
+    k  1250  tot -0.000000  K+V 0.0000e+00  (2948 s)
+    k  1500  tot -0.000000  K+V 0.0000e+00  (3540 s)
+    k  1750  tot -0.000000  K+V 0.0000e+00  (4005 s)
+    k  2000  tot -0.000000  K+V 0.0000e+00  (4509 s)
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k  materia vuoto  materia fuori  vuoto vuoto  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   0.000000e+00   0.000000e+00   0.0000e+00   0.0000e+00  0.0000e+00          0.000000       +0.0000       +0.0000    0.0000e+00
+        500   0.000000e+00   0.000000e+00   2.1810e-13   1.3429e-12  0.0000e+00          0.000000       +0.0000       +0.0000    0.0000e+00
+       1000   0.000000e+00   0.000000e+00   2.7747e-13   1.1677e-12  0.0000e+00          0.000000       -0.0000       -0.0000    0.0000e+00
+       1500   0.000000e+00   0.000000e+00  -1.3326e-13  -5.2552e-13  0.0000e+00         -0.000000       -0.0000       -0.0000    0.0000e+00
+       2000   0.000000e+00   0.000000e+00  -3.5921e-13  -1.0487e-12  0.0000e+00         -0.000000       -0.0000       -0.0000    0.0000e+00
+==================================================================================================================================
+ESITO: finita; 4545 s in tutto

@@ -1,0 +1,62 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+==================================================================================================================================
+GLI OGGETTI LEGATI (Luca 10:29, B2): la coppia GUpi da k 8000 a k 18000 (E:\soliton_simulator\mattone\legati_GUpi_08000.npz); la scena di C35-pi, il bordo da R_A 60, G+U; il tetto 28800 s; B4: oltre R_A 0.0001 scritto, 0.01 l'ARRESTO
+==================================================================================================================================
+  DEVE PASSARE: la ripartenza da legati_GUpi_07950.npz per 50 tick = legati_GUpi_08000.npz AL BIT (esclusa h_int)              PASSA   diverse: []
+    k  8000  d 39.8906  il raggio 23.7115  A2 0.5735  il picco 1.1330e+03  la massa 1.928308e+06  oltre R_A 1.673e-05  Gauss 5.88e-11  (341 s)
+    k  8500  d 40.1121  il raggio 23.8098  A2 0.5865  il picco 1.1572e+03  la massa 1.928175e+06  oltre R_A 1.669e-05  Gauss 5.76e-11  (2836 s)
+    k  9000  d 40.3952  il raggio 23.9187  A2 0.5910  il picco 1.1816e+03  la massa 1.928043e+06  oltre R_A 1.782e-05  Gauss 5.64e-11  (5460 s)
+    k  9500  d 40.7274  il raggio 24.0863  A2 0.5858  il picco 1.2428e+03  la massa 1.927906e+06  oltre R_A 1.695e-05  Gauss 5.36e-11  (7992 s)
+    k 10000  d 41.1907  il raggio 24.3016  A2 0.5886  il picco 1.0946e+03  la massa 1.927776e+06  oltre R_A 1.585e-05  Gauss 6.09e-11  (10319 s)
+    k 10500  d 41.7174  il raggio 24.5662  A2 0.5909  il picco 1.0799e+03  la massa 1.927650e+06  oltre R_A 1.612e-05  Gauss 6.17e-11  (12415 s)
+    k 11000  d 42.1024  il raggio 24.7780  A2 0.5887  il picco 1.1032e+03  la massa 1.927536e+06  oltre R_A 1.591e-05  Gauss 6.04e-11  (14273 s)
+    k 11500  d 42.3063  il raggio 24.8769  A2 0.5868  il picco 1.1132e+03  la massa 1.927409e+06  oltre R_A 1.759e-05  Gauss 5.99e-11  (15905 s)
+    k 12000  d 42.3932  il raggio 24.9369  A2 0.5870  il picco 1.1171e+03  la massa 1.927285e+06  oltre R_A 1.407e-05  Gauss 5.97e-11  (17496 s)
+    k 12500  d 42.4119  il raggio 24.9292  A2 0.5996  il picco 1.0724e+03  la massa 1.927176e+06  oltre R_A 1.543e-05  Gauss 6.22e-11  (19101 s)
+    k 13000  d 42.2903  il raggio 24.8288  A2 0.6080  il picco 1.1035e+03  la massa 1.927057e+06  oltre R_A 1.436e-05  Gauss 6.04e-11  (20570 s)
+    k 13500  d 42.0009  il raggio 24.6800  A2 0.6038  il picco 1.1556e+03  la massa 1.926942e+06  oltre R_A 1.396e-05  Gauss 5.77e-11  (21712 s)
+    k 14000  d 41.6689  il raggio 24.5418  A2 0.5934  il picco 1.1534e+03  la massa 1.926835e+06  oltre R_A 1.332e-05  Gauss 5.78e-11  (22763 s)
+    k 14500  d 41.4428  il raggio 24.5001  A2 0.5841  il picco 1.0480e+03  la massa 1.926737e+06  oltre R_A 1.167e-05  Gauss 6.36e-11  (23815 s)
+    k 15000  d 41.2957  il raggio 24.5428  A2 0.5738  il picco 1.0594e+03  la massa 1.926648e+06  oltre R_A 1.172e-05  Gauss 6.29e-11  (24872 s)
+    k 15500  d 41.1849  il raggio 24.5652  A2 0.5678  il picco 1.0504e+03  la massa 1.926559e+06  oltre R_A 1.209e-05  Gauss 6.35e-11  (25916 s)
+    k 16000  d 41.1608  il raggio 24.5387  A2 0.5623  il picco 1.0596e+03  la massa 1.926458e+06  oltre R_A 1.356e-05  Gauss 6.29e-11  (26958 s)
+    k 16500  d 41.2624  il raggio 24.5400  A2 0.5643  il picco 1.0466e+03  la massa 1.926363e+06  oltre R_A 1.155e-05  Gauss 6.37e-11  (28006 s)
+    k 17000  d 41.4690  il raggio 24.5911  A2 0.5713  il picco 1.1058e+03  la massa 1.926271e+06  oltre R_A 1.270e-05  Gauss 6.03e-11  (29052 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 9042 tick in 28800 s; il tetto di 28800 s a k 17042 (si riparte da 17000)
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B  materia fuori      vuoto A      vuoto B  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+       8000   8.033537e+06   7.981734e+06   9.744428e+02   3.9812e+03   4.0108e+03   7.1756e+02  1.5970e+01   16024955.255449       +0.0000       +0.0000    0.0000e+00
+       8500   8.036141e+06   7.978191e+06   9.663636e+02   3.9871e+03   4.0404e+03   7.1089e+02  1.5939e+01   16024036.056835    +1016.8916       -5.2767    1.3286e+02
+       9000   8.038659e+06   7.974632e+06   9.838034e+02   4.0041e+03   4.0651e+03   7.2103e+02  1.5889e+01   16023064.169977    +2023.3564      +27.2651    2.6484e+02
+       9500   8.040325e+06   7.971906e+06   9.057084e+02   4.0212e+03   4.0468e+03   7.1140e+02  1.5752e+01   16021916.273027    +3077.7566      -65.7578    4.0208e+02
+      10000   8.040567e+06   7.970638e+06   9.068546e+02   4.0186e+03   4.0590e+03   7.0686e+02  1.5572e+01   16020896.279434    +4067.1060      -84.7996    5.3177e+02
+      10500   8.040823e+06   7.969449e+06   8.505397e+02   4.0241e+03   4.0716e+03   6.9413e+02  1.5356e+01   16019911.760069    +5036.8638     -104.2100    6.5831e+02
+      11000   8.041646e+06   7.967607e+06   8.985642e+02   4.0544e+03   4.0782e+03   7.0141e+02  1.5168e+01   16018985.726388    +5901.6978     -157.5514    7.7191e+02
+      11500   8.042171e+06   7.966053e+06   9.183945e+02   4.0729e+03   4.0867e+03   6.9379e+02  1.5074e+01   16017996.513759    +6860.3241     -192.7389    8.9862e+02
+      12000   8.043253e+06   7.964047e+06   7.963539e+02   4.0908e+03   4.1121e+03   6.8760e+02  1.5027e+01   16016986.607682    +7798.3523     -255.9878    1.0234e+03
+      12500   8.041565e+06   7.964799e+06   8.560980e+02   4.0858e+03   4.1342e+03   6.9326e+02  1.5058e+01   16016133.176079    +8625.4808     -279.2163    1.1323e+03
+      13000   8.043800e+06   7.961822e+06   7.662893e+02   4.0941e+03   4.1543e+03   6.9169e+02  1.5181e+01   16015328.227445    +9520.3959     -192.7447    1.2513e+03
+      13500   8.049595e+06   7.955135e+06   7.807726e+02   4.1071e+03   4.1528e+03   7.1576e+02  1.5314e+01   16014486.165146   +10387.4067     -169.4387    1.3657e+03
+      14000   8.054251e+06   7.949735e+06   6.893977e+02   4.1158e+03   4.1435e+03   6.9585e+02  1.5382e+01   16013630.459481   +11215.7136     -188.6829    1.4735e+03
+      14500   8.060292e+06   7.942942e+06   6.475752e+02   4.1198e+03   4.1535e+03   6.7618e+02  1.5344e+01   16012831.432834   +11964.1861     -229.9082    1.5708e+03
+      15000   8.063971e+06   7.938416e+06   6.594269e+02   4.1264e+03   4.1740e+03   6.7622e+02  1.5197e+01   16012023.004007   +12645.3589     -356.8799    1.6599e+03
+      15500   8.067780e+06   7.933731e+06   7.467717e+02   4.1391e+03   4.1600e+03   6.7416e+02  1.5077e+01   16011231.080582   +13331.2589     -464.3222    1.7494e+03
+      16000   8.072451e+06   7.928304e+06   7.370485e+02   4.1684e+03   4.1634e+03   6.7181e+02  1.5069e+01   16010496.078142   +14095.3375     -442.2978    1.8503e+03
+      16500   8.075063e+06   7.925066e+06   6.840365e+02   4.1800e+03   4.1462e+03   6.8394e+02  1.5110e+01   16009823.623196   +14812.8012     -386.3714    1.9452e+03
+      17000   8.079518e+06   7.919973e+06   6.783390e+02   4.1852e+03   4.1452e+03   6.7935e+02  1.5145e+01   16009178.949587   +15519.5875     -330.1694    2.0367e+03
+      17042   8.079656e+06   7.919781e+06   6.729660e+02   4.1845e+03   4.1486e+03   6.7908e+02  1.5146e+01   16009122.354831   +15581.7045     -325.0225    2.0449e+03
+### LE MAPPE: 91 fotogrammi in C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\legati_GUpi_mappe_08000.npz, 26.4 MB
+### d da 39.8906 a 41.4690 (il minimo 39.8906 a k 8000, il massimo 42.4156 a k 12350); la massa oltre R_A il massimo 1.884e-05 (oltre 0.0001 dal tick mai)
+### LA MASSA: persa 2.036683e+03, uscita dal bordo 2.044890e+03, la differenza relativa 4.256e-06
+  DEVE PASSARE: Gauss sotto 1e-10 a ogni controllo (L 162)                                                                     PASSA   il massimo 6.445e-11
+  DEVE PASSARE: la massa persa = la massa uscita dal bordo entro 1e-6 relativo                                                 ### FALLISCE   4.256e-06
+==================================================================================================================================
+ESITO: 2/3 controlli come devono; fallite ['la massa persa = la massa uscita dal bordo entro 1e-6 relativo']; il tetto di 28800 s a k 17042 (si riparte da 17000); 29142 s in tutto

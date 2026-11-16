@@ -1,0 +1,18 @@
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] fase_nel_tempo.py  sha1-BYTE 3f90fef5  committato e pulito
+==================================================================================================================================
+(fase_nel_tempo.py: la funzione fase di legame.py, corretta)
+LA FASE RELATIVA NEL TEMPO (Luca 23:32, «ma sono tutti in fase?»; solo lettura): arg <psi_i, psi_j> col pezzo di i (entro 14 nodi dal suo centro) SPOSTATO sul vertice di j
+==================================================================================================================================
+### (T-fase): i vertici [[112, 107], [73, 68], [112, 68]]
+    k  500: A-B    -0.3  B-C    +0.1  A-C    -0.1 gradi
+    k 1000: A-B    -1.7  B-C    -0.6  A-C    -1.1 gradi
+    k 1500: A-B    -5.2  B-C    -3.1  A-C    -4.0 gradi
+    k 2000: A-B   -11.5  B-C    -9.2  A-C    -9.5 gradi
+### (T-sfasati): i vertici [[112, 107], [73, 68], [112, 68]]
+    k  500: A-B  -179.1  B-C  +177.9  A-C    -1.0 gradi
+    k 1000: A-B  -176.5  B-C  +173.9  A-C    -2.1 gradi
+    k 1500: A-B  -173.1  B-C  +168.0  A-C    -4.2 gradi
+    k 2000: A-B  -168.4  B-C  +161.8  A-C    -6.3 gradi
+### (T-video): i vertici non si rifanno da qui (la variante e' in memoria in triangolo_video.py): saltato
+==================================================================================================================================

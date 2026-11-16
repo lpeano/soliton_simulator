@@ -1,0 +1,80 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+==================================================================================================================================
+GLI OGGETTI LEGATI (Luca 10:29, B3): il triangolo a 120 gradi da k 2000 a k 6000 (E:\soliton_simulator\mattone\triangolo_t120_02000.npz); la scena di S162, il bordo da R_A 60, G+U; le mappe ogni 60; il tetto 28800 s; B4: oltre R_A 0.0001 scritto, 0.01 l'ARRESTO
+==================================================================================================================================
+  DEVE PASSARE: la ripartenza da triangolo_t120_01950.npz per 50 tick = triangolo_t120_02000.npz AL BIT (esclusa h_int)        PASSA   diverse: []
+    [giro] k  2000: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.0706e+01; il cerchio r 11.530; oltre R_A 1.911e-05
+    k  2000  lati 39.9035 39.9658 39.9549  masse 9.750604e+05 9.888529e+05 9.934146e+05  raggi 15.5787 15.4276 15.5179  oltre R_A 1.911e-05  Gauss 5.50e-11  (297 s)
+    [giro] k  2100: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.5405e+01; il cerchio r 11.531; oltre R_A 1.710e-05
+    [giro] k  2200: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.4744e+01; il cerchio r 11.530; oltre R_A 1.600e-05
+    [giro] k  2300: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.8414e+01; il cerchio r 11.527; oltre R_A 1.554e-05
+    [giro] k  2400: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.5439e+01; il cerchio r 11.521; oltre R_A 1.646e-05
+    [giro] k  2500: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.8145e+01; il cerchio r 11.510; oltre R_A 1.723e-05
+    k  2500  lati 39.8093 39.9800 39.8301  masse 9.774035e+05 9.846833e+05 9.950488e+05  raggi 16.0921 15.8823 16.0074  oltre R_A 1.723e-05  Gauss 6.22e-11  (2572 s)
+    [giro] k  2600: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.5445e+01; il cerchio r 11.496; oltre R_A 1.738e-05
+    [giro] k  2700: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.7289e+01; il cerchio r 11.479; oltre R_A 1.664e-05
+    [giro] k  2800: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.6304e+01; il cerchio r 11.458; oltre R_A 1.524e-05
+    [giro] k  2900: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.3050e+01; il cerchio r 11.434; oltre R_A 1.657e-05
+    [giro] k  3000: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.5320e+01; il cerchio r 11.405; oltre R_A 1.655e-05
+    k  3000  lati 39.4325 39.6396 39.4562  masse 9.768259e+05 9.820191e+05 9.980776e+05  raggi 16.4146 16.2770 16.4020  oltre R_A 1.655e-05  Gauss 6.52e-11  (4488 s)
+    [giro] k  3100: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2223e+01; il cerchio r 11.372; oltre R_A 1.808e-05
+    [giro] k  3200: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.4958e+01; il cerchio r 11.334; oltre R_A 1.856e-05
+    [giro] k  3300: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.3568e+01; il cerchio r 11.293; oltre R_A 1.822e-05
+    [giro] k  3400: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.6852e+01; il cerchio r 11.248; oltre R_A 1.936e-05
+    [giro] k  3500: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.2917e+01; il cerchio r 11.202; oltre R_A 1.867e-05
+    k  3500  lati 38.7297 38.9523 38.7330  masse 9.828601e+05 9.767626e+05 9.970678e+05  raggi 16.6437 16.5534 16.6485  oltre R_A 1.867e-05  Gauss 6.43e-11  (6305 s)
+    [giro] k  3600: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0388e+01; il cerchio r 11.154; oltre R_A 1.883e-05
+    [giro] k  3700: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.7556e+01; il cerchio r 11.105; oltre R_A 2.076e-05
+    [giro] k  3800: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.7506e+01; il cerchio r 11.054; oltre R_A 2.027e-05
+    [giro] k  3900: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.6741e+01; il cerchio r 11.001; oltre R_A 2.042e-05
+    [giro] k  4000: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 4.6070e+01; il cerchio r 10.948; oltre R_A 2.006e-05
+    k  4000  lati 37.8131 38.0905 37.8732  masse 9.858188e+05 9.794509e+05 9.911761e+05  raggi 16.7763 16.7689 16.8239  oltre R_A 2.006e-05  Gauss 6.14e-11  (8312 s)
+    [giro] k  4100: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 4.1046e+01; il cerchio r 10.894; oltre R_A 1.947e-05
+    [giro] k  4200: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.0652e+01; il cerchio r 10.840; oltre R_A 1.952e-05
+    [giro] k  4300: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.6654e+01; il cerchio r 10.787; oltre R_A 2.019e-05
+    [giro] k  4400: la componente piu' grande (2) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.3400e+01; il cerchio r 10.731; oltre R_A 2.155e-05
+    [giro] k  4500: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.0886e+01; il cerchio r 10.674; oltre R_A 2.136e-05
+    k  4500  lati 36.8985 37.0831 36.9429  masse 9.809022e+05 9.789957e+05 9.962985e+05  raggi 16.8290 16.7528 16.8202  oltre R_A 2.136e-05  Gauss 6.19e-11  (10433 s)
+    [giro] k  4600: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.8694e+01; il cerchio r 10.615; oltre R_A 2.305e-05
+    [giro] k  4700: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 1.7975e+01; il cerchio r 10.555; oltre R_A 2.168e-05
+    [giro] k  4800: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.0953e+01; il cerchio r 10.496; oltre R_A 1.941e-05
+    [giro] k  4900: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.5416e+01; il cerchio r 10.437; oltre R_A 2.094e-05
+    [giro] k  5000: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.3195e+01; il cerchio r 10.379; oltre R_A 2.221e-05
+    k  5000  lati 35.9179 35.9943 35.9469  masse 9.836421e+05 9.730249e+05 9.992769e+05  raggi 16.9598 16.9965 16.9814  oltre R_A 2.221e-05  Gauss 5.93e-11  (12688 s)
+    [giro] k  5100: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.0209e+01; il cerchio r 10.321; oltre R_A 2.163e-05
+    [giro] k  5200: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.3726e+01; il cerchio r 10.267; oltre R_A 2.105e-05
+    [giro] k  5300: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.6325e+01; il cerchio r 10.214; oltre R_A 2.261e-05
+    [giro] k  5400: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.7488e+01; il cerchio r 10.163; oltre R_A 2.231e-05
+    [giro] k  5500: la componente piu' grande (6) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.6139e+01; il cerchio r 10.114; oltre R_A 2.019e-05
+    k  5500  lati 34.9821 35.0873 35.0375  masse 9.899075e+05 9.761754e+05 9.896030e+05  raggi 17.2297 17.2946 17.2571  oltre R_A 2.019e-05  Gauss 6.42e-11  (14752 s)
+    [giro] k  5600: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.7125e+01; il cerchio r 10.067; oltre R_A 2.122e-05
+    [giro] k  5700: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.6473e+01; il cerchio r 10.023; oltre R_A 2.259e-05
+    [giro] k  5800: la componente piu' grande (4) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.9788e+01; il cerchio r 9.982; oltre R_A 2.095e-05
+    [giro] k  5900: la componente piu' grande (0) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 3.1489e+01; il cerchio r 9.944; oltre R_A 2.023e-05
+    [giro] k  6000: la componente piu' grande (10) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.6025e+01; il cerchio r 9.907; oltre R_A 2.218e-05
+    k  6000  lati 34.2329 34.3727 34.3488  masse 9.938454e+05 9.771367e+05 9.844374e+05  raggi 17.4978 17.5399 17.5376  oltre R_A 2.218e-05  Gauss 6.39e-11  (17039 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 4000 tick in 16742 s; finita
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B      materia C  materia fuori      vuoto A      vuoto B      vuoto C  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+       2000   8.099127e+06   8.213788e+06   8.251905e+06   1.259883e+03   3.6146e+03   3.5832e+03   3.5398e+03   1.9628e+02  2.7978e+01   24577013.524546       +0.0000       +0.0000    0.0000e+00
+       2500   8.110758e+06   8.179261e+06   8.272860e+06   1.227567e+03   3.6288e+03   3.5757e+03   3.5826e+03   1.7739e+02  2.7532e+01   24575070.978130    +1546.4068     -546.5819    1.9955e+02
+       3000   8.119008e+06   8.158091e+06   8.283807e+06   1.306221e+03   3.6582e+03   3.6053e+03   3.6228e+03   2.0019e+02  2.7502e+01   24573298.455973    +3044.5970     -817.3183    3.9360e+02
+       3500   8.167625e+06   8.109616e+06   8.281828e+06   1.453645e+03   3.6763e+03   3.6569e+03   3.6457e+03   2.2969e+02  2.8055e+01   24571731.354944    +4713.0822     -744.9172    6.0842e+02
+       4000   8.187352e+06   8.135117e+06   8.234766e+06   1.513716e+03   3.6894e+03   3.6822e+03   3.6534e+03   2.3937e+02  2.8935e+01   24570012.796507    +6510.7435     -668.2178    8.4087e+02
+       4500   8.149373e+06   8.134705e+06   8.271380e+06   1.584257e+03   3.6896e+03   3.6969e+03   3.6567e+03   2.2944e+02  2.9943e+01   24568314.478521    +8386.1787     -504.9571    1.0832e+03
+       5000   8.166564e+06   8.083187e+06   8.303902e+06   1.596364e+03   3.6980e+03   3.6143e+03   3.7009e+03   2.4506e+02  3.0800e+01   24566508.450984   +10304.2277     -386.2885    1.3347e+03
+       5500   8.228729e+06   8.086600e+06   8.236394e+06   1.577157e+03   3.6930e+03   3.6085e+03   3.6323e+03   2.4413e+02  3.1345e+01   24564478.183612   +12276.7809     -451.4677    1.5921e+03
+       6000   8.238815e+06   8.132373e+06   8.178500e+06   1.629379e+03   3.6651e+03   3.6514e+03   3.6025e+03   2.4598e+02  3.1628e+01   24562483.006994   +14174.8996     -529.8822    1.8404e+03
+### LE MAPPE: 67 fotogrammi in C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\legati_t120_mappe_02000.npz, 19.4 MB
+### il lato medio da 39.9414 a 34.3181 (il minimo 34.3181 a k 6000, il massimo 39.9460 a k 2100); la massa oltre R_A il massimo 2.305e-05
+  DEVE PASSARE: Gauss sotto 1e-10 a ogni controllo (L 162)                                                                     PASSA   il massimo 6.539e-11
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite []; finita; 17040 s in tutto

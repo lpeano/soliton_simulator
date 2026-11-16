@@ -1,0 +1,63 @@
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+==================================================================================================================================
+GLI OGGETTI LEGATI, LA LETTURA (Luca 10:29, B5): la distanza (i lati) nel tempo, le inversioni, il periodo, le previsioni P1-P3; le inversioni sulla serie lisciata (11 punti) entro +- 1000 tick (mie)
+==================================================================================================================================
+### B1, B2 in fase (P1; i pezzi ['legati_GU_serie_06000.npz', 'legati_GU_serie_12000.npz'])
+    d: da 35.0575 (k 0) a 31.9149 (k 18000); le inversioni (la serie lisciata): ['min 28.7277 a k 5050', 'max 33.7514 a k 9950', 'min 29.3990 a k 14750']
+      il periodo (2 x la media fra due inversioni successive): 9700 tick (le meta' [4900, 4800])
+      la massa oltre R_A nei pezzi lunghi: il massimo 1.778e-05
+### B2, B2-pi in opposizione (P2; i pezzi ['legati_GUpi_serie_02000.npz'])
+    d: da 37.0483 (k 0) a 40.2810 (k 8800); le inversioni (la serie lisciata): ['max 41.2001 a k 4350']
+      la massa oltre R_A nei pezzi lunghi: il massimo 2.262e-05
+### B3, IL TRIANGOLO A 120 GRADI (P3)
+    il lato medio: da 39.2573 (k 0) a 38.7910 (k 12000); le inversioni (la serie lisciata): ['max 39.9362 a k 2100', 'min 32.6670 a k 8600']
+      il periodo (2 x la media fra due inversioni successive): 13000 tick (le meta' [6500])
+    IL GIRO DELLA FASE (ogni 100 tick; mostrati ogni 500): la piu' grande, la somma delle 12, quante delle 12 a +1
+      k     0: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.8641e+01
+      k   500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.0389e+01
+      k  1000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.0395e+01
+      k  1500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.2152e+01
+      k  2000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 3.0706e+01
+      k  2500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.8145e+01
+      k  3000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 1.5320e+01
+      k  3500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.2917e+01
+      k  4000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 4.6070e+01
+      k  4500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.0886e+01
+      k  5000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.3195e+01
+      k  5500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 3.6139e+01
+      k  6000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.6025e+01
+      k  6500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 3.2380e+01
+      k  7000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 1.9949e+01
+      k  7500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.0764e+01
+      k  8000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.8842e+01
+      k  8500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 3.2963e+01
+      k  9000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.6844e+01
+      k  9500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 4.0214e+01
+      k 10000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 3.1903e+01
+      k 10500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.8707e+01
+      k 11000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 1.8483e+01
+      k 11500: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 2.1725e+01
+      k 12000: la piu' grande +1.00; la somma +1.00; a +1 12 delle 12; la densita' al centro 1.4784e+01
+      -> il giro della piu' grande RESTA +1 a ogni controllo
+    LA DENSITA' AL CENTRO contro (T-fase) agli stessi tick (il video fino a 2000, il trifoglio dopo; mostrati ogni 500): T120, (T-fase), il rapporto
+      k     0: 2.8641e+01  1.9949e+02  0.1436
+      k   500: 2.0389e+01  8.0549e+02  0.0253
+      k  1000: 2.0395e+01  1.1096e+03  0.0184
+      k  1500: 2.2152e+01  9.8220e+02  0.0226
+      k  2000: 3.0706e+01  9.6804e+02  0.0317
+      k  2500: 2.8145e+01  9.5313e+02  0.0295
+      k  3000: 1.5320e+01  1.0342e+03  0.0148
+      k  3500: 2.2917e+01  1.1849e+03  0.0193
+      k  4000: 4.6070e+01  9.9013e+02  0.0465
+      k  4500: 2.0886e+01  1.1262e+03  0.0185
+      k  5000: 2.3195e+01  9.9335e+02  0.0234
+      k  5500: 3.6139e+01  9.7057e+02  0.0372
+      k  6000: 2.6025e+01  1.1913e+03  0.0218
+      -> MOLTO PIU' BASSA (la soglia mia, sez. 23: sotto la meta' a ogni controllo); il rapporto da 0.1436 a 0.0218, il massimo 0.1436
+    la massa oltre R_A: il massimo 2.561e-05
+----------------------------------------------------------------------------------------------------------------------------------
+### LE PREVISIONI (del guardiano, 10:29, scritte PRIMA); un risultato diverso: una SORPRESA
+    (P1) B2 OSCILLA (almeno due inversioni dal k 4000), l'equilibrio intorno a 29: le inversioni 3; l'equilibrio (la media degli estremi) 30.626 -> CONFERMATA (che OSCILLA)
+    (P2) B2-pi si ferma fra 44 e 49 e torna indietro: il primo massimo 41.200 a k 4350 -> ### NON CONFERMATA: si ferma fuori dall'intervallo (una SORPRESA)
+    (P3) il triangolo SI ALLARGA: ### NO (il lato medio da 39.2573 a 38.7910); NESSUNA fusione: il lato medio minimo 32.6606; il VORTICE: il giro resta, la densita' molto piu' bassa; si ferma fra 44 e 49: il primo massimo 39.936 a k 2100
+==================================================================================================================================

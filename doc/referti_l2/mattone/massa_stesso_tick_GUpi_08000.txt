@@ -1,0 +1,26 @@
+[TIMBRO] massa_stesso_tick.py  sha1-BYTE 22225a21  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DELLA MASSA ALLO STESSO TICK (Luca 20:40, R1): la massa persa M(k0) - M(k) contro il bordo cumulato a k, a OGNI tick comune; la soglia 1e-06 (la stessa del DEVE)
+==================================================================================================================================
+### legati_GUpi_08000.txt + legati_GUpi_serie_08000.npz: k0 8000, M(k0) 1.928308e+06; i tick comuni 18 (8500 ... 17000); l'ultimo tick della tabella 17042, l'ultima misura della serie 17000
+    k   8500: persa 132.8590, bordo 132.8600, la differenza -0.0010, relativa 5.234e-10
+    k   9000: persa 264.8436, bordo 264.8400, la differenza +0.0036, relativa 1.873e-09
+    k   9500: persa 402.0782, bordo 402.0800, la differenza -0.0018, relativa 9.133e-10
+    k  10000: persa 531.7677, bordo 531.7700, la differenza -0.0023, relativa 1.194e-09
+    k  10500: persa 658.3147, bordo 658.3100, la differenza +0.0047, relativa 2.428e-09
+    k  11000: persa 771.9127, bordo 771.9100, la differenza +0.0027, relativa 1.408e-09
+    k  11500: persa 898.6239, bordo 898.6200, la differenza +0.0039, relativa 2.045e-09
+    k  12000: persa 1023.3634, bordo 1023.4000, la differenza -0.0366, relativa 1.900e-08
+    k  12500: persa 1132.2649, bordo 1132.3000, la differenza -0.0351, relativa 1.818e-08
+    k  13000: persa 1251.2837, bordo 1251.3000, la differenza -0.0163, relativa 8.438e-09
+    k  13500: persa 1365.6645, bordo 1365.7000, la differenza -0.0355, relativa 1.839e-08
+    k  14000: persa 1473.4708, bordo 1473.5000, la differenza -0.0292, relativa 1.512e-08
+    k  14500: persa 1570.7622, bordo 1570.8000, la differenza -0.0378, relativa 1.961e-08
+    k  15000: persa 1659.9486, bordo 1659.9000, la differenza +0.0486, relativa 2.520e-08
+    k  15500: persa 1749.4304, bordo 1749.4000, la differenza +0.0304, relativa 1.574e-08
+    k  16000: persa 1850.3175, bordo 1850.3000, la differenza +0.0175, relativa 9.085e-09
+    k  16500: persa 1945.1910, bordo 1945.2000, la differenza -0.0090, relativa 4.682e-09
+    k  17000: persa 2036.6825, bordo 2036.7000, la differenza -0.0175, relativa 9.073e-09
+  DEVE PASSARE: la massa persa = il bordo ALLO STESSO TICK entro 1e-06 relativo, a ogni tick comune   PASSA   il massimo 2.520e-08
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: TUTTI PASSANO

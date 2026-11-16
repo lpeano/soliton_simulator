@@ -1,0 +1,18 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_mappe.py  sha1-BYTE a9a7e618  committato e pulito
+==================================================================================================================================
+LE MAPPE DEL TRIANGOLO (T-fase) (Luca 21:37, solo lettura): rho, |phi - phi0|, |E| ai tick (0, 500, 1000, 1500, 2000); lo stato 0 RICOSTRUITO (le righe dell'incollatura di mattone_triangolo.corsa)
+==================================================================================================================================
+### lo stato 0 ricostruito: i vertici [[112, 107], [73, 68], [112, 68]]; la massa 3.0205556359e+06 (la serie della corsa a k 0: le masse dei pezzi ['1.0048975103e+06', '1.0042029242e+06', '1.0114321101e+06'])
+### lo stato 500: E:\soliton_simulator\mattone\triangolo_fase_00500.npz (lo sha di psi_h nel meta 5cf6534c5b773545858d85a2353a235e71defcc2)
+### lo stato 1000: E:\soliton_simulator\mattone\triangolo_fase_01000.npz (lo sha di psi_h nel meta 9c89ddc6b3a413f4354980d4721720cbf2e656ae)
+### lo stato 1500: E:\soliton_simulator\mattone\triangolo_fase_01500.npz (lo sha di psi_h nel meta 06dca5ff7f34af813a1cd4994e6360ad287d72fb)
+### lo stato 2000: E:\soliton_simulator\mattone\triangolo_fase_02000.npz (lo sha di psi_h nel meta 52c86d7a87fd8c4847f67366d5251b283fecf599)
+    k    0: rho max 1.2674e+03, somma 3.020556e+06; |phi - phi0| max 5.7763e+00; |E| max 5.1706e-01; i centri [[112.27470397949219, 106.40911865234375], [73.54706573486328, 67.67508697509766], [112.26818084716797, 67.72891235351562]]
+    k  500: rho max 1.3001e+03, somma 3.020494e+06; |phi - phi0| max 5.2089e+00; |E| max 5.1138e-01; i centri [[112.14733123779297, 106.04080200195312], [73.82793426513672, 67.75379180908203], [112.26972961425781, 67.75552368164062]]
+    k 1000: rho max 1.3034e+03, somma 3.020341e+06; |phi - phi0| max 5.6293e+00; |E| max 5.0838e-01; i centri [[111.87479400634766, 105.51760864257812], [74.42847442626953, 68.04736328125], [112.0863037109375, 68.02363586425781]]
+    k 1500: rho max 1.2496e+03, somma 3.020145e+06; |phi - phi0| max 5.6083e+00; |E| max 5.0661e-01; i centri [[111.54100036621094, 104.78329467773438], [75.20084381103516, 68.40998077392578], [111.74996948242188, 68.39328002929688]]
+    k 2000: rho max 1.2474e+03, somma 3.019970e+06; |phi - phi0| max 5.7565e+00; |E| max 5.1125e-01; i centri [[111.41412353515625, 104.12897491455078], [76.30490112304688, 69.07830810546875], [111.29273986816406, 68.81181335449219]]
+### C:\Users\lpeano\soliton_simulator_mattone\doc\referti_l2\mattone\triangolo_fase_mappe.npz: 1.32 MB
+==================================================================================================================================

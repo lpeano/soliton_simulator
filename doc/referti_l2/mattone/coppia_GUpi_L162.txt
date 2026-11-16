@@ -1,0 +1,56 @@
+[TIMBRO] mattone_coppia_L162.py  sha1-BYTE a65d59ec  committato e pulito
+[TIMBRO] coppia_fase.py  sha1-BYTE af68f86c  committato e pulito
+### LA CONTROPROVA B2-pi (Luca 22:44): mattone_coppia_L162.main col mondo GUpi e mattone.incolla col francobollo B a psi -> -psi, SOSTITUITI in memoria
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] mattone_coppia_L162.py  sha1-BYTE a65d59ec  committato e pulito
+==================================================================================================================================
+LA COPPIA GUpi COL MATTONE COTTO SU L 162 (Luca 09:34, B2; 14:54; 15:49 il bordo da 60): due (MGU) COTTI da E:\soliton_simulator\mattone\L162_MGU_03000.npz (k 3000) sul vuoto di L 162 al tick 60000 (la scena di C35-pi); campi pieni dal tick 0; rho_c 227058.574864, e 6.3154140e-05; 2000 tick
+    i riferimenti (8ca61a34:doc/referti_l2/p6_bracci.txt): (GU = GUrampa) d'' +6.887181e-07 +- 3.4e-08; (U = U_2000) -2.554235e-08 +- 3.4e-10; (G = Grampa) +7.175065e-07 +- 3.4e-08  -- d_X - d_0, NON omogenei col d'' crudo della coppia: il SEGNO e l'ORDINE
+==================================================================================================================================
+### il francobollo: R_t 41.0; 7333 nodi; il picco del mattone a k 3000 1.1927e+03 (nell'ultimo pezzo da 1.1861e+03 a 1.3653e+03); la massa del francobollo 9.950109e+05, oltre 18.8 nodi 5.010568e+04 (5.036e-02 relativo)
+### IL BORDO (Luca 15:49): quello della scena di C35-pi ha R_A 47.500; QUI R_A 60 attorno allo stesso centro [98.87378070359784, 81.36252985852764], R_B 81, g_max 0.03
+### i centri di C35-pi a 60000: A (80.0253, 81.4533), B (117.3140, 80.8984), d 37.569220; i nodi (multipli di 3 dal centro del francobollo): [[80, 80], [116, 80]], la loro distanza 36.000000
+  DEVE PASSARE: (GUpi) un solo francobollo: la somma e il prodotto = l'incollatura di S6 AL BIT                      PASSA   diverse: []
+### la coppia incollata: Delta ['-0.000074', '-0.000014']; E(coppia) - E(vuoto) 1.604281e+07; |phi_j|^2 lontano (fuori da R_t + 4 dai due centri, 15275 nodi): la mediana 1.000000000000, il minimo 1.000000000000, il massimo 1.000000000000
+### il campo di Gauss (A = 0): il residuo iniziale 5.565e-11
+### d0 VERA (dai semipiani, sullo stato incollato): 37.048260
+    k   250  d 37.147559  A (78.997, 79.723) picco 1.2952e+03 massa 9.666004e+05  B (116.145, 79.725) picco 1.2185e+03 massa 9.639357e+05  Gauss 5.14e-11  (1083 s)
+    k   500  d 37.368186  A (78.899, 79.751) picco 1.2407e+03 massa 9.670743e+05  B (116.249, 79.715) picco 1.2173e+03 massa 9.634205e+05  Gauss 5.37e-11  (2072 s)
+    k   750  d 37.658741  A (78.747, 79.766) picco 1.2550e+03 massa 9.670782e+05  B (116.378, 79.711) picco 1.2789e+03 massa 9.633542e+05  Gauss 5.21e-11  (3111 s)
+    k  1000  d 37.986224  A (78.571, 79.773) picco 1.3062e+03 massa 9.669755e+05  B (116.524, 79.707) picco 1.2377e+03 massa 9.633897e+05  Gauss 5.10e-11  (4107 s)
+    k  1250  d 38.333122  A (78.391, 79.772) picco 1.2833e+03 massa 9.670794e+05  B (116.692, 79.708) picco 1.2382e+03 massa 9.632175e+05  Gauss 5.19e-11  (5092 s)
+    k  1500  d 38.692237  A (78.202, 79.764) picco 1.2279e+03 massa 9.671712e+05  B (116.866, 79.708) picco 1.1998e+03 massa 9.630545e+05  Gauss 5.42e-11  (6251 s)
+    k  1750  d 39.068100  A (78.001, 79.752) picco 1.2444e+03 massa 9.671406e+05  B (117.045, 79.704) picco 1.2828e+03 massa 9.630131e+05  Gauss 5.19e-11  (7406 s)
+    k  2000  d 39.456287  A (77.794, 79.735) picco 1.1916e+03 massa 9.672239e+05  B (117.230, 79.695) picco 1.2031e+03 massa 9.628546e+05  Gauss 5.54e-11  (8619 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 2000 tick in 8620 s
+### LA TABELLA DEI CONTI (R-CONTI-1; l'energia MEDIA sugli ultimi 100 tick, C5; la materia = cost + cin + leg, il vuoto = vuo, per pezzo entro 28 nodi; il bordo cumulato)
+          k      materia A      materia B  materia fuori      vuoto A      vuoto B  vuoto lontano       K + V               tot       bordo E       residuo       bordo M
+          0   8.016464e+06   8.018191e+06   4.417258e+02   3.5071e+03   3.5592e+03   6.4413e+02  1.7526e+01   16042807.298876       -0.0000       -0.0000    0.0000e+00
+        500   8.029893e+06   8.003797e+06   9.236559e+02   3.5070e+03   3.5901e+03   7.0285e+02  1.7324e+01   16042413.051836     +426.0762      -42.8291    5.4224e+01
+       1000   8.031065e+06   8.001465e+06   9.981878e+02   3.5582e+03   3.6448e+03   7.0524e+02  1.7082e+01   16041436.276055    +1431.1734      -47.6332    1.8385e+02
+       1500   8.032308e+06   7.999022e+06   1.053918e+03   3.5843e+03   3.7229e+03   7.1548e+02  1.6869e+01   16040406.255406    +2503.3327      -13.8647    3.2334e+02
+       2000   8.032555e+06   7.997576e+06   1.034623e+03   3.6508e+03   3.7247e+03   7.2071e+02  1.6623e+01   16039262.242442    +3637.3434      -21.4221    4.7050e+02
+### LA TABELLA DELLE FORZE (finestre di 250 tick; la prima l'ASSESTAMENTO): d, la velocita' relativa d' e l'accelerazione relativa d'' (la parabola)
+    tick    0- 250: d da 37.048260 a 37.147559; d' +4.0100e-04; d'' +2.416550e-06 +- 2.1e-08 (115.9 errori)   (l'ASSESTAMENTO)
+    tick  250- 500: d da 37.147559 a 37.368186; d' +8.8640e-04; d'' +1.529172e-06 +- 2.1e-08 (72.2 errori)
+    tick  500- 750: d da 37.368186 a 37.658741; d' +1.1640e-03; d'' +8.249497e-07 +- 9.8e-09 (84.2 errori)
+    tick  750-1000: d da 37.658741 a 37.986224; d' +1.3121e-03; d'' +3.574899e-07 +- 1.6e-08 (21.7 errori)
+    tick 1000-1250: d da 37.986224 a 38.333122; d' +1.3902e-03; d'' +2.531262e-07 +- 1.5e-08 (16.9 errori)
+    tick 1250-1500: d da 38.333122 a 38.692237; d' +1.4357e-03; d'' +1.830917e-07 +- 9.1e-09 (20.1 errori)
+    tick 1500-1750: d da 38.692237 a 39.068100; d' +1.5026e-03; d'' +3.585669e-07 +- 7.4e-09 (48.7 errori)
+    tick 1750-2000: d da 39.068100 a 39.456287; d' +1.5542e-03; d'' +2.132898e-08 +- 9.9e-09 (2.2 errori)
+----------------------------------------------------------------------------------------------------------------------------------
+### B3 SU B2, LA LETTURA (Luca 09:38): d'' sui tick 250-2000 +3.605169e-07 +- 6.8e-09 (52.7 errori); contro GUrampa +6.887181e-07: 0.523 (la soglia 0.3); da U_2000 -2.554235e-08: +3.861e-07, 56.4 errori (in quadratura; la soglia 3)
+  LA LETTURA: G E' UNA FORZA
+### IL PICCO: A da 1.1967e+03 a 1.1916e+03 (min 1.1819e+03, max 1.3337e+03); B da 1.1908e+03 a 1.2031e+03 (min 1.1675e+03, max 1.3429e+03); il mattone nell'ultimo pezzo della cottura: da 1.1861e+03 a 1.3653e+03
+### LA MASSA: A da 9.653454e+05 a 9.672239e+05, B da 9.652036e+05 a 9.628546e+05
+  DEVE PASSARE: il residuo di Gauss sotto 1e-10 a ogni controllo (ogni 250 tick)                                     PASSA   il massimo 5.565e-11 (l'iniziale 5.565e-11)
+==================================================================================================================================
+ESITO: 2/2 controlli come devono; fallite: 0 []; la lettura G E' UNA FORZA; finita; 8696 s in tutto
+### le incollature fatte: 2 (attese 2: A, poi B girato)

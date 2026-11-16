@@ -1,0 +1,47 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] profilo_tick.py  sha1-BYTE 71f09f3f  committato e pulito
+==================================================================================================================================
+LA PROFILAZIONE DEL TICK (Luca 12:24, 12:32 B): E:\soliton_simulator\mattone\L162_MGU_03000.npz da solo nella scena di S162, il bordo da R_A 60; 50 tick COL lapse (MGU) e SENZA (MU); cProfile; la macchina CARICA: le FRAZIONI
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### (MGU) COL lapse: il tempo totale del profilo 245.33 s (50 tick, 4.907 s per tick, la macchina CARICA); il tick (Campi.tick, cumulato) 245.33 s
+    LA FRAZIONE DEL TEMPO NEL PUNTO FISSO DEL LAPSE (tick_lapse.cs_al_centro, cumulato / il tick): 0.5630 (138.12 s su 245.33)
+    LA FRAZIONE DEI NODI con |N - 1| > 1e-12: al tick 0 0.9173, al tick 50 0.9194 (26244 nodi)
+    LE PRIME 15 FUNZIONI PER TEMPO PROPRIO (tottime; la frazione del totale accanto):
+      frazione    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        0.1296        50   31.795    0.636   31.795    0.636 {built-in method scipy.sparse.linalg._dsolve._superlu.gssv}
+        0.1279     10650   31.385    0.003   31.385    0.003 {method 'at' of 'numpy.ufunc' objects}
+        0.1081      1200   26.513    0.022   76.910    0.064 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\energia_pesata.py:182(termini_di_h)
+        0.0834      1200   20.465    0.017   21.765    0.018 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:542(elicita)
+        0.0745      7500   18.276    0.002   18.276    0.002 {method 'take' of 'numpy.ndarray' objects}
+        0.0699       300   17.148    0.057  115.659    0.386 C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\tick_lapse.py:58(reazione)
+        0.0576      2400   14.133    0.006   14.133    0.006 {built-in method numpy._core._multiarray_umath.c_einsum}
+        0.0534       600   13.089    0.022   21.666    0.036 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:378(_hop_psi_mezzo)
+        0.0399       300    9.783    0.033    9.790    0.033 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:484(_ruota_attorno_a_n)
+        0.0308      1200    7.550    0.006   29.910    0.025 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:317(_grover_mezzo)
+        0.0274     14150    6.730    0.000    6.730    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+        0.0267      1550    6.555    0.004   13.048    0.008 C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\tick_lapse.py:39(rho_di)
+        0.0177       300    4.341    0.014    9.628    0.032 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\materia_vuoto.py:210(applica)
+        0.0151      1200    3.698    0.003    5.379    0.004 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\energia_pesata.py:267(d_peso_arco)
+        0.0131       600    3.207    0.005   33.563    0.056 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:450(grover)
+----------------------------------------------------------------------------------------------------------------------------------
+### (MU) SENZA lapse: il tempo totale del profilo 65.53 s (50 tick, 1.311 s per tick, la macchina CARICA); il tick (Campi.tick, cumulato) 65.53 s
+    LE PRIME 15 FUNZIONI PER TEMPO PROPRIO (tottime; la frazione del totale accanto):
+      frazione    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        0.4857        50   31.825    0.637   31.825    0.637 {built-in method scipy.sparse.linalg._dsolve._superlu.gssv}
+        0.0825      2100    5.406    0.003    5.406    0.003 {method 'take' of 'numpy.ndarray' objects}
+        0.0651       200    4.265    0.021    7.042    0.035 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:378(_hop_psi_mezzo)
+        0.0509       700    3.335    0.005    3.335    0.005 {method 'at' of 'numpy.ufunc' objects}
+        0.0495       100    3.244    0.032    3.246    0.032 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\motore.py:484(_ruota_attorno_a_n)
+        0.0377       400    2.472    0.006    9.787    0.024 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:317(_grover_mezzo)
+        0.0242       400    1.587    0.004    1.587    0.004 {built-in method numpy._core._multiarray_umath.c_einsum}
+        0.0217       100    1.419    0.014    3.140    0.031 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\materia_vuoto.py:210(applica)
+        0.0177      3700    1.158    0.000    1.158    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+        0.0168        50    1.103    0.022    1.234    0.025 C:\Users\lpeano\soliton_simulator_mattone\csv\solitone\bordo.py:34(assorbi)
+        0.0162       200    1.060    0.005   10.994    0.055 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:450(grover)
+        0.0143       200    0.940    0.005    2.137    0.011 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:411(_hop_phi_mezzo)
+        0.0143      1200    0.937    0.001    0.937    0.001 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:246(espi)
+        0.0109       600    0.713    0.001    1.968    0.003 C:\Users\lpeano\soliton_simulator_mattone\primo_ordine\flussi_parziali.py:184(s_arco)
+        0.0108       100    0.709    0.007    9.067    0.091 C:\Users\lpeano\soliton_simulator_mattone\csv\_u1_prototipo.py:218(sp)
+==================================================================================================================================

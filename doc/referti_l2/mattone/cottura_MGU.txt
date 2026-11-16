@@ -1,0 +1,11 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+==================================================================================================================================
+LA COTTURA (MGU; Luca 09:34, A1): da MGU_05000 a campi pieni su L 81, pezzi di 1000 tick, al piu' 10; COTTO: il picco medio entro 0.02 e il raggio medio entro 0.01 fra due pezzi; rho_c 227058.574864; e 6.3154140e-05
+==================================================================================================================================
+### la ripartenza: E:\soliton_simulator\mattone\MGU_04000.npz -> 1000 tick (465 s) -> confrontato con E:\soliton_simulator\mattone\MGU_05000.npz
+  DEVE PASSARE: la ripartenza da MGU_04000 per 1000 tick = MGU_05000 AL BIT (tutte le chiavi e il campo)             ### FALLISCE   diverse: ['Lambda', 'phi_h', 'psi_h', 'rho', 'campo_A', 'campo_E']
+ESITO: ### FERMO: la ripartenza NON e' esatta; 0/1
+uscita 1

@@ -1,0 +1,37 @@
+[TIMBRO] massa_stesso_tick.py  sha1-BYTE 22225a21  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DELLA MASSA ALLO STESSO TICK (Luca 20:40, R1): la massa persa M(k0) - M(k) contro il bordo cumulato a k, a OGNI tick comune; la soglia 1e-06 (la stessa del DEVE)
+==================================================================================================================================
+### legati_GU_06000.txt + legati_GU_serie_06000.npz: k0 6000, M(k0) 2.047893e+06; i tick comuni 13 (6500 ... 12500); l'ultimo tick della tabella 12823, l'ultima misura della serie 12800
+    k   6500: persa 132.9903, bordo 132.9900, la differenza +0.0003, relativa 1.614e-10
+    k   7000: persa 248.3352, bordo 248.3400, la differenza -0.0048, relativa 2.334e-09
+    k   7500: persa 363.9687, bordo 363.9700, la differenza -0.0013, relativa 6.549e-10
+    k   8000: persa 472.6130, bordo 472.6100, la differenza +0.0030, relativa 1.456e-09
+    k   8500: persa 577.9290, bordo 577.9300, la differenza -0.0010, relativa 4.690e-10
+    k   9000: persa 669.2176, bordo 669.2200, la differenza -0.0024, relativa 1.192e-09
+    k   9500: persa 766.8176, bordo 766.8200, la differenza -0.0024, relativa 1.152e-09
+    k  10000: persa 858.2187, bordo 858.2200, la differenza -0.0013, relativa 6.361e-10
+    k  10500: persa 947.5458, bordo 947.5500, la differenza -0.0042, relativa 2.053e-09
+    k  11000: persa 1030.4253, bordo 1030.4000, la differenza +0.0253, relativa 1.237e-08
+    k  11500: persa 1129.4251, bordo 1129.4000, la differenza +0.0251, relativa 1.225e-08
+    k  12000: persa 1227.0694, bordo 1227.1000, la differenza -0.0306, relativa 1.495e-08
+    k  12500: persa 1320.8002, bordo 1320.8000, la differenza +0.0002, relativa 9.841e-11
+  DEVE PASSARE: la massa persa = il bordo ALLO STESSO TICK entro 1e-06 relativo, a ogni tick comune   PASSA   il massimo 1.495e-08
+----------------------------------------------------------------------------------------------------------------------------------
+### legati_GUpi_02000.txt + legati_GUpi_serie_02000.npz: k0 2000, M(k0) 1.930079e+06; i tick comuni 13 (2500 ... 8500); l'ultimo tick della tabella 8818, l'ultima misura della serie 8800
+    k   2500: persa 146.5419, bordo 146.5400, la differenza +0.0019, relativa 9.969e-10
+    k   3000: persa 301.3863, bordo 301.3900, la differenza -0.0037, relativa 1.898e-09
+    k   3500: persa 465.0709, bordo 465.0700, la differenza +0.0009, relativa 4.844e-10
+    k   4000: persa 620.5944, bordo 620.5900, la differenza +0.0044, relativa 2.260e-09
+    k   4500: persa 772.1158, bordo 772.1200, la differenza -0.0042, relativa 2.151e-09
+    k   5000: persa 919.4785, bordo 919.4800, la differenza -0.0015, relativa 7.598e-10
+    k   5500: persa 1057.0213, bordo 1057.0000, la differenza +0.0213, relativa 1.104e-08
+    k   6000: persa 1202.3071, bordo 1202.3000, la differenza +0.0071, relativa 3.692e-09
+    k   6500: persa 1344.0642, bordo 1344.1000, la differenza -0.0358, relativa 1.856e-08
+    k   7000: persa 1495.5027, bordo 1495.5000, la differenza +0.0027, relativa 1.375e-09
+    k   7500: persa 1643.3778, bordo 1643.4000, la differenza -0.0222, relativa 1.152e-08
+    k   8000: persa 1770.4170, bordo 1770.4000, la differenza +0.0170, relativa 8.791e-09
+    k   8500: persa 1903.2760, bordo 1903.3000, la differenza -0.0240, relativa 1.246e-08
+  DEVE PASSARE: la massa persa = il bordo ALLO STESSO TICK entro 1e-06 relativo, a ogni tick comune   PASSA   il massimo 1.856e-08
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: TUTTI PASSANO

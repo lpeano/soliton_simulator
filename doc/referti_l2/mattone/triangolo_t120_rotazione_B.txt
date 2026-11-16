@@ -1,0 +1,96 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] triangolo_rotazione_B.py  sha1-BYTE 32371cd3  committato e pulito
+==================================================================================================================================
+IL CAMPO B E LA ROTAZIONE DEL TRIANGOLO A 120 GRADI (Luca 2026-11-16 09:25; solo lettura); sys.executable E:\python\py3132\python.exe
+  il centro: il baricentro periodico di rho; l'anello 12-32; l'angolo della forma = -arg(somma rho e^{-3i theta})/3, srotolato
+==================================================================================================================================
+### (a) LA ROTAZIONE DALLE MAPPE: 268 istanti da k 0 a 12000
+### IL CONTROLLO DI SCALA contro i numeri del guardiano (gradi; entro 3):
+    k  2000: il guardiano  +10.0, qui  +10.33  ok
+    k  4000: il guardiano  +15.0, qui  +14.07  ok
+    k  8000: il guardiano  +32.0, qui  +32.01  ok
+    k  9000: il guardiano  +66.0, qui  +66.20  ok
+    k 12000: il guardiano  +98.0, qui  +98.49  ok
+  DEVE: la rotazione entro 3 gradi dal guardiano nei 5 punti  PASSA
+         k     angolo   omega/1000   ampiezza              I   lato medio
+         0      -0.00        +4.55     0.3669   1.983185e+09       39.257
+       500      +2.23        +4.58     0.3626   2.005771e+09       39.431
+      1000      +4.96        +6.13     0.3595   2.036730e+09       39.669
+      1500      +8.00        +5.63     0.3421   2.064722e+09       39.852
+      2000     +10.33        +3.72     0.3044   2.091667e+09       39.941
+      2500     +12.05        +3.55     0.2610   2.118817e+09       39.873
+      3000     +13.80        +3.45     0.2202   2.108255e+09       39.509
+      3500     +15.02        +0.20     0.2000   2.056889e+09       38.805
+      4000     +14.07        -3.20     0.2027   1.979529e+09       37.926
+      4500     +12.13        -3.35     0.1913   1.891707e+09       36.975
+      5000     +11.04        -1.10     0.1638   1.813984e+09       35.953
+      5500     +11.63        +2.63     0.1264   1.754692e+09       35.036
+      6000     +14.06        +9.38     0.0924   1.716710e+09       34.318
+      6500     +21.07       +15.78     0.0754   1.688387e+09       33.740
+      7000     +27.50        +8.74     0.0797   1.664153e+09       33.368
+      7500     +29.74        +2.12     0.0719   1.647460e+09       33.067
+      8000     +32.01       +14.06     0.0496   1.646034e+09       32.819
+      8500     +49.19       +48.57     0.0239   1.660684e+09       32.661
+      9000     +66.20       +15.69     0.0452   1.690020e+09       32.733
+      9500     +70.11        +6.86     0.0570   1.732460e+09       33.314
+     10000     +77.77       +22.94     0.0577   1.780530e+09       34.233
+     10500     +89.68       +17.57     0.0713   1.844229e+09       35.332
+     11000     +94.94        +6.35     0.1148   1.916608e+09       36.514
+     11500     +96.71        +1.90     0.1443   2.000078e+09       37.656
+     12000     +98.49        +5.06     0.1624   2.092755e+09       38.791
+### il minimo del lato: 32.661 a k 8650
+----------------------------------------------------------------------------------------------------------------------------------
+### (b) e (c) DAGLI STATI COMPLETI: B medio nel disco 8 e il flusso entro 30; L dalla corrente di ENERGIA; I entro 81
+    la corsa              k il centro (rho)       B medio (8)  flusso (30)              L              I          L/I
+    120                 500 ( 100.95,   79.35)    -6.0257e-04  -6.4426e-01  -3.959648e+04   2.005771e+09  -1.9741e-05
+    120                1000 ( 100.97,   79.38)    -6.0072e-04  -2.4860e-01  -4.809539e+04   2.036730e+09  -2.3614e-05
+    120                1500 ( 101.00,   79.39)    -9.7192e-04  -9.8112e-01  -5.640735e+04   2.064722e+09  -2.7320e-05
+    120                2000 ( 101.03,   79.38)    -1.2155e-03  -8.3709e-01  -6.694654e+04   2.091667e+09  -3.2006e-05
+    120                3000 ( 101.04,   79.38)    -1.6228e-03  -2.2568e+00  -1.364945e+05   2.108315e+09  -6.4741e-05
+    120                4000 ( 100.85,   79.51)    -1.9901e-03  -3.0929e+00  -1.888185e+05   1.979532e+09  -9.5385e-05
+    120                5000 ( 100.50,   79.78)    -2.0685e-03  -3.4915e+00  -2.228501e+05   1.813984e+09  -1.2285e-04
+    120                6000 ( 100.05,   80.11)    -1.9907e-03  -3.8021e+00  -2.581614e+05   1.716710e+09  -1.5038e-04
+    120                7000 (  99.72,   80.32)    -2.0313e-03  -4.0845e+00  -2.884404e+05   1.664144e+09  -1.7333e-04
+    120                8000 (  99.56,   80.40)    -2.1260e-03  -4.3104e+00  -3.059816e+05   1.646005e+09  -1.8589e-04
+    120                9000 (  99.56,   80.31)    -2.2367e-03  -4.6679e+00  -3.269976e+05   1.690020e+09  -1.9349e-04
+    120               10000 (  99.80,   80.01)    -2.2234e-03  -4.3929e+00  -3.080377e+05   1.780506e+09  -1.7301e-04
+    120               11000 ( 100.15,   79.64)    -1.8542e-03  -3.7879e+00  -2.706080e+05   1.916580e+09  -1.4119e-04
+    120               12000 ( 100.51,   79.32)    -1.4974e-03  -2.8134e+00  -2.156779e+05   2.092755e+09  -1.0306e-04
+    T-fase              500 (  99.58,   79.27)    +5.1106e-07  +2.4877e-03  -1.572336e+03   1.904755e+09  -8.2548e-07
+    T-fase             1000 (  99.54,   79.35)    -7.1586e-06  -1.2448e-02  -1.375484e+03   1.904743e+09  -7.2214e-07
+    T-fase             1500 (  99.48,   79.46)    +1.5801e-06  +5.9487e-03  -7.518125e+01   1.872810e+09  -4.0144e-08
+    T-fase             2000 (  99.40,   79.59)    -7.4512e-06  -3.6816e-03  +2.499448e+02   1.810354e+09  +1.3806e-07
+----------------------------------------------------------------------------------------------------------------------------------
+### (b) L: la media -1.9522e+05, la variazione massima 79.7% della media; il segno di L ['-']; il verso della rotazione +
+    LA LETTURA (fissata prima): L costante se entro il 10%: NO
+    T-fase: |L| a 2000 2.4994e+02 contro 120 a 2000 6.6947e+04 (il rapporto 0.004)
+### LA PATTINATRICE: omega misurato (dalla rotazione, gradi per 1000 tick) contro omega previsto = omega(k0) (L/I)(k) / (L/I)(k0), k0 = 3000
+    k   500: omega misurato    +4.58, previsto    +1.05, il rapporto 4.34; il lato 39.431; B al centro -6.0257e-04
+    k  1000: omega misurato    +6.13, previsto    +1.26, il rapporto 4.86; il lato 39.669; B al centro -6.0072e-04
+    k  1500: omega misurato    +5.63, previsto    +1.46, il rapporto 3.86; il lato 39.852; B al centro -9.7192e-04
+    k  2000: omega misurato    +3.72, previsto    +1.71, il rapporto 2.18; il lato 39.941; B al centro -1.2155e-03
+    k  3000: omega misurato    +3.45, previsto    +3.45, il rapporto 1.00; il lato 39.509; B al centro -1.6228e-03
+    k  4000: omega misurato    -3.20, previsto    +5.09, il rapporto -0.63; il lato 37.926; B al centro -1.9901e-03
+    k  5000: omega misurato    -1.10, previsto    +6.56, il rapporto -0.17; il lato 35.953; B al centro -2.0685e-03
+    k  6000: omega misurato    +9.38, previsto    +8.02, il rapporto 1.17; il lato 34.318; B al centro -1.9907e-03
+    k  7000: omega misurato    +8.74, previsto    +9.25, il rapporto 0.94; il lato 33.368; B al centro -2.0313e-03
+    k  8000: omega misurato   +14.06, previsto    +9.92, il rapporto 1.42; il lato 32.819; B al centro -2.1260e-03
+    k  9000: omega misurato   +15.69, previsto   +10.32, il rapporto 1.52; il lato 32.733; B al centro -2.2367e-03
+    k 10000: omega misurato   +22.94, previsto    +9.23, il rapporto 2.48; il lato 34.233; B al centro -2.2234e-03
+    k 11000: omega misurato    +6.35, previsto    +7.53, il rapporto 0.84; il lato 36.514; B al centro -1.8542e-03
+    k 12000: omega misurato    +5.06, previsto    +5.50, il rapporto 0.92; il lato 38.791; B al centro -1.4974e-03
+    LA LETTURA (fissata prima), al minimo del lato (lo stato piu' vicino, k 9000): misurato / previsto 1.52 -> la pattinatrice NON spiega
+### (c) B DOPO L'ARROTOLAMENTO (circa k 2800): il segno e |B| contro k 2000 (-1.2155e-03):
+    k  3000: B -1.6228e-03 (1.34 di quello a 2000) 
+    k  4000: B -1.9901e-03 (1.64 di quello a 2000) 
+    k  5000: B -2.0685e-03 (1.70 di quello a 2000) 
+    k  6000: B -1.9907e-03 (1.64 di quello a 2000) 
+    k  7000: B -2.0313e-03 (1.67 di quello a 2000) 
+    k  8000: B -2.1260e-03 (1.75 di quello a 2000) 
+    k  9000: B -2.2367e-03 (1.84 di quello a 2000) 
+    k 10000: B -2.2234e-03 (1.83 di quello a 2000) 
+    k 11000: B -1.8542e-03 (1.53 di quello a 2000) 
+    k 12000: B -1.4974e-03 (1.23 di quello a 2000) 
+    LA LETTURA (fissata prima): B RESTA (stesso segno, sopra il 10%)
+==================================================================================================================================

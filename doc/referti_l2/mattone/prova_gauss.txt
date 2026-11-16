@@ -1,0 +1,22 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura_U.py  sha1-BYTE 4e21b296  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] prova_gauss.py  sha1-BYTE cbe2f09e  committato e pulito
+==================================================================================================================================
+IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS (Luca 14:05, 15:07): E:\soliton_simulator\mattone\L162_MGU_03000.npz da solo nella scena di S162, il bordo da R_A 60, G+U, 50 tick, com'e' e col riuso; la macchina CARICA
+==================================================================================================================================
+    Lambda    AL BIT True; la differenza relativa massima 0.000e+00
+    campo_A   AL BIT True; la differenza relativa massima 0.000e+00
+    campo_E   AL BIT True; la differenza relativa massima 0.000e+00
+    phi_h     AL BIT True; la differenza relativa massima 0.000e+00
+    psi       AL BIT True; la differenza relativa massima 0.000e+00
+    psi_h     AL BIT True; la differenza relativa massima 0.000e+00
+    rho       AL BIT True; la differenza relativa massima 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il tempo per tick: oggi 4.599 s, col riuso 4.786 s, il rapporto 0.961 (la macchina CARICA); le fattorizzazioni costruite col riuso: 1
+  DEVE PASSARE: 50 tick col riuso = 50 tick di oggi AL BIT (esclusa h_int)   PASSA   diverse: []
+  DEVE PASSARE: una sola fattorizzazione per il campo   PASSA   1
+==================================================================================================================================
+ESITO: AL BIT: il riuso per le corse NUOVE (Luca 15:07)

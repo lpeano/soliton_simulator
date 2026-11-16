@@ -1,0 +1,24 @@
+[TIMBRO] mattone.py  sha1-BYTE c2107885  committato e pulito
+[TIMBRO] mattone_ctrl2.py  sha1-BYTE e53dd754  committato e pulito
+==================================================================================================================================
+S7' (MG; Luca 00:53): il francobollo del mattone (E:\soliton_simulator\mattone\MG_05000.npz) su L 162 nella scena di S162; 1250 tick, i primi 250 l'ASSESTAMENTO; il respiro del mattone negli ultimi 1000 tick 0.0711
+==================================================================================================================================
+### il francobollo: R_t 32.0 (l'anello del vuoto 5); 4693 nodi; il centro d'origine (41, 41); E_sol 8.279771e+06
+### incollato a [80, 80]; il salto di energia all'incollatura 1.118239e+01 (Delta 0.000139)
+    k   250  il respiro 1.4852  il centro (79.539, 79.707)  (524 s)
+    k   500  il respiro 1.4230  il centro (79.526, 79.716)  (1056 s)
+    k   750  il respiro 1.4677  il centro (79.517, 79.732)  (1584 s)
+    k  1000  il respiro 1.5052  il centro (79.515, 79.755)  (2132 s)
+    k  1250  il respiro 1.4847  il centro (79.521, 79.780)  (2573 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### 1250 tick in 2573 s
+### IL RESPIRO PER FINESTRE DI 250 TICK (picco-picco) e lo spostamento del centro:
+    tick    0- 250: il respiro 0.0749; il centro 0.0161 nodi   (l'ASSESTAMENTO: misurato, non giudicato)
+    tick  250- 500: il respiro 0.0677; il centro 0.0196 nodi
+    tick  500- 750: il respiro 0.0792; il centro 0.0215 nodi
+    tick  750-1000: il respiro 0.0635; il centro 0.0240 nodi
+    tick 1000-1250: il respiro 0.0425; il centro 0.0232 nodi
+    i primi 1000 tick (come S7): il respiro 0.1068, il centro 0.0785; IL GIUDIZIO S7' (tick 250-1250): il respiro 0.1193 contro il mattone 0.0711 (il rapporto 1.677; la tolleranza 0.25), il centro 0.0839 (la soglia 0.2)
+  DEVE PASSARE: la riproducibilita': i primi 1000 tick = il controllo S7 di prima (0.1068 e 0.0785, 4 cifre)         PASSA   0.1068 e 0.0785
+==================================================================================================================================
+ESITO: S7' ### NON PASSA; 1/1 controlli come devono; fallite: []; 2606 s in tutto
