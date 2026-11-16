@@ -50,3 +50,58 @@ ESITO (PR2-coppia): 8/8 controlli come devono; fallite []
 ### R3, IL RIFIUTO NEL LOG DI (d):
 ### R3: lo stato stato_00040.npz NON e' integro (lo sha1 9c3216ca non coincide con quello scritto): NON si riparte da li', si prende quello prima
 ### il pezzo pezzo_00020_00040.npz comincia a/oltre k 20: SCARTATO (rinominato)
+
+=============================== LO STRUMENTO DEL TRIANGOLO (la scena di V-T120: il triangolo a 120, lato 39, L 339, R_A 97.16) ===============================
+==================================================================================================================================
+LA PROVA DELLA RIPRESA (Luca 20:35, R2-R3): PR-t120, triangolo su L 339, R_A 97.16; i processi a 2 per volta; i log C:\Users\lpeano\AppData\Local\Temp\claude\b9208eb8a2665aad\a1f276e8-bac6-4d71-a5b8-87072b85f545\scratchpad\prova_ripresa\PR-t120_*.txt
+==================================================================================================================================
+    il processo PR-t120_avvio.txt: uscito con 0
+    il processo PR-t120_a.txt: uscito con 0
+    il processo PR-t120_b1.txt: uscito con 0
+    il processo PR-t120_c1.txt: uscito con 3
+    il processo PR-t120_b2.txt: uscito con 0
+    il processo PR-t120_c2.txt: uscito con 0
+### (d): un byte cambiato a meta' di E:\soliton_simulator\notte\PR-t120-d\stato_00040.npz (lo sha1 scritto resta quello di prima)
+    il processo PR-t120_d.txt: uscito con 0
+----------------------------------------------------------------------------------------------------------------------------------
+### R1, LE CHIAVI DELLO STATO (stato_00040 di (a)): Lambda float64 (114921,), campo_A float64 (344763,), campo_E float64 (344763,), h_int float64 (114921,), meta <U653 (), phi_h complex128 (689526,), psi complex128 (114921, 2), psi_h complex128 (689526, 2), rho float64 (114921,)
+### R2, LO STATO A k 40 DI (b) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (b) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+### R2, LO STATO A k 40 DI (c) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (c) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+### R2, LO STATO A k 40 DI (d) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (d) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+  DEVE FALLIRE: IL COMPARATORE: lo stato 40 di (a) contro il suo stato 20 risulta UGUALE                                       ### FALLISCE   7 chiavi diverse su 9
+### R2, LA SERIE UNITA DI (b): la catena [(0, 20), (20, 40)] (di (a) [(0, 20), (20, 40)]); 42 chiavi
+  DEVE PASSARE: (b) la serie unita = quella di (a) da 0 a 40, AL BIT (42 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### R2, LA SERIE UNITA DI (c): la catena [(0, 20), (20, 25), (25, 40)] (di (a) [(0, 20), (20, 40)]); 42 chiavi
+  DEVE PASSARE: (c) la serie unita = quella di (a) da 0 a 40, AL BIT (42 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### R2, LA SERIE UNITA DI (d): la catena [(0, 20), (20, 40)] (di (a) [(0, 20), (20, 40)]); 42 chiavi
+  DEVE PASSARE: (d) la serie unita = quella di (a) da 0 a 40, AL BIT (42 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### le chiavi della serie: FOTO_E (1, 114921), FOTO_centri (1, 3, 2), FOTO_dphi (1, 114921), FOTO_k (1,), FOTO_rho (1, 114921), GIRO_Mtot (1,), GIRO_Mtot_k (1,), GIRO_comp (1, 12), GIRO_dens (1,), GIRO_fuori (1,), GIRO_fuori_k (1,), GIRO_grande (1,), GIRO_k (1,), GIRO_r (1,), GIRO_somma (1,), PK (41, 3), S_M_A (1,), S_M_B (1,), S_M_C (1,), S_c1_A (1,), S_c1_B (1,), S_c1_C (1,), S_c2_A (1,), S_c2_B (1,), S_c2_C (1,), S_gauss (1,), S_k (1,), S_l_AB (1,), S_l_BC (1,), S_l_CA (1,), S_raggio_A (1,), S_raggio_B (1,), S_raggio_C (1,), T_KVd (41,), T_KVp (41,), T_Md (41,), T_Mp (41,), T_k (41,), T_mat (41, 4), T_totd (41,), T_totp (41,), T_vuo (41, 4)
+  DEVE PASSARE: (d) la ripresa RIFIUTA lo stato 40 col byte cambiato (R3) e riparte da 20                                      PASSA   il log C:\Users\lpeano\AppData\Local\Temp\claude\b9208eb8a2665aad\a1f276e8-bac6-4d71-a5b8-87072b85f545\scratchpad\prova_ripresa\PR-t120_d.txt
+### R3, GLI SHA1: lo stato a k 0 32d8e642 (scritto 32d8e642); a k 40: (a) 1a32f063; (b) 1a32f063; (c) 1a32f063; (d) 1a32f063
+==================================================================================================================================
+ESITO (PR-t120): 8/8 controlli come devono; fallite []
+    R-SCATOLA al 5% a k 0: R_ogg 47.0 (scena.json); il residuo di Gauss 3.981e-10
+### I CONTROLLI DELL'AVVIO (dal log dell'avvio):
+  DEVE PASSARE: i tre lati uguali entro 1e-09 al tick 0 (il lato atteso 39.000000000)                                PASSA   max - min 0.000e+00
+  DEVE PASSARE: i vertici A, B, C in senso antiorario (l'area con segno positiva)                                    PASSA   +658.6123
+  DEVE PASSARE: un solo francobollo: la somma e il prodotto = l'incollatura di S6 AL BIT (come c1740faa)             PASSA   diverse: []
+    [giro] k     0: la componente piu' grande (8) +1.000; la somma +1.000; le 12 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1 +1; la densita' al centro 2.8641e+01; il cerchio r 11.334; oltre R_A 0.000e+00
+  DEVE PASSARE: le tre masse dei francobolli da soli uguali entro 1e-10 relativo al tick 0                           PASSA   2.340e-16 (['9.950108931446826e+05', '9.950108931446826e+05', '9.950108931446829e+05'])
+  DEVE PASSARE: il giro della componente piu' grande al tick 0 = +1                                                  PASSA   +1.000000 (la somma +1.000000)
+  DEVE PASSARE: il vuoto senza materia (max |psi_h| = 0 prima dell'incollatura)                                      PASSA   0.000e+00
+### R-SCATOLA AL 5% (a k 0, PR-t120-0): R_ogg 47.0; la distanza al lato del rombo 146.79 = 3.12 R_ogg (>= 3: True); R_A 97.2 = 2.07 R_ogg (>= 2: True); la fascia 49.63 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 169.50
+### I TEMPI DEI PROCESSI (la macchina con 4-5 processi di calcolo):
+    a    ### 40 tick in 862 s (21.552 s per tick); finita a k 40
+    b1   ### 20 tick in 443 s (22.147 s per tick); finita a k 20
+    b2   ### 20 tick in 377 s (18.850 s per tick); finita a k 40
+    c1   ### 25 tick in 477 s (19.063 s per tick); fermata di prova a k 25
+    c2   ### 15 tick in 292 s (19.465 s per tick); finita a k 40
+    d    ### 20 tick in 456 s (22.789 s per tick); finita a k 40
+### R3, IL RIFIUTO NEL LOG DI (d):
+### R3: lo stato stato_00040.npz NON e' integro (lo sha1 b264ce05 non coincide con quello scritto): NON si riparte da li', si prende quello prima
+### il pezzo pezzo_00020_00040.npz comincia a/oltre k 20: SCARTATO (rinominato)
+
+### R5, IL VERDETTO: I DUE STRUMENTI (la coppia e il triangolo di notte.py) PASSANO R1-R3: 8/8 e 8/8.
