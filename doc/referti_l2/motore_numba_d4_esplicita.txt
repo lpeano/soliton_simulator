@@ -1,0 +1,14 @@
+[TIMBRO] prova_numba_motore.py  sha1-BYTE 802ee321  committato e pulito
+==================================================================================================================================
+D4 DEL MOTORE NUMBA INTERO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+  D4, 6 fili contro 6 fili, di nuovo, k    50: 9 chiavi su 9 al bit
+  D4, 6 fili contro 6 fili, di nuovo, k   100: 9 chiavi su 9 al bit
+  D4, 6 fili contro 6 fili, di nuovo, k   150: 9 chiavi su 9 al bit
+  D4, 6 fili contro 6 fili, di nuovo, k   200: 9 chiavi su 9 al bit
+  D4, 1 filo contro 6 fili, k    50: 9 chiavi su 9 al bit
+  D4, 1 filo contro 6 fili, k   100: 9 chiavi su 9 al bit
+  D4, 1 filo contro 6 fili, k   150: 9 chiavi su 9 al bit
+  D4, 1 filo contro 6 fili, k   200: 9 chiavi su 9 al bit
+==================================================================================================================================
+ESITO D4: PASSA (1391 s)

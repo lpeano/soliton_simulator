@@ -1,0 +1,30 @@
+[TIMBRO] prova_numba_motore.py  sha1-BYTE 802ee321  committato e pulito
+==================================================================================================================================
+D3 DEL MOTORE NUMBA INTERO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### D3: motore_numba.stato(): {'motore': 'numba', 'fili': 6, 'chiamate': 156000, 'ripieghi': 0, 'numba_importato': True, 'sys.executable': 'E:\\python\\py3132\\python.exe', 'secondo_passo': True, 'fma': 'esplicita', 'via_fma': 'llvm.fma.f64'}
+  D3, k   100: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   200: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   300: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   400: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   500: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   600: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   700: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   800: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k   900: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+  D3, k  1000: Lambda 0.00e+00, U 0.00e+00, campo_A 0.00e+00, campo_E 0.00e+00, h_int 0.00e+00, phi_h 0.00e+00, psi 0.00e+00, psi_h 0.00e+00, rho 0.00e+00
+### D3 a k 1000: il picco 1.163200228060e+03 contro 1.163200228060e+03; il respiro 1.519922613500e+00 contro 1.519922613500e+00; il centro (112.53332891650228, 106.73012100121323) contro (112.53332891650228, 106.73012100121323); il peggio relativo (la distanza dei centri in nodi) 0.000e+00
+  DEVE: la differenza relativa per chiave alla fine sotto 1e-10 (h_int esclusa): 0.000e+00  PASSA
+  DEVE: il picco, il respiro, il centro entro 1e-8: 0.000e+00  PASSA
+  D3 al bit, numba (esplicita) contro numpy, k   100: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   200: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   300: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   400: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   500: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   600: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   700: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   800: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k   900: 9 chiavi su 9 al bit
+  D3 al bit, numba (esplicita) contro numpy, k  1000: 9 chiavi su 9 al bit
+==================================================================================================================================
+ESITO D3: PASSA (7133 s)

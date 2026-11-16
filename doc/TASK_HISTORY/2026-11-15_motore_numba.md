@@ -242,3 +242,11 @@
 ### COSA MI FA FERMARE
 
 - **Una delle V1-V4 che cade: FERMO, niente fase 2, scritto quale.** **La fase 2 SOLO dopo «VIA ALLA FASE 2» di Luca.**
+
+## 24. V1-V4: PASSANO TUTTE *(i referti `motore_numba_d1.txt`, `_d3_esplicita.txt`, `_d4_esplicita.txt`, `_v4_suite.txt`, `_v4_conti.txt`)*
+
+- ### **V1** *(D1, `011377eb`, `12:48:47`-`14:52:33`)*: **`MGU` col lapse e `MU` senza, `1000` tick, mai importato contro importato e spento: `20` controlli su `20` AL BIT; `numba` NON in `sys.modules`; PASSA** *(`7426 s`)*. **E la suite a switch SPENTO col codice dei tempi: `67/67`** *(`15:16:40`-`15:32:37`)*.
+- ### **V2** *(D3 `--fma esplicita`, `10:44:28`-`12:43:23`)*: **`9` chiavi su `9` AL BIT a ogni controllo, da `k 100` a `1000`; PASSA** *(`7133 s`)*.
+- ### **V3** *(D4 `--fma esplicita`, rigirato `14:52:52`-`15:16:04`)*: **`6` fili contro `6` rigirati e `1` contro `6`: AL BIT a ogni controllo fino a `k 200`; PASSA** *(`1391 s`)*. **Il primo giro** *(`12:43:23`-`12:48:46`)* **e' MORTO dopo il timbro col codice `127`, nessun traceback** *(`_d4_esplicita_giro1.txt`)*: **non si e' ripetuto; la causa NON la so.**
+- ### **V4** *(la suite a switch ACCESO coi due passi, `35f84e04`, `14:05:48`-`14:26:48`, `2` fili)*: **`67/67`; `151` processi, `10` ACCESI tutti coi due passi** *(il modo `esplicita`, la via `llvm.fma.f64`)*, **`1112982` chiamate al ciclo, `0` ripieghi; `1` accensione caduta: `_misura_mb1.py`, che M-B1 gira in una copia a un commit vecchio senza `motore_numba.py`** *(come nella W2: atteso)*; **PASSA.**
+- **Resta V5, i tempi, in una finestra ferma.**
