@@ -1,0 +1,52 @@
+LA PROVA DELLA RIPRESA (Luca 2026-11-16 20:35, R1-R5): IL REFERTO
+Lo strumento: csv/solitone/notte.py (ff846b8c, sha1-BYTE 7cfa457f); la prova: csv/solitone/notte_prova.py (sha1-BYTE 1ba03b08); la carta doc/TASK_HISTORY/2026-11-16_notte_verifica.md, sez. 2.2 (il criterio scritto prima).
+La configurazione: l'interprete E:/python/py3132/python.exe, PYTHONNOUSERSITE=1, OMP/MKL/OPENBLAS/NUMEXPR_NUM_THREADS=1, TMP/TEMP E:/python/tmp_letture; il motore di oggi (numba spento, la ROTTA); G+U a campi pieni (mattone_cottura.Corsa).
+I comandi (verbatim):
+  E:/python/py3132/python.exe csv/solitone/notte_prova.py --nome PR2-coppia --tipo coppia --L 297 --d 35 --fase 0 --R_A 85.06 --log <scratchpad>/prova_ripresa --paralleli 2
+  E:/python/py3132/python.exe csv/solitone/notte_prova.py --nome PR-t120 --tipo triangolo --L 339 --R_A 97.16 --log <scratchpad>/prova_ripresa --paralleli 2
+(La prima prova della coppia, PR-coppia, si e' fermata all'avvio: mattone_coppia_L162 legge doc/referti_l2/mattone/triangolo_solo_serie.npz, che non c'era sul principale; copiato dal worktree del mattone, sha1 0abb19a0: la carta sez. 4.)
+
+=============================== LO STRUMENTO DELLE COPPIE (la scena di V-B2 e di F-35: d 35 in fase, L 297, R_A 85.06) ===============================
+==================================================================================================================================
+LA PROVA DELLA RIPRESA (Luca 20:35, R2-R3): PR2-coppia, coppia su L 297, R_A 85.06, d 35, fase 0; i processi a 2 per volta; i log C:\Users\lpeano\AppData\Local\Temp\claude\b9208eb8a2665aad\a1f276e8-bac6-4d71-a5b8-87072b85f545\scratchpad\prova_ripresa\PR2-coppia_*.txt
+==================================================================================================================================
+    il processo PR2-coppia_avvio.txt: uscito con 0
+    il processo PR2-coppia_a.txt: uscito con 0
+    il processo PR2-coppia_b1.txt: uscito con 0
+    il processo PR2-coppia_c1.txt: uscito con 3
+    il processo PR2-coppia_b2.txt: uscito con 0
+    il processo PR2-coppia_c2.txt: uscito con 0
+### (d): un byte cambiato a meta' di E:\soliton_simulator\notte\PR2-coppia-d\stato_00040.npz (lo sha1 scritto resta quello di prima)
+    il processo PR2-coppia_d.txt: uscito con 0
+----------------------------------------------------------------------------------------------------------------------------------
+### R1, LE CHIAVI DELLO STATO (stato_00040 di (a)): Lambda float64 (88209,), campo_A float64 (264627,), campo_E float64 (264627,), h_int float64 (88209,), meta <U570 (), phi_h complex128 (529254,), psi complex128 (88209, 2), psi_h complex128 (529254, 2), rho float64 (88209,)
+### R2, LO STATO A k 40 DI (b) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (b) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+### R2, LO STATO A k 40 DI (c) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (c) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+### R2, LO STATO A k 40 DI (d) CONTRO (a), chiave per chiave (la differenza massima): Lambda 0.000e+00; campo_A 0.000e+00; campo_E 0.000e+00; h_int 0.000e+00; meta 0.000e+00; phi_h 0.000e+00; psi 0.000e+00; psi_h 0.000e+00; rho 0.000e+00
+  DEVE PASSARE: (d) lo stato a k 40 = quello di (a) AL BIT, OGNI chiave (9 chiavi)                                             PASSA   diverse: []
+  DEVE FALLIRE: IL COMPARATORE: lo stato 40 di (a) contro il suo stato 20 risulta UGUALE                                       ### FALLISCE   7 chiavi diverse su 9
+### R2, LA SERIE UNITA DI (b): la catena [(0, 20), (20, 40)] (di (a) [(0, 20), (20, 40)]); 29 chiavi
+  DEVE PASSARE: (b) la serie unita = quella di (a) da 0 a 40, AL BIT (29 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### R2, LA SERIE UNITA DI (c): la catena [(0, 20), (20, 25), (25, 40)] (di (a) [(0, 20), (20, 40)]); 29 chiavi
+  DEVE PASSARE: (c) la serie unita = quella di (a) da 0 a 40, AL BIT (29 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### R2, LA SERIE UNITA DI (d): la catena [(0, 20), (20, 40)] (di (a) [(0, 20), (20, 40)]); 29 chiavi
+  DEVE PASSARE: (d) la serie unita = quella di (a) da 0 a 40, AL BIT (29 chiavi, la catena fino a 40)                          PASSA   diverse: []
+### le chiavi della serie: MP_E (1, 88209), MP_dphi (1, 88209), MP_k (1,), MP_rho (1, 88209), PK (41,), S_A2 (1,), S_M (1,), S_b1 (1,), S_b2 (1,), S_d (1,), S_d10 (5,), S_fuori (1,), S_gauss (1,), S_k (1,), S_raggio (1,), S_t10 (5,), S_u1_A (1,), S_u1_B (1,), S_u2_A (1,), S_u2_B (1,), T_KVd (41,), T_KVp (41,), T_Md (41,), T_Mp (41,), T_k (41,), T_mat (41, 3), T_totd (41,), T_totp (41,), T_vuo (41, 3)
+  DEVE PASSARE: (d) la ripresa RIFIUTA lo stato 40 col byte cambiato (R3) e riparte da 20                                      PASSA   il log C:\Users\lpeano\AppData\Local\Temp\claude\b9208eb8a2665aad\a1f276e8-bac6-4d71-a5b8-87072b85f545\scratchpad\prova_ripresa\PR2-coppia_d.txt
+### R3, GLI SHA1: lo stato a k 0 87bd2925 (scritto 87bd2925); a k 40: (a) 3288bac0; (b) 3288bac0; (c) 3288bac0; (d) 3288bac0
+==================================================================================================================================
+ESITO (PR2-coppia): 8/8 controlli come devono; fallite []
+    R-SCATOLA al 5% a k 0: R_ogg 42.0 (scena.json); il residuo di Gauss 3.208e-10
+### I TEMPI DEI PROCESSI (la macchina con 4-5 processi di calcolo):
+    avvio ### LO STATO A k 0: E:\soliton_simulator\notte\PR2-coppia-0\stato_00000.npz, sha1 87bd2925966b10478cd01e9ead6fbefa47a09508; il residuo di Gauss 3.208e-10
+    a    ### 40 tick in 658 s (16.445 s per tick); finita a k 40
+    b1   ### 20 tick in 318 s (15.876 s per tick); finita a k 20
+    b2   ### 20 tick in 286 s (14.290 s per tick); finita a k 40
+    c1   ### 25 tick in 373 s (14.901 s per tick); fermata di prova a k 25
+    c2   ### 15 tick in 230 s (15.364 s per tick); finita a k 40
+    d    ### 20 tick in 256 s (12.814 s per tick); finita a k 40
+### R3, IL RIFIUTO NEL LOG DI (d):
+### R3: lo stato stato_00040.npz NON e' integro (lo sha1 9c3216ca non coincide con quello scritto): NON si riparte da li', si prende quello prima
+### il pezzo pezzo_00020_00040.npz comincia a/oltre k 20: SCARTATO (rinominato)

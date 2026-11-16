@@ -26104,3 +26104,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Lo stato a `k 1250` non c'e':** `prova_scatola5.py` salva gli stati solo a `950` e `1000` *(`OGNI_STATO 1000`, `PRIMA 50`)*; **per la regola di Luca si riparte da `0`** *(e da `1000` mancherebbe la serie del picco `250`-`1000`, che serve al periodo del respiro)*. Gli sha1 degli stati di prima: `00950` `bf95772f`, `01000` `f392e6d9` *(la carta sez. `10`, `6a64bf13`)*.
 - **La corsa interrotta era arrivata a `k 1500`** *(morta col riavvio)*: reperto, non prova.
 - **La voce `prova-scatola5-L186-b` aperta alle `20:19`; la corsa partita** *(stima: circa `2.5` ore a `2.95 s` per tick)*.
+
+### 2026-11-16 21:35 -- LA NOTTE (LUCA 20:35): LO STRUMENTO notte.py, LA PROVA DELLA RIPRESA SULLA COPPIA PASSA 8/8
+
+- **PRECEDENZA-IN-CODA:** la correzione delle 20:19 (ripresa della fase 0 da k 1000) e' superata dal mandato delle 20:35 («la fase 0 gia' partita resta com'e'»): `prova-scatola5-L186-b` da 0 continua.
+- **Gli strumenti di L 162 NON passavano R1-R3** (`mattone_coppia_L162` senza `--da`; `legati` con serie e mappe solo a fine corsa, lo stato ogni 1000): **lo strumento nuovo `csv/solitone/notte.py`** (ff846b8c; la carta `2026-11-16_notte_verifica.md`, d46069c8).
+- **La prova sulla coppia (V-B2/F-35, L 297): 8/8** -- lo stato a k 40 di (b) 20+20, (c) fermata a 25 + 15, (d) un byte cambiato -> rifiutato -> da 20, UGUALE a (a) continuo su TUTTE le 9 chiavi (h_int compresa; lo sha1 del file 3288bac0 in tutti e quattro); le serie unite (29 chiavi) uguali al bit; il comparatore fallisce come deve. Referto `doc/referti_l2/prova_ripresa.txt`.
+- **Un intoppo:** `mattone_coppia_L162` legge `triangolo_solo_serie.npz`, rimasto (ignorato) nel worktree del mattone: copiato con lo sha1 0abb19a0.
+- **I COSTI CAMBIANO:** su L 297 con la macchina carica **13-16 s per tick** (non 7.5): V-B2 in una notte fa circa 2400 tick su 12000; F-66 su L 402 (circa 27 s per tick) non finisce in una notte: si sospende alle 08:00 e riprende.
