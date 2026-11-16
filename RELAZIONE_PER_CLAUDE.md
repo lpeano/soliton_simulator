@@ -26131,3 +26131,4 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **R-SCATOLA al 5% ADOTTATA**: la soglia del periodo era mal posta (le caselle della FFT 1501/12 e 1501/8; errore della carta e del guardiano n.182); al suo posto il confronto diretto delle serie (il picco 0.049-0.132%, il raggio 0.005%, il 5% del vuoto uguale). Nella ROTTA col verdetto della carta accanto; il bordo delle scene future da 2 R_ogg + 2 nodi.
 - **V-T120 fermata** (la voce chiusa alle 00:21; salva ed esce alla tappa successiva); il posto a F-51. Il triangolo si rilancia con un mandato, su un toro scelto dopo la misura della crescita di R_ogg (il piano).
+- **00:26 -- V-T120 uscita a k 332** (lo stato `E:/soliton_simulator/notte/V-T120/stato_00332.npz`, sha1 65415993; R_ogg 59 anche a k 332; il giro +1 nelle 12 a k 300). **F-51 partita** nel suo posto.
