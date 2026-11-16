@@ -90,3 +90,9 @@
 ### LA DOMANDA CHE PUO' DARE UN RISULTATO NUOVO: LA STABILITA'
 
 - **Se il triangolo si FERMA** *(la fase 2 fino a `6000` tick, in corsa; poi il porto grande `L 324`)*, **qualcosa del nostro modello lo stabilizza dove la teoria classica in genere non ci riesce: DA PROVARE.**
+
+### LO SPECCHIO -- **CONFERMATO PER COSTRUZIONE (C2), SENZA CORSA** *(Luca `2026-11-16` `10:43` la domanda, `12:57` la decisione; `triangolo_specchio.txt`, `specchio_carta.txt`)*
+
+- **Il modello e' simmetrico allo specchio:** **F3 riflesso = `-F3` al bit; il tick commuta con lo specchio con `T = sigma.l`, `A` col segno del verso, `phi -> -phi`** *(`3.5e-14` dopo `10` tick entro `40` nodi)*.
+- **Il verso del vortice del triangolo e' solo la CONDIZIONE INIZIALE** *(le fasi `0`, `120`, `240` in ordine antiorario: il giro `+1`)*; **l'unica rottura e' la scena** *(il bordo a `0.85` nodi dalla sua immagine)*.
+- *(Luca ha chiamato questa «la sez. `7` delle considerazioni»: la sez. `7` numerata e' «INTERFERENZA E JOSEPHSON», che non tocco; questa sottosezione sta nella parte della girandola. Dichiarato.)*

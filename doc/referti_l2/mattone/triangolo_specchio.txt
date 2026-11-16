@@ -1,0 +1,18 @@
+LA PROVA DELLO SPECCHIO DEL TRIANGOLO A 120 GRADI (Luca 2026-11-16 10:43) -- CHIUSA SENZA CORSA (decisione di Luca 2026-11-16 12:57)
+==================================================================================================================================
+
+P-SPECCHIO: CONFERMATA PER COSTRUZIONE (C2), SENZA CORSA.
+
+LA DECISIONE (Luca 12:57): la corsa M2 NON si fa. C1 e C2 rispondono gia':
+  - C1: F3 riflesso = -F3 al bit (1.2e-16): il vuoto e' simmetrico allo specchio a meno della fase globale pi.
+  - C2: il tick commuta con lo specchio con T = sigma.l (l la direzione dello specchio; unitaria, senza coniugio), A ed E per arco
+    col solo segno del verso, phi -> -phi: dopo 10 tick, entro 40 nodi dal baricentro, psi_h 3.5e-14 e phi_h 1.5e-14.
+  - il modello e' simmetrico allo specchio; il verso del vortice (il giro +1) e' solo la CONDIZIONE INIZIALE (le fasi 0, 120, 240 in
+    ordine antiorario);
+  - l'unica rottura e' la SCENA: il centro del bordo c0 sta a 0.851 nodi dalla sua immagine (g_e riflesso diverso fino a 1.9e-3 su
+    3.0e-2; su tutto il toro, dopo 10 tick, psi_h 7.4e-5 e phi_h 5.2e-4).
+
+LE FONTI: doc/referti_l2/mattone/specchio_carta.txt (specchio_carta.py, 6ea3dd66; il referto 6faa1a3d); la carta del task history,
+sez. 24.40 e 24.41.
+UN ERRORE MIO, gia' scritto: l'ultima riga di specchio_carta.txt applica la soglia 1e-10 al toro intero e scrive "NON ESISTE"; la
+carta aveva fissato la lettura entro 40 nodi. Vale la carta.
