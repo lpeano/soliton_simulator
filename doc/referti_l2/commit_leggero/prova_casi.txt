@@ -1,0 +1,73 @@
+[TIMBRO] prova.py  sha1-BYTE 713fe4d3  committato e pulito
+==================================================================================================================================
+LA PROVA A3 DEL COMMIT PIU' LEGGERO (S1 + S2; Luca 2026-11-16 08:57); sys.executable C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe
+  i file nuovi: csv/indice.py <- indice_nuovo.py.txt (dec08110), csv/_hook_presidi.py <- _hook_presidi_nuovo.py.txt (2934efff)
+  i file vecchi al commit 16346123: csv/indice.py 166e5876, csv/_hook_presidi.py cff1298a
+==================================================================================================================================
+### i log del 2026-11-15: 42; con un hash: 41 (la carta c0c3b78d contava 40 log coi tempi)
+### i due file sono gli stessi di 16346123 in tutti i 41 commit: la sovrapposizione vale
+### la memoria: C:/Users/lpeano/soliton_simulator/.git\indice_storico_righe.json (c'e': True; la si toglie prima, cosi' il primo NUOVO la costruisce)
+----------------------------------------------------------------------------------------------------------------------------------
+### --solo-casi: i 41 commit NON si rigirano (il primo giro: doc/referti_l2/commit_leggero/prova.txt, ce9e7b63)
+----------------------------------------------------------------------------------------------------------------------------------
+### I TEMPI MEDI PER COMANDO (secondi):
+### IL CONFRONTO SUI 41 COMMIT: TUTTI UGUALI
+==================================================================================================================================
+### I CASI CHE DEVONO FALLIRE, sul commit 52143b43
+  F1 una riga di storico TOLTA in mezzo, in stage (c2 e c3 devono uscire 1):
+    VECCHIO c1 -> 1, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl')
+    NUOVO   c1 -> 0, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl')
+  F2 voci.jsonl cambiato in stage SENZA la riga di storico (c2 e c3 devono uscire 1):
+    VECCHIO c1 -> 1, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl')
+    NUOVO   c1 -> 0, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl')
+  F3 un indice rotto SOLO sul disco (c3 deve uscire 1; il pre-commit INTERO deve uscire 1, e i file dopo come prima):
+    VECCHIO c1 -> 1, c2 -> 0, c3 -> 1, c4 -> 0, c5 -> 1; i file (disco, stage) prima ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md'), dopo ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md')
+    NUOVO   c1 -> 0, c2 -> 0, c3 -> 1, c4 -> 0, c5 -> 1; i file (disco, stage) prima ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md'), dopo ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md')
+    F3: il pre-commit INTERO, VECCHIO: 1; NUOVO: 1; l'ultima riga di rifiuto VECCHIO "  CHE FARE: `python csv/indice.py valida` dice quale voce e perche'. Le viste si rigenerano con `python csv/indice.py viste`, e si scrive SOLO con `py"; NUOVO 'json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)'
+    F3 VECCHIO, chi rifiuta (gli ultimi timbri, i traceback, le righe RIFIUTATO):   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\indice.py", line 2713, in main |   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\indice.py", line 201, in carica |   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\indice.py", line 191, in _jsonl |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 361, in raw_decode
+    F3 NUOVO, chi rifiuta (gli ultimi timbri, i traceback, le righe RIFIUTATO):   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\_presidi_era2.py", line 386, in tutti |   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\_presidi_era2.py", line 303, in pe7 |   File "C:\Users\lpeano\AppData\Local\Temp\wt_prova_commit_leggero\csv\_presidi_era2.py", line 280, in _voci |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode |   File "C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 361, in raw_decode
+    F1 c1: VECCHIO 1, NUOVO 0 (per costruzione: S1 toglie da c1 il valida sul disco)
+    F2 c1: VECCHIO 1, NUOVO 0 (per costruzione: S1 toglie da c1 il valida sul disco)
+    F3 c1: VECCHIO 1, NUOVO 0 (per costruzione: S1 toglie da c1 il valida sul disco)
+    F4a: [TIMBRO] indice.py  sha1-BYTE dec08110  committato e pulito | PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 39.0 s | [indice: la memoria delle righe dello storico e- ROTTA: non si usa, si ricostruisce]
+[TIMBRO] indice_nuovo.py.txt  sha1-BYTE dec08110  committato e pulito
+    F4b: [TIMBRO] indice.py  sha1-BYTE dec08110  committato e pulito | PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 38.3 s | [indice: la memoria delle righe dello storico NON torna con git: si butta e si ricostruisce]
+    F5: [TIMBRO] indice.py  sha1-BYTE dec08110  committato e pulito
+PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 39.7 s
+    IL LIMITE, dichiarato: un conto falsato su un blob VECCHIO con l'impronta rifatta NON e' riconosciuto (si rilegge solo il piu' recente)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: F1 VECCHIO c2 esce 1                                                                                           PASSA
+  DEVE: F1 VECCHIO c3 esce 1                                                                                           PASSA
+  DEVE: F1 NUOVO c2 esce 1                                                                                             PASSA
+  DEVE: F1 NUOVO c3 esce 1                                                                                             PASSA
+  DEVE: F2 VECCHIO c2 esce 1                                                                                           PASSA
+  DEVE: F2 VECCHIO c3 esce 1                                                                                           PASSA
+  DEVE: F2 NUOVO c2 esce 1                                                                                             PASSA
+  DEVE: F2 NUOVO c3 esce 1                                                                                             PASSA
+  DEVE: F3 VECCHIO c3 esce 1                                                                                           PASSA
+  DEVE: F3 VECCHIO c5 esce 1                                                                                           PASSA
+  DEVE: F3 NUOVO c3 esce 1                                                                                             PASSA
+  DEVE: F3 NUOVO c5 esce 1                                                                                             PASSA
+  DEVE: F3 NUOVO: i file (disco, stage) dopo il rifiuto come prima                                                     PASSA
+  DEVE: F1 c2: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F1 c2: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F1 c3: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F1 c3: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F1 c4: lo stesso codice d'uscita nei due modi (0, 0)                                                           PASSA
+  DEVE: F2 c2: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F2 c2: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F2 c3: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F2 c3: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F2 c4: lo stesso codice d'uscita nei due modi (0, 0)                                                           PASSA
+  DEVE: F3 c2: lo stesso codice d'uscita nei due modi (0, 0)                                                           PASSA
+  DEVE: F3 c2: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F3 c3: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F3 c3: le stesse righe di valida nei due modi (l'uscita normalizzata)                                          PASSA
+  DEVE: F3 c4: lo stesso codice d'uscita nei due modi (0, 0)                                                           PASSA
+  DEVE: F3 c5: lo stesso codice d'uscita nei due modi (1, 1)                                                           PASSA
+  DEVE: F4a un conto sbagliato SENZA rifare l'impronta: riconosciuta ROTTA, lo stesso per_riga                         PASSA
+  DEVE: F4b il conto del blob PIU' RECENTE falsato CON l'impronta rifatta: riconosciuto da git, lo stesso per_riga     PASSA
+  DEVE: F5 la memoria assente: ricostruita, lo stesso per_riga                                                         PASSA
+==================================================================================================================================
+### I TEMPI DELLA PROVA: VECCHIO 0 s, NUOVO 0 s
+ESITO: LA STRADA S1 + S2 RESTA: ogni esito uguale, ogni caso come deve
