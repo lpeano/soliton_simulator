@@ -26112,3 +26112,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La prova sulla coppia (V-B2/F-35, L 297): 8/8** -- lo stato a k 40 di (b) 20+20, (c) fermata a 25 + 15, (d) un byte cambiato -> rifiutato -> da 20, UGUALE a (a) continuo su TUTTE le 9 chiavi (h_int compresa; lo sha1 del file 3288bac0 in tutti e quattro); le serie unite (29 chiavi) uguali al bit; il comparatore fallisce come deve. Referto `doc/referti_l2/prova_ripresa.txt`.
 - **Un intoppo:** `mattone_coppia_L162` legge `triangolo_solo_serie.npz`, rimasto (ignorato) nel worktree del mattone: copiato con lo sha1 0abb19a0.
 - **I COSTI CAMBIANO:** su L 297 con la macchina carica **13-16 s per tick** (non 7.5): V-B2 in una notte fa circa 2400 tick su 12000; F-66 su L 402 (circa 27 s per tick) non finisce in una notte: si sospende alle 08:00 e riprende.
+
+### 2026-11-16 22:05 -- LE DIPENDENZE DAI FILE (LUCA 21:35): MISURATE, 4 NON TRACCIATI E TUTTI PRESENTI; LA PROVA DEL TRIANGOLO 8/8
+
+- **Misurate con un audit hook** (ogni `open` del processo) in tre casi: coppia avvio+2 tick, triangolo avvio+2 tick, `verifica_coppie` fino alla scrittura finale. **I non tracciati che servono: 4, tutti presenti** -- `db/accensione_lenta/fase_F3.npz` (4beb01d9), `doc/referti_l2/mattone/triangolo_solo_serie.npz` (0abb19a0, l'unico che stava SOLO nel worktree del mattone: copiato alle 21:03), su E: `L162_MGU_03000.npz` (6bf50730) e `S162_stato_010000.npz` (7a2bdc7e). Referto `doc/referti_l2/notte_dipendenze.txt`; la carta notte sez. 5.
+- **La prova della ripresa sul triangolo (L 339): 8/8** (704c5baf); 19-23 s per tick.
+- **V-B2 e V-B2pi erano partiti alle 21:36, prima del mandato delle 21:35 arrivato dopo**: non fermati (i loro file erano gia' provati dalla R2 della coppia; l'elenco lo conferma). **Ora partono V-T120 e F-66.**

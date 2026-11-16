@@ -1,0 +1,83 @@
+==================================================================================================================================
+LE DIPENDENZE DI notte.py E verifica_coppie.py DAI FILE (Luca 2026-11-16 21:35): MISURATE con un audit hook (l'evento open), fuori dalla libreria di Python (e:\python\py3132)
+==================================================================================================================================
+    il file                                                                                dove       tracciato sha1      nel worktree del mattone   i casi
+    (i .pyc di __pycache__ letti: 85, DERIVATI dai sorgenti da Python, non dipendenze: fuori dalla tabella)
+    .githooks/commit-msg                                                                   repo C:    SI        46688e2a  46688e2a                   coppia,triangolo,verifica
+    .githooks/pre-commit                                                                   repo C:    SI        3e3614fc  3e3614fc                   coppia,triangolo,verifica
+    csv/_barriera.lock                                                                     repo C:    SI        249f1f97  249f1f97                   coppia,triangolo,verifica
+    db/accensione_lenta/fase_F3.npz                                                        repo C:    ### NO    4beb01d9  4beb01d9                   coppia,triangolo,verifica
+    doc/NUCLEO_CONGELATO.md                                                                repo C:    SI        a83b9e64  b272e6fc                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_000000.jsonl                                      repo C:    SI        ada93d48  ada93d48                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_010000.jsonl                                      repo C:    SI        d6b80ee3  d6b80ee3                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_020000.jsonl                                      repo C:    SI        68fdf2fc  68fdf2fc                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_030000.jsonl                                      repo C:    SI        43333be7  43333be7                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_040000.jsonl                                      repo C:    SI        1108640e  1108640e                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_050000.jsonl                                      repo C:    SI        90cbac83  90cbac83                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_060000.jsonl                                      repo C:    SI        4d9103a7  4d9103a7                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_066667.jsonl                                      repo C:    SI        cd07c61a  cd07c61a                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_076667.jsonl                                      repo C:    SI        01a85fec  01a85fec                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_086667.jsonl                                      repo C:    SI        a23e9c3f  a23e9c3f                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_096667.jsonl                                      repo C:    SI        22581a29  22581a29                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_106667.jsonl                                      repo C:    SI        8aebb527  8aebb527                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_116667.jsonl                                      repo C:    SI        8ff61554  8ff61554                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_126667.jsonl                                      repo C:    SI        704a6bcd  704a6bcd                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_136667.jsonl                                      repo C:    SI        e68a094f  e68a094f                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_146667.jsonl                                      repo C:    SI        f31b56a6  f31b56a6                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_156667.jsonl                                      repo C:    SI        3522659d  3522659d                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_166667.jsonl                                      repo C:    SI        a912929e  a912929e                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_176667.jsonl                                      repo C:    SI        ef16bfef  ef16bfef                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_186667.jsonl                                      repo C:    SI        33e7806d  33e7806d                   coppia,triangolo,verifica
+    doc/referti_l2/accensione_lenta/S162_196667.jsonl                                      repo C:    SI        5128e5ed  5128e5ed                   coppia,triangolo,verifica
+    doc/referti_l2/coppia_di_B/griglia.json                                                repo C:    SI        96d882ac  96d882ac                   coppia,triangolo,verifica
+    doc/referti_l2/mattone/cottura_L162_MGU.json                                           repo C:    SI        d6a30fb9  d6a30fb9                   coppia,triangolo,verifica
+    doc/referti_l2/mattone/triangolo_solo_serie.npz                                        repo C:    ### NO    0abb19a0  0abb19a0                   coppia,verifica
+    doc/referti_l2/p6_bracci/0.npz                                                         repo C:    SI        487eccea  487eccea                   coppia,triangolo,verifica
+    doc/referti_l2/s5_caduta_segno.txt                                                     repo C:    SI        ac0cc32c  ac0cc32c                   coppia,triangolo,verifica
+    csv/_u1_prototipo.py                                                                   repo C:    SI        d073761c  d073761c                   triangolo
+    csv/solitone/carta_coppia.py                                                           repo C:    SI        3adbbe11  3adbbe11                   coppia,verifica
+    csv/solitone/conti.py                                                                  repo C:    SI        d57ce3d4  d57ce3d4                   coppia,triangolo,verifica
+    csv/solitone/convergenza.py                                                            repo C:    SI        c3b10add  c3b10add                   coppia,triangolo,verifica
+    csv/solitone/legati.py                                                                 repo C:    SI        75646939  75646939                   coppia,triangolo
+    csv/solitone/mattone.py                                                                repo C:    SI        b0a96cf6  b0a96cf6                   coppia,triangolo,verifica
+    csv/solitone/mattone_coppia_L162.py                                                    repo C:    SI        a65d59ec  a65d59ec                   coppia,triangolo,verifica
+    csv/solitone/mattone_cottura.py                                                        repo C:    SI        cbd7859a  cbd7859a                   coppia,triangolo,verifica
+    csv/solitone/mattone_cottura_U.py                                                      repo C:    SI        4e21b296  4e21b296                   triangolo
+    csv/solitone/mattone_rhoc.py                                                           repo C:    SI        bf6b7c9f  bf6b7c9f                   triangolo
+    csv/solitone/mattone_triangolo.py                                                      repo C:    SI        02f75f97  02f75f97                   coppia,triangolo
+    csv/solitone/notte.py                                                                  repo C:    SI        7cfa457f  no                         coppia,triangolo
+    csv/solitone/p6_bracci.py                                                              repo C:    SI        91e02c6a  91e02c6a                   coppia,verifica
+    csv/solitone/p6_u_breve.py                                                             repo C:    SI        8994cb96  8994cb96                   coppia,verifica
+    csv/solitone/prova_scatola5.py                                                         repo C:    SI        30e0c27b  no                         coppia,triangolo,verifica
+    csv/solitone/triangolo_120.py                                                          repo C:    SI        fc588994  fc588994                   coppia,triangolo
+    csv/solitone/triangolo_equilatero.py                                                   repo C:    SI        14ef2563  14ef2563                   triangolo
+    csv/solitone/triangolo_video.py                                                        repo C:    SI        8558625c  8558625c                   coppia,triangolo
+    csv/solitone/verifica_coppie.py                                                        repo C:    SI        1168ae62  no                         verifica
+    primo_ordine/composizione.py                                                           repo C:    SI        4f6f0b4e  4f6f0b4e                   triangolo
+    E:\soliton_simulator\mattone\L162_MGU_03000.npz                                        fuori      ### NO    6bf50730  -                          coppia,triangolo,verifica
+    E:\soliton_simulator\stati\S162\S162_stato_010000.npz                                  fuori      ### NO    7a2bdc7e  -                          coppia,triangolo,verifica
+----------------------------------------------------------------------------------------------------------------------------------
+### I FILE LETTI NON TRACCIATI: 4
+    db/accensione_lenta/fase_F3.npz  sha1 4beb01d9  (il worktree del mattone: 4beb01d9)
+    doc/referti_l2/mattone/triangolo_solo_serie.npz  sha1 0abb19a0  (il worktree del mattone: 0abb19a0)
+    E:\soliton_simulator\mattone\L162_MGU_03000.npz  sha1 6bf50730  (il worktree del mattone: -)
+    E:\soliton_simulator\stati\S162\S162_stato_010000.npz  sha1 7a2bdc7e  (il worktree del mattone: -)
+----------------------------------------------------------------------------------------------------------------------------------
+### I FILE NOMINATI NEI SORGENTI (os.path.join(DIR_REF|DIR_E, "nome"), nomi fissi) CHE I TRE CASI NON HANNO APERTO (rami non toccati, o file che si SCRIVONO):
+    legati                   DIR_REF  doc/referti_l2/mattone/triangolo_t120_serie.npz                        esiste sha1 d9669c43; tracciato SI
+    mattone_cottura          DIR_REF  doc/referti_l2/mattone/MG_raggio.npz                                   esiste sha1 7eac78f4; tracciato SI
+    mattone_cottura          DIR_REF  doc/referti_l2/mattone/ctrl2_MG_serie.npz                              esiste sha1 52d7e4c6; tracciato SI
+    porto                    DIR_REF  doc/referti_l2/mattone/cottura_L324_MGU.json                           ### NON esiste
+    porto                    DIR_REF  doc/referti_l2/mattone/porto_cottura_serie_*.npz                       ### NON esiste
+    porto                    DIR_REF  doc/referti_l2/mattone/porto_gauss.json                                esiste sha1 1d5570e7; tracciato SI
+    porto                    DIR_REF  doc/referti_l2/mattone/porto_t120_giro_*.npz                           ### NON esiste
+    porto_alone              DIR_E    E:\soliton_simulator\mattone\conv_GU_L243_02000.npz                    esiste sha1 b42a64b5
+    porto_alone              DIR_REF  doc/referti_l2/mattone/porto_alone_profili.npz                         esiste sha1 a770dbf5; tracciato SI
+    porto_alone              DIR_REF  doc/referti_l2/mattone/porto_alone_profili.png                         esiste sha1 e120e19b; tracciato SI
+    prova_scatola5           DIR_REF  doc/referti_l2/mattone/conv_GU_L243.txt                                esiste sha1 f5856cf2; tracciato SI
+    prova_scatola5           DIR_REF  doc/referti_l2/mattone/porto_alone_vuoto.txt                           esiste sha1 2d4dc7f1; tracciato SI
+    prova_scatola5           DIR_REF  doc/referti_l2/mattone/porto_cottura_serie_00000.npz                   esiste sha1 7cb25d8e; tracciato SI
+    triangolo_120            DIR_REF  doc/referti_l2/mattone/triangolo_t120_giro.npz                         esiste sha1 e18da85f; tracciato SI
+    triangolo_120            DIR_REF  doc/referti_l2/mattone/triangolo_t120_mappe.npz                        esiste sha1 13b90cf0; tracciato SI
+    triangolo_video          DIR_REF  doc/referti_l2/mattone/triangolo_video_mappe.npz                       esiste sha1 6bd555fb; tracciato SI
+==================================================================================================================================
