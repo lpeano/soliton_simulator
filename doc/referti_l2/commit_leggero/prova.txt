@@ -1,0 +1,157 @@
+[TIMBRO] prova.py  sha1-BYTE 977b903f  committato e pulito
+==================================================================================================================================
+LA PROVA A3 DEL COMMIT PIU' LEGGERO (S1 + S2; Luca 2026-11-16 08:57); sys.executable C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe
+  i file nuovi: csv/indice.py <- indice_nuovo.py.txt (dec08110), csv/_hook_presidi.py <- _hook_presidi_nuovo.py.txt (2934efff)
+  i file vecchi al commit 16346123: csv/indice.py 166e5876, csv/_hook_presidi.py cff1298a
+==================================================================================================================================
+### i log del 2026-11-15: 42; con un hash: 41 (la carta c0c3b78d contava 40 log coi tempi)
+### i due file sono gli stessi di 16346123 in tutti i 41 commit: la sovrapposizione vale
+### la memoria: C:/Users/lpeano/soliton_simulator/.git\indice_storico_righe.json (c'e': False; la si toglie prima, cosi' il primo NUOVO la costruisce)
+----------------------------------------------------------------------------------------------------------------------------------
+   1 00a4a108 (remotes/origin/motore-numba~23) INTERO; i codici V [0, 0, 0, 0, 0] N [0, 0, 0, 0, 0]; i secondi V ['40', '45', '39', '32', '277'] N ['4', '47', '4', '1', '81']; ### 1 DIVERSI
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+    ### DIVERSO: c5 il pre-commit INTERO: il codice 0 contro 0
+        --- VECCHIO
+        +++ NUOVO
+        @@ -362,4 +362,4 @@
+         ----------------------------------------------------------------------------------------------------
+        -  il controllo: 32.949 us   un passo GLOBALE: 1096.7 us   rapporto: 3.0043%
+        -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   3.0043%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+        +  il controllo: 36.547 us   un passo GLOBALE: 1242.3 us   rapporto: 2.9419%
+        +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.9419%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+         ====================================================================================================
+   2 2a27c535 (remotes/origin/motore-numba~22) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['37', '51', '38', '34'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+   3 a5cdb23c (remotes/origin/motore-numba~21) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['38', '46', '33', '31'] N ['1', '14', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+   4 10c5494d (remotes/origin/motore-numba~20) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['39', '51', '52', '44'] N ['2', '16', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+   5 683f17eb (remotes/origin/motore-numba~17^2~7) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['49', '49', '36', '31'] N ['1', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+   6 ce4dde10 (remotes/origin/motore-numba~17^2~6) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['34', '44', '40', '30'] N ['2', '13', '3', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+   7 4f4ca5a1 (remotes/origin/motore-numba~17^2~5) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['39', '42', '41', '30'] N ['2', '17', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 1.0 s
+   8 1d913fd1 (remotes/origin/motore-numba~17^2~4) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['52', '62', '39', '28'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+   9 259ae269 (remotes/origin/motore-numba~17^2~3) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['34', '40', '34', '35'] N ['1', '15', '3', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  10 dc831f8e (remotes/origin/primo-ordine~23) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['43', '40', '36', '34'] N ['1', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  11 aed31248 (remotes/origin/motore-numba~17^2~2) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['34', '48', '37', '30'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  12 20bb8afe (remotes/origin/motore-numba~17^2~1) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['33', '39', '38', '30'] N ['1', '13', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  13 224f2061 (remotes/origin/motore-numba~17^2) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['39', '49', '33', '37'] N ['1', '15', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 1.0 s
+  14 c503b81b (remotes/origin/primo-ordine~22) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['37', '42', '33', '27'] N ['1', '12', '3', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  15 ef724b73 (remotes/origin/motore-numba~18) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['31', '38', '30', '26'] N ['1', '12', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  16 5b08a90e (remotes/origin/motore-numba~17) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['34', '38', '34', '32'] N ['2', '12', '3', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  17 88005322 (remotes/origin/strumento-mattone~21) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['40', '47', '32', '27'] N ['1', '14', '3', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  18 722fb8bd (remotes/origin/primo-ordine~21) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['32', '39', '31', '34'] N ['1', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  19 8818445b (remotes/origin/strumento-mattone~20) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['32', '45', '32', '34'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  20 db57a540 (remotes/origin/strumento-mattone~19) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['42', '44', '32', '30'] N ['1', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  21 9ca55e8d (remotes/origin/primo-ordine~20) INTERO; i codici V [0, 0, 0, 0, 0] N [0, 0, 0, 0, 0]; i secondi V ['37', '40', '29', '29', '250'] N ['2', '15', '4', '1', '90']; ### 1 DIVERSI
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.9 s
+    ### DIVERSO: c5 il pre-commit INTERO: il codice 0 contro 0
+        --- VECCHIO
+        +++ NUOVO
+        @@ -362,4 +362,4 @@
+         ----------------------------------------------------------------------------------------------------
+        -  il controllo: 48.649 us   un passo GLOBALE: 1259.2 us   rapporto: 3.8636%
+        -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   3.8636%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+        +  il controllo: 33.625 us   un passo GLOBALE: 1125.7 us   rapporto: 2.9870%
+        +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.9870%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+         ====================================================================================================
+  22 417e7818 (remotes/origin/motore-numba~16) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['36', '47', '34', '31'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  23 93acca61 (remotes/origin/motore-numba~15) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['41', '46', '43', '40'] N ['2', '17', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  24 7f01286a (remotes/origin/strumento-mattone~18) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['36', '47', '35', '42'] N ['2', '18', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  25 b6e7dad7 (remotes/origin/strumento-mattone~17) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['49', '55', '41', '60'] N ['2', '19', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.9 s
+  26 ffa4fa82 (remotes/origin/strumento-mattone~16) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['60', '53', '43', '42'] N ['2', '16', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.9 s
+  27 fcb5dcf6 (remotes/origin/strumento-mattone~16) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['51', '58', '46', '44'] N ['2', '16', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  28 e1df85c3 (remotes/origin/motore-numba~14) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['52', '77', '58', '37'] N ['3', '18', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  29 8402c74e (remotes/origin/motore-numba~13) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['48', '50', '47', '43'] N ['1', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  30 15308c40 (remotes/origin/strumento-mattone~16) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['39', '47', '37', '35'] N ['1', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  31 ddf2fc02 (remotes/origin/strumento-mattone~16) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['38', '46', '36', '32'] N ['4', '17', '5', '2']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  32 4e6ad2c9 (remotes/origin/strumento-mattone~15) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['46', '52', '48', '45'] N ['1', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.8 s
+  33 330d3718 (remotes/origin/motore-numba~12) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['50', '57', '38', '43'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  34 007e9af1 (remotes/origin/motore-numba~11) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['47', '58', '40', '43'] N ['2', '17', '5', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  35 f743185e (remotes/origin/motore-numba~10) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['42', '54', '41', '44'] N ['2', '16', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  36 aedf6e51 (remotes/origin/strumento-mattone~15) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['44', '58', '47', '36'] N ['2', '15', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  37 be408f31 (remotes/origin/primo-ordine~19) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['39', '49', '42', '40'] N ['2', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  38 5b33b7f5 (remotes/origin/motore-numba~9) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['47', '54', '40', '35'] N ['2', '17', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  39 7be17e3f (remotes/origin/motore-numba~8) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['38', '57', '43', '46'] N ['2', '16', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+  40 1537b583 (remotes/origin/primo-ordine~18) ; i codici V [0, 0, 0, 0] N [0, 0, 0, 0]; i secondi V ['42', '53', '42', '33'] N ['2', '14', '4', '1']; UGUALE
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.6 s
+  41 52143b43 (remotes/origin/motore-numba~7) INTERO; i codici V [0, 0, 0, 0, 0] N [0, 0, 0, 0, 0]; i secondi V ['37', '41', '32', '29', '234'] N ['1', '13', '3', '1', '82']; ### 1 DIVERSI
+       PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 0.7 s
+    ### DIVERSO: c5 il pre-commit INTERO: il codice 0 contro 0
+        --- VECCHIO
+        +++ NUOVO
+        @@ -362,4 +362,4 @@
+         ----------------------------------------------------------------------------------------------------
+        -  il controllo: 37.199 us   un passo GLOBALE: 1280.6 us   rapporto: 2.9049%
+        -  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.9049%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+        +  il controllo: 36.191 us   un passo GLOBALE: 1214.0 us   rapporto: 2.9812%
+        +  ### e il COSTO e- sotto il 10%% di un passo                    PASSA   2.9812%: ### un presidio che decuplicasse il costo SI SPEGNEREBBE IL PRIMO GIORNO, ed e- il difetto di `A9`
+         ====================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### I TEMPI MEDI PER COMANDO (secondi):
+    c1 _hook_presidi --pre-commit        NUOVO       1.8  (su 41)
+    c1 _hook_presidi --pre-commit        VECCHIO    40.9  (su 41)
+    c2 _stage --rapido                   NUOVO      15.8  (su 41)
+    c2 _stage --rapido                   VECCHIO    48.7  (su 41)
+    c3 indice.py valida (il disco)       NUOVO       4.1  (su 41)
+    c3 indice.py valida (il disco)       VECCHIO    38.6  (su 41)
+    c4 _storico_da_git                   NUOVO       1.1  (su 41)
+    c4 _storico_da_git                   VECCHIO    35.7  (su 41)
+    c5 il pre-commit INTERO              NUOVO      84.5  (su 3)
+    c5 il pre-commit INTERO              VECCHIO   253.7  (su 3)
+### IL CONFRONTO SUI 41 COMMIT: ### DIVERSI: ['00a4a108', '9ca55e8d', '52143b43']
+==================================================================================================================================
+### I CASI CHE DEVONO FALLIRE, sul commit 52143b43
+  F1 una riga di storico TOLTA in mezzo, in stage (c2 e c3 devono uscire 1):
+    VECCHIO c1 -> 1, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl')
+    NUOVO   c1 -> 0, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/storico.jsonl')
+  F2 voci.jsonl cambiato in stage SENZA la riga di storico (c2 e c3 devono uscire 1):
+    VECCHIO c1 -> 1, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl')
+    NUOVO   c1 -> 0, c2 -> 1, c3 -> 1, c4 -> 0; i file (disco, stage) prima ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl'), dopo ('', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md\ndoc/indice/voci.jsonl')
+  F3 un indice rotto SOLO sul disco (c3 deve uscire 1; il pre-commit INTERO deve uscire 1, e i file dopo come prima):
+    VECCHIO c1 -> 1, c2 -> 0, c3 -> 1, c4 -> 0, c5 -> 1; i file (disco, stage) prima ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md'), dopo ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md')
+    NUOVO   c1 -> 0, c2 -> 0, c3 -> 1, c4 -> 0, c5 -> 1; i file (disco, stage) prima ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md'), dopo ('doc/indice/voci.jsonl', 'doc/TASK_HISTORY/2026-11-15_motore_numba.md')
+    F3: il pre-commit INTERO, VECCHIO: 1; NUOVO: 1; l'ultima riga di rifiuto VECCHIO "  CHE FARE: `python csv/indice.py valida` dice quale voce e perche'. Le viste si rigenerano con `python csv/indice.py viste`, e si scrive SOLO con `py"; NUOVO 'json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)'
+    F3 c1: VECCHIO 1, NUOVO 0 (per costruzione: S1 toglie da c1 il valida sul disco)
+    F4a: [TIMBRO] indice.py  sha1-BYTE dec08110  committato e pulito | PER_RIGA 83c26ebbf4a62c693da92a635707225733279a6e 2520 2520 2520 34.7 s | [indice: la memoria delle righe dello storico e- ROTTA: non si usa, si ricostruisce]
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\doc\referti_l2\commit_leggero\prova.py", line 315, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\doc\referti_l2\commit_leggero\prova.py", line 284, in main
+    mod = importlib.util.module_from_spec(spec)
+  File "<frozen importlib._bootstrap>", line 810, in module_from_spec
+AttributeError: 'NoneType' object has no attribute 'loader'

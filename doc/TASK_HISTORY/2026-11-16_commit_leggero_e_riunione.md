@@ -68,3 +68,11 @@
 2. A2 e A1 nel codice; il censimento di chi usa `indice.py`; la prova A3 *(`doc/referti_l2/commit_leggero_prova.py` -> `commit_leggero_prova.txt`)*.
 3. Se la prova passa: il commit di S1 + S2 *(coi hook VECCHI, cioe' quelli in vigore)*; poi un commit di prova coi hook nuovi; A4 i tempi.
 4. (B): B1, il merge, la suite, la relazione e la ROTTA, il tag.
+
+## 4. LA PROVA A3, IL PRIMO GIRO *(`doc/referti_l2/commit_leggero/prova.txt`; `09:25:30`-`11:59:01`; uscita `1`)*
+
+- **I `41` commit** *(i `42` log del `15`, uno senza hash)*: **i codici d'uscita uguali in tutti, nei due modi; le uscite diverse SOLO nella riga di tempo del collaudo del grafo** *(`il controllo: ... us ... rapporto: ...%`)* **nei `3` pre-commit interi.** ### **La carta escludeva i tempi; la mia normalizzazione non toglieva i `us`: il verdetto «DIVERSI» dello script e' piu' severo della carta.** *(Annotato qui, non riscritto.)*
+- **F1, F2:** **c2 e c3 escono `1` nei due modi; c1 esce `1` nel vecchio e `0` nel nuovo: per costruzione di S1** *(sez. `2`: il confronto di S1 vale sul pre-commit e sulle righe di `valida`)*. **Lo script li avrebbe contati come diversi: piu' severo della carta.**
+- **F3:** **il pre-commit INTERO esce `1` nei due modi; i file dopo come prima. Nel nuovo l'ultima riga e' un `JSONDecodeError` di un presidio dopo `_hook_presidi`, non il messaggio di `valida`** *(la guardia persa davanti agli altri presidi: lo avevo previsto nella sez. `1`)*. **Chi cade: da stampare nel rigiro.**
+- ### **LO SCRIPT E' CADUTO a F4b:** **`importlib.util.spec_from_file_location` non da' un loader per `indice_nuovo.py.txt`. F4a: la memoria rotta riconosciuta, lo stesso `per_riga`; F4b, F5: NON girati.** **Un errore mio; la correzione e' un commit a se': il loader esplicito, `--solo-casi` per rigirare solo F1-F5, e i controlli dei casi come li dice la carta.**
+- **Un limite:** **`per_riga` ha la stessa impronta su tutti i `41` commit** *(`83c26ebb`, `2520` righe: lo storico non e' cambiato il `15`)*.
