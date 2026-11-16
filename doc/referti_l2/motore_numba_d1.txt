@@ -1,0 +1,28 @@
+[TIMBRO] prova_numba_motore.py  sha1-BYTE 802ee321  committato e pulito
+==================================================================================================================================
+D1 DEL MOTORE NUMBA INTERO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### D1, MGU: numba in sys.modules: False; motore_numba.stato(): {'motore': 'nucleo', 'fili': None, 'chiamate': 0, 'ripieghi': 0, 'numba_importato': False, 'sys.executable': 'E:\\python\\py3132\\python.exe', 'secondo_passo': False, 'fma': None, 'via_fma': None}
+  D1 MGU, mai importato contro importato e spento, k   100: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   200: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   300: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   400: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   500: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   600: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   700: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   800: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k   900: 9 chiavi su 9 al bit
+  D1 MGU, mai importato contro importato e spento, k  1000: 9 chiavi su 9 al bit
+### D1, MU: numba in sys.modules: False; motore_numba.stato(): {'motore': 'nucleo', 'fili': None, 'chiamate': 0, 'ripieghi': 0, 'numba_importato': False, 'sys.executable': 'E:\\python\\py3132\\python.exe', 'secondo_passo': False, 'fma': None, 'via_fma': None}
+  D1 MU, mai importato contro importato e spento, k   100: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   200: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   300: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   400: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   500: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   600: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   700: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   800: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k   900: 9 chiavi su 9 al bit
+  D1 MU, mai importato contro importato e spento, k  1000: 9 chiavi su 9 al bit
+==================================================================================================================================
+ESITO D1: PASSA (7426 s)

@@ -1,0 +1,16 @@
+==================================================================================================================================
+I CONTI DELLA SUITE A SWITCH ACCESO (V4): la cartella E:\python\numba_suite2; lo strumento sitecustomize.py sha1-BYTE 55f5d0e5
+==================================================================================================================================
+### i processi 151; ACCESI 10 (coi due passi 10; il modo ['esplicita']; la via della FMA ['llvm.fma.f64']); l'accensione caduta 1; le chiamate al ciclo numba 1112982; i ripieghi su numpy 0
+    ACCESO  primo_ordine/_misura_completa_l2.py                          le chiamate 44274, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_misura_theta_nonlineare.py                     le chiamate 10683, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_r60.py                                le chiamate 1198, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_cs_centro.py                          le chiamate 73718, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_scala.py                              le chiamate 115396, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_cs.py                                 le chiamate 167165, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_misura_hw.py                                   le chiamate 545048, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_tempo_proprio.py                      le chiamate 733, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_mb1.py                                le chiamate 6024, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ACCESO  primo_ordine/_collauda_deriva.py                             le chiamate 148743, i ripieghi 0, i fili 2, il secondo passo True (esplicita, llvm.fma.f64)
+    ### CADUTA  primo_ordine\_misura_mb1.py: ModuleNotFoundError("No module named 'motore_numba'")
+==================================================================================================================================

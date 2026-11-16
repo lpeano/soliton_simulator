@@ -1,0 +1,51 @@
+[TIMBRO] prova_numba_motore.py  sha1-BYTE ffe70630  committato e pulito
+==================================================================================================================================
+TEMPI DEL MOTORE NUMBA INTERO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### IL CARICO, all'inizio: 5 processi python.exe vivi (questo compreso)
+### una copia dello stato (tutte le chiavi) 0.0032 s
+  (a) il motore di oggi                la mediana per tick (i tick 11-60) 4.048 s (min 3.824, max 4.268); il riscaldamento ['4.18', '4.10', '4.02']; l'accensione 0.00 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 4.169 s per tick): _grover_mezzo 0.493, _hop_psi_mezzo 0.358, _per_nodo 0.042, _ruota_attorno_a_n 0.167, _somma_per_nodo 0.147, densita_materia 0.042, densita_vuoto 0.015, elicita 0.386, termini_di_h 1.340
+  (b) il primo passo, 1 fili           la mediana per tick (i tick 11-60) 3.711 s (min 3.462, max 4.155); il riscaldamento ['3.93', '3.76', '3.66']; l'accensione 0.40 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 3.632 s per tick): _grover_mezzo 0.362, _hop_psi_mezzo 0.343, _per_nodo 0.035, _ruota_attorno_a_n 0.163, _somma_per_nodo 0.038, densita_materia 0.041, densita_vuoto 0.016, elicita 0.362, termini_di_h 1.072
+  (b) il primo passo, 2 fili           la mediana per tick (i tick 11-60) 3.664 s (min 3.438, max 3.979); il riscaldamento ['3.47', '3.80', '3.67']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 3.661 s per tick): _grover_mezzo 0.357, _hop_psi_mezzo 0.348, _per_nodo 0.024, _ruota_attorno_a_n 0.163, _somma_per_nodo 0.026, densita_materia 0.042, densita_vuoto 0.014, elicita 0.373, termini_di_h 1.069
+  (b) il primo passo, 6 fili           la mediana per tick (i tick 11-60) 3.938 s (min 3.694, max 4.111); il riscaldamento ['3.92', '4.10', '3.99']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 3.907 s per tick): _grover_mezzo 0.371, _hop_psi_mezzo 0.373, _per_nodo 0.013, _ruota_attorno_a_n 0.171, _somma_per_nodo 0.018, densita_materia 0.045, densita_vuoto 0.013, elicita 0.368, termini_di_h 1.082
+  (c) i due passi, fma True, 1 fili    la mediana per tick (i tick 11-60) 3.083 s (min 2.866, max 3.854); il riscaldamento ['5.66', '3.11', '2.96']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 3.092 s per tick): _grover_mezzo 0.108, _hop_psi_mezzo 0.089, _per_nodo 0.039, _ruota_attorno_a_n 0.023, _somma_per_nodo 0.042, densita_materia 0.043, densita_vuoto 0.016, elicita 0.378, termini_di_h 1.130
+  (c) i due passi, fma True, 2 fili    la mediana per tick (i tick 11-60) 3.174 s (min 3.008, max 3.345); il riscaldamento ['3.25', '3.02', '3.19']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.992 s per tick): _grover_mezzo 0.081, _hop_psi_mezzo 0.093, _per_nodo 0.024, _ruota_attorno_a_n 0.018, _somma_per_nodo 0.028, densita_materia 0.042, densita_vuoto 0.014, elicita 0.355, termini_di_h 1.039
+  (c) i due passi, fma True, 6 fili    la mediana per tick (i tick 11-60) 2.692 s (min 2.514, max 3.025); il riscaldamento ['3.16', '2.92', '2.73']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.674 s per tick): _grover_mezzo 0.048, _hop_psi_mezzo 0.070, _per_nodo 0.011, _ruota_attorno_a_n 0.015, _somma_per_nodo 0.016, densita_materia 0.038, densita_vuoto 0.011, elicita 0.294, termini_di_h 0.874
+  (c) i due passi, fma False, 1 fili   la mediana per tick (i tick 11-60) 2.589 s (min 2.448, max 3.340); il riscaldamento ['2.60', '2.65', '2.63']; l'accensione 0.02 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.520 s per tick): _grover_mezzo 0.082, _hop_psi_mezzo 0.074, _per_nodo 0.030, _ruota_attorno_a_n 0.018, _somma_per_nodo 0.030, densita_materia 0.034, densita_vuoto 0.012, elicita 0.301, termini_di_h 0.889
+  (c) i due passi, fma False, 2 fili   la mediana per tick (i tick 11-60) 2.528 s (min 2.361, max 2.855); il riscaldamento ['2.66', '2.50', '2.64']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.482 s per tick): _grover_mezzo 0.061, _hop_psi_mezzo 0.065, _per_nodo 0.020, _ruota_attorno_a_n 0.015, _somma_per_nodo 0.022, densita_materia 0.034, densita_vuoto 0.012, elicita 0.297, termini_di_h 0.867
+  (c) i due passi, fma False, 6 fili   la mediana per tick (i tick 11-60) 2.701 s (min 2.535, max 2.887); il riscaldamento ['2.76', '2.71', '2.73']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.668 s per tick): _grover_mezzo 0.047, _hop_psi_mezzo 0.070, _per_nodo 0.016, _ruota_attorno_a_n 0.013, _somma_per_nodo 0.014, densita_materia 0.039, densita_vuoto 0.011, elicita 0.301, termini_di_h 0.894
+----------------------------------------------------------------------------------------------------------------------------------
+### IL PESO NEL TICK DI (a)  (il tempo inclusivo per tick / il tick con gli orologi 4.169 s):
+    termini_di_h           1.340 s   32.1%
+    _grover_mezzo          0.493 s   11.8%
+    elicita                0.386 s    9.3%
+    _hop_psi_mezzo         0.358 s    8.6%
+    _ruota_attorno_a_n     0.167 s    4.0%
+    _somma_per_nodo        0.147 s    3.5%
+    densita_materia        0.042 s    1.0%
+    _per_nodo              0.042 s    1.0%
+    densita_vuoto          0.015 s    0.4%
+### IL GUADAGNO CONTRO (a)  (la mediana di (a) 4.048 s / la mediana):
+    (b) il primo passo, 1 fili           1.09x    _grover_mezzo 1.4x, _hop_psi_mezzo 1.0x, _per_nodo 1.2x, _ruota_attorno_a_n 1.0x, _somma_per_nodo 3.9x, densita_materia 1.0x, densita_vuoto 0.9x, elicita 1.1x, termini_di_h 1.3x
+    (b) il primo passo, 2 fili           1.10x    _grover_mezzo 1.4x, _hop_psi_mezzo 1.0x, _per_nodo 1.7x, _ruota_attorno_a_n 1.0x, _somma_per_nodo 5.6x, densita_materia 1.0x, densita_vuoto 1.1x, elicita 1.0x, termini_di_h 1.3x
+    (b) il primo passo, 6 fili           1.03x    _grover_mezzo 1.3x, _hop_psi_mezzo 1.0x, _per_nodo 3.1x, _ruota_attorno_a_n 1.0x, _somma_per_nodo 8.0x, densita_materia 0.9x, densita_vuoto 1.2x, elicita 1.0x, termini_di_h 1.2x
+    (c) i due passi, fma True, 1 fili    1.31x    _grover_mezzo 4.5x, _hop_psi_mezzo 4.0x, _per_nodo 1.1x, _ruota_attorno_a_n 7.4x, _somma_per_nodo 3.5x, densita_materia 1.0x, densita_vuoto 1.0x, elicita 1.0x, termini_di_h 1.2x
+    (c) i due passi, fma True, 2 fili    1.28x    _grover_mezzo 6.1x, _hop_psi_mezzo 3.9x, _per_nodo 1.7x, _ruota_attorno_a_n 9.3x, _somma_per_nodo 5.3x, densita_materia 1.0x, densita_vuoto 1.1x, elicita 1.1x, termini_di_h 1.3x
+    (c) i due passi, fma True, 6 fili    1.50x    _grover_mezzo 10.2x, _hop_psi_mezzo 5.1x, _per_nodo 3.8x, _ruota_attorno_a_n 11.0x, _somma_per_nodo 9.0x, densita_materia 1.1x, densita_vuoto 1.5x, elicita 1.3x, termini_di_h 1.5x
+    (c) i due passi, fma False, 1 fili   1.56x    _grover_mezzo 6.0x, _hop_psi_mezzo 4.8x, _per_nodo 1.4x, _ruota_attorno_a_n 9.1x, _somma_per_nodo 4.9x, densita_materia 1.2x, densita_vuoto 1.3x, elicita 1.3x, termini_di_h 1.5x
+    (c) i due passi, fma False, 2 fili   1.60x    _grover_mezzo 8.0x, _hop_psi_mezzo 5.5x, _per_nodo 2.1x, _ruota_attorno_a_n 11.3x, _somma_per_nodo 6.8x, densita_materia 1.2x, densita_vuoto 1.3x, elicita 1.3x, termini_di_h 1.5x
+    (c) i due passi, fma False, 6 fili   1.50x    _grover_mezzo 10.5x, _hop_psi_mezzo 5.1x, _per_nodo 2.6x, _ruota_attorno_a_n 12.5x, _somma_per_nodo 10.2x, densita_materia 1.1x, densita_vuoto 1.4x, elicita 1.3x, termini_di_h 1.5x
+### LE ATTESE W4 (scritte prima, non riviste): il primo passo al piu' 1.16x -> il migliore 1.10x; i due passi 1.5-2.5x -> da 1.28x a 1.60x
+### IL CARICO, alla fine: 4 processi python.exe vivi (questo compreso)
+==================================================================================================================================
+ESITO TEMPI: PASSA (2304 s)

@@ -200,6 +200,7 @@ FILE_FISICA = (
     'primo_ordine/_misura_statica_motore.py',
     'primo_ordine/_misura_statica_l2.py',
     'primo_ordine/motore.py',
+    'primo_ordine/motore_numba.py',          # ### il motore numba con lo switch (Luca 2026-11-15 15:50 e 18:08; il ramo motore-numba)
     'primo_ordine/_collauda_motore.py',
     # ### IL CHECKPOINT *(sotto-pezzo `5c`)*: salva e riprende ### **stato, grafo,
     # ### geometria e contatori**, riusando `timbro.py`. ### ⛔ **E il grafo si

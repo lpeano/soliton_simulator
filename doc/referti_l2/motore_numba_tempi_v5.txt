@@ -1,0 +1,39 @@
+[TIMBRO] prova_numba_motore.py  sha1-BYTE 57d0d4b1  committato e pulito
+==================================================================================================================================
+TEMPI DEL MOTORE NUMBA INTERO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### IL CARICO, all'inizio: 1 processi python.exe vivi (questo compreso)
+### una copia dello stato (tutte le chiavi) 0.0020 s
+  (a) il motore di oggi                la mediana per tick (i tick 11-60) 2.138 s (min 2.017, max 2.328); il riscaldamento ['2.14', '2.07', '2.06']; l'accensione 0.00 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.194 s per tick): _grover_mezzo 0.280, _hop_psi_mezzo 0.178, _per_nodo 0.018, _ruota_attorno_a_n 0.072, _somma_per_nodo 0.107, densita_materia 0.024, densita_vuoto 0.007, elicita 0.176, termini_di_h 0.677
+  (c) i due passi, esplicita, 2 fili, giro 1 la mediana per tick (i tick 11-60) 1.997 s (min 1.796, max 2.567); il riscaldamento ['3.89', '1.93', '1.88']; l'accensione 0.90 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 1.983 s per tick): _grover_mezzo 0.046, _hop_psi_mezzo 0.061, _per_nodo 0.015, _ruota_attorno_a_n 0.014, _somma_per_nodo 0.014, densita_materia 0.033, densita_vuoto 0.009, elicita 0.219, termini_di_h 0.665
+  (c) i due passi, esplicita, 6 fili, giro 1 la mediana per tick (i tick 11-60) 2.162 s (min 1.999, max 2.386); il riscaldamento ['2.15', '2.08', '2.14']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.376 s per tick): _grover_mezzo 0.043, _hop_psi_mezzo 0.065, _per_nodo 0.012, _ruota_attorno_a_n 0.014, _somma_per_nodo 0.012, densita_materia 0.040, densita_vuoto 0.013, elicita 0.258, termini_di_h 0.800
+  (c) i due passi, esplicita, 2 fili, giro 2 la mediana per tick (i tick 11-60) 1.992 s (min 1.585, max 2.478); il riscaldamento ['1.98', '2.03', '2.00']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 1.609 s per tick): _grover_mezzo 0.034, _hop_psi_mezzo 0.042, _per_nodo 0.013, _ruota_attorno_a_n 0.010, _somma_per_nodo 0.011, densita_materia 0.025, densita_vuoto 0.007, elicita 0.179, termini_di_h 0.537
+  (c) i due passi, esplicita, 6 fili, giro 2 la mediana per tick (i tick 11-60) 2.059 s (min 1.889, max 2.405); il riscaldamento ['2.01', '2.07', '2.04']; l'accensione 0.01 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.161 s per tick): _grover_mezzo 0.038, _hop_psi_mezzo 0.062, _per_nodo 0.011, _ruota_attorno_a_n 0.012, _somma_per_nodo 0.011, densita_materia 0.036, densita_vuoto 0.009, elicita 0.237, termini_di_h 0.725
+  (a) il motore di oggi, di nuovo      la mediana per tick (i tick 11-60) 2.172 s (min 2.021, max 2.364); il riscaldamento ['2.08', '2.12', '2.09']; l'accensione 0.00 s; i giri del punto fisso [4]
+      con gli orologi (10 tick a parte, 2.376 s per tick): _grover_mezzo 0.304, _hop_psi_mezzo 0.190, _per_nodo 0.018, _ruota_attorno_a_n 0.077, _somma_per_nodo 0.121, densita_materia 0.024, densita_vuoto 0.007, elicita 0.185, termini_di_h 0.724
+----------------------------------------------------------------------------------------------------------------------------------
+### (a) all'inizio 2.138 s, alla fine 2.172 s: la deriva del carico 1.6%
+### IL PESO NEL TICK DI (a)  (il tempo inclusivo per tick / il tick con gli orologi 2.194 s):
+    termini_di_h           0.677 s   30.9%
+    _grover_mezzo          0.280 s   12.8%
+    _hop_psi_mezzo         0.178 s    8.1%
+    elicita                0.176 s    8.0%
+    _somma_per_nodo        0.107 s    4.9%
+    _ruota_attorno_a_n     0.072 s    3.3%
+    densita_materia        0.024 s    1.1%
+    _per_nodo              0.018 s    0.8%
+    densita_vuoto          0.007 s    0.3%
+### IL GUADAGNO CONTRO (a)  (la mediana di (a) 2.138 s / la mediana):
+    (c) i due passi, esplicita, 2 fili, giro 1 1.07x    _grover_mezzo 6.1x, _hop_psi_mezzo 2.9x, _per_nodo 1.2x, _ruota_attorno_a_n 5.1x, _somma_per_nodo 7.9x, densita_materia 0.7x, densita_vuoto 0.8x, elicita 0.8x, termini_di_h 1.0x
+    (c) i due passi, esplicita, 6 fili, giro 1 0.99x    _grover_mezzo 6.6x, _hop_psi_mezzo 2.7x, _per_nodo 1.4x, _ruota_attorno_a_n 5.1x, _somma_per_nodo 8.9x, densita_materia 0.6x, densita_vuoto 0.6x, elicita 0.7x, termini_di_h 0.8x
+    (c) i due passi, esplicita, 2 fili, giro 2 1.07x    _grover_mezzo 8.2x, _hop_psi_mezzo 4.3x, _per_nodo 1.4x, _ruota_attorno_a_n 7.6x, _somma_per_nodo 9.7x, densita_materia 1.0x, densita_vuoto 1.0x, elicita 1.0x, termini_di_h 1.3x
+    (c) i due passi, esplicita, 6 fili, giro 2 1.04x    _grover_mezzo 7.3x, _hop_psi_mezzo 2.9x, _per_nodo 1.7x, _ruota_attorno_a_n 5.8x, _somma_per_nodo 9.9x, densita_materia 0.7x, densita_vuoto 0.8x, elicita 0.7x, termini_di_h 0.9x
+    (a) il motore di oggi, di nuovo      0.98x    _grover_mezzo 0.9x, _hop_psi_mezzo 0.9x, _per_nodo 1.0x, _ruota_attorno_a_n 0.9x, _somma_per_nodo 0.9x, densita_materia 1.0x, densita_vuoto 1.0x, elicita 1.0x, termini_di_h 0.9x
+### IL CARICO, alla fine: 1 processi python.exe vivi (questo compreso)
+==================================================================================================================================
+ESITO TEMPI: PASSA (904 s)

@@ -1,0 +1,19 @@
+========================================================================================================================
+W2: LA SUITE DEL REPO CON IL MOTORE NUMBA ACCESO IN OGNI PROCESSO DEI COLLAUDI (Luca 2026-11-15 19:12; lo strumento E:\python\numba_suite\sitecustomize.py, fuori dal repo; 1 filo)
+========================================================================================================================
+### la suite: E:\python\py3132\python.exe primo_ordine/collauda.py nel clone (330d3718), 22:03:40 - 22:26:25, uscita 0
+  ### TUTTI I COLLAUDI PASSANO: 67 su 67
+### i processi 151; ACCESI 10; non accesi per errore 1; le chiamate al ciclo numba 1112982; i ripieghi su numpy 0
+    ACCESO  primo_ordine/_collauda_r60.py                                le chiamate 1198, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_scala.py                              le chiamate 115396, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_tempo_proprio.py                      le chiamate 733, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_deriva.py                             le chiamate 148743, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_cs.py                                 le chiamate 167165, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_misura_theta_nonlineare.py                     le chiamate 10683, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_misura_completa_l2.py                          le chiamate 44274, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_mb1.py                                le chiamate 6024, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_misura_hw.py                                   le chiamate 545048, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    ACCESO  primo_ordine/_collauda_cs_centro.py                          le chiamate 73718, i ripieghi 0, i fili 1, E:\python\py3132\python.exe
+    NON ACCESO primo_ordine\_misura_mb1.py --scrivi E:\python\tmp\mb1c_bzmdvt_d\rif_f: ModuleNotFoundError("No module named 'motore_numba'") (### M-B1 gira _misura_mb1.py in una COPIA dell'albero a un commit VECCHIO, 8c7b9288, dove motore_numba.py non c'e': quel processo col motore di oggi)
+### gli altri 140 processi non importano motore ed energia_pesata (non fanno girare il tick): nessuna accensione
+========================================================================================================================
