@@ -1,0 +1,182 @@
+PERCHE' I HOOK COSTANO TANTO -- LA CARTA IN SOLA LETTURA (Luca 2026-11-16 00:23)
+================================================================================
+
+Nessun hook, collaudo, strumento (committa2.py compreso) o file del nucleo e' stato cambiato.
+Nessuna proposta e' adottata: le strade sono scritte per Luca, che decide coi numeri.
+Le misure sono state prese con la macchina carica e una volta sola, salvo dove e' scritto:
+  - per tempi_hook_misure.txt (02:49), 3 corse aperte (legati-GU-2, legati-GUpi-2, e legati-t120-3, chiusa alle 02:4x);
+  - per i 40 log di committa2 del 2026-11-15, da 3 a 8 corse aperte.
+
+LE FONTI (tutti i numeri escono da questi script; nessuno e' ricopiato a mano):
+  - doc/referti_l2/tempi_hook_misure.txt, prodotto da doc/referti_l2/tempi_hook_misura.py (a63e33b1):
+      A = i gruppi del pre-commit dai log;
+      B = le misure dirette;
+      C = che cosa legge _storico_da_git;
+      il profilo di indice.py valida.
+  - doc/referti_l2/tempi_suite.txt, prodotto da doc/referti_l2/tempi_suite_conta.py (14d55d2d): i tempi dei collaudi della suite.
+  - il codice: .githooks/pre-commit, csv/_hook_presidi.py, csv/_stage.py, csv/_albero_era2.py, csv/indice.py (_storico_da_git, _f5_storico), primo_ordine/collauda.py.
+
+0. UN MIO ERRORE, CORRETTO QUI
+------------------------------
+Nel referto bb14987b il tempo di un "passo" dei hook era l'intervallo fra due righe con un'etichetta qualunque.
+Il conteggio era sbagliato per due motivi:
+  - molti script del pre-commit non stampano un'etichetta;
+  - l'uscita di un figlio arriva tutta insieme quando il figlio la scarica.
+Le conseguenze:
+  - i "50.7 s di H-NUCLEO-CONGELATO" erano di _hook_presidi.py;
+  - _albero_era2.py non gira due volte: e' UNA chiamata da circa 98 s;
+  - i totali per commit restano giusti.
+L'attribuzione di adesso parte dal [TIMBRO] che _presidio.avvia stampa con flush all'INIZIO di ogni script.
+Un "gruppo" e' lo script col timbro, piu' quelli dopo di lui che non ne hanno uno o che hanno l'uscita in /dev/null.
+
+IL QUADRO, IN UNA RIGA
+----------------------
+Su 332.5 s di mediana dei hook per commit:
+  - tre gruppi fanno l'87%: lo stage 139.6 s, l'albero 97.8 s, i presidi 51.2 s;
+  - in tutti e tre il pezzo piu' grosso e' lo stesso: indice.py valida, che costa circa 44 s;
+  - valida gira QUATTRO volte per commit;
+  - in valida circa 35 s su 47 vanno a _storico_da_git, che a ogni chiamata legge tutte le 331 versioni di
+    doc/indice/storico.jsonl, cioe' 1827 MB in 26 s.
+
+1. H-NUCLEO-CONGELATO (i "51 s per 12 file")
+--------------------------------------------
+CHE COSA FA (dal codice):
+  - legge il ramo, i nomi in stage e doc/NUCLEO_CONGELATO.md nell'indice;
+  - decide con una funzione pura (decidi).
+  - Non legge la storia e non apre i commit.
+  - Non calcola nemmeno lo sha1 dei 12 file: la tabella degli sha1 in NUCLEO_CONGELATO.md la verifica un altro presidio.
+MISURA DIRETTA: 0.2 s (B).
+I 51.2 s del gruppo d'apertura (A) sono di _hook_presidi.py --pre-commit, che costa 46.4 s in misura diretta (B). Il suo tempo e':
+  - 44.1 s, il figlio indice.py valida;
+  - 0.8 s, il figlio _presidio_commenti_flag.py;
+  - 0.3 s, il figlio _indice_id.py;
+  - il resto: la scansione AST dei file in stage, per H-P3, H-P5, H-P8 e H-P9.
+QUANTO COSTEREBBE IL SOLO SHA1 DEI 12 FILE:
+  - non e' misurato: H-NUCLEO-CONGELATO oggi non lo fa, quindi non c'e' niente da sostituire;
+  - il costo di questo gruppo e' valida.
+
+2. _stage.py --rapido (140 s di gruppo; circa 168 s nel clone su E:)
+-------------------------------------------------------------------
+CHE COSA FA (dal codice):
+  - esporta TUTTO l'indice in una cartella temporanea (git checkout-index -a; 4211 file);
+  - la cartella sta in %TEMP%, cioe' sul disco del TMP del processo del commit: C: per il principale e il mattone, E: per il clone;
+  - fa girare la' i primi RAPIDI = 1 controlli di SULLO_STAGE, cioe' solo "csv/indice.py valida";
+  - poi toglie la cartella.
+  La garanzia che da' e' che valida legge i BYTE CHE IL COMMIT CONTERRA', non il disco: nasce dal difetto c68b635.
+MISURE:
+  - _stage.py --rapido, misura diretta: 44.9 s (B);
+  - checkout-index su C: 6.5 s, su E: 26.9 s (B).
+  La differenza fra i due dischi, circa 20 s, e' circa quella fra il clone e il mattone nei log (152-190 s contro 120-149 s).
+  ### PERCHE' SU E: COSTA DI PIU': la copia di 4211 file su E:, il disco exFAT, costa circa 4 volte la stessa su C:.
+  La misura e' una volta sola; che la causa sia il file system e' una mia lettura, non provata.
+IL GRUPPO DI 140 s COMPRENDE ANCHE i quattro comandi che vengono dopo nel pre-commit (la loro uscita non entra nel log):
+  - _controlli_indice_v2.py --scrivi e _presidio_indice.py --collaudo --scrivi, con l'uscita in /dev/null;
+  - _collauda_simmetrie.py e _collauda_determinismo.py, senza timbro.
+  Quei quattro non li ho girati: scrivono file o stanno nel gruppo con altri. Valgono circa 140 - 45 = 95 s; non sono separati
+  uno per uno.
+  ### Il collaudo _presidio_indice --collaudo e i controlli v2 sono da guardare per primi in una carta successiva.
+
+3. _albero_era2.py --collaudo (NON due volte: una chiamata da circa 98 s)
+------------------------------------------------------------------------
+Stampa due timbri perche' il file chiama due volte _presidio.avvia.
+CHE COSA FA (dal codice): i casi a risposta nota, piu' il "ramo end-to-end":
+  - scrive DAVVERO nel file tracciato doc/ALBERO_era2.yaml un nodo "presa: true";
+  - lancia indice.py valida, che deve fallire;
+  - rimette il file, verificando lo sha1;
+  - lancia di nuovo indice.py valida, che deve passare.
+  Quindi DUE valida, circa 88 s su 98.
+LE DUE CHIAMATE GUARDANO COSE DIVERSE: la prima un albero rotto apposta, la seconda l'albero vero.
+  Tutte e due leggono il DISCO, non lo stage, e rifanno per intero _storico_da_git, che non c'entra con l'albero.
+Questo collaudo scrive per un momento in un file tracciato: e' la causa probabile dei rossi falsi con suite e hook insieme
+  (la memoria del 2026-11-08 e del 2026-11-09).
+
+4. IL PEZZO COMUNE: indice.py valida (circa 44 s; 4 volte per commit, circa 176 s su 332)
+----------------------------------------------------------------------------------------
+IL PROFILO (cProfile, 47.7 s in tutto):
+  - _f5_storico, 35.0 s (il controllo PI-STORICO-SENZA-COMMIT), dentro _storico_da_git:
+      - 15 processi git;
+      - 26.2 s per git cat-file --batch delle 331 versioni di storico.jsonl, 1827 MB letti;
+      - 4.4 s per contare le righe di ogni versione;
+  - segnali, 11.8 s, di cui _f4_etichette 10.7 s.
+CHE COSA GARANTISCE _f5_storico: ogni riga dello storico e' in un commit, e il commit scritto nella riga e' quello vero.
+  - Per sapere chi ha introdotto la riga i rilegge tutta la storia del file.
+  - Il conto CRESCE con ogni commit che tocca lo storico: oggi 331 versioni da 7.17 MB.
+  - Il costo per commit oggi: 4 x 26 s circa di sola lettura della storia.
+
+5. LA SUITE (1234 s di mediana; i collaudi in fila)
+----------------------------------------------------
+PERCHE' IN FILA (dal codice di collauda.py):
+  - un ciclo for con subprocess.run, che aspetta;
+  - nessuna scelta scritta nel file che dica "in fila perche'...";
+  - c'e' un meccanismo che PRESUPPONE la fila: _sporchi() prima e dopo TUTTA la corsa, poi git checkout dei file sporcati.
+  I file temporaneamente scritti da un collaudo e letti da altri sono almeno tre:
+    - doc/ALBERO_era2.yaml, da _albero_era2 --collaudo;
+    - CLAUDE.md, da _collauda_regole;
+    - la tabella delle leggi, da _collauda_guida (la memoria del 2026-11-08).
+  Due di questi file li legge valida, che gira dentro altri collaudi: in parallelo darebbero rossi falsi.
+I 5 PIU' LENTI (le mediane da tempi_suite.txt; il profilo di ciascuno NON e' preso qui, scritto):
+  - i controlli sullo STAGE (csv/_stage.py senza --rapido), 292.6 s: l'export, piu' i 5 controlli di SULLO_STAGE.
+    Fra questi ci sono valida, _albero_era2 --collaudo (altri 2 valida) e _replay_registri --collaudo:
+    almeno 3 valida, cioe' circa 130 s, piu' l'export.
+  - la corrente locale costruita (primo_ordine/_collauda_corrente.py), 198.7 s: puro calcolo; dal codice nessuna scrittura
+    di file, nessun sottoprocesso, nessuna cartella temporanea. Il candidato piu' pulito per girare accanto agli altri.
+  - il referto dell'infrastruttura (csv/_referto_infrastruttura_era2.py), 105.6 s: scrive un file (il suo referto) e lancia
+    un sottoprocesso; da guardare.
+  - P-ALB (csv/_albero_era2.py --collaudo), 89.0 s: 2 valida, e scrive il yaml tracciato. NON puo' girare accanto a chi legge
+    l'albero o l'indice.
+  - M-B1 (primo_ordine/_collauda_mb1.py), 76.5 s: una cartella temporanea sua (mkdtemp), nessuna scrittura nel repo dal
+    codice; un candidato.
+  Questa lettura di chi scrive cosa viene da un grep (open in scrittura, write, savez, mkdtemp, subprocess), non da una prova.
+
+6. LE STRADE POSSIBILI, IL GUADAGNO STIMATO E LA GARANZIA DA TENERE (nessuna adottata)
+-------------------------------------------------------------------------------------
+LA GARANZIA COMUNE, per tutte: "ogni controllo deve dare lo stesso esito di prima".
+LA PROVA COMUNE:
+  - rigirare il pre-commit vecchio e quello nuovo sugli stessi commit del 2026-11-15, i 40 dei log;
+  - per ognuno, in un clone di prova a quel commit con lo stesso stage, ripetere i casi che DEVONO fallire (c'e' gia'
+    _nucleo_congelato --prova-git come modello);
+  - confrontare esito per esito (codice d'uscita e righe dei rifiuti);
+  - un solo esito diverso: la strada cade.
+
+S1. togliere il valida DOPPIONE (quello di _hook_presidi, sul disco), tenendo quello sullo stage. Guadagno stimato circa 44 s
+    su 332, circa il 13%. I due valida del collaudo dell'albero restano: il loro motivo scritto e' provare valida end-to-end.
+    - Come: lo stage e' gia' esportato da _stage --rapido; il valida di _hook_presidi, che legge il DISCO, e' un doppione del
+      valida sullo STAGE.
+    - Garanzia da tenere: il valida sul disco vede anche cio' che NON e' in stage (un file modificato e non aggiunto). Va
+      scritto se quella vista serve a qualcosa: _stage.py dice che il controllo giusto e' sullo stage.
+    - Il collaudo dell'albero puo' chiamare la FUNZIONE invece del processo? No: il suo motivo scritto e' proprio provare
+      valida end-to-end, l'import dentro il try.
+
+S2. _storico_da_git con una memoria per sha1. Guadagno stimato circa 25 s per valida, circa 100 s per commit; e non cresce
+    piu' con la storia.
+    - Come: la versione N dello storico e' la N-1 piu' righe in fondo, solo aggiunte (lo dice il codice: "n < prec" ->
+      rifiuto). Si puo' tenere fuori dal repo la tabella (sha del blob -> numero di righe) e leggere solo le versioni nuove.
+    - Garanzia: lo stesso per_riga al bit; la prova e' calcolarlo nei due modi su tutti i 40 commit e confrontare.
+    - Il rischio: una cache che mente se il blob cambia senza che cambi lo sha. Non puo' succedere per costruzione di git,
+      ma la cache va rifatta se manca, mai fidata se e' rotta.
+
+S3. lo stage esportato su C: anche per il clone su E: (il TMP del commit), oppure l'export solo dei file che valida legge.
+    Guadagno stimato circa 20 s nel clone.
+    - Garanzia: valida legge solo doc/indice/ e pochi altri? Va CONTATO dal codice prima.
+    - Il limite: R-AMBIENTE vuole i temporanei su E: per il clone. Una scelta di Luca.
+
+S4. la suite in parallelo a gruppi. Guadagno: dipende dai gruppi; la corrente locale (199 s) e M-B1 (77 s) accanto agli
+    altri darebbero circa 270 s su 1234, se non si toccano.
+    - Garanzia: un collaudo in parallelo non deve leggere un file che un altro scrive per un momento. Oggi ce ne sono almeno
+      tre, al punto 5.
+    - La strada piu' pulita: il parallelo SOLO fra i collaudi che non toccano il repo (una lista dichiarata e collaudata),
+      il resto in fila.
+    - E _sporchi() va ripensato per gruppo.
+
+S5. riuso del verdetto per sha1 (un controllo gia' passato sugli STESSI byte dei suoi ingressi non si rigira).
+    - E' la strada piu' grande e la piu' rischiosa: ogni controllo dovrebbe DICHIARARE i suoi ingressi (P-TAB e P-R1
+      insegnano che in prosa non basta). Non stimata.
+
+COSA NON SO, SCRITTO:
+  - il dettaglio dei 95 s dei quattro comandi dopo _stage (al punto 2);
+  - il profilo dei 5 collaudi lenti della suite;
+  - se S1 tolga una vista che oggi serve;
+  - la causa del costo su E: oltre la misura.
+  Ognuno si misura con lo stesso metodo, da fuori, senza cambiare i file.
+
+FERMO per Luca: le strade le decide lui.

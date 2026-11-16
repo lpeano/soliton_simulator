@@ -1,0 +1,78 @@
+[TIMBRO] tempi_hook_misura.py  sha1-BYTE 5bc096ba  committato e pulito
+==================================================================================================================================
+PERCHE' I HOOK COSTANO TANTO, LE MISURE (Luca 2026-11-16 00:23): SOLO LETTURA; sys.executable C:\Users\lpeano\AppData\Local\Programs\Python\Python313\python.exe; il carico: le corse aperte del registro, dichiarate nella carta
+==================================================================================================================================
+### A. IL PRE-COMMIT: 29 comandi python, in ordine: _nucleo_congelato.py, _hook_presidi.py, _presidi_era2.py, _metodi_era2.py, _controlli_nell_indice.py, _testo_e_metadati.py, _rami_era2.py, _replay_registri.py, _collauda_regole.py, _collauda_guida.py, _collauda_passo.py, _barriera.py, _forma_referti.py, _stage.py, _controlli_indice_v2.py, _presidio_indice.py, _collauda_simmetrie.py, _collauda_determinismo.py, _collauda_grafo.py, _collauda_schema_camminata.py, _collauda_tempo_proprio.py, _albero_era2.py, _registri_indice.py, _citazioni_strutturate.py, _rif_nel_codice.py, _un_solo_esecutore.py, _modularita_era2.py, _confronti_e_dati.py, _strumento_dalla_tabella.py
+### i log con i tempi: 40; il totale mediano dei hook 332.5 s
+  il gruppo (lo script col timbro + quelli dopo senza timbro)                                                       n  mediana      max  quota
+  _stage.py + _controlli_indice_v2.py + _presidio_indice.py + _collauda_simmetrie.py + _collauda_determinismo.py   40    139.6    189.5  42.0%
+  _albero_era2.py                                                                                                  40     97.8    131.0  29.4%
+  _nucleo_congelato.py + _hook_presidi.py                                                                          40     51.2     67.1  15.4%
+  _strumento_dalla_tabella.py                                                                                      40     10.7     13.9   3.2%
+  _collauda_passo.py + _barriera.py                                                                                40      6.7      8.8   2.0%
+  _collauda_regole.py + _collauda_guida.py                                                                         40      4.2      6.1   1.3%
+  _rif_nel_codice.py                                                                                               40      3.9      5.1   1.2%
+  _replay_registri.py                                                                                              40      3.5      4.7   1.0%
+  _un_solo_esecutore.py                                                                                            40      2.3      3.0   0.7%
+  _modularita_era2.py                                                                                              40      1.3      1.7   0.4%
+  _forma_referti.py                                                                                                40      1.2      1.9   0.4%
+  _controlli_nell_indice.py                                                                                        40      1.1      1.4   0.3%
+  _citazioni_strutturate.py                                                                                        40      0.7      0.8   0.2%
+  _rami_era2.py                                                                                                    40      0.7      0.8   0.2%
+  _presidi_era2.py                                                                                                 40      0.7      0.9   0.2%
+  _registri_indice.py                                                                                              40      0.6      1.4   0.2%
+  _testo_e_metadati.py                                                                                             40      0.6      0.9   0.2%
+  _collauda_schema_camminata.py                                                                                    40      0.5      0.6   0.1%
+  _collauda_tempo_proprio.py                                                                                       40      0.4      0.6   0.1%
+  _metodi_era2.py                                                                                                  40      0.4      1.0   0.1%
+  _confronti_e_dati.py                                                                                             40      0.3      0.5   0.1%
+==================================================================================================================================
+### B. LE MISURE DIRETTE (una volta ciascuna; la macchina carica)
+  _nucleo_congelato.py --pre-commit                                0.2 s  (uscita 0)
+  _hook_presidi.py --pre-commit (lo stage vuoto)                  46.4 s  (uscita 0)
+    il figlio _presidio_commenti_flag.py --pre-commit              0.8 s  (uscita 0)
+    il figlio _indice_id.py                                        0.3 s  (uscita 0)
+    il figlio indice.py valida                                    44.1 s  (uscita 0)
+  _stage.py --rapido (TMP del processo)                           44.9 s  (uscita 0)
+  git checkout-index di tutto l'indice su C: (%TEMP%)      6.5 s  (uscita 0; 4211 file su 4211 tracciati; la cartella tolta: True)
+  git checkout-index di tutto l'indice su E:              27.4 s  (uscita 0; 4211 file su 4211 tracciati; la cartella tolta: True)
+----------------------------------------------------------------------------------------------------------------------------------
+### C. CHE COSA LEGGE _storico_da_git: 3842 commit a HEAD; doc/indice/storico.jsonl oggi 7.17 MB; le sue versioni nella storia 331; git log del percorso 0.1 s; cat-file --batch di tutte le versioni 26.2 s, 1827 MB letti
+----------------------------------------------------------------------------------------------------------------------------------
+### IL PROFILO DI indice.py valida (cProfile, in questo processo; il tempo CUMULATIVO, le prime 25 righe)
+----------------------------------------------------------------------------------------------------------------------------------
+         10201034 function calls (10193242 primitive calls) in 47.743 seconds
+
+   Ordered by: cumulative time
+   List reduced from 706 to 25 due to restriction <25>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000   47.743   47.743 <frozen runpy>:262(run_path)
+     23/2    0.000    0.000   47.696   23.848 {built-in method builtins.exec}
+        1    0.000    0.000   47.695   47.695 <frozen runpy>:91(_run_module_code)
+        1    0.000    0.000   47.695   47.695 <frozen runpy>:65(_run_code)
+        1    0.003    0.003   47.695   47.695 C:\Users\lpeano\soliton_simulator\csv\indice.py:1(<module>)
+        1    0.000    0.000   47.521   47.521 C:\Users\lpeano\soliton_simulator\csv\indice.py:2691(main)
+        1    0.035    0.035   47.486   47.486 C:\Users\lpeano\soliton_simulator\csv\indice.py:250(valida)
+        1    0.139    0.139   34.975   34.975 C:\Users\lpeano\soliton_simulator\csv\indice.py:1493(_f5_storico)
+        1    1.095    1.095   34.753   34.753 C:\Users\lpeano\soliton_simulator\csv\indice.py:1417(_storico_da_git)
+       15    0.000    0.000   27.080    1.805 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\subprocess.py:514(run)
+       15    0.000    0.000   27.014    1.801 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\subprocess.py:1177(communicate)
+       15    0.000    0.000   26.998    1.800 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\subprocess.py:1615(_communicate)
+       30    0.000    0.000   26.997    0.900 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\threading.py:1056(join)
+       30    0.002    0.000   26.996    0.900 {method 'join' of '_thread._ThreadHandle' objects}
+    30/15    0.000    0.000   26.994    1.800 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\threading.py:998(_bootstrap)
+    30/15    0.004    0.000   26.994    1.800 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\threading.py:1025(_bootstrap_inner)
+    30/15    0.000    0.000   26.992    1.799 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\threading.py:981(run)
+    30/15    0.000    0.000   26.990    1.799 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\subprocess.py:1610(_readerthread)
+    18/15    0.000    0.000   26.500    1.767 {method 'close' of '_io.BufferedReader' objects}
+        1    0.000    0.000   11.778   11.778 C:\Users\lpeano\soliton_simulator\csv\indice.py:2348(segnali)
+        1    1.789    1.789   10.742   10.742 C:\Users\lpeano\soliton_simulator\csv\indice.py:2232(_f4_etichette)
+      611    5.017    0.008    5.019    0.008 {built-in method _io.open}
+      333    0.682    0.002    4.449    0.013 C:\Users\lpeano\soliton_simulator\csv\indice.py:1442(_righe)
+   128407    4.232    0.000    4.232    0.000 {method 'split' of 'str' objects}
+        1    0.000    0.000    3.162    3.162 C:\Users\lpeano\AppData\Local\Programs\Python\Python313\Lib\subprocess.py:1152(_stdin_write)
+
+
+
+==================================================================================================================================
