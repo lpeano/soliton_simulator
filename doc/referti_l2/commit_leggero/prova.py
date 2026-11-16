@@ -2,6 +2,7 @@
 r"""**LA PROVA A3 DEL COMMIT PIU' LEGGERO** *(Luca `2026-11-16` `08:57`; la carta `doc/TASK_HISTORY/2026-11-16_commit_leggero_e_riunione.md`)*.
 
     python doc/referti_l2/commit_leggero/prova.py <cartella dei log di committa2> > doc/referti_l2/commit_leggero/prova.txt
+    python doc/referti_l2/commit_leggero/prova.py <cartella dei log di committa2> --solo-casi > doc/referti_l2/commit_leggero/prova_casi.txt   (il secondo giro: solo F1-F5)
 
 **I due modi, sullo STESSO commit `C` del `2026-11-15`** *(i commit dei log `commit_log_*.txt` di quel giorno che hanno un hash nei `c2_*.txt`)*,
 in un `git worktree` del repo principale:
@@ -165,6 +166,7 @@ def main(argv):
     _presidio.avvia(__file__)
     global MEMORIA
     d = argv[0]
+    solo = "--solo-casi" in argv[1:]                  # ### il secondo giro (ce9e7b63): SOLO i casi F1-F5, dopo il crash di F4b
     print("=" * 130)
     print("LA PROVA A3 DEL COMMIT PIU' LEGGERO (S1 + S2; Luca 2026-11-16 08:57); sys.executable %s" % sys.executable)
     print("  i file nuovi: %s" % ", ".join("%s <- %s (%s)" % (r, os.path.basename(f), sha8(f)) for r, f in NUOVI.items()))
@@ -192,7 +194,9 @@ def main(argv):
     tempi_c = {}
     try:
         print("-" * 130)
-        for i, c in enumerate(commit):
+        if solo:
+            print("### --solo-casi: i %d commit NON si rigirano (il primo giro: doc/referti_l2/commit_leggero/prova.txt, ce9e7b63)" % len(commit))
+        for i, c in enumerate([] if solo else commit):
             p = git("rev-parse", c + "^")
             ramo = git("name-rev", "--name-only", "--refs=refs/remotes/origin/*", c, ok=False)
             res = {}
@@ -259,14 +263,22 @@ def main(argv):
         v5, n5 = r3["VECCHIO"][-1], r3["NUOVO"][-1]
         print("    F3: il pre-commit INTERO, VECCHIO: %d; NUOVO: %d; l'ultima riga di rifiuto VECCHIO %r; NUOVO %r"
               % (v5["codice"], n5["codice"], (v5["grezza"].strip().splitlines() or [""])[-1][:150], (n5["grezza"].strip().splitlines() or [""])[-1][:150]))
+        for modo, x5 in (("VECCHIO", v5), ("NUOVO", n5)):
+            tb = [r for r in x5["grezza"].splitlines() if r.startswith("[TIMBRO]") or "Traceback" in r or 'File "' in r or "RIFIUTATO" in r]
+            print("    F3 %s, chi rifiuta (gli ultimi timbri, i traceback, le righe RIFIUTATO): %s" % (modo, " | ".join(x[:120] for x in tb[-6:])))
         esiti.append(("F3 NUOVO: i file (disco, stage) dopo il rifiuto come prima", r3["NUOVO_file"][0] == r3["NUOVO_file"][1]))
         for nome, r in (("F1", r1), ("F2", r2), ("F3", r3)):
             for x, y in zip(r["VECCHIO"], r["NUOVO"]):
                 k = x["nome"].split()[0]
-                if nome == "F3" and k == "c1":
-                    print("    F3 c1: VECCHIO %d, NUOVO %d (per costruzione: S1 toglie da c1 il valida sul disco)" % (x["codice"], y["codice"]))
+                if k == "c1":
+                    # ### la carta, sez. 2: per S1 le righe di _hook_presidi sul disco spariscono PER COSTRUZIONE; il confronto vale sul pre-commit e sulle righe di valida
+                    print("    %s c1: VECCHIO %d, NUOVO %d (per costruzione: S1 toglie da c1 il valida sul disco)" % (nome, x["codice"], y["codice"]))
                     continue
                 esiti.append(("%s %s: lo stesso codice d'uscita nei due modi (%d, %d)" % (nome, k, x["codice"], y["codice"]), x["codice"] == y["codice"]))
+                if k in ("c2", "c3"):
+                    esiti.append(("%s %s: le stesse righe di valida nei due modi (l'uscita normalizzata)" % (nome, k), x["uscita"] == y["uscita"]))
+                    if x["uscita"] != y["uscita"]:
+                        stampa_diversi([(x["nome"], x["codice"], y["codice"], x["uscita"], y["uscita"])])
         # ---------------------------------------------------------------- F4, F5: la memoria
         prepara(wt, c, p, "NUOVO")
         rif = gira("c4", comandi(wt, False)[3][1], wt, [])["grezza"].strip().splitlines()[-1].split()[1]
@@ -279,8 +291,10 @@ def main(argv):
         esiti.append(("F4a un conto sbagliato SENZA rifare l'impronta: riconosciuta ROTTA, lo stesso per_riga", "ROTTA" in x["grezza"] and x["grezza"].strip().splitlines()[-1].split()[1] == rif))
         print("    F4a: %s" % x["grezza"].strip().replace("\n", " | ")[:250])
         sys.path.insert(0, _QUI)
+        import importlib.machinery
         import importlib.util
-        spec = importlib.util.spec_from_file_location("indice_nuovo_prova", NUOVI["csv/indice.py"])
+        # ### il crash del primo giro: per un `.txt` spec_from_file_location non da' un loader; il loader si dichiara
+        spec = importlib.util.spec_from_loader("indice_nuovo_prova", importlib.machinery.SourceFileLoader("indice_nuovo_prova", NUOVI["csv/indice.py"]))
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         m = json.load(io.open(MEMORIA, encoding="utf-8"))
