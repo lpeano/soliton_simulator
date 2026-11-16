@@ -1,0 +1,2904 @@
+# -*- coding: utf-8 -*-
+"""L'INDICE `v2` — **l'UNICA via di lettura e di scrittura**.
+
+```
+python csv/indice.py valida
+python csv/indice.py cerca [--dominio X] [--stato X] [--era X] [--blocca SI|NO]
+                           [--legge ID] [--variabile ID] [--assioma ID] [--meta k=v]
+python csv/indice.py aggiorna ID --campo nome=valore | --meta k=v --motivo "..."
+   ### `--commit` NON esiste piu': era falso per costruzione, e il commit di una riga
+   ### di storico lo riempie `storico-commit` DAI LOG.
+python csv/indice.py aggiorna-lotto LOTTO.jsonl     # la STESSA via, in blocco
+python csv/indice.py crea-lotto LOTTO.jsonl        # la STESSA via, per FAR NASCERE una voce
+python csv/indice.py storico-commit               # riempie il campo `commit` DAI LOG
+python csv/indice.py segnali                      # i PRESIDI: segnalano, NON decidono
+python csv/indice.py etichette-lotto LOTTO.jsonl   # la via per le ETICHETTE rimosse
+python csv/indice.py da-decidere                  # CIO- SU CUI L-INDICE ASPETTA LUCA
+python csv/indice.py mostra [--stato X] [--segnaposto SI] [--da N] [--quante N]
+python csv/indice.py meta-aggiungi k --tipo T [--valori a,b] [--regex R] --descrizione "..."
+python csv/indice.py meta-depreca k --sostituito-da k2 --motivo "..."
+python csv/indice.py meta-rinomina k k2 --motivo "..."
+python csv/indice.py rinomina VECCHIO NUOVO --motivo "..."
+python csv/indice.py citazioni
+python csv/indice.py viste
+python csv/indice.py collaudo
+```
+
+### ⛔ **LA REGOLA CHE QUESTO FILE FA RISPETTARE:** ### **nessuna funzione legge `titolo` o
+`descrizione` per decidere qualcosa.** Lo schema sta in `doc/INDICE_SCHEMA.md`.
+"""
+import io
+import json
+import os
+import re
+import subprocess
+import sys
+
+_QUI = os.path.dirname(os.path.abspath(__file__))
+RADICE = os.path.dirname(_QUI)
+sys.path.insert(0, _QUI)
+import _presidio                                             # noqa: E402
+_presidio.avvia(__file__)
+
+# ESENTE-H-P5: non importa il simulatore e non lo fa girare. Legge e scrive l'indice.
+NL = chr(10)
+TAB = chr(9)
+D = os.path.join(RADICE, "doc", "indice")
+VOCI = os.path.join(D, "voci.jsonl")
+STORICO = os.path.join(D, "storico.jsonl")
+ETICH = os.path.join(D, "etichette_rimosse.jsonl")
+META = os.path.join(D, "metadati.jsonl")
+INVERTITO = os.path.join(D, "_indice_meta.json")
+TSV = os.path.join(RADICE, "doc", "INDICE_ID.tsv")
+VISTA_MD = os.path.join(RADICE, "doc", "INDICE.md")
+# ### ⭐ **SCHEMA 3 (2026-10-09): la classe `NON_DEFINITA`.** La migrazione aveva dato
+# ### `DIFETTO` ai `234` segnaposto *(titolo <<MAI definito in un registro>>)*, ed e'
+# ### ### **sbagliato: un segnaposto NON E' UN DIFETTO** -- e' un ID citato di cui non si sa
+# ### che cosa sia. ### ⛔ **E il validatore vieta `NON_DEFINITA` con uno stato diverso da
+# ### `DA_CLASSIFICARE`:** una voce di cui non si sa la classe non puo' essere <<aperta>>.
+# ### **LA MIGRAZIONE DI VERSIONE:** `csv/migra_schema_3.py`, riseguibile.
+SCHEMA_VERSION = 3
+
+CLASSI = ("DIFETTO", "CURA", "MISURA", "CRITERIO", "PRESIDIO", "STANDARD", "TEORIA",
+          "DECISIONE", "FRONTE", "NON_DEFINITA")
+DOMINI = ("FISICA", "METODO", "INFRASTRUTTURA", "DOCUMENTAZIONE", "DA_CLASSIFICARE")
+ERE = ("1", "2", "ENTRAMBE", "DA_CLASSIFICARE")
+STATI = ("APERTA", "IN_CORSO", "CHIUSA", "SOSPESA", "SUPERATA", "AGENDA", "DA_CLASSIFICARE")
+# ### ⛔ **GLI STATI <<APERTI>>, DICHIARATI -- e serve a `PI-ERA-STATO` RISTRETTO.**
+# ### ⭐ **E l-elenco e- per ENUMERAZIONE e non per complemento** *(<<tutti tranne
+# ### `CHIUSA`>>)*: con il complemento, ### **uno stato NUOVO sarebbe <<aperto>> per
+# ### default**, e un default che nessuno ha deciso e- la cosa che questo repo vieta.
+APERTI_ERA2 = ("APERTA", "IN_CORSO", "SOSPESA")
+# ### ⚠ **LA REGEX E' PIU' LARGA DI COME L'AVEVO SCRITTA, e il motivo e' una REGOLA:**
+# ### *«i REPERTI non si riscrivono -- il nome vecchio RESTA»* (`CLAUDE.md` par.9). La
+# ### migrazione ha trovato ### **96 ID esistenti** che la regex stretta avrebbe rifiutato:
+# ### `A2b` `A3c` `H-P1-bis` `E4a` `COMPONENTI:S3b` `CONFIG-1/` `INERZIA-1(C)` ...
+# ### ➜ **Rifiutarli voleva dire RINOMINARLI**, e quello non si fa. La regex pretende
+# ### ### **la MAIUSCOLA iniziale** e vieta lo spazio: il resto lo ammette.
+RE_ID = re.compile(r"^[A-Z0-9][A-Za-z0-9:_./()\[\]-]*$")
+RE_META = re.compile(r"^[a-z][a-z0-9_]*$")
+
+# ### LE TRANSIZIONI AMMESSE: la tavola di doc/INDICE_SCHEMA.md, in codice.
+# ### ⛔ **NESSUNA transizione RAGGIUNGE `DA_CLASSIFICARE`**: e' lo stato in cui si ENTRA solo
+# ### alla migrazione, e da cui si ESCE con una decisione registrata.
+TRANSIZIONI = {
+    "DA_CLASSIFICARE": {"APERTA", "IN_CORSO", "SOSPESA", "AGENDA", "CHIUSA", "SUPERATA"},
+    "APERTA": {"IN_CORSO", "SOSPESA", "AGENDA", "CHIUSA", "SUPERATA"},
+    "IN_CORSO": {"APERTA", "SOSPESA", "AGENDA", "CHIUSA", "SUPERATA"},
+    "SOSPESA": {"APERTA", "IN_CORSO", "AGENDA", "CHIUSA", "SUPERATA"},
+    "AGENDA": {"APERTA", "IN_CORSO", "SOSPESA", "CHIUSA", "SUPERATA"},
+    "CHIUSA": {"APERTA", "SUPERATA"},
+    "SUPERATA": {"APERTA"},
+}
+
+# ### L'ORDINE FISSO DELLE CHIAVI. Una voce scritta con un ordine diverso NON e' valida:
+# ### cosi' il file e' confrontabile al byte fra due esecuzioni.
+# ### ✅ **TRE CAMPI NUOVI il `2026-10-10`, per un mandato di Luca:** le domande
+# ### aperte diventano voci, e ### **`DA_DECIDERE_LUCA.md` diventa la lista da spuntare
+# ### UNA ALLA VOLTA, nell-ordine delle DIPENDENZE.**
+# ### ⛔ **`priorita`, `dipende_da`, `sblocca` sono CAMPI e non prosa** (par. 9): la
+# ### lista si ordina ### **da loro**, e ### **nessuno strumento legge il titolo.**
+CHIAVI = ("id", "alias", "titolo", "descrizione", "classe", "dominio", "era", "stato",
+          "blocca", "leggi", "variabili", "assiomi", "collegate", "priorita",
+          "dipende_da", "sblocca", "padre", "superata_da",
+          "chiusura", "fonte", "creata", "aggiornata", "stato_era_1", "meta")
+
+# ### ⛔ **IL VOCABOLARIO DI `priorita`, CHIUSO.** ### ⚠ **E il vuoto CI STA, ed
+# ### e- il valore di quasi tutte le voci:** `priorita` dice ### **dove sta una DOMANDA
+# ### APERTA PER LUCA nella lista**, e una voce che non e- una domanda ### **non ha una
+# ### priorita-** -- scriverne una sarebbe ### **mettere in lista cose che nessuno deve
+# ### decidere.**
+PRIORITA = ("", "CRITICA", "DIPENDENTE", "MINORE")
+
+# ### ⭐ **I DEFAULT DEI CAMPI NUOVI, e servono a `PI-REPLAY`:** una voce dove il
+# ### campo ### **vale il default** non e- una differenza rispetto a una riga di storico
+# ### ### **scritta prima che il campo esistesse.** ### ✅ **Ma se il valore NON e-
+# ### il default, nello storico DEVE esserci** -- cosi- i denti restano dove sta il dato.
+DEFAULT_NUOVI = {"priorita": "", "dipende_da": [], "sblocca": []}
+
+# =====================================================================================
+#   LA DICHIARAZIONE DEGLI ID -- punto `12(a)`, e i nomi sono quelli NUOVI del `12(b)`
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **DODICI PRESIDI IN UN FILE: quindi `PRESIDI` e non `PRESIDIO`.**
+#   ### `P-C1` legge questa tabella ### **via AST** e verifica che ### **ogni ID sia
+#   ### nell-indice** e che ### **la funzione esista nel modulo.**
+#   ### ⭐ **E i nomi sono CAMBIATI il 2026-10-09:** si chiamavano `F1`…`F12`,
+#   ### e quei nomi ### **COLLIDEVANO con ID veri** *(`F1`-`F3` segnaposto, `F4`-`F5`
+#   ### difetti)*. ### **Il nome vecchio vive come alias NAMESPACED**
+#   ### *(`VALIDATORE:F1`)*: nudo collidirebbe, ed e- la ragione del rinominamento.
+# =====================================================================================
+PRESIDI = {
+    "PI-GEMELLE": "_f1_gemelle",
+    "PI-SIMBOLI-ERA1": "_f2_era2",
+    "PI-PAROLE-STRUMENTO": "_f3_fisica_strumenti",
+    "PI-ETICHETTA-DEFINITA": "_f4_etichette",
+    "PI-STORICO-SENZA-COMMIT": "_f5_storico",
+    "PI-NOTA-CONTRADDICE-LISTA": "_f6_note",
+    "PI-FISICA-ERA1-NON-SOSPESA": "_f7_stato",
+    "PI-OGGETTI-ERA1": "_f8_era1",
+    "PI-ERA-STATO": "_f9_era_stato",
+    "PI-CRITERIO-METODO": "_f10_criterio_metodo",
+    "PI-REPLAY": "_f11_replay",
+    "PI-CHIUSURA-ORFANA": "_f12_chiusura_orfana",
+    "PI-CICLO-DIPENDENZE": "_cicli",
+}
+
+# =====================================================================================
+#   LA SEVERITA- DI OGNI PRESIDIO -- punto `13(b)`, a VOCABOLARIO CHIUSO
+# -------------------------------------------------------------------------------------
+#   ### ⛔ **PERCHE- DICHIARATA E NON DEDOTTA:** la severita- si potrebbe dedurre da
+#   ### ### **quale lista** un presidio finisce *(`err` oppure `segnali`)*, e dedurre
+#   ### dalla ### **forma del codice** e- esattamente cio- che questo mandato vieta.
+#   ### ⭐ **`P-T1` la legge VIA AST e verifica che NESSUN presidio `ERRORE` tocchi
+#   ### un campo di TESTO** -- chi RIFIUTA decide da campi strutturati, chi legge la
+#   ### prosa ### **puo- solo SEGNALARE.**
+#   ### ✅ **E oggi e- VERO, MISURATO:** i sei `ERRORE` non nominano nessun campo di
+#   ### testo e non chiamano nessuna ricerca testuale; i sei `SEGNALE` lo fanno tutti.
+# =====================================================================================
+PRESIDI_SEVERITA = {
+    "PI-GEMELLE": "SEGNALE",
+    "PI-SIMBOLI-ERA1": "SEGNALE",
+    "PI-PAROLE-STRUMENTO": "SEGNALE",
+    "PI-ETICHETTA-DEFINITA": "SEGNALE",
+    "PI-STORICO-SENZA-COMMIT": "ERRORE",
+    "PI-NOTA-CONTRADDICE-LISTA": "SEGNALE",
+    "PI-FISICA-ERA1-NON-SOSPESA": "ERRORE",
+    "PI-OGGETTI-ERA1": "SEGNALE",
+    "PI-ERA-STATO": "ERRORE",
+    "PI-CRITERIO-METODO": "ERRORE",
+    "PI-REPLAY": "ERRORE",
+    "PI-CHIUSURA-ORFANA": "ERRORE",
+    "PI-CICLO-DIPENDENZE": "ERRORE",
+}
+
+# ### ⛔ **LA FORMA DI UN-ECCEZIONE SI COSTRUISCE DALLA TABELLA `PRESIDI`.**
+# ### Scrivere l-elenco a mano qui sarebbe ### **un secondo posto** dove i nomi
+# ### dei presidi possono divergere -- e ### **divergerebbero**, perche- i nomi
+# ### sono appena cambiati.
+_FORMA_ECC = r"^(" + "|".join(re.escape(k) for k in PRESIDI) + r"):\s*(.+)$"
+
+TIPI_META = ("enum", "bool", "intero", "reale", "data", "testo_breve", "id_voce",
+             "id_legge", "id_variabile", "id_assioma", "id_decisione", "sha_commit",
+             "sha_blob")
+
+
+# ==========================================================================
+#   LETTURA
+# ==========================================================================
+def _jsonl(p):
+    if not os.path.exists(p):
+        return []
+    return [json.loads(r) for r in io.open(p, encoding="utf-8").read().split(NL) if r.strip()]
+
+
+def _scrivi_jsonl(p, righe, chiave="id"):
+    righe = sorted(righe, key=lambda r: r[chiave])
+    io.open(p, "w", encoding="utf-8", newline=NL).write(
+        NL.join(json.dumps(r, ensure_ascii=False) for r in righe) + NL)
+
+
+def carica():
+    voci = _jsonl(VOCI)
+    reg = {k: {x[("chiave" if k == "metadati" else "id")]: x
+               for x in _jsonl(os.path.join(D, "%s.jsonl" % k))}
+           for k in ("leggi", "variabili", "assiomi", "decisioni", "metadati")}
+    return voci, reg
+
+
+# ==========================================================================
+#   VALIDAZIONE
+# ==========================================================================
+def tipo_ok(val, tipo, spec, reg):
+    base = tipo[len("lista_di:"):] if tipo.startswith("lista_di:") else None
+    if base:
+        if not isinstance(val, list):
+            return "non e' una lista"
+        for v in val:
+            e = tipo_ok(v, base, spec, reg)
+            if e:
+                return "un elemento: %s" % e
+        return ""
+    if tipo == "bool":
+        return "" if isinstance(val, bool) else "non e' un bool"
+    if tipo == "intero":
+        return "" if isinstance(val, int) and not isinstance(val, bool) else "non e' un intero"
+    if tipo == "reale":
+        return "" if isinstance(val, (int, float)) and not isinstance(val, bool) \
+            else "non e' un numero"
+    if not isinstance(val, str):
+        return "non e' una stringa"
+    if tipo == "enum":
+        return "" if val in (spec.get("valori") or []) else "fuori dai valori ammessi"
+    if tipo == "data":
+        return "" if re.match(r"^\d{4}-\d{2}-\d{2}$", val) else "non e' una data AAAA-MM-GG"
+    if tipo in ("sha_commit", "sha_blob"):
+        return "" if re.match(r"^[0-9a-f]{7,40}$", val) else "non e' uno sha"
+    if tipo == "id_voce":
+        return "" if val in reg["_voci"] else "non e' un id di voce"
+    for t, k in (("id_legge", "leggi"), ("id_variabile", "variabili"),
+                 ("id_assioma", "assiomi"), ("id_decisione", "decisioni")):
+        if tipo == t:
+            return "" if val in reg[k] else "non e' un id di %s" % k
+    if tipo == "testo_breve":
+        r = spec.get("regex")
+        if r and not re.match(r, val):
+            return "non rispetta la regex del registro"
+        return ""
+    return "tipo `%s` non riconosciuto" % tipo
+
+
+def valida(voci, reg, verboso=True, derivati=True):
+    """### `derivati=False` salta i controlli sui FILE derivati *(indice invertito e viste)*:
+    serve al ### **collaudo**, che valida insiemi di voci ### **in memoria**, dove quei file
+    non c'entrano. ### ⛔ **Sul file vero `derivati` resta `True`**, ed e' la sua ultima
+    coppia di controlli."""
+    err = []
+    reg["_voci"] = {v["id"] for v in voci}
+    ids = [v["id"] for v in voci]
+    for i in sorted(set(x for x in ids if ids.count(x) > 1)):
+        err.append("id DUPLICATO: `%s`" % i)
+    tutti_alias = {}
+    for v in voci:
+        q = v["id"]
+        if list(v.keys()) != list(CHIAVI):
+            err.append("`%s`: chiavi fuori ordine o mancanti" % q)
+            continue
+        if not RE_ID.match(q):
+            err.append("`%s`: id fuori regex" % q)
+        if v.get("priorita") not in PRIORITA:
+            err.append("`%s`: `priorita` %r fuori vocabolario: %s"
+                       % (q, v.get("priorita"), list(PRIORITA)))
+        for k in ("dipende_da", "sblocca"):
+            if not isinstance(v.get(k), list):
+                err.append("`%s`: `%s` deve essere una lista" % (q, k))
+        if v["classe"] not in CLASSI:
+            err.append("`%s`: classe `%s` fuori vocabolario" % (q, v["classe"]))
+        if v["dominio"] not in DOMINI:
+            err.append("`%s`: dominio `%s` fuori vocabolario" % (q, v["dominio"]))
+        if str(v["era"]) not in ERE:
+            err.append("`%s`: era `%s` fuori vocabolario" % (q, v["era"]))
+        if v["stato"] not in STATI:
+            err.append("`%s`: stato `%s` fuori vocabolario" % (q, v["stato"]))
+        if not isinstance(v["blocca"], bool):
+            err.append("`%s`: blocca non e' un bool" % q)
+        if len(v["titolo"]) > 100:
+            err.append("`%s`: titolo oltre 100 caratteri" % q)
+        # ### i RIFERIMENTI, contro i registri
+        for campo, k in (("leggi", "leggi"), ("variabili", "variabili"),
+                         ("assiomi", "assiomi")):
+            for x in v[campo]:
+                if x not in reg[k]:
+                    err.append("`%s`: %s `%s` NON e' nel registro" % (q, campo, x))
+        for x in v["collegate"]:
+            if x not in reg["_voci"]:
+                err.append("`%s`: collegata `%s` NON e' una voce" % (q, x))
+        if v["padre"] and v["padre"] not in reg["_voci"]:
+            err.append("`%s`: padre `%s` NON e' una voce" % (q, v["padre"]))
+        for a in v["alias"]:
+            if a in tutti_alias:
+                err.append("alias `%s` usato da `%s` e `%s`" % (a, tutti_alias[a], q))
+            tutti_alias[a] = q
+            if a in reg["_voci"]:
+                err.append("`%s`: l'alias `%s` e' anche un id di voce" % (q, a))
+        # ### I CAMPI OBBLIGATORI PER STATO
+        if v["stato"] == "CHIUSA" and not (v["chiusura"].get("criterio")
+                                           and v["chiusura"].get("commit")):
+            err.append("`%s`: CHIUSA senza `chiusura.criterio` e `chiusura.commit`" % q)
+        if v["stato"] == "SUPERATA":
+            s = v["superata_da"]
+            if not s:
+                err.append("`%s`: SUPERATA senza `superata_da`" % q)
+            # ### ⭐ **E DAL 2026-10-09 ACCETTA ANCHE L-ID DI UNA VOCE**, e il mandato lo
+            # ### dice: ### **una voce promossa o fusa in un-altra e- superata DA QUELLA.**
+            # ### ⛔ **La mia regola di ieri -- *<<un difetto non decide niente>>* -- era
+            # ### vera per una DECISIONE e falsa per una PROMOZIONE:** `S02` e-
+            # ### ### **PROMOSSO** a `D31`, e `D31` e- una voce. ### **Rifiutarla
+            # ### significava pretendere che ogni superamento venisse da FUORI l-indice**,
+            # ### e un indice che non sa dire *<<questa e- diventata quella>>*
+            # ### ### **perde la storia delle fusioni.**
+            elif (s not in reg["decisioni"] and s not in reg["assiomi"]
+                  and s not in {w["id"] for w in voci}):
+                err.append("`%s`: superata_da `%s` non e' una decisione, ne' un assioma, "
+                           "ne' una voce"
+                           % (q, s))
+        if v["stato"] == "SOSPESA" and not v["stato_era_1"]:
+            err.append("`%s`: SOSPESA senza `stato_era_1`" % q)
+        if v["blocca"] and v["stato"] in ("CHIUSA", "SUPERATA"):
+            err.append("`%s`: blocca=true con stato `%s`: contraddizione" % (q, v["stato"]))
+        if v["classe"] == "NON_DEFINITA" and v["stato"] != "DA_CLASSIFICARE":
+            err.append("`%s`: classe NON_DEFINITA con stato `%s`: una voce di cui non si sa "
+                       "la classe non puo' avere uno stato deciso" % (q, v["stato"]))
+        if v["dominio"] == "DA_CLASSIFICARE" and v["stato"] != "DA_CLASSIFICARE" \
+                and str(v["era"]) != "DA_CLASSIFICARE":
+            err.append("`%s`: dominio DA_CLASSIFICARE ma stato ed era sono deciso" % q)
+        # ### I METADATI
+        for k, val in (v["meta"] or {}).items():
+            if not RE_META.match(k):
+                err.append("`%s`: chiave meta `%s` fuori regex" % (q, k))
+                continue
+            spec = reg["metadati"].get(k)
+            if spec is None:
+                err.append("`%s`: chiave meta `%s` NON REGISTRATA" % (q, k))
+                continue
+            if spec.get("stato") == "DEPRECATO":
+                err.append("`%s`: chiave meta `%s` e' DEPRECATA (usa `%s`)"
+                           % (q, k, spec.get("sostituito_da") or "?"))
+                continue
+            e = tipo_ok(val, spec["tipo"], spec, reg)
+            if e:
+                err.append("`%s`: meta `%s`: %s" % (q, k, e))
+            ap = spec.get("si_applica_a") or {}
+            cl, do = ap.get("classi") or [], ap.get("domini") or []
+            if cl and v["classe"] not in cl:
+                err.append("`%s`: meta `%s` non si applica alla classe `%s`"
+                           % (q, k, v["classe"]))
+            if do and v["dominio"] not in do:
+                err.append("`%s`: meta `%s` non si applica al dominio `%s`"
+                           % (q, k, v["dominio"]))
+    # ### ⛔ **QUESTI DUE VANNO PRIMA DEL RITORNO, e non e- un dettaglio:** dipendono
+    # ### ### **SOLO dalle voci**, e `aggiorna_lotto` valida con `derivati=False`
+    # ### ### **PRIMA DI SCRIVERE**. Finche- stavano dopo, un lotto che violava `PI-FISICA-ERA1-NON-SOSPESA`
+    # ### ### **VENIVA SCRITTO** e solo allora l-assert scattava: l-indice restava
+    # ### ### **CORROTTO**, e l-ho ripristinato con `git checkout`. L-ha dimostrato una
+    # ### prova end-to-end, e la promessa *<<se non passa NON SI SCRIVE NIENTE>>*
+    # ### ### **era falsa.**
+    err += _f7_stato(voci)
+    # ### `PI-CRITERIO-METODO` SI ACCENDE, `PI-ERA-STATO` NO, e la differenza e- ### **misurata, non di gusto:**
+    # ### `PI-CRITERIO-METODO` viola su ### **ZERO** voci, `PI-ERA-STATO` su ### **CINQUE**. `indice.py valida`
+    # ### gira nel `pre-commit`: un presidio bloccante con violazioni in piedi
+    # ### ### **blocca ogni commit del repo**, compreso quello che lo accende.
+    # ### ✔ **E ADESSO `PI-ERA-STATO` E- ACCESO, NELLO STESSO COMMIT CHE CURA LE CINQUE** -- `A2`,
+    # ### `LUNGA-BATTITO-CADUTA`, `PRESTAZIONI-CORSE`, `REPERTI-IMMUTABILI`,
+    # ### `RIPRESA-ARGV`: quattro passano ad `APERTA`, una a era `1`.
+    # ### ⛔ **In DUE commit non si poteva**, e Luca lo ha riconosciuto: *<<F9 e F10 si
+    # ### accendono NELLO STESSO COMMIT delle correzioni che li rendono veri, mai
+    # ### prima>>*. Il commit che accendesse `PI-ERA-STATO` prima ### **sarebbe bloccato dal suo
+    # ### stesso hook**, perche- `indice.py valida` gira nel `pre-commit`.
+    err += _f9_era_stato(voci)
+    err += _f10_criterio_metodo(voci)
+    # ### `PI-CHIUSURA-ORFANA` SI ACCENDE QUI, ### **nello stesso commit che cura le `41`** -- e- la
+    # ### ### **quarta volta** che l-ordine non e- libero, e stavolta stava scritto nel
+    # ### task history ### **prima di muovermi.**
+    err += _f12_chiusura_orfana(voci)
+    # ### ⛔ **IL CICLO DELLE DIPENDENZE: il mandato lo vuole BLOCCANTE**, e
+    # ### la ragione e- che ### **una lista senza ordine non e- una lista.**
+    err += _cicli(voci)
+    err += _eccezioni_malformate(voci)
+    # ### L'INDICE INVERTITO e le VISTE: DERIVATI, e si CONFRONTANO
+    if not derivati:
+        return err
+    # ### `PI-STORICO-SENZA-COMMIT` e la FORMA delle ECCEZIONI sono ERRORI, non segnali, e stanno QUI: il
+    # ### mandato dice *<<storico senza commit -> ERRORE, non segnale>>*, e
+    # ### un-eccezione che NON CITA non e- un-eccezione, e- una via di fuga.
+    err += _f5_storico(voci)
+    # ### `PI-REPLAY` STA QUI, accanto a `PI-STORICO-SENZA-COMMIT`, perche- ### **legge il disco** *(lo storico e il
+    # ### tag)* e non solo la lista: ### **non e- puro**, e il `derivati=False` di
+    # ### `aggiorna_lotto` lo salta ### **di proposito** -- durante un lotto lo storico
+    # ### nuovo ### **non e- ancora scritto**, e `PI-REPLAY` accuserebbe ogni voce del lotto.
+    # ### ✔ **Dopo la scrittura `valida` gira INTERO, e li- `PI-REPLAY` controlla.**
+    err += _f11_replay(voci)
+    atteso = invertito(voci, reg)
+    if os.path.exists(INVERTITO):
+        avuto = json.load(io.open(INVERTITO, encoding="utf-8"))
+        if avuto != atteso:
+            err.append("l'INDICE INVERTITO e' DISALLINEATO: rigeneralo con `viste`")
+    elif voci:
+        err.append("l'INDICE INVERTITO MANCA: rigeneralo con `viste`")
+    if voci and os.path.exists(TSV):
+        if io.open(TSV, encoding="utf-8").read() != vista_tsv(voci):
+            err.append("la VISTA `doc/INDICE_ID.tsv` NON coincide con voci.jsonl: e' stata "
+                       "modificata a mano, oppure va rigenerata con `viste`")
+    # ### ⛔ **`P-ALB` DENTRO `valida`, E IL MANDATO LO CHIEDE ALLA LETTERA:**
+    # ### *<<una decisione marcata PRESA con una dipendenza ancora APERTA ->
+    # ### ### **la validazione FALLISCE**>>*. ### **Quindi entra in `err`, non fra i
+    # ### segnali:** un segnale che non blocca ### **non e- quello che il mandato ha
+    # ### chiesto.**
+    # ### ⚠ **E se il presidio SI SCHIANTA, l-errore si DICHIARA e non si
+    # ### nasconde** *(`A8`: un presidio che si schianta non deve bloccare in
+    # ### silenzio -- deve DIRLO)*.
+    try:
+        import _albero_era2 as _ALB
+        err += _ALB.controlla()
+    except Exception as _e:                                 # noqa: BLE001
+        err.append("`P-ALB` NON E- GIRATO (%s): dichiarato, non nascosto" % _e)
+    if verboso:
+        print("=" * 96)
+        print("VALIDAZIONE dell'indice v%d -- %d voci, %d chiavi di metadato"
+              % (SCHEMA_VERSION, len(voci), len(reg["metadati"])))
+        print("=" * 96)
+        if err:
+            for e in err[:40]:
+                print("  ### " + e)
+            if len(err) > 40:
+                print("  ... e altri %d" % (len(err) - 40))
+            print("  ### FALLITA: %d errori" % len(err))
+        else:
+            print("  schema, vocabolari, riferimenti, transizioni, campi obbligatori,")
+            print("  unicita', metadati, indice invertito e viste: **TUTTO A POSTO**")
+        # ### I SEGNALI NON CAMBIANO IL CODICE D-USCITA, e per questo si stampano
+        # ### DOPO il verdetto e FUORI da `err`: un segnale che blocca NON E- UN
+        # ### SEGNALE. La lista intera la da- `python csv/indice.py segnali`.
+        _s = segnali(voci, reg, verboso=False)
+        _n = sum(len(x[2]) for x in _s)
+        print("  ### i PRESIDI contro le mescolanze: %d segnali (%s). NON bloccano: "
+              "`indice.py segnali`"
+              % (_n, "  ".join("%s=%d" % (x[0], len(x[2])) for x in _s)))
+    return err
+
+
+# ==========================================================================
+#   DERIVATI
+# ==========================================================================
+def invertito(voci, reg):
+    fuori = {}
+    for campo in ("classe", "dominio", "era", "stato"):
+        for v in voci:
+            fuori.setdefault(campo, {}).setdefault(str(v[campo]), []).append(v["id"])
+    for v in voci:
+        fuori.setdefault("blocca", {}).setdefault(
+            "SI" if v["blocca"] else "NO", []).append(v["id"])
+        for campo in ("leggi", "variabili", "assiomi"):
+            for x in v[campo]:
+                fuori.setdefault(campo, {}).setdefault(x, []).append(v["id"])
+        for k, val in (v["meta"] or {}).items():
+            spec = reg["metadati"].get(k) or {}
+            if not spec.get("cercabile"):
+                continue
+            for u in (val if isinstance(val, list) else [val]):
+                fuori.setdefault("meta:" + k, {}).setdefault(str(u), []).append(v["id"])
+    return {k: {k2: sorted(set(v2)) for k2, v2 in sorted(v.items())}
+            for k, v in sorted(fuori.items())}
+
+
+def vista_tsv(voci):
+    """### LA VISTA COMPATIBILE: le 15 colonne dell'era `1`, perche'
+    `python csv/_indice_id.py --blocca SI` e `--dettaglio` continuino a funzionare."""
+    col = ["id", "alias", "titolo_breve", "fonte_principale", "stato", "blocca_run_base",
+           "tipo", "famiglia", "stato_da", "avanzamento", "revisione", "motivo", "nota",
+           "stato_era_1", "si_riferisce_a"]
+    r = [TAB.join(col)]
+    for v in sorted(voci, key=lambda x: x["id"]):
+        m = v["meta"] or {}
+        r.append(TAB.join([
+            v["id"], ",".join(v["alias"]), v["titolo"].replace(TAB, " "),
+            v["fonte"], v["stato"], "SI" if v["blocca"] else "NO",
+            m.get("tipo_era1", v["classe"].lower()), m.get("famiglia_era1", "?"),
+            (v["descrizione"] or "").replace(TAB, " ").replace(NL, " ")[:900],
+            m.get("avanzamento_era1", "(senza marcatore)"),
+            m.get("revisione_era1", "") or str(v["aggiornata"].get("data", "")),
+            (m.get("motivo_era1", "")
+             or v["chiusura"].get("criterio", "") or v["superata_da"] or "")[:1000],
+            (m.get("nota_guardiano", "") or "").replace(TAB, " ")[:300],
+            v["stato_era_1"], m.get("si_riferisce_a_era1", ""),
+        ]))
+    return NL.join(r) + NL
+
+
+def vista_md(voci):
+    r = ["# L'INDICE — **vista generata, NON si modifica a mano**", "",
+         "> ### ⛔ **La fonte e' `doc/indice/voci.jsonl`.** Si scrive solo con "
+         "`python csv/indice.py aggiorna`.", ""]
+    per = {}
+    for v in voci:
+        per.setdefault((v["dominio"], str(v["era"])), []).append(v)
+    r.append("| dominio | era | voci |")
+    r.append("|---|---|--:|")
+    for k in sorted(per):
+        r.append("| `%s` | `%s` | %d |" % (k[0], k[1], len(per[k])))
+    r.append("")
+    r.append("| id | classe | dominio | era | stato | blocca | titolo |")
+    r.append("|---|---|---|---|---|---|---|")
+    for v in sorted(voci, key=lambda x: x["id"]):
+        r.append("| `%s` | %s | %s | %s | ### **%s** | %s | %s |"
+                 % (v["id"], v["classe"], v["dominio"], v["era"], v["stato"],
+                    "SI" if v["blocca"] else "", v["titolo"].replace("|", "/")[:80]))
+    return NL.join(r) + NL
+
+
+def viste(voci, reg):
+    json.dump(invertito(voci, reg), io.open(INVERTITO, "w", encoding="utf-8", newline=NL),
+              ensure_ascii=False, indent=1, sort_keys=True)
+    io.open(TSV, "w", encoding="utf-8", newline=NL).write(vista_tsv(voci))
+    io.open(VISTA_MD, "w", encoding="utf-8", newline=NL).write(vista_md(voci))
+    print("  rigenerati: _indice_meta.json, doc/INDICE_ID.tsv, doc/INDICE.md")
+
+
+# ==========================================================================
+#   CERCA  --  SENZA parsing di testo
+# ==========================================================================
+def cerca(voci, reg, a):
+    res = voci
+    for chiave, campo in (("dominio", "dominio"), ("stato", "stato"), ("era", "era"),
+                          ("classe", "classe")):
+        if a.get(chiave):
+            res = [v for v in res if str(v[campo]) == a[chiave]]
+    if a.get("blocca"):
+        vuole = a["blocca"].upper() in ("SI", "TRUE", "1")
+        res = [v for v in res if v["blocca"] == vuole]
+    for chiave, campo in (("legge", "leggi"), ("variabile", "variabili"),
+                          ("assioma", "assiomi")):
+        if a.get(chiave):
+            res = [v for v in res if a[chiave] in v[campo]]
+    if a.get("meta"):
+        k, _, val = a["meta"].partition("=")
+        res = [v for v in res if str((v["meta"] or {}).get(k, "")) == val]
+    print("%-22s %-10s %-16s %-4s %-16s %-3s %s"
+          % ("id", "classe", "dominio", "era", "stato", "blc", "titolo"))
+    print("-" * 118)
+    for v in sorted(res, key=lambda x: x["id"]):
+        print("%-22s %-10s %-16s %-4s %-16s %-3s %s"
+              % (v["id"][:22], v["classe"][:10], v["dominio"][:16], str(v["era"])[:4],
+                 v["stato"][:16], "SI" if v["blocca"] else "", v["titolo"][:48]))
+    print("-" * 118)
+    print("%d voci" % len(res))
+    return res
+
+
+# ==========================================================================
+#   AGGIORNA  --  l'UNICA via di scrittura
+# ==========================================================================
+def aggiorna(voci, reg, idv, campi, metas, motivo, commit):
+    assert motivo, "serve --motivo: una modifica senza motivo non si registra"
+    # ### ⛔ **`--commit` NON SI ACCETTA PIU-, e NON e- un controllo in piu-: e- una
+    # ### possibilita- di sbagliare che SI TOGLIE** *(`9-ter`: a parita- di effetto si
+    # ### preferisce togliere un-eccezione)*.
+    # ### ⚠ **PERCHE- ERA UNA TRAPPOLA PER COSTRUZIONE:** scriveva il `commit` ### **anche
+    # ### nella riga di storico**, ma quella riga finisce in un commit ### **che ancora
+    # ### non esiste** -- quindi ### **qualunque valore passato li- e- falso.** E
+    # ### ### **un numero che dice una cosa falsa e- PEGGIO di un numero assente**
+    # ### *(`L-NUMERI`)*: il campo si lascia ### **VUOTO**, e `storico-commit` lo riempie
+    # ### ### **DAI LOG.**
+    # ### ⭐ **E l-ho scoperto sbagliandolo:** ho passato il commit ### **della cura** a una
+    # ### riga che e- finita nel commit ### **dopo**, e `PI-STORICO-SENZA-COMMIT` ha
+    # ### rifiutato il commit dicendo entrambi i numeri.
+    assert not commit, (
+        "`--commit` NON esiste piu-, e il motivo e- che era falso per costruzione: la"
+        " riga di storico che stai scrivendo finira- in un commit CHE ANCORA NON ESISTE."
+        " Lascia il campo vuoto -- `python csv/indice.py storico-commit` lo riempie DAI"
+        " LOG. ### Se volevi dire <<il commit della CURA>>, quello e- un CAMPO della"
+        " voce: `--campo chiusura.commit=<sha>`")
+    per = {v["id"]: v for v in voci}
+    assert idv in per, "`%s` non e' una voce" % idv
+    v = per[idv]
+    prima = json.loads(json.dumps(v))
+    for c in campi:
+        _campo(v, c)
+    for m in metas:
+        k, _, val = m.partition("=")
+        spec = reg["metadati"].get(k)
+        assert spec, "la chiave meta `%s` NON e' registrata: usa `meta-aggiungi`" % k
+        assert spec.get("stato") == "ATTIVO", "la chiave meta `%s` e' DEPRECATA" % k
+        if spec["tipo"] == "intero":
+            val = int(val)
+        elif spec["tipo"] == "bool":
+            val = val.upper() in ("SI", "TRUE", "1")
+        elif spec["tipo"].startswith("lista_di:"):
+            val = [x for x in val.split(",") if x]
+        v.setdefault("meta", {})[k] = val
+    v["aggiornata"] = {"data": _oggi(), "commit": commit or ""}
+    # ### ⛔ **IL DIFETTO, visto il `2026-10-10`: `aggiorna` RIFIUTAVA SE STESSO.**
+    # ### Validava ### **PRIMA** di scrivere la riga di storico e di rigenerare le viste --
+    # ### e in quel momento ### **lo stato NON PUO- essere valido**: `PI-REPLAY` vede una
+    # ### voce che non coincide col `dopo` della sua ultima riga *(la riga non c-e- ancora)*,
+    # ### e le viste derivate ### **sono stale per costruzione.**
+    # ### ⭐ **Quindi il comando che `CLAUDE.md` indica come IL SOLO MODO DI SCRIVERE
+    # ### fallisce per QUALUNQUE modifica**, e tutte le scritture vere sono passate dai
+    # ### ### **lotti.** ### ⚠ **E- `A9` dal lato del percorso di scrittura: una via
+    # ### che non si puo- percorrere non e- una via.**
+    # ### 📌 **E `aggiorna_lotto` SAPEVA GIA- LA RISPOSTA, scritta nei suoi
+    # ### commenti:** *<<le viste sono per costruzione stale finche- non si riscrivono:
+    # ### controllarli qui vorrebbe dire rifiutare OGNI lotto -- e si rivalida INTERO
+    # ### DOPO>>*. ### **Qui si fa LA STESSA COSA, e non una seconda regola** (`9-ter`).
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
+    assert not err, "la modifica NON passa la validazione:" + NL + NL.join(err[:8])
+    _scrivi_jsonl(VOCI, voci)
+    io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
+        json.dumps({"quando": _oggi(), "id": idv, "motivo": motivo,
+                    "commit": commit or "", "commit_base": _head(),
+                    "prima": prima, "dopo": v},
+                   ensure_ascii=False) + NL)
+    _stage_storico()
+    viste(voci, reg)
+    v2, r2 = carica()
+    err2 = valida(v2, r2, verboso=False)
+    assert not err2, ("### SCRITTO, MA LA VALIDAZIONE INTERA FALLISCE:" + NL
+                      + NL.join(err2[:10]))
+    print("  `%s` aggiornata, lo storico ha una riga in piu', e la validazione INTERA "
+          "passa" % idv)
+
+
+def aggiorna_lotto(voci, reg, percorso):
+    """### ⭐ **LA SCRITTURA A LOTTI: E' LA STESSA VIA, non un'altra.**
+
+    Prende un `jsonl` di `{id, campi: {...}, meta: {...}, motivo}` e lo applica
+    ### **atomicamente**: ### **una riga di storico PER VOCE** *(come `aggiorna`)*, le
+    ### **stesse** asserzioni sulle transizioni e sui metadati, e ### **una sola**
+    validazione alla fine -- ### **se non passa, NON SI SCRIVE NIENTE.**
+    ### ⚠ **Serve perche' la fase 2 tocca ~900 voci:** `aggiorna` una per volta riscriverebbe
+    `voci.jsonl` e le tre viste ### **novecento volte**, e un lavoro di quella forma non si
+    porta a termine. ### **La REGOLA che conta -- una via di scrittura, un motivo che cita, una
+    riga di storico -- resta INTATTA.**
+    """
+    per = {v["id"]: v for v in voci}
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    storia = []
+    for r in righe:
+        idv = r["id"]
+        assert idv in per, "`%s` non e' una voce" % idv
+        motivo = r.get("motivo", "")
+        assert len(motivo) >= 20, ("`%s`: il motivo e' troppo corto per CITARE qualcosa: %r"
+                                   % (idv, motivo))
+        v = per[idv]
+        prima = json.loads(json.dumps(v))
+        for k, val in (r.get("campi") or {}).items():
+            assert k in CHIAVI, "`%s`: `%s` non e' un campo dello schema" % (idv, k)
+            if k == "stato" and val != v["stato"]:
+                assert val in TRANSIZIONI.get(v["stato"], set()), (
+                    "`%s`: TRANSIZIONE VIETATA `%s` -> `%s`" % (idv, v["stato"], val))
+            v[k] = val
+        for k, val in (r.get("meta") or {}).items():
+            spec = reg["metadati"].get(k)
+            assert spec, "`%s`: la chiave meta `%s` NON e' registrata" % (idv, k)
+            assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e' DEPRECATA"
+                                                   % (idv, k))
+            v["meta"][k] = val
+        # ### TOGLIERE UN METADATO E- UNA COSA DIVERSA DA SVUOTARLO, e serve:
+        # ### `nota_guardiano` ha regex `^.{1,300}$`, quindi ### **non si puo- mettere a
+        # ### stringa vuota.** E una ### **domanda a cui si e- risposto non si riscrive: si
+        # ### TOGLIE** -- la risposta vive in `superata_da` e nello storico.
+        for k in (r.get("meta_togli") or []):
+            assert k in v["meta"], ("`%s`: la chiave meta `%s` NON ESISTE, e togliere "
+                                    "cio- che non esiste NASCONDE un errore" % (idv, k))
+            del v["meta"][k]
+        v["aggiornata"] = {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")}
+        storia.append({"quando": v["aggiornata"]["data"], "id": idv, "motivo": motivo,
+                       "commit": r.get("commit", ""), "commit_base": _head(),
+                       "prima": prima, "dopo": json.loads(json.dumps(v))})
+    # ### ⚠ **SI VALIDA `derivati=False` PRIMA di scrivere**, perche' l'indice invertito e
+    # ### le viste sono ### **per costruzione stale** finche' non si riscrivono: controllarli
+    # ### qui vorrebbe dire rifiutare OGNI lotto. ### ➜ **E si rivalida INTERO DOPO**, viste
+    # ### comprese: cosi' nessun controllo si perde.
+    # ### ⛔ **`PI-STORICO-SENZA-COMMIT` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
+    # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("IL LOTTO NON PASSA LA VALIDAZIONE, e NON SI SCRIVE NIENTE:" + NL
+                     + NL.join(err[:10]))
+    _scrivi_jsonl(VOCI, voci)
+    io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
+        NL.join(json.dumps(x, ensure_ascii=False) for x in storia) + NL)
+    _stage_storico()
+    viste(voci, reg)
+    v2, r2 = carica()
+    err2 = valida(v2, r2, verboso=False)
+    assert not err2, ("### SCRITTO, MA LA VALIDAZIONE INTERA FALLISCE:" + NL
+                      + NL.join(err2[:10]))
+    print("  lotto applicato: %d voci, %d righe di storico; e la validazione INTERA passa"
+          % (len(righe), len(storia)))
+
+
+def mostra(voci, a):
+    """### Il DUMP per leggere: `descrizione`, `fonte` e i metadati dell'era `1` --
+    ### **mai il solo titolo.**"""
+    res = voci
+    for k, c in (("stato", "stato"), ("dominio", "dominio"), ("classe", "classe")):
+        if a.get(k):
+            res = [v for v in res if str(v[c]) == a[k]]
+    if a.get("segnaposto"):
+        vuole = a["segnaposto"].upper() in ("SI", "TRUE", "1")
+        res = [v for v in res if ("MAI definito in un registro" in v["titolo"]) == vuole]
+    res = sorted(res, key=lambda x: x["id"])
+    da = int(a.get("da", 0) or 0)
+    quante = int(a.get("quante", 50) or 50)
+    lung = int(a.get("lung", 300) or 300)
+    for v in res[da:da + quante]:
+        m = v["meta"] or {}
+        print("### %s | %s | %s | %s | %s" % (v["id"], v["classe"], v["stato"],
+                                              m.get("tipo_era1", "-"),
+                                              m.get("famiglia_era1", "-")))
+        print("  F: %s" % v["fonte"][:110])
+        d = (v["descrizione"] or "").replace(NL, " ")
+        print("  D: %s" % (d[:lung] if d else "(vuota)  T: " + v["titolo"][:120]))
+        for k in ("motivo_era1", "si_riferisce_a_era1", "avanzamento_era1", "file_citanti",
+                  "nota_guardiano"):
+            if m.get(k):
+                print("  %s: %s" % (k[:12], str(m[k])[:170]))
+    print("--- mostrate %d di %d (da %d)" % (min(quante, max(0, len(res) - da)), len(res), da))
+
+
+def _oggi():
+    import datetime
+    return datetime.date.today().isoformat()
+
+
+# ==========================================================================
+#   IL REGISTRO DEI METADATI
+# ==========================================================================
+def meta_aggiungi(reg, k, tipo, valori, regex, descr):
+    assert RE_META.match(k), "la chiave `%s` e' fuori regex" % k
+    assert k not in reg["metadati"], "la chiave `%s` esiste gia'" % k
+    base = tipo[len("lista_di:"):] if tipo.startswith("lista_di:") else tipo
+    assert base in TIPI_META, "il tipo `%s` non e' ammesso" % tipo
+    assert descr, "serve una descrizione"
+    if base == "enum":
+        assert valori, "un `enum` senza valori non e' un vocabolario chiuso"
+    r = _jsonl(META)
+    r.append({"chiave": k, "tipo": tipo,
+              "valori": [x for x in (valori or "").split(",") if x],
+              "regex": regex or "", "descrizione": descr,
+              "si_applica_a": {"classi": [], "domini": []}, "cercabile": True,
+              "stato": "ATTIVO", "sostituito_da": "",
+              "creato": {"data": _oggi(), "commit": ""}})
+    _scrivi_jsonl(META, r, "chiave")
+    print("  registrata la chiave meta `%s` (%s)" % (k, tipo))
+
+
+def meta_depreca(voci, reg, k, nuovo, motivo):
+    assert motivo, "serve --motivo"
+    r = _jsonl(META)
+    trovata = [x for x in r if x["chiave"] == k]
+    assert trovata, "la chiave `%s` non e' registrata" % k
+    trovata[0]["stato"] = "DEPRECATO"
+    trovata[0]["sostituito_da"] = nuovo or ""
+    _scrivi_jsonl(META, r, "chiave")
+    n = 0
+    for v in voci:
+        if k in (v["meta"] or {}):
+            if nuovo:
+                v["meta"][nuovo] = v["meta"].pop(k)
+            else:
+                v["meta"].pop(k)
+            n += 1
+    _scrivi_jsonl(VOCI, voci)
+    io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
+        json.dumps({"quando": _oggi(), "meta_deprecata": k, "sostituito_da": nuovo or "",
+                    "voci_migrate": n, "motivo": motivo}, ensure_ascii=False) + NL)
+    _stage_storico()
+    print("  `%s` DEPRECATA, e %d voci migrate%s"
+          % (k, n, (" a `%s`" % nuovo) if nuovo else " (chiave rimossa)"))
+
+
+def meta_rinomina(voci, reg, k, k2, motivo):
+    assert motivo, "serve --motivo"
+    r = _jsonl(META)
+    trovata = [x for x in r if x["chiave"] == k]
+    assert trovata, "la chiave `%s` non e' registrata" % k
+    assert not [x for x in r if x["chiave"] == k2], "`%s` esiste gia'" % k2
+    assert RE_META.match(k2), "`%s` e' fuori regex" % k2
+    trovata[0]["chiave"] = k2
+    _scrivi_jsonl(META, r, "chiave")
+    n = 0
+    for v in voci:
+        if k in (v["meta"] or {}):
+            v["meta"][k2] = v["meta"].pop(k)
+            n += 1
+    _scrivi_jsonl(VOCI, voci)
+    io.open(STORICO, "a", encoding="utf-8", newline=NL).write(
+        json.dumps({"quando": _oggi(), "meta_rinominata": [k, k2], "voci_migrate": n,
+                    "motivo": motivo}, ensure_ascii=False) + NL)
+    _stage_storico()
+    print("  `%s` -> `%s`, e %d voci migrate" % (k, k2, n))
+
+
+# ==========================================================================
+#   CITAZIONI  --  un RAPPORTO, non voci nuove
+# ==========================================================================
+def citazioni(voci):
+    noti = {v["id"] for v in voci} | {a for v in voci for a in v["alias"]}
+    trovate = {}
+    for radice, _dirs, files in os.walk(RADICE):
+        if any(x in radice for x in (".git", "__pycache__", "_archivio")):
+            continue
+        for f in files:
+            if not f.endswith((".md", ".py", ".tsv")):
+                continue
+            p = os.path.join(radice, f)
+            try:
+                t = io.open(p, encoding="utf-8", errors="replace").read()
+            except Exception:                                  # noqa: BLE001
+                continue
+            for m in re.finditer(r"\[\[([A-Z0-9][A-Z0-9:_-]*)\]\]", t):
+                trovate.setdefault(m.group(1), []).append(
+                    os.path.relpath(p, RADICE).replace(chr(92), "/"))
+    manca = {k: sorted(set(v)) for k, v in trovate.items() if k not in noti}
+    print("=" * 96)
+    print("LE CITAZIONI `[[ID]]`: %d distinte, %d NON ESISTONO" % (len(trovate), len(manca)))
+    print("=" * 96)
+    for k in sorted(manca):
+        print("  ### `%s`   citata in: %s" % (k, " ".join(manca[k][:4])))
+    if not manca:
+        print("  tutte le `[[ID]]` esistono.")
+    print()
+    print("  ### E' UN RAPPORTO, NON UNA VOCE: nessun segnaposto si crea.")
+    return manca
+
+
+# ==========================================================================
+#   IL COLLAUDO  --  coi casi che DEVONO fallire
+# ==========================================================================
+def collaudo():
+    def base(**kw):
+        v = {"id": "X1", "alias": [], "titolo": "t", "descrizione": "", "classe": "DIFETTO",
+        # ### ⚠ **La voce-modello era `FISICA`/era `1`/`APERTA`, che da oggi `PI-FISICA-ERA1-NON-SOSPESA` VIETA:**
+        # ### il caso SANO sarebbe diventato un fallimento. ### **Era `ENTRAMBE`**, e il
+        # ### caso di `PI-FISICA-ERA1-NON-SOSPESA` ce l-ha suo.
+             "dominio": "FISICA", "era": "ENTRAMBE", "stato": "APERTA", "blocca": False,
+             "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
+             "priorita": "", "dipende_da": [], "sblocca": [],
+             "superata_da": "", "chiusura": {}, "fonte": "doc/x.md::X1",
+             "creata": {"data": "2026-10-08", "commit": ""},
+             "aggiornata": {"data": "2026-10-08", "commit": ""}, "stato_era_1": "",
+             "meta": {}}
+        v.update(kw)
+        return {k: v[k] for k in CHIAVI}
+
+    _voci, reg = carica()
+    reg["metadati"]["_dep"] = {"chiave": "_dep", "tipo": "testo_breve", "valori": [],
+                               "stato": "DEPRECATO", "sostituito_da": "nota_guardiano"}
+    casi = [
+        ("il caso SANO", [base()], True),
+        ("### dominio FUORI vocabolario", [base(dominio="PIPPO")], False),
+        ("### legge INESISTENTE", [base(leggi=["L-NON-ESISTE"])], False),
+        ("### CHIUSA senza chiusura", [base(stato="CHIUSA")], False),
+        ("### SUPERATA senza superata_da", [base(stato="SUPERATA")], False),
+        # ### ⭐ **I DUE VERSI DEL PUNTO `3`** *(2026-10-09)*: `superata_da` accetta
+        # ### ### **anche l-ID di una VOCE** -- una voce ### **promossa o fusa** in
+        # ### un-altra e- superata ### **da quella** -- e ### **rifiuta cio- che non e-
+        # ### ne- decisione, ne- assioma, ne- voce.** ### ⛔ **Senza il verso negativo
+        # ### la regola nuova non e- una regola: e- un PERMESSO.**
+        ("una VOCE come `superata_da` (il verso POSITIVO del punto 3)",
+         [base(stato="SUPERATA", superata_da="B", stato_era_1=""),
+          base(id="B")], True),
+        ("### `superata_da` che NON e- ne- decisione, ne- assioma, ne- voce",
+         [base(stato="SUPERATA", superata_da="NON-ESISTE-NIENTE")], False),
+        # ### ⭐ **E `PI-ERA-STATO` AMMETTE `SUPERATA` PER `ENTRAMBE`**, che corregge una mia
+        # ### strettezza; ma ### **`SOSPESA` resta VIETATA**, e il caso accanto lo prova.
+        ("era `ENTRAMBE` con `SUPERATA` (il verso POSITIVO di `PI-ERA-STATO`)",
+         [base(stato="SUPERATA", superata_da="B"), base(id="B")], True),
+        ("### `PI-ERA-STATO`: era `ENTRAMBE` con stato `SOSPESA`, che resta VIETATO",
+         [base(stato="SOSPESA", stato_era_1="aperto")], False),
+        # ### ✅ **I DUE VERSI DEL `PI-ERA-STATO` RISTRETTO** *(decisione di Luca,
+        # ### `2026-10-12`)*. ### ⛔ **Il verso che DEVE ancora scattare:** una voce
+        # ### ### **APERTA** dell-era `2` che non sia `AGENDA`.
+        ("### `PI-ERA-STATO`: era `2` APERTA e non `AGENDA`, che resta VIETATO",
+         [base(era="2", stato="APERTA")], False),
+        ("### e lo stesso con `IN_CORSO`, che e- aperto anche lui",
+         [base(era="2", stato="IN_CORSO")], False),
+        # ### ⭐ **E IL VERSO NUOVO, QUELLO CHE PRIMA ERA IMPOSSIBILE:** una domanda
+        # ### dell-era `2` ### **DECISA da Luca** si registra come `CHIUSA`, col suo
+        # ### criterio e il suo commit. ### **Prima era irraggiungibile**, e la prima
+        # ### risposta di Luca ci ha sbattuto contro.
+        ("era `2` CHIUSA con la sua chiusura (il verso NUOVO di `PI-ERA-STATO`)",
+         [base(era="2", stato="CHIUSA",
+               chiusura={"criterio": "deciso da Luca", "commit": "abc1234",
+                         "data": "2026-10-12"})], True),
+        ("### e era `2` `AGENDA` resta buono: il caso normale non si rompe",
+         [base(era="2", stato="AGENDA")], True),
+        ("### SOSPESA senza stato_era_1", [base(stato="SOSPESA")], False),
+        ("### `PI-FISICA-ERA1-NON-SOSPESA`: FISICA/era 1 con stato APERTA",
+         [base(era="1", stato="APERTA")], False),
+        ("### id DUPLICATO", [base(), base()], False),
+        ("### chiave meta NON REGISTRATA", [base(meta={"pippo": "x"})], False),
+        ("### valore meta del TIPO SBAGLIATO", [base(meta={"seme": "undici"})], False),
+        ("### chiave meta DEPRECATA usata", [base(meta={"_dep": "x"})], False),
+        ("### blocca con stato CHIUSA",
+         [base(blocca=True, stato="CHIUSA",
+               chiusura={"criterio": "c", "commit": "abc1234"})], False),
+        ("### dominio DA_CLASSIFICARE con stato ed era decisi",
+         [base(dominio="DA_CLASSIFICARE")], False),
+        ("### alias che e' anche un id", [base(id="A", alias=["B"]), base(id="B")], False),
+        ("### chiavi FUORI ORDINE",
+         [dict(reversed(list(base().items())))], False),
+        ("### classe NON_DEFINITA con stato APERTA",
+         [base(classe="NON_DEFINITA", stato="APERTA")], False),
+        ("il caso SANO con classe NON_DEFINITA",
+         [base(classe="NON_DEFINITA", stato="DA_CLASSIFICARE",
+               dominio="DA_CLASSIFICARE", era="DA_CLASSIFICARE")], True),
+    ]
+    print("=" * 96)
+    print("IL COLLAUDO DELL'INDICE v%d -- coi casi che DEVONO fallire" % SCHEMA_VERSION)
+    print("=" * 96)
+    ok = 0
+    for nome, vv, deve_passare in casi:
+        err = valida(vv, dict(reg), verboso=False, derivati=False)
+        passa = not err
+        buono = (passa == deve_passare)
+        ok += buono
+        print("  %-52s %-12s %s" % (nome, "PASSA" if passa else "RIFIUTA",
+                                    "ok" if buono else "### SBAGLIATO"))
+        if not buono and err:
+            print("      primo errore: %s" % err[0])
+    # ### le TRANSIZIONI VIETATE
+    vietate = [("CHIUSA", "SOSPESA"), ("SUPERATA", "CHIUSA"), ("APERTA", "DA_CLASSIFICARE")]
+    for da, a in vietate:
+        buono = a not in TRANSIZIONI.get(da, set())
+        ok += buono
+        print("  %-52s %-12s %s" % ("### transizione VIETATA `%s` -> `%s`" % (da, a),
+                                    "VIETATA" if buono else "ammessa",
+                                    "ok" if buono else "### SBAGLIATO"))
+    # ### I DUE CONTROLLI SUI DERIVATI, provati IN MEMORIA sulla loro LOGICA: si costruisce
+    # ### un derivato SBAGLIATO e si pretende che il confronto lo veda.
+    sane = [base()]
+    inv_giusto = invertito(sane, reg)
+    inv_storto = {"classe": {"DIFETTO": ["X9"]}}
+    buono = inv_giusto != inv_storto
+    ok += buono
+    print("  %-52s %-12s %s" % ("### indice invertito DISALLINEATO",
+                                "VISTO" if buono else "non visto",
+                                "ok" if buono else "### SBAGLIATO"))
+    tsv_giusto = vista_tsv(sane)
+    buono = tsv_giusto != (tsv_giusto + "riga aggiunta a mano" + NL)
+    ok += buono
+    print("  %-52s %-12s %s" % ("### vista TSV MODIFICATA A MANO",
+                                "VISTO" if buono else "non visto",
+                                "ok" if buono else "### SBAGLIATO"))
+    # ===================================================================
+    #   LA LISTA DA SPUNTARE  --  il CICLO, e `prossima`
+    # -------------------------------------------------------------------
+    # ### ⛔ **Il mandato lo chiede alla lettera:** *<<il braccio che DEVE fallire
+    # ### e- un CICLO di dipendenze, e un caso con DUE domande in cui la seconda dipende
+    # ### dalla prima deve dare ### **LA PRIMA** come prossima>>*.
+    sotto9 = 0
+
+    def _dom(idv, pri, dip=(), st="AGENDA"):
+        return base(id=idv, priorita=pri, dipende_da=list(dip), stato=st)
+
+    _A, _B = _dom("Q1", "CRITICA"), _dom("Q2", "CRITICA", ["Q1"])
+    _ciclo = [_dom("Q1", "CRITICA", ["Q2"]), _dom("Q2", "CRITICA", ["Q1"])]
+    for _che, _v, _buono in (
+            ("### DEVE scattare: un CICLO nelle dipendenze",
+             _cicli(_ciclo) != [], True),
+            ("una CATENA (la seconda dipende dalla prima) NON e- un ciclo",
+             _cicli([_A, _B]) == [], True),
+            ("### e `prossima` da- LA PRIMA, non la seconda",
+             (prossima([_A, _B]) or {}).get("id") == "Q1", True),
+            ("### e PRONTE e- UNA SOLA: la seconda ASPETTA",
+             [x["id"] for x in pronte([_A, _B])] == ["Q1"], True),
+            ("### e una voce SENZA `priorita` NON e- una domanda",
+             _domande([base(id="Q3")]) == [], True),
+            ("### e una domanda DECISA esce da sola (stato `CHIUSA`)",
+             _domande([_dom("Q4", "CRITICA", (), "CHIUSA")]) == [], True),
+            ("### DEVE scattare: `priorita` fuori vocabolario",
+             any("fuori vocabolario" in e
+                 for e in valida([base(priorita="SUBITO")], reg, verboso=False,
+                                 derivati=False)), True),
+            ("### e se nessuna CRITICA e- pronta, `prossima` da- NIENTE",
+             prossima([_dom("Q5", "MINORE")]) is None, True)):
+        buono = _v if _buono else not _v
+        sotto9 += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % (_che, "ok" if buono else "### SBAGLIATO"))
+
+    # ===================================================================
+    #   `PI-STORICO-SENZA-COMMIT`: I TRE CASI DEL MANDATO  --  nei DUE versi
+    # -------------------------------------------------------------------
+    # ### \u26d4 **La forma vecchia PRETENDEVA il campo scritto, ed era STRUTTURALMENTE
+    # ### ROSSA:** le ultime righe di `HEAD` ### **non possono** portare l-hash del commit
+    # ### che le contiene. ### **Diagnosi del guardiano, 2026-10-10.**
+    # ### \u26a0 **E i bracci girano su RIGHE FINTE:** un collaudo che per provare questo
+    # ### presidio dovesse scrivere nello storico vero ### **sarebbe lo stesso difetto che
+    # ### nel giro scorso ha cancellato 867 classificazioni.**
+    _R = ['{"quando": "2026-10-10", "id": "X1", "motivo": "m", "commit": "%s"}' % c
+          for c in ("aaa1111", "bbb2222", "")]
+    # ### ⚠ **UN CONTATORE SUO, e non quello del blocco dopo:** il blocco di
+    # ### `_campo` comincia con `sotto = 0`, e ### **avrebbe azzerato questi sei** --
+    # ### ### **`ok` sarebbe cresciuto e `tot` no**, cioe- il collaudo avrebbe detto
+    # ### ### **piu- passati che bracci.** ### **Visto prima di girarlo.**
+    sotto5 = 0
+
+    def _f5(vive, per_riga, n_head, n_stage):
+        return _f5_storico(None, vive=vive, da_git=(per_riga, n_head, n_stage))
+
+    for _che, _a, _buono in (
+            ("(a) righe TUTTE in un commit, campo pieno e GIUSTO",
+             _f5(_R[:2], ["aaa1111", "bbb2222"], 2, 2), True),
+            ("(a) e col campo VUOTO va bene uguale: il commit SI RICAVA",
+             _f5([_R[2]], ["ccc3333"], 1, 1), True),
+            ("### (b) DEVE scattare: un `commit` scritto che NON COINCIDE",
+             _f5(_R[:1], ["zzz9999"], 1, 1), False),
+            ("(c) una riga NELLO STAGE va bene: e- il ritardo inevitabile",
+             _f5(_R[:2], ["aaa1111"], 1, 2), True),
+            ("### (c) DEVE scattare: una riga sul DISCO e FUORI dallo stage",
+             _f5(_R[:2], ["aaa1111"], 1, 1), False),
+            ("### e senza `HEAD` il presidio TACE invece di accusare",
+             _f5(_R[:2], [], -1, -1), True)):
+        buono = (_a == []) if _buono else (_a != [])
+        sotto5 += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % (_che, "ok" if buono else "### SBAGLIATO"))
+
+    # ===================================================================
+    #   `_campo()`: IL PERCORSO UNICO IMPARA A CHIUDERE  --  nei DUE versi
+    # -------------------------------------------------------------------
+    # ### ⛔ **Prima del `2026-10-10` il percorso unico NON SAPEVA CHIUDERE:**
+    # ### `chiusura` si poteva solo ### **schiacciare a stringa**, e il validatore,
+    # ### che pretende `chiusura.criterio` e `chiusura.commit`, sarebbe ANDATO IN ERRORE.
+    sotto = 0
+    # ### ⛔ **IL RIFIUTO DI `--commit`, PROVATO E NON DICHIARATO** *(difetto del
+    # ### `2026-10-12`)*. ### ⭐ **E questo braccio POTEVA fallire**: fino a quel
+    # ### giorno `aggiorna` ### **accettava** quel flag, e ci scriveva un numero
+    # ### ### **falso per costruzione** nella riga di storico.
+    # ### ⚠ **E l-`assert` scatta PRIMA di toccare qualunque cosa**, quindi questo
+    # ### braccio ### **non puo- lasciare danno**: nessun file viene scritto.
+    try:
+        aggiorna([], {}, "QUALUNQUE", [], [], "un motivo lungo abbastanza", "abc1234")
+        buono = False
+    except AssertionError as _e:
+        buono = "--commit" in str(_e) and "chiusura.commit" in str(_e)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### DEVE scattare: `aggiorna` RIFIUTA `--commit`",
+                          "ok" if buono else "### SBAGLIATO"))
+    # ### ✅ **E IL VERSO OPPOSTO: senza `--commit` l-`assert` NON scatta**, e il
+    # ### percorso arriva al controllo dopo *(l-id che non esiste)*. ### **Senza questo
+    # ### braccio il primo passerebbe anche se `aggiorna` rifiutasse SEMPRE.**
+    try:
+        aggiorna([], {}, "QUALUNQUE", [], [], "un motivo lungo abbastanza", "")
+        buono = False
+    except AssertionError as _e:
+        buono = "--commit" not in str(_e)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### e SENZA `--commit` il rifiuto NON e- quello",
+                          "ok" if buono else "### SBAGLIATO"))
+    _v = base(stato="APERTA")
+    _campo(_v, "stato=CHIUSA")
+    _campo(_v, "chiusura.criterio=il criterio")
+    _campo(_v, "chiusura.commit=abc1234")
+    _campo(_v, "chiusura.data=2026-10-10")
+    buono = (_v["stato"] == "CHIUSA" and isinstance(_v["chiusura"], dict)
+             and _v["chiusura"]["criterio"] == "il criterio"
+             and _v["chiusura"]["commit"] == "abc1234")
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("`_campo` CHIUDE una voce col punto",
+                          "ok" if buono else "### SBAGLIATO"))
+    # ### ✅ **E UN CAMPO-DIZIONARIO SI SVUOTA**, perche- la regola vuole `chiusura`
+    # ### piena ### **solo con stato `CHIUSA`**: una voce che passa a `SUPERATA`
+    # ### ### **deve poterla svuotare**, e la sua storia vive nello STORICO.
+    _s = base(stato="CHIUSA", chiusura={"data": "x", "criterio": "c", "commit": "abc1234"})
+    _campo(_s, "chiusura=")
+    buono = _s["chiusura"] == {} and isinstance(_s["chiusura"], dict)
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("`_campo` SVUOTA un campo-dizionario, e resta un dizionario",
+                          "ok" if buono else "### SBAGLIATO"))
+    # ### ⛔ **E IL VERSO CHE DEVE FALLIRE, che e- il piu- importante** (`P1-sexies`):
+    # ### ### **un sotto-campo che NON ESISTE si rifiuta**, invece di nascere come un
+    # ### campo fantasma che nessuno legge mai.
+    for _c, _che in (("chiusura.motivo=x", "un sotto-campo INVENTATO"),
+                     ("titolo.x=y", "il punto su un campo che NON e- dizionario"),
+                     ("pippo=y", "un campo che non sta nello schema")):
+        _w = base(stato="APERTA")
+        try:
+            _campo(_w, _c)
+            buono = False
+        except AssertionError:
+            buono = True
+        sotto += 1 if buono else 0
+        ok += 1 if buono else 0
+        print("  %-62s %s" % ("### DEVE fallire: " + _che,
+                              "ok" if buono else "### SBAGLIATO"))
+    # ### ⚠ **E LA TRANSIZIONE RESTA CONTROLLATA:** `_campo` non e- una
+    # ### ### **scorciatoia** che salta le regole degli stati.
+    _z = base(stato="CHIUSA", chiusura={"data": "2026-10-10", "criterio": "c",
+                                        "commit": "abc1234"})
+    try:
+        _campo(_z, "stato=AGENDA")
+        buono = False
+    except AssertionError:
+        buono = True
+    sotto += 1 if buono else 0
+    ok += 1 if buono else 0
+    print("  %-62s %s" % ("### DEVE fallire: `CHIUSA` -> `AGENDA` resta VIETATA",
+                          "ok" if buono else "### SBAGLIATO"))
+    tot = len(casi) + len(vietate) + 2 + sotto + sotto5 + sotto9
+    print()
+    print("  COLLAUDO: %d su %d" % (ok, tot))
+    print("  ### I DUE CONTROLLI SUI DERIVATI sono provati IN MEMORIA sulla loro LOGICA")
+    print("  ###   (si costruisce un derivato sbagliato e si pretende che il confronto lo")
+    print("  ###   veda); SUL FILE VERO li fa `valida`, e sono gli ultimi due della sua")
+    print("  ###   lista. ### Il collaudo valida IN MEMORIA, quindi `derivati=False`.")
+    return 0 if ok == tot else 1
+
+
+# ==========================================================================
+# ==========================================================================
+#   I PRESIDI CONTRO LE MESCOLANZE  --  SEGNALANO, non decidono
+# ==========================================================================
+# ### ⛔ **LA REGOLA CHE LI GOVERNA:** sono ### **deterministici** e ### **SEGNALANO**; la
+# ### decisione e- di chi legge. ### **Un segnale si chiude in due modi soli:**
+# ### ### **correggendo la voce**, oppure con ### **`meta.eccezione_presidio`**, che deve
+# ### ### **CITARE IL TESTO ALLA LETTERA.**
+# ### ⚠ **`PI-STORICO-SENZA-COMMIT` e- L-UNICO che e- un ERRORE**, e il mandato lo dice: *«storico senza commit ->
+# ### errore, non segnale»*.
+# ### ⛔ **E `PI-GEMELLE` non puo- leggere l-intenzione:** *«come lo stesso fatto»* non e- rilevabile
+# ### da un programma. `PI-GEMELLE` segnala ### **che l-ID c-e-**; che sia *lo stesso fatto* lo decide
+# ### chi legge. ### **E- esattamente il motivo per cui questi presidi SEGNALANO.**
+
+# ### I simboli dell-ERA 1: se una voce dell-era `2` li nomina, sta ancora parlando del
+# ### vecchio codice. (`PI-SIMBOLI-ERA1`)
+ERA1_SIMBOLI = ("phivel", "phidot", "M_PH", "perc_chi", "perc_geom", "mem_mot",
+                "dir_laterale", "Nose-Hoover", "scuotimento", "sync", "SCALAMIN")
+# ### Le parole degli STRUMENTI: se le dice il titolo di una voce `FISICA`, quella voce parla
+# ### del modo di verificare, non della natura. (`PI-PAROLE-STRUMENTO`)
+STRUMENTI = ("sigillo", "criterio", "controllo positivo", "caso che deve fallire",
+             "commento", "docstring", "README", "hook", "presidio", "CRLF")
+# ### GENERATE: una riga qui ELENCA un ID, non lo DEFINISCE. (`PI-ETICHETTA-DEFINITA`)
+# ### ⛔ **E- lo stesso FALSO-UNO del controllo `C4`, che leggeva `doc/INDICE.md`.**
+VISTE_GENERATE = ("doc/LISTA_CHIUSA.md", "doc/INDICE.md", "doc/INDICE_ID.tsv",
+                  "doc/INDICE_ID_dettaglio.md", "doc/indice/")
+# ### Che cosa diceva ciascuna lista del guardiano. (`PI-NOTA-CONTRADDICE-LISTA`)
+LISTE_GUARDIANO = {"1": (None, "ENTRAMBE", None),
+                   "2": ("FISICA", "2", "AGENDA"),
+                   "3": ("FISICA", "1", "SOSPESA")}
+# ### ⛔ **`_DOMINI_PAROLA` e `_STATI_PAROLA` SONO STATE TOLTE**, non lasciate morte:
+# ### servivano a `PI-NOTA-CONTRADDICE-LISTA` per ### **leggere la prosa della nota**, ed e- proprio cio- che
+# ### ### **sbagliava** *(«candidata SUPERATA dalla decisione» letto come lo stato
+# ### `SUPERATA`)*. ### **Un vocabolario che non si usa piu- si cancella**, altrimenti
+# ### il prossimo lo riusa.
+_TOKEN = re.compile(r"[A-Za-z][A-Za-z0-9_:.-]*")
+# ### Lo schema `D`/`Z`: una riga della tavola `D` che cita la sua `Z`. (`PI-GEMELLE`)
+_DZ = re.compile(r"^D\d+[a-z]?$")
+_ZZ = re.compile(r"^Z\d+[a-z]?$")
+_RIGA_NNNN = re.compile(r":\d{3,5}(?![0-9])")
+_FLAG = re.compile(r"(?<![A-Za-z0-9])--[a-z][a-z0-9-]{2,}")
+
+
+def _coperto(v, quale):
+    """### `meta.eccezione_presidio`: la voce dichiara che quel segnale ### **e- stato
+    guardato e va bene cosi-.** ### ⚠ **La FORMA la controlla `valida`** *(vedi
+    `_eccezioni_malformate`)*: senza quel controllo l-eccezione sarebbe ### **una via di
+    fuga a costo zero.**"""
+    for e in (v.get("meta") or {}).get("eccezione_presidio", []) or []:
+        if str(e).strip().upper().startswith(quale + ":"):
+            return True
+    return False
+
+
+def _testo_voce(v):
+    return " ".join([v.get("titolo") or "", v.get("descrizione") or "",
+                     v.get("fonte") or "", (v.get("meta") or {}).get("nota_guardiano") or ""])
+
+
+def _eccezioni_malformate(voci):
+    """### ⛔ **UN-ECCEZIONE CHE NON CITA NON E- UN-ECCEZIONE: e- una via di fuga.**
+
+    La forma obbligata e- ### **`F<n>: <motivo>`**, e il motivo deve contenere
+    ### **un pezzo LETTERALE di almeno `20` caratteri** del testo della voce
+    *(titolo, descrizione, fonte o nota)*. ### **Cosi- l-eccezione e- VERIFICABILE**, e non
+    si puo- zittire un presidio con una frase generica.
+    """
+    err = []
+    for v in voci:
+        for e in (v.get("meta") or {}).get("eccezione_presidio", []) or []:
+            s = str(e)
+            # ### ⛔ **LA FORMA SEGUE IL RINOMINAMENTO** *(punto `12(b)`)*: il prefisso
+            # ### e- ### **l-ID del presidio**, e `_PRESIDI_NOMI` lo prende
+            # ### ### **dalla tabella `PRESIDI`** -- cosi- ### **non c-e- un
+            # ### secondo posto** dove l-elenco possa divergere.
+            m = re.match(_FORMA_ECC, s.strip())
+            if not m:
+                err.append("`%s`: `eccezione_presidio` fuori forma: serve `F<n>: <motivo>`, "
+                           "trovato %r" % (v["id"], s[:60]))
+                continue
+            testo = " ".join(_testo_voce(v).split())
+            motivo = " ".join(m.group(2).split())
+            if not any(testo[k:k + 20] and testo[k:k + 20] in motivo
+                       for k in range(max(1, len(testo) - 19))):
+                err.append("`%s`: l-eccezione `%s` NON CITA IL TESTO ALLA LETTERA (serve un "
+                           "pezzo di almeno 20 caratteri del titolo, della descrizione, "
+                           "della fonte o della nota)" % (v["id"], m.group(1)))
+    return err
+
+
+def _f5_righe(vive, n_head):
+    """### LA LOGICA DI `PI-STORICO-SENZA-COMMIT`, PURA: nessun disco, nessun git.
+
+    ### ⛔ **Esiste per una ragione precisa:** il collaudo deve poterla provare
+    ### **senza toccare l-indice vero**, e il mandato lo dice. ### **Un collaudo che per
+    provare un presidio deve scrivere nell-indice e- lo stesso difetto che nel giro scorso
+    ha cancellato `867` classificazioni** *(`C4` che rilanciava la migrazione)*.
+    """
+    err = []
+    for k in range(min(n_head, len(vive))):
+        riga = vive[k] if isinstance(vive[k], dict) else json.loads(vive[k])
+        if not riga.get("commit"):
+            err.append("`PI-STORICO-SENZA-COMMIT` storico riga %d: GIA- COMMITTATA e senza `commit`. Gira "
+                       "`python csv/indice.py storico-commit`" % (k + 1))
+    return err[:20]
+
+
+# ### ⛔ **IL TAG DELLA FINE DELLA MIGRAZIONE.** Le voci ### **senza storico** non sono un
+# ### buco: sono ### **quelle che nessuno ha ancora toccato**, e il loro stato giusto e-
+# ### ### **quello con cui sono nate.** `3ef2326` e- il commit in cui la migrazione ha
+# ### finito di scriverle.
+FINE_MIGRAZIONE = "3ef2326"
+# ### I campi che `PI-REPLAY` confronta: ### **tutti quelli dello schema tranne `aggiornata`**, che
+# ### e- ### **un timbro di QUANDO**, non un dato della voce -- e lo riscrive ogni lotto,
+# ### anche quando non cambia niente.
+# ### ⛔ **I CAMPI CHE SONO DIZIONARI, e che si scrivono CON IL PUNTO.**
+# ### ⚠ **IL DIFETTO, visto il `2026-10-10`:** `aggiorna` prendeva solo campi PIATTI,
+# ### quindi ### **`chiusura` si poteva solo SCHIACCIARE A STRINGA** -- e il validatore,
+# ### che pretende `chiusura.criterio` e `chiusura.commit`, sarebbe andato in errore.
+# ### ⭐ **Cioe-: il percorso UNICO di scrittura NON SAPEVA CHIUDERE UNA VOCE.**
+# ### ### **E lo storico lo diceva da tre volte:** *<<TERZA volta che questo rito costa un
+# ### commit>>*. ### **Non era un rito: era un campo che non si poteva scrivere.**
+SOTTOCAMPI = {"chiusura": ("data", "criterio", "commit", "come"),
+              "creata": ("data", "commit"),
+              "aggiornata": ("data", "commit")}
+
+
+def _campo(v, c):
+    """### Applica UN `--campo k=val` alla voce. ### **Il PUNTO entra in un dizionario.**
+
+    ### ⛔ **E il sotto-campo e- a VOCABOLARIO CHIUSO**, come tutto il resto: un
+    `chiusura.motivo` *(che non esiste)* ### **si rifiuta**, invece di nascere come
+    ### **un campo fantasma che nessuno legge.**
+    """
+    k, _, val = c.partition("=")
+    # ### ✅ **UN CAMPO-DIZIONARIO SI SVUOTA con il valore VUOTO**, e serve: la
+    # ### regola vuole `chiusura` piena ### **solo con stato `CHIUSA`**, quindi una voce
+    # ### che passa a `SUPERATA` ### **deve poterla svuotare** -- e la sua storia
+    # ### ### **vive nello STORICO**, non in quel campo.
+    # ### ⚠ **Senza questo, `--campo chiusura=` ci metterebbe LA STRINGA VUOTA** dove
+    # ### il validatore aspetta un dizionario: ### **un campo di tipo sbagliato invece di
+    # ### un campo vuoto.**
+    if k in SOTTOCAMPI and val == "":
+        v[k] = {}
+        return
+    if "." in k:
+        radice, _, sotto = k.partition(".")
+        assert radice in SOTTOCAMPI, (
+            "`%s` non e- un campo-dizionario: col punto si scrivono solo %s"
+            % (radice, ", ".join(sorted(SOTTOCAMPI))))
+        assert sotto in SOTTOCAMPI[radice], (
+            "`%s` non e- un sotto-campo di `%s`: sono %s"
+            % (sotto, radice, ", ".join(SOTTOCAMPI[radice])))
+        vecchio = v.get(radice) or {}
+        assert isinstance(vecchio, dict), (
+            "`%s` non e- un dizionario nella voce: e- `%s`" % (radice, type(vecchio)))
+        d = dict(vecchio)
+        d[sotto] = val
+        v[radice] = d
+        return
+    assert k in CHIAVI, "`%s` non e' un campo dello schema" % k
+    if k == "stato":
+        assert val in TRANSIZIONI.get(v["stato"], set()), (
+            "TRANSIZIONE VIETATA: `%s` -> `%s` (vedi doc/INDICE_SCHEMA.md)"
+            % (v["stato"], val))
+    if k == "blocca":
+        val = val.upper() in ("SI", "TRUE", "1")
+    elif k in ("alias", "leggi", "variabili", "assiomi", "collegate",
+                "dipende_da", "sblocca"):
+        val = [x for x in val.split(",") if x]
+    v[k] = val
+
+
+CHIAVI_F11 = tuple(k for k in CHIAVI if k != "aggiornata")
+
+
+def _f11_righe(voci, ultimo, nati):
+    """### `PI-REPLAY`, ### **la parte PURA:** ogni voce coincide col `dopo` della sua ULTIMA riga
+    di storico; ### **le voci senza storico** coincidono con il loro stato alla fine della
+    migrazione; ### **una voce nata dopo e senza storico e- un ERRORE.**
+
+    ### ⭐ **E- IL PRESIDIO PIU- FORTE DI TUTTI, e il perche- e- questo:** gli altri guardano
+    ### **se un campo e- plausibile**; `PI-REPLAY` guarda ### **se il campo e- ARRIVATO DA UNA
+    SCRITTURA DICHIARATA.** ### ⛔ **Una modifica a mano a `voci.jsonl` -- anche con le viste
+    rigenerate, anche se passa TUTTI gli altri controlli -- qui NON PASSA**, perche-
+    ### **non ha una riga di storico che la spieghi.**
+
+    ### ⚠ **E- l-unico presidio che rende VERA la frase <<si scrive SOLO con `indice.py
+    aggiorna`>>** *(par.9)*: prima era ### **una regola scritta**, e `A9` dice che una regola
+    scritta ### **non impedisce niente.**
+
+    ### ⛔ **`aggiornata` NON si confronta:** e- un timbro di ### **quando**, non un dato
+    della voce.
+    """
+    err = []
+    for v in voci:
+        u = ultimo.get(v["id"])
+        if u is None:
+            m = nati.get(v["id"])
+            if m is None:
+                err.append("`PI-REPLAY` `%s`: NATA DOPO la migrazione e SENZA STORICO. Una voce "
+                           "nuova si crea con `crea-lotto`, che scrive la sua riga: se la "
+                           "riga non c-e-, la voce e- stata scritta A MANO" % v["id"])
+                continue
+            d = [k for k in CHIAVI_F11
+                 if json.dumps(v[k], sort_keys=True)
+                 != json.dumps(m.get(k, DEFAULT_NUOVI.get(k)), sort_keys=True)]
+            if d:
+                err.append("`PI-REPLAY` `%s`: NON ha storico, quindi deve coincidere col suo "
+                           "stato a %s (fine della migrazione), e invece differisce in %s"
+                           % (v["id"], FINE_MIGRAZIONE, d[:5]))
+            continue
+        d = [k for k in CHIAVI_F11
+             if json.dumps(v[k], sort_keys=True)
+             != json.dumps((u.get("dopo") or {}).get(k, DEFAULT_NUOVI.get(k)),
+                           sort_keys=True)]
+        if d:
+            err.append("`PI-REPLAY` `%s`: NON coincide col `dopo` della sua ULTIMA riga di storico "
+                       "(%s), e differisce in %s. Il campo non e- arrivato da una scrittura "
+                       "dichiarata: qualcuno ha scritto A MANO"
+                       % (v["id"], u.get("quando", ""), d[:5]))
+    return err
+
+
+def _f11_nati():
+    """### Le voci ### **alla fine della migrazione**, o `{}` se il tag non si legge."""
+    q = subprocess.run(["git", "show", "%s:doc/indice/voci.jsonl" % FINE_MIGRAZIONE],
+                       cwd=RADICE, capture_output=True, text=True, encoding="utf-8")
+    if q.returncode != 0:
+        return {}
+    fuori = {}
+    for r in q.stdout.split(NL):
+        if r.strip():
+            w = json.loads(r)
+            fuori[w["id"]] = w
+    return fuori
+
+
+def _f11_ultimo(percorso=None):
+    """### Per ogni id, ### **l-ULTIMA riga di storico.**"""
+    p = percorso or STORICO
+    fuori = {}
+    if not os.path.exists(p):
+        return fuori
+    for r in io.open(p, encoding="utf-8").read().split(NL):
+        if r.strip():
+            s = json.loads(r)
+            fuori[s["id"]] = s
+    return fuori
+
+
+def _f11_replay(voci):
+    """### `PI-REPLAY` sul disco: legge `storico.jsonl` e ### **le voci al tag.**
+
+    ### ⚠ **Se il tag non si legge il presidio TACE, e lo dichiaro:** senza il
+    ### **punto di partenza** non si puo- dire se una voce senza storico sia giusta --
+    ### **meglio tacere che accusare.**
+    """
+    if not os.path.exists(STORICO):
+        return []
+    nati = _f11_nati()
+    if not nati:
+        return []
+    return _f11_righe(voci, _f11_ultimo(), nati)
+
+
+def _stage_storico():
+    """### Mette ### **L-INSIEME COERENTE** in stage, subito dopo averci scritto.
+
+    ### ⛔ **PERCHE- QUI E NON NEL `pre-commit`:** dal `2026-10-10` il commit di una
+    riga ### **si ricava da git**, e una riga ### **che niente contiene** non e- una
+    scrittura dichiarata. ### **Chi scrive la riga la mette in stage**: e- un atto solo, e
+    si vede.
+    ### ⭐ **E NEL `pre-commit` ERA IL POSTO SBAGLIATO:** la- cambiava
+    ### **l-insieme dei file in stage A META- DEL COMMIT**, e `H-FILE` ha rifiutato
+    ### **due commit** per una lista che era giusta quando era stata generata.
+    ### ⚠ **Se `git` non c-e- o non risponde NON SI FERMA NIENTE:** scrivere
+    nell-indice ### **non deve dipendere** dal poter mettere in stage.
+    """
+    # ### ⛔ **E L-INSIEME E- COERENTE, non il solo storico** -- e questa riga
+    # ### nasce da un difetto MISURATO dal guardiano poche ore dopo la prima versione:
+    # ### mettendo in stage ### **solo lo storico**, un commit successivo che non facesse
+    # ### `git add` di `voci.jsonl` ### **si portava via le righe da sole**, e l-HEAD
+    # ### restava ### **incoerente** *(`PI-REPLAY` su `Z47` e `Z103`)*.
+    # ### ⭐ **La prima versione CHIUDEVA un buco e NE APRIVA un altro**, e il
+    # ### presidio non poteva vederlo perche- guardava ### **il disco.**
+    for _f in ("doc/indice/storico.jsonl", "doc/indice/voci.jsonl",
+               "doc/indice/_indice_meta.json", "doc/INDICE_ID.tsv", "doc/INDICE.md"):
+        subprocess.run(["git", "add", "--", _f], cwd=RADICE, capture_output=True)
+
+
+def _storico_da_git():
+    """### Per ogni riga di `storico.jsonl`: ### **il commit che l-ha INTRODOTTA.**
+
+    ### ⛔ **IL DIFETTO CHE QUESTO CHIUDE, diagnosticato dal guardiano il
+    `2026-10-10`, ed e- STRUTTURALE:** una riga di storico scritta ### **in** un commit
+    ### **non puo- contenere l-hash di quel commit** -- quindi ### **l-HEAD pushato ha
+    SEMPRE le ultime righe senza `commit`**, e ### **chi clona, e la CI, trovano `valida`
+    ROSSA fino al commit successivo.**
+    ### ⭐ **E io la curavo A MANO con `storico-commit`, e l-ho chiamata <<l-ottava
+    volta>> SENZA CHIEDERMI PERCHE- TORNASSE.** ### **Ho contato le volte invece di
+    guardare la causa**, ed e- esattamente il segnale d-allarme di `P1`.
+
+    ### ✅ **LA CURA: il commit SI RICAVA**, invece di pretenderlo scritto. E il
+    codice per ricavarlo ### **c-era gia-**, dentro `storico_commit()`: era usato
+    ### **come SCRITTORE** e non come ### **LETTORE** -- quindi questa non e- una legge
+    nuova *(`9-ter`)*.
+
+    Ritorna `(per_riga, n_head, n_stage)`:
+      * `per_riga[i]` -- il commit corto che ha introdotto la riga `i`, oppure `""` se
+        quella riga ### **non e- in nessun commit**;
+      * `n_head` -- quante righe ci sono ### **a `HEAD`**;
+      * `n_stage` -- quante ce ne sono ### **nello STAGE** *(`-1` se non si legge)*.
+    """
+    rel = "doc/indice/storico.jsonl"
+
+    def _righe(testo):
+        return len([x for x in (testo or "").split(NL) if x.strip()])
+
+    def _quante(arg):
+        r = subprocess.run(["git", "show", arg + ":" + rel], cwd=RADICE,
+                           capture_output=True, text=True, encoding="utf-8",
+                           errors="replace")
+        return -1 if r.returncode != 0 else _righe(r.stdout)
+
+    # ### \u26d4 **E NON SI USA `git blame`, e il motivo e- MISURATO:** `storico-commit`
+    # ### ### **RISCRIVE le righe vecchie** per riempire il loro campo `commit`, quindi
+    # ### blame attribuisce una riga ### **al commit che ha RIEMPITO il campo**, non a
+    # ### quello che ### **l-ha aggiunta.** ### \u26a0 **Provato: sulle prime righe blame
+    # ### dava `85b5313` dove il campo dice `a7569dd`** -- e avrei <<curato>> `2000` righe
+    # ### giuste.
+    # ### \u2705 **La derivazione giusta e- PER CONTEGGIO DI RIGHE**, ed e- quella che
+    # ### `storico_commit()` usa gia-: per ogni commit che ha toccato il file, le righe
+    # ### `[quante_prima, quante_dopo)` sono ### **esattamente quelle che ha aggiunto.**
+    # ### \u2b50 **E costa DUE processi invece di uno per commit:** un `git log` per gli
+    # ### sha, e ### **un solo `git cat-file --batch`** per tutti i contenuti.
+    q = subprocess.run(["git", "log", "--reverse", "--format=%h", "--", rel],
+                       cwd=RADICE, capture_output=True, text=True, encoding="utf-8",
+                       errors="replace")
+    sha = [c for c in (q.stdout or "").split() if c]
+    per_riga = []
+    if sha:
+        # ### \u2b50 **S2 (Luca `2026-11-16` `08:57`): LA MEMORIA PER SHA1 DEL BLOB.** Di ogni
+        # ### versione serve SOLO il numero di righe, e un blob di git non cambia mai a sha1
+        # ### fisso: ### **`--batch-check` da' lo sha1 senza leggere il contenuto**, e si
+        # ### leggono ### **solo i blob che la memoria non ha.** Prima: TUTTE le versioni
+        # ### a ogni `valida` *(331 il 2026-11-16, 1.8 GB)*.
+        dentro = NL.join("%s:%s" % (c, rel) for c in sha) + NL
+        bc = subprocess.run(["git", "cat-file", "--batch-check"], cwd=RADICE,
+                            input=dentro.encode("utf-8"), capture_output=True)
+        teste = bc.stdout.decode("utf-8", "replace").split(NL)
+        blob = []
+        for i in range(len(sha)):
+            testa = teste[i].split() if i < len(teste) else []
+            # ### lo stesso `break` di prima: un oggetto mancante e- `<nome> missing`
+            if len(testa) < 3:
+                break
+            blob.append(testa[0])
+        conto = _righe_dei_blob(blob)
+        prec = 0
+        for c, b in zip(sha, blob):
+            # ### un contenuto che git non ha dato: lo stesso `break` di prima
+            if b not in conto:
+                break
+            n = conto[b]
+            # ### \u26a0 **SOLO IN AGGIUNTA, e la premessa SI VERIFICA:** se un commit
+            # ### ### **togliesse** righe la derivazione sarebbe sbagliata, e allora
+            # ### ### **si FERMA** invece di scrivere numeri falsi.
+            if n < prec:
+                return [], -1, -1
+            per_riga.extend([c] * (n - prec))
+            prec = n
+    return per_riga, _quante("HEAD"), _quante("")
+
+
+_MEMORIA_NOME = "indice_storico_righe.json"
+
+
+def _memoria_percorso():
+    """### Dove sta la memoria: ### **nella cartella COMUNE di git** *(fuori dall-albero di
+    lavoro, mai tracciata; `C:` per il principale, `E:` per il clone)*. `None` se git non la da-."""
+    r = subprocess.run(["git", "rev-parse", "--git-common-dir"], cwd=RADICE,
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    d = (r.stdout or "").strip()
+    if r.returncode != 0 or not d:
+        return None
+    if not os.path.isabs(d):
+        d = os.path.join(RADICE, d)
+    return os.path.join(d, _MEMORIA_NOME)
+
+
+def _impronta_memoria(righe):
+    import hashlib
+    return hashlib.sha1(json.dumps(righe, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
+def _memoria_leggi(f):
+    """### La memoria `{sha1 del blob: righe}`, ### **o `{}` se manca o e- ROTTA** *(mai usata
+    rotta: la forma, i tipi e l-impronta del contenuto devono tornare; se no si ricostruisce)*."""
+    if f is None or not os.path.exists(f):
+        return {}
+    try:
+        with io.open(f, encoding="utf-8") as h:
+            m = json.load(h)
+        righe = m["righe"]
+        ok = (m.get("versione") == 1 and isinstance(righe, dict)
+              and all(isinstance(k, str) and len(k) == 40 and isinstance(v, int) and v >= 0
+                      for k, v in righe.items())
+              and m.get("impronta") == _impronta_memoria(righe))
+    except Exception:
+        ok = False
+    if not ok:
+        sys.stderr.write("[indice: la memoria delle righe dello storico e- ROTTA: non si usa, si ricostruisce]" + NL)
+        return {}
+    return righe
+
+
+def _memoria_scrivi(f, righe):
+    if f is None:
+        return
+    try:
+        tmp = f + ".%d.tmp" % os.getpid()
+        with io.open(tmp, "w", encoding="utf-8", newline="") as h:
+            json.dump({"versione": 1, "righe": righe, "impronta": _impronta_memoria(righe)}, h,
+                      sort_keys=True, separators=(",", ":"))
+        os.replace(tmp, f)
+    except OSError as x:
+        sys.stderr.write("[indice: la memoria delle righe dello storico NON scritta: %r]" % (x,) + NL)
+
+
+def _leggi_righe_da_git(blob):
+    """### `{sha1: righe non vuote}` leggendo i contenuti con UN `git cat-file --batch`."""
+    out = {}
+    if not blob:
+        return out
+    b = subprocess.run(["git", "cat-file", "--batch"], cwd=RADICE,
+                       input=(NL.join(blob) + NL).encode("utf-8"), capture_output=True)
+    dati, pos = b.stdout, 0
+    for x in blob:
+        fine = dati.find(b"\n", pos)
+        if fine < 0:
+            break
+        testa = dati[pos:fine].decode("utf-8", "replace").split()
+        if len(testa) < 3:
+            break
+        lung = int(testa[2])
+        corpo = dati[fine + 1:fine + 1 + lung].decode("utf-8", "replace")
+        pos = fine + 1 + lung + 1
+        out[x] = len([r for r in corpo.split(NL) if r.strip()])
+    return out
+
+
+def _righe_dei_blob(blob):
+    """### `{sha1: righe}` per OGNI blob della lista: dalla memoria, e da git quelli nuovi.
+
+    ### \u26d4 **IL CONTROLLO DI COERENZA A OGNI LETTURA** *(oltre a forma e impronta)*: il blob
+    PIU- RECENTE fra quelli presi dalla memoria si ### **rilegge da git**, e il conto deve
+    coincidere; se no ### **la memoria si butta e si rifa- da zero.**"""
+    f = _memoria_percorso()
+    mem = _memoria_leggi(f)
+    dalla_memoria = [b for b in blob if b in mem]
+    if dalla_memoria:
+        ultimo = dalla_memoria[-1]
+        if _leggi_righe_da_git([ultimo]).get(ultimo) != mem[ultimo]:
+            sys.stderr.write("[indice: la memoria delle righe dello storico NON torna con git: si butta e si ricostruisce]" + NL)
+            mem = {}
+    nuovi = sorted(set(b for b in blob if b not in mem))
+    letti = _leggi_righe_da_git(nuovi)
+    if letti:
+        mem = dict(mem)
+        mem.update(letti)
+        _memoria_scrivi(f, mem)
+    return mem
+
+
+def _f5_storico(voci, vive=None, da_git=None):
+    """### `PI-STORICO-SENZA-COMMIT`: una riga di storico ### **che NON E- IN NESSUN
+    COMMIT**, oppure il cui `commit` scritto ### **NON COINCIDE con quello vero.**
+
+    ### ⛔ **LA FORMA VECCHIA PRETENDEVA IL CAMPO SCRITTO, ed era STRUTTURALMENTE
+    ROSSA:** le ultime righe di `HEAD` ### **non possono** portare l-hash del commit che
+    le contiene, quindi ### **ogni clone e la CI vedevano `valida` fallire** fino al
+    commit dopo. ### **Diagnosi del guardiano, `2026-10-10`.**
+
+    ### ✅ **LA FORMA NUOVA, e sono i TRE casi che il mandato fissa:**
+
+      * una riga ### **presente in un commit** va bene, ### **col campo vuoto o pieno**;
+      * una riga ### **nello STAGE** del commit in corso va bene: e- il ritardo
+        ### **inevitabile**, e il commit che la conterra- ### **non esiste ancora**;
+      * una riga ### **sul disco e FUORI dallo stage** e- un errore: ### **non la
+        contiene niente**, e non e- nemmeno in viaggio;
+      * un `commit` ### **scritto che NON COINCIDE** con quello ricavato da git e- un
+        errore: ### **e- un numero che dice una cosa falsa**, e un numero falso e- peggio
+        di un numero assente *(`L-NUMERI`)*.
+    """
+    del voci
+    if vive is None:
+        if not os.path.exists(STORICO):
+            return []
+        vive = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL)
+                if r.strip()]
+    per_riga, n_head, n_stage = _storico_da_git() if da_git is None else da_git
+    if n_head < 0:
+        # ### ⚠ **Senza `HEAD` non si puo- dire niente, e TACERE E- GIUSTO:** e- il
+        # ### caso del primo commit di un repo, e accusare la- sarebbe un FALSO.
+        return []
+    err = []
+    for k, riga in enumerate(vive):
+        try:
+            d = json.loads(riga)
+        except ValueError:
+            err.append("`PI-STORICO-SENZA-COMMIT` storico riga %d: NON E- JSON" % (k + 1))
+            continue
+        vero = per_riga[k] if k < len(per_riga) else ""
+        scritto = str(d.get("commit") or "")
+        if not vero:
+            if n_stage >= 0 and k < n_stage:
+                continue          # ### nello STAGE: e- il ritardo, ed e- ammesso
+            err.append(
+                "`PI-STORICO-SENZA-COMMIT` storico riga %d: NON E- IN NESSUN COMMIT e "
+                "NON E- NELLO STAGE. ### Una riga di storico che niente contiene non e- "
+                "una scrittura dichiarata: `git add doc/indice/storico.jsonl`" % (k + 1))
+            continue
+        if scritto and not (vero.startswith(scritto) or scritto.startswith(vero)):
+            err.append(
+                "`PI-STORICO-SENZA-COMMIT` storico riga %d: il `commit` scritto e- `%s` "
+                "e quello RICAVATO DA GIT e- `%s`. ### Un numero che dice una cosa falsa "
+                "e- PEGGIO di un numero assente (`L-NUMERI`)" % (k + 1, scritto, vero))
+    return err[:20]
+
+
+def _cicli(voci):
+    """### `PI-CICLO-DIPENDENZE`: un CICLO in `dipende_da` ### **FA FALLIRE `valida`.**
+
+    ### ⛔ **Il mandato lo chiede alla lettera:** *«un ciclo nelle dipendenze FA
+    FALLIRE `valida`»*. ### ⭐ **E la ragione non e- formale: una lista da
+    spuntare «nell-ordine delle dipendenze»**, se c-e- un ciclo,
+    ### **non ha un ordine** -- e la lista ### **non direbbe quale viene prima**, cioe-
+    ### **non sarebbe una lista.**
+
+    ### ⚠ **E si guardano SOLO le voci con una `priorita`:** `dipende_da` vuoto non
+    fa ciclo, e una voce che non e- una domanda ### **non entra nella lista.**
+    """
+    arco = {v["id"]: [x for x in (v.get("dipende_da") or [])]
+            for v in voci if v.get("priorita")}
+    stato, err = {}, []
+
+    def giro(n, via):
+        if stato.get(n) == 1:
+            err.append("`PI-CICLO-DIPENDENZE`: un CICLO in `dipende_da`: %s. ### Una "
+                       "lista da spuntare NELL-ORDINE DELLE DIPENDENZE, con un ciclo, "
+                       "NON HA UN ORDINE" % " -> ".join(via + [n]))
+            return
+        if stato.get(n) == 2 or n not in arco:
+            return
+        stato[n] = 1
+        for s in arco[n]:
+            giro(s, via + [n])
+        stato[n] = 2
+
+    for n in sorted(arco):
+        if stato.get(n) is None:
+            giro(n, [])
+    return err[:8]
+
+
+DA_DECIDERE = os.path.join(D, "DA_DECIDERE_LUCA.md")
+_DD_NOTA = re.compile(r"da\s+(decidere|confermare)\s+da\s+Luca[\s:,-]*(.*)$", re.I)
+
+
+# =====================================================================================
+#   LA LISTA DA SPUNTARE  --  `prossima`, e l-ordine viene DAI CAMPI
+# -------------------------------------------------------------------------------------
+#   ### \u26d4 **IL MANDATO DI LUCA, 2026-10-10:** *<<Luca ha troppe domande aperte per
+#   ### tenerle a mente. Ogni domanda aperta diventa UNA VOCE, e `DA_DECIDERE_LUCA.md`
+#   ### diventa ### **la lista da spuntare UNA ALLA VOLTA, nell-ordine delle
+#   ### DIPENDENZE**>>.
+#   ### \u2b50 **E L-ORDINE VIENE DAI CAMPI, non dal titolo:** `priorita`, `dipende_da`,
+#   ### `sblocca`. ### **Nessuna funzione qui legge `titolo` o `descrizione`** -- e- la
+#   ### regola che questo file fa rispettare.
+# =====================================================================================
+APERTI = ("AGENDA", "APERTA", "IN_CORSO", "SOSPESA", "DA_CLASSIFICARE")
+
+
+def _domande(voci):
+    """### Le DOMANDE APERTE: hanno una `priorita` e uno stato ### **aperto.**
+
+    ### \u26a0 **Una voce senza `priorita` NON e- una domanda**, e una domanda
+    ### **decisa** *(stato `CHIUSA` o `SUPERATA`)* ### **esce dalla lista DA SOLA** --
+    che e- cio- che il mandato chiede: ### **nessuna spunta a mano.**
+    """
+    return [v for v in voci if v.get("priorita") and v["stato"] in APERTI]
+
+
+def _ordine_albero():
+    """### L-ordine in cui i nodi stanno nell-albero, per rompere le parita-.
+
+    ### \u26d4 **Il mandato lo dice: <<a parita-, l-ordine dell-albero>>** -- e
+    l-albero e- `doc/ALBERO_era2.yaml`, che e- ### **la fonte delle dipendenze di
+    fisica.** ### \u26a0 **Se non si legge, si torna all-ordine alfabetico e NON si
+    tace:** chi guarda deve sapere ### **con che criterio** la lista e- ordinata.
+    """
+    p = os.path.join(RADICE, "doc", "ALBERO_era2.yaml")
+    if not os.path.exists(p):
+        return {}, False
+    try:
+        import yaml
+        d = yaml.safe_load(io.open(p, encoding="utf-8").read()) or {}
+    except Exception:                                        # noqa: BLE001
+        return {}, False
+    return {n["id"]: i for i, n in enumerate(d.get("nodi") or [])}, True
+
+
+def pronte(voci):
+    """### Le domande ### **PRONTE**: tutte le loro dipendenze sono ### **DECISE.**"""
+    aperte = {v["id"] for v in _domande(voci)}
+    return [v for v in _domande(voci)
+            if not [x for x in (v.get("dipende_da") or []) if x in aperte]]
+
+
+def prossima(voci):
+    """### `LA PROSSIMA`: la domanda ### **`CRITICA` con TUTTE le dipendenze decise.**
+
+    ### \u26d4 **E se nessuna `CRITICA` e- pronta, NON si scende di priorita- in
+    silenzio:** si ritorna ### **`None`**, e chi stampa ### **lo dice** -- perche-
+    *<<la prossima e- una MINORE>>* sarebbe ### **una bugia utile**, e il mandato vuole
+    ### **l-ordine delle dipendenze**, non un suggerimento qualunque.
+    """
+    ord_alb, _ok = _ordine_albero()
+    cand = [v for v in pronte(voci) if v.get("priorita") == "CRITICA"]
+    if not cand:
+        return None
+    return sorted(cand, key=lambda v: (ord_alb.get(v["id"], 10 ** 6), v["id"]))[0]
+
+
+def da_decidere(voci, reg):
+    """### UN ELENCO SOLO: tutto cio- su cui l-indice ASPETTA LUCA.
+
+    ### ⛔ **Nel codice NON c-e- nessuna lista di ID: ci sono i TRE CRITERI**, e l-elenco
+    e- cio- che trovano. ### **Il mandato dice «generato e non scritto a mano»**, e la
+    ragione e- precisa: ### **un elenco mezzo generato SEMBRA COMPLETO.**
+
+      * ① la `nota_guardiano` dice *«da decidere / confermare da Luca»* -> la domanda e-
+        ### **cio- che la nota stessa chiede**;
+      * ② ### **TOLTO il 2026-10-10, per decisione di Luca** *(blocco `1` delle `43`
+        domande)*: diceva *<<la voce ha `meta.omonimo` -> quale dei `N` significati?>>*,
+        e la decisione e- ### **<<gli `11` OMONIMI restano omonimi dichiarati, non si
+        scegli un significato. La domanda si chiude (via la nota <<da decidere>>, il
+        metadato omonimo resta)>>.** ### ⛔ **QUELLE DUE COSE, INSIEME, OBBLIGANO A
+        TOGLIERE IL CRITERIO:** se il metadato resta ### **e** la domanda si chiude,
+        allora ### **non puo- essere il metadato a generare la domanda.** ### ⭐ **E
+        il criterio non ha piu- materia FUTURA, perche- `P-ID` vieta la NASCITA di un
+        omonimo nuovo** *(un ID nuovo non puo- coincidere con un ID esistente, che e-
+        l-unico modo in cui un ID prende un secondo significato)*: ### **quindi
+        togliendolo non si perde una guardia, si toglie una legge** (`9-ter`);
+      * ③ `stato = DA_CLASSIFICARE` e la classe ### **NON e- `NON_DEFINITA`** -> che
+        classe, dominio, era e stato?
+
+    ### ⚠ **I segnaposto NON ci vanno**, e il mandato lo dice: sono tanti, e sono
+    ### **il lavoro che resta**, non una domanda aperta.
+    """
+    del reg
+    righe = {}
+
+    def dom(idv, q):
+        righe.setdefault(idv, []).append(q)
+
+    for v in voci:
+        nota = (v.get("meta") or {}).get("nota_guardiano") or ""
+        m = _DD_NOTA.search(nota)
+        if m:
+            coda = " ".join(m.group(2).split())[:200]
+            if m.group(1).lower().startswith("conf"):
+                dom(v["id"], "CONFERMI `%s`/era `%s`? %s"
+                    % (v["dominio"], v["era"], coda))
+            else:
+                dom(v["id"], coda or "la nota chiede una decisione e non dice quale")
+        # ### ⛔ **QUI STAVA IL CRITERIO ②, <<la voce ha `meta.omonimo`>>, e la
+        # ### DECISIONE DI LUCA DEL 2026-10-10 LO HA TOLTO.** Il blocco `1` delle `43`
+        # ### domande dice: *<<gli `11` OMONIMI (`C4` `C5` `D3` `D4` `D5` `D6` `H2` `M1`
+        # ### `S1` `S3` `T1`): restano omonimi dichiarati, non si scegli un significato.
+        # ### La domanda si chiude (via la nota <<da decidere>>, il metadato omonimo
+        # ### resta)>>.*
+        # ### ⚠ **E IO AVEVO PREVISTO CHE TOGLIERE LA NOTA NON BASTASSE**, nel task
+        # ### history, ### **prima di guardare** -- ed era vero: gli `11` hanno perso la
+        # ### nota e ### **erano ancora nell-elenco, per QUESTO criterio.**
+        # ### ⭐ **LE DUE META- DELLA DECISIONE, INSIEME, SONO LA CURA:** <<la
+        # ### domanda si chiude>> ### **e** <<il metadato omonimo resta>> si possono
+        # ### soddisfare entrambe ### **solo se non e- il metadato a generare la
+        # ### domanda.** ### **Non sto scegliendo al posto di Luca: sto eseguendo cio-
+        # ### che ha detto.**
+        # ### ✅ **E NON SI PERDE UNA GUARDIA, perche- il criterio non ha piu- materia
+        # ### FUTURA:** un ID prende un secondo significato ### **solo se qualcuno riusa
+        # ### un ID che esiste**, e ### **`P-ID` lo VIETA** *(nato nello stesso blocco `1`,
+        # ### per decisione di Luca)*. ### **Quindi la cura TOGLIE una legge invece di
+        # ### aggiungerne una** (`9-ter`), e il collaudo lo MISURA nei due versi.
+        # ### ⚠ **E IL METADATO `omonimo` NON SI TOCCA:** resta la dichiarazione dei
+        # ### significati, che e- ### **un FATTO**, e i `14` significati dichiarati
+        # ### restano quello che `P-ID` legge per rifiutare un ID nuovo.
+        if v["stato"] == "DA_CLASSIFICARE" and v["classe"] != "NON_DEFINITA":
+            d = (v.get("meta") or {}).get("motivo_dubbio") or ""
+            dom(v["id"], "CHE CLASSE, DOMINIO, ERA E STATO? %s"
+                % (" ".join(d.split())[:200] if d else "il dubbio non e- dichiarato"))
+    per = {v["id"]: v for v in voci}
+    nd = sum(1 for v in voci if v["classe"] == "NON_DEFINITA")
+    R = [
+         "# CIO' SU CUI L-INDICE ASPETTA LUCA — **un elenco solo, GENERATO**",
+         "",
+         "> ### ⛔ **Questo file e' GENERATO da `python csv/indice.py da-decidere`: NON si scrive a mano.** Nel codice ### **non c'e' nessuna lista di ID**: ci sono ### **DUE criteri** — la nota che dice *<<da decidere/confermare da Luca>>* e lo stato `DA_CLASSIFICARE` su una voce che ### **non e' un segnaposto.** ### ⛔ **IL TERZO** *(il metadato `omonimo`)* ### **e' stato TOLTO il 2026-10-10, per decisione di Luca:** gli `11` omonimi ### **restano omonimi dichiarati**, il metadato ### **resta**, e ### **la domanda si chiude** — e quelle due cose insieme vogliono dire che ### **non e' il metadato a generare la domanda.** ### ⭐ **La guardia non si perde: `P-ID` vieta la NASCITA di un omonimo nuovo.**",
+         "",
+         "| | |",
+         "|---|--:|",
+    ]
+    # ===================================================================
+    #   LA LISTA DA SPUNTARE  --  dai CAMPI, e nella forma che Luca chiede
+    # -------------------------------------------------------------------
+    #   ### \u26d4 **IL MANDATO, alla lettera:** *<<IN CIMA, da sola: LA PROSSIMA = la
+    #   ### domanda CRITICA con tutte le dipendenze decise (a parita-, l-ordine
+    #   ### dell-albero). SOTTO: le altre, raggruppate per priorita-, ciascuna con
+    #   ### <<aspetta: ...>> se ha dipendenze aperte. IN FONDO: il conto>>.
+    #   ### \u2b50 **E tutto viene DAI CAMPI**: `priorita`, `dipende_da`, `sblocca`.
+    #   ### **Nessuna riga legge il titolo per DECIDERE qualcosa** -- il titolo si
+    #   ### ### **stampa**, che e- un-altra cosa.
+    _ap = _domande(voci)
+    _pr = {x["id"] for x in pronte(voci)}
+    _p = prossima(voci)
+    _aperte = {x["id"] for x in _ap}
+    R += ["## \u2b50 **LA PROSSIMA**", ""]
+    if _p is None:
+        R += ["> ### \u26d4 **NESSUNA domanda `CRITICA` e- PRONTA**, e non si scende di "
+              "priorita- in silenzio: *<<la prossima e- una MINORE>>* sarebbe ### **una "
+              "bugia utile**, e il mandato vuole ### **l-ordine delle dipendenze.**", ""]
+    else:
+        R += ["> ### \u2705 **[[%s]]** \u2014 %s" % (_p["id"], _p["titolo"]), ">",
+              "> ### \U0001F4CC **Che cosa SBLOCCA:** %s"
+              % (", ".join("`%s`" % x for x in (_p.get("sblocca") or []))
+                 or "### **niente di dichiarato**"), ">",
+              "> ### **Le alternative e i numeri stanno nella voce**, e la voce e- la "
+              "fonte: ### **qui non si ricopia niente** (`L-NUMERI`).", ""]
+    R += ["---", ""]
+    R += ["## LE ALTRE, per priorita-", ""]
+    for _liv in ("CRITICA", "DIPENDENTE", "MINORE"):
+        _g = sorted([x for x in _ap if x.get("priorita") == _liv
+                     and (_p is None or x["id"] != _p["id"])],
+                    key=lambda x: x["id"])
+        if not _g:
+            continue
+        R += ["### `%s` \u2014 **%d**" % (_liv, len(_g)), "",
+              "| la domanda | pronta? | che cosa aspetta |", "|---|---|---|"]
+        for x in _g:
+            _att = [y for y in (x.get("dipende_da") or []) if y in _aperte]
+            R.append("| **[[%s]]** %s | %s | %s |"
+                     % (x["id"], x["titolo"][:72],
+                        "### \u2705 **PRONTA**" if x["id"] in _pr
+                        else "### \u23f3 aspetta",
+                        ("### **aspetta:** " + ", ".join("`%s`" % y for y in _att))
+                        if _att else "### **niente**"))
+        R += [""]
+    R += ["---", "",
+          "## IL CONTO", "",
+          "> ### \u26d4 **aperte `%d`, di cui pronte `%d`.**" % (len(_ap), len(_pr)),
+          ">",
+          "> ### \u2705 **E una domanda DECISA esce da sola:** si chiude con la "
+          "decisione di Luca e il commit, e ### **nessuno la spunta a mano** -- la lista "
+          "### **si genera dai campi**, e un campo che cambia ### **cambia la lista.**",
+          "", "---", ""]
+    R += ["## \u26a0 **E LE DOMANDE CHE VIVONO ANCORA IN UNA NOTA, non nei campi**", "",
+          "> ### \U0001F4CC **Queste arrivano dai DUE criteri vecchi** *(la nota che dice "
+          "<<da decidere da Luca>>, e lo stato `DA_CLASSIFICARE`)*, e ### **non hanno una "
+          "`priorita`**: quindi ### **non stanno nell-ordine delle dipendenze.** "
+          "### \u2705 **Non le tolgo: le DICHIARO**, perche- una lista che ne nasconde "
+          "una parte ### **sembra completa.**", ""]
+    R.append("| **voci che aspettano una decisione** | ### **`%d`** |" % len(righe))
+    R.append("| **domande in tutto** | `%d` |" % sum(len(x) for x in righe.values()))
+    R.append("| **segnaposto `NON_DEFINITA`**, che NON sono una domanda | `%d` |" % nd)
+    R += ["", "---", ""]
+    # ### ⚠ **IL GRUPPO <<gli OMONIMI>> E- TOLTO col criterio ②**, e non lo lascio
+    # ### come gruppo VUOTO: ### **un gruppo vuoto in un elenco generato dice <<qui non
+    # ### c-e- niente>>, che e- VERO e FUORVIANTE** -- suggerisce che il criterio guardi
+    # ### ancora. ### **Il criterio non c-e- piu-, e il posto dove e- scritto perche- e-
+    # ### il commento dentro `da_decidere`.**
+    gruppi = [("le CLASSIFICAZIONI da confermare",
+               lambda i: any(q.startswith("CONFERMI") for q in righe[i])),
+              ("le DOMANDE aperte", lambda i: True)]
+    visti = set()
+    for titolo, quali in gruppi:
+        dentro = [i for i in sorted(righe) if i not in visti and quali(i)]
+        if not dentro:
+            continue
+        visti |= set(dentro)
+        R += ["## %s -- `%d`" % (titolo, len(dentro)), "",
+              "| id | `classe`/`dominio`/era/stato | LA DOMANDA | LA FRASE |",
+              "|---|---|---|---|"]
+        for i in dentro:
+            v = per[i]
+            frase = " ".join(((v.get("titolo") or "") + " "
+                              + (v.get("descrizione") or "")).split())[:150]
+            R.append("| `%s` | `%s`/`%s`/`%s`/`%s` | %s | %s |"
+                     % (i, v["classe"], v["dominio"], v["era"], v["stato"],
+                        "<br>".join(q.replace("|", "/") for q in righe[i]),
+                        frase.replace("|", "/")))
+        R += ["", "---", ""]
+    R.append("> ### \u2b50 **Una decisione non presa e- un dato; una decisione presa al "
+             "posto di Luca e- un difetto.** Questo file e- il primo: ### **tutto cio- che "
+             "l-indice NON sa, in un posto solo.**")
+    R.append("")
+    io.open(DA_DECIDERE, "w", encoding="utf-8", newline=NL).write(NL.join(R) + NL)
+    print("  scritto doc/indice/DA_DECIDERE_LUCA.md: %d voci, %d domande, %d righe"
+          % (len(righe), sum(len(x) for x in righe.values()), len(R)))
+    return righe
+
+
+# ### ⭐ **GLI OGGETTI CONCRETI DELL-ERA `1`** *(`PI-OGGETTI-ERA1`, dal 2026-10-09)*. Il guardiano:
+# ### *<<vale per ### **ENTRAMBE** una REGOLA DI LAVORO o uno strumento che sopravvive;
+# ### e- ### **era 1** cio- che riguarda un OGGETTO CONCRETO dell-era 1>>*.
+# ### ⛔ **E un oggetto concreto si riconosce da COME SI SCRIVE, non dalla parola:** un flag
+# ### da ### **`--`**, non dalla parola *<<flag>>*; il blob dal ### **suo sha1**, non dalla
+# ### parola *<<blob>>*. ### **Per questo `P6` -- <<ogni csv di misura porta BLOB, SEME e
+# ### TUTTI I FLAG>> -- NON scatta: e- una REGOLA, e non nomina nessun flag.**
+ERA1_OGGETTI = (
+    # ### il SIGILLO DI UNA CURA, in tutte le forme in cui lo scriviamo
+    (r"sigill\w*\s+(?:di|del|della|dell)\s*(?:la\s+)?cura", "il sigillo di una cura"),
+    (r"scena\s*\(ii\)", "la scena (ii)"),
+    (r"\bpilot[ao]\b", "il pilota"),
+    (r"\.pkl\b", "un `.pkl`"),
+    (r"b8c21049", "il blob b8c21049"),
+    # ### ⚠ **un FLAG si riconosce dai due trattini ATTACCATI a una lettera:** cosi- il
+    # ### ### **`--` usato come lineetta** *(<<-- e poi>>)* non conta.
+    (r"(?<![A-Za-z0-9-])--[a-z][a-z0-9-]{2,}", "un flag `--...`"),
+    (r"\bCURA\s*\d", "CURA n"),
+    # ### ⭐ **ALLARGATO il 2026-10-09**, perche- il guardiano dichiara che `PI-OGGETTI-ERA1` era
+    # ### ### **troppo stretto:** una ### **funzione o una variabile del simulatore** e- un
+    # ### oggetto concreto dell-era 1 ### **tanto quanto un `.pkl`**, e cosi- uno
+    # ### ### **script di `csv/_test_fork` o `csv/_seal_fork`.**
+    (r"\bphivel\b|\bperc_[a-z]+|\b_avvelena_[a-z]*"
+     r"|\bpasso_pieno\b|\bnet\.step\b|\bmitosi\b|\bcalcola_psi\b"
+     r"|\bsmp_apri\b|\bsmpchiudi\b|\bpsispin\w*|\bcsnodoprev\b"
+     r"|\bomega_s\b|\bchiralita_core_locale\b|\bforma_passo0\b",
+     "una funzione o una variabile del simulatore"),
+    (r"csv/_test_fork|csv/_seal_fork", "uno script di csv/_test_fork o csv/_seal_fork"),
+    # ### ⛔ **IL MARCATORE «un file `.py` del repo» E- USCITO IL 2026-10-09, e il guardiano
+    # ### ### dichiara l-errore suo -- ma IL MARCATORE L-AVEVO AGGIUNTO IO** *(mandato
+    # ### dell-era delle voci di metodo)*, con la scusa che `PAT-1` nomina
+    # ### `dovespingelagravita.py`.
+    # ### ⭐ **PERCHE- ERA SBAGLIATO:** ### **quasi ogni voce di METODO nomina un `.py`** --
+    # ### un presidio, un attrezzo, un collaudo -- e un `.py` ### **non e- un oggetto
+    # ### dell-era `1`: e- un oggetto DEL REPO**, che vive ### **in entrambe le ere.**
+    # ### ⛔ **Faceva `17` dei `20` segnali**, e quei `17` li avevo ### **elencati nel
+    # ### referto come «il confine fra le due frasi dell-era»**: non erano un confine,
+    # ### erano ### **rumore di un marcatore mio.**
+    # ### ⚠ **E AVEVO GIA- TOLTO UN MARCATORE MIO UNA VOLTA** *(il `FLAG-COSTANTE`, perche-
+    # ### rompeva `FALSO-ZERO`)*: ### **questo l-ho tenuto, e per quattro giri.**
+    # ### ⛔ **UN PATTERN CHE AVEVO AGGIUNTO IO, E L-HO TOLTO.** Volevo far scattare
+    # ### `CONFIG-1` su un ### **FLAG-COSTANTE** (`FORK_SU2`, `TAU_LUCE`), e il pattern
+    # ### ### **faceva scattare `FALSO-ZERO` su `REGISTRO_STATO`** -- il caso che il mandato
+    # ### dice che ### **NON deve scattare.** ### ✔ **E non serviva:** `CONFIG-1` scatta
+    # ### ### **dal suo `csv/_config_delle_misure.py`**, che la riga d-origine nomina.
+    # ### ⭐ **Un marcatore che il mandato non chiede e che rompe un caso negativo
+    # ### si TOGLIE, non si aggiusta.**
+)
+_ERA1_RE = tuple((re.compile(r, re.I), q) for r, q in ERA1_OGGETTI)
+
+
+_RIGHE = {}
+
+
+def _riga_origine_di(v):
+    """### La riga d-origine della voce, ### **o la stringa vuota.**
+
+    ### ⚠ **L-import e- QUI DENTRO e non in testa**, perche- `csv/_righe_origine.py`
+    importa a sua volta questo modulo: ### **un import in testa sarebbe circolare.**
+    """
+    i = v["id"]
+    if i not in _RIGHE:
+        try:
+            import _righe_origine as _RO
+            r = _RO.riga_origine(v)[0]
+        except Exception:
+            r = None
+        _RIGHE[i] = " ".join((r or "").split())
+    return _RIGHE[i]
+
+
+def _f8_era1(voci):
+    """### `PI-OGGETTI-ERA1`: una voce `ENTRAMBE` NON CHIUSA che nomina un oggetto concreto dell-era `1`.
+
+    ### ⛔ **SEGNALA, non decide:** il mandato dice che i segnali che restano
+    ### **si ELENCANO, non si correggono.**
+    ### ⚠ **Solo le NON CHIUSE**, e il mandato lo dice: ### **una voce chiusa non si sposta
+    piu-.**
+    """
+    fuori = []
+    for v in voci:
+        if str(v["era"]) != "ENTRAMBE" or v["stato"] == "CHIUSA" or _coperto(v, "PI-OGGETTI-ERA1"):
+            continue
+        # ### ⛔ **F8 LEGGEVA UN TITOLO TRONCATO, ed e- L-ERRORE (d) applicato a un
+        # ### presidio:** il titolo di `CONFIG-1` finisce *<<28 LEGGI SU 31 SPENTE,
+        # ### misurato...>>*, e ### **la riga d-origine nomina `csv/_config_delle_misure.py`
+        # ### e i flag `FORK_SU2`, `CAMPO_SPINORIALE`, `TAU_LUCE`.** Il mandato dice che
+        # ### `PI-OGGETTI-ERA1` ### **deve** scattare su `CONFIG-1`: ### **senza la riga d-origine non
+        # ### puo-.**
+        t = ((v.get("titolo") or "") + " " + (v.get("descrizione") or "")
+             + " " + _riga_origine_di(v))
+        visti = []
+        for r, q in _ERA1_RE:
+            m = r.search(t)
+            if m:
+                visti.append("%s (<<%s>>)" % (q, " ".join(m.group(0).split())[:40]))
+        if visti:
+            fuori.append((v["id"], "era `ENTRAMBE` ma nomina un oggetto dell-era 1: "
+                                   + "; ".join(visti[:4])))
+    return fuori
+
+
+def _f12_chiusura_orfana(voci):
+    """### `PI-CHIUSURA-ORFANA`: una `chiusura` non vuota ### **su una voce che non e- `CHIUSA`.**
+
+    ### ⛔ **E- UN ERRORE, non un segnale:** una voce che porta *<<chiusa dal commit `X`
+    con criterio `Y`>>* e ### **non e- chiusa MENTE** -- e mente ### **in un campo che
+    un programma legge** *(`valida` pretende `criterio` e `commit` quando lo stato e-
+    `CHIUSA`; il rovescio ### **non lo chiedeva nessuno**)*.
+
+    ### ⚠ **Da dove venivano le `41`:** ### **dalla migrazione.** Avevano tutte
+    `commit` = `era-1-secondo-ordine` *(il NOME del tag)* e criterio *<<chiusa
+    nell-era 1 (stato `chiuso` al tag …)>>*, e il lavoro dopo le ha portate a
+    `SOSPESA` ### **lasciando la `chiusura` dietro.**
+
+    ### ⭐ **E la cura NON ha scelto fra i due campi a caso: ha chiesto al DOCUMENTO.**
+    `40` righe ### **non chiudono** -> la `chiusura` ### **si svuota**; `1` chiude
+    *(`Z22`)* -> ### **`CHIUSA`**, col commit ricavato.
+
+    ### **E- PURA**, come `PI-FISICA-ERA1-NON-SOSPESA` e `PI-ERA-STATO`: il collaudo la prova ### **su una COPIA.**
+    """
+    err = []
+    for v in voci:
+        ch = v["chiusura"] or {}
+        if ch and v["stato"] != "CHIUSA":
+            err.append("`PI-CHIUSURA-ORFANA` `%s`: la `chiusura` e- piena (commit `%s`) ma lo stato e- "
+                       "`%s`. Una voce che dice <<chiusa dal commit X>> e non e- chiusa "
+                       "MENTE, e mente in un campo che un programma legge"
+                       % (v["id"], ch.get("commit", "")[:40], v["stato"]))
+    return err
+
+
+def _f9_era_stato(voci):
+    """### `PI-ERA-STATO`: l-era e lo stato ### **non sono indipendenti.**
+
+    ### **La regola del mandato:** era `ENTRAMBE` ### **=> stato `APERTA` o `CHIUSA`**;
+    era `2` ### **=> stato `AGENDA`.** ### ⭐ **Il perche- e- che l-era dice QUANDO una
+    cosa vive, e lo stato dice COM-E- ADESSO:** una voce che vale per ### **entrambe le
+    ere** non puo- essere ### **SOSPESA**, perche- <<sospesa>> vuol dire
+    ### **<<rimandata all-era 2>>** -- e una cosa che vale ### **anche** nell-era 2
+    ### **non si puo- rimandare a se stessa.** Una voce dell-era `2` e- ### **agenda**:
+    l-era `2` e- ### **l-era corrente** *(`CLAUDE.md` par.13)*, e una sua voce rimandata
+    e- `AGENDA`, non `SOSPESA` -- ### **una voce dell-era 2 non si puo- rimandare a se
+    stessa.** *(Frase corretta il 2026-10-20, `c8f1683d` e il commit di questo testo.)*
+
+    ### ⛔ **NON E- NEL VALIDATORE, E NON E- UN PRESIDIO** *(`A9`)*: il mandato lo
+    vuole ### **BLOCCANTE**, e oggi ### **`5` voci lo violano** -- `A2`,
+    `LUNGA-BATTITO-CADUTA`, `PRESTAZIONI-CORSE`, `REPERTI-IMMUTABILI`, `RIPRESA-ARGV`.
+    ### **`indice.py valida` gira nel `pre-commit`**, quindi accenderlo adesso
+    ### **bloccherebbe OGNI COMMIT DEL REPO**, compreso quello che lo accende: l-hook
+    gira il codice ### **dell-albero di lavoro.** ### ➜ **La riga che lo accende sta
+    nello STESSO commit che cura le `5`**, e la cura e- ### **il file del guardiano.**
+
+    ### ⚠ **E le `5` si curano in DUE modi diversi** -- portarle a `APERTA`, oppure
+    portarle a ### **era `1`** *(dove `SOSPESA` e- lecito, e `PI-OGGETTI-ERA1` segnala proprio che
+    nominano oggetti dell-era 1)*. ### ⛔ **QUALE DEI DUE lo dice il file, non io.**
+
+    ### **E- PURA**, come `PI-FISICA-ERA1-NON-SOSPESA`: il collaudo la prova ### **su una COPIA.**
+    """
+    err = []
+    for v in voci:
+        # ### ⭐ **UN SEGNAPOSTO SI SALTA:** `DA_CLASSIFICARE` non e- uno stato, e-
+        # ### ### **l-assenza di uno stato** -- la stessa scelta del punto `1` del
+        # ### 2026-10-09, dove lo stato non si decide prima della classe.
+        if v["stato"] == "DA_CLASSIFICARE":
+            continue
+        e = str(v["era"])
+        # ### ⭐ **`SUPERATA` ENTRA FRA GLI AMMESSI il 2026-10-09**, e corregge
+        # ### ### **una MIA strettezza:** avevo scritto *<<`ENTRAMBE` => `APERTA` o
+        # ### `CHIUSA`>>* ### **alla lettera del mandato**, e una voce che vale per entrambe
+        # ### le ere ### **puo- essere SUPERATA** da una decisione o da un-altra voce.
+        # ### ⛔ **<<Superata>> non e- <<rimandata>>:** e- ### **risolta da fuori**, e per
+        # ### questo non cade nel divieto che colpisce `SOSPESA`.
+        if e == "ENTRAMBE" and v["stato"] not in ("APERTA", "CHIUSA", "SUPERATA"):
+            err.append("`PI-ERA-STATO` `%s`: era `ENTRAMBE` con stato `%s`. Una voce che vale per "
+                       "ENTRAMBE le ere e- APERTA o CHIUSA: <<sospesa>> vuol dire "
+                       "<<rimandata all-era 2>>, e una cosa che vale ANCHE nell-era 2 "
+                       "non si puo- rimandare a se stessa"
+                       % (v["id"], v["stato"]))
+        # ### ✅ **RISTRETTO il 2026-10-12, DECISIONE DI LUCA** *(`D-ERA2-NON-SI-CHIUDE`,
+        # ### e la raccomandazione era mia)*: la pretesa di `AGENDA` vale
+        # ### ### **SOLO PER LE VOCI APERTE** dell-era `2`.
+        # ### ⛔ **PERCHE- LA VECCHIA FORMA RENDEVA IRRAGGIUNGIBILE UNO STATO
+        # ### LEGITTIMO:** insieme a `PI-CHIUSURA-ORFANA` *(una `chiusura` piena vuole
+        # ### stato `CHIUSA`)* vietava di registrare come ### **DECISA** una domanda
+        # ### dell-era `2` ### **a cui Luca aveva risposto** -- la prima a cui ha
+        # ### risposto ### **ha trovato il muro**, e ce ne sono `18`.
+        # ### ⭐ **E LA RAGIONE DEL PRESIDIO NON SI APPLICA A UNA DOMANDA RISPOSTA:**
+        # ### *<<una voce dell-era `2` rimandata e- in agenda, non sospesa>>*
+        # ### vale per cio- che ### **si deve ancora fare**; ### **una domanda decisa non
+        # ### e- <<in agenda>>.**
+        # ### ⚠ **E NON E- UNA LEGGE NUOVA: e- UN-ECCEZIONE TOLTA** *(`9-ter`)* --
+        # ### il presidio guarda ### **meno** casi, non piu-.
+        if e == "2" and v["stato"] in APERTI_ERA2:
+            err.append("`PI-ERA-STATO` `%s`: era `2` con stato `%s`. L-era 2 e- l-era CORRENTE "
+                       "(CLAUDE.md par.13): una sua voce APERTA e- AGENDA, non SOSPESA, perche- "
+                       "SOSPESA vuol dire <<rimandata all-era 2>> e una voce dell-era 2 non si "
+                       "puo- rimandare a se stessa. ### Una voce DECISA o CHIUSA invece "
+                       "puo- stare cosi-: una domanda a cui Luca ha risposto NON E- <<in "
+                       "agenda>>" % (v["id"], v["stato"]))
+    return err
+
+
+def _f10_criterio_metodo(voci):
+    """### `PI-CRITERIO-METODO`: una voce di classe `CRITERIO` ### **sta nel dominio `METODO`.**
+
+    ### ⭐ **Un criterio e- una REGOLA DI GIUDIZIO**, e una regola di giudizio
+    ### **non e- fisica**: dice ### **come si decide**, non ### **come va il mondo.**
+    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice: *<<entrambi errori
+    (validazione bloccante)>>*.
+
+    ### ✔ **QUESTO SI PUO- ACCENDERE SUBITO: le violazioni oggi sono ZERO**, misurate
+    sulle `846` voci a `bfb1596`. ### **Un presidio che si accende su zero violazioni
+    non ha bisogno di nessuna cura prima** -- ed e- per questo che `PI-ERA-STATO` e `PI-CRITERIO-METODO`,
+    che il mandato chiede ### **insieme**, ### **si separano: uno si puo-, l-altro no.**
+
+    ### ⚠ **E lo zero NON e- un FALSO-ZERO:** il punto `4` del 2026-10-09 ha portato
+    `REGISTRO_FISICA:D37` da `CRITERIO`/`INFRASTRUTTURA` a `DIFETTO`, e
+    `REGISTRO_FISICA:C3` a `CRITERIO`/`METODO`. ### **Lo zero di oggi e- il risultato di
+    quelle cure**, e il collaudo lo prova ### **con un caso che DEVE scattare.**
+    """
+    err = []
+    for v in voci:
+        if v["classe"] == "CRITERIO" and v["dominio"] != "METODO":
+            err.append("`PI-CRITERIO-METODO` `%s`: classe `CRITERIO` nel dominio `%s`. Un criterio e- "
+                       "una REGOLA DI GIUDIZIO, e una regola di giudizio non e- fisica: "
+                       "dice COME SI DECIDE, non come va il mondo" % (v["id"],
+                                                                      v["dominio"]))
+    return err
+
+
+def _f7_stato(voci):
+    """### `PI-FISICA-ERA1-NON-SOSPESA`: una voce `FISICA` dell-era `1` con uno stato che non e- `SOSPESA` ne-
+    `CHIUSA`.
+
+    ### ⛔ **E- UN ERRORE, non un segnale**, e il mandato lo dice: *<<la validazione
+    fallisce>>*. ### **La regola in vigore: la fisica dell-era `1` NON CHIUSA e- `SOSPESA`**
+    -- e l-### **<<APERTO>>** che un documento scrive e- lo stato ### **dell-era `1`**, che
+    sta in `stato_era_1`.
+
+    ### ⚠ **Nasce da un errore mio:** nel punto `5` del 2026-10-09 ho ripristinato `4` voci
+    leggendo lo stato da `## APERTO <ID>` e ### **l-ho messo nel campo `stato`**, che e- lo
+    stato ### **di oggi**. Avevo ### **dichiarato la provenienza del dato**, e questo mi ha
+    fatto sembrare prudente ### **un errore di campo**: ### **per questo la regola ha un
+    presidio e non solo una riga in `par9.md`.**
+
+    ### ⛔ **E- PURA** *(prende la lista, non legge il disco)* perche- ### **il collaudo deve
+    poterla provare su una COPIA**, mai sull-indice vero.
+    """
+    err = []
+    for v in voci:
+        # ### ⭐ **`SUPERATA` STA CON `CHIUSA`, NON CON `APERTA`:** la regola dice *<<la
+        # ### fisica dell-era 1 ### **NON CHIUSA** e- SOSPESA>>*, e una voce
+        # ### ### **superata da una decisione NON E- APERTA** -- e- risolta ### **da
+        # ### fuori.** `TRANSIZIONI` lo conferma: da `SUPERATA` si esce ### **solo verso
+        # ### `APERTA`**, cioe- ### **solo riaprendola.**
+        # ### ⭐ **ESTESO A QUALSIASI DOMINIO il 2026-10-09**, e il perche- e- che la
+        # ### regola non parlava di fisica: ### **una voce dell-era 1 NON CHIUSA e-
+        # ### SOSPESA**, e vale per `METODO`, `INFRASTRUTTURA` e `DOCUMENTAZIONE` come per
+        # ### `FISICA`. ### **Violava su 16 voci** -- le 14 `CENS-*`, `D32-CONTATORE` e
+        # ### `RAMI-OFF-CURA2` -- e ### **sono state curate PRIMA che il presidio si
+        # ### accendesse**, perche- un presidio bloccante acceso prima della cura
+        # ### ### **rende il lotto che lo curerebbe inapplicabile.**
+        vietato = (str(v["era"]) == "1"
+                   and v["stato"] not in ("SOSPESA", "CHIUSA", "SUPERATA"))
+        if vietato:
+            err.append("`PI-FISICA-ERA1-NON-SOSPESA` `%s`: `%s`/era `1` con stato `%s`. Una voce dell-era 1 "
+                       "NON CHIUSA e- SOSPESA; se quello stato viene da un documento "
+                       "(<<APERTO>>), e- lo stato DELL-ERA 1 e va in `stato_era_1`"
+                       % (v["id"], v["dominio"], v["stato"]))
+    return err
+
+
+def _f1_gemelle(voci):
+    """### `PI-GEMELLE`: il titolo di una voce ### **cita l-ID di un-altra**, e ### **dominio o era
+    DIFFERISCONO.**"""
+    ids = {v["id"]: v for v in voci}
+    fuori = []
+    for v in voci:
+        if _coperto(v, "PI-GEMELLE"):
+            continue
+        for tok in set(_TOKEN.findall(v.get("titolo") or "")):
+            w = ids.get(tok)
+            if w is None or w["id"] == v["id"]:
+                continue
+            # ### LA RESTRIZIONE DEL 2026-10-09, E IL DIFETTO ERA MIO: CITARE UN ASSIOMA
+            # ### NON E- ESSERE GEMELLE. `D24` e- un difetto dell-era 1 che VIOLA `A2`, e
+            # ### `A2` vale per ### **ENTRAMBE** le ere: <<differiscono>> e- GIUSTO che sia
+            # ### vero, e non e- una mescolanza. Lo stesso per i presidi (`H-*`) e per i
+            # ### SEGNAPOSTO, che ### **non hanno ancora un dominio ne- un-era.**
+            # ### ### **42 dei 49 segnali erano questo**, e io ne avevo dichiarati 12.
+            if w["classe"] in ("STANDARD", "PRESIDIO", "NON_DEFINITA"):
+                continue
+            # ### ⛔ **LO STATO E- USCITO DAL CONTROLLO IL 2026-10-09, ed e- un errore che
+            # ### ### il guardiano dichiara SUO -- ma l-applicazione era MIA.** Lo avevo
+            # ### esteso allo stato *<<solo per lo schema `D`/`Z`>>* ### **alla lettera del
+            # ### prompt**, e nel referto avevo scritto che le ### **`9` coppie
+            # ### disallineate erano «UN RITROVATO»**: ### **le ho elencate come un
+            # ### difetto, ed erano LA FORMA GIUSTA.**
+            # ### ⭐ **LA DISTINZIONE CHE NON AVEVO:** la voce `D` e- ### **il DIFETTO**, la
+            # ### `Z` e- ### **il REPERTO che lo ha trovato.** Io le leggevo come
+            # ### ### **<<la stessa cosa scritta due volte>>**, e sono ### **un difetto e
+            # ### la misura che lo ha scoperto** -- e ### **una misura resta
+            # ### un-AVVERTENZA anche dopo che il difetto e- curato** *(`D19` CURATO,
+            # ### `Z88` aperta come avvertenza)*.
+            # ### ✔ **Restano `dominio` ed `era`:** quelli ### **devono** coincidere,
+            # ### perche- il difetto e il suo reperto ### **parlano della stessa cosa,
+            # ### nella stessa era.**
+            if w["dominio"] != v["dominio"] or str(w["era"]) != str(v["era"]):
+                fuori.append((v["id"], "il titolo cita `%s`, che e- `%s`/era `%s`, mentre "
+                                       "questa e- `%s`/era `%s`"
+                              % (w["id"], w["dominio"], w["era"],
+                                 v["dominio"], v["era"])))
+    return fuori
+
+
+def _f2_era2(voci):
+    """### `PI-SIMBOLI-ERA1`: una voce dell-era `2` che ### **nomina il vecchio codice.**"""
+    fuori = []
+    for v in voci:
+        if str(v["era"]) != "2" or _coperto(v, "PI-SIMBOLI-ERA1"):
+            continue
+        t = _testo_voce(v)
+        tl = t.lower()
+        visti = [s for s in ERA1_SIMBOLI if s.lower() in tl]
+        if _RIGA_NNNN.search(t):
+            visti.append("un numero di riga `" + _RIGA_NNNN.search(t).group(0) + "`")
+        m = _FLAG.search(t)
+        if m:
+            visti.append("un flag `" + m.group(0) + "`")
+        if visti:
+            fuori.append((v["id"], "era `2` ma nomina l-era `1`: " + ", ".join(visti[:5])))
+    return fuori
+
+
+def _f3_fisica_strumenti(voci):
+    """### `PI-PAROLE-STRUMENTO`: una voce `FISICA` il cui ### **TITOLO** parla di strumenti.
+
+    ### ⚠ **Solo il titolo**, e il mandato dice cosi-: *«il cui TITOLO parla di…»*.
+    ### **Preso alla lettera**, e se risulta troppo stretto lo si scrive invece di allargarlo.
+    """
+    fuori = []
+    for v in voci:
+        if v["dominio"] != "FISICA" or _coperto(v, "PI-PAROLE-STRUMENTO"):
+            continue
+        tl = (v.get("titolo") or "").lower()
+        visti = [s for s in STRUMENTI if s.lower() in tl]
+        if visti:
+            fuori.append((v["id"], "`FISICA`, ma il titolo parla di strumenti: "
+                          + ", ".join("`%s`" % s for s in visti[:5])))
+    return fuori
+
+
+# ### ⛔ **LA REGOLA DELL-INTESTAZIONE** *(punto `5` del 2026-10-09)*. `PI-ETICHETTA-DEFINITA` segnalava `30`
+# ### etichette, e ### **circa meta- erano intestazioni in cui l-ID sta DENTRO LA PROSA**:
+# ### *<<`### 1.2 ⚠ E LA LETTURA CHE DECIDE DAVVERO — dichiarata POST-HOC, non era fissata
+# ### prima`>>*. ### **`POST-HOC` non e- il soggetto di quell-intestazione: e- un aggettivo.**
+# ### Lo stesso per `RI-LETTO`, `RI-VERIFICATI`, `SOVRA-CORREGGE`, che sono ### **VERBI.**
+# ###
+# ### ✔ **UN-INTESTAZIONE DEFINISCE SE, E SOLO SE:**
+# ###   ① si toglie dall-inizio, ripetutamente, cio- che NON porta significato -- i `#`, gli
+# ###     spazi, i ### **simboli non alfanumerici** *(`⛔` `✅` `⚠` `⭐` `➜` `①` `*` backtick
+# ###     `—` `§`)*, la ### **numerazione** *(`5.`, `1.2`, `5-bis.`, `§38`)* e ### **una
+# ###     parola di STATO** *(`APERTO`, `CHIUSO`, `APERTA`, `CHIUSA`, `RISOLTO`,
+# ###     `SOSPESO`)*; ### **e il resto COMINCIA con l-ID** -- cioe- ### **l-ID e- il
+# ###     SOGGETTO**;
+# ###   ② ### **e c-e- CONTENUTO:** altri `3` caratteri sulla riga dopo l-ID,
+# ###     ### **oppure** almeno una riga non vuota e non-intestazione ### **SOTTO**.
+# ### ⚠ **Il ② serve a `## APERTO CURA1-CORTO`**, dove il contenuto e- ### **il paragrafo
+# ### sotto**: l-intestazione e- nuda, la sezione no. ### **<<Senza contenuto>> vuol dire
+# ### che non c-e- NIENTE, ne- accanto ne- sotto.**
+_H_SIMBOLI = re.compile(r"^[^0-9A-Za-z]+")
+_H_NUM = re.compile(r"^(?:§\s*)?\d+(?:[.-][0-9A-Za-z]+)*\.?\s*")
+_H_STATO = re.compile(r"^(?:APERTO|APERTA|CHIUSO|CHIUSA|RISOLTO|RISOLTA|SOSPESO|SOSPESA)\b\s*", re.I)
+
+
+def _intestazione_definisce(righe, k, idv):
+    """### `righe[k]` e- un-intestazione: ### **definisce `idv`?** Vedi la regola sopra."""
+    t = re.sub(r"^#{1,6}\s*", "", righe[k])
+    for _ in range(8):
+        prima = t
+        for r in (_H_SIMBOLI, _H_NUM, _H_STATO):
+            t = r.sub("", t, count=1)
+        if t == prima:
+            break
+    if not t.startswith(idv):
+        return False
+    resto = t[len(idv):]
+    # ### ⛔ **e l-ID deve finire DOVE FINISCE IL TOKEN:** `S1` non definisce `S10`.
+    if resto[:1] and (resto[0].isalnum() or resto[0] in "_:-"):
+        return False
+    if len(resto.strip()) >= 3:
+        return True
+    # ### ② il CONTENUTO puo- stare SOTTO: `## APERTO CURA1-CORTO` + il paragrafo
+    for r in righe[k + 1:k + 12]:
+        if r.strip().startswith("#"):
+            break
+        if len(r.strip()) >= 3:
+            return True
+    return False
+
+
+def _f4_etichette(etich):
+    """### `PI-ETICHETTA-DEFINITA`: un-etichetta rimossa che ### **in un documento E- DEFINITA.**"""
+    fuori = []
+    riga_t = "|"
+    for e in etich:
+        idv = e["id"]
+        # ### ⛔ **UN-ETICHETTA NON HA UN `meta`:** non e- una voce, e lo schema delle
+        # ### voci non la riguarda. ### **Quindi la sua eccezione sta in un campo suo**,
+        # ### `eccezione_presidio`, scritto con `etichette-lotto` -- la stessa via, con
+        # ### la sua riga di storico.
+        if e.get("eccezione_presidio"):
+            continue
+        q = re.escape(idv)
+        rt = re.compile(r"^\s*\|\s*\**\s*`?" + q + r"`?\s*\**\s*\|")
+        it = re.compile(r"^#{1,6}\s.*(?<![A-Za-z0-9_:-])" + q + r"(?![A-Za-z0-9_:-])")
+        for f in (e.get("file_citanti") or []):
+            fp = str(f).replace(chr(92), "/")
+            if any(fp == g or fp.startswith(g) for g in VISTE_GENERATE):
+                continue
+            p = os.path.join(RADICE, fp)
+            if not os.path.exists(p):
+                continue
+            trovata = None
+            righe = io.open(p, encoding="utf-8", errors="replace").read().split(NL)
+            for n, r in enumerate(righe, 1):
+                if rt.match(r):
+                    trovata = ("una riga di tabella", n)
+                    break
+                # ### ⛔ **NON BASTA CHE L-INTESTAZIONE CONTENGA L-ID:** vedi la regola
+                # ### dell-intestazione qui sopra.
+                if it.match(r) and _intestazione_definisce(righe, n - 1, idv):
+                    trovata = ("un-intestazione", n)
+                    break
+            if trovata:
+                fuori.append((idv, "etichetta rimossa, ma %s la DEFINISCE in `%s:%d`"
+                              % (trovata[0], fp, trovata[1])))
+                break
+    del riga_t
+    return fuori
+
+
+# ### ⛔ **UNA NOTA PUO- DICHIARARE UNA TRIPLA**, e allora la tripla e- un-ASSERZIONE:
+# ### *<<correzione v3 blocco G2: ### **FISICA/era 1/SOSPESA**>>* dice
+# ### ### **che cos-e- la voce**, e se la voce e- cambiata ### **la nota e- SCADUTA.**
+# ### ⚠ **E NON E- LEGGERE LA PROSA:** serve ### **la forma esatta**
+# ### `DOMINIO/era N/STATO`. Sulle `846` voci la trovano ### **`6` note**, e
+# ### ### **una sola e- incoerente: `G1`** -- esattamente il caso che il mandato
+# ### nomina. ### ⛔ **La via grossolana -- <<la nota nomina uno stato diverso>> --
+# ### dava `69` SEGNALI**, perche- la maggior parte delle note parla
+# ### ### **di un-altra era o fa una DOMANDA** *(<<superata da A16?>>)*: era
+# ### ### **la condizione di FERMO scritta nel task history**, e mi sono fermato.
+_TRIPLA = re.compile(r"(FISICA|METODO|INFRASTRUTTURA|DOCUMENTAZIONE)\s*/\s*era\s*"
+                    r"(1|2|ENTRAMBE)\s*/\s*(APERTA|CHIUSA|SOSPESA|AGENDA|SUPERATA)",
+                    re.I)
+
+
+def _f6_note(voci):
+    """### `PI-NOTA-CONTRADDICE-LISTA`: una `nota_guardiano` che ### **nomina una lista del guardiano** e che
+    ### **contraddice** il dominio, l-era o lo stato della voce.
+
+    ### ⛔ **NON SI LEGGE LA PROSA, e la prima stesura lo faceva:** cercava nella nota le
+    parole `SUPERATA`, `SOSPESA`, `fisica`… e le prendeva per ### **asserzioni di stato.**
+    ### **`11` dei `13` segnali erano UNA SOLA FRASE** -- *«candidata ### **SUPERATA** dalla
+    decisione sulla sincronizzazione»*, che e- ### **prosa.** ### **Un presidio che legge la
+    prosa legge male**, e l-ha trovato il presidio stesso guardando la sua uscita.
+
+    ### ✔ **Si confronta con CIO- CHE LA LISTA `N` DICEVA** *(`LISTE_GUARDIANO`, una tabella
+    dichiarata)*. ### ⚠ **E una nota che si DICHIARA correzione non si guarda:**
+    *<<correzione della lista 2 …>>* ### **non e- incoerente, e- informativa.**
+    """
+    fuori = []
+    for v in voci:
+        nota = (v.get("meta") or {}).get("nota_guardiano") or ""
+        if not nota or _coperto(v, "PI-NOTA-CONTRADDICE-LISTA"):
+            continue
+        # ### ✔ **PRIMA LA TRIPLA DICHIARATA**, che vale ### **anche per una nota che si
+        # ### dice <<correzione>>:** una correzione ### **dichiara cio- che la voce E-**, e
+        # ### se la voce si e- mossa ### **la dichiarazione e- SCADUTA.** `G1` dice
+        # ### *<<correzione v3 blocco G2: FISICA/era 1/SOSPESA>>* e oggi e- ### **`CHIUSA`**,
+        # ### perche- il guardiano ha dichiarato che e- ### **<<FATTO>>.**
+        mt = _TRIPLA.search(nota)
+        if mt:
+            d, e, s = (x.upper() for x in mt.groups())
+            g2 = []
+            if v["dominio"] != d:
+                g2.append("la nota dichiara `%s`, la voce e- `%s`" % (d, v["dominio"]))
+            if str(v["era"]).upper() != e:
+                g2.append("la nota dichiara era `%s`, la voce e- era `%s`" % (e, v["era"]))
+            if v["stato"] != s:
+                g2.append("la nota dichiara `%s`, la voce e- `%s`" % (s, v["stato"]))
+            if g2:
+                fuori.append((v["id"], "la nota DICHIARA una tripla `dominio/era/stato` e "
+                                       "la voce non e- piu- quella: %s" % "; ".join(g2)))
+                continue
+        m = re.search(r"list[ae]\s*([123])?\s*del guardiano", nota, re.I)
+        if not m:
+            continue
+        # ### UNA NOTA CHE SI DICHIARA CORREZIONE NON SI GUARDA: <<correzione della lista
+        # ### 2 ...>> NON e- incoerente, e- INFORMATIVA. Segnalarla sarebbe un FALSO-UNO.
+        if "correzione" in nota.lower() or not m.group(1):
+            continue
+        dom, era, stato = LISTE_GUARDIANO[m.group(1)]
+        guai = []
+        if dom and v["dominio"] != dom:
+            guai.append("la lista diceva `%s`, la voce e- `%s`" % (dom, v["dominio"]))
+        if era and str(v["era"]) != era:
+            guai.append("la lista diceva era `%s`, la voce e- era `%s`" % (era, v["era"]))
+        if stato and v["stato"] != stato:
+            guai.append("la lista diceva `%s`, la voce e- `%s`" % (stato, v["stato"]))
+        if guai:
+            fuori.append((v["id"], "la nota nomina la lista `%s` del guardiano e la voce "
+                                   "NON e- piu- cio- che quella lista diceva: %s"
+                          % (m.group(1), "; ".join(guai))))
+    return fuori
+
+
+def segnali(voci, reg, verboso=True):
+    """### I CINQUE PRESIDI CHE SEGNALANO. ### ⛔ **NON cambiano il codice d-uscita.**"""
+    del reg
+    etich = [json.loads(r) for r in io.open(ETICH, encoding="utf-8").read().split(NL)
+             if r.strip()] if os.path.exists(ETICH) else []
+    n_fisica = sum(1 for v in voci if v["dominio"] == "FISICA")
+    n_era2 = sum(1 for v in voci if str(v["era"]) == "2")
+    n_note = sum(1 for v in voci
+                 if re.search(r"list[ae]\s*[123]?\s*del guardiano",
+                              (v.get("meta") or {}).get("nota_guardiano") or "", re.I))
+    tutti = [("PI-GEMELLE", "GEMELLE: il titolo cita l-ID di un-altra, e dominio o era differiscono",
+              _f1_gemelle(voci), len(voci)),
+             ("PI-SIMBOLI-ERA1", "ERA 2 PULITA: una voce dell-era 2 che nomina simboli dell-era 1",
+              _f2_era2(voci), n_era2),
+             ("PI-PAROLE-STRUMENTO", "FISICA CHE PARLA DI STRUMENTI: il titolo di una voce FISICA",
+              _f3_fisica_strumenti(voci), n_fisica),
+             ("PI-ETICHETTA-DEFINITA", "ETICHETTA CON DEFINIZIONE: un-etichetta che un documento DEFINISCE",
+              _f4_etichette(etich), len(etich)),
+             ("PI-NOTA-CONTRADDICE-LISTA", "NOTE COERENTI: una nota che nomina una lista e la contraddice",
+              _f6_note(voci), n_note),
+             ("PI-OGGETTI-ERA1", "ERA 1 NEL TESTO: una voce ENTRAMBE che nomina un oggetto concreto",
+              _f8_era1(voci),
+              sum(1 for v in voci if str(v["era"]) == "ENTRAMBE"
+                  and v["stato"] != "CHIUSA"))]
+    if verboso:
+        print("=" * 96)
+        print("I PRESIDI CONTRO LE MESCOLANZE  --  SEGNALANO, NON DECIDONO")
+        print("=" * 96)
+        for sig, che, fuori, su in tutti:
+            # ### ⚠ **IL TOOL MISURA, LA LETTURA STA NEL REFERTO.** La soglia del
+            # ### `10%` l-ho fissata nel task history ### **prima di misurare**, ed e-
+            # ### un FATTO utile; ma ### **<<TROPPO GROSSO>> e- un GIUDIZIO**, e su un
+            # ### denominatore di `25` una percentuale non vuol dire niente. Quindi il
+            # ### tool dice ### **che la soglia e- superata**, e il referto dice
+            # ### ### **se il presidio e- troppo grosso DAVVERO.**
+            grosso = ""
+            if su and len(fuori) > su * 0.10:
+                grosso = ("   ### oltre il 10%% di %d -- la LETTURA sta nel referto"
+                          % su)
+            print("  %s  %-70s %4d segnali su %d%s"
+                  % (sig, che[:70], len(fuori), su, grosso))
+        print()
+        for sig, _che, fuori, _su in tutti:
+            if not fuori:
+                continue
+            print("-" * 96)
+            print("### `%s`: %d" % (sig, len(fuori)))
+            print("-" * 96)
+            for i, msg in fuori:
+                print("  %-26s %s" % (i, msg))
+        print()
+        print("  ### I SEGNALI NON SI CORREGGONO DA QUI: si chiudono correggendo la voce,")
+        print("  ### oppure con `meta.eccezione_presidio` CHE CITA IL TESTO ALLA LETTERA.")
+    return tutti
+
+
+def _head():
+    """### `HEAD` adesso: il commit ### **su cui** la modifica e- fatta. Si sa, a differenza
+    del commit che la ### **conterra-**."""
+    q = subprocess.run(["git", "rev-parse", "--short=8", "HEAD"], cwd=RADICE,
+                       capture_output=True, text=True)
+    return (q.stdout or "").strip() if q.returncode == 0 else ""
+
+
+def storico_commit():
+    """### IL BLOCCO `D`: riempie il campo `commit` di ogni riga dello storico.
+
+    ### ⛔ **Non si indovina: si LEGGE DAI LOG.** `storico.jsonl` e- ### **solo in
+    aggiunta**, quindi per ogni commit che l-ha toccato le righe
+    `[quante_prima, quante_dopo)` sono ### **esattamente quelle che quel commit ha
+    scritto.** ### ✔ **E LA PREMESSA SI VERIFICA:** se una versione vecchia non e- un
+    ### **prefisso** di quella nuova lo storico ### **non e- piu- solo-in-aggiunta**, e
+    allora ### **questa funzione SI FERMA** invece di scrivere numeri sbagliati.
+
+    ### ⚠ **UN LOTTO DI RITARDO, e non e- un difetto nascosto:** le righe scritte DOPO
+    l-ultimo commit non hanno ancora un commit che le contenga, e restano vuote fino al
+    giro dopo. ### **E- la conseguenza di quando esiste un commit**, non una scelta.
+    """
+    righe = [r for r in io.open(STORICO, encoding="utf-8").read().split(NL) if r.strip()]
+    vive = [json.loads(r) for r in righe]
+    q = subprocess.run(["git", "log", "--reverse", "--format=%h", "--",
+                        "doc/indice/storico.jsonl"], cwd=RADICE, capture_output=True,
+                       text=True)
+    commits = [c for c in (q.stdout or "").split() if c]
+    print("=" * 96)
+    print("IL CAMPO `commit` DELLO STORICO -- preso DAI LOG, non indovinato")
+    print("=" * 96)
+    print("  righe: %d   commit che hanno toccato il file: %d" % (len(vive), len(commits)))
+    prec, assegnate, totcorretti = 0, 0, 0
+    for c in commits:
+        qc = subprocess.run(["git", "show", "%s:doc/indice/storico.jsonl" % c], cwd=RADICE,
+                            capture_output=True, text=True, encoding="utf-8")
+        sue = [r for r in (qc.stdout or "").split(NL) if r.strip()]
+        # ### LA PREMESSA, VERIFICATA: la versione di allora e- un PREFISSO di oggi.
+        assert len(sue) <= len(righe), ("`%s`: aveva %d righe, oggi il file ne ha %d: lo "
+                                        "storico NON e- solo-in-aggiunta" % (c, len(sue),
+                                                                             len(righe)))
+        for k, r in enumerate(sue):
+            a, b = json.loads(r), vive[k]
+            assert (a["id"], a["quando"], a["motivo"]) == (b["id"], b["quando"],
+                                                           b["motivo"]), (
+                "`%s`: la riga %d di allora NON e- la riga %d di oggi: lo storico e- stato "
+                "RISCRITTO, e questa funzione si ferma" % (c, k + 1, k + 1))
+        n, corretti = 0, 0
+        for k in range(prec, len(sue)):
+            fermo = vive[k].get("commit")
+            if not fermo:
+                vive[k]["commit"] = c
+                n += 1
+            elif fermo != c:
+                # ### ⛔ **I LOG VINCONO SU UN VALORE SCRITTO, e non e- un-eccezione:
+                # ### e- il principio di questa funzione** -- *<<non si indovina: si
+                # ### LEGGE DAI LOG>>*. ### **Un valore che i log SMENTISCONO non e- un
+                # ### dato: e- un errore**, e correggerlo e- l-unica cosa che questa
+                # ### funzione puo- fare di coerente con il suo nome.
+                # ### ⚠ **E SI STAMPA, sempre:** correggerlo in silenzio vorrebbe dire
+                # ### ### **nascondere che qualcuno ci aveva scritto un altro numero.**
+                print("  ### CORRETTO  riga %d (`%s`): c-era `%s`, i LOG dicono `%s`"
+                      % (k + 1, vive[k].get("id", "?"), fermo, c))
+                vive[k]["commit"] = c
+                corretti += 1
+        if len(sue) > prec:
+            print("  %-10s righe %5d..%-5d  (%d)  %s" % (c, prec + 1, len(sue),
+                                                         len(sue) - prec,
+                                                         "riempite %d%s"
+                                                         % (n, ", CORRETTE %d" % corretti
+                                                            if corretti else "")))
+        assegnate += n
+        totcorretti += corretti
+        prec = max(prec, len(sue))
+    restano = [k for k, v in enumerate(vive) if not v.get("commit")]
+    print()
+    print("  riempite: %d   corrette: %d   senza commit: %d"
+          % (assegnate, totcorretti, len(restano)))
+    if restano:
+        print("  ### LE %d SENZA COMMIT SONO LE RIGHE %d..%d, scritte DOPO l-ultimo commit:"
+              % (len(restano), restano[0] + 1, restano[-1] + 1))
+        print("  ### il commit che le conterra- NON ESISTE ANCORA. Si riempiono al giro dopo,")
+        print("  ### ed e- IL LOTTO DI RITARDO dichiarato nel sorgente di questa funzione.")
+    # ### ⛔ **SI SCRIVE ANCHE PER UNA SOLA CORREZIONE**, e il bug era qui: prima
+    # ### la condizione era `if assegnate`, cioe- ### **solo i campi RIEMPITI**. Una
+    # ### correzione veniva ### **STAMPATA e non SCRITTA** -- cioe- il comando diceva
+    # ### <<CORRETTO>> e il file ### **restava sbagliato.** ### ⚠ **L-ho visto perche-
+    # ### il validatore ha rifiutato lo stesso errore subito dopo.**
+    if assegnate or totcorretti:
+        io.open(STORICO, "w", encoding="utf-8", newline=NL).write(
+            NL.join(json.dumps(v, ensure_ascii=False) for v in vive) + NL)
+        print("  scritto doc/indice/storico.jsonl")
+    return 0
+
+
+def etichette_lotto(percorso):
+    """### LA VIA DI SCRITTURA PER LE ETICHETTE RIMOSSE.
+
+    ### ⚠ **Perche- serviva:** il punto `5` del 2026-10-09 deve ### **chiudere un
+    segnale di `PI-ETICHETTA-DEFINITA` su un'etichetta** *(`GLOBALE-DIS`: la sua unica definizione dice
+    che l'ID ### **non esiste**)* e ### **lasciare una nota «da decidere da Luca»** su
+    tre altre. ### ⛔ **Un'etichetta NON ha un `meta`**, perche- non e- una voce: la
+    sua eccezione e la sua nota stanno in ### **campi suoi**, e `PI-ETICHETTA-DEFINITA` li legge.
+
+    ### ✔ **Resta LA STESSA VIA:** ogni modifica ### **una riga di storico**, col
+    motivo, e ### **se un ID non e- fra le etichette il lotto non parte.**
+    """
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read()
+             .split(NL) if r.strip()]
+    etich = [json.loads(r) for r in io.open(ETICH, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    per = {e["id"]: e for e in etich}
+    storia = []
+    for r in righe:
+        idv = r["id"]
+        assert idv in per, "`%s` NON e- fra le etichette rimosse" % idv
+        e = per[idv]
+        prima = json.loads(json.dumps(e))
+        for k, val in r.items():
+            if k in ("id", "motivo", "quando"):
+                continue
+            e[k] = val
+        motivo = r.get("motivo") or ("(etichetta) aggiornata: " + ", ".join(
+            k for k in r if k not in ("id", "motivo", "quando")))
+        assert len(motivo) >= 20, "`%s`: motivo troppo corto" % idv
+        storia.append({"quando": r.get("quando") or _oggi(), "id": idv,
+                       "motivo": motivo, "commit": "", "commit_base": _head(),
+                       "prima": prima, "dopo": json.loads(json.dumps(e))})
+    _scrivi_jsonl(ETICH, etich)
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for s in storia:
+            f.write(json.dumps(s, ensure_ascii=False) + NL)
+    _stage_storico()
+    print("  lotto ETICHETTE applicato: %d etichette, %d righe di storico"
+          % (len(righe), len(storia)))
+
+
+def rinomina(voci, reg, vecchio, nuovo, motivo):
+    """### `14(f)`: ### **un ID si rinomina TUTTO IN UN COLPO**, e in un commit.
+
+    ### ⛔ **DELEGATO a `csv/_rinomina.py`**, che ### **pianifica senza scrivere**:
+    cosi- ### **la via di scrittura resta UNA** *(questa funzione)* e il piano
+    ### **si puo- collaudare senza toccare il disco.**
+    ### ⭐ **E L-ALTRA META- DELLA REGOLA E- GIA- VERA:** rinominare a mano viene
+    ### **rifiutato da DUE presidi indipendenti** -- il replay dello storico
+    *(la voce non coincide piu- col suo `dopo`)* e quello dei riferimenti
+    *(un `@rif` verso un ID che non esiste piu-)*.
+    """
+    assert motivo and len(motivo) >= 20, (
+        "serve --motivo: un rinominamento senza motivo non si registra")
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import _rinomina as RN
+    piano = RN.pianifica(voci, vecchio, nuovo)
+    voci, storia, scritture = RN.applica(voci, piano, motivo)
+    # ### ⛔ **SI VALIDA PRIMA DI SCRIVERE: o tutto, o niente.** Un rinominamento
+    # ### a meta- lascia ### **un indice che si contraddice.**
+    err = valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("il rinominamento NON passa la validazione, e NON SI SCRIVE "
+                     "NIENTE:" + NL + NL.join(err[:8]))
+    _scrivi_jsonl(VOCI, voci)
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for r in storia:
+            r["quando"] = _oggi()
+            r["commit_base"] = _head()
+            f.write(json.dumps(r, ensure_ascii=False) + NL)
+    _stage_storico()
+    for rel, testo in sorted(scritture.items()):
+        io.open(os.path.join(os.path.dirname(os.path.dirname(
+            os.path.abspath(__file__))), rel), "w", encoding="utf-8",
+            newline=NL).write(testo)
+    viste(voci, reg)
+    print("  `%s` -> `%s`: %d righe di storico, %d file riscritti, e il nome vecchio "
+          "resta come ALIAS" % (vecchio, nuovo, len(storia), len(scritture)))
+
+
+def crea_lotto(voci, reg, percorso):
+    """### LA VIA PER FAR NASCERE UNA VOCE -- la STESSA via, non un-altra.
+
+    Prende un `jsonl` di `{campi: {...}, motivo, togli_da_etichette}` e lo applica
+    ### **atomicamente**: ogni voce passa dal ### **modello completo** delle `CHIAVI`, con
+    ### **una riga di storico** *(`prima: null`: prima non c-era niente)*, e ### **una sola
+    validazione alla fine.** ### Se non passa, ### **NON SI SCRIVE NIENTE.**
+
+    ### ⛔ **Perche- serviva:** `aggiorna` e `aggiorna_lotto` cominciano entrambi con
+    `assert idv in per`, quindi ### **una voce non poteva NASCERE dalla via di scrittura** --
+    la fase `1` le creava ### **dentro la migrazione**, che gira una volta sola e dal tag.
+    Il blocco `C` della correzione `v3` deve far nascere `16` voci, e scriverle a mano in
+    `voci.jsonl` sarebbe stata ### **una SECONDA via di scrittura.**
+
+    ### ⚠ **`togli_da_etichette`:** se l-ID stava in `etichette_rimosse.jsonl` ci va
+    ### **TOLTO NELLO STESSO ATTO**, perche- il controllo `C1` pretende che ogni ID vecchio
+    stia in ### **UNO E UNO SOLO** posto. ### **Non e- una pulizia: e- la conservazione.**
+    """
+    per = {v["id"]: v for v in voci}
+    righe = [json.loads(r) for r in io.open(percorso, encoding="utf-8").read().split(NL)
+             if r.strip()]
+    etich = [json.loads(r) for r in
+             io.open(ETICH, encoding="utf-8").read().split(NL) if r.strip()] \
+        if os.path.exists(ETICH) else []
+    per_et = {e["id"]: e for e in etich}
+    storia, togli = [], []
+    for r in righe:
+        campi = r["campi"]
+        idv = campi["id"]
+        motivo = r.get("motivo", "")
+        assert len(motivo) >= 20, ("`%s`: il motivo e- troppo corto per CITARE qualcosa: %r"
+                                   % (idv, motivo))
+        assert idv not in per, "`%s` ESISTE GIA-: si aggiorna, non si crea" % idv
+        # ### ⛔ **`P-ID`: UN ID CHE NASCE NON PUO- COLLIDERE** *(decisione di Luca,
+        # ### blocco `1` delle `43`)*: ne- con un ID, ne- con un ALIAS, ne- con uno dei
+        # ### ### **significati dichiarati di un omonimo**, e deve avere
+        # ### ### **almeno `4` caratteri.**
+        # ### ⚠ **<<CHE NASCE>> E- LA PAROLA CHE CONTA:** ### **`420` ID esistenti
+        # ### sono piu- corti di `4`** -- misurato -- e rinominarli ### **perderebbe
+        # ### degli ID.** Il presidio guarda ### **chi nasce**, non chi c-e-.
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import _id_nuovo as IDN
+        _e = IDN.controlla_nuovo(idv, voci, etich)
+        assert not _e, ("`%s` NON PUO- NASCERE:" % idv) + NL + NL.join(_e)
+        for k in campi:
+            assert k in CHIAVI, "`%s`: `%s` non e- un campo dello schema" % (idv, k)
+        for k, val in (campi.get("meta") or {}).items():
+            spec = reg["metadati"].get(k)
+            assert spec, "`%s`: la chiave meta `%s` NON e- registrata" % (idv, k)
+            assert spec.get("stato") == "ATTIVO", ("`%s`: la chiave meta `%s` e- DEPRECATA"
+                                                   % (idv, k))
+        # ### ⛔ **IL MODELLO COPRE `CHIAVI` INTERE, E I TRE CAMPI NUOVI VENGONO DA
+        # ### `DEFAULT_NUOVI`** -- non riscritti a mano qui.
+        # ### ⚠ **PERCHE- LA CORREZIONE E- SERVITA, ed e- un difetto che NESSUNO AVEVA
+        # ### VISTO:** `priorita`, `dipende_da` e `sblocca` sono nati ### **dopo** questo
+        # ### modello, e la riga `{k: v[k] for k in CHIAVI}` che viene dopo
+        # ### ### **ALZAVA `KeyError`** -- cioe- ### **`crea-lotto` non poteva far nascere
+        # ### NESSUNA voce**, e il blocco `C` delle `16` era passato ### **prima che i tre
+        # ### campi esistessero.** ### **La via unica di scrittura era rotta in silenzio**,
+        # ### e si e- vista solo alla prima voce nata dopo.
+        # ### ⭐ **E LA FONTE E- `DEFAULT_NUOVI`, non una copia**: un terzo elenco degli
+        # ### stessi default ### **sarebbe il prossimo a restare indietro.**
+        v = {"id": idv, "alias": [], "titolo": "", "descrizione": "",
+             "classe": "NON_DEFINITA", "dominio": "DA_CLASSIFICARE",
+             "era": "DA_CLASSIFICARE", "stato": "DA_CLASSIFICARE", "blocca": False,
+             "leggi": [], "variabili": [], "assiomi": [], "collegate": [], "padre": "",
+             "superata_da": "", "chiusura": {}, "fonte": "",
+             "creata": {"data": r.get("quando") or _oggi(), "commit": r.get("commit", "")},
+             "aggiornata": {"data": r.get("quando") or _oggi(),
+                            "commit": r.get("commit", "")},
+             "stato_era_1": "", "meta": {}}
+        v.update(DEFAULT_NUOVI)
+        v.update(campi)
+        # ### ⛔ **E QUI SI CONTROLLA, invece di alzare `KeyError` su un campo:** se un
+        # ### campo nuovo nasce domani e nessuno aggiorna il modello, ### **il messaggio
+        # ### deve DIRE QUALE** -- un `KeyError` nudo manda a leggere il codice.
+        manca = [k for k in CHIAVI if k not in v]
+        assert not manca, ("il MODELLO di `crea_lotto` non copre `CHIAVI`: mancano %r."
+                           " Il campo nuovo va aggiunto al modello (o a `DEFAULT_NUOVI`"
+                           " se ha un default), altrimenti NESSUNA voce puo- nascere"
+                           % (manca,))
+        v = {k: v[k] for k in CHIAVI}
+        voci.append(v)
+        per[idv] = v
+        if r.get("togli_da_etichette"):
+            assert idv in per_et, ("`%s`: non sta in etichette_rimosse.jsonl, e il lotto "
+                                   "dice di toglierlo" % idv)
+            togli.append(idv)
+        storia.append({"quando": v["creata"]["data"], "id": idv, "motivo": motivo,
+                       "commit": r.get("commit", ""), "commit_base": _head(),
+                       "prima": None, "dopo": json.loads(json.dumps(v))})
+    # ### ⛔ **`PI-STORICO-SENZA-COMMIT` NON dipende dalle voci** -- guarda `storico.jsonl` sul disco contro
+    # ### `HEAD` -- quindi ### **si chiede PRIMA di scrivere**, non alla fine: alla fine
+    # ### sarebbe ### **un allarme su un file GIA- SCRITTO.**
+    err = _f5_storico(voci) + valida(voci, reg, verboso=False, derivati=False)
+    assert not err, ("il lotto NON passa la validazione, e NON SI SCRIVE NIENTE:" + NL
+                     + NL.join(err[:10]))
+    voci.sort(key=lambda v: v["id"])
+    _scrivi_jsonl(VOCI, voci)
+    if togli:
+        _scrivi_jsonl(ETICH, [e for e in etich if e["id"] not in togli])
+    with io.open(STORICO, "a", encoding="utf-8", newline=NL) as f:
+        for s in storia:
+            f.write(json.dumps(s, ensure_ascii=False) + NL)
+    _stage_storico()
+    viste(voci, reg)
+    err = valida(voci, reg, verboso=False)
+    assert not err, "DOPO le viste la validazione cade:" + NL + NL.join(err[:10])
+    print("  lotto CREATO: %d voci nuove, %d togliate dalle etichette, %d righe di storico; "
+          "e la validazione INTERA passa" % (len(righe), len(togli), len(storia)))
+
+
+def main(argv):
+    if not argv:
+        print(__doc__)
+        return 0
+    cmd, resto = argv[0], argv[1:]
+    a, pos = {}, []
+    i = 0
+    while i < len(resto):
+        if resto[i].startswith("--"):
+            k = resto[i][2:].replace("-", "_")
+            if i + 1 < len(resto) and not resto[i + 1].startswith("--"):
+                a.setdefault(k, []).append(resto[i + 1])
+                i += 2
+            else:
+                a.setdefault(k, []).append("SI")
+                i += 1
+        else:
+            pos.append(resto[i])
+            i += 1
+    uno = {k: v[0] for k, v in a.items()}
+    if cmd == "collaudo":
+        return collaudo()
+    voci, reg = carica()
+    if cmd == "valida":
+        return 1 if valida(voci, reg) else 0
+    if cmd == "cerca":
+        cerca(voci, reg, uno)
+        return 0
+    if cmd == "viste":
+        viste(voci, reg)
+        return 0
+    if cmd == "citazioni":
+        citazioni(voci)
+        return 0
+    if cmd == "rinomina":
+        # ### ⛔ **`14(f)`: voce, alias, ogni `@rif` e ogni `[[ID]]`, IN UN COLPO.**
+        rinomina(voci, reg, pos[0], pos[1], uno.get("motivo") or "")
+        return 0
+    if cmd == "aggiorna-lotto":
+        aggiorna_lotto(voci, reg, pos[0])
+        return 0
+    if cmd == "crea-lotto":
+        crea_lotto(voci, reg, pos[0])
+        return 0
+    if cmd == "etichette-lotto":
+        etichette_lotto(pos[0])
+        return 0
+    if cmd == "era2-lotto":
+        # ### ⛔ **LA VIA DI SCRITTURA DEI REGISTRI DELL-ERA `2`**, e sta QUI perche- il
+        # ### mandato dice *<<via `indice.py`>>*: ### **una sola porta**, come per le voci.
+        # ### ⚠ **Il codice vive in `csv/_indice_era2.py`** -- `indice.py` e- gia-
+        # ### ### **lungo**, e un file che cresce senza fine ### **nessuno lo rilegge.**
+        import _indice_era2 as _E2
+        return _E2.lotto(pos[0])
+    if cmd == "era2-valida":
+        import _indice_era2 as _E2
+        return 1 if _E2.valida() else 0
+    if cmd == "prossima":
+        # ### \u26d4 **STAMPA SOLO LA PROSSIMA**, come il mandato chiede: *<<un comando:
+        # ### `python csv/indice.py prossima` stampa SOLO la prossima domanda>>*.
+        _v, _r = carica()
+        _p = prossima(_v)
+        _pr = pronte(_v)
+        _ap = _domande(_v)
+        if _p is None:
+            print("  ### NESSUNA domanda `CRITICA` e- PRONTA.")
+            print("  ### aperte %d, di cui pronte %d -- e NON si scende di priorita- in "
+                  "silenzio" % (len(_ap), len(_pr)))
+            return 1
+        print("  LA PROSSIMA:  %s" % _p["id"])
+        print("    %s" % _p["titolo"])
+        print("    priorita- %s   sblocca %s"
+              % (_p["priorita"], ", ".join(_p.get("sblocca") or []) or "(niente)"))
+        print("  ### aperte %d, di cui pronte %d" % (len(_ap), len(_pr)))
+        return 0
+    if cmd == "storico-commit":
+        return storico_commit()
+    if cmd == "segnali":
+        segnali(voci, reg)
+        return 0
+    if cmd == "da-decidere":
+        da_decidere(voci, reg)
+        return 0
+    if cmd == "mostra":
+        mostra(voci, uno)
+        return 0
+    if cmd == "aggiorna":
+        aggiorna(voci, reg, pos[0], a.get("campo", []), a.get("meta", []),
+                 uno.get("motivo", ""), uno.get("commit", ""))
+        return 0
+    if cmd == "meta-aggiungi":
+        meta_aggiungi(reg, pos[0], uno.get("tipo", ""), uno.get("valori", ""),
+                      uno.get("regex", ""), uno.get("descrizione", ""))
+        return 0
+    if cmd == "meta-depreca":
+        meta_depreca(voci, reg, pos[0], uno.get("sostituito_da", ""), uno.get("motivo", ""))
+        return 0
+    if cmd == "meta-rinomina":
+        meta_rinomina(voci, reg, pos[0], pos[1], uno.get("motivo", ""))
+        return 0
+    print("comando `%s` non riconosciuto." % cmd)
+    return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]))

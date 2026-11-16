@@ -1,0 +1,537 @@
+# -*- coding: utf-8 -*-
+"""**I PRESIDI CHE IMPEDISCONO** — `H-P3`, `H-P5`, `H-P8`, `H-P9` come hook `pre-commit`.
+
+*(Anticipati dal mandato sui presidi automatici, su ordine di Luca del 2026-09-25, perche' i tre
+difetti che coprono sono **accaduti oggi**: `CLI-1`, `CONFIG-1`, `ANCORE-1`.)*
+
+> ### `A9` — UN PRESIDIO CHE NON IMPEDISCE NON E' UN PRESIDIO.
+> Le tre regole esistevano gia' **come prosa**, e tutte e tre sono state violate **dopo essere
+> state scritte**. Qui **rifiutano il commit**.
+
+| presidio | cosa impedisce | il difetto REALE da cui nasce |
+|---|---|---|
+| **`H-P3`** | un **sigillo** che configura il modulo **a mano** invece di passare dal CLI | `CLI-1`: `7/7` e `8/8` **con i flag MORTI da riga di comando** |
+| **`H-P5`** | un referto che **non dichiara la configurazione INTERA** | `CONFIG-1`: sei misure con **28 leggi su 31 spente**, e ogni referto dichiarava i **4 flag accesi da me** |
+| **`H-P8`** | un confronto che prende **il codice di prima da `HEAD`** | `ANCORE-1`: **25 sigilli**, e `A1` confrontava **il ramo spento con se stesso** |
+| **`H-P9`** | uno strumento che fa avanzare una rete con **`net.step()`** invece di **`passo_pieno`** | `PASSO-1`: **25 strumenti**, e il 25esimo e' il sigillo di `D32`, dove `mitosi()` girava **0 volte in 14 giri** e la byte-identita' certificava **codice mai eseguito**. **E la correzione aveva ricopiato le cinque chiamate a mano** |
+
+**LA VIA D'USCITA ESISTE E OBBLIGA A DICHIARARE** *(la forma di `[SENZA-RELAZIONE]`)*:
+`ESENTE-H-P3: <motivo>` in un commento del file *(col cancelletto davanti; qui non si scrive
+per intero, perche' **questo scanner scandisce anche se stesso** -- ed e' giusto che lo
+faccia: escludere un file dal proprio controllo e' il buco che `A9` descrive)*.
+**E l'esenzione va ELENCATA** in `doc/ESENZIONI_presidi.md`,
+generato da `--elenca`: **un'esenzione che non compare nell'elenco fa fallire il commit**, cosi'
+non se ne accumulano di invisibili.
+
+**COLLAUDO** *(`P1-sexies`)*: `--collaudo` prova **OTTO** casi sintetici a risposta nota, **quattro
+che DEVONO bloccare e quattro che NON devono**. **Il caso che deve fallire e' il piu' importante:** un
+presidio che non blocca mai e' una nota.
+
+ASCII puro.
+"""
+import ast
+import io
+import os
+import re
+import subprocess
+import sys
+
+try:
+    sys.stdout.reconfigure(encoding="utf-8")
+    sys.stderr.reconfigure(encoding="utf-8")
+except Exception:
+    pass
+
+NL = chr(10)
+_QUI = os.path.dirname(os.path.abspath(__file__))
+RADICE = os.path.abspath(os.path.join(_QUI, ".."))
+ELENCO = os.path.join(RADICE, "doc", "ESENZIONI_presidi.md")
+ALIAS = {"S", "S2", "_S", "_S5", "sim", "SIM"}
+NOMI_PRIMA = ("vecchi", "prima", "_old", "old_", "pre_", "_pre", "precedent", "senza_cura")
+ESENTE = re.compile(r"#\s*ESENTE-(H-P\d)\s*:\s*(.+)")
+
+
+def _ast_sicuro(t):
+    try:
+        return ast.parse(t)
+    except SyntaxError:
+        return None
+
+
+def _assegna_flag(arb):
+    """Le assegnazioni `S.FLAG = ...` (MAIUSCOLE su un alias di modulo), anche nei FIGLI."""
+    fuori = []
+
+    def scan(a):
+        for nd in ast.walk(a):
+            if isinstance(nd, ast.Assign):
+                for tg in nd.targets:
+                    if (isinstance(tg, ast.Attribute) and isinstance(tg.value, ast.Name)
+                            and tg.value.id in ALIAS and tg.attr.isupper()):
+                        fuori.append(tg.attr)
+    scan(arb)
+    for nd in ast.walk(arb):
+        if (isinstance(nd, ast.Constant) and isinstance(nd.value, str)
+                and len(nd.value) > 120 and "import" in nd.value):
+            sub = _ast_sicuro(nd.value)
+            if sub is not None:
+                scan(sub)
+    return sorted(set(fuori))
+
+
+def _usa(t, nome):
+    return nome in t
+
+
+def _scrive_referto(t, arb):
+    """Il file SCRIVE un referto? (una `io.open(...).write` su un `DEST`/`REFERTO`)"""
+    for nd in ast.walk(arb):
+        if isinstance(nd, ast.Name) and nd.id in ("DEST", "REFERTO", "DEST_TXT"):
+            if "io.open(" in t and ".write(" in t:
+                return True
+    return False
+
+
+#  LE CINQUE CHIAMATE DEL PASSO, lette da `csv/_passo.py` e NON ricopiate qui: se un giorno
+#  l'ordine cambiasse, cambierebbe in UN posto. Se `_passo` non si importa si ripiega su una
+#  lista MINIMA e **lo si dichiara nel motivo**, invece di tacere (`A9`).
+def _le_cinque():
+    try:
+        import _passo
+        return [n for _tipo, n in _passo.ordine()], True
+    except Exception:
+        return ['scuoti_vuoto', 'step', 'mitosi', 'rilassa_disegno',
+                'memoria_hebbiana_moto'], False
+
+
+def _avanza_con_step(t, arb):
+    """**`H-P9`**: il file fa avanzare una rete con `.step()` **senza** `passo_pieno`?
+
+    Restituisce `(riga, motivo)` oppure `(0, None)`.
+
+    ### Perche' esiste, ed e' un difetto MISURATO venticinque volte
+    **`net.step()` NON E' UN PASSO:** il passo sono **cinque chiamate**, e `mitosi()` e' una
+    delle altre quattro. Uno strumento che avanza con `step()` da solo **misura un sistema in
+    cui i nodi non nascono** -- e non se ne accorge, perche' non fallisce: gira.
+    **MISURATO il 2026-09-27:** nel sigillo di `D32`, `mitosi()` chiamata **0 volte in 14 giri**,
+    e la byte-identita' certificava **codice mai eseguito**.
+    **E la CORREZIONE ha ricopiato le cinque chiamate a mano**, cioe' ha aggiunto il
+    ventiseiesimo posto in cui quell'ordine vive cablato: per questo il presidio chiede
+    **`passo_pieno`**, che l'ordine lo **legge dal codice**.
+    """
+    cinque, da_passo = _le_cinque()
+    # [T1, 2026-09-28] `esegui_passo` E' L'ESECUTORE UNICO DELLO SCHEDULATORE, e da oggi
+    #   e' il modo CANONICO di avanzare: chi lo usa NON ricopia l'ordine, lo legge da
+    #   `PASSO_COMPOSIZIONE`. `passo_pieno` resta accettato perche' e' il suo involucro
+    #   per le sonde, e `frame_pieno` perche' aggiunge `passo_test` una volta per frame.
+    if (_usa(t, 'esegui_passo') or _usa(t, 'passo_pieno')
+            or _usa(t, 'frame_pieno')):
+        return 0, None
+    riga = 0
+    for nd in ast.walk(arb):
+        if (isinstance(nd, ast.Call) and isinstance(nd.func, ast.Attribute)
+                and nd.func.attr == 'step' and not nd.args):
+            riga = nd.lineno
+            break
+    if not riga:
+        return 0, None
+    # chi chiama TUTTE le altre quattro a mano avanza in modo completo: non e' il difetto
+    altre = [c for c in cinque if c != 'step']
+    if altre and all(_usa(t, c) for c in altre):
+        return 0, None
+    mancanti = [c for c in altre if not _usa(t, c)]
+    _rip = '' if da_passo else " (ordine di RIPIEGO: `csv/_passo.py` non si importa)"
+    return riga, ("fa avanzare una rete con `.step()` (:%d) senza `passo_pieno`: "
+                  "`net.step()` NON E' UN PASSO, e cosi' %s non gira%s"
+                  % (riga, ', '.join('`%s`' % m for m in mancanti[:4]), _rip))
+
+
+def _ancora_head(t, arb):
+    """Prende «il codice di prima» da `HEAD`? (estrazione git + un nome che dice «vecchio»)"""
+    righe = t.split(NL)
+    for nd in ast.walk(arb):
+        if not (isinstance(nd, ast.Constant) and isinstance(nd.value, str)):
+            continue
+        if not any(x in nd.value for x in ("HEAD:", "rev-parse HEAD", "cat-file")):
+            continue
+        # ⚠ LA FINESTRA GUARDA ANCHE INDIETRO, e non e' un dettaglio: il collaudo del caso
+        #   «DEVE bloccare» **NON bloccava** perche' guardavo solo in AVANTI, e `VECCHIO = ...`
+        #   sta tipicamente **PRIMA** dell'estrazione. **Il caso che deve fallire ha trovato un
+        #   buco nel rilevatore** -- ed e' la ragione per cui `P1-sexies` lo pretende.
+        i = max(0, (nd.lineno or 1) - 1)
+        intorno = NL.join(righe[max(0, i - 3):i + 4]).lower()
+        if any(x in intorno for x in NOMI_PRIMA):
+            return nd.lineno
+    return 0
+
+
+def esamina(rel, t):
+    """I guasti di UN file: lista di `(presidio, motivo)`. Le esenzioni sono a parte."""
+    arb = _ast_sicuro(t)
+    if arb is None:
+        return [], {}
+    esenzioni = dict((m.group(1).upper(), m.group(2).strip())
+                     for m in ESENTE.finditer(t))
+    g = []
+    base = os.path.basename(rel)
+    sotto_csv = rel.replace(chr(92), "/").startswith("csv/")
+    # ---------------------------------------------------------------- P3
+    if sotto_csv and (base.startswith("_sigillo") or base.startswith("_sig_")):
+        am = _assegna_flag(arb)
+        if am and not _usa(t, "_cli_flag"):
+            g.append(("H-P3", "sigillo che configura il modulo A MANO (%s) senza passare dal CLI: "
+                            "prova LA LEGGE, non IL FLAG" % ", ".join(am[:6])))
+    # ---------------------------------------------------------------- P5
+    if sotto_csv and _scrive_referto(t, arb):
+        if not (_usa(t, "dichiara_configurazione") or _usa(t, "esigi_configurazione")):
+            g.append(("H-P5", "scrive un referto senza dichiarare LA CONFIGURAZIONE INTERA "
+                            "(`_cli_flag.dichiara_configurazione`)"))
+    # ---------------------------------------------------------------- P8
+    lin = _ancora_head(t, arb)
+    if lin and not _usa(t, "sim_prima_del_flag"):
+        g.append(("H-P8", "prende «il codice di prima» da `HEAD` (:%d): DIVENTA VUOTO appena la "
+                        "cura e' committata" % lin))
+    # ---------------------------------------------------------------- H-P9
+    if sotto_csv:
+        _r9, _m9 = _avanza_con_step(t, arb)
+        if _r9:
+            g.append(("H-P9", _m9))
+    return g, esenzioni
+
+
+def staged():
+    q = subprocess.run(["git", "diff", "--cached", "--name-only", "--diff-filter=ACM"],
+                       cwd=RADICE, capture_output=True, text=True)
+    return [r.strip().replace(chr(92), "/") for r in (q.stdout or "").split(NL)
+            if r.strip().endswith(".py")]
+
+
+def elenco_attuale():
+    try:
+        return io.open(ELENCO, encoding="utf-8").read()
+    except Exception:
+        return ""
+
+
+def controlla(coppie, elenco=None):
+    """`coppie` = [(rel, testo)]. Restituisce (guasti, esenti_non_elencate)."""
+    el = elenco_attuale() if elenco is None else elenco
+    guasti, non_elencate = [], []
+    for rel, t in coppie:
+        g, es = esamina(rel, t)
+        for pres, motivo in g:
+            if pres in es:
+                if ("%s|%s" % (rel, pres)) not in el:
+                    non_elencate.append((rel, pres, es[pres]))
+                continue
+            guasti.append((pres, rel, motivo))
+        for pres, mot in es.items():
+            if ("%s|%s" % (rel, pres)) not in el:
+                if (rel, pres, mot) not in non_elencate:
+                    non_elencate.append((rel, pres, mot))
+    return guasti, non_elencate
+
+
+def scrivi_elenco():
+    """Genera `doc/ESENZIONI_presidi.md` da TUTTO `csv/` (non dal solo staged)."""
+    righe = ["# LE ESENZIONI DICHIARATE AI PRESIDI — **generato**", "",
+             "*(`csv/_hook_presidi.py --elenca`. Un'esenzione che NON compare qui **fa fallire il",
+             "commit**: cosi' non se ne accumulano di invisibili.)*", "",
+             "| file\\|presidio | motivo dichiarato |", "|---|---|"]
+    n = 0
+    for base, _dd, ff in os.walk(os.path.join(RADICE, "csv")):
+        if "/_tmp" in base.replace(chr(92), "/") or "__pycache__" in base:
+            continue
+        for f in sorted(ff):
+            if not f.endswith(".py"):
+                continue
+            p = os.path.join(base, f)
+            rel = os.path.relpath(p, RADICE).replace(chr(92), "/")
+            t = io.open(p, encoding="utf-8", errors="replace").read()
+            for m in ESENTE.finditer(t):
+                righe.append("| `%s|%s` | %s |" % (rel, m.group(1).upper(), m.group(2).strip()))
+                n += 1
+    righe += ["", "```", "esenzioni dichiarate   %d" % n, "```"]
+    io.open(ELENCO, "w", encoding="utf-8", newline=NL).write(NL.join(righe) + NL)
+    return n
+
+
+def arretrato():
+    """Cosa fallirebbe su TUTTO `csv/`: **una MISURA, non un blocco.**"""
+    coppie = []
+    for base, _dd, ff in os.walk(os.path.join(RADICE, "csv")):
+        b = base.replace(chr(92), "/")
+        if "/_tmp" in b or "__pycache__" in b:
+            continue
+        for f in sorted(ff):
+            if not f.endswith(".py") or f.startswith("_old_sim_pre_") or f.endswith("._sim.py"):
+                continue
+            p = os.path.join(base, f)
+            coppie.append((os.path.relpath(p, RADICE).replace(chr(92), "/"),
+                           io.open(p, encoding="utf-8", errors="replace").read()))
+    g, _ = controlla(coppie, elenco="")
+    per = {}
+    for pres, rel, _m in g:
+        per.setdefault(pres, []).append(rel)
+    return per, len(coppie)
+
+
+# ============================================================================== IL COLLAUDO
+SORG = {
+    # --- H-P3: DEVE bloccare / NON deve
+    "blocca_H-P3": ("csv/_seal_fork/_sigillo_finto.py",
+                  "import x" + NL + "S.SEMINA_MATURA = True" + NL),
+    "passa_H-P3": ("csv/_seal_fork/_sigillo_finto2.py",
+                 "import _cli_flag" + NL + "S.SEMINA_MATURA = True" + NL),
+    # --- H-P5: DEVE bloccare / NON deve
+    "blocca_H-P5": ("csv/_test_fork/_misura_finta.py",
+                  "import io" + NL + "DEST = 'x.txt'" + NL
+                  + "io.open(DEST, 'w').write('ciao')" + NL),
+    "passa_H-P5": ("csv/_test_fork/_misura_finta2.py",
+                 "import io" + NL + "import _cli_flag" + NL + "DEST = 'x.txt'" + NL
+                 + "_cli_flag.dichiara_configurazione(S, print)" + NL
+                 + "io.open(DEST, 'w').write('ciao')" + NL),
+    # --- H-P9: DEVE bloccare / NON deve
+    "blocca_H-P9": ("csv/_test_fork/_sonda_finta.py",
+                    "import x" + NL + "for _ in range(3):" + NL + "    net.step()" + NL),
+    "passa_H-P9": ("csv/_test_fork/_sonda_finta2.py",
+                   "import _passo" + NL + "for _ in range(3):" + NL
+                   + "    _passo.passo_pieno(S, net)" + NL),
+    # --- H-P8: DEVE bloccare / NON deve
+    "blocca_H-P8": ("csv/_seal_fork/_sigillo_finto3.py",
+                  "import subprocess" + NL
+                  + "VECCHIO = 'v.py'" + NL
+                  + "g = subprocess.run(['git', 'cat-file', '-p', 'HEAD:soliton_simulator.py'])"
+                  + NL),
+    "passa_H-P8": ("csv/_seal_fork/_sigillo_finto4.py",
+                 "import _cli_flag" + NL + "VECCHIO = 'v.py'" + NL
+                 + "_cli_flag.sim_prima_del_flag('X', VECCHIO)" + NL
+                 + "# l'ancora e' il PADRE del commit, non `HEAD:soliton_simulator.py`" + NL),
+}
+
+
+def collaudo():
+    print("=" * 96)
+    print("COLLAUDO DEI PRESIDI -- %d casi a risposta NOTA, nei DUE versi (`P1-sexies`)"
+          % (len(SORG) + 2))
+    print("=" * 96)
+    ok = True
+    _n_casi = 0
+    for nome, (rel, t) in sorted(SORG.items()):
+        atteso_blocca = nome.startswith("blocca")
+        g, _ = controlla([(rel, t)], elenco="")
+        pres = nome.split("_")[-1]
+        blocca = any(p == pres for p, _r, _m in g)
+        buono = (blocca == atteso_blocca)
+        ok = ok and buono
+        _n_casi += 1
+        print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
+              % (nome, os.path.basename(rel), "BLOCCA" if atteso_blocca else "passa",
+                 "BLOCCA" if blocca else "passa", "OK" if buono else "!! SBAGLIATO"))
+    # e l'ESENZIONE: dichiarata e NON elencata -> deve fallire; elencata -> passa
+    rel, t = SORG["blocca_H-P3"]
+    # il marcatore si COMPONE, cosi' non compare per intero nel sorgente dello scanner
+    t_es = t + chr(35) + " ESENTE-H-P3: motivo di prova" + NL
+    _g, non_el = controlla([(rel, t_es)], elenco="")
+    print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
+          % ("esenz_nuda", os.path.basename(rel), "BLOCCA", "BLOCCA" if non_el else "passa",
+             "OK" if non_el else "!! SBAGLIATO"))
+    ok = ok and bool(non_el)
+    _n_casi += 1
+    _g2, non_el2 = controlla([(rel, t_es)], elenco="%s|H-P3" % rel)
+    print("  %-11s %-34s atteso %-9s ottenuto %-9s %s"
+          % ("esenz_elenc", os.path.basename(rel), "passa",
+             "BLOCCA" if non_el2 else "passa", "OK" if not non_el2 else "!! SBAGLIATO"))
+    ok = ok and not non_el2
+    _n_casi += 1
+    print()
+    # ⚠ IL TOTALE SI CONTA, NON SI SCRIVE: era la costante "8/8", e con `H-P9` i casi sono
+    #   diventati 10 mentre la riga diceva ancora 8. Un collaudo che sbaglia il proprio
+    #   conteggio non e' un dettaglio: e' il numero che chi legge prende per buono.
+    print("COLLAUDO: %s" % ("%d/%d OK" % (_n_casi, _n_casi) if ok else "FALLITO"))
+    return 0 if ok else 1
+
+
+GITHOOKS = ".githooks"
+
+
+def stato_hook():
+    """**I PRESIDI SONO ATTIVI IN QUESTO CLONE?** Stampa il verdetto e lo restituisce.
+
+    ⚠ **`A9`: uno strumento che TACE quando il presidio e' spento non e' un presidio.**
+    I hook di `.git/hooks/` **non viaggiano col repo**: un clone nuovo **non li ha**, e fino
+    al 2026-09-25 questo si leggeva **solo in una nota**. Ora gli script stanno in
+    **`.githooks/`, che E' TRACCIATO**, e basta **un comando per clone**:
+
+        git config core.hooksPath .githooks
+
+    **Questa funzione gira a ogni invocazione dello strumento**, cosi' un clone senza hook
+    **lo dice da se'** invece di far credere che i presidi stiano lavorando.
+    """
+    q = subprocess.run(["git", "config", "--get", "core.hooksPath"], cwd=RADICE,
+                       capture_output=True, text=True)
+    via = (q.stdout or "").strip()
+    attivo = (via == GITHOOKS)
+    dir_git = os.path.join(RADICE, ".git", "hooks")
+    resti = [f for f in ("pre-commit", "commit-msg")
+             if os.path.exists(os.path.join(dir_git, f))]
+    print("-" * 96)
+    if attivo:
+        print("  PRESIDI ATTIVI: `core.hooksPath` = %s (tracciato da git)." % via)
+        if resti:
+            print("  ⚠ in `.git/hooks/` restano copie IGNORATE: %s" % ", ".join(resti))
+            print("     `core.hooksPath` SOSTITUISCE quella cartella: quelle copie non")
+            print("     girano piu'. Vanno tolte, perche' due verita' sono peggio di una.")
+    else:
+        print("  ⛔ **I PRESIDI NON SONO ATTIVI IN QUESTO CLONE.**")
+        print("     `core.hooksPath` = %s" % (via or "(non impostato)"))
+        print("     Un commit che viola `H-P3`, `H-P5`, `H-P8` o `H-P9` **passa in silenzio**.")
+        if resti:
+            print("     *(in `.git/hooks/` ci sono %s: girano, ma NON viaggiano col repo)*"
+                  % ", ".join(resti))
+        print("     CHE FARE, una volta per clone:   git config core.hooksPath %s"
+              % GITHOOKS)
+    print("-" * 96)
+    return attivo
+
+
+def installa():
+    """Punta `core.hooksPath` alla cartella TRACCIATA, e toglie le copie non versionate."""
+    for f in ("pre-commit", "commit-msg"):
+        p = os.path.join(RADICE, GITHOOKS, f)
+        if not os.path.exists(p):
+            sys.stderr.write("MANCA %s: non installo nulla." % p + NL)
+            return 1
+    q = subprocess.run(["git", "config", "core.hooksPath", GITHOOKS], cwd=RADICE,
+                       capture_output=True, text=True)
+    if q.returncode:
+        sys.stderr.write((q.stderr or "")[:300] + NL)
+        return 1
+    print("`core.hooksPath` -> %s   (cartella TRACCIATA: viaggia col repo)" % GITHOOKS)
+    # le copie in `.git/hooks/` ora sono IGNORATE: si togliono, perche' un lettore che le
+    # trova crede che siano loro a girare.
+    for f in ("pre-commit", "commit-msg"):
+        p = os.path.join(RADICE, ".git", "hooks", f)
+        if os.path.exists(p):
+            os.remove(p)
+            print("  tolta la copia IGNORATA .git/hooks/%s" % f)
+    stato_hook()
+    return 0
+
+def fuori_lista(percorsi=None):
+    """### I `.py` ### **sotto la cartella dell-era `2` che NON sono nella LISTA** di
+    `csv/_file_fisica.py`.
+
+    ### ⭐ **IL PERCHE-:** un file di fisica che ### **nessuno sorveglia** e- peggio di un
+    file che non esiste, perche- ### **SEMBRA sorvegliato** -- e `H-REG-R` e `H-P7`
+    guardano ### **solo cio- che e- nella LISTA.** ### ⛔ **Un `.py` nuovo la- sotto
+    senza voce nella lista e- fisica SENZA REGISTRO e SENZA commenti dei flag.**
+
+    ### ⚠ **E CON LA CARTELLA VUOTA TORNA SEMPRE `[]`, cioe- NON IMPEDISCE NIENTE:** per
+    `A9` ### **non e- un presidio, e- una tenda**, e il referto lo dichiara. ### ✔ **Il
+    giorno in cui Luca da- il nome diventa vero cambiando UNA STRINGA.**
+    """
+    sys.path.insert(0, os.path.join(RADICE, "csv"))
+    import _file_fisica as _FF
+    return _FF.intrusi(percorsi if percorsi is not None else staged())
+
+
+def pre_commit():
+    # ### `H-FISICA-FUORI-LISTA`: un `.py` NUOVO sotto la cartella dell-era `2` che non e-
+    #   nella LISTA dei file di fisica. ### **Sta per primo perche- e- il piu- economico**
+    #   (legge due costanti e i nomi staged) e perche- se scatta ### **tutto il resto non
+    #   conta**: significa che c-e- fisica che nessun presidio sorveglia.
+    _int = fuori_lista()
+    if _int:
+        sys.stderr.write(NL + "[H-FISICA-FUORI-LISTA] *** COMMIT RIFIUTATO ***" + NL + NL)
+        for _x in _int:
+            sys.stderr.write("  %s" % _x + NL)
+        sys.stderr.write(NL + "  Questi `.py` stanno SOTTO la cartella del codice"
+                         " dell-era 2 e NON sono nella LISTA di" + NL
+                         + "  `csv/_file_fisica.py`. Un file di fisica che NESSUNO"
+                         " sorveglia e- peggio di un file che" + NL
+                         + "  non esiste, perche- SEMBRA sorvegliato: `H-REG-R` e `H-P7`"
+                         " guardano SOLO la LISTA." + NL + NL
+                         + "  CHE FARE: aggiungere il file a `FILE_FISICA` -- e sapere che"
+                         " cosi- gli si mettono" + NL
+                         + "  addosso DUE presidi (la scheda nel registro, e il commento"
+                         " di ogni flag)." + NL + NL)
+        return 1
+    # `P7` sta in un modulo suo (`csv/_presidio_commenti_flag.py`) perche' NON guarda i file
+    #   staged: e' una POSTCONDIZIONE, e confronta il disco con `HEAD`.
+    import subprocess as _sp
+    _q = _sp.run([sys.executable, os.path.join(RADICE, 'csv', '_presidio_commenti_flag.py'),
+                  '--pre-commit'], cwd=RADICE, capture_output=True, text=True)
+    if _q.returncode:
+        sys.stderr.write(_q.stderr or '')
+        return 1
+    # [INDICE] il VALIDATORE dello schema sta QUI, perche' guarda un FILE e non ha bisogno del
+    #   messaggio: `doc/INDICE_ID.tsv` e' LA FONTE, e una fonte mal formata non entra nel repo.
+    _qv = _sp.run([sys.executable, os.path.join(RADICE, 'csv', '_indice_id.py')],
+                  cwd=RADICE, capture_output=True, text=True)
+    if _qv.returncode:
+        sys.stderr.write((_qv.stdout or '') + (_qv.stderr or ''))
+        sys.stderr.write(NL + "  CHE FARE: correggere la riga dell'indice."
+                         " Il validatore dice quale e perche'." + NL + NL)
+        return 1
+    # [INDICE v2, 2026-10-08] IL VALIDATORE DELLO SCHEMA 2 (`indice.py valida`) ### NON GIRA PIU'
+    #   QUI (S1, Luca 2026-11-16 08:57; la carta `doc/referti_l2/tempi_hook_carta.txt`): era un
+    #   DOPPIONE. ### Lo stesso `valida` gira nello stesso `pre-commit` DUE volte ancora:
+    #   **sullo STAGE** in `csv/_stage.py --rapido` *(i byte che il commit conterra')*, e **sul
+    #   DISCO** nel ramo end-to-end di `csv/_albero_era2.py --collaudo` *(P-ALB: «rimessa la
+    #   fonte, `valida` PASSA di nuovo»)*. ### Cio' che si perde e' solo la POSIZIONE: un indice
+    #   rotto sul disco ferma il commit piu' avanti. Il caso che lo misura: F3 della prova
+    #   (`doc/TASK_HISTORY/2026-11-16_commit_leggero_e_riunione.md`).
+    # [INDICE] il controllo degli ID citati **NON sta qui**: sta in `commit-msg`, perche' e' l'unico
+    #   stadio in cui il MESSAGGIO esiste -- e senza il messaggio la via d'uscita dichiarata
+    #   `[SENZA-INDICE: ...]` non si puo' leggere. Metterlo in `pre-commit` significava leggere
+    #   `.git/COMMIT_EDITMSG`, che a quel punto contiene **il commit PRECEDENTE**: un'eccezione
+    #   dichiarata una volta avrebbe spento il presidio per sempre. Vedi `csv/_presidio_indice.py`.
+    coppie = []
+    for rel in staged():
+        p = os.path.join(RADICE, rel)
+        if os.path.exists(p):
+            coppie.append((rel, io.open(p, encoding="utf-8", errors="replace").read()))
+    g, non_el = controlla(coppie)
+    if not g and not non_el:
+        return 0
+    sys.stderr.write(NL + "[PRESIDI] *** COMMIT RIFIUTATO ***" + NL + NL)
+    for pres, rel, motivo in g:
+        sys.stderr.write("  %s  %s" % (pres, rel) + NL + "      %s" % motivo + NL + NL)
+    for rel, pres, mot in non_el:
+        sys.stderr.write("  ESENZIONE NON ELENCATA  %s|%s: %s" % (rel, pres, mot) + NL
+                         + "      rigenera l'elenco:  python csv/_hook_presidi.py --elenca"
+                         + NL + NL)
+    sys.stderr.write("  CHE FARE: passare dal CLI (`_cli_flag`), dichiarare la configurazione" + NL
+                     + "  intera, ancorare al PADRE del commit -- oppure dichiarare" + NL
+                     + "  'ESENTE-<H-Pn>: <motivo>' (col cancelletto davanti) nel file E"
+                     + " rigenerare l'elenco." + NL + NL)
+    return 1
+
+
+if __name__ == "__main__":
+    a = sys.argv[1:]
+    # ⚠ LO STATO DEI HOOK SI STAMPA A OGNI INVOCAZIONE **tranne quando siamo NOI il hook**
+    #   (li' gira per ogni commit, e un presidio che stampa a ogni commit diventa rumore
+    #   che si impara a saltare). **Fuori da quel caso, tacere sarebbe il difetto di `A9`.**
+    if "--pre-commit" not in a:
+        stato_hook()
+    if "--collaudo" in a:
+        sys.exit(collaudo())
+    if "--installa" in a:
+        sys.exit(installa())
+    if "--elenca" in a:
+        print("esenzioni elencate: %d" % scrivi_elenco())
+        sys.exit(0)
+    if "--arretrato" in a:
+        per, quanti = arretrato()
+        print("ARRETRATO su %d file di csv/ (una MISURA, non un blocco):" % quanti)
+        for k in sorted(per):
+            print("  %-4s %d file" % (k, len(per[k])))
+            for r in per[k][:40]:
+                print("       %s" % r)
+        sys.exit(0)
+    if "--pre-commit" in a:
+        sys.exit(pre_commit())
+    print(__doc__)
+    sys.exit(0)
