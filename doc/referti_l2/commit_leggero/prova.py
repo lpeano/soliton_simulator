@@ -69,7 +69,14 @@ _NORM = [
     (re.compile(r"[A-Za-z]:[\\/][^\s'\"]*?(tmp|Temp|TEMP)[^\s'\"]*", re.I), "<TMP>"),
     (re.compile(r"/tmp/[^\s'\"]*"), "<TMP>"),
     (re.compile(r"wt_prova_commit_leggero"), "<WT>"),
+    (re.compile(r"\bline \d+\b"), "line <N>"),     # ### il terzo giro: i numeri di riga dei traceback (indice.py nuovo e' piu' lungo), non l'esito
 ]
+
+
+def per_riga_di(grezza):
+    """### L'impronta dalla riga `PER_RIGA` *(non l'ultima riga: stderr arriva dopo; il secondo giro, prova_casi_giro2.txt)*."""
+    r = [x for x in grezza.splitlines() if x.startswith("PER_RIGA ")]
+    return r[-1].split()[1] if r else None
 
 
 def norm(s):
@@ -281,14 +288,14 @@ def main(argv):
                         stampa_diversi([(x["nome"], x["codice"], y["codice"], x["uscita"], y["uscita"])])
         # ---------------------------------------------------------------- F4, F5: la memoria
         prepara(wt, c, p, "NUOVO")
-        rif = gira("c4", comandi(wt, False)[3][1], wt, [])["grezza"].strip().splitlines()[-1].split()[1]
+        rif = per_riga_di(gira("c4", comandi(wt, False)[3][1], wt, [])["grezza"])
         import json
         m = json.load(io.open(MEMORIA, encoding="utf-8"))
         k0 = sorted(m["righe"])[0]
         m["righe"][k0] += 1
         io.open(MEMORIA, "w", encoding="utf-8").write(json.dumps(m))
         x = gira("c4", comandi(wt, False)[3][1], wt, [])
-        esiti.append(("F4a un conto sbagliato SENZA rifare l'impronta: riconosciuta ROTTA, lo stesso per_riga", "ROTTA" in x["grezza"] and x["grezza"].strip().splitlines()[-1].split()[1] == rif))
+        esiti.append(("F4a un conto sbagliato SENZA rifare l'impronta: riconosciuta ROTTA, lo stesso per_riga", "ROTTA" in x["grezza"] and per_riga_di(x["grezza"]) == rif))
         print("    F4a: %s" % x["grezza"].strip().replace("\n", " | ")[:250])
         sys.path.insert(0, _QUI)
         import importlib.machinery
@@ -304,11 +311,11 @@ def main(argv):
         m["impronta"] = mod._impronta_memoria(m["righe"])
         io.open(MEMORIA, "w", encoding="utf-8").write(json.dumps(m))
         x = gira("c4", comandi(wt, False)[3][1], wt, [])
-        esiti.append(("F4b il conto del blob PIU' RECENTE falsato CON l'impronta rifatta: riconosciuto da git, lo stesso per_riga", "NON torna" in x["grezza"] and x["grezza"].strip().splitlines()[-1].split()[1] == rif))
+        esiti.append(("F4b il conto del blob PIU' RECENTE falsato CON l'impronta rifatta: riconosciuto da git, lo stesso per_riga", "NON torna" in x["grezza"] and per_riga_di(x["grezza"]) == rif))
         print("    F4b: %s" % x["grezza"].strip().replace("\n", " | ")[:250])
         os.remove(MEMORIA)
         x = gira("c4", comandi(wt, False)[3][1], wt, [])
-        esiti.append(("F5 la memoria assente: ricostruita, lo stesso per_riga", os.path.exists(MEMORIA) and x["grezza"].strip().splitlines()[-1].split()[1] == rif))
+        esiti.append(("F5 la memoria assente: ricostruita, lo stesso per_riga", os.path.exists(MEMORIA) and per_riga_di(x["grezza"]) == rif))
         print("    F5: %s" % x["grezza"].strip()[:200])
         print("    IL LIMITE, dichiarato: un conto falsato su un blob VECCHIO con l'impronta rifatta NON e' riconosciuto (si rilegge solo il piu' recente)")
         print("-" * 130)
