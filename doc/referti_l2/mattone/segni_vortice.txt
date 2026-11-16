@@ -1,0 +1,38 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] triangolo_rotazione_B.py  sha1-BYTE 32371cd3  committato e pulito
+[TIMBRO] segni_vortice.py  sha1-BYTE 9466775d  committato e pulito
+==================================================================================================================================
+LA CONVENZIONE DEI SEGNI SU UN CASO NOTO (Luca 2026-11-16 10:39; solo lettura); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+### 1. GLI ASSI: A1 = [1.0, 0.0], A2 = [-0.5, 0.8660254037844386]; A1 x A2 = +0.8660 (la base e' DESTRA: (m1, m2) -> (x, y) conserva il verso)
+    il nodo piu' vicino a +x = (5.0, 0.0) dal centro: (m1, m2) = (86, 81), (x, y) = (+5.000, +0.000), theta = +0.00 gradi
+    il nodo piu' vicino a +y = (0.0, 5.0) dal centro: (m1, m2) = (84, 87), (x, y) = (+0.000, +5.196), theta = +90.00 gradi
+    Campo.B sull'A ROTANTE antiorario (A_k = x dy - y dx): B medio nel disco 8 +8.6603e-01, il minimo +8.6603e-01, il massimo +8.6603e-01
+### 2. IL VORTICE: u = lo spinore del nodo 17275 di L162_MGU_03000 (la norma A0 = 3.453496e+01)
+  s = +1: il giro (le 12 componenti) +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00 +1.00; la somma +1.000
+          L dalla corrente di ENERGIA (energia.corrente) -9.413002e+04; L dalla corrente di FASE Im(sum conj(psi_ii) psi_jj) +1.213291e+06
+          B dalla dinamica (MU): dopo 1 tick nel disco 8 -2.7480e-08 (il flusso entro 30 -1.2777e-11); dopo 3 tick -1.9084e-07 (-9.5860e-11)
+  s = -1: il giro (le 12 componenti) -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00 -1.00; la somma -1.000
+          L dalla corrente di ENERGIA (energia.corrente) +9.413002e+04; L dalla corrente di FASE Im(sum conj(psi_ii) psi_jj) -1.213291e+06
+          B dalla dinamica (MU): dopo 1 tick nel disco 8 +2.7499e-08 (il flusso entro 30 +1.2777e-11); dopo 3 tick +1.9111e-07 (+9.6335e-11)
+### 3. LA FORMA m=3 RUOTATA (la m=3 di triangolo_rotazione_B.forma, l'angolo = -(arg S - arg S0)/3)
+    phi0  +0.0: l'angolo misurato -0.0000 gradi; l'ampiezza 0.2496; il centro (81.000, 81.000)
+    phi0 +10.0: l'angolo misurato +10.0534 gradi; l'ampiezza 0.2496; il centro (80.940, 81.060)
+    phi0 -10.0: l'angolo misurato -10.0534 gradi; l'ampiezza 0.2496; il centro (81.060, 80.940)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: 1. theta: +x circa 0 gradi, +y circa 90 gradi (entro 15)                                             PASSA
+  DEVE: 1. Campo.B di una circolazione ANTIORARIA e' POSITIVO                                                PASSA
+  DEVE: 2a. s = +1: il giro della somma = +1 (entro 0.1)                                                     PASSA
+  DEVE: 2b. s = +1: L dalla corrente di FASE ha il segno +1                                                  PASSA
+  DEVE: 2a. s = -1: il giro della somma = -1 (entro 0.1)                                                     PASSA
+  DEVE: 2b. s = -1: L dalla corrente di FASE ha il segno -1                                                  PASSA
+  DEVE: 3. la forma ruotata di +10 gradi -> +10 (entro 0.1)                                                  PASSA
+  DEVE: 3. la forma ruotata di -10 gradi -> -10 (entro 0.1)                                                  PASSA
+==================================================================================================================================
+### IL VERDETTO (la carta): S1: le convenzioni sono COERENTI (il giro, la corrente di fase, Campo.B, la forma)
+    E, rispetto alla corrente di FASE del vortice s = +1 (L_fase +1.213e+06):
+      L dalla corrente di ENERGIA -9.413e+04: ### il verso OPPOSTO
+      B dalla dinamica (MU) dopo 3 tick -1.908e-07: ### il verso OPPOSTO
+==================================================================================================================================
