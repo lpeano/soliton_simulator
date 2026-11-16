@@ -101,7 +101,13 @@
 
 - **Il merge:** **`1fcd8682`** *(`git merge --no-ff origin/strumento-mattone`: `195` file tutti nuovi, nessuno sotto `primo_ordine/`; H-NUCLEO-CONGELATO passato senza eccezioni; la suite `67/67` dopo il merge)*.
 - ### **LA NAVE DEL MATTONE E' CHIUSA:** **il tag `nave-mattone-chiusa-2026-11-16` sull'ultimo commit di `strumento-mattone`** *(`5f4fa81c`)*. **Le corse NUOVE partono dal PRINCIPALE con l'interprete di E:** *(R-AMBIENTE)*; **il worktree `C:\Users\lpeano\soliton_simulator_mattone` resta sul disco ma NON si usa** *(non si cancella senza Luca)*; **`doc/REGISTRO_CORSE_mattone.md` resta com'e', come STORIA; le corse nuove nel registro del principale** *(`doc/REGISTRO_CORSE.md`)*.
-- **Il ramo `motore-numba` NON si riunisce:** **resta separato, nel clone su E:** *(`E:\soliton_simulator_numba`)*, **finche' Luca non decide la sua strada.**
+- **Il ramo `motore-numba` e' RIUNITO il `2026-11-16`** *(Luca `13:58` e `16:10`: il merge `ca55169e`, il tag `motore-numba-riunito-2026-11-16` su `abf59c6f`)*; **il clone `E:\soliton_simulator_numba` resta sul disco e NON si usa** *(non si cancella senza Luca)*.
+
+## IL MOTORE NUMBA *(Luca `2026-11-16` `16:10`, al posto di R-MOTORE)*
+
+- ### **Il motore numba e' nel nucleo, AL BIT, SPENTO per difetto anche nelle corse; si accende solo per una corsa dove una misura sua mostra un guadagno.** *(V5 a macchina ferma: `1.07x` a `2` fili e `0.99`-`1.04x` a `6`, e a `2` fili numba usa circa il doppio della CPU: con piu' corse insieme la produzione peggiorerebbe.)*
+- **Il prossimo passo possibile:** **`termini_di_h` ed `elicita`** *(circa il `40%` del tick)* **con la stessa tecnica della FMA esplicita, con un mandato di Luca.**
+- **Il limite, scritto:** **il bit col motore di oggi vale su CPU con FMA** *(questa: FMA3, AVX2)*.
 
 ## LA REGOLA DEI CONTI *(R-CONTI; Luca `2026-11-13` `23:47`, per sempre; i dettagli del guardiano)*
 

@@ -26083,3 +26083,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **V5, a macchina FERMA** *(un solo processo python)*: **il tick `2.138 s` -> `1.997 s` a `2` fili (`1.07x`), `2.06`-`2.16 s` a `6` (`0.99`-`1.04x`).** **Le funzioni sostituite `2.7`-`9.9x`, ma le altre di numpy RALLENTANO con numba acceso.** **Il `1.33x` della notte era a macchina carica** *(il tick di oggi `2.80 s`)*: **la mia stima va corretta.**
 - **La prova a secco:** **nessun conflitto; `19` file** *(`motore_numba.py`, la voce in `_mappa.yaml`, una riga in `_file_fisica.py`, `NUCLEO_CONGELATO.md`, `4` prove, i referti)*; **niente contro S1/S2; H-NUCLEO-CONGELATO rifiutera' il merge finche' il nucleo e' CONGELATO: la procedura e' lo stato SBLOCCATO con la riga di Luca, poi si ricongela.**
 - **FERMO per Luca:** **la fase 2 solo dopo «VIA ALLA FASE 2».**
+
+### 2026-11-16 16:55 -- LA RIUNIONE DI NUMBA FATTA (LA FASE 2 RIDOTTA, LUCA `16:10`): IL MERGE `ca55169e`, LE TRE SUITE `67/67`, IL TAG, IL NUCLEO RICONGELATO, LA ROTTA SENZA R-MOTORE
+
+- **Punto 4:** **il merge `ca55169e`** *(`29` file, nessun conflitto; nel nucleo `motore_numba.py` nuovo e la voce in `_mappa.yaml`)*. **Punto 5: la procedura di H-NUCLEO-CONGELATO** *(lo stato SBLOCCATO con la riga di Luca delle `16:10`, provata sullo stage prima: passa)*; **la tabella del principale: `_mappa.yaml` `26f2abaf`, `motore_numba.py` `61a3e756`, gli altri `11` identici** *(misurati dal disco)*.
+- **Punto 6: le tre suite `67/67`** *(E: spento `16:14`-`16:26`; C: spento `16:26`-`16:36`; E: acceso coi due passi `16:36`-`16:49`, `10` processi accesi, `1112982` chiamate, `0` ripieghi; `doc/referti_l2/motore_numba_principale_conti.txt`)*. **Punto 8: il tag `motore-numba-riunito-2026-11-16` su `abf59c6f`.**
+- **Il nucleo RICONGELATO; nella ROTTA la sezione «IL MOTORE NUMBA» col testo di Luca al posto di R-MOTORE.**
+- **Ora il mandato delle `16:17`** *(R-SCATOLA al `5%`)*: **la carta.**

@@ -1,7 +1,8 @@
 # IL NUCLEO DEL PRINCIPALE E' CONGELATO
 
-stato: SBLOCCATO
-decisione_di_luca: 2026-11-16 16:10, «VIA ALLA FASE 2, RIDOTTA» (i punti 4, 5, 6 e 8 del mandato delle 13:58): la riunione di motore-numba nel principale; il nucleo si RICONGELA nel commit dopo le suite
+stato: CONGELATO
+
+> **Ricongelato il 2026-11-16 dopo la riunione di numba** *(sbloccato SOLO per il merge `ca55169e`, con la riga di Luca delle `16:10`; le tre suite `67/67` dopo il merge)*.
 
 > **La decisione di Luca** *(2026-11-08, `21:47`-`21:49`, dopo il revert `de46816d`)*: **sul ramo `primo-ordine` NESSUN commit
 > modifica file in `primo_ordine/`** *(il nucleo, le leggi, i collaudi del nucleo, `collauda.py` compreso)* **finche'
@@ -65,7 +66,7 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 
 ## LA RIUNIONE DI NUMBA SUL PRINCIPALE *(decisione di Luca 2026-11-16 15:50 (15/11), 18:08, 19:12, 19:57, 13:58 e il via delle 16:10)*
 
-- **Il merge di `motore-numba` nel principale porta nel nucleo UN file nuovo** *(`primo_ordine/motore_numba.py`, lo switch SPENTO per difetto)* **e UNA voce nella mappa** *(`primo_ordine/_mappa.yaml`)*; **nessun file di fisica del nucleo cambia.** **Lo stato e' SBLOCCATO SOLO per il commit del merge** *(la riga `decisione_di_luca` sopra)* **e si RICONGELA nel commit dopo le suite.**
+- **Il merge di `motore-numba` nel principale porta nel nucleo UN file nuovo** *(`primo_ordine/motore_numba.py`, lo switch SPENTO per difetto)* **e UNA voce nella mappa** *(`primo_ordine/_mappa.yaml`)*; **nessun file di fisica del nucleo cambia.** **Lo stato e' stato SBLOCCATO SOLO per il commit del merge** *(`ca55169e`, la riga `decisione_di_luca` delle `16:10`)* **ed e' RICONGELATO nel commit dopo le tre suite** *(`67/67` su E: spento, su C: spento, su E: acceso)*.
 
 | il file | il nucleo del principale, prima | il nucleo del principale, dopo la riunione di numba |
 |---|---|---|
