@@ -26061,3 +26061,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **LA ROTAZIONE E B** *(Luca `09:25`; il ramo, `c211cf19`)*: **la scala contro il guardiano entro `1` grado; B resta e cresce dopo l'arrotolamento** *(negativo, `1.2`-`1.8` volte quello a `2000`)* **e non segue omega; la forma torna indietro fra `3500` e `5000`; la pattinatrice non spiega** *(`1.52`)*.
 - ### **I SEGNI** *(Luca `10:39`; `eebb2f39`)*: **S1, le convenzioni sono coerenti** *(`8/8`)*; **e un vortice di fase `+1` costruito a mano ha L dall'energia e B NEGATIVI: i segni del triangolo sono quelli del suo giro `+1`, non una materia che gira in senso orario.** **Il controllo del verso della `24.36` aveva una premessa sbagliata, mia.**
 - ### **LO SPECCHIO, C1-C2** *(Luca `10:43`; `6faa1a3d`)*: **F3 riflesso = `-F3` al bit** *(F3 e' un flusso uniforme con una fase per direzione, non un motivo ogni `3` nodi)*; **il tick COMMUTA con lo specchio con `T = sigma.l`, `A` col solo segno del verso, `phi -> -phi`: `3.5e-14` dopo `10` tick entro `40` nodi; l'unica rottura e' il bordo** *(`c0` a `0.85` nodi dalla sua immagine)*. **Un mio errore: l'ultima riga dello script applica la soglia al toro intero; vale la carta** *(entro `40`)*. ### **Con C2 esatto la corsa M2 misura l'arrotondamento, non la chiralita': detto a Luca prima della corsa.**
+
+### 2026-11-16 13:35 -- (A) FATTO: S1 + S2 ADOTTATI (`06e5f3e8`), LA PROVA A3 PASSATA (I `41` COMMIT, I CASI `32/32` AL TERZO GIRO), I HOOK DA CIRCA `330 s` A `114 s`; LO SPECCHIO CHIUSO SENZA CORSA (LUCA `12:57`)
+
+- **La prova A3:** **i `41` commit del `15` con gli stessi codici d'uscita** *(le sole differenze: la riga di tempo del collaudo del grafo)*; **i casi F: il secondo giro `29/32` per DUE errori del mio controllore** *(i numeri di riga del traceback; l'ultima riga invece della riga `PER_RIGA`)*, **il terzo `32/32`** *(`ddbdcae5`)*.
+- **L'adozione:** **rifiutata una volta da H-P8 per una parola di un MIO commento** *(«Prima» vicino a `cat-file`)*; **riscritti tre commenti, suite `67/67`, `06e5f3e8`.**
+- ### **A4: i hook dei commit del principale da `326.4`, `338.6`, `318.7 s` a `114 s`.**
+- **Da dire a Luca:** **con un indice rotto SOLO sul disco il nuovo pre-commit rifiuta con un TRACEBACK di `_presidi_era2.py` invece che col messaggio di `valida`** *(la guardia persa, prevista)*; **e `valida` cade con un traceback su un `voci.jsonl` rotto, vecchio e nuovo.**
+- **Lo specchio** *(Luca `12:57`)*: **P-SPECCHIO «confermata per costruzione (C2), senza corsa»** *(`5f4fa81c` sul ramo)*.
+- **Ora (B), la riunione.**
