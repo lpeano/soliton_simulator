@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 r"""**R-SCATOLA AL 5%, LA PROVA SUL MATTONE DA SOLO** *(Luca `2026-11-16` `16:17`; la carta `doc/TASK_HISTORY/2026-11-16_scatola5.md`)*.
 
-    E:\python\py3132\python.exe csv/solitone/prova_scatola5.py corsa --da 0 --fino 3000 --registro prova-scatola5 > <scratchpad>/prova_scatola5_00000.txt
-    E:\python\py3132\python.exe csv/solitone/prova_scatola5.py lettura > doc/referti_l2/prova_scatola5_lettura.txt
+    E:\python\py3132\python.exe csv/solitone/prova_scatola5.py corsa --L 186 --da 0 --fino 3000 --registro prova-scatola5-L186 > <scratchpad>/prova_scatola5_L186_00000.txt
+    E:\python\py3132\python.exe csv/solitone/prova_scatola5.py lettura --L 186 > doc/referti_l2/prova_scatola5_L186_lettura.txt
 
-**La scena:** `convergenza.scena_L(150, R_A)` *(il toro MINIMO della regola al 5% per `R_ogg` 25: il raggio inscritto `meta_periodo` = 75)*; il vuoto fresco; il francobollo del mattone
+### **LA CORREZIONE DI LUCA (`16:58`):** **la regola e' quella di `porto.regola`, TRE clausole** *(la distanza dal centro al LATO del rombo `>= 3 R_ogg`, `R_A >= 2 R_ogg`, la fascia `>= 30`)*, **con `R_ogg` al 5%; la scena su `L 186`** *(la prima versione usava il raggio inscritto `L/2` e due clausole: `L 150`, sbagliato)*.
+
+**La scena:** `convergenza.scena_L(L, R_A)` *(`L` dalla riga di comando; il toro MINIMO della regola al 5% per `R_ogg` 25: la distanza al lato `L sqrt(3)/4 >= 80` -> `L 186`)*; il vuoto fresco; il francobollo del mattone
 `L162_MGU_03000` *(`convergenza_243.francobollo_L162("MGU", 0)`, come il porto)* nel nodo buono vicino al centro del bordo; **`R_ogg` al 5%** *(la regola di `porto_alone.raggi`)*; il bordo `R_A = 2 R_ogg`.
 **La corsa:** G+U col lapse pieno *(`mattone_cottura.Corsa`, come il porto)*; la serie *(il picco a ogni tick; il raggio della materia, la massa, il raggio del 5% del vuoto ogni 50)*; le mappe ogni 100.
 **Le funzioni di `porto.py` che dipendono da `L`** *(il nodo buono, il bordo, il salvataggio, la ripartenza)* **sono COPIATE qui con `L` dalla scena**: `porto.py` non e' toccato.
@@ -36,14 +38,11 @@ import mattone_rhoc as MR  # noqa: E402
 import porto as PO  # noqa: E402
 import porto_alone as PA  # noqa: E402
 
-L5 = 150                                        # ### la carta: il raggio inscritto 75 = 3 x 25
 SOGLIA5 = 0.05                                  # ### Luca 16:17: R_ogg al 5%
 R_OGG_MAX = 25.0                                # ### Luca 16:17: R_ogg 25; sopra, la corsa NON parte
 FATTORE_R_A = 2.0                               # ### il bordo da 2 R_ogg
 FATTORE_GAUSS = 10.0                            # ### come il porto (porto.FATTORE_GAUSS, "MIO, dichiarato")
-NOME = "scatola5"
 OGNI, OGNI_MAPPA, OGNI_STATO, PRIMA = 50, 100, 1000, 50
-F_GAUSS = os.path.join(MT.DIR_REF, "..", "prova_scatola5_gauss.json")
 DIR_REF = os.path.normpath(os.path.join(MT.DIR_REF, ".."))       # ### doc/referti_l2 (il principale)
 OK = [0, 0]
 FALLITE = []
@@ -109,8 +108,13 @@ def r5(Z, t):
     return rr[SOGLIA5], rr, b
 
 
+def nomi(L):
+    """### I nomi con `L`: lo stato su E:, la serie, le mappe, la soglia di Gauss."""
+    return "scatola5_L%d" % L, os.path.join(DIR_REF, "prova_scatola5_L%d" % L)
+
+
 def regola(Z, R, quando):
-    """### La regola al 5% del mandato *(il raggio inscritto >= 3 R_ogg, R_A >= 2 R_ogg)*, e accanto le tre clausole di ieri *(porto.regola: il lato del rombo, R_A, la fascia 30)*."""
+    """### LA REGOLA DI `porto.regola` CON `R_ogg` AL 5% *(la correzione di Luca 16:58)*: la distanza dal centro al LATO del rombo `>= 3 R_ogg`, `R_A >= 2 R_ogg`, la fascia `>= 30`; accanto, il raggio inscritto `meta_periodo`."""
     from solitone import toro as TO
     L = Z["L"]
     mp = TO.meta_periodo(L)
@@ -119,14 +123,15 @@ def regola(Z, R, quando):
     area = abs(float(a[0] * b[1] - a[1] * b[0]))
     lato = min(area / float(np.hypot(*a)), area / float(np.hypot(*b))) / 2.0
     R_A = Z["bordo"]["R_A"]
-    ok = mp >= 3.0 * R and R_A >= 2.0 * R
-    print("### R-SCATOLA AL 5%% (%s): R_ogg %.1f; il raggio inscritto %.2f = %.2f R_ogg (>= 3: %s); R_A %.1f = %.2f R_ogg (>= 2: %s) -> %s; ACCANTO, le tre clausole di ieri: il lato del rombo %.2f = %.2f R_ogg (>= 3: %s), la fascia %.1f (>= 30: %s)"
-          % (quando, R, mp, mp / R, mp >= 3.0 * R, R_A, R_A / R, R_A >= 2.0 * R, "RISPETTATA" if ok else "### NON RISPETTATA", lato, lato / R, lato >= 3.0 * R, lato - R_A, lato - R_A >= 30.0))
+    c = (lato >= 3.0 * R, R_A >= 2.0 * R, lato - R_A >= 30.0)
+    ok = all(c)
+    print("### R-SCATOLA AL 5%% (%s): R_ogg %.1f; la distanza al lato del rombo %.2f = %.2f R_ogg (>= 3: %s); R_A %.1f = %.2f R_ogg (>= 2: %s); la fascia %.2f (>= 30: %s) -> %s; accanto, il raggio inscritto %.2f"
+          % (quando, R, lato, lato / R, c[0], R_A, R_A / R, c[1], lato - R_A, c[2], "RISPETTATA" if ok else "### NON RISPETTATA", mp))
     sys.stdout.flush()
     return ok
 
 
-def salva(Z, C, k, t, extra):
+def salva(Z, C, k, t, extra, NOME):
     import _vuoto_vivo_B as V
     meta = {"k": k, "t": t, "sha": V.shas(Z["z"]), "codice": "csv/solitone/prova_scatola5.py", "R_A": Z["bordo"]["R_A"], "L": Z["L"]}
     meta.update(extra)
@@ -148,13 +153,15 @@ def carica(Z, f, rho_c, e):
     return PO.campi(Z, rho_c, e, A, E), meta, cs
 
 
-def corsa(k_da, k_fino, reg):
+def corsa(L5, k_da, k_fino, reg):
     from solitone import _registro_corse as RC
     presidi()
     t00 = time.time()
     rho_c = MT.rho_c_assoluto()
     e = MT.PB.E_DECISO
     t0 = MT.G2.T0
+    NOME, BASE = nomi(L5)
+    F_GAUSS = BASE + "_gauss.json"
     print("=" * 130)
     print("R-SCATOLA AL 5%%, LA PROVA SUL MATTONE DA SOLO (Luca 16:17): L %d; da k %d a k %d; il tetto %g s; le mappe ogni %d" % (L5, k_da, k_fino, MT.TETTO_S, OGNI_MAPPA))
     print("=" * 130)
@@ -175,7 +182,7 @@ def corsa(k_da, k_fino, reg):
                 return 1
             metti_bordo(Z, FATTORE_R_A * R)
             if not regola(Z, R, "a k 0"):
-                print("### LA CORSA NON PARTE: la regola al 5% non e' rispettata")
+                print("### LA CORSA NON PARTE: la regola al 5% non e' rispettata (FERMO, la correzione di Luca 16:58)")
                 return 1
             C = PO.campi(Z, rho_c, e)
             g0 = C.residuo()
@@ -248,7 +255,7 @@ def corsa(k_da, k_fino, reg):
                           "%.2e" % S["gauss"][-1] if S["gauss_k"] and S["gauss_k"][-1] == k else "--", time.time() - t00))
                     sys.stdout.flush()
                 if k > k_da and (k % OGNI_STATO == 0 or k % OGNI_STATO == OGNI_STATO - PRIMA):
-                    salva(Z, C, k, t0 + k, {"centro": [float(c[0]), float(c[1])], "R_ogg5": R})
+                    salva(Z, C, k, t0 + k, {"centro": [float(c[0]), float(c[1])], "R_ogg5": R}, NOME)
                 adesso = time.time()
                 if reg and adesso - t_tappa >= MT.TAPPA_S:
                     RC.tappa(reg, "k %d; %.3f s per tick; la memoria libera %.2f GB" % (k, (adesso - t1) / max(1, k - k_da), MT.memoria_gb()))
@@ -272,8 +279,8 @@ def corsa(k_da, k_fino, reg):
         Rf, _rr, _b = r5(Z, t0 + k)
         regola(Z, Rf, "alla fine")
         Z["metti"]()
-    np.savez_compressed(os.path.join(DIR_REF, "prova_scatola5_serie_%05d.npz" % k_da), **{x: np.array(v) for x, v in S.items()})
-    f = os.path.join(DIR_REF, "prova_scatola5_mappe_%05d.npz" % k_da)
+    np.savez_compressed(BASE + "_serie_%05d.npz" % k_da, **{x: np.array(v) for x, v in S.items()})
+    f = BASE + "_mappe_%05d.npz" % k_da
     np.savez_compressed(f, tick=np.array(MP["k"], dtype=np.int32), rho=np.stack(MP["rho"]), dphi=np.stack(MP["dphi"]), L=np.int16(L5))
     print("### LE MAPPE: %d fotogrammi in %s, %.1f MB" % (len(MP["k"]), f, os.path.getsize(f) / 1e6))
     persa = S["M"][0] - S["M"][-1]
@@ -306,14 +313,16 @@ def periodo(k, p, da, a):
     return 1.0 / f[j]
 
 
-def lettura():
+def lettura(L5):
     import _presidio
     _presidio.avvia(__file__)
     print("=" * 130)
     print("R-SCATOLA AL 5%, LA LETTURA (la carta, sez. 3: le soglie fissate PRIMA)")
     print("=" * 130)
     S = {}
-    for f in sorted(glob.glob(os.path.join(DIR_REF, "prova_scatola5_serie_*.npz"))):
+    _n, BASE = nomi(L5)
+    print("### la corsa: L %d (%s_serie_*.npz)" % (L5, BASE))
+    for f in sorted(glob.glob(BASE + "_serie_*.npz")):
         s = np.load(f)
         for x in s.files:
             S.setdefault(x, []).extend(list(s[x]))
@@ -340,7 +349,7 @@ def lettura():
         righe.append(("il picco contro %s entro il 2%% a ogni tick comune" % nome, max(dp) <= 0.02, "il peggio %.3f%%" % (100 * max(dp))))
     T5 = periodo(S["pk_k"], S["picco"], 250, 1750)
     T3 = periodo(s3["pk_k"], s3["picco"], 250, 1750)
-    print("### il periodo del respiro (tick 250-1750): L 150 %.2f, L 324 %.2f tick; la differenza %.3f%%" % (T5, T3, 100 * abs(T5 - T3) / T3))
+    print("### il periodo del respiro (tick 250-1750): L %d %.2f, L 324 %.2f tick; la differenza %.3f%%" % (L5, T5, T3, 100 * abs(T5 - T3) / T3))
     righe.append(("il periodo del respiro contro L 324 entro il 3%", abs(T5 - T3) / T3 <= 0.03, "%.2f contro %.2f" % (T5, T3)))
     A = {}
     for r in open(os.path.join(MT.DIR_REF, "porto_alone_vuoto.txt"), encoding="utf-8"):
@@ -350,7 +359,7 @@ def lettura():
     for (nome, k) in (("L 324", 950), ("L 324", 1000), ("L 243", 2000)):
         rif = float(A[(nome, k)][0.05])
         mio = float(S["r5"][k5[k]])
-        print("### il raggio del 5%% del vuoto a k %d: L 150 %.0f, %s %.0f" % (k, mio, nome, rif))
+        print("### il raggio del 5%% del vuoto a k %d: L %d %.0f, %s %.0f" % (k, L5, mio, nome, rif))
         righe.append(("il raggio del 5%% del vuoto a k %d contro %s entro 1 nodo" % (k, nome), abs(mio - rif) <= 1.0, "%.0f contro %.0f" % (mio, rif)))
     print("-" * 130)
     for che, ok, nota in righe:
@@ -364,13 +373,14 @@ def lettura():
 def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("cosa", choices=("corsa", "lettura"))
+    ap.add_argument("--L", type=int, required=True)
     ap.add_argument("--da", type=int)
     ap.add_argument("--fino", type=int)
     ap.add_argument("--registro")
     x = ap.parse_args(argv)
     if x.cosa == "corsa":
-        return corsa(x.da, x.fino, x.registro)
-    return lettura()
+        return corsa(x.L, x.da, x.fino, x.registro)
+    return lettura(x.L)
 
 
 if __name__ == "__main__":
