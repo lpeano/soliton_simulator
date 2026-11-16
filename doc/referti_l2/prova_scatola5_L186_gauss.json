@@ -1,0 +1,14 @@
+{
+ "L": 186,
+ "r0": 3.150027665761808e-11,
+ "soglia": 3.150027665761808e-10,
+ "fattore": 10.0,
+ "R_ogg5": 25.0,
+ "R_A": 50.0,
+ "incollato": [
+  92,
+  92
+ ],
+ "Delta": -7.441668553405487e-05,
+ "codice": "csv/solitone/prova_scatola5.py"
+}

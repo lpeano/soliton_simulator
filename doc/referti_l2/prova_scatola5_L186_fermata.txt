@@ -1,0 +1,28 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp_letture (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+R-SCATOLA AL 5%, LA PROVA SUL MATTONE DA SOLO (Luca 16:17): L 186; da k 0 a k 3000; il tetto 28800 s; le mappe ogni 100
+==================================================================================================================================
+### la scena: L 186, 34596 nodi; il centro del bordo [93, 93]; il raggio inscritto 93.0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### incollato a [92, 92] (Delta -0.000074); i raggi a k 0: 10% 24.0, 5% 25.0, 2% 44.0, 1% 44.0; il baricentro (91.53, 91.70)
+### R-SCATOLA AL 5% (a k 0): R_ogg 25.0; la distanza al lato del rombo 80.54 = 3.22 R_ogg (>= 3: True); R_A 50.0 = 2.00 R_ogg (>= 2: True); la fascia 30.54 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 93.00
+### il residuo di Gauss iniziale 3.150e-11 -> la soglia 3.150e-10 (10 volte, come il porto)
+    k     0  il picco 1.1927e+03  il raggio 12.3657  la massa 9.9501089314e+05  oltre R_A 0.000e+00  il 5% del vuoto 25.0  Gauss 3.15e-11  (53 s)
+    k   250  il picco 1.2325e+03  il raggio 12.4626  la massa 9.9500864110e+05  oltre R_A 1.991e-05  il 5% del vuoto 25.0  Gauss 3.05e-11  (869 s)
+    k   500  il picco 1.1555e+03  il raggio 12.5672  la massa 9.9497907464e+05  oltre R_A 3.004e-05  il 5% del vuoto 43.0  Gauss 3.25e-11  (1507 s)
+    k   750  il picco 1.1355e+03  il raggio 12.6602  la massa 9.9494074686e+05  oltre R_A 2.712e-05  il 5% del vuoto 25.0  Gauss 3.31e-11  (2253 s)
+    k  1000  il picco 1.1516e+03  il raggio 12.7177  la massa 9.9490399714e+05  oltre R_A 3.172e-05  il 5% del vuoto 25.0  Gauss 3.26e-11  (2960 s)
+    k  1250  il picco 1.1297e+03  il raggio 12.7286  la massa 9.9486465028e+05  oltre R_A 2.785e-05  il 5% del vuoto 25.0  Gauss 3.33e-11  (3681 s)

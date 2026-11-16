@@ -26090,3 +26090,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Punto 6: le tre suite `67/67`** *(E: spento `16:14`-`16:26`; C: spento `16:26`-`16:36`; E: acceso coi due passi `16:36`-`16:49`, `10` processi accesi, `1112982` chiamate, `0` ripieghi; `doc/referti_l2/motore_numba_principale_conti.txt`)*. **Punto 8: il tag `motore-numba-riunito-2026-11-16` su `abf59c6f`.**
 - **Il nucleo RICONGELATO; nella ROTTA la sezione «IL MOTORE NUMBA» col testo di Luca al posto di R-MOTORE.**
 - **Ora il mandato delle `16:17`** *(R-SCATOLA al `5%`)*: **la carta.**
+
+### 2026-11-16 19:01 -- FERMATO PER ORDINE DI LUCA: LA CORSA SU `L 186` CHIUSA A `k 1250`, I TODO SCRITTI
+
+- **Luca (`19:01`): «ferma le attivita' in corso e scrivi e committa e pusha i todo da completare».**
+- **La corsa `prova-scatola5-L186` FERMATA chiudendo la sua voce nel registro** *(si ferma alla prossima tappa)*: **arrivata a `k 1250` su `3000`, circa `2.95 s` per tick; Gauss `3.33e-11`, il 5% del vuoto `25.0`.** **La fase 0 NON e' chiusa: nessun verdetto su R-SCATOLA al `5%`.** L'uscita parziale: `doc/referti_l2/prova_scatola5_L186_fermata.txt`.
+- **Lo strumento della fase 1** *(mai girato)* **salvato come bozza:** `doc/referti_l2/verifica_coppie_bozza.py.txt`.
+- **I TODO, in ordine e coi criteri di chiusura:** **la sez. `9` di `doc/TASK_HISTORY/2026-11-16_scatola5.md`** *(A la fase 0 da rifare; B la fase 1; C la fase 2; D la fase 3 dopo il via; E le decisioni aperte per Luca)*.
