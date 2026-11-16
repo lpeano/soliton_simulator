@@ -3,7 +3,7 @@ r"""**D1, D3, D4, D5 DEL MOTORE NUMBA INTERO** *(il primo passo e il secondo; la
 
     E:\python\py3132\python.exe csv/solitone/prova_numba_motore.py tempi > doc/referti_l2/motore_numba_tempi.txt     (NUMBA_CACHE_DIR su E:, PYTHONNOUSERSITE=1, TMP su E:)
     ... d3 --fma si|no|esplicita > motore_numba_d3.txt ;  ... d4 --fma si|no|esplicita > motore_numba_d4.txt ;  ... d1 > motore_numba_d1.txt
-    ... tempi_fma > motore_numba_tempi_fma.txt   (Luca 2026-11-16 08:57, C2: (a) e (c) semplice ed esplicita, a 2 fili, alternati)
+    ... tempi_fma > motore_numba_tempi_fma.txt   (Luca 2026-11-16 13:58, V5: (a) e (c) i due passi col modo esplicita, a 2 e a 6 fili, alternati due volte; poi (a) di nuovo)
 
 **La scena:** **il mattone di `L 162`** *(`L162_MGU_03000`, `t 63000`; `A`, `E` dal file, `U` dal campo)* **nella scena di S162, il bordo da `R_A 60`; il tick di `mattone.Campi`** *(`MGU`: G+U col lapse; `MU`: senza lapse)*.
 **Ogni corsa riparte dal FILE** *(lo stato, `A`, `E`, `e`, `U`)*.
@@ -216,11 +216,11 @@ def tempi(Z, ct, rho_c):
     for f in (1, 2, FILI_MOLTI):
         conf.append(("(b) il primo passo, %d fili" % f, f, "primo"))
     if SOLO_FMA[0]:
-        # ### C2 (Luca 2026-11-16 08:57): (a), poi (c) semplice ed esplicita a 2 fili, ALTERNATI due volte (un carico che cambia si vede)
+        # ### V5 (Luca 2026-11-16 13:58): (a), poi (c) i due passi col modo esplicita a 2 e a 6 fili, ALTERNATI due volte (un carico che cambia si vede)
         conf = [("(a) il motore di oggi", 0, None)]
         for _g in (1, 2):
-            for modo in ("semplice", "esplicita"):
-                conf.append(("(c) i due passi, %s, 2 fili, giro %d" % (modo, _g), 2, modo))
+            for f in (2, FILI_MOLTI):
+                conf.append(("(c) i due passi, esplicita, %d fili, giro %d" % (f, _g), f, "esplicita"))
         conf.append(("(a) il motore di oggi, di nuovo", 0, None))
     else:
         for modo in ("contract", "semplice"):
