@@ -26097,3 +26097,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La corsa `prova-scatola5-L186` FERMATA chiudendo la sua voce nel registro** *(si ferma alla prossima tappa)*: **arrivata a `k 1250` su `3000`, circa `2.95 s` per tick; Gauss `3.33e-11`, il 5% del vuoto `25.0`.** **La fase 0 NON e' chiusa: nessun verdetto su R-SCATOLA al `5%`.** L'uscita parziale: `doc/referti_l2/prova_scatola5_L186_fermata.txt`.
 - **Lo strumento della fase 1** *(mai girato)* **salvato come bozza:** `doc/referti_l2/verifica_coppie_bozza.py.txt`.
 - **I TODO, in ordine e coi criteri di chiusura:** **la sez. `9` di `doc/TASK_HISTORY/2026-11-16_scatola5.md`** *(A la fase 0 da rifare; B la fase 1; C la fase 2; D la fase 3 dopo il via; E le decisioni aperte per Luca)*.
+
+### 2026-11-16 20:19 -- LA RIPRESA DOPO IL RIAVVIO: LA FASE 0 RIPARTE DA `k 0` (`prova-scatola5-L186-b`)
+
+- **I controlli:** E: montato; nessun `commit.lock` ne' `index.lock`; `0` voci aperte nel registro.
+- **Lo stato a `k 1250` non c'e':** `prova_scatola5.py` salva gli stati solo a `950` e `1000` *(`OGNI_STATO 1000`, `PRIMA 50`)*; **per la regola di Luca si riparte da `0`** *(e da `1000` mancherebbe la serie del picco `250`-`1000`, che serve al periodo del respiro)*. Gli sha1 degli stati di prima: `00950` `bf95772f`, `01000` `f392e6d9` *(la carta sez. `10`, `6a64bf13`)*.
+- **La corsa interrotta era arrivata a `k 1500`** *(morta col riavvio)*: reperto, non prova.
+- **La voce `prova-scatola5-L186-b` aperta alle `20:19`; la corsa partita** *(stima: circa `2.5` ore a `2.95 s` per tick)*.
