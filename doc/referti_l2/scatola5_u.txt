@@ -1,4 +1,4 @@
-[TIMBRO] scatola5_u.py  sha1-BYTE 0f262170  committato e pulito
+[TIMBRO] scatola5_u.py  sha1-BYTE a60beaa3  committato e pulito
 ==================================================================================================================================
 R-SCATOLA-U (Luca 16:17): la forza delle copie periodiche contro la forza che una scena vuole misurare; la soglia 0.05
 ==================================================================================================================================
@@ -9,21 +9,23 @@ R-SCATOLA-U (Luca 16:17): la forza delle copie periodiche contro la forza che un
     la legge alle distanze dei punti: F(35.06) 1.010e-06 (misura 1.010e-06); F(51.01) 2.616e-08 (2.616e-08); F(66.00) 1.338e-08 (1.338e-08)
 ----------------------------------------------------------------------------------------------------------------------------------
     la scena                        d      R_ogg    L min         F(d)     F(L - d)   rapporto   
-    il mattone da solo            0.0       25.0  L 150 *    1.338e-08    1.581e-09     11.82%   ### SOPRA  (nessun compagno: l'immagine di se' a L; il riferimento F(66), la forza piu' piccola misurata (dichiarato))
     il mattone da solo            0.0       25.0    L 162    1.338e-08    1.294e-09      9.67%   ### SOPRA
+    il mattone da solo            0.0       25.0  L 185 *    1.338e-08    9.163e-10      6.85%   ### SOPRA  (nessun compagno: l'immagine di se' a L; il riferimento F(66), la forza piu' piccola misurata (dichiarato))
+    il mattone da solo            0.0       25.0    L 186    1.338e-08    9.036e-10      6.75%   ### SOPRA
     il mattone da solo            0.0       25.0    L 243    1.338e-08    4.508e-10      3.37%   SOTTO
     il mattone da solo            0.0       25.0    L 324    1.338e-08    2.133e-10      1.59%   SOTTO
     la coppia a 30               30.0       40.0    L 162    4.611e-06    2.205e-09      0.05%   SOTTO
-    la coppia a 30               30.0       40.0  L 240 *    4.611e-06    6.590e-10      0.01%   SOTTO  (l'immagine del compagno a L - 30)
     la coppia a 30               30.0       40.0    L 243    4.611e-06    6.351e-10      0.01%   SOTTO
+    la coppia a 30               30.0       40.0  L 278 *    4.611e-06    4.275e-10      0.01%   SOTTO  (l'immagine del compagno a L - 30)
     la coppia a 30               30.0       40.0    L 324    4.611e-06    2.746e-10      0.01%   SOTTO
     la coppia a 40               40.0       45.0    L 162    2.794e-07    2.706e-09      0.97%   SOTTO
     la coppia a 40               40.0       45.0    L 243    2.794e-07    7.197e-10      0.26%   SOTTO
-    la coppia a 40               40.0       45.0  L 270 *    2.794e-07    5.201e-10      0.19%   SOTTO  (l'immagine del compagno a L - 40)
+    la coppia a 40               40.0       45.0  L 312 *    2.794e-07    3.362e-10      0.12%   SOTTO  (l'immagine del compagno a L - 40)
     la coppia a 40               40.0       45.0    L 324    2.794e-07    3.005e-10      0.11%   SOTTO
     il triangolo (lato 40)       40.0       48.1    L 162    2.794e-07    2.706e-09      0.97%   SOTTO
     il triangolo (lato 40)       40.0       48.1    L 243    2.794e-07    7.197e-10      0.26%   SOTTO
-    il triangolo (lato 40)       40.0       48.1  L 289 *    2.794e-07    4.231e-10      0.15%   SOTTO  (come una coppia a 40: l'immagine piu' vicina di un vertice a L - 40 (dichiarato))
     il triangolo (lato 40)       40.0       48.1    L 324    2.794e-07    3.005e-10      0.11%   SOTTO
-    (* = il toro minimo di R-SCATOLA al 5% per quella scena)
+    il triangolo (lato 40)       40.0       48.1  L 334 *    2.794e-07    2.746e-10      0.10%   SOTTO  (come una coppia a 40: l'immagine piu' vicina di un vertice a L - 40 (dichiarato))
+    (* = il toro minimo di R-SCATOLA al 5% per quella scena, con le TRE clausole: la distanza al lato del rombo L sqrt(3)/4 >= max(3 R_ogg, 2 R_ogg + 30))
+    (il mattone da solo: le sei copie si ANNULLANO per simmetria, nessuna forza netta, solo una marea: il rapporto e' un riferimento CONVENZIONALE, non un blocco -- Luca)
 ==================================================================================================================================
