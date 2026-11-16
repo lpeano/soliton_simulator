@@ -127,6 +127,19 @@ def main(argv):
         print("  git checkout-index di tutto l'indice su %-12s %7.1f s  (uscita %d; %d file su %d tracciati; la cartella tolta: %s)" % (disco, s, rc, n, n_file, tolta))
         sys.stdout.flush()
     print("-" * 130)
+    # ### C. che cosa legge _storico_da_git (indice.py): git log del percorso, poi cat-file --batch di OGNI versione
+    rel = "doc/indice/storico.jsonl"
+    n_commit = subprocess.run(["git", "rev-list", "--count", "HEAD"], cwd=RADICE, capture_output=True, text=True).stdout.strip()
+    t = time.perf_counter()
+    q = subprocess.run(["git", "log", "--reverse", "--format=%h", "--", rel], cwd=RADICE, capture_output=True, text=True)
+    t_log = time.perf_counter() - t
+    sha = q.stdout.split()
+    t = time.perf_counter()
+    b = subprocess.run(["git", "cat-file", "--batch"], cwd=RADICE, input=("\n".join("%s:%s" % (c, rel) for c in sha) + "\n").encode("utf-8"), capture_output=True)
+    t_cat = time.perf_counter() - t
+    print("### C. CHE COSA LEGGE _storico_da_git: %s commit a HEAD; %s oggi %.2f MB; le sue versioni nella storia %d; git log del percorso %.1f s; cat-file --batch di tutte le versioni %.1f s, %.0f MB letti"
+          % (n_commit, rel, os.path.getsize(os.path.join(RADICE, rel)) / 1e6, len(sha), t_log, t_cat, len(b.stdout) / 1e6))
+    print("-" * 130)
     print("### IL PROFILO DI indice.py valida (cProfile, in questo processo; il tempo CUMULATIVO, le prime 25 righe)")
     sys.stdout.flush()
     sys.path.insert(0, os.path.join(RADICE, "csv"))
