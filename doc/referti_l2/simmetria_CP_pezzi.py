@@ -132,6 +132,8 @@ def main():
                 TL.reazione(mot, st, par, Z["s"], Cx.legge, 0.5)
             elif nome == "tick":
                 Cx.tick(1, t0 + 1, 1.0, e)
+            elif nome == "tick_GU":
+                MT.PBR.tick_GU(Z["z"], Z["s"], Cx.legge, Cx.e0, Cx.campo)   # ### il tick SENZA il bordo (v3): cs dal suo stato, nessun assorbimento, nessuna correzione di Gauss
             else:
                 mot.cs = cs.copy()
                 mot.lambda_c = None
@@ -152,7 +154,7 @@ def main():
         CAND = (("CPT", ("inv", SY, mcj, -1.0, +1.0), "inv sy -conj(phi) sA-1 sE+1"),
                 ("CPT", ("inv", SY, mcj, -1.0, -1.0), "inv sy -conj(phi) sA-1 sE-1"),
                 ("CP", ("spec", (lv[0] * SX + lv[1] * SY) @ SY, lambda p: p, +1.0, +1.0), "spec s.l.sy phi sA+1 sE+1"))
-        pezzi = ["spinta", "fase_a", "reazione"] + ids + ["tick"]
+        pezzi = ["spinta", "fase_a", "reazione"] + ids + ["tick_GU", "tick"]
         ok_ctrl = True
         for nome in pezzi:
             t1 = time.time()
