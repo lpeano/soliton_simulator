@@ -1,0 +1,19 @@
+==================================================================================================================================
+A3: QUANTO PUO' TOGLIERE UNA OPERAZIONE LOCALE SUL VUOTO CHE CONSERVA LA NORMA (Luca 2026-11-17 16:38, D-R3)
+==================================================================================================================================
+### il caso noto (1): H_v dalla forma Q -4.946877456e+05 contro G_phi + a_phi di nascita_dentro_fuori.famiglie -4.946877456e+05 (la differenza relativa 0.0e+00)
+### il caso noto (2): il vuoto F3 SENZA nascita, il minimo su S a 1 passi dal nodo (81, 81): H_v -4.946877456e+05, il minimo -4.946877456e+05, la differenza 0.000e+00
+### il caso noto (2): il vuoto F3 SENZA nascita, il minimo su S a 2 passi dal nodo (81, 81): H_v -4.946877456e+05, il minimo -4.946877456e+05, la differenza 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il vuoto F3 puro
+    FA     dH totale +3.476457e+00, dH del vuoto +3.476457e+00;  S a 1 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 3.4765e+00, il 100.0%)  S a 2 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 3.4765e+00, il 100.0%)  S a 3 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 3.4765e+00, il 100.0%)
+    v4-F3  dH totale +2.358265e+01, dH del vuoto +2.358265e+01;  S a 1 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 2.3583e+01, il 100.0%)  S a 2 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 2.3583e+01, il 100.0%)  S a 3 passi: il minimo di dH del vuoto -5.820766e-11 (tolto 2.3583e+01, il 100.0%)
+----------------------------------------------------------------------------------------------------------------------------------
+### il mattone, l'arco a 59.81 nodi
+    FA     dH totale +3.476439e+00, dH del vuoto +3.479135e+00;  S a 1 passi: il minimo di dH del vuoto -1.229233e-02 (tolto 3.4914e+00, il 100.4%)  S a 2 passi: il minimo di dH del vuoto -5.611568e-02 (tolto 3.5353e+00, il 101.6%)  S a 3 passi: il minimo di dH del vuoto -1.329312e-01 (tolto 3.6121e+00, il 103.8%)
+    v4-F3  dH totale +2.611234e+01, dH del vuoto +2.611503e+01;  S a 1 passi: il minimo di dH del vuoto -1.229233e-02 (tolto 2.6127e+01, il 100.0%)  S a 2 passi: il minimo di dH del vuoto -5.611568e-02 (tolto 2.6171e+01, il 100.2%)  S a 3 passi: il minimo di dH del vuoto -1.329312e-01 (tolto 2.6248e+01, il 100.5%)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto (1): la forma Q = le famiglie del vuoto entro 1e-12                                               PASSA
+  DEVE: il caso noto (2): F3 e' gia' il minimo a 1 passi (la differenza entro 1e-9)                                    PASSA
+  DEVE: il caso noto (2): F3 e' gia' il minimo a 2 passi (la differenza entro 1e-9)                                    PASSA
+==================================================================================================================================
