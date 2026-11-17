@@ -116,7 +116,13 @@ def main():
         Cx = prepara(X0, A0, E0)
         cs_x = np.array(TL.cs_al_centro(mot, st, par, Z["s"], Cx.legge, False, omega=1.0, giri_max=None, storia=None)[0], copy=True)
 
-        def applica(nome, X, A, E):
+        def cs_di(mp):
+            """### `cs` dello stato di partenza PERMUTATO dalla mappa del candidato (v2: nella v1 lo stesso `cs_x` sui due lati, errore mio)."""
+            y = np.empty_like(cs_x)
+            y[geo[mp][0]] = cs_x
+            return y
+
+        def applica(nome, X, A, E, cs):
             Cx = prepara(X, A, E)
             if nome == "spinta":
                 Cx.campo.spinta(0.5)
@@ -127,7 +133,7 @@ def main():
             elif nome == "tick":
                 Cx.tick(1, t0 + 1, 1.0, e)
             else:
-                mot.cs = cs_x.copy()
+                mot.cs = cs.copy()
                 mot.lambda_c = None
                 with UO.avvolto(mot, Cx.campo, True):
                     TK.percorri_tick(st, mot, par, tuple(i for i in ids if i != nome), None, 7)
@@ -150,15 +156,15 @@ def main():
         ok_ctrl = True
         for nome in pezzi:
             t1 = time.time()
-            Px = applica(nome, X0, A0, E0)
-            ctrl = diff(applica(nome, *theta(X0, A0, E0, "id", I2, lambda p: p, 1.0, 1.0, cj_=False)), Px)["max"]
+            Px = applica(nome, X0, A0, E0, cs_x)
+            ctrl = diff(applica(nome, *theta(X0, A0, E0, "id", I2, lambda p: p, 1.0, 1.0, cj_=False), cs_x), Px)["max"]
             ok_ctrl = ok_ctrl and ctrl == 0.0
             parti = []
             for fam, (mp, T, f, sA, sE), etich in CAND:
                 if fam == "CP":
-                    dd = diff(applica(nome, *theta(X0, A0, E0, mp, T, f, sA, sE)), theta(*Px, mp, T, f, sA, sE))
+                    dd = diff(applica(nome, *theta(X0, A0, E0, mp, T, f, sA, sE), cs_di(mp)), theta(*Px, mp, T, f, sA, sE))
                 else:
-                    dd = diff(applica(nome, *theta(*Px, mp, T, f, sA, sE)), theta(X0, A0, E0, mp, T, f, sA, sE))
+                    dd = diff(applica(nome, *theta(*Px, mp, T, f, sA, sE), cs_di(mp)), theta(X0, A0, E0, mp, T, f, sA, sE))
                 parti.append("%s [%s] psi_h %.2e phi_h %.2e A %.2e E %.2e" % (fam, etich, dd["psi_h"], dd["phi_h"], dd["A"], dd["E"]))
             print("    %-24s il controllo %.1e (%.0f s)" % (nome, ctrl, time.time() - t1))
             for p_ in parti:
