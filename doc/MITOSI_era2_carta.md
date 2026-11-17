@@ -350,3 +350,9 @@
 - **(b)** **cercare l'olonomia VERA del vuoto**: la fase relativa misurata delle estremita' *(cio' che K2 misura)*, **su finestre lunghe** o **filtrata** dell'oscillazione d'arco, con un criterio fissato prima;
 - **(c)** **tornare a D-R1-D-R3**.
 - **E, per la parte B:** l'area e `l/l*` dei triangoli nuovi *(la stella di Hodge sul reticolo irregolare: B.3, provvisori)*, con D-M3.
+
+### 14.6-bis LA LETTURA DEL GUARDIANO SU K2 *(la sua, accanto alla mia della `14.5`; Luca `2026-11-17` `19:40`)*
+
+- **Il guardiano:** **K2 era MAL POSTA** -- **un segnale di `1e-5` contro onde di `1e-2` in `50` tick** *(l'errore `n.190` del guardiano)*; **ma la conclusione REGGE per un motivo piu' forte:** **un vuoto stazionario ha UNA frequenza globale, e la somma di `(dtau_i - dtau_j)` su un ciclo e' ZERO** *(un GRADIENTE, non un'olonomia)*: **la torsione del tempo proprio e' al piu' un CONTATORE della deriva fra orologi vicini** *(l'opzione (a))*.
+- **La mia, accanto:** **sono d'accordo su entrambe le cose.** **Sulla prima:** il rischio l'avevo scritto nella carta *(sez. `1.2`: «il rapporto puo' essere un quoziente di due numeri vicini allo zero»)* **ma ho fatto girare la prova com'era** *(la soglia era del mandato)*: **la scala `1.0e-05` stampata accanto lo mostrava.** **Sulla seconda:** **e' un argomento piu' forte di K2 e non dipende da nessuna misura** -- `Theta_a = pi somma_t (s_i - s_j)` e' la differenza di una funzione dei NODI, quindi **sulla chiusura di qualunque ciclo si annulla esattamente**: **non puo' essere un'olonomia per costruzione.** **Avrei dovuto vederlo leggendo la definizione** *(sez. `1.2` della carta della torsione: «uno scalare per nodo», scritto come un pregio)*.
+- **M3-bis** *(i segmenti tick per tick, l'aggiunta delle `18:48`)* **gira**: **i suoi numeri sono il ritmo del CONTATORE (a)**, letto come tale *(la carta della torsione, sez. `6`)*.
