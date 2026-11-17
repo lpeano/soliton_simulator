@@ -26194,3 +26194,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - I casi noti (controllo_senza_bordo_caso.txt): il vuoto puro senza bordo conserva la norma a 3.6e-14; il passo senza bordo = tick_GU al bit; la ripresa al bit. **La mia premessa era sbagliata**: il bordo a zero (assorbi con g = 0) NON e' tick_GU al bit (phi_h di 1.16e-16): il passo senza bordo e' ora tick_GU coi conti (96a26baa).
 - Il costo (controllo_senza_bordo_costo.txt): L 186 il tick 3.252 s (la stima di 3000 tick 2.71 ore), L 324 11.324 s; la misura costa meno dello 0.2%: la cadenza resta 50.
 - **C3 annullata** (Luca 16:01-16:02; non era partita: non si lancia); P-SB4 si legge solo su C1 e C2. C2 e' il braccio senza mitosi della prova futura.
+
+### 2026-11-17 16:3x -- IL MANDATO DELLE 16:02, S1: IL DIFETTO DELL'ACCUMULO MISURATO: IL NETTO PAGA 0.006-0.009 NASCITE PER TICK, UN FATTORE 55-87 SOTTO LE 0.50 CONTATE ARCO PER ARCO
+
+- doc/referti_l2/accumulo_controllo.txt: il netto che esce per tick al confine (23.81 nodi) la media +0.149 (da +0.022 a +0.383 nei sei istanti), a 30 e 45 nodi +0.234 e +0.237; il costo medio 25.70 +- 1.23; le nascite pagabili 5.8e-3 (+- 4.3e-3), 9.1e-3, 9.2e-3 per tick contro 0.504: il fattore 87, 55, 55. La riserva sul netto in 2050 tick (il trapezio): 385, 474, 496 -> 15, 18, 19 nascite. Le due previsioni del guardiano sul numero (fra 0.005 e 0.02, il fattore fra 20 e 100; al piu' 25 nascite): VERE.

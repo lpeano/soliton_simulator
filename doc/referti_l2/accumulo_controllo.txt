@@ -1,0 +1,23 @@
+[TIMBRO] flusso_uscente.py  sha1-BYTE 28c0a366  committato e pulito
+[TIMBRO] accumulo_controllo.py  sha1-BYTE e3620911  committato e pulito
+==================================================================================================================================
+IL CONTROLLO DELL'ACCUMULO (Luca 2026-11-17 16:02, S1)
+==================================================================================================================================
+### da flusso_uscente.txt: i costi delle nascite fuori dal confine 22.477, 26.012, 26.174, 26.251, 26.490, 26.149, 26.034, 26.026 -> la media 25.7017, la deviazione standard 1.2275 (8 valori); le nascite per tick dell'accumulo arco per arco 5.0409e-01
+    k  950: R 23.81: + 5.3540e-01 netto +2.2452e-02  R 30.00: + 2.7704e-01 netto +2.6856e-01  R 45.00: + 2.4585e-01 netto +2.4355e-01
+    k 1000: R 23.81: + 5.5358e-01 netto +1.2072e-01  R 30.00: + 2.7112e-01 netto +2.6421e-01  R 45.00: + 2.2705e-01 netto +2.2405e-01
+    k 1950: R 23.81: + 6.7863e-01 netto +1.2357e-01  R 30.00: + 1.9414e-01 netto +1.8852e-01  R 45.00: + 2.7496e-01 netto +2.7173e-01
+    k 2000: R 23.81: + 8.9349e-01 netto +3.8322e-01  R 30.00: + 2.2442e-01 netto +2.1816e-01  R 45.00: + 2.7377e-01 netto +2.6993e-01
+    k 2950: R 23.81: + 7.5227e-01 netto +1.3660e-01  R 30.00: + 2.6154e-01 netto +2.5231e-01  R 45.00: + 2.0793e-01 netto +2.0381e-01
+    k 3000: R 23.81: + 7.7662e-01 netto +1.0492e-01  R 30.00: + 2.1982e-01 netto +2.1126e-01  R 45.00: + 2.1251e-01 netto +2.0838e-01
+----------------------------------------------------------------------------------------------------------------------------------
+### l'anello 23.81: il netto per tick la media +1.4858e-01 (la deviazione standard 1.1137e-01 su 6 istanti; da +2.2452e-02 a +3.8322e-01); il positivo la media 6.9833e-01
+    il massimo di nascite pagabili dal NETTO: 5.7810e-03 per tick (+- 4.3e-03 dalla dispersione del netto); contro 5.0409e-01 dell'accumulo arco per arco: il fattore 87.2
+    la riserva sul netto da k 950 a k 3000 (il trapezio sui sei istanti): +3.8524e+02; le nascite che paga al costo medio: 14.99
+### l'anello 30.00: il netto per tick la media +2.3384e-01 (la deviazione standard 2.9660e-02 su 6 istanti; da +1.8852e-01 a +2.6856e-01); il positivo la media 2.4135e-01
+    il massimo di nascite pagabili dal NETTO: 9.0980e-03 per tick (+- 1.2e-03 dalla dispersione del netto); contro 5.0409e-01 dell'accumulo arco per arco: il fattore 55.4
+    la riserva sul netto da k 950 a k 3000 (il trapezio sui sei istanti): +4.7360e+02; le nascite che paga al costo medio: 18.43
+### l'anello 45.00: il netto per tick la media +2.3691e-01 (la deviazione standard 2.7145e-02 su 6 istanti; da +2.0381e-01 a +2.7173e-01); il positivo la media 2.4034e-01
+    il massimo di nascite pagabili dal NETTO: 9.2176e-03 per tick (+- 1.1e-03 dalla dispersione del netto); contro 5.0409e-01 dell'accumulo arco per arco: il fattore 54.7
+    la riserva sul netto da k 950 a k 3000 (il trapezio sui sei istanti): +4.9606e+02; le nascite che paga al costo medio: 19.30
+==================================================================================================================================
