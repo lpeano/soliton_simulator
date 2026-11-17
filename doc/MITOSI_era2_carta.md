@@ -370,3 +370,37 @@
 - **(a) il contatore del lapse:** **un gradiente, non un'olonomia** *(14.6-bis)*; **il suo ritmo netto lo da' M3-bis, che GIRA** *(i `12` segmenti di C2; il referto quando chiudono)*.
 - **(c) la riserva del calore:** **D-R1-D-R3, sospese** *(13.7)*; **e la domanda della `13.3`: la riserva conservata vuole un confine che assorbe.**
 - **(d) il flusso della placchetta:** **invariante di gauge, locale, su un ciclo -- ma `1e-9` del quanto, fermo, e nel campo NON compatto** *(14.7)*.
+
+## 15. L'INNESCO: IL CONTATORE DEL LAPSE *(il mandato di Luca del `2026-11-17` `21:00`; la carta `doc/TASK_HISTORY/2026-11-17_innesco_contatore.md`)*
+
+### 15.1 LE DECISIONI DI LUCA *(`21:00`)*
+
+- **L'innesco e' (a), IL CONTATORE DEL LAPSE:** `Theta_a = pi * somma sui tick (dtau_nodo_i - dtau_nodo_j)` *(14.2)*, **una memoria per arco; l'arco si divide a `|Theta_a| >= 2 pi`.** **Dichiarato come CONTATORE DELLA DERIVA FRA OROLOGI VICINI** *(la dilatazione gravitazionale del tempo)*, **NON come olonomia** *(14.6-bis)*. **`2 pi` e `omega = pi` dal modello.** **CONDIZIONATA alla deriva netta** *(il criterio di Luca, scritto prima del referto)*.
+- **D-M3 = FA con la compensazione locale di A3** *(il minimo a norma fissata su `S` a `1` passo: `H` totale conservata alla nascita)*. **D-R1-D-R3 restano sospese.** **Restano** D-M1, D-M2, D-M4, D-R4, D-R5, il bordo tolto, C2 braccio senza mitosi, il mattone su `L 186`.
+- **Le scelte del guardiano:** **S1** *(la materia della nascita FA sotto l'`1%` di `|DH|`: ### **l'`1%` E' UN NUMERO, `A1`: una scelta del guardiano, da rivedere con Luca**)*; **S2** *(gli archi nuovi da `Theta = 0`, l'arco diviso consumato)*; **S3** *(la compensazione deterministica e simmetrica, o una regola sulla fase, o FERMO)*; **S4** *(P7 riscritta: la FORMA del profilo della curvatura di Regge contro `N(rho)`)*.
+
+### 15.2 LA DERIVA NETTA C'E' *(`doc/referti_l2/torsione_segmenti.txt`: i `12` segmenti di C2, tutti AL BIT con lo stato salvato successivo)*
+
+- ### **IL CRITERIO DI LUCA PASSA:** **sull'arco del massimo** *(r `18.12`)* **la deriva netta in `3000` tick e' `0.675` rad contro un'oscillazione massima di `0.0082`** *(la pendenza a `3630 sigma`)*; **tutti i `20` archi del massimo lo passano.** **(a) VALE.**
+- **Il ritmo netto massimo `2.256e-04 +- 6e-08` rad per tick a r `18.08`** *(l'anello `18`; la media per anello piu' alta al `17`)*; **oltre `24` nodi crolla** *(`7e-08` all'anello `24`, `3e-09` al `27`)*.
+- **Il primo `2 pi` al tick `2.79e+04`**; entro `1e4` nessuno; ### **entro `1e5`: `2929` archi, TUTTI fra `10.0` e `22.3` nodi; entro `1e6`: `5346`, fra `2.3` e `23.45` -- TUTTI DENTRO IL CONFINE** *(`23.81`)*.
+
+### 15.3 S1 NON NE LASCIA PASSARE NESSUNO *(`doc/referti_l2/innesco_S1.txt`)*
+
+- ### **`0` SU `2929`:** **nel guscio della materia il termine della materia della nascita FA e' praticamente TUTTO `|DH|`** *(materia/`|DH|` fra `0.93` e `1.37`, mediana `1.003`)*, **e `DH` e' fortemente NEGATIVO** *(la mediana da `-1.2e+03` a `10`-`12` nodi a `-26` a `22`-`24`)*: **le nascite la' RILASCIANO energia della materia.** *(Lo stato di C2 a `k 3000`, non quello allo scatto: dichiarato.)*
+
+### 15.4 LA STIMA DELLA CORSA GEMELLA *(`doc/referti_l2/innesco_stima.txt`)*: ### **IMPRATICABILE con queste scelte**
+
+- **Perche' nascano `10` nodi oltre il confine `23.81`:** il ritmo netto massimo la' e' `1.25e-06` rad per tick; **il `10`-esimo arco a `2 pi` al tick `7.47e+06` = `7652` ore al tick misurato** *(`3.690` s, C2)*: **`0.9` anni** -- **e a `23.81` con FA la materia e' ancora il `6%` di `|DH|`** *(`regole_fase_F3.txt`)*: **S1 bloccherebbe i primi.**
+- **Oltre `29.81`** *(dove FA ha la materia sotto l'`1%`: `0.24%`)*: il ritmo `1.2e-08`; **il `10`-esimo al tick `6.2e+08` = `73` anni.**
+- **L'estensione di C2 alla stessa lunghezza:** lo stesso costo.
+
+### 15.5 LE PREVISIONI DEL GUARDIANO
+
+- **P-L1 VERA** *(il criterio passa, `20` su `20`)*; **P-L2 VERA** *(r `18.08`)*; **P-L3 VERA** *(`2.79e+04`)*; **P-L4 VERA, all'estremo** *(`0` su `2929`, non «meno della meta'»)*; **P-L5 NON MISURATA** *(la compensazione sul ramo `mitosi`: il TODO 3 non e' partito, sotto)*. **Le mie:** P-L1-P-L4 vere come le sue; su P-L5 nessun numero.
+
+### 15.6 COSA SIGNIFICA, E FERMO PER LUCA
+
+- ### **IL CONTATORE DEL LAPSE SCATTA SOLO NEL GUSCIO DELLA MATERIA** *(dove il gradiente di `N(rho)` e' grande)*, **e li' la nascita e' dominata dalla materia; S1, che vuole il vuoto, la vieta.** **Le due cose si escludono: con (a) piu' S1 la mitosi NON scatta in un tempo praticabile** *(il primo arco oltre il confine a `5e6` tick, i primi `10` dove S1 passa a `6e8`)*. **«Vicino ma fuori» e il contatore non stanno insieme.**
+- **Le strade** *(nessuna scelta presa)*: **(i)** togliere S1 o cambiarne la natura: **le nascite nel guscio, dentro la materia** *(`DH` negativo: la compensazione di A3 conserva `H`, quindi l'energia rilasciata va nel vuoto attorno)*; **(ii)** tenere S1 e accettare che la mitosi non scatti nel mattone di `L 186` *(il test sul mattone non si fa)*; **(iii)** un altro innesco per il vuoto fuori dal confine.
+- ### **IL TODO 3 NON E' PARTITO** *(B4, la memoria per arco, la regola, FA e la compensazione, le prove P6-P9 sul ramo `mitosi`)*: **B4 e la memoria per arco non dipendono da questa scelta; la REGOLA di nascita si'** *(dove si permette: S1)*, **e la corsa gemella che le prove preparano oggi non si puo' fare.** **Se Luca vuole, B4 riparte da subito.**
