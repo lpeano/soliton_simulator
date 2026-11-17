@@ -211,6 +211,8 @@
 
 ### 11.3 LA PROPOSTA DI SOGLIA *(che segue dai numeri; LA DECIDE LUCA)*
 
+> ### ⛔ **SUPERATA DALLA SEZ. `12`** *(Luca `2026-11-17` `16:02`: il calore si accumula sul NETTO, in una riserva conservata; l'accumulo arco per arco contava la stessa energia molte volte: sez. `12.2`)*. **Il testo sotto resta com'era.**
+
 - **La nascita sull'arco FUORI dal confine** *(oltre `~1.9` raggi della materia, dove il termine della materia e' sotto l'`1%`)* **quando il FLUSSO USCENTE ACCUMULATO sull'arco copre il COSTO della nascita li'** *(`+22`-`+26` sul vuoto vicino)*; **poi l'accumulo riparte da zero; al piu' una nascita per tick.**
 - **Da definire prima del codice:** **(i)** l'accumulo della parte positiva o del NETTO *(il netto non raddrizza; il positivo si')*; **(ii)** il confine come grandezza LOCALE *(la materia sull'arco sotto l'`1%` del costo?)* e non come raggio dal baricentro *(un oggetto composto non ha un solo centro)*; **(iii)** la corrente del VUOTO *(oggi `J` e' della sola materia)*.
 
@@ -234,3 +236,34 @@
 - **P-R1:** **la credo VERA**: il netto a `30` e `45` nodi sta fra `0.19` e `0.27` per tick nei sei istanti, il costo fuori fra `+22.5` e `+26.5`: **circa `0.01` per tick, un fattore circa `50` sotto `0.50`**. **Ma al confine** *(`23.81` nodi)* **il netto non e' misurato, e a `15` e `20` nodi oscilla di segno**: **li' puo' venire diverso.**
 - **P-R2:** **la credo VERA** *(circa `0.23 x 2050 / 26`, una ventina)*.
 - **P-R3:** **NON so**: **il costo al confine dipende dall'ANGOLO** *(la materia del mattone non e' rotonda)*: **l'ultima contro la prima puo' differire di piu' del `10%` per l'angolo, non per l'accumulo**; **lo separo stampando il costo di ogni arco sparso sullo stato VERGINE** *(senza le nascite prima)* **accanto a quello in sequenza.**
+
+### 12.2 IL DIFETTO DELL'ACCUMULO, MISURATO *(S1; `doc/referti_l2/accumulo_controllo.txt`)*
+
+- **L'accumulo arco per arco della sez. `11.2`** *(`flusso_uscente.txt`, 3.3)* **sommava il flusso che ATTRAVERSA ogni arco: la stessa energia, uscendo, attraversa molti archi in fila e si contava molte volte.**
+- **Il controllo: l'energia NETTA che esce per tick attraverso l'anello, per il costo medio di una nascita** *(`25.70 +- 1.23`, gli otto costi fuori dal confine)*:
+
+| l'anello | il netto per tick *(la media sui sei istanti)* | le nascite pagabili per tick | il fattore contro `0.504` | la riserva in `2050` tick | le nascite che paga |
+|---|---|---|---|---|---|
+| il confine `23.81` | `+0.149` *(da `+0.022` a `+0.383`)* | `5.8e-03 +- 4.3e-03` | `87` | `+385` | `15.0` |
+| `30` | `+0.234` | `9.1e-03` | `55` | `+474` | `18.4` |
+| `45` | `+0.237` | `9.2e-03` | `55` | `+496` | `19.3` |
+
+- **LE PREVISIONI:** **P-R1 VERA** *(fra `0.005` e `0.02`; il fattore fra `20` e `100`)*; **P-R2 VERA** *(al piu' `25`)*. **La riserva e' incerta:** al confine il netto oscilla di un ordine fra i sei istanti, e il trapezio su sei punti e' un'approssimazione *(Q-A5)*.
+
+### 12.3 LA RISERVA *(S2: la PROPOSTA; ### LA SCELTA E' DI LUCA)*
+
+- **(a)** entra **solo il flusso NETTO di energia attraverso il confine** *(`23.81` nodi = `1.92` raggi della materia per il mattone)*, integrato nel tempo; **(b)** ogni nascita toglie dalla riserva il suo costo `Delta H` misurato sullo stato vero, e **la riserva non va mai sotto zero**; **(c)** **l'energia della nascita deve uscire DAVVERO dal campo** *([[D-BILANCIO-NASCITA]])*: **il totale** *(il campo + la riserva + il costo dei nodi nati)* **e' conservato.**
+- **LE ALTERNATIVE, coi pro e i contro** *(NON scelgo)*:
+  - **(i) una riserva UNICA per oggetto** -- **pro:** semplice, un numero; il netto al confine e' gia' misurato cosi'. **contro:** serve un «oggetto» e un confine *(per un composto, quale centro?)*; **non dice DOVE nascere.**
+  - **(ii) riserve LOCALI per settore angolare** -- **pro:** la nascita cade dove l'energia esce davvero; **nessun centro globale** *(un confine locale)*. **contro:** il netto per settore oscilla di piu' *(al confine gia' l'anello intero oscilla di un ordine)*; **piu' leggi da scrivere.**
+  - **COME si toglie l'energia dal campo** *(da derivare)*: **la proposta: dal vuoto** *(il costo e' quasi tutto del vuoto: la sez. `11.2`)*, **con un'operazione che conserva la norma** *(una rotazione di fase locale del vuoto attorno all'arco nato, che cambia `H` senza cambiare `V`, come la «rotazione» di `_conto_del_vuoto.conto`)*; **dove: sugli archi che il flusso ha attraversato** *(contro: non locale)* **o sull'arco nato** *(contro: la riserva e' integrale, l'arco no)*.
+  - **DOVE nasce il nodo:** **l'arco scelto dalla tensione** *(il termine d'arco del vuoto: misurato, sez. `10.6`)* **o dal flusso** *(l'arco col netto uscente piu' grande del settore)*. **La simmetria allo specchio** *(D-M2)* **vale per tutte e due, se la scelta e' equivariante e i pari merito non scelgono** *(sez. `10.3`)*.
+
+### 12.4 L'AUTOALIMENTAZIONE *(S3; `doc/referti_l2/nascite_sparse.txt`)*: **UNA DILUIZIONE LOCALE, NON UN EFFETTO CHE SI ALLARGA**
+
+- **La domanda di Luca:** **le nascite in fila della sez. `11.2`** *(sul nato per ultimo, da `+27.4` a `+0.45`)* **sono come l'espansione accelerata?**
+- **Le nascite su archi SPARSI** *(lo stato di `L 186` a `k 3000`; `20` archi a `18` gradi l'uno dall'altro, uno dopo l'altro sullo stato che cresce)*: ### **ogni nascita costa ESATTAMENTE quanto costerebbe sullo stato vergine** *(la differenza relativa massima `3.9e-11` al confine, `1.8e-11` a `30` nodi)*: **le nascite lontane NON si vedono fra loro.**
+- **Il rapporto ultima/prima:** **a `30` nodi `0.995`; al confine `1.201`** -- **ma al confine il costo dipende dall'ANGOLO** *(sullo stato vergine da `+17.70` a `+31.81` attorno all'anello; a `30` nodi da `+25.73` a `+26.45`)*: **il `20%` e' l'angolo, non l'accumulo** *(la sequenza = il vergine)*. **Accanto, in fila sul nato per ultimo:** `0.017`.
+- ### **LA LETTURA:** **la discesa in fila e' DILUIZIONE LOCALE** *(D7 dimezza il campo sempre nello stesso punto: una crepa che si allarga in un posto solo)*, **non un effetto che si allarga** *(lo spazio nuovo non rende piu' facile lo spazio lontano)*. **Con la scelta del nodo da una grandezza dello stato** *(la tensione o il flusso)* **la crepa e' possibile: la riserva la limita** *(sotto)*.
+- **P-R3 ALLA LETTERA:** **VERA a `30` nodi** *(`0.995`)*, **FALSA al confine** *(`1.201`, oltre il `10%`)* **-- per l'angolo, come scritto prima della misura** *(la mia nota in `12.1`)*; **la sostanza** *(la discesa e' locale)* **regge.**
+- **QUANTE NE PAGA LA RISERVA** *(il netto al confine in `2050` tick, `+385`)*: **`16` nascite su archi sparsi al confine, `14` a `30` nodi, `20` in fila** *(in fila costano sempre meno: la riserva ne paga di piu', ed e' la crepa)*.
