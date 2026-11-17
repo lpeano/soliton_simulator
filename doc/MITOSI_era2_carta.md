@@ -267,3 +267,15 @@
 - ### **LA LETTURA:** **la discesa in fila e' DILUIZIONE LOCALE** *(D7 dimezza il campo sempre nello stesso punto: una crepa che si allarga in un posto solo)*, **non un effetto che si allarga** *(lo spazio nuovo non rende piu' facile lo spazio lontano)*. **Con la scelta del nodo da una grandezza dello stato** *(la tensione o il flusso)* **la crepa e' possibile: la riserva la limita** *(sotto)*.
 - **P-R3 ALLA LETTERA:** **VERA a `30` nodi** *(`0.995`)*, **FALSA al confine** *(`1.201`, oltre il `10%`)* **-- per l'angolo, come scritto prima della misura** *(la mia nota in `12.1`)*; **la sostanza** *(la discesa e' locale)* **regge.**
 - **QUANTE NE PAGA LA RISERVA** *(il netto al confine in `2050` tick, `+385`)*: **`16` nascite su archi sparsi al confine, `14` a `30` nodi, `20` in fila** *(in fila costano sempre meno: la riserva ne paga di piu', ed e' la crepa)*.
+
+## 13. VERSO IL PRIMO TEST SUL MATTONE *(il mandato di Luca del `2026-11-17` `16:38`)*
+
+> **Le decisioni di Luca** *(`16:38`, sulla sez. `12.3`)*: **D-R1** riserve LOCALI per settore angolare; **D-R2** il nodo nasce, nel settore, sull'arco oltre il confine col flusso NETTO uscente di energia piu' grande; **D-R3** l'energia della nascita si toglie dal VUOTO attorno all'arco nato, con una rotazione che conserva la norma, da derivare e provare; **D-R4** la crescita e' IRREVERSIBILE *(nessuna fusione)*: **una freccia del tempo DICHIARATA**, accanto a CPT *(che regge senza bordo e senza crescita)*; **D-R5** il codice del nucleo sul ramo `mitosi` si allenta SOLO per l'infrastruttura che non dipende dalla regola di `phi_h`; **la regola di nascita resta FERMA fino a D-M3.**
+
+### 13.1 LE PREVISIONI DEL GUARDIANO *(copiate PRIMA delle misure)*
+
+- **P-M1.** A3: una rotazione locale SOLO sul vuoto di `S` non basta a togliere `+26` sul vuoto F3 quasi puro *(serve un insieme piu' grande o un'altra operazione)*.
+- **P-M2.** P6 passa al bit a piu' di `6` nodi dal difetto.
+- **P-M3.** Il costo di una nascita *(CSR + Gauss rifattorizzato)* sta sotto `3` tick; con circa `0.01` nascite per tick, il costo medio cresce meno dell'`1%`.
+- **P-M4.** Per il test futuro: sul mattone senza bordo, in `3000` tick, fra `5` e `40` nascite, tutte oltre il confine, in almeno `4` settori su `6`; la massa entro `12.4` e la larghezza `w` diverse da C2 per meno dell'`1%` *(il test mostrera' il meccanismo e la conservazione, non ancora la curvatura P7)*.
+- **LE MIE, accanto** *(il perche' nella carta del mandato, `doc/TASK_HISTORY/2026-11-17_mitosi_verso_il_test.md`, sez. `1`-`2`)*: **P-M1 VERA** *(F3 e' il minimo locale dell'energia del vuoto a norma fissata)*; **P-M2: credo che FALLISCA al bit per Gauss e per il lapse** *(una nascita cambia `E` e `cs` ovunque: il confronto lontano dal difetto va fatto a parita' di `E` e di `cs`, o il cancello va riscritto)*; **P-M3: non so.**
