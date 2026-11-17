@@ -1,5 +1,7 @@
 # IL PIANO DI VERIFICA NELLA SCATOLA GIUSTA *(Luca `2026-11-16` `17:47`; R-SCATOLA al `5%` con le TRE clausole)*
 
+> ### ⛔ **SOSPESO per decisione di Luca `2026-11-17` `09:19`, da rifare; il filo nel documento `doc/SOSPESO_2026-11-17_FILO_DELLA_RICERCA.md`** *(le corse, gli stati su E:, la condizione e il comando per riprenderle: la parte `5`)*.
+
 > **La domanda di Luca** *(`17:43`)*: **la fisica vista finora** *(le coppie B2 e B2-pi, il triangolo a `120`, le forze a `35`, `51`, `66`)* **viene da `L 162`, dove R-SCATOLA non e' rispettata: e' quella che vedremo nella scatola giusta?**
 > **Le previsioni sono committate PRIMA dei risultati; le soglie non si rivedono** *(se si rivedono: post-hoc, dichiarato)*.
 > **Le fasi `0`-`2` si fanno; la fase `3` SOLO dopo «VIA ALLA FASE 3».**

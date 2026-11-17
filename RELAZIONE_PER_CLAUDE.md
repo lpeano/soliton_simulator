@@ -26140,3 +26140,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Errore mio**: la prima versione della tabella leggeva il Gauss anche dall'intestazione (il massimo uguale alla soglia, F-66 e A-66 "sopra"); corretto (9650ea2c) prima di scriverlo.
 - **R-SCATOLA al 5% alla fine non e' rispettata in nessuna corsa**: R_ogg cresce (F-66 57 -> 86, A-66 57 -> 77, F-51 50 -> 68; V-B2 e V-B2pi 42 -> 43 con un salto a 59 a k 1750). **V-B2 e V-B2pi hanno la stessa serie di R_ogg tappa per tappa**: da controllare (FALSO-UNO?). R_ogg al 5% salta a gradini.
 - **Le domande per Luca** (la carta notte sez. 7.2): **D-N1** le cinque si riprendono cosi' o si fermano come V-T120 e si rilanciano su tori scelti dopo la misura della crescita di R_ogg? **D-N2** le quattro non partite su quali tori? La mia raccomandazione: prima la lettura dei pezzi (massa, R_ogg dalle mappe, V-B2 contro V-B2pi), poi decidere.
+
+### 2026-11-17 09:2x -- LA VERIFICA SOSPESA (LUCA 09:19); IL FILO DELLA RICERCA IN doc/SOSPESO_2026-11-17_FILO_DELLA_RICERCA.md
+
+- Il documento: parti 1-6 del guardiano con ogni numero controllato contro il suo referto (nessuno cambiato; accanto "il referto dice" o "la fonte: non trovata"), parte 7 dal repo (doc/referti_l2/sospeso_censimento.txt). Le segnalazioni in testa al documento: B2-pi parte da 37.048 non 35; 1.52 e' misurato/previsto della pattinatrice; i due strati, le sei gobbe, le culle che seguono la materia e il guscio 0.44 -> 0.21 senza fonte; la voce 7 della ROTTA ha 0.0128 non 0.0178; la voce 8 e' CHIUSA; il mandato delle 13:04 (Q11) non trovato.
+- **Le considerazioni delle 11:47 del 2026-11-16 NON sono scritte: il testo di quel mandato non e' nel repo ne' nelle mie trascrizioni.** Serve il testo.
+- La ROTTA: R-SCATOLA al 5% adottata per il mattone singolo, da ridefinire per i composti (Q2); la verifica SOSPESA. Il piano di verifica: SOSPESO.

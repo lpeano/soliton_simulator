@@ -1,0 +1,248 @@
+[TIMBRO] sospeso_censimento.py  sha1-BYTE 4c3287bc  committato e pulito
+==================================================================================================================================
+(7.3) L'INDICE: 1121 voci (doc/indice/voci.jsonl); il conto per classe e stato
+    classe                    AGENDA          APERTA          CHIUSA DA_CLASSIFICARE         SOSPESA        SUPERATA  in tutto
+    CRITERIO                       4               3              17               0              78               0       102
+    CURA                           5               0              45               0               3               7        60
+    DECISIONE                     71               4              18               0               0               6        99
+    DIFETTO                       11              20              51               0             132               2       216
+    FRONTE                        35              11               5               0              77               3       131
+    MISURA                        27               2             125               0              24               1       179
+    NON_DEFINITA                   0               0               0             187               0               0       187
+    PRESIDIO                      26              39               1               0               7               0        73
+    STANDARD                      12              42               3               0               0               3        60
+    TEORIA                        14               0               0               0               0               0        14
+    IN TUTTO                     205             121             265             187             321              22      1121
+----------------------------------------------------------------------------------------------------------------------------------
+### DECISIONE, APERTA: 4
+    BUDGET-COLLAUDI-500                              il budget dei collaudi e- 500 s, soglia di LAVORO decisa da Luca, e niente parallelismo
+    D-BILANCIO-NASCITA                               la nascita si paga: i genitori con la tensione, il vuoto col suo termine
+    DOMANDA-BASE-DI-CICLI                            la base di cicli non e unica, e lo stesso difetto compare in tre pezzi diversi
+    DOMANDA-LA-CARTA-NON-ESISTE                      la carta della fisica non ha un documento, e le sue etichette collidono con ID veri
+----------------------------------------------------------------------------------------------------------------------------------
+### DECISIONE, AGENDA: 71
+    BASTA-PROTOTIPI                                  basta prototipi: il simulatore riusa l-architettura provata dell-era 1, adattata
+    COESIONE-TERMINE-O-CAMPO                         la coesione simmetrica viene da un termine LOCALE o da un CAMPO?
+    CS-LOCALE-DAL-VUOTO                              il tempo proprio e la velocita- locale della luce vengono dal VUOTO, non dalla materia del nodo
+    DEC-ALBERO-CINQUE-SENZA-ARGOMENTO                di CINQUE nodi dell-albero il repo non dice l-argomento, e delle decisioni 1, 3, 10 nemmeno
+    DEC-NASCITA-PSI                                  con che stato nasce un nodo? il punto 3 chiede UNA REGOLA DICHIARATA per ogni grandezza
+    DEC-REGOLA-FORMA                                 che CODICE genera una `regola`? il punto 11(a) chiede che crescita e vuoto si generino
+    DECISIONE-DIREZIONE-STRADA-3                     strada (3): C esatta nelle leggi e ROTTA SPONTANEAMENTE nello stato, con pareti
+    DECISIONE-L1-NATURA-A-SIMULATORE-B               LA NATURA E- (A), IL SIMULATORE E- (B): fisso in archi = artefatto; serve un dizionario
+    DECISIONE-LA-C-VUOLE-IL-TEMPO-ROVESCIATO         La C del cammino era una conseguenza delle involuzioni: coi flussi parziali serve una CT
+    DECISIONE-LINEARE                                LINEARE, il regime di poca materia di S3: l-accoppiamento rho dalpha/drho deve andare a zero
+    DECISIONE-SOLO-TRIANGOLI                         SOLO TRIANGOLI: la fisica si misura sui triangoli; il quadrato solo come controllo di servizio
+    DECISIONE-TICK-OROLOGIO-MASSIMO                  il tick e l orologio piu veloce possibile: theta <= pi e cs ha un massimo
+    DERIVA-DELLA-FORMA-D                             la forma (D) non conserva la sua conservazione modificata: perche-?
+    DOMANDA-A-NON-E-MECCANICA                        (A) non e meccanica: dE/d theta_k = 0, quindi Hamilton da d pi_k / dt = 0
+    DOMANDA-A3B-CLASSE                               A3b: con che classe entra nell-indice?
+    DOMANDA-BANDA-ANTIMATERIA                        la banda di sotto come antimateria: un vuoto con la banda negativa occupata, la norma come N+ - N-?
+    DOMANDA-C2-O-C4                                  due componenti o quattro: il gap c-e- solo con C4?
+    DOMANDA-CHI-CAUSA-L-ANISOTROPIA                  sul cubico i versori del v3 RIDUCONO l-anisotropia direzionale: e- una leva o si lascia?
+    DOMANDA-CHIRALITA                                la chiralita: quale grandezza del modello e? la moneta di spin, le due componenti a K, le valli
+    DOMANDA-CONDIZIONI-INIZIALI-IN-TABELLA           la tabella non ha un posto dove dichiarare le condizioni iniziali
+    DOMANDA-CONO-EMERGENTE                           il cono di luce unico puo' emergere dalla dinamica della materia vestita dal vuoto?
+    DOMANDA-D13-CONIUGATI                            D13: i coniugati delle memorie -- tw come fase U(1) sull-arco?
+    DOMANDA-D9-GEOMETRIA                             D9: la geometria viene da d e p_d dentro H, o dalle relazioni fra gli psi?
+    DOMANDA-DOVE-STA-LA-C-IN-TABELLA                 la C e decisa al punto F3 e nessuna legge della tabella la dichiara
+    DOMANDA-DOVE-VIVE-LAMBDA-C-SENZA-UN-VALORE       la scheda di Lambda_c non si genera dalla tabella: lo schema pretende valore E origine
+    DOMANDA-ESTREMITA-NUOVE-INIZIALI                 con che psi e che phi nascono le estremita di un arco nuovo
+    DOMANDA-FLUSSO-SENZA-AZIONE                      un flusso non dichiara dove agisce: lo schema non ha il campo azione per lui
+    DOMANDA-FORME-VUOTO                              le TRE forme del vuoto locale: che cos-e- un grado, quanti per nodo, l-accoppiamento
+    DOMANDA-FUSIONE                                  la FUSIONE di due nodi: si vieta, e con che cosa?
+    DOMANDA-GOBBA-SEGNO-GRAVITA                      la gobba del vuoto e il segno della gravita: la massa sul fondo fa un pozzo o una collina di cs?
+    DOMANDA-GRAFO-INIZIALE                           il grafo iniziale SENZA pos: reticolo, k-regolare, espansore?
+    DOMANDA-GRANDEZZA-LOCALE-TEMPO                   da dove viene la grandezza locale da cui escono r_k e cs_k?
+    DOMANDA-GUSCIO-E-INTERFERENZA                    il guscio e- interferenza e non materia: che cosa resta dell-ipotesi del guscio?
+    DOMANDA-IL-PI-DEL-NODO-CHE-NASCE                 il pi di un nodo nuovo: la decisione 10 (il calore paga la nascita) riscritta su pi
+    DOMANDA-IL-V4-ENTRA-NELL-ERA-2                   cinque gruppi di operatori del v4 sono nel banco e non in tabella
+    DOMANDA-IL-VALORE-DI-LAMBDA-C                    il valore di Lambda_c: parametro dichiarato, memoria di nascita, o altro
+    DOMANDA-L-ORDINAMENTO-IN-H-O-NON-H               il termine di ordinamento entra in H (e nel flusso) o come legge NON-H?
+    DOMANDA-LA-FORMA-DI-CS-CHE-SATURA                la forma di cs dal vuoto che satura: la scala Lambda_0 non esiste in tabella
+    DOMANDA-LA-FORMA-DI-F-NELL-ORDINAMENTO           quale F in Lambda F(q q / Lambda^2): esiste, NON e unica, ed e la stessa classe di G
+    DOMANDA-LA-GERARCHIA-GRAVITA-EM                  la gerarchia gravita/elettromagnetismo deve EMERGERE dal modello, o si accetta come parametro
+    DOMANDA-LA-MITOSI-CREA-VUOTO                     la mitosi CREA vuoto? a densita costante V cresce, e oggi V si conserva esattamente
+    DOMANDA-LAMBDA-GRANDEZZA                         lambda: su quale grandezza si misura, e da dove viene il suo valore?
+    DOMANDA-LO-STATO-CONTIENE-IL-PASSATO             lo stato contiene il passato? una memoria al posto dei punti fissi di cs, scelta per il modello
+    DOMANDA-MASSA-E-FORME-MANCANTI                   il termine di massa e due forme del flusso sono nel banco e non in tabella
+    DOMANDA-MITOSI-LE-FORME                          le quattro forme della mitosi: lo spareggio, phi, il ramo della radice, la connessione
+    DOMANDA-PASSO-FRAZIONARIO-O-ASINCRONO            pezzi frazionari o tick asincroni, e l-invarianza locale dei secondi NON e- dimostrata dove cs varia
+    DOMANDA-PESO-ARCO-COME-MEMORIA                   il peso d-arco come memoria dinamica: la geometria nasce dalla dinamica?
+    DOMANDA-PORTATA-DEL-VUOTO-MEDIATORE              quale instradamento, cioe quale cono: la liberta di ricircolo adesso sceglie la portata
+    DOMANDA-PRIMA-LEGARE-POI-MISURARE                senza stato legato tre letture non sono decidibili: si cerca prima un legame?
+    DOMANDA-Q-DEL-NODO-SOMMA-O-MEDIA                 q_k e la SOMMA o la MEDIA dei q_h sulle estremita del nodo?
+    DOMANDA-QUALE-FORMA-FISSA-CS                     quale forma del vuoto fissa cs: nessuna delle tre e- libera da tutti i difetti
+    DOMANDA-QUALE-INVARIANTE-CON-CS                  con cs non uniforme H_tot non e conservato: quale quantita deve conservare il passo?
+    DOMANDA-QUALE-LAMBDA-SULL-ARCO                   quale Lambda usa l arco nel termine di ordinamento: del nodo, la media, o dell arco?
+    DOMANDA-QUALE-SCENA-3D-PRINCIPALE                quale scena 3D fa da principale, se nessuna delle due provate e- isotropa?
+    DOMANDA-QUALE-SEGNO                              quale segno della non linearita-, se quello che lega lega solo in 1D?
+    DOMANDA-QUANDO-LA-CAMMINATA-IN-TABELLA           quando si porta la camminata nella tabella? il porting aspetta TRE decisioni aperte
+    DOMANDA-QUANTITA-CONSERVATA                      esiste una moneta isotropa, causale e simmetrica fra le bande con una quantita- conservata?
+    DOMANDA-REGOLE-FUORI-CLAUDE                      le regole di gestione fuori da CLAUDE.md, e quelle dentro senza presidio: vanno bene?
+    DOMANDA-U-DINAMICA-LE-FORME                      le quattro forme della U d arco dinamica: la scala, il caso senza vuoto, le olonomie, l esponente
+    DOMANDA-UNITA-DI-STATO                           l-unita- di stato: qual e- la capacita- di un nodo?
+    DOMANDA-VALLE-CARICA                             la valle come carica: K - K' si conserva con la moneta accesa? e il momento angolare modulo 6?
+    DOMANDA-VIA-DEL-CAMPO                            si passa alla via del campo, dato che nessuna non linearita- locale lega in 3D?
+    INDIRIZZO-MASSA-COLLETTIVA                       l indirizzo di Luca: una massa e una velocita di gruppo collettive, non una massa per nodo
+    N-DIREZIONI-DI-MOTO                              le direzioni n della moneta sono DIREZIONI DI MOTO, non un campo fisso
+    PIANO-2D-3D                                      IL PIANO: 2D per le proprieta' locali del passo, 3D per le leggi globali (la FCC)
+    PROPOSTA-FASE-DISPARI-COESIONE                   la fase DISPARI sotto coniugazione di carica come forma della coesione
+    PROPOSTA-LOG1P-IN-N                              log1p nella formula di N: la proposta resta APERTA, e NON si fa ora
+    PROPOSTA-SCANSIONE-FORZA-NONLINEARE              la coerenza del cluster migliora con la forza: si estende la scansione?
+    PROVV-U-FISSE-TRE-SCENE                          le matrici d-arco sono FISSE, in tre scene dichiarate: provvisorio
+    PROVV-VERSORI-NON-RELAZIONALI                    i versori del riferimento locale sono DATI e non relazionali: provvisorio
+    SPIN-LEGATO-AL-MOTO                              lo spin si lega al moto: una moneta exp(-i eps dtau sigma.n) e il trasporto U(2)
+----------------------------------------------------------------------------------------------------------------------------------
+### FRONTE, APERTA: 11
+    AUDIT-CURE                                       per ogni legge aggiunta: compensava un difetto che ORA e' curato? Non il numero: la LEGGE
+    CONTA-RIGHE                                      DUE CONVENZIONI PER CONTARE LE RIGHE: i miei strumenti contavano uno in piu' di H-RIGHE
+    FINESTRA-PRE-NASCITA                             una finestra PRIMA della prima nascita (216) non dice niente sulle nascite: e' costata TRE volte
+    IMPL-2                                           una SECONDA implementazione indipendente, scritta dalle LEGGI e non dal codice
+    LINGUAGGIO-REGOLE                                un linguaggio dichiarativo delle leggi, da cui GENERARE il codice e il documento: proposta di Luca
+    LOSCHMIDT-ECO                                    l'eco di Loschmidt PER VOCE: un errore subito grande e' irreversibilita' del CODICE
+    NON-TRACCIATI                                    484 file non tracciati: 98 CITATI e non tracciati sono riferimenti al vuoto, e il .gitignore blocca
+    PIATTAFORMA-NON-TIMBRATA                         I REFERTI NON TIMBRANO LA PIATTAFORMA, e i conteggi assoluti ne dipendono
+    PRESTAZIONI-CORSE                                le corse costano: sei strade per il tempo di calcolo, da affrontare a modello STABILE
+    REG-V                                            verificaregistro.py: completezza, esistenza, coerenza con la traccia di d0 e col registro dei...
+    RISCRITTURA-GO                                   riscrivere il simulatore in Go: valutato, NON deciso
+----------------------------------------------------------------------------------------------------------------------------------
+### FRONTE, AGENDA: 35
+    CAMMINATA-NELLA-TABELLA                          la camminata entra nella tabella -- ASSORBITA da SIMULATORE-ERA-2, e i quattro punti restano
+    CANALE-CS-SECONDA-SORGENTE                       IL CANALE DI cs: LA SECONDA SORGENTE DELL-INSTABILITA- DELLA MATERIA UNIFORME
+    CONSERVAZIONE-LOCALE                             A14: ogni legge si giudica su tre domande -- energia locale, carica locale, totali solo per nascita
+    CORRENTE-DERIVATA-H-TOT                          la strada D del libro dei conti: una corrente d energia per H_tot derivata dai commutatori
+    DIVISIONE-AUTOCONSISTENTE                        la divisione dell arco come UNA legge: dove si rompe, cosa ereditano i figli, il calcio
+    EM-CURVATURA-BIDIREZIONALE                       l accoppiamento EM-curvatura e' bidirezionale in natura: il verso EM->curvatura c'e' o manca?
+    GEOMETRIA-DELLA-CRESCITA                         SPECULATIVA: lo spazio delle fasi CRESCE, e una forza nuova come OSTRUZIONE fra le nascite
+    GRAVITA-POTENZIALE                               due potenziali nel codice e nessun Poisson risolto: Poisson e un VINCOLO DI SCALA
+    GRIGLIA-A-TRIANGOLI                              GRIGLIA A TRIANGOLI: GEOMETRIA DALLE SOLE CONNESSIONI
+    I1                                               IDEA DI LUCA, per dopo: costruire UNA massa, farla maturare, leggerne la struttura sul grafo e...
+    INVARIANZA-LOCALE-CS                             ogni legge che usa una grandezza GLOBALE da all osservatore locale un riferimento esterno
+    ISOTROPIA-LOCALE                                 l-irregolarita- locale si attenua con la distanza? e si riduce costruendo meglio la scena?
+    LEGAME-SCENE-GRANDI                              il completamento del legame: scene 3D grandi, misura in archi assoluti, e M2
+    LIBRO-DEI-CONTI                                  il libro dei conti: conta giusto; H_tot col legame S1 DERIVA senza scalare con s (iv' 0.72): FERMO
+    LORENTZ-MATERIA-INTERFERENZA                     la materia per interferenza aggira la violazione di Lorentz che si propaga alle basse energie?
+    LUCE-VINCOLO-LAMPI-GAMMA                         LA LUCE DEL MODELLO RISPETTA IL VINCOLO DEI LAMPI GAMMA?
+    M-SPINORE                                        trasporto SU(2) per arco con memoria: il candidato campo di gauge della carica
+    M1                                               LA MATERIA È UNO STATO, NON UNA SOSTANZA — e non c'è SCARICO. Nel codice la materia è la...
+    MAPPA-DEL-LAVORO                                 la mappa del lavoro (doc/MAPPA.md): lo stato in un posto solo, aggiornata a ogni referto e decisione
+    MASSE-PESI-SOVRAPPOSTE                           un nodo appartiene a PIU masse con peso diverso: una massa e una configurazione del campo, non nodi
+    MATERIA-LEGGERA                                  la materia leggera: v_max/c dipende dalla massa della coppia rispetto alla larghezza della banda?
+    MODELLO-MINIMO                                   un modello semplice (spinore, grafo, LAM) da costruire DOPO il simulatore completo
+    O4                                               CONSERVAZIONE DELL'ENERGIA. L'energia assorbita non si riesce a bilanciare
+    PROGETTO-CURVATURA                               IL PROGETTO DELLA CURVATURA DELLO SPAZIO: cs nelle lunghezze, gamma = 1, sulla carta
+    PROGETTO-DRIVER-CAMMINATA                        il progetto del driver della camminata: tre opzioni, lo schema, il timbro, il sigillo, sette domande
+    PROGETTO-MASSA-COLLETTIVA                        il progetto della massa collettiva: inventario, ipotesi di Luca, costituenti senza massa, tre misure
+    PROGETTO-MITOSI                                  IL PROGETTO DELLA MITOSI NELL ERA 2, sulla carta: olonomia, forma sui triangoli, bilancio col vuoto
+    PROGETTO-U1                                      IL PROGETTO DEL CAMPO U(1) SUGLI ARCHI: la luce del modello, sulla carta
+    REVERSIBILITA-LOCALE                             reversibilita' LOCALE, irreversibilita' GLOBALE: la sola freccia e' la crescita dello spazio
+    RINOMINA-SCENA-QUADRATO                          scena_l2.scena costruisce il quadrato e il nome non lo dice: la rinomina, con i 12 strumenti
+    SIMULATORE-ERA-2                                 basta prototipi: la camminata entra in primo_ordine e DIVENTA il simulatore
+    SPAZIO-CHE-NASCE                                 lo spazio nasce dalla dinamica: U d-arco dinamica, mitosi al quanto di olonomia
+    SPAZIO-TRIANGOLAZIONE-SENZA-POSIZIONI            SPECULATIVA: lo spazio come triangolazione senza posizioni, curvatura nei vertici
+    SPAZIOTEMPO-3PIU1                                LE IDEE SULLO SPAZIO-TEMPO 3+1: il tempo dei tick, la FCC a quattro direzioni, torsione e Minkowski
+    VUOTO-LOCALE-DETERMINISTICO                      termostato locale + scuotimento DETERMINISTICO: UNA legge per nodo, fase <-> vuoto
+----------------------------------------------------------------------------------------------------------------------------------
+### MISURA, APERTA: 2
+    DOMANDA-CORRENTE-LOCALE-NON-ESISTE               la corrente locale di E ESISTE per la parte lineare, portata misurata 3 archi
+    SCHED-T3-REGOLE                                  le regole di composizione: 94 scritture, 80 nelle cinque forme, 6 eccezioni in tre famiglie
+----------------------------------------------------------------------------------------------------------------------------------
+### MISURA, AGENDA: 27
+    CARICA-A14-3                                     la carica di A14.3: la rotazione interna sigma_z ha due segni e si conserva a eps 0 e U = I
+    CENSIMENTO-DECISIONI                             IL CENSIMENTO DELLE DECISIONI DI LUCA: 48, di cui 25 nel nucleo, 15 giustamente fuori, 8 mancanze
+    CONTO-DEL-VUOTO                                  conto del vuoto: nascita con D7 e flip liberano energia; il vuoto uniforme, al massimo, non assorbe
+    DIMENSIONE-E-ISOTROPIA-DELLE-SCENE               le scene del banco non hanno dimensione 3, e la mia misura dell-isotropia era confusa
+    DIVISIONE-DEL-VUOTO                              la divisione del vuoto: nessuna regola di phi con V conservata chiude il conto della nascita
+    ENERGIA-DEL-LEGAME                               il conto dell energia del legame: il vuoto cede energia alla materia; 5/5 coi criteri fino alla vita
+    ENERGIA-NON-CONSERVATA-S1                        H_tot col legame S1 e' conservata a O(s^2): la "non conservazione" era lo stato di partenza
+    MASSA-NEI-DIFETTI                                la massa nei difetti: nessuno stato legato; il bordo locale non converge; Lambda per nodo cambia cs
+    MISURA-ANTIMATERIA-PIEGA-DIVERSO                 i pezzi frazionari fanno piegare il tempo in modo diverso a materia e antimateria
+    MISURA-ARCO-E-COINCIDENZA                        nei tick asincroni la frequenza dell-arco e- una COINCIDENZA, non il minimo dei cs
+    MISURA-BUCO-SPETTRO-PER-FAMIGLIA                 il buco nello spettro c-e- sull-anello e sul geometrico 3D, non sul cubico
+    MISURA-C-ESATTA-OPPURE-LOCALITA                  C esatta oppure localita-, non entrambe: il conto e- il determinante del blocco
+    MISURA-CS-NESSUN-EFFETTO-SULLA-MATERIA           a queste taglie il cs locale non produce nessun effetto misurabile sulla materia
+    MISURA-DUE-GRUMI-NESSUNA-INTERAZIONE             due grumi non interagiscono, e il 20 per cento di G2(b) sta dentro la barra d-errore
+    MISURA-GUSCIO-ANTIFASE                           il guscio in antifase c-e-, ma e- interferenza di Grover e la saturazione lo distrugge
+    MISURA-INVARIANZA-LOCALE-V4                      l-invarianza locale della luce: misurata SOLO a cs UNIFORME, e la- i tick asincroni la rispettano
+    MISURA-NORMA-ERA2                                la norma totale sum_nodi psi^dag psi: l-invariante QUADRATICO su cui si misura l-integratore
+    MISURA-SEGNO-LEGA-IN-1D                          la forma (D) col segno diretto LEGA IN 1D, e in 3D l-effetto cala con la taglia
+    SCOMPOSIZIONE-SOLITONE                           l energia a riposo del solitone: i costituenti 127%, il legame -27%, la cinetica ~0
+    SCOMPOSIZIONE-ZERO-LAMBDA                        la scomposizione con lo zero simmetrico: il legame 63% dei costituenti, il solitone 37% (5/5)
+    SOLITONE-VUOTO-CONGELATO                         il solitone col vuoto congelato: stabile a N 1e6; col tick intero vive 320: lo disfa il vuoto
+    SOLITONI-TRIANGOLI                               i solitoni sui triangoli: S1 esiste nel risolutore ma nella dinamica si disfa; S3 e S4 solo stretti
+    TORSIONE-DEL-VUOTO                               la torsione del vuoto: in energia massima sul bordo della buca, senza freno; in fase illeggibile
+    U1-PROTOTIPO-TRIANGOLI                           IL PROTOTIPO U(1) SUI TRIANGOLI: c = 1 per tempo proprio, Courant 0.408, la DEVE di gauge fallita
+    VUOTO-DA-SOLO                                    il vuoto da solo e stabile al bit: il vuoto risponde alla materia, non si disfa per conto suo
+    VUOTO-DISTURBATO                                 il vuoto da solo e stabile, non solo stazionario: un disturbo 1e-6 non cresce, cs spento o acceso
+    VUOTO-SUL-FONDO                                  il vuoto uniforme e' il MASSIMO; dal fondo il vuoto PRENDE energia, il solitone vive 1.6-1.9 volte
+----------------------------------------------------------------------------------------------------------------------------------
+### DIFETTO, APERTA: 20
+    BLOB-DAL-DISCO-NON-DAL-REPO                      il blob dichiarato di un reperto era quello del DISCO con le CRLF, non dei committati
+    CENS-B16                                         [B] (1) INVENTARIO e (2) README sono prescritti *"nello stesso commit del 
+    COLLAUDO-NON-ESEGUITO                            un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come PASS
+    D-AGGIORNA-COMMIT-FALSO                          il flag --commit di aggiorna era falso per costruzione: la riga finisce in un commit futuro
+    DUE-STRUMENTI-ARCHIVIO-E                         due strumenti per lo stesso mestiere: spostare gli output su E-
+    ESENTE-P3                                        (CITATO 2 volte, MAI definito in un registro; citato solo in referti/sigilli/task... [ESENTE-P3]
+    FALSO-UNO                                        un verdetto NEGATIVO prodotto da una voce che non parla del merito: il gemello di FALSO-ZERO
+    FALSO-ZERO                                       uno ZERO prodotto da un insieme o un campione che ho scelto io: cinque volte in una sessione
+    FUGA-MULTIRIGA                                   la via d'uscita di H-REG-R e H-P1-bis e' una regex SENZA re.S: una dichiarazione su PIU' RIGHE...
+    H-REGR-LARGA                                     H-REG-R associa una scheda per NOME DI FUNZIONE: scatta su qualunque modifica a `_applica_flag`...
+    INDICE-COLLAUDO-SCRITTURA                        `crea-lotto` e `storico-commit` NON hanno un caso nel collaudo di `indice.py`
+    METADATI-REPERTO-PER-NECESSITA                   metadati.jsonl ha una via di scrittura e ZERO storico: e- un REPERTO per necessita-
+    PASSO-PIENO                                      un hook che rifiuta uno script che avanza con net.step() invece di csv/_passo.py passo_pieno
+    PRESIDIO-RIFIUTO-SOLO-SIGILLI                    _presidio.avvia rifiuta di girare SOLO se il nome comincia con _sigillo_: A9 lo dice senza
+    REFERTO-VERDE-SU-FALLIMENTO                      un referto scriveva il segno VERDE su un collaudo FALLITO: 20 su 22 con la spunta
+    RELAZIONE-BINARIA                                un NUL letterale rende RELAZIONE_PER_CLAUDE.md binaria per git, e i suoi diff illeggibili
+    REPERTI-IMMUTABILI                               APERTA il 2026-09-26 (proposta di Luca), famiglia G | UN COMMIT PUO' TOCCARE UN REPERTO GIA'...
+    REPLAY-CIECO-ALLE-CANCELLAZIONI                  il REPLAY di P-T2 non vedeva una cancellazione: 13 su 13 con 4 record tolti
+    RIPRESA-ARGV                                     APERTA il 2026-09-26 (limite di un meccanismo che ho costruito io) | LA RIPRESA SI FIDA DEL...
+    Z125                                             Z125 DIFETTO DI METODO, MIO ⏳[archivi delle cure · LETTURA] | IL §E NON ESISTE NEL REPO OLTRE E1...
+----------------------------------------------------------------------------------------------------------------------------------
+### DIFETTO, AGENDA: 11
+    COSTO-MEMORIA-DEI-FLUSSI-PARZIALI                I flussi parziali costano 1.17x dello stato in buffer, e la scena passa la soglia
+    DIFETTO-LAMBDA-NON-PIU-INVARIANTE-SOTTO-IL-VUOTO Con i flussi parziali Lambda_k non e piu invariante sotto la camminata del vuoto
+    DIFETTO-TERNARIO-CHE-NON-SCEGLIE                 un ternario che non scegliE: per il braccio lineare misuravo la Q di N
+    DIFETTO-TRE-MISURE-FUORI-DALLA-SUITE             tre misure della simmetria rotte dal divieto del vuoto nullo, e la suite non le girava
+    DOMANDA-DUE-SOGLIE-SENZA-ERRORE                  due soglie senza l-errore da cui proteggono: tol in corrente.instrada e il limite a Lambda zero
+    FRECCE-IMPOSTE                                   il censimento delle leggi che impongono una direzione nel tempo: NOVE, e DUE curabili prima
+    L-NUMERI-DERIVA-ORFANA                           il rapporto 4.20 della deriva di E non esce da nessuno script: numero orfano
+    MEMORIE-MANCANTI                                 il rapporto sulle memorie: il censimento dello stato, il bilancio, e le memorie candidate
+    PUNTO-FISSO-CS-SOLITONE                          il punto fisso di cs (tick.tick_con_cs) non converge col solitone S1, gia al tick 0
+    STRUMENTI-SULLA-LEGGE-VECCHIA                    20 coppie file/simbolo misurano, saltano o sostituiscono la legge che NON gira
+    V-MAX-DIREZIONI                                  _triangoli_forza.v_max sottostima la velocita massima sui gruppi degeneri (61 direzioni)
+==================================================================================================================================
+(7.5) I RAMI SU ORIGIN: 13 (l'ultimo commit; dentro origin/primo-ordine = antenato; i tag che puntano all'ultimo commit)
+    il ramo                    commit    la data                    dentro primo-ordine    i tag sull'ultimo commit
+    origin/dati-grezzi         c7a90cd7  2026-09-21 14:18:22 +0200  NO                     -
+        3 commit non in primo-ordine; l'ultimo: CORREZIONE: nodo_origine etichettava come MASSA i primi 595 NATI -- ripubblicato
+    origin/dev-dof             125666a2  2026-09-09 17:53:52 +0200  NO                     -
+        2 commit non in primo-ordine; l'ultimo: [dev-dof] dati accessori del tracing §48 (per doppio-check Claude): trace_diag.csv=diaglog completo del run trace seed1 (complemento di trace_segno.cs
+    origin/dev-infra           36a310c9  2026-09-07 11:23:42 +0200  SI'                    -
+    origin/dev-spinoriale      c9fcc1e8  2026-09-13 14:24:00 +0200  SI'                    -
+    origin/fork-su2            803bfed7  2026-10-08 21:52:44 +0200  SI'                    era-1-secondo-ordine
+    origin/last                2235a3cf  2026-09-02 09:55:33 +0200  NO                     -
+        1 commit non in primo-ordine; l'ultimo: Rimoazione Anisotropia Spuria
+    origin/main                252630fe  2026-09-10 20:38:11 +0200  NO                     -
+        20 commit non in primo-ordine; l'ultimo: tracing §55: fix calore (contaminazione stanata) + pilota PULITO NO-GO confermato (abeliano anche pulito) + doc 3+1 + diagnosi 5.3a->5.3c (verso nella
+    origin/media               182e30f1  2026-09-27 12:10:41 +0200  NO                     -
+        2 commit non in primo-ordine; l'ultimo: media: video rigenerato con l'opacita' PESO-MAX, e la distorsione degli archi DICHIARATA
+    origin/motore-numba        abf59c6f  2026-11-16 16:01:37 +0100  SI'                    motore-numba-riunito-2026-11-16
+    origin/primo-ordine        52d1ea9e  2026-11-17 09:28:52 +0100  SI'                    -
+    origin/strumento-mattone   5f4fa81c  2026-11-16 12:57:31 +0100  SI'                    nave-mattone-chiusa-2026-11-16
+    origin/unificazione        0fa7792d  2026-11-12 16:04:45 +0100  SI'                    -
+    origin/zero-nel-nucleo     986440d6  2026-11-12 10:29:12 +0100  SI'                    laterale-archiviato, pre-unificazione-laterale
+==================================================================================================================================
+(7.6) LE CORSE E I LUCCHETTI
+    il registro di C:/Users/lpeano/soliton_simulator            le voci APERTE: 0 
+        index.lock in C:/Users/lpeano/soliton_simulator\.git: nessuno
+    il registro di C:/Users/lpeano/soliton_simulator_mattone    le voci APERTE: 1 {'p6-0_2000': '2026-11-13T19:18:47+01:00'}
+        index.lock in C:/Users/lpeano/soliton_simulator/.git/worktrees/soliton_simulator_mattone: nessuno
+    il registro di C:/Users/lpeano/st_main                      (nessun doc/REGISTRO_CORSE.md)
+        index.lock in C:/Users/lpeano/soliton_simulator/.git/worktrees/st_main: nessuno
+    il registro di C:/Users/lpeano/wt_zero                      (nessun doc/REGISTRO_CORSE.md)
+        index.lock in C:/Users/lpeano/soliton_simulator/.git/worktrees/wt_zero: nessuno
+    il registro di C:/Users/lpeano/wt_zero_padre                (nessun doc/REGISTRO_CORSE.md)
+        index.lock in C:/Users/lpeano/soliton_simulator/.git/worktrees/wt_zero_padre: nessuno
+    i file di tappe NON chiusi in E:\soliton_simulator\registro_tappe: 0 
+    commit.lock (C:/Users/lpeano/AppData/Local/Temp/claude/b9208eb8a2665aad/a1f276e8-bac6-4d71-a5b8-87072b85f545/scratchpad\commit.lock): nessuno
+==================================================================================================================================

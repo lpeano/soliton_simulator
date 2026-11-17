@@ -21,3 +21,10 @@
 2. il controllo dei numeri *(gli agenti; i miei ricontrolli)*;
 3. il documento; il piano, la ROTTA, la relazione; commit e push;
 4. **FERMO** *(fine del mandato)*.
+
+## 4. L'ESITO *(e le annotazioni alle premesse)*
+
+- **La parte `7`** *(Luca, dopo la carta: «il resto del repo in sospeso, il censimento dal repo, non a memoria»)*: **i conti da `doc/referti_l2/sospeso_censimento.py`** *(committato prima, `52d1ea9e`; il referto `sospeso_censimento.txt`)*; **la ROTTA e il censimento delle decisioni letti come stanno.**
+- **Il controllo dei numeri:** due agenti in sola lettura; **i loro NON TORNA e NON TROVATO ricontrollati da me sul file** *(i valori di B2-pi, la `d 66`, il lato del triangolo, il `1.52`; le culle e i due strati cercati anche nel worktree del mattone)*. **Nessun numero cambiato:** le note accanto, e le nove segnalazioni in testa al documento.
+- **ANNOTAZIONE alla premessa** *(«se un numero non lo trovo, lo scrivo NON TROVATO»)*: **vale anche per un TESTO:** ### **le considerazioni delle `11:47` del `2026-11-16` NON si possono scrivere** -- il testo del mandato non e' nel repo ne' nelle trascrizioni delle mie sessioni *(i messaggi di Luca del `2026-11-16` cominciano alle `12:57`)*. **Lo stesso per il mandato delle `13:04` (Q11).** **Il file `doc/CONSIDERAZIONI/2026-11-16_triangolo_forme.md` NON e' creato:** si scrive quando il testo arriva.
+- **Una cosa vista nel censimento** *(scritta, non toccata)*: **il registro del worktree del mattone ha `p6-0_2000` ancora APERTA**, ma e' una copia vecchia: nel registro di `primo-ordine` e' `CHIUSO` `FINITO`.
