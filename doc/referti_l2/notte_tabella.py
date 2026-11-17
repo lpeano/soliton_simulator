@@ -37,7 +37,7 @@ def leggi(nome, file):
     ult = re.search(r"### L'ULTIMO STATO: k (\d+), (\S+), sha1 ([0-9a-f]{40})", t)
     k, path, h = int(ult.group(1)), ult.group(2).rstrip(","), ult.group(3)
     rogg = [(int(a), float(b)) for a, b in re.findall(r"### R-SCATOLA AL 5% \(\S+ a k (\d+)\): R_ogg ([\d.]+)", t)]
-    gauss = [float(g) for g in re.findall(r"Gauss ([\d.e+-]+)", t)]
+    gauss = [float(g) for g in re.findall(r"  Gauss ([\d.e+-]+)  \(", t)]  # SOLO le righe dei tick: l'intestazione scrive anche "la soglia di Gauss" (l'errore della prima versione, 58d1045b)
     if fatto["tipo"] == "coppia":
         masse = [float(x) for x in re.findall(r"la massa ([\d.e+-]+)", t)]
     else:
@@ -74,7 +74,7 @@ def main():
     for n in NON_PARTITE:
         print("    %-7s %-9s %-5s %-7s %-6s %-7s %-10s %-60s %s" % (n, "coppia", "-", "-", "2000", "-", "2000", "-", "NON PARTITA (il posto di V-T120 e' andato a F-51; dalle 07:30 nessuna corsa nuova)"))
     print("-" * 130)
-    print("### I CONTROLLI E R-SCATOLA AL 5%% (R_ogg a ogni tappa; la regola: la distanza al lato >= 3 R_ogg, R_A >= 2 R_ogg)")
+    print("### I CONTROLLI E R-SCATOLA AL 5% (R_ogg a ogni tappa; la regola: la distanza al lato >= 3 R_ogg, R_A >= 2 R_ogg)")
     for r in righe:
         f = r["fatto"]
         gm = max(r["gauss"])
