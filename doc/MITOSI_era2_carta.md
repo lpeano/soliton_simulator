@@ -219,3 +219,18 @@
 - **LA REVERSIBILITA':** **una nascita irreversibile rompe CPT come il bordo.** **Esiste l'anti-nascita** *(la fusione di due nodi quando il flusso ENTRA)*? **Se si', la crescita e' reversibile e CPT potrebbe restare; se no, la crescita e' una freccia del tempo dichiarata.**
 - **IL BORDO:** **se il flusso uscente paga la nascita, il bordo assorbente serve ancora?** *(oggi il bordo prende `0.12`-`0.17` di massa per tick; le nascite prenderebbero ENERGIA)*.
 - **LE PREVISIONI DEL GUARDIANO** *(`831e8d52`)*: **P-E1 CADE** *(il confine a `1.92` raggi, non entro `1.5`)*; **P-E2 CADE** *(al confine nessun cambio di segno in `20`: la crescita NON si frena da sola li')*; **P-E3 REGGE** *(positivo a `15`-`45`, non si esaurisce)*; **P-E4 e' vera PER COSTRUZIONE** *(un falso zero: la corrente e' della materia)*.
+
+## 12. IL DIFETTO DELL'ACCUMULO, LA RISERVA E L'AUTOALIMENTAZIONE *(il mandato di Luca del `2026-11-17` `16:02`)*
+
+> **Le decisioni di Luca** *(`16:02`)*: **il calore si accumula sul NETTO** *(non sulla parte positiva)*, **in una RISERVA CONSERVATA**; **C3 annullata**; **C2 del controllo e' il braccio SENZA MITOSI della prova futura.** **Questa sezione SUPERA la sez. `11.3`** *(la sez. `11` resta com'era)*.
+
+### 12.1 LE PREVISIONI DEL GUARDIANO *(copiate PRIMA dei numeri)*
+
+- **P-R1.** Il massimo di nascite pagabili dal netto al confine sta fra `0.005` e `0.02` per tick; il fattore di sovraconteggio fra `20` e `100`.
+- **P-R2.** Con la riserva sul netto, nei `2050` tick misurati *(`k 950`-`3000`)* si pagano al piu' `25` nascite.
+- **P-R3.** Sugli archi sparsi *(S3a e S3b)* il costo NON scende: l'ultima nascita entro il `10%` della prima. La discesa della sez. `11.2` *(le nascite in fila)* e' diluizione locale, non un effetto che si allarga.
+
+### LE MIE, accanto *(dai numeri gia' nel repo, `flusso_uscente.txt`)*
+- **P-R1:** **la credo VERA**: il netto a `30` e `45` nodi sta fra `0.19` e `0.27` per tick nei sei istanti, il costo fuori fra `+22.5` e `+26.5`: **circa `0.01` per tick, un fattore circa `50` sotto `0.50`**. **Ma al confine** *(`23.81` nodi)* **il netto non e' misurato, e a `15` e `20` nodi oscilla di segno**: **li' puo' venire diverso.**
+- **P-R2:** **la credo VERA** *(circa `0.23 x 2050 / 26`, una ventina)*.
+- **P-R3:** **NON so**: **il costo al confine dipende dall'ANGOLO** *(la materia del mattone non e' rotonda)*: **l'ultima contro la prima puo' differire di piu' del `10%` per l'angolo, non per l'accumulo**; **lo separo stampando il costo di ogni arco sparso sullo stato VERGINE** *(senza le nascite prima)* **accanto a quello in sequenza.**
