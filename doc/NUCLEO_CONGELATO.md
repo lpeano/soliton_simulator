@@ -107,3 +107,18 @@ scrivere la riga senza la decisione: quella resta una regola.** **E una testa st
 | `primo_ordine/motore_numba.py` | *(non c'e')* | `61a3e756` **(NUOVO; `40d05c43` a `e1df85c3`, `8c7bc873` a `330d3718`, `eea1d3b0` a `5b33b7f5` il secondo passo W3, `92113af2` a `c87fad26` l'argomento `fma` di H1, `a43a3a3c` a `0d7cfa0f` il modo `esplicita`: la FMA vera, Luca 2026-11-16 08:57, poi la firma dell'intrinseco)** |
 
 - **Gli altri `11` file della tabella: IDENTICI** *(`sha1-BYTE` misurati nel clone).* **Il guardiano verifica questo ramo contro questa tabella.**
+
+## IL RAMO `mitosi` *(decisioni di Luca 2026-11-17 11:33 e 16:38: D-M1, D-R5; la carta `doc/TASK_HISTORY/2026-11-17_mitosi_verso_il_test.md`)*
+
+- **Sul ramo `mitosi` il presidio NON agisce** *(guarda il nome del ramo)*: **il nucleo cambia SOLO per l'INFRASTRUTTURA che non dipende dalla regola di `phi_h`** *(D-R5)*; **la regola della nascita resta FERMA fino a D-M3.** **Nulla torna al principale senza un mandato di Luca** *(R-NAVI)*.
+- **B2, `Motore.cresci` completo** *(dalla base `37e43b3d`)*: **la geometria** *(`n` per estremita', `U` per arco)*, **`dtau`, `cs` e le chiavi PER NODO dello stato** *(`psi`, `Lambda`, `rho`, `h_int`)* **seguono la crescita**, **i valori nuovi SOLO da `iniziali`** *(nessun default di fisica)*, **tutti controllati PRIMA di toccare qualunque cosa**; **la cache di numba si svuota.** **Il corpo sta nel modulo NUOVO `primo_ordine/crescita_dati.py`**: **`motore.py` col corpo dentro arrivava a `760` righe, oltre il tetto di `700`** *(ora `697`)*.
+
+| il file *(`sha1-BYTE`, i byte grezzi)* | prima *(`37e43b3d`)* | B2 |
+|---|---|---|
+| `csv/_file_fisica.py` | `c63f4908` | `793f38b4` |
+| `csv/_rami_era2.py` | `38c0d4ef` | `74b16007` |
+| `primo_ordine/_collauda_motore.py` | `4d60d2f2` | `f0a8f90a` |
+| `primo_ordine/_mappa.yaml` | `26f2abaf` | `376b4d37` |
+| `primo_ordine/crescita_dati.py` | *(nuovo)* | `3be38e61` |
+| `primo_ordine/flussi_parziali.py` | `d43b1cf8` | `1a7e973e` *(solo il commento e il messaggio di `dtau_nodo`)* |
+| `primo_ordine/motore.py` | `0e07bbfd` | `5582c4af` |

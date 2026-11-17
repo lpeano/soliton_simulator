@@ -139,6 +139,9 @@ FILE_FISICA = (
     # ### cui nasce: ### **il tempo proprio locale, la fase esatta `e^{i pi s}`, e i
     # ### due flussi parziali** del Grover e dello spostamento.
     'primo_ordine/flussi_parziali.py',
+    # ### (il ramo `mitosi`, D-M1, Luca 2026-11-17 16:38): la crescita della geometria,
+    # ### di `dtau`, di `cs` e dei dati per nodo, uscita da `motore.py` al tetto.
+    'primo_ordine/crescita_dati.py',
     'primo_ordine/energia_pesata.py',
     # ### ⭐ **LE TRE MISURE DEI CRITERI DI USCITA**, nate il `2026-10-15`: il
     # ### raccordo al bit, la scala dell-errore di `H_tot`, e ### **dove la `C` si

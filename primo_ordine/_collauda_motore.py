@@ -80,6 +80,25 @@ def _norma(v):
     return float(np.sum(np.abs(v) ** 2))
 
 
+def _iniziali_zero(archi, nodi):
+    """### (il ramo `mitosi`, D-M1) I valori iniziali COMPLETI, a zero DICHIARATO, per
+    `archi` archi nuovi e `nodi` nodi nuovi: le estremita' (`psi_h`, `phi_h`, `geo_n`),
+    il trasporto per arco (`geo_U` = identita', la geometria banale del banco), e i dati
+    per nodo (`nodo:<nome>`, `dtau` = quello del banco)."""
+    U = np.zeros((archi, 2, 2), dtype=complex)
+    U[:, 0, 0] = 1.0
+    U[:, 1, 1] = 1.0
+    nv = np.zeros((2 * archi, 3))
+    nv[:, 2] = 1.0
+    return {"psi_h": np.zeros((2 * archi, 2), dtype=complex),
+            "phi_h": np.zeros(2 * archi, dtype=complex),
+            "geo_n": nv, "geo_U": U,
+            "nodo:psi": np.zeros((nodi, 2), dtype=complex),
+            "nodo:Lambda": np.zeros(nodi), "nodo:rho": np.zeros(nodi),
+            "nodo:h_int": np.zeros(nodi),
+            "dtau": np.full(nodi, DTAU_BANCO)}
+
+
 def main(argv):
     _presidio.avvia(__file__)
     print("=" * 100)
@@ -302,8 +321,7 @@ def main(argv):
     # ### collaudo che vuole estremita- nuove a zero ### **passa un array di zeri.**
     # ### ⭐ **E la differenza e- tutta qui: un default e- una decisione
     # ### invisibile, un argomento esplicito e- una decisione dichiarata.**
-    zeri = {"psi_h": np.zeros((4, 2), dtype=complex),
-            "phi_h": np.zeros(4, dtype=complex)}
+    zeri = _iniziali_zero(2, 1)
     dove = mot.cresci(tieni, [0, 10], [10, 1], 1, zeri)
     mot.chiudi_tick()
     vive = dove >= 0
@@ -341,9 +359,7 @@ def main(argv):
     t7 = np.ones(_i7.m, dtype=bool)
     t7[0] = False
     m7.apri_tick()
-    m7.cresci(t7, [0, 10], [10, 1], 1,
-              {"psi_h": np.zeros((4, 2), dtype=complex),
-               "phi_h": np.zeros(4, dtype=complex)})
+    m7.cresci(t7, [0, 10], [10, 1], 1, _iniziali_zero(2, 1))
     m7.chiudi_tick()
     esito("### e il VERSO OPPOSTO: con i valori iniziali DICHIARATI, passa",
           m7.inc.m == 11, "### altrimenti il braccio di sopra proverebbe solo che alza"
@@ -355,9 +371,9 @@ def main(argv):
     t8[0] = False
     m8.apri_tick()
     try:
-        m8.cresci(t8, [0, 10], [10, 1], 1,
-                  {"psi_h": np.zeros((7, 2), dtype=complex),
-                   "phi_h": np.zeros(4, dtype=complex)})
+        sbagliati = _iniziali_zero(2, 1)
+        sbagliati["psi_h"] = np.zeros((7, 2), dtype=complex)
+        m8.cresci(t8, [0, 10], [10, 1], 1, sbagliati)
         passa, nota = False, "### NON ha alzato"
     except AssertionError as e:
         passa = "taglia sbagliata" in str(e)
@@ -371,8 +387,9 @@ def main(argv):
     t9[0] = False
     m9.apri_tick()
     try:
-        m9.cresci(t9, [0, 10], [10, 1], 1,
-                  {"psi_h": np.zeros((4, 2), dtype=complex)})
+        senza_phi = _iniziali_zero(2, 1)
+        del senza_phi["phi_h"]
+        m9.cresci(t9, [0, 10], [10, 1], 1, senza_phi)
         passa, nota = False, "### NON ha alzato: `phi_h` nascerebbe con lo zero"
     except AssertionError as e:
         passa = "DEVE dire con che valore nasce" in str(e)
@@ -380,6 +397,72 @@ def main(argv):
     m9.chiudi_tick()
     esito("### DEVE fallire: una variabile che NON dice con che valore nasce",
           passa, nota)
+
+    # ======== (5-ter) (il ramo `mitosi`, D-M1, Luca 2026-11-17 16:38) LA CRESCITA COMPLETA
+    print()
+    # ### ⭐ **LA GEOMETRIA, `dtau` E I DATI PER NODO SEGUONO LA CRESCITA:** prima
+    # ### `Motore.cresci` permutava solo `psi_h` e `phi_h`, e un motore cresciuto aveva
+    # ### `geo`, `dtau` e le chiavi per nodo della taglia VECCHIA.
+    ia, sa, ma = _banco(10, "numpy", 8, DTAU_BANCO)
+    n_prima = ma.geo.n.copy()
+    U_prima = ma.geo.U.copy()
+    sa["Lambda"][...] = np.arange(10, dtype=float) + 0.5
+    lam_prima = sa["Lambda"].copy()
+    ta = np.ones(ia.m, dtype=bool)
+    ta[0] = False
+    ini = _iniziali_zero(2, 1)
+    ini["nodo:Lambda"] = np.array([7.25])
+    ma.apri_tick()
+    da = ma.cresci(ta, [0, 10], [10, 1], 1, ini)
+    ma.chiudi_tick()
+    viva = da >= 0
+    forme = (ma.geo.n.shape == (2 * ia.m, 3) and ma.geo.U.shape == (ia.m, 2, 2)
+             and ma.dtau.shape == (ia.n,) and sa["psi"].shape == (ia.n, 2)
+             and sa["Lambda"].shape == (ia.n,) and sa["rho"].shape == (ia.n,)
+             and sa["h_int"].shape == (ia.n,))
+    esito("### (5-ter) dopo la crescita geo, dtau e le chiavi per nodo hanno la taglia NUOVA",
+          forme, "### %d nodi, %d archi" % (ia.n, ia.m))
+    arco_vivo = da[0::2] >= 0
+    tenuti = (np.array_equal(ma.geo.n[da[viva]], n_prima[viva])
+              and np.array_equal(ma.geo.U[da[0::2][arco_vivo] // 2], U_prima[arco_vivo])
+              and np.array_equal(sa["Lambda"][:10], lam_prima)
+              and float(sa["Lambda"][10]) == 7.25
+              and np.array_equal(ma.dtau, np.full(11, DTAU_BANCO)))
+    esito("### e i valori VECCHI restano al bit, il nuovo e' quello DICHIARATO",
+          tenuti, "### Lambda del nodo nuovo %.2f (dichiarato 7.25)" % float(sa["Lambda"][10]))
+    # ### ⛔ **E UN TICK DOPO LA CRESCITA GIRA E CONSERVA LA NORMA** *(i pezzi sono
+    # ### unitari: se la geometria fosse rimasta vecchia, l'indice uscirebbe dalla taglia)*.
+    sa["psi_h"][...] = np.random.default_rng(9).normal(size=sa["psi_h"].shape) + 0j
+    sa["phi_h"][...] = np.random.default_rng(10).normal(size=sa["phi_h"].shape) + 0j
+    na, fa = _norma(sa["psi_h"]), _norma(sa["phi_h"])
+    try:
+        ma.apri_tick()
+        ma.operatori["grover"](sa, {}, 1)
+        ma.operatori["moneta_spin"](sa, dict(TMS.PARAMETRI), 1)
+        ma.operatori["spostamento_trasporto"](sa, {}, 1)
+        ma.operatori["grover_scalare"](sa, {}, 1)
+        ma.operatori["spostamento_scalare"](sa, {}, 1)
+        ma.chiudi_tick()
+        scarto = max(abs(_norma(sa["psi_h"]) - na) / na, abs(_norma(sa["phi_h"]) - fa) / fa)
+        passa, nota = scarto <= 1e-12, "### lo scarto relativo della norma %.1e" % scarto
+    except Exception as e:  # noqa: BLE001
+        passa, nota = False, "### il tick dopo la crescita alza: %r" % str(e)[:60]
+    esito("### e un tick DOPO la crescita gira e conserva la norma (entro 1e-12)", passa, nota)
+    # ### ⛔ **IL CASO CHE DEVE FALLIRE: la crescita SENZA la geometria nuova.**
+    ib, _sb, mb = _banco(10, "numpy", 9, DTAU_BANCO)
+    tb = np.ones(ib.m, dtype=bool)
+    tb[0] = False
+    senza_geo = _iniziali_zero(2, 1)
+    del senza_geo["geo_n"]
+    mb.apri_tick()
+    try:
+        mb.cresci(tb, [0, 10], [10, 1], 1, senza_geo)
+        passa, nota = False, "### NON ha alzato: il versore nuovo nascerebbe a zero"
+    except AssertionError as e:
+        passa = "geo_n" in str(e)
+        nota = "### e per la chiave giusta" if passa else "### %r" % str(e)[:50]
+    mb.chiudi_tick()
+    esito("### DEVE fallire: la crescita SENZA la geometria delle estremita' nuove", passa, nota)
 
     # ============================================= (6) I CASI CHE DEVONO FALLIRE
     print()

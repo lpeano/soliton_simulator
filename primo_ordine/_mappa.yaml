@@ -190,6 +190,10 @@ moduli:
     responsabilita: chi, fra gli strumenti, materializza un albero vecchio o scrive nel repo
     importa: []
 
+  - nome: crescita_dati.py
+    responsabilita: la crescita della geometria, di dtau, di cs e dei dati per nodo del motore (il ramo mitosi, D-M1)
+    importa: []
+
   - nome: flussi_parziali.py
     responsabilita: il tempo proprio locale, la fase esatta, e i due flussi parziali
     importa: []
@@ -200,7 +204,7 @@ moduli:
 
   - nome: motore.py
     responsabilita: il doppio contenitore, i pezzi unitari, il flusso, e la regola del tick
-    importa: [energia_pesata, flussi_parziali, incidenza, materia_vuoto, saturazione]
+    importa: [crescita_dati, energia_pesata, flussi_parziali, incidenza, materia_vuoto, saturazione]
 
   - nome: motore_numba.py
     responsabilita: lo switch del motore numba, spento per difetto -- sostituisce in memoria funzioni del tick

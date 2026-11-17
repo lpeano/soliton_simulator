@@ -56,6 +56,7 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 
+import crescita_dati as CD                                    # noqa: E402
 import flussi_parziali as FP                                  # noqa: E402
 import incidenza as IN                                        # noqa: E402
 import materia_vuoto as MV                                    # noqa: E402
@@ -313,12 +314,10 @@ class Motore(object):
                 " un'estremita' nuova e' una DECISIONE, e `None` non vuol dire <<zero>>:"
                 " vuol dire <<nessuno ha deciso>>. ### Lo zero si ottiene PASSANDO un"
                 " array di zeri, e allora e' dichiarato" % nuove)
-            for nome in sorted(iniziali):
-                a = np.asarray(iniziali[nome])
-                assert a.shape[0] == nuove, (
-                    "`iniziali[%r]` ha %d righe e nascono %d estremita': un valore"
-                    " iniziale della taglia sbagliata si propagherebbe in silenzio"
-                    % (nome, a.shape[0], nuove))
+        # ### (il ramo `mitosi`, D-M1) TUTTI i controlli di `iniziali` PRIMA di toccare
+        # ### qualunque cosa: le taglie, la geometria nuova, i dati per nodo.
+        CD.controlla(self.st, self.inc.n, self.inc.m, self.cs, nuove, int(nodi_nuovi),
+                     iniziali)
         assert self.cresciute_nel_tick >= 0, (
             "`cresci()` fuori da un tick: le crescite si contano PER TICK, e fuori da un"
             " tick quel conto non esiste")
@@ -360,6 +359,14 @@ class Motore(object):
                     " fisica presa dal motore" % nome)
                 nuovo[base:base + nuove] = np.asarray(val, dtype=v.dtype)
             self.st[nome] = nuovo
+        # ### ⭐ **(il ramo `mitosi`, D-M1) LA GEOMETRIA, `dtau`, `cs` E I DATI PER NODO
+        # ### SEGUONO LA CRESCITA** *(`crescita_dati.py`)*, e la cache di numba si svuota.
+        self.geo = Geometria(*CD.geometria(self.geo.n, self.geo.U, dove, vecchio, self.inc.m,
+                                           nuove, iniziali))
+        if int(nodi_nuovi):
+            self.dtau, self.cs = CD.nodi(self.st, self.dtau, self.cs, self.inc.n,
+                                         int(nodi_nuovi), iniziali)
+        CD.svuota_numba()
         # ### ⚠ **E I BUFFER SI BUTTANO, perche- la taglia e- cambiata:** tenerli
         # ### sarebbe ### **esattamente il difetto della cache che non porta la taglia.**
         self._buf = {}

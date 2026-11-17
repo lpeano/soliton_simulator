@@ -266,11 +266,35 @@ RAMI[("primo_ordine/motore.py", "_b")] = (
     "c-e- ancora>> e <<c-e->>. ### E' il vincolo della memoria per tick PIATTA: allocare "
     "a ogni tick la farebbe crescere, e il conto e' misurato")
 RAMI[("primo_ordine/motore.py", "cresci")] = (
-    3, "smistamento",
-    "TRE rami: `nuove` (due volte) smista fra <<in questo tick NON e' nato niente>> e "
+    4, "smistamento",
+    "QUATTRO rami: `nuove` (due volte) smista fra <<in questo tick NON e' nato niente>> e "
     "<<sono nate delle estremita'>>, e `v is None` smista sulla VARIABILE ASSENTE -- una "
     "tabella che non dichiara `psi_h` o `phi_h` e' LEGITTIMA, e pretenderla qui vorrebbe "
-    "dire che il motore sa quali leggi esistono, e NON LO SA")
+    "dire che il motore sa quali leggi esistono, e NON LO SA. ### (il ramo `mitosi`, D-M1, "
+    "2026-11-17) il QUARTO: `nodi_nuovi` smista fra <<nessun nodo nuovo>> e <<i dati per "
+    "nodo crescono>> (`crescita_dati.nodi`)")
+# ### (il ramo `mitosi`, D-M1, Luca 2026-11-17 16:38) `crescita_dati.py`: uscito da
+# ### `motore.py` al tetto delle 700 righe.
+RAMI[("primo_ordine/crescita_dati.py", "_attese")] = (
+    3, "smistamento",
+    "TRE rami: la taglia attesa di una chiave di `iniziali` -- un ARCO per riga "
+    "(`geo_U`), un NODO per riga (`dtau`, `cs`, `nodo:<nome>`, con l'`or` del prefisso), "
+    "altrimenti un'ESTREMITA'")
+RAMI[("primo_ordine/crescita_dati.py", "controlla")] = (
+    4, "validazione",
+    "QUATTRO rami: `nuove` e `nodi` smistano fra i controlli degli archi nuovi e dei nodi "
+    "nuovi; `_per_nodo` sceglie le chiavi dello stato da controllare; `cs is None` il "
+    "motore senza lapse. Ogni controllo FERMA prima che la crescita tocchi qualcosa")
+RAMI[("primo_ordine/crescita_dati.py", "geometria")] = (
+    1, "smistamento",
+    "UN ramo: `nuove` smista fra <<nessun arco nuovo>> e <<i posti nuovi da `iniziali`>>")
+RAMI[("primo_ordine/crescita_dati.py", "nodi")] = (
+    2, "smistamento",
+    "DUE rami: `_per_nodo` sceglie le chiavi dello stato che crescono per nodo, e "
+    "`cs is None` smista sul motore SENZA lapse (legittimo: `cs` e' opzionale)")
+RAMI[("primo_ordine/crescita_dati.py", "svuota_numba")] = (
+    1, "smistamento",
+    "UN ramo: `motore_numba` non importato (numba spento, legittimo) contro importato")
 RAMI[("primo_ordine/motore.py", "_somma_per_nodo")] = (
     3, "smistamento",
     "TRE rami: `self.sommatoria` scegli la VIA DELLA SOMMA, `ee.size == 0` il nodo senza "

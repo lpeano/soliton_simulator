@@ -77,13 +77,14 @@ def dtau_nodo(mot):
     """### Il tempo proprio **PER NODO** — ### **l'unico posto da cui si legge.**
 
     ### ⛔ **E verifica la taglia**, che costa `O(1)`: dopo una crescita `inc.n` cambia e
-    `dtau` **no** *(`cresci()` non lo estende)*, e senza questo controllo la differenza
+    `dtau` deve seguirla *(dal ramo `mitosi`, D-M1, `cresci()` lo estende da
+    `iniziali["dtau"]`; prima NON lo faceva)*, e senza questo controllo la differenza
     uscirebbe come un `IndexError` lontano da qui — ### **o, peggio, come un numero.**
     """
     d = mot.dtau
     assert d.shape == (mot.inc.n,), (
-        "`dtau` ha forma %r e i nodi sono %d: dopo una crescita `dtau` NON si estende da"
-        " solo, e un `dtau` di un'altra taglia darebbe numeri che sembrano buoni"
+        "`dtau` ha forma %r e i nodi sono %d: dopo una crescita `dtau` si estende SOLO da"
+        " `iniziali`, e un `dtau` di un'altra taglia darebbe numeri che sembrano buoni"
         % (d.shape, mot.inc.n))
     # ### ⛔⛔ **IL RAMO DELLA FORMA `cs`** *(`D0`, `2026-10-17`)*: ### **`mot.cs`
     # ### e- `None` finche- Luca non decide `Lambda_c`**, e allora questo ritorna
