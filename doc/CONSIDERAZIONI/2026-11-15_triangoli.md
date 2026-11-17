@@ -12,6 +12,8 @@
 
 ## 2. LE CULLE NEL VUOTO RESTANO, LA MATERIA SI MUOVE -- **MISURATO** *(sulle mappe)*; **la spiegazione DA PROVARE**
 
+> ### ⛔ **CORRETTA il `2026-11-17`** *(le considerazioni del `2026-11-16`, `doc/CONSIDERAZIONI/2026-11-16_triangolo_forme.md`, sez. `5`; le misure `doc/referti_l2/triangolo_t120_misure_guardiano.txt`)*: **su `12000` tick le culle SEGUONO la materia** *(la distanza culla-centro mediana `0.881` nodi, nessun accumulo in angolo)*; **la cosa ferma e' il GUSCIO grande** *(`30`-`45` nodi: l'orientamento entro `+2.81` gradi contro `+98.49` dei lobi)*. **Il testo sotto resta com'era.**
+
 - **In (T-fase)** *(`657d58ec`, lettura del guardiano)*: **il centro degli anelli di `|phi - phi0|` si sposta di `0.2`-`0.5` nodi in `2000` tick, i centri della materia di `1.8`-`2.4`; la densita' passa dai vertici** *(circa `1127` -> `528`)* **alle meta' dei lati** *(`522` -> `915`)* **e al centro** *(`17` -> `1094`)*.
 - **TRE SPIEGAZIONI, DA PROVARE:** **la scatola** *(poco probabile: la stessa cosa in G1 su `L 81`)*; **il vuoto lento** *(«la memoria»)*; **l'AGGANCIO AL RETICOLO** *(il disegno F3 ogni `3` nodi: una culla salterebbe di `3` nodi alla volta)*.
 - **LA PROVA:** **il trifoglio lungo** *(in corsa: `trifoglio`)*: **la posizione delle culle ogni `50` tick: salti di `3` o scivolamento.**

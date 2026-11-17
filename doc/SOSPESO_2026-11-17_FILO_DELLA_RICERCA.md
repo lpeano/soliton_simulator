@@ -6,6 +6,8 @@
 
 > **Il MANDATO UNICO di Luca delle `09:49`** *(che sostituisce quello delle `09:20`)* **riprende queste parti come A** *(A1-A5 = parti `1`-`3`, `5`, `6`)* **e B** *(B1-B6 = parte `7`)*; **B4, le considerazioni delle `11:47`, resta SENZA TESTO** *(Q-A1 della ROTTA, R-QUALITA')*. La carta: `doc/TASK_HISTORY/2026-11-17_mitosi_primo_passo.md`.
 
+> ### ✅ **LE CORREZIONI DEL GUARDIANO** *(Luca `2026-11-17` `11:33`)*: **n.`183`** -- `1.52` e' il rapporto MISURATO / PREVISTO della pattinatrice: **resta da spiegare un fattore `1.52`, non `4`-`5`x**; **n.`184`** -- lo `0.0178` NON e' della voce `7` *(che ha `0.0128`)*, e il video triplo e' CHIUSO *(`102814bd`)*; «il motore fuso circa `10`x» e' una **STIMA**. **Le misure dalle mappe** *(i due strati, le sei gobbe, le culle, il guscio, i centri)*: `doc/referti_l2/triangolo_t120_misure_guardiano.txt` *(lo script a `7d408b2b`)*; le note sotto sono AGGIORNATE dove c'era «la fonte: non trovata».
+
 ## LE SEGNALAZIONI DEL CONTROLLO *(i numeri e le frasi che non tornano o non hanno fonte; NESSUNA cambia una previsione da confermata a fallita)*
 
 1. **A, B2-pi:** la partenza «`35`» e' la `d` nominale; **la misurata e' `37.048`**; la fascia `39.89`-`42.42` vale **da `k 8000`**; «i minimi e i massimi salgono» e' detto **da due cicli**.
@@ -43,8 +45,10 @@
   *Fonte: `M/triangolo_t120_rotazione_B.txt` (`+98.49` a `12000`; omega massimo `+48.6` gradi per `1000` tick a `k 8500`, il lato minimo a `k 8650`). «il referto dice»: `1.52` NON e' cio' che la pattinatrice prevede: e' il rapporto MISURATO / PREVISTO al minimo del lato (`k 9000`: «misurato / previsto 1.52 -> la pattinatrice NON spiega»). Il «circa `1.5`x previsto contro `4`-`5`x» e' la stima del guardiano scritta PRIMA (`TH-M`); con L costante la previsione sarebbe `1.25`x (`TH-M`). E `TH-M` avverte: il picco di omega cade dove l'ampiezza a tre punte e' minima (`0.024`), dove l'angolo e' fragile («scritto, non provato»).*
 - **DUE STRATI:** i lobi esterni *(`27`-`32`)* sempre avanti; l'interno *(`17`-`27`)* indietro fino a `-23` gradi a `k 5000` mentre perde la tre punte.
   *La fonte: non trovata (`M/girandola.txt` ha gli angoli per anello solo fino a `k 2000`, e su anelli diversi: `8`-`14`, `14`-`20`, `20`-`26`, `26`-`32`).*
+  ### ✅ *AGGIORNAMENTO (Luca `11:33`, A1): la fonte ORA c'e': `doc/referti_l2/triangolo_t120_misure_guardiano.txt` (il fotogramma di riferimento `3020`, il piu' vicino a `3000`). «il referto dice»: a `k 5000` `17-22` **`-22.66`** gradi (torna con «fino a -23»), `22-27` **`-3.64`** (il guardiano: circa `-5`), `27-32` **`+1.41`**; il `12-17` a `-62.49` con un'ampiezza `0.008` (l'angolo non e' definito). **«27-32 sempre avanti»: NON sempre**: avanti a tutti e tre gli altri anelli in `33` fotogrammi su `59` fra `2500` e `6000` (prima di `3020` il `27-32` e' a `-3.48`/`-1.24`).*
 - **la pulsazione delle forme** *(un ciclo visto)*: tre punte `0.37` *(largo)* -> `0.02`-`0.05` *(stretto, quasi un anello, a tratti sei gobbe)* -> `0.16`.
   *Fonte: `M/triangolo_t120_rotazione_B.txt` (`0.3669` a `k 0`; `0.0496`, `0.0239`, `0.0452` a `k 8000`, `8500`, `9000`; `0.1624` a `k 12000`): torna. «quasi un anello, a tratti sei gobbe»: la fonte non trovata (dalle mappe?).*
+  ### ✅ *AGGIORNAMENTO (A4): «a tratti sei gobbe»: `doc/referti_l2/triangolo_t120_misure_guardiano.txt`: la m=6 della densita' (`12-32`) supera la m=3 a `k 8520` (`0.052` contro `0.024`) ed e' pari a `k 7980` (`0.051`); altrove la m=6 sta fra `0.013` e `0.099` sotto la m=3. **Torna come «a tratti».***
 - **il campo B al centro NEGATIVO su tutta la corsa e CRESCENTE** *(`1.2`-`1.8` volte quello di `k 2000`)*, **non segue la velocita' della forma; L negativo.**
   *Fonte: `M/triangolo_t120_rotazione_B.txt` (B da `-6.0e-4` a `k 500`, tutti negativi; i rapporti `1.23`-`1.84`; il segno di L «-»); `TH-M` («B NON segue omega»). Torna.*
 - **i segni (`eebb2f39`): coerenti; un vortice `+1` costruito a mano ha L e B negativi: e' la firma del `+1`.** **IPOTESI:** l'energia circola contro il verso della fase *(«onda all'indietro», o le onde di Kelvin su un vortice)*.
@@ -54,6 +58,7 @@
 
 - **le culle SEGUONO la materia** *(`0.1`-`2` nodi dal loro centro, `+-5` gradi senza accumularsi)*; **il GUSCIO grande** *(`30`-`45` nodi)* **NON gira e si spegne** *(tre punte `0.44` -> `0.21`)*. **L'ipotesi di Luca: la scatola piccola trattiene il guscio.**
   *La fonte dei numeri (`0.1`-`2` nodi, `+-5` gradi, `0.44` -> `0.21`): non trovata. I testi piu' vecchi dicono il contrario sulle culle («le culle restano ferme», `TH-M`; e la previsione P4 di `TH-M` le voleva «FERME»): la parte `2` lo elenca fra le cose corrette («le culle ferme: era il guscio»). Il «`1`-`2` gradi contro `+98`» del guscio sta in `doc/PIANO_VERIFICA_SCATOLA.md` (P-V6), senza un referto citato. Il guscio `30`-`45`: la definizione di P-V6.*
+  ### ✅ *AGGIORNAMENTO (A2, A3): `doc/referti_l2/triangolo_t120_misure_guardiano.txt`. **Il guscio (`30-45`): da `0.436` a `0.215`, l'orientamento entro `+2.81` gradi in `12000` tick: TORNA** (contro `+98` dei lobi). **Le culle: «il referto dice» la distanza culla-centro mediana `0.881` nodi, il `5%` `0.105`, il `95%` `3.687`, il massimo `5.490`** (sul bordo della finestra di raggio `5.5`: dove la misura satura, il dominio di validita' finisce -- Q-A4); **lo sfasamento mediano `-0.02` gradi, fra `-3.74` e `+8.24` (5%-95%), estremi `-13.20`/`+13.26`; la pendenza fra `-0.18` e `-0.12` gradi per `1000` tick: NON si accumula.** Il «`0.1`-`2` nodi, `+-5` gradi» del guardiano e' la parte centrale, non tutta la distribuzione.*
 
 ### E. Lo specchio *(`6faa1a3d`)*
 
@@ -81,7 +86,7 @@
 |---|---|---|---|
 | `1` | il ritorno apparente dei «centri» del triangolo *(difetto della misura)* | `b20633d1` | `TH-M`: «NON i tre "centri" della serie, che saltano vicino all'esagono: il difetto scritto dal guardiano». *La parola «ritorno» non c'e'; il piu' vicino e' «la forma torna indietro fra 3500 e 5000» (`c211cf19`).* |
 | `2` | il verso degli angoli delle girandole | `259ae269` | «i numeri del guardiano specchiati ... uno specchio di convenzione»; accanto `eebb2f39` *(i segni coerenti)* |
-| `3` | «le culle ferme» *(era il guscio)* | ### **la fonte: non trovata come correzione** | *Il piu' vicino: `ee7b8215` / `TH-M` («il vuoto e' teso su un GUSCIO ... (la "culla"?)»). E `doc/CONSIDERAZIONI/2026-11-15_triangoli.md` dice ANCORA «le culle nel vuoto restano»: **la correzione non e' scritta da nessuna parte.*** |
+| `3` | «le culle ferme» *(era il guscio)* | ### **la fonte: non trovata come correzione** *(AGGIORNAMENTO `11:33`: scritta ORA, `doc/CONSIDERAZIONI/2026-11-16_triangolo_forme.md` sez. `5`, con una riga in `2026-11-15_triangoli.md`; le misure: `triangolo_t120_misure_guardiano.txt`)* | *Il piu' vicino: `ee7b8215` / `TH-M` («il vuoto e' teso su un GUSCIO ... (la "culla"?)»). E `doc/CONSIDERAZIONI/2026-11-15_triangoli.md` dice ANCORA «le culle nel vuoto restano»: **la correzione non e' scritta da nessuna parte.*** |
 | `4` | il reticolo come causa *(caduto)* | `aedf6e51` | «il reticolo non tira il vuoto»; la previsione in `7f01286a` |
 | `5` | F3 come motivo ogni `3` nodi *(e' un flusso)* | `13466107` | il controllo di prima dichiarato sbagliato in `6b07fca5` |
 | `6` | il raggio inscritto `L/2` contro `0.433 L` | `8debe00f` | l'errore del guardiano n.`179`; i tori ricontati in `413480a0` |
@@ -112,7 +117,7 @@
 - **Q15. Il terzo corpo:** il triangolo e' la somma di tre coppie?
 - **Q16. I puntini:** la tabella delle leggi dei mattoni, poi la prova del «clic» *(il modello a puntini contro la coppia vera)*.
 - **Q17. La velocita':** Numba anche su `termini_di_h` ed `elicita` *(circa il `40%` del tick)*; il motore fuso *(circa `10`x, non al bit)*; i `3` giri del punto fisso *(non al bit)*.
-  *Fonte: il `40%`: `doc/ROTTA.md`, `doc/TASK_HISTORY/2026-11-15_motore_numba.md`; i `3` giri: `1d913fd1`. «il motore fuso circa `10`x»: la fonte non trovata; il piu' vicino: «le tre funzioni del secondo passo `4`-`12`x piu' veloci ciascuna» (`2026-11-15_motore_numba.md`).*
+  *Fonte: il `40%`: `doc/ROTTA.md`, `doc/TASK_HISTORY/2026-11-15_motore_numba.md`; i `3` giri: `1d913fd1`. «il motore fuso circa `10`x»: **una STIMA del guardiano** (Luca `11:33`), non una misura; la fonte non trovata; il piu' vicino: «le tre funzioni del secondo passo `4`-`12`x piu' veloci ciascuna» (`2026-11-15_motore_numba.md`).*
 - **Q18. Parcheggiate:** il bordo come orizzonte *(`cs -> 0`, idea di Luca)*; le strade S3-S5 dei hook; il trasloco del repo su E:.
 
 *(Il costo stimato di ogni test: il testo del guardiano non lo dà; non lo invento. I costi misurati per tick sono nella parte `5`.)*
