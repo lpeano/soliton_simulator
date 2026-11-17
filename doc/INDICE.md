@@ -165,7 +165,7 @@
 | `CLI-1` | DIFETTO | METODO | 1 | ### **SOSPESA** | SI | I SIGILLI DI CURA 4 E CURA 5 NON HANNO MAI PROVATO IL PERCORSO CLI: impostavano  |
 | `CLIP-INVENTARIO` | DIFETTO | FISICA | 1 | ### **SOSPESA** |  | INVENTARIO dei clip, tetti e pavimenti del passo pieno: 27 TETTI FISICI su 117 g |
 | `COER-4PI` | CRITERIO | METODO | 1 | ### **CHIUSA** |  | la coerenza della massa e' `/<e^{i phi}>/`: il campo NON distingue `phi` da `phi |
-| `COESIONE-TERMINE-O-CAMPO` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? |
+| `COESIONE-TERMINE-O-CAMPO` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la coesione simmetrica viene da un termine LOCALE o da un CAMPO? |
 | `COLLAUDO-LEGGE-L-AMBIENTE` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | il collaudo della barriera dipendeva dall-ambiente in cui era lanciato: 6 su 11  |
 | `COLLAUDO-NON-ESEGUITO` | DIFETTO | METODO | ENTRAMBE | ### **APERTA** |  | un collaudo che si RIFIUTA di girare esce con 2, e il controllo C4 lo conta come |
 | `COMANDO-UNICO-INCOMPLETO` | DIFETTO | INFRASTRUTTURA | ENTRAMBE | ### **CHIUSA** |  | il comando che si chiama LA SUITE COMPLETA copriva 19 collaudi su 29 |
@@ -702,7 +702,7 @@
 | `PROGETTO-MITOSI` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DELLA MITOSI NELL ERA 2, sulla carta: olonomia, forma sui triangoli, |
 | `PROGETTO-U1` | FRONTE | FISICA | 2 | ### **AGENDA** |  | IL PROGETTO DEL CAMPO U(1) SUGLI ARCHI: la luce del modello, sulla carta |
 | `PROMOZIONE-CONSERVAZIONE-MODIFICATA` | DECISIONE | FISICA | 2 | ### **CHIUSA** |  | la conservazione modificata si conserva: si promuove a energia? |
-| `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
+| `PROPOSTA-FASE-DISPARI-COESIONE` | DECISIONE | FISICA | 2 | ### **SUPERATA** |  | la fase DISPARI sotto coniugazione di carica come forma della coesione |
 | `PROPOSTA-LOG1P-IN-N` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | log1p nella formula di N: la proposta resta APERTA, e NON si fa ora |
 | `PROPOSTA-SCANSIONE-FORZA-NONLINEARE` | DECISIONE | FISICA | 2 | ### **AGENDA** |  | la coerenza del cluster migliora con la forza: si estende la scansione? |
 | `PROVA-COMB` | FRONTE | FISICA | 1 | ### **SOSPESA** |  | LA PROVA COMBINATA: TUTTE LE CURE APPROVATE ACCESE INSIEME — 600 passi, stesso s |

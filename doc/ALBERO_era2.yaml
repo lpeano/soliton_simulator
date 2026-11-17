@@ -108,6 +108,16 @@ nodi:
       ENERGIA non e- garantita -- e la decisione 10 (il calore paga la nascita) E-
       UN BILANCIO D-ENERGIA. Il contenuto sta nella voce
       DOMANDA-QUANTITA-CONSERVATA, col criterio di RIAPERTURA.
+      ### ⭐ IL MANDATO UNICO DI LUCA DEL 2026-11-17 (09:39-09:49, la mitosi primo passo, C1;
+      le proposte del guardiano): ACCANTO ALLA NORMA, LA CARICA DI U (GAUSS). Le grandezze
+      su cui si fa il bilancio della nascita sono la NORMA DI psi (la carica di Noether della
+      fase globale) e la CARICA DI U (il residuo di Gauss, div E - e (rho - media)).
+      ### IL DATO: il bilancio della massa col bordo (Delta M + la massa tolta dal bordo = 0
+      entro 1e-11 relativo, il peggiore 1.17e-12: doc/referti_l2/bilancio_chiusura.txt, la
+      soglia RIVISTA dopo il risultato, n.157); la rotazione di fase del mattone e- una
+      simmetria A MENO DELL-ARROTONDAMENTO, NON AL BIT (b7f7a04e: dopo 20 tick psi_h 3.3e-15,
+      campo_E 3.7e-13 per theta = pi). ### LA PROVA (nella mitosi): la norma e Gauss AL BIT
+      a ogni nascita. Nessun cambio di stato: il nodo era gia- presa.
 
   - id: DEC-D6F-FORME-VUOTO
     etichetta: D6f
@@ -166,6 +176,14 @@ nodi:
       ### ✅ QUINDI IL PASSO 1 DELLA GUIDA (doc/COME_SI_AGGIUNGE_UNA_LEGGE.md) E-
       SODDISFATTO: la decisione che governa la legge e- PRESA, e il conflitto
       dichiarato in 8718e91 E- CHIUSO.
+      ### ⭐ IL MANDATO UNICO DI LUCA DEL 2026-11-17 (C1): LE FORME DI OGGI per la mitosi --
+      il vuoto F3 e- un FLUSSO uniforme con una fase per direzione d-arco (13466107); il
+      vuoto segue la materia. ### IL DATO: l-alone del mattone fermo a 24-25 nodi (il 10% e
+      il 5% su L 162, 243, 324: ee7b8215, porto_alone_vuoto.txt); phi -> -phi allo specchio
+      (6faa1a3d). ### ⚠ IL GUARDIANO CITA ANCHE <<le culle a 0.1-2 nodi>>: LA FONTE NON SI
+      TROVA (doc/SOSPESO_2026-11-17_FILO_DELLA_RICERCA.md, le segnalazioni, punto 5): non e-
+      un dato di questa nota finche- non ha un referto. ### LA PROVA (nella mitosi): il
+      vuoto lontano invariato dopo una nascita. Nessun cambio di stato: il nodo era gia- presa.
 
   - id: DEC-FC-COESIONE
     etichetta: FC
@@ -180,6 +198,17 @@ nodi:
       ### E una non linearita- A SEGNO FISSO e- attrattiva per UNA banda e
       repulsiva per l-altra: terrebbe la materia e DISFEREBBE l-antimateria PER
       COSTRUZIONE -- e il prototipo ne fa un BRACCIO CHE DEVE FALLIRE.
+      ### ⭐ IL MANDATO UNICO DI LUCA DEL 2026-11-17 (09:39-09:49, C1): LA COESIONE E- GIA-
+      NEL NUCLEO, IL MONDO G+U; NESSUN TERMINE NUOVO. ### IL DATO: i mattoni stabili da soli
+      (il raggio della materia entro 0.005% fra L 186 e L 243 e L 324: prova_scatola5.txt; L
+      162 non e- in quel confronto), le coppie e il triangolo LEGATI su L 162 senza una
+      coesione aggiunta (doc/SOSPESO_2026-11-17_FILO_DELLA_RICERCA.md, parte 1A; ma L 162 NON
+      rispetta R-SCATOLA, la domanda Q1). ### COESIONE-TERMINE-O-CAMPO e
+      PROPOSTA-FASE-DISPARI-COESIONE: SUPERATE col perche- (nell-indice).
+      ### ⛔ LA CONDIZIONE DI LUCA: FC E- PRESA SOLO SE LA PROVA DELLA SIMMETRIA C DI G+U PASSA
+      (C2, doc/referti_l2/simmetria_C.txt: la forza deve agire allo stesso modo sulle due
+      bande, cioe- G+U deve commutare con la coniugazione di carica); SE NO, RESTA APERTA COL
+      PERCHE-. Fino al referto: presa false.
 
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
@@ -196,6 +225,15 @@ nodi:
       PRESA: <<il confronto (a)/(b) su PROVA resta, con i criteri fissati PRIMA>>.
       ### Quindi `presa` e- false, e la direzione sta QUI come nota e non come stato.
       E- la prima cosa che questo albero serve a tenere separata.
+      ### ⭐ IL MANDATO UNICO DI LUCA DEL 2026-11-17 (C1): LA GEOMETRIA E- LA DIVISIONE
+      D-ARCO. Prima la VIA (B): il reticolo regolare quasi ovunque, la crescita con
+      DISLOCAZIONI (i difetti con 5 e 7 vicini, concentrati); la VIA (A) (un grafo
+      qualunque) dopo. ### IL VINCOLO: dove il reticolo resta regolare, le leggi IDENTICHE
+      AL BIT a quelle di oggi. ### LA COERENZA COL TEMPO: attorno a un mattone la curvatura
+      dello spazio dalle nascite (in 2D (6 - k) per 60 gradi, Regge) e il profilo del lapse
+      N(rho) in un rapporto FISSO lungo il raggio; la soglia nella carta della mitosi
+      (doc/MITOSI_era2_carta.md), prima del codice. Presa resta false: e- la direzione del
+      lavoro, e il confronto su prova resta.
 
   - id: DEC-D13-MEMORIE
     etichetta: D13
@@ -276,6 +314,18 @@ nodi:
       VUOTO della regola e- quella che il conto del vuoto (d999cca7) mostra
       aperta -- con D7 applicata a phi la nascita libera 8.548 e il vuoto
       uniforme non la assorbe -- e dipende da D6f, le forme del vuoto.
+      ### ⭐ IL MANDATO UNICO DI LUCA DEL 2026-11-17 (C1): LA REGOLA CONFERMATA (psi/sqrt(2)
+      al padre e al figlio, la stessa fase) CON TRE VINCOLI: (a) il giro del vortice si
+      conserva attorno a ogni anello (il dato: +1 in tutte le 12 componenti in 61 controlli
+      su 61, il triangolo a 120 su L 162); (b) simmetrica allo specchio (6faa1a3d); (c)
+      DETERMINISTICA. ### LA PROVA: il giro, lo specchio e la norma dopo le nascite.
+      ### DOVE NASCE (la decisione 10, 3e8375b6): dove il vuoto e- teso, cioe- dove la
+      tensione dell-arco paga la nascita; IL VUOTO PURO NON CRESCE. Il dato: l-energia del
+      vuoto per nodo massima nel guscio agli anelli 13-14 (ee7b8215, porto_alone_vuoto.txt).
+      La prova: nessuna nascita in un toro di solo vuoto.
+      ### ⚠ E PRESA RESTA false ANCHE SE FC PASSA: il motivo della via (3) di Luca del
+      2026-10-26 (la parte del VUOTO della regola, la nascita libera 8.548 che il vuoto
+      uniforme non assorbe, d999cca7) non dipende dalla prova C. La via e- di Luca.
 
   # ----------------------------------------------------------------------------------
   #  IL NODO DI METODO, il solo fuori dalla catena di cui il repo sappia l-argomento
