@@ -36,3 +36,10 @@
 2. la prova CPT: lo script *(commit)*, la corsa in fondo, il referto; FC; commit;
 3. la parte 3 e la parte 4 mentre la prova gira *(script committati prima delle loro corse)*;
 4. **FERMO per Luca:** la soglia *(4.4)*, e D-M3.
+
+## 4. L'ESITO *(e le annotazioni alle premesse)*
+
+- **Parte 1** *(`45568f37`)*: **la previsione alla lettera CADE sulle tre CACHE** *(`h_int` `1.787e+02` e `1.157e+02`, `Lambda` `1.262e-04`, `rho` `4.459e-07`: gli stessi numeri per ogni N e ogni stato)*; **le chiavi della dinamica passano** *(il peggiore E `2.817e-12` a `N = 100`, la soglia `1e-10`)*. **ANNOTAZIONE alla premessa (1):** **ne' il punto fisso di `cs` ne' la crescita degli errori hanno pesato** *(da `N = 10` a `N = 100` psi_h da `4.8e-15` a `1.7e-14`)*; **cio' che ha fatto cadere la lettura e' una cosa che la carta non aveva visto: lo stato contiene CACHE che il tick non aggiorna.** ### **Errore mio nella carta:** la previsione «per OGNI chiave» andava scritta sulle chiavi dello STATO DINAMICO *(il precedente c'era: `CHIAVI_SERVIZIO`)*.
+- **Parte 2** *(`f1565bd2`)*: **FC resta aperta**; la proposta nella nota; le simmetrie nelle considerazioni e nel SOSPESO; la domanda dell'immagine CPT di un mattone.
+- **Parte 3** *(`4ef87f14`)*: **ANNOTAZIONE alla premessa (3):** **non sapevo che il referto «rigirato» fosse del nucleo di ALLORA**: **oggi v2-v5 danno altri numeri** *(S1 e lo zero simmetrico)*; **e su F3 puro D7 su `phi` e' INDEFINITA** *(la somma delle estremita' del padre e' `0`)*. **All'anello `60` la nascita COSTA** *(`+17`/`+26`)*: **la nota di D7 «ALZA H» e' vera sul vuoto vero.** **La condizione per v4 non si chiude: FERMO coi numeri.**
+- **Parte 4** *(il commit di questa sezione)*: **le tre candidate `Q1`-`Q3` sono `0` esatte nel vuoto F3 puro e massime nel guscio** *(`6`-`10`)*; **nessun arco raggiunge il costo `26.11`** *(una scelta mia per l'ordine di grandezza)*. **FERMO per Luca: la scelta della soglia.**

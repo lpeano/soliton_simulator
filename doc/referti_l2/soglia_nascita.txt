@@ -1,0 +1,113 @@
+[TIMBRO] soglia_nascita.py  sha1-BYTE fc02d94b  committato e pulito
+==================================================================================================================================
+LA LETTURA PER LA SOGLIA DELLA NASCITA (Luca 2026-11-17 13:16, parte 4); sola lettura; OMEGA_H 3.141592653589793
+==================================================================================================================================
+### 4.1 IL SEGNO: le famiglie di termini (la somma; quanto ne e' negativo); il controllo: la ricostruzione contro termini_di_h
+    il vuoto F3 puro (psi = 0) (la ricostruzione contro termini_di_h: 0.0e+00):
+        Grover nodo psi          la somma +0.000000e+00   (la parte negativa +0.000000e+00, la positiva +0.000000e+00)
+        Grover nodo phi          la somma -2.473439e+05   (la parte negativa -2.473439e+05, la positiva +0.000000e+00)
+        moneta                   la somma +0.000000e+00   (la parte negativa +0.000000e+00, la positiva +0.000000e+00)
+        N (materia-vuoto)        la somma +0.000000e+00   (la parte negativa +0.000000e+00, la positiva +0.000000e+00)
+        arco psi                 la somma +0.000000e+00   (la parte negativa +0.000000e+00, la positiva +0.000000e+00)
+        arco phi (la tensione)   la somma -2.473439e+05   (la parte negativa -2.473439e+05, la positiva +0.000000e+00)
+        IL TOTALE                -4.946877e+05
+    il mattone L162_MGU_03000 (la ricostruzione contro termini_di_h: 4.5e-13):
+        Grover nodo psi          la somma +1.543548e+06   (la parte negativa -4.388935e-01, la positiva +1.543549e+06)
+        Grover nodo phi          la somma -2.398899e+05   (la parte negativa -2.398899e+05, la positiva +0.000000e+00)
+        moneta                   la somma +7.249271e+04   (la parte negativa -3.731586e-01, la positiva +7.249309e+04)
+        N (materia-vuoto)        la somma +9.840028e+05   (la parte negativa +0.000000e+00, la positiva +9.840028e+05)
+        arco psi                 la somma +1.543956e+06   (la parte negativa -2.221725e-01, la positiva +1.543956e+06)
+        arco phi (la tensione)   la somma -2.377436e+05   (la parte negativa -2.380307e+05, la positiva +2.870720e+02)
+        IL TOTALE                +3.666367e+06
+    il triangolo legati_t120_03000 (la ricostruzione contro termini_di_h: 9.1e-13):
+        Grover nodo psi          la somma +4.586409e+06   (la parte negativa -4.934172e+00, la positiva +4.586414e+06)
+        Grover nodo phi          la somma -2.243633e+05   (la parte negativa -2.243651e+05, la positiva +1.819196e+00)
+        moneta                   la somma +2.155319e+05   (la parte negativa -1.138977e+00, la positiva +2.155331e+05)
+        N (materia-vuoto)        la somma +2.925168e+06   (la parte negativa +0.000000e+00, la positiva +2.925168e+06)
+        arco psi                 la somma +4.587780e+06   (la parte negativa -1.544532e+00, la positiva +4.587781e+06)
+        arco phi (la tensione)   la somma -2.179871e+05   (la parte negativa -2.188834e+05, la positiva +8.963471e+02)
+        IL TOTALE                +1.187254e+07
+    la coppia legati_GU_07000 (la ricostruzione contro termini_di_h: 9.1e-13):
+        Grover nodo psi          la somma +3.177096e+06   (la parte negativa -2.517048e+00, la positiva +3.177099e+06)
+        Grover nodo phi          la somma -2.294612e+05   (la parte negativa -2.294616e+05, la positiva +4.335852e-01)
+        moneta                   la somma +1.490695e+05   (la parte negativa -1.255435e+00, la positiva +1.490707e+05)
+        N (materia-vuoto)        la somma +2.026534e+06   (la parte negativa +0.000000e+00, la positiva +2.026534e+06)
+        arco psi                 la somma +3.177922e+06   (la parte negativa -6.115540e-01, la positiva +3.177923e+06)
+        arco phi (la tensione)   la somma -2.245961e+05   (la parte negativa -2.253533e+05, la positiva +7.572046e+02)
+        IL TOTALE                +8.076565e+06
+----------------------------------------------------------------------------------------------------------------------------------
+### 4.2 LA TENSIONE D'ARCO T(a) = Omega Re(conj(phi_coda) phi_testa): sul vuoto F3 puro da -3.141592654e+00 a -3.141592654e+00 (la media -3.141592654e+00)
+    il fondo F3: T_F3 = -3.141592654e+00 (la mediana); l'energia del vuoto per nodo (Grover nodo phi) -9.424777961e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il vuoto F3 puro (psi = 0): il baricentro (81.00, 81.00); per anello (la media sugli archi col punto medio nell'anello [r, r+1)):
+        r           T(a)             Q1             Q2         Q3 |J|
+        0  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+        5  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       10  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       13  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       14  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       15  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       20  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       25  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       30  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       40  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       50  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+       60  -3.141593e+00  +0.000000e+00  +0.000000e+00   0.000000e+00
+    Q1: nel vuoto lontano (anelli 55-60) la media +0.000e+00; il massimo +0.000000e+00 all'arco col punto medio a 80.75 nodi; gli archi con Q1 >= 26.11 (il costo C): 0 su 78732
+    Q2: nel vuoto lontano (anelli 55-60) la media +0.000e+00; il massimo +0.000000e+00 all'arco col punto medio a 80.75 nodi; gli archi con Q2 >= 26.11 (il costo C): 0 su 78732
+    Q3: nel vuoto lontano (anelli 55-60) la media +0.000e+00; il massimo +0.000000e+00 all'arco col punto medio a 80.75 nodi; gli archi con Q3 >= 26.11 (il costo C): 0 su 78732
+----------------------------------------------------------------------------------------------------------------------------------
+### il mattone L162_MGU_03000: il baricentro (112.54, 106.69); per anello (la media sugli archi col punto medio nell'anello [r, r+1)):
+        r           T(a)             Q1             Q2         Q3 |J|
+        0  -3.227698e+00  -8.610545e-02  -2.149991e-01   9.277296e-01
+        5  -3.338393e+00  -1.967999e-01  -9.468484e-01   1.100756e+00
+       10  -2.885834e+00  +2.557590e-01  -7.378112e-01   1.529294e+00
+       13  -1.278606e+00  +1.862986e+00  +2.885012e+00   1.228518e+00
+       14  -7.931475e-01  +2.348445e+00  +4.224348e+00   1.132317e+00
+       15  -5.529275e-01  +2.588665e+00  +5.784682e+00   1.070945e+00
+       20  -7.917425e-01  +2.349850e+00  +6.478519e+00   5.032827e-01
+       25  -3.151567e+00  -9.973884e-03  -5.807600e-02   7.236004e-04
+       30  -3.148590e+00  -6.996918e-03  -2.255417e-02   4.934391e-04
+       40  -3.148691e+00  -7.097952e-03  -1.897629e-02   4.162521e-04
+       50  -3.144180e+00  -2.587508e-03  -1.325872e-02   1.893021e-04
+       60  -3.143419e+00  -1.826483e-03  -6.250769e-03   1.522019e-04
+    Q1: nel vuoto lontano (anelli 55-60) la media -2.737e-03; il massimo +6.139778e+00 all'arco col punto medio a 14.85 nodi; gli archi con Q1 >= 26.11 (il costo C): 0 su 78732
+    Q2: nel vuoto lontano (anelli 55-60) la media -7.843e-03; il massimo +9.225297e+00 all'arco col punto medio a 20.54 nodi; gli archi con Q2 >= 26.11 (il costo C): 0 su 78732
+    Q3: nel vuoto lontano (anelli 55-60) la media +1.508e-04; il massimo +6.133610e+00 all'arco col punto medio a 9.21 nodi; gli archi con Q3 >= 26.11 (il costo C): 0 su 78732
+----------------------------------------------------------------------------------------------------------------------------------
+### il triangolo legati_t120_03000: il baricentro (101.04, 79.38); per anello (la media sugli archi col punto medio nell'anello [r, r+1)):
+        r           T(a)             Q1             Q2         Q3 |J|
+        0  -1.991865e+00  +1.149727e+00  +2.886798e+00   5.133878e-01
+        5  -8.160884e-01  +2.325504e+00  +6.108331e+00   2.198285e+00
+       10  -1.127201e+00  +2.014391e+00  +4.235405e+00   2.830580e+00
+       13  -1.710814e+00  +1.430779e+00  +2.851077e+00   2.797069e+00
+       14  -1.916003e+00  +1.225590e+00  +2.570845e+00   2.823763e+00
+       15  -1.920501e+00  +1.221091e+00  +2.327907e+00   2.729739e+00
+       20  -2.034069e+00  +1.107524e+00  +2.313172e+00   2.345876e+00
+       25  -1.969143e+00  +1.172450e+00  +2.585143e+00   1.510618e+00
+       30  -1.915222e+00  +1.226371e+00  +2.626678e+00   1.032658e+00
+       40  -1.975444e+00  +1.166148e+00  +3.136129e+00   3.697192e-01
+       50  -3.153744e+00  -1.215144e-02  -3.377031e-02   9.157755e-04
+       60  -3.146168e+00  -4.575176e-03  -2.051978e-02   6.952203e-04
+    Q1: nel vuoto lontano (anelli 55-60) la media +1.231e-02; il massimo +7.749312e+00 all'arco col punto medio a 37.47 nodi; gli archi con Q1 >= 26.11 (il costo C): 0 su 78732
+    Q2: nel vuoto lontano (anelli 55-60) la media +2.670e-02; il massimo +9.183244e+00 all'arco col punto medio a 8.52 nodi; gli archi con Q2 >= 26.11 (il costo C): 0 su 78732
+    Q3: nel vuoto lontano (anelli 55-60) la media +8.120e-04; il massimo +9.711996e+00 all'arco col punto medio a 19.38 nodi; gli archi con Q3 >= 26.11 (il costo C): 0 su 78732
+----------------------------------------------------------------------------------------------------------------------------------
+### la coppia legati_GU_07000: il baricentro (97.31, 79.57); per anello (la media sugli archi col punto medio nell'anello [r, r+1)):
+        r           T(a)             Q1             Q2         Q3 |J|
+        0  -1.759306e+00  +1.382287e+00  +3.475647e+00   5.547904e-01
+        5  -1.008917e+00  +2.132675e+00  +5.273636e+00   1.200930e+00
+       10  -1.669022e+00  +1.472570e+00  +3.248333e+00   1.268614e+00
+       13  -1.905087e+00  +1.236506e+00  +2.769400e+00   1.315134e+00
+       14  -1.971316e+00  +1.170276e+00  +2.465947e+00   1.564240e+00
+       15  -2.075897e+00  +1.065696e+00  +2.600147e+00   1.439787e+00
+       20  -1.579070e+00  +1.562523e+00  +3.671883e+00   1.232469e+00
+       25  -2.016392e+00  +1.125201e+00  +2.572176e+00   7.448191e-01
+       30  -1.824781e+00  +1.316812e+00  +2.981373e+00   5.815774e-01
+       40  -2.695499e+00  +4.460939e-01  +1.193214e+00   1.412698e-02
+       50  -3.131973e+00  +9.619641e-03  +2.846151e-02   4.949457e-04
+       60  -3.074626e+00  +6.696690e-02  +7.207040e-02   3.688616e-04
+    Q1: nel vuoto lontano (anelli 55-60) la media +8.919e-02; il massimo +6.659970e+00 all'arco col punto medio a 57.75 nodi; gli archi con Q1 >= 26.11 (il costo C): 0 su 78732
+    Q2: nel vuoto lontano (anelli 55-60) la media +5.480e-02; il massimo +9.304446e+00 all'arco col punto medio a 3.73 nodi; gli archi con Q2 >= 26.11 (il costo C): 0 su 78732
+    Q3: nel vuoto lontano (anelli 55-60) la media +3.940e-04; il massimo +6.981396e+00 all'arco col punto medio a 17.06 nodi; gli archi con Q3 >= 26.11 (il costo C): 0 su 78732
+==================================================================================================================================
