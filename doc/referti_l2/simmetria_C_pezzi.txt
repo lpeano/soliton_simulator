@@ -1,0 +1,27 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] simmetria_C.py  sha1-BYTE 7cfc93b7  committato e pulito
+[TIMBRO] simmetria_C_pezzi.py  sha1-BYTE a509a7a2  committato e pulito
+==================================================================================================================================
+LA SIMMETRIA C, PEZZO PER PEZZO (dopo simmetria_C.txt); sys.executable E:\python\py3132\python.exe; e 6.315414e-05
+==================================================================================================================================
+### i pezzi della prima meta' del palindromo: ['CAMM-MATERIA-VUOTO', 'CAMM-FASE-VUOTO', 'CAMM-MONETA-SPIN', 'CAMM-GROVER', 'CAMM-SPOSTAMENTO', 'CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO']
+### cs dallo stato di partenza: forma (26244,), da 1.492183e-01 a 1.500000e-01
+### cs di C(x) (T sigma_y, f phi, s -1) contro cs di x: max |differenza| relativa 6.634e-05
+----------------------------------------------------------------------------------------------------------------------------------
+    spinta                   il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 0.000e+00  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (13.1 s)
+    fase_a                   il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 4.969e-03  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (12.6 s)
+    reazione                 il controllo (identita') 0.0e+00 | il migliore T sigma_y  f phi         s +1: psi_h 3.168e-03  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (18.4 s)
+    CAMM-MATERIA-VUOTO       il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 1.491e-01  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (12.9 s)
+    CAMM-FASE-VUOTO          il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 0.000e+00  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (12.1 s)
+    CAMM-MONETA-SPIN         il controllo (identita') 0.0e+00 | il migliore T sigma_y  f phi         s +1: psi_h 0.000e+00  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (13.0 s)
+    CAMM-GROVER              il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 2.345e-01  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (13.5 s)
+    CAMM-SPOSTAMENTO         il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 2.341e-01  phi_h 0.000e+00  A 0.000e+00  E 1.456e-03   (14.2 s)
+    CAMM-GROVER-VUOTO        il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 0.000e+00  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (15.2 s)
+    CAMM-SPOSTAMENTO-VUOTO   il controllo (identita') 0.0e+00 | il migliore T I        f phi         s +1: psi_h 0.000e+00  phi_h 0.000e+00  A 0.000e+00  E 0.000e+00   (14.2 s)
+    tick                     il controllo (identita') 0.0e+00 | il migliore T sigma_y  f phi         s +1: psi_h 1.153e+00  phi_h 5.863e-03  A 4.709e-07  E 2.724e-03   (108.5 s)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il controllo positivo (l'identita' senza coniugio) da' 0 per ogni pezzo e per il tick: PASSA 
+### I PEZZI CHE COMMUTANO CON C (il migliore sotto 1e-12):  ['spinta', 'CAMM-FASE-VUOTO', 'CAMM-MONETA-SPIN', 'CAMM-GROVER-VUOTO', 'CAMM-SPOSTAMENTO-VUOTO']
+### I PEZZI CHE ROMPONO C (il migliore sopra 1e-12):        [('fase_a', '4.97e-03'), ('reazione', '3.17e-03'), ('CAMM-MATERIA-VUOTO', '1.49e-01'), ('CAMM-GROVER', '2.35e-01'), ('CAMM-SPOSTAMENTO', '2.34e-01'), ('tick', '1.15e+00')]
+    (il tempo 274 s)
+==================================================================================================================================

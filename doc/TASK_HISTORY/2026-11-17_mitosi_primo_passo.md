@@ -43,3 +43,13 @@
 5. C2: lo script, commit; la corsa *(breve, una «breve» nel registro)*; il referto; FC; commit;
 6. C3: la carta; commit;
 7. **FERMO per Luca.**
+
+## 4. L'ESITO *(e le annotazioni alle premesse)*
+
+- **Parte 0:** R-QUALITA' nella ROTTA *(`c076265a`)*. **A e B:** gia' fatte *(`980f5f5e`)*; **B4 senza testo** *(resta per Luca)*.
+- **C1** *(`938fa9dc`)*: le note nell'albero, **nessun `presa` cambiato**; le due voci della coesione SUPERATE da `DEC-FC-COESIONE`. **Tre commit rifiutati dai hook prima di passare** *(un file generato dal hook fuori dalla lista; due volte l'etichetta `D6f` letta come un ID: la memoria «la forma del messaggio di commit» lo diceva gia')*.
+- **C2** *(`simmetria_C.txt`, `92948daf`)*: **i casi noti PASSANO** *(K1 `32`/`32`; K2 il vortice coniugato ha giro `-1` e L opposto; il caso che deve fallire fallisce)*; ### **C NON ESISTE fra i `32` candidati**: dopo `10` tick il migliore entro `40` nodi **`2.976e-01`** sul mattone e **`1.593e+00`** sullo stato a caso, contro `1e-12`. ### **LA PREVISIONE DEL GUARDIANO CADE.**
+- ### **ERRORE MIO** *(annotato, non riscritto)*: **il primo script NON aveva un CONTROLLO POSITIVO** *(l'identita' senza coniugio deve dare `0`)*: **la sez. `2.3` di questa carta lo ometteva.** **Lo ha il passo diagnostico** *(`simmetria_C_pezzi.py`, `a454a50b`)*: **`0` per ogni pezzo e per il tick**, e **il tick intero ridà `1.153e+00`, lo stesso numero della prima prova**: la rottura e' vera, non della catena.
+- **IL PERCHE'** *(`simmetria_C_pezzi.txt`)*: **rompono C** `CAMM-GROVER` `2.35e-01`, `CAMM-SPOSTAMENTO` `2.34e-01`, `CAMM-MATERIA-VUOTO` `1.49e-01`, `fase_a` `4.97e-03`, `reazione` `3.17e-03`; **commutano** la spinta, `CAMM-MONETA-SPIN` *(con `sigma_y`)*, `CAMM-FASE-VUOTO` e i due pezzi del vuoto *(con `phi` invariato: **per costruzione**, se non leggono `psi` -- un FALSO-ZERO possibile, dichiarato)*. **La differenza di `cs` fra `x` e `C(x)`: `6.634e-05` relativa.**
+- **ANNOTAZIONE alla premessa 3** *(«una fase pari rompe C»)*: **VERA, ma non e' la sola causa, e non la piu' grande:** **i pezzi UNITARI della camminata** *(Grover e lo spostamento)* **rompono C piu' della fase materia-vuoto.** **La lettura** *(non una prova)*: **sotto il coniugio un pezzo `exp(-i tau H)` cambia verso: per questa camminata il coniugio e' un ROVESCIAMENTO DEL TEMPO, non lo scambio delle bande.**
+- ### **FC RESTA APERTA, col perche'** *(la nota nell'albero)*; **la domanda per Luca:** che cosa vuol dire «la stessa azione sulle due bande» per questa camminata *(un operatore UNITARIO che scambia le bande, o C insieme al rovesciamento del tick)*.

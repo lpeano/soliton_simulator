@@ -209,6 +209,23 @@ nodi:
       (C2, doc/referti_l2/simmetria_C.txt: la forza deve agire allo stesso modo sulle due
       bande, cioe- G+U deve commutare con la coniugazione di carica); SE NO, RESTA APERTA COL
       PERCHE-. Fino al referto: presa false.
+      ### ⛔ L-ESITO DI C2 (2026-11-17, doc/referti_l2/simmetria_C.txt e
+      simmetria_C_pezzi.txt): LA PROVA NON PASSA, E FC RESTA APERTA. La coniugazione di
+      carica antiunitaria (psi_h -> T conj(psi_h), 32 candidati: T in I, sigma_x,
+      sigma_y, sigma_z; phi in phi, -phi, conj, -conj; A ed E per +1 o -1) NON commuta
+      col tick di G+U: dopo 10 tick il migliore entro 40 nodi 2.976e-01 sul mattone e
+      1.593e+00 su uno stato a caso, contro la soglia 1e-12 (la previsione del
+      guardiano cade). ### IL PERCHE-, PEZZO PER PEZZO (il controllo positivo, l-identita-
+      senza coniugio, da- 0 ovunque): ROMPONO C i pezzi della camminata della materia
+      CAMM-GROVER (2.35e-01) e CAMM-SPOSTAMENTO (2.34e-01), la fase CAMM-MATERIA-VUOTO
+      (1.49e-01), fase_a (4.97e-03) e la reazione (3.17e-03); COMMUTANO la spinta del
+      campo, CAMM-MONETA-SPIN (con sigma_y) e i pezzi del vuoto (con phi invariato: per
+      costruzione, se non leggono psi). ### LA LETTURA (non una prova): un pezzo della
+      forma exp(-i tau H) con H che nessun T rende dispari cambia verso sotto il
+      coniugio: per la camminata il coniugio e- un ROVESCIAMENTO DEL TEMPO, non uno
+      scambio delle bande. ### DA DECIDERE (Luca): che cosa vuol dire <<la stessa azione
+      sulle due bande>> per questa camminata (un operatore UNITARIO che scambia le bande,
+      o C insieme al rovesciamento del tick), e se FC si giudica su quello.
 
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
