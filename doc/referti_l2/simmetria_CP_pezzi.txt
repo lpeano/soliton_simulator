@@ -1,0 +1,58 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] specchio_carta.py  sha1-BYTE 8ca8f96b  committato e pulito
+[TIMBRO] simmetria_CP_pezzi.py  sha1-BYTE 3bdf48dc  committato e pulito
+==================================================================================================================================
+CP E CPT, PEZZO PER PEZZO (dopo simmetria_CP.txt); sys.executable E:\python\py3132\python.exe
+==================================================================================================================================
+    spinta                   il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 2.88e-14
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 4.25e-04
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 1.44e-14
+    fase_a                   il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 2.52e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 2.52e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 4.97e-03 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    reazione                 il controllo 0.0e+00 (3 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 2.52e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 2.52e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 3.17e-03 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    CAMM-MATERIA-VUOTO       il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 2.58e-16 phi_h 2.84e-15 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 2.58e-16 phi_h 2.84e-15 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 1.49e-01 phi_h 2.84e-15 A 0.00e+00 E 0.00e+00
+    CAMM-FASE-VUOTO          il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    CAMM-MONETA-SPIN         il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 2.58e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 2.58e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 3.96e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    CAMM-GROVER              il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 5.01e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 5.01e-16 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 2.35e-01 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    CAMM-SPOSTAMENTO         il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 6.38e-16 phi_h 0.00e+00 A 0.00e+00 E 1.95e-16
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 6.38e-16 phi_h 0.00e+00 A 0.00e+00 E 1.43e-03
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 2.34e-01 phi_h 0.00e+00 A 0.00e+00 E 1.46e-03
+    CAMM-GROVER-VUOTO        il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 0.00e+00 phi_h 4.34e-16 A 0.00e+00 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 0.00e+00 phi_h 4.34e-16 A 0.00e+00 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 0.00e+00 phi_h 1.73e-16 A 0.00e+00 E 0.00e+00
+    CAMM-SPOSTAMENTO-VUOTO   il controllo 0.0e+00 (2 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 0.00e+00 phi_h 7.20e-16 A 1.06e-16 E 0.00e+00
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 0.00e+00 phi_h 7.20e-16 A 6.63e-04 E 0.00e+00
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 0.00e+00 phi_h 0.00e+00 A 0.00e+00 E 0.00e+00
+    tick_GU                  il controllo 0.0e+00 (13 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 1.63e-15 phi_h 5.29e-15 A 4.24e-16 E 1.29e-13
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 1.29e-07 phi_h 6.65e-09 A 6.63e-04 E 2.66e-03
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 1.15e+00 phi_h 5.86e-03 A 4.71e-07 E 2.72e-03
+    tick                     il controllo 0.0e+00 (16 s)
+        CPT [inv sy -conj(phi) sA-1 sE+1] psi_h 2.00e-04 phi_h 9.92e-03 A 7.90e-11 E 6.97e-07
+        CPT [inv sy -conj(phi) sA-1 sE-1] psi_h 2.00e-04 phi_h 9.92e-03 A 6.63e-04 E 2.66e-03
+        CP [spec s.l.sy phi sA+1 sE+1] psi_h 1.15e+00 phi_h 2.32e-02 A 4.71e-07 E 2.72e-03
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il controllo positivo (l'identita') da' 0 per ogni pezzo: PASSA
+    (il tempo 84 s)
+==================================================================================================================================

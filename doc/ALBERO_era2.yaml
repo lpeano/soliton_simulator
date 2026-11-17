@@ -226,6 +226,18 @@ nodi:
       scambio delle bande. ### DA DECIDERE (Luca): che cosa vuol dire <<la stessa azione
       sulle due bande>> per questa camminata (un operatore UNITARIO che scambia le bande,
       o C insieme al rovesciamento del tick), e se FC si giudica su quello.
+      ### ⛔ L-ESITO DI CP E CPT (Luca 2026-11-17 11:33, B; doc/referti_l2/simmetria_CP.txt e
+      simmetria_CP_pezzi.txt): LA LETTURA FISSATA PRIMA NON PASSA (ne- CP ne- CPT sotto 1e-12
+      dopo 10 tick entro 40 nodi), QUINDI FC RESTA APERTA E SI FERMA PER LUCA. CP cade come C
+      (2.976e-01). ### MA LA DIAGNOSI (dichiarata DOPO la lettura, post-hoc): l-antiunitario
+      Theta = l-inversione x -> -x attorno a un nodo, sigma_y, il coniugio, phi -> -conj(phi),
+      A dispari ed E pari, ROVESCIA OGNI PEZZO del tick all-arrotondamento, E ROVESCIA IL TICK
+      G+U SENZA IL BORDO (psi_h 1.63e-15, phi_h 5.29e-15, A 4.24e-16, E 1.29e-13 su tutto il
+      toro, 1 tick); cio- che rompe e- il BORDO ASSORBENTE (dissipativo per costruzione) con la
+      sua correzione di Gauss: col bordo psi_h 2.00e-04, phi_h 9.92e-03 dopo 1 tick. ### DA
+      DECIDERE (Luca): FC presa <<la coesione e- G+U, simmetrica per CPT (questo Theta)>>, con
+      la correzione post-hoc dichiarata (il confronto sul tick SENZA il bordo), oppure una
+      prova nuova con le soglie scritte prima (10 tick di tick_GU sui due stati).
 
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
@@ -343,6 +355,15 @@ nodi:
       ### ⚠ E PRESA RESTA false ANCHE SE FC PASSA: il motivo della via (3) di Luca del
       2026-10-26 (la parte del VUOTO della regola, la nascita libera 8.548 che il vuoto
       uniforme non assorbe, d999cca7) non dipende dalla prova C. La via e- di Luca.
+      ### ⭐ LE DECISIONI DI LUCA DEL 2026-11-17 (11:33), D-M1..D-M4 (doc/MITOSI_era2_carta.md,
+      sez. 9): D-M1 lo scongelamento del nucleo per Motore.cresci SOLO sul ramo mitosi, col
+      cancello P6 (le zone regolari al bit), la riunione solo con un mandato; D-M2 la
+      divisione d-arco PIU- il flip, la scelta del flip simmetrica allo specchio; D-M3 la
+      regola di phi_h sulle estremita- nuove SUI NUMERI (la proposta v4, la carta sez. 10.2;
+      FERMO per Luca); D-M4 una nascita per tick. Il codice del nucleo sul ramo parte solo
+      dopo D-M3 e con FC presa. ### ⚠ LA NOTA SOPRA DICE <<la divisione ALZA H>>: il referto
+      rigirato (divisione_vuoto_rigirato.txt) da- Delta H_tot NEGATIVO per tutte e cinque le
+      regole: da chiarire (la carta, sez. 10.2 punto 2).
 
   # ----------------------------------------------------------------------------------
   #  IL NODO DI METODO, il solo fuori dalla catena di cui il repo sappia l-argomento

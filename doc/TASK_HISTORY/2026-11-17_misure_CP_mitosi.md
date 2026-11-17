@@ -49,3 +49,22 @@
 3. B: lo script *(commit)*, la corsa *(una «breve»)*, il referto, FC *(commit)*;
 4. C: l'albero e la carta; il ramo; `divisione_vuoto` rigirato; la carta delle regole aperte *(commit)*;
 5. **FERMO** su D-M3 e FC.
+
+## 4. L'ESITO *(e le annotazioni alle premesse)*
+
+### 4.1 A -- le misure *(`dd711ad1`)*
+
+- **Il caso noto passa** *(la tre punte ruotata di `+10` e `-7` gradi misurata entro `0.01`)*. **Il confronto cogli attesi del guardiano** *(sez. `2.1`, scritti prima)*: **il guscio TORNA** *(`0.436` -> `0.215`, l'orientamento al piu' `+2.81` gradi)*; **i due strati tornano per `17-22`** *(`-22.66` a `k 5000`)*, **il `22-27` e' `-3.64` contro circa `-5`**, **«il `27-32` SEMPRE avanti» NON torna** *(`33` fotogrammi su `59`)*; **le culle: la parte centrale torna, la coda no** *(il `95%` a `3.687` nodi, fino a `+8.24` gradi)*, **e il massimo `5.490` satura la finestra** *(un limite della misura)*.
+- **ANNOTAZIONE alle premesse 1-2:** i fotogrammi assenti presi al piu' vicino *(il riferimento `3020`)*; la finestra delle culle un disco di raggio `5.5`: **entrambe stampate nel referto.**
+
+### 4.2 B -- CP E CPT *(`d1c32fb5`, la diagnosi `6ae5dd72`, `ddafacba`)*
+
+- **LA LETTURA FISSATA PRIMA: NE' CP NE' CPT** *(sotto `1e-12` dopo `10` tick entro `40` nodi)*. **CP cade come C** *(`2.976e-01`)*; **CPT si ferma a `5.475e-02`** *(il vuoto; psi_h `7.9e-04`, A `8.6e-09`, E `5.3e-06`)*. ### **LA PREVISIONE DEL GUARDIANO CADE**; **la mia** *(«CP cade, puo' passare la famiglia che rovescia il tick»)* **e' giusta per CP, e per CPT a meta'** *(vedi sotto)*.
+- ### **ERRORE MIO, il secondo di oggi sullo stesso tipo di prova:** **la v1 della diagnosi teneva lo stesso `cs` sui due lati mentre la mappa permuta i nodi**: **tutti i pezzi della camminata davano `~1e-4`** *(un artefatto)*; **corretto nella v2** *(`cs` permutato)*: **`<= 7.2e-16` per ogni pezzo.** **La v1 e' tenuta** *(`simmetria_CP_pezzi_v1.txt`)*.
+- ### **IL RISULTATO DELLA DIAGNOSI** *(post-hoc, DOPO la lettura)*: **l'antiunitario `Theta` = l'inversione `x -> -x` attorno a un nodo, `sigma_y`, il coniugio, `phi -> -conj(phi)`, `A` dispari ed `E` pari ROVESCIA OGNI PEZZO del tick e IL TICK G+U SENZA IL BORDO** *(psi_h `1.63e-15`, phi_h `5.29e-15`, A `4.24e-16`, E `1.29e-13`, tutto il toro, `1` tick)*. **Cio' che rompe e' il BORDO ASSORBENTE** *(dissipativo per costruzione: un rovesciamento del tempo non puo' commutare con un assorbitore)* **con la sua correzione di Gauss.** **I segni sono quelli classici del rovesciamento del tempo** *(A dispari, E pari)*: **nella fisica di questo modello il coniugio e' la parte «T» e l'inversione la parte «P».**
+- ### **FC RESTA APERTA, FERMO per Luca** *(B5: «se nessuna passa»)*, **con la proposta scritta nella nota dell'albero:** FC presa «simmetrica per CPT» con la correzione post-hoc dichiarata, **o** una prova nuova con le soglie scritte prima *(`10` tick di `tick_GU`, senza bordo, sui due stati)*.
+
+### 4.3 C -- le decisioni e il ramo *(il commit dopo)*
+
+- **D-M1..D-M4** nella nota di D7 e nella carta della mitosi *(sez. `9`)*; **il ramo `mitosi`** *(il worktree `C:/Users/lpeano/wt_mitosi` da `306fd07b`, pushato)*; **`divisione_vuoto.txt` rigirato dal suo commit** *(il worktree staccato `C:/Users/lpeano/wt_divisione_f7ee87a9`)*: **identico all'ordine di `1e-14`; il timbro «MODIFICATO» di allora era la trappola CRLF**; **la proposta per D-M3: `v4`** *(la carta, sez. `10.2`)*; **due cose aperte:** il segno di `Delta H` contro la nota di D7 *(«ALZA H»)* e la soglia contro «il vuoto puro non cresce».
+- **I due worktree restano** *(nessun file cancellato)*.
