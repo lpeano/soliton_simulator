@@ -1,0 +1,18 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] specchio_carta.py  sha1-BYTE 8ca8f96b  committato e pulito
+[TIMBRO] simmetria_CPT_cache.py  sha1-BYTE 1af7aff7  committato e pulito
+==================================================================================================================================
+LA PROVA CPT SENZA BORDO CON LE CACHE RICALCOLATE (Luca 2026-11-17 14:27, parte 1); sys.executable E:\python\py3132\python.exe; le soglie {10: 1e-12, 100: 1e-10}
+==================================================================================================================================
+### l'operatore di simmetria_CPT.py: l'inversione attorno a p0 = (113, 107); sigma_y e il coniugio su psi; phi -> -conj(phi); A -> -(verso) A; E -> +(verso) E
+### il mattone: h_int ricalcolato su Theta(x) contro h_int(x) permutato: 3.181e-16; contro MENO h_int(x) permutato: 2.000e+00
+### il mattone, N = 10: il massimo 7.621e-13 (la soglia 1e-12: SOTTO) -- h_int 7.952e-15  rho 5.338e-15  Lambda 7.840e-15  psi_h 4.796e-15  phi_h 1.380e-14  A 6.355e-16  E 7.621e-13  (52 s)
+### il mattone, N = 100: il massimo 2.731e-12 (la soglia 1e-10: SOTTO) -- h_int 2.195e-14  rho 1.239e-14  Lambda 3.148e-14  psi_h 1.663e-14  phi_h 3.087e-14  A 2.542e-15  E 2.731e-12  (572 s)
+### lo stato a caso (seme 11): h_int ricalcolato su Theta(x) contro h_int(x) permutato: 2.456e-16; contro MENO h_int(x) permutato: 2.000e+00
+### lo stato a caso (seme 11), N = 10: il massimo 7.189e-13 (la soglia 1e-12: SOTTO) -- h_int 1.207e-14  rho 4.957e-15  Lambda 7.227e-15  psi_h 7.947e-15  phi_h 1.683e-14  A 8.464e-16  E 7.189e-13  (65 s)
+### lo stato a caso (seme 11), N = 100: il massimo 2.817e-12 (la soglia 1e-10: SOTTO) -- h_int 3.804e-14  rho 1.468e-14  Lambda 2.940e-14  psi_h 2.209e-14  phi_h 3.046e-14  A 3.386e-15  E 2.817e-12  (663 s)
+==================================================================================================================================
+### LA LETTURA (la carta, sez. 3): PASSA: le cache ricalcolate e la dinamica coincidono entro le soglie, N = 10 e 100, dai due stati
+    (il tempo 1378 s)
+==================================================================================================================================

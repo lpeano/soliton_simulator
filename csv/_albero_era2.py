@@ -280,8 +280,11 @@ def collaudo():
     # ### ### **`DEC-D6F-FORME-VUOTO`** *(la forma `(c)` decisa il `2026-10-15`, e le
     # ### `(a)` e `(b)` VERIFICATE come decisioni gia- registrate: il punto `F4` della
     # ### carta, del `2026-10-12`)*.
+    # ### ✅ **SEI dal `2026-11-17`**: ### **`DEC-FC-COESIONE`** *(la decisione di Luca delle
+    # ### `14:23`: la coesione e- G+U, simmetrica per CPT sulla dinamica; la prova
+    # ### `doc/referti_l2/simmetria_CPT_cache.txt`)*.
     PRESI_DICHIARATI = ("DEC-CAM-CAMMINATA", "DEC-D6-VUOTO",
-                        "DEC-D6F-FORME-VUOTO", "DEC-INT-INTEGRATORE",
+                        "DEC-D6F-FORME-VUOTO", "DEC-FC-COESIONE", "DEC-INT-INTEGRATORE",
                         "DEC-QC-CONSERVATA")
     _presi = sorted(x["id"] for x in nodi if x.get("presa"))
     esito("### i nodi PRESI sono esattamente quelli DICHIARATI",
@@ -415,22 +418,26 @@ def collaudo():
     import subprocess
     b0 = io.open(FONTE, "rb").read()
     sha0 = hashlib.sha1(b0).hexdigest()
+    # ### ⛔ **(2026-11-17) LA QUARTA VOLTA: la vittima del file era `figlio`, che quando
+    # ### nessun nodo ha un padre non preso e- COSTRUITO SOLO IN MEMORIA** *(`DEC-CAM-CAMMINATA`,
+    # ### gia- presa e senza dipendenze nel file)*: ### **il braccio cambiava il primo
+    # ### `presa: false` di UN ALTRO nodo, e `valida` passava** *(con `DEC-FC-COESIONE` presa)*.
+    # ### ✅ **Ora la vittima del FILE si COSTRUISCE sempre:** un nodo NON preso con delle
+    # ### dipendenze *(`_vf`)*, a cui si aggiunge come padre un altro nodo NON preso *(`_pf`)*,
+    # ### e lo si marca `presa`: la violazione esiste per costruzione, qualunque cosa sia presa.
+    _vf = next(n for n in nodi if not n.get("presa") and n.get("dipende_da"))
+    _pf = next(n for n in nodi if not n.get("presa") and n["id"] != _vf["id"])
     try:
-        # ### il nodo che ha una dipendenza, marcato `presa` NEL FILE
-        rotto = b0.decode("utf-8").replace(
-            "    id: %s%s    etichetta: %s%s    titolo:"
-            % (figlio["id"], NL, figlio["etichetta"], NL),
-            "    id: %s%s    etichetta: %s%s    titolo:"
-            % (figlio["id"], NL, figlio["etichetta"], NL), 1)
-        # ### ⚠ **la sostituzione si fa sulla RIGA `presa: false` DI QUEL NODO**, e
-        # ### ### **si CONTA**: un blocco che non si trova una volta sola si rifiuta.
-        pezzi = rotto.split("  - id: " + figlio["id"] + NL)
-        assert len(pezzi) == 2, "### il nodo `%s` non compare una volta sola" % figlio["id"]
+        # ### ⚠ **la sostituzione si fa sulle RIGHE `dipende_da` e `presa: false` DI QUEL NODO**,
+        # ### e ### **si CONTA**: un blocco che non si trova una volta sola si rifiuta.
+        pezzi = b0.decode("utf-8").split("  - id: " + _vf["id"] + NL)
+        assert len(pezzi) == 2, "### il nodo `%s` non compare una volta sola" % _vf["id"]
         testa, coda = pezzi
-        assert coda.count("presa: false") >= 1
+        assert coda.count("presa: false") >= 1 and coda.count("    dipende_da: [") >= 1
+        coda = coda.replace("    dipende_da: [", "    dipende_da: [%s, " % _pf["id"], 1)
         coda = coda.replace("presa: false", "presa: true", 1)
         io.open(FONTE, "w", encoding="utf-8", newline="").write(
-            testa + "  - id: " + figlio["id"] + NL + coda)
+            testa + "  - id: " + _vf["id"] + NL + coda)
         r = subprocess.run([sys.executable, os.path.join(_QUI, "indice.py"), "valida"],
                            cwd=RADICE, capture_output=True, text=True,
                            encoding="utf-8", errors="replace")

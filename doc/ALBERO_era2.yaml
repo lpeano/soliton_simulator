@@ -190,7 +190,7 @@ nodi:
     titolo: "la forza che tiene insieme il cluster, simmetrica fra le due bande"
     argomento_noto: true
     dipende_da: [DEC-QC-CONSERVATA]
-    presa: false
+    presa: true
     fonte: "doc/CODA_2026-10-09.md::la camminata a moneta, punto 2"
     nota: >
       Dalla voce MATERIA-ANTIMATERIA-SPAZIO: la forza che tiene il cluster deve
@@ -250,6 +250,17 @@ nodi:
       (la condizione 2.2 del mandato). DA DECIDERE (Luca): FC presa <<simmetrica per CPT,
       esatta all-arrotondamento sullo stato dinamico (psi_h, phi_h, A, E)>>, con le cache
       escluse come per CHIAVI_SERVIZIO (post-hoc dichiarato), oppure no.
+      ### ✅ PRESA (DECISIONE DI LUCA 2026-11-17 14:23, condizionata al ricalcolo delle cache,
+      che TORNA: doc/referti_l2/simmetria_CPT_cache.txt, h_int, rho, Lambda ricalcolate dal
+      codice del nucleo sui due lati <= 3.8e-14, la dinamica come prima, N = 10 e 100, i due
+      stati). IL TESTO: LA COESIONE E- G+U (nessun termine nuovo); IL TICK G+U E- SIMMETRICO
+      PER CPT (l-inversione, sigma_y e il coniugio su psi, phi -> -conj(phi), A dispari, E
+      pari) ESATTO ALL-ARROTONDAMENTO SULLA DINAMICA (le cache derivate ricalcolate); C E CP
+      NON SONO SIMMETRIE DEL MODELLO (le rompono la camminata della materia e
+      CAMM-MATERIA-VUOTO); IL BORDO ASSORBENTE E- UNO STRUMENTO DISSIPATIVO E ROMPE CPT, non
+      e- fisica. ### POST-HOC DICHIARATO: la condizione era C (2026-11-17 09:49), poi CP
+      (11:33); CPT e- venuta DOPO le due prove (ebe6dcf0), con la prova prevista prima
+      (815a7fba) e il ricalcolo delle cache (14:27).
 
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
