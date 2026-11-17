@@ -1,0 +1,14 @@
+[TIMBRO] controllo_senza_bordo.py  sha1-BYTE cb036cff  committato e pulito
+[TIMBRO] torsione_tempo_proprio.py  sha1-BYTE d977d348  committato e pulito
+==================================================================================================================================
+LA TORSIONE DEL TEMPO PROPRIO, SOLO MISURA (Luca 2026-11-17 18:04): k3
+==================================================================================================================================
+K3: L'INTEGRALE FRA STATI -- da C2 k 1500 a k 1750, l'accumulo tick per tick contro il trapezio
+### la ripresa da C2 stato_01500 (sha1 8c25f3d9, ricontrollato)
+### Theta su 250 tick: max |accumulo| 6.223150e-02 rad; max |trapezio - accumulo| 5.946e-02 (relativo alla scala 9.554e-01); sugli archi con |Theta| >= meta' del massimo (1577): la differenza relativa massima 1.557e+00
+### lo stato d'arrivo contro C2 stato_01750: [('Lambda', True), ('h_int', True), ('phi_h', True), ('psi', True), ('psi_h', True), ('rho', True), ('campo_A', True), ('campo_E', True), ('cs_prec', True)]
+### 1093 s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K3: lo stato d'arrivo = C2 stato_01750 AL BIT (l'accumulo e' quello della corsa)                               PASSA
+  DEVE: K3: l'errore del trapezio stampato (Q-A5): relativo alla scala 9.554e-01                                       PASSA
+==================================================================================================================================
