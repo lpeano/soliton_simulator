@@ -1,0 +1,10 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL COSTO su L 186 (100 tick, col bordo; il carico della macchina com'e'): il tick la mediana 3.252 s (da 2.758 a 3.950); r5 + raggio 0.046 s; la misura nuova (J, le masse) 0.099 s
+    la misura nuova ogni 50 tick costa 0.06% dei 50 tick; la stima di 3000 tick: 2.71 ore
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL COSTO su L 324 (10 tick, col bordo; il carico della macchina com'e'): il tick la mediana 11.324 s (da 11.187 a 11.842); r5 + raggio 0.187 s; la misura nuova (J, le masse) 0.898 s
+    la misura nuova ogni 50 tick costa 0.16% dei 50 tick; la stima di 3000 tick: 9.45 ore

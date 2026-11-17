@@ -38,3 +38,9 @@
 2. lo script; commit; i casi noti; il costo; commit;
 3. le tre corse;
 4. il referto e la figura; commit; **FERMO col referto.**
+
+## 5. I CASI NOTI, IL COSTO, E C3 ANNULLATA *(Luca `2026-11-17` `16:02`)*
+
+- **I casi noti** *(`doc/referti_l2/controllo_senza_bordo_caso.txt`)*: **K1** il vuoto F3 puro senza bordo, `100` tick: la norma del vuoto `3.6e-14` relativa, la materia `0`, l'energia dei conti *(che parte da `0`)* deriva di `1.229e-10` in assoluto; **K2** il passo senza bordo = `tick_GU` AL BIT; **K3** la ripresa AL BIT. ### **ANNOTAZIONE alla premessa** *(«`assorbi` con `g = 0` moltiplica per `1`»)*: **ERA SBAGLIATA** -- **il bordo a zero differisce da `tick_GU` di `1.160e-16` relativo su `phi_h`** *(la prima versione, `controllo_senza_bordo_caso_v1.txt`)*: **il passo senza bordo e' ora `tick_GU` coi conti** *(`96a26baa`)*.
+- **Il costo** *(S4; `controllo_senza_bordo_costo.txt`)*: su `L 324` il tick `11.324` s, la misura nuova `0.898` s *(lo `0.16%` dei `50` tick: la cadenza resta `50`)*; su `L 186` nel referto.
+- ### **C3 E' ANNULLATA** *(decisione di Luca `16:01`-`16:02`: il danno del rientro senza bordo e' gia' noto, TB3 e TBS, la lettura (b1) del `2026-11-04`)*: **NON era partita: non si lancia** *(nessuna voce nel registro)*. **C1 e C2 proseguono; C2 diventa il BRACCIO SENZA MITOSI della prova futura.** ### **P-SB4 si legge solo su C1/C2: la parte su C3 (il rapporto `1.74`) DECADE.**

@@ -1,0 +1,18 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+==================================================================================================================================
+I CASI NOTI DEL CONTROLLO SENZA BORDO (Luca 2026-11-17 15:22)
+==================================================================================================================================
+### K1 il vuoto F3 puro senza bordo, 100 tick: la norma del vuoto 2.075759999999955e+05 -> 2.075760000000030e+05 (relativa 3.6e-14); la materia 0.0e+00 -> 0.0e+00; l'energia dei conti (totd + KVd) da 0.000000e+00: la deriva massima ASSOLUTA 1.229e-10
+    (l'energia: QC la conserva al secondo ordine; la deriva si dichiara: 1.229e-10)
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+    (accanto: Campi.tick col bordo a zero contro il passo senza bordo: phi_h 1.160e-16 relativa, psi_h 0.000e+00: assorbi con g = 0 non e' l'identita' al bit)
+### K2 un passo SENZA BORDO (CorsaSB) contro un tick di p6_bracci.tick_GU, dallo stesso stato di k 0: AL BIT (esclusa h_int)
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### K3 la ripresa: 20 tick di fila contro 10 + salva + riprendi + 10 (senza bordo): AL BIT (esclusa h_int)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1 la norma del vuoto costante entro 1e-12 e la materia 0 (il flusso di massa 0)                     PASSA
+  DEVE: K2 il passo senza bordo = tick_GU al bit                                                             PASSA
+  DEVE: K3 la ripresa al bit                                                                                 PASSA
+==================================================================================================================================
