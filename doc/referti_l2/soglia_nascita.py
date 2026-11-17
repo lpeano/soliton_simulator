@@ -5,7 +5,7 @@ r"""**LA LETTURA PER LA SOGLIA DELLA NASCITA** *(Luca `2026-11-17` `13:16`, part
 
 **I termini di H** *(`primo_ordine/energia_pesata.termini_di_h`, letti nel codice)*: **nodo** `-Omega (0.5 nrm_psi - |S_psi|^2/d) - Omega (0.5 nrm_phi - |S_phi|^2/d) + eps h + N(rho, Lambda)`; **arco** `Omega Re(incro_psi) + Omega Re(conj(phi_coda) phi_testa)`.
 **4.1 IL SEGNO:** le famiglie di termini, sommate e per segno, sul vuoto F3 puro della scena S162 *(`psi = 0`)* e sul mattone `L162_MGU_03000` *(il motore, la geometria e il `par` della scena)*.
-**4.2 LA TENSIONE D'ARCO** *(la definizione, SCELTA MIA, dichiarata)*: `T(a) = Omega Re(conj(phi_coda) phi_testa)`, **il termine D'ARCO del vuoto di `termini_di_h`**; sul vuoto F3 puro; il profilo per anello `0`-`60` attorno al mattone, al triangolo *(`legati_t120_03000.npz`)* e alla coppia *(`legati_GU_*.npz` se c'e')*.
+**4.2 LA TENSIONE D'ARCO** *(la definizione, SCELTA MIA, dichiarata)*: `T(a) = Omega Re(conj(phi_coda) phi_testa)`, **il termine D'ARCO del vuoto di `termini_di_h`**; sul vuoto F3 puro; il profilo per anello `0`-`60` attorno al mattone, al triangolo *(`legati_t120_03000.npz`)* e alla coppia *(`legati_GU_07000.npz`)*.
 **4.3 TRE CANDIDATE PER IL «CALORE» `Q(a)`:** **Q1** `T(a) - T_F3` *(la tensione sopra il vuoto puro)*; **Q2** l'energia del vuoto per nodo, la media sui due nodi dell'arco, sopra il fondo F3; **Q3** `|J(a)|`, la corrente di energia sull'arco *(`energia.corrente`)*; per ognuna: il valore nel vuoto puro, il profilo, e **QUANTI ARCHI superano il costo `C`** *(una SCELTA mia per dare un ordine di grandezza: `C = 26.11`, il `Delta H` di v4-F3 all'anello `60`, `divisione_vuoto_F3.txt`)*.
 """
 import math
@@ -48,7 +48,7 @@ def main():
         m1, m2 = (v // L).astype(float), (v % L).astype(float)
         phi_v = np.asarray(Z["phi_v"]).copy()
         stati = {"il vuoto F3 puro (psi = 0)": (np.zeros((len(nodo), 2), dtype=complex), phi_v)}
-        for nome, f in (("il mattone L162_MGU_03000", "L162_MGU_03000.npz"), ("il triangolo legati_t120_03000", "legati_t120_03000.npz"), ("la coppia legati_GU_06000", "legati_GU_06000.npz")):
+        for nome, f in (("il mattone L162_MGU_03000", "L162_MGU_03000.npz"), ("il triangolo legati_t120_03000", "legati_t120_03000.npz"), ("la coppia legati_GU_07000", "legati_GU_07000.npz")):
             p = os.path.join(MT.DIR_E, f)
             if os.path.exists(p):
                 with np.load(p) as d:
