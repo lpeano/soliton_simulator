@@ -1,0 +1,29 @@
+[TIMBRO] u1_generico.py  sha1-BYTE dde89e5e  committato e pulito
+[TIMBRO] prova_u1_generico.py  sha1-BYTE cabda1f1  committato e pulito (i fine riga diversi dal blob, CRLF/LF: il contenuto e' quello committato)
+==================================================================================================================================
+LA PROVA DELLA U(1) SUL GRAFO GENERICO (il ramo mitosi, B3; Luca 2026-11-17 16:38)
+==================================================================================================================================
+### il caso noto (compatto): {'forza': True, 'div': True, 'K': True, 'B (insieme)': True, 'w': True}; V relativa 1.6e-16 (0.7 ulp); dopo 200 tick_campo A, E al bit: True
+### il caso noto (noncompatto): {'forza': True, 'div': True, 'K': True, 'B (insieme)': True, 'w': True}; V relativa 0.0e+00 (0.0 ulp); dopo 200 tick_campo A, E al bit: True
+----------------------------------------------------------------------------------------------------------------------------------
+### la crescita: l'arco 900 (300 -> 324), il nodo 576 -> 300, 324, 325, 299; m 1728 -> 1731; le placchette 1154 (m - n = 1154)
+    il triangolo (i, j, 325): il flusso di prima -1.39242152504397820e+00; i due mezzi ['-6.96210762521989324e-01', '-6.96210762521989102e-01']
+    il triangolo (i, j, 299): il flusso di prima +1.68804026218507985e+00; i due mezzi ['+8.44020131092539927e-01', '+8.44020131092540149e-01']
+### Gauss sul grafo nuovo (gauss_riuso, la cache svuotata da cresci, 2 fattorizzazioni): il residuo 1.48e-14
+    DEVE FALLIRE: la cache del grafo VECCHIO: b is of incompatible size
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto (compatto): forza, div, K, w, B come insieme AL BIT                                               PASSA
+  DEVE: il caso noto (compatto): V entro 8 ulp relativi (l'ordine delle placchette, dichiarato)                        PASSA
+  DEVE: il caso noto (compatto): 200 tick_campo, A e E AL BIT                                                          PASSA
+  DEVE: il caso noto (noncompatto): forza, div, K, w, B come insieme AL BIT                                            PASSA
+  DEVE: il caso noto (noncompatto): V entro 8 ulp relativi (l'ordine delle placchette, dichiarato)                     PASSA
+  DEVE: il caso noto (noncompatto): 200 tick_campo, A e E AL BIT                                                       PASSA
+  DEVE: la crescita: placchette = m - n, ogni arco in due (il controllo del costruttore)                               PASSA
+  DEVE: il flusso dei due triangoli vecchi = la somma dei mezzi, e META' ciascuno (entro pochi ulp)                    PASSA
+  DEVE: le aree: i triangoli sopravvissuti al bit, i nuovi quelle dichiarate                                           PASSA
+  DEVE: cresci = il campo costruito sul grafo nuovo: P, forza, div, K, V AL BIT                                        PASSA
+  DEVE: Gauss sul grafo nuovo: il residuo sotto 1e-12                                                                  PASSA
+  DEVE: DEVE FALLIRE: Gauss con la cache del grafo vecchio (alza, o il residuo e' grande)                              PASSA
+  DEVE: DEVE FALLIRE: A_nuovi della taglia sbagliata (per la chiave giusta)                                            PASSA
+  DEVE: DEVE FALLIRE: il toro con un arco tolto (archi in un solo triangolo)                                           PASSA
+==================================================================================================================================
