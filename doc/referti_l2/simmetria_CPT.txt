@@ -1,0 +1,25 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] specchio_carta.py  sha1-BYTE 8ca8f96b  committato e pulito
+[TIMBRO] simmetria_CPT.py  sha1-BYTE ee8dee6b  committato e pulito
+==================================================================================================================================
+LA PROVA CPT DEL TICK G+U SENZA IL BORDO (Luca 2026-11-17 13:16, parte 1); sys.executable E:\python\py3132\python.exe; e 6.315414e-05; le soglie {10: 1e-12, 100: 1e-10}
+==================================================================================================================================
+### L'OPERATORE: l'inversione attorno a p0 = (113, 107) (il baricentro della materia (112.536, 106.692)); gli archi della passeggiata rovesciati 78732 su 78732, quelli del campo 78732 su 78732
+    psi_h -> sigma_y conj(psi_h); phi_h -> -conj(phi_h); A -> -(verso) A; E -> +(verso) E; le chiavi reali permutate; cs non toccato (tick_GU lo calcola)
+----------------------------------------------------------------------------------------------------------------------------------
+### K1: Theta(Theta(x)) contro x: Lambda 0.000e+00, h_int 0.000e+00, phi_h 0.000e+00, psi 0.000e+00, psi_h 2.842e+01, rho 0.000e+00; A 0.000e+00; E 0.000e+00; su psi contro -x: psi 0.000e+00, psi_h 0.000e+00
+### IL CONTROLLO POSITIVO (il determinismo): Q^10(x) due volte, la differenza massima 0.000e+00 (41 s per 10 tick)
+### DEVE FALLIRE: lo stesso operatore SENZA il coniugio, N = 10, il mattone: la differenza massima 3.436e+02
+### il mattone, N = 10: Q^N(Theta(Q^N(x))) contro Theta(x): il massimo 1.787e+02 (la soglia 1e-12: ### SOPRA) -- A 6.355e-16  E 7.621e-13  Lambda 1.262e-04  h_int 1.787e+02  phi_h 1.380e-14  psi 0.000e+00  psi_h 4.796e-15  rho 4.459e-07  (24 s)
+### il mattone, N = 100: Q^N(Theta(Q^N(x))) contro Theta(x): il massimo 1.787e+02 (la soglia 1e-10: ### SOPRA) -- A 2.542e-15  E 2.731e-12  Lambda 1.262e-04  h_int 1.787e+02  phi_h 3.087e-14  psi 0.000e+00  psi_h 1.663e-14  rho 4.459e-07  (436 s)
+### lo stato a caso (seme 11), N = 10: Q^N(Theta(Q^N(x))) contro Theta(x): il massimo 1.157e+02 (la soglia 1e-12: ### SOPRA) -- A 8.464e-16  E 7.189e-13  Lambda 1.262e-04  h_int 1.157e+02  phi_h 1.683e-14  psi 0.000e+00  psi_h 7.947e-15  rho 4.459e-07  (56 s)
+### lo stato a caso (seme 11), N = 100: Q^N(Theta(Q^N(x))) contro Theta(x): il massimo 1.157e+02 (la soglia 1e-10: ### SOPRA) -- A 3.386e-15  E 2.817e-12  Lambda 1.262e-04  h_int 1.157e+02  phi_h 3.046e-14  psi 0.000e+00  psi_h 2.209e-14  rho 4.459e-07  (561 s)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1. Theta^2 = x (e -x su psi: sigma_y sigma_y^* = -I) al bit                                         PASSA
+  DEVE: il controllo positivo: Q^10(x) due volte uguale al bit                                               PASSA
+  DEVE: DEVE FALLIRE: senza il coniugio la differenza NON sta sotto 1e-12                                    PASSA
+==================================================================================================================================
+### LA LETTURA (la previsione del guardiano, 815a7fba): ### CADE: il mattone N 10 1.787e+02; il mattone N 100 1.787e+02; lo stato a caso (seme 11) N 10 1.157e+02; lo stato a caso (seme 11) N 100 1.157e+02
+    (il tempo 1163 s)
+==================================================================================================================================
