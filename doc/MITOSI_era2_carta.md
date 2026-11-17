@@ -404,3 +404,7 @@
 - ### **IL CONTATORE DEL LAPSE SCATTA SOLO NEL GUSCIO DELLA MATERIA** *(dove il gradiente di `N(rho)` e' grande)*, **e li' la nascita e' dominata dalla materia; S1, che vuole il vuoto, la vieta.** **Le due cose si escludono: con (a) piu' S1 la mitosi NON scatta in un tempo praticabile** *(il primo arco oltre il confine a `5e6` tick, i primi `10` dove S1 passa a `6e8`)*. **«Vicino ma fuori» e il contatore non stanno insieme.**
 - **Le strade** *(nessuna scelta presa)*: **(i)** togliere S1 o cambiarne la natura: **le nascite nel guscio, dentro la materia** *(`DH` negativo: la compensazione di A3 conserva `H`, quindi l'energia rilasciata va nel vuoto attorno)*; **(ii)** tenere S1 e accettare che la mitosi non scatti nel mattone di `L 186` *(il test sul mattone non si fa)*; **(iii)** un altro innesco per il vuoto fuori dal confine.
 - ### **IL TODO 3 NON E' PARTITO** *(B4, la memoria per arco, la regola, FA e la compensazione, le prove P6-P9 sul ramo `mitosi`)*: **B4 e la memoria per arco non dipendono da questa scelta; la REGOLA di nascita si'** *(dove si permette: S1)*, **e la corsa gemella che le prove preparano oggi non si puo' fare.** **Se Luca vuole, B4 riparte da subito.**
+
+### 15.7 SOSPESO *(Luca `2026-11-17` `23:07`)*
+
+- ### **SOSPESO (Luca 23:07): la ripresa da `doc/SOSPESO_2026-11-17_MITOSI_INNESCO.md`.** Nessuna corsa aperta, il ramo `mitosi` resta com'e'.
