@@ -1,0 +1,29 @@
+==================================================================================================================================
+LE REGOLE PER LA FASE DEL VUOTO SULLE ESTREMITA' NUOVE, SENZA D7 (Luca 2026-11-17 16:38, A1-A2)
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### il vuoto F3 puro (psi = 0) (l'arco 39609: 13203 -> 13365)
+    v4-F3  dH +2.358265e+01 = materia +0.000000e+00 (G_psi +0.0000e+00 a_psi +0.0000e+00) + vuoto +2.358265e+01 (G_phi +3.2314e+00 a_phi +2.0351e+01) + N +0.0000e+00; materia/|dH| 0.000e+00 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 1.066e-01
+    FA     dH +3.476457e+00 = materia +0.000000e+00 (G_psi +0.0000e+00 a_psi +0.0000e+00) + vuoto +3.476457e+00 (G_phi +3.2314e+00 a_phi +2.4510e-01) + N +0.0000e+00; materia/|dH| 0.000e+00 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+    FT     dH +3.476457e+00 = materia +0.000000e+00 (G_psi +0.0000e+00 a_psi +0.0000e+00) + vuoto +3.476457e+00 (G_phi +3.2314e+00 a_phi +2.4510e-01) + N +0.0000e+00; materia/|dH| 0.000e+00 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il mattone, l'arco a 23.81 nodi (l'arco 66417: 22139 -> 22301)
+    v4-F3  dH +2.737528e+01 = materia -2.676590e-01 (G_psi +9.8309e-02 a_psi -3.6597e-01) + vuoto +2.764309e+01 (G_phi +1.1954e+01 a_phi +1.5689e+01) + N -1.5399e-04; materia/|dH| 9.777e-03 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 1.701e-11
+    FA     dH +4.459258e+00 = materia -2.676590e-01 (G_psi +9.8309e-02 a_psi -3.6597e-01) + vuoto +4.727071e+00 (G_phi +4.4306e+00 a_phi +2.9644e-01) + N -1.5399e-04; materia/|dH| 6.002e-02 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+    FT     dH +6.648522e+00 = materia -2.676590e-01 (G_psi +9.8309e-02 a_psi -3.6597e-01) + vuoto +6.916335e+00 (G_phi +2.4433e+00 a_phi +4.4730e+00) + N -1.5399e-04; materia/|dH| 4.026e-02 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il mattone, l'arco a 29.81 nodi (l'arco 69333: 23111 -> 23273)
+    v4-F3  dH +2.623922e+01 = materia -8.539553e-03 (G_psi -6.7371e-03 a_psi -1.8024e-03) + vuoto +2.624776e+01 (G_phi +1.0830e+01 a_phi +1.5418e+01) + N +8.6147e-09; materia/|dH| 3.255e-04 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 1.775e-11
+    FA     dH +3.495370e+00 = materia -8.539553e-03 (G_psi -6.7371e-03 a_psi -1.8024e-03) + vuoto +3.503909e+00 (G_phi +3.2529e+00 a_phi +2.5103e-01) + N +8.6147e-09; materia/|dH| 2.443e-03 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+    FT     dH +3.510412e+00 = materia -8.539553e-03 (G_psi -6.7371e-03 a_psi -1.8024e-03) + vuoto +3.518952e+00 (G_phi +3.2572e+00 a_phi +2.6170e-01) + N +8.6147e-09; materia/|dH| 2.433e-03 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### il mattone, l'arco a 59.81 nodi (l'arco 5181: 1727 -> 1889)
+    v4-F3  dH +2.611234e+01 = materia -2.696041e-03 (G_psi -1.0730e-03 a_psi -1.6231e-03) + vuoto +2.611503e+01 (G_phi +1.0796e+01 a_phi +1.5319e+01) + N -1.1642e-10; materia/|dH| 1.032e-04 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+    FA     dH +3.476439e+00 = materia -2.696041e-03 (G_psi -1.0730e-03 a_psi -1.6231e-03) + vuoto +3.479135e+00 (G_phi +3.2296e+00 a_phi +2.4954e-01) + N -1.1642e-10; materia/|dH| 7.755e-04 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 0.000e+00
+    FT     dH +3.481349e+00 = materia -2.696041e-03 (G_psi -1.0730e-03 a_psi -1.6231e-03) + vuoto +3.484045e+00 (G_phi +3.2321e+00 a_phi +2.5191e-01) + N -1.1642e-10; materia/|dH| 7.744e-04 | V relativa 0.0e+00 | la sensibilita' (il vuoto perturbato di 1e-12): la differenza relativa di dH 1.338e-10
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto (il mattone, l'arco a 23.81 nodi): la v4-F3 = nascita_dentro_fuori.v4f3 al bit                    PASSA
+  DEVE: il caso noto (il mattone, l'arco a 29.81 nodi): la v4-F3 = nascita_dentro_fuori.v4f3 al bit                    PASSA
+  DEVE: il caso noto (il mattone, l'arco a 59.81 nodi): la v4-F3 = nascita_dentro_fuori.v4f3 al bit                    PASSA
+  DEVE: il caso noto: all'anello 60 dH = +2.611234e+01 (nascita_dentro_fuori.txt) alla precisione stampata             PASSA
+==================================================================================================================================
