@@ -279,3 +279,36 @@
 - **P-M3.** Il costo di una nascita *(CSR + Gauss rifattorizzato)* sta sotto `3` tick; con circa `0.01` nascite per tick, il costo medio cresce meno dell'`1%`.
 - **P-M4.** Per il test futuro: sul mattone senza bordo, in `3000` tick, fra `5` e `40` nascite, tutte oltre il confine, in almeno `4` settori su `6`; la massa entro `12.4` e la larghezza `w` diverse da C2 per meno dell'`1%` *(il test mostrera' il meccanismo e la conservazione, non ancora la curvatura P7)*.
 - **LE MIE, accanto** *(il perche' nella carta del mandato, `doc/TASK_HISTORY/2026-11-17_mitosi_verso_il_test.md`, sez. `1`-`2`)*: **P-M1 VERA** *(F3 e' il minimo locale dell'energia del vuoto a norma fissata)*; **P-M2: credo che FALLISCA al bit per Gauss e per il lapse** *(una nascita cambia `E` e `cs` ovunque: il confronto lontano dal difetto va fatto a parita' di `E` e di `cs`, o il cancello va riscritto)*; **P-M3: non so.**
+
+### 13.2 A1-A2: LA FASE DEL VUOTO SULLE ESTREMITA' NUOVE SENZA D7 *(`doc/referti_l2/regole_fase_F3.txt`)*
+
+- **Le due regole proposte** *(i moduli come v4: `V` esatta)*: **FA «antipodale»** *(gli archi nuovi con le estremita' OPPOSTE come in F3; in `i`, `j` il trasporto; in `n` verso `k`, `l` la fase del padre su `i -> k`, `i -> l`)* e **FT «trasporto del padre»** *(in `n` la fase del padre nella stessa direzione)*.
+
+| | il vuoto F3 puro | il mattone a `23.81` | a `29.81` | a `59.81` | la sensibilita' a `1e-12` |
+|---|---|---|---|---|---|
+| **v4-F3** *(D7)* | `+23.58` *(solo dal ramo di riserva: la fase `0/0` sostituita)* | `+27.38` | `+26.24` | `+26.11` | **`10.7%` sul vuoto puro** |
+| **FA** | **`+3.476`** | `+4.459` | `+3.495` | `+3.476` | `0` |
+| **FT** | **`+3.476`** | `+6.649` | `+3.510` | `+3.481` | `<= 1.3e-10` |
+
+- **Definite sul vuoto puro, locali, `V` esatta, deterministiche, STABILI.** **Il costo e' `7` volte piu' basso** *(il termine d'arco del vuoto da `+15`-`+20` a `+0.25`: gli archi nuovi restano antipodali come F3)*. ### **La simmetria allo specchio NON e' provata**: **il padre e' la CODA dell'arco** *(`ii`)*: **un arco riflesso puo' cambiare verso, e allora cambia padre** *(un difetto anche della `nascita` di oggi)*. **Una regola simmetrica deve scegliere il padre senza il verso dell'arco** *(per esempio: i due capi insieme)*.
+
+### 13.3 A3: LA COMPENSAZIONE SUL VUOTO *(`doc/referti_l2/compensazione_vuoto.txt`)*: ### **TOGLIE IL `100%`**
+
+- **L'energia del vuoto e' una forma QUADRATICA esatta** *(il codice di `termini_di_h`)*; **il minimo a norma fissata sulle estremita' di `S`** *(il resto fisso)* **e' il massimo che QUALUNQUE operazione su `S` che conserva la norma puo' togliere** *(il caso noto: F3 senza nascita e' gia' il minimo, la differenza `0`)*.
+- ### **DOPO LA NASCITA IL MINIMO TORNA ESATTAMENTE ALL'ENERGIA DI PRIMA:** **sul vuoto F3 puro `-5.8e-11`, gia' a un passo** *(per FA e per v4-F3)*; **sul mattone a `59.81` nodi `-0.012` a un passo, `-0.056` a due, `-0.133` a tre** *(sotto lo zero)*.
+- ### **P-M1 FALSA** *(e la mia previsione con lei)*. **La conseguenza: il costo della nascita NON e' intrinseco**: **e' il costo di una regola di fase lontana dal minimo.** **Con la regola «il vuoto di `S` al MINIMO a norma fissata»** *(un problema agli autovalori complesso, esatto)* **la nascita sul vuoto costa circa `0`, e vicino alla materia MENO di `0`.** ### **E allora l'argomento della sez. `12` («la riserva paga il costo») cade: se la nascita e' gratis, la riserva non ha niente da pagare** -- **la soglia deve venire da un'altra parte** *(una domanda per Luca)*.
+- ### **E LA COSA CHE IL MANDATO NON DICEVA** *(la carta del mandato, sez. `1`)*: **la riserva conservata, riempita dal flusso che attraversa il confine, conta un'energia che RESTA nel campo**: **perche' il totale si conservi, il confine deve togliere quell'energia dal campo, cioe' ASSORBIRE come un bordo** -- **in conflitto con «la mitosi non deve fare le veci del bordo».**
+
+### 13.4 A4: I SETTORI *(`doc/referti_l2/settori_specchio.txt`)*
+
+- **Sei settori da `60` gradi attorno a un NODO, i bordi sulle direzioni del reticolo; gli archi col punto medio sul bordo: pari merito, nessuna nascita.** **Entro il disco INSCRITTO nel toro** *(`L sqrt(3)/4 = 70.15` su `L 162`)* **lo specchio a `30` gradi e l'inversione mandano OGNI arco nel settore immagine: `0` sbagliati su `53562`.** **Fuori dal disco** *(oltre `80.5` nodi)* **l'immagine piu' vicina sul toro e' ambigua** *(`414` e `522` sbagliati)*: **il dominio, dichiarato DOPO la prima corsa** *(post-hoc)*. **Il caso che deve fallire** *(il centro non su un nodo)*: l'inversione ne sbaglia `421` dentro il disco. ### **Il centro dei settori va arrotondato al NODO.**
+
+### 13.5 LA FRECCIA DEL TEMPO *(D-R4)* E LE GRANDEZZE DA DEFINIRE
+
+- ### **LA CRESCITA E' IRREVERSIBILE** *(nessuna fusione; decisione di Luca `16:38`)*: **UNA FRECCIA DEL TEMPO DICHIARATA**, **accanto a CPT** *(che regge sul tick G+U senza bordo e senza crescita: [[DEC-FC-COESIONE]])*. **Con la crescita accesa il modello NON e' piu' CPT-simmetrico**: **la rottura e' una SCELTA dichiarata, non un difetto.**
+- **DA DEFINIRE** *(nessuna misura ora)*: **l'ENTROPIA** *(il numero dei nodi? la «disposizione» del grafo? l'informazione persa da una nascita irreversibile?)*.
+
+### 13.6 FERMO PER LUCA SU D-M3 *(la parte B prosegue)*
+
+- **Le scelte per la regola del vuoto alla nascita:** **FA o FT** *(stabili, `+3.48` sul vuoto)*, **oppure il MINIMO a norma fissata** *(il costo circa `0`)*; **e il PADRE senza il verso dell'arco** *(per la simmetria allo specchio)*.
+- **E le due domande nuove:** **se la nascita al minimo e' gratis, che cosa fa la soglia?**; **la riserva conservata vuole un confine che assorbe: si accetta?**
