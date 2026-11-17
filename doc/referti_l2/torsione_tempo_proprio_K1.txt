@@ -1,0 +1,12 @@
+[TIMBRO] controllo_senza_bordo.py  sha1-BYTE cb036cff  committato e pulito
+[TIMBRO] torsione_tempo_proprio.py  sha1-BYTE d977d348  committato e pulito
+==================================================================================================================================
+LA TORSIONE DEL TEMPO PROPRIO, SOLO MISURA (Luca 2026-11-17 18:04): k1
+==================================================================================================================================
+K1: IL VUOTO F3 PURO, UN TICK DELLA CORSA SENZA BORDO: THETA = 0 AL BIT
+### psi = 0: la massa 0.000e+00; cs: min 0.14999999999999999 max 0.14999999999999999 (s = 0.15); il ritmo per arco: max |pi (dtau_i - dtau_j)| = 0.000e+00; archi diversi da 0: 0 su 103788
+    DEVE FALLIRE: cs perturbato di 1e-12 sul nodo 0: archi diversi da 0: 6 (max 3.142e-12)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1: il vuoto F3 puro, Theta di un tick = 0 AL BIT su tutti gli archi                                           PASSA
+  DEVE: K1, DEVE FALLIRE: cs perturbato di 1e-12 su un nodo da' Theta != 0 sui suoi archi                              PASSA
+==================================================================================================================================
