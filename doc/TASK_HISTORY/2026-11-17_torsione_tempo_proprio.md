@@ -47,3 +47,17 @@
 - **CRESCE O OSCILLA** *(per gli archi del massimo)*: **Theta(t) tick per tick su tutta la corsa** *(il ritmo di ogni tick salvato per gli archi entro `45` nodi dal centro: dichiarato ORA)*; **gli archi del massimo = i `20` con `|Theta|` totale piu' grande** *(dichiarato ORA)*; **la retta dei minimi quadrati: la pendenza = il ritmo NETTO, con l'errore standard dai residui; la parte oscillante = l'ampiezza `rms` e massima attorno alla retta.**
 - **Le previsioni si leggono cosi':** **P-T2 sul ritmo NETTO massimo** *(`2 pi / pendenza`)*; **P-T1 e P-T4 su `|Theta| / 3000`** *(il ritmo netto medio della corsa)*; **P-T3 sul ritmo netto dei primi due segmenti contro gli ultimi due, all'anello del massimo di `|Theta|`.** **M1, M2, M4, M5, M6 usano Theta di M3-bis, non il ritmo di un tick.**
 - **Lo script:** **`doc/referti_l2/torsione_tempo_proprio_v2.py`, una versione NUOVA dichiarata** *(la v1 resta: k1, k3 e k2 vengono da li')*; **K2 resta quella della v1** *(50 tick da `k 3000`)*.
+
+## 5. K2: LA TORSIONE DEL TEMPO PROPRIO NON SI LEGA ALLA FASE VERA DEL VUOTO -- FERMO *(il referto `doc/referti_l2/torsione_tempo_proprio_K2.txt`)*
+
+- **Da C2 a `k 3000`, `50` tick; la fase RELATIVA delle due estremita' del vuoto contro `omega somma (dtau_i - dtau_j)`:**
+
+| gli archi | quanti | la scala della torsione *(max, `50` tick)* | la fase relativa misurata *(mediana `|.|`; max)* | il rapporto *(mediana; quartili)* |
+|---|---|---|---|---|
+| **oltre `30` nodi** *(il mandato)* | `93993` | `1.025e-05` rad | `2.453e-02`; `11.64` | **`-10.3`**; `-3.5e4`, `+3.5e4` |
+| fra `20` e `30` *(accanto)* | `5437` | `1.052e-02` | `5.765e-02`; `23.04` | `-113`; `-1948`, `+700` |
+| fra `10` e `20` *(accanto)* | `3267` | `1.436e-02` | `1.428`; `25.69` | `+7.5`; `-334`, `+393` |
+
+- ### **P-T5 FALSA** *(e la mia previsione, «falsa o non leggibile», con lei)*: **la fase relativa vera si muove di ORDINI DI GRANDEZZA piu' della torsione del tempo proprio, e senza legame col suo segno** *(i quartili del rapporto simmetrici attorno a `0`)*, **anche dove la torsione e' piu' grande** *(fra `10` e `20` nodi)*. **E' cio' che la sez. `1.2` temeva: lo spostamento e il Grover MESCOLANO le estremita', e la fase relativa del vuoto e' dominata dalla dinamica d'arco, non dalla differenza dei due orologi.**
+- ### **IL MANDATO: «se le due cose non si legano, FERMO: la torsione del tempo proprio non sarebbe l'olonomia del vuoto».** **FERMO.** **M3-bis NON e' partita** *(i `12` segmenti erano pronti: lo script `torsione_tempo_proprio_v2.py`, `9ffe51e8`)*: **misurare Theta tick per tick ha senso solo se Theta e' l'olonomia.**
+- **COSA LA PROVA NON ESCLUDE** *(per Luca, nessuna misura fatta)*: **`50` tick e' una finestra corta**; **una DERIVA lenta legata alla torsione potrebbe stare sotto un'oscillazione veloce della fase relativa**: **la misura che la cercherebbe** e' la correlazione fra la fase relativa accumulata e la torsione **su finestre lunghe** *(centinaia di tick)*, o la fase relativa **filtrata** dell'oscillazione; **ma e' un'altra prova, con un criterio da fissare prima.**

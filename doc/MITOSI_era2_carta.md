@@ -312,3 +312,41 @@
 
 - **Le scelte per la regola del vuoto alla nascita:** **FA o FT** *(stabili, `+3.48` sul vuoto)*, **oppure il MINIMO a norma fissata** *(il costo circa `0`)*; **e il PADRE senza il verso dell'arco** *(per la simmetria allo specchio)*.
 - **E le due domande nuove:** **se la nascita al minimo e' gratis, che cosa fa la soglia?**; **la riserva conservata vuole un confine che assorbe: si accetta?**
+
+### 13.7 D-R1, D-R2, D-R3 SOSPESE *(decisione di Luca `2026-11-17` `18:04`)*
+
+- **Le riserve per settore, la nascita dove passa piu' flusso, l'energia tolta dal vuoto: SOSPESE, non annullate.** **D-R4** *(la crescita irreversibile, la freccia dichiarata)* **RESTA.** **La parte B** *(l'infrastruttura, D-R5)* **prosegue: B.2 `f7f3e43d`, B.3 `c2cb792b` sul ramo `mitosi`.**
+
+## 14. IL QUANTO DI OLONOMIA COME INNESCO *(il mandato di Luca del `2026-11-17` `18:04` e l'aggiunta delle `18:48`; la carta `doc/TASK_HISTORY/2026-11-17_torsione_tempo_proprio.md`)*
+
+### 14.1 LA STORIA
+
+- **`2026-10-11`, la decisione di Luca** [[MITOSI-QUANTO-OLONOMIA]]: **la mitosi scatta al QUANTO di olonomia**, col tetto `4 pi` della doppia copertura, **nessun numero tarato.**
+- **`2026-10-27`, l'ipotesi** *(PROGETTO_MITOSI `3(a)`)*: **la torsione e' un criterio d'energia scritto come fase; `2 pi` e' un quanto d'azione; scatta dove `cs` differisce ai capi** -- *«il tempo curvo che produce lo spazio curvo»*. **La misura del `27/10` NON LEGGIBILE** *(incrementi di fase circa `pi` per tick; il punto fisso di `cs` allora non convergeva)*.
+- **`2026-11-17`, A3:** a norma fissata la nascita NON ha un costo intrinseco *(`compensazione_vuoto.txt`)*. **L'errore `n.188` del guardiano:** oggi la mitosi e' stata progettata sul «calore che paga» senza richiamare la decisione dell'`11/10`.
+
+### 14.2 LA DEFINIZIONE *(del guardiano, letta sul codice)*
+
+- **`Theta_a = pi * somma sui tick (dtau_nodo_i - dtau_nodo_j)`**, `dtau_nodo = mot.dtau * cs` *(`flussi_parziali.dtau_nodo`)*, `omega = pi / dtau_rif = pi`: **il nodo da' al vuoto la fase `pi s_k` per tick** *(sul vuoto `3 pi / 20` a `s = 0.15`)*. **Giusta senza fattori.** Invariante di gauge, locale, simmetrica allo specchio per costruzione.
+
+### 14.3 I NUMERI
+
+- **K1** *(`torsione_tempo_proprio_K1.txt`)*: sul vuoto F3 puro `cs = 0.15` uniforme al bit, Theta `0` su tutti i `103788` archi; il caso che deve fallire fallisce.
+- **K3** *(`torsione_tempo_proprio_K3.txt`)*: la ripresa dagli stati AL BIT; **il trapezio fra stati ogni `250` tick sbaglia Theta del `96%` della scala** -> M3-bis *(l'errore `n.189` del guardiano: la stazionarieta' del lapse data per buona)*.
+- **K2** *(`torsione_tempo_proprio_K2.txt`)*: **la fase relativa vera del vuoto NON si lega alla torsione del tempo proprio**: oltre `30` nodi la torsione in `50` tick e' al piu' `1.0e-05` rad, la fase relativa misurata si muove di `2.5e-02` *(mediana)*; **il rapporto: mediana `-10`, quartili `+-3.5e4`**; fra `10` e `20` nodi *(la torsione `1.4e-02`)* mediana `+7.5`, quartili `-334`, `+393`.
+
+### 14.4 LE PREVISIONI DEL GUARDIANO
+
+- **P-T5 FALSA** *(K2)*. **P-T1, P-T2, P-T3, P-T4: NON MISURATE** -- **M3-bis non e' partita per il FERMO di K2.**
+
+### 14.5 COSA SIGNIFICA *(per «vicino ma fuori» e per il test di `3000` tick)*
+
+- ### **NELLA FORMA LETTA DAL CODICE, LA TORSIONE DEL TEMPO PROPRIO NON E' L'OLONOMIA DEL VUOTO:** **la fase relativa delle estremita' e' dominata dalla dinamica d'arco** *(lo spostamento e il Grover mescolano i capi)*, **non dalla differenza dei due orologi.** **Quindi un innesco «a `|Theta_a| = 2 pi`» conterebbe una grandezza che il vuoto NON accumula** -- **non sarebbe il quanto di olonomia dell'`11/10`, ma un contatore del lapse.**
+- **Per «vicino ma fuori»**: nessuna lettura possibile *(il ritmo per anello non e' misurato)*. **Per il test di `3000` tick**: **nessun innesco e' pronto** -- ne' D-R1-D-R3 *(sospese)*, ne' la torsione *(non legata)*.
+
+### 14.6 FERMO PER LUCA
+
+- **(a)** la torsione del tempo proprio **come contatore** *(un innesco dichiarato come tale, non come olonomia)* -- o no;
+- **(b)** **cercare l'olonomia VERA del vuoto**: la fase relativa misurata delle estremita' *(cio' che K2 misura)*, **su finestre lunghe** o **filtrata** dell'oscillazione d'arco, con un criterio fissato prima;
+- **(c)** **tornare a D-R1-D-R3**.
+- **E, per la parte B:** l'area e `l/l*` dei triangoli nuovi *(la stella di Hodge sul reticolo irregolare: B.3, provvisori)*, con D-M3.
