@@ -72,3 +72,50 @@
 - ### **V-T120 a `k 250`: R-SCATOLA al `5%` NON RISPETTATA** *(N5: la corsa CONTINUA, il referto lo scrive)*: **R_ogg al `5%` da `47.0` a `k 0` a `59.0` a `k 250`** *(la distanza al lato `2.49` R_ogg, R_A `1.65` R_ogg)*. **Le coppie restano a `42.0`** *(V-B2 a `250` e `500`, V-B2pi a `250`)*. **Lettura possibile** *(da verificare, non un risultato)*: **la deformazione del vuoto del triangolo si allarga nei primi tick** *(il guscio di P-V6?)*; **con la regola al `5%` il toro `L 339` sarebbe troppo piccolo per V-T120 gia' a `k 250`.** Si guarda alle prossime tappe.
 - ### **`00:20` LE DECISIONI DI LUCA:** **(1) R-SCATOLA al `5%` ADOTTATA** con la correzione post-hoc dichiarata *(la soglia del periodo mal posta, errore della carta e del guardiano n.`182`; al suo posto il confronto diretto delle serie: la ROTTA e il referto `prova_scatola5.txt`)*; **(2) V-T120 FERMATA** *(la voce chiusa alle `00:21`: si ferma alla tappa successiva DOPO un salvataggio, `notte.py` salva a quel `k` ed esce)*; **il posto a F-51** *(`L 351`, `d 51`, R_A `101` = `d + 50`)*; **il triangolo si rilancia con un mandato di Luca su un toro scelto dopo la misura della crescita di R_ogg al `5%`** *(il piano)*.
 - **`00:26` V-T120 USCITA** *(la voce chiusa: salvato e uscito)*: **l'ultimo stato `k 332`, `E:/soliton_simulator/notte/V-T120/stato_00332.npz`, sha1 `65415993`** *(e `k 250` sha1 `4593d42d`; i pezzi `0`-`250`, `250`-`332`)*; **R_ogg al `5%` `59.0` anche a `k 332`; il giro `+1` in tutte le `12` a `k 300`; `23.8` s per tick.** L'uscita: `doc/referti_l2/notte_V-T120_fermata.txt` *(e l'avvio `notte_V-T120_avvio.txt`)*. **`00:26` F-51 partita** *(la voce `notte-F-51`)*.
+
+## 7. LA FINE DELLA NOTTE (F2-F3): LA TABELLA *(`2026-11-17` `08:00`)*
+
+- **F2:** **alle `08:00` le cinque corse si sono fermate da sole DOPO un salvataggio** *(`notte.py --ferma-alle`, il codice `3`)* **e hanno chiuso la loro voce del registro «SOSPESA per ordine di Luca (20:33), da riprendere»** col `k`, il percorso e lo sha1. **Dalle `07:30` nessuna corsa nuova e' partita.** Le uscite: `doc/referti_l2/notte_<nome>.txt` *(e `_avvio.txt`)*, `58d1045b`.
+- **F3, la tabella:** `doc/referti_l2/notte_tabella.txt` *(lo script `notte_tabella.py`, `9650ea2c`: legge SOLO le uscite copiate, e lo sha1 dell'ultimo stato lo RICALCOLA dal disco e lo confronta col file `.sha1`: CONCORDI in tutte e sei)*.
+
+| corsa | toro | fino a | l'ultimo `k` | mancano | l'ultimo stato *(E:/soliton_simulator/notte/<nome>/)* | sha1 | lo stato | s per tick |
+|---|---|---|---|---|---|---|---|---|
+| V-B2 | `L 297`, R_A `85.06` | `12000` | `2223` | `9777` | `stato_02223.npz` | `af975abf` | SOSPESA, da riprendere | `16.717` |
+| V-B2pi | `L 321`, R_A `92.42` | `10000` | `1870` | `8130` | `stato_01870.npz` | `14950bf6` | SOSPESA, da riprendere | `19.854` |
+| V-T120 | `L 339`, R_A `97.16` | `12000` | `332` | `11668` | `stato_00332.npz` | `65415993` | **FERMATA** per decisione di Luca (`00:20`) | `23.849` |
+| F-66 | `L 402`, R_A `116` | `2000` | `1019` | `981` | `stato_01019.npz` | `6ca3d8e2` | SOSPESA, da riprendere | `34.593` |
+| A-66 | `L 402`, R_A `116` | `2000` | `835` | `1165` | `stato_00835.npz` | `d7830888` | SOSPESA, da riprendere | `34.398` |
+| F-51 | `L 351`, R_A `101` | `2000` | `1076` | `924` | `stato_01076.npz` | `f4caab19` | SOSPESA, da riprendere | `24.942` |
+| A-51, A-45, F-35, A-35 | | `2000` | -- | `2000` | -- | -- | **NON PARTITE** | |
+
+- **Si riprende con** `notte.py corsa --nome <nome> --da <k> --fino <fino> --registro <voce nuova>` *(il comando e' scritto anche nella voce chiusa del registro)*. **Nessuna corsa e' FINITA:** **la tabella delle forze della fase 1 non c'e' ancora** *(`d''` sui tick `250`-`2000` vuole i `2000` tick)*.
+- **I CONTROLLI:** **Gauss sotto la soglia in tutte e sei** *(il massimo delle righe dei tick contro `10` volte il residuo di `k 0`: V-B2 `3.71e-10` contro `3.21e-9`; F-66 `4.84e-10` contro `4.66e-9`; gli altri nel referto)*. ### **IL DEVE DELLA MASSA NON E' ANCORA VERIFICATO** *(la massa persa = la massa uscita dal bordo entro `1e-6` sui conti UNITI, la sez. `2.1`)*: **`notte.py` non lo calcola durante la corsa**; si fa nella lettura, dai pezzi. **La deriva della massa TOTALE** *(che contiene anche cio' che il bordo assorbe)* **e' al massimo `1.52e-4` relativa in V-B2** *(da `2.049495e6` a `2.049183e6`)*: **non e' il DEVE, e non lo giudico da quella.**
+- **ERRORE MIO** *(nello stesso giro)*: **la prima versione dello script prendeva il Gauss anche dall'intestazione** *(«la soglia di Gauss»)*, **e dava il massimo UGUALE alla soglia in tutte e sei, con F-66 e A-66 «SOPRA»**; corretto in `9650ea2c` prima di scrivere qui.
+
+### 7.1 **R-SCATOLA AL `5%` DURANTE LE CORSE: NON RISPETTATA IN NESSUNA, ALLA FINE** *(N5: le corse sono andate avanti, qui si scrive)*
+
+| corsa | R_ogg a `k 0` | le tappe | l'ultimo | il massimo / `k 0` | R_A / R_ogg al massimo |
+|---|---|---|---|---|---|
+| V-B2 | `42` | `42 42 43 43 43 43` **`59`** *(k 1750)* `43 43` | `43` | `1.40` | `1.44` |
+| V-B2pi | `42` | `42 42 43 43 43 43` **`59`** *(k 1750)* `59` | `59` | `1.40` | `1.57` |
+| V-T120 | `47` | `59 59` | `59` | `1.26` | `1.65` |
+| F-66 | `57` | `73 76 77 84 86` | `86` | `1.51` | `1.35` |
+| A-66 | `57` | `73 76 77 77` | `77` | `1.35` | `1.51` |
+| F-51 | `50` | `50 67 68 68 68` | `68` | `1.36` | `1.49` |
+
+- ### **Il criterio con cui Luca ha fermato V-T120** *(R-SCATOLA al `5%` non rispettata)* **vale ora per TUTTE e cinque le corse sospese:** **a `43` V-B2 manca la regola di un soffio** *(`2.99` R_ogg al lato, R_A `1.98` R_ogg)*; **le altre di molto** *(F-66: R_A `1.35` R_ogg)*. **NON decido io se riprenderle cosi': e' una decisione di Luca** *(sotto, D-N1)*.
+- **Tre cose che vedo, e che NON sono risultati:**
+  1. **nelle coppie da `51` e `66` R_ogg al `5%` CRESCE** *(F-66 ancora a `k 1019`; F-51 si ferma a `68` da `k 750`)*: **la deformazione del vuoto si allarga** -- la stessa cosa di V-T120;
+  2. **V-B2 e V-B2pi hanno la STESSA serie di R_ogg, tappa per tappa** *(su tori diversi, `297` e `321`, e fasi diverse)*, **col salto a `59` allo stesso `k 1750`.** ### **Puo' essere vero** *(il `5%` e' preso sull'alone di ogni mattone, che le due fasi condividono)* **o un FALSO-UNO** *(la misura che non distingue)*: **va controllato** sulle mappe dei pezzi prima di leggerlo;
+  3. **i salti `43 -> 59 -> 43` di V-B2** dicono che **R_ogg al `5%` e' una grandezza a GRADINI** *(il contorno al `5%` attraversa un anello e salta)*: **una regola su un gradino non e' stabile** -- anche questo va con D-N1.
+
+### 7.2 **LE DOMANDE PER LUCA** *(ognuna col criterio di chiusura)*
+
+- **D-N1 -- le cinque corse sospese si RIPRENDONO cosi'** *(R-SCATOLA al `5%` non rispettata alla fine)*, **o si fermano come V-T120 e si rilanciano su tori scelti dopo la misura della crescita di R_ogg?** *(Chiusa da una decisione di Luca. La mia raccomandazione: prima misurare dai pezzi gia' su E: quanto cresce R_ogg e se il `5%` e' stabile -- il punto `2` e `3` sopra -- perche' con la regola com'e' oggi nessun toro di questa notte la rispetta dopo `500` tick.)*
+- **D-N2 -- le quattro corse non partite della fase 1** *(A-51, A-45, F-35, A-35)*: **sugli stessi tori del piano** *(che a `k 0` la regola la rispettano)* **o sui tori nuovi di D-N1?** *(Chiusa con D-N1.)*
+
+### 7.3 **IL TODO DOPO LA NOTTE** *(operativo)*
+
+1. **la lettura dei pezzi** *(script nuovo in `doc/referti_l2`, committato prima)*: **il DEVE della massa sui conti uniti** per le sei corse; **R_ogg al `5%` dalle mappe**, con **il controllo di V-B2 contro V-B2pi**;
+2. **la decisione di Luca su D-N1 e D-N2**;
+3. **poi** la ripresa *(voci nuove nel registro)* o i rilanci, e la fase 2 quando la fase 1 ha i suoi `2000` tick.

@@ -1,0 +1,36 @@
+[TIMBRO] notte_tabella.py  sha1-BYTE 7c088ebf  committato e pulito (i fine riga diversi dal blob, CRLF/LF: il contenuto e' quello committato)
+==================================================================================================================================
+LA NOTTE 2026-11-16/17 (il mandato di Luca 20:35, F3): che cosa e' finito, che cosa e' sospeso, da dove si riprende
+==================================================================================================================================
+    corsa   tipo      L     R_A     fino   k       mancano    l'ultimo stato (lo sha1 RICALCOLATO dal disco)               lo stato
+    V-B2    coppia 0  297   85.06   12000  2223    9777       stato_02223.npz sha1 af975abf (disco e .sha1 CONCORDI)       SOSPESA alle 08:00 (da riprendere)
+    V-B2pi  coppia pi 321   92.42   10000  1870    8130       stato_01870.npz sha1 14950bf6 (disco e .sha1 CONCORDI)       SOSPESA alle 08:00 (da riprendere)
+    V-T120  triangolo 339   97.16   12000  332     11668      stato_00332.npz sha1 65415993 (disco e .sha1 CONCORDI)       FERMATA per decisione di Luca (00:20)
+    F-66    coppia 0  402   116.00  2000   1019    981        stato_01019.npz sha1 6ca3d8e2 (disco e .sha1 CONCORDI)       SOSPESA alle 08:00 (da riprendere)
+    A-66    coppia pi 402   116.00  2000   835     1165       stato_00835.npz sha1 d7830888 (disco e .sha1 CONCORDI)       SOSPESA alle 08:00 (da riprendere)
+    F-51    coppia 0  351   101.00  2000   1076    924        stato_01076.npz sha1 f4caab19 (disco e .sha1 CONCORDI)       SOSPESA alle 08:00 (da riprendere)
+    A-51    coppia    -     -       2000   -       2000       -                                                            NON PARTITA (il posto di V-T120 e' andato a F-51; dalle 07:30 nessuna corsa nuova)
+    A-45    coppia    -     -       2000   -       2000       -                                                            NON PARTITA (il posto di V-T120 e' andato a F-51; dalle 07:30 nessuna corsa nuova)
+    F-35    coppia    -     -       2000   -       2000       -                                                            NON PARTITA (il posto di V-T120 e' andato a F-51; dalle 07:30 nessuna corsa nuova)
+    A-35    coppia    -     -       2000   -       2000       -                                                            NON PARTITA (il posto di V-T120 e' andato a F-51; dalle 07:30 nessuna corsa nuova)
+----------------------------------------------------------------------------------------------------------------------------------
+### I CONTROLLI E R-SCATOLA AL 5% (R_ogg a ogni tappa; la regola: la distanza al lato >= 3 R_ogg, R_A >= 2 R_ogg)
+    V-B2    2223 tick in 16.717 s per tick; Gauss massimo 3.710e-10 contro la soglia 3.208e-09 (sotto); la massa: la deriva massima 1.52e-04 relativa (5 letture)
+            R_ogg al 5%: k 0 42.0; k 250 42.0, k 500 42.0, k 750 43.0, k 1000 43.0, k 1250 43.0, k 1500 43.0, k 1750 59.0, k 2000 43.0, k 2223 43.0
+            il massimo 59.0 (1.40 volte quello di k 0); R_A / R_ogg al massimo 1.44
+    V-B2pi  1870 tick in 19.854 s per tick; Gauss massimo 2.980e-10 contro la soglia 2.975e-09 (sotto); la massa: la deriva massima 7.61e-05 relativa (4 letture)
+            R_ogg al 5%: k 0 42.0; k 250 42.0, k 500 42.0, k 750 43.0, k 1000 43.0, k 1250 43.0, k 1500 43.0, k 1750 59.0, k 1870 59.0
+            il massimo 59.0 (1.40 volte quello di k 0); R_A / R_ogg al massimo 1.57
+    V-T120  332 tick in 23.849 s per tick; Gauss massimo 3.980e-10 contro la soglia 3.981e-09 (sotto); la massa: la deriva massima 0.00e+00 relativa (1 letture)
+            R_ogg al 5%: k 0 47.0; k 250 59.0, k 332 59.0
+            il massimo 59.0 (1.26 volte quello di k 0); R_A / R_ogg al massimo 1.65
+    F-66    1019 tick in 34.593 s per tick; Gauss massimo 4.840e-10 contro la soglia 4.662e-09 (sotto); la massa: la deriva massima 7.04e-06 relativa (3 letture)
+            R_ogg al 5%: k 0 57.0; k 250 73.0, k 500 76.0, k 750 77.0, k 1000 84.0, k 1019 86.0
+            il massimo 86.0 (1.51 volte quello di k 0); R_A / R_ogg al massimo 1.35
+    A-66    835 tick in 34.398 s per tick; Gauss massimo 4.810e-10 contro la soglia 4.663e-09 (sotto); la massa: la deriva massima 0.00e+00 relativa (2 letture)
+            R_ogg al 5%: k 0 57.0; k 250 73.0, k 500 76.0, k 750 77.0, k 835 77.0
+            il massimo 77.0 (1.35 volte quello di k 0); R_A / R_ogg al massimo 1.51
+    F-51    1076 tick in 24.942 s per tick; Gauss massimo 2.500e-10 contro la soglia 2.433e-09 (sotto); la massa: la deriva massima 1.46e-05 relativa (3 letture)
+            R_ogg al 5%: k 0 50.0; k 250 50.0, k 500 67.0, k 750 68.0, k 1000 68.0, k 1076 68.0
+            il massimo 68.0 (1.36 volte quello di k 0); R_A / R_ogg al massimo 1.49
+==================================================================================================================================
