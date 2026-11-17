@@ -33,3 +33,10 @@
 2. la parte 1: lo script, la corsa, il referto, FC; commit;
 3. la parte 2 e la parte 3: gli script *(commit)*, le corse, i referti; commit;
 4. la carta; commit; **FERMO.**
+
+## 5. L'ESITO *(e le annotazioni alle premesse)*
+
+- **Parte 1** *(`simmetria_CPT_cache.txt`)*: **PASSA**: le cache ricalcolate sui due lati coincidono *(`h_int` `<= 3.8e-14`, `rho` `<= 1.5e-14`, `Lambda` `<= 3.1e-14`)*, la dinamica come in `45568f37` *(il peggiore E `2.817e-12` a `N = 100`)*. **ANNOTAZIONE alla premessa (1):** **`h_int` NON cambia segno sotto `Theta`** *(il ricalcolato sul trasformato = il permutato a `3.2e-16`; contro il permutato col segno meno `2.0`)*: **lo spin e i versori cambiano segno insieme.** **FC PRESA** *(la decisione di Luca delle `14:23`)*.
+- **Parte 2** *(`nascita_dentro_fuori.txt`)*: **il caso noto al bit**; **il confine a `23.81` nodi = `1.92` raggi della materia**; dentro negativo *(la materia)*, fuori positivo *(il vuoto)*; **in fila al confine nessun cambio di segno; a `13.81` uno solo** *(la `15`a)*; **con U cambia alla quarta cifra.** **P-E1 e P-E2 CADONO.**
+- **Parte 3** *(`flusso_uscente.txt`)*: **il caso noto passa** *(e mostra l'onda all'indietro: il pacchetto con la fase verso fuori va dentro)*; **il flusso uscente positivo a `15`-`45`, non si esaurisce** *(P-E3 regge)*; **P-E4 vera per costruzione** *(falso zero, dichiarato prima)*; **l'accumulo: il primo arco dopo circa `2515` tick, `0.50` nascite per tick al ritmo medio** -- **un MASSIMO** *(la parte positiva raddrizza le oscillazioni)*.
+- **Parte 4:** la carta della mitosi, sez. `11`; **FERMO.**
