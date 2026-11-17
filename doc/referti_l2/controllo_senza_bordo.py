@@ -46,6 +46,30 @@ def sha1(f):
     return h.hexdigest()
 
 
+def corsa_senza_bordo():
+    """### `mattone_cottura.Corsa` con `passo` SENZA il bordo: le righe di `Corsa.passo` *(e di `mattone.Campi.tick`)* SENZA `bordo.assorbi` e SENZA la correzione di Gauss
+    del bordo, cioe' **`p6_bracci.tick_GU`** coi conti di `Corsa` *(il mandato: «si usa quello»)*. ### Il perche': `assorbi` con `g = 0` NON e' l'identita' al bit su `phi_h` (K2)."""
+    CT, MT = PS.CT, PS.MT
+
+    class CorsaSB(CT.Corsa):
+        def passo(self, k, t, r, e):
+            C, Z = self.C, self.Z
+            if e > 0.0 and C.e_prec == 0.0:
+                rho = MT.rho_di(Z)
+                C.campo.A[...] = 0.0
+                C.campo.E[...] = C.gauss(e * (rho - rho.mean()))
+            elif C.e_prec > 0.0:
+                C.campo.E *= e / C.e_prec
+            C.campo.e = e
+            C.e_prec = e
+            with MT.PBR.con_rampa(r):
+                MT.PBR.tick_GU(Z["z"], Z["s"], C.legge, C.e0, C.campo)
+            totp = float(np.sum(CT.CO.conti_nodo(Z)["tot"]))
+            KVp, Mp = self.kv(), float(np.sum(np.abs(Z["st"]["psi_h"]) ** 2))
+            self.registra(k, totp, KVp, Mp)
+    return CorsaSB
+
+
 def copia_stato(st):
     return {k: (v.copy() if isinstance(v, np.ndarray) else v) for k, v in st.items()}
 
@@ -160,7 +184,7 @@ def corsa(nome, L5, bordo, k_da, k_fino, reg, ogni):
             print("### la ripresa da %s (sha1 %s, ricontrollato)" % (f, s[:8]))
         PO.accendi(cs)
         try:
-            RC_ = CT.Corsa(Z, C)
+            RC_ = (CT.Corsa if bordo else corsa_senza_bordo())(Z, C)
             RC_.etichette([meta["lab"]])
             RC_.inizio(k_da)
             t1 = t_tappa = time.time()
@@ -228,7 +252,7 @@ def caso():
         C = PO.campi(Z, rho_c, e)
         PO.accendi(None)
         try:
-            RC_ = CT.Corsa(Z, C)
+            RC_ = corsa_senza_bordo()(Z, C)
             RC_.etichette([[93.0, 93.0]])
             RC_.inizio(0)
             V0 = float(np.sum(np.abs(Z["st"]["phi_h"]) ** 2))
@@ -241,9 +265,9 @@ def caso():
             M1 = float(np.sum(np.abs(Z["st"]["psi_h"]) ** 2))
         finally:
             LC.spegni()
-        dE = float(np.max(np.abs(E - E[0])) / abs(E[0]))
-        print("### K1 il vuoto F3 puro senza bordo, 100 tick: la norma del vuoto %.15e -> %.15e (relativa %.1e); la materia %.1e -> %.1e; l'energia: la deriva massima relativa %.3e" % (
-            V0, V1, abs(V1 - V0) / V0, M0, M1, dE))
+        dE = float(np.max(np.abs(E - E[0])))
+        print("### K1 il vuoto F3 puro senza bordo, 100 tick: la norma del vuoto %.15e -> %.15e (relativa %.1e); la materia %.1e -> %.1e; l'energia dei conti (totd + KVd) da %.6e: la deriva massima ASSOLUTA %.3e" % (
+            V0, V1, abs(V1 - V0) / V0, M0, M1, float(E[0]), dE))
         esiti.append(("K1 la norma del vuoto costante entro 1e-12 e la materia 0 (il flusso di massa 0)", abs(V1 - V0) / V0 < 1e-12 and M1 == 0.0))
         print("    (l'energia: QC la conserva al secondo ordine; la deriva si dichiara: %.3e)" % dE)
         Z["metti"]()
@@ -253,9 +277,22 @@ def caso():
         A0, E0 = C.campo.A.copy(), C.campo.E.copy()
         PO.accendi(None)
         try:
-            C.tick(1, t0 + 1, 1.0, e)
+            R1 = corsa_senza_bordo()(Z, C)
+            R1.etichette([[93.0, 93.0]])
+            R1.inizio(0)
+            R1.passo(1, t0 + 1, 1.0, e)
             Ya = {x: Z["st"][x].copy() for x in Z["chiavi"]}
             Aa, Ea = C.campo.A.copy(), C.campo.E.copy()
+            # accanto: Campi.tick col bordo a zero (g_e = 0), quanto differisce
+            Z["metti"]({x: v.copy() for x, v in X0.items()})
+            C.campo.A[...] = A0
+            C.campo.E[...] = E0
+            import _u1_prototipo as U0
+            U0.scrivi_U(Z["mot"], C.campo)
+            C.tick(1, t0 + 1, 1.0, e)
+            dz = float(np.max(np.abs(Z["st"]["phi_h"] - Ya["phi_h"]))) / float(np.max(np.abs(Ya["phi_h"])))
+            dzp = float(np.max(np.abs(Z["st"]["psi_h"] - Ya["psi_h"])))
+            print("    (accanto: Campi.tick col bordo a zero contro il passo senza bordo: phi_h %.3e relativa, psi_h %.3e: assorbi con g = 0 non e' l'identita' al bit)" % (dz, dzp))
             Z["metti"]({x: v.copy() for x, v in X0.items()})
             C.campo.A[...] = A0
             C.campo.E[...] = E0
@@ -267,8 +304,8 @@ def caso():
         finally:
             LC.spegni()
         div = [x for x in Ya if x != "h_int" and not np.array_equal(Ya[x], Yb[x])] + [x for x, a, b in (("A", Aa, Ab), ("E", Ea, Eb)) if not np.array_equal(a, b)]
-        print("### K2 un tick di Campi.tick con g_e = 0 contro un tick di p6_bracci.tick_GU, dallo stesso stato di k 0: %s" % ("AL BIT (esclusa h_int)" if not div else "### DIVERSE: %s" % div))
-        esiti.append(("K2 senza bordo (g_e = 0) = tick_GU al bit", not div))
+        print("### K2 un passo SENZA BORDO (CorsaSB) contro un tick di p6_bracci.tick_GU, dallo stesso stato di k 0: %s" % ("AL BIT (esclusa h_int)" if not div else "### DIVERSE: %s" % div))
+        esiti.append(("K2 il passo senza bordo = tick_GU al bit", not div))
         Z["metti"]()
         # ---------------------------------------------------------------- K3
         def venti(spezza):
@@ -277,7 +314,7 @@ def caso():
             meta["centro"] = meta["lab"] = [float(x) for x in MT.centro_di(Z, rho)]
             PO.accendi(None)
             try:
-                RC_ = CT.Corsa(Z, C)
+                RC_ = corsa_senza_bordo()(Z, C)
                 RC_.etichette([meta["lab"]])
                 RC_.inizio(0)
                 for k in range(1, 21):
@@ -287,7 +324,7 @@ def caso():
                         LC.spegni()
                         C, meta2, cs, _s = riprendi(Z, f, False, rho_c, e)
                         PO.accendi(cs)
-                        RC_ = CT.Corsa(Z, C)
+                        RC_ = corsa_senza_bordo()(Z, C)
                         RC_.etichette([meta2["lab"]])
                         RC_.inizio(10)
                 out = ({x: Z["st"][x].copy() for x in Z["chiavi"]}, C.campo.A.copy(), C.campo.E.copy())

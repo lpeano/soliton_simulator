@@ -1,0 +1,19 @@
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+==================================================================================================================================
+I CASI NOTI DEL CONTROLLO SENZA BORDO (Luca 2026-11-17 15:22)
+==================================================================================================================================
+C:\Users\lpeano\soliton_simulator\doc\referti_l2\controllo_senza_bordo.py:244: RuntimeWarning: divide by zero encountered in scalar divide
+  dE = float(np.max(np.abs(E - E[0])) / abs(E[0]))
+### K1 il vuoto F3 puro senza bordo, 100 tick: la norma del vuoto 2.075759999999955e+05 -> 2.075760000000030e+05 (relativa 3.6e-14); la materia 0.0e+00 -> 0.0e+00; l'energia: la deriva massima relativa inf
+    (l'energia: QC la conserva al secondo ordine; la deriva si dichiara: inf)
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### K2 un tick di Campi.tick con g_e = 0 contro un tick di p6_bracci.tick_GU, dallo stesso stato di k 0: ### DIVERSE: ['phi_h']
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### K3 la ripresa: 20 tick di fila contro 10 + salva + riprendi + 10 (senza bordo): AL BIT (esclusa h_int)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1 la norma del vuoto costante entro 1e-12 e la materia 0 (il flusso di massa 0)                     PASSA
+  DEVE: K2 senza bordo (g_e = 0) = tick_GU al bit                                                            ### FALLISCE
+  DEVE: K3 la ripresa al bit                                                                                 PASSA
+==================================================================================================================================
