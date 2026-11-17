@@ -104,14 +104,23 @@ def main():
     print("=" * 130)
     esiti = []
     # ---------------------------------------------------------------- K
-    print("### (K) IL CASO NOTO: il vuoto UNIFORME stato_K(24) (divisione_vuoto_rigirato.txt: v1 %.9f, v4 %.9f)" % (RIF["v1"], RIF["v4"]))
+    import _divisione_vuoto as DV
+    print("### (K) IL CASO NOTO: il vuoto UNIFORME stato_K(24), col NUCLEO DI OGGI: le cinque regole di _divisione_vuoto.phi_regola col conto di _conto_del_vuoto (v5 compresa: reale e densa, su L 24 si puo')")
+    print("    (accanto il referto di f7ee87a9, divisione_vuoto_rigirato.txt: v1 %.9f, v4 %.9f -- il nucleo di ALLORA: S1 e lo zero simmetrico sono entrati dopo, 00821633 e 7c181cc4)" % (RIF["v1"], RIF["v4"]))
     sc = C3.stato_K(24)
+    dopoK = C3.nascita(24, *sc)
+    oggi = {}
+    for nome in ("v1", "v2", "v3", "v4", "v5"):
+        phk = DV.phi_regola(nome, "nascita", sc, dopoK)
+        rk = C3.conto(24, *sc, *dopoK[:5], phk, dopoK[6], dopoK[7])
+        oggi[nome] = rk["dH"]
+        print("    OGGI %s: Delta H_tot %+.9e = materia %+.6e + vuoto %+.6e + legame %+.6e | V %.6f -> %.6f" % (nome, rk["dH"], rk["dH_materia"], rk["dH_vuoto"], rk["dH_legame"], rk["V"][0], rk["V"][1]))
     R, _N = regole(24, sc)
     for nome, (ph, hS, dopo) in R.items():
         r = conta(24, sc, nome, ph, hS, dopo)
         stampa(nome, r)
-        rif = RIF["v1" if nome == "v1" else "v4"]
-        esiti.append(("K. %s ridà %s del referto rigirato entro 1e-8" % (nome, "v1" if nome == "v1" else "v4"), abs(r["dH"] - rif) < 1e-8))
+        rif = oggi["v1" if nome == "v1" else "v4"]
+        esiti.append(("K. %s ridà %s di OGGI al bit" % (nome, "v1" if nome == "v1" else "v4"), r["dH"] == rif))
     # ---------------------------------------------------------------- la scena S162
     with MT.scena(MT.CORSA_162, MT.T_162) as Z:
         L, n = Z["L"], Z["n"]
@@ -146,6 +155,15 @@ def main():
         sc = (ii, jj, nn, dirs, ps_t, ph_t)
         print("-" * 130)
         print("### %s; la traslazione (%d, %d)" % (nome_c, d1, d2))
+        i0 = c * L + c
+        hi = np.where(nodo_h(ii, jj) == i0)[0]
+        chiv = complex(np.sum(ph_t[hi]))
+        nrm = math.sqrt(float(np.sum(np.abs(ph_t[hi]) ** 2)) * len(hi))
+        print("    il padre i: |somma di phi sulle sue %d estremita'| = %.3e, relativa a sqrt(6 somma |phi|^2) %.3e" % (len(hi), abs(chiv), abs(chiv) / nrm))
+        if abs(chiv) / nrm < 1e-12:
+            print("    ### D7 SU phi E' INDEFINITA QUI: v1 mette sulle estremita' nuove chiv/|chiv| = 0/0 (sul vuoto F3 la somma delle estremita' di un nodo e' nulla: un flusso). v1 e v4-F3 NON SI MISURANO.")
+            tab.append((nome_c[:3], "v1, v4-F3", None))
+            continue
         R, N_S = regole(L, sc)
         print("    N_S %.9e (la norma del vuoto di S prima)" % N_S)
         for nome, (ph, hS, dopo) in R.items():
@@ -157,7 +175,7 @@ def main():
     print("-" * 130)
     print("### LA TABELLA (Delta H_tot)")
     for caso, nome, r in tab:
-        print("    %-4s %-6s %+.6e" % (caso, nome, r["dH"]))
+        print("    %-4s %-10s %s" % (caso, nome, ("%+.6e" % r["dH"]) if r is not None else "INDEFINITA (D7 su phi: 0/0)"))
     for nm, ok in esiti:
         print("  DEVE: %-110s %s" % (nm, "PASSA" if ok else "### FALLISCE"))
     print("=" * 130)

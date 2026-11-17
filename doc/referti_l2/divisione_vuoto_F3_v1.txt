@@ -1,0 +1,32 @@
+[TIMBRO] _conto_del_vuoto.py  sha1-BYTE c3d9c303  committato e pulito
+[TIMBRO] divisione_vuoto_F3.py  sha1-BYTE 2ab41b6b  committato e pulito
+==================================================================================================================================
+LA REGOLA DEL VUOTO ALLA NASCITA, RIMISURATA SUL VUOTO F3 (Luca 2026-11-17 13:16, parte 3); le regole: v1 e v4-F3 (la fase: una scelta mia, dichiarata)
+==================================================================================================================================
+### (K) IL CASO NOTO: il vuoto UNIFORME stato_K(24) (divisione_vuoto_rigirato.txt: v1 -8.548213678, v4 -0.300804079)
+    v1     Delta H_tot -8.548213678e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame +3.637979e-12 | V 3.456000000e+03 -> 3.456000000e+03 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+    v4-F3  Delta H_tot -3.099018648e-01 = materia -6.480149e-02 + vuoto -2.451049e-01 + legame +4.564146e-06 | V 3.456000000e+03 -> 3.456000000e+03 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+### la scena S162: L 162, 26244 nodi, 78732 archi; l'ordine degli archi = _massa_nei_difetti.toro (asserito)
+### il baricentro della materia del mattone (112.536, 106.692)
+----------------------------------------------------------------------------------------------------------------------------------
+### (a) il vuoto F3 puro (psi = 0); la traslazione (0, 0)
+    (psi = 0: le estremita' nuove di psi messe a 0, il valore che D7 da' con la norma del padre 0)
+    N_S 2.400000000e+01 (la norma del vuoto di S prima)
+Traceback (most recent call last):
+  File "C:\Users\lpeano\soliton_simulator\doc\referti_l2\divisione_vuoto_F3.py", line 168, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\doc\referti_l2\divisione_vuoto_F3.py", line 152, in main
+    r = conta(L, sc, nome, ph, hS, dopo)
+  File "C:\Users\lpeano\soliton_simulator\doc\referti_l2\divisione_vuoto_F3.py", line 66, in conta
+    mot1, st1 = C3.motore(ii2, jj2, nn2, dirs2, psi2, ph)
+                ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\soliton_simulator\csv\_conto_del_vuoto.py", line 76, in motore
+    mot = MO.Motore(inc, MO.Geometria(nv, U), st, np.ones(nn), "numpy")
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\motore.py", line 208, in __init__
+    self._vieta_vuoto_nullo()
+    ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\soliton_simulator\primo_ordine\motore.py", line 239, in _vieta_vuoto_nullo
+    assert mi > 0.0, (
+           ^^^^^^^^
+AssertionError: questo stato ha `Lambda = 0` su 0 nodi su 26245 (il minimo e' nan): IL VUOTO NULLO NON E' UNO STATO FISICO (decisione di Luca del 2026-10-17). ### `cs = Lambda/(Lambda + Lambda_c)` darebbe `cs = 0` la', e con lui gli archi che toccano quel nodo (media armonica `B-3`): il nodo diventerebbe UNA CELLA SIGILLATA PER SEMPRE -- niente entra, niente esce, il suo vuoto resta zero. ### NON e' un orizzonte: e' UN POZZO MURATO. ### E NON SI CORREGGE CON UN PAVIMENTO (`A11`): si rifiuta LO STATO. La scena va costruita con `phi` non nullo su ogni nodo
