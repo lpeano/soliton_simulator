@@ -46,3 +46,15 @@
 ## 8. LE MISURE CHE MANCANO
 
 - **Il secondo ciclo** *(Q6)*; **L e I della materia nel tempo, `omega = L / I`** *(Q7: resta da spiegare un fattore `1.52`, la correzione n.`183`)*; **la dispersione dei mattoni** *(Q8)*; **il guscio in una scatola grande** *(Q9)*; **CP / CPT** *(SC e la parte B)*; **le culle con una finestra che non satura** *(R, il limite della sez. `5`)*.
+
+## LE SIMMETRIE: LO SPECCHIO SI', C NO, CP NO, CPT SI' (SENZA IL BORDO) *(il mandato di Luca del `2026-11-17` `13:16`, 2.3)*
+
+| | l'operatore | l'esito | il referto |
+|---|---|---|---|
+| **lo specchio** *(unitario)* | la riflessione a `30` gradi, `T = sigma.l`, `A` col segno del verso, `phi -> -phi` | ### **SI'**: `3.5e-14` dopo `10` tick entro `40` nodi | `doc/referti_l2/mattone/specchio_carta.txt` *(`6faa1a3d`)* |
+| **C** *(antiunitario: il coniugio)* | `32` candidati | ### **NO**: il migliore `2.976e-01` dopo `10` tick; **la rompono** `CAMM-GROVER` `2.35e-01`, `CAMM-SPOSTAMENTO` `2.34e-01`, `CAMM-MATERIA-VUOTO` `1.49e-01`, `fase_a` `4.97e-03`, la reazione `3.17e-03` | `simmetria_C.txt`, `simmetria_C_pezzi.txt` *(`92948daf`, `7782ef70`)* |
+| **CP** | `256` candidati *(l'inversione e lo specchio)* | ### **NO**: come C, `2.976e-01` | `simmetria_CP.txt` *(`d1c32fb5`)* |
+| **CPT** *(antiunitario che ROVESCIA il tick)* | **l'inversione `x -> -x`, `sigma_y` e il coniugio su `psi`, `phi -> -conj(phi)`, `A` dispari, `E` pari** | ### **SI', SENZA IL BORDO**: ogni pezzo del tick e il tick G+U senza il bordo all'arrotondamento *(`ebe6dcf0`)*; **la prova prevista prima** *(`simmetria_CPT.txt`)*: **le chiavi della dinamica** *(`psi_h`, `phi_h`, `A`, `E`)* **sotto la soglia per `N = 10` e `N = 100`**; **le CACHE** *(`h_int`, `Lambda`, `rho`)* **no** *(vedi il referto)*. **Il bordo assorbente la rompe** *(dissipativo per costruzione)* | `simmetria_CP_pezzi.txt`, `simmetria_CPT.txt` |
+
+- **LA LETTURA** *(non una prova)*: **nella camminata il coniugio ROVESCIA IL TEMPO** *(un pezzo `exp(-i tau H)` diventa il suo inverso)*: **C da solo non puo' commutare col tick; e' l'antiunitario che rovescia il tick, insieme all'inversione, la simmetria del modello.** **I segni** *(A dispari, E pari)* **sono quelli classici del rovesciamento del tempo.**
+- ### **LA CORREZIONE DEL GUARDIANO** *(Luca `13:16`)*: **i lobi esterni (`27`-`32`) vanno avanti IN MEDIA** *(`33` fotogrammi su `59`, `doc/referti_l2/triangolo_t120_misure_guardiano.txt`, `dd711ad1`)*, **non «sempre».**

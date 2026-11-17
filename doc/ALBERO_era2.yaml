@@ -238,6 +238,18 @@ nodi:
       DECIDERE (Luca): FC presa <<la coesione e- G+U, simmetrica per CPT (questo Theta)>>, con
       la correzione post-hoc dichiarata (il confronto sul tick SENZA il bordo), oppure una
       prova nuova con le soglie scritte prima (10 tick di tick_GU sui due stati).
+      ### ⛔ LA PROVA NUOVA, PREVISTA PRIMA (Luca 2026-11-17 13:16; la previsione 815a7fba,
+      il referto doc/referti_l2/simmetria_CPT.txt): N = 10 e N = 100, il tick G+U senza il
+      bordo, i due stati, il toro intero. LE CHIAVI DELLA DINAMICA PASSANO (il peggiore E
+      2.8e-12 a N = 100, la soglia 1e-10; psi_h, phi_h, A <= 3.1e-14). LA LETTURA ALLA
+      LETTERA CADE sulle tre CACHE h_int (1.787e+02), Lambda (1.262e-04), rho (4.459e-07):
+      gli stessi numeri per ogni N e ogni stato, cioe- valori che il tick non aggiorna;
+      il codice le riscrive da psi_h e phi_h (motore.elicita, densita_materia,
+      densita_vuoto), e h_int e- gia- <<una CACHE diagnostica>> per la decisione di Luca
+      del 2026-11-16 12:19. ### MA LA PREVISIONE DICEVA <<ogni chiave>>: FC RESTA APERTA
+      (la condizione 2.2 del mandato). DA DECIDERE (Luca): FC presa <<simmetrica per CPT,
+      esatta all-arrotondamento sullo stato dinamico (psi_h, phi_h, A, E)>>, con le cache
+      escluse come per CHIAVI_SERVIZIO (post-hoc dichiarato), oppure no.
 
   - id: DEC-D9-GEOMETRIA
     etichetta: D9
