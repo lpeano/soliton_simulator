@@ -1,0 +1,114 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] simmetria_C.py  sha1-BYTE 7cfc93b7  committato e pulito
+==================================================================================================================================
+LA PROVA DELLA SIMMETRIA C DI G+U (Luca 2026-11-17 09:49, C2); sys.executable E:\python\py3132\python.exe; e 6.315414e-05; la soglia 1e-12 dopo 10 tick entro 40 nodi
+==================================================================================================================================
+### LO STATO: E:\soliton_simulator\mattone\L162_MGU_03000.npz (t 63000); le chiavi {'Lambda': ((26244,), 'float64'), 'h_int': ((26244,), 'float64'), 'phi_h': ((157464,), 'complex128'), 'psi': ((26244, 2), 'complex128'), 'psi_h': ((157464, 2), 'complex128'), 'rho': ((26244,), 'float64')}
+    max |A| 3.3543e+01, max |E| 2.8540e-01
+### il baricentro della materia (112.536, 106.692); entro 40 nodi: 5805 nodi, 34830 estremita', 17138 archi del campo; la materia entro: 0.999934 del totale
+----------------------------------------------------------------------------------------------------------------------------------
+### K1 (il caso noto): C(C(x)) contro x, per ogni candidato (al bit)
+    T I        f phi         s +1: max |C(C(x)) - x| 0.000e+00
+    T sigma_x  f phi         s +1: max |C(C(x)) - x| 0.000e+00
+    T sigma_y  f phi         s +1: max |C(C(x)) - x| 2.842e+01; C(C(psi_h)) = -psi_h al bit (0.0e+00): una fase globale
+    T sigma_z  f phi         s +1: max |C(C(x)) - x| 0.000e+00
+    (stampati i soli f = phi, s = +1 e gli eventuali che NON passano; i 32 sono tutti nei DEVE)
+----------------------------------------------------------------------------------------------------------------------------------
+### K2 (il caso noto): il vortice +1 costruito a mano (come segni_vortice.py), coniugato
+    il vortice: il giro della somma +1.000; L della corrente di fase +1.213291e+06
+    C con T I       : il giro della somma -1.000; L -1.213291e+06 (il rapporto con quello del vortice -1.000000)
+    C con T sigma_x : il giro della somma -1.000; L -1.213291e+06 (il rapporto con quello del vortice -1.000000)
+    C con T sigma_y : il giro della somma -1.000; L -1.213291e+06 (il rapporto con quello del vortice -1.000000)
+    C con T sigma_z : il giro della somma -1.000; L -1.213291e+06 (il rapporto con quello del vortice -1.000000)
+    DEVE FALLIRE (sigma_x SENZA coniugio): il giro +1.000; L +1.213291e+06
+----------------------------------------------------------------------------------------------------------------------------------
+### P: il mattone -- C(tick(x)) contro tick(C(x)), 1 tick, i 32 candidati (la differenza relativa al massimo della chiave; @40 = entro 40 nodi)
+    un tick: 3.2 s
+    T I        f phi         s +1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 5.869e-03 (5.869e-03)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T I        f phi         s -1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 5.888e-03 (5.888e-03)  A 1.008e-07 (1.008e-07)  E 7.695e-04 (7.695e-04)
+    T I        f -phi        s +1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 2.216e-02 (8.424e-03)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T I        f -phi        s -1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 2.216e-02 (8.424e-03)  A 1.008e-07 (1.008e-07)  E 7.695e-04 (7.695e-04)
+    T I        f conj(phi)   s +1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T I        f conj(phi)   s -1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.008e-07 (1.008e-07)  E 7.695e-04 (7.695e-04)
+    T I        f -conj(phi)  s +1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T I        f -conj(phi)  s -1: psi_h 1.164e+00 (@40 1.164e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.008e-07 (1.008e-07)  E 7.695e-04 (7.695e-04)
+    T sigma_x  f phi         s +1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 5.826e-03 (5.826e-03)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T sigma_x  f phi         s -1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 5.845e-03 (5.845e-03)  A 1.045e-07 (1.045e-07)  E 7.690e-04 (7.690e-04)
+    T sigma_x  f -phi        s +1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 2.216e-02 (8.424e-03)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T sigma_x  f -phi        s -1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 2.216e-02 (8.424e-03)  A 1.045e-07 (1.045e-07)  E 7.690e-04 (7.690e-04)
+    T sigma_x  f conj(phi)   s +1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T sigma_x  f conj(phi)   s -1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.045e-07 (1.045e-07)  E 7.690e-04 (7.690e-04)
+    T sigma_x  f -conj(phi)  s +1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.733e-07 (4.733e-07)  E 2.737e-03 (2.737e-03)
+    T sigma_x  f -conj(phi)  s -1: psi_h 1.163e+00 (@40 1.163e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.045e-07 (1.045e-07)  E 7.690e-04 (7.690e-04)
+    T sigma_y  f phi         s +1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 5.863e-03 (5.863e-03)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_y  f phi         s -1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 5.882e-03 (5.882e-03)  A 9.736e-08 (9.736e-08)  E 7.606e-04 (7.606e-04)
+    T sigma_y  f -phi        s +1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 2.216e-02 (8.424e-03)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_y  f -phi        s -1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 2.216e-02 (8.424e-03)  A 9.736e-08 (9.736e-08)  E 7.606e-04 (7.606e-04)
+    T sigma_y  f conj(phi)   s +1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_y  f conj(phi)   s -1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 1.083e+00 (1.083e+00)  A 9.736e-08 (9.736e-08)  E 7.606e-04 (7.606e-04)
+    T sigma_y  f -conj(phi)  s +1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_y  f -conj(phi)  s -1: psi_h 1.153e+00 (@40 1.153e+00)  phi_h 1.083e+00 (1.083e+00)  A 9.736e-08 (9.736e-08)  E 7.606e-04 (7.606e-04)
+    T sigma_z  f phi         s +1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 5.820e-03 (5.820e-03)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_z  f phi         s -1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 5.839e-03 (5.839e-03)  A 1.011e-07 (1.011e-07)  E 7.601e-04 (7.601e-04)
+    T sigma_z  f -phi        s +1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 2.216e-02 (8.424e-03)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_z  f -phi        s -1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 2.216e-02 (8.424e-03)  A 1.011e-07 (1.011e-07)  E 7.601e-04 (7.601e-04)
+    T sigma_z  f conj(phi)   s +1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_z  f conj(phi)   s -1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.011e-07 (1.011e-07)  E 7.601e-04 (7.601e-04)
+    T sigma_z  f -conj(phi)  s +1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 1.083e+00 (1.083e+00)  A 4.709e-07 (4.709e-07)  E 2.724e-03 (2.724e-03)
+    T sigma_z  f -conj(phi)  s -1: psi_h 1.156e+00 (@40 1.156e+00)  phi_h 1.083e+00 (1.083e+00)  A 1.011e-07 (1.011e-07)  E 7.601e-04 (7.601e-04)
+### il mattone: i due migliori su 10 tick
+    T sigma_y  f phi         s +1: dopo 10 tick psi_h 2.976e-01 (@40 2.976e-01)  phi_h 2.448e-01 (2.448e-01)  A 2.177e-05 (2.177e-05)  E 1.218e-02 (1.218e-02)
+    T sigma_y  f -phi        s +1: dopo 10 tick psi_h 2.976e-01 (@40 2.976e-01)  phi_h 2.448e-01 (2.448e-01)  A 2.177e-05 (2.177e-05)  E 1.218e-02 (1.218e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+### P: lo stato a caso (seme 11) -- C(tick(x)) contro tick(C(x)), 1 tick, i 32 candidati (la differenza relativa al massimo della chiave; @40 = entro 40 nodi)
+    un tick: 3.1 s
+    T I        f phi         s +1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.878e-02 (1.878e-02)  A 6.539e-06 (6.539e-06)  E 1.182e-02 (1.182e-02)
+    T I        f phi         s -1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.879e-02 (1.879e-02)  A 1.715e-06 (1.715e-06)  E 2.906e-03 (2.906e-03)
+    T I        f -phi        s +1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 2.216e-02 (1.878e-02)  A 6.539e-06 (6.539e-06)  E 1.182e-02 (1.182e-02)
+    T I        f -phi        s -1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 2.216e-02 (1.879e-02)  A 1.715e-06 (1.715e-06)  E 2.906e-03 (2.906e-03)
+    T I        f conj(phi)   s +1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.539e-06 (6.539e-06)  E 1.182e-02 (1.182e-02)
+    T I        f conj(phi)   s -1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.715e-06 (1.715e-06)  E 2.906e-03 (2.906e-03)
+    T I        f -conj(phi)  s +1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.539e-06 (6.539e-06)  E 1.182e-02 (1.182e-02)
+    T I        f -conj(phi)  s -1: psi_h 7.555e-01 (@40 7.555e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.715e-06 (1.715e-06)  E 2.906e-03 (2.906e-03)
+    T sigma_x  f phi         s +1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.880e-02 (1.880e-02)  A 6.537e-06 (6.537e-06)  E 1.179e-02 (1.179e-02)
+    T sigma_x  f phi         s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.881e-02 (1.881e-02)  A 1.745e-06 (1.745e-06)  E 2.958e-03 (2.958e-03)
+    T sigma_x  f -phi        s +1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 2.216e-02 (1.880e-02)  A 6.537e-06 (6.537e-06)  E 1.179e-02 (1.179e-02)
+    T sigma_x  f -phi        s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 2.216e-02 (1.881e-02)  A 1.745e-06 (1.745e-06)  E 2.958e-03 (2.958e-03)
+    T sigma_x  f conj(phi)   s +1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.537e-06 (6.537e-06)  E 1.179e-02 (1.179e-02)
+    T sigma_x  f conj(phi)   s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.745e-06 (1.745e-06)  E 2.958e-03 (2.958e-03)
+    T sigma_x  f -conj(phi)  s +1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.537e-06 (6.537e-06)  E 1.179e-02 (1.179e-02)
+    T sigma_x  f -conj(phi)  s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.745e-06 (1.745e-06)  E 2.958e-03 (2.958e-03)
+    T sigma_y  f phi         s +1: psi_h 7.553e-01 (@40 7.553e-01)  phi_h 1.876e-02 (1.876e-02)  A 6.551e-06 (6.551e-06)  E 1.186e-02 (1.186e-02)
+    T sigma_y  f phi         s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.876e-02 (1.876e-02)  A 1.702e-06 (1.702e-06)  E 2.883e-03 (2.883e-03)
+    T sigma_y  f -phi        s +1: psi_h 7.553e-01 (@40 7.553e-01)  phi_h 2.216e-02 (1.876e-02)  A 6.551e-06 (6.551e-06)  E 1.186e-02 (1.186e-02)
+    T sigma_y  f -phi        s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 2.216e-02 (1.876e-02)  A 1.702e-06 (1.702e-06)  E 2.883e-03 (2.883e-03)
+    T sigma_y  f conj(phi)   s +1: psi_h 7.553e-01 (@40 7.553e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.551e-06 (6.551e-06)  E 1.186e-02 (1.186e-02)
+    T sigma_y  f conj(phi)   s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.702e-06 (1.702e-06)  E 2.883e-03 (2.883e-03)
+    T sigma_y  f -conj(phi)  s +1: psi_h 7.553e-01 (@40 7.553e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.551e-06 (6.551e-06)  E 1.186e-02 (1.186e-02)
+    T sigma_y  f -conj(phi)  s -1: psi_h 7.552e-01 (@40 7.552e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.702e-06 (1.702e-06)  E 2.883e-03 (2.883e-03)
+    T sigma_z  f phi         s +1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.878e-02 (1.878e-02)  A 6.550e-06 (6.550e-06)  E 1.185e-02 (1.185e-02)
+    T sigma_z  f phi         s -1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.878e-02 (1.878e-02)  A 1.731e-06 (1.731e-06)  E 2.934e-03 (2.934e-03)
+    T sigma_z  f -phi        s +1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 2.216e-02 (1.878e-02)  A 6.550e-06 (6.550e-06)  E 1.185e-02 (1.185e-02)
+    T sigma_z  f -phi        s -1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 2.216e-02 (1.878e-02)  A 1.731e-06 (1.731e-06)  E 2.934e-03 (2.934e-03)
+    T sigma_z  f conj(phi)   s +1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.550e-06 (6.550e-06)  E 1.185e-02 (1.185e-02)
+    T sigma_z  f conj(phi)   s -1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.731e-06 (1.731e-06)  E 2.934e-03 (2.934e-03)
+    T sigma_z  f -conj(phi)  s +1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.083e+00 (1.083e+00)  A 6.550e-06 (6.550e-06)  E 1.185e-02 (1.185e-02)
+    T sigma_z  f -conj(phi)  s -1: psi_h 7.550e-01 (@40 7.550e-01)  phi_h 1.083e+00 (1.083e+00)  A 1.731e-06 (1.731e-06)  E 2.934e-03 (2.934e-03)
+### lo stato a caso (seme 11): i due migliori su 10 tick
+    T sigma_z  f phi         s -1: dopo 10 tick psi_h 1.593e+00 (@40 1.593e+00)  phi_h 2.351e-01 (2.351e-01)  A 1.990e-04 (1.990e-04)  E 5.668e-02 (5.668e-02)
+    T sigma_z  f -phi        s -1: dopo 10 tick psi_h 1.593e+00 (@40 1.593e+00)  phi_h 2.351e-01 (2.351e-01)  A 1.990e-04 (1.990e-04)  E 5.668e-02 (5.668e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K2. T I: il vortice +1 coniugato ha il giro -1 (entro 0.1) e L col segno opposto                               PASSA
+  DEVE: K2. T sigma_x: il vortice +1 coniugato ha il giro -1 (entro 0.1) e L col segno opposto                         PASSA
+  DEVE: K2. T sigma_y: il vortice +1 coniugato ha il giro -1 (entro 0.1) e L col segno opposto                         PASSA
+  DEVE: K2. T sigma_z: il vortice +1 coniugato ha il giro -1 (entro 0.1) e L col segno opposto                         PASSA
+  DEVE: K2. DEVE FALLIRE: senza coniugio il giro NON e' -1 (resta +1)                                                  PASSA
+  K1: 32 su 32 PASSANO; K2: tutti come devono
+==================================================================================================================================
+### il mattone: il migliore dopo 10 tick T sigma_y, f phi, s +1: entro 40 nodi 2.976e-01 (dopo 1 tick il migliore era T sigma_y, f phi, s +1: 1.153e+00)
+### lo stato a caso (seme 11): il migliore dopo 10 tick T sigma_z, f phi, s -1: entro 40 nodi 1.593e+00 (dopo 1 tick il migliore era T sigma_z, f phi, s -1: 7.550e-01)
+### C2, LA LETTURA (fissata prima: C esiste se il migliore dopo 10 tick sta sotto 1e-12 entro 40 nodi per ENTRAMBI gli stati): ### C NON ESISTE FRA I 32 CANDIDATI (la previsione del guardiano CADE)
+    (il tempo 384 s)
+==================================================================================================================================
