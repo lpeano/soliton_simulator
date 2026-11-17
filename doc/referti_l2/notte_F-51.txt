@@ -1,0 +1,29 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_coppia_L162.py  sha1-BYTE a65d59ec  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+[TIMBRO] notte.py  sha1-BYTE 7cfa457f  committato e pulito
+==================================================================================================================================
+LA NOTTE (Luca 20:35), F-51: coppia su L 351, il bordo da R_A 101; da k 0 (stato_00000.npz, sha1 7aef4ecb, ricontrollato) a k 2000; lo stato ogni 250; la fermata 2026-11-17T08:00; la soglia di Gauss 2.433e-09 (10 volte il residuo a k 0)
+==================================================================================================================================
+    k     0  d 51.0059  il raggio 28.3428  A2 0.7642  il picco 1.1927e+03  la massa 1.989669e+06  oltre R_A 0.000e+00  Gauss 2.43e-10  (135 s)
+### R-SCATOLA AL 5% (F-51 a k 250): R_ogg 50.0; la distanza al lato del rombo 151.99 = 3.04 R_ogg (>= 3: True); R_A 101.0 = 2.02 R_ogg (>= 2: True); la fascia 50.99 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 175.50
+    [stato] k 250 (il passo): stato_00250.npz sha1 ecf14955; il pezzo pezzo_00000_00250.npz; R_ogg al 5% 50.0
+    k   500  d 51.0046  il raggio 28.4307  A2 0.7575  il picco 1.1600e+03  la massa 1.989669e+06  oltre R_A 1.707e-06  Gauss 2.50e-10  (12579 s)
+### R-SCATOLA AL 5% (F-51 a k 500): R_ogg 67.0; la distanza al lato del rombo 151.99 = 2.27 R_ogg (>= 3: False); R_A 101.0 = 1.51 R_ogg (>= 2: False); la fascia 50.99 (>= 30: True) -> ### NON RISPETTATA; accanto, il raggio inscritto 175.50
+    [stato] k 500 (il passo): stato_00500.npz sha1 75dc8a50; il pezzo pezzo_00250_00500.npz; R_ogg al 5% 67.0
+### R-SCATOLA AL 5% (F-51 a k 750): R_ogg 68.0; la distanza al lato del rombo 151.99 = 2.24 R_ogg (>= 3: False); R_A 101.0 = 1.49 R_ogg (>= 2: False); la fascia 50.99 (>= 30: True) -> ### NON RISPETTATA; accanto, il raggio inscritto 175.50
+    [stato] k 750 (il passo): stato_00750.npz sha1 3207914a; il pezzo pezzo_00500_00750.npz; R_ogg al 5% 68.0
+    k  1000  d 50.9918  il raggio 28.4929  A2 0.7514  il picco 1.1589e+03  la massa 1.989640e+06  oltre R_A 1.847e-05  Gauss 2.50e-10  (25071 s)
+### R-SCATOLA AL 5% (F-51 a k 1000): R_ogg 68.0; la distanza al lato del rombo 151.99 = 2.24 R_ogg (>= 3: False); R_A 101.0 = 1.49 R_ogg (>= 2: False); la fascia 50.99 (>= 30: True) -> ### NON RISPETTATA; accanto, il raggio inscritto 175.50
+    [stato] k 1000 (il passo): stato_01000.npz sha1 736e97fa; il pezzo pezzo_00750_01000.npz; R_ogg al 5% 68.0
+### R-SCATOLA AL 5% (F-51 a k 1076): R_ogg 68.0; la distanza al lato del rombo 151.99 = 2.24 R_ogg (>= 3: False); R_A 101.0 = 1.49 R_ogg (>= 2: False); la fascia 50.99 (>= 30: True) -> ### NON RISPETTATA; accanto, il raggio inscritto 175.50
+    [stato] k 1076 (la fermata): stato_01076.npz sha1 f4caab19; il pezzo pezzo_01000_01076.npz; R_ogg al 5% 68.0
+----------------------------------------------------------------------------------------------------------------------------------
+### 1076 tick in 26838 s (24.942 s per tick); SOSPESA alle 08:00:05 a k 1076
+### L'ULTIMO STATO: k 1076, E:\soliton_simulator\notte\F-51\stato_01076.npz, sha1 f4caab191113ea7d70fae246797934f40765d73a

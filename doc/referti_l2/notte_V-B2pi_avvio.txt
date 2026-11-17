@@ -1,0 +1,33 @@
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_coppia_L162.py  sha1-BYTE a65d59ec  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] triangolo_120.py  sha1-BYTE fc588994  committato e pulito
+[TIMBRO] mattone_triangolo.py  sha1-BYTE 02f75f97  committato e pulito
+[TIMBRO] triangolo_video.py  sha1-BYTE 8558625c  committato e pulito
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+[TIMBRO] notte.py  sha1-BYTE 7cfa457f  committato e pulito
+### L'AVVIO DI V-B2pi: la coppia d 35, fase pi, L 321, il bordo da R_A 92.42; mattone_coppia_L162.main col mondo N321d35pi, intercettata in Corsa.inizio(0)
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] conti.py  sha1-BYTE d57ce3d4  committato e pulito
+[TIMBRO] p6_bracci.py  sha1-BYTE 91e02c6a  committato e pulito
+[TIMBRO] p6_u_breve.py  sha1-BYTE 8994cb96  committato e pulito
+[TIMBRO] carta_coppia.py  sha1-BYTE 3adbbe11  committato e pulito
+[TIMBRO] mattone_coppia_L162.py  sha1-BYTE a65d59ec  committato e pulito
+==================================================================================================================================
+LA COPPIA N321d35pi COL MATTONE COTTO SU L 162 (Luca 09:34, B2; 14:54; 15:49 il bordo da 60): due (MGU) COTTI da E:\soliton_simulator\mattone\L162_MGU_03000.npz (k 3000) sul vuoto di L 162 al tick 60000 (la scena di C35-pi); campi pieni dal tick 0; rho_c 227058.574864, e 6.3154140e-05; 2000 tick
+    i riferimenti (8ca61a34:doc/referti_l2/p6_bracci.txt): (GU = GUrampa) d'' +6.887181e-07 +- 3.4e-08; (U = U_2000) -2.554235e-08 +- 3.4e-10; (G = Grampa) +7.175065e-07 +- 3.4e-08  -- d_X - d_0, NON omogenei col d'' crudo della coppia: il SEGNO e l'ORDINE
+==================================================================================================================================
+### il francobollo: R_t 41.0; 7333 nodi; il picco del mattone a k 3000 1.1927e+03 (nell'ultimo pezzo da 1.1861e+03 a 1.3653e+03); la massa del francobollo 9.950109e+05, oltre 18.8 nodi 5.010568e+04 (5.036e-02 relativo)
+### IL BORDO (Luca 15:49): quello della scena di C35-pi ha R_A 92.420; QUI R_A 60 attorno allo stesso centro [160, 160], R_B 160.5, g_max 0.03
+### i centri di C35-pi a 60000: A (142.5000, 160.0000), B (177.5000, 160.0000), d 35.000000; i nodi (multipli di 3 dal centro del francobollo): [[143, 161], [179, 161]], la loro distanza 36.000000
+  DEVE PASSARE: (N321d35pi) un solo francobollo: la somma e il prodotto = l'incollatura di S6 AL BIT                 PASSA   diverse: []
+### la coppia incollata: Delta ['-0.000074', '-0.000074']; E(coppia) - E(vuoto) 1.604243e+07; |phi_j|^2 lontano (fuori da R_t + 4 dai due centri, 92072 nodi): la mediana 1.000000000000, il minimo 1.000000000000, il massimo 1.000000000000
+### il campo di Gauss (A = 0): il residuo iniziale 2.975e-10
+### d0 VERA (dai semipiani, sullo stato incollato): 37.057058
+### l'oggetto incollato: i raggi 10% 41.0, 5% 42.0, 2% 59.0, 1% 60.0 attorno al baricentro (160.54, 160.72); R_ogg al 5% 42.0
+### R-SCATOLA AL 5% (a k 0, V-B2pi): R_ogg 42.0; la distanza al lato del rombo 139.00 = 3.31 R_ogg (>= 3: True); R_A 92.4 = 2.20 R_ogg (>= 2: True); la fascia 46.58 (>= 30: True) -> RISPETTATA; accanto, il raggio inscritto 160.50
+### LO STATO A k 0: E:\soliton_simulator\notte\V-B2pi\stato_00000.npz, sha1 e32b13970d7fbf186214e99e7e808838d39f2019; il residuo di Gauss 2.975e-10
+### L'AVVIO FATTO: {"nome": "V-B2pi", "tipo": "coppia", "L": 321, "R_A": 92.42, "d": 35.0, "fase": "pi", "t_base": 60000, "g0": 2.975042484410812e-10, "soglia_gauss": 2.9750424844108124e-09, "R_ogg5_k0": 42.0, "stato_k0": "E:\\soliton_simulator\\notte\\V-B2pi\\stato_00000.npz", "sha1_k0": "e32b13970d7fbf186214e99e7e808838d39f2019", "codice": "csv/solitone/notte.py"}
