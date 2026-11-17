@@ -120,3 +120,48 @@
 | `6` | la misura del costo *(Q-P1)*: con la crescita spenta e accesa | referto | `1` sessione |
 
 ### ⛔ **FERMO PRIMA DI OGNI CODICE.** **Le decisioni che servono da Luca:** **(D-M1)** lo scongelamento del nucleo per `Motore.cresci`; **(D-M2)** la mossa: «divisione + flip» *(la dislocazione)* o la sola divisione; **(D-M3)** la regola di `phi_h` sulle estremita' nuove *(la parte aperta della via (3), con i numeri di `divisione_vuoto.txt` da rigirare dal commit)*; **(D-M4)** una o piu' nascite per tick.
+
+## 9. LE DECISIONI DI LUCA DEL `2026-11-17` `11:33` *(sulle proposte del guardiano)*
+
+- **D-M1 -- SI', SU UN RAMO NUOVO `mitosi`** *(da `primo-ordine` a `306fd07b`; il worktree `C:/Users/lpeano/wt_mitosi`; pushato)*: **lo scongelamento del nucleo per `Motore.cresci` vale SOLO sul ramo**; **la riunione solo con un mandato di Luca** *(R-NAVI)*; ### **il CANCELLO e' P6** *(le zone regolari AL BIT)*: **se P6 non passa, nulla si riunisce.** **La tabella del nucleo congelato si aggiorna SUL RAMO, file per file, con la decisione scritta** *(in questo mandato nessun file del nucleo e' cambiato: niente da aggiornare)*.
+- **D-M2 -- LA DIVISIONE D'ARCO PIU' IL FLIP** *(la dislocazione, la via (B))*, **CON LA CONDIZIONE che la scelta del flip sia SIMMETRICA ALLO SPECCHIO** *(la regola sotto, sez. `10.3`; la prova P5)*.
+- **D-M3 -- la regola di `phi_h` sulle estremita' nuove SI DECIDE SUI NUMERI** *(la proposta sotto, sez. `10.2`; ### **FERMO per Luca**)*.
+- **D-M4 -- UNA nascita per tick**, per cominciare; **piu' nascite dopo, con una prova dedicata.**
+- ### ⛔ **IL CODICE DEL NUCLEO SUL RAMO PARTE SOLO DOPO D-M3 E CON FC PRESA** *(il mandato, C4)*.
+
+## 10. LE REGOLE APERTE *(il punto `1` della stima; SOLO CARTA)*
+
+### 10.1 I NUMERI, RIGIRATI DAL LORO COMMIT *(Q-A1)*
+
+- **`doc/referti_l2/divisione_vuoto_rigirato.txt`**: **lo script di `aac33f2f` nel worktree staccato `C:/Users/lpeano/wt_divisione_f7ee87a9`** *(il commit del referto, `f7ee87a9`)*, con l'interprete di E:: **«committato e pulito»** *(sha1 dei byte `07b75ba1`)*.
+- ### **LA PROVENIENZA DEL REFERTO DI ALLORA E' CHIARITA:** **il timbro «MODIFICATO rispetto a HEAD» era la TRAPPOLA CRLF** *(par. `7`)*: **i byte che girarono, sha1 `aa0384b6`, sono ESATTAMENTE il contenuto committato con i fine riga CRLF** *(il contenuto LF, `07b75ba1`, convertito in CRLF da' `aa0384b6`)*. **Lo stesso codice.**
+- **Il confronto riga per riga col referto di `f7ee87a9`:** **identico tranne il timbro, la riga dei blob e tre termini dell'ordine di `1e-14`** *(il `vuoto` del flip `v5`: `+1.674177e-14` allora, `+7.673311e-15` ora; un `legame` `+2.842171e-14` -> `0`; un `dcs/cs` `4.219e-15` -> `4.441e-15`)*: **l'estremo della sfera di `v5` e' un conto numerico** *(il DEVE (2) lo tollera a `1e-12`)*. **Tutti i numeri sotto vengono dal referto rigirato.**
+
+### 10.2 `psi_h` E `phi_h` SULLE ESTREMITA' NUOVE -- LA PROPOSTA PER D-M3
+
+- **`psi`:** **D7** *(`psi/sqrt(2)` al padre e al figlio, la stessa fase)*: **la materia `-6.480149e-02` per TUTTE le regole** *(il referto, la parte `materia` della nascita)*. **Sulle estremita' nuove: `psi_h` = lo spinore del nodo, come sulle altre estremita' del nodo** *(da verificare nel codice della camminata prima della regola)*.
+- **`phi_h`, le cinque regole** *(la nascita; `L 24` e `L 36` danno gli stessi numeri, tranne `v3`)*:
+
+| | la regola | `Delta H_tot` | il vuoto | il legame | `V` | locale |
+|---|---|---|---|---|---|---|
+| `v1` | D7 anche per `phi` | `-8.548213678` | `-8.483412` | `~1e-13` | conservata | si' |
+| `v2` | le nuove al valore uniforme, il padre intero | `-0.1435872887` | `0` | `-0.0787858` | ### **cresce di `6`** | si' |
+| `v3` | `v2`, poi TUTTO il vuoto diluito | `-0.04531145615` *(L 24)* | `~0` | `+0.01949003` | conservata | ### **NO** *(ogni estremita' del toro)* |
+| `v4` | il vuoto di `S` *(n, i, j, k, l e i vicini)* ridistribuito UNIFORME | `-0.300804079` | `-0.2451049` | `+0.00910235` | conservata | si' |
+| `v5` | il MASSIMO della parte quadratica su `S`, alla norma | `-0.2334053164` | `-0.1775461` | `+0.008942222` | conservata | si' |
+
+- ### **I DUE VINCOLI CHE SCELGONO:** **(a) la LOCALITA'** *(il cancello P6 di D-M1: lontano dai difetti il tick resta AL BIT; `v3` cambia ogni estremita' del toro: ESCLUSA)*; **(b) `V` conservata** *(QC, la norma del vuoto esatta: `v2` la viola: ESCLUSA)*. **Restano `v1`, `v4`, `v5`; `v1` libera `-8.548`, circa `30` volte le altre: ESCLUSA** *(e' gia' la ragione della via (3) di Luca)*.
+- ### **LA PROPOSTA: `v4`** *(il vuoto di `S` ridistribuito uniforme fra le sue estremita', il fattore `sqrt(24/30)`)*: **locale, `V` ESATTA, DETERMINISTICA e SIMMETRICA ALLO SPECCHIO PER COSTRUZIONE** *(uniforme su un insieme simmetrico)*, **una formula chiusa senza ottimizzazione** *(`9-ter`: a parita' di effetto, meno leggi)*. **`v5` libera di meno** *(`-0.233` contro `-0.301`, la differenza `0.067`)*, **ma e' un ESTREMO NUMERICO** *(un problema agli autovalori: la scelta del segno dell'autovettore e' una preferenza nascosta, e il referto la rende entro `1e-12`, non al bit)*. ### **Le due differiscono di `0.067` su `0.3`: senza una barra non si puo' dire «parita'»** *(Q-A5)*: **la scelta e' di Luca.**
+- ### ⚠ **DUE COSE DA SAPERE PRIMA DI DECIDERE:**
+  1. **I numeri sono SULLA CARTA, col vuoto UNIFORME `stato_K`** *(il conto del vuoto di `C3`)*, **non col vuoto F3 delle corse** *(un flusso con una fase per direzione: D6f, «le forme di oggi»)*. **La regola va RIMISURATA sul vuoto F3 prima del codice** *(la stessa mossa sullo stato di una corsa)*.
+  2. ### **IL SEGNO:** **la nota di D7 dice «la divisione ALZA H, quindi va PAGATA»**; **il referto da' `Delta H_tot` NEGATIVO per TUTTE le regole** *(la nascita ABBASSA `H`)*. **O la nota e' scaduta, o il segno di `H` e' una convenzione diversa: NON lo so, e decide come si scrive la soglia** *(sez. `10.4`)*.
+
+### 10.3 IL FLIP SIMMETRICO ALLO SPECCHIO *(D-M2)*
+
+- **Dopo la divisione di `(i, j)`:** `n` di grado `4`, `k` e `l` di grado `7`. **I flip che portano a una dislocazione:** **i quattro lati del rombo `i, k, j, l` attorno a `n`** *(`(i,k)`, `(k,j)`, `(j,l)`, `(l,i)`: ognuno, girato, collega `n` al vertice opposto e `n` sale a `5`)*. **I quattro sono immagine l'uno dell'altro per i due specchi della mossa** *(la retta `i-j` e la retta `k-l`)*: **nessuno, scelto A PRIORI, e' simmetrico.**
+- ### **LA REGOLA PROPOSTA:** **si sceglie il flip che rende massima una grandezza LOCALE dello STATO** *(la proposta: la tensione del vuoto sull'arco che nasce dal flip, la stessa grandezza della soglia)*; ### **se il massimo NON e' unico** *(un pari merito entro la tolleranza della norma: uno stato simmetrico)*, **NESSUN flip a questo tick** *(la `4`-`7`-`7` resta, e il primo tick in cui lo stato rompe la parita' decide)*. **E' simmetrica allo specchio per costruzione:** **lo specchio dello stato sceglie lo specchio del flip** *(equivariante)*, **e uno stato simmetrico non sceglie.** **Deterministica:** nessun estratto, nessun ordine di indice usato fra pari merito. **La prova: P5.**
+
+### 10.4 LA SOGLIA COME DISUGUAGLIANZA DEL BILANCIO
+
+- **La decisione `10`:** il calore paga la nascita; **la soglia E' il bilancio.** **La forma proposta** *(nessun numero libero)*: **l'arco `a` si divide quando il bilancio locale della nascita su `a` e' coperto: `Delta H_nascita(a) <= Q(a)`**, con `Q(a)` **il calore disponibile sull'arco** *(una grandezza del modello da DEFINIRE: oggi nel nucleo non esiste un «calore»)*.
+- ### ⚠ **IL CONFLITTO CHE LA CARTA NON RISOLVE** *(scritto, non aggirato)*: **sulla carta `Delta H_tot < 0` su un vuoto UNIFORME** *(`v4`: `-0.301`)*: **se la soglia fosse «la nascita abbassa `H`», il vuoto puro crescerebbe ovunque** -- **contro «il vuoto puro non cresce»** *(la nota di D7, C1)*. **Quindi o la soglia NON e' il segno di `Delta H` ma un confronto con una grandezza che nel vuoto puro e' nulla** *(la tensione d'arco, nulla nel vuoto UNIFORME; `vuo` all'anello `60` fra `2e-3` e `5e-3`)*, **o il segno della sez. `10.2`, punto 2, va chiarito prima.** ### **E' una domanda per Luca, insieme a D-M3.**
