@@ -120,6 +120,26 @@
 - ### **R-CONTI-5:** **una corsa nuova senza le tabelle NON si chiude come `FINITO` ma come «FINITA SENZA CONTI», col motivo** *(la skill `registro-corse`; finche' il modulo del registro non ha l'esito apposito: `FINITO` col punto che comincia con «SENZA CONTI:»)*.
 - ### **R-CONTI-6** *(Luca `2026-11-14` `09:34`, C5)*: **l'energia nelle tabelle dei conti e' la MEDIA su `100` tick** *(il valore per tick oscilla di `+-200` su `1.65e7` anche senza campi: `doc/referti_l2/bilancio_chiusura.txt`, la deviazione per tick `124`, quella di una media su `100` tick `2.1`)*.
 
+## LA REGOLA DELLA QUALITA' *(R-QUALITA'; Luca `2026-11-17` `09:46`, permanente, per ogni lavoro da ora; le soglie del guardiano su delega di Luca)*
+
+> **Un vincolo per TUTTO il progetto: una forte attenzione all'ACCURATEZZA DEL DATO e alle PRESTAZIONI.**
+
+**L'ACCURATEZZA DEL DATO**
+- **Q-A1.** Ogni numero scritto *(referto, carta, considerazioni, relazione)* viene da un'uscita o da un referto citato, **MAI a memoria**; se non torna, **si scrive accanto, non si corregge in silenzio.**
+- **Q-A2.** Ogni corsa controlla a OGNI tappa le conservazioni che le competono *(la norma e il bilancio col bordo, Gauss, il giro dove c'e' un vortice)* e le scrive; **una violazione oltre la soglia ferma la corsa.**
+- **Q-A3.** Ogni corsa e' **DETERMINISTICA e RIPRENDIBILE AL BIT** *(lo stato completo con lo sha1, la prova di ripresa come `notte_prova.py` per ogni strumento nuovo)*.
+- **Q-A4.** Ogni MISURA nuova si prova prima su un **CASO NOTO costruito a mano** *(come `eebb2f39`)* e dichiara il suo **DOMINIO DI VALIDITA'** *(es. un periodo su una finestra di almeno `3` periodi, con l'incertezza: la lezione dell'errore n.`182`)*.
+- **Q-A5.** Ogni grandezza misurata porta la sua **INCERTEZZA** *(la barra, o l'ordine dell'errore numerico e della dipendenza dalla scatola)*.
+- **Q-A6.** Le previsioni e le soglie **PRIMA** dei risultati; le correzioni dopo, **solo dichiarate post-hoc**.
+
+**LE PRESTAZIONI**
+- **Q-P1.** Ogni strumento o legge nuova dichiara il suo **COSTO MISURATO** *(s per tick, memoria, disco)* **PRIMA dell'adozione**, contro il motore di oggi sullo stesso stato.
+- **Q-P2.** Un aumento del costo per tick **oltre il `10%`** del motore di riferimento **richiede una decisione di Luca**, coi numeri.
+- **Q-P3.** Prima di ottimizzare, **il PROFILO**; le stime di guadagno scritte prima e confrontate dopo.
+- **Q-P4.** Le prestazioni si misurano **COME SI LAVORA**: a macchina ferma E col carico vero, e come **PRODUZIONE** *(tick totali all'ora)*.
+- **Q-P5.** Il disco e l'I/O: gli stati su E: ogni `250` tick con lo sha1; le mappe a intervalli dichiarati con lo spazio stimato; **niente file grandi nel repo senza una ragione scritta.**
+- **Q-P6.** Ogni progetto nuovo *(la mitosi per prima)* dichiara la **COMPLESSITA'** delle sue operazioni *(per nodo, per nascita, globale)* e come resta compatibile coi cicli compilati *(numba)* e coi buffer del nucleo.
+
 ## LA REGOLA DELLA SCATOLA *(R-SCATOLA; Luca `2026-11-15` `12:01`, da ora per sempre)*
 
 - ### **R-SCATOLA-1:** **la scatola deve essere ALMENO `3` VOLTE l'oggetto piu' grande che contiene, compresa la sua deformazione del vuoto:** **il raggio dell'oggetto `R_ogg` e' il raggio oltre il quale `|phi - phi0|` medio per anello scende sotto il `2%` del suo massimo;** **la distanza dal centro al lato piu' vicino del toro `>= 3 R_ogg`, e il bordo** *(`R_A`)* **che comincia oltre `2 R_ogg`.**

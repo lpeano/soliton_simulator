@@ -4,6 +4,8 @@
 > **Questo documento salva TUTTO il filo di questi giorni** *(decisione di Luca, `09:20`)*: cosa e' stato trovato, cosa e' stato corretto, le domande aperte, i test da fare *(con le previsioni gia' scritte)*, lo stato delle corse e come riprenderle, e il resto del repo in sospeso *(parte `7`)*.
 > **Il testo delle parti `1`-`6` e' del guardiano.** Claude Code lo ha portato qui **controllando ogni numero contro il referto citato**: **un numero che non torna NON e' stato cambiato** -- accanto c'e' *«il referto dice ...»*; **uno senza fonte** ha accanto *«la fonte: non trovata»*. La carta: `doc/TASK_HISTORY/2026-11-17_sospeso_filo.md` *(`74579055`)*.
 
+> **Il MANDATO UNICO di Luca delle `09:49`** *(che sostituisce quello delle `09:20`)* **riprende queste parti come A** *(A1-A5 = parti `1`-`3`, `5`, `6`)* **e B** *(B1-B6 = parte `7`)*; **B4, le considerazioni delle `11:47`, resta SENZA TESTO** *(Q-A1 della ROTTA, R-QUALITA')*. La carta: `doc/TASK_HISTORY/2026-11-17_mitosi_primo_passo.md`.
+
 ## LE SEGNALAZIONI DEL CONTROLLO *(i numeri e le frasi che non tornano o non hanno fonte; NESSUNA cambia una previsione da confermata a fallita)*
 
 1. **A, B2-pi:** la partenza «`35`» e' la `d` nominale; **la misurata e' `37.048`**; la fascia `39.89`-`42.42` vale **da `k 8000`**; «i minimi e i massimi salgono» e' detto **da due cicli**.
