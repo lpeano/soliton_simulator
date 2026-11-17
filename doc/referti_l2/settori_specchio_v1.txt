@@ -1,0 +1,15 @@
+==================================================================================================================================
+A4: I SEI SETTORI E LO SPECCHIO (Luca 2026-11-17 16:38)
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### il centro: il nodo p0 = (113, 107) (il baricentro arrotondato); gli archi per settore [13095, 13041, 13095, 13041, 12933, 13041]; i pari merito 486
+    lo specchio a 30 gradi (la mappa per il nodo p0, lo scarto 5.7e-14): gli archi nel settore sbagliato o col pari merito non conservato: 414 su 78732
+    l'inversione (la mappa per il nodo p0, lo scarto 1.4e-14): gli archi nel settore sbagliato o col pari merito non conservato: 522 su 78732
+----------------------------------------------------------------------------------------------------------------------------------
+### il centro: il baricentro NON arrotondato (112.536, 106.692): DEVE FALLIRE; gli archi per settore [13203, 13122, 13122, 13041, 13122, 13122]; i pari merito 0
+    lo specchio a 30 gradi (la mappa per il nodo p0, lo scarto 5.7e-14): gli archi nel settore sbagliato o col pari merito non conservato: 270 su 78732
+    l'inversione (la mappa per il nodo p0, lo scarto 1.4e-14): gli archi nel settore sbagliato o col pari merito non conservato: 864 su 78732
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: col centro sul nodo dello specchio: settori e pari merito equivarianti (0 sbagliati) per lo specchio e l'inversione ### FALLISCE
+  DEVE: DEVE FALLIRE: col centro fuori dal nodo dello specchio l'equivarianza si rompe                                 PASSA
+==================================================================================================================================

@@ -4,7 +4,7 @@ r"""**A4: I SEI SETTORI E LO SPECCHIO** *(Luca `2026-11-17` `16:38`; la carta `d
     E:\python\py3132\python.exe doc/referti_l2/settori_specchio.py > doc/referti_l2/settori_specchio.txt
 
 **I settori:** `6` da `60` gradi attorno a un CENTRO, **i bordi sulle direzioni del reticolo** *(`0, 60, 120, ...` gradi: `A1` e le sue rotazioni)*; **un arco appartiene al settore del suo punto medio**; **un arco col punto medio SUL bordo** *(entro `1e-9` gradi)* **o nel centro: PARI MERITO, nessuna nascita.**
-**La prova** *(la mappa dei nodi e degli archi di `specchio_carta.py`)*: **lo specchio a `30` gradi per il centro** *(`theta -> 60 - theta`: il settore `s` va in `-s mod 6`)* **e l'inversione** *(`theta -> theta + 180`: `s -> s + 3 mod 6`)* **mandano OGNI arco nel settore immagine, e i pari merito in pari merito.** **Il caso che DEVE fallire:** il centro NON su un nodo *(il baricentro del mattone, non arrotondato)*: lo specchio del reticolo non passa per lui, e l'equivarianza si rompe.
+**Il dominio** *(v2, POST-HOC dichiarato dopo la v1, `settori_specchio_v1.txt`: tutti gli archi sbagliati stavano oltre `80.5` nodi)*: **il disco INSCRITTO nel toro** *(`L sqrt(3) / 4`)*. **La prova** *(la mappa dei nodi e degli archi di `specchio_carta.py`)*: **lo specchio a `30` gradi per il centro** *(`theta -> 60 - theta`: il settore `s` va in `-s mod 6`)* **e l'inversione** *(`theta -> theta + 180`: `s -> s + 3 mod 6`)* **mandano OGNI arco nel settore immagine, e i pari merito in pari merito.** **Il caso che DEVE fallire:** il centro NON su un nodo *(il baricentro del mattone, non arrotondato)*: lo specchio del reticolo non passa per lui, e l'equivarianza si rompe.
 """
 import math
 import os
@@ -34,7 +34,7 @@ def settori(m1, m2, ii, jj, L, centro):
     s = np.floor(th / 60.0).astype(int) % 6
     resto = th - 60.0 * np.floor(th / 60.0)
     pari = (r < 1e-9) | (np.minimum(resto, 60.0 - resto) < TOLL)
-    return np.where(pari, -1, s)
+    return np.where(pari, -1, s), r
 
 
 def main():
@@ -64,7 +64,9 @@ def main():
     ang = math.atan2(d30[1], d30[0])
     esiti = []
     for nome_c, centro in (("il nodo p0 = %s (il baricentro arrotondato)" % (p0,), (float(p0[0]), float(p0[1]))), ("il baricentro NON arrotondato (%.3f, %.3f): DEVE FALLIRE" % cb, (float(cb[0]), float(cb[1])))):
-        s = settori(m1, m2, ii, jj, L, centro)
+        s, r = settori(m1, m2, ii, jj, L, centro)
+        Rin = L * math.sqrt(3.0) / 4.0
+        dentro = r <= Rin           # ### (v2, POST-HOC dichiarato): il dominio dei settori e' il disco INSCRITTO nel toro (la distanza al lato del rombo); oltre, l'immagine piu' vicina e' ambigua
         print("-" * 130)
         print("### il centro: %s; gli archi per settore %s; i pari merito %d" % (nome_c, [int(np.sum(s == q)) for q in range(6)], int(np.sum(s < 0))))
         risultati = []
@@ -79,8 +81,10 @@ def main():
                 sig = ((qi[:, 0].astype(int) + p0[0]) % L) * L + (qi[:, 1].astype(int) + p0[1]) % L
             ap, _rov = SPC.mappa_archi(ii, jj, sig)
             atteso = np.where(s < 0, -1, np.vectorize(f)(np.maximum(s, 0)))
-            sbagliati = int(np.sum(s[ap] != atteso))
-            print("    %s (la mappa per il nodo p0, lo scarto %.1e): gli archi nel settore sbagliato o col pari merito non conservato: %d su %d" % (nome_m, scarto, sbagliati, len(ap)))
+            male = s[ap] != atteso
+            sbagliati = int(np.sum(male & dentro))
+            print("    %s (la mappa per il nodo p0, lo scarto %.1e): gli archi nel settore sbagliato o col pari merito non conservato: ENTRO il disco inscritto (%.2f nodi) %d su %d; FUORI %d su %d (il piu' vicino a %.2f nodi)" % (
+                nome_m, scarto, Rin, sbagliati, int(dentro.sum()), int(np.sum(male & ~dentro)), int(np.sum(~dentro)), float(r[male].min()) if male.any() else float("nan")))
             risultati.append(sbagliati)
         if centro == (float(p0[0]), float(p0[1])):
             esiti.append(("col centro sul nodo dello specchio: settori e pari merito equivarianti (0 sbagliati) per lo specchio e l'inversione", all(x == 0 for x in risultati)))
