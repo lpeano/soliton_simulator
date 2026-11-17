@@ -1,0 +1,46 @@
+[TIMBRO] _conto_del_vuoto.py  sha1-BYTE c3d9c303  committato e pulito
+[TIMBRO] divisione_vuoto_F3.py  sha1-BYTE b9acad60  committato e pulito
+==================================================================================================================================
+LA REGOLA DEL VUOTO ALLA NASCITA, RIMISURATA SUL VUOTO F3 (Luca 2026-11-17 13:16, parte 3); le regole: v1 e v4-F3 (la fase: una scelta mia, dichiarata)
+==================================================================================================================================
+### (K) IL CASO NOTO: il vuoto UNIFORME stato_K(24), col NUCLEO DI OGGI: le cinque regole di _divisione_vuoto.phi_regola col conto di _conto_del_vuoto (v5 compresa: reale e densa, su L 24 si puo')
+    (accanto il referto di f7ee87a9, divisione_vuoto_rigirato.txt: v1 -8.548213678, v4 -0.300804079 -- il nucleo di ALLORA: S1 e lo zero simmetrico sono entrati dopo, 00821633 e 7c181cc4)
+    OGGI v1: Delta H_tot -8.548213678e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame +3.637979e-12 | V 3456.000000 -> 3456.000000
+    OGGI v2: Delta H_tot +1.878474403e+01 = materia -6.480149e-02 + vuoto +1.884956e+01 + legame -1.040809e-05 | V 3456.000000 -> 3462.000000
+    OGGI v3: Delta H_tot -6.479340335e-02 = materia -6.480149e-02 + vuoto +0.000000e+00 + legame +8.084156e-06 | V 3456.000000 -> 3456.000000
+    OGGI v4: Delta H_tot -3.099018648e-01 = materia -6.480149e-02 + vuoto -2.451049e-01 + legame +4.564146e-06 | V 3456.000000 -> 3456.000000
+    OGGI v5: Delta H_tot -2.423431548e-01 = materia -6.480149e-02 + vuoto -1.775461e-01 + legame +4.383983e-06 | V 3456.000000 -> 3456.000000
+    v1     Delta H_tot -8.548213678e+00 = materia -6.480149e-02 + vuoto -8.483412e+00 + legame +3.637979e-12 | V 3.456000000e+03 -> 3.456000000e+03 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+    v4-F3  Delta H_tot -3.099018648e-01 = materia -6.480149e-02 + vuoto -2.451049e-01 + legame +4.564146e-06 | V 3.456000000e+03 -> 3.456000000e+03 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+### la scena S162: L 162, 26244 nodi, 78732 archi; l'ordine degli archi = _massa_nei_difetti.toro (asserito)
+### il baricentro della materia del mattone (112.536, 106.692)
+----------------------------------------------------------------------------------------------------------------------------------
+### (a) il vuoto F3 puro (psi = 0); la traslazione (0, 0)
+    il padre i: |somma di phi sulle sue 6 estremita'| = 0.000e+00, relativa a sqrt(6 somma |phi|^2) 0.000e+00
+    ### D7 SU phi E' INDEFINITA QUI: v1 mette sulle estremita' nuove chiv/|chiv| = 0/0 (sul vuoto F3 la somma delle estremita' di un nodo e' nulla: un flusso). v1 e v4-F3 NON SI MISURANO.
+----------------------------------------------------------------------------------------------------------------------------------
+### (b) il mattone, l'arco all'anello 13.5 (il nodo (126, 107), il punto medio a 13.81 nodi dal baricentro); la traslazione (-45, -26)
+    il padre i: |somma di phi sulle sue 6 estremita'| = 5.526e-01, relativa a sqrt(6 somma |phi|^2) 1.090e-01
+    N_S 1.539203937e+01 (la norma del vuoto di S prima)
+    v1     Delta H_tot -9.059589141e+02 = materia -9.163192e+02 + vuoto +1.036026e+01 + legame +6.984919e-10 | V 1.532532547e+05 -> 1.532532547e+05 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+    v4-F3  Delta H_tot -8.980333911e+02 = materia -9.163192e+02 + vuoto +1.828611e+01 + legame -3.261273e-04 | V 1.532532547e+05 -> 1.532532547e+05 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+----------------------------------------------------------------------------------------------------------------------------------
+### (c) il mattone, l'arco all'anello 60.0 (il nodo (10, 107), il punto medio a 59.81 nodi dal baricentro); la traslazione (71, -26)
+    il padre i: |somma di phi sulle sue 6 estremita'| = 5.681e-02, relativa a sqrt(6 somma |phi|^2) 9.489e-03
+    N_S 2.400724132e+01 (la norma del vuoto di S prima)
+    v1     Delta H_tot +1.725844160e+01 = materia -2.696040e-03 + vuoto +1.726114e+01 + legame -9.313226e-10 | V 1.532532547e+05 -> 1.532532547e+05 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+    v4-F3  Delta H_tot +2.611233508e+01 = materia -2.696040e-03 + vuoto +2.611503e+01 + legame -1.105946e-09 | V 1.532532547e+05 -> 1.532532547e+05 (relativa 0.0e+00) | |S| 30, cambiate FUORI da S 0
+----------------------------------------------------------------------------------------------------------------------------------
+### LA TABELLA (Delta H_tot)
+    (a)  v1, v4-F3  INDEFINITA (D7 su phi: 0/0)
+    (b)  v1         -9.059589e+02
+    (b)  v4-F3      -8.980334e+02
+    (c)  v1         +1.725844e+01
+    (c)  v4-F3      +2.611234e+01
+  DEVE: K. v1 ridà v1 di OGGI al bit                                                                                   PASSA
+  DEVE: K. v4-F3 ridà v4 di OGGI al bit                                                                                PASSA
+  DEVE: (b) v1: locale (nessuna estremita' cambiata fuori da S) e V conservata entro 1e-12                             PASSA
+  DEVE: (b) v4-F3: locale (nessuna estremita' cambiata fuori da S) e V conservata entro 1e-12                          PASSA
+  DEVE: (c) v1: locale (nessuna estremita' cambiata fuori da S) e V conservata entro 1e-12                             PASSA
+  DEVE: (c) v4-F3: locale (nessuna estremita' cambiata fuori da S) e V conservata entro 1e-12                          PASSA
+==================================================================================================================================
