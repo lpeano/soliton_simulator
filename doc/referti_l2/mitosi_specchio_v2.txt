@@ -1,0 +1,22 @@
+[TIMBRO] mitosi_specchio_v2.py  sha1-BYTE b21add57  committato e pulito
+==================================================================================================================================
+P5 DELLA REGOLA INTERA NELLA CORSA, CON L'ENERGIA DELLA CORSA (Luca 2026-11-20 16:37, 17:08; la carta sez. 10.3, 11): 200 archi in 5 parti
+==================================================================================================================================
+### il caso noto: l'energia dello stato specchiato contro quella dello stato, il massimo sulle parti 1.13e-16 (H 8.26864303334007226e+06)
+### STELLA: lo stesso lato su 200 archi su 200; gli scarti massimi psi 3.8e-16, phi 2.0e-16, geo 0.0e+00, A 2.2e-16, E 5.5e-16, H 2.3e-16
+    l'arco diviso conservato: 132 archi, lo stesso lato 132, psi 3.8e-16 phi 2.0e-16 geo 0.0e+00 A 0.0e+00 E 5.5e-16 H 2.3e-16 (sui 132 con lo stesso lato)
+    l'arco diviso ROVESCIATO: 68 archi, lo stesso lato 68, psi 2.6e-16 phi 1.9e-16 geo 0.0e+00 A 2.2e-16 E 3.9e-16 H 2.3e-16 (sui 68 con lo stesso lato)
+    l'arco girato conservato: 132 archi, lo stesso lato 132, psi 3.8e-16 phi 1.9e-16 geo 0.0e+00 A 2.2e-16 E 5.5e-16 H 2.3e-16 (sui 132 con lo stesso lato)
+    l'arco girato ROVESCIATO: 68 archi, lo stesso lato 68, psi 2.6e-16 phi 2.0e-16 geo 0.0e+00 A 0.0e+00 E 5.1e-16 H 2.3e-16 (sui 68 con lo stesso lato)
+### VERSO: lo stesso lato su 174 archi su 200; gli scarti massimi psi 9.7e-02, phi 7.4e-01, geo 1.7e+00, A 2.2e-16, E 4.6e-04, H 7.0e-07
+    l'arco diviso conservato: 132 archi, lo stesso lato 106, psi 9.7e-02 phi 7.4e-01 geo 1.7e+00 A 0.0e+00 E 4.6e-04 H 7.0e-07 (sui 106 con lo stesso lato)
+    l'arco diviso ROVESCIATO: 68 archi, lo stesso lato 68, psi 1.4e-16 phi 1.3e-16 geo 0.0e+00 A 2.2e-16 E 3.9e-16 H 2.3e-16 (sui 68 con lo stesso lato)
+    l'arco girato conservato: 127 archi, lo stesso lato 116, psi 2.5e-16 phi 1.8e-16 geo 0.0e+00 A 2.2e-16 E 5.7e-16 H 2.3e-16 (sui 116 con lo stesso lato)
+    l'arco girato ROVESCIATO: 73 archi, lo stesso lato 58, psi 9.7e-02 phi 7.4e-01 geo 1.7e+00 A 0.0e+00 E 4.6e-04 H 7.0e-07 (sui 58 con lo stesso lato)
+### lo scarto fra il migliore e il secondo (stella): la mediana 2.69e-07 |H|, il minimo 4.64e-11
+### il tempo delle parti: ['2559', '2559', '2451', '2447', '2558'] s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: H dello stato specchiato = H entro 1e-12 relativo                                                  PASSA
+  DEVE: P5: la regola intera simmetrica (lo stesso lato; psi, phi, versori, A entro 1e-14; E entro 1e-10; H entro 1e-12) PASSA
+  DEVE: DEVE FALLIRE: la regola col flip col VERSO (un lato diverso o uno scarto sopra 1e-6)                             PASSA
+==================================================================================================================================
