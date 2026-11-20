@@ -1,0 +1,50 @@
+[TIMBRO] mitosi_corsa.py  sha1-BYTE d7dd926b  committato e pulito
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+LA REGOLA INTERA NELLA CORSA, I CASI NOTI (Luca 2026-11-20 16:37, 17:03; la carta sez. 10.3): una nascita FORZATA su C2 a k 3000
+==================================================================================================================================
+### K0: l'energia della corsa 8.26864303334007226e+06; con un motore costruito sugli array 8.26864303334007226e+06: AL BIT
+### V-0: i versori di oggi contro le direzioni dei vettori d'arco del campo (+ in ii, - in jj, z = 0): lo scarto massimo 3.33e-16 (1.5 ulp)
+### l'arco 51106 (17035 -> 17036), il primo nell'ordine di scatto; k 16849, l 17222, n 34596
+    H prima 8.2686430333e+06; la sola nascita 8.2686331692e+06 (DH -9.864127e+00)
+    il flip 0 (17035, 16849): H 8.2686295456e+06 (DH dalla nascita -3.623650e+00)
+    il flip 1 (17036, 16849): H 8.2686357137e+06 (DH dalla nascita +2.544520e+00)
+    il flip 2 (17036, 17222): H 8.2686319732e+06 (DH dalla nascita -1.196026e+00)
+    il flip 3 (17035, 17222): H 8.2686261202e+06 (DH dalla nascita -7.048971e+00)   <- SCELTO
+    lo scarto fra il migliore e il secondo 4.143e-07 |H|; il tempo: ['2.0', '2.0', '1.9', '2.0', '1.9'] s (la regola intera 9.7 s)
+### V-a: |geo(a->b) + geo(b->a)| sugli archi nuovi: ['0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00']
+### V-b: i versori nati contro le direzioni del punto medio (i vettori d'arco nuovi): lo scarto massimo 3.33e-16 (1.5 ulp)
+### F3: Eulero True, nessun arco doppio True, ogni arco in due triangoli True, i gradi [5, 6, 7]; i segni delle placchette coerenti True
+### P1: la materia 9.950108931446704e+05 -> 9.950108931446704e+05 (0.0e+00); il vuoto 2.031985042452542e+05 -> 2.031985042452542e+05 (0.0e+00)
+    DEVE FALLIRE: senza il fattore di stella: M 3.3e-04, V 4.3e-06
+### P3: il residuo di Gauss prima 3.104e-11; dopo la nascita (Gauss vero) 4.263e-15; la media tolta dal bersaglio 3.2e-19; DEVE FALLIRE senza Gauss 5.384e+00
+### P9: nel motore vero (in 0.2 s): fuori dalla stella AL BIT True, i versori True, U True; cs del nodo nuovo 0.14986523508348815; l'energia della corsa riletta 8.26862612024202757e+06 contro il candidato 8.26862612024202757e+06: 0.0e+00 |H|
+    E_persa di questa nascita +1.691310e+01; Theta 103791 archi; le posizioni del nodo nuovo (91.0000, 109.5000)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K0: il conto di un motore costruito sugli array = il conto della corsa AL BIT                                    PASSA
+  DEVE: V-0: i versori di oggi = le direzioni dei vettori d'arco entro 4 ulp (il riferimento di V-b)                     PASSA
+  DEVE: V-a: versori opposti sugli archi nuovi (nascita entro 4 ulp, flip AL BIT)                                        PASSA
+  DEVE: V-b: la nascita ridà la direzione del punto medio entro 4 ulp                                                    PASSA
+  DEVE: F3: Eulero, nessun doppio, due triangoli per arco, placchette coerenti                                           PASSA
+  DEVE: P1: le norme M e V entro 1e-12 relativo                                                                          PASSA
+  DEVE: DEVE FALLIRE: senza il fattore di stella le norme escono da 1e-12                                                PASSA
+  DEVE: P3: il residuo dopo la nascita sotto 10 volte quello di prima                                                    PASSA
+  DEVE: DEVE FALLIRE: gli archi nuovi con E = 0 senza Gauss: sopra 10 volte                                              PASSA
+  DEVE: P9: l'energia riletta dal motore vero = H(prima) + DH entro 1e-12 |H|                                            PASSA
+  DEVE: lo stato nel motore vero: fuori dalla stella AL BIT, i versori, U                                                PASSA
+  DEVE: Theta e le posizioni seguono il grafo                                                                            PASSA
+==================================================================================================================================
