@@ -428,3 +428,10 @@
 
 - **P-Z1.** La radice esiste su almeno il `95%` dei `2929` archi. **P-Z2.** `alpha*` strettamente dentro `(0, 1)` sulla maggior parte. **P-Z3.** Alla radice deterministica al bit e simmetrica allo specchio. **P-Z4.** Nelle `20` nascite in fila `|H(dopo) - H(prima)| / |H|` sotto `1e-10`. **P-Z5.** Una nascita costa meno di `10` tick.
 - **Le mie:** P-Z1 non lo so *(serve `DH(0) > 0`)*; P-Z2 vera se la radice c'e'; **P-Z3 deterministica si', simmetrica solo sugli archi a verso conservato**; P-Z4 vera; P-Z5 qui solo in parte.
+
+### 16.4 LE AGGIUNTE DI LUCA DELLE `10:41` E `10:47`: LA SPINTA, LA SATURAZIONE, LA MATERIA E LA METRICA *(il testo intero nella carta del mandato, sez. `6`)*
+
+- **La domanda:** la crescita attorno alla massa si SATURA *(IPOTESI G)* o NO *(IPOTESI E)*: **alla pari, la lettura dopo i numeri.** **«Spinto in la'» = la distanza IN PASSI lungo il grafo**; lo strumento `doc/referti_l2/distanza_passi.py` *(D1-D3, E1)*, in MITOSI e C2-EXT ogni `250` tick.
+- **La nota del guardiano:** **se tutto si espande insieme l'espansione non si vede; in un'espansione vera si conservano i conteggi** *(norma, carica)*, **non l'energia; l'energia nulla e' una scelta da metrica statica.** **D-PRINCIPIO** *(energia nulla o covariante)* **e' di Luca, dopo i numeri; il mandato prosegue con l'energia nulla.**
+- **La covariante, solo misurata:** le estremita' di `n` = la media delle estremita' di `i` e di `j` nella stessa direzione; un fattore uniforme sulla stella per `psi` e uno per `phi`; nessun padre.
+- **Le previsioni:** P-S1 *(i passi all'anello `40` crescono in MITOSI, costanti in C2-EXT)*, P-S2 *(la crescita rallenta)*, P-S3 *(le nascite restano nel guscio)*, P-E1 *(il mattone torna alla sua larghezza in passi)*, P-E2 *(`DH_cov` negativo su piu' della meta')*.
