@@ -175,3 +175,48 @@
 1. questa carta + la `18.7` + la relazione: commit, push;
 2. ramo `mitosi`: `mitosi_corsa.py` + la prova P6.0: commit, push; la suite; la prova; il referto: commit, push;
 3. **FERMO per Luca sul versore `geo_n`** *(9.3)*, **con P6.0 nel messaggio.**
+
+## 10. L'AGGIUNTA DI LUCA DELLE `17:03`: IL VERSORE, E SI PROSEGUE *(scritta PRIMA del codice)*
+
+### 10.1 LA DECISIONE *(di Luca, copiata)*
+
+- **D-VERSORE = V3.** **Alla NASCITA (V1, di stella):** il versore di ogni estremita' nuova = **la media normalizzata dei due versori accanto**, con gli stessi indici della covariante di stella *(`n -> k` da `i -> k` e `j -> k`; `k -> n` da `k -> i` e `k -> j`; `n -> i` = `j -> i`; `n -> j` = `i -> j`)*. **Al FLIP (V3):** l'arco `n - m` coi versori OPPOSTI per costruzione: `v` = la differenza normalizzata delle due medie *(quella di `n` verso `x`, `y` meno quella di `m` verso `x`, `y`)*; `geo(n -> m) = +v`, `geo(m -> n) = -v` *(simmetrico in `n <-> m`)*.
+- **I casi noti:** ogni arco nuovo `geo(a -> b) = - geo(b -> a)` *(al bit, o entro l'arrotondamento della normalizzazione: dichiarato)*; **sul reticolo regolare la nascita ridà la geometria del punto medio** *(al bit o entro l'arrotondamento)*; **P5 con l'energia della corsa comprende i versori.** **P6.1: il profilo, nessuna soglia.**
+
+### 10.2 LE PREMESSE DAL CODICE *(lette sul ramo `mitosi`)*
+
+- ### **IL MOTORE AMMETTE UNA SOLA CRESCITA PER TICK** *(`Motore.chiudi_tick`: `quante <= 1`)*: **la nascita e il flip vanno in UNA chiamata di `Motore.cresci`**: tolti l'arco `a` e l'arco `x - y`, nati `n -> i, j, k, l, m`. **E' la stessa cosa dei due passi** *(l'arco `x - y` e' un arco VECCHIO: i sopravvissuti restano nell'ordine, i nuovi in coda nello stesso ordine)*: **si CONTROLLA** *(`inc.nodo` dopo la crescita = quello dei due passi)*. **`Motore.cresci` vuole un tick aperto:** la nascita sta fra `apri_tick` e `chiudi_tick` **fuori dal palindromo** *(`mot.tick` conta allora anche le nascite: lo legge solo `checkpoint`, che la corsa non usa)*.
+- **`st["psi"]` per nodo e' TUTTO ZERO nello stato di C2** *(nessuno lo scrive; `passo.py` ne legge solo la lunghezza)*: **il nodo nuovo lo prende a zero, controllato che sia zero ovunque.** `rho`, `Lambda`, `h_int` del nodo nuovo: **dalle sue estremita'** *(le formule di `densita_materia`, `densita_vuoto`, `elicita`)*; poi il motore li riscrive sui nodi della stella.
+- **L'energia della corsa NON legge il lapse** *(`conti_per_nodo` -> `termini_di_h`: i termini NON pesati; il lapse entra nei pesi del passo, non nell'energia registrata)*: **«con U e il lapse veri» vuol dire qui: `U` dal campo nuovo; `cs` del nodo nuovo dalla legge per il tick dopo.**
+- **IL CONTO DI OGNI CANDIDATO:** **cinque stati** *(la sola nascita, e la nascita col flip su ognuno dei quattro lati)*, **ciascuno col SUO campo** *(`CampoGenerico.cresci` su una copia: `A` di B3 alla nascita, al flip `A(n -> m)` = **la media dei due cammini** `n -> x -> m` e `n -> y -> m`, **che e' ESATTAMENTE il flusso del quadrilatero a meta'** *(in aritmetica esatta: dichiarato, scritto in forma simmetrica)*; `E` degli archi nuovi a `0`, poi **Gauss vero** *(la correzione di norma minima `E + D^T x`, come `nascita_dentro_fuori.gauss`)*), **col SUO motore** *(un `Motore` costruito sul grafo del candidato)* **e la SUA energia** *(`conti_per_nodo` + `K + V`)*. **La scelta (A) con la guardia `1e-12 |H|`. Poi lo stato scelto si scrive nel motore VERO, e la sua energia si rilegge col conto della corsa: e' P9 alla nascita.**
+- **Il residuo del bersaglio di Gauss** *(`b = e (rho - media) - div E`)* **ha somma nulla in aritmetica esatta; si toglie la sua media** *(solo l'arrotondamento: stampato)* **prima della soluzione.**
+
+### 10.3 LE PROVE, LE SOGLIE *(fissate ORA)*, I CASI CHE DEVONO FALLIRE
+
+| | la prova | la soglia | DEVE FALLIRE |
+|---|---|---|---|
+| **V-a** | ogni arco nuovo: `geo(a -> b) = - geo(b -> a)` | alla nascita entro `4` ulp; al flip AL BIT | -- |
+| **V-b** | sul reticolo di C2 la nascita ridà la direzione del punto medio | entro `4` ulp | -- |
+| **F3** | i gradi, Eulero, nessun arco doppio, ogni arco in due triangoli, i segni delle placchette coerenti | tutti | -- |
+| **P1** | la norma della materia `M` e del vuoto `V`, totali | entro `1e-12` relativo | la nascita SENZA il fattore di stella |
+| **P3** | Gauss dopo la nascita | il residuo sotto `10` volte quello di prima | gli archi nuovi con `E = 0` senza Gauss |
+| **P9** | l'energia della corsa rilette sullo stato VERO dopo la nascita contro `H(prima) + DH` del candidato | entro `1e-12 |H|` | -- |
+| **P5** | la regola intera sull'arco e sull'arco specchiato, l'energia della corsa | lo stesso lato; `psi`, `phi`, versori, `A` entro `1e-14`; **`E` entro `1e-10`** *(la soglia di P5 della carta della mitosi: `E` viene da una soluzione GLOBALE)*; il caso noto: `H` dello stato specchiato contro `H` entro `1e-12` | la regola col flip col VERSO |
+| **P8** | la ripresa al bit dopo una nascita | ogni chiave, `A`, `E`, `cs_prec`, il grafo, `Theta`, le posizioni AL BIT | un byte cambiato |
+| **N** | una nascita FORZATA nel guscio e `20` tick dopo | il tick gira; `M` e `V` come in C2; Gauss sotto `10` volte | -- |
+| **P6.1** | il profilo della differenza per anello in passi | **nessuna soglia** *(dichiarato)* | -- |
+
+- **Lo specchio** *(P5)*: **l'azione sullo stato e' la PERMUTAZIONE** *(le estremita': `psi`, `phi`, i versori; gli archi: `A`, `E` col segno del verso; i vettori d'arco del campo RIFLESSI, perche' danno solo il verso delle placchette)*; **i versori NON si riflettono** *(la prova e' sulla regola, che non ha verso: l'energia e' invariante per questa azione, ed e' il caso noto)*. **Dichiarato.**
+- **Quante nascite in P5:** **la prima corsa** *(`caso`)* **stampa il costo di una nascita**; **il numero si fissa da quel costo, prima della corsa di P5, e si scrive nel commit** *(il primo `N` archi nell'ordine di scatto)*.
+
+### 10.4 LE PREVISIONI *(copiate PRIMA)*
+
+- **Le mie:** **V-a, V-b, F3 VERE**; **P1 VERA** *(il fattore di stella conserva la norma della stella)*; **P3 VERA**; **P9 VERA** *(gli stessi array e lo stesso codice: credo al bit)*; **P5 VERA** *(la scelta stessa; `E` entro `1e-12`)*; **il flip col verso CADE**; **N: il tick gira sul grafo cresciuto**; **P8 VERA**; **il costo di una nascita: alcuni tick** *(cinque ricostruzioni delle placchette e cinque fattorizzazioni)*.
+
+### 10.5 TODO *(un commit per pezzo)*
+
+1. questa carta: commit, push;
+2. ramo `mitosi`: `doc/referti_l2/mitosi_regola.py` *(la regola nella corsa e `caso`: V-a, V-b, F3, P1, P3, P9 e i casi che devono fallire, il costo)*: commit; la corsa; il referto;
+3. `specchio N` *(P5)*: commit; la corsa; il referto;
+4. il driver della corsa *(`mitosi_corsa.py corsa`: le nascite, le misure dopo la crescita, salva e riprendi col grafo)*, **N** e **P8**: commit; le corse; il referto;
+5. P6.1 e il costo *(Q-P1)*; **la stima di C2-EXT e di MITOSI**; ### **FERMO PER LUCA prima di lanciare.**
