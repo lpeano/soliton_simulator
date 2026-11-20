@@ -408,3 +408,23 @@
 ### 15.7 SOSPESO *(Luca `2026-11-17` `23:07`)*
 
 - ### **SOSPESO (Luca 23:07): la ripresa da `doc/SOSPESO_2026-11-17_MITOSI_INNESCO.md`.** Nessuna corsa aperta, il ramo `mitosi` resta com'e'.
+
+## 16. LA RIPRESA: LE NASCITE NEL GUSCIO A ENERGIA NULLA *(il mandato di Luca del `2026-11-20` `10:31`; la carta `doc/TASK_HISTORY/2026-11-20_nascita_energia_nulla.md`)*
+
+### 16.1 LE DECISIONI DI LUCA *(`10:31`)*
+
+- **La strada (i) della `15.6`:** lo spazio puo' nascere **NEL GUSCIO della materia**, dove scatta il contatore del lapse *(15.2: `10`-`22` nodi)*. **S1 del `2026-11-17`** *(il filtro della materia all'`1%`)* **e' TOLTA.**
+- ### **IL «VICINO MA FUORI» DEL `2026-11-17` E' SUPERATO.** **La ragione** *(di Luca)*: **il contatore scatta solo dove il tempo e' curvo** *(15.2: il ritmo netto crolla oltre `24` nodi)*, **e lo spazio in se' non costa** *(A3, 13.3: a norma fissata la nascita non ha un costo intrinseco)*. **Il vincolo che lo sostituisce e' l'ENERGIA NULLA, sotto.**
+- **La nascita e' A ENERGIA NULLA:** la regola della MATERIA sulle estremita' nuove si sceglie, nascita per nascita, perche' `DH` totale `= 0` *(con FA per il vuoto)*. **La compensazione di A3 resta SOLO come riserva** dove la materia e' trascurabile *(li' la famiglia non ha radice: sul vuoto puro `DH = +3.476` con FA, `regole_fase_F3.txt`)*.
+- **In vigore:** l'innesco (a), D-M1, D-M2, D-M4, D-M3 = FA, D-R4, D-R5, D-R1-D-R3 sospese, il bordo tolto, C2 braccio senza mitosi, il mattone su `L 186`; S2 e S4 del `21:00`.
+
+### 16.2 LA FAMIGLIA E LA RADICE *(del guardiano, su delega; il testo intero nella carta del mandato, sez. `1.2`-`1.4`)*
+
+- **`alpha` = la frazione della norma del padre che passa al nodo nuovo, in unita' di D7:** le estremita' del padre `i` divise per `sqrt(2/(2 - alpha))`, le `4` di `n` a `sqrt(alpha)` volte quelle di D7. **`alpha = 1` e' D7 al bit; `alpha = 0` e' «`psi` trasportata senza dividerla».** La norma conservata, locale, deterministica.
+- **La radice per bisezione a `53` passi fissi** *(la risoluzione del double: un numero di precisione, dichiarato)*.
+- ### ⚠ **La premessa:** **il padre di D7 e' il SORGENTE dell'arco: lo specchio a `30` gradi rovescia una direzione su tre, e su quegli archi la famiglia, come D7, non puo' essere simmetrica.** P5 si stampa separata.
+
+### 16.3 LE PREVISIONI *(copiate PRIMA delle misure)*
+
+- **P-Z1.** La radice esiste su almeno il `95%` dei `2929` archi. **P-Z2.** `alpha*` strettamente dentro `(0, 1)` sulla maggior parte. **P-Z3.** Alla radice deterministica al bit e simmetrica allo specchio. **P-Z4.** Nelle `20` nascite in fila `|H(dopo) - H(prima)| / |H|` sotto `1e-10`. **P-Z5.** Una nascita costa meno di `10` tick.
+- **Le mie:** P-Z1 non lo so *(serve `DH(0) > 0`)*; P-Z2 vera se la radice c'e'; **P-Z3 deterministica si', simmetrica solo sugli archi a verso conservato**; P-Z4 vera; P-Z5 qui solo in parte.
