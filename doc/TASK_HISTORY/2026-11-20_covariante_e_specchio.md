@@ -50,3 +50,10 @@
 1. questa carta: commit, push;
 2. lo script: commit, push; le `5` corse col registro;
 3. il referto, la sez. `17`: commit, push; **FERMO.**
+
+## 5. LA CORREZIONE DI LUCA DELLE `12:10` *(prima della misura di E2; la 1.4 sopra NON si riscrive: si annota)*
+
+- ### **IL CASO NOTO FISICO DELLA 1.4 E' MAL POSTO** *(l'errore `n.191` del guardiano)*: **la covariante RIPRISTINA la norma, e a norma fissata l'energia del vuoto non dipende dal numero dei nodi** *(A3, carta della mitosi `13.3`)*. **L'attesa NON e' `DH_cov = H / n`.**
+- **Il caso noto fisico diventa:** **sul vuoto F3 puro `DH_cov` vicino a `0`**, con un residuo atteso dalle estremita' nuove di `k` e `l` *(la media di due direzioni con fasi F3 diverse ne riduce l'ampiezza)*; **accanto, la sola parte dovuta a `k` e `l`:** la covariante con `k` e `l` presi da UNA direzione *(verso `i`, e accanto verso `j`)*. **Se quella parte spiega il residuo, il caso e' letto: POST-HOC, dichiarato.**
+- **Dove:** `covariante_e_famiglia.py` **e' IN USO dalle `5` corse** *(partite alle `12:07`)* **e non si tocca**: la riga del suo referto sul vuoto F3 *(«`DH_cov = H / n`», un DEVE)* **resta stampata, ed e' SUPERATA da questa correzione**: **il suo verdetto non conta.** **Il caso corretto: uno script NUOVO,** `doc/referti_l2/covariante_vuoto_F3.py`, col suo caso noto del codice *(la covariante ricomposta = `cov_grezza` al bit)*.
+- **Il caso noto del CODICE resta quello che deve passare** *(il campo uniforme al bit; `beta = 0` = FA al bit)*. **Nient'altro cambia.**
