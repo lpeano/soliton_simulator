@@ -84,3 +84,27 @@
 - **P-F2.** Il flip di stella e' simmetrico allo specchio su tutte le classi *(entro `1e-14`)*; il flip di C3 cade sui rovesciati.
 - **P-F3.** Su almeno il `90%` delle nascite il massimo e' unico *(il flip c'e')*.
 - **LE MIE:** **P-F1 VERA; P-F2 VERA** *(medie e un fattore uniforme: come la covariante di stella)*; **P-F3: NON misurata ora** *(7.2)*; **se misurata con la proposta, credo VERA** *(i quattro candidati hanno ampiezze diverse nel guscio)*.
+
+## 8. L'AGGIUNTA DI LUCA DELLE `14:53`: LA SCELTA DEL FLIP, E SI RIPARTE *(scritta PRIMA delle misure)*
+
+### 8.1 LE DECISIONI
+
+- **D-FLIP-AMPIEZZE:** il flip di stella *(`13:54`)* **ADOTTATO.** **D-COVSTELLA ADOTTATA** per `psi` e `phi`.
+- **D-FLIP-SCELTA (A):** fra i quattro lati `(i, k)`, `(k, j)`, `(j, l)`, `(l, i)` **si gira quello che lascia `H` PIU' BASSA dopo** *(il conto PIENO, `nascita_dentro_fuori.famiglie`, con le ampiezze di stella)*. **Il pari merito:** se il migliore e il secondo distano **meno di `1e-12 |H|`**, **NESSUN flip** in quella nascita.
+- ### **`1e-12 |H|` E' UNA GUARDIA CONTRO L'ARROTONDAMENTO, NON UNA MANOPOLA FISICA** *(`A1`)*: **circa `3700` volte il `2.7e-16` del conto** *(il conto a mano contro il pieno, `covariante_di_stella.txt`)*. **Dichiarata cosi'.**
+- **`E_persa = - somma dei DH`, nascita E flip.** **L'errore `n.193` del guardiano:** in P-F2 la classe giusta era il verso dell'arco GIRATO *(la lettura post-hoc della `18.4` e' corretta)*.
+- **I TODO `3` e `4` del mandato delle `13:33` RIPARTONO.**
+
+### 8.2 LA MISURA SUL RAMO PRINCIPALE *(prima del codice sul ramo)*: lo script `doc/referti_l2/regola_intera.py`
+
+- **La regola intera sullo stato di C2 a `k 3000`** *(dichiarato)*: **la nascita di stella → i quattro flip di stella → la scelta (A)** *(il conto pieno su ognuno)* **col pari merito.**
+- **P-F3 sui `2929` archi:** quante nascite hanno il pari merito *(nessun flip)*; **la distribuzione dello scarto fra il migliore e il secondo in unita' di `|H|`**; quale lato vince; **`DH` della nascita, del flip e il totale** *(per `E_persa`)*.
+- **P5 sulla regola INTERA** *(i primi `200` archi: nascere, girare il flip SCELTO, specchiare, contro specchiare e fare la regola intera sull'arco specchiato; array per array, soglia `1e-14`; la classe e' quella dell'arco GIRATO, e accanto quella dell'arco diviso)*; **il caso che DEVE FALLIRE:** la regola intera col flip col VERSO *(scelto allo stesso modo, col conto pieno)*; **i pari merito:** lo specchio deve dare «nessun flip» su ENTRAMBI i lati.
+- **Due parti per P-F3 + un processo per P5 = `3` processi.** Il determinismo della regola intera si prova sul ramo *(P8, P9)*.
+
+### 8.3 LE PREVISIONI *(copiate PRIMA)*
+
+- **P-F3.** Su almeno il `90%` delle nascite il minimo e' unico *(il flip c'e')*.
+- **P-F4.** Lo scarto mediano fra il migliore e il secondo e' sopra `1e-8 |H|` *(la guardia scatta solo sulle simmetrie esatte)*.
+- **P-F5.** La regola intera e' simmetrica allo specchio su tutte le classi *(entro `1e-14`)*.
+- **LE MIE:** **P-F3 VERA** *(il `DH` del flip va da `-9.1` a `+7.2` sui quattro candidati, `18.4`: lontani fra loro)*; **P-F4 VERA** *(`|H| = 3.4e6`: `1e-8 |H| = 0.034`; i `DH` dei candidati differiscono di unita')*; **P-F5: VERA se la scelta e' equivariante** -- ### ⚠ **una premessa: il conto pieno sullo stato specchiato somma in un altro ordine** *(`H` specchiato contro `H`: `1.4e-16` relativo, `covariante_di_stella.txt`)*: **se due candidati distano meno della guardia la regola non gira, e se distano di piu' la guardia e' `3700` volte quell'errore: la scelta e' la stessa sui due lati.**
