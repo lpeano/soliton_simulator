@@ -1,0 +1,52 @@
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+UNA NASCITA FORZATA NELLA CORSA E 20 TICK DOPO; P6.1; IL COSTO (Luca 2026-11-20 16:37, 17:08; la carta sez. 10.3, 12)
+==================================================================================================================================
+    [nascita 1] k 3001, l'arco 51106 (FORZATA): i 17035 j 17036 k 16849 l 17222 n 34596 m 17221; DH nascita -1.095864e+01 flip -7.505769e+00 (lo scarto 4.15e-07 |H|); P9 0.0e+00; Gauss 5.4e-15; E_persa +1.846441e+01 (13.1 s)
+### prima della nascita (k 3001) i due bracci AL BIT: True
+### N: 20 tick dopo la nascita: la materia 3.5e-16, il vuoto 1.4e-16 (le variazioni relative massime); senza la nascita 2.3e-16 e 0.0e+00
+### N: Gauss: prima della nascita 3.12e-11; dopo la nascita 5.36e-15; nei 20 tick il massimo 1.31e-14 (senza la nascita 3.13e-11)
+### N: le misure della corsa sul grafo cresciuto: M 9.950108931447e+05, E 8.2686133105e+06, il raggio 12.5370, Min12.4 5.375202e+05, J45 + 3.0218e-01
+### Theta 103791 archi (il grafo 103791); le posizioni 34597 nodi; E_persa +1.846441e+01
+### P6.1 (nessuna soglia): dopo UN tick, nato contro non nato dallo stesso stato di k 3001; per anello in PASSI dal nodo nuovo 34596:
+      d   nodi    max |d psi|     max |d phi|     max |d E| prima del tick   max |d E| dopo
+       1      5    9.147e-01       7.482e-02       9.271e-02                  9.235e-02
+       2     11    2.106e-01       1.586e-02       2.096e-02                  2.096e-02
+       3     17    1.552e-05       1.669e-07       7.727e-03                  7.727e-03
+       4     23    2.118e-08       1.009e-10       4.362e-03                  4.362e-03
+       5     29    1.204e-08       3.672e-11       2.694e-03                  2.694e-03
+       6     35    7.691e-09       2.143e-11       1.865e-03                  1.865e-03
+       7     41    5.515e-09       9.525e-12       1.350e-03                  1.350e-03
+       8     47    4.226e-09       1.244e-11       1.027e-03                  1.027e-03
+       9     53    3.495e-09       4.813e-12       8.085e-04                  8.085e-04
+      10     59    2.788e-09       4.705e-12       6.476e-04                  6.476e-04
+      15     89    1.218e-09       5.981e-12       2.955e-04                  2.955e-04
+      20    119    6.326e-10       2.888e-12       1.710e-04                  1.710e-04
+      30    179    2.651e-10       2.315e-13       8.034e-05                  8.034e-05
+      40    239    9.107e-11       2.628e-13       4.785e-05                  4.785e-05
+      60    359    7.536e-13       1.110e-16       2.389e-05                  2.389e-05
+     124      4    9.147e-14       0.000e+00       4.799e-06                  4.799e-06
+    gli anelli con la differenza ZERO al bit in psi e phi: nessuno
+### IL COSTO: il tick senza la nascita (mediana di 20) 3.940 s; dopo la nascita 3.381 s (0.8582); la nascita 13.1 s (3.32 tick)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il tick prima della nascita: i due bracci AL BIT                                                                 PASSA
+  DEVE: N: M e V dopo la nascita come senza (entro 10 volte, o 1e-13)                                                    PASSA
+  DEVE: N: Gauss nei 20 tick dopo la nascita sotto 10 volte il residuo di prima                                          PASSA
+  DEVE: N: le misure della corsa girano sul grafo cresciuto                                                              PASSA
+  DEVE: Theta e le posizioni seguono il grafo                                                                            PASSA
+==================================================================================================================================

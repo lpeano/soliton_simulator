@@ -1,0 +1,28 @@
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+P8: LA RIPRESA AL BIT DOPO UNA NASCITA (la carta sez. 10.3): 10 tick di fila contro 5 + salva + riprendi + 5; la nascita forzata al primo tick
+==================================================================================================================================
+    [nascita 1] k 3001, l'arco 51106 (FORZATA): i 17035 j 17036 k 16849 l 17222 n 34596 m 17221; DH nascita -1.095864e+01 flip -7.505769e+00 (lo scarto 4.15e-07 |H|); P9 0.0e+00; Gauss 5.4e-15; E_persa +1.846441e+01 (14.8 s)
+    [nascita 1] k 3001, l'arco 51106 (FORZATA): i 17035 j 17036 k 16849 l 17222 n 34596 m 17221; DH nascita -1.095864e+01 flip -7.505769e+00 (lo scarto 4.15e-07 |H|); P9 0.0e+00; Gauss 5.4e-15; E_persa +1.846441e+01 (13.1 s)
+    [stato] k 3005: stato_03005.npz sha1 1929c422
+### P8: 10 tick di fila contro la ripresa: AL BIT su ogni chiave, A, E, cs_prec, il grafo, i versori, Theta, le posizioni, E_persa
+### DEVE FALLIRE: un byte cambiato (il byte 11765574): la ripresa RIFIUTA (lo sha1)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: P8: la ripresa dopo una nascita AL BIT                                                                           PASSA
+  DEVE: DEVE FALLIRE: un byte cambiato nello stato salvato: la ripresa rifiuta                                           PASSA
+==================================================================================================================================
