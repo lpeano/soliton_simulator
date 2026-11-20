@@ -48,11 +48,17 @@ def scrivi(percorso, ii, m1, m2, L):
     """### **Le istantanee `ii` in un `.npz` compresso** *(scritto in un temporaneo, poi rinominato)*: `(dimensione, sha1)`."""
     from solitone import toro as TO
     A1, A2 = TO.vettori()
+    assert all(len(i["rho"]) == len(m1) for i in ii), "mappe.scrivi: un'istantanea di un'altra taglia del grafo (un pezzo per taglia: B4, il ramo mitosi)"
+    q1, q2 = np.asarray(m1) - L // 2, np.asarray(m2) - L // 2
+    if np.all(q1 == np.rint(q1)) and np.all(q2 == np.rint(q2)):
+        q1, q2 = q1.astype(np.int16), q2.astype(np.int16)                  # ### gli indici del toro: come prima, al byte
+    else:
+        q1, q2 = q1.astype(np.float64), q2.astype(np.float64)              # ### B4: le posizioni dei nodi nati (punti medi) non sono intere
     os.makedirs(os.path.dirname(percorso), exist_ok=True)
     tmp = percorso + ".tmp.npz"
     np.savez_compressed(tmp, t=np.array([i["t"] for i in ii], dtype=np.int64), rho=np.stack([i["rho"] for i in ii]), Lambda=np.stack([i["Lambda"] for i in ii]),
                         centro=np.stack([i["centro"] for i in ii]), lam=np.array([i["lam"] for i in ii]),
-                        d1=(np.asarray(m1) - L // 2).astype(np.int16), d2=(np.asarray(m2) - L // 2).astype(np.int16), A1=A1, A2=A2, L=np.int64(L))
+                        d1=q1, d2=q2, A1=A1, A2=A2, L=np.int64(L))
     os.replace(tmp, percorso)
     return os.path.getsize(percorso), sha1(percorso)
 

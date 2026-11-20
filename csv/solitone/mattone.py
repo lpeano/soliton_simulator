@@ -86,6 +86,7 @@ def scena(corsa, t_stato):
     from solitone import bordo as BO
     from solitone import corsa_accensione as CA
     from solitone import protetto as P
+    from solitone import posizioni as PZ
     sol, vuoto, s = V.CORSE[CA.NOME]
     T_acc, _f = CA.CORSE[corsa]
     K = int(round(T_acc / s))
@@ -126,12 +127,13 @@ def scena(corsa, t_stato):
         g_e = BO.g_estremita(z, bor["c0"][0], bor["c0"][1], bor["R_A"], bor["g_max"])[0]
         Z = {"z": z, "st": st, "mot": mot, "par": z["par"], "n": n, "L": L, "nodo": nodo, "m1": v_ // L, "m2": v_ % L, "chiavi": chiavi, "stato": stato,
              "metti": metti, "phi_v": phi_v, "tab_c": tab_c, "omega": omega, "K": K, "s": s, "e_K": e_K, "g_e": g_e, "bordo": bor, "U0": U0,
-             "righe": np.argsort(nodo, kind="stable").reshape(n, 6), "x_st": x_st[0]}
+             "righe": PZ.righe(z["inc"]), "x_st": x_st[0]}
         try:
             with SF.forma(VC.FORMA), BE.conv(DC.ZERO):
                 yield Z
         finally:
-            metti()
+            if not Z.get("cresciuto"):
+                metti()                      # ### B4: dopo la crescita lo stato di partenza e' della taglia vecchia: la scena non si rimette
 
 
 def vuoto_fresco(Z, t):
