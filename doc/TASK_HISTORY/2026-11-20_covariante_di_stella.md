@@ -56,3 +56,31 @@
 2. lo script, commit; le `5` corse; il referto `doc/referti_l2/covariante_di_stella.txt`: commit, push; **se una condizione cade: FERMO**;
 3. sul ramo `mitosi`: il flip *(1.4)*, poi la regola completa e le prove; un commit per pezzo;
 4. la stima delle due corse, la sez. `18`: **FERMO per Luca.**
+
+## 7. L'AGGIUNTA DI LUCA DELLE `13:54`: IL FLIP DI STELLA *(scritta PRIMA delle misure)*
+
+### 7.1 LE DECISIONI
+
+- **Il segno di `E_persa`** *(`- somma dei DH`)* **e' quello giusto: l'errore `n.192` del guardiano era nel mandato. `E_persa` conta ANCHE il `DH` del flip.**
+- **IL FLIP DI STELLA** *(del guardiano, approvato da Luca)*: **i candidati** -- i quattro archi `(i, k)`, `(i, l)`, `(j, k)`, `(j, l)`; ciascuno `(x, y)` e' la diagonale del quadrilatero `n - x - m - y`, **`m` l'altro vicino comune di `x` e `y`**; il flip la sostituisce con `(n, m)`. **Le ampiezze:** `n -> m` = la media delle estremita' di `n` verso `x` e verso `y`; `m -> n` = la media di quelle di `m` verso `x` e verso `y`; **le estremita' dell'arco tolto spariscono**; un fattore UNIFORME sui quattro vertici `n, x, m, y` per `psi` e uno per `phi`. **Quale flip:** il massimo della grandezza della sez. `10.3`, calcolata con le ampiezze di stella; **il massimo condiviso → nessun flip.**
+
+### 7.2 ### **LA GRANDEZZA DELLA `10.3` NON E' UNIVOCA: LA PROPOSTA, E FERMO PRIMA DI USARLA**
+
+- **La `10.3`:** «la tensione del vuoto sull'arco che nasce dal flip, **la stessa grandezza della soglia**». **La soglia non e' mai stata decisa** *(la `10.6`: tre candidate, Q1, Q2, Q3, «FERMO per Luca»; e oggi l'innesco e' il contatore, sez. `15`)*. **«La tensione d'arco» della `10.6`, 4.2, e' una definizione MIA** *(il termine d'arco del vuoto, `T = Omega Re(conj(phi_coda) phi_testa)`)*, **e su un arco NUOVO ha due letture che danno ordini DIVERSI:** **(a) `T` col segno** *(sul vuoto F3 `T = -Omega |phi|^2`: il fondo, NEGATIVO; nel guscio sale verso `0`)*; **(b) Q1, `T` sopra il fondo dello stesso arco:** `T + Omega |phi_coda| |phi_testa|` *(`0` quando le due estremita' sono opposte come nel vuoto F3, positiva altrimenti)* -- **con moduli diversi sui quattro candidati, (a) e (b) non scelgono lo stesso flip.**
+- ### **LA PROPOSTA DEL GUARDIANO** *(Claude Code; NON usata)*: **(b), Q1 sull'arco nato `n - m`, con le ampiezze di stella DOPO il fattore** *(nulla nel vuoto F3, come voleva la `10.4`: una grandezza «che nel vuoto puro e' nulla»)*. **Il pari merito** *(il criterio numerico, dichiarato prima)*: **due candidati sono pari se `|Q1_a - Q1_b| <= 8 ulp` del massimo** *(`8 * eps * max|Q1|`: il fattore della stella somma in ordini diversi, e due candidati specchio differiscono negli ultimi bit; l'uguaglianza ESATTA dei double non riconoscerebbe il pari merito di uno stato simmetrico)*. **`8` e' un NUMERO** *(`A1`)*: **da decidere con Luca.**
+- ### **FERMO PRIMA DI USARLA** *(il mandato)*. **Quindi P5 sulla regola INTERA e P-F3** *(il massimo unico)* **NON si misurano ora.**
+
+### 7.3 CIO' CHE SI MISURA ORA *(non dipende dalla scelta)*: lo script `doc/referti_l2/flip_di_stella.py`
+
+- **Lo stato:** la nascita di stella *(`covariante_di_stella.py`)* sui primi `200` archi nell'ordine di scatto, dallo stato di C2 a `k 3000` *(dichiarato)*; **su ognuna, I QUATTRO flip candidati.**
+- **F1** *(il caso noto del codice)*: sul campo UNIFORME le due estremita' nuove del flip, PRIMA del fattore, = il valore AL BIT.
+- **F2, lo specchio del flip DA SOLO** *(per ciascun candidato `(x, y)`: nascere e girare, poi specchiare, contro specchiare, nascere sull'arco specchiato e girare `(sigma(x), sigma(y))`; array per array; `132` conservati, `68` rovesciati; la soglia `1e-14`)*. **Il caso che DEVE FALLIRE: il flip col VERSO** *(come C3: le estremita' dell'arco tolto PERMUTATE sull'arco nato, quella del capo SORGENTE `ii` in `n`, quella del capo `jj` in `m`; nessun fattore)* -- **deve superare `1e-6`, o la prova non vale: FERMO.**
+- **F3, il grafo dopo la nascita e il flip:** **i gradi** *(`n` da `4` a `5`, `x` e `y` scendono di `1`, `m` sale di `1`)*; **`somma (6 - k)` = `0` sul toro** *(Eulero: `E = 3 V`)*; **nessun arco doppio**; **ogni arco in esattamente due triangoli** *(ogni placchetta un triangolo)*; **e ogni candidato DEFINITO** *(`x` e `y` con esattamente due vicini comuni)*.
+- **Il `DH` del flip** *(per candidato, il conto a mano: per `E_persa`)* **stampato, NON usato per scegliere.**
+
+### 7.4 LE PREVISIONI *(copiate PRIMA)*
+
+- **P-F1.** F1 passa al bit; F3 passa.
+- **P-F2.** Il flip di stella e' simmetrico allo specchio su tutte le classi *(entro `1e-14`)*; il flip di C3 cade sui rovesciati.
+- **P-F3.** Su almeno il `90%` delle nascite il massimo e' unico *(il flip c'e')*.
+- **LE MIE:** **P-F1 VERA; P-F2 VERA** *(medie e un fattore uniforme: come la covariante di stella)*; **P-F3: NON misurata ora** *(7.2)*; **se misurata con la proposta, credo VERA** *(i quattro candidati hanno ampiezze diverse nel guscio)*.
