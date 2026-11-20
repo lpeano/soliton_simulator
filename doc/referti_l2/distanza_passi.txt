@@ -1,0 +1,15 @@
+[TIMBRO] distanza_passi.py  sha1-BYTE 70899f57  committato e pulito
+==================================================================================================================================
+LA DISTANZA IN PASSI (Luca 2026-11-20 10:41, 10:47): lo strumento e i suoi casi noti
+==================================================================================================================================
+### (1) il toro piatto L 186, la sorgente il nodo (93, 93): i passi = la distanza esagonale su TUTTI i 34596 nodi: True (il massimo 124)
+    l'anello 40 (288 nodi): i passi mediana 45.0, min 40, max 46
+    l'anello 60 (414 nodi): i passi mediana 67.0, min 60, max 69
+### (2) la nascita forzata sull'arco 43803 (14601 -> 14787, a 15.50 nodi dal centro): l'anello 40, i passi cambiati di {0: 287, 1: 1}; su tutti i nodi originari da 0 a 1
+### (3) DEVE FALLIRE: l'arco 52173 tolto (dalla sorgente): i nodi coi passi cambiati 92 (cresciuti di al piu' 1)
+### accanto (nessuna attesa): C2 a k 3000, il baricentro (91.453, 91.596), la sorgente il nodo 17204; D1: anello 40 mediana 45.0 [40, 47], anello 60 mediana 67.0 [60, 70]; E1 (r50, r90, w in passi): (13, 20, 13.927574099780259)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto (1): sul toro piatto i passi = la distanza esagonale AL PASSO su tutti i nodi                             PASSA
+  DEVE: il caso noto (2): dopo una nascita nel guscio i passi crescono di 0 o 1, mai di piu', mai calano                       PASSA
+  DEVE: DEVE FALLIRE (3): un arco tolto sul cammino dalla sorgente cambia i passi di qualche nodo                              PASSA
+==================================================================================================================================

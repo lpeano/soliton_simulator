@@ -1,0 +1,39 @@
+[TIMBRO] flip_di_stella.py  sha1-BYTE 622bc818  committato e pulito
+[TIMBRO] regola_intera.py  sha1-BYTE 2bc263c1  committato e pulito
+==================================================================================================================================
+LA REGOLA INTERA: LA NASCITA DI STELLA, I QUATTRO FLIP, LA SCELTA (A) (Luca 2026-11-20 14:53); lo stato di C2 a k 3000 (dichiarato); la guardia 1e-12 |H|
+==================================================================================================================================
+### parte_0.npz: 1465 archi, 1612 s
+### parte_1.npz: 1464 archi, 1609 s
+### ### P-F3: il flip c'e' su 2929 nascite su 2929 (100.00%); il pari merito (nessun flip) 0; i lati scelti (i,k) (j,k) (j,l) (i,l): [723, 729, 738, 739]
+    lo scarto fra il migliore e il secondo, in unita' di |H|: min 1.358e-10, mediana 7.573e-07, max 3.555e-06; sotto 1e-12 0, sotto 1e-10 0, sotto 1e-8 35
+    DH della nascita: mediana -1.2561e+01; DH del flip scelto: mediana -3.4397e+00 (min -1.2915e+01, max +6.6580e+00); E_persa per nascita (- la somma): mediana +1.6172e+01
+    PER ANELLO (le mediane): 
+      r 10-12:  191 archi; il pari merito   0; lo scarto 6.014e-07; DH nascita -2.8136e+01, flip -1.0145e+00
+      r 12-14:  372 archi; il pari merito   0; lo scarto 5.377e-07; DH nascita -2.4253e+01, flip -6.4563e-01
+      r 14-16:  504 archi; il pari merito   0; lo scarto 6.140e-07; DH nascita -1.9664e+01, flip -2.0223e+00
+      r 16-18:  587 archi; il pari merito   0; lo scarto 8.861e-07; DH nascita -1.3722e+01, flip -3.5465e+00
+      r 18-20:  667 archi; il pari merito   0; lo scarto 1.073e-06; DH nascita -7.7595e+00, flip -4.4558e+00
+      r 20-22:  593 archi; il pari merito   0; lo scarto 6.643e-07; DH nascita -3.2819e+00, flip -4.7047e+00
+      r 22-24:   15 archi; il pari merito   0; lo scarto 4.486e-07; DH nascita -2.3835e+00, flip -3.8989e+00
+----------------------------------------------------------------------------------------------------------------------------------
+### P5 SULLA REGOLA INTERA (a 30 gradi per il nodo (92, 92); 200 archi)
+    stella: lo stesso lato 200, nessun flip su entrambi 0, DIVERSO 0
+        l'arco girato conservato   127: psi max 3.777e-16, phi max 1.892e-16 (sopra 1e-14: 0)
+        l'arco girato ROVESCIATO    73: psi max 2.560e-16, phi max 1.981e-16 (sopra 1e-14: 0)
+        l'arco diviso conservato   132: psi max 3.777e-16, phi max 1.981e-16 (sopra 1e-14: 0)
+        l'arco diviso ROVESCIATO    68: psi max 2.560e-16, phi max 1.892e-16 (sopra 1e-14: 0)
+    verso : lo stesso lato 174, nessun flip su entrambi 0, DIVERSO 26
+        l'arco girato conservato   117: psi max 9.695e-02, phi max 5.944e-01 (sopra 1e-14: 8)
+        l'arco girato ROVESCIATO    57: psi max 9.241e-02, phi max 7.377e-01 (sopra 1e-14: 50)
+        l'arco diviso conservato   106: psi max 9.695e-02, phi max 7.377e-01 (sopra 1e-14: 58)
+        l'arco diviso ROVESCIATO    68: psi max 1.388e-16, phi max 1.253e-16 (sopra 1e-14: 0)
+    il caso che DEVE FALLIRE (la regola col flip col verso): DIVERSO 26, lo scarto massimo 7.377e-01
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: P-F3: il minimo unico (il flip c'e') su almeno il 90% delle nascite (100.00%)                                          PASSA
+  DEVE: P-F4: lo scarto mediano sopra 1e-8 |H| (7.573e-07)                                                                     PASSA
+  DEVE: DEVE FALLIRE: la regola col flip col verso cade (o la prova non vale: FERMO)                                           PASSA
+  DEVE: P-F5: la regola intera simmetrica allo specchio su tutte le classi entro 1e-14 (lo stesso lato o nessun flip su entrambi) PASSA
+  DEVE: i pari merito: lo specchio da' nessun flip su ENTRAMBI i lati                                                          PASSA
+### 30 s
+==================================================================================================================================
