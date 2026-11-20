@@ -1,0 +1,60 @@
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] mitosi_rami.py  sha1-BYTE 6dccd9d6  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+LA PROVA DEL PUNTO DI RAMIFICAZIONE (Luca 2026-11-20 18:40; la carta sez. 14.3): lo scatto FORZATO dell'arco 51106 a k 3002 (solo qui)
+==================================================================================================================================
+### PROVA_cont_m (mitosi): da E:\soliton_simulator\controllo\C2\stato_03000.npz (k 3000, sha1 e717706f), fino a k 3005; le nascite ACCESE
+    [nascita 1] k 3002, l'arco 51106 (scattato; 0 in attesa): n 34596 a r 18.08, 18 passi dalla sorgente; DH nascita -1.1518e+01 flip -7.7559e+00; P9 0.0e+00; |Ec| 2.585e-01; E_persa +1.927406e+01 (9.1 s)
+    [stato] k 3005 sha1 fd06e362
+### PROVA_cont_m: 5 tick in 51 s; 1 nascite; E_persa +1.927406e+01; il codice 0
+### PROVA_cont_c (c2ext): da E:\soliton_simulator\controllo\C2\stato_03000.npz (k 3000, sha1 e717706f), fino a k 3005; le nascite SPENTE
+    [stato] k 3005 sha1 9c3c4ef5
+### PROVA_cont_c: 5 tick in 40 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+### PROVA_tronco (tronco): da E:\soliton_simulator\controllo\C2\stato_03000.npz (k 3000, sha1 e717706f), fino a k 3005; le nascite SPENTE
+### IL PRIMO SCATTO a k 3002 (1 archi, il primo 51106): lo stato PRIMA della regola prima_nascita_03002.npz sha1 89254006; il tronco esce (10)
+### PROVA_tronco: 2 tick in 33 s; 0 nascite; E_persa +0.000000e+00; il codice 10
+### il tronco: il codice 10 a k 3002; scatto.json {'k': 3002, 'file': 'E:\\soliton_simulator\\controllo\\mitosi_rami\\PROVA\\tronco\\prima_nascita_03002.npz', 'sha1': '89254006c2a87092b7aa78abb4dfab5056db9664', 'archi': [51106], 'quanti': 1}
+### PROVA_m (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\PROVA\tronco\prima_nascita_03002.npz (k 3002, sha1 89254006), fino a k 3005; le nascite ACCESE
+    [nascita 1] k 3002, l'arco 51106 (lo scatto del tronco; 0 in attesa): n 34596 a r 18.08, 18 passi dalla sorgente; DH nascita -1.1518e+01 flip -7.7559e+00; P9 0.0e+00; |Ec| 2.585e-01; E_persa +1.927406e+01 (9.2 s)
+    [stato] k 3005 sha1 fd06e362
+### PROVA_m: 3 tick in 44 s; 1 nascite; E_persa +1.927406e+01; il codice 0
+### PROVA_c (c2ext): da E:\soliton_simulator\controllo\mitosi_rami\PROVA\tronco\prima_nascita_03002.npz (k 3002, sha1 89254006), fino a k 3005; le nascite SPENTE
+    [stato] k 3005 sha1 9c3c4ef5
+### PROVA_c: 3 tick in 35 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+### PROVA_senza (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\PROVA\tronco\prima_nascita_03002.npz (k 3002, sha1 89254006), fino a k 3005; le nascite ACCESE
+    [nascita 1] k 3003, l'arco 51106 (scattato; 0 in attesa): n 34596 a r 18.08, 18 passi dalla sorgente; DH nascita -1.1177e+01 flip -7.5898e+00; P9 0.0e+00; |Ec| 2.585e-01; E_persa +1.876639e+01 (9.7 s)
+    [stato] k 3005 sha1 ed75b36b
+### PROVA_senza: 3 tick in 44 s; 1 nascite; E_persa +1.876639e+01; il codice 0
+### R1: il ramo MITOSI contro la corsa continua (k 3005): AL BIT su ogni chiave, A, E, cs_prec, il grafo, i versori, Theta, le posizioni, E_persa, gauss_acc
+### R2: il ramo C2-EXT contro la corsa continua spenta: AL BIT
+### DEVE FALLIRE: il ramo MITOSI SENZA la nascita iniziale: diverse: ['Lambda', 'phi_h', 'psi_h', 'rho', 'A', 'E']
+### PROVA_cont_e (mitosi): da E:\soliton_simulator\controllo\C2\stato_03000.npz (k 3000, sha1 e717706f), fino a k 3008; le nascite ACCESE
+    [nascita 1] k 3002, l'arco 51106 (scattato; 0 in attesa): n 34596 a r 18.08, 18 passi dalla sorgente; DH nascita -1.1518e+01 flip -7.7559e+00; P9 0.0e+00; |Ec| 2.585e-01; E_persa +1.927406e+01 (9.3 s)
+    [stato] k 3008 sha1 ea1ad7ea
+### PROVA_cont_e: 8 tick in 57 s; 1 nascite; E_persa +1.927406e+01; il codice 0
+### PROVA_rip (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\PROVA\ramo_m\stato_03005.npz (k 3005, sha1 fd06e362), fino a k 3008; le nascite ACCESE
+    [stato] k 3008 sha1 ea1ad7ea
+### PROVA_rip: 3 tick in 36 s; 1 nascite; E_persa +1.927406e+01; il codice 0
+### R3: la ripresa del ramo MITOSI da stato_03005.npz fino a k 3008 contro la continua: AL BIT
+    gauss_acc dopo la nascita: la norma 2.585e-01, il massimo 9.585e-02
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il tronco esce col codice dello scatto al tick forzato                                                           PASSA
+  DEVE: R1: il ramo MITOSI = la corsa continua con le nascite AL BIT                                                     PASSA
+  DEVE: R2: il ramo C2-EXT = la corsa continua spenta AL BIT                                                             PASSA
+  DEVE: DEVE FALLIRE: il ramo MITOSI senza la nascita iniziale e' diverso                                                PASSA
+  DEVE: R3: la ripresa dopo una nascita col gauss_acc AL BIT                                                             PASSA
+==================================================================================================================================
