@@ -1,0 +1,38 @@
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] controllo_senza_bordo.py  sha1-BYTE cb036cff  committato e pulito
+[TIMBRO] u1_generico.py  sha1-BYTE dde89e5e  committato e pulito
+[TIMBRO] contatore.py  sha1-BYTE 666b8d04  committato e pulito
+[TIMBRO] mitosi_corsa.py  sha1-BYTE d7dd926b  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+P6.0, IL BRACCIO 0 DELLA CORSA MITOSI (Luca 2026-11-20 16:37; la carta sez. 9.5): il passo di C2 contro quello di MITOSI, 20 tick da C2 a k 3000
+==================================================================================================================================
+### lo stato di partenza: E:\soliton_simulator\controllo\C2\stato_03000.npz (sha1 e717706f, ricontrollato da riprendi)
+### il campo generico: le placchette 69192; s_a uniforme True (0.14999999999999999, da 0.14999999999999999 a 0.14999999999999999); i segni delle placchette coerenti True; w AL BIT col prototipo True
+### P6.0: 20 tick, C2 contro MITOSI: AL BIT su ogni chiave, A, E, cs_prec; h_int (fuori dal confronto, come K2 e K3 di C2) al bit
+### l'energia registrata (totd + KVd), 21 valori: la differenza relativa massima 0.00e+00 (0.0 ulp)
+### Theta: dopo 20 tick il massimo |Theta| 6.781944e-01 rad (2 pi = 6.283185e+00); scattati 0
+### DEVE FALLIRE: E dell'arco 51612 (dal nodo 17204, il piu' vicino al centro ['91.534', '91.695']) spostato di un ulp: diverse: ['E']
+### il tempo per tick (Q-P1, senza nascite): C2 la mediana 2.638 s, MITOSI 2.585 s (il rapporto 0.9801)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: s_a del campo di C2 uniforme (se no: FERMO, la carta sez. 9.6)                                                 PASSA
+  DEVE: i segni delle placchette coerenti (ogni arco in due placchette con segni opposti)                              PASSA
+  DEVE: w del campo generico = w del prototipo AL BIT                                                                  PASSA
+  DEVE: P6.0: il passo di MITOSI = il passo di C2 AL BIT (ogni chiave salvo h_int, A, E, cs_prec)                      PASSA
+  DEVE: l'energia registrata entro 8 ulp relativi (V: l'ordine delle placchette, dichiarato)                           PASSA
+  DEVE: Theta: nessun arco scattato (la nascita non c'e' ancora)                                                       PASSA
+  DEVE: DEVE FALLIRE: un ulp in E di un arco prima del primo tick rende il risultato DIVERSO                           PASSA
+==================================================================================================================================
