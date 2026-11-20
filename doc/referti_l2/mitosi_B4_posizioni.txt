@@ -1,0 +1,22 @@
+[TIMBRO] posizioni.py  sha1-BYTE e4ec8f2f  committato e pulito
+[TIMBRO] prova_posizioni_v2.py  sha1-BYTE 325c0c2c  committato e pulito
+==================================================================================================================================
+LA PROVA DI B4: LE POSIZIONI E LA SCENA CHE CRESCE, v2 (il ramo mitosi; Luca 2026-11-20 10:31)
+==================================================================================================================================
+### dentro il toro: l'arco 381 (127 -> 151); il nodo nato a (5.500, 7.000); la distanza da i 0.500000000000000, da j 0.500000000000000 (meta' arco 0.500000000000000)
+### sulla cucitura (m1 = L - 1 -> 0): l'arco 1677 (559 -> 7); il nodo nato a (23.500, 7.000); la distanza da i 0.500000000000000, da j 0.500000000000000 (meta' arco 0.500000000000000)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: righe(inc) = argsort(nodo, stable).reshape(n, 6) AL BIT (valori e tipo)                                                PASSA
+  DEVE: toro.centro e toro.scarti con le posizioni float = con gli indici interi AL BIT                                        PASSA
+  DEVE: DEVE FALLIRE: cresci PRIMA che il grafo cresca                                                                         PASSA
+  DEVE: il nodo nato al punto medio, dentro il toro: distanza da i e da j = meta' arco entro 1e-14                             PASSA
+  DEVE: cresci, dentro il toro: n, nodo, le posizioni (le vecchie al bit), g_e a zero della taglia nuova                       PASSA
+  DEVE: cresci, dentro il toro: righe, phi_v, stato, metti, g_nodo e righe(inc) RIFIUTANO                                      PASSA
+  DEVE: il nodo nato al punto medio, sulla cucitura (m1 = L - 1 -> 0): distanza da i e da j = meta' arco entro 1e-14           PASSA
+  DEVE: cresci, sulla cucitura (m1 = L - 1 -> 0): n, nodo, le posizioni (le vecchie al bit), g_e a zero della taglia nuova     PASSA
+  DEVE: cresci, sulla cucitura (m1 = L - 1 -> 0): righe, phi_v, stato, metti, g_nodo e righe(inc) RIFIUTANO                    PASSA
+  DEVE: DEVE FALLIRE: cresci con un bordo NON nullo (g_e != 0)                                                                 PASSA
+  DEVE: mappe, le posizioni intere: d1 e d2 = la riga del padre (int16) AL BIT                                                 PASSA
+  DEVE: mappe, un nodo nato: d1, d2 float64 con la meta' (3.5 - L/2)                                                           PASSA
+  DEVE: DEVE FALLIRE: mappe con un'istantanea di un'altra taglia                                                               PASSA
+==================================================================================================================================

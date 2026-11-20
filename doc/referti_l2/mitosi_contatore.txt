@@ -1,0 +1,20 @@
+[TIMBRO] contatore.py  sha1-BYTE 666b8d04  committato e pulito
+[TIMBRO] prova_contatore.py  sha1-BYTE 542b3155  committato e pulito
+==================================================================================================================================
+LA PROVA DELLA MEMORIA PER ARCO THETA (il ramo mitosi; Luca 2026-11-20 10:31)
+==================================================================================================================================
+### IL CASO NOTO: Theta a k 3000 dai 12 segmenti di C2: 103788 archi, max |Theta| 6.724303e-01 rad; contro la riga di innesco_stima.py AL BIT True; contro theta3000 di candidati.npz (2929 archi) max 3.331e-15 rad; scattati 0
+### la crescita sull'arco 531 (177 -> 201): gli archi 1728 -> 1731; Theta dei tenuti al bit True; i 4 nuovi a 0 True; l'arco diviso consumato True
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: Theta(3000) = np.sum(acc, axis=0) di innesco_stima.py AL BIT                                             PASSA
+  DEVE: il caso noto: contro theta3000 di candidati.npz (la somma tick per tick) entro 1e-12 rad                               PASSA
+  DEVE: il caso noto: nessun arco a 2 pi a k 3000 (il primo a 2.79e4, torsione_segmenti.txt)                                   PASSA
+  DEVE: ritmo = pi (dtau cs_i - dtau cs_j) arco per arco AL BIT (L 24, cs a caso)                                              PASSA
+  DEVE: DEVE FALLIRE: mot.dtau != 1                                                                                            PASSA
+  DEVE: scattati: ordinati per indice, 2 pi esatto compreso (gli archi 2 e 5 dentro)                                           PASSA
+  DEVE: DEVE FALLIRE: accumula su un grafo cresciuto senza cresci del contatore                                                PASSA
+  DEVE: DEVE FALLIRE: cresci con una maschera non booleana                                                                     PASSA
+  DEVE: la crescita: ogni arco tenuto conserva Theta AL BIT, i 4 nuovi a 0, l'arco diviso consumato                            PASSA
+  DEVE: dopo la crescita accumula sul grafo nuovo (cs uniforme: il ritmo 0, Theta invariato AL BIT)                            PASSA
+  DEVE: P8: salva e riprendi da un .npz AL BIT                                                                                 PASSA
+==================================================================================================================================
