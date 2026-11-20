@@ -113,3 +113,10 @@
 - **P-E1.** Il mattone TORNA alla sua larghezza in passi: entro `1000` tick dall'ultima nascita, `w` in passi in MITOSI entro il `10%` di C2-EXT.
 - **P-E2.** `DH_cov` e' NEGATIVO nel guscio su piu' della meta' dei `2929` archi.
 - ### **LE MIE, accanto:** **P-S1:** i passi crescono solo se una nascita cade su TUTTI i cammini minimi verso un nodo dell'anello, e le nascite stanno a `10`-`22` nodi, dentro l'anello: **credo VERA, ma di `0` o `1` passo e non a ogni nascita**; in C2-EXT costante **per costruzione** *(il grafo non cresce: un braccio di controllo)*. **P-S2: non lo so** *(il ragionamento regge per l'arco diviso, ma i figli `n -> k`, `n -> l` stanno di traverso al gradiente)*. **P-S3: VERA in `7000` tick.** **P-E1: non lo so.** **P-E2: non lo so** *(nel guscio `DH(1)` e' fortemente negativo, ma la covariante non ha un padre e muove meno materia)*.
+
+## 7. L'ESITO E LE ANNOTAZIONI ALLE PREMESSE *(le premesse sopra NON si riscrivono)*
+
+- **1.4, «NON SO il segno di `DH(0)`»:** **NEGATIVO su tutti i `2929`** *(mediana `-566`)*: **la radice non esiste** *(`doc/referti_l2/nascita_energia_nulla.txt`)*. **FERMO del mandato** *(oltre il `20%`)*. Il perche' e le strade: la carta della mitosi, sez. `16.5`.
+- **1.3, il padre di D7 e lo specchio:** **NON misurato** -- senza radice la prova dello specchio passa a vuoto *(il caso che deve fallire da' `0`: un FALSO-UNO, dichiarato nel referto)*.
+- **6.3, la covariante (E2):** **scritta, NON misurata**: il FERMO viene prima; la raccomandazione e' di farla per prima alla ripresa.
+- **TODO 3 (il ramo):** B4 `68089e6d`, la memoria `Theta` `c14a087b`, la suite `67/67`; i referti delle due prove sul ramo.
