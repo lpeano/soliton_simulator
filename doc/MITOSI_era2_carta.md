@@ -444,3 +444,42 @@
 - **LE PREVISIONI:** P-Z1 FALSA *(`0%`)*; P-Z2 FALSA *(nessuna radice)*; **P-Z3: deterministica VERA; lo specchio NON misurato**; P-Z4 non misurabile *(`0` nascite in fila)*; P-Z5: il pezzo di questo script `0.36` s = `0.10` tick di C2, **senza** la CSR e Gauss.
 - ### **LE STRADE, PER LUCA** *(nessuna presa)*: **(a) una famiglia piu' larga**: **la regola della materia deve mettere `psi` ANCHE sulle estremita' nuove in `k` e `l`** *(e sul nodo nuovo piu' della meta' del padre)*: e' cio' che fa la **covariante** *(6.3: le medie nella stessa direzione, la norma sulla stella)*; **(b) D-PRINCIPIO verso la covariante** *(l'energia libera)*: **la sua misura E2 e' PRONTA da scrivere e NON e' fatta** *(il FERMO viene prima)*; **(c) la compensazione di A3 sul vuoto**: **NON misurata qui**; il vuoto della stella vale decine *(la stima del guardiano)*, `DH` centinaia. ### **La mia raccomandazione: prima E2** *(la covariante sugli stessi `2929` archi: dice se la nascita che mette `psi` su `k`, `l`, `n` arriva vicino a zero o no)*, **poi la scelta.**
 - **Il ramo `mitosi`, a parte:** **B4** *(`68089e6d`)* **e la memoria `Theta`** *(`c14a087b`)* committati, la suite `67/67`; **la prova di `Theta` passa** *(`11/11`)*; **la prova di B4 v1 si e' fermata su un errore della PROVA** *(la scena finta senza `righe`)*: **la v2 in un file nuovo.**
+
+## 17. LA COVARIANTE, LA FAMIGLIA FRA D7 E LA COVARIANTE, E LO SPECCHIO VERO *(il mandato di Luca del `2026-11-20` `11:57` e la correzione delle `12:10`; la carta `doc/TASK_HISTORY/2026-11-20_covariante_e_specchio.md`; i referti `doc/referti_l2/covariante_e_famiglia.txt`, `covariante_vuoto_F3.txt`)*
+
+### 17.1 E2: LA COVARIANTE DA SOLA *(`psi` e `phi` covarianti; lo stato di C2 a `k 3000`, dichiarato)*
+
+- ### **`DH_cov` mediana `-11.9`** *(da `-39.3` a `+2.9`)*, **contro `DH(D7)` mediana `-555`: il `2.15%`.** **Negativa su `2840` archi su `2929`.** Per anello *(le mediane)*: `-26.3` a `10`-`12` nodi, `-13.2` a `16`-`18`, `-1.8` a `20`-`22`, `+0.19` a `22`-`24`. **Per termine** *(mediane)*: `G_psi +1.45`, **`a_psi -13.8`**, `N +0.002`, il vuoto `+0.48`: **mettere ampiezza in `k`, `l`, `n` recupera il termine di nodo; resta quasi solo il termine d'arco.**
+- **Il caso noto del codice** *(il campo uniforme: le estremita' nuove al bit)* **PASSA.** `beta = 1` *(la covariante con `phi` FA)* contro E2: la differenza di `DH` mediana `+0.58`.
+
+### 17.2 IL VUOTO F3 PURO *(il caso corretto delle `12:10`, `covariante_vuoto_F3.txt`; la riga «`H / n`» di `covariante_e_famiglia.txt` e' SUPERATA: l'errore `n.191`)*
+
+- ### **`DH_cov = +0.034`: vicino a `0`** *(FA sullo stesso arco: `+3.476`)*: **il caso e' LETTO, ma NON come atteso.** **L'estremita' nuova di `k`** *(la media delle estremita' di `k` verso `i` e verso `j`)* **e' ESATTAMENTE `0`**: **nel vuoto F3 le due hanno modulo `1` e fasi OPPOSTE.** **Con `k` e `l` presi da UNA direzione** *(verso `i` o verso `j`, lo stesso numero)*: **`DH = +3.583`**, come FA. ### **POST-HOC, dichiarato:** **non c'e' un «residuo dalla media che riduce l'ampiezza»: la media ANNULLA `k` e `l`, ed e' proprio cio' che tiene `DH` vicino a `0`.** **Nel vuoto la covariante lascia `k` e `l` vuoti come D7 lasciava `k` e `l` vuoti nella materia: li' non costa, qui costava.**
+
+### 17.3 LA FAMIGLIA `beta` *(`psi` = `(1 - beta) D7 + beta COV` sulla stella, `phi` FA)*
+
+- ### **LA RADICE SU `197` ARCHI SU `2929` (`6.73%`)**: **solo dove `DH(beta = 1) > 0`**, **e quasi tutti al bordo esterno del guscio** *(`0` fino a `18` nodi; `24` a `18`-`20`, `165` a `20`-`22`, `8` a `22`-`24`)*. **Dentro, anche la covariante con `phi` FA abbassa l'energia** *(le mediane `DH(beta = 1)` da `-21.4` a `-1.1`)*. `beta*` mediana `0.854` *(da `0.548` a `0.967`)*; i cambi di segno sugli `11` punti: `0` su `2721`, `1` su `197`, `2` su `11`.
+- **Alla radice:** `|DH|` col conto pieno al piu' `1.4e-09` *(`4.1e-16` di `|H|`)*. **Il determinismo: due processi AL BIT, uguali alle parti** *(la v2, `covariante_det_v2.py`: la v1 e' caduta nella fila, sotto)*. **Le `20` nascite IN FILA:** `|H(dopo) - H(prima)| / |H|` **al piu' `4.1e-16`** *(`beta*` da `0.851` a `0.948`)*; per trovarle la fila ha saltato **`865` candidati senza radice e `2` dove la covariante NON E' DEFINITA**.
+- ### ⚠ **LA COVARIANTE NON E' DEFINITA SU TUTTO IL GRAFO CRESCIUTO:** usa il vicino di `i` in `-a` e quello di `j` in `+a`, **e accanto a un difetto gia' nato quel vicino non esiste** *(la v1 della fila: `nessun vicino di 21125 nella direzione opposta`)*. **Va ridefinita sul grafo generico prima di ogni corsa** *(una decisione: quale vicino quando la direzione non c'e')*.
+- **La D7 simmetrica** *(un quarto da ciascun capo, misurata accanto)*: `DH` mediana `-528`: **come D7**.
+
+### 17.4 LO SPECCHIO VERO *(`200` archi: `132` a verso conservato, `68` ROVESCIATI; nascere e specchiare contro specchiare e nascere, array per array)*
+
+- ### **LA PROVA VALE:** **il caso che DEVE FALLIRE** *(il padre = il nodo di indice minore)* **FALLISCE: `0.51`** *(sui `68` rovesciati)*.
+- **D7: simmetrica sui conservati** *(`2e-16`)*, **NON sui rovesciati: `68` su `68`** *(`psi` `0.20`, `phi` `0.51`)*. **La COVARIANTE: simmetrica su TUTTI** *(`2e-16`)*. ### **La D7 simmetrica: `psi` simmetrico su tutti, ma `phi` NO sui rovesciati (`0.51`)**: **`phi` e' FA, e FA HA ANCHE LUI IL PADRE** *(le fasi di `n -> k`, `n -> l` dalle estremita' di `i`)*. ### **Quindi D-M3 = FA e' asimmetrica allo specchio sugli archi rovesciati, da sola** -- **e ogni regola che usa FA per `phi`** *(la famiglia `beta` compresa)* **la eredita.**
+- **La radice della famiglia:** confrontabile **su `1` arco solo** *(a verso conservato; `1.8e-12`)*, **`0` rovesciati** *(la radice esiste su pochi archi)*: **il «PASSA» del referto e' QUASI A VUOTO** -- **e per la riga sopra, sui rovesciati NON puo' essere simmetrica** *(`phi` FA)*. **Dichiarato.**
+
+### 17.5 LE PREVISIONI
+
+- **P-C1 VERA** *(`2.15%` contro la soglia `30%`)*; **P-C2 FALSA** *(`6.73%` contro `80%`)*; **P-C3 VERA** *(D7 asimmetrica su `68` su `68` rovesciati, la covariante simmetrica su tutti)*; **P-C4 VERA** *(al bit; la fila `4.1e-16`)*; **P-E2 VERA** *(`2840` su `2929`)*. **Le mie:** P-C1 e P-C2 «non lo so»; **P-C3 vera, come la mia premessa** *(che ora tocca anche FA)*; P-C4 vera.
+- **La previsione sul vuoto «`H / n`» della carta 1.4: FALSA e mal posta** *(l'errore `n.191`)*; il caso corretto e' la `17.2`.
+
+### 17.6 LA CONDIZIONE PER RIPARTIRE: ### **NON C'E'. FERMO.**
+
+- **Il mandato:** se la radice c'e' su almeno l'`80%` **E** la radice e' simmetrica, i TODO `4`-`5` delle `10:31` potrebbero ripartire con `beta`. **La radice c'e' sul `6.73%`, e la sua simmetria non e' stabilita** *(e con `phi` FA non puo' esserlo sui rovesciati)*. **I TODO `4`-`5` NON ripartono.**
+
+### 17.7 D-PRINCIPIO, PER LUCA *(le due strade coi numeri; NESSUNA presa)*
+
+- **ENERGIA NULLA** *(la famiglia `beta`)*: **PRO:** `H` conservata al bit *(`4.1e-16` in `20` nascite)*, deterministica. **CONTRO:** **la radice esiste sul `6.7%` degli archi del guscio, al suo bordo esterno**: **dove il contatore scatta di piu'** *(`10`-`18` nodi)* **non nasce niente**; usa D7 e FA, **asimmetriche allo specchio sui rovesciati**; e' una scelta da metrica statica *(la nota del guardiano delle `10:47`)*.
+- **COVARIANTE** *(E2)*: **PRO:** **simmetrica allo specchio su TUTTE le classi, per costruzione e misurata** *(`2e-16`)*; norma e carica esatte; nessun padre; `DH` piccolo *(il `2%` di D7; negativo: l'energia scende come in uno spostamento verso il rosso)*. **CONTRO:** **l'energia NON si conserva** *(la mediana `-12` per nascita: dove va e' da decidere)*; **non e' definita accanto a un difetto gia' nato** *(serve la sua definizione sul grafo generico)*.
+- ### **LA MIA RACCOMANDAZIONE** *(motivata; la scelta e' di Luca)*: **la COVARIANTE**, perche' e' l'unica simmetrica e nasce dove il contatore scatta; **ma prima due decisioni:** **(1) la covariante sul grafo generico** *(il vicino «opposto» quando non c'e')*; **(2) che cosa fare dell'energia che scende** *(lasciarla scendere, o una compensazione)*. **E A PARTE, PER QUALUNQUE STRADA: FA E' ASIMMETRICA ALLO SPECCHIO** *(D-M3)*: **la covariante di `phi` non lo e'.**

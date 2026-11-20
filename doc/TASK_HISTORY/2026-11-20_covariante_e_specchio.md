@@ -57,3 +57,10 @@
 - **Il caso noto fisico diventa:** **sul vuoto F3 puro `DH_cov` vicino a `0`**, con un residuo atteso dalle estremita' nuove di `k` e `l` *(la media di due direzioni con fasi F3 diverse ne riduce l'ampiezza)*; **accanto, la sola parte dovuta a `k` e `l`:** la covariante con `k` e `l` presi da UNA direzione *(verso `i`, e accanto verso `j`)*. **Se quella parte spiega il residuo, il caso e' letto: POST-HOC, dichiarato.**
 - **Dove:** `covariante_e_famiglia.py` **e' IN USO dalle `5` corse** *(partite alle `12:07`)* **e non si tocca**: la riga del suo referto sul vuoto F3 *(«`DH_cov = H / n`», un DEVE)* **resta stampata, ed e' SUPERATA da questa correzione**: **il suo verdetto non conta.** **Il caso corretto: uno script NUOVO,** `doc/referti_l2/covariante_vuoto_F3.py`, col suo caso noto del codice *(la covariante ricomposta = `cov_grezza` al bit)*.
 - **Il caso noto del CODICE resta quello che deve passare** *(il campo uniforme al bit; `beta = 0` = FA al bit)*. **Nient'altro cambia.**
+
+## 6. L'ESITO E LE ANNOTAZIONI *(le premesse sopra NON si riscrivono; i numeri nella carta della mitosi, sez. `17`)*
+
+- **1.2, «non so se la radice in `beta` esiste»:** **sul `6.73%`** *(`197` archi, al bordo esterno del guscio)*. **FERMO.**
+- **1.3, lo specchio:** **la prova vale** *(il padre a indice minore fallisce: `0.51`)*. **D7 asimmetrica sui `68` rovesciati; la covariante simmetrica su tutti; e FA, da sola, asimmetrica sui rovesciati** *(la D7 simmetrica ha `psi` simmetrico e `phi` no)*: **una premessa che non avevo scritto.**
+- **1.4, il caso sul vuoto:** mal posto *(sez. `5`, l'errore `n.191`)*; **il caso corretto: `DH_cov +0.034`, con `k` e `l` ANNULLATI dalla media** *(fasi opposte)*: **letto post-hoc.**
+- **La fila della v1 e' caduta:** la covariante non e' definita accanto a un difetto gia' nato; **la v2** *(`covariante_det_v2.py`)* salva prima e conta i saltati *(`2`)*.
