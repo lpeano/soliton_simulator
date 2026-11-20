@@ -244,3 +244,32 @@
 - **Il costo:** la nascita `13.1` s *(`3.3` tick)*; il tick a macchina carica `3.94` s, meno carica `2.585` s *(il rapporto prima/dopo la nascita misurato sotto carico NON e' una misura del grafo: dichiarato)*.
 - ### **LA STIMA** *(il tronco comune, poi i due rami in parallelo; le nascite sono un MINIMO)*: **il tronco da `k 3000` al primo scatto `27888`: `24888` tick, `17.9`-`27.2` ore**; **i rami:** `2500` tick *(almeno `230` nascite)* `2.6`-`3.6` ore; `10000` *(`839`)* `10.2`-`14.0`; `20000` *(`1410`)* `19.5`-`27.0`; `72000` *(tutti i `2926` candidati)* `62.3`-`89.4`. **Gli stati `13.8` MB.**
 - ### **FERMO PER LUCA PRIMA DI LANCIARE:** **la lunghezza dei due rami** *(la finestra dopo il primo scatto)*; **il tronco si puo' lanciare da solo** *(e' lo stesso codice per le due corse: la decisione della lunghezza serve al primo scatto, fra `18`-`27` ore)*.
+
+## 14. IL MANDATO DI LUCA DELLE `18:40`: SI LANCIA *(scritta PRIMA del codice)*
+
+### 14.1 LE DECISIONI *(di Luca, copiate)*
+
+- **Il TRONCO COMUNE parte ORA:** da C2 a `k 3000`, il codice della corsa MITOSI sul ramo `mitosi` **con le nascite SPENTE fino al primo scatto** *(`k 27888` stimato)*, `Theta` tick per tick, gli stati ogni `250` tick su `E:` con lo sha1 e il grafo, il registro APERTO/CHIUSO. **I riavvii notturni:** la ripresa al bit dall'ultimo stato *(come `notte.py`)*, **ogni ripresa scritta nel registro.**
+- **I DUE RAMI, dallo stato salvato PRIMA del primo scatto, in parallelo, `10000` TICK ciascuno:** MITOSI *(le nascite accese)* e C2-EXT *(spente)*. **Partono da soli** quando il tronco arriva al primo scatto: nessun FERMO li'.
+- **Le misure:** D1 *(la distanza in passi)*, **D2, D3** *(il ritmo e il luogo delle nascite)*, E1 *(la scala della materia in passi)*; **`H + E_persa` di MITOSI contro `H` di C2-EXT**; **la CORREZIONE GLOBALE di `E` da Gauss sommata sulle nascite** *(la sua norma nel tempo, all'anello piu' lontano)*. **Le previsioni gia' scritte valgono** *(P-S1-P-S3, P-E1, P-M4 dove si applica)*.
+- **FINE:** checkpoint dopo ogni pezzo; il referto dei due rami con le figure *(i passi all'anello `40`, le nascite per finestra, `w` in passi, `H + E_persa`)*, la carta della mitosi aggiornata; **FERMO per Luca col referto.**
+
+### 14.2 COME *(il codice: `doc/referti_l2/mitosi_rami.py` del ramo `mitosi`, un file NUOVO che importa `mitosi_lunga.py` senza toccarlo)*
+
+- **`tronco`:** il passo di C2, `Theta`; **al primo tick in cui un arco scatta: lo stato DOPO il passo e `Theta` di quel tick, PRIMA della regola** *(`prima_nascita_<k>.npz`)*, **un file `scatto.json`** *(`k`, il file, lo sha1)*, **e l'uscita col codice `10`.** **I rami partono da li':** **MITOSI fa la nascita di quel tick PER PRIMA COSA** *(cosi' MITOSI e' la stessa corsa che non si fosse mai fermata)*, **poi prosegue; C2-EXT prosegue senza.**
+- **La ripresa** *(`--da ultimo`: lo stato integro piu' recente, come `notte.py` R3)* **scrive una tappa «RIPRESA da k ..., sha1 ...» nel registro**; **`--ferma-alle`** *(una fermata a ora, come `notte.py`: lo stato a quel `k`, la voce chiusa «SOSPESA»)*.
+- **Lo stato salvato porta in piu' la correzione di Gauss sommata** *(`gauss_acc`, per arco: la ripresa al bit la comprende)*. **Ogni nascita:** `Ec = E del candidato scelto - E prima di Gauss`; **`gauss_acc` segue la crescita** *(i tenuti, i nuovi a `0`)* **e somma `Ec`.**
+- **Le misure ogni `50` tick:** quelle di C2, **D1 ed E1**, `E_persa`, il numero di nascite; **la norma di `gauss_acc` e il suo massimo sugli archi all'anello piu' lontano in passi dalla sorgente** *(e all'anello `40`)*. **A ogni nascita** *(D2, D3)*: `k`, il raggio del nodo nuovo dal centro, **la sua distanza in passi dalla sorgente**, i `DH`, `Ec`.
+- **Il lanciatore** `doc/referti_l2/mitosi_lancia.sh` *(nel repo, non nello scratchpad: deve sopravvivere a un riavvio)*: il registro, il tronco, e **se il tronco esce con `10`, i due rami in parallelo** *(ognuno con la sua voce del registro)*. **Dopo un riavvio:** lo stesso lanciatore con `--da ultimo`.
+
+### 14.3 LA PROVA DEL PUNTO DI RAMIFICAZIONE *(prima del lancio; `mitosi_rami.py prova`)*
+
+- **Lo scatto si FORZA** *(solo nella prova: `Theta` di un arco portato a `2 pi` dopo il passo di `k 3002`)*. **(R1)** il tronco si ferma a `3002` con lo stato e `scatto.json`; **MITOSI dal ramo fino a `3005` = la corsa CONTINUA con le nascite accese fino a `3005`, AL BIT** *(ogni chiave, `A`, `E`, `cs_prec`, il grafo, `Theta`, le posizioni, `E_persa`, `gauss_acc`)*; **(R2)** **C2-EXT dal ramo = la corsa continua con le nascite spente, AL BIT**; **(R3) la ripresa dopo una nascita col `gauss_acc`: AL BIT** *(come P8)*; **DEVE FALLIRE:** il ramo MITOSI SENZA la nascita iniziale -> diverso.
+- **Le mie previsioni:** R1, R2, R3 VERE; il caso che deve fallire FALLISCE.
+
+### 14.4 TODO
+
+1. questa carta: commit, push;
+2. `mitosi_rami.py` + `mitosi_lancia.sh`: commit; la prova; il referto: commit;
+3. **il lancio** *(il tronco; i rami partono da soli)*: il registro; checkpoint;
+4. a corse finite: il referto dei rami con le figure, la carta; **FERMO per Luca.**
