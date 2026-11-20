@@ -108,3 +108,70 @@
 - **P-F4.** Lo scarto mediano fra il migliore e il secondo e' sopra `1e-8 |H|` *(la guardia scatta solo sulle simmetrie esatte)*.
 - **P-F5.** La regola intera e' simmetrica allo specchio su tutte le classi *(entro `1e-14`)*.
 - **LE MIE:** **P-F3 VERA** *(il `DH` del flip va da `-9.1` a `+7.2` sui quattro candidati, `18.4`: lontani fra loro)*; **P-F4 VERA** *(`|H| = 3.4e6`: `1e-8 |H| = 0.034`; i `DH` dei candidati differiscono di unita')*; **P-F5: VERA se la scelta e' equivariante** -- ### ⚠ **una premessa: il conto pieno sullo stato specchiato somma in un altro ordine** *(`H` specchiato contro `H`: `1.4e-16` relativo, `covariante_di_stella.txt`)*: **se due candidati distano meno della guardia la regola non gira, e se distano di piu' la guardia e' `3700` volte quell'errore: la scelta e' la stessa sui due lati.**
+
+## 9. L'AGGIUNTA DI LUCA DELLE `16:37`: I QUATTRO PUNTI DELLA `18.6`, SI RIPARTE SUL RAMO *(scritta PRIMA del codice)*
+
+### 9.1 LE DECISIONI *(di Luca, copiate)*
+
+- **D-AREA (a) COMBINATORIA:** ogni triangolo nuovo ha l'area dei triangoli di oggi *(`_u1_prototipo.AREA`)* e ogni arco nuovo `l/l* = sqrt(3)` *(`L_SU_LS`)*; la curvatura sta solo nei gradi *(`(6 - k) x 60` gradi, Regge, P7)*; l'area totale cresce con le nascite. **Le posizioni restano solo per disegnare** *(`10:41`)*.
+- **D-A-NASCITA:** `A` sugli archi nuovi come B3 *(meta' flusso ai mezzi triangoli)*.
+- **D-A-FLIP:** il flusso del quadrilatero `n - x - m - y` spartito a META' fra i due triangoli nuovi *(di stella, nessun verso)*. **`E`: Gauss VERO sul grafo nuovo.**
+- **D-H-CORSA:** la scelta del flip e `E_persa` usano **l'energia della CORSA** *(`conti_nodo` + il campo, con `U` e il lapse veri)*. **P5 si RIPETE con questa energia, sul ramo, col caso che deve fallire.**
+- **D-P9:** **P9 ALLA NASCITA:** nello stesso tick, `H(dopo nascita e flip) - H(prima) = DH` contato in `E_persa`, entro `1e-12 |H|`. **Sulla corsa:** `H + E_persa` di MITOSI contro `H` di C2-EXT *(la stessa deriva)*. **L'errore `n.194` del guardiano:** P9 a `1e-12` su tutta la corsa non era soddisfacibile *(C2 deriva di `-9.9e-06` in `3000` tick)*.
+- **Il quinto punto:** il lapse del nodo nuovo **dalla legge**; la partenza a caldo del punto fisso **dalla media di `i` e `j`**.
+- **Il TODO `3`** *(la regola completa sul ramo `mitosi`, **P6 PER PRIMA**)* **e il TODO `4`** *(la stima delle due corse)* **RIPARTONO. FERMO PER LUCA prima di lanciare le corse.**
+
+### 9.2 LE PREMESSE DAL CODICE *(cosa credo; cosa NON so)* -- il percorso della corsa, letto file per file sul ramo `mitosi`
+
+- **Il tick di C2** *(`doc/referti_l2/controllo_senza_bordo.py`, `corsa_senza_bordo`)*: `p6_bracci.tick_GU` = `campo.spinta(1/2)`, `tick_lapse.fase_a`, **`cs_al_centro`** *(il punto fisso del lapse; a caldo da `lapse_caldo.STATO["cs"]`)*, **`reazione`** *(un secondo punto fisso, `TOLL_REAZIONE`)*, il palindromo avvolto da `_u1_oggi.avvolto` *(Ampere: `E <- E - e J`; la deriva di `A` e `U = e^{ieA}` rifatta)*, `reazione`, `fase_a`, `spinta(1/2)`. **L'energia registrata** *(`Corsa.registra`)*: `totd = somma conti_nodo(Z)["tot"]` *(`_libro_dei_conti.conti_per_nodo`: `energia_pesata.termini_di_h` con `mot.geo.U` e `par["eps"]`, il legame S1, i costituenti)* **+ `KVd = campo.K() + campo.V()`.** ### **E' questa l'«energia della CORSA» di D-H-CORSA** *(la mia lettura: la stessa somma che la corsa registra come `E`)*.
+- **Il campo di C2 e' `_u1_prototipo.Campo`** *(`m = 3 n` cablato: NON puo' crescere)*; **B3** *(`csv/solitone/u1_generico.CampoGenerico`)* **ha le stesse formule** *(la dinamica di `A`, `E` AL BIT sul toro, `200` passi; `V` entro `8` ulp: l'ordine delle placchette)*. **Gauss:** `p6_u_breve.gauss_sparso` *(la norma minima: `E = D^T phi`)*, e `gauss_riuso` con la cache per identita' del campo *(`CampoGenerico.cresci` la svuota)*.
+- ### **CHE COSA VUOLE UN NODO NUOVO NELLA CORSA, GRANDEZZA PER GRANDEZZA, E CHI LO DECIDE:**
+
+| la grandezza | chi la vuole | la regola | chi la decide |
+|---|---|---|---|
+| `psi_h`, `phi_h` *(nascita e flip)* | `Motore.cresci` | la covariante di stella + il fattore di stella; il flip di stella | D-COVSTELLA, D-FLIP-AMPIEZZE |
+| **`geo_n`: il VERSORE di ogni estremita' nuova** | `Motore.cresci` *(`iniziali["geo_n"]`)* | ### **NESSUNA** | ### **APERTO** *(9.3)* |
+| `geo_U` *(il trasporto per arco)* | `Motore.cresci` | `e^{ieA} I` dell'arco nuovo *(`_u1_prototipo.scrivi_U`)* | D-A-NASCITA, D-A-FLIP |
+| `dtau` del nodo nuovo | `Motore.cresci` | il valore uniforme *(`reazione` e `contatore.ritmo` lo VOGLIONO uniforme e uguale a `1`: lo controllano)* | derivato |
+| `cs` del nodo nuovo | `Motore.cresci` | `s N(rho_n)` *(`tick_lapse.cs_di`)*; la partenza a caldo: la media di `i` e `j` | il quinto punto |
+| `psi`, `rho`, `Lambda`, `h_int` per nodo | `Motore.cresci` *(`nodo:<nome>`)* | **ricalcolati dalle estremita' del nodo nuovo** *(`rho = somma |psi_h|^2`, `Lambda = somma |phi_h|^2`, `h_int` da `mot.elicita`, `psi` come la corsa la scrive)* | derivati |
+| `A`, `E`, area, `l/l*` | `CampoGenerico.cresci` | meta' flusso; Gauss vero; `AREA`; `sqrt(3)` | D-A-NASCITA, D-A-FLIP, D-AREA |
+| `s_a` *(il tempo d'arco del campo)* | `CampoGenerico.cresci` | **in C2 e' una COPIA presa alla costruzione** *(`campo_della_scena`: `FP.s_arco(mot)`)*: **se e' uniforme, lo stesso valore**; ### **NON SO se e' uniforme: si controlla e, se non lo e', FERMO** | derivato *(se uniforme)* |
+| `vec` *(il vettore d'arco del campo)* | `CampoGenerico` | **serve SOLO al verso antiorario della placchetta** *(un SEGNO)*: dai vettori dei genitori, e **la coerenza si CONTROLLA** *(ogni arco nelle sue due placchette con segni OPPOSTI)* | derivato *(un segno, non una grandezza)* |
+| `Theta` | `contatore.Contatore.cresci` | i nuovi da `0`, il diviso consumato | S2 del `2026-11-17` |
+| le posizioni | `posizioni.cresci` | il punto medio *(solo per disegnare)* | `10:41` |
+
+- ### ⚠ **9.3 IL PUNTO APERTO: IL VERSORE `geo_n` DELLE ESTREMITA' NUOVE E' FISICA, NON GEOMETRIA DA DISEGNO.** **[codice]** `Motore._moneta_spin` applica `exp(-i eps dtau sigma.n)` **per estremita'** e `Motore.elicita` somma `s_h . n_h` **dentro `H`** *(`termini_di_h`: `eps * h`)*; **nella corsa `eps = 0.5`** *(`_vuoto_vivo_B.EPS = CB.EPS_LUNGA`)*. **Sul toro `n` e' la direzione dell'arco uscente** *(`scena_l2.versori`: `+e_a` sull'estremita' `2k`, `-e_a` su `2k+1`; le tre direzioni a `0`, `120`, `60` gradi)*: ### **le due estremita' di un arco hanno `n` OPPOSTI** *(«e' cio' che rende `n` una direzione di moto»)*. **Nessuna decisione dice che versore ha un'estremita' nuova**, e **con D-AREA la geometria e' combinatoria** *(le posizioni non sono fisica)*. ### **Le proposte, e quella del guardiano:**
+  - **(V1) DI STELLA, come le ampiezze:** `n -> i` in `n` = il versore di `j -> i` in `j`; `n -> j` in `n` = quello di `i -> j` in `i`; `n -> k` in `n` = **la media normalizzata** dei versori di `i -> k` in `i` e `j -> k` in `j`; l'estremita' nuova di `k` = la media normalizzata di `k -> i` e `k -> j` in `k`; le estremita' trasportate tengono il loro. **Alla NASCITA coincide con la geometria del punto medio** *(sul toro: `n -> k` a `90` gradi, `k -> n` a `270`: OPPOSTI)*. **Al FLIP no:** le medie in `n` e in `m` **NON sono opposte** *(sul toro, `x = i`, `y = k`: `135` e `330` gradi)*.
+  - **(V2) DALLE POSIZIONI di B4:** opposte per costruzione, **ma le posizioni diventerebbero FISICA** *(contro la decisione delle `10:41`)*.
+  - **(V3) V1 alla nascita; al FLIP il versore dell'arco `n - m` OPPOSTO PER COSTRUZIONE:** `v = normalizza(media in n - media in m)`, **`+v` in `n`, `-v` in `m`** *(simmetrica, nessun verso)*. ### **La raccomandazione del guardiano: (V3)** *(tiene la proprieta' delle due estremita' opposte, che e' la definizione di `n` come direzione di moto, e non usa le posizioni)*. ### **E' UNA DECISIONE DI LUCA: FERMO prima di usarla** *(la regola senza i versori NON si chiude: `Motore.cresci` li vuole, e il conto della scelta del flip li legge attraverso `elicita`)*.
+- **9.4 UNA CONSEGUENZA DI «GAUSS VERO», non una scelta** *(dichiarata)*: **la carta sez. `2` scrive `div E = e (rho - media)` sul grafo NUOVO**; **un nodo nuovo cambia la MEDIA** *(la carica conservata su `n + 1` nodi)*, **quindi il bersaglio cambia su TUTTI i nodi** *(di `e M / (n (n + 1))` ciascuno)* **e la correzione e' GLOBALE** *(la norma minima, come la misura di `nascita_dentro_fuori.gauss` che Luca ha visto nella `11.2`: `E + D^T x`)*. ### **Quindi `E` cambia, poco, OVUNQUE a ogni nascita:** P6 lontano dal difetto **non puo' essere al bit per `E`** *(la mia previsione della `9` della carta della mitosi lo diceva gia')*. **L'alternativa** *(lo sfondo resta sui nodi vecchi, il nodo nuovo nasce con sfondo `0`: la correzione LOCALE)* **sarebbe un'altra legge: NON la uso; la scrivo solo come osservazione.**
+- **9.5 P6, COME SI PUO' FARE** *(la carta del mandato delle `10:31`, TODO 4: «P6 PER PRIMA, riscritta a parita' di `E` e `cs`»)*:
+  - **P6.0 -- IL BRACCIO 0** *(il cancello di D-M1 nella forma che si puo' provare AL BIT)*: **la corsa MITOSI col codice della crescita PRESENTE e nessuna nascita** *(lo stato di C2 a `k 3000`: nessun arco e' a `2 pi` prima di `2.8e4` tick)* **contro il passo di C2, `N` tick dallo stesso stato:** **tutte le chiavi dello stato, `A`, `E`, `cs_prec` AL BIT**; `Theta` accumulato senza toccare lo stato. ### **E' la condizione del RISPARMIO** *(S3: MITOSI riparte dallo stato di C2-EXT prima del primo scatto: le due corse devono coincidere fin li')*. **L'energia registrata: entro pochi ulp** *(`V` di `CampoGenerico` somma le placchette in un altro ordine: dichiarato)*.
+  - **P6.1 -- LONTANO DA UNA NASCITA FORZATA:** **NON al bit, e il perche' e' nel codice:** oltre a `E` *(9.4)*, **i due punti fissi del tick** *(`cs_al_centro` con `EPS_CS`, `reazione` con `TOLL_REAZIONE`)* **si fermano su un criterio GLOBALE** *(il massimo su tutti i nodi)*: **un grafo diverso puo' cambiare il numero di giri e quindi l'ultimo bit OVUNQUE.** **«A parita' di `E` e `cs`» non basta: anche la reazione e' un punto fisso globale.** ### **Si MISURA il profilo** *(la differenza massima per anello in passi dal nodo nuovo, dopo un tick, con `cs` e `E` dei nodi e degli archi vecchi messi uguali)* **e si DICHIARA, senza soglia nuova** *(la soglia `0` della tabella della carta NON e' raggiungibile per costruzione: una premessa che cade, scritta qui)*.
+
+### 9.6 PROGETTAZIONE *(i passi; cosa mi farebbe FERMARE)*
+
+1. **Questa carta, la sez. `18.7` della carta della mitosi, la relazione: commit, push** *(primo-ordine)*.
+2. **Sul ramo `mitosi`, P6.0 PER PRIMA:** `doc/referti_l2/mitosi_corsa.py` *(un file NUOVO: `controllo_senza_bordo.py` non si tocca)*: **la corsa di C2 con `CampoGenerico` al posto del campo del prototipo** *(costruito dagli stessi archi, `s_a`, `A`, `E`)* **e il contatore `Theta` dopo ogni tick**; la nascita **non c'e' ancora** *(9.3)*: **se un arco scatta, ALZA.** **La prova** `p6` *(`N = 20` tick da C2 `k 3000`: lo script di C2 e quello nuovo, in memoria, AL BIT su ogni chiave, `A`, `E`, `cs_prec`)*. **Il caso che DEVE fallire:** lo stesso con `E` di UN arco toccato di un ulp prima del primo tick *(la prova deve vederlo)*. **Commit prima della prova; la suite; commit del referto.**
+3. ### **FERMO se:** P6.0 non e' al bit *(il risparmio cade)*; `s_a` del campo non e' uniforme; la coerenza dei segni delle placchette non regge. ### **E FERMO PER LUCA sul versore `geo_n`** *(9.3)* **prima della regola nella corsa.**
+4. **Dopo la decisione:** la regola nella corsa *(nascita di stella -> `Motore.cresci` -> `CampoGenerico.cresci` -> i quattro flip ognuno col suo Gauss e l'energia della corsa -> la scelta -> `Theta`, le posizioni, `E_persa`)*; le prove P1, P3, P5 *(con l'energia della corsa)*, P8, **P9 alla nascita**, la nascita FORZATA, P6.1, il costo *(Q-P1)*; poi la stima delle due corse e FERMO.
+
+### 9.7 LE PREVISIONI *(copiate PRIMA)*
+
+- **P6.0 (le mie):** **AL BIT su ogni chiave dello stato, `A`, `E` e `cs_prec`** *(B3 ha la dinamica del campo al bit sul toro; `gauss_sparso` non gira dopo `k 0`; la divergenza di B3 e' al bit)*; **l'energia registrata entro `8` ulp** *(`V`)*. **Il caso che deve fallire: FALLISCE** *(un ulp in `E` passa in `A`, poi in `U` e nella materia)*.
+- **P6.1 (la mia):** **non al bit oltre il cono di un tick** *(9.4, 9.5)*; **la differenza lontana all'ordine di `EPS_CS` relativo o sotto.**
+
+### 9.8 LA STELLA POLARE *(le cinque domande: la regola entra nella corsa sul ramo)*
+
+1. **A14:** **ogni grandezza del nodo nuovo ha una fonte scritta** *(9.2, la tabella)*; **dove non ce l'ha** *(il versore)* **si chiede, non si sceglie.**
+2. **Il gradino di ROBUSTEZZA-FISICA:** P6.0 e' un braccio 0 *(la condizione del risparmio)*; la regola si prova prima di qualunque corsa.
+3. **Numeri o leggi aggiunti:** **nessun numero libero** *(`1e-12 |H|` e' la guardia contro l'arrotondamento di D-FLIP-SCELTA, gia' dichiarata)*; **le leggi della nascita sono quelle decise** *(D-COVSTELLA, D-FLIP-AMPIEZZE, D-FLIP-SCELTA, D-AREA, D-A-NASCITA, D-A-FLIP)*; **il versore: aperto.**
+4. **Verso EM-curvatura:** **con D-AREA la curvatura sta nei GRADI dei nodi**; la nascita nel guscio *(dove scatta il contatore del lapse)* **lega la curvatura del grafo al lapse** *(P7)*.
+5. **Emergente o imposto:** **il DOVE e' emergente** *(il contatore)*; **il COME e' imposto dalle regole di stella** *(nessuna taratura)*; **la scelta del flip e' emergente dall'energia della corsa.**
+
+### 9.9 TODO
+
+1. questa carta + la `18.7` + la relazione: commit, push;
+2. ramo `mitosi`: `mitosi_corsa.py` + la prova P6.0: commit, push; la suite; la prova; il referto: commit, push;
+3. **FERMO per Luca sul versore `geo_n`** *(9.3)*, **con P6.0 nel messaggio.**
