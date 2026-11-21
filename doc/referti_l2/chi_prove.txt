@@ -1,0 +1,23 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_prove.py  sha1-BYTE 9e99d6d1  committato e pulito
+======================================================================================================================================================
+LE PROVE DEL TICK CON CHI, LA PARTE B (Luca 2026-11-21 15:57; il task history del ramo lapse-u, sez. 9.3)
+======================================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### i parametri (CALCOLATI): kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04; m0 +1.504935886674e+00; a 4.7680250765e-03
+    il controllo contro chi_massa.txt (238de05e): kappa 2.5289441539e-04, c0 +3.8058988126e-04 -> COINCIDONO
+    e0 = C.e0 4.767266e-01; G2.eps_top_tl4b 4.767266e-01
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### K1 IL VUOTO (c0 del vuoto -7.1504211378e-04, kappa di C2): chi e pi a 0 al bit per 20 tick: False; lo stato contro tick_GU con ('uno',): AL BIT -> NON PASSA
+### K2 KAPPA = 0 (il mattone di C2 a k 3000, 20 tick) contro tick_GU con ('uno',): AL BIT -> PASSA
+### K3 LA SORGENTE FERMA: dal profilo statico, 2000 passi: 2.387e-14 (la soglia 1e-10); da 0, la media sui passi 2000-8000 al centro 1.894636e+01 contro lo statico 1.889891e+01: 0.0025 (la soglia 0.10) -> PASSA
+### K4 L'IMPULSO (chi = 1 al nodo 17204): per t = 1..30, chi = 0 esatto oltre t passi e non zero a t: True -> PASSA
+### K5 L'ENERGIA (100 tick dal mattone di C2 a k 3000; chi al profilo statico, H_chi iniziale +2.888657e+02): la deriva relativa con chi 7.335e-06, il tick di oggi 7.522e-06 (il rapporto 0.98; la soglia 10 volte + 1e-12) -> PASSA
+    H con chi: +5.2612153446e+05 +5.2611770035e+05 +5.2612152457e+05 +5.2611767510e+05
+    H di oggi: +5.2591275331e+05 +5.2590880712e+05 +5.2591275091e+05 +5.2590879726e+05
+### IL DETERMINISMO (due volte 20 tick dallo stesso stato): AL BIT
+### LA RIPRESA (10 + salva + riprendi + 10 contro 20 di fila): AL BIT (il file E:\soliton_simulator\controllo\CHI\prova\ripresa_00010.npz)
+### B3 IL COSTO (i primi 20 tick, lo stesso stato, lo stesso processo): con chi 0.678 s per tick, il tick di C2 3.407 s per tick: il rapporto 0.199 -> ENTRO +10%
+======================================================================================================================================================
+### GLI ESITI: {'K1': False, 'K2': True, 'K3': np.True_, 'K4': True, 'K5': True, 'determinismo': True, 'ripresa': True, 'costo': True} -> NON TUTTE: FERMO   (il tempo 607 s)
+======================================================================================================================================================

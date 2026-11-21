@@ -1,0 +1,20 @@
+[TIMBRO] torsione_segmenti.py  sha1-BYTE 378eedc2  committato e pulito
+[TIMBRO] innesco_stima.py  sha1-BYTE c0ed33a2  committato e pulito
+==================================================================================================================================
+LA STIMA DELLA CORSA GEMELLA (Luca 2026-11-17 21:00): quanti tick perche' nascano 10 nodi oltre il confine
+==================================================================================================================================
+### il caso noto: il primo 2 pi entro 45 nodi 2.7888e+04
+### il tick misurato di C2 (il registro): 3.690 s
+----------------------------------------------------------------------------------------------------------------------------------
+OLTRE 23.81 NODI: entro 45 nodi 15862 archi, con la pendenza oltre 3 sigma 15356; il ritmo netto massimo 1.2498e-06 rad per tick
+    il 10-esimo arco a 2 pi (la retta prolungata): tick 7.4657e+06 = 7.652e+03 ore al tick misurato (0.9 anni); il primo: tick 5.0277e+06
+    oltre 45 nodi (|Theta|/3000, NON significativo): il 10-esimo arco a 2 pi al tick 7.0423e+08
+----------------------------------------------------------------------------------------------------------------------------------
+OLTRE 29.81 NODI: entro 45 nodi 12359 archi, con la pendenza oltre 3 sigma 11937; il ritmo netto massimo 1.1995e-08 rad per tick
+    il 10-esimo arco a 2 pi (la retta prolungata): tick 6.2102e+08 = 6.365e+05 ore al tick misurato (72.7 anni); il primo: tick 5.2381e+08
+    oltre 45 nodi (|Theta|/3000, NON significativo): il 10-esimo arco a 2 pi al tick 7.0423e+08
+----------------------------------------------------------------------------------------------------------------------------------
+### l'estensione di C2 alla stessa lunghezza: lo stesso costo (il braccio senza mitosi gira allo stesso tick)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: il primo 2 pi entro 45 nodi = 2.7888e+04 (torsione_segmenti.txt)                                 PASSA
+==================================================================================================================================

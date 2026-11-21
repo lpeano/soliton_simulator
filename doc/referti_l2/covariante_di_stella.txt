@@ -1,0 +1,64 @@
+[TIMBRO] covariante_e_famiglia.py  sha1-BYTE c9abaac2  committato e pulito
+[TIMBRO] covariante_di_stella.py  sha1-BYTE 4b672175  committato e pulito
+==================================================================================================================================
+LA COVARIANTE DI STELLA (Luca 2026-11-20 13:33); lo stato di C2 a k 3000 (dichiarato)
+==================================================================================================================================
+### IL CASO NOTO DEL CODICE: sul campo uniforme le 6 estremita' nuove (prima del fattore) = il valore AL BIT: True
+----------------------------------------------------------------------------------------------------------------------------------
+### IL VUOTO F3 PURO (S162, L 162, l'arco 39609; NESSUNA attesa, dichiarato): DH_SC +3.384608e-02; per termine: G_psi +0.0000e+00, a_psi +0.0000e+00, N +0.0000e+00, G_phi +0.0000e+00, a_phi +3.3846e-02; accanto E2 +3.384608e-02 (covariante_vuoto_F3.txt) e FA +3.476457e+00 (regole_fase_F3.txt)
+----------------------------------------------------------------------------------------------------------------------------------
+### parte_0.npz: 1465 archi, 429 s
+### parte_1.npz: 1464 archi, 428 s
+### DH_SC: definita su 2929 archi su 2929; min -4.0943e+01, mediana -1.2561e+01, max +9.8383e-01; negativi 2916; |a mano - pieno| max 1.397e-09; la norma (materia, vuoto) dopo - prima: max |.| 2.274e-12, 1.421e-14
+    accanto (le mediane): E2 -1.1921e+01, D7 -5.5520e+02; DH_SC per termine (mediane): G_psi +1.3646e+00, a_psi -1.4450e+01, N +6.5536e-04, G_phi +2.8235e-01, a_phi +3.2487e-02
+    DH_SC - E2: mediana -8.4701e-01, max |.| 9.6647e+00
+    PER ANELLO (le mediane):
+      r 10-12:  191 archi; DH_SC -2.8136e+01 (materia -2.9186e+01, vuoto +7.0735e-01, N +3.1370e-03); E2 -2.6289e+01; D7 -1.2135e+03
+      r 12-14:  372 archi; DH_SC -2.4253e+01 (materia -2.5285e+01, vuoto +7.1411e-01, N +1.5764e-03); E2 -2.3668e+01; D7 -1.0875e+03
+      r 14-16:  504 archi; DH_SC -1.9664e+01 (materia -2.0318e+01, vuoto +4.7962e-01, N +5.7559e-04); E2 -1.9378e+01; D7 -8.7335e+02
+      r 16-18:  587 archi; DH_SC -1.3722e+01 (materia -1.4129e+01, vuoto +3.0821e-01, N +3.5753e-04); E2 -1.3162e+01; D7 -6.1085e+02
+      r 18-20:  667 archi; DH_SC -7.7595e+00 (materia -8.1402e+00, vuoto +2.8088e-01, N +7.1319e-04); E2 -6.8989e+00; D7 -3.2302e+02
+      r 20-22:  593 archi; DH_SC -3.2819e+00 (materia -3.4313e+00, vuoto +2.2104e-01, N -4.6390e-05); E2 -1.8305e+00; D7 -1.0463e+02
+      r 22-24:   15 archi; DH_SC -2.3835e+00 (materia -1.9592e+00, vuoto -1.9621e-02, N -5.5708e-02); E2 +1.9348e-01; D7 -2.6150e+01
+----------------------------------------------------------------------------------------------------------------------------------
+### IL DETERMINISMO: det_a e det_b AL BIT True; contro le parti sugli stessi 100 archi True
+### LA FILA: 20 nascite; saltati: divisi 0, senza due vicini comuni 0, NON definite 0
+     1: l'arco  51106 (17035 -> 17036): DH -8.028212e+00; H 3.4366521297e+06; E_persa +8.028212e+00; |H + E_persa - H0|/|H0| 1.355e-16
+     2: l'arco  61662 (20554 -> 20740): DH -9.233982e+00; H 3.4366428957e+06; E_persa +1.726219e+01; |H + E_persa - H0|/|H0| 1.355e-16
+     3: l'arco  52225 (17408 -> 17409): DH -1.573418e+01; H 3.4366271616e+06; E_persa +3.299637e+01; |H + E_persa - H0|/|H0| 0.000e+00
+     4: l'arco  51664 (17221 -> 17222): DH -3.208702e+01; H 3.4365950745e+06; E_persa +6.508340e+01; |H + E_persa - H0|/|H0| 1.355e-16
+     5: l'arco  61151 (20383 -> 20570): DH -1.328009e+01; H 3.4365817944e+06; E_persa +7.836349e+01; |H + E_persa - H0|/|H0| 1.355e-16
+     6: l'arco  61706 (20568 -> 20755): DH -1.844764e+01; H 3.4365633468e+06; E_persa +9.681113e+01; |H + E_persa - H0|/|H0| 0.000e+00
+     7: l'arco  61665 (20555 -> 20741): DH -1.634896e+01; H 3.4365469978e+06; E_persa +1.131601e+02; |H + E_persa - H0|/|H0| 1.355e-16
+     8: l'arco  61098 (20366 -> 20552): DH -9.518449e+00; H 3.4365374794e+06; E_persa +1.226785e+02; |H + E_persa - H0|/|H0| 0.000e+00
+     9: l'arco  50545 (16848 -> 16849): DH -2.258831e+01; H 3.4365148911e+06; E_persa +1.452669e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    10: l'arco  49987 (16662 -> 16663): DH -1.607871e+01; H 3.4364988124e+06; E_persa +1.613456e+02; |H + E_persa - H0|/|H0| 2.710e-16
+    11: l'arco  62226 (20742 -> 20928): DH -1.826277e+01; H 3.4364805496e+06; E_persa +1.796083e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    12: l'arco  49879 (16626 -> 16627): DH -1.003091e+01; H 3.4364705187e+06; E_persa +1.896392e+02; |H + E_persa - H0|/|H0| 2.710e-16
+    13: l'arco  50998 (16999 -> 17000): DH -1.720044e+01; H 3.4364533183e+06; E_persa +2.068397e+02; |H + E_persa - H0|/|H0| 0.000e+00
+    14: l'arco  52783 (17594 -> 17595): DH -2.078467e+01; H 3.4364325336e+06; E_persa +2.276244e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    15: l'arco  60596 (20198 -> 20385): DH -1.755162e+01; H 3.4364149820e+06; E_persa +2.451760e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    16: l'arco  61148 (20382 -> 20569): DH -3.681883e+01; H 3.4363781631e+06; E_persa +2.819948e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    17: l'arco  61703 (20567 -> 20754): DH -2.990437e+01; H 3.4363482588e+06; E_persa +3.118992e+02; |H + E_persa - H0|/|H0| 1.355e-16
+    18: l'arco  62229 (20743 -> 20929): DH -2.041776e+01; H 3.4363278410e+06; E_persa +3.323169e+02; |H + E_persa - H0|/|H0| 2.710e-16
+    19: l'arco  49426 (16475 -> 16476): DH -1.952494e+01; H 3.4363083161e+06; E_persa +3.518419e+02; |H + E_persa - H0|/|H0| 0.000e+00
+    20: l'arco  60593 (20197 -> 20384): DH -4.310466e+01; H 3.4362652114e+06; E_persa +3.949465e+02; |H + E_persa - H0|/|H0| 2.710e-16
+----------------------------------------------------------------------------------------------------------------------------------
+### LO SPECCHIO VERO a 30 gradi per il nodo (92, 92) (lo scarto 4.3e-14); H dello stato specchiato contro H relativo 1.355e-16; 200 archi: 132 conservati, 68 ROVESCIATI
+    SC      conservati 132 archi: psi max 2.503e-16 (sopra 1e-14:   0), phi max 1.981e-16 (sopra:   0)
+    SC      ROVESCIATI  68 archi: psi max 1.388e-16 (sopra 1e-14:   0), phi max 1.253e-16 (sopra:   0)
+    MINIMO  conservati 132 archi: psi max 2.156e-16 (sopra 1e-14:   0), phi max 6.264e-17 (sopra:   0)
+    MINIMO  ROVESCIATI  68 archi: psi max 2.028e-01 (sopra 1e-14:  68), phi max 5.137e-01 (sopra:  68)
+    il caso che DEVE FALLIRE (il padre a indice minore): lo scarto massimo 5.137e-01 (deve superare 1e-06)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: sul campo uniforme la covariante di stella (prima del fattore) da' il valore AL BIT                      PASSA
+  DEVE: P-SC1 (gli archi): definita sul 100% dei 2929 (2929)                                                                   PASSA
+  DEVE: P-SC3: DH_SC mediano negativo e fra -40 e 0 (-12.561)                                                                  PASSA
+  DEVE: il determinismo: due processi AL BIT (i 100 archi e la fila) e uguali alle parti                                       PASSA
+  DEVE: P-SC1 (la fila): 20 nascite, NESSUNA non definita                                                                      PASSA
+  DEVE: P-SC4: nella fila |H + E_persa - H0|/|H0| sotto 1e-12 dopo ognuna                                                      PASSA
+  DEVE: DEVE FALLIRE: il padre a indice minore sopra 1e-6 (o la prova non vale: FERMO)                                         PASSA
+  DEVE: P-SC2: la covariante di stella simmetrica su tutte le classi entro 1e-14                                               PASSA
+### LA CONDIZIONE DI LUCA PER PROSEGUIRE (definita al 100%, simmetrica entro 1e-14, deterministica, H + E_persa entro 1e-12): PASSA
+### 51 s
+==================================================================================================================================

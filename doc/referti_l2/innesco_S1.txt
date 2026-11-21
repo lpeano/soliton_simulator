@@ -1,0 +1,34 @@
+[TIMBRO] regole_fase_F3.py  sha1-BYTE d45678c4  committato e pulito
+[TIMBRO] innesco_S1.py  sha1-BYTE 7ca3b38e  committato e pulito
+==================================================================================================================================
+S1 SUI CANDIDATI: LA MATERIA DELLA NASCITA FA SOTTO L'1%% DI |DH|? (Luca 2026-11-17 21:00)
+==================================================================================================================================
+### il caso noto (L162_MGU_03000, l'arco 66417: 22139 -> 22301): FA dH +4.459258e+00, materia/|dH| 6.002e-02
+### 2929 candidati (r da 10.01 a 22.27); lo stato di C2 a k 3000
+    0 su 2929 (0 s)
+    250 su 2929 (79 s)
+    500 su 2929 (157 s)
+    750 su 2929 (234 s)
+    1000 su 2929 (312 s)
+    1250 su 2929 (390 s)
+    1500 su 2929 (469 s)
+    1750 su 2929 (548 s)
+    2000 su 2929 (625 s)
+    2250 su 2929 (705 s)
+    2500 su 2929 (787 s)
+    2750 su 2929 (865 s)
+----------------------------------------------------------------------------------------------------------------------------------
+### il rapporto materia/|dH| della nascita FA: min 9.267e-01, mediana 1.003e+00, max 1.372e+00; indefinite 0
+### ### PASSANO S1 (materia sotto l'1%): 0 su 2929
+    r 10-12:  191 archi; materia/|dH| mediana 1.006e+00 (min 9.968e-01); dH mediana -1.2135e+03; passano 0
+    r 12-14:  372 archi; materia/|dH| mediana 1.002e+00 (min 9.945e-01); dH mediana -1.0875e+03; passano 0
+    r 14-16:  504 archi; materia/|dH| mediana 1.000e+00 (min 9.939e-01); dH mediana -8.7335e+02; passano 0
+    r 16-18:  587 archi; materia/|dH| mediana 1.000e+00 (min 9.925e-01); dH mediana -6.1085e+02; passano 0
+    r 18-20:  667 archi; materia/|dH| mediana 1.005e+00 (min 9.881e-01); dH mediana -3.2302e+02; passano 0
+    r 20-22:  593 archi; materia/|dH| mediana 1.011e+00 (min 9.267e-01); dH mediana -1.0463e+02; passano 0
+    r 22-24:   15 archi; materia/|dH| mediana 1.042e+00 (min 9.478e-01); dH mediana -2.6150e+01; passano 0
+### 922 s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: FA a 23.81 nodi su L162 = regole_fase_F3.txt alla precisione stampata                            PASSA
+  DEVE: P-L4: fra gli archi a 2 pi entro 1e5 tick meno della meta' passa S1 (0 su 2929)                                PASSA
+==================================================================================================================================

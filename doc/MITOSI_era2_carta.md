@@ -312,3 +312,239 @@
 
 - **Le scelte per la regola del vuoto alla nascita:** **FA o FT** *(stabili, `+3.48` sul vuoto)*, **oppure il MINIMO a norma fissata** *(il costo circa `0`)*; **e il PADRE senza il verso dell'arco** *(per la simmetria allo specchio)*.
 - **E le due domande nuove:** **se la nascita al minimo e' gratis, che cosa fa la soglia?**; **la riserva conservata vuole un confine che assorbe: si accetta?**
+
+### 13.7 D-R1, D-R2, D-R3 SOSPESE *(decisione di Luca `2026-11-17` `18:04`)*
+
+- **Le riserve per settore, la nascita dove passa piu' flusso, l'energia tolta dal vuoto: SOSPESE, non annullate.** **D-R4** *(la crescita irreversibile, la freccia dichiarata)* **RESTA.** **La parte B** *(l'infrastruttura, D-R5)* **prosegue: B.2 `f7f3e43d`, B.3 `c2cb792b` sul ramo `mitosi`.**
+
+## 14. IL QUANTO DI OLONOMIA COME INNESCO *(il mandato di Luca del `2026-11-17` `18:04` e l'aggiunta delle `18:48`; la carta `doc/TASK_HISTORY/2026-11-17_torsione_tempo_proprio.md`)*
+
+### 14.1 LA STORIA
+
+- **`2026-10-11`, la decisione di Luca** [[MITOSI-QUANTO-OLONOMIA]]: **la mitosi scatta al QUANTO di olonomia**, col tetto `4 pi` della doppia copertura, **nessun numero tarato.**
+- **`2026-10-27`, l'ipotesi** *(PROGETTO_MITOSI `3(a)`)*: **la torsione e' un criterio d'energia scritto come fase; `2 pi` e' un quanto d'azione; scatta dove `cs` differisce ai capi** -- *«il tempo curvo che produce lo spazio curvo»*. **La misura del `27/10` NON LEGGIBILE** *(incrementi di fase circa `pi` per tick; il punto fisso di `cs` allora non convergeva)*.
+- **`2026-11-17`, A3:** a norma fissata la nascita NON ha un costo intrinseco *(`compensazione_vuoto.txt`)*. **L'errore `n.188` del guardiano:** oggi la mitosi e' stata progettata sul «calore che paga» senza richiamare la decisione dell'`11/10`.
+
+### 14.2 LA DEFINIZIONE *(del guardiano, letta sul codice)*
+
+- **`Theta_a = pi * somma sui tick (dtau_nodo_i - dtau_nodo_j)`**, `dtau_nodo = mot.dtau * cs` *(`flussi_parziali.dtau_nodo`)*, `omega = pi / dtau_rif = pi`: **il nodo da' al vuoto la fase `pi s_k` per tick** *(sul vuoto `3 pi / 20` a `s = 0.15`)*. **Giusta senza fattori.** Invariante di gauge, locale, simmetrica allo specchio per costruzione.
+
+### 14.3 I NUMERI
+
+- **K1** *(`torsione_tempo_proprio_K1.txt`)*: sul vuoto F3 puro `cs = 0.15` uniforme al bit, Theta `0` su tutti i `103788` archi; il caso che deve fallire fallisce.
+- **K3** *(`torsione_tempo_proprio_K3.txt`)*: la ripresa dagli stati AL BIT; **il trapezio fra stati ogni `250` tick sbaglia Theta del `96%` della scala** -> M3-bis *(l'errore `n.189` del guardiano: la stazionarieta' del lapse data per buona)*.
+- **K2** *(`torsione_tempo_proprio_K2.txt`)*: **la fase relativa vera del vuoto NON si lega alla torsione del tempo proprio**: oltre `30` nodi la torsione in `50` tick e' al piu' `1.0e-05` rad, la fase relativa misurata si muove di `2.5e-02` *(mediana)*; **il rapporto: mediana `-10`, quartili `+-3.5e4`**; fra `10` e `20` nodi *(la torsione `1.4e-02`)* mediana `+7.5`, quartili `-334`, `+393`.
+
+### 14.4 LE PREVISIONI DEL GUARDIANO
+
+- **P-T5 FALSA** *(K2)*. **P-T1, P-T2, P-T3, P-T4: NON MISURATE** -- **M3-bis non e' partita per il FERMO di K2.**
+
+### 14.5 COSA SIGNIFICA *(per «vicino ma fuori» e per il test di `3000` tick)*
+
+- ### **NELLA FORMA LETTA DAL CODICE, LA TORSIONE DEL TEMPO PROPRIO NON E' L'OLONOMIA DEL VUOTO:** **la fase relativa delle estremita' e' dominata dalla dinamica d'arco** *(lo spostamento e il Grover mescolano i capi)*, **non dalla differenza dei due orologi.** **Quindi un innesco «a `|Theta_a| = 2 pi`» conterebbe una grandezza che il vuoto NON accumula** -- **non sarebbe il quanto di olonomia dell'`11/10`, ma un contatore del lapse.**
+- **Per «vicino ma fuori»**: nessuna lettura possibile *(il ritmo per anello non e' misurato)*. **Per il test di `3000` tick**: **nessun innesco e' pronto** -- ne' D-R1-D-R3 *(sospese)*, ne' la torsione *(non legata)*.
+
+### 14.6 FERMO PER LUCA
+
+- **(a)** la torsione del tempo proprio **come contatore** *(un innesco dichiarato come tale, non come olonomia)* -- o no;
+- **(b)** **cercare l'olonomia VERA del vuoto**: la fase relativa misurata delle estremita' *(cio' che K2 misura)*, **su finestre lunghe** o **filtrata** dell'oscillazione d'arco, con un criterio fissato prima;
+- **(c)** **tornare a D-R1-D-R3**.
+- **E, per la parte B:** l'area e `l/l*` dei triangoli nuovi *(la stella di Hodge sul reticolo irregolare: B.3, provvisori)*, con D-M3.
+
+### 14.6-bis LA LETTURA DEL GUARDIANO SU K2 *(la sua, accanto alla mia della `14.5`; Luca `2026-11-17` `19:40`)*
+
+- **Il guardiano:** **K2 era MAL POSTA** -- **un segnale di `1e-5` contro onde di `1e-2` in `50` tick** *(l'errore `n.190` del guardiano)*; **ma la conclusione REGGE per un motivo piu' forte:** **un vuoto stazionario ha UNA frequenza globale, e la somma di `(dtau_i - dtau_j)` su un ciclo e' ZERO** *(un GRADIENTE, non un'olonomia)*: **la torsione del tempo proprio e' al piu' un CONTATORE della deriva fra orologi vicini** *(l'opzione (a))*.
+- **La mia, accanto:** **sono d'accordo su entrambe le cose.** **Sulla prima:** il rischio l'avevo scritto nella carta *(sez. `1.2`: «il rapporto puo' essere un quoziente di due numeri vicini allo zero»)* **ma ho fatto girare la prova com'era** *(la soglia era del mandato)*: **la scala `1.0e-05` stampata accanto lo mostrava.** **Sulla seconda:** **e' un argomento piu' forte di K2 e non dipende da nessuna misura** -- `Theta_a = pi somma_t (s_i - s_j)` e' la differenza di una funzione dei NODI, quindi **sulla chiusura di qualunque ciclo si annulla esattamente**: **non puo' essere un'olonomia per costruzione.** **Avrei dovuto vederlo leggendo la definizione** *(sez. `1.2` della carta della torsione: «uno scalare per nodo», scritto come un pregio)*.
+- **M3-bis** *(i segmenti tick per tick, l'aggiunta delle `18:48`)* **gira**: **i suoi numeri sono il ritmo del CONTATORE (a)**, letto come tale *(la carta della torsione, sez. `6`)*.
+
+### 14.7 IL FLUSSO DELLA PLACCHETTA *(il mandato di Luca del `2026-11-17` `19:40`; la carta `doc/TASK_HISTORY/2026-11-17_flusso_placchetta.md`; i referti `doc/referti_l2/flusso_placchetta.txt`, `.png`, `flusso_placchetta_K3.txt`)*
+
+- **La definizione:** `Phi_p = e * somma +-A_a` sul bordo della placchetta antioraria, `e = 6.315414e-05`; **nel codice `Campo.B()` e' gia' la circolazione: `Phi = e * B()`** *(K4 al bit)*. ### **IL CAMPO DELLE CORSE E' NON COMPATTO** *(`p6_u_breve.FORMA`; la spinta usa `B / AREA`, non `sin B`)*: **il quanto `2 pi` qui NON ha il senso pieno** [[PROGETTO-U1]].
+- **Le prove:** K1 *(`A = 0`)* `Phi = 0` su tutte le `69192` placchette; K2 la somma su tutte `3.3e-13` relativo; K4 il rotore del codice `0` al bit; **K3, la gauge a caso: `2.178e-10` contro la soglia `1e-12`: FALSA come scritta** -- **e' l'ARROTONDAMENTO, non la gauge** *(a posteriori, dichiarato)*: **`max |A| = 33.0` contro una circolazione massima `6.5e-05`** *(`A` e' quasi tutto GRADIENTE: il rapporto `5.1e+05`)*; lo scarto sta sotto il limite dell'arrotondamento a ogni ampiezza di `chi`; **in aritmetica esatta la circolazione e' invariata AL BIT** *(`0` su `69192`)*. Il caso che deve fallire *(un arco solo)* fallisce *(`1.2e+05`)*.
+- ### **I NUMERI:** **in C2 `max |Phi|` fra `3.16e-09` e `5.22e-09` rad su tutti gli stati** *(da `k 250` a `3000`)*, **fra `12.8` e `21.6` nodi dal baricentro** *(nel guscio della materia, dentro il confine `23.81`)*; **`|Phi|` medio `1.4e-10`-`3.7e-10`**; **il segno medio vicino a `0`** *(`-0.008` a `k 3000`)*; **nel tempo RESTA**: la pendenza di `max |Phi|` `-1.7e-13 +- 2.1e-13` per tick; **`max |Phi| / 2 pi = 8.3e-10`**: ### **NOVE ORDINI sotto il quanto, e non cresce.** **C1 contro C2:** entro il `4.3%` *(il massimo a `k 2750`)*.
+- **Le previsioni del guardiano:** **P-B1 VERA** *(`5.2e-09` contro `1e-2`)*; **P-B2 VERA** *(`12.8`-`21.6`)*; **P-B3 VERA** *(`4.3%`)*; **P-B4 FALSA come scritta** *(`2.2e-10`: l'arrotondamento, sopra)*. **Le mie:** P-B1 vera di molti ordini *(VERA: `Phi ~ e^2`)*; P-B2 non sapevo; P-B3 vera fino a `k 1000` *(VERA anche dopo)*; P-B4 vera *(FALSA come scritta: non avevo pensato alla cancellazione, con `A` cosi' grande)*.
+- ### **COSA SIGNIFICA PER (d):** **il flusso della placchetta, nel campo di oggi, e' `1e-9` del quanto e NON cresce** *(e l'aliasing: gli stati ogni `250` tick non vedono un'oscillazione piu' veloce di `500`)*: **come innesco a `|Phi| = 2 pi` NON scatterebbe MAI** *(a nessun orizzonte: la pendenza e' zero entro l'errore)*. **Perche' scatti servirebbe un'altra cosa** *(un `e` diverso, il campo compatto, o un innesco a una frazione del quanto -- e quest'ultima sarebbe una MANOPOLA, `A1`)*.
+
+### 14.8 FERMO PER LUCA: (a), (c) O (d)
+
+- **(a) il contatore del lapse:** **un gradiente, non un'olonomia** *(14.6-bis)*; **il suo ritmo netto lo da' M3-bis, che GIRA** *(i `12` segmenti di C2; il referto quando chiudono)*.
+- **(c) la riserva del calore:** **D-R1-D-R3, sospese** *(13.7)*; **e la domanda della `13.3`: la riserva conservata vuole un confine che assorbe.**
+- **(d) il flusso della placchetta:** **invariante di gauge, locale, su un ciclo -- ma `1e-9` del quanto, fermo, e nel campo NON compatto** *(14.7)*.
+
+## 15. L'INNESCO: IL CONTATORE DEL LAPSE *(il mandato di Luca del `2026-11-17` `21:00`; la carta `doc/TASK_HISTORY/2026-11-17_innesco_contatore.md`)*
+
+### 15.1 LE DECISIONI DI LUCA *(`21:00`)*
+
+- **L'innesco e' (a), IL CONTATORE DEL LAPSE:** `Theta_a = pi * somma sui tick (dtau_nodo_i - dtau_nodo_j)` *(14.2)*, **una memoria per arco; l'arco si divide a `|Theta_a| >= 2 pi`.** **Dichiarato come CONTATORE DELLA DERIVA FRA OROLOGI VICINI** *(la dilatazione gravitazionale del tempo)*, **NON come olonomia** *(14.6-bis)*. **`2 pi` e `omega = pi` dal modello.** **CONDIZIONATA alla deriva netta** *(il criterio di Luca, scritto prima del referto)*.
+- **D-M3 = FA con la compensazione locale di A3** *(il minimo a norma fissata su `S` a `1` passo: `H` totale conservata alla nascita)*. **D-R1-D-R3 restano sospese.** **Restano** D-M1, D-M2, D-M4, D-R4, D-R5, il bordo tolto, C2 braccio senza mitosi, il mattone su `L 186`.
+- **Le scelte del guardiano:** **S1** *(la materia della nascita FA sotto l'`1%` di `|DH|`: ### **l'`1%` E' UN NUMERO, `A1`: una scelta del guardiano, da rivedere con Luca**)*; **S2** *(gli archi nuovi da `Theta = 0`, l'arco diviso consumato)*; **S3** *(la compensazione deterministica e simmetrica, o una regola sulla fase, o FERMO)*; **S4** *(P7 riscritta: la FORMA del profilo della curvatura di Regge contro `N(rho)`)*.
+
+### 15.2 LA DERIVA NETTA C'E' *(`doc/referti_l2/torsione_segmenti.txt`: i `12` segmenti di C2, tutti AL BIT con lo stato salvato successivo)*
+
+- ### **IL CRITERIO DI LUCA PASSA:** **sull'arco del massimo** *(r `18.12`)* **la deriva netta in `3000` tick e' `0.675` rad contro un'oscillazione massima di `0.0082`** *(la pendenza a `3630 sigma`)*; **tutti i `20` archi del massimo lo passano.** **(a) VALE.**
+- **Il ritmo netto massimo `2.256e-04 +- 6e-08` rad per tick a r `18.08`** *(l'anello `18`; la media per anello piu' alta al `17`)*; **oltre `24` nodi crolla** *(`7e-08` all'anello `24`, `3e-09` al `27`)*.
+- **Il primo `2 pi` al tick `2.79e+04`**; entro `1e4` nessuno; ### **entro `1e5`: `2929` archi, TUTTI fra `10.0` e `22.3` nodi; entro `1e6`: `5346`, fra `2.3` e `23.45` -- TUTTI DENTRO IL CONFINE** *(`23.81`)*.
+
+### 15.3 S1 NON NE LASCIA PASSARE NESSUNO *(`doc/referti_l2/innesco_S1.txt`)*
+
+- ### **`0` SU `2929`:** **nel guscio della materia il termine della materia della nascita FA e' praticamente TUTTO `|DH|`** *(materia/`|DH|` fra `0.93` e `1.37`, mediana `1.003`)*, **e `DH` e' fortemente NEGATIVO** *(la mediana da `-1.2e+03` a `10`-`12` nodi a `-26` a `22`-`24`)*: **le nascite la' RILASCIANO energia della materia.** *(Lo stato di C2 a `k 3000`, non quello allo scatto: dichiarato.)*
+
+### 15.4 LA STIMA DELLA CORSA GEMELLA *(`doc/referti_l2/innesco_stima.txt`)*: ### **IMPRATICABILE con queste scelte**
+
+- **Perche' nascano `10` nodi oltre il confine `23.81`:** il ritmo netto massimo la' e' `1.25e-06` rad per tick; **il `10`-esimo arco a `2 pi` al tick `7.47e+06` = `7652` ore al tick misurato** *(`3.690` s, C2)*: **`0.9` anni** -- **e a `23.81` con FA la materia e' ancora il `6%` di `|DH|`** *(`regole_fase_F3.txt`)*: **S1 bloccherebbe i primi.**
+- **Oltre `29.81`** *(dove FA ha la materia sotto l'`1%`: `0.24%`)*: il ritmo `1.2e-08`; **il `10`-esimo al tick `6.2e+08` = `73` anni.**
+- **L'estensione di C2 alla stessa lunghezza:** lo stesso costo.
+
+### 15.5 LE PREVISIONI DEL GUARDIANO
+
+- **P-L1 VERA** *(il criterio passa, `20` su `20`)*; **P-L2 VERA** *(r `18.08`)*; **P-L3 VERA** *(`2.79e+04`)*; **P-L4 VERA, all'estremo** *(`0` su `2929`, non «meno della meta'»)*; **P-L5 NON MISURATA** *(la compensazione sul ramo `mitosi`: il TODO 3 non e' partito, sotto)*. **Le mie:** P-L1-P-L4 vere come le sue; su P-L5 nessun numero.
+
+### 15.6 COSA SIGNIFICA, E FERMO PER LUCA
+
+- ### **IL CONTATORE DEL LAPSE SCATTA SOLO NEL GUSCIO DELLA MATERIA** *(dove il gradiente di `N(rho)` e' grande)*, **e li' la nascita e' dominata dalla materia; S1, che vuole il vuoto, la vieta.** **Le due cose si escludono: con (a) piu' S1 la mitosi NON scatta in un tempo praticabile** *(il primo arco oltre il confine a `5e6` tick, i primi `10` dove S1 passa a `6e8`)*. **«Vicino ma fuori» e il contatore non stanno insieme.**
+- **Le strade** *(nessuna scelta presa)*: **(i)** togliere S1 o cambiarne la natura: **le nascite nel guscio, dentro la materia** *(`DH` negativo: la compensazione di A3 conserva `H`, quindi l'energia rilasciata va nel vuoto attorno)*; **(ii)** tenere S1 e accettare che la mitosi non scatti nel mattone di `L 186` *(il test sul mattone non si fa)*; **(iii)** un altro innesco per il vuoto fuori dal confine.
+- ### **IL TODO 3 NON E' PARTITO** *(B4, la memoria per arco, la regola, FA e la compensazione, le prove P6-P9 sul ramo `mitosi`)*: **B4 e la memoria per arco non dipendono da questa scelta; la REGOLA di nascita si'** *(dove si permette: S1)*, **e la corsa gemella che le prove preparano oggi non si puo' fare.** **Se Luca vuole, B4 riparte da subito.**
+
+### 15.7 SOSPESO *(Luca `2026-11-17` `23:07`)*
+
+- ### **SOSPESO (Luca 23:07): la ripresa da `doc/SOSPESO_2026-11-17_MITOSI_INNESCO.md`.** Nessuna corsa aperta, il ramo `mitosi` resta com'e'.
+
+## 16. LA RIPRESA: LE NASCITE NEL GUSCIO A ENERGIA NULLA *(il mandato di Luca del `2026-11-20` `10:31`; la carta `doc/TASK_HISTORY/2026-11-20_nascita_energia_nulla.md`)*
+
+### 16.1 LE DECISIONI DI LUCA *(`10:31`)*
+
+- **La strada (i) della `15.6`:** lo spazio puo' nascere **NEL GUSCIO della materia**, dove scatta il contatore del lapse *(15.2: `10`-`22` nodi)*. **S1 del `2026-11-17`** *(il filtro della materia all'`1%`)* **e' TOLTA.**
+- ### **IL «VICINO MA FUORI» DEL `2026-11-17` E' SUPERATO.** **La ragione** *(di Luca)*: **il contatore scatta solo dove il tempo e' curvo** *(15.2: il ritmo netto crolla oltre `24` nodi)*, **e lo spazio in se' non costa** *(A3, 13.3: a norma fissata la nascita non ha un costo intrinseco)*. **Il vincolo che lo sostituisce e' l'ENERGIA NULLA, sotto.**
+- **La nascita e' A ENERGIA NULLA:** la regola della MATERIA sulle estremita' nuove si sceglie, nascita per nascita, perche' `DH` totale `= 0` *(con FA per il vuoto)*. **La compensazione di A3 resta SOLO come riserva** dove la materia e' trascurabile *(li' la famiglia non ha radice: sul vuoto puro `DH = +3.476` con FA, `regole_fase_F3.txt`)*.
+- **In vigore:** l'innesco (a), D-M1, D-M2, D-M4, D-M3 = FA, D-R4, D-R5, D-R1-D-R3 sospese, il bordo tolto, C2 braccio senza mitosi, il mattone su `L 186`; S2 e S4 del `21:00`.
+
+### 16.2 LA FAMIGLIA E LA RADICE *(del guardiano, su delega; il testo intero nella carta del mandato, sez. `1.2`-`1.4`)*
+
+- **`alpha` = la frazione della norma del padre che passa al nodo nuovo, in unita' di D7:** le estremita' del padre `i` divise per `sqrt(2/(2 - alpha))`, le `4` di `n` a `sqrt(alpha)` volte quelle di D7. **`alpha = 1` e' D7 al bit; `alpha = 0` e' «`psi` trasportata senza dividerla».** La norma conservata, locale, deterministica.
+- **La radice per bisezione a `53` passi fissi** *(la risoluzione del double: un numero di precisione, dichiarato)*.
+- ### ⚠ **La premessa:** **il padre di D7 e' il SORGENTE dell'arco: lo specchio a `30` gradi rovescia una direzione su tre, e su quegli archi la famiglia, come D7, non puo' essere simmetrica.** P5 si stampa separata.
+
+### 16.3 LE PREVISIONI *(copiate PRIMA delle misure)*
+
+- **P-Z1.** La radice esiste su almeno il `95%` dei `2929` archi. **P-Z2.** `alpha*` strettamente dentro `(0, 1)` sulla maggior parte. **P-Z3.** Alla radice deterministica al bit e simmetrica allo specchio. **P-Z4.** Nelle `20` nascite in fila `|H(dopo) - H(prima)| / |H|` sotto `1e-10`. **P-Z5.** Una nascita costa meno di `10` tick.
+- **Le mie:** P-Z1 non lo so *(serve `DH(0) > 0`)*; P-Z2 vera se la radice c'e'; **P-Z3 deterministica si', simmetrica solo sugli archi a verso conservato**; P-Z4 vera; P-Z5 qui solo in parte.
+
+### 16.4 LE AGGIUNTE DI LUCA DELLE `10:41` E `10:47`: LA SPINTA, LA SATURAZIONE, LA MATERIA E LA METRICA *(il testo intero nella carta del mandato, sez. `6`)*
+
+- **La domanda:** la crescita attorno alla massa si SATURA *(IPOTESI G)* o NO *(IPOTESI E)*: **alla pari, la lettura dopo i numeri.** **«Spinto in la'» = la distanza IN PASSI lungo il grafo**; lo strumento `doc/referti_l2/distanza_passi.py` *(D1-D3, E1)*, in MITOSI e C2-EXT ogni `250` tick.
+- **La nota del guardiano:** **se tutto si espande insieme l'espansione non si vede; in un'espansione vera si conservano i conteggi** *(norma, carica)*, **non l'energia; l'energia nulla e' una scelta da metrica statica.** **D-PRINCIPIO** *(energia nulla o covariante)* **e' di Luca, dopo i numeri; il mandato prosegue con l'energia nulla.**
+- **La covariante, solo misurata:** le estremita' di `n` = la media delle estremita' di `i` e di `j` nella stessa direzione; un fattore uniforme sulla stella per `psi` e uno per `phi`; nessun padre.
+- **Le previsioni:** P-S1 *(i passi all'anello `40` crescono in MITOSI, costanti in C2-EXT)*, P-S2 *(la crescita rallenta)*, P-S3 *(le nascite restano nel guscio)*, P-E1 *(il mattone torna alla sua larghezza in passi)*, P-E2 *(`DH_cov` negativo su piu' della meta')*.
+
+### 16.5 LA NASCITA A ENERGIA NULLA: ### **LA RADICE NON ESISTE** *(`doc/referti_l2/nascita_energia_nulla.txt`, `nascita_energia_nulla_anelli.txt`)*: **FERMO DEL MANDATO**
+
+- ### **SU `0` DEI `2929` ARCHI:** **`DH(0)`** *(il trasporto senza divisione)* **e `DH(1)`** *(D7)* **sono TUTTI negativi** *(mediane `-566` e `-555`; da `-1.4e+03` a `10`-`12` nodi a `-22` a `22`-`24`)*, **e sugli `11` punti di `alpha` nessun cambio di segno.** **La radice manca sul `100%`: oltre il `20%` del mandato, FERMO.**
+- ### **IL PERCHE': LA FAMIGLIA QUASI NON CONTA.** **`DH(1) - DH(0)` ha la mediana `+8.5`** *(da `-44` a `+69`)*, **contro un `DH` di centinaia** *(`DH(1)/DH(0)` fra `0.87` e `0.99` per anello)*. **Sui primi `50` archi, col conto pieno, a `alpha 0`:** `G_psi -313`, `a_psi -177`, `N +1.7`, il vuoto `+1.3` *(le mediane)*. **La caduta c'e' gia' SENZA spostare niente**: **la mia lettura sul codice** *(`famiglie`: il termine di nodo `-Omega (0.5 nrm - |S|^2/d)`, il termine d'arco di `a`)*: **(1) le estremita' nuove in `k` e in `l` nascono con `psi = 0`: il grado sale da `6` a `7` senza ampiezza, `|S|^2/d` scende, il termine di nodo SCENDE; (2) l'arco diviso porta via il suo termine d'arco.** **Spostare la norma del padre al nodo nuovo non ci arriva.** *(Una lettura: non scomposta per nodo.)*
+- **Il resto:** il caso noto *(`alpha 1` = `regole_fase_F3` FA)* **al bit**; il determinismo *(due processi)* **al bit**; il conto a mano contro il pieno `2.7e-16` di `|H|`. ### ⚠ **LO SPECCHIO PASSA A VUOTO** *(un FALSO-UNO)*: **senza radice lo script confronta solo lo stato**, e **il caso che DEVE FALLIRE da' `0` anche lui**: **lo specchio NON e' misurato**, e **la premessa sul padre di D7** *(1.3 della carta del mandato)* **resta aperta.**
+- **LE PREVISIONI:** P-Z1 FALSA *(`0%`)*; P-Z2 FALSA *(nessuna radice)*; **P-Z3: deterministica VERA; lo specchio NON misurato**; P-Z4 non misurabile *(`0` nascite in fila)*; P-Z5: il pezzo di questo script `0.36` s = `0.10` tick di C2, **senza** la CSR e Gauss.
+- ### **LE STRADE, PER LUCA** *(nessuna presa)*: **(a) una famiglia piu' larga**: **la regola della materia deve mettere `psi` ANCHE sulle estremita' nuove in `k` e `l`** *(e sul nodo nuovo piu' della meta' del padre)*: e' cio' che fa la **covariante** *(6.3: le medie nella stessa direzione, la norma sulla stella)*; **(b) D-PRINCIPIO verso la covariante** *(l'energia libera)*: **la sua misura E2 e' PRONTA da scrivere e NON e' fatta** *(il FERMO viene prima)*; **(c) la compensazione di A3 sul vuoto**: **NON misurata qui**; il vuoto della stella vale decine *(la stima del guardiano)*, `DH` centinaia. ### **La mia raccomandazione: prima E2** *(la covariante sugli stessi `2929` archi: dice se la nascita che mette `psi` su `k`, `l`, `n` arriva vicino a zero o no)*, **poi la scelta.**
+- **Il ramo `mitosi`, a parte:** **B4** *(`68089e6d`)* **e la memoria `Theta`** *(`c14a087b`)* committati, la suite `67/67`; **la prova di `Theta` passa** *(`11/11`)*; **la prova di B4 v1 si e' fermata su un errore della PROVA** *(la scena finta senza `righe`)*: **la v2 in un file nuovo.**
+
+## 17. LA COVARIANTE, LA FAMIGLIA FRA D7 E LA COVARIANTE, E LO SPECCHIO VERO *(il mandato di Luca del `2026-11-20` `11:57` e la correzione delle `12:10`; la carta `doc/TASK_HISTORY/2026-11-20_covariante_e_specchio.md`; i referti `doc/referti_l2/covariante_e_famiglia.txt`, `covariante_vuoto_F3.txt`)*
+
+### 17.1 E2: LA COVARIANTE DA SOLA *(`psi` e `phi` covarianti; lo stato di C2 a `k 3000`, dichiarato)*
+
+- ### **`DH_cov` mediana `-11.9`** *(da `-39.3` a `+2.9`)*, **contro `DH(D7)` mediana `-555`: il `2.15%`.** **Negativa su `2840` archi su `2929`.** Per anello *(le mediane)*: `-26.3` a `10`-`12` nodi, `-13.2` a `16`-`18`, `-1.8` a `20`-`22`, `+0.19` a `22`-`24`. **Per termine** *(mediane)*: `G_psi +1.45`, **`a_psi -13.8`**, `N +0.002`, il vuoto `+0.48`: **mettere ampiezza in `k`, `l`, `n` recupera il termine di nodo; resta quasi solo il termine d'arco.**
+- **Il caso noto del codice** *(il campo uniforme: le estremita' nuove al bit)* **PASSA.** `beta = 1` *(la covariante con `phi` FA)* contro E2: la differenza di `DH` mediana `+0.58`.
+
+### 17.2 IL VUOTO F3 PURO *(il caso corretto delle `12:10`, `covariante_vuoto_F3.txt`; la riga «`H / n`» di `covariante_e_famiglia.txt` e' SUPERATA: l'errore `n.191`)*
+
+- ### **`DH_cov = +0.034`: vicino a `0`** *(FA sullo stesso arco: `+3.476`)*: **il caso e' LETTO, ma NON come atteso.** **L'estremita' nuova di `k`** *(la media delle estremita' di `k` verso `i` e verso `j`)* **e' ESATTAMENTE `0`**: **nel vuoto F3 le due hanno modulo `1` e fasi OPPOSTE.** **Con `k` e `l` presi da UNA direzione** *(verso `i` o verso `j`, lo stesso numero)*: **`DH = +3.583`**, come FA. ### **POST-HOC, dichiarato:** **non c'e' un «residuo dalla media che riduce l'ampiezza»: la media ANNULLA `k` e `l`, ed e' proprio cio' che tiene `DH` vicino a `0`.** **Nel vuoto la covariante lascia `k` e `l` vuoti come D7 lasciava `k` e `l` vuoti nella materia: li' non costa, qui costava.**
+
+### 17.3 LA FAMIGLIA `beta` *(`psi` = `(1 - beta) D7 + beta COV` sulla stella, `phi` FA)*
+
+- ### **LA RADICE SU `197` ARCHI SU `2929` (`6.73%`)**: **solo dove `DH(beta = 1) > 0`**, **e quasi tutti al bordo esterno del guscio** *(`0` fino a `18` nodi; `24` a `18`-`20`, `165` a `20`-`22`, `8` a `22`-`24`)*. **Dentro, anche la covariante con `phi` FA abbassa l'energia** *(le mediane `DH(beta = 1)` da `-21.4` a `-1.1`)*. `beta*` mediana `0.854` *(da `0.548` a `0.967`)*; i cambi di segno sugli `11` punti: `0` su `2721`, `1` su `197`, `2` su `11`.
+- **Alla radice:** `|DH|` col conto pieno al piu' `1.4e-09` *(`4.1e-16` di `|H|`)*. **Il determinismo: due processi AL BIT, uguali alle parti** *(la v2, `covariante_det_v2.py`: la v1 e' caduta nella fila, sotto)*. **Le `20` nascite IN FILA:** `|H(dopo) - H(prima)| / |H|` **al piu' `4.1e-16`** *(`beta*` da `0.851` a `0.948`)*; per trovarle la fila ha saltato **`865` candidati senza radice e `2` dove la covariante NON E' DEFINITA**.
+- ### ⚠ **LA COVARIANTE NON E' DEFINITA SU TUTTO IL GRAFO CRESCIUTO:** usa il vicino di `i` in `-a` e quello di `j` in `+a`, **e accanto a un difetto gia' nato quel vicino non esiste** *(la v1 della fila: `nessun vicino di 21125 nella direzione opposta`)*. **Va ridefinita sul grafo generico prima di ogni corsa** *(una decisione: quale vicino quando la direzione non c'e')*.
+- **La D7 simmetrica** *(un quarto da ciascun capo, misurata accanto)*: `DH` mediana `-528`: **come D7**.
+
+### 17.4 LO SPECCHIO VERO *(`200` archi: `132` a verso conservato, `68` ROVESCIATI; nascere e specchiare contro specchiare e nascere, array per array)*
+
+- ### **LA PROVA VALE:** **il caso che DEVE FALLIRE** *(il padre = il nodo di indice minore)* **FALLISCE: `0.51`** *(sui `68` rovesciati)*.
+- **D7: simmetrica sui conservati** *(`2e-16`)*, **NON sui rovesciati: `68` su `68`** *(`psi` `0.20`, `phi` `0.51`)*. **La COVARIANTE: simmetrica su TUTTI** *(`2e-16`)*. ### **La D7 simmetrica: `psi` simmetrico su tutti, ma `phi` NO sui rovesciati (`0.51`)**: **`phi` e' FA, e FA HA ANCHE LUI IL PADRE** *(le fasi di `n -> k`, `n -> l` dalle estremita' di `i`)*. ### **Quindi D-M3 = FA e' asimmetrica allo specchio sugli archi rovesciati, da sola** -- **e ogni regola che usa FA per `phi`** *(la famiglia `beta` compresa)* **la eredita.**
+- **La radice della famiglia:** confrontabile **su `1` arco solo** *(a verso conservato; `1.8e-12`)*, **`0` rovesciati** *(la radice esiste su pochi archi)*: **il «PASSA» del referto e' QUASI A VUOTO** -- **e per la riga sopra, sui rovesciati NON puo' essere simmetrica** *(`phi` FA)*. **Dichiarato.**
+
+### 17.5 LE PREVISIONI
+
+- **P-C1 VERA** *(`2.15%` contro la soglia `30%`)*; **P-C2 FALSA** *(`6.73%` contro `80%`)*; **P-C3 VERA** *(D7 asimmetrica su `68` su `68` rovesciati, la covariante simmetrica su tutti)*; **P-C4 VERA** *(al bit; la fila `4.1e-16`)*; **P-E2 VERA** *(`2840` su `2929`)*. **Le mie:** P-C1 e P-C2 «non lo so»; **P-C3 vera, come la mia premessa** *(che ora tocca anche FA)*; P-C4 vera.
+- **La previsione sul vuoto «`H / n`» della carta 1.4: FALSA e mal posta** *(l'errore `n.191`)*; il caso corretto e' la `17.2`.
+
+### 17.6 LA CONDIZIONE PER RIPARTIRE: ### **NON C'E'. FERMO.**
+
+- **Il mandato:** se la radice c'e' su almeno l'`80%` **E** la radice e' simmetrica, i TODO `4`-`5` delle `10:31` potrebbero ripartire con `beta`. **La radice c'e' sul `6.73%`, e la sua simmetria non e' stabilita** *(e con `phi` FA non puo' esserlo sui rovesciati)*. **I TODO `4`-`5` NON ripartono.**
+
+### 17.7 D-PRINCIPIO, PER LUCA *(le due strade coi numeri; NESSUNA presa)*
+
+- **ENERGIA NULLA** *(la famiglia `beta`)*: **PRO:** `H` conservata al bit *(`4.1e-16` in `20` nascite)*, deterministica. **CONTRO:** **la radice esiste sul `6.7%` degli archi del guscio, al suo bordo esterno**: **dove il contatore scatta di piu'** *(`10`-`18` nodi)* **non nasce niente**; usa D7 e FA, **asimmetriche allo specchio sui rovesciati**; e' una scelta da metrica statica *(la nota del guardiano delle `10:47`)*.
+- **COVARIANTE** *(E2)*: **PRO:** **simmetrica allo specchio su TUTTE le classi, per costruzione e misurata** *(`2e-16`)*; norma e carica esatte; nessun padre; `DH` piccolo *(il `2%` di D7; negativo: l'energia scende come in uno spostamento verso il rosso)*. **CONTRO:** **l'energia NON si conserva** *(la mediana `-12` per nascita: dove va e' da decidere)*; **non e' definita accanto a un difetto gia' nato** *(serve la sua definizione sul grafo generico)*.
+- ### **LA MIA RACCOMANDAZIONE** *(motivata; la scelta e' di Luca)*: **la COVARIANTE**, perche' e' l'unica simmetrica e nasce dove il contatore scatta; **ma prima due decisioni:** **(1) la covariante sul grafo generico** *(il vicino «opposto» quando non c'e')*; **(2) che cosa fare dell'energia che scende** *(lasciarla scendere, o una compensazione)*. **E A PARTE, PER QUALUNQUE STRADA: FA E' ASIMMETRICA ALLO SPECCHIO** *(D-M3)*: **la covariante di `phi` non lo e'.**
+
+## 18. LA COVARIANTE DI STELLA E IL FLIP *(il mandato di Luca del `2026-11-20` `13:33`; la carta `doc/TASK_HISTORY/2026-11-20_covariante_di_stella.md`; il referto `doc/referti_l2/covariante_di_stella.txt`)*
+
+### 18.1 LE DECISIONI DI LUCA *(`13:33`)*
+
+- **D-PRINCIPIO = COVARIANTE** *(norma e carica esatte; l'energia puo' scendere)*; **la famiglia `beta` e l'energia nulla ABBANDONATE** *(restano come misura, sez. `16`-`17`)*; **D-M3 = COVARIANTE anche per `phi`** *(FA SOSTITUITA)*; **D-COVSTELLA:** la covariante di stella *(da misurare prima di adottarla)*; **D-EPERSA:** `H + E_persa` costante, `E_persa = - somma dei DH` *(il segno, dichiarato: la carta del mandato 1.2)*.
+
+### 18.2 LA COVARIANTE DI STELLA: ### **LA CONDIZIONE DI LUCA PASSA**
+
+- ### **DEFINITA sul `100%`** *(`2929` su `2929`; la fila: `20` nascite in fila, NESSUNA non definita, nessun arco senza due vicini comuni)*.
+- ### **SIMMETRICA ALLO SPECCHIO su TUTTE le classi:** `psi` al piu' `2.5e-16`, `phi` `2.0e-16` sui `132` conservati; **sui `68` ROVESCIATI `1.4e-16` e `1.3e-16`** *(la soglia `1e-14`)*. **Il caso che DEVE FALLIRE fallisce** *(il padre a indice minore: `0.51`)*: **la prova vale.**
+- ### **DETERMINISTICA AL BIT** *(due processi, i `100` archi e la fila, uguali alle parti)*.
+- ### **`H + E_persa` COSTANTE: al piu' `2.7e-16` di `|H|`** in `20` nascite *(`E_persa` arriva a `+395`)*; ### ⚠ **QUASI TAUTOLOGICO qui** *(nessuna dinamica fra le nascite: dice che il conto a mano e il pieno coincidono)*; **il controllo vero e' P9 sul ramo.**
+- **`DH_SC`:** mediana **`-12.6`** *(da `-40.9` a `+0.98`; negativo su `2916` su `2929`)*; accanto E2 `-11.9`, D7 `-555`. Per anello *(mediane)*: `-28.1` a `10`-`12` nodi, `-13.7` a `16`-`18`, `-3.3` a `20`-`22`. **Per termine:** `a_psi -14.5`, `G_psi +1.36`, il vuoto `+0.31`, `N +0.0007`. **La norma della stella conservata:** materia `2.3e-12`, vuoto `1.4e-14` *(assoluti)*.
+- **Il caso noto del codice** *(il campo uniforme al bit)* **PASSA. Il vuoto F3 puro** *(nessuna attesa)*: `DH_SC = +0.0338`, **lo stesso di E2** *(sul vuoto puro `n -> i`, `n -> j` della stella e della sez. `17` coincidono)*.
+- **Le previsioni:** **P-SC1 VERA, P-SC2 VERA, P-SC3 VERA** *(`-12.6`)*, **P-SC4 VERA** *(quasi tautologica)*. **P-SC5: NON misurabile** *(il flip non esiste: sotto)*.
+
+### 18.3 IL FLIP *(il TODO 3 comincia qui)*: ### **NON ESISTE; LA PROPOSTA DI STELLA; FERMO PRIMA DI ADOTTARLA**
+
+- **[codice] Il flip DOPO LA DIVISIONE** *(D-M2)* **non esiste.** **Esiste un flip di misura:** `csv/_conto_del_vuoto.flip` *(C3, sul toro perfetto)*: **l'arco `i -> j` diventa `l -> k`, e l'estremita' in `i` va in `l`, quella in `j` va in `k`**: **una scelta con un VERSO** *(lo specchio che scambia `k` e `l` la manda nell'altra)*. **La sez. `10.3`** propone la SCELTA del flip *(«il massimo di una grandezza locale dello stato: la tensione del vuoto sull'arco che nasce»)*: **quella grandezza non e' definita sul codice.**
+- ### **LA PROPOSTA DEL GUARDIANO** *(Claude Code; NON adottata)*: **IL FLIP DI STELLA**
+  - **I candidati** *(10.3)*: i quattro lati del rombo attorno a `n`: `(i, k)`, `(k, j)`, `(j, l)`, `(l, i)`. **Il flip del lato `(u, v)`:** l'arco `u - v` si toglie; nasce `n - m`, con **`m` = il vicino comune di `u` e `v` diverso da `n`** *(l'altro triangolo del lato: esiste su ogni grafo di triangoli)*.
+  - **Le estremita' dell'arco nato:** **in `n` = la media delle estremita' di `n` verso `u` e verso `v`; in `m` = la media delle estremita' di `m` verso `u` e verso `v`** *(fra le quali l'arco si infila: la stessa regola della covariante di stella in `k`)*; **poi un fattore UNIFORME sulla stella del flip** *(i nodi `u, v, n, m`)* **che rimette la norma, per `psi` e per `phi`.** **Nessun padre, nessuna direzione: definita su ogni grafo e simmetrica allo specchio per costruzione.**
+  - **La scelta fra i quattro** *(equivariante per costruzione)*: **il flip con `H` piu' BASSO dopo** *(ognuno dei quattro col conto, con la regola sopra)*; ### **il pari merito → nessun flip a questo tick** *(10.3)*. ### ⚠ **IL PARI MERITO VUOLE UNA TOLLERANZA: E' UN NUMERO** *(`A1`)*: **la proposta `1e-12 |H|`** *(sopra l'arrotondamento del conto, `2.7e-16`)* **-- DA DECIDERE CON LUCA.** **E il `DH` del flip entra in `E_persa`.**
+  - **Le alternative per la scelta** *(scritte, non scelte)*: il massimo di `|a_phi|` sull'arco nato *(una «tensione del vuoto»)*; il flip che porta `n` a `5` col vicino di grado `7` piu' vicino al centro *(geometrico: vuole le posizioni, che restano fuori dal nucleo)*.
+- ### **FERMO prima di adottarlo** *(il mandato)*: **la regola delle estremita', la grandezza della scelta e la tolleranza del pari merito sono di Luca.** **I TODO `3`-`4`** *(la regola completa sul ramo, le prove P6 prima, la stima delle due corse)* **aspettano.**
+
+### 18.4 IL FLIP DI STELLA *(l'aggiunta di Luca delle `13:54`; il referto `doc/referti_l2/flip_di_stella.txt`; la carta del mandato sez. `7`)*
+
+- **La decisione di Luca:** **il flip di stella come regola delle ampiezze** *(le medie in `n` e in `m` verso `x` e `y`, il fattore uniforme su `n, x, m, y`)*; **`E_persa = - somma dei DH`** e conta anche il flip *(l'errore `n.192` era nel mandato)*.
+- ### **F1 PASSA** *(il campo uniforme al bit)*. ### **F2: il flip di stella e' SIMMETRICO su TUTTI gli `800` flip** *(`200` nascite x `4` candidati; al piu' `3.9e-16` contro `1e-14`)*; **nessun candidato non definito.** ### **F3 PASSA su `800` su `800`** *(i gradi, Eulero, nessun arco doppio, ogni arco in due triangoli)*. **Il `DH` del flip** *(a mano, NON usato)*: mediana `+0.14`, da `-9.1` a `+7.2`.
+- **Il caso che DEVE FALLIRE** *(il flip col verso, come C3)*: **fallisce, `1.15`: la prova vale.** ### ⚠ **MA NON DOVE AVEVO SCRITTO:** cade su `264` dei `528` flip delle nascite a verso CONSERVATO, e su NESSUNO di quelle ROVESCIATE. **Il perche'** *(POST-HOC, dichiarato)*: **conta il verso dell'arco GIRATO `x - y`, non quello dell'arco diviso `a`**: se `a` e' nella direzione che lo specchio rovescia, i suoi quattro lati stanno nelle altre due *(nessuno rovesciato)*; se `a` e' conservato, **due lati su quattro** stanno nella direzione rovesciata *(`264 = 528 / 2`)*. **La classe di `a` non era la classe giusta per il flip: un mio errore nella previsione P-F2** *(la seconda meta': «il flip di C3 cade sui rovesciati» -- FALSA come scritta, vera per gli archi girati rovesciati)*.
+- **Le previsioni:** **P-F1 VERA; P-F2: il flip di stella simmetrico VERA, il flip col verso «sui rovesciati» FALSA come scritta** *(sopra)*; **P-F3 NON misurata** *(la scelta non si usa)*.
+- ### **LA SCELTA FRA I QUATTRO: FERMO** *(la carta del mandato 7.2)*: **la grandezza della `10.3` non e' univoca** *(rimanda a una soglia mai decisa; la «tensione d'arco» ha due letture)*. **La proposta del guardiano:** **Q1 sull'arco nato `n - m`** *(`Omega Re(conj(phi_nm) phi_mn) + Omega |phi_nm| |phi_mn|`: nulla quando le due estremita' sono opposte come nel vuoto F3)*, **il pari merito entro `8` ulp del massimo** *(un NUMERO, `A1`)* **→ nessun flip.** **Da decidere da Luca prima di usarla; poi P-F3, P5 sulla regola intera, e i TODO `3`-`4`.**
+
+### 18.5 LA REGOLA INTERA *(l'aggiunta di Luca delle `14:53`; il referto `doc/referti_l2/regola_intera.txt`; la carta del mandato sez. `8`)*
+
+- **Le decisioni:** **D-FLIP-AMPIEZZE e D-COVSTELLA ADOTTATE; D-FLIP-SCELTA (A):** il lato che lascia `H` piu' bassa *(il conto pieno)*; **il pari merito sotto `1e-12 |H|`: nessun flip** -- ### **una GUARDIA CONTRO L'ARROTONDAMENTO** *(circa `3700` volte il `2.7e-16` del conto)*, **NON una manopola fisica** *(`A1`)*. **`E_persa = - (DH nascita + DH flip)`.** L'errore `n.193` del guardiano *(la classe giusta in P-F2 era l'arco girato)*.
+- ### **P-F3 VERA: il flip c'e' su `2929` nascite su `2929`** *(nessun pari merito)*; i quattro lati scelti quasi alla pari *(`723`, `729`, `738`, `739`)*. ### **P-F4 VERA:** lo scarto fra il migliore e il secondo **mediana `7.6e-07 |H|`** *(il minimo `1.4e-10 |H|`: 136 volte la guardia; `35` sotto `1e-8 |H|`)*.
+- **I `DH`** *(mediane)*: la nascita `-12.6`, **il flip scelto `-3.4`** *(da `-12.9` a `+6.7`)*; **`E_persa` per nascita `+16.2`.** Per anello il flip pesa di piu' verso l'esterno *(`-1.0` a `10`-`12` nodi, `-4.7` a `20`-`22`)*.
+- ### **P-F5 VERA: la regola intera e' simmetrica allo specchio su TUTTE le classi** *(lo stesso lato su `200` archi su `200`; al piu' `3.8e-16`, sia per l'arco girato sia per l'arco diviso, conservati e rovesciati)*. **Il caso che DEVE FALLIRE** *(la regola col flip col verso)*: **cade, `26` lati diversi e `0.74`: la prova vale.** ### ⚠ **«I pari merito: nessun flip su entrambi i lati» PASSA A VUOTO** *(non c'e' nessun pari merito)*: **non e' misurato.**
+
+### 18.6 IL TODO 3 SUL RAMO: ### **QUATTRO PUNTI CHE NON SONO CONTI, E FERMO**
+
+**Per far nascere nella corsa VERA** *(il motore, il campo U(1), il lapse: `Motore.cresci`, B3, B4, la memoria `Theta`)* **servono quattro cose che il codice non decide e i mandati non hanno ancora deciso:**
+
+1. ### **L'AREA E IL `l/l*` DEI TRIANGOLI E DEGLI ARCHI NUOVI** *(la domanda di Luca accodata dalle `16:38` del `2026-11-17`; B3 li vuole senza default, la sua prova usava valori PROVVISORI: le meta' geometriche e `sqrt(3)`)*. **(a) COMBINATORIA:** **ogni triangolo ha l'area del triangolo di oggi e ogni arco `l/l* = sqrt(3)`** *(il grafo e' fatto di triangoli equilateri: la curvatura sta solo nei gradi, `(6 - k) x 60` gradi, come Regge e P7)*; **(b) GEOMETRICA:** dalle POSIZIONI *(le meta' dei triangoli divisi)*. ### **La mia raccomandazione: (a)** -- **deriva dalla decisione di Luca delle `10:41`** *(«i nodi non hanno posizione; le posizioni restano solo per disegnare»)*: **(b) la contraddirebbe.** **Con (a) l'area totale CRESCE con le nascite** *(lo spazio che nasce)*.
+2. ### **`A` SUGLI ARCHI NUOVI E SULL'ARCO GIRATO** *(la carta sez. `2`: «il flusso attorno ai triangoli nuovi conservato»)*: **alla nascita** la regola di B3 *(meta' flusso ai mezzi triangoli)*; **al flip** *(nessuna regola scritta)*: **la proposta di stella: il flusso del quadrilatero `n - x - m - y` spartito a META' fra i due triangoli nuovi** *(simmetrica, nessun verso)*. **`E`: Gauss VERO sul grafo nuovo** *(la carta sez. `2`)*.
+3. ### **QUALE `H` PER LA SCELTA E PER `E_persa` NELLA CORSA:** **la misura usa il conto della carta** *(`famiglie`: `U = I`, `cs` spento, `eps = 0`)*; **la corsa ha la sua energia** *(`conti_nodo` + il campo, con `U` e il lapse veri)*. **La mia raccomandazione: l'energia della CORSA** *(e' quella di cui si controlla la conservazione)*; **la scelta del lato puo' cambiare rispetto alla misura** *(il campo e `cs` entrano nel conto)*.
+4. ### **P9 COME SCRITTA NON SI PUO' SODDISFARE:** **la dinamica NON conserva `H` a `1e-12`**: **in C2, senza nascite, l'energia deriva di `-9.9e-06` relativo in `3000` tick** *(`doc/referti_l2/controllo_senza_bordo.txt`)*. ### **La proposta:** **P9 ALLA NASCITA** *(`H` subito prima e subito dopo la nascita e il flip, nello stesso tick: `H(dopo) - H(prima) = DH` contato in `E_persa`, entro `1e-12 |H|`)*; **e sulla corsa `H + E_persa` contro C2-EXT** *(la stessa deriva: la differenza fra le due corse dice cosa fanno le nascite)*.
+
+- **E una quinta, minore** *(una lettura, non una scelta)*: **il lapse del nodo nuovo** *(`cs`)* **si ricalcola dalla legge** *(la carta sez. `2`)*; **la partenza a caldo del punto fisso** *(`lapse_caldo`, solo l'innesco dell'iterazione)* **per il nodo nuovo: la media di `i` e `j`** *(il risultato e' quello del punto fisso, entro `EPS_CS`)*.
+- **Gia' fatto e indipendente:** **lo strumento `doc/referti_l2/distanza_passi.py`** *(`1fe8df14`: i tre casi noti PASSANO; **una nascita sposta un nodo su `288` dell'anello `40`**: **la mediana di P-S1 si muovera' solo dopo MOLTE nascite**)*.
+- ### **FERMO PER LUCA sui punti `1`-`4`** *(il codice sul ramo e la stima delle due corse vengono dopo)*.
+
+### 18.7 I QUATTRO PUNTI DECISI *(Luca `16:37`)*, E IL QUINTO CHE IL CODICE HA TIRATO FUORI *(la carta del mandato sez. `9`)*
+
+- **Le decisioni:** **D-AREA (a) combinatoria** *(ogni triangolo nuovo `AREA`, ogni arco nuovo `sqrt(3)`)*; **D-A-NASCITA** *(meta' flusso, B3)*; **D-A-FLIP** *(il flusso del quadrilatero a meta')*; **`E` da Gauss vero**; **D-H-CORSA** *(l'energia della corsa: `conti_nodo` + `K + V`; P5 si ripete con questa)*; **D-P9** *(P9 alla nascita entro `1e-12 |H|`; sulla corsa `H + E_persa` contro C2-EXT)*; **il lapse del nodo nuovo dalla legge, la partenza a caldo dalla media di `i` e `j`.** **L'errore `n.194` del guardiano** *(P9 a `1e-12` su tutta la corsa non era soddisfacibile)*.
+- ### **LETTO SUL CODICE DELLA CORSA, PRIMA DI SCRIVERE LA REGOLA: IL VERSORE `geo_n` DELLE ESTREMITA' NUOVE E' FISICA** *(la moneta di spin `exp(-i eps dtau sigma.n)` e l'elicita' `s . n` dentro `H`; nella corsa `eps = 0.5`)*, **e nessuna decisione lo copre.** **Le proposte** *(la carta del mandato `9.3`)*: **(V1)** di stella *(medie normalizzate: alla nascita = la geometria del punto medio; al flip le due estremita' NON opposte)*; **(V2)** dalle posizioni *(le posizioni diventerebbero fisica)*; ### **(V3) -- la raccomandazione: V1 alla nascita, e al flip l'arco `n - m` con i versori OPPOSTI per costruzione** *(`+v`, `-v`, `v` la differenza normalizzata delle due medie)*. **FERMO PER LUCA prima della regola nella corsa.**
+- **Una conseguenza dichiarata di «Gauss vero» con `rho - media`:** **la media cambia su tutti i nodi a ogni nascita** *(la carica su `n + 1` nodi)*: **la correzione di `E` e' GLOBALE** *(piccola)*, **e P6 lontano da una nascita non puo' essere al bit.** **E nemmeno a parita' di `E` e `cs`:** **i due punti fissi del tick** *(il lapse e la reazione)* **si fermano su un massimo GLOBALE.** **Quindi P6 in due parti:** **P6.0** *(il braccio 0: la corsa col codice della crescita e nessuna nascita, contro C2, AL BIT: e' la condizione del risparmio di S3)* **e P6.1** *(il profilo lontano da una nascita forzata: MISURATO e dichiarato, senza soglia nuova)*.
+- **Si fa ora:** **P6.0 sul ramo** *(`doc/referti_l2/mitosi_corsa.py`)*.
+
+### 18.8 IL VERSORE DECISO *(Luca `17:03`: D-VERSORE = V3)*, LE PROVE DELLA REGOLA NELLA CORSA *(la carta del mandato sez. `10`)*
+
+- **Alla nascita** la media normalizzata dei due versori accanto *(gli indici della covariante di stella)*; **al flip** l'arco `n - m` coi versori opposti per costruzione *(`+v`, `-v`)*. **Letto sul codice:** **il motore ammette UNA crescita per tick**: **nascita e flip in una sola chiamata di `Motore.cresci`** *(controllata uguale ai due passi)*; **ogni candidato col SUO campo, il SUO Gauss e la SUA energia della corsa**; **lo stato scelto si scrive nel motore vero e la sua energia si rilegge: e' P9 alla nascita.** **Le soglie** *(fissate prima)*: i versori opposti entro `4` ulp alla nascita e al bit al flip; P1 `1e-12`; P3 sotto `10` volte il residuo di prima; P9 `1e-12 |H|`; P5 lo stesso lato, le ampiezze, i versori e `A` entro `1e-14`, `E` entro `1e-10`; P8 al bit; P6.1 senza soglia.

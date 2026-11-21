@@ -1,0 +1,37 @@
+[TIMBRO] regole_fase_F3.py  sha1-BYTE d45678c4  committato e pulito
+[TIMBRO] nascita_energia_nulla.py  sha1-BYTE e92b4ac5  committato e pulito
+==================================================================================================================================
+LA NASCITA NEL GUSCIO A ENERGIA NULLA (Luca 2026-11-20 10:31); lo stato di C2 a k 3000 (NON quello allo scatto: dichiarato)
+==================================================================================================================================
+### H dello stato: il conto pieno 3.4366601579e+06, a mano 3.4366601579e+06 (relativo 1.35e-16); 2929 candidati, r da 10.01 a 22.27
+----------------------------------------------------------------------------------------------------------------------------------
+### IL CASO NOTO (alpha = 1 contro regole_fase_F3.nascita FA, i primi 20 archi): psi al bit True; ogni termine di dH al bit True
+----------------------------------------------------------------------------------------------------------------------------------
+### LE PARTI: [('parte_0.npz', '821 s', 977), ('parte_1.npz', '821 s', 976), ('parte_2.npz', '821 s', 976)]; gli archi coperti 2929 su 2929
+### ### LA RADICE ESISTE su 0 archi su 2929 (0.00%); senza radice (DH(0) e DH(1) dello stesso segno) 2929; indefiniti 0; chi = 0 0
+    DH(0) (il trasporto): min -1.4011e+03, mediana -5.6589e+02, max -5.2252e+00; DH(1) (D7): min -1.3825e+03, mediana -5.5520e+02, max -9.4242e+00
+### ### LA RADICE MANCA SU PIU' DEL 20% DEGLI ARCHI (100.0%): FERMO (il mandato)
+----------------------------------------------------------------------------------------------------------------------------------
+### IL DETERMINISMO: det_a e det_b (due processi), ogni array AL BIT: True (lo sha1 a9476a0c0066 e a9476a0c0066); contro le parti sugli stessi 100 archi: True
+----------------------------------------------------------------------------------------------------------------------------------
+### LE 0 NASCITE IN FILA alla radice (gli archi in ordine di scatto; il conto pieno dopo ognuna): H prima 3.4366601579e+06
+----------------------------------------------------------------------------------------------------------------------------------
+### LO SPECCHIO a 30 gradi per il nodo (92, 92) (lo scarto 4.3e-14): H dello stato riflesso contro H, relativo 0.000e+00
+    gli archi a verso conservato: 132; la differenza (alpha*, DH0 e DH1 relativi) max 0.000e+00, mediana 0.000e+00; sotto 1e-10: 132
+    gli archi a verso ROVESCIATO: 68; la differenza (alpha*, DH0 e DH1 relativi) max 0.000e+00, mediana 0.000e+00; sotto 1e-10: 68
+    DEVE FALLIRE, l'arco immagine nello stato NON riflesso: la differenza min 0.000e+00; sotto 1e-10: 200 su 200
+----------------------------------------------------------------------------------------------------------------------------------
+### IL COSTO DI UNA NASCITA in questo script (la divisione, FA, 65 valutazioni di DH a mano, senza il conto pieno): 0.36 s = 0.10 tick di C2 (3.690 s, innesco_stima.txt); ### SENZA la CSR e Gauss rifattorizzato: P-Z5 si chiude sul ramo
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: a alpha = 1 psi e ogni termine di dH = regole_fase_F3.nascita(FA) AL BIT (20 archi)                      PASSA
+  DEVE: il mandato: la radice manca su NON piu' del 20% degli archi (manca sul 100.00%)                                        ### FALLISCE
+  DEVE: P-Z1: la radice esiste su almeno il 95% degli archi (0.00%)                                                            ### FALLISCE
+  DEVE: P-Z2: alpha* strettamente dentro (0, 1) sulla maggior parte degli archi                                                ### FALLISCE
+  DEVE: P-Z3, il determinismo: due processi AL BIT (i 100 archi e la fila), e uguali alle parti                                PASSA
+  DEVE: P-Z4: nelle 0 nascite in fila |H(dopo) - H(prima)|/|H| sotto 1e-10 dopo ognuna                                         ### FALLISCE
+  DEVE: il controllo: H dello stato riflesso = H entro 1e-10 relativo                                                          PASSA
+  DEVE: P5 sugli archi a verso conservato: la nascita alla radice equivariante entro 1e-10 (132 archi)                         PASSA
+  DEVE: P-Z3, lo specchio su TUTTI i 200 archi (anche i rovesciati) entro 1e-10                                                PASSA
+  DEVE: DEVE FALLIRE: l'arco immagine nello stato NON riflesso da' un'altra nascita (tutti sopra 1e-10)                        ### FALLISCE
+### 314 s
+==================================================================================================================================
