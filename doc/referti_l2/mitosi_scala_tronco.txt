@@ -1,0 +1,37 @@
+[TIMBRO] mitosi_scala_tronco.py  sha1-BYTE 53777748  committato e pulito
+============================================================================================================================================
+LA SCALA DEL MATTONE CONTRO IL RITMO DEL CONTATORE, SUL TRONCO (la domanda di Luca 2026-11-21 14:22; la carta sez. 18)
+============================================================================================================================================
+### il tronco: la serie fino a k 29500 (530 righe, da k 3050); 11 tratti; i primi 20 archi (|Theta| maggiore a k 29500)
+### LE MEDIE PER TRATTO (il ritmo in 1e-4 per tick; w, r50, r90 in passi; il raggio euclideo; Lambda e cs alle estremita' dei 20 archi):
+    il tratto       w       r50     r90    raggio   M<12.4      M<25       max rho     ritmo(Theta)  ritmo(cs)   cs/Theta   Lambda(20)   cs(20)
+    3250-5000     14.302   13.28   20.00  12.8432  511828.7476  994372.7129  1.138029e+03      2.1045      2.0300    0.9646   2.288447e+00  0.149815
+    5000-7500     14.432   13.22   20.00  12.9085  509964.6892  994116.7075  1.057504e+03      1.9946      1.9479    0.9766   2.244226e+00  0.149796
+    7500-10000    14.721   13.80   20.49  13.1279  493574.7199  993844.7898  1.075868e+03      1.9301      1.8763    0.9721   2.138746e+00  0.149793
+    10000-12500   14.958   14.00   20.96  13.2987  481330.3455  993598.8396  1.076863e+03      1.8888      2.0348    1.0773   2.036932e+00  0.149790
+    12500-15000   15.044   14.00   21.00  13.3360  481674.9014  993353.1727  1.007215e+03      1.8007      2.0070    1.1145   1.943848e+00  0.149772
+    15000-17500   15.348   14.00   21.00  13.5806  464009.2882  993119.1917  9.974197e+02      1.7374      1.6994    0.9781   1.990650e+00  0.149765
+    17500-20000   15.541   14.02   21.53  13.7212  454751.6464  992857.1835  9.819199e+02      1.6842      1.7372    1.0314   2.005537e+00  0.149763
+    20000-22500   15.572   14.00   21.47  13.7119  458478.9108  992593.1938  9.363370e+02      1.6364      1.7588    1.0748   1.992540e+00  0.149756
+    22500-25000   15.838   14.65   22.00  13.9268  441998.6558  992268.6591  9.622112e+02      1.5956      1.6393    1.0274   1.960504e+00  0.149757
+    25000-27500   15.909   14.49   22.00  13.9621  442009.4525  991920.6862  9.465227e+02      1.5355      1.5992    1.0414   1.894212e+00  0.149749
+    27500-29500   16.073   14.93   22.00  14.0872  434625.2251  991504.6145  9.529283e+02      1.5044      1.5246    1.0135   1.892447e+00  0.149750
+### IL CONTROLLO (il ritmo da cs_prec entro il 10% di quello da Theta, a ogni tratto): NON PASSA: FERMO (il contatore non legge cs_prec come credo)
+### LE GRANDEZZE SUL PRIMO TRATTO (l'ultimo tratto diviso il primo):
+    il ritmo    0.7148   (la correlazione col ritmo +1.0000)
+    w           1.1238   (la correlazione col ritmo -0.9926)
+    r50         1.1242   (la correlazione col ritmo -0.9085)
+    r90         1.1000   (la correlazione col ritmo -0.9700)
+    il raggio   1.0969   (la correlazione col ritmo -0.9891)
+    M<12.4      0.8492   (la correlazione col ritmo +0.9819)
+    M<25        0.9971   (la correlazione col ritmo +0.9825)
+    max rho     0.8373   (la correlazione col ritmo +0.9525)
+    Lambda(20)  0.8270   (la correlazione col ritmo +0.9159)
+    cs(20)      0.9996   (la correlazione col ritmo +0.9851)
+### LA FORMA (la variazione relativa sui tratti, max/min - 1; il ritmo stesso: 0.3989):
+    ritmo / max rho (il PICCO)                   0.1948  -> circa costante
+    ritmo * w (l'ALLARGAMENTO, in passi)         0.2448  -> circa costante
+    ritmo * r90 (l'ALLARGAMENTO, in passi)       0.2718  -> circa costante
+    ritmo * raggio (l'ALLARGAMENTO, euclideo)    0.2754  -> circa costante
+### LA LETTURA (scritta prima): NON DECIDIBILE da queste serie (entrambi circa costanti)
+============================================================================================================================================
