@@ -20,7 +20,7 @@ _QUI = os.path.dirname(os.path.abspath(__file__))
 for _p in (_QUI, os.path.join(_QUI, "mattone")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
-import mitosi_chi as MCH  # noqa: E402
+import mitosi_chi_v2 as MCH  # noqa: E402
 import mitosi_specchio_v2 as MS  # noqa: E402
 import chi_tick as CT  # noqa: E402
 
@@ -33,7 +33,7 @@ F3 = os.path.join(MCH.DIR_M, "stato_03000.npz")
 
 def parte(K_, NP):
     import _presidio
-    _presidio.avvia(os.path.join(_QUI, "mitosi_chi.py"))
+    _presidio.avvia(os.path.join(_QUI, "mitosi_chi_v2.py"))
     _presidio.avvia(os.path.join(_QUI, "mitosi_specchio_v2.py"))
     _presidio.avvia(__file__)
     PS.presidi()
