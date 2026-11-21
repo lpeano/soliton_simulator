@@ -1,0 +1,14 @@
+### aspetto il processo 16368 dalle 2026-11-21 14:07:19
+### il processo 16368 e' uscito alle 2026-11-21 14:07:22 (WaitForSingleObject 0)
+### ATTESA: tornata dopo 3.05 s; il processo uscito: True
+### aspetto il processo 16368 dalle 2026-11-21 14:07:22
+### il processo 16368 e' uscito alle 2026-11-21 14:07:22 (WaitForSingleObject 0)
+### ATTESA su un processo uscito: codice 0 dopo 0.00 s
+### DECISIONE scatto : SCATTO (attesa SCATTO) OK
+### DECISIONE limite : PROROGA (attesa PROROGA) OK
+### DECISIONE caduto : CADUTO (attesa CADUTO) OK
+### lo stato stato_40000.npz NON e' integro: si prende quello prima
+### DECISIONE rotto  : CADUTO (attesa CADUTO) OK
+### DECISIONE vuoto  : VUOTO (attesa VUOTO) OK
+### DEVE FALLIRE (il limite 50000 sulla cartella del 40000): CADUTO OK, non e' PROROGA
+### LE PROVE A SECCO: PASSANO
