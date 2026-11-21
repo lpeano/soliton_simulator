@@ -93,3 +93,28 @@
 2. **(ii) `chi` nel tempo proprio:** si'/no; **`N` congelato a meta' tick** *(esplicito, economico, quasi simplettico)* **o il punto medio implicito** *(simplettico, `x 2-3` il costo di `chi`)*?
 3. **(iii) `c_chi = s sqrt(2/3)`:** si'/no; **e la portata:** `1/m` o `v_chi/m`, e quale si tiene?
 4. **L'ordine:** un interruttore alla volta *(la regola d'oro)*: **la mia raccomandazione: (iii) per primo** *(una costante, nessun codice nuovo: toglie il fattore `4.08`, la differenza piu' grande)*, **poi (i)** *(la luce che sente `N`, col caso noto della parte G)*, **poi (ii).**
+
+## 4. V1: `chi` ALLA VELOCITA' DELLA LUCE *(il mandato di Luca `2026-11-21` `23:30` e la risposta al FERMO di L2: (iii) per primo, con l'inerzia `f`; scritta PRIMA del codice)*
+
+### 4.1 LE DECISIONI *(copiate)*
+
+- **Luca:** `v_chi = v_luce` in archi per tick a `cs = s`; «non importa che le corse non siano piu' confrontabili, sistemiamo»: le corse con `chi` fatte fin qui restano **fisica vecchia**, documentate; le nuove usano `chi` curato.
+- **La forma** *(del guardiano su delega)*: **L'INERZIA di `chi`:** `pi_dot = f [c2 Delta chi - m2 chi + kappa N (s Q - e0 rho) - c0]`, **`f = (s / (c_chi sqrt(3/2)))^2`** calcolato dai numeri del codice, stampato al bit. **`c2`, `m2`, `kappa`, `c0` restano quelli di oggi.** **La risposta al FERMO di L2** *(Luca)*: **(iii) per primo, NON cambiando `c_chi`**; **la portata e' `v_chi/m`** *(la lunghezza di decadimento)*: **si tiene quella di oggi, `61.2` archi**, implicita con `f`; **la «portata `1/m` = 100» delle `16:39` si CORREGGE: «la portata in archi e' `v_chi/m ~ 61`»** *(la sez. `8` della carta del ramo `lapse-u` resta com'e' scritta: questa e' la correzione, l'errore n.208 del guardiano)*. **L'ordine:** (iii) -> (i) -> (ii), ognuno col suo FERMO.
+- **L'energia** si riscrive per la forma nuova e si VERIFICA *(Q-A2)*. **Nessun'altra fisica cambia.**
+- **Le corse:** la corsa lunga del mattone arriva alla sua fine *(la fisica vecchia, il riferimento)*; **il tronco `chi` che partiva da solo dopo di lei NON parte con la fisica vecchia:** **la sua attesa e' stata FERMATA alle `23:4x`** *(il permesso questa volta c'era; nessuna voce di registro: il tronco non era partito)*; P5 del ramo `mitosi-chi` finisce *(e' meccanica)*; **i tronchi del triangolo e ogni corsa nuova con `chi` usano `chi_tick_v2`, e partono solo dopo V1-V5.**
+
+### 4.2 LA FORMA, L'ENERGIA, IL PUNTO FISSO, IL PASSO
+
+- **Il leapfrog:** `pi += (1/2) f F`; `chi += pi` *(in due mezzi, come oggi)*; ...; `pi += (1/2) f F` *(la stessa struttura di `tick_chi`: il passo 4, `cs = s N`, la fase (a), il palindromo, il contatore, invariati)*.
+- **L'hamiltoniana:** con `chi_dot = pi` e `pi_dot = - f dU/d chi` la variabile coniugata e' `p = pi / f`, quindi **`H_chi = somma_k pi_k^2 / (2 f) + (c2/2) somma_a (chi_i - chi_j)^2 + (m2/2) somma_k chi_k^2 + c0 somma_k chi_k`** *(oggi `pi^2/2`: e' l'UNICO termine che cambia)*; **l'accoppiamento con la materia** *(`somma w H` coi pesi di `cs = s N`, `- e0 somma (N - 1) rho`, `K + V`)* **non cambia.** **Si verifica** *(S3)*: la deriva di `H` totale con la v2 entro la soglia, e **l'energia VECCHIA** *(`pi^2/2`)* **con la dinamica v2 NON si conserva** *(il caso che deve fallire)*.
+- **Il punto fisso statico NON cambia:** `pi = 0`, `F = 0` non contiene `f` *(`chi_statico`, `Laplaciano.statico`: `(c2 L + m2) chi = sorgente`)*: **S1 lo prova al bit.**
+- **La velocita':** `cos omega = 1 - f (c2 lambda(k) + m2)/2`; a `k -> 0` senza massa **`v = sqrt(f) c sqrt(3/2) = s`**; **la portata** del profilo statico **`c sqrt(3/2)/m = 61.2` archi, invariata** *(con la massa la frequenza a `k = 0` e' `sqrt(f) m` e `v / omega_0` non cambia)*.
+- **Il passo massimo stabile:** `f c2 lambda_max <= 4` con `lambda_max = 9` *(il triangolare)*: **`0.06 x 0.25 x 9 = 0.135`** *(oggi `2.25`)*: stabile con largo margine.
+- **`f`** = `(0.15 / (0.5 sqrt 1.5))^2` = `0.06` *(P-V1: al quarto decimale; il valore al bit lo stampa il codice)*.
+
+### 4.3 IL CODICE E LE PROVE *(V2, V3)*
+
+- **File NUOVI:** `doc/referti_l2/chi_tick_v2.py` *(`Parametri2` con `f`; `tick_chi_v2` e `energia_chi_v2` riga per riga di `chi_tick` con `f`; i parametri con `kappa` il NUMERO, `chi_parametri_v2`, D3)*; `doc/referti_l2/chi_mattone_v3.py` *(la corsa del mattone, la ripresa, la prova S5)*; i lanciatori nuovi.
+- **S1** il pozzo invariato: `chi_statico` coi parametri di oggi = quello coi `Parametri2`, AL BIT. **S2** la velocita': l'onda stazionaria di `chi` sul toro `48 x 48` *(`m2 = 0` e quello di oggi)* col passo della v2: `omega` = la formula con `f` entro `1e-10`; **`v` senza massa = `0.15000` entro `1e-6`**; DEVE FALLIRE `f = 1` *(da' `0.6124`)*. **S3** l'energia: sul mattone *(C2 `k 3000`, il profilo statico)*, `500` tick: **la deriva relativa di `H` v2 non oltre `10` volte quella dell'energia del tick di oggi negli stessi `500` tick, piu' `1e-12`** *(il criterio di K5)*; DEVE FALLIRE l'energia vecchia con la dinamica v2. **S4** CPT e lo specchio *(`chi_simmetrie.py` col passo v2)*: **le soglie di K6** *(CPT `1e-12` a `N 10`; lo specchio `1e-10`: il mandato scrive `1e-11`, la soglia di K6 scritta nella carta era `1e-10` e il valore misurato `1.2e-11`: dichiarato, vale quella di K6)*. **S5** la ripresa: `10` tick di fila contro `5` + salva + riprendi + `5`, AL BIT; un byte cambiato -> RIFIUTA.
+- **V4:** la corsa nuova del mattone con `chi` curato **come la vecchia** *(la vecchia partiva da `k 0` di C2, `prepara`, col profilo statico: il mandato scrive «da C2 `k 3000`»; parto come la vecchia, per confrontarle: dichiarato)* fino a `k 20000`, gli stati ogni `250` in `E:/soliton_simulator/controllo/CHI/mattone_v2/`. **V5:** la tabella delle velocita' nella relazione.
+- **Se una prova non passa: FERMO.**
