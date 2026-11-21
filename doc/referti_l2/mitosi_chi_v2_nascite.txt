@@ -1,0 +1,67 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] mitosi_chi_v2.py  sha1-BYTE f186fd79  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+LE NASCITE FORZATE DEL RAMO mitosi-chi (Luca 2026-11-21 19:40, R2-R3; la carta sez. 2.3): P1, P3, P9, i casi noti nel guscio e a r 30, K4 dopo la nascita, Q-P1; dallo stato stato_03000.npz della corsa del ramo lapse-u, piu' 5 tick
+============================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### NEL GUSCIO: l'arco 52229 a r 18.903 (il punto medio); H prima 5.261306138515e+05 (H_chi +3.497848e+02); somma c0 1.3166887532e+01
+    il flip 0 (17409, 17410): H 5.2613038051e+05 (DH dalla nascita +1.842621e-01)
+    il flip 1 (17596, 17410): H 5.2612993072e+05 (DH dalla nascita -2.655294e-01)
+    il flip 2 (17596, 17595): H 5.2613045423e+05 (DH dalla nascita +2.579865e-01)
+    il flip 3 (17409, 17595): H 5.2612942092e+05 (DH dalla nascita -7.753254e-01)   <- SCELTO
+    la sola nascita H 5.2613019624e+05 (DH -4.176066e-01, H_chi +3.498435e+02); lo scarto fra il migliore e il secondo 9.690e-07 |H|; chi del nodo nuovo +1.116713e+01 (la media di +1.135257e+01 e +1.098169e+01); il tempo ['3.0', '3.3', '3.2', '4.2', '3.4'] s
+### P1: M 2.3e-16, V 0.0e+00; DEVE FALLIRE senza il fattore di stella: M 7.4e-05, V 4.1e-06
+### P3: il residuo di Gauss prima 1.401e-11; dopo 1.619e-15; DEVE FALLIRE senza Gauss 9.790e-01
+    [nascita 1] k 3005, l'arco 52229 (FORZATA (NEL GUSCIO)): n 34596 a r 18.90, 19 passi dalla sorgente; DH nascita -4.1761e-01 flip -7.7533e-01 chi +1.4328e-01; P9 0.0e+00; |Ec| 8.738e-02; E_persa +1.192932e+00 (19.8 s)
+### P9: H riletta 5.26129420919462456e+05 contro il candidato 5.26129420919462456e+05: 0.0e+00 |H|; E_persa +1.192932e+00, -(H dopo - H prima) +1.192932e+00; DEVE FALLIRE il candidato senza H_chi: 6.7e-04 |H|
+### IL CASO NOTO: DH nascita -4.176066e-01, DH flip -7.753254e-01, DH -1.192932e+00, DH_chi +1.432790e-01; somma c0 1.3166887532e+01 -> 1.3167268122e+01 (la differenza 3.805899e-04, c0 3.805899e-04); il lato (17409, 17595); n 34596 a r 18.899, 19 passi dalla sorgente
+### K4 DOPO LA NASCITA (chi = 1 sul nodo nato 34596): PASSA per t = 1..30; DEVE FALLIRE col Laplaciano del grafo vecchio (il nodo nuovo isolato): cade a t 1
+### Q-P1: il tick prima della nascita 0.895 s, dopo 0.835 s (la media di 5); la nascita 19.8 s
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### A r 30: l'arco 33749 a r 29.999 (il punto medio); H prima 5.261306138515e+05 (H_chi +3.497848e+02); somma c0 1.3166887532e+01
+    il flip 0 (11249, 11250): H 5.2613090681e+05 (DH dalla nascita +2.699809e-01)
+    il flip 1 (11436, 11250): H 5.2613089342e+05 (DH dalla nascita +2.565887e-01)   <- SCELTO
+    il flip 2 (11436, 11435): H 5.2613091435e+05 (DH dalla nascita +2.775147e-01)
+    il flip 3 (11249, 11435): H 5.2613090178e+05 (DH dalla nascita +2.649482e-01)
+    la sola nascita H 5.2613063683e+05 (DH +2.298067e-02, H_chi +3.498039e+02); lo scarto fra il migliore e il secondo 1.589e-08 |H|; chi del nodo nuovo +5.523210e+00 (la media di +5.419386e+00 e +5.627035e+00); il tempo ['3.1', '3.2', '3.1', '3.2', '3.2'] s
+### P1: M 0.0e+00, V 0.0e+00; DEVE FALLIRE senza il fattore di stella: M 7.0e-09, V 5.2e-07
+### P3: il residuo di Gauss prima 1.401e-11; dopo 1.619e-15; DEVE FALLIRE senza Gauss 1.586e+00
+    [nascita 1] k 3005, l'arco 33749 (FORZATA (A r 30)): n 34596 a r 30.00, 32 passi dalla sorgente; DH nascita +2.2981e-02 flip +2.5659e-01 chi +2.6574e-03; P9 0.0e+00; |Ec| 1.656e-01; E_persa -2.795693e-01 (16.3 s)
+### P9: H riletta 5.26130893420834444e+05 contro il candidato 5.26130893420834444e+05: 0.0e+00 |H|; E_persa -2.795693e-01, -(H dopo - H prima) -2.795693e-01; DEVE FALLIRE il candidato senza H_chi: 6.6e-04 |H|
+### IL CASO NOTO: DH nascita +2.298067e-02, DH flip +2.565887e-01, DH +2.795693e-01, DH_chi +2.657409e-03; somma c0 1.3166887532e+01 -> 1.3167268122e+01 (la differenza 3.805899e-04, c0 3.805899e-04); il lato (11436, 11250); n 34596 a r 29.997, 32 passi dalla sorgente
+### K4 DOPO LA NASCITA (chi = 1 sul nodo nato 34596): PASSA per t = 1..30; DEVE FALLIRE col Laplaciano del grafo vecchio (il nodo nuovo isolato): cade a t 1
+### Q-P1: il tick prima della nascita 0.747 s, dopo 0.778 s (la media di 5); la nascita 16.3 s
+--------------------------------------------------------------------------------------------------------------------------------------------
+  DEVE: NEL GUSCIO P1: le norme M e V entro 1e-12 relativo                                                             PASSA
+  DEVE: NEL GUSCIO DEVE FALLIRE: senza il fattore di stella le norme escono da 1e-12                                   PASSA
+  DEVE: NEL GUSCIO P3: il residuo dopo la nascita sotto 10 volte quello di prima                                       PASSA
+  DEVE: NEL GUSCIO DEVE FALLIRE: senza Gauss sopra 10 volte                                                            PASSA
+  DEVE: NEL GUSCIO P9: H riletta = H del candidato entro 1e-12 |H|, E_persa = -DH                                      PASSA
+  DEVE: NEL GUSCIO DEVE FALLIRE: il candidato senza H_chi fuori da 1e-12                                               PASSA
+  DEVE: NEL GUSCIO chi, pi, Theta, le posizioni, il Laplaciano seguono il grafo                                        PASSA
+  DEVE: NEL GUSCIO K4: il fronte di chi a un arco per tick sul grafo nuovo                                             PASSA
+  DEVE: NEL GUSCIO DEVE FALLIRE: K4 col Laplaciano del grafo vecchio                                                   PASSA
+  DEVE: A r 30 P1: le norme M e V entro 1e-12 relativo                                                                 PASSA
+  DEVE: A r 30 DEVE FALLIRE: senza il fattore di stella le norme escono da 1e-12                                       PASSA
+  DEVE: A r 30 P3: il residuo dopo la nascita sotto 10 volte quello di prima                                           PASSA
+  DEVE: A r 30 DEVE FALLIRE: senza Gauss sopra 10 volte                                                                PASSA
+  DEVE: A r 30 P9: H riletta = H del candidato entro 1e-12 |H|, E_persa = -DH                                          PASSA
+  DEVE: A r 30 DEVE FALLIRE: il candidato senza H_chi fuori da 1e-12                                                   PASSA
+  DEVE: A r 30 chi, pi, Theta, le posizioni, il Laplaciano seguono il grafo                                            PASSA
+  DEVE: A r 30 K4: il fronte di chi a un arco per tick sul grafo nuovo                                                 PASSA
+  DEVE: A r 30 DEVE FALLIRE: K4 col Laplaciano del grafo vecchio                                                       PASSA
+============================================================================================================================================
