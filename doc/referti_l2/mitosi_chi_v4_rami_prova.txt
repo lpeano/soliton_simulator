@@ -1,0 +1,90 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_tronco.py  sha1-BYTE 1f3bcc91  committato e pulito
+[TIMBRO] mitosi_chi_v4.py  sha1-BYTE 8841ff15  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+R4, LA PROVA DELLA RAMIFICAZIONE DEL RAMO mitosi-chi (Luca 2026-11-21 19:40; la carta sez. 2.3; come 6e51d762): lo scatto FORZATO dell'arco 58866 a k 3003 (solo qui)
+============================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_cont_m (mitosi): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0), fino a k 3006; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3003, l'arco 58866 (scattato; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.7198e+00 flip -1.0109e+00 chi +3.0299e-02; P9 0.0e+00; |Ec| 3.338e-01; E_persa +3.730662e+00 (16.7 s)
+    [stato] k 3006 sha1 83dabdfe
+### PROVA_cont_m: 6 tick in 106 s; 1 nascite; E_persa +3.730662e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_cont_c (ext): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0), fino a k 3006; le nascite SPENTE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [stato] k 3006 sha1 90d632b3
+### PROVA_cont_c: 6 tick in 85 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_mattone.py  sha1-BYTE 8487dd95  committato e pulito
+[TIMBRO] chi_tronco.py  sha1-BYTE 1f3bcc91  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+IL TRONCO CHI (Luca 2026-11-21 19:40, T1; il task history del ramo lapse-u, sez. 14): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz fino a k 3006 ### lo scatto FORZATO a k 3003 sull'arco 58866 (SOLO nella prova); gli stati in E:\soliton_simulator\controllo\mitosi_chi\PROVA_RAMI\tronco
+============================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### la ripresa da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0, ricontrollato); i parametri ricalcolati AL BIT con quelli del meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04; m0 +1.504935886674e+00; max |Theta| 0.259904
+### IL PRIMO SCATTO a k 3003 (1 archi, il primo 58866, Theta -6.543376): lo stato PRIMA della regola prima_nascita_003003.npz sha1 2966601d; il tronco esce (10)
+--------------------------------------------------------------------------------------------------------------------------------------------
+### il tronco: 3 tick in 3 s (1.088 s per tick); il codice 10
+============================================================================================================================================
+### il tronco chi (chi_tronco.py, il campo prototipo): il codice 10 a k 3003; scatto.json {"k": 3003, "archi": [58866], "quanti": 1}
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_m (mitosi): da E:\soliton_simulator\controllo\mitosi_chi\PROVA_RAMI\tronco\prima_nascita_003003.npz (k 3003, sha1 2966601d), fino a k 3006; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3003, l'arco 58866 (lo scatto del tronco; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.7198e+00 flip -1.0109e+00 chi +3.0299e-02; P9 0.0e+00; |Ec| 3.338e-01; E_persa +3.730662e+00 (15.8 s)
+    [stato] k 3006 sha1 83dabdfe
+### PROVA_m: 3 tick in 94 s; 1 nascite; E_persa +3.730662e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_c (ext): da E:\soliton_simulator\controllo\mitosi_chi\PROVA_RAMI\tronco\prima_nascita_003003.npz (k 3003, sha1 2966601d), fino a k 3006; le nascite SPENTE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [stato] k 3006 sha1 90d632b3
+### PROVA_c: 3 tick in 83 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_senza (mitosi): da E:\soliton_simulator\controllo\mitosi_chi\PROVA_RAMI\tronco\prima_nascita_003003.npz (k 3003, sha1 2966601d), fino a k 3006; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3004, l'arco 58866 (scattato; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.7139e+00 flip -8.6707e-01 chi +3.0256e-02; P9 0.0e+00; |Ec| 3.336e-01; E_persa +3.580984e+00 (20.0 s)
+    [stato] k 3006 sha1 a319cf97
+### PROVA_senza: 3 tick in 108 s; 1 nascite; E_persa +3.580984e+00; il codice 0
+### R1: il ramo MITOSI-CHI contro la corsa continua (k 3006): AL BIT su ogni chiave, A, E, il grafo, i versori, Theta, le posizioni, E_persa, gauss_acc, chi, pi
+### R2: il ramo CHI-EXT contro la corsa continua spenta: AL BIT
+### DEVE FALLIRE: il ramo MITOSI-CHI SENZA la nascita iniziale: diverse: ['Lambda', 'phi_h', 'psi_h', 'rho', 'A', 'E']
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_cont_e (mitosi): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0), fino a k 3009; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3003, l'arco 58866 (scattato; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.7198e+00 flip -1.0109e+00 chi +3.0299e-02; P9 0.0e+00; |Ec| 3.338e-01; E_persa +3.730662e+00 (17.6 s)
+    [stato] k 3009 sha1 67c15926
+### PROVA_cont_e: 9 tick in 117 s; 1 nascite; E_persa +3.730662e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### PROVA_rip (mitosi): da E:\soliton_simulator\controllo\mitosi_chi\PROVA_RAMI\ramo_m\stato_003006.npz (k 3006, sha1 83dabdfe), fino a k 3009; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [stato] k 3009 sha1 67c15926
+### PROVA_rip: 3 tick in 82 s; 1 nascite; E_persa +3.730662e+00; il codice 0
+### R3: la ripresa del ramo MITOSI-CHI da stato_003006.npz fino a k 3009 contro la continua: AL BIT
+--------------------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il tronco esce col codice dello scatto al tick forzato                                                         PASSA
+  DEVE: R1: il ramo MITOSI-CHI = la corsa continua con le nascite AL BIT                                               PASSA
+  DEVE: R2: il ramo CHI-EXT = la corsa continua spenta AL BIT                                                          PASSA
+  DEVE: DEVE FALLIRE: il ramo MITOSI-CHI senza la nascita iniziale e' diverso                                          PASSA
+  DEVE: R3: la ripresa dopo una nascita AL BIT                                                                         PASSA
+============================================================================================================================================
