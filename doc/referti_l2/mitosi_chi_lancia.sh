@@ -11,13 +11,13 @@ O=/e/soliton_simulator/controllo/mitosi_chi
 mkdir -p $O
 REG=csv/solitone/_registro_corse.py
 FORZA="Luca 2026-11-21 19:40: al primo scatto del tronco chi i due rami MITOSI-CHI e CHI-EXT in parallelo"
-corri() { env -u PYTHONHOME -u PYTHONPATH PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 TMP='E:\python\tmp' TEMP='E:\python\tmp' $PY -u doc/referti_l2/mitosi_chi_v2.py "$@"; }
+corri() { env -u PYTHONHOME -u PYTHONPATH PYTHONNOUSERSITE=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 TMP='E:\python\tmp' TEMP='E:\python\tmp' $PY -u doc/referti_l2/mitosi_chi_v3.py "$@"; }
 aperta() { $PY -c "import sys; sys.path[:0]=['csv/solitone','csv']; import _registro_corse as R; sys.exit(0 if '$1' in R.aperte() else 1)"; }
 
 apri() {   # NOME DA: la voce, prima delle corse (in sequenza: nessuna scrittura insieme nel registro)
   V=mitosi-chi-ramo-$1
   if ! aperta $V; then
-    $PY $REG apri --nome $V --tipo lunga --comando "E:/python/py3132/python.exe doc/referti_l2/mitosi_chi_v2.py ramo --nome $1 --da $2 --dopo 20000 --registro $V" --note "Il ramo $1 del ramo mitosi-chi dallo stato prima del primo scatto del tronco chi, 20000 tick (Luca 2026-11-21 19:40, R4); 1 filo, numba spento" --forza "$FORZA" || return 3
+    $PY $REG apri --nome $V --tipo lunga --comando "E:/python/py3132/python.exe doc/referti_l2/mitosi_chi_v3.py ramo --nome $1 --da $2 --dopo 20000 --registro $V" --note "Il ramo $1 del ramo mitosi-chi dallo stato prima del primo scatto del tronco chi, 20000 tick (Luca 2026-11-21 19:40, R4); 1 filo, numba spento" --forza "$FORZA" || return 3
   fi
 }
 
