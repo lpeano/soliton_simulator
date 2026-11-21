@@ -1,0 +1,22 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] lorentz_velocita.py  sha1-BYTE 098496da  committato e pulito
+============================================================================================================================================
+L1 (c), CHI (la carta sez. 2.2): c2 0.25, m2 0.0001 (la corsa), il Laplaciano L = D D^T del triangolare, il leapfrog di tick_chi
+============================================================================================================================================
+### IL CASO NOTO (m2 0.0): l'onda stazionaria di chi sul toro 48x48, k (1, 0), 400 tick: omega misurata 0.09252699494082, formula 0.09252699494082 (lo scarto 0.0e+00; la dispersione 4.0e-15)
+  CASO NOTO (m2 0.0): omega dell'onda stazionaria di chi = la formula entro 1e-10                                        PASSA   0.0e+00
+  DEVE FALLIRE (m2 0.0): lambda con due direzioni sole (omega 0.065415)                                                  PASSA   2.9e-01
+### IL CASO NOTO (m2 0.0001): l'onda stazionaria di chi sul toro 48x48, k (1, 0), 400 tick: omega misurata 0.09306658078517, formula 0.09306658078517 (lo scarto 1.3e-14; la dispersione 3.7e-15)
+  CASO NOTO (m2 0.0001): omega dell'onda stazionaria di chi = la formula entro 1e-10                                     PASSA   1.3e-14
+  DEVE FALLIRE (m2 0.0001): lambda con due direzioni sole (omega 0.066175)                                               PASSA   2.9e-01
+### LA VELOCITA' DI CHI (archi per tick): senza massa v = omega/|k|; con la massa v_g = d omega/d|k|:
+  theta  0.0: |k| 1e-02: senza massa 0.6123714789, v_g con m2 3.198e-01; |k| 1e-03: senza massa 0.6123724260, v_g con m2 3.743e-02; |k| 1e-04: senza massa 0.6123724249, v_g con m2 3.750e-03
+  theta 15.0: |k| 1e-02: senza massa 0.6123714789, v_g con m2 3.198e-01; |k| 1e-03: senza massa 0.6123724262, v_g con m2 3.743e-02; |k| 1e-04: senza massa 0.6123724430, v_g con m2 3.750e-03
+  theta 30.0: |k| 1e-02: senza massa 0.6123714789, v_g con m2 3.198e-01; |k| 1e-03: senza massa 0.6123724260, v_g con m2 3.743e-02; |k| 1e-04: senza massa 0.6123724249, v_g con m2 3.750e-03
+### v_chi senza massa a k -> 0: 0.6123724249 archi per tick (c sqrt(3/2) = 0.6123724357); l'anisotropia 3.0e-08; con la massa v_g -> 0 a k -> 0 (portata 1/m = 100 archi)
+============================================================================================================================================
+--------------------------------------------------------------------------------------------------------------------------------------------
+  CASO NOTO (m2 0.0): omega dell'onda stazionaria di chi = la formula entro 1e-10                                        PASSA
+  DEVE FALLIRE (m2 0.0): lambda con due direzioni sole (omega 0.065415)                                                  PASSA
+  CASO NOTO (m2 0.0001): omega dell'onda stazionaria di chi = la formula entro 1e-10                                     PASSA
+  DEVE FALLIRE (m2 0.0001): lambda con due direzioni sole (omega 0.066175)                                               PASSA
