@@ -1,0 +1,56 @@
+[TIMBRO] coppie_57.py  sha1-BYTE 343305c1  committato e pulito
+==================================================================================================================================
+M1, LE COPPIE 5-7 (Luca 2026-11-21 23:13; la carta sez. 3.2): sola lettura
+==================================================================================================================================
+### IL TORO INIZIALE (il caso noto) (k 0, n 34596): la sorgente 17391 (r 0.000); i gradi {np.int64(6): np.int64(34596)}; i difetti 0
+    la curvatura netta (gradi) nelle palle di passi (5, 10, 15, 18, 20, 25): 0, 0, 0, 0, 0, 0
+### IL RAMO MITOSI stato_36000.npz (sha1 9bab6148) (k 36000, n 34597): la sorgente 17204 (r 0.443); i gradi {np.int64(5): np.int64(2), np.int64(6): np.int64(34593), np.int64(7): np.int64(2)}; i difetti 4
+    il nodo  16813: grado 7, 19 passi dalla sorgente, r 18.197
+    il nodo  16999: grado 5, 19 passi dalla sorgente, r 18.655
+    il nodo  17185: grado 7, 19 passi dalla sorgente, r 19.154
+    il nodo  34596: grado 5, 20 passi dalla sorgente, r 19.155
+    il 5 16999 -> il 7 piu' vicino 16813 a 1 passi (legata)
+    il 5 34596 -> il 7 piu' vicino 16813 a 1 passi (legata)
+    il 7 16813 -> il 5 piu' vicino 16999 a 1 passi
+    il 7 17185 -> il 5 piu' vicino 16999 a 1 passi
+    la curvatura netta (gradi) nelle palle di passi (5, 10, 15, 18, 20, 25): 0, 0, 0, 0, 0, 0
+### IL RAMO MITOSI stato_36250.npz (sha1 64999c5b) (k 36250, n 34605): la sorgente 17204 (r 0.442); i gradi {np.int64(5): np.int64(8), np.int64(6): np.int64(34589), np.int64(7): np.int64(8)}; i difetti 16
+    il nodo  13295: grado 7, 21 passi dalla sorgente, r 19.231
+    il nodo  13482: grado 5, 20 passi dalla sorgente, r 18.638
+    il nodo  13668: grado 7, 19 passi dalla sorgente, r 17.643
+    il nodo  13669: grado 5, 19 passi dalla sorgente, r 18.082
+    il nodo  13671: grado 7, 20 passi dalla sorgente, r 19.089
+    il nodo  16439: grado 7, 21 passi dalla sorgente, r 19.387
+    il nodo  16999: grado 7, 19 passi dalla sorgente, r 18.652
+    il nodo  17371: grado 7, 21 passi dalla sorgente, r 19.688
+    il nodo  17558: grado 7, 20 passi dalla sorgente, r 19.267
+    il nodo  34597: grado 7, 20 passi dalla sorgente, r 18.582
+    il nodo  34598: grado 5, 20 passi dalla sorgente, r 19.065
+    il nodo  34599: grado 5, 20 passi dalla sorgente, r 19.190
+    il nodo  34601: grado 5, 21 passi dalla sorgente, r 19.137
+    il nodo  34602: grado 5, 21 passi dalla sorgente, r 19.270
+    il nodo  34603: grado 5, 21 passi dalla sorgente, r 19.651
+    il nodo  34604: grado 5, 19 passi dalla sorgente, r 18.651
+    il 5 13482 -> il 7 piu' vicino 13295 a 1 passi (legata)
+    il 5 13669 -> il 7 piu' vicino 13668 a 1 passi (legata)
+    il 5 34598 -> il 7 piu' vicino 13671 a 1 passi (legata)
+    il 5 34599 -> il 7 piu' vicino 17371 a 1 passi (legata)
+    il 5 34601 -> il 7 piu' vicino 13295 a 1 passi (legata)
+    il 5 34602 -> il 7 piu' vicino 16439 a 1 passi (legata)
+    il 5 34603 -> il 7 piu' vicino 17371 a 1 passi (legata)
+    il 5 34604 -> il 7 piu' vicino 16999 a 1 passi (legata)
+    il 7 13295 -> il 5 piu' vicino 13482 a 1 passi
+    il 7 13668 -> il 5 piu' vicino 13482 a 1 passi
+    il 7 13671 -> il 5 piu' vicino 34598 a 1 passi
+    il 7 16439 -> il 5 piu' vicino 34602 a 1 passi
+    il 7 16999 -> il 5 piu' vicino 34604 a 1 passi
+    il 7 17371 -> il 5 piu' vicino 34599 a 1 passi
+    il 7 17558 -> il 5 piu' vicino 34599 a 1 passi
+    il 7 34597 -> il 5 piu' vicino 13482 a 1 passi
+    la curvatura netta (gradi) nelle palle di passi (5, 10, 15, 18, 20, 25): 0, 0, 0, 0, 0, 0
+----------------------------------------------------------------------------------------------------------------------------------
+### P-M1 (k 36000, una nascita: un 5 e un 7 a distanza 1, nessun altro difetto): FALSA (5: 2, 7: 2, le coppie [1, 1])
+### P-M2 (k 36250: ogni 5 col suo 7 a distanza <= 2): VERA (5: 8, 7: 8, le distanze [1, 1, 1, 1, 1, 1, 1, 1])
+### P-M3 (k 36250: la curvatura nella palla di raggio 18 e' 0): VERA (0 gradi)
+  DEVE: il toro iniziale: tutti i gradi 6, la curvatura 0 in ogni palla                                          PASSA
+==================================================================================================================================

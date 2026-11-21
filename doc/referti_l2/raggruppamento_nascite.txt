@@ -1,0 +1,46 @@
+[TIMBRO] coppie_57.py  sha1-BYTE 343305c1  committato e pulito
+[TIMBRO] raggruppamento_nascite.py  sha1-BYTE 9bd2421b  committato e pulito
+==================================================================================================================================
+M2 E M3, IL RAGGRUPPAMENTO E GLI ANGOLI DELLE NASCITE (Luca 2026-11-21 23:13 e l'aggiunta; la carta sez. 3.2): sola lettura
+==================================================================================================================================
+### IL CASO NOTO DI M3: Theta isotropo sul toro iniziale: i 20 archi piu' alti a r 18.875..18.901, la distanza media dall'asse 14.694 gradi; gli archi dell'anello (840) 15.291 gradi
+### lo stato stato_36250.npz (sha1 64999c5b): k 36250, n 34605; la sorgente 17204; 9 nascite (i nodi [np.int64(34596), np.int64(34597), np.int64(34598), np.int64(34599), np.int64(34600), np.int64(34601), np.int64(34602), np.int64(34603), np.int64(34604)])
+### M2: la distanza in passi dalla nascita precedente piu' vicina: [37, 1, 2, 1, 1, 1, 1, 1]; S = 5.6250; a caso (264 nodi dell'anello (17.5, 19.5), 10000 estrazioni, seme 20261121): media 13.370, il 1% 8.625; p = 0.0001
+### P-M4 (il raggruppamento oltre il caso, p < 0.01): VERA (p 0.0001)
+### M3: le nascite attorno alla sorgente:
+    la nascita 1 (k 35976), il nodo 34596: l'angolo 297.39 gradi, r 19.020, dall'asse 2.61 gradi
+    la nascita 2 (k 36001), il nodo 34597: l'angolo 182.61 gradi, r 19.020, dall'asse 2.61 gradi
+    la nascita 3 (k 36027), il nodo 34598: l'angolo 180.00 gradi, r 19.500, dall'asse 0.00 gradi
+    la nascita 4 (k 36059), il nodo 34599: l'angolo 302.61 gradi, r 19.020, dall'asse 2.61 gradi
+    la nascita 5 (k 36125), il nodo 34600: l'angolo 294.65 gradi, r 18.581, dall'asse 5.35 gradi
+    la nascita 6 (k 36129), il nodo 34601: l'angolo 185.08 gradi, r 19.577, dall'asse 5.08 gradi
+    la nascita 7 (k 36152), il nodo 34602: l'angolo 292.21 gradi, r 19.177, dall'asse 7.79 gradi
+    la nascita 8 (k 36162), il nodo 34603: l'angolo 300.00 gradi, r 19.500, dall'asse 0.00 gradi
+    la nascita 9 (k 36228), il nodo 34604: l'angolo 300.00 gradi, r 18.500, dall'asse 0.00 gradi
+### il massimo dall'asse 7.79 gradi; a caso (le stesse estrazioni): il massimo medio 27.14, il 1% 18.14; p = 0.0000
+### P-M5 (tutte entro 10 gradi da un asse e p < 0.01): VERA
+### i 20 archi con |Theta| piu' alto a k 36250 (dove maturano le prossime nascite):
+    l'arco  51097 (17036 -> 17037): |Theta| 6.280624, l'angolo 122.61 gradi, r 19.020, dall'asse 2.61 gradi (l'asse 120)
+    l'arco  40445 (13482 -> 13668): |Theta| 6.279461, l'angolo 185.35 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 180)
+    l'arco  52212 (17409 -> 17410): |Theta| 6.277299, l'angolo 117.39 gradi, r 19.020, dall'asse 2.61 gradi (l'asse 120)
+    l'arco  39885 (13295 -> 13481): |Theta| 6.277279, l'angolo 187.79 gradi, r 19.177, dall'asse 7.79 gradi (l'asse 180)
+    l'arco  40393 (13464 -> 13651): |Theta| 6.273686, l'angolo 240.00 gradi, r 19.500, dall'asse 0.00 gradi (l'asse 240)
+    l'arco  41007 (13671 -> 13857): |Theta| 6.271878, l'angolo 177.39 gradi, r 19.020, dall'asse 2.61 gradi (l'asse 180)
+    l'arco  51652 (17222 -> 17223): |Theta| 6.267298, l'angolo 120.00 gradi, r 18.500, dall'asse 0.00 gradi (l'asse 120)
+    l'arco  52770 (17595 -> 17596): |Theta| 6.267162, l'angolo 114.65 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 120)
+    l'arco  61640 (20552 -> 20738): |Theta| 6.261546, l'angolo 0.00 gradi, r 18.500, dall'asse 0.00 gradi (l'asse 0)
+    l'arco  61696 (20570 -> 20757): |Theta| 6.260624, l'angolo 60.00 gradi, r 18.500, dall'asse 0.00 gradi (l'asse 60)
+    l'arco  41010 (13672 -> 13858): |Theta| 6.260467, l'angolo 174.92 gradi, r 19.577, dall'asse 5.08 gradi (l'asse 180)
+    l'arco  50426 (16811 -> 16812): |Theta| 6.259993, l'angolo 294.92 gradi, r 19.577, dall'asse 5.08 gradi (l'asse 300)
+    l'arco  39839 (13279 -> 13466): |Theta| 6.255050, l'angolo 234.92 gradi, r 19.577, dall'asse 5.08 gradi (l'asse 240)
+    l'arco  52659 (17558 -> 17559): |Theta| 6.251712, l'angolo 305.35 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 300)
+    l'arco  40943 (13649 -> 13836): |Theta| 6.250015, l'angolo 245.08 gradi, r 19.577, dall'asse 5.08 gradi (l'asse 240)
+    l'arco  61076 (20364 -> 20550): |Theta| 6.245827, l'angolo 354.65 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 0)
+    l'arco  50538 (16849 -> 16850): |Theta| 6.245475, l'angolo 125.35 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 120)
+    l'arco  62204 (20740 -> 20926): |Theta| 6.244517, l'angolo 5.35 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 0)
+    l'arco  61141 (20385 -> 20572): |Theta| 6.244474, l'angolo 65.35 gradi, r 18.581, dall'asse 5.35 gradi (l'asse 60)
+    l'arco  41571 (13859 -> 14045): |Theta| 6.244442, l'angolo 172.21 gradi, r 19.177, dall'asse 7.79 gradi (l'asse 180)
+### P-M6 (fra i 20, archi entro 10 gradi da almeno due assi fra 0, 60, 120, 240): VERA (gli assi toccati [0.0, 60.0, 120.0, 240.0])
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il Theta isotropo non preferisce gli assi oltre la grana: |14.694 - 15.291| <= 5 gradi                   PASSA
+==================================================================================================================================
