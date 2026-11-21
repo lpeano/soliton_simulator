@@ -396,3 +396,32 @@
 2. `doc/referti_l2/mitosi_scala_tronco.py` *(la domanda; il controllo del ritmo da `cs_prec`)*: commit; il referto sulle serie del tronco: commit; **la risposta a Luca**;
 3. `doc/referti_l2/mitosi_lambda.py` *(l'aggiunta: `tronco` per la prova sugli stati di oggi, `rami` a rami finiti)*: commit; la prova: commit;
 4. **a rami finiti:** `mitosi_lambda.py rami` nel referto della corsa, con la lettura di 18.1 e, se MITOSI e' caduta sull'assert del cono, il tick e il luogo.
+
+## 19. LE PREVISIONI DEL GUARDIANO PER I RAMI *(Luca `2026-11-21` `14:35`; copiate PRIMA del primo scatto: alle `14:36` `scatto.json` non c'e', il tronco a `k 29634`)*
+
+### 19.1 LE PREVISIONI *(del GUARDIANO, copiate; il suo file nel progetto: `claude/ANALISI_continuo_mitosi_2026-11-21.md`, ### che da qui NON posso leggere)*
+
+- **P-A1 IL BILANCIO DI FASE:** su ogni cammino radiale senza flip, **somma di `Theta` + `2 pi` x (nascite sul cammino) = `0.15 pi` x integrale di (`N` fuori - `N` centro) `dt`**, entro l'arrotondamento; **coi flip entro il `10%`.**
+- **P-A2:** una **RAFFICA di `50-200` nascite agli anelli `15-21` nei primi `~3000` tick dei rami**; poi **un ritmo di `0.01-0.03` nascite per tick.**
+- **P-A3:** il totale delle nascite nei `10000` tick dei rami **SOTTO `900`.**
+- **P-A4:** **la pendenza di D1** *(passi dal centro all'anello `40`)* **proporzionale a `N(fuori) - N(centro)` nel tempo** *(il pozzo si ferma solo se il nucleo si rilassa)*.
+- **P-A5 IL LAPSE LOCALE:** **`1 - N` oltre l'anello `30` sotto `1e-6` di quello al centro.**
+- **Le misure a posteriori dagli stati salvati:** **il bilancio di fase su `20` cammini radiali; `1 - N` per anello fino all'anello `80`.**
+
+### 19.2 COME LE LEGGO *(mio: i simboli del guardiano tradotti nelle grandezze della corsa; ### da CONFERMARE col suo file)*
+
+- **`N` = `cs / s`**, `cs` il lapse del tick *(`cs_prec` dello stato)*, **`s` il lapse del vuoto uniforme** *(la forma `cs = Lambda / (Lambda + Lambda_c)` con `Lambda_c = Lambda_vuoto (1 - s) / s` da' `cs = s` nel vuoto; il guardiano scrive `0.15`)*: **`N = 1` nel vuoto, `N < 1` nel pozzo.** **Il valore di `s` lo script lo legge dal codice e lo misura** *(`cs` lontano dal mattone)*, **non lo scrivo a mano.**
+- **Il contatore** *(`contatore.ritmo`)*: `Theta_a += pi (cs_i - cs_j)` = **`s pi (N_i - N_j)`** a ogni tick: **sommato su un cammino radiale, telescopico** -> `s pi (N_fuori - N_centro)` per tick.
+- **Gli anelli:** **euclidei dal centro della corsa** *(come gli anelli `40` e `60` di D1 e gli anelli della sez. `17`)*, larghi `1`. **I cammini radiali:** `20` cammini fissi dal nodo del centro verso l'esterno *(gli angoli `0, 18, ..., 342` gradi)*, scelti una volta sui nodi originari; **«senza flip»** = nessun arco del cammino toccato da una regola.
+
+### 19.3 LE MIE OSSERVAZIONI DI GUARDIANO *(scritte prima, per Luca; non cambiano le previsioni)*
+
+- ### ⚠ **P-A1 SENZA FLIP E' UN'IDENTITA' DEL CONTATORE, NON UNA PREVISIONE DELLA DINAMICA:** il telescopio di `pi (cs_i - cs_j)` lungo un cammino da' esattamente `s pi (N_fuori - N_centro)` a ogni tick, **per come `Theta` e' definito** *(un FALSO-UNO se letta come prova di fisica)*. **Cio' che PUO' fallire:** la parte coi flip *(entro il `10%`)* e il conto delle nascite *(`2 pi` per ogni arco consumato)*.
+- ### ⚠ **«ENTRO L'ARROTONDAMENTO» NON E' RAGGIUNGIBILE DAGLI STATI SALVATI:** l'integrale di `N` nel tempo, dagli stati ogni `250` tick, e' una SOMMA CAMPIONATA *(`cs` respira da un tick all'altro: la sez. `18`, il rapporto fra due campioni e la media fra `0.965` e `1.115`)*. **Dagli stati la parte senza flip si verifica solo alla precisione del campionamento**, e lo scrivo nel referto; **al bit si verificherebbe solo dentro la corsa, che non si tocca.**
+- **P-A2, P-A3** si leggono dai bilanci delle nascite *(`nascite_<k>.json`: il tick e il nodo nato, la sua posizione B4 per l'anello)*; **P-A4** dalla serie *(`D_med40` ogni `50` tick)* e da `cs_prec` agli stati; **P-A5** da `cs_prec` per anello fino a `80`.
+
+### 19.4 TODO *(dopo i rami, nel referto della corsa; ### lo script NON prima che Luca risponda al FERMO della sez. 18 sul controllo del ritmo da `cs_prec`)*
+
+1. questa carta: commit, push, **prima del primo scatto**;
+2. lo script delle misure a posteriori *(il bilancio su `20` cammini, `1 - N` per anello fino a `80`, le nascite per anello e per finestra, la pendenza di D1)*: commit; **prima una prova sul tronco**; poi i rami;
+3. il referto: le cinque previsioni, ognuna VERA o FALSA col suo numero.
