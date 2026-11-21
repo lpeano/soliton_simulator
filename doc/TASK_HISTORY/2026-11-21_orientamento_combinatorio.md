@@ -91,3 +91,35 @@
 - **M2:** i nodi nati *(`nascite_36250.json`, `n`)* sul grafo di `k 36250`; **la statistica** `S` = la media, sulle nascite dalla seconda, della distanza in passi dalla nascita PRECEDENTE piu' vicina; **il confronto:** `10000` estrazioni *(seme `20261121`)* di `9` nodi distinti a caso fra i nodi ORIGINARI con `r` in `[17.5, 19.5)` *(l'anello `18-19`)* sullo stesso grafo, la stessa `S`; **`p` = la frazione delle estrazioni con `S <= S` osservata.** **P-M4 VERA** se `p < 0.01`.
 - **M3:** l'angolo di ogni nascita *(il nodo nato)* attorno alla sorgente, nel disegno *(`m1 a1 + m2 a2`, l'immagine minima)*; **la distanza dall'asse del reticolo piu' vicino** *(i multipli di `60` gradi: le direzioni di `a1`, `a1 + a2`, `a2`)*; **la statistica** = il MASSIMO delle `9` distanze; il confronto come in M2 *(gli stessi `10000` nodi a caso)*; **`p` = la frazione col massimo `<=` quello osservato.** **P-M5 VERA** se tutte entro `10` gradi e `p < 0.01`. **Poi a `k 36250`:** i `20` archi con `|Theta|` piu' alto, l'angolo del punto medio e la distanza dall'asse; **P-M6 VERA** se fra loro ce ne sono entro `10` gradi da almeno due assi fra `0`, `60`, `120`, `240`. **IL CASO NOTO DI M3 (DEVE):** sul toro iniziale un `Theta` isotropo costruito a mano *(`Theta = exp(-(r_mid - 18.9)^2 / 2)`, `r_mid` il raggio del punto medio dell'arco dalla stessa sorgente)*: la distanza media dall'asse dei `20` archi con `Theta` piu' alto, contro quella di tutti gli archi con `r_mid` in `[17.5, 19.5)`: **entro `5` gradi** *(la grana del reticolo, dichiarata)*.
 - **A17:** l'angolo e `r` usano il disegno solo per MISURARE *(Luca)*.
+
+## 4. C1: LE CURE D1-D3 PER ESTESO *(scritta PRIMA del codice)*
+
+### 4.1 D1: `geo.n` E' UNO STATO DELLA RELAZIONE
+
+- **Precisazione di A17** *(Luca)*: **«A17 vieta le posizioni del disegno, non gli stati locali della relazione».** `geo.n` *(il versore per estremita')* e' come `U`: uno stato locale, con le sue regole di nascita di oggi *(le estremita' di `a` trasportate, le altre medie normalizzate; al flip `+v`, `-v`)*. **Nessun codice cambia per D1.**
+
+### 4.2 D2: L'ORIENTAMENTO EREDITATO *(`vec` esce dalla fisica)*
+
+- **Lo stato:** **per ogni triangolo il suo CICLO** *(l'ordine dei tre nodi, ruotato in modo canonico: il nodo d'indice minore per primo)*; un dizionario `{la terna ordinata: il ciclo}` nel campo *(`CampoGenerico_v2.ori`)*, e **nello stato salvato** come un array `(F, 3)` dei cicli *(la chiave `ori_cicli`)*: **la ripresa lo LEGGE, non lo ricalcola dalla geometria.**
+- **A `k 0` UNA volta dalla geometria:** sul toro regolare il ciclo antiorario dal prodotto vettoriale dei vettori d'arco *(la regola di oggi: sul reticolo regolare non ci sono degeneri)*; **poi solo eredita'.**
+- **LA NASCITA sull'arco `a = i -> j`, la stella `i - k - j - l`:** i due triangoli di `a` sono `T_k = (i, j, k)` *(quello il cui ciclo contiene `i -> j`)* e `T_l = (j, i, l)` *(quello il cui ciclo contiene `j -> i`)*; **nel ciclo di ciascuno si sostituisce `j` con `n`, e poi `i` con `n`:** `T_k -> (i, n, k)` e `(n, j, k)`; `T_l -> (j, n, l)` e `(n, i, l)`. **I quattro triangoli nuovi hanno il verso del triangolo da cui nascono.**
+- **IL FLIP del lato `x - y` nel quadrilatero `n - x - m - y`:** i due triangoli orientati che condividono la diagonale vecchia, `(n, x, y)` e `(m, y, x)` nel loro verso, danno **il ciclo del quadrilatero** *(se il ciclo del primo contiene `x -> y`, il quadrilatero e' `n -> x -> m -> y`; altrimenti il verso opposto)*; **i due triangoli nuovi lo seguono:** `(n, x, m)` e `(n, m, y)` nel verso del quadrilatero.
+- **`k` E `l` DALL'ORDINE CICLICO** *(D2 b)*: **`k` = il terzo vertice del triangolo il cui ciclo contiene `i -> j`; `l` = il terzo dell'altro.** Oggi `k` e' «a sinistra di `i -> j`» dal prodotto vettoriale: **sul triangolo antiorario e' lo stesso nodo** *(P-C1)*.
+- **La sorgente e i segni** della placchetta: **dal ciclo ereditato, con le righe di oggi** *(`_placchetta` dopo la scelta del ciclo: il primo arco esce dalla sorgente, i segni dal verso degli archi)*.
+- **`vec`** resta **solo per il disegno e le misure** *(i nati continuano ad averlo, con la formula di oggi)*: **nessuna riga di fisica lo legge.**
+- **I file NUOVI** *(nessuno in uso si tocca)*: `csv/solitone/u1_generico_v2.py` *(`CampoGenerico_v2`: `ori`, `_placchetta` SENZA prodotto vettoriale, `cresci` con `ori_nuovi`, `orientamento_da_vec` solo a `k 0`)* -- **e' sotto `csv/`, quindi il commit gira la suite** *(SUITE-NEL-COMMIT)*; `doc/referti_l2/mitosi_regola_v2.py` *(`indici_nascita` dall'ordine ciclico; `candidato`, `regola`, `applica` col campo v2 e gli `ori_nuovi`)*; `mitosi_corsa_v2`, `mitosi_lunga_v2`, `mitosi_rami_v2` *(il campo v2 a `k 0`; salva e riprendi con `ori_cicli`)* -- **dove possibile importando i vecchi e cambiando solo le funzioni che toccano l'orientamento.**
+
+### 4.3 D3: `kappa` IL NUMERO DI OGGI
+
+- **`kappa = 2.5289441539...e-04`** *(il valore AL BIT del `meta["parametri"]` della corsa del mattone con `chi`)* **dichiarato costante** in un file nuovo *(`doc/referti_l2/chi_parametri_v2.py`)*: `parametri_v2` restituisce lo STESSO `kappa` senza leggere nessuna posizione; `m0` dallo stato di partenza come oggi; **`c0 = kappa m0` come oggi, al bit.**
+
+### 4.4 LE PROVE *(il mandato: O1-O5, O7, O8; le soglie)*
+
+- **O1** *(senza tick)*: dall'orientamento del toro *(da `vec`, `k 0`)* **ricostruito lungo le `9` nascite di `nascite_36250.json`** *(la nascita e il flip, nell'ordine)* **contro l'orientamento di oggi a `k 36250`** *(il `CampoGenerico` ricostruito dallo stato: il ciclo dal prodotto vettoriale)*: **`0` triangoli diversi**; e **`k`, `l` dall'ordine ciclico = `k`, `l` registrati, nascita per nascita: `0` diversi.**
+- **O2** *(una corsa)*: dallo stato del tronco `k 35976` col codice nuovo fino a `k 36250`: **lo stato AL BIT con lo stato `k 36250` del ramo** *(sha1 `64999c5b`: ogni array, il grafo, i versori, `Theta`, le posizioni, `E_persa`; il file nuovo ha in piu' `ori_cicli`, quindi si confrontano gli array, non lo sha1 del file)*. **Q-P1, prima:** `274` tick a `~4.7` s *(il ritmo del ramo, con le altre corse)* piu' `9` nascite a `~15` s: **circa `24` minuti.**
+- **O3** *(una corsa)*: da `k 36250` col codice nuovo **fino alla decima nascita piu' `5` tick**: **nessun AssertionError; P1, P3, P9 a `0`, F3** *(Eulero, nessun doppio, due triangoli per arco, placchette coerenti)* **a ogni nascita.**
+- **O4** *(deve fallire)*: un triangolo col ciclo invertito a mano nel candidato: **le placchette NON coerenti** *(F3)* **o P3 fuori soglia.**
+- **O5:** P8 col codice nuovo *(`ori_cicli` compreso)*: `10` tick di fila contro `5` + salva + riprendi + `5`, AL BIT; un byte cambiato -> la ripresa RIFIUTA.
+- **O7:** i due candidati degeneri noti *(l'arco `40445` flip `0`; l'arco `103798` flip `3`)* **sullo stato `k 36250` col codice nuovo: nessun AssertionError**, l'orientamento ereditato dei triangoli nuovi stampato.
+- **O8:** `chi_parametri_v2` = `meta["parametri"]` della corsa *(`kappa`, `c0`, `m0`)* **al bit.**
+- **Se O1, O2 o O8 non passano: FERMO.**
