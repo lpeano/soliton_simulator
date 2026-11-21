@@ -55,3 +55,41 @@
 2. L0: lo script, commit; il referto *(due radici)*, commit;
 3. L1: lo script; il caso noto e la velocita' di ciascun settore *(luce, `chi`, materia)*, commit dopo ognuno; la tabella;
 4. L2: la sez. `3` *(la carta della cura)*, commit; **FERMO per Luca.**
+
+## 3. L2, LA CARTA DELLA CURA *(solo testo; DOPO i numeri di L0 e L1; la cura la sceglie Luca)*
+
+### 3.0 DA DOVE PARTE *(i referti di L0 e L1)*
+
+- **Chi segue `N`** *(`lorentz_censimento.txt`)*: la materia `psi` e il vuoto `phi` SI' *(lo spostamento, il Grover, la moneta leggono `dtau cs`; la fase (a))*; **la luce NO** *(`s_a` congelato alla costruzione)*; **`chi` NO** *(`dt` il tick, `c2` costante)*. **`cs = s N` si scrive UNA volta per tick, col `N` di META' tick.**
+- **Le velocita' al vuoto** *(`lorentz_velocita.txt`)*: **materia `0.0882` archi/tick** *(`v_max`, `0.588 s`)*, **luce `0.1500`** *(`= s_a = s`)*, **`chi` `0.6124`** *(`c sqrt(3/2)`, senza massa)*: **i rapporti `0.588` e `4.082`.** **Al centro del mattone** *(`N 0.995525`)*: **in tempo proprio luce e `chi` crescono di `4.5e-3`, materia/luce scende di `4.5e-3`.**
+- **Quindi due difetti distinti:** **(D1)** luce e `chi` NON sentono `N` *(il rapporto con la materia cambia da punto a punto: P-L5)*; **(D2)** le tre velocita' di base sono DIVERSE gia' al vuoto *(`chi` e' `4.08` volte la luce; la materia `0.588` della luce)*.
+
+### 3.1 (i) LA LUCE CHE SENTE `N`: `s_a` RICALCOLATO DA `cs` A OGNI TICK
+
+- **La forma:** `s_a = FP.s_arco(mot)` *(la media armonica di `dtau cs` sull'arco, B-3: la stessa che usa lo spostamento della materia)* e `w_a = s_a^2 (l/l*)`, **ricalcolati in `tick_chi` SUBITO DOPO `mot.cs = s N`** *(il passo 4: il `cs` di META' tick)*, **prima del palindromo avvolto** *(che contiene le due deriva `1/2`)*. **Perche' a meta' tick:** il palindromo resta simmetrico *(la stessa scelta di D2 per `cs`: un `cs` dell'inizio rompe la reversibilita')*; le due spinte `1/2` agli estremi non leggono `s` *(«spinta senza s», F1)*.
+- **La velocita' che ne viene:** `v_luce = s_a` a `k -> 0` *(L1 (b): `1.00000004 s_a`)*: **la luce va come `s N`, come la materia in tempo proprio.**
+- **L'energia:** `K = somma_a w_a(N) E_a^2 / 2` dipende da `chi` attraverso `N`: **perche' l'energia TOTALE si conservi serve la REAZIONE su `chi`:** un termine in piu' nella forza di `chi`, `- dK/d chi_k = - somma_{a in k} (d w_a / d chi_k) E_a^2 / 2` *(`d w_a/d cs_k` e' la derivata del peso gia' usato -- come `energia_pesata.d_peso_arco` --, `d cs_k / d chi_k = - kappa cs_k`)*: **DERIVATO, nessuna costante nuova** *(A1)*. **Senza la reazione** l'energia del campo cambia ogni tick di `somma (dw/dt) E^2/2`: **la deriva di `H` va misurata** *(K5)*.
+- **Il costo** *(Q-P1, una stima: da misurare)*: `s_arco` e il prodotto per arco sono `O(m)` *(`~1e5` archi)*, la reazione `O(m)`: **qualche per cento del tick di `chi`** *(`0.68` s)*.
+- **Le prove, ciascuna col suo caso noto:** **(i-1)** a `kappa = 0` *(`N = 1`)* il tick nuovo = quello di oggi AL BIT *(`s_arco` con `cs = s` uniforme da' `s` esatto: lo dice la docstring di `FP.s_arco`; da verificare al bit)*; **(i-2)** in una regione a `N` uniforme e fermo, l'onda del campo ha `v = s N` *(lo strumento di L1 (b) con `s_a = s N`: il caso noto dell'onda stazionaria)*; **(i-3)** l'energia totale con la reazione: la deriva come K5; **(i-4)** CPT e lo specchio *(K6)* rigirati; **(i-5)** la parte G *(Shapiro)* rigirata con `N` dinamico, accanto al suo `0.99356`.
+
+### 3.2 (ii) `chi` NEL TEMPO PROPRIO: L'ONDA COL LAPSE
+
+- **La forma continua** *(il mandato)*: `d_t (N^-1 d_t chi) = div (N grad chi) - N m^2 chi + sorgente`. **La forma discreta sugli archi** *(una proposta: una lagrangiana, quindi un'hamiltoniana)*: `L = somma_k chi_dot_k^2 / (2 N_k) - (c2/2) somma_a N_a (chi_i - chi_j)^2 - somma_k N_k m2 chi_k^2 / 2 + ...`, con `N_a` la stessa media d'arco di `s_a` *(la media armonica)*; **`pi_k = chi_dot_k / N_k`**, `H_chi = somma_k N_k pi_k^2 / 2 + (c2/2) somma_a N_a (chi_i - chi_j)^2 + somma_k N_k m2 chi_k^2 / 2 + ...`.
+- **Il leapfrog:** la spinta `pi -= (1/2) dH/d chi`, la deriva `chi += N pi` *(il tempo proprio del nodo)*, la spinta `1/2`; **`N` congelato a META' tick** *(come `cs`: nessun punto fisso, nessuna `Q` in piu')*. **Ma `N` dipende da `chi`:** `dH/d chi` contiene i termini da `dN/d chi` *(`- kappa N`)*: con `N` congelato a meta' passo il metodo resta reversibile *(il palindromo)* ma **non e' piu' esattamente simplettico**: **la deriva dell'energia va misurata** *(e se cresce: il punto medio implicito, come D2, con il suo costo)*.
+- **La causalita':** lo stencil resta il primo vicino: **un arco per tick** *(K4 si rigira)*; **la stabilita':** `c2 lambda_max N^2 <= 4`, con `lambda_max = 9` sul triangolare: **oggi `c2 9 = 2.25`** *(e con `N <= 1` resta sotto `4`)*. **CPT e lo specchio:** `N` e' una funzione scalare di `chi` per nodo; `pi -> - pi` col palindromo: **attese conservate**, K6 rigirato.
+- **Il costo:** la deriva e la forza con `N_k`, `N_a`: `O(n + m)` in piu'; **nessuna valutazione di `Q` in piu'** *(se `N` resta congelato a meta' passo)*; il punto medio implicito, se servisse, `x 2-3` la parte di `chi`.
+- **Le prove:** **(ii-1)** a `kappa = 0` = il `chi` di oggi AL BIT; **(ii-2)** l'onda stazionaria in `N` uniforme fermo: `v = c sqrt(3/2) N` *(lo strumento di L1 (c))*; **(ii-3)** l'energia conservata *(K5)*; **(ii-4)** K4, la causalita'; **(ii-5)** K6, CPT e lo specchio; **(ii-6)** la parte C rigirata *(il mattone con `chi`: la contrazione cambia?)*.
+
+### 3.3 (iii) LE TRE VELOCITA' DI BASE UGUALI
+
+- **`c_chi` legata a `v_luce` invece che scelta:** `v_chi = c sqrt(3/2)` e `v_luce = s` *(L1)*: **`v_chi = v_luce` vuol dire `c_chi = s sqrt(2/3) = 0.122474`** *(`c2 = 0.015`; oggi `c_chi = 0.5`, la scelta di Luca delle `15:57`, D-CHI-VELOCITA')*. **Non e' una manopola:** e' una RELAZIONE *(la velocita' di `chi` = quella della luce)*, e con (i) e (ii) **le due restano uguali in ogni punto** *(entrambe scalano con `N`)*.
+- ### **MA CAMBIA LA PORTATA DEL PROFILO STATICO:** il profilo statico di `chi` decade su `v_chi / m` archi: **oggi `0.6124 / 0.01 = 61.2` archi** *(NON i `100` della «portata `1/m`» delle `16:39`: la portata in archi e' `v_chi/m`, non `1/m`)*; **con `c_chi = 0.1225` diventerebbe `15` archi** *(quanto il mattone)*, **a meno di scalare `m`** *(`m = 0.00245`, `m2 = 6e-6`, per tenere `61.2`; o `m = 0.0015` per `100`)*. **E `kappa` si ritara** *(la regola delle `16:39`: dal profilo statico a C2 `k 3000`, che dipende da `c2` e `m2`)*. **Questa e' una DOMANDA per Luca:** la portata e' `1/m` o `v_chi/m`, e quale si tiene fissa.
+- **`v_materia` contro `v_luce`** *(`0.588`)*: **resta la «strada 4» del `9/11`** *(la convergenza per interazione)*: **NON si decide qui.**
+- **Il costo:** nessuno *(una costante)*; **le prove:** K2-K6 rigirate, la parte A *(il segno della sorgente netta)*, la parte C.
+
+### 3.4 LE DOMANDE PER LUCA *(il criterio di chiusura: la sua scelta)*
+
+1. **(i) la luce che sente `N`:** si'/no; **e con la reazione su `chi`** *(l'energia totale conservata)* **o senza** *(l'energia del campo non conservata, misurata)*?
+2. **(ii) `chi` nel tempo proprio:** si'/no; **`N` congelato a meta' tick** *(esplicito, economico, quasi simplettico)* **o il punto medio implicito** *(simplettico, `x 2-3` il costo di `chi`)*?
+3. **(iii) `c_chi = s sqrt(2/3)`:** si'/no; **e la portata:** `1/m` o `v_chi/m`, e quale si tiene?
+4. **L'ordine:** un interruttore alla volta *(la regola d'oro)*: **la mia raccomandazione: (iii) per primo** *(una costante, nessun codice nuovo: toglie il fattore `4.08`, la differenza piu' grande)*, **poi (i)** *(la luce che sente `N`, col caso noto della parte G)*, **poi (ii).**
