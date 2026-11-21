@@ -359,3 +359,40 @@
 1. questa carta: commit, push;
 2. `doc/referti_l2/mitosi_anelli.py` *(sul ramo `mitosi`)*: commit; **la prova** *(17.4)* sul punto di ramificazione appena c'e', **o sul toro dell'ultimo stato del tronco** *(lo stesso grafo)*: il referto, commit;
 3. **a rami finiti:** la misura su tutti gli stati salvati, **nel referto della corsa**, con la lettura di 17.1 e la materia di 17.3.
+
+## 18. L'AGGIUNTA DI LUCA DELLE `14:13` (LAMBDA NEL POZZO) E LA SUA DOMANDA DELLE `14:22` (LA SCALA DEL MATTONE CONTRO IL RITMO DEL CONTATORE) *(scritta PRIMA del codice e dei numeri)*
+
+### 18.1 LE RICHIESTE *(di Luca, copiate)*
+
+- **`14:13`, al referto, nessun cambio alle corse in uso:** dagli stati salvati di MITOSI e C2-EXT **il minimo di `Lambda`** *(`densita_vuoto`)*, **dove sta** *(il raggio in passi)*, **il profilo di `Lambda` per anello in passi nel tempo**; **il ritmo `cs` al fondo del pozzo contro quello di C2-EXT.**
+  - **LA LETTURA** *(di Luca, scritta prima)*: **se `Lambda` nel guscio cala nascita dopo nascita e il ritmo del contatore sugli archi del fondo CRESCE, il pozzo si AUTOALIMENTA verso il pavimento `Lambda -> 0` (`cs -> 0`); se `Lambda` rifluisce e resta, no.**
+  - **Se la corsa si ferma sul controllo di `Lambda = 0`: NON e' un guasto del codice, e' il RISULTATO;** si riporta col tick e il luogo.
+- **`14:22`, DOMANDA, solo lettura, il tronco non si tocca:** dalle serie del tronco *(da `k 3000` a oggi)* **la scala del mattone nel tempo** *(`w`, `r50`, `r90`, la massa entro `12.4` e `25`, il massimo di `rho`)* **e accanto il ritmo del contatore sui primi `20` archi.** **Il calo del ritmo segue l'allargamento del mattone, o il calo del suo picco?**
+
+### 18.2 LE PREMESSE DAL CODICE
+
+- **`Lambda`:** `motore.densita_vuoto` = **`somma |phi_h|^2` sulle estremita' del nodo**; **la chiave `Lambda` dello stato e' il buffer che quella funzione riempie** *(come `rho`: scritta a meta' tick)*: **si RICALCOLA da `phi_h`** e **la differenza con la chiave si stampa** *(non decide niente)*.
+- **`cs`:** **`cs_prec` dello stato** = il lapse del punto fisso del tick *(quello con cui il contatore accumula: `contatore.ritmo`, `pi (cs_i - cs_j)`)*. **La forma** `cs = Lambda / (Lambda + Lambda_c)` *(`flussi_parziali.cs`)*: **`Lambda = 0` da' `cs = 0` ESATTO.**
+- **IL CONTROLLO DI `Lambda = 0`:** non c'e' un controllo che si chiami cosi'; **c'e' l'assert del cono** *(`motore._nel_cono`, `assert mi > 0`)*: **con `cs = 0` un orologio e' fermo e l'assert lo RIFIUTA** *(la docstring di `flussi_parziali.cs`: «il caso resta una domanda per Luca»)*. **Se MITOSI cade li', il lanciatore chiude la sua voce FALLITO col codice, e il traceback sta in `log_MITOSI.txt`:** il referto lo legge e lo riporta come **RISULTATO**, col tick *(l'ultima riga `k` del log e l'ultimo stato)* e il luogo *(il nodo e il raggio in passi del minimo di `Lambda` nell'ultimo stato)*. **C2-EXT continua** *(un ramo che cade non ferma l'altro)*.
+- **Il ritmo del contatore da `cs`:** il ritmo di un arco **in un tick** e' `pi |cs_i - cs_j|`: **si legge da ogni stato, senza seguire gli indici** *(che in MITOSI cambiano)*. **Il controllo:** sul tronco, il ritmo da `cs_prec` **deve stare vicino** a quello dalle differenze di `Theta` sullo stesso tratto *(l'uno e' istantaneo, l'altro la media: entro il `10%`, la mia soglia, scritta qui)*; **se no, FERMO:** il contatore non legge `cs_prec`.
+- **NON so:** se ci saranno nascite abbastanza vicine al fondo da cambiare `Lambda` li'.
+
+### 18.3 LE DEFINIZIONI *(le mie)*
+
+- **La sorgente dei passi:** il nodo originario piu' vicino a `meta["centro"]` *(il centro fisso con cui la corsa fa gli anelli: lo stesso di `mitosi_anelli.py`)*; **i passi:** la distanza nel grafo dello stato. ### **La D1 della corsa usa invece il centro di `rho` che si muove: dichiarato.**
+- **Il profilo:** la media di `Lambda` per anello in passi `d = 0, 1, ..., 60`; nel referto gli anelli `0, 5, 10, 15, 20, 25, 30, 40, 60` **ogni `1000` tick** *(il profilo intero di ogni stato in un `npz` su `E:`)*.
+- **Il fondo:** **il nodo di `Lambda` minimo e il suo anello in passi** *(«il guscio» della lettura)*; **`Lambda` del guscio** = la media sull'anello del minimo; **il ritmo sugli archi del fondo** = la media di `pi |cs_i - cs_j|` sugli archi con un'estremita' nell'anello del minimo; **`cs` al fondo** = `cs_prec` del nodo minimo e la media sul suo anello, **MITOSI contro C2-EXT allo stesso `k`.**
+- **La domanda delle `14:22`:** per tratti di `2500` tick *(gli stessi di `mitosi_ritmo_contatore.py`)* la media sul tratto di `D_w`, `D_r50`, `D_r90` *(in passi)* e del `raggio` *(euclideo)*, di `Min_12.4`, `Min_25` dalla serie *(ogni `50` tick)*; **il massimo di `rho`** dagli stati ai confini dei tratti *(ricalcolato dalle estremita')*; **il ritmo dei primi `20` archi** *(da `Theta`, e da `cs_prec`)*.
+
+### 18.4 LA LETTURA DELLA DOMANDA *(mia, scritta PRIMA)*
+
+- ### ⚠ **IL LIMITE DA DICHIARARE PRIMA:** **su una serie dove TUTTO cambia in modo monotono, una correlazione alta non distingue niente** *(ogni grandezza che sale o scende si correla con il ritmo che scende)*. **Quindi la correlazione si stampa ma NON risponde.**
+- **Cio' che puo' rispondere, e lo scrivo prima:** **la FORMA del calo** *(il calo relativo tratto per tratto)*: **se il ritmo segue il picco**, `ritmo / max rho` resta circa costante; **se segue l'allargamento**, `ritmo * w` *(o `ritmo * r90`)* resta circa costante. **«Circa costante» = la variazione relativa sui tratti piu' piccola di quella del ritmo stesso** *(il `28%` circa da k 3250 a k 29250)*. **Se entrambi o nessuno: NON DECIDIBILE da queste serie**, e lo scrivo.
+- **Una premessa fisica, da verificare e non da usare:** il ritmo e' `pi |cs_i - cs_j|`, cioe' **il gradiente di `cs` a `r` circa `18`**; `cs` segue `Lambda`; quindi la domanda vera e' **come cambia il profilo di `Lambda` a `r` circa `18`** -- che e' la misura della `14:13` fatta sul tronco.
+
+### 18.5 TODO
+
+1. questa carta: commit, push;
+2. `doc/referti_l2/mitosi_scala_tronco.py` *(la domanda; il controllo del ritmo da `cs_prec`)*: commit; il referto sulle serie del tronco: commit; **la risposta a Luca**;
+3. `doc/referti_l2/mitosi_lambda.py` *(l'aggiunta: `tronco` per la prova sugli stati di oggi, `rami` a rami finiti)*: commit; la prova: commit;
+4. **a rami finiti:** `mitosi_lambda.py rami` nel referto della corsa, con la lettura di 18.1 e, se MITOSI e' caduta sull'assert del cono, il tick e il luogo.
