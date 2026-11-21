@@ -1,0 +1,35 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] orientamento_prove.py  sha1-BYTE faa2afe2  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+O1, O4, O7 DELL'ORIENTAMENTO EREDITATO (Luca 2026-11-21 23:13; la carta sez. 4.4): senza tick, dallo stato E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz
+==================================================================================================================================
+### O1: il toro 69192 triangoli; lungo le 9 nascite: 69210 triangoli ricostruiti, 69210 oggi (dal prodotto vettoriale); diversi 0; k/l dall'ordine ciclico diversi da quelli registrati: nessuno
+  O1: l'orientamento ereditato lungo le 9 nascite = quello di oggi, triangolo per triangolo (0 diversi)            PASSA   0
+  O1: k e l dall'ordine ciclico = quelli registrati, nascita per nascita (0 diversi)                               PASSA   0
+### O7: l'arco 40445 (13482 -> 13668), la stella i 13482 j 13668 k 34597 l 13481, il flip 0 (13482, 34597): NESSUN AssertionError; i triangoli col nodo nuovo 34605 (cicli ereditati): [(13481, 13668, 34605), (13481, 34605, 13482), (13482, 34605, 34601), (13668, 34597, 34605), (34597, 34601, 34605)]; F3 Eulero True, doppi no True, due triangoli True, coerenti True; il residuo di Gauss 3.38e-15
+  O7: il candidato degenere noto (l'arco 40445, il flip 0) passa senza AssertionError, F3 vero                     PASSA   
+### O7: l'arco 103798 (34601 -> 13295), la stella i 34601 j 13295 k 13482 l 13296, il flip 3 (34601, 13296): NESSUN AssertionError; i triangoli col nodo nuovo 34605 (cicli ereditati): [(13295, 13482, 34605), (13295, 34605, 13296), (13296, 34605, 13483), (13482, 34601, 34605), (13483, 34605, 34601)]; F3 Eulero True, doppi no True, due triangoli True, coerenti True; il residuo di Gauss 2.79e-15
+  O7: il candidato degenere noto (l'arco 103798, il flip 3) passa senza AssertionError, F3 vero                    PASSA   
+### O4 (deve fallire): il ciclo del triangolo (13482, 34605, 34597) invertito a mano: coerenti False, il residuo 3.62e-15
+  O4 DEVE FALLIRE: un ciclo invertito a mano -> F3 (le placchette non coerenti) o P3 cadono                        PASSA   
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: O1: l'orientamento ereditato lungo le 9 nascite = quello di oggi, triangolo per triangolo (0 diversi)          PASSA
+  DEVE: O1: k e l dall'ordine ciclico = quelli registrati, nascita per nascita (0 diversi)                             PASSA
+  DEVE: O7: il candidato degenere noto (l'arco 40445, il flip 0) passa senza AssertionError, F3 vero                   PASSA
+  DEVE: O7: il candidato degenere noto (l'arco 103798, il flip 3) passa senza AssertionError, F3 vero                  PASSA
+  DEVE: O4 DEVE FALLIRE: un ciclo invertito a mano -> F3 (le placchette non coerenti) o P3 cadono                      PASSA
+==================================================================================================================================
