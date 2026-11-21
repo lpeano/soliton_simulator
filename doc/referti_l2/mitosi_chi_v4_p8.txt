@@ -1,0 +1,41 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] mitosi_chi_v4.py  sha1-BYTE 8841ff15  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+P8 DEL RAMO mitosi-chi (Luca 2026-11-21 19:40, R2; la carta sez. 2.3): lo scatto FORZATO dell'arco 58866 a k 3001 (la nascita), 10 tick di fila contro 5 + salva + riprendi + 5
+============================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### P8_fila (mitosi): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0), fino a k 3010; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3001, l'arco 58866 (scattato; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.6003e+00 flip -1.0011e+00 chi +3.1608e-02; P9 0.0e+00; |Ec| 3.328e-01; E_persa +3.601415e+00 (17.5 s)
+    [stato] k 3010 sha1 c241e804
+### P8_fila: 10 tick in 111 s; 1 nascite; E_persa +3.601415e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### P8_prima (mitosi): da E:\soliton_simulator\controllo\CHI\mattone\stato_03000.npz (k 3000, sha1 f7bd85a0), fino a k 3005; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [nascita 1] k 3001, l'arco 58866 (scattato; 0 in attesa): n 34596 a r 13.82, 14 passi dalla sorgente; DH nascita -2.6003e+00 flip -1.0011e+00 chi +3.1608e-02; P9 0.0e+00; |Ec| 3.328e-01; E_persa +3.601415e+00 (15.3 s)
+    [stato] k 3005 sha1 383f6ac8
+### P8_prima: 5 tick in 101 s; 1 nascite; E_persa +3.601415e+00; il codice 0
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### P8_dopo (mitosi): da E:\soliton_simulator\controllo\mitosi_chi\P8\spezza\stato_003005.npz (k 3005, sha1 383f6ac8), fino a k 3010; le nascite ACCESE; i parametri AL BIT col meta: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04
+    [stato] k 3010 sha1 c241e804
+### P8_dopo: 5 tick in 87 s; 1 nascite; E_persa +3.601415e+00; il codice 0
+### P8: 10 tick di fila contro la ripresa da stato_003005.npz (sha1 383f6ac8): AL BIT su ogni chiave, A, E, il grafo, i versori, Theta, le posizioni, E_persa, gauss_acc, chi, pi; chi 34597 nodi, Theta 103791 archi, E_persa +3.601415e+00
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### DEVE FALLIRE: un byte dello stato cambiato: la ripresa RIFIUTA (lo sha1 di E:\soliton_simulator\controllo\mitosi_chi\P8\rotto\stato_003005.npz NON coincide: la ripresa RIFIUTA)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  DEVE: P8: la ripresa dopo una nascita AL BIT (chi, pi, Theta, il grafo compresi)                                     PASSA
+  DEVE: P8 non a vuoto: la nascita c'e' stata (un nodo in piu')                                                        PASSA
+  DEVE: DEVE FALLIRE: un byte dello stato salvato cambiato -> la ripresa RIFIUTA (lo sha1)                             PASSA
+============================================================================================================================================
