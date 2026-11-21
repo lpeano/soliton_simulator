@@ -425,3 +425,52 @@
 1. questa carta: commit, push, **prima del primo scatto**;
 2. lo script delle misure a posteriori *(il bilancio su `20` cammini, `1 - N` per anello fino a `80`, le nascite per anello e per finestra, la pendenza di D1)*: commit; **prima una prova sul tronco**; poi i rami;
 3. il referto: le cinque previsioni, ognuna VERA o FALSA col suo numero.
+
+## 20. LA DOMANDA DI MISURA DI LUCA DELLE `14:47`: IL LAPSE DALLA `U`, COI SEGNI DELLE PROVE G+U *(scritta PRIMA del codice e dei numeri; solo lettura, le corse non si toccano)*
+
+### 20.1 LA DOMANDA E LE PREVISIONI *(di Luca e del guardiano, copiate)*
+
+1. **Dal codice:** la convenzione di Gauss *(`E = - grad Phi` o `+ grad Phi`, il segno della sorgente `e (rho - media)`)*, **scritta prima.**
+2. **Sugli stati del tronco** *(`k 3000`, `15000`, `29000`)*: **`Phi` dal campo `E` di Gauss** *(la parte gradiente)*, **il profilo per anello fino all'anello `80`**, accanto a **`1 - N(rho)`** di oggi.
+3. **`kappa`:** il SEGNO perche' `N_U < 1` sul mattone *(come nelle corse G+U legate)*; il VALORE perche' `1 - N_U` al centro = `1 - N(rho)` al centro. **Dichiarato come derivato.**
+4. **Con `N_U`:** il ritmo del contatore per anello *(`0.15 pi` x la differenza di `N_U` sull'arco)*, **il primo arco a `2 pi` e dove**, **quanti archi fuori dal confine `23.81` arriverebbero a `2 pi` entro `1e5` tick.**
+5. **Il caso noto:** sul vuoto puro `Phi` costante e `N_U = 1` AL BIT.
+
+- **P-U1** *(il guardiano)*: `Phi` ha una coda lunga: **`1 - N_U` all'anello `60` sopra il `10%` di quello al centro** *(contro meno di `1e-6` per `N(rho)`)*.
+- **P-U2:** **il ritmo massimo del contatore con `N_U` sta FUORI dal guscio della materia** *(oltre `22` nodi)*, dove il gradiente di `Phi` e' massimo.
+- **P-U3:** **il primo quanto con `N_U` arriva piu' tardi che con `N(rho)`** *(il gradiente di una coda `log r` e' piu' dolce)*, **oltre `5e4` tick.**
+- **FERMO per Luca col referto: nessun cambio al nucleo.**
+
+### 20.2 LA CONVENZIONE DI GAUSS, DAL CODICE *(il punto 1, scritto prima dei numeri)*
+
+- **La divergenza** *(`u1_generico.Campo.div`)*: **`div_i = somma degli E ENTRANTI in i - somma degli E USCENTI da i`** *(l'arco `a` va da `ii[a]` a `jj[a]`)*: ### **e' il flusso ENTRANTE.**
+- **La legge** *(`mitosi_regola.residuo`, `mattone.Campi.residuo`, `controllo_senza_bordo`: `C.gauss(e * (rho - rho.mean()))`)*: **`div E = e (rho - media rho)`**, `e = E_DECISO = 6.315414e-05` *(`p6_u_breve`)*.
+- **La soluzione** *(`gauss_riuso.gauss_sparso_riuso` = `p6_u_breve.gauss_sparso`)*: **`D` la matrice della divergenza, `D D^T phi = b`** *(il nodo `0` fissato, poi la media tolta)*, **`E = D^T phi`**, cioe' **`E_a = phi(jj[a]) - phi(ii[a])`: `E = + grad phi` lungo l'arco.**
+- **Quindi:** `D D^T` e' il Laplaciano POSITIVO `L` *(il grado sulla diagonale)*, e **`L phi = e (rho - media)`**, cioe' `- nabla^2 phi = e (rho - media)`: ### **`phi` ha il MASSIMO sulla materia** *(come il potenziale usuale di una carica positiva)*. **Nel linguaggio usuale** *(flusso USCENTE, `E = - grad Phi`)*: **il campo usuale e' `- E` del codice, e `Phi` usuale = `phi` del codice.** **In questo referto `Phi` = `phi` del codice** *(il massimo sul mattone)*. **Il controllo numerico** *(nel referto)*: `Phi` al centro **sopra** `Phi` lontano; **e `D E` contro `e (rho - media)`** *(il residuo di Gauss sullo stato: se e' grande, `D` non e' la divergenza della corsa o gli archi non sono nell'ordine giusto: FERMO)*.
+
+### 20.3 UNA MIA PREMESSA CHE CADE *(annotata qui; le sez. `18` e `19` NON si riscrivono)*
+
+- **Nella sez. `18.2` ho scritto che il lapse della corsa e' `cs = Lambda / (Lambda + Lambda_c)`** *(`flussi_parziali.cs`)*, **e nella `19.2` ho ricavato `s` da quella forma.** ### **E' SBAGLIATO per questa corsa:** il lapse e' **`tick_lapse.cs_di`**: **`cs = s N(rho)`, `N(rho) = 1 / (1 + rho / rho_c)`** *(la legge `("rho_c", rho_c)`, `rho_c = mattone.rho_c_assoluto()`; `rho` la densita' della MATERIA sul nodo, dalle estremita')*. **Non avevo letto `tick_lapse` prima di scrivere: e' l'errore della regola `P1`.**
+- **Le conseguenze:** **(a)** in questa corsa **`cs` non dipende da `Lambda`**: **`cs -> 0` solo se `rho -> infinito`**; quindi **la lettura delle `14:13` «`Lambda -> 0` (`cs -> 0`)» e il «controllo di `Lambda = 0`» NON valgono qui come li avevo scritti**: l'assert del cono scatta per `cs = 0`, e **`cs = s N(rho) > 0` per ogni `rho` finito**. ### **Da dire a Luca: la misura di `Lambda` delle `14:13` resta una misura, ma non governa il lapse di questa corsa.** **(b)** La `19.2` *(`N = cs / s`)* **regge** *(e' proprio `N(rho)`)*; **`s` si misura** come `cs / N(rho)` sullo stato *(deve essere lo stesso su ogni nodo: il controllo della legge)*. **(c)** Il FERMO della sez. `18` *(il ritmo da `cs_prec`)* **resta com'e'.**
+
+### 20.4 LE DEFINIZIONI *(mie)*
+
+- **Gli stati:** `k 3000` = lo stato di C2 *(`E:/soliton_simulator/controllo/C2/stato_03000.npz`, da cui il tronco riparte)*; `k 15000` e `k 29000` = gli stati del tronco. **Il grafo:** il toro di `L 186` *(gli archi `3 v + a`)*; **il centro:** `meta["centro"]` del tronco *(per lo stato di C2: quello del tronco)*.
+- **`Phi`:** **la parte gradiente di `E` salvato** *(`campo_E`)*: `L Phi = D E`, **lo stesso solutore** *(il nodo `0` fissato, la media tolta)*.
+- **`rho`** dalle estremita' *(`psi_h`)*; **`N(rho)`** con `rho_c`; **`1 - N(rho) = rho / (rho + rho_c)`.**
+- **Il riferimento di `Phi`:** ### **`Phi_ref` = il MINIMO di `Phi` sul toro** *(il punto «piu' vuoto»: sul toro la sorgente ha la media tolta e `Phi` non va a zero all'infinito)*. ### ⚠ **P-U1 DIPENDE da questa scelta** *(un altro riferimento sposta `1 - N_U` all'anello `60`)*: **la fisso qui, prima dei numeri, e il referto stampa ANCHE `Phi` all'anello `80` per chi volesse un altro riferimento.**
+- **`N_U = 1 - kappa (Phi - Phi_ref)`**; **`kappa` = `(1 - N(rho))_centro / (Phi_centro - Phi_ref)`** *(«il centro» = la media sull'anello `0`, `r < 0.5`)*: **il segno e' positivo se `Phi` e' massimo sul mattone** *(20.2)*, **e cosi' `N_U < 1` sul mattone.** **Un numero DERIVATO da un'uguaglianza in un punto: lo conto come tale.**
+- **I profili:** la media per anello euclideo largo `1`, `r = 0, 1, ..., 80`.
+- **Il ritmo:** **`s pi |N_i - N_j|`** per arco *(`s` misurato; il guardiano scrive `0.15`)*, per `N_U` e per `N(rho)`; **il primo arco a `2 pi`:** `2 pi / ritmo` **partendo da `Theta = 0`** *(un contatore IPOTETICO col ritmo fermo dello stato: dichiarato)*; **dove** = il raggio del punto medio dell'arco; **«fuori dal confine `23.81`»** = gli archi col punto medio oltre `r 23.81` *(il numero di Luca)*, **quanti con `2 pi / ritmo <= 1e5`.**
+- **Il caso noto** *(il punto 5)*: **la stessa catena su un vuoto puro** *(lo stato con `rho` UNIFORME: `b = e (rho - media) = 0` ESATTO)*: **`Phi` dal solutore = `0` al bit, `N_U = 1` al bit**; **e `E = 0`: lo stesso.**
+
+### 20.5 LE MIE OSSERVAZIONI *(scritte prima)*
+
+- **Il riferimento di `Phi` (20.4)** decide P-U1 quasi da solo: sul toro, col fondo neutralizzante, la «coda `log r`» c'e' solo fino a distanze piccole rispetto a `L`. **Il referto lo stampa, non lo nasconde.**
+- **`kappa` e' scelto perche' `N_U` e `N(rho)` coincidano al centro:** quindi **il confronto al centro e' FALSO-UNO** *(uguale per costruzione)*; **cio' che dice qualcosa e' la FORMA fuori dal centro.**
+
+### 20.6 TODO
+
+1. questa carta: commit, push;
+2. `doc/referti_l2/mitosi_lapse_U.py`: commit; **il caso noto per primo** *(se non e' al bit: FERMO)*; il referto: commit;
+3. **FERMO per Luca col referto.**
