@@ -1,0 +1,170 @@
+### T0 DELL'ORIENTAMENTO COMBINATORIO (Luca 2026-11-21 22:12 e l'aggiunta): IL REFERTO. I comandi:
+###   E:\python\py3132\python.exe doc/referti_l2/degenere_diagnosi.py              (parte 1)
+###   E:\python\py3132\python.exe doc/referti_l2/censimento_a17_era2.py --radice C:\Users\lpeano\wt_mitosi_chi    (parte 2)
+### PARTE 1: LA DIAGNOSI
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] degenere_diagnosi.py  sha1-BYTE 5ba9456c  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+T0, LA DIAGNOSI DEL TRIANGOLO DEGENERE (Luca 2026-11-21 22:12; la carta sez. 2.1): dallo stato E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz, NESSUN tick
+============================================================================================================================================
+### lo stato: k 36250, n 34605, m 103815, nascite 9, E_persa +1.929694e+02; sha1 64999c5b
+### gli archi la cui stella contiene 13482 o 34601: 15; i primi 12 per |Theta| (2 pi = 6.283185; il massimo di |Theta| su tutto il grafo 6.280624, l'arco 51097):
+    l'arco  40445 (13482 -> 13668) |Theta| 6.279461 (manca 0.003724): nascita ok; flip 0 (13482, 34597) DEGENERE (13482, 34601, 34605); flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  39885 (13295 -> 13481) |Theta| 6.277279 (manca 0.005907): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  40444 (13481 -> 13668) |Theta| 3.719003 (manca 2.564182): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  39887 (13295 -> 13482) |Theta| 3.716821 (manca 2.566365): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  39889 (13296 -> 13483) |Theta| 3.452130 (manca 2.831056): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  39886 (13295 -> 13296) |Theta| 2.576706 (manca 3.706479): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco  40443 (13481 -> 13482) |Theta| 2.560458 (manca 3.722727): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco 103799 (34601 -> 34597) |Theta| 0.048337 (manca 6.234848): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco 103776 (34597 -> 13483) |Theta| 0.048232 (manca 6.234953): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco 103779 (34597 -> 13482) |Theta| 0.045886 (manca 6.237299): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco 103780 (34597 -> 13668) |Theta| 0.043440 (manca 6.239745): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 ok
+    l'arco 103798 (34601 -> 13295) |Theta| 0.018622 (manca 6.264563): nascita ok; flip 0 ok; flip 1 ok; flip 2 ok; flip 3 (34601, 13296) DEGENERE (13483, 34601, 34605)
+--------------------------------------------------------------------------------------------------------------------------------------------
+### L'ARCO DELLA DECIMA: 40445 (13482 -> 13668), |Theta| 6.279461; il candidato: flip 0 (13482, 34597)
+    la stella: i 13482 j 13668 k 34597 l 13481, il nodo nuovo n 34605
+### IL TRIANGOLO (x, y, z) (13482, 34601, 34605); il grafo del candidato ha 103818 archi
+    l'arco x-y: 34601 -> 13482, il vettore d'arco [0.5 0. ], nel verso da x [-0.5 -0. ]
+    l'arco x-z: 34605 -> 13482, il vettore d'arco [-0.5 -0. ], nel verso da x [0.5 0. ]
+    il prodotto vettoriale 0.0; uguali al bit False; opposti al bit True; il rapporto per componente [np.float64(-1.0), nan]
+    l'arco 34601-13482 e' nato alla nascita di k 36129 (l'arco 39888, n 34601): 13482 e' ['j'] di quella stella
+    l'arco 34605-13482 e' del CANDIDATO (n = 34605): 13482 e' ['i'] della stella
+    i versori geo.n dell'arco 34601-13482 (oggi, l'arco 103796): in 34601 [1. 0. 0.], in 13482 [-1. -0. -0.]
+    l'arco 34605-13482 NON c'e' nel grafo di oggi (e' del candidato)
+--------------------------------------------------------------------------------------------------------------------------------------------
+### LA STORIA DEL NODO 34601:
+    k 36129, l'arco 39888: {"i": 13296, "j": 13482, "k": 13483, "l": 13295, "n": 34601, "m": 34597}; il nodo 34601 e' ['n']; il lato scelto 1, DH nascita -1.7818e+01 flip -5.1611e+00, r 19.242
+    i vicini di 34601 oggi (5): [13295, 13296, 13482, 13483, 34597]
+    i vicini di 13482 oggi (5): [13295, 13481, 13668, 34597, 34601]
+============================================================================================================================================
+### PARTE 2: IL CENSIMENTO A17 DELL'ERA 2
+============================================================================================================================================
+IL CENSIMENTO A17 DELL'ERA 2 (Luca 2026-11-21 22:12, l'aggiunta; la carta sez. 2.2): la radice C:\Users\lpeano\wt_mitosi_chi, 42 file
+============================================================================================================================================
+### LE LETTURE DIRETTE (160 letture in 59 funzioni):
+  csv/_u1_prototipo.py::energia                                          geo.n r.327                              decide fisica: SI  un'ENERGIA: il termine della moneta EPS_MONETA s_n s.n con i versori
+  csv/solitone/conti.py::etichette                                       pos r.102                                decide fisica: NO  le etichette delle misure (il nodo piu' vicino ai centri)
+  csv/solitone/conti.py::moto                                            pos r.136                                decide fisica: NO  una misura del moto del centro
+  csv/solitone/mattone.py::centro_di                                     pos r.158                                decide fisica: NO  il centro della materia: misure ed etichette
+  csv/solitone/mattone.py::controllo                                     pos r.410,421,444,454                    decide fisica: NO  un controllo
+  csv/solitone/mattone.py::distanza                                      pos r.163                                decide fisica: NO  una misura
+  csv/solitone/mattone.py::prepara.misura                                pos r.317                                decide fisica: NO  una misura della preparazione
+  csv/solitone/mattone.py::ritaglia                                      pos r.231,248,249                        decide fisica: NO  il ritaglio del mattone alla preparazione (k 0)
+  csv/solitone/p6_u_breve.py::main                                       pos r.202                                decide fisica: NO  uno script di prova
+  csv/solitone/porto.py::corsa                                           pos r.452,454                            decide fisica: NO  un'altra corsa (non nel cammino)
+  csv/solitone/porto.py::cuoci                                           pos r.331,339                            decide fisica: NO  la cottura del mattone (non nel cammino delle due corse)
+  csv/solitone/porto.py::francobollo_L324                                pos r.413                                decide fisica: NO  la preparazione di un francobollo (non nel cammino)
+  csv/solitone/porto.py::metti_bordo                                     pos r.106                                decide fisica: NO  il bordo (r_c0 -> g_e): nelle corse senza bordo g_e e' azzerato subito dopo (controllo_senza_bordo.riprendi, mitosi_lunga.riprendi)
+  csv/solitone/porto.py::r_ogg                                           pos r.121,122                            decide fisica: NO  la misura di R_ogg
+  csv/solitone/posizioni.py::cresci                                      pos r.64,65,66                           decide fisica: NO  le posizioni dei nati (B4): disegno e misure
+  csv/solitone/u1_generico.py::CampoGenerico.__init__                    vec r.43,46                              decide fisica: NO  memorizza i vettori d'arco
+  csv/solitone/u1_generico.py::CampoGenerico._placchetta                 vec r.54,56                              decide fisica: SI  L'ORIENTAMENTO DELLE PLACCHETTE (il verso del giro, la sorgente, i segni del flusso di A): l'oggetto della cura (a)
+  csv/solitone/u1_generico.py::CampoGenerico.cresci                      vec r.184                                decide fisica: NO  segue la crescita: i vettori d'arco dei nati
+  csv/solitone/u1_generico.py::_verso                                    vec r.29                                 decide fisica: NO  il vettore d'arco col verso: lo legge _placchetta
+  doc/referti_l2/chi_mattone_v2.py::corsa                                pos r.80,137                             decide fisica: NO  le misure per anello
+  doc/referti_l2/chi_tick.py::parametri                                  pos r.178                                decide fisica: SI  KAPPA si tara sul nodo piu' vicino (per POSIZIONE) al centro della materia di C2: una posizione sceglie il nodo che fissa una costante
+  doc/referti_l2/chi_tronco.py::corsa                                    pos r.109,186                            decide fisica: NO  le misure per anello
+  doc/referti_l2/controllo_senza_bordo.py::Misure.__init__               pos r.128                                decide fisica: NO  le misure
+  doc/referti_l2/controllo_senza_bordo.py::caso.venti                    pos r.314                                decide fisica: NO  la prova
+  doc/referti_l2/controllo_senza_bordo.py::corsa                         pos r.173,196                            decide fisica: NO  il centro delle misure
+  doc/referti_l2/controllo_senza_bordo.py::costo                         pos r.355                                decide fisica: NO  la misura del costo
+  doc/referti_l2/mitosi_chi_v4.py::NascitaChi.nasci                      pos r.153,155,160                        decide fisica: NO  il luogo della nascita (D3): registro
+  doc/referti_l2/mitosi_chi_v4.py::ciclo                                 pos r.265,357,372                        decide fisica: NO  le misure (anelli, centro, D1, E1)
+  doc/referti_l2/mitosi_chi_v4.py::ciclo.rigeometria                     pos r.289                                decide fisica: NO  i raggi per le misure per anello
+  doc/referti_l2/mitosi_chi_v4.py::nascite                               pos r.535,572                            decide fisica: NO  la prova (la scelta dell'arco forzato per raggio)
+  doc/referti_l2/mitosi_chi_v4.py::salva                                 geo.n r.179, pos r.180, vec r.179        decide fisica: NO  salva lo stato
+  doc/referti_l2/mitosi_corsa.py::campo_generico                         vec r.46                                 decide fisica: NO  i vettori d'arco del toro a k 0 dal reticolo regolare (a1, a2, a1 + a2): la sorgente UNA volta, come il mandato permette
+  doc/referti_l2/mitosi_corsa.py::p6                                     pos r.145                                decide fisica: NO  la prova
+  doc/referti_l2/mitosi_lunga.py::Nascite.nasci                          pos r.82                                 decide fisica: NO  la posizione del nato nel bilancio (registro)
+  doc/referti_l2/mitosi_lunga.py::corsa                                  pos r.476,504,515                        decide fisica: NO  le misure (gli anelli, il centro, la sorgente dei passi D1)
+  doc/referti_l2/mitosi_lunga.py::misure_su                              pos r.244                                decide fisica: NO  le misure
+  doc/referti_l2/mitosi_lunga.py::nasce                                  pos r.298,326,327                        decide fisica: NO  la prova
+  doc/referti_l2/mitosi_lunga.py::raggi                                  pos r.57                                 decide fisica: NO  le distanze dal centro: misure
+  doc/referti_l2/mitosi_lunga.py::riprendi                               geo.n r.182,194, pos r.201, vec r.196    decide fisica: NO  riprende lo stato
+  doc/referti_l2/mitosi_lunga.py::salva                                  geo.n r.124, pos r.125, vec r.124        decide fisica: NO  salva lo stato
+  doc/referti_l2/mitosi_lunga.py::stato_di                               geo.n r.217, pos r.217,218               decide fisica: NO  fotografa lo stato (le prove)
+  doc/referti_l2/mitosi_rami.py::Rami.centro_materia                     pos r.78                                 decide fisica: NO  il centro: la sorgente dei passi (misura)
+  doc/referti_l2/mitosi_rami.py::Rami.nasci                              pos r.62,64,68                           decide fisica: NO  il luogo della nascita (D3): registro
+  doc/referti_l2/mitosi_rami.py::ciclo                                   pos r.147,201,213                        decide fisica: NO  le misure (anelli, centro, D1, E1)
+  doc/referti_l2/mitosi_rami.py::salva                                   geo.n r.91, pos r.92, vec r.91           decide fisica: NO  salva lo stato
+  doc/referti_l2/mitosi_regola.py::_v                                    vec r.79                                 decide fisica: NO  il vettore d'arco col verso: lo usa candidato
+  doc/referti_l2/mitosi_regola.py::applica                               geo.n r.310                              decide fisica: NO  un controllo (ok_geo)
+  doc/referti_l2/mitosi_regola.py::candidato                             geo.n r.177,244, vec r.163,178,186       decide fisica: SI  i vettori d'arco e i versori del CANDIDATO: le sue placchette, la sua energia (l'elicita' coi versori nati) -> la SCELTA del flip
+  doc/referti_l2/mitosi_regola.py::caso                                  geo.n r.378,383, pos r.442,443, vec r.382,407 decide fisica: NO  la prova
+  doc/referti_l2/mitosi_regola.py::indici_nascita                        vec r.70,71                              decide fisica: SI  QUALE vicino comune e' k (a sinistra di i -> j): un prodotto vettoriale sui vettori d'arco; se e' 0 sceglie in silenzio
+  primo_ordine/checkpoint.py::main                                       geo.n r.212                              decide fisica: NO  un collaudo
+  primo_ordine/checkpoint.py::riprendi                                   geo.n r.128                              decide fisica: NO  la ripresa: rimette i versori salvati
+  primo_ordine/corrente.py::_scena                                       geo.n r.326                              decide fisica: NO  una scena di collaudo
+  primo_ordine/crescita_dati.py::geometria                               geo.n r.88                               decide fisica: NO  copia i versori dei nati (iniziali['geo_n']): trasporto
+  primo_ordine/motore.py::Motore._moneta_spin                            geo.n r.483                              decide fisica: SI  LA MONETA DI SPIN del passo (CAMM-MONETA-SPIN, due volte nell'ordine): exp(-i ang sigma.n)
+  primo_ordine/motore.py::Motore._ruota_attorno_a_n                      geo.n r.512                              decide fisica: SI  la rotazione exp(-i ang sigma.n) della moneta: i versori sono l'ASSE
+  primo_ordine/motore.py::Motore.cresci                                  geo.n r.364                              decide fisica: NO  segue la crescita: i versori dei nati entrano nello stato (trasporto, non decisione)
+  primo_ordine/motore.py::Motore.elicita                                 geo.n r.559                              decide fisica: SI  h = s.n per nodo: il termine eps h dell'energia pesata (la scelta del flip, la Q di chi, E_persa)
+  primo_ordine/segno.py::_coniugato                                      geo.n r.166                              decide fisica: NO  l'operatore coniugato per la prova del segno (collaudo)
+### LE ANCORE DELLA FISICA (raggiunge una lettura? DIRETTO o INDIRETTO, per nome semplice):
+  il passo: la moneta di spin                   primo_ordine/motore.py::Motore._moneta_spin             DIRETTO geo.n 
+  il passo: i pezzi della tabella               primo_ordine/termini/*                                  nessuna 
+  l'energia pesata (il conto di chi, la Q)      primo_ordine/energia_pesata.py::termini_di_h            INDIRETTO geo.n tramite elicita
+  il conto della corsa (la mitosi)              csv/_libro_dei_conti.py::conti_per_nodo                  nessuna 
+  la regola: il candidato                       doc/referti_l2/mitosi_regola.py::candidato              DIRETTO geo.n, pos, vec 
+  la regola: la scelta                          doc/referti_l2/mitosi_regola.py::regola                 INDIRETTO geo.n, pos, vec tramite candidato
+  la regola: applica                            doc/referti_l2/mitosi_regola.py::applica                DIRETTO geo.n, pos, vec 
+  chi: la sorgente Q                            doc/referti_l2/chi_tick.py::Q_di                        INDIRETTO geo.n tramite termini_di_h
+  chi: l'energia                                doc/referti_l2/chi_tick.py::energia_chi                 INDIRETTO geo.n tramite termini_di_h
+  chi: il tick                                  doc/referti_l2/chi_tick.py::tick_chi                    INDIRETTO geo.n tramite forza, spinta
+  chi: la regola col suo H                      doc/referti_l2/mitosi_chi_v4.py::regola_chi             INDIRETTO geo.n, pos, vec tramite candidato_chi
+--------------------------------------------------------------------------------------------------------------------------------------------
+### LA REGOLA DEL FERMO (una funzione che decide fisica legge geo.n o le posizioni): SCATTA: [('csv/_u1_prototipo.py::energia', ['geo.n']), ('doc/referti_l2/chi_tick.py::parametri', ['pos']), ('doc/referti_l2/mitosi_regola.py::candidato', ['geo.n', 'vec']), ('primo_ordine/motore.py::Motore._moneta_spin', ['geo.n']), ('primo_ordine/motore.py::Motore._ruota_attorno_a_n', ['geo.n']), ('primo_ordine/motore.py::Motore.elicita', ['geo.n'])]
+### i vettori d'arco decidono fisica anche FUORI da _placchetta: ['doc/referti_l2/mitosi_regola.py::candidato', 'doc/referti_l2/mitosi_regola.py::indici_nascita']
+============================================================================================================================================
+############################################################################################################################################
+### LA LETTURA (scritta DOPO i numeri; le soglie e le definizioni erano nella carta sez. 2)
+############################################################################################################################################
+1. IL TRIANGOLO DEGENERE E' STRUTTURALE, NON UN CASO NUMERICO.
+   - L'arco che riproduce il triangolo (13482, 34601, 34605) e' il 40445 (13482 -> 13668), |Theta| 6.279461 a k 36250 (manca 0.003724
+     a 2 pi); il candidato e' il FLIP 0, il lato (13482, 34597): il nodo nuovo 34605 (il punto medio di 13482 -> 13668) viene legato al
+     nodo 34601 (il punto medio di 13296 -> 13482, nato a k 36129).
+   - I due archi del triangolo visti da 13482: verso 34601 il vettore d'arco (-0.5, 0), verso 34605 (+0.5, 0): OPPOSTI AL BIT, il
+     prodotto vettoriale 0.0. Vengono dalla formula del PUNTO MEDIO (n -> j = +va/2 alla nascita di k 36129, n -> i = -va/2 nel
+     candidato) su DUE ARCHI ALLINEATI DEL RETICOLO (13296 -> 13482 e 13482 -> 13668, la stessa direzione a1): 34601, 13482, 34605 sono
+     in fila, e il flip li chiude in un triangolo di area zero.
+   - Un SECONDO candidato degenere c'e' gia' nello stesso stato: l'arco 103798 (34601 -> 13295), flip 3, il triangolo (13483, 34601, 34605).
+   - ### INCERTEZZA DICHIARATA: senza tick non so quale arco scatti davvero per primo dopo k 36250: l'arco col |Theta| piu' grande di
+     tutto il grafo e' il 51097 (6.280624), fuori dalle stelle guardate; il 40445 e' quello che RIPRODUCE il triangolo della caduta.
+2. LE PREVISIONI DEL GUARDIANO (lette coi numeri):
+   - P-O1 ("versori uguali al bit, copiati da n -> i = j -> i, non per caso numerico"): **FALSA COME SCRITTA, VERA NELLA SOSTANZA.** Il
+     prodotto che cade e' sui VETTORI D'ARCO del campo (CampoGenerico.vec), non sui versori del motore (geo.n); i due vettori sono
+     OPPOSTI al bit (non uguali) e vengono dal punto medio +-va/2 (non dalla copia dei versori). Strutturale si', per caso no.
+   - P-O3 ("i versori decidono solo l'orientamento delle placchette"): **FALSA.** I versori geo.n decidono: la MONETA DI SPIN del passo
+     (Motore._moneta_spin, _ruota_attorno_a_n: exp(-i ang sigma.n); CAMM-MONETA-SPIN e' due volte nell'ordine del tick); l'ELICITA'
+     h = s.n (Motore.elicita), che entra nell'ENERGIA PESATA (energia_pesata.termini_di_h: per_nodo + eps h), quindi la scelta del
+     flip, E_persa, P9 e la sorgente Q di chi (chi_tick.Q_di, energia_chi, tick_chi tramite forza); e l'energia del prototipo
+     (_u1_prototipo.energia, il termine della moneta).
+   - P-O6 ("letture che decidono fisica in mitosi_regola, nella scelta dei candidati o del flip"): **VERA.** mitosi_regola.indici_nascita
+     sceglie QUALE vicino comune e' k con un prodotto vettoriale sui vettori d'arco (a 0 sceglie in silenzio com[1]); mitosi_regola.candidato
+     costruisce coi vettori d'arco e coi versori le placchette e l'energia del candidato: la scelta del flip ne dipende.
+   - In piu' (non previsto): **UNA POSIZIONE DECIDE UNA COSTANTE:** chi_tick.parametri tara kappa sul nodo piu' vicino, per posizione,
+     al centro della materia di C2.
+   - Le posizioni (Z["m1"], Z["m2"]) per il resto servono alle misure, ai registri e al bordo (spento nelle due corse).
+3. LA REGOLA DEL FERMO (la carta sez. 2.2) SCATTA: i versori e una posizione decidono fisica oltre all'orientamento delle placchette.
+   **FERMO per Luca**: e' un'altra decisione (i versori geo.n sono una geometria nascosta come A17 la intende, o una variabile di stato
+   come U? la moneta di spin e l'elicita' ne dipendono; e kappa). T1-T5 NON cominciano.
+4. I LIMITI DEL CENSIMENTO: per difetto sulle letture (un alias o una chiamata per variabile non si vedono: i pezzi della tabella
+   primo_ordine/termini/* risultano «nessuna» perche' il passo li chiama per nome di operatore, non per nome di funzione; la moneta e'
+   presa comunque dalla sua ancora diretta); per eccesso sull'indiretto (il nome semplice).
+############################################################################################################################################
