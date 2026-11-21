@@ -1,0 +1,72 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] orientamento_prove.py  sha1-BYTE faa2afe2  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+O2, O3, O5 DELL'ORIENTAMENTO EREDITATO (Luca 2026-11-21 23:13; la carta sez. 4.4): le corse col codice nuovo
+==================================================================================================================================
+### O2 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, sha1 abbdcaca), fino a k 36250; le nascite ACCESE
+    [nascita 1] k 35976, l'arco 50995 (lo scatto del tronco; 0 in attesa): n 34596 a r 18.93, 20 passi dalla sorgente; DH nascita -1.7244e+01 flip -7.0629e+00; P9 0.0e+00; |Ec| 2.308e-01; E_persa +2.430687e+01 (21.9 s)
+    k 36000  M 9.950108931445e+05  E +8.2677914271e+06  E_persa +2.430687e+01  nascite 1  n 34597  D1 45.0/67.0  E1 (15, 22, 16.513768415391073)  |gauss_acc| 2.308e-01 (lontano 7.891e-06)  (209 s)
+    [stato] k 36000 sha1 38e62a67
+    [nascita 2] k 36001, l'arco 40449 (scattato; 0 in attesa): n 34597 a r 18.70, 20 passi dalla sorgente; DH nascita -1.4783e+01 flip -5.6858e+00; P9 0.0e+00; |Ec| 2.297e-01; E_persa +4.477615e+01 (20.4 s)
+    [nascita 3] k 36027, l'arco 40450 (scattato; 0 in attesa): n 34598 a r 19.19, 20 passi dalla sorgente; DH nascita -1.2874e+01 flip -8.7318e+00; P9 0.0e+00; |Ec| 2.421e-01; E_persa +6.638163e+01 (22.9 s)
+    [nascita 4] k 36059, l'arco 52108 (scattato; 0 in attesa): n 34599 a r 18.97, 19 passi dalla sorgente; DH nascita -1.3676e+01 flip -2.7621e+00; P9 0.0e+00; |Ec| 2.211e-01; E_persa +8.281967e+01 (23.9 s)
+    [nascita 5] k 36125, l'arco 50433 (scattato; 0 in attesa): n 34600 a r 18.48, 20 passi dalla sorgente; DH nascita -1.5852e+01 flip -8.4281e+00; P9 0.0e+00; |Ec| 2.455e-01; E_persa +1.070994e+02 (22.4 s)
+    [nascita 6] k 36129, l'arco 39888 (scattato; 0 in attesa): n 34601 a r 19.24, 21 passi dalla sorgente; DH nascita -1.7818e+01 flip -5.1611e+00; P9 0.0e+00; |Ec| 2.117e-01; E_persa +1.300788e+02 (25.8 s)
+    [nascita 7] k 36152, l'arco 49870 (scattato; 0 in attesa): n 34602 a r 19.06, 21 passi dalla sorgente; DH nascita -1.7044e+01 flip -7.0965e+00; P9 0.0e+00; |Ec| 2.280e-01; E_persa +1.542193e+02 (20.9 s)
+    [nascita 8] k 36162, l'arco 51542 (scattato; 0 in attesa): n 34603 a r 19.43, 20 passi dalla sorgente; DH nascita -1.2215e+01 flip -3.1987e+00; P9 0.0e+00; |Ec| 2.440e-01; E_persa +1.696328e+02 (23.1 s)
+    [nascita 9] k 36228, l'arco 51543 (scattato; 0 in attesa): n 34604 a r 18.43, 19 passi dalla sorgente; DH nascita -1.3500e+01 flip -9.8367e+00; P9 0.0e+00; |Ec| 2.235e-01; E_persa +1.929694e+02 (23.0 s)
+    k 36250  M 9.950108931445e+05  E +8.2676235283e+06  E_persa +1.929694e+02  nascite 9  n 34605  D1 45.0/67.0  E1 (15, 23, 16.512644876128125)  |gauss_acc| 7.640e-01 (lontano 3.844e-05)  (1737 s)
+    [stato] k 36250 sha1 4b89568c
+### O2: 274 tick in 1738 s; 9 nascite; E_persa +1.929694e+02; il codice 0
+### O2: dal tronco k 35976 col codice nuovo fino a k 36250 contro stato_36250.npz (sha1 64999c5b): AL BIT (ogni array, il grafo, i versori, Theta, le posizioni, gauss_acc, cs_prec, E_persa)
+  O2: lo stato a k 36250 col codice nuovo = quello del ramo AL BIT                                                 PASSA   
+### O3 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz (k 36250, sha1 64999c5b), fino a k 36350; le nascite ACCESE
+    [nascita 10] k 36257, l'arco 40445 (scattato; 0 in attesa): n 34605 a r 18.25, 20 passi dalla sorgente; DH nascita -1.7442e+01 flip -8.4070e+00; P9 0.0e+00; |Ec| 2.441e-01; E_persa +2.188184e+02 (19.8 s)
+    [nascita 11] k 36265, l'arco 51096 (scattato; 0 in attesa): n 34606 a r 19.08, 20 passi dalla sorgente; DH nascita -1.4696e+01 flip -4.1413e+00; P9 0.0e+00; |Ec| 2.296e-01; E_persa +2.376559e+02 (21.3 s)
+    [nascita 12] k 36294, l'arco 39885 (scattato; 1 in attesa): n 34607 a r 18.83, 21 passi dalla sorgente; DH nascita -1.3828e+01 flip -2.4894e+00; P9 0.0e+00; |Ec| 2.510e-01; E_persa +2.539733e+02 (18.9 s)
+    [nascita 13] k 36295, l'arco 52207 (scattato; 0 in attesa): n 34608 a r 19.11, 19 passi dalla sorgente; DH nascita -1.1799e+01 flip -5.9923e+00; P9 0.0e+00; |Ec| 2.116e-01; E_persa +2.717644e+02 (20.0 s)
+    [nascita 14] k 36309, l'arco 40391 (scattato; 0 in attesa): n 34609 a r 19.12, 20 passi dalla sorgente; DH nascita -1.4243e+01 flip -4.6969e+00; P9 0.0e+00; |Ec| 2.205e-01; E_persa +2.907045e+02 (20.2 s)
+    [stato] k 36350 sha1 68b03bcf
+### O3: 100 tick in 654 s; 14 nascite; E_persa +2.907045e+02; il codice 0
+    la nascita (k 36257, l'arco 40445): r 18.25, 20 passi; P9 0.0e+00; F3 True; il residuo di Gauss 8.18e-15; E_persa +2.188184e+02
+    la nascita (k 36265, l'arco 51096): r 19.08, 20 passi; P9 0.0e+00; F3 True; il residuo di Gauss 3.51e-15; E_persa +2.376559e+02
+    la nascita (k 36294, l'arco 39885): r 18.83, 21 passi; P9 0.0e+00; F3 True; il residuo di Gauss 6.21e-15; E_persa +2.539733e+02
+    la nascita (k 36295, l'arco 52207): r 19.11, 19 passi; P9 0.0e+00; F3 True; il residuo di Gauss 3.22e-15; E_persa +2.717644e+02
+    la nascita (k 36309, l'arco 40391): r 19.12, 20 passi; P9 0.0e+00; F3 True; il residuo di Gauss 5.37e-15; E_persa +2.907045e+02
+### O3: da k 36250 fino a k 36350: 5 nascite in tutto (5 dopo k 36250); la decima ### NON c'e'
+  O3: la decima nascita passa; P9 a 0 e F3 a ogni nascita                                                          ### FALLISCE   
+### O5_fila (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz (k 36250, sha1 64999c5b), fino a k 36260; le nascite ACCESE
+    [nascita 10] k 36251, l'arco 40445 (scattato; 0 in attesa): n 34605 a r 18.25, 20 passi dalla sorgente; DH nascita -2.0612e+01 flip -7.7165e+00; P9 0.0e+00; |Ec| 2.322e-01; E_persa +2.212981e+02 (24.9 s)
+    [stato] k 36260 sha1 3e9205b3
+### O5_fila: 10 tick in 145 s; 10 nascite; E_persa +2.212981e+02; il codice 0
+### O5_prima (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz (k 36250, sha1 64999c5b), fino a k 36255; le nascite ACCESE
+    [nascita 10] k 36251, l'arco 40445 (scattato; 0 in attesa): n 34605 a r 18.25, 20 passi dalla sorgente; DH nascita -2.0612e+01 flip -7.7165e+00; P9 0.0e+00; |Ec| 2.322e-01; E_persa +2.212981e+02 (23.1 s)
+    [stato] k 36255 sha1 d6d936f3
+### O5_prima: 5 tick in 125 s; 10 nascite; E_persa +2.212981e+02; il codice 0
+### O5_dopo (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\PROVA_V2\o5_spezza\stato_36255.npz (k 36255, sha1 d6d936f3), fino a k 36260; le nascite ACCESE
+    [stato] k 36260 sha1 3e9205b3
+### O5_dopo: 5 tick in 86 s; 10 nascite; E_persa +2.212981e+02; il codice 0
+### O5: 10 tick di fila contro la ripresa da stato_36255.npz (ori_cicli nello stato True): AL BIT
+  O5: la ripresa dopo una nascita col codice nuovo AL BIT (l'orientamento nello stato)                             PASSA   
+### O5 DEVE FALLIRE: un byte cambiato: lo sha1 di E:\soliton_simulator\controllo\mitosi_rami\PROVA_V2\o5_rotto\stato_36255.npz NON coincide: la ripresa RIFIUTA
+  O5 DEVE FALLIRE: un byte dello stato cambiato -> la ripresa RIFIUTA (lo sha1)                                    PASSA   
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: O2: lo stato a k 36250 col codice nuovo = quello del ramo AL BIT                                               PASSA
+  DEVE: O3: la decima nascita passa; P9 a 0 e F3 a ogni nascita                                                        ### FALLISCE
+  DEVE: O5: la ripresa dopo una nascita col codice nuovo AL BIT (l'orientamento nello stato)                           PASSA
+  DEVE: O5 DEVE FALLIRE: un byte dello stato cambiato -> la ripresa RIFIUTA (lo sha1)                                  PASSA
+==================================================================================================================================
