@@ -1,0 +1,18 @@
+[TIMBRO] mitosi_proiezione_scatto.py  sha1-BYTE f56c7c06  committato e pulito
+========================================================================================================================
+LA PROIEZIONE DEL PRIMO SCATTO DAGLI STATI DEL TRONCO (Luca 2026-11-21 12:56); l'ultimo stato k 28000
+========================================================================================================================
+### I PRIMI TRE CANDIDATI DELLA STIMA (lineare da C2 a k 3000) e il loro Theta a k 28000 (la soglia 6.2832):
+    l'arco 51106: T 27888.07; Theta a k 28000 -5.020244
+    l'arco 61662: T 27935.99; Theta a k 28000 -4.953909
+    l'arco 52225: T 27936.76; Theta a k 28000 -5.031657
+### il massimo |Theta| per k: k 13750 2.7986 (l'arco 41010), k 20000 3.8549 (l'arco 40449), k 25000 4.6692 (l'arco 40449), k 27000 4.9806 (l'arco 40449), k 28000 5.1208 (l'arco 40449)
+### l'arco col |Theta| massimo (40449), il ritmo per tratto (1e-4 per tick): 13750-20000 1.7093, 20000-25000 1.6286, 25000-27000 1.5572, 27000-28000 1.4015
+### IL RITMO LINEARE (da k0 a k 28000):
+    da k 25000: il primo a 2 pi l'arco 61712 a k 35538; gli archi entro k 40000: 388
+    da k 27000: il primo a 2 pi l'arco 52114 a k 35556; gli archi entro k 40000: 385
+### IL FIT QUADRATICO di |Theta| su 24 stati (k 22250-28000), i 300 archi col |Theta| maggiore: 300 arrivano a 2 pi; entro k 40000: 246
+    l'arco 61656: a k 35476 (la curvatura 2.86e-10, il ritmo oggi 1.583e-04)
+    l'arco 62217: a k 35506 (la curvatura 5.59e-10, il ritmo oggi 1.634e-04)
+    l'arco 61653: a k 35571 (la curvatura 5.59e-10, il ritmo oggi 1.625e-04)
+========================================================================================================================
