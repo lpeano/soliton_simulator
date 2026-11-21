@@ -1,0 +1,46 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] mitosi_chi.py  sha1-BYTE d661c3d6  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+LE NASCITE FORZATE DEL RAMO mitosi-chi (Luca 2026-11-21 19:40, R2-R3; la carta sez. 2.3): P1, P3, P9, i casi noti nel guscio e a r 30, K4 dopo la nascita, Q-P1; dallo stato stato_03000.npz della corsa del ramo lapse-u, piu' 5 tick
+============================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### NEL GUSCIO: l'arco 52229 a r 18.903 (il punto medio); H prima 5.261306138515e+05 (H_chi +3.497848e+02); somma c0 1.3166887532e+01
+    il flip 0 (17409, 17410): H 5.2613038051e+05 (DH dalla nascita +1.842621e-01)
+    il flip 1 (17596, 17410): H 5.2612993072e+05 (DH dalla nascita -2.655294e-01)
+    il flip 2 (17596, 17595): H 5.2613045423e+05 (DH dalla nascita +2.579865e-01)
+    il flip 3 (17409, 17595): H 5.2612942092e+05 (DH dalla nascita -7.753254e-01)   <- SCELTO
+    la sola nascita H 5.2613019624e+05 (DH -4.176066e-01, H_chi +3.498435e+02); lo scarto fra il migliore e il secondo 9.690e-07 |H|; chi del nodo nuovo +1.116713e+01 (la media di +1.135257e+01 e +1.098169e+01); il tempo ['3.0', '3.2', '3.2', '3.3', '3.1'] s
+### P1: M 2.3e-16, V 0.0e+00; DEVE FALLIRE senza il fattore di stella: M 7.4e-05, V 4.1e-06
+### P3: il residuo di Gauss prima 1.401e-11; dopo 1.619e-15; DEVE FALLIRE senza Gauss 9.790e-01
+    [nascita 1] k 3005, l'arco 52229 (FORZATA (NEL GUSCIO)): n 34596 a r 18.90, 19 passi dalla sorgente; DH nascita -4.1761e-01 flip -7.7533e-01 chi +1.4328e-01; P9 0.0e+00; |Ec| 8.738e-02; E_persa +1.192932e+00 (17.6 s)
+### P9: H riletta 5.26129420919462456e+05 contro il candidato 5.26129420919462456e+05: 0.0e+00 |H|; E_persa +1.192932e+00, -(H dopo - H prima) +1.192932e+00; DEVE FALLIRE il candidato senza H_chi: 6.7e-04 |H|
+### IL CASO NOTO: DH nascita -4.176066e-01, DH flip -7.753254e-01, DH -1.192932e+00, DH_chi +1.432790e-01; somma c0 1.3166887532e+01 -> 1.3167268122e+01 (la differenza 3.805899e-04, c0 3.805899e-04); il lato (17409, 17595); n 34596 a r 18.899, 19 passi dalla sorgente
+### K4 DOPO LA NASCITA (chi = 1 sul nodo nato 34596): PASSA per t = 1..30; DEVE FALLIRE col Laplaciano del grafo vecchio (il nodo nuovo isolato): cade a t 1
+### Q-P1: il tick prima della nascita 0.831 s, dopo 0.836 s (la media di 5); la nascita 17.6 s
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi_chi\doc\referti_l2\mitosi_chi.py", line 730, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi_chi\doc\referti_l2\mitosi_chi.py", line 705, in main
+    return {"p60": p60, "nascite": nascite, "p8": p8, "rami_prova": rami_prova}[x.cmd]()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_mitosi_chi\doc\referti_l2\mitosi_chi.py", line 588, in nascite
+    Z["metti"]()
+    ~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_mitosi_chi\csv\solitone\posizioni.py", line 21, in _alza
+    raise RuntimeError("Z[%r] non esiste dopo la crescita del grafo: %s" % (self.nome, self.perche))
+RuntimeError: Z['metti'] non esiste dopo la crescita del grafo: lo stato di partenza della scena e' della taglia vecchia: la scena non si rimette
