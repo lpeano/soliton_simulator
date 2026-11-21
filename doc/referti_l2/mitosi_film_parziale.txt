@@ -1,0 +1,18 @@
+### IL FILM PARZIALE (Luca 2026-11-21 20:35): mitosi_film.py --base E:\soliton_simulator\controllo\film_parziale_base --out doc/referti_l2/mitosi_film_parziale --ogni 250
+### TRONCO: nessuna cartella
+### MITOSI: 2 istantanee (rho_36000, rho_36250)
+### C2EXT: 9 istantanee (rho_36000, rho_36250, rho_36500, rho_36750, rho_37000, rho_37250, rho_37500, rho_37750, rho_38000)
+### nascite.json: 9 nascite
+### la cartella doc/referti_l2/mitosi_film_parziale: 1.39 MB
+### mitosi_film_anelli.py --base E:\soliton_simulator\controllo\film_parziale_base --out doc/referti_l2/mitosi_film_parziale
+### dal file nascite_36250.json: 9 nascite
+    k 35976  n 34596  r 18.934  l'anello 19  20 passi
+    k 36001  n 34597  r 18.696  l'anello 19  20 passi
+    k 36027  n 34598  r 19.188  l'anello 19  20 passi
+    k 36059  n 34599  r 18.971  l'anello 19  19 passi
+    k 36125  n 34600  r 18.476  l'anello 18  20 passi
+    k 36129  n 34601  r 19.242  l'anello 19  21 passi
+    k 36152  n 34602  r 19.055  l'anello 19  21 passi
+    k 36162  n 34603  r 19.433  l'anello 19  20 passi
+    k 36228  n 34604  r 18.433  l'anello 18  19 passi
+### per anello: 18: 2, 19: 7

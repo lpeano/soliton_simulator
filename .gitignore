@@ -19,6 +19,8 @@ __pycache__/
 !doc/referti_l2/campo_TB3/*.npz
 # Luca 2026-11-05 19:24: le mappe leggere e i profili di TBS, come TB3
 !doc/referti_l2/campo_TBS/*.npz
+# Luca 2026-11-21 20:35: il film parziale della mitosi (rho e grado per nodo, float32, compresso, ~1.4 MB)
+!doc/referti_l2/mitosi_film_parziale/*.npz
 
 # ----------------------------------------------------------------------------
 # NUOVO LAYOUT OUTPUT (2026-09-07): db/<campagna>/ (.pkl), csv/<campagna>/ (.csv),
