@@ -279,3 +279,47 @@
 - **La `18:56` ripete le decisioni della `18:40`** *(il tronco, i due rami da `10000` tick che partono da soli, le misure, le previsioni, il FINE)* **e AGGIUNGE:** **`doc/referti_l2/mitosi_film/` sul ramo `mitosi`** *(piccolo, nel repo)*: **`nascite.json`** *(per ogni nascita: il tick, `i`, `j`, `k`, `l`, il nodo nato, il lato del flip `x`, `y`, `m`, `DH` nascita, `DH` flip, `E_persa`)*; **ogni `1000` tick `rho` e il grado per nodo** in un `npz` compresso *(`float32`)*; **le posizioni dei nodi originari una volta**; **per C2-EXT solo `rho` ogni `1000` tick.**
 - **L'ordine di esecuzione registrato:** **il tronco e' partito alle `18:57:38` col codice della `18:40`** *(`6e51d762`)*; ### **la `18:56` non cambia NIENTE di cio' che la corsa calcola** *(e' un prodotto in piu')*: **i dati del film si RICAVANO dagli stati che la corsa salva ogni `250` tick** *(le chiavi per nodo, il grafo dopo la prima nascita, le posizioni)* **e dai bilanci delle nascite** *(`nascite_<k>.json`: `i`, `j`, `k`, `l`, `n`, `m`, il lato scelto fra `(i, k)`, `(j, k)`, `(j, l)`, `(i, l)`, i `DH`, `E_persa`)*. **Quindi la corsa NON si ferma ne' si tocca** *(durante una corsa nessun file del suo percorso si modifica)*: **uno script a parte**, `doc/referti_l2/mitosi_film.py`, **legge gli stati e scrive il film.** **`rho` si RICALCOLA dalle estremita'** *(`somma |psi_h|^2` sul nodo, dal grafo dello stato: sul toro quello di `L 186`)*, **non si prende la chiave `rho` dello stato** *(la scrive il motore a meta' tick)*.
 - **TODO:** lo script, commit; una prova sugli stati della prova del punto di ramificazione *(con una nascita)*, nello scratchpad; **il film nel repo a corse finite, col referto.**
+
+## 16. LA NOTA DI LUCA DELLE `13:57` DEL `2026-11-21`: LA PROROGA DEL TRONCO *(scritta PRIMA del codice)*
+
+### 16.1 LE DECISIONI *(di Luca, copiate)*
+
+- **Se il tronco arriva a `k 40000` senza scatto, NON si chiude: prosegue dallo stesso stato fino a `k 50000`** *(la ripresa al bit; la proroga scritta nel registro come voce nuova o come tappa dichiarata)*. **Il resto del mandato invariato:** al primo scatto i due rami da `10000` tick partono da soli.
+- **Se nemmeno a `k 50000` scatta: FERMO**, con la proiezione aggiornata e il ritmo per tratto dei primi archi.
+- **Al referto della corsa si aggiunge il ritmo del contatore nel tempo sui primi `20` archi, per tratti di `2500` tick:** una misura del raddrizzarsi del tempo attorno al mattone.
+
+### 16.2 IL MOTIVO *(del GUARDIANO, non mio: scritto qui come suo, con i suoi numeri, che NON ho rifatto)*
+
+- Il ritmo del contatore sull'arco `40449` cala *(`1.71 -> 1.63 -> 1.56 -> 1.40` per `1e-4` per tick: il referto `mitosi_proiezione_scatto.txt`, `8adf1aa9`)*. **Con un calo lineare il quanto arriva verso `k 36000-36800`; con un calo esponenziale col tempo dell'ultima finestra (`tau` circa `14000` tick) verso `k 40600`, oltre il limite. Lo scatto arriva comunque se `tau > 7600` tick.**
+- **Il controllo che faro' io** *(lo script nuovo, 16.4)*: le stesse due proiezioni *(calo lineare ed esponenziale del ritmo per tratto)* e il `tau` critico, sui primi `20` archi, dagli stati del tronco; **se i miei numeri non coincidono con i suoi, lo scrivo, non scelgo.**
+
+### 16.3 LE PREMESSE DAL CODICE *(cosa credo, e cosa NON so)*
+
+- **Il tronco a `--fino 40000` senza scatto** *(`mitosi_rami.ciclo`)*: il ciclo arriva a `k = k_fino`, **salva `stato_40000.npz`** *(`k % 250 == 0`)* **ed esce con `0`**; il lanciatore `mitosi_lancia.sh` *(in uso: NON si tocca)* allora **chiude la voce `mitosi-tronco` con FALLITO** *(«uscita 0 senza lo scatto»)* **ed esce.** ### **Quel FALLITO non si puo' evitare senza toccare il lanciatore in uso:** la proroga lo dichiara nella sua voce come **il limite, non un guasto.**
+- **La ripresa da `stato_40000.npz`** *(`tronco --da ultimo --fino 50000`)*: `ciclo` comincia a `k_da = 40000` senza fare il passo a `k_da` *(`k > k_da`)*, come nella ripresa delle `03:04`; **P8 e R3 la provano al bit.** **Gli stati della proroga vanno nella stessa cartella `TRONCO`**, quindi `scatto.json` e `prima_nascita_<k>.npz` stanno dove i rami li cercano.
+- **NON so:** se lo scatto arrivi prima di `k 40000` *(la mia proiezione lineare dice `k 35476-35556`; quella esponenziale del guardiano `k 40600`)*. **La proroga serve solo nel secondo caso; nel primo non fa niente.**
+
+### 16.4 COME *(file NUOVI sul ramo `mitosi`; i file in uso non si toccano)*
+
+- **`doc/referti_l2/mitosi_lancia_v2.sh`**, il lanciatore della proroga:
+  - **`attendi <WINPID>`:** aspetta che il lanciatore in corso *(`mitosi_lancia.sh`, il suo processo Windows)* esca, **con un'attesa del sistema operativo, non con un sondaggio** *(`WaitForSingleObject`, in `doc/referti_l2/mitosi_attendi.py`)*; poi decide:
+    - **se `scatto.json` c'e':** lo scatto e' venuto prima di `k 40000` e i rami li ha gia' fatti il lanciatore vecchio: **non fa niente;**
+    - **se l'ultimo stato integro del tronco e' `k 40000`, senza scatto:** **la PROROGA**: una voce nuova `mitosi-tronco-proroga` *(la nota di Luca e il FALLITO del lanciatore vecchio spiegati nelle note)*, `tronco --da ultimo --fino 50000`; **all'uscita `10`** la voce FINITO e **i due rami come prima** *(le stesse voci `mitosi-ramo-MITOSI`, `mitosi-ramo-C2EXT`, la stessa forza)*; **all'uscita `0` a `k 50000`:** la voce FALLITO col punto «il limite k 50000 senza scatto: FERMO», **e la proiezione aggiornata** *(lo script di 16.4 sotto, l'uscita in un file su `E:`)*; **ogni altra uscita:** FALLITO col codice;
+    - **altrimenti** *(il tronco e' caduto prima di `k 40000`)*: **non fa niente e lo scrive**: si riprende a mano, come alle `03:04`.
+  - **`riprendi`** *(dopo un riavvio: sostituisce `mitosi_lancia.sh riprendi` da qui in avanti)*: se c'e' `scatto.json`, i rami dall'ultimo loro stato; se e' aperta `mitosi-tronco`, il tronco `--da ultimo --fino 40000` e poi la stessa decisione; se e' aperta `mitosi-tronco-proroga`, la proroga `--da ultimo --fino 50000`.
+- **`doc/referti_l2/mitosi_ritmo_contatore.py`** *(la misura chiesta, e la proiezione aggiornata: e' la v2 di `mitosi_proiezione_scatto.py`, che non si riscrive)*:
+  - **i primi `20` archi** = i `20` col `|Theta|` maggiore **all'ultimo stato del tronco** *(dopo lo scatto: lo stato prima della prima nascita)*;
+  - **il ritmo di `|Theta|` per tratti di `2500` tick** *(i confini ai multipli di `2500`, dal primo stato salvato all'ultimo)*, per arco e la media dei `20`; **anche su C2-EXT** dopo lo scatto *(lo stesso grafo, gli stessi indici)*; ### **NON su MITOSI:** dopo una nascita gli indici degli archi cambiano *(il ritmo li' vuole una mappa che oggi non c'e': dichiarato)*;
+  - **le proiezioni** per ognuno dei `20` dai suoi ultimi `4` tratti: **il calo LINEARE del ritmo** e **il calo ESPONENZIALE** *(il `tau` dal fit di `log` del ritmo)*, **e il `tau` CRITICO** *(quanto manca a `2 pi` diviso il ritmo di oggi)*; **il primo arco a `2 pi` col ritmo lineare di tutti gli archi** e **quanti entro il limite `--fino`**.
+
+### 16.5 COSA MI FAREBBE FERMARE
+
+- **Il controllo del lanciatore v2** *(prima di lanciarlo)*: `bash -n`; **l'attesa provata su un processo breve** *(deve tornare quando quel processo esce, non prima)*; **la decisione provata a secco** su una cartella finta *(con `scatto.json`; con l'ultimo stato `k 40000`; con l'ultimo stato prima)*: **se una delle tre sceglie male, FERMO.**
+- **Se il lanciatore vecchio uscisse con lo scatto:** la proroga non ha niente da fare *(e lo scrive nel suo file su `E:`)*.
+
+### 16.6 TODO
+
+1. questa carta: commit, push;
+2. `mitosi_attendi.py` + `mitosi_lancia_v2.sh`: commit; le prove a secco; **il lancio di `attendi` sul lanciatore in corso**; il registro *(una tappa dichiarata su `mitosi-tronco`)*;
+3. `mitosi_ritmo_contatore.py`: commit; il referto sugli stati di oggi *(il controllo dei numeri del guardiano)*: commit;
+4. a corse finite: **il ritmo nel referto della corsa**; il resto del FINE della `18:40`.
