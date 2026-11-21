@@ -1,0 +1,15 @@
+[TIMBRO] lorentz_velocita.py  sha1-BYTE 098496da  committato e pulito
+============================================================================================================================================
+L1 (a), LA MATERIA (la carta sez. 2.2): la matrice di Bloch del passo a cs = s uniforme (_triangoli_bassa_energia.matrice, eps 0.5, lato 48), Hellmann-Feynman
+============================================================================================================================================
+### IL CASO NOTO E1-R: v_max/s a eps 0.5, s 0.15: 0.58813743 (in (39, 17), la fase 0.354259) contro 0.588137
+  CASO NOTO E1-R: v_max/s = 0.588137 entro 1e-6                                                                          PASSA   0.58813743
+  DEVE FALLIRE: contro 0.601963 (eps 0) entro 1e-6                                                                       PASSA   1.4e-02
+### v_max proiettata (archi per tick): 0 gradi 0.08820447, 15 gradi 0.08677987, 30 gradi 0.08494977; /s: 0.58802978, 0.57853245, 0.56633180; l'anisotropia 3.76e-02
+### il ramo piu' basso a Gamma: la fase -0.011437 (per tick); la materia ha massa: v_g -> 0 a k -> 0 (la velocita' limite e' v_max, la carta sez. 1 punto 5)
+### N AL CENTRO del mattone con chi: lo stato stato_14750.npz (k 14750), il nodo 17204, chi 17.736095, N 0.99552468 (1 - N 4.4753e-03); cs = s N = 0.14932870
+### v_max a cs = s N: 0.08782173 archi per tick, v_max/cs 0.58811016 (al vuoto 0.58813743)
+============================================================================================================================================
+--------------------------------------------------------------------------------------------------------------------------------------------
+  CASO NOTO E1-R: v_max/s = 0.588137 entro 1e-6                                                                          PASSA
+  DEVE FALLIRE: contro 0.601963 (eps 0) entro 1e-6                                                                       PASSA
