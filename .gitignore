@@ -19,6 +19,8 @@ __pycache__/
 !doc/referti_l2/campo_TB3/*.npz
 # Luca 2026-11-05 19:24: le mappe leggere e i profili di TBS, come TB3
 !doc/referti_l2/campo_TBS/*.npz
+# Luca 2026-11-21 sera: il film leggero (rho, chi, archi, posizioni; float32 compresso, sotto i 50 MB)
+!doc/referti_l2/film/*.npz
 
 # ----------------------------------------------------------------------------
 # NUOVO LAYOUT OUTPUT (2026-09-07): db/<campagna>/ (.pkl), csv/<campagna>/ (.csv),
