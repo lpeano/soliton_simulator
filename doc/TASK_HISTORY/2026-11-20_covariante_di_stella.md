@@ -323,3 +323,39 @@
 2. `mitosi_attendi.py` + `mitosi_lancia_v2.sh`: commit; le prove a secco; **il lancio di `attendi` sul lanciatore in corso**; il registro *(una tappa dichiarata su `mitosi-tronco`)*;
 3. `mitosi_ritmo_contatore.py`: commit; il referto sugli stati di oggi *(il controllo dei numeri del guardiano)*: commit;
 4. a corse finite: **il ritmo nel referto della corsa**; il resto del FINE della `18:40`.
+
+## 17. L'AGGIUNTA AL REFERTO DI LUCA DELLE `14:06` DEL `2026-11-21`: LA CIRCONFERENZA DELL'ANELLO `40` E LA DISTANZA ESTERNA *(scritta PRIMA del codice e dei numeri)*
+
+### 17.1 LA RICHIESTA *(di Luca, copiata)*
+
+- **A ogni stato salvato di MITOSI e C2-EXT:** **la circonferenza in passi dell'anello `40`** *(il ciclo piu' corto che gira attorno al mattone passando per i nodi originari dell'anello)* **e la distanza in passi fra due nodi opposti dell'anello `40` col cammino che NON entra nell'anello `20`** *(il grafo senza i nodi entro l'anello `20`)*.
+- **LA LETTURA** *(di Luca, scritta prima)*: **POZZO** = cresce D1 *(dal centro all'anello `40`)* **ma non la circonferenza ne' la distanza esterna**; **ESPANSIONE** = **crescono anche quelle.**
+- **Si ricava a posteriori dagli stati salvati, come il film: le corse non si toccano.**
+
+### 17.2 LE DEFINIZIONI *(le mie, da controllare: Luca ha dato la forma, il dettaglio e' mio)*
+
+- **Il centro e i raggi:** il centro della corsa *(`meta["centro"]` dello stato: quello con cui la corsa fa gli anelli di D1)*; **il raggio di un nodo** come la corsa *(`toro.scarti`, l'immagine piu' vicina, la distanza euclidea)*: **per i nodi originari dalle posizioni del toro, per i nodi NATI dalla loro posizione** *(B4: il punto medio, solo per disegnare e misurare)*.
+- **L'anello `40`** = i nodi originari con `39.5 <= r0 < 40.5` *(la stessa riga di `mitosi_rami.ciclo`)*. **La fascia della circonferenza** = quei nodi **piu' i nodi NATI su un arco con le DUE estremita' nella fascia** *(per genealogia, nell'ordine delle nascite: un arco della fascia diviso resta nella fascia)*. ### **Senza i nati, una nascita su un arco della fascia la ROMPEREBBE** *(l'arco diviso sparisce)*, **e la circonferenza misurerebbe la regola, non lo spazio.**
+- **La circonferenza** = **il ciclo piu' corto della fascia che gira UNA volta attorno al centro**: il taglio lungo la semiretta dal centro all'angolo `pi`; **per ogni arco della fascia che attraversa il taglio, `1 +` la distanza fra le sue estremita' nella fascia SENZA gli archi del taglio**; il minimo. *(Un ciclo che attraversa il taglio una volta sola: nella fascia sottile il piu' corto lo fa; dichiarato.)* **Se la fascia non e' connessa attorno: `nan`, e lo dice.**
+- **La distanza esterna:** **`6` coppie fisse di nodi opposti dell'anello `40`** *(il nodo all'angolo piu' vicino a `0, 30, ..., 150` gradi, e quello piu' vicino all'angolo opposto; scelte UNA volta dalle posizioni originarie)*; **la distanza in passi nel grafo SENZA i nodi con `r < 20.5`** *(gli originari da `r0`, i nati dalla posizione)*; **ogni coppia e la media.**
+- **D1:** la riga della corsa *(`D_med40` della serie allo stesso `k`: la mediana dei passi dalla sorgente all'anello `40`)*.
+- **Gli stati:** il punto di ramificazione *(`prima_nascita_<k>.npz`)* e **ogni stato salvato** di MITOSI e C2-EXT *(ogni `250` tick)*, lo sha1 controllato.
+
+### 17.3 LE PREMESSE DAL CODICE *(cosa credo, e cosa NON so)*
+
+- **C2-EXT NON cambia il grafo** *(le nascite spente)*: **la sua circonferenza e la sua distanza esterna devono restare IDENTICHE al punto di ramificazione a ogni stato** *(e' il CONTROLLO che deve restare fermo; se si muovesse, la misura legge altro che il grafo: FERMO)*. **La sua D1 puo' muoversi solo perche' la sorgente si muove** *(il centro di `rho`)*.
+- ### ⚠ **IL FALSO-ZERO DA DICHIARARE PRIMA:** **la circonferenza cambia SOLO se nasce un nodo su un arco della fascia** *(`r` circa `40`)*; **la distanza esterna cambia SOLO se nasce un nodo fuori dall'anello `20`** *(e su un cammino corto)*. **I primi scatti attesi sono a `r` circa `18`** *(i candidati, `candidati.npz`)*: **dentro l'anello `20`.** **Quindi, se le nascite restano dentro `r < 20.5`, «POZZO» e' GARANTITO dalla geometria delle nascite, non misurato dalla dinamica.** **Per questo il referto conta, a ogni stato, le nascite con `r >= 20.5` e quelle nella fascia: sono la MATERIA della prova.** **Senza nascite fuori dall'anello `20` il verdetto e' «NON DECIDIBILE», non POZZO.**
+- **NON so** dove nasceranno le nascite dopo le prime *(gli archi nuovi da `Theta = 0`, il lapse che si muove)*.
+
+### 17.4 I CONTROLLI DELLA MISURA *(prima di leggere i rami: `mitosi_anelli.py prova`)*
+
+- **IL CONTROLLO DI SCALA:** sul toro *(il punto di ramificazione)* **la circonferenza contro `2 pi 40 = 251.3`**: con archi di lunghezza `1` **non puo' essere piu' corta** *(e sul reticolo triangolare non molto piu' lunga)*; **la distanza esterna contro la semicirconferenza `pi 40 = 125.7`** *(il cammino gira attorno all'anello `20`: fra `80` e `130` circa, la mia attesa)*.
+- **I CONTROLLI POSITIVI (devono CAMBIARE):** **ogni arco della fascia diviso in due** *(un nodo nuovo a meta')* -> **la circonferenza RADDOPPIA esatta**; **ogni arco fuori dall'anello `20` diviso in due** -> **la distanza esterna RADDOPPIA esatta.**
+- **IL CONTROLLO CHE DEVE RESTARE FERMO:** **ogni arco DENTRO l'anello `20` diviso in due** -> **circonferenza e distanza esterna INVARIATE** *(e D1 a parte)*.
+- **Se uno dei tre non torna: FERMO.**
+
+### 17.5 TODO
+
+1. questa carta: commit, push;
+2. `doc/referti_l2/mitosi_anelli.py` *(sul ramo `mitosi`)*: commit; **la prova** *(17.4)* sul punto di ramificazione appena c'e', **o sul toro dell'ultimo stato del tronco** *(lo stesso grafo)*: il referto, commit;
+3. **a rami finiti:** la misura su tutti gli stati salvati, **nel referto della corsa**, con la lettura di 17.1 e la materia di 17.3.
