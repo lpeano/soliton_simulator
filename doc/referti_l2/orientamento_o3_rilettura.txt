@@ -1,0 +1,13 @@
+[TIMBRO] orientamento_o3_rilettura.py  sha1-BYTE c076d24c  committato e pulito
+==================================================================================================================================
+O3 RILETTO DAI FILE (Luca 2026-11-21 23:13; la carta sez. 4.4): nessuna corsa
+==================================================================================================================================
+### lo stato di partenza k 36250 (sha1 64999c5b): 9 nascite; lo stato finale k 36350 (sha1 68b03bcf): 14 nascite; i bilanci della corsa: 5
+    la nascita 10 (k 36257, l'arco 40445): r 18.245, 20 passi; P9 0.0e+00; F3 True
+    la nascita 11 (k 36265, l'arco 51096): r 19.077, 20 passi; P9 0.0e+00; F3 True
+    la nascita 12 (k 36294, l'arco 39885): r 18.831, 21 passi; P9 0.0e+00; F3 True
+    la nascita 13 (k 36295, l'arco 52207): r 19.114, 19 passi; P9 0.0e+00; F3 True
+    la nascita 14 (k 36309, l'arco 40391): r 19.115, 20 passi; P9 0.0e+00; F3 True
+### la decima nascita: k 36257, l'arco 40445, r 18.245 (il guscio 18-20: True)
+  DEVE: O3: la decima nascita passa; P9 a 0 e F3 a ogni nascita (riletto dai file)        PASSA
+==================================================================================================================================
