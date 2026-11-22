@@ -144,3 +144,11 @@
 - **Il DEVE FALLIRE di (a)** con `pi^2 / 2` *(`H_vecchia - H = (f - 1) K`)* dovrebbe fallire bene: `(1 - f) = 0.94` volte la cinetica.
 - **Che cosa mi fa FERMARE:** (a) o (b) non passano come scritte *(il mandato: FERMO se una prova di V3 non passa)*; la copia del tick non e' AL BIT a `k 250` *(allora (b) non misura la dinamica vera: si butta)*.
 - **Il costo:** (a) un minuto per la scena del mattone, poi `2000` tick sul toro `48` *(secondi)*; (b) `250` tick del mattone *(intorno al secondo l'uno, coi processi di adesso)*. **Due processi, in parallelo** *(il tetto `10`, la memoria libera `13.6 GB` alle `02:2x`)*.
+
+### 5.3 LA DECISIONE DI LUCA DELLE `02:42`: IL CRITERIO SULL'ENERGIA DISCRETA *(copiata; scritta PRIMA dello script nuovo)*
+
+- **L'errore n.212 del guardiano:** la soglia `1e-9` su `H` era impossibile per il salto di rana *(il referto 1c48728c)*; **il n.211:** i lati del caso che deve fallire del t120r28 sono `22.65` e `58.40` *(37d01cef)*.
+- **(a) PASSA** se `max |H~(t) - H~(0)| / E* <= 1e-9`, `H~ = H - (dt^2 f / 8) sum F^2`, al netto del termine non quadratico di `e^{-kappa chi}`: se quel termine porta `H~` sopra `1e-9`, si stampa la sua stima e la soglia diventa `10` volte la stima, dichiarato. **In piu':** `max |H(t) - H(0)| / E*` dentro la stima `omega^2 / 8` della sez. `5.2`, **fra `1e-5` e `3e-4`**. **DEVE FALLIRE:** con `pi^2 / 2` lo scarto `>= 1e-2`.
+- **(b) PASSA** se `max_tick |R - (dt^2 f / 8)(sum F_b^2 - sum F_a^2)| / |W| <= 1e-6`. **DEVE FALLIRE:** con `pi^2 / 2` il residuo almeno `10` volte piu' grande. **La mia lettura, fissata qui:** il residuo con `pi^2 / 2` e' `R_vecchio - (dt^2 f / 8)(sum F_b^2 - sum F_a^2)` *(la STESSA correzione discreta)*, e si confronta col residuo che passa con la stessa statistica *(il massimo per tick su `|W|`)*.
+- **Lo script:** `doc/referti_l2/chi_s3bis_v2.py`, nuovo *(la v1 riga per riga, salvo i criteri)*; si rigira tutto, `(a)` e `(b)`, perche' il bilancio per tick non e' salvato. **Se il termine non quadratico serve** *(`H~` sopra `1e-9`)*: **FERMO**, perche' la stima di quel termine non e' ancora definita qui.
+- **Se (a) e (b) passano:** la linea di `chi` v2 e' sbloccata *(Luca)*: la corsa nuova del mattone *(chi_lancia_v4.sh)* e i tronchi *(triangolo_lancia_v3.sh, t120 e t120r28 dopo la sua prova breve)* partono, nel tetto dei `10` e col freno dei `4 GB`.
