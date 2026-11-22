@@ -1,0 +1,71 @@
+==================================================================================================================================
+S3 DI CHI V2: L'ENERGIA (Luca 2026-11-21 23:30; la carta sez. 4.3): 500 tick da k 0 col passo v2 e col passo di oggi
+==================================================================================================================================
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL PASSO V2 (l'inerzia f) da k 0 fino a k 500 (prepara); i parametri kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.504935886674e+00; gli stati in E:\soliton_simulator\controllo\CHI\prova_v2\s3_v2
+    k     0  la massa 9.950108931447e+05  il raggio 12.3657  Min12.4 5.527894e+05  il picco 1.1927e+03  H +5.2613128573e+05  H_chi +2.9156e+02  1-N centro 4.8047e-03  max|Theta| 0.0000  (118 s)
+    k   250  la massa 9.950108931447e+05  il raggio 12.3501  Min12.4 5.500970e+05  il picco 1.2334e+03  H +5.2612931958e+05  H_chi +2.8814e+02  1-N centro 4.7624e-03  max|Theta| 0.0193  (412 s)
+    [stato] k 250 sha1 b63a7a4a
+    k   500  la massa 9.950108931447e+05  il raggio 12.1635  Min12.4 5.667626e+05  il picco 1.2355e+03  H +5.2613157105e+05  H_chi +2.9137e+02  1-N centro 4.7887e-03  max|Theta| 0.0390  (737 s)
+    [stato] k 500 sha1 bcea445d
+### 500 tick in 620 s (1.240 s per tick)
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL PASSO DI OGGI da k 0 fino a k 500 (prepara); i parametri kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04; m0 +1.504935886674e+00; gli stati in E:\soliton_simulator\controllo\CHI\prova_v2\s3_v1
+    k     0  la massa 9.950108931447e+05  il raggio 12.3657  Min12.4 5.527894e+05  il picco 1.1927e+03  H +5.2613128573e+05  H_chi +2.9156e+02  1-N centro 4.8047e-03  max|Theta| 0.0000  (137 s)
+    k   250  la massa 9.950108931447e+05  il raggio 12.3501  Min12.4 5.501015e+05  il picco 1.2334e+03  H +5.2612931837e+05  H_chi +2.8955e+02  1-N centro 4.7631e-03  max|Theta| 0.0193  (457 s)
+    [stato] k 250 sha1 a112dfeb
+    k   500  la massa 9.950108931447e+05  il raggio 12.1635  Min12.4 5.667615e+05  il picco 1.2355e+03  H +5.2613156526e+05  H_chi +2.9387e+02  1-N centro 4.8072e-03  max|Theta| 0.0390  (757 s)
+    [stato] k 500 sha1 dc84246f
+### 500 tick in 621 s (1.242 s per tick)
+### S3: la deriva relativa massima di H in 500 tick (ogni 50): v2 (pi^2/2f) 4.799e-06; il passo di oggi 4.795e-06; l'energia vecchia (pi^2/2) sulla dinamica v2 4.787e-06
+    k    0: H v2 +5.261312857263e+05   H oggi +5.261312857263e+05   l'energia vecchia sulla v2 +5.261312857263e+05
+    k   50: H v2 +5.261310713770e+05   H oggi +5.261310684401e+05   l'energia vecchia sulla v2 +5.261310694500e+05
+    k  100: H v2 +5.261322718303e+05   H oggi +5.261322710990e+05   l'energia vecchia sulla v2 +5.261322673863e+05
+    k  150: H v2 +5.261299073957e+05   H oggi +5.261299021131e+05   l'energia vecchia sulla v2 +5.261299029069e+05
+    k  200: H v2 +5.261335339190e+05   H oggi +5.261335351524e+05   l'energia vecchia sulla v2 +5.261335292225e+05
+    k  250: H v2 +5.261293195844e+05   H oggi +5.261293183699e+05   l'energia vecchia sulla v2 +5.261293139429e+05
+    k  300: H v2 +5.261338107581e+05   H oggi +5.261338085573e+05   l'energia vecchia sulla v2 +5.261338042884e+05
+    k  350: H v2 +5.261294736455e+05   H oggi +5.261294755435e+05   l'energia vecchia sulla v2 +5.261294663324e+05
+    k  400: H v2 +5.261330677744e+05   H oggi +5.261330588797e+05   l'energia vecchia sulla v2 +5.261330596906e+05
+    k  450: H v2 +5.261307593488e+05   H oggi +5.261307681802e+05   l'energia vecchia sulla v2 +5.261307505237e+05
+    k  500: H v2 +5.261315710466e+05   H oggi +5.261315652609e+05   l'energia vecchia sulla v2 +5.261315614596e+05
+  S3: la deriva di H v2 non oltre 10 volte quella di oggi + 1e-12                                                  PASSA   4.80e-06 contro 4.80e-05
+  S3 DEVE FALLIRE: l'energia vecchia sulla dinamica v2 oltre la stessa soglia                                      ### FALLISCE   4.79e-06
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: S3: la deriva di H v2 non oltre 10 volte quella di oggi + 1e-12                                                PASSA
+  DEVE: S3 DEVE FALLIRE: l'energia vecchia sulla dinamica v2 oltre la stessa soglia                                    ### FALLISCE
+==================================================================================================================================
