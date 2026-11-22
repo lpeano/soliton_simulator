@@ -610,3 +610,35 @@
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "gravita-F60-on", "ora": "2026-11-22T13:06:26+01:00", "punto": "k 3000 (uscita 0)"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "gravita-F60-off", "ora": "2026-11-22T13:04:11+01:00", "punto": "k 2885; 1.248 s per tick"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "gravita-F60-off", "ora": "2026-11-22T13:06:36+01:00", "punto": "k 3000 (uscita 0)"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T04:12:43+01:00", "punto": "k 3916; 0.920 s per tick; max |Theta| 0.4453"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T05:12:44+01:00", "punto": "k 7122; 1.011 s per tick; max |Theta| 0.7915"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T06:12:45+01:00", "punto": "k 9700; 1.114 s per tick; max |Theta| 1.0593"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T07:12:46+01:00", "punto": "k 12789; 1.126 s per tick; max |Theta| 1.3825"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T08:12:46+01:00", "punto": "k 16753; 1.075 s per tick; max |Theta| 1.7851"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T09:12:47+01:00", "punto": "k 20815; 1.038 s per tick; max |Theta| 2.2113"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T10:12:48+01:00", "punto": "k 24080; 1.047 s per tick; max |Theta| 2.5340"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T11:12:49+01:00", "punto": "k 26379; 1.092 s per tick; max |Theta| 2.7490"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T12:12:49+01:00", "punto": "k 29382; 1.103 s per tick; max |Theta| 2.9715"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120", "ora": "2026-11-22T13:12:49+01:00", "punto": "k 32370; 1.112 s per tick; max |Theta| 3.1099"}
+- {"esito": "FALLITO", "ev": "CHIUSO", "nome": "chi-tronco-t120", "ora": "2026-11-22T14:11:01+01:00", "punto": "uscita 127 (il log /e/soliton_simulator/controllo/CHI/triangolo/log_t120.txt)"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T04:12:46+01:00", "punto": "k 3923; 0.918 s per tick; max |Theta| 0.4498"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T05:12:48+01:00", "punto": "k 7119; 1.012 s per tick; max |Theta| 0.8007"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T06:12:48+01:00", "punto": "k 9699; 1.114 s per tick; max |Theta| 1.0796"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T07:12:48+01:00", "punto": "k 12787; 1.126 s per tick; max |Theta| 1.4049"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T08:12:49+01:00", "punto": "k 16756; 1.074 s per tick; max |Theta| 1.8181"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T09:12:50+01:00", "punto": "k 20811; 1.038 s per tick; max |Theta| 2.2338"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T10:12:52+01:00", "punto": "k 24080; 1.047 s per tick; max |Theta| 2.4342"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T11:12:53+01:00", "punto": "k 26389; 1.092 s per tick; max |Theta| 2.5009"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T12:12:54+01:00", "punto": "k 29383; 1.103 s per tick; max |Theta| 2.6830"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T13:12:55+01:00", "punto": "k 32368; 1.112 s per tick; max |Theta| 2.9296"}
+- {"esito": "FALLITO", "ev": "CHIUSO", "nome": "chi-tronco-t120r28", "ora": "2026-11-22T14:11:11+01:00", "punto": "uscita 127 (il log /e/soliton_simulator/controllo/CHI/triangolo/log_t120r28.txt)"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T05:41:43+01:00", "punto": "k 2693; 1.337 s per tick; max |Theta| 0.3034"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T06:41:44+01:00", "punto": "k 5586; 1.289 s per tick; max |Theta| 0.6213"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T07:41:44+01:00", "punto": "k 9039; 1.195 s per tick; max |Theta| 0.9973"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T08:41:45+01:00", "punto": "k 13129; 1.097 s per tick; max |Theta| 1.4249"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T09:41:45+01:00", "punto": "k 16892; 1.066 s per tick; max |Theta| 1.8267"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T10:41:46+01:00", "punto": "k 19611; 1.102 s per tick; max |Theta| 2.1061"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T11:41:47+01:00", "punto": "k 22179; 1.136 s per tick; max |Theta| 2.3846"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T12:41:47+01:00", "punto": "k 25148; 1.145 s per tick; max |Theta| 2.6878"}
+- {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "chi-tronco-t000", "ora": "2026-11-22T13:41:48+01:00", "punto": "k 28289; 1.146 s per tick; max |Theta| 3.0169"}
+- {"esito": "FALLITO", "ev": "CHIUSO", "nome": "chi-tronco-t000", "ora": "2026-11-22T14:11:11+01:00", "punto": "uscita 127 (il log /e/soliton_simulator/controllo/CHI/triangolo/log_t000.txt)"}
