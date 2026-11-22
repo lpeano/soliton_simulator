@@ -1,0 +1,30 @@
+[TIMBRO] orologio_mattone_v2.py  sha1-BYTE 18c0185e  committato e pulito
+[TIMBRO] orologio_zero.py  sha1-BYTE 5ab1d36b  committato e pulito
+==================================================================================================================================
+[M1427-R] IL VERSO DELL'OROLOGIO: QUALE ZERO (la carta sez. 8; POST-HOC, dichiarato da Luca)
+==================================================================================================================================
+### l'orologio: omega(N1) 0.6264373875; Nm 0.6259165943; Np 0.6269581472; NmV2 0.6242480511; NmV3 0.6281059307; NpV3 0.6247688443
+    V1: d omega/dN +0.14879327; LO ZERO omega0 = omega(1) - d omega/dN = +0.47764412; omega(1) - omega0 = +0.14879327 (lo zero SOTTO psi)
+    V2: d omega/dN +0.62552469; LO ZERO omega0 = omega(1) - d omega/dN = +0.00091270; omega(1) - omega0 = +0.62552469 (lo zero SOTTO psi)
+    V3: d omega/dN -0.47672663; LO ZERO omega0 = omega(1) - d omega/dN = +1.10316402; omega(1) - omega0 = -0.47672663 (lo zero SOPRA psi)
+    V4: d omega/dN +1.10225132 (RICAVATO: V2 - V3); LO ZERO omega0 = omega(1) - d omega/dN = -0.47581393; omega(1) - omega0 = +1.10225132 (lo zero SOTTO psi)
+### il referto caduta_libera.txt (sha1 0cca64c8)
+### K1: la caduta |a(V2)/a(V3)| = 1.30135 +- 0.00637 (a - a(V0): -5.0854e-06, +3.9078e-06); le distanze dallo zero |omega(1) - omega0(V2)| / |omega(1) - omega0(V3)| = 1.31212; lo scarto +8.283e-03
+  DEVE: K1: V2/V3 della caduta = il rapporto delle distanze dallo zero entro l'1%                                      PASSA (+8.283e-03)
+### il referto pound_rebka_GU.txt (sha1 1e9c1db4)
+### il referto orologio_relativo.txt (sha1 ef57b836)
+  DEVE: K2: omega_phi nel vuoto lontano uguale fra le coppie entro 1e-5 (da orologio_relativo.txt)                     PASSA (1.061e-08)
+### la base (in fase, d 50, in fase, d 65 (L 243)): omega_psi 0.62536024; omega_phi locale (orologio_relativo) -0.47558924
+----------------------------------------------------------------------------------------------------------------------------------
+  T1: Delta|omega_psi - omega0| = |omega_psi(coppia) - omega0| - |omega_psi(base) - omega0|; NEGATIVO = come la natura, POSITIVO = al contrario
+    B2 in fase, d 35           d 34.138, omega_psi 0.62548570 (Delta +1.2546e-04): V1 +1.2546e-04; V2 +1.2546e-04; V3 -1.2546e-04; V4 +1.2546e-04; il vuoto locale +2.0734e-04
+    in fase, d 50              d 50.981, omega_psi 0.62535959 (Delta -6.5000e-07): V1 -6.5000e-07; V2 -6.5000e-07; V3 +6.5000e-07; V4 -6.5000e-07; il vuoto locale +4.6778e-06
+    in fase, d 65 (L 243)      d 65.992, omega_psi 0.62536089 (Delta +6.5000e-07): V1 +6.5000e-07; V2 +6.5000e-07; V3 -6.5000e-07; V4 +6.5000e-07; il vuoto locale -4.6778e-06
+    B2-pi in antifase, d 35    d 38.358, omega_psi 0.62526959 (Delta -9.0650e-05): V1 -9.0650e-05; V2 -9.0650e-05; V3 +9.0650e-05; V4 -9.0650e-05; il vuoto locale -1.8435e-04
+----------------------------------------------------------------------------------------------------------------------------------
+  K3, LA COPPIA CHE SI ATTRAE (B2 in fase): V1 POSITIVO: al contrario; V2 POSITIVO: al contrario; V3 NEGATIVO: come la natura; V4 POSITIVO: al contrario; vuoto POSITIVO: al contrario
+  il verdetto CAMBIA da una forma all'altra
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1: V2/V3 della caduta = il rapporto delle distanze dallo zero entro l'1%                                      PASSA
+  DEVE: K2: omega_phi nel vuoto lontano uguale fra le coppie entro 1e-5 (da orologio_relativo.txt)                     PASSA
+==================================================================================================================================
