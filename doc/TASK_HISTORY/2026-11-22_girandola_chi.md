@@ -54,3 +54,35 @@
 - **[M0428-S]:** (a) l'anello `10-16` a `k 0` del t120 *(ricostruito con `triangolo_chi_v4.prepara`, attorno a `G_k` come il film)* con lo strumento del film *(`cs = s N(chi)`, la fase (a))* E con lo strumento del 15/11 *(il `cs` della scena, nessuna fase)*: **coincidono entro l'`1%`**, se no la differenza e' dello strumento; (b) lo stesso anello sulle sfasate del 15/11 RICOSTRUITE *(lo strumento del 15/11)*: `-574` entro l'`1%`; (c) la serie del t120 dal film, `k 0 ... 2000`. **La lettura «`chi` toglie il controvortice» si scrive solo se (a) coincide e (c) mostra il cambio di segno nel tempo.**
 - **[M2357-T4], il caso noto vero:** sul mattone con `chi` della fisica vecchia *(`CHI/mattone`, gli stati `250 ... 3000`: `k 0` non e' salvato, dichiarato)*, i `20` archi con `|Theta|` piu' alto a `k 3000` contro **la media nel tempo di `|D(dtau cs)|`** *(`d_i - d_j` per arco, `d = dtau s exp(-kappa chi)` di ogni stato salvato)*: **almeno `16` su `20` in comune e il rango `>= 0.9`** *(Spearman su tutti gli archi)*; **DEVE FALLIRE con il solo stato di `k 3000`.** Se passa, T4 riprende.
 - **I processi:** il tetto e' pieno *(10 python: le tre corse dei due mattoni, i tre tronchi, il mattone v2, MITOSI_V2, C2EXT, l'attesa della proroga)*; **le letture partono quando si libera un posto** *(le corse F-off e S-on finiscono verso le `06:15`)*.
+
+## 7. [M0329-F1] e [M0329-M1] OLTRE `k 6000`: TUTTI I BLOCCHI, E LA SERIE DI TUTTO IL TRONCO *(la richiesta di Luca del `2026-11-22` `10:32`; scritta PRIMA del codice e dei numeri)*
+
+### 7.1 La richiesta *(copiata)*
+
+> «[M0329-F1] e [M0329-M1]: esporta e misura TUTTI i blocchi disponibili oltre k 6000 di t120, t120r28 e t000 (uno alla volta, nel tetto), fino all'ultimo stato salvato. In più, nel referto: la serie della rotazione dei tre centri (cumulata stato per stato) e del lato medio su tutto il tronco, per vedere se la girandola dondola, si ferma o riparte.»
+
+### 7.2 Le premesse dal codice
+
+- **Gli strumenti sono quelli dei blocchi gia' fatti, senza cambiarli:** il film `film/esporta_film_triangolo_v3.py --quale --da --fino --out` *(a4389b27)*; le misure `girandola_chi_v3.py giro --da --fino --scene` *(b617403d; il suo caso noto gira prima di ogni giro)*, che leggono il film da `doc/referti_l2/film/`.
+- **Il t000 e' gia' esportato fino a `k 2000`:** «oltre `k 6000`» per il t000 lo leggo come **tutti i blocchi non ancora esportati**, cioe' da `k 2000`; i blocchi `2000-4000` e `4000-6000` del t000 erano nella lista del punto 6 di [M0428]. **Lo dichiaro: se Luca voleva solo oltre `6000` anche per il t000, i due blocchi in piu' sono letture in piu', non numeri diversi.**
+- **I blocchi:** di `2000` tick, `da` multiplo di `2000`; **l'ultimo blocco e' parziale**, fino all'ultimo stato salvato quando la catena parte *(i tronchi girano ancora: lo stato dopo non entra)*. Alle `10:32` l'ultimo stato era `k 24750` per t120 e t120r28, `k 19250` per il t000 *(contati con `ls`)*: circa `9` blocchi per scena, `27` in tutto, `~7.9 MB` l'uno.
+- **Il film si scrive FUORI dal repo** *(`E:\soliton_simulator\controllo\girandola_blocchi\`)*, perche' un file non tracciato sotto `doc/` blocca ogni commit *(H-NON-TRACCIATI)*; si copia nel repo al commit. **Poi le misure**, che leggono i film dal repo.
+- **Uno alla volta:** una catena sola, un processo python alla volta *(`doc/referti_l2/girandola_blocchi.sh`)*.
+
+### 7.3 La serie di tutto il tronco *(`doc/referti_l2/girandola_serie.py`, nuovo; le definizioni fissate QUI)*
+
+- **I dati:** i film `girandola_<scena>_<da>_<fino>.npz` di una scena, in ordine; **controllo:** ogni blocco comincia dove finisce il precedente, e i `k` sono tutti diversi.
+- **Per stato:** i tre centri = `centri_bari` *(i baricentri di `rho` dei tre settori)*; `G_k` la loro media; l'angolo di ogni centro attorno a `G_k` *(`girandola_chi_v3.angoli`)*, **srotolato su TUTTA la serie** *(`girandola_chi_v3.srotola`)*; **la rotazione cumulata** = l'angolo meno quello di `k 0`, per centro, e la media dei tre; **il lato medio** = la media dei tre lati fra i baricentri.
+- **Dondola, si ferma, riparte** *(la lettura, fissata prima)*: gli incrementi della rotazione media fra due stati salvati *(`250` tick)*; **i TRATTI** = i tratti di incrementi dello stesso segno, ciascuno con `k` d'inizio, `k` di fine, la rotazione del tratto; **e nessuna soglia per «si ferma»**: stampo gli incrementi, e la lettura e' «dondola» se i tratti cambiano segno piu' di una volta con ampiezze sopra lo scarto fra i tre centri *(lo scarto quadratico dei tre incrementi, stampato accanto)*, altrimenti la descrivo coi numeri.
+- **Il referto:** `doc/referti_l2/girandola_serie.txt`.
+
+### 7.4 Le previsioni *(mie, prima dei numeri)*
+
+- **t120 e t120r28:** dopo il ritorno di `-0.79` gradi del blocco `4000-6000` la rotazione **dondola** con ampiezza di `~1` grado `55%`; **il lato medio cresce ancora ma piu' piano** *(da `47` a `<= 50` a `k 24000`)* `60%`.
+- **t000:** **resta sotto `0.5` gradi di rotazione** `75%`; il lato dai baricentri **continua a scendere** *(si chiude)* `60%`; **si fonde** *(un massimo solo)* entro `k 19250` `35%`.
+
+### 7.5 TODO
+
+- [ ] committare questa sezione, `girandola_blocchi.sh` e `girandola_serie.py`;
+- [ ] i film, una scena alla volta, quando c'e' un posto nel tetto; commit coi file di testo dei film;
+- [ ] le misure dei blocchi *(`giro`)*, commit; la serie, commit; la relazione nel ramo principale.
