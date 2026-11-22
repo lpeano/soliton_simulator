@@ -11,7 +11,7 @@
 |---|---|---|
 | 1 | ### **la scena a triangoli nel nucleo** *(al bit contro quella in memoria)* | `36040a07`, `2d996edc` |
 | 2 | ### **la luce isotropa, e a `1` nel tempo proprio** | `0764d566`, `afba052b` |
-| 3 | ### **la gravita' senza curvatura, attrattiva e universale** *(con lo zero simmetrico)* | ### **lo zero simmetrico** *(`_segno_gravita`, `_zero_simmetrico`)* |
+| 3 | ### **la gravita' senza curvatura, attrattiva e universale** *(con lo zero simmetrico)* ### ⚠ **DA RIFARE** *([M1446-Z], 2026-11-22): le due fonti sono sulla GRIGLIA QUADRATA* *(`csv/_segno_gravita.py` e `doc/referti_l2/zero_simmetrico.txt` portano la marca «GRIGLIA QUADRATA -- risultato da rifare sui triangoli», 406b32f0, 2026-10-23, [[DECISIONE-SOLO-TRIANGOLI]]); **sui triangoli non c'e' ancora la misura** | ### **lo zero simmetrico** *(`_segno_gravita`, `_zero_simmetrico`)* |
 | 4 | ### **la materia mai oltre la luce** *(`v_max/s 0.5992864` a `r 1`)* | `afba052b` |
 | 5 | ### **i difetti non intrappolano** *(nessuno stato legato al difetto)* | `74b4bce4` |
 | 6 | ### **la geometria del conteggio per la LUCE:** ### **il cono converge di `pi/3`, niente `1/b`** | `b99ba2b1` |
