@@ -101,51 +101,151 @@
    "finita": "2026-11-22T15:39:28"
   },
   "Q_x0.8_Nm_V2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 13692,
    "lanciata": "2026-11-22T15:39:07",
    "processi_prima": 6,
    "gb": 14.85,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:57:26"
   },
   "Q_x0.8_Np_V2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 18632,
    "lanciata": "2026-11-22T15:39:08",
    "processi_prima": 7,
    "gb": 14.84,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:57:34"
   },
   "Q_x0.8_Nm_V3": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 30572,
    "lanciata": "2026-11-22T15:39:10",
    "processi_prima": 8,
    "gb": 14.74,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:57:53"
   },
   "Q_x0.8_Np_V3": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 6844,
    "lanciata": "2026-11-22T15:39:11",
    "processi_prima": 8,
    "gb": 14.68,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:57:58"
   },
   "Q_x0.8_calcio": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 35160,
    "lanciata": "2026-11-22T15:39:13",
    "processi_prima": 9,
    "gb": 14.53,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:57:16"
   },
   "Q_x0.8_caduta_V2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 36572,
    "lanciata": "2026-11-22T15:39:30",
    "processi_prima": 9,
    "gb": 14.03,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:12:03"
+  },
+  "Q_x0.8_caduta_V3": {
+   "stato": "IN CORSA",
+   "pid": 10944,
+   "lanciata": "2026-11-22T15:57:28",
+   "processi_prima": 8,
+   "gb": 14.26,
+   "registro": 0
+  },
+  "Q_x1.2_Nm_V2": {
+   "stato": "FINITO",
+   "pid": 13608,
+   "lanciata": "2026-11-22T15:57:29",
+   "processi_prima": 8,
+   "gb": 14.25,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:15:24"
+  },
+  "Q_x1.2_Np_V2": {
+   "stato": "FINITO",
+   "pid": 21952,
+   "lanciata": "2026-11-22T15:57:36",
+   "processi_prima": 9,
+   "gb": 14.11,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:15:29"
+  },
+  "Q_x1.2_Nm_V3": {
+   "stato": "FINITO",
+   "pid": 25752,
+   "lanciata": "2026-11-22T15:57:54",
+   "processi_prima": 9,
+   "gb": 14.26,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:16:14"
+  },
+  "Q_x1.2_Np_V3": {
+   "stato": "FINITO",
+   "pid": 26916,
+   "lanciata": "2026-11-22T15:57:59",
+   "processi_prima": 9,
+   "gb": 14.31,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:16:22"
+  },
+  "Q_x1.2_calcio": {
+   "stato": "IN CORSA",
+   "pid": 16212,
+   "lanciata": "2026-11-22T16:12:05",
+   "processi_prima": 8,
+   "gb": 14.32,
+   "registro": 0
+  },
+  "Q_x1.2_caduta_V2": {
+   "stato": "IN CORSA",
+   "pid": 23440,
+   "lanciata": "2026-11-22T16:12:07",
+   "processi_prima": 9,
+   "gb": 14.23,
+   "registro": 0
+  },
+  "Q_x1.2_caduta_V3": {
+   "stato": "IN CORSA",
+   "pid": 34624,
+   "lanciata": "2026-11-22T16:15:31",
+   "processi_prima": 9,
+   "gb": 14.23,
+   "registro": 0
+  },
+  "F_D90": {
+   "stato": "IN CORSA",
+   "pid": 4188,
+   "lanciata": "2026-11-22T16:16:16",
+   "processi_prima": 9,
+   "gb": 14.43,
+   "registro": 0
+  },
+  "F_D60": {
+   "stato": "IN CORSA",
+   "pid": 39052,
+   "lanciata": "2026-11-22T16:16:24",
+   "processi_prima": 9,
+   "gb": 14.32,
    "registro": 0
   }
  },
@@ -175,6 +275,26 @@
   "2026-11-22T15:39:11 LANCIATA Q_x0.8_Np_V3 (pid 6844; i processi prima 8, la CPU stimata 9/12; 14.7 GB)",
   "2026-11-22T15:39:13 LANCIATA Q_x0.8_calcio (pid 35160; i processi prima 9, la CPU stimata 10/12; 14.5 GB)",
   "2026-11-22T15:39:28 FINITO M_k0.005_a2 (uscita 0)",
-  "2026-11-22T15:39:30 LANCIATA Q_x0.8_caduta_V2 (pid 36572; i processi prima 9, la CPU stimata 10/12; 14.0 GB)"
+  "2026-11-22T15:39:30 LANCIATA Q_x0.8_caduta_V2 (pid 36572; i processi prima 9, la CPU stimata 10/12; 14.0 GB)",
+  "2026-11-22T15:57:16 FINITO Q_x0.8_calcio (uscita 0)",
+  "2026-11-22T15:57:26 FINITO Q_x0.8_Nm_V2 (uscita 0)",
+  "2026-11-22T15:57:28 LANCIATA Q_x0.8_caduta_V3 (pid 10944; i processi prima 8, la CPU stimata 9/12; 14.3 GB)",
+  "2026-11-22T15:57:29 LANCIATA Q_x1.2_Nm_V2 (pid 13608; i processi prima 8, la CPU stimata 9/12; 14.3 GB)",
+  "2026-11-22T15:57:34 FINITO Q_x0.8_Np_V2 (uscita 0)",
+  "2026-11-22T15:57:36 LANCIATA Q_x1.2_Np_V2 (pid 21952; i processi prima 9, la CPU stimata 10/12; 14.1 GB)",
+  "2026-11-22T15:57:53 FINITO Q_x0.8_Nm_V3 (uscita 0)",
+  "2026-11-22T15:57:54 LANCIATA Q_x1.2_Nm_V3 (pid 25752; i processi prima 9, la CPU stimata 10/12; 14.3 GB)",
+  "2026-11-22T15:57:58 FINITO Q_x0.8_Np_V3 (uscita 0)",
+  "2026-11-22T15:57:59 LANCIATA Q_x1.2_Np_V3 (pid 26916; i processi prima 9, la CPU stimata 10/12; 14.3 GB)",
+  "2026-11-22T16:12:03 FINITO Q_x0.8_caduta_V2 (uscita 0)",
+  "2026-11-22T16:12:05 LANCIATA Q_x1.2_calcio (pid 16212; i processi prima 8, la CPU stimata 9/12; 14.3 GB)",
+  "2026-11-22T16:12:07 LANCIATA Q_x1.2_caduta_V2 (pid 23440; i processi prima 9, la CPU stimata 10/12; 14.2 GB)",
+  "2026-11-22T16:15:24 FINITO Q_x1.2_Nm_V2 (uscita 0)",
+  "2026-11-22T16:15:29 FINITO Q_x1.2_Np_V2 (uscita 0)",
+  "2026-11-22T16:15:31 LANCIATA Q_x1.2_caduta_V3 (pid 34624; i processi prima 9, la CPU stimata 10/12; 14.2 GB)",
+  "2026-11-22T16:16:14 FINITO Q_x1.2_Nm_V3 (uscita 0)",
+  "2026-11-22T16:16:16 LANCIATA F_D90 (pid 4188; i processi prima 9, la CPU stimata 10/12; 14.4 GB)",
+  "2026-11-22T16:16:22 FINITO Q_x1.2_Np_V3 (uscita 0)",
+  "2026-11-22T16:16:24 LANCIATA F_D60 (pid 39052; i processi prima 9, la CPU stimata 10/12; 14.3 GB)"
  ]
 }
