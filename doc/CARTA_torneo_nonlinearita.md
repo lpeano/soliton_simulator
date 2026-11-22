@@ -43,7 +43,9 @@
 
 ## 6. LE DEFINIZIONI CHE DIPENDONO DA 1a E DAL CODICE *(si aggiungono qui PRIMA del codice che le usa)*
 
-*(vuota: il k del fondo da 1a; theta e a nel nucleo per 1d)*
+- **Il fondo, da 1a** *(7d3967f8, `spettro_gap_v2.txt`, 96 x 96)*: **la banda piu' bassa vale `-0.4826761` a OGNI `k` (PIATTA)**: **il «k del fondo» e' DEGENERE** -- la semina al fondo prende **tutti i `k` come casi** *(il mandato)*: **in pratica `k = 0` (Gamma), `K` e `M` come tre casi** *(i punti di simmetria della zona: la scelta dei tre e' mia, dichiarata; ogni altro k darebbe la stessa energia)*. **La portante:** l'autovettore della banda piatta a quel `k` *(dalla risposta lineare di 1a)*, messo al posto della componente della cima nello stampo, con la stessa `|psi|` per nodo *(«la stessa forma di partenza, la portante spostata»)*: **la definizione operativa la scrivo col codice della semina, prima di girarlo.**
+- **theta e a nel nucleo, per 1d** *(dalle righe di `primo_ordine/leggi/leggi.yaml`)*: **`theta = pi dtau_nodo/dtau_rif`** nel Grover *(CAMM-GROVER)* e **`pi dtau_arco/dtau_rif`** nello spostamento *(CAMM-SPOSTAMENTO)*: **non e' un parametro libero, viene da `cs`** -- **`theta -> -theta` vuol dire `cs -> -cs`** *(in memoria: `mot.cs = -s`)*; **`a` della moneta e' `eps = 0.5` di CAMM-MONETA-SPIN** *(in memoria: il parametro del pezzo a `-0.5`)*; **`N_{-1}`** in memoria come `_screening_forme_s3.forma` *(la sostituzione di `MV.pezzi`, nessun file toccato)*. **La prova** *(il file nuovo `doc/referti_l2/equivalenza_lambda.py`, L 16)*: **la risposta lineare di un tick su psi attorno a uno stato con `rho` fissata** *(il metodo di T-L4b)* con `N_{-1}`, `cs = s`, `eps = 0.5`, contro il complesso coniugato della stessa con `N`, `cs = -s`, `eps = -0.5`; **entro `1e-12`**. ### ⚠ **Con `cs < 0` il tetto causale e i pesi potrebbero rifiutare** *(`theta <= pi` «per costruzione»)*: **se il codice non accetta `cs < 0`, 1d non si puo' fare in memoria e lo dico.**
+
 
 ## 7. I CRITERI, L'ALBERO E LE PREVISIONI *(copiati dal mandato)*
 
