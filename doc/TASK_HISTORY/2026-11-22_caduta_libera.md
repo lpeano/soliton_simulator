@@ -227,3 +227,21 @@
 - **`omega_v`:** `-wrap(theta_v(k2) - theta_v(k1))/(k2 - k1)`; **il controllo:** `|wrap(.)| < pi/2` *(se no, anche `omega_v` e' ambiguo)*.
 - **K1, il criterio numerico:** la fase relativa `Psi(k) = theta_v(k) + somma omega_F3 - Phi_psi(k)` di N1 *(gli stati `250 ... 1000`, `psi` dalla fase di ogni tick)*, **il residuo del fit lineare sotto `1` rad** *(come [M1310-P])*.
 - **La base** = la media di d 50 e d 66 *(in fase, lontane)*.
+
+## 8. [M1427] IL VERSO DELL'OROLOGIO: QUALE ZERO *(la decisione di Luca dopo le `14:27`; scritta PRIMA del codice `doc/referti_l2/orologio_zero.py` e dei suoi numeri; POST-HOC, dichiarato da Luca)*
+
+### 8.1 Le scelte e i criteri *(copiati)*
+
+- **S1:** solo carta, lettura del codice e degli stati gia' usati. **S2:** per ogni forma del lapse lo ZERO `omega0` da cui `N` conta il ritmo, dal codice. **S3:** `omega_phi` come [M1417] *(sez. 7.2)*.
+- **K1:** il controllo di `V2/V3 = 1.30` rifatto con questi zeri entro l'`1%`; se no, gli zeri sono sbagliati: fermarsi. **K2:** `omega_phi` nel vuoto lontano uguale fra le coppie entro `1e-5`. **K3:** per ogni zero il segno di `Delta|omega_psi - omega0|` per la coppia che si attrae: NEGATIVO = come la natura; POSITIVO = al contrario. Se cambia da una forma all'altra: e' il risultato.
+- **Le previsioni del guardiano** *(copiate)*: **P1** K1 passa. **P2** per V1/V3 con lo zero sotto `psi` (`omega0 < 0.625`) il verdetto resta POSITIVO. **P3** il segno di `omega_phi - omega_psi`: `50%`.
+- **T2, T3, T4 sono gia' fatti** *(sotto [M1417])*: `doc/CORSE_SOSPESE.md` (6804cc31); la chiusura di C2EXT nel ramo mitosi (d0ca7274); i processi contati e la fine di chi-mattone-v2 nella relazione (29fa0c42). **Citati, non rifatti.**
+
+### 8.2 Le premesse dal codice: come `N` entra nel ritmo
+
+- **Il trasporto** *(`caduta_segno_v2.tick_var`, riga `36`: `mot.cs = float(s) * N`)*: **tutto il palindromo gira con `cs`** al posto di `s`; nell'orologio [M1253-O] `NmV2` da' `q - 1 = 0.999 (N - 1)`: **la frequenza del mattone scala con `N` intera**, cioe' `omega(N) - omega0 = N (omega(1) - omega0)` **con `omega0 ~ 0`**.
+- **La fase (a)** *(`caduta_segno_v2.tick_var`, righe `39` e `43`, che chiamano `chi_tick.fase_a`, riga `102`: `psi_h *= exp(0.5j e0 (N - 1))`, due volte per tick)*: **aggiunge `-e0 (N - 1)` alla frequenza** *(la convenzione `e^{-i omega}` di [M0908-L])*: `omega(N) = omega(1) - e0 (N - 1)`. **Scritta come «N conta il ritmo da uno zero»:** `omega(N) - omega0 = N (omega(1) - omega0)` vuole `omega(1) - omega0 = -e0`, cioe' **`omega0(V3) = omega(1) + e0`**: **lo zero sta SOPRA `psi`**, e il ritmo che `N` conta e' **`-e0`** *(negativo)*. **Non `0`:** l'ipotesi di Luca («`omega0 = 0` con il ritmo `e0`?») **non regge col codice**, perche' la fase (a) sposta `omega` di `-e0 (N - 1)`, non di `+e0 (N - 1)`.
+- **La regola generale** *(la definizione, fissata qui)*: per ogni forma, `omega0 = omega(1) - d omega/dN`, con `d omega/dN` **misurato** dall'orologio *(`(omega(Np) - omega(Nm))/(N_p - N_m)` dove ci sono tutti e due, se no `(omega(Nm) - omega(1))/(N_m - 1)`)*. **V4** *(`cs = s N` e la fase col segno opposto)* **non e' misurato** *(la corsia V di [M1446] lo misura)*: qui **`d omega/dN(V4) = d omega/dN(V2) - d omega/dN(V3)`, RICAVATO, dichiarato.**
+- **La previsione dalle righe, prima dei numeri:** **V2** `omega0 ~ 0`; **V3** `omega0 = omega(1) + e0 = ~1.103`; **V1** = V2 + V3: `d omega/dN = ~0.238 omega(1)`, quindi **`omega0(V1) = ~0.762 omega(1) = ~0.477 = ~e0`** *(la cima della banda: la forma (a) conta l'energia dalla cima, sez. 1.1)*; **V4** `omega0 = ~-e0`.
+- **K1, il controllo di `V2/V3`:** nella caduta libera `|a(V2)/a(V3)|` *(al netto di V0, dal referto `caduta_libera.txt`, e72044df)* **contro** `|omega(1) - omega0(V2)| / |omega(1) - omega0(V3)|` *(il rapporto delle due distanze dallo zero)*: **entro l'`1%`**.
+- **T1, la misura:** per le coppie di [M1310-P] e la base *(d 50, d 66)*, **`Delta|omega_psi - omega0|`** per ogni `omega0` e **`Delta|omega_psi - omega_phi|`** *(il vuoto locale di [M1417])*. **I numeri si LEGGONO dai referti** `pound_rebka_GU.txt` *(615d4070)*, `orologio_relativo.txt` *(29fa0c42)*, `caduta_libera.txt` *(e72044df)* e dalle fasi dell'orologio *(`fase.npy`, con lo sha1)*: **niente ricopiato.** **K2** si legge da `orologio_relativo.txt` *(e' lo stesso conto)*.
