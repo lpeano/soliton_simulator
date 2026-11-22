@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\t4_sblocco.py", line 94, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\t4_sblocco.py", line 49, in main
+    import _presidio
+ModuleNotFoundError: No module named '_presidio'
