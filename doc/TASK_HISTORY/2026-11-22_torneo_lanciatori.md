@@ -27,3 +27,10 @@
 4. le `21` voci nella coda, il dispatcher rilanciato;
 5. il codice di [M1446-F2] *(definizioni gia' nella carta di E=mc2, sez. F2)*, le sue voci a priorita' `1`;
 6. a corse chiuse: `lettura`, la tabella del torneo (colonna «regge»), poi 5b-5f.
+
+## 4. L'ANNOTAZIONE DOPO LA DECISIONE DI LUCA SULLA PORTANTE *(2026-11-22 dopo le `21:40`; le sez. 1-3 restano com'erano)*
+
+- **Premessa che cade:** la semina al fondo della sez. 2 (P2) non si fa come scritta: la banda piu' bassa e' degenere *(05e2e8d0)*. **La decisione di Luca:** (c) `L-0.25`, `L-0.5`, `L-1` alla cima; poi (a) solo `L-1`, la proiezione a Gamma. Le definizioni nella carta, sez. 11.
+- **Il codice nuovo:** `doc/referti_l2/torneo_tenuta_v2.py` *(il v1 e' in uso dalla coda: non si tocca)*: `corsa` con `omega` per tick e la semina `proiezione_Gamma`; `lettura` con `w`, picco, pezzi, massa ogni `250`, `omega` nelle tre finestre, «dove sta», «si scioglie».
+- **Le voci della coda** *(priorita' `0`)*: prima il controllo positivo `T2_S1_cima_omega` *(F0, `500` tick)*, poi `T2_L-0.25_cima`, `T2_L-0.5_cima`, `T2_L-1_cima`, poi `T2_L-1_proiezione_Gamma`.
+- **COSA MI FA FERMARE:** il controllo positivo di `omega` fuori da `1e-3`; la frazione proiettata diversa da quella di `torneo_fondo_v2.txt`.
