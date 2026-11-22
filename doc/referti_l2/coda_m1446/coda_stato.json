@@ -161,12 +161,14 @@
    "finita": "2026-11-22T16:12:03"
   },
   "Q_x0.8_caduta_V3": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 10944,
    "lanciata": "2026-11-22T15:57:28",
    "processi_prima": 8,
    "gb": 14.26,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:29:05"
   },
   "Q_x1.2_Nm_V2": {
    "stato": "FINITO",
@@ -209,28 +211,34 @@
    "finita": "2026-11-22T16:16:22"
   },
   "Q_x1.2_calcio": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 16212,
    "lanciata": "2026-11-22T16:12:05",
    "processi_prima": 8,
    "gb": 14.32,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:27:55"
   },
   "Q_x1.2_caduta_V2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 23440,
    "lanciata": "2026-11-22T16:12:07",
    "processi_prima": 9,
    "gb": 14.23,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:41:04"
   },
   "Q_x1.2_caduta_V3": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 34624,
    "lanciata": "2026-11-22T16:15:31",
    "processi_prima": 9,
    "gb": 14.23,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T16:44:38"
   },
   "F_D90": {
    "stato": "IN CORSA",
@@ -246,6 +254,22 @@
    "lanciata": "2026-11-22T16:16:24",
    "processi_prima": 9,
    "gb": 14.32,
+   "registro": 0
+  },
+  "F_D180": {
+   "stato": "IN CORSA",
+   "pid": 31228,
+   "lanciata": "2026-11-22T16:27:56",
+   "processi_prima": 7,
+   "gb": 14.09,
+   "registro": 0
+  },
+  "F_D270": {
+   "stato": "IN CORSA",
+   "pid": 9628,
+   "lanciata": "2026-11-22T16:27:58",
+   "processi_prima": 8,
+   "gb": 14.09,
    "registro": 0
   }
  },
@@ -295,6 +319,12 @@
   "2026-11-22T16:16:14 FINITO Q_x1.2_Nm_V3 (uscita 0)",
   "2026-11-22T16:16:16 LANCIATA F_D90 (pid 4188; i processi prima 9, la CPU stimata 10/12; 14.4 GB)",
   "2026-11-22T16:16:22 FINITO Q_x1.2_Np_V3 (uscita 0)",
-  "2026-11-22T16:16:24 LANCIATA F_D60 (pid 39052; i processi prima 9, la CPU stimata 10/12; 14.3 GB)"
+  "2026-11-22T16:16:24 LANCIATA F_D60 (pid 39052; i processi prima 9, la CPU stimata 10/12; 14.3 GB)",
+  "2026-11-22T16:27:55 FINITO Q_x1.2_calcio (uscita 0)",
+  "2026-11-22T16:27:56 LANCIATA F_D180 (pid 31228; i processi prima 7, la CPU stimata 8/12; 14.1 GB)",
+  "2026-11-22T16:27:58 LANCIATA F_D270 (pid 9628; i processi prima 8, la CPU stimata 9/12; 14.1 GB)",
+  "2026-11-22T16:29:05 FINITO Q_x0.8_caduta_V3 (uscita 0)",
+  "2026-11-22T16:41:04 FINITO Q_x1.2_caduta_V2 (uscita 0)",
+  "2026-11-22T16:44:38 FINITO Q_x1.2_caduta_V3 (uscita 0)"
  ]
 }
