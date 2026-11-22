@@ -49,3 +49,14 @@
 
 - **La v2 riga per riga, salvo:** le scene `t120` e `t120r28` *(il t120r di `+15` resta nella v2, non qui)*; **`--quale` scelto** per `compat`, `costo`, `prova` *(il t120 e' gia' passato con la v2, 50845283: si rifa' solo il t120r28)*; in `compat` per il t120r28 **i lati, il baricentro, la traslazione, il verso, l'angolo, e il caso coi vettori sbagliati**.
 - **Il lanciatore dei tronchi:** un `triangolo_lancia_v3.sh` nuovo, coi tronchi t120 e t120r28; il vecchio non si usa.
+
+## 5. [M2357-T4]: LE SCELTE DELLE MISURE IN CORSA CHE LA SEZ. 2 NON FISSAVA *(scritte PRIMA del primo giro; il codice `doc/referti_l2/triangolo_chi_misure.py`, nuovo)*
+
+- **I tronchi:** il t120 e il t120r28 *(la decisione di Luca delle `02:22`)*, dalle cartelle `CHI/triangolo/t120` e `t120r28`; ogni stato con lo sha1 controllato.
+- **Il baricentro del triangolo** `G`: la media dei tre vertici del `meta` dello stato *(fisso)*; **il lato:** la media dei tre lati del `meta` *(`39`)*; l'inraggio `lato / (2 sqrt 3)`.
+- **I tre centri della materia:** i baricentri di `rho` *(per nodo, `chi_tick.rho_di`)* nei tre settori di `120` gradi attorno a `G`, **centrati sulle direzioni dei tre vertici**, su TUTTI i nodi del settore *(l'immagine minima: nessun raggio di taglio, mio)*.
+- **Il punto di un arco:** il punto medio fra i due nodi, nelle coordinate di reticolo, l'immagine minima.
+- **(a) Il ritmo:** fra `k - 250` e `k`; i `20` piu' veloci contati per classe. **L'angolo** dal baricentro e **la distanza dall'asse** come in M3 *(i multipli di `60` gradi)*.
+- **(c) La circolazione:** `B = cam.B()` del campo di `mattone.Campi(Z, "MGU")` *(come `triangoli_magnetico`)* con `A` = `campo_A` dello stato; **il disco di raggio `8` attorno alla MEDIA dei tre centri della materia di quello stato** *(il 15/11: la media dei tre centri della serie)*; il flusso entro `30`; **l'orientamento a tre punte di `rho` entro `32` attorno a `G`** *(come `girandola`, srotolato modulo `120`)*, su tutti gli stati da `k 250` a `k` ogni `250`. **Il confronto col 15/11** e' di segno *(`B` negativo a `k 500-2000` nel T120)*: il 15/11 aveva il bordo da `R_A` e niente `chi`, dichiarato.
+- **Il caso noto** *(DEVE)*: `CHI/mattone/stato_03000` *(la fisica vecchia; la scena `chi_mattone_v3`, `L 186`)*, `r` dal `centro` del `meta`; **tutti e `20` nel guscio `17 <= r <= 20`.** **DEVE FALLIRE** *(mio)*: `20` archi a caso *(il seme `11`)* NON tutti nel guscio.
+- **Il referto** `doc/referti_l2/triangolo_chi_misure.txt` *(il primo giro a `k 3000`; i giri dopo, ogni `5000`, in file col `k` nel nome)*; **un processo breve, di sola lettura.**
