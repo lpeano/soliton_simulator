@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro)",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -598,6 +598,96 @@
     "3000"
    ],
    "note": "[M1631] la strada (a) di Luca: un oggetto nuovo, la proiezione a Gamma"
+  },
+  {
+   "nome": "M2351M_fondo_k0_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_fondo_k0.010_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_fondo_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_F0_k0_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
+  },
+  {
+   "nome": "M2351M_F0_k0.010_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
+  },
+  {
+   "nome": "M2351M_F0_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
   }
  ]
 }
