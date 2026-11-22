@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro)",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -523,6 +523,81 @@
     "3000"
    ],
    "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "T2_S1_cima_omega",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "S1",
+    "--semina",
+    "cima",
+    "--fino",
+    "500"
+   ],
+   "note": "[M1631] il controllo positivo di omega (la carta sez. 11)"
+  },
+  {
+   "nome": "T2_L-0.25_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-0.25",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-0.5_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-0.5",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-1_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-1_proiezione_Gamma",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "proiezione_Gamma",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (a) di Luca: un oggetto nuovo, la proiezione a Gamma"
   }
  ]
 }
