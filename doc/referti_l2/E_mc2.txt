@@ -1,0 +1,21 @@
+[TIMBRO] spettro_gap.py  sha1-BYTE 7494e102  committato e pulito
+[TIMBRO] emc2_v2.py  sha1-BYTE ec41d42a  committato e pulito
+[TIMBRO] emc2_v3.py  sha1-BYTE 4ab28b83  committato e pulito
+==================================================================================================================================
+[M1446-E] E = m c^2, TUTTI GLI ZERI CANDIDATI (la carta sez. 1): lo spettro E:\soliton_simulator\controllo\M1446\spettro.npz (sha1 2b96f5e2)
+==================================================================================================================================
+### la banda della materia (le due piu' alte a Gamma: +0.4767266, +0.4767266): i bordi +0.2453383 e +0.4767266
+### orologio_zero.txt (sha1 44bf48f3)
+### omega(N1) 0.6264373875; m*_banda -16.8819, m*_sol -19.2580
+  E0 -0.117244 (il centro del gap da -0.2459 a +0.0114): Delta 0.743681, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 5.6628; m*_banda, c = s: R_E 1.9579; m*_sol, c_m = 0.588 s: R_E 4.9641; m*_sol, c = s: R_E 1.7163
+  E0 +0.128604 (il centro del gap da +0.0119 a +0.2453): Delta 0.497833, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 3.7907; m*_banda, c = s: R_E 1.3106; m*_sol, c_m = 0.588 s: R_E 3.3230; m*_sol, c = s: R_E 1.1489
+  E0 +3.138618 (il centro del gap da +0.4767 a -0.4827): Delta 2.512181, la materia SOTTO (particella); m*_banda, c_m = 0.588 s: R_E 19.1290; m*_banda, c = s: R_E 6.6137; m*_sol, c_m = 0.588 s: R_E 16.7688; m*_sol, c = s: R_E 5.7977
+  E0 +0.245338 (il bordo basso della banda della materia): Delta 0.381099, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 2.9019; m*_banda, c = s: R_E 1.0033 VALE; m*_sol, c_m = 0.588 s: R_E 2.5438; m*_sol, c = s: R_E 0.8795
+  E0 +0.476727 (il bordo alto della banda della materia): Delta 0.149711, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 1.1400; m*_banda, c = s: R_E 0.3941; m*_sol, c_m = 0.588 s: R_E 0.9993 VALE; m*_sol, c = s: R_E 0.3455
+  E0 +0.477644 (lo zero di V1 (orologio_zero)): Delta 0.148793, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 1.1330; m*_banda, c = s: R_E 0.3917; m*_sol, c_m = 0.588 s: R_E 0.9932 VALE; m*_sol, c = s: R_E 0.3434
+  E0 +0.000913 (lo zero di V2 (orologio_zero)): Delta 0.625525, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 4.7631; m*_banda, c = s: R_E 1.6468; m*_sol, c_m = 0.588 s: R_E 4.1754; m*_sol, c = s: R_E 1.4436
+  E0 +1.103164 (lo zero di V3 (orologio_zero)): Delta 0.476727, la materia SOTTO (particella); m*_banda, c_m = 0.588 s: R_E 3.6300; m*_banda, c = s: R_E 1.2551; m*_sol, c_m = 0.588 s: R_E 3.1822; m*_sol, c = s: R_E 1.1002
+  E0 -0.475814 (lo zero di V4 (orologio_zero)): Delta 1.102251, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 8.3931; m*_banda, c = s: R_E 2.9019; m*_sol, c_m = 0.588 s: R_E 7.3575; m*_sol, c = s: R_E 2.5438
+  E0 +0.000000 (lo zero simmetrico 0): Delta 0.626437, la materia SOPRA (lacuna); m*_banda, c_m = 0.588 s: R_E 4.7700; m*_banda, c = s: R_E 1.6492; m*_sol, c_m = 0.588 s: R_E 4.1815; m*_sol, c = s: R_E 1.4457
+  E0 +1.100950 (omega_psi - omega_phi locale della base (orologio_relativo, -omega_rel)): Delta 0.474512, la materia SOTTO (particella); m*_banda, c_m = 0.588 s: R_E 3.6132; m*_banda, c = s: R_E 1.2492; m*_sol, c_m = 0.588 s: R_E 3.1674; m*_sol, c = s: R_E 1.0951 VALE
+==================================================================================================================================
