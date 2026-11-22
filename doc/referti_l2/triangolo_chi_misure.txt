@@ -1,0 +1,100 @@
+[TIMBRO] triangolo_chi_misure.py  sha1-BYTE 11bf3a46  committato e pulito
+==================================================================================================================================
+IL CASO NOTO DI (a): il mattone con chi (la fisica vecchia) a k 3000: i 20 archi con |Theta| piu' alto nel guscio 17 <= r <= 20
+==================================================================================================================================
+### stato_03000.npz (sha1 f7bd85a0): k 3000, il centro ['91.534', '91.695']; max |Theta| 0.259904; i 20 piu' maturi a r 13.82, 13.89, 14.08, 13.94, 14.33, 13.43, 14.19, 13.58, 14.36, 14.58, 14.40, 14.43, 14.12, 14.82, 13.33, 14.42, 13.70, 14.89, 13.41, 14.13
+### 20 archi a caso (il seme 11): r 99.0, 70.8, 45.9, 79.7, 61.4, 29.4, 38.1, 71.6, 66.9, 66.4, 95.1, 43.9, 66.6, 76.0, 65.7, 83.5, 36.7, 91.6, 76.3, 92.6
+  CASO NOTO: sul mattone a k 3000 i 20 archi piu' maturi nel guscio 17 <= r <= 20                                  ### FALLISCE   0 su 20
+  CASO NOTO DEVE FALLIRE (mio): 20 archi a caso NON tutti nel guscio                                               PASSA   
+==================================================================================================================================
+IL TRONCO t120 A k 3000 (sola lettura, E:\soliton_simulator\controllo\CHI\triangolo\t120)
+==================================================================================================================================
+### stato_003000.npz (sha1 fbd35e61): il lato 39.0000, l'inraggio 11.2583; il baricentro del triangolo (m) ['100.000', '81.000']; i centri della materia (dal baricentro, cartesiani) [['-21.839', '-14.233'], ['22.706', '-11.886'], ['-1.656', '25.507']]; max |Theta| 0.348597
+    (a) i 20 archi con |Theta| piu' alto:
+       1. l'arco  54793  |Theta| 0.348597  r 35.075  l'angolo +102.765  dall'asse 17.235  guscio esterno
+       2. l'arco  54307  |Theta| 0.348528  r 35.309  l'angolo +104.348  dall'asse 15.652  guscio esterno
+       3. l'arco  54304  |Theta| 0.348377  r 34.347  l'angolo +103.898  dall'asse 16.102  guscio esterno
+       4. l'arco  53818  |Theta| 0.348155  r 34.601  l'angolo +105.506  dall'asse 14.494  guscio esterno
+       5. l'arco  61929  |Theta| 0.347608  r 35.075  l'angolo  -17.235  dall'asse 17.235  guscio esterno
+       6. l'arco  54796  |Theta| 0.347163  r 36.031  l'angolo +103.236  dall'asse 16.764  guscio esterno
+       7. l'arco  55282  |Theta| 0.347091  r 35.815  l'angolo +101.679  dall'asse 18.321  guscio esterno
+       8. l'arco  61932  |Theta| 0.347076  r 34.347  l'angolo  -16.102  dall'asse 16.102  guscio esterno
+       9. l'arco  55279  |Theta| 0.346807  r 34.868  l'angolo +101.162  dall'asse 18.838  guscio esterno
+      10. l'arco  61440  |Theta| 0.346729  r 34.868  l'angolo  -18.838  dall'asse 18.838  guscio esterno
+      11. l'arco  53821  |Theta| 0.346602  r 35.570  l'angolo +105.909  dall'asse 14.091  guscio esterno
+      12. l'arco  62418  |Theta| 0.346566  r 35.309  l'angolo  -15.652  dall'asse 15.652  guscio esterno
+      13. l'arco  54790  |Theta| 0.346559  r 34.121  l'angolo +102.268  dall'asse 17.732  guscio esterno
+      14. l'arco  61926  |Theta| 0.346346  r 35.815  l'angolo  -18.321  dall'asse 18.321  guscio esterno
+      15. l'arco  53815  |Theta| 0.346311  r 33.634  l'angolo +105.079  dall'asse 14.921  guscio esterno
+      16. l'arco  61443  |Theta| 0.346241  r 34.121  l'angolo  -17.732  dall'asse 17.732  guscio esterno
+      17. l'arco  53329  |Theta| 0.346144  r 33.908  l'angolo +106.711  dall'asse 13.289  guscio esterno
+      18. l'arco  53332  |Theta| 0.346064  r 34.882  l'angolo +107.088  dall'asse 12.912  guscio esterno
+      19. l'arco  62421  |Theta| 0.346062  r 34.601  l'angolo  -14.494  dall'asse 14.494  guscio esterno
+      20. l'arco  61437  |Theta| 0.345448  r 35.627  l'angolo  -19.896  dall'asse 19.896  guscio esterno
+    (a) il conto: centrale 0, corridoio 0, guscio esterno 20, altrove 0; la distanza dall'asse: la mediana 16.433, il massimo 19.896
+    (a) il ritmo |d Theta / dt| fra k 2750 e k 3000: il massimo 1.1806e-04 (l'arco 61604, guscio esterno); i 20 piu' veloci: centrale 0, corridoio 0, guscio esterno 20, altrove 0
+    (b) la proiezione con D = 250: il primo scatto a k 53322 (l'arco 61604, guscio esterno, |Theta| 0.341971, il ritmo 1.1806e-04)
+    (b) la proiezione con D = 2500: il primo scatto a k 52897 (l'arco 54304, guscio esterno, |Theta| 0.348377, il ritmo 1.1894e-04)
+    (b) l'incertezza |k(250) - k(2500)| = 425 tick
+    (c) la circolazione, su tutti gli stati salvati fino a k 3000:
+      k   250: B medio (8) -5.5994e-04 (-), il flusso (30) -8.8914e-01; l'orientamento a tre punte di rho (32) -28.41 gradi
+      k   500: B medio (8) -5.7134e-04 (-), il flusso (30) -6.1522e-01; l'orientamento a tre punte di rho (32) -27.38 gradi
+      k   750: B medio (8) -5.9455e-04 (-), il flusso (30) -6.4064e-01; l'orientamento a tre punte di rho (32) -26.69 gradi
+      k  1000: B medio (8) -4.4369e-04 (-), il flusso (30) -1.7588e-01; l'orientamento a tre punte di rho (32) -26.12 gradi
+      k  1250: B medio (8) -6.9903e-04 (-), il flusso (30) -9.3286e-01; l'orientamento a tre punte di rho (32) -25.75 gradi
+      k  1500: B medio (8) -6.5783e-04 (-), il flusso (30) -7.6328e-01; l'orientamento a tre punte di rho (32) -25.50 gradi
+      k  1750: B medio (8) -6.2310e-04 (-), il flusso (30) -3.3441e-01; l'orientamento a tre punte di rho (32) -25.42 gradi
+      k  2000: B medio (8) -7.3142e-04 (-), il flusso (30) -4.7773e-01; l'orientamento a tre punte di rho (32) -25.53 gradi
+      k  2250: B medio (8) -7.3194e-04 (-), il flusso (30) -8.0561e-01; l'orientamento a tre punte di rho (32) -25.85 gradi
+      k  2500: B medio (8) -6.2176e-04 (-), il flusso (30) -9.6192e-01; l'orientamento a tre punte di rho (32) -26.21 gradi
+      k  2750: B medio (8) -5.1098e-04 (-), il flusso (30) -2.9197e-01; l'orientamento a tre punte di rho (32) -26.62 gradi
+      k  3000: B medio (8) -7.3392e-04 (-), il flusso (30) -1.1549e+00; l'orientamento a tre punte di rho (32) -26.87 gradi
+    (c) il segno di B: costante; il 15/11 (T120, il bordo da R_A, senza chi): negativo a k 500-2000 (-6.2e-04 .. -1.26e-03); l'orientamento da -28.41 a -26.87 (il 15/11 T120: -30.00 -> -18.96 in 2000 tick)
+==================================================================================================================================
+IL TRONCO t120r28 A k 3000 (sola lettura, E:\soliton_simulator\controllo\CHI\triangolo\t120r28)
+==================================================================================================================================
+### stato_003000.npz (sha1 6dba9665): il lato 39.0000, l'inraggio 11.2583; il baricentro del triangolo (m) ['100.000', '81.000']; i centri della materia (dal baricentro, cartesiani) [['-12.908', '-22.807'], ['25.506', '0.177'], ['-13.623', '21.937']]; max |Theta| 0.352187
+    (a) i 20 archi con |Theta| piu' alto:
+       1. l'arco  48952  |Theta| 0.352187  r 36.500  l'angolo +120.000  dall'asse 0.000  guscio esterno
+       2. l'arco  49441  |Theta| 0.351385  r 37.010  l'angolo +118.659  dall'asse 1.341  guscio esterno
+       3. l'arco  48463  |Theta| 0.351371  r 36.010  l'angolo +121.378  dall'asse 1.378  guscio esterno
+       4. l'arco  49438  |Theta| 0.351232  r 36.010  l'angolo +118.622  dall'asse 1.378  guscio esterno
+       5. l'arco  48466  |Theta| 0.351083  r 37.010  l'angolo +121.341  dall'asse 1.341  guscio esterno
+       6. l'arco  48955  |Theta| 0.350503  r 37.500  l'angolo +120.000  dall'asse 0.000  guscio esterno
+       7. l'arco  48949  |Theta| 0.350494  r 35.500  l'angolo +120.000  dall'asse 0.000  guscio esterno
+       8. l'arco  49927  |Theta| 0.350318  r 36.541  l'angolo +117.283  dall'asse 2.717  guscio esterno
+       9. l'arco  65850  |Theta| 0.350286  r 36.010  l'angolo   -1.378  dall'asse 1.378  guscio esterno
+      10. l'arco  66339  |Theta| 0.350125  r 36.500  l'angolo   +0.000  dall'asse 0.000  guscio esterno
+      11. l'arco  47977  |Theta| 0.350011  r 36.541  l'angolo +122.717  dall'asse 2.717  guscio esterno
+      12. l'arco  65847  |Theta| 0.349560  r 36.541  l'angolo   -2.717  dall'asse 2.717  guscio esterno
+      13. l'arco  66336  |Theta| 0.349514  r 37.010  l'angolo   -1.341  dall'asse 1.341  guscio esterno
+      14. l'arco  65853  |Theta| 0.349330  r 35.500  l'angolo   +0.000  dall'asse 0.000  guscio esterno
+      15. l'arco  30266  |Theta| 0.349119  r 37.010  l'angolo -121.341  dall'asse 1.341  guscio esterno
+      16. l'arco  66342  |Theta| 0.349018  r 36.010  l'angolo   +1.378  dall'asse 1.378  guscio esterno
+      17. l'arco  49930  |Theta| 0.348968  r 37.540  l'angolo +117.356  dall'asse 2.644  guscio esterno
+      18. l'arco  47974  |Theta| 0.348845  r 35.542  l'angolo +122.793  dall'asse 2.793  guscio esterno
+      19. l'arco  30752  |Theta| 0.348601  r 36.500  l'angolo -120.000  dall'asse 0.000  guscio esterno
+      20. l'arco  65361  |Theta| 0.348565  r 35.542  l'angolo   -2.793  dall'asse 2.793  guscio esterno
+    (a) il conto: centrale 0, corridoio 0, guscio esterno 20, altrove 0; la distanza dall'asse: la mediana 1.359, il massimo 2.793
+    (a) il ritmo |d Theta / dt| fra k 2750 e k 3000: il massimo 1.1788e-04 (l'arco 49447, guscio esterno); i 20 piu' veloci: centrale 0, corridoio 0, guscio esterno 20, altrove 0
+    (b) la proiezione con D = 250: il primo scatto a k 53398 (l'arco 49447, guscio esterno, |Theta| 0.342097, il ritmo 1.1788e-04)
+    (b) la proiezione con D = 2500: il primo scatto a k 52368 (l'arco 48952, guscio esterno, |Theta| 0.352187, il ritmo 1.2014e-04)
+    (b) l'incertezza |k(250) - k(2500)| = 1030 tick
+    (c) la circolazione, su tutti gli stati salvati fino a k 3000:
+      k   250: B medio (8) -5.4630e-04 (-), il flusso (30) -8.9629e-01; l'orientamento a tre punte di rho (32) -0.55 gradi
+      k   500: B medio (8) -5.6183e-04 (-), il flusso (30) -6.4370e-01; l'orientamento a tre punte di rho (32) +0.42 gradi
+      k   750: B medio (8) -5.7886e-04 (-), il flusso (30) -6.5608e-01; l'orientamento a tre punte di rho (32) +0.97 gradi
+      k  1000: B medio (8) -4.3197e-04 (-), il flusso (30) -1.7591e-01; l'orientamento a tre punte di rho (32) +1.43 gradi
+      k  1250: B medio (8) -6.4944e-04 (-), il flusso (30) -9.0722e-01; l'orientamento a tre punte di rho (32) +1.84 gradi
+      k  1500: B medio (8) -5.9391e-04 (-), il flusso (30) -7.4709e-01; l'orientamento a tre punte di rho (32) +2.09 gradi
+      k  1750: B medio (8) -5.5829e-04 (-), il flusso (30) -3.2698e-01; l'orientamento a tre punte di rho (32) +2.15 gradi
+      k  2000: B medio (8) -6.6216e-04 (-), il flusso (30) -4.2160e-01; l'orientamento a tre punte di rho (32) +2.10 gradi
+      k  2250: B medio (8) -6.7463e-04 (-), il flusso (30) -7.6546e-01; l'orientamento a tre punte di rho (32) +1.83 gradi
+      k  2500: B medio (8) -5.5962e-04 (-), il flusso (30) -9.0786e-01; l'orientamento a tre punte di rho (32) +1.45 gradi
+      k  2750: B medio (8) -4.5554e-04 (-), il flusso (30) -2.2729e-01; l'orientamento a tre punte di rho (32) +1.18 gradi
+      k  3000: B medio (8) -6.6894e-04 (-), il flusso (30) -9.9151e-01; l'orientamento a tre punte di rho (32) +0.99 gradi
+    (c) il segno di B: costante; il 15/11 (T120, il bordo da R_A, senza chi): negativo a k 500-2000 (-6.2e-04 .. -1.26e-03); l'orientamento da -0.55 a +0.99 (il 15/11 T120: -30.00 -> -18.96 in 2000 tick)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: CASO NOTO: sul mattone a k 3000 i 20 archi piu' maturi nel guscio 17 <= r <= 20                                ### FALLISCE
+  DEVE: CASO NOTO DEVE FALLIRE (mio): 20 archi a caso NON tutti nel guscio                                             PASSA
+==================================================================================================================================
