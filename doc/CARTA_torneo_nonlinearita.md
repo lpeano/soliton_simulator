@@ -64,3 +64,8 @@
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | F0 | si' *(oggi)* | `0.6264` | il gap sopra | `-19.26` | `+0.999` | `-0.761` | VIA | VERSO | *(oggi: in G+U attrae)* | piu' veloce | respinge | `0.996` |
 | L+0.5 ... L-1, FH, FT | | | | | | | | | | | | |
+
+## 9. 1d NON SI PUO' FARE COSI' *(annotazione dopo il numero; 131f4bb7, `doc/referti_l2/equivalenza_lambda.txt`)*
+
+- **Il nucleo RIFIUTA `cs < 0`** *(un assert: «un `s` del nodo vale `-0.15 <= 0`: un tempo proprio nullo o negativo e' un orologio fermo o che va indietro, e NON si corregge con un pavimento»)*: **`theta -> -theta` non si ottiene rovesciando `cs`**, perche' in questo codice `theta = pi dtau_nodo/dtau_rif` e `dtau_nodo = dtau cs` e' un tempo proprio, che deve essere positivo. **E lo stesso `dtau_nodo` e' il tempo della non linearita'** *(`materia_vuoto.applica`)*: rovesciare `theta` col tempo rovescerebbe anche la non linearita'.
+- **Le strade, da decidere da Luca** *(nessuna fatta)*: **(a)** rovesciare l'angolo dentro i soli pezzi liberi *(Grover, spostamento)* in memoria, con un contesto che cambia l'angolo e non il tempo *(serve leggere gli operatori del motore: `grover`, `spostamento_trasporto`)*; **(b)** usare `theta -> 2 pi - theta` *(lo stesso `e^{i theta}` coniugato a meno di segni sui pezzi a `theta/2`)*: cambia anche il tempo, quindi no; **(c)** dare per non provata S1-bis e lanciare Flambda lo stesso, dichiarandolo. **Il mandato: 1d DEVE PASSARE prima delle corse di Flambda.** **FERMO su 1d.**
