@@ -1,67 +1,99 @@
 {
  "corse": {
   "M_k0.000_a1": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 35156,
    "lanciata": "2026-11-22T15:06:55",
    "processi_prima": 2,
    "gb": 16.66,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:28:45"
   },
   "M_k0.010_a1": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 32440,
    "lanciata": "2026-11-22T15:06:56",
    "processi_prima": 3,
    "gb": 16.63,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:28:58"
   },
   "V4_Nm": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 29216,
    "lanciata": "2026-11-22T15:06:58",
    "processi_prima": 4,
    "gb": 16.5,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:29:54"
   },
   "V4_Np": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 10500,
    "lanciata": "2026-11-22T15:06:59",
    "processi_prima": 5,
    "gb": 16.32,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:30:06"
   },
   "Q_tenuta_x0.8": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 24268,
    "lanciata": "2026-11-22T15:07:01",
    "processi_prima": 6,
    "gb": 16.13,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:29:36"
   },
   "Q_tenuta_x1.2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 28260,
    "lanciata": "2026-11-22T15:07:02",
    "processi_prima": 7,
    "gb": 15.87,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:29:41"
   },
   "V4_N1": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 25884,
    "lanciata": "2026-11-22T15:07:04",
    "processi_prima": 8,
    "gb": 15.93,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:30:02"
   },
   "M_k0.010_a2": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 9476,
    "lanciata": "2026-11-22T15:07:06",
    "processi_prima": 9,
    "gb": 15.69,
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T15:29:13"
+  },
+  "M_k0.005_a1": {
+   "stato": "IN CORSA",
+   "pid": 8348,
+   "lanciata": "2026-11-22T15:29:04",
+   "processi_prima": 9,
+   "gb": 12.28,
+   "registro": 0
+  },
+  "M_k0.005_a2": {
+   "stato": "IN CORSA",
+   "pid": 11084,
+   "lanciata": "2026-11-22T15:29:43",
+   "processi_prima": 8,
+   "gb": 13.05,
    "registro": 0
   }
  },
@@ -73,6 +105,16 @@
   "2026-11-22T15:07:01 LANCIATA Q_tenuta_x0.8 (pid 24268; i processi prima 6, la CPU stimata 7/12; 16.1 GB)",
   "2026-11-22T15:07:02 LANCIATA Q_tenuta_x1.2 (pid 28260; i processi prima 7, la CPU stimata 8/12; 15.9 GB)",
   "2026-11-22T15:07:04 LANCIATA V4_N1 (pid 25884; i processi prima 8, la CPU stimata 9/12; 15.9 GB)",
-  "2026-11-22T15:07:06 LANCIATA M_k0.010_a2 (pid 9476; i processi prima 9, la CPU stimata 10/12; 15.7 GB)"
+  "2026-11-22T15:07:06 LANCIATA M_k0.010_a2 (pid 9476; i processi prima 9, la CPU stimata 10/12; 15.7 GB)",
+  "2026-11-22T15:28:45 FINITO M_k0.000_a1 (uscita 0)",
+  "2026-11-22T15:28:58 FINITO M_k0.010_a1 (uscita 0)",
+  "2026-11-22T15:29:04 LANCIATA M_k0.005_a1 (pid 8348; i processi prima 9, la CPU stimata 10/12; 12.3 GB)",
+  "2026-11-22T15:29:13 FINITO M_k0.010_a2 (uscita 0)",
+  "2026-11-22T15:29:36 FINITO Q_tenuta_x0.8 (uscita 0)",
+  "2026-11-22T15:29:41 FINITO Q_tenuta_x1.2 (uscita 0)",
+  "2026-11-22T15:29:43 LANCIATA M_k0.005_a2 (pid 11084; i processi prima 8, la CPU stimata 9/12; 13.0 GB)",
+  "2026-11-22T15:29:54 FINITO V4_Nm (uscita 0)",
+  "2026-11-22T15:30:02 FINITO V4_N1 (uscita 0)",
+  "2026-11-22T15:30:06 FINITO V4_Np (uscita 0)"
  ]
 }

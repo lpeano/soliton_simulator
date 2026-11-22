@@ -1,15 +1,296 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato)",
  "corse": [
-  {"nome": "M_k0.000_a1", "priorita": 1, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0", "--asse", "1"]},
-  {"nome": "M_k0.010_a1", "priorita": 1, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.010", "--asse", "1"]},
-  {"nome": "V4_Nm", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4Nm"]},
-  {"nome": "V4_Np", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4Np"]},
-  {"nome": "Q_tenuta_x0.8", "priorita": 1, "argv": ["doc/referti_l2/eotvos.py", "tenuta", "--scala", "0.8"]},
-  {"nome": "Q_tenuta_x1.2", "priorita": 1, "argv": ["doc/referti_l2/eotvos.py", "tenuta", "--scala", "1.2"]},
-  {"nome": "V4_N1", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4N1"], "note": "[M1446] il caso noto di V (mio): V4 a N = 1 al bit con N1"},
-  {"nome": "M_k0.010_a2", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.010", "--asse", "2"]},
-  {"nome": "M_k0.005_a1", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.005", "--asse", "1"]},
-  {"nome": "M_k0.005_a2", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.005", "--asse", "2"]}
+  {
+   "nome": "M_k0.000_a1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "M_k0.010_a1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "V4_Nm",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4Nm"
+   ]
+  },
+  {
+   "nome": "V4_Np",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4Np"
+   ]
+  },
+  {
+   "nome": "Q_tenuta_x0.8",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "tenuta",
+    "--scala",
+    "0.8"
+   ]
+  },
+  {
+   "nome": "Q_tenuta_x1.2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "tenuta",
+    "--scala",
+    "1.2"
+   ]
+  },
+  {
+   "nome": "V4_N1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4N1"
+   ],
+   "note": "[M1446] il caso noto di V (mio): V4 a N = 1 al bit con N1"
+  },
+  {
+   "nome": "M_k0.010_a2",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ]
+  },
+  {
+   "nome": "M_k0.005_a1",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.005",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "M_k0.005_a2",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.005",
+    "--asse",
+    "2"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Nm_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Np_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Nm_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Np_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_calcio",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "calcio",
+    "--scala",
+    "0.8"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_caduta_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_caduta_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Nm_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Np_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Nm_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Np_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_calcio",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "calcio",
+    "--scala",
+    "1.2"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_caduta_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_caduta_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3"
+   ]
+  }
  ]
 }

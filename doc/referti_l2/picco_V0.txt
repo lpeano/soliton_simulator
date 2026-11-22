@@ -1,0 +1,14 @@
+[TIMBRO] picco_V0.py  sha1-BYTE a757bb80  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+====================================================================================================
+[M1446-Q] IL PICCO DI rho DEL MATTONE V0 (la norma x1, N = 1), da psi_h
+====================================================================================================
+  k    0: il picco 1192.6636 (+0.0% da k 0); la chiave rho dello stato 3313.5925; la norma 9.950109e+05
+  k  250: il picco 1244.4086 (+4.3% da k 0); la chiave rho dello stato 1244.4086; la norma 9.950109e+05
+  k  500: il picco 1260.3989 (+5.7% da k 0); la chiave rho dello stato 1260.3989; la norma 9.950109e+05
+  k  750: il picco 1455.1411 (+22.0% da k 0); la chiave rho dello stato 1455.1411; la norma 9.950109e+05
+  k 1000: il picco 1712.0224 (+43.5% da k 0); la chiave rho dello stato 1712.0224; la norma 9.950109e+05
+  k 1250: il picco 2389.0506 (+100.3% da k 0); la chiave rho dello stato 2389.0506; la norma 9.950109e+05
+  k 1500: il picco 2922.7115 (+145.1% da k 0); la chiave rho dello stato 2922.7115; la norma 9.950109e+05
+  k 1750: il picco 3238.3575 (+171.5% da k 0); la chiave rho dello stato 3238.3575; la norma 9.950109e+05
+  k 2000: il picco 3775.5602 (+216.6% da k 0); la chiave rho dello stato 3775.5602; la norma 9.950109e+05
+====================================================================================================
