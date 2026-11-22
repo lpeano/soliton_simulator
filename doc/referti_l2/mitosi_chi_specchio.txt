@@ -1,0 +1,22 @@
+[TIMBRO] mitosi_chi_specchio.py  sha1-BYTE 524e5df1  committato e pulito
+==================================================================================================================================
+P5 DELLA REGOLA INTERA CON CHI (Luca 2026-11-21 19:40, R2; la carta del ramo mitosi-chi sez. 2.3): 200 archi in 5 parti, dallo stato k 3000 della corsa con chi
+==================================================================================================================================
+### il caso noto: l'energia con chi dello stato specchiato contro quella dello stato, il massimo sulle parti 2.21e-16 (H 5.26131745378626976e+05)
+### STELLA: lo stesso lato su 200 archi su 200; gli scarti massimi psi 1.7e-16, phi 1.9e-16, geo 0.0e+00, A 1.9e-16, E 5.3e-16, H 4.4e-16, chi 0.0e+00
+    l'arco diviso conservato: 132 archi, lo stesso lato 132, psi 1.7e-16 phi 1.9e-16 geo 0.0e+00 A 0.0e+00 E 5.3e-16 H 4.4e-16 chi 0.0e+00 (sui 132 con lo stesso lato)
+    l'arco diviso ROVESCIATO: 68 archi, lo stesso lato 68, psi 8.5e-17 phi 1.9e-16 geo 0.0e+00 A 1.9e-16 E 4.3e-16 H 4.4e-16 chi 0.0e+00 (sui 68 con lo stesso lato)
+    l'arco girato conservato: 124 archi, lo stesso lato 124, psi 1.7e-16 phi 1.9e-16 geo 0.0e+00 A 1.9e-16 E 5.1e-16 H 4.4e-16 chi 0.0e+00 (sui 124 con lo stesso lato)
+    l'arco girato ROVESCIATO: 76 archi, lo stesso lato 76, psi 1.3e-16 phi 1.8e-16 geo 0.0e+00 A 0.0e+00 E 5.3e-16 H 4.4e-16 chi 0.0e+00 (sui 76 con lo stesso lato)
+### VERSO: lo stesso lato su 171 archi su 200; gli scarti massimi psi 4.2e-02, phi 8.2e-01, geo 1.7e+00, A 1.9e-16, E 2.7e-04, H 1.4e-06, chi 0.0e+00
+    l'arco diviso conservato: 132 archi, lo stesso lato 103, psi 4.2e-02 phi 8.2e-01 geo 1.7e+00 A 0.0e+00 E 2.7e-04 H 1.4e-06 chi 0.0e+00 (sui 103 con lo stesso lato)
+    l'arco diviso ROVESCIATO: 68 archi, lo stesso lato 68, psi 4.2e-17 phi 1.8e-16 geo 0.0e+00 A 1.9e-16 E 3.6e-16 H 4.4e-16 chi 0.0e+00 (sui 68 con lo stesso lato)
+    l'arco girato conservato: 131 archi, lo stesso lato 115, psi 4.3e-17 phi 1.8e-16 geo 0.0e+00 A 1.9e-16 E 4.3e-16 H 4.4e-16 chi 0.0e+00 (sui 115 con lo stesso lato)
+    l'arco girato ROVESCIATO: 69 archi, lo stesso lato 56, psi 4.2e-02 phi 8.2e-01 geo 1.7e+00 A 0.0e+00 E 2.7e-04 H 1.4e-06 chi 0.0e+00 (sui 56 con lo stesso lato)
+### lo scarto fra il migliore e il secondo (stella): la mediana 4.53e-07 |H|, il minimo 5.30e-09
+### il tempo delle parti: ['2978', '3016', '3336', '3127', '3226'] s
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: H con chi dello stato specchiato = H entro 1e-12 relativo                                          PASSA
+  DEVE: P5: la regola intera con chi simmetrica (lo stesso lato; psi, phi, versori, A, chi entro 1e-14; E entro 1e-10; H entro 1e-12) PASSA
+  DEVE: DEVE FALLIRE: la regola col flip col VERSO (un lato diverso o uno scarto sopra 1e-6)                             PASSA
+==================================================================================================================================
