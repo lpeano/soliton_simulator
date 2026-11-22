@@ -1,0 +1,13 @@
+[TIMBRO] notte_m0428_v3.py  sha1-BYTE 0f18226d  committato e pulito
+[TIMBRO] t4_sblocco_v2.py  sha1-BYTE 4bad1006  committato e pulito
+==================================================================================================================================
+[M2357-T4] LO SBLOCCO DEL CASO NOTO VERO (Luca 09:08): il rango sui 1000 archi piu' maturi >= 0.9 E i 20 scelti dalla media con |Theta| >= 0.99 T20; DEVE FALLIRE col solo k 3000
+==================================================================================================================================
+### gli stati 250 ... 3000 (12; k 0 non salvato); gli archi 103788; max |Theta| 0.259904
+### la media nel tempo: il rango sui 1000 piu' maturi 0.993186 (su tutti 0.999921); T20 0.25870498; il minimo di |Theta| sui 20 scelti 0.25771984 = 0.996192 T20; in comune coi 20 piu' maturi 14 su 20: I DUE CONTROLLI PASSANO
+### il solo stato di k 3000: il rango sui 1000 piu' maturi 0.694092 (su tutti 0.999371); T20 0.25870498; il minimo di |Theta| sui 20 scelti 0.23793568 = 0.919718 T20; in comune coi 20 piu' maturi 0 su 20: CADE
+  DEVE: T4 CASO NOTO (Luca 09:08): la media, il rango sui 1000 >= 0.9 E i 20 scelti entro l'1%% di T20                 PASSA (0.993186, 0.996192 T20)
+  DEVE: T4 DEVE FALLIRE: col solo stato di k 3000 almeno uno dei due controlli cade                                    PASSA (0.694092, 0.919718 T20)
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 2/2
+==================================================================================================================================
