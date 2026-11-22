@@ -126,3 +126,23 @@
 **T4 riprende:** il giro delle misure in corsa dei tronchi *(sez. `2` e `5` della carta del triangolo)* col caso noto NUOVO al posto del guscio `17-20` *(che la mia premessa sbagliata aveva fissato: 06a9fadb)*, in un file nuovo `triangolo_chi_misure_v2.py`, al `k 8000` *(il primo `k 3000 + 5000`)*. **Se non passa: FERMO su T4, coi numeri.**
 
 **I processi:** il tetto e' pieno *(le tre catene della caduta, 10 python)*; **lo sblocco parte quando si libera un posto.**
+
+## 4. [M1052-S] DOVE NASCE LA SPINTA: L'IMPULSO DELLA MATERIA PER REGIONE *(la richiesta di Luca delle `10:40` e il mandato [M1052] delle `10:52`, fase 1; scritta PRIMA del codice `doc/referti_l2/caduta_libera_misure_v2.py` e dei numeri)*
+
+### 4.1 La richiesta *(copiata)*
+
+> «[M1052-S] Aggiungi alle misure [M0908-M], sola lettura: in V0, V1, V2, V3, V4 e V1m, la variazione dell'impulso della materia lungo il gradiente (dal flusso J o dalla derivata del momento di ρ), separata per anelli dal baricentro: nucleo (r < 15), guscio (15–21), bordo (21–25), fuori (> 25); a ogni stato salvato e cumulata. Il confronto già previsto fra baricentro e ρ massimo, letto come «nucleo contro tutto il mattone». Il caso noto: in V0 la spinta per regione è zero entro il rumore; la somma delle regioni = la spinta totale entro l'1%.» **IL BIVIO** *(scritto da Luca)*: «la spinta sta all'interfaccia» se in V1 il bordo + il guscio danno più del `50%` della spinta cumulata *(in valore assoluto)* con il `26%` della massa, oppure se il baricentro e il `rho` massimo accelerano con segni opposti.
+
+### 4.2 Le premesse e le definizioni *(fissate QUI)*
+
+- **Lo script delle misure di [M0908-M]** *(`caduta_libera_misure.py`, 54b1ab48)* **non e' ancora girato:** la v2 *(file nuovo)* e' la v1 riga per riga **piu' la spinta per regione**; la v1 non gira piu'.
+- **L'impulso: dal flusso `J`** *(lo strumento gia' nella v1: `spostamento_trasporto` a `0.5` su una copia, il `cs` e la fase della variante; `Jy` per nodo)*. **`P_R(k) = somma_{v in R(k)} Jy(v)`**, le regioni per distanza dal baricentro di `rho` DELLO STATO *(non dal centro di `k 0`)*: **nucleo** `r < 15`, **guscio** `15 <= r < 21`, **bordo** `21 <= r < 25`, **fuori** `r >= 25`. **La variazione** `dP_R(k) = P_R(k) - P_R(k - 250)`; **la cumulata** `P_R(k) - P_R(0)`. Accanto, la massa di ogni regione.
+- **Al netto di V0:** V0 parte dallo STESSO stato *(l'impronta del caso noto)*, quindi per V1-V4 e V1m **la spinta di `N`** in una regione = la cumulata della variante **meno** quella di V0 nella stessa regione. Stampo le due.
+- ### ⚠ **Che cosa la misura NON separa:** **le regioni sono anelli fissi attorno al baricentro**, e la materia che attraversa un confine porta con se' il suo impulso: **la variazione dell'impulso di un anello e' la forza su quell'anello PIU' il flusso d'impulso attraverso i suoi confini.** Lo dichiaro: e' la quantita' che il mandato chiede, non la forza locale.
+- **Il caso noto** *(il mandato)*: **(i)** in V0 la spinta per regione e' zero entro il rumore = per ogni regione la media delle `8` variazioni `dP_R` entro `3` errori standard *(`std/sqrt(8)`)* da `0`; **(ii)** la somma delle regioni = la spinta totale entro l'`1%`. ### ⚠ **(ii) e' vera PER COSTRUZIONE** *(le quattro regioni sono una partizione dei nodi)*: **controlla il codice, non la fisica** *(FALSO-UNO, dichiarato)*. **Accanto, un controllo che PUO' fallire** *(una lettura, non un DEVE)*: l'impulso totale `somma Jy` diviso la massa contro la velocita' del baricentro dalle differenze finite *(`(y(k+250) - y(k-250))/500`)*: devono avere lo stesso segno e lo stesso ordine di grandezza, se `J` misura davvero l'impulso.
+- **Il bivio, in numeri:** in V1, al netto di V0, a `k 2000`: **`quota = (|C_guscio| + |C_bordo|) / (|C_nucleo| + |C_guscio| + |C_bordo| + |C_fuori|)`** *(«in valore assoluto»)*; **«interfaccia» se `quota > 0.5`**, oppure se `a - a(V0)` del baricentro e del `rho` massimo hanno segni opposti **e tutti e due fuori dall'incertezza** *(il mio: un segno dentro l'incertezza non e' un segno)*. Accanto, `|C_guscio + C_bordo| / |C_totale|` e la quota di massa del guscio e del bordo.
+
+### 4.3 Le previsioni
+
+- **Del guardiano** *(copiate)*: **P-S1:** V1 cade VERSO il `N` piu' basso, piano (come l'11/11). `70%`. **P-S2:** la spinta di V1 sta all'interfaccia (il bivio: bordo + guscio oltre il `50%`). `55%`.
+- **Mie:** P-S1 `40%` *(il solitone di G1 andava VIA; la mia scommessa di cb23b30a: V1 VIA `60%`)*; P-S2 `50%`.
