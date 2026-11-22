@@ -1,0 +1,6 @@
+[TIMBRO] triangolo_chi_v3.py  sha1-BYTE 7bb324ea  committato e pulito
+[TIMBRO] triangolo_flussi.py  sha1-BYTE 4f282062  committato e pulito
+[TIMBRO] esporta_film_triangolo_v2.py  sha1-BYTE c2e35dfd  committato e pulito
+usage: esporta_film_triangolo_v2.py [-h] --quale {t120,t120r28} --da DA
+                                    --fino FINO --out OUT
+esporta_film_triangolo_v2.py: error: argument --quale: invalid choice: 't000' (choose from t120, t120r28)
