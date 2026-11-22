@@ -1,0 +1,114 @@
+[TIMBRO] collauda.py  sha1-BYTE c90f9aef  committato e pulito
+====================================================================================================
+TUTTI I COLLAUDI, CON I TEMPI   (punto 6)
+====================================================================================================
+  la macchina: Windows AMD64, python 3.13.2
+  il budget del `pre-commit`: 1800 s   ### e oltre il budget e- un SEGNALE, non un rifiuto
+
+  il collaudo                            dove         secondi  esito
+  ----------------------------------------------------------------------------------------------
+  il grafo valido                        pre-commit      0.69  ok
+  il determinismo                        pre-commit     10.89  ok
+  le simmetrie e le conservazioni        pre-commit      1.92  ok
+  lo schema della tabella                pre-commit      0.93  ok
+  il generatore                          pre-commit      3.68  ok
+  la struttura compatta delle estremita- pre-commit      0.42  ok
+  il motore: contenitore e pezzi unitari pre-commit      0.45  ok
+  il checkpoint e la ripresa             pre-commit      7.58  ok
+  il confronto tabella / banco           pre-commit      5.10  ok
+  la memoria: `m1`..`m4`                 pre-commit      2.34  ok
+  il flusso di saturazione               pre-commit      0.49  ok
+  il flusso materia-vuoto                pre-commit      0.54  ok
+  le forme del legame                    pre-commit      0.49  ok
+  `P3` l-energia e la corrente           pre-commit      0.40  ok
+  la corrente locale costruita           pre-commit    180.95  ok
+  la deriva di `E` e la sorgente         pre-commit     47.16  ok
+  il tempo proprio in TUTTE le leggi     pre-commit      0.49  ok
+  lo schema della camminata              pre-commit      0.25  ok
+  lo schema della configurazione         pre-commit      0.29  ok
+  `@rif` byte-inerte                     pre-commit      0.26  ok
+  il modello di sigillo                  pre-commit      1.97  ok
+  la catena                              pre-commit      4.85  ok
+  la GUIDA, eseguita                     pre-commit      2.58  ok
+  il referto dell-infrastruttura (LENTO) solo-CI        21.76  ok
+  la barriera dei hook                   pre-commit      0.86  ok
+  `P-ALB` l-albero delle scelte          pre-commit      8.70  ok
+  `P-ID` un id che nasce                 pre-commit      0.71  ok
+  `P-T2` il replay dei registri          pre-commit     10.30  ok
+  l-arbitro fra le due vie               pre-commit      0.59  ok
+  i presidi dell-indice                  pre-commit     10.68  ok
+  `P-REG` le regole di gestione          pre-commit      1.05  ok
+  il presidio sullo STOP                 pre-commit      0.58  ok
+  `P-E1`..`P-E5` i presidi dell-era 2    pre-commit      0.95  ok
+  `P-M1` il documento dei metodi         pre-commit      0.39  ok
+  `P-C1` i controlli nell-indice         pre-commit      2.17  ok
+  `P-T1` il testo non si interpreta      pre-commit      1.62  ok
+  `P-R1` ogni ramo e- dichiarato         pre-commit      3.17  ### FALLISCE (codice 1)
+  `P-T3` le citazioni strutturate        pre-commit      1.76  ok
+  `P-RIF` un ID nel codice e- un costrutto pre-commit      9.12  ok
+  `P-ES1` un solo esecutore              pre-commit     11.06  ok
+  `P-MOD` la modularita-                 pre-commit      6.49  ok
+  `P-AB` i confronti e i dati            pre-commit      0.31  ok
+  `P-TAB` la legge si legge dalla tabella pre-commit      9.75  ok
+  `D0` la forma `cs` spenta e' il passo di oggi pre-commit     10.30  ok
+  `D1` l-invarianza di scala             pre-commit      5.65  ok
+  `D2` `cs` al centro, a punto fisso     pre-commit      3.67  ok
+  `D2-T` il tetto di `Omega`, la tolleranza derivata pre-commit      0.39  ok
+  `R60` le rotazioni del reticolo commutano col tick di oggi pre-commit      1.44  ok
+  il censimento dei rami (NON blocca)    solo-CI         0.41  ok
+  chi la suite NON gira (NON blocca)     pre-commit      0.35  ok
+  `M-B1` PUO- fallire, ed e- provato     solo-CI        34.75  ok
+  i presidi dell-indice, nei due versi   pre-commit      6.00  ok
+  i controlli della migrazione           pre-commit      5.17  ok
+  il rinominamento, sul piano            pre-commit      0.53  ok
+  la FORMA dei testi generati            pre-commit      9.26  ok
+  i controlli sullo STAGE e non sul disco solo-CI        69.05  ok
+  la pulizia delle temporanee            pre-commit      0.60  ok
+  la simmetria `(P Theta)` sulla parte LINEARE pre-commit      2.29  ok
+  la `(P Theta)` col termine NON lineare, e `cs` nei due modi pre-commit      0.79  ok
+  la misura COMPLETA di `L2`, su piu- stati solo-CI        26.47  ok
+  `H_w`: l-energia PESATA, e se il passo con `cs` la conserva pre-commit     23.66  ok
+  il banco della camminata               pre-commit      1.05  ok
+  il banco della camminata v2            pre-commit      1.10  ok
+  il banco della camminata v3            pre-commit      1.26  ok
+  le letture del guscio e del moto       solo-CI        46.69  ok
+  il banco del v4                        pre-commit      5.40  ok
+  il banco del legame                    solo-CI        31.79  ok
+  ----------------------------------------------------------------------------------------------
+  IL TOTALE del `pre-commit`                           433.93
+  piu- i LENTI, solo in CI                             230.94
+  IN TUTTO                                             664.87
+
+  ### 1 COLLAUDI FALLISCONO:
+     `P-R1` ogni ramo e- dichiarato         `csv/_rami_era2.py --collaudo` -> codice 1
+        |   sul disco: `P-R1` TACE                                           ### FALLISCE   62 rami in 33 funzioni
+        |   ### il braccio sopra HA MATERIA (ci sono rami da dichiarare)     PASSA   62 rami: se fosse 0 il braccio sarebbe un FALSO-UNO. ### Erano 27, e il punto 15(b) n
+        |   ### DEVE scattare: una funzione con rami e NON dichiarata        PASSA   `A8`: un ramo silenzioso non e- un ramo
+        |   ### DEVE scattare: un CONTEGGIO che non coincide con l-AST       PASSA   ### un ramo NATO o MORTO senza che nessuno lo dicesse
+        |   ### DEVE scattare: un RUOLO fuori vocabolario                    PASSA   
+        |   ### DEVE scattare: un `perche-` troppo corto                     PASSA   ### dire QUANTI senza dire A CHE SERVONO non e- dichiararli
+        |   ### DEVE scattare: una riga DICHIARATA che l-AST non trova       PASSA   
+        |   NON deve scattare: rimesso tutto a posto, `P-R1` TACE            ### FALLISCE   ### i bracci di sopra scattavano per i loro casi finti
+        |   `15(b)` i DEFAULT nelle firme della fisica sono ZERO             PASSA   ### erano NOVE il 2026-10-09, e il punto 15(b) li ha TOLTI
+        |   ### DEVE scattare: un default in una firma di fisica             PASSA   ### misurato su una COPIA del sorgente, non sul file vero
+        |   ### e i `default` NON sono piu- nella tabella dei ruoli          PASSA   ### il debito e- PAGATO: 27 rami -> 19, e 9 default -> 0
+        |   ### ogni LEGAME generato ha ESATTAMENTE la sua guardia (contata, non dichiarata) PASSA   ### 9 legami generati, 0 senza la loro guardia. ### L-errore che la g
+        |   ### il FONDO dell-albero finto e' noto, e i bracci guardano la DIFFERENZA PASSA   ### 19 errori di fondo (le righe vere citano funzioni che il finto non ha), 
+        |   ### ① DEVE fallire: un ramo NUOVO non dichiarato in un file del NUCLEO PASSA   ### 1 errori NUOVI, e il nucleo derivato dalla mappa finta e' 5 file
+        |   ### ② DEVE fallire: un `default` in una firma del NUCLEO (tetto ZERO) PASSA   ### 1 errori NUOVI
+        |   ### ③ DEVE fallire: un file che ENTRA nel nucleo per import, coi suoi rami PASSA   ### senza l-import: 0 errori nuovi; con l-import: 1. ### Il file e' lo STES
+        |   ### (c) DEVE PASSARE: un ramo nuovo in un COLLAUDO fuori dal nucleo PASSA   ### 0 errori nuovi: fuori dal nucleo `P-R1` NON si applica, e il collaudo finto ha
+        | ====================================================================================================
+        | IL COLLAUDO DI `P-R1`: 15 su 17   ### CI SONO BUCHI
+        | ====================================================================================================
+  ### il `pre-commit` sta nel budget: 433.9 s su 1800 s (24%)
+====================================================================================================
+
+  ### ⛔ LA SUITE HA SPORCATO 1 FILE, e un collaudo deve lasciare l-albero come l-ha trovato:
+     db_era2/stato_0bc547638e.npz.timbro.json
+  ### Vuol dire che un file GENERATO e COMMITTATO e- SCADUTO: il commit
+  ### che ha cambiato cio- che quel file racconta NON HA PORTATO IL SUO
+  ### GENERATO. ### I byte si RIMETTONO A POSTO adesso, e il difetto RESTA
+  ### SCRITTO QUI: rimetterli a posto in silenzio sarebbe nasconderlo.
+  ### byte RIMESSI A POSTO: 1 file
+====================================================================================================

@@ -1,6 +1,9 @@
 # IL NUCLEO DEL PRINCIPALE E' CONGELATO
 
-stato: CONGELATO
+stato: SBLOCCATO
+decisione_di_luca: 2026-11-22 16:31, "niente era 3; si lavora qui, toccando il core in questo modo": le forme della non linearità come opzioni della legge CAMM-MATERIA-VUOTO, F0 predefinita; il mandato [M1631]
+
+> ### **SBLOCCATO sul ramo `lapse-u`** *(il worktree `wt_lapse_u`; la decisione di Luca sulla sez. 5 della carta del torneo, 2026-11-22 dopo le `19:00`)* **SOLO per il commit del nucleo del passo 3 di [M1631]**: le forme `L+0.5` ... `L-1`, `FH`, `FT` come OPZIONI di `CAMM-MATERIA-VUOTO`, `S1` predefinita. **Si RICONGELA nel commit dopo le suite** *(`collauda.py` a F0 al bit, la ripresa di uno stato di oggi al bit: `doc/referti_l2/ripresa_F0_v2.py`)*. **Il merge su `primo-ordine` NON ora.** *(Il presidio `H-NUCLEO-CONGELATO` agisce solo sul ramo `primo-ordine`: qui la procedura si segue alla lettera, non e' imposta.)*
 
 > **Ricongelato il 2026-11-16 dopo la riunione di numba** *(sbloccato SOLO per il merge `ca55169e`, con la riga di Luca delle `16:10`; le tre suite `67/67` dopo il merge)*.
 

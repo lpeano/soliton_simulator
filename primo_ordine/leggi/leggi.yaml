@@ -544,6 +544,14 @@ leggi:
         ammessi:
           S1: rho - Lambda*atan(rho/Lambda)
           S3: rho*log(rho/(rho + Lambda))
+          L+0.5: 0.5*(rho - Lambda*atan(rho/Lambda))
+          L+0.25: 0.25*(rho - Lambda*atan(rho/Lambda))
+          L0: 0
+          L-0.25: -0.25*(rho - Lambda*atan(rho/Lambda))
+          L-0.5: -0.5*(rho - Lambda*atan(rho/Lambda))
+          L-1: -(rho - Lambda*atan(rho/Lambda))
+          FH: rho - 2*Lambda*atan(rho/Lambda)
+          FT: Lambda*(log(cosh(rho/Lambda - 1)) - log(cosh(1)))
         origine: >-
           ### LA DECISIONE DI LUCA, NON UNA TARATURA (2026-11-01 16:52; la decisione (1) delle 01:27): il nucleo usa
           `S1`, la forma con cui sono misurati il solitone protetto, le bande piatte, la regola dei livelli e il
@@ -551,6 +559,11 @@ leggi:
           risultati vecchi (`materia_vuoto.scegli`, `forma_esplicita`). ### NESSUNA COSTANTE: `x = rho/Lambda`,
           `N = Lambda (x - arctan x)`, le espressioni di `csv/_screening_forme_s3._ab("S1")` e
           `csv/_scomposizione_solitone.F1`; nessun `g` (a `g 1` il fattore di `csv/_livelli_piatti` vale `1`).
+          ### E DAL 2026-11-22 (il mandato [M1631] di Luca, il torneo delle forme; sul ramo `lapse-u`, la riga in
+          `doc/NUCLEO_CONGELATO.md`) SONO AMMESSE ANCHE `L+0.5`, `L+0.25`, `L0`, `L-0.25`, `L-0.5`, `L-1` (`lambda` volte
+          `S1`: `lambda` e' il NOME della forma, i sei valori del mandato), `FH` (`N = Lambda (x - 2 arctan x)`) e `FT`
+          (`N = Lambda (ln cosh(x - 1) - ln cosh 1)`): OPZIONI ESPLICITE come `S3`, `S1` resta la predefinita
+          (`doc/CARTA_torneo_nonlinearita.md`, sez. 1).
     simmetrie: [U1-FASE-GLOBALE]
     conserva: [NORMA]
     scheda: >-
