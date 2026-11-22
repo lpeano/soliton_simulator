@@ -1,0 +1,78 @@
+{
+ "corse": {
+  "M_k0.000_a1": {
+   "stato": "IN CORSA",
+   "pid": 35156,
+   "lanciata": "2026-11-22T15:06:55",
+   "processi_prima": 2,
+   "gb": 16.66,
+   "registro": 0
+  },
+  "M_k0.010_a1": {
+   "stato": "IN CORSA",
+   "pid": 32440,
+   "lanciata": "2026-11-22T15:06:56",
+   "processi_prima": 3,
+   "gb": 16.63,
+   "registro": 0
+  },
+  "V4_Nm": {
+   "stato": "IN CORSA",
+   "pid": 29216,
+   "lanciata": "2026-11-22T15:06:58",
+   "processi_prima": 4,
+   "gb": 16.5,
+   "registro": 0
+  },
+  "V4_Np": {
+   "stato": "IN CORSA",
+   "pid": 10500,
+   "lanciata": "2026-11-22T15:06:59",
+   "processi_prima": 5,
+   "gb": 16.32,
+   "registro": 0
+  },
+  "Q_tenuta_x0.8": {
+   "stato": "IN CORSA",
+   "pid": 24268,
+   "lanciata": "2026-11-22T15:07:01",
+   "processi_prima": 6,
+   "gb": 16.13,
+   "registro": 0
+  },
+  "Q_tenuta_x1.2": {
+   "stato": "IN CORSA",
+   "pid": 28260,
+   "lanciata": "2026-11-22T15:07:02",
+   "processi_prima": 7,
+   "gb": 15.87,
+   "registro": 0
+  },
+  "V4_N1": {
+   "stato": "IN CORSA",
+   "pid": 25884,
+   "lanciata": "2026-11-22T15:07:04",
+   "processi_prima": 8,
+   "gb": 15.93,
+   "registro": 0
+  },
+  "M_k0.010_a2": {
+   "stato": "IN CORSA",
+   "pid": 9476,
+   "lanciata": "2026-11-22T15:07:06",
+   "processi_prima": 9,
+   "gb": 15.69,
+   "registro": 0
+  }
+ },
+ "eventi": [
+  "2026-11-22T15:06:55 LANCIATA M_k0.000_a1 (pid 35156; i processi prima 2, la CPU stimata 3/12; 16.7 GB)",
+  "2026-11-22T15:06:56 LANCIATA M_k0.010_a1 (pid 32440; i processi prima 3, la CPU stimata 4/12; 16.6 GB)",
+  "2026-11-22T15:06:58 LANCIATA V4_Nm (pid 29216; i processi prima 4, la CPU stimata 5/12; 16.5 GB)",
+  "2026-11-22T15:06:59 LANCIATA V4_Np (pid 10500; i processi prima 5, la CPU stimata 6/12; 16.3 GB)",
+  "2026-11-22T15:07:01 LANCIATA Q_tenuta_x0.8 (pid 24268; i processi prima 6, la CPU stimata 7/12; 16.1 GB)",
+  "2026-11-22T15:07:02 LANCIATA Q_tenuta_x1.2 (pid 28260; i processi prima 7, la CPU stimata 8/12; 15.9 GB)",
+  "2026-11-22T15:07:04 LANCIATA V4_N1 (pid 25884; i processi prima 8, la CPU stimata 9/12; 15.9 GB)",
+  "2026-11-22T15:07:06 LANCIATA M_k0.010_a2 (pid 9476; i processi prima 9, la CPU stimata 10/12; 15.7 GB)"
+ ]
+}
