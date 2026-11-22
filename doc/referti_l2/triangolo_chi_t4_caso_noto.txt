@@ -1,0 +1,13 @@
+[TIMBRO] notte_m0428.py  sha1-BYTE 3872b321  committato e pulito
+==================================================================================================================================
+[M2357-T4] IL CASO NOTO VERO DEGLI ARCHI MATURI (Luca 04:18): |Theta| a k 3000 contro la media nel tempo di |D(dtau cs)|; 16 su 20 e il rango >= 0.9; DEVE FALLIRE con il solo stato di k 3000
+==================================================================================================================================
+### gli stati 250 ... 3000 (12; k 0 non salvato); gli archi 103788; max |Theta| 0.259904
+### la media nel tempo: in comune coi 20 piu' maturi 14 su 20, il rango (Spearman su tutti gli archi) 0.9999
+### il solo stato di k 3000: 0 su 20, il rango 0.9994
+  T4 CASO NOTO: |Theta| contro la media nel tempo di |D(dtau cs)|, 16 su 20 e il rango >= 0.9                      ### FALLISCE   14, 0.9999
+  T4 DEVE FALLIRE: con il solo stato di k 3000 (meno di 16 su 20 o il rango sotto 0.9)                             PASSA   0, 0.9994
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: T4 CASO NOTO: |Theta| contro la media nel tempo di |D(dtau cs)|, 16 su 20 e il rango >= 0.9                    ### FALLISCE
+  DEVE: T4 DEVE FALLIRE: con il solo stato di k 3000 (meno di 16 su 20 o il rango sotto 0.9)                           PASSA
+==================================================================================================================================
