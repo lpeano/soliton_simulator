@@ -1,0 +1,92 @@
+[TIMBRO] girandola_chi_v4.py  sha1-BYTE ea1ccd0a  committato e pulito
+==================================================================================================================================
+IL CASO NOTO (le mappe del 15/11; la carta sez. 2): la rotazione +5.1, +5.1, +5.2 (0.1); le pale a k 2000 e in [0.13, 0.16], l'asse -51 (3); l'anello 10-16 delle sfasate a k 0 -574 (1%)
+==================================================================================================================================
+### triangolo_t120_mappe.npz sha1 13b90cf0; triangolo_flussi.npz sha1 c4e405af
+### (a) la rotazione del t120 a k 2000 (i centri delle mappe, attorno alla loro media): +5.138, +5.109, +5.184 gradi
+### (c) le pale a k 2000: la misura a = (l1 - l2)/(l1 + l2) 0.1258, 0.1513, 0.1593; la lettura e = sqrt(1 - l2/l1) 0.4727, 0.5126, 0.5242; l'asse dalla radiale -51.56, -51.08, -50.04 gradi; il raggio quadratico medio 11.827, 11.802, 11.794
+### (d) l'anello 10-16 delle sfasate a k 0, attorno alla media dei centri ['99.312', '80.551']: -573.526
+### (d) l'anello 10-16 IN FASE a k 0, attorno alla media dei centri ['99.363', '80.604']: -658.415
+  CASO NOTO (a): la rotazione dei tre vertici entro 0.1 da +5.1, +5.1, +5.2                                        PASSA   +5.138, +5.109, +5.184
+  CASO NOTO (c): le tre a in [0.125, 0.16] e gli assi entro 3 da -51 (Luca 03:48)                                  PASSA   0.1258, 0.1513, 0.1593
+  CASO NOTO (d): l'anello 10-16 delle sfasate a k 0 entro l'1% da -574                                             PASSA   -573.526
+  CASO NOTO (d) IN FASE: l'anello 10-16 a k 0 entro l'1% da -658 (M0333)                                           PASSA   -658.415
+==================================================================================================================================
+LA GIRANDOLA t120, IL BLOCCO k 20000-22000 (girandola_t120_20000_22000.npz, sha1 6fa08e86)
+==================================================================================================================================
+  k 20250  G_k ['-1.277', '-0.923'] (dal G0)  (a) i lati 52.458, 51.488, 50.934, col rho massimo 51.03, 51.57, 55.00; il raggio medio 29.807
+           (b) i centri (baricentri) [['-27.77', '-14.76'], ['+24.66', '-16.40'], ['-0.72', '+28.40']]; (rho massimo) [['-28.0', '-15.6'], ['+23.0', '-13.9'], ['-0.5', '+32.0']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.2198, 0.1145, 0.0315; la lettura e 0.6004, 0.4532, 0.2469; l'asse +61.41, +50.50, +62.36 gradi; il raggio quadratico medio 9.813, 10.537, 10.594
+           (d) attorno a G_k: 0-3 +1.3543e-01; 3-6 -7.0666e-01; 6-10 +3.2855e+01; 10-16 +1.4338e+03; 16-30 +1.8402e+04; 0-45 +3.3416e+04
+           (d) attorno alle pale: 0-6 -4.266e+01, 6-12 +2.550e+02, 12-18 -5.734e+01 | 0-6 +5.631e+01, 6-12 -3.892e+02, 12-18 +5.967e+01 | 0-6 -5.575e+01, 6-12 -1.197e+02, 12-18 -2.482e+02
+           (e) il buco: rho entro 2 1.1930e+00; la mediana dell'anello 11-13 9.4686e+01; il rapporto 1.2599e-02
+           (f) chi al centro 13.236932; ai centri delle pale 17.328781, 18.194567, 18.904009; lungo il lato 0-1 (41 punti) min 11.731420, max 18.431736, ai capi 17.328781 e 18.194567, a meta' 11.836737
+  k 20500  G_k ['-1.362', '-0.967'] (dal G0)  (a) i lati 53.043, 51.874, 51.267, col rho massimo 52.51, 50.69, 56.11; il raggio medio 30.058
+           (b) i centri (baricentri) [['-28.22', '-14.72'], ['+24.79', '-16.69'], ['-0.66', '+28.51']]; (rho massimo) [['-31.5', '-18.2'], ['+21.0', '-17.3'], ['-0.5', '+28.6']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.2680, 0.1375, 0.0494; la lettura e 0.6502, 0.4917, 0.3067; l'asse +63.41, +55.27, +75.85 gradi; il raggio quadratico medio 9.807, 10.578, 10.638
+           (d) attorno a G_k: 0-3 -2.0106e-01; 3-6 +2.9046e+00; 6-10 +5.8746e+01; 10-16 +1.5398e+03; 16-30 +1.7659e+04; 0-45 +3.5414e+04
+           (d) attorno alle pale: 0-6 -5.957e+00, 6-12 +3.002e+02, 12-18 -1.444e+02 | 0-6 -8.180e+00, 6-12 -2.549e+02, 12-18 -2.771e+02 | 0-6 -2.474e+00, 6-12 -8.060e+01, 12-18 -4.196e+02
+           (e) il buco: rho entro 2 1.3773e+00; la mediana dell'anello 11-13 9.0066e+01; il rapporto 1.5292e-02
+           (f) chi al centro 12.806417; ai centri delle pale 16.913008, 18.069105, 18.786522; lungo il lato 0-1 (41 punti) min 11.315833, max 18.310406, ai capi 16.913008 e 18.069105, a meta' 11.446568
+  k 20750  G_k ['-1.463', '-1.005'] (dal G0)  (a) i lati 53.692, 52.273, 51.619, col rho massimo 53.67, 58.66, 56.00; il raggio medio 30.327
+           (b) i centri (baricentri) [['-28.72', '-14.65'], ['+24.92', '-16.99'], ['-0.59', '+28.63']]; (rho massimo) [['-27.5', '-14.7'], ['+26.0', '-19.1'], ['+0.5', '+33.8']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.3123, 0.1608, 0.0618; la lettura e 0.6899, 0.5263, 0.3412; l'asse +63.97, +58.13, +79.19 gradi; il raggio quadratico medio 9.770, 10.538, 10.716
+           (d) attorno a G_k: 0-3 -1.2867e+00; 3-6 -1.7419e+00; 6-10 +9.5637e+01; 10-16 +1.1961e+03; 16-30 +1.7448e+04; 0-45 +3.7661e+04
+           (d) attorno alle pale: 0-6 -3.207e+01, 6-12 +3.118e+02, 12-18 -3.126e+02 | 0-6 +8.695e+01, 6-12 -2.538e+02, 12-18 -2.115e+02 | 0-6 -4.698e+00, 6-12 -1.914e+02, 12-18 -2.522e+02
+           (e) il buco: rho entro 2 1.7636e+00; la mediana dell'anello 11-13 6.9587e+01; il rapporto 2.5344e-02
+           (f) chi al centro 12.396036; ai centri delle pale 16.785789, 17.756384, 18.512407; lungo il lato 0-1 (41 punti) min 10.875420, max 18.012276, ai capi 16.785789 e 17.756384, a meta' 11.055828
+  k 21000  G_k ['-1.590', '-1.057'] (dal G0)  (a) i lati 54.433, 52.703, 52.015, col rho massimo 57.65, 57.65, 57.65; il raggio medio 30.628
+           (b) i centri (baricentri) [['-29.30', '-14.60'], ['+25.07', '-17.32'], ['-0.54', '+28.75']]; (rho massimo) [['-32.0', '-13.9'], ['+25.0', '-22.5'], ['+4.0', '+31.2']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.3568, 0.1854, 0.0570; la lettura e 0.7252, 0.5593, 0.3284; l'asse +64.37, +58.63, +85.00 gradi; il raggio quadratico medio 9.808, 10.475, 10.776
+           (d) attorno a G_k: 0-3 -1.1172e-01; 3-6 +1.4509e+00; 6-10 +5.3305e+01; 10-16 +7.4764e+02; 16-30 +1.8034e+04; 0-45 +3.9738e+04
+           (d) attorno alle pale: 0-6 -4.179e+01, 6-12 +2.783e+02, 12-18 -5.615e+02 | 0-6 +2.298e+01, 6-12 -7.828e+01, 12-18 -4.817e+02 | 0-6 -5.036e+00, 6-12 -1.201e+02, 12-18 -2.973e+02
+           (e) il buco: rho entro 2 1.7327e+00; la mediana dell'anello 11-13 2.4631e+01; il rapporto 7.0348e-02
+           (f) chi al centro 12.030960; ai centri delle pale 16.550814, 17.530268, 18.172491; lungo il lato 0-1 (41 punti) min 10.500668, max 17.611872, ai capi 16.550814 e 17.530268, a meta' 10.715851
+  k 21250  G_k ['-1.740', '-1.116'] (dal G0)  (a) i lati 55.232, 53.174, 52.451, col rho massimo 61.02, 63.02, 59.03; il raggio medio 30.957
+           (b) i centri (baricentri) [['-29.93', '-14.55'], ['+25.21', '-17.67'], ['-0.50', '+28.87']]; (rho massimo) [['-30.0', '-17.3'], ['+31.0', '-19.1'], ['-2.0', '+34.6']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.3953, 0.2185, 0.0557; la lettura e 0.7527, 0.5988, 0.3248; l'asse +66.15, +59.09, -86.22 gradi; il raggio quadratico medio 9.898, 10.441, 10.918
+           (d) attorno a G_k: 0-3 +2.8675e-01; 3-6 -2.5496e+00; 6-10 -1.7020e+00; 10-16 +4.1858e+02; 16-30 +1.7558e+04; 0-45 +4.1890e+04
+           (d) attorno alle pale: 0-6 +1.208e+02, 6-12 +1.875e+01, 12-18 -4.554e+01 | 0-6 +4.752e+01, 6-12 -2.454e+02, 12-18 -6.638e+02 | 0-6 -6.757e+01, 6-12 +4.116e+01, 12-18 -2.252e+02
+           (e) il buco: rho entro 2 1.4523e+00; la mediana dell'anello 11-13 5.0906e+00; il rapporto 2.8529e-01
+           (f) chi al centro 11.482005; ai centri delle pale 16.206915, 17.342537, 17.700102; lungo il lato 0-1 (41 punti) min 9.903977, max 17.390882, ai capi 16.206915 e 17.342537, a meta' 10.003959
+  k 21500  G_k ['-1.905', '-1.188'] (dal G0)  (a) i lati 56.105, 53.693, 52.914, col rho massimo 56.67, 57.66, 57.11; il raggio medio 31.314
+           (b) i centri (baricentri) [['-30.61', '-14.51'], ['+25.38', '-18.06'], ['-0.49', '+29.00']]; (rho massimo) [['-30.0', '-15.6'], ['+26.5', '-19.9'], ['+1.5', '+32.0']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.4224, 0.2610, 0.0625; la lettura e 0.7707, 0.6433, 0.3431; l'asse +67.61, +60.40, -81.74 gradi; il raggio quadratico medio 9.965, 10.451, 11.052
+           (d) attorno a G_k: 0-3 +2.7623e-01; 3-6 +2.0976e-01; 6-10 -7.2089e+00; 10-16 -4.6135e+01; 16-30 +1.6405e+04; 0-45 +4.3514e+04
+           (d) attorno alle pale: 0-6 -6.020e+01, 6-12 +1.506e+02, 12-18 -6.076e+01 | 0-6 +3.958e+01, 6-12 -7.530e+01, 12-18 -1.275e+03 | 0-6 -3.438e+01, 6-12 -2.903e+01, 12-18 -8.297e+01
+           (e) il buco: rho entro 2 1.5126e+00; la mediana dell'anello 11-13 1.8675e+00; il rapporto 8.0996e-01
+           (f) chi al centro 10.830887; ai centri delle pale 15.521404, 17.174412, 17.317026; lungo il lato 0-1 (41 punti) min 9.212335, max 17.238983, ai capi 15.521404 e 17.174412, a meta' 9.428037
+  k 21750  G_k ['-2.072', '-1.254'] (dal G0)  (a) i lati 57.042, 54.267, 53.414, col rho massimo 59.91, 56.24, 54.01; il raggio medio 31.701
+           (b) i centri (baricentri) [['-31.33', '-14.45'], ['+25.57', '-18.46'], ['-0.47', '+29.15']]; (rho massimo) [['-31.0', '-8.7'], ['+28.0', '-19.1'], ['+4.5', '+32.0']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.4527, 0.2956, 0.0758; la lettura e 0.7895, 0.6755, 0.3755; l'asse +69.15, +62.54, -77.05 gradi; il raggio quadratico medio 9.976, 10.399, 11.147
+           (d) attorno a G_k: 0-3 -5.1601e-01; 3-6 -2.6821e+00; 6-10 +1.4414e+01; 10-16 -2.8431e+02; 16-30 +1.5205e+04; 0-45 +4.3393e+04
+           (d) attorno alle pale: 0-6 -4.212e+01, 6-12 +1.940e+02, 12-18 +3.128e+01 | 0-6 +5.541e+01, 6-12 -6.111e+01, 12-18 -1.197e+03 | 0-6 -4.425e+01, 6-12 +2.952e+01, 12-18 -1.058e+02
+           (e) il buco: rho entro 2 1.3626e+00; la mediana dell'anello 11-13 1.6777e+00; il rapporto 8.1218e-01
+           (f) chi al centro 10.389855; ai centri delle pale 14.958219, 17.299541, 17.134417; lungo il lato 0-1 (41 punti) min 8.851162, max 17.354267, ai capi 14.958219 e 17.299541, a meta' 9.085871
+  k 22000  G_k ['-2.240', '-1.334'] (dal G0)  (a) i lati 58.050, 54.886, 53.944, col rho massimo 59.81, 56.67, 67.02; il raggio medio 32.115
+           (b) i centri (baricentri) [['-32.07', '-14.41'], ['+25.80', '-18.90'], ['-0.45', '+29.30']]; (rho massimo) [['-31.5', '-23.4'], ['+28.0', '-17.3'], ['+3.5', '+33.8']]
+           (c) le pale: a = (l1-l2)/(l1+l2) 0.4877, 0.3274, 0.0877; la lettura e 0.8097, 0.7024, 0.4016; l'asse +70.04, +63.78, -75.61 gradi; il raggio quadratico medio 10.077, 10.224, 11.119
+           (d) attorno a G_k: 0-3 +3.1433e-01; 3-6 -1.7901e+00; 6-10 -5.2853e+00; 10-16 -2.3204e+02; 16-30 +1.2110e+04; 0-45 +4.2390e+04
+           (d) attorno alle pale: 0-6 -6.391e+01, 6-12 +4.503e+02, 12-18 +3.972e+01 | 0-6 +3.020e+01, 6-12 -1.340e+02, 12-18 -1.120e+03 | 0-6 -8.172e+01, 6-12 -5.644e+01, 12-18 -8.124e-01
+           (e) il buco: rho entro 2 1.6275e+00; la mediana dell'anello 11-13 1.7718e+00; il rapporto 9.1856e-01
+           (f) chi al centro 10.016771; ai centri delle pale 14.702927, 17.180395, 17.025970; lungo il lato 0-1 (41 punti) min 8.490338, max 17.330412, ai capi 14.702927 e 17.180395, a meta' 8.626478
+  (a) la rotazione (gradi, dal primo stato del blocco; i baricentri): k 20250: +0.000, +0.000, +0.000; k 20500: -0.463, -0.192, -0.280; k 20750: -0.981, -0.385, -0.594; k 21000: -1.528, -0.548, -0.922; k 21250: -2.097, -0.724, -1.268; k 21500: -2.688, -0.890, -1.600; k 21750: -3.300, -1.069, -1.934; k 22000: -3.912, -1.224, -2.245
+  (a) la rotazione (il rho massimo): k 20250: +0.00, +0.00, +0.00; k 20500: -2.46, -0.66, -3.40; k 20750: -3.71, -5.22, +1.04; k 21000: -10.80, -7.98, -6.19; k 21250: -2.72, +0.14, +5.16; k 21500: -5.96, -3.97, -1.29; k 21750: -14.38, -6.04, -5.00; k 22000: +1.62, +2.47, -3.09
+  (e) l'avvolgimento a k 20250 sul cerchio di raggio 5 attorno a G_k: -1.0000 (la componente 0), arrotondato -1
+  (e) l'avvolgimento a k 20500 sul cerchio di raggio 5 attorno a G_k: -2.0000 (la componente 0), arrotondato -2
+  (e) l'avvolgimento a k 20750 sul cerchio di raggio 5 attorno a G_k: +1.0000 (la componente 0), arrotondato 1
+  (e) l'avvolgimento a k 21000 sul cerchio di raggio 5 attorno a G_k: +0.0000 (la componente 0), arrotondato 0
+  (e) l'avvolgimento a k 21250 sul cerchio di raggio 5 attorno a G_k: +0.0000 (la componente 0), arrotondato 0
+  (e) l'avvolgimento a k 21500 sul cerchio di raggio 5 attorno a G_k: -3.0000 (la componente 0), arrotondato -3
+  (e) l'avvolgimento a k 21750 sul cerchio di raggio 5 attorno a G_k: +0.0000 (la componente 0), arrotondato 0
+  (e) l'avvolgimento a k 22000 sul cerchio di raggio 5 attorno a G_k: -1.0000 (la componente 0), arrotondato -1
+==================================================================================================================================
+M2: IL MATTONE SOLO DELLA CORSA NUOVA (chi curato) A k 22000: (d) e (e) attorno al centro del meta
+==================================================================================================================================
+### stato_22000.npz NON c'e' ancora: M2 al giro dopo
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: CASO NOTO (a): la rotazione dei tre vertici entro 0.1 da +5.1, +5.1, +5.2                                      PASSA
+  DEVE: CASO NOTO (c): le tre a in [0.125, 0.16] e gli assi entro 3 da -51 (Luca 03:48)                                PASSA
+  DEVE: CASO NOTO (d): l'anello 10-16 delle sfasate a k 0 entro l'1% da -574                                           PASSA
+  DEVE: CASO NOTO (d) IN FASE: l'anello 10-16 a k 0 entro l'1% da -658 (M0333)                                         PASSA
+==================================================================================================================================
