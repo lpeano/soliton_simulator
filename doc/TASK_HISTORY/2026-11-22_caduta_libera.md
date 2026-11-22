@@ -102,3 +102,27 @@
 - [ ] [M0908-K] `caduta_libera.py` *(la scena, `A`, il caso noto, la corsa di una variante)*, il caso noto girato e committato;
 - [ ] [M0908-R] le sei corse *(nel tetto: al piu' `3` nuove insieme con `7` processi vivi; una alla volta se la CPU e' sopra il `90%`)*, le voci nel registro;
 - [ ] [M0908-M] `caduta_libera_misure.py`, il referto, il film; la relazione nel ramo principale; **FERMO**.
+
+## 3. [M2357-T4] LO SBLOCCO DEL CASO NOTO VERO *(la DECISIONE di Luca delle `09:08`; scritta PRIMA del codice `doc/referti_l2/t4_sblocco.py` e dei numeri)*
+
+### 3.1 La decisione *(copiata)*
+
+> «SBLOCCO DEL CASO NOTO VERO (DECISIONE DI LUCA, 09:08; l'errore n.215 del guardiano: «16 su 20» era troppo rigido con archi a pari merito): passa se la correlazione di rango fra |Θ| e la media nel tempo di |Δ(dtau·cs)| sui 1000 archi più maturi è ≥ 0,9 (misurato 0,9999), E i 20 archi scelti dalla media hanno |Θ| entro l'1% della soglia dei 20 più maturi. Il deve-fallire resta quello con il solo stato di k 3000. Se passa, T4 riprende.»
+
+### 3.2 Le premesse dal codice
+
+- **I dati e le righe** sono quelli di `notte_m0428_v3.t4` *(9f9f2e49, il referto `doc/referti_l2/triangolo_chi_t4_caso_noto.txt`)*: `CHI/mattone`, gli stati `250 ... 3000` *(`k 0` non salvato)*, `|Theta|` a `k 3000`, `d = dtau s exp(-kappa chi)` per stato, `|d_i - d_j|` per arco, la media sui `12` stati.
+- ### ⚠ **«0,9999» del mandato e' il rango su TUTTI i `103788` archi**, non sui `1000` piu' maturi: **il criterio nuovo e' su un insieme diverso, e il numero puo' cambiare.** Lo dichiaro.
+- **Le definizioni, fissate QUI:** **i `1000` piu' maturi** = i `1000` archi con `|Theta|` piu' alto a `k 3000`; **il rango** = Pearson fra i ranghi *(`argsort(argsort)`, come la v3)* ristretto a quei `1000`; **la soglia** `T20` = il `20`-esimo `|Theta|` piu' alto; **«entro l'`1%`»** = il minimo di `|Theta|` sui `20` archi con la media piu' alta *(su tutti gli archi)* `>= 0.99 T20`.
+- **Il deve-fallire:** gli stessi due controlli con il solo stato di `k 3000` al posto della media: **almeno uno dei due deve cadere.**
+
+### 3.3 Le previsioni *(mie, prima dei numeri)*
+
+- **la media:** il rango sui `1000` `>= 0.9` `80%`; i `20` scelti entro l'`1%` `70%` *(la v3: `14` su `20` in comune, i primi archi quasi alla pari)*;
+- **il solo `k 3000`:** cade `85%` *(la v3: `0` su `20` in comune)*.
+
+### 3.4 Se passa
+
+**T4 riprende:** il giro delle misure in corsa dei tronchi *(sez. `2` e `5` della carta del triangolo)* col caso noto NUOVO al posto del guscio `17-20` *(che la mia premessa sbagliata aveva fissato: 06a9fadb)*, in un file nuovo `triangolo_chi_misure_v2.py`, al `k 8000` *(il primo `k 3000 + 5000`)*. **Se non passa: FERMO su T4, coi numeri.**
+
+**I processi:** il tetto e' pieno *(le tre catene della caduta, 10 python)*; **lo sblocco parte quando si libera un posto.**
