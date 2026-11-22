@@ -591,3 +591,4 @@
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "gravita-S-on", "ora": "2026-11-22T06:11:52+01:00", "punto": "k 3000 (uscita 0)"}
 - {"copiata_alla_chiusura": true, "ev": "TAPPA", "nome": "gravita-F-off", "ora": "2026-11-22T06:00:34+01:00", "punto": "k 2497; 1.442 s per tick"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "gravita-F-off", "ora": "2026-11-22T06:11:54+01:00", "punto": "k 3000 (uscita 0)"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "gravita-S-off", "ora": "2026-11-22T07:11:47+01:00", "punto": "k 3000 (uscita 0)"}
