@@ -763,3 +763,7 @@
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-Q_x0.8_caduta_V3", "ora": "2026-11-22T16:29:05+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-Q_x1.2_caduta_V2", "ora": "2026-11-22T16:41:03+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-Q_x1.2_caduta_V3", "ora": "2026-11-22T16:44:38+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-F_D60", "ora": "2026-11-22T17:06:58+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-F_D90", "ora": "2026-11-22T17:07:08+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-F_D270", "ora": "2026-11-22T17:12:56+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-F_D180", "ora": "2026-11-22T17:13:00+01:00", "punto": "uscita 0"}

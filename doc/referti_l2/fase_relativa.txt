@@ -1,0 +1,21 @@
+[TIMBRO] gravita_due_corpi_d.py  sha1-BYTE fb3c6840  committato e pulito
+[TIMBRO] gravita_due_corpi_misure.py  sha1-BYTE 7d739a8f  committato e pulito
+[TIMBRO] gravita_fase.py  sha1-BYTE 1c771cab  committato e pulito
+==================================================================================================================================
+[M1446-F] G+U (kappa = 0) CONTRO LA FASE RELATIVA delta, d 39 (la carta sez. 2.2): a da D(k) dei baricentri; il fit A cos(delta) + B
+==================================================================================================================================
+  F-off    delta   0.0 gradi (le fasi del meta [0.0, 0.0]): D da 38.6813 a 32.0000; a -1.2603e-06 +- 1.8e-08 (il residuo 2.51e-02)
+  S-off    delta 120.0 gradi (le fasi del meta [0.0, 119.99999999999999]): D da 39.1447 a 39.0639; a -3.1597e-07 +- 1.5e-08 (il residuo 2.16e-02)
+  D90-off  delta  90.0 gradi (le fasi del meta [0.0, 90.0]): D da 38.9752 a 37.0900; a -5.7442e-07 +- 1.3e-08 (il residuo 1.75e-02)
+  D60-off  delta  60.0 gradi (le fasi del meta [0.0, 60.0]): D da 38.8159 a 34.6673; a -9.0328e-07 +- 9.9e-09 (il residuo 1.38e-02)
+  D180-off delta 180.0 gradi (le fasi del meta [0.0, 180.0]): D da 39.3400 a 41.7213; a +2.3511e-07 +- 1.7e-08 (il residuo 2.36e-02)
+  D270-off delta 270.0 gradi (le fasi del meta [0.0, 270.0]): D da 39.0405 a 37.1265; a -5.2944e-07 +- 7.7e-09 (il residuo 1.08e-02)
+----------------------------------------------------------------------------------------------------------------------------------
+  il fit pesato a = A cos(delta) + B: A -7.1016e-07 +- 1.0e-08, B -5.5076e-07 +- 4.8e-09; lo scarto massimo 1.203e-07 = 0.169 |A|: cos(delta) REGGE entro il 20%
+    delta   0.0: a -1.2603e-06, il fit -1.2609e-06, lo scarto +6.401e-10 (0.0 sigma)
+    delta 120.0: a -3.1597e-07, il fit -1.9568e-07, lo scarto -1.203e-07 (7.8 sigma)
+    delta  90.0: a -5.7442e-07, il fit -5.5076e-07, lo scarto -2.367e-08 (1.9 sigma)
+    delta  60.0: a -9.0328e-07, il fit -9.0584e-07, lo scarto +2.562e-09 (0.3 sigma)
+    delta 180.0: a +2.3511e-07, il fit +1.5940e-07, lo scarto +7.571e-08 (4.5 sigma)
+    delta 270.0: a -5.2944e-07, il fit -5.5076e-07, lo scarto +2.132e-08 (2.8 sigma)
+==================================================================================================================================

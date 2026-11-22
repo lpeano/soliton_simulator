@@ -241,36 +241,44 @@
    "finita": "2026-11-22T16:44:38"
   },
   "F_D90": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 4188,
    "lanciata": "2026-11-22T16:16:16",
    "processi_prima": 9,
    "gb": 14.43,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T17:07:08"
   },
   "F_D60": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 39052,
    "lanciata": "2026-11-22T16:16:24",
    "processi_prima": 9,
    "gb": 14.32,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T17:06:58"
   },
   "F_D180": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 31228,
    "lanciata": "2026-11-22T16:27:56",
    "processi_prima": 7,
    "gb": 14.09,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T17:13:00"
   },
   "F_D270": {
-   "stato": "IN CORSA",
+   "stato": "FINITO",
    "pid": 9628,
    "lanciata": "2026-11-22T16:27:58",
    "processi_prima": 8,
    "gb": 14.09,
-   "registro": 0
+   "registro": 0,
+   "uscita": 0,
+   "finita": "2026-11-22T17:12:56"
   }
  },
  "eventi": [
@@ -325,6 +333,11 @@
   "2026-11-22T16:27:58 LANCIATA F_D270 (pid 9628; i processi prima 8, la CPU stimata 9/12; 14.1 GB)",
   "2026-11-22T16:29:05 FINITO Q_x0.8_caduta_V3 (uscita 0)",
   "2026-11-22T16:41:04 FINITO Q_x1.2_caduta_V2 (uscita 0)",
-  "2026-11-22T16:44:38 FINITO Q_x1.2_caduta_V3 (uscita 0)"
+  "2026-11-22T16:44:38 FINITO Q_x1.2_caduta_V3 (uscita 0)",
+  "2026-11-22T17:06:58 FINITO F_D60 (uscita 0)",
+  "2026-11-22T17:07:08 FINITO F_D90 (uscita 0)",
+  "2026-11-22T17:12:56 FINITO F_D270 (uscita 0)",
+  "2026-11-22T17:13:00 FINITO F_D180 (uscita 0)",
+  "2026-11-22T17:13:00 FERMO: la coda e' vuota"
  ]
 }
