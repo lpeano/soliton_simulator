@@ -31,3 +31,9 @@
 1. Questa carta, commit e push.
 2. F1: il codice, commit; il primo blocco a `k 2000` dei due tronchi, commit dei file.
 3. M1, M2, M3: il codice, commit; il giro sul primo blocco, il referto, commit.
+
+## 4. LA DECISIONE DI LUCA DELLE `03:48` SUL FERMO DI [M0329-M1] *(l'errore n.213 del guardiano: «eccentricita'» senza formula; scritta PRIMA dello script nuovo)*
+
+- **La forma delle pale e' `a = (lambda_1 - lambda_2) / (lambda_1 + lambda_2)`**, `lambda_1 >= lambda_2` gli autovalori del tensore pesato con `rho` entro `18` nodi *(la formula del guardiano: il caso noto passa, `0.126-0.159`)*. **Accanto, solo come lettura, `e = sqrt(1 - lambda_2 / lambda_1)`.** Le soglie e le previsioni restano su `a`.
+- **La soglia del caso noto (c), la mia lettura dichiarata:** Luca scrive che il caso noto passa con `0.126-0.159`; il primo valore e' `0.1258` *(8738148a)*: **la soglia e' `[0.125, 0.16]`**, l'arrotondamento di `0.126`, non `[0.13, 0.16]`.
+- **Lo script nuovo** `doc/referti_l2/girandola_chi_v2.py` *(la v1 riga per riga, salvo: `a` come misura; le scene scelte con `--scene`; il caso noto della scena IN FASE del 15/11, l'anello `10-16` a `k 0` entro l'`1%` da `-658` [M0333]; la tabella t120 contro t000 [M0333-M] quando ci sono tutte e due)*.
