@@ -26,3 +26,6 @@
 - **Il referto** `doc/referti_l2/triangolo_chi_misure.txt`, aggiornato a ogni giro.
 
 ## 3. I NUMERI DI P0 E P1 *(dopo le misure: la sez. si aggiunge coi referti)*
+
+- **P0** *(triangolo_chi_v2.py compat, a980c640; doc/referti_l2/triangolo_chi_v2_compat.txt)*: le due scene sono compatibili. **t120:** i vertici `[74, 68]`, `[113, 68]`, `[113, 107]`, i lati `39.0000`; `m0` `+1.412935154856e+01`, `c0` `+3.5732340997e-03`. **t120r:** i vertici `[74, 62]`, `[119, 74]`, `[107, 107]`, **i lati `40.3609`** *(non `39`: i vertici ruotati cadono sui nodi del reticolo; la costruzione e' quella del `15/11`, `triangolo_ruotato`, non mia; DICHIARATO: il gemello e' un triangolo piu' grande del `3.5%`)*; `m0` `+1.422893814310e+01`, `c0` `+3.5984189934e-03`. In tutte e due: il vuoto senza materia prima dell'incollatura, le tre masse dei francobolli uguali, `s_a` uniforme `0.15`, `g_e = 0`.
+- **P1, il costo** *(triangolo_chi_v2.py costo; doc/referti_l2/triangolo_chi_v2_costo.txt)*: 50 tick col passo v2: **t120 `0.854` s per tick, t120r `0.740`**; la prima misura del t120 *(triangolo_chi.py, 178b033b)* dava `0.615`: **lo stesso conto, un carico della macchina diverso** *(5 processi)*; la stima per `k 20000`: fra `3.4` e `4.7` ore per scena.
