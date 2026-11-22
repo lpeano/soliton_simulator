@@ -86,3 +86,12 @@
 - [ ] committare questa sezione, `girandola_blocchi.sh` e `girandola_serie.py`;
 - [ ] i film, una scena alla volta, quando c'e' un posto nel tetto; commit coi file di testo dei film;
 - [ ] le misure dei blocchi *(`giro`)*, commit; la serie, commit; la relazione nel ramo principale.
+
+## 8. [M0329-F1] IL FILM LEGGERO DI TUTTO IL TRONCO, NEL REPO *(la richiesta di Luca del `2026-11-22`, dopo le `12:12`; scritta PRIMA del codice `doc/referti_l2/film/girandola_film_leggero.py`)*
+
+> «[M0329-F1] I film dei blocchi oltre k 6000: nel repo, in versione leggera (uno stato ogni 1000 tick, rho e Jx, Jy e chi in float16, i centri), sotto i 50 MB per scena; i film completi possono restare fuori. Serve al guardiano per il video della corsa intera.»
+
+- **Le fonti:** i film dei blocchi gia' nel repo *(`doc/referti_l2/film/girandola_<scena>_<da>_<fino>.npz`)* e quelli nuovi della catena *(`E:\soliton_simulator\controllo\girandola_blocchi\`)*, letti in ordine; il controllo: i blocchi contigui, i `k` tutti diversi; lo sha1 di ogni fonte stampato.
+- **Gli stati:** quelli con `k` multiplo di `1000`, da `k 0` all'ultimo multiplo di `1000` disponibile. **Per stato:** `rho`, `Jx`, `Jy`, `chi` per nodo in `float16`; `centri_bari` e `centri_max` in `float32`. **Una volta:** `k`, `L`, `x`, `y`, `vertici` *(e `G0` se il blocco lo ha)*.
+- ### ⚠ **Il `float16`** ha `~3` cifre e il minimo normale `6.1e-05`: `rho` sotto `~6e-05` *(fuori dal mattone)* **perde precisione o va a zero**; e' una versione per il VIDEO, **non per le misure** *(le misure leggono i film interi)*. Lo scrivo anche nel file *(la chiave `nota`)*.
+- **Il file:** `doc/referti_l2/film/girandola_<scena>_leggero.npz`, `savez_compressed`, **sotto i `50 MB`** *(un assert)*. **I film interi oltre `k 6000` restano fuori dal repo** *(la richiesta; nella sez. 7 li avevo previsti nel repo: qui la richiesta li sostituisce)*. **Le misure dei blocchi (`giro`) leggono i film da `doc/referti_l2/film/`:** per farle girare, li copio li' per la corsa delle misure e li tolgo dopo, **senza committarli** *(dichiarato)*.
