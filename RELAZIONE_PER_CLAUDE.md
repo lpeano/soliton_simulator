@@ -26462,3 +26462,37 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   | T3 i tronchi | il lanciatore triangolo_lancia_v3.sh, t120 e t120r28 (b9977640) | NON partiti |
   | T4 le misure | nessuno | dopo T3 |
   | R1 il promemoria | 62825411 (lapse-u) | arrivato e confermato |
+
+- **[M2357-V3-S3bis] LA DECISIONE DI LUCA DELLE 02:42: IL CRITERIO SULL'ENERGIA DISCRETA** (la carta sez. 5.3) [[PROGETTO-MITOSI]]. I criteri nuovi scritti prima dello script nuovo chi_s3bis_v2.py, che rigira (a) e (b); il deve-fallire di (b) letto con la stessa correzione discreta applicata al residuo con pi^2/2. Se passano, partono la corsa nuova del mattone e i tronchi del triangolo.
+
+- **[M2357-V3-S3bis] COI CRITERI DI LUCA DELLE 02:42 (L'ENERGIA DISCRETA) PASSA: LA LINEA DI CHI V2 E' SBLOCCATA** (chi_s3bis_v2.py tutte, caa4dc34; il referto doc/referti_l2/chi_v2_s3bis_v2.txt del ramo lapse-u; la carta sez. 5.3) [[PROGETTO-MITOSI]]. **(a):** l'energia discreta 3.717e-11 (sotto 1e-9: la stima del termine non quadratico non serve); H 1.306e-04, dentro la stima fra 1e-5 e 3e-4; con pi^2/2 9.401e-01 (deve fallire: fallisce); la frazione cinetica 0.9999. **(b):** la copia del tick AL BIT a k 250 (sha1 b63a7a4a); il residuo meno il termine discreto 2.639e-14 per tick (sotto 1e-6); con pi^2/2, meno lo stesso termine, 1.829e-02 (piu' di 10 volte: deve fallire, fallisce). I numeri sono gli stessi del referto della v1 (1c48728c): lo stesso codice, i criteri nuovi. **V3 e' completa** (S1, S2, S3bis, S4, S5): partono la corsa nuova del mattone (V4) e i due tronchi del triangolo (T3, t120 e t120r28).
+
+- **LA PROVA BREVE DEL t120 E DEL t120r CON LA V2 DELLO SCRIPT: AL BIT, IL BYTE RIFIUTATO** (triangolo_chi_v2.py prova, a980c640; il referto doc/referti_l2/triangolo_chi_v2_prova.txt del ramo lapse-u) [[PROGETTO-MITOSI]]. t120 e t120r: 250 tick di fila contro 125 + salva + riprendi + 125 AL BIT (psi, phi, A, E, chi, pi, Theta); un byte cambiato, la ripresa rifiuta; la deriva di H in 250 tick t120 3.405e-06 (oggi 3.415e-06), t120r 3.632e-06 (oggi 3.642e-06), la stessa cecita' di S3, dichiarata. **Il t120r di +15 gradi e' scartato da Luca (02:22)**: il referto resta, il gemello dei tronchi e' il t120r28. Il tempo per tick 0.66-0.82 s con sei o sette python di calcolo.
+
+- **[M2357-T2] IL GEMELLO ESATTO t120r28: LA COMPATIBILITA' E IL COSTO PASSANO; I TRE LATI 39.0000** (triangolo_chi_v3.py compat e costo --quale t120r28, b9977640; i referti doc/referti_l2/triangolo_chi_v3_compat.txt e triangolo_chi_v3_costo.txt del ramo lapse-u) [[PROGETTO-MITOSI]]. I vertici [77, 59], [122, 80], [101, 104]: i vettori (45, 21) e (24, 45) dal vertice [74, 68] del t120, la traslazione [3, -9] esatta, il baricentro [100.0, 81.0] uguale a quello del t120; **i lati con la norma del codice 39.0000, 39.0000, 39.0000**; lo stesso verso di giro (+1317.2246 tutti e due); **l'angolo 27.7958 gradi dall'asse piu' vicino**; i nodi buoni del francobollo. **Coi vettori sbagliati della decisione delle 02:22: i lati 22.6495, 60.6712, 58.4038** (deve fallire: fallisce; non 21.6 e 52.0 come nella correzione delle 02:31: lo scarto a Luca). m0 +1.413455756638e+01 (il t120 +1.412935154856e+01), c0 +3.5745506726e-03. **Il costo:** 50 tick in 40 s, 0.799 s per tick, con sette python di calcolo. La prova breve gira.
+
+- **[M2357-T2] IL GEMELLO ESATTO t120r28, LA PROVA BREVE: AL BIT, IL BYTE RIFIUTATO** (triangolo_chi_v3.py prova --quale t120r28, b9977640; il referto doc/referti_l2/triangolo_chi_v3_prova.txt del ramo lapse-u) [[PROGETTO-MITOSI]]. 250 tick di fila contro 125 + salva + riprendi + 125 AL BIT (psi, phi, A, E, chi, pi, Theta); un byte cambiato, la ripresa rifiuta; la deriva di H in 250 tick 3.533e-06 (il passo di oggi 3.543e-06; la stessa cecita' di S3, dichiarata). 0.68-0.74 s per tick con sei o sette python di calcolo. **T2 e' completo per le due scene dei tronchi** (il t120, 50845283 e ea2632f1; il t120r28, qui).
+
+- **[M2357-V4] E [M2357-T3]: I LANCI DELLE 03:11** (chi_lancia_v4.sh nuova, f2f34ff7; triangolo_lancia_v3.sh t120 e t120r28, b9977640; le voci chi-mattone-v2, chi-tronco-t120, chi-tronco-t120r28 APERTE nel registro delle corse del ramo lapse-u) [[PROGETTO-MITOSI]]. Dopo V3 completa (S3bis 7070ac2d) e T2 per le due scene (ea2632f1, b073925d). **La corsa nuova del mattone** con chi curato da k 0 di C2 fino a k 20000, gli stati ogni 250 in E:\soliton_simulator\controllo\CHI\mattone_v2; **i due tronchi** fino al primo scatto (il limite k 200000), gli stati ogni 250 in E:\soliton_simulator\controllo\CHI\triangolo\t120 e \t120r28. **I processi alle 03:11:** sei python di calcolo, 1 filo ciascuno (la mitosi C2EXT, l'attesa della proroga, il ramo MITOSI_V2, il mattone v2, i due tronchi), piu' le attese in bash; P5 del ramo mitosi-chi e' finita prima. **La memoria libera** 17.3 GB. Le misure in corsa (T4) a k 3000 dei tronchi.
+
+- **P5 DEL RAMO mitosi-chi (IL MANDATO DI LUCA DELLE 19:40): LA REGOLA INTERA CON CHI E' SIMMETRICA SOTTO LO SPECCHIO; IL FLIP COL VERSO NO** (mitosi_chi_specchio.py, le 5 parti e raccogli; il referto doc/referti_l2/mitosi_chi_specchio.txt) [[PROGETTO-MITOSI]]. **Lo stato di partenza:** stato_03000 della corsa con chi del ramo lapse-u (la fisica vecchia: chi_tick e la regola PRIMA della cura dell'orientamento, dichiarato). **Il caso noto:** H con chi dello stato specchiato contro H, 2.21e-16 (soglia 1e-12). **La stella:** lo stesso lato su 200 archi su 200; gli scarti massimi psi 1.7e-16, phi 1.9e-16, geo 0.0e+00, A 1.9e-16, E 5.3e-16, H 4.4e-16, chi 0.0e+00. **Il verso** (deve fallire): lo stesso lato su 171 su 200, psi 4.2e-02, phi 8.2e-01: fallisce. Lo scarto fra il migliore e il secondo: la mediana 4.53e-07 |H|, il minimo 5.30e-09. Le parti 2978-3336 s ciascuna, una alla volta. **Le prove R2 del ramo mitosi-chi sono tutte passate** (P6.0, P1, P3, P9, i casi noti, K4, P8, R4, P5).
+
+- **IL MANDATO [M2357]: LA TABELLA ETICHETTA -> COMMIT, AGGIORNATA ALLE 03:2x** (la nota del guardiano al mandato, punto 3; i pezzi fatti prima delle etichette si riconoscono dai commit e non si rifanno) [[PROGETTO-MITOSI]]:
+
+  | l'etichetta | il commit che la chiude (il ramo) | lo stato |
+  |---|---|---|
+  | V1 la carta | c6225cca (lapse-u) | fatto, senza etichetta |
+  | V2 il codice | d4b830d4 (lapse-u) | fatto, senza etichetta |
+  | V3-S1, V3-S2 | 527556e1 (lapse-u) | passano |
+  | V3-S3 | 184fee86 (lapse-u) | cieca: resta nel repo, dichiarata |
+  | V3-S3bis | 62825411 la carta, c8d4fc05 il codice, 1c48728c il referto coi criteri vecchi; 461f75c8, caa4dc34, 7070ac2d coi criteri di Luca delle 02:42 (lapse-u) | passa coi criteri sull'energia discreta |
+  | V3-S4 | b61cbb32 (lapse-u) | passa |
+  | V3-S5 | 0137d0c4 (lapse-u) | passa |
+  | V4 la corsa nuova del mattone | lanciata alle 03:11, c739beda (lapse-u) | in corsa |
+  | V5 le velocita' | questa relazione (dati da 527556e1 e d547a5ad) | fatto |
+  | T0 la compatibilita' | 6d4e0726 il t120, 44df0996 il t120r (lapse-u, non mitosi-chi: dichiarato) | fatto |
+  | T1 la carta | 92ca7fdf (lapse-u), la sez. 3 in 44df0996 | fatta, DOPO il codice 178b033b (lo scarto dichiarato) |
+  | T2 la prova breve | 50845283 ed ea2632f1 il t120; b073925d il t120r28 (lapse-u) | al bit tutte e due (il t120r di +15 gradi scartato da Luca alle 02:22) |
+  | T3 i tronchi | lanciati alle 03:11, c739beda (lapse-u) | in corsa |
+  | T4 le misure | nessuno | dopo T3 |
+  | R1 il promemoria | 62825411 (lapse-u) | arrivato e confermato |
