@@ -146,3 +146,12 @@
 
 - **Del guardiano** *(copiate)*: **P-S1:** V1 cade VERSO il `N` piu' basso, piano (come l'11/11). `70%`. **P-S2:** la spinta di V1 sta all'interfaccia (il bivio: bordo + guscio oltre il `50%`). `55%`.
 - **Mie:** P-S1 `40%` *(il solitone di G1 andava VIA; la mia scommessa di cb23b30a: V1 VIA `60%`)*; P-S2 `50%`.
+
+### 4.4 Annotazione dopo i numeri *(e72044df; le premesse sopra NON si riscrivono)*
+
+- **Il controllo che PUO' fallire e' fallito:** `P/M` *(l'impulso del flusso `J` diviso la massa)* **ha il segno OPPOSTO alla velocita' del baricentro in TUTTE le varianti** *(V1 a `k 2000`: `+1.10e-03` contro `-2.37e-03`)*. **La ripartizione da `J` non e' la ripartizione della spinta che muove il baricentro:** **non la uso per il bivio.**
+
+### 4.5 La ripartizione dal MOMENTO di `rho` *(l'altra via del mandato; scritta PRIMA del codice `doc/referti_l2/caduta_regioni_momento.py` e dei numeri)*
+
+- **Per stato e per regione** *(gli stessi anelli dal baricentro dello stato)*: **`m_R(k) = somma_{v in R(k)} rho_v y_v`** *(`y` dal centro del `meta` di `k 0`, `rho` dal film di [M0908-M], lo sha1 stampato)*; **il fit `m_R(k) = m0 + v k + a_R k^2/2`** *(`gravita_due_corpi_misure.fit`)*; **al netto di V0**; la quota `(|a_guscio| + |a_bordo|)/somma |a_R|` **e il bivio di Luca con questa quota.**
+- ### ⚠ **Che cosa NON separa, come prima:** la materia che passa un confine porta il suo momento; **e `somma_R a_R = M a_bari` PER COSTRUZIONE** *(un controllo del codice, dichiarato; `M` cambia poco: lo stampo)*. **Accanto:** lo stesso con le regioni FISSE ai nodi di `k 0` *(gli anelli attorno al baricentro di `k 0`)*: se le due quote dicono cose diverse, il passaggio di materia fra gli anelli conta.
