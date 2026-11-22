@@ -1,0 +1,35 @@
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] spettro_gap.py  sha1-BYTE 7494e102  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+==================================================================================================================================
+[M1631] GLI AUTOVETTORI DEL FONDO (la carta sez. 6, 10): A_IMP 1e-06
+==================================================================================================================================
+### la risposta di un tick: 23 nodi col supporto; |B0| 7.255197, |B1| 7.255197, B0.B1/|B0|^2 +0.5000; L 162
+  DEVE: K: un candidato con |k| = |B0|/sqrt(3)                                                               PASSA ['(B0+B1)/3']
+### la SU(2) casuale: |det - 1| 2.2e-16, |S S^dag - I| 1.6e-16
+### la CIMA a Gamma: E +0.4767266286, la molteplicita' 2; le 12 quasi-energie a Gamma: -0.482676 -0.482676 -0.482676 -0.482676 -0.476727 -0.476727 +0.011437 +0.011437 +0.011437 +0.011437 +0.476727 +0.476727
+  Gamma k = 0           (+0.000000, +0.000000): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 4.18e-16; |e^{i k.L A_j} - 1| 0.00e+00
+        |v| per componente: 0.0079 0.4498 0.1397 0.4709 0.1834 0.1143 0.2257 0.1743 0.2213 0.4508 0.1047 0.4064
+  DEVE: Gamma: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                    PASSA (-0.48267613)
+  DEVE: Gamma: NON degenere (il distacco dalla seconda > 1e-6)                                               ### FALLISCE (5.551e-17)
+  DEVE: Gamma: k commensurato col toro L 162                                                                 PASSA (0.00e+00)
+  DEVE: Gamma: autovettore (il residuo < 1e-10)                                                              PASSA (4.18e-16)
+        la molteplicita' 4; il sottospazio sotto SU(2) sullo spin: il residuo 9.26e-01 (NON invariante); lo stampo nel sottospazio: la frazione pesata 0.0004 su 1907 nodi
+  K     k = (B0+B1)/3   (+2.094395, +3.627599): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 1.09e-15; |e^{i k.L A_j} - 1| 2.94e-14
+        |v| per componente: 0.2421 0.2451 0.3265 0.3287 0.2421 0.2451 0.3265 0.3287 0.3265 0.3287 0.2421 0.2451
+  DEVE: K: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                        PASSA (-0.48267613)
+  DEVE: K: NON degenere (il distacco dalla seconda > 1e-6)                                                   ### FALLISCE (1.665e-16)
+  DEVE: K: k commensurato col toro L 162                                                                     PASSA (2.94e-14)
+  DEVE: K: autovettore (il residuo < 1e-10)                                                                  PASSA (1.09e-15)
+        la molteplicita' 2; il sottospazio sotto SU(2) sullo spin: il residuo 8.40e-01 (NON invariante); lo stampo nel sottospazio: la frazione pesata 0.0023 su 1907 nodi
+  M     k = B0/2        (+3.141593, +1.813799): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 1.05e-15; |e^{i k.L A_j} - 1| 4.12e-14
+        |v| per componente: 0.0393 0.4730 0.1621 0.4984 0.0000 0.0000 0.0000 0.0000 0.1124 0.4845 0.1233 0.4872
+  DEVE: M: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                        PASSA (-0.48267613)
+  DEVE: M: NON degenere (il distacco dalla seconda > 1e-6)                                                   ### FALLISCE (2.776e-16)
+  DEVE: M: k commensurato col toro L 162                                                                     PASSA (4.12e-14)
+  DEVE: M: autovettore (il residuo < 1e-10)                                                                  PASSA (1.05e-15)
+        la molteplicita' 2; il sottospazio sotto SU(2) sullo spin: il residuo 3.90e-01 (NON invariante); lo stampo nel sottospazio: la frazione pesata 0.0012 su 1907 nodi
+### salvato E:\soliton_simulator\controllo\M1631\fondo_v2.npz
+==================================================================================================================================
+  10 DEVE su 13   ### CI SONO BUCHI
+==================================================================================================================================
