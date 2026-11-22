@@ -1,0 +1,19 @@
+[TIMBRO] girandola_chi_v3.py  sha1-BYTE 4f6a3787  committato e pulito
+==================================================================================================================================
+[M0333-ISO1] L'ISOTROPIA (la carta della girandola sez. 5): il contorno a meta' del massimo in 360 direzioni, A3/A0, A6/A0, la fase di A6; la grana 0.001
+==================================================================================================================================
+### IL CASO NOTO (costruiti a mano sul toro di L 162, attorno a (81.3, 80.7))
+    il disco (sigma 13)                il centro ['81.300', '80.700']; R medio (A0) 15.3125; A3/A0 2.481e-05; A6/A0 2.241e-05; il massimo di A6 a 60.00 gradi, dall'asse 0.00; rqm 10.1849, la massa 6.131060e+02; i massimi locali 1
+    l'esagono (raggio 15, vertici sugli assi) il centro ['81.333', '80.667']; R medio (A0) 13.6253; A3/A0 1.385e-02; A6/A0 5.775e-02; il massimo di A6 a 60.00 gradi, dall'asse 0.00; rqm 9.6782, la massa 6.750000e+02; i massimi locali 0
+  ISO CASO NOTO: il disco isotropo, A3/A0 e A6/A0 sotto la grana                                                   PASSA   2.48e-05, 2.24e-05
+  ISO CASO NOTO DEVE FALLIRE come isotropo: l'esagono, A6/A0 sopra 10 grane e la fase di A6 entro 5 gradi da un asse PASSA   5.77e-02, dall'asse 0.00
+### il riferimento: il mattone vecchio, C:\Users\lpeano\wt_mitosi_chi\doc\referti_l2\film\mattone_chi.npz (sha1 348261f2)
+  k 2000
+    il t000 (girandola_t000_00000_02000.npz) il centro ['99.544', '80.763']; R medio (A0) 0.0000; A3/A0 2.427e+12; A6/A0 1.926e+00; il massimo di A6 a 54.72 gradi, dall'asse 5.28; rqm 27.8834, la massa 1.223916e+06; i massimi locali 34
+    il mattone nuovo (stato_02000.npz) il centro ['91.568', '91.772']; R medio (A0) 8.8657; A3/A0 1.613e-02; A6/A0 7.580e-03; il massimo di A6 a 50.75 gradi, dall'asse 9.25; rqm 5.9757, la massa 5.155615e+05; i massimi locali 1
+    il mattone vecchio (il film)       il centro ['91.568', '91.773']; R medio (A0) 8.8852; A3/A0 1.624e-02; A6/A0 7.552e-03; il massimo di A6 a 50.20 gradi, dall'asse 9.80; rqm 5.9658, la massa 5.141905e+05; i massimi locali 2
+    LA TABELLA t000 / il mattone nuovo: A6/A0 1.926e+00 / 7.580e-03 (il rapporto 254.061); A3/A0 2.427e+12 / 1.613e-02; rqm 27.883 / 5.976; (R_mattone / R_fuso)^2 89441349970893847016767488.000; i massimi 34 / 1
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: ISO CASO NOTO: il disco isotropo, A3/A0 e A6/A0 sotto la grana                                                 PASSA
+  DEVE: ISO CASO NOTO DEVE FALLIRE come isotropo: l'esagono, A6/A0 sopra 10 grane e la fase di A6 entro 5 gradi da un asse PASSA
+==================================================================================================================================
