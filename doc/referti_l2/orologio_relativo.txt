@@ -1,0 +1,54 @@
+[TIMBRO] pound_rebka_GU.py  sha1-BYTE 22d25a15  committato e pulito
+[TIMBRO] orologio_mattone.py  sha1-BYTE f64ebaff  committato e pulito
+[TIMBRO] girandola_chi_v3.py  sha1-BYTE 4f6a3787  committato e pulito
+[TIMBRO] orologio_relativo.py  sha1-BYTE 057d67f9  committato e pulito
+==================================================================================================================================
+[M1417-R] L'OROLOGIO RELATIVO AL VUOTO (la carta sez. 7; POST-HOC, dichiarato da Luca): omega_ref (N1) 0.6264373875
+==================================================================================================================================
+### K1, N1 da solo: omega_F3 -0.4712388980; theta_v locale -0.10016, +1.77446, +3.61704, +5.66133; omega_rel (la pendenza) -1.10532542; il residuo del fit 7.071e-02 rad
+  DEVE: K1: l'orologio N1 da solo, omega_rel costante (il residuo del fit della fase relativa sotto 1 rad)             PASSA 
+----------------------------------------------------------------------------------------------------------------------------------
+  B2 in fase, d 35           k  500 (t 60500, sha1 902ea094): psi +1.72400 +1.72662; theta_v locale +0.14513 +0.14252; lontano +0.00000 (17316 nodi)
+  B2 in fase, d 35           k 1000 (t 61000, sha1 50569b73): psi -3.10766 -3.10881; theta_v locale +2.35114 +2.34854; lontano +0.00000 (17358 nodi)
+  B2 in fase, d 35           k 1500 (t 61500, sha1 a3864508): psi -1.69203 -1.69707; theta_v locale -1.74072 -1.77571; lontano -0.00001 (17409 nodi)
+  B2 in fase, d 35           k 2000 (t 62000, sha1 d0573bbf): psi -0.30837 -0.30888; theta_v locale +0.54814 +0.46989; lontano +0.00000 (17478 nodi)
+    k  500 -> 1000: omega_F3 -0.4712388980; omega_psi 0.62541548 0.62542301; omega_phi locale -0.47565090 -0.47565094 (theta_v si sposta di +2.2060 +2.2060 rad); lontano -0.47123890 (+0.0000 rad); omega_rel -1.10106638 -1.10107395
+    k 1000 -> 1500: omega_F3 -0.4712388980; omega_psi 0.62548726 0.62549506; omega_phi locale -0.47562157 -0.47555678 (theta_v si sposta di +2.1913 +2.1589 rad); lontano -0.47123887 (-0.0000 rad); omega_rel -1.10110883 -1.10105184
+    k 1500 -> 2000: omega_F3 -0.4712388980; omega_psi 0.62555122 0.62554215; omega_phi locale -0.47581660 -0.47573010 (theta_v si sposta di +2.2889 +2.2456 rad); lontano -0.47123893 (+0.0000 rad); omega_rel -1.10136782 -1.10127225
+----------------------------------------------------------------------------------------------------------------------------------
+  in fase, d 50              k  500 (t 60500, sha1 da1383a6): psi +1.73729 +1.73717; theta_v locale +0.14873 +0.14663; lontano -0.00001 (16071 nodi)
+  in fase, d 50              k 1000 (t 61000, sha1 b1f46acc): psi -3.06208 -3.06289; theta_v locale +2.29889 +2.29735; lontano -0.00000 (16073 nodi)
+  in fase, d 50              k 1500 (t 61500, sha1 56b09e20): psi -1.58856 -1.59101; theta_v locale -1.79545 -1.80556; lontano +0.00001 (16071 nodi)
+  in fase, d 50              k 2000 (t 62000, sha1 1c1b591d): psi -0.10586 -0.10931; theta_v locale +0.39908 +0.39694; lontano -0.00002 (16076 nodi)
+    k  500 -> 1000: omega_F3 -0.4712388980; omega_psi 0.62535091 0.62535228; omega_phi locale -0.47553922 -0.47554034 (theta_v si sposta di +2.1502 +2.1507 rad); lontano -0.47123891 (+0.0000 rad); omega_rel -1.10089013 -1.10089262
+    k 1000 -> 1500: omega_F3 -0.4712388980; omega_psi 0.62537148 0.62537478; omega_phi locale -0.47561658 -0.47559945 (theta_v si sposta di +2.1888 +2.1803 rad); lontano -0.47123892 (+0.0000 rad); omega_rel -1.10098806 -1.10097423
+    k 1500 -> 2000: omega_F3 -0.4712388980; omega_psi 0.62535313 0.62535512; omega_phi locale -0.47562796 -0.47564389 (theta_v si sposta di +2.1945 +2.2025 rad); lontano -0.47123885 (-0.0000 rad); omega_rel -1.10098109 -1.10099900
+----------------------------------------------------------------------------------------------------------------------------------
+  in fase, d 65 (L 243)      k  500 (t 60500, sha1 68e328ac): psi +1.73710 +1.73711; theta_v locale +0.14774 +0.14764; lontano -0.00000 (47936 nodi)
+  in fase, d 65 (L 243)      k 1000 (t 61000, sha1 99fa4cce): psi -3.06243 -3.06240; theta_v locale +2.30278 +2.29931; lontano -0.00000 (47938 nodi)
+  in fase, d 65 (L 243)      k 1500 (t 61500, sha1 caf2476a): psi -1.58844 -1.58852; theta_v locale -1.78905 -1.79192; lontano -0.00001 (47935 nodi)
+    k  500 -> 1000: omega_F3 -0.4712388980; omega_psi 0.62535122 0.62535117; omega_phi locale -0.47554897 -0.47554222 (theta_v si sposta di +2.1550 +2.1517 rad); lontano -0.47123890 (-0.0000 rad); omega_rel -1.10090018 -1.10089339
+    k 1000 -> 1500: omega_F3 -0.4712388980; omega_psi 0.62537055 0.62537077; omega_phi locale -0.47562162 -0.47562282 (theta_v si sposta di +2.1914 +2.1920 rad); lontano -0.47123888 (-0.0000 rad); omega_rel -1.10099217 -1.10099358
+----------------------------------------------------------------------------------------------------------------------------------
+  B2-pi in antifase, d 35    k  500 (t 60500, sha1 2e09b255): psi +1.76421 -1.37763; theta_v locale +0.14031 +0.14868; lontano +0.00000 (17119 nodi)
+  B2-pi in antifase, d 35    k 1000 (t 61000, sha1 d821f2e5): psi -2.99079 +0.14852; theta_v locale +2.28950 +2.28820; lontano +0.00000 (17069 nodi)
+  B2-pi in antifase, d 35    k 1500 (t 61500, sha1 b0c5252b): psi -1.47417 +1.66325; theta_v locale -1.88805 -1.90333; lontano -0.00001 (17015 nodi)
+  B2-pi in antifase, d 35    k 2000 (t 62000, sha1 b320912b): psi +0.05908 -3.09208; theta_v locale +0.27266 +0.21994; lontano +0.00000 (16951 nodi)
+    k  500 -> 1000: omega_F3 -0.4712388980; omega_psi 0.62526214 0.62526624; omega_phi locale -0.47553729 -0.47551794 (theta_v si sposta di +2.1492 +2.1395 rad); lontano -0.47123890 (+0.0000 rad); omega_rel -1.10079943 -1.10078419
+    k 1000 -> 1500: omega_F3 -0.4712388980; omega_psi 0.62528530 0.62528906; omega_phi locale -0.47545016 -0.47542220 (theta_v si sposta di +2.1056 +2.0917 rad); lontano -0.47123888 (-0.0000 rad); omega_rel -1.10073546 -1.10071126
+    k 1500 -> 2000: omega_F3 -0.4712388980; omega_psi 0.62525202 0.62526283; omega_phi locale -0.47556032 -0.47548543 (theta_v si sposta di +2.1607 +2.1233 rad); lontano -0.47123891 (+0.0000 rad); omega_rel -1.10081234 -1.10074826
+==================================================================================================================================
+  DEVE: il controllo: ogni spostamento di theta_v fra due stati sotto pi/2 (omega_v senza ambiguita')                  ### FALLISCE (il massimo 2.2889 rad)
+  il vuoto lontano, omega_phi per coppia: GU -0.4712388982, GUd50 -0.4712388920, GUd65 -0.4712388887, GUpi -0.4712388993; lo scarto massimo 1.061e-08
+  DEVE: K2: omega_phi nel vuoto lontano uguale fra le coppie entro 1e-5                                                PASSA (1.061e-08)
+  LA BASE (d 50 e d 66): omega_rel -1.10094951; omega_phi locale -0.47558924; omega_psi 0.62536027; IL SEGNO DI omega_phi - omega_psi DI BASE: -
+  B2 in fase, d 35           omega_rel -1.10115685, Delta omega_rel -2.0734e-04; Delta omega_phi locale -8.1909e-05; Delta omega_psi +1.2543e-04
+  in fase, d 50              omega_rel -1.10095419, Delta omega_rel -4.6778e-06; Delta omega_phi locale -5.3327e-06; Delta omega_psi -6.5489e-07
+  in fase, d 65 (L 243)      omega_rel -1.10094483, Delta omega_rel +4.6778e-06; Delta omega_phi locale +5.3327e-06; Delta omega_psi +6.5489e-07
+  B2-pi in antifase, d 35    omega_rel -1.10076516, Delta omega_rel +1.8435e-04; Delta omega_phi locale +9.3681e-05; Delta omega_psi -9.0670e-05
+  K3 (la coppia che si attrae, B2 a d 34): Delta omega_rel -2.0734e-04: NEGATIVO: come la natura (l'orologio relativo rallenta legandosi); P3: |Delta omega_phi locale| 8.191e-05 contro |Delta omega_psi| 1.254e-04
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1: l'orologio N1 da solo, omega_rel costante (il residuo del fit della fase relativa sotto 1 rad)             PASSA
+  DEVE: il controllo: ogni spostamento di theta_v fra due stati sotto pi/2 (omega_v senza ambiguita')                  ### FALLISCE
+  DEVE: K2: omega_phi nel vuoto lontano uguale fra le coppie entro 1e-5                                                PASSA
+==================================================================================================================================
