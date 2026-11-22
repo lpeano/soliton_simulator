@@ -1,0 +1,15 @@
+{
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta",
+ "corse": [
+  {"nome": "M_k0.000_a1", "priorita": 1, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0", "--asse", "1"]},
+  {"nome": "M_k0.010_a1", "priorita": 1, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.010", "--asse", "1"]},
+  {"nome": "V4_Nm", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4Nm"]},
+  {"nome": "V4_Np", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4Np"]},
+  {"nome": "Q_tenuta_x0.8", "priorita": 1, "argv": ["doc/referti_l2/eotvos.py", "tenuta", "--scala", "0.8"]},
+  {"nome": "Q_tenuta_x1.2", "priorita": 1, "argv": ["doc/referti_l2/eotvos.py", "tenuta", "--scala", "1.2"]},
+  {"nome": "V4_N1", "priorita": 1, "argv": ["doc/referti_l2/orologio_V4.py", "corsa", "--var", "V4N1"], "note": "[M1446] il caso noto di V (mio): V4 a N = 1 al bit con N1"},
+  {"nome": "M_k0.010_a2", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.010", "--asse", "2"]},
+  {"nome": "M_k0.005_a1", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.005", "--asse", "1"]},
+  {"nome": "M_k0.005_a2", "priorita": 2, "argv": ["doc/referti_l2/massa_calcio.py", "corsa", "--k", "0.005", "--asse", "2"]}
+ ]
+}
