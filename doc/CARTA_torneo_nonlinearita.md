@@ -90,3 +90,7 @@
 - **«Si scioglie»** *(mia, dichiarata)*: il primo `k` *(fra gli stati ogni `250`)* in cui `w(k)/w(0)` esce da `[0.7, 1.3]` oppure i pezzi sopra il `10%` sono piu' di uno; **K-T resta quello della sez. 10** *(`w(3000)/w(500)`, un pezzo)*. Nel referto anche il picco lisciato e la massa `somma rho` a ogni stato.
 - **La semina (a)** *(«proiezione_Gamma»)*: `Q` = una base ortonormale *(QR)* del sottospazio della quasi-energia piu' bassa di `A(0)` *(le righe di `torneo_fondo_v2.py`, molteplicita' `4`)*; **`psi(x) = Q Q^dag psi_cima(x)` nodo per nodo, poi uno scalare unico perche' `somma |psi|^2` = quella della cima** *(«la stessa norma»: globale, non per nodo)*; `phi` quello della cima. **Il referto stampa la frazione proiettata** *(deve ridare `0.0004` di `torneo_fondo_v2.txt`)*.
 - ### ⚠ **UN ERRORE MIO, DETTO PRIMA:** le voci `T_L+0.5_cima` e `T_L+0.25_cima` della coda **non hanno aperto la voce nel registro** *(il `+` non e' un nome valido: `NOME_VALIDO = [A-Za-z0-9._-]`)*; la coda le ha lanciate lo stesso *(codice `2` annotato)*. Registrate ora come RETROATTIVE *(`m1446-T_Lp0.5_cima`, `m1446-T_Lp0.25_cima`)*; **le voci nuove non usano il `+`.**
+
+## 12. IL GIUDIZIO SULLA SAGOMA *(Luca, 2026-11-22, [M2226-SAGOMA])*
+
+- **Ogni referto del torneo chiude con la TABELLA DEL GIUDIZIO di `doc/SAGOMA.md`** *(una riga per proporzione, S1-S15 e M1-M5 quando ci sono: prima, dopo, MIGLIORA / LASCIA / PEGGIORA / NON MISURATO, i numeri)*; **una forma che migliora una riga e ne peggiora un'altra e' una TOPPA, non una cura, e si scrive cosi'.**
