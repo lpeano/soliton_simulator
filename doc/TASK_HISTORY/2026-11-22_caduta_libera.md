@@ -205,3 +205,25 @@
 ### 6.3 Le previsioni mie
 
 - P-O2 `40%`; **il controllo dell'ambiguita' passa** `70%` *(le scene diverse possono spostare la frequenza di piu' di `0.006`)*.
+
+## 7. [M1417] L'OROLOGIO RELATIVO AL VUOTO *(la decisione di Luca, dopo le `14:01`; scritta PRIMA del codice `doc/referti_l2/orologio_relativo.py` e dei numeri)*
+
+> **Dichiarato da Luca:** la lettura e' **POST-HOC** *(l'idea e' nata dopo aver visto il segno di [M1310-P])*.
+
+### 7.1 Le scelte e i criteri *(copiati)*
+
+- **S1:** sola lettura degli stati gia' usati da `pound_rebka_GU.py` *(le stesse coppie, gli stessi `k 500-2000`)* e dell'orologio N1; nessuna corsa, nessun file del nucleo.
+- **S2:** `omega_phi` = il ritmo della fase di `phi - phi0` *(o di `phi`, quello che la carta giustifica)*, la media pesata con lo stesso peso di `psi` entro `r 15` da ciascun mattone, e nel vuoto lontano *(`r > 40` da tutti e due)*.
+- **S3:** `omega_rel = omega_phi(locale) - omega_psi`; `Delta omega_rel` rispetto alla base *(d 50 e d 66)*, per coppia.
+- **K1:** l'orologio N1 da solo, `omega_rel` costante *(il residuo del fit come in [M1310-P])*. **K2:** `omega_phi` nel vuoto lontano uguale fra le coppie entro `1e-5`; se no la scena non e' confrontabile: dirlo e fermarsi. **K3:** il segno di `Delta omega_rel` per la coppia che si attrae: NEGATIVO = come la natura; POSITIVO = come prima. E il segno di `omega_phi - omega_psi` di base.
+- **Le previsioni del guardiano** *(copiate)*: **P1** K1 e K2 passano. **P2** il segno di `omega_phi - omega_psi` di base: `50%`. **P3** `omega_phi` locale vicino ai mattoni cambia fra la coppia a `d 34` e la base meno di `|Delta omega_psi| = 1.26e-4`.
+
+### 7.2 Le definizioni *(fissate QUI)*
+
+- **Quale fase:** **la fase di `phi` RISPETTO A `phi0`**, `theta_v = arg somma_v w_v somma_{h in v} conj(phi0_h) phi_h`, **e poi `omega_phi = omega_F3 + omega_v`**, con `omega_v = -d theta_v/dk` e **`omega_F3` il ritmo del vuoto indisturbato** *(`-arg c(t + 1)/c(t)`, srotolato tick per tick sull'intervallo, dalla tabella `bordo.c_di` della scena)*. **Il perche':** `phi` da solo gira di `~0.47` rad per tick *(`pi s`)*, quindi fra due stati a `500` tick ha la stessa ambiguita' di `psi`; **`phi - phi0` gira lento** *(`|omega_v| << 2 pi/500`)*, e l'ambiguita' non c'e': la parte veloce `omega_F3` e' nota esattamente dalla tabella. **I due numeri sono la stessa cosa** *(`omega_phi`)*, solo misurati senza ambiguita'.
+- **`phi0(t) = c(t) F3`** con la tabella e il vuoto F3 della scena delle coppie *(`mattone.scena(CORSA_C, T_C)` di `mattone_coppia_L162`; per d 65 `convergenza.scena_L(243, 100.5)`, come `coppia_distanze`)*, `t` dal `meta` dello stato; per N1 la scena di `chi` *(`triangolo_chi_v4.scena`)*, `t = G2.T0 + k`.
+- **I pesi:** **locale** = `rho` entro `r 15` dal baricentro di ciascun mattone *(lo stesso di `psi` in [M1310-P])*; **lontano** = `1` per nodo dove `r > 40` da tutti e due i baricentri.
+- **`omega_psi`:** come `pound_rebka_GU.py` *(la fase di `psi` sciolta con `omega_ref` dell'orologio N1)*.
+- **`omega_v`:** `-wrap(theta_v(k2) - theta_v(k1))/(k2 - k1)`; **il controllo:** `|wrap(.)| < pi/2` *(se no, anche `omega_v` e' ambiguo)*.
+- **K1, il criterio numerico:** la fase relativa `Psi(k) = theta_v(k) + somma omega_F3 - Phi_psi(k)` di N1 *(gli stati `250 ... 1000`, `psi` dalla fase di ogni tick)*, **il residuo del fit lineare sotto `1` rad** *(come [M1310-P])*.
+- **La base** = la media di d 50 e d 66 *(in fase, lontane)*.
