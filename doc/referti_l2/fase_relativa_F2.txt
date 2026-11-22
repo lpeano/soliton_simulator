@@ -1,0 +1,26 @@
+[TIMBRO] gravita_fase.py  sha1-BYTE 1c771cab  committato e pulito
+[TIMBRO] gravita_due_corpi_d.py  sha1-BYTE fb3c6840  committato e pulito
+[TIMBRO] gravita_due_corpi_misure.py  sha1-BYTE 7d739a8f  committato e pulito
+[TIMBRO] gravita_fase_F2.py  sha1-BYTE 2f248157  committato e pulito
+==================================================================================================================================
+[M1446-F2] CHI FA B? (la carta sez. F2): a da D(k); A = (a0 - a180)/2, B = (a0 + a180)/2
+==================================================================================================================================
+  riferimento (F, nessun interruttore)
+    F-off          le fasi [0.0, 0.0]: D da 38.6813 a 32.0000; a -1.2603e-06 +- 1.8e-08 (il residuo 2.51e-02)
+    D180-off       le fasi [0.0, 180.0]: D da 39.3400 a 41.7213; a +2.3511e-07 +- 1.7e-08 (il residuo 2.36e-02)
+    A -7.4769e-07, B -5.1259e-07, sigma 1.2e-08 (B/sigma -41.6)
+  U0 (U spento)
+    F2_U0_D0       le fasi [0.0, 0.0]: D da 38.6813 a 32.2934; a -1.1638e-06 +- 1.8e-08 (il residuo 2.54e-02)
+    F2_U0_D180     le fasi [0.0, 180.0]: D da 39.3400 a 41.8080; a +2.4158e-07 +- 1.6e-08 (il residuo 2.29e-02)
+    A -7.0271e-07, B -4.6113e-07, sigma 1.2e-08 (B/sigma -37.7)
+  PHI (phi congelato)
+    F2_PHI_D0      le fasi [0.0, 0.0]: D da 38.6813 a 26.8355; a -1.4590e-06 +- 1.9e-07 (il residuo 2.69e-01)
+    F2_PHI_D180    le fasi [0.0, 180.0]: D da 39.3400 a 39.7663; a -8.0879e-08 +- 3.3e-09 (il residuo 4.62e-03)
+    A -6.8906e-07, B -7.6994e-07, sigma 9.6e-08 (B/sigma -8.0)
+  U0PHI (tutti e due)
+    F2_U0PHI_D0    le fasi [0.0, 0.0]: D da 38.6813 a 26.9812; a -1.4296e-06 +- 1.9e-07 (il residuo 2.68e-01)
+    F2_U0PHI_D180  le fasi [0.0, 180.0]: D da 39.3400 a 39.9031; a -5.1816e-08 +- 3.3e-09 (il residuo 4.59e-03)
+    A -6.8889e-07, B -7.4070e-07, sigma 9.6e-08 (B/sigma -7.7)
+----------------------------------------------------------------------------------------------------------------------------------
+  le letture della carta F2: B da G col vuoto no; B da U no; ### ne' l'una ne' l'altra: tutti e due o nessuno (i numeri sopra)
+==================================================================================================================================
