@@ -291,6 +291,58 @@
     "--forma",
     "V3"
    ]
+  },
+  {
+   "nome": "F_D90",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "90",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 90 gradi"
+  },
+  {
+   "nome": "F_D60",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "60",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 60 gradi"
+  },
+  {
+   "nome": "F_D180",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 180 gradi"
+  },
+  {
+   "nome": "F_D270",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "270",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 270 gradi"
   }
  ]
 }
