@@ -1,0 +1,27 @@
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi.py  sha1-BYTE 85c48663  committato e pulito
+==================================================================================================================================
+P0, LA COMPATIBILITA' DEL TRIANGOLO CON CHI (Luca 2026-11-21 23:23): sola lettura, nessun tick
+==================================================================================================================================
+### t120: la scena S162 (T 10000): L 162, n 26244, m 78732; s 0.15; rho_c 227058.57486393457, e 6.315414e-05; la forma noncompatto; il bordo della scena R_A 47.500, c0 [98.87378070359784, 81.36252985852764]; il bordo nelle corse con chi: NESSUNO (g_e = 0)
+    i vertici [[74, 68], [113, 68], [113, 107]]; i lati ['39.0000', '39.0000', '39.0000']; il vuoto senza materia prima dell'incollatura True (max |psi_h| 0.0e+00); le masse dei francobolli da soli ['9.950108931447e+05', '9.950108931447e+05', '9.950108931447e+05']
+    il campo U(1): s_a uniforme True, 0.15; w 0.03897114317029973; il Laplaciano di chi sul grafo della scena (n 26244)
+    i parametri di chi (v2): kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 dello stato di partenza +1.412935154856e+01
+### t120r: la scena S162 (T 10000): L 162, n 26244, m 78732; s 0.15; rho_c 227058.57486393457, e 6.315414e-05; la forma noncompatto; il bordo della scena R_A 47.500, c0 [98.87378070359784, 81.36252985852764]; il bordo nelle corse con chi: NESSUNO (g_e = 0)
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 315, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 311, in main
+    return {"compat": compat, "costo": costo, "prova": prova}[x.cmd]()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 116, in compat
+    C, info = prepara(Z, quale)
+              ~~~~~~~^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 82, in prepara
+    MT.incolla(Z, fr, c, True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 258, in incolla
+    assert (centro[0] - fr["centro"][0]) % 3 == 0 and (centro[1] - fr["centro"][1]) % 3 == 0, "lo spostamento NON e' multiplo di 3: il disegno di fase di F3 non combacia"
+            ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'list' and 'int'
