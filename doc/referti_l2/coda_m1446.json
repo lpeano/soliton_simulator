@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato)",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -343,6 +343,186 @@
     "3000"
    ],
    "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 270 gradi"
+  },
+  {
+   "nome": "T_S1_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "S1",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L+0.5_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L+0.5",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L+0.25_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L+0.25",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L0_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_FH_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "FH",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_FT_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "FT",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "F2_U0_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_PHI_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "PHI",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_PHI_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "PHI",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0PHI_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0PHI",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0PHI_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0PHI",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
   }
  ]
 }
