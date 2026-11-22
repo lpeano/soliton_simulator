@@ -186,3 +186,22 @@
 ### 5.5 TODO
 
 - [ ] committare questa sezione; [M1253-G] `doc/referti_l2/galleggiamento.py` *(il vuoto puro col gradiente e a `N = 1`, `500` tick, poi la lettura)*; [M1253-O] `doc/referti_l2/orologio_mattone.py` *(cinque corse da `1000` tick, quando la CPU lo consente)*; i referti; la relazione nel ramo principale; **FERMO**.
+
+## 6. [M1310-P] IL POUND-REBKA DI G+U *(il mandato di Luca [M1310] delle `13:10`, fase B; scritta PRIMA del codice `doc/referti_l2/pound_rebka_GU.py` e dei numeri)*
+
+### 6.1 La richiesta *(copiata)*
+
+> «[M1310-P] Sugli stati salvati delle coppie del 14–16/11 senza lapse (B2 in fase a 35, coppia-d50, coppia-d65, e B2-pi in antifase): la frequenza propria di ciascun mattone (la rotazione della fase media di ψ pesata con ρ entro r 15, fra stati successivi) in funzione della distanza dall'altro. La domanda: G+U rallentano l'orologio di un mattone quando l'altro è vicino, nello stesso verso in cui lo attirano? IL CASO NOTO: il mattone da solo (lo stampo, stessi tick) ha frequenza costante entro il rumore.» **La previsione del guardiano** *(copiata)*: **P-O2:** nel Pound–Rebka di G+U l'orologio di un mattone rallenta quando l'altro (in fase) è più vicino. `50%`.
+
+### 6.2 Le premesse dal codice
+
+- **Gli stati** *(`E:\soliton_simulator\mattone\`, `mattone_coppia_L162.py` e `coppia_distanze.py`)*: `coppiaGU_L162` *(B2, `d 35`)*, `coppiaGUd50_L162`, `coppiaGUpi_L162` *(B2-pi)* a `k 500, 1000, 1500, 2000`; `coppiaGUd65_L162` a `k 500, 1000, 1500`, **sul toro di `L 243`** *(il nome dice `L162` perche' e' lo stampo)*. **Solo ogni `500` tick, e `k 0` non c'e'.** Le chiavi `psi_h`, `phi_h`, `rho`, `campo_A`, `campo_E`; **nessun `.sha1` accanto**: lo stampo al momento della lettura.
+- ### ⚠ **LA FASE FRA DUE STATI A `500` TICK E' AMBIGUA:** il mattone gira di `~0.6` rad per tick, cioe' `~300` rad in `500` tick; la differenza di fase misurata e' nota **a meno di `2 pi`**, quindi la frequenza **a meno di `2 pi/500 = 0.01257` per tick**. **Si scioglie con una frequenza di riferimento** `omega_ref`, se la vera e' entro `+-0.0063` da essa: `omega = omega_ref + wrap(-dPhi - omega_ref 500)/500`. **`omega_ref` = la frequenza dell'orologio-mattone `N1`** *([M1253-O], il mattone da solo col tick V0, la fase a OGNI tick: nessuna ambiguita')*. ### **E' anche il caso noto del mandato** *(«il mattone da solo, stessi tick»)*, **con una differenza dichiarata:** **la scena non e' la stessa** *(l'orologio sta su S162 senza bordo; le coppie su `C35-pi` col bordo da `R_A 60`, d65 su `L 243`)*, **e il tick** *(`mattone_cottura.Corsa.passo` del mondo GU, contro `tick_U` dei due mattoni)* **lo do per uguale perche' Luca scrive «G+U senza lapse»: NON l'ho verificato al bit.** **Il controllo che PUO' fallire:** le frequenze sciolte delle due meta' di una coppia, e dei tre intervalli, devono stare entro `+-0.006` da `omega_ref` *(se no, l'ambiguita' non e' sciolta: FERMO su quel numero)*.
+- **I due mattoni:** le due meta' divise dal piano per il punto medio fra i due massimi della materia, perpendicolare a `A1` *(la direzione delle coppie)*; **il centro di ognuno** = il baricentro di `rho` della sua meta'; **la fase** `Phi = arg somma_{r < 15} rho psi_c` *(`psi_c` la componente del primo semiarco con la norma piu' grande nel mattone, `girandola_chi_v3.fase_dei_nodi`; i semiarchi del toro di `243` con `girandola_chi_v3.toro_nodo`, controllati sulla forma di `psi_h`)*; **la distanza** fra i due baricentri.
+- **La lettura** *(fissata qui)*: per ogni coppia e intervallo, `omega_A`, `omega_B`, la media, `omega - omega_ref`, e la distanza media; **«rallenta quando l'altro e' vicino»** se `omega - omega_ref` e' piu' NEGATIVO a `d 35` che a `d 50` e a `d 65` *(in fase)*, **oltre lo scarto fra le due meta'**; **«nello stesso verso in cui lo attirano»:** il segno di `d''` di ogni coppia dai referti del `14-16/11` *(B2 in fase attrae, B2-pi respinge: la premessa del mandato)*, confrontato col segno di `omega - omega_ref`.
+
+- **La soglia del caso noto** *(mia, dichiarata)*: «frequenza costante entro il rumore» = **il residuo rms del fit lineare della fase di `N1` sotto `1` rad** su `900` tick *(una frequenza che deriva di `2e-3` in `900` tick darebbe un residuo di `~100` rad)*.
+
+### 6.3 Le previsioni mie
+
+- P-O2 `40%`; **il controllo dell'ambiguita' passa** `70%` *(le scene diverse possono spostare la frequenza di piu' di `0.006`)*.
