@@ -38,7 +38,7 @@
 ## 4. La tabella del giudizio (da compilare in ogni referto di cura)
 | riga | prima | dopo | MIGLIORA / LASCIA / PEGGIORA / NON MISURATO |
 (una riga per S1–S15 e, quando c'è, per M1–M5; i numeri; nessuna riga saltata senza il motivo)
-Il verdetto: CURA se nessuna riga PEGGIORA e almeno una MIGLIORA; TOPPA se una MIGLIORA e un'altra PEGGIORA; NULLA se tutte LASCIANO. Una TOPPA non entra nel nucleo.
+Il verdetto: CURA se nessuna riga PEGGIORA e almeno una MIGLIORA; TOPPA se una MIGLIORA e un'altra PEGGIORA; NULLA se tutte LASCIANO; DANNO se una o più righe PEGGIORANO e nessuna MIGLIORA (Luca, 2026-11-22, [M2351]). Una TOPPA non entra nel nucleo.
 
 ## 5. Le regole
 - La sagoma si aggiorna solo con numeri misurati e la loro fonte; mai con previsioni.
