@@ -1,0 +1,16 @@
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] notte_m0428_v3.py  sha1-BYTE 0f18226d  committato e pulito
+==================================================================================================================================
+[M0428-S] IL SEGNO DELL'ANELLO 10-16: (a) il t120 a k 0 coi due strumenti; (b) le sfasate del 15/11 ricostruite; (c) la serie del t120 dal film
+==================================================================================================================================
+### (b) le sfasate del 15/11 a k 0 ricostruite, lo strumento del 15/11, attorno alla media dei centri ['99.000', '81.000']: l'anello 10-16 -584.799
+### (a) il t120 a k 0 (ricostruito con prepara), attorno a G_k ['-0.307', '-0.233'] dal G0: lo strumento del film (cs = s N(chi), la fase (a)) +3119.882; lo strumento del 15/11 (il cs della scena, nessuna fase) +3135.544; lo scarto relativo 5.00e-03
+  S (b) CASO NOTO: le sfasate del 15/11 ricostruite, l'anello 10-16 entro l'1% da -574                             ### FALLISCE   -584.799
+  S (a): i due strumenti sul t120 a k 0 coincidono entro l'1%                                                      PASSA   +3119.882 contro +3135.544
+### (c) la serie del t120 dal film (doc/referti_l2/film/girandola_t120_00000_02000.npz), attorno a G_k:
+    k 0 +3119.882; k 250 +3109.887; k 500 +3167.044; k 750 +4935.195; k 1000 +5814.217; k 1250 +6485.354; k 1500 +6514.796; k 1750 +6516.051; k 2000 +6723.059
+### (c) il segno: SEMPRE POSITIVO, nessun cambio
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: S (b) CASO NOTO: le sfasate del 15/11 ricostruite, l'anello 10-16 entro l'1% da -574                           ### FALLISCE
+  DEVE: S (a): i due strumenti sul t120 a k 0 coincidono entro l'1%                                                    PASSA
+==================================================================================================================================
