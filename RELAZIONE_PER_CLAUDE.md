@@ -26794,3 +26794,34 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **[M2305]: le otto corse FINITE, uscita `0`** *(le due S3 `23:50`; le sei tenute `00:03:06`-`00:03:21`)*. **Le letture domattina, su richiesta di Luca.**
 - **[M1751] le schede: le due voci FALLITE** *(`23:51:51`, `23:52:00`)* all'apertura dello stato: `KeyError 'R_A'` -- **gli stati `prima_`/`dopo_` delle riprese li ho salvati con un `meta` RIDOTTO: errore mio** *(le riprese restano buone: il controllo al bit 10 su 10)*. Il fallimento `42ac7465` *(ramo `mitosi`)*. **La correzione, un file nuovo:** `gradi_liberta_v2.py` *(`9f3771d8`)* -- lo stato si apre da una COPIA col `meta` completato dalla partenza della stessa ripresa *(le chiavi aggiunte: `Delta`, `R_A`, `R_ogg5_k0`, `incollato`: i parametri della corsa)*; gli originali non si toccano. **Due voci nuove a priorita' `2`** *(`a69e460d`)*; **il dispatcher rilanciato a mano** *(uscito alle `00:03:21` con la coda vuota)*: **le schede partite alle `00:09:47` e `00:09:49`**, oltre il punto della caduta.
+
+## [M1751-L] LE SCHEDE: LA v2 CADUTA DUE VOLTE (cs_prec DELLA RIPRESA 1; Z['metti'] SU SCENA CRESCIUTA), LA v3 SCRITTA E NON LANCIATA *(2026-11-24, `00:10`-`00:18` da `date`)* [[PROGETTO-MITOSI]]
+
+**`M1751S_v2_schede_a` FALLITO `00:10:33`:** la ripresa della nascita 1 non ha `cs_prec` *(la nascita avviene prima di ogni tick)*: `s` del nodo `nan` *(`5c51f40a`)*. **`M1751S_v2_schede_b` FALLITO `00:14:45`:** `gradi_liberta.scheda` chiama `Z["metti"]()` su una scena CRESCIUTA *(`4a3628ce`)*. **Errori miei, tutti e due.** **La v3** *(`gradi_liberta_v3.py`, `4a3628ce`)*: `cs_prec` dalla partenza della ripresa SOLO allo stesso `k`; la scheda senza `Z["metti"]` *(in memoria, dal sorgente della v1)*. **Non lanciata:** [M0015] dice «nessuna corsa nuova».
+
+## [M0015-01] S3, LA LEGGE SULL'OGGETTO AL FONDO A K: a - a(V0) PROPORZIONALE A grad omega (K UGUALE ENTRO LO 0.46%), MA K = 0.129, NON 1: IL CRITERIO NON VALE *(2026-11-24, `00:20` da `date`)* [[PROGETTO-MITOSI]]
+
+**`fondo_s3.py lettura`** -> `fondo_s3.txt`: `m* = +18.9162` *(il calcio di 1c)*, `d omega/dN = +0.559784` *(l'orologio V2 di 1c, `Delta` dal vuoto lontano)*, `a(V0) = +2.74e-8`.
+
+| il gradiente | `-grad omega / m*` | `a - a(V0)` | `K` |
+|---|---|---|---|
+| `x0.5` | `+2.3290e-6` | `+2.998e-7 +- 1.7e-9` | `+0.1287 +- 0.0008` |
+| `x1` *(1c)* | `+4.6579e-6` | `+6.023e-7 +- 3.2e-9` | `+0.1293 +- 0.0007` |
+| `x2` | `+9.3159e-6` | `+1.2104e-6 +- 6.3e-9` | `+0.1299 +- 0.0007` |
+
+**`K`: la media `+0.1293`, lo scarto `0.0006` (`0.46%`).** ### **IL CRITERIO DELLA CARTA** *(lo scarto/la media `< 10%` E `|media - 1| < 0.15`)*: **NON VALE** -- la proporzionalita' c'e' *(lineare nel gradiente, col segno della legge)*, **il coefficiente no** *(`0.129`: un fattore `~7.7` sotto)*. **Le previsioni del guardiano:** `K_i` uguale entro il `10%` `60%`: **SI'**; la media in `[0.85, 1.15]` `50%`: **NO**. **Nessun giudizio oltre il criterio** *(il mandato)*.
+
+## [M0015-02] [M0015-03] LE TENUTE DI [M2305]: t2 E t3 REGGONO, t1 E t4 NO; GLI L0 NON REGGONO -- t1 NON REGGE: LE CADUTE DI S4 NON SI LANCIANO, FERMO *(2026-11-24, `00:23` da `date`)* [[PROGETTO-MITOSI]]
+
+**`tenuta_fondo_v2_lettura.py`** *(`fcfa4b2d`; il mandato diceva `tenuta_fondo_v2.py lettura`: quello script e' usato e non ha `lettura`)* -> `tenuta_fondo_v2.txt`:
+
+| | `w(3000)/w(1500)` | i pezzi a 3000 | K-T v2 | `omega` `[2500, 3000]` | la massa |
+|---|---|---|---|---|---|
+| **t1** L-1 ampiezza `x0.5` | **`2.720`** | `1` | **NON REGGE** | `+0.0928`, nel gap | `248752.72` |
+| **t2** L-1 ampiezza `x2` | `1.059` | `1` | **REGGE** | `+0.0940`, nel gap | `3980043.57` |
+| **t3** L-1 larghezza `x0.7` | `1.204` | `1` | **REGGE** | `+0.0927`, nel gap | `995010.89` |
+| **t4** L-1 larghezza `x1.4` | `0.727` | **`4`** | **NON REGGE** | `+0.0947`, nel gap | `995010.89` |
+| L0 ampiezza `x0.5` | `1.889` | `1` | NON REGGE | `+0.2442` | |
+| L0 ampiezza `x2` | `1.900` | `1` | NON REGGE | `+0.2442` | |
+
+**I fatti in piu', dai numeri:** t1 si stringe fino a `w 3.64` a `k 1500` e poi si riallarga *(`8.99` a `2250`, `9.89` a `3000`)*; i due L0 hanno lo STESSO `w` a ogni `k` *(L0 e' lineare: l'ampiezza non conta)*; la massa costante a `~1e-12` relativo. **Le previsioni del guardiano:** t1 regge `55%`: **no**; t2 `70%`: **si'**; t3 `65%`: **si'**; t4 `65%`: **no** *(4 pezzi)*; L0 non reggono `90%`: **si'**. ### **[M0015-03]: t1 (ampiezza `x0.5`) NON REGGE: le cadute V2 di S4 NON si lanciano** *(il mandato: «se una delle due non regge: NON lanciare, dire quale e FERMO»)*. **E le schede di [M1751]** *(la v3, `4a3628ce`)* **non sono in corso: sono cadute due volte; la v3 non l'ho lanciata** *([M0015]: nessuna corsa nuova)*.
