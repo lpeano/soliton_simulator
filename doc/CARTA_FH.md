@@ -43,3 +43,8 @@
 | S1-S16 | | | **riempita in `doc/referti_l2/FH_giudizio.md`**: S4 PEGGIORA *(`eta` V2 `0.227`, V3 `0.303`, `3.9` sigma)*, S5 MIGLIORA, S1 S2 S15 LASCIA, S13 NON MISURATO per decisione: **FH = TOPPA** |
 
 - ### **S4, LA DECISIONE DI LUCA** *(2026-11-23 dopo le `03:45`)*: **la mitosi con FH NON ora; il merge `lapse-u` -> `mitosi` con un mandato a se', di giorno, a corse ferme** *(MITOSI-v2 non si tocca)*. **Si va avanti con Eotvos, la coppia a `d 36`, le tenute lunghe.** Nella tabella del giudizio di FH la riga S13 *(le nascite)* resta **NON MISURATO** con questo motivo.
+
+## 8. DUE ERRORI DEL GUARDIANO *(il mandato [M0528], 2026-11-23)*
+
+- **n.235:** il riferimento `-1.0e-06` della coppia *(sez. 4 e 6)* era **di un altro stato** *(`coppia_GU_L162`, il mattone cotto su L 162)*; **il riferimento giusto a parita' di stato e' F-off o lo stato compatto riscalati per `1/d`** *(`1.021` / `1.034`, `doc/referti_l2/coppia_caso_noto.txt`)*.
+- **n.236:** **il criterio K3 della tenuta lunga** *(sez. 2)* **misurava il respiro** *(`w` `+-50%`, anche per F0)* **e non lo scioglimento** *(`doc/referti_l2/tenuta_lunga_FH.txt`)*.
