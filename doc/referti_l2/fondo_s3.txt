@@ -1,0 +1,17 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_s3.py  sha1-BYTE 47fa8b17  committato e pulito
+==================================================================================================================================
+[M2305] S3: LA LEGGE a = -grad omega / m* SULL'OGGETTO AL FONDO A K (la carta sez. 2-sexies)
+==================================================================================================================================
+  m* +18.9162 (il calcio di 1c); d omega/dN +0.559784 (l'orologio V2 di 1c); a(V0) +2.7401e-08 +- 4.6e-10
+  x0.5: A 6.948706e+00; dN/dy -7.8700e-05; grad omega -4.4055e-05; -grad omega/m* +2.3290e-06; a - a(V0) +2.9982e-07 +- 1.7e-09; K +0.1287 +- 0.0008; la norma 1.7e-13
+  x1.0: A 1.389741e+01; dN/dy -1.5740e-04; grad omega -8.8111e-05; -grad omega/m* +4.6579e-06; a - a(V0) +6.0229e-07 +- 3.2e-09; K +0.1293 +- 0.0007; la norma 2.8e-14
+  x2.0: A 2.779482e+01; dN/dy -3.1480e-04; grad omega -1.7622e-04; -grad omega/m* +9.3159e-06; a - a(V0) +1.2104e-06 +- 6.3e-09; K +0.1299 +- 0.0007; la norma 1.1e-13
+### K: la media +0.1293, lo scarto 0.0006 (0.46% della media); il criterio: lo scarto/la media < 10% e |media - 1| < 0.15: NON VALE
+==================================================================================================================================

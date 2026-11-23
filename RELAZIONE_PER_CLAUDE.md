@@ -26829,3 +26829,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **[M2305]: le otto corse FINITE, uscita `0`** *(le due S3 `23:50`; le sei tenute `00:03:06`-`00:03:21`)*. **Le letture domattina, su richiesta di Luca.**
 - **[M1751] le schede: le due voci FALLITE** *(`23:51:51`, `23:52:00`)* all'apertura dello stato: `KeyError 'R_A'` -- **gli stati `prima_`/`dopo_` delle riprese li ho salvati con un `meta` RIDOTTO: errore mio** *(le riprese restano buone: il controllo al bit 10 su 10)*. Il fallimento `42ac7465` *(ramo `mitosi`)*. **La correzione, un file nuovo:** `gradi_liberta_v2.py` *(`9f3771d8`)* -- lo stato si apre da una COPIA col `meta` completato dalla partenza della stessa ripresa *(le chiavi aggiunte: `Delta`, `R_A`, `R_ogg5_k0`, `incollato`: i parametri della corsa)*; gli originali non si toccano. **Due voci nuove a priorita' `2`** *(`a69e460d`)*; **il dispatcher rilanciato a mano** *(uscito alle `00:03:21` con la coda vuota)*: **le schede partite alle `00:09:47` e `00:09:49`**, oltre il punto della caduta.
+
+## [M0015-01] S3, LA LEGGE SULL'OGGETTO AL FONDO A K: a - a(V0) PROPORZIONALE A grad omega (K UGUALE ENTRO LO 0.46%), MA K = 0.129, NON 1: IL CRITERIO NON VALE *(2026-11-24, `00:20` da `date`)* [[PROGETTO-MITOSI]]
+
+**`fondo_s3.py lettura`** -> `fondo_s3.txt`: `m* = +18.9162` *(il calcio di 1c)*, `d omega/dN = +0.559784` *(l'orologio V2 di 1c, `Delta` dal vuoto lontano)*, `a(V0) = +2.74e-8`.
+
+| il gradiente | `-grad omega / m*` | `a - a(V0)` | `K` |
+|---|---|---|---|
+| `x0.5` | `+2.3290e-6` | `+2.998e-7 +- 1.7e-9` | `+0.1287 +- 0.0008` |
+| `x1` *(1c)* | `+4.6579e-6` | `+6.023e-7 +- 3.2e-9` | `+0.1293 +- 0.0007` |
+| `x2` | `+9.3159e-6` | `+1.2104e-6 +- 6.3e-9` | `+0.1299 +- 0.0007` |
+
+**`K`: la media `+0.1293`, lo scarto `0.0006` (`0.46%`).** ### **IL CRITERIO DELLA CARTA** *(lo scarto/la media `< 10%` E `|media - 1| < 0.15`)*: **NON VALE** -- la proporzionalita' c'e' *(lineare nel gradiente, col segno della legge)*, **il coefficiente no** *(`0.129`: un fattore `~7.7` sotto)*. **Le previsioni del guardiano:** `K_i` uguale entro il `10%` `60%`: **SI'**; la media in `[0.85, 1.15]` `50%`: **NO**. **Nessun giudizio oltre il criterio** *(il mandato)*.
