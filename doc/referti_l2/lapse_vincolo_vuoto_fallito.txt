@@ -1,0 +1,14 @@
+### il vuoto V2V3: max |psi_h| 0.000e+00; u a k 0 da -2.82743338823075074e+00 a -2.82743338823075074e+00 (lo scarto 0.000e+00); l'impronta b82192228ba5
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\lapse_vincolo.py", line 491, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\lapse_vincolo.py", line 481, in main
+    return vuoto(x.riga)
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\lapse_vincolo.py", line 246, in vuoto
+    C.residuo()
+    ~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 188, in residuo
+    return float(np.max(np.abs(G))) / (self.campo.e * float(rho.max()))
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero
