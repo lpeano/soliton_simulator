@@ -26628,3 +26628,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### **LA PREMESSA CHE NON TORNA:** il mandato dice *«il corpo pesante ... cade MENO»*; **col vincolo il corpo con piu' norma si muove DI PIU'** *(V2 `|a|` `3.15e-6` a `x0.8`, `4.37e-6` a `x1.2`; senza il vincolo `5.53e-6`, `4.90e-6`)*: **nella sagoma i numeri, non la frase.** «M5 della stella polare» l'ho letto come la riga M5 della sagoma *(la stella polare non ha un M5)*.
 
 **`doc/PROGETTO_VINCOLI.md` sez. `6`, sul ramo `vincoli`:** **G2 NON SI APRE** *(Eotvos sale su tutti e tre i collegamenti; S5 PEGGIORA contro F0)*; l'ordine: **il pezzo C e Q2**; Z1-Z4 restano a costo zero. ### **UNA DOMANDA A LUCA:** la porta scritta di C1-C2 **e' G2, che resta chiusa**: come si entra in C *(una porta riscritta, o C sulla sola carta finche' Q2 non e' chiusa)* lo decide lui; il criterio di chiusura: una sua riga in quella sezione.
+
+## [M1623] LA PARTE 2 DAL RAMO mitosi E LA SAGOMA (S13 CADE); FERMO *(2026-11-23, `16:30`-`17:00` da `date`; i commit su `mitosi`: `76227635` la carta, `71a6a9ec` lo script, `4bc988bf` il referto)* [[PROGETTO-MITOSI]]
+
+**Le 538 nascite di MITOSI-v2, lette dai file** *(`doc/referti_l2/nascite/nascite_538_lettura.md` del ramo `mitosi`; solo lettura; «prima» e «dopo» con la risoluzione dei dati, `50` tick la norma, `250` Theta)*:
+- **K1 PASSA** *(le prime 9 al bit con M1-M3; la norma senza nascite `3.3e-16`)*.
+- ### **K2: S13 SI SFUMA** -- sull'asse **`0.353`** contro **`0.338`** dei nodi dell'anello *(`p = 0.24`)*; le prime `100` `0.78`, le ultime `238` `0.22`. **Nella sagoma S13 e' scritta CADUTA, col perche'.**
+- **K3 CONSERVATA** *(`8.9e-16`)*, **ma e' il codice** *(`_fattore` riscala la norma della stella)*; **l'energia NON e' conservata:** `-21.3` per nascita, `1.1455e+04` in tutto.
+- **K4 CHIUDE** *(genitore+nato `0.425`, i vicini `0.957`, il controllo `1.006`; lo scendere e' garantito dal contatore)*; **ma l'`83%` delle nascite e' a 1 passo dalla precedente** *(la mediana `12` tick)*: **la nascita non sposta Theta, i vicini sono gia' maturi.**
+- ### **K5: il ritmo RALLENTA** *(`69 -> 39` per `1000` tick, `-5 sigma`)*.
+- **N6: tutte nel guscio** *(`r 16.6-22.0`)*. **N1:** «5-7» `506` su `538`.
+- **Le previsioni del guardiano:** P1, P3, P4, P6 si'; **P2** *(IMPRONTA)* **e P5** *(ACCELERA)* **no.**
+
+### **LE RIGHE NUOVE POSSIBILI DELLA SAGOMA -- NON SCRITTE, LA DECISIONE E' DI LUCA:** il ritmo delle nascite rallenta; le nascite si toccano *(`83%` a 1 passo)*; la nascita conserva la norma per costruzione e perde energia *(C5 del progetto dei vincoli, nel codice di oggi, e' il contrario)*. **FERMO.**
