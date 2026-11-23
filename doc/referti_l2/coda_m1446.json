@@ -1224,6 +1224,15 @@
     "corsa"
    ],
    "note": "[M0326] S5 il caso noto della coppia a d 36 (d 35 non e' un nodo buono)"
+  },
+  {
+   "nome": "M0528N_casi_noti",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "casi_noti"
+   ],
+   "note": "[M0528] 2b i casi noti del lapse come moltiplicatore (CN1, CN1b, CN2 e il DEVE FALLIRE, CN3)"
   }
  ]
 }
