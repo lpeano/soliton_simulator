@@ -1,0 +1,17 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] eotvos.py  sha1-BYTE ed8dd279  committato e pulito
+[TIMBRO] eotvos_v2.py  sha1-BYTE 263711d2  committato e pulito
+[TIMBRO] gravita_fase.py  sha1-BYTE 1c771cab  committato e pulito
+[TIMBRO] fh_suite.py  sha1-BYTE 3f8b42fc  committato e pulito
+==================================================================================================================================
+[M0326-S] IL SEGNO DI m_E (la carta sez. 5)
+  A uniforme (e A0 = +0.010): v +6.2128e-04; la deriva v0 +6.8182e-05; v - v0 +5.5310e-04
+  il calcio k = +0.010: v -5.5148e-04; v - v0 -6.1966e-04
+  il segno: OPPOSTO al calcio -> k_cin = k - e A; m_E = -16.61 (COERENTE con I1)
+  DEVE: K5: il segno di m_E dalle righe (negativo, k_cin = k - e A) confermato dal controllo                     PASSA 
+  la norma 9.950108931e+05 -> 9.950108931e+05
+==================================================================================================================================
