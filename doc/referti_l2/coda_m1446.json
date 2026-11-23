@@ -1676,66 +1676,6 @@
     "20000"
    ],
    "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
-  },
-  {
-   "nome": "M1658T_L-1_stampo_K",
-   "priorita": 0,
-   "argv": [
-    "doc/referti_l2/tenuta_fondo.py",
-    "corsa",
-    "--forma",
-    "L-1",
-    "--semina",
-    "stampo_K",
-    "--fino",
-    "3000"
-   ],
-   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L-1 stampo_K, 3000 tick"
-  },
-  {
-   "nome": "M1658T_L-1_proiezione_K",
-   "priorita": 0,
-   "argv": [
-    "doc/referti_l2/tenuta_fondo.py",
-    "corsa",
-    "--forma",
-    "L-1",
-    "--semina",
-    "proiezione_K",
-    "--fino",
-    "3000"
-   ],
-   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L-1 proiezione_K, 3000 tick"
-  },
-  {
-   "nome": "M1658T_L0_stampo_K",
-   "priorita": 0,
-   "argv": [
-    "doc/referti_l2/tenuta_fondo.py",
-    "corsa",
-    "--forma",
-    "L0",
-    "--semina",
-    "stampo_K",
-    "--fino",
-    "3000"
-   ],
-   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L0 stampo_K, 3000 tick"
-  },
-  {
-   "nome": "M1658T_L0_proiezione_K",
-   "priorita": 0,
-   "argv": [
-    "doc/referti_l2/tenuta_fondo.py",
-    "corsa",
-    "--forma",
-    "L0",
-    "--semina",
-    "proiezione_K",
-    "--fino",
-    "3000"
-   ],
-   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L0 proiezione_K, 3000 tick"
   }
  ]
 }
