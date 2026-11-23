@@ -1,0 +1,17 @@
+[TIMBRO] coppie_57.py  sha1-BYTE 343305c1  committato e pulito
+[TIMBRO] nascite_lettura.py  sha1-BYTE ec1571ea  committato e pulito
+[TIMBRO] burgers.py  sha1-BYTE acc75526  committato e pulito
+[TIMBRO] burgers_circuito.py  sha1-BYTE 8d1bba6e  committato e pulito
+============================================================================================================================================
+[M1751-L] S5 RIFATTO: IL BURGERS COL CIRCUITO CHIUSO (il primo guscio attorno alla coppia 5-7, contro il favo perfetto; PAREGGIO se un passo sta a 30 gradi da due direzioni)
+============================================================================================================================================
+  k 36000: 2 coppie legate; l'anello un ciclo semplice in 2 (le lunghezze: {8: 2}); con almeno un passo a PAREGGIO 1 su 2
+    senza pareggi (1): |b| {np.float64(0.0): 1}; la somma dei b [0.0, 0.0]
+  DEVE: K1 a k 36000: la somma dei b delle due coppie zero                                                             NON MISURATO anelli validi 2, con pareggio 1
+  k 36250: 8 coppie legate; l'anello un ciclo semplice in 8 (le lunghezze: {8: 8}); con almeno un passo a PAREGGIO 7 su 8
+    senza pareggi (1): |b| {np.float64(0.0): 1}; la somma dei b [-0.0, 0.0]
+  DEVE: il controllo: due nodi perfetti (2275, 2088, r 69.9) -> b = 0, l'anello di 8, nessun pareggio                  PASSA b [-0.0, 0.0], pareggi 0
+  k 45976: 250 coppie legate; l'anello un ciclo semplice in 247 (le lunghezze: {8: 250}); con almeno un passo a PAREGGIO 236 su 247
+    senza pareggi (11): |b| {np.float64(0.0): 8, np.float64(1.0): 3}; la somma dei b [-0.0, 0.0]
+============================================================================================================================================
+### 2 DEVE: 1 PASSANO, 0 FALLISCONO [], 1 NON MISURATI ['K1 a k 36000: la somma dei b delle due coppie zero']
