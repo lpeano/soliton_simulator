@@ -1,0 +1,30 @@
+[TIMBRO] lapse_vincolo_stato_v2.py  sha1-BYTE fba95507  committato e pulito
+[TIMBRO] lapse_vincolo_stato.py  sha1-BYTE c7ff4537  committato e pulito
+la cartella                  l'ultimo stato              k    s/tick  it medie   it max
+caduta_V2V3_x0.8_senza       stato_002000.npz (sha1)   2000     1.025     0.000        0
+caduta_V2V3_x0.8_vincolo     stato_002000.npz (sha1)   2000     1.685     3.959        5
+caduta_V2V3_x1.0_vincolo     stato_002000.npz (sha1)   2000     1.704     3.971        6
+caduta_V2V3_x1.2_senza       stato_002000.npz (sha1)   2000     1.028     0.000        0
+caduta_V2V3_x1.2_vincolo     stato_002000.npz (sha1)   2000     1.687     3.981        6
+caduta_V2_x0.8_vincolo       stato_002000.npz (sha1)   2000     1.701     4.582        7
+caduta_V2_x1.0_vincolo       stato_002000.npz (sha1)   2000     1.750     4.849        7
+caduta_V2_x1.2_vincolo       stato_002000.npz (sha1)   2000     1.759     5.000        7
+caduta_V3_x0.8_vincolo       stato_002000.npz (sha1)   2000     1.196     4.002        7
+caduta_V3_x1.0_vincolo       stato_002000.npz (sha1)   2000     1.240     4.594        7
+caduta_V3_x1.2_vincolo       stato_002000.npz (sha1)   2000     1.239     4.848        7
+coppia_F0_180_senza          stato_002000.npz (sha1)   2000     0.534     0.000        0
+coppia_V2V3_0_vincolo        stato_002000.npz (sha1)   2000     1.465     3.966        6
+coppia_V2V3_180_vincolo      stato_002000.npz (sha1)   2000     1.104     3.974        6
+mattone_V2                   stato_02000.npz (sha1)   2000     2.412     4.930        7
+mattone_V2V3                 stato_02000.npz (sha1)   2000     2.316     3.973        6
+mattone_V3                   stato_02000.npz (sha1)   2000     1.690     4.694        7
+vuoto_V2                     stato_000000.npz (sha1)      0       nan        --       --
+vuoto_V2V3                   stato_000000.npz (sha1)      0       nan        --       --
+vuoto_V3                     stato_000000.npz (sha1)      0       nan        --       --
+vuoto_v2_V2                  stato_000500.npz (sha1)    500     1.001     1.454        2
+vuoto_v2_V2V3                stato_000500.npz (sha1)    500     1.036     1.454        2
+vuoto_v2_V3                  stato_000500.npz (sha1)    500     0.759     1.000        1
+### IL COSTO DEL SOLUTORE, STIMATO (col vincolo meno senza, la stessa scena; le corse insieme):
+    caduta_V2V3_x0.8_vincolo 1.685 - caduta_V2V3_x0.8_senza 1.025 = +0.660 s/tick
+    caduta_V2V3_x1.2_vincolo 1.687 - caduta_V2V3_x1.2_senza 1.028 = +0.659 s/tick
+    coppia_V2V3_180_vincolo 1.104 - coppia_F0_180_senza 0.534 = +0.570 s/tick
