@@ -1,0 +1,13 @@
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+==================================================================================================================================
+[M0037-01bis] LA CADUTA A FINESTRE (la carta sez. 2-octies): a per finestra (estremi compresi), v(k) su [k-50, k+50]
+==================================================================================================================================
+  IL CASO NOTO:
+    DEVE: [200, 2000] della V2 x1 = fondo_1c.fit_a AL BIT: PASSA (a +6.2969e-07, fit_a +6.2969e-07; contro +6.2969e-07: COINCIDE)
+    DEVE FALLIRE: [200, 1990] diversa al bit: PASSA (e' diversa) (a +6.3127e-07)
+  caduta_V2 (A 13.897411673714853):
+    [ 200,  800]: a +8.0314e-07 +- 6.9e-09 (61 punti)
+    [ 800, 1400]: a +6.3397e-07 +- 1.4e-08 (61 punti)
+    [1400, 2000]: a +4.7534e-07 +- 1.9e-08 (61 punti)
+### CADUTO QUI (00:47, il codice d'uscita 1): KeyError 'caduta_V0' -- la netta di una V2 legge R["caduta_V0"] prima che la V0 (ultima di CADUTE) sia calcolata. ERRORE MIO di ordine. La v2 calcola tutte le finestre PRIMA di stampare le nette.
