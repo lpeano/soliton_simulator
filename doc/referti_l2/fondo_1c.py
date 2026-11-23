@@ -32,6 +32,7 @@ BASE = os.path.join("E:" + os.sep, "soliton_simulator", "controllo", "M1658", "c
 FORMA_OGG = "L-1"
 K_OROLOGIO, K_CADUTA, K_FIT = 500, 2000, 200
 R_LONTANO = 60.0
+COME_N = (0.98, 1.02)        # ### «l'orologio come N»: Luca [M2145] 21:45 (era [0.9, 1.1], mia): la differenza V2/V3 e' il 2%
 COLL = {"V0": (False, 0), "V2": (True, 0), "V3": (False, 1)}
 
 
@@ -223,7 +224,7 @@ def lettura():
             dl = (R[1.0035][2] - R[0.9965][2]) / (2 * 0.0035) / d1
             Ds[coll] = dl
             print("  L'OROLOGIO %s: Delta = omega_psi - omega_phi(lontano) a N 0.9965, 1, 1.0035: %+.7f, %+.7f, %+.7f; d ln Delta/dN %+.4f (%s)" % (
-                coll, R[0.9965][2], R[1.0][2], R[1.0035][2], dl, "COME N" if 0.9 <= dl <= 1.1 else "non come N"))
+                coll, R[0.9965][2], R[1.0][2], R[1.0035][2], dl, "COME N" if COME_N[0] <= dl <= COME_N[1] else "non come N"))
         else:
             print("  L'OROLOGIO %s: NON FINITO" % coll)
     c0 = leggi("caduta_V0")
@@ -234,7 +235,7 @@ def lettura():
             a0, sa0, _ = fit_a(c0["serie"])
             da, sd = a - a0, math.hypot(sa, sa0)
             verso = da > 0
-            nat = verso and coll in Ds and 0.9 <= Ds[coll] <= 1.1
+            nat = verso and coll in Ds and COME_N[0] <= Ds[coll] <= COME_N[1]
             print("  LA CADUTA %s: a %+.4e +- %.1e; V0 %+.4e +- %.1e; a - a(V0) %+.4e +- %.1e (%.1f sigma): %s; la norma %.1e%s" % (
                 coll, a, sa, a0, sa0, da, sd, abs(da) / sd, "VERSO N piu' basso" if verso else "VIA", dn, "; ### NATURA" if nat else ""))
         else:
