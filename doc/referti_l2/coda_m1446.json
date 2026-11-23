@@ -1676,6 +1676,106 @@
     "20000"
    ],
    "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1751R_nascita_001",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "1"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 1 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_002",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "2"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 2 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_003",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "3"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 3 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_010",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "10"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 10 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_269",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "269"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 269 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_270",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "270"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 270 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_271",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "271"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 271 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_536",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "536"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 536 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_537",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "537"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 537 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_538",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "538"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 538 (il ramo mitosi; lo stato prima e dopo)"
   }
  ]
 }
