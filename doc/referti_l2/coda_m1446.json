@@ -1592,6 +1592,90 @@
     "1.00"
    ],
    "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640v2_N1_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "N1",
+    "--N",
+    "1.00",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, N1 N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V2_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V2",
+    "--N",
+    "0.99",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 0.99, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V2_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V2",
+    "--N",
+    "1.01",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 1.01, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V3_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V3",
+    "--N",
+    "0.99",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 0.99, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V3_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V3",
+    "--N",
+    "1.01",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 1.01, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_CTRL_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "CTRL",
+    "--N",
+    "1.00",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
   }
  ]
 }
