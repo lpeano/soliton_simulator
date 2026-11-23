@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 r"""**[M1751-L] S2-S4, S7: LA SCHEDA SPETTRALE DEI MODI NUOVI** *(Luca, 2026-11-23; la carta `doc/CARTA_gradi_di_liberta.md`, sez. `4`: il metodo scritto prima)*. [[PROGETTO-MITOSI]]
 
-    E:\python\py3132\python.exe C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py scheda --nascita 269        (dopo la ripresa: prima_/dopo_ in M1751/ripresa_<q>)
+    E:\python\py3132\python.exe C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py scheda --nascita 269        (dopo la ripresa: prima_/dopo_ in M1751/ripresa_<q>; o --nascite 1,2,3 in sequenza, le fatte si saltano)
     E:\python\py3132\python.exe doc/referti_l2/nascite/gradi_liberta.py lettura > doc/referti_l2/nascite/gradi_liberta.txt
 
 **Lo stato** PRIMA e DOPO *(`mitosi_rami_v2.apri` nella scena `L 186` di `ciclo`)*. **Il cammino:** `percorri_tick` dentro `_u1_oggi.avvolto` coi soli `CAMM-MONETA-SPIN`, `CAMM-GROVER`, `CAMM-SPOSTAMENTO` *(saltati il legame, la fase del vuoto, i pezzi del vuoto; fuori anche la fase (a) e la reazione del lapse di `p6_bracci.tick_GU`)*, `mot.cs` = `cs_prec` dello stato. **Il disco:** i nodi entro `12` passi da `{i, j}`; **il muro:** solo il disco. **La sonda:** gruppi a distanza `>= 7`, un tick per gruppo e posto; le risposte nelle palle di raggio `3`; **il residuo fuori DEVE essere zero.** **I modi:** `eig`; **i nuovi:** (1) il conto per finestra di energia *(DOPO meno PRIMA: non abbina niente)*; (2) l'abbinamento ungherese su `|<v_p|v_d>|^2` sulle etichette `(nodo, altro capo, spin)` comuni. **La scheda, S4** come la carta.
@@ -242,9 +242,19 @@ def main(argv):
     ap = argparse.ArgumentParser()
     ap.add_argument("cosa", choices=("scheda", "lettura"))
     ap.add_argument("--nascita", type=int)
+    ap.add_argument("--nascite", help="piu' nascite in sequenza, separate da virgole; una scheda gia' fatta (scheda.json) si salta: la ripresa dopo un riavvio")
     a = ap.parse_args(argv)
     if a.cosa == "scheda":
-        return scheda(a.nascita)
+        qs = [int(x) for x in a.nascite.split(",")] if a.nascite else [a.nascita]
+        cod = 0
+        for q in qs:
+            if os.path.exists(os.path.join(RN.DIR, "ripresa_%03d" % q, "scheda.json")):
+                print("### la scheda della nascita %d c'e' gia': si salta" % q)
+                continue
+            OK.clear()
+            cod = max(cod, scheda(q))
+            sys.stdout.flush()
+        return cod
     return lettura()
 
 
