@@ -1,0 +1,18 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] respiro_N.py  sha1-BYTE 3c9dc596  committato e pulito
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\respiro_N.py", line 356, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\respiro_N.py", line 351, in main
+    return corsa(a.riga, a.N)
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\respiro_N.py", line 136, in corsa
+    print("### %s N %.2f (cs_N %s, segno %d): %s (k %d); il centro %d; %d nodi a r < %g, %d a r in %s; e0 %.10f; fino a %d" % (
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~
+        riga, N, cs_N, segno, info["file"], info["k_file"], G["centro"], int(np.sum(G["r"] < R_C)), int(np.sum((G["r"] >= R10[0]) & (G["r"] < R10[1]))), R10, e0, k_fino))
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+TypeError: %d format: a real number is required, not tuple
