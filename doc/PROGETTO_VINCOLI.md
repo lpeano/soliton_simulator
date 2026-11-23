@@ -39,6 +39,7 @@ Non è un'era nuova (Luca, 16:31: «niente era 3»): il mondo è lo stesso, camb
 ## 6. Le pote (gates): il codice entra solo quando la porta si apre
 - G0 (ora): solo carta e le prove Z1–Z4 in memoria.
 - G1: il torneo [M1631] chiuso con la tabella del giudizio; la forma predefinita decisa da Luca. Si apre il pezzo A.
+  - **G1 APERTA** (2026-11-23, [M0528]): il torneo chiuso con `doc/referti_l2/TORNEO_FINALE.md` del ramo `lapse-u` (08de784c): nessuna forma cambia il segno della gravita'; FH TOPPA, FT DANNO, (c) DANNO, il fondo la banda piatta; la forma predefinita F0 (decisione di Luca, 23/11). Il pezzo A (il lapse come moltiplicatore: N dal vincolo, non da chi) comincia dalla carta, sul ramo `lapse-u` (file nuovi, fuori dal nucleo).
 - G2: A dà Eötvös sotto l'1% su almeno un collegamento, senza peggiorare S2, S3, S5 (CURA, non TOPPA). Si apre C1–C2 (il motore a strati col tick uniforme come caso noto al bit).
 - G3: Z1 passata e C2 al bit col tick di oggi. Si apre C3–C5 (i vincoli come proiettori, la mitosi dallo stallo).
 - G4: M2 (mitosi e gravità insieme) con B1 e B2. Da qui la sagoma si rilegge da un altro punto di vista (M3).
