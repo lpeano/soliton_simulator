@@ -76,3 +76,10 @@
 - **Le corse:** `10` *(il calcio 2; l'orologio 5: `N = 1` in comune, V2 e V3 a `0.9965` e `1.0035` -- V2 e V3 con `N = 1` sono lo stesso tick al bit, CN2 di [M1640]; la caduta 3)*, in `coda_m1446` a priorita' `0` *(il mandato: «in coda a priorita' 0»)*, **dal solo lanciatore** *([M1944])*.
 - **La tabella del giudizio contro F0:** S1 *(il segno della massa)*, S3, S4 non *(Eotvos: non fatta, una scala sola)*, S6 *(l'orologio e la caduta)*.
 - **LE PREVISIONI** *(copiate)*: P2: `m* > 0` `85%`; NATURA in V2 `55%`; TOPPA per Eotvos `50%`. **Le mie:** `m* > 0` `90%` *(la curvatura `+0.056` al fondo)*; NATURA in almeno un collegamento `35%`.
+
+## 2-quinquies. [M2221] LA FORMA DELL'OGGETTO AL FONDO A K *(Luca, 22:21; solo lettura; scritta PRIMA del codice, `22:23` da `date`)*
+
+- **I tre stati a `k 3000`:** (a) `M1658/tenuta/L-1_proiezione_K/stato_003000.npz`; (b) `L0_proiezione_K/stato_003000.npz`; (c) **`M1631/tenuta_v2/L-1_cima/stato_003000.npz`** *(esiste a `k 3000` esatto)*. La scena `triangolo_chi_v4.scena` per il grafo e le posizioni.
+- **Il baricentro:** `toro.centro(rho)` *(periodico)*, poi gli scarti `toro.scarti` e la media pesata con `rho` *(il baricentro raffinato)*; `r`, `theta = atan2(y, x)` *(la convenzione di `segni_vortice.py`)* attorno a lui. **Gli anelli** `[4, 8)`, `[8, 12)`, `[12, 16)`. **`S_m = somma rho e^{-i m theta}`**, `|S_m| / somma rho`, l'orientamento `-arg(S_m)/m` in gradi, per `m = 3` e `m = 6`.
+- **Il caso noto:** sull'anello, **`rho = 1 + cos(6 theta)`** *(con `cos(6 theta)` da sola la somma e' zero e il rapporto non e' definito: il `0.5` del mandato e' questa)* -> `|S_6|/somma` `0.5`, l'orientamento `0`; **la tolleranza, fissata qui:** entro il fondo del favo di quell'anello piu' `0.01` *(il reticolo aggiunge la sua impronta)*. **Il controllo negativo: `rho = 1`** su tutti i nodi dell'anello: `|S_3|`, `|S_6|` **del favo stesso**, per anello: la soglia sotto cui c'e' solo il reticolo.
+- **Le immagini** *(tre file)*: (a) e (b) a scala lineare sul massimo di CIASCUNO; (a) e (b) in `log10 rho` su `4` decadi; (c) lineare e logaritmica. Una finestra di raggio `30` attorno al baricentro.
