@@ -1,0 +1,104 @@
+[TIMBRO] coppie_57.py  sha1-BYTE 343305c1  committato e pulito
+[TIMBRO] nascite_lettura.py  sha1-BYTE ec1571ea  committato e pulito
+============================================================================================================================================
+[M1623-L] LE 538 NASCITE DI MITOSI-v2: LA LETTURA (la carta doc/CARTA_nascite_lettura.md; sola lettura)
+### «prima» e «dopo» hanno la risoluzione dei dati: 50 tick la norma, 250 Theta e il grafo. K3 e la parte «scende» di K4 sono GARANTITE dal codice (la carta sez. 2).
+============================================================================================================================================
+### 538 nascite (9 + 529), da k 35976 a k 45949; 42 stati da k 35750 a k 45976
+K1 I CASI NOTI: le prime 9 nascite contro M1-M3 (MITOSI/stato_36250, raggruppamento_nascite.py e coppie_57.py)
+    gli angoli (M3): 297.39, 182.61, 180.00, 302.61, 294.65, 185.08, 292.21, 300.00, 300.00
+    i miei:          297.39, 182.61, 180.00, 302.61, 294.65, 185.08, 292.21, 300.00, 300.00; lo scarto massimo 0.000e+00 gradi, in r 0.000e+00
+  DEVE: K1 gli angoli delle prime 9: la mia funzione = coppie_57.angolo_e_r AL BIT                                     PASSA 
+  DEVE: K1 le prime 9 tutte entro 10 gradi da un asse (M3: il massimo 7.79)                                            PASSA il massimo 7.79
+    i gradi a k 36250: miei 8 cinque, 8 sette, 8 cinque legati a un 7; coppie_57: 8, 8, passi [1, 1, 1, 1, 1, 1, 1, 1]
+  DEVE: K1 le coppie a k 36250: 8 cinque e 8 sette, ognuno legato (M1, P-M2), e = coppie_57                            PASSA 
+--------------------------------------------------------------------------------------------------------------------------------------------
+N1 LA LISTA E N2 GLI ASSI (lo stato finale MITOSI_V2/stato_45976: la sorgente, le posizioni):
+    la sorgente 17204; r dei nati (dal centro della materia a k 45976) da 16.112 a 22.515
+    sull'asse (entro 10 gradi): 190 su 538 = 0.3532; le prime 9 (nello stato finale) 1.0000; la distanza media dall'asse 14.071 gradi, la mediana 13.587, il massimo 29.325
+    il nullo uniforme 1/3: p = 1.761e-01; il nullo dell'anello (902 nodi originari con r in [16.112, 22.515], la loro frazione sull'asse 0.3381): p = 2.440e-01
+    le nascite 1-100: sull'asse 0.7800
+    le nascite 101-300: sull'asse 0.3000
+    le nascite 301-538: sull'asse 0.2185
+    K2: SI SFUMA
+--------------------------------------------------------------------------------------------------------------------------------------------
+N3 IL RITMO: le nascite per 1000 tick da k 35976
+    i conteggi: 69, 69, 75, 54, 52, 51, 51, 42, 36, 39 (in tutto 538; fuori dalle finestre 0)
+    i nodi: 34596, 34665, 34734, 34809, 34863, 34915, 34966, 35017, 35059, 35095, 35134
+    costante     AIC -3210.154; chi2 di Pearson 29.844 su 9 gradi; 
+    lineare      AIC -3234.020; chi2 di Pearson 3.862 su 8 gradi; a 74.058, b -4.052 +- 0.792 per finestra (-5.1 sigma)
+    esponenziale AIC -3234.021; chi2 di Pearson 3.868 su 8 gradi; A 77.133, c -0.0769 +- 0.0152 per finestra (-5.0 sigma)
+    K5: il migliore (AIC) esponenziale: RALLENTA
+--------------------------------------------------------------------------------------------------------------------------------------------
+N4 Z3: LA NORMA (la serie ogni 50 tick: M = somma |psi_h|^2, D_n le nascite fatte; phi dagli stati ogni 250)
+    205 intervalli da k 35500 a 45950; con nascite 184 (le nascite dentro 538), senza 21
+    |dM/M| per intervallo: CON nascite il massimo 8.882e-16 (la mediana 2.220e-16); SENZA il massimo 3.331e-16 (la mediana 2.220e-16)
+    il segno di dM negli intervalli con nascite: + 3, - 151, 0 30; M da 9.950108931445455e+05 a 9.950108931445091e+05 (relativo 3.664e-14)
+  DEVE: K1 la norma fuori dalle nascite: |dM/M| < 1e-12 in ogni intervallo di 50 tick senza nascite                    PASSA 3.331e-16
+    K3: CONSERVATA
+    phi (gli stati da k 36000, 40 intervalli da 250): |d somma phi^2 / somma phi^2| il massimo 8.882e-16, la mediana 5.551e-16
+    L'ENERGIA (dai bilanci, non dalla norma): DH per nascita la media -2.1291e+01, da -5.7762e+01 a -2.4960e+00; la somma -1.145465e+04; E_persa all'ultima +1.145465e+04
+    P9 il massimo 0.000e+00; il residuo di Gauss il massimo 2.805e-14; F3 vero in 538 su 538
+--------------------------------------------------------------------------------------------------------------------------------------------
+N5 B1/Z4: THETA ATTORNO AL NATO (Theta_v = somma |theta_a| sugli archi del nodo; prima = lo stato con k < k nascita, dopo = il primo con k >= k nascita)
+    538 nascite in 41 finestre (saltate 0: il genitore nato nella stessa finestra, non esiste nello stato prima); Theta medio (rad, somma sugli archi del nodo):
+      genitore+nato: prima 21.1729, dopo 9.0056: il rapporto 0.4253
+      i vicini a 1 passo: prima 14.9306, dopo 14.2933: il rapporto 0.9573
+      i vicini a 2 passi: prima 14.8812, dopo 14.6416: il rapporto 0.9839
+      il controllo (l'anello delle nascite, a piu' di 3 passi da ogni nascita della finestra): il rapporto medio 1.0060
+      i rapporti diviso il controllo: genitore+nato 0.4228, vicini 1 0.9516, vicini 2 0.9781
+      la distribuzione per nascita, vicini 1 dopo/prima: il 10% 0.888, la mediana 0.984, il 90%  1.006; genitore+nato: 0.366, 0.422, 0.479
+    K4 (il criterio del mandato, sui rapporti grezzi): CHIUDE
+    LE NASCITE CHE SI TOCCANO (il grafo finale): la distanza in passi dalla nascita precedente piu' vicina, e il tempo dalla precedente
+      537 nascite: a 1 passo 0.8305, a <= 2 0.9628, a <= 3 0.9870; la media 1.399, la mediana 1, il massimo 38; le prime 9 (M2): [np.int64(38), np.int64(1), np.int64(2), np.int64(1), np.int64(1), np.int64(1), np.int64(1), np.int64(1)]
+      il tempo dalla nascita precedente: la mediana 12 tick, il 10% 2, il 90% 44
+    N1 la coppia (i gradi dei sei nodi nello stato dopo): 5-7 506, altro 32
+--------------------------------------------------------------------------------------------------------------------------------------------
+N6 DOVE: r registrato (dal centro fisso della corsa) e il profilo dello stato finale
+    il cuore r < 10: 0; il guscio [10, 25): 538 (1.0000); oltre: 0; r da 16.613 a 22.049, la mediana 19.803
+    i passi dalla sorgente: da 18 a 26, la mediana 22
+    il profilo per anello (r intero, lo stato finale; le nascite dal r ricalcolato col centro della materia finale):
+      r  0: rho 3.3368e+02, |phi - phi0|^2 1.1766e+00, le nascite 0
+      r  1: rho 3.0980e+02, |phi - phi0|^2 9.9583e-01, le nascite 0
+      r  2: rho 2.8504e+02, |phi - phi0|^2 1.0565e+00, le nascite 0
+      r  3: rho 3.0613e+02, |phi - phi0|^2 1.0765e+00, le nascite 0
+      r  4: rho 3.3016e+02, |phi - phi0|^2 1.1142e+00, le nascite 0
+      r  5: rho 3.3968e+02, |phi - phi0|^2 1.0558e+00, le nascite 0
+      r  6: rho 3.5089e+02, |phi - phi0|^2 1.0647e+00, le nascite 0
+      r  7: rho 3.6407e+02, |phi - phi0|^2 9.8874e-01, le nascite 0
+      r  8: rho 3.5774e+02, |phi - phi0|^2 9.2719e-01, le nascite 0
+      r  9: rho 3.5152e+02, |phi - phi0|^2 1.0613e+00, le nascite 0
+      r 10: rho 3.7003e+02, |phi - phi0|^2 9.5141e-01, le nascite 0
+      r 11: rho 3.8324e+02, |phi - phi0|^2 8.4192e-01, le nascite 0
+      r 12: rho 3.9329e+02, |phi - phi0|^2 8.5631e-01, le nascite 0
+      r 13: rho 4.0476e+02, |phi - phi0|^2 6.8905e-01, le nascite 0
+      r 14: rho 4.1882e+02, |phi - phi0|^2 5.8028e-01, le nascite 0
+      r 15: rho 4.3290e+02, |phi - phi0|^2 3.8905e-01, le nascite 0
+      r 16: rho 4.4766e+02, |phi - phi0|^2 3.1194e-01, le nascite 7
+      r 17: rho 4.5658e+02, |phi - phi0|^2 2.2344e-01, le nascite 46
+      r 18: rho 4.4696e+02, |phi - phi0|^2 1.8766e-01, le nascite 110
+      r 19: rho 4.2190e+02, |phi - phi0|^2 1.6982e-01, le nascite 142
+      r 20: rho 3.6899e+02, |phi - phi0|^2 1.7664e-01, le nascite 141
+      r 21: rho 3.0842e+02, |phi - phi0|^2 1.8273e-01, le nascite 80
+      r 22: rho 2.2507e+02, |phi - phi0|^2 2.0091e-01, le nascite 12
+      r 23: rho 1.4493e+02, |phi - phi0|^2 1.9763e-01, le nascite 0
+      r 24: rho 8.4835e+01, |phi - phi0|^2 1.8788e-01, le nascite 0
+      r 25: rho 4.4425e+01, |phi - phi0|^2 1.8569e-01, le nascite 0
+      r 26: rho 1.7492e+01, |phi - phi0|^2 2.1314e-01, le nascite 0
+      r 27: rho 4.5416e+00, |phi - phi0|^2 4.2476e-01, le nascite 0
+      r 28: rho 7.8245e-01, |phi - phi0|^2 8.2951e-01, le nascite 0
+      r 29: rho 2.7636e-01, |phi - phi0|^2 1.0466e+00, le nascite 0
+      r 30: rho 2.3638e-01, |phi - phi0|^2 1.0381e+00, le nascite 0
+      r 31: rho 2.0859e-01, |phi - phi0|^2 1.0287e+00, le nascite 0
+      r 32: rho 2.1536e-01, |phi - phi0|^2 1.0397e+00, le nascite 0
+      r 33: rho 2.1208e-01, |phi - phi0|^2 1.0278e+00, le nascite 0
+      r 34: rho 2.3651e-01, |phi - phi0|^2 1.0085e+00, le nascite 0
+      r 35: rho 2.2130e-01, |phi - phi0|^2 1.0181e+00, le nascite 0
+      r 36: rho 2.1657e-01, |phi - phi0|^2 1.0199e+00, le nascite 0
+      r 37: rho 2.1774e-01, |phi - phi0|^2 1.0347e+00, le nascite 0
+      r 38: rho 2.0538e-01, |phi - phi0|^2 1.0257e+00, le nascite 0
+      r 39: rho 2.0288e-01, |phi - phi0|^2 1.0295e+00, le nascite 0
+      r 40: rho 2.2243e-01, |phi - phi0|^2 1.0340e+00, le nascite 0
+============================================================================================================================================
+### IL RIASSUNTO: K2 SI SFUMA (sull'asse 0.3532); K3 CONSERVATA; K4 CHIUDE; K5 RALLENTA; il guscio 1.0000; N1 in nascite_538.tsv
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []

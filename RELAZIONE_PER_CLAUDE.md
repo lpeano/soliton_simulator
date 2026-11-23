@@ -26263,3 +26263,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **O3 RILETTO DAI FILE: PASSA** (orientamento_o3_rilettura.py, cd9f8635; il referto doc/referti_l2/orientamento_o3_rilettura.txt del ramo mitosi) [[PROGETTO-MITOSI]]. Lo stato di partenza k 36250 (64999c5b) 9 nascite; lo stato finale k 36350 (68b03bcf) 14; i bilanci della corsa 5. **La decima nascita a k 36257 sull'arco 40445 (quello che faceva cadere il ramo MITOSI), r 18.245: nel guscio (P-O4 VERA, P-C2 VERA)**; le nascite 10-14 con P9 0.0 e F3 vero. **Le prove della cura dell'orientamento passano tutte** (O1, O2, O3, O4, O5, O7; O8 di kappa e' nella coda delle prove brevi): **il ramo MITOSI puo' ripartire da k 36250 (C4) al primo posto libero.**
 
 - **IL RAMO MITOSI RIPARTE COL CODICE NUOVO (C4) ALLE 01:11** (mitosi_lancia_v3.sh, a6b6a67e; mitosi_rami_v2.py riparti) [[PROGETTO-MITOSI]]. Da MITOSI/stato_36250 (64999c5b) fino a k 45976, gli stati in E:\soliton_simulator\controllo\mitosi_rami\MITOSI_V2; la voce nuova mitosi-ramo-MITOSI-v2 APERTA, la vecchia resta FALLITO. Le prove passate prima: O1 (0 diversi), O2 (al bit), O3 (riletto: la decima nascita sull'arco degenere passa), O4, O5, O7, O8. Il ramo C2-EXT continua, non toccato.
+
+## [M1623-L] 2b-2c: LE 538 NASCITE DI MITOSI-v2, LA LETTURA -- S13 SI SFUMA, IL RITMO RALLENTA, LA NORMA CONSERVATA DAL CODICE, B1 CHIUDE MA LE NASCITE SI TOCCANO *(2026-11-23, `16:30`-`16:55` da `date`)* [[PROGETTO-MITOSI]]
+
+**La carta** `doc/CARTA_nascite_lettura.md` *(`76227635`)*, **lo script** `doc/referti_l2/nascite/nascite_lettura.py` *(`71a6a9ec`, sha1 dei byte `ec1571ea`)*, **il referto** `nascite_538.txt`, **la lista N1** `nascite_538.tsv`, **la lettura** `nascite_538_lettura.md`. **Solo lettura, nessuna corsa.** ### **«Prima» e «dopo» con la risoluzione dei dati** *(`50` tick la norma, `250` Theta)*: al tick vorrebbe una corsa. **K3 e lo scendere di K4 sono garantiti dal codice** *(`_fattore`; il contatore da `0`)*: dichiarato prima.
+
+- **K1 PASSA** *(4 su 4)*: gli angoli delle prime 9 **al bit** con M3 *(una funzione mia)*; `8` cinque e `8` sette legati; la norma senza nascite `3.3e-16`.
+- ### **K2 (S13): SI SFUMA.** Sull'asse `190` su `538` = **`0.353`**, il nullo dell'anello **`0.338`** *(`p = 0.24`)*. **Le prime `100` `0.78`; le ultime `238` `0.22`.** **L'impronta del favo era delle prime nascite.**
+- **K3 CONSERVATA** *(`8.9e-16`: e' il codice)*. **L'energia NO:** `-21.3` per nascita, `E_persa` `1.1455e+04`: **C5 del progetto dei vincoli, nel codice di oggi, e' il contrario.**
+- **K4 CHIUDE** *(genitore+nato `0.425`; i vicini a 1 passo `0.957`, il controllo `1.006`)*; **ma l'`83%` delle nascite e' a 1 passo dalla precedente, la mediana `12` tick**: la nascita non sposta Theta, **i vicini sono gia' maturi.**
+- ### **K5: RALLENTA** *(`69 -> 39` per `1000` tick; lineare ed esponenziale a `-5 sigma`)*.
+- **N6:** **tutte nel guscio** *(`r 16.6-22.0`)*, sul fianco esterno del mattone *(`rho` massimo a `r 17`)*, dove `|phi - phi0|^2` ha il minimo. **N1:** «5-7» `506` su `538`.
+- **Le previsioni:** P1, P3, P4, P6 si'; **P2 no** *(SI SFUMA)*; **P5 no** *(RALLENTA)*.
