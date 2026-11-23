@@ -1,0 +1,30 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] ripresa_nascita.py  sha1-BYTE 63985dc7  committato e pulito
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+==================================================================================================================================
+[M1751-L] LA SCHEDA della nascita 1 (k 35976, l'arco 50995, i 16998, j 16999, il nato 34596): il disco di raggio 12 attorno a {i, j}
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 262, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 255, in main
+    cod = max(cod, scheda(q))
+                   ~~~~~~^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 139, in scheda
+    with aperto(f) as (Z, C, NS, meta, cs):
+         ~~~~~~^^^
+  File "E:\python\py3132\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 47, in aperto
+    C, NS, meta, cs = MR2V.apri(Z, f, rho_c, e, True)
+                      ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami_v2.py", line 223, in apri
+    C, NS0, meta, cs = riprendi_v2(Z, f, rho_c, e, accese)
+                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami_v2.py", line 148, in riprendi_v2
+    C, NS0, meta, cs = ML.riprendi(Z, f, rho_c, e, accese)
+                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_lunga.py", line 157, in riprendi
+    PS.metti_bordo(Z, meta["R_A"])
+                      ~~~~^^^^^^^
+KeyError: 'R_A'
