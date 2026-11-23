@@ -1,0 +1,41 @@
+[TIMBRO] tenuta_fondo_v2.py  sha1-BYTE d7e812bf  committato e pulito
+==================================================================================================================================
+[M2305] I CASI NOTI DELLE SEMINE (in memoria)
+==================================================================================================================================
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_proiezione_K: la forma L-1, la semina proiezione_K; il centro [80, 80]; {"E_K": 0.24533832644652534, "molteplicita": 2, "k": [2.0943951023931953, 3.627598728468436], "frazione_proiettata": 0.2540788750547807, "ampiezza": 1.0, "larghezza": 1.0}; l'impronta di partenza bb0ae3b4b9a4fa842ab022d2cffa407e227b61c5
+    [stato] k 0 sha1 --------
+### 0 tick in 0 s (0.048 s per tick)
+  DEVE: la semina ampiezza 1, larghezza 1 a k 0 = M1658/tenuta/L-1_proiezione_K/stato_000000 AL BIT                    PASSA diversi []
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_proiezione_K: la forma L-1, la semina proiezione_K; il centro [80, 80]; {"E_K": 0.24533832644652534, "molteplicita": 2, "k": [2.0943951023931953, 3.627598728468436], "frazione_proiettata": 0.25412527009697405, "ampiezza": 1.0, "larghezza": 0.7}; l'impronta di partenza a384de757d5d6b61da4175ccd133f16ea39eb7c9
+    [stato] k 0 sha1 --------
+### 0 tick in 0 s (0.037 s per tick)
+  DEVE: DEVE FALLIRE: la larghezza 0.7 diversa a k 0 (psi_h)                                                           PASSA max|d psi_h| 1.019e+01
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_proiezione_K: la forma L-1, la semina proiezione_K; il centro [80, 80]; {"E_K": 0.24533832644652534, "molteplicita": 2, "k": [2.0943951023931953, 3.627598728468436], "frazione_proiettata": 0.2540788750547807, "ampiezza": 2.0, "larghezza": 1.0}; l'impronta di partenza 63892108730dfbb61fe68b077574dd430f808e07
+    [stato] k 0 sha1 --------
+### 0 tick in 0 s (0.033 s per tick)
+  DEVE: l'ampiezza 2: la norma x4                                                                                      PASSA 4.000000000000000
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []

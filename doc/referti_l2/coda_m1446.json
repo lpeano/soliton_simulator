@@ -1956,6 +1956,152 @@
     "3000"
    ],
    "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L0 proiezione_K, 3000 tick"
+  },
+  {
+   "nome": "M2305_s3_caduta_x0.5",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_s3.py",
+    "caduta",
+    "--scala",
+    "0.5"
+   ],
+   "note": "[M2305] S3 la caduta V2 a gradiente x0.5 sull'oggetto al fondo a K"
+  },
+  {
+   "nome": "M2305_s3_caduta_x2.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_s3.py",
+    "caduta",
+    "--scala",
+    "2.0"
+   ],
+   "note": "[M2305] S3 la caduta V2 a gradiente x2.0 sull'oggetto al fondo a K"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a0.5_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "0.5",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x0.5 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a2.0_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "2.0",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x2.0 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a1.0_l0.7",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "1.0",
+    "--larghezza",
+    "0.7",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x1.0 larghezza x0.7"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a1.0_l1.4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "1.0",
+    "--larghezza",
+    "1.4",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x1.0 larghezza x1.4"
+  },
+  {
+   "nome": "M2305_tenuta_L0_a0.5_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--ampiezza",
+    "0.5",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L0 ampiezza x0.5 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L0_a2.0_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--ampiezza",
+    "2.0",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L0 ampiezza x2.0 larghezza x1.0"
+  },
+  {
+   "nome": "M1751S_schede_a",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py",
+    "scheda",
+    "--nascite",
+    "1,2,3,10,269"
+   ],
+   "note": "[M1751] S2-S4 le schede delle nascite 1, 2, 3, 10, 269 (in sequenza)"
+  },
+  {
+   "nome": "M1751S_schede_b",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py",
+    "scheda",
+    "--nascite",
+    "270,271,536,537,538"
+   ],
+   "note": "[M1751] S2-S4 le schede delle nascite 270, 271, 536, 537, 538 (in sequenza)"
   }
  ]
 }
