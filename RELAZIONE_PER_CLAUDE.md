@@ -26641,3 +26641,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni del guardiano:** P1, P3, P4, P6 si'; **P2** *(IMPRONTA)* **e P5** *(ACCELERA)* **no.**
 
 ### **LE RIGHE NUOVE POSSIBILI DELLA SAGOMA -- NON SCRITTE, LA DECISIONE E' DI LUCA:** il ritmo delle nascite rallenta; le nascite si toccano *(`83%` a 1 passo)*; la nascita conserva la norma per costruzione e perde energia *(C5 del progetto dei vincoli, nel codice di oggi, e' il contrario)*. **FERMO.**
+
+## [M1623] UNA CORREZIONE DELLE ORE *(2026-11-23, `16:50` da `date`)* [[PROGETTO-MITOSI]]
+
+**Nei paragrafi di [M1623] di questa relazione ho scritto `16:55`, `17:00` come ore di fine: erano STIMATE, non lette con `date`, e sono piu' tardi del vero** *(`date` alle `16:49:47`, a lavoro finito)*. **Le ore giuste:** la Parte 2 dalle `16:30` alle `16:49`; la lettura `16:42:21`-`16:42:33`. **Errore mio**, lo stesso di stamattina *(16:40 contro 16:30)*: la regola dice che le ore si leggono con `date`.
