@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0; [M0149] (sostituisce [M0133]): tolte le 8 corse di convergenza M0133C non lanciate; le cadute M0133F a priorita' 1 (S6: I2, I4, S4 prima di S5); poi tolte anche le cadute M0133F (non lanciate): tornano in coda dopo I2, I4, S4; [M0149] S6: I2, I4, S4 a priorita' 0; le coppie (v3) a 1; le cadute (v2) a 2; [M0326] FH alla prova: S5, S6, Eotvos (2 tenute FH, il controllo F0, 4 cadute) a priorita' 0; le tenute lunghe a 1; la mitosi FH NO (un merge)",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0; [M0149] (sostituisce [M0133]): tolte le 8 corse di convergenza M0133C non lanciate; le cadute M0133F a priorita' 1 (S6: I2, I4, S4 prima di S5); poi tolte anche le cadute M0133F (non lanciate): tornano in coda dopo I2, I4, S4; [M0149] S6: I2, I4, S4 a priorita' 0; le coppie (v3) a 1; le cadute (v2) a 2; [M0326] FH alla prova: S5, S6, Eotvos (2 tenute FH, il controllo F0, 4 cadute) a priorita' 0; le tenute lunghe a 1; la mitosi FH NO (un merge); [M0326] la coppia a d 35 fallita (d multiplo di 3): a d 36",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -1215,6 +1215,15 @@
     "S1"
    ],
    "note": "[M0326] S3 la tenuta lunga F0"
+  },
+  {
+   "nome": "M0326K_coppia_F0_d36",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_coppia36.py",
+    "corsa"
+   ],
+   "note": "[M0326] S5 il caso noto della coppia a d 36 (d 35 non e' un nodo buono)"
   }
  ]
 }
