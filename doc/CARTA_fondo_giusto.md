@@ -1,0 +1,27 @@
+# IL FONDO GIUSTO (alpha < 0 AL FONDO DELLA BANDA DELLA MATERIA) E L'ABLAZIONE DELLO SPETTRO *(Luca, 2026-11-23, [M1658]; scritta PRIMA del codice e dei numeri, dalle `17:03` da `date`)* [[PROGETTO-MITOSI]]
+
+## 0. L'ERRORE DEL GUARDIANO, DICHIARATO *(dal mandato)*
+
+- **n.240:** «il fondo della banda» letto come il minimo dello spettro *(la piatta a `-0.4827`)*: il torneo semino' `lambda < 0` alla cima e sulla piatta, **mai al fondo della banda della materia** *(`+0.245`)*.
+
+## 1. COSA DICE GIA' `spettro_gap_v2.txt` *(letto alle `17:02`, PRIMA di ogni codice)*
+
+- **La banda della materia sono DUE bande** *(«la penultima» e «l'ultima»)*: **tutte e due hanno il minimo `+0.2453383` a `k = (32, 32)/96`** e il massimo `+0.4767266` a Gamma *(la cima, molteplicita' `2`)*. **`(32, 32)/96 = (B0 + B1)/3`: e' il punto K** *(l'angolo della zona di Brillouin)*, **non Gamma.**
+- ### **QUINDI, DETTO PRIMA:** al fondo le due bande **si toccano** *(molteplicita' almeno `2`)*. **Se si toccano a CONO** *(`E - E_K ~ |delta k|`, un punto di Dirac)* **la curvatura `d2E/dk2` non e' definita** e K2 *(«la curvatura positiva»)* non si chiude come scritto: lo dico, e K2 FALLISCE. **Se si toccano con una curvatura** *(`~ delta k^2`)*, K2 si legge col suo segno.
+- **Il gap sotto:** da `+0.011870` a `+0.245338` *(largo `0.233468`)*; il bersaglio del mandato `~+0.095` ci sta dentro.
+
+## 2. 1a: LA LETTURA, LE DEFINIZIONI *(fissate qui)*
+
+- `A(k)` dalle righe di `spettro_gap.bande` *(la risposta lineare di un tick sul vuoto fresco della scena di chi, `12` impulsi `+-`, il tick U con `cs = s`: come `torneo_fondo_v2.py`)*. **I punti:** K `(B0 + B1)/3` e K' `(2 B0 + B1)/3`.
+- **La molteplicita':** le quasi-energie entro `1e-9` da `+0.2453383` *(e il caso noto: il minimo uguale a quello di `spettro_gap_v2` entro `1e-6`)*.
+- **Cono o curvatura:** lungo `B0`, `B1` e la loro bisettrice, a `delta = 0.0025, 0.005, 0.01, 0.02` *(in unita' di `|B0|`)*: le quasi-energie della coppia *(le due piu' vicine a `+0.2453` nella finestra `[0.20, 0.30]`)*; **l'esponente** `p = log2((E(2 delta) - E_K)/(E(delta) - E_K))` *(`p ~ 1`: CONO; `p ~ 2`: CURVATURA, e allora `d2E/dk2 = 2 (E(delta) - E_K)/delta^2`)*. **Il criterio:** `|p - 2| < 0.2` per la curvatura, `|p - 1| < 0.2` per il cono, ai due `delta` piu' piccoli.
+- **Lo stampo nel sottospazio di K** *(come `torneo_fondo_v2`: il mattone di `caduta_libera.prepara`, i nodi con `rho > 1e-3 rho_max`, la frazione pesata di `|psi(x) e^{-i k.d}|^2` nel sottospazio)*; **per confronto la stessa frazione nel sottospazio della CIMA a Gamma.**
+- **Il doppietto di spin:** il residuo sotto la stessa SU(2) casuale *(il seme `20261122`)*.
+
+## 3. I CRITERI *(copiati)* E LE PREVISIONI
+
+- **K1** casi noti: 2a senza ablazione al bit; 1b L0 non regge. **K2** 1a: la curvatura al fondo `+0.245` POSITIVA e non degenere *(molteplicita' `<= 2`)*. **K3** 1b: `lambda = -1` al fondo regge `3000` tick *(K-T v2)* con `omega` nel gap. **K4** 1c: `m*` positiva; NATURA se orologio come `N` e caduta VERSO in almeno un collegamento. **K5** 2a: la piatta sparisce con (iii) = «e' Grover»; la cima a massa negativa resta in tutte = «e' il cammino».
+- **DEL GUARDIANO** *(copiate)*: P1 K2 `60%`. P2 K3 regge `45%`; se regge `m* > 0` `85%`, NATURA in V2 `55%`, TOPPA per Eotvos `50%`. P3 la piatta di Grover `70%`; la cima negativa resta tranne (iii) `55%`.
+- **LE MIE** *(prima dei numeri)*: **la molteplicita' al fondo e' `2` `90%`** *(il testo di `spettro_gap_v2`)*; **le due bande si toccano a CONO `55%`** *(un punto K di un reticolo a favo con due bande che si toccano e' il posto classico di un cono di Dirac)*; **lo stampo nel sottospazio di K pesa meno del `1%` `80%`** *(il mattone e' fermo: e' a Gamma)*.
+
+## 4. LA PARTE 2 *(l'ablazione)*: la sua sezione si scrive prima del suo codice, dopo 1a.
