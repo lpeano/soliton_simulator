@@ -1,0 +1,41 @@
+==================================================================================================================================
+[M1658-T] I CASI NOTI DI 1b (in memoria)
+==================================================================================================================================
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_cima: la forma L-1, la semina cima; il centro [80, 80]; {}; l'impronta di partenza 87088896318c1b16c3b530528f243caeb8be328a
+    [stato] k 0 sha1 --------
+    [stato] k 250 sha1 --------  omega +0.324589  (195 s)
+### 250 tick in 195 s (0.779 s per tick)
+  DEVE: CN1 la semina cima con L-1 a k 250 = M1631/tenuta_v2/L-1_cima AL BIT                                           PASSA diversi []
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_proiezione_Gamma: la forma L-1, la semina proiezione_Gamma; il centro [80, 80]; {"E_fondo": -0.48267613346003985, "molteplicita": 4, "frazione_proiettata": 0.00041993105361799304}; l'impronta di partenza 03c146ab1b2520da2d56898f5a5b3874bce5df2e
+    [stato] k 0 sha1 --------
+### 0 tick in 0 s (0.104 s per tick)
+  DEVE: CN2 la proiezione a Gamma a k 0 = M1631/tenuta_v2/L-1_proiezione_Gamma AL BIT                                  PASSA diversi []
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+### L-1_stampo_K: la forma L-1, la semina stampo_K; il centro [80, 80]; {"E_K": 0.24533832644652534, "molteplicita": 2, "k": [2.0943951023931953, 3.627598728468436], "frazione_nel_fondo": 0.2540788750547806}; l'impronta di partenza de4ec3f35cec8dfd42877aa2988b90a758e68b7f
+    [stato] k 0 sha1 --------
+### 0 tick in 0 s (0.148 s per tick)
+  DEVE: DEVE FALLIRE: stampo_K a k 0 diverso dalla cima in psi_h                                                       PASSA max|d psi_h| 2.446e+01
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
