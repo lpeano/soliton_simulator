@@ -1776,6 +1776,126 @@
     "538"
    ],
    "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 538 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1658U_calcio_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): calcio --k 0.0"
+  },
+  {
+   "nome": "M1658U_calcio_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): calcio --k 0.010"
+  },
+  {
+   "nome": "M1658U_orologio_N1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "1.0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 1.0"
+  },
+  {
+   "nome": "M1658U_orologio_V2_N0.9965",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "0.9965"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 0.9965"
+  },
+  {
+   "nome": "M1658U_orologio_V2_N1.0035",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "1.0035"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 1.0035"
+  },
+  {
+   "nome": "M1658U_orologio_V3_N0.9965",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V3",
+    "--N",
+    "0.9965"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V3 --N 0.9965"
+  },
+  {
+   "nome": "M1658U_orologio_V3_N1.0035",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V3",
+    "--N",
+    "1.0035"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V3 --N 1.0035"
+  },
+  {
+   "nome": "M1658U_caduta_V0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V0"
+  },
+  {
+   "nome": "M1658U_caduta_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V2"
+  },
+  {
+   "nome": "M1658U_caduta_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V3"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V3"
   }
  ]
 }
