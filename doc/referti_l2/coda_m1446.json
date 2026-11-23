@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -703,6 +703,327 @@
     "3000"
    ],
    "note": "[M2351-Z] 5a-bis il controllo negativo del fondo"
+  },
+  {
+   "nome": "M0133P_FH_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FH)"
+  },
+  {
+   "nome": "M0133P_FH_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FH)"
+  },
+  {
+   "nome": "M0133P_FT_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FT)"
+  },
+  {
+   "nome": "M0133P_FT_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FT)"
+  },
+  {
+   "nome": "M0133P_F0_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (F0)"
+  },
+  {
+   "nome": "M0133P_F0_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (F0)"
+  },
+  {
+   "nome": "M0133M_FH_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FH",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (FH)"
+  },
+  {
+   "nome": "M0133M_FH_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FH",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (FH)"
+  },
+  {
+   "nome": "M0133M_FT_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FT",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (FT)"
+  },
+  {
+   "nome": "M0133M_FT_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FT",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (FT)"
+  },
+  {
+   "nome": "M0133M_F0_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (F0)"
+  },
+  {
+   "nome": "M0133M_F0_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (F0)"
+  },
+  {
+   "nome": "M0133F_FH",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FH"
+   ],
+   "note": "[M0133] 5d la caduta V2 (FH)"
+  },
+  {
+   "nome": "M0133F_FT",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FT"
+   ],
+   "note": "[M0133] 5d la caduta V2 (FT)"
+  },
+  {
+   "nome": "M0133F_F0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "F0"
+   ],
+   "note": "[M0133] 5d la caduta V2 (F0)"
+  },
+  {
+   "nome": "M0133C_F0_k0000_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "0",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k0000_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "0",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k0500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k0500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k1000_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1000",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k1000_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1000",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k3000_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "3000",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
+  },
+  {
+   "nome": "M0133C_F0_k3000_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "3000",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] m* e omega di F0 lungo la tenuta"
   }
  ]
 }
