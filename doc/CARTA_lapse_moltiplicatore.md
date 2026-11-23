@@ -1,5 +1,7 @@
 # IL LAPSE COME MOLTIPLICATORE: N DAL VINCOLO, NON DA CHI *(il pezzo A del progetto dei vincoli; il mandato di Luca [M0528] Parte 2, 2026-11-23 dopo le `05:20`; scritta PRIMA del codice; il task history `doc/TASK_HISTORY/2026-11-23_torneo_finale_e_lapse_vincolo.md`)* [[PROGETTO-MITOSI]]
 
+> ### **IN TESTA** *(Luca, 2026-11-23, le risposte a D1-D4)*: **«il lapse-moltiplicatore derivato dalle righe e' chi statico senza portata; la domanda del pezzo A e' se un N autoconsistente cambia Eotvos; il segno della caduta non puo' cambiare qui».**
+
 > **Le scelte A1-A5 sono del guardiano su delega di Luca.** **La carta le deriva dalle righe, e dove le righe dicono un'altra cosa lo scrive (sez. 3): TRE PREMESSE DEL MANDATO CADONO, e la decisione e' di Luca.** **Il codice fuori dal nucleo** *(come `doc/referti_l2/chi_tick.py`)*; **2b-2d solo col via di Luca.**
 
 ## 0. LE RIGHE DA CUI SI PARTE *(lette il 2026-11-23, prima delle 05:47 da `date`)*
@@ -30,6 +32,15 @@
 | **D3** | la caduta e Eotvos «con N risolto» | **`N` risolto viene dal mattone stesso: da solo non da' una forza netta sul mattone** *(il campo che uno si fa da se' non lo sposta)*: **la caduta di [M0908] cade in un gradiente IMPOSTO** *(`campo_N`)* | **(i)** `N = N_imposto x N_risolto` *(il gradiente di [M0908] resta, il vincolo si aggiunge: si misura se il vincolo cambia `eta`)*; **(ii)** la sorgente e' un secondo corpo pesante *(e' la coppia, K5)* | **(i)** per confrontare con `eta 0.120 / 0.138` dalla stessa scena, **dichiarando che il gradiente resta imposto**; (ii) e' gia' in K5 |
 | **D4** | «per rilassamento, `1e-10` in meno di `200` iterazioni» | **Jacobi o Gauss-Seidel sul laplaciano del toro vogliono `O(L^2)` iterazioni** *(migliaia)* | la fattorizzazione diretta *(sez. 1)*; il gradiente coniugato partito dal tick prima | **la diretta**, e K2 sulle iterazioni del punto fisso |
 
+### 3-bis. LE DECISIONI DI LUCA *(2026-11-23, prima delle `08:31` da `date`; il task history `doc/TASK_HISTORY/2026-11-23_lapse_vincolo_codice.md`)*
+
+- **D1 (a):** la media di `N u` tolta a ogni tick, **`somma chi = 0`**; nessun `R`. **Dichiarato in ogni referto:** `N` lontano dal mattone e' `> 1` e il profilo e' logaritmico.
+- **D2 (i):** **le tre righe del libro:** **V2** *(`cs = s N`: lo zero a `0`)*, **V3** *(la fase (a): `eps = -e0`, l'anti-lapse)*, **V2+V3** *(lo zero `e0` = Z1)*. ### **Z2 NON SI FA:** sarebbe una legge nuova; **resta qui come «postulato non adottato».**
+- **D3 (i):** **`N = N_imposto x N_risolto` nella scena di [M0908]**; **il gradiente resta imposto, detto in ogni referto**; **la coppia (K5) e' il solo caso con la sorgente vera** *(`N_imposto = 1`)*.
+- **D4:** la fattorizzazione diretta e il punto fisso; **K2 sulle iterazioni del punto fisso: `< 20`.**
+- **La riga che ne segue** *(mia, dalle righe, scritta prima del codice)*: con `N = N_imp N_ris`, `dH_materia/dN_ris,i = N_imp,i u_i(N)` *(`u_i = s Q_i - e0 rho_i` coi pesi di `cs = s N`, come `chi_tick.forza`; con V3 solo `u_i = -e0 rho_i`, con V2 solo `u_i = s Q_i`)*; la tensione e' solo su `ln N_ris`: ### **`c2 L chi = kappa (N_imp N_ris u - <N_imp N_ris u>)`, `N_ris = e^{-kappa chi}`, `somma chi = 0`.**
+- **Il tick:** **all'inizio di ogni tick** `N_ris` si risolve dallo stato a `k`, poi `caduta_segno_v2.tick_var` con `N_imp N_ris` *(V2 `(cs_N, segno) = (True, 0)`, V3 `(False, +1)`, V2+V3 `(True, +1)`: il V1 di [M0908])*. **Non e' palindromo in `N`** *(il vincolo e' letto a inizio tick)*: dichiarato. Il punto fisso parte dal `chi` del tick prima; K2 conta a ogni tick, e al primo **da freddo**.
+
 ## 4. I CASI NOTI E I CRITERI *(copiati dal mandato; adattati SOLO dove la sez. 3 lo obbliga, e detto)*
 
 - **A5 / K1:** senza materia `u = 0` e `chi = 0`, `N = 1` ovunque AL BIT *(con (a) anche col vuoto: `u` del vuoto e' uniforme, tolta la media e' zero -- da verificare: il vuoto fresco ha `u` uniforme al bit?)*; il mattone fermo: `N(r)` stazionario *(la variazione `< 1e-6` fra `1500` e `2000`)* e `N(centro) < 1` con Z1; **il profilo contro quello di chi a `2000` tick** *([M1310], il test pulito)*: forma e profondita', la differenza dichiarata; la norma a `1e-12`. **Il caso noto in piu' (mio):** con `m2` e `c0` di chi rimessi, il solutore deve ridare `Laplaciano.statico` di chi AL `1e-12` *(lo stesso stato)*.
@@ -38,17 +49,22 @@
 - **K4** Eotvos `eta` con `2 sigma`: `< 1%` = la porta G2; fra `1%` e `12%` = MIGLIORA; `>= 12%` = LASCIA / PEGGIORA.
 - **K5** la coppia a `d 36`: `Delta a` in fase e in antifase; A e B contro F0 senza lapse e contro chi; **il riferimento a parita' di stato** *(l'errore n.235: F-off o lo stato compatto riscalati, non `coppia_GU_L162`)*.
 - **K6** la tabella del giudizio contro chi.
+- ### **ADATTATI DALLE DECISIONI** *(3-bis)*: «Z1 e Z2» diventa **le tre righe** *(V2, V3, V2+V3)* in K1 *(il mattone)*, K3, K4; **«`N(centro) < 1` con Z1» vale per V2+V3**; **K2 `< 20`**; **il confronto con chi a parita' di stato e' solo per V2+V3** *(il collegamento di `chi_tick`, la stessa partenza: il `k 0` di C2)*.
+- **I CASI NOTI DEL CODICE** *(committati prima delle corse)*: **CN1** il solutore con `m2`, `c0` di chi e `N = 1` ridà `chi_tick.chi_statico` al `1e-12`; **CN2** il vincolo SPENTO ridà lo stato `k 250` della caduta V2 x0.8 di [M1446] AL BIT; **CN3** il vincolo spento ridà `D(k)` della coppia in fase di [M0326-K] AL BIT fino a `k 250`; **DEVE FALLIRE:** CN2 con la scala cambiata nell'ultimo bit.
+- **LE CORSE IN PIU' CHE IL MANDATO NON NOMINA** *(le dico)*: **il riferimento V2+V3 SENZA vincolo a x0.8 e x1.2** *(Eotvos fu misurato solo per V2 e V3: senza, il cambio di `eta` per V2+V3 non ha base)*; **la coppia F0 in ANTIFASE a `d 36` senza vincolo** *(c'e' solo in fase)*. **Chi in antifase non esiste:** K5 contro chi solo in fase *(`gravita-F-on`, `d 39`, riscalato `1/d`)*. **Il Pound-Rebka interno si legge dalle corse del mattone fermo** *(non due corse a parte)*: `omega` per anello pesata con `rho` su finestre di `50` tick; **il centro `r < 5`, il bordo `5 <= r < 10`** *(il raggio del mattone `~9.7`: la scelta e' mia, fissata qui)*. **In tutto `22` corse.**
 
 ## 5. LE PREVISIONI *(copiate dal mandato, prima dei numeri; e le mie, separate)*
 
 - **DEL GUARDIANO:** **P1** K1 e K2 passano `75%`; il profilo `N(r)` risolto piu' stretto di quello di chi `60%`. **P2** la caduta: V2 VIA `70%`; V3 VERSO `65%`, con l'orologio interno come natura solo con Z2 `55%`. **P3** Eotvos `< 1%` con almeno una combinazione `35%`; fra `1%` e `12%` `40%`; `>= 12%` `25%`. **P4** la coppia: A e B come F0 entro il `20%` `65%`. **P5** il giudizio: TOPPA o NULLA `55%`, CURA `30%`, DANNO `15%`.
+- **DEL GUARDIANO, AGGIUNTA CON LE DECISIONI** *(Luca, 2026-11-23)*: **`eta` cambia meno del `20%` in relativo `60%`; sotto l'`1%` `10%`; sale `30%`.** *(La mia lettura, dichiarata: «sotto l'`1%`» e' il cambio relativo `|eta_vinc/eta_rif - 1| < 1%`; nel referto si dice anche se `eta < 1%`, la porta G2.)* **P2 «V3 VERSO con l'orologio interno come natura solo con Z2»** non e' piu' giudicabile come scritta *(Z2 non si fa)*: si giudica la parte senza Z2.
+- **LE MIE SU `eta`** *(prima dei numeri)*: il cambio relativo `< 20%` per tutte e tre le righe `70%` *(il campo che il mattone si fa da se' cambia `cs` e la fase dentro di lui di `~kappa chi ~ 1e-2`: un effetto del secondo ordine su una differenza del `12%`)*; `eta` sale con V3 `55%` *(l'anti-lapse e' piu' profondo per il mattone piu' pesante)*.
 - **LE MIE** *(dalla sez. 1, prima dei numeri)*: **il profilo risolto e' PIU' LARGO di quello di chi, non piu' stretto** `75%` *(togliere `m2` toglie la portata: la coda di `K0` diventa un logaritmo)*; **con V3 da solo `N(centro) > 1`** `90%` *(la sorgente `-e0 (rho - <rho>)` e' negativa nel cuore)*; **il rilassamento semplice NON passerebbe K2** `90%` *(D4)*.
 
 ## 6. LA STELLA POLARE *(le cinque risposte, prima del codice)*
 
 1. **A14:** l'energia `E[N]` e' stazionaria in `N`: `N` non porta energia propria *(non ha `pi`)*; **la conservazione LOCALE non vale** *(`N` risponde istantaneamente a tutto il toro: un vincolo ellittico e' non locale nel tempo)*: **e' una violazione da dichiarare**, come nella relativita' generale per il lapse.
 2. **Il gradino:** nessuno ancora *(la carta)*.
-3. **Numeri e leggi:** **nessun numero nuovo** con D1(a) *(`c2`, `kappa` di chi)*; **una legge tolta** *(l'equazione del moto di chi)* **e una forma cambiata** *(chi statico, `m2 = 0`)*; **Z2 sarebbe una legge in piu'** *(D2)*.
+3. **Numeri e leggi:** **nessun numero nuovo** con D1(a) *(`c2`, `kappa` di chi)*; **una legge tolta** *(l'equazione del moto di chi)* **e una forma cambiata** *(chi statico, `m2 = 0`)*; **Z2 sarebbe una legge in piu'** *(D2)*: **Luca non l'adotta** *(3-bis)*.
 4. **Il verso:** materia -> curvatura *(`u` fa `N`)* e curvatura -> materia *(`N` in `cs` o nella fase (a))*: **tutti e due, a ogni tick**; tocca `c_s` *(V2)*.
 5. **Emergente o imposto:** `N` non si impone *(si risolve)*; ### **ma la caduta e Eotvos restano in un gradiente imposto** *(D3)*.
 
