@@ -1514,6 +1514,84 @@
     "V3"
    ],
    "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M1640_N1_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "N1",
+    "--N",
+    "1.00"
+   ],
+   "note": "[M1640] il respiro a N uniforme, N1 N 1.00, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V2_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V2",
+    "--N",
+    "0.99"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 0.99, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V2_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V2",
+    "--N",
+    "1.01"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 1.01, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V3_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V3",
+    "--N",
+    "0.99"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 0.99, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V3_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V3",
+    "--N",
+    "1.01"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 1.01, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_CTRL_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "CTRL",
+    "--N",
+    "1.00"
+   ],
+   "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, 20000 tick da k 1500 del compatto"
   }
  ]
 }
