@@ -26666,3 +26666,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni del guardiano:** P1, P3, P4, P6 si'; **P2** *(IMPRONTA)* **e P5** *(ACCELERA)* **no.**
 
 ### **LE RIGHE NUOVE POSSIBILI DELLA SAGOMA -- NON SCRITTE, LA DECISIONE E' DI LUCA:** il ritmo delle nascite rallenta; le nascite si toccano *(`83%` a 1 passo)*; la nascita conserva la norma per costruzione e perde energia *(C5 del progetto dei vincoli, nel codice di oggi, e' il contrario)*. **FERMO.**
+
+## [M1623-V] 1b DAL RAMO vincoli: G2 NON SI APRE; UNA DOMANDA A LUCA *(2026-11-23; il commit `4a300cf3` sul ramo `vincoli`; scritto qui alle `17:00`: il messaggio di `aab44e26` lo dava per gia' scritto, e non lo era -- errore mio)* [[PROGETTO-MITOSI]]
+
+**`doc/PROGETTO_VINCOLI.md` sez. `6`:** **G2 NON SI APRE** *(Eotvos sale su tutti e tre i collegamenti: V2 `-0.325`, V3 `-0.338`, V2+V3 `+0.178`; S5 PEGGIORA contro F0)*; il motivo con M5 della sagoma; l'ordine: **il pezzo C e Q2**; Z1-Z4 restano a costo zero. ### **LA DOMANDA:** la porta scritta di C1-C2 e' G2, che resta chiusa: **come si entra in C** *(una porta riscritta, o C sulla sola carta finche' Q2 non e' chiusa)* **lo decide Luca**; il criterio di chiusura: una sua riga in quella sezione.
