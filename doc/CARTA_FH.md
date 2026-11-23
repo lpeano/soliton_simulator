@@ -41,3 +41,5 @@
 | riga | F0 | FH | giudizio |
 |---|---|---|---|
 | S1-S16 | | | |
+
+- ### **S4, LA DECISIONE DI LUCA** *(2026-11-23 dopo le `03:45`)*: **la mitosi con FH NON ora; il merge `lapse-u` -> `mitosi` con un mandato a se', di giorno, a corse ferme** *(MITOSI-v2 non si tocca)*. **Si va avanti con Eotvos, la coppia a `d 36`, le tenute lunghe.** Nella tabella del giudizio di FH la riga S13 *(le nascite)* resta **NON MISURATO** con questo motivo.
