@@ -26275,3 +26275,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **K5: RALLENTA** *(`69 -> 39` per `1000` tick; lineare ed esponenziale a `-5 sigma`)*.
 - **N6:** **tutte nel guscio** *(`r 16.6-22.0`)*, sul fianco esterno del mattone *(`rho` massimo a `r 17`)*, dove `|phi - phi0|^2` ha il minimo. **N1:** «5-7» `506` su `538`.
 - **Le previsioni:** P1, P3, P4, P6 si'; **P2 no** *(SI SFUMA)*; **P5 no** *(RALLENTA)*.
+
+## [M1623] UNA CORREZIONE DELLE ORE *(2026-11-23, `16:50` da `date`)* [[PROGETTO-MITOSI]]
+
+**Nei paragrafi di [M1623] di questa relazione ho scritto `16:55`, `17:00` come ore di fine: erano STIMATE, non lette con `date`, e sono piu' tardi del vero** *(`date` alle `16:49:47`, a lavoro finito)*. **Le ore giuste:** la Parte 2 dalle `16:30` alle `16:49`; la lettura `16:42:21`-`16:42:33`. **Errore mio**, lo stesso di stamattina *(16:40 contro 16:30)*: la regola dice che le ore si leggono con `date`.
