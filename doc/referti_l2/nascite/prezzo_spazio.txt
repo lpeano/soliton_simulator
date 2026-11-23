@@ -1,0 +1,24 @@
+[TIMBRO] coppie_57.py  sha1-BYTE 343305c1  committato e pulito
+[TIMBRO] nascite_lettura.py  sha1-BYTE ec1571ea  committato e pulito
+[TIMBRO] prezzo_spazio.py  sha1-BYTE 32e71502  committato e pulito
+============================================================================================================================================
+[M1739-E] IL PREZZO DELLO SPAZIO (la carta doc/CARTA_prezzo_spazio.md; sola lettura). ### L'energia PER PEZZI al tick della nascita NON E' NEI DATI (una ripresa): NON MISURATO
+============================================================================================================================================
+(1) 538 nascite; DH: la media -21.2912, la deviazione 7.0037, la mediana -21.0165, da -57.7619 a -2.4960; la somma -11454.645139; E_persa all'ultima +11454.645139
+    la scomposizione della regola: DH_nascita la media -13.9759 (da -31.4511 a +2.2214), DH_flip la media -7.3152 (da -30.3417 a -0.0504); |DH - DH_nascita - DH_flip| massimo 0.000e+00
+    |DH/media - 1| <= 0.3 (entro +-30% di una costante) in 0.6710 delle nascite; la deviazione relativa 0.3289
+    per terzi della corsa: 1-179: la media -20.564; 180-358: la media -21.058; 359-538: la media -22.245
+(3) IL SEGNO: DH > 0 in 0 su 538 (0.0000)
+### i genitori (i, j) nello stato salvato prima (538 nascite; saltate 0: un genitore nato nella stessa finestra); i tick dallo stato: la mediana 135, il massimo 250
+    Theta_v la media 21.1729 (da 12.7753 a 24.9478); Lambda la media 1.600448 (da 0.636364 a 3.379529); rho la media 387.9285 (da 181.7140 a 637.1171); |phi - phi0|^2 la media 0.2508
+    (1) DH = a + b Lambda: a -19.1538 +- 0.9712, b -1.335492e+00 +- 5.8e-01 (-2.3 sigma); la correlazione -0.0995
+    (1) DH = a + b rho: a -10.6720 +- 1.3118, b -2.737406e-02 +- 3.3e-03 (-8.3 sigma); la correlazione -0.3372
+    (1) DH = a + b |phi - phi0|^2: a -19.5396 +- 0.9346, b -6.983528e+00 +- 3.5e+00 (-2.0 sigma); la correlazione -0.0852
+    (2) DH = a + b Theta_v: a -17.1138 +- 2.4513, b -1.972953e-01 +- 1.1e-01 (-1.7 sigma); la correlazione -0.0740
+    DH/Lambda: la media -14.6346, la deviazione relativa 0.4627; entro +-30% della media in 0.5149
+### IL CASO NOTO: E (la serie) da k 35750 (8267817.228625, nascite 0) a k 45950 (8256001.082961, nascite 538): la deriva -11816.145663; la somma dei DH -11454.645139; lo scarto -3.615005e+02 (relativo a E 4.37e-05)
+  DEVE: il caso noto: la somma dei 538 DH = la deriva di E della corsa entro 1e-9                                      ### FALLISCE -3.615e+02
+    la deriva dei tick dal tronco (k 30000-35750, senza nascite): -7.189130e-03 per tick; tolta su 10200 tick: -11742.816540; contro la somma dei DH: lo scarto -288.1714 (2.52%)
+    la deriva per tick negli intervalli di 50 tick SENZA nascite dopo la prima (16): la media -1.9635e-01, la mediana -1.6078e-01
+============================================================================================================================================
+### 1 DEVE: 0 PASSANO, 1 FALLISCONO ['il caso noto: la somma dei 538 DH = la deriva di E della corsa entro 1e-9']
