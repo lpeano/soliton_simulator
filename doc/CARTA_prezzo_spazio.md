@@ -1,4 +1,4 @@
-# IL PREZZO DELLO SPAZIO: L'ENERGIA PERSA ALLE 538 NASCITE *(Luca, 2026-11-23, [M1739-E]; scritta PRIMA del codice e dei numeri, `18:00` da `date`; SOLA LETTURA, il ramo `mitosi`, file nuovi)* [[PROGETTO-MITOSI]]
+# IL PREZZO DELLO SPAZIO: L'ENERGIA PERSA ALLE 538 NASCITE *(Luca, 2026-11-23, [M1739-E]; scritta PRIMA del codice e dei numeri, `18:05` da `date`; SOLA LETTURA, il ramo `mitosi`, file nuovi)* [[PROGETTO-MITOSI]]
 
 ## 1. COSA C'E' NEI DATI, E COSA NO
 
