@@ -72,4 +72,11 @@
 
 | riga | F0 senza lapse | chi | il lapse risolto | giudizio |
 |---|---|---|---|---|
-| S1-S18 | | | | |
+| S1-S3, S7-S10, S12-S14, S16-S18 | | | non misurato | NON MISURATO |
+| **S4** Eotvos | V2 `0.120`, V3 `0.138`, V2V3 `0.131` | non misurato | **`-0.325`, `-0.338`, `+0.178`** | contro F0 **PEGGIORA**; contro chi NON MISURATO |
+| **S5** la coppia `d 36` | A `-8.25e-7`, B `-5.69e-7` | in fase `+1.32e-6` | A `-6.48e-7`, **B `+5.52e-7`** | contro F0 **PEGGIORA**; contro chi **LASCIA** *(`0.983`)* |
+| S6 | V2 VIA, V3 VERSO | come [M0908] | uguale; l'orologio opposto a `N` | contro F0 LASCIA; contro chi NON MISURATO |
+| S11 | -- | `N` varia `2.65e-4` | V2V3 `2.65e-4`, V3 `9.7e-4`, V2 `1.69e-3` | NON MISURATO |
+| **S15** | -- | `+1.22e-6` a `d 39` | `+1.30e-6` a `d 36` | contro chi **LASCIA** |
+
+**Riempita il 2026-11-23** *(`11:14`-`11:25` da `date`)* **dal referto `doc/referti_l2/lapse_vincolo_giudizio.md`** *(i numeri e le note li'):* ### **CONTRO CHI: NULLA; CONTRO F0 SENZA LAPSE RISOLTO: DANNO.**
