@@ -1,0 +1,17 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+==================================================================================================================================
+[M1658-U] 1c: L'OGGETTO AL FONDO A K (L-1_proiezione_K, k 3000) MISURATO COME F0 (la carta sez. 2-quater)
+==================================================================================================================================
+  IL CALCIO: v0 -1.0587e-05 +- 3.2e-07, v(k 0.010) +5.1806e-04 +- 1.2e-06; m* = 0.010/(v - v0) = +18.916 (|v - v0| 422.4 sigma); omega (k 0) +0.0938973
+  K4: m* POSITIVA
+  L'OROLOGIO V2: Delta = omega_psi - omega_phi(lontano) a N 0.9965, 1, 1.0035: +0.5614458, +0.5634051, +0.5653643; d ln Delta/dN +0.9936 (COME N)
+  L'OROLOGIO V3: Delta = omega_psi - omega_phi(lontano) a N 0.9965, 1, 1.0035: +0.5650737, +0.5634051, +0.5617366; d ln Delta/dN -0.8462 (non come N)
+  LA CADUTA V2: a +6.2969e-07 +- 3.2e-09; V0 +2.7401e-08 +- 4.6e-10; a - a(V0) +6.0229e-07 +- 3.2e-09 (185.9 sigma): VERSO N piu' basso; la norma 2.8e-14; ### NATURA
+  LA CADUTA V3: a -3.0573e-06 +- 1.7e-08; V0 +2.7401e-08 +- 4.6e-10; a - a(V0) -3.0847e-06 +- 1.7e-08 (184.3 sigma): VIA; la norma 1.3e-12
+==================================================================================================================================
