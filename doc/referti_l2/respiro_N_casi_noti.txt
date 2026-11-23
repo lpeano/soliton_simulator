@@ -1,0 +1,21 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] respiro_N.py  sha1-BYTE 3c9dc596  committato e pulito
+==================================================================================================================================
+[M1640-R] I CASI NOTI (in memoria; prima delle corse)
+==================================================================================================================================
+    N1 N 1.00: 500 tick in 198 s
+    V2 N 1.00: 250 tick in 124 s
+    V3 N 1.00: 250 tick in 136 s
+    V3 N 0.99: 250 tick in 126 s
+    V2 N 0.99: 250 tick in 111 s
+  DEVE: CN1 N1 a k 250 = la tenuta S1 di [M0326-T] AL BIT (8 array)                                                      PASSA diversi: []
+  DEVE: CN1 N1 a k 500 = la tenuta S1 di [M0326-T] AL BIT (8 array)                                                      PASSA diversi: []
+  DEVE: CN2 V2 con N = 1 = N1 a k 250 AL BIT (tick_var: s * 1.0 = s, exp(0) = 1)                                         PASSA diversi: []
+  DEVE: CN2 V3 con N = 1 = N1 a k 250 AL BIT (tick_var: s * 1.0 = s, exp(0) = 1)                                         PASSA diversi: []
+  DEVE: DEVE FALLIRE: V3 con N = 0.99 diverso da N1 a k 250 (psi_h)                                                      PASSA max|d psi_h| 2.618e+01
+  DEVE: DEVE FALLIRE: V2 con N = 0.99 diverso da N1 a k 250 (psi_h)                                                      PASSA max|d psi_h| 3.278e+01
+### 6 DEVE: 6 PASSANO, 0 FALLISCONO []
