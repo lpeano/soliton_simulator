@@ -25,7 +25,7 @@
 | S13 | le nascite cadono sugli assi del favo | p < 1e-4; coppie 5–7 legate; raggruppamento p = 1e-4 | mitosi, M1–M3 | della prospettiva (il favo) |
 | S14 | i triangoli sfasati dondolano e si allargano; quello in fase si chiude | lato 39,3 → 71,2; rotazione ±7°; t000 38,6 → 35,8 | girandola, tronchi | non so |
 | S15 | la gravità (χ) respinge, dal volume | Δa +1,22e-6 a 39; +3,53e-7 a 60 (rapporto 0,29); 95% dal nucleo | test pulito, gravita_60, spinta_regioni | dell'animale (= S1), con χ imposto |
-| S16 | le quattro inerzie (Σρ, la banda, il campo U, il tempo N; e l'orologio ω/c²) | aperta: la tabella in doc/CARTA_inerzie.md, i numeri in inerzie.txt quando ci sono | (Luca, 2026-11-23, [M0149]) | non so |
+| S16 | le quattro inerzie (Σρ, la banda, il campo U, il tempo N; e l'orologio ω/c²) | per particella: la banda k/v −18,13 (k/(v−v0) −16,14) compatto, −19,26 largo; il campo U abs(m_E) 16,61 (il segno non determinato); il tempo V3 −19,21, V2 −19,36 (largo: entro lo 0,5% dalla banda dello stesso stato); il vuoto congelato −18,36 (+1,3%; +8,4% con la deriva tolta: non robusto); l'orologio ω/c² 80,5 (c_sol): non è una massa; il composto t000 additivo (0,984) | inerzie.txt, inerzie_giudizio.md (Luca, 2026-11-23, [M0149]) | non so |
 
 ## 3. Le righe che MANCANO (la proboscide: non inquadrata, non inventata)
 | # | la proporzione | perché manca | cosa serve |
