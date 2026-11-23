@@ -26797,3 +26797,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **K2 (`rho` di V3 al bit con N1): FALLISCE**, come previsto *(la carta: «al bit `15%`»)*; **il controllo CTRL** *(una fase globale una volta sola)* **si allontana da N1 come V3:** `2.6e-4` contro `8.9e-4`/`1.0e-3` a `k 5000`, `0.138` contro `0.172`/`0.133` a `k 20000` -- **l'arrotondamento amplificato dalla dinamica, non una fase che agisce**; **V2** invece `0.108` gia' a `k 5000`.
 - **Il battimento centro-`r 10`:** `b(1.01)/b(0.99)` `1.016 +- 0.186` *(V2)*, `0.997 +- 0.184` *(V3)*: **non informa** *(P3 non giudicabile)*.
 - ### **K4, il verdetto:** **COME SCRITTO NON SI RAGGIUNGE** *(K2 e K3 non passano)*; **i numeri dicono ETICHETTA:** il tempo vero *(V2)* rallenta il respiro come `N`, il «tempo» di V3 e' una fase *(un potenziale)* e non rallenta niente. **La sagoma S20; la voce 6-STELLA** *(«lo specchio del 23/11, con il numero»)*. **Le previsioni del guardiano:** P1 K1 `85%` *(il periodo si', la norma no)*, K2 al bit `85%` **no**, K3 `85%` **no come scritto**; P2 ETICHETTA `80%`: **i numeri si', il verdetto formale no**. **Le mie:** N1 = tenuta S1 al bit `95%` si' *(i casi noti)*; `5125` entro l'`1%` `35%`: **si'**; K2 al bit `15%`: **no** *(giusto)*; V3 entro `10x` CTRL `70%`: **si'**; K3 `60%`: **no**; `sigma` sotto `0.003` `50%`: **no**; ETICHETTA `60%`: **i numeri si'**.
+
+## [M2221] LA FORMA DELL'OGGETTO AL FONDO A K: I NUMERI, E LE PREVISIONI CONTRO DI LORO *(2026-11-23, la lettura `22:51:02`-`22:51:25` da `date`)* [[PROGETTO-MITOSI]]
+
+**`forma_fondo.py`** *(`7082f6b8`)* -> `forma_fondo.txt` e tre png. **I casi noti** *(`rho = 1 + cos(6 theta)`)*: `0.49983`, `0.50045`, `0.50413`, l'orientamento entro `0.22` gradi: **PASSANO 3 su 3.** **Il fondo del favo** *(`rho = 1`)*: `|S3|/somma` `0.0092`, `0.0070`, `0.0048`; `|S6|/somma` `0.0149`, `0.0090`, `0.0148` sugli anelli `[4,8)`, `[8,12)`, `[12,16)` *(calcolato sulla geometria di (a): il baricentro di (b) e (c) e' un poco diverso, lo dico)*. **La tabella** *(|S|/somma)*:
+
+| | `[4,8)` m3 / m6 | `[8,12)` m3 / m6 | `[12,16)` m3 / m6 |
+|---|---|---|---|
+| (a) lambda `-1` al fondo a K | `0.0297` / `0.0170` | **`0.0508`** / `0.0066` | `0.0151` / `0.0334` |
+| (b) L0, il controllo | `0.0107` / `0.0114` | `0.0093` / `0.0106` | `0.0246` / `0.0009` |
+| (c) il mattone alla cima | `0.0174` / `0.0046` | `0.0273` / `0.0139` | `0.0094` / `0.0197` |
+| il fondo del favo | `0.0092` / `0.0149` | `0.0070` / `0.0090` | `0.0048` / `0.0148` |
+
+**Le previsioni del guardiano, contro i numeri** *(nessun giudizio nel referto, qui solo il confronto)*: **(c) m6 sopra il fondo in `[8,12)` `65%`:** `0.0139` contro `0.0090` -- **sopra** *(`1.5x`)*. **(a) m6 NON sopra il fondo `55%`:** in `[8,12)` `0.0066` contro `0.0090` **non sopra**; in `[4,8)` `0.0170` contro `0.0149` *(appena)*, in `[12,16)` `0.0334` contro `0.0148` **sopra**. **(a) m3 sopra il fondo `40%`:** **si', su tutti e tre gli anelli**, in `[8,12)` `0.0508` contro `0.0070` *(`7x`)*. **(a) tondo entro 2 decadi in log `60%`, (b) un alone senza bordo `85%`:** **dalla figura** *(una lettura a occhio, non un numero)*: (a) tondo su circa due decadi; (b) un alone di circa `1.5` decadi su tutta la finestra di raggio `30`, senza bordo.
