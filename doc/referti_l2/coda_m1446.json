@@ -2124,6 +2124,50 @@
     "270,271,536,537,538"
    ],
    "note": "[M1751] S2-S4 le schede, la v2 (il meta completato), nascite 270,271,536,537,538 in sequenza"
+  },
+  {
+   "nome": "M0037_e1_caduta_V2_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): caduta --coll V2"
+  },
+  {
+   "nome": "M0037_e2_caduta_V0_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): caduta --coll V0"
+  },
+  {
+   "nome": "M0037_e3_calcio_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): calcio --k 0.010"
+  },
+  {
+   "nome": "M0037_e3b_calcio_k0_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): calcio --k 0.0"
   }
  ]
 }
