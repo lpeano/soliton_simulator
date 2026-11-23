@@ -26697,3 +26697,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ## [M1759-CONT] LA SEZIONE D DEL PROGETTO DEI VINCOLI (IL CONTINUO DEI DIFETTI) E IL RIMANDO M6 NELLA SAGOMA *(2026-11-23, `18:41`-`18:50` da `date`)* [[PROGETTO-MITOSI]]
 
 **`doc/PROGETTO_VINCOLI.md` sez. D** *(ramo `vincoli`, `9b1b6d5e`)*, **alla lettera di Luca**, con una nota del guardiano in coda: ### **MITOSI-v2 e' su `L 186`, non `162`** *(il testo dice «538 nascite su L 162»)*; **K5 di [M1751-GL] e' misurata** *(le coppie ferme fra le nascite, nessuna dipendenza dalla distanza, `p = 0.04 +- 0.01`)*, **ma il Burgers non e' definito con le posizioni fisse: D1 lo vuole prima.** **La sagoma:** la riga **M6** in sez. 3 *(le righe che mancano)*, col rimando. **Solo carta.**
+
+## [M1810-STELLA] LA STELLA POLARE ARRICCHITA: IL PIANO DAL 2D AL 3+1 *(2026-11-23, `18:52`-`19:00` da `date`)* [[PROGETTO-MITOSI]]
+
+**La voce 6-STELLA di `doc/MAPPA.md`** *(su `lapse-u` e `primo-ordine`)* **e la sezione E di `doc/PROGETTO_VINCOLI.md`** *(ramo `vincoli`)*: **il testo di Luca alla lettera** *(nella MAPPA gli a capo resi con `###`: una cella di tabella non li tiene)*, **con una nota del guardiano in coda:** ### **«il cono a K un punto di Weyl»: il fondo a K e' CURVO, non un cono** *(`fondo_K.txt`, `7f65f182`)*; **MITOSI-v2 e' su `L 186`, non `162`**; **K5 di [M1751-GL] misurata, il Burgers non definito.** **E una correzione delle ore:** nel paragrafo di [M1759-CONT] ho scritto `18:50` come fine: `date` dava `18:52`. **Solo carta.**
