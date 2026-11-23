@@ -26653,3 +26653,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### **UNA PREMESSA DEL MANDATO CHE NON TORNA COI NUMERI:** il mandato scrive *«il corpo pesante che si scava il pozzo piu' profondo cade MENO»*. **`scena_calciata` moltiplica `psi_h` per `sqrt(scala)`:** `x1.2` ha piu' norma. **Col vincolo il corpo piu' pesante si muove DI PIU'** *(V2 `|a|` `3.15e-6` a `x0.8`, `4.37e-6` a `x1.2`; V3 `2.21e-6`, `3.11e-6`)*; senza il vincolo il contrario *(V2 `5.53e-6`, `4.90e-6`)*. **Nella sagoma ho scritto i numeri, non la frase.** **E «Eotvos raddoppia e cambia segno»** in S19 vale per V2 e V3; **V2+V3 `x1.35`, senza cambio di segno**: la riga porta i tre numeri.
 
 **«M5 della stella polare»:** `doc/STELLA_POLARE.md` non ha un M5; l'ho letto come **la riga M5 della sagoma** *(sez. `3`)*. **La sagoma su `primo-ordine` e' INDIETRO di tre aggiornamenti** *(S4 e S5 con FH, S16 chiusa, S17, S18, M2)*: ogni differenza va nello stesso verso; la porto su `primo-ordine` copiando il file di `lapse-u` *(con lo sha1)* nel giro della relazione.
+
+## [M1623] LA PARTE 2 DAL RAMO mitosi E LA SAGOMA (S13 CADE); FERMO *(2026-11-23, `16:30`-`17:00` da `date`; i commit su `mitosi`: `76227635` la carta, `71a6a9ec` lo script, `4bc988bf` il referto)* [[PROGETTO-MITOSI]]
+
+**Le 538 nascite di MITOSI-v2, lette dai file** *(`doc/referti_l2/nascite/nascite_538_lettura.md` del ramo `mitosi`; solo lettura; «prima» e «dopo» con la risoluzione dei dati, `50` tick la norma, `250` Theta)*:
+- **K1 PASSA** *(le prime 9 al bit con M1-M3; la norma senza nascite `3.3e-16`)*.
+- ### **K2: S13 SI SFUMA** -- sull'asse **`0.353`** contro **`0.338`** dei nodi dell'anello *(`p = 0.24`)*; le prime `100` `0.78`, le ultime `238` `0.22`. **Nella sagoma S13 e' scritta CADUTA, col perche'.**
+- **K3 CONSERVATA** *(`8.9e-16`)*, **ma e' il codice** *(`_fattore` riscala la norma della stella)*; **l'energia NON e' conservata:** `-21.3` per nascita, `1.1455e+04` in tutto.
+- **K4 CHIUDE** *(genitore+nato `0.425`, i vicini `0.957`, il controllo `1.006`; lo scendere e' garantito dal contatore)*; **ma l'`83%` delle nascite e' a 1 passo dalla precedente** *(la mediana `12` tick)*: **la nascita non sposta Theta, i vicini sono gia' maturi.**
+- ### **K5: il ritmo RALLENTA** *(`69 -> 39` per `1000` tick, `-5 sigma`)*.
+- **N6: tutte nel guscio** *(`r 16.6-22.0`)*. **N1:** «5-7» `506` su `538`.
+- **Le previsioni del guardiano:** P1, P3, P4, P6 si'; **P2** *(IMPRONTA)* **e P5** *(ACCELERA)* **no.**
+
+### **LE RIGHE NUOVE POSSIBILI DELLA SAGOMA -- NON SCRITTE, LA DECISIONE E' DI LUCA:** il ritmo delle nascite rallenta; le nascite si toccano *(`83%` a 1 passo)*; la nascita conserva la norma per costruzione e perde energia *(C5 del progetto dei vincoli, nel codice di oggi, e' il contrario)*. **FERMO.**
