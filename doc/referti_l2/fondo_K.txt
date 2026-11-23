@@ -1,0 +1,12 @@
+[TIMBRO] fondo_materia.py  sha1-BYTE 69b994c0  committato e pulito
+[TIMBRO] fondo_K.py  sha1-BYTE c90fb64a  committato e pulito
+==================================================================================================================================
+[M1658-S] 1a, L'ADDENDUM v2: IL FIT QUADRATICO E LINEARE AL FONDO A K (|k - k_K| in (0, 0.15], 20 punti)
+==================================================================================================================================
+### K: le quasi-energie nella finestra +0.2453383264 +0.2453383264; E_K +0.2453383264; la molteplicita' 2
+  lungo B0, il ramo 0: (Q) a +2.792351e-02 +- 3.8e-06, il residuo relativo massimo 0.0020 (REGGE); (L) v +3.218439e-03 +- 1.9e-04, il residuo 14.3374 (no); E - E_K da +1.574e-06 a +6.279e-04
+  lungo B0, il ramo 1: (Q) a +2.792351e-02 +- 3.8e-06, il residuo relativo massimo 0.0020 (REGGE); (L) v +3.218439e-03 +- 1.9e-04, il residuo 14.3374 (no); E - E_K da +1.574e-06 a +6.279e-04
+  lungo B1, il ramo 0: (Q) a +2.792351e-02 +- 3.8e-06, il residuo relativo massimo 0.0020 (REGGE); (L) v +3.218439e-03 +- 1.9e-04, il residuo 14.3374 (no); E - E_K da +1.574e-06 a +6.279e-04
+  lungo B1, il ramo 1: (Q) a +2.792351e-02 +- 3.8e-06, il residuo relativo massimo 0.0020 (REGGE); (L) v +3.218439e-03 +- 1.9e-04, il residuo 14.3374 (no); E - E_K da +1.574e-06 a +6.279e-04
+==================================================================================================================================
+### IL VERDETTO (K2): FONDO CURVO
