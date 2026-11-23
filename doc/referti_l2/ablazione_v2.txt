@@ -47,7 +47,7 @@
     le bande piatte (larghezza < 1e-06): 0
     lo spostamento delle bande ordinate rispetto a (0): da +2.148129e-03 a +4.493452e-01 (uniforme entro 4.47e-01)
 ----------------------------------------------------------------------------------------------------------------------------------
-### K5 (come scritto): «la piatta sparisce con (iii)»: NON GIUDICABILE ((iii) non si fa: la carta)
+### [M2136-05] QUI C'ERA la riga «K5 (come scritto): ... NON GIUDICABILE ((iii) non si fa: la carta)», testo FISSO della v1 (ablazione.py), FALSA dopo (iii): tolta A MANO il 2026-11-23 su ordine di Luca; i conti NON sono stati rifatti. K5 su (iii): le piatte da 4 a 0 (sopra).
 ### K5: la cima a massa negativa resta in ['i', 'ii', 'iv', 'iv-b'] su ['i', 'ii', 'iv', 'iv-b']
 ==================================================================================================================================
 ### 1 DEVE: 1 PASSANO, 0 FALLISCONO []
