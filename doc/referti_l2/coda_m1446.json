@@ -1233,6 +1233,257 @@
     "casi_noti"
    ],
    "note": "[M0528] 2b i casi noti del lapse come moltiplicatore (CN1, CN1b, CN2 e il DEVE FALLIRE, CN3)"
+  },
+  {
+   "nome": "M0528L_mattone_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_mattone_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_mattone_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_vuoto_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_vuoto_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_vuoto_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x0.8_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "0.8",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K4 il riferimento V2V3 senza vincolo"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.2_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.2",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K4 il riferimento V2V3 senza vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_V2V3_0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "V2V3",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0528] 2c K5 la coppia a d 36 col vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_V2V3_180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "V2V3",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0528] 2c K5 la coppia a d 36 col vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_F0_180_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "F0",
+    "--gradi",
+    "180",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K5 la coppia F0 in antifase senza lapse"
   }
  ]
 }

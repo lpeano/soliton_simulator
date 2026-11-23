@@ -22,3 +22,8 @@
 2. `doc/referti_l2/lapse_vincolo.py` *(il solutore, il tick, le scene, i casi noti CN1-CN3, le letture)* e le `22` voci in `coda_m1446.json`; l'inventario; commit;
 3. i casi noti, il referto `lapse_vincolo_casi_noti.txt`; commit; se passano, la coda;
 4. le letture e i referti K1-K5, la tabella del giudizio, la relazione *(sui due rami)*; FERMO.
+
+## 4. ANNOTAZIONI *(le premesse non si riscrivono)*
+
+- **`08:49`:** **le corse sono `20`, non `22`** *(`3+3+3+6+2+2+1`: un errore di somma mio, trovato dall'assert dello script che scrive le voci)*. **E il vuoto gira in `TC.scena`** *(la scena della caduta)*, **non su L 186** come scritto in sez. 2: nel codice `lapse_vincolo.vuoto` e' `TC.scena`.
+- **I casi noti** *(`doc/referti_l2/lapse_vincolo_casi_noti.txt`, `08:43-08:48`)*: **10 DEVE, 10 PASSANO.**
