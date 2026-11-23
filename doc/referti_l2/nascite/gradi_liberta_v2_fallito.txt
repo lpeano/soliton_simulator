@@ -1,0 +1,46 @@
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+[TIMBRO] gradi_liberta_v2.py  sha1-BYTE 69482ee8  committato e pulito
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] ripresa_nascita.py  sha1-BYTE 63985dc7  committato e pulito
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+==================================================================================================================================
+[M1751-L] LA SCHEDA della nascita 1 (k 35976, l'arco 50995, i 16998, j 16999, il nato 34596): il disco di raggio 12 attorno a {i, j}
+    il meta di prima_35976.npz completato da prima_nascita_35976.npz: ['Delta', 'R_A', 'R_ogg5_k0', 'incollato']
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v2.py", line 62, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v2.py", line 58, in main
+    return GL.main(argv)
+           ~~~~~~~^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 255, in main
+    cod = max(cod, scheda(q))
+                   ~~~~~~^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 141, in scheda
+    M, et, righe, resid, nt, ncol, D = matrice(Z, C, cs, (i, j))
+                                       ~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 107, in matrice
+    out = cammino(Z, C, cs, p)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 60, in cammino
+    TK.percorri_tick(st, mot, par, SALTA, None, len(CM.ORDINE))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\tick.py", line 99, in percorri_tick
+    mot.operatori[nome](st, par if vuole_par else {}, frazione)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\motore.py", line 453, in _grover
+    FP.grover(self, st["psi_h"], frazione)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\flussi_parziali.py", line 454, in grover
+    _grover_mezzo(mot, vista, h)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\flussi_parziali.py", line 335, in _grover_mezzo
+    z = z_nodo(mot, frazione)
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\flussi_parziali.py", line 298, in z_nodo
+    s = s_nodo(mot)
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\flussi_parziali.py", line 181, in s_nodo
+    _nel_cono(s, "nodo")
+    ~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\flussi_parziali.py", line 237, in _nel_cono
+    assert mi > 0.0, (
+           ^^^^^^^^
+AssertionError: un `s` del nodo vale nan <= 0: un tempo proprio nullo o negativo e' un orologio fermo o che va indietro, e NON si corregge con un pavimento
