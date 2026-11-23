@@ -1,5 +1,5 @@
 {
- "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0; [M0149] (sostituisce [M0133]): tolte le 8 corse di convergenza M0133C non lanciate; le cadute M0133F a priorita' 1 (S6: I2, I4, S4 prima di S5); poi tolte anche le cadute M0133F (non lanciate): tornano in coda dopo I2, I4, S4",
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0; [M0149] (sostituisce [M0133]): tolte le 8 corse di convergenza M0133C non lanciate; le cadute M0133F a priorita' 1 (S6: I2, I4, S4 prima di S5); poi tolte anche le cadute M0133F (non lanciate): tornano in coda dopo I2, I4, S4; [M0149] S6: I2, I4, S4 a priorita' 0; le coppie (v3) a 1; le cadute (v2) a 2",
  "corse": [
   {
    "nome": "M_k0.000_a1",
@@ -871,6 +871,211 @@
     "0.010"
    ],
    "note": "[M0133] 5b il calcio (F0)"
+  },
+  {
+   "nome": "M0149I2_Ep1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "1"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I2_Em1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "-1"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I2_E0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "0"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I4_congelato_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "congelato",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149I4_congelato_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "congelato",
+    "--k",
+    "0"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149I4_libero_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "libero",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149S4_tri_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "triangolo",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] S4 il composto t000"
+  },
+  {
+   "nome": "M0149S4_tri_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "triangolo",
+    "--k",
+    "0"
+   ],
+   "note": "[M0149] S4 il composto t000"
+  },
+  {
+   "nome": "M0149P_FH_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FH_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FT_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FT_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_F0_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_F0_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149F_FH",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FH"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
+  },
+  {
+   "nome": "M0149F_FT",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FT"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
+  },
+  {
+   "nome": "M0149F_F0",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "F0"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
   }
  ]
 }
