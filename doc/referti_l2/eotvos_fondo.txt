@@ -1,0 +1,16 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] eotvos_fondo.py  sha1-BYTE d6861ad6  committato e pulito
+==================================================================================================================================
+[M0037] L'EOTVOS AL FONDO A K: LA MASSA 1 (1c) E LA MASSA 4 (a2) (la carta sez. 2-septies)
+==================================================================================================================================
+  1c (massa 1): m* +18.9162 +- 0.0448; a - a(V0) +6.0229e-07 +- 3.2e-09; -grad omega/m* +4.6579e-06; K +0.1293 +- 0.0008; la norma 2.8e-14
+  a2 (massa 4): m* +18.6350 +- 0.0367; a - a(V0) +6.7340e-07 +- 2.3e-09; -grad omega/m* +4.7282e-06; K +0.1424 +- 0.0006; la norma 1.5e-13
+### K(a2)/K(1c) 1.1015; K(a2) - K(1c) +0.0131 +- 0.0009
+### eta = 2 |a1 - a2|/(a1 + a2) = 0.1115 +- 0.0064 (a_i = a - a(V0))
+==================================================================================================================================

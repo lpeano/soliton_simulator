@@ -26873,3 +26873,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni del guardiano:** «`a` cresce di piu' del `20%`» *(`35%`)* **NON e' successo: cala.** La seconda *(K sopra `0.5` a `6000`)* **non si misura.**
 - ### **La lettura, POST-HOC e dichiarata come tale:** **una accelerazione che CALA nel tempo, in tutte e tre le scale**, non e' una spinta costante con un impulso iniziale che si somma: e' semmai **una parte che si spegne**. **K = `0.129` e' la media su `[200, 2000]` di una cosa che non e' costante** -- e il confronto con `-grad omega/m*` va fatto **per finestra**, se Luca lo vuole. **Non l'ho fatto:** il mandato non lo chiedeva.
 - **L'incertezza dai residui e' un pavimento** *(i punti vicini sono correlati)*.
+
+## [M0037-03] L'EOTVOS AL FONDO A K CON LE MASSE 1 E 4: eta = 0.1115 +- 0.0064; K(a2) 0.1424 CONTRO 0.1293; m* QUASI UGUALE *(2026-11-24, le corse finite `00:58`, la lettura `00:59` da `date`)* [[PROGETTO-MITOSI]]
+
+- **Le quattro corse finite in ~`18` minuti** *(`1085` s le cadute, `660` s i calci)*: **io avevo scritto «un'ora e mezza, due»: sbagliato, mio.**
+- ### **Il referto** `doc/referti_l2/eotvos_fondo.txt`: **1c (massa 1):** `m* +18.9162 +- 0.0448`; `a - a(V0) +6.0229e-07 +- 3.2e-09`; **K `+0.1293 +- 0.0008`**. **a2 (massa 4):** `m* +18.6350 +- 0.0367`; `a - a(V0) +6.7340e-07 +- 2.3e-09`; **K `+0.1424 +- 0.0006`**. **`K(a2)/K(1c)` `1.1015`, la differenza `+0.0131 +- 0.0009`; `eta = 0.1115 +- 0.0064`.**
+- **Le previsioni del guardiano:** `m*(a2)` in `[15, 25]` *(`65%`)*: **SI'** *(`18.635`)*; `K(a2) = K(1c)` entro il `10%` *(`60%`)*: **NO, di poco** *(`1.1015`)*; `eta < 0.05` *(`55%`)*: **NO**; `eta > 0.15` *(`20%`)*: **NO**. **eta sta in mezzo, a ~`17` sigma da zero** *(con la barra dai residui, che e' un pavimento: [M0037-01bis])*.
+- ### **Tre cose da dire, POST-HOC e dichiarate come tali:**
+  1. **«massa 4» e' la NORMA x4, non la massa inerziale:** `m*` di a2 e' **quasi uguale** a quella di 1c *(`18.6350` contro `18.9162`)*. **La prova di equivalenza qui confronta due oggetti di inerzia ~uguale**, non `1` e `4`.
+  2. **Con `m*` quasi uguale, la differenza di `a` *(eta `0.1115`)* non viene da `m*`:** viene dalla risposta al gradiente. **Il principio di equivalenza, letto cosi', NON e' rispettato al livello `0.1`.**
+  3. **Dopo [M0037-01bis] (`a` cala nel tempo), `a` e K sono MEDIE su `[200, 2000]`:** se a1 e a2 si spengono con tempi diversi, eta dipende dalla finestra. **Non l'ho misurato per finestra:** il mandato non lo chiede.
