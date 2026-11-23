@@ -180,3 +180,5 @@ db_era2/*.parziale
 db_era2_pezzi/
 # IL FILM LEGGERO DEI TRONCHI DEL TRIANGOLO (Luca 2026-11-22 03:21): i file del film si committano
 !doc/referti_l2/film/*.npz
+# [M2155] il video della tenuta al fondo a K: Luca (21:55) lo vuole nel repo (1.44 MB); l'eccezione come quella del film dei tronchi (142325bb)
+!doc/referti_l2/anima_tenuta_fondo.mp4
