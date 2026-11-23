@@ -1,0 +1,24 @@
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+[TIMBRO] gradi_liberta_v2.py  sha1-BYTE 69482ee8  committato e pulito
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] ripresa_nascita.py  sha1-BYTE 63985dc7  committato e pulito
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+==================================================================================================================================
+[M1751-L] LA SCHEDA della nascita 270 (k 40009, l'arco 51422, i 17224, j 17225, il nato 34865): il disco di raggio 12 attorno a {i, j}
+    il meta di prima_40009.npz completato da stato_40000.npz: ['Delta', 'R_A', 'R_ogg5_k0', 'incollato']
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v2.py", line 62, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v2.py", line 58, in main
+    return GL.main(argv)
+           ~~~~~~~^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 255, in main
+    cod = max(cod, scheda(q))
+                   ~~~~~~^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 144, in scheda
+    Z["metti"]()
+    ~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\posizioni.py", line 21, in _alza
+    raise RuntimeError("Z[%r] non esiste dopo la crescita del grafo: %s" % (self.nome, self.perche))
+RuntimeError: Z['metti'] non esiste dopo la crescita del grafo: lo stato di partenza della scena e' della taglia vecchia: la scena non si rimette
