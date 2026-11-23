@@ -40,6 +40,7 @@
 | M3 | la sagoma da un altro punto di vista | tutto a L ≤ 243, un'orientazione | L doppio; il triangolo ruotato; le righe che restano uguali |
 | M4 | la Lorentz emergente | nessuna misura di contrazione/dilatazione sul mattone in moto | il mattone calciato a tre velocità, w e ω misurate |
 | M5 | il tempo e la caduta dalla STESSA grandezza (N da vincolo) | **il pezzo A chiuso il 23/11: NULLA contro chi, DANNO contro F0; il vincolo derivato dal libro di oggi dà la gravità di oggi (la coppia 0,983 × chi); il tempo e la caduta NON vengono ancora dalla stessa grandezza: l'orologio interno va al contrario di N in tutte e tre le righe; la caduta resta in un gradiente imposto** (Luca, 2026-11-23, [M1623]; sez. 4-bis) | **per cambiare segno e universalità deve cambiare l'ENERGIA che entra nel vincolo (il cammino, la banda, la non linearità), non il solutore** |
+| M6 | il continuo dei difetti: la geometria che la mitosi costruisce (dislocazioni = torsione, disclinazioni = curvatura: Kondo–Bilby–Kröner) | nessun campo misurato; le coppie 5–7 contate (S23), il Burgers non definito con le posizioni fisse; 538 nascite su L 186 | `doc/PROGETTO_VINCOLI.md` sez. D del ramo `vincoli` (9b1b6d5e; Luca, 2026-11-23, [M1759-CONT]): D1 il campo per celle, D2 la sorgente, D3 la chiusura di Kröner; dopo M3 (L ≥ 240, ≥ 2000 nascite) |
 
 ## 4. La tabella del giudizio (da compilare in ogni referto di cura)
 | riga | prima | dopo | MIGLIORA / LASCIA / PEGGIORA / NON MISURATO |
