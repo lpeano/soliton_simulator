@@ -1,0 +1,10 @@
+[TIMBRO] fh_coppia36.py  sha1-BYTE ea7be800  committato e pulito
+==================================================================================================================================
+[M0326-K] IL CASO NOTO DELLA COPPIA, d 36 (la carta sez. 4; d 35 non e' un nodo buono)
+==================================================================================================================================
+  F0 in fase dallo stampo, la distanza 36.0000: D da 35.0753 a 31.7874; a -1.3940e-06 +- 1.1e-08 (il residuo 2.38e-02); la norma 2.049494557e+06 -> 2.049494557e+06
+    contro il mandato -1.0e-06 a d 35, x 35/36 = -9.7222e-07: il rapporto 1.434
+    contro F-off -1.2603e-06 a d 39, x 39/36 = -1.3653e-06: il rapporto 1.021
+    contro lo stato compatto -1.3867e-06 a d 35, x 35/36 = -1.3482e-06: il rapporto 1.034
+  DEVE: K1 S5: entro il 15% del mandato riscalato   ### FALLISCE
+==================================================================================================================================
