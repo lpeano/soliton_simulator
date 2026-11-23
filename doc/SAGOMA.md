@@ -13,8 +13,8 @@
 | S1 | la materia vive nel gap SOPRA la cima della banda, con massa efficace negativa | ω 0,626 = e0 + 0,1497; m*_sol −19,26 (banda −16,88) | spettro_gap_v2, massa_calcio | dell'animale (è il segno della non linearità) |
 | S2 | E = m c² dalla cima | Δ/(m*_sol c_m²) = 0,9989 (c_sol), 1,077 (c_banda) col mattone largo a k 0 (m* −19,26); 1,126 (c_sol), 1,214 (c_banda) col mattone compatto a k 1500 (m* −17,03, ω 0,62591): m*_sol dipende dallo stato | emc2_v4, fondo_calcio, torneo_tenuta_v2 (R_E: python -c del 2026-11-23, 01:40) | probabile coincidenza (Luca, 2026-11-23, [M0133]); uno su ~40 zeri; dipende da c |
 | S3 | la legge della caduta | a = −∇ω/m*, K/K_th = 0,996 (4 forme entro l'8%) | legge_caduta | dell'animale |
-| S4 | la caduta NON è universale | Eötvös η = 0,120 ± 0,012 (V2), 0,138 ± 0,014 (V3) fra ×0,8 e ×1,2 | eotvos | dell'animale (da curare) |
-| S5 | la forza fra due corpi | Δa = A cos δ + B, A −7,10e-7, B −5,51e-7 (|B| = 0,78 |A|); 120° e 180° fuori dal fit a 7,8σ e 4,5σ | fase_relativa | non so (chi fa B: F2 in corsa) |
+| S4 | la caduta NON è universale | Eötvös η = 0,120 ± 0,012 (V2), 0,138 ± 0,014 (V3) fra ×0,8 e ×1,2; **con FH 0,227 ± 0,024 (V2), 0,303 ± 0,040 (V3): PEGGIORA a 3,9σ** (Luca, 2026-11-23, [M0326]) | eotvos, eotvos_FH | dell'animale (da curare; la non linearità non la cura) |
+| S5 | la forza fra due corpi | Δa = A cos δ + B, A −7,10e-7, B −5,51e-7 (|B| = 0,78 |A|); 120° e 180° fuori dal fit a 7,8σ e 4,5σ (lo stampo); **dallo stato compatto a k 1500, d 35: F0 A −7,63e-7, B −6,24e-7, abs(A/B) 1,22; FH −5,65e-7 / −8,91e-7, 0,63 (attrae anche in antifase); FT −7,26e-7 / −3,00e-7, 2,42**; B non viene né da U né dal vuoto (F2) (Luca, 2026-11-23, [M0149]) | fase_relativa, fase_relativa_F2, torneo_FH_FT | non so (chi fa B: non U, non il vuoto) |
 | S6 | l'orologio e la caduta non vanno insieme | V2 orologio come N (0,999) ma VIA; V3 VERSO ma orologio −0,761; Pound–Rebka G+U: l'attratto più veloce (+1,26e-4) | orologio_mattone_v2, pound_rebka_GU | dell'animale (= S1) |
 | S7 | il mattone più veloce della sua banda | 0,588 s contro 0,566 s (+3,7%) | emc2_v4, spettro_gap_v2 | non so |
 | S8 | l'anisotropia della materia | 3,8% fra gli assi | (riferimento di ottobre) | della prospettiva (il favo) |
@@ -25,13 +25,15 @@
 | S13 | le nascite cadono sugli assi del favo | p < 1e-4; coppie 5–7 legate; raggruppamento p = 1e-4 | mitosi, M1–M3 | della prospettiva (il favo) |
 | S14 | i triangoli sfasati dondolano e si allargano; quello in fase si chiude | lato 39,3 → 71,2; rotazione ±7°; t000 38,6 → 35,8 | girandola, tronchi | non so |
 | S15 | la gravità (χ) respinge, dal volume | Δa +1,22e-6 a 39; +3,53e-7 a 60 (rapporto 0,29); 95% dal nucleo | test pulito, gravita_60, spinta_regioni | dell'animale (= S1), con χ imposto |
-| S16 | le quattro inerzie (Σρ, la banda, il campo U, il tempo N; e l'orologio ω/c²) | per particella: la banda k/v −18,13 (k/(v−v0) −16,14) compatto, −19,26 largo; il campo U abs(m_E) 16,61 (il segno non determinato); il tempo V3 −19,21, V2 −19,36 (largo: entro lo 0,5% dalla banda dello stesso stato); il vuoto congelato −18,36 (+1,3%; +8,4% con la deriva tolta: non robusto); l'orologio ω/c² 80,5 (c_sol): non è una massa; il composto t000 additivo (0,984) | inerzie.txt, inerzie_giudizio.md (Luca, 2026-11-23, [M0149]) | non so |
+| S16 | le quattro inerzie (Σρ, la banda, il campo U, il tempo N; e l'orologio ω/c²) | per particella: la banda k/v −18,13 (k/(v−v0) −16,14) compatto, −19,26 largo; il campo U m_E −16,61 (il segno NEGATIVO, k_cin = k − eA: [M0326-S]; **S16 CHIUSA**: l'inerzia è una in grandezza, negativa); il tempo V3 −19,21, V2 −19,36 (largo: entro lo 0,5% dalla banda dello stesso stato); il vuoto congelato −18,36 (+1,3%; +8,4% con la deriva tolta: non robusto); l'orologio ω/c² 80,5 (c_sol): non è una massa; il composto t000 additivo (0,984) | inerzie.txt, inerzie_giudizio.md, segno_mE (Luca, 2026-11-23, [M0149], [M0326]) | non so |
+| S17 | fase e universalità tirano in direzioni opposte dentro la non linearità (FH) | FH: l'attrazione universale nel segno (abs(A/B) 0,63, S5 MIGLIORA) ma Eötvös raddoppia (η 0,227 / 0,303 contro 0,120 / 0,138, S4 PEGGIORA a 3,9σ) | torneo_FH_FT, eotvos_FH, FH_giudizio (Luca, 2026-11-23, [M0528]) | non so |
+| S18 | il respiro è del mattone, non della forma | F0 e FH, 10000 tick da k 1500 a N = 1: w ≈ 6–16, periodo 5125 tick per tutti e due (lo stesso bin dello spettro: 41 campioni), l'ampiezza 5,08 / 5,44 | tenuta_lunga_FH (Luca, 2026-11-23, [M0528]) | non so |
 
 ## 3. Le righe che MANCANO (la proboscide: non inquadrata, non inventata)
 | # | la proporzione | perché manca | cosa serve |
 |---|---|---|---|
 | M1 | la legge della forza con la distanza (in 2D 1/r) | si hanno code a K1 fino a r 40, nessun fit di legge | Δa a 5 distanze, un fit dichiarato prima |
-| M2 | la mitosi e la gravità nella STESSA corsa | mai fotografate insieme (MITOSI-v2 è senza lapse) | una corsa con nascite e N; costa 4,7 s/tick |
+| M2 | la mitosi e la gravità nella STESSA corsa | mai fotografate insieme (MITOSI-v2 è senza lapse; **FINITA a k 45976 = --fino il 22/11 alle 21:28:50, uscita 0, 538 nascite all'ultima tappa**: il registro del ramo mitosi, ec76e5c7) | una corsa con nascite e N; costa 4,7 s/tick |
 | M3 | la sagoma da un altro punto di vista | tutto a L ≤ 243, un'orientazione | L doppio; il triangolo ruotato; le righe che restano uguali |
 | M4 | la Lorentz emergente | nessuna misura di contrazione/dilatazione sul mattone in moto | il mattone calciato a tre velocità, w e ω misurate |
 | M5 | il tempo e la caduta dalla STESSA grandezza (N da vincolo) | oggi N è un campo imposto | la stella polare, dopo il torneo |
