@@ -25,3 +25,14 @@
 - **LE MIE** *(prima dei numeri)*: **la molteplicita' al fondo e' `2` `90%`** *(il testo di `spettro_gap_v2`)*; **le due bande si toccano a CONO `55%`** *(un punto K di un reticolo a favo con due bande che si toccano e' il posto classico di un cono di Dirac)*; **lo stampo nel sottospazio di K pesa meno del `1%` `80%`** *(il mattone e' fermo: e' a Gamma)*.
 
 ## 4. LA PARTE 2 *(l'ablazione)*: la sua sezione si scrive prima del suo codice, dopo 1a.
+
+## 2-bis. 1b: LA SEMINA AL FONDO *(scritta dopo 1a e PRIMA del codice di 1b)*
+
+- **1a ha detto** *(`fondo_materia.txt`, `a8116845`)*: il fondo a K `(B0 + B1)/3`, `E = +0.2453383`, molteplicita' `2`, **curvatura positiva `+0.0560`** *(isotropa)*: K2 passa, **1b si fa.**
+- **L'onda di Bloch** *(dalle righe: `A(k) = somma_x R(x) e^{-i k.d(x)}`, quindi `psi'(x) = somma_z R(z) psi(x - z)`)*: **`v e^{+i k.x}`**. **Le semine** *(`torneo_tenuta_v2.corsa` riga per riga, la scena di `caduta_libera.prepara`)*:
+  - **`stampo_K`:** `psi_h(x) <- psi_cima(x) e^{+i K.d(x)}` *(`d` lo scarto dal centro del mattone; `rho` non cambia: lo stesso mattone con la portante a K)*;
+  - **`proiezione_K`:** `psi(x) <- Q_K Q_K^dag psi_cima(x) e^{+i K.d(x)}` nodo per nodo, poi uno scalare per la norma *(`Q_K` = la base QR del sottospazio a `+0.2453383` di `A(K)`)*: **un oggetto nuovo**, non il mattone spostato.
+- **Le corse, `3000` tick:** **L-1 `stampo_K`**, **L-1 `proiezione_K`**, ### **L0 `stampo_K` e L0 `proiezione_K`** *(il mandato: «L0 alla stessa semina»; non dice quale: **tutte e due**, una corsa in piu', dichiarata)*.
+- **I casi noti del codice** *(in memoria, prima delle corse)*: la semina `cima` con L-1 ridà `M1631/tenuta_v2/L-1_cima/stato_000250` **al bit**; la proiezione a Gamma *(`k = 0`, la quasi-energia piu' bassa: la somma `R[sup].sum(axis=0)` di `torneo_tenuta_v2`)* ridà `L-1_proiezione_Gamma/stato_000000` **al bit**; **DEVE FALLIRE:** `stampo_K` a `k 0` diverso dalla cima in `psi_h`.
+- **La lettura** *(K-T v2, `torneo_kt_v2`)*: **REGGE** se `w(3000)/w(1500)` in `[0.7, 1.3]` e un pezzo solo a `k 3000`; **K3:** regge **e** `omega` *(la media su `[2500, 3000]`, `-arg vdot`)* **nel gap `(0.011870, 0.245338)`**. **K1:** L0 NON regge *(con la stessa semina della L-1 che regge; se nessuna regge, il controllo e' a vuoto: lo dico)*.
+- **LE MIE PREVISIONI** *(prima dei numeri)*: `stampo_K` regge `25%` *(la polarizzazione di Gamma pesa solo `~25%` nel sottospazio di K: tre quarti in altre bande)*; `proiezione_K` regge `40%`; `omega` nel gap se regge `60%`.
