@@ -23,3 +23,7 @@
 3. 1b `PROGETTO_VINCOLI.md` su `vincoli`, commit;
 4. la sagoma e la relazione su `primo-ordine`, commit;
 5. la Parte 2 sul ramo `mitosi` *(il suo task history e la carta)*.
+
+## 4. ANNOTAZIONI *(le premesse non si riscrivono)*
+
+- **`16:30`** *(da `date`)*: **la sagoma su `primo-ordine` NON e' identica** *(sha1 `7c515bee` contro `bdbea146` di `lapse-u`)*: **e' INDIETRO di tre aggiornamenti** *(S4 e S5 con FH, S16 chiusa, S17, S18, M2)*, ogni differenza nello stesso verso. **Il FERMO della sez. 2 lo avevo scritto per un conflitto; questo non lo e'**: si copia il file di `lapse-u` con lo sha1, e lo dico a Luca.

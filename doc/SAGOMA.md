@@ -13,8 +13,8 @@
 | S1 | la materia vive nel gap SOPRA la cima della banda, con massa efficace negativa | ω 0,626 = e0 + 0,1497; m*_sol −19,26 (banda −16,88) | spettro_gap_v2, massa_calcio | dell'animale (è il segno della non linearità) |
 | S2 | E = m c² dalla cima | Δ/(m*_sol c_m²) = 0,9989 (c_sol), 1,077 (c_banda) col mattone largo a k 0 (m* −19,26); 1,126 (c_sol), 1,214 (c_banda) col mattone compatto a k 1500 (m* −17,03, ω 0,62591): m*_sol dipende dallo stato | emc2_v4, fondo_calcio, torneo_tenuta_v2 (R_E: python -c del 2026-11-23, 01:40) | probabile coincidenza (Luca, 2026-11-23, [M0133]); uno su ~40 zeri; dipende da c |
 | S3 | la legge della caduta | a = −∇ω/m*, K/K_th = 0,996 (4 forme entro l'8%) | legge_caduta | dell'animale |
-| S4 | la caduta NON è universale | Eötvös η = 0,120 ± 0,012 (V2), 0,138 ± 0,014 (V3) fra ×0,8 e ×1,2; **con FH 0,227 ± 0,024 (V2), 0,303 ± 0,040 (V3): PEGGIORA a 3,9σ** (Luca, 2026-11-23, [M0326]) | eotvos, eotvos_FH | dell'animale (da curare; la non linearità non la cura) |
-| S5 | la forza fra due corpi | Δa = A cos δ + B, A −7,10e-7, B −5,51e-7 (|B| = 0,78 |A|); 120° e 180° fuori dal fit a 7,8σ e 4,5σ (lo stampo); **dallo stato compatto a k 1500, d 35: F0 A −7,63e-7, B −6,24e-7, abs(A/B) 1,22; FH −5,65e-7 / −8,91e-7, 0,63 (attrae anche in antifase); FT −7,26e-7 / −3,00e-7, 2,42**; B non viene né da U né dal vuoto (F2) (Luca, 2026-11-23, [M0149]) | fase_relativa, fase_relativa_F2, torneo_FH_FT | non so (chi fa B: non U, non il vuoto) |
+| S4 | la caduta NON è universale | Eötvös η = 0,120 ± 0,012 (V2), 0,138 ± 0,014 (V3) fra ×0,8 e ×1,2; **con FH 0,227 ± 0,024 (V2), 0,303 ± 0,040 (V3): PEGGIORA a 3,9σ** (Luca, 2026-11-23, [M0326]); **col lapse risolto a ogni tick (il pezzo A, N = N_imp × N_ris, il gradiente imposto): V2 −0,325 ± 0,053, V3 −0,338 ± 0,069, V2+V3 +0,178 ± 0,018 contro +0,120 / +0,138 / +0,131 senza; |η| ×2,70 (3,8σ), ×2,45 (2,8σ), ×1,35 (2,1σ); il SEGNO di η si inverte in V2 e V3 (−8,2σ, −6,8σ): col vincolo il corpo con più norma si muove DI PIÙ (V2 |a| 3,15e-6 a ×0,8, 4,37e-6 a ×1,2; senza 5,53e-6, 4,90e-6): l'autointerazione, S19** (Luca, 2026-11-23, [M1623]) | eotvos, eotvos_FH, lapse_vincolo, lapse_vincolo_giudizio | dell'animale (da curare; né la non linearità né il lapse risolto la curano) |
+| S5 | la forza fra due corpi | Δa = A cos δ + B, A −7,10e-7, B −5,51e-7 (|B| = 0,78 |A|); 120° e 180° fuori dal fit a 7,8σ e 4,5σ (lo stampo); **dallo stato compatto a k 1500, d 35: F0 A −7,63e-7, B −6,24e-7, abs(A/B) 1,22; FH −5,65e-7 / −8,91e-7, 0,63 (attrae anche in antifase); FT −7,26e-7 / −3,00e-7, 2,42**; B non viene né da U né dal vuoto (F2) (Luca, 2026-11-23, [M0149]); **a d 36 dallo stampo, F0 A −8,25e-7, B −5,69e-7 (abs(A/B) 1,45); col lapse risolto (la sorgente vera) A −6,48e-7, B +5,52e-7: B CAMBIA SEGNO, la parte universale RESPINGE; in fase −9,5e-8 (0,068 × F0); Δa in fase contro F0 +1,299e-6, chi +1,322e-6 (0,983)** (Luca, 2026-11-23, [M1623]) | fase_relativa, fase_relativa_F2, torneo_FH_FT, lapse_vincolo | non so (chi fa B: non U, non il vuoto; sotto N risolto cambia segno) |
 | S6 | l'orologio e la caduta non vanno insieme | V2 orologio come N (0,999) ma VIA; V3 VERSO ma orologio −0,761; Pound–Rebka G+U: l'attratto più veloce (+1,26e-4) | orologio_mattone_v2, pound_rebka_GU | dell'animale (= S1) |
 | S7 | il mattone più veloce della sua banda | 0,588 s contro 0,566 s (+3,7%) | emc2_v4, spettro_gap_v2 | non so |
 | S8 | l'anisotropia della materia | 3,8% fra gli assi | (riferimento di ottobre) | della prospettiva (il favo) |
@@ -28,6 +28,7 @@
 | S16 | le quattro inerzie (Σρ, la banda, il campo U, il tempo N; e l'orologio ω/c²) | per particella: la banda k/v −18,13 (k/(v−v0) −16,14) compatto, −19,26 largo; il campo U m_E −16,61 (il segno NEGATIVO, k_cin = k − eA: [M0326-S]; **S16 CHIUSA**: l'inerzia è una in grandezza, negativa); il tempo V3 −19,21, V2 −19,36 (largo: entro lo 0,5% dalla banda dello stesso stato); il vuoto congelato −18,36 (+1,3%; +8,4% con la deriva tolta: non robusto); l'orologio ω/c² 80,5 (c_sol): non è una massa; il composto t000 additivo (0,984) | inerzie.txt, inerzie_giudizio.md, segno_mE (Luca, 2026-11-23, [M0149], [M0326]) | non so |
 | S17 | fase e universalità tirano in direzioni opposte dentro la non linearità (FH) | FH: l'attrazione universale nel segno (abs(A/B) 0,63, S5 MIGLIORA) ma Eötvös raddoppia (η 0,227 / 0,303 contro 0,120 / 0,138, S4 PEGGIORA a 3,9σ) | torneo_FH_FT, eotvos_FH, FH_giudizio (Luca, 2026-11-23, [M0528]) | non so |
 | S18 | il respiro è del mattone, non della forma | F0 e FH, 10000 tick da k 1500 a N = 1: w ≈ 6–16, periodo 5125 tick per tutti e due (lo stesso bin dello spettro: 41 campioni), l'ampiezza 5,08 / 5,44 | tenuta_lunga_FH (Luca, 2026-11-23, [M0528]) | non so |
+| S19 | l'autointerazione: ogni corpo sente il proprio N, e il proprio N scala con la norma | col lapse risolto a ogni tick: |η| ×2,70 (V2), ×2,45 (V3), ×1,35 (V2+V3); il segno di η si inverte in V2 e V3 (non in V2+V3); nel mattone fermo 1 − N al centro +1,095e-2 (V2), −1,119e-2 (V3, l'anti-lapse), +6,198e-3 (V2+V3; chi +5,694e-3) | lapse_vincolo, lapse_vincolo_giudizio (Luca, 2026-11-23, [M1623]) | non so |
 
 ## 3. Le righe che MANCANO (la proboscide: non inquadrata, non inventata)
 | # | la proporzione | perché manca | cosa serve |
@@ -36,12 +37,27 @@
 | M2 | la mitosi e la gravità nella STESSA corsa | mai fotografate insieme (MITOSI-v2 è senza lapse; **FINITA a k 45976 = --fino il 22/11 alle 21:28:50, uscita 0, 538 nascite all'ultima tappa**: il registro del ramo mitosi, ec76e5c7) | una corsa con nascite e N; costa 4,7 s/tick |
 | M3 | la sagoma da un altro punto di vista | tutto a L ≤ 243, un'orientazione | L doppio; il triangolo ruotato; le righe che restano uguali |
 | M4 | la Lorentz emergente | nessuna misura di contrazione/dilatazione sul mattone in moto | il mattone calciato a tre velocità, w e ω misurate |
-| M5 | il tempo e la caduta dalla STESSA grandezza (N da vincolo) | oggi N è un campo imposto | la stella polare, dopo il torneo |
+| M5 | il tempo e la caduta dalla STESSA grandezza (N da vincolo) | **il pezzo A chiuso il 23/11: NULLA contro chi, DANNO contro F0; il vincolo derivato dal libro di oggi dà la gravità di oggi (la coppia 0,983 × chi); il tempo e la caduta NON vengono ancora dalla stessa grandezza: l'orologio interno va al contrario di N in tutte e tre le righe; la caduta resta in un gradiente imposto** (Luca, 2026-11-23, [M1623]; sez. 4-bis) | **per cambiare segno e universalità deve cambiare l'ENERGIA che entra nel vincolo (il cammino, la banda, la non linearità), non il solutore** |
 
 ## 4. La tabella del giudizio (da compilare in ogni referto di cura)
 | riga | prima | dopo | MIGLIORA / LASCIA / PEGGIORA / NON MISURATO |
 (una riga per S1–S15 e, quando c'è, per M1–M5; i numeri; nessuna riga saltata senza il motivo)
 Il verdetto: CURA se nessuna riga PEGGIORA e almeno una MIGLIORA; TOPPA se una MIGLIORA e un'altra PEGGIORA; NULLA se tutte LASCIANO; DANNO se una o più righe PEGGIORANO e nessuna MIGLIORA (Luca, 2026-11-22, [M2351]). Una TOPPA non entra nel nucleo.
+
+## 4-bis. Il giudizio del pezzo A: il lapse come moltiplicatore, N dal vincolo (Luca, 2026-11-23, [M0528] 2d; copiato da `doc/referti_l2/lapse_vincolo_giudizio.md`, dac9aecb)
+| riga | F0 senza lapse risolto (il gradiente imposto; la coppia [M0326-K]) | chi | il lapse risolto | contro chi | contro F0 |
+|---|---|---|---|---|---|
+| S1–S3 | | | non misurato | NON MISURATO | NON MISURATO |
+| S4 | η V2 0,120, V3 0,138, V2+V3 0,131 | non misurato con chi | V2 −0,325, V3 −0,338, V2+V3 +0,178 | NON MISURATO | PEGGIORA (|η| ×2,70 a 3,8σ, ×2,45 a 2,8σ, ×1,35 a 2,1σ) |
+| S5 | A −8,25e-7, B −5,69e-7, abs(A/B) 1,45; in fase −1,39e-6 | in fase Δa +1,32e-6 (S15 riscalato) | A −6,48e-7, B +5,52e-7; in fase −9,5e-8 | LASCIA (0,983 in fase; l'antifase di chi non esiste) | PEGGIORA (in fase 0,068 ×; B respinge) |
+| S6 | V2 VIA, V3 VERSO; l'orologio opposto | come [M0908] | V2 VIA, V3 VERSO, V2+V3 VIA; l'orologio opposto a N in tutte e tre | NON MISURATO | LASCIA |
+| S7–S10 | | | non misurato | NON MISURATO | NON MISURATO |
+| S11 | il mattone respira | N agli anelli varia 2,65e-4 (k 1500–2000) | V2+V3 2,65e-4, V3 9,7e-4, V2 1,69e-3 | NON MISURATO | NON MISURATO |
+| S12–S14 | | | non misurato | NON MISURATO | NON MISURATO |
+| S15 | — (senza lapse non c'è gravità) | respinge, +1,22e-6 a d 39 | respinge, +1,30e-6 a d 36 | LASCIA (0,983) | — (S5) |
+| S16–S18 | | | non misurato | NON MISURATO | NON MISURATO |
+
+**IL VERDETTO: contro chi NULLA; contro F0 senza lapse risolto DANNO.** Il vincolo non entra nel nucleo; la forma predefinita resta F0.
 
 ## 5. Le regole
 - La sagoma si aggiorna solo con numeri misurati e la loro fonte; mai con previsioni.
