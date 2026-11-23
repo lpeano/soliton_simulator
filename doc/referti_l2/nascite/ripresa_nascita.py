@@ -3,7 +3,7 @@ r"""**[M1751-R] S1: LA RIPRESA P8 FINO AL TICK DI UNA NASCITA, E LO STATO PRIMA 
 
     E:\python\py3132\python.exe C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py --nascita 269
 
-**`mitosi_rami_v2.ciclo` COSI' COM'E'** *(modo `mitosi`, il registro della corsa no: la voce la apre la coda)*, dallo stato salvato prima della nascita `q` fino al suo tick, nella cartella `E:/soliton_simulator/controllo/M1751/ripresa_<q>`; **in memoria `Rami.nasci` avvolta:** alla nascita numero `q` *(il conto delle nascite gia' fatte = `q - 1`)* **salva lo stato PRIMA** *(`prima_<k>.npz`, con `mitosi_rami_v2.salva`)*, poi la nascita; **lo stato DOPO:** il dizionario che `ciclo` restituisce a `k_fino` *(`dopo_<k>.npz`; per la nascita 1 `ciclo` non salva: `k_fino = k_da`)*. **Il controllo (DEVE):** `k`, l'arco, il nato, `DH` e `P9` della ripresa = la voce registrata, AL BIT. **Gli stati di partenza:** la 1 `TRONCO/prima_nascita_35976.npz`; la 2, la 3 `MITOSI/stato_36000.npz`; la 10 `MITOSI/stato_36250.npz`; le altre lo stato di MITOSI_V2 con `k` < quello della nascita.
+**`mitosi_rami_v2.ciclo` COSI' COM'E'** *(modo `mitosi`, il registro della corsa no: la voce la apre la coda)*, dallo stato salvato prima della nascita `q` fino al suo tick, nella cartella `E:/soliton_simulator/controllo/M1751/ripresa_<q>`; **in memoria `Rami.nasci` avvolta:** alla nascita numero `q` *(il conto delle nascite gia' fatte = `q - 1`)* **salva lo stato PRIMA** *(`prima_<k>.npz`, con `mitosi_rami_v2.salva`)*, poi la nascita; **lo stato DOPO** subito dopo la nascita, nello stesso tick, con `mitosi_rami_v2.salva` *(`dopo_<k>.npz`: lo stesso formato di PRIMA, che `riprendi_v2` sa riaprire)*. **Il controllo (DEVE):** `k`, l'arco, il nato, `DH` e `P9` della ripresa = la voce registrata, AL BIT. **Gli stati di partenza:** la 1 `TRONCO/prima_nascita_35976.npz`; la 2, la 3 `MITOSI/stato_36000.npz`; la 10 `MITOSI/stato_36250.npz`; le altre lo stato di MITOSI_V2 con `k` < quello della nascita.
 """
 import argparse
 import json
@@ -61,6 +61,9 @@ def main(argv):
             s = MR2V.salva(Z, C, self, k_, MR2V.PS.MT.G2.T0 + k_, {"nascita": q, "k": int(k_), "centro": self.centro if self.centro is not None else [0.0, 0.0], "lab": [0.0, 0.0], "tronco_scatto": False}, fp)
             print("### lo stato PRIMA della nascita %d: %s sha1 %s" % (q, os.path.basename(fp), s[:8]))
             out = vera(self, Z, C, a_, k_, perche)
+            fd = os.path.join(d_out, "dopo_%05d.npz" % k_)
+            s2 = MR2V.salva(Z, C, self, k_, MR2V.PS.MT.G2.T0 + k_, {"nascita": q, "k": int(k_), "centro": self.centro if self.centro is not None else [0.0, 0.0], "lab": [0.0, 0.0], "tronco_scatto": False}, fd)
+            print("### lo stato DOPO la nascita %d (subito, nello stesso tick): %s sha1 %s" % (q, os.path.basename(fd), s2[:8]))
             preso["b"] = out
             return out
         return vera(self, Z, C, a_, k_, perche)
@@ -69,10 +72,6 @@ def main(argv):
         cod, kf, _fine = MR2V.ciclo("RIPRESA_%03d" % q, "mitosi", f, k, None, d_out=d_out)
     finally:
         MR2V.Rami.nasci = vera
-    import numpy as np
-    fd = os.path.join(d_out, "dopo_%05d.npz" % kf)
-    np.savez(fd, **{x: np.asarray(v) for x, v in _fine.items()})
-    print("### lo stato DOPO (il ritorno di ciclo, k %d): %s sha1 %s" % (kf, os.path.basename(fd), NL.CP.sha1(fd)[:8]))
     b = preso.get("b")
     ok = b is not None and all(b[x] == b0[x] for x in ("k", "a", "DH", "P9")) and b["nodi"] == b0["nodi"]
     print("### IL CONTROLLO: la nascita %d della ripresa = la voce registrata AL BIT (k, l'arco, i nodi, DH, P9): %s" % (q, "PASSA" if ok else "### FALLISCE"))
