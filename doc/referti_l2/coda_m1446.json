@@ -1484,6 +1484,36 @@
     "--senza"
    ],
    "note": "[M0528] 2c K5 la coppia F0 in antifase senza lapse"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
   }
  ]
 }

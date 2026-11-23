@@ -51,9 +51,9 @@ def norma(d, k0, k1):
 
 
 def k1_vuoto():
-    print("K1 IL VUOTO (TC.scena, il vuoto fresco, 500 tick):")
+    print("K1 IL VUOTO (TC.scena, il vuoto fresco, 500 tick; lapse_vincolo_vuoto.py):")
     for r in RIGHE:
-        d = os.path.join(LV.BASE, "vuoto_%s" % r)
+        d = os.path.join(LV.BASE, "vuoto_v2_%s" % r)          # ### lapse_vincolo_vuoto.py (la v1 cadde: il controllo di Gauss con max rho = 0)
         f = os.path.join(d, "serie_000500.json")
         if not os.path.exists(f):
             esito("K1 vuoto %s: N = 1 AL BIT" % r, None)
