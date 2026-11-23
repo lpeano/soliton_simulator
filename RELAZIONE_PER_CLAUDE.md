@@ -26841,3 +26841,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 | `x2` | `+9.3159e-6` | `+1.2104e-6 +- 6.3e-9` | `+0.1299 +- 0.0007` |
 
 **`K`: la media `+0.1293`, lo scarto `0.0006` (`0.46%`).** ### **IL CRITERIO DELLA CARTA** *(lo scarto/la media `< 10%` E `|media - 1| < 0.15`)*: **NON VALE** -- la proporzionalita' c'e' *(lineare nel gradiente, col segno della legge)*, **il coefficiente no** *(`0.129`: un fattore `~7.7` sotto)*. **Le previsioni del guardiano:** `K_i` uguale entro il `10%` `60%`: **SI'**; la media in `[0.85, 1.15]` `50%`: **NO**. **Nessun giudizio oltre il criterio** *(il mandato)*.
+
+## [M0015-02] [M0015-03] LE TENUTE DI [M2305]: t2 E t3 REGGONO, t1 E t4 NO; GLI L0 NON REGGONO -- t1 NON REGGE: LE CADUTE DI S4 NON SI LANCIANO, FERMO *(2026-11-24, `00:23` da `date`)* [[PROGETTO-MITOSI]]
+
+**`tenuta_fondo_v2_lettura.py`** *(`fcfa4b2d`; il mandato diceva `tenuta_fondo_v2.py lettura`: quello script e' usato e non ha `lettura`)* -> `tenuta_fondo_v2.txt`:
+
+| | `w(3000)/w(1500)` | i pezzi a 3000 | K-T v2 | `omega` `[2500, 3000]` | la massa |
+|---|---|---|---|---|---|
+| **t1** L-1 ampiezza `x0.5` | **`2.720`** | `1` | **NON REGGE** | `+0.0928`, nel gap | `248752.72` |
+| **t2** L-1 ampiezza `x2` | `1.059` | `1` | **REGGE** | `+0.0940`, nel gap | `3980043.57` |
+| **t3** L-1 larghezza `x0.7` | `1.204` | `1` | **REGGE** | `+0.0927`, nel gap | `995010.89` |
+| **t4** L-1 larghezza `x1.4` | `0.727` | **`4`** | **NON REGGE** | `+0.0947`, nel gap | `995010.89` |
+| L0 ampiezza `x0.5` | `1.889` | `1` | NON REGGE | `+0.2442` | |
+| L0 ampiezza `x2` | `1.900` | `1` | NON REGGE | `+0.2442` | |
+
+**I fatti in piu', dai numeri:** t1 si stringe fino a `w 3.64` a `k 1500` e poi si riallarga *(`8.99` a `2250`, `9.89` a `3000`)*; i due L0 hanno lo STESSO `w` a ogni `k` *(L0 e' lineare: l'ampiezza non conta)*; la massa costante a `~1e-12` relativo. **Le previsioni del guardiano:** t1 regge `55%`: **no**; t2 `70%`: **si'**; t3 `65%`: **si'**; t4 `65%`: **no** *(4 pezzi)*; L0 non reggono `90%`: **si'**. ### **[M0015-03]: t1 (ampiezza `x0.5`) NON REGGE: le cadute V2 di S4 NON si lanciano** *(il mandato: «se una delle due non regge: NON lanciare, dire quale e FERMO»)*. **E le schede di [M1751]** *(la v3, `4a3628ce`)* **non sono in corso: sono cadute due volte; la v3 non l'ho lanciata** *([M0015]: nessuna corsa nuova)*.

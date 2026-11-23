@@ -1,0 +1,49 @@
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+[TIMBRO] tenuta_fondo_v2.py  sha1-BYTE d7e812bf  committato e pulito
+[TIMBRO] tenuta_fondo_v2_lettura.py  sha1-BYTE 9bc7d9ef  committato e pulito
+==================================================================================================================================
+[M0015-02] LE TENUTE DI [M2305] (K-T v2: w(3000)/w(1500) in [0.7, 1.3] e un pezzo a 3000; omega su [2500, 3000] nel gap (0.01187, 0.245338))
+==================================================================================================================================
+  L-1_a0.5_l1.0: l'ampiezza 0.5, la larghezza 1.0; la frazione proiettata 0.254079
+    k     0: w 15.469, i pezzi 1, il picco lisciato 2.8799e+02, la massa 248752.723286
+    k   750: w 10.760, i pezzi 1, il picco lisciato 5.7250e+02, la massa 248752.723286
+    k  1500: w 3.638, i pezzi 1, il picco lisciato 3.9568e+03, la massa 248752.723286
+    k  2250: w 8.987, i pezzi 1, il picco lisciato 8.9162e+02, la massa 248752.723286
+    k  3000: w 9.892, i pezzi 1, il picco lisciato 4.7283e+02, la massa 248752.723287
+    K-T v2: w(3000)/w(1500) 2.720, i pezzi a 3000 1: ### NON REGGE; omega [1, 500] +0.0945865, [2500, 3000] +0.0928420 +- 7.9e-06: NEL GAP; la massa a k 3000 248752.723287 (a k 0 248752.723286)
+  L-1_a2.0_l1.0: l'ampiezza 2.0, la larghezza 1.0; la frazione proiettata 0.254079
+    k     0: w 15.469, i pezzi 1, il picco lisciato 4.6078e+03, la massa 3980043.572579
+    k   750: w 11.903, i pezzi 1, il picco lisciato 6.1894e+03, la massa 3980043.572580
+    k  1500: w 9.920, i pezzi 1, il picco lisciato 7.9241e+03, la massa 3980043.572582
+    k  2250: w 10.031, i pezzi 1, il picco lisciato 8.1170e+03, la massa 3980043.572584
+    k  3000: w 10.501, i pezzi 1, il picco lisciato 7.3934e+03, la massa 3980043.572586
+    K-T v2: w(3000)/w(1500) 1.059, i pezzi a 3000 1: REGGE; omega [1, 500] +0.0941944, [2500, 3000] +0.0940390 +- 3.5e-07: NEL GAP; la massa a k 3000 3980043.572586 (a k 0 3980043.572579)
+  L-1_a1.0_l0.7: l'ampiezza 1.0, la larghezza 0.7; la frazione proiettata 0.254125
+    k     0: w 10.811, i pezzi 1, il picco lisciato 2.3192e+03, la massa 995010.893145
+    k   750: w 5.630, i pezzi 1, il picco lisciato 4.3990e+03, la massa 995010.893145
+    k  1500: w 11.515, i pezzi 1, il picco lisciato 1.9764e+03, la massa 995010.893146
+    k  2250: w 8.941, i pezzi 1, il picco lisciato 2.0965e+03, la massa 995010.893146
+    k  3000: w 13.861, i pezzi 1, il picco lisciato 1.3574e+03, la massa 995010.893146
+    K-T v2: w(3000)/w(1500) 1.204, i pezzi a 3000 1: REGGE; omega [1, 500] +0.0930733, [2500, 3000] +0.0927211 +- 6.5e-07: NEL GAP; la massa a k 3000 995010.893146 (a k 0 995010.893145)
+  L-1_a1.0_l1.4: l'ampiezza 1.0, la larghezza 1.4; la frazione proiettata 0.254111
+    k     0: w 21.514, i pezzi 1, il picco lisciato 6.0075e+02, la massa 995010.893145
+    k   750: w 12.436, i pezzi 1, il picco lisciato 1.5003e+03, la massa 995010.893145
+    k  1500: w 9.333, i pezzi 4, il picco lisciato 2.3544e+03, la massa 995010.893146
+    k  2250: w 5.507, i pezzi 1, il picco lisciato 4.6990e+03, la massa 995010.893146
+    k  3000: w 6.785, i pezzi 4, il picco lisciato 3.2373e+03, la massa 995010.893146
+    K-T v2: w(3000)/w(1500) 0.727, i pezzi a 3000 4: ### NON REGGE; omega [1, 500] +0.0955205, [2500, 3000] +0.0946663 +- 2.6e-06: NEL GAP; la massa a k 3000 995010.893146 (a k 0 995010.893145)
+  L0_a0.5_l1.0: l'ampiezza 0.5, la larghezza 1.0; la frazione proiettata 0.254079
+    k     0: w 15.469, i pezzi 1, il picco lisciato 2.8799e+02, la massa 248752.723286
+    k   750: w 10.988, i pezzi 1, il picco lisciato 4.1398e+02, la massa 248752.723286
+    k  1500: w 7.536, i pezzi 1, il picco lisciato 5.9958e+02, la massa 248752.723286
+    k  2250: w 10.670, i pezzi 1, il picco lisciato 3.6755e+02, la massa 248752.723286
+    k  3000: w 14.234, i pezzi 1, il picco lisciato 2.2516e+02, la massa 248752.723287
+    K-T v2: w(3000)/w(1500) 1.889, i pezzi a 3000 1: ### NON REGGE; omega [1, 500] +0.2442404, [2500, 3000] +0.2442428 +- 1.2e-08: NEL GAP; la massa a k 3000 248752.723287 (a k 0 248752.723286)
+  L0_a2.0_l1.0: l'ampiezza 2.0, la larghezza 1.0; la frazione proiettata 0.254079
+    k     0: w 15.469, i pezzi 1, il picco lisciato 4.6078e+03, la massa 3980043.572579
+    k   750: w 10.988, i pezzi 1, il picco lisciato 6.6210e+03, la massa 3980043.572580
+    k  1500: w 7.536, i pezzi 1, il picco lisciato 9.5513e+03, la massa 3980043.572582
+    k  2250: w 10.696, i pezzi 1, il picco lisciato 5.8396e+03, la massa 3980043.572584
+    k  3000: w 14.321, i pezzi 1, il picco lisciato 3.5824e+03, la massa 3980043.572586
+    K-T v2: w(3000)/w(1500) 1.900, i pezzi a 3000 1: ### NON REGGE; omega [1, 500] +0.2442404, [2500, 3000] +0.2442419 +- 2.7e-09: NEL GAP; la massa a k 3000 3980043.572586 (a k 0 3980043.572579)
+==================================================================================================================================
