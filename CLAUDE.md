@@ -63,6 +63,8 @@ di equivalenza — **la prova piu' dura per qualunque teoria a spinta**)*?
 - **IL BLOB E' L'UNICA IDENTITA' CHE NON MENTE** — un commit puo' «mentire», un blob no, e
   si verifica **dal DISCO**. ### ⚠ **Ci sono DUE convenzioni di hash** che danno numeri
   diversi per lo stesso file: **quando si cita un blob, si dice QUALE DELLE DUE.**
+- **Gestione (lanciatori, code, script di controllo, attività pianificate, riavvii di sessione): NON esiste senza una riga di Luca con l'ora. Senza, non si fa; dichiararla dopo non la sana.**
+  Le scelte di criterio dentro un mandato (soglie, convenzioni di segno, riferimenti) restano ammesse se dichiarate nella carta PRIMA della corsa. *(Luca, [M2145], 2026-11-23 21:45)*
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par2.md`**.
 
