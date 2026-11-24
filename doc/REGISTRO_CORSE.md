@@ -1109,3 +1109,7 @@
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.01", "ora": "2026-11-24T15:33:26+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.1", "ora": "2026-11-24T15:33:34+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.05", "ora": "2026-11-24T15:33:37+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.3", "ora": "2026-11-24T15:44:10+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.2", "ora": "2026-11-24T15:44:12+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.4", "ora": "2026-11-24T15:44:22+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M1330F2_calcio_k0.5", "ora": "2026-11-24T15:44:24+01:00", "punto": "uscita 0"}

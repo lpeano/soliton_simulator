@@ -2516,6 +2516,15 @@
     "0.5"
    ],
    "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.5 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1540_puntofisso_v2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_v2.py",
+    "corsa"
+   ],
+   "note": "[M1540] (DECISIONE DI LUCA (15:40)) il punto fisso: tre giri di 6000 tick a N 1, stati ogni 100"
   }
  ]
 }

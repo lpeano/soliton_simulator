@@ -196,3 +196,9 @@
 
 - **I calci di `ep_fondo.py` (`8f236e63`) hanno fatto i `1000` tick e sono CADUTI salvando lo stato finale:** la cartella `M1330/ep/k<k>` nasce in `fondo_1c.scrivi`, DOPO il ciclo, e il mio `ciclo` avvolto salvava PRIMA. **La serie non e' stata scritta: i tick sono persi.** **Errore mio.** Il caso noto (a) non salva lo stato finale ed e' finito.
 - **La v2** *(`ep_fondo_v2.py`)*: la cartella si crea PRIMA. **Le nove corse si rifanno** *(`M1330F2_calcio_k<k>`, priorita' `1`)*, **messe in coda SOLO a lanciatore fermo** *(i tre calci `0.3`, `0.4`, `0.5` della v1 girano ancora e cadranno alla fine: non li posso fermare)*. **La lettura resta `ep_fondo.py lettura`.**
+
+## 3-quater. [M1540] IL PUNTO FISSO A 6000 TICK PER GIRO *(DECISIONE DI LUCA, `15:40`; scritta PRIMA del codice, `15:46` da `date`)*
+
+- **`git log --all --fixed-strings --grep "[M1540"`: vuoto** *(`15:44`)*.
+- **La fase (i) a `6000` tick per giro** *(«due periodi del respiro»)*, **gli stati ogni `100`** *(quindi `w` ogni `100`: `61` valori per giro, e i minimi locali stretti su quella griglia)*; **il resto invariato** *(la sez. `3-bis`: la media sul periodo fra i primi due minimi con `theta` dagli `omega` misurati, la riproiezione su `Q_K`, la massa, tre giri, il criterio `< 5%` sull'ultimo giro, FERMO senza due minimi)*. `fondo_puntofisso_v2.py` *(`K_GIRO`, `OGNI`, la cartella `M1330/puntofisso_v2` in memoria)*. **In coda a priorita' `1`**, `M1540_puntofisso_v2`, **dopo le corse di F** *(finite alle `15:44:24`: la voce si scrive a lanciatore fermo)*.
+- **Il caso noto** *(il giro con la media identita' = lo stato al bit)* **non dipende da `K_GIRO` e `OGNI`:** e' quello di `fondo_puntofisso_noto.txt` *(3 su 3)*.
