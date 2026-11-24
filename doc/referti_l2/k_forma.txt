@@ -1,0 +1,52 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] k_forma.py  sha1-BYTE 1a2c86bb  committato e pulito
+[TIMBRO] eotvos_fondo.py  sha1-BYTE d6861ad6  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] k_forma_v2.py  sha1-BYTE c3045762  committato e pulito
+==================================================================================================================================
+[M0118-02] K A PARITA' DI MASSA, FORMA DIVERSA, NELLE DUE CONVENZIONI: 1c, a2 (norma x4), l0.7 (larghezza 0.7)
+==================================================================================================================================
+  d Delta/dN +0.559784 (VUOTO); omega_psi(N1) +0.0939180 (CIMA, l'orologio V2 di 1c a N 1)
+  1c    m* +18.9162 +- 0.0448:
+    [ 200, 2000]: a - a(V0) +6.0229e-07 +- 3.2e-09;   K VUOTO +0.1293 +- 0.0007;   K CIMA +0.7707 +- 0.0041
+    [ 200,  800]: a - a(V0) +7.3353e-07 +- 7.5e-09;   K VUOTO +0.1575 +- 0.0016;   K CIMA +0.9386 +- 0.0096
+    [ 800, 1400]: a - a(V0) +6.1926e-07 +- 1.5e-08;   K VUOTO +0.1329 +- 0.0031;   K CIMA +0.7924 +- 0.0186
+    [1400, 2000]: a - a(V0) +4.0205e-07 +- 2.0e-08;   K VUOTO +0.0863 +- 0.0042;   K CIMA +0.5145 +- 0.0251
+  a2    m* +18.6350 +- 0.0367:
+    [ 200, 2000]: a - a(V0) +6.7340e-07 +- 2.3e-09;   K VUOTO +0.1424 +- 0.0005;   K CIMA +0.8489 +- 0.0029
+    [ 200,  800]: a - a(V0) +7.3247e-07 +- 1.4e-08;   K VUOTO +0.1549 +- 0.0030;   K CIMA +0.9234 +- 0.0177
+    [ 800, 1400]: a - a(V0) +6.7874e-07 +- 2.6e-08;   K VUOTO +0.1436 +- 0.0055;   K CIMA +0.8556 +- 0.0328
+    [1400, 2000]: a - a(V0) +5.9359e-07 +- 3.4e-08;   K VUOTO +0.1255 +- 0.0072;   K CIMA +0.7483 +- 0.0431
+  l0.7  m* +19.3450 +- 0.0482:
+    [ 200, 2000]: a - a(V0) +6.1596e-07 +- 2.7e-09;   K VUOTO +0.1352 +- 0.0006;   K CIMA +0.8061 +- 0.0035
+    [ 200,  800]: a - a(V0) +7.2029e-07 +- 2.2e-08;   K VUOTO +0.1581 +- 0.0047;   K CIMA +0.9426 +- 0.0282
+    [ 800, 1400]: a - a(V0) +5.9732e-07 +- 3.5e-08;   K VUOTO +0.1311 +- 0.0077;   K CIMA +0.7817 +- 0.0458
+    [1400, 2000]: a - a(V0) +6.1862e-07 +- 4.4e-08;   K VUOTO +0.1358 +- 0.0096;   K CIMA +0.8095 +- 0.0573
+### l0.7 con m*(1c) (a parita' di massa): K VUOTO +0.1322, K CIMA +0.7882; con m*(l0.7): K VUOTO +0.1352, K CIMA +0.8061
+### K(l0.7)/K(1c) (lo stesso nelle due convenzioni): 1.0459 con m*(l0.7), 1.0227 con m*(1c)
+### eta(1c, a2) = 0.1115 +- 0.0064 (su [200, 2000])
+### eta(1c, l0.7) = 0.0224 +- 0.0069 (su [200, 2000])
+### eta(a2, l0.7) = 0.0891 +- 0.0055 (su [200, 2000])
+==================================================================================================================================
+[TIMBRO] k_forma.py  sha1-BYTE 1a2c86bb  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] forma_l07.py  sha1-BYTE 7f10b360  committato e pulito
+----------------------------------------------------------------------------------------------------------------------------------
+[M0140] w(k) DI l0.7: LA V0 ACCANTO ALLA V2 (torneo_tenuta.misura sugli stati ogni 250)
+----------------------------------------------------------------------------------------------------------------------------------
+  k    0:   V0: w 13.861, i pezzi 1, il picco 1.3574e+03, la massa 995010.893146;   V2: w 13.861, i pezzi 1, il picco 1.3574e+03, la massa 995010.893146
+  k  250:   V0: w 14.010, i pezzi 1, il picco 1.4289e+03, la massa 995010.893147;   V2: w 13.990, i pezzi 1, il picco 1.4289e+03, la massa 995010.893146
+  k  500:   V0: w 14.427, i pezzi 1, il picco 1.3517e+03, la massa 995010.893147;   V2: w 14.455, i pezzi 1, il picco 1.3497e+03, la massa 995010.893146
+  k  750:   V0: w 13.293, i pezzi 1, il picco 1.4805e+03, la massa 995010.893147;   V2: w 13.314, i pezzi 1, il picco 1.4754e+03, la massa 995010.893146
+  k 1000:   V0: w 10.696, i pezzi 1, il picco 1.7764e+03, la massa 995010.893147;   V2: w 10.631, i pezzi 1, il picco 1.7953e+03, la massa 995010.893146
+  k 1250:   V0: w 7.313, i pezzi 1, il picco 2.5169e+03, la massa 995010.893147;   V2: w 7.332, i pezzi 1, il picco 2.5293e+03, la massa 995010.893146
+  k 1500:   V0: w 6.965, i pezzi 1, il picco 2.7569e+03, la massa 995010.893147;   V2: w 7.161, i pezzi 1, il picco 2.7223e+03, la massa 995010.893146
+  k 1750:   V0: w 9.109, i pezzi 1, il picco 2.2894e+03, la massa 995010.893147;   V2: w 9.033, i pezzi 1, il picco 2.3035e+03, la massa 995010.893146
+  k 2000:   V0: w 10.963, i pezzi 1, il picco 2.0027e+03, la massa 995010.893148;   V2: w 10.824, i pezzi 1, il picco 2.0426e+03, la massa 995010.893146
