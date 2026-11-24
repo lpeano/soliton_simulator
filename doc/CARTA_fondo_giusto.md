@@ -366,3 +366,16 @@
 - **La misura:** per stato, `rho_phi = somma |phi_h|^2` per nodo, mediata sugli anelli `[0, 8)`, `[8, 16)`, `[16, 32)` attorno al baricentro di `rho_psi` *(`toro.centro`, `toro.scarti`)*. **Con due corpi:** dal centro della coppia, ogni corpo nella sua meta' *(il segno di `dx`)*, il suo baricentro, e gli anelli solo dentro la sua meta'. Accanto, la variazione da `k 0` in `%`, e la somma totale di `rho_phi`.
 - **I casi noti:** (a) `rho_phi` costante: le tre medie al bit; (b) **DEVE FALLIRE la costanza:** `rho_phi = d` da' tre medie crescenti.
 - **Le previsioni:** del guardiano, `rho_phi` in `[0, 8)` cresce di piu' dell'`1%` in `2000` tick con chi vero *(`30%`)*; **mia:** `20%`.
+
+
+## 3-terdecies. [M2245-C] L'ANIMAZIONE DEL VENTO DEL VUOTO *(scritta dopo lo script e PRIMA del filmato)*
+
+- **Come `anima_tenuta.py`:** `10` passi per intervallo, `10 fps`, l'mp4 nel repo sotto i `20 MB`, i png in `E:/soliton_simulator/controllo/M2245/png/`. **Tre colonne** *(r1, r2, r3)*, **quattro righe**: `rho_psi` col cerchio di raggio `25`; `rho_phi - rho_phi(k 0)` con la scala simmetrica sul massimo di tutta la serie; `J_phi` a frecce, una ogni `4` nodi, la scala fissa, il colore col segno di `J_y`; la fase lungo `y`. **Sotto,** `w(k)` e K per finestra.
+- **LE MIE SCELTE, dichiarate:**
+  - la finestra di raggio `40` attorno al centro di partenza, come `anima_tenuta`;
+  - **`J_x`** coi nodi `(m1 +- 1, m2)`, a `+-1` esatti lungo `x`; `J_y` come in `vento_vuoto_v2`;
+  - «una freccia ogni `4` nodi» = `m1` e `m2` multipli di `4`;
+  - **la riga 4** mostra la fase assoluta *(come chiesto)*, quella di `k 0` in grigio, **e in piu' la fase acquistata, tratteggiata**. **Non si interpola:** gli angoli attraversano `+-pi`;
+  - `w(k)` con `torneo_tenuta.misura` sugli stati, K letta da `legge_fondo_v3.txt`.
+- **Il caso noto:** a `k 0` le quattro righe sono uguali al bit nelle tre colonne; **e l'mp4 sotto i `20 MB`.** L'uscita stampata va in `doc/referti_l2/anima_vento.txt`.
+- **Le previsioni:** del guardiano, a gradino le frecce lontane crescono nel tempo tutte nello stesso verso *(`50%`)*; un accumulo di `rho_phi` vicino a `y_c +- L_y/4` *(`35%`)*. **Mie:** le frecce crescono col tempo ma **cambiano verso con `y`**, seguendo `dN/dy` *(`70%`, da A4: la fase acquistata e' una sinusoide in `y`)*; nessun accumulo *(`75%`, da B)*.

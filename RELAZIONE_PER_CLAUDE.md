@@ -27273,3 +27273,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Gli anelli `[8, 16)` e `[16, 32)` calano dappertutto:** a `k 2000` fra `-3%` e `-5%` in F-on e F-off; a `k 3000` F-on fra `-4.5%` e `-5.6%`, **F-off fra `-7.2%` e `-12.9%`**. **Con chi acceso il calo e' minore che con chi spento.**
 - **Nella V2 a chi imposto:** l'anello `[0, 8)` resta entro l'`1%` fino a `k 1000`, poi cala *(`-3.6%` a `1500`, `-9.5%` a `1750`, `-20.8%` a `2000`)*; l'anello `[16, 32)` sale dello `0.93%`.
 - **Le previsioni:** del guardiano, `[0, 8)` cresce di piu' dell'`1%` con chi vero *(`30%`)*: **NO** *(cala)*; mia *(`20%`)*: **NO**.
+
+
+### 2026-11-24 -- [M2245-C] L'ANIMAZIONE: LA CARTA (SEZ. 3-TERDECIES) E anima_vento.py, PRIMA DEL FILMATO [[PROGETTO-MITOSI]]
+
+- **Come `anima_tenuta.py`.** Tre colonne, quattro righe. `J_x` coi nodi `(m1 +- 1, m2)`. La riga 4: la fase assoluta, quella di `k 0` in grigio, e la fase acquistata tratteggiata, senza interpolazione.
+- **Le previsioni mie:** le frecce crescono ma cambiano verso con `y` *(`70%`)*; nessun accumulo *(`75%`)*.
