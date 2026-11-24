@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `115` |
+| **`PORTATO`** | `116` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`153`** |
+| **in tutto** | ### **`154`** |
 
-### ⚠ **E IL NUMERO `153` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `154` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `115` metodi
+## `PORTATO` — `116` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -44,6 +44,7 @@
 | **`H-FILE`** | `PRESIDIO` | la lista `FILE CAMBIATI` si GENERA da `git diff --cached --name-only`, e vale per ogni commit -- compresi quelli dell-era 2 | `.githooks/commit-msg` + `cm.py` |
 | **`H-ID-OBBLIGATORIO`** | `PRESIDIO` | un commit che tocca la fisica dell-era 2 o un referto DEVE citare un ID: e- il rovescio di `H-INDICE` | `.githooks/commit-msg` + `csv/_hook_id_obbligatorio.py` |
 | **`H-INDICE`** | `PRESIDIO` | un ID citato che non e- nell-indice fa rifiutare il commit: vale per gli ID dell-era 2 come per gli altri | `.githooks/commit-msg` |
+| **`H-LANCIATORI`** | `PRESIDIO` | un lanciatore nuovo (`coda_`, `lancia_`, `dispatcher_` in `doc/referti_l2/`) o una modifica a `coda_m1446.py` senza la riga di Luca con l-ora: RIFIUTA IL COMMIT in `commit-msg`. Vale per ogni lavoro, era 2 compresa: guarda il diff e il messaggio, non la fisica | `.githooks/commit-msg` |
 | **`H-NON-TRACCIATI`** | `PRESIDIO` | file non tracciati e non ignorati sotto `csv/` o `doc/` BLOCCANO: ha bloccato questo mandato piu- volte | `.githooks/commit-msg` |
 | **`H-NUCLEO-CONGELATO`** | `PRESIDIO` | sul ramo `primo-ordine` un commit che tocca `primo_ordine/` e- RIFIUTATO finche- `doc/NUCLEO_CONGELATO.md` dice CONGELATO: vale SOLO per l-era 2, il nucleo e- il suo | `.githooks/pre-commit` + `csv/_nucleo_congelato.py` |
 | **`H-P1-bis`** | `PRESIDIO` | un referto committato senza toccare la relazione: il referto dell-infrastruttura e- stato committato CON il suo paragrafo | `.githooks/commit-msg` |

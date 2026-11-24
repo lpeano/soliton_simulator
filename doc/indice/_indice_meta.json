@@ -262,6 +262,7 @@
    "DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2",
    "FORMA-SPEZZA-ID",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-STOP-CODA",
    "L-NON-FERMARSI-AL-CHECKPOINT",
    "L-NUMERI-DERIVA-ORFANA",
@@ -707,6 +708,7 @@
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -2445,6 +2447,7 @@
    "H-FISICA-FUORI-LISTA",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -3534,6 +3537,7 @@
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -4762,6 +4766,7 @@
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-P1-bis",
    "H-P3",
@@ -6029,6 +6034,7 @@
    "H-FISICA-FUORI-LISTA",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -6918,6 +6924,9 @@
   ],
   "un indice mal formato, o con una voce persa || H-VALIDATORE": [
    "H-VALIDATORE"
+  ],
+  "un lanciatore NUOVO in `doc/referti_l2/` (`coda_`, `lancia_`, `dispatcher_`) o una modifica a `coda_m1446.py` SENZA `DECISIONE DI LUCA (hh:mm)` nel messaggio: nessuna via d-uscita || H-LANCIATORI": [
+   "H-LANCIATORI"
   ],
   "un referto che non dichiara LA CONFIGURAZIONE INTERA || H-P5": [
    "H-P5"
@@ -8398,6 +8407,7 @@
    "H-FISICA-FUORI-LISTA",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-P1-bis",
    "H-P3",

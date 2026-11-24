@@ -66,6 +66,7 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_presidio_commenti_flag.py|H-P8` | legge `HEAD:soliton_simulator.py`, ma **NON come «il codice prima di una |
 | `csv/_presidio_commenti_flag.py|H-P5` | strumento di analisi STATICA. Non importa il simulatore e non lo fa girare: legge |
 | `csv/_presidio_indice.py|H-P5` | non importa il simulatore e non lo fa girare. E' un presidio su documenti. |
+| `csv/_presidio_lanciatori.py|H-P5` | non importa il simulatore e non lo fa girare. Legge il diff staged e il messaggio. |
 | `csv/_presidio_righe.py|H-P5` | non importa il simulatore e non lo fa girare. Conta le righe di un documento. |
 | `csv/_pulizia.py|H-P5` | non importa il simulatore e non lo fa girare. Cancella cartelle temporanee. |
 | `csv/_pulizia_finale.py|H-P5` | non importa il simulatore e non lo fa girare. Costruisce lotti per l'indice. |
@@ -151,5 +152,5 @@ commit**: cosi' non se ne accumulano di invisibili.)*
 | `csv/_test_fork/_z43_tempo_proprio.py|H-P3` | la scena passa TUTTA dal CLI (`nmasse` e `sep` da `argv`), e la |
 
 ```
-esenzioni dichiarate   144
+esenzioni dichiarate   145
 ```

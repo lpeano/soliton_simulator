@@ -26964,3 +26964,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni del guardiano:** il merge con al piu' conflitti di documentazione *(`70%`)*: **SI'**; la suite al bit *(`75%`)*: **SI'**.
 - **[M1330-B1] il caso noto del punto fisso** *(`fondo_puntofisso.py noto`, `d27805ac`)*: **3 su 3** -- la media di un solo stato col proiettore identita' ridà `psi_h` AL BIT; lo stato riscritto e ricaricato con `FS.carica` = l'originale *(tutte le chiavi, `A`, `E`)* AL BIT; con `Q_K` diverso *(`max |d|` `2.639`)*.
 - **In coda** *(scritte a lanciatore FERMO)*: le quattro di B5 *(priorita' `0`)* e `M1330_puntofisso` *(priorita' `1`)*; il lanciatore si rilancia DOPO questo commit.
+
+## [M1330-D1] IL PRESIDIO DEI LANCIATORI, `H-LANCIATORI`: CABLATO IN `commit-msg`; IL CASO NOTO 8 SU 8 CON COMMIT VERI *(2026-11-24, `14:00`-`14:28` da `date`)* [[PROGETTO-MITOSI]]
+
+- **`csv/_presidio_lanciatori.py`**, in **`.githooks/commit-msg`** *(in `pre-commit` il messaggio non esiste ancora: come `H-RIGHE`)*: **rifiuta** un commit con un file NUOVO in `doc/referti_l2/` che comincia per `coda_`, `lancia_`, `dispatcher_`, o una MODIFICA a `coda_m1446.py`, **senza `DECISIONE DI LUCA (hh:mm)`** nel messaggio. **Nessuna via d'uscita.** Le voci di `coda_m1446.json` non le guarda.
+- ### **IL CASO NOTO, 8 su 8, con COMMIT VERI** in un repo di prova col hook che chiama il presidio: `coda_prova.py` senza la frase RIFIUTATO, con la frase ENTRA; `lancia_` e `dispatcher_` senza RIFIUTATO; `coda_m1446.py` modificato senza RIFIUTATO, con `(9:05)` ENTRA; un file qualunque ENTRA; `coda_m1446.json` ENTRA; la frase senza parentesi RIFIUTATO.
+- ### **Un mio errore nel collaudo, prima del commit:** la prima stesura metteva il hook di prova DENTRO il repo di prova, e `git clean` lo cancellava a ogni caso: **5 su 8 falliti** per questo. Il hook ora sta fuori, e ogni caso controlla di avere qualcosa in stage.
+- **La voce `H-LANCIATORI`** nell'indice *(`crea-lotto`)*, la riga in `CLAUDE.md` par. `12` *(generata: 355 righe)*, la riga dei metodi *(`P-M1`)*, la barriera dei hook *(`_barriera.lock`)*, e l'elenco del collaudo di `P-REG` *(la settima regola nuova, come prescrive il suo commento)*. **La suite: 67 su 67** *(al secondo giro: il primo cadde perche' lo stage era a meta')*.
+- **La previsione del guardiano** «fatto in 20 minuti» *(`85%`)*: **NO** *(circa mezz'ora)*.
