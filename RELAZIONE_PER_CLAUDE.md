@@ -27279,3 +27279,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Come `anima_tenuta.py`.** Tre colonne, quattro righe. `J_x` coi nodi `(m1 +- 1, m2)`. La riga 4: la fase assoluta, quella di `k 0` in grigio, e la fase acquistata tratteggiata, senza interpolazione.
 - **Le previsioni mie:** le frecce crescono ma cambiano verso con `y` *(`70%`)*; nessun accumulo *(`75%`)*.
+
+### 2026-11-24 -- [M2245-C] L'ANIMAZIONE: anima_vento.mp4 (81 FOTOGRAMMI, 1.31 MB); IL CASO NOTO PASSA; LE FRECCE SONO DOMINATE DALLE FLUTTUAZIONI LOCALI, LA PARTE COERENTE SI VEDE NELLA FASE [[PROGETTO-MITOSI]]
+
+- **L'uscita:** `doc/referti_l2/anima_vento.mp4` *(81 fotogrammi a 10 fps, `1.31 MB`)*; la stampa in `doc/referti_l2/anima_vento.txt`; i `9` png in `E:/soliton_simulator/controllo/M2245/png/`. **Il caso noto:** a `k 0` le righe uguali al bit nelle tre colonne: **PASSA**.
+- **Le scale** *(dalla stampa)*: `rho_psi` `1.9190e+03` *(`k 0`)*; `|rho_phi - rho_phi(0)|` `8.0943`; `|J|` per nodo `11.119` *(tutta la serie, nella finestra)*.
+- **`w(k)`** *(dalla stampa)*: r1 da `10.696` a `10.913`; r2 da `10.696` a `10.900`; r3 da `10.696` a `10.875`.
+- **CHE COSA SI VEDE** *(il fotogramma `k 2000`, guardato da me)*:
+  - **le frecce di `J_phi` per nodo sono dominate da fluttuazioni locali**, della stessa taglia nelle tre colonne. Il massimo per nodo e' `11.1`, mentre la media lontana di A1 e' `0.077`: **la parte coerente sta sotto l'1% delle frecce e non si vede.** La tendenza lineare di A1 *(`28.8` sigma)* nasce dalla media su migliaia di nodi;
+  - `rho_phi - rho_phi(0)` fluttua dentro l'oggetto **nelle tre colonne**, senza accumuli verso `y_c +- L_y/4`;
+  - **la fase acquistata** *(la riga 4)* **e' la sinusoide in `y` in r1 e r2** *(in r1 ampiezza vicina a `pi` a `k 2000`)* **ed e' piatta in V0.** La fase assoluta per riga non ha struttura a vista.
+- **Le previsioni:**
+  - del guardiano: le frecce crescono tutte nello stesso verso *(`50%`)*: **NO a vista** *(dominano le fluttuazioni)*; un accumulo vicino a `y_c +- L_y/4` *(`35%`)*: **NO**;
+  - mie: le frecce cambiano verso con `y` *(`70%`)*: **NON SI DECIDE dalle frecce** *(la dipendenza da `y` si vede solo nella fase)*; nessun accumulo *(`75%`)*: **SI'**.

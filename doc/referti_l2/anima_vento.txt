@@ -1,0 +1,22 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+[TIMBRO] vento_vuoto.py  sha1-BYTE 04c19b27  committato e pulito
+[TIMBRO] vento_vuoto_v2.py  sha1-BYTE d3396fa9  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+[TIMBRO] anima_vento.py  sha1-BYTE 4b829f93  committato e pulito
+### il caso noto: il fotogramma k 0 uguale AL BIT nelle tre colonne (rho_psi, rho_phi - rho_phi(0), J_x, J_y, le due fasi): PASSA
+### le scale: rho_psi 1.9190e+03 (k 0); |rho_phi - rho_phi(0)| 8.0943e+00; |J| 1.1119e+01 (tutta la serie, nella finestra)
+### 9 png in E:\soliton_simulator\controllo\M2245\png
+### 81 fotogrammi a 10 fps: C:\Users\lpeano\wt_lapse_u\doc\referti_l2\anima_vento.mp4 (1.31 MB; il tetto 20 MB: PASSA)
+### w(k): r1 gradino 10.696 10.657 10.786 10.760 10.837 10.875 10.963 11.013 10.913; r2 rampa 10.696 10.670 10.773 10.811 10.875 10.837 10.976 10.988 10.900; r3 V0 10.696 10.670 10.773 10.824 10.824 10.887 10.925 10.963 10.875
