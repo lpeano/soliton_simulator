@@ -27369,3 +27369,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **(i)-(v) come nel mandato.** Le scelte dichiarate: `w` come raggio quadratico medio nella meta' del corpo; `J` radiale negativo = verso l'oggetto; la profondita' di chi = la media su `[0, 4)`.
 - **Il caso noto del segno:** una fase uscente da' `J_r` positivo.
+
+### 2026-11-25 -- [M2330] LE LETTURE (v1) E DUE ERRORI MIEI: LA COPPIA E' A 63.46 IN DIAGONALE, NON A 41.57 LUNGO y; IL d/dy DI [M2245] E DI QUESTA LETTURA NON E' LUNGO y [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo.txt` *(v1, cosi' com'e')*: **9 DEVE su 9.**
+- **ERRORE MIO 1, la geometria della coppia:** `toro.vettori()` da' `A1 = (1, 0)`, **`A2 = (-1/2, sqrt3/2)`**, quindi **`x = m1 - m2/2`**, non `m1 + m2/2` come avevo scritto nella carta *(sez. `3-quattuordecies`)*. **La traslazione `(-24, +48)` e' `(-48, +41.57)`: la coppia di d1 e d2 sta a `d(0) = 63.46` in diagonale, non a `41.57` lungo `y`.** Per stare lungo `y` serviva `(+24, +48)`. **d1 e d2 non sono le corse del mandato.** d3 *(un oggetto solo)* non dipende da questo.
+- **ERRORE MIO 2, il `d/dy`:** i nodi `(m1 -+ 1, m2 +- 2)` stanno a `(-+2, +-sqrt3)`, **non a `+-sqrt3` lungo `y`**. La mia `d theta/dy` era `d_y theta - (2/sqrt3) d_x theta`. **Riguarda `vento_vuoto` (A1, A2), `anima_vento` (le frecce) e (ii) di questa lettura.** **Il caso noto non poteva vederlo:** la fase `q y` non dipende da `x`. Neanche il caso noto del segno radiale: con `q r` il termine misto si annulla sull'anello. **Il caso noto che lo vede:** una fase `q x` deve dare `J_y = 0`. **Nelle due correzioni (`vento_vuoto_v3`, `due_corpi_lettura_v2`) i nodi giusti sono `(m1 + 1, m2 + 2)` e `(m1 - 1, m2 - 2)`.**
+- **I numeri della v1, con queste riserve** *(dal referto)*:
+  - **(i)** in d1 `d` va da `63.460` a `8.466` in `6000` tick *(`-54.99`)*; in d2 da `63.460` a `63.635` *(`+0.17`)*. **`a(d1) - a(d2)` su `[0, 6000]`: `-4.21e-06 +- 3.3e-08` (`128` sigma)**, per finestra da `-3.46e-06` a `-1.17e-05`, con due finestre di segno opposto *(`[2000, 3000]` `+3.0e-07`, `1.5` sigma; `[5000, 6000]` `+2.53e-05`, quando i corpi sono a meno di `25`)*;
+  - **(v)** il respiro: **d1 `0.901` e `0.904`, d3 `0.886`, d2 `0.103` e `0.105`. Con chi acceso l'oggetto respira al `90%`, anche da solo.**
+- **(ii)** e il J radiale non si leggono finche' non c'e' la correzione.
