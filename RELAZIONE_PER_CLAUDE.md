@@ -27135,3 +27135,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-24 -- [M1932] B3 PARTITA: IL LANCIATORE RILANCIATO A MANO ALLE 20:16:31 (DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `20:16:31` *(da `date`)*, dopo `3e5ef20d`. **Al momento di questo commit** nel registro c'e' l'APERTO di `m1446-M1932B3_V0` e di `m1446-M1932B3_x0.5`. Le altre due voci partono quando il lanciatore lo permette *(la CPU letta, il tetto dei processi)*, e ogni lancio va nel registro.
+
+### 2026-11-24 -- [M1932] B3, LA LEGGE DEL FONDO DALL'OGGETTO DEL GIRO 4 (RESPIRO RESIDUO 6.77 PER CENTO): K PESATA 0.8994 SU [200, 2000], UGUALE A x0.5, x1, x2 ENTRO LO 0.07 PER CENTO; MA NELLA CADUTA SCENDE DA 1.00 A 0.77 [[PROGETTO-MITOSI]]
+
+- **Le corse:** V0, x0.5, x1.0, x2.0, chiuse fra `20:34:32` e `20:34:36`, uscita `0`. Il referto: `doc/referti_l2/legge_fondo_v2.txt` *(`legge_fondo_v2b.py lettura`)*. **In testa al referto, il respiro residuo dichiarato:** il giro 4 `0.0677`.
+- **Una correzione:** il paragrafo del rilancio *(`3ac9f110`)* diceva due corse aperte, ma **nel registro di quel commit erano aperte tutte e quattro**.
+- **Le costanti, di 1c:** `m*` `+18.9162`, `omega_psi(N1)` `+0.0939180`.
+- **K CIMA su `[200, 2000]`** *(dal referto)*:
+  - al centro: `0.8465`, `0.8473`, `0.8451`; media `0.8463`, scarto `0.13%`;
+  - **PESATA: `0.8991`, `0.9002`, `0.8991`; media `0.8994`, scarto `0.07%`**.
+  - **K non dipende dall'ampiezza del gradiente:** `a - a(V0)` e' proporzionale a `dN/dy`, **la legge lineare regge** per l'oggetto del giro 4.
+- **`<dN/dy>/centro`:** fra `0.937` e `0.942` in tutte le finestre e scale *(B0, sull'oggetto con respiro: da `0.955` a `0.921`)*.
+- **Per finestra, la K PESATA scende durante la caduta** *(le tre scale insieme)*: `[200, 800]` da `1.0001` a `1.0017`; `[800, 1400]` da `0.8943` a `0.9022`; `[1400, 2000]` da `0.7566` a `0.7744`. **Lo stesso calo, per finestra, che aveva l'oggetto con respiro** *([M0037-01bis])*: **togliere quasi tutto il respiro non lo toglie.**
+- **Le previsioni:**
+  - del guardiano: K nella prima finestra fra `0.95` e `1.00` *(`70%`)*: **di poco NO** in tutte e due le convenzioni. Pesata `1.0001`-`1.0017` *(sopra `1.00`, entro l'errore `+- 0.009`-`0.010`)*; al centro `0.9422`-`0.9438` *(sotto `0.95`)*. K costante entro il `5%` su tutte le finestre *(`55%`)*: **NO** *(da `1.00` a `0.77`)*;
+  - mie: le tre K pesate piu' vicine fra loro di quelle al centro *(`55%`)*: **SI'** *(`0.07%` contro `0.13%`)*. La K pesata a `x1` entro il `10%` di K CIMA di 1c *(`0.7707`)* *(`40%`)*: **NO** *(`0.9002`)*.
+- **Aperto:** `m*` e' quello di 1c; l'oggetto nuovo ha un altro `w`. **Decide Luca** se misurarne il `m*` con due calci.

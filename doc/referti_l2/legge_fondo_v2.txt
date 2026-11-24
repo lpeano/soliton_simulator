@@ -1,0 +1,53 @@
+[TIMBRO] fondo_puntofisso_v3b4_lettura.py  sha1-BYTE 02c536c7  committato e pulito
+[TIMBRO] legge_fondo_v2b.py  sha1-BYTE a9dfbd72  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] fondo_puntofisso_v3.py  sha1-BYTE 3a7112d6  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4_lettura.py  sha1-BYTE 02c536c7  committato e pulito
+==================================================================================================================================
+[M1932] IL QUARTO GIRO DELLA v3b (la carta sez. 3-octies), LA LETTURA CORRETTA: il criterio sotto il 5 per cento; fra il 5 e l'8 B3 parte col respiro residuo dichiarato; oltre FERMO
+==================================================================================================================================
+  DEVE (la stampa): 0.0499 -> PASSA (sotto il 5 per cento) PASSA
+  DEVE (la stampa): 0.0582 -> FRA IL 5 E L'8 PER CENTO: B3 PARTE, IL RESPIRO RESIDUO 5.82 PER CENTO DICHIARATO PASSA
+  DEVE (la stampa): 0.0801 -> OLTRE L'8 PER CENTO: FERMO PASSA
+  giro 4: la partenza E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz
+  giro 4: w (k 0, 100, ..., 6000): 10.70 10.59 10.64 10.70 10.70 10.77 10.73 10.81 10.82 10.81 10.82 10.85 10.86 10.96 10.96 10.93 11.04 10.94 10.99 11.03 10.87 11.00 11.08 11.10 11.10 11.19 11.27 11.26 11.33 11.21 11.27 11.31 11.24 11.24 11.21 11.19 11.19 11.15 11.10 11.06 11.13 11.10 11.04 10.93 11.03 11.04 10.98 10.89 10.90 10.90 10.87 10.86 10.75 10.72 10.67 10.72 10.70 10.66 10.68 10.76 10.77
+          i minimi della lisciata ai k [1900, 5600]; k_max 1700, k_min 1900, P 400, la finestra [1500, 1900]; w min 10.592, max 11.334, medio 10.953
+### IL CRITERIO sul giro 4: (max - min)/medio 0.0677: FRA IL 5 E L'8 PER CENTO: B3 PARTE, IL RESPIRO RESIDUO 6.77 PER CENTO DICHIARATO
+==================================================================================================================================
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_s3.py  sha1-BYTE 47fa8b17  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+==================================================================================================================================
+[M1330-B3] LA LEGGE DEL FONDO DALL'OGGETTO SENZA RESPIRO (la carta sez. 3-septies): K CIMA col gradiente al centro e col gradiente PESATO
+==================================================================================================================================
+  DI 1c (la carta): m* +18.9162; omega_psi(N1) +0.0939180
+  l'oggetto: E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz
+  x0.5 (A 6.948706e+00; il centro -7.870048e-05):
+    [ 200, 2000]: a - a(V0) +3.3078e-07 +- 9.5e-10; <dN/dy>/centro 0.94156;   K CIMA al centro +0.8465 +- 0.0024;   K CIMA PESATO +0.8991 +- 0.0026
+    [ 200,  800]: a - a(V0) +3.6878e-07 +- 3.7e-09; <dN/dy>/centro 0.94223;   K CIMA al centro +0.9438 +- 0.0095;   K CIMA PESATO +1.0017 +- 0.0101
+    [ 800, 1400]: a - a(V0) +3.2908e-07 +- 7.0e-09; <dN/dy>/centro 0.94170;   K CIMA al centro +0.8422 +- 0.0179;   K CIMA PESATO +0.8943 +- 0.0190
+    [1400, 2000]: a - a(V0) +2.8466e-07 +- 1.1e-08; <dN/dy>/centro 0.94077;   K CIMA al centro +0.7285 +- 0.0281;   K CIMA PESATO +0.7744 +- 0.0299
+  x1.0 (A 1.389741e+01; il centro -1.574010e-04):
+    [ 200, 2000]: a - a(V0) +6.6215e-07 +- 1.8e-09; <dN/dy>/centro 0.94126;   K CIMA al centro +0.8473 +- 0.0024;   K CIMA PESATO +0.9002 +- 0.0025
+    [ 200,  800]: a - a(V0) +7.3736e-07 +- 7.0e-09; <dN/dy>/centro 0.94221;   K CIMA al centro +0.9435 +- 0.0090;   K CIMA PESATO +1.0014 +- 0.0095
+    [ 800, 1400]: a - a(V0) +6.6066e-07 +- 1.3e-08; <dN/dy>/centro 0.94154;   K CIMA al centro +0.8454 +- 0.0169;   K CIMA PESATO +0.8979 +- 0.0180
+    [1400, 2000]: a - a(V0) +5.6457e-07 +- 1.8e-08; <dN/dy>/centro 0.94004;   K CIMA al centro +0.7224 +- 0.0231;   K CIMA PESATO +0.7685 +- 0.0245
+  x2.0 (A 2.779482e+01; il centro -3.148019e-04):
+    [ 200, 2000]: a - a(V0) +1.3209e-06 +- 3.7e-09; <dN/dy>/centro 0.93998;   K CIMA al centro +0.8451 +- 0.0023;   K CIMA PESATO +0.8991 +- 0.0025
+    [ 200,  800]: a - a(V0) +1.4727e-06 +- 1.3e-08; <dN/dy>/centro 0.94215;   K CIMA al centro +0.9422 +- 0.0085;   K CIMA PESATO +1.0001 +- 0.0090
+    [ 800, 1400]: a - a(V0) +1.3268e-06 +- 2.0e-08; <dN/dy>/centro 0.94084;   K CIMA al centro +0.8489 +- 0.0129;   K CIMA PESATO +0.9022 +- 0.0137
+    [1400, 2000]: a - a(V0) +1.1080e-06 +- 2.6e-08; <dN/dy>/centro 0.93696;   K CIMA al centro +0.7089 +- 0.0167;   K CIMA PESATO +0.7566 +- 0.0178
+### K CIMA al centro su [200, 2000]: +0.8465, +0.8473, +0.8451; la media +0.8463, lo scarto 0.0011 (0.13% della media)
+### K CIMA PESATO su [200, 2000]: +0.8991, +0.9002, +0.8991; la media +0.8994, lo scarto 0.0006 (0.07% della media)
+==================================================================================================================================
