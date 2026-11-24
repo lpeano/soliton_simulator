@@ -354,3 +354,15 @@
 - **LE PREVISIONI:**
   - **del guardiano:** A1 `J_phi` lontano cresce linearmente a gradino e non in V0 *(`50%`)*; A2 `v_phi` a `k 2000` fra il `10%` e il `50%` di `v` *(`35%`)*; A3 il massimo vicino a `y_c +- L_y/4` *(`40%`)*; B *(`30%`)*; C *(`50%`, `35%`)*;
   - **mie:** A1 `J - J(V0)` cresce linearmente in r1 *(`60%`)*, **e segue il riferimento `omega k <dN/dy>` entro un fattore `2`** *(`40%`)*; A3 il massimo vicino a `y_c +- L_y/4` *(`30%`)*.
+
+
+## 3-duodecies. [M2245-B] IL VUOTO SI AMMASSA? *(A dice che il vuoto scorre, per il criterio della sez. `3-undecies`: B si fa; scritta dopo lo script e PRIMA dei numeri)*
+
+- **UNA PREMESSA CHE NON REGGE, dichiarata:** le corse nominate *(`caduta_libera`, le tenute di [M1631] o [M0326])* **non hanno chi VERO**. `caduta_libera` ha `chi` **imposto e fermo** *(negli stati c'e' `N`, non `pi`)*; le tenute di [M1631] **non hanno `chi`** negli stati. **Fra le `112` cartelle con `stato_000250.npz`, `chi` col suo momento `pi` c'e' solo in `CHI/due_corpi/*`** *(`13` stati, `k 0..3000`)* **e in `CHI/triangolo/*`** *(fino a `k 35000`)*.
+- **LE CORSE SCELTE, dichiarate:**
+  - **`CHI/due_corpi/F-on` contro `F-off`** *([M0417]: due mattoni a `39` nodi, in fase; `chi` acceso contro `kappa = 0`)*: **chi vero, con il suo controllo**;
+  - **accanto, chi imposto:** `CHI/caduta/V2` e `V0` *(`caduta_libera`, nominata da Luca)*;
+  - **i triangoli no:** tre corpi e `35000` tick, fuori dalla misura di `2000` tick.
+- **La misura:** per stato, `rho_phi = somma |phi_h|^2` per nodo, mediata sugli anelli `[0, 8)`, `[8, 16)`, `[16, 32)` attorno al baricentro di `rho_psi` *(`toro.centro`, `toro.scarti`)*. **Con due corpi:** dal centro della coppia, ogni corpo nella sua meta' *(il segno di `dx`)*, il suo baricentro, e gli anelli solo dentro la sua meta'. Accanto, la variazione da `k 0` in `%`, e la somma totale di `rho_phi`.
+- **I casi noti:** (a) `rho_phi` costante: le tre medie al bit; (b) **DEVE FALLIRE la costanza:** `rho_phi = d` da' tre medie crescenti.
+- **Le previsioni:** del guardiano, `rho_phi` in `[0, 8)` cresce di piu' dell'`1%` in `2000` tick con chi vero *(`30%`)*; **mia:** `20%`.

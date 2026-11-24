@@ -27256,3 +27256,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: A1 *(`50%`)*: **SI'**; A2, fra il `10%` e il `50%` di `v` *(`35%`)*: **NO** *(da `6.8` a `14.5` volte, con la riserva sulle unita')*; A3, vicino a `y_c +- L_y/4` *(`40%`)*: **NO** *(sul raggio `25`, `y - y_c` circa `-22`)*;
   - mie: A1 lineare in r1 *(`60%`)*: **SI'**; il riferimento entro un fattore `2` *(`40%`)*: **SI'** *(entro il `7%`)*; A3 *(`30%`)*: **NO**.
+
+
+### 2026-11-24 -- [M2245-B] IL VUOTO SI AMMASSA?: LA CARTA (SEZ. 3-DUODECIES) E vuoto_ammassato.py; LE CORSE NOMINATE NON HANNO CHI VERO, SCELTE CHI/due_corpi F-on CONTRO F-off [[PROGETTO-MITOSI]]
+
+- **La premessa che non regge:** `caduta_libera` ha `chi` imposto, e le tenute di [M1631] non hanno `chi`. **Chi vero con gli stati ogni `250` c'e' solo nelle due_corpi e nei triangoli.**
+- **Scelte:** due_corpi `F-on` contro `F-off` *(chi vero e il suo controllo)*; accanto `caduta_libera` V2 e V0 *(chi imposto)*. Gli anelli attorno a ogni corpo, dentro la sua meta'.
