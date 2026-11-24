@@ -274,3 +274,27 @@
 - **LE PREVISIONI, mie, scritte prima:**
   - **le tre K PESATE piu' vicine fra loro delle tre K al centro** *(`55%`)*;
   - **la K PESATA a `x1` entro il `10%` di K CIMA di 1c a `x1`** *(`0.7707`)*: `40%`, perche' `m*` di 1c non e' quello dell'oggetto.
+
+## 3-octies. [M1932] IL QUARTO GIRO DELLA v3b, E B3 COL RESPIRO RESIDUO *(DECISIONE DI LUCA, `19:32`; scritta PRIMA dei numeri, dopo gli script; `19:37:31` l'ultimo `date`)*
+
+- **`git log --all --fixed-strings --grep "[M1932"`: vuoto** *(`19:36:48`)*.
+- **Di Luca:**
+  - un quarto giro della v3b dallo stato finale del giro 3, `6000` tick, `w` ogni `100`, lo stesso metodo; il criterio resta `< 5%`;
+  - **se passa:** B3 parte da solo, le quattro cadute;
+  - **fra `5%` e `8%`:** B3 parte lo stesso, **e il respiro residuo si dichiara nel referto** *(«col gradiente pesato un respiro del `5%` su `w` sposta K dello `0.5%`, sotto l'incertezza»)*;
+  - **oltre l'`8%`: FERMO.**
+- **LE MIE SCELTE, dichiarate prima:**
+  1. **«lo stato finale del giro 3»** = `puntofisso_v3b/giro_3/stato_006000.npz` *(`w 10.70`)*. Luca ha usato la stessa frase in [M1735] per lo stato a `k 6000` *(«w 12.6»)*. **Non** `partenza_giro_4.npz`, che e' la media del giro 3 su `[0, 500]`. **Se Luca intendeva quella, questa corsa non e' quella che ha chiesto.**
+  2. **le fasce:** `r < 0.05` PASSA; **`0.05 <= r <= 0.08`** RESIDUO *(i bordi compresi)*; `r > 0.08` FERMO;
+  3. **l'oggetto di B3** e' la partenza del giro 4, come nella sez. `3-septies` *(«lo stato la cui evoluzione ha passato il criterio»)*. `legge_fondo_v2.py` ha gia' girato il suo caso noto e non si riscrive: **`legge_fondo_v2b.py`** cambia in memoria solo `OGGETTO_B3`, e la sua lettura stampa **prima il respiro del giro 4 e la sua fascia**, poi la lettura di `legge_fondo_v2` cosi' com'e', nel referto `legge_fondo_v2.txt`.
+- **Il codice:** `fondo_puntofisso_v3b4.py` fa un giro, il `4`: `fondo_puntofisso.giro` col `minimi_v3b`, nella cartella della v3b *(`giro_4`)*.
+- **IL CASO NOTO** *(`fondo_puntofisso_v3b4.py noto`)*:
+  - (a) il giro 3 della v3b *(`0.0582`)* cade in RESIDUO;
+  - (b) i bordi: `0.0499` PASSA; `0.05` e `0.08` RESIDUO; `0.0801` e `0.3079` FERMO;
+  - (c) DEVE FALLIRE: `0.0801` in RESIDUO;
+  - (d) lo sha1 della partenza coincide, e `giro_4` non esiste ancora.
+  - **Il caso noto di B3 resta quello della sez. `3-septies`** *(3 su 3, `2a6304d8`)*: la macchina e' la stessa, cambia solo l'oggetto.
+- **La coda:** `M1932_puntofisso_v3b4` a priorita' `1`, scritta a lanciatore fermo. **Le quattro voci di B3 entrano dopo la lettura del giro 4, a lanciatore fermo, e solo se il giro 4 non e' FERMO.**
+- **LE PREVISIONI:**
+  - **del guardiano:** il giro 4 sotto il `5%` *(`65%`)*; B3, K nella prima finestra fra `0.95` e `1.00` *(`70%`)*; K costante entro il `5%` su tutte le finestre *(`55%`)*;
+  - **mie:** il giro 4 sotto il `5%`: `45%`; sotto l'`8%`: `80%`. Le previsioni su B3 restano quelle della sez. `3-septies`.
