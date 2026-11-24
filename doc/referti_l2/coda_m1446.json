@@ -2248,6 +2248,67 @@
     "corsa"
    ],
    "note": "[M0140] (DECISIONE DI LUCA 01:40) la caduta V2 x1 rifatta, omega per tick, psi_h confrontato con c1_parti ogni 250"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0.010_da500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.010 dallo stato k 500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0_da500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "500",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.0 dallo stato k 500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0.010_da1500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.010 dallo stato k 1500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0_da1500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "1500",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.0 dallo stato k 1500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_puntofisso",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso.py",
+    "corsa"
+   ],
+   "note": "[M1330-B1/B2] (DECISIONE DI LUCA 13:30) il punto fisso: tre giri di 2000 tick a N 1, stati ogni 50"
   }
  ]
 }
