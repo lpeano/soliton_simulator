@@ -27061,3 +27061,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - del guardiano: respiro `< 10%` al giro 2 *(`60%`)*: **NO** *(`0.1516`)*; `< 5%` al giro 3 *(`50%`)*: **NO** *(`0.0582`)*;
   - mia, `< 5%` al giro 3 *(`35%`)*: **NO**.
 - ### **FERMO** *(la carta sez. `3-bis`)*: **B3 non parte**; le quattro voci non entrano in coda. **Decide Luca.**
+
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO DELLA v3b E B3 COL RESPIRO RESIDUO: LA CARTA (SEZ. 3-OCTIES) E GLI SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Gli script:** `fondo_puntofisso_v3b4.py` fa un giro, il `4`, col metodo della v3b. `legge_fondo_v2b.py` e' B3, con l'oggetto cambiato in memoria.
+- **La mia lettura, dichiarata:** «lo stato finale del giro 3» e' `giro_3/stato_006000.npz`, come nella frase di Luca in [M1735]. **Non e' la media `partenza_giro_4.npz`: se Luca intendeva quella, va detto prima della corsa.**
+- **Le fasce:** `< 0.05` PASSA; `0.05`-`0.08` compresi RESIDUO, B3 parte e il respiro si dichiara; `> 0.08` FERMO.
+- **Il caso noto:** 4 DEVE, gira dopo questo commit.
+- **Le previsioni mie:** il giro 4 sotto il `5%` `45%`, sotto l'`8%` `80%`.
+
+### 2026-11-24 -- [M1932] IL CASO NOTO DEL QUARTO GIRO PASSA: 4 DEVE SU 4; LA VOCE IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4_noto.txt`. (a) il giro 3 `0.0582` cade in RESIDUO; (b) i bordi delle fasce; (c) DEVE FALLIRE, `0.0801` non e' RESIDUO; (d) la partenza `giro_3/stato_006000.npz`, con lo sha1 che coincide.
+- **Le masse:** v1 `995010.893146391`, partenza del giro 4 `995010.893149807`.
+- **La coda:** `M1932_puntofisso_v3b4` a priorita' `1`, nello stesso commit, scritta a lanciatore fermo *(chiuso alle `19:25:24`)*. Il rilancio a mano dopo il commit.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO PARTITO ALLE 19:40:43 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py` rilanciato a mano alle `19:40:43` *(da `date`)*, dopo `8cfd30a6`. Nel registro c'e' l'APERTO di `m1446-M1932_puntofisso_v3b4`.
