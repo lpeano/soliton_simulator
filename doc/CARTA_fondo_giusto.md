@@ -231,3 +231,28 @@
 - **LE PREVISIONI:**
   - **del guardiano:** il caso noto da' `4500 +- 300` *(`85%`)*; il respiro `< 10%` al giro 2 *(`60%`)*; `< 5%` al giro 3 *(`50%`)*;
   - **mie:** (a) passa *(`80%`)*. **Il criterio al giro 3 `< 5%`: `35%`.** Il motivo, qualitativo: nella v2 il respiro e' calato di giro in giro *(`0.7565`, `0.6325`, `0.3079`)*, ma senza un ritmo che arrivi sotto `0.05` in altri tre giri.
+
+
+## 3-sexies. [M1748] IL PUNTO FISSO v3, IL PERIODO DAL MASSIMO AL MINIMO DELLA LISCIATA *(DECISIONE DI LUCA, `17:48`; scritta PRIMA del codice e dei numeri, `17:49` da `date`)*
+
+- **`git log --all --fixed-strings --grep "[M1748"`: vuoto** *(`17:47:53`)*.
+- **Perche':** il caso noto della sez. `3-quinquies` e' fallito *(`11f57c86`)*: la lisciata del giro 1 della v2 ha un solo minimo *(k `4500`)*.
+- **Di Luca:**
+  - **`P = 2 x (k del minimo lisciato - k del massimo lisciato precedente)`**;
+  - la media su **`[k_max - P/2, k_max + P/2]`**; **se la finestra esce dal giro, si accorcia al giro e si dichiara**;
+  - il caso noto sul giro 1 della v2: **`P` fra `4000` e `5000`** *(il massimo a `2200`, il minimo a `4500`: `4600`)*;
+  - **il resto invariato** *(la sez. `3-quinquies`: la lisciata di `500` tick, la partenza `puntofisso_v2/giro_3/stato_006000.npz`, tre giri da `6000`, stati ogni `100`, il criterio `< 5%`, priorita' `1`; se passa, B3 parte da solo)*.
+- **Il file:** `fondo_puntofisso_v3.py` ha gia' girato il suo caso noto, quindi non si riscrive. Il nuovo e' **`fondo_puntofisso_v3b.py`**, con la cartella **`M1330/puntofisso_v3b`**. Usa la `lisciata` della v3 cosi' com'e', e sostituisce di nuovo `minimi` in memoria; il giro resta `fondo_puntofisso.giro`.
+- **LE MIE SCELTE DI CRITERIO, dichiarate qui prima della corsa** *(il mandato non le fissa)*:
+  1. **«il minimo lisciato»** e' il **primo** minimo locale stretto della lisciata *(come nella v3)*;
+  2. **«il massimo lisciato precedente»** e' il **massimo** della lisciata sui punti prima di quel minimo *(l'argmax, e a parita' il primo)*. **Non uso un massimo locale stretto**, perche' sul giro 1 della v2 la lisciata ha `15.95` sia a k `2200` sia a `2300`, cosi' come stampata. **Se l'argmax cade sul primo punto della lisciata** *(k `200`, un bordo e non un massimo vero)*, **si usa lo stesso e si dichiara** `massimo_al_bordo: true`;
+  3. **nessun minimo: FERMO**, come nella v3;
+  4. la finestra e' `[k_max - (k_min - k_max), k_min]`, quindi **finisce sempre al minimo**, dentro il giro. **Puo' uscire solo a sinistra:** allora si accorcia a `0` e si dichiara `accorciata` con la finestra intera accanto. Il giro riparte dallo stato alla fine della finestra *(`k_min`)*, come prima.
+- **IL CASO NOTO** *(`fondo_puntofisso_v3b.py noto`)*:
+  - (a) **di Luca:** il giro 1 della v2, `P` fra `4000` e `5000`;
+  - (b) **DEVE FALLIRE:** il metodo della v2 sulla stessa serie, `P` fra `4000` e `5000`;
+  - (c) `w = 10 + 3 cos(2 pi (k - 2000)/4000)`: il massimo a `2000`, il minimo a `4000`, **`P 4000`, finestra `[0, 4000]`**, non accorciata *(il periodo `4000`: con `3000` c'e' un minimo gia' a k `500`, prima del massimo; corretto prima del commit)*;
+  - (d) `w = 10 + 3 cos(2 pi (k - 1000)/3000)`: **`P 3000`, finestra `[-500, 2500]` accorciata a `[0, 2500]`**;
+  - (e) `w` crescente: **FERMO**;
+  - (f) `w = 10 + ((k - 1000)/1000)^2`: il minimo a `1000` e l'argmax al bordo *(k `200`)*: **`massimo_al_bordo` dichiarato**.
+- **LE PREVISIONI** *(di Luca: `4600`)*: **mie,** (a) passa *(`85%`)*; il criterio al giro 3 `< 5%`: `35%`, come nella sez. `3-quinquies`.

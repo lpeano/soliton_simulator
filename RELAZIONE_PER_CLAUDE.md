@@ -27036,3 +27036,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. la finestra **che finisce** al minimo, `[k_min - periodo, k_min]` = `[0, 4500]`;
   2. un giro piu' lungo *(almeno `9000` tick)*;
   3. il periodo dal massimo al minimo della lisciata, moltiplicato per due.
+
+
+### 2026-11-24 17:52 -- [M1748] IL PUNTO FISSO v3b: LA CARTA (SEZ. 3-SEXIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Di Luca:** `P = 2 (k_min - k_max)` sulla lisciata; la media su `[k_max - P/2, k_max + P/2]`, accorciata al giro e dichiarata; il caso noto `P` fra `4000` e `5000` sul giro 1 della v2.
+- **Il file:** `fondo_puntofisso_v3b.py` e la cartella `M1330/puntofisso_v3b`. La v3 ha gia' girato il suo caso noto e non si riscrive.
+- **Le mie scelte, dichiarate:** `k_min` e' il primo minimo stretto; `k_max` e' l'argmax della lisciata prima di `k_min` *(non un massimo stretto: a k `2200` e `2300` la lisciata stampata vale `15.95` in entrambi)*; un massimo al bordo si usa e si dichiara; senza minimi, FERMO. La finestra finisce sempre a `k_min`, quindi puo' uscire solo a sinistra.
+- **Il caso noto:** 6 DEVE. Il sintetico (c) e' stato corretto prima del commit, perche' con periodo `3000` c'e' un minimo a k `500`.
