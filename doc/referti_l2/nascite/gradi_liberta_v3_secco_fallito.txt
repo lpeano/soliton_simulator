@@ -1,0 +1,47 @@
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+[TIMBRO] gradi_liberta_v3.py  sha1-BYTE 862532e7  committato e pulito
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] ripresa_nascita.py  sha1-BYTE 63985dc7  committato e pulito
+[TIMBRO] gradi_liberta.py  sha1-BYTE 59e97bbe  committato e pulito
+==================================================================================================================================
+[M1751-L] LA SCHEDA della nascita 1 (k 35976, l'arco 50995, i 16998, j 16999, il nato 34596): il disco di raggio 12 attorno a {i, j}
+    il meta di prima_35976.npz completato da prima_nascita_35976.npz: ['Delta', 'R_A', 'R_ogg5_k0', 'incollato']; cs_prec dalla partenza (lo stesso k 35976)
+  prima: 494 nodi nel disco, 5928 componenti; 55 gruppi, 660 tick del cammino; il residuo fuori dalle palle 0.000e+00; |lambda| da 0.972370 a 1.000000 (474 s)
+  DEVE: prima: la sonda e' locale (il residuo fuori dalle palle di raggio 3 = 0)                                       PASSA 0.000e+00
+    il meta di dopo_35976.npz completato da prima_nascita_35976.npz: ['Delta', 'R_A', 'R_ogg5_k0', 'incollato']; cs_prec dalla partenza (lo stesso k 35976)
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v3.py", line 79, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v3.py", line 75, in main
+    return GL.main(argv)
+           ~~~~~~~^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 255, in main
+    cod = max(cod, scheda(q))
+                   ~~~~~~^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py (la v3: senza Z[metti])", line 18, in scheda
+  File "E:\python\py3132\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta_v3.py", line 57, in aperto
+    with _VERO(completo(f)) as x:
+         ~~~~~^^^^^^^^^^^^^
+  File "E:\python\py3132\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\nascite\gradi_liberta.py", line 47, in aperto
+    C, NS, meta, cs = MR2V.apri(Z, f, rho_c, e, True)
+                      ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami_v2.py", line 223, in apri
+    C, NS0, meta, cs = riprendi_v2(Z, f, rho_c, e, accese)
+                       ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami_v2.py", line 199, in riprendi_v2
+    mot.cresci(tieni, ii[ms:], jj[ms:], n - n0, ini)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\motore.py", line 319, in cresci
+    CD.controlla(self.st, self.inc.n, self.inc.m, self.cs, nuove, int(nodi_nuovi),
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                 iniziali)
+                 ^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\primo_ordine\crescita_dati.py", line 43, in controlla
+    assert a.shape[0] == attese, (
+           ^^^^^^^^^^^^^^^^^^^^
+AssertionError: `iniziali['cs']` ha 0 righe e ne servono 1: un valore iniziale della taglia sbagliata si propagherebbe in silenzio
