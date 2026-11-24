@@ -27238,3 +27238,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il referto** `doc/referti_l2/vento_vuoto.txt` *(si committa cosi' com'e')*: 3 DEVE su 4. **Fallisce «`J_phi` di `k 0` rispetto a se stesso = `0` AL BIT»:** a `k 0` `J` vale `-3.3452e-21`.
 - **La causa:** `np.conj(a) * a` col prodotto complesso di numpy non da' una parte immaginaria esattamente nulla. Il prodotto scritto in reali la da': `ar ai - ai ar = 0` in IEEE.
 - **La correzione** va in `vento_vuoto_v2.py` *(lo script e' usato)*: `Z` col prodotto in reali. Le letture non le riporto finche' i casi noti non passano.
+
+### 2026-11-24 -- [M2245-A] IL VENTO DEL VUOTO, LE LETTURE (v2): J_phi LONTANO CRESCE LINEARE A GRADINO E A RAMPA (28.8 E 31.2 SIGMA), NON IN V0 (0.7); SEGUE IL RITMO LOCALE omega k <dN/dy>; IL MASSIMO DI |psi| LONTANO STA SUL RAGGIO 25 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vento_vuoto.txt`, da `vento_vuoto_v2.py`. **I casi noti: 4 su 4** *(lo zero al bit; la fase uniforme `6.5e-17`; la rampa di fase `4.9e-15`; `phi` di `k 0` uguale nelle tre corse)*.
+- **(A1) `J_phi` lontano** *(`d > 25`)*:
+  - a `k 2000`: gradino `7.747e-02`, rampa `6.761e-02`, V0 `3.80e-03`;
+  - `J - J(V0)` contro `k`: gradino **`+3.608e-05 +- 1.3e-06` per tick** *(`28.8` sigma, `R^2 0.9928`)*; rampa `+3.657e-05` *(`31.2` sigma, `R^2 0.9939`)*. V0, `J - J(k 0)`: `0.7` sigma, `R^2 0.079`.
+  - **Il criterio della carta per B** *(piu' di `3` sigma e `R^2 > 0.9`)*: **PASSA, quindi B si fa.**
+- **(A2) `v_phi`:** a `k 2000` gradino `1.2739e-02` contro il riferimento `omega k <dN/dy>` `1.2003e-02`; rampa `1.1114e-02` contro `1.0464e-02`. **`v_phi` sta entro il `7%` del riferimento in tutti gli stati da `k 1000`.** `v_phi/v` dell'oggetto va da `6.8` a `14.5` *(la riserva sulle unita' e' nella carta)*.
+- **(A4) la fase acquistata lungo `y`:**
+  - a gradino e' **una sinusoide in `y` che cresce col tempo**: ampiezza circa `1.6` rad a `k 1000`, circa `3` a `k 2000`;
+  - in V0 resta `0` lontano dall'oggetto, con `-0.19` solo nelle righe dell'oggetto;
+  - **perche' in V0 e' zero:** `omega = 3 pi/20`, e `1000 omega` e' un multiplo di `2 pi`.
+- **(A3) il massimo di `|psi|` lontano sta sempre a `d` fra `25.01` e `25.24`, cioe' sul raggio della maschera:** **e' il bordo dell'oggetto**, dal lato `-y` *(direzione fra `-55` e `-160` gradi; `y - y_c` fra `-8` e `-25`)*, **non una struttura lontana**. **Correggo cosi' la mia lettura di [M2210]** («un picco localizzato lontano»): il massimo che cresce col gradiente *(da `0.30` a `1.31`)* **e' il bordo dell'oggetto dal lato `-y` che si gonfia.**
+- **LA LETTURA, post-hoc e dichiarata:** la fase del vuoto segue il ritmo locale `N(y)` *(il vuoto batte a `omega N`)*. **Se questo sia «il vuoto che scorre» o il ritmo di un orologio, i numeri da soli non lo decidono.**
+- **Le previsioni:**
+  - del guardiano: A1 *(`50%`)*: **SI'**; A2, fra il `10%` e il `50%` di `v` *(`35%`)*: **NO** *(da `6.8` a `14.5` volte, con la riserva sulle unita')*; A3, vicino a `y_c +- L_y/4` *(`40%`)*: **NO** *(sul raggio `25`, `y - y_c` circa `-22`)*;
+  - mie: A1 lineare in r1 *(`60%`)*: **SI'**; il riferimento entro un fattore `2` *(`40%`)*: **SI'** *(entro il `7%`)*; A3 *(`30%`)*: **NO**.

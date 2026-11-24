@@ -1,3 +1,5 @@
+[TIMBRO] vento_vuoto.py  sha1-BYTE 04c19b27  committato e pulito
+[TIMBRO] vento_vuoto_v2.py  sha1-BYTE d3396fa9  committato e pulito
 [TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
 [TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
 [TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
@@ -16,15 +18,15 @@
 ==================================================================================================================================
 [M2245-A] IL VENTO DEL VUOTO (la carta sez. 3-undecies): gli stati ogni 250 di [M2210] (r1 gradino, r2 rampa, r3 V0); il raggio 25 dal baricentro
 ==================================================================================================================================
-  DEVE: (A1) J_phi di k 0 rispetto a se stesso (fase uniforme 0) = 0 AL BIT                                  ### FALLISCE 
-  DEVE: (A1) la fase uniforme 0.3: |d theta/dy| massimo < 1e-12 (l'arrotondamento: 0.3 non e' al bit)        PASSA 6.2e-17
-  DEVE: (A1) DEVE FALLIRE lo zero: la rampa di fase q y (3 giri su L_y) da' d theta/dy = q entro 1e-9 (fuori dalla cucitura del toro) PASSA max |d/q - 1| 4.7e-15
+  DEVE: (A1) J_phi di k 0 rispetto a se stesso (fase uniforme 0) = 0 AL BIT                                  PASSA 
+  DEVE: (A1) la fase uniforme 0.3: |d theta/dy| massimo < 1e-12 (l'arrotondamento: 0.3 non e' al bit)        PASSA 6.5e-17
+  DEVE: (A1) DEVE FALLIRE lo zero: la rampa di fase q y (3 giri su L_y) da' d theta/dy = q entro 1e-9 (fuori dalla cucitura del toro) PASSA max |d/q - 1| 4.9e-15
   DEVE: (A4) phi di k 0 uguale AL BIT nelle tre corse                                                        PASSA 
 ----------------------------------------------------------------------------------------------------------------------------------
 (A1) J_phi LONTANO (la media sui nodi a d > 25) E (A2) v_phi = <J>/<rho_phi>; accanto, il riferimento omega k_eff <dN/dy> (il ritmo locale SE omega del vuoto scalasse come N; omega 0.471239 della scena)
 ----------------------------------------------------------------------------------------------------------------------------------
       k  r1 gradino: J, v_phi, riferimento              r2 rampa: J, v_phi, riferimento                r3 V0: J, v_phi                               
-      0  -3.3452e-21 -5.4976e-22 +0.0000e+00            -3.3452e-21 -5.4976e-22 +0.0000e+00            -3.3452e-21 -5.4976e-22 +0.0000e+00           
+      0  +0.0000e+00 +0.0000e+00 +0.0000e+00            +0.0000e+00 +0.0000e+00 +0.0000e+00            +0.0000e+00 +0.0000e+00 +0.0000e+00           
     250  +8.1763e-03 +1.3437e-03 +1.4947e-03            +1.5939e-03 +2.6193e-04 +3.7520e-04            -2.2344e-04 -3.6719e-05 +0.0000e+00           
     500  +2.1336e-02 +3.5059e-03 +2.9899e-03            +1.0135e-02 +1.6654e-03 +1.4966e-03            +2.2781e-03 +3.7432e-04 +0.0000e+00           
     750  +3.3126e-02 +5.4432e-03 +4.4913e-03            +2.2414e-02 +3.6828e-03 +2.9914e-03            +2.4779e-03 +4.0712e-04 +0.0000e+00           
@@ -79,16 +81,16 @@
 (A4) LA FASE DI phi LUNGO y (arg della somma su x, per riga m2): assoluta (arg somma phi_h) e acquistata da k 0; ogni 9 righe
 ----------------------------------------------------------------------------------------------------------------------------------
   gradino  k    0 assoluta:   -0.402 +2.232 -0.462 -0.167 +1.310 -1.523 +0.300 -2.852 +2.768 -0.397 -2.014 -1.993 +1.934 +2.361 +2.301 -2.582 -2.221 +3.105
-  gradino  k    0 acquistata: +0.000 +0.000 -0.000 +0.000 -0.000 -0.000 +0.000 -0.000 -0.000 +0.000 +0.000 +0.000 +0.000 -0.000 -0.000 +0.000 +0.000 -0.000
+  gradino  k    0 acquistata: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
   gradino  k 1000 assoluta:   -1.674 -0.180 +1.095 +2.454 -2.179 -1.013 -2.801 +0.679 -2.041 -1.778 -2.202 +1.777 -2.512 +0.935 +1.039 -1.532 +1.892 +2.227
   gradino  k 1000 acquistata: +0.082 +0.643 +1.127 +1.475 +1.646 +1.617 +1.388 +0.952 +0.290 -0.271 -0.733 -1.123 -1.472 -1.640 -1.612 -1.389 -0.999 -0.488
   gradino  k 2000 assoluta:   +1.050 -2.813 +2.417 +0.755 +0.046 -0.921 +2.094 -1.188 +2.100 +2.503 -1.104 +1.908 +0.814 +3.106 +0.698 -1.098 -1.427 +0.028
   gradino  k 2000 acquistata: +0.164 +1.286 +2.254 +2.951 -2.992 -3.049 +2.786 +2.001 +1.001 -0.109 -1.399 -2.256 -2.949 +3.003 +3.060 -2.778 -1.997 -0.977
   v0       k    0 assoluta:   -0.402 +2.232 -0.462 -0.167 +1.310 -1.523 +0.300 -2.852 +2.768 -0.397 -2.014 -1.993 +1.934 +2.361 +2.301 -2.582 -2.221 +3.105
-  v0       k    0 acquistata: +0.000 +0.000 -0.000 +0.000 -0.000 -0.000 +0.000 -0.000 -0.000 +0.000 +0.000 +0.000 +0.000 -0.000 -0.000 +0.000 +0.000 -0.000
+  v0       k    0 acquistata: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
   v0       k 1000 assoluta:   -2.307 -0.673 +0.437 -2.658 -1.766 +1.685 -2.907 -1.051 -1.982 -2.167 -2.960 +1.704 -1.952 +0.350 +0.717 -0.318 -1.800 +1.957
   v0       k 1000 acquistata: -0.000 +0.000 +0.000 -0.000 +0.000 +0.000 -0.010 -0.048 -0.187 -0.192 -0.125 -0.012 -0.009 -0.000 +0.000 -0.000 -0.000 +0.000
   v0       k 2000 assoluta:   +0.809 +2.549 +2.881 +0.550 +0.651 -0.770 -2.521 -1.153 -0.688 -0.847 -0.331 +2.060 +0.443 +2.206 +1.429 -0.359 -2.048 -0.086
   v0       k 2000 acquistata: +0.000 -0.000 +0.001 +0.000 -0.000 +0.000 -0.008 -0.038 -0.039 +0.063 -0.079 -0.009 -0.002 -0.000 -0.000 +0.000 +0.000 +0.000
-### 4 DEVE: 3 PASSANO, 1 FALLISCONO ['(A1) J_phi di k 0 rispetto a se stesso (fase uniforme 0) = 0 AL BIT']
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
 ==================================================================================================================================
