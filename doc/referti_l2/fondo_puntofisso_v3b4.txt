@@ -1,0 +1,10 @@
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] fondo_puntofisso_v3.py  sha1-BYTE 3a7112d6  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+==================================================================================================================================
+[M1932] IL QUARTO GIRO DELLA v3b (la carta sez. 3-octies): il criterio < 5%; fra 5% e 8% B3 parte col respiro residuo dichiarato; oltre FERMO
+==================================================================================================================================
+  giro 4: la partenza E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz
+  giro 4: w (k 0, 100, ..., 6000): 10.70 10.59 10.64 10.70 10.70 10.77 10.73 10.81 10.82 10.81 10.82 10.85 10.86 10.96 10.96 10.93 11.04 10.94 10.99 11.03 10.87 11.00 11.08 11.10 11.10 11.19 11.27 11.26 11.33 11.21 11.27 11.31 11.24 11.24 11.21 11.19 11.19 11.15 11.10 11.06 11.13 11.10 11.04 10.93 11.03 11.04 10.98 10.89 10.90 10.90 10.87 10.86 10.75 10.72 10.67 10.72 10.70 10.66 10.68 10.76 10.77
+          i minimi della lisciata ai k [1900, 5600]; k_max 1700, k_min 1900, P 400, la finestra [1500, 1900]; w min 10.592, max 11.334, medio 10.953

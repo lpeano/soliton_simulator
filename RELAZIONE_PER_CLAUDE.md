@@ -27111,3 +27111,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-24 -- [M1932] IL QUARTO GIRO PARTITO ALLE 19:40:43 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py` rilanciato a mano alle `19:40:43` *(da `date`)*, dopo `8cfd30a6`. Nel registro c'e' l'APERTO di `m1446-M1932_puntofisso_v3b4`.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO E' FINITO (20:09:50, USCITA 0); LA MIA LETTURA CADE SULLA RIGA DEL VERDETTO (UN ERRORE DI FORMATO, MIO) [[PROGETTO-MITOSI]]
+
+- **La corsa:** `m1446-M1932_puntofisso_v3b4`, aperta `19:40:43`, chiusa `20:09:50`, uscita `0`.
+- **La lettura** *(`fondo_puntofisso_v3b4.py lettura`)* stampa la partenza, le `w` e la finestra *(i minimi della lisciata `[1900, 5600]`; `k_max 1700`, `k_min 1900`, `P 400`, la finestra `[1500, 1900]`; `w` min `10.592`, max `11.334`, medio `10.953`)*, **poi cade sulla riga del verdetto:** `TypeError: not enough arguments for format string`. **La causa, mia:** nella stringa della fascia RESIDUO i testi «`5% E`» e «`8%:`» vengono letti come specificatori di formato. Il caso noto non lo vedeva: provava `fascia()`, non la stampa.
+- **Il referto parziale** `fondo_puntofisso_v3b4.txt` si committa cosi' com'e'. La correzione va in un file nuovo *(lo script e' usato)*, con un commit a se'.
