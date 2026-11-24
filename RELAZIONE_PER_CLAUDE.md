@@ -27322,3 +27322,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **K1-on** *(si dichiara)*: con chi acceso dopo `100` tick `max |psi - psi(tenuta)| 3.854` *(su `17.84`)*: **chi cambia l'oggetto gia' in 100 tick.**
 - **La coda:** `M2330_d1`, `M2330_d2`, `M2330_d3` a priorita' `1`, `due_corpi_fondo_v3.py corsa`, scritte a lanciatore fermo *(dalle `22:34:39`)*, in questo commit. Il rilancio a mano dopo.
 - **[M2345]** *(il ramo `guardiano` e la posta)* **e' arrivato a meta' lavoro:** in coda, dopo il lancio.
+
+### 2026-11-24 -- [M2330] d1, d2, d3 PARTITE: IL LANCIATORE RILANCIATO A MANO (DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, dopo `3f21445b`. L'ora e' la prima riga dell'uscita del lanciatore. Gli APERTO sono nel registro, in questo commit.
