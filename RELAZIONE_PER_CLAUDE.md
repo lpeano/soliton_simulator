@@ -27146,3 +27146,27 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: il gradiente spiega meno del `5%` *(`65%`)*: **SI'** *(`0.68%`-`2.22%`)*; K riscalata entro il `10%` di `1` su tutte le finestre *(`45%`)*: **NO** *(`0.7434`-`1.0017`)*;
   - mie: meno del `5%` *(`85%`)*: **SI'**; il riscalamento peggiora *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2210] IL FRENO CHE SEGUE IL TEMPO: LA CARTA (SEZ. 3-DECIES) E legge_fondo_v3.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Tre corse:** r1 gradino, r2 rampa `N(t) = 1 + (N - 1) min(t/500, 1)` *(la formula letterale, dichiarata)*, r3 V0. Dall'oggetto del giro 4, gradiente `x1`, `2000` tick, gli stati ogni `250` e a `k 0`.
+- **Le letture:** K per finestra *(r2 fittata su `[700, 2000]` e sulle finestre di `600` dentro)*; la norma fuori da `25` nodi dal baricentro; `|psi|` massimo fuori.
+- **Il caso noto:** `100` tick, il gradino e la V0 al bit con B3, la rampa diversa. **A fine corsa** `stato_000250.npz` deve esistere, e r1 deve coincidere con B3 `x1` al bit.
+
+### 2026-11-24 -- [M2210] IL CASO NOTO PASSA (4 DEVE SU 4); r1, r2, r3 IN CODA; [M2210-r4] ARRIVATO A META' LAVORO, IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v3_noto.txt`, `100` tick dall'oggetto del giro 4. (a) il gradino = B3 `x1` **al bit** *(11 righe, cinque colonne)*; (b) **DEVE FALLIRE:** la rampa differisce *(y a `k 100`: rampa `-3.908795e-03`, gradino `-3.001756e-04`; la rampa e' vicina alla deriva della V0)*; (c) la V0 = B3 V0 **al bit**; (d) `N_di` ai bordi della rampa.
+- **La coda:** `M2210_r1_gradino`, `M2210_r2_rampa`, `M2210_r3_V0` a priorita' `1`, scritte a lanciatore fermo *(dalle `20:34:36`)*, nello stesso commit. Il rilancio a mano dopo il commit.
+- **[M2210-r4]** *(Luca, arrivato mentre lavoravo)*: r4 = la caduta `x1` a gradino **col bordo assorbente**, r5 = la sua V0 col bordo. Va in coda dopo r1-r3: **carta, script e caso noto adesso; le voci a lanciatore fermo.**
+
+### 2026-11-24 -- [M2210-r4] FERMO SU r4 E r5: NELLE SCENE CHI IL BORDO E' SPENTO (g_e = 0), E IL VUOTO DI RIFERIMENTO DEL BORDO VUOLE UN TICK ASSOLUTO CHE LA CATENA DEL PUNTO FISSO NON TIENE; r1-r3 GIRANO [[PROGETTO-MITOSI]]
+
+- **r1, r2, r3** partiti col rilancio a mano delle `22:17:51` *(dichiarato; gli APERTO nel registro, in questo commit)*.
+- **La premessa che non regge, dal codice:** **nelle scene chi il bordo assorbente e' spento.** `triangolo_chi_v4.prepara` azzera `Z["g_e"]` *(«Luca: NIENTE bordo sorbente»)*, e cosi' fanno `caduta_libera`, `caduta_segno_v2`, `ep_fondo` e gli altri. **Il tick `caduta_segno_v2.tick_var` non chiama mai `bordo.assorbi`.** In [M0326] *(`CARTA_FH`, `CARTA_lapse_moltiplicatore`, `CARTA_respiro_orologio`)* non c'e' un bordo acceso: la `CARTA_lapse_moltiplicatore` dice «la scena della caduta e' un TORO SENZA BORDO».
+- **I valori nativi della scena** *(letti con uno script nello scratchpad, solo i parametri, nessuna misura)*: **`R_A 47.5`, `g_max 0.03`**, il disco centrato in `c0 = (98.87, 81.36)`. L'oggetto del giro 4 sta al nodo `(79, 80)`: **«l'oggetto al centro del disco» vuole il disco ricentrato** sull'oggetto *(`bordo.g_estremita` attorno a `(79, 80)`, `R_B` = la meta' del periodo, `81`)*.
+- **IL NODO VERO: il vuoto di riferimento.** Tutti i chiamanti di `bordo.assorbi` passano `phi0 = bordo.c_di(t, tab_c, K, omega) phi_v`: il vuoto che ruota con `omega 0.4712` **al tick ASSOLUTO `t`**. **L'oggetto del giro 4 viene da una catena** *(la tenuta a `k 3000`, poi i giri della v2 e della v3b, ognuno ripartito dallo stato a `k_b` con `meta k = 3000`)* **che il tick assoluto non lo tiene.** Con un `t` sbagliato il bordo smorza `phi` verso la fase sbagliata, cioe' assorbe il vuoto stesso, e la misura si rompe in silenzio.
+- **Le strade, decide Luca:**
+  1. **(raccomandata)** `R_A 47.5` e `g_max 0.03` *(i valori nativi della scena)*, il disco sull'oggetto, `phi0 = c_di(t) phi_v` con **`t` ricostruito dalla catena** *(T0 + 3000 + i `k_b` dei giri + i giri interi)*, e **un controllo a `k 0`**: `bordo.fase_fascia` *(il controllo di Luca del 5.3)* sulla fascia deve dare `|a - 1|` e `arg a` piccoli, **altrimenti FERMO**;
+  2. il bordo solo su `psi` *(`phi` non toccato)*: non e' `bordo.py` com'e';
+  3. altri valori di `R_A` e `g_max`.
