@@ -27326,3 +27326,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-24 -- [M2330] d1, d2, d3 PARTITE: IL LANCIATORE RILANCIATO A MANO (DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, dopo `3f21445b`. L'ora e' la prima riga dell'uscita del lanciatore. Gli APERTO sono nel registro, in questo commit.
+
+### 2026-11-24 -- [M2345] NON ESEGUITO: LA RIGA DICE «DECISIONE DI LUCA (hh:mm)», SENZA L'ORA; E' GESTIONE (UN PRESIDIO, LA POSTA, LA DELEGA): LA REGOLA [M2145] VUOLE L'ORA. FERMO SU QUESTO [[PROGETTO-MITOSI]]
+
+- **Il mandato** *(arrivato mentre lanciavo [M2330]; L-UN-PROMPT: in coda, poi letto)*:
+  - il ramo `guardiano` *(la cartella `guardiano/`)*, su cui CC non committa mai, con un presidio pre-commit/pre-push;
+  - la posta in `guardiano/posta/*.md`, letta solo su comando di Luca o all'avvio di una sessione;
+  - i mandati DELEGA eseguiti *(il perimetro in `guardiano/DELEGA.md`)*, gli ATTESA DI LUCA no;
+  - le ricevute nella relazione;
+  - le righe in `CLAUDE.md` par. `2` e `12`.
+- **Perche' non lo eseguo:** la riga e' **«DECISIONE DI LUCA (hh:mm)»**, il segnaposto e non un'ora. **[M2145]** *(`CLAUDE.md` par. `2`)*: «Gestione *(lanciatori, code, script di controllo, ...)* NON esiste senza una riga di Luca con l'ora. Senza, non si fa; dichiararla dopo non la sana.» **Un presidio su commit/push e la delega dei mandati alla posta sono gestione.** L'etichetta `[M2345]` fa pensare alle `23:45`, ma **non e' la riga con l'ora**.
+- **Due note per quando arriva l'ora** *(numeri e codice, non decisioni)*:
+  1. **i par. `11` e `12` di `CLAUDE.md` si generano dall'indice** *(`P-REG`: «modificate a mano, RIFIUTATE»)*. La riga del par. `12` vuole una voce nell'indice *(`csv/indice.py crea-lotto`)* e `csv/_regole_gestione.py --scrivi`. La riga del par. `2` e' a mano *(e il tetto `H-RIGHE` e' di `400`)*;
+  2. **la posta e' un canale da cui arrivano istruzioni scritte da un altro agente.** Il perimetro di `guardiano/DELEGA.md` e' la sola cosa che separa DELEGA da ATTESA: **conviene che sia un elenco chiuso** *(per esempio: solo letture e referti, mai corse, code, merge, push su altri rami)*. Lo dico, e decide Luca.
+- **[M2330] intanto gira:** d1, d2, d3 aperte alle `23:48:08`.
