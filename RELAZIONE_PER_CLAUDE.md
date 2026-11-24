@@ -27044,3 +27044,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il file:** `fondo_puntofisso_v3b.py` e la cartella `M1330/puntofisso_v3b`. La v3 ha gia' girato il suo caso noto e non si riscrive.
 - **Le mie scelte, dichiarate:** `k_min` e' il primo minimo stretto; `k_max` e' l'argmax della lisciata prima di `k_min` *(non un massimo stretto: a k `2200` e `2300` la lisciata stampata vale `15.95` in entrambi)*; un massimo al bordo si usa e si dichiara; senza minimi, FERMO. La finestra finisce sempre a `k_min`, quindi puo' uscire solo a sinistra.
 - **Il caso noto:** 6 DEVE. Il sintetico (c) e' stato corretto prima del commit, perche' con periodo `3000` c'e' un minimo a k `500`.
+
+### 2026-11-24 17:56 -- [M1748] IL CASO NOTO DELLA v3b PASSA: 6 DEVE SU 6; P 4600 SUL GIRO 1 DELLA v2 (k_max 2200, k_min 4500), LA FINESTRA [0, 4500] ACCORCIATA DA [-100, 4500] [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b_noto.txt`.
+- **(a) di Luca:** `P 4600`, nell'intervallo `[4000, 5000]`, e uguale al numero previsto da Luca. **(b) DEVE FALLIRE:** il metodo della v2 da' `200`. **(c)** `[0, 4000]`; **(d)** accorciata a `[0, 2500]`; **(e)** FERMO; **(f)** il massimo al bordo, dichiarato.
+- **Le previsioni:** del guardiano `4500 +- 300` *(`85%`)*: **SI'** *(`4600`)*; mia, (a) passa *(`85%`)*: **SI'**.
+- **Il prossimo passo:** la voce `M1748_puntofisso_v3b` in coda a priorita' `1`, scritta a lanciatore fermo e committata prima del rilancio.

@@ -1,0 +1,23 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] fondo_puntofisso_v3.py  sha1-BYTE 3a7112d6  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+==================================================================================================================================
+[M1748] IL CASO NOTO DEL PERIODO (la carta sez. 3-sexies): P = 2 (k_min - k_max) sulla lisciata di 500 tick
+==================================================================================================================================
+  la lisciata del giro 1 della v2 (k 200..5800): 8.4561 8.4658 8.5296 8.6517 8.9229 9.2778 9.7357 10.3023 10.9897 11.7221 12.5390 13.3212 13.9533 14.4839 14.8897 15.1498 15.3259 15.5364 15.7349 15.8748 15.9499 15.9463 15.8113 15.5226 15.2267 14.8644 14.5205 14.1135 13.7015 13.2572 12.8433 12.3729 12.0293 11.6969 11.2852 10.8097 10.3508 9.8241 9.2991 8.8514 8.5020 8.2035 8.0285 7.9650 7.9986 8.0597 8.1563 8.2145 8.2813 8.3272 8.4649 8.6092 8.8503 9.0247 9.2235 9.3047 9.3890
+  i minimi della lisciata ai k [4500]; k_max 2200, k_min 4500, P 4600, la finestra [0, 4500] (ACCORCIATA da [-100, 4500])
+  DEVE: (a) di Luca: il giro 1 della v2, P fra 4000 e 5000                                         PASSA P 4600
+  DEVE: (b) DEVE FALLIRE: il metodo della v2 sulla stessa serie, P fra 4000 e 5000                 PASSA il periodo della v2 200
+  DEVE: (c) cos di periodo 4000, il massimo a 2000: P 4000, finestra [0, 4000], non accorciata     PASSA k_max 2000, k_min 4000, P 4000, la finestra [0, 4000]
+  DEVE: (d) cos, il massimo a 1000: P 3000, [-500, 2500] accorciata a [0, 2500]                    PASSA k_max 1000, k_min 2500, P 3000, la finestra [0, 2500] (ACCORCIATA da [-500, 2500])
+  DEVE: (e) w crescente: FERMO                                                                     PASSA ### FERMO: nessun minimo della w lisciata
+  DEVE: (f) il minimo a 1000, l'argmax al bordo (k 200): dichiarato                                PASSA k_max 200, k_min 1000, P 1600, la finestra [0, 1000] (ACCORCIATA da [-600, 1000]) (### il massimo AL BORDO)
+### 6 DEVE: 6 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
