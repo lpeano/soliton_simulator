@@ -27024,3 +27024,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il caso noto:** 6 DEVE, (a) quello di Luca (il periodo fra `4000` e `5000` sul giro 1 della v2), (b) DEVE FALLIRE il metodo della v2 sulla stessa serie.
 - **B3:** la coda non ha dipendenze fra voci, quindi le quattro cadute entrano in coda a lanciatore fermo, dopo la lettura della v3, solo se passa. Carta e script di B3 si committano mentre la v3 gira.
 - **Le previsioni:** quelle del guardiano; le mie: (a) passa `80%`; il criterio al giro 3 `35%`.
+
+### 2026-11-24 17:41 -- [M1735] IL CASO NOTO DELLA v3 FALLISCE: 5 DEVE SU 6; (a) DI LUCA NO, LA LISCIATA DEL GIRO 1 DELLA v2 HA UN SOLO MINIMO (k 4500). FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3_noto.txt` (`fondo_puntofisso_v3.py noto`, blob `3a7112d6`).
+- **(a) FALLISCE:** la `w` lisciata del giro 1 della v2 *(k da 200 a 5800)* parte da `8.46` e sale, con il massimo `15.95` a k `2200`-`2300`, poi scende al minimo `7.96` a k `4500`, poi risale fino a `9.39`. **I minimi della lisciata: solo `[4500]`.** Il piccolo avvallamento di `w` grezza a k `100`-`300` sparisce con la media mobile. Col ripiego la finestra sarebbe `[4500, 9000]`, che **esce dal giro di `6000`**: per la regola che ho scritto nella carta, FERMO, quindi periodo `None`.
+- **Una cosa da dire chiaramente:** anche leggendo il mandato alla lettera *(«con un solo minimo, periodo = 4500»)*, su questa serie il periodo verrebbe `4500` **per costruzione**, perche' `4500` viene proprio da questa serie. Il caso noto passerebbe senza aver misurato niente.
+- **Gli altri:** (b) DEVE FALLIRE passa *(il metodo della v2 da' `200`)*; (c), (d), (e), (f) passano. **Le masse:** v1 `995010.893146391`, partenza v3 `995010.893149807`.
+- **Le previsioni:** del guardiano, `4500 +- 300` *(`85%`)*: **non misurato**, perche' c'e' un solo minimo; mia, (a) passa *(`80%`)*: **NO**.
+- ### **FERMO:** la v3 non va in coda. **Decide Luca.** Possibili strade, nessuna scelta da me:
+  1. la finestra **che finisce** al minimo, `[k_min - periodo, k_min]` = `[0, 4500]`;
+  2. un giro piu' lungo *(almeno `9000` tick)*;
+  3. il periodo dal massimo al minimo della lisciata, moltiplicato per due.
