@@ -5,7 +5,7 @@ r"""**[M1932] B3 DALL'OGGETTO DEL QUARTO GIRO** *(DECISIONE DI LUCA, 2026-11-24 
     E:\python\py3132\python.exe doc/referti_l2/legge_fondo_v2b.py caduta --coll V2 --scala 0.5   (0.5, 1.0, 2.0)
     E:\python\py3132\python.exe doc/referti_l2/legge_fondo_v2b.py lettura > doc/referti_l2/legge_fondo_v2.txt
 
-**Una sola differenza, in memoria:** l'oggetto e' `puntofisso_v3b/giro_3/stato_006000.npz`, la partenza del giro 4, cioe' lo stato la cui evoluzione e' misurata da `fondo_puntofisso_v3b4.py`. Le uscite vanno in `M1330/b3` *(vuota: B3 non e' mai partita)*. **La lettura** stampa prima il respiro del giro 4 e la sua fascia, poi `legge_fondo_v2.lettura` cosi' com'e'.
+**Una sola differenza, in memoria:** l'oggetto e' `puntofisso_v3b/giro_3/stato_006000.npz`, la partenza del giro 4, cioe' lo stato la cui evoluzione e' misurata da `fondo_puntofisso_v3b4.py`. Le uscite vanno in `M1330/b3` *(vuota: B3 non e' mai partita)*. **La lettura** stampa prima il respiro del giro 4 e la sua fascia *(con `fondo_puntofisso_v3b4_lettura.py`: la lettura di `_v3b4` cade sul verdetto; questo file non aveva mai girato, e la correzione e' dichiarata nella relazione)*, poi `legge_fondo_v2.lettura` cosi' com'e'.
 """
 import argparse
 import os
@@ -16,15 +16,16 @@ if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
 import legge_fondo_v2 as LF  # noqa: E402
 import fondo_puntofisso_v3b4 as G4  # noqa: E402
+import fondo_puntofisso_v3b4_lettura as G4L  # noqa: E402
 
 LF.OGGETTO_B3 = G4.PARTENZA_G4
 
 
 def lettura():
     import _presidio
-    _presidio.avvia(os.path.join(_QUI, "fondo_puntofisso_v3b4.py"))
+    _presidio.avvia(os.path.join(_QUI, "fondo_puntofisso_v3b4_lettura.py"))
     _presidio.avvia(__file__)
-    G4.lettura()
+    G4L.lettura()
     return LF.lettura()
 
 

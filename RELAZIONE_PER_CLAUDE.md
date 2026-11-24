@@ -27117,3 +27117,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La corsa:** `m1446-M1932_puntofisso_v3b4`, aperta `19:40:43`, chiusa `20:09:50`, uscita `0`.
 - **La lettura** *(`fondo_puntofisso_v3b4.py lettura`)* stampa la partenza, le `w` e la finestra *(i minimi della lisciata `[1900, 5600]`; `k_max 1700`, `k_min 1900`, `P 400`, la finestra `[1500, 1900]`; `w` min `10.592`, max `11.334`, medio `10.953`)*, **poi cade sulla riga del verdetto:** `TypeError: not enough arguments for format string`. **La causa, mia:** nella stringa della fascia RESIDUO i testi «`5% E`» e «`8%:`» vengono letti come specificatori di formato. Il caso noto non lo vedeva: provava `fascia()`, non la stampa.
 - **Il referto parziale** `fondo_puntofisso_v3b4.txt` si committa cosi' com'e'. La correzione va in un file nuovo *(lo script e' usato)*, con un commit a se'.
+
+
+### 2026-11-24 -- [M1932] LA CORREZIONE: fondo_puntofisso_v3b4_lettura.py (IL VERDETTO SENZA % SUI TESTI CON %); legge_fondo_v2b.py LA CHIAMA [[PROGETTO-MITOSI]]
+
+- **Il file nuovo** `fondo_puntofisso_v3b4_lettura.py` stampa il verdetto senza l'operatore `%` sui testi che contengono `%`. **Ha il caso noto della stampa:** `0.0499`, `0.0582` e `0.0801` danno la fascia giusta, senza errore, prima di leggere il giro 4.
+- **`legge_fondo_v2b.py` corretto, non riscritto da usato:** chiamava la lettura rotta, ma **non ha mai girato** *(B3 non e' partita)*. Ora chiama `_v3b4_lettura`. Lo dichiaro qui.
