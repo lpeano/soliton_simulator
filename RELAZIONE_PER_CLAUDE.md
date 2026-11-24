@@ -27226,3 +27226,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: la norma lontana cresce in r1 e non in r3 *(`55%`)*: **NO** *(cresce anche in r3; cresce invece il massimo, solo col gradiente)*. Con la rampa K su `[1400, 2000]` sopra `0.90` *(`45%`)*: **NO** *(`0.8294`)*;
   - mie: rampa sopra `0.90` *(`30%`)*: **NO**; la norma lontana cresce in r1 piu' che in r3 *(`50%`)*: **SI', ma di poco** *(`3.726e-04` contro `3.529e-04`)*.
+
+
+### 2026-11-24 -- [M2245-A] IL VENTO DEL VUOTO: LA CARTA (SEZ. 3-UNDECIES) E vento_vuoto.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Una corrente di `phi` gia' in uso non c'e'** *(`anemometro.J_di` e' quella della materia)*. **La mia:** `J_phi = rho_phi d theta/dy`, con `theta` la fase acquistata da `k 0` della stessa corsa. Cosi' non serve il tick assoluto. `d/dy` esatto coi nodi a `+- sqrt3` lungo `y`. `v_phi = <J>/<rho>` ha le dimensioni di un numero d'onda: la riserva e' dichiarata.
+- **Il criterio per B, fissato prima:** in r1 `J - J(V0)` contro `k` con la pendenza a piu' di `3` sigma e `R^2 > 0.9`.

@@ -332,3 +332,25 @@
 - **LE PREVISIONI:**
   - **del guardiano:** la norma lontana cresce nel tempo in r1 e non in r3 *(`55%`)*; con la rampa K su `[1400, 2000]` resta sopra `0.90` *(`45%`)*; se la norma lontana NON cresce, il freno non e' il toro e resta aperto *(`35%`)*;
   - **mie:** con la rampa K su `[1400, 2000]` sopra `0.90`: `30%`. La norma lontana cresce in r1 piu' che in r3: `50%`.
+
+## 3-undecies. [M2245] IL VENTO DEL VUOTO *(DECISIONE DI LUCA, `22:49`; solo letture e un'animazione, nessuna corsa; scritta dopo lo script di A e PRIMA dei numeri)*
+
+- **`git log --all --fixed-strings --grep "[M2245"`: vuoto** *(`22:49:55`)*.
+- **L'ipotesi** *(del guardiano, `22:40`)*: in V2 tutto scala con `N`, e il vuoto `phi` ha una frequenza propria. Nel gradiente accumula un impulso che cresce col tempo: il vuoto cade, e la caduta misurata e' rispetto alla scatola, non al vuoto.
+- **A, le definizioni** *(Luca: «dichiararne la definizione»)*. **Una corrente di `phi` gia' in uso nel codice non c'e':** `anemometro.J_di` e' la corrente della MATERIA *(un mezzo passo di trasporto su `psi`)*. **La mia:**
+  - per nodo `rho_phi = somma |phi_h|^2` sulle sei mezze-spighe;
+  - **`theta(k)`** = la fase di `Z = somma conj(phi_h(0)) phi_h(k)`, **la fase acquistata dallo stato `k 0` della stessa corsa.** Cosi' non serve il tick assoluto di `bordo.c_di` *(il nodo di [M2210-r4])*;
+  - **`d theta/dy`** = `arg(conj(Z_giu) Z_su)/(2 sqrt3)`, coi nodi `(m1 - 1, m2 + 2)` e `(m1 + 1, m2 - 2)`, **esattamente a `+- sqrt3` lungo `y`** *(`x = m1 + m2/2`, `y = m2 sqrt3/2`)*;
+  - **`J_phi = rho_phi d theta/dy`**, la corrente di Noether di un campo complesso, **mediata sui nodi a distanza `> 25` dal baricentro di `rho_psi`** *(i `dxy` di `FS.carica`)*;
+  - **`v_phi = <J_phi>/<rho_phi>`** sugli stessi nodi. **La riserva:** ha le dimensioni di un numero d'onda, non di una velocita' *(la velocita' vorrebbe la dispersione del vuoto, che non ho)*. Il rapporto con `v` dell'oggetto *(`v - v(V0)`, la differenza centrata a `10` tick della serie)* si stampa come chiesto, con questa riserva;
+  - **accanto, un riferimento** *(numeri, non giudizio)*: `omega k_eff <dN/dy>` sugli stessi nodi, cioe' la fase che si accumulerebbe **se la frequenza del vuoto scalasse come `N`**. `omega 0.471239` e' quello della scena; `k_eff = k` a gradino, `somma min(t/500, 1)` con la rampa, `0` in V0.
+- **(A3)** il massimo di `sqrt(rho_psi)` fuori dal raggio: il nodo, `d`, la direzione dal baricentro, `y - y_c`, per stato, in r1, r2 e r3. **(A4)** la fase lungo `y` per riga `m2` *(l'arg della somma sulla riga)*, **assoluta** *(`somma phi_h`)* **e acquistata da `k 0`**, a `k 0`, `1000`, `2000` in r1 e r3.
+- **I CASI NOTI:**
+  - (A1) `J_phi` di `k 0` rispetto a se stesso = `0` **al bit**;
+  - (A1) una fase uniforme `0.3`: `|d theta/dy| < 1e-12`. **Non al bit, e lo dico:** `0.3` passa da coseno e seno arrotondati;
+  - (A1) **DEVE FALLIRE lo zero:** una rampa di fase `q y` *(3 giri su `L_y`)* ridà `q` entro `1e-9`;
+  - (A4) `phi` di `k 0` uguale al bit nelle tre corse.
+- **IL CRITERIO PER B, fissato qui:** **«il vuoto scorre»** se in r1 `J - J(V0)`, contro `k` *(`k 250..2000`)*, ha **una pendenza a piu' di `3` sigma e `R^2 > 0.9`**. Altrimenti B non si fa, e lo dico.
+- **LE PREVISIONI:**
+  - **del guardiano:** A1 `J_phi` lontano cresce linearmente a gradino e non in V0 *(`50%`)*; A2 `v_phi` a `k 2000` fra il `10%` e il `50%` di `v` *(`35%`)*; A3 il massimo vicino a `y_c +- L_y/4` *(`40%`)*; B *(`30%`)*; C *(`50%`, `35%`)*;
+  - **mie:** A1 `J - J(V0)` cresce linearmente in r1 *(`60%`)*, **e segue il riferimento `omega k <dN/dy>` entro un fattore `2`** *(`40%`)*; A3 il massimo vicino a `y_c +- L_y/4` *(`30%`)*.
