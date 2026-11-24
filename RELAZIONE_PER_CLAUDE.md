@@ -27207,3 +27207,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Solo doc**, sui due rami, nella stessa voce. **`git log --all --fixed-strings --grep "[M2222"`: vuoto** *(`22:26:18`)*.
 - **Due note del guardiano nella voce, dai referti:** K `1.00 +- 0.01` e' la prima finestra *(`[200, 800]`)*, mentre su `[200, 2000]` la K pesata e' `0.8994`; in E(p) `v(p)` e' lineare ma `E_w` ha il segno opposto. **Il `1.5%` della massa** *(il quanto del respiro)* **non viene da un referto di questa sessione:** la provenienza va detta.
 - **Le corse di [M2210] non si toccano** *(r1, r2, r3 girano)*.
+
+### 2026-11-24 -- [M2210] LA LETTURA: LA RAMPA ATTENUA IL FRENO MA NON LO TOGLIE (K [1400, 2000] 0.8294 CONTRO 0.7685); LA NORMA LONTANA CRESCE ANCHE IN V0; |psi| MASSIMO LONTANO CRESCE SOLO COL GRADIENTE (1.31 A GRADINO, 0.28 IN V0) [[PROGETTO-MITOSI]]
+
+- **Le corse:** r1, r2, r3, chiuse fra `22:34:33` e `22:34:39`, uscita `0`. Il referto: `doc/referti_l2/legge_fondo_v3.txt`. **I DEVE: 5 su 5:** `stato_000250.npz` esiste nelle tre corse *(Luca)*; **r1 = B3 `x1` AL BIT su tutta la serie, r3 = B3 V0 AL BIT** *(salvare gli stati non tocca la dinamica)*.
+- **(i) K CIMA pesata:**
+
+| finestra | gradino (r1) | rampa (r2) |
+|---|---|---|
+| `[200, 800]` | `1.0014 +- 0.0095` | *(dentro la rampa)* |
+| `[800, 1400]` | `0.8979 +- 0.0180` | `0.9415 +- 0.0146` |
+| `[1400, 2000]` | `0.7685 +- 0.0245` | `0.8294 +- 0.0224` |
+| `[200, 2000]` / `[700, 2000]` | `0.9002 +- 0.0025` | `0.9008 +- 0.0031` |
+
+  **La rampa alza le due finestre tarde** *(di circa `0.04` e `0.06`)* **ma K scende anche con la rampa** *(da `0.94` a `0.83`)*. **Il freno resta.**
+- **(ii) la norma fuori dal raggio `25`** *(frazione della massa)*: a `k 0` `2.853e-04` in tutte e tre; a `k 2000` r1 `3.726e-04`, r2 `3.630e-04`, **r3 (V0) `3.529e-04`**. **Cresce anche nella V0, quindi anche senza gradiente:** la parte in piu' col gradiente a `k 2000` e' piccola rispetto alla crescita della V0 stessa.
+- **(iii) `|psi|` massimo fuori dal raggio:** **nella V0 resta fra `0.26` e `0.35`**; **a gradino cresce da `0.30` a `1.31`** *(`0.90` gia' a `k 1500`)*; **con la rampa a `0.80`**. **Lontano dall'oggetto, col gradiente, cresce un picco localizzato che nella V0 non c'e'.** Dove sia non l'ho misurato: e' la lettura che manca.
+- **Le previsioni:**
+  - del guardiano: la norma lontana cresce in r1 e non in r3 *(`55%`)*: **NO** *(cresce anche in r3; cresce invece il massimo, solo col gradiente)*. Con la rampa K su `[1400, 2000]` sopra `0.90` *(`45%`)*: **NO** *(`0.8294`)*;
+  - mie: rampa sopra `0.90` *(`30%`)*: **NO**; la norma lontana cresce in r1 piu' che in r3 *(`50%`)*: **SI', ma di poco** *(`3.726e-04` contro `3.529e-04`)*.
