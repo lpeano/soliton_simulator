@@ -298,3 +298,17 @@
 - **LE PREVISIONI:**
   - **del guardiano:** il giro 4 sotto il `5%` *(`65%`)*; B3, K nella prima finestra fra `0.95` e `1.00` *(`70%`)*; K costante entro il `5%` su tutte le finestre *(`55%`)*;
   - **mie:** il giro 4 sotto il `5%`: `45%`; sotto l'`8%`: `80%`. Le previsioni su B3 restano quelle della sez. `3-septies`.
+
+## 3-nonies. [M2045] LE LETTURE SULLE CADUTE DI B3 *(DECISIONE DI LUCA, `20:45`; solo letture, nessuna corsa; scritta dopo lo script e PRIMA dei numeri)*
+
+- **`git log --all --fixed-strings --grep "[M2045"`: vuoto** *(`20:43:02`)*.
+- **UNA PREMESSA CHE CAMBIA IL MANDATO, dichiarata:** **le cadute di B3 non hanno salvato gli stati.** Salvano solo la serie ogni `MC.OGNI` tick: il tick, il baricentro `x` e `y`, la massa, e la quinta colonna `<dN/dy>` **pesata col `rho` di quel tick**. La quinta colonna **e' gia' il gradiente alla posizione raggiunta**, quindi le quattro letture si fanno dalle serie. Lo script e' `legge_fondo_v2c.py`, il referto `legge_fondo_v2c.txt`.
+- **Di Luca, e le mie scelte, dichiarate prima:**
+  - **(i)** `<dN/dy>(k)/<dN/dy>(0)` ogni `400` tick, con lo spostamento `y(k) - y(0)`. **La parte del calo spiegata** = il calo del gradiente medio dalla prima all'ultima finestra di `600`, diviso il calo di K CIMA al centro nelle stesse finestre *(la K al centro non contiene il gradiente: e' il calo da spiegare)*;
+  - **(ii)** K PESATA per finestra *(`[200, 800]`, `[800, 1400]`, `[1400, 2000]`)* contro **`v` della finestra = `(y(k1) - y(k0))/(k1 - k0)` della V2 meno quella della V0**. Le tre scale insieme, ordinate per `v`;
+  - **(iii)** `m*(p)` = **`dp/dv` letto da `ep_fondo.txt`** *(le righe «dp/dv contro gamma^3 m», il file committato pulito: si verifica)*, **interpolato linearmente** a `p = m*(0) v`. **`m*(0)` = `dp/dv` al primo punto** *(`p 0.0099`)*; sotto quel `p`, `m*(p) = m*(0)`. **`R = m*(0)/m*(p)`, e `K/R`.** La curva `dp/dv` e' quella del calcio lungo `u` sull'oggetto di E(p): **la uso per la caduta in `y` sull'oggetto del giro 4**, e lo dichiaro;
+  - **(iv)** `a(V0)` per finestra *(e su `[200, 2000]`)*, col fit di `caduta_finestre`, accanto a `v(V0)`.
+- **IL CASO NOTO:** (a) la K PESATA `x1 [200, 800]` ridà `1.0014` di `legge_fondo_v2.txt`; (b) **DEVE FALLIRE:** la stessa col gradiente al centro; (c) `dp/dv` al primo punto e' `19.036` *(`ep_fondo.txt`)*.
+- **LE PREVISIONI:**
+  - **del guardiano:** il gradiente raggiunto spiega meno del `5%` del calo *(`65%`)*; K(v) riscalato con `m*(p)` entro il `10%` di `1` su tutte le finestre *(`45%`)*;
+  - **mie:** il gradiente spiega meno del `5%` *(`85%`)*, perche' `<dN/dy>/centro` resta fra `0.937` e `0.942` in tutte le finestre. **Il riscalamento non aiuta** *(`75%`)*: in `ep_fondo.txt` `dp/dv` scende con `p` *(da `19.04` a `0.0099` a `16.98` a `0.2985`)*, quindi `R > 1` e `K/R < K`: **il calo peggiora.**

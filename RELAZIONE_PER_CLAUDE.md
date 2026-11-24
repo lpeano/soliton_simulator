@@ -27151,3 +27151,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - del guardiano: K nella prima finestra fra `0.95` e `1.00` *(`70%`)*: **di poco NO** in tutte e due le convenzioni. Pesata `1.0001`-`1.0017` *(sopra `1.00`, entro l'errore `+- 0.009`-`0.010`)*; al centro `0.9422`-`0.9438` *(sotto `0.95`)*. K costante entro il `5%` su tutte le finestre *(`55%`)*: **NO** *(da `1.00` a `0.77`)*;
   - mie: le tre K pesate piu' vicine fra loro di quelle al centro *(`55%`)*: **SI'** *(`0.07%` contro `0.13%`)*. La K pesata a `x1` entro il `10%` di K CIMA di 1c *(`0.7707`)* *(`40%`)*: **NO** *(`0.9002`)*.
 - **Aperto:** `m*` e' quello di 1c; l'oggetto nuovo ha un altro `w`. **Decide Luca** se misurarne il `m*` con due calci.
+
+
+### 2026-11-24 -- [M2045] LE LETTURE SULLE CADUTE DI B3: LA CARTA (SEZ. 3-NONIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La premessa:** **B3 non ha salvato gli stati**, solo la serie. La quinta colonna e' gia' `<dN/dy>` pesato alla posizione raggiunta, quindi le quattro letture si fanno da li'.
+- **Le scelte:** `v` della V2 meno quella della V0; `m*(p)` da `dp/dv` di `ep_fondo.txt`, interpolato linearmente; `m*(0)` = il primo punto.
+- **Le previsioni mie:** il gradiente spiega meno del `5%` *(`85%`)*; il riscalamento peggiora il calo *(`75%`)*, perche' `dp/dv` scende con `p`.
