@@ -27262,3 +27262,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **La premessa che non regge:** `caduta_libera` ha `chi` imposto, e le tenute di [M1631] non hanno `chi`. **Chi vero con gli stati ogni `250` c'e' solo nelle due_corpi e nei triangoli.**
 - **Scelte:** due_corpi `F-on` contro `F-off` *(chi vero e il suo controllo)*; accanto `caduta_libera` V2 e V0 *(chi imposto)*. Gli anelli attorno a ogni corpo, dentro la sua meta'.
+
+### 2026-11-24 -- [M2245-B] IL VUOTO NON SI AMMASSA: VICINO AI CORPI rho_phi CALA IN TUTTE LE CORSE, ANCHE CON CHI SPENTO; NELLA V2 A CHI IMPOSTO IL NUCLEO PERDE IL 20.8 PER CENTO A k 2000 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vuoto_ammassato.txt`. **I casi noti: 2 su 2.** **La somma di `rho_phi` si conserva al bit** in ogni corsa *(`149075.065061` nelle due_corpi, `153086.504245` nelle cadute)*.
+- **L'anello `[0, 8)` a `k 2000`** *(corpo 1, corpo 2)*:
+  - **chi vero acceso** *(`F-on`)*: `-0.895%`, `-1.291%`;
+  - **chi vero spento** *(`F-off`)*: `-1.775%`, `-0.342%`;
+  - **chi imposto:** V2 **`-20.806%`**, V0 `-1.111%`.
+- **Gli anelli `[8, 16)` e `[16, 32)` calano dappertutto:** a `k 2000` fra `-3%` e `-5%` in F-on e F-off; a `k 3000` F-on fra `-4.5%` e `-5.6%`, **F-off fra `-7.2%` e `-12.9%`**. **Con chi acceso il calo e' minore che con chi spento.**
+- **Nella V2 a chi imposto:** l'anello `[0, 8)` resta entro l'`1%` fino a `k 1000`, poi cala *(`-3.6%` a `1500`, `-9.5%` a `1750`, `-20.8%` a `2000`)*; l'anello `[16, 32)` sale dello `0.93%`.
+- **Le previsioni:** del guardiano, `[0, 8)` cresce di piu' dell'`1%` con chi vero *(`30%`)*: **NO** *(cala)*; mia *(`20%`)*: **NO**.
