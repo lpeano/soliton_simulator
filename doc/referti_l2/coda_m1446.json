@@ -2309,6 +2309,114 @@
     "corsa"
    ],
    "note": "[M1330-B1/B2] (DECISIONE DI LUCA 13:30) il punto fisso: tre giri di 2000 tick a N 1, stati ogni 50"
+  },
+  {
+   "nome": "M1330F_noto_a",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "noto_a"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il caso noto (a): il calcio 0.010 di 1c rifatto, al bit"
+  },
+  {
+   "nome": "M1330F_calcio_k0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.01",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.01"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.01 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.02",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.02"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.02 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.05",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.05"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.05 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.1"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.1 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.2"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.2 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.3"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.3 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.4"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.4 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.5",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.5"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.5 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
   }
  ]
 }
