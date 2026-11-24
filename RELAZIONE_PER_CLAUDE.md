@@ -27071,3 +27071,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`m*` e `omega_psi(N1)` sono quelli di 1c.** **UNA DOMANDA A LUCA:** il `m*` dell'oggetto nuovo vuole due calci in piu'; non li lancio senza mandato.
 - **Il caso noto:** 3 DEVE. (a) la V2 `x1` di 1c al bit per `100` tick; (b) DEVE FALLIRE contro `x2`; (c) `<dN/dy>/centro` a `k 0` uguale a B0 *(`0.95481`)*.
 - **La coda:** le quattro voci solo se la v3b passa, scritte a lanciatore fermo.
+
+### 2026-11-24 -- [M1330-B3] IL CASO NOTO DI B3 PASSA: 3 DEVE SU 3 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v2_noto.txt`.
+- **(a)** la V2 `x1` di 1c, `100` tick: **11 righe su 11 AL BIT** con `M1658/c1/caduta_V2`. **(b) DEVE FALLIRE** contro `x2`: diverse. **(c)** `<dN/dy>` `-1.502885e-04`, centro `-1.574010e-04`, rapporto **`0.954813`** *(B0: `0.95481`)*.
+- **La nota delle ore:** il titolo del paragrafo della carta di B3 diceva «18:0x»; l'ora vera e' quella del commit `80f95c8d`. Questo paragrafo non ha ora nel titolo: e' quella del suo commit.
+- **Le quattro voci** entrano in coda solo se la v3b passa.

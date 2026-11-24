@@ -1,0 +1,21 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_s3.py  sha1-BYTE 47fa8b17  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+==================================================================================================================================
+[M1330-B3] IL CASO NOTO DELLE CADUTE (la carta sez. 3-septies): la V2 x1 su 1c per 100 tick contro la serie di 1c (M1658/c1/caduta_V2)
+==================================================================================================================================
+### noto_x1.0: E:\soliton_simulator\controllo\M1658\tenuta\L-1_proiezione_K\stato_003000.npz; y_c 68.917800; A 1.389741e+01 (x1.0); N da 0.9964916077 a 1.0035207444; l'impronta f868245d6314
+### 100 tick in 105 s
+  DEVE: (a) le prime 4 colonne = la serie di 1c (k <= 100) AL BIT                                            PASSA 11 righe contro 11
+  DEVE: (b) DEVE FALLIRE: le stesse colonne = la serie x2 di 1c                                              PASSA 
+  DEVE: (c) <dN/dy>/centro a k 0 = quello di B0 sullo stesso stato (0.95481, k_forma.txt) entro 5e-6         PASSA <dN/dy> -1.502885e-04, il centro -1.574010e-04, il rapporto 0.954813
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
