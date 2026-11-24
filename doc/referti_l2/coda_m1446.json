@@ -2593,6 +2593,39 @@
     "2.0"
    ],
    "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 2.0"
+  },
+  {
+   "nome": "M2210_r1_gradino",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "gradino"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: gradino, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2210_r2_rampa",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "rampa"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: rampa, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2210_r3_V0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "v0"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: v0, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
   }
  ]
 }

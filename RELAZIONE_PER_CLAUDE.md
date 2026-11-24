@@ -27183,3 +27183,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Tre corse:** r1 gradino, r2 rampa `N(t) = 1 + (N - 1) min(t/500, 1)` *(la formula letterale, dichiarata)*, r3 V0. Dall'oggetto del giro 4, gradiente `x1`, `2000` tick, gli stati ogni `250` e a `k 0`.
 - **Le letture:** K per finestra *(r2 fittata su `[700, 2000]` e sulle finestre di `600` dentro)*; la norma fuori da `25` nodi dal baricentro; `|psi|` massimo fuori.
 - **Il caso noto:** `100` tick, il gradino e la V0 al bit con B3, la rampa diversa. **A fine corsa** `stato_000250.npz` deve esistere, e r1 deve coincidere con B3 `x1` al bit.
+
+### 2026-11-24 -- [M2210] IL CASO NOTO PASSA (4 DEVE SU 4); r1, r2, r3 IN CODA; [M2210-r4] ARRIVATO A META' LAVORO, IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v3_noto.txt`, `100` tick dall'oggetto del giro 4. (a) il gradino = B3 `x1` **al bit** *(11 righe, cinque colonne)*; (b) **DEVE FALLIRE:** la rampa differisce *(y a `k 100`: rampa `-3.908795e-03`, gradino `-3.001756e-04`; la rampa e' vicina alla deriva della V0)*; (c) la V0 = B3 V0 **al bit**; (d) `N_di` ai bordi della rampa.
+- **La coda:** `M2210_r1_gradino`, `M2210_r2_rampa`, `M2210_r3_V0` a priorita' `1`, scritte a lanciatore fermo *(dalle `20:34:36`)*, nello stesso commit. Il rilancio a mano dopo il commit.
+- **[M2210-r4]** *(Luca, arrivato mentre lavoravo)*: r4 = la caduta `x1` a gradino **col bordo assorbente**, r5 = la sua V0 col bordo. Va in coda dopo r1-r3: **carta, script e caso noto adesso; le voci a lanciatore fermo.**
