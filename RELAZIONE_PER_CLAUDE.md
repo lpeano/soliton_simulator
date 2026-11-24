@@ -27131,3 +27131,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La serie dei respiri:** v3b giri 1-3 `0.2856`, `0.1516`, `0.0582`; giro 4 **`0.0677`**. **Il giro 4 non scende sotto il giro 3**: il respiro si e' fermato fra il 5 e il 7 per cento.
 - **Le previsioni:** del guardiano, giro 4 sotto il `5%` *(`65%`)*: **NO**; mie, sotto il `5%` *(`45%`)*: **NO**, sotto l'`8%` *(`80%`)*: **SI'**.
 - **B3 parte** *(Luca: «fra 5% e 8%, B3 parte lo stesso»)*: l'oggetto e' la partenza del giro 4 *(`giro_3/stato_006000.npz`, la cui evoluzione ha respiro `6.77%`)*. Le quattro voci vanno in coda nel prossimo commit, a lanciatore fermo.
+
+### 2026-11-24 -- [M1932] B3 PARTITA: IL LANCIATORE RILANCIATO A MANO ALLE 20:16:31 (DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `20:16:31` *(da `date`)*, dopo `3e5ef20d`. **Al momento di questo commit** nel registro c'e' l'APERTO di `m1446-M1932B3_V0` e di `m1446-M1932B3_x0.5`. Le altre due voci partono quando il lanciatore lo permette *(la CPU letta, il tetto dei processi)*, e ogni lancio va nel registro.
