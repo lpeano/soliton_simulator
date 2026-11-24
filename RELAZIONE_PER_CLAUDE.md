@@ -27123,3 +27123,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Il file nuovo** `fondo_puntofisso_v3b4_lettura.py` stampa il verdetto senza l'operatore `%` sui testi che contengono `%`. **Ha il caso noto della stampa:** `0.0499`, `0.0582` e `0.0801` danno la fascia giusta, senza errore, prima di leggere il giro 4.
 - **`legge_fondo_v2b.py` corretto, non riscritto da usato:** chiamava la lettura rotta, ma **non ha mai girato** *(B3 non e' partita)*. Ora chiama `_v3b4_lettura`. Lo dichiaro qui.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO: 0.0677, FRA IL 5 E L'8 PER CENTO; B3 PARTE COL RESPIRO RESIDUO 6.77 PER CENTO DICHIARATO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4.txt`, da `fondo_puntofisso_v3b4_lettura.py`. **Il caso noto della stampa:** 3 su 3.
+- **I numeri:** `w` min `10.592`, max `11.334`, medio `10.953`; **`(max - min)/medio` `0.0677`**: fascia RESIDUO. Minimi della lisciata `[1900, 5600]`; `k_max 1700`, `k_min 1900`, `P 400`, finestra `[1500, 1900]`. Non serve: e' l'ultimo giro.
+- **La serie dei respiri:** v3b giri 1-3 `0.2856`, `0.1516`, `0.0582`; giro 4 **`0.0677`**. **Il giro 4 non scende sotto il giro 3**: il respiro si e' fermato fra il 5 e il 7 per cento.
+- **Le previsioni:** del guardiano, giro 4 sotto il `5%` *(`65%`)*: **NO**; mie, sotto il `5%` *(`45%`)*: **NO**, sotto l'`8%` *(`80%`)*: **SI'**.
+- **B3 parte** *(Luca: «fra 5% e 8%, B3 parte lo stesso»)*: l'oggetto e' la partenza del giro 4 *(`giro_3/stato_006000.npz`, la cui evoluzione ha respiro `6.77%`)*. Le quattro voci vanno in coda nel prossimo commit, a lanciatore fermo.
