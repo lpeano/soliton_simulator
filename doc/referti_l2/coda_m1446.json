@@ -2186,6 +2186,50 @@
     "corsa"
    ],
    "note": "[M0100] la caduta per parti, la v2 per CELLA (la v1 cadde all'avvio sul mio assert, 859a4067): caduta V2 x1 dallo stato k 3000 di L-1_proiezione_K, 2000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0118_caduta_V2_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): caduta --coll V2 (Luca)"
+  },
+  {
+   "nome": "M0118_caduta_V0_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): caduta --coll V0 (Luca)"
+  },
+  {
+   "nome": "M0118_calcio_k0.010_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): calcio --k 0.010 (per m*, mia aggiunta dichiarata nella carta)"
+  },
+  {
+   "nome": "M0118_calcio_k0_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): calcio --k 0.0 (per m*, mia aggiunta dichiarata nella carta)"
   }
  ]
 }
