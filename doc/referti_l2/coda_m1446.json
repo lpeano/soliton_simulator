@@ -2230,6 +2230,24 @@
     "0.0"
    ],
    "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): calcio --k 0.0 (per m*, mia aggiunta dichiarata nella carta)"
+  },
+  {
+   "nome": "M0140_omega_noto",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_omega.py",
+    "noto"
+   ],
+   "note": "[M0140] (DECISIONE DI LUCA 01:40) il caso noto: la tenuta 1b da k 2500, 250 tick, omega per tick"
+  },
+  {
+   "nome": "M0140_caduta_omega",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_omega.py",
+    "corsa"
+   ],
+   "note": "[M0140] (DECISIONE DI LUCA 01:40) la caduta V2 x1 rifatta, omega per tick, psi_h confrontato con c1_parti ogni 250"
   }
  ]
 }
