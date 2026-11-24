@@ -26883,3 +26883,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **«massa 4» e' la NORMA x4, non la massa inerziale:** `m*` di a2 e' **quasi uguale** a quella di 1c *(`18.6350` contro `18.9162`)*. **La prova di equivalenza qui confronta due oggetti di inerzia ~uguale**, non `1` e `4`.
   2. **Con `m*` quasi uguale, la differenza di `a` *(eta `0.1115`)* non viene da `m*`:** viene dalla risposta al gradiente. **Il principio di equivalenza, letto cosi', NON e' rispettato al livello `0.1`.**
   3. **Dopo [M0037-01bis] (`a` cala nel tempo), `a` e K sono MEDIE su `[200, 2000]`:** se a1 e a2 si spengono con tempi diversi, eta dipende dalla finestra. **Non l'ho misurato per finestra:** il mandato non lo chiede.
+
+## [M0100] LA CADUTA PER PARTI: LA CORSA PARTITA *(DECISIONE DI LUCA `01:00`; il lancio `01:07` da `date`)* [[PROGETTO-MITOSI]]
+
+- **`git log --all --fixed-strings --grep "[M0100"`: vuoto.** **La carta prima** *(sez. `2-nonies`)*, poi `caduta_parti.py` e la voce in coda *(`551b2170`)*.
+- **La corsa** = `fondo_1c.caduta("V2")` cosi' com'e' *(lo stato `k 3000` di `L-1_proiezione_K`, `2000` tick, `x1`)*, con `fondo_1c.ciclo` avvolta in memoria: **gli stati ogni `250`** *(come deciso)* e, **mia scelta dichiarata, le parti ogni `10` tick**: con gli stati ogni `250` una finestra di `600` avrebbe `2`-`3` punti, troppo pochi per un fit a tre parametri.
+- ### **Le parti, la mia definizione dichiarata:** `psi_K = psi Q_K* Q_K^T` nodo per nodo *(`Q_K` = la base della semina `proiezione_K`, `tenuta_fondo.base_k`)*, `psi_R = psi - psi_K`. **`Q_K` calcolato prima, in un processo a parte** *(`01:06:55`-`01:07:28`)*: `12 x 2`, `E +0.2453383`, la molteplicita' `2`, `Q^dag Q - 1` `4.4e-16`, sha1 `55e6fb84`.
+- **I casi noti della lettura:** CN1 il totale = `M1658/c1/caduta_V2` al bit; CN2 `f_K y_K + f_R y_R = y`; CN3 le parti dallo stato `k 2000` = la serie al bit; CN4 `Q_K` ricalcolato = il file; **DEVE FALLIRE** CN2 con `1.1 Q_K`. ### **Non c'e' la V0 per parti** *(Luca ha deciso solo la V2)*: **le `a` per parte saranno GREZZE.**
+- **Il lanciatore rilanciato a mano** *(era uscito alle `00:58` con la coda vuota)*: dichiarato. **Le schede [M1751] FERME fino a domani di giorno.**
