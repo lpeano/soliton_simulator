@@ -27047,3 +27047,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **(a)** la V2 `x1` di 1c, `100` tick: **11 righe su 11 AL BIT** con `M1658/c1/caduta_V2`. **(b) DEVE FALLIRE** contro `x2`: diverse. **(c)** `<dN/dy>` `-1.502885e-04`, centro `-1.574010e-04`, rapporto **`0.954813`** *(B0: `0.95481`)*.
 - **La nota delle ore:** il titolo del paragrafo della carta di B3 diceva «18:0x»; l'ora vera e' quella del commit `80f95c8d`. Questo paragrafo non ha ora nel titolo: e' quella del suo commit.
 - **Le quattro voci** entrano in coda solo se la v3b passa.
+
+### 2026-11-24 -- [M1748] IL PUNTO FISSO v3b: IL CRITERIO NON PASSA, 0.0582 CONTRO 0.05 (GIRI 0.2856, 0.1516, 0.0582); IN TUTTI E TRE I GIRI IL MASSIMO E' AL BORDO; FERMO, B3 NON PARTE [[PROGETTO-MITOSI]]
+
+- **La corsa** `m1446-M1748_puntofisso_v3b`: aperta `17:53:43`, chiusa `19:25:24`, uscita `0`. Il referto: `doc/referti_l2/fondo_puntofisso_v3b.txt`.
+- **I numeri** *(dal referto)*, `(w_max - w_min)/w_medio`: giro 1 **`0.2856`**, giro 2 **`0.1516`**, giro 3 **`0.0582`**. **Il criterio `< 0.05` sull'ultimo giro: NON PASSA.**
+- **Le finestre** *(dai `periodo_v3b.json`)*:
+  - giro 1: minimi della lisciata `[1500, 1900, 3200, 5300]`; `k_max 200`, `k_min 1500`, **`P 2600`**, finestra `[0, 1500]`, accorciata da `[-1100, 1500]`;
+  - giro 2: minimi `[2100, 4900]`; `k_max 200`, `k_min 2100`, **`P 3800`**, finestra `[0, 2100]`, accorciata da `[-1700, 2100]`;
+  - giro 3: minimi `[500, 1700, 2800, 4700]`; `k_max 200`, `k_min 500`, **`P 600`**, finestra `[0, 500]`, accorciata da `[-100, 500]`.
+- **In tutti e tre i giri il massimo e' AL BORDO** *(k `200`, il primo punto della lisciata)*, dichiarato come scritto nella carta. **Una cosa che noto dopo aver visto i numeri:** ogni giro e' partito vicino a un massimo di `w`. Quindi «il massimo precedente» e' stato il bordo, `P` e' uscito piu' corto del respiro *(nel giro 3 `600` tick)*, e le finestre sono state accorciate. La media non e' stata fatta su un respiro intero.
+- **Le previsioni:**
+  - del guardiano: respiro `< 10%` al giro 2 *(`60%`)*: **NO** *(`0.1516`)*; `< 5%` al giro 3 *(`50%`)*: **NO** *(`0.0582`)*;
+  - mia, `< 5%` al giro 3 *(`35%`)*: **NO**.
+- ### **FERMO** *(la carta sez. `3-bis`)*: **B3 non parte**; le quattro voci non entrano in coda. **Decide Luca.**
