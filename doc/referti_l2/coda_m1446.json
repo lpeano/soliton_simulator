@@ -2168,6 +2168,15 @@
     "0.0"
    ],
    "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): calcio --k 0.0"
+  },
+  {
+   "nome": "M0100_caduta_parti",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_parti.py",
+    "corsa"
+   ],
+   "note": "[M0100] la caduta per parti (DECISIONE DI LUCA 01:00): caduta V2 x1 dallo stato k 3000 di L-1_proiezione_K, 2000 tick, stati ogni 250"
   }
  ]
 }
