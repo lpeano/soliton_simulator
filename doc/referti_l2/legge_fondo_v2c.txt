@@ -1,0 +1,52 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v2c.py  sha1-BYTE ca268679  committato e pulito
+==================================================================================================================================
+[M2045] LE LETTURE SULLE CADUTE DI B3 (la carta sez. 3-nonies): dalle serie (gli stati non sono salvati); nessuna corsa
+==================================================================================================================================
+  le costanti di 1c (come B3): m* +18.9162; omega_psi(N1) +0.0939180. Da ep_fondo.txt: dp/dv ai p 0.0099 0.0199 0.0498 0.0995 0.1990 0.2985 0.3980 0.4975 = 19.0360 18.9710 18.6460 18.2340 17.4380 16.9830 17.0920 17.2410; m*(0) = dp/dv al primo punto 19.0360
+  DEVE: (a) il caso noto: K PESATA x1 [200, 800] = 1.0014 di legge_fondo_v2.txt (4 decimali)                 PASSA 1.001403
+  DEVE: (b) DEVE FALLIRE: la stessa col gradiente al centro = 1.0014                                         PASSA 0.943535
+  DEVE: (c) dp/dv di ep_fondo.txt al primo punto (p 0.0099) = 19.036                                         PASSA p 0.0099, 19.0360
+----------------------------------------------------------------------------------------------------------------------------------
+(i) IL GRADIENTE ALLA POSIZIONE RAGGIUNTA: <dN/dy>(k) (la quinta colonna, il rho di quel tick) contro <dN/dy>(0)
+----------------------------------------------------------------------------------------------------------------------------------
+  x0.5: y(k) - y(0) e <dN/dy>(k)/<dN/dy>(0): k 0: +0.0000, 1.00000; k 400: +0.0143, 1.00001; k 800: +0.0883, 0.99982; k 1200: +0.2157, 0.99934; k 1600: +0.3946, 0.99855; k 2000: +0.6193, 0.99771
+      dalla prima all'ultima finestra: il gradiente medio cala del 0.155%, K al centro del 22.81%: il gradiente spiega il 0.68% del calo
+  x1.0: y(k) - y(0) e <dN/dy>(k)/<dN/dy>(0): k 0: +0.0000, 1.00000; k 400: +0.0439, 1.00001; k 800: +0.2084, 0.99976; k 1200: +0.4814, 0.99912; k 1600: +0.8594, 0.99798; k 2000: +1.3287, 0.99638
+      dalla prima all'ultima finestra: il gradiente medio cala del 0.231%, K al centro del 23.43%: il gradiente spiega il 0.99% del calo
+  x2.0: y(k) - y(0) e <dN/dy>(k)/<dN/dy>(0): k 0: +0.0000, 1.00000; k 400: +0.1032, 0.99999; k 800: +0.4475, 0.99953; k 1200: +1.0136, 0.99817; k 1600: +1.7876, 0.99548; k 2000: +2.7417, 0.99089
+      dalla prima all'ultima finestra: il gradiente medio cala del 0.550%, K al centro del 24.77%: il gradiente spiega il 2.22% del calo
+----------------------------------------------------------------------------------------------------------------------------------
+(ii) e (iii) K PESATA PER FINESTRA CONTRO v, E RISCALATA CON m*(p): p = m*(0) v, R = m*(0)/m*(p), K/R
+----------------------------------------------------------------------------------------------------------------------------------
+  scala     finestra     v - v(V0)          p      m*(p)         R         K       K/R
+  x0.5  [ 200, 800]  +1.87712e-04   +0.00357    19.0360   1.00000   +1.0017   +1.0017   (+- 0.0101)
+  x0.5  [ 800,1400]  +3.93867e-04   +0.00750    19.0360   1.00000   +0.8943   +0.8943   (+- 0.0190)
+  x0.5  [1400,2000]  +5.90126e-04   +0.01123    19.0273   1.00046   +0.7744   +0.7740   (+- 0.0299)
+  x1.0  [ 200, 800]  +3.75153e-04   +0.00714    19.0360   1.00000   +1.0014   +1.0014   (+- 0.0095)
+  x1.0  [ 800,1400]  +7.89228e-04   +0.01502    19.0027   1.00175   +0.8979   +0.8963   (+- 0.0180)
+  x1.0  [1400,2000]  +1.17693e-03   +0.02240    18.9438   1.00487   +0.7685   +0.7648   (+- 0.0245)
+  x2.0  [ 200, 800]  +7.48418e-04   +0.01425    19.0077   1.00149   +1.0001   +0.9986   (+- 0.0090)
+  x2.0  [ 800,1400]  +1.58444e-03   +0.03016    18.8595   1.00936   +0.9022   +0.8939   (+- 0.0137)
+  x2.0  [1400,2000]  +2.33815e-03   +0.04451    18.7035   1.01778   +0.7566   +0.7434   (+- 0.0178)
+  le tre scale insieme, per v crescente: v +1.877e-04: K 1.0017, K/R 1.0017; v +3.752e-04: K 1.0014, K/R 1.0014; v +3.939e-04: K 0.8943, K/R 0.8943; v +5.901e-04: K 0.7744, K/R 0.7740; v +7.484e-04: K 1.0001, K/R 0.9986; v +7.892e-04: K 0.8979, K/R 0.8963; v +1.177e-03: K 0.7685, K/R 0.7648; v +1.584e-03: K 0.9022, K/R 0.8939; v +2.338e-03: K 0.7566, K/R 0.7434
+### K/R: da 0.7434 a 1.0017; il massimo scarto da 1: 0.2566
+----------------------------------------------------------------------------------------------------------------------------------
+(iv) a(V0) PER FINESTRA, DA SOLA (la caduta senza gradiente: l'oggetto del giro 4, N = 1)
+----------------------------------------------------------------------------------------------------------------------------------
+  [ 200, 2000]: a(V0) -1.0911e-08 +- 2.1e-10 (181 punti); v(V0) -4.6347e-05
+  [ 200,  800]: a(V0) -6.2368e-09 +- 2.9e-09 (61 punti); v(V0) -4.0088e-05
+  [ 800, 1400]: a(V0) -1.1883e-08 +- 3.0e-09 (61 punti); v(V0) -4.5230e-05
+  [1400, 2000]: a(V0) -9.7666e-10 +- 3.3e-09 (61 punti); v(V0) -5.3722e-05
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
