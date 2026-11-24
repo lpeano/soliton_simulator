@@ -26853,3 +26853,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **«massa 4» e' la NORMA x4, non la massa inerziale:** `m*` di a2 e' **quasi uguale** a quella di 1c *(`18.6350` contro `18.9162`)*. **La prova di equivalenza qui confronta due oggetti di inerzia ~uguale**, non `1` e `4`.
   2. **Con `m*` quasi uguale, la differenza di `a` *(eta `0.1115`)* non viene da `m*`:** viene dalla risposta al gradiente. **Il principio di equivalenza, letto cosi', NON e' rispettato al livello `0.1`.**
   3. **Dopo [M0037-01bis] (`a` cala nel tempo), `a` e K sono MEDIE su `[200, 2000]`:** se a1 e a2 si spengono con tempi diversi, eta dipende dalla finestra. **Non l'ho misurato per finestra:** il mandato non lo chiede.
+
+## [M0100] LA CADUTA PER PARTI: LA CORSA PARTITA *(DECISIONE DI LUCA `01:00`; il lancio `01:07` da `date`)* [[PROGETTO-MITOSI]]
+
+- **`git log --all --fixed-strings --grep "[M0100"`: vuoto.** **La carta prima** *(sez. `2-nonies`)*, poi `caduta_parti.py` e la voce in coda *(`551b2170`)*.
+- **La corsa** = `fondo_1c.caduta("V2")` cosi' com'e' *(lo stato `k 3000` di `L-1_proiezione_K`, `2000` tick, `x1`)*, con `fondo_1c.ciclo` avvolta in memoria: **gli stati ogni `250`** *(come deciso)* e, **mia scelta dichiarata, le parti ogni `10` tick**: con gli stati ogni `250` una finestra di `600` avrebbe `2`-`3` punti, troppo pochi per un fit a tre parametri.
+- ### **Le parti, la mia definizione dichiarata:** `psi_K = psi Q_K* Q_K^T` nodo per nodo *(`Q_K` = la base della semina `proiezione_K`, `tenuta_fondo.base_k`)*, `psi_R = psi - psi_K`. **`Q_K` calcolato prima, in un processo a parte** *(`01:06:55`-`01:07:28`)*: `12 x 2`, `E +0.2453383`, la molteplicita' `2`, `Q^dag Q - 1` `4.4e-16`, sha1 `55e6fb84`.
+- **I casi noti della lettura:** CN1 il totale = `M1658/c1/caduta_V2` al bit; CN2 `f_K y_K + f_R y_R = y`; CN3 le parti dallo stato `k 2000` = la serie al bit; CN4 `Q_K` ricalcolato = il file; **DEVE FALLIRE** CN2 con `1.1 Q_K`. ### **Non c'e' la V0 per parti** *(Luca ha deciso solo la V2)*: **le `a` per parte saranno GREZZE.**
+- **Il lanciatore rilanciato a mano** *(era uscito alle `00:58` con la coda vuota)*: dichiarato. **Le schede [M1751] FERME fino a domani di giorno.**
+
+## [M0100] LA CORSA CADUTA ALL'AVVIO, SUL MIO ASSERT: `reshape(n, 12)` E' LA CELLA, NON IL NODO *(`01:08:28` uscita `1`; la diagnosi `01:10` da `date`)* [[PROGETTO-MITOSI]]
+
+- **`caduta_parti.py corsa` (`551b2170`, sha1-BYTE `7afd9887`) e' caduta PRIMA del primo tick** sul controllo che avevo messo *(«`reshape(n, 12)` NON e' per nodo: FERMO»)*. **La cartella degli stati non e' nata** *(l'assert viene prima)*: in `M1658/c1_parti` c'e' solo `Q_K.npz`.
+- ### **La diagnosi** *(uno script di sola lettura nello scratchpad, sulla scena col solo `FS.carica`)*: `psi_h` e' `(157464, 2)`, `nodo` `(157464,)`, `n` `26244`: **SEI mezzi archi per nodo**, in ordine d'arco *(`nodo[:6]` = `0, 162, 0, 1, 0, 163`: i tre archi che PARTONO da `v`, coda e testa)*. **`reshape(n, 12)` raggruppa i tre archi uscenti da `v`: la CELLA `v`** *(il mattone su cui e' definita `A(K)`, `12 x 12`)*, **non i mezzi archi che toccano il nodo `v`**. Le densita' per cella e per nodo hanno la stessa somma *(`995010.893146391`)* e lo stesso massimo *(cella/nodo `12552`)*, ma differiscono punto per punto *(`max` `160.0` su `2821.4`)*.
+- ### **L'errore e' mio, nella carta** *(«`psi_K` nodo per nodo»)* **e nell'assert:** la proiezione della semina e' **per CELLA**, ed e' quella giusta. **La correzione** *(un commit a se', la v2)*: le parti per cella, il baricentro con la posizione del nodo `v` della cella; **il totale anche per cella** *(cosi' `f_K y_K + f_R y_R = y_cella` e' un'identita')*, e accanto il totale per nodo della serie *(CN1 resta)*.
+
+## [M0100] LA V2 PER CELLA PARTITA *(`d5fb4b27`; il lanciatore rilanciato a mano alle `01:14`; il primo stato `01:16` da `date`)* [[PROGETTO-MITOSI]]
+
+- **I controlli d'avvio passano** *(le forme; le code dei tre archi della cella `v` sono `v`)*. **Dal log:** `k 0`: `f_K 0.989818`, `y_K -0.25730`, `y_R -0.36350`, `y_T -0.25838`; `k 250`: `f_K 0.991746`, `y_K -0.25091`, `y_R -0.12031`, `y_T -0.24983`. *(`y_T` non parte da `0`: il `dxy` e' riferito al baricentro PER NODO di `FS.carica`; per una caduta conta la curvatura, non lo zero.)*
+- **La parte R e' l'`1%` della norma** *(dal log)*: il suo baricentro sara' rumoroso. **La lettura a fine corsa.**
