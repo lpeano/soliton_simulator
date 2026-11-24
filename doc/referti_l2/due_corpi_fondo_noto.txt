@@ -1,0 +1,32 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+==================================================================================================================================
+[M2330] I CASI NOTI (la carta sez. 3-quattuordecies)
+==================================================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 258, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 254, in main
+    return noto() if a.cosa == "noto" else corsa(a.quale)
+           ~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 147, in noto
+    ciclo(Z, C, P, Lp, X, 100, lambda kk, prima: None)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 115, in ciclo
+    MV, P0 = F1.TT.nucleo()
+             ~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\torneo_tenuta.py", line 56, in nucleo
+    assert P.__module__ == "materia_vuoto" and P.__code__.co_filename == os.path.abspath(MV.__file__), "pezzi NON e' quello del nucleo: FERMO"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: pezzi NON e' quello del nucleo: FERMO

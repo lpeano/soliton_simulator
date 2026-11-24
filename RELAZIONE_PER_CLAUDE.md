@@ -27298,3 +27298,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Le scelte:** la traslazione `(-24, +48)`, cioe' `41.57` lungo `y` *(40 esatti non si possono coi multipli di 3)*; il vuoto per prodotto col fondo `a phi_v` fittato lontano *(niente tick assoluto)*; `porto.campi` in tutte e tre; il tick `tick_chi_v2` *(la variante V1, con la fase (a))* dentro la forma `L-1`; i parametri verificati uguali a F-on, e `c0` della configurazione.
 - **I casi noti:** K1 *(kappa 0 = la tenuta del giro 4 al bit per 100 tick)*, K1-on *(si dichiara)*, K2 *(d1 = d2 a k 0)*, T.
+
+### 2026-11-24 -- [M2330] IL CASO NOTO CADE PRIMA DEI NUMERI: TT.nucleo() CHIAMATO DENTRO LA SCENA (ERRORE MIO); LA CORREZIONE IN due_corpi_fondo_v2.py [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo_noto.txt` *(cosi' com'e')*: `AssertionError: pezzi NON e' quello del nucleo: FERMO` in `torneo_tenuta.nucleo`, chiamato da `ciclo` **dentro** `TC.scena()`. Gli altri script *(`fondo_1c.caduta`, `fondo_puntofisso.corsa`)* lo chiamano **prima** della scena. Nessun numero e' uscito.
+- **La correzione:** `due_corpi_fondo_v2.py` prende `MV, P0` una volta, prima della scena, e li passa al ciclo. Il resto non cambia.
