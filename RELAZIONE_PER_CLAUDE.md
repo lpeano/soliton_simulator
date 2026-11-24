@@ -27262,3 +27262,37 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: le frecce crescono tutte nello stesso verso *(`50%`)*: **NO a vista** *(dominano le fluttuazioni)*; un accumulo vicino a `y_c +- L_y/4` *(`35%`)*: **NO**;
   - mie: le frecce cambiano verso con `y` *(`70%`)*: **NON SI DECIDE dalle frecce** *(la dipendenza da `y` si vede solo nella fase)*; nessun accumulo *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2330] IL MODELLO INTERO: LA CARTA (SEZ. 3-QUATTUORDECIES) E due_corpi_fondo.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Le scelte:** la traslazione `(-24, +48)`, cioe' `41.57` lungo `y` *(40 esatti non si possono coi multipli di 3)*; il vuoto per prodotto col fondo `a phi_v` fittato lontano *(niente tick assoluto)*; `porto.campi` in tutte e tre; il tick `tick_chi_v2` *(la variante V1, con la fase (a))* dentro la forma `L-1`; i parametri verificati uguali a F-on, e `c0` della configurazione.
+- **I casi noti:** K1 *(kappa 0 = la tenuta del giro 4 al bit per 100 tick)*, K1-on *(si dichiara)*, K2 *(d1 = d2 a k 0)*, T.
+
+### 2026-11-24 -- [M2330] IL CASO NOTO CADE PRIMA DEI NUMERI: TT.nucleo() CHIAMATO DENTRO LA SCENA (ERRORE MIO); LA CORREZIONE IN due_corpi_fondo_v2.py [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo_noto.txt` *(cosi' com'e')*: `AssertionError: pezzi NON e' quello del nucleo: FERMO` in `torneo_tenuta.nucleo`, chiamato da `ciclo` **dentro** `TC.scena()`. Gli altri script *(`fondo_1c.caduta`, `fondo_puntofisso.corsa`)* lo chiamano **prima** della scena. Nessun numero e' uscito.
+- **La correzione:** `due_corpi_fondo_v2.py` prende `MV, P0` una volta, prima della scena, e li passa al ciclo. Il resto non cambia.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v2: K1 FALLISCE (kappa 0 NON RIFA' LA TENUTA); (T) MASSE AL BIT FALLISCE (IL CASO NOTO ERA SBAGLIATO: UNA SOMMA PERMUTATA, 1 ulp); K2 PASSA; IL FONDO DEL VUOTO FITTATO MALE (RESIDUO 0.107); m0 NEGATIVO [[PROGETTO-MITOSI]]
+
+- **Il referto della v2** `doc/referti_l2/due_corpi_fondo_noto.txt`: 3 DEVE su 5.
+- **(K1) FALLISCE:** `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` contro la tenuta del giro 4 a `k 100`. Diverse: `Lambda`, `phi_h`, `psi_h`, `rho`, `A`, `E`. **La causa candidata, dal codice:** `chi_parametri_v2.parametri_v2` chiama `Z["metti"](stato)`, che rimette il motore e perde i link `U` scritti da `fondo_suite_v2.carica` con `scrivi_U` *(con `A != 0`)*. **La v3 riscrive `U` dopo i parametri.**
+- **(T) masse uguali al bit: FALLISCE, ma l'errore e' nel caso noto:** `995010.893149807` contro `995010.8931498068`. La somma di un array permutato non e' uguale al bit. **Non lo correggo:** lo dichiaro.
+- **(K2) d2 = d1 a `k 0` al bit: PASSA** *(`5793c58a9c2d`)*. **La traslazione e la sua inversa:** PASSA.
+- **DUE FATTI DA RIFERIRE** *(numeri, non giudizi)*:
+  - **il vuoto lontano dell'oggetto NON e' `a phi_v`:** il residuo del fit a `d > 45` e' medio `0.107`, massimo `0.398`. Col vuoto per prodotto, **`phi` vicino ad A** *(`d < 20`)* **cambia fino al `36%`**;
+  - **`m0` e' NEGATIVO:** `-5.787` per l'oggetto solo, `c0 = kappa m0 = -1.46e-03`; per la coppia `c0 = -2.19e-03`. In F-on *(il mattone alla cima)* era `m0 +8.69`, `c0 +2.20e-03`. **La sorgente di chi ha il segno opposto.**
+- **K1-on** *(chi acceso, si dichiara)*: `max |psi - psi(tenuta)| 3.854` *(su `max |psi| 17.84`)*.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v3: K1 PASSA (U RISCRITTO: LA CAUSA ERA QUELLA); 4 DEVE SU 5, IL QUINTO E' IL CASO NOTO SBAGLIATO DELLE MASSE; LE TRE CORSE IN CODA; [M2345] IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_noto.txt`, dalla v3. **(K1) PASSA:** con `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` = la tenuta del giro 4 a `k 100` **AL BIT** *(le chiavi, `A`, `E`)*. **La causa del fallimento della v2 era la perdita di `U` in `parametri_v2`.**
+- **(K2) e la traslazione:** PASSANO. **(T) masse al bit:** fallisce di `1 ulp`, ma e' il caso noto a essere sbagliato *(dichiarato nel paragrafo precedente)*.
+- **K1-on** *(si dichiara)*: con chi acceso dopo `100` tick `max |psi - psi(tenuta)| 3.854` *(su `17.84`)*: **chi cambia l'oggetto gia' in 100 tick.**
+- **La coda:** `M2330_d1`, `M2330_d2`, `M2330_d3` a priorita' `1`, `due_corpi_fondo_v3.py corsa`, scritte a lanciatore fermo *(dalle `22:34:39`)*, in questo commit. Il rilancio a mano dopo.
+- **[M2345]** *(il ramo `guardiano` e la posta)* **e' arrivato a meta' lavoro:** in coda, dopo il lancio.
+
+### 2026-11-24 -- [M2330] d1, d2, d3 PARTITE: IL LANCIATORE RILANCIATO A MANO (DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, dopo `3f21445b`. L'ora e' la prima riga dell'uscita del lanciatore. Gli APERTO sono nel registro, in questo commit.
