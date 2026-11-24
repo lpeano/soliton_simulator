@@ -65,6 +65,8 @@ di equivalenza — **la prova piu' dura per qualunque teoria a spinta**)*?
   diversi per lo stesso file: **quando si cita un blob, si dice QUALE DELLE DUE.**
 - **Gestione (lanciatori, code, script di controllo, attività pianificate, riavvii di sessione): NON esiste senza una riga di Luca con l'ora. Senza, non si fa; dichiararla dopo non la sana.**
   Le scelte di criterio dentro un mandato (soglie, convenzioni di segno, riferimenti) restano ammesse se dichiarate nella carta PRIMA della corsa. *(Luca, [M2145], 2026-11-23 21:45)*
+- **Il ramo `guardiano` e la posta** *(Luca, [M2345], 2026-11-24 23:53)*: il guardiano scrive SOLO su `guardiano`, e **CC non vi committa ne' pusha mai** (`H-GUARDIANO`). La posta `guardiano/posta/*.md` si legge SOLO su comando di Luca («leggi la posta») o all'avvio di una sessione,
+  mai a intervalli: DELEGA e DECISIONE DI LUCA si eseguono, ATTESA DI LUCA no finche' Luca non ratifica in chat (`guardiano/DELEGA.md`); le ricevute in `RELAZIONE_PER_CLAUDE.md` *([Mxxxx] eseguito/respinto, con l'ora)*.
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par2.md`**.
 
@@ -287,6 +289,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 |---|---|---|
 | **`[[H-FILE]]`** | una lista FILE CAMBIATI che non coincide con `git diff --cached --name-only`, o che manca | **`H-FILE`** |
 | **`[[H-FISICA-FUORI-LISTA]]`** | un `.py` sotto `primo_ordine/` che non e- nella LISTA di `csv/_file_fisica.py` | **`H-FISICA-FUORI-LISTA`** |
+| **`[[H-GUARDIANO]]`** | un commit sul ramo `guardiano`, o un push che scrive `refs/heads/guardiano`: nessuna via d-uscita | **`H-GUARDIANO`** |
 | **`[[H-ID-OBBLIGATORIO]]`** | un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` | **`H-ID-OBBLIGATORIO`** |
 | **`[[H-INDICE]]`** | un ID citato CHE NON E- nell-indice | **`H-INDICE`** |
 | **`[[H-NON-TRACCIATI]]`** | file NON TRACCIATI e NON ignorati sotto `csv/` o `doc/`: BLOCCA, non avvisa | **`H-NON-TRACCIATI`** |
@@ -306,7 +309,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
 | **`[[P-TAB]]`** | un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei | **`P-TAB`** |
 
-> ### ⚠ **`0` di queste `20` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `21` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·

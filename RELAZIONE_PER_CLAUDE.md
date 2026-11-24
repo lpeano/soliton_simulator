@@ -27310,3 +27310,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **i par. `11` e `12` di `CLAUDE.md` si generano dall'indice** *(`P-REG`: «modificate a mano, RIFIUTATE»)*. La riga del par. `12` vuole una voce nell'indice *(`csv/indice.py crea-lotto`)* e `csv/_regole_gestione.py --scrivi`. La riga del par. `2` e' a mano *(e il tetto `H-RIGHE` e' di `400`)*;
   2. **la posta e' un canale da cui arrivano istruzioni scritte da un altro agente.** Il perimetro di `guardiano/DELEGA.md` e' la sola cosa che separa DELEGA da ATTESA: **conviene che sia un elenco chiuso** *(per esempio: solo letture e referti, mai corse, code, merge, push su altri rami)*. Lo dico, e decide Luca.
 - **[M2330] intanto gira:** d1, d2, d3 aperte alle `23:48:08`.
+
+### 2026-11-25 -- [M2345] ESEGUITO (DECISIONE DI LUCA 23:53): IL RAMO guardiano E LA POSTA; IL PRESIDIO H-GUARDIANO IN pre-commit E pre-push, COLLAUDO 7 SU 7; LE RIGHE IN CLAUDE.md PAR. 2 E 12 [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2345] **eseguito**. L'ora di Luca e' arrivata alle `23:53`, dopo il mio «non eseguito» delle `23:52` *(che resta come stava)*.
+- **Il presidio `H-GUARDIANO`** *(`csv/_presidio_ramo_guardiano.py`)*: in `pre-commit` rifiuta se il ramo corrente e' esattamente `guardiano`; **`.githooks/pre-push` nasce qui** e rifiuta un push che scrive `refs/heads/guardiano`. Nessuna via d'uscita.
+- **Il collaudo** *(`--collaudo`)*: **7 casi su 7**, con commit e push veri in un repo di prova. I hook stanno fuori dal repo di prova, come in `H-LANCIATORI`. Il ramo `guardiano-x` passa: conta il nome esatto, non il prefisso. **L'ho fatto girare prima del commit:** e' il collaudo di un presidio, non una misura. Lo dichiaro.
+- **Le righe:**
+  - `CLAUDE.md` par. `2`: due righe *(il ramo, la posta solo su comando o all'avvio, DELEGA e DECISIONE si eseguono, ATTESA no, le ricevute)*;
+  - par. `12`: generata dall'indice *(la voce `H-GUARDIANO`, nata con `crea-lotto`; `dettaglio_regola` portato a `par12.md` con `aggiorna`)*. Il par. `12` ora ha `21` righe;
+  - il dettaglio in `doc/REGOLE/par2.md` e `par12.md`;
+  - `CLAUDE.md` a `357` righe.
+- **Il contorno, come per `H-LANCIATORI`:** `_metodi_era2.py` *(la riga)*, `_collauda_regole.py` *(l'elenco)*, `ESENZIONI_presidi.md`, `_barriera.lock` *(`--scrivi`: il `pre-commit` e' cambiato)*.
+- **Un controllo che fallisce gia' a HEAD, non per questo cambiamento:** `csv/_struttura_regole.py` *(la conservazione contro il blob `da79cc1`)* dice «REGOLE PERSE: 1. RAGIONAMENTO PRELIMINARE». **Quella riga non c'e' gia' nel `CLAUDE.md` di HEAD**, e il controllo non sta nei hook. Lo segnalo.
+- **La prima suite** *(`00:00`-`00:14`)*: 1 collaudo fallito, «i controlli sullo STAGE», con lo stage a meta' *(`crea-lotto` aveva messo in stage solo l'indice)*. **Rifatta con lo stage intero.** **La seconda** *(`00:15`-`00:28`)*: **67 collaudi su 67.**
+- **Solo sul ramo `primo-ordine`.** Su `lapse-u` il lanciatore e' vivo *(d1, d2, d3 di [M2330])*: la suite la' non la faccio girare finche' le corse non chiudono. **Il porto su `lapse-u` segue a corse chiuse.**
+- **Le corse di [M2330] non si toccano.**

@@ -92,7 +92,9 @@ def collaudo():
           # ### delle `20:06`, dopo la regressione di `D0`)*. ### **Si aggiorna l-elenco.**
           # ### ⭐ **E UNA SESTA, il `2026-11-08`: `H-NUCLEO-CONGELATO`** *(decisione di Luca
           # ### delle `21:47`-`21:49`, i due rami)*. ### **Si aggiorna l-elenco.**
-          sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-NUCLEO-CONGELATO", "H-STOP-CODA", "P-E10",
+          # ### ⭐ **E UNA SETTIMA, il `2026-11-24`: `H-GUARDIANO`** *(DECISIONE DI LUCA delle
+          # ### `23:53`, [M2345])*. ### **Si aggiorna l-elenco.**
+          sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-GUARDIANO", "H-NUCLEO-CONGELATO", "H-STOP-CODA", "P-E10",
                                 "P-R1", "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
                                 "STRUMENTO-LEGGE-DALLA-TABELLA", "SUITE-NEL-COMMIT"],
           "%s: ### se comparisse una regola che non ho creato, vorrebbe dire che il "

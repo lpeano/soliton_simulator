@@ -16,7 +16,7 @@
 | `INFRASTRUTTURA` | `ENTRAMBE` | 24 |
 | `METODO` | `1` | 156 |
 | `METODO` | `2` | 28 |
-| `METODO` | `ENTRAMBE` | 95 |
+| `METODO` | `ENTRAMBE` | 96 |
 
 | id | classe | dominio | era | stato | blocca | titolo |
 |---|---|---|---|---|---|---|
@@ -421,6 +421,7 @@
 | `H-ETC-2` | PRESIDIO | METODO | 1 | ### **SOSPESA** |  | PRESIDIO PROPOSTO E NON CABLATO: permutare le cinque leggi deve dare lo STESSO s |
 | `H-FILE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | la lista FILE CAMBIATI nel messaggio e verificata da una macchina: il decimo hoo |
 | `H-FISICA-FUORI-LISTA` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-FISICA-FUORI-LISTA: un .py sotto la cartella dell'era 2 che NON e' nella LISTA |
+| `H-GUARDIANO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un commit sul ramo guardiano o un push che scrive refs/heads/ |
 | `H-ID-OBBLIGATORIO` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | H-ID-OBBLIGATORIO: un commit che tocca la fisica o un referto CITA almeno un ID  |
 | `H-INDICE` | PRESIDIO | METODO | ENTRAMBE | ### **APERTA** |  | PRESIDIO DEL HOOK: un ID citato in un documento vivo o nel messaggio che non e'  |
 | `H-INDICE-IGNORA-I-VOCABOLARI` | DIFETTO | METODO | ENTRAMBE | ### **CHIUSA** |  | H-INDICE legge solo le voci: un ID di legge, variabile, assioma o decisione risu |
