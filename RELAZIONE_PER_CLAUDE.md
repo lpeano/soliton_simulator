@@ -27121,3 +27121,28 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - del guardiano: K nella prima finestra fra `0.95` e `1.00` *(`70%`)*: **di poco NO** in tutte e due le convenzioni. Pesata `1.0001`-`1.0017` *(sopra `1.00`, entro l'errore `+- 0.009`-`0.010`)*; al centro `0.9422`-`0.9438` *(sotto `0.95`)*. K costante entro il `5%` su tutte le finestre *(`55%`)*: **NO** *(da `1.00` a `0.77`)*;
   - mie: le tre K pesate piu' vicine fra loro di quelle al centro *(`55%`)*: **SI'** *(`0.07%` contro `0.13%`)*. La K pesata a `x1` entro il `10%` di K CIMA di 1c *(`0.7707`)* *(`40%`)*: **NO** *(`0.9002`)*.
 - **Aperto:** `m*` e' quello di 1c; l'oggetto nuovo ha un altro `w`. **Decide Luca** se misurarne il `m*` con due calci.
+
+
+### 2026-11-24 -- [M2045] LE LETTURE SULLE CADUTE DI B3: LA CARTA (SEZ. 3-NONIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La premessa:** **B3 non ha salvato gli stati**, solo la serie. La quinta colonna e' gia' `<dN/dy>` pesato alla posizione raggiunta, quindi le quattro letture si fanno da li'.
+- **Le scelte:** `v` della V2 meno quella della V0; `m*(p)` da `dp/dv` di `ep_fondo.txt`, interpolato linearmente; `m*(0)` = il primo punto.
+- **Le previsioni mie:** il gradiente spiega meno del `5%` *(`85%`)*; il riscalamento peggiora il calo *(`75%`)*, perche' `dp/dv` scende con `p`.
+
+### 2026-11-24 -- [M2045] LE LETTURE SULLE CADUTE DI B3: IL GRADIENTE RAGGIUNTO SPIEGA FRA LO 0.68 E IL 2.22 PER CENTO DEL CALO; m*(p) LO PEGGIORA; A PARITA' DI v K DIPENDE DALLA FINESTRA, CIOE' DAL TEMPO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v2c.txt` *(`legge_fondo_v2c.py`)*. **Il caso noto:** 3 su 3 *(K pesata `x1 [200, 800]` `1.001403`; al centro `0.943535`; `dp/dv` al primo punto `19.0360`)*.
+- **(i) il gradiente alla posizione raggiunta:**
+  - a `k 2000` il baricentro e' sceso di `0.6193` *(x0.5)*, `1.3287` *(x1)* e `2.7417` *(x2)*;
+  - `<dN/dy>(2000)/<dN/dy>(0)` vale `0.99771`, `0.99638`, `0.99089`;
+  - dalla prima all'ultima finestra il gradiente medio cala dello `0.155%`, `0.231%`, `0.550%`, mentre K al centro cala del `22.81%`, `23.43%`, `24.77%`;
+  - **il gradiente spiega lo `0.68%`, lo `0.99%` e il `2.22%` del calo.**
+- **(ii) K contro `v`** *(`v` della V2 meno V0)*. **A `v` quasi uguale, K dipende dalla finestra:**
+  - `v` `3.75e-04` *(x1, `[200, 800]`)*: K `1.0014`; `v` `3.94e-04` *(x0.5, `[800, 1400]`)*: K `0.8943`;
+  - `v` `7.48e-04` *(x2, `[200, 800]`)*: K `1.0001`; `v` `7.89e-04` *(x1, `[800, 1400]`)*: K `0.8979`.
+  - **LA LETTURA, post-hoc e dichiarata:** il calo di K segue il **tempo dalla partenza**, non la velocita' raggiunta ne' lo spostamento *(x2 a `k 800` e' sceso di `0.4475`, x0.5 a `k 1400` di meno, e ha la K piu' bassa)*.
+- **(iii) `m*(p)`:** `p` della caduta fra `0.0036` e `0.0445`; `R` fra `1.00000` e `1.01778`. **`R >= 1`, quindi `K/R <= K`: il riscalamento PEGGIORA il calo** *(K/R da `0.7434` a `1.0017`; il massimo scarto da `1` e' `0.2566`)*.
+- **(iv) `a(V0)`:** su `[200, 2000]` `-1.0911e-08 +- 2.1e-10`; per finestra `-6.24e-09`, `-1.19e-08`, `-9.8e-10` *(`+- 3e-09`)*. **Piccola rispetto a `a - a(V0)`** *(da `3e-07` a `1.5e-06`)* **e senza un andamento** che segua il calo.
+- **Le previsioni:**
+  - del guardiano: il gradiente spiega meno del `5%` *(`65%`)*: **SI'** *(`0.68%`-`2.22%`)*; K riscalata entro il `10%` di `1` su tutte le finestre *(`45%`)*: **NO** *(`0.7434`-`1.0017`)*;
+  - mie: meno del `5%` *(`85%`)*: **SI'**; il riscalamento peggiora *(`75%`)*: **SI'**.
