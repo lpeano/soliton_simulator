@@ -2534,6 +2534,15 @@
     "corsa"
    ],
    "note": "[M1748] (DECISIONE DI LUCA (17:48)) il punto fisso v3b: P = 2 (k_min - k_max) sulla w lisciata, tre giri di 6000 tick dallo stato finale del giro 3 della v2, stati ogni 100"
+  },
+  {
+   "nome": "M1932_puntofisso_v3b4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_v3b4.py",
+    "corsa"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) il quarto giro della v3b: 6000 tick da giro_3/stato_006000, w ogni 100, lo stesso metodo"
   }
  ]
 }

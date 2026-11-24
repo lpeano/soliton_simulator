@@ -27101,3 +27101,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le fasce:** `< 0.05` PASSA; `0.05`-`0.08` compresi RESIDUO, B3 parte e il respiro si dichiara; `> 0.08` FERMO.
 - **Il caso noto:** 4 DEVE, gira dopo questo commit.
 - **Le previsioni mie:** il giro 4 sotto il `5%` `45%`, sotto l'`8%` `80%`.
+
+### 2026-11-24 -- [M1932] IL CASO NOTO DEL QUARTO GIRO PASSA: 4 DEVE SU 4; LA VOCE IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4_noto.txt`. (a) il giro 3 `0.0582` cade in RESIDUO; (b) i bordi delle fasce; (c) DEVE FALLIRE, `0.0801` non e' RESIDUO; (d) la partenza `giro_3/stato_006000.npz`, con lo sha1 che coincide.
+- **Le masse:** v1 `995010.893146391`, partenza del giro 4 `995010.893149807`.
+- **La coda:** `M1932_puntofisso_v3b4` a priorita' `1`, nello stesso commit, scritta a lanciatore fermo *(chiuso alle `19:25:24`)*. Il rilancio a mano dopo il commit.
