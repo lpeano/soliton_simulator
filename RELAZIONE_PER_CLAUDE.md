@@ -27232,3 +27232,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Una corrente di `phi` gia' in uso non c'e'** *(`anemometro.J_di` e' quella della materia)*. **La mia:** `J_phi = rho_phi d theta/dy`, con `theta` la fase acquistata da `k 0` della stessa corsa. Cosi' non serve il tick assoluto. `d/dy` esatto coi nodi a `+- sqrt3` lungo `y`. `v_phi = <J>/<rho>` ha le dimensioni di un numero d'onda: la riserva e' dichiarata.
 - **Il criterio per B, fissato prima:** in r1 `J - J(V0)` contro `k` con la pendenza a piu' di `3` sigma e `R^2 > 0.9`.
+
+### 2026-11-24 -- [M2245-A] IL PRIMO CASO NOTO FALLISCE: J_phi DI k 0 RISPETTO A SE STESSO -3.3e-21, NON 0 AL BIT (IL PRODOTTO COMPLESSO DI numpy); 3 DEVE SU 4; LA CORREZIONE IN UN FILE NUOVO [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/vento_vuoto.txt` *(si committa cosi' com'e')*: 3 DEVE su 4. **Fallisce «`J_phi` di `k 0` rispetto a se stesso = `0` AL BIT»:** a `k 0` `J` vale `-3.3452e-21`.
+- **La causa:** `np.conj(a) * a` col prodotto complesso di numpy non da' una parte immaginaria esattamente nulla. Il prodotto scritto in reali la da': `ar ai - ai ar = 0` in IEEE.
+- **La correzione** va in `vento_vuoto_v2.py` *(lo script e' usato)*: `Z` col prodotto in reali. Le letture non le riporto finche' i casi noti non passano.
