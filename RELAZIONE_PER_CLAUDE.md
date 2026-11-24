@@ -26902,3 +26902,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **I controlli d'avvio passano** *(le forme; le code dei tre archi della cella `v` sono `v`)*. **Dal log:** `k 0`: `f_K 0.989818`, `y_K -0.25730`, `y_R -0.36350`, `y_T -0.25838`; `k 250`: `f_K 0.991746`, `y_K -0.25091`, `y_R -0.12031`, `y_T -0.24983`. *(`y_T` non parte da `0`: il `dxy` e' riferito al baricentro PER NODO di `FS.carica`; per una caduta conta la curvatura, non lo zero.)*
 - **La parte R e' l'`1%` della norma** *(dal log)*: il suo baricentro sara' rumoroso. **La lettura a fine corsa.**
+
+## [M0118-00] LA CONVENZIONE DELLA CIMA: K(1c) `0.7707`, K(a2) `0.8489`, la prima finestra `0.9386`; S3 ancora uguali entro lo `0.46%` *(2026-11-24, `01:24`-`01:27` da `date`)* [[PROGETTO-MITOSI]]
+
+- **La carta** *(sez. `2-sexies`, l'annotazione, `6a3e2aca`)*: **«lo zero dal vuoto lontano era una scelta di CC; la convenzione della sagoma e' quella della cima».** `grad omega` CIMA = `omega_psi(N1) dN/dy`, `omega_psi(N1)` = `+0.0939180` *(l'orologio V2 di 1c a `N 1`)*; VUOTO = `d Delta/dN` `+0.559784`; **il rapporto delle K CIMA/VUOTO = `5.9603`**. *(Nella carta avevo scritto l'ora `01:28` a stima: corretta a `01:24` da `date` prima del commit.)*
+- ### **Dai referti** *(`fondo_s3.txt`, `eotvos_fondo.txt`: le v2 AGGIUNTE sotto, i vecchi numeri restano)*: **S3 CIMA su `[200, 2000]`:** `x0.5` `+0.7673`, `x1` `+0.7707`, `x2` `+0.7744`, la media `+0.7708`, lo scarto `0.46%`. **K(a2) CIMA `+0.8489 +- 0.0029`.** **Le finestre (x1, CIMA):** `[200, 800]` `+0.9386`, `[800, 1400]` `+0.7924`, `[1400, 2000]` `+0.5145`.
+- **Le previsioni del guardiano:** K(1c) `0.77` -- **SI'**; K(a2) `0.85` -- **SI'**; la prima finestra `0.94` -- **SI'**; le tre di S3 entro l'`1%` -- **SI'** *(era aritmetica, come diceva)*.
+- ### **Una cosa nei numeri, POST-HOC e dichiarata:** **nella prima finestra 1c e a2 cadono quasi uguale** *(`a - a(V0)` `+7.3353e-07` contro `+7.3247e-07`)*; **a2 si spegne piu' piano** *(`[1400, 2000]` `+5.9359e-07` contro `+4.0205e-07`)*. **L'eta `0.1115` su `[200, 2000]` viene quasi tutta dalla coda.** Non ho calcolato l'eta per finestra: si puo' su richiesta.
+- **Le incertezze delle K nelle v2 vengono dalle sole `a`** *(non da `m*`)*: dichiarato nel commit.

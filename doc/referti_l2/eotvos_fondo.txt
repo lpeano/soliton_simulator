@@ -14,3 +14,30 @@
 ### K(a2)/K(1c) 1.1015; K(a2) - K(1c) +0.0131 +- 0.0009
 ### eta = 2 |a1 - a2|/(a1 + a2) = 0.1115 +- 0.0064 (a_i = a - a(V0))
 ==================================================================================================================================
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] eotvos_fondo.py  sha1-BYTE d6861ad6  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] eotvos_fondo_v2.py  sha1-BYTE 4d5063d8  committato e pulito
+==================================================================================================================================
+[M0118-00] L'EOTVOS AL FONDO A K NELLE DUE CONVENZIONI (la carta sez. 2-sexies, l'annotazione): VUOTO e CIMA
+==================================================================================================================================
+  d Delta/dN +0.559784 (VUOTO); omega_psi(N1) +0.0939180 (CIMA, l'orologio V2 di 1c a N 1)
+  1c (massa 1): m* +18.9162 +- 0.0448; omega del suo calcio a k 0 +0.0938973
+    [ 200, 2000]: a - a(V0) +6.0229e-07 +- 3.2e-09;   K VUOTO +0.1293 +- 0.0007;   K CIMA +0.7707 +- 0.0041;   (CIMA con l'omega proprio +0.7709 +- 0.0041)
+    [ 200,  800]: a - a(V0) +7.3353e-07 +- 7.5e-09;   K VUOTO +0.1575 +- 0.0016;   K CIMA +0.9386 +- 0.0096;   (CIMA con l'omega proprio +0.9388 +- 0.0096)
+    [ 800, 1400]: a - a(V0) +6.1926e-07 +- 1.5e-08;   K VUOTO +0.1329 +- 0.0031;   K CIMA +0.7924 +- 0.0186;   (CIMA con l'omega proprio +0.7926 +- 0.0186)
+    [1400, 2000]: a - a(V0) +4.0205e-07 +- 2.0e-08;   K VUOTO +0.0863 +- 0.0042;   K CIMA +0.5145 +- 0.0251;   (CIMA con l'omega proprio +0.5146 +- 0.0251)
+  a2 (massa 4): m* +18.6350 +- 0.0367; omega del suo calcio a k 0 +0.0940053
+    [ 200, 2000]: a - a(V0) +6.7340e-07 +- 2.3e-09;   K VUOTO +0.1424 +- 0.0005;   K CIMA +0.8489 +- 0.0029;   (CIMA con l'omega proprio +0.8481 +- 0.0029)
+    [ 200,  800]: a - a(V0) +7.3247e-07 +- 1.4e-08;   K VUOTO +0.1549 +- 0.0030;   K CIMA +0.9234 +- 0.0177;   (CIMA con l'omega proprio +0.9225 +- 0.0177)
+    [ 800, 1400]: a - a(V0) +6.7874e-07 +- 2.6e-08;   K VUOTO +0.1436 +- 0.0055;   K CIMA +0.8556 +- 0.0328;   (CIMA con l'omega proprio +0.8548 +- 0.0328)
+    [1400, 2000]: a - a(V0) +5.9359e-07 +- 3.4e-08;   K VUOTO +0.1255 +- 0.0072;   K CIMA +0.7483 +- 0.0431;   (CIMA con l'omega proprio +0.7476 +- 0.0430)
+### eta (non dipende dalla convenzione) = 0.1115 +- 0.0064 (a_i = a - a(V0) su [200, 2000])
+==================================================================================================================================
