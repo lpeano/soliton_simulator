@@ -27303,3 +27303,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Il referto** `doc/referti_l2/due_corpi_fondo_noto.txt` *(cosi' com'e')*: `AssertionError: pezzi NON e' quello del nucleo: FERMO` in `torneo_tenuta.nucleo`, chiamato da `ciclo` **dentro** `TC.scena()`. Gli altri script *(`fondo_1c.caduta`, `fondo_puntofisso.corsa`)* lo chiamano **prima** della scena. Nessun numero e' uscito.
 - **La correzione:** `due_corpi_fondo_v2.py` prende `MV, P0` una volta, prima della scena, e li passa al ciclo. Il resto non cambia.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v2: K1 FALLISCE (kappa 0 NON RIFA' LA TENUTA); (T) MASSE AL BIT FALLISCE (IL CASO NOTO ERA SBAGLIATO: UNA SOMMA PERMUTATA, 1 ulp); K2 PASSA; IL FONDO DEL VUOTO FITTATO MALE (RESIDUO 0.107); m0 NEGATIVO [[PROGETTO-MITOSI]]
+
+- **Il referto della v2** `doc/referti_l2/due_corpi_fondo_noto.txt`: 3 DEVE su 5.
+- **(K1) FALLISCE:** `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` contro la tenuta del giro 4 a `k 100`. Diverse: `Lambda`, `phi_h`, `psi_h`, `rho`, `A`, `E`. **La causa candidata, dal codice:** `chi_parametri_v2.parametri_v2` chiama `Z["metti"](stato)`, che rimette il motore e perde i link `U` scritti da `fondo_suite_v2.carica` con `scrivi_U` *(con `A != 0`)*. **La v3 riscrive `U` dopo i parametri.**
+- **(T) masse uguali al bit: FALLISCE, ma l'errore e' nel caso noto:** `995010.893149807` contro `995010.8931498068`. La somma di un array permutato non e' uguale al bit. **Non lo correggo:** lo dichiaro.
+- **(K2) d2 = d1 a `k 0` al bit: PASSA** *(`5793c58a9c2d`)*. **La traslazione e la sua inversa:** PASSA.
+- **DUE FATTI DA RIFERIRE** *(numeri, non giudizi)*:
+  - **il vuoto lontano dell'oggetto NON e' `a phi_v`:** il residuo del fit a `d > 45` e' medio `0.107`, massimo `0.398`. Col vuoto per prodotto, **`phi` vicino ad A** *(`d < 20`)* **cambia fino al `36%`**;
+  - **`m0` e' NEGATIVO:** `-5.787` per l'oggetto solo, `c0 = kappa m0 = -1.46e-03`; per la coppia `c0 = -2.19e-03`. In F-on *(il mattone alla cima)* era `m0 +8.69`, `c0 +2.20e-03`. **La sorgente di chi ha il segno opposto.**
+- **K1-on** *(chi acceso, si dichiara)*: `max |psi - psi(tenuta)| 3.854` *(su `max |psi| 17.84`)*.

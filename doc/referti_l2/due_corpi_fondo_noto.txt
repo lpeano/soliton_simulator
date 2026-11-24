@@ -10,23 +10,16 @@
 [TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
 [TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
 [TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
 ==================================================================================================================================
 [M2330] I CASI NOTI (la carta sez. 3-quattuordecies)
 ==================================================================================================================================
-Traceback (most recent call last):
-  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 258, in <module>
-    sys.exit(main(sys.argv[1:]))
-             ~~~~^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 254, in main
-    return noto() if a.cosa == "noto" else corsa(a.quale)
-           ~~~~^^
-  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 147, in noto
-    ciclo(Z, C, P, Lp, X, 100, lambda kk, prima: None)
-    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\due_corpi_fondo.py", line 115, in ciclo
-    MV, P0 = F1.TT.nucleo()
-             ~~~~~~~~~~~~^^
-  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\torneo_tenuta.py", line 56, in nucleo
-    assert P.__module__ == "materia_vuoto" and P.__code__.co_filename == os.path.abspath(MV.__file__), "pezzi NON e' quello del nucleo: FERMO"
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: pezzi NON e' quello del nucleo: FERMO
+  DEVE: (K1) kappa 0, i campi dello stato, 100 tick nella forma L-1 = la tenuta del giro 4 a k 100 AL BIT (le chiavi, A, E) ### FALLISCE diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'A', 'E']
+  (K1-on, si dichiara) chi acceso, 100 tick: max |psi - psi(tenuta)| 3.854e+00 (max |psi| 1.784e+01); m0 -5.786643e+00, c0 -1.463410e-03
+  la coppia: la traslazione [-24, 48]; a del fondo +0.987699+0.156418i; il residuo del fondo (d > 45) medio 1.071e-01, massimo 3.983e-01; phi vicino ad A (d < 20) cambiato al massimo di 3.620e-01; le masse [995010.893149807, 995010.8931498068]; il centro [67.44762210036073, 103.72276850790288]; P on kappa 2.5289441539e-04, c0 -2.1945030485e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001
+  DEVE: (T) le masse dei due oggetti uguali AL BIT                                                           ### FALLISCE [995010.893149807, 995010.8931498068]
+  DEVE: (T) la traslazione e la sua inversa = l'identita' AL BIT                                             PASSA 
+  DEVE: (T) DEVE FALLIRE: rho della coppia simmetrico per T (rho(T v) = rho(v)) -- non lo e', i corpi sono due PASSA 
+  DEVE: (K2) d2 a k 0 = d1 a k 0 AL BIT (l'impronta: le chiavi, A, E, chi, pi, Theta)                        PASSA 5793c58a9c2d 5793c58a9c2d
+### 5 DEVE: 3 PASSANO, 2 FALLISCONO ['(K1) kappa 0, i campi dello stato, 100 tick nella forma L-1 = la tenuta del giro 4 a k 100 AL BIT (le chiavi, A, E)', '(T) le masse dei due oggetti uguali AL BIT']
+==================================================================================================================================
