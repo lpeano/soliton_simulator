@@ -2543,6 +2543,56 @@
     "corsa"
    ],
    "note": "[M1932] (DECISIONE DI LUCA (19:32)) il quarto giro della v3b: 6000 tick da giro_3/stato_006000, w ogni 100, lo stesso metodo"
+  },
+  {
+   "nome": "M1932B3_V0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V0"
+  },
+  {
+   "nome": "M1932B3_x0.5",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "0.5"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 0.5"
+  },
+  {
+   "nome": "M1932B3_x1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 1.0"
+  },
+  {
+   "nome": "M1932B3_x2.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "2.0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 2.0"
   }
  ]
 }
