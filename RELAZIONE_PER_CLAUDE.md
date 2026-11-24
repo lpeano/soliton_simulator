@@ -27358,3 +27358,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Solo sul ramo `primo-ordine`.** Su `lapse-u` il lanciatore e' vivo *(d1, d2, d3 di [M2330])*: la suite la' non la faccio girare finche' le corse non chiudono. **Il porto su `lapse-u` segue a corse chiuse.**
 - **Le corse di [M2330] non si toccano.**
 - **Il commit** *(`8d58d7de` su `primo-ordine`)* **e' entrato al terzo tentativo:** `H-FILE` voleva i due file rigenerati dai hook *(`doc/COLLAUDO_presidio_indice.txt`, `doc/indice/_controlli.txt`)*; `H-INDICE` voleva la dichiarazione per `H-LANCIATORI`, che e' nell'indice di `lapse-u` e non di `primo-ordine`.
+
+### 2026-11-25 -- [M2330] d1, d2, d3 CHIUSE (00:51:52-00:51:58, USCITA 0): 25 STATI E LA SERIE PER CORSA [[PROGETTO-MITOSI]]
+
+- **Le chiusure sono nel registro.** Ogni corsa ha `stato_000000` .. `stato_006000` *(`25`)* e `serie.json` con lo sha1, in `E:/soliton_simulator/controllo/M2330/<d>/`.
+- **Il prossimo passo:** la carta e lo script delle letture (i)-(v) *(`due_corpi_fondo.txt`)*, poi l'animazione, poi il porto di `H-GUARDIANO` su `lapse-u` *(il lanciatore e' fermo: la suite si puo' fare)*.
