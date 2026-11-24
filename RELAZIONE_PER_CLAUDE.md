@@ -27005,3 +27005,27 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. la finestra **che finisce** al minimo, `[k_min - periodo, k_min]` = `[0, 4500]`;
   2. un giro piu' lungo *(almeno `9000` tick)*;
   3. il periodo dal massimo al minimo della lisciata, moltiplicato per due.
+
+
+### 2026-11-24 17:52 -- [M1748] IL PUNTO FISSO v3b: LA CARTA (SEZ. 3-SEXIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Di Luca:** `P = 2 (k_min - k_max)` sulla lisciata; la media su `[k_max - P/2, k_max + P/2]`, accorciata al giro e dichiarata; il caso noto `P` fra `4000` e `5000` sul giro 1 della v2.
+- **Il file:** `fondo_puntofisso_v3b.py` e la cartella `M1330/puntofisso_v3b`. La v3 ha gia' girato il suo caso noto e non si riscrive.
+- **Le mie scelte, dichiarate:** `k_min` e' il primo minimo stretto; `k_max` e' l'argmax della lisciata prima di `k_min` *(non un massimo stretto: a k `2200` e `2300` la lisciata stampata vale `15.95` in entrambi)*; un massimo al bordo si usa e si dichiara; senza minimi, FERMO. La finestra finisce sempre a `k_min`, quindi puo' uscire solo a sinistra.
+- **Il caso noto:** 6 DEVE. Il sintetico (c) e' stato corretto prima del commit, perche' con periodo `3000` c'e' un minimo a k `500`.
+
+### 2026-11-24 17:56 -- [M1748] IL CASO NOTO DELLA v3b PASSA: 6 DEVE SU 6; P 4600 SUL GIRO 1 DELLA v2 (k_max 2200, k_min 4500), LA FINESTRA [0, 4500] ACCORCIATA DA [-100, 4500] [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b_noto.txt`.
+- **(a) di Luca:** `P 4600`, nell'intervallo `[4000, 5000]`, e uguale al numero previsto da Luca. **(b) DEVE FALLIRE:** il metodo della v2 da' `200`. **(c)** `[0, 4000]`; **(d)** accorciata a `[0, 2500]`; **(e)** FERMO; **(f)** il massimo al bordo, dichiarato.
+- **Le previsioni:** del guardiano `4500 +- 300` *(`85%`)*: **SI'** *(`4600`)*; mia, (a) passa *(`85%`)*: **SI'**.
+- **Il prossimo passo:** la voce `M1748_puntofisso_v3b` in coda a priorita' `1`, scritta a lanciatore fermo e committata prima del rilancio.
+
+### 2026-11-24 17:54 -- [M1748] LA v3b E' PARTITA (17:53:43, IL LANCIATORE RILANCIATO A MANO); UN ERRORE MIO: SEI ORE SCRITTE A STIMA [[PROGETTO-MITOSI]]
+
+- **Il rilancio, dichiarato:** il lanciatore `coda_m1446.py`, fermo dalle `17:17:41`, e' stato rilanciato a mano alle `17:53:43` *(da `date`)*, dopo il commit della voce *(`8bf0b90d`)*. Nel registro c'e' l'APERTO di `m1446-M1748_puntofisso_v3b`.
+- **UN ERRORE MIO, LE ORE A STIMA** *(si annotano, non si riscrivono)*:
+  - i titoli dei paragrafi di [M1735] `17:38` e `17:41` sono stati scritti prima dei commit, che sono delle `17:37:25` e `17:39:18`;
+  - quelli di [M1748] `17:52` e `17:56`: i commit sono delle `17:49:13` e `17:50:44`;
+  - nella carta, «`17:36` da `date`» *(sez. `3-quinquies`)* e «`17:49` da `date`» *(sez. `3-sexies`)* **non vengono da `date`**: i soli `date` di quei pezzi sono `17:34:40`, `17:37:07` e `17:47:53`.
+- **L'ordine, verificabile da git:** la carta e lo script di ogni pezzo sono antenati del suo caso noto, e il caso noto e' antenato della voce in coda.
