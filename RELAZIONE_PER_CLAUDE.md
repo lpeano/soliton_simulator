@@ -27363,3 +27363,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Le chiusure sono nel registro.** Ogni corsa ha `stato_000000` .. `stato_006000` *(`25`)* e `serie.json` con lo sha1, in `E:/soliton_simulator/controllo/M2330/<d>/`.
 - **Il prossimo passo:** la carta e lo script delle letture (i)-(v) *(`due_corpi_fondo.txt`)*, poi l'animazione, poi il porto di `H-GUARDIANO` su `lapse-u` *(il lanciatore e' fermo: la suite si puo' fare)*.
+
+
+### 2026-11-25 -- [M2330] LE LETTURE: LA CARTA (SEZ. 3-QUINDECIES) E due_corpi_lettura.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **(i)-(v) come nel mandato.** Le scelte dichiarate: `w` come raggio quadratico medio nella meta' del corpo; `J` radiale negativo = verso l'oggetto; la profondita' di chi = la media su `[0, 4)`.
+- **Il caso noto del segno:** una fase uscente da' `J_r` positivo.

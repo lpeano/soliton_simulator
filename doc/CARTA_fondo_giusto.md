@@ -402,3 +402,20 @@
 - **LE PREVISIONI:**
   - **del guardiano:** (i) in d1 si avvicinano e in d2 no *(`65%`)*; l'accelerazione cala nel tempo *(`50%`)*. (ii) J radiale verso l'oggetto cresce *(`55%`)*, meno di un decimo del seno *(`60%`)*. (iii) `rho_phi [8, 16)` cambia meno dell'`1%` *(`60%`)*. (iv) la profondita' di chi cambia meno del `5%` *(`55%`)*. (v) il respiro sotto il `10%` *(`70%`)*;
   - **mie:** (i) VERSO in d1 *(`55%`)*; (v) sotto il `10%` *(`50%`)*: con due corpi e la fase (a) l'oggetto non e' piu' al suo punto fisso.
+
+
+## 3-quindecies. [M2330] LE LETTURE DEL MODELLO INTERO *(scritta dopo lo script e PRIMA dei numeri; le corse chiuse alle `00:51`)*
+
+- **Lo script:** `due_corpi_lettura.py`, il referto **`due_corpi_fondo.txt`**. Solo letture sugli stati ogni `250` e sulle serie ogni `10` tick.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **(i)** `d(k)` dalla serie *(i baricentri dei due corpi nel riferimento della corsa)*. Il fit `d = c0 + c1 k + a k^2/2` per finestra di `1000` e su `[0, 6000]`. **`a < 0` = si avvicinano.** Accanto, `a(d1) - a(d2)` con la sua barra;
+  - **(ii)** `J_phi` come in `vento_vuoto_v2` *(la fase acquistata da `k 0` della stessa corsa)*, e `J_x` coi nodi a `+-1` lungo `x`. **La componente radiale** dal baricentro del corpo, mediata sugli anelli `[8, 16)` e `[16, 32)` dentro la meta' del corpo. **Negativa = verso l'oggetto**;
+  - **(iii)** `rho_phi` sugli stessi anelli, con la variazione da `k 0`;
+  - **(iv)** `chi` sugli anelli `[0, 4)`, `[4, 8)`, `[8, 16)`, `[16, 32)`; **la profondita' = la media su `[0, 4)`**, con la variazione da `k 0`;
+  - **(v)** `w` di ogni corpo = **il raggio quadratico medio di `rho_psi` nella sua meta'** *(non `torneo_tenuta.misura`, che vede un oggetto solo)*; `omega` per tick dalla serie, la media per finestra di `250`; il respiro = `(w_max - w_min)/w_medio` sui `25` stati, accanto al `10%` di Luca.
+- **I CASI NOTI:**
+  - d2 a `k 0` = d1 a `k 0` al bit *(Luca)*;
+  - il baricentro di `k 0` riletto dallo stato = la serie al bit;
+  - `J` radiale di `k 0` = `0` al bit;
+  - **il segno:** una fase uscente `q r` ridà `J_r = + rho q` entro il `5%`, e **DEVE FALLIRE** che dia un radiale negativo.
+- **Le previsioni** sono quelle della sez. `3-quattuordecies`, del guardiano e mie.
