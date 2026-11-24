@@ -27107,3 +27107,7 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4_noto.txt`. (a) il giro 3 `0.0582` cade in RESIDUO; (b) i bordi delle fasce; (c) DEVE FALLIRE, `0.0801` non e' RESIDUO; (d) la partenza `giro_3/stato_006000.npz`, con lo sha1 che coincide.
 - **Le masse:** v1 `995010.893146391`, partenza del giro 4 `995010.893149807`.
 - **La coda:** `M1932_puntofisso_v3b4` a priorita' `1`, nello stesso commit, scritta a lanciatore fermo *(chiuso alle `19:25:24`)*. Il rilancio a mano dopo il commit.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO PARTITO ALLE 19:40:43 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py` rilanciato a mano alle `19:40:43` *(da `date`)*, dopo `8cfd30a6`. Nel registro c'e' l'APERTO di `m1446-M1932_puntofisso_v3b4`.
