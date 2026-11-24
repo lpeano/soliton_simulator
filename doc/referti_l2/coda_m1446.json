@@ -2626,6 +2626,39 @@
     "v0"
    ],
    "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: v0, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: due oggetti, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: due oggetti, chi off, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: un oggetto, chi on, 6000 tick, stati ogni 250"
   }
  ]
 }

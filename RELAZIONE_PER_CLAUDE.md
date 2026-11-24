@@ -27314,3 +27314,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il vuoto lontano dell'oggetto NON e' `a phi_v`:** il residuo del fit a `d > 45` e' medio `0.107`, massimo `0.398`. Col vuoto per prodotto, **`phi` vicino ad A** *(`d < 20`)* **cambia fino al `36%`**;
   - **`m0` e' NEGATIVO:** `-5.787` per l'oggetto solo, `c0 = kappa m0 = -1.46e-03`; per la coppia `c0 = -2.19e-03`. In F-on *(il mattone alla cima)* era `m0 +8.69`, `c0 +2.20e-03`. **La sorgente di chi ha il segno opposto.**
 - **K1-on** *(chi acceso, si dichiara)*: `max |psi - psi(tenuta)| 3.854` *(su `max |psi| 17.84`)*.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v3: K1 PASSA (U RISCRITTO: LA CAUSA ERA QUELLA); 4 DEVE SU 5, IL QUINTO E' IL CASO NOTO SBAGLIATO DELLE MASSE; LE TRE CORSE IN CODA; [M2345] IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_noto.txt`, dalla v3. **(K1) PASSA:** con `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` = la tenuta del giro 4 a `k 100` **AL BIT** *(le chiavi, `A`, `E`)*. **La causa del fallimento della v2 era la perdita di `U` in `parametri_v2`.**
+- **(K2) e la traslazione:** PASSANO. **(T) masse al bit:** fallisce di `1 ulp`, ma e' il caso noto a essere sbagliato *(dichiarato nel paragrafo precedente)*.
+- **K1-on** *(si dichiara)*: con chi acceso dopo `100` tick `max |psi - psi(tenuta)| 3.854` *(su `17.84`)*: **chi cambia l'oggetto gia' in 100 tick.**
+- **La coda:** `M2330_d1`, `M2330_d2`, `M2330_d3` a priorita' `1`, `due_corpi_fondo_v3.py corsa`, scritte a lanciatore fermo *(dalle `22:34:39`)*, in questo commit. Il rilancio a mano dopo.
+- **[M2345]** *(il ramo `guardiano` e la posta)* **e' arrivato a meta' lavoro:** in coda, dopo il lancio.
