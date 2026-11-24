@@ -27292,3 +27292,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: le frecce crescono tutte nello stesso verso *(`50%`)*: **NO a vista** *(dominano le fluttuazioni)*; un accumulo vicino a `y_c +- L_y/4` *(`35%`)*: **NO**;
   - mie: le frecce cambiano verso con `y` *(`70%`)*: **NON SI DECIDE dalle frecce** *(la dipendenza da `y` si vede solo nella fase)*; nessun accumulo *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2330] IL MODELLO INTERO: LA CARTA (SEZ. 3-QUATTUORDECIES) E due_corpi_fondo.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Le scelte:** la traslazione `(-24, +48)`, cioe' `41.57` lungo `y` *(40 esatti non si possono coi multipli di 3)*; il vuoto per prodotto col fondo `a phi_v` fittato lontano *(niente tick assoluto)*; `porto.campi` in tutte e tre; il tick `tick_chi_v2` *(la variante V1, con la fase (a))* dentro la forma `L-1`; i parametri verificati uguali a F-on, e `c0` della configurazione.
+- **I casi noti:** K1 *(kappa 0 = la tenuta del giro 4 al bit per 100 tick)*, K1-on *(si dichiara)*, K2 *(d1 = d2 a k 0)*, T.

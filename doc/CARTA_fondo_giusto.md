@@ -379,3 +379,26 @@
   - `w(k)` con `torneo_tenuta.misura` sugli stati, K letta da `legge_fondo_v3.txt`.
 - **Il caso noto:** a `k 0` le quattro righe sono uguali al bit nelle tre colonne; **e l'mp4 sotto i `20 MB`.** L'uscita stampata va in `doc/referti_l2/anima_vento.txt`.
 - **Le previsioni:** del guardiano, a gradino le frecce lontane crescono nel tempo tutte nello stesso verso *(`50%`)*; un accumulo di `rho_phi` vicino a `y_c +- L_y/4` *(`35%`)*. **Mie:** le frecce crescono col tempo ma **cambiano verso con `y`**, seguendo `dN/dy` *(`70%`, da A4: la fase acquistata e' una sinusoide in `y`)*; nessun accumulo *(`75%`, da B)*.
+
+
+## 3-quattuordecies. [M2330] IL MODELLO INTERO: DUE OGGETTI AL FONDO A K CON CHI VERO *(DECISIONE DI LUCA, `23:30`; scritta dopo lo script delle corse e PRIMA dei numeri)*
+
+- **`git log --all --fixed-strings --grep "[M2330"`: vuoto** *(`23:28:50`)*.
+- **Le corse** *(Luca)*: `L 162`, il toro, `g_e = 0`, `6000` tick, gli stati ogni `250`; **(d1)** due oggetti del punto fisso, chi VERO acceso; **(d2)** gli stessi, chi spento; **(d3)** un oggetto solo, chi vero. Lo script e' `due_corpi_fondo.py`.
+- **LE MIE SCELTE, dichiarate prima** *(il mandato non le fissa)*:
+  1. **L'oggetto:** `puntofisso_v3b/giro_3/stato_006000.npz`, la partenza del giro 4 *(come B3 e [M2210])*.
+  2. **«A distanza 40 nodi lungo y»:** la traslazione `(dm1, dm2) = (-24, +48)`, cioe' **`+41.57` lungo `y` e `0` lungo `x`**. Le componenti devono essere multipli di `3`, per il disegno di fase di K *(`mattone.incolla`)*: `40` esatti non si possono, `(-21, +42)` darebbe `36.37`.
+  3. **La materia per SOMMA, il vuoto per PRODOTTO** *(come `gravita_due_corpi.prepara_coppia`)*: `phi = phi_A phi_B / phi_fondo`. **Il fondo** e' `a phi_v`, con `a` il fit complesso di `phi_A` su `phi_v` sui nodi a distanza `> 45` dall'oggetto: **non serve il tick assoluto.** Il residuo del fit si stampa.
+  4. **I campi:** `porto.campi` *(`A = 0`, `E` da Gauss)*, **in tutte e tre le corse**, come la coppia di [M0417]. Cosi' d3 e' confrontabile con d1.
+  5. **`chi`:** il tick `chi_tick_v2.tick_chi_v2` *(con la fase (a): `cs = s N` e `e^{i e0 (N - 1)/2}`, **la variante V1, non la V2 della legge del fondo**: lo dico)*. I parametri sono quelli di `gravita_due_corpi.parametri`: **si verifica che `kappa`, `f`, `c2`, `m2`, `s`, `e0` siano uguali a quelli di `CHI/due_corpi/F-on`** *(`kappa 2.5289e-04`, `f 0.06`, `c2 0.25`, `m2 1e-04`, `s 0.15`, `e0 0.4767`)*. **`c0 = kappa m0` della configurazione** *(Luca nomina `kappa`, `f`, la portata; `c0` no)*. Off: `kappa = 0`, lo stesso `c0`. `chi` parte dal profilo statico di «on».
+  6. **Il tick dentro la forma `L-1` del nucleo** *(come `fondo_1c.ciclo`: l'oggetto al fondo esiste in quella forma)*.
+  7. **La serie ogni `10` tick:** per corpo il baricentro e la massa *(i corpi separati dal segno di `dy` dal centro della coppia a `k 0`)*, `max |chi|`; **`omega` per tick per corpo** sulla meta' del corpo.
+- **I CASI NOTI** *(`due_corpi_fondo.py noto`)*:
+  - **(K1)** `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` = **la tenuta del giro 4 a `k 100` AL BIT** *(il tick di chi con `N = 1` e' il tick U)*;
+  - **(K1-on)** lo stesso con chi acceso: **l'esito si dichiara** *(Luca: «se chi non cambia niente in 100 tick»)*;
+  - **(K2)** d2 a `k 0` = d1 a `k 0` **AL BIT** *(l'impronta, chi compreso)*;
+  - **(T)** le masse dei due oggetti uguali al bit; la traslazione e la sua inversa = l'identita'; **DEVE FALLIRE:** `rho` della coppia simmetrico per la traslazione.
+  - **Le letture** *(i)-(v)* e l'animazione: **uno script a parte, a corse finite**, con la sua carta.
+- **LE PREVISIONI:**
+  - **del guardiano:** (i) in d1 si avvicinano e in d2 no *(`65%`)*; l'accelerazione cala nel tempo *(`50%`)*. (ii) J radiale verso l'oggetto cresce *(`55%`)*, meno di un decimo del seno *(`60%`)*. (iii) `rho_phi [8, 16)` cambia meno dell'`1%` *(`60%`)*. (iv) la profondita' di chi cambia meno del `5%` *(`55%`)*. (v) il respiro sotto il `10%` *(`70%`)*;
+  - **mie:** (i) VERSO in d1 *(`55%`)*; (v) sotto il `10%` *(`50%`)*: con due corpi e la fase (a) l'oggetto non e' piu' al suo punto fisso.
