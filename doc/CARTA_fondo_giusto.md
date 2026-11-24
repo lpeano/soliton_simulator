@@ -202,3 +202,32 @@
 - **`git log --all --fixed-strings --grep "[M1540"`: vuoto** *(`15:44`)*.
 - **La fase (i) a `6000` tick per giro** *(«due periodi del respiro»)*, **gli stati ogni `100`** *(quindi `w` ogni `100`: `61` valori per giro, e i minimi locali stretti su quella griglia)*; **il resto invariato** *(la sez. `3-bis`: la media sul periodo fra i primi due minimi con `theta` dagli `omega` misurati, la riproiezione su `Q_K`, la massa, tre giri, il criterio `< 5%` sull'ultimo giro, FERMO senza due minimi)*. `fondo_puntofisso_v2.py` *(`K_GIRO`, `OGNI`, la cartella `M1330/puntofisso_v2` in memoria)*. **In coda a priorita' `1`**, `M1540_puntofisso_v2`, **dopo le corse di F** *(finite alle `15:44:24`: la voce si scrive a lanciatore fermo)*.
 - **Il caso noto** *(il giro con la media identita' = lo stato al bit)* **non dipende da `K_GIRO` e `OGNI`:** e' quello di `fondo_puntofisso_noto.txt` *(3 su 3)*.
+
+
+## 3-quinquies. [M1735] IL PUNTO FISSO v3: IL PERIODO DA w LISCIATA *(DECISIONE DI LUCA, `17:35`; scritta PRIMA del codice e dei numeri, `17:36` da `date`)*
+
+- **`git log --all --fixed-strings --grep "[M1735"`: vuoto** *(`17:34:40`)*.
+- **Perche':** la v2 *(sez. `3-quater`, `0793e8bd`)* non passa *(`0.3079` sull'ultimo giro)*, ma i minimi locali stretti di `w` grezza erano oscillazioni corte sopra il respiro *(periodi `200`, `2000`, `300` tick)*: il fallimento non distingueva l'oggetto dal metodo.
+- **Di Luca:**
+  - il periodo si legge da **`w` LISCIATA, media mobile su `500` tick**: i minimi della lisciata, e il periodo e' la distanza fra i primi due;
+  - **se ce n'e' UNO SOLO, periodo = `4500`** *(dal giro 1 della v2)*;
+  - la media di `psi` *(con `e^{+i theta}`, come nella v2)* su **una finestra intera `[k_min, k_min + periodo]`**;
+  - **la partenza: lo stato finale del giro 3 della v2**, `M1330/puntofisso_v2/giro_3/stato_006000.npz` *(`w 12.57`; non `partenza_giro_4.npz`, che e' gia' mediata)*;
+  - tre giri da `6000` tick, stati ogni `100`; **il criterio invariato** *(`< 5%` sull'ultimo giro)*; in coda a priorita' `1`.
+- **LE MIE SCELTE DI CRITERIO, dichiarate qui prima della corsa** *(il mandato non le fissa)*:
+  1. **la media mobile:** `w` e' campionata ogni `100`, quindi `500` tick = **`5` campioni consecutivi**, finestra **centrata**, solo finestre intere *(la lisciata esiste da `k 200` a `k 5800`)*;
+  2. **i minimi della lisciata** sono minimi locali **stretti** *(come `fondo_puntofisso.minimi`)*, gli estremi esclusi;
+  3. **nessun minimo: FERMO**; **un solo minimo e `k_min + 4500 > 6000`** *(la finestra non sta nel giro)*: **FERMO**; nessun ripiego mio;
+  4. **la massa** e' quella della partenza della v1 e della v2 *(`massa_di(PARTENZA_1)`, invariata)*; la massa del nuovo stato di partenza si stampa accanto.
+- **IL CODICE** *(`fondo_puntofisso_v3.py`)*: **il giro e' `fondo_puntofisso.giro` cosi' com'e'**. Cambia solo la funzione `minimi`, sostituita in memoria: restituisce gli indici `[k_min, k_min + periodo]/100`, cosi' il giro media su quella finestra e riparte dallo stato a `k_min + periodo`, **come la v2 ripartiva dallo stato al secondo minimo**. La decisione sul periodo *(la lisciata, i suoi minimi, la fonte `due minimi` o `ripiego 4500`, l'eventuale motivo del FERMO)* si scrive in `giro_<g>/periodo_v3.json`. In `giro.json` il campo `minimi_k` contiene **la finestra**, non i minimi: e' il nome che usa la v1.
+- **IL CASO NOTO** *(`fondo_puntofisso_v3.py noto`; i DEVE fissati qui)*:
+  - (a) **di Luca:** sulla serie `w` del giro 1 della v2 il periodo e' **fra `4000` e `5000`**;
+  - (b) **DEVE FALLIRE:** sulla stessa serie il metodo della v2 *(i minimi stretti di `w` grezza)* dava un periodo **fuori** da `[4000, 5000]`;
+  - (c) `w = 10 + 3 cos(2 pi k / 3000)` su `k = 0..6000`: due minimi, **periodo `3000`, finestra `[1500, 4500]`**;
+  - (d) `w = 10 + ((k - 1000)/1000)^2`: un solo minimo, a `k 1000`: **il ripiego, finestra `[1000, 5500]`**;
+  - (e) `w` crescente: **nessun minimo, FERMO**;
+  - (f) `w = 10 + ((k - 2000)/1000)^2`: un solo minimo, a `k 2000`, e `2000 + 4500 > 6000`: **FERMO**.
+- **SE PASSA** *(il criterio sull'ultimo giro)*: **B3 parte senza chiedere** *(Luca: «B3 parte da solo, le quattro cadute»)*. La coda non ha dipendenze fra voci, quindi: **B3 ha la sua carta e i suoi script, committati mentre la v3 gira; le quattro voci entrano in coda a lanciatore fermo, dopo la lettura della v3, e solo se la v3 passa.** **Se non passa, o si ferma: FERMO, i numeri a Luca.**
+- **LE PREVISIONI:**
+  - **del guardiano:** il caso noto da' `4500 +- 300` *(`85%`)*; il respiro `< 10%` al giro 2 *(`60%`)*; `< 5%` al giro 3 *(`50%`)*;
+  - **mie:** (a) passa *(`80%`)*. **Il criterio al giro 3 `< 5%`: `35%`.** Il motivo, qualitativo: nella v2 il respiro e' calato di giro in giro *(`0.7565`, `0.6325`, `0.3079`)*, ma senza un ritmo che arrivi sotto `0.05` in altri tre giri.

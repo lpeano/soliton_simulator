@@ -27014,3 +27014,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **UNA COSA NEI NUMERI, POST-HOC e dichiarata:** il metodo della carta *(i primi due minimi locali STRETTI sulla griglia di `100`)* **ha preso come "periodo" finestre di `200`, `2000` e `300` tick**, mentre il respiro visibile in `w` ha periodo di qualche migliaio di tick *(giro 1: massimo `16.19` a `k 2200`, minimo `7.75` a `k 4500`)*. **I minimi piccoli sono oscillazioni corte sopra il respiro**: la media non e' stata fatta sul periodo del respiro, tranne forse nel giro 2. **Non e' una lettura del criterio**: il criterio, come scritto, non passa. Ma dice che **il fallimento non distingue "l'oggetto non ha un punto fisso" da "il metodo non media sul periodo giusto"**.
 - **E il giro 3 parte da `w 11.39`** *(giri 1 e 2 da `8.50` e `8.51`)*: la trasformazione del giro 2 ha cambiato la larghezza di partenza.
 - ### **FERMO** *(la carta sez. `3-bis`: «se il criterio fallisce, FERMO, i numeri a Luca»)*: **B3 non si fa.** **Decide Luca** se e come cambiare il metodo dei minimi *(es. minimi del respiro su una `w` lisciata, o il periodo fissato da un primo giro)*: **e' una scelta di criterio, va nella carta prima della corsa.**
+
+
+### 2026-11-24 17:38 -- [M1735] IL PUNTO FISSO v3: LA CARTA E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La carta** sez. `3-quinquies`: il periodo dai minimi di `w` lisciata (media mobile centrata di `5` campioni = `500` tick); con un solo minimo il ripiego `4500`; la media su `[k_min, k_min + periodo]`; la partenza `puntofisso_v2/giro_3/stato_006000.npz`; tre giri da `6000`, stati ogni `100`; il criterio invariato.
+- **Le mie scelte di criterio, dichiarate prima:** la finestra centrata di `5` campioni, solo finestre intere; i minimi stretti; **FERMO** senza minimi, o se `k_min + 4500 > 6000`; la massa della partenza della v1, invariata.
+- **Il codice** (`fondo_puntofisso_v3.py`): il giro e' `fondo_puntofisso.giro` cosi' com'e'; cambia solo `minimi`, sostituita in memoria, e la decisione va in `periodo_v3.json`.
+- **Il caso noto:** 6 DEVE, (a) quello di Luca (il periodo fra `4000` e `5000` sul giro 1 della v2), (b) DEVE FALLIRE il metodo della v2 sulla stessa serie.
+- **B3:** la coda non ha dipendenze fra voci, quindi le quattro cadute entrano in coda a lanciatore fermo, dopo la lettura della v3, solo se passa. Carta e script di B3 si committano mentre la v3 gira.
+- **Le previsioni:** quelle del guardiano; le mie: (a) passa `80%`; il criterio al giro 3 `35%`.
