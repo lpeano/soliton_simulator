@@ -27170,3 +27170,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   1. **(raccomandata)** `R_A 47.5` e `g_max 0.03` *(i valori nativi della scena)*, il disco sull'oggetto, `phi0 = c_di(t) phi_v` con **`t` ricostruito dalla catena** *(T0 + 3000 + i `k_b` dei giri + i giri interi)*, e **un controllo a `k 0`**: `bordo.fase_fascia` *(il controllo di Luca del 5.3)* sulla fascia deve dare `|a - 1|` e `arg a` piccoli, **altrimenti FERMO**;
   2. il bordo solo su `psi` *(`phi` non toccato)*: non e' `bordo.py` com'e';
   3. altri valori di `R_A` e `g_max`.
+
+
+### 2026-11-24 -- [M2222] LA STELLA POLARE AGGIORNATA AL 24/11 (doc/MAPPA.md, VOCE 6-STELLA): LE 24 ORE, LE IDEE IN ATTESA H1-H4, LA CAUTELA, LE PREVISIONI; G-A QUASI CHIUSO [[PROGETTO-MITOSI]]
+
+- **Solo doc**, sui due rami, nella stessa voce. **`git log --all --fixed-strings --grep "[M2222"`: vuoto** *(`22:26:18`)*.
+- **Due note del guardiano nella voce, dai referti:** K `1.00 +- 0.01` e' la prima finestra *(`[200, 800]`)*, mentre su `[200, 2000]` la K pesata e' `0.8994`; in E(p) `v(p)` e' lineare ma `E_w` ha il segno opposto. **Il `1.5%` della massa** *(il quanto del respiro)* **non viene da un referto di questa sessione:** la provenienza va detta.
+- **Le corse di [M2210] non si toccano** *(r1, r2, r3 girano)*.
