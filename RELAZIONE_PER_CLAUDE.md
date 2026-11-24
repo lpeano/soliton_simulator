@@ -27060,3 +27060,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - quelli di [M1748] `17:52` e `17:56`: i commit sono delle `17:49:13` e `17:50:44`;
   - nella carta, «`17:36` da `date`» *(sez. `3-quinquies`)* e «`17:49` da `date`» *(sez. `3-sexies`)* **non vengono da `date`**: i soli `date` di quei pezzi sono `17:34:40`, `17:37:07` e `17:47:53`.
 - **L'ordine, verificabile da git:** la carta e lo script di ogni pezzo sono antenati del suo caso noto, e il caso noto e' antenato della voce in coda.
+
+
+### 2026-11-24 18:0x (l'ora vera e' quella del commit) -- [M1330-B3] LA CARTA (SEZ. 3-SEPTIES) E LO SCRIPT DI B3, MENTRE LA v3b GIRA; PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Lo script e il referto:** `legge_fondo_v2.py`, con referto `legge_fondo_v2.txt`; le cadute V0, V2 `x0.5`, `x1`, `x2`.
+- **L'oggetto:** `puntofisso_v3b/giro_3/partenza_giro_3.npz`, quello la cui evoluzione ha passato il criterio. Non `partenza_giro_4`, che nessuna corsa ha misurato.
+- **Il gradiente pesato:** una quinta colonna della serie, `<dN/dy>` pesato con `rho`.
+- **K CIMA, al centro e pesata, una accanto all'altra.**
+- **`m*` e `omega_psi(N1)` sono quelli di 1c.** **UNA DOMANDA A LUCA:** il `m*` dell'oggetto nuovo vuole due calci in piu'; non li lancio senza mandato.
+- **Il caso noto:** 3 DEVE. (a) la V2 `x1` di 1c al bit per `100` tick; (b) DEVE FALLIRE contro `x2`; (c) `<dN/dy>/centro` a `k 0` uguale a B0 *(`0.95481`)*.
+- **La coda:** le quattro voci solo se la v3b passa, scritte a lanciatore fermo.

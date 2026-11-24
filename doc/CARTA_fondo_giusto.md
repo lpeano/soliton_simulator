@@ -256,3 +256,21 @@
   - (e) `w` crescente: **FERMO**;
   - (f) `w = 10 + ((k - 1000)/1000)^2`: il minimo a `1000` e l'argmax al bordo *(k `200`)*: **`massimo_al_bordo` dichiarato**.
 - **LE PREVISIONI** *(di Luca: `4600`)*: **mie,** (a) passa *(`85%`)*; il criterio al giro 3 `< 5%`: `35%`, come nella sez. `3-quinquies`.
+
+
+## 3-septies. [M1330-B3] LA LEGGE DEL FONDO DALL'OGGETTO SENZA RESPIRO *(DECISIONE DI LUCA, `13:30` [M1330] e `17:35` [M1735]: «se passa, B3 parte da solo, le quattro cadute»; la sez. `3-bis` diceva «un'altra carta, dopo»: e' questa; scritta PRIMA del codice e dei numeri, mentre la v3b gira; `17:58:47` l'ultimo `date` prima di scriverla)*
+
+- **Che cosa:** **le cadute V2 `x0.5`, `x1`, `x2` e la V0** dall'oggetto senza respiro, **col gradiente pesato di B0**; il referto **`legge_fondo_v2.txt`** *([M1330], seconda versione)*. Lo script e' `doc/referti_l2/legge_fondo_v2.py`, le uscite in `M1330/b3/<nome>/serie.json`.
+- **LE MIE SCELTE, dichiarate prima** *(il mandato non le fissa)*:
+  1. **l'oggetto:** `M1330/puntofisso_v3b/giro_3/partenza_giro_3.npz`, lo stato **la cui evoluzione di `6000` tick ha passato il criterio**. Non `partenza_giro_4.npz`: quella e' la media del giro 3, e **nessuna corsa ha misurato che non respiri**;
+  2. **la macchina:** la V0 e' `fondo_1c.caduta("V0")` cosi' com'e'. Le V2 sono `fondo_s3.caduta` riga per riga, con una sola aggiunta in `misura`: **la quinta colonna `<dN/dy>` pesata con `rho`** *(la formula di `gradiente_pesato.dNdy`, `N` da `campo_N`)*, che non tocca la dinamica. `2000` tick, la serie ogni `MC.OGNI`;
+  3. **`m*` e `omega_psi(N1)` sono quelli di 1c** *(il calcio `0.010`/`0` e l'orologio V2 a `N 1`)*, come in S3. **L'oggetto nuovo ha un `w` diverso, e B5 dice che `m*` dipende da `w`** *(il rapporto `1.0535` fra `w 14.4` e `w 7.0`)*. Il suo `m*` vorrebbe **due calci in piu'**, che il mandato non chiede: **lo chiedo a Luca, e non li lancio**;
+  4. **la lettura:** per finestra *(`[200, 2000]`, `[200, 800]`, `[800, 1400]`, `[1400, 2000]`)*, `a - a(V0)` col fit di `caduta_finestre`. **K CIMA al centro** *(come S3)* e **K CIMA PESATO** *(il gradiente = la media della quinta colonna nella finestra)*, uno accanto all'altro; **la legge:** la media e lo scarto delle tre K su `[200, 2000]`, in `%` della media. **Nessuna soglia di passaggio:** e' una misura, non un sigillo.
+- **IL CASO NOTO** *(`legge_fondo_v2.py noto`, prima delle corse)*:
+  - (a) **la V2 `x1` su 1c, `100` tick:** le prime quattro colonne coincidono **AL BIT** con la serie di 1c *(`M1658/c1/caduta_V2`, `k <= 100`)*;
+  - (b) **DEVE FALLIRE:** le stesse colonne contro la serie `x2` di 1c;
+  - (c) **`<dN/dy>/centro` a `k 0` uguale a quello di B0 sullo stesso stato** *(`0.95481`, `k_forma.txt`)* entro `5e-6`, cioe' l'arrotondamento della quinta cifra.
+- **LA CODA:** quattro voci a priorita' `1` *(`M1330B3_V0`, `M1330B3_x0.5`, `M1330B3_x1.0`, `M1330B3_x2.0`)*, **scritte a lanciatore fermo, dopo la lettura della v3b, e solo se la v3b passa.** Se non passa, B3 non parte.
+- **LE PREVISIONI, mie, scritte prima:**
+  - **le tre K PESATE piu' vicine fra loro delle tre K al centro** *(`55%`)*;
+  - **la K PESATA a `x1` entro il `10%` di K CIMA di 1c a `x1`** *(`0.7707`)*: `40%`, perche' `m*` di 1c non e' quello dell'oggetto.
