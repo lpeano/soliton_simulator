@@ -1,0 +1,71 @@
+==================================================================================================================================
+P2, LA PROVA BREVE DEL TRIANGOLO CON CHI (Luca 2026-11-21 23:23): 250 tick di fila contro 125 + salva + riprendi + 125; un byte; l'energia
+==================================================================================================================================
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120 CON CHI (il passo v2): da k 0 (prepara) fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.412935154856e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120\fila
+    k    250  la massa 2.958154857218e+06  H +1.780091705979e+06  H_chi +9.6473e+02  max|Theta| 0.0262  il picco 1.2496e+03  (272 s)
+    [stato] k 250 sha1 c3c98af0
+### 250 tick in 185 s (0.740 s per tick); il codice 0
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120 CON CHI (il passo v2): da k 0 (prepara) fino a k 125; i parametri kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.412935154856e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120\spezza
+### 125 tick in 83 s (0.663 s per tick); il codice 0
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120 CON CHI (il passo v2): da stato_000125.npz fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.412935154856e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120\spezza
+    k    250  la massa 2.958154857218e+06  H +1.780091705979e+06  H_chi +9.6473e+02  max|Theta| 0.0262  il picco 1.2496e+03  (121 s)
+    [stato] k 250 sha1 c3c98af0
+### 125 tick in 84 s (0.672 s per tick); il codice 0
+### t120: 250 tick di fila contro la ripresa da stato_000125.npz: AL BIT (psi, phi, A, E, chi, pi, Theta)
+  P2 t120: la ripresa AL BIT su ogni chiave                                                                        PASSA   
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### t120: un byte cambiato: lo sha1 di E:\soliton_simulator\controllo\CHI\triangolo\prova\t120\rotto\stato_000125.npz NON coincide: la ripresa RIFIUTA
+  P2 t120 DEVE FALLIRE: un byte cambiato -> la ripresa RIFIUTA                                                     PASSA   
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120 CON CHI (il passo di OGGI): da k 0 (prepara) fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04; m0 +1.412935154856e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120\oggi
+    k    250  la massa 2.958154857218e+06  H +1.780091655783e+06  H_chi +9.4322e+02  max|Theta| 0.0261  il picco 1.2497e+03  (246 s)
+    [stato] k 250 sha1 eb7087e1
+### 250 tick in 166 s (0.664 s per tick); il codice 0
+### t120: la deriva relativa massima di H in 250 tick: il passo v2 3.405e-06, il passo di oggi 3.415e-06
+  P2 t120: l'energia con chi v2 entro 10 volte la deriva del passo di oggi + 1e-12 (il criterio di K5)             PASSA   3.41e-06
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120r CON CHI (il passo v2): da k 0 (prepara) fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5984189934e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.422893814310e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120r\fila
+    k    250  la massa 2.972780958542e+06  H +1.789701240275e+06  H_chi +9.4066e+02  max|Theta| 0.0259  il picco 1.2673e+03  (256 s)
+    [stato] k 250 sha1 1fb705da
+### 250 tick in 174 s (0.695 s per tick); il codice 0
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120r CON CHI (il passo v2): da k 0 (prepara) fino a k 125; i parametri kappa 2.5289441539e-04, c0 +3.5984189934e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.422893814310e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120r\spezza
+### 125 tick in 91 s (0.728 s per tick); il codice 0
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120r CON CHI (il passo v2): da stato_000125.npz fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5984189934e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.422893814310e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120r\spezza
+    k    250  la massa 2.972780958542e+06  H +1.789701240275e+06  H_chi +9.4066e+02  max|Theta| 0.0259  il picco 1.2673e+03  (142 s)
+    [stato] k 250 sha1 1fb705da
+### 125 tick in 103 s (0.822 s per tick); il codice 0
+### t120r: 250 tick di fila contro la ripresa da stato_000125.npz: AL BIT (psi, phi, A, E, chi, pi, Theta)
+  P2 t120r: la ripresa AL BIT su ogni chiave                                                                       PASSA   
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### t120r: un byte cambiato: lo sha1 di E:\soliton_simulator\controllo\CHI\triangolo\prova\t120r\rotto\stato_000125.npz NON coincide: la ripresa RIFIUTA
+  P2 t120r DEVE FALLIRE: un byte cambiato -> la ripresa RIFIUTA                                                    PASSA   
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v2.py  sha1-BYTE 4365403d  committato e pulito
+### IL TRIANGOLO t120r CON CHI (il passo di OGGI): da k 0 (prepara) fino a k 250; i parametri kappa 2.5289441539e-04, c0 +3.5984189934e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04; m0 +1.422893814310e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\prova\t120r\oggi
+    k    250  la massa 2.972780958542e+06  H +1.789701190955e+06  H_chi +9.1957e+02  max|Theta| 0.0258  il picco 1.2673e+03  (279 s)
+    [stato] k 250 sha1 756f9212
+### 250 tick in 193 s (0.773 s per tick); il codice 0
+### t120r: la deriva relativa massima di H in 250 tick: il passo v2 3.632e-06, il passo di oggi 3.642e-06
+  P2 t120r: l'energia con chi v2 entro 10 volte la deriva del passo di oggi + 1e-12 (il criterio di K5)            PASSA   3.63e-06
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: P2 t120: la ripresa AL BIT su ogni chiave                                                                      PASSA
+  DEVE: P2 t120 DEVE FALLIRE: un byte cambiato -> la ripresa RIFIUTA                                                   PASSA
+  DEVE: P2 t120: l'energia con chi v2 entro 10 volte la deriva del passo di oggi + 1e-12 (il criterio di K5)           PASSA
+  DEVE: P2 t120r: la ripresa AL BIT su ogni chiave                                                                     PASSA
+  DEVE: P2 t120r DEVE FALLIRE: un byte cambiato -> la ripresa RIFIUTA                                                  PASSA
+  DEVE: P2 t120r: l'energia con chi v2 entro 10 volte la deriva del passo di oggi + 1e-12 (il criterio di K5)          PASSA
+==================================================================================================================================

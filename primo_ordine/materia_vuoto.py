@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""IL GENERATORE DELL'ACCOPPIAMENTO MATERIA-VUOTO -- ### **DAL `2026-11-01` (Luca `16:52`) LE FORME SONO DUE, `S1` (predefinita, DALLA TABELLA) E `S3` (opzione esplicita): sotto, `FORME`.** Il testo che segue e' quello di `S3`.
+"""IL GENERATORE DELL'ACCOPPIAMENTO MATERIA-VUOTO -- ### **DAL `2026-11-01` (Luca `16:52`) LE FORME SONO DUE, `S1` (predefinita, DALLA TABELLA) E `S3` (opzione esplicita): sotto, `FORME`.** ### **E DAL `2026-11-22` (il mandato [M1631] di Luca, il torneo; sul ramo `lapse-u`) LE OPZIONI ESPLICITE SONO ANCHE `L+0.5`, `L+0.25`, `L0`, `L-0.25`, `L-0.5`, `L-1`, `FH`, `FT`** *(`doc/CARTA_torneo_nonlinearita.md`, sez. 1)*: **`S1` resta la PREDEFINITA.** Il testo che segue e' quello di `S3`.
 
 ### — **le tre funzioni, e il LIMITE.**
 
@@ -173,7 +173,106 @@ def beta_s1(rho, lam):
 # ### vecchio *(Luca `16:52`)*: `scegli(nome)` per un processo intero, `forma_esplicita(nome)` per un contesto.
 # ### ⚠ **`pezzi` e `applica` chiamano `alpha` e `beta` PER NOME DI MODULO:** cosi' la sostituzione di `MV.pezzi` di `csv/_screening_forme_s3.forma`
 # ### continua a funzionare per gli strumenti di `csv/`.
-FORME = {"S1": (N_s1, alpha_s1, beta_s1), "S3": (N_s3, alpha_s3, beta_s3)}
+# =====================================================================================
+#   LE FORME DEL TORNEO -- il mandato [M1631] di Luca (2026-11-22, sul ramo `lapse-u`; la carta `doc/CARTA_torneo_nonlinearita.md`, sez. 1)
+# =====================================================================================
+# ### **OPZIONI ESPLICITE, come `S3`: la PREDEFINITA resta `S1`** *(il valore della tabella)*. **Nessuna costante tarata:** `lambda` e' il NOME della forma
+# ### *(i sei valori del mandato)*, `FH` e `FT` non hanno parametri. **Le convenzioni di `S1`:** a `Lambda = 0` con `rho > 0` il LIMITE *(non un pavimento)*;
+# ### a `rho = 0` *(con `Lambda > 0`)* il valore che le espressioni PRENDONO a `x = 0`; a `rho = 0` e `Lambda = 0` lo zero.
+def _forma_lambda(lam):
+    """### **Flambda:** `lambda` volte `N`, `alpha`, `beta` di `S1` *(i limiti di `S1` per `lambda`)*."""
+    lam = float(lam)
+
+    def N_l(rho, l_):
+        return lam * N_s1(rho, l_)
+
+    def alpha_l(rho, l_):
+        return lam * alpha_s1(rho, l_)
+
+    def beta_l(rho, l_):
+        return lam * beta_s1(rho, l_)
+    return N_l, alpha_l, beta_l
+
+
+def _tre(rho, lam):
+    rho = np.asarray(rho, dtype=float)
+    lam = np.asarray(lam, dtype=float)
+    fuori = np.zeros(np.broadcast(rho, lam).shape, dtype=float)
+    r = np.broadcast_to(rho, fuori.shape)
+    l = np.broadcast_to(lam, fuori.shape)
+    return fuori, r, l, (r > 0.0) & (l > 0.0), (r == 0.0) & (l > 0.0), (r > 0.0) & (l == 0.0)
+
+
+def N_fh(rho, lam):
+    """### **FH** *(Luca `16:28`)*: `N = Lambda (x - 2 arctan x)`; ### **`rho` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    fuori, r, l, pieni, _vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = l[pieni] * (x - 2.0 * np.arctan(x))
+    fuori[sv] = r[sv]
+    return fuori
+
+
+def alpha_fh(rho, lam):
+    """### **FH**: `alpha = (x^2 - 1)/(x^2 + 1)`; ### **`1` dove `Lambda = 0`** *(il limite)*, **`-1` dove `rho = 0`** *(il valore a `x = 0`)*."""
+    fuori, r, l, pieni, vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = (x ** 2 - 1.0) / (x ** 2 + 1.0)
+    fuori[vu] = -1.0
+    fuori[sv] = 1.0
+    return fuori
+
+
+def beta_fh(rho, lam):
+    """### **FH**: `beta = x - 2 arctan x - x (x^2 - 1)/(x^2 + 1)`; ### **`-pi` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    fuori, r, l, pieni, _vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = x - 2.0 * np.arctan(x) - x * (x ** 2 - 1.0) / (x ** 2 + 1.0)
+    fuori[sv] = -np.pi
+    return fuori
+
+
+def _lncosh(y):
+    """### `ln cosh y = |y| + log1p(e^{-2|y|}) - ln 2`: ### **la stessa funzione, in una forma che NON trabocca** *(`cosh` trabocca oltre `|y| ~ 710`; dichiarato nel task history)*."""
+    a = np.abs(y)
+    return a + np.log1p(np.exp(-2.0 * a)) - np.log(2.0)
+
+
+_LNCOSH1 = float(_lncosh(np.float64(1.0)))
+_BETA_FT_LIMITE = -1.0 - float(np.log(2.0)) - _LNCOSH1          # ### il limite di `ln cosh(x - 1) - ln cosh 1 - x tanh(x - 1)` per `x -> infinito`
+
+
+def N_ft(rho, lam):
+    """### **FT**: `N = Lambda (ln cosh(x - 1) - ln cosh 1)`; ### **`rho` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    fuori, r, l, pieni, _vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = l[pieni] * (_lncosh(x - 1.0) - _LNCOSH1)
+    fuori[sv] = r[sv]
+    return fuori
+
+
+def alpha_ft(rho, lam):
+    """### **FT**: `alpha = tanh(x - 1)`; ### **`1` dove `Lambda = 0`** *(il limite)*, **`tanh(-1)` dove `rho = 0`** *(il valore a `x = 0`)*."""
+    fuori, r, l, pieni, vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = np.tanh(x - 1.0)
+    fuori[vu] = np.tanh(-1.0)
+    fuori[sv] = 1.0
+    return fuori
+
+
+def beta_ft(rho, lam):
+    """### **FT**: `beta = ln cosh(x - 1) - ln cosh 1 - x tanh(x - 1)`; ### **`-1 - ln 2 - ln cosh 1` dove `Lambda = 0`** *(il limite)*, `0` dove `rho = 0`."""
+    fuori, r, l, pieni, _vu, sv = _tre(rho, lam)
+    x = r[pieni] / l[pieni]
+    fuori[pieni] = _lncosh(x - 1.0) - _LNCOSH1 - x * np.tanh(x - 1.0)
+    fuori[sv] = _BETA_FT_LIMITE
+    return fuori
+
+
+FORME = {"S1": (N_s1, alpha_s1, beta_s1), "S3": (N_s3, alpha_s3, beta_s3),
+         "L+0.5": _forma_lambda(0.5), "L+0.25": _forma_lambda(0.25), "L0": _forma_lambda(0.0),
+         "L-0.25": _forma_lambda(-0.25), "L-0.5": _forma_lambda(-0.5), "L-1": _forma_lambda(-1.0),
+         "FH": (N_fh, alpha_fh, beta_fh), "FT": (N_ft, alpha_ft, beta_ft)}
 
 import termini.camm_materia_vuoto as _TMV                     # noqa: E402
 

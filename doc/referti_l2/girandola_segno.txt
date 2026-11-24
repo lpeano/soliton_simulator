@@ -1,0 +1,27 @@
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] notte_m0428.py  sha1-BYTE 3872b321  committato e pulito
+==================================================================================================================================
+[M0428-S] IL SEGNO DELL'ANELLO 10-16: (a) il t120 a k 0 coi due strumenti; (b) le sfasate del 15/11 ricostruite; (c) la serie del t120 dal film
+==================================================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 259, in <module>
+    sys.exit({"avvolgimento": avvolgimento, "segno": segno, "t4": t4}[cmd[0]]())
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 170, in segno
+    C15, centri = stato0_15_11(Z, "sfasati")
+                  ~~~~~~~~~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 73, in stato0_15_11
+    FR = [MTR.francobollo(k) for k in MTR.VARIANTI[v]]
+          ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone_triangolo.py", line 65, in francobollo
+    with MT.scena(MT.CORSA_BASE, MT.T_BASE) as Z81:
+         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\python\py3132\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 122, in scena
+    metti()
+    ~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 119, in metti
+    st[k][...] = (st_dato or stato)[k]
+    ~~~~~^^^^^
+ValueError: could not broadcast input array from shape (6561,) into shape (26244,)

@@ -7,7 +7,7 @@
 | **tipo** | `flusso` |
 | **generatore** | `rho - Lambda*atan(rho/Lambda)` |
 | **ambito** | `psi_h` · `phi_h` · `Lambda` · `rho` |
-| **impronta della riga** | `4fb9b958ec63bfce` |
+| **impronta della riga** | `75206f6d35cec4d1` |
 | **assiomi soddisfatti** | `A1` · `A16` |
 
 ## I PARAMETRI
@@ -16,7 +16,7 @@
 
 | | valore | origine |
 |---|--:|---|
-| `forma` | `S1` | ### LA DECISIONE DI LUCA, NON UNA TARATURA (2026-11-01 16:52; la decisione (1) delle 01:27): il nucleo usa `S1`, la forma con cui sono misurati il solitone protetto, le bande piatte, la regola dei livelli e il vuoto vivo (a8e0e43b, 751bca7f). `S3` resta AMMESSA come opzione esplicita, solo per riprodurre i risultati vecchi (`materia_vuoto.scegli`, `forma_esplicita`). ### NESSUNA COSTANTE: `x = rho/Lambda`, `N = Lambda (x - arctan x)`, le espressioni di `csv/_screening_forme_s3._ab("S1")` e `csv/_scomposizione_solitone.F1`; nessun `g` (a `g 1` il fattore di `csv/_livelli_piatti` vale `1`). |
+| `forma` | `S1` | ### LA DECISIONE DI LUCA, NON UNA TARATURA (2026-11-01 16:52; la decisione (1) delle 01:27): il nucleo usa `S1`, la forma con cui sono misurati il solitone protetto, le bande piatte, la regola dei livelli e il vuoto vivo (a8e0e43b, 751bca7f). `S3` resta AMMESSA come opzione esplicita, solo per riprodurre i risultati vecchi (`materia_vuoto.scegli`, `forma_esplicita`). ### NESSUNA COSTANTE: `x = rho/Lambda`, `N = Lambda (x - arctan x)`, le espressioni di `csv/_screening_forme_s3._ab("S1")` e `csv/_scomposizione_solitone.F1`; nessun `g` (a `g 1` il fattore di `csv/_livelli_piatti` vale `1`). ### E DAL 2026-11-22 (il mandato [M1631] di Luca, il torneo delle forme; sul ramo `lapse-u`, la riga in `doc/NUCLEO_CONGELATO.md`) SONO AMMESSE ANCHE `L+0.5`, `L+0.25`, `L0`, `L-0.25`, `L-0.5`, `L-1` (`lambda` volte `S1`: `lambda` e' il NOME della forma, i sei valori del mandato), `FH` (`N = Lambda (x - 2 arctan x)`) e `FT` (`N = Lambda (ln cosh(x - 1) - ln cosh 1)`): OPZIONI ESPLICITE come `S3`, `S1` resta la predefinita (`doc/CARTA_torneo_nonlinearita.md`, sez. 1). |
 
 
 ## LA SCHEDA, dalla tabella

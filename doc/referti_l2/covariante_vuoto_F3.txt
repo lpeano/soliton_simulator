@@ -1,0 +1,14 @@
+[TIMBRO] covariante_e_famiglia.py  sha1-BYTE c9abaac2  committato e pulito
+[TIMBRO] covariante_vuoto_F3.py  sha1-BYTE 9c48008b  committato e pulito
+==================================================================================================================================
+IL CASO NOTO FISICO DI E2, CORRETTO (Luca 2026-11-20 12:10): LA COVARIANTE SUL VUOTO F3 PURO
+==================================================================================================================================
+### il vuoto F3 puro (S162, L 162, n 26244, l'arco 39609: 13203 -> 13365; k 13366, l 13202); H -4.9468774560e+05
+### DH_cov (la covariante, la media in k e l) +3.384608e-02; per termine: G_psi +0.0000e+00, a_psi +0.0000e+00, N +0.0000e+00, G_phi +0.0000e+00, a_phi +3.3846e-02
+    le ampiezze prima del fattore: l'estremita' nuova di k |media| 0.000000 contro |verso i| 1.000000 e |verso j| 1.000000; il fattore della stella 0.960769
+### la covariante con k e l presi da UNA direzione (verso i): DH +3.583173e+00; la parte dovuta a k e l (DH_cov - DH_una) -3.549327e+00 (-10486.7% di DH_cov); per termine: G_psi +0.0000e+00, a_psi +0.0000e+00, N +0.0000e+00, G_phi +7.6937e-01, a_phi +2.8138e+00
+### la covariante con k e l presi da UNA direzione (verso j): DH +3.583173e+00; la parte dovuta a k e l (DH_cov - DH_una) -3.549327e+00 (-10486.7% di DH_cov); per termine: G_psi +0.0000e+00, a_psi +0.0000e+00, N +0.0000e+00, G_phi +7.6937e-01, a_phi +2.8138e+00
+### accanto (regole_fase_F3.txt): FA sullo stesso arco dH +3.476457e+00
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto del codice: cov_una con la media rimessa = covariante_e_famiglia.cov_grezza AL BIT                        PASSA
+==================================================================================================================================

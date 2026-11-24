@@ -1,0 +1,34 @@
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] spettro_gap.py  sha1-BYTE 7494e102  committato e pulito
+[TIMBRO] spettro_gap_v2.py  sha1-BYTE 6858158e  committato e pulito
+[TIMBRO] spettro_gap_v3.py  sha1-BYTE 8a6460ce  committato e pulito
+==================================================================================================================================
+[M1446-S] LO SPETTRO DEL TICK, LA V2 (la carta sez. S, 2, 3): la griglia 96 x 96; A_IMP 1e-06, DK 0.02; e0 0.4767266286
+==================================================================================================================================
+### la risposta di un tick: 23 nodi col supporto (il raggio massimo 2.646)
+### v_max sulla griglia 96 x 96: 0.084950; col raffinamento 21 x 21 attorno al massimo (la cella [np.int64(28), np.int64(0)]): 0.084955
+### le quasi-energie: da -0.482676 a +0.476727; |dE/dk| massima 0.084955 nodi per tick (B0 0.084950, B1 0.084950); 0.588 s = 0.088200: il rapporto 0.96321
+### i 12 autovalori a Gamma (ordinati): -0.4826761 -0.4826761 -0.4826761 -0.4826761 -0.4767266 -0.4767266 +0.0114372 +0.0114372 +0.0114372 +0.0114372 +0.4767266 +0.4767266
+### la banda piu' bassa (il fondo) (ordinata per valore): il minimo -0.4826761 a k = (52, 37)/96, il massimo -0.4826761 a k = (88, 43)/96
+### la penultima (la base della coppia della materia) (ordinata per valore): il minimo +0.2453383 a k = (32, 32)/96, il massimo +0.4767266 a k = (0, 0)/96
+### l'ultima (la cima della materia) (ordinata per valore): il minimo +0.2453383 a k = (32, 32)/96, il massimo +0.4767266 a k = (0, 0)/96
+### la banda di q (la cima, E 0.4767266286): d2E/dk2 lungo B0 -5.923495e-02, lungo B1 -5.923495e-02; m*_banda -16.8819
+  DEVE: K1-S: d2E/dk2 della banda di q = -0.059 entro l'1% (T-L4: -5.923495e-02)                                       PASSA (-5.923495e-02)
+  DEVE: K1-S: v_max = 0.588 s entro l'1%                                                                               ### FALLISCE (0.084955 contro 0.088200)
+### I GAP (gli spazi sopra 4 v_max dk = 2.5682e-02): 3
+    da -0.245925 a +0.011437: la larghezza 0.257363, il centro -0.117244; nella convenzione VECCHIA (E - pi s) il centro -0.588483
+    da +0.011870 a +0.245338: la larghezza 0.233468, il centro +0.128604; nella convenzione VECCHIA (E - pi s) il centro -0.342635
+    da +0.476727 a -0.482676: la larghezza 5.323783, il centro +3.138618; nella convenzione VECCHIA (E - pi s) il centro +2.667379
+### (i) LA SIMMETRIA (lo scarto massimo sul cerchio): eps -> -eps allo stesso k 2.373e-01; eps -> -eps con k -> -k 2.373e-01; eps -> eps + pi 2.650e+00
+    i centri di simmetria trovati (entro 1e-6): nessuno
+### (iii) e0 - pi s = 0.005488; le larghezze dei gap 0.257363, 0.233468, 5.323783; a Gamma la cima +0.4767266 e il livello piu' vicino sotto +0.0114372 (la distanza 0.465289)
+    e0 - pi s NON e' la larghezza di nessun gap: e' la distanza fra la cima della banda della materia (e0) e il ritmo del vuoto (pi s), due livelli diversi
+### (iv) I GAP ATTORNO ALLA BANDA DELLA MATERIA, a Gamma, |k| < 0.3, 61 punti
+    sopra la materia (la cima +0.476727 -> -0.482676), lungo B0: E0 +3.138618, Delta 2.661891; il ramo alto c +0.07975 (l'errore relativo massimo 0.095, la curvatura +3.1460e-03); il basso c +0.39672 (0.001, -5.9236e-02); c contro s 0.532, contro 0.588 s 0.904: non Dirac
+    sopra la materia (la cima +0.476727 -> -0.482676), lungo B1: E0 +3.138618, Delta 2.661891; il ramo alto c +0.07975 (l'errore relativo massimo 0.095, la curvatura +3.1460e-03); il basso c +0.39672 (0.001, -5.9236e-02); c contro s 0.532, contro 0.588 s 0.904: non Dirac
+    sotto la materia (+0.011437 -> la base della coppia +0.476727), lungo B0: E0 +0.244082, Delta 0.232645; il ramo alto c -0.11701 (l'errore relativo massimo 0.002, la curvatura -5.9236e-02); il basso c -0.00300 (0.500, +3.8778e-05); c contro s 0.780, contro 0.588 s 1.327: non Dirac
+    sotto la materia (+0.011437 -> la base della coppia +0.476727), lungo B1: E0 +0.244082, Delta 0.232645; il ramo alto c -0.11701 (l'errore relativo massimo 0.002, la curvatura -5.9236e-02); il basso c -0.00425 (0.000, +7.7556e-05); c contro s 0.780, contro 0.588 s 1.327: non Dirac
+### omega(N1) 0.6264373875; i dati in E:\soliton_simulator\controllo\M1446\spettro.npz (sha1 2b96f5e2)
+  DEVE: K1-S: d2E/dk2 della banda di q = -0.059 entro l'1% (T-L4: -5.923495e-02)                                       PASSA
+  DEVE: K1-S: v_max = 0.588 s entro l'1%                                                                               ### FALLISCE
+==================================================================================================================================

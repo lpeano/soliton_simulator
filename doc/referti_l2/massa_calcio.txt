@@ -1,0 +1,16 @@
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+==================================================================================================================================
+[M1446-M] LA MASSA DEL SOLITONE COL CALCIO (la carta sez. M): v dal fit su k 200 ... 1000, m* = k/v
+==================================================================================================================================
+  k0.000_a1: v lungo l'asse +9.979127e-07 +- 2.2e-07 (il residuo 4.66e-04); lo spostamento a k 1000 -0.0040; la norma da 9.950109e+05 a 9.950109e+05; m* = k/v = -
+  k0.010_a1: v lungo l'asse -5.362580e-04 +- 8.2e-07 (il residuo 1.73e-03); lo spostamento a k 1000 -0.5518; la norma da 9.950109e+05 a 9.950109e+05; m* = k/v = -18.648 +- 0.029
+  k0.010_a2: v lungo l'asse -5.033241e-04 +- 1.3e-06 (il residuo 2.70e-03); lo spostamento a k 1000 -0.5124; la norma da 9.950109e+05 a 9.950109e+05; m* = k/v = -19.868 +- 0.051
+  k0.005_a1: non c'e' ancora
+  k0.005_a2: non c'e' ancora
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1-M: a k = 0 il mattone fermo (v entro 3 sigma da 0)                                                          ### FALLISCE (+9.98e-07 +- 2.2e-07)
+  m*_sol: -18.648, -19.868; la media -19.258
+  DEVE: K2: m*_sol NEGATIVA (se positiva la lettura del guardiano cade)                                                PASSA (-18.65, -19.87)
+  DEVE: K1-M: a k = 0 il mattone fermo (v entro 3 sigma da 0)                                                          ### FALLISCE
+  DEVE: K2: m*_sol NEGATIVA (se positiva la lettura del guardiano cade)                                                PASSA
+==================================================================================================================================

@@ -1,0 +1,37 @@
+[TIMBRO] covariante_di_stella.py  sha1-BYTE 4b672175  committato e pulito
+[TIMBRO] flip_di_stella.py  sha1-BYTE 622bc818  committato e pulito
+==================================================================================================================================
+IL FLIP DI STELLA: F1, F2 PER CANDIDATO, F3 (Luca 2026-11-20 13:54); lo stato di C2 a k 3000 (dichiarato); LA SCELTA FRA I QUATTRO NON SI USA
+==================================================================================================================================
+### F1: sul campo uniforme le due estremita' nuove dei quattro flip (prima del fattore) = il valore AL BIT: True
+----------------------------------------------------------------------------------------------------------------------------------
+    0 su 200 (1 s)
+    20 su 200 (21 s)
+    40 su 200 (40 s)
+    60 su 200 (60 s)
+    80 su 200 (79 s)
+    100 su 200 (99 s)
+    120 su 200 (119 s)
+    140 su 200 (138 s)
+    160 su 200 (158 s)
+    180 su 200 (177 s)
+### LO SPECCHIO DEL FLIP DA SOLO (a 30 gradi per il nodo (92, 92); 200 nascite x 4 candidati: 132 conservate, 68 ROVESCIATE); candidati NON definiti 0
+    stella  conservati 528 flip: psi max 3.927e-16 (sopra 1e-14:   0), phi max 2.660e-16 (sopra:   0)
+    stella  ROVESCIATI 272 flip: psi max 2.560e-16 (sopra 1e-14:   0), phi max 1.892e-16 (sopra:   0)
+    verso   conservati 528 flip: psi max 9.695e-02 (sopra 1e-14: 264), phi max 1.146e+00 (sopra: 264)
+    verso   ROVESCIATI 272 flip: psi max 1.388e-16 (sopra 1e-14:   0), phi max 1.253e-16 (sopra:   0)
+    il caso che DEVE FALLIRE (il flip col verso, come C3): lo scarto massimo 1.146e+00 (deve superare 1e-06)
+----------------------------------------------------------------------------------------------------------------------------------
+### F3, i gradi (n e m +1, x e y -1): 800 su 800 flip
+### F3, Eulero (somma 6 - k = 0, E = 3 V): 800 su 800 flip
+### F3, nessun arco doppio: 800 su 800 flip
+### F3, ogni arco in due triangoli: 800 su 800 flip
+### il DH del flip (il conto a mano; NON usato per scegliere): min -9.1376e+00, mediana +1.4034e-01, max +7.2476e+00; negativi 390 su 800
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: F1: sul campo uniforme le estremita' nuove del flip (prima del fattore) AL BIT                                         PASSA
+  DEVE: DEVE FALLIRE: il flip col verso sopra 1e-6 (o la prova non vale: FERMO)                                                PASSA
+  DEVE: P-F2: il flip di stella simmetrico su tutte le classi entro 1e-14 (ogni candidato)                                     PASSA
+  DEVE: P-F2: il flip col verso cade sui ROVESCIATI                                                                            ### FALLISCE
+  DEVE: F3: i gradi, Eulero, nessun arco doppio, ogni arco in due triangoli, su ogni flip                                      PASSA
+### 227 s
+==================================================================================================================================

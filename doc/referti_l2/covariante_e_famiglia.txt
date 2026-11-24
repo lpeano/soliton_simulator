@@ -1,0 +1,77 @@
+[TIMBRO] nascita_energia_nulla.py  sha1-BYTE e92b4ac5  committato e pulito
+[TIMBRO] covariante_e_famiglia.py  sha1-BYTE c9abaac2  committato e pulito
+==================================================================================================================================
+LA COVARIANTE, LA FAMIGLIA FRA D7 E LA COVARIANTE, E LO SPECCHIO VERO (Luca 2026-11-20 11:57); lo stato di C2 a k 3000 (dichiarato)
+==================================================================================================================================
+### IL CASO NOTO (beta = 0 contro regole_fase_F3.nascita FA, 20 archi): psi al bit True; ogni termine di dH al bit True
+### IL CASO NOTO DEL CODICE: sul campo uniforme le 6 estremita' nuove della covariante (prima del fattore) = il valore AL BIT: True
+----------------------------------------------------------------------------------------------------------------------------------
+### LA PREVISIONE SUL VUOTO F3 PURO (S162, L 162, n 26244, l'arco 39609): H/n = -1.884956e+01 (il numero che la covariante DEVE dare); DH_cov = +3.384608e-02; lo scarto relativo 1.002e+00; per termine: G_psi +0.0000e+00, a_psi +0.0000e+00, N +0.0000e+00, G_phi +0.0000e+00, a_phi +3.3846e-02
+----------------------------------------------------------------------------------------------------------------------------------
+### parte_0.npz: 1465 archi, 1373 s
+### parte_1.npz: 1464 archi, 1358 s
+### E2 (la covariante, psi e phi): DH_cov min -3.9275e+01, mediana -1.1921e+01, max +2.8851e+00; negativi 2840 su 2929; |conto a mano - pieno| max 1.863e-09
+    DH(D7) mediana -5.5520e+02; |DH_cov| mediano / |DH(D7)| mediano = 0.0215; per termine (la mediana): G_psi +1.4458e+00, a_psi -1.3842e+01, N +2.2005e-03, G_phi +2.8371e-01, a_phi +1.9198e-01
+    beta = 1 (la covariante con phi FA) contro E2: la differenza di DH mediana +5.7834e-01 (max |.| 1.8828e+01)
+    la D7 simmetrica: DH mediana -5.2832e+02 (min -1.2979e+03, max -6.8507e+00)
+### ### LA FAMIGLIA BETA: LA RADICE su 197 archi su 2929 (6.73%); DH(beta=1) positivi 197; i cambi di segno sugli 11 punti {0: 2721, 1: 197, 2: 11}
+    beta*: min 0.547549, mediana 0.853639, max 0.966900; alla radice col conto pieno |DH| max 1.397e-09 (relativo a |H| 4.065e-16); per termine (mediana): G_psi -3.0939e-01, a_psi -1.7441e+00, N -5.7656e-03, G_phi +1.2252e+00, a_phi +9.5451e-01
+    PER ANELLO:
+      r 10-12:  191 archi; DH(D7) -1.2135e+03, DH_cov -2.6289e+01, DH(beta=1) -2.1381e+01, DH sim -1.1444e+03 (le mediane); la radice    0, beta* mediana -
+      r 12-14:  372 archi; DH(D7) -1.0875e+03, DH_cov -2.3668e+01, DH(beta=1) -2.2417e+01, DH sim -1.0239e+03 (le mediane); la radice    0, beta* mediana -
+      r 14-16:  504 archi; DH(D7) -8.7335e+02, DH_cov -1.9378e+01, DH(beta=1) -1.9603e+01, DH sim -8.2932e+02 (le mediane); la radice    0, beta* mediana -
+      r 16-18:  587 archi; DH(D7) -6.1085e+02, DH_cov -1.3162e+01, DH(beta=1) -1.3172e+01, DH sim -5.7376e+02 (le mediane); la radice    0, beta* mediana -
+      r 18-20:  667 archi; DH(D7) -3.2302e+02, DH_cov -6.8989e+00, DH(beta=1) -5.6912e+00, DH sim -3.0482e+02 (le mediane); la radice   24, beta* mediana 0.9036
+      r 20-22:  593 archi; DH(D7) -1.0463e+02, DH_cov -1.8305e+00, DH(beta=1) -1.1182e+00, DH sim -1.0093e+02 (le mediane); la radice  165, beta* mediana 0.8485
+      r 22-24:   15 archi; DH(D7) -2.6150e+01, DH_cov +1.9348e-01, DH(beta=1) +1.2204e+00, DH sim -2.3285e+01 (le mediane); la radice    8, beta* mediana 0.6546
+----------------------------------------------------------------------------------------------------------------------------------
+### IL DETERMINISMO: det_a e det_b AL BIT True; contro le parti sugli stessi 100 archi True
+### LE NASCITE IN FILA alla radice: 20; H prima 3.4366601579e+06
+     1: l'arco  62816 (20938 -> 21125): beta* 0.935720; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+     2: l'arco  62822 (20940 -> 21127): beta* 0.891967; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+     3: l'arco  63348 (21116 -> 21302): beta* 0.922049; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+     4: l'arco  55024 (18341 -> 18342): beta* 0.915919; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+     5: l'arco  60047 (20015 -> 20202): beta* 0.894899; H(dopo) - H(prima) -4.657e-10; relativo 1.355e-16
+     6: l'arco  42059 (14019 -> 14206): beta* 0.875713; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+     7: l'arco  47638 (15879 -> 15880): beta* 0.931323; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+     8: l'arco  62828 (20942 -> 21129): beta* 0.926508; H(dopo) - H(prima) -4.657e-10; relativo 1.355e-16
+     9: l'arco  53908 (17969 -> 17970): beta* 0.919837; H(dopo) - H(prima) -4.657e-10; relativo 1.355e-16
+    10: l'arco  38729 (12909 -> 13096): beta* 0.907164; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+    11: l'arco  52111 (17370 -> 17371): beta* 0.852218; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+    12: l'arco  63342 (21114 -> 21300): beta* 0.889142; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+    13: l'arco  61163 (20387 -> 20574): beta* 0.933185; H(dopo) - H(prima) -9.313e-10; relativo 2.710e-16
+    14: l'arco  63929 (21309 -> 21496): beta* 0.923918; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+    15: l'arco  48754 (16251 -> 16252): beta* 0.905872; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+    16: l'arco  57154 (19051 -> 19052): beta* 0.851207; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+    17: l'arco  63923 (21307 -> 21494): beta* 0.881619; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+    18: l'arco  57717 (19239 -> 19425): beta* 0.947672; H(dopo) - H(prima) +4.657e-10; relativo 1.355e-16
+    19: l'arco  62211 (20737 -> 20923): beta* 0.928826; H(dopo) - H(prima) +0.000e+00; relativo 0.000e+00
+    20: l'arco  38723 (12907 -> 13094): beta* 0.871875; H(dopo) - H(prima) -1.397e-09; relativo 4.065e-16
+----------------------------------------------------------------------------------------------------------------------------------
+### LO SPECCHIO VERO a 30 gradi per il nodo (np.int64(92), np.int64(92)) (lo scarto 4.3e-14); H dello stato specchiato contro H relativo 1.355e-16; i primi 200 archi: 132 a verso conservato, 68 ROVESCIATI
+    D7      conservati 132 archi: psi max 2.156e-16 (sopra 1e-10:   0), phi max 6.264e-17 (sopra 1e-10:   0)
+    D7      ROVESCIATI  68 archi: psi max 2.028e-01 (sopra 1e-10:  68), phi max 5.137e-01 (sopra 1e-10:  68)
+    COV     conservati 132 archi: psi max 1.963e-16 (sopra 1e-10:   0), phi max 1.826e-16 (sopra 1e-10:   0)
+    COV     ROVESCIATI  68 archi: psi max 1.326e-16 (sopra 1e-10:   0), phi max 1.786e-16 (sopra 1e-10:   0)
+    RADICE  conservati   1 archi: psi max 1.846e-12 (sopra 1e-10:   0), phi max 0.000e+00 (sopra 1e-10:   0)
+    RADICE  ROVESCIATI   0 archi confrontabili
+    D7SIM   conservati 132 archi: psi max 1.888e-16 (sopra 1e-10:   0), phi max 6.264e-17 (sopra 1e-10:   0)
+    D7SIM   ROVESCIATI  68 archi: psi max 1.869e-16 (sopra 1e-10:   0), phi max 5.137e-01 (sopra 1e-10:  68)
+    MINIMO  conservati 132 archi: psi max 2.156e-16 (sopra 1e-10:   0), phi max 6.264e-17 (sopra 1e-10:   0)
+    MINIMO  ROVESCIATI  68 archi: psi max 2.028e-01 (sopra 1e-10:  68), phi max 5.137e-01 (sopra 1e-10:  68)
+    il caso che DEVE FALLIRE (il padre = l'indice minore): lo scarto massimo 5.137e-01 (deve superare 1e-06)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: beta = 0 = regole_fase_F3.nascita(FA) AL BIT, psi e ogni termine (20 archi)                              PASSA
+  DEVE: il caso noto: sul campo uniforme la covariante (prima del fattore) da' il valore AL BIT                                PASSA
+  DEVE: la previsione: sul vuoto F3 puro DH_cov = H/n entro 1e-6 relativo (la carta 1.4: credo di NO)                          ### FALLISCE
+  DEVE: P-C1: |DH_cov| mediano sotto il 30%% di |DH(D7)| mediano                                                               PASSA
+  DEVE: P-E2: DH_cov negativo su piu' della meta' degli archi                                                                  PASSA
+  DEVE: P-C2: la radice della famiglia beta su almeno l'80% degli archi (6.73%)                                                ### FALLISCE
+  DEVE: P-C4: deterministica AL BIT (due processi) e uguale alle parti                                                         PASSA
+  DEVE: P-C4: 20 nascite in fila, |H(dopo) - H(prima)|/|H| sotto 1e-10 dopo ognuna                                             PASSA
+  DEVE: DEVE FALLIRE: il padre = il nodo di indice minore da' uno scarto sopra 1e-6 (o la prova non vale: FERMO)               PASSA
+  DEVE: P-C3: D7 NON simmetrica sulla classe rovesciata (sopra 1e-10 su almeno un arco rovesciato)                             PASSA
+  DEVE: P-C3: la covariante simmetrica su tutte le classi (sotto 1e-10)                                                        PASSA
+  DEVE: la radice della famiglia simmetrica allo specchio (sotto 1e-10 su tutti gli archi confrontabili)                       PASSA
+### 65 s
+==================================================================================================================================

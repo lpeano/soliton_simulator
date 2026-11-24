@@ -1,0 +1,32 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] girandola_chi_v3.py  sha1-BYTE 4f6a3787  committato e pulito
+[TIMBRO] eotvos.py  sha1-BYTE ed8dd279  committato e pulito
+[TIMBRO] eotvos_v2.py  sha1-BYTE 263711d2  committato e pulito
+==================================================================================================================================
+[M1446-Q] EÖTVÖS, LA V2 (la carta sez. 1): le norme x (0.8, 1.2); le forme V2 e V3; eta = 2 (a1 - a2)/(a1 + a2)
+==================================================================================================================================
+  x 0.8 la tenuta: omega 0.6264217267 +- 4.9e-07 (il residuo 3.852e-03); il picco da 9.5413e+02 a 1.3240e+03 (+38.8%); ### NON REGGE
+  x 0.8 il calcio: v -5.580232e-04 +- 3.5e-07; m* -17.920
+  x 0.8 V2: omega(Nm) 0.6242324802, omega(Np) 0.6286109438; d omega/dN +0.62549481; (q - 1)/(N - 1) +0.99852
+  x 0.8 V2 la caduta: a lungo y -5.5320e-06 +- 5.9e-08 (il residuo 3.25e-02)
+  x 0.8 V3: omega(Nm) 0.6280902699, omega(Np) 0.6247531835; d omega/dN -0.47672663; (q - 1)/(N - 1) -0.76103
+  x 0.8 V3 la caduta: a lungo y +4.2868e-06 +- 5.6e-08 (il residuo 3.06e-02)
+  x 1.2 la tenuta: omega 0.6264454232 +- 3.3e-07 (il residuo 2.610e-03); il picco da 1.4312e+03 a 1.9934e+03 (+39.3%); ### NON REGGE
+  x 1.2 il calcio: v -5.194804e-04 +- 1.5e-06; m* -19.250
+  x 1.2 V2: omega(Nm) 0.6242560701, omega(Np) 0.6286347436; d omega/dN +0.62552478; (q - 1)/(N - 1) +0.99853
+  x 1.2 V2 la caduta: a lungo y -4.9038e-06 +- 2.2e-08 (il residuo 1.20e-02)
+  x 1.2 V3: omega(Nm) 0.6281139664, omega(Np) 0.6247768800; d omega/dN -0.47672663; (q - 1)/(N - 1) -0.76100
+  x 1.2 V3 la caduta: a lungo y +3.7335e-06 +- 1.0e-08 (il residuo 5.65e-03)
+----------------------------------------------------------------------------------------------------------------------------------
+  V2: ETA = +1.2039e-01 +- 1.2e-02 (9.9 sigma): K5 VIOLA
+    x 0.8 la previsione -(d omega/dN) g_N/|m*| -5.4939e-06; la misura -5.5320e-06; il rapporto 1.007
+    x 1.2 la previsione -(d omega/dN) g_N/|m*| -5.1147e-06; la misura -4.9038e-06; il rapporto 0.959
+    eta prevista +7.1493e-02; la misurata meno la prevista +4.8897e-02 (4.0 sigma)
+  V3: ETA = +1.3799e-01 +- 1.4e-02 (9.7 sigma): K5 VIOLA
+    x 0.8 la previsione -(d omega/dN) g_N/|m*| +4.1873e-06; la misura +4.2868e-06; il rapporto 1.024
+    x 1.2 la previsione -(d omega/dN) g_N/|m*| +3.8980e-06; la misura +3.7335e-06; il rapporto 0.958
+    eta prevista +7.1541e-02; la misurata meno la prevista +6.6446e-02 (4.7 sigma)
+==================================================================================================================================

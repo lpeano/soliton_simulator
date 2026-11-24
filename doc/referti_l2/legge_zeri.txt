@@ -1,0 +1,28 @@
+[TIMBRO] orologio_relativo.py  sha1-BYTE 057d67f9  committato e pulito
+[TIMBRO] orologio_zero.py  sha1-BYTE 5ab1d36b  committato e pulito
+[TIMBRO] orologio_mattone_v2.py  sha1-BYTE 18c0185e  committato e pulito
+[TIMBRO] legge_zeri.py  sha1-BYTE ee7be582  committato e pulito
+==================================================================================================================================
+[M1446-L] LE K DI V2 E V3 DA QUATTRO ZERI (la carta sez. 3; POST-HOC, dichiarato)
+==================================================================================================================================
+  N1    N 1.0000: omega_psi 0.6264373875; omega_phi locale -0.47892089 (theta_v si sposta di +1.8746, +1.8426, +2.0443 rad in 250 tick); il vuoto lontano -0.4712389025; omega_F3 -0.4712388980
+  NmV2  N 0.9965: omega_psi 0.6242480511; omega_phi locale -0.47645552 (theta_v si sposta di +1.2580, +1.2306, +1.4240 rad in 250 tick); il vuoto lontano -0.4695895722; omega_F3 -0.4712388980
+  NmV3  N 0.9965: omega_psi 0.6281059307; omega_phi locale -0.47892089 (theta_v si sposta di +1.8746, +1.8426, +2.0443 rad in 250 tick); il vuoto lontano -0.4712389025; omega_F3 -0.4712388980
+  NpV3  N 1.0035: omega_psi 0.6247688443; omega_phi locale -0.47892089 (theta_v si sposta di +1.8746, +1.8426, +2.0443 rad in 250 tick); il vuoto lontano -0.4712389025; omega_F3 -0.4712388980
+  il controllo: lo spostamento massimo di theta_v fra due stati 2.0443 rad (sotto pi/2: ### NO: ambiguo)
+----------------------------------------------------------------------------------------------------------------------------------
+  IL CONTROLLO DI V2: (omega_psi - omega_vuoto_lontano)(N) contro (omega(1) - omega_F3) N = 1.097676 N
+    N1    N 1.0000: 1.097676 contro 1.097676: lo scarto +4.498e-09 (entro 1e-3)
+    NmV2  N 0.9965: 1.093838 contro 1.093834: lo scarto +3.205e-06 (entro 1e-3)
+----------------------------------------------------------------------------------------------------------------------------------
+  V2 (a/(c^2 |grad N|): c_m = 0.588 s +4.153, c = s +1.436; i punti N [1.0, 0.9965])
+    lo zero 0 (lo zero simmetrico)                       Delta(1) 0.626437; d ln Delta/dN +1.00029; K: c_m = 0.588 s +4.152; c = s +1.436
+    lo zero omega(1) + e0 = 1.103164 (fisso)             Delta(1) 0.476727; d ln Delta/dN -1.30912; K: c_m = 0.588 s -3.172; c = s -1.097
+    lo zero omega(1) - omega_F3 = 1.097676 (fisso)       Delta(1) 0.471239; d ln Delta/dN -1.32433; K: c_m = 0.588 s -3.136; c = s -1.084
+    lo zero il vuoto LOCALE (misurato a ogni N)          Delta(1) 1.105358; d ln Delta/dN +1.20569; K: c_m = 0.588 s +3.444; c = s +1.191
+  V3 (a/(c^2 |grad N|): c_m = 0.588 s -3.191, c = s -1.103; i punti N [0.9965, 1.0, 1.0035])
+    lo zero 0 (lo zero simmetrico)                       Delta(1) 0.626437; d ln Delta/dN -0.76101; K: c_m = 0.588 s +4.193; c = s +1.449
+    lo zero omega(1) + e0 = 1.103164 (fisso)             Delta(1) 0.476727; d ln Delta/dN +1.00000; K: c_m = 0.588 s -3.191; c = s -1.103
+    lo zero omega(1) - omega_F3 = 1.097676 (fisso)       Delta(1) 0.471239; d ln Delta/dN +1.01165; K: c_m = 0.588 s -3.154; c = s -1.090
+    lo zero il vuoto LOCALE (misurato a ogni N)          Delta(1) 1.105358; d ln Delta/dN -0.43129; K: c_m = 0.588 s +7.399; c = s +2.557
+==================================================================================================================================

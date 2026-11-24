@@ -1,0 +1,24 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] chi_parametri_v2.py  sha1-BYTE a1bcb2f4  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+==================================================================================================================================
+[M0908-K] IL CASO NOTO DELLA CADUTA LIBERA: 50 tick; V1 con A = 0 contro V0, V0 contro il tick U (gravita_due_corpi.tick_U), AL BIT; DEVE FALLIRE V1 con A vero
+==================================================================================================================================
+### L'AMPIEZZA dallo stato E:\soliton_simulator\controllo\CHI\mattone_v2\stato_03000.npz (k 3000, L 186): il centro del meta ['91.534', '91.695'], kappa 0.0002528944153922671; N medio sugli anelli r 19, 20, 21: 0.997202657503 0.997364172755 0.997517459428; G20 = 1.574010e-04; N al centro 0.9942053510; il massimo di chi 22.979958 a r 0.410 dal centro
+  DEVE: K: il massimo di chi dello stato del mattone con chi a meno di 3 dal centro del meta (la convenzione delle coordinate) PASSA (r 0.410)
+### V0: l'impronta di partenza 87088896318c
+### U: l'impronta di partenza 87088896318c
+### V1 A = 0: l'impronta di partenza 87088896318c
+### la scena: il centro [80, 80], il baricentro di rho a k 0 (dal centro) ['-0.3251', '-0.2577'], y_c 69.024359, la massa 995010.893145; L_y 140.2961; A 1.389741e+01; N da 0.9964916991 a 1.0035206524; |dN/dy| allo zero (kappa A 2 pi/L_y) 1.574010e-04
+### V1 A vero: l'impronta di partenza 87088896318c
+### V1 A = 0 contro V0: AL BIT; V0 contro U: AL BIT; V1 A vero contro V0: le chiavi diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'A', 'E']
+  DEVE: K: V1 con A = 0 = V0 AL BIT dopo 50 tick (ogni chiave, A, E)                                                   PASSA 
+  DEVE: K: V0 = il tick U di gravita_due_corpi AL BIT dopo 50 tick                                                     PASSA 
+  DEVE: K DEVE FALLIRE: V1 con A vero diversa da V0 dopo 50 tick (psi_h)                                               PASSA 
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 4/4
+==================================================================================================================================

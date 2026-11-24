@@ -1,0 +1,18 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] specchio_carta.py  sha1-BYTE 8ca8f96b  committato e pulito
+[TIMBRO] chi_simmetrie_v2.py  sha1-BYTE e3c702e3  committato e pulito
+======================================================================================================================================================
+K6: CPT E LO SPECCHIO DEL TICK CON CHI, SENZA BORDO (Luca 2026-11-21 15:57; il task history del ramo lapse-u, sez. 9.3)
+======================================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### i parametri: kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001
+### p0 = (91, 92); l'inversione: una permutazione del toro; lo specchio a 30.0 gradi (2 A1 + A2): lo scarto 4.26e-14
+### CPT, il mattone, N = 10: il massimo 7.760e-13 (la soglia 1e-12: SOTTO) -- psi_h 4.505e-15  phi_h 1.397e-14  A 8.623e-16  E 7.760e-13  chi 7.519e-16  pi 3.393e-15  (19 s)
+### CPT, il mattone, N = 100: il massimo 2.599e-12 (la soglia 1e-10: SOTTO) -- psi_h 1.506e-14  phi_h 3.544e-14  A 2.587e-15  E 2.599e-12  chi 3.384e-15  pi 1.820e-14  (178 s)
+### CPT, lo stato a caso (seme 11), N = 10: il massimo 6.898e-13 (la soglia 1e-12: SOTTO) -- psi_h 7.100e-15  phi_h 1.141e-14  A 8.614e-16  E 6.898e-13  chi 7.517e-16  pi 5.409e-14  (18 s)
+### CPT DEVE FALLIRE (pi NON invertito), il mattone, N = 10: il massimo 8.032e-04 -> FALLISCE (giusto) -- psi_h 1.093e-06  phi_h 3.216e-06  A 1.918e-11  E 2.744e-08  chi 2.897e-04  pi 8.032e-04
+### LO SPECCHIO (T = sigma.l, phi -> -phi, A e E col verso, chi e pi permutati), il mattone, 10 tick: il massimo 7.997e-12 (la soglia 1e-10: SOTTO) -- psi_h 3.217e-15  phi_h 1.046e-14  A 8.594e-16  E 6.768e-13  chi 7.520e-16  pi 7.997e-12
+### LO SPECCHIO DEVE FALLIRE (chi e pi NON permutati), 10 tick: il massimo 8.103e+00 -> FALLISCE (giusto) -- psi_h 2.575e-04  phi_h 1.024e-03  A 2.753e-09  E 2.569e-06  chi 1.278e-03  pi 8.103e+00
+======================================================================================================================================================
+### GLI ESITI: {'CPT il mattone N 10': True, 'CPT il mattone N 100': True, 'CPT lo stato a caso (seme 11) N 10': True, 'CPT DEVE FALLIRE': True, 'specchio': True, 'specchio DEVE FALLIRE': True} -> TUTTE PASSANO   (il tempo 351 s)
+======================================================================================================================================================

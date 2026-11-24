@@ -1,0 +1,41 @@
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] spettro_gap_v2.py  sha1-BYTE 6858158e  committato e pulito
+[TIMBRO] ablazione.py  sha1-BYTE e63b7df3  committato e pulito
+==================================================================================================================================
+[M1658-A] L'ABLAZIONE DELLO SPETTRO (la carta sez. 4): la griglia 96 x 96; DK 0.02; (iii) e (v) NON si fanno (la carta)
+==================================================================================================================================
+(0) nessuna ablazione (il caso noto): 23 nodi col supporto; |lambda| a Gamma da 1.000000000000 a 1.000000000000
+  DEVE: K1 (0) senza ablazione: E(k) = spettro.npz di spettro_gap_v2 AL BIT                                            PASSA max|dE| 0.000e+00
+    le 12 bande ordinate: -0.482676..-0.482676 PIATTA; -0.482676..-0.482676 PIATTA; -0.482676..-0.482421; -0.482676..-0.482421; -0.476727..-0.245925; -0.476727..-0.245925; +0.011437..+0.011437 PIATTA; +0.011437..+0.011437 PIATTA; +0.011437..+0.011870; +0.011437..+0.011870; +0.245338..+0.476727; +0.245338..+0.476727
+    LA CIMA (a Gamma, la sovrapposizione massima col q senza ablazione 1.0000): E +0.4767266; d2E/dk2 lungo B0 -5.9235e-02, B1 -5.9235e-02 (MASSA NEGATIVA)
+    IL FONDO a K (la sovrapposizione massima col sottospazio del fondo senza ablazione 1.0000): E +0.2453383; d2E/dk2 lungo B0 +5.5956e-02, B1 +5.5956e-02
+    le bande piatte (larghezza < 1e-06): 4
+(i) la moneta di spin -> l'identita': 23 nodi col supporto; |lambda| a Gamma da 1.000000000000 a 1.000000000000
+    le 12 bande ordinate: -0.471239..-0.471239 PIATTA; -0.471239..-0.471239 PIATTA; -0.471239..-0.471239 PIATTA; -0.471239..-0.471239 PIATTA; -0.471239..-0.233979; -0.471239..-0.233979; -0.000000..+0.000000 PIATTA; -0.000000..+0.000000 PIATTA; -0.000000..+0.000000 PIATTA; -0.000000..+0.000000 PIATTA; +0.233979..+0.471239; +0.233979..+0.471239
+    LA CIMA (a Gamma, la sovrapposizione massima col q senza ablazione 0.9127): E +0.4712389; d2E/dk2 lungo B0 -6.0019e-02, B1 -6.0019e-02 (MASSA NEGATIVA)
+    IL FONDO a K (la sovrapposizione massima col sottospazio del fondo senza ablazione 0.9695): E +0.2339787; d2E/dk2 lungo B0 +5.8760e-02, B1 +5.8760e-02
+    le bande piatte (larghezza < 1e-06): 8
+    lo spostamento delle bande ordinate rispetto a (0): da -1.187024e-02 a +1.194664e-02 (uniforme entro 2.38e-02)
+(ii) lo zero simmetrico -> lo zero di prima: 23 nodi col supporto; |lambda| a Gamma da 1.000000000000 a 1.000000000000
+    le 12 bande ordinate: -0.953915..-0.953915 PIATTA; -0.953915..-0.953915 PIATTA; -0.953915..-0.953660; -0.953915..-0.953660; -0.947966..-0.717164; -0.947966..-0.717164; -0.459802..-0.459802 PIATTA; -0.459802..-0.459802 PIATTA; -0.459802..-0.459369; -0.459802..-0.459369; -0.225901..+0.005488; -0.225901..+0.005488
+    LA CIMA (a Gamma, la sovrapposizione massima col q senza ablazione 0.8357): E +0.0054877; d2E/dk2 lungo B0 -5.9235e-02, B1 -5.9235e-02 (MASSA NEGATIVA)
+    IL FONDO a K (la sovrapposizione massima col sottospazio del fondo senza ablazione 1.0000): E -0.2259006; d2E/dk2 lungo B0 +5.5956e-02, B1 +5.5956e-02
+    le bande piatte (larghezza < 1e-06): 4
+    lo spostamento delle bande ordinate rispetto a (0): da -4.712389e-01 a -4.712389e-01 (uniforme entro 4.77e-15)
+(iv) il legame col vuoto spento: 23 nodi col supporto; |lambda| a Gamma da 1.000000000000 a 1.000000000000
+    le 12 bande ordinate: -0.482676..-0.482676 PIATTA; -0.482676..-0.482676 PIATTA; -0.482676..-0.482421; -0.482676..-0.482421; -0.476727..-0.245925; -0.476727..-0.245925; +0.011437..+0.011437 PIATTA; +0.011437..+0.011437 PIATTA; +0.011437..+0.011870; +0.011437..+0.011870; +0.245338..+0.476727; +0.245338..+0.476727
+    LA CIMA (a Gamma, la sovrapposizione massima col q senza ablazione 1.0000): E +0.4767266; d2E/dk2 lungo B0 -5.9235e-02, B1 -5.9235e-02 (MASSA NEGATIVA)
+    IL FONDO a K (la sovrapposizione massima col sottospazio del fondo senza ablazione 1.0000): E +0.2453383; d2E/dk2 lungo B0 +5.5956e-02, B1 +5.5956e-02
+    le bande piatte (larghezza < 1e-06): 4
+    lo spostamento delle bande ordinate rispetto a (0): da +0.000000e+00 a +0.000000e+00 (uniforme entro 0.00e+00)
+(iv-b) la fase del vuoto spenta: 23 nodi col supporto; |lambda| a Gamma da 1.000000000000 a 1.000000000000
+    le 12 bande ordinate: -0.482676..-0.482676 PIATTA; -0.482676..-0.482676 PIATTA; -0.482676..-0.482421; -0.482676..-0.482421; -0.476727..-0.245925; -0.476727..-0.245925; +0.011437..+0.011437 PIATTA; +0.011437..+0.011437 PIATTA; +0.011437..+0.011870; +0.011437..+0.011870; +0.245338..+0.476727; +0.245338..+0.476727
+    LA CIMA (a Gamma, la sovrapposizione massima col q senza ablazione 1.0000): E +0.4767266; d2E/dk2 lungo B0 -5.9235e-02, B1 -5.9235e-02 (MASSA NEGATIVA)
+    IL FONDO a K (la sovrapposizione massima col sottospazio del fondo senza ablazione 1.0000): E +0.2453383; d2E/dk2 lungo B0 +5.5956e-02, B1 +5.5956e-02
+    le bande piatte (larghezza < 1e-06): 4
+    lo spostamento delle bande ordinate rispetto a (0): da +0.000000e+00 a +0.000000e+00 (uniforme entro 0.00e+00)
+----------------------------------------------------------------------------------------------------------------------------------
+### K5 (come scritto): «la piatta sparisce con (iii)»: NON GIUDICABILE ((iii) non si fa: la carta)
+### K5: la cima a massa negativa resta in ['i', 'ii', 'iv', 'iv-b'] su ['i', 'ii', 'iv', 'iv-b']
+==================================================================================================================================
+### 1 DEVE: 1 PASSANO, 0 FALLISCONO []

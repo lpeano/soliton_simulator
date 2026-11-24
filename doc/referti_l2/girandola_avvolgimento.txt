@@ -1,0 +1,26 @@
+[TIMBRO] notte_m0428.py  sha1-BYTE 3872b321  committato e pulito
+==================================================================================================================================
+[M0428-W] L'AVVOLGIMENTO SUGLI STATI 0 DEL 15/11 RICOSTRUITI (psi_h, il cerchio di raggio 5 attorno alla media dei tre centri)
+==================================================================================================================================
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 259, in <module>
+    sys.exit({"avvolgimento": avvolgimento, "segno": segno, "t4": t4}[cmd[0]]())
+             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 140, in avvolgimento
+    _C, centri = stato0_15_11(Z, v)
+                 ~~~~~~~~~~~~^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\notte_m0428.py", line 73, in stato0_15_11
+    FR = [MTR.francobollo(k) for k in MTR.VARIANTI[v]]
+          ~~~~~~~~~~~~~~~^^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone_triangolo.py", line 65, in francobollo
+    with MT.scena(MT.CORSA_BASE, MT.T_BASE) as Z81:
+         ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\python\py3132\Lib\contextlib.py", line 141, in __enter__
+    return next(self.gen)
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 122, in scena
+    metti()
+    ~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 119, in metti
+    st[k][...] = (st_dato or stato)[k]
+    ~~~~~^^^^^
+ValueError: could not broadcast input array from shape (6561,) into shape (26244,)

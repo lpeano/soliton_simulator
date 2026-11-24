@@ -1,0 +1,7 @@
+[TIMBRO] equivalenza_lambda.py  sha1-BYTE 35c659ea  committato e pulito
+==================================================================================================================================
+[M1631-E] L'EQUIVALENZA DI S1-bis (la carta sez. 2, 6): UN tick intero sullo stato CHI/caduta/V0/stato_001000 (S162); la forma del nucleo S1, eps 0.5
+==================================================================================================================================
+  A (lambda -1): cs +1 s, eps +0.5, lambda -1, lo stato com'e'; |psi_h| 9.975023e+02, |phi_h| 3.912627e+02
+### il tick con cs < 0 o eps < 0 ALZA: AssertionError("un `s` del nodo vale -0.14999999999999999 <= 0: un tempo proprio nullo o negativo e' un orologio fermo o che va indietro, e NON si corregge con un pavimento") -- 1d non si puo' fare in memoria cosi'
+==================================================================================================================================

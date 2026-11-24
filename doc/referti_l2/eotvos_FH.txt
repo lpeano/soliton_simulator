@@ -1,0 +1,22 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] eotvos.py  sha1-BYTE ed8dd279  committato e pulito
+[TIMBRO] eotvos_v2.py  sha1-BYTE 263711d2  committato e pulito
+[TIMBRO] gravita_fase.py  sha1-BYTE 1c771cab  committato e pulito
+[TIMBRO] fh_suite.py  sha1-BYTE 3f8b42fc  committato e pulito
+==================================================================================================================================
+[M0326-Q] EOTVOS CON FH (la carta sez. 1): eta = 2 (a1 - a2)/(a1 + a2); contro F0 (M1446-Q: V2 0.120 +- 0.012, V3 0.138 +- 0.014)
+  FH x 0.8 la tenuta: omega 0.6263325086 +- 1.0e-06 (il residuo 8.122e-03); il picco 9.5413e+02 -> 1.7580e+03; la norma 7.960087145e+05 -> 7.960087145e+05
+  FH x 1.2 la tenuta: omega 0.6264078087 +- 5.8e-07 (il residuo 4.549e-03); il picco 1.4312e+03 -> 2.0698e+03; la norma 1.194013072e+06 -> 1.194013072e+06
+  FH x 0.8 caduta V2: a -7.1152e-06 +- 1.5e-07 (il residuo 8.25e-02)
+  FH x 1.2 caduta V2: a -5.6674e-06 +- 7.0e-08 (il residuo 3.85e-02)
+  FH V2: ETA = +0.2265 +- 0.0242; F0 0.120 +- 0.012; |eta_FH| - eta_F0 = +0.1065 (3.9 sigma): PEGGIORA
+  FH x 0.8 caduta V3: a +5.8342e-06 +- 2.2e-07 (il residuo 1.20e-01)
+  FH x 1.2 caduta V3: a +4.3011e-06 +- 7.5e-08 (il residuo 4.09e-02)
+  FH V3: ETA = +0.3025 +- 0.0403; F0 0.138 +- 0.014; |eta_FH| - eta_F0 = +0.1645 (3.9 sigma): PEGGIORA
+  S1 x 0.8 la tenuta: omega 0.6264217267 +- 4.9e-07 (il residuo 3.852e-03); il picco 9.5413e+02 -> 1.3240e+03; la norma 7.960087145e+05 -> 7.960087145e+05
+  DEVE: K1: F0 x0.8 con lo script nuovo = la tenuta di ieri entro il 2%% (al bit atteso)                         PASSA (0.6264217267 contro 0.6264217267)
+==================================================================================================================================

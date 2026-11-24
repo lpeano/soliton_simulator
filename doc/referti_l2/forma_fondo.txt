@@ -1,0 +1,28 @@
+[TIMBRO] forma_fondo.py  sha1-BYTE 0b1cd7f8  committato e pulito
+==================================================================================================================================
+[M2221] LA FORMA DELL'OGGETTO AL FONDO A K (la carta sez. 2-quinquies): gli anelli ((4.0, 8.0), (8.0, 12.0), (12.0, 16.0)) attorno al baricentro di rho; m = 3, 6
+==================================================================================================================================
+  IL FONDO DEL FAVO (rho = 1 sull'anello) e IL CASO NOTO (rho = 1 + cos(6 theta)), sulla geometria di (a):
+    [ 4,  8): 173 nodi; il fondo |S3|/somma 0.00915, |S6|/somma 0.01486; il caso noto |S6|/somma 0.49983, l'orientamento +0.152 gradi
+  DEVE: il caso noto [4, 8): |S6|/somma = 0.5 entro il fondo + 0.01, l'orientamento 0 entro 1 grado                    PASSA 0.49983, +0.152
+    [ 8, 12): 293 nodi; il fondo |S3|/somma 0.00695, |S6|/somma 0.00900; il caso noto |S6|/somma 0.50045, l'orientamento -0.214 gradi
+  DEVE: il caso noto [8, 12): |S6|/somma = 0.5 entro il fondo + 0.01, l'orientamento 0 entro 1 grado                   PASSA 0.50045, -0.214
+    [12, 16): 400 nodi; il fondo |S3|/somma 0.00476, |S6|/somma 0.01484; il caso noto |S6|/somma 0.50413, l'orientamento -0.004 gradi
+  DEVE: il caso noto [12, 16): |S6|/somma = 0.5 entro il fondo + 0.01, l'orientamento 0 entro 1 grado                  PASSA 0.50413, -0.004
+----------------------------------------------------------------------------------------------------------------------------------
+  lo stato                                           l'anello   m = 3: |S|/somma, orient. m = 6: |S|/somma, orient. il fondo del favo (m 3, m 6)
+  (a) lambda -1, proiezione al fondo a K: L-1_proiezione_K/stato_003000.npz, k 3000; il baricentro raffinato; la massa 995010.893146, il picco 2.8214e+03
+      [ 4,  8)    0.02968,  +55.159 gradi     0.01702,   +1.053 gradi     0.00915, 0.01486
+      [ 8, 12)    0.05079,  -55.630 gradi     0.00656,  -22.988 gradi     0.00695, 0.00900
+      [12, 16)    0.01509,  -34.020 gradi     0.03344,   +2.561 gradi     0.00476, 0.01484
+  (b) L0, proiezione al fondo a K (il controllo): L0_proiezione_K/stato_003000.npz, k 3000; il baricentro raffinato; la massa 995010.893146, il picco 9.0890e+02
+      [ 4,  8)    0.01072,  +37.383 gradi     0.01141,   +0.698 gradi     0.00915, 0.01486
+      [ 8, 12)    0.00931,   -8.471 gradi     0.01059,  -15.406 gradi     0.00695, 0.00900
+      [12, 16)    0.02456,   +2.164 gradi     0.00088,   -3.159 gradi     0.00476, 0.01484
+  (c) il mattone alla cima, L-1 ([M1631] tenuta_v2/L-1_cima): L-1_cima/stato_003000.npz, k 3000; il baricentro raffinato; la massa 995010.893146, il picco 1.5966e+03
+      [ 4,  8)    0.01738,  +38.910 gradi     0.00458,   +1.341 gradi     0.00915, 0.01486
+      [ 8, 12)    0.02729,  -36.929 gradi     0.01393,   +4.345 gradi     0.00695, 0.00900
+      [12, 16)    0.00935,  +30.164 gradi     0.01966,  -12.505 gradi     0.00476, 0.01484
+----------------------------------------------------------------------------------------------------------------------------------
+### le immagini: forma_fondo_ab_lineare.png (281 kB), forma_fondo_ab_log.png (299 kB), forma_fondo_c.png (282 kB)
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []

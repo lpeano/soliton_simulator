@@ -2,6 +2,10 @@
 
 stato: CONGELATO
 
+> ### **RICONGELATO il 2026-11-22 sul ramo `lapse-u`, dopo le suite del passo 3 di [M1631]** *(il commit del nucleo `90813637`; `collauda.py` 67 su 67, `doc/referti_l2/collauda_passo3_giro2.txt`; la ripresa al bit DOPO 8 DEVE su 8, lo sha1 dello stato a k 2000 `49d89ecb` come PRIMA: `doc/referti_l2/ripresa_F0_v2_dopo.txt`)*. **La riga di Luca con cui era SBLOCCATO:** 2026-11-22 16:31, "niente era 3; si lavora qui, toccando il core in questo modo": le forme della non linearità come opzioni della legge CAMM-MATERIA-VUOTO, F0 predefinita; il mandato [M1631]
+
+> ### **SBLOCCATO sul ramo `lapse-u`** *(il worktree `wt_lapse_u`; la decisione di Luca sulla sez. 5 della carta del torneo, 2026-11-22 dopo le `19:00`)* **SOLO per il commit del nucleo del passo 3 di [M1631]**: le forme `L+0.5` ... `L-1`, `FH`, `FT` come OPZIONI di `CAMM-MATERIA-VUOTO`, `S1` predefinita. **Si RICONGELA nel commit dopo le suite** *(`collauda.py` a F0 al bit, la ripresa di uno stato di oggi al bit: `doc/referti_l2/ripresa_F0_v2.py`)*. **Il merge su `primo-ordine` NON ora.** *(Il presidio `H-NUCLEO-CONGELATO` agisce solo sul ramo `primo-ordine`: qui la procedura si segue alla lettera, non e' imposta.)*
+
 > **Ricongelato il 2026-11-16 dopo la riunione di numba** *(sbloccato SOLO per il merge `ca55169e`, con la riga di Luca delle `16:10`; le tre suite `67/67` dopo il merge)*.
 
 > **La decisione di Luca** *(2026-11-08, `21:47`-`21:49`, dopo il revert `de46816d`)*: **sul ramo `primo-ordine` NESSUN commit

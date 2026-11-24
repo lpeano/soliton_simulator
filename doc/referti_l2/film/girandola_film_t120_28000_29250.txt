@@ -1,0 +1,9 @@
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] triangolo_flussi.py  sha1-BYTE 4f282062  committato e pulito
+[TIMBRO] esporta_film_triangolo_v3.py  sha1-BYTE 8994660e  committato e pulito
+    k  28250 stato_028250.npz sha1 956fb31b: la somma di J_a -5.885e+02; |J| per nodo il massimo 1.1375e+01; i centri (baricentri di rho, dal G0) [['-38.229', '-16.731'], ['33.818', '-26.811'], ['0.438', '37.326']]; (rho massimo) [['-42.0', '-15.6'], ['39.0', '-22.5'], ['1.5', '37.2']]
+    k  28500 stato_028500.npz sha1 3bb25d7d: la somma di J_a -8.065e+02; |J| per nodo il massimo 1.3865e+01; i centri (baricentri di rho, dal G0) [['-38.065', '-16.902'], ['33.896', '-26.901'], ['0.555', '37.572']]; (rho massimo) [['-38.5', '-19.9'], ['35.5', '-26.8'], ['1.0', '34.6']]
+    k  28750 stato_028750.npz sha1 ba2e03d8: la somma di J_a -8.557e+02; |J| per nodo il massimo 1.8371e+01; i centri (baricentri di rho, dal G0) [['-37.911', '-17.067'], ['33.951', '-26.969'], ['0.678', '37.842']]; (rho massimo) [['-39.0', '-19.1'], ['35.0', '-27.7'], ['3.0', '36.4']]
+    k  29000 stato_029000.npz sha1 08da84d3: la somma di J_a -7.842e+02; |J| per nodo il massimo 1.9457e+01; i centri (baricentri di rho, dal G0) [['-37.767', '-17.222'], ['33.982', '-27.024'], ['0.795', '38.129']]; (rho massimo) [['-35.0', '-17.3'], ['36.0', '-27.7'], ['1.0', '36.4']]
+    k  29250 stato_029250.npz sha1 fafd50d9: la somma di J_a -8.338e+02; |J| per nodo il massimo 1.4206e+01; i centri (baricentri di rho, dal G0) [['-37.635', '-17.368'], ['33.990', '-27.077'], ['0.890', '38.424']]; (rho massimo) [['-37.5', '-16.5'], ['35.5', '-28.6'], ['-1.0', '36.4']]
+### E:/soliton_simulator/controllo/girandola_blocchi/girandola_t120_28000_29250.npz: 5.00 MB; 5 stati (k [28250, 28500, 28750, 29000, 29250]); i vertici [[74, 68], [113, 68], [113, 107]]; G0 ['100.000', '81.000']

@@ -1,0 +1,20 @@
+[TIMBRO] legge_caduta_v2.py  sha1-BYTE bfd785ae  committato e pulito
+==================================================================================================================================
+[M1446-L] LA LEGGE DELLA CADUTA (la carta sez. L; POST-HOC, dichiarato)
+==================================================================================================================================
+### caduta_libera.txt (sha1 0cca64c8)
+### orologio_mattone.txt (sha1 b5607915)
+### orologio_V4.txt (sha1 ac5fd342)
+### d ln omega/dN: V1 +0.238, V2 +0.999, V3 -0.761, V4 +1.760; V4 misurato (orologio_V4.txt); omega(N1) 0.6264373875
+### massa_calcio.txt (sha1 6328eb58)
+### m* = -19.2580 (m*_sol (massa_calcio.txt))
+----------------------------------------------------------------------------------------------------------------------------------
+  c_m = 0.588 s: K_i V1 +4.319, V2 +4.157, V3 +4.193, V4 +3.988; la media +4.164, la dispersione (max - min)/|media| 0.080 (K3: entro il 10% SI'); K_th = omega/(|m*| c^2) 4.181: la media/K_th 0.996 (K3: entro il 20% SI')
+  c = s: K_i V1 +1.492, V2 +1.437, V3 +1.449, V4 +1.379; la media +1.439, la dispersione (max - min)/|media| 0.078 (K3: entro il 10% SI'); K_th = omega/(|m*| c^2) 1.446: la media/K_th 0.996 (K3: entro il 20% SI')
+  (in natura lo stesso numero e' -1: E = m c^2)
+----------------------------------------------------------------------------------------------------------------------------------
+  LO ZERO DI V4: omega(1) (1 - rapporto) = -0.476092 (il rapporto misurato (orologio_V4.txt)) contro -e0 = -0.476727: lo scarto +6.342e-04
+  DALLO ZERO DI CIASCUNA FORMA (d ln|omega - omega0|/dN = 1 per costruzione): K0_i = a_i/(c^2 |grad N|) col segno; K0_th = Delta_i/(|m*| c^2), Delta_i = |d omega/dN|_i = |rapporto_i| omega(1)
+  c_m = 0.588 s: V1 K0 +1.028, K0_th 0.995 (Delta 0.14909): il rapporto +1.033; V2 K0 +4.153, K0_th 4.177 (Delta 0.62581): il rapporto +0.994; V3 K0 -3.191, K0_th 3.182 (Delta 0.47672): il rapporto -1.003; V4 K0 +7.019, K0_th 7.359 (Delta 1.10253): il rapporto +0.954
+  c = s: V1 K0 +0.355, K0_th 0.344 (Delta 0.14909): il rapporto +1.032; V2 K0 +1.436, K0_th 1.444 (Delta 0.62581): il rapporto +0.994; V3 K0 -1.103, K0_th 1.100 (Delta 0.47672): il rapporto -1.003; V4 K0 +2.427, K0_th 2.544 (Delta 1.10253): il rapporto +0.954
+==================================================================================================================================

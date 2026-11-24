@@ -1,0 +1,15 @@
+[TIMBRO] flusso_placchetta.py  sha1-BYTE 3f7c2c3e  committato e pulito
+[TIMBRO] flusso_placchetta_K3.py  sha1-BYTE 36ca2e63  committato e pulito (i fine riga diversi dal blob, CRLF/LF: il contenuto e' quello committato)
+==================================================================================================================================
+IL FLUSSO DELLA PLACCHETTA: PERCHE' K3 FALLISCE (POST-HOC, dichiarato)
+==================================================================================================================================
+(1) LA SCALA (C2 k 3000): max |A| 3.2960e+01, std(A) 7.6468e+00, max |somma +-A| 6.5259e-05 (il rapporto max|A| / max|circolazione| 5.051e+05)
+(2) chi = std(A) * 1e+00: max |Delta Phi| / max |Phi| = 2.178e-10; il limite dell'arrotondamento 3 eps max(|A| + 2|chi|) / max|circ| = 1.038e-09
+(2) chi = std(A) * 1e-02: max |Delta Phi| / max |Phi| = 1.633e-10; il limite dell'arrotondamento 3 eps max(|A| + 2|chi|) / max|circ| = 3.435e-10
+(2) chi = std(A) * 1e-04: max |Delta Phi| / max |Phi| = 2.178e-10; il limite dell'arrotondamento 3 eps max(|A| + 2|chi|) / max|circ| = 3.365e-10
+(2) chi = std(A) * 1e-06: max |Delta Phi| / max |Phi| = 2.178e-10; il limite dell'arrotondamento 3 eps max(|A| + 2|chi|) / max|circ| = 3.364e-10
+(3) l'aritmetica ESATTA (A a multipli di 2^-40, chi interi su 2^20): le circolazioni diverse dopo la gauge: 0 su 69192
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: (2) lo scarto sta sotto il limite dell'arrotondamento a ogni ampiezza di chi                                   PASSA
+  DEVE: (3) in aritmetica esatta la circolazione e' invariata per gauge AL BIT                                         PASSA
+==================================================================================================================================

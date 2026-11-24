@@ -1,0 +1,97 @@
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+[TIMBRO] chi_s3bis_v2.py  sha1-BYTE 435fa7e2  committato e pulito
+==================================================================================================================================
+(a) CHI DA SOLO SUL TORO 48 (la carta sez. 5.1): la sorgente gaussiana fissa dal mattone, chi = pi = 0, 2000 tick col passo v2
+==================================================================================================================================
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP C:\Users\lpeano\AppData\Local\Temp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### la sorgente dal mattone (prepara di C2, k 0 della corsa con chi): il centro della materia [91.53388081669641, 91.6952959812105], il nodo centrale a r 0.410; m0 = media(u) +1.504935886674e+00 (m0 dei parametri v2 +1.504935886674e+00: AL BIT)
+### A = u(centro) - m0 = +1.642333142807e+02; le medie per anelli di (u - m0) / A per R = 0..16: 1.0000, 0.9874, 0.9612, 0.9533, 0.9486, 0.9441, 0.9374, 0.9295, 0.9076, 0.8787, 0.8371, 0.7988, 0.7569, 0.7007, 0.6272, 0.5491, 0.4618
+### r_1/2 15.562401; sigma = r_1/2 / sqrt(2 ln 2) = 13.217486
+### il toro 48 (n 2304, archi 6912); S max +1.642333e+02 al nodo (24, 24), min +1.823347e+01; kappa 0.0002528944153922671, c2 0.25, m2 0.0001, f 0.06000000000000001, c0 = kappa media(S) +1.909155002757e-02; dt 1
+### E* = max K 1.276997017161e+01 (al tick 758); max |U| 1.277163733891e+01; la frazione cinetica max K / max |U| 0.9999; max chi 2.688287e+00, kappa max chi 6.799e-04
+### max |H - H(0)| / E*: con pi^2/2f 1.306e-04; con pi^2/2 (la vecchia) 9.401e-01; L'AGGIUNTA MIA, l'energia discreta H - (f/8) somma F^2: 3.717e-11
+### solo illustrazione: max |H - H(0)| / somma S (la diluizione evitata togliendo la costante) 9.585e-09
+    t    0: K +0.000000000000e+00  U +0.000000000000e+00  H +0.000000e+00  H vecchia +0.000000e+00  H discreta +0.000000e+00
+    t    1: K +6.694711529847e-03  U -6.695639638315e-03  H -9.281085e-07  H vecchia -6.293957e-03  H discreta +1.019150e-17
+    t    2: K +2.676400920640e-02  U -2.676771526801e-02  H -3.706062e-06  H vecchia -2.516187e-02  H discreta +2.959872e-16
+    t    5: K +1.666292532222e-01  U -1.666521744930e-01  H -2.292127e-05  H vecchia -1.566544e-01  H discreta +1.281223e-14
+    t   10: K +6.574378186736e-01  U -6.575271677123e-01  H -8.934904e-05  H vecchia -6.180809e-01  H discreta +2.056532e-13
+    t   50: K +1.054555057699e+01  U -1.054692759169e+01  H -1.377015e-03  H vecchia -9.914195e+00  H discreta +8.844631e-11
+    t  100: K +7.365853771767e+00  U -7.366818683099e+00  H -9.649113e-04  H vecchia -6.924867e+00  H discreta +4.293249e-10
+    t  200: K +1.247222571479e+01  U -1.247385191184e+01  H -1.626197e-03  H vecchia -1.172552e+01  H discreta +2.685030e-10
+    t  500: K +1.080464983886e+01  U -1.080606197902e+01  H -1.412140e-03  H vecchia -1.015778e+01  H discreta +5.362957e-11
+    t 1000: K +6.668229576829e+00  U -6.669104114745e+00  H -8.745379e-04  H vecchia -6.269010e+00  H discreta +4.188393e-10
+    t 1500: K +1.612467428512e+00  U -1.612686860929e+00  H -2.194324e-04  H vecchia -1.515939e+00  H discreta +3.884747e-10
+    t 2000: K +1.273429379451e+01  U -1.273595128553e+01  H -1.657491e-03  H vecchia -1.197189e+01  H discreta +1.800245e-10
+### V2 (Luca 02:42): H discreta 3.717e-11 <= 1e-9: la stima del termine non quadratico NON serve
+  (a) PASSA se max |H~ - H~(0)| / E* <= 1e-9 (H~ = H - (f/8) somma F^2; Luca 02:42)                                PASSA   3.717e-11
+  (a) max |H - H(0)| / E* dentro la stima omega^2/8, fra 1e-5 e 3e-4                                               PASSA   1.306e-04
+  (a) DEVE FALLIRE: con pi^2/2 max |H - H(0)| / E* >= 1e-2                                                         PASSA   9.401e-01
+  (a) la frazione cinetica max K / max |U| >= 0.1                                                                  PASSA   0.9999
+==================================================================================================================================
+(b) IL BILANCIO DEL SETTORE CHI SUL MATTONE (la carta sez. 5.1): la corsa di S3 col tick registrato, 250 tick da k 0 (C2 k 3000); il bilancio sui tick 1-200
+==================================================================================================================================
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP C:\Users\lpeano\AppData\Local\Temp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL PASSO V2 (l'inerzia f) da k 0 fino a k 250 (prepara); i parametri kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.504935886674e+00; gli stati in E:\soliton_simulator\controllo\CHI\prova_v2\s3bis_v2_b
+    k     0  la massa 9.950108931447e+05  il raggio 12.3657  Min12.4 5.527894e+05  il picco 1.1927e+03  H +5.2613128573e+05  H_chi +2.9156e+02  1-N centro 4.8047e-03  max|Theta| 0.0000  (123 s)
+    k   250  la massa 9.950108931447e+05  il raggio 12.3501  Min12.4 5.500970e+05  il picco 1.2334e+03  H +5.2612931958e+05  H_chi +2.8814e+02  1-N centro 4.7624e-03  max|Theta| 0.0193  (390 s)
+    [stato] k 250 sha1 b63a7a4a
+### 250 tick in 267 s (1.069 s per tick)
+### lo stato a k 250 col tick registrato contro s3_v2\stato_00250.npz (sha1 b63a7a4a): le chiavi uguali; AL BIT su 11 chiavi; il meta uguale
+  (b) la copia del tick e' la stessa dinamica: lo stato a k 250 AL BIT con la corsa S3 v2                          PASSA   
+### 250 tick registrati (il bilancio sui primi 200); |W|: min 1.325e-04, mediana 1.755e-02, max 2.288e-02, rms 1.711e-02; i cambi di segno di W 0
+### max |R| / |W| per tick: con pi^2/2f 9.120e-04; con pi^2/2 1.821e-02; L'AGGIUNTA MIA, R meno il termine discreto (dt^2 f / 8) D somma F^2: 2.639e-14
+### con rms(W) al denominatore: max |R| 1.692e-05; max |R vecchio| 4.120e-03; max |R - C| 8.358e-15
+    tick   1: W -1.324846e-04  DH_chi -1.323638e-04  R +1.208e-07  R vecchio -5.122e-07  il termine discreto +1.208e-07  R - termine +1.095e-19
+    tick   2: W -3.964216e-04  DH_chi -3.961359e-04  R +2.857e-07  R vecchio -2.806e-06  il termine discreto +2.857e-07  R - termine -8.842e-19
+    tick   5: W -1.194781e-03  DH_chi -1.194662e-03  R +1.184e-07  R vecchio -2.138e-05  il termine discreto +1.184e-07  R - termine -9.807e-18
+    tick  10: W -2.531790e-03  DH_chi -2.531679e-03  R +1.104e-07  R vecchio -3.784e-05  il termine discreto +1.104e-07  R - termine -2.824e-17
+    tick  50: W -1.366341e-02  DH_chi -1.366334e-02  R +7.641e-08  R vecchio -6.807e-05  il termine discreto +7.641e-08  R - termine +8.374e-18
+    tick 100: W -2.228120e-02  DH_chi -2.228112e-02  R +8.253e-08  R vecchio -2.039e-05  il termine discreto +8.253e-08  R - termine -4.150e-17
+    tick 150: W -2.043272e-02  DH_chi -2.043285e-02  R -1.266e-07  R vecchio +6.168e-06  il termine discreto -1.266e-07  R - termine +3.479e-17
+    tick 200: W -1.022228e-02  DH_chi -1.022224e-02  R +4.373e-08  R vecchio -1.812e-05  il termine discreto +4.373e-08  R - termine -3.265e-17
+### V2 (Luca 02:42): max |R vecchio - termine discreto| / |W| 1.829e-02; max |R - termine discreto| / |W| 2.639e-14
+  (b) PASSA se max |R - (dt^2 f/8)(somma F_b^2 - somma F_a^2)| / |W| <= 1e-6 per tick (Luca 02:42)                 PASSA   2.639e-14
+  (b) DEVE FALLIRE: con pi^2/2 il residuo (meno lo stesso termine) almeno 10 volte piu' grande                     PASSA   1.829e-02 contro 2.639e-14
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: (a) PASSA se max |H~ - H~(0)| / E* <= 1e-9 (H~ = H - (f/8) somma F^2; Luca 02:42)                              PASSA
+  DEVE: (a) max |H - H(0)| / E* dentro la stima omega^2/8, fra 1e-5 e 3e-4                                             PASSA
+  DEVE: (a) DEVE FALLIRE: con pi^2/2 max |H - H(0)| / E* >= 1e-2                                                       PASSA
+  DEVE: (a) la frazione cinetica max K / max |U| >= 0.1                                                                PASSA
+  DEVE: (b) la copia del tick e' la stessa dinamica: lo stato a k 250 AL BIT con la corsa S3 v2                        PASSA
+  DEVE: (b) PASSA se max |R - (dt^2 f/8)(somma F_b^2 - somma F_a^2)| / |W| <= 1e-6 per tick (Luca 02:42)               PASSA
+  DEVE: (b) DEVE FALLIRE: con pi^2/2 il residuo (meno lo stesso termine) almeno 10 volte piu' grande                   PASSA
+==================================================================================================================================

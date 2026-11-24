@@ -1,0 +1,93 @@
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] gravita_due_corpi_misure.py  sha1-BYTE 7d739a8f  committato e pulito
+==================================================================================================================================
+[M0417-M] I DUE MATTONI, CHI ACCESO CONTRO CHI SPENTO (la carta sez. 2): le quattro corse, gli stati 0 ... 3000 ogni 250
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+### F-on: i vertici [[62, 80], [101, 80]], il punto medio [81.5, 80.0]; kappa 0.0002528944153922671, c0 0.002198353113323864 (kappa di on 0.0002528944153922671)
+    (c) k 0 lungo la congiungente (41 punti): chi ai capi 19.528457 e 19.355985, a meta' 19.495954; N a meta' 0.99508172; la sorgente netta ai capi +3.9442e-02 e +3.9164e-02, a meta' +2.0084e-02, il min +1.6190e-02, il max +3.9973e-02; nel vuoto lontano (la mediana) chi -4.832602, N 1.00122289, la sorgente -2.9143e-03
+    (c) k 1500 lungo la congiungente (41 punti): chi ai capi 20.719978 e 20.751923, a meta' 20.512917; N a meta' 0.99482583; la sorgente netta ai capi +5.9047e-02 e +5.5784e-02, a meta' +3.3430e-02, il min +2.7383e-02, il max +5.9047e-02; nel vuoto lontano (la mediana) chi -5.071154, N 1.00128329, la sorgente -2.9171e-03
+    (c) k 3000 lungo la congiungente (41 punti): chi ai capi 21.911863 e 21.644612, a meta' 21.892256; N a meta' 0.99447887; la sorgente netta ai capi +6.6633e-02 e +6.2398e-02, a meta' +3.2791e-02, il min +3.2373e-02, il max +7.1154e-02; nel vuoto lontano (la mediana) chi -4.956671, N 1.00125430, la sorgente -2.9207e-03
+    k    0  D (baricentri) 38.6813  D (rho massimo lisciato) 31.0966  (d) le pale: rqm 11.5821, 11.5818; a 0.0082, 0.0098
+    k  250  D (baricentri) 38.6467  D (rho massimo lisciato) 39.0000  (d) le pale: rqm 11.6331, 11.6422; a 0.0085, 0.0108
+    k  500  D (baricentri) 38.5452  D (rho massimo lisciato) 43.1393  (d) le pale: rqm 11.5690, 11.5757; a 0.0098, 0.0081
+    k  750  D (baricentri) 38.4166  D (rho massimo lisciato) 42.5793  (d) le pale: rqm 11.4689, 11.4484; a 0.0213, 0.0172
+    k 1000  D (baricentri) 38.2799  D (rho massimo lisciato) 48.4458  (d) le pale: rqm 11.3159, 11.2709; a 0.0495, 0.0370
+    k 1250  D (baricentri) 38.1306  D (rho massimo lisciato) 44.5084  (d) le pale: rqm 11.1504, 11.1146; a 0.0841, 0.0728
+    k 1500  D (baricentri) 37.9740  D (rho massimo lisciato) 45.0333  (d) le pale: rqm 10.9525, 10.9230; a 0.1144, 0.1081
+    k 1750  D (baricentri) 37.8296  D (rho massimo lisciato) 49.5076  (d) le pale: rqm 10.8015, 10.7556; a 0.1653, 0.1566
+    k 2000  D (baricentri) 37.7149  D (rho massimo lisciato) 42.5088  (d) le pale: rqm 10.7145, 10.6859; a 0.2076, 0.2001
+    k 2250  D (baricentri) 37.6183  D (rho massimo lisciato) 44.5084  (d) le pale: rqm 10.6175, 10.6080; a 0.2292, 0.2331
+    k 2500  D (baricentri) 37.5014  D (rho massimo lisciato) 47.0000  (d) le pale: rqm 10.5600, 10.5676; a 0.2450, 0.2557
+    k 2750  D (baricentri) 37.3629  D (rho massimo lisciato) 37.5100  (d) le pale: rqm 10.5516, 10.5983; a 0.2703, 0.2908
+    k 3000  D (baricentri) 37.1712  D (rho massimo lisciato) 33.0454  (d) le pale: rqm 10.6201, 10.6563; a 0.2892, 0.3042
+    (b) il fit sui baricentri: D0 38.7392, v -4.6124e-04, a -3.6551e-08 +- 2.62e-08 (il residuo rms 3.668e-02); sul rho massimo: a -1.2222e-05 +- 2.03e-06 (il residuo rms 2.839e+00)
+    il film film\gravita_F-on.npz: 4.91 MB (sha1 851531ed)
+----------------------------------------------------------------------------------------------------------------------------------
+### F-off: i vertici [[62, 80], [101, 80]], il punto medio [81.5, 80.0]; kappa 0.0, c0 0.002198353113323864 (kappa di on 0.0002528944153922671)
+    (c) k 0 lungo la congiungente (41 punti): chi ai capi 19.528457 e 19.355985, a meta' 19.495954; N a meta' 1.00000000; la sorgente netta ai capi -2.1984e-03 e -2.1984e-03, a meta' -2.1984e-03, il min -2.1984e-03, il max -2.1984e-03; nel vuoto lontano (la mediana) chi -4.832602, N 1.00000000, la sorgente -2.1984e-03
+    (c) k 1500 lungo la congiungente (41 punti): chi ai capi -43.472179 e -43.454796, a meta' -43.649960; N a meta' 1.00000000; la sorgente netta ai capi -2.1984e-03 e -2.1984e-03, a meta' -2.1984e-03, il min -2.1984e-03, il max -2.1984e-03; nel vuoto lontano (la mediana) chi -39.344631, N 1.00000000, la sorgente -2.1984e-03
+    (c) k 3000 lungo la congiungente (41 punti): chi ai capi -26.812958 e -26.866396, a meta' -27.785440; N a meta' 1.00000000; la sorgente netta ai capi -2.1984e-03 e -2.1984e-03, a meta' -2.1984e-03, il min -2.1984e-03, il max -2.1984e-03; nel vuoto lontano (la mediana) chi -7.373193, N 1.00000000, la sorgente -2.1984e-03
+    k    0  D (baricentri) 38.6813  D (rho massimo lisciato) 31.0966  (d) le pale: rqm 11.5821, 11.5818; a 0.0082, 0.0098
+    k  250  D (baricentri) 38.6112  D (rho massimo lisciato) 39.0000  (d) le pale: rqm 11.6112, 11.6236; a 0.0088, 0.0110
+    k  500  D (baricentri) 38.4053  D (rho massimo lisciato) 43.1393  (d) le pale: rqm 11.4935, 11.4919; a 0.0127, 0.0124
+    k  750  D (baricentri) 38.1066  D (rho massimo lisciato) 42.1426  (d) le pale: rqm 11.3163, 11.2647; a 0.0397, 0.0308
+    k 1000  D (baricentri) 37.7358  D (rho massimo lisciato) 42.5088  (d) le pale: rqm 11.0096, 10.9696; a 0.0759, 0.0614
+    k 1250  D (baricentri) 37.2884  D (rho massimo lisciato) 43.0000  (d) le pale: rqm 10.7145, 10.7012; a 0.1289, 0.1170
+    k 1500  D (baricentri) 36.7583  D (rho massimo lisciato) 42.5088  (d) le pale: rqm 10.3847, 10.3703; a 0.1843, 0.1723
+    k 1750  D (baricentri) 36.1667  D (rho massimo lisciato) 42.0000  (d) le pale: rqm 10.1162, 10.0671; a 0.2556, 0.2467
+    k 2000  D (baricentri) 35.5196  D (rho massimo lisciato) 41.0366  (d) le pale: rqm 9.8654, 9.8293; a 0.3049, 0.3091
+    k 2250  D (baricentri) 34.7923  D (rho massimo lisciato) 42.5088  (d) le pale: rqm 9.6428, 9.6368; a 0.3502, 0.3618
+    k 2500  D (baricentri) 33.9601  D (rho massimo lisciato) 39.5854  (d) le pale: rqm 9.5209, 9.5101; a 0.3859, 0.4050
+    k 2750  D (baricentri) 33.0266  D (rho massimo lisciato) 32.0000  (d) le pale: rqm 9.5763, 9.5426; a 0.4045, 0.4268
+    k 3000  D (baricentri) 32.0000  D (rho massimo lisciato) 31.0000  (d) le pale: rqm 9.7442, 9.7584; a 0.3978, 0.4262
+    (b) il fit sui baricentri: D0 38.7075, v -3.3571e-04, a -1.2603e-06 +- 1.80e-08 (il residuo rms 2.514e-02); sul rho massimo: a -1.0330e-05 +- 1.49e-06 (il residuo rms 2.085e+00)
+    il film film\gravita_F-off.npz: 4.85 MB (sha1 06ea1384)
+----------------------------------------------------------------------------------------------------------------------------------
+### S-on: i vertici [[62, 80], [101, 80]], il punto medio [81.5, 80.0]; kappa 0.0002528944153922671, c0 0.0021616481233725335 (kappa di on 0.0002528944153922671)
+    (c) k 0 lungo la congiungente (41 punti): chi ai capi 19.289418 e 19.148016, a meta' 18.630959; N a meta' 0.99529942; la sorgente netta ai capi +3.9453e-02 e +3.9674e-02, a meta' +4.1421e-03, il min +4.1421e-03, il max +3.9778e-02; nel vuoto lontano (la mediana) chi -4.769050, N 1.00120679, la sorgente -2.8776e-03
+    (c) k 1500 lungo la congiungente (41 punti): chi ai capi 22.119995 e 20.492097, a meta' 17.354052; N a meta' 0.99562087; la sorgente netta ai capi +8.2155e-02 e +8.0338e-02, a meta' +6.0477e-03, il min +3.0343e-03, il max +8.2155e-02; nel vuoto lontano (la mediana) chi -5.006867, N 1.00126701, la sorgente -2.8802e-03
+    (c) k 3000 lungo la congiungente (41 punti): chi ai capi 23.370212 e 19.484100, a meta' 16.319443; N a meta' 0.99588141; la sorgente netta ai capi +8.7626e-02 e +7.3367e-02, a meta' +2.3957e-03, il min +2.3957e-03, il max +8.7626e-02; nel vuoto lontano (la mediana) chi -4.871700, N 1.00123279, la sorgente -2.8841e-03
+    k    0  D (baricentri) 39.1447  D (rho massimo lisciato) 39.0000  (d) le pale: rqm 11.5539, 11.5463; a 0.0027, 0.0015
+    k  250  D (baricentri) 39.2331  D (rho massimo lisciato) 39.5095  (d) le pale: rqm 11.6614, 11.5083; a 0.0201, 0.0260
+    k  500  D (baricentri) 39.3999  D (rho massimo lisciato) 26.4575  (d) le pale: rqm 11.5650, 11.3228; a 0.0185, 0.0591
+    k  750  D (baricentri) 39.6300  D (rho massimo lisciato) 30.1993  (d) le pale: rqm 11.3732, 11.0358; a 0.0211, 0.0916
+    k 1000  D (baricentri) 39.9075  D (rho massimo lisciato) 37.3631  (d) le pale: rqm 11.0797, 10.6744; a 0.0162, 0.1222
+    k 1250  D (baricentri) 40.2132  D (rho massimo lisciato) 41.5090  (d) le pale: rqm 10.7867, 10.3112; a 0.0231, 0.1490
+    k 1500  D (baricentri) 40.5459  D (rho massimo lisciato) 40.0000  (d) le pale: rqm 10.4041, 9.9468; a 0.0072, 0.1792
+    k 1750  D (baricentri) 40.8996  D (rho massimo lisciato) 45.0333  (d) le pale: rqm 10.0955, 9.6161; a 0.0118, 0.1767
+    k 2000  D (baricentri) 41.2870  D (rho massimo lisciato) 40.0375  (d) le pale: rqm 9.9038, 9.4369; a 0.0122, 0.1672
+    k 2250  D (baricentri) 41.6967  D (rho massimo lisciato) 43.0000  (d) le pale: rqm 9.7792, 9.3648; a 0.0156, 0.1526
+    k 2500  D (baricentri) 42.1621  D (rho massimo lisciato) 48.5695  (d) le pale: rqm 9.7210, 9.4468; a 0.0195, 0.1094
+    k 2750  D (baricentri) 42.6441  D (rho massimo lisciato) 44.1362  (d) le pale: rqm 9.7235, 9.5412; a 0.0142, 0.0585
+    k 3000  D (baricentri) 43.1511  D (rho massimo lisciato) 44.0341  (d) le pale: rqm 9.8616, 9.7191; a 0.0162, 0.0240
+    (b) il fit sui baricentri: D0 39.0949, v +5.5257e-04, a +5.3694e-07 +- 1.81e-08 (il residuo rms 2.532e-02); sul rho massimo: a +1.1485e-06 +- 3.44e-06 (il residuo rms 4.817e+00)
+    il film film\gravita_S-on.npz: 4.92 MB (sha1 72a251dd)
+----------------------------------------------------------------------------------------------------------------------------------
+### S-off: i vertici [[62, 80], [101, 80]], il punto medio [81.5, 80.0]; kappa 0.0, c0 0.0021616481233725335 (kappa di on 0.0002528944153922671)
+    (c) k 0 lungo la congiungente (41 punti): chi ai capi 19.289418 e 19.148016, a meta' 18.630959; N a meta' 1.00000000; la sorgente netta ai capi -2.1616e-03 e -2.1616e-03, a meta' -2.1616e-03, il min -2.1616e-03, il max -2.1616e-03; nel vuoto lontano (la mediana) chi -4.769050, N 1.00000000, la sorgente -2.1616e-03
+    (c) k 1500 lungo la congiungente (41 punti): chi ai capi -42.725784 e -42.668642, a meta' -42.935115; N a meta' 1.00000000; la sorgente netta ai capi -2.1616e-03 e -2.1616e-03, a meta' -2.1616e-03, il min -2.1616e-03, il max -2.1616e-03; nel vuoto lontano (la mediana) chi -38.645707, N 1.00000000, la sorgente -2.1616e-03
+    (c) k 3000 lungo la congiungente (41 punti): chi ai capi -26.029260 e -25.530509, a meta' -27.221058; N a meta' 1.00000000; la sorgente netta ai capi -2.1616e-03 e -2.1616e-03, a meta' -2.1616e-03, il min -2.1616e-03, il max -2.1616e-03; nel vuoto lontano (la mediana) chi -7.119348, N 1.00000000, la sorgente -2.1616e-03
+    k    0  D (baricentri) 39.1447  D (rho massimo lisciato) 39.0000  (d) le pale: rqm 11.5539, 11.5463; a 0.0027, 0.0015
+    k  250  D (baricentri) 39.2001  D (rho massimo lisciato) 39.5095  (d) le pale: rqm 11.6426, 11.4885; a 0.0208, 0.0256
+    k  500  D (baricentri) 39.2693  D (rho massimo lisciato) 27.8747  (d) le pale: rqm 11.4858, 11.2313; a 0.0217, 0.0576
+    k  750  D (baricentri) 39.3395  D (rho massimo lisciato) 32.9090  (d) le pale: rqm 11.1901, 10.8397; a 0.0313, 0.0860
+    k 1000  D (baricentri) 39.3992  D (rho massimo lisciato) 38.0000  (d) le pale: rqm 10.7382, 10.3224; a 0.0341, 0.1118
+    k 1250  D (baricentri) 39.4343  D (rho massimo lisciato) 40.0000  (d) le pale: rqm 10.2734, 9.7850; a 0.0485, 0.1306
+    k 1500  D (baricentri) 39.4475  D (rho massimo lisciato) 40.0000  (d) le pale: rqm 9.6919, 9.2159; a 0.0446, 0.1482
+    k 1750  D (baricentri) 39.4453  D (rho massimo lisciato) 40.5093  (d) le pale: rqm 9.1913, 8.7254; a 0.0578, 0.1250
+    k 2000  D (baricentri) 39.4228  D (rho massimo lisciato) 40.5093  (d) le pale: rqm 8.7933, 8.3756; a 0.0683, 0.0870
+    k 2250  D (baricentri) 39.3616  D (rho massimo lisciato) 42.0000  (d) le pale: rqm 8.4256, 8.1803; a 0.0696, 0.0297
+    k 2500  D (baricentri) 39.2763  D (rho massimo lisciato) 43.0000  (d) le pale: rqm 8.1848, 8.1808; a 0.0733, 0.0664
+    k 2750  D (baricentri) 39.1615  D (rho massimo lisciato) 40.5093  (d) le pale: rqm 8.1769, 8.3836; a 0.0708, 0.1457
+    k 3000  D (baricentri) 39.0639  D (rho massimo lisciato) 40.5093  (d) le pale: rqm 8.4404, 8.6747; a 0.0744, 0.1926
+    (b) il fit sui baricentri: D0 39.1052, v +4.6241e-04, a -3.1597e-07 +- 1.55e-08 (il residuo rms 2.164e-02); sul rho massimo: a +7.8347e-08 +- 2.62e-06 (il residuo rms 3.665e+00)
+    il film film\gravita_S-off.npz: 4.86 MB (sha1 5d491f03)
+==================================================================================================================================
+(b) IL CONFRONTO: Da = a(on) - a(off), l'incertezza in quadratura; Da < 0: chi ATTIRA (fuori dall'incertezza se |Da| > 2 sigma)
+==================================================================================================================================
+  F, i baricentri    a(on) -3.6551e-08 +- 2.62e-08; a(off) -1.2603e-06 +- 1.80e-08; Da +1.2237e-06 +- 3.18e-08: SPINGE (fuori dall'incertezza)
+  F, il rho massimo  a(on) -1.2222e-05 +- 2.03e-06; a(off) -1.0330e-05 +- 1.49e-06; Da -1.8923e-06 +- 2.52e-06: ATTIRA (DENTRO l'incertezza)
+  S, i baricentri    a(on) +5.3694e-07 +- 1.81e-08; a(off) -3.1597e-07 +- 1.55e-08; Da +8.5290e-07 +- 2.38e-08: SPINGE (fuori dall'incertezza)
+  S, il rho massimo  a(on) +1.1485e-06 +- 3.44e-06; a(off) +7.8347e-08 +- 2.62e-06; Da +1.0702e-06 +- 4.33e-06: SPINGE (DENTRO l'incertezza)
+==================================================================================================================================

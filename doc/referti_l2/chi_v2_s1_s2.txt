@@ -1,0 +1,22 @@
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+==================================================================================================================================
+S1 E S2 DI CHI V2 (Luca 2026-11-21 23:30; la carta sez. 4.3)
+==================================================================================================================================
+### f = (s / (c sqrt(3/2)))^2 = 0.06000000000000001 (s 0.15, c2 0.25)
+### S1: il profilo statico (c2 L + m2)^-1 sorgente coi Parametri e coi Parametri2: AL BIT
+  S1: il pozzo statico invariato AL BIT (la formula non contiene f)                                                PASSA   
+### S2 (m2 0.0): omega misurata 0.02265679315776, formula con f 0.02265679315776 (lo scarto 0.0e+00)
+  S2 (m2 0.0): omega dell'onda stazionaria = la formula con f entro 1e-10                                          PASSA   0.0e+00
+### S2 (m2 0.0001): omega misurata 0.02278883043412, formula con f 0.02278883043412 (lo scarto 0.0e+00)
+  S2 (m2 0.0001): omega dell'onda stazionaria = la formula con f entro 1e-10                                       PASSA   0.0e+00
+### S2: v senza massa a |k| 1e-4: 0.1500000062 archi per tick (la luce 0.1500000000); con f = 1: 0.6123724249
+  S2: v senza massa = 0.15000 entro 1e-6                                                                           PASSA   0.1500000062
+  S2 DEVE FALLIRE: con f = 1 la velocita' NON e' 0.15 (0.6124)                                                     PASSA   0.6124
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: S1: il pozzo statico invariato AL BIT (la formula non contiene f)                                              PASSA
+  DEVE: S2 (m2 0.0): omega dell'onda stazionaria = la formula con f entro 1e-10                                        PASSA
+  DEVE: S2 (m2 0.0001): omega dell'onda stazionaria = la formula con f entro 1e-10                                     PASSA
+  DEVE: S2: v senza massa = 0.15000 entro 1e-6                                                                         PASSA
+  DEVE: S2 DEVE FALLIRE: con f = 1 la velocita' NON e' 0.15 (0.6124)                                                   PASSA
+==================================================================================================================================

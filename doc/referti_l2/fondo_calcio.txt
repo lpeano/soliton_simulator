@@ -1,0 +1,25 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] fondo_suite.py  sha1-BYTE f5c178a3  committato e pulito
+==================================================================================================================================
+[M2351-M] 5b IL CALCIO DAL k 1500 (la carta sez. 13): v dal fit su k 200 ... 1000, m* = k/v col segno; sotto il rumore |v - v0| < 3 sigma
+==================================================================================================================================
+  calcio_F0_k0.000_a1        v lungo l'asse +6.818231e-05 +- 8.5e-07 (il residuo 1.79e-03); lo spostamento a k 1000 +0.0578; la norma 9.950109e+05 -> 9.950109e+05
+  calcio_F0_k0.010_a1        v lungo l'asse -5.514779e-04 +- 5.0e-07 (il residuo 1.06e-03); lo spostamento a k 1000 -0.5569; la norma 9.950109e+05 -> 9.950109e+05
+  calcio_F0_k0.010_a2        v lungo l'asse -6.279601e-04 +- 1.3e-06 (il residuo 2.79e-03); lo spostamento a k 1000 -0.6209; la norma 9.950109e+05 -> 9.950109e+05
+    F0 asse 1: m* = k/v = -18.133 +- 0.017 (con v - v0: -16.138)
+    F0 asse 2: m* = k/v = -15.925 +- 0.034 (con v - v0: -14.365)
+  F0: m*_sol -18.133, -15.925, la media -17.029
+  DEVE: il caso noto: F0 da k 1500, m* media entro il 2% di -19.26                                               ### FALLISCE (-17.029)
+  calcio_fondo_k0.000_a1     v lungo l'asse -8.610842e-05 +- 4.3e-06 (il residuo 9.04e-03); lo spostamento a k 1000 -0.1295; la norma 9.950109e+05 -> 9.950109e+05
+  calcio_fondo_k0.010_a1     v lungo l'asse -1.195880e-04 +- 3.7e-06 (il residuo 7.77e-03); lo spostamento a k 1000 -0.1344; la norma 9.950109e+05 -> 9.950109e+05
+  calcio_fondo_k0.010_a2     v lungo l'asse +1.420323e-04 +- 4.4e-06 (il residuo 9.36e-03); lo spostamento a k 1000 +0.1917; la norma 9.950109e+05 -> 9.950109e+05
+    fondo asse 1: m* = k/v = -83.620 +- 2.581 (con v - v0: -298.689)
+    fondo asse 2: m* = k/v = +70.407 +- 2.204 (con v - v0: +43.833)
+  fondo: m*_sol -83.620, +70.407, la media -6.607
+==================================================================================================================================

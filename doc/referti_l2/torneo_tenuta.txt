@@ -1,0 +1,17 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+==================================================================================================================================
+[M1631] LE TENUTE (5a; la carta sez. 7 e 10): K-T = w(3000)/w(500) entro [0.7, 1.3] e un solo pezzo a k 3000
+==================================================================================================================================
+  FH_cima        w 14.850 -> 7.351 (il rapporto 0.495); i pezzi 1 -> 1; il picco lisciato 1.3086e+03 -> 4.0866e+03; la massa 995010.893145 -> 995010.893146: ### NON REGGE
+  FT_cima        w 15.226 -> 6.825 (il rapporto 0.448); i pezzi 1 -> 1; il picco lisciato 1.1930e+03 -> 3.6001e+03; la massa 995010.893145 -> 995010.893147: ### NON REGGE
+  L+0.25_cima    w 14.176 -> 7.963 (il rapporto 0.562); i pezzi 1 -> 1; il picco lisciato 1.2305e+03 -> 2.7698e+03; la massa 995010.893145 -> 995010.893146: ### NON REGGE
+  L+0.5_cima     w 15.035 -> 8.515 (il rapporto 0.566); i pezzi 1 -> 1; il picco lisciato 1.1925e+03 -> 2.9136e+03; la massa 995010.893145 -> 995010.893146: ### NON REGGE
+  L0_cima        w 13.752 -> 15.117 (il rapporto 1.099); i pezzi 1 -> 1; il picco lisciato 1.2586e+03 -> 7.7837e+02; la massa 995010.893145 -> 995010.893146: REGGE
+  S1_cima        w 15.217 -> 6.516 (il rapporto 0.428); i pezzi 1 -> 1; il picco lisciato 1.2011e+03 -> 4.2676e+03; la massa 995010.893145 -> 995010.893146: ### NON REGGE
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: F0 (S1) alla cima REGGE (se no, il criterio e' rotto)                                      ### FALLISCE 
+==================================================================================================================================

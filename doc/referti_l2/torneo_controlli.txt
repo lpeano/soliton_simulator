@@ -1,0 +1,32 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+==================================================================================================================================
+[M1631] I CONTROLLI K1 DEL LANCIATORE (la carta sez. 10): la forma della tabella S1; le forme del nucleo ['FH', 'FT', 'L+0.25', 'L+0.5', 'L-0.25', 'L-0.5', 'L-1', 'L0', 'S1', 'S3']
+==================================================================================================================================
+  DEVE: (4) UN tick: il percorso del nucleo a S1 = quello di csv/ della scena, al bit                            PASSA c65ce25a c65ce25a
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L+0.5 contro S1                                          PASSA dafbef4b
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L+0.25 contro S1                                         PASSA 08b9a7e1
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L0 contro S1                                             PASSA cc59a9f3
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L-0.25 contro S1                                         PASSA a3a1aed8
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L-0.5 contro S1                                          PASSA 55b978ea
+  DEVE: (3) ### DEVE differire: UN tick con la materia, L-1 contro S1                                            PASSA 9bd78b72
+  DEVE: (3) ### DEVE differire: UN tick con la materia, FH contro S1                                             PASSA b12fb022
+  DEVE: (3) ### DEVE differire: UN tick con la materia, FT contro S1                                             PASSA 186fcb58
+  DEVE: (1) lambda = 1 (in memoria) = S1 AL BIT, 100 tick con la materia                                         PASSA e5397e4c e5397e4c
+  il vuoto da solo: max |psi_h| 0.0e+00 (DEVE essere 0)
+  DEVE: (2) il vuoto da solo ha psi = 0                                                                          PASSA 
+  DEVE: (2) il vuoto da solo, 100 tick: L+0.5 = S1 AL BIT                                                        PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: L+0.25 = S1 AL BIT                                                       PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: L0 = S1 AL BIT                                                           PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: L-0.25 = S1 AL BIT                                                       PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: L-0.5 = S1 AL BIT                                                        PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: L-1 = S1 AL BIT                                                          PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: FH = S1 AL BIT                                                           PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: FT = S1 AL BIT                                                           PASSA f96a97c2 f96a97c2
+  DEVE: (2) il vuoto da solo, 100 tick: il nucleo a S1 = csv/ della scena, al bit                                PASSA f96a97c2
+==================================================================================================================================
+  20 DEVE su 20   TUTTI PASSATI
+==================================================================================================================================

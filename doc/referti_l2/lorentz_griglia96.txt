@@ -1,0 +1,9 @@
+[TIMBRO] lorentz_velocita.py  sha1-BYTE 098496da  committato e pulito
+[TIMBRO] lorentz_griglia96.py  sha1-BYTE fa4a7d13  committato e pulito
+==================================================================================================================================
+L'ANISOTROPIA DELLA MATERIA SULLA GRIGLIA 96 (la risposta di Luca al FERMO della carta della cura): solo Bloch
+==================================================================================================================================
+### lato 48 (L1): v_max/s 0.58813743; proiettata 0 gradi 0.58802978, 15 gradi 0.57853245, 30 gradi 0.56633180; l'anisotropia 3.7564e-02
+### lato 96: v_max/s 0.58854082 (in (79, 34)); proiettata 0 gradi 0.58854082, 15 gradi 0.57911538, 30 gradi 0.56633180; l'anisotropia 3.8424e-02
+### il rapporto delle anisotropie 96/48: 1.0229 -> DEL RETICOLO (entro il 20%)
+==================================================================================================================================

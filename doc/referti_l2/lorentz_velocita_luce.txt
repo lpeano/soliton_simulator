@@ -1,0 +1,33 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] lorentz_velocita.py  sha1-BYTE 098496da  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+============================================================================================================================================
+L1 (b), LA LUCE U(1) (la carta sez. 2.2): s_a del campo della corsa, il leapfrog per k, il caso noto dell'onda stazionaria
+============================================================================================================================================
+### il campo della corsa (ripreso da stato_03000.npz come la corsa lo costruisce): forma noncompatto; s_a uniforme True, 0.15 .. 0.15; w 0.03897114317029973 .. 0.03897114317029973; mot.cs alla costruzione presente; L_SU_LS 1.7320508075688772, AREA 0.4330127018922193
+### IL CASO NOTO: l'onda stazionaria del fotone sul toro 48x48, k (1, 0) |k| 0.151150, 400 tick: omega misurata 0.022667580018, formula 0.022667580018 (lo scarto 4.3e-13; la dispersione delle stime 3.4e-14); il modo di gauge lambda -4.4e-16
+  CASO NOTO: omega dell'onda stazionaria = la formula del leapfrog entro 1e-6 relativo                                   PASSA   4.3e-13
+  DEVE FALLIRE: la formula senza l'AREA (omega 0.014916)                                                                 PASSA   3.4e-01
+### LA VELOCITA' DEL FOTONE (archi per tick), v = omega/|k| e v_g = d omega/d|k|:
+  theta  0.0: |k| 1e-02: v 0.1499998578, v_g 0.1499995743 (v/s_a 0.99999905); |k| 1e-03: v 0.1499999989, v_g 0.1500000143 (v/s_a 0.99999999); |k| 1e-04: v 0.1500000062, v_g 0.1499911624 (v/s_a 1.00000004)
+  theta 15.0: |k| 1e-02: v 0.1499998578, v_g 0.1499995743 (v/s_a 0.99999905); |k| 1e-03: v 0.1499999989, v_g 0.1499996446 (v/s_a 0.99999999); |k| 1e-04: v 0.1500000062, v_g 0.1499541179 (v/s_a 1.00000004)
+  theta 30.0: |k| 1e-02: v 0.1499998578, v_g 0.1499995743 (v/s_a 0.99999905); |k| 1e-03: v 0.1499999989, v_g 0.1499996446 (v/s_a 0.99999999); |k| 1e-04: v 0.1500000062, v_g 0.1499911624 (v/s_a 1.00000004)
+### v_luce a k -> 0: 0.1500000062 archi per tick = 1.00000004 s_a; l'anisotropia (0, 15, 30 gradi) 0.0e+00; la parte G (un pacchetto a k finito, cs variabile) dava v/cs medio 0.99356
+### P-L2 (v_luce/s_a a k -> 0 entro 0.02 da 1): VERA (1.000000)
+============================================================================================================================================
+--------------------------------------------------------------------------------------------------------------------------------------------
+  CASO NOTO: omega dell'onda stazionaria = la formula del leapfrog entro 1e-6 relativo                                   PASSA
+  DEVE FALLIRE: la formula senza l'AREA (omega 0.014916)                                                                 PASSA

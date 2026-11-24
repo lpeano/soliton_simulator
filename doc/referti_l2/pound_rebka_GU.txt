@@ -1,0 +1,48 @@
+[TIMBRO] orologio_mattone.py  sha1-BYTE f64ebaff  committato e pulito
+[TIMBRO] girandola_chi_v3.py  sha1-BYTE 4f6a3787  committato e pulito
+[TIMBRO] pound_rebka_GU.py  sha1-BYTE 22d25a15  committato e pulito
+==================================================================================================================================
+[M1310-P] IL POUND-REBKA DI G+U (la carta sez. 6): omega_ref (l'orologio N1, il mattone da solo) 0.6264373875 per tick (il residuo del fit 3.002e-03 rad; la deviazione standard dell'incremento per tick 8.775e-05)
+==================================================================================================================================
+  DEVE: P CASO NOTO: il mattone da solo (N1) ha la frequenza costante: il residuo del fit lineare della fase sotto 1 rad su 900 tick PASSA (3.002e-03 rad)
+----------------------------------------------------------------------------------------------------------------------------------
+  B2 in fase, d 35           k  500 (t 60500; sha1 902ea094): L 162, rho del file contro psi_h 3.0e-07; d 34.9614; le fasi +1.72400 (comp 0, la massa entro 15 7.2612e+05) e +1.72662 (comp 0, 7.3112e+05)
+  B2 in fase, d 35           k 1000 (t 61000; sha1 50569b73): L 162, rho del file contro psi_h 5.3e-07; d 34.5414; le fasi -3.10766 (comp 0, la massa entro 15 6.9049e+05) e -3.10881 (comp 0, 6.9492e+05)
+  B2 in fase, d 35           k 1500 (t 61500; sha1 a3864508): L 162, rho del file contro psi_h 4.7e-07; d 33.8728; le fasi -1.69203 (comp 0, la massa entro 15 6.7740e+05) e -1.69707 (comp 0, 6.7370e+05)
+  B2 in fase, d 35           k 2000 (t 62000; sha1 d0573bbf): L 162, rho del file contro psi_h 4.9e-07; d 33.0374; le fasi -0.30837 (comp 0, la massa entro 15 6.7665e+05) e -0.30888 (comp 0, 6.7690e+05)
+    k  500 -> 1000, d medio 34.7514: omega A 0.62541548, B 0.62542301; la media 0.62541925; omega - omega_ref -1.0181e-03 (A -1.0219e-03, B -1.0144e-03)
+    k 1000 -> 1500, d medio 34.2071: omega A 0.62548726, B 0.62549506; la media 0.62549116; omega - omega_ref -9.4623e-04 (A -9.5012e-04, B -9.4233e-04)
+    k 1500 -> 2000, d medio 33.4551: omega A 0.62555122, B 0.62554215; la media 0.62554669; omega - omega_ref -8.9070e-04 (A -8.8617e-04, B -8.9523e-04)
+----------------------------------------------------------------------------------------------------------------------------------
+  in fase, d 50              k  500 (t 60500; sha1 da1383a6): L 162, rho del file contro psi_h 2.9e-07; d 51.0036; le fasi +1.73729 (comp 0, la massa entro 15 7.2712e+05) e +1.73717 (comp 0, 7.2680e+05)
+  in fase, d 50              k 1000 (t 61000; sha1 b1f46acc): L 162, rho del file contro psi_h 5.5e-07; d 50.9921; le fasi -3.06208 (comp 0, la massa entro 15 7.1432e+05) e -3.06289 (comp 0, 7.1324e+05)
+  in fase, d 50              k 1500 (t 61500; sha1 56b09e20): L 162, rho del file contro psi_h 4.9e-07; d 50.9724; le fasi -1.58856 (comp 0, la massa entro 15 7.1679e+05) e -1.59101 (comp 0, 7.1318e+05)
+  in fase, d 50              k 2000 (t 62000; sha1 1c1b591d): L 162, rho del file contro psi_h 4.7e-07; d 50.9522; le fasi -0.10586 (comp 0, la massa entro 15 7.2320e+05) e -0.10931 (comp 0, 7.2166e+05)
+    k  500 -> 1000, d medio 50.9979: omega A 0.62535091, B 0.62535228; la media 0.62535160; omega - omega_ref -1.0858e-03 (A -1.0865e-03, B -1.0851e-03)
+    k 1000 -> 1500, d medio 50.9823: omega A 0.62537148, B 0.62537478; la media 0.62537313; omega - omega_ref -1.0643e-03 (A -1.0659e-03, B -1.0626e-03)
+    k 1500 -> 2000, d medio 50.9623: omega A 0.62535313, B 0.62535512; la media 0.62535412; omega - omega_ref -1.0833e-03 (A -1.0843e-03, B -1.0823e-03)
+----------------------------------------------------------------------------------------------------------------------------------
+  in fase, d 65 (L 243)      k  500 (t 60500; sha1 68e328ac): L 243, rho del file contro psi_h 8.4e-08; d 65.9990; le fasi +1.73710 (comp 0, la massa entro 15 7.2700e+05) e +1.73711 (comp 0, 7.2703e+05)
+  in fase, d 65 (L 243)      k 1000 (t 61000; sha1 99fa4cce): L 243, rho del file contro psi_h 1.4e-07; d 65.9922; le fasi -3.06243 (comp 0, la massa entro 15 7.1475e+05) e -3.06240 (comp 0, 7.1419e+05)
+  in fase, d 65 (L 243)      k 1500 (t 61500; sha1 caf2476a): L 243, rho del file contro psi_h 3.3e-07; d 65.9828; le fasi -1.58844 (comp 0, la massa entro 15 7.1555e+05) e -1.58852 (comp 0, 7.1540e+05)
+    k  500 -> 1000, d medio 65.9956: omega A 0.62535122, B 0.62535117; la media 0.62535119; omega - omega_ref -1.0862e-03 (A -1.0862e-03, B -1.0862e-03)
+    k 1000 -> 1500, d medio 65.9875: omega A 0.62537055, B 0.62537077; la media 0.62537066; omega - omega_ref -1.0667e-03 (A -1.0668e-03, B -1.0666e-03)
+----------------------------------------------------------------------------------------------------------------------------------
+  B2-pi in antifase, d 35    k  500 (t 60500; sha1 2e09b255): L 162, rho del file contro psi_h 3.4e-07; d 37.3832; le fasi +1.76421 (comp 0, la massa entro 15 7.4355e+05) e -1.37763 (comp 0, 7.3680e+05)
+  B2-pi in antifase, d 35    k 1000 (t 61000; sha1 d821f2e5): L 162, rho del file contro psi_h 4.1e-07; d 37.9962; le fasi -2.99079 (comp 0, la massa entro 15 7.3248e+05) e +0.14852 (comp 0, 7.3059e+05)
+  B2-pi in antifase, d 35    k 1500 (t 61500; sha1 b0c5252b): L 162, rho del file contro psi_h 3.9e-07; d 38.6747; le fasi -1.47417 (comp 0, la massa entro 15 7.3046e+05) e +1.66325 (comp 0, 7.3329e+05)
+  B2-pi in antifase, d 35    k 2000 (t 62000; sha1 b320912b): L 162, rho del file contro psi_h 4.3e-07; d 39.4235; le fasi +0.05908 (comp 0, la massa entro 15 7.3611e+05) e -3.09208 (comp 0, 7.2769e+05)
+    k  500 -> 1000, d medio 37.6897: omega A 0.62526214, B 0.62526624; la media 0.62526419; omega - omega_ref -1.1732e-03 (A -1.1752e-03, B -1.1711e-03)
+    k 1000 -> 1500, d medio 38.3354: omega A 0.62528530, B 0.62528906; la media 0.62528718; omega - omega_ref -1.1502e-03 (A -1.1521e-03, B -1.1483e-03)
+    k 1500 -> 2000, d medio 39.0491: omega A 0.62525202, B 0.62526283; la media 0.62525743; omega - omega_ref -1.1800e-03 (A -1.1854e-03, B -1.1746e-03)
+==================================================================================================================================
+  DEVE: P CONTROLLO: ogni omega sciolta entro +-0.006 da omega_ref (l'ambiguita' di 2 pi/500 sciolta)                  PASSA (il massimo 1.1854e-03)
+  LA SINTESI: per coppia, omega - omega_ref (la media degli intervalli) e lo scarto fra le due meta'
+    B2 in fase, d 35           d medio 34.138: omega - omega_ref -9.5169e-04 (da -1.0181e-03 a -8.9070e-04); lo scarto A - B medio 8.131e-06
+    in fase, d 50              d medio 50.981: omega - omega_ref -1.0778e-03 (da -1.0858e-03 a -1.0643e-03); lo scarto A - B medio 2.222e-06
+    in fase, d 65 (L 243)      d medio 65.992: omega - omega_ref -1.0765e-03 (da -1.0862e-03 a -1.0667e-03); lo scarto A - B medio 1.340e-07
+    B2-pi in antifase, d 35    d medio 38.358: omega - omega_ref -1.1678e-03 (da -1.1800e-03 a -1.1502e-03); lo scarto A - B medio 6.222e-06
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: P CASO NOTO: il mattone da solo (N1) ha la frequenza costante: il residuo del fit lineare della fase sotto 1 rad su 900 tick PASSA
+  DEVE: P CONTROLLO: ogni omega sciolta entro +-0.006 da omega_ref (l'ambiguita' di 2 pi/500 sciolta)                  PASSA
+==================================================================================================================================

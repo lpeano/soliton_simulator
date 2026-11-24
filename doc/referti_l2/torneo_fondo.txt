@@ -1,0 +1,30 @@
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] spettro_gap.py  sha1-BYTE 7494e102  committato e pulito
+[TIMBRO] torneo_fondo.py  sha1-BYTE 878ee93e  committato e pulito
+==================================================================================================================================
+[M1631] GLI AUTOVETTORI DEL FONDO (la carta sez. 6, 10): A_IMP 1e-06
+==================================================================================================================================
+### la risposta di un tick: 23 nodi col supporto; |B0| 7.255197, |B1| 7.255197, B0.B1/|B0|^2 +0.5000; L 162
+  DEVE: K: un candidato con |k| = |B0|/sqrt(3)                                                               PASSA ['(B0+B1)/3']
+  Gamma k = 0           (+0.000000, +0.000000): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 4.18e-16; |e^{i k.L A_j} - 1| 0.00e+00
+        |v| per componente: 0.0079 0.4498 0.1397 0.4709 0.1834 0.1143 0.2257 0.1743 0.2213 0.4508 0.1047 0.4064
+  DEVE: Gamma: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                    PASSA (-0.48267613)
+  DEVE: Gamma: NON degenere (il distacco dalla seconda > 1e-6)                                               ### FALLISCE (5.551e-17)
+  DEVE: Gamma: k commensurato col toro L 162                                                                 PASSA (0.00e+00)
+  DEVE: Gamma: autovettore (il residuo < 1e-10)                                                              PASSA (4.18e-16)
+  K     k = (B0+B1)/3   (+2.094395, +3.627599): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 1.09e-15; |e^{i k.L A_j} - 1| 2.94e-14
+        |v| per componente: 0.2421 0.2451 0.3265 0.3287 0.2421 0.2451 0.3265 0.3287 0.3265 0.3287 0.2421 0.2451
+  DEVE: K: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                        PASSA (-0.48267613)
+  DEVE: K: NON degenere (il distacco dalla seconda > 1e-6)                                                   ### FALLISCE (1.665e-16)
+  DEVE: K: k commensurato col toro L 162                                                                     PASSA (2.94e-14)
+  DEVE: K: autovettore (il residuo < 1e-10)                                                                  PASSA (1.09e-15)
+  M     k = B0/2        (+3.141593, +1.813799): le due quasi-energie piu' basse -0.48267613 -0.48267613; |lambda| 1.000000000000; il residuo 1.05e-15; |e^{i k.L A_j} - 1| 4.12e-14
+        |v| per componente: 0.0393 0.4730 0.1621 0.4984 0.0000 0.0000 0.0000 0.0000 0.1124 0.4845 0.1233 0.4872
+  DEVE: M: la piu' bassa = -0.4826761 entro 1e-6 (1a)                                                        PASSA (-0.48267613)
+  DEVE: M: NON degenere (il distacco dalla seconda > 1e-6)                                                   ### FALLISCE (2.776e-16)
+  DEVE: M: k commensurato col toro L 162                                                                     PASSA (4.12e-14)
+  DEVE: M: autovettore (il residuo < 1e-10)                                                                  PASSA (1.05e-15)
+### salvato E:\soliton_simulator\controllo\M1631\fondo.npz
+==================================================================================================================================
+  10 DEVE su 13   ### CI SONO BUCHI
+==================================================================================================================================

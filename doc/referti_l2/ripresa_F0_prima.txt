@@ -1,0 +1,28 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] gravita_due_corpi_misure.py  sha1-BYTE 7d739a8f  committato e pulito
+[TIMBRO] ripresa_F0.py  sha1-BYTE 3e189d76  committato e pulito
+==================================================================================================================================
+[M1631] LA RIPRESA AL BIT (prima): CHI/caduta/V1 da k 1750 a k 2000; la forma della tabella S1; cs s N, la fase (a) +1; e0 0.4767266286 (il file 0.4767266286)
+==================================================================================================================================
+  DEVE: la forma della tabella e' S1 (F0)                                                                    PASSA S1
+  DEVE: e0 della corsa = e0 di oggi                                                                          PASSA 
+  DEVE: s della corsa = s di oggi                                                                            PASSA 
+  DEVE: ### DEVE fallire l'uguaglianza: UN tick con S3 contro UN tick con la forma della tabella             ### FALLISCE le chiavi diverse []
+  DEVE: la forma torna quella della tabella dopo il contesto                                                 PASSA S1
+----------------------------------------------------------------------------------------------------------------------------------
+  Lambda     (26244,)     float64: ### DIVERSO (max |diff| 1.216e-03)
+  campo_A    (78732,)     float64: ### DIVERSO (max |diff| 2.283e-05)
+  campo_E    (78732,)     float64: ### DIVERSO (max |diff| 4.129e-06)
+  h_int      (26244,)     float64: AL BIT (max |diff| 0.000e+00)
+  phi_h      (157464,)    complex128: ### DIVERSO (max |diff| 1.626e-03)
+  psi        (26244, 2)   complex128: AL BIT (max |diff| 0.000e+00)
+  psi_h      (157464, 2)  complex128: ### DIVERSO (max |diff| 1.829e-03)
+  rho        (26244,)     float64: ### DIVERSO (max |diff| 4.318e-02)
+  lo sha1 dello stato a k 2000 (le chiavi in ordine): eb4eeb37aea3a62340c5269d982da9907ff080ae
+  DEVE: lo stato a k 2000 = stato_002000.npz del disco, ogni chiave, AL BIT                                  ### FALLISCE 
+  DEVE: ### DEVE fallire l'uguaglianza: lo stato a k 1999 contro il file a k 2000                            PASSA 
+==================================================================================================================================
+  5 DEVE su 7   ### CI SONO BUCHI
+==================================================================================================================================

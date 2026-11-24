@@ -1,0 +1,38 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] caduta_segno.py  sha1-BYTE 46a205a9  committato e pulito
+==================================================================================================================================
+[M0908-L] LA LETTURA DEL SEGNO DELLA FORMA (a) (la carta sez. 1); le costanti di T-L4b: A_IMP 1e-06, DK 0.02, H_CS 0.0001
+==================================================================================================================================
+(0) LE RIGHE DEL CODICE (dai sorgenti di OGGI)
+    chi_tick.fase_a | def fase_a(mot, st, e0, N):
+    chi_tick.fase_a |     """### la fase della forma (a) con `N(chi)` *(fa1)*: `e^{+i e0 (N - 1)/2}` per nodo *(le righe di `tick_lapse.fase_a` col termine in `N'` caduto)*."""
+    chi_tick.fase_a |     g = N - 1.0
+    chi_tick.fase_a |     st["psi_h"][...] = st["psi_h"] * np.exp(0.5j * float(e0) * g)[mot.inc.nodo][:, None]
+    doc/referti_l2/chi_tick.py:147  Fa = -P.e0 * float(np.sum((N - 1.0) * rho))
+    doc/referti_l2/chi_tick_v2.py:83  Fa = -P.e0 * float(np.sum((N - 1.0) * rho))
+    doc/referti_l2/chi_tick_v2.py:55  CT.fase_a(mot, st, P.e0, N)
+    doc/referti_l2/chi_tick_v2.py:58  CT.fase_a(mot, st, P.e0, N)
+    csv/solitone/s5_caduta_segno.py:125  E = -np.angle(lam)
+    csv/solitone/s5_caduta_segno.py:174  mezza = np.exp(1j * e0 * (Nx - 1.0) * 0.5)[nodo][:, None]
+    csv/solitone/p6_bracci.py:91  TL.fase_a(mot, st, legge, e0, False)
+    csv/solitone/p6_bracci.py:99  TL.fase_a(mot, st, legge, e0, False)
+    csv/solitone/s5_coppia_lapse.py:47  def eps_top_tl4b():
+(0) LE RIGHE DELLE CARTE (dove la forma (a) e il suo segno furono decisi)
+    doc/TASK_HISTORY/2026-11-09_laterale_mb.md:1626  - ### **LA FORMA (a)** *(del guardiano)*: **l'energia della materia contata DALLA CIMA della sua banda.**
+    doc/TASK_HISTORY/2026-11-09_laterale_mb.md:1628  **`E_N = somma_k N_k h_k - eps_top somma_k (N_k - 1) rho_k`**,
+    doc/TASK_HISTORY/2026-11-09_laterale_mb.md:1631  - **I vincoli:** **(i)** **dove `psi = 0` il termine nuovo e' zero:** **il vuoto e' invariato;** **(ii)** **la reazione si deriva da `E_N`;** **(iii)** **vedi sopra;** **(iv)** **il peso della materia, `h - eps_top rho`, e' `<= 0` nella banda: il segno dell'inerzia.**
+    doc/TASK_HISTORY/2026-11-21_lapse_u.md:229  - **D-CHI-FORMA-A = (fa1)** *(`16:05`)*: la forma (a) con `N(chi)`: `- eps_a somma_k (N(chi_k) - 1) rho_k`, la stessa `eps_a` di C2 *(`e0 = G2.eps_top_tl4b()`)*; la fase su `psi` `e^{+i eps_a (N(chi_k) - 1)/2}` *(il termine in `N'` cade)*; **nella forza su `chi` il termine dalla catena `- eps_a kappa N_k rho_k`, insieme a `kappa cs Q`.** **Il motivo** *(di Luca)*: la forma (a) era accesa in tutte le corse G+U legate;
+    doc/referti_l2/s5_caduta_segno.txt:13  la banda 0: eps(0) +0.4767266286; d eps/dk -9.7145e-15; d2 eps/dk2 -5.923495e-02; d eps/d cs +3.172173; il peso di q a k = dk 0.8978
+    doc/referti_l2/s5_caduta_segno.txt:38  LA LETTURA: verso giusto ma NON (f1): l'ampiezza fuori dal 15%; il pacchetto va verso N piu' BASSO; i rapporti con la previsione (con la larghezza) 0.448, 0.450, 0.452, 0.466
+    doc/referti_l2/s5_caduta_solitone.txt:43  LA LETTURA: (e3) verso N piu' ALTO
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\caduta_segno.py", line 192, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\caduta_segno.py", line 94, in main
+    assert np.array_equal(nodo, np.repeat(np.arange(n), 6)), "i semiarchi non sono 6 per nodo in ordine: il reshape (n, 12) non vale"
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: i semiarchi non sono 6 per nodo in ordine: il reshape (n, 12) non vale

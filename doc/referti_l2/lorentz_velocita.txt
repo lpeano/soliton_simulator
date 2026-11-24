@@ -1,0 +1,14 @@
+[TIMBRO] lorentz_velocita.py  sha1-BYTE 098496da  committato e pulito
+============================================================================================================================================
+L1, LA TABELLA DELLE TRE VELOCITA' (dai json di luce, chi, materia; la carta sez. 2.2)
+============================================================================================================================================
+                                                materia           luce            chi |       mat/cs      luce/cs       chi/cs |   mat/luce   chi/luce
+  vuoto (cs = s = 0.1500)                  0.0882206150   0.1500000062   0.6123724249 |   0.58813743   1.00000004   4.08248283 |   0.588137   4.082483
+  centro (cs = s N = 0.149329, N 0.995525)   0.0878217273   0.1500000062   0.6123724249 |   0.58811016   1.00449548   4.10083536 |   0.585478   4.082483
+  (archi per tick; /cs = archi per unita' di tempo proprio; la materia: v_max, la velocita' di gruppo massima; chi: la pendenza senza massa; la luce: il fotone a k -> 0)
+### P-L3 (|v_materia/v_luce - 1| > 0.05 al vuoto): VERA (0.588137)
+### P-L4 (|v_chi/v_luce - 1| > 0.10): VERA (4.082483)
+### P-L5 (i rapporti in tempo proprio cambiano fra il vuoto e il centro fra 0.1 e 10 volte 1 - N = 4.475e-03): materia/luce 4.521e-03, luce/cs 4.495e-03, chi/cs 4.495e-03 -> VERA
+### P-L2 (dalla luce): VERA
+============================================================================================================================================
+--------------------------------------------------------------------------------------------------------------------------------------------

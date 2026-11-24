@@ -1,0 +1,34 @@
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] fondo_materia.py  sha1-BYTE 69b994c0  committato e pulito
+==================================================================================================================================
+[M1658-S] 1a: IL FONDO DELLA BANDA DELLA MATERIA (la carta doc/CARTA_fondo_giusto.md, sez. 2)
+==================================================================================================================================
+### la CIMA a Gamma: E +0.4767266286, la molteplicita' 2; SU(2) il residuo 1.90e-01; lo stampo nel sottospazio 0.9979 (1907 nodi)
+  DEVE: K1 la cima a Gamma = +0.4767266 entro 1e-6 (spettro_gap_v2)                                                    PASSA (+0.47672663)
+  K (+2.094395, +3.627599), |k|/|B0| 0.577350; commensurato con L 162: 2.9e-14
+    le 12 quasi-energie: -0.4826761 -0.4826761 -0.4825221 -0.4825221 -0.2459254 -0.2459254 +0.0114372 +0.0114372 +0.0118702 +0.0118702 +0.2453383 +0.2453383
+    il fondo della materia +0.2453383264; la molteplicita' 2 (entro 1e-9); |lambda| 1.000000000000; SU(2) il residuo 4.48e-01 (NON invariante); lo stampo nel sottospazio 0.254081
+  DEVE: K1 K: il fondo = +0.2453383 entro 1e-6 (spettro_gap_v2)                                                        PASSA (+0.24533833)
+    lungo B0         d 0.0025: +9.2044e-06 +9.2044e-06; d 0.0050: +3.6813e-05 +3.6813e-05; d 0.0100: +1.4718e-04 +1.4718e-04; d 0.0200: +5.8764e-04 +5.8764e-04
+      il ramo 0: gli esponenti p 2.000 1.999 1.997: CURVATURA; 2 dE/dk^2 +5.5956e-02 +5.5950e-02 +5.5923e-02 +5.5819e-02; dE/dk +5.0747e-04 +1.0148e-03 +2.0287e-03 +4.0498e-03
+      il ramo 1: gli esponenti p 2.000 1.999 1.997: CURVATURA; 2 dE/dk^2 +5.5956e-02 +5.5950e-02 +5.5923e-02 +5.5819e-02; dE/dk +5.0747e-04 +1.0148e-03 +2.0287e-03 +4.0498e-03
+    lungo B1         d 0.0025: +9.2044e-06 +9.2044e-06; d 0.0050: +3.6813e-05 +3.6813e-05; d 0.0100: +1.4718e-04 +1.4718e-04; d 0.0200: +5.8764e-04 +5.8764e-04
+      il ramo 0: gli esponenti p 2.000 1.999 1.997: CURVATURA; 2 dE/dk^2 +5.5956e-02 +5.5950e-02 +5.5923e-02 +5.5819e-02; dE/dk +5.0747e-04 +1.0148e-03 +2.0287e-03 +4.0498e-03
+      il ramo 1: gli esponenti p 2.000 1.999 1.997: CURVATURA; 2 dE/dk^2 +5.5956e-02 +5.5950e-02 +5.5923e-02 +5.5819e-02; dE/dk +5.0747e-04 +1.0148e-03 +2.0287e-03 +4.0498e-03
+    lungo bisettrice d 0.0025: +9.1562e-06 +9.1562e-06; d 0.0050: +3.6428e-05 +3.6428e-05; d 0.0100: +1.4410e-04 +1.4410e-04; d 0.0200: +5.6303e-04 +5.6303e-04
+      il ramo 0: gli esponenti p 1.992 1.984 1.966: CURVATURA; 2 dE/dk^2 +5.5663e-02 +5.5363e-02 +5.4751e-02 +5.3482e-02; dE/dk +5.0481e-04 +1.0042e-03 +1.9862e-03 +3.8802e-03
+      il ramo 1: gli esponenti p 1.992 1.984 1.966: CURVATURA; 2 dE/dk^2 +5.5663e-02 +5.5363e-02 +5.4751e-02 +5.3482e-02; dE/dk +5.0481e-04 +1.0042e-03 +1.9862e-03 +3.8802e-03
+  DEVE: K2 K: non degenere (la molteplicita' <= 2)                                                                     PASSA (2)
+  K' (+4.188790, +4.836798), |k|/|B0| 0.881917; commensurato con L 162: 8.6e-14
+    le 12 quasi-energie: -0.4826761 -0.4826761 -0.4824485 -0.4824485 -0.3401099 -0.3401099 +0.0114372 +0.0114372 +0.0116642 +0.0116642 +0.3396553 +0.3396553
+    il fondo della materia +0.3396553194; la molteplicita' 2 (entro 1e-9); |lambda| 1.000000000000; SU(2) il residuo 2.95e-01 (NON invariante); lo stampo nel sottospazio 0.424613
+  DEVE: K1 K': il fondo = +0.2453383 entro 1e-6 (spettro_gap_v2)                                                       ### FALLISCE (+0.33965532)
+    lungo B0         d 0.0025: ; d 0.0050: ; d 0.0100: ; d 0.0200: 
+    lungo B1         d 0.0025: ; d 0.0050: ; d 0.0100: ; d 0.0200: 
+    lungo bisettrice d 0.0025: ; d 0.0050: ; d 0.0100: ; d 0.0200: 
+  DEVE: K2 K': non degenere (la molteplicita' <= 2)                                                                    PASSA (2)
+### i rami al fondo: ['CURVATURA']
+  DEVE: K2: la curvatura al fondo POSITIVA (ogni ramo, ogni direzione, a K e K')                                       PASSA 
+==================================================================================================================================
+### 6 DEVE: 5 PASSANO, 1 FALLISCONO ["K1 K': il fondo = +0.2453383 entro 1e-6 (spettro_gap_v2)"]

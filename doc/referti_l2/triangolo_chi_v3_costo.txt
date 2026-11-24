@@ -1,0 +1,7 @@
+==================================================================================================================================
+P1, IL COSTO DEL TICK CON CHI SUL TRIANGOLO (Luca 2026-11-21 23:23): 50 tick per scena
+==================================================================================================================================
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v3.py  sha1-BYTE 7bb324ea  committato e pulito
+### IL TRIANGOLO t120r28 CON CHI (il passo v2): da k 0 (prepara) fino a k 50; i parametri kappa 2.5289441539e-04, c0 +3.5745506726e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.413455756638e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\costo\t120r28
+### 50 tick in 40 s (0.799 s per tick); il codice 0

@@ -1,0 +1,12 @@
+[TIMBRO] notte_m0428_v3.py  sha1-BYTE 0f18226d  committato e pulito
+==================================================================================================================================
+[M0428-W] L'AVVOLGIMENTO SUGLI STATI 0 DEL 15/11 RICOSTRUITI (psi_h, il cerchio di raggio 5 attorno alla media dei tre centri)
+==================================================================================================================================
+### sfasati: i centri [[112, 107], [73, 68], [112, 68]], la media ['99.000', '81.000']; rho entro 2 8.6895e+00; l'avvolgimento +1.0000 (la componente 0)
+### fase: i centri [[112, 107], [73, 68], [112, 68]], la media ['99.000', '81.000']; rho entro 2 1.9571e+01; l'avvolgimento +0.0000 (la componente 0)
+  W CASO NOTO: le sfasate del 15/11 a k 0, l'avvolgimento 1                                                        PASSA   +1.0000
+  W DEVE FALLIRE: il triangolo in fase del 15/11 a k 0, l'avvolgimento NON 1 (0)                                   PASSA   +0.0000
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: W CASO NOTO: le sfasate del 15/11 a k 0, l'avvolgimento 1                                                      PASSA
+  DEVE: W DEVE FALLIRE: il triangolo in fase del 15/11 a k 0, l'avvolgimento NON 1 (0)                                 PASSA
+==================================================================================================================================

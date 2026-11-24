@@ -1,0 +1,13 @@
+[TIMBRO] controllo_senza_bordo.py  sha1-BYTE cb036cff  committato e pulito
+[TIMBRO] torsione_tempo_proprio.py  sha1-BYTE d977d348  committato e pulito
+==================================================================================================================================
+LA TORSIONE DEL TEMPO PROPRIO, SOLO MISURA (Luca 2026-11-17 18:04): k2
+==================================================================================================================================
+K2: IL LEGAME CON LA FASE VERA -- da C2 k 3000, 50 tick
+### la ripresa da C2 stato_03000 (sha1 e717706f, ricontrollato)
+### oltre 30 nodi (il mandato): 93993 archi; la scala max |omega somma(dtau_i - dtau_j)| su 50 tick 1.025e-05 rad; la fase relativa misurata: max 1.164e+01, mediana |.| 2.453e-02; il rapporto misurata/omega dtau (archi con |pre| > 1e-3 della scala, 93055): mediana -1.0301e+01, i quartili -3.5166e+04 +3.4927e+04
+### fra 20 e 30 nodi (dichiarato accanto): 5437 archi; la scala max |omega somma(dtau_i - dtau_j)| su 50 tick 1.052e-02 rad; la fase relativa misurata: max 2.304e+01, mediana |.| 5.765e-02; il rapporto misurata/omega dtau (archi con |pre| > 1e-3 della scala, 1916): mediana -1.1304e+02, i quartili -1.9479e+03 +6.9973e+02
+### fra 10 e 20 nodi (dichiarato accanto): 3267 archi; la scala max |omega somma(dtau_i - dtau_j)| su 50 tick 1.436e-02 rad; la fase relativa misurata: max 2.569e+01, mediana |.| 1.428e+00; il rapporto misurata/omega dtau (archi con |pre| > 1e-3 della scala, 3264): mediana +7.4754e+00, i quartili -3.3415e+02 +3.9267e+02
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K2 (P-T5): il rapporto mediano entro 1% da 1 oltre 30 nodi                                                     ### FALLISCE
+==================================================================================================================================

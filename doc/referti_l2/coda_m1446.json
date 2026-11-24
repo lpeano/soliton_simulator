@@ -1,0 +1,2253 @@
+{
+ "nota": "[M1446] la coda (la carta doc/CARTA_E_mc2.md sez. K); priorita' 1 prima, a parita' l'ordine scritto; la corsia Q aggiunge la priorita' 3 per ciascun solitone che regge, dopo la tenuta; la priorita' 3 aggiunta dopo la tenuta (i due solitoni crescono di picco come il mattone di riferimento V0: il criterio assoluto del 20% era mio e sbagliato); [M1631] le tenute alla cima del torneo a priorita' 0 (la semina al fondo attende la decisione di Luca sulla portante); [M1446-F2] a priorita' 1; [M1631] la portante (Luca): (c) L-0.25, L-0.5, L-1 alla cima e (a) L-1 per proiezione a Gamma, a priorita' 0 col controllo positivo di omega; i nomi senza + (il registro); [M2351-M] 5b il calcio sul mattone del fondo e il caso noto F0, a priorita' 0; [M2351-Z] il controllo negativo del fondo a priorita' 0; [M0133] la fase con FH/FT (coppie, calcio, caduta) e m* di F0 lungo la tenuta, a priorita' 0; [M0149] (sostituisce [M0133]): tolte le 8 corse di convergenza M0133C non lanciate; le cadute M0133F a priorita' 1 (S6: I2, I4, S4 prima di S5); poi tolte anche le cadute M0133F (non lanciate): tornano in coda dopo I2, I4, S4; [M0149] S6: I2, I4, S4 a priorita' 0; le coppie (v3) a 1; le cadute (v2) a 2; [M0326] FH alla prova: S5, S6, Eotvos (2 tenute FH, il controllo F0, 4 cadute) a priorita' 0; le tenute lunghe a 1; la mitosi FH NO (un merge); [M0326] la coppia a d 35 fallita (d multiplo di 3): a d 36",
+ "corse": [
+  {
+   "nome": "M_k0.000_a1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "M_k0.010_a1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "V4_Nm",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4Nm"
+   ]
+  },
+  {
+   "nome": "V4_Np",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4Np"
+   ]
+  },
+  {
+   "nome": "Q_tenuta_x0.8",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "tenuta",
+    "--scala",
+    "0.8"
+   ]
+  },
+  {
+   "nome": "Q_tenuta_x1.2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "tenuta",
+    "--scala",
+    "1.2"
+   ]
+  },
+  {
+   "nome": "V4_N1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/orologio_V4.py",
+    "corsa",
+    "--var",
+    "V4N1"
+   ],
+   "note": "[M1446] il caso noto di V (mio): V4 a N = 1 al bit con N1"
+  },
+  {
+   "nome": "M_k0.010_a2",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ]
+  },
+  {
+   "nome": "M_k0.005_a1",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.005",
+    "--asse",
+    "1"
+   ]
+  },
+  {
+   "nome": "M_k0.005_a2",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/massa_calcio.py",
+    "corsa",
+    "--k",
+    "0.005",
+    "--asse",
+    "2"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Nm_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Np_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Nm_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_Np_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_calcio",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "calcio",
+    "--scala",
+    "0.8"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_caduta_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V2"
+   ]
+  },
+  {
+   "nome": "Q_x0.8_caduta_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "0.8",
+    "--forma",
+    "V3"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Nm_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Np_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Nm_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3",
+    "--var",
+    "Nm"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_Np_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "orologio",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3",
+    "--var",
+    "Np"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_calcio",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos.py",
+    "calcio",
+    "--scala",
+    "1.2"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_caduta_V2",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V2"
+   ]
+  },
+  {
+   "nome": "Q_x1.2_caduta_V3",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/eotvos_v2.py",
+    "caduta",
+    "--scala",
+    "1.2",
+    "--forma",
+    "V3"
+   ]
+  },
+  {
+   "nome": "F_D90",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "90",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 90 gradi"
+  },
+  {
+   "nome": "F_D60",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "60",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 60 gradi"
+  },
+  {
+   "nome": "F_D180",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 180 gradi"
+  },
+  {
+   "nome": "F_D270",
+   "priorita": 3,
+   "argv": [
+    "doc/referti_l2/gravita_fase.py",
+    "corsa",
+    "--gradi",
+    "270",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F] G+U (kappa 0) a d 39, la fase relativa 270 gradi"
+  },
+  {
+   "nome": "T_S1_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "S1",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L+0.5_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L+0.5",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L+0.25_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L+0.25",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_L0_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_FH_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "FH",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "T_FT_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta.py",
+    "corsa",
+    "--forma",
+    "FT",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] 5a, la tenuta alla cima (la carta sez. 10)"
+  },
+  {
+   "nome": "F2_U0_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_PHI_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "PHI",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_PHI_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "PHI",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0PHI_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0PHI",
+    "--gradi",
+    "0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "F2_U0PHI_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/gravita_fase_F2.py",
+    "corsa",
+    "--var",
+    "U0PHI",
+    "--gradi",
+    "180",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1446-F2] chi fa B (la carta di E=mc2 sez. F2)"
+  },
+  {
+   "nome": "T2_S1_cima_omega",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "S1",
+    "--semina",
+    "cima",
+    "--fino",
+    "500"
+   ],
+   "note": "[M1631] il controllo positivo di omega (la carta sez. 11)"
+  },
+  {
+   "nome": "T2_L-0.25_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-0.25",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-0.5_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-0.5",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-1_cima",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "cima",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (c) di Luca: lambda < 0 alla cima"
+  },
+  {
+   "nome": "T2_L-1_proiezione_Gamma",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "proiezione_Gamma",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1631] la strada (a) di Luca: un oggetto nuovo, la proiezione a Gamma"
+  },
+  {
+   "nome": "M2351M_fondo_k0_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_fondo_k0.010_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_fondo_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "fondo",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (fondo)"
+  },
+  {
+   "nome": "M2351M_F0_k0_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
+  },
+  {
+   "nome": "M2351M_F0_k0.010_a1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0.010",
+    "--asse",
+    "1"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
+  },
+  {
+   "nome": "M2351M_F0_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--k",
+    "0.010",
+    "--asse",
+    "2"
+   ],
+   "note": "[M2351-M] 5b il calcio dal k 1500 (F0)"
+  },
+  {
+   "nome": "M2351Z_L0_proiezione_Gamma",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/torneo_tenuta_v2.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--semina",
+    "proiezione_Gamma",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2351-Z] 5a-bis il controllo negativo del fondo"
+  },
+  {
+   "nome": "M0133P_FH_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FH)"
+  },
+  {
+   "nome": "M0133P_FH_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FH)"
+  },
+  {
+   "nome": "M0133P_FT_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FT)"
+  },
+  {
+   "nome": "M0133P_FT_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (FT)"
+  },
+  {
+   "nome": "M0133P_F0_D0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (F0)"
+  },
+  {
+   "nome": "M0133P_F0_D180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0133] 5e la coppia a d 35 (F0)"
+  },
+  {
+   "nome": "M0133M_FH_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FH",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (FH)"
+  },
+  {
+   "nome": "M0133M_FH_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FH",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (FH)"
+  },
+  {
+   "nome": "M0133M_FT_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FT",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (FT)"
+  },
+  {
+   "nome": "M0133M_FT_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "FT",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (FT)"
+  },
+  {
+   "nome": "M0133M_F0_k1500_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1500",
+    "--k",
+    "0"
+   ],
+   "note": "[M0133] 5b il calcio (F0)"
+  },
+  {
+   "nome": "M0133M_F0_k1500_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "calcio",
+    "--sorgente",
+    "F0",
+    "--kstato",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0133] 5b il calcio (F0)"
+  },
+  {
+   "nome": "M0149I2_Ep1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "1"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I2_Em1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "-1"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I2_E0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "campoE",
+    "--segno",
+    "0"
+   ],
+   "note": "[M0149] I2 il campo E uniforme"
+  },
+  {
+   "nome": "M0149I4_congelato_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "congelato",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149I4_congelato_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "congelato",
+    "--k",
+    "0"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149I4_libero_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "vuoto",
+    "--phi",
+    "libero",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] I4 il vuoto"
+  },
+  {
+   "nome": "M0149S4_tri_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "triangolo",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0149] S4 il composto t000"
+  },
+  {
+   "nome": "M0149S4_tri_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/inerzia_suite.py",
+    "triangolo",
+    "--k",
+    "0"
+   ],
+   "note": "[M0149] S4 il composto t000"
+  },
+  {
+   "nome": "M0149P_FH_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FH_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FH",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FT_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_FT_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "FT",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_F0_D0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149P_F0_D180",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v3.py",
+    "coppia",
+    "--sorgente",
+    "F0",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0149] S5 5e la coppia a d 35"
+  },
+  {
+   "nome": "M0149F_FH",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FH"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
+  },
+  {
+   "nome": "M0149F_FT",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "FT"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
+  },
+  {
+   "nome": "M0149F_F0",
+   "priorita": 2,
+   "argv": [
+    "doc/referti_l2/fondo_suite_v2.py",
+    "caduta",
+    "--sorgente",
+    "F0"
+   ],
+   "note": "[M0149] S5 5d la caduta V2"
+  },
+  {
+   "nome": "M0326K_coppia_F0_d35",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "coppia_stampo"
+   ],
+   "note": "[M0326] S5 il caso noto della coppia"
+  },
+  {
+   "nome": "M0326S_segno_mE",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "segno_mE"
+   ],
+   "note": "[M0326] S6 il segno di m_E"
+  },
+  {
+   "nome": "M0326Q_FH_x0.8_tenuta",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_tenuta",
+    "--forma",
+    "FH",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0326] S2 Eotvos FH"
+  },
+  {
+   "nome": "M0326Q_FH_x1.2_tenuta",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_tenuta",
+    "--forma",
+    "FH",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0326] S2 Eotvos FH"
+  },
+  {
+   "nome": "M0326Q_S1_x0.8_tenuta",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_tenuta",
+    "--forma",
+    "S1",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0326] S2 il controllo F0 con lo script nuovo"
+  },
+  {
+   "nome": "M0326Q_FH_x0.8_caduta_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_caduta",
+    "--forma",
+    "FH",
+    "--scala",
+    "0.8",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0326] S2 Eotvos FH, la caduta"
+  },
+  {
+   "nome": "M0326Q_FH_x0.8_caduta_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_caduta",
+    "--forma",
+    "FH",
+    "--scala",
+    "0.8",
+    "--coll",
+    "V3"
+   ],
+   "note": "[M0326] S2 Eotvos FH, la caduta"
+  },
+  {
+   "nome": "M0326Q_FH_x1.2_caduta_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_caduta",
+    "--forma",
+    "FH",
+    "--scala",
+    "1.2",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0326] S2 Eotvos FH, la caduta"
+  },
+  {
+   "nome": "M0326Q_FH_x1.2_caduta_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "eotvos_caduta",
+    "--forma",
+    "FH",
+    "--scala",
+    "1.2",
+    "--coll",
+    "V3"
+   ],
+   "note": "[M0326] S2 Eotvos FH, la caduta"
+  },
+  {
+   "nome": "M0326T_FH",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "tenuta_lunga",
+    "--forma",
+    "FH"
+   ],
+   "note": "[M0326] S3 la tenuta lunga FH"
+  },
+  {
+   "nome": "M0326T_F0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fh_suite.py",
+    "tenuta_lunga",
+    "--forma",
+    "S1"
+   ],
+   "note": "[M0326] S3 la tenuta lunga F0"
+  },
+  {
+   "nome": "M0326K_coppia_F0_d36",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fh_coppia36.py",
+    "corsa"
+   ],
+   "note": "[M0326] S5 il caso noto della coppia a d 36 (d 35 non e' un nodo buono)"
+  },
+  {
+   "nome": "M0528N_casi_noti",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "casi_noti"
+   ],
+   "note": "[M0528] 2b i casi noti del lapse come moltiplicatore (CN1, CN1b, CN2 e il DEVE FALLIRE, CN3)"
+  },
+  {
+   "nome": "M0528L_mattone_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_mattone_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_mattone_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "mattone",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il mattone fermo col vincolo, il Pound-Rebka interno"
+  },
+  {
+   "nome": "M0528L_vuoto_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_vuoto_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_vuoto_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "vuoto",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x1.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M0528] 2c K3 la caduta col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x0.8",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "0.8"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V3_x1.2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V3",
+    "--scala",
+    "1.2"
+   ],
+   "note": "[M0528] 2c K4 Eotvos col vincolo (il gradiente imposto)"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x0.8_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "0.8",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K4 il riferimento V2V3 senza vincolo"
+  },
+  {
+   "nome": "M0528L_caduta_V2V3_x1.2_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "caduta",
+    "--riga",
+    "V2V3",
+    "--scala",
+    "1.2",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K4 il riferimento V2V3 senza vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_V2V3_0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "V2V3",
+    "--gradi",
+    "0"
+   ],
+   "note": "[M0528] 2c K5 la coppia a d 36 col vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_V2V3_180",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "V2V3",
+    "--gradi",
+    "180"
+   ],
+   "note": "[M0528] 2c K5 la coppia a d 36 col vincolo"
+  },
+  {
+   "nome": "M0528L_coppia_F0_180_senza",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo.py",
+    "coppia",
+    "--riga",
+    "F0",
+    "--gradi",
+    "180",
+    "--senza"
+   ],
+   "note": "[M0528] 2c K5 la coppia F0 in antifase senza lapse"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V2V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V2V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V2"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M0528L_vuoto_v2_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/lapse_vincolo_vuoto.py",
+    "--riga",
+    "V3"
+   ],
+   "note": "[M0528] 2c K1 il vuoto col vincolo, la v2 (il controllo di Gauss saltato con max rho = 0)"
+  },
+  {
+   "nome": "M1640_N1_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "N1",
+    "--N",
+    "1.00"
+   ],
+   "note": "[M1640] il respiro a N uniforme, N1 N 1.00, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V2_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V2",
+    "--N",
+    "0.99"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 0.99, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V2_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V2",
+    "--N",
+    "1.01"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 1.01, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V3_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V3",
+    "--N",
+    "0.99"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 0.99, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_V3_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "V3",
+    "--N",
+    "1.01"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 1.01, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640_CTRL_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N.py",
+    "corsa",
+    "--riga",
+    "CTRL",
+    "--N",
+    "1.00"
+   ],
+   "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, 20000 tick da k 1500 del compatto"
+  },
+  {
+   "nome": "M1640v2_N1_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "N1",
+    "--N",
+    "1.00",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, N1 N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V2_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V2",
+    "--N",
+    "0.99",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 0.99, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V2_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V2",
+    "--N",
+    "1.01",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V2 N 1.01, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V3_0.99",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V3",
+    "--N",
+    "0.99",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 0.99, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_V3_1.01",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "V3",
+    "--N",
+    "1.01",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, V3 N 1.01, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1640v2_CTRL_1.00",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/respiro_N_v2.py",
+    "--riga",
+    "CTRL",
+    "--N",
+    "1.00",
+    "--fino",
+    "20000"
+   ],
+   "note": "[M1640] il respiro a N uniforme, CTRL N 1.00, la v2 (la v1 cadde alla stampa di partenza)"
+  },
+  {
+   "nome": "M1751R_nascita_001",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "1"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 1 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_002",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "2"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 2 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_003",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "3"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 3 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_010",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "10"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 10 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_269",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "269"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 269 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_270",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "270"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 270 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_271",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "271"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 271 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_536",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "536"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 536 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_537",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "537"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 537 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1751R_nascita_538",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/ripresa_nascita.py",
+    "--nascita",
+    "538"
+   ],
+   "note": "[M1751] S1 la ripresa P8 fino al tick della nascita 538 (il ramo mitosi; lo stato prima e dopo)"
+  },
+  {
+   "nome": "M1658U_calcio_k0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): calcio --k 0.0"
+  },
+  {
+   "nome": "M1658U_calcio_k0.010",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): calcio --k 0.010"
+  },
+  {
+   "nome": "M1658U_orologio_N1",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "1.0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 1.0"
+  },
+  {
+   "nome": "M1658U_orologio_V2_N0.9965",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "0.9965"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 0.9965"
+  },
+  {
+   "nome": "M1658U_orologio_V2_N1.0035",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V2",
+    "--N",
+    "1.0035"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V2 --N 1.0035"
+  },
+  {
+   "nome": "M1658U_orologio_V3_N0.9965",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V3",
+    "--N",
+    "0.9965"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V3 --N 0.9965"
+  },
+  {
+   "nome": "M1658U_orologio_V3_N1.0035",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "orologio",
+    "--coll",
+    "V3",
+    "--N",
+    "1.0035"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): orologio --coll V3 --N 1.0035"
+  },
+  {
+   "nome": "M1658U_caduta_V0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V0"
+  },
+  {
+   "nome": "M1658U_caduta_V2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V2"
+  },
+  {
+   "nome": "M1658U_caduta_V3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_1c.py",
+    "caduta",
+    "--coll",
+    "V3"
+   ],
+   "note": "[M1658] 1c l'oggetto al fondo a K (L-1_proiezione_K, k 3000): caduta --coll V3"
+  },
+  {
+   "nome": "M1658T_L-1_stampo_K",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "stampo_K",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L-1 stampo_K, 3000 tick"
+  },
+  {
+   "nome": "M1658T_L-1_proiezione_K",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--semina",
+    "proiezione_K",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L-1 proiezione_K, 3000 tick"
+  },
+  {
+   "nome": "M1658T_L0_stampo_K",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--semina",
+    "stampo_K",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L0 stampo_K, 3000 tick"
+  },
+  {
+   "nome": "M1658T_L0_proiezione_K",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--semina",
+    "proiezione_K",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M1658] 1b la tenuta al fondo della banda della materia (K), L0 proiezione_K, 3000 tick"
+  },
+  {
+   "nome": "M2305_s3_caduta_x0.5",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_s3.py",
+    "caduta",
+    "--scala",
+    "0.5"
+   ],
+   "note": "[M2305] S3 la caduta V2 a gradiente x0.5 sull'oggetto al fondo a K"
+  },
+  {
+   "nome": "M2305_s3_caduta_x2.0",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/fondo_s3.py",
+    "caduta",
+    "--scala",
+    "2.0"
+   ],
+   "note": "[M2305] S3 la caduta V2 a gradiente x2.0 sull'oggetto al fondo a K"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a0.5_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "0.5",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x0.5 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a2.0_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "2.0",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x2.0 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a1.0_l0.7",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "1.0",
+    "--larghezza",
+    "0.7",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x1.0 larghezza x0.7"
+  },
+  {
+   "nome": "M2305_tenuta_L-1_a1.0_l1.4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L-1",
+    "--ampiezza",
+    "1.0",
+    "--larghezza",
+    "1.4",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L-1 ampiezza x1.0 larghezza x1.4"
+  },
+  {
+   "nome": "M2305_tenuta_L0_a0.5_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--ampiezza",
+    "0.5",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L0 ampiezza x0.5 larghezza x1.0"
+  },
+  {
+   "nome": "M2305_tenuta_L0_a2.0_l1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/tenuta_fondo_v2.py",
+    "corsa",
+    "--forma",
+    "L0",
+    "--ampiezza",
+    "2.0",
+    "--larghezza",
+    "1.0",
+    "--fino",
+    "3000"
+   ],
+   "note": "[M2305] la tenuta al fondo a K, L0 ampiezza x2.0 larghezza x1.0"
+  },
+  {
+   "nome": "M1751S_schede_a",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py",
+    "scheda",
+    "--nascite",
+    "1,2,3,10,269"
+   ],
+   "note": "[M1751] S2-S4 le schede delle nascite 1, 2, 3, 10, 269 (in sequenza)"
+  },
+  {
+   "nome": "M1751S_schede_b",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta.py",
+    "scheda",
+    "--nascite",
+    "270,271,536,537,538"
+   ],
+   "note": "[M1751] S2-S4 le schede delle nascite 270, 271, 536, 537, 538 (in sequenza)"
+  },
+  {
+   "nome": "M1751S_v2_schede_a",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta_v2.py",
+    "scheda",
+    "--nascite",
+    "1,2,3,10,269"
+   ],
+   "note": "[M1751] S2-S4 le schede, la v2 (il meta completato), nascite 1,2,3,10,269 in sequenza"
+  },
+  {
+   "nome": "M1751S_v2_schede_b",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/nascite/gradi_liberta_v2.py",
+    "scheda",
+    "--nascite",
+    "270,271,536,537,538"
+   ],
+   "note": "[M1751] S2-S4 le schede, la v2 (il meta completato), nascite 270,271,536,537,538 in sequenza"
+  },
+  {
+   "nome": "M0037_e1_caduta_V2_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): caduta --coll V2"
+  },
+  {
+   "nome": "M0037_e2_caduta_V0_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): caduta --coll V0"
+  },
+  {
+   "nome": "M0037_e3_calcio_k0.010_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): calcio --k 0.010"
+  },
+  {
+   "nome": "M0037_e3b_calcio_k0_a2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/eotvos_fondo.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M0037] l'Eotvos al fondo a K, la massa 4 (a2): calcio --k 0.0"
+  },
+  {
+   "nome": "M0100_caduta_parti",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_parti.py",
+    "corsa"
+   ],
+   "note": "[M0100] la caduta per parti (DECISIONE DI LUCA 01:00): caduta V2 x1 dallo stato k 3000 di L-1_proiezione_K, 2000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0100_caduta_parti_v2",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_parti_v2.py",
+    "corsa"
+   ],
+   "note": "[M0100] la caduta per parti, la v2 per CELLA (la v1 cadde all'avvio sul mio assert, 859a4067): caduta V2 x1 dallo stato k 3000 di L-1_proiezione_K, 2000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0118_caduta_V2_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "caduta",
+    "--coll",
+    "V2"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): caduta --coll V2 (Luca)"
+  },
+  {
+   "nome": "M0118_caduta_V0_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): caduta --coll V0 (Luca)"
+  },
+  {
+   "nome": "M0118_calcio_k0.010_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "calcio",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): calcio --k 0.010 (per m*, mia aggiunta dichiarata nella carta)"
+  },
+  {
+   "nome": "M0118_calcio_k0_l07",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/k_forma.py",
+    "calcio",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M0118-02] K a parita' di massa, forma diversa (l0.7): calcio --k 0.0 (per m*, mia aggiunta dichiarata nella carta)"
+  },
+  {
+   "nome": "M0140_omega_noto",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_omega.py",
+    "noto"
+   ],
+   "note": "[M0140] (DECISIONE DI LUCA 01:40) il caso noto: la tenuta 1b da k 2500, 250 tick, omega per tick"
+  },
+  {
+   "nome": "M0140_caduta_omega",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/caduta_omega.py",
+    "corsa"
+   ],
+   "note": "[M0140] (DECISIONE DI LUCA 01:40) la caduta V2 x1 rifatta, omega per tick, psi_h confrontato con c1_parti ogni 250"
+  }
+ ]
+}

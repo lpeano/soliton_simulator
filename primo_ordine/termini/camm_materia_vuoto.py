@@ -10,7 +10,7 @@ l-operatore ### **al motore**, e se il motore non ce l-ha ### **ALZA** -- non
 torna un risultato finto.
 """
 
-IMPRONTA = '4fb9b958ec63bfce'
+IMPRONTA = '75206f6d35cec4d1'
 LEGGE = 'CAMM-MATERIA-VUOTO'
 TIPO = 'flusso'
 AMBITO = ('psi_h', 'phi_h', 'Lambda', 'rho')

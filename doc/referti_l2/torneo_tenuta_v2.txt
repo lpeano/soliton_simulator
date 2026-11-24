@@ -1,0 +1,94 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+==================================================================================================================================
+[M1631] LE TENUTE v2 (la carta sez. 10, 11): w, i pezzi, il picco, la massa ogni 250; omega e dove sta; si scioglie; K-T. I gap di 1a: (-0.245925, 0.011437); (0.011870, 0.245338); (0.476727, -0.482676)
+==================================================================================================================================
+  L-0.25_cima
+    k     0: w 15.504, i pezzi 1, il picco lisciato 1.1496e+03, la massa 995010.893145
+    k   250: w 15.016, i pezzi 1, il picco lisciato 1.2179e+03, la massa 995010.893145
+    k   500: w 13.841, i pezzi 1, il picco lisciato 1.2568e+03, la massa 995010.893145
+    k   750: w 12.235, i pezzi 1, il picco lisciato 1.3707e+03, la massa 995010.893145
+    k  1000: w 7.499, i pezzi 1, il picco lisciato 2.1628e+03, la massa 995010.893145
+    k  1250: w 7.407, i pezzi 1, il picco lisciato 2.3215e+03, la massa 995010.893145
+    k  1500: w 7.663, i pezzi 1, il picco lisciato 2.3215e+03, la massa 995010.893146
+    k  1750: w 7.997, i pezzi 1, il picco lisciato 2.1364e+03, la massa 995010.893146
+    k  2000: w 8.351, i pezzi 1, il picco lisciato 1.9372e+03, la massa 995010.893146
+    k  2250: w 8.117, i pezzi 1, il picco lisciato 1.8244e+03, la massa 995010.893146
+    k  2500: w 9.567, i pezzi 1, il picco lisciato 1.4065e+03, la massa 995010.893146
+    k  2750: w 11.563, i pezzi 1, il picco lisciato 1.1408e+03, la massa 995010.893146
+    k  3000: w 15.244, i pezzi 2, il picco lisciato 8.3239e+02, la massa 995010.893146
+    si scioglie: al k 1000 (il primo stato fuori)
+    K-T: w(3000)/w(500) 1.101, i pezzi a 3000 2: ### NON REGGE
+    omega [1, 500]: +0.4381327 +- 1.4e-05 (la deviazione 3.1e-04): IN BANDA
+    omega [1000, 1500]: +0.4358462 +- 1.5e-05 (la deviazione 3.3e-04): IN BANDA
+    omega [2500, 3000]: +0.4290242 +- 2.3e-05 (la deviazione 5.1e-04): IN BANDA
+  L-0.5_cima
+    k     0: w 15.504, i pezzi 1, il picco lisciato 1.1496e+03, la massa 995010.893145
+    k   250: w 15.035, i pezzi 1, il picco lisciato 1.2193e+03, la massa 995010.893145
+    k   500: w 14.029, i pezzi 1, il picco lisciato 1.2526e+03, la massa 995010.893145
+    k   750: w 12.513, i pezzi 1, il picco lisciato 1.3669e+03, la massa 995010.893145
+    k  1000: w 8.738, i pezzi 1, il picco lisciato 2.0194e+03, la massa 995010.893145
+    k  1250: w 6.683, i pezzi 1, il picco lisciato 2.6010e+03, la massa 995010.893145
+    k  1500: w 6.516, i pezzi 1, il picco lisciato 2.7156e+03, la massa 995010.893146
+    k  1750: w 8.032, i pezzi 1, il picco lisciato 2.1914e+03, la massa 995010.893146
+    k  2000: w 9.494, i pezzi 1, il picco lisciato 1.7894e+03, la massa 995010.893146
+    k  2250: w 11.088, i pezzi 1, il picco lisciato 1.4434e+03, la massa 995010.893146
+    k  2500: w 12.019, i pezzi 1, il picco lisciato 1.2396e+03, la massa 995010.893146
+    k  2750: w 11.973, i pezzi 1, il picco lisciato 1.1681e+03, la massa 995010.893146
+    k  3000: w 12.201, i pezzi 1, il picco lisciato 1.0774e+03, la massa 995010.893146
+    si scioglie: al k 1000 (il primo stato fuori)
+    K-T: w(3000)/w(500) 0.870, i pezzi a 3000 1: REGGE
+    omega [1, 500]: +0.4002674 +- 2.3e-05 (la deviazione 5.2e-04): IN BANDA
+    omega [1000, 1500]: +0.3966488 +- 3.9e-05 (la deviazione 8.6e-04): IN BANDA
+    omega [2500, 3000]: +0.3843202 +- 4.5e-05 (la deviazione 1.0e-03): IN BANDA
+  L-1_cima
+    k     0: w 15.504, i pezzi 1, il picco lisciato 1.1496e+03, la massa 995010.893145
+    k   250: w 15.044, i pezzi 1, il picco lisciato 1.2202e+03, la massa 995010.893145
+    k   500: w 14.059, i pezzi 1, il picco lisciato 1.2644e+03, la massa 995010.893145
+    k   750: w 12.223, i pezzi 1, il picco lisciato 1.4379e+03, la massa 995010.893145
+    k  1000: w 8.066, i pezzi 1, il picco lisciato 2.1863e+03, la massa 995010.893145
+    k  1250: w 7.218, i pezzi 1, il picco lisciato 2.4734e+03, la massa 995010.893145
+    k  1500: w 7.332, i pezzi 1, il picco lisciato 2.5346e+03, la massa 995010.893146
+    k  1750: w 7.840, i pezzi 1, il picco lisciato 2.3996e+03, la massa 995010.893146
+    k  2000: w 8.987, i pezzi 1, il picco lisciato 2.0445e+03, la massa 995010.893146
+    k  2250: w 9.752, i pezzi 1, il picco lisciato 1.7501e+03, la massa 995010.893146
+    k  2500: w 9.377, i pezzi 1, il picco lisciato 1.7134e+03, la massa 995010.893146
+    k  2750: w 8.956, i pezzi 1, il picco lisciato 1.6626e+03, la massa 995010.893146
+    k  3000: w 9.392, i pezzi 1, il picco lisciato 1.4671e+03, la massa 995010.893146
+    si scioglie: al k 1000 (il primo stato fuori)
+    K-T: w(3000)/w(500) 0.668, i pezzi a 3000 1: ### NON REGGE
+    omega [1, 500]: +0.3245300 +- 4.5e-05 (la deviazione 1.0e-03): IN BANDA
+    omega [1000, 1500]: +0.3154350 +- 7.4e-05 (la deviazione 1.6e-03): IN BANDA
+    omega [2500, 3000]: +0.2948783 +- 1.0e-04 (la deviazione 2.3e-03): IN BANDA
+  L-1_proiezione_Gamma   ### UN OGGETTO NUOVO (la proiezione: la frazione 0.000420, la molteplicita' 4), NON IL MATTONE SPOSTATO
+    k     0: w 13.529, i pezzi 1, il picco lisciato 1.1377e+03, la massa 995010.893145
+    k   250: w 12.568, i pezzi 11, il picco lisciato 9.8772e+02, la massa 995010.893145
+    k   500: w 14.186, i pezzi 12, il picco lisciato 8.7034e+02, la massa 995010.893145
+    k   750: w 14.118, i pezzi 4, il picco lisciato 8.3956e+02, la massa 995010.893145
+    k  1000: w 13.772, i pezzi 1, il picco lisciato 8.1804e+02, la massa 995010.893145
+    k  1250: w 13.641, i pezzi 1, il picco lisciato 8.3939e+02, la massa 995010.893145
+    k  1500: w 13.073, i pezzi 1, il picco lisciato 8.5207e+02, la massa 995010.893145
+    k  1750: w 12.871, i pezzi 1, il picco lisciato 8.6150e+02, la massa 995010.893146
+    k  2000: w 13.073, i pezzi 1, il picco lisciato 8.4255e+02, la massa 995010.893146
+    k  2250: w 13.199, i pezzi 1, il picco lisciato 8.5815e+02, la massa 995010.893146
+    k  2500: w 11.273, i pezzi 1, il picco lisciato 8.8668e+02, la massa 995010.893146
+    k  2750: w 13.641, i pezzi 1, il picco lisciato 8.4176e+02, la massa 995010.893146
+    k  3000: w 13.042, i pezzi 1, il picco lisciato 8.4011e+02, la massa 995010.893146
+    si scioglie: al k 250 (il primo stato fuori)
+    K-T: w(3000)/w(500) 0.919, i pezzi a 3000 1: REGGE
+    omega [1, 500]: -0.5871025 +- 8.1e-05 (la deviazione 1.8e-03): NEL GAP SOPRA
+    omega [1000, 1500]: -0.5968872 +- 2.4e-05 (la deviazione 5.4e-04): NEL GAP SOPRA
+    omega [2500, 3000]: -0.5994483 +- 5.3e-06 (la deviazione 1.2e-04): NEL GAP SOPRA
+  S1_cima
+    k     0: w 15.504, i pezzi 1, il picco lisciato 1.1496e+03, la massa 995010.893145
+    k   250: w 15.469, i pezzi 1, il picco lisciato 1.1954e+03, la massa 995010.893145
+    k   500: w 15.217, i pezzi 1, il picco lisciato 1.2011e+03, la massa 995010.893145
+    si scioglie: NO, fino a k 500
+    omega [1, 500]: +0.6259060 +- 4.7e-07 (la deviazione 1.0e-05): NEL GAP SOPRA
+  DEVE: il controllo positivo: omega di F0 alla cima su [1, 500] = 0.6264 entro 0.001                            PASSA (+0.625906)
+==================================================================================================================================

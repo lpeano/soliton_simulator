@@ -1,0 +1,18 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite.py  sha1-BYTE f5c178a3  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\fondo_suite_v2.py", line 362, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\fondo_suite_v2.py", line 355, in main
+    return coppia(a.sorgente, a.gradi, a.kstato)
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\fondo_suite_v2.py", line 174, in coppia
+    assert np.array_equal(rho2, r_sp), "rho traslata != rho spostata: FERMO"
+           ~~~~~~~~~~~~~~^^^^^^^^^^^^
+AssertionError: rho traslata != rho spostata: FERMO

@@ -1,0 +1,41 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] respiro_N.py  sha1-BYTE 3c9dc596  committato e pulito
+============================================================================================================================================
+[M1640-L] IL RESPIRO COME OROLOGIO SENZA ZERO: LE LETTURE (la carta sez. 4-6)
+============================================================================================================================================
+    N1   N 1.00: T(w) 5103.04 +- 16.66 (lo spettro 4512; A 4.579; rms 1.310, 361 punti); T(picco) 5104.58 +- 14.60; il battimento omega_c - omega_10 +5.21001e-04 +- 7.0e-05; omega +0.6252838; la norma 1.16e-11
+  DEVE: K1 N1 1.00: arriva a 20000, la norma entro 1e-12                                                                 ### FALLISCE 1.16e-11
+    V2   N 0.99: T(w) 5142.36 +- 16.61 (lo spettro 6017; A 4.553; rms 1.260, 361 punti); T(picco) 5137.19 +- 14.24; il battimento omega_c - omega_10 +5.16013e-04 +- 6.8e-05; omega +0.6190431; la norma 2.07e-11
+  DEVE: K1 V2 0.99: arriva a 20000, la norma entro 1e-12                                                                 ### FALLISCE 2.07e-11
+    V2   N 1.01: T(w) 5015.15 +- 15.25 (lo spettro 4512; A -4.610; rms 1.275, 361 punti); T(picco) 5027.59 +- 13.39; il battimento omega_c - omega_10 +5.24406e-04 +- 6.7e-05; omega +0.6315280; la norma 1.13e-11
+  DEVE: K1 V2 1.01: arriva a 20000, la norma entro 1e-12                                                                 ### FALLISCE 1.13e-11
+    V3   N 0.99: T(w) 5096.62 +- 15.88 (lo spettro 4512; A -4.745; rms 1.299, 361 punti); T(picco) 5097.79 +- 13.51; il battimento omega_c - omega_10 +5.22466e-04 +- 6.9e-05; omega +0.6300479; la norma 1.49e-11
+  DEVE: K1 V3 0.99: arriva a 20000, la norma entro 1e-12                                                                 ### FALLISCE 1.49e-11
+    V3   N 1.01: T(w) 5108.52 +- 16.08 (lo spettro 6017; A -4.629; rms 1.273, 361 punti); T(picco) 5108.86 +- 13.61; il battimento omega_c - omega_10 +5.20733e-04 +- 6.7e-05; omega +0.6205067; la norma 1.49e-11
+  DEVE: K1 V3 1.01: arriva a 20000, la norma entro 1e-12                                                                 ### FALLISCE 1.49e-11
+    CTRL N 1.00: T(w) 5101.31 +- 16.06 (lo spettro 4512; A -4.624; rms 1.276, 361 punti); T(picco) 5100.76 +- 13.60; il battimento omega_c - omega_10 +5.21885e-04 +- 6.8e-05; omega +0.6252844; la norma 1.16e-11
+  DEVE: K1 CTRL 1.00: arriva a 20000, la norma entro 1e-12                                                               ### FALLISCE 1.16e-11
+--------------------------------------------------------------------------------------------------------------------------------------------
+  DEVE: K1 a N = 1 il periodo ridà 5125 entro l'1%% (### 5125 E' IL CENTRO DI UN BIN: la carta sez. 5)                   PASSA T 5103.04 +- 16.66 (-0.43%)
+  K2 / S3: rho contro N1 (max|d rho|/max rho; lo sha1 dei byte di rho)
+    V3   0.99: k 5000: diverso 8.891e-04 (f3b4734a / a14c03d2); k 10000: diverso 6.694e-02 (c8ce14df / 65b9b06f); k 20000: diverso 1.719e-01 (3c68c5c1 / 8910681e)
+  DEVE: K2 V3 0.99: rho AL BIT con N = 1 a k (5000, 10000, 20000)                                                        ### FALLISCE 
+    V3   1.01: k 5000: diverso 1.018e-03 (f3b4734a / cccf948a); k 10000: diverso 7.364e-02 (c8ce14df / ee57fe09); k 20000: diverso 1.325e-01 (3c68c5c1 / ab0d300d)
+  DEVE: K2 V3 1.01: rho AL BIT con N = 1 a k (5000, 10000, 20000)                                                        ### FALLISCE 
+    CTRL 1.00: k 5000: diverso 2.621e-04 (f3b4734a / 8972d90e); k 10000: diverso 7.851e-02 (c8ce14df / 753ed22e); k 20000: diverso 1.384e-01 (3c68c5c1 / 13aef3eb)
+    V2   0.99: k 5000: diverso 1.079e-01 (f3b4734a / a84d8ac0); k 10000: diverso 1.480e-01 (c8ce14df / 95313a14); k 20000: diverso 2.212e-01 (3c68c5c1 / a932ca74)
+    V2   1.01: k 5000: diverso 1.152e-01 (f3b4734a / 22e1b1c0); k 10000: diverso 1.245e-01 (c8ce14df / 94a92089); k 20000: diverso 4.773e-01 (3c68c5c1 / 1d2549a0)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  V2 T(0.99)/T(1.01) da w: 1.02537 +- 0.00455; contro 1.0202 (+1.1 sigma) e 1.0000 (+5.6 sigma)
+  V2 T(0.99)/T(1.01) da mx: 1.02180 +- 0.00393; contro 1.0202 (+0.4 sigma) e 1.0000 (+5.6 sigma)
+  V2 il battimento: b(1.01)/b(0.99) 1.01627 +- 0.18619 (un orologio che riscala: 1.0202)
+  V3 T(0.99)/T(1.01) da w: 0.99767 +- 0.00442; contro 1.0202 (-5.1 sigma) e 1.0000 (-0.5 sigma)
+  V3 T(0.99)/T(1.01) da mx: 0.99783 +- 0.00375; contro 1.0202 (-6.0 sigma) e 1.0000 (-0.6 sigma)
+  V3 il battimento: b(1.01)/b(0.99) 0.99668 +- 0.18421 (un orologio che riscala: 1.0202)
+  DEVE: K3 V2: T(0.99)/T(1.01) = 1.0202 entro 0.003 (dal respiro w)                                                      ### FALLISCE 1.02537 +- 0.00455
+============================================================================================================================================
+### 10 DEVE: 1 PASSANO, 9 FALLISCONO ['K1 N1 1.00: arriva a 20000, la norma entro 1e-12', 'K1 V2 0.99: arriva a 20000, la norma entro 1e-12', 'K1 V2 1.01: arriva a 20000, la norma entro 1e-12', 'K1 V3 0.99: arriva a 20000, la norma entro 1e-12', 'K1 V3 1.01: arriva a 20000, la norma entro 1e-12', 'K1 CTRL 1.00: arriva a 20000, la norma entro 1e-12', 'K2 V3 0.99: rho AL BIT con N = 1 a k (5000, 10000, 20000)', 'K2 V3 1.01: rho AL BIT con N = 1 a k (5000, 10000, 20000)', 'K3 V2: T(0.99)/T(1.01) = 1.0202 entro 0.003 (dal respiro w)'], 0 NON MISURATI []

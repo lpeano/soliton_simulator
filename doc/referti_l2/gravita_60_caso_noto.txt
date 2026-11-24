@@ -1,0 +1,19 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] gravita_due_corpi_d.py  sha1-BYTE fb3c6840  committato e pulito
+==================================================================================================================================
+[M1017-K] IL CASO NOTO: (i) d = 39, lo stato di partenza AL BIT con [M0417] F-on; (ii) d = 60, kappa = 0, 50 tick del tick v2 = 50 del tick U AL BIT; DEVE FALLIRE con kappa vero
+==================================================================================================================================
+### (i) d = 39: i vertici [[62, 80], [101, 80]], la distanza 39.0000; m0 +8.692770498368e+00; l'impronta 31e210d7c150e8ff2ed733bf5326f5e609edbbd3 (il log di F-on 31e210d7c150e8ff2ed733bf5326f5e609edbbd3); le chiavi diverse da F-on/stato_000000: nessuna
+  DEVE: K (i): d = 39, lo stato di partenza AL BIT con F-on/stato_000000 (ogni chiave) e l'impronta uguale a quella del log PASSA 
+### (ii) v2 kappa 0: i vertici [[50, 80], [110, 80]] (il bersaglio ['51.00', '81.00']; il punto medio [80.0, 80.0], il centro del toro [81.0, 81.0]), la distanza 60.0000; kappa 0.0, c0 0.0021738477678417563, m0 +8.595870986197e+00; l'impronta di partenza 0156c89adbf5
+### (ii) U cs = s: i vertici [[50, 80], [110, 80]] (il bersaglio ['51.00', '81.00']; il punto medio [80.0, 80.0], il centro del toro [81.0, 81.0]), la distanza 60.0000; kappa 0.0, c0 0.0021738477678417563, m0 +8.595870986197e+00; l'impronta di partenza 0156c89adbf5
+### (ii) v2 kappa vero: i vertici [[50, 80], [110, 80]] (il bersaglio ['51.00', '81.00']; il punto medio [80.0, 80.0], il centro del toro [81.0, 81.0]), la distanza 60.0000; kappa 0.0002528944153922671, c0 0.0021738477678417563, m0 +8.595870986197e+00; l'impronta di partenza 0156c89adbf5
+### (ii) v2 kappa 0 contro U: AL BIT; cs = s esatto True; v2 kappa vero contro U: le chiavi diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'A', 'E']
+  DEVE: K (ii): d = 60, kappa = 0: il tick v2 = il tick U con cs = s AL BIT dopo 50 tick (la materia, A, E), cs = s esatto PASSA 
+  DEVE: K (ii) DEVE FALLIRE: d = 60, kappa vero: la materia diversa dopo 50 tick                                       PASSA 
+----------------------------------------------------------------------------------------------------------------------------------
+ESITO: 3/3
+==================================================================================================================================

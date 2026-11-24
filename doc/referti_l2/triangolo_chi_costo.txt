@@ -1,0 +1,29 @@
+==================================================================================================================================
+P1, IL COSTO DEL TICK CON CHI SUL TRIANGOLO (Luca 2026-11-21 23:23): 50 tick per scena
+==================================================================================================================================
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi.py  sha1-BYTE 85c48663  committato e pulito
+### IL TRIANGOLO t120 CON CHI (il passo v2): da k 0 (prepara) fino a k 50; i parametri kappa 2.5289441539e-04, c0 +3.5732340997e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.412935154856e+01; gli stati in E:\soliton_simulator\controllo\CHI\triangolo\costo\t120
+### 50 tick in 31 s (0.615 s per tick); il codice 0
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi.py  sha1-BYTE 85c48663  committato e pulito
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 315, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 311, in main
+    return {"compat": compat, "costo": costo, "prova": prova}[x.cmd]()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 241, in costo
+    corsa(quale, 50, None, os.path.join(BASE, "costo", quale), scatta=False)
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 145, in corsa
+    C, info = prepara(Z, quale)
+              ~~~~~~~^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\doc\referti_l2\triangolo_chi.py", line 82, in prepara
+    MT.incolla(Z, fr, c, True)
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_lapse_u\csv\solitone\mattone.py", line 258, in incolla
+    assert (centro[0] - fr["centro"][0]) % 3 == 0 and (centro[1] - fr["centro"][1]) % 3 == 0, "lo spostamento NON e' multiplo di 3: il disegno di fase di F3 non combacia"
+            ~~~~~~~~~~^~~~~~~~~~~~~~~~~
+TypeError: unsupported operand type(s) for -: 'list' and 'int'

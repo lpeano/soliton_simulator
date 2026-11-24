@@ -1,0 +1,92 @@
+[TIMBRO] caduta_parti.py  sha1-BYTE 7afd9887  committato e pulito
+[TIMBRO] caduta_parti_v2.py  sha1-BYTE 9df94a12  committato e pulito
+[TIMBRO] forma_fondo.py  sha1-BYTE 0b1cd7f8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] caduta_parti_v3.py  sha1-BYTE 116a94ea  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] caduta_parti.py  sha1-BYTE 7afd9887  committato e pulito
+[TIMBRO] caduta_parti_v2.py  sha1-BYTE 9df94a12  committato e pulito
+==================================================================================================================================
+[M0100] LA CADUTA PER PARTI, LA V2 (la carta sez. 2-nonies-bis): psi_K = psi Q_K* Q_K^T CELLA PER CELLA, psi_R = psi - psi_K
+==================================================================================================================================
+  DEVE: CN1 la serie del totale (per nodo) = M1658/c1/caduta_V2 AL BIT                                       PASSA (201 punti)
+  DEVE: CN2 (n_K y_K + n_R y_R)/(n_K + n_R) = y_T (cella) entro 1e-12 a ogni punto                           PASSA max 1.9e-14
+  DEVE: CN3 le parti dallo stato salvato a k 2000 = la serie AL BIT                                          PASSA 
+  DEVE: DEVE FALLIRE: CN2 con 1.1 Q_K (non un proiettore) a k 2000                                           PASSA |d y| 2.1e-03
+  DEVE: CN4 Q_K ricalcolato = il file AL BIT                                                                 PASSA 
+  LE FRAZIONI f_K = n_K/(n_K + n_R): k 0: 0.989818; k 500: 0.989213; k 1000: 0.991114; k 1500: 0.989152; k 2000: 0.990276; k 2000: 0.990276
+  y_K      : [ 200,  800] a +8.0854e-07 +- 1.5e-08; [ 800, 1400] a +6.2004e-07 +- 1.6e-08; [1400, 2000] a +4.8809e-07 +- 1.2e-08
+  y_R      : [ 200,  800] a -1.3975e-07 +- 2.2e-06; [ 800, 1400] a +2.5174e-06 +- 3.9e-06; [1400, 2000] a -8.4073e-07 +- 4.4e-06
+  y_T cella: [ 200,  800] a +8.0003e-07 +- 1.0e-08; [ 800, 1400] a +6.3921e-07 +- 2.4e-08; [1400, 2000] a +4.7569e-07 +- 3.6e-08
+  y nodo   : [ 200,  800] a +8.0314e-07 +- 6.9e-09; [ 800, 1400] a +6.3397e-07 +- 1.4e-08; [1400, 2000] a +4.7534e-07 +- 1.9e-08
+  (riferimento) la V0 del TOTALE di 1c (per nodo): [ 200,  800] a +6.9603e-08 +- 3.0e-09; [ 800, 1400] a +1.4716e-08 +- 2.9e-09; [1400, 2000] a +7.3297e-08 +- 2.6e-09  ### NON c'e' la V0 per parti: le a per parte sono GREZZE
+### 5 DEVE: 5 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+[M0118-01] LA FORMA DURANTE LA CADUTA (gli stati ogni 250): w e i pezzi, m = 3 sugli anelli ((4.0, 8.0), (8.0, 12.0), (12.0, 16.0)), omega su [k, k + 250]
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto omega [2500, 2750] della tenuta 1b = la media di omega.npy entro 1e-4                   ### FALLISCE +0.0957197 contro +0.0939787 (|d| 1.7e-03; la fedelta' 0.990250)
+  DEVE: il caso noto omega [2750, 3000] della tenuta 1b = la media di omega.npy entro 1e-4                   ### FALLISCE +0.0957101 contro +0.0939533 (|d| 1.8e-03; la fedelta' 0.989449)
+  DEVE: DEVE FALLIRE: [2500, 3000] diviso per 250 (la finestra sbagliata) oltre 1e-4                         PASSA +0.0909148 contro +0.0939660
+  k    0: w 8.498, i pezzi 1, il picco lisciato 2.7733e+03, la massa 995010.893146
+          m = 3: [ 4,  8) 0.02968 ( +55.16 gradi; il favo 0.00915); [ 8, 12) 0.05079 ( -55.63 gradi; il favo 0.00695); [12, 16) 0.01509 ( -34.02 gradi; il favo 0.00476)
+  k  250: w 8.450, i pezzi 1, il picco lisciato 2.6630e+03, la massa 995010.893146; omega [0, 250] +0.0957012, la fedelta' 0.988620
+          m = 3: [ 4,  8) 0.00352 ( +45.46 gradi; il favo 0.01423); [ 8, 12) 0.01459 ( -42.09 gradi; il favo 0.00381); [12, 16) 0.03800 ( -22.60 gradi; il favo 0.00652)
+  k  500: w 8.482, i pezzi 1, il picco lisciato 2.4704e+03, la massa 995010.893146; omega [250, 500] +0.0956924, la fedelta' 0.988194
+          m = 3: [ 4,  8) 0.02787 ( +29.96 gradi; il favo 0.02440); [ 8, 12) 0.04149 ( -10.97 gradi; il favo 0.00670); [12, 16) 0.07770 ( -12.19 gradi; il favo 0.00458)
+  k  750: w 9.318, i pezzi 1, il picco lisciato 2.1355e+03, la massa 995010.893146; omega [500, 750] +0.0956863, la fedelta' 0.988101
+          m = 3: [ 4,  8) 0.00999 ( -11.87 gradi; il favo 0.00505); [ 8, 12) 0.04563 ( -11.22 gradi; il favo 0.00549); [12, 16) 0.10389 (  -5.29 gradi; il favo 0.00315)
+  k 1000: w 10.773, i pezzi 1, il picco lisciato 1.8226e+03, la massa 995010.893146; omega [750, 1000] +0.0956808, la fedelta' 0.988018
+          m = 3: [ 4,  8) 0.00641 (  -6.06 gradi; il favo 0.00307); [ 8, 12) 0.05445 (  -5.74 gradi; il favo 0.00318); [12, 16) 0.09743 (  -4.80 gradi; il favo 0.00228)
+  k 1250: w 12.882, i pezzi 1, il picco lisciato 1.5115e+03, la massa 995010.893146; omega [1000, 1250] +0.0956792, la fedelta' 0.988023
+          m = 3: [ 4,  8) 0.02257 (  -4.54 gradi; il favo 0.00502); [ 8, 12) 0.04716 (  +0.72 gradi; il favo 0.00547); [12, 16) 0.08783 (  -1.95 gradi; il favo 0.00372)
+  k 1500: w 14.822, i pezzi 1, il picco lisciato 1.2023e+03, la massa 995010.893146; omega [1250, 1500] +0.0956769, la fedelta' 0.987898
+          m = 3: [ 4,  8) 0.00607 ( -21.33 gradi; il favo 0.01383); [ 8, 12) 0.04062 (  +3.54 gradi; il favo 0.00596); [12, 16) 0.08805 (  +0.26 gradi; il favo 0.00220)
+  k 1750: w 15.190, i pezzi 1, il picco lisciato 1.1633e+03, la massa 995010.893146; omega [1500, 1750] +0.0956731, la fedelta' 0.987893
+          m = 3: [ 4,  8) 0.00786 ( -15.23 gradi; il favo 0.00314); [ 8, 12) 0.03356 (  -0.46 gradi; il favo 0.00619); [12, 16) 0.08011 (  +3.76 gradi; il favo 0.00688)
+  k 2000: w 15.513, i pezzi 1, il picco lisciato 1.1445e+03, la massa 995010.893146; omega [1750, 2000] +0.0956692, la fedelta' 0.987843
+          m = 3: [ 4,  8) 0.01199 ( +14.68 gradi; il favo 0.01033); [ 8, 12) 0.02942 (  +2.15 gradi; il favo 0.00152); [12, 16) 0.05243 (  +5.17 gradi; il favo 0.00310)
+### omega: la prima finestra +0.0957012, l'ultima +0.0956692, la differenza -3.21e-05; il minimo +0.0956692, il massimo +0.0957012; il gap (0.011870, 0.245338)
+### 3 DEVE della forma: 1 PASSANO, 2 FALLISCONO ['il caso noto omega [2500, 2750] della tenuta 1b = la media di omega.npy entro 1e-4', 'il caso noto omega [2750, 3000] della tenuta 1b = la media di omega.npy entro 1e-4']
+==================================================================================================================================
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] caduta_omega.py  sha1-BYTE 45b0bfb3  committato e pulito
+----------------------------------------------------------------------------------------------------------------------------------
+[M0140] LA COLONNA omega, V2: omega per tick = -arg <psi_prima|psi_dopo> (il metodo di tenuta_fondo.corsa, 1b) (la carta sez. 2-undecies)
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: omega medio [2501, 2750] dalla tenuta 1b ripresa = omega.npy entro 1e-4                PASSA +0.0939787 contro +0.0939787 (|d| 0.0e+00)
+        (piu' stretto: psi_h a 2750 AL BIT True, max |d| 0.0e+00; omega per tick uguale a omega.npy AL BIT: True)
+  DEVE: DEVE FALLIRE: omega.npy su [2251, 2500] (un'altra finestra) contro il misurato, oltre 1e-4           ### FALLISCE +0.0940034 contro +0.0939787 (|d| 2.5e-05) ### omega costante entro 1e-4: il caso noto NON distingue
+  DEVE: la caduta rifatta: la serie = M1658/c1/caduta_V2 AL BIT                                              PASSA 
+  DEVE: la caduta rifatta: psi_h = gli stati di c1_parti AL BIT a ogni 250 (9 confronti)                     PASSA []
+  omega [   1,  250] +0.0939301 +- 5.0e-07
+  omega [ 251,  500] +0.0939065 +- 3.2e-07
+  omega [ 501,  750] +0.0938874 +- 3.9e-07
+  omega [ 751, 1000] +0.0938660 +- 3.6e-07
+  omega [1001, 1250] +0.0938492 +- 3.4e-07
+  omega [1251, 1500] +0.0938315 +- 4.0e-07
+  omega [1501, 1750] +0.0938094 +- 4.5e-07
+  omega [1751, 2000] +0.0937879 +- 4.1e-07
+### omega: l'ultima finestra - la prima -1.422e-04; il minimo +0.0937879, il massimo +0.0939301; il gap (0.011870, 0.245338)
+### 4 DEVE della colonna omega: 3 PASSANO, 1 FALLISCONO ["DEVE FALLIRE: omega.npy su [2251, 2500] (un'altra finestra) contro il misurato, oltre 1e-4"]

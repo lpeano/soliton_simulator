@@ -1,0 +1,16 @@
+[TIMBRO] chi_tick.py  sha1-BYTE b0eac421  committato e pulito
+[TIMBRO] chi_parametri_v2.py  sha1-BYTE a1bcb2f4  committato e pulito
+==================================================================================================================================
+O8: KAPPA IL NUMERO DI OGGI (Luca 2026-11-21 23:13, D3): parametri_v2 contro il meta della corsa (stato_03000.npz) e contro chi_tick.parametri
+==================================================================================================================================
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### parametri_v2: kappa 0.0002528944153922671, c0 0.0003805898812631646, m0 1.5049358866736056
+### il meta della corsa: kappa 0.0002528944153922671, c0 0.0003805898812631646, m0 1.5049358866736056
+### chi_tick.parametri (la posizione): kappa 0.0002528944153922671, c0 0.0003805898812631646, m0 1.5049358866736056
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: O8: parametri_v2 = il meta della corsa (kappa, c0, m0) AL BIT                                                  PASSA
+  DEVE: O8: parametri_v2 = chi_tick.parametri di oggi AL BIT (kappa, c0, m0, c2, m2)                                   PASSA
+  DEVE: DEVE FALLIRE: kappa con l'ultimo bit cambiato -> c0 diverso (0.00038058988126316474)                           PASSA
+==================================================================================================================================

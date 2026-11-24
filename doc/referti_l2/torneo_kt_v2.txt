@@ -1,0 +1,26 @@
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_kt_v2.py  sha1-BYTE 8a881d29  committato e pulito
+==================================================================================================================================
+[M2351] K-T v2 (la carta sez. 13): w(3000)/w(1500) in [0.7, 1.3] e un pezzo a k 3000; L0 il controllo negativo
+==================================================================================================================================
+  tenuta/FH_cima             w 6.078 -> 7.351 (il rapporto 1.209); i pezzi 1 -> 1; il picco 4.3846e+03 -> 4.0866e+03: REGGE
+  DEVE: FH_cima: REGGE                                                                                       PASSA (1.209, 1 pezzi)
+  tenuta/FT_cima             w 7.572 -> 6.825 (il rapporto 0.901); i pezzi 1 -> 1; il picco 2.9622e+03 -> 3.6001e+03: REGGE
+  DEVE: FT_cima: REGGE                                                                                       PASSA (0.901, 1 pezzi)
+  tenuta/L+0.25_cima         w 12.099 -> 7.963 (il rapporto 0.658); i pezzi 1 -> 1; il picco 1.6183e+03 -> 2.7698e+03: NON REGGE
+  DEVE: L+0.25_cima: REGGE                                                                                   ### FALLISCE (0.658, 1 pezzi)
+  tenuta/L+0.5_cima          w 8.987 -> 8.515 (il rapporto 0.947); i pezzi 1 -> 1; il picco 2.3882e+03 -> 2.9136e+03: REGGE
+  DEVE: L+0.5_cima: REGGE                                                                                    PASSA (0.947, 1 pezzi)
+  tenuta/L0_cima             w 8.100 -> 15.117 (il rapporto 1.866); i pezzi 1 -> 1; il picco 2.0546e+03 -> 7.7837e+02: NON REGGE
+  DEVE: L0_cima: NON REGGE (il controllo negativo)                                                           PASSA (1.866, 1 pezzi)
+  tenuta/S1_cima             w 7.770 -> 6.516 (il rapporto 0.839); i pezzi 1 -> 1; il picco 2.8432e+03 -> 4.2676e+03: REGGE
+  DEVE: S1_cima: REGGE                                                                                       PASSA (0.839, 1 pezzi)
+  tenuta_v2/L-0.25_cima      w 7.663 -> 15.244 (il rapporto 1.989); i pezzi 1 -> 2; il picco 2.3215e+03 -> 8.3239e+02: NON REGGE
+  tenuta_v2/L-0.5_cima       w 6.516 -> 12.201 (il rapporto 1.873); i pezzi 1 -> 1; il picco 2.7156e+03 -> 1.0774e+03: NON REGGE
+  tenuta_v2/L-1_cima         w 7.332 -> 9.392 (il rapporto 1.281); i pezzi 1 -> 1; il picco 2.5346e+03 -> 1.4671e+03: REGGE
+  tenuta_v2/L-1_proiezione_Gamma w 13.073 -> 13.042 (il rapporto 0.998); i pezzi 1 -> 1; il picco 8.5207e+02 -> 8.4011e+02: REGGE
+  S1_cima                    (non ha k 1500 e k 3000: saltata)
+==================================================================================================================================
+  5 DEVE su 6   ### CI SONO BUCHI
+==================================================================================================================================

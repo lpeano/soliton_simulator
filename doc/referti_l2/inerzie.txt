@@ -1,0 +1,38 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] orologio_zero.py  sha1-BYTE 5ab1d36b  committato e pulito
+[TIMBRO] inerzia_suite.py  sha1-BYTE 6ecb0f1d  committato e pulito
+==================================================================================================================================
+[M0149] LE QUATTRO INERZIE E IL COMPOSTO (la carta doc/CARTA_inerzie.md)
+==================================================================================================================================
+  I1 la banda (il calcio, F0 compatto k 1500): v0 +6.818e-05 +- 8.5e-07, v -5.515e-04 +- 5.0e-07; m* = k/v -18.133 +- 0.017; k/(v - v0) -16.138
+     (dallo stato largo k 0: -19.26, massa_calcio.txt)
+  I2 il campo U: E = 0 (il caso noto): v +6.818e-05 +- 8.5e-07 (il calcio a k 0: +6.818e-05 +- 8.5e-07); a +6.741e-08 +- 2.9e-09
+  DEVE: K1 I2: E = 0 ridà la deriva v0 del calcio a k 0 entro 3 sigma                                            PASSA (+6.82e-05 contro +6.82e-05)
+     E +1: a +1.272e-06, a - a(E = 0) +1.205e-06 +- 3.3e-09 (366.4 sigma); la spinta +2.00e-05 per tick; m_E = +16.602 +- 0.045
+     E -1: a -1.136e-06, a - a(E = 0) -1.203e-06 +- 4.3e-09 (277.8 sigma); la spinta -2.00e-05 per tick; m_E = +16.626 +- 0.060
+  DEVE: K2 I2: segni opposti sotto +E e -E, |a| > 3 sigma                                                        PASSA 
+  I3 il tempo, V3: F_N per particella = e0 (la fase (a)) = 0.476727 |dN/dy|; a/(c_sol^2 |dN/dy|) = +3.191 (VERSO); m_N = F_N/a = +19.205 (lo stato largo)
+  I3 il tempo, V2: F_N per particella = |d omega/dN| (l'orologio V2: omega(NmV2) 0.62424805, omega(N1) 0.62643739) = 0.625525 |dN/dy|; a/(c_sol^2 |dN/dy|) = -4.153 (VIA); m_N = F_N/a = -19.362 (lo stato largo)
+  I4 il vuoto: phi libero (il caso noto): m* = k/v -18.133
+  DEVE: K1 I4: phi libero ridà I1 entro il 2%                                                                    PASSA (-18.133 contro -18.133)
+  I4 phi CONGELATO: v -5.446e-04 +- 2.7e-07; m* = k/v -18.361; k/(v - v0) -17.487 (v0 congelato +2.722e-05)
+     Delta m*/m* = +0.0126: il vuoto non partecipa (< 5%)
+  I5 l'orologio, compatto: omega_ass 0.625906: omega/c^2 = 80.46 (c_sol), 86.71 (c_banda)
+  I5 l'orologio, largo: omega_ass 0.626440: omega/c^2 = 80.53 (c_sol), 86.79 (c_banda)
+     (omega_psi - omega_phi locale) = Delta(1) 1.105358 (legge_zeri.txt): /c^2 = 142.09 (c_sol), 153.13 (c_banda)
+  S4 il composto t000: v -5.716e-04 +- 8.5e-07; m*_tri = k/v -17.494 (k/(v - v0) -17.739); la massa 3044073.798 (il mattone 995010.893); M*_tri/(3 M*_mattone) = 0.984: ADDITIVA
+----------------------------------------------------------------------------------------------------------------------------------
+  LA TABELLA S16 (le inerzie per particella, col segno):
+    I1       -18.1331 +- 0.0165
+    I2       +16.6138 +- 0.0375
+    I3_V3    +19.2046 
+    I3_V2    -19.3618 
+    I4       -18.3612 (Delta m*/m* +0.0126)
+    I5       +80.4585 
+    I2 / I1 = -0.916 (entro il 15%: no)
+    I3_V2 / I1 = +1.068 (entro il 15%: SI')
+    I3_V3 / I1 = -1.059 (entro il 15%: no)
+==================================================================================================================================

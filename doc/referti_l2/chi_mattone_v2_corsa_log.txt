@@ -1,0 +1,181 @@
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] chi_mattone_v3.py  sha1-BYTE f39a9021  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c3b10add  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE b0a96cf6  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL MATTONE (Luca 20:47): E:\soliton_simulator\mattone\L162_MGU_03000.npz, cotto su L 162 (k 3000), ritagliato nella scena di S162: R_t 41.0, 7333 nodi, il picco 1.1927e+03
+### IL PASSO V2 (l'inerzia f) da k 0 fino a k 20000 (prepara); i parametri kappa 2.5289441539e-04, c0 +3.8058988126e-04, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 +1.504935886674e+00; gli stati in E:\soliton_simulator\controllo\CHI\mattone_v2
+    k     0  la massa 9.950108931447e+05  il raggio 12.3657  Min12.4 5.527894e+05  il picco 1.1927e+03  H +5.2613128573e+05  H_chi +2.9156e+02  1-N centro 4.8047e-03  max|Theta| 0.0000  (159 s)
+    k   250  la massa 9.950108931447e+05  il raggio 12.3501  Min12.4 5.500970e+05  il picco 1.2334e+03  H +5.2612931958e+05  H_chi +2.8814e+02  1-N centro 4.7624e-03  max|Theta| 0.0193  (599 s)
+    [stato] k 250 sha1 b63a7a4a
+    k   500  la massa 9.950108931447e+05  il raggio 12.1635  Min12.4 5.667626e+05  il picco 1.2355e+03  H +5.2613157105e+05  H_chi +2.9137e+02  1-N centro 4.7887e-03  max|Theta| 0.0390  (1018 s)
+    [stato] k 500 sha1 bcea445d
+    k   750  la massa 9.950108931447e+05  il raggio 11.8726  Min12.4 5.995534e+05  il picco 1.3314e+03  H +5.2613295050e+05  H_chi +2.9820e+02  1-N centro 4.8591e-03  max|Theta| 0.0590  (1433 s)
+    [stato] k 750 sha1 b7a3841d
+    k  1000  la massa 9.950108931447e+05  il raggio 11.5213  Min12.4 6.352096e+05  il picco 1.4708e+03  H +5.2613028321e+05  H_chi +3.0687e+02  1-N centro 5.0186e-03  max|Theta| 0.0793  (1854 s)
+    [stato] k 1000 sha1 22afc24c
+    k  1250  la massa 9.950108931447e+05  il raggio 11.1352  Min12.4 6.629184e+05  il picco 1.8575e+03  H +5.2612846428e+05  H_chi +3.1534e+02  1-N centro 5.2277e-03  max|Theta| 0.1001  (2284 s)
+    [stato] k 1250 sha1 b9707d3b
+    k  1500  la massa 9.950108931447e+05  il raggio 10.7416  Min12.4 6.949998e+05  il picco 2.1917e+03  H +5.2613083694e+05  H_chi +3.2323e+02  1-N centro 5.4122e-03  max|Theta| 0.1214  (2711 s)
+    [stato] k 1500 sha1 783b311a
+    k  1750  la massa 9.950108931447e+05  il raggio 10.3694  Min12.4 7.358092e+05  il picco 2.3886e+03  H +5.2613256304e+05  H_chi +3.3553e+02  1-N centro 5.5857e-03  max|Theta| 0.1428  (3146 s)
+    [stato] k 1750 sha1 71e332d2
+    k  2000  la massa 9.950108931447e+05  il raggio 10.0208  Min12.4 7.621318e+05  il picco 2.5484e+03  H +5.2613133572e+05  H_chi +3.4552e+02  1-N centro 5.7099e-03  max|Theta| 0.1647  (3573 s)
+    [stato] k 2000 sha1 d69ff36c
+    k  2250  la massa 9.950108931447e+05  il raggio 9.7297  Min12.4 7.833875e+05  il picco 2.6642e+03  H +5.2613015274e+05  H_chi +3.4954e+02  1-N centro 5.7664e-03  max|Theta| 0.1878  (4065 s)
+    [stato] k 2250 sha1 b8190866
+    k  2500  la massa 9.950108931447e+05  il raggio 9.5531  Min12.4 8.060530e+05  il picco 2.2994e+03  H +5.2613241156e+05  H_chi +3.5305e+02  1-N centro 5.7544e-03  max|Theta| 0.2116  (4551 s)
+    [stato] k 2500 sha1 5c59a98c
+    k  2750  la massa 9.950108931447e+05  il raggio 9.5435  Min12.4 8.101964e+05  il picco 2.3672e+03  H +5.2613394223e+05  H_chi +3.5473e+02  1-N centro 5.7510e-03  max|Theta| 0.2356  (5033 s)
+    [stato] k 2750 sha1 7cb0eb0f
+    k  3000  la massa 9.950108931447e+05  il raggio 9.7226  Min12.4 7.861368e+05  il picco 2.6293e+03  H +5.2613186894e+05  H_chi +3.5285e+02  1-N centro 5.7946e-03  max|Theta| 0.2600  (5483 s)
+    [stato] k 3000 sha1 7f639c0a
+    k  3250  la massa 9.950108931447e+05  il raggio 10.0750  Min12.4 7.526699e+05  il picco 2.8089e+03  H +5.2613040325e+05  H_chi +3.4414e+02  1-N centro 5.7350e-03  max|Theta| 0.2836  (5985 s)
+    [stato] k 3250 sha1 331f1d3c
+    k  3500  la massa 9.950108931447e+05  il raggio 10.5249  Min12.4 7.241918e+05  il picco 2.3636e+03  H +5.2613254668e+05  H_chi +3.3159e+02  1-N centro 5.5629e-03  max|Theta| 0.3062  (6500 s)
+    [stato] k 3500 sha1 33832f67
+    k  3750  la massa 9.950108931447e+05  il raggio 10.9590  Min12.4 6.823235e+05  il picco 2.0911e+03  H +5.2613328914e+05  H_chi +3.2198e+02  1-N centro 5.3803e-03  max|Theta| 0.3278  (7217 s)
+    [stato] k 3750 sha1 d1f4af7d
+    k  4000  la massa 9.950108931447e+05  il raggio 11.3926  Min12.4 6.358541e+05  il picco 1.8647e+03  H +5.2613160167e+05  H_chi +3.1141e+02  1-N centro 5.1668e-03  max|Theta| 0.3487  (7936 s)
+    [stato] k 4000 sha1 9f1743b0
+    k  4250  la massa 9.950108931447e+05  il raggio 11.8613  Min12.4 6.003443e+05  il picco 1.4250e+03  H +5.2613149731e+05  H_chi +3.0035e+02  1-N centro 4.9146e-03  max|Theta| 0.3689  (8625 s)
+    [stato] k 4250 sha1 ece00456
+    k  4500  la massa 9.950108931447e+05  il raggio 12.2979  Min12.4 5.664384e+05  il picco 1.3040e+03  H +5.2613356581e+05  H_chi +2.8911e+02  1-N centro 4.6992e-03  max|Theta| 0.3881  (9256 s)
+    [stato] k 4500 sha1 66f1f091
+    k  4750  la massa 9.950108931447e+05  il raggio 12.6316  Min12.4 5.223353e+05  il picco 1.2403e+03  H +5.2613398466e+05  H_chi +2.8557e+02  1-N centro 4.6391e-03  max|Theta| 0.4064  (9897 s)
+    [stato] k 4750 sha1 17f0e55f
+    k  5000  la massa 9.950108931447e+05  il raggio 12.8506  Min12.4 4.954108e+05  il picco 1.0668e+03  H +5.2613230624e+05  H_chi +2.8172e+02  1-N centro 4.6115e-03  max|Theta| 0.4243  (10533 s)
+    [stato] k 5000 sha1 ca6d2be9
+    k  5250  la massa 9.950108931447e+05  il raggio 12.9046  Min12.4 5.046047e+05  il picco 1.1112e+03  H +5.2613126427e+05  H_chi +2.8009e+02  1-N centro 4.6044e-03  max|Theta| 0.4414  (11092 s)
+    [stato] k 5250 sha1 97798dcf
+    k  5500  la massa 9.950108931447e+05  il raggio 12.7167  Min12.4 5.251949e+05  il picco 1.2377e+03  H +5.2613237510e+05  H_chi +2.8156e+02  1-N centro 4.6434e-03  max|Theta| 0.4590  (11647 s)
+    [stato] k 5500 sha1 13286a55
+    k  5750  la massa 9.950108931447e+05  il raggio 12.3218  Min12.4 5.525569e+05  il picco 1.2474e+03  H +5.2613317918e+05  H_chi +2.9071e+02  1-N centro 4.7789e-03  max|Theta| 0.4775  (12195 s)
+    [stato] k 5750 sha1 a164ca3c
+    k  6000  la massa 9.950108931447e+05  il raggio 11.8437  Min12.4 6.017913e+05  il picco 1.3553e+03  H +5.2613206353e+05  H_chi +3.0260e+02  1-N centro 4.9425e-03  max|Theta| 0.4971  (12752 s)
+    [stato] k 6000 sha1 5b2c42e0
+    k  6250  la massa 9.950108931447e+05  il raggio 11.3612  Min12.4 6.546483e+05  il picco 1.5642e+03  H +5.2613092400e+05  H_chi +3.1095e+02  1-N centro 5.1179e-03  max|Theta| 0.5172  (13311 s)
+    [stato] k 6250 sha1 106435f6
+    k  6500  la massa 9.950108931447e+05  il raggio 10.8819  Min12.4 6.897424e+05  il picco 2.0984e+03  H +5.2613131618e+05  H_chi +3.2172e+02  1-N centro 5.3707e-03  max|Theta| 0.5381  (13884 s)
+    [stato] k 6500 sha1 e1cf35a0
+    k  6750  la massa 9.950108931447e+05  il raggio 10.4492  Min12.4 7.193958e+05  il picco 2.6864e+03  H +5.2613211913e+05  H_chi +3.3528e+02  1-N centro 5.6058e-03  max|Theta| 0.5597  (14414 s)
+    [stato] k 6750 sha1 0f6233d6
+    k  7000  la massa 9.950108931447e+05  il raggio 10.1211  Min12.4 7.549849e+05  il picco 2.6112e+03  H +5.2613132972e+05  H_chi +3.4441e+02  1-N centro 5.7147e-03  max|Theta| 0.5820  (14883 s)
+    [stato] k 7000 sha1 274360c3
+    k  7250  la massa 9.950108931447e+05  il raggio 9.9015  Min12.4 7.769906e+05  il picco 2.4418e+03  H +5.2613043673e+05  H_chi +3.4927e+02  1-N centro 5.7557e-03  max|Theta| 0.6046  (15356 s)
+    [stato] k 7250 sha1 1baf2017
+    k  7500  la massa 9.950108931447e+05  il raggio 9.8141  Min12.4 7.772090e+05  il picco 2.5502e+03  H +5.2613190419e+05  H_chi +3.4763e+02  1-N centro 5.7459e-03  max|Theta| 0.6280  (15765 s)
+    [stato] k 7500 sha1 4ccb2c3c
+    k  7750  la massa 9.950108931447e+05  il raggio 9.9092  Min12.4 7.724109e+05  il picco 2.4823e+03  H +5.2613272607e+05  H_chi +3.4751e+02  1-N centro 5.6918e-03  max|Theta| 0.6517  (16175 s)
+    [stato] k 7750 sha1 e7440418
+    k  8000  la massa 9.950108931447e+05  il raggio 10.1952  Min12.4 7.563628e+05  il picco 2.2882e+03  H +5.2613169659e+05  H_chi +3.4235e+02  1-N centro 5.5771e-03  max|Theta| 0.6750  (16586 s)
+    [stato] k 8000 sha1 6c4a3a35
+    k  8250  la massa 9.950108931447e+05  il raggio 10.6235  Min12.4 7.174276e+05  il picco 2.0867e+03  H +5.2613114272e+05  H_chi +3.2926e+02  1-N centro 5.4573e-03  max|Theta| 0.6973  (17000 s)
+    [stato] k 8250 sha1 22007ffb
+    k  8500  la massa 9.950108931447e+05  il raggio 11.1349  Min12.4 6.643926e+05  il picco 2.0696e+03  H +5.2613199954e+05  H_chi +3.1766e+02  1-N centro 5.3363e-03  max|Theta| 0.7185  (17406 s)
+    [stato] k 8500 sha1 b4d24c41
+    k  8750  la massa 9.950108931447e+05  il raggio 11.6546  Min12.4 6.244850e+05  il picco 1.9254e+03  H +5.2613275642e+05  H_chi +3.0617e+02  1-N centro 5.1525e-03  max|Theta| 0.7384  (17824 s)
+    [stato] k 8750 sha1 edc9b988
+    k  9000  la massa 9.950108931446e+05  il raggio 12.0706  Min12.4 5.869806e+05  il picco 1.4394e+03  H +5.2613233566e+05  H_chi +2.9875e+02  1-N centro 4.9518e-03  max|Theta| 0.7578  (18238 s)
+    [stato] k 9000 sha1 4890a873
+    k  9250  la massa 9.950108931446e+05  il raggio 12.3787  Min12.4 5.484632e+05  il picco 1.1899e+03  H +5.2613149428e+05  H_chi +2.8928e+02  1-N centro 4.7563e-03  max|Theta| 0.7763  (18652 s)
+    [stato] k 9250 sha1 3c9c89fa
+    k  9500  la massa 9.950108931446e+05  il raggio 12.6302  Min12.4 5.225864e+05  il picco 1.2317e+03  H +5.2613236574e+05  H_chi +2.8365e+02  1-N centro 4.6035e-03  max|Theta| 0.7943  (19065 s)
+    [stato] k 9500 sha1 379fe63e
+    k  9750  la massa 9.950108931446e+05  il raggio 12.8381  Min12.4 5.137457e+05  il picco 1.1940e+03  H +5.2613316381e+05  H_chi +2.8199e+02  1-N centro 4.5267e-03  max|Theta| 0.8124  (19478 s)
+    [stato] k 9750 sha1 1b0988d0
+    k 10000  la massa 9.950108931446e+05  il raggio 12.9357  Min12.4 5.009205e+05  il picco 1.1312e+03  H +5.2613260752e+05  H_chi +2.8139e+02  1-N centro 4.5474e-03  max|Theta| 0.8303  (19895 s)
+    [stato] k 10000 sha1 5ab9ab23
+    k 10250  la massa 9.950108931446e+05  il raggio 12.8962  Min12.4 4.965138e+05  il picco 1.1243e+03  H +5.2613175276e+05  H_chi +2.7991e+02  1-N centro 4.6147e-03  max|Theta| 0.8479  (20305 s)
+    [stato] k 10250 sha1 55f07bc8
+    k 10500  la massa 9.950108931446e+05  il raggio 12.7320  Min12.4 5.209214e+05  il picco 1.2725e+03  H +5.2613145023e+05  H_chi +2.8273e+02  1-N centro 4.7101e-03  max|Theta| 0.8652  (20720 s)
+    [stato] k 10500 sha1 fd6d58a3
+    k 10750  la massa 9.950108931446e+05  il raggio 12.4155  Min12.4 5.595818e+05  il picco 1.3533e+03  H +5.2613208549e+05  H_chi +2.9132e+02  1-N centro 4.8331e-03  max|Theta| 0.8830  (21142 s)
+    [stato] k 10750 sha1 f8b25ef9
+    k 11000  la massa 9.950108931446e+05  il raggio 11.9398  Min12.4 6.018418e+05  il picco 1.5361e+03  H +5.2613189846e+05  H_chi +3.0175e+02  1-N centro 4.9980e-03  max|Theta| 0.9018  (21555 s)
+    [stato] k 11000 sha1 1cc4088b
+    k 11250  la massa 9.950108931446e+05  il raggio 11.3857  Min12.4 6.451338e+05  il picco 1.6827e+03  H +5.2613089351e+05  H_chi +3.1055e+02  1-N centro 5.1426e-03  max|Theta| 0.9215  (22004 s)
+    [stato] k 11250 sha1 fbb06bf3
+    k 11500  la massa 9.950108931446e+05  il raggio 10.8776  Min12.4 6.953080e+05  il picco 1.8696e+03  H +5.2613098848e+05  H_chi +3.2239e+02  1-N centro 5.3106e-03  max|Theta| 0.9427  (22484 s)
+    [stato] k 11500 sha1 ebe1cb0c
+    k 11750  la massa 9.950108931446e+05  il raggio 10.4665  Min12.4 7.321100e+05  il picco 2.0681e+03  H +5.2613165107e+05  H_chi +3.3417e+02  1-N centro 5.4959e-03  max|Theta| 0.9645  (22986 s)
+    [stato] k 11750 sha1 7b52e8b0
+    k 12000  la massa 9.950108931446e+05  il raggio 10.1749  Min12.4 7.475101e+05  il picco 2.6620e+03  H +5.2613114116e+05  H_chi +3.4387e+02  1-N centro 5.6991e-03  max|Theta| 0.9869  (23484 s)
+    [stato] k 12000 sha1 6afe0302
+    k 12250  la massa 9.950108931446e+05  il raggio 10.0332  Min12.4 7.568412e+05  il picco 2.7707e+03  H +5.2613059128e+05  H_chi +3.4493e+02  1-N centro 5.7557e-03  max|Theta| 1.0094  (23977 s)
+    [stato] k 12250 sha1 46eec2b2
+    k 12500  la massa 9.950108931446e+05  il raggio 10.0483  Min12.4 7.640595e+05  il picco 2.4656e+03  H +5.2613088518e+05  H_chi +3.4518e+02  1-N centro 5.7203e-03  max|Theta| 1.0320  (24481 s)
+    [stato] k 12500 sha1 406b7f47
+    k 12750  la massa 9.950108931446e+05  il raggio 10.2053  Min12.4 7.524244e+05  il picco 2.3188e+03  H +5.2613149986e+05  H_chi +3.4290e+02  1-N centro 5.6476e-03  max|Theta| 1.0547  (25048 s)
+    [stato] k 12750 sha1 2b98cd9e
+    k 13000  la massa 9.950108931446e+05  il raggio 10.5085  Min12.4 7.198334e+05  il picco 2.2466e+03  H +5.2613122990e+05  H_chi +3.3347e+02  1-N centro 5.4997e-03  max|Theta| 1.0772  (25789 s)
+    [stato] k 13000 sha1 2def612f
+    k 13250  la massa 9.950108931446e+05  il raggio 10.9620  Min12.4 6.879172e+05  il picco 1.8974e+03  H +5.2613089422e+05  H_chi +3.2225e+02  1-N centro 5.3274e-03  max|Theta| 1.0991  (26541 s)
+    [stato] k 13250 sha1 b6f7cf41
+    k 13500  la massa 9.950108931446e+05  il raggio 11.4930  Min12.4 6.472281e+05  il picco 1.6142e+03  H +5.2613199081e+05  H_chi +3.0858e+02  1-N centro 5.1142e-03  max|Theta| 1.1200  (27265 s)
+    [stato] k 13500 sha1 c2e25294
+    k 13750  la massa 9.950108931446e+05  il raggio 12.0181  Min12.4 5.955922e+05  il picco 1.5561e+03  H +5.2613256739e+05  H_chi +3.0006e+02  1-N centro 4.9871e-03  max|Theta| 1.1398  (27974 s)
+    [stato] k 13750 sha1 31eb7201
+    k 14000  la massa 9.950108931446e+05  il raggio 12.4655  Min12.4 5.450726e+05  il picco 1.4898e+03  H +5.2613145216e+05  H_chi +2.9016e+02  1-N centro 4.8464e-03  max|Theta| 1.1584  (28717 s)
+    [stato] k 14000 sha1 5d9907d2
+    k 14250  la massa 9.950108931446e+05  il raggio 12.8188  Min12.4 5.167707e+05  il picco 1.2460e+03  H +5.2613098289e+05  H_chi +2.8095e+02  1-N centro 4.6791e-03  max|Theta| 1.1761  (29437 s)
+    [stato] k 14250 sha1 82a86032
+    k 14500  la massa 9.950108931446e+05  il raggio 13.0175  Min12.4 4.997617e+05  il picco 1.1076e+03  H +5.2613218303e+05  H_chi +2.7770e+02  1-N centro 4.5503e-03  max|Theta| 1.1933  (30066 s)
+    [stato] k 14500 sha1 fffddac0
+    k 14750  la massa 9.950108931446e+05  il raggio 13.0590  Min12.4 4.882017e+05  il picco 1.1270e+03  H +5.2613292595e+05  H_chi +2.7835e+02  1-N centro 4.4910e-03  max|Theta| 1.2105  (30544 s)
+    [stato] k 14750 sha1 6d6cb952
+    k 15000  la massa 9.950108931446e+05  il raggio 13.0229  Min12.4 4.884551e+05  il picco 1.1315e+03  H +5.2613190231e+05  H_chi +2.7953e+02  1-N centro 4.4954e-03  max|Theta| 1.2283  (31041 s)
+    [stato] k 15000 sha1 41b823e1
+    k 15250  la massa 9.950108931446e+05  il raggio 12.9299  Min12.4 5.047523e+05  il picco 1.1892e+03  H +5.2613073776e+05  H_chi +2.8028e+02  1-N centro 4.5523e-03  max|Theta| 1.2459  (31543 s)
+    [stato] k 15250 sha1 7dc661d5
+    k 15500  la massa 9.950108931446e+05  il raggio 12.7580  Min12.4 5.282294e+05  il picco 1.1666e+03  H +5.2613123703e+05  H_chi +2.8254e+02  1-N centro 4.6839e-03  max|Theta| 1.2637  (32057 s)
+    [stato] k 15500 sha1 0f1af355
+    k 15750  la massa 9.950108931446e+05  il raggio 12.4643  Min12.4 5.473795e+05  il picco 1.5554e+03  H +5.2613232914e+05  H_chi +2.9192e+02  1-N centro 4.8838e-03  max|Theta| 1.2819  (32714 s)
+    [stato] k 15750 sha1 621db215
+    k 16000  la massa 9.950108931446e+05  il raggio 12.0766  Min12.4 5.871908e+05  il picco 1.8238e+03  H +5.2613212266e+05  H_chi +2.9923e+02  1-N centro 5.0352e-03  max|Theta| 1.3005  (33354 s)
+    [stato] k 16000 sha1 a2296e61
+    k 16250  la massa 9.950108931446e+05  il raggio 11.6253  Min12.4 6.352902e+05  il picco 1.7060e+03  H +5.2613073697e+05  H_chi +3.0765e+02  1-N centro 5.1401e-03  max|Theta| 1.3202  (33939 s)
+    [stato] k 16250 sha1 865babe9
+    k 16500  la massa 9.950108931446e+05  il raggio 11.1344  Min12.4 6.770357e+05  il picco 1.7880e+03  H +5.2613080771e+05  H_chi +3.1708e+02  1-N centro 5.2576e-03  max|Theta| 1.3407  (34496 s)
+    [stato] k 16500 sha1 a1e6d5eb
+    k 16750  la massa 9.950108931446e+05  il raggio 10.6872  Min12.4 7.092726e+05  il picco 2.0842e+03  H +5.2613160686e+05  H_chi +3.2905e+02  1-N centro 5.4163e-03  max|Theta| 1.3622  (35008 s)
+    [stato] k 16750 sha1 7a41caa6
+    k 17000  la massa 9.950108931446e+05  il raggio 10.3700  Min12.4 7.354679e+05  il picco 2.0824e+03  H +5.2613178389e+05  H_chi +3.3669e+02  1-N centro 5.5197e-03  max|Theta| 1.3841  (35582 s)
+    [stato] k 17000 sha1 406a3416
+    k 17250  la massa 9.950108931446e+05  il raggio 10.2219  Min12.4 7.536695e+05  il picco 2.2045e+03  H +5.2613115616e+05  H_chi +3.3975e+02  1-N centro 5.6005e-03  max|Theta| 1.4063  (36068 s)
+    [stato] k 17250 sha1 78912a18
+    k 17500  la massa 9.950108931446e+05  il raggio 10.2296  Min12.4 7.480202e+05  il picco 2.4188e+03  H +5.2613044433e+05  H_chi +3.4102e+02  1-N centro 5.6652e-03  max|Theta| 1.4286  (36514 s)
+    [stato] k 17500 sha1 2a467bb7
+    k 17750  la massa 9.950108931446e+05  il raggio 10.3816  Min12.4 7.300414e+05  il picco 2.6482e+03  H +5.2613120074e+05  H_chi +3.3968e+02  1-N centro 5.6759e-03  max|Theta| 1.4509  (37048 s)
+    [stato] k 17750 sha1 adaf96ad
+    k 18000  la massa 9.950108931446e+05  il raggio 10.6620  Min12.4 7.110645e+05  il picco 2.3313e+03  H +5.2613190182e+05  H_chi +3.3331e+02  1-N centro 5.5561e-03  max|Theta| 1.4730  (37660 s)
+    [stato] k 18000 sha1 56c4e2e1
+    k 18250  la massa 9.950108931446e+05  il raggio 11.0376  Min12.4 6.857128e+05  il picco 1.9412e+03  H +5.2613144002e+05  H_chi +3.2045e+02  1-N centro 5.3370e-03  max|Theta| 1.4950  (38365 s)
+    [stato] k 18250 sha1 5b01b0b8
+    k 18500  la massa 9.950108931446e+05  il raggio 11.4828  Min12.4 6.399070e+05  il picco 1.6230e+03  H +5.2613091901e+05  H_chi +3.1022e+02  1-N centro 5.1370e-03  max|Theta| 1.5163  (39051 s)
+    [stato] k 18500 sha1 b50763fa
+    k 18750  la massa 9.950108931446e+05  il raggio 11.9903  Min12.4 5.922246e+05  il picco 1.4278e+03  H +5.2613179994e+05  H_chi +3.0036e+02  1-N centro 4.9530e-03  max|Theta| 1.5362  (39720 s)
+    [stato] k 18750 sha1 0cbd6622
+    k 19000  la massa 9.950108931446e+05  il raggio 12.5137  Min12.4 5.523686e+05  il picco 1.2011e+03  H +5.2613216019e+05  H_chi +2.8903e+02  1-N centro 4.7641e-03  max|Theta| 1.5552  (40062 s)
+    [stato] k 19000 sha1 3ebd1ee7
+    k 19250  la massa 9.950108931446e+05  il raggio 12.9527  Min12.4 5.127070e+05  il picco 1.1658e+03  H +5.2613177688e+05  H_chi +2.7913e+02  1-N centro 4.6101e-03  max|Theta| 1.5731  (40369 s)
+    [stato] k 19250 sha1 f9601e03
+    k 19500  la massa 9.950108931446e+05  il raggio 13.2412  Min12.4 4.785716e+05  il picco 1.0975e+03  H +5.2613141595e+05  H_chi +2.7323e+02  1-N centro 4.5295e-03  max|Theta| 1.5898  (40687 s)
+    [stato] k 19500 sha1 b488178d
+    k 19750  la massa 9.950108931446e+05  il raggio 13.3704  Min12.4 4.593844e+05  il picco 9.9778e+02  H +5.2613141546e+05  H_chi +2.7297e+02  1-N centro 4.4850e-03  max|Theta| 1.6060  (41010 s)
+    [stato] k 19750 sha1 24240190
+    k 20000  la massa 9.950108931446e+05  il raggio 13.3629  Min12.4 4.692507e+05  il picco 1.0913e+03  H +5.2613227296e+05  H_chi +2.7414e+02  1-N centro 4.4593e-03  max|Theta| 1.6222  (41326 s)
+    [stato] k 20000 sha1 4dde5ad1
+### 20000 tick in 41167 s (2.058 s per tick)

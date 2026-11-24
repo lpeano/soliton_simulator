@@ -1,0 +1,153 @@
+============================================================================================================================================
+L0 DEL LORENTZ LOCALE, CHI SENTE N (la carta sez. 2.1): la radice C:\Users\lpeano\wt_lapse_u, 27 file
+============================================================================================================================================
+### i file che NON ci sono in questa radice: ['doc/referti_l2/mitosi_chi_v4.py', 'csv/solitone/u1_generico.py', 'csv/solitone/contatore.py']
+### LE LETTURE DIRETTE (68 letture in 38 funzioni):
+  csv/_u1_prototipo.py::Campo.K                                  w r.180                            U1      segue N: NO  l'energia elettrica con w = s_a^2 l/l*: s_a CONGELATO alla costruzione
+  csv/_u1_prototipo.py::Campo.__init__                           s_a r.149                          U1      segue N: NO  s_a si copia UNA volta: w = s_a^2 L_SU_LS
+  csv/_u1_prototipo.py::Campo.deriva                             w r.171                            U1      segue N: NO  LA DERIVA A += f w E: w congelato
+  csv/_u1_prototipo.py::campo_gradiente                          s_arco() r.796                     prova   segue N: -   la parte G: s_a da un cs statico dato a mano
+  csv/_u1_prototipo.py::energia                                  s_a r.324                          U1      segue N: -   l'energia del prototipo (s_a del campo)
+  csv/_u1_prototipo.py::energia_nodi                             w r.659                            U1      segue N: -   un'energia per nodo (misura)
+  csv/_u1_prototipo.py::gauss_energia                            cs r.439                           prova   segue N: -   una prova
+  csv/_u1_prototipo.py::scena_materia                            s_arco() r.291                     prova   segue N: -   una scena di prova
+  csv/solitone/_u1_oggi.py::campo_della_scena                    s_arco() r.58                      U1      segue N: NO  s_a = s_arco(mot) ALLA COSTRUZIONE: il cs di quel momento, poi congelato
+  csv/solitone/conti.py::scena                                   cs r.65                            misura  segue N: -   la scena delle misure
+  csv/solitone/mattone.py::scena                                 cs r.112                           misura  segue N: -   la scena
+  csv/solitone/porto.py::salva                                   cs_prec() r.181                    misura  segue N: -   salva cs_prec
+  doc/referti_l2/chi_tick.py::Laplaciano.statico                 c2 r.59, m2 r.59                   chi     segue N: -   il profilo statico (la taratura)
+  doc/referti_l2/chi_tick.py::Parametri.__init__                 C_CHI r.30                         chi     segue N: NO  c2 = C_CHI^2 = 0.25 COSTANTE
+  doc/referti_l2/chi_tick.py::Parametri.__repr__                 c2 r.34, m2 r.34                   chi     segue N: -   la stampa
+  doc/referti_l2/chi_tick.py::Q_di                               cs r.73                            chi     segue N: SI  la sorgente Q coi pesi di cs = s N
+  doc/referti_l2/chi_tick.py::energia_chi                        N r.138,147, c2 r.149, cs r.137, m2 r.149 chi     segue N: SI  l'energia: i pesi di cs = s N; H_chi con c2 e m2 costanti
+  doc/referti_l2/chi_tick.py::energia_oggi                       N r.158, N_di() r.157              misura  segue N: -   l'energia del tick di oggi (confronto)
+  doc/referti_l2/chi_tick.py::fase_a                             N r.101                            psi     segue N: SI  la fase (a) e^{+i e0 (N - 1)/2}
+  doc/referti_l2/chi_tick.py::forza                              N r.93,96, c2 r.96, m2 r.96        chi     segue N: NO  LA FORZA DI CHI: c2 Delta chi - m2 chi COSTANTI; N solo nella sorgente
+  doc/referti_l2/chi_tick.py::tick_chi                           N r.117,119,122, cs r.123, dtau r.111,112,123 chi     segue N: NO  il tick: chi avanza con dt = mot.dtau[0] (il tick, non dtau cs); mot.cs = s N UNA volta (il N di meta' tick)
+  primo_ordine/energia_pesata.py::applica                        cs r.407, dtau r.416,417, lambda_c r.407 phi     segue N: SI  la fase del vuoto (Omega): legge cs e lambda_c; con chi lambda_c = None, quindi spenta
+  primo_ordine/energia_pesata.py::d_peso_arco                    cs r.279                           chi     segue N: SI  dw/dcs coi cs = s N (la Q)
+  primo_ordine/energia_pesata.py::g_dello_stato                  cs r.366, lambda_c r.366           misura  segue N: -   G dello stato
+  primo_ordine/energia_pesata.py::g_pesata                       cs r.387                           misura  segue N: -   G pesata
+  primo_ordine/energia_pesata.py::omega                          lambda_c r.322                     phi     segue N: -   Omega: lambda_c None con chi
+  primo_ordine/energia_pesata.py::pesi                           cs r.257, s_arco() r.259,262       chi     segue N: SI  i pesi cs e s_arco (l'energia, la Q)
+  primo_ordine/energia_pesata.py::pesi_dello_stato               cs r.347,348, lambda_c r.348       misura  segue N: -   i pesi dello stato
+  primo_ordine/energia_pesata.py::termini_di_h                   N r.227,242                        chi     segue N: SI  i termini di H coi cs (la Q)
+  primo_ordine/energia_pesata.py::tetto_omega                    lambda_c r.113                     phi     segue N: -   il tetto di Omega
+  primo_ordine/flussi_parziali.py::accendi_cs                    cs r.157                           psi     segue N: -   accende il lapse N(rho): NON con chi
+  primo_ordine/flussi_parziali.py::dtau_nodo                     cs r.95,98, dtau r.83              psi     segue N: SI  IL TEMPO PROPRIO PER NODO dtau cs: l'unico posto da cui il passo lo legge
+  primo_ordine/flussi_parziali.py::s_arco                        dtau_nodo() r.203                  psi     segue N: SI  la media armonica di dtau_nodo per arco: lo spostamento
+  primo_ordine/flussi_parziali.py::s_nodo                        dtau_nodo() r.177                  psi     segue N: SI  dtau_nodo per nodo: il Grover
+  primo_ordine/flussi_parziali.py::z_arco                        s_arco() r.308                     psi     segue N: SI  e^{i pi s_arco f}: lo spostamento
+  primo_ordine/motore.py::Motore._moneta_spin                    dtau_nodo() r.478                  psi     segue N: SI  la moneta: ang = eps dtau_nodo
+  primo_ordine/motore.py::Motore._saturazione                    dtau_nodo() r.621                  psi     segue N: -   la saturazione: fuori dall'ordine (superata)
+  primo_ordine/tick.py::cs_al_centro                             cs r.160,165                       psi     segue N: -   il punto fisso del lapse N(rho): NON con chi (lambda_c None)
+### LE ANCORE DEL TICK (che cosa raggiungono, DIRETTO o INDIRETTO per nome semplice):
+  psi: lo spostamento                  primo_ordine/flussi_parziali.py::hop_psi                   INDIRETTO cs, dtau, dtau_nodo(), s_arco() tramite _hop_psi_mezzo, z_arco
+  psi: il Grover                       primo_ordine/flussi_parziali.py::grover                    INDIRETTO cs, dtau, dtau_nodo()        tramite _grover_mezzo, z_nodo
+  psi: la moneta                       primo_ordine/motore.py::Motore._moneta_spin                DIRETTO   cs, dtau, dtau_nodo()        tramite dtau_nodo
+  psi: la fase (a)                     doc/referti_l2/chi_tick.py::fase_a                         DIRETTO   N                            
+  phi: lo spostamento del vuoto        primo_ordine/flussi_parziali.py::hop_phi                   INDIRETTO cs, dtau, dtau_nodo(), s_arco() tramite _hop_phi_mezzo, z_arco
+  phi: il materia-vuoto                primo_ordine/motore.py::Motore._materia_vuoto              INDIRETTO N, cs, dtau, lambda_c        tramite applica
+  phi: la fase del vuoto               primo_ordine/motore.py::Motore._fase_vuoto                 INDIRETTO N, cs, dtau, lambda_c        tramite applica
+  U1: la deriva                        csv/_u1_prototipo.py::Campo.deriva                         DIRETTO   w                            
+  U1: la spinta                        csv/_u1_prototipo.py::Campo.spinta                         INDIRETTO N, c2, cs, m2                tramite forza
+  U1: il campo generico, la deriva     csv/solitone/u1_generico.py::CampoGenerico.deriva          ### NON TROVATA
+  chi: la forza                        doc/referti_l2/chi_tick.py::forza                          DIRETTO   N, c2, cs, m2                tramite Q_di
+  chi: il tick                         doc/referti_l2/chi_tick.py::tick_chi                       DIRETTO   N, c2, cs, dtau, m2, w       tramite avvolto, fase_a, forza, spinta
+  il contatore                         csv/solitone/contatore.py::ritmo                           ### NON TROVATA
+--------------------------------------------------------------------------------------------------------------------------------------------
+### (1) la materia segue N (lo spostamento e la moneta raggiungono cs, dtau_nodo = dtau cs): CONFERMATA
+    e il vuoto phi (lo spostamento del vuoto raggiunge cs): SI'
+### (2) la luce non sente N (la deriva legge w e non cs; nessuna riga di chi_tick tocca s_a): CONFERMATA
+### (3) chi non sente il proprio N (tick_chi legge dtau, la forza c2 costante): CONFERMATA
+============================================================================================================================================
+### uscita 0
+============================================================================================================================================
+L0 DEL LORENTZ LOCALE, CHI SENTE N (la carta sez. 2.1): la radice C:\Users\lpeano\wt_mitosi_chi, 27 file
+============================================================================================================================================
+### LE LETTURE DIRETTE (86 letture in 47 funzioni):
+  csv/_u1_prototipo.py::Campo.K                                  w r.180                            U1      segue N: NO  l'energia elettrica con w = s_a^2 l/l*: s_a CONGELATO alla costruzione
+  csv/_u1_prototipo.py::Campo.__init__                           s_a r.149                          U1      segue N: NO  s_a si copia UNA volta: w = s_a^2 L_SU_LS
+  csv/_u1_prototipo.py::Campo.deriva                             w r.171                            U1      segue N: NO  LA DERIVA A += f w E: w congelato
+  csv/_u1_prototipo.py::campo_gradiente                          s_arco() r.796                     prova   segue N: -   la parte G: s_a da un cs statico dato a mano
+  csv/_u1_prototipo.py::energia                                  s_a r.324                          U1      segue N: -   l'energia del prototipo (s_a del campo)
+  csv/_u1_prototipo.py::energia_nodi                             w r.659                            U1      segue N: -   un'energia per nodo (misura)
+  csv/_u1_prototipo.py::gauss_energia                            cs r.439                           prova   segue N: -   una prova
+  csv/_u1_prototipo.py::scena_materia                            s_arco() r.291                     prova   segue N: -   una scena di prova
+  csv/solitone/_u1_oggi.py::campo_della_scena                    s_arco() r.58                      U1      segue N: NO  s_a = s_arco(mot) ALLA COSTRUZIONE: il cs di quel momento, poi congelato
+  csv/solitone/contatore.py::ritmo                               dtau r.20,21                       mitosi  segue N: SI  Theta: pi (dtau cs_i - dtau cs_j) col cs del tick
+  csv/solitone/conti.py::scena                                   cs r.65                            misura  segue N: -   la scena delle misure
+  csv/solitone/mattone.py::scena                                 cs r.113                           misura  segue N: -   la scena
+  csv/solitone/porto.py::salva                                   cs_prec() r.181                    misura  segue N: -   salva cs_prec
+  csv/solitone/u1_generico.py::CampoGenerico.K                   w r.137                            U1      segue N: NO  come Campo.K: w congelato
+  csv/solitone/u1_generico.py::CampoGenerico.__init__            s_a r.46,47                        U1      segue N: NO  s_a si copia UNA volta
+  csv/solitone/u1_generico.py::CampoGenerico.cresci              s_a r.182,186                      U1      segue N: NO  s_a dei nati: il valore uniforme (congelato)
+  csv/solitone/u1_generico.py::CampoGenerico.deriva              w r.128                            U1      segue N: NO  LA DERIVA: w congelato
+  doc/referti_l2/chi_tick.py::Laplaciano.statico                 c2 r.59, m2 r.59                   chi     segue N: -   il profilo statico (la taratura)
+  doc/referti_l2/chi_tick.py::Parametri.__init__                 C_CHI r.30                         chi     segue N: NO  c2 = C_CHI^2 = 0.25 COSTANTE
+  doc/referti_l2/chi_tick.py::Parametri.__repr__                 c2 r.34, m2 r.34                   chi     segue N: -   la stampa
+  doc/referti_l2/chi_tick.py::Q_di                               cs r.73                            chi     segue N: SI  la sorgente Q coi pesi di cs = s N
+  doc/referti_l2/chi_tick.py::energia_chi                        N r.138,147, c2 r.149, cs r.137, m2 r.149 chi     segue N: SI  l'energia: i pesi di cs = s N; H_chi con c2 e m2 costanti
+  doc/referti_l2/chi_tick.py::energia_oggi                       N r.158, N_di() r.157              misura  segue N: -   l'energia del tick di oggi (confronto)
+  doc/referti_l2/chi_tick.py::fase_a                             N r.101                            psi     segue N: SI  la fase (a) e^{+i e0 (N - 1)/2}
+  doc/referti_l2/chi_tick.py::forza                              N r.93,96, c2 r.96, m2 r.96        chi     segue N: NO  LA FORZA DI CHI: c2 Delta chi - m2 chi COSTANTI; N solo nella sorgente
+  doc/referti_l2/chi_tick.py::tick_chi                           N r.117,119,122, cs r.123, dtau r.111,112,123 chi     segue N: NO  il tick: chi avanza con dt = mot.dtau[0] (il tick, non dtau cs); mot.cs = s N UNA volta (il N di meta' tick)
+  doc/referti_l2/mitosi_chi_v4.py::applica_chi                   cs r.113                           mitosi  segue N: SI  cs del nodo nato da chi
+  doc/referti_l2/mitosi_chi_v4.py::nascite                       c2 r.576,578, m2 r.576,578         prova   segue N: -   la prova K4
+  doc/referti_l2/mitosi_chi_v4.py::salva                         cs r.176,177                       misura  segue N: -   salva cs_prec
+  primo_ordine/energia_pesata.py::applica                        cs r.407, dtau r.416,417, lambda_c r.407 phi     segue N: SI  la fase del vuoto (Omega): legge cs e lambda_c; con chi lambda_c = None, quindi spenta
+  primo_ordine/energia_pesata.py::d_peso_arco                    cs r.279                           chi     segue N: SI  dw/dcs coi cs = s N (la Q)
+  primo_ordine/energia_pesata.py::g_dello_stato                  cs r.366, lambda_c r.366           misura  segue N: -   G dello stato
+  primo_ordine/energia_pesata.py::g_pesata                       cs r.387                           misura  segue N: -   G pesata
+  primo_ordine/energia_pesata.py::omega                          lambda_c r.322                     phi     segue N: -   Omega: lambda_c None con chi
+  primo_ordine/energia_pesata.py::pesi                           cs r.257, s_arco() r.259,262       chi     segue N: SI  i pesi cs e s_arco (l'energia, la Q)
+  primo_ordine/energia_pesata.py::pesi_dello_stato               cs r.347,348, lambda_c r.348       misura  segue N: -   i pesi dello stato
+  primo_ordine/energia_pesata.py::termini_di_h                   N r.227,242                        chi     segue N: SI  i termini di H coi cs (la Q)
+  primo_ordine/energia_pesata.py::tetto_omega                    lambda_c r.113                     phi     segue N: -   il tetto di Omega
+  primo_ordine/flussi_parziali.py::accendi_cs                    cs r.158                           psi     segue N: -   accende il lapse N(rho): NON con chi
+  primo_ordine/flussi_parziali.py::dtau_nodo                     cs r.96,99, dtau r.84              psi     segue N: SI  IL TEMPO PROPRIO PER NODO dtau cs: l'unico posto da cui il passo lo legge
+  primo_ordine/flussi_parziali.py::s_arco                        dtau_nodo() r.204                  psi     segue N: SI  la media armonica di dtau_nodo per arco: lo spostamento
+  primo_ordine/flussi_parziali.py::s_nodo                        dtau_nodo() r.178                  psi     segue N: SI  dtau_nodo per nodo: il Grover
+  primo_ordine/flussi_parziali.py::z_arco                        s_arco() r.309                     psi     segue N: SI  e^{i pi s_arco f}: lo spostamento
+  primo_ordine/motore.py::Motore._moneta_spin                    dtau_nodo() r.485                  psi     segue N: SI  la moneta: ang = eps dtau_nodo
+  primo_ordine/motore.py::Motore._saturazione                    dtau_nodo() r.628                  psi     segue N: -   la saturazione: fuori dall'ordine (superata)
+  primo_ordine/motore.py::Motore.cresci                          cs r.319,367, dtau r.367           mitosi  segue N: -   segue la crescita: cs e dtau dei nati
+  primo_ordine/tick.py::cs_al_centro                             cs r.160,165                       psi     segue N: -   il punto fisso del lapse N(rho): NON con chi (lambda_c None)
+### LE ANCORE DEL TICK (che cosa raggiungono, DIRETTO o INDIRETTO per nome semplice):
+  psi: lo spostamento                  primo_ordine/flussi_parziali.py::hop_psi                   INDIRETTO cs, dtau, dtau_nodo(), s_arco() tramite _hop_psi_mezzo, z_arco
+  psi: il Grover                       primo_ordine/flussi_parziali.py::grover                    INDIRETTO cs, dtau, dtau_nodo()        tramite _grover_mezzo, z_nodo
+  psi: la moneta                       primo_ordine/motore.py::Motore._moneta_spin                DIRETTO   cs, dtau, dtau_nodo()        tramite dtau_nodo
+  psi: la fase (a)                     doc/referti_l2/chi_tick.py::fase_a                         DIRETTO   N                            
+  phi: lo spostamento del vuoto        primo_ordine/flussi_parziali.py::hop_phi                   INDIRETTO cs, dtau, dtau_nodo(), s_arco() tramite _hop_phi_mezzo, z_arco
+  phi: il materia-vuoto                primo_ordine/motore.py::Motore._materia_vuoto              INDIRETTO N, cs, dtau, lambda_c        tramite applica
+  phi: la fase del vuoto               primo_ordine/motore.py::Motore._fase_vuoto                 INDIRETTO N, cs, dtau, lambda_c        tramite applica
+  U1: la deriva                        csv/_u1_prototipo.py::Campo.deriva                         DIRETTO   w                            
+  U1: la spinta                        csv/_u1_prototipo.py::Campo.spinta                         INDIRETTO N, c2, cs, m2                tramite forza
+  U1: il campo generico, la deriva     csv/solitone/u1_generico.py::CampoGenerico.deriva          DIRETTO   w                            
+  chi: la forza                        doc/referti_l2/chi_tick.py::forza                          DIRETTO   N, c2, cs, m2                tramite Q_di
+  chi: il tick                         doc/referti_l2/chi_tick.py::tick_chi                       DIRETTO   N, c2, cs, dtau, m2, w       tramite avvolto, fase_a, forza, spinta
+  il contatore                         csv/solitone/contatore.py::ritmo                           DIRETTO   dtau                         
+--------------------------------------------------------------------------------------------------------------------------------------------
+### (1) la materia segue N (lo spostamento e la moneta raggiungono cs, dtau_nodo = dtau cs): CONFERMATA
+    e il vuoto phi (lo spostamento del vuoto raggiunge cs): SI'
+### (2) la luce non sente N (la deriva legge w e non cs; nessuna riga di chi_tick tocca s_a): CONFERMATA
+### (3) chi non sente il proprio N (tick_chi legge dtau, la forza c2 costante): CONFERMATA
+============================================================================================================================================
+### uscita 0
+############################################################################################################################################
+### LA LETTURA (dopo i numeri)
+### - Le tre letture della carta sono CONFERMATE sulle due radici (lapse-u: 68 letture in 38 funzioni; mitosi-chi: 86 in 47), con la
+###   correzione gia' scritta nella carta: mot.cs = s N si scrive UNA volta per tick (il N di meta' tick), non a ogni mezzo passo.
+###   (1) la materia: lo spostamento (hop_psi -> z_arco -> s_arco -> dtau_nodo), il Grover (grover -> z_nodo -> dtau_nodo), la moneta
+###       (dtau_nodo) leggono dtau cs: SEGUONO N; e la fase (a) legge N.
+###   (2) la luce: la deriva legge solo w = s_a^2 l/l*, e s_a si copia UNA volta alla costruzione del campo (campo_della_scena,
+###       Campo.__init__): NON segue N; nessuna riga di chi_tick tocca s_a.
+###   (3) chi: tick_chi lo avanza con dt = mot.dtau[0] (il tick) e la forza ha c2, m2 costanti: NON segue il proprio N (N entra solo
+###       nella sorgente kappa N (s Q - e0 rho)).
+### - IL VUOTO phi SEGUE N come la materia: lo spostamento del vuoto (hop_phi -> z_arco -> s_arco -> dtau_nodo) e i pezzi del vuoto.
+###   P-L1: VERA (le tre letture e il vuoto).
+### - Il contatore Theta (contatore.ritmo, e la stessa riga in tick_chi) legge dtau cs: SEGUE N.
+### - UN FALSO POSITIVO DICHIARATO: «U1: la spinta» risulta INDIRETTO tramite «forza»: e' il nome semplice (Campo.spinta chiama
+###   Campo.forza, dV/dA, che si confonde con chi_tick.forza): la spinta del campo NON legge cs (Campo.forza e' la rotazione trasposta
+###   di g(B)). Lo stesso vale per i pezzi del vuoto «tramite applica» (il nome di energia_pesata.applica).
+############################################################################################################################################
