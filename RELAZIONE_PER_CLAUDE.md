@@ -27176,3 +27176,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: il gradiente spiega meno del `5%` *(`65%`)*: **SI'** *(`0.68%`-`2.22%`)*; K riscalata entro il `10%` di `1` su tutte le finestre *(`45%`)*: **NO** *(`0.7434`-`1.0017`)*;
   - mie: meno del `5%` *(`85%`)*: **SI'**; il riscalamento peggiora *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2210] IL FRENO CHE SEGUE IL TEMPO: LA CARTA (SEZ. 3-DECIES) E legge_fondo_v3.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Tre corse:** r1 gradino, r2 rampa `N(t) = 1 + (N - 1) min(t/500, 1)` *(la formula letterale, dichiarata)*, r3 V0. Dall'oggetto del giro 4, gradiente `x1`, `2000` tick, gli stati ogni `250` e a `k 0`.
+- **Le letture:** K per finestra *(r2 fittata su `[700, 2000]` e sulle finestre di `600` dentro)*; la norma fuori da `25` nodi dal baricentro; `|psi|` massimo fuori.
+- **Il caso noto:** `100` tick, il gradino e la V0 al bit con B3, la rampa diversa. **A fine corsa** `stato_000250.npz` deve esistere, e r1 deve coincidere con B3 `x1` al bit.

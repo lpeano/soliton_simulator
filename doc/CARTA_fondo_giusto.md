@@ -312,3 +312,23 @@
 - **LE PREVISIONI:**
   - **del guardiano:** il gradiente raggiunto spiega meno del `5%` del calo *(`65%`)*; K(v) riscalato con `m*(p)` entro il `10%` di `1` su tutte le finestre *(`45%`)*;
   - **mie:** il gradiente spiega meno del `5%` *(`85%`)*, perche' `<dN/dy>/centro` resta fra `0.937` e `0.942` in tutte le finestre. **Il riscalamento non aiuta** *(`75%`)*: in `ep_fondo.txt` `dp/dv` scende con `p` *(da `19.04` a `0.0099` a `16.98` a `0.2985`)*, quindi `R > 1` e `K/R < K`: **il calo peggiora.**
+
+## 3-decies. [M2210] IL FRENO CHE SEGUE IL TEMPO: RAMPA E NORMA LONTANA *(DECISIONE DI LUCA, `22:10`; scritta dopo lo script e PRIMA dei numeri)*
+
+- **`git log --all --fixed-strings --grep "[M2210"`: vuoto** *(`22:09:02`)*.
+- **Di Luca:** dall'oggetto del giro 4 *(`puntofisso_v3b/giro_3/stato_006000.npz`, respiro `6.77%`)*, gradiente `x1`, `2000` tick, **tre corse**, **gli stati ogni `250`** *(il caso noto: `stato_000250.npz` esiste a fine corsa)*:
+  - **(r1)** V2 a **GRADINO** come B3;
+  - **(r2)** V2 a **RAMPA**: **`N(t) = 1 + (N - 1) min(t/500, 1)`**;
+  - **(r3)** V0.
+  - Le letture: (i) K per finestra di `600` di r1 e r2, col gradiente pesato, e **per r2 il fit su `[700, 2000]`, dopo la rampa**; (ii) la norma di `psi` fuori da un raggio di `25` nodi dal baricentro, per stato, r1, r2, r3 una accanto all'altra; (iii) `|psi|` massimo fuori dal raggio, per stato. Il referto: `legge_fondo_v3.txt`. Tetto `10`, un filo *(il lanciatore mette gia' `OMP/MKL/OPENBLAS_NUM_THREADS = 1`)*, CPU `< 90%`.
+- **LA RAMPA, dichiarata:** `N` entra nel tick solo in `cs = s N` *(`caduta_segno_v2.tick_var`, `cs_N` vero; la fase (a) ha `segno 0`)*. Al tick `kk = 1..2000` si passa **`N(kk) = 1 + (N - 1) min(kk/500, 1)`**, con `N` il campo di `campo_N` a gradiente `x1`. **La formula si usa letterale:** da `kk 500` in poi vale `1 + (N - 1)`, che puo' differire da `N` di un ulp. Prima di `kk 500` anche il gradiente cresce, quindi **il fit di r2 si fa dopo la rampa**: `[700, 2000]`, e le finestre di `600` dentro, `[800, 1400]` e `[1400, 2000]`, confrontabili con quelle di r1.
+- **LE MIE SCELTE, dichiarate prima:**
+  1. **gli stati:** `k 0` e ogni `250` fino a `2000` *(`9` per corsa)*, in `M1330/b3v3/<r1_gradino|r2_rampa|r3_V0>/`, con lo sha1;
+  2. **il ciclo** e' `fondo_1c.ciclo` riga per riga, con `N` che puo' cambiare a ogni tick. La V0 ha `N = 1` e `cs_N` falso, come `fondo_1c.COLL["V0"]`;
+  3. **(i)** la V0 da sottrarre e' r3. La quinta colonna e' `<dN/dy>` pesato **col gradiente pieno**, anche per r2: dopo la rampa e' il gradiente vero;
+  4. **(ii) il raggio:** la distanza di ogni nodo dal baricentro *(di quello stato)* nel piano, coi `dxy` di `FS.carica` *(gli scarti a immagine minima dal centro di partenza)*. «25 nodi» = `25` passi di reticolo. **La norma lontana** = `somma rho` fuori dal raggio / `somma rho`;
+  5. **(iii)** `|psi|` per nodo = `sqrt(rho)`; il massimo fuori dal raggio.
+- **IL CASO NOTO** *(`legge_fondo_v3.py noto`, `100` tick, prima delle corse)*: (a) il gradino = B3 `x1` **AL BIT**, cinque colonne; (b) **DEVE FALLIRE:** la rampa = B3 `x1`; (c) la V0 = B3 V0 **AL BIT**; (d) `N_di` ai bordi della rampa. **E A FINE CORSA** *(nella lettura)*: `stato_000250.npz` esiste *(Luca)*; **r1 = B3 `x1` AL BIT su tutta la serie** e r3 = B3 V0 *(salvare gli stati non tocca la dinamica)*.
+- **LE PREVISIONI:**
+  - **del guardiano:** la norma lontana cresce nel tempo in r1 e non in r3 *(`55%`)*; con la rampa K su `[1400, 2000]` resta sopra `0.90` *(`45%`)*; se la norma lontana NON cresce, il freno non e' il toro e resta aperto *(`35%`)*;
+  - **mie:** con la rampa K su `[1400, 2000]` sopra `0.90`: `30%`. La norma lontana cresce in r1 piu' che in r3: `50%`.
