@@ -459,3 +459,11 @@
   - P5 *(`60%`)* in d1' il vento radiale `[16, 32)` verso l'oggetto cresce ancora;
   - P6 *(`40%`)* il respiro di `w` in d1' sotto il `15%`.
 - **LE MIE:** P2 `30%` *(il modo uniforme di chi ha un periodo di qualche migliaio di tick, e un giro di `6000` ne vede due)*; P4 `65%`.
+
+- **Il pezzo 4, le scelte dichiarate prima** *(`due_corpi_fondo_v4.py`, scritto mentre gira il giro 1)*:
+  - **lo stato di partenza** e' la nuova partenza del giro che passa C *(`psi` mediato, i campi, `chi`, `pi` da `k 6000`)*;
+  - **`pi` per SOMMA come chi** *(`pi_A + pi_B - pi_fondo`)*, perche' Luca nomina chi e `pi` e' il suo momento;
+  - **`theta_a` a zero:** e' un accumulatore che il tick non rilegge;
+  - **i campi** `porto.campi` in tutte e tre *(come [M2330])*, quindi d3' a `k 0` non e' esattamente il punto fisso: ha `A = 0`;
+  - **i parametri** sulla configurazione *(`c0 = kappa m0`, la regola di `gravita_due_corpi.parametri`)*: per la coppia `m0` e' quello della coppia;
+  - **(G)** lo spostamento di ogni nodo per `(+24, +48)`: `|dx| < 1e-9`, `|dy - 48 sqrt3/2| < 1e-9`.
