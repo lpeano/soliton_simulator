@@ -27520,3 +27520,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **LE CORSE DELLA RAMPA** *(`M0137_rampa_d1`, `_d2`, `_d3`)* **erano partite alle `04:20:19`**, prima che leggessi la posta *(il mandato e' delle `04:14`)*. **Ho provato a fermarle** *(i PID `37856`, `27188`, `21812`, miei, dalla riga di comando)*: **il permesso e' stato negato.** Finiscono da sole, verso le `05:25`. **I loro numeri non entrano in nessun referto.** Se Luca vuole fermarle prima, va fatto a mano.
 - **La carta** *(sez. `3-sedecies`, il blocco [M0414])*: B', B'', C, D di Luca; i due errori del guardiano *(n.253, n.254)*; le mie scelte, tra cui gli ultimi due picchi, la finestra `[6000 - P, 6000]`, la partenza dal giro 3 di [M0137] con `pi = 0`, e il residuo di Gauss ricalcolato e stampato.
 - **Lo script:** `fondo_puntofisso_chi_v2.py`. **I giri entrano in coda quando il lanciatore e' fermo**, cioe' dopo le corse della rampa.
+
+
+### 2026-11-25 -- [M0414] I CASI NOTI DEL PUNTO FISSO ACCOPPIATO PASSANO (4 SU 4); IL GIRO 1 IN CODA A LANCIATORE FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_v2_noto.txt`.
+  - **(K1)** `kappa 0` = la tenuta del giro 4 **al bit**;
+  - **(K5)** due picchi a `2500` tick danno **`P 2500`** *(i picchi a `k 1250` e `3750`)*, e con un picco solo **il ripiego dichiarato**;
+  - **(K6)** la media di un chi costante intero **al bit**.
+- **Il giro 1** *(dalla fine del giro 3 di [M0137], `pi = 0`)* **entra in coda quando il lanciatore si ferma**, dopo le corse della rampa *(non fermabili da me)*.
