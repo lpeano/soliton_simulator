@@ -18,3 +18,9 @@ Un solo lanciatore (coda_m1446.py); nessuna gestione nuova senza «DECISIONE DI 
 - Le schede [M1751] (cadute quattro volte): contesto pulito, prova a secco.
 - [M1739-E2] la deriva dell'energia senza nascite: mandato a parte.
 - Il post Itaca «Il Big Bang era un gong» (scritto, non so se pubblicato); il documento «La materia al fondo a K» nel progetto Claude (artefatto Docs, aggiornato al 24/11 sera).
+
+## Aggiornamento 2026-11-25 01:40
+- [M2330] chiuso: d1 si avvicina (63,46 -> 8,47), d2 no; vento radiale verso l'oggetto cresce; ma la coppia era a 63,46 in diagonale (A2) e chi partiva fuori equilibrio (-9,4 -> -150, oscilla), respiro 0,90: numeri non quantitativi.
+- [M0105] eseguito via posta (137baaf9) e portato su lapse-u (33737d2d): la posta funziona.
+- [M0137] in posta (DECISIONE DI LUCA 01:37): punto fisso con chi acceso, poi coppia a (+24,+48) = 41,57 lungo y; criterio C 10%/10%/3 giri.
+- Il coordinatore in Python: progetto a parte, Luca lo vedra' poi.
