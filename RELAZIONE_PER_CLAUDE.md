@@ -27432,3 +27432,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`H-LANCIATORI` con la stessa cura** *(`cancella()` e il DEVE (9) della pulizia)*;
   - i collaudi: **`H-LANCIATORI` 9 su 9, `H-GUARDIANO` 8 su 8**, `h_*` nella cartella temporanea dopo: **0**;
   - **la suite di `lapse-u`: 67 su 67** *(`01:22`-`01:31`, con lo stage intero)*.
+
+
+### 2026-11-25 -- [M0137] (DALLA POSTA, DECISIONE DI LUCA 01:37) IL PEZZO 0 E LA CARTA (SEZ. 3-SEDECIES): IL TRANSITORIO DI CHI E' DEL GRADINO, NON DELL'INCONTRO [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0137] letto dalla posta alle `01:42` *(«Leggi la posta»; `8b6efc0b`)*, categoria DECISIONE DI LUCA (01:37). In esecuzione.
+- **Il pezzo 0** *(`chi_d3.txt`)*: **in d3, un oggetto solo, chi fa lo stesso transitorio di d1** *(`max|chi|` da `10.6` a `170`, coi picchi a `k 1250`-`1500` e `4000`)*, **e `w` crolla da `10.70` a `2.73`.** **P1 del guardiano: SI'.**
+- **La carta, sez. `3-sedecies`:** A, B, C di Luca e le mie scelte. I parametri di chi fissati al giro 1; `w` e `max|chi|` ogni `100`; la finestra col metodo della v3b; le chiavi da `k 6000`; un giro per voce in coda. K2 e' l'equivalente dichiarato *(la forza sul profilo statico, `100` volte sotto quella su `chi = 0`)*.
+- **Un errore mio, senza conseguenze:** il primo tentativo di scrivere la carta con un heredoc si e' rotto sugli apostrofi e non ha scritto niente *(rifatto col Write)*.

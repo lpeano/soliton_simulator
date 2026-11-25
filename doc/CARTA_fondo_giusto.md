@@ -419,3 +419,43 @@
   - `J` radiale di `k 0` = `0` al bit;
   - **il segno:** una fase uscente `q r` ridà `J_r = + rho q` entro il `5%`, e **DEVE FALLIRE** che dia un radiale negativo.
 - **Le previsioni** sono quelle della sez. `3-quattuordecies`, del guardiano e mie.
+
+
+## 3-sedecies. [M0137] DUE CORPI CON CHI IN EQUILIBRIO: IL PUNTO FISSO CON CHI ACCESO, POI LA COPPIA A 41.57 LUNGO y *(DECISIONE DI LUCA, `01:37`, arrivata dalla posta, `guardiano/posta/2026-11-25_0137_M0137.md`, `8b6efc0b`; scritta PRIMA del codice del punto fisso)*
+
+- **`git log --all --fixed-strings --grep "[M0137"`:** solo il commit della posta *(`8b6efc0b`)*: niente e' gia' fatto.
+- **PEZZO 0, A COSTO ZERO** *(`chi_d3.py`, `chi_d3.txt`)*:
+  - **d3** *(un oggetto, chi on)*: `max|chi|` per finestra di `250` va da `69.9` *(`k 250`)* a `168.3`-`169.2` *(`k 1250`-`1500`)*, `52.5` *(`2750`)*, `170.5` *(`4000`)*, `107.9` *(`6000`)*; a `k 0` vale `10.615`;
+  - **d1** *(due, chi on)*: lo stesso andamento, coi picchi a `221.5`-`222.4` *(`1250`-`1500`)* e `232.1` *(`4000`)*;
+  - `w` *(`torneo_tenuta.misura`)* di d3: da `10.70` a `2.73` *(`k 1500`)*, poi fra `3` e `7.7`; `(max - min)/medio` `1.37`;
+  - **IL TRANSITORIO E' DEL GRADINO DI CHI SULL'OGGETTO SOLO, NON DELL'INCONTRO.**
+- **LE SCELTE DI LUCA (01:37):**
+  - **A.** la coppia a `(dm1, dm2) = (+24, +48)`: `41.57` lungo `y`, `0` lungo `x`. **Caso noto:** `|x_B - x_A| < 1e-9`, `|y_B - y_A| = 48 sqrt3/2`;
+  - **B.** chi parte in equilibrio col **punto fisso con chi acceso** *(un oggetto, chi dinamico)*, cioe' lo schema del giro 4 con `tick_chi_v2` dentro la forma `L-1`:
+    - la media di `psi` sul periodo, con la fase riallineata, e la riproiezione su `Q_K`;
+    - **chi NON si media:** si riparte da `(psi, chi, pi)` di fine giro;
+    - **la coppia dallo stato finale:** materia per SOMMA, vuoto per PRODOTTO, **chi per SOMMA** *(`chi_A + chi_B - chi_fondo`, `chi_fondo` = la media di chi a distanza `> 45`)*;
+  - **C.** **«equilibrio»** = `max|chi|` cambia meno del `10%` fra il giro `n` e il giro `n + 1`, **e** il respiro di `w` sul giro `< 10%`. Al massimo `3` giri da `6000` tick. **La riserva, se C non passa:** la rampa lineare di `kappa` in `1500` tick sulla coppia, dichiarata qui prima.
+- **LE MIE SCELTE, dichiarate prima** *(il mandato non le fissa)*:
+  1. **il giro** *(`fondo_puntofisso_chi.py`)*: `6000` tick di `tick_chi_v2` *(kappa acceso)* nella forma `L-1`, col nucleo preso prima della scena e `U` riscritto dopo i parametri *(le due lezioni di `due_corpi_fondo_v2`/`v3`)*; `C.residuo` ogni `OGNI_GAUSS`;
+  2. **i parametri di chi** si calcolano **una volta, al giro 1**, sull'oggetto del giro 4 *(`gravita_due_corpi.parametri`, `c0 = kappa m0`)*, **e restano gli stessi nei giri dopo** *(scritti nel `giro.json`)*;
+  3. **ogni `100` tick, in memoria:** `w` con la formula di `torneo_tenuta.misura` *(dalla `rho` lisciata)*, `max|chi|`, la somma progressiva di `psi e^{i theta}`. **Gli stati ogni `250`** *(Luca)*;
+  4. **il periodo e la finestra della media:** il metodo della v3b *(sez. `3-sexies`: la lisciata di `500` tick = `5` campioni da `100`; `P = 2 (k_min - k_max)`; la finestra accorciata e dichiarata; senza minimi FERMO)*;
+  5. **la nuova partenza:** `psi` mediato, riproiettato su `Q_K` e riportato alla massa della partenza della v1 *(come tutti i punti fissi)*. **Le altre chiavi, i campi, `chi`, `pi` e `Theta` dallo stato a `k 6000`** *(«di fine giro»)*;
+  6. **C, in numeri:** `max|chi|` del giro = il massimo sui `61` campioni ogni `100`; il respiro = `(w_max - w_min)/w_medio` sugli stessi campioni. **C si valuta dopo il giro `2` e dopo il giro `3`:** `|maxchi(n+1)/maxchi(n) - 1| < 0.10` **e** il respiro del giro `n + 1` `< 0.10`. **Ci si ferma al primo giro che passa;**
+  7. **la profondita' del pozzo:** la media di chi sull'anello `[0, 4)` attorno al baricentro;
+  8. **un giro = una voce in coda:** il giro dopo entra a lanciatore fermo, a giro chiuso e letto. Cosi' ogni giro ha il suo referto e il suo commit.
+- **I CASI NOTI** *(`fondo_puntofisso_chi.py noto`)*:
+  - **(K1)** `kappa 0`, `100` tick = la tenuta del giro 4 al bit;
+  - **(K2) «chi_statico riprodotto con `dt 0`», l'equivalente dichiarato:** la forza di chi *(`chi_tick.forza`)* sul profilo statico, contro la forza su `chi = 0`. **DEVE:** il massimo e' almeno `100` volte piu' piccolo. **E' un controllo di equilibrio, non al bit:** il profilo statico e' la soluzione del problema lineare, e la forza contiene `N` non lineare;
+  - **(K3)** la riproiezione su `Q_K` conserva la norma *(riporta alla massa)* entro `1e-12`.
+- **LE MISURE** *(`fondo_puntofisso_chi.txt`, dopo ogni giro)*: `max|chi|` e `w` per finestra di `500`, la profondita' del pozzo, `omega` del corpo, il respiro, il criterio C.
+- **DOPO** *(pezzi 4 e 5)*: `due_corpi_fondo_v4.py` con la coppia da A e dallo stato finale, i casi noti G, K2, T *(le masse entro `1e-9`)*; d1', d2', d3' a `6000` tick; le letture con `due_corpi_lettura_v2` *(i nodi giusti)*, `a` per finestra di `500`. **Il controllo negativo prima del verdetto:** `d(k)` di d2' fermo entro `0.5` nodi.
+- **LE PREVISIONI DEL GUARDIANO** *(dalla posta)*:
+  - P1 *(`75%`)* in d3 chi oscilla come in d1: **SI'** *(il pezzo 0)*;
+  - P2 *(`55%`)* il punto fisso con chi passa C entro 3 giri;
+  - P3 *(`50%`)* la profondita' stazionaria fra `-100` e `-200`;
+  - P4 *(`80%`)* con chi in equilibrio d1' si avvicina e d2' no;
+  - P5 *(`60%`)* in d1' il vento radiale `[16, 32)` verso l'oggetto cresce ancora;
+  - P6 *(`40%`)* il respiro di `w` in d1' sotto il `15%`.
+- **LE MIE:** P2 `30%` *(il modo uniforme di chi ha un periodo di qualche migliaio di tick, e un giro di `6000` ne vede due)*; P4 `65%`.
