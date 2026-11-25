@@ -2670,6 +2670,17 @@
     "1"
    ],
    "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) il punto fisso con chi acceso, giro 1: 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_puntofisso_chi_g2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi.py",
+    "giro",
+    "--g",
+    "2"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) il punto fisso con chi acceso, giro 2: 6000 tick, stati ogni 250"
   }
  ]
 }

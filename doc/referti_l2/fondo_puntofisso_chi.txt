@@ -1,0 +1,20 @@
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+==================================================================================================================================
+[M0137] IL PUNTO FISSO CON CHI (la carta sez. 3-sedecies): per giro, per finestra di 500; il criterio C (max|chi| fra giri < 10% E il respiro < 10%)
+==================================================================================================================================
+  giro 1 (i parametri {'kappa': 0.0002528944153922671, 'c0': -0.0014634097749023729, 's': 0.15, 'e0': 0.4767266286, 'f': 0.06000000000000001, 'c2': 0.25, 'm2': 0.0001}; m0 -5.786643301839873):
+    [   0,  500]: max|chi| 85.720; w medio 9.909 (da 8.627 a 10.696); la profondita' media -58.072; omega medio +0.0897195
+    [ 500, 1000]: max|chi| 100.098; w medio 6.507 (da 4.607 a 8.627); la profondita' media -90.780; omega medio +0.0871601
+    [1000, 1500]: max|chi| 165.955; w medio 3.869 (da 3.403 a 4.607); la profondita' media -138.114; omega medio +0.0828317
+    [1500, 2000]: max|chi| 150.636; w medio 4.102 (da 2.728 a 5.799); la profondita' media -112.179; omega medio +0.0860753
+    [2000, 2500]: max|chi| 104.109; w medio 5.637 (da 5.482 a 5.870); la profondita' media -82.151; omega medio +0.0877794
+    [2500, 3000]: max|chi| 100.228; w medio 6.035 (da 5.870 a 6.168); la profondita' media -59.083; omega medio +0.0901075
+    [3000, 3500]: max|chi| 100.462; w medio 5.593 (da 4.033 a 6.516); la profondita' media -93.940; omega medio +0.0864024
+    [3500, 4000]: max|chi| 165.575; w medio 6.217 (da 3.858 a 7.770); la profondita' media -122.075; omega medio +0.0839039
+    [4000, 4500]: max|chi| 165.575; w medio 3.481 (da 3.106 a 3.858); la profondita' media -122.547; omega medio +0.0845250
+    [4500, 5000]: max|chi| 107.522; w medio 4.287 (da 3.599 a 5.456); la profondita' media -93.202; omega medio +0.0869252
+    [5000, 5500]: max|chi| 84.883; w medio 6.085 (da 5.456 a 6.430); la profondita' media -57.436; omega medio +0.0902143
+    [5500, 6000]: max|chi| 106.294; w medio 6.953 (da 6.145 a 7.294); la profondita' media -88.608; omega medio +0.0863388
+  ### giro 1: max|chi| del giro 165.955; il respiro 1.3807; il periodo: k_max 200, k_min 1500, P 2600, la finestra [0, 1500] (ACCORCIATA da [-1100, 1500]) (### il massimo AL BORDO)
+==================================================================================================================================
