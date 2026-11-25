@@ -2765,6 +2765,17 @@
     "2"
    ],
    "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 2"
+  },
+  {
+   "nome": "M0414_accoppiato_g3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "3"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 3 (l'ultimo)"
   }
  ]
 }
