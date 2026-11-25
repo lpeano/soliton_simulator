@@ -47,3 +47,5 @@ I numeri 1–222 sono nelle sessioni di settembre–novembre; il dettaglio non �
 - Scrivere il verdetto prima del controllo negativo (232, 233).
 - Scrivere un criterio senza guardare la serie su cui si applica (231, 237, 251, 252).
 - Credere al riassunto del contesto invece che al log (244).
+- n.253 (2026-11-25 04:14) — [M0137] criterio B: «chi NON si media, si riparte da (psi medio, chi, pi) di fine giro». Il respiro è un modo accoppiato psi-chi (periodo ~2500): lasciare chi con il suo impulso rimette in moto l'oscillazione a ogni giro. Corretto in [M0414] (chi medio, pi = 0).
+- n.254 (2026-11-25 04:14) — [M0137] criterio B: il periodo da w lisciata 500 con P = 2(k_min - k_max), già errore n.251, riusato: nel giro 2 ha dato P 200 con il massimo al bordo, e la media di psi è stata fatta su 200 tick. Corretto in [M0414] (P dai picchi di max|chi|(k)).
