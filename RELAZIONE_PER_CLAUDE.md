@@ -27419,3 +27419,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0137] IL GIRO 1 PARTITO ALLE 01:54:27 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `01:54:27` *(da `date`)*, dopo `5501af07`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g1`.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 1 DEL PUNTO FISSO CON CHI (CHIUSO 02:35:37, USCITA 0): max|chi| 166, IL RESPIRO 1.38; C SI VALUTA DAL GIRO 2; IL GIRO 2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi.txt`. **I parametri fissati al giro 1:** `kappa 2.5289e-04`, `c0 -1.46341e-03`, `m0 -5.78664`.
+- **Per finestra di `500`** *(dal referto)*:
+  - `max|chi|` sale a `165.955` *(`[1000, 1500]`)*, scende a `100` *(`[2500, 3500]`)*, risale a `165.575` *(`[3500, 4500]`)*, poi `84.9`-`107.5`;
+  - **la profondita'** del pozzo oscilla fra `-57.4` e `-138.1`;
+  - `w` medio da `9.909` a `3.481`;
+  - **`omega` medio fra `+0.0828` e `+0.0902`.**
+- **Il respiro del giro 1: `1.3807`.** **Il periodo** *(il metodo della v3b)*: `k_max 200` al bordo, `k_min 1500`, `P 2600`, la finestra `[0, 1500]`, accorciata.
+- **La coda:** `M0137_puntofisso_chi_g2`, a lanciatore fermo, in questo commit; il rilancio dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 2 PARTITO ALLE 02:37:24 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `02:37:24` *(da `date`)*, dopo `dc73e864`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g2`.
