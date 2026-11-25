@@ -27031,3 +27031,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Lo stato DOPO** *(`dopo_35976`, un nodo in piu': il nato `34596`)* **CADE all'apertura:** `mitosi_rami_v2.riprendi_v2` costruisce `ini["cs"] = X["cs_prec"][n0:]` -- **i `cs` dei nodi NATI** -- e `primo_ordine/crescita_dati.controlla` rifiuta: **`iniziali['cs']` ha `0` righe e ne serve `1`.**
 - ### **L'ERRORE E' MIO, nella v3** *(`4a3628ce`)*: **ho preso `cs_prec` dalla partenza «se manca e la partenza ha lo stesso `k`» per ENTRAMBI gli stati**; per il PRIMA e' giusto, **per il DOPO no: la partenza ha `n0` nodi, il DOPO `n0 + 1`, e il `cs` del nato NON c'e' da nessuna parte** *(lo stato `dopo_` salvato da `ripresa_nascita` non ha `cs_prec`)*. **Quale `cs` dare al nato** *(quello che il motore gli darebbe al tick dopo la nascita? quello del padre? rifare la ripresa salvando `cs_prec` nel DOPO?)* **e' una scelta nuova: la decide Luca.**
 - ### **Quindi le due voci (schede_a, schede_b) NON sono in coda** *(il mandato: «provata A SECCO … PRIMA di mettere in coda»)*. **FERMO su C.** **La previsione del guardiano** «prova a secco al primo colpo» *(`50%`)*: **NO.**
+
+
+### 2026-11-25 -- [M0237] (DALLA POSTA, DECISIONE DI LUCA 02:37) LE TRE PROVE SULLA MITOSI: IL PEZZO 0 E LA CARTA (doc/CARTA_mitosi.md, NUOVA); UN ERRORE MIO: IL COMMIT 20e7f3be HA IL MESSAGGIO DI [M2351] [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0237] letto dalla posta alle `02:44` *(«Leggi post.»; `319cfd2f`)*, categoria DECISIONE DI LUCA (02:37). In esecuzione sul ramo `mitosi`, nel worktree **`C:\Users\lpeano\wt_mitosi`** *(S1: separato, fuori da `E:\soliton_simulator`; esisteva gia', dal merge [M1330-A2])*. Le corse di [M0137] hanno la precedenza.
+- **Il pezzo 0** *(`mitosi_dati.txt`)*:
+  - `538` nascite dal `k 35976` al `45949`;
+  - la fiammata dalla nascita 12, `k 36294`;
+  - la deriva di fondo sul TRONCO, sugli stessi `9656` tick: `|dE|/|E| = 1.891e-05`;
+  - **la corsa con la fiammata e' MITOSI_V2**, non MITOSI *(che si ferma a `36250`)*.
+- **La carta:** `doc/CARTA_mitosi.md`, **nuova** *(una carta col nome del mandato non c'era)*: S1-S3, i pezzi, i casi noti. **La formula del ritmo, scritta prima:** `N(s) = N_1 / s`, con `N_1` le nascite in `[35976, 41976)` a soglia `1`.
+- ### **UN ERRORE MIO: il commit `20e7f3be` *(ramo `mitosi`, pushato) ha il messaggio di [M2351], non il suo.** Il contenuto e' giusto *(solo `doc/referti_l2/mitosi_dati.py`, e la lista FILE CAMBIATI in coda e' giusta)*. **La causa:** il blocco python che doveva scrivere il messaggio nuovo e' caduto *(`NameError`: una variabile non definita)* dopo aver modificato il file, e `committa2.py` ha preso un `msg_m0.txt` **vecchio**, rimasto nello scratchpad da una sessione precedente. **Non riscrivo la storia pushata.** **D'ora in poi:** ogni file di messaggio ha un nome nuovo, e il commit parte solo se il file e' appena stato scritto.

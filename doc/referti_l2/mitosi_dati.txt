@@ -1,0 +1,37 @@
+[TIMBRO] mitosi_dati.py  sha1-BYTE 3b142d63  committato e pulito
+==================================================================================================================================
+[M0237-0] I DATI DELLA CORSA MITOSI (la carta doc/CARTA_mitosi.md, Le tre prove): le nascite, la fiammata, gli stati, la deriva di fondo
+==================================================================================================================================
+  TRONCO    : 131 stati (stato_03250.npz .. stato_35750.npz); prima_nascita: ['prima_nascita_35976.npz']
+  MITOSI    : 2 stati (stato_36000.npz .. stato_36250.npz); prima_nascita: []
+  MITOSI_V2 : 39 stati (stato_36500.npz .. stato_45976.npz); prima_nascita: []
+  le nascite di MITOSI: nascite_36250.json, 9 voci
+  le nascite di MITOSI_V2: nascite_45976.json, 529 voci
+  LE NASCITE (unite): 538; i k: dal 35976 al 45949; le prime 12: 35976 36001 36027 36059 36125 36129 36152 36162 36228 36257 36265 36294
+  il primo intervallo 25 tick; la fiammata (il primo intervallo sotto 2.5): alla nascita 12, k 36294
+    [35500, 36000):   1 nascite
+    [36000, 36500):  26 nascite
+    [36500, 37000):  45 nascite
+    [37000, 37500):  36 nascite
+    [37500, 38000):  33 nascite
+    [38000, 38500):  35 nascite
+    [38500, 39000):  37 nascite
+    [39000, 39500):  28 nascite
+    [39500, 40000):  28 nascite
+    [40000, 40500):  26 nascite
+    [40500, 41000):  25 nascite
+    [41000, 41500):  22 nascite
+    [41500, 42000):  28 nascite
+    [42000, 42500):  22 nascite
+    [42500, 43000):  32 nascite
+    [43000, 43500):  22 nascite
+    [43500, 44000):  17 nascite
+    [44000, 44500):  16 nascite
+    [44500, 45000):  20 nascite
+    [45000, 45500):  22 nascite
+    [45500, 46000):  17 nascite
+  la serie di TRONCO: serie_35750.npz, k da 3050 a 35750 (655 punti); E da +8.2686101692e+06 a +8.2678172286e+06
+  la serie di MITOSI: serie_36250.npz, k da 36000 a 36250 (6 punti); E da +8.2677914271e+06 a +8.2676235283e+06
+  la serie di MITOSI_V2: serie_45976.npz, k da 36300 a 45950 (194 punti); E da +8.2675516453e+06 a +8.2560010830e+06
+### la fiammata dura 9656 tick (da k 36294 a k 45950). LA DERIVA DI FONDO sul TRONCO sugli stessi 9656 tick prima della prima nascita: E(26300) +8.2679735766e+06, E(35750) +8.2678172286e+06: |dE|/|E| = 1.891e-05
+==================================================================================================================================
