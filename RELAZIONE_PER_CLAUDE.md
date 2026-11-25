@@ -27594,3 +27594,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - (1) il fondo come `phi_A` traslato di mezzo toro, cioe' il vuoto stesso dello stato lontano dall'oggetto;
   - (2) per il secondo corpo solo `psi` e chi, col vuoto di A lasciato com'e';
   - (3) partire dall'oggetto del giro 4 di [M1932] *(il cui vuoto si componeva al `10%`)* e accettare chi fuori equilibrio.
+
+
+### 2026-11-25 -- [M0925] (DALLA POSTA, DECISIONE DI LUCA 09:25) LA SOSPENSIONE: IL TODO PER DOMANI SCRITTO; NESSUNA CORSA, NESSUN CODICE NUOVO; LO STATO ALLA SOSPENSIONE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0925] letto dalla posta alle `09:27` *(«Leggi post.»; `25b17e3f`)*, categoria DECISIONE DI LUCA (09:25). **Eseguiti i punti 1-3 di oggi.**
+- **(1) la coda e i processi:** il lanciatore e' uscito dopo il giro 3 di [M0414] *(`07:18:33`)*. **Nessun processo python degli script e' aperto** *(verificato alle `09:28`)*. Il worktree di `lapse-u` e' pulito.
+- **(2) il TODO:** `doc/TODO_domani_2026-11-26.md`, coi pezzi A *(la diagnosi del vuoto del giro 3)*, B *(la coppia con `phi` fresco, `due_corpi_fondo_v6.py`)*, C *(il criterio con d3' di controllo)*, D *(la mitosi, in ATTESA)*; gli stati di partenza con lo sha1; le decisioni prese e aperte. **Ne aggiungo una aperta:** la fase dichiarata di `phi` fresco *(`phi_v` com'e', o `c(t) phi_v`)*.
+- **(3) lo stato alla sospensione:**
+  - **[M0414] giro 3:** `w` circa `4.5`, `omega` `0.0833`, il pozzo `-102.3`, **`Omega_b = 2.513e-03`**; D;
+  - **la coppia non composta:** il vuoto del giro 3 non e' `a phi_v`, residuo `52`;
+  - **la mitosi ferma su K3 e K4.**
+- **FERMO fino al prossimo «leggi la posta».**
