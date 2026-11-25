@@ -27326,3 +27326,57 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La prima suite** *(`00:00`-`00:14`)*: 1 collaudo fallito, «i controlli sullo STAGE», con lo stage a meta' *(`crea-lotto` aveva messo in stage solo l'indice)*. **Rifatta con lo stage intero.** **La seconda** *(`00:15`-`00:28`)*: **67 collaudi su 67.**
 - **Solo sul ramo `primo-ordine`.** Su `lapse-u` il lanciatore e' vivo *(d1, d2, d3 di [M2330])*: la suite la' non la faccio girare finche' le corse non chiudono. **Il porto su `lapse-u` segue a corse chiuse.**
 - **Le corse di [M2330] non si toccano.**
+
+
+### 2026-11-25 -- [M2330] d1, d2, d3 CHIUSE (00:51:52-00:51:58, USCITA 0): 25 STATI E LA SERIE PER CORSA [[PROGETTO-MITOSI]]
+
+- **Le chiusure sono nel registro.** Ogni corsa ha `stato_000000` .. `stato_006000` *(`25`)* e `serie.json` con lo sha1, in `E:/soliton_simulator/controllo/M2330/<d>/`.
+- **Il prossimo passo:** la carta e lo script delle letture (i)-(v) *(`due_corpi_fondo.txt`)*, poi l'animazione, poi il porto di `H-GUARDIANO` su `lapse-u` *(il lanciatore e' fermo: la suite si puo' fare)*.
+
+
+### 2026-11-25 -- [M2330] LE LETTURE: LA CARTA (SEZ. 3-QUINDECIES) E due_corpi_lettura.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **(i)-(v) come nel mandato.** Le scelte dichiarate: `w` come raggio quadratico medio nella meta' del corpo; `J` radiale negativo = verso l'oggetto; la profondita' di chi = la media su `[0, 4)`.
+- **Il caso noto del segno:** una fase uscente da' `J_r` positivo.
+
+### 2026-11-25 -- [M2330] LE LETTURE (v1) E DUE ERRORI MIEI: LA COPPIA E' A 63.46 IN DIAGONALE, NON A 41.57 LUNGO y; IL d/dy DI [M2245] E DI QUESTA LETTURA NON E' LUNGO y [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo.txt` *(v1, cosi' com'e')*: **9 DEVE su 9.**
+- **ERRORE MIO 1, la geometria della coppia:** `toro.vettori()` da' `A1 = (1, 0)`, **`A2 = (-1/2, sqrt3/2)`**, quindi **`x = m1 - m2/2`**, non `m1 + m2/2` come avevo scritto nella carta *(sez. `3-quattuordecies`)*. **La traslazione `(-24, +48)` e' `(-48, +41.57)`: la coppia di d1 e d2 sta a `d(0) = 63.46` in diagonale, non a `41.57` lungo `y`.** Per stare lungo `y` serviva `(+24, +48)`. **d1 e d2 non sono le corse del mandato.** d3 *(un oggetto solo)* non dipende da questo.
+- **ERRORE MIO 2, il `d/dy`:** i nodi `(m1 -+ 1, m2 +- 2)` stanno a `(-+2, +-sqrt3)`, **non a `+-sqrt3` lungo `y`**. La mia `d theta/dy` era `d_y theta - (2/sqrt3) d_x theta`. **Riguarda `vento_vuoto` (A1, A2), `anima_vento` (le frecce) e (ii) di questa lettura.** **Il caso noto non poteva vederlo:** la fase `q y` non dipende da `x`. Neanche il caso noto del segno radiale: con `q r` il termine misto si annulla sull'anello. **Il caso noto che lo vede:** una fase `q x` deve dare `J_y = 0`. **Nelle due correzioni (`vento_vuoto_v3`, `due_corpi_lettura_v2`) i nodi giusti sono `(m1 + 1, m2 + 2)` e `(m1 - 1, m2 - 2)`.**
+- **I numeri della v1, con queste riserve** *(dal referto)*:
+  - **(i)** in d1 `d` va da `63.460` a `8.466` in `6000` tick *(`-54.99`)*; in d2 da `63.460` a `63.635` *(`+0.17`)*. **`a(d1) - a(d2)` su `[0, 6000]`: `-4.21e-06 +- 3.3e-08` (`128` sigma)**, per finestra da `-3.46e-06` a `-1.17e-05`, con due finestre di segno opposto *(`[2000, 3000]` `+3.0e-07`, `1.5` sigma; `[5000, 6000]` `+2.53e-05`, quando i corpi sono a meno di `25`)*;
+  - **(v)** il respiro: **d1 `0.901` e `0.904`, d3 `0.886`, d2 `0.103` e `0.105`. Con chi acceso l'oggetto respira al `90%`, anche da solo.**
+- **(ii)** e il J radiale non si leggono finche' non c'e' la correzione.
+
+### 2026-11-25 -- [M2330] LE LETTURE v2 (I NODI GIUSTI, 11 DEVE SU 11) E [M2245-A] v3: IL VENTO CON N DIPINTO REGGE (22.6 SIGMA); CON CHI VERO d1 SI AVVICINA, IL VENTO RADIALE ENTRA E CRESCE, MA CHI NON PARTE ALL'EQUILIBRIO (DA -9.4 A -149 IN 1000 TICK) E L'OGGETTO RESPIRA AL 90% [[PROGETTO-MITOSI]]
+
+- **[M2245-A] rifatta coi nodi giusti** *(`vento_vuoto_v3.txt`; 6 DEVE su 6, compreso `q x -> 0` che la v1 avrebbe fallito)*: `J - J(V0)` a gradino `+3.551e-05 +- 1.6e-06` per tick *(`22.6` sigma, `R^2 0.988`)*, rampa `22.3` sigma, V0 `1.0` sigma. **`v_phi` a `k 2000`: `1.2207e-02` contro il riferimento `1.2003e-02`.** **La lettura di A regge.**
+- **[M2330] le letture v2** *(`due_corpi_fondo_v2.txt`; 11 DEVE su 11)*. **Con la riserva della geometria:** la coppia e' a `63.46` in diagonale, non a `41.57` lungo `y`.
+  - **(i)** d1 `d` da `63.460` a `8.466`; d2 da `63.460` a `63.635`. `a(d1) - a(d2)` su `[0, 6000]`: `-4.21e-06 +- 3.3e-08`. **L'accelerazione NON cala:** per finestra va da `-3.46e-06` *(`[0, 1000]`)* a `-1.17e-05` *(`[4000, 5000]`)*;
+  - **(ii) il vento radiale sull'anello `[16, 32)`:**
+    - d3: `-0.41` a `k 1000`, `-0.67` a `2000`, `-1.29` a `4000`, `-2.00` a `6000`;
+    - d1 corpo 1: `-0.23`, `-0.51`, `-0.83`, `-2.01`;
+    - **d2, chi spento: fra `+0.01` e `+0.13`.**
+    - Sull'anello `[8, 16)` il segno cambia;
+  - **(iii) `rho_phi` su `[8, 16)`:** con chi acceso cala fino a `-27%` *(d3 a `k 6000`)*; con chi spento fra `-0.3%` e `-1.7%`;
+  - **(iv) chi NON parte all'equilibrio:**
+    - d3 su `[0, 4)` va da `-10.43` *(`k 0`, il profilo statico)* a `-99.7` a `k 1000`, poi `-163.1` a `4000` e `-89.8` a `6000`;
+    - d1 da `-9.36` a `-149.4` a `k 1000` e `-223.2` a `4000`;
+    - **in d2** *(kappa 0)* chi va verso valori positivi *(`+33.6`, `+19.7`, `+49.2`, `+30.8`)*: **il modo uniforme oscilla attorno a `-c0/m2`, con `c0 < 0`.**
+    - **Con chi `~ -150`, `N = exp(-kappa chi) ~ 1.04`: il `4%`, contro lo `0.35%` del gradiente del fondo.**
+  - **(v) il respiro:** d1 `0.901` e `0.904`, d3 `0.886`, d2 `0.103` e `0.105`.
+- **Le previsioni:**
+  - del guardiano:
+
+    | previsione | esito |
+    |---|---|
+    | (i) VERSO in d1, non in d2 *(`65%`)* | **SI'** |
+    | (i) l'accelerazione cala come K *(`50%`)* | **NO** *(cresce)* |
+    | (ii) J radiale verso l'oggetto cresce in d1 e d3 *(`55%`)* | **SI'** *(su `[16, 32)`)* |
+    | (ii) meno di un decimo del seno *(`60%`)* | **NO** *(circa dieci volte di piu')* |
+    | (iii) meno dell'`1%` *(`60%`)* | **NO** con chi; quasi con chi spento |
+    | (iv) la profondita' di chi entro il `5%` *(`55%`)* | **NO** *(per un fattore da `9` a `24`)* |
+    | (v) il respiro sotto il `10%` *(`70%`)* | **NO** *(`0.89`-`0.90` con chi)* |
+  - mie: VERSO *(`55%`)*: **SI'**; il respiro sotto il `10%` *(`50%`)*: **NO**.
+- **LA LETTURA, post-hoc e dichiarata:** l'avvicinamento di d1 avviene mentre chi e' lontano dall'equilibrio, oscilla con ampiezza `~ 100` e fa respirare l'oggetto al `90%`. **Questi numeri non separano la gravita' dal transitorio di chi.**
