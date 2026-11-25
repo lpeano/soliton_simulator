@@ -27472,3 +27472,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0137] IL GIRO 2 PARTITO ALLE 02:37:24 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `02:37:24` *(da `date`)*, dopo `dc73e864`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g2`.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 2 DEL PUNTO FISSO CON CHI (CHIUSO 03:22:45): C NON PASSA (max|chi| +0.25%, MA IL RESPIRO 0.965); IL GIRO 3 IN CODA; E K3, K4 DI [M0237] [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi.txt`.
+- **Il giro 2:**
+  - `max|chi|` del giro `166.378` *(il giro 1: `165.955`)*;
+  - la profondita' per finestra fra `-67.5` e `-138.0`;
+  - `w` medio fra `3.72` e `6.93`;
+  - `omega` fra `+0.0810` e `+0.0880`;
+  - **il respiro `0.9652`**;
+  - la finestra della media `[100, 300]` *(`P 200`, il massimo al bordo)*.
+- **IL CRITERIO C fra il giro 1 e il 2:** `max|chi|` cambia del `+0.25%` *(sotto il `10%`)*, **ma il respiro `0.9652` e' sopra il `10%`: NON PASSA.**
+- **La coda, scritta a lanciatore fermo** *(chiuso alle `03:22:45`)*:
+  - `M0137_puntofisso_chi_g3` a priorita' `1`;
+  - **`M0237_K3`** *(la soglia `1` da `35976` a `36250` contro MITOSI)* e **`M0237_K4`** *(il vuoto con le nascite spente, `250` tick)* a priorita' `2`, coi percorsi assoluti degli script del worktree `mitosi`. **Sono due processi da circa mezz'ora: stanno nel tetto col giro 3.** Le corse lunghe di [M0237] *(le due soglie, il vuoto)* aspettano i casi noti.
