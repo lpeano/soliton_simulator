@@ -27043,3 +27043,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la corsa con la fiammata e' MITOSI_V2**, non MITOSI *(che si ferma a `36250`)*.
 - **La carta:** `doc/CARTA_mitosi.md`, **nuova** *(una carta col nome del mandato non c'era)*: S1-S3, i pezzi, i casi noti. **La formula del ritmo, scritta prima:** `N(s) = N_1 / s`, con `N_1` le nascite in `[35976, 41976)` a soglia `1`.
 - ### **UN ERRORE MIO: il commit `20e7f3be` *(ramo `mitosi`, pushato) ha il messaggio di [M2351], non il suo.** Il contenuto e' giusto *(solo `doc/referti_l2/mitosi_dati.py`, e la lista FILE CAMBIATI in coda e' giusta)*. **La causa:** il blocco python che doveva scrivere il messaggio nuovo e' caduto *(`NameError`: una variabile non definita)* dopo aver modificato il file, e `committa2.py` ha preso un `msg_m0.txt` **vecchio**, rimasto nello scratchpad da una sessione precedente. **Non riscrivo la storia pushata.** **D'ora in poi:** ogni file di messaggio ha un nome nuovo, e il commit parte solo se il file e' appena stato scritto.
+
+
+### 2026-11-25 -- [M0237-2] L'ENERGIA LUNGO LA FIAMMATA: H CALA (|dH|/|H| 1.397e-03 CONTRO 3 x DERIVA 5.673e-05), E QUELLO CHE PERDE VA NELLE NASCITE (H + E_persa CAMBIA DI 4.4e-05, ENTRO LA DERIVA); K1 E K2 AL BIT [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/mitosi_energia_fiammata.txt`.
+- **(K1)** `energia_corsa` su `stato_36000` = la serie `E` a `k 36000` **al bit** *(`+8.267791427054e+06`; il meta non porta `H`, dichiarato)*. **(K2)** `-somma DH` delle `538` nascite = `E_persa` finale **al bit** *(`+1.145464513856e+04`)*.
+- **I `DH`:** **tutti e `538` negativi**, medio `-21.29` *(da `-57.76` a `-2.50`)*; `DH_nascita` medio `-13.98`, `DH_flip` medio `-7.32`.
+- **IL VERDETTO S3: CALA.** `H(36300) = +8.2675516453e+06`, `H(45950) = +8.2560010830e+06`; `dH = -1.155e+04`, **`|dH|/|H| = 1.397e-03`**, contro `3` volte la deriva *(`5.673e-05`)*.
+- **DOVE VA:** **`H + E_persa`** sullo stesso tratto cambia di `-367.7`, cioe' **`4.447e-05` di `H`, entro `3` volte la deriva di fondo.** **L'energia che `H` perde e' quella che le nascite tolgono** *(`E_persa`)*.
+- **I nodi:** da `34596` a `35134`, uno per nascita.
+- **Le previsioni:** del guardiano, P1 H CALA *(`60%`)*: **SI'**; P4 K2 fallisce *(`50%`)*: **NO**, torna al bit. Mie: P1 *(`75%`)*: **SI'**; P4 *(`40%`)*: **NO**.

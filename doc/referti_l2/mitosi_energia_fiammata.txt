@@ -1,0 +1,59 @@
+[TIMBRO] mitosi_dati.py  sha1-BYTE 3b142d63  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] mitosi_energia_fiammata.py  sha1-BYTE b2fb0227  committato e pulito
+==================================================================================================================================
+[M0237-2] L'ENERGIA LUNGO LA FIAMMATA (la carta doc/CARTA_mitosi.md, Le tre prove): H(k), E_persa(k), n(k), DH per nascita; il verdetto S3
+==================================================================================================================================
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE None; TMP C:\Users\lpeano\AppData\Local\Temp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+  DEVE: (K1) H di stato_36000 da energia_corsa = la serie E a k 36000 AL BIT (il meta non porta H)           PASSA +8.267791427054e+06 contro +8.267791427054e+06 (diff 0.000e+00)
+  DEVE: (K2) -somma DH delle 538 nascite = E_persa finale entro 1e-9 relativo                                PASSA -somma DH +1.145464513856e+04, E_persa +1.145464513856e+04, |d|/|E_persa| 0.000e+00
+  DH per nascita: medio -21.2912, da -57.7619 a -2.4960; negativi 538 su 538; DH_nascita medio -13.9759, DH_flip medio -7.3152
+  i nodi: n(36000) 34597 con 1 nascite: n0 34596; n(fine) 35134
+----------------------------------------------------------------------------------------------------------------------------------
+  H(k), E_persa(k), H + E_persa, le nascite e i nodi, ogni 500 tick (dalle serie)
+----------------------------------------------------------------------------------------------------------------------------------
+    k 26000: H +8.2680020207e+06  E_persa +0.000000e+00  H + E_persa +8.2680020207e+06  nascite   0  n 34596
+    k 28000: H +8.2678934940e+06  E_persa +0.000000e+00  H + E_persa +8.2678934940e+06  nascite   0  n 34596
+    k 30000: H +8.2679490003e+06  E_persa +0.000000e+00  H + E_persa +8.2679490003e+06  nascite   0  n 34596
+    k 32000: H +8.2678421291e+06  E_persa +0.000000e+00  H + E_persa +8.2678421291e+06  nascite   0  n 34596
+    k 34000: H +8.2679069805e+06  E_persa +0.000000e+00  H + E_persa +8.2679069805e+06  nascite   0  n 34596
+    k 36000: H +8.2677914271e+06  E_persa +2.430687e+01  H + E_persa +8.2678157339e+06  nascite   1  n 34597
+    k 36000: H +8.2677914271e+06  E_persa +2.430687e+01  H + E_persa +8.2678157339e+06  nascite   1  n 34597
+    k 36500: H +8.2672706453e+06  E_persa +5.660407e+02  H + E_persa +8.2678366860e+06  nascite  27  n 34623
+    k 37000: H +8.2663494961e+06  E_persa +1.515456e+03  H + E_persa +8.2678649520e+06  nascite  72  n 34668
+    k 37500: H +8.2655856028e+06  E_persa +2.226483e+03  H + E_persa +8.2678120856e+06  nascite 108  n 34704
+    k 38000: H +8.2648148531e+06  E_persa +2.916183e+03  H + E_persa +8.2677310359e+06  nascite 141  n 34737
+    k 38500: H +8.2639969711e+06  E_persa +3.631889e+03  H + E_persa +8.2676288603e+06  nascite 176  n 34772
+    k 39000: H +8.2631872620e+06  E_persa +4.389343e+03  H + E_persa +8.2675766049e+06  nascite 213  n 34809
+    k 39500: H +8.2625149814e+06  E_persa +5.009325e+03  H + E_persa +8.2675243063e+06  nascite 242  n 34838
+    k 40000: H +8.2619244192e+06  E_persa +5.567688e+03  H + E_persa +8.2674921070e+06  nascite 269  n 34865
+    k 40500: H +8.2613552218e+06  E_persa +6.149116e+03  H + E_persa +8.2675043380e+06  nascite 295  n 34891
+    k 41000: H +8.2608559549e+06  E_persa +6.647900e+03  H + E_persa +8.2675038551e+06  nascite 320  n 34916
+    k 41500: H +8.2603855207e+06  E_persa +7.122247e+03  H + E_persa +8.2675077678e+06  nascite 342  n 34938
+    k 42000: H +8.2598217259e+06  E_persa +7.701762e+03  H + E_persa +8.2675234875e+06  nascite 370  n 34966
+    k 42500: H +8.2594059906e+06  E_persa +8.133013e+03  H + E_persa +8.2675390037e+06  nascite 392  n 34988
+    k 43000: H +8.2587513981e+06  E_persa +8.770302e+03  H + E_persa +8.2675216997e+06  nascite 424  n 35020
+    k 43500: H +8.2582226163e+06  E_persa +9.258708e+03  H + E_persa +8.2674813245e+06  nascite 446  n 35042
+    k 44000: H +8.2577875835e+06  E_persa +9.673853e+03  H + E_persa +8.2674614365e+06  nascite 463  n 35059
+    k 44500: H +8.2574226976e+06  E_persa +1.003232e+04  H + E_persa +8.2674550204e+06  nascite 479  n 35075
+    k 45000: H +8.2568945452e+06  E_persa +1.053353e+04  H + E_persa +8.2674280751e+06  nascite 499  n 35095
+    k 45500: H +8.2563978278e+06  E_persa +1.104835e+04  H + E_persa +8.2674461747e+06  nascite 521  n 35117
+    k 45950: H +8.2560010830e+06  E_persa +1.145465e+04  H + E_persa +8.2674557281e+06  nascite 538  n 35134
+----------------------------------------------------------------------------------------------------------------------------------
+### IL VERDETTO S3: H(36300) +8.2675516453e+06, H(45950) +8.2560010830e+06; dH -1.155056e+04; |dH|/|H| 1.397e-03 contro 3 x deriva 5.673e-05: CALA
+### e H + E_persa sullo stesso tratto: -3.676816e+02 (|.|/|H| 4.447e-05)
+### 2 DEVE: 2 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
