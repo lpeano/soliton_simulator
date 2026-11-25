@@ -467,3 +467,11 @@
   - **i campi** `porto.campi` in tutte e tre *(come [M2330])*, quindi d3' a `k 0` non e' esattamente il punto fisso: ha `A = 0`;
   - **i parametri** sulla configurazione *(`c0 = kappa m0`, la regola di `gravita_due_corpi.parametri`)*: per la coppia `m0` e' quello della coppia;
   - **(G)** lo spostamento di ogni nodo per `(+24, +48)`: `|dx| < 1e-9`, `|dy - 48 sqrt3/2| < 1e-9`.
+
+- **IL PEZZO 6, LA RISERVA, le scelte dichiarate prima** *(C non e' passato in tre giri: respiro `1.38`, `0.97`, `0.76`; `due_corpi_fondo_v5.py`, scritta prima dei numeri della riserva)*:
+  - **«la rampa lineare di `kappa` in `1500` tick sulla coppia»:** la leggo come **l'accensione graduale.** La coppia parte dall'**oggetto del giro 4 SENZA chi** *(`chi = pi = 0`)*, e **`kappa` cresce come `min(t/1500, 1)`**;
+  - **anche `c0` cresce con la stessa rampa**, perche' `c0 = kappa m0`: la sorgente media resta nulla a ogni tick;
+  - l'altra lettura possibile *(la coppia dal punto fisso con chi del giro 3, `chi` gia' profondo, e la rampa solo sull'accoppiamento)* **la dico e non la faccio**;
+  - il resto e' la v4: `(+24, +48)`, la materia per somma, il vuoto per prodotto, `porto.campi`, i parametri della configurazione, `theta_a` a zero;
+  - **d2'** *(chi spento)* ha `kappa = 0` sempre; **d3'** e' un oggetto solo con la stessa rampa. Le uscite in `M0137/coppia_rampa/`;
+  - **i casi noti:** G, T, K2 come la v4; **(R)** il fattore della rampa a `k 0`, `750`, `1500`, `6000` = `0`, `0.5`, `1`, `1` esatti.
