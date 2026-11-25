@@ -27565,3 +27565,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il residuo di Gauss alla partenza `9.724e-01`** *(il giro 1: `3.428e-01`)*.
 - **C fra il giro 1 e il 2:** `max|chi|` cambia del `-17.88%`, il respiro `0.6948`: **NON PASSA.**
 - **La coda:** `M0414_accoppiato_g3`, l'ultimo, a lanciatore fermo. Dopo, D se `max|chi|` sta fermo entro il `10%`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 3 PARTITO ALLE 06:41:37 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `06:41:37` *(da `date`)*, dopo `a014ce7a`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g3`.
