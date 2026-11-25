@@ -27541,3 +27541,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0414] IL GIRO 2 PARTITO ALLE 06:03:00 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `06:03:00` *(da `date`)*, dopo `2a7fe32f`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g2`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 2 (CHIUSO 06:39:52): P 2500 TROVATO DAI PICCHI A k 1500 E 4000; max|chi| 118.5 (-17.9%), IL RESPIRO 0.695; C NON PASSA; IL GIRO 3 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il giro 2** *(`fondo_puntofisso_chi_v2.txt`)*:
+  - **B' trova `P = 2500` davvero**, dagli ultimi due picchi a `k 1500` e `4000`;
+  - `max|chi|` per finestra oscilla fra `95.5` e `118.5` *(il giro 1: fra `80.0` e `144.3`)*;
+  - **il respiro `0.6948`** *(il giro 1: `0.5723`)*; la profondita' media `-98.962`; `omega` medio `+0.0854475`;
+  - **il residuo di Gauss alla partenza `9.724e-01`** *(il giro 1: `3.428e-01`)*.
+- **C fra il giro 1 e il 2:** `max|chi|` cambia del `-17.88%`, il respiro `0.6948`: **NON PASSA.**
+- **La coda:** `M0414_accoppiato_g3`, l'ultimo, a lanciatore fermo. Dopo, D se `max|chi|` sta fermo entro il `10%`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 3 PARTITO ALLE 06:41:37 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `06:41:37` *(da `date`)*, dopo `a014ce7a`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g3`.
