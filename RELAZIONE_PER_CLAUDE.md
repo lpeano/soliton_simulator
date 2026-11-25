@@ -27488,3 +27488,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La coda, scritta a lanciatore fermo** *(chiuso alle `03:22:45`)*:
   - `M0137_puntofisso_chi_g3` a priorita' `1`;
   - **`M0237_K3`** *(la soglia `1` da `35976` a `36250` contro MITOSI)* e **`M0237_K4`** *(il vuoto con le nascite spente, `250` tick)* a priorita' `2`, coi percorsi assoluti degli script del worktree `mitosi`. **Sono due processi da circa mezz'ora: stanno nel tetto col giro 3.** Le corse lunghe di [M0237] *(le due soglie, il vuoto)* aspettano i casi noti.
+
+
+### 2026-11-25 -- [M0137] [M0237] IL GIRO 3 E I CASI NOTI K3, K4 LANCIATI (IL LANCIATORE RILANCIATO A MANO ALLE 03:24:44, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `03:24:44` *(da `date`)*, dopo `835b8c4d`. **Gli APERTO nel registro a questo commit:** `m1446-M0137_puntofisso_chi_g3`, `m1446-M0237_K3`, `m1446-M0237_K4`.
