@@ -27467,3 +27467,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`omega` medio fra `+0.0828` e `+0.0902`.**
 - **Il respiro del giro 1: `1.3807`.** **Il periodo** *(il metodo della v3b)*: `k_max 200` al bordo, `k_min 1500`, `P 2600`, la finestra `[0, 1500]`, accorciata.
 - **La coda:** `M0137_puntofisso_chi_g2`, a lanciatore fermo, in questo commit; il rilancio dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 2 PARTITO ALLE 02:37:24 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `02:37:24` *(da `date`)*, dopo `dc73e864`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g2`.
