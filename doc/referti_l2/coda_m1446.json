@@ -2754,6 +2754,17 @@
     "1"
    ],
    "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 1: 6000 tick dalla fine del giro 3 di [M0137], pi = 0"
+  },
+  {
+   "nome": "M0414_accoppiato_g2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "2"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 2"
   }
  ]
 }

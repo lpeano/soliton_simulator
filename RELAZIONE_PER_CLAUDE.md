@@ -27540,3 +27540,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0414] IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO PARTITO ALLE 05:24:55 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `05:24:55` *(da `date`)*, dopo `225f073d`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g1`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO (CHIUSO 06:01:15): P IL RIPIEGO 2500 (NESSUN PICCO STRETTO), IL RESPIRO 0.572, max|chi| 144.3; IL GIRO 2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_v2.txt`.
+- **B'** *(gli ultimi due picchi stretti)*: **nessun picco**, e quindi **`P = 2500` col ripiego dichiarato**; la finestra della media `[3500, 6000]`. `max|chi|` per finestra di `250` oscilla, coi massimi `142.7`-`143.0` *(`[1500, 2000]`)* e `144.3` *(`[4250, 4500]`)*, a circa `2500`-`2750` tick, **ma senza tre finestre di salita e tre di discesa strette.**
+- **Il giro:** **il respiro `0.5723`** *(l'ultimo giro di [M0137]: `0.7584`)*; `max|chi|` `144.277`; la profondita' media `-97.508`; **`omega` medio `+0.0842498`**.
+- **Il residuo di Gauss alla partenza:** **`3.428e-01`**. La partenza e' la fine del giro 3 di [M0137] con `pi = 0`, e `psi` di quello stato e' gia' una media. **Lo stampo e non lo correggo** *(la carta)*.
+- **La coda:** `M0414_accoppiato_g2`, a lanciatore fermo, in questo commit.
