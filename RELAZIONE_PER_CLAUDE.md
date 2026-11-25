@@ -27450,3 +27450,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(K3)** la massa riportata esatta *(`0.0`)*;
   - `m0 -5.786643`, `c0 -1.463410e-03`.
 - **La coda:** `M0137_puntofisso_chi_g1` a priorita' `1`, scritta a lanciatore fermo *(dalle `00:51:58`)*, in questo commit. Il rilancio a mano dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 1 PARTITO ALLE 01:54:27 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `01:54:27` *(da `date`)*, dopo `5501af07`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g1`.
