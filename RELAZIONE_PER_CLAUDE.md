@@ -27529,3 +27529,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(K5)** due picchi a `2500` tick danno **`P 2500`** *(i picchi a `k 1250` e `3750`)*, e con un picco solo **il ripiego dichiarato**;
   - **(K6)** la media di un chi costante intero **al bit**.
 - **Il giro 1** *(dalla fine del giro 3 di [M0137], `pi = 0`)* **entra in coda quando il lanciatore si ferma**, dopo le corse della rampa *(non fermabili da me)*.
+
+
+### 2026-11-25 -- [M0414] LE CORSE DELLA RAMPA CHIUSE (05:23, USCITA 0; FUORI MANDATO, NON SI USANO); IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO IN CODA [[PROGETTO-MITOSI]]
+
+- **Le corse della rampa** *(`M0137_rampa_d1`, `_d2`, `_d3`)* chiuse fra `05:23:10` e `05:23:17`, uscita `0`. **Gli stati restano in `M0137/coppia_rampa/`, ma per [M0414] la rampa non si fa: non si leggono.**
+- **La coda:** `M0414_accoppiato_g1` a priorita' `1`, scritta a lanciatore fermo, in questo commit. Il rilancio a mano dopo.

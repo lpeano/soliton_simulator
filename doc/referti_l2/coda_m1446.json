@@ -2743,6 +2743,17 @@
     "d3"
    ],
    "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: uno, chi in rampa, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0414_accoppiato_g1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "1"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 1: 6000 tick dalla fine del giro 3 di [M0137], pi = 0"
   }
  ]
 }
