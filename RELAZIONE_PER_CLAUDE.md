@@ -27535,3 +27535,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Le corse della rampa** *(`M0137_rampa_d1`, `_d2`, `_d3`)* chiuse fra `05:23:10` e `05:23:17`, uscita `0`. **Gli stati restano in `M0137/coppia_rampa/`, ma per [M0414] la rampa non si fa: non si leggono.**
 - **La coda:** `M0414_accoppiato_g1` a priorita' `1`, scritta a lanciatore fermo, in questo commit. Il rilancio a mano dopo.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO PARTITO ALLE 05:24:55 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `05:24:55` *(da `date`)*, dopo `225f073d`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g1`.
