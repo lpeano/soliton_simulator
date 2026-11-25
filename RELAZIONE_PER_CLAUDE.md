@@ -27512,3 +27512,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0137] LA RISERVA PARTITA: d1', d2', d3' (IL LANCIATORE RILANCIATO A MANO ALLE 04:20:19, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `04:20:19` *(da `date`)*, dopo `0a2dbd6a`. Gli APERTO nel registro a questo commit: `m1446-M0137_rampa_d1`, `m1446-M0137_rampa_d2`, `m1446-M0137_rampa_d3`.
+
+
+### 2026-11-25 -- [M0414] (DALLA POSTA, DECISIONE DI LUCA 04:14) IL PUNTO FISSO ACCOPPIATO: LA CARTA E fondo_puntofisso_chi_v2.py; LA RAMPA NON SI FA, MA LE SUE CORSE ERANO GIA' PARTITE E NON HO POTUTO FERMARLE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0414] letto dalla posta alle `04:25` *(«Leggi la posta.»; `de84c53a`)*, categoria DECISIONE DI LUCA (04:14). **Sostituisce il pezzo 3 di [M0137] e la riserva.**
+- **LE CORSE DELLA RAMPA** *(`M0137_rampa_d1`, `_d2`, `_d3`)* **erano partite alle `04:20:19`**, prima che leggessi la posta *(il mandato e' delle `04:14`)*. **Ho provato a fermarle** *(i PID `37856`, `27188`, `21812`, miei, dalla riga di comando)*: **il permesso e' stato negato.** Finiscono da sole, verso le `05:25`. **I loro numeri non entrano in nessun referto.** Se Luca vuole fermarle prima, va fatto a mano.
+- **La carta** *(sez. `3-sedecies`, il blocco [M0414])*: B', B'', C, D di Luca; i due errori del guardiano *(n.253, n.254)*; le mie scelte, tra cui gli ultimi due picchi, la finestra `[6000 - P, 6000]`, la partenza dal giro 3 di [M0137] con `pi = 0`, e il residuo di Gauss ricalcolato e stampato.
+- **Lo script:** `fondo_puntofisso_chi_v2.py`. **I giri entrano in coda quando il lanciatore e' fermo**, cioe' dopo le corse della rampa.

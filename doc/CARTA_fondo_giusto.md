@@ -475,3 +475,22 @@
   - il resto e' la v4: `(+24, +48)`, la materia per somma, il vuoto per prodotto, `porto.campi`, i parametri della configurazione, `theta_a` a zero;
   - **d2'** *(chi spento)* ha `kappa = 0` sempre; **d3'** e' un oggetto solo con la stessa rampa. Le uscite in `M0137/coppia_rampa/`;
   - **i casi noti:** G, T, K2 come la v4; **(R)** il fattore della rampa a `k 0`, `750`, `1500`, `6000` = `0`, `0.5`, `1`, `1` esatti.
+
+- ### **[M0414] IL PUNTO FISSO ACCOPPIATO (psi, chi): LA CORREZIONE DI B** *(DECISIONE DI LUCA, `04:14`, arrivata dalla posta, `de84c53a`; letta alle `04:25`; scritta PRIMA del codice)*:
+  - **`git log --all --fixed-strings --grep "[M0414"`:** solo il commit della posta.
+  - **SOSTITUISCE il pezzo 3 e la riserva:** **la rampa di `kappa` NON si fa.** **Ma le tre corse della rampa** *(d1', d2', d3' in `M0137/coppia_rampa/`)* **erano gia' partite alle `04:20:19`**, dopo il mandato *(04:14)* e prima che lo leggessi *(04:25)*. **Ho provato a fermarle** *(i miei processi, dalla riga di comando)*: **il permesso e' stato negato.** Finiscono da sole; **i loro numeri non entrano in nessun referto di questo mandato.**
+  - **I due errori del guardiano** *(ERRORI n.253, n.254, dichiarati da lui)*: (a) chi ripartiva col suo impulso `pi` di fine giro, che rimetteva in moto l'oscillazione a ogni giro; (b) il periodo dalla `w` lisciata dava finestre di `200` tick col massimo al bordo. **Il punto fisso non poteva convergere.**
+  - **B'** *(Luca)*: il periodo `P` da `max|chi|(k)`, per finestra di `250`: la distanza fra due picchi consecutivi. Il picco e' un massimo locale con almeno `3` finestre in salita prima e `3` in discesa dopo. **Senza due picchi, `P = 2500` dichiarato.**
+  - **B''** *(Luca)*: a fine giro si riparte da **`psi` medio sull'ultimo periodo `P`** *(la fase riallineata tick per tick, la riproiezione su `Q_K`, come il giro 4)*, **chi medio sullo stesso periodo, `pi = 0`**, e i campi `A`, `E` dallo stato di fine giro, col residuo di Gauss ricalcolato.
+  - **C:** uguale a [M0137]. **D** *(Luca)*: se dopo `3` giri C non passa ma `max|chi|` e' fermo entro il `10%`, il respiro e' un modo normale del sistema: si misura **`Omega_b = 2 pi / P`** e la profondita' media del pozzo, **e i pezzi 4 e 5 partono comunque dallo stato** *(`psi` medio, chi medio, `pi = 0`)* **del giro 3.**
+  - **LE MIE SCELTE, dichiarate prima:**
+    1. **`max|chi|` si misura a ogni tick**; per finestra di `250` si tiene il massimo. **«Salita» e «discesa» sono strette:** `v[i-3] < v[i-2] < v[i-1] < v[i] > v[i+1] > v[i+2] > v[i+3]`;
+    2. **«due picchi consecutivi» = gli ULTIMI due del giro**, perche' la media si fa sull'ultimo periodo. `P` e' la loro distanza in tick *(un multiplo di `250`)*. **La finestra della media e' `[6000 - P, 6000]`;**
+    3. le somme progressive di `psi e^{i theta}` e di chi si tengono ogni `250`;
+    4. **la partenza del giro 1:** lo stato di fine del giro 3 di [M0137] *(`M0137/puntofisso_chi/giro_3/stato_006000.npz`)*, **con `pi = 0`** *(come B'')*;
+    5. **«col residuo di Gauss ricalcolato»:** all'inizio di ogni giro si ricalcola `C.residuo()` col nuovo `psi` e si stampa. **I campi non si correggono:** e' la lettura minima, dichiarata;
+    6. `w` *(la formula di `torneo_tenuta.misura`)* ogni `100` tick, per il respiro; `omega` per tick; la profondita' *(chi medio su `[0, 4)`)* ogni `100`. **I parametri di chi sono quelli del giro 1 di [M0137]** *(`c0 -1.46341e-03`)*;
+    7. **(K6) al bit** si puo' solo con valori di chi esatti nella somma: il caso noto usa **un chi costante a valori interi** *(somme di interi esatte fino a `2^53`)*. Lo dichiaro.
+  - **I CASI NOTI** *(`fondo_puntofisso_chi_v2.py noto`)*: **(K1)** `kappa 0`, `100` tick = la tenuta del giro 4 al bit; **(K5)** una serie sintetica con due picchi a distanza `2500` da' `P 2500`, **e DEVE FALLIRE** una serie con un solo picco *(il ripiego `2500` dichiarato, non i due picchi)*; **(K6)** la media di un chi costante *(intero)* ridà lo stesso chi al bit, e `pi = 0`.
+  - **LE PREVISIONI DEL GUARDIANO** *(dalla posta)*: P1 *(`70%`)* B' trova `P` fra `2300` e `2800` al giro 1; P2 *(`45%`)* C passa entro 3 giri; P3 *(`55%`)* se no, il respiro sotto il `50%` al giro 3; P4 *(`65%`)* `omega` fra `0.080` e `0.090`; P5 *(`60%`)* `max|chi|` del punto fisso fra `110` e `140`.
+  - **LE MIE:** P1 `70%` *(i picchi del giro 2 di [M0137] stanno a `[500, 1000]`, `[3000, 3500]` e `[5500, 6000]`, cioe' a circa `2500` l'uno dall'altro)*; P2 `40%`.
