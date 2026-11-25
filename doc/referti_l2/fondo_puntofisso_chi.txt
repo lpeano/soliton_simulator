@@ -31,5 +31,20 @@
     [5000, 5500]: max|chi| 122.154; w medio 5.339 (da 4.517 a 5.870); la profondita' media -113.846; omega medio +0.0832537
     [5500, 6000]: max|chi| 165.121; w medio 3.792 (da 3.443 a 4.517); la profondita' media -134.704; omega medio +0.0813607
   ### giro 2: max|chi| del giro 166.378; il respiro 0.9652; il periodo: k_max 200, k_min 300, P 200, la finestra [100, 300] (### il massimo AL BORDO)
+  giro 3 (i parametri {'kappa': 0.0002528944153922671, 'c0': -0.0014634097749023729, 's': 0.15, 'e0': 0.4767266286, 'f': 0.06000000000000001, 'c2': 0.25, 'm2': 0.0001}; m0 None):
+    [   0,  500]: max|chi| 144.626; w medio 4.515 (da 4.330 a 4.667); la profondita' media -98.806; omega medio +0.0849419
+    [ 500, 1000]: max|chi| 111.661; w medio 3.838 (da 3.194 a 4.393); la profondita' media -90.561; omega medio +0.0853901
+    [1000, 1500]: max|chi| 117.179; w medio 4.661 (da 4.393 a 5.009); la profondita' media -76.686; omega medio +0.0870569
+    [1500, 2000]: max|chi| 130.571; w medio 5.227 (da 4.869 a 5.847); la profondita' media -115.358; omega medio +0.0823425
+    [2000, 2500]: max|chi| 152.986; w medio 6.059 (da 5.224 a 6.744); la profondita' media -118.609; omega medio +0.0823092
+    [2500, 3000]: max|chi| 152.986; w medio 4.231 (da 3.786 a 5.224); la profondita' media -111.276; omega medio +0.0832433
+    [3000, 3500]: max|chi| 100.745; w medio 3.767 (da 3.675 a 3.964); la profondita' media -87.305; omega medio +0.0857446
+    [3500, 4000]: max|chi| 100.745; w medio 4.878 (da 3.675 a 5.894); la profondita' media -75.133; omega medio +0.0869137
+    [4000, 4500]: max|chi| 133.583; w medio 5.749 (da 5.406 a 5.894); la profondita' media -109.331; omega medio +0.0827230
+    [4500, 5000]: max|chi| 125.626; w medio 5.092 (da 4.812 a 5.406); la profondita' media -114.469; omega medio +0.0826167
+    [5000, 5500]: max|chi| 147.649; w medio 4.404 (da 3.638 a 5.198); la profondita' media -119.387; omega medio +0.0818353
+    [5500, 6000]: max|chi| 94.634; w medio 3.907 (da 3.561 a 4.547); la profondita' media -80.493; omega medio +0.0863806
+  ### giro 3: max|chi| del giro 152.986; il respiro 0.7584; il periodo: k_max 200, k_min 700, P 1000, la finestra [0, 700] (ACCORCIATA da [-300, 700]) (### il massimo AL BORDO)
 ### IL CRITERIO C fra il giro 1 e il giro 2: max|chi| cambia del +0.25%; il respiro del giro 2 0.9652: NON PASSA
+### IL CRITERIO C fra il giro 2 e il giro 3: max|chi| cambia del -8.05%; il respiro del giro 3 0.7584: NON PASSA
 ==================================================================================================================================

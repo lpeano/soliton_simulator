@@ -27493,3 +27493,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0137] [M0237] IL GIRO 3 E I CASI NOTI K3, K4 LANCIATI (IL LANCIATORE RILANCIATO A MANO ALLE 03:24:44, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `03:24:44` *(da `date`)*, dopo `835b8c4d`. **Gli APERTO nel registro a questo commit:** `m1446-M0137_puntofisso_chi_g3`, `m1446-M0237_K3`, `m1446-M0237_K4`.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 3 (CHIUSO 04:10:49): C NON PASSA IN TRE GIRI (max|chi| -8.05%, IL RESPIRO 0.758); SI VA ALLA RISERVA (LA RAMPA DI kappa). [M0237] K3 E K4 FALLITI (IL CORRIDORE SBAGLIATO; LA DIVISIONE PER ZERO NEL VUOTO) [[PROGETTO-MITOSI]]
+
+- **Il giro 3** *(`fondo_puntofisso_chi.txt`)*: `max|chi|` del giro `152.986` *(il giro 2: `166.378`, `-8.05%`)*; **il respiro `0.7584`**; la finestra `[0, 700]`. **C fra il giro 2 e il 3: NON PASSA.** **La serie dei respiri: `1.38`, `0.97`, `0.76`: scende, ma non sotto il `10%` in tre giri.** **Per il mandato si va alla riserva** *(pezzo 6)*: la rampa lineare di `kappa` in `1500` tick sulla coppia, dichiarata nella carta prima.
+- **[M0237] K4 FALLITO** *(chiuso alle `03:26:33`, uscita `1`; il log `E:/soliton_simulator/controllo/M1446/log/M0237_K4.txt`)*: `ZeroDivisionError` in `mattone.Campi.residuo`, che normalizza il residuo di Gauss su `e max(rho)`. **Nel vuoto puro `rho = 0`.**
+- **[M0237] K3 FALLITO** *(chiuso alle `03:46:24`, uscita `1`)*: gli stati `36000` e `36250` non sono quelli di MITOSI. **La prima nascita cade a `k 35977`** *(MITOSI: `35976`)*, i `k` divergono dopo *(`36122` contro `36125`)*, e i `DH` sono diversi *(la prima nascita `-15.82` e `-6.53`, contro `-17.24` e `-7.06` di MITOSI)*. **LA CAUSA, dal log di MITOSI** *(`mitosi_rami/log_MITOSI.txt`)*: MITOSI non e' stata fatta da `mitosi_lunga.corsa`, ma da un altro corridore. Quello applica subito «lo scatto del tronco» a `k 35976` e tiene `gauss_acc` e `|Ec|`. **I pezzi 3 e 4 erano costruiti sul corridore sbagliato: errore mio.** Il caso noto l'ha preso.
