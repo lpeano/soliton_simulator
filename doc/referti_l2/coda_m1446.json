@@ -2710,6 +2710,39 @@
     "noto"
    ],
    "note": "[M0237] (DECISIONE DI LUCA (02:37), dalla posta) K4: il vuoto puro con le nascite spente, 250 tick; ramo mitosi"
+  },
+  {
+   "nome": "M0137_rampa_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: due, chi in rampa, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_rampa_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: due, chi off, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_rampa_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: uno, chi in rampa, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
   }
  ]
 }

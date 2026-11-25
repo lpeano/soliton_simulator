@@ -1,0 +1,25 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v5.py  sha1-BYTE a6b2d771  committato e pulito
+==================================================================================================================================
+[M0137-4] I CASI NOTI DELLA COPPIA (la carta sez. 3-sedecies): lo stato di partenza E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz
+==================================================================================================================================
+  DEVE: (G) lo spostamento di ogni nodo: |dx| < 1e-9 e |dy - 48 sqrt3/2| < 1e-9                              PASSA max |dx| 0.0e+00, max |dy - 41.5692| 0.0e+00
+  DEVE: (T) le masse dei due corpi uguali entro 1e-9 relativo                                                PASSA [995010.893149807, 995010.8931498069]
+  la coppia: a del fondo +0.987699+0.156418i; il residuo del fondo (d > 45) medio 1.071e-01, massimo 3.983e-01; chi_fondo +0.0000, pi_fondo +0.000e+00; max|chi| 0.000; il centro [91.446864286963, 103.7252676636823]; P on kappa 2.5289441539e-04, c0 -2.2000023159e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 -8.699292e+00
+  DEVE: (K2) d2' a k 0 = d1' a k 0 AL BIT (l'impronta: le chiavi, A, E, chi, pi, Theta)                      PASSA 0276108b9b8f 0276108b9b8f
+  DEVE: (R) la rampa: il fattore a k 0, 750, 1500, 6000 = 0, 0.5, 1, 1 esatti                                PASSA [0.0, 0.5, 1.0, 1.0]
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
