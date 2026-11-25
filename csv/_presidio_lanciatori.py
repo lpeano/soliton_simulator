@@ -19,9 +19,11 @@ modifica *(stato `M`)* a `doc/referti_l2/coda_m1446.py` -- **SENZA** che il mess
 
 ASCII puro nel codice.
 """
+import glob
 import os
 import re
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -81,6 +83,18 @@ def controlla(f_msg):
     return cod
 
 
+def cancella(p):
+    """### `shutil.rmtree` che toglie la sola lettura e riprova *([M0105]: su Windows gli oggetti di git sono in sola lettura, e `ignore_errors=True` li SALTAVA in silenzio: tre `h_lanciatori_*` erano rimaste)*."""
+    def via(func, path, _exc):
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+    if os.path.exists(p):
+        try:
+            shutil.rmtree(p, onexc=via)
+        except TypeError:
+            shutil.rmtree(p, onerror=via)
+
+
 def collaudo():
     """### i casi noti con COMMIT VERI in un repo di prova, col hook `commit-msg` che chiama QUESTO file:
     (1) coda_prova.py senza la frase: RIFIUTATO; (2) con la frase: ENTRA; (3) lancia_ e dispatcher_ senza: RIFIUTATO;
@@ -135,8 +149,12 @@ def collaudo():
         caso("coda_m1446.json modificato (le voci) SENZA", [("doc/referti_l2/coda_m1446.json", "z\n")], "niente", True)
         caso("la frase SENZA le parentesi (DECISIONE DI LUCA 13:30)", [("doc/referti_l2/coda_altra.py", "y\n")], "(DECISIONE DI LUCA 13:30)", False)
     finally:
-        shutil.rmtree(d, ignore_errors=True)
-        shutil.rmtree(d + "_ganci", ignore_errors=True)
+        cancella(d)
+        cancella(d + "_ganci")
+    resta = [x for x in (d, d + "_ganci") if os.path.exists(x)]
+    altre = sorted(glob.glob(os.path.join(tempfile.gettempdir(), "h_lanciatori_*")))
+    ok.append(not resta)
+    print("  DEVE: %-80s %s (restano %d cartelle di questo collaudo; h_lanciatori_* nella cartella temporanea: %d)" % ("(9) [M0105] la pulizia: nessuna cartella del collaudo resta", "PASSA" if not resta else "### FALLISCE", len(resta), len(altre)))
     print("### %d casi: %d PASSANO, %d FALLISCONO" % (len(ok), sum(ok), len(ok) - sum(ok)))
     return 0 if all(ok) else 1
 

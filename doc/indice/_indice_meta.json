@@ -261,6 +261,7 @@
    "DOMANDA-REGOLE-FUORI-CLAUDE",
    "DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2",
    "FORMA-SPEZZA-ID",
+   "H-GUARDIANO",
    "H-INDICE-IGNORA-I-VOCABOLARI",
    "H-LANCIATORI",
    "H-STOP-CODA",
@@ -705,6 +706,7 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
@@ -2445,6 +2447,7 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-LANCIATORI",
@@ -3534,6 +3537,7 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
@@ -4763,6 +4767,7 @@
    "FUGA-MULTIRIGA",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
@@ -6032,6 +6037,7 @@
   "par12.md": [
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-LANCIATORI",
@@ -6912,6 +6918,9 @@
   ],
   "un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` || H-ID-OBBLIGATORIO": [
    "H-ID-OBBLIGATORIO"
+  ],
+  "un commit sul ramo `guardiano`, o un push che scrive `refs/heads/guardiano`: nessuna via d-uscita || H-GUARDIANO": [
+   "H-GUARDIANO"
   ],
   "un confronto che prende il codice di prima da HEAD invece che dal PADRE || H-P8": [
    "H-P8"
@@ -8405,6 +8414,7 @@
    "FUGA-MULTIRIGA",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-LANCIATORI",

@@ -8,18 +8,18 @@
 
 | | quanti |
 |---|--:|
-| **`PORTATO`** | `116` |
+| **`PORTATO`** | `117` |
 | **`PRONTO`** | `7` |
 | **`DA_PORTARE`** | `19` |
 | **`DA_DECIDERE`** | `5` |
 | **`NON_SI_APPLICA`** | `7` |
-| **in tutto** | ### **`154`** |
+| **in tutto** | ### **`155`** |
 
-### ⚠ **E IL NUMERO `154` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
+### ⚠ **E IL NUMERO `155` E- MISURATO, non stimato:** viene dal perimetro che l-indice calcola, e ### **il mandato ne nominava <<una decina>>** per nome piu- *<<e le cure di architettura>>*. ### **La decina era `20`.**
 
 ---
 
-## `PORTATO` — `116` metodi
+## `PORTATO` — `117` metodi
 
 > ### ✅ **GIA- NELL-ERA `2`**, e `dove` dice dove
 
@@ -42,6 +42,7 @@
 | **`ETC-PASSO`** | `CURA` | il passo diventa SINCRONO, fotografia a inizio passo: ### SUPERATA, e il mandato stesso l-ha corretta -- la regola giusta e- LA FOTOGRAFIA PER STRATO, non <<lo stato di inizio passo>>, perche- quella contraddiceva i passi unitari arco per arco | `passo.py` + la correzione nella coda |
 | **`H-ETC-2`** | `PRESIDIO` | permutare le leggi deve dare lo STESSO stato: ### PORTATO E MISURATO -- e la misura dice che per il GRADIENTE serve l-ordine canonico, perche- `fsum` non si puo- usare su array complessi | `_collauda_passo.py` sezione (A), livelli 1 e 1-bis |
 | **`H-FILE`** | `PRESIDIO` | la lista `FILE CAMBIATI` si GENERA da `git diff --cached --name-only`, e vale per ogni commit -- compresi quelli dell-era 2 | `.githooks/commit-msg` + `cm.py` |
+| **`H-GUARDIANO`** | `PRESIDIO` | un commit sul ramo `guardiano` o un push che scrive `refs/heads/guardiano`: RIFIUTA in `pre-commit` e in `pre-push`. Vale per ogni lavoro, era 2 compresa: guarda il ramo, non la fisica | `.githooks/pre-commit` + `.githooks/pre-push` |
 | **`H-ID-OBBLIGATORIO`** | `PRESIDIO` | un commit che tocca la fisica dell-era 2 o un referto DEVE citare un ID: e- il rovescio di `H-INDICE` | `.githooks/commit-msg` + `csv/_hook_id_obbligatorio.py` |
 | **`H-INDICE`** | `PRESIDIO` | un ID citato che non e- nell-indice fa rifiutare il commit: vale per gli ID dell-era 2 come per gli altri | `.githooks/commit-msg` |
 | **`H-LANCIATORI`** | `PRESIDIO` | un lanciatore nuovo (`coda_`, `lancia_`, `dispatcher_` in `doc/referti_l2/`) o una modifica a `coda_m1446.py` senza la riga di Luca con l-ora: RIFIUTA IL COMMIT in `commit-msg`. Vale per ogni lavoro, era 2 compresa: guarda il diff e il messaggio, non la fisica | `.githooks/commit-msg` |

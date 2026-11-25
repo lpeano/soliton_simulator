@@ -94,7 +94,9 @@ def collaudo():
           # ### delle `21:47`-`21:49`, i due rami)*. ### **Si aggiorna l-elenco.**
           # ### ⭐ **E UNA SETTIMA, il `2026-11-24`: `H-LANCIATORI`** *(DECISIONE DI LUCA delle
           # ### `13:30`, [M1330-D1])*. ### **Si aggiorna l-elenco.**
-          sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-LANCIATORI", "H-NUCLEO-CONGELATO", "H-STOP-CODA", "P-E10",
+          # ### ⭐ **E UN'OTTAVA, il `2026-11-25`: `H-GUARDIANO`** *(DECISIONE DI LUCA delle
+          # ### `23:53` del 24, [M2345]; il porto da `primo-ordine`, [M0105])*. ### **Si aggiorna l-elenco.**
+          sorted(ora - pri) == ["DECISIONE-VUOLE-UN-CAMPO", "H-GUARDIANO", "H-LANCIATORI", "H-NUCLEO-CONGELATO", "H-STOP-CODA", "P-E10",
                                 "P-R1", "P-REG", "P-TAB", "PRECEDENZA-IN-CODA",
                                 "STRUMENTO-LEGGE-DALLA-TABELLA", "SUITE-NEL-COMMIT"],
           "%s: ### se comparisse una regola che non ho creato, vorrebbe dire che il "

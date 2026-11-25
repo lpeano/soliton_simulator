@@ -275,3 +275,7 @@ portato dentro `energia`, `corrente`, `deriva_serie`, `deriva_variabile`.**
 - **Lo sblocco:** solo il file a uno stato diverso **con** una riga `decisione_di_luca:` non vuota.
 - **I collaudi:** `--collaudo` *(8 casi sulla funzione pura `decidi`, uno DEVE FALLIRE)*; `--prova-git` *(il DEVE e il DEVE FALLIRE di Luca con COMMIT VERI in un clone di prova: rifiutato su `primo-ordine`, passa su `zero-nel-nucleo`)*.
 - **Il limite** *(`A9`)*: **una testa staccata non ha ramo, e il presidio non la vede; e il presidio impedisce di DIMENTICARE, non di scrivere la riga di sblocco senza la decisione.**
+
+## `H-GUARDIANO` *(Luca, [M2345], 2026-11-24 23:53)*
+
+Il ramo `guardiano` e' del guardiano: **un commit su quel ramo** *(`pre-commit`, il ramo corrente)* **e un push che scrive `refs/heads/guardiano`** *(`pre-push`, le righe su stdin)* **sono rifiutati, senza via d'uscita.** `.githooks/pre-push` nasce con questo presidio. Il collaudo: `python csv/_presidio_ramo_guardiano.py --collaudo`, sette casi con commit e push veri in un repo di prova; il ramo `guardiano-x` deve passare *(il nome esatto, non il prefisso)*. Il perche' della regola sta col par. `2`.

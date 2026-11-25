@@ -206,6 +206,10 @@ METODI = {
     "H-RIGHE": ("`CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE "
                 "(mandato 6) genera la sezione delle regole dall-indice",
                 "`.githooks/pre-commit`", "PORTATO"),
+    "H-GUARDIANO": ("un commit sul ramo `guardiano` o un push che scrive `refs/heads/guardiano`: RIFIUTA "
+                    "in `pre-commit` e in `pre-push`. Vale per ogni lavoro, era 2 compresa: guarda il ramo, "
+                    "non la fisica",
+                    "`.githooks/pre-commit` + `.githooks/pre-push`", "PORTATO"),
     "H-STASH": ("`git stash` bloccato da `permissions.deny`: non e- un hook e non ha via "
                 "d-uscita. Vale per ogni lavoro, era 2 compresa",
                 "`.claude/settings`", "PORTATO"),

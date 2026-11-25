@@ -27411,3 +27411,24 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
     | (v) il respiro sotto il `10%` *(`70%`)* | **NO** *(`0.89`-`0.90` con chi)* |
   - mie: VERSO *(`55%`)*: **SI'**; il respiro sotto il `10%` *(`50%`)*: **NO**.
 - **LA LETTURA, post-hoc e dichiarata:** l'avvicinamento di d1 avviene mentre chi e' lontano dall'equilibrio, oscilla con ampiezza `~ 100` e fa respirare l'oggetto al `90%`. **Questi numeri non separano la gravita' dal transitorio di chi.**
+
+### 2026-11-25 -- [M0105] ESEGUITO (DECISIONE DI LUCA 01:03), IL PRIMO MANDATO ARRIVATO DALLA POSTA: LA PULIZIA DEI COLLAUDI CORRETTA (GLI OGGETTI DI git IN SOLA LETTURA); IL CONTROLLO DI STRUTTURA ROTTO DA 3ff828f3 (UN TITOLO RINOMINATO), NON USATO DA HOOK NE' SUITE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0105] **eseguito.** **E' arrivato per la posta:** Luca ha scritto «Leggi post» alle `01:07`; `git fetch origin guardiano` *(`ad1069cb`)*, l'`INDICE.md` e `guardiano/posta/2026-11-25_0105_M0105.md`, categoria **DECISIONE DI LUCA (01:03)**. Nell'indice [M2330] risulta gia' eseguito *(in chat)*: non rifatto.
+- **[M0105-01] la pulizia.**
+  - **Prima:** nella cartella temporanea c'erano `h_guardiano_c2xwi87w` e `h_guardiano_c2xwi87w_remoto.git` *(il mio collaudo delle `23:58`)* e **tre `h_lanciatori_*`**. **Dentro restavano solo i file di `.git/objects`:** git li crea in sola lettura, e su Windows `shutil.rmtree(..., ignore_errors=True)` **li saltava in silenzio**. Le cartelle dei hook *(senza sola lettura)* erano state cancellate.
+  - **La cura:** `cancella()`, che toglie la sola lettura e riprova *(`onexc`, oppure `onerror`)*, e **un DEVE in piu' nel collaudo:** «nessuna cartella del collaudo resta», col conto di `h_guardiano_*` nella cartella temporanea.
+  - **Su `primo-ordine`:** il collaudo **8 su 8**, `h_guardiano_*` dopo: **0**. **I cinque residui vecchi li ho cancellati** con la stessa funzione: erano miei.
+  - **Lo stesso su `H-LANCIATORI`** *(che vive su `lapse-u`)*: nel porto, insieme a `H-GUARDIANO`.
+  - **La suite** *(lo stage col solo presidio)*: **67 su 67.**
+- **[M0105-02] il controllo gia' rotto** *(`csv/_struttura_regole.py`)*:
+  - **che cosa manca:** il punto `1` del par. `8` di `CLAUDE.md`, «**RAGIONAMENTO PRELIMINARE**»;
+  - **chi l'ha rotto:** **`3ff828f3`** *(2026-10-28 18:56, «LA FORMA DEI TASK HISTORY E DEI REFERTI (LUCA, 18:48 ...)»)*. Ha rinominato quel punto in «**LE PREMESSE DAL CODICE** *(decisione di Luca, 2026-10-28)*». **La regola non e' persa, e' rinominata.** Il controllo confronta i testi col blob FISSO `da79cc1` *(l'ultimo prima del riordino)*, quindi da allora la vede sparita. Trovato con `git log -S "RAGIONAMENTO PRELIMINARE" -- CLAUDE.md`;
+  - **chi lo usa:** **nessun hook e nessuna suite lo esegue.** `csv/_controlli_nell_indice.py` *(nel `pre-commit`)* ne legge solo le costanti via AST, nella lista `SORGENTI`. `csv/_referto_regole.py` lo esegue, ma solo per un referto fatto a mano. `csv/_collauda_regole.py` lo nomina in un commento;
+  - **non lo riparo** *(Luca)*: **la decisione e' di Luca.** Le strade: aggiornare il riferimento, oppure registrare l'equivalenza fra il nome vecchio e il nuovo.
+- **Le previsioni del guardiano:** la cartella non veniva cancellata *(`60%`)*: **SI'** *(i soli oggetti di git)*. Il controllo rotto da un commit di documentazione delle ultime due settimane, e non usato da nessun hook *(`70%`)*: **di documentazione e non usato da hook SI', ma di quattro settimane fa** *(2026-10-28)*.
+- **IL PORTO SU `lapse-u`** *(questo commit)*:
+  - `H-GUARDIANO` intero: il presidio, `pre-commit` e `pre-push`, `CLAUDE.md` par. `2` e par. `12` *(generato: `22` righe, con `H-LANCIATORI`)*, la voce `H-GUARDIANO` nell'indice *(nata gia' con `dettaglio_regola: par12.md`)*, i dettagli, il contorno;
+  - **`H-LANCIATORI` con la stessa cura** *(`cancella()` e il DEVE (9) della pulizia)*;
+  - i collaudi: **`H-LANCIATORI` 9 su 9, `H-GUARDIANO` 8 su 8**, `h_*` nella cartella temporanea dopo: **0**;
+  - **la suite di `lapse-u`: 67 su 67** *(`01:22`-`01:31`, con lo stage intero)*.
