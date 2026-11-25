@@ -1,0 +1,9 @@
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] mitosi_vuoto.py  sha1-BYTE bf69a6f6  committato e pulito
+==================================================================================================================================
+[M0237-4] LO STATO DEL VUOTO PURO da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, t 95976.0)
+==================================================================================================================================
+  a del fondo +0.134973027+0.990846206i (|a| 0.999996961); il residuo del fit a d > 45: medio 1.252e-01, massimo 5.125e-01
+  la materia del tronco: somma |psi_h|^2 9.950108931e+05 (si azzera); la norma del vuoto: somma |phi_h|^2 2.031985042e+05 -> 2.075747383e+05
+### scritto E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz (sha1 1b265f08); le chiavi ['Lambda', 'campo_A', 'campo_E', 'cs_prec', 'gauss_acc', 'h_int', 'meta', 'phi_h', 'psi', 'psi_h', 'rho', 'theta_a']
+==================================================================================================================================

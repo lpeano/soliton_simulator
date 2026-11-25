@@ -27054,3 +27054,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **DOVE VA:** **`H + E_persa`** sullo stesso tratto cambia di `-367.7`, cioe' **`4.447e-05` di `H`, entro `3` volte la deriva di fondo.** **L'energia che `H` perde e' quella che le nascite tolgono** *(`E_persa`)*.
 - **I nodi:** da `34596` a `35134`, uno per nascita.
 - **Le previsioni:** del guardiano, P1 H CALA *(`60%`)*: **SI'**; P4 K2 fallisce *(`50%`)*: **NO**, torna al bit. Mie: P1 *(`75%`)*: **SI'**; P4 *(`40%`)*: **NO**.
+
+
+### 2026-11-25 -- [M0237] I PEZZI 3 E 4 PRONTI (mitosi_soglia.py, mitosi_vuoto.py); LO STATO DEL VUOTO PURO SCRITTO: IL FONDO DEL TRONCO NON E' a phi_v (RESIDUO 0.125) [[PROGETTO-MITOSI]]
+
+- **Il pezzo 3** *(`f9939c7f`)*: le corse di soglia a `pi` e `4 pi` da `prima_nascita_35976`, con `QUANTO` su entrambi i nomi del modulo `contatore`. **Il costo:** circa `12` ore per corsa da `6000` tick *(MITOSI_V2: `9726` tick in `73019` s)*.
+- **Il pezzo 4** *(`a775502c`)*: lo stato del vuoto puro *(`mitosi_vuoto_prepara.txt`)*:
+  - `a = +0.134973+0.990846i` *(`|a| = 0.999997`)*;
+  - **il residuo del fit a `d > 45`: medio `1.252e-01`, massimo `5.125e-01`.** Il vuoto del tronco non e' un multiplo di `phi_v`, come gia' per l'oggetto del fondo in [M2330];
+  - la norma del vuoto passa da `2.031985e+05` a `2.075747e+05`;
+  - `psi`, i campi e `theta_a` a zero; il file `M0237/vuoto/vuoto_35976.npz` *(sha1 `1b265f08`)*.
+- **Le corse** *(K3, K4, poi le due soglie e il vuoto)* entrano in coda **a lanciatore fermo, dopo quelle di [M0137]**, quando c'e' posto nel tetto.
