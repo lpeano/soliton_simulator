@@ -27507,3 +27507,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il referto:** `doc/referti_l2/due_corpi_fondo_v5_noto.txt`. **(G)** lo spostamento esatto *(`|dx|` `0.0`, `|dy - 41.5692|` `0.0`)*; **(T)** le masse `995010.893149807` e `995010.8931498069`; **(K2)** d2' = d1' a `k 0` al bit *(`0276108b9b8f`)*; **(R)** la rampa `0`, `0.5`, `1`, `1`.
 - **La coppia:** `c0` della coppia `-2.2000e-03`; il residuo del fondo del vuoto medio `0.107` *(lo stesso oggetto di [M2330])*.
 - **La coda:** `M0137_rampa_d1`, `_d2`, `_d3` a priorita' `1`, scritte a lanciatore fermo *(dalle `04:10:49`)*, in questo commit; il rilancio dopo.
+
+
+### 2026-11-25 -- [M0137] LA RISERVA PARTITA: d1', d2', d3' (IL LANCIATORE RILANCIATO A MANO ALLE 04:20:19, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `04:20:19` *(da `date`)*, dopo `0a2dbd6a`. Gli APERTO nel registro a questo commit: `m1446-M0137_rampa_d1`, `m1446-M0137_rampa_d2`, `m1446-M0137_rampa_d3`.
