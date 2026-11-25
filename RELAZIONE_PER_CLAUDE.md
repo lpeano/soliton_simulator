@@ -27570,3 +27570,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 ### 2026-11-25 -- [M0414] IL GIRO 3 PARTITO ALLE 06:41:37 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
 
 - **Il rilancio:** `coda_m1446.py`, a mano, alle `06:41:37` *(da `date`)*, dopo `a014ce7a`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g3`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 3 (CHIUSO 07:18:33): C NON PASSA, MA max|chi| E' FERMO (-3.80%): D. IL RESPIRO E' UN MODO NORMALE, OMEGA_b = 2.513e-03 PER TICK; LA PROFONDITA' -102.3; LA COPPIA PARTE DAL GIRO 3 [[PROGETTO-MITOSI]]
+
+- **Il giro 3** *(`fondo_puntofisso_chi_v2.txt`)*:
+  - `max|chi|` per finestra oscilla fra `101.7` e `114.0`; **`max|chi|` del giro `113.987`, `-3.80%`** rispetto al giro 2;
+  - **il respiro `0.4118`**; la profondita' media `-102.343`; `omega` medio `+0.0833429`;
+  - il residuo di Gauss alla partenza `5.655e-01`;
+  - **P: il ripiego `2500`**, perche' c'e' un solo picco stretto *(a `k 3000`)*. I massimi della serie stanno a `k 750`, `3000`, `5500`.
+- **IL VERDETTO, D** *(Luca)*: C non passa in tre giri *(i respiri `0.572`, `0.695`, `0.412`)*, **ma `max|chi|` e' fermo entro il `10%`.** **Il respiro e' un modo normale: `Omega_b = 2 pi / 2500 = 2.513e-03` per tick**; la profondita' media del pozzo `-102.343`.
+- **I pezzi 4 e 5 di [M0137] partono dallo stato del giro 3** *(`M0414/puntofisso_accoppiato/giro_3/partenza_giro_4.npz`: `psi` medio, chi medio, `pi = 0`)* con `due_corpi_fondo_v4.py --da`.
+- **Le previsioni del guardiano:**
+  - P1, B' trova `P` fra `2300` e `2800` al giro 1 *(`70%`)*: **no al giro 1** *(il ripiego)*, **si' al giro 2** *(`2500` dai picchi)*;
+  - P2, C passa entro 3 giri *(`45%`)*: **NO**;
+  - P3, il respiro sotto il `50%` al giro 3 *(`55%`)*: **SI'** *(`0.412`)*;
+  - P4, `omega` fra `0.080` e `0.090` *(`65%`)*: **SI'** *(da `0.0833` a `0.0854`)*;
+  - P5, `max|chi|` fra `110` e `140` *(`60%`)*: **SI'** *(`114.0`)*.
+- **Le mie:** P1 *(`70%`)*: come sopra; P2 *(`40%`)*: **NO**.
