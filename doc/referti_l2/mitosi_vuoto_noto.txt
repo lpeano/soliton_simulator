@@ -1,0 +1,43 @@
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] mitosi_vuoto.py  sha1-BYTE bf69a6f6  committato e pulito
+### [M0237-4] il vuoto puro, le nascite SPENTE, da 35976 a 36250; la sorgente E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz; le uscite in E:\soliton_simulator\controllo\M0237\vuoto_noto
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+LA CORSA M0237\vuoto_noto (Luca 2026-11-20 16:37, 17:08): da k 35976 a k 36250, le nascite SPENTE (il ramo C2-EXT); lo stato di partenza E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz
+==================================================================================================================================
+C:\Users\lpeano\wt_mitosi\csv\solitone\mattone_rhoc.py:55: RuntimeWarning: invalid value encountered in scalar divide
+  return float(math.sqrt(np.sum(rho[m] * r2[m]) / np.sum(rho[m])))
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_vuoto.py", line 143, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_vuoto.py", line 139, in main
+    return {"prepara": prepara, "noto": noto, "lettura": lettura}[a.cosa]()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_vuoto.py", line 96, in noto
+    r = corsa(False, 36250, "M0237" + os.sep + "vuoto_noto")
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_vuoto.py", line 92, in corsa
+    return ML.corsa(nome, K0, fino, nascite, None, F_VUOTO)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_lunga.py", line 512, in corsa
+    C.residuo()
+    ~~~~~~~~~^^
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\mattone.py", line 190, in residuo
+    return float(np.max(np.abs(G))) / (self.campo.e * float(rho.max()))
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero

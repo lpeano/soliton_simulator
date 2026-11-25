@@ -1,0 +1,42 @@
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] mitosi_soglia.py  sha1-BYTE f4e85a5e  committato e pulito
+### [M0237-3] la soglia s 1.00: QUANTO = 6.283185307179586 (2 pi = 6.283185307179586), in C:\Users\lpeano\wt_mitosi\csv\solitone\contatore.py e in C:\Users\lpeano\wt_mitosi\csv\solitone\contatore.py; la sorgente E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz; da 35976 a 36250; le uscite in E:\soliton_simulator\controllo\M0237\soglia_noto
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE 1; TMP E:\python\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+LA CORSA M0237\soglia_noto (Luca 2026-11-20 16:37, 17:08): da k 35976 a k 36250, le nascite ACCESE; lo stato di partenza E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz
+==================================================================================================================================
+    [stato PRIMA della prima nascita] k 35977: prima_nascita_35977.npz sha1 5d279e07 (il punto del ramo C2-EXT)
+    [nascita 1] k 35977, l'arco 50995 (scattato; 0 in attesa): i 16998 j 16999 k 16812 l 17185 n 34596 m 16813; DH nascita -1.581755e+01 flip -6.527670e+00 (lo scarto 4.04e-07 |H|); P9 0.0e+00; Gauss 2.8e-15; E_persa +2.234522e+01 (19.7 s)
+    k 36000  la massa 9.950108931445e+05  l'energia +8.2677935260e+06  E_persa +2.234522e+01  nascite 1  n 34597  D1 45.0/67.0  E1 (15, 22, 16.51376568732509)  (183 s)
+    [stato] k 36000 sha1 729cafc3
+    [nascita 2] k 36001, l'arco 40449 (scattato; 0 in attesa): i 13483 j 13669 k 13670 l 13482 n 34597 m 13668; DH nascita -1.478347e+01 flip -5.685803e+00 (lo scarto 2.60e-07 |H|); P9 0.0e+00; Gauss 3.3e-15; E_persa +4.281450e+01 (18.5 s)
+    [nascita 3] k 36027, l'arco 40450 (scattato; 0 in attesa): i 13484 j 13670 k 13671 l 13483 n 34598 m 34597; DH nascita -1.287367e+01 flip -8.731814e+00 (lo scarto 1.00e-06 |H|); P9 0.0e+00; Gauss 3.1e-15; E_persa +6.441999e+01 (14.9 s)
+    [nascita 4] k 36059, l'arco 52108 (scattato; 0 in attesa): i 17371 j 17372 k 17185 l 17558 n 34599 m 17559; DH nascita -1.334332e+01 flip -2.619407e+00 (lo scarto 6.11e-09 |H|); P9 0.0e+00; Gauss 3.0e-15; E_persa +8.038272e+01 (14.8 s)
+    [nascita 5] k 36122, l'arco 51547 (scattato; 0 in attesa): i 17184 j 17185 k 16998 l 17371 n 34600 m 34599; DH nascita -1.248727e+01 flip -5.621409e+00 (lo scarto 3.42e-07 |H|); P9 0.0e+00; Gauss 5.9e-15; E_persa +9.849140e+01 (15.0 s)
+    [nascita 6] k 36124, l'arco 50433 (scattato; 0 in attesa): i 16812 j 16813 k 16626 l 34596 n 34601 m 16999; DH nascita -1.458625e+01 flip -1.148226e+01 (lo scarto 8.49e-07 |H|); P9 0.0e+00; Gauss 3.1e-15; E_persa +1.245599e+02 (15.0 s)
+    [nascita 7] k 36129, l'arco 39888 (scattato; 0 in attesa): i 13296 j 13482 k 13483 l 13295 n 34602 m 34597; DH nascita -1.781832e+01 flip -5.161130e+00 (lo scarto 2.82e-07 |H|); P9 0.0e+00; Gauss 8.0e-15; E_persa +1.475394e+02 (14.8 s)
+    [nascita 8] k 36151, l'arco 49870 (scattato; 0 in attesa): i 16625 j 16626 k 16439 l 16812 n 34603 m 34601; DH nascita -1.750850e+01 flip -7.455894e+00 (lo scarto 5.95e-07 |H|); P9 0.0e+00; Gauss 3.4e-15; E_persa +1.725038e+02 (15.3 s)
+    [nascita 9] k 36160, l'arco 52660 (scattato; 0 in attesa): i 17558 j 17559 k 34599 l 17745 n 34604 m 17372; DH nascita -1.540889e+01 flip -9.230892e+00 (lo scarto 8.29e-07 |H|); P9 0.0e+00; Gauss 3.0e-15; E_persa +1.971435e+02 (14.5 s)
+    k 36250  la massa 9.950108931445e+05  l'energia +8.2676199721e+06  E_persa +1.971435e+02  nascite 9  n 34605  D1 45.0/67.0  E1 (15, 23, 16.508039366185486)  (1292 s)
+    [stato] k 36250 sha1 6854de54
+----------------------------------------------------------------------------------------------------------------------------------
+### 274 tick in 1242 s (4.533 s per tick); 9 nascite; E_persa +1.971435e+02
+==================================================================================================================================
+  DEVE: (K3) a soglia 1 lo stato 36000 = MITOSI AL BIT (ogni chiave tranne meta)  ### FALLISCE  diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'campo_A', 'campo_E', 'theta_a', 'gauss_acc', 'cs_prec']
+  DEVE: (K3) a soglia 1 lo stato 36250 = MITOSI AL BIT (ogni chiave tranne meta)  ### FALLISCE  diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'campo_A', 'campo_E', 'theta_a', 'gauss_acc', 'cs_prec', 'ii', 'jj', 'geo_n', 'campo_vec', 'm1', 'm2']
+### (K3) ### FALLISCE

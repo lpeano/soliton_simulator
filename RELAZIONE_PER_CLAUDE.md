@@ -27065,3 +27065,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - la norma del vuoto passa da `2.031985e+05` a `2.075747e+05`;
   - `psi`, i campi e `theta_a` a zero; il file `M0237/vuoto/vuoto_35976.npz` *(sha1 `1b265f08`)*.
 - **Le corse** *(K3, K4, poi le due soglie e il vuoto)* entrano in coda **a lanciatore fermo, dopo quelle di [M0137]**, quando c'e' posto nel tetto.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 3 (CHIUSO 04:10:49): C NON PASSA IN TRE GIRI (max|chi| -8.05%, IL RESPIRO 0.758); SI VA ALLA RISERVA (LA RAMPA DI kappa). [M0237] K3 E K4 FALLITI (IL CORRIDORE SBAGLIATO; LA DIVISIONE PER ZERO NEL VUOTO) [[PROGETTO-MITOSI]]
+
+- **Il giro 3** *(`fondo_puntofisso_chi.txt`)*: `max|chi|` del giro `152.986` *(il giro 2: `166.378`, `-8.05%`)*; **il respiro `0.7584`**; la finestra `[0, 700]`. **C fra il giro 2 e il 3: NON PASSA.** **La serie dei respiri: `1.38`, `0.97`, `0.76`: scende, ma non sotto il `10%` in tre giri.** **Per il mandato si va alla riserva** *(pezzo 6)*: la rampa lineare di `kappa` in `1500` tick sulla coppia, dichiarata nella carta prima.
+- **[M0237] K4 FALLITO** *(chiuso alle `03:26:33`, uscita `1`; il log `E:/soliton_simulator/controllo/M1446/log/M0237_K4.txt`)*: `ZeroDivisionError` in `mattone.Campi.residuo`, che normalizza il residuo di Gauss su `e max(rho)`. **Nel vuoto puro `rho = 0`.**
+- **[M0237] K3 FALLITO** *(chiuso alle `03:46:24`, uscita `1`)*: gli stati `36000` e `36250` non sono quelli di MITOSI. **La prima nascita cade a `k 35977`** *(MITOSI: `35976`)*, i `k` divergono dopo *(`36122` contro `36125`)*, e i `DH` sono diversi *(la prima nascita `-15.82` e `-6.53`, contro `-17.24` e `-7.06` di MITOSI)*. **LA CAUSA, dal log di MITOSI** *(`mitosi_rami/log_MITOSI.txt`)*: MITOSI non e' stata fatta da `mitosi_lunga.corsa`, ma da un altro corridore. Quello applica subito «lo scatto del tronco» a `k 35976` e tiene `gauss_acc` e `|Ec|`. **I pezzi 3 e 4 erano costruiti sul corridore sbagliato: errore mio.** Il caso noto l'ha preso.
+- **I referti sul ramo `mitosi`:** `doc/referti_l2/mitosi_soglia_noto.txt` e `mitosi_vuoto_noto.txt`, le copie dei log del lanciatore *(`E:/soliton_simulator/controllo/M1446/log/M0237_K3.txt`, `M0237_K4.txt`)*.
+- **FERMO sui pezzi 3 e 4 di [M0237]:** vanno rifatti sul corridore che ha prodotto MITOSI e MITOSI_V2. **Il vuoto puro vuole anche una decisione:** `mattone.Campi.residuo` divide per `max(rho)`, che nel vuoto e' zero. Le strade: una `psi` piccolissima invece di zero, oppure un residuo normalizzato altrimenti nel solo script del vuoto. **Decide Luca.**
