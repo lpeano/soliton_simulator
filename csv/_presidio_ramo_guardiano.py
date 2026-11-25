@@ -13,8 +13,10 @@
 
 ASCII puro nel codice.
 """
+import glob
 import os
 import shutil
+import stat
 import subprocess
 import sys
 import tempfile
@@ -48,6 +50,18 @@ def decidi_push(righe):
         if len(p) >= 4 and p[2] == REF:
             return 1, "[H-GUARDIANO] RIFIUTATO: il push scrive `%s` (da `%s`). Quel ramo e' del guardiano: CC non pusha mai li' ([M2345]).\n" % (REF, p[0])
     return 0, ""
+
+
+def cancella(p):
+    """### `shutil.rmtree` che toglie la sola lettura e riprova *([M0105]: su Windows gli oggetti di git sono in sola lettura, e `ignore_errors=True` li SALTAVA in silenzio)*."""
+    def via(func, path, _exc):
+        os.chmod(path, stat.S_IWRITE)
+        func(path)
+    if os.path.exists(p):
+        try:
+            shutil.rmtree(p, onexc=via)
+        except TypeError:
+            shutil.rmtree(p, onerror=via)
 
 
 def collaudo():
@@ -113,7 +127,11 @@ def collaudo():
         caso_push("(7) git push origin guardiano-x", "guardiano-x", True)
     finally:
         for x in (d, nudo, ganci):
-            shutil.rmtree(x, ignore_errors=True)
+            cancella(x)
+    resta = [x for x in (d, nudo, ganci) if os.path.exists(x)]
+    altre = sorted(glob.glob(os.path.join(tempfile.gettempdir(), "h_guardiano_*")))
+    ok.append(not resta)
+    print("  DEVE: %-70s %s (restano %d cartelle di questo collaudo; h_guardiano_* nella cartella temporanea: %d)" % ("(8) [M0105] la pulizia: nessuna cartella del collaudo resta", "PASSA" if not resta else "### FALLISCE", len(resta), len(altre)))
     print("### %d casi: %d PASSANO, %d FALLISCONO" % (len(ok), sum(ok), len(ok) - sum(ok)))
     return 0 if all(ok) else 1
 
