@@ -24,3 +24,11 @@ Un solo lanciatore (coda_m1446.py); nessuna gestione nuova senza «DECISIONE DI 
 - [M0105] eseguito via posta (137baaf9) e portato su lapse-u (33737d2d): la posta funziona.
 - [M0137] in posta (DECISIONE DI LUCA 01:37): punto fisso con chi acceso, poi coppia a (+24,+48) = 41,57 lungo y; criterio C 10%/10%/3 giri.
 - Il coordinatore in Python: progetto a parte, Luca lo vedra' poi.
+
+## Aggiornamento 2026-11-25 09:25 (sospensione)
+- [M0414] fatto: l'oggetto con chi esiste (w 4,5, omega 0,0833, pozzo -102 +-4), con un modo normale Omega_b = 2 pi / 2500 (D). Cinque previsioni su cinque dalla parte giusta.
+- La coppia dal giro 3 NON si compone: il vuoto del giro 3 non e' a phi_v (|a| 0,019, residuo 52; chi lontano -24). Via decisa da Luca (09:25): psi e chi dal giro 3, phi FRESCO; d3' controllo; lettura solo sulle finestre con w, omega entro 5% del giro 3.
+- [M0237] mitosi: H cala lungo la fiammata e va nelle nascite (H + E_persa costante); K3, K4 falliti, pezzi 3-4 fermi (D1: provenienza di MITOSI; D2: residuo senza rho).
+- Le corse della rampa [M0137] pezzo 6 (d1', d2', d3' in rampa, chiuse 05:23) esistono ma sono fuori mandato: non lette.
+- Repo: 4860 commit, 1,07 GB su GitHub, RELAZIONE 27.500 righe: un mandato di gestione (binari fuori da git, RELAZIONE per mese) da proporre a coda vuota.
+- Il postino non interrompe: il «leggi la posta» viene eseguito a fine passo (la rampa e' partita 1 minuto dopo il comando).
