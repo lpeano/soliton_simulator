@@ -27396,3 +27396,26 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **chi lo usa:** **nessun hook e nessuna suite lo esegue.** `csv/_controlli_nell_indice.py` *(nel `pre-commit`)* ne legge solo le costanti via AST, nella lista `SORGENTI`. `csv/_referto_regole.py` lo esegue, ma solo per un referto fatto a mano. `csv/_collauda_regole.py` lo nomina in un commento;
   - **non lo riparo** *(Luca)*: **la decisione e' di Luca.** Le strade: aggiornare il riferimento, oppure registrare l'equivalenza fra il nome vecchio e il nuovo.
 - **Le previsioni del guardiano:** la cartella non veniva cancellata *(`60%`)*: **SI'** *(i soli oggetti di git)*. Il controllo rotto da un commit di documentazione delle ultime due settimane, e non usato da nessun hook *(`70%`)*: **di documentazione e non usato da hook SI', ma di quattro settimane fa** *(2026-10-28)*.
+
+
+### 2026-11-25 -- [M0137] (DALLA POSTA, DECISIONE DI LUCA 01:37) IL PEZZO 0 E LA CARTA (SEZ. 3-SEDECIES): IL TRANSITORIO DI CHI E' DEL GRADINO, NON DELL'INCONTRO [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0137] letto dalla posta alle `01:42` *(«Leggi la posta»; `8b6efc0b`)*, categoria DECISIONE DI LUCA (01:37). In esecuzione.
+- **Il pezzo 0** *(`chi_d3.txt`)*: **in d3, un oggetto solo, chi fa lo stesso transitorio di d1** *(`max|chi|` da `10.6` a `170`, coi picchi a `k 1250`-`1500` e `4000`)*, **e `w` crolla da `10.70` a `2.73`.** **P1 del guardiano: SI'.**
+- **La carta, sez. `3-sedecies`:** A, B, C di Luca e le mie scelte. I parametri di chi fissati al giro 1; `w` e `max|chi|` ogni `100`; la finestra col metodo della v3b; le chiavi da `k 6000`; un giro per voce in coda. K2 e' l'equivalente dichiarato *(la forza sul profilo statico, `100` volte sotto quella su `chi = 0`)*.
+- **Un errore mio, senza conseguenze:** il primo tentativo di scrivere la carta con un heredoc si e' rotto sugli apostrofi e non ha scritto niente *(rifatto col Write)*.
+
+
+### 2026-11-25 -- [M0137] IL PEZZO 2: I CASI NOTI DEL PUNTO FISSO CON CHI PASSANO (3 SU 3); IL GIRO 1 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_noto.txt`.
+  - **(K1)** `kappa 0`, `100` tick = la tenuta del giro 4 **al bit**;
+  - **(K2)** `max|forza(chi_statico)|` `1.069e-04` contro `max|forza(0)|` `3.830e-02`: rapporto `2.79e-03`, sotto `1/100`;
+  - **(K3)** la massa riportata esatta *(`0.0`)*;
+  - `m0 -5.786643`, `c0 -1.463410e-03`.
+- **La coda:** `M0137_puntofisso_chi_g1` a priorita' `1`, scritta a lanciatore fermo *(dalle `00:51:58`)*, in questo commit. Il rilancio a mano dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 1 PARTITO ALLE 01:54:27 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `01:54:27` *(da `date`)*, dopo `5501af07`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g1`.
