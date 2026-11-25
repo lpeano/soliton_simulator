@@ -27588,3 +27588,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - P4, `omega` fra `0.080` e `0.090` *(`65%`)*: **SI'** *(da `0.0833` a `0.0854`)*;
   - P5, `max|chi|` fra `110` e `140` *(`60%`)*: **SI'** *(`114.0`)*.
 - **Le mie:** P1 *(`70%`)*: come sopra; P2 *(`40%`)*: **NO**.
+
+
+### 2026-11-25 -- [M0137-4] LA COPPIA DAL GIRO 3 DEL PUNTO FISSO ACCOPPIATO: I CASI NOTI PASSANO (3 SU 3), MA IL VUOTO NON SI COMPONE PIU' (a 0.019, RESIDUO 52); c0 -1.56. FERMO, NIENTE IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v4_noto.txt` *(`due_corpi_fondo_v4.py noto --da M0414/puntofisso_accoppiato/giro_3/partenza_giro_4.npz`)*. **(G)** lo spostamento esatto; **(T)** le masse uguali; **(K2)** d2' = d1' a `k 0` al bit.
+- ### **MA LA COMPOSIZIONE DEL VUOTO E' ROTTA:**
+  - **il fit del fondo a `d > 45` da' `a = -0.006500+0.018193i`** *(`|a|` circa `0.019`)*, **col residuo medio `52.17` e massimo `83.04`** *(per l'oggetto del giro 4 era `0.107`)*;
+  - **il vuoto di questo stato, dopo i nove giri con chi** *(3 di [M0137], 3 di [M0414], e prima quelli della v3b)*, **non ha piu' la fase di `phi_v`**;
+  - **il vuoto per PRODOTTO, `phi_A phi_B / (a phi_v)`, divide per un fondo quasi nullo e gonfia `phi` di circa `50` volte;**
+  - **di conseguenza `c0` della coppia e' `-1.5627`** *(le coppie di prima: `-2.2e-03`)*. `chi_fondo -23.95`.
+- **FERMO:** d1', d2', d3' **non vanno in coda**. **Decide Luca** come comporre il vuoto per questo stato. Le strade:
+  - (1) il fondo come `phi_A` traslato di mezzo toro, cioe' il vuoto stesso dello stato lontano dall'oggetto;
+  - (2) per il secondo corpo solo `psi` e chi, col vuoto di A lasciato com'e';
+  - (3) partire dall'oggetto del giro 4 di [M1932] *(il cui vuoto si componeva al `10%`)* e accettare chi fuori equilibrio.
