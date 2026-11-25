@@ -27549,3 +27549,8 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il giro:** **il respiro `0.5723`** *(l'ultimo giro di [M0137]: `0.7584`)*; `max|chi|` `144.277`; la profondita' media `-97.508`; **`omega` medio `+0.0842498`**.
 - **Il residuo di Gauss alla partenza:** **`3.428e-01`**. La partenza e' la fine del giro 3 di [M0137] con `pi = 0`, e `psi` di quello stato e' gia' una media. **Lo stampo e non lo correggo** *(la carta)*.
 - **La coda:** `M0414_accoppiato_g2`, a lanciatore fermo, in questo commit.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 2 PARTITO ALLE 06:03:00 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `06:03:00` *(da `date`)*, dopo `2a7fe32f`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g2`.
