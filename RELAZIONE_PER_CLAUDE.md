@@ -27716,3 +27716,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **B:** le chiusure di `M2034_d1`, `_d2`, `_d3` nel registro *(in questo commit)*. La lettura col criterio C viene subito dopo.
 - **[M2053]:** le sei corse *(`x` `n` `2, 4, 8, 16`; `y` `n 2`; `x` `n 2` `eps 5e-4`)* in coda a priorita' `1`, a lanciatore fermo, in questo commit. Il rilancio dopo.
 - **Le corse lunghe della mitosi** aspettano K3, K3b e K4, che girano ancora.
+
+
+### 2026-11-26 22:22 -- [M0237] LE DUE CORSE DELLA SOGLIA IN CODA; IL VUOTO NO (K4 FALLITO) [[PROGETTO-MITOSI]]
+
+- **Sul ramo mitosi** *(`e398b4fb`)*: K3 e K3b PASSANO *(lo stato `36500` al bit)*; **K4 FALLISCE**. La norma e' ferma a `8.99e-14`, ma la variazione relativa di `H` e' `9.83e-01` su un `H` che e' zero *(`1e-10`)*. **Il criterio era contro la sua premessa: e' un mio errore.** La correzione aspetta Luca.
+- **In coda, a lanciatore fermo** *(fermo dalle `22:15:44`, letto da `coda_stato.json`)*: `M0237_soglia_v2_0.5` e `M0237_soglia_v2_2`, a priorita' `2`, cioe' dopo le sei delle due luci. **La corsa lunga del vuoto NON va in coda.**

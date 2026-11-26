@@ -2899,6 +2899,28 @@
     "5e-4"
    ],
    "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 2 eps 5e-4, 1000 tick"
+  },
+  {
+   "nome": "M0237_soglia_v2_0.5",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_soglia_v2.py",
+    "corsa",
+    "--s",
+    "0.5"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA, dalla posta) la mitosi, pezzo 3: soglia 0.5, dopo B; K3 e K3b verdi (e398b4fb, ramo mitosi)"
+  },
+  {
+   "nome": "M0237_soglia_v2_2",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_soglia_v2.py",
+    "corsa",
+    "--s",
+    "2"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA, dalla posta) la mitosi, pezzo 3: soglia 2, dopo B; K3 e K3b verdi (e398b4fb, ramo mitosi)"
   }
  ]
 }
