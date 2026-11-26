@@ -9,3 +9,4 @@
 | 2026-11-25_0414_M0414.md | DECISIONE DI LUCA (04:14) | eseguito: 3 giri, D (modo normale, Omega_b 2,513e-03), w 4,5, omega 0,0833, pozzo -102; la coppia non si compone (vuoto non a phi_v) | lapse-u 3f503999, 329cba3b |
 | 2026-11-25_0925_M0925.md | DECISIONE DI LUCA (09:25) | eseguito: il TODO per domani scritto, sospensione | lapse-u b4df4f0f |
 | 2026-11-26_2034_M2034.md | DECISIONE DI LUCA (2026-11-26 20:34) | da eseguire: la ripresa del piano di [M0925]; fase di phi = c(t) phi_v (V3), D1 e D2 sì | — |
+| 2026-11-26_2048_M2048.md | DECISIONE DI LUCA (2026-11-26 20:48) | da eseguire (lettura a costo zero, non ferma B): chi contro rho_phi e contro l'orologio locale di phi sul giro 3 | — |
