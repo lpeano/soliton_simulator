@@ -27802,3 +27802,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - P4 *(guardiano `65%`, mia `60%`, un gap)*: **NON VALUTABILE**, perche' ne' il cono ne' il gap emergono dal rumore.
 - **COSA SERVIREBBE per misurare davvero:** corse piu' lunghe, oppure il fit della parte reale e immaginaria di `A_q/A_0` invece della fase svolta. **Sono proposte, non eseguite.**
 - **FERMO:** le decisioni aperte sono su B *(il criterio di `w` e d2')*, su K4, sulle due soglie e sul passo successivo delle due luci.
+
+
+### 2026-11-27 00:27 -- [M0024] RICEVUTO (DECISIONE DI LUCA 00:24, letto alle 00:25); IL PEZZO 1, LA CARTA DI C', N, D2', PRIMA DELLO SCRIPT [[PROGETTO-MITOSI]]
+
+- **La posta:** `2026-11-27_0024_M0024.md` *(`e609aafa`)*, cinque pezzi; nessuno era gia' fatto *(`git log --all --grep`)*. **Lo eseguo in ordine.**
+- **Il pezzo 1, la carta** *(sez. `3-vicies`, il seguito)*:
+  - C', N e D2' come li ha scritti Luca;
+  - l'errore n.256;
+  - le mie scelte *(le medie sugli stati salvati, `Delta d` dalla serie, il verdetto per finestra)*;
+  - i casi noti (R) e N1;
+  - le previsioni, le mie prima dei numeri.
+- **DUE FATTI DEL MANDATO DA CORREGGERE, dichiarati subito:**
+  - **(1)** le premesse dicono «a `4 pi` nessuna nascita in `6000` tick». **Non e' quello che e' successo:** la corsa a `4 pi` si e' fermata alla partenza *(k `35976`)*, su «lo stato del tronco NON ha un arco scattato»; **nessun tick e' stato fatto** *(mitosi `21745434`)*. Il pezzo 4 scrive la frase di Luca e accanto la nota;
+  - **(2)** l'INDICE della posta dice [M2048] «da eseguire», ma e' **eseguito**: lapse-u `329527f2`; phi NON porta il lapse, `|Spearman|` `0.20` e `0.24`.

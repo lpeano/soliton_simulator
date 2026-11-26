@@ -601,3 +601,31 @@
 - **LE PREVISIONI:**
   - **di [M0925]:** P3 *(`55%`)* almeno `6` finestre valide su `12`; P4 *(`70%`)* d1' si avvicina e d2' sta fermo; **P5** *(`50%`)* «K fra `0.8` e `1.2`»: **K non e' definito per B nel TODO.** Lo dichiaro **non valutabile**, a meno che Luca non lo definisca;
   - **le mie, prima:** P3 `60%` *(`omega` di d3' parte a `0.08407`, cioe' `+0.9%`)*; P4 `35%` *(nel vuoto fresco il pozzo di chi delle due copie si somma, e la spinta, se c'e', e' piccola rispetto al respiro)*.
+
+
+### 3-vicies, il seguito. [M0024] IL CRITERIO C', I NUMERI SEMPRE, D2' *(DECISIONE DI LUCA, 2026-11-27 `00:24`, arrivata dalla posta, `e609aafa`; letta alle `00:25`; scritto PRIMA di `due_corpi_lettura_v4.py`)*
+
+- **L'ERRORE n.256 DEL GUARDIANO, e il mio:**
+  - il criterio C chiedeva `w` entro il `5%` per finestra di `500`, ma il respiro di `w` e' un modo normale *(D di [M0414], circa `+-20%` con un periodo di `2500` tick)*. **Il giro 3 di riferimento non passa il suo stesso criterio** *(`0` finestre su `12`, `criterio_c_giro3.txt`)*;
+  - io l'ho tradotto nella carta senza vederlo.
+- **LE SCELTE DI LUCA:**
+  - **C'.** Per finestra di `500`, `omega` medio entro il `5%` di `0.0833` e il pozzo medio entro il `10%` di `-102`, come prima. **`w` invece si media sul periodo `P = 2500`**, sulle finestre `[0, 2500]`, `[2500, 5000]` e `[3500, 6000]`, e deve stare entro il `10%` di `4.60` *(la media del giro 3 su `[3500, 6000]`)*. **Le finestre di `500` valide per d1' sono quelle che stanno dentro un periodo valido;**
+  - **N.** I numeri si stampano sempre, con o senza verdetto: `d(k)` per finestra di `500` per d1' e d2', col verso *(VERSO o VIA)*; `a(k)`; `J` radiale; `chi(k)`; `w` e `omega` per tutte e tre le corse. **Il verdetto sta su un'altra riga;**
+  - **D2'.** d2' e' il controllo negativo. **Il verdetto su d1' si da' solo se `|Delta d|` di d1' supera `3` volte quello di d2' nello stesso intervallo, e nello stesso verso.** Altrimenti: «non distinguibile dalla deriva senza chi». La deriva di d2' si dichiara col suo verso.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **le medie di d3'** si fanno sugli stati salvati *(ogni `250`)*: il pozzo medio della finestra di `500` sui suoi `3` stati, `w` del periodo sui suoi `11` stati *(gli estremi compresi)*. **Nel giro 3** *(campioni ogni `100`)* le stesse medie si fanno sui campioni, sempre con gli estremi compresi: e' cosi' che e' nato il `4.6015`;
+  - **`w` dei periodi** si misura con `fondo_puntofisso_chi.w_di`, la formula del giro;
+  - **`Delta d`** di una finestra = `d(k1) - d(k0)` dalla serie *(ogni `10` tick)*; **VERSO** se `< 0`;
+  - **il verdetto D2'** si da' **per finestra valida**, e c'e' **una riga di sintesi** *(quante finestre VERSO, VIA, «non distinguibile»)*;
+  - **i numeri N per tutte e tre** si stampano sui `25` stati con le formule di `due_corpi_lettura_v2` *(d3' con un corpo solo, tutto il toro)*, e `d(k)` su tutte le `12` finestre;
+  - **l'ordine:** (R), poi le finestre valide di d3', poi i numeri N, poi i verdetti.
+- **I CASI NOTI:**
+  - **(R)** il giro 3 di riferimento passa C': `w` su `[3500, 6000]` = `4.6015` per costruzione, e `omega` e il pozzo `12` su `12`. Lo stampo anche per `[0, 2500]` e `[2500, 5000]`;
+  - **(N1)** come nella v3: `w_di` e `profondita` al bit sul giro 3 a `k 500`.
+- **IL REFERTO:** `doc/referti_l2/due_corpi_fondo_v6_C.txt`.
+- **LE PREVISIONI:**
+  - **del guardiano:** P1 *(`70%`)* con C' almeno un periodo di d3' e' valido; P2 *(`60%`)* d2' deriva VERSO; P3 *(`55%`)* d1' si avvicina piu' di `3` volte d2': verdetto VERSO;
+  - **le mie, prima:**
+    - P1 al `75%`: d3' ha `w` da `3.40` a `6.10` con medie vicine a `4.6`;
+    - **P2 al `50%`**: dalla v3 `d2'` *(`d(0) 41.569`)* ha `max |d - d(0)|` `1.50` a `k 6000`, ma il verso non l'ho guardato;
+    - P3 al `30%`.
