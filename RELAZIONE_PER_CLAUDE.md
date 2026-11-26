@@ -27614,3 +27614,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la coppia non composta:** il vuoto del giro 3 non e' `a phi_v`, residuo `52`;
   - **la mitosi ferma su K3 e K4.**
 - **FERMO fino al prossimo «leggi la posta».**
+
+
+### 2026-11-26 -- [M2034] (DALLA POSTA, DECISIONE DI LUCA 20:34) LA RIPRESA: LA CARTA (SEZ. 3-SEPTENDECIES) E IL PEZZO A (vuoto_giro3.py), PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2034] letto dalla posta alle `20:35` *(«Leggi post.»; `3ec35629`)*, categoria DECISIONE DI LUCA (20:34): il piano di [M0925]; F *(`phi = c(t) phi_v`)*, D1, D2. In esecuzione.
+- **La carta, sez. `3-septendecies`:**
+  - **il tick `t` dello stato del giro 3 si ricostruisce dalla catena**: la tenuta ha `t0 60000`, `k 3000`, quindi `t 63000`; poi i `k_b` delle finestre della v2 e della v3b, e i `6000` di [M0137] e [M0414];
+  - **(V0):** su `PARTENZA_G4` la fase di `c(t)` deve coincidere con quella del fit di [M2330] *(`arg a = 0.1571`)* entro `0.05` rad, altrimenti FERMO;
+  - **A:** il rapporto `rho_phi` per anello, `J_phi` radiale e tangenziale col riferimento `phi_v`, `chi(d)`. **(V1)** sul vuoto fresco.

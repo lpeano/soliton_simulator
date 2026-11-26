@@ -494,3 +494,29 @@
   - **I CASI NOTI** *(`fondo_puntofisso_chi_v2.py noto`)*: **(K1)** `kappa 0`, `100` tick = la tenuta del giro 4 al bit; **(K5)** una serie sintetica con due picchi a distanza `2500` da' `P 2500`, **e DEVE FALLIRE** una serie con un solo picco *(il ripiego `2500` dichiarato, non i due picchi)*; **(K6)** la media di un chi costante *(intero)* ridà lo stesso chi al bit, e `pi = 0`.
   - **LE PREVISIONI DEL GUARDIANO** *(dalla posta)*: P1 *(`70%`)* B' trova `P` fra `2300` e `2800` al giro 1; P2 *(`45%`)* C passa entro 3 giri; P3 *(`55%`)* se no, il respiro sotto il `50%` al giro 3; P4 *(`65%`)* `omega` fra `0.080` e `0.090`; P5 *(`60%`)* `max|chi|` del punto fisso fra `110` e `140`.
   - **LE MIE:** P1 `70%` *(i picchi del giro 2 di [M0137] stanno a `[500, 1000]`, `[3000, 3500]` e `[5500, 6000]`, cioe' a circa `2500` l'uno dall'altro)*; P2 `40%`.
+
+
+## 3-septendecies. [M2034] LA RIPRESA: IL PIANO DI [M0925] *(DECISIONE DI LUCA, 2026-11-26 `20:34`, arrivata dalla posta, `3ec35629`; letta alle `20:35`; scritta PRIMA del codice)*
+
+- **`git log --all --fixed-strings --grep "[M2034"`:** solo il commit della posta.
+- **Il piano:** `doc/TODO_domani_2026-11-26.md` *(`b4df4f0f`)*, pezzi A, B, C su `lapse-u`; D sul ramo `mitosi`.
+- **LE DECISIONI DI LUCA (20:34):**
+  - **F.** la fase di `phi` fresco: **`phi = c(t) phi_v` al tick dello stato del giro 3**. **(V3)**, prima delle corse lunghe: d3' per `250` tick con `phi_v` a fase `0` e con `c(t) phi_v`; se `omega` medio differisce oltre `1e-6`, la fase conta e si dichiara. Si usa comunque `c(t) phi_v`;
+  - **D1, si':** la provenienza della corsa MITOSI;
+  - **D2, si':** nel vuoto puro il residuo di Gauss senza la normalizzazione a `rho`, dichiarato prima, e K4 rifatto. Le corse della mitosi partono DOPO d1', d2', d3'.
+- **IL TICK `t` DELLO STATO DEL GIRO 3: la catena, dichiarata** *(lo stato non porta `t` nel meta)*. **La tenuta** `M1658/tenuta/L-1_proiezione_K/stato_003000.npz` ha nel meta `t0 = 60000`, `k = 3000`, cioe' **`t = 63000`**. Ogni giro dei punti fissi riparte col vuoto *(`phi`)* dello stato a un `k` noto:
+  - **v2** *(M1540)*: dallo stato a `k_b` della finestra *(`fondo_puntofisso.giro`: le altre chiavi da `k_b`)*;
+  - **v3b** *(M1748)*: lo stesso;
+  - **il giro 4** *(M1932)*: e' la partenza, cioe' lo stato a `k 6000` del giro 3 della v3b;
+  - **[M0137]** e **[M0414]**: dallo stato a `k 6000`.
+  - **`t` si ricostruisce sommando, dai `giro.json` e dai `periodo_v3b.json`.** Lo script stampa la catena.
+  - **IL CASO NOTO (V0), prima di usarlo:** su `PARTENZA_G4` la fase di `c(t)` ricostruita deve coincidere con la fase del fit complesso di [M2330] *(`a = +0.987699+0.156418i`, `arg a = 0.1571`)* **entro `0.05` rad**; e sulla tenuta *(`t 63000`)* la stessa cosa col suo fit. **Se non coincide, FERMO:** la catena e' sbagliata, oppure il vuoto non avanza come `c(t)`.
+- **A, LA DIAGNOSI DEL VUOTO DEL GIRO 3** *(`vuoto_giro3.py`, letture su `partenza_giro_4.npz` di [M0414])*. **Le mie scelte:**
+  - **il centro:** il baricentro di `rho_psi` *(`toro.centro`)*; gli anelli `[45, 60)`, `[60, 75)`, `[75, 90)`;
+  - **`rho_phi`** = `somma |phi_h|^2` per nodo; **il rapporto** = la media sull'anello di `rho_phi` dello stato, divisa per la media di `rho_phi` di `phi_v` sullo stesso anello *(il modulo di `c(t)` e' `|tab_c[K]|`: lo stampo)*;
+  - **`J_phi`** = `rho_phi grad theta`, con `theta` la fase di `somma conj(phi_v) phi` per nodo *(il riferimento e' il vuoto fresco: la sua fase costante non entra nel gradiente)*. **I nodi giusti:** `(m1 +- 1, m2)` per `x`, `(m1 +- 1, m2 +- 2)` per `y` *(`A2 = (-1/2, sqrt3/2)`)*. **Le componenti radiale e tangenziale** dal centro, la media sull'anello; **negativo = verso l'oggetto**;
+  - **`chi(d)`:** la media per anello, e anche per `[0, 15)`, `[15, 30)`, `[30, 45)`;
+  - **(V1)** sul vuoto fresco *(`phi = phi_v`)*: il rapporto `1` e la corrente `0` entro `1e-9`. **E DEVE FALLIRE:** una fase `q y` aggiunta da' una corrente non nulla;
+  - il referto `doc/referti_l2/vuoto_giro3.txt`.
+- **B, LA COPPIA** *(`due_corpi_fondo_v6.py`)*: la v4, con **`phi = c(t) phi_v` fresco** *(F)*, **`psi` e chi dal giro 3** *(`psi_A + psi_B`, `chi_A + chi_B - chi_fondo`, `pi = 0`)*, i campi da Gauss *(`porto.campi`)*. I casi noti: G, T, K2; **(V2)** il vuoto composto a `k 0` e' `c(t) phi_v` al bit a `d > 45` da entrambi *(e dappertutto: `phi` fresco non porta oggetti)*; **(V0)**; **(V3)**.
+- **D, LA MITOSI** *(ramo `mitosi`)*: D1 a costo zero; D2 dichiarato nella `doc/CARTA_mitosi.md` prima di rifare K4.
