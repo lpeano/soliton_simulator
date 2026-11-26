@@ -27816,3 +27816,30 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **DUE FATTI DEL MANDATO DA CORREGGERE, dichiarati subito:**
   - **(1)** le premesse dicono «a `4 pi` nessuna nascita in `6000` tick». **Non e' quello che e' successo:** la corsa a `4 pi` si e' fermata alla partenza *(k `35976`)*, su «lo stato del tronco NON ha un arco scattato»; **nessun tick e' stato fatto** *(mitosi `21745434`)*. Il pezzo 4 scrive la frase di Luca e accanto la nota;
   - **(2)** l'INDICE della posta dice [M2048] «da eseguire», ma e' **eseguito**: lapse-u `329527f2`; phi NON porta il lapse, `|Spearman|` `0.20` e `0.24`.
+
+
+### 2026-11-27 00:36 -- [M0024] PEZZO 1, IL REFERTO due_corpi_fondo_v6_C.txt: C' DA' 12 FINESTRE VALIDE; d1' VA DA 41.57 A 9.62 NODI IN 3000 TICK, RISALE A 27.87, RISCENDE A 21.08; d2' DERIVA VIA DI +1.50 [[PROGETTO-MITOSI]]
+
+- **Lo script:** `due_corpi_lettura_v4.py` *(`0e6ac37d`)*, codice d'uscita `0`. **Casi noti `2` su `2`:**
+  - N1 al bit;
+  - **(R) il giro 3 passa C'**: `w` medio `4.5809`, `4.5651`, `4.6015` sui tre periodi; `omega` e pozzo `12` su `12`.
+- **d3' con C':** i tre periodi sono **VALIDI** *(`w` medio `4.4617`, `4.4074`, `4.7134`, cioe' `-3.01%`, `-4.19%`, `+2.47%` di `4.60`)*. **Le finestre valide sono `12` su `12`.**
+- **I NUMERI d(k)** *(d1' e d2' partono tutti e due da `41.569207`)*:
+  - **d1':** scende fino a `9.621451` a `k 3000` *(VERSO in ognuna delle prime `6` finestre, con `Delta` da `-0.77` a `-11.29`)*; risale fino a `27.865483` a `k 5000` *(VIA in `4` finestre)*; riscende fino a `21.076958` a `k 6000`. **Su `[0, 6000]`: `-20.49` nodi;**
+  - **d2'** *(chi spento)* va **VIA** in tutte le `12` finestre, `+1.499645` su `[0, 6000]`. Anche la deriva senza chi e' VIA.
+- **I NUMERI attorno al minimo** *(d1', corpo 1)*:
+  - `omega` passa da `0.0833` a `0.07565` a `k 3500` *(`-9%`)*;
+  - il pozzo *(chi su `[0, 4)`)* scende a `-198` / `-199` a `k 3250-3500`, contro i circa `-100` di d3' allo stesso `k`;
+  - `w` *(il raggio quadratico medio nella meta')* sta fra `4.8` e `5.9`.
+- **IL VERDETTO D2', con la regola com'e' scritta** *(lo stesso segno di d2', dichiarato in `0e6ac37d` prima della corsa)*: **VERSO `0`, VIA `4`, non distinguibile `8`.**
+- **### LA LETTURA DELLA REGOLA, mia, dopo i numeri:**
+  - le `8` finestre «non distinguibili» sono quelle in cui d1' si avvicina da `9` a `95` volte la deriva di d2'. Sono «non distinguibili» solo perche' d2' va nel verso opposto;
+  - **la mia lettura letterale di «nello stesso verso» qui da' l'esito opposto a quello che la regola vuole misurare.** Con la lettura senza segno *(`|Delta d1'| > 3 |Delta d2'|`)* sarebbe: VERSO `8`, VIA `4`;
+  - **non cambio la regola a posteriori:** la lettura giusta di «nello stesso verso» la decide Luca.
+- **### IL LIMITE DELLA MISURA, dichiarato:**
+  - i due corpi si definiscono come le due meta' del toro *(`y` sotto o sopra il centro della coppia)*;
+  - **sotto circa `2 w`** *(`~ 11-12` nodi)* le code dei due corpi stanno nella meta' sbagliata, e il baricentro di una meta' non e' piu' il baricentro di un corpo;
+  - **il minimo `9.62` e il rimbalzo vanno quindi letti con questa riserva.** Una fusione, un urto con rimbalzo o un'oscillazione legata non si distinguono con questo strumento.
+- **LE PREVISIONI:**
+  - **guardiano:** P1 *(un periodo valido)* **SI'** *(`3` su `3`)*; P2 *(d2' VERSO)* **NO**, e' VIA; P3 *(verdetto VERSO)* **NO** con la regola scritta, **SI'** nella sostanza *(d1' si avvicina oltre `3` volte la deriva in `8` finestre)*;
+  - **le mie:** P1 *(`75%`)* giusta; P2 *(`50%`)* nessuna delle due; **P3 *(`30%`)* sbagliata nella sostanza.**
