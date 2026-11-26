@@ -27663,3 +27663,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La ricevuta:** [M2048] letto dalla posta alle `21:04` *(«Leggi post. Leggi la posta.»; `cd581122`)*, categoria DECISIONE DI LUCA (20:48). **Nella stessa lettura c'era [M2053]** *(le due luci, `5c9edcef`)*: la carta, lo script e i casi noti si fanno ora, le corse dopo B.
 - **La lettura** si fa mentre gira B: un processo, un tick.
 - **K3 e' un equivalente dichiarato:** `250` tick dalla partenza del giro 3, contro il suo `stato_000250`. Il tick `1` non e' stato salvato.
+
+
+### 2026-11-26 -- [M2048] I CASI NOTI PASSANO (4 SU 4) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi_noto.txt`.
+  - **(K1)** il vuoto fresco: `omega_phi` locale = globale *(`-0.471238896701`)*, `max |d|` `6.38e-15`; `rho_phi` uniforme *(`6.000000000000`)*;
+  - **(K2)** Spearman`(chi, N) = -1.0` esatto;
+  - **(K3, l'equivalente)** `250` tick dalla partenza del giro 3 = `giro_3/stato_000250` **al bit**.
