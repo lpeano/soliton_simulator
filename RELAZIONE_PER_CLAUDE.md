@@ -27709,3 +27709,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(K3)** la serie sintetica ridà `-0.434100000000`;
   - **(K1)** il vuoto senza increspatura: `omega_phi` `-0.471238898038`, `ptp` `7.20e-14`, `max ||A_0| - 1|` `2.13e-13` in `1000` tick.
 - **Le sei corse** entrano in coda a lanciatore fermo, dopo B.
+
+
+### 2026-11-26 -- [M2034-B] d1', d2', d3' CHIUSE; [M2053] LE SEI CORSE DELLE DUE LUCI IN CODA [[PROGETTO-MITOSI]]
+
+- **B:** le chiusure di `M2034_d1`, `_d2`, `_d3` nel registro *(in questo commit)*. La lettura col criterio C viene subito dopo.
+- **[M2053]:** le sei corse *(`x` `n` `2, 4, 8, 16`; `y` `n 2`; `x` `n 2` `eps 5e-4`)* in coda a priorita' `1`, a lanciatore fermo, in questo commit. Il rilancio dopo.
+- **Le corse lunghe della mitosi** aspettano K3, K3b e K4, che girano ancora.

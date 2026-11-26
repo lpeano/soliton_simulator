@@ -2809,6 +2809,96 @@
     "d3"
    ],
    "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: uno, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2053_x_n2_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "2",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 2 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n4_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "4",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 4 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n8_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "8",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 8 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n16_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "16",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 16 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_y_n2_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "y",
+    "--n",
+    "2",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: y n 2 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n2_eps5e-4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "2",
+    "--eps",
+    "5e-4"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 2 eps 5e-4, 1000 tick"
   }
  ]
 }
