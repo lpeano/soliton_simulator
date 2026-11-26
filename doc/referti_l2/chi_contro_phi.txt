@@ -1,0 +1,46 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] chi_contro_phi.py  sha1-BYTE c94117a9  committato e pulito
+==================================================================================================================================
+[M2048] chi CONTRO phi SULLO STATO DEL GIRO 3 (la carta sez. 3-duodevicies): E:\soliton_simulator\controllo\M0414\puntofisso_accoppiato\giro_3\partenza_giro_4.npz
+==================================================================================================================================
+  26244 nodi; il centro ['79.693', '79.545']; kappa 2.528944e-04; omega_phi globale -0.447403148
+----------------------------------------------------------------------------------------------------------------------------------
+  (chi, rho_phi), tutti i 26244 nodi: Pearson +0.6095, Spearman +0.2021; la mediana di chi per decile: -51.95 -24.29 -24.02 -23.98 -23.84 -23.99 -23.92 -23.98 -24.09 -25.15; monotona: NO
+    [ 0,  8) (  232 nodi): Pearson -0.2465, Spearman -0.2994
+    [ 8, 16) (  694 nodi): Pearson -0.7787, Spearman -0.8011
+    [16, 32) ( 2793 nodi): Pearson +0.8687, Spearman +0.8035
+    [32, 45) ( 3632 nodi): Pearson -0.0279, Spearman -0.0081
+    [45, 90) (18742 nodi): Pearson -0.0138, Spearman -0.0098
+----------------------------------------------------------------------------------------------------------------------------------
+  (chi, omega_phi locale), tutti i 26244 nodi: Pearson -0.7607, Spearman -0.2402; la mediana di chi per decile: -24.76 -23.97 -23.95 -23.97 -23.77 -23.87 -23.88 -24.07 -24.75 -54.10; monotona: NO
+    [ 0,  8) (  232 nodi): Pearson +0.4628, Spearman +0.4472
+    [ 8, 16) (  694 nodi): Pearson +0.4153, Spearman +0.3071
+    [16, 32) ( 2793 nodi): Pearson -0.8680, Spearman -0.8099
+    [32, 45) ( 3632 nodi): Pearson +0.0650, Spearman +0.0216
+    [45, 90) (18742 nodi): Pearson -0.0074, Spearman -0.0064
+----------------------------------------------------------------------------------------------------------------------------------
+  (chi, N (il controllo)), tutti i 26244 nodi: Pearson -1.0000, Spearman -1.0000; la mediana di chi per decile: -21.52 -22.10 -22.48 -23.07 -24.02 -25.48 -27.72 -31.29 -37.71 -54.10; monotona: SI'
+    [ 0,  8) (  232 nodi): Pearson -1.0000, Spearman -1.0000
+    [ 8, 16) (  694 nodi): Pearson -1.0000, Spearman -1.0000
+    [16, 32) ( 2793 nodi): Pearson -1.0000, Spearman -1.0000
+    [32, 45) ( 3632 nodi): Pearson -1.0000, Spearman -1.0000
+    [45, 90) (18742 nodi): Pearson -1.0000, Spearman -1.0000
+----------------------------------------------------------------------------------------------------------------------------------
+### S3: phi NON LO PORTA (|Spearman| rho_phi 0.2021, omega_phi 0.2402; monotone False, False)
+### S4, il segno: Spearman(chi, rho_phi) +0.2021: chi cresce dove rho_phi cresce
+### l'immagine: C:\Users\lpeano\wt_lapse_u\doc\referti_l2\chi_contro_phi.png (il colore e' la distanza dal centro)
+==================================================================================================================================

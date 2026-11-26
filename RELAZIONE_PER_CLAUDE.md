@@ -27671,3 +27671,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(K1)** il vuoto fresco: `omega_phi` locale = globale *(`-0.471238896701`)*, `max |d|` `6.38e-15`; `rho_phi` uniforme *(`6.000000000000`)*;
   - **(K2)** Spearman`(chi, N) = -1.0` esatto;
   - **(K3, l'equivalente)** `250` tick dalla partenza del giro 3 = `giro_3/stato_000250` **al bit**.
+
+
+### 2026-11-26 -- [M2048] chi CONTRO phi: phi NON PORTA IL LAPSE (|SPEARMAN| 0.20 E 0.24 SU TUTTI I NODI); UNA RELAZIONE SOLO IN [16, 32) (+-0.80) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi.txt` e `chi_contro_phi.png`. `26244` nodi; `omega_phi` globale del vuoto dopo un tick `-0.447403148` *(il fresco: `-0.471238897`)*.
+
+| coppia | Pearson | Spearman | `[0, 8)` | `[8, 16)` | `[16, 32)` | `[32, 45)` | `[45, 90)` |
+|---|---|---|---|---|---|---|---|
+| `(chi, rho_phi)` | `+0.6095` | **`+0.2021`** | `-0.30` | **`-0.80`** | **`+0.80`** | `-0.01` | `-0.01` |
+| `(chi, omega_phi)` | `-0.7607` | **`-0.2402`** | `+0.45` | `+0.31` | **`-0.81`** | `+0.02` | `-0.01` |
+| `(chi, N)` *(controllo)* | `-1.0000` | `-1.0000` | `-1` | `-1` | `-1` | `-1` | `-1` |
+
+  *(gli anelli: Spearman; i nodi `232`, `694`, `2793`, `3632`, `18742`)*
+- **Le mediane di chi per decile** non sono monotone *(per `rho_phi`: `-51.95` nel primo decile, poi circa `-24`, `-25.15` nell'ultimo)*.
+- **S3: phi NON LO PORTA.** **S4:** su tutti i nodi Spearman`(chi, rho_phi)` e' `+0.20`, cioe' chi e' meno negativo dove `rho_phi` e' piu' alto. Nell'anello `[8, 16)` e' `-0.80`.
+- **LA LETTURA, post-hoc:** lontano *(`d > 32`)* chi e' quasi costante *(circa `-24`, il modo zero)*, e nessuna correlazione puo' esserci. Vicino all'oggetto il segno cambia da un anello all'altro.
+- **Le previsioni:**
+  - del guardiano: P1, l'orologio meglio della densita' *(`55%`)*: **di poco SI'** *(`0.24` contro `0.20`)*; P2, nessuno passa S3 *(`60%`)*: **SI'**; P3, l'anticorrelazione *(`65%`)*: **NO su tutti i nodi** *(`+0.20`)*, **SI' in `[8, 16)`** *(`-0.80`)*; P4, in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8` *(`70%`)*: **NO** *(`0.45`)*;
+  - mia: P2 *(`70%`)*: **SI'**.
