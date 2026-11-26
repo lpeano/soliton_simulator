@@ -27774,3 +27774,31 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(c)** solo `omega` e il pozzo, `w` tolto.
   - **E d2'** *(chi spento)* si allontana di `1.50` nodi in `6000` tick. Senza una decisione il controllo «d2' fermo» resta fallito.
 - **FERMO:** la soglia e' di Luca.
+
+
+### 2026-11-26 22:50 -- [M2053] LE DUE LUCI: LE SEI CORSE CHIUSE, LA LETTURA. IL VERDETTO AUTOMATICO DICE «DUE LUCI» E «ANISOTROPO», MA IL SEGNALE STA SOTTO LO SCARTO DEL FIT [[PROGETTO-MITOSI]]; [M0237] LE SOGLIE FALLITE
+
+- **Le corse:** sei, chiuse fra le `22:35:16` e le `22:44:08` con uscita `0` *(le chiusure sono nel registro, in questo commit)*.
+- **Le corse della soglia** `M0237_soglia_v2_0.5` e `_2` sono FALLITE con uscita `1`: i log e la lettura sono sul ramo mitosi, `21745434`.
+- **Il referto:** `doc/referti_l2/due_luci.txt` *(`due_luci.py lettura`, `b0e944e2`)*. **`omega(q) - omega_phi` per tick:**
+  - `x`: n `2` `-1.87e-08`, n `4` `-7.37e-08`, n `8` `-2.91e-07`, n `16` `-1.66e-06`;
+  - `y`: n `2` `-2.50e-08`.
+- **La linearita':** a `eps 5e-4` lo stesso valore entro `0.000%`. PASSA.
+- **Lo scarto del fit** *(n `2`, `x`)* e' `5.32e-04` rad, mentre la fase totale in `1000` tick vale `1.9e-05` rad. **Le due meta' danno `+3.6e-11`, con il segno opposto a quello del fit intero.**
+- **Le uscite automatiche:**
+  - `c_phi` = `-0.000001`;
+  - il gap `a = +5.16e-08`;
+  - l'anisotropia `-8.19%` *(«ANISOTROPO»)*;
+  - **S4: «DUE LUCI»** *(`|c_phi|` `0.000001` contro `c_psi` `0.084955`)*.
+- **LA LETTURA, mia, e il controllo di scala:**
+  - **la fase dell'increspatura relativa al vuoto non avanza in modo misurabile.** Lo spostamento in frequenza sta sotto `2e-6` per tick a tutti i `q`, e a `q` piccolo sta **sotto lo scarto del fit**. **Quindi `c_phi`, il gap e l'anisotropia NON SONO MISURATI:** il `-8.19%` e' il rapporto fra due numeri piu' piccoli del loro errore;
+  - **quello che il dato dice:** a ogni `q` provato l'increspatura `phi_v e^{iqx}` resta alla frequenza del vuoto entro `1.7e-6`. Contro `c_psi` di `8.5e-2`, **`phi` non porta un segnale a velocita' paragonabile.** Al livello di questa misura e' **una banda piatta**: niente cono e niente minimo in `q^2`;
+  - **e l'ampiezza:** `|A_q/A_0|/eps` scende fino a `0.905` a n `16`. Una parte dell'increspatura passa su altre componenti, quindi `phi_v e^{iqx}` non e' un autostato;
+  - **il verdetto di S4, letto alla lettera, e' «due luci»**, ma per la ragione meno interessante: **la seconda «luce» non c'e'.**
+- **LE PREVISIONI:**
+  - P1 *(guardiano `60%`, mia `65%`, due luci)*: SI', nel senso appena detto;
+  - P2 *(`55%`, `c_phi > c_psi`)*: **NO**;
+  - P3 *(`70%`, anisotropia sotto il `5%`)*: **NON VALUTABILE** *(sotto il rumore)*;
+  - P4 *(guardiano `65%`, mia `60%`, un gap)*: **NON VALUTABILE**, perche' ne' il cono ne' il gap emergono dal rumore.
+- **COSA SERVIREBBE per misurare davvero:** corse piu' lunghe, oppure il fit della parte reale e immaginaria di `A_q/A_0` invece della fase svolta. **Sono proposte, non eseguite.**
+- **FERMO:** le decisioni aperte sono su B *(il criterio di `w` e d2')*, su K4, sulle due soglie e sul passo successivo delle due luci.

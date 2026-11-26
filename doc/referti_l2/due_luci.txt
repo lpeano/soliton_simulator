@@ -1,0 +1,15 @@
+[TIMBRO] due_luci.py  sha1-BYTE c2ad66ec  committato e pulito
+==================================================================================================================================
+[M2053] LE DUE LUCI (la carta sez. 3-undevicies): omega(q) - omega_phi del vuoto, c_phi, il gap, l'anisotropia; c_psi = 0.084955 (ep_fondo.C_RET)
+==================================================================================================================================
+  x n  2 (L 162), eps 1e-03: q 0.077570; omega_phi -0.471238898; omega(q) - omega_phi -1.872223e-08 (lo scarto del fit 5.32e-04; [0, 500] +3.594226e-11, [500, 1000] +3.575692e-11); |A_q/A_0|/eps da 0.9985 a 1.0000
+  x n  4 (L 162), eps 1e-03: q 0.155140; omega_phi -0.471238898; omega(q) - omega_phi -7.367843e-08 (lo scarto del fit 2.13e-03; [0, 500] +1.641272e-09, [500, 1000] +1.457062e-09); |A_q/A_0|/eps da 0.9940 a 1.0000
+  x n  8 (L 162), eps 1e-03: q 0.310281; omega_phi -0.471238898; omega(q) - omega_phi -2.909068e-07 (lo scarto del fit 8.56e-03; [0, 500] +7.056424e-08, [500, 1000] -4.619922e-08); |A_q/A_0|/eps da 0.9760 a 1.0000
+  x n 16 (L 162), eps 1e-03: q 0.620562; omega_phi -0.471238898; omega(q) - omega_phi -1.663665e-06 (lo scarto del fit 3.49e-02; [0, 500] -2.266260e-06, [500, 1000] -1.511061e-06); |A_q/A_0|/eps da 0.9050 a 1.0000
+  y n  2 (L 162), eps 1e-03: q 0.089570; omega_phi -0.471238898; omega(q) - omega_phi -2.499478e-08 (lo scarto del fit 7.09e-04; [0, 500] +2.356820e-11, [500, 1000] +2.356826e-11); |A_q/A_0|/eps da 0.9980 a 1.0000
+  x n  2 (L 162), eps 5e-04: q 0.077570; omega_phi -0.471238898; omega(q) - omega_phi -1.872223e-08 (lo scarto del fit 5.32e-04; [0, 500] +3.594231e-11, [500, 1000] +3.575694e-11); |A_q/A_0|/eps da 0.9985 a 1.0000
+### LA LINEARITA' (x, n 2): eps 5e-4 contro 1e-3: +0.000% (entro l'1%)
+  c_phi (la pendenza fra i due q piu' piccoli lungo x, 0.077570 e 0.155140): -0.000001; il gap (il fit omega = a + b q^2 lungo x): a +5.164276e-08, b -4.406130e-06
+  l'anisotropia: lungo y q 0.089570, omega(q) - omega_phi -2.499478e-08; lungo x interpolato alla stessa q -2.722399e-08: -8.19% ### ANISOTROPO (oltre il 5%)
+### IL VERDETTO S4: |c_phi| 0.000001 contro c_psi 0.084955: 100.0% -> DUE LUCI
+==================================================================================================================================

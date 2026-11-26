@@ -1179,3 +1179,7 @@
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M2053_x_n4_eps1e-3", "ora": "2026-11-26T22:35:25+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M2053_x_n8_eps1e-3", "ora": "2026-11-26T22:35:25+01:00", "punto": "uscita 0"}
 - {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M2053_x_n16_eps1e-3", "ora": "2026-11-26T22:35:25+01:00", "punto": "uscita 0"}
+- {"esito": "FALLITO", "ev": "CHIUSO", "nome": "m1446-M0237_soglia_v2_2", "ora": "2026-11-26T22:36:16+01:00", "punto": "uscita 1"}
+- {"esito": "FALLITO", "ev": "CHIUSO", "nome": "m1446-M0237_soglia_v2_0.5", "ora": "2026-11-26T22:37:41+01:00", "punto": "uscita 1"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M2053_y_n2_eps1e-3", "ora": "2026-11-26T22:44:05+01:00", "punto": "uscita 0"}
+- {"esito": "FINITO", "ev": "CHIUSO", "nome": "m1446-M2053_x_n2_eps5e-4", "ora": "2026-11-26T22:44:08+01:00", "punto": "uscita 0"}
