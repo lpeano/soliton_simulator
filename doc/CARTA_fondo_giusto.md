@@ -574,3 +574,30 @@
 - **Le corse:** sei, da `1000` tick, un processo ciascuna: `x` con `n = 2, 4, 8, 16`; `y` con `n = 2`; `x`, `n = 2`, `eps = 5e-4`.
 - **LE PREVISIONI DEL GUARDIANO:** P1 *(`60%`)* due luci; P2 *(`55%`)* `c_phi > c_psi`; P3 *(`70%`)* l'anisotropia a `q` piccolo sotto il `5%`; P4 *(`65%`)* le onde del vuoto hanno un gap.
 - **LE MIE:** P4 `60%`; P1 `65%`.
+
+
+## 3-vicies. [M2034-B] LA LETTURA DI d1', d2', d3' COL CRITERIO C *(DECISIONE DI LUCA `09:25` e [M2034] `20:34`; scritta PRIMA dello script e PRIMA di guardare le serie)*
+
+- **LO SCRIPT NUOVO:** `doc/referti_l2/due_corpi_lettura_v3.py`. `due_corpi_lettura_v2.py` e' usato e non si riscrive: la v3 lo importa per `fit_d` e per gli anelli. **Il referto:** `doc/referti_l2/due_corpi_fondo_v6.txt`. **I dati:** `M2034/coppia/{d1,d2,d3}`.
+- **LE FINESTRE:** `12` da `500` tick, `[0, 500]`, ..., `[5500, 6000]`.
+- **IL CONTROLLO d3'** *(le soglie sono di Luca; come si misura e' una scelta mia)*:
+  - **`w`** si calcola con la formula del giro, `fondo_puntofisso_chi.w_di` *(`torneo_tenuta`, sulla `rho_psi` per nodo)*, sui tre stati della finestra *(`k0`, `k0 + 250`, `k0 + 500`)*. **Tutti e tre** devono stare entro il `5%` di `4.5`;
+  - **`omega`** e' la media della serie per tick di `serie.json` sulla finestra, entro il `5%` di `0.0833`;
+  - **il pozzo** si calcola con `fondo_puntofisso_chi.profondita` *(chi medio su `r < 4` dal centro di `rho_psi`)* sui tre stati, **tutti e tre** entro il `10%` di `-102`;
+  - **una finestra e' valida se passa tutte e tre le condizioni.** I riferimenti sono i numeri scritti da Luca *(`4.5`, `0.0833`, `-102`)*. Le medie del giro 3 sulla sua finestra `[3500, 6000]` si stampano accanto, senza contare per la validita';
+  - **le finestre valide si stampano PRIMA di qualunque riga su d1'.**
+- **IL CONTROLLO d2'** *(Luca)*: `max |d(k) - d(0)|` sulla serie *(ogni `10` tick, `0..6000`)* `< 0.5` nodi. **Se non passa, nessun verdetto su d1'.**
+- **LE LETTURE SU d1'** *(solo sulle finestre valide)*:
+  - **(i)** `d(k)` e il fit `a` per finestra, per d1' e d2', e la differenza `a(d1') - a(d2')` col suo errore;
+  - **(ii)-(v)** come `due_corpi_lettura_v2`, sugli stati delle finestre valide: `J_r` sugli anelli `[8, 16)` e `[16, 32)`, `rho_phi`, chi sugli anelli, `w` *(il raggio quadratico medio nella meta')* e `omega`.
+- **IL VERDETTO SU d1', una scelta mia, dichiarata ora:**
+  - **«si avvicinano»** se `a(d1') - a(d2') < 0` oltre `2 sigma` su almeno meta' delle finestre valide, e su nessuna e' `> 0` oltre `2 sigma`;
+  - **«si allontanano»** nel caso speculare;
+  - **«nessun segnale»** altrimenti.
+- **I CASI NOTI** *(nello stesso script, prima delle letture)*:
+  - **(N1)** `w_di` e `profondita` rifatti su `M0414/puntofisso_accoppiato/giro_3/stato_000500.npz` ridanno `giro.json` `w[5]` e `profondita[5]` **al bit** *(ogni `100` tick, quindi l'indice `5` e' `k 500`)*;
+  - **(N2)** la serie di d3' ha `6000` valori di `omega`;
+  - **(N3)** il caso che DEVE FALLIRE: con il riferimento di `w` a `4.5 x 1.2`, nessuna finestra di d3' e' valida *(se una lo fosse, vorrebbe dire che `w` si sposta del `20%`: lo stampo comunque)*.
+- **LE PREVISIONI:**
+  - **di [M0925]:** P3 *(`55%`)* almeno `6` finestre valide su `12`; P4 *(`70%`)* d1' si avvicina e d2' sta fermo; **P5** *(`50%`)* «K fra `0.8` e `1.2`»: **K non e' definito per B nel TODO.** Lo dichiaro **non valutabile**, a meno che Luca non lo definisca;
+  - **le mie, prima:** P3 `60%` *(`omega` di d3' parte a `0.08407`, cioe' `+0.9%`)*; P4 `35%` *(nel vuoto fresco il pozzo di chi delle due copie si somma, e la spinta, se c'e', e' piccola rispetto al respiro)*.

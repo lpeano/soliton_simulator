@@ -27722,3 +27722,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Sul ramo mitosi** *(`e398b4fb`)*: K3 e K3b PASSANO *(lo stato `36500` al bit)*; **K4 FALLISCE**. La norma e' ferma a `8.99e-14`, ma la variazione relativa di `H` e' `9.83e-01` su un `H` che e' zero *(`1e-10`)*. **Il criterio era contro la sua premessa: e' un mio errore.** La correzione aspetta Luca.
 - **In coda, a lanciatore fermo** *(fermo dalle `22:15:44`, letto da `coda_stato.json`)*: `M0237_soglia_v2_0.5` e `M0237_soglia_v2_2`, a priorita' `2`, cioe' dopo le sei delle due luci. **La corsa lunga del vuoto NON va in coda.**
+
+
+### 2026-11-26 22:30 -- [M2034-B] IL LANCIATORE RILANCIATO A MANO (22:23); LA CARTA DELLA LETTURA COL CRITERIO C, PRIMA DELLO SCRIPT [[PROGETTO-MITOSI]]
+
+- **Il rilancio, dichiarato:** il lanciatore e' ripartito a mano alle `22:23:06`, dopo `34ce3734`, e ha lanciato `M2053_x_n2_eps1e-3`. Gli APERTO del registro sono in questo commit.
+- **La carta, sez. `3-vicies`:**
+  - le `12` finestre di d3' e il modo di misurare `w`, `omega` e il pozzo *(la formula del giro; tutti e tre gli stati della finestra dentro le soglie)*;
+  - d2' fermo entro `0.5`;
+  - le letture di d1' solo sulle finestre valide, e il mio verdetto *(`2 sigma`, almeno meta' delle finestre)*;
+  - i casi noti N1-N3.
+- **P5 di [M0925] non e' valutabile:** «K» non e' definito per B.
