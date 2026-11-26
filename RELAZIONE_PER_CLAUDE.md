@@ -27733,3 +27733,29 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - le letture di d1' solo sulle finestre valide, e il mio verdetto *(`2 sigma`, almeno meta' delle finestre)*;
   - i casi noti N1-N3.
 - **P5 di [M0925] non e' valutabile:** «K» non e' definito per B.
+
+
+### 2026-11-26 22:36 -- [M2034-B] IL CRITERIO C: 0 FINESTRE VALIDE SU 12, d2' NON FERMO (1.50 NODI); IL VERDETTO SU d1' NON SI DA' [[PROGETTO-MITOSI]]
+
+*(Correzione: il paragrafo precedente ha nel titolo `22:30`, ma l'ora da `date` era `22:24`.)*
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v6.txt` *(`due_corpi_lettura_v3.py`, `bdd586db`)*. **I casi noti passano `4` su `4`:**
+  - N1: `w_di` e `profondita` ridanno il giro 3 a `k 500` al bit *(`4.13414994383072`, `-106.735967944411`)*;
+  - N2 passa;
+  - N3, il caso che DEVE FALLIRE, si comporta come deve.
+- **IL CONTROLLO d3':**
+  - **`omega`** sta nelle soglie su `12` finestre su `12` *(da `-0.24%` a `+0.73%`)*;
+  - **il pozzo** sta nelle soglie su `12` su `12` *(da `-97.8` a `-108.9`)*;
+  - **`w` non ci sta su nessuna:** varia da `3.40` a `6.10`, e dentro ogni finestra cambia ben oltre il `5%`;
+  - **le finestre valide sono `0` su `12`.**
+- **IL CONTROLLO d2':** `max |d(k) - d(0)|` = `1.4996` nodi a `k 6000`, contro un limite di `0.5`. **d2' NON sta fermo.**
+- **IL VERDETTO SU d1' NON SI DA'**, come dice il criterio di Luca, e lo dichiaro. **Le letture di d1' non sono state stampate.**
+- **LA LETTURA, mia e a posteriori:**
+  - il criterio su `w` sembra irraggiungibile per costruzione. Il giro 3 ha il respiro come modo normale *(D di [M0414]: `Omega_b 2.513e-3`, cioe' `P` circa `2500` tick)*, e in una finestra da `500` `w` fa un quinto di ciclo;
+  - **lo verifico con uno script** *(`criterio_c_giro3.py`, in questo commit; il referto nel prossimo)*: lo stesso criterio applicato al giro 3 di riferimento.
+- **LE PREVISIONI:**
+  - P3 *(`55%`, almeno `6` finestre valide su `12`)*: **NO**;
+  - P4 *(`70%`, d1' si avvicina e d2' sta fermo)*: **NO** sulla meta' «d2' fermo»; l'avvicinamento non si legge;
+  - P5 non e' valutabile;
+  - le mie: P3 al `60%` sbagliata; P4 al `35%`, il NO era piu' probabile.
+- **FERMO:** cambiare la soglia su `w`, o misurarlo in un altro modo *(la media sul periodo del respiro)*, e' una decisione di Luca *(«nessuna soglia diversa senza DECISIONE DI LUCA»)*. Anche d2' che si muove di `1.5` nodi senza chi va guardato.
