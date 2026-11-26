@@ -629,3 +629,4 @@
     - P1 al `75%`: d3' ha `w` da `3.40` a `6.10` con medie vicine a `4.6`;
     - **P2 al `50%`**: dalla v3 `d2'` *(`d(0) 41.569`)* ha `max |d - d(0)|` `1.50` a `k 6000`, ma il verso non l'ho guardato;
     - P3 al `30%`.
+- **LA LETTURA DI «NELLO STESSO VERSO»** *(una mia scelta, aggiunta col commit dello script e prima della corsa)*: la regola chiede **lo stesso segno di `Delta d` di d2'** nella stessa finestra *(la lettura letterale)*. Se `|Delta d1'| > 3 |Delta d2'|` col verso opposto a d2', la finestra conta «non distinguibile», ma si stampa a parte come **«fuori regola»**, perche' sia Luca a leggerla.
