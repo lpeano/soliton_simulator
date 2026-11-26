@@ -27852,3 +27852,29 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - la banda e' piatta allo zero simmetrico, con risposta lineare;
   - **il limite su `c_phi`** e' `2.681e-06` *(`max_q |Delta omega|/q`, a `x` n `16`; calcolato con uno script dai numeri di `due_luci.txt`)*, sotto `1e-5`.
 - **Le previsioni di [M2053]:** P1 giusta; P2 e P4 sbagliate; P3 non decidibile. **La mia P4 al `60%`** *(un gap)* era sbagliata.
+
+
+### 2026-11-27 00:41 -- [M0024] LA RICEVUTA: ESEGUITO (5 PEZZI SU 5); LE PREVISIONI CONFRONTATE [[PROGETTO-MITOSI]]
+
+- **[M0024] eseguito** *(DECISIONE DI LUCA 00:24)*:
+  - **1.** lapse-u `30dd017f`, `0e6ac37d`, `6df1aa60`;
+  - **2.** lapse-u `a3c54ab5`;
+  - **3.** mitosi `58e3c59e`, `ca8ddfeb` *(K4' FALLISCE, la corsa del vuoto non in coda)*;
+  - **4.** mitosi `c09d2906`;
+  - **5.** questo paragrafo.
+- **I RISULTATI:**
+  - **la coppia** *(C')*: `12` finestre valide. **d1' va da `41.57` a `9.62` nodi in `3000` tick**, risale a `27.87` e riscende a `21.08`. d2' *(chi off)* deriva **VIA** di `+1.50`;
+  - **D2', con la regola com'e' scritta** *(lo stesso segno di d2')*: **VERSO `0`, VIA `4`, non distinguibile `8`.** Le `8` «non distinguibili» sono pero' le finestre in cui d1' si avvicina da `9` a `95` volte la deriva, nel verso opposto a d2'. **Senza il vincolo di segno sarebbe VERSO `8`, VIA `4`;**
+  - attorno al minimo il pozzo di d1' arriva a `-199` *(contro `-100` di d3')* e `omega` a `0.0757` *(`-9%`)*;
+  - **il limite:** le due meta' del toro non separano i corpi sotto circa `2 w`.
+- **LE PREVISIONI:**
+  - **[M0024] del guardiano:** P1 *(un periodo valido)* **SI'** *(3 su 3)*; P2 *(d2' VERSO)* **NO** *(VIA)*; P3 *(il verdetto VERSO)* **NO** con la regola scritta, SI' nella sostanza; P4 *(K4' passa, niente nascite)* **NO** su K4', la parte sulle nascite non provata;
+  - **[M0024], le mie:** P1 `75%` giusta; P2 `50%` nessuna; P3 `30%` sbagliata nella sostanza; K4' passa al `5%`, giusta;
+  - **[M2053]** *(guardiano)*: P1 giusta; P2 e P4 sbagliate; P3 non decidibile. Le mie: P1 `65%` giusta; P4 `60%` sbagliata.
+- **I FATTI DEL MANDATO CORRETTI:**
+  - **(1)** a `4 pi` la corsa non ha fatto `6000` tick senza nascite: si e' fermata alla partenza *(la nota nella carta della mitosi)*;
+  - **(2)** [M2048] e' eseguito *(`329527f2`)*, non «da eseguire».
+- **LE DECISIONI PER LUCA:**
+  - **(a)** che cosa significa «nello stesso verso» in D2';
+  - **(b)** una soglia di K4' sopra il pavimento di arrotondamento;
+  - **(c)** se lo strumento delle due meta' basta sotto `2 w`.
