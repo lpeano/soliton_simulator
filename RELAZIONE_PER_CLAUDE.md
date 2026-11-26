@@ -27623,3 +27623,23 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il tick `t` dello stato del giro 3 si ricostruisce dalla catena**: la tenuta ha `t0 60000`, `k 3000`, quindi `t 63000`; poi i `k_b` delle finestre della v2 e della v3b, e i `6000` di [M0137] e [M0414];
   - **(V0):** su `PARTENZA_G4` la fase di `c(t)` deve coincidere con quella del fit di [M2330] *(`arg a = 0.1571`)* entro `0.05` rad, altrimenti FERMO;
   - **A:** il rapporto `rho_phi` per anello, `J_phi` radiale e tangenziale col riferimento `phi_v`, `chi(d)`. **(V1)** sul vuoto fresco.
+
+
+### 2026-11-26 -- [M2034-A] IL VUOTO DEL GIRO 3: NON SI E' SVUOTATO (rho_phi 1.032-1.034 DEL FRESCO); LA SUA FASE HA UN GRADIENTE RADIALE VERSO L'OGGETTO (J RADIALE -1.7, -3.7, -1.2; TANGENZIALE CIRCA 0); chi NON TORNA A ZERO (-21.9 A d 75-90) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vuoto_giro3.txt`. **(V1):** 2 DEVE su 2 *(il fresco da' rapporto 1 e corrente 0 al bit; una fase `q y` da' `|J_y|` `0.537`)*.
+- **I numeri** *(il centro al baricentro `(79.693, 79.545)`; `|c| = 1`)*:
+
+| anello | `rho_phi`/fresco | `J` radiale | `J` tangenziale | `|J|` medio |
+|---|---|---|---|---|
+| `[45, 60)` | `1.034145` | `-1.6973` | `+0.0103` | `6.71` |
+| `[60, 75)` | `1.032799` | `-3.7142` | `+0.0039` | `4.12` |
+| `[75, 90)` | `1.032264` | `-1.2234` | `-0.0006` | `1.38` |
+
+- **chi per anello:** `[0, 15)` `-76.53`, `[15, 30)` `-48.34`, `[30, 45)` `-34.25`, `[45, 60)` `-26.94`, `[60, 75)` `-23.27`, `[75, 90)` `-21.90`. A `d > 45`: media `-23.95`, da `-30.03` a `-21.19`.
+- **LA LETTURA, post-hoc e dichiarata:**
+  - **il vuoto non ha perso densita'** *(e' il `3%` piu' pieno)*;
+  - **la sua fase non e' piu' uniforme: ha un gradiente RADIALE**, che e' il vento di [M2245] attorno all'oggetto;
+  - **per questo il fit di `a` uniforme dava `|a|` `0.019`:** la fase cambia con la distanza;
+  - **chi ha un fondo uniforme circa `-21`** *(il modo zero)*, che non torna a zero sul toro.
+- **Le previsioni del guardiano:** P1, `rho_phi` lontano sotto l'`80%` *(`65%`)*: **NO** *(`103%`)*; P2, `J_phi` radiale verso l'oggetto e non tangenziale *(`60%`)*: **SI'**.

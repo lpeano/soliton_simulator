@@ -1,0 +1,25 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] vuoto_giro3.py  sha1-BYTE 80eb70bf  committato e pulito
+==================================================================================================================================
+[M2034-A] LA DIAGNOSI DEL VUOTO DEL GIRO 3 (la carta sez. 3-septendecies): E:\soliton_simulator\controllo\M0414\puntofisso_accoppiato\giro_3\partenza_giro_4.npz
+==================================================================================================================================
+  il centro (baricentro di rho_psi) ['79.693', '79.545']; |c| = |tab_c[K]| 1.000000000
+  DEVE: (V1) il vuoto fresco: il rapporto 1 e la corrente 0 entro 1e-9                                       PASSA max |J| 0.0e+00
+  DEVE: (V1) DEVE FALLIRE lo zero: una fase q y da' una corrente lungo y                                     PASSA max |J_y| 5.374e-01
+----------------------------------------------------------------------------------------------------------------------------------
+  per anello (d dal centro): rho_phi / rho_phi(phi_v); J_phi radiale e tangenziale (la media; negativo = verso l'oggetto); |J| medio
+----------------------------------------------------------------------------------------------------------------------------------
+    [45, 60): rho_phi 6.204872 / 6.000000 = 1.034145;  J radiale -1.6973e+00, tangenziale +1.0330e-02, |J| medio 6.7143e+00
+    [60, 75): rho_phi 6.196794 / 6.000000 = 1.032799;  J radiale -3.7142e+00, tangenziale +3.9019e-03, |J| medio 4.1158e+00
+    [75, 90): rho_phi 6.193585 / 6.000000 = 1.032264;  J radiale -1.2234e+00, tangenziale -6.4113e-04, |J| medio 1.3843e+00
+  chi per anello: [ 0, 15) -76.5303  [15, 30) -48.3403  [30, 45) -34.2457  [45, 60) -26.9384  [60, 75) -23.2720  [75, 90) -21.9001
+  chi a d > 45: media -23.9511, min -30.0290, max -21.1904
+### 2 DEVE: 2 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
