@@ -1,0 +1,13 @@
+[TIMBRO] mitosi_vuoto_v2.py  sha1-BYTE 96a0eb49  committato e pulito
+[TIMBRO] mitosi_vuoto_v3.py  sha1-BYTE 8a428d04  committato e pulito
+==================================================================================================================================
+[M0024] K4': il vuoto puro senza nascite, il criterio su H in assoluto; dalla corsa K4 in E:\soliton_simulator\controllo\M0237\vuoto_v2_noto
+==================================================================================================================================
+  lo stato E:\soliton_simulator\controllo\M0237\vuoto_v2_noto\stato_36000.npz, sha1 registrato 7d19f1c2
+  lo stato E:\soliton_simulator\controllo\M0237\vuoto_v2_noto\stato_36250.npz, sha1 registrato 1eadb09e
+  la serie E: k 36000 +1.229097e-10; k 36050 +1.183018e-10; k 36100 +3.197442e-14; k 36150 +1.111964e-10; k 36200 +5.488943e-12; k 36250 +2.131628e-12
+  H_rif +1.229096824318e-10; il ramo: |H_rif| 1.229e-10 < 1e-9: H circa 0, |Delta H| < 1e-12
+  DEVE: (K4') la norma 36000 -> 36250: 2.075747383350e+05 -> 2.075747383350e+05 (8.99e-14 relativo, entro 1e-9)   PASSA
+  DEVE: (K4') H 36000 -> 36250: +1.229096824318e-10 -> +2.131628207280e-12, |Delta H| 1.208e-10 contro 1.0e-12   ### FALLISCE
+### (K4') FALLISCE
+==================================================================================================================================

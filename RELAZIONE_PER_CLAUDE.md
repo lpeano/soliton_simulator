@@ -27107,3 +27107,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **a `4 pi` la via di partenza che ho scelto non esiste.** La prima nascita a `4 pi` cadrebbe piu' tardi, e per trovarla bisogna far girare il tronco da prima di `35976` senza nascite fino al primo scatto. Il pezzo 3 l'avevo progettato male: errore mio;
   - **a `pi`** non e' un errore di via: e' un risultato *(una valanga, poi la geometria si rompe)*. Ma l'assert ferma la corsa, e decidere se un triangolo degenere conta come un esito di fisica o come un limite della regola di nascita spetta a Luca.
 - **FERMO:** le due corse non si rilanciano senza una decisione.
+
+
+### 2026-11-27 00:38 -- [M0024] PEZZO 3: K4' FALLISCE, COME PREVISTO (|Delta H| 1.208e-10 CONTRO 1e-12; LA NORMA 8.99e-14 PASSA); LA CORSA DEL VUOTO NON VA IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/mitosi_vuoto_v3_noto.txt` *(`mitosi_vuoto_v3.py`, `58e3c59e`, codice d'uscita `1`)*.
+- **`H_rif`** = `+1.229097e-10`, quindi vale il ramo «circa 0» *(`|Delta H| < 1e-12`)*.
+- **La serie `E`** ogni `50` tick: `+1.229e-10`, `+1.183e-10`, `+3.197e-14`, `+1.112e-10`, `+5.489e-12`, `+2.132e-12`. **E' rumore di arrotondamento attorno allo zero.**
+- **K4':** la norma passa *(`8.99e-14`)*. `H` **FALLISCE**: `|Delta H|` = `1.208e-10` contro `1e-12`.
+- **La previsione scritta prima** *(nella carta, `58e3c59e`)* era «FALLISCE»: **giusta**. Il guardiano, P4 al `70%`: **sbagliata** sulla parte K4'; la parte sulle nascite non si e' potuta provare.
+- **LA CORSA DEL VUOTO PURO NON VA IN CODA** *(il mandato: «se passa»)*.
+- **La proposta per Luca, non eseguita:** una soglia che stia sopra il pavimento di arrotondamento. Per esempio `|Delta H| < 1e-12 somma_nodi |tot_nodo|` *(la scala dei termini che si cancellano)*, oppure `|Delta H| < 1e-9` assoluto *(e' `100` volte meno del salto osservato fra campioni)*.
