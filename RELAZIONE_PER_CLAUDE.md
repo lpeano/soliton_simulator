@@ -27759,3 +27759,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - P5 non e' valutabile;
   - le mie: P3 al `60%` sbagliata; P4 al `35%`, il NO era piu' probabile.
 - **FERMO:** cambiare la soglia su `w`, o misurarlo in un altro modo *(la media sul periodo del respiro)*, e' una decisione di Luca *(«nessuna soglia diversa senza DECISIONE DI LUCA»)*. Anche d2' che si muove di `1.5` nodi senza chi va guardato.
+
+
+### 2026-11-26 22:34 -- [M2034-B] A POSTERIORI: IL CRITERIO C NON PASSA NEMMENO SUL GIRO 3 DI RIFERIMENTO (w IN 0 FINESTRE SU 12) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/criterio_c_giro3.txt` *(`criterio_c_giro3.py`, `6041f473`)*. Sul giro 3 di [M0414], che e' l'oggetto di riferimento:
+  - **`w`** sta nelle soglie su `0` finestre su `12` *(varia da `3.6753` a `5.5316`)*;
+  - **`omega`** ci sta su `12` su `12`;
+  - **il pozzo** ci sta su `12` su `12`.
+- **La lettura:** **il criterio su `w`, con finestre da `500`, non puo' passare sull'oggetto stesso.** Il respiro *(il modo normale, D)* porta `w` dal `-18%` al `+23%` di `4.5` in circa `2500` tick. d3' fa lo stesso: da `3.40` a `6.10`, un respiro un po' piu' largo. **Il criterio era contro la premessa D, e quando l'ho scritto non l'ho visto:** e' un mio errore, il secondo di oggi dopo K4.
+- **LE PROPOSTE PER LUCA, nessuna eseguita:**
+  - **(a)** `w` medio sul periodo del respiro *(`P` di circa `2500`, cioe' due finestre `[0, 2500]` e `[2500, 5000]`, piu' il resto)* entro il `5%`. Sul giro 3 la media sulla finestra `[3500, 6000]` e' `4.6015` *(`+2.3%`)*, gia' stampata nel referto v6;
+  - **(b)** su `w` di d3' contro `w` del giro 3 allo stesso tick *(la stessa fase del respiro)*;
+  - **(c)** solo `omega` e il pozzo, `w` tolto.
+  - **E d2'** *(chi spento)* si allontana di `1.50` nodi in `6000` tick. Senza una decisione il controllo «d2' fermo» resta fallito.
+- **FERMO:** la soglia e' di Luca.
