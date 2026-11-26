@@ -27699,3 +27699,19 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **lungo `y`** `|q| = 2 pi n/L_y`; l'anisotropia si legge contro `x` interpolato alla stessa `|q|`.
 - **`c_psi = 0.084955`** *(`ep_fondo.C_RET`)*, la velocita' di gruppo massima della banda della materia. La pendenza di E(p) dove l'oggetto si spezza non e' misurata: lo dico.
 - **`C.residuo` assoluto**, perche' senza materia `rho = 0` *(come D2)*.
+
+
+### 2026-11-26 22:37 -- (dal ramo lapse-u e dal ramo mitosi) [M2034-B] IL CRITERIO C NON DA' FINESTRE; [M0237] K3 SI', K4 NO; [M2053] LE CORSE PARTITE [[PROGETTO-MITOSI]]
+
+- **[M2034-B]** *(lapse-u `6041f473`, `511a1ec9`)*:
+  - **d3':** `0` finestre valide su `12`. `w` sta fuori del `5%` in tutte *(da `3.40` a `6.10`)*, mentre `omega` e il pozzo stanno dentro in tutte;
+  - **d2'** si muove di `1.4996` nodi;
+  - **il verdetto su d1' non si da'.**
+  - **A posteriori,** anche il giro 3 di riferimento ha `w` nelle soglie su `0` finestre su `12` *(il respiro di D, da `3.68` a `5.53`)*: **il criterio su `w` non poteva passare, ed e' un mio errore.**
+  - **Proposte per Luca:** `w` medio sul periodo del respiro, `w` alla stessa fase del giro 3, oppure `w` tolto. **FERMO.**
+- **[M0237]** *(mitosi `e398b4fb`)*:
+  - **K3 e K3b passano:** lo stato `36500` torna al bit;
+  - **K4 fallisce:** e' un criterio relativo su `H`, che nel vuoto e' zero *(`1e-10`)*, mentre la norma e' ferma a `8.99e-14`. Anche questo e' un mio errore;
+  - **la proposta:** `|Delta H|` diviso la norma;
+  - **le soglie `0.5` e `2` girano dalle `22:35`; il vuoto no.**
+- **[M2053]:** quattro corse lungo `x` sono chiuse *(uscita `0`)*, due girano ancora. La lettura `due_luci.txt` si fa quando chiudono.
