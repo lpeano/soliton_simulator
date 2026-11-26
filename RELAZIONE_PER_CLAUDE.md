@@ -27700,3 +27700,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **lungo `y`** `|q| = 2 pi n/L_y`; l'anisotropia si legge contro `x` interpolato alla stessa `|q|`.
 - **`c_psi = 0.084955`** *(`ep_fondo.C_RET`)*, la velocita' di gruppo massima della banda della materia. La pendenza di E(p) dove l'oggetto si spezza non e' misurata: lo dico.
 - **`C.residuo` assoluto**, perche' senza materia `rho = 0` *(come D2)*.
+
+
+### 2026-11-26 -- [M2053] I CASI NOTI DELLE DUE LUCI PASSANO (3 SU 3) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_luci_noto.txt` *(`21:29`-`21:43`)*.
+  - **(K2)** `A_q` a `k 0` = `+9.999999999999543e-04`, `|A_2q|` `2.41e-17`;
+  - **(K3)** la serie sintetica ridà `-0.434100000000`;
+  - **(K1)** il vuoto senza increspatura: `omega_phi` `-0.471238898038`, `ptp` `7.20e-14`, `max ||A_0| - 1|` `2.13e-13` in `1000` tick.
+- **Le sei corse** entrano in coda a lanciatore fermo, dopo B.

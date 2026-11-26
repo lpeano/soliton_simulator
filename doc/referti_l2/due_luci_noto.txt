@@ -1,0 +1,17 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] due_luci.py  sha1-BYTE c2ad66ec  committato e pulito
+==================================================================================================================================
+[M2053] I CASI NOTI DELLE DUE LUCI (la carta sez. 3-undevicies)
+==================================================================================================================================
+  DEVE: (K2) a k 0 la componente a q vale eps = 1e-3 entro 1e-12, quella a 2q sotto 1e-9                     PASSA A_q +9.999999999999543e-04+1.859e-17i, |A_2q| 2.41e-17
+  DEVE: (K3) la lettura su una serie sintetica e^{-i omega k} ridà omega(q) - omega_phi entro 1e-9           PASSA -0.434100000000 contro -0.434100000000
+  DEVE: (K1) eps 0: il vuoto fermo per 1000 tick, omega_phi per tick costante entro 1e-12 (al bit non si chiede: l'arg arrotonda) PASSA omega_phi -0.471238898038, ptp 7.20e-14, max ||A_0| - 1| 2.13e-13 (737 s)
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+==================================================================================================================================
