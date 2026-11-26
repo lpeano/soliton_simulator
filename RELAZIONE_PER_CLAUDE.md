@@ -27715,3 +27715,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la proposta:** `|Delta H|` diviso la norma;
   - **le soglie `0.5` e `2` girano dalle `22:35`; il vuoto no.**
 - **[M2053]:** quattro corse lungo `x` sono chiuse *(uscita `0`)*, due girano ancora. La lettura `due_luci.txt` si fa quando chiudono.
+
+
+### 2026-11-26 22:47 -- (dai rami lapse-u e mitosi) [M2053] LE DUE LUCI LETTE; [M0237] LE DUE SOGLIE FALLITE [[PROGETTO-MITOSI]]
+
+- **[M2053]** *(lapse-u `12d3d40b`)*:
+  - `omega(q) - omega_phi` sta sotto `1.7e-6` per tick a ogni `q` *(x n `2..16`, y n `2`)*, e la linearita' passa;
+  - **il segnale sta sotto lo scarto del fit:** `c_phi`, il gap e l'anisotropia *(il `-8.19%` automatico)* **non sono misurati**;
+  - l'increspatura del vuoto resta alla frequenza del vuoto. Contro `c_psi` di `0.085` e' **una banda piatta**, quindi S4 dice «due luci» alla lettera, ma la seconda luce non c'e';
+  - P2: NO. P3 e P4: non valutabili.
+- **[M0237]** *(mitosi `21745434`)*:
+  - **a `pi`** `2094` archi sono in attesa e alla quarta nascita c'e' un triangolo degenere;
+  - **a `4 pi`** lo stato di partenza del tronco non ha scatti, e la via di partenza che ho scelto non esiste: errore mio di progetto;
+  - tutte e due sono FALLITE con uscita `1`.
+- **FERMO** sulle decisioni di Luca.
