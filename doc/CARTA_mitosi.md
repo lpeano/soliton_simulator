@@ -34,3 +34,22 @@
   - le corse vanno in coda **col percorso assoluto dello script del worktree `mitosi`**, e lo script si porta da solo nella radice del suo worktree;
   - **(K3) e' una corsa** *(`274` tick, da `35976` a `36250`)*: va in coda insieme alle due;
   - **IL COSTO:** MITOSI_V2 ha fatto `9726` tick in `73019` s *(il suo log)*, cioe' circa `7.5` s per tick con le nascite. **Una corsa di `6000` tick dura circa `12` ore.**
+
+
+## D1 E D2 *([M2034], DECISIONE DI LUCA 2026-11-26 `20:34`, arrivata dalla posta, `3ec35629`; scritta PRIMA del codice nuovo)*
+
+- **D1, LA PROVENIENZA DI MITOSI** *(a costo zero: i TIMBRO dei log in `mitosi_rami/`, i blob di oggi, `git log`)*:
+  - **MITOSI** *(da `35976` a `36250`)* viene da **`doc/referti_l2/mitosi_rami.py ramo --nome MITOSI --da primo`**: blob `6dccd9d6` *(sha1 dei byte)*, l'ultimo commit `bd2adaad` *(2026-11-20 18:49)*. Importa `mitosi_lunga.py` *(`4d484044`, `74184d78`)*. Il suo `ciclo` fa per prima cosa **«lo scatto del tronco»** *(la nascita al `k` dello stato, `nascita_iniziale`)* e tiene **`gauss_acc`**. **NON e' `mitosi_lunga.corsa`:** per questo K3 cadeva *(la prima nascita a `35977`)*. MITOSI e' caduta dopo `36250` *(il suo log finisce con un triangolo degenere)*;
+  - **MITOSI_V2** *(da `36250` a `45976`)* viene da **`doc/referti_l2/mitosi_rami_v2.py riparti --da MITOSI/stato_36250.npz`**: blob `a17baaad`, l'ultimo commit `0dd4b707` *(2026-11-21 23:56)*, **con la regola `mitosi_regola_v2`**;
+  - **i blob di oggi coincidono** con quelli dei TIMBRO.
+  - **LA CORSA DI RIFERIMENTO A SOGLIA 1 E' QUINDI IN DUE PASSI:** la v1 da `prima_nascita_35976` a `36250`, poi la v2 da li'. **Le corse di soglia la rifanno cosi', cambiando solo `QUANTO`** *(«tutto il resto uguale»)*: fase 1 con `mitosi_rami.ciclo`, fase 2 con `mitosi_rami_v2.ciclo` dallo stato `36250` della fase 1, fino a `41976`.
+  - **I CASI NOTI, RISCRITTI** *(`mitosi_soglia_v2.py noto`)*: **(K3)** la fase 1 a soglia `2 pi`, da `prima_nascita_35976` a `36250` = MITOSI agli stati `36000` e `36250` **AL BIT** *(ogni chiave)*; **(K3b)** la fase 2 a soglia `2 pi`, da `MITOSI/stato_36250` a `36500` = MITOSI_V2 a `36500` **AL BIT**.
+  - **Se la fase 1 a soglia `pi` o `4 pi` cade prima di `36250`** *(il triangolo degenere della v1)*, **FERMO** per quella soglia, coi numeri.
+- **D2, IL RESIDUO DI GAUSS NEL VUOTO PURO** *(dichiarato PRIMA di rifare K4)*:
+  - `mattone.Campi.residuo` restituisce `max |div E - e (rho - media)| / (e max rho)`, che con `psi = 0` divide per zero;
+  - **nel solo script del vuoto** *(`mitosi_vuoto_v2.py`)* **il residuo diventa assoluto:** `max |div E - e (rho - media)|`, **senza dividere** *(Luca, D2)*. Lo si sostituisce in memoria sulla classe `Campi`, con entrambi i nomi del modulo *(`mattone`, `solitone.mattone`)*. **E' una misura: il ciclo la chiama ogni `OGNI_GAUSS` e la stampa, non corregge niente;**
+  - **la corsa del vuoto passa per `mitosi_rami_v2.ciclo`** *(la via vera)*, dallo stato `M0237/vuoto/vuoto_35976.npz` *(gia' preparato: `psi = 0`, `phi = a phi_v`, i campi e `theta_a` a zero)*, **con `nascita_iniziale = False`** *(nel vuoto non c'e' uno scatto del tronco)*;
+  - **(K4), rifatto:** con le nascite spente *(il modo `c2ext`)*, da `35976` a `36250`: `somma |phi_h|^2` e `H` *(la serie `E`)* fermi entro `1e-9` relativo, fra `36000` e `36250`.
+- **L'ORDINE** *(Luca)*: K3, K3b e K4 adesso, mentre girano d1', d2', d3'. **Le corse lunghe** *(soglia `pi`, soglia `4 pi`, il vuoto)* **DOPO** d1', d2', d3'.
+- **IL COSTO:** circa `4.5`-`7.5` s per tick *(K3 della v1: `274` tick in `1242` s)*. Una corsa di `6000` tick dura **circa `8`-`12` ore.**
+- **La previsione del guardiano P6** *(`60%`)*: D1 trova che MITOSI viene da un'altra via. **SI'** *(`mitosi_rami.py`)*.
