@@ -27606,3 +27606,52 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la coppia non composta:** il vuoto del giro 3 non e' `a phi_v`, residuo `52`;
   - **la mitosi ferma su K3 e K4.**
 - **FERMO fino al prossimo «leggi la posta».**
+
+
+### 2026-11-26 -- [M2034] (DALLA POSTA, DECISIONE DI LUCA 20:34) LA RIPRESA: LA CARTA (SEZ. 3-SEPTENDECIES) E IL PEZZO A (vuoto_giro3.py), PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2034] letto dalla posta alle `20:35` *(«Leggi post.»; `3ec35629`)*, categoria DECISIONE DI LUCA (20:34): il piano di [M0925]; F *(`phi = c(t) phi_v`)*, D1, D2. In esecuzione.
+- **La carta, sez. `3-septendecies`:**
+  - **il tick `t` dello stato del giro 3 si ricostruisce dalla catena**: la tenuta ha `t0 60000`, `k 3000`, quindi `t 63000`; poi i `k_b` delle finestre della v2 e della v3b, e i `6000` di [M0137] e [M0414];
+  - **(V0):** su `PARTENZA_G4` la fase di `c(t)` deve coincidere con quella del fit di [M2330] *(`arg a = 0.1571`)* entro `0.05` rad, altrimenti FERMO;
+  - **A:** il rapporto `rho_phi` per anello, `J_phi` radiale e tangenziale col riferimento `phi_v`, `chi(d)`. **(V1)** sul vuoto fresco.
+
+
+### 2026-11-26 -- [M2034-A] IL VUOTO DEL GIRO 3: NON SI E' SVUOTATO (rho_phi 1.032-1.034 DEL FRESCO); LA SUA FASE HA UN GRADIENTE RADIALE VERSO L'OGGETTO (J RADIALE -1.7, -3.7, -1.2; TANGENZIALE CIRCA 0); chi NON TORNA A ZERO (-21.9 A d 75-90) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vuoto_giro3.txt`. **(V1):** 2 DEVE su 2 *(il fresco da' rapporto 1 e corrente 0 al bit; una fase `q y` da' `|J_y|` `0.537`)*.
+- **I numeri** *(il centro al baricentro `(79.693, 79.545)`; `|c| = 1`)*:
+
+| anello | `rho_phi`/fresco | `J` radiale | `J` tangenziale | `|J|` medio |
+|---|---|---|---|---|
+| `[45, 60)` | `1.034145` | `-1.6973` | `+0.0103` | `6.71` |
+| `[60, 75)` | `1.032799` | `-3.7142` | `+0.0039` | `4.12` |
+| `[75, 90)` | `1.032264` | `-1.2234` | `-0.0006` | `1.38` |
+
+- **chi per anello:** `[0, 15)` `-76.53`, `[15, 30)` `-48.34`, `[30, 45)` `-34.25`, `[45, 60)` `-26.94`, `[60, 75)` `-23.27`, `[75, 90)` `-21.90`. A `d > 45`: media `-23.95`, da `-30.03` a `-21.19`.
+- **LA LETTURA, post-hoc e dichiarata:**
+  - **il vuoto non ha perso densita'** *(e' il `3%` piu' pieno)*;
+  - **la sua fase non e' piu' uniforme: ha un gradiente RADIALE**, che e' il vento di [M2245] attorno all'oggetto;
+  - **per questo il fit di `a` uniforme dava `|a|` `0.019`:** la fase cambia con la distanza;
+  - **chi ha un fondo uniforme circa `-21`** *(il modo zero)*, che non torna a zero sul toro.
+- **Le previsioni del guardiano:** P1, `rho_phi` lontano sotto l'`80%` *(`65%`)*: **NO** *(`103%`)*; P2, `J_phi` radiale verso l'oggetto e non tangenziale *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2034-B] LA COPPIA COL VUOTO FRESCO: I CASI NOTI 6 SU 6; LA CATENA DEL TICK GIUSTA (V0); LA FASE DI phi NON CONTA (V3, omega UGUALE AL BIT); c0 -2.30e-03; d1', d2', d3' IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v6_noto.txt`.
+- **La catena del tick:** la tenuta `63000`; la v2 `63300`, `65600`, `71600`; la v3b `73100`, `75200`, `81200` *(`PARTENZA_G4`)*; [M0137] `87200`, `93200`, `99200`; [M0414] `105200`, `111200`, **`117200`** *(lo stato del giro 3)*.
+- **(V0):** sulla tenuta e su `PARTENZA_G4` la fase di `c(t)` = la fase del fit sul vuoto lontano *(`+0.1571` contro `+0.1571`, `|a|` `1.0000`)*. **La catena e' giusta.** Nota: `c(t)` vale `+0.987688+0.156434i` a tutti e tre i `t` *(`omega = 3 pi/20`, e le differenze di `t` sono multipli di `40/3`)*.
+- **(G)** esatto; **(T)** le masse uguali; **(V2)** `phi` composto = `c(t) phi_v` al bit; **(K2)** d2' = d1' a `k 0` al bit *(`ebc59ddfbb8c`)*.
+- **(V3):** d3' per `250` tick, `omega` medio **`+0.084031366` a fase `0` e a fase `c(t)`: identico al bit.** **La fase del vuoto fresco non conta.**
+- **La coppia:** `chi_fondo -23.95`; `max|chi|` `114.06`; **`c0 -2.3030e-03`, `m0 -9.1066`**. Col vuoto fresco la composizione e' sana *(nella v4 `c0` era `-1.56`)*.
+- **La coda:** `M2034_d1`, `_d2`, `_d3` a priorita' `1`, a lanciatore fermo, in questo commit; il rilancio dopo.
+- ### **UN ERRORE MIO, DUE PARTI:** (1) **il lanciatore e' stato rilanciato prima del commit delle tre voci in coda** *(la stessa svista di [M0140])*: il commit era stato RIFIUTATO *(lo stage non coincideva)*, e il rilancio era partito in parallelo. **Il codice delle corse e' committato** *(`878b6e5f`, il timbro di se stesso compreso: la correzione era gia' li', non dopo)*; le voci in coda e il registro entrano in questo commit. (2) Una riga che avevo scritto qui *(«una correzione dopo `878b6e5f`»)* era falsa, e la tolgo prima del commit.
+- **Le previsioni:** P7 del guardiano, la fase non conta *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2034-D] (DALLA POSTA, DECISIONE DI LUCA 20:34) D1: MITOSI VIENE DA mitosi_rami.py (v1) E MITOSI_V2 DA mitosi_rami_v2.py; LA CARTA D1 E D2; I PEZZI 3 E 4 RISCRITTI SULLA VIA VERA (v2 DEGLI SCRIPT) [[PROGETTO-MITOSI]]
+
+- **D1** *(dai TIMBRO dei log in `mitosi_rami/`)*: **MITOSI** = `mitosi_rami.py ramo --nome MITOSI --da primo` *(blob `6dccd9d6`, `bd2adaad`)*, che applica «lo scatto del tronco» e tiene `gauss_acc`; **MITOSI_V2** = `mitosi_rami_v2.py riparti --da MITOSI/stato_36250.npz` *(`a17baaad`, `0dd4b707`)*, con la regola `mitosi_regola_v2`. **I blob di oggi coincidono.** **La corsa di riferimento a soglia 1 e' in due fasi** *(la v1 fino a `36250`, poi la v2)*. **P6 del guardiano: SI'.**
+- **D2:** nel solo script del vuoto il residuo di Gauss e' assoluto *(senza dividere per `e max rho`)*, sostituito in memoria su `Campi`.
+- **Gli script nuovi:** `mitosi_soglia_v2.py` *(K3: la v1 a soglia 1 fino a `36250` = MITOSI al bit; K3b: la v2 da `MITOSI/stato_36250` fino a `36500` = MITOSI_V2 al bit)* e `mitosi_vuoto_v2.py` *(K4 col residuo assoluto e la via vera)*. I casi noti girano adesso; le corse lunghe dopo d1', d2', d3'.
