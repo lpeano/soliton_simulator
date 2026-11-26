@@ -72,3 +72,10 @@
   - `|Delta H|` fra `36000` e `36250` e' `1.208e-10`, cioe' **oltre `100` volte `1e-12`**;
   - **la soglia di `1e-12` sta sotto il pavimento di arrotondamento di questa somma.** La applico com'e', e se fallisce la corsa del vuoto non va in coda.
 - **IL GUARDIANO, P4 *(`70%`)*:** K4' passa e nel vuoto puro non nasce nulla in `6000` tick. **La mia, prima:** K4' passa al `5%`.
+- **S. LA SOGLIA SI CHIUDE COSI' COM'E'** *(DECISIONE DI LUCA `00:24`)*:
+  - nessuna corsa in piu';
+  - la frase di Luca: **«il quanto `2 pi` non e' un parametro: a `pi` il reticolo si ingolfa, a `4 pi` non nasce nulla in `6000` tick; la domanda di Sheldon sulla formula `N(s) = N_1/s` e' mal posta, e si dichiara».** La parte ancora aperta *(il ritmo a `2 pi` contro il tempo)* resta in attesa.
+- **### LA NOTA, MIA, SU CHE COSA E' STATO MISURATO** *(i log in `doc/referti_l2/mitosi_soglia_v2_{0.5,2}_log.txt`, `21745434`)*:
+  - **a `pi`:** cosa misurata. Alla prima nascita `2094` archi sono in attesa sopra la soglia; tre nascite *(k `35976-35978`)*; alla quarta il triangolo `(12537, 12723, 34599)` e' degenere e la corsa si ferma *(uscita `1`)*. **«Si ingolfa» e' una lettura giusta del dato;**
+  - **a `4 pi`: «non nasce nulla in `6000` tick» NON E' MISURATO.** La corsa si e' fermata **alla partenza** *(k `35976`, uscita `1`)* su «lo stato del tronco NON ha un arco scattato», e **non ha fatto nessun tick**. Il fatto misurato e' piu' debole: **nello stato in cui a `2 pi` nasce il primo nodo, a `4 pi` nessun arco ha ancora superato la soglia.** Quanto tardi arriverebbe la prima nascita a `4 pi`, e se arriverebbe, non lo sappiamo;
+  - **quindi la frase di Luca sta qui come DECISIONE, e la sua seconda meta' come NON MISURATA.** Come conclusione di fisica, «`2 pi` strutturale» poggia per ora sulla sola parte a `pi`.
