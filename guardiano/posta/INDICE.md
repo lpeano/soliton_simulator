@@ -8,6 +8,7 @@
 | 2026-11-25_0237_M0237.md | DECISIONE DI LUCA (02:37) | pezzi 0-2 eseguiti (H cala, va nelle nascite); pezzi 3-4 fermi: K3, K4 falliti (MITOSI non da mitosi_lunga.corsa; rho = 0) | mitosi 478703c8, 356b0fad |
 | 2026-11-25_0414_M0414.md | DECISIONE DI LUCA (04:14) | eseguito: 3 giri, D (modo normale, Omega_b 2,513e-03), w 4,5, omega 0,0833, pozzo -102; la coppia non si compone (vuoto non a phi_v) | lapse-u 3f503999, 329cba3b |
 | 2026-11-25_0925_M0925.md | DECISIONE DI LUCA (09:25) | eseguito: il TODO per domani scritto, sospensione | lapse-u b4df4f0f |
-| 2026-11-26_2034_M2034.md | DECISIONE DI LUCA (2026-11-26 20:34) | da eseguire: la ripresa del piano di [M0925]; fase di phi = c(t) phi_v (V3), D1 e D2 sì | — |
+| 2026-11-26_2034_M2034.md | DECISIONE DI LUCA (2026-11-26 20:34) | eseguito: A (vuoto non svuotato, corrente radiale), B (corse chiuse; criterio C impossibile: 0 finestre; d2' non fermo 1,50), D1 (MITOSI da mitosi_rami.py), D2 | lapse-u 6041f473, 511a1ec9; mitosi a7ba237f |
 | 2026-11-26_2048_M2048.md | DECISIONE DI LUCA (2026-11-26 20:48) | da eseguire (lettura a costo zero, non ferma B): chi contro rho_phi e contro l'orologio locale di phi sul giro 3 | — |
-| 2026-11-26_2053_M2053.md | DECISIONE DI LUCA (2026-11-26 20:53) | da eseguire dopo B: le due luci, la dispersione delle onde del vuoto phi contro c_psi (5 corse da 1000 tick) | — |
+| 2026-11-26_2053_M2053.md | DECISIONE DI LUCA (2026-11-26 20:53) | eseguito: il vuoto non propaga (banda piatta, c_phi ~ 0): DUE LUCI; l'anisotropia è rumore | lapse-u 12d3d40b |
+| 2026-11-27_0024_M0024.md | DECISIONE DI LUCA (2026-11-27 00:24) | da eseguire: C' (w sul periodo), i numeri d(k) sempre, D2' (3x la deriva di d2'); K4' assoluto e il vuoto puro; la soglia chiusa | — |
