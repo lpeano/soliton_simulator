@@ -1,0 +1,20 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] mitosi_vuoto.py  sha1-BYTE bf69a6f6  committato e pulito
+[TIMBRO] mitosi_vuoto_v2.py  sha1-BYTE 96a0eb49  committato e pulito
+### D2: Campi.residuo assoluto in mattone (C:\Users\lpeano\wt_mitosi\csv\solitone\mattone.py); solitone.mattone (C:\Users\lpeano\wt_mitosi\csv\solitone\mattone.py)
+### [M0237-4 v2] il vuoto puro, il modo c2ext, da E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz a 36250, in E:\soliton_simulator\controllo\M0237\vuoto_v2_noto
+C:\Users\lpeano\wt_mitosi\csv\solitone\mattone_rhoc.py:55: RuntimeWarning: invalid value encountered in scalar divide
+  return float(math.sqrt(np.sum(rho[m] * r2[m]) / np.sum(rho[m])))
+C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_lunga.py:49: RuntimeWarning: invalid value encountered in divide
+  cum = np.cumsum(rho[o]) / float(np.sum(rho))
+C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_lunga.py:51: RuntimeWarning: invalid value encountered in scalar divide
+  w = float(np.sqrt(np.sum(rho * d.astype(float) ** 2) / np.sum(rho)))
+### vuoto_v2_c2ext (c2ext): da E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz (k 35976, sha1 1b265f08), fino a k 36250; le nascite SPENTE
+    k 36000  M 0.000000000000e+00  E +1.2290968243e-10  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (112 s)
+    [stato] k 36000 sha1 7d19f1c2
+C:\Users\lpeano\wt_mitosi\csv\solitone\mattone_rhoc.py:55: RuntimeWarning: invalid value encountered in scalar divide
+  return float(math.sqrt(np.sum(rho[m] * r2[m]) / np.sum(rho[m])))
+    k 36250  M 0.000000000000e+00  E +2.1316282073e-12  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (631 s)
+    [stato] k 36250 sha1 1eadb09e
+### vuoto_v2_c2ext: 274 tick in 632 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+  DEVE: (K4) il vuoto senza nascite (c2ext), 36000 -> 36250: la norma 2.075747383350e+05 -> 2.075747383350e+05 (8.99e-14), H +1.229096824318e-10 -> +2.131628207280e-12 (9.83e-01), entro 1e-9   ### FALLISCE

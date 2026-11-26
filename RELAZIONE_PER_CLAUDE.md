@@ -27081,3 +27081,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **D1** *(dai TIMBRO dei log in `mitosi_rami/`)*: **MITOSI** = `mitosi_rami.py ramo --nome MITOSI --da primo` *(blob `6dccd9d6`, `bd2adaad`)*, che applica «lo scatto del tronco» e tiene `gauss_acc`; **MITOSI_V2** = `mitosi_rami_v2.py riparti --da MITOSI/stato_36250.npz` *(`a17baaad`, `0dd4b707`)*, con la regola `mitosi_regola_v2`. **I blob di oggi coincidono.** **La corsa di riferimento a soglia 1 e' in due fasi** *(la v1 fino a `36250`, poi la v2)*. **P6 del guardiano: SI'.**
 - **D2:** nel solo script del vuoto il residuo di Gauss e' assoluto *(senza dividere per `e max rho`)*, sostituito in memoria su `Campi`.
 - **Gli script nuovi:** `mitosi_soglia_v2.py` *(K3: la v1 a soglia 1 fino a `36250` = MITOSI al bit; K3b: la v2 da `MITOSI/stato_36250` fino a `36500` = MITOSI_V2 al bit)* e `mitosi_vuoto_v2.py` *(K4 col residuo assoluto e la via vera)*. I casi noti girano adesso; le corse lunghe dopo d1', d2', d3'.
+
+
+### 2026-11-26 22:19 -- [M0237] I CASI NOTI v2: K3 E K3b PASSANO; K4 FALLISCE (IL CRITERIO RELATIVO SU UN H CHE E' ZERO) [[PROGETTO-MITOSI]]
+
+- **K3, K3b** *(`mitosi_soglia_v2.py noto`)*: PASSANO. La fase 2 a soglia `1` da `MITOSI/stato_36250` ridà lo stato `36500` di MITOSI_V2 **al bit**: `27` nascite, `E_persa +5.660407e+02`.
+- **K4** *(`mitosi_vuoto_v2.py noto`)*: **FALLISCE.** La norma va da `2.075747383350e+05` a `2.075747383350e+05`, una variazione relativa di `8.99e-14`: passa. **`H` va da `+1.229e-10` a `+2.132e-12`**, con una variazione relativa di `9.83e-01` contro un limite di `1e-9`: non passa.
+- **LA LETTURA, mia, dopo il numero:**
+  - nel vuoto puro `H` e' **zero a meno dell'arrotondamento** *(`1e-10` su una norma `2e5`)*, quindi la variazione relativa di uno zero non misura niente;
+  - **il criterio era contro la sua premessa** *(`H = 0` senza materia)*, e non l'ho visto prima della corsa: e' un mio errore;
+  - la norma, il controllo che ha senso, e' ferma a `9e-14`.
+- **NON CORREGGO IL CRITERIO DA SOLO:** cambiare la soglia dopo aver visto il numero e' una scelta a posteriori. **La proposta per Luca:** un criterio assoluto, `|Delta H| / somma |phi_h|^2 < 1e-9` *(qui `5.8e-16`)*.
+- **FINCHE' LUCA NON DECIDE, la corsa lunga del vuoto NON va in coda.** Le due corse della soglia *(`0.5` e `2`)* hanno K3 e K3b verdi e vanno in coda adesso, sulla coda di lapse-u.

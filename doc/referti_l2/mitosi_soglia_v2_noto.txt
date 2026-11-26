@@ -1,0 +1,46 @@
+[TIMBRO] mitosi_soglia_v2.py  sha1-BYTE eb484371  committato e pulito
+[TIMBRO] mitosi_rami.py  sha1-BYTE 6dccd9d6  committato e pulito
+### [M0237-3 v2] fase 1 (mitosi_rami, la v1): s 1.00, QUANTO 6.283185307179586; da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz a 36250; in E:\soliton_simulator\controllo\M0237\soglia_v2_noto\fase1
+### soglia_1.0_fase1 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, sha1 abbdcaca), fino a k 36250; le nascite ACCESE
+    [nascita 1] k 35976, l'arco 50995 (lo scatto del tronco; 0 in attesa): n 34596 a r 18.93, 20 passi dalla sorgente; DH nascita -1.7244e+01 flip -7.0629e+00; P9 0.0e+00; |Ec| 2.308e-01; E_persa +2.430687e+01 (23.2 s)
+    k 36000  M 9.950108931445e+05  E +8.2677914271e+06  E_persa +2.430687e+01  nascite 1  n 34597  D1 45.0/67.0  E1 (15, 22, 16.513768415391073)  |gauss_acc| 2.308e-01 (lontano 7.891e-06)  (248 s)
+    [stato] k 36000 sha1 9bab6148
+    [nascita 2] k 36001, l'arco 40449 (scattato; 0 in attesa): n 34597 a r 18.70, 20 passi dalla sorgente; DH nascita -1.4783e+01 flip -5.6858e+00; P9 0.0e+00; |Ec| 2.297e-01; E_persa +4.477615e+01 (21.1 s)
+    [nascita 3] k 36027, l'arco 40450 (scattato; 0 in attesa): n 34598 a r 19.19, 20 passi dalla sorgente; DH nascita -1.2874e+01 flip -8.7318e+00; P9 0.0e+00; |Ec| 2.421e-01; E_persa +6.638163e+01 (23.5 s)
+    [nascita 4] k 36059, l'arco 52108 (scattato; 0 in attesa): n 34599 a r 18.97, 19 passi dalla sorgente; DH nascita -1.3676e+01 flip -2.7621e+00; P9 0.0e+00; |Ec| 2.211e-01; E_persa +8.281967e+01 (23.5 s)
+    [nascita 5] k 36125, l'arco 50433 (scattato; 0 in attesa): n 34600 a r 18.48, 20 passi dalla sorgente; DH nascita -1.5852e+01 flip -8.4281e+00; P9 0.0e+00; |Ec| 2.455e-01; E_persa +1.070994e+02 (22.5 s)
+    [nascita 6] k 36129, l'arco 39888 (scattato; 0 in attesa): n 34601 a r 19.24, 21 passi dalla sorgente; DH nascita -1.7818e+01 flip -5.1611e+00; P9 0.0e+00; |Ec| 2.117e-01; E_persa +1.300788e+02 (23.3 s)
+    [nascita 7] k 36152, l'arco 49870 (scattato; 0 in attesa): n 34602 a r 19.06, 21 passi dalla sorgente; DH nascita -1.7044e+01 flip -7.0965e+00; P9 0.0e+00; |Ec| 2.280e-01; E_persa +1.542193e+02 (23.7 s)
+    [nascita 8] k 36162, l'arco 51542 (scattato; 0 in attesa): n 34603 a r 19.43, 20 passi dalla sorgente; DH nascita -1.2215e+01 flip -3.1987e+00; P9 0.0e+00; |Ec| 2.440e-01; E_persa +1.696328e+02 (23.5 s)
+    [nascita 9] k 36228, l'arco 51543 (scattato; 0 in attesa): n 34604 a r 18.43, 19 passi dalla sorgente; DH nascita -1.3500e+01 flip -9.8367e+00; P9 0.0e+00; |Ec| 2.235e-01; E_persa +1.929694e+02 (25.1 s)
+    k 36250  M 9.950108931445e+05  E +8.2676235283e+06  E_persa +1.929694e+02  nascite 9  n 34605  D1 45.0/67.0  E1 (15, 23, 16.512644876128125)  |gauss_acc| 7.640e-01 (lontano 3.844e-05)  (2039 s)
+    [stato] k 36250 sha1 64999c5b
+### soglia_1.0_fase1: 274 tick in 2039 s; 9 nascite; E_persa +1.929694e+02; il codice 0
+  DEVE: (K3) la fase 1 a soglia 1, lo stato 36000 = MITOSI AL BIT (ogni chiave tranne meta)   PASSA  diverse []
+  DEVE: (K3) la fase 1 a soglia 1, lo stato 36250 = MITOSI AL BIT (ogni chiave tranne meta)   PASSA  diverse []
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+### [M0237-3 v2] fase 2 (mitosi_rami_v2): s 1.00, QUANTO 6.283185307179586; da E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz a 36500; in E:\soliton_simulator\controllo\M0237\soglia_v2_noto\fase2
+### soglia_1.0_fase2 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\MITOSI\stato_36250.npz (k 36250, sha1 64999c5b), fino a k 36500; le nascite ACCESE
+    [nascita 10] k 36257, l'arco 40445 (scattato; 0 in attesa): n 34605 a r 18.25, 20 passi dalla sorgente; DH nascita -1.7442e+01 flip -8.4070e+00; P9 0.0e+00; |Ec| 2.441e-01; E_persa +2.188184e+02 (26.0 s)
+    [nascita 11] k 36265, l'arco 51096 (scattato; 0 in attesa): n 34606 a r 19.08, 20 passi dalla sorgente; DH nascita -1.4696e+01 flip -4.1413e+00; P9 0.0e+00; |Ec| 2.296e-01; E_persa +2.376559e+02 (25.6 s)
+    [nascita 12] k 36294, l'arco 39885 (scattato; 1 in attesa): n 34607 a r 18.83, 21 passi dalla sorgente; DH nascita -1.3828e+01 flip -2.4894e+00; P9 0.0e+00; |Ec| 2.510e-01; E_persa +2.539733e+02 (25.9 s)
+    [nascita 13] k 36295, l'arco 52207 (scattato; 0 in attesa): n 34608 a r 19.11, 19 passi dalla sorgente; DH nascita -1.1799e+01 flip -5.9923e+00; P9 0.0e+00; |Ec| 2.116e-01; E_persa +2.717644e+02 (25.2 s)
+    [nascita 14] k 36309, l'arco 40391 (scattato; 0 in attesa): n 34609 a r 19.12, 20 passi dalla sorgente; DH nascita -1.4243e+01 flip -4.6969e+00; P9 0.0e+00; |Ec| 2.205e-01; E_persa +2.907045e+02 (25.2 s)
+    [nascita 15] k 36378, l'arco 50533 (scattato; 0 in attesa): n 34610 a r 18.62, 20 passi dalla sorgente; DH nascita -1.4782e+01 flip -1.0852e+01; P9 0.0e+00; |Ec| 2.380e-01; E_persa +3.163379e+02 (22.1 s)
+    [nascita 16] k 36390, l'arco 51644 (scattato; 0 in attesa): n 34611 a r 18.58, 19 passi dalla sorgente; DH nascita -1.9802e+01 flip -1.1807e+01; P9 0.0e+00; |Ec| 2.145e-01; E_persa +3.479467e+02 (22.6 s)
+    [nascita 17] k 36399, l'arco 61629 (scattato; 0 in attesa): n 34612 a r 18.82, 19 passi dalla sorgente; DH nascita -1.1861e+01 flip -5.8540e+00; P9 0.0e+00; |Ec| 2.296e-01; E_persa +3.656621e+02 (22.6 s)
+    [nascita 18] k 36401, l'arco 41005 (scattato; 0 in attesa): n 34613 a r 19.29, 20 passi dalla sorgente; DH nascita -1.4951e+01 flip -1.6305e+00; P9 0.0e+00; |Ec| 2.195e-01; E_persa +3.822436e+02 (22.1 s)
+    [nascita 19] k 36412, l'arco 61681 (scattato; 0 in attesa): n 34614 a r 18.89, 19 passi dalla sorgente; DH nascita -1.8894e+01 flip -5.2889e+00; P9 0.0e+00; |Ec| 2.260e-01; E_persa +4.064269e+02 (22.7 s)
+    [nascita 20] k 36436, l'arco 40444 (scattato; 0 in attesa): n 34615 a r 19.72, 21 passi dalla sorgente; DH nascita -1.3095e+01 flip -6.6905e+00; P9 0.0e+00; |Ec| 2.381e-01; E_persa +4.262120e+02 (22.2 s)
+    [nascita 21] k 36452, l'arco 39839 (scattato; 1 in attesa): n 34616 a r 19.18, 21 passi dalla sorgente; DH nascita -1.4593e+01 flip -5.4067e+00; P9 0.0e+00; |Ec| 2.347e-01; E_persa +4.462118e+02 (24.7 s)
+    [nascita 22] k 36453, l'arco 50415 (scattato; 0 in attesa): n 34617 a r 19.47, 21 passi dalla sorgente; DH nascita -1.3568e+01 flip -6.2319e+00; P9 0.0e+00; |Ec| 1.877e-01; E_persa +4.660117e+02 (23.4 s)
+    [nascita 23] k 36472, l'arco 40998 (scattato; 1 in attesa): n 34618 a r 18.72, 20 passi dalla sorgente; DH nascita -1.2285e+01 flip -7.0625e+00; P9 0.0e+00; |Ec| 2.356e-01; E_persa +4.853592e+02 (23.1 s)
+    [nascita 24] k 36473, l'arco 52636 (scattato; 0 in attesa): n 34619 a r 19.55, 21 passi dalla sorgente; DH nascita -9.3604e+00 flip -2.0859e+00; P9 0.0e+00; |Ec| 2.461e-01; E_persa +4.968055e+02 (23.2 s)
+    [nascita 25] k 36483, l'arco 40386 (scattato; 1 in attesa): n 34620 a r 19.64, 21 passi dalla sorgente; DH nascita -1.5694e+01 flip -4.6013e+00; P9 0.0e+00; |Ec| 2.470e-01; E_persa +5.171011e+02 (22.6 s)
+    [nascita 26] k 36484, l'arco 40932 (scattato; 0 in attesa): n 34621 a r 19.21, 20 passi dalla sorgente; DH nascita -2.1830e+01 flip -4.8563e+00; P9 0.0e+00; |Ec| 1.928e-01; E_persa +5.437871e+02 (24.5 s)
+    [nascita 27] k 36497, l'arco 62171 (scattato; 0 in attesa): n 34622 a r 19.35, 20 passi dalla sorgente; DH nascita -1.5906e+01 flip -6.3472e+00; P9 0.0e+00; |Ec| 2.437e-01; E_persa +5.660407e+02 (23.3 s)
+    k 36500  M 9.950108931445e+05  E +8.2672706453e+06  E_persa +5.660407e+02  nascite 27  n 34623  D1 45.0/67.0  E1 (15, 22, 16.487093501364242)  |gauss_acc| 1.328e+00 (lontano 5.917e-05)  (1937 s)
+    [stato] k 36500 sha1 fcfd044b
+### soglia_1.0_fase2: 250 tick in 1937 s; 27 nascite; E_persa +5.660407e+02; il codice 0
+  DEVE: (K3b) la fase 2 a soglia 1 da MITOSI/stato_36250, lo stato 36500 = MITOSI_V2 AL BIT   PASSA  diverse []
+### (K3, K3b) PASSANO (i codici 0, 0)
