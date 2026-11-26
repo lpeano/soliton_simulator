@@ -27655,3 +27655,47 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **D1** *(dai TIMBRO dei log in `mitosi_rami/`)*: **MITOSI** = `mitosi_rami.py ramo --nome MITOSI --da primo` *(blob `6dccd9d6`, `bd2adaad`)*, che applica «lo scatto del tronco» e tiene `gauss_acc`; **MITOSI_V2** = `mitosi_rami_v2.py riparti --da MITOSI/stato_36250.npz` *(`a17baaad`, `0dd4b707`)*, con la regola `mitosi_regola_v2`. **I blob di oggi coincidono.** **La corsa di riferimento a soglia 1 e' in due fasi** *(la v1 fino a `36250`, poi la v2)*. **P6 del guardiano: SI'.**
 - **D2:** nel solo script del vuoto il residuo di Gauss e' assoluto *(senza dividere per `e max rho`)*, sostituito in memoria su `Campi`.
 - **Gli script nuovi:** `mitosi_soglia_v2.py` *(K3: la v1 a soglia 1 fino a `36250` = MITOSI al bit; K3b: la v2 da `MITOSI/stato_36250` fino a `36500` = MITOSI_V2 al bit)* e `mitosi_vuoto_v2.py` *(K4 col residuo assoluto e la via vera)*. I casi noti girano adesso; le corse lunghe dopo d1', d2', d3'.
+
+
+### 2026-11-26 -- [M2048] (DALLA POSTA, DECISIONE DI LUCA 20:48) chi CONTRO phi: LA CARTA (SEZ. 3-DUODEVICIES) E chi_contro_phi.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2048] letto dalla posta alle `21:04` *(«Leggi post. Leggi la posta.»; `cd581122`)*, categoria DECISIONE DI LUCA (20:48). **Nella stessa lettura c'era [M2053]** *(le due luci, `5c9edcef`)*: la carta, lo script e i casi noti si fanno ora, le corse dopo B.
+- **La lettura** si fa mentre gira B: un processo, un tick.
+- **K3 e' un equivalente dichiarato:** `250` tick dalla partenza del giro 3, contro il suo `stato_000250`. Il tick `1` non e' stato salvato.
+
+
+### 2026-11-26 -- [M2048] I CASI NOTI PASSANO (4 SU 4) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi_noto.txt`.
+  - **(K1)** il vuoto fresco: `omega_phi` locale = globale *(`-0.471238896701`)*, `max |d|` `6.38e-15`; `rho_phi` uniforme *(`6.000000000000`)*;
+  - **(K2)** Spearman`(chi, N) = -1.0` esatto;
+  - **(K3, l'equivalente)** `250` tick dalla partenza del giro 3 = `giro_3/stato_000250` **al bit**.
+
+
+### 2026-11-26 -- [M2048] chi CONTRO phi: phi NON PORTA IL LAPSE (|SPEARMAN| 0.20 E 0.24 SU TUTTI I NODI); UNA RELAZIONE SOLO IN [16, 32) (+-0.80) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi.txt` e `chi_contro_phi.png`. `26244` nodi; `omega_phi` globale del vuoto dopo un tick `-0.447403148` *(il fresco: `-0.471238897`)*.
+
+| coppia | Pearson | Spearman | `[0, 8)` | `[8, 16)` | `[16, 32)` | `[32, 45)` | `[45, 90)` |
+|---|---|---|---|---|---|---|---|
+| `(chi, rho_phi)` | `+0.6095` | **`+0.2021`** | `-0.30` | **`-0.80`** | **`+0.80`** | `-0.01` | `-0.01` |
+| `(chi, omega_phi)` | `-0.7607` | **`-0.2402`** | `+0.45` | `+0.31` | **`-0.81`** | `+0.02` | `-0.01` |
+| `(chi, N)` *(controllo)* | `-1.0000` | `-1.0000` | `-1` | `-1` | `-1` | `-1` | `-1` |
+
+  *(gli anelli: Spearman; i nodi `232`, `694`, `2793`, `3632`, `18742`)*
+- **Le mediane di chi per decile** non sono monotone *(per `rho_phi`: `-51.95` nel primo decile, poi circa `-24`, `-25.15` nell'ultimo)*.
+- **S3: phi NON LO PORTA.** **S4:** su tutti i nodi Spearman`(chi, rho_phi)` e' `+0.20`, cioe' chi e' meno negativo dove `rho_phi` e' piu' alto. Nell'anello `[8, 16)` e' `-0.80`.
+- **LA LETTURA, post-hoc:** lontano *(`d > 32`)* chi e' quasi costante *(circa `-24`, il modo zero)*, e nessuna correlazione puo' esserci. Vicino all'oggetto il segno cambia da un anello all'altro.
+- **Le previsioni:**
+  - del guardiano: P1, l'orologio meglio della densita' *(`55%`)*: **di poco SI'** *(`0.24` contro `0.20`)*; P2, nessuno passa S3 *(`60%`)*: **SI'**; P3, l'anticorrelazione *(`65%`)*: **NO su tutti i nodi** *(`+0.20`)*, **SI' in `[8, 16)`** *(`-0.80`)*; P4, in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8` *(`70%`)*: **NO** *(`0.45`)*;
+  - mia: P2 *(`70%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2053] (DALLA POSTA, DECISIONE DI LUCA 20:53) LE DUE LUCI: LA CARTA (SEZ. 3-UNDEVICIES) E due_luci.py; n = 1 LUNGO x NON ESISTE SUL TORO: n = 2, 4, 8, 16 [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2053] letto dalla posta alle `21:04` *(`5c9edcef`)*, categoria DECISIONE DI LUCA (20:53). Le corse dopo B.
+- **Due cose del mandato che il toro non permette, dichiarate:**
+  - **lungo `x` servono `n` pari** *(con `A2 = (-1/2, sqrt3/2)`, `n = 1` non e' periodica)*: uso `n = 2, 4, 8, 16`;
+  - **lungo `y`** `|q| = 2 pi n/L_y`; l'anisotropia si legge contro `x` interpolato alla stessa `|q|`.
+- **`c_psi = 0.084955`** *(`ep_fondo.C_RET`)*, la velocita' di gruppo massima della banda della materia. La pendenza di E(p) dove l'oggetto si spezza non e' misurata: lo dico.
+- **`C.residuo` assoluto**, perche' senza materia `rho = 0` *(come D2)*.
