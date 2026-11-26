@@ -27843,3 +27843,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **LE PREVISIONI:**
   - **guardiano:** P1 *(un periodo valido)* **SI'** *(`3` su `3`)*; P2 *(d2' VERSO)* **NO**, e' VIA; P3 *(verdetto VERSO)* **NO** con la regola scritta, **SI'** nella sostanza *(d1' si avvicina oltre `3` volte la deriva in `8` finestre)*;
   - **le mie:** P1 *(`75%`)* giusta; P2 *(`50%`)* nessuna delle due; **P3 *(`30%`)* sbagliata nella sostanza.**
+
+
+### 2026-11-27 00:38 -- [M0024] PEZZO 2: NELLA CARTA DELLE DUE LUCI (3-undevicies) LA NOTA SUL RUMORE DELL'ANISOTROPIA E LA BANDA PIATTA [[PROGETTO-MITOSI]]
+
+- **La nota** e' annotata in coda alla sez. `3-undevicies`, senza riscrivere la sezione:
+  - l'anisotropia `-8.19%` e' rumore;
+  - la banda e' piatta allo zero simmetrico, con risposta lineare;
+  - **il limite su `c_phi`** e' `2.681e-06` *(`max_q |Delta omega|/q`, a `x` n `16`; calcolato con uno script dai numeri di `due_luci.txt`)*, sotto `1e-5`.
+- **Le previsioni di [M2053]:** P1 giusta; P2 e P4 sbagliate; P3 non decidibile. **La mia P4 al `60%`** *(un gap)* era sbagliata.

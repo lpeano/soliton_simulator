@@ -574,6 +574,12 @@
 - **Le corse:** sei, da `1000` tick, un processo ciascuna: `x` con `n = 2, 4, 8, 16`; `y` con `n = 2`; `x`, `n = 2`, `eps = 5e-4`.
 - **LE PREVISIONI DEL GUARDIANO:** P1 *(`60%`)* due luci; P2 *(`55%`)* `c_phi > c_psi`; P3 *(`70%`)* l'anisotropia a `q` piccolo sotto il `5%`; P4 *(`65%`)* le onde del vuoto hanno un gap.
 - **LE MIE:** P4 `60%`; P1 `65%`.
+- **### [M0024] LA NOTA SUL RUMORE E LA LETTURA** *(DECISIONE DI LUCA, 2026-11-27 `00:24`; annotata dopo `due_luci.txt`, `12d3d40b`; la sezione sopra non si riscrive)*:
+  - **l'«anisotropo `-8.19%`» del referto NON e' un'anisotropia.** E' il rapporto fra due spostamenti di frequenza da `~2e-8` per tick *(`-2.50e-08` lungo `y`, `-2.72e-08` lungo `x` interpolato)*, piu' piccoli dello scarto del fit *(`5.32e-04` rad su una fase totale di `~2e-5` rad)*: **e' rumore**;
+  - **LA LETTURA:** allo zero simmetrico il vuoto **non propaga** l'increspatura. `omega(q) - omega_phi` sta sotto `1.7e-6` per tick fino a `q 0.62`, e la risposta e' lineare *(`eps 5e-4` = `1e-3` entro `0.000%`)*: **una banda piatta**;
+  - **`c_phi` non e' misurabile:** il limite e' `max_q |omega(q) - omega_phi| / q` = `2.681e-06` *(a `x` n `16`, calcolato dai numeri del referto)*, **sotto `1e-5`**, contro `c_psi` di `0.084955`;
+  - **S4, «due luci», vale alla lettera:** la seconda luce non c'e';
+  - **le previsioni:** P1 giusta; P2 e P4 sbagliate; P3 non decidibile.
 
 
 ## 3-vicies. [M2034-B] LA LETTURA DI d1', d2', d3' COL CRITERIO C *(DECISIONE DI LUCA `09:25` e [M2034] `20:34`; scritta PRIMA dello script e PRIMA di guardare le serie)*
