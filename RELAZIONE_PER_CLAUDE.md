@@ -27093,3 +27093,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - la norma, il controllo che ha senso, e' ferma a `9e-14`.
 - **NON CORREGGO IL CRITERIO DA SOLO:** cambiare la soglia dopo aver visto il numero e' una scelta a posteriori. **La proposta per Luca:** un criterio assoluto, `|Delta H| / somma |phi_h|^2 < 1e-9` *(qui `5.8e-16`)*.
 - **FINCHE' LUCA NON DECIDE, la corsa lunga del vuoto NON va in coda.** Le due corse della soglia *(`0.5` e `2`)* hanno K3 e K3b verdi e vanno in coda adesso, sulla coda di lapse-u.
+
+
+### 2026-11-26 22:48 -- [M0237] LE DUE CORSE DELLA SOGLIA FALLITE (USCITA 1): A pi UNA VALANGA DI 2094 ARCHI E UN TRIANGOLO DEGENERE ALLA QUARTA NASCITA; A 4 pi IL TRONCO NON HA SCATTI [[PROGETTO-MITOSI]]
+
+- **I log**, copiati dal lanciatore di lapse-u *(`E:/soliton_simulator/controllo/M1446/log/`)*, stanno in `doc/referti_l2/mitosi_soglia_v2_{0.5,2}_log.txt`.
+- **Soglia `0.5`** *(`QUANTO = pi`; partita alle `22:35:22`, FALLITA alle `22:37:41`)*:
+  - dalla fase 1 *(`TRONCO/prima_nascita_35976.npz`)*, alla prima nascita `2094` archi sono gia' «in attesa» sopra la soglia;
+  - tre nascite *(k `35976-35978`, `E_persa +4.594863e+01`)*;
+  - alla quarta, `u1_generico._placchetta`: **«il triangolo `(12537, 12723, 34599)` e' degenere: i vettori d'arco sono paralleli»**.
+- **Soglia `2`** *(`QUANTO = 4 pi`; FALLITA alle `22:36:16`)*: `mitosi_rami.ciclo` si ferma su **«lo stato del tronco NON ha un arco scattato»**. La fase 1 parte dallo stato della prima nascita a soglia `2 pi`, e a `4 pi` quello stato non ha scatti.
+- **LA LETTURA, mia:**
+  - **a `4 pi` la via di partenza che ho scelto non esiste.** La prima nascita a `4 pi` cadrebbe piu' tardi, e per trovarla bisogna far girare il tronco da prima di `35976` senza nascite fino al primo scatto. Il pezzo 3 l'avevo progettato male: errore mio;
+  - **a `pi`** non e' un errore di via: e' un risultato *(una valanga, poi la geometria si rompe)*. Ma l'assert ferma la corsa, e decidere se un triangolo degenere conta come un esito di fisica o come un limite della regola di nascita spetta a Luca.
+- **FERMO:** le due corse non si rilanciano senza una decisione.

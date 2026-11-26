@@ -1,0 +1,43 @@
+[TIMBRO] mitosi_soglia_v2.py  sha1-BYTE eb484371  committato e pulito
+[TIMBRO] mitosi_rami.py  sha1-BYTE 6dccd9d6  committato e pulito
+### [M0237-3 v2] fase 1 (mitosi_rami, la v1): s 0.50, QUANTO 3.141592653589793; da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz a 36250; in E:\soliton_simulator\controllo\M0237\soglia_v2_0.5\fase1
+### soglia_0.5_fase1 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, sha1 abbdcaca), fino a k 36250; le nascite ACCESE
+    [nascita 1] k 35976, l'arco 37046 (lo scatto del tronco; 2094 in attesa): n 34596 a r 22.69, 25 passi dalla sorgente; DH nascita -6.2246e+00 flip -3.3093e+00; P9 0.0e+00; |Ec| 1.885e-01; E_persa +9.533845e+00 (18.0 s)
+    [nascita 2] k 35977, l'arco 37048 (scattato; 2093 in attesa): n 34597 a r 22.41, 25 passi dalla sorgente; DH nascita -1.2518e+01 flip -5.6353e+00; P9 0.0e+00; |Ec| 1.661e-01; E_persa +2.768733e+01 (19.7 s)
+    [nascita 3] k 35978, l'arco 37050 (scattato; 2092 in attesa): n 34598 a r 22.18, 25 passi dalla sorgente; DH nascita -1.1357e+01 flip -6.9045e+00; P9 0.0e+00; |Ec| 1.592e-01; E_persa +4.594863e+01 (21.1 s)
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 146, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 141, in main
+    return corsa(a.s)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 89, in corsa
+    cod, k, _f = fase1(s, os.path.join(d, "fase1"))
+                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 46, in fase1
+    return MR1.ciclo("soglia_%.1f_fase1" % s, "mitosi", SORGENTE, K1, None, d_out=d)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami.py", line 197, in ciclo
+    NS.nasci(Z, C, int(sc[0]), k, "scattato; %d in attesa" % (sc.size - 1))
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami.py", line 48, in nasci
+    R, S = MR.regola(Z, C, int(a), "stella")
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_regola.py", line 269, in regola
+    cand = [candidato(Z, C, a, lt, giro) for lt in lati]
+            ~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_regola.py", line 223, in candidato
+    g.cresci(dove_di(keep), ii3, jj3, n + 1, vec3[mb:], A3[mb:], E3[mb:], np.full(nuovi, s0), np.full(nuovi, U1.L_SU_LS), lambda *_: U1.AREA)
+    ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\u1_generico.py", line 187, in cresci
+    self._topologia(aree, area_di)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\u1_generico.py", line 86, in _topologia
+    righe = sorted((self._placchetta(*t, adj) for t in terne), key=lambda r: r[1][0])
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\u1_generico.py", line 86, in <genexpr>
+    righe = sorted((self._placchetta(*t, adj) for t in terne), key=lambda r: r[1][0])
+                    ~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\csv\solitone\u1_generico.py", line 58, in _placchetta
+    assert cr != 0.0, "il triangolo (%d, %d, %d) e' degenere: i vettori d'arco sono paralleli" % (x, y, z)
+           ^^^^^^^^^
+AssertionError: il triangolo (12537, 12723, 34599) e' degenere: i vettori d'arco sono paralleli

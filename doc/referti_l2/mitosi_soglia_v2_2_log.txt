@@ -1,0 +1,20 @@
+[TIMBRO] mitosi_soglia_v2.py  sha1-BYTE eb484371  committato e pulito
+[TIMBRO] mitosi_rami.py  sha1-BYTE 6dccd9d6  committato e pulito
+### [M0237-3 v2] fase 1 (mitosi_rami, la v1): s 2.00, QUANTO 12.566370614359172; da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz a 36250; in E:\soliton_simulator\controllo\M0237\soglia_v2_2.0\fase1
+### soglia_2.0_fase1 (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, sha1 abbdcaca), fino a k 36250; le nascite ACCESE
+Traceback (most recent call last):
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 146, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 141, in main
+    return corsa(a.s)
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 89, in corsa
+    cod, k, _f = fase1(s, os.path.join(d, "fase1"))
+                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_soglia_v2.py", line 46, in fase1
+    return MR1.ciclo("soglia_%.1f_fase1" % s, "mitosi", SORGENTE, K1, None, d_out=d)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lpeano\wt_mitosi\doc\referti_l2\mitosi_rami.py", line 166, in ciclo
+    assert sc.size, "lo stato del tronco NON ha un arco scattato"
+           ^^^^^^^
+AssertionError: lo stato del tronco NON ha un arco scattato
