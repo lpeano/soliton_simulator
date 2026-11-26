@@ -2776,6 +2776,39 @@
     "3"
    ],
    "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 3 (l'ultimo)"
+  },
+  {
+   "nome": "M2034_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: due, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2034_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: due, chi off, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2034_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: uno, chi on, 6000 tick, stati ogni 250"
   }
  ]
 }

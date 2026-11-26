@@ -27643,3 +27643,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **per questo il fit di `a` uniforme dava `|a|` `0.019`:** la fase cambia con la distanza;
   - **chi ha un fondo uniforme circa `-21`** *(il modo zero)*, che non torna a zero sul toro.
 - **Le previsioni del guardiano:** P1, `rho_phi` lontano sotto l'`80%` *(`65%`)*: **NO** *(`103%`)*; P2, `J_phi` radiale verso l'oggetto e non tangenziale *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2034-B] LA COPPIA COL VUOTO FRESCO: I CASI NOTI 6 SU 6; LA CATENA DEL TICK GIUSTA (V0); LA FASE DI phi NON CONTA (V3, omega UGUALE AL BIT); c0 -2.30e-03; d1', d2', d3' IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v6_noto.txt`.
+- **La catena del tick:** la tenuta `63000`; la v2 `63300`, `65600`, `71600`; la v3b `73100`, `75200`, `81200` *(`PARTENZA_G4`)*; [M0137] `87200`, `93200`, `99200`; [M0414] `105200`, `111200`, **`117200`** *(lo stato del giro 3)*.
+- **(V0):** sulla tenuta e su `PARTENZA_G4` la fase di `c(t)` = la fase del fit sul vuoto lontano *(`+0.1571` contro `+0.1571`, `|a|` `1.0000`)*. **La catena e' giusta.** Nota: `c(t)` vale `+0.987688+0.156434i` a tutti e tre i `t` *(`omega = 3 pi/20`, e le differenze di `t` sono multipli di `40/3`)*.
+- **(G)** esatto; **(T)** le masse uguali; **(V2)** `phi` composto = `c(t) phi_v` al bit; **(K2)** d2' = d1' a `k 0` al bit *(`ebc59ddfbb8c`)*.
+- **(V3):** d3' per `250` tick, `omega` medio **`+0.084031366` a fase `0` e a fase `c(t)`: identico al bit.** **La fase del vuoto fresco non conta.**
+- **La coppia:** `chi_fondo -23.95`; `max|chi|` `114.06`; **`c0 -2.3030e-03`, `m0 -9.1066`**. Col vuoto fresco la composizione e' sana *(nella v4 `c0` era `-1.56`)*.
+- **La coda:** `M2034_d1`, `_d2`, `_d3` a priorita' `1`, a lanciatore fermo, in questo commit; il rilancio dopo.
+- ### **UN ERRORE MIO, DUE PARTI:** (1) **il lanciatore e' stato rilanciato prima del commit delle tre voci in coda** *(la stessa svista di [M0140])*: il commit era stato RIFIUTATO *(lo stage non coincideva)*, e il rilancio era partito in parallelo. **Il codice delle corse e' committato** *(`878b6e5f`, il timbro di se stesso compreso: la correzione era gia' li', non dopo)*; le voci in coda e il registro entrano in questo commit. (2) Una riga che avevo scritto qui *(«una correzione dopo `878b6e5f`»)* era falsa, e la tolgo prima del commit.
+- **Le previsioni:** P7 del guardiano, la fase non conta *(`60%`)*: **SI'**.
