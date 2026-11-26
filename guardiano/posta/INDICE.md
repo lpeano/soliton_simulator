@@ -10,3 +10,4 @@
 | 2026-11-25_0925_M0925.md | DECISIONE DI LUCA (09:25) | eseguito: il TODO per domani scritto, sospensione | lapse-u b4df4f0f |
 | 2026-11-26_2034_M2034.md | DECISIONE DI LUCA (2026-11-26 20:34) | da eseguire: la ripresa del piano di [M0925]; fase di phi = c(t) phi_v (V3), D1 e D2 sì | — |
 | 2026-11-26_2048_M2048.md | DECISIONE DI LUCA (2026-11-26 20:48) | da eseguire (lettura a costo zero, non ferma B): chi contro rho_phi e contro l'orologio locale di phi sul giro 3 | — |
+| 2026-11-26_2053_M2053.md | DECISIONE DI LUCA (2026-11-26 20:53) | da eseguire dopo B: le due luci, la dispersione delle onde del vuoto phi contro c_psi (5 corse da 1000 tick) | — |
