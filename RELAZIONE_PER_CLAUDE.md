@@ -27690,3 +27690,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le previsioni:**
   - del guardiano: P1, l'orologio meglio della densita' *(`55%`)*: **di poco SI'** *(`0.24` contro `0.20`)*; P2, nessuno passa S3 *(`60%`)*: **SI'**; P3, l'anticorrelazione *(`65%`)*: **NO su tutti i nodi** *(`+0.20`)*, **SI' in `[8, 16)`** *(`-0.80`)*; P4, in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8` *(`70%`)*: **NO** *(`0.45`)*;
   - mia: P2 *(`70%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2053] (DALLA POSTA, DECISIONE DI LUCA 20:53) LE DUE LUCI: LA CARTA (SEZ. 3-UNDEVICIES) E due_luci.py; n = 1 LUNGO x NON ESISTE SUL TORO: n = 2, 4, 8, 16 [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2053] letto dalla posta alle `21:04` *(`5c9edcef`)*, categoria DECISIONE DI LUCA (20:53). Le corse dopo B.
+- **Due cose del mandato che il toro non permette, dichiarate:**
+  - **lungo `x` servono `n` pari** *(con `A2 = (-1/2, sqrt3/2)`, `n = 1` non e' periodica)*: uso `n = 2, 4, 8, 16`;
+  - **lungo `y`** `|q| = 2 pi n/L_y`; l'anisotropia si legge contro `x` interpolato alla stessa `|q|`.
+- **`c_psi = 0.084955`** *(`ep_fondo.C_RET`)*, la velocita' di gruppo massima della banda della materia. La pendenza di E(p) dove l'oggetto si spezza non e' misurata: lo dico.
+- **`C.residuo` assoluto**, perche' senza materia `rho = 0` *(come D2)*.

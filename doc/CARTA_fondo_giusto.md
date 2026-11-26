@@ -542,3 +542,35 @@
 - **I referti:** `chi_contro_phi_noto.txt`, `chi_contro_phi.txt`, `chi_contro_phi.png`.
 - **LE PREVISIONI DEL GUARDIANO:** P1 *(`55%`)* chi segue l'orologio locale meglio della densita'; P2 *(`60%`)* nessuno dei due passa S3; P3 *(`65%`)* il segno scomodo *(chi grande dove `rho_phi` e' piccolo)*; P4 *(`70%`)* in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8`.
 - **LE MIE:** P2 `70%` *(fuori dall'oggetto chi e' quasi costante, circa `-22`, mentre `rho_phi` fluttua)*.
+
+
+## 3-undevicies. [M2053] LE DUE LUCI: LA DISPERSIONE DELLE ONDE DEL VUOTO phi CONTRO QUELLA DELLA MATERIA psi *(DECISIONE DI LUCA, 2026-11-26 `20:53`, arrivata dalla posta, `5c9edcef`; letta alle `21:04`; scritta PRIMA del codice)*
+
+- **`git log --all --fixed-strings --grep "[M2053"`:** solo il commit della posta. **Le corse vanno in coda DOPO quelle di B di [M2034] e dopo [M2048]** *(gia' chiusa)*.
+- **LE SCELTE DI LUCA:**
+  - **S1** `phi = phi_v (1 + eps e^{i q.x})`, `eps = 1e-3`, `q` lungo `x` per `n = 1, 2, 4, 8`, `q = 2 pi 2/L` lungo `y`; la linearita' a `eps = 5e-4` su UNA `q`. Corse da `1000` tick, `N = 1`, chi spento;
+  - **S2** la componente di Fourier a `q` nel tempo: `omega(q) - omega_phi`, la velocita' di gruppo `c_phi`, il gap;
+  - **S3** `c_psi` non si rimisura: da `ep_fondo.txt`;
+  - **S4** «una luce sola» se `|c_phi - c_psi|/c_psi < 10%`; «anisotropo» se `c_phi` lungo `y` e lungo `x` differiscono oltre il `5%`.
+- ### **DUE COSE DEL MANDATO CHE IL TORO NON PERMETTE, dichiarate:**
+  1. **lungo `x` l'onda `e^{i q x}` e' periodica solo con `n` PARI.** Il toro e' `m1 -> m1 + L`, `m2 -> m2 + L`, con `x = m1 - m2/2`: il secondo passo sposta `x` di `-L/2`, e la fase cambia di `-pi n`. **`n = 1` lungo `x` non esiste.** **Uso `n = 2, 4, 8, 16`**: quattro valori, raddoppiando la lista;
+  2. **lungo `y`** le onde ammesse sono `|q| = 2 pi n/L_y`, `L_y = L sqrt3/2`; uso `n = 2` *(`|q| = 0.0896`)*. **L'anisotropia** si confronta con la dispersione lungo `x` interpolata alla stessa `|q|`.
+- **IL LATO:** `L = 162` *(il toro della scena del fondo)*.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **la scena** e' quella del fondo: `psi = 0`, i campi `porto.campi` *(zero senza materia)*, il tick con `N = 1`, `cs_N` falso, `segno 0`, la forma `L-1`;
+  - **`C.residuo` assoluto** *(senza dividere per `rho`)*, perche' senza materia `rho = 0`: come D2 di [M2034], solo in questo script;
+  - **la misura:** a ogni tick `A_0 = <phi_v|phi>/<phi_v|phi_v>` e `A_q = <phi_v e^{iqx}|phi>/<phi_v|phi_v>`; **`omega(q) - omega_phi` = meno la pendenza del fit lineare della fase svolta di `A_q/A_0`**, su `[0, 1000]` e sulle due meta'. Si stampa anche `|A_q/A_0|/eps`: se oscilla, nell'increspatura ci sono piu' bande;
+  - **`c_phi`** = la pendenza fra i due `q` piu' piccoli lungo `x` *(`n = 2` e `4`)*; **il gap** = `a` nel fit `omega(q) - omega_phi = a + b q^2` lungo `x`;
+  - **la linearita'** su `x`, `n = 2`;
+  - **`c_psi = 0.084955`** per tick, cioe' `ep_fondo.C_RET`, **la velocita' di gruppo MASSIMA della banda della materia** *(definita cosi' in `ep_fondo.py`)*. Nella misura di E(p) `v` e' arrivato solo a `2.84e-02` *(`p 0.50`)*: **la pendenza di E(p) dove l'oggetto si spezza non e' stata misurata.** Il confronto si fa col massimo della banda, e lo dico.
+- **LA FORMA ATTESA, scritta prima:**
+  - il vuoto sta su un autostato della camminata con `omega_phi = -0.4712 = -3 pi/20`. **Attorno a quel punto la banda puo' avere un cono** *(`omega(q) - omega_phi = +- c_phi |q|`, senza gap, come il grafene)* **o un minimo** *(`omega(q) - omega_phi = Delta + q^2/(2 m_phi)`, col gap `Delta`)*;
+  - **non so quale delle due:** e' la domanda;
+  - se l'increspatura `phi_v e^{iqx}` non e' un autostato, `A_q` contiene due rami *(`+` e `-`)* e `|A_q|` batte; la fase allora segue il ramo dominante.
+- **I CASI NOTI** *(`due_luci.py noto`)*:
+  - **(K1)** `eps = 0`, `1000` tick: `omega_phi` per tick costante entro `1e-12`, e `|A_0| = 1` entro `1e-12`. **«Al bit» non lo chiedo:** l'`arg` arrotonda;
+  - **(K2)** a `k 0` la componente a `q` vale `eps` entro `1e-12`, e quella a `2q` sta sotto `1e-9`;
+  - **(K3)** la lettura su una serie sintetica `e^{-i omega k}` ridà `omega` entro `1e-9`.
+- **Le corse:** sei, da `1000` tick, un processo ciascuna: `x` con `n = 2, 4, 8, 16`; `y` con `n = 2`; `x`, `n = 2`, `eps = 5e-4`.
+- **LE PREVISIONI DEL GUARDIANO:** P1 *(`60%`)* due luci; P2 *(`55%`)* `c_phi > c_psi`; P3 *(`70%`)* l'anisotropia a `q` piccolo sotto il `5%`; P4 *(`65%`)* le onde del vuoto hanno un gap.
+- **LE MIE:** P4 `60%`; P1 `65%`.
