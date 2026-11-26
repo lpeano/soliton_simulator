@@ -27656,3 +27656,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La coda:** `M2034_d1`, `_d2`, `_d3` a priorita' `1`, a lanciatore fermo, in questo commit; il rilancio dopo.
 - ### **UN ERRORE MIO, DUE PARTI:** (1) **il lanciatore e' stato rilanciato prima del commit delle tre voci in coda** *(la stessa svista di [M0140])*: il commit era stato RIFIUTATO *(lo stage non coincideva)*, e il rilancio era partito in parallelo. **Il codice delle corse e' committato** *(`878b6e5f`, il timbro di se stesso compreso: la correzione era gia' li', non dopo)*; le voci in coda e il registro entrano in questo commit. (2) Una riga che avevo scritto qui *(«una correzione dopo `878b6e5f`»)* era falsa, e la tolgo prima del commit.
 - **Le previsioni:** P7 del guardiano, la fase non conta *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2048] (DALLA POSTA, DECISIONE DI LUCA 20:48) chi CONTRO phi: LA CARTA (SEZ. 3-DUODEVICIES) E chi_contro_phi.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2048] letto dalla posta alle `21:04` *(«Leggi post. Leggi la posta.»; `cd581122`)*, categoria DECISIONE DI LUCA (20:48). **Nella stessa lettura c'era [M2053]** *(le due luci, `5c9edcef`)*: la carta, lo script e i casi noti si fanno ora, le corse dopo B.
+- **La lettura** si fa mentre gira B: un processo, un tick.
+- **K3 e' un equivalente dichiarato:** `250` tick dalla partenza del giro 3, contro il suo `stato_000250`. Il tick `1` non e' stato salvato.

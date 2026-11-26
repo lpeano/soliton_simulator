@@ -520,3 +520,25 @@
   - il referto `doc/referti_l2/vuoto_giro3.txt`.
 - **B, LA COPPIA** *(`due_corpi_fondo_v6.py`)*: la v4, con **`phi = c(t) phi_v` fresco** *(F)*, **`psi` e chi dal giro 3** *(`psi_A + psi_B`, `chi_A + chi_B - chi_fondo`, `pi = 0`)*, i campi da Gauss *(`porto.campi`)*. I casi noti: G, T, K2; **(V2)** il vuoto composto a `k 0` e' `c(t) phi_v` al bit a `d > 45` da entrambi *(e dappertutto: `phi` fresco non porta oggetti)*; **(V0)**; **(V3)**.
 - **D, LA MITOSI** *(ramo `mitosi`)*: D1 a costo zero; D2 dichiarato nella `doc/CARTA_mitosi.md` prima di rifare K4.
+
+
+## 3-duodevicies. [M2048] chi CONTRO phi: IL LAPSE LO PORTA GIA' IL VUOTO? *(DECISIONE DI LUCA, 2026-11-26 `20:48`, arrivata dalla posta, `cd581122`; letta alle `21:04`; scritta PRIMA del codice)*
+
+- **`git log --all --fixed-strings --grep "[M2048"`:** solo il commit della posta. **Una lettura a costo zero, mentre gira B di [M2034]**, senza toccarla.
+- **LE SCELTE DI LUCA:**
+  - **S1.** un tick dallo stato *(`M0414/puntofisso_accoppiato/giro_3/partenza_giro_4.npz`, sha1 `bee0464d6d2e`)*, chi acceso, `tick_chi_v2`, come il giro;
+  - **S2.** per nodo le coppie `(chi, rho_phi)`, `(chi, omega_phi locale)`, `(chi, N)`, quest'ultima di controllo: Pearson e Spearman su tutti i nodi; la mediana di chi per decile; gli anelli `[0, 8)`, `[8, 16)`, `[16, 32)`, `[32, 45)`, `[45, 90)`;
+  - **S3.** «phi lo porta» se `|Spearman| > 0.9` su tutti i nodi **e** la mediana per decile e' monotona; con due candidati vince il `|Spearman|` maggiore;
+  - **S4.** il segno si dichiara.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **`omega_phi` locale** `= -arg somma_{mezze-spighe del nodo} conj(phi(k)) phi(k+1)`, col prodotto in reali;
+  - **il centro** e' il baricentro di `rho_psi`;
+  - **la macchina** e' quella di `fondo_puntofisso_chi_v2`: i parametri del giro 1 di [M0137], i campi dallo stato, `U` riscritto, la forma `L-1`;
+  - **«monotona»** = le differenze fra decili consecutivi tutte dello stesso segno, strette.
+- **I CASI NOTI** *(`chi_contro_phi.py noto`)*:
+  - **(K1)** il vuoto fresco *(`phi = phi_v`, `psi = 0`, chi `0`)*, un tick: `omega_phi` locale = `omega_phi` globale entro `1e-9` su tutti i nodi, e `rho_phi` uniforme entro `1e-9`;
+  - **(K2)** Spearman`(chi, N) = -1` esatto;
+  - **(K3), l'equivalente dichiarato:** il giro 3 non ha salvato lo stato al tick `1`, quindi il «primo tick del giro 3 al bit» non si puo' controllare. **Si fa con `250` tick dalla partenza del giro 3, contro `giro_3/stato_000250` al bit** *(`psi_h`, `phi_h`)*.
+- **I referti:** `chi_contro_phi_noto.txt`, `chi_contro_phi.txt`, `chi_contro_phi.png`.
+- **LE PREVISIONI DEL GUARDIANO:** P1 *(`55%`)* chi segue l'orologio locale meglio della densita'; P2 *(`60%`)* nessuno dei due passa S3; P3 *(`65%`)* il segno scomodo *(chi grande dove `rho_phi` e' piccolo)*; P4 *(`70%`)* in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8`.
+- **LE MIE:** P2 `70%` *(fuori dall'oggetto chi e' quasi costante, circa `-22`, mentre `rho_phi` fluttua)*.
