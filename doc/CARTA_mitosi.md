@@ -53,3 +53,22 @@
 - **L'ORDINE** *(Luca)*: K3, K3b e K4 adesso, mentre girano d1', d2', d3'. **Le corse lunghe** *(soglia `pi`, soglia `4 pi`, il vuoto)* **DOPO** d1', d2', d3'.
 - **IL COSTO:** circa `4.5`-`7.5` s per tick *(K3 della v1: `274` tick in `1242` s)*. Una corsa di `6000` tick dura **circa `8`-`12` ore.**
 - **La previsione del guardiano P6** *(`60%`)*: D1 trova che MITOSI viene da un'altra via. **SI'** *(`mitosi_rami.py`)*.
+
+
+## K4' E LA SOGLIA CHIUSA *([M0024], DECISIONE DI LUCA, 2026-11-27 `00:24`, arrivata dalla posta, `e609aafa`; scritta PRIMA di `mitosi_vuoto_v3.py`)*
+
+- **K4', LA SCELTA DI LUCA:**
+  - il criterio su `H` diventa ASSOLUTO: `|H(250) - H(0)| < 1e-9 |H_rif|`, con `H_rif` = l'energia del vuoto fresco sullo stesso reticolo;
+  - **se anche quella e' circa `0`, vale `|Delta H| < 1e-12`, dichiarato**;
+  - la norma resta com'e' gia' misurata *(`8.99e-14`)*;
+  - **se K4' passa**, va in coda la corsa del vuoto puro con le nascite accese, `6000` tick.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **`H_rif`** e' `H` dello stato di partenza `vuoto_35976.npz`. Quello stato e' gia' il vuoto fresco sullo stesso reticolo: `mitosi_vuoto.py prepara` mette `phi_h = a phi_v` e `psi = 0`. Il primo valore che la serie misura e' `k 36000`;
+  - **«circa 0»** significa `|H_rif| < 1e-9`;
+  - **`Delta`** e' preso fra `36000` e `36250`, come in K4;
+  - **non rifaccio la corsa:** la v3 legge le uscite di K4 *(`M0237/vuoto_v2_noto`)*. Il codice della via non e' cambiato, quindi rifarla darebbe gli stessi byte.
+- **### LA PREVISIONE, MIA, PRIMA DI APPLICARLO: K4' FALLISCE** *(la regola «una soglia DEVE contro la sua premessa»)*:
+  - la serie `E` di K4 e' gia' sul disco, e fra un campione e il successivo *(ogni `50` tick)* salta da `3.2e-14` a `1.2e-10`. **E' il rumore di arrotondamento di una somma che vale zero;**
+  - `|Delta H|` fra `36000` e `36250` e' `1.208e-10`, cioe' **oltre `100` volte `1e-12`**;
+  - **la soglia di `1e-12` sta sotto il pavimento di arrotondamento di questa somma.** La applico com'e', e se fallisce la corsa del vuoto non va in coda.
+- **IL GUARDIANO, P4 *(`70%`)*:** K4' passa e nel vuoto puro non nasce nulla in `6000` tick. **La mia, prima:** K4' passa al `5%`.
