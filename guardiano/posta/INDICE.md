@@ -15,4 +15,5 @@
 | 2026-11-27_0106_M0106.md | DECISIONE DI LUCA (2026-11-27 01:06) | eseguito: D2'' VERSO 8 / VIA 4 / ND 0, minimo d 6,80 a k 3230; K4'' passa; vuoto puro 0 nascite in 6000 tick | lapse-u 41ccae13, 1de07f48; mitosi 82739c06 |
 | 2026-11-27_0951_M0951.md | DECISIONE DI LUCA (2026-11-27 09:51) | eseguito 3/3: il video (anima_coppia.mp4), il TODO con A0 (due corpi o una nube?) | lapse-u 838d378e, 7cfe4823, 2182b909 |
 | 2026-11-27_1016_M1016.md | DECISIONE DI LUCA (2026-11-27 10:16) | A0 fatto: due corpi in 22/25, urto a 3000-3500, norma ferma (a); la corsa lunga FERMA: K0' fallisce (uno stato non caricato) -> [M1107] | lapse-u e64e79d1, 0c6f2a0c |
-| 2026-11-27_1107_M1107.md | DECISIONE DI LUCA (2026-11-27 11:07), in chat | da eseguire: lo spostamento su E:\ (worktree, temp, caso noto); la chiave non salvata con tetto di 2 tentativi, poi d1 da capo a 18000 con K5 | — |
+| 2026-11-27_1107_M1107.md | DECISIONE DI LUCA (2026-11-27 11:07), in chat | A1-A4 fatti (E:/soliton_lavoro, wt_mitosi, lanciatore a secco 8/8); B5: la chiave è mot.geo.U (funzione di A), v9 tentativo 1 | lapse-u 576c2687, 4bca34db, b1a22f1c, 568fcc74 |
+| 2026-11-27_1214_M1214.md | DECISIONE DI LUCA (2026-11-27 12:14) | da eseguire: la regola «si lavora sempre nella cartella nuova» (CLAUDE.md par. 2); K0' v9 e la corsa lunga; la suite mitosi nel worktree nuovo; i pezzi 4-6 di [M1016] | — |
