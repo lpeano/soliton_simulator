@@ -28218,3 +28218,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   6. `core.hooksPath` vale `.githooks` *(e' una configurazione condivisa, quindi i presidi ci sono)*. **Questo commit e' il primo dal worktree nuovo.**
 - **I manifesti** sono in `E:\soliton_lavoro\manifesto_lapse_u_{vecchio,riserva,nuovo}.txt`.
 - **Poi:** A2 per la mitosi; B5 parte dal worktree nuovo di lapse-u.
+
+
+### 2026-11-27 11:50 -- [M1107] B5a: b5_chiave.py, PRIMA DELLA LETTURA (LA CORSA CONTINUA A k 250 CONTRO LA RICARICA DAL FILE APPENA SCRITTO); E DI NUOVO UN'ORA STIMATA NEL TITOLO DI fd996d24 [[PROGETTO-MITOSI]]
+
+- **Lo script:** `doc/referti_l2/b5_chiave.py`.
+  - **Dentro una corsa** *(la via di d1': `costruisci` e `parametri` della v6, il `D.ciclo` della v2)*: `250` tick, poi l'istantanea A di tutto cio' che e' raggiungibile da `Z`, `Z["z"]`, il motore, `C`, `C.campo`, `X` e `P` *(gli array, gli scalari, le sparse; profondita' `4`)*.
+  - **Lo stato si salva** come in `due_corpi_fondo_v4.corsa`, in un file su `E:\soliton_lavoro\tmp`.
+  - **Poi una scena nuova**, la carica come `Ripresa`, e l'istantanea B. **Le voci diverse sono le candidate.**
+- **LA MIA SCELTA, DICHIARATA:** il confronto si fa a `k 250`, non a `5750` come dice il mandato. **Il meccanismo del salvataggio e' lo stesso a ogni multiplo di `250`;** cosi' si risparmiano circa `80` minuti. **La prova finale resta K0' a `5750`.**
+- **LA MIA PREVISIONE:** la candidata e' un attributo del motore *(`mot.dtau`, `mot.cs` o una cache del passo)* o del campo, non una chiave dello stato *(`60%`)*. **Il guardiano, P1** *(`55%`)*: «una cache del motore *(`cs_prec` o `lambda_c`)*».
+- **### UN ERRORE MIO, DI NUOVO L'ORA:** il titolo del paragrafo di `fd996d24` dice «`11:50`», ma `date` dava `11:47:33`. **Da adesso il titolo lo scrive uno script** *(`accoda.py`)*, che legge l'ora dall'orologio nel momento in cui accoda il paragrafo.
