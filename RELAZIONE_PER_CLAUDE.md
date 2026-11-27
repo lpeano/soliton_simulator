@@ -29236,3 +29236,18 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
   - **mie:** `t120` `+1` all'ultimo stato (`60%`): **NO**, a `k 35000` e' `-3`, cioe' rumore. `t000` `0` (`80%`): **SI'**.
 - **Nello stesso commit:** lo script di A5, `vento_due_corpi.py`, prima dei dati. Il motivo e' che `H-NON-TRACCIATI` rifiutava ciascuno dei due commit separati per il file non tracciato dell'altro.
 - **Un mio errore, senza effetto:** alle 00:03 un comando conteneva `git stash list`, e `H-STASH` l'ha bloccato prima che partisse.
+
+
+### 2026-11-28 00:08 -- [M2245-27] A5 FATTO: IL VENTO DEL VUOTO VA VERSO CIASCUN CORPO NELL'ANELLO [16, 32) (42 SU 44, DA -0.06 A -3.5) E CRESCE NEL TEMPO; LUNGO L'ASSE NON VA VERSO IL BARICENTRO (8 SU 22, MEDIA -0.045) [[PROGETTO-MITOSI]]
+
+- **I casi noti** (V1, quelli di `vuoto_giro3`): sul vuoto fresco la corrente e' `0`; la fase `q y` da' `|J_y| 0.537`. **2 DEVE su 2.**
+- **Gli stati** (`M2034/coppia/d1`, da 0 a 6000, ogni 250): 22 sono DUE. Sono esclusi `k 3000` (ALTRO 3), `3250` (UNO) e `3500` (ALTRO 3). La distanza fra i corpi va da `41.57` a `16.46` (`k 2750`), poi risale a `28.58` e torna a `13.89` a `k 6000`.
+- **Il vento radiale** (`J_phi`, negativo verso il corpo):
+  - **anello `[16, 32)`:** **verso il corpo in 42 casi su 44** (2 corpi x 22 stati), con media `-1.98`, e **cresce nel tempo**: `-0.06` nella finestra `[0, 500)`, `-1.24` in `[1500, 2000)`, `-3.49` in `[5000, 5500)`. A `k 0` vale zero (`-4.6e-33`), il vuoto fresco;
+  - **anello `[8, 16)`:** il segno e' misto, 24 negativi su 44, con media `-2.6e-03`. Nei primi 1000 tick e' **uscente** (fino a `+0.78`), da `k 2500` circa piu' spesso entrante.
+- **Lungo l'asse** (positivo verso il punto medio): media `-0.045`, **positivo in 8 stati su 22**. Per finestra va da `-0.26` a `+0.55`; quel `+0.55` viene da un solo stato, `k 3750`, subito dopo la fusione. **Non c'e' un vento verso il baricentro della coppia:** fra i due corpi la corrente va, debolmente, verso i corpi.
+- **La lettura:** e' la stessa del vuoto del giro 3 di [M2034-A], cioe' corrente radiale verso l'oggetto a `d 45-90`, qui verso ciascun corpo a `d 16-32`, e cresce mentre i due si avvicinano e si fondono. **E' un flusso del vuoto verso la materia, cioe' «la spinta» del bersaglio, letta e non provata come causa del moto.**
+- **Le previsioni:**
+  - **del guardiano, A5 (`60%`)**, «il vento radiale verso ciascun corpo e, lungo l'asse, verso il baricentro»: la prima meta' **SI'** (`[16, 32)`, 42 su 44), la seconda **NO** (8 su 22);
+  - **mie:** radiale verso il corpo in `[16, 32)` (`65%`): **SI'**. Lungo l'asse verso il baricentro (`50%`): **NO**.
+- **A e' finita** (A1-A5): il prossimo pezzo e' C, la carta del corpo fuso con le nascite accese.
