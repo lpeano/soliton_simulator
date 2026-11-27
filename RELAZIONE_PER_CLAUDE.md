@@ -28391,3 +28391,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il log:** `E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`; i timbri dicono «committato e pulito».
 - **Le uscite:** `E:\soliton_simulator\controllo\M2034\coppia\d1L`, gli stati da `stato_006250` a `stato_018000`.
 - **Il tempo stimato:** circa `2.7` ore, quindi la chiusura verso le `16:00`.
+
+
+### 2026-11-27 13:23 -- [M1214] 2b: I DUE COLLAUDI CON TMP SU C: PASSANO (M-B1 11 SU 11, LO STAGE 8 SU 8; 0 CARTELLE TEMPORANEE NUOVE SU C:); GIT 2.45.1, NIENTE JOLLY; ORA LA SUITE INTERA SU E: [[PROGETTO-MITOSI]]
+
+- **`git --version`:** `git version 2.45.1.windows.1`, cioe' sotto la `2.46`. **Il jolly in `safe.directory` non si aggiunge** *(il ramo «altrimenti» della decisione delle `13:12`)*.
+- **I due collaudi, da soli, nel worktree della mitosi, con `TMP` e `TEMP` su `C:\Users\lpeano\AppData\Local\Temp`** *(dalle `13:20:39` alle `13:23:01`)*:
+  - **`primo_ordine/_collauda_mb1.py`:** **`11` su `11`**, uscita `0` *(il log: `doc/referti_l2/collaudo_mb1_C_M1214.txt`)*;
+  - **`csv/_stage.py --collaudo`:** **`8` su `8`**, uscita `0`, «`0` residui dei nostri prefissi» *(il log: `doc/referti_l2/collaudo_stage_C_M1214.txt`)*.
+- **Le cartelle temporanee nuove su C:** *(`repo_*`, `st_*`, `stage_*`, `mb1*`, contate prima e dopo)*: **`0`.**
+- **Col caso che deve fallire** *(gli stessi due con `TMP` su E:, `12:36`)*, **la causa e' confermata** dalla controprova che mancava nel pezzo 2: su C: passano, su E: no.
+- **Ora la suite intera con `TMP` su E:**; il `67/67` sara' i suoi `65` piu' questi `2`.
