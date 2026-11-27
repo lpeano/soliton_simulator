@@ -28434,3 +28434,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - un secondo contatto entro `k 8000` *(`60%`)*;
   - i contatti si avvicinano nel tempo *(`50%`)*;
   - la norma ferma *(`95%`)*.
+
+
+### 2026-11-27 15:00 -- [M1214] LA CORSA d1'' CHIUSA: M1214_d1L FINITO, USCITA 0, 12000 TICK IN 6254 s [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `M1214_d1L` `FINITO`, `uscita 0`, lanciata `2026-11-27T13:14:52`, finita `2026-11-27T14:59:12`. Il registro ha la riga `CHIUSO` *(in questo commit)*.
+- **Il log** *(`E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`)*: `### 12000 tick in 6254 s`; `### stato_018000.npz ESISTE`. In `M2034/coppia/d1L` ci sono `98` file *(stati, le loro `.sha1`, la serie)*.
+- **Le ultime righe del log** *(y dei baricentri delle meta', non una misura dei picchi)*: a `k 18000` `y1 -4.6274`, `y2 +4.8689`, `max|chi| 1.9654e+02`. La lettura vera e' il pezzo 4, che viene subito dopo.
+- **Un mio errore di forma:** nel messaggio di `255ad66f` la lista FILE CAMBIATI e la riga Co-Authored-By sono scritte DUE volte. Le avevo messe nel corpo, e `committa3.py` le aggiunge da se'. La lista e' giusta in entrambe le copie; da questo commit il corpo non le contiene piu'.
