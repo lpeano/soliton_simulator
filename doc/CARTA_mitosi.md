@@ -188,3 +188,46 @@
   - **A3:** «A GRADINI» (`45%`);
   - **A4:** `t120` `+1` all'ultimo stato (`60%`): la saturazione potrebbe aver rotto il giro; `t000` `0` (`80%`);
   - **A5:** radiale verso il corpo nell'anello `[16, 32)` (`65%`), come il vento del giro 3; lungo l'asse verso il baricentro (`50%`).
+
+
+## C E F, PRIMA DEL CODICE: LE SCELTE CHE IL CODICE NON HA *([M2245-27], DECISIONE DI LUCA 2026-11-27 `22:45` e `22:47`; scritta il 2026-11-28 verso le `00:25`, PRIMA di ogni riga di `corpo_fuso_mitosi.py` e di `vuoto_lapse_mitosi.py`)* [[PROGETTO-MITOSI]]
+
+**Che cosa ho letto nel codice:**
+- **Le nascite e `chi` non si sono mai incontrati.** Nessuno script della mitosi usa `chi_tick_v2`.
+- **Le nascite** (`mitosi_lunga.Nascite.nasci`) passano da `mitosi_regola`:
+  - `regola(Z, C, a, "stella")` sceglie il flip;
+  - `applica` allunga gli array dei nodi;
+  - `energia_corsa` da' `H` **senza `chi`**.
+- **La scena delle nascite** e' `CV.scena_L(186, ...)` dentro `mitosi_rami_v2.ciclo`. Quella del corpo fuso e della coppia e' la scena del triangolo, `L 162` (`TC.scena`, `corpo_fuso.Ripresa10` con `geo.U` riscritta).
+- **Il lapse dipinto di [M2210]** (`caduta_libera.campo_N`, con `chi = A sin(2 pi (y - y_c)/L_y)` e `N = exp(-kappa chi)`) entra col tick `caduta_segno_v2.tick_var(..., N, ...)` sulla scena `L 162`, **non** col tick di `mitosi_rami_v2.ciclo`.
+
+### C: IL CORPO FUSO CON LE NASCITE ACCESE -- LE SCELTE APERTE
+
+- **C-0, IL CONTATORE (misurato).** In `d1L/stato_018000`, la partenza scritta nella lettera:
+  - `max |Theta| = 11.42`;
+  - **1596 archi** hanno gia' `|Theta| > 2 pi` (7666 sopra `pi`);
+  - per confronto: `0` archi a `k 0` (`d1`), `0` a `6000`, `35` a `d1L/12000`, `13309` a `d1T_r/54000`.
+  - **Con le nascite accese da quello stato**, 1596 archi sono scattati al primo tick, la coda d'attesa supera 500 e il verdetto C4 e' **INGOLFAMENTO al tick 1**. Il caso noto K1 della lettera («nessun arco scattato nei primi 250 tick») non si puo' fare.
+  - **Le vie:**
+    - (a) il contatore `Theta` si rimette a zero a `k 18000`: le nascite contano da li', come il tronco contava dal suo inizio. **E' una scelta di fisica**;
+    - (b) si parte da uno stato prima che un arco superi `2 pi` (fra `d1/6000` e `d1L/12000`), ma non e' il corpo fuso: a `k 6000` i corpi sono ancora due;
+    - (c) si accetta l'ingolfamento come risultato.
+- **C-1, `chi` e `pi` del nodo nato.** `chi` e' un campo dinamico (il passo v2), quindi il nato deve avere un `chi` e un `pi`. **E' un numero da scegliere**, cosa che `A1` vieta senza una derivazione. I candidati sono:
+  - la media dei due estremi dell'arco che si spezza, con `pi` uguale alla loro media;
+  - il profilo statico ricalcolato;
+  - zero.
+- **C-2, l'energia della regola.** `regola` sceglie il flip che rende minima `H` di `energia_corsa`, senza `chi`. Con `chi` acceso, la `H` della scelta e il `DH` della nascita, e quindi `E_persa`, includono `H_chi` (`chi_tick_v2.energia_chi_v2`) oppure no?
+- **C-3, la scena.** Le nascite sono scritte e collaudate sulla scena `L 186`, il corpo fuso vive su `L 162`. **Non ho verificato** che `Rami`, `regola` e `applica` girino su `L 162` senza toccarli: lo verifico a secco prima di ogni corsa, ma solo dopo C-0..C-2.
+- **C-4, `geo.U` del nato.** La ripresa v9 riscrive `geo.U` da `chi` (`scrivi_U`). Dopo una nascita `U` va ricalcolata sul grafo nuovo, e questo segue da C-1.
+
+### F: LA NASCITA NEL VUOTO CON IL LAPSE DIPINTO -- LE SCELTE APERTE
+
+- **F-1, la scena.**
+  - **(a)** il vuoto della mitosi, `M0237/vuoto/vuoto_35976.npz` su `L 186`, con il tick di `mitosi_rami_v2.ciclo`: bisogna far entrare `N` dipinto in quel tick, **che oggi non lo prevede**;
+  - **(b)** un vuoto equivalente su `L 162`, la scena di [M2210], con `tick_var`: bisogna far entrare le nascite in quel tick.
+  - **Tutte e due sono un'integrazione nuova:** nessuno dei due tick ha l'altra meta'.
+- **F-2, l'ampiezza.** «La stessa ampiezza usata per la caduta della materia»: se la scena e' `L 186` e non `L 162`, si tiene la stessa `A`, oppure lo stesso gradiente `G20`, con `A = G20 L_y / (2 pi kappa)`, che dipende da `L`?
+- **F-3, `N` del nodo nato:** **la propongo derivata**, cioe' la stessa formula del seno calcolata nella posizione del nato. Non e' un numero nuovo.
+- **Il controllo con il lapse piatto** (= [M0106], 0 nascite, al bit sui primi 250 tick) vale solo con la via F-1 (a). Con (b) il riferimento al bit non esiste.
+
+**Finche' Luca non decide C-0..C-2 e F-1..F-2, non si scrive codice per C ne' per F.**

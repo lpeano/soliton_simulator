@@ -29251,3 +29251,52 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
   - **del guardiano, A5 (`60%`)**, «il vento radiale verso ciascun corpo e, lungo l'asse, verso il baricentro»: la prima meta' **SI'** (`[16, 32)`, 42 su 44), la seconda **NO** (8 su 22);
   - **mie:** radiale verso il corpo in `[16, 32)` (`65%`): **SI'**. Lungo l'asse verso il baricentro (`50%`): **NO**.
 - **A e' finita** (A1-A5): il prossimo pezzo e' C, la carta del corpo fuso con le nascite accese.
+
+
+### 2026-11-28 00:13 -- [M2245-27] C E F FERMI PRIMA DEL CODICE: IL CORPO FUSO HA GIA' 1596 ARCHI OLTRE 2 pi (CON LE NASCITE ACCESE: INGOLFAMENTO AL TICK 1); LE NASCITE E chi NON SI SONO MAI INCONTRATI NEL CODICE; IL LAPSE DIPINTO E LE NASCITE STANNO IN DUE TICK DIVERSI. LE DOMANDE PER LUCA [[PROGETTO-MITOSI]]
+
+**La carta** e' in `doc/CARTA_mitosi.md`, sezione «C E F, PRIMA DEL CODICE». Contiene la lettura del codice e le scelte aperte, scritte prima di ogni riga.
+
+**Il numero che cambia C** (letto verso le `00:20` dagli stati):
+
+| stato | max abs(Theta) | archi oltre `2 pi` |
+|---|---|---|
+| `d1/0` | `0.0000` | `0` |
+| `d1/6000` | `2.6532` | `0` |
+| `d1L/12000` | `6.6289` | `35` |
+| **`d1L/18000`** (la partenza di C) | **`11.4186`** | **`1596`** |
+| `d1T_r/54000` | `39.2405` | `13309` |
+
+Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdetto C4 e' **INGOLFAMENTO al tick 1**. Il caso noto K1 della lettera non si puo' fare.
+
+**LE DOMANDE** (il criterio di chiusura e' una DECISIONE DI LUCA con l'ora):
+- **C-0, il contatore:**
+  - (a) `Theta` si azzera a `k 18000`;
+  - (b) si parte da uno stato prima della soglia, che pero' non e' il corpo fuso;
+  - (c) l'ingolfamento e' il risultato.
+- **C-1, `chi` e `pi` del nodo nato:** la media dei due estremi dell'arco, il profilo statico, o zero. **E' un numero da scegliere** (`A1`).
+- **C-2:** la `H` della regola e il `DH` della nascita includono `H_chi`, oppure no?
+- **F-1, la scena e il tick:**
+  - (a) il vuoto di [M0106] su `L 186`, facendo entrare `N` dipinto nel tick della mitosi;
+  - (b) un vuoto su `L 162`, facendo entrare le nascite nel tick di [M2210].
+  - Tutte e due sono un'integrazione nuova.
+- **F-2:** la stessa `A` oppure lo stesso gradiente `G20`, se `L` cambia?
+- **F-3:** la mia proposta e' `N` del nato dalla formula del seno nella sua posizione, cioe' derivato e non scelto.
+- **E resta aperta [M-GM] D4** (`bea28bb2`): il giro di fase e' sempre intero, quindi quale stato vale per decidere se [M-GM] prosegue?
+
+**Lo stato di [M2245-27]:**
+
+| pezzo | stato | commit |
+|---|---|---|
+| B | **fatto** | `b3ccf592` |
+| A1 | **fatto** | `f2af2a38` |
+| A2 | **fatto** | `2ac0b4c0` |
+| A3 | **fatto** | `08cf4e55` |
+| A4 | **fatto** | `bea28bb2` |
+| A5 | **fatto** | `b80c1f71` |
+| C | **fermo** su C-0..C-2 | |
+| D | **fermo** su D4 | |
+| F | **fermo** su F-1 e F-2 | |
+| E | dopo F, nell'ordine di Luca | |
+
+**Non scrivo codice per C, D ed F** finche' non ci sono le decisioni ([[L-DOPO-STOP]]).
