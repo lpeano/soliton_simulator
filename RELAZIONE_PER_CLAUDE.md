@@ -28229,3 +28229,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **LA MIA SCELTA, DICHIARATA:** il confronto si fa a `k 250`, non a `5750` come dice il mandato. **Il meccanismo del salvataggio e' lo stesso a ogni multiplo di `250`;** cosi' si risparmiano circa `80` minuti. **La prova finale resta K0' a `5750`.**
 - **LA MIA PREVISIONE:** la candidata e' un attributo del motore *(`mot.dtau`, `mot.cs` o una cache del passo)* o del campo, non una chiave dello stato *(`60%`)*. **Il guardiano, P1** *(`55%`)*: «una cache del motore *(`cs_prec` o `lambda_c`)*».
 - **### UN ERRORE MIO, DI NUOVO L'ORA:** il titolo del paragrafo di `fd996d24` dice «`11:50`», ma `date` dava `11:47:33`. **Da adesso il titolo lo scrive uno script** *(`accoda.py`)*, che legge l'ora dall'orologio nel momento in cui accoda il paragrafo.
+
+
+### 2026-11-27 11:54 -- [M1107] A2 (MITOSI): IL WORKTREE RIFATTO IN E:\soliton_lavoro\wt_mitosi (HEAD 82739c06), db/ UGUALE (549 FILE); C: DA 121 MB A 4.5 GB LIBERI; LA SUITE 67/67 DOPO B5 [[PROGETTO-MITOSI]]
+
+- **La stessa procedura di lapse-u:**
+  - il vecchio era pulito;
+  - la riserva dei dati ignorati e' stata confrontata col manifesto *(`549` file uguali)*;
+  - `git worktree remove C:/Users/lpeano/wt_mitosi`, poi `git worktree add E:/soliton_lavoro/wt_mitosi mitosi`;
+  - i dati sono tornati al loro posto, e **il manifesto nuovo e' uguale al vecchio** *(`E:\soliton_lavoro\manifesto_mitosi_{vecchio,riserva,nuovo}.txt`)*.
+- **`git worktree list`:** `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* ed `E:/soliton_lavoro/wt_mitosi` *(mitosi)*. Gli altri worktree non sono stati toccati.
+- **Il disco C:** e' passato da `121 MB` a `4.5 GB` liberi.
+- **La verifica di A2, «la suite della mitosi `67` su `67`»:** e' `primo_ordine/collauda.py` *(il «`67/67`» di `doc/NUCLEO_CONGELATO.md` e di `doc/ROTTA.md`)*. **La lancio dopo la fine di B5**, perche' la suite non va sovrapposta a una corsa *(le note: il 2026-11-09 una suite e un'altra corsa si sono toccate anche fra worktree diversi, attraverso `%TEMP%`)*. **La lancio con `TMP` su `E:\soliton_lavoro\tmp`**, cosi' vale anche come verifica di A3.
