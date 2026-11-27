@@ -1,0 +1,71 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] k0_diagnosi.py  sha1-BYTE 3375f70e  committato e pulito
+==================================================================================================================================
+[M1016] LA DIAGNOSI DI K0': da stato_005750, 250 tick (la v8), contro serie.json e stato_006000.npz
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+LA SERIE: per riga, max |d| fra le colonne e max relativo (|d| / |riferimento|)
+----------------------------------------------------------------------------------------------------------------------------------
+  k 5760: max |d| 1.066e-01; max rel 1.782e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5770: max |d| 5.644e-02; max rel 1.088e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5780: max |d| 3.938e-02; max rel 1.011e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5790: max |d| 1.915e-02; max rel 1.219e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5800: max |d| 1.277e-01; max rel 1.461e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5810: max |d| 6.284e-02; max rel 1.413e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5820: max |d| 3.097e-02; max rel 1.476e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5830: max |d| 8.410e-02; max rel 1.118e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5840: max |d| 4.009e-02; max rel 1.257e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5850: max |d| 1.453e-01; max rel 1.264e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5860: max |d| 5.885e-03; max rel 9.817e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5870: max |d| 5.873e-02; max rel 1.891e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5880: max |d| 1.136e-01; max rel 1.303e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5890: max |d| 5.045e-02; max rel 1.187e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5900: max |d| 6.807e-02; max rel 1.030e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5910: max |d| 5.460e-03; max rel 5.835e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5920: max |d| 3.868e-02; max rel 2.285e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5930: max |d| 1.125e-01; max rel 1.459e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5940: max |d| 1.605e-01; max rel 1.058e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5950: max |d| 3.191e-01; max rel 8.968e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5960: max |d| 2.802e-01; max rel 5.396e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5970: max |d| 7.942e-02; max rel 2.635e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5980: max |d| 2.695e-02; max rel 1.544e-05; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 5990: max |d| 1.461e-02; max rel 9.319e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+  k 6000: max |d| 8.126e-02; max rel 8.526e-06; le colonne diverse [1, 2, 3, 4, 5, 6, 7]
+----------------------------------------------------------------------------------------------------------------------------------
+omega: il primo tick diverso, e max |d| per blocchi di 10 tick
+----------------------------------------------------------------------------------------------------------------------------------
+  il corpo 1: il primo tick diverso 5751; max |d| per blocco: 6.1e-06 4.3e-07 4.3e-07 4.4e-07 4.8e-07 4.7e-07 4.7e-07 4.6e-07 4.6e-07 4.9e-07 4.8e-07 4.7e-07 4.7e-07 4.7e-07 4.9e-07 4.7e-07 4.7e-07 4.8e-07 4.6e-07 4.7e-07 4.8e-07 4.5e-07 4.7e-07 4.9e-07 5.0e-07
+  il corpo 2: il primo tick diverso 5751; max |d| per blocco: 1.0e-05 4.0e-07 3.6e-07 3.9e-07 4.2e-07 3.7e-07 3.8e-07 3.5e-07 3.4e-07 3.8e-07 3.6e-07 3.6e-07 3.6e-07 3.6e-07 3.8e-07 3.5e-07 3.6e-07 3.6e-07 3.4e-07 3.6e-07 3.6e-07 3.3e-07 3.6e-07 3.7e-07 3.8e-07
+----------------------------------------------------------------------------------------------------------------------------------
+LO STATO A k 6000: per chiave, max |d|, max |d| / max |riferimento|, elementi diversi
+----------------------------------------------------------------------------------------------------------------------------------
+  Lambda  : max |d| 1.333e-02; relativo 9.407e-04; diversi 26244 su 26244
+  h_int   : max |d| 0.000e+00; relativo 0.000e+00; diversi 0 su 26244
+  phi_h   : max |d| 9.512e-03; relativo 3.535e-03; diversi 157464 su 157464
+  psi     : max |d| 0.000e+00; relativo 0.000e+00; diversi 0 su 52488
+  psi_h   : max |d| 2.422e-02; relativo 7.942e-04; diversi 314928 su 314928
+  rho     : max |d| 2.808e-01; relativo 5.610e-05; diversi 26244 su 26244
+  campo_A : max |d| 1.838e-04; relativo 1.314e-06; diversi 78732 su 78732
+  campo_E : max |d| 1.987e-04; relativo 2.989e-04; diversi 78732 su 78732
+  chi     : max |d| 8.569e-04; relativo 5.121e-06; diversi 26244 su 26244
+  pi      : max |d| 1.762e-05; relativo 1.450e-04; diversi 26244 su 26244
+  theta_a : max |d| 3.496e-06; relativo 1.318e-06; diversi 78732 su 78732
+==================================================================================================================================

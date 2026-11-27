@@ -28124,3 +28124,40 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 
 - **Lo script:** `doc/referti_l2/k0_diagnosi.py`, cioe' la misura dichiarata nel pezzo 3d. **Non corregge niente.** Riprende come K0' *(dalla v8)* e stampa la grandezza delle differenze: per riga della serie, per `omega` e per chiave dello stato.
 - **UN ERRORE MIO, nel messaggio di `755a781c`** *(gia' spinto, non lo riscrivo)*. Nella riga «IL DISCO» il percorso doveva essere `E:` + `\soliton_simulator\tmp_M1016`, ma il `\t` di `\tmp_M1016` e' diventato una tabulazione. **E' successo perche' ho modificato il messaggio con un python fra virgolette;** la nota «percorsi Windows negli script» lo diceva gia'. **Il percorso giusto e' quello scritto nel paragrafo del pezzo 3d.**
+
+
+### 2026-11-27 11:02 -- [M1016] PEZZO 3f: LA DIAGNOSI DI K0': LE DIFFERENZE SONO GRANDI GIA' AL PRIMO TICK (omega 6e-6 A 5751; LA SERIE 1.8e-5 RELATIVO A 5760; phi_h 3.5e-3 A 6000) E NON CRESCONO: C'E' UNO STATO CHE LA RIPRESA NON CARICA. FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/k0_diagnosi.txt`, prodotto da `k0_diagnosi.py` *(`5ad3cbbb`)*, uscita `0`, con `TMP` su E:.
+- **I NUMERI:**
+  - **`omega`:** e' diverso gia' al primo tick, `5751`. Nel primo blocco di `10` tick lo scarto e' `6.1e-06` *(corpo 1)* e `1.0e-05` *(corpo 2)*; poi resta **stabile** intorno a `4e-07`, per tutti i `250` tick;
+  - **la serie:** gia' a `k 5760` lo scarto e' `1.066e-01` assoluto e `1.782e-05` relativo, su tutte le colonne. Lungo i `250` tick resta fra `5.4e-06` e `2.6e-05` relativo: **non cresce**;
+  - **lo stato a `k 6000`** *(relativo = `max|d| / max|riferimento|`)*:
+
+    | chiave | relativo |
+    |---|---|
+    | `phi_h` | **`3.535e-03`** |
+    | `Lambda` | `9.407e-04` |
+    | `psi_h` | `7.942e-04` |
+    | `campo_E` | `2.989e-04` |
+    | `pi` | `1.450e-04` |
+    | `rho` | `5.610e-05` |
+    | `chi` | `5.121e-06` |
+    | `campo_A` | `1.314e-06` |
+    | `theta_a` | `1.318e-06` |
+    | **`h_int`, `psi`** | **uguali AL BIT** |
+
+- **LA LETTURA, con il criterio del pezzo 3d:** la prima differenza e' grande gia' al primo tick, molto sopra `1e-12`, e poi non cresce. **Non e' l'arrotondamento: c'e' uno stato che la ripresa non carica.** La mia previsione *(arrotondamento, `60%`)* era **SBAGLIATA**.
+- **I CANDIDATI, dalla lettura di `chi_tick_v2.tick_chi_v2`** *(non misurati)*:
+  - **`campo`:** `campo.spinta(0.5)` lavora sull'oggetto, e lo stato ne salva solo `A` ed `E`. Se il campo porta altro *(una velocita', una carica di riferimento)*, la ripresa lo prende da `costruisci`, cioe' da `k 0`;
+  - **il motore `mot`:** `mot.cs` e `mot.lambda_c` si riscrivono a ogni tick, ma **`mot.dtau` e gli altri attributi non stanno nello stato**;
+  - **`CT.fase_a(mot, st, e0, N)`** agisce su `st`, e `psi` e `h_int` risultano identici al bit. Due chiavi che il tick non tocca *(o che la ripresa non usa)* sono a loro volta un indizio da capire;
+  - **`phi_h`** ha lo scarto relativo piu' grande, cioe' il vuoto. **Il fasore `c(t)`** e' scritto solo in `costruisci`, ma se qualcosa nel tick dipende dal tempo assoluto, la ripresa riparte col tempo sbagliato.
+- **CHE COSA NE SEGUE:**
+  - **la corsa d1'' non va in coda** *(la carta)*;
+  - **e la cosa vale per ogni ripresa da uno stato salvato, non solo per questa:** **gli stati salvati da `due_corpi_fondo_v4.corsa` non sono completi.**
+- **LA PROPOSTA, NON ESEGUITA** *(la decisione spetta a Luca)*:
+  - **(a)** una lettura a costo zero: elencare gli attributi array di `Z["z"]`, `mot` e `C.campo` che lo stato non salva, e trovare quello che manca;
+  - **(b)** la corsa lunga senza ripresa: d1' rifatta da `k 0` fino a `k 18000`, in un processo solo *(circa `4` ore)*. **Le prime `6000` devono riprodurre d1' al bit**, ed e' un caso noto gratuito.
+  - **(b) non dipende da (a)**, ed e' la via piu' sicura per avere d1'' oggi.
+- **FERMO.**
