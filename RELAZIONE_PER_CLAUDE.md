@@ -28824,3 +28824,56 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La coda:** alle 21:58:18 e' vuota, e il lanciatore e' uscito con 0. Nel registro c'e' la riga CHIUSO di `m1446-M1824_S1`.
 - **Le misure** (21:58:33): C: 25.08 GB liberi; E: 152.19 GB; impegnabile 31.68 GB liberi su 49.47.
 - **Il seguito:** [M1519] pezzo 3, cioe' `corpo_fuso_lettura.py lettura` -> `corpo_fuso.txt` con il verdetto S3, poi il video v4.
+
+
+### 2026-11-27 22:03 -- [M1519] PEZZO 3, LA LETTURA E IL VERDETTO S3 (`doc/referti_l2/corpo_fuso.txt`, 446 righe; `corpo_fuso_lettura.py lettura`, blob sha1-byte 9901e2da, timbrato pulito): **ALTRO, CON D** [[PROGETTO-MITOSI]]
+
+**Il comando:** `E:/python/py3132/python.exe doc/referti_l2/corpo_fuso_lettura.py lettura > doc/referti_l2/corpo_fuso.txt`, dalle 22:00:36 alle 22:03:07, con uscita 0. Tutti i numeri qui sotto vengono dal referto.
+
+- **S1, per stato** (217 stati, da `k 0` a `54000`):
+  - **DEVE la norma:** `max |N(k)/N(0) - 1|` = `1.559e-13` < `1e-9`. **PASSA.**
+  - **I verdetti A0:** `UNO` 182, `DUE CORPI` 31, `ALTRO (3)` 3, `ALTRO (5)` 1. Da `k 6250` in poi: `UNO` 181, `DUE` 9, `ALTRO` 2. **Dopo il secondo contatto il sistema e' un corpo solo.**
+- **S1, per finestra di 2500:**
+  - **Il respiro di `R` scende:** `0.6646` nella prima finestra, `[6250, 8750]`, e poi `0.04..0.12` da `k 23750` in poi. `R` resta fra circa `11.4` e `13.1`.
+  - **`w` medio degli stati UNO** fra `3.64` e `3.89` da `k 26250`; nell'ultima finestra e' `3.7564`.
+  - **`max rho` medio** fra `1.9e4` e `2.3e4`.
+- **S1, `H`:** a `k 18000` vale `7.2158899238e+05`, a `k 54000` vale `7.1459935039e+05`, cioe' **`-9.6865e-03` relativo**. Fra una finestra e l'altra oscilla di `±5e-03`. **Lo strumento non e' sigillato su questa scena: e' un andamento, non una conservazione provata.**
+- **S1, `omega`** (la media delle due meta', con la riserva della carta): scende da `0.0825` nella finestra `(0, 500]` a circa `0.069..0.071` nelle ultime finestre. **E' vicino all'`omega` della `psi` intera di S2 al giro 3r, `0.069081`, ma la media delle meta' non e' quella grandezza:** si scrive come una lettura.
+- **S2:**
+  - **giro 3r:** `max|chi|` `252.9440`, `w` medio `3.3679` (da `2.6772` a `4.6370`), il respiro `0.5819`, la profondita' `-221.3351`, `omega` `0.069081`, A0 `UNO` 25 su 25;
+  - **C fra 1 e 2:** `|rapporto - 1|` `0.1331`, e il respiro del giro 2 e' `0.3877`: **NON PASSA**;
+  - **C fra 2 e 3r:** `|rapporto - 1|` `0.0253` (si'), ma il respiro del giro 3r e' `0.5819` (no): **NON PASSA.** **Il respiro di `w` e' risalito** da `0.3877` a `0.5819`;
+  - **D:** **SI'**, perche' `max|chi|` resta entro il 10% fra il giro 2 e il giro 3r.
+- **S3, le regole della carta:**
+  - **SI SPEZZA:** no. In S1 la fila piu' lunga di DUE con `d_p > 2 max w` e' di 12 stati, sotto i 22 richiesti; nei giri 1, 2 e 3r non ce n'e' nessuna;
+  - **COLLASSA (a):** il respiro di `R` e' `0.3989` nelle prime 4 finestre e `0.0946` nelle ultime 4, quindi non cresce. E' una sola corsa, senza barra: e' una lettura;
+  - **COLLASSA (b):** nessuna fila;
+  - **IL VERDETTO S3: ALTRO**, con D: `|rapporto - 1|` `0.0253` fra 2 e 3r, e il respiro del giro 3r `0.5819`.
+- **Che cosa NON dice:**
+  - non dice che il punto fisso non esiste. Dice che **la definizione C, cioe' il respiro di `w` sotto `0.10`, non e' raggiunta in 3 giri**;
+  - il `w` di S1 nell'ultima finestra (`3.7564`) e quello del giro 3r (`3.3679`) differiscono di circa l'11%. Il confronto «entro il 10%» la regola lo fa **solo se C passa**, e quindi qui non si applica: lo riporto come numero;
+  - questo rapporto l'ho calcolato a mano dai due numeri del referto (`3.7564/3.3679 = 1.1154`): **non esce dallo script** ([[L-NUMERI]]).
+- **Le previsioni della carta del pezzo 3, controllate:**
+
+  | previsione | probabilita' | esito |
+  |---|---|---|
+  | C passa fra 2 e 3r | 30% | **no** |
+  | D vale | 55% | **si'** |
+  | ALTRO | 50% | **si'** |
+  | ESISTE MA NON CI ARRIVA | 20% | no |
+  | ESISTE E CI ARRIVA | 10% | no |
+  | SI SPEZZA | 10% | no |
+  | COLLASSA | 10% | no |
+  | `H` fermo entro l'1% fra `k 18000` e `54000` | 50% | **si'**, di poco: `-0.97%` |
+
+- **Il video v4:** nel paragrafo che segue, stesso commit.
+
+
+### 2026-11-27 22:05 -- [M1519] PEZZO 3, IL VIDEO v4 (`doc/referti_l2/anima_coppia_v4.mp4`, con `anima_coppia_v4.txt`), NELLO STESSO COMMIT DEL VERDETTO [[PROGETTO-MITOSI]]
+
+- **Il comando:** `E:/python/py3132/python.exe doc/referti_l2/anima_coppia_v4.py > doc/referti_l2/anima_coppia_v4.txt`, con uscita 0. Lo script ha blob sha1-byte 4c09677c e il timbro dice pulito.
+- **Il DEVE:** 109 quadri su 109, a 6 fps, 1440x480, 1.000 MB contro un tetto di 5 MB. **PASSA.** Le scale fisse sono `rho_psi [0, 3.8318e+04]` e `chi [-245.2493, -19.9540]`.
+- **I png** sono in `E:/soliton_simulator/controllo/M1519/v4/` (k 0, 6000, 18000, 30000, 42000, 54000). Ne ho guardati due:
+  - **k 6000:** due picchi a `d_p 13.89`, uno sopra l'altro lungo `y`, dentro un solo pozzo di `chi`, allungato;
+  - **k 54000:** un corpo solo, con `max rho 2.576e+04` e `R 12.36`. Intorno ci sono ali deboli e il pozzo di `chi` e' quasi circolare. **Il corpo non sta al centro della scatola:** e' spostato a sinistra e in su rispetto al centro del pozzo, come lo si vede nel pannello `chi`.
+- **La correzione del giro:** il primo tentativo di commit del verdetto, alle 22:03, e' stato RIFIUTATO da `H-NON-TRACCIATI`. Il video stava scrivendo `anima_coppia_v4.txt`, che non era ancora tracciato. Ho atteso la fine del video e ho committato tutto insieme.

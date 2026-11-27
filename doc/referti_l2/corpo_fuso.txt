@@ -1,0 +1,446 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] due_corpi_fondo_v9.py  sha1-BYTE af211422  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] corpo_fuso.py  sha1-BYTE 43ac319d  committato e pulito
+[TIMBRO] due_corpi_lettura_v4.py  sha1-BYTE 2935b6cf  committato e pulito
+[TIMBRO] coppia_a0.py  sha1-BYTE 68f4bf68  committato e pulito
+[TIMBRO] due_corpi_lettura_v6.py  sha1-BYTE 5188a75e  committato e pulito
+[TIMBRO] corpo_fuso_v2.py  sha1-BYTE 687b68c0  committato e pulito
+[TIMBRO] corpo_fuso_lettura.py  sha1-BYTE 9901e2da  committato e pulito
+============================================================================================================================================
+[M1519] PEZZO 3: IL CORPO FUSO, LE LETTURE DI S1 (0..54000) E DI S2 (I GIRI 1, 2, 3r) E IL VERDETTO S3 (le regole della carta, il seguito 2)
+============================================================================================================================================
+--------------------------------------------------------------------------------------------------------------------------------------------
+S1 (i) PER STATO: il verdetto A0, d_p, d_m, R, max rho, la norma; w (per corpo se DUE, totale se UNO); chi al centro; H, H_chi
+--------------------------------------------------------------------------------------------------------------------------------------------
+  k     0: DUE CORPI  d_p  41.569; w 4.486 4.486; chi ai picchi -109.73 -109.29; d_m  41.569; R  21.527; max rho 9.2109e+03; N +0.00e+00; w 4.486 4.486; chi al centro -109.294; H 7.1497578967e+05; H_chi 1.0178732580e+04  [d1]
+  k   250: DUE CORPI  d_p  41.569; w 4.233 4.265; chi ai picchi -118.37 -117.84; d_m  41.377; R  21.294; max rho 1.0781e+04; N -4.44e-16; w 4.233 4.265; chi al centro -118.372; H 7.1712865551e+05; H_chi 1.1731176538e+04  [d1]
+  k   500: DUE CORPI  d_p  40.706; w 3.858 3.786; chi ai picchi -133.71 -133.83; d_m  40.795; R  20.887; max rho 1.3742e+04; N -6.66e-16; w 3.858 3.786; chi al centro -133.710; H 7.1980595660e+05; H_chi 1.4785509386e+04  [d1]
+  k   750: DUE CORPI  d_p  40.706; w 3.483 3.483; chi ai picchi -147.84 -147.97; d_m  39.819; R  20.464; max rho 1.4709e+04; N -1.55e-15; w 3.483 3.483; chi al centro -148.657; H 7.2195653516e+05; H_chi 1.7920226514e+04  [d1]
+  k  1000: DUE CORPI  d_p  38.974; w 4.547 4.486; chi ai picchi -157.40 -157.85; d_m  38.413; R  19.957; max rho 9.7880e+03; N -1.78e-15; w 4.547 4.486; chi al centro -157.855; H 7.2306260094e+05; H_chi 2.0214034361e+04  [d1]
+  k  1250: DUE CORPI  d_p  35.511; w 5.063 5.117; chi ai picchi -162.75 -162.86; d_m  36.590; R  19.282; max rho 7.7772e+03; N -2.66e-15; w 5.063 5.117; chi al centro -162.748; H 7.2346504314e+05; H_chi 2.1361421764e+04  [d1]
+  k  1500: DUE CORPI  d_p  33.779; w 5.063 5.036; chi ai picchi -159.64 -160.00; d_m  34.368; R  18.345; max rho 7.4518e+03; N -3.44e-15; w 5.063 5.036; chi al centro -160.283; H 7.2274035328e+05; H_chi 2.0684757736e+04  [d1]
+  k  1750: DUE CORPI  d_p  28.583; w 5.329 5.581; chi ai picchi -151.93 -151.74; d_m  31.751; R  17.068; max rho 6.8992e+03; N -4.11e-15; w 5.329 5.581; chi al centro -151.931; H 7.2150824200e+05; H_chi 1.8541610551e+04  [d1]
+  k  2000: DUE CORPI  d_p  27.731; w 4.134 4.233; chi ai picchi -143.56 -142.94; d_m  28.683; R  15.455; max rho 1.0218e+04; N -4.88e-15; w 4.134 4.233; chi al centro -143.596; H 7.2025905974e+05; H_chi 1.6069020401e+04  [d1]
+  k  2250: DUE CORPI  d_p  25.120; w 3.858 3.929; chi ai picchi -137.29 -137.19; d_m  25.127; R  13.563; max rho 1.2712e+04; N -5.22e-15; w 3.858 3.929; chi al centro -137.292; H 7.1968648417e+05; H_chi 1.4129631318e+04  [d1]
+  k  2500: DUE CORPI  d_p  19.925; w 3.483 3.599; chi ai picchi -138.08 -137.88; d_m  20.914; R  11.531; max rho 1.5177e+04; N -5.77e-15; w 3.483 3.599; chi al centro -136.525; H 7.1986193085e+05; H_chi 1.3300115403e+04  [d1]
+  k  2750: DUE CORPI  d_p  16.462; w 3.675 3.638; chi ai picchi -144.30 -144.54; d_m  15.682; R   9.500; max rho 1.2948e+04; N -6.22e-15; w 3.675 3.638; chi al centro -144.543; H 7.2084911532e+05; H_chi 1.4132415799e+04  [d1]
+  k  3000: ALTRO (3)  d_p -; d_m   9.621; R   7.616; max rho 2.0778e+04; N -7.55e-15; w -; chi al centro -181.174; H 7.2465261502e+05; H_chi 1.7796928412e+04  [d1]
+  k  3250: UNO        d_p -; d_m   6.835; R   6.623; max rho 3.7914e+04; N -8.22e-15; w 2.728; chi al centro -212.443; H 7.2977570800e+05; H_chi 2.2808222164e+04  [d1]
+  k  3500: ALTRO (3)  d_p -; d_m  10.734; R   7.609; max rho 2.1350e+04; N -8.66e-15; w -; chi al centro -212.259; H 7.2968027624e+05; H_chi 2.4449843198e+04  [d1]
+  k  3750: DUE CORPI  d_p  16.462; w 3.599 3.599; chi ai picchi -193.49 -193.69; d_m  16.371; R   9.720; max rho 1.4731e+04; N -9.55e-15; w 3.599 3.599; chi al centro -193.175; H 7.2841512111e+05; H_chi 2.4689218806e+04  [d1]
+  k  4000: DUE CORPI  d_p  21.656; w 4.134 4.033; chi ai picchi -181.47 -181.48; d_m  20.716; R  11.911; max rho 1.1073e+04; N -1.05e-14; w 4.134 4.033; chi al centro -181.285; H 7.2616883416e+05; H_chi 2.3444640470e+04  [d1]
+  k  4250: DUE CORPI  d_p  25.120; w 4.953 4.783; chi ai picchi -162.90 -163.04; d_m  23.866; R  13.745; max rho 7.7368e+03; N -1.10e-14; w 4.953 4.783; chi al centro -163.040; H 7.2280862708e+05; H_chi 2.0493544248e+04  [d1]
+  k  4500: DUE CORPI  d_p  27.713; w 5.250 5.507; chi ai picchi -142.71 -141.67; d_m  26.057; R  15.034; max rho 6.0691e+03; N -1.19e-14; w 5.250 5.507; chi al centro -141.196; H 7.1945628562e+05; H_chi 1.6705619699e+04  [d1]
+  k  4750: DUE CORPI  d_p  28.583; w 6.662 6.926; chi ai picchi -123.68 -123.95; d_m  27.365; R  15.791; max rho 4.8312e+03; N -1.29e-14; w 6.662 6.926; chi al centro -120.919; H 7.1669393693e+05; H_chi 1.3133312902e+04  [d1]
+  k  5000: DUE CORPI  d_p  28.583; w 5.532 5.581; chi ai picchi -113.55 -113.83; d_m  27.865; R  16.110; max rho 5.7504e+03; N -1.31e-14; w 5.532 5.581; chi al centro -112.412; H 7.1510586636e+05; H_chi 1.0932989722e+04  [d1]
+  k  5250: DUE CORPI  d_p  28.583; w 5.431 5.581; chi ai picchi -111.38 -111.94; d_m  27.534; R  16.042; max rho 5.9891e+03; N -1.40e-14; w 5.431 5.581; chi al centro -111.379; H 7.1486066411e+05; H_chi 1.0507716139e+04  [d1]
+  k  5500: DUE CORPI  d_p  28.583; w 6.344 6.212; chi ai picchi -117.89 -118.56; d_m  26.362; R  15.616; max rho 5.2222e+03; N -1.52e-14; w 6.344 6.212; chi al centro -119.998; H 7.1604992317e+05; H_chi 1.2073207168e+04  [d1]
+  k  5750: DUE CORPI  d_p  25.120; w 7.083 6.825; chi ai picchi -132.75 -136.23; d_m  24.244; R  14.780; max rho 4.6935e+03; N -1.57e-14; w 7.083 6.825; chi al centro -134.460; H 7.1842405667e+05; H_chi 1.5217504326e+04  [d1]
+  k  6000: DUE CORPI  d_p  13.892; w 6.558 6.473; chi ai picchi -160.61 -162.20; d_m  21.077; R  13.474; max rho 5.0048e+03; N -1.64e-14; w 6.558 6.473; chi al centro -161.424; H 7.2146499650e+05; H_chi 1.9058680865e+04  [d1]
+  k  6250: UNO        d_p -; d_m  16.638; R  11.598; max rho 7.4466e+03; N -1.72e-14; w 6.579; chi al centro -190.083; H 7.2479798060e+05; H_chi 2.2547551917e+04  [d1L]
+  k  6500: UNO        d_p -; d_m  10.867; R   9.183; max rho 1.5659e+04; N -1.78e-14; w 4.134; chi al centro -216.388; H 7.2866329592e+05; H_chi 2.5465738444e+04  [d1L]
+  k  6750: UNO        d_p -; d_m   5.766; R   6.807; max rho 4.2757e+04; N -1.87e-14; w 2.876; chi al centro -238.164; H 7.3377906081e+05; H_chi 2.8089452870e+04  [d1L]
+  k  7000: UNO        d_p -; d_m   7.744; R   6.477; max rho 3.5062e+04; N -1.94e-14; w 2.728; chi al centro -222.447; H 7.3137487052e+05; H_chi 2.5034685738e+04  [d1L]
+  k  7250: DUE CORPI  d_p  12.124; w 3.061 3.016; chi ai picchi -173.03 -171.09; d_m  12.046; R   8.260; max rho 1.8506e+04; N -1.94e-14; w 3.061 3.016; chi al centro -173.034; H 7.2476699381e+05; H_chi 1.8917635363e+04  [d1L]
+  k  7500: ALTRO (5)  d_p -; d_m  14.517; R  10.356; max rho 8.6930e+03; N -2.01e-14; w -; chi al centro -150.541; H 7.1914224207e+05; H_chi 1.3928859379e+04  [d1L]
+  k  7750: ALTRO (3)  d_p -; d_m  15.938; R  12.059; max rho 6.2099e+03; N -2.11e-14; w -; chi al centro -138.008; H 7.1642172576e+05; H_chi 1.1757904592e+04  [d1L]
+  k  8000: UNO        d_p -; d_m  16.473; R  13.172; max rho 6.6927e+03; N -2.15e-14; w 6.366; chi al centro -141.603; H 7.1602274721e+05; H_chi 1.2125891274e+04  [d1L]
+  k  8250: UNO        d_p -; d_m  16.223; R  13.613; max rho 1.0103e+04; N -2.26e-14; w 4.869; chi al centro -157.714; H 7.1785563967e+05; H_chi 1.4659836203e+04  [d1L]
+  k  8500: UNO        d_p -; d_m  15.368; R  13.490; max rho 1.8543e+04; N -2.34e-14; w 3.713; chi al centro -185.744; H 7.2201456246e+05; H_chi 1.9072577012e+04  [d1L]
+  k  8750: UNO        d_p -; d_m  14.368; R  13.099; max rho 3.5217e+04; N -2.39e-14; w 2.876; chi al centro -215.184; H 7.2709117447e+05; H_chi 2.3945669462e+04  [d1L]
+  k  9000: UNO        d_p -; d_m  14.155; R  12.876; max rho 3.8222e+04; N -2.52e-14; w 2.677; chi al centro -222.282; H 7.2827035609e+05; H_chi 2.5539636934e+04  [d1L]
+  k  9250: UNO        d_p -; d_m  15.410; R  12.901; max rho 1.3569e+04; N -2.64e-14; w 4.200; chi al centro -201.480; H 7.2515319417e+05; H_chi 2.3337147451e+04  [d1L]
+  k  9500: DUE CORPI  d_p   7.810; w 5.799 5.482; chi ai picchi -176.99 -176.50; d_m  16.058; R  12.756; max rho 6.4034e+03; N -2.71e-14; w 5.799 5.482; chi al centro -177.495; H 7.2253677063e+05; H_chi 2.0544990899e+04  [d1L]
+  k  9750: UNO        d_p -; d_m  14.997; R  12.226; max rho 1.0153e+04; N -2.79e-14; w 4.577; chi al centro -172.115; H 7.2047450594e+05; H_chi 1.7614816525e+04  [d1L]
+  k 10000: UNO        d_p -; d_m  12.963; R  11.310; max rho 1.7580e+04; N -2.83e-14; w 3.675; chi al centro -167.590; H 7.1951563183e+05; H_chi 1.5302065664e+04  [d1L]
+  k 10250: UNO        d_p -; d_m  10.942; R  10.229; max rho 2.3504e+04; N -2.90e-14; w 3.403; chi al centro -167.988; H 7.1987809601e+05; H_chi 1.4463238427e+04  [d1L]
+  k 10500: UNO        d_p -; d_m  10.480; R   9.405; max rho 2.1135e+04; N -2.98e-14; w 3.929; chi al centro -171.516; H 7.2094849397e+05; H_chi 1.5146972250e+04  [d1L]
+  k 10750: UNO        d_p -; d_m   9.083; R   9.225; max rho 2.4536e+04; N -3.10e-14; w 3.561; chi al centro -183.074; H 7.2263571486e+05; H_chi 1.7244267036e+04  [d1L]
+  k 11000: UNO        d_p -; d_m   9.608; R   9.817; max rho 2.4506e+04; N -3.14e-14; w 3.016; chi al centro -188.851; H 7.2348606909e+05; H_chi 1.9413395485e+04  [d1L]
+  k 11250: DUE CORPI  d_p   8.718; w 4.841 4.725; chi ai picchi -183.25 -184.32; d_m  12.514; R  10.707; max rho 8.3383e+03; N -3.22e-14; w 4.841 4.725; chi al centro -183.255; H 7.2373121401e+05; H_chi 2.1406293777e+04  [d1L]
+  k 11500: UNO        d_p -; d_m  14.007; R  11.368; max rho 1.0059e+04; N -3.32e-14; w 5.456; chi al centro -200.491; H 7.2489476078e+05; H_chi 2.3469413974e+04  [d1L]
+  k 11750: UNO        d_p -; d_m  13.950; R  11.761; max rho 1.7767e+04; N -3.45e-14; w 3.786; chi al centro -210.253; H 7.2593339501e+05; H_chi 2.4381478519e+04  [d1L]
+  k 12000: UNO        d_p -; d_m  13.513; R  12.101; max rho 2.8617e+04; N -3.54e-14; w 3.106; chi al centro -210.918; H 7.2587892591e+05; H_chi 2.3564806707e+04  [d1L]
+  k 12250: UNO        d_p -; d_m  14.491; R  12.559; max rho 2.7213e+04; N -3.60e-14; w 3.279; chi al centro -196.369; H 7.2330780577e+05; H_chi 2.0471787275e+04  [d1L]
+  k 12500: UNO        d_p -; d_m  15.353; R  13.037; max rho 1.6676e+04; N -3.71e-14; w 4.101; chi al centro -172.373; H 7.1940329216e+05; H_chi 1.6217904116e+04  [d1L]
+  k 12750: UNO        d_p -; d_m  15.544; R  13.364; max rho 1.4380e+04; N -3.77e-14; w 4.167; chi al centro -150.690; H 7.1658329222e+05; H_chi 1.3035481362e+04  [d1L]
+  k 13000: UNO        d_p -; d_m  16.008; R  13.419; max rho 1.1442e+04; N -3.85e-14; w 4.696; chi al centro -147.401; H 7.1559459343e+05; H_chi 1.2015053816e+04  [d1L]
+  k 13250: UNO        d_p -; d_m  16.155; R  13.086; max rho 1.3813e+04; N -3.94e-14; w 4.033; chi al centro -153.900; H 7.1659732204e+05; H_chi 1.3345030096e+04  [d1L]
+  k 13500: UNO        d_p -; d_m  15.282; R  12.328; max rho 1.3252e+04; N -3.99e-14; w 3.999; chi al centro -168.264; H 7.1899263255e+05; H_chi 1.6320098237e+04  [d1L]
+  k 13750: DUE CORPI  d_p   4.359; w 4.167 3.786; chi ai picchi -185.70 -186.85; d_m  13.435; R  11.176; max rho 1.0678e+04; N -4.06e-14; w 4.167 3.786; chi al centro -183.917; H 7.2260366831e+05; H_chi 2.0402719640e+04  [d1L]
+  k 14000: UNO        d_p -; d_m  10.219; R   9.816; max rho 2.3001e+04; N -4.09e-14; w 3.561; chi al centro -218.577; H 7.2740171649e+05; H_chi 2.5001635357e+04  [d1L]
+  k 14250: UNO        d_p -; d_m   7.589; R   8.843; max rho 5.3610e+04; N -4.25e-14; w 2.518; chi al centro -241.543; H 7.3214481501e+05; H_chi 2.8696609202e+04  [d1L]
+  k 14500: DUE CORPI  d_p   5.196; w 3.522 3.237; chi ai picchi -216.23 -215.68; d_m  10.120; R   9.141; max rho 1.6524e+04; N -4.37e-14; w 3.522 3.237; chi al centro -213.291; H 7.2805932027e+05; H_chi 2.5605350834e+04  [d1L]
+  k 14750: UNO        d_p -; d_m  12.100; R  10.142; max rho 1.6270e+04; N -4.49e-14; w 3.750; chi al centro -197.543; H 7.2409663040e+05; H_chi 2.1737473969e+04  [d1L]
+  k 15000: UNO        d_p -; d_m  13.633; R  11.276; max rho 1.5770e+04; N -4.61e-14; w 3.786; chi al centro -175.991; H 7.2032493669e+05; H_chi 1.7596548975e+04  [d1L]
+  k 15250: UNO        d_p -; d_m  14.489; R  12.235; max rho 1.0345e+04; N -4.73e-14; w 4.812; chi al centro -155.243; H 7.1701642942e+05; H_chi 1.3942183677e+04  [d1L]
+  k 15500: UNO        d_p -; d_m  14.219; R  12.817; max rho 9.2108e+03; N -4.79e-14; w 6.145; chi al centro -142.529; H 7.1568994901e+05; H_chi 1.2321656370e+04  [d1L]
+  k 15750: UNO        d_p -; d_m  13.294; R  12.983; max rho 1.7078e+04; N -4.87e-14; w 3.786; chi al centro -158.287; H 7.1689440067e+05; H_chi 1.3384440639e+04  [d1L]
+  k 16000: UNO        d_p -; d_m  13.032; R  12.838; max rho 2.6045e+04; N -4.95e-14; w 3.237; chi al centro -179.907; H 7.2015108063e+05; H_chi 1.6791958534e+04  [d1L]
+  k 16250: UNO        d_p -; d_m  13.291; R  12.599; max rho 3.4420e+04; N -4.98e-14; w 3.061; chi al centro -201.096; H 7.2371642479e+05; H_chi 2.0795614888e+04  [d1L]
+  k 16500: UNO        d_p -; d_m  13.839; R  12.539; max rho 2.7994e+04; N -5.05e-14; w 3.061; chi al centro -208.669; H 7.2466786695e+05; H_chi 2.3075690470e+04  [d1L]
+  k 16750: DUE CORPI  d_p   6.083; w 4.754 3.561; chi ai picchi -198.10 -197.97; d_m  14.277; R  12.535; max rho 1.0431e+04; N -5.13e-14; w 4.754 3.561; chi al centro -197.971; H 7.2392232613e+05; H_chi 2.3612307816e+04  [d1L]
+  k 17000: UNO        d_p -; d_m  13.505; R  12.318; max rho 9.8310e+03; N -5.26e-14; w 5.224; chi al centro -200.171; H 7.2356209537e+05; H_chi 2.3429200832e+04  [d1L]
+  k 17250: UNO        d_p -; d_m  12.301; R  11.836; max rho 1.2406e+04; N -5.27e-14; w 4.812; chi al centro -189.695; H 7.2264977079e+05; H_chi 2.1824648294e+04  [d1L]
+  k 17500: UNO        d_p -; d_m  11.456; R  11.096; max rho 1.5781e+04; N -5.36e-14; w 3.964; chi al centro -185.794; H 7.2133390566e+05; H_chi 1.9362448155e+04  [d1L]
+  k 17750: UNO        d_p -; d_m  10.985; R  10.147; max rho 1.8822e+04; N -5.37e-14; w 4.101; chi al centro -180.765; H 7.2074976695e+05; H_chi 1.7180028407e+04  [d1L]
+  k 18000: UNO        d_p -; d_m   9.496; R   9.364; max rho 3.0654e+04; N -5.48e-14; w 3.237; chi al centro -182.697; H 7.2158899238e+05; H_chi 1.6522688859e+04  [d1L]
+  k 18250: UNO        d_p -; d_m   9.068; R   9.322; max rho 3.7477e+04; N -5.52e-14; w 2.728; chi al centro -180.215; H 7.2126175580e+05; H_chi 1.6120870837e+04  [d1T]
+  k 18500: UNO        d_p -; d_m  10.284; R   9.989; max rho 1.3393e+04; N -5.55e-14; w 5.380; chi al centro -165.216; H 7.1950736001e+05; H_chi 1.5864960251e+04  [d1T]
+  k 18750: UNO        d_p -; d_m  10.949; R  10.799; max rho 1.4289e+04; N -5.64e-14; w 4.033; chi al centro -177.406; H 7.2025840104e+05; H_chi 1.7977909218e+04  [d1T]
+  k 19000: UNO        d_p -; d_m  12.145; R  11.494; max rho 1.2016e+04; N -5.66e-14; w 4.925; chi al centro -190.481; H 7.2212413155e+05; H_chi 2.1074119789e+04  [d1T]
+  k 19250: UNO        d_p -; d_m  13.262; R  12.039; max rho 1.6560e+04; N -5.74e-14; w 3.999; chi al centro -207.667; H 7.2411740152e+05; H_chi 2.3773426321e+04  [d1T]
+  k 19500: UNO        d_p -; d_m  13.747; R  12.423; max rho 2.5282e+04; N -5.87e-14; w 3.150; chi al centro -215.346; H 7.2518412890e+05; H_chi 2.4841428746e+04  [d1T]
+  k 19750: UNO        d_p -; d_m  13.464; R  12.649; max rho 1.8667e+04; N -5.96e-14; w 4.067; chi al centro -209.757; H 7.2422219037e+05; H_chi 2.3634067573e+04  [d1T]
+  k 20000: UNO        d_p -; d_m  12.355; R  12.706; max rho 2.4318e+04; N -6.08e-14; w 3.483; chi al centro -199.792; H 7.2266165478e+05; H_chi 2.1172736204e+04  [d1T]
+  k 20250: UNO        d_p -; d_m  12.477; R  12.677; max rho 2.8966e+04; N -6.15e-14; w 2.923; chi al centro -183.314; H 7.2003476605e+05; H_chi 1.7720017228e+04  [d1T]
+  k 20500: UNO        d_p -; d_m  13.605; R  12.583; max rho 9.4609e+03; N -6.23e-14; w 6.190; chi al centro -157.249; H 7.1668691200e+05; H_chi 1.4042794008e+04  [d1T]
+  k 20750: UNO        d_p -; d_m  13.956; R  12.301; max rho 1.1427e+04; N -6.27e-14; w 5.581; chi al centro -155.590; H 7.1624076173e+05; H_chi 1.3195622962e+04  [d1T]
+  k 21000: UNO        d_p -; d_m  12.974; R  11.908; max rho 2.3763e+04; N -6.38e-14; w 3.279; chi al centro -168.967; H 7.1792725266e+05; H_chi 1.4804755936e+04  [d1T]
+  k 21250: UNO        d_p -; d_m  11.898; R  11.574; max rho 2.8014e+04; N -6.38e-14; w 3.150; chi al centro -186.080; H 7.2061260471e+05; H_chi 1.7982473233e+04  [d1T]
+  k 21500: UNO        d_p -; d_m  11.491; R  11.405; max rho 2.1663e+04; N -6.46e-14; w 3.483; chi al centro -196.961; H 7.2229203468e+05; H_chi 2.0822561749e+04  [d1T]
+  k 21750: UNO        d_p -; d_m  11.495; R  11.295; max rho 1.3958e+04; N -6.62e-14; w 4.981; chi al centro -207.857; H 7.2417717646e+05; H_chi 2.3666514004e+04  [d1T]
+  k 22000: UNO        d_p -; d_m  11.971; R  11.199; max rho 2.9027e+04; N -6.57e-14; w 2.778; chi al centro -218.565; H 7.2553297707e+05; H_chi 2.5352748025e+04  [d1T]
+  k 22250: UNO        d_p -; d_m  12.796; R  11.121; max rho 1.3616e+04; N -6.65e-14; w 5.090; chi al centro -209.701; H 7.2455305024e+05; H_chi 2.4416674282e+04  [d1T]
+  k 22500: DUE CORPI  d_p   7.810; w 4.486 3.561; chi ai picchi -186.94 -191.61; d_m  12.752; R  11.008; max rho 1.1737e+04; N -6.71e-14; w 4.486 3.561; chi al centro -187.722; H 7.2253073633e+05; H_chi 2.1823756847e+04  [d1T]
+  k 22750: UNO        d_p -; d_m  11.624; R  10.781; max rho 2.2036e+04; N -6.79e-14; w 3.279; chi al centro -188.268; H 7.2099122027e+05; H_chi 1.9073460157e+04  [d1T]
+  k 23000: UNO        d_p -; d_m   9.931; R  10.645; max rho 2.3138e+04; N -6.82e-14; w 3.786; chi al centro -181.919; H 7.2033120970e+05; H_chi 1.7078091954e+04  [d1T]
+  k 23250: UNO        d_p -; d_m  10.074; R  10.996; max rho 3.6253e+04; N -6.88e-14; w 2.778; chi al centro -176.406; H 7.1932568887e+05; H_chi 1.5507169653e+04  [d1T]
+  k 23500: UNO        d_p -; d_m  12.088; R  11.651; max rho 1.5055e+04; N -6.94e-14; w 5.036; chi al centro -162.952; H 7.1746280660e+05; H_chi 1.4437756494e+04  [d1T]
+  k 23750: UNO        d_p -; d_m  13.609; R  12.250; max rho 2.0125e+04; N -6.94e-14; w 3.599; chi al centro -171.748; H 7.1800725291e+05; H_chi 1.5920426090e+04  [d1T]
+  k 24000: UNO        d_p -; d_m  14.323; R  12.675; max rho 1.8313e+04; N -6.95e-14; w 3.638; chi al centro -184.248; H 7.1962151663e+05; H_chi 1.8788155111e+04  [d1T]
+  k 24250: UNO        d_p -; d_m  14.263; R  12.826; max rho 1.3145e+04; N -7.07e-14; w 4.455; chi al centro -192.643; H 7.2129820009e+05; H_chi 2.1573078107e+04  [d1T]
+  k 24500: UNO        d_p -; d_m  13.241; R  12.673; max rho 1.3987e+04; N -7.14e-14; w 4.696; chi al centro -208.132; H 7.2337335041e+05; H_chi 2.4024451433e+04  [d1T]
+  k 24750: UNO        d_p -; d_m  12.080; R  12.327; max rho 2.7641e+04; N -7.18e-14; w 3.106; chi al centro -218.727; H 7.2514147134e+05; H_chi 2.5203115360e+04  [d1T]
+  k 25000: UNO        d_p -; d_m  11.829; R  12.039; max rho 2.9077e+04; N -7.22e-14; w 3.279; chi al centro -217.685; H 7.2522981283e+05; H_chi 2.4410482397e+04  [d1T]
+  k 25250: UNO        d_p -; d_m  12.619; R  12.117; max rho 2.7311e+04; N -7.31e-14; w 3.194; chi al centro -199.284; H 7.2220119212e+05; H_chi 2.0819018003e+04  [d1T]
+  k 25500: UNO        d_p -; d_m  13.342; R  12.400; max rho 1.4493e+04; N -7.39e-14; w 5.063; chi al centro -167.351; H 7.1828291836e+05; H_chi 1.6564723017e+04  [d1T]
+  k 25750: UNO        d_p -; d_m  12.684; R  12.578; max rho 1.8148e+04; N -7.47e-14; w 3.638; chi al centro -161.055; H 7.1595109035e+05; H_chi 1.3846897412e+04  [d1T]
+  k 26000: UNO        d_p -; d_m  12.639; R  12.567; max rho 1.2209e+04; N -7.55e-14; w 5.063; chi al centro -152.908; H 7.1517305358e+05; H_chi 1.3116547765e+04  [d1T]
+  k 26250: UNO        d_p -; d_m  12.554; R  12.317; max rho 1.4799e+04; N -7.57e-14; w 4.298; chi al centro -164.871; H 7.1652118368e+05; H_chi 1.4719748351e+04  [d1T]
+  k 26500: UNO        d_p -; d_m  12.169; R  11.948; max rho 2.4128e+04; N -7.68e-14; w 3.321; chi al centro -186.618; H 7.1980609167e+05; H_chi 1.8405932151e+04  [d1T]
+  k 26750: UNO        d_p -; d_m  11.756; R  11.630; max rho 2.6213e+04; N -7.74e-14; w 3.362; chi al centro -207.336; H 7.2321310582e+05; H_chi 2.2426864337e+04  [d1T]
+  k 27000: UNO        d_p -; d_m  10.593; R  11.516; max rho 3.0751e+04; N -7.80e-14; w 3.106; chi al centro -221.829; H 7.2552169259e+05; H_chi 2.5366090018e+04  [d1T]
+  k 27250: UNO        d_p -; d_m  11.264; R  11.735; max rho 1.9294e+04; N -7.87e-14; w 3.786; chi al centro -216.046; H 7.2438499419e+05; H_chi 2.5130107577e+04  [d1T]
+  k 27500: UNO        d_p -; d_m  12.110; R  11.981; max rho 1.2038e+04; N -7.87e-14; w 5.581; chi al centro -200.098; H 7.2261180856e+05; H_chi 2.3431478890e+04  [d1T]
+  k 27750: UNO        d_p -; d_m  12.498; R  12.088; max rho 1.6705e+04; N -7.92e-14; w 3.999; chi al centro -194.671; H 7.2092493716e+05; H_chi 2.0951391979e+04  [d1T]
+  k 28000: UNO        d_p -; d_m  13.237; R  12.085; max rho 1.7719e+04; N -7.95e-14; w 3.894; chi al centro -180.667; H 7.1876017985e+05; H_chi 1.7763056517e+04  [d1T]
+  k 28250: UNO        d_p -; d_m  12.893; R  12.001; max rho 1.9230e+04; N -8.06e-14; w 3.964; chi al centro -171.926; H 7.1740078330e+05; H_chi 1.5432084980e+04  [d1T]
+  k 28500: UNO        d_p -; d_m  11.822; R  11.973; max rho 2.3247e+04; N -8.22e-14; w 3.561; chi al centro -168.699; H 7.1695495599e+05; H_chi 1.4482260996e+04  [d1T]
+  k 28750: UNO        d_p -; d_m  10.718; R  12.011; max rho 2.7685e+04; N -8.29e-14; w 3.194; chi al centro -174.528; H 7.1797701785e+05; H_chi 1.5560410511e+04  [d1T]
+  k 29000: UNO        d_p -; d_m  11.385; R  12.159; max rho 2.0026e+04; N -8.40e-14; w 3.822; chi al centro -180.939; H 7.1863918028e+05; H_chi 1.7271093848e+04  [d1T]
+  k 29250: UNO        d_p -; d_m  12.997; R  12.385; max rho 1.3409e+04; N -8.40e-14; w 4.637; chi al centro -187.059; H 7.1982020157e+05; H_chi 1.9823922555e+04  [d1T]
+  k 29500: UNO        d_p -; d_m  13.552; R  12.514; max rho 1.5144e+04; N -8.43e-14; w 4.361; chi al centro -202.392; H 7.2185566149e+05; H_chi 2.2802507797e+04  [d1T]
+  k 29750: UNO        d_p -; d_m  13.689; R  12.502; max rho 2.1775e+04; N -8.48e-14; w 3.561; chi al centro -215.794; H 7.2380713586e+05; H_chi 2.5017208118e+04  [d1T]
+  k 30000: UNO        d_p -; d_m  12.703; R  12.403; max rho 2.0828e+04; N -8.62e-14; w 3.750; chi al centro -216.267; H 7.2384986589e+05; H_chi 2.4845211398e+04  [d1T]
+  k 30250: UNO        d_p -; d_m  11.625; R  12.340; max rho 2.4237e+04; N -8.70e-14; w 3.522; chi al centro -207.781; H 7.2261855781e+05; H_chi 2.2903434962e+04  [d1T_r]
+  k 30500: UNO        d_p -; d_m  11.835; R  12.396; max rho 2.0479e+04; N -8.84e-14; w 3.750; chi al centro -190.044; H 7.1967422426e+05; H_chi 1.9300076923e+04  [d1T_r]
+  k 30750: UNO        d_p -; d_m  12.320; R  12.430; max rho 2.1507e+04; N -8.88e-14; w 3.522; chi al centro -174.211; H 7.1715939401e+05; H_chi 1.6032029728e+04  [d1T_r]
+  k 31000: UNO        d_p -; d_m  13.112; R  12.347; max rho 1.8503e+04; N -8.98e-14; w 3.822; chi al centro -161.955; H 7.1544582809e+05; H_chi 1.3898070088e+04  [d1T_r]
+  k 31250: DUE CORPI  d_p   8.718; w 4.812 3.750; chi ai picchi -149.72 -154.30; d_m  12.897; R  12.140; max rho 1.1815e+04; N -9.05e-14; w 4.812 3.750; chi al centro -154.298; H 7.1546009624e+05; H_chi 1.3922871372e+04  [d1T_r]
+  k 31500: UNO        d_p -; d_m  11.418; R  11.890; max rho 2.3836e+04; N -9.17e-14; w 3.362; chi al centro -177.860; H 7.1787298802e+05; H_chi 1.6470068642e+04  [d1T_r]
+  k 31750: UNO        d_p -; d_m  10.346; R  11.780; max rho 2.9895e+04; N -9.26e-14; w 3.061; chi al centro -196.509; H 7.2081900043e+05; H_chi 2.0029548440e+04  [d1T_r]
+  k 32000: UNO        d_p -; d_m  10.806; R  11.835; max rho 2.4482e+04; N -9.36e-14; w 3.522; chi al centro -209.228; H 7.2283317436e+05; H_chi 2.3119810267e+04  [d1T_r]
+  k 32250: UNO        d_p -; d_m  12.354; R  12.083; max rho 1.9196e+04; N -9.44e-14; w 4.101; chi al centro -215.442; H 7.2353652680e+05; H_chi 2.4848624419e+04  [d1T_r]
+  k 32500: UNO        d_p -; d_m  12.976; R  12.419; max rho 2.2666e+04; N -9.54e-14; w 3.237; chi al centro -213.774; H 7.2298070799e+05; H_chi 2.4747183700e+04  [d1T_r]
+  k 32750: UNO        d_p -; d_m  12.890; R  12.611; max rho 1.2703e+04; N -9.58e-14; w 4.812; chi al centro -199.088; H 7.2091116350e+05; H_chi 2.2583577868e+04  [d1T_r]
+  k 33000: UNO        d_p -; d_m  11.812; R  12.503; max rho 1.0834e+04; N -9.68e-14; w 5.751; chi al centro -181.198; H 7.1911618805e+05; H_chi 1.9868145082e+04  [d1T_r]
+  k 33250: UNO        d_p -; d_m  10.507; R  12.124; max rho 2.4542e+04; N -9.76e-14; w 3.321; chi al centro -181.994; H 7.1824647870e+05; H_chi 1.7533222132e+04  [d1T_r]
+  k 33500: UNO        d_p -; d_m  10.592; R  11.719; max rho 2.3940e+04; N -9.83e-14; w 3.599; chi al centro -176.678; H 7.1765725190e+05; H_chi 1.5856837116e+04  [d1T_r]
+  k 33750: UNO        d_p -; d_m  10.801; R  11.570; max rho 3.2079e+04; N -9.91e-14; w 2.923; chi al centro -174.337; H 7.1735285696e+05; H_chi 1.5189583361e+04  [d1T_r]
+  k 34000: UNO        d_p -; d_m  11.486; R  11.676; max rho 2.1443e+04; N -9.97e-14; w 3.675; chi al centro -173.501; H 7.1699775980e+05; H_chi 1.5715068762e+04  [d1T_r]
+  k 34250: UNO        d_p -; d_m  11.614; R  11.843; max rho 1.4735e+04; N -1.01e-13; w 4.637; chi al centro -177.139; H 7.1779140710e+05; H_chi 1.7735158974e+04  [d1T_r]
+  k 34500: UNO        d_p -; d_m  10.656; R  11.943; max rho 1.8031e+04; N -1.02e-13; w 3.822; chi al centro -194.610; H 7.1995072471e+05; H_chi 2.1025310102e+04  [d1T_r]
+  k 34750: UNO        d_p -; d_m  10.740; R  11.889; max rho 1.7463e+04; N -1.02e-13; w 3.822; chi al centro -203.293; H 7.2178084788e+05; H_chi 2.3674369377e+04  [d1T_r]
+  k 35000: UNO        d_p -; d_m  10.823; R  11.662; max rho 1.7154e+04; N -1.02e-13; w 4.330; chi al centro -216.822; H 7.2343188780e+05; H_chi 2.5426033229e+04  [d1T_r]
+  k 35250: UNO        d_p -; d_m  10.426; R  11.426; max rho 3.7462e+04; N -1.04e-13; w 2.827; chi al centro -224.964; H 7.2482107449e+05; H_chi 2.5818814066e+04  [d1T_r]
+  k 35500: UNO        d_p -; d_m  10.865; R  11.534; max rho 2.3343e+04; N -1.05e-13; w 3.713; chi al centro -209.684; H 7.2219672780e+05; H_chi 2.2860366111e+04  [d1T_r]
+  k 35750: UNO        d_p -; d_m  10.886; R  11.854; max rho 2.0553e+04; N -1.06e-13; w 3.483; chi al centro -184.542; H 7.1826767344e+05; H_chi 1.8484591810e+04  [d1T_r]
+  k 36000: UNO        d_p -; d_m  11.002; R  12.115; max rho 1.6806e+04; N -1.07e-13; w 3.750; chi al centro -164.471; H 7.1534420956e+05; H_chi 1.5033756724e+04  [d1T_r]
+  k 36250: UNO        d_p -; d_m  11.381; R  12.258; max rho 1.4484e+04; N -1.07e-13; w 4.233; chi al centro -156.319; H 7.1381371413e+05; H_chi 1.3321642452e+04  [d1T_r]
+  k 36500: UNO        d_p -; d_m  11.799; R  12.225; max rho 1.5142e+04; N -1.08e-13; w 4.265; chi al centro -159.708; H 7.1447511810e+05; H_chi 1.4059153459e+04  [d1T_r]
+  k 36750: UNO        d_p -; d_m  12.077; R  12.046; max rho 2.3749e+04; N -1.08e-13; w 3.403; chi al centro -179.170; H 7.1717634611e+05; H_chi 1.7000096072e+04  [d1T_r]
+  k 37000: UNO        d_p -; d_m  11.594; R  11.836; max rho 2.8820e+04; N -1.09e-13; w 3.150; chi al centro -199.338; H 7.2035743354e+05; H_chi 2.0830248975e+04  [d1T_r]
+  k 37250: UNO        d_p -; d_m  10.720; R  11.720; max rho 2.4676e+04; N -1.10e-13; w 3.522; chi al centro -214.663; H 7.2288633495e+05; H_chi 2.4294977216e+04  [d1T_r]
+  k 37500: UNO        d_p -; d_m  10.556; R  11.861; max rho 2.7182e+04; N -1.10e-13; w 3.279; chi al centro -221.138; H 7.2357504701e+05; H_chi 2.5728328698e+04  [d1T_r]
+  k 37750: UNO        d_p -; d_m  12.007; R  12.113; max rho 1.0049e+04; N -1.10e-13; w 6.234; chi al centro -202.906; H 7.2176868280e+05; H_chi 2.4506614677e+04  [d1T_r]
+  k 38000: UNO        d_p -; d_m  12.839; R  12.177; max rho 1.5960e+04; N -1.11e-13; w 3.999; chi al centro -201.501; H 7.2038871276e+05; H_chi 2.2545432501e+04  [d1T_r]
+  k 38250: UNO        d_p -; d_m  12.925; R  12.139; max rho 2.3871e+04; N -1.13e-13; w 3.321; chi al centro -193.381; H 7.1901605762e+05; H_chi 2.0039532754e+04  [d1T_r]
+  k 38500: UNO        d_p -; d_m  12.508; R  12.137; max rho 1.9327e+04; N -1.14e-13; w 4.101; chi al centro -177.227; H 7.1664319743e+05; H_chi 1.6705188529e+04  [d1T_r]
+  k 38750: UNO        d_p -; d_m  11.423; R  12.168; max rho 2.6094e+04; N -1.15e-13; w 3.321; chi al centro -172.606; H 7.1584398264e+05; H_chi 1.5049623635e+04  [d1T_r]
+  k 39000: UNO        d_p -; d_m  11.354; R  12.345; max rho 2.9788e+04; N -1.15e-13; w 3.194; chi al centro -171.484; H 7.1565643799e+05; H_chi 1.4866804239e+04  [d1T_r]
+  k 39250: UNO        d_p -; d_m  12.886; R  12.609; max rho 1.7242e+04; N -1.17e-13; w 4.330; chi al centro -172.114; H 7.1555722327e+05; H_chi 1.5782744667e+04  [d1T_r]
+  k 39500: UNO        d_p -; d_m  13.867; R  12.821; max rho 1.5935e+04; N -1.18e-13; w 4.067; chi al centro -180.921; H 7.1678149612e+05; H_chi 1.8133424939e+04  [d1T_r]
+  k 39750: UNO        d_p -; d_m  14.109; R  12.868; max rho 1.3425e+04; N -1.19e-13; w 4.897; chi al centro -194.317; H 7.1896371592e+05; H_chi 2.1385768584e+04  [d1T_r]
+  k 40000: UNO        d_p -; d_m  12.830; R  12.701; max rho 2.2247e+04; N -1.20e-13; w 3.403; chi al centro -211.795; H 7.2153083192e+05; H_chi 2.4442195354e+04  [d1T_r]
+  k 40250: UNO        d_p -; d_m  11.172; R  12.413; max rho 2.5180e+04; N -1.20e-13; w 3.321; chi al centro -220.879; H 7.2290577575e+05; H_chi 2.5659412364e+04  [d1T_r]
+  k 40500: UNO        d_p -; d_m  10.760; R  12.204; max rho 2.6987e+04; N -1.21e-13; w 3.321; chi al centro -216.095; H 7.2236998996e+05; H_chi 2.4556301656e+04  [d1T_r]
+  k 40750: UNO        d_p -; d_m  11.809; R  12.226; max rho 2.4815e+04; N -1.21e-13; w 3.321; chi al centro -201.114; H 7.1980880260e+05; H_chi 2.1460097924e+04  [d1T_r]
+  k 41000: UNO        d_p -; d_m  12.952; R  12.304; max rho 1.8638e+04; N -1.23e-13; w 3.999; chi al centro -181.288; H 7.1671182234e+05; H_chi 1.7719855329e+04  [d1T_r]
+  k 41250: UNO        d_p -; d_m  12.871; R  12.307; max rho 1.7464e+04; N -1.24e-13; w 3.675; chi al centro -164.619; H 7.1403695861e+05; H_chi 1.4528253290e+04  [d1T_r]
+  k 41500: DUE CORPI  d_p   4.359; w 4.361 3.858; chi ai picchi -155.14 -153.90; d_m  12.557; R  12.202; max rho 1.0888e+04; N -1.25e-13; w 4.361 3.858; chi al centro -151.871; H 7.1309022195e+05; H_chi 1.3418340168e+04  [d1T_r]
+  k 41750: UNO        d_p -; d_m  10.651; R  11.937; max rho 1.9188e+04; N -1.25e-13; w 3.599; chi al centro -169.427; H 7.1483025610e+05; H_chi 1.5155045199e+04  [d1T_r]
+  k 42000: UNO        d_p -; d_m   8.935; R  11.633; max rho 3.0681e+04; N -1.26e-13; w 3.106; chi al centro -191.518; H 7.1845427419e+05; H_chi 1.8888224595e+04  [d1T_r]
+  k 42250: UNO        d_p -; d_m  10.142; R  11.617; max rho 2.7551e+04; N -1.26e-13; w 3.321; chi al centro -205.175; H 7.2037619341e+05; H_chi 2.1934028682e+04  [d1T_r]
+  k 42500: UNO        d_p -; d_m  11.254; R  11.823; max rho 2.2985e+04; N -1.28e-13; w 3.522; chi al centro -215.250; H 7.2169128338e+05; H_chi 2.4434378529e+04  [d1T_r]
+  k 42750: UNO        d_p -; d_m  11.568; R  12.077; max rho 2.0934e+04; N -1.27e-13; w 3.483; chi al centro -215.447; H 7.2156986909e+05; H_chi 2.5148592646e+04  [d1T_r]
+  k 43000: UNO        d_p -; d_m  11.498; R  12.223; max rho 1.0871e+04; N -1.28e-13; w 5.606; chi al centro -202.189; H 7.2018012893e+05; H_chi 2.3892244829e+04  [d1T_r]
+  k 43250: UNO        d_p -; d_m  10.919; R  12.173; max rho 2.0246e+04; N -1.29e-13; w 3.362; chi al centro -196.800; H 7.1893934405e+05; H_chi 2.1853985081e+04  [d1T_r]
+  k 43500: UNO        d_p -; d_m  10.909; R  12.051; max rho 1.4688e+04; N -1.29e-13; w 4.637; chi al centro -185.976; H 7.1711438699e+05; H_chi 1.8994546987e+04  [d1T_r]
+  k 43750: UNO        d_p -; d_m  10.544; R  11.941; max rho 2.8358e+04; N -1.30e-13; w 3.150; chi al centro -180.836; H 7.1620882460e+05; H_chi 1.6747834458e+04  [d1T_r]
+  k 44000: UNO        d_p -; d_m  10.457; R  11.960; max rho 3.4884e+04; N -1.30e-13; w 2.923; chi al centro -176.526; H 7.1568060544e+05; H_chi 1.5485220918e+04  [d1T_r]
+  k 44250: UNO        d_p -; d_m  10.938; R  12.219; max rho 2.4388e+04; N -1.30e-13; w 3.403; chi al centro -171.307; H 7.1449744880e+05; H_chi 1.4973180051e+04  [d1T_r]
+  k 44500: UNO        d_p -; d_m  11.312; R  12.570; max rho 1.3288e+04; N -1.31e-13; w 4.841; chi al centro -168.380; H 7.1437645096e+05; H_chi 1.6105415010e+04  [d1T_r]
+  k 44750: UNO        d_p -; d_m  11.123; R  12.737; max rho 1.4291e+04; N -1.32e-13; w 4.667; chi al centro -183.037; H 7.1621347143e+05; H_chi 1.8944732637e+04  [d1T_r]
+  k 45000: UNO        d_p -; d_m  11.361; R  12.642; max rho 1.9216e+04; N -1.33e-13; w 3.483; chi al centro -200.376; H 7.1887924884e+05; H_chi 2.2471994659e+04  [d1T_r]
+  k 45250: UNO        d_p -; d_m  11.449; R  12.344; max rho 1.5810e+04; N -1.34e-13; w 4.577; chi al centro -214.276; H 7.2121524856e+05; H_chi 2.5161664050e+04  [d1T_r]
+  k 45500: UNO        d_p -; d_m  10.496; R  12.034; max rho 2.9982e+04; N -1.35e-13; w 3.016; chi al centro -225.474; H 7.2283950105e+05; H_chi 2.6285297952e+04  [d1T_r]
+  k 45750: UNO        d_p -; d_m   9.771; R  11.964; max rho 3.4551e+04; N -1.35e-13; w 3.016; chi al centro -219.606; H 7.2191269846e+05; H_chi 2.4708199158e+04  [d1T_r]
+  k 46000: UNO        d_p -; d_m  10.204; R  12.185; max rho 2.3319e+04; N -1.36e-13; w 3.279; chi al centro -197.189; H 7.1813299670e+05; H_chi 2.0726119563e+04  [d1T_r]
+  k 46250: UNO        d_p -; d_m  11.358; R  12.446; max rho 1.4657e+04; N -1.37e-13; w 4.455; chi al centro -173.032; H 7.1429541849e+05; H_chi 1.6526323588e+04  [d1T_r]
+  k 46500: UNO        d_p -; d_m  12.706; R  12.575; max rho 1.2997e+04; N -1.38e-13; w 4.455; chi al centro -154.804; H 7.1201908318e+05; H_chi 1.3757749514e+04  [d1T_r]
+  k 46750: UNO        d_p -; d_m  12.732; R  12.478; max rho 1.8681e+04; N -1.38e-13; w 3.675; chi al centro -160.617; H 7.1215105182e+05; H_chi 1.3617613036e+04  [d1T_r]
+  k 47000: UNO        d_p -; d_m  12.062; R  12.157; max rho 2.5803e+04; N -1.39e-13; w 2.970; chi al centro -174.230; H 7.1426778197e+05; H_chi 1.5869085898e+04  [d1T_r]
+  k 47250: UNO        d_p -; d_m  11.258; R  11.771; max rho 1.8894e+04; N -1.40e-13; w 4.330; chi al centro -185.050; H 7.1663384003e+05; H_chi 1.8928553280e+04  [d1T_r]
+  k 47500: UNO        d_p -; d_m   9.279; R  11.495; max rho 3.1949e+04; N -1.40e-13; w 2.923; chi al centro -210.306; H 7.2013263594e+05; H_chi 2.2948954400e+04  [d1T_r]
+  k 47750: UNO        d_p -; d_m   9.476; R  11.518; max rho 2.8395e+04; N -1.41e-13; w 3.194; chi al centro -221.666; H 7.2172529268e+05; H_chi 2.5554003808e+04  [d1T_r]
+  k 48000: UNO        d_p -; d_m  11.192; R  11.745; max rho 1.4883e+04; N -1.41e-13; w 4.577; chi al centro -214.236; H 7.2074237541e+05; H_chi 2.5435396922e+04  [d1T_r]
+  k 48250: UNO        d_p -; d_m  11.776; R  11.922; max rho 2.2326e+04; N -1.41e-13; w 3.279; chi al centro -208.959; H 7.1981045436e+05; H_chi 2.4216718708e+04  [d1T_r]
+  k 48500: UNO        d_p -; d_m  11.222; R  12.069; max rho 2.1807e+04; N -1.41e-13; w 3.443; chi al centro -200.856; H 7.1809443428e+05; H_chi 2.1701978460e+04  [d1T_r]
+  k 48750: UNO        d_p -; d_m  10.889; R  12.245; max rho 2.4664e+04; N -1.42e-13; w 3.483; chi al centro -188.897; H 7.1619249730e+05; H_chi 1.8844952611e+04  [d1T_r]
+  k 49000: UNO        d_p -; d_m  11.171; R  12.460; max rho 2.7201e+04; N -1.43e-13; w 3.194; chi al centro -174.885; H 7.1383010520e+05; H_chi 1.5740701365e+04  [d1T_r]
+  k 49250: UNO        d_p -; d_m  11.813; R  12.676; max rho 1.7975e+04; N -1.43e-13; w 4.200; chi al centro -164.316; H 7.1209878564e+05; H_chi 1.3936570246e+04  [d1T_r]
+  k 49500: UNO        d_p -; d_m  12.429; R  12.840; max rho 2.1248e+04; N -1.44e-13; w 3.483; chi al centro -166.917; H 7.1240020834e+05; H_chi 1.4640379535e+04  [d1T_r]
+  k 49750: UNO        d_p -; d_m  12.595; R  12.896; max rho 1.9593e+04; N -1.44e-13; w 3.443; chi al centro -175.712; H 7.1360739335e+05; H_chi 1.6811449573e+04  [d1T_r]
+  k 50000: UNO        d_p -; d_m  12.174; R  12.692; max rho 1.2133e+04; N -1.45e-13; w 5.009; chi al centro -184.332; H 7.1541687091e+05; H_chi 1.9689543305e+04  [d1T_r]
+  k 50250: UNO        d_p -; d_m  10.670; R  12.184; max rho 1.6355e+04; N -1.45e-13; w 4.298; chi al centro -205.070; H 7.1873437088e+05; H_chi 2.3510964992e+04  [d1T_r]
+  k 50500: UNO        d_p -; d_m   8.908; R  11.642; max rho 3.5154e+04; N -1.46e-13; w 2.827; chi al centro -229.376; H 7.2251541421e+05; H_chi 2.6966066441e+04  [d1T_r]
+  k 50750: UNO        d_p -; d_m   9.270; R  11.432; max rho 3.1875e+04; N -1.47e-13; w 3.016; chi al centro -227.696; H 7.2220011467e+05; H_chi 2.6554650015e+04  [d1T_r]
+  k 51000: UNO        d_p -; d_m  10.585; R  11.545; max rho 2.1551e+04; N -1.48e-13; w 3.822; chi al centro -208.832; H 7.1919903177e+05; H_chi 2.3392244404e+04  [d1T_r]
+  k 51250: UNO        d_p -; d_m  11.289; R  11.823; max rho 2.1516e+04; N -1.48e-13; w 3.279; chi al centro -190.960; H 7.1607495535e+05; H_chi 1.9728808696e+04  [d1T_r]
+  k 51500: UNO        d_p -; d_m  11.031; R  12.128; max rho 1.7839e+04; N -1.49e-13; w 3.750; chi al centro -171.471; H 7.1314111286e+05; H_chi 1.6258237397e+04  [d1T_r]
+  k 51750: UNO        d_p -; d_m  10.785; R  12.301; max rho 1.3627e+04; N -1.50e-13; w 4.607; chi al centro -159.836; H 7.1114957632e+05; H_chi 1.3838956001e+04  [d1T_r]
+  k 52000: UNO        d_p -; d_m  10.838; R  12.274; max rho 1.6957e+04; N -1.51e-13; w 4.101; chi al centro -162.154; H 7.1149631113e+05; H_chi 1.4071897147e+04  [d1T_r]
+  k 52250: UNO        d_p -; d_m  11.161; R  12.114; max rho 2.4045e+04; N -1.51e-13; w 3.483; chi al centro -182.026; H 7.1441329804e+05; H_chi 1.7092072575e+04  [d1T_r]
+  k 52500: UNO        d_p -; d_m  12.027; R  12.148; max rho 3.8318e+04; N -1.52e-13; w 2.728; chi al centro -203.565; H 7.1788373379e+05; H_chi 2.1125318577e+04  [d1T_r]
+  k 52750: UNO        d_p -; d_m  12.156; R  12.545; max rho 2.1313e+04; N -1.53e-13; w 3.675; chi al centro -206.952; H 7.1786089292e+05; H_chi 2.2814656380e+04  [d1T_r]
+  k 53000: UNO        d_p -; d_m  12.725; R  12.938; max rho 1.5931e+04; N -1.53e-13; w 4.167; chi al centro -210.211; H 7.1814409864e+05; H_chi 2.4316362282e+04  [d1T_r]
+  k 53250: UNO        d_p -; d_m  12.863; R  13.125; max rho 1.6437e+04; N -1.53e-13; w 4.033; chi al centro -209.713; H 7.1818956956e+05; H_chi 2.4721838252e+04  [d1T_r]
+  k 53500: UNO        d_p -; d_m  13.225; R  13.116; max rho 1.8316e+04; N -1.54e-13; w 3.675; chi al centro -203.679; H 7.1709386075e+05; H_chi 2.3195860399e+04  [d1T_r]
+  k 53750: UNO        d_p -; d_m  12.972; R  12.869; max rho 1.8019e+04; N -1.55e-13; w 3.822; chi al centro -191.348; H 7.1523685912e+05; H_chi 2.0344295910e+04  [d1T_r]
+  k 54000: UNO        d_p -; d_m  11.365; R  12.365; max rho 2.5762e+04; N -1.56e-13; w 3.403; chi al centro -185.869; H 7.1459935039e+05; H_chi 1.8212712532e+04  [d1T_r]
+  DEVE: (la norma) max |N(k)/N(0) - 1| su 217 stati = 1.559e-13 < 1e-9   PASSA
+  i verdetti su 217 stati: {'ALTRO (3)': 3, 'ALTRO (5)': 1, 'DUE CORPI': 31, 'UNO': 182}; da k 6250: {'ALTRO (3)': 1, 'ALTRO (5)': 1, 'DUE CORPI': 9, 'UNO': 181}
+--------------------------------------------------------------------------------------------------------------------------------------------
+S1 (ii) PER FINESTRA DI 500: omega medio per meta' e la media delle due (### la riserva della carta: dopo k 6250 le meta' non sono due corpi, e la media NON e' l'omega della psi intera)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  (    0,   500]: omega 0.082522 0.082525; la media 0.082523
+  (  500,  1000]: omega 0.079638 0.079628; la media 0.079633
+  ( 1000,  1500]: omega 0.077912 0.077903; la media 0.077907
+  ( 1500,  2000]: omega 0.078961 0.078955; la media 0.078958
+  ( 2000,  2500]: omega 0.080759 0.080777; la media 0.080768
+  ( 2500,  3000]: omega 0.080379 0.080419; la media 0.080399
+  ( 3000,  3500]: omega 0.076483 0.076697; la media 0.076590
+  ( 3500,  4000]: omega 0.075491 0.075518; la media 0.075505
+  ( 4000,  4500]: omega 0.077298 0.077341; la media 0.077320
+  ( 4500,  5000]: omega 0.080499 0.080582; la media 0.080541
+  ( 5000,  5500]: omega 0.081623 0.081711; la media 0.081667
+  ( 5500,  6000]: omega 0.079474 0.079534; la media 0.079504
+  ( 6000,  6500]: omega 0.076019 0.076068; la media 0.076043
+  ( 6500,  7000]: omega 0.073624 0.073780; la media 0.073702
+  ( 7000,  7500]: omega 0.077518 0.077490; la media 0.077504
+  ( 7500,  8000]: omega 0.080655 0.080687; la media 0.080671
+  ( 8000,  8500]: omega 0.079136 0.079155; la media 0.079145
+  ( 8500,  9000]: omega 0.075099 0.074975; la media 0.075037
+  ( 9000,  9500]: omega 0.075132 0.075093; la media 0.075113
+  ( 9500, 10000]: omega 0.077690 0.077647; la media 0.077668
+  (10000, 10500]: omega 0.079042 0.078844; la media 0.078943
+  (10500, 11000]: omega 0.077811 0.077511; la media 0.077661
+  (11000, 11500]: omega 0.075808 0.075642; la media 0.075725
+  (11500, 12000]: omega 0.074496 0.074216; la media 0.074356
+  (12000, 12500]: omega 0.076155 0.075890; la media 0.076023
+  (12500, 13000]: omega 0.079409 0.079069; la media 0.079239
+  (13000, 13500]: omega 0.079232 0.078945; la media 0.079089
+  (13500, 14000]: omega 0.075969 0.075585; la media 0.075777
+  (14000, 14500]: omega 0.072938 0.071668; la media 0.072303
+  (14500, 15000]: omega 0.075312 0.074899; la media 0.075106
+  (15000, 15500]: omega 0.078828 0.078326; la media 0.078577
+  (15500, 16000]: omega 0.079117 0.078067; la media 0.078592
+  (16000, 16500]: omega 0.075910 0.074562; la media 0.075236
+  (16500, 17000]: omega 0.074351 0.073565; la media 0.073958
+  (17000, 17500]: omega 0.075505 0.073751; la media 0.074628
+  (17500, 18000]: omega 0.077113 0.076061; la media 0.076587
+  (18000, 18500]: omega 0.077896 0.076119; la media 0.077007
+  (18500, 19000]: omega 0.077006 0.075343; la media 0.076174
+  (19000, 19500]: omega 0.074246 0.072963; la media 0.073604
+  (19500, 20000]: omega 0.074113 0.072904; la media 0.073509
+  (20000, 20500]: omega 0.077026 0.075051; la media 0.076039
+  (20500, 21000]: omega 0.078609 0.077603; la media 0.078106
+  (21000, 21500]: omega 0.076734 0.074927; la media 0.075831
+  (21500, 22000]: omega 0.074108 0.072165; la media 0.073137
+  (22000, 22500]: omega 0.073552 0.072257; la media 0.072905
+  (22500, 23000]: omega 0.075907 0.074466; la media 0.075187
+  (23000, 23500]: omega 0.077879 0.075205; la media 0.076542
+  (23500, 24000]: omega 0.077048 0.076092; la media 0.076570
+  (24000, 24500]: omega 0.074580 0.073340; la media 0.073960
+  (24500, 25000]: omega 0.073249 0.070949; la media 0.072099
+  (25000, 25500]: omega 0.074921 0.073294; la media 0.074107
+  (25500, 26000]: omega 0.077987 0.076506; la media 0.077246
+  (26000, 26500]: omega 0.077648 0.075766; la media 0.076707
+  (26500, 27000]: omega 0.074017 0.072453; la media 0.073235
+  (27000, 27500]: omega 0.072779 0.071144; la media 0.071962
+  (27500, 28000]: omega 0.074643 0.073216; la media 0.073929
+  (28000, 28500]: omega 0.076913 0.075705; la media 0.076309
+  (28500, 29000]: omega 0.077257 0.074854; la media 0.076055
+  (29000, 29500]: omega 0.074972 0.073456; la media 0.074214
+  (29500, 30000]: omega 0.072536 0.071334; la media 0.071935
+  (30000, 30500]: omega 0.073590 0.071882; la media 0.072736
+  (30500, 31000]: omega 0.076458 0.075133; la media 0.075796
+  (31000, 31500]: omega 0.077225 0.076040; la media 0.076633
+  (31500, 32000]: omega 0.074610 0.073171; la media 0.073891
+  (32000, 32500]: omega 0.072421 0.070968; la media 0.071695
+  (32500, 33000]: omega 0.073162 0.072239; la media 0.072701
+  (33000, 33500]: omega 0.075560 0.074189; la media 0.074875
+  (33500, 34000]: omega 0.076630 0.075002; la media 0.075816
+  (34000, 34500]: omega 0.075246 0.073968; la media 0.074607
+  (34500, 35000]: omega 0.072657 0.071079; la media 0.071868
+  (35000, 35500]: omega 0.071619 0.070393; la media 0.071006
+  (35500, 36000]: omega 0.074726 0.073578; la media 0.074152
+  (36000, 36500]: omega 0.077129 0.075750; la media 0.076439
+  (36500, 37000]: omega 0.075259 0.074214; la media 0.074736
+  (37000, 37500]: omega 0.071967 0.070822; la media 0.071395
+  (37500, 38000]: omega 0.071824 0.070565; la media 0.071194
+  (38000, 38500]: omega 0.073965 0.072668; la media 0.073317
+  (38500, 39000]: omega 0.075927 0.074922; la media 0.075425
+  (39000, 39500]: omega 0.075275 0.074872; la media 0.075073
+  (39500, 40000]: omega 0.072298 0.072782; la media 0.072540
+  (40000, 40500]: omega 0.070860 0.070345; la media 0.070603
+  (40500, 41000]: omega 0.072503 0.072374; la media 0.072438
+  (41000, 41500]: omega 0.075559 0.075423; la media 0.075491
+  (41500, 42000]: omega 0.075336 0.074865; la media 0.075100
+  (42000, 42500]: omega 0.072026 0.072012; la media 0.072019
+  (42500, 43000]: omega 0.070905 0.070326; la media 0.070615
+  (43000, 43500]: omega 0.071987 0.072134; la media 0.072060
+  (43500, 44000]: omega 0.074367 0.074033; la media 0.074200
+  (44000, 44500]: omega 0.074749 0.075108; la media 0.074928
+  (44500, 45000]: omega 0.072998 0.073222; la media 0.073110
+  (45000, 45500]: omega 0.069897 0.070580; la media 0.070239
+  (45500, 46000]: omega 0.069887 0.070901; la media 0.070394
+  (46000, 46500]: omega 0.073192 0.074696; la media 0.073944
+  (46500, 47000]: omega 0.074706 0.075722; la media 0.075214
+  (47000, 47500]: omega 0.072050 0.073319; la media 0.072684
+  (47500, 48000]: omega 0.068653 0.070760; la media 0.069706
+  (48000, 48500]: omega 0.070141 0.070542; la media 0.070341
+  (48500, 49000]: omega 0.072403 0.073004; la media 0.072703
+  (49000, 49500]: omega 0.074830 0.074652; la media 0.074741
+  (49500, 50000]: omega 0.073208 0.073750; la media 0.073479
+  (50000, 50500]: omega 0.070004 0.070530; la media 0.070267
+  (50500, 51000]: omega 0.068183 0.069563; la media 0.068873
+  (51000, 51500]: omega 0.070215 0.073124; la media 0.071669
+  (51500, 52000]: omega 0.073090 0.075439; la media 0.074265
+  (52000, 52500]: omega 0.069693 0.074589; la media 0.072141
+  (52500, 53000]: omega 0.067517 0.071647; la media 0.069582
+  (53000, 53500]: omega 0.066418 0.071023; la media 0.068720
+  (53500, 54000]: omega 0.068819 0.072552; la media 0.070686
+--------------------------------------------------------------------------------------------------------------------------------------------
+S1 (iii) PER FINESTRA DI 2500 (da k 6250): il respiro di R, w medio (gli stati UNO), max rho medio, H e H_chi
+--------------------------------------------------------------------------------------------------------------------------------------------
+  [    0,  6250] (26 stati): il respiro di R 1.0078 (R da 6.623 a 21.527); UNO  2, w medio 4.6534; max rho medio 1.1154e+04; H 7.1497578967e+05 -> 7.2479798060e+05 (+1.374e-02 rel); H_chi 1.017873e+04 -> 2.254755e+04
+  [ 6250,  8750] (11 stati): il respiro di R 0.6646 (R da 6.477 a 13.613); UNO  8, w medio 4.2675; max rho medio 1.8626e+04; H 7.2479798060e+05 -> 7.2709117447e+05 (+3.164e-03 rel); H_chi 2.254755e+04 -> 2.394567e+04
+  [ 8750, 11250] (11 stati): il respiro di R 0.3421 (R da 9.225 a 13.099); UNO  9, w medio 3.5460; max rho medio 2.0288e+04; H 7.2709117447e+05 -> 7.2373121401e+05 (-4.621e-03 rel); H_chi 2.394567e+04 -> 2.140629e+04
+  [11250, 13750] (11 stati): il respiro di R 0.2211 (R da 10.707 a 13.419); UNO  9, w medio 4.0692; max rho medio 1.5658e+04; H 7.2373121401e+05 -> 7.2260366831e+05 (-1.558e-03 rel); H_chi 2.140629e+04 -> 2.040272e+04
+  [13750, 16250] (11 stati): il respiro di R 0.3677 (R da 8.843 a 12.983); UNO  9, w medio 3.8507; max rho medio 2.1177e+04; H 7.2260366831e+05 -> 7.2371642479e+05 (+1.540e-03 rel); H_chi 2.040272e+04 -> 2.079561e+04
+  [16250, 18750] (11 stati): il respiro di R 0.2942 (R da 9.322 a 12.599); UNO 10, w medio 3.9601; max rho medio 2.0500e+04; H 7.2371642479e+05 -> 7.2025840104e+05 (-4.778e-03 rel); H_chi 2.079561e+04 -> 1.797791e+04
+  [18750, 21250] (11 stati): il respiro di R 0.1576 (R da 10.799 a 12.706); UNO 11, w medio 4.0709; max rho medio 1.9342e+04; H 7.2025840104e+05 -> 7.2061260471e+05 (+4.918e-04 rel); H_chi 1.797791e+04 -> 1.798247e+04
+  [21250, 23750] (11 stati): il respiro di R 0.1425 (R da 10.645 a 12.250); UNO 10, w medio 3.7961; max rho medio 2.1329e+04; H 7.2061260471e+05 -> 7.1800725291e+05 (-3.615e-03 rel); H_chi 1.798247e+04 -> 1.592043e+04
+  [23750, 26250] (11 stati): il respiro di R 0.0634 (R da 12.039 a 12.826); UNO 11, w medio 4.0026; max rho medio 1.9023e+04; H 7.1800725291e+05 -> 7.1652118368e+05 (-2.070e-03 rel); H_chi 1.592043e+04 -> 1.471975e+04
+  [26250, 28750] (11 stati): il respiro di R 0.0671 (R da 11.516 a 12.317); UNO 11, w medio 3.8241; max rho medio 2.1073e+04; H 7.1652118368e+05 -> 7.1797701785e+05 (+2.032e-03 rel); H_chi 1.471975e+04 -> 1.556041e+04
+  [28750, 31250] (11 stati): il respiro di R 0.0408 (R da 12.011 a 12.514); UNO 10, w medio 3.7941; max rho medio 1.9583e+04; H 7.1797701785e+05 -> 7.1546009624e+05 (-3.506e-03 rel); H_chi 1.556041e+04 -> 1.392287e+04
+  [31250, 33750] (11 stati): il respiro di R 0.0863 (R da 11.570 a 12.611); UNO 10, w medio 3.7690; max rho medio 2.1453e+04; H 7.1546009624e+05 -> 7.1735285696e+05 (+2.646e-03 rel); H_chi 1.392287e+04 -> 1.518958e+04
+  [33750, 36250] (11 stati): il respiro di R 0.0705 (R da 11.426 a 12.258); UNO 11, w medio 3.7468; max rho medio 2.1232e+04; H 7.1735285696e+05 -> 7.1381371413e+05 (-4.934e-03 rel); H_chi 1.518958e+04 -> 1.332164e+04
+  [36250, 38750] (11 stati): il respiro di R 0.0446 (R da 11.720 a 12.258); UNO 11, w medio 3.8934; max rho medio 2.0850e+04; H 7.1381371413e+05 -> 7.1584398264e+05 (+2.844e-03 rel); H_chi 1.332164e+04 -> 1.504962e+04
+  [38750, 41250] (11 stati): il respiro di R 0.0562 (R da 12.168 a 12.868); UNO 11, w medio 3.7133; max rho medio 2.1620e+04; H 7.1584398264e+05 -> 7.1403695861e+05 (-2.524e-03 rel); H_chi 1.504962e+04 -> 1.452825e+04
+  [41250, 43750] (11 stati): il respiro di R 0.0575 (R da 11.617 a 12.307); UNO 10, w medio 3.7461; max rho medio 2.0350e+04; H 7.1403695861e+05 -> 7.1620882460e+05 (+3.042e-03 rel); H_chi 1.452825e+04 -> 1.674783e+04
+  [43750, 46250] (11 stati): il respiro di R 0.0648 (R da 11.941 a 12.737); UNO 11, w medio 3.7099; max rho medio 2.2977e+04; H 7.1620882460e+05 -> 7.1429541849e+05 (-2.672e-03 rel); H_chi 1.674783e+04 -> 1.652632e+04
+  [46250, 48750] (11 stati): il respiro di R 0.0897 (R da 11.495 a 12.575); UNO 11, w medio 3.7076; max rho medio 2.1369e+04; H 7.1429541849e+05 -> 7.1619249730e+05 (+2.656e-03 rel); H_chi 1.652632e+04 -> 1.884495e+04
+  [48750, 51250] (11 stati): il respiro di R 0.1198 (R da 11.432 a 12.896); UNO 11, w medio 3.6412; max rho medio 2.2660e+04; H 7.1619249730e+05 -> 7.1607495535e+05 (-1.641e-04 rel); H_chi 1.884495e+04 -> 1.972881e+04
+  [51250, 53750] (11 stati): il respiro di R 0.1042 (R da 11.823 a 13.125); UNO 11, w medio 3.7564; max rho medio 2.0211e+04; H 7.1607495535e+05 -> 7.1523685912e+05 (-1.170e-03 rel); H_chi 1.972881e+04 -> 2.034430e+04
+  ### H a k 18000 7.2158899238e+05, a k 54000 7.1459935039e+05: -9.6865e-03 relativo (lo strumento NON e' sigillato su questa scena: e' un andamento)
+--------------------------------------------------------------------------------------------------------------------------------------------
+S2: I GIRI 1, 2, 3r (C: |maxchi(n+1)/maxchi(n) - 1| < 0.10 E il respiro di w del giro n+1 < 0.10; D: C no, ma max|chi| entro il 10% fra 2 e 3r)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  GIRO 1 (E:\soliton_simulator\controllo\M1519\puntofisso_2M\giro_1): la partenza E:\soliton_simulator\controllo\M2034\coppia\d1L\stato_018000.npz, il residuo 1.135e-12; P 2500 (gli ultimi due picchi, a k 1500 e 4000), i picchi a k [1500, 4000]
+    max|chi| 229.0287; w medio 3.9279 (da 2.6252 a 6.2345), il respiro 0.9189; la profondita' media -188.6017; omega medio 0.075452 (la psi intera)
+    (    0,   500] max|chi|   205.8557  w   3.5554  profondita'  -183.7876  omega 0.076693
+    (  500,  1000] max|chi|   204.8804  w   4.7584  profondita'  -190.3076  omega 0.075344
+    ( 1000,  1500] max|chi|   223.2635  w   3.7826  profondita'  -208.6211  omega 0.073590
+    ( 1500,  2000] max|chi|   222.4188  w   3.8068  profondita'  -198.5449  omega 0.074490
+    ( 2000,  2500] max|chi|   200.7480  w   3.8780  profondita'  -170.8907  omega 0.076997
+    ( 2500,  3000] max|chi|   188.2346  w   4.7068  profondita'  -163.8840  omega 0.077832
+    ( 3000,  3500] max|chi|   216.0377  w   3.2555  profondita'  -197.2575  omega 0.075026
+    ( 3500,  4000] max|chi|   229.0287  w   3.7974  profondita'  -213.2986  omega 0.073049
+    ( 4000,  4500] max|chi|   228.7434  w   4.6516  profondita'  -198.7040  omega 0.073783
+    ( 4500,  5000] max|chi|   190.9705  w   3.7069  profondita'  -179.3523  omega 0.076180
+    ( 5000,  5500] max|chi|   196.1071  w   3.5021  profondita'  -176.3374  omega 0.076746
+    ( 5500,  6000] max|chi|   201.8472  w   3.8713  profondita'  -183.4242  omega 0.075696
+    A0 sui 25 stati del giro: {'DUE CORPI': 1, 'UNO': 24}
+  GIRO 2 (E:\soliton_simulator\controllo\M1519\puntofisso_2M\giro_2): la partenza E:\soliton_simulator\controllo\M1519\puntofisso_2M\giro_1\partenza_giro_2.npz, il residuo 4.761e-01; P 2500 (il ripiego 2500 (0 picchi)), i picchi a k []
+    max|chi| 259.5144; w medio 3.2767 (da 2.7282 a 3.9986), il respiro 0.3877; la profondita' media -224.9944; omega medio 0.071003 (la psi intera)
+    (    0,   500] max|chi|   249.4213  w   3.3015  profondita'  -224.8896  omega 0.071893
+    (  500,  1000] max|chi|   254.9951  w   2.9435  profondita'  -229.5642  omega 0.071021
+    ( 1000,  1500] max|chi|   237.4586  w   3.6643  profondita'  -221.2964  omega 0.071581
+    ( 1500,  2000] max|chi|   258.4867  w   3.0942  profondita'  -229.0633  omega 0.070950
+    ( 2000,  2500] max|chi|   256.2127  w   3.4524  profondita'  -223.9713  omega 0.071010
+    ( 2500,  3000] max|chi|   252.7246  w   3.3175  profondita'  -221.4396  omega 0.071480
+    ( 3000,  3500] max|chi|   257.3769  w   3.0508  profondita'  -230.0142  omega 0.070485
+    ( 3500,  4000] max|chi|   245.9667  w   3.6025  profondita'  -222.1256  omega 0.071104
+    ( 4000,  4500] max|chi|   252.2199  w   3.1319  profondita'  -227.9267  omega 0.070582
+    ( 4500,  5000] max|chi|   251.5421  w   3.2836  profondita'  -226.0673  omega 0.070637
+    ( 5000,  5500] max|chi|   246.1948  w   3.3201  profondita'  -220.4561  omega 0.071091
+    ( 5500,  6000] max|chi|   259.5144  w   3.0140  profondita'  -230.0741  omega 0.070199
+    A0 sui 25 stati del giro: {'UNO': 25}
+  GIRO 3r (E:\soliton_simulator\controllo\M1519\puntofisso_2M\giro_3r): la partenza E:\soliton_simulator\controllo\M1519\puntofisso_2M\giro_2\partenza_giro_3.npz, il residuo 4.400e-01; P 2500 (il ripiego 2500 (0 picchi)), i picchi a k []
+    max|chi| 252.9440; w medio 3.3679 (da 2.6772 a 4.6370), il respiro 0.5819; la profondita' media -221.3351; omega medio 0.069081 (la psi intera)
+    (    0,   500] max|chi|   240.4454  w   3.7977  profondita'  -216.0505  omega 0.069742
+    (  500,  1000] max|chi|   252.9440  w   3.0880  profondita'  -227.5450  omega 0.068968
+    ( 1000,  1500] max|chi|   252.9402  w   3.7265  profondita'  -221.0402  omega 0.069152
+    ( 1500,  2000] max|chi|   243.2410  w   3.2758  profondita'  -219.5239  omega 0.069443
+    ( 2000,  2500] max|chi|   251.3305  w   3.0382  profondita'  -228.1385  omega 0.068587
+    ( 2500,  3000] max|chi|   237.0716  w   3.5874  profondita'  -216.6202  omega 0.069401
+    ( 3000,  3500] max|chi|   243.7816  w   3.2464  profondita'  -221.9828  omega 0.069024
+    ( 3500,  4000] max|chi|   247.7802  w   3.2493  profondita'  -223.5469  omega 0.068747
+    ( 4000,  4500] max|chi|   235.2615  w   3.5432  profondita'  -217.0277  omega 0.069242
+    ( 4500,  5000] max|chi|   241.4330  w   3.2167  profondita'  -222.6457  omega 0.068825
+    ( 5000,  5500] max|chi|   242.7481  w   3.2861  profondita'  -219.5580  omega 0.068975
+    ( 5500,  6000] max|chi|   240.0426  w   3.3136  profondita'  -221.6496  omega 0.068865
+    A0 sui 25 stati del giro: {'UNO': 25}
+  C fra 1 e 2: max|chi| 229.0287 -> 259.5144, |rapporto - 1| 0.1331 (NO); il respiro del giro 2 0.3877 (NO)  ->  NON PASSA
+  C fra 2 e 3r: max|chi| 259.5144 -> 252.9440, |rapporto - 1| 0.0253 (SI); il respiro del giro 3r 0.5819 (NO)  ->  NON PASSA
+  ### C PASSA: NO; D (C no, max|chi| fermo fra 2 e 3r): SI
+--------------------------------------------------------------------------------------------------------------------------------------------
+S3: IL VERDETTO (le regole della carta, il seguito 2)
+--------------------------------------------------------------------------------------------------------------------------------------------
+  SI SPEZZA? (DUE con d_p > 2 max w, per >= 22 stati consecutivi): S1 nessuna (la fila piu' lunga 12 stati); S2 {'1': 'nessuna', '2': 'nessuna', '3r': 'nessuna'}
+  COLLASSA? (a) il respiro di R: le prime 4 finestre 0.3989, le ultime 4 0.0946 -> non cresce (una corsa, nessuna barra: e' una lettura); (b) max rho > 5e4 e R < 6 per >= 22 stati: nessuna
+### IL VERDETTO S3: ALTRO (D: max|chi| fermo entro il 10% fra 2 e 3r, |rapporto - 1| 0.0253; il respiro del giro 3r 0.5819)
+============================================================================================================================================
