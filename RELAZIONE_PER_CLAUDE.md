@@ -27888,3 +27888,25 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - gli errori n.257 e n.258;
   - le mie definizioni del minimo, del minimo successivo *(solo se interno)* e della tabella `d` / `omega` / chi al centro.
 - **Lo script:** `due_corpi_lettura_v5.py`. Fa girare la v4 intera, poi aggiunge D2'', il minimo, l'oscillazione e la tabella.
+
+
+### 2026-11-27 01:15 -- [M0106] PEZZO 1b: D2'' DA' VERSO 8, VIA 4, NON DISTINGUIBILE 0; IL MINIMO d 6.795 A k 3230; IL MASSIMO 27.870 A k 5020; NESSUN SECONDO MINIMO IN 6000 TICK [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo_v6_C.txt`, riscritto con `due_corpi_lettura_v5.py` *(`4078ab07`)* sugli stessi `25` stati. Codice d'uscita `0`; i DEVE della v4 passano `2` su `2`. **Le finestre valide sono `12` su `12`.**
+- **D2'' per finestra:**
+  - **VERSO** su `[0, 3000]` *(`6` finestre, `|Delta d1'|/|Delta d2'|` da `72.0` a `95.5`)* e su `[5000, 6000]` *(`2`, i rapporti `8.99` e `37.4`)*;
+  - **VIA** su `[3000, 5000]` *(`4`, da `6.78` a `50.6`)*;
+  - **d2' va VIA in tutte le `12` finestre.**
+- **Il verdetto D2'':** **VERSO `8`, VIA `4`, non distinguibile `0`.**
+- **Il minimo e l'oscillazione** *(dalla serie, ogni `10` tick)*:
+  - il minimo e' `d 6.795042` a `k 3230`; il massimo dopo e' `27.870268` a `k 5020`;
+  - **il minimo successivo non c'e'**: `d` scende fino all'ultimo tick *(`21.077` a `k 6000`)*;
+  - il mezzo periodo, minimo -> massimo, e' `1790` tick: **non e' un periodo.**
+- **La tabella `d` / `omega` / chi al centro** *(per finestra di `500`)*:
+  - **d1':** `omega` scende quando `d` scende e il pozzo si approfondisce. `[0, 500]`: `d 41.31`, `omega 0.08252`, chi `-120.6`. `[3000, 3500]`: `d 8.06`, `omega 0.0765`, chi `-188`. `[3500, 4000]`: `d 16.13`, `omega 0.0755`, chi `-191.5`. `[5000, 5500]`: `d 27.39`, `omega 0.0817`, chi `-115`;
+  - **d2'** *(chi spento)*: `omega` va da `0.0934` a `0.0920` e chi al centro oscilla da `-32` a `+77`. **Chi qui non accoppia: evolve libero;**
+  - **d3':** `omega` da `0.0831` a `0.0839`, chi da `-98.5` a `-106.9`.
+- **La lettura, mia:**
+  - **il pozzo di chi delle due copie si somma quando si avvicinano, e l'orologio dei corpi rallenta dove il pozzo e' piu' profondo.** Il segno e' quello di uno spostamento verso il rosso. Il ritardo e' visibile: `omega` minima a `[3500, 4000]`, mentre `d` e' minima a `[3000, 3500]`;
+  - la riserva delle due meta' sotto `2 w` resta *(il minimo `6.795` sta sotto)*.
+- **LE PREVISIONI:** del guardiano, P1 *(`90%`, VERSO `8`, VIA `4`, le finestre `[3000, 5000]` VIA)*: **SI'**, esatta. La mia *(`95%`)*: **SI'**.
