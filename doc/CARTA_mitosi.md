@@ -95,3 +95,96 @@
 - **LE PREVISIONI:**
   - **del guardiano:** P2 *(`60%`)* non nasce nulla in `6000` tick; P3 *(`55%`)* se nasce qualcosa, nasce dopo `k 3000` e sul bordo del toro;
   - **le mie:** K4'' passa *(gia' misurato)*. P2 al `75%`: il vuoto fresco e' un autostato, quindi le fasi degli archi non dovrebbero accumularsi fino a `2 pi`.
+
+
+## A. LE CINQUE LETTURE A COSTO ZERO *([M2245-27], DECISIONE DI LUCA 2026-11-27 `22:45`, dalla posta, `c00aa4b3`; `23:14` e `23:21` per la suite; scritta PRIMA del codice; un processo alla volta, nessuna corsa)* [[PROGETTO-MITOSI]]
+
+**I dati:** solo stati e registri che ci sono gia'.
+- **La fiammata:** `E:/soliton_simulator/controllo/mitosi_rami`, cioe' `TRONCO`, `MITOSI` e `MITOSI_V2`, letti con `mitosi_dati.py`. Ci sono `538` nascite fra `k 35976` e `45949`, e la fiammata parte dalla nascita 12, a `k 36294`.
+- **I triangoli:** `controllo/CHI/triangolo/{t120, t120r28, t000}`.
+- **La coppia:** `controllo/M2034/coppia/d1`.
+
+**Le soglie che fisso io** sono criteri dentro il mandato, dichiarati qui prima dei numeri. Quelle del guardiano, dove le adotto, lo dico.
+
+### A1. IL COSTO DI UN NODO -> `doc/referti_l2/mitosi_costo_nodo.py`, `mitosi_costo_nodo.txt`
+
+- **Le grandezze:** per ogni nascita `DH` (dal registro), il numero di nodi `n(k)` al momento della nascita e **la densita' locale**.
+  - `n(k)` e' `n0 + i`, con `n0` dal meta di `stato_36000` meno le sue nascite e `i` il numero d'ordine della nascita: e' la stessa regola di `mitosi_energia_fiammata.py`.
+  - **La densita' locale** e' la media di `rho` sui nodi entro una distanza `4` dalla `pos` della nascita (`toro.scarti`, `L 186`). La `rho` viene dallo **stato salvato piu' vicino con `k <=` quello della nascita**, ogni `250`. La risoluzione di `250` tick e' dichiarata.
+- **Il fit, dichiarato prima:** minimi quadrati `DH = a + b x`, con `x = n` e poi con `x = densita'`; `sigma_b` dai residui.
+  - **«COSTANTE»** se `|b| < 2 sigma_b`;
+  - altrimenti si aggiunge `c x^2`: **«LINEARE»** se `|c| < 2 sigma_c`, **«ALTRO»** se no;
+  - si stampa anche lo Spearman, come lettura.
+- **I casi noti:**
+  - **(K1)** `-somma DH` delle `538` nascite = `E_persa` finale entro `1e-9` relativo. E' gia' passato in [M0237-2] e si rifa';
+  - **(K2)** il fit su dati sintetici costanti piu' rumore (seme fisso) da' COSTANTE, e su dati con una pendenza nota la ritrova entro `2 sigma`;
+  - **(K3)** la densita' locale di una `rho` costante `c` e' `c` al bit.
+
+### A2. a(k) = sqrt(n(k)) -> `doc/referti_l2/mitosi_a_di_k.py`, `mitosi_a_di_k.txt`
+
+- **Le grandezze:** `n(k)` come in A1, letto ai bordi delle finestre di `500` da `k 36000` a `46000`, e `a = sqrt(n)`.
+  - `H_i = (a_{i+1} - a_{i-1}) / (2 * 500 * a_i)`;
+  - `a''_i = (a_{i+1} - 2 a_i + a_{i-1}) / 500^2`;
+  - `q_i = - a''_i a_i / a'_i^2`.
+- **La lettura:** la sequenza dei segni di `q`. **«C'e' una fase con `q > 0` prima di una con `q < 0`?»** La risposta e' si' se esiste un `i` tale che `q > 0` nelle finestre prima e `q < 0` in almeno `2` finestre consecutive dopo. **Nessuna ipotesi su Lambda.**
+- **I casi noti:**
+  - **(K1)** `a` lineare in `k` da' `q = 0` entro `1e-12`;
+  - **(K2)** `a` esponenziale da' `q = -1` entro l'errore della differenza finita, stampato;
+  - **(K3)** `a ∝ k^(1/2)` da' `q = +1`, con lo stesso criterio.
+
+### A3. IL RITMO DELLE NASCITE -> `doc/referti_l2/mitosi_ritmo.py`, `mitosi_ritmo.txt`
+
+- **Le finestre** sono di `250`, da `k 36250` a `46000`. **In ogni finestra** si contano le nascite in `10` sottofinestre di `25` tick (`25` e' il primo intervallo fra due nascite, `mitosi_dati.txt`), e si calcola **il rapporto varianza/media** di quei conteggi.
+- **La soglia, quella del guardiano, che adotto:** **«A GRADINI»** se il rapporto supera `2` in **oltre meta'** delle finestre con almeno `2` nascite; **«LISCIO»** se sta fra `0.5` e `2` in oltre meta'; **«ALTRO»** se no.
+  - Il rapporto per finestre di `250` su tutta la fiammata si stampa insieme.
+  - Le sottofinestre di `10` e di `50` tick si stampano **come sensibilita'**: il verdetto resta quello con `25`.
+- **I casi noti** (seme fisso):
+  - **(K1)** nascite regolari, una ogni `25` tick, danno un rapporto `0`;
+  - **(K2)** nascite di Poisson danno un rapporto mediano fra `0.5` e `2`;
+  - **(K3)** pacchetti di `5` nascite nello stesso tick danno un rapporto sopra `2`.
+
+### A4. LE TRE SFASATE -> `doc/referti_l2/triangoli_vortice.py`, `triangoli_vortice.txt` *(il pezzo 0 di [M-GM])*
+
+- **Gli stati che ci sono, e lo dichiaro come chiede la lettera:**
+  - **`t120`:** il triangolo «destro», con le fasi `0, 120, 240` in senso antiorario;
+  - **`t120r28`:** il suo gemello ruotato di `15` gradi. Ha **le stesse fasi e lo stesso verso**: **non e' un «sinistro».** Un triangolo sinistro (`0, 240, 120`) con `chi` acceso **non c'e'**, e lo dichiaro;
+  - **`t000`:** il triangolo in fase.
+  - Per ciascuno si legge **il primo stato e l'ultimo** salvati, e uno ogni `5000` in mezzo.
+- **Il numero di vortice:** il giro della fase di `psi` attorno al centro (il baricentro dei tre vertici), in unita' di `2 pi`.
+  - Si calcola sulla componente di `psi` con la norma piu' grande, come in `triangolo_120`, sommando le differenze di fase ridotte in `(-pi, pi]` lungo un cerchio di `N` punti al raggio `r`.
+  - **Il raggio principale e' il raggio circoscritto**, cioe' il cerchio che passa per i tre corpi, dove `psi` non e' trascurabile. Si stampano anche `0.5` e `1.5` volte il raggio.
+  - **Il verdetto:** «giro intero» se il valore principale dista da un intero meno di `0.1`.
+- **La corrente circolante `J_theta`** per anello `[0, R/2)`, `[R/2, R)`, `[R, 3R/2)`, con `R` il raggio circoscritto. `J` e' la corrente di `psi` sugli archi, `Im(somma_c conj(psi_i) psi_j)`, proiettata sulla direzione tangente.
+- **`Theta` sommato su un giro chiuso attorno al centro** (gli archi di un cammino chiuso del grafo vicino al raggio principale, ciascuno col suo verso). **DEVE essere zero entro `1e-9`: e' il caso noto, non una misura** (l'errore n.261 del guardiano).
+- **I casi noti:**
+  - **(K1)** sulla `psi` di partenza (`k 0`) di `t120` il giro e' `+1`, e quello di `t000` e' `0`. E' il DEVE di `triangolo_120` al tick `0`;
+  - **(K2)** **DEVE FALLIRE**: una `psi` con la fase invertita (`conj`) da' `-1`;
+  - **(K3)** il giro di `Theta`.
+- **Per [M-GM] (D4):** se nessuno dei tre ha un giro intero diverso da zero all'ultimo stato, **[M-GM] si ferma qui** e si dichiara.
+
+### A5. IL VENTO A DUE CORPI -> `doc/referti_l2/vento_due_corpi.py`, `vento_due_corpi.txt`
+
+- **Gli stati:** `M2034/coppia/d1`, da `k 0` a `6000`, ogni `250`.
+- **I due corpi:** si prendono da `coppia_a0.a0`, che da' i due picchi. Gli stati che non sono DUE si stampano e restano fuori dalla media.
+- **`J_phi`** e' la formula di `vuoto_giro3.py` (`rho_phi grad theta`, con `theta` la fase di `somma conj(phi_v) phi` per nodo, e i nodi giusti `(m1 +- 1, m2)` e `(m1 +- 1, m2 +- 2)`):
+  - **la componente radiale attorno a ciascun corpo**, negli anelli `[8, 16)` e `[16, 32)`, **negativa se e' verso il corpo**;
+  - **la componente lungo l'asse fra i due**, sui nodi a meno di `2` dal segmento che unisce i due corpi, proiettata sul versore verso il baricentro della coppia, **positiva se e' verso il baricentro**.
+  - **Per finestra di `500`:** la media sugli stati della finestra.
+- **I casi noti:** quelli di `vuoto_giro3` (V1):
+  - sul vuoto fresco la corrente e' `0` entro `1e-9`;
+  - **DEVE FALLIRE** con una fase `q y`, che da' una corrente lungo `y`.
+
+### LE PREVISIONI *(prima dei numeri)*
+
+- **Del guardiano** (copiate dalla lettera):
+  - A1 (`50%`): `DH` cresce con la densita' locale;
+  - A2 (`70%`): nessuna fase con `q > 0`;
+  - A3 (`60%`): a gradini;
+  - A4 (`70%`): `+-1` per le sfasate e `0` per quello in fase;
+  - A5 (`60%`): vento radiale verso ciascun corpo e, lungo l'asse, verso il baricentro.
+- **Le mie:**
+  - **A1:** «LINEARE» o «ALTRO» contro la densita' (`55%`): i `DH` vanno da `-57.76` a `-2.50`, troppo sparsi per essere una costante;
+  - **A2:** **c'e' `q > 0` per gran parte della fiammata** (`70%`). Le nascite per `500` calano da `45` a `16`, quindi `a'` cala, e un `a'` che cala e' una decelerazione: e' **contro** la previsione A2 del guardiano;
+  - **A3:** «A GRADINI» (`45%`);
+  - **A4:** `t120` `+1` all'ultimo stato (`60%`): la saturazione potrebbe aver rotto il giro; `t000` `0` (`80%`);
+  - **A5:** radiale verso il corpo nell'anello `[16, 32)` (`65%`), come il vento del giro 3; lungo l'asse verso il baricentro (`50%`).

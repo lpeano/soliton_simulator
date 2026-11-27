@@ -29123,3 +29123,17 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 - **Nota per lapse-u:** CLAUDE.md di lapse-u dice ancora `python primo_ordine/collauda.py`. Il wrapper arriva su lapse-u solo con un merge nel verso opposto, o con una decisione apposta.
 - **Da qui A, C, D ed F girano su mitosi**, e D sul ramo `u-dinamica`. Il prossimo pezzo e' la carta A.
 - **Un incidente del commit, dichiarato:** il primo tentativo con `committa3.py` e' stato rifiutato dal suo stesso controllo, perche' un merge porta 141 file nello stage, e dopo il rifiuto ha fatto `git reset` dei file dichiarati. `MERGE_HEAD` e' rimasto e il contenuto fuso era intatto nel worktree: ho ri-aggiunto i file e committato con `committa3_merge.py` (lo stage deve CONTENERE i file dichiarati, `MERGE_HEAD` e' obbligatorio, e non fa nessun reset).
+
+
+### 2026-11-27 23:35 -- [M2245-27] A, LA CARTA DELLE CINQUE LETTURE (doc/CARTA_mitosi.md, sezione «A. LE CINQUE LETTURE A COSTO ZERO»), PRIMA DEL CODICE [[PROGETTO-MITOSI]]
+
+- **Che cosa contiene, per ogni lettura:** i dati, le grandezze, il fit o il test dichiarato prima, i casi noti e le previsioni, le mie e quelle del guardiano.
+- **Le soglie mie** (criteri dentro il mandato):
+  - **A1:** «COSTANTE» se `|b| < 2 sigma_b`; altrimenti si aggiunge il termine quadratico, e il verdetto e' «LINEARE» o «ALTRO». La densita' locale e' la media di `rho` entro `4` dalla `pos` della nascita, sullo stato salvato piu' vicino prima della nascita (risoluzione `250`);
+  - **A2:** le differenze finite sulle finestre di `500`. «Si'» se `q > 0` prima e `q < 0` in almeno `2` finestre consecutive dopo;
+  - **A3:** sottofinestre di `25` tick; la soglia `2` e' quella del guardiano;
+  - **A4:** il raggio principale e' quello circoscritto, e il «giro intero» vuol dire entro `0.1` da un intero;
+  - **A5:** l'asse e' la fascia di larghezza `2` attorno al segmento fra i due corpi.
+- **A4, dichiarato:** con `chi` acceso esistono `t120` (il destro), `t120r28` (il gemello ruotato di `15` gradi, **con lo stesso verso**) e `t000` (in fase). **Un triangolo «sinistro» non c'e'.**
+- **Una mia previsione e' contro quella del guardiano su A2:** le nascite calano da `45` a `16` per `500` tick, e mi aspetto `q > 0`, cioe' una decelerazione, per gran parte della fiammata (`70%`).
+- **Una nota sul commit B3** (`b3ccf592`): due referti di [M1214] (`suite_mitosi_M1214*.txt`) risultano modificati nel worktree solo per i fine riga (CRLF). Il contenuto e' identico (`git diff --ignore-cr-at-eol` vuoto) e non li tocco.
