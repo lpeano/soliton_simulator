@@ -27962,3 +27962,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il percorso nel mandato e' sbagliato:** gli stati di d1' non sono in `M2034/d1`, ma in `M2034/coppia/d1`. Uso quest'ultimo.
 - **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M0951]. Fissa le scelte *(riquadro, d, omega, scale)* e due controlli DEVE: `d(3250)` entro il `10%` di `6.795`, e il riferimento a `k 0` entro `0.5`.
 - **La previsione, mia:** i due controlli passano *(`90%`)*; il video sta sotto i `5 MB` *(`80%`)*.
+
+
+### 2026-11-27 10:05 -- [M0951] PEZZO 1b: IL VIDEO v1 PASSA I DUE DEVE (d(3250) 6.835, 0.59%; IL RIFERIMENTO 0.0000) MA NON SI LEGGE (I PUNTI TROPPO PICCOLI): ERRORE MIO, LA CORREZIONE IN v2 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia.txt`; il video `anima_coppia.mp4` *(h264, `1280x640`, yuv420p, `25` quadri, `1.185 MB`)*, prodotti da `anima_coppia.py` *(`c0f781ea`, committato e pulito)*.
+- **I due DEVE PASSANO:**
+  - `d(3250)` = `6.834784`, lo `0.59%` da `6.795`;
+  - **il riferimento:** lo scarto a `k 0` e' `0.0000` per entrambi i corpi. **Quello zero e' quasi garantito:** la serie calcola il baricentro nello stesso modo. Prova soltanto che i pannelli stanno nello stesso riferimento della serie, e niente di piu'.
+- **IL DIFETTO, MIO:** ho guardato il quadro a `t 3.30 s` *(`k 3500`)*. I punti `scatter` con `s=4` sono troppo piccoli per `120` nodi su `560` pixel: lo sfondo bianco passa fra i punti, i corpi si vedono appena e le curve di livello di `chi` non si vedono. **Il video non e' utilizzabile.** Lo committo com'e' e lo correggo in `anima_coppia_v2.py`, che lo sovrascrive.
+- **UN'OSSERVAZIONE CHE IL VIDEO NON CERCAVA:** il baricentro della coppia **si sposta lungo x** di `-2.557` *(il massimo, a `k 4250`)*, poi torna a `-1.142` *(a `k 6000)*; lungo y resta entro `0.103`.
+  - Con due corpi uguali e simmetrici, per la sola interazione reciproca il baricentro dovrebbe stare fermo. **Una deriva laterale fa pensare a una spinta esterna, per esempio il vento del vuoto lungo x, o a un'asimmetria della partenza.**
+  - **Domanda aperta.** Si chiude confrontando d2' *(chi spento)*: se anche li' il baricentro deriva, la causa non e' il pozzo.
