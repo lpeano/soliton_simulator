@@ -29332,3 +29332,20 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **E** viene dopo F.
 - **Non ho creato il ramo `u-dinamica`** ne' il suo worktree: e' gestione, e la sua forma dipende dalla risposta.
 - **Le previsioni del guardiano per P1 con le nascite spente** (`50%`, «A tiene in vita il vortice oltre `k 30000`»): **i dati di A4 dicono gia' di no** per l'A di oggi, ma il P1 di [M0016] non e' stato eseguito.
+
+
+### 2026-11-28 00:28 -- [M0026] LETTA (DECISIONE DI LUCA 2026-11-28 00:26): C DA k 0 CON LE NASCITE ACCESE; F CON N DIPINTO NEL TICK DELLA MITOSI; D RITIRATO SALVO P3; [M0016] E [M-GM] RITIRATI. IN ESECUZIONE NELL'ORDINE C, F, D-P3, E [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0026] e' stata letta su comando di Luca («Leggi posta.»). E' una DECISIONE DI LUCA (00:26) e **sostituisce [M0016]** per la parte D. Risponde a C-0..C-2 e F-1..F-3 (`d61e1361`) e alla premessa caduta (`0d9b5fc3`), che il guardiano registra come **errore n.263**.
+  - `git log --all --grep "[M0026"` trova solo il commit della posta: non e' fatto niente.
+- **Le decisioni, in breve:**
+  - **C, la via (d):** la coppia da `k 0` (`M2034/coppia/d1/stato_000000`), con `chi` e le nascite accese, per 18000 tick;
+    - C-1: `chi` e `pi` del nato sono la media dei due estremi dell'arco;
+    - C-2: `H` e `DH` includono `H_chi`;
+    - K0: con le nascite spente, i primi 250 tick sono uguali AL BIT a `d1`;
+    - K1: con le nascite accese, nessuno scatto prima di `k 6000`, e lo stato a `6000` e' uguale AL BIT a `d1`;
+    - il verdetto C4 sul tratto `6000-18000`, contro `d1L`.
+  - **F, la via (a):** `N` dipinto nel tick della mitosi su `L 186`, con lo stesso **gradiente** `G20`; `N` del nato viene dalla formula. Il vuoto e' quello di [M0106], con 6000 tick e il controllo `N` piatto uguale a [M0106] al bit.
+  - **D:** resta solo P3 (Eotvos con gli aggregati: destro + sinistro specchio accanto a M, nel seno dipinto), con il campo che c'e' gia'. Niente ramo `u-dinamica`, niente nucleo.
+  - **E:** il TODO allineato a `CODA.md` e le ricevute.
+- **Il primo passo:** la mappa del codice che C e F devono unire (il tick di `d1`, il contatore `Theta`, `mitosi_regola`, il tick della mitosi). Poi il task history, poi la carta, poi il codice.
