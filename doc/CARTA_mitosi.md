@@ -190,7 +190,7 @@
   - **A5:** radiale verso il corpo nell'anello `[16, 32)` (`65%`), come il vento del giro 3; lungo l'asse verso il baricentro (`50%`).
 
 
-## C E F, PRIMA DEL CODICE: LE SCELTE CHE IL CODICE NON HA *([M2245-27], DECISIONE DI LUCA 2026-11-27 `22:45` e `22:47`; scritta il 2026-11-28 verso le `00:25`, PRIMA di ogni riga di `corpo_fuso_mitosi.py` e di `vuoto_lapse_mitosi.py`)* [[PROGETTO-MITOSI]]
+## C E F, PRIMA DEL CODICE: LE SCELTE CHE IL CODICE NON HA *([M2245-27], DECISIONE DI LUCA 2026-11-27 `22:45` e `22:47`; scritta il 2026-11-28 alle `00:13` (l'ora di `accoda.py`; nel commit `d61e1361` c'era scritto, sbagliato, «verso le `00:25`»), PRIMA di ogni riga di `corpo_fuso_mitosi.py` e di `vuoto_lapse_mitosi.py`)* [[PROGETTO-MITOSI]]
 
 **Che cosa ho letto nel codice:**
 - **Le nascite e `chi` non si sono mai incontrati.** Nessuno script della mitosi usa `chi_tick_v2`.

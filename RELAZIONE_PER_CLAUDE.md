@@ -29257,7 +29257,7 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 
 **La carta** e' in `doc/CARTA_mitosi.md`, sezione «C E F, PRIMA DEL CODICE». Contiene la lettura del codice e le scelte aperte, scritte prima di ogni riga.
 
-**Il numero che cambia C** (letto verso le `00:20` dagli stati):
+**Il numero che cambia C** (letto dagli stati fra le `00:09` e le `00:13`; nel commit `d61e1361` c'era scritto, sbagliato, «verso le `00:20`»):
 
 | stato | max abs(Theta) | archi oltre `2 pi` |
 |---|---|---|
