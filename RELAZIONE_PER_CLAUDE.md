@@ -28686,3 +28686,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - gli scratchpad delle sessioni di Claude in `C:\Users\lpeano\AppData\Local\Temp\claude\...`. **Gli aiuti di commit** *(`committa3.py`, `accoda.py`)* **ora girano da una copia su `E:\soliton_lavoro\strumenti_cc`**, e i messaggi stanno li'; lo scratchpad della sessione, invece, lo sceglie l'ambiente.
 - **CLAUDE.md par. 2** *(due righe)* **e `doc/REGOLE/par2.md`** *(il dettaglio)* dicono la regola nuova: il repository principale su E:, i worktree su E:, C: mai.
 - **Un controllo che fallisce gia' da prima, non per questo commit:** `csv/_struttura_regole.py` dice «REGOLE PERSE: `1. RAGIONAMENTO PRELIMINARE`», perche' confronta col blob vecchio `da79cc1`, e quel punto e' diventato «LE PREMESSE DAL CODICE» *(decisione di Luca, 2026-10-28)*. **L'esito e' lo stesso prima e dopo la mia modifica.** Non lo correggo qui: e' un'altra cosa.
+
+
+### 2026-11-27 19:13 -- [M1824] IL CODICE DELLA RIPRESA: corpo_fuso_v2.py (lettura_s2, noto, corsa, giro3), COMMITTATO PRIMA DI GIRARE; C: 25.11 GB, IMPEGNABILE 28.22 GB SU 49.47 (19:13) [[PROGETTO-MITOSI]]
+
+- **`doc/referti_l2/corpo_fuso_v2.py`** *(sha1 dei byte `687b68c0`)* importa `corpo_fuso.py` e non lo riscrive: `Ripresa10`, `giro_pf`, le costanti e i percorsi sono quelli.
+  - **`lettura_s2`** *(-> `corpo_fuso_s2_giri12.txt`)*: i giri `1` e `2` dai `giro.json` firmati. Per giro: `P`, la fonte, i picchi, il residuo alla partenza, e per finestra di `500` *(`(a, b]`)* `max|chi|`, `w`, la profondita' e `omega`. Poi il criterio C fra `1` e `2`.
+    - **Le definizioni** sono quelle di [M0137] punto 6: `max|chi|` del giro e' il massimo per tick sul giro, il respiro e' `(w_max - w_min)/w_medio` sui `61` campioni.
+    - **Verificate prima su un caso noto:** con queste definizioni uno script ridà i numeri gia' scritti alle `17:58` *(giro 1: `229.03`, `3.928`, `0.9189`, `-188.60`, `0.075452`; giro 2: `259.51`, `3.277`, `0.3877`, `-224.99`, `0.071003`)*.
+  - **`noto`:**
+    - **K0** da `d1T/stato_029750`, `250` tick: lo stato uguale AL BIT a `d1T/stato_030000`, la serie `29760..30000` e `omega` entro `1e-12`, contro `serie_parziale.json`. **K0-neg:** senza `geo.U` lo stato deve essere diverso;
+    - **in piu', mie, dichiarate qui:**
+      - **KB e KB-neg**, il confronto AL BIT che le corse usano per fermarsi: contro se stesso trova `0` chiavi diverse; con un ulp cambiato in `psi_h` DEVE trovare `psi_h`. **E' il controllo positivo del DEVE dentro le corse;**
+      - **K2**, la carica di S2 *(nessun tick)*: lo stato caricato da `partenza_giro_3.npz` con `pi = 0` deve essere uguale AL BIT a `giro_3/stato_000000`.
+  - **`corsa`** *(S1)*: da `d1T/stato_030000` a `k 54000`, in `M1519/d1T_r`. La serie e `omega` ripartono da `serie_parziale.json` *(fino a `30000`)*, e la riga a `30000` deve essere uguale AL BIT a quella della serie parziale. **A `30250`, `30500`, `30750` e `31000` lo stato si confronta AL BIT con `d1T`; se uno differisce, la corsa si ferma** *(assert, uscita `1`)*. La serie parziale si riscrive ogni `2500` tick.
+  - **`giro3`** *(S2)*: da `giro_2/partenza_giro_3.npz`, con `pi = 0`, in `puntofisso_2M/giro_3r`. **A `k 0, 250, 500, 750, 1000` lo stato si confronta AL BIT con `giro_3`** *(`k 0` l'ho aggiunto io: e' gratis)*, altrimenti il giro si ferma. Poi `giro.json` e `partenza_giro_4.npz`, riga per riga come in `corpo_fuso.puntofisso`.
+  - **`d1T` e `giro_3` non si toccano:** si leggono soltanto.
+- **Le misure delle `19:13:20`:** C: `25.11 GB` liberi, E: `153.62 GB`, l'impegnabile `28.22 GB` liberi su `49.47` *(sopra la soglia di `8`)*, la RAM `15.99 GB` su `34.13`.
+- **Il prossimo passo:** `lettura_s2`, committata prima del lancio; poi `noto`.
