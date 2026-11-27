@@ -28342,3 +28342,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **accettare K0' sullo stato e sulla serie al bit** *(e' il K0 del mandato, spostato a `5750`)*, con `omega` entro `1e-14` relativo, dichiarato come scelta fatta dopo il numero;
   - **e lanciare d1'' con la v9.** E' la strada piu' corta: **circa `2.7` ore**, contro le circa `4` di B6.
 - **In attesa:** la suite della mitosi *(il punto 2 di [M1214])*, che non dipende da questa scelta.
+
+
+### 2026-11-27 12:37 -- [M1214] 2: LA SUITE DELLA MITOSI NEL WORKTREE NUOVO, CON TMP SU E:, DA' 65 SU 67: I DUE COLLAUDI CHE CREANO UN REPOSITORY GIT TEMPORANEO (M-B1, LO STAGE) CADONO PER LA DUBIOUS OWNERSHIP DI E:; A3: NESSUNA h_* NUOVA SU C: [[PROGETTO-MITOSI]]
+
+- **Il log:** `doc/referti_l2/suite_mitosi_M1214.txt` *(copia di `E:\soliton_lavoro\tmp\suite_mitosi.txt`)*.
+  - **Il comando:** `primo_ordine/collauda.py` in `E:\soliton_lavoro\wt_mitosi` *(HEAD `82739c06`)*, con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, dalle `12:24:44` alle `12:36:28`, uscita `1`.
+- **`65` collaudi su `67` PASSANO.** Il `pre-commit` impiega `393.04 s`, i lenti `294.16 s`.
+- **I `2` che FALLISCONO**, entrambi «solo-CI»:
+  - **`M-B1` PUO' fallire** *(`primo_ordine/_collauda_mb1.py`)*: `_misura_mb1._byte_dell_albero` fa un `git worktree add --detach` in una cartella di `tempfile`, cioe' su E:. Il timbro dice **«FUORI DA UN REPO GIT»** e la barriera dice **«`core.hooksPath` e' `<non impostato>`»**: **git non legge quel repository**;
+  - **i controlli sullo STAGE** *(`csv/_stage.py --collaudo`)*: `tempfile.mkdtemp(prefix="repo_")` e poi `git init`, su E:. Il caso SANO e i casi (a) e (b) falliscono: **5 su 8.**
+- **LA CAUSA:** **e' la stessa di A2.** Su E: git rifiuta ogni repository senza un'eccezione `safe.directory`, e le cartelle temporanee hanno un nome nuovo a ogni giro. **La catena e' letta dal codice; non ho rifatto i due collaudi con `TMP` su C: per una controprova.**
+- **A3, LA VERIFICA:**
+  - **nessuna cartella `h_*` nuova su C:** *(`0` prima, `0` dopo)*;
+  - **su `E:\soliton_lavoro\tmp` ne resta `1` in piu'** *(`1` prima, `2` dopo)*: un residuo, forse di un collaudo fallito. **Non lo cancello finche' non so di chi e'.**
+- **LE TRE VIE, LA SCELTA E' DI LUCA:**
+  - **(a)** un'eccezione `safe.directory` col jolly sulla sola cartella temporanea *(`E:/soliton_lavoro/tmp/*`)*. **Luca ha escluso il jolly per i worktree:** chiedo se vale anche qui;
+  - **(b)** solo per quei due collaudi, la cartella temporanea su C: *(che ora ha `4.5 GB` liberi)*, dichiarata. **Contraddice A3** per quei due;
+  - **(c)** lasciare la suite a `65/67` su E: e dichiarare i due collaudi «solo-CI» come non verificabili in locale. **Sconsiglio (c):** sono quelli che provano il `pre-commit`.

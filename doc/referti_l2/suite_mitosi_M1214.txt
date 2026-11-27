@@ -1,0 +1,122 @@
+[TIMBRO] collauda.py  sha1-BYTE c90f9aef  committato e pulito
+====================================================================================================
+TUTTI I COLLAUDI, CON I TEMPI   (punto 6)
+====================================================================================================
+  la macchina: Windows AMD64, python 3.13.2
+  il budget del `pre-commit`: 1800 s   ### e oltre il budget e- un SEGNALE, non un rifiuto
+
+  il collaudo                            dove         secondi  esito
+  ----------------------------------------------------------------------------------------------
+  il grafo valido                        pre-commit      0.93  ok
+  il determinismo                        pre-commit     11.81  ok
+  le simmetrie e le conservazioni        pre-commit      1.97  ok
+  lo schema della tabella                pre-commit      1.07  ok
+  il generatore                          pre-commit      3.65  ok
+  la struttura compatta delle estremita- pre-commit      0.50  ok
+  il motore: contenitore e pezzi unitari pre-commit      0.54  ok
+  il checkpoint e la ripresa             pre-commit      6.90  ok
+  il confronto tabella / banco           pre-commit      4.64  ok
+  la memoria: `m1`..`m4`                 pre-commit      2.33  ok
+  il flusso di saturazione               pre-commit      0.42  ok
+  il flusso materia-vuoto                pre-commit      0.57  ok
+  le forme del legame                    pre-commit      0.46  ok
+  `P3` l-energia e la corrente           pre-commit      0.45  ok
+  la corrente locale costruita           pre-commit    145.68  ok
+  la deriva di `E` e la sorgente         pre-commit     38.66  ok
+  il tempo proprio in TUTTE le leggi     pre-commit      0.52  ok
+  lo schema della camminata              pre-commit      0.32  ok
+  lo schema della configurazione         pre-commit      0.31  ok
+  `@rif` byte-inerte                     pre-commit      0.25  ok
+  il modello di sigillo                  pre-commit      2.13  ok
+  la catena                              pre-commit      4.84  ok
+  la GUIDA, eseguita                     pre-commit      2.72  ok
+  il referto dell-infrastruttura (LENTO) solo-CI        22.86  ok
+  la barriera dei hook                   pre-commit      0.89  ok
+  `P-ALB` l-albero delle scelte          pre-commit      7.90  ok
+  `P-ID` un id che nasce                 pre-commit      0.67  ok
+  `P-T2` il replay dei registri          pre-commit     10.27  ok
+  l-arbitro fra le due vie               pre-commit      0.61  ok
+  i presidi dell-indice                  pre-commit     10.26  ok
+  `P-REG` le regole di gestione          pre-commit      1.12  ok
+  il presidio sullo STOP                 pre-commit      0.86  ok
+  `P-E1`..`P-E5` i presidi dell-era 2    pre-commit      1.04  ok
+  `P-M1` il documento dei metodi         pre-commit      0.37  ok
+  `P-C1` i controlli nell-indice         pre-commit      2.57  ok
+  `P-T1` il testo non si interpreta      pre-commit      1.34  ok
+  `P-R1` ogni ramo e- dichiarato         pre-commit      3.18  ok
+  `P-T3` le citazioni strutturate        pre-commit      2.07  ok
+  `P-RIF` un ID nel codice e- un costrutto pre-commit      8.83  ok
+  `P-ES1` un solo esecutore              pre-commit     12.32  ok
+  `P-MOD` la modularita-                 pre-commit      7.13  ok
+  `P-AB` i confronti e i dati            pre-commit      0.31  ok
+  `P-TAB` la legge si legge dalla tabella pre-commit      8.26  ok
+  `D0` la forma `cs` spenta e' il passo di oggi pre-commit      7.95  ok
+  `D1` l-invarianza di scala             pre-commit      4.81  ok
+  `D2` `cs` al centro, a punto fisso     pre-commit      3.40  ok
+  `D2-T` il tetto di `Omega`, la tolleranza derivata pre-commit      0.43  ok
+  `R60` le rotazioni del reticolo commutano col tick di oggi pre-commit      1.61  ok
+  il censimento dei rami (NON blocca)    solo-CI         0.58  ok
+  chi la suite NON gira (NON blocca)     pre-commit      0.42  ok
+  `M-B1` PUO- fallire, ed e- provato     solo-CI        16.25  ### FALLISCE (codice 1)
+  i presidi dell-indice, nei due versi   pre-commit      6.05  ok
+  i controlli della migrazione           pre-commit      5.63  ok
+  il rinominamento, sul piano            pre-commit      0.52  ok
+  la FORMA dei testi generati            pre-commit     10.07  ok
+  i controlli sullo STAGE e non sul disco solo-CI       133.21  ### FALLISCE (codice 1)
+  la pulizia delle temporanee            pre-commit      0.84  ok
+  la simmetria `(P Theta)` sulla parte LINEARE pre-commit      2.42  ok
+  la `(P Theta)` col termine NON lineare, e `cs` nei due modi pre-commit      0.89  ok
+  la misura COMPLETA di `L2`, su piu- stati solo-CI        28.41  ok
+  `H_w`: l-energia PESATA, e se il passo con `cs` la conserva pre-commit     25.80  ok
+  il banco della camminata               pre-commit      1.17  ok
+  il banco della camminata v2            pre-commit      1.52  ok
+  il banco della camminata v3            pre-commit      1.39  ok
+  le letture del guscio e del moto       solo-CI        47.29  ok
+  il banco del v4                        pre-commit      6.48  ok
+  il banco del legame                    solo-CI        45.55  ok
+  ----------------------------------------------------------------------------------------------
+  IL TOTALE del `pre-commit`                           393.04
+  piu- i LENTI, solo in CI                             294.16
+  IN TUTTO                                             687.20
+
+  ### 2 COLLAUDI FALLISCONO:
+     `M-B1` PUO- fallire, ed e- provato     `primo_ordine/_collauda_mb1.py` -> codice 1
+        | Traceback (most recent call last):
+        |   File "E:\soliton_lavoro\wt_mitosi\primo_ordine\_collauda_mb1.py", line 209, in <module>
+        |     sys.exit(main(sys.argv[1:]))
+        |              ~~~~^^^^^^^^^^^^^^
+        |   File "E:\soliton_lavoro\wt_mitosi\primo_ordine\_collauda_mb1.py", line 205, in main
+        |     return collaudo()
+        |   File "E:\soliton_lavoro\wt_mitosi\primo_ordine\_collauda_mb1.py", line 77, in collaudo
+        |     n1, i1, b_pert, ids_pert = MB1._byte_dell_albero("8c7b9288", os.path.join(base, "pert"),
+        |                                ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        |                                        MB1._perturba_operatore(oggi))
+        |                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        |   File "E:\soliton_lavoro\wt_mitosi\primo_ordine\_misura_mb1.py", line 514, in _byte_dell_albero
+        |     assert not r.returncode, ("la corsa in %s e- FALLITA: %s"
+        |            ^^^^^^^^^^^^^^^^
+        | AssertionError: la corsa in 8c7b928 e- FALLITA: [TIMBRO] _misura_mb1.py  sha1-BYTE 046fb206  FUORI DA UN REPO GIT
+        | [BARRIERA] *** RIFIUTO DI GIRARE ***
+        |   `P-BARRIERA`: `core.hooksPath` e- `<non impostato>` e non `.githooks`. ### I hook di `.git/hooks/` NON VIAGGIANO COL REPO: senza questo comando -- `git config
+        |   ### I hook LOCALI sono la BARRIERA, e la CI e- solo una RETE: senza
+        |   ### di loro NIENTE impedisce un commit, e questo strumento non
+        |   ### vuole far credere il contrario.
+     i controlli sullo STAGE e non sul disco `csv/_stage.py --collaudo` -> codice 1
+        | [TIMBRO] _stage.py  sha1-BYTE fc366ea7  committato e pulito
+        | ====================================================================================================
+        | IL COLLAUDO DEI CONTROLLI SULLO STAGE -- nei DUE VERSI
+        | ====================================================================================================
+        |   ### e il modo RAPIDO passa (e- quello del `pre-commit`)          PASSA   ### 1 controllo su 5: il validatore dell-indice, che e- quello che prende l-incoerenz
+        |   sul disco: i controlli del contenuto passano SULLO STAGE         PASSA   5 controlli sullo stage, 4 dichiarati sul disco col motivo
+        |   ### il collaudo ha MATERIA: le due liste non sono vuote          PASSA   ### se una fosse vuota, o non si controllerebbe niente o non si dichiarerebbe niente
+        |   ### il caso SANO: tutto committato, il controllo PASSA           ### FALLISCE   ### se questo fallisse, i due casi sotto non direbbero niente
+        |   ### (a) DEVE scattare: `b` in stage e `a` SOLO SUL DISCO         ### FALLISCE   ### e- IL DIFETTO: sul disco e- coerente, nel COMMIT no -- e il presidio vecch
+        |   ### e SUL DISCO lo stesso caso PASSA: ecco perche- nessuno lo vedeva PASSA   ### il disco diceva <<coerente>>, e il commit NON lo era
+        |   ### (b) entrambi in stage: il controllo PASSA                    ### FALLISCE   ### la cura non deve rifiutare il caso GIUSTO
+        |   ### e il collaudo NON LASCIA RESIDUI nel `%TEMP%`                PASSA   ### 0 residui dei nostri prefissi
+        | ====================================================================================================
+        | IL COLLAUDO DELLO STAGE: 5 su 8   ### CI SONO BUCHI
+        | ====================================================================================================
+  ### il `pre-commit` sta nel budget: 393.0 s su 1800 s (22%)
+====================================================================================================
+====================================================================================================
