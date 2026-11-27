@@ -29201,3 +29201,38 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 - **Le previsioni:**
   - **del guardiano, A1 (50%), «DH cresce con la densita' locale, non costante»:** **SI'** se si legge come «il costo `|DH|» cresce», perche' `DH` diventa piu' negativo con la densita'. Con il segno di `DH` alla lettera cala. Lo scrivo tutte e due le volte;
   - **mia,** «LINEARE o ALTRO contro la densita'» (55%): **SI'**, ALTRO.
+
+
+### 2026-11-28 00:01 -- [M2245-27] A4 FATTO: IL +1 DI t120 E DI t120r28 REGGE FINO A k 15000-20000, POI LA FASE AL CENTRO E' RUMORE (J_theta CALA DI ~1000 VOLTE); IL CRITERIO «GIRO INTERO» DELLA CARTA E' VUOTO (ERRORE MIO); Theta SUL GIRO = 0 IN TUTTI I 24 STATI; **DOMANDA SU [M-GM] D4** [[PROGETTO-MITOSI]]
+
+- **I casi noti, 29 DEVE su 29** (`triangoli_vortice.txt`, script `08016f8f`):
+  - **(K1)** a `k 0`, ricostruito con `prepara` e senza tick, `t120` ha giro `+1.0000` e `t000` ha `0.0000`;
+  - **(K2)** `conj(psi)` di `t120` da' `-1.0000`;
+  - **(K3)** `Theta` sommato sul cammino chiuso (156 archi) e' zero fra `1e-17` e `8e-14` in tutti i 24 stati letti, e il campo d'arco a caso non somma a zero. **Theta e' telescopico, come dice l'errore n.261 del guardiano.**
+- **La geometria:** i vertici di `t120` e `t000` sono `[74, 68]`, `[113, 68]`, `[113, 107]`, e i tre centri hanno lo stesso baricentro `(100, 81)`. `R` circoscritto e' `22.52`, `r` inscritto `11.26`.
+- **Il giro a `R`, con la componente di norma massima:**
+
+  | `k` | `t120` | `t120r28` | `t000` |
+  |---|---|---|---|
+  | 0, 250, 5000, 10000, 15000 | `+1` | `+1` | `0` |
+  | 20000 | `+1` | `0` | `0` |
+  | 25000 | `-1` | `-1` | `0` |
+  | 30000 | `+2` | `+1` | (l'ultimo e' 29250: `0`) |
+  | 35000 | `-3` | `0` | |
+
+- **La corrente circolante `J_theta` di `t120`** nell'anello `[0, R/2)`: `+13.4` a `k 250`, `+8.1` a `5000`, `+8.5` a `10000`, `+4.8` a `15000`, `+0.55` a `20000`, poi **`+6.8e-03`, `-1.3e-03`, `-7.9e-03`** fino a `35000`. In `t000` sta fra `-0.16` e `+0.07` per tutto il tempo.
+  - **La lettura:** il vortice c'e' e gira finche' la corrente circola, cioe' fino a circa `k 15000-20000`. Dopo, al centro la `psi` e' trascurabile e il giro sul cerchio e' la fase del rumore.
+- **UN ERRORE MIO NELLA CARTA:** il criterio «giro intero, entro `0.1` da un intero» e' **VUOTO**. Il giro discreto e' una somma di differenze ridotte lungo un cammino chiuso, quindi **e' sempre un intero per costruzione**: tutti i valori del referto sono interi esatti.
+  - Lo script applica la regola alla lettera e stampa «[M-GM] D4: si prosegue (t120, n = -3)». **Quel `-3` e' rumore, non un vortice.**
+- **LA DOMANDA PER LUCA (e per il guardiano), su [M-GM] D4:**
+  > La regola «se nessun triangolo ha giro di fase intero, [M-GM] si ferma» non discrimina, perche' il giro e' sempre intero. Le sfasate hanno un giro `+1` stabile, con corrente circolante, fino a `k 15000-20000`, e dopo no. **Quale stato vale per D4?**
+  > 1. **Lo stato in cui il vortice c'e'** (`+1` con `J_theta` sopra `1`, per esempio `k 5000-15000`): [M-GM] prosegue, e P1 parte da li';
+  > 2. **l'ultimo stato:** [M-GM] si ferma, perche' a `k 35000` il vortice non c'e' piu';
+  > 3. un'altra regola.
+  >
+  > Il criterio di chiusura e' una DECISIONE DI LUCA con l'ora. **D viene dopo C nell'ordine**, quindi intanto proseguo con A5 e con C.
+- **Le previsioni:**
+  - **del guardiano, A4 (`70%`):** `+-1` per le sfasate e `0` per quella in fase. **Si'** fino a `k 15000-20000`, **no** agli ultimi stati;
+  - **mie:** `t120` `+1` all'ultimo stato (`60%`): **NO**, a `k 35000` e' `-3`, cioe' rumore. `t000` `0` (`80%`): **SI'**.
+- **Nello stesso commit:** lo script di A5, `vento_due_corpi.py`, prima dei dati. Il motivo e' che `H-NON-TRACCIATI` rifiutava ciascuno dei due commit separati per il file non tracciato dell'altro.
+- **Un mio errore, senza effetto:** alle 00:03 un comando conteneva `git stash list`, e `H-STASH` l'ha bloccato prima che partisse.
