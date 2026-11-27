@@ -29349,3 +29349,23 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **D:** resta solo P3 (Eotvos con gli aggregati: destro + sinistro specchio accanto a M, nel seno dipinto), con il campo che c'e' gia'. Niente ramo `u-dinamica`, niente nucleo.
   - **E:** il TODO allineato a `CODA.md` e le ricevute.
 - **Il primo passo:** la mappa del codice che C e F devono unire (il tick di `d1`, il contatore `Theta`, `mitosi_regola`, il tick della mitosi). Poi il task history, poi la carta, poi il codice.
+
+
+### 2026-11-28 00:47 -- [M0026] C, I CASI NOTI 9 SU 9 (corpo_fuso_mitosi_noto.txt): d1 AL BIT A k 0 E 250; LA NASCITA FORZATA DA d1L/18000 CON P9 0.0, chi DEL NATO LA MEDIA AL BIT; E F, LA CARTA E LO SCRIPT PRIMA DEI DATI [[PROGETTO-MITOSI]]
+
+- **C** (`corpo_fuso_mitosi.py noto`, `7d89da33`, dalle 00:42:38 alle 00:46:07):
+  - **K-pre e K0 PASSANO:** lo stato costruito a `k 0` e quello a `250` tick sono uguali AL BIT a `d1`. **K0-neg** contro `d1/500` fallisce come deve (9 chiavi diverse);
+  - **K-nascita PASSA tutto** (l'arco `47451`, con `|Theta| 11.4186`):
+    - P9 `0.0` con l'energia di `chi`;
+    - `DH -55.175`, di cui `DH_chi -0.2536`;
+    - `n` da 26244 a 26245 e `m` da 78732 a 78735, con `chi`, `pi`, `theta_a` e `Lp` che seguono;
+    - `chi` del nato `-158.31` e `pi -6.35e-03`: la media AL BIT;
+    - F3 regge, `C.residuo()` da' `2.3e-15` dopo la nascita, e un tick dopo gira;
+    - **una nascita costa 11 s.**
+  - **Il campo convertito:** `s_a` uniforme a `0.15`, i segni coerenti, `w` AL BIT, 52488 placchette.
+- **F, la carta e lo script prima dei dati:**
+  - **la carta** e' la sezione «F, LA VIA (a)» di `doc/CARTA_mitosi.md`;
+  - **lo script** e' `doc/referti_l2/vuoto_lapse_mitosi.py`: `N = N(rho) * N_dip(x)` dentro il tick della mitosi, lo stesso `G20`, `N` del nato dalla posizione di `posizioni.nuova`, `y_c = 0`;
+  - **i casi noti** sono K-F0 (`A = 0` = [M0106] AL BIT a `k 36250`), K-F1 (deve fallire) e K-F2 (= `campo_N`).
+- **Un'etichetta riusata, l'errore n.262 di nuovo:** [M0037] esisteva gia' (`[M0037-03]`, l'Eotvos al fondo). La ricevuta `430b3953` su lapse-u la chiama [M0037]; **da qui la scrivo [M0037-28]**, come vuole la regola di Luca delle 23:14.
+- **Il prossimo «fine passo»:** **G** ([M0037-28]), la carta G-0 e le sue dichiarazioni. Poi i casi noti di F, poi la coda con C e F.

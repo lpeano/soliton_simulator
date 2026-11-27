@@ -276,3 +276,33 @@
   - **le prime nascite dopo `k 6000`** (`80%`): `max |Theta|` vale `1.50` a `k 3000` e `2.65` a `6000` in `d1`, che ha la stessa dinamica fino alla prima nascita. **E' contro la prima previsione del guardiano;**
   - **un ingolfamento prima di `k 18000`** (`40%`): in `d1L` gli archi oltre `2 pi` passano da 35 (`k 12000`) a 1596 (`k 18000`), e una nascita per tick potrebbe non stare al passo;
   - il respiro sotto la meta' (`30%`).
+
+
+## F, LA VIA (a): LA NASCITA NEL VUOTO CON IL LAPSE DIPINTO DENTRO IL TICK DELLA MITOSI *([M0026], DECISIONE DI LUCA 2026-11-28 `00:26`; scritta PRIMA del codice)* [[PROGETTO-MITOSI]]
+
+**La corsa** e' quella del vuoto di [M0106]: `mitosi_rami_v2.ciclo` da `M0237/vuoto/vuoto_35976.npz`, su `L 186`, senza materia, con `chi` spento e le nascite accese, per 6000 tick fino a `k 41976`, con gli stati ogni 250 in `controllo/M0026/F`.
+
+**Il lapse dipinto nel tick** (la mia forma, dichiarata):
+- durante la corsa `tick_lapse.N_di(rho, legge)` diventa `N_di(rho, legge) * N_dip(x)`, e `Np_di` diventa `Np_di * N_dip(x)`;
+  - `N_dip = exp(-kappa chi_dip)`, con `chi_dip = A sin(2 pi (y - y_c) / L_y)`, cioe' la forma di `caduta_libera.campo_N`;
+  - `y = m2 sqrt(3)/2` dei nodi della scena, che si cattura avvolgendo `convergenza.scena_L`.
+- **Nel vuoto la materia e' zero, quindi `N_di = 1` e il lapse E' quello dipinto.** Con `A = 0` il fattore e' `1.0` esatto, quindi la corsa e' quella di [M0106] bit per bit (K-F0).
+- **Il nodo nato** (la chiamata su un solo valore dentro `applica`): `N_dip` si calcola nella posizione di `posizioni.nuova(m1, m2, i, j, L)`, cioe' e' derivato (F-3).
+- **L'ampiezza:** lo stesso gradiente `G20` di [M2210] (F-2): `A = G20 L_y / (2 pi kappa)`, con `L_y = 186 sqrt(3)/2`.
+- **`y_c = 0`:** e' una fase, e la dichiaro.
+
+**I casi noti** (`vuoto_lapse_mitosi.py noto`):
+- **K-F0:** con `A = 0`, da `35976` a `36250` lo stato e' uguale AL BIT a `M0237/vuoto_v2/stato_36250` ([M0106]);
+- **K-F1:** con `A` vero, DEVE FALLIRE;
+- **K-F2:** `N_dip` sui nodi e' uguale AL BIT a `caduta_libera.campo_N` sulla stessa scena.
+- **Se un caso noto fallisce: FERMO.**
+
+**Le letture** (a corsa chiusa):
+- nascite si' o no, a quali `k`, e **dove rispetto al seno**: il fondo del pozzo (`chi_dip` minimo, `N` massimo), i fianchi o la cima;
+- `rho_phi` e `J_phi` per fascia di `y` (il vuoto cade nel seno?), la norma e `H`.
+
+**IL VERDETTO:** NASCE (e dove) / NON NASCE.
+
+**LE PREVISIONI:**
+- **del guardiano:** nessuna nascita (`55%`); se nasce, sui fianchi;
+- **mia:** **NON NASCE** (`65%`). Il lapse dipinto e' statico, e in un vuoto senza materia `Theta` cresce con le differenze di `cs` fra i due estremi di un arco, che sono piccole (il gradiente `G20` per un arco). Se nasce, nasce **sui fianchi**, dove il gradiente di `N` e' massimo (`70%` condizionato).

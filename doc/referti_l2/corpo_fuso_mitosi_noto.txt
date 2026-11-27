@@ -1,0 +1,48 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] due_corpi_fondo_v9.py  sha1-BYTE af211422  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] corpo_fuso.py  sha1-BYTE 43ac319d  committato e pulito
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] mitosi_regola_v2.py  sha1-BYTE 1cc57469  committato e pulito
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] corpo_fuso_mitosi.py  sha1-BYTE 3fea6ba8  committato e pulito
+======================================================================================================================================
+[M0026] C, I CASI NOTI: K-pre, K0, K0-neg (d1), K-nascita (d1L/stato_018000)
+======================================================================================================================================
+  DEVE: (K-pre) lo stato costruito a k 0 = d1/stato_000000 AL BIT                                                PASSA diverse []
+  DEVE: (K0) le nascite spente: 250 tick = d1/stato_000250 AL BIT                                                PASSA diverse []
+  DEVE: (K0-neg) DEVE FALLIRE: lo stesso stato contro d1/stato_000500                                            PASSA diverse ['Lambda', 'phi_h', 'psi_h', 'rho', 'campo_A', 'campo_E', 'chi', 'pi', 'theta_a']
+  K-nascita: da E:\soliton_simulator\controllo\M2034\coppia\d1L\stato_018000.npz; max |Theta| 11.4186 all'arco 47451; archi oltre 2 pi 1596
+  il campo convertito: {'s_a_uniforme': True, 's_a': 0.15, 's_a_min': 0.15, 's_a_max': 0.15, 'segni_coerenti': True, 'w_al_bit': True, 'placchette': 52488}
+    [nascita 1] k 18000, l'arco 47451 (K-nascita): n 26244 a r 6.10; chi_n -158.3100; DH -5.5175e+01 (H_chi -2.5362e-01); P9 0.0e+00; |Ec| 1.417e+00; E_persa +5.517538e+01 (11.0 s)
+  DEVE: (K-nascita) P9: l'energia di chi riletta dal motore vero = quella del candidato entro 1e-12              PASSA 0.00e+00; DH -5.517538e+01, DH_chi -2.536206e-01
+  DEVE: (K-nascita) n + 1 nodi e m + 3 archi; chi, pi, theta_a, Lp seguono il grafo                              PASSA n 26244 -> 26245, m 78732 -> 78735; chi 26245, pi 26245, theta 78735, Lp 78735
+  DEVE: (K-nascita) chi e pi del nato = la media dei due estremi dell'arco AL BIT                                PASSA chi -1.583100e+02, pi -6.346168e-03
+  DEVE: (K-nascita) F3 e il candidato entrato nel motore (ok)                                                    PASSA 
+  DEVE: (K-nascita) C.residuo() gira col campo orientato dopo la nascita                                         PASSA 2.297041649215949e-15
+  DEVE: (K-nascita) un tick dopo la nascita gira (le lunghezze tengono)                                          PASSA 
+### 9 DEVE: 9 PASSANO, 0 FALLISCONO []
+======================================================================================================================================
