@@ -844,3 +844,69 @@
   - per giro: `P`, la fonte di `P`, i picchi, `max|chi|` per finestra, `w` medio e respiro, la profondita' media, `omega` medio, per finestra di `500`;
   - **il criterio C fra il giro `1` e il giro `2`** *(`max|chi|` entro il `10%`, respiro sotto il `10%`)*.
   - **Nessun verdetto S3:** il verdetto arriva dopo il giro `3` e dopo S1.
+
+
+### 3-unetvicies, il seguito 2. [M1519] PEZZI 3 E 4: LE LETTURE DI S1 E S2, IL VERDETTO S3, IL VIDEO v4 *(DECISIONE DI LUCA, 2026-11-27 `15:19`; `18:24`; `18:59`, punto 5; scritta PRIMA del codice e prima che S1 e S2 siano chiuse)* [[PROGETTO-MITOSI]]
+
+**Gli script:** `doc/referti_l2/corpo_fuso_lettura.py` *(`noto` -> `corpo_fuso_lettura_noto.txt`; `lettura` -> `corpo_fuso.txt`)* e `doc/referti_l2/anima_coppia_v4.py` *(-> `anima_coppia_v4.mp4`)*. **Si committano prima che le corse siano chiuse.** Il caso noto gira subito, sui dati gia' letti.
+
+#### S1, LA CORSA LIBERA DA `k 0` A `k 54000`
+
+- **Gli stati:** `217`, ogni `250`. Vengono da `M2034/coppia/d1` fino a `6000`, da `d1L` fino a `18000`, da `M1519/d1T` fino a `30000` e da `M1519/d1T_r` dopo. Gli stati `30250..31000` di `d1T` e `d1T_r` sono uguali AL BIT: lo controlla la corsa stessa.
+- **La serie** *(ogni `10` tick)* e `omega` *(per tick)* vengono da `d1/serie.json`, `d1L/serie.json` e `d1T_r/serie.json`. Quest'ultima contiene gia' il tratto di `d1T` da `18000` a `30000`. `omega` deve avere `54000` tick.
+- **Per stato** *(come `due_corpi_lettura_v6`)*:
+  - A0 *(`coppia_a0.a0`)* e il verdetto: DUE, UNO o ALTRO;
+  - `d_p` se DUE, `d_m` dalla serie, `R`, `max rho`;
+  - la norma, con il DEVE `|N(k)/N(0) - 1| < 1e-9`;
+  - `w`: per corpo *(la meta')* se DUE; se UNO, **`FPC.w_di` sulla `rho` totale**. E' la stessa formula del `w` di S2, e cosi' i due `w` si confrontano;
+  - **`chi` al centro:** la media di `chi` su `r < 4` dal nodo di `max rho` *(A0: `im`)*. E' la definizione di «`chi` ai picchi», applicata al picco piu' alto;
+  - **l'energia:** `H` e `H_chi` da `chi_tick_v2.energia_chi_v2`, con la scena della ripresa *(`corpo_fuso.Ripresa10`, `geo.U` riscritta)*. **Lo strumento c'e', ma su questa scena non e' sigillato:** `H` si legge come andamento, non come una conservazione provata.
+- **Per finestra di `500`:** `omega` medio per meta' e la media delle due.
+  - **La riserva, scritta prima:** dopo `k 6250` le meta' per `y` non sono due corpi *(la domanda aperta 2 di [M1016])*. **La media delle meta' non e' l'`omega` della `psi` intera, che e' quello di S2.** Il confronto con S2 su `omega` si scrive con questa riserva.
+- **Per finestra di `2500`** *(`[6250 + 2500 i, 6250 + 2500 (i + 1)]`, `i = 0..18`, cioe' fino a `53750`, con gli `11` stati di ciascuna)*:
+  - **il respiro di `R`** = `(R_max - R_min) / R_medio`;
+  - `w` medio *(gli stati UNO)*, `max rho` medio;
+  - `H` e `H_chi` al primo e all'ultimo stato, e la loro variazione.
+  - La finestra da `0` a `6250` si stampa a parte.
+
+#### S2, IL PUNTO FISSO: I GIRI `1`, `2` E `3r`
+
+- **Per giro:** quello che dava `lettura_s2` *(`P`, i picchi, `max|chi|`, `w`, il respiro, la profondita', `omega`, per finestra di `500`)*.
+- **C fra `1` e `2`, e fra `2` e `3r`:** `|maxchi(n+1)/maxchi(n) - 1| < 0.10` **e** il respiro del giro `n + 1` sotto `0.10`.
+- **D** *(Luca, [M0414])*: se C non passa ma `max|chi|` resta entro il `10%` fra il giro `2` e il giro `3r`.
+- **A0 sugli stati dei tre giri** *(`25` per giro)*: serve per SI SPEZZA.
+
+#### S3, IL VERDETTO: COME APPLICO LE SOGLIE DI LUCA *(le soglie sono le sue; l'applicazione e' mia, ed e' scritta qui prima dei dati)*
+
+- **C PASSA** se passa fra `1` e `2` **oppure** fra `2` e `3r`. Allora `w_S2` e' il `w` medio del giro `n + 1` che lo fa passare.
+- **«La corsa libera tende allo stesso `w` entro il `10%` prima di `k 54000`»:**
+  - c'e' una finestra di `2500`, che chiamo `i*`, tale che **in ogni finestra da `i*` all'ultima** il `w` medio *(gli stati UNO)* sta entro il `10%` di `w_S2`, **e** almeno `8` stati su `11` sono UNO;
+  - **il tempo di rilassamento** e' l'inizio di `i*` meno `6250` *(il secondo contatto)*.
+  - **Ci vuole almeno una finestra dopo `i*`:** `i*` non puo' essere l'ultima.
+- **SI SPEZZA:** in S1 o in un giro di S2, una fila di stati consecutivi DUE con `d_p > 2 max(w_1, w_2)` *(i `w` per corpo dello stato)* **che copre piu' di `5000` tick**, cioe' almeno `22` stati.
+- **COLLASSA:**
+  - **(a) «il respiro cresce»:** il respiro medio di `R` nelle ultime `4` finestre di `2500` supera quello delle prime `4`. **E' una sola corsa, senza semi, e non ha una barra** *(`P3`)*: il confronto e' una lettura, e si dichiara cosi';
+  - **oppure (b):** una fila di stati consecutivi con `max rho > 5e4` **e** `R < 6`, che copre piu' di `5000` tick *(almeno `22` stati)*.
+- **L'ordine:** se vale SI SPEZZA o COLLASSA, il verdetto e' quello *(se valgono tutti e due, si scrivono tutti e due)*. Altrimenti, se C passa: ESISTE E CI ARRIVA, oppure ESISTE MA NON CI ARRIVA. **Altrimenti ALTRO**, con D se vale, e i numeri che lo descrivono.
+
+#### IL VIDEO v4 *(`anima_coppia_v4.py`)*
+
+- **`109` quadri:** da `k 0` a `54000`, uno ogni `500`, a `6 fps`. Le cartelle sono quelle di S1.
+- **I tre pannelli e le sovrimpressioni** sono quelli della v3: `rho_psi` a scala fissa, `rho_psi` a scala per quadro, `chi` a scala fissa.
+- **`1440x480`, sotto `5 MB`** *(altrimenti `1080x360`)*. **DEVE:** `109` quadri e meno di `5 MB`.
+- **I png** a `k 0, 6000, 18000, 30000, 42000, 54000`, in `E:/soliton_simulator/controllo/M1519/v4/`.
+
+#### I CASI NOTI *(`corpo_fuso_lettura.py noto`, sui dati gia' letti)*
+
+- **(KL)** la lettura per stato da `0` a `18000` *(`73` stati)* ridà le righe di `due_corpi_fondo_v7.txt` carattere per carattere *(verdetto, `d_p`, `d_m`, `R`, `max rho`)*.
+- **(KH)** `H` di `d1L/stato_018000` caricato in una scena nuova *(`Ripresa10`)* e' uguale AL BIT a `H` dello stesso file ricaricato nella scena gia' usata per un altro stato *(`d1L/stato_017750`)*. **E' la prova che il ricaricamento sul posto e' come una scena nuova.**
+  - **(KH-neg):** `H` di `stato_017750` e' DIVERSO da quello di `stato_018000`.
+- **(KHc)** `H_chi` ricalcolato nello script dalla formula *(`pi^2/2f + c2/2 somma (dchi)^2 + m2/2 somma chi^2 + c0 somma chi`)* e' uguale a quello dello strumento entro `1e-12` relativo.
+- **Se un caso noto fallisce, FERMO.**
+
+#### LE MIE PREVISIONI, prima dei dati *(quelle di [M1519] restano)*
+
+- **C passa fra `2` e `3r`** *(`30%`)*: fra `1` e `2` il respiro e' sceso da `0.92` a `0.39`, ma resta lontano da `0.10`.
+- **D vale** *(`55%`)*: `max|chi|` fra `2` e `3r` resta entro il `10%`.
+- **Il verdetto S3 e' ALTRO** *(`50%`)*, perche' C non passa; ESISTE MA NON CI ARRIVA *(`20%`)*; ESISTE E CI ARRIVA *(`10%`)*; SI SPEZZA *(`10%`)*; COLLASSA *(`10%`)*.
+- **`H` di S1 e' fermo entro l'`1%` fra `k 18000` e `54000`** *(`50%`)*: lo strumento non e' sigillato su questa scena.

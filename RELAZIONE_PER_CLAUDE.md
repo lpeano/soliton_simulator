@@ -28765,3 +28765,27 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I DEVE dentro le corse** si leggeranno nei log: per S1 a `k 30250`, `30500`, `30750` e `31000`; per S2 a `k 0`, `250`, `500`, `750` e `1000`.
 - **La stima, dai tempi di prima** *(con due processi, da [M1519])*: S1 arrivava a `k 31000` in `7564 s`, cioe' circa `0.58 s` per tick; i `24000` tick di S1 vogliono quindi circa `3.9 h`. Il giro 3 di S2 *(`6000` tick)* vuole circa `1 h`.
 - **Poi:** il pezzo 3 di [M1519] *(le letture, il verdetto S3, il video v4)* a corse chiuse, e il pezzo 4 *(la ricevuta)*.
+
+
+### 2026-11-27 19:34 -- [M1519] PEZZO 3, LA CARTA E GLI SCRIPT PRIMA DEI DATI: corpo_fuso_lettura.py (noto: KL, KH, KH-neg, KHc; lettura: S1 SU 217 STATI, S2, IL VERDETTO S3) E anima_coppia_v4.py (109 QUADRI); COME APPLICO LE SOGLIE DI S3 [[PROGETTO-MITOSI]]
+
+- **La carta:** `doc/CARTA_fondo_giusto.md`, «3-unetvicies, il seguito 2». **E' scritta mentre S1 e S2 girano, prima che esistano i loro dati.**
+- **Gli script:**
+  - `doc/referti_l2/corpo_fuso_lettura.py`: `noto` -> `corpo_fuso_lettura_noto.txt`, `lettura` -> `corpo_fuso.txt`;
+  - `doc/referti_l2/anima_coppia_v4.py`, la v3 con i quadri e le cartelle di S1 -> `anima_coppia_v4.mp4`.
+- **Le scelte mie, dichiarate nella carta:**
+  - `w` se UNO e' `FPC.w_di` sulla `rho` totale, la formula del `w` di S2, cosi' si confrontano;
+  - `chi` al centro e' la media su `r < 4` dal nodo di `max rho`;
+  - `omega` di S1 e' per meta' e la loro media. **La riserva:** dopo `k 6250` non e' l'`omega` della `psi` intera;
+  - **`H` e `H_chi` vengono da `chi_tick_v2.energia_chi_v2`: lo strumento c'e', ma su questa scena non e' sigillato;**
+  - **S3:**
+    - «tende allo stesso `w`»: da una finestra `i*` all'ultima, ogni finestra di `2500` ha il `w` medio entro il `10%` di `w_S2`, con almeno `8` stati UNO su `11`;
+    - SI SPEZZA: almeno `22` stati DUE consecutivi con `d_p > 2 max w`;
+    - COLLASSA (a): il respiro medio di `R` nelle ultime `4` finestre supera quello delle prime `4`. E' una sola corsa e non ha barra;
+    - COLLASSA (b): almeno `22` stati consecutivi con `max rho > 5e4` e `R < 6`.
+- **I casi noti** *(sui dati gia' letti)*:
+  - **KL:** le `73` righe per stato da `0` a `18000` uguali, carattere per carattere, a quelle di `due_corpi_fondo_v7.txt`;
+  - **KH:** `H` di uno stato in una scena nuova uguale AL BIT allo stesso stato ricaricato sul posto. **KH-neg:** uno stato diverso deve dare un `H` diverso;
+  - **KHc:** `H_chi` dalla formula uguale a quello dello strumento entro `1e-12`.
+- **Le previsioni mie** sono nella carta: C passa fra `2` e `3r` *(`30%`)*, D vale *(`55%`)*, ALTRO *(`50%`)*.
+- **A meta' corsa** *(dai log, alle `19:34`)*: **S1 ha passato i DEVE al bit a `k 30250`, `30500` e `30750`; S2 a `k 0`, `250`, `500` e `750`.**
