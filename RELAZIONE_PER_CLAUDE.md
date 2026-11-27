@@ -27974,3 +27974,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **UN'OSSERVAZIONE CHE IL VIDEO NON CERCAVA:** il baricentro della coppia **si sposta lungo x** di `-2.557` *(il massimo, a `k 4250`)*, poi torna a `-1.142` *(a `k 6000)*; lungo y resta entro `0.103`.
   - Con due corpi uguali e simmetrici, per la sola interazione reciproca il baricentro dovrebbe stare fermo. **Una deriva laterale fa pensare a una spinta esterna, per esempio il vento del vuoto lungo x, o a un'asimmetria della partenza.**
   - **Domanda aperta.** Si chiude confrontando d2' *(chi spento)*: se anche li' il baricentro deriva, la causa non e' il pozzo.
+
+
+### 2026-11-27 10:10 -- [M0951] PEZZO 1d: IL VIDEO v2 SI LEGGE (0.338 MB, I DUE DEVE PASSANO); E MOSTRA CHE A k 3250 E A k 6000 LA MATERIA E' UNA NUBE SOLA: IL «RIMBALZO» DI [M0106] PUO' ESSERE UN ARTEFATTO DELLE DUE META' [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia_v2.txt`; il video `doc/referti_l2/anima_coppia.mp4`, che sovrascrive il v1 *(`0.338 MB`; h264 `1280x640` yuv420p, `25` quadri a `4 fps`)*. Lo produce `anima_coppia_v2.py` al commit `6f432280`. I png di controllo a `k 0`, `3250` e `6000` stanno in `E:/soliton_simulator/controllo/M0951/`.
+- **I due DEVE passano**, con gli stessi numeri del v1: `d(3250)` `6.834784` *(lo `0.59%` da `6.795`)*; lo scarto del riferimento `0.0000`.
+- **### CIO' CHE IL VIDEO MOSTRA, LETTO A OCCHIO SUI TRE QUADRI** *(non e' misurato)*:
+  - **a `k 0`:** due corpi rotondi e separati, a `d 41.57`. Le due buche di `chi` sono unite da un collo comune;
+  - **a `k 3250`:** **la materia e' UN SOLO PICCO al centro**, con due lobi deboli sopra e sotto. **I due `+` della serie *(i baricentri delle due meta', a `+-3.4`)* non cadono su due corpi:** cadono fra il picco e i lobi. `chi` e' una buca sola, rotonda, con il minimo `-228.7`;
+  - **a `k 6000`:** **la materia e' UNA NUBE allungata lungo y e piegata**, larga e debole. I due `+` *(a `d 21.08`)* stanno dentro la stessa nube. `chi` e' una buca sola, ellittica.
+- **### CHE COSA CAMBIA, la mia lettura:** in [M0106] ho scritto «il minimo d `6.795` a `k 3230`, il massimo `27.870` a `k 5020`, nessun secondo minimo». **Il video dice che dopo l'incontro i due corpi non si separano:** si fondono, e la nube che ne nasce si allarga.
+  - **La «distanza» dopo `k 3250` e' la distanza fra i baricentri delle due meta' di UNA nube** che si allunga lungo y. **Non e' la distanza fra due corpi.**
+  - E' la riserva che avevo gia' scritto in [M0106] *(«sotto circa `2 w` la divisione in due meta' non separa piu' bene i due corpi»)*, **ma vale per tutta la seconda parte della corsa, non solo vicino al minimo.**
+  - **Le `4` finestre VIA di D2'' *(da `3000` a `5000`)* e il «massimo» `27.87`** sono quindi da rileggere. **Il verdetto VERSO sulle finestre prima di `k 3000` non cambia:** li' i corpi sono due e ben separati.
+  - **E la corsa lunga A1 del TODO** *(«il secondo e il terzo minimo»)* **presuppone due corpi in orbita.** Se si sono fusi, non ci sono minimi da cercare.
+- **IL CRITERIO DI CHIUSURA** *(una misura, non un'occhiata)*: per ogni stato si contano i massimi locali di `rho_psi` sopra una frazione del massimo *(per esempio il `10%`; la soglia va fissata nella carta PRIMA)*. **Due picchi = due corpi; uno = fusione.** E' una lettura a costo zero sugli stessi `25` stati. **La metto nel TODO come A0, prima di A1. La decisione spetta a Luca.**
+- **La deriva laterale del baricentro della coppia** *(`-2.56` lungo x, nel pezzo 1b)* **resta aperta.** Con la fusione puo' essere il moto della nube, ma resta da misurare.

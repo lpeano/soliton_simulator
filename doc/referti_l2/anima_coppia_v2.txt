@@ -1,0 +1,39 @@
+[TIMBRO] due_corpi_lettura_v4.py  sha1-BYTE 2935b6cf  committato e pulito
+[TIMBRO] anima_coppia.py  sha1-BYTE c0f781ea  committato e pulito
+[TIMBRO] anima_coppia_v2.py  sha1-BYTE 32ee2bcd  committato e pulito
+==================================================================================================================================
+[M0951] IL VIDEO DELLA COPPIA d1', v2 (E:\soliton_simulator\controllo\M2034\coppia\d1, 25 stati)
+==================================================================================================================================
+  DEVE: (il mandato) d a k 3250 = 6.834784, entro il 10% di 6.795 (0.59%)   PASSA
+  il corpo 1 a k 0: il baricentro di rho_psi (+0.0000, -20.7846); la serie (+0.0000, -20.7846); lo scarto 0.0000
+  il corpo 2 a k 0: il baricentro di rho_psi (+0.0000, +20.7846); la serie (+0.0000, +20.7846); lo scarto 0.0000
+  DEVE: (il riferimento) lo scarto massimo 0.0000 < 0.5   PASSA
+  le scale fisse: rho_psi [0, 3.7914e+04]; chi [-228.6795, -19.9310], 12 livelli
+  k    0: d  41.5692; omega 0.083074 0.083076; il baricentro della coppia (+0.000, -0.000); chi min nel riquadro -114.057
+  k  250: d  41.3767; omega 0.083074 0.083076; il baricentro della coppia (-0.016, +0.013); chi min nel riquadro -123.553
+  k  500: d  40.7947; omega 0.081970 0.081974; il baricentro della coppia (-0.032, +0.030); chi min nel riquadro -140.347
+  k  750: d  39.8192; omega 0.080337 0.080331; il baricentro della coppia (-0.049, +0.047); chi min nel riquadro -155.114
+  k 1000: d  38.4132; omega 0.078940 0.078925; il baricentro della coppia (-0.078, +0.068); chi min nel riquadro -162.585
+  k 1250: d  36.5905; omega 0.078034 0.078024; il baricentro della coppia (-0.120, +0.085); chi min nel riquadro -166.721
+  k 1500: d  34.3676; omega 0.077789 0.077781; il baricentro della coppia (-0.175, +0.097); chi min nel riquadro -163.612
+  k 1750: d  31.7513; omega 0.078427 0.078418; il baricentro della coppia (-0.241, +0.103); chi min nel riquadro -155.398
+  k 2000: d  28.6831; omega 0.079496 0.079493; il baricentro della coppia (-0.319, +0.103); chi min nel riquadro -148.056
+  k 2250: d  25.1265; omega 0.080464 0.080471; il baricentro della coppia (-0.416, +0.101); chi min nel riquadro -143.912
+  k 2500: d  20.9143; omega 0.081054 0.081083; il baricentro della coppia (-0.550, +0.098); chi min nel riquadro -144.977
+  k 2750: d  15.6816; omega 0.080974 0.080959; il baricentro della coppia (-0.761, +0.096); chi min nel riquadro -152.975
+  k 3000: d   9.6215; omega 0.079783 0.079879; il baricentro della coppia (-1.129, +0.091); chi min nel riquadro -191.827
+  k 3250: d   6.8348; omega 0.077311 0.077548; il baricentro della coppia (-1.726, +0.085); chi min nel riquadro -228.679
+  k 3500: d  10.7345; omega 0.075654 0.075847; il baricentro della coppia (-2.181, +0.082); chi min nel riquadro -221.486
+  k 3750: d  16.3708; omega 0.075396 0.075452; il baricentro della coppia (-2.357, +0.083); chi min nel riquadro -201.739
+  k 4000: d  20.7160; omega 0.075586 0.075585; il baricentro della coppia (-2.476, +0.084); chi min nel riquadro -187.996
+  k 4250: d  23.8659; omega 0.076526 0.076555; il baricentro della coppia (-2.557, +0.085); chi min nel riquadro -168.080
+  k 4500: d  26.0571; omega 0.078070 0.078127; il baricentro della coppia (-2.546, +0.086); chi min nel riquadro -146.384
+  k 4750: d  27.3649; omega 0.079836 0.079891; il baricentro della coppia (-2.422, +0.083); chi min nel riquadro -127.988
+  k 5000: d  27.8655; omega 0.081163 0.081272; il baricentro della coppia (-2.194, +0.076); chi min nel riquadro -118.001
+  k 5250: d  27.5343; omega 0.081759 0.081860; il baricentro della coppia (-1.903, +0.067); chi min nel riquadro -116.305
+  k 5500: d  26.3615; omega 0.081487 0.081562; il baricentro della coppia (-1.606, +0.060); chi min nel riquadro -124.503
+  k 5750: d  24.2441; omega 0.080338 0.080407; il baricentro della coppia (-1.337, +0.049); chi min nel riquadro -142.554
+  k 6000: d  21.0770; omega 0.078609 0.078662; il baricentro della coppia (-1.142, +0.036); chi min nel riquadro -167.322
+  il video a 1280x640: 0.338 MB
+### 25 quadri a 4 fps: C:\Users\lpeano\wt_lapse_u\doc\referti_l2\anima_coppia.mp4 (0.338 MB; il tetto 5 MB: PASSA)
+==================================================================================================================================
