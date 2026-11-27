@@ -27954,3 +27954,11 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la mia, P2 *(`75%`)*, nessuna nascita: GIUSTA.**
 - **LA LETTURA, mia:** il vuoto puro *(`phi_h = a phi_v`, `psi = 0`)*, con le nascite accese, **resta vuoto per `6000` tick**. Ne segue che le nascite viste nelle altre corse **dovrebbero richiedere materia, cioe' `psi` diverso da zero**: qui il vuoto da solo non le ha innescate. **Vale entro i `6000` tick e su questo reticolo** *(`n 34596`)*: non e' una prova che il vuoto non generi mai nulla.
 - **[M0106] E' ESEGUITO PER INTERO.** **FERMO:** aspetto il mandato successivo.
+
+
+### 2026-11-27 09:58 -- [M0951] RICEVUTO (DECISIONE DI LUCA 09:51, letto alle 09:53); IL PEZZO 1a, LA CARTA DEL VIDEO E LO SCRIPT anima_coppia.py, PRIMA DEL VIDEO [[PROGETTO-MITOSI]]
+
+- **Il mandato:** chiusura in tre pezzi *(il video della coppia, il TODO per la sessione successiva, la ricevuta)*; niente corse e niente gestione.
+- **Il percorso nel mandato e' sbagliato:** gli stati di d1' non sono in `M2034/d1`, ma in `M2034/coppia/d1`. Uso quest'ultimo.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M0951]. Fissa le scelte *(riquadro, d, omega, scale)* e due controlli DEVE: `d(3250)` entro il `10%` di `6.795`, e il riferimento a `k 0` entro `0.5`.
+- **La previsione, mia:** i due controlli passano *(`90%`)*; il video sta sotto i `5 MB` *(`80%`)*.

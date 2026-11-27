@@ -649,3 +649,15 @@
     - **il minimo successivo** = il minimo dopo quel massimo, **ma solo se e' interno** *(cioe' non all'ultimo tick)*. Il periodo e' la distanza fra i due minimi. **Se il minimo successivo cade all'ultimo tick, dichiaro che non c'e'**, e stampo il mezzo periodo, minimo -> massimo, **ma non lo chiamo periodo**;
     - **la tabella per finestra di `500`:** `d` medio dalla serie; `omega` medio di ciascun corpo dalla serie per tick; **chi al centro** = chi medio su `r < 4` dal baricentro del corpo nella sua meta', in media sui `3` stati della finestra. Per d1', d2' e d3'.
   - **LA PREVISIONE DEL GUARDIANO:** P1 *(`90%`)* VERSO `8`, VIA `4`. **La mia: la stessa, al `95%`.** I rapporti stampati dalla v4 vanno da `6.78` a `95.5`, tutti sopra `3`.
+
+- **### [M0951] IL VIDEO DELLA COPPIA d1'** *(DECISIONE DI LUCA, 2026-11-27 `09:51`, arrivata dalla posta, `30d9cd91`; letta alle `09:53`; scritto PRIMA di `anima_coppia.py`; sola lettura, nessuna corsa)*:
+  - **IL PERCORSO:** il mandato dice `E:/soliton_simulator/controllo/M2034/d1`, ma quella cartella non esiste. **Gli stati sono in `M2034/coppia/d1`**, cioe' la `BASE` di `due_corpi_lettura_v3.py`, la stessa delle letture v3, v4 e v5. **Uso quella;**
+  - **LE MIE SCELTE, dichiarate prima:**
+    - **le coordinate:** `dxy` = `toro.scarti` rispetto a `centro_coppia`, come nella v5. **Il baricentro della coppia** al tick `k` e' la media, pesata con le masse, dei due baricentri della `serie.json` *(le colonne `1,2,3` e `4,5,6`)* in quel tick. **Il riquadro** e' `|x - x_b| <= 60` e `|y - y_b| <= 60` in unita' di lunghezza *(il lato del triangolo vale `1`)*;
+    - **`d(k)`** e' la distanza fra i due baricentri della serie in quel tick. **`omega` di un corpo** e' la media della serie per tick sui `250` tick che precedono `k`, cioe' `[k-250, k)`; a `k 0` e' `[0, 250)`;
+    - **le scale fisse:** `rho_psi` va da `0` al massimo su tutti i quadri dentro il riquadro; `chi` va dal minimo al massimo su tutti i quadri dentro il riquadro; le curve di livello di `chi` sono `12`, equispaziate, uguali in tutti i quadri;
+    - **25 quadri senza interpolazione**, a `4 fps`; formato `1280x640` *(`figsize 16x8`, `dpi 80`)*, `libx264` `yuv420p`. **Se supera `5 MB`, rifaccio a `960x480`** *(`dpi 60`)*, nella stessa esecuzione;
+  - **I CONTROLLI, PRIMA DEL VIDEO:**
+    - **(il mandato) DEVE:** il quadro a `k 3250` ha `d` entro il `10%` di `6.795` *(il minimo, che cade a `k 3230`)*;
+    - **(mio, il controllo positivo sul sistema di riferimento) DEVE:** a `k 0` il baricentro di `rho_psi` di ciascuna meta' *(`y < 0` e `y >= 0` in `dxy`)* coincide entro `0.5` col baricentro della serie. **Se le coordinate dei pannelli fossero in un altro riferimento, questo controllo fallirebbe;**
+  - **LA PREVISIONE, mia:** i due controlli passano *(`90%`)*; il video sta sotto i `5 MB` gia' a `1280x640` *(`80%`: sono `25` quadri soli)*.
