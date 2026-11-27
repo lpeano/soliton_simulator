@@ -691,3 +691,22 @@
     - la norma e' ferma *(`95%`)*: vale (a);
     - A0 dice DUE fino a `k 2750` e UNO da `k 3000` o `3250` in poi *(`70%`)*. Ma a `k 6000` la nube allungata **potrebbe dare `2` massimi deboli sopra il `30%`** *(`30%`)*: in quel caso «DUE» non significa due corpi separati;
     - `R` cresce dopo la fusione *(`80%`)*.
+  - **### LA CORSA LUNGA d1'' (S2), LA CARTA** *(scritta alle `10:26`, PRIMA di `due_corpi_fondo_v7.py`)*:
+    - **LA VIA E' QUELLA DI d1'** *(`due_corpi_fondo_v6.py corsa --quale d1`)*:
+      - `costruisci` della v6 e `D.parametri` danno `P` e `m0` **prima** che lo stato venga caricato, nello stesso ordine della corsa originale. **Si asserisce** che i parametri coincidano col `meta` di `serie.json` e che `centro_coppia` coincida con quello del meta;
+      - poi si carica lo stato di partenza: tutte le chiavi di `st` *(`Lambda, h_int, phi_h, psi, psi_h, rho`)*, `campo_A` e `campo_E` in `C.campo`, e `chi, pi, theta_a` in `X`. **Tutto in place.**
+      - **Il ciclo** e' il corpo di `due_corpi_fondo.ciclo` *(`tick_chi_v2` nella forma `L-1` del nucleo)*, ma **col tick ASSOLUTO** da `k_da + 1`. Siccome `OGNI_GAUSS` vale `250` e `6000` e' un suo multiplo, **`C.residuo` cade negli stessi tick della corsa originale.**
+    - **(K0') AL POSTO DI K0:** lo stato a `6250` di d1' non esiste, quindi non si puo' riprodurre `6000 -> 6250`. **Si prova la stessa cosa un passo prima:**
+      - si riparte da `stato_005750.npz` per `250` tick;
+      - **DEVE:** lo stato finale e' **uguale AL BIT** a `stato_006000.npz` in ogni chiave *(`st`, `campo_A`, `campo_E`, `chi`, `pi`, `theta_a`)*;
+      - **DEVE:** le righe della serie da `5760` a `6000` e `omega` dei tick da `5751` a `6000` sono uguali al bit a quelle di `serie.json`;
+      - **(K0'-neg), il caso che DEVE FALLIRE:** la stessa ripresa **senza caricare `campo_E`** *(che resta quello di `costruisci`)*. **DEVE** dare uno stato finale **diverso** da `stato_006000`. Se fosse uguale, il confronto non vedrebbe il campo;
+      - **la carica:** prima del ciclo, **DEVE:** la riga della serie misurata a `k_da` e' uguale al bit a quella di `serie.json`.
+    - **Se K0' fallisce: FERMO, la corsa non va in coda.**
+    - **LA CORSA:**
+      - parte da `stato_006000.npz` *(sha1 `aca74f48`, controllato)* e fa `12000` tick, fino a `k 18000`;
+      - salva gli stati ogni `250` col `k` ASSOLUTO *(`stato_006250` ... `stato_018000`)* e la serie ogni `10`, nella cartella **`M2034/coppia/d1L`**;
+      - `serie.json` ha lo stesso formato della v4. **`omega[j][i]` e' il tick `6001 + i`**, e `k_da` sta nel meta;
+      - **un processo solo, dalla coda** *(`coda_m1446.py`, il tetto `10`, il freno `4 GB`)*.
+    - **IL TEMPO, stimato** dalla corsa d1' *(`6000` tick in `4896 s`)*: circa `9800 s`, cioe' **2.7 ore**.
+    - **LA MIA PREVISIONE:** K0' passa al bit *(`85%`)*; K0'-neg fallisce come deve *(`95%`)*.
