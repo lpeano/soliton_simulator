@@ -29173,3 +29173,31 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
     - K2b **senza rumore**: la pendenza si ritrova entro `1e-9` relativo;
     - **K2c, la copertura:** su 200 semi, la frazione di fit con `|b - b_vero| < 2 sigma` sta fra 0.90 e 0.99. Cosi' si prova che la `sigma` del fit e' giusta;
   - **i numeri dei dati di questo giro** (`DH` contro la densita' locale: `b -2.016 +- 0.289` per deviazione standard di `x`, `c +0.546 +- 0.216`, cioe' ALTRO) **sono gia' nel referto**, ma **il verdetto si scrive solo dopo che i casi noti passano tutti.**
+
+
+### 2026-11-27 23:49 -- [M2245-27] A1 FATTO: IL COSTO DI UN NODO NON E' COSTANTE. |DH| CRESCE CON LA DENSITA' LOCALE E SATURA (ALTRO: b -2.02 +- 0.29, c +0.55 +- 0.22); CONTRO n(k) DEBOLE (SPEARMAN -0.08) [[PROGETTO-MITOSI]]
+
+- **I casi noti, 6 su 6:**
+  - K1: `-somma DH = E_persa` al bit;
+  - K4: le nascite non spostano i nodi vecchi;
+  - K3: la densita' di una `rho` costante si ritrova al bit;
+  - K2: i dati costanti danno COSTANTE;
+  - **K2b:** la pendenza esatta senza rumore si ritrova;
+  - **K2c:** la copertura dei 2 sigma e' 195 su 200.
+- **Le grandezze:**
+  - 538 nascite, con `n` da 34596 a 35133;
+  - la densita' locale (`r < 4`, dallo stato salvato prima) va da `212.6` a `527.5`, con media `349.4`;
+  - `DH` va da `-57.76` a `-2.50`, con media `-21.29`.
+- **I fit** (i coefficienti sono per una deviazione standard di `x`):
+
+  | `DH` contro | verdetto | `b` | `c` | Spearman |
+  |---|---|---|---|---|
+  | **la densita' locale** | **ALTRO** | `-2.016 +- 0.289` (7 sigma) | `+0.546 +- 0.216` (2.5 sigma) | `-0.321` |
+  | `n(k)` | ALTRO, ma debole | `-0.780 +- 0.300` | `-0.749 +- 0.335` | `-0.083` |
+  | `r` dal centro (dal registro) | LINEARE | `+1.338 +- 0.297` | | `+0.233` |
+
+- **La lettura per decile della densita':** il `DH` medio va da `-16.97` nel decile piu' rarefatto a `-24.17`, e sopra una densita' di circa 390 resta fra `-23.4` e `-24.2`. **Il costo `|DH|` cresce con la densita' e poi satura.** Il termine quadratico positivo e' questa saturazione.
+- **Per finestra di 1000 tick** il `DH` medio sta fra `-19.8` e `-23.9`, senza una tendenza netta. Nelle ultime tre finestre (`43000-46000`) e' circa `-23.5`.
+- **Le previsioni:**
+  - **del guardiano, A1 (50%), «DH cresce con la densita' locale, non costante»:** **SI'** se si legge come «il costo `|DH|» cresce», perche' `DH` diventa piu' negativo con la densita'. Con il segno di `DH` alla lettera cala. Lo scrivo tutte e due le volte;
+  - **mia,** «LINEARE o ALTRO contro la densita'» (55%): **SI'**, ALTRO.

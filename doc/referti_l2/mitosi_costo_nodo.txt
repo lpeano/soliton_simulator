@@ -1,5 +1,5 @@
 [TIMBRO] mitosi_dati.py  sha1-BYTE 3b142d63  committato e pulito
-[TIMBRO] mitosi_costo_nodo.py  sha1-BYTE 552c0345  committato e pulito
+[TIMBRO] mitosi_costo_nodo.py  sha1-BYTE dcd8649a  committato e pulito
 ==================================================================================================================================
 [M2245-27] A1, IL COSTO DI UN NODO (la carta doc/CARTA_mitosi.md, A1): DH per nascita contro n(k) e contro la densita' locale
 ==================================================================================================================================
@@ -8,7 +8,8 @@
   DEVE: (K4) le posizioni dei primi 34597 nodi: stato_36000 = stato_40000 AL BIT (le nascite non le spostano) PASSA 
   DEVE: (K3) la densita' locale di una rho costante 0.5 = 0.5 AL BIT                                         PASSA 0.5 su 60 nodi
   DEVE: (K2) dati sintetici costanti + rumore (sigma = std dei DH, seme 20261127): COSTANTE                  PASSA b -5.3870e-05 +- 2.9517e-01
-  DEVE: (K2) pendenza nota 0.01: ritrovata entro 2 sigma                                                     ### FALLISCE b +9.687386e-03 +- 1.38e-04
+  DEVE: (K2b) pendenza nota 0.01 SENZA rumore: ritrovata entro 1e-9 relativo                                 PASSA b +1.000000000000e-02
+  DEVE: (K2c) la copertura: su 200 semi |b - b_vero| < 2 sigma in una frazione fra 0.90 e 0.99               PASSA 195 su 200
 ----------------------------------------------------------------------------------------------------------------------------------
   la densita' locale (r < 4, dallo stato salvato prima): media 3.4942e+02, da 2.1259e+02 a 5.2753e+02
   DH: media -21.2912, da -57.7619 a -2.4960
@@ -40,5 +41,5 @@
     [43000, 44000):  39 nascite, DH medio -23.168, densita' locale media 3.312e+02
     [44000, 45000):  36 nascite, DH medio -23.880, densita' locale media 3.407e+02
     [45000, 46000):  39 nascite, DH medio -23.618, densita' locale media 3.696e+02
-### 5 DEVE: 4 PASSANO, 1 FALLISCONO ['(K2) pendenza nota 0.01: ritrovata entro 2 sigma']
+### 6 DEVE: 6 PASSANO, 0 FALLISCONO []
 ==================================================================================================================================
