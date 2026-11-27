@@ -28596,3 +28596,25 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Lo spazio su E:** `164.1 GB` liberi prima del lancio.
 - **La stima, dal tempo di d1''** *(12000 tick in `6254 s`, un processo solo)*: S1 circa `5.2 h`, S2 circa `2.6 h`, di piu' con due processi insieme.
 - **Il resto di [M1519]** *(TODO 3: le letture, `corpo_fuso.txt` col verdetto S3, il video v4; TODO 4: la ricevuta)* **viene a corse chiuse.**
+
+
+### 2026-11-27 17:58 -- [M1519] S1 E S2 FALLITE ALLE 17:56:24, TUTTE E DUE NELLO STESSO SECONDO: MEMORIA ESAURITA (_ArrayMemoryError SU 1.20 MiB); S1 A k 31000, S2 A 2 GIRI SU 3; FERMO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `M1519_S1` e `M1519_S2` risultano `FALLITO`, con `uscita 1`, tutte e due finite alle `17:56:24`. Le righe CHIUSO sono nel registro, in questo commit.
+- **La causa, dai log** *(`E:\soliton_simulator\controllo\M1446\log\M1519_S1.txt` e `M1519_S2.txt`)*: in tutti e due i processi `numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.20 MiB for an array with shape (157464,)`, dentro `motore.elicita`, chiamata da `chi_tick.forza`. **Non e' un errore del codice:** e' un'allocazione piccola rifiutata dal sistema.
+- **La memoria alle `17:57`, a processi morti** *(`GlobalMemoryStatusEx`)*:
+  - la RAM libera e' `6.81 GB` su `34.13`;
+  - **la memoria impegnabile libera e' solo `1.49 GB` su `62.11`;**
+  - su **C:** restano `0.25 GB` liberi.
+  - **La mia lettura, da verificare:** con C: pieno il file di paging non puo' crescere, e il limite di memoria impegnabile e' stato raggiunto. **Chi occupi gli altri circa `60 GB` impegnati non lo so:** l'elenco dei processi mi e' negato, e non lo aggiro. **Non sono i miei due:** il conto e' stato fatto con loro gia' morti.
+- **Fin dove sono arrivate:**
+  - **S1:** fino a `k 31000` *(il log arriva a `7564 s`)*, con gli stati da `18250` a `31000` in `M1519/d1T`. `serie_parziale.json` arriva a `k 30000`; `serie.json` non c'e'.
+  - **S2:** i giri `1` e `2` sono chiusi, con `giro.json` firmati. Il giro `3` e' arrivato a `k 1000`.
+    - **Giro 1:** `P 2500` *(i picchi a `k 1500` e `4000`)*, `max|chi|` `229.03`, `w` medio `3.928`, respiro `0.9189`, profondita' media `-188.60`, `omega` medio `0.075452`.
+    - **Giro 2:** `P 2500` *(il ripiego: `0` picchi)*, `max|chi|` `259.51`, `w` medio `3.277`, respiro `0.3877`, profondita' media `-224.99`, `omega` medio `0.071003`.
+    - **Nessun verdetto:** sono numeri parziali, e il verdetto spetta a S3.
+- **Il residuo di Gauss alla partenza** del giro `2` *(`0.476`)* e del giro `3` *(`0.440`)* non e' un difetto nuovo. Lo schema di [M0414] aveva gia' residui alla partenza fra `0.343` e `0.972` *(i tre `giro.json` di `M0414/puntofisso_accoppiato`)*: la `psi` media non e' coerente col `campo_E` dello stato a `k 6000`.
+- **FERMO.** Rilanciare e' una decisione di Luca, e anche liberare la memoria. **Le vie possibili, da decidere:**
+  - **(a)** una v2 di `corpo_fuso.py` che riprende S1 da `stato_031000` *(il K0 sul tratto `30750 -> 31000`, come K0'')* e S2 dal giro `3` *(`partenza_giro_3.npz`)*;
+  - **(b)** rifare da capo, dopo aver liberato la memoria.
+  - **In tutti e due i casi va prima capito chi occupa la memoria:** con `1.49 GB` impegnabili liberi, un rilancio cadrebbe di nuovo.
