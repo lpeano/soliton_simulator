@@ -28704,3 +28704,24 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`d1T` e `giro_3` non si toccano:** si leggono soltanto.
 - **Le misure delle `19:13:20`:** C: `25.11 GB` liberi, E: `153.62 GB`, l'impegnabile `28.22 GB` liberi su `49.47` *(sopra la soglia di `8`)*, la RAM `15.99 GB` su `34.13`.
 - **Il prossimo passo:** `lettura_s2`, committata prima del lancio; poi `noto`.
+
+
+### 2026-11-27 19:15 -- [M1824] IL REFERTO DEI GIRI 1 E 2 DI S2, PRIMA DEL LANCIO: C FRA 1 E 2 NON PASSA (max|chi| DA 229.03 A 259.51, +13.3%; IL RESPIRO DEL GIRO 2 0.3877); NESSUN VERDETTO S3 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_s2_giri12.txt`, da `corpo_fuso_v2.py lettura_s2` *(sha1 dei byte `687b68c0`, timbrato committato e pulito)*, uscita `0`.
+- **Giro 1** *(da `d1L/stato_018000`, residuo di Gauss alla partenza `1.135e-12`)*:
+  - `P 2500`, dagli ultimi due picchi *(`k 1500` e `4000`)*;
+  - `max|chi|` `229.0287`; `w` medio `3.9279` *(fra `2.6252` e `6.2345`)*, **il respiro `0.9189`**;
+  - la profondita' media `-188.6017`, `omega` medio `0.075452`.
+  - **Per finestra di `500`:** `max|chi|` va su e giu' fra `188.23` e `229.03`, e `omega` fra `0.073049` e `0.077832`.
+- **Giro 2** *(da `partenza_giro_2.npz`, residuo `0.4761`)*:
+  - `P 2500` dal **ripiego** *(`0` picchi)*;
+  - `max|chi|` `259.5144`; `w` medio `3.2767` *(fra `2.7282` e `3.9986`)*, **il respiro `0.3877`**;
+  - la profondita' media `-224.9944`, `omega` medio `0.071003`.
+  - **Per finestra:** `max|chi|` fra `237.46` e `259.51`, `omega` fra `0.070199` e `0.071893`.
+- **Il criterio C fra il giro 1 e il giro 2: NON PASSA,** e mancano tutte e due le condizioni:
+  - `|259.5144/229.0287 - 1| = 0.1331`, sopra `0.10`;
+  - il respiro del giro 2 e' `0.3877`, sopra `0.10`.
+- **Cio' che si vede, senza verdetto:** dal giro 1 al giro 2 il pozzo si fa piu' profondo *(da `-188.6` a `-225.0`)* e `w` piu' stretto *(da `3.93` a `3.28`)*. Il respiro scende da `0.92` a `0.39`, e `omega` scende da `0.0755` a `0.0710`.
+  - **Il verdetto S3 viene dopo il giro 3 e dopo S1.** C si valuta di nuovo fra il giro `2` e il giro `3`.
+- **Il prossimo passo:** `corpo_fuso_v2.py noto`.
