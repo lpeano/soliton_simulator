@@ -2921,6 +2921,15 @@
     "2"
    ],
    "note": "[M0237] (DECISIONE DI LUCA, dalla posta) la mitosi, pezzo 3: soglia 2, dopo B; K3 e K3b verdi (e398b4fb, ramo mitosi)"
+  },
+  {
+   "nome": "M0106_vuoto_puro",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_vuoto_v2.py",
+    "corsa"
+   ],
+   "note": "[M0106] (DECISIONE DI LUCA 01:06, dalla posta) il vuoto puro con le nascite accese, 6000 tick, stati ogni 250; K4'' PASSA (mitosi, ramo mitosi)"
   }
  ]
 }

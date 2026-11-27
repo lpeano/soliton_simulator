@@ -27910,3 +27910,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **il pozzo di chi delle due copie si somma quando si avvicinano, e l'orologio dei corpi rallenta dove il pozzo e' piu' profondo.** Il segno e' quello di uno spostamento verso il rosso. Il ritardo e' visibile: `omega` minima a `[3500, 4000]`, mentre `d` e' minima a `[3000, 3500]`;
   - la riserva delle due meta' sotto `2 w` resta *(il minimo `6.795` sta sotto)*.
 - **LE PREVISIONI:** del guardiano, P1 *(`90%`, VERSO `8`, VIA `4`, le finestre `[3000, 5000]` VIA)*: **SI'**, esatta. La mia *(`95%`)*: **SI'**.
+
+
+### 2026-11-27 01:17 -- [M0106] PEZZO 2: K4'' PASSA (mitosi); LA CORSA DEL VUOTO PURO IN CODA, A LANCIATORE FERMO [[PROGETTO-MITOSI]]
+
+- **K4''** *(il ramo mitosi: `d6b1ef8b` la carta e lo script, il referto subito dopo)*: **la norma passa** *(`8.99e-14` relativo, entro `1e-9`)*. `|Delta H|` = `1.208e-10` *(`H_rif +1.229e-10`)* si stampa e non blocca.
+- **In coda:** `M0106_vuoto_puro` *(`mitosi_vuoto_v2.py corsa`: nascite accese, da `35976` a `41976`, stati ogni `250`, in `M0237/vuoto_v2`)*. Il lanciatore e' fermo dalle `22:44:08` di ieri *(letto da `coda_stato.json`)*. **Il rilancio a mano viene dopo questo commit**, e si dichiara nel commit successivo.
+- **La durata attesa** e' di circa `8-12` ore *(la carta della mitosi)*. Il referto `mitosi_vuoto_v3.txt` si fa con `mitosi_vuoto_v4.py lettura` quando la corsa chiude.
