@@ -28648,3 +28648,41 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **E::** `162.84 GB` liberi su `256.05`;
   - **la memoria impegnabile:** `29.53 GB` liberi su **`49.47`**. **Il limite e' sceso da `62.11` a `49.47 GB`:** il file di paging e' piu' piccolo. Non so perche', e non l'ho verificato. **Luca, `18:59`: la soglia resta `8 GB` liberi, e il file di paging non si tocca;**
   - **la RAM:** `16.05 GB` liberi su `34.13`.
+
+
+### 2026-11-27 19:10 -- DECISIONE DI LUCA (18:59, in chat): IL REPOSITORY PRINCIPALE SU E: (E:\soliton_lavoro\soliton_simulator; fsck 0 ERRORI); wt_lapse_u E wt_mitosi RIPARATI; I 7 WORKTREE SU C: RIMOSSI (2 CON --force, DOPO LA RISERVA); IL RENAME IN _OLD RIFIUTATO (Permission denied): RESTA A LUCA; C: DA 16.07 A 23.29 GB [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `18:59`)*, i punti:
+  1. rifare il commit della carta [M1824] *(fatto: `8aa80065`)*;
+  2. **spostare il repository principale su E:, prima del rilancio**, e da li' lavorare per sempre. E' gestione, e la decisione la autorizza;
+  3. la soglia resta `8 GB` impegnabili liberi; il file di paging non si tocca;
+  4. e 5. [M1824] e i pezzi 3-4 di [M1519].
+- **IL PUNTO 2, passo per passo:**
+  1. **la copia** *(`19:03:15 -> 19:04:22`)*: `robocopy C:\Users\lpeano\soliton_simulator E:\soliton_lavoro\soliton_simulator /E /COPY:DAT /R:1 /W:1 /NP /NFL /NDL`. **Ho aggiunto io `/R:1 /W:1`** *(un solo tentativo per file, invece del milione di default)* e le opzioni del log. Uscita `1` *(tutto copiato)*: **`906` cartelle, `9287` file, `7.517 g` byte, `0` non riusciti** *(il log: `E:\soliton_lavoro\robocopy_repo_1903.log`)*. Prima della copia nessun `git.exe` e nessun `python.exe` era vivo, e durante la copia non ho dato comandi git.
+  2. **`git fsck --full` sulla copia** *(`19:04:34 -> 19:06:41`)*: uscita `0`, `1122` righe, **tutte `dangling`** *(oggetti non raggiungibili, nessun errore; `E:\soliton_lavoro\fsck_repo_E.txt`)*. **La safe.directory l'ho passata con `-c` sulla riga di comando**, perche' senza git rifiuta la cartella: l'ordine di Luca metteva la safe.directory dopo fsck.
+  3. **La terza `safe.directory`** *(`19:06:54`)*: `git config --global --add safe.directory E:/soliton_lavoro/soliton_simulator`. Ora sono `36` righe, **nessun `*`** *(`E:\soliton_lavoro\safe_directory_1907.txt`)*.
+  4. **`git worktree repair`**, dato **dal repository nuovo** con i due percorsi come argomenti *(`git worktree repair E:/soliton_lavoro/wt_lapse_u E:/soliton_lavoro/wt_mitosi`)*. Il mandato dice «da `wt_lapse_u` e `wt_mitosi`», ma dentro i worktree il comando avrebbe riparato verso il repository VECCHIO, a cui puntavano. **### UN EFFETTO CHE NON AVEVO PREVISTO:** dato dal repository principale, `repair` ha riscritto il file `.git` di **tutti** i `9` worktree registrati, anche dei `7` su C:. Tutti hanno puntato al repository su E: fino alla loro rimozione *(passo 6)*. Il risultato era coerente, ma era piu' del richiesto, e lo dichiaro.
+  5. **`git worktree list` e il fetch di prova** *(`19:07:16`)*: `git fetch --prune` dal repository nuovo, uscita `0` *(ha portato `origin/guardiano` da `625021df6` a `63a03de9c`)*; `git fetch` da `wt_lapse_u`, uscita `0`; `wt_mitosi` allineato a `origin/mitosi`.
+  6. **I worktree su C:, rimossi uno per uno dal repository nuovo** *(per ciascuno `git -c safe.directory=<percorso> worktree remove <percorso>`: una eccezione sulla riga di comando, non nella configurazione globale)*:
+
+     | worktree | HEAD | stato | rimosso |
+     |---|---|---|---|
+     | `C:/Users/lpeano/soliton_simulator_mattone` | `5f4fa81c` *(strumento-mattone)* | pulito, uguale a origin | `19:07:50`, uscita `0` |
+     | `C:/Users/lpeano/st_main` | `252630fe` *(main)* | pulito, uguale a origin | `19:07:51`, uscita `0` |
+     | `C:/Users/lpeano/wt_mitosi_chi` | `0b04992f` *(mitosi-chi)* | pulito, uguale a origin | `19:07:52`, uscita `0` |
+     | `C:/Users/lpeano/wt_vincoli` | `795deac0` *(vincoli)* | pulito, uguale a origin | `19:07:53`, uscita `0` |
+     | `C:/Users/lpeano/wt_zero` | `986440d6` *(zero-nel-nucleo)* | pulito, uguale a origin | `19:07:55`, uscita `0` |
+     | `C:/Users/lpeano/wt_divisione_f7ee87a9` | `f7ee87a9` *(staccata; contenuta in `17` rami locali e remoti, fra cui `lapse-u` e `mitosi`)* | **`doc/referti_l2/divisione_vuoto.jsonl` modificato, non in stage, in NESSUN commit** | `19:08:06`, **`--force`**, uscita `0` |
+     | `C:/Users/lpeano/wt_zero_padre` | `aa530454` *(staccata; contenuta in `15` rami locali e remoti)* | **in stage `csv/solitone/carta_coppia_ss.py`** *(lo stesso blob `bb2c46b6` gia' in `e3531a7f9`)* **e `1` riga di `doc/INVENTARIO_strumenti.md`** | `19:08:06`, **`--force`**, uscita `0` |
+
+     **Per i due sporchi ho chiesto a Luca** *(in chat, risposta alle `19:03:44`: «riserva su E:, poi `--force`»)*. **La riserva** e' in `E:\soliton_lavoro\riserva_worktree_C`, con i file modificati, le patch *(`patch_non_in_stage.diff` `66504` byte; `patch_in_stage.diff` `19993` byte)*, le HEAD, l'`index` di `wt_zero_padre` e un `manifesto_sha1.txt` *(`10` file)*. **Il manifesto e gli sha1 dei file su C: sono stati riverificati subito prima di `--force`.** Poi `git worktree prune -v` non ha trovato voci orfane.
+  7. **`git worktree list`, adesso:** `E:/soliton_lavoro/soliton_simulator` *(primo-ordine, `12e9a783`)*, `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)*, `E:/soliton_lavoro/wt_mitosi` *(mitosi)*. Tutti e tre puliti e allineati a origin; `core.hooksPath` vale `.githooks`.
+  8. **### IL RENAME E' RIFIUTATO** *(`19:08:30`)*: `mv C:/Users/lpeano/soliton_simulator C:/Users/lpeano/soliton_simulator_OLD` da' «Permission denied». **Qualche processo tiene aperta la cartella.** Volevo cercare quale, ma il comando che elenca i processi mi e' stato negato, e non lo aggiro. **Il rename resta a Luca** *(chiudere cio' che tiene aperta la cartella, per esempio una finestra di VS Code o un terminale su di essa)*. Nessun worktree dipende piu' da quella cartella.
+- **LO SPAZIO** *(`19:08:30`)*: **C: da `16.07` a `23.29 GB` liberi** *(`+7.22 GB`: i worktree rimossi)*. La copia su C: occupa ancora `7.6 GB`, che torneranno quando Luca cancellera' `_OLD`. **E:** da `162.84` a `153.62 GB`. **Impegnabile:** `29.66 GB` liberi su `49.47`.
+- **CIO' CHE DEL PROGETTO RESTA SU C:, da decidere** *(non l'ho toccato)*:
+  - `C:\Users\lpeano\soliton_simulator`, la copia vecchia *(il rename e' rifiutato, vedi sopra)*;
+  - `C:\Users\lpeano\solitonsimulator` *(`50 MB`, file Go di agosto, non e' un repository git)*;
+  - `C:\Users\lpeano\wt_t1` *(`32 KB`, due referti `u1_prototipo_0b6bfde8.txt` e `u1_secondo_64bb2328.txt` del 12 novembre)*;
+  - gli scratchpad delle sessioni di Claude in `C:\Users\lpeano\AppData\Local\Temp\claude\...`. **Gli aiuti di commit** *(`committa3.py`, `accoda.py`)* **ora girano da una copia su `E:\soliton_lavoro\strumenti_cc`**, e i messaggi stanno li'; lo scratchpad della sessione, invece, lo sceglie l'ambiente.
+- **CLAUDE.md par. 2** *(due righe)* **e `doc/REGOLE/par2.md`** *(il dettaglio)* dicono la regola nuova: il repository principale su E:, i worktree su E:, C: mai.
+- **Un controllo che fallisce gia' da prima, non per questo commit:** `csv/_struttura_regole.py` dice «REGOLE PERSE: `1. RAGIONAMENTO PRELIMINARE`», perche' confronta col blob vecchio `da79cc1`, e quel punto e' diventato «LE PREMESSE DAL CODICE» *(decisione di Luca, 2026-10-28)*. **L'esito e' lo stesso prima e dopo la mia modifica.** Non lo correggo qui: e' un'altra cosa.

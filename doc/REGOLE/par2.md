@@ -52,3 +52,10 @@ Il 2026-11-27 il disco C: era pieno *(`131 MB` liberi)*, e un commit e' stato ri
 **La regola dice da dove si lavora.** `E:\soliton_simulator` resta il deposito dei dati *(gli stati in `controllo/`, le tappe)*, e i percorsi dei dati nelle carte restano validi.
 
 **Il repository principale** `C:\Users\lpeano\soliton_simulator` *(ramo `primo-ordine`)* non e' un worktree che si possa rimuovere. Per la regola, da li' non si lancia e non si committa.
+
+**Lo spostamento del repository principale** *(DECISIONE DI LUCA, 2026-11-27 `18:59`)*: alle `18:25` C: era di nuovo pieno *(`0.024 GB`)* e un `git fetch` era fallito, perche' gli oggetti git dei worktree su E: stavano ancora in `C:\Users\lpeano\soliton_simulator\.git`. Luca ha deciso:
+
+- **il repository principale e' `E:\soliton_lavoro\soliton_simulator`** *(copiato con `robocopy /E /COPY:DAT`, verificato con `git fsck --full`)*, con una terza eccezione `safe.directory` *(nessun jolly)*;
+- **i worktree sono collegati a lui** *(`git worktree repair`)*, e quelli rimasti su C: sono stati rimossi;
+- **la copia su C: si rinomina `soliton_simulator_OLD`** e non si cancella: la cancella Luca;
+- **da allora NIENTE del progetto sta su C::** ne' repository, ne' worktree, ne' temp, ne' stati.
