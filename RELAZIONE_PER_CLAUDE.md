@@ -28367,3 +28367,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **L'errore e' mio** *(il paragrafo precedente, `a14a39a8`)*: ho contato le `h_*` di `E:\soliton_lavoro\tmp` col pattern `h_*`, che prende anche i file `h_prima.txt` e `h_dopo.txt` scritti dallo stesso comando. **`1` prima e `2` dopo erano quei due file.**
 - **Le cartelle `h_*` su E: sono `0`** *(`ls -d .../h_*/`)*. **Quindi A3 e' pulito su C: e su E:**, e non resta nessun residuo.
 - **E' la trappola gia' scritta nella nota «misurare col caso nullo»:** un conteggio vuole un controllo di che cosa conta.
+
+
+### 2026-11-27 13:12 -- [M1214] DECISIONE DI LUCA (13:12, in chat): IL DEVE SU omega E' |Delta omega|/omega < 1e-12; K0' PASSA (7.5e-15); LA CORSA d1'' IN CODA (M1214_d1L, v9), A LANCIATORE FERMO, PRIMA DEL RILANCIO [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `13:12`)*:
+  1. il DEVE su `omega` diventa **`|Delta omega| / omega < 1e-12`**; lo stato al bit resta il criterio vero. **Lancio subito d1''**;
+  2. i due collaudi: se `git --version` e' `>= 2.46`, `safe.directory E:/soliton_lavoro/tmp/*` e la suite rifatta *(DEVE dare `67/67`)*; altrimenti i repository temporanei di quei due collaudi su C:, dichiarato;
+  3. poi i pezzi 4, 5 e 6 di [M1016], a corsa chiusa.
+- **K0' COL CRITERIO NUOVO:** `omega` ha un massimo relativo di `7.456e-15` e `6.756e-15`, sotto `1e-12`. **K0' PASSA** *(la carta, il seguito [M1214])*. Il referto della v9 resta com'e', col DEVE vecchio.
+- **LA CODA:** il lanciatore e' fermo *(l'ultimo evento: `03:19:48 FERMO: la coda e' vuota`; nessuna corsa IN CORSA)*. **La voce nuova** in `doc/referti_l2/coda_m1446.json`:
+  - `M1214_d1L`, priorita' `1`, argv `doc/referti_l2/due_corpi_fondo_v9.py corsa`;
+  - la lista passa da `237` a `238` voci;
+  - il formato e' quello del file *(`indent 1`, verificato al byte prima della modifica)*.
+- **Poi:** il rilancio a mano di `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con `TMP` su E:. **Lo dichiaro nel commit successivo, con la voce APERTO del registro.**

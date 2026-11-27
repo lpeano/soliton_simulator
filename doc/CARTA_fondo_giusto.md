@@ -718,3 +718,8 @@
     - **(ii) in `coda_m1446.py`:** `_RADICE` confrontata con `E:/soliton_lavoro/wt_lapse_u` prima di ogni lancio;
   - **il caso che DEVE fallire:** un commit da una copia di prova su C:;
   - **il limite** *(`A9`)*: il presidio non vede un `python` lanciato a mano da un'altra cartella.
+  - **### [M1214] IL DEVE SU omega, RISCRITTO DA LUCA** *(DECISIONE DI LUCA, 2026-11-27 `13:12`, in chat)*:
+    - il DEVE diventa **`|Delta omega| / omega < 1e-12`**; **lo stato al bit resta il criterio vero;**
+    - **applicato ai numeri gia' misurati** *(`k0_omega.txt`, `69fcd7ce`)*: il massimo relativo e' `7.456e-15` *(corpo 1)* e `6.756e-15` *(corpo 2)*, **sotto `1e-12`. K0' PASSA:** lo stato al bit in `11` chiavi su `11`, la serie al bit, `omega` entro `1e-12`;
+    - **il referto `due_corpi_fondo_v9_noto.txt` resta com'e'** *(il DEVE vecchio, «AL BIT», FALLISCE)*: il verdetto col criterio nuovo e' questo. **Lo script non si riscrive;**
+    - **la corsa d1''** parte con la v9 *(`due_corpi_fondo_v9.py corsa`)*, dalla coda, come `M1214_d1L`.

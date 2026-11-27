@@ -2930,6 +2930,15 @@
     "corsa"
    ],
    "note": "[M0106] (DECISIONE DI LUCA 01:06, dalla posta) il vuoto puro con le nascite accese, 6000 tick, stati ogni 250; K4'' PASSA (mitosi, ramo mitosi)"
+  },
+  {
+   "nome": "M1214_d1L",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v9.py",
+    "corsa"
+   ],
+   "note": "[M1214] (DECISIONE DI LUCA 13:12) la corsa lunga d1'': da M2034/coppia/d1/stato_006000 per 12000 tick (fino a k 18000), stati ogni 250, in M2034/coppia/d1L; v9 (U rifatta dopo la carica); K0' passa (lo stato al bit, omega < 1e-12)"
   }
  ]
 }
