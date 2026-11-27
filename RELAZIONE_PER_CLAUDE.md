@@ -28753,3 +28753,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - `M1824_S2`: `doc/referti_l2/corpo_fuso_v2.py giro3`.
   - **La lista passa da `240` a `242` voci.** Il formato e' quello del file *(`indent 1`, ascii, verificato al byte prima della modifica)*.
 - **Poi:** `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con TMP su E:, e le righe APERTO nel commit successivo.
+
+
+### 2026-11-27 19:27 -- [M1824] S1 E S2 LANCIATE DALLA CODA (19:26:51 E 19:26:54, pid 3196 E 7372); LE RIGHE APERTO NEL REGISTRO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore:** `coda_m1446.py`, partito alle `19:26` da `E:\soliton_lavoro\wt_lapse_u`, con TMP e TEMP su `E:\soliton_lavoro\tmp` *(la sua uscita in `E:\soliton_lavoro\tmp\lanciatore_M1824.txt`)*.
+  - **`M1824_S1`** *(`corpo_fuso_v2.py corsa`)*: lanciata alle `19:26:51`, pid `3196`; il lanciatore ha letto `16.4 GB` liberi.
+  - **`M1824_S2`** *(`corpo_fuso_v2.py giro3`)*: lanciata alle `19:26:54`, pid `7372`, con `16.3 GB` liberi.
+- **I log** *(`E:\soliton_simulator\controllo\M1446\log\M1824_S1.txt` e `M1824_S2.txt`)*: `24` moduli timbrati su `24`, tutti «committato e pulito». S2 ha stampato la riga di partenza, con la massa di riferimento `1.9900238506e+06`.
+- **Le righe APERTO** di `m1446-M1824_S1` e `m1446-M1824_S2` in `doc/REGISTRO_CORSE.md` sono in questo commit *(`git.head` `4654854e`)*.
+- **I DEVE dentro le corse** si leggeranno nei log: per S1 a `k 30250`, `30500`, `30750` e `31000`; per S2 a `k 0`, `250`, `500`, `750` e `1000`.
+- **La stima, dai tempi di prima** *(con due processi, da [M1519])*: S1 arrivava a `k 31000` in `7564 s`, cioe' circa `0.58 s` per tick; i `24000` tick di S1 vogliono quindi circa `3.9 h`. Il giro 3 di S2 *(`6000` tick)* vuole circa `1 h`.
+- **Poi:** il pezzo 3 di [M1519] *(le letture, il verdetto S3, il video v4)* a corse chiuse, e il pezzo 4 *(la ricevuta)*.
