@@ -28483,3 +28483,67 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - lo stesso alone spiega perche' `d_m` *(le meta' per `y`)* resta fra `10` e `16`, mentre i picchi, quando sono due, distano da `4` a `12`.
   - **Gli stati DUE isolati dopo `k 6250` non li ho visti nei png:** nessuno dei cinque cade su uno di essi. **Se siano due corpi o un nucleo deformato, va guardato nel video quadro per quadro.** Non lo affermo.
 - **Un difetto di presentazione, senza effetto sui numeri:** in alcuni quadri gli angoli del riquadro restano vuoti, ai bordi della triangolazione.
+
+
+### 2026-11-27 15:13 -- [M1016] PEZZO 6: LA RICEVUTA [M1016]/[M1107]/[M1214] (RAMO lapse-u): ESEGUITO; LE PREVISIONI CONFRONTATE; FERMO [[PROGETTO-MITOSI]]
+
+**LA RICEVUTA.**
+
+- **[M1016] (10:16): ESEGUITO.** A0 c'e' *(`e64e79d1`)*. La corsa lunga d1'' e' chiusa *(`7366a447`)*. Il pezzo 4 e' in `9bdfea82`, il pezzo 5 in `fcd8bdc0`, il pezzo 6 e' questo.
+- **[M1107] (11:07): ESEGUITO.** A *(lo spostamento su E:)* e B5 *(la chiave mancante e' `mot.geo.U`, curata nella v9)*.
+  - **Il punto 6 di [M1107] chiedeva la via da capo** se la chiave fosse risultata una cache del nucleo, e `geo.U` lo e'. **Non l'ho seguito di mia iniziativa:** sono andato avanti con la ripresa perche' l'ha deciso Luca, alle `11:44` *(B5 subito, il tetto di due tentativi nella v8)* e alle `13:12` *(lanciare d1'' da `stato_006000`)*. Lo scrivo perche' chi legge solo [M1107] vedrebbe una discordanza.
+- **[M1214] (12:14) e DECISIONE DI LUCA 13:12: ESEGUITO.**
+  - La regola della cartella di lavoro;
+  - K0' con il criterio nuovo su `omega`;
+  - la corsa `M1214_d1L` *(uscita `0`, 12000 tick in `6254 s`)*;
+  - la suite: `67` su `67` *(`65` su E: e `2` su C:)*;
+  - i pezzi 4, 5 e 6.
+
+**LE PREVISIONI CONFRONTATE** *(i numeri dal referto `due_corpi_fondo_v7.txt`; `max|chi|` dal log della corsa)*:
+
+- **Il guardiano, [M1016]:**
+  - **P1 (`80%`), la norma ferma e la materia che si allarga: GIUSTA per la norma, giusta fino a `k 6000`, poi smentita dalla corsa lunga.**
+    - La norma: massimo `5.485e-14`.
+    - Fino a `6000` `max rho` scende da `9.21e3` a `5.00e3`.
+    - Dopo, la materia si ricompatta: `max rho` arriva a `5.36e4` e a `k 18000` vale `3.07e4`.
+  - **P2 (`60%`), «UNO da `k ~3000` in poi; il rimbalzo e' l'artefatto delle meta'»: SBAGLIATA.** Coi picchi, fra `3750` e `6000` A0 dice DUE in `10` stati su `10`, e `d_p` risale a `28.58`: **il rimbalzo c'e' anche coi picchi.** UNO domina solo da `k 6250`.
+  - **P3 (`55%`), il corpo fuso si ristringe *(`R` sotto `7`)* e trova un punto fisso con un pozzo piu' profondo di `-102`: SBAGLIATA nella parte che decide.**
+    - `R` sta sotto `7` solo a `k 7000` *(`6.477`)*, e a `k 18000` vale `9.364`.
+    - Il picco non e' fermo: fra `6250` e `18000` `max rho` varia di un fattore `8.6`.
+    - **Il pozzo e' piu' profondo, questo si':** `max|chi|` e' `196.5` a `k 18000` *(dal log)*, e il minimo di `chi` sulla scala del video e' `-263.77`.
+  - **P4 (`30%`), DUE per tutta la corsa, un'orbita vera: SBAGLIATA.** Da `k 6250` ci sono `40` stati UNO su `48`.
+- **Il guardiano, [M1107]:**
+  - **P1 (`55%`), la chiave e' una cache del motore *(`cs_prec` o `lambda_c`)*: GIUSTA nel tipo, SBAGLIATA nel nome.** La chiave e' una cache *(`mot.geo.U`, funzione di `A`)*, ma non e' nessuna delle due nominate.
+  - **P2 (`60%`), si finisce per la via 6, da capo: SBAGLIATA.** La ripresa v9 riproduce lo stato al bit.
+  - **P3 (`70%`), K5 passa al bit: NON GIUDICABILE.** K5 era il caso noto della via 6, che non si e' presa.
+- **Il guardiano, [M1214]:**
+  - **P1 (`70%`), K0' con la v9 passa al bit al primo tentativo: GIUSTA per lo stato, SBAGLIATA per K0' com'era scritto.**
+    - Lo stato e' uguale al bit in `11` chiavi su `11`, e la serie pure.
+    - `omega` differisce di `42` ulp *(`7.5e-15` relativo)*. K0' e' passato solo col criterio nuovo di Luca delle `13:12`.
+  - **P2 (`65%`), un secondo minimo entro `k 8000`, sotto `6.8`: GIUSTA con `d_m`, NON MISURABILE con `d_p`.**
+    - Con `d_m` *(la serie, ogni `10` tick)* il minimo del secondo contatto e' `5.441` a `k 6810`. Il primo era `6.795` a `k 3230`.
+    - Il secondo contatto *(`6250..7000`)* e' tutto UNO, quindi `d_p` non si misura. Resta la riserva gia' scritta: sotto circa `2 w` le meta' non separano.
+- **Le mie** *(la carta dei pezzi 4 e 5)*:
+  - **un secondo contatto entro `k 8000` (`60%`): GIUSTA.** Comincia a `k 6250`;
+  - **i contatti si avvicinano nel tempo (`50%`): NON DECIDIBILE.**
+    - Fra i primi due inizi ci sono `3250` tick, poi `1250`.
+    - Ma dopo `k 6250` i «contatti» sono separati da stati DUE isolati, e non li posso difendere come eventi distinti *(pezzo 4)*. Non c'e' una sequenza di periodi da confrontare.
+  - **la norma ferma (`95%`): GIUSTA.** `5.485e-14`.
+
+**CIO' CHE I NUMERI DICONO, IN UNA RIGA:** i due corpi si avvicinano *(da `41.57`)*, si toccano a `k 3000`, si separano di nuovo fino a `d_p 28.58`, si ritoccano a `k 6250`. **Da li', per `11750` tick, A0 vede quasi sempre un nucleo solo,** con un alone che tiene `R` fra `6.5` e `13.6`, e non tornano mai sopra `d_p 12.12`.
+- **Non dico «fusione» ne' «orbita»:** gli stati DUE isolati non li ho guardati quadro per quadro.
+
+**Una correzione a me stesso:** nel pezzo 4 ho scritto «la nube ha `R` fra `9` e `13`». L'intervallo misurato dopo `k 6250` e' da `6.477` a `13.613`, come dice la riga sopra di quello stesso paragrafo.
+
+**LE DOMANDE APERTE PER LUCA** *(con il loro criterio di chiusura)*:
+
+1. **Gli stati DUE isolati dopo `k 6250`:** sono due corpi, o un nucleo deformato?
+   - **Si chiude** guardando quei `6` quadri nel video, o con un A0 a soglia diversa *(ma la soglia e' una scelta sua)*.
+2. **Lo scarto di `omega` fra i due corpi cresce** *(da `3e-6` a `1.75e-3` per finestra)*. Dopo la fusione, le due meta' per `y` non sono piu' «i due corpi».
+   - **Si chiude** decidendo se `omega` per meta' abbia ancora senso dopo `k 6250`.
+3. **Restano aperte quelle di prima:**
+   - la relazione del ramo `primo-ordine`, che e' indietro;
+   - la deriva in `x` del baricentro;
+   - la deriva della norma nel vuoto puro.
+
+**FERMO:** i pezzi 4, 5 e 6 di [M1016] sono fatti; si attende Luca.
