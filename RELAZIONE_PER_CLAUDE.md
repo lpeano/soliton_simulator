@@ -28466,3 +28466,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`omega`, per finestra:** fra `0.0717` e `0.0825`, **senza una tendenza monotona**. Fra i due corpi c'e' uno scarto che cresce nel tempo: `0.000003` nella finestra `[0, 500]`, `0.001754` in `[17000, 17500]`. **Lo noto e non lo interpreto.**
 - **Il confronto con le previsioni** e' nel pezzo 6.
 - **Un mio errore, corretto prima del commit:** nella prima stesura avevo contato a occhio `41` UNO e `7` DUE, e copiato `16.47` e `6.40e3`. Il conto fatto con uno script sul referto da' `40`, `6`, `16.64` e `6.21e3`.
+
+
+### 2026-11-27 15:10 -- [M1016] PEZZO 5: IL VIDEO v3 (73 QUADRI, TRE PANNELLI, 0.615 MB); I PNG GUARDATI: DOPO k 6250 UN NUCLEO SOLO CON UN ALONE [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia_v3.txt`, da `anima_coppia_v3.py` *(sha1 dei byte `401a9baf`)* e `due_corpi_lettura_v6.py` *(`5188a75e`)*, timbrati committati e puliti; uscita `0`.
+  - **Il video:** `doc/referti_l2/anima_coppia_v3.mp4`, `73` quadri a `6 fps`, `1440x480`, `0.615 MB`, sotto il tetto di `5 MB`: **PASSA**. Il file e' committato con `git add -f`, perche' i `.mp4` sono nel `.gitignore`.
+  - **Le scale fisse:** `rho_psi` da `0` a `5.3610e+04`, `chi` da `-263.7705` a `-19.8096`.
+- **I cinque png, guardati prima del commit** *(`E:\soliton_simulator\controllo\M0951\v3\coppia_v3_k*.png`)*. Cio' che ho visto, a occhio:
+  - **`k 0`:** due corpi rotondi separati lungo `y`, ciascuno nel suo pozzo; le curve di `chi` hanno la forma a otto.
+  - **`k 3250`** *(il primo contatto, A0 dice UNO)*: un nucleo schiacciato lungo `x`, con due lobi deboli sopra e sotto. Il pozzo e' tondo.
+  - **`k 6000`** *(A0 dice DUE, `d_p 13.89`)*: un arco allungato lungo `y`, con i due picchi dentro la stessa nube. Il pozzo e' unico e ovale.
+  - **`k 12000` e `k 18000`** *(UNO)*: **un solo nucleo compatto**, circondato da un **alone debole e frammentato** che si allarga per una ventina di nodi. Il pozzo e' unico e quasi tondo, con le curve strette al centro.
+- **Che cosa cambia nella lettura del pezzo 4:**
+  - il valore alto di `R` dopo `k 6250` *(fra `9` e `13`)* **viene dall'alone**, non da due corpi lontani;
+  - lo stesso alone spiega perche' `d_m` *(le meta' per `y`)* resta fra `10` e `16`, mentre i picchi, quando sono due, distano da `4` a `12`.
+  - **Gli stati DUE isolati dopo `k 6250` non li ho visti nei png:** nessuno dei cinque cade su uno di essi. **Se siano due corpi o un nucleo deformato, va guardato nel video quadro per quadro.** Non lo affermo.
+- **Un difetto di presentazione, senza effetto sui numeri:** in alcuni quadri gli angoli del riquadro restano vuoti, ai bordi della triangolazione.

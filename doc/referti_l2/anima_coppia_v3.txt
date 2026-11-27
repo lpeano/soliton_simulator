@@ -1,0 +1,9 @@
+[TIMBRO] due_corpi_lettura_v6.py  sha1-BYTE 5188a75e  committato e pulito
+[TIMBRO] anima_coppia_v3.py  sha1-BYTE 401a9baf  committato e pulito
+==================================================================================================================================
+[M1016] PEZZO 5: IL VIDEO v3 (73 quadri, 6 fps, tre pannelli)
+==================================================================================================================================
+  le scale fisse: rho_psi [0, 5.3610e+04]; chi [-263.7705, -19.8096]
+  il video a 1440x480: 0.615 MB
+### 73 quadri a 6 fps: E:\soliton_lavoro\wt_lapse_u\doc\referti_l2\anima_coppia_v3.mp4 (0.615 MB; il tetto 5 MB: PASSA); i png in E:\soliton_simulator\controllo\M0951\v3
+==================================================================================================================================
