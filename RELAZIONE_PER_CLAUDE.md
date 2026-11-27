@@ -28118,3 +28118,9 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
     - la cartella e' `E:\soliton_simulator\tmp_M1016`;
     - `committa3.py` e' una copia di `committa2.py` con `TMP` e `TEMP` del commit su quella cartella *(una sostituzione asserita; la riserva sta in `E:\soliton_simulator\controllo\committa3_copia.py`)*;
     - **le corse e gli script girano con `TMP` e `TEMP` su E:.**
+
+
+### 2026-11-27 10:57 -- [M1016] PEZZO 3e: k0_diagnosi.py, PRIMA DELLA DIAGNOSI; IL MESSAGGIO DI 755a781c MUTILATO (UN \t DIVENTATO TABULAZIONE) [[PROGETTO-MITOSI]]
+
+- **Lo script:** `doc/referti_l2/k0_diagnosi.py`, cioe' la misura dichiarata nel pezzo 3d. **Non corregge niente.** Riprende come K0' *(dalla v8)* e stampa la grandezza delle differenze: per riga della serie, per `omega` e per chiave dello stato.
+- **UN ERRORE MIO, nel messaggio di `755a781c`** *(gia' spinto, non lo riscrivo)*. Nella riga «IL DISCO» il percorso doveva essere `E:` + `\soliton_simulator\tmp_M1016`, ma il `\t` di `\tmp_M1016` e' diventato una tabulazione. **E' successo perche' ho modificato il messaggio con un python fra virgolette;** la nota «percorsi Windows negli script» lo diceva gia'. **Il percorso giusto e' quello scritto nel paragrafo del pezzo 3d.**
