@@ -27917,3 +27917,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **K4''** *(il ramo mitosi: `d6b1ef8b` la carta e lo script, il referto subito dopo)*: **la norma passa** *(`8.99e-14` relativo, entro `1e-9`)*. `|Delta H|` = `1.208e-10` *(`H_rif +1.229e-10`)* si stampa e non blocca.
 - **In coda:** `M0106_vuoto_puro` *(`mitosi_vuoto_v2.py corsa`: nascite accese, da `35976` a `41976`, stati ogni `250`, in `M0237/vuoto_v2`)*. Il lanciatore e' fermo dalle `22:44:08` di ieri *(letto da `coda_stato.json`)*. **Il rilancio a mano viene dopo questo commit**, e si dichiara nel commit successivo.
 - **La durata attesa** e' di circa `8-12` ore *(la carta della mitosi)*. Il referto `mitosi_vuoto_v3.txt` si fa con `mitosi_vuoto_v4.py lettura` quando la corsa chiude.
+
+
+### 2026-11-27 01:19 -- [M0106] LA RICEVUTA: ESEGUITO (3 PEZZI SU 3; LA CORSA DEL VUOTO PURO GIRA); LE PREVISIONI CONFRONTATE [[PROGETTO-MITOSI]]
+
+- **[M0106] eseguito** *(DECISIONE DI LUCA 01:06)*:
+  - **1.** lapse-u `4078ab07` *(la carta, la v5)*, `41ccae13` *(il referto)*;
+  - **2.** mitosi `d6b1ef8b`, `38d02317` *(K4'' PASSA)*; lapse-u `dd505ea7` *(la coda)*;
+  - **3.** questo paragrafo.
+- **Il rilancio, dichiarato:** il lanciatore e' ripartito a mano alle `01:18` e ha lanciato `M0106_vuoto_puro` alle `01:18:37` *(pid `4452`)*. L'APERTO del registro e' in questo commit *(su lapse-u)*.
+- **I RISULTATI:**
+  - **D2'':** VERSO `8`, VIA `4`, non distinguibile `0`;
+  - il minimo e' `d 6.795` a `k 3230`, il massimo dopo `27.870` a `k 5020`, nessun secondo minimo nei `6000` tick;
+  - `omega` di d1' scende col pozzo *(`0.0755` a chi `-191.5`, su `[3500, 4000]`)*;
+  - **K4'' passa.**
+- **LE PREVISIONI:**
+  - **del guardiano:** P1 *(`90%`)* **SI'**, esatta *(VERSO `8`, VIA `4`, `[3000, 5000]` VIA)*; P2 e P3 *(il vuoto puro)* **aspettano la corsa**;
+  - **le mie:** P1 al `95%` **SI'**; K4'' passa **SI'**; P2 *(niente nascite)* al `75%`, aspetta la corsa.
+- **IL SEGUITO:** quando la corsa chiude *(circa `8-12` ore)*, `mitosi_vuoto_v4.py lettura > doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi.
