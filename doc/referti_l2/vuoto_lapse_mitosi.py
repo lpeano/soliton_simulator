@@ -112,6 +112,7 @@ def avvia():
     for m in ("mitosi_rami_v2.py", "mitosi_vuoto_v2.py", "caduta_libera.py"):
         _presidio.avvia(os.path.join(_QUI, m))
     _presidio.avvia(__file__)
+    MV2.d2()          # ### Campi.residuo ASSOLUTO, come la corsa di [M0106] (corsa_v2): nel vuoto max rho = 0 (81f5df7f)
 
 
 def confronta(fa, fb):
