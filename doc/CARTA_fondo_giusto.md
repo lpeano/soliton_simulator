@@ -711,3 +711,10 @@
     - **IL TEMPO, stimato** dalla corsa d1' *(`6000` tick in `4896 s`)*: circa `9800 s`, cioe' **2.7 ore**.
     - **LA MIA PREVISIONE:** K0' passa al bit *(`85%`)*; K0'-neg fallisce come deve *(`95%`)*.
     - **LA v8** *(scritta alle `10:32`, dopo la caduta della v7, `0cc00fab`, e PRIMA della sua corsa)*: `Ripresa.gira` chiama **`D.ciclo`, cioe' il ciclo della v2**, quello con cui e' girata d1' *(il nucleo preso prima della scena)*, con il tick portato ad assoluto nel `dopo`. **K0', K0'-neg e la corsa restano quelli della v7**, con le stesse soglie e la stessa cartella.
+- **### [M1214] IL PRESIDIO DELLA CARTELLA DI LAVORO, PROPOSTO** *(DECISIONE DI LUCA, 2026-11-27 `12:14`: «si propone nella carta, non si scrive oggi»)*:
+  - **cosa impedirebbe:** un commit, o un lancio dalla coda, che parta da una radice diversa da `E:/soliton_lavoro/wt_lapse_u` o da `E:/soliton_lavoro/wt_mitosi`;
+  - **dove:**
+    - **(i) nel `pre-commit`:** `git rev-parse --show-toplevel` confrontato con le due radici ammesse. Il repository principale su C: *(`primo-ordine`)* va trattato a parte: **o si ammette come terza radice** *(e' la cartella della sessione)*, **o si vieta** *(e allora i commit su `primo-ordine` vanno fatti da un worktree su E:)*. **La scelta e' di Luca;**
+    - **(ii) in `coda_m1446.py`:** `_RADICE` confrontata con `E:/soliton_lavoro/wt_lapse_u` prima di ogni lancio;
+  - **il caso che DEVE fallire:** un commit da una copia di prova su C:;
+  - **il limite** *(`A9`)*: il presidio non vede un `python` lanciato a mano da un'altra cartella.

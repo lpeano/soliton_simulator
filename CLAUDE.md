@@ -67,6 +67,8 @@ di equivalenza — **la prova piu' dura per qualunque teoria a spinta**)*?
   Le scelte di criterio dentro un mandato (soglie, convenzioni di segno, riferimenti) restano ammesse se dichiarate nella carta PRIMA della corsa. *(Luca, [M2145], 2026-11-23 21:45)*
 - **Il ramo `guardiano` e la posta** *(Luca, [M2345], 2026-11-24 23:53)*: il guardiano scrive SOLO su `guardiano`, e **CC non vi committa ne' pusha mai** (`H-GUARDIANO`). La posta `guardiano/posta/*.md` si legge SOLO su comando di Luca («leggi la posta») o all'avvio di una sessione,
   mai a intervalli: DELEGA e DECISIONE DI LUCA si eseguono, ATTESA DI LUCA no finche' Luca non ratifica in chat (`guardiano/DELEGA.md`); le ricevute in `RELAZIONE_PER_CLAUDE.md` *([Mxxxx] eseguito/respinto, con l'ora)*.
+- **La cartella di lavoro** *(Luca, [M1214], 2026-11-27 12:14)*: ogni comando, lancio, commit e push si fa da `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* o `E:/soliton_lavoro/wt_mitosi` *(mitosi)*; **mai da C:, mai da `E:/soliton_simulator`**,
+  che e' SOLO il deposito dei dati *(`controllo/`, `registro_tappe`)*. Il presidio *(la radice del lanciatore e dei commit)* e' proposto nella carta, non ancora scritto (`A9`).
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par2.md`**.
 

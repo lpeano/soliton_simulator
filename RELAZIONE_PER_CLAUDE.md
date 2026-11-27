@@ -28300,3 +28300,16 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **Cosa decide:**
     - **se lo scarto relativo e' sotto `1e-14`**, e' l'ultimo bit del calcolo di `omega`, e la corsa riprodurrebbe d1'. **Ma il DEVE su `omega` AL BIT l'ho scritto io nella carta, e cambiarlo dopo aver visto il numero e' una lettura a posteriori: decide Luca;**
     - **se lo scarto e' piu' grande**, c'e' ancora qualcosa da capire, e si va al tentativo 2.
+
+
+### 2026-11-27 12:19 -- [M1214] RICEVUTO (DECISIONE DI LUCA 12:14, dalla posta 23e249f0, letto alle 12:18); 0: LA REGOLA DELLA CARTELLA DI LAVORO IN CLAUDE.md PAR. 2 E QUI; IL PRESIDIO PROPOSTO NELLA CARTA [[PROGETTO-MITOSI]]
+
+- **LA REGOLA** *(`CLAUDE.md` par. 2, due righe; il dettaglio in `doc/REGOLE/par2.md`)*:
+  - ogni comando, lancio, commit e push si fa da `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* o da `E:/soliton_lavoro/wt_mitosi` *(mitosi)*;
+  - **mai da C:, e mai da `E:/soliton_simulator`**, che resta SOLO il deposito dei dati *(`controllo/`, `registro_tappe`)*.
+- **Lo stato:** `wt_lapse_u` esiste gia' su E: *(rifatto in [M1107] A2)*, quindi il primo passo e' gia' fatto. Da `git worktree list`: `E:/soliton_lavoro/wt_lapse_u` e `E:/soliton_lavoro/wt_mitosi`. **Dalle `11:47`** *(il commit `fd996d24`)* **ogni comando e ogni commit di lapse-u e della mitosi e' partito dalla cartella nuova.**
+- **Un'eccezione da dichiarare:** **i paragrafi della relazione sul ramo `primo-ordine`.** La copia di quel ramo e' il repository principale `C:\Users\lpeano\soliton_simulator`, e un worktree principale non si rimuove. **Per la regola, da li' non committo piu'.** La relazione di `primo-ordine` resta indietro finche' Luca non decide come aggiornarla *(per esempio con un worktree di `primo-ordine` su E:)*. **E' una domanda aperta.**
+- **IL PRESIDIO:** proposto nella carta *(`doc/CARTA_fondo_giusto.md`, il seguito [M1214])*, **non scritto**: la radice del `pre-commit` e quella del lanciatore.
+- **Gli altri punti di [M1214] sono gia' in corso:**
+  - **1.** K0' con la v9 e' gia' girato: lo stato e la serie sono AL BIT, `omega` no *(`e91d7462`)*. **La misura dello scarto di `omega` e' in corso** *(`k0_omega.py`, `e2d08151`)*;
+  - **2.** la suite della mitosi si fa quando si e' chiusa la misura.
