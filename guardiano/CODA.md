@@ -10,7 +10,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 5. **Il vento a due corpi**: J_φ attorno a ciascun corpo e lungo l'asse, dagli stati di d1'.
 
 ## Corse corte (≤ 6000 tick): un sì e una soglia
-6. **La nascita nel vuoto CON il lapse** (non ancora chiesta da Luca) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
+6. **La nascita nel vuoto CON il lapse** (decisa il 27/11 22:47, [M2245] F) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
 7. **Il corpo fuso con la mitosi accesa**, contro S1 (ex H3): si raffredda facendo spazio? i nodi nati ∝ l'energia interna persa? (previsione 60%).
 8. **Le tre semine del vuoto** per K (cima e fondo) e per il punto fisso: le barre d'errore vere (assorbe S4 Eötvös pulito).
 9. **Masse 1 e 4 nella coppia**: il baricentro resta fermo? il rapporto delle accelerazioni è 4?
