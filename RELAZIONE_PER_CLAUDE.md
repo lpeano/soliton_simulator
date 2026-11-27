@@ -28241,3 +28241,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **`git worktree list`:** `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* ed `E:/soliton_lavoro/wt_mitosi` *(mitosi)*. Gli altri worktree non sono stati toccati.
 - **Il disco C:** e' passato da `121 MB` a `4.5 GB` liberi.
 - **La verifica di A2, «la suite della mitosi `67` su `67`»:** e' `primo_ordine/collauda.py` *(il «`67/67`» di `doc/NUCLEO_CONGELATO.md` e di `doc/ROTTA.md`)*. **La lancio dopo la fine di B5**, perche' la suite non va sovrapposta a una corsa *(le note: il 2026-11-09 una suite e un'altra corsa si sono toccate anche fra worktree diversi, attraverso `%TEMP%`)*. **La lancio con `TMP` su `E:\soliton_lavoro\tmp`**, cosi' vale anche come verifica di A3.
+
+
+### 2026-11-27 11:59 -- [M1107] B5b: LA CHIAVE NON SALVATA E' mot.geo.U (IL TRASPORTO U(1) SULLA DIAGONALE, 4.7e-4); NON E' INFORMAZIONE PERSA: U = exp(i e A) DALLA A SALVATA. IL TENTATIVO 1: scrivi_U DOPO LA CARICA (v9) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/b5_chiave.txt` *(`b5_chiave.py`, `7426fe60`; uscita `0`)*.
+  - Le istantanee hanno `151` voci *(A, la corsa continua)* e `147` *(B, la ricarica)*. **Delle `147` voci in comune, `109` sono uguali e `38` diverse;** `4` buffer esistono solo in A.
+- **LE `38` DIVERSE, per tipo:**
+  - **`mot.geo.U`** *(`78732 x 2 x 2`)*: diverso in **`157464` elementi su `314928`**, esattamente la diagonale, con relativo **`4.745e-04`**. **E' la candidata;**
+  - **`mot.cs`** *(relativo `3.076e-02`)*: **non e' stato.** `chi_tick.forza` ricalcola `cs = s N(chi)`, e `tick_chi_v2` riscrive `mot.cs` prima del passo;
+  - **i contatori:** `mot.tick` *(`250` contro `0`)*, `mot.applicazioni[...]` e `mot.ripieghi`. **Il passo non li legge:** `mot.tick` lo legge solo `primo_ordine/checkpoint.py`, che qui non si usa;
+  - **`31` buffer di lavoro** `mot._buf[...]` *(`fp_*`, `ep_*`, `mv_*`, `a0`, `a1`, `sin`, `sn`, `ang`)*: si riscrivono dentro ogni tick.
+- **IL MECCANISMO, DAL CODICE** *(`csv/_u1_prototipo.py`: `avvolto` e `scrivi_U`; `Campo.u`)*:
+  - dentro il tick, **`U` si riscrive solo DOPO il primo `CAMM-SPOSTAMENTO-VUOTO`**, come `scrivi_U(mot, campo)`, cioe' `U[:,0,0] = U[:,1,1] = exp(i e A)`;
+  - **la parte del tick che viene prima usa la `U` del tick precedente.** Nella corsa continua quella `U` vale `exp(i e A)`, con la `A` di fine tick, che e' la `A` salvata. **Dopo la ricarica, invece, `U` e' quella lasciata da `costruisci`**, cioe' con `A = 0`, quindi `U = I`;
+  - **di qui lo scarto gia' al primo tick, e la diagonale.**
+- **QUINDI LA CHIAVE NON E' INFORMAZIONE PERSA, E NON E' UNA CACHE DEL NUCLEO DA SALVARE:** e' **una funzione della `A` salvata.**
+  - Il guardiano, P1 *(«una cache del motore, `cs_prec` o `lambda_c`»)*: **sbagliata nel nome, giusta nel genere** *(un attributo del motore, non una chiave dello stato)*. La mia previsione *(«un attributo del motore o del campo»)*: **giusta.**
+- **IL TENTATIVO 1** *(su 2)*: `due_corpi_fondo_v9.py`, cioe' la v8 piu' **`scrivi_U(mot, C.campo)` dopo la carica.** E' in memoria, fuori dal nucleo; la v8 e' usata e non si tocca. **Poi K0' da `stato_005750`.**
+  - **La previsione, mia:** K0' passa AL BIT *(`70%`)*. Il resto del passo non legge niente di diverso, ma un ordine di operazioni diverso in `scrivi_U` darebbe lo stesso `exp(i e A)`.
