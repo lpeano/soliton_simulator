@@ -29300,3 +29300,35 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 | E | dopo F, nell'ordine di Luca | |
 
 **Non scrivo codice per C, D ed F** finche' non ci sono le decisioni ([[L-DOPO-STOP]]).
+
+
+### 2026-11-28 00:19 -- [M0016] LETTA (DECISIONE DI LUCA 2026-11-28 00:16): D4 DECISO. MA UNA PREMESSA DI [M-GM] CADE: IL CAMPO A E' GIA' DINAMICO, CON SORGENTE LA CORRENTE DI psi, NELLE CORSE DEI TRIANGOLI, E IL VORTICE DI t120 E' MORTO CON A ACCESO. FERMO SU D [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0016] letta su comando di Luca («Leggi post.»). E' una DECISIONE DI LUCA (00:16) e risponde alla domanda D4 di `bea28bb2`:
+  - **D4:** vale il vortice vivo, cioe' P1 parte da `t120` a `k 10000`;
+  - **P1 diventa** «A acceso tiene in vita il vortice?», con il controllo ad A spento;
+  - **il sinistro** si semina come specchio del destro;
+  - **`u-dinamica`** parte da mitosi;
+  - **P1** si fa prima con le nascite spente, poi accese;
+  - **«giro intero»** si sostituisce con «giro `+-1` e `J_theta > 1` in `[0, R/2)`».
+  - `git log --all --grep "[M0016"` trova solo il commit della posta: non e' fatto niente.
+- **LA PREMESSA CHE CADE** (letta dal codice, non dai commenti):
+  - [M-GM] dice che «l'unico interruttore nuovo e' A: la parte di fase di U diventa dinamica», e K4 vuole «`kappa_A = 0` e `A = 0` -> il tick di oggi al bit». **Ma nel modello di oggi A e' gia' dinamico:**
+    - **`csv/_u1_prototipo.py`** ([[PROGETTO-U1]]) contiene il campo U(1) sui triangoli: `A_a` per arco e `E_a` coniugato; `U_a = e^{i e A_a}` nello spostamento della materia; le placchette per `B`; `H_F = somma s_a^2 (l/l*) E_a^2/2 + V(B)`; **la sorgente `E <- E - e J` della corrente di `psi`** dentro lo spostamento; il passo `spinta(1/2)`, la camminata, `spinta(1/2)`;
+    - **`chi_tick_v2.tick_chi_v2`**, il tick delle corse dei triangoli lette da A4, fa proprio `campo.spinta(0.5)`, poi `UO.avvolto(mot, campo, True)` (la sorgente accesa), poi `campo.spinta(0.5)`;
+    - **`porto.campi`** parte da `A = 0`, con `E` da Gauss, ma da li' `A` evolve: negli stati letti da A4 `max |campo_A|` sale da `3.9` (`k 250`) a `481` (`k 35000`).
+  - **QUINDI:** il vortice di `t120` (giro `+1` con `J_theta` da `13.4` a `0.55`) e' morto fra `k 15000` e `25000` **con A gia' acceso e dinamico**, con la sorgente nella corrente di `psi` e l'accoppiamento `e = E_DECISO` (`0.4767`). La domanda di P1, «A acceso tiene in vita il vortice?», **ha gia' una risposta nei dati di A4: con l'A di oggi, NO.**
+  - **Cio' che non esiste ancora** e' il controllo «A spento» (il campo congelato, o senza sorgente). E le scelte S1-S3 di [M-GM] (il salto di rana, la sorgente `J`, il ritorno su `chi` con `1/2 (E^2 + B^2)`) **coincidono in gran parte con cio' che c'e' gia'**, salvo forse S3, che non ho verificato.
+- **LA DOMANDA PER LUCA (e per il guardiano)**, con il criterio di chiusura di una DECISIONE DI LUCA con l'ora:
+  > Il campo A di [M-GM] esiste gia' ed e' acceso nelle corse dei triangoli, e A4 mostra che con quel campo il vortice muore. **Che cosa deve essere [M-GM]?**
+  > 1. **P1 = il controllo «A spento»** (lo stesso tick con il campo congelato, o senza sorgente) dalla stessa partenza (`t120`, `k 10000`), per vedere se A accelera o rallenta la morte del vortice. **La corsa «A acceso» c'e' gia':** sono gli stati di `t120` da `10000` a `35000`;
+  > 2. **un A diverso da quello di oggi** (per esempio un `e_A` proprio, diverso da `E_DECISO`, cioe' S2 di [M-GM]): e' una legge nuova, e la costante va derivata o decisa;
+  > 3. **[M-GM] si chiude:** l'A di oggi non veste il vortice;
+  > 4. un'altra via.
+- **Lo stato di [M2245-27] e [M0016]:**
+  - **C e' FERMO** su C-0, C-1 e C-2 (`d61e1361`). La lettera [M0016] dice «C (in corsa)», ma **C non e' partito**: aspetta quelle tre decisioni;
+  - **D e' FERMO** sulla premessa qui sopra;
+  - **F e' FERMO** su F-1 e F-2;
+  - **E** viene dopo F.
+- **Non ho creato il ramo `u-dinamica`** ne' il suo worktree: e' gestione, e la sua forma dipende dalla risposta.
+- **Le previsioni del guardiano per P1 con le nascite spente** (`50%`, «A tiene in vita il vortice oltre `k 30000`»): **i dati di A4 dicono gia' di no** per l'A di oggi, ma il P1 di [M0016] non e' stato eseguito.
