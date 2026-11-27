@@ -28725,3 +28725,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Cio' che si vede, senza verdetto:** dal giro 1 al giro 2 il pozzo si fa piu' profondo *(da `-188.6` a `-225.0`)* e `w` piu' stretto *(da `3.93` a `3.28`)*. Il respiro scende da `0.92` a `0.39`, e `omega` scende da `0.0755` a `0.0710`.
   - **Il verdetto S3 viene dopo il giro 3 e dopo S1.** C si valuta di nuovo fra il giro `2` e il giro `3`.
 - **Il prossimo passo:** `corpo_fuso_v2.py noto`.
+
+
+### 2026-11-27 19:22 -- [M1824] I CASI NOTI DELLA RIPRESA: 8 DEVE SU 8 PASSANO (K0 AL BIT IN 11 CHIAVI, LA SERIE AL BIT, omega 6.04e-15; K0-neg DIVERSO IN 9; KB E KB-neg; K2 LA CARICA DI S2 AL BIT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_v2_noto.txt`, da `corpo_fuso_v2.py noto` *(sha1 dei byte `687b68c0`; tutti i moduli timbrati committati e puliti)*. Uscita `0`, dalle `19:17:40` alle `19:22:28`.
+  - **KB:** il confronto al bit di uno stato con se stesso trova `0` chiavi diverse. **KB-neg** *(un ulp cambiato in `psi_h`)*: il confronto trova `['psi_h']`, come deve. **Il DEVE dentro le corse vede quindi anche un ulp.**
+  - **La carica:** la riga a `k 29750` e' uguale AL BIT a quella della serie parziale di d1T.
+  - **K0** *(da `d1T/stato_029750`, `250` tick, `125 s`)*:
+    - lo stato a `k 30000` e' uguale AL BIT a `d1T/stato_030000` in `11` chiavi su `11`;
+    - la serie `29760..30000` *(`25` righe)* e' uguale AL BIT;
+    - `omega` dei tick `29751..30000` ha un massimo relativo di `6.042e-15`, sotto `1e-12`.
+  - **K0-neg** *(senza `geo.U`, `122 s`)*: lo stato e' DIVERSO in `9` chiavi *(`Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`)*.
+  - **K2:** lo stato caricato da `partenza_giro_3.npz` con `pi = 0` e' uguale AL BIT a `giro_3/stato_000000` in ogni chiave.
+- **Il prossimo passo:** le due voci in coda, `M1824_S1` e `M1824_S2`.
