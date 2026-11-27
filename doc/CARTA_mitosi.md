@@ -231,3 +231,48 @@
 - **Il controllo con il lapse piatto** (= [M0106], 0 nascite, al bit sui primi 250 tick) vale solo con la via F-1 (a). Con (b) il riferimento al bit non esiste.
 
 **Finche' Luca non decide C-0..C-2 e F-1..F-2, non si scrive codice per C ne' per F.**
+
+
+## C, LA VIA (d): LA COPPIA DA k 0 CON chi E LE NASCITE ACCESE *([M0026], DECISIONE DI LUCA 2026-11-28 `00:26`; il task history `doc/TASK_HISTORY/2026-11-28_m0026_corpo_fuso_nascite.md`; scritta PRIMA del codice)* [[PROGETTO-MITOSI]]
+
+**La scena e la partenza sono quelle di `d1`:** la semina di `M2034/coppia/d1/stato_000000`, `chi` acceso (il passo v2), `Theta = 0` a `k 0`.
+- **Le nascite:** la via vera della mitosi, con il quanto `2 pi`: `Rami.nasci` riga per riga, il campo orientato, una nascita per tick. Due cambi decisi da Luca:
+  - **C-1:** `chi` e `pi` del nato sono la media dei due estremi dell'arco;
+  - **C-2:** l'energia della regola, del P9 e di `DH` e' `energia_chi_v2`, cioe' con `H_chi`.
+- **Le mie scelte dentro il mandato** (dichiarate):
+  - il campo si converte (prototipo -> generico -> orientato dal toro) **solo alla prima nascita**, cosi' K1 non la tocca;
+  - la `H` del candidato si **ricalcola** con `energia_chi_v2` sul motore e sul campo che `MR2.candidato` costruisce: la funzione si chiama com'e', e la sua `H` del libro dei conti resta come `H_libro`;
+  - `H(k)` si calcola ogni 250 tick.
+- **La corsa:** 18000 tick, gli stati ogni 250 in `E:/soliton_simulator/controllo/M0026/C`, la serie ogni 10 come `d1`, e `nascite.json`.
+
+**I casi noti** (`corpo_fuso_mitosi.py noto`):
+- **K-pre:** lo stato costruito a `k 0` = `d1/0` AL BIT;
+- **K0:** le nascite spente, 250 tick = `d1/250` AL BIT; **K0-neg:** contro `d1/500` DEVE FALLIRE;
+- **K-nascita:** da `d1L/18000`, una nascita sull'arco di `|Theta|` massimo:
+  - P9 entro `1e-12` con l'energia di `chi`;
+  - il grafo ha `n + 1` nodi e `m + 3` archi, e `chi`, `pi`, `theta_a` e `Lp` lo seguono;
+  - `chi` e `pi` del nato sono la media AL BIT;
+  - F3 regge, `C.residuo()` gira, e un tick dopo la nascita gira.
+- **K1** e' dentro la corsa: a `k 6000` nessuna nascita, e lo stato = `d1/6000` AL BIT. **Altrimenti FERMO.**
+- **Se un caso noto fallisce: FERMO.**
+
+**Le letture e il verdetto** (C4 di [M2245-27], sul tratto `6000-18000`):
+- sulla griglia di S1: A0, `R`, `max rho`, `w`, `chi` al centro, `H` e `H_chi`;
+- **le nascite:** quante, quando (durante l'urto, intorno a `k 3000`, oppure dopo) e dove (la distanza dal baricentro della nube nel momento della nascita, per anello); `E_persa(k)` e `H + E_persa`;
+- **il respiro di `R` su `[15500, 18000]`**, contro `d1L` sullo stesso tratto.
+
+**IL VERDETTO** (le soglie sono di Luca):
+- **SI RAFFREDDA FACENDO SPAZIO** se nascono nodi entro `2 R` dal baricentro **e** il respiro di `R` su `[15500, 18000]` e' sotto la meta' di quello di `d1L`;
+- **FA SPAZIO MA NON SI RAFFREDDA** se nascono, ma il respiro resta sopra la meta';
+- **NON FA SPAZIO** se non nasce niente;
+- **INGOLFAMENTO** se gli archi in attesa superano 500 o se un triangolo degenera: **FERMO**, dichiarato.
+
+**LE PREVISIONI:**
+- **del guardiano:**
+  - le prime nascite fra `k 2500` e `4000`, entro `2 R` (`65%`);
+  - il respiro sotto la meta' (`45%`);
+  - nessun ingolfamento (`60%`);
+- **mie:**
+  - **le prime nascite dopo `k 6000`** (`80%`): `max |Theta|` vale `1.50` a `k 3000` e `2.65` a `6000` in `d1`, che ha la stessa dinamica fino alla prima nascita. **E' contro la prima previsione del guardiano;**
+  - **un ingolfamento prima di `k 18000`** (`40%`): in `d1L` gli archi oltre `2 pi` passano da 35 (`k 12000`) a 1596 (`k 18000`), e una nascita per tick potrebbe non stare al passo;
+  - il respiro sotto la meta' (`30%`).
