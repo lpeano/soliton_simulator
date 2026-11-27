@@ -636,3 +636,16 @@
     - **P2 al `50%`**: dalla v3 `d2'` *(`d(0) 41.569`)* ha `max |d - d(0)|` `1.50` a `k 6000`, ma il verso non l'ho guardato;
     - P3 al `30%`.
 - **LA LETTURA DI «NELLO STESSO VERSO»** *(una mia scelta, aggiunta col commit dello script e prima della corsa)*: la regola chiede **lo stesso segno di `Delta d` di d2'** nella stessa finestra *(la lettura letterale)*. Se `|Delta d1'| > 3 |Delta d2'|` col verso opposto a d2', la finestra conta «non distinguibile», ma si stampa a parte come **«fuori regola»**, perche' sia Luca a leggerla.
+
+- **### [M0106] D2'' E IL VERDETTO RISCRITTO** *(DECISIONE DI LUCA, 2026-11-27 `01:06`, arrivata dalla posta, `4c973b3a`; letta alle `01:07`; scritto PRIMA di `due_corpi_lettura_v5.py`)*:
+  - **GLI ERRORI DEL GUARDIANO:**
+    - **n.257:** in D2' «nello stesso verso» stava per «nello stesso intervallo». Io l'ho applicato alla lettera e ho segnalato le finestre «fuori regola»;
+    - **n.258:** K4' aveva una soglia sotto il pavimento dell'arrotondamento.
+  - **D2'', LA SCELTA DI LUCA:** per finestra valida, **VERSO** se `Delta d(d1') < 0` e `|Delta d(d1')| > 3 |Delta d(d2')|` nello stesso intervallo; **VIA** se `Delta d(d1') > 0` con lo stesso rapporto; altrimenti «non distinguibile». **Il verso di d2' si dichiara, ma non entra nella regola;**
+  - **LO SCRIPT:** `due_corpi_lettura_v5.py`. La v4 e' usata e non si tocca: **la v5 la fa girare per intero** *(la sua riga D2' resta stampata, marcata come SUPERATA)* e poi aggiunge D2''. **Il referto `due_corpi_fondo_v6_C.txt` si riscrive sugli stessi `25` stati, senza nessuna corsa;**
+  - **IN PIU', LE MIE DEFINIZIONI, dichiarate prima:**
+    - il minimo di `d(k)` di d1' e il suo tick, dalla serie ogni `10` tick;
+    - il massimo dopo il minimo;
+    - **il minimo successivo** = il minimo dopo quel massimo, **ma solo se e' interno** *(cioe' non all'ultimo tick)*. Il periodo e' la distanza fra i due minimi. **Se il minimo successivo cade all'ultimo tick, dichiaro che non c'e'**, e stampo il mezzo periodo, minimo -> massimo, **ma non lo chiamo periodo**;
+    - **la tabella per finestra di `500`:** `d` medio dalla serie; `omega` medio di ciascun corpo dalla serie per tick; **chi al centro** = chi medio su `r < 4` dal baricentro del corpo nella sua meta', in media sui `3` stati della finestra. Per d1', d2' e d3'.
+  - **LA PREVISIONE DEL GUARDIANO:** P1 *(`90%`)* VERSO `8`, VIA `4`. **La mia: la stessa, al `95%`.** I rapporti stampati dalla v4 vanno da `6.78` a `95.5`, tutti sopra `3`.

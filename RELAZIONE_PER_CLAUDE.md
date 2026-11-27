@@ -27878,3 +27878,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(a)** che cosa significa «nello stesso verso» in D2';
   - **(b)** una soglia di K4' sopra il pavimento di arrotondamento;
   - **(c)** se lo strumento delle due meta' basta sotto `2 w`.
+
+
+### 2026-11-27 01:12 -- [M0106] RICEVUTO (DECISIONE DI LUCA 01:06, letto alle 01:07); IL PEZZO 1a, LA CARTA DI D2'' E LO SCRIPT v5, PRIMA DEL REFERTO [[PROGETTO-MITOSI]]
+
+- **La posta:** `2026-11-27_0106_M0106.md` *(`4c973b3a`)*, tre pezzi, nessuno gia' fatto.
+- **La carta** *(sez. `3-vicies`, il seguito [M0106])*:
+  - D2'' com'e' scritto da Luca;
+  - gli errori n.257 e n.258;
+  - le mie definizioni del minimo, del minimo successivo *(solo se interno)* e della tabella `d` / `omega` / chi al centro.
+- **Lo script:** `due_corpi_lettura_v5.py`. Fa girare la v4 intera, poi aggiunge D2'', il minimo, l'oscillazione e la tabella.
