@@ -28561,3 +28561,12 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
     - `Q_K` e' quella di [M0414], e la massa di riferimento e' la norma di `stato_018000`.
   - **Le previsioni** stanno nella carta.
 - **Spazio su E:** `164.1 GB` liberi alle `15:25` *(`shutil.disk_usage`)*. S1 ne occupera' circa `0.78 GB`.
+
+
+### 2026-11-27 15:29 -- [M1519] IL CODICE: corpo_fuso.py (noto, corsa, puntofisso), COMMITTATO PRIMA DI GIRARE [[PROGETTO-MITOSI]]
+
+- **`doc/referti_l2/corpo_fuso.py`** importa la v9 e `fondo_puntofisso_chi_v2`, e non riscrive nessuno dei due.
+  - **`Ripresa10`** e' la `Ripresa` della v7, ma carica lo stato da un file qualunque. Confronta parametri e `centro_coppia` col meta di `d1L/serie.json`, e riscrive `geo.U` dopo la carica *(si spegne solo per K0''-neg)*.
+  - **`giro_pf`** e' il ciclo del punto fisso di `V2.giro`, riga per riga, sulla scena di d1'.
+- **Un controllo che il codice copre per costruzione:** `fondo_puntofisso_chi` importa `due_corpi_fondo_v3`, che riassegna `D.parametri`. E' lo stesso modulo che la catena della v7 ha gia' importato, quindi non cambia niente. **K0'' e K1'' girano comunque con tutti gli import della corsa:** se un import cambiasse il ciclo, lo stato al bit non tornerebbe.
+- **Il prossimo passo:** `corpo_fuso.py noto`. Se tutti i DEVE passano, S1 e S2 vanno in coda.
