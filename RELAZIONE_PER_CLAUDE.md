@@ -28260,3 +28260,20 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - Il guardiano, P1 *(«una cache del motore, `cs_prec` o `lambda_c`»)*: **sbagliata nel nome, giusta nel genere** *(un attributo del motore, non una chiave dello stato)*. La mia previsione *(«un attributo del motore o del campo»)*: **giusta.**
 - **IL TENTATIVO 1** *(su 2)*: `due_corpi_fondo_v9.py`, cioe' la v8 piu' **`scrivi_U(mot, C.campo)` dopo la carica.** E' in memoria, fuori dal nucleo; la v8 e' usata e non si tocca. **Poi K0' da `stato_005750`.**
   - **La previsione, mia:** K0' passa AL BIT *(`70%`)*. Il resto del passo non legge niente di diverso, ma un ordine di operazioni diverso in `scrivi_U` darebbe lo stesso `exp(i e A)`.
+
+
+### 2026-11-27 12:09 -- [M1107] A4: IL LANCIATORE A SECCO DALLA CARTELLA NUOVA, 8 DEVE SU 8: RADICE E:\soliton_lavoro\wt_lapse_u; LISTA (237 VOCI), STATO, TAPPE E STATI AI PERCORSI VECCHI; NESSUNA CORSA DA LANCIARE [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/prova_secco_coda.txt`, da `prova_secco_coda.py` *(`ccb7d25c`)*, uscita `0`.
+- **Come:** `coda_m1446.py` **non ha un modo a secco**, quindi la prova **lo importa senza chiamare `main()`**: nessun lancio, nessun file scritto.
+- **Gli `8` DEVE PASSANO:**
+  - la radice del lanciatore e' `E:\soliton_lavoro\wt_lapse_u`;
+  - la lista si legge *(`237` voci)*;
+  - lo stato, al percorso vecchio `E:\soliton_simulator\controllo\M1446\coda_stato.json`, si legge *(`237` corse; l'ultimo evento: `03:19:48 FERMO: la coda e' vuota`)*;
+  - `_registro_corse.py` esiste sotto la radice nuova;
+  - il REGISTRO esiste *(`doc/REGISTRO_CORSE.md` nel repo: nella cartella nuova, con lo stesso percorso nel repo)*;
+  - le TAPPE esistono al percorso vecchio, `E:\soliton_simulator\registro_tappe`;
+  - gli stati di d1' sono al percorso vecchio *(`25`)*;
+  - nessuna corsa e' da lanciare.
+- **Un limite, dichiarato:** la prova non ha un caso che DEVE fallire. Controlla che i percorsi esistano, non il codice di `main()`.
+- **Resta A3** *(la temp dei collaudi su E:, con nessuna cartella `h_*` su C: dopo un collaudo)* insieme alla suite `67/67`. **Le lancio quando K0' (v9) chiude.**
