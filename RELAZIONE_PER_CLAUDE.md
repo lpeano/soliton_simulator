@@ -28954,3 +28954,30 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
   - lapse-u non ha toccato `primo_ordine/` da `d27805ac`, la base del merge precedente: **il merge dovrebbe lasciare il nucleo a 9 file;**
   - mitosi e' 168 commit dietro lapse-u e 99 avanti.
 - **Le misure** (22:50:35): C: 25.06 GB liberi; E: 152.17 GB; impegnabile 31.77 GB liberi su 49.47. Nessuna corsa in giro, coda vuota.
+
+
+### 2026-11-27 23:06 -- [M2245] (27/11) B: IL MERGE lapse-u -> mitosi E' FATTO MA NON COMMITTATO. NUCLEO A 9 FILE E NASCITE AL BIT, MA LA SUITE DA' 65 SU 67. **DOMANDA PER IL GUARDIANO** (su indicazione di Luca, in chat) [[PROGETTO-MITOSI]]
+
+**Lo stato** *(in `E:/soliton_lavoro/wt_mitosi`, il merge **in corso, non committato**)*: `git merge --no-ff --no-commit origin/lapse-u`, 144 file in stage.
+
+- **B1, il nucleo:** **PASSA.** `git diff --cached --name-only 42638304 -- primo_ordine/` da' **esattamente i 9 file** del criterio.
+- **B1, i conflitti:** uno solo, in `RELAZIONE_PER_CLAUDE.md`, in 4 blocchi. Ho tenuto tutte e due le parti, prima lapse-u e poi mitosi, come in [M1330-A2]: (righe lapse-u, mitosi) = (9, 1), (16, 0), (504, 33), (1454, 46). Il registro si e' fuso da solo.
+- **B2, il caso noto delle nascite:** **PASSA.** `suite_merge.py`, dal tronco `k 35976` a `k 36000` col codice fuso, e' uguale AL BIT a `MITOSI/stato_36000`, e il DEVE FALLIRE contro `stato_36250` fallisce come deve. Il referto e' copiato in `doc/referti_l2/suite_merge_m2245_mitosi.txt`; l'originale sta nel worktree mitosi, non committato.
+- **B2, la suite:** **65 su 67** (`collauda.py`, dalle 22:53:41 alle 23:03:27, uscita 1; il log intero e' in `doc/referti_l2/collauda_merge_m2245_mitosi.txt`). Falliscono **i due collaudi «solo-CI» che creano un repository git temporaneo:**
+  - `M-B1 PUO' fallire, ed e' provato` (`primo_ordine/_collauda_mb1.py`);
+  - `i controlli sullo STAGE e non sul disco` (`csv/_stage.py --collaudo`).
+- **La causa, provata:** `TMP` e' su `E:\soliton_lavoro\tmp`, come vuole la decisione delle 18:59 («C: mai, ne' temp»). **E: e' un file system che non registra il proprietario:** un `git init` vuoto in `E:/soliton_lavoro/tmp/prova_own` da' subito `fatal: detected dubious ownership ... is on a file system that does not record ownership`. Nel repository temporaneo dei collaudi git quindi non funziona (il timbro «FUORI DA UN REPO GIT», `core.hooksPath <non impostato>`). **E' l'ambiente, non il codice.**
+- **Il «file sporcato» che la suite segnala** (`suite_merge_m2245.txt`) **non e' un difetto:** e' il referto del caso noto, che il mio processo stava scrivendo in parallelo. Il referto e' intero (32 righe, tutti e 2 i DEVE).
+
+**LA DOMANDA PER IL GUARDIANO** (e per Luca):
+
+> La lettera [M2245] B2 dice «i due collaudi con repository temporaneo su C: come gia' dichiarato». La DECISIONE DI LUCA delle 18:59 dice «C: MAI (ne' temp)». Su E: un repository temporaneo e' sempre «dubious ownership». **Come si fanno girare i due collaudi?**
+> 1. **Un jolly solo per quei due processi:** `safe.directory=*` passato per variabile d'ambiente al solo processo del collaudo (`GIT_CONFIG_COUNT`), senza toccare la config globale e senza C:. Nota: `committa3.py` toglie apposta le `GIT_CONFIG_*` dall'ambiente del commit, quindi e' una via che finora si e' evitata.
+> 2. **Un'eccezione a «C: mai»** per il solo temp di quei due collaudi, cancellato a fine collaudo, come dice la lettera.
+> 3. **Committare il merge con 65/67**, dichiarando la causa, e sistemare i due collaudi dopo.
+> 4. **FERMO su B:** annullare il merge (`git merge --abort`) e fare A sui due rami separati.
+
+**Il criterio di chiusura:** una DECISIONE DI LUCA con l'ora che sceglie una delle quattro vie, o un'altra. **Finche' non arriva:**
+- il merge resta in corso, non committato, in `wt_mitosi`, e non lo tocco;
+- C, D ed F non partono;
+- **A non parte**, perche' la carta l'avevo messa dopo il merge, sull'albero fuso. Partire su due rami separati sarebbe una decisione presa al posto di Luca ([[L-DOPO-STOP]]).
