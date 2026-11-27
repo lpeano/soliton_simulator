@@ -28037,3 +28037,43 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **K2** usa `giro_3/stato_003000.npz`.
 - **Le previsioni, mie:** la norma ferma *(`95%`)*; UNO da `k 3000`-`3250` *(`70%`)*; `R` cresce dopo la fusione *(`80%`)*.
 - **Il caso K0 della corsa:** lo stato a `6250` di d1' non esiste. Il pezzo 3 avra' la sua carta.
+
+
+### 2026-11-27 10:23 -- [M1016] PEZZO 2: A0 DICE DUE CORPI IN 22 STATI SU 25; LA SOVRAPPOSIZIONE A k 3000-3500 (3, 1, 3 MASSIMI); DA k 3750 DI NUOVO DUE, A 28.6 E POI 13.9 A k 6000; LA NORMA FERMA (1.6e-14): VALE (a). LA MIA «NUBE SOLA» ERA SBAGLIATA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/coppia_a0.txt`, prodotto da `coppia_a0.py` *(`c6f4c4c3`, blob `68f4bf68`, committato e pulito)*, uscita `0`.
+- **I casi noti PASSANO:**
+  - **(K1)** `stato_000000` da' `2` massimi a `41.569`;
+  - **(K2)** `giro_3/stato_003000` da' `1` massimo, con `R` `4.8946`.
+- **LA NORMA E' FERMA:** `max |N(k)/N(0) - 1|` = **`1.643e-14`**, contro una soglia di `1e-9`. **Quindi vale (a): la materia si allarga, non si perde.** `max rho` scende da `9.2109e+03` *(a `k 0`)* a `5.0048e+03` *(a `k 6000`)*, cioe' al **`0.543`**. **Lo «svanire» del video e' la scala fissa:** i due corpi sono piu' larghi e piu' bassi.
+- **IL VERDETTO PER STATO:**
+
+  | tratto | verdetto | distanza fra i due massimi |
+  |---|---|---|
+  | da `k 0` a `k 2750` | **DUE CORPI** | da `41.57` a `16.46` |
+  | `k 3000` | ALTRO *(`3` massimi)* | — |
+  | `k 3250` | **UNO** | — |
+  | `k 3500` | ALTRO *(`3`)* | — |
+  | da `k 3750` a `k 6000` | **DUE CORPI** | da `16.46` a `28.58` *(da `k 4750` a `k 5500`)*, poi giu' fino a **`13.89` a `k 6000`** |
+
+  - **Il tick della fusione**, secondo la definizione della carta *(il primo UNO subito dopo un DUE)*, **non c'e'**: prima di `3250` c'e' ALTRO, non DUE.
+  - **Nei `3` massimi** a `3000` e a `3500`, quello centrale e' alto *(`1.7e4`)* e i due laterali sono piu' bassi *(da `5.7e3` a `9.1e3`)*. **E' la sovrapposizione dei due corpi**, un picco con due frange, come nel quadro a `k 3250` del video.
+  - **La distanza fra i massimi va a passi di reticolo:** `28.583` si ripete in `4` stati. Va letta con una risoluzione di circa `1` nodo.
+- **### LA LETTURA:** **i due corpi si attraversano** *(o rimbalzano: A0 non distingue quale massimo e' quale)* a `k 3250`, **si separano fino a circa `28.6` e tornano ad avvicinarsi**: a `k 6000` sono a `13.9`. **E' una seconda caduta, e A1 ha senso.**
+  - **«Una nube sola» del video v2 era una MIA lettura sbagliata:** due corpi larghi e bassi, sulla scala fissa, sembrano una banana.
+  - **Il «massimo» di [M0106]** *(`27.87` a `k 5020`, dalle meta')* **e' vicino a quello dei massimi** *(`28.58`)*.
+  - **Ma da `k 5500` la «d» delle meta' e la distanza fra i massimi divergono:** a `k 6000` sono `21.08` contro `13.89`. **La «d» delle meta' non vale piu' con corpi larghi:** per A1 si usa la distanza fra i massimi, o un baricentro locale attorno a ciascun massimo *(scelta da dichiarare nella carta del pezzo 4)*.
+- **`R` della nube intera** scende da `21.53` a `6.62` *(a `k 3250`)*, risale a `16.11` *(a `k 5000`)* e riscende a `13.47`. **Misura la separazione piu' la larghezza, non la sola larghezza.**
+- **LE PREVISIONI CONFRONTATE:**
+
+  | chi | previsione | esito |
+  |---|---|---|
+  | il guardiano, P1 *(`80%`)* | la norma ferma, (a) | **GIUSTA** |
+  | il guardiano, P2 *(`60%`)* | UNO da `k 3000` in poi | **SBAGLIATA**: UNO solo a `3250` |
+  | il guardiano, P4 *(`30%`)* | DUE per tutta la corsa, e il secondo minimo | **in parte:** non DUE ovunque *(c'e' la sovrapposizione)*; il secondo minimo e' da vedere in d1'' |
+  | io | la norma ferma *(`95%`)* | **giusta** |
+  | io | UNO da `3000`-`3250` in poi *(`70%`)* | **SBAGLIATA** |
+  | io | `R` cresce dopo la fusione *(`80%`)* | **non applicabile:** la fusione non c'e' |
+  | io, nel TODO | «nube sola dopo `3250`» *(`75%`)* | **SBAGLIATA** |
+
+- **### UN ERRORE MIO, DI NUOVO LE ORE:** il titolo del paragrafo del pezzo 1 dice «`10:24`», ma `date` dava `10:18:48` prima del commit *(`cdcffb1a`)*. **E' lo stesso errore che avevo appena corretto.** Da ora leggo l'ora con `date` prima di scrivere il titolo, come per questo *(`10:22:58`)*.
