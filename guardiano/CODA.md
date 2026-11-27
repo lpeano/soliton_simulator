@@ -10,7 +10,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 5. **Il vento a due corpi**: J_φ attorno a ciascun corpo e lungo l'asse, dagli stati di d1'.
 
 ## Corse corte (≤ 6000 tick): un sì e una soglia
-6. **La nascita nel vuoto CON il lapse** (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
+6. **La nascita nel vuoto CON il lapse** (non ancora chiesta da Luca) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
 7. **Il corpo fuso con la mitosi accesa**, contro S1 (ex H3): si raffredda facendo spazio? i nodi nati ∝ l'energia interna persa? (previsione 60%).
 8. **Le tre semine del vuoto** per K (cima e fondo) e per il punto fisso: le barre d'errore vere (assorbe S4 Eötvös pulito).
 9. **Masse 1 e 4 nella coppia**: il baricentro resta fermo? il rapporto delle accelerazioni è 4?
@@ -20,7 +20,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 11. **N come vincolo di Poisson** sulla materia a ogni tick (ex VINCOLI, la versione viva; H7): lo stesso oggetto e la stessa coppia, contro il χ dinamico; la differenza è il ritardo.
 12. **Lo zero del vuoto**: V2 fa cadere il vuoto (−20% vicino alla massa con χ vero). È una scelta di principio, non una corsa. La più vecchia della coda.
 13. **Lo spettro delle masse** (H8, ex H1): 2M (in corsa), poi 4M, 8M: esiste, si spezza, collassa (densità al tetto). Il triangolo di tre oggetti in caduta sta qui.
-14. **[M-GM] il W di Weyl: A dinamico (elettromagnetismo) sopra la gravità accesa**: in ATTESA, parte solo al «via» di Luca con l'ora. Corretto il 27/11 22:20 (n.261): da questo W non viene gravitomagnetismo; P1 il vortice che si veste di flusso, P2 i due segni, P3 Eötvös con gli aggregati neutri.
+14. **[M-GM] il W di Weyl: A dinamico (elettromagnetismo) sopra la gravità accesa**: VIA dato il 27/11 alle 22:45 ([M2245] D), con tutta la fisica accesa; ramo u-dinamica. Corretto il 27/11 22:20 (n.261): da questo W non viene gravitomagnetismo; P1 il vortice che si veste di flusso, P2 i due segni, P3 Eötvös con gli aggregati neutri.
 15. **La terza dimensione** (H11): segnata, non proposta.
 16. **H2, la massa come somma di configurazioni** (DHN 1974): idea da Grossmann, non da corse. Senza mandato.
 
