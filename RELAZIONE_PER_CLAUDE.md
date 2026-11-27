@@ -28739,3 +28739,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **K0-neg** *(senza `geo.U`, `122 s`)*: lo stato e' DIVERSO in `9` chiavi *(`Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`)*.
   - **K2:** lo stato caricato da `partenza_giro_3.npz` con `pi = 0` e' uguale AL BIT a `giro_3/stato_000000` in ogni chiave.
 - **Il prossimo passo:** le due voci in coda, `M1824_S1` e `M1824_S2`.
+
+
+### 2026-11-27 19:24 -- [M1824] S1 E S2 IN CODA (M1824_S1 corpo_fuso_v2.py corsa, M1824_S2 corpo_fuso_v2.py giro3): LA LISTA DA 240 A 242 VOCI; IMPEGNABILE 29.37 GB SU 49.47, C: 25.14 GB (19:24:37) [[PROGETTO-MITOSI]]
+
+- **Le misure prima della coda** *(`19:24:37`, `GlobalMemoryStatusEx` e `shutil.disk_usage`)*:
+  - l'impegnabile e' `29.37 GB` liberi su `49.47`, **sopra la soglia di `8 GB`** *(Luca, `18:59`)*;
+  - C: `25.14 GB` liberi, E: `153.61 GB`, la RAM `17.68 GB` su `34.13`.
+  - **Le stesse misure stanno nelle note delle due voci**, e cosi' finiscono nella riga APERTO del registro.
+- **Il lanciatore e' fermo:** l'ultimo evento di `coda_stato.json` e' `17:56:24 FERMO: la coda e' vuota`, e nessun `python.exe` e' vivo.
+- **Le due voci nuove** in `doc/referti_l2/coda_m1446.json`, priorita' `1`:
+  - `M1824_S1`: `doc/referti_l2/corpo_fuso_v2.py corsa`;
+  - `M1824_S2`: `doc/referti_l2/corpo_fuso_v2.py giro3`.
+  - **La lista passa da `240` a `242` voci.** Il formato e' quello del file *(`indent 1`, ascii, verificato al byte prima della modifica)*.
+- **Poi:** `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con TMP su E:, e le righe APERTO nel commit successivo.

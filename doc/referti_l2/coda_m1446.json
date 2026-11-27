@@ -2957,6 +2957,24 @@
     "puntofisso"
    ],
    "note": "[M1519] (DECISIONE DI LUCA 15:19) S2, il punto fisso accoppiato 2M: 3 giri da 6000 da d1L/stato_018000 (pi = 0), i parametri di d1', in M1519/puntofisso_2M; K1'' passa"
+  },
+  {
+   "nome": "M1824_S1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso_v2.py",
+    "corsa"
+   ],
+   "note": "[M1824] (DECISIONE DI LUCA 18:24 e 18:59) S1 ripresa: da M1519/d1T/stato_030000 per 24000 tick (fino a k 54000), stati ogni 250, in M1519/d1T_r; gli stati 30250..31000 AL BIT con d1T, altrimenti si ferma; K0 passa (8/8 DEVE, corpo_fuso_v2_noto.txt); alle 19:24:37 C: 25.14 GB liberi, impegnabile 29.37 GB liberi su 49.47 (soglia 8)"
+  },
+  {
+   "nome": "M1824_S2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso_v2.py",
+    "giro3"
+   ],
+   "note": "[M1824] (DECISIONE DI LUCA 18:24 e 18:59) S2, il giro 3 ripreso: da puntofisso_2M/giro_2/partenza_giro_3.npz (pi = 0), 6000 tick, in puntofisso_2M/giro_3r; gli stati 0..1000 AL BIT con giro_3, altrimenti si ferma; K2 passa; alle 19:24:37 C: 25.14 GB liberi, impegnabile 29.37 GB liberi su 49.47 (soglia 8)"
   }
  ]
 }
