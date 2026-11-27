@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "E:\soliton_lavoro\wt_mitosi\doc\referti_l2\vuoto_lapse_mitosi.py", line 188, in <module>
+    sys.exit(main(sys.argv[1:]))
+             ~~~~^^^^^^^^^^^^^^
+  File "E:\soliton_lavoro\wt_mitosi\doc\referti_l2\vuoto_lapse_mitosi.py", line 184, in main
+    return noto() if x.modo == "noto" else corsa()
+           ~~~~^^
+  File "E:\soliton_lavoro\wt_mitosi\doc\referti_l2\vuoto_lapse_mitosi.py", line 145, in noto
+    cod, k = corri(0.0, os.path.join(D_NOTO, "A0"), K_CTRL)
+             ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\soliton_lavoro\wt_mitosi\doc\referti_l2\vuoto_lapse_mitosi.py", line 133, in corri
+    cod, k, _f = RV.ciclo("vuoto_lapse_" + os.path.basename(d), "mitosi", MV2.F_VUOTO, fino, None, nascita_iniziale=False, d_out=d)
+                 ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\soliton_lavoro\wt_mitosi\doc\referti_l2\mitosi_rami_v2.py", line 311, in ciclo
+    C.residuo()
+    ~~~~~~~~~^^
+  File "E:\soliton_lavoro\wt_mitosi\csv\solitone\mattone.py", line 190, in residuo
+    return float(np.max(np.abs(G))) / (self.campo.e * float(rho.max()))
+           ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ZeroDivisionError: float division by zero

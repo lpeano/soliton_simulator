@@ -29369,3 +29369,13 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **i casi noti** sono K-F0 (`A = 0` = [M0106] AL BIT a `k 36250`), K-F1 (deve fallire) e K-F2 (= `campo_N`).
 - **Un'etichetta riusata, l'errore n.262 di nuovo:** [M0037] esisteva gia' (`[M0037-03]`, l'Eotvos al fondo). La ricevuta `430b3953` su lapse-u la chiama [M0037]; **da qui la scrivo [M0037-28]**, come vuole la regola di Luca delle 23:14.
 - **Il prossimo «fine passo»:** **G** ([M0037-28]), la carta G-0 e le sue dichiarazioni. Poi i casi noti di F, poi la coda con C e F.
+
+
+### 2026-11-28 00:50 -- [M0026] F, I CASI NOTI CADONO AL PRIMO RESIDUO DI GAUSS (ZeroDivisionError: max rho = 0 NEL VUOTO). ERRORE MIO: NON HO CHIAMATO mitosi_vuoto_v2.d2(), CHE LA CORSA DI [M0106] CHIAMAVA [[PROGETTO-MITOSI]]
+
+- **Che cosa e' successo:** `vuoto_lapse_mitosi.py noto` (dalle 00:49:01 alle 00:50:00, uscita 1) ha stampato l'ampiezza, poi K-F0 e' caduto dentro `mitosi_rami_v2.ciclo` a `C.residuo()`:
+  - `mattone.Campi.residuo` divide per `e max rho`, che nel vuoto senza materia vale `0`;
+  - **l'ampiezza:** `L_y 161.080725`, `G20 1.574010e-04`, `kappa 2.5289e-04`, quindi `A = 15.95629`.
+- **L'errore e' mio:** la corsa di [M0106] (`mitosi_vuoto_v2.corsa_v2`) chiama **`d2()` prima di `ciclo`**, e `d2()` sostituisce `Campi.residuo` con `residuo_assoluto`. E' la cura di K4 in [M0237]. Io ho copiato la chiamata a `ciclo`, ma non la sua preparazione.
+- **La cura** (il prossimo commit): `avvia()` chiama `MV2.d2()`, cosi' il percorso e' quello di [M0106] e K-F0 lo controlla AL BIT.
+- **I reperti:** `doc/referti_l2/vuoto_lapse_mitosi_noto_fallito.txt` e `vuoto_lapse_mitosi_noto_fallito.err.txt` (la coda dello stderr).
