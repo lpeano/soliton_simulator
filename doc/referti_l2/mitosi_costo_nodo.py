@@ -44,6 +44,16 @@ def nascite():
     return [N[q] for q in sorted(N)]
 
 
+def posizioni(f, n):
+    """### `(m1, m2)` dello stato `f`; se non le ha (lo stato del TRONCO prima della nascita) i primi `n` nodi di
+    `MITOSI/stato_36000` -- le posizioni dei nodi vecchi NON cambiano con le nascite: il DEVE (K4) lo verifica."""
+    with np.load(f, allow_pickle=True) as z:
+        if "m1" in z.files:
+            return z["m1"].copy(), z["m2"].copy()
+    with np.load(os.path.join(MD.R, "MITOSI", "stato_36000.npz"), allow_pickle=True) as z:
+        return z["m1"][:n].copy(), z["m2"][:n].copy()
+
+
 def stati():
     """### `[(k, file)]` ordinati: il tronco prima della prima nascita, MITOSI, MITOSI_V2."""
     out = [(35976, os.path.join(MD.R, "TRONCO", "prima_nascita_35976.npz"))]
@@ -107,7 +117,15 @@ def main():
     # ### (K3)
     S = stati()
     with np.load(S[0][1], allow_pickle=True) as z:
-        m1, m2 = z["m1"].copy(), z["m2"].copy()
+        n_tr = len(z["rho"])
+    m1, m2 = posizioni(S[0][1], n_tr)
+    # ### (K4) le posizioni dei nodi vecchi non cambiano con le nascite: MITOSI/stato_36000 e MITOSI_V2/stato_40000
+    with np.load(os.path.join(MD.R, "MITOSI", "stato_36000.npz"), allow_pickle=True) as z:
+        p0 = (z["m1"].copy(), z["m2"].copy())
+    with np.load(os.path.join(MD.R, "MITOSI_V2", "stato_40000.npz"), allow_pickle=True) as z:
+        p1 = (z["m1"][:len(p0[0])].copy(), z["m2"][:len(p0[0])].copy())
+    esito("(K4) le posizioni dei primi %d nodi: stato_36000 = stato_40000 AL BIT (le nascite non le spostano)" % len(p0[0]),
+          np.array_equal(p0[0], p1[0]) and np.array_equal(p0[1], p1[1]), "")
     v, cnt = densita_locale(np.full(len(m1), 0.5), m1, m2, nas[0]["pos"])
     esito("(K3) la densita' locale di una rho costante 0.5 = 0.5 AL BIT", v == 0.5, "%.17g su %d nodi" % (v, cnt))
     # ### (K2)
@@ -130,7 +148,8 @@ def main():
         if j not in cache:
             cache.clear()
             with np.load(S[j][1], allow_pickle=True) as z:
-                cache[j] = (z["rho"].copy(), z["m1"].copy(), z["m2"].copy(), S[j][0])
+                rr = z["rho"].copy()
+            cache[j] = (rr,) + posizioni(S[j][1], len(rr)) + (S[j][0],)
         rho, a1, a2, kst = cache[j]
         rho_loc[i], _ = densita_locale(rho, a1, a2, x["pos"])
     print("  la densita' locale (r < %.0f, dallo stato salvato prima): media %.4e, da %.4e a %.4e" % (R_LOC, rho_loc.mean(), rho_loc.min(), rho_loc.max()))

@@ -36,7 +36,8 @@ def rapporti(ks, sub):
     """### `[(inizio, nascite, varianza/media)]` per finestra di `FIN`, con `FIN // sub` sottofinestre di `sub` tick."""
     out = []
     for a in range(K_INI, K_FIN, FIN):
-        c = np.histogram(ks, bins=np.arange(a, a + FIN + 1, sub))[0].astype(float)
+        dentro = ks[(ks >= a) & (ks < a + FIN)]    # ### [a, a + FIN): np.histogram chiude l'ultimo bin a destra (2ac0b4c0, K1)
+        c = np.histogram(dentro, bins=np.arange(a, a + FIN + 1, sub))[0].astype(float)
         m = float(c.mean())
         out.append((a, int(c.sum()), float(c.var()) / m if m > 0 else float("nan")))
     return out
