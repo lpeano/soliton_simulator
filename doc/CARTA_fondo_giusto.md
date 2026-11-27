@@ -758,3 +758,68 @@
       - **un secondo contatto entro `k 8000`** *(`60%`)*: a `k 6000` `d_p` e' `13.89` e scende;
       - **i contatti successivi arrivano piu' presto**, cioe' il periodo si accorcia, perche' i corpi perdono energia *(`50%`)*;
       - **la norma ferma** *(`95%`)*.
+
+
+## 3-unetvicies. [M1519] IL CORPO FUSO: LA CORSA LIBERA d1''' E IL PUNTO FISSO ACCOPPIATO 2M *(DECISIONE DI LUCA, 2026-11-27 `15:19`, arrivata dalla posta, `df8635b5`; letta alle `15:22`; scritta PRIMA del codice)* [[PROGETTO-MITOSI]]
+
+**Il punto 0 del mandato e' gia' fatto:** i pezzi 5 e 6 di [M1016] stanno in `fcd8bdc0` e `c0f56df5`, committati alle `15:10` e alle `15:13`, prima che il mandato arrivasse.
+
+**Due premesse del mandato non coincidono col referto `due_corpi_fondo_v7.txt`** *(numeri da uno script, pezzo 4)*:
+
+- da `k 6250` gli stati sono **`48`**, non `47`: `40` UNO, `2` ALTRO, `6` DUE;
+- **`R` della nube va da `6.477` a `13.613`**, non da `9` a `13`. L'errore di partenza era mio: nella relazione del pezzo 4 avevo scritto «fra `9` e `13`», e l'ho corretto nel pezzo 6.
+
+**Nessuna delle due differenze cambia le scelte di Luca.**
+
+### S1, LA CORSA LIBERA d1''' *(`corpo_fuso.py corsa`)*
+
+- **La partenza:** `M2034/coppia/d1L/stato_018000.npz`, per `36000` tick fino a `k 54000`, in un processo.
+  - Si salva lo stato ogni `250`, una riga della serie ogni `10` *(la stessa `misura` di d1': i baricentri delle meta' per `y`, le masse, `max|chi|`)*, e `omega` per meta' a ogni tick.
+  - **Dove:** `E:\soliton_simulator\controllo\M1519\d1T`.
+  - **La serie parziale** si riscrive ogni `2500` tick *(`serie_parziale.json`)*, cosi' una caduta non la perde.
+- **La via:** la ripresa della v9, cioe' i parametri e `centro_coppia` asseriti uguali al meta di d1L, lo stato in place, e `geo.U` riscritta da `campo_A` dopo la carica. Il ciclo e' `D.ciclo` della v2, col tick ASSOLUTO.
+- **La scelta di K0'' e' mia, dichiarata qui prima:** `stato_018250` non esiste ancora. K0'' si fa quindi sull'ultimo tratto gia' girato:
+  - **la prova:** da `d1L/stato_017750`, `250` tick;
+  - **DEVE (lo stato):** uguale AL BIT a `d1L/stato_018000` in ogni chiave;
+  - **DEVE (la serie):** la serie `17760..18000` uguale AL BIT a `d1L/serie.json`;
+  - **DEVE (omega):** `omega` dei tick `17751..18000` entro `|Δω|/ω < 1e-12`, il criterio di Luca delle `13:12`.
+  - **K0''-neg:** la stessa prova SENZA riscrivere `geo.U`. Lo stato DEVE essere diverso: e' la chiave trovata in B5, e il caso negativo dice che la prova la vede.
+- **Lo spazio:** `144` stati, circa `0.78 GB` *(d1L, `48` stati: `529 MB`)*. Su E: alle `15:25` restano liberi `164.1 GB`.
+
+### S2, IL PUNTO FISSO ACCOPPIATO 2M *(`corpo_fuso.py puntofisso`)*
+
+- **Lo schema di [M0414]** *(`fondo_puntofisso_chi_v2`)*, in un processo con `3` giri di `6000` tick.
+  - **Ogni tick:** `max|chi|` *(il massimo per finestra di `250`)* e `omega` di TUTTA la `psi` *(`np.vdot` sull'intero vettore, non per meta')*, piu' le somme progressive di `psi e^{i theta}` e di `chi`.
+  - **Ogni `100` tick:** `w` *(`FPC.w_di` sulla `rho` totale)* e la profondita' *(`FPC.profondita`: la media di `chi` entro `r < 4` dal baricentro)*.
+  - **P:** dagli ultimi due picchi di `max|chi|` *(`V2.periodo`, ripiego `2500`)*.
+  - **La partenza del giro dopo:**
+    - `psi` medio su `[6000 - P, 6000]`, riproiettato con `Q_K` *(`PF.trasforma`)*;
+    - `chi` medio sulla stessa finestra;
+    - `pi = 0`;
+    - il resto dallo stato a `k 6000` del giro.
+- **La partenza del giro 1:** `d1L/stato_018000.npz`, con `pi = 0`.
+- **Due scelte mie, dichiarate qui prima:**
+  - **(a) I parametri sono quelli di d1'** *(meta di d1L: `kappa 2.5289e-4` acceso, `c0`, `m0` e il resto)*, non quelli del giro 1 di [M0137]. Il corpo fuso e' nato con la fisica di d1', e K1 lo confronta con la corsa libera. **Il «kappa 0» del K1 del mandato lo leggo come «i parametri della corsa libera»:** con `kappa 0` il K1 non potrebbe uguagliare d1L.
+  - **(b) La riproiezione `Q_K` sulla massa 2M:** `Q_K` e' la stessa di [M0414] *(`M1658/c1_parti/Q_K.npz`)*, ed e' una proiezione cella per cella che non conosce la massa. La massa di riferimento e' la norma di `psi` di `d1L/stato_018000`, circa il doppio di un oggetto *(`2 x 995010.89`)*.
+- **I casi noti** *(`corpo_fuso.py noto`, insieme a K0'')*:
+  - **(K1'')** il ciclo del punto fisso *(con la sua carica e le sue misure, ma `pi` caricato com'e')*, da `d1L/stato_017750` per `250` tick, = `d1L/stato_018000` AL BIT in ogni chiave. **E' la corsa libera al bit;**
+  - **(K5)** e **(K6)** di `fondo_puntofisso_chi_v2`, rigirati: due picchi danno `P 2500`, un picco DEVE dare il ripiego, la media di un `chi` costante resta lo stesso `chi` al bit;
+  - **(KQ)** la riproiezione della `psi` di `stato_018000` sulla massa di riferimento ridà quella massa entro `1e-12` relativo. **DEVE FALLIRE** la stessa riproiezione chiesta con la massa di un oggetto solo *(`995010.89`)*: la massa deve venire diversa da quella di riferimento.
+- **Il lancio:** S1 e S2 in coda *(`coda_m1446.py` dalla cartella nuova, tetto `10`, freno `4 GB`)* solo se tutti i DEVE di `noto` passano. **Se uno fallisce: FERMO,** e la correzione e' un commit a se'.
+
+### S3, IL VERDETTO *(il giorno dopo; le soglie sono quelle di Luca, copiate qui)*
+
+- **ESISTE E CI ARRIVA:** C passa in S2, e la corsa libera arriva allo stesso `w` entro il `10%` prima di `k 54000`. Il tempo di rilassamento si dichiara.
+- **ESISTE MA NON CI ARRIVA:** C passa, la corsa libera no.
+- **SI SPEZZA:** A0 dice DUE o piu', con `d_p > 2 w`, stabilmente per oltre `5000` tick, in una delle due.
+- **COLLASSA:** il respiro cresce, oppure `max rho` resta sopra `5e4` per oltre `5000` tick con `R < 6`.
+- **ALTRO:** dichiarato.
+- **Nessun verdetto prima di S3.**
+
+### LE MIE PREVISIONI, prima del codice
+
+- **S1 non si spezza** *(`80%`)*: dopo `k 6250` `d_p` non supera mai `12.12`, e la nube tiene `R` sotto `14`.
+- **S1 non arriva a un `w` fermo entro il `10%` prima di `k 54000`** *(`55%`)*: fra `6250` e `18000` `max rho` varia di un fattore `8.6`, senza una tendenza che si veda.
+- **C passa in S2 entro `3` giri** *(`40%`)*. Se non passa, e' piu' probabile D *(`|chi|` fermo e il respiro che resta)*.
+- **Il `w` dell'oggetto 2M, se c'e', sta sotto `4.5`** *(`65%`)*: a `k 12000` e `18000` il nucleo dei png e' compatto.
+- **Il suo `omega` sta sotto `0.078`** *(`60%`)*: dopo `k 6000` `omega` per meta' e per finestra sta fra `0.071668` e `0.080687` *(contato con uno script dal referto)*, e la mediana e' piu' bassa di `0.0833`.

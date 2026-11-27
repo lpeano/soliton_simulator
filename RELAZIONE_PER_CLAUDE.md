@@ -28547,3 +28547,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
    - la deriva della norma nel vuoto puro.
 
 **FERMO:** i pezzi 4, 5 e 6 di [M1016] sono fatti; si attende Luca.
+
+
+### 2026-11-27 15:24 -- [M1519] LETTO DALLA POSTA; IL PUNTO 0 ERA GIA' FATTO; LA CARTA DEL CORPO FUSO (S1 LA CORSA LIBERA d1''', S2 IL PUNTO FISSO 2M), PRIMA DEL CODICE [[PROGETTO-MITOSI]]
+
+- **La posta:** `[M1519]`, DECISIONE DI LUCA delle `15:19` *(`df8635b5`)*, letta alle `15:22`. `git log --all --grep "[M1519"` trova solo il commit della posta: nessun pezzo era gia' fatto, a parte il punto 0.
+- **Il punto 0** *(i pezzi 5 e 6 di [M1016])* **era gia' fatto prima che il mandato arrivasse:** `fcd8bdc0` e `c0f56df5`.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, sez. `3-unetvicies`.
+  - **Due premesse del mandato sono corrette dal referto:** gli stati da `k 6250` sono `48`, non `47`; `R` va da `6.477` a `13.613`, non da `9` a `13`. Il secondo errore era mio, nella relazione del pezzo 4.
+  - **Le scelte mie, dichiarate prima del codice:**
+    - K0'' si fa da `d1L/stato_017750` a `018000`, perche' `018250` non esiste;
+    - S2 usa i parametri di d1', e il «kappa 0» del K1 del mandato lo leggo come «i parametri della corsa libera»;
+    - `Q_K` e' quella di [M0414], e la massa di riferimento e' la norma di `stato_018000`.
+  - **Le previsioni** stanno nella carta.
+- **Spazio su E:** `164.1 GB` liberi alle `15:25` *(`shutil.disk_usage`)*. S1 ne occupera' circa `0.78 GB`.
