@@ -28442,3 +28442,27 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il log** *(`E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`)*: `### 12000 tick in 6254 s`; `### stato_018000.npz ESISTE`. In `M2034/coppia/d1L` ci sono `98` file *(stati, le loro `.sha1`, la serie)*.
 - **Le ultime righe del log** *(y dei baricentri delle meta', non una misura dei picchi)*: a `k 18000` `y1 -4.6274`, `y2 +4.8689`, `max|chi| 1.9654e+02`. La lettura vera e' il pezzo 4, che viene subito dopo.
 - **Un mio errore di forma:** nel messaggio di `255ad66f` la lista FILE CAMBIATI e la riga Co-Authored-By sono scritte DUE volte. Le avevo messe nel corpo, e `committa3.py` le aggiunge da se'. La lista e' giusta in entrambe le copie; da questo commit il corpo non le contiene piu'.
+
+
+### 2026-11-27 15:04 -- [M1016] PEZZO 4: A0 SU 73 STATI (d1' E d1''): LA NORMA PASSA (5.485e-14); DA k 6250 LA COPPIA NON SI RISEPARA, UNO CON DUE ISOLATI [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v7.txt`, da `due_corpi_lettura_v6.py` *(sha1 dei byte `5188a75e`)* e `coppia_a0.py` *(sha1 dei byte `68f4bf68`)*, timbrati committati e puliti. Uscita `0`.
+- **DEVE, la norma:** il massimo di `|N(k)/N(0) - 1|` sui `73` stati e' `5.485e-14`, sotto `1e-9`: **PASSA**. La deriva cresce in modo regolare, da `-1.64e-14` a `k 6000` a `-5.48e-14` a `k 18000`.
+- **Fino a `k 6000`** i numeri sono gli stessi di `coppia_a0.txt`:
+  - DUE da `0` a `2750`, con `d_p` da `41.57` a `16.46`;
+  - il contatto da `3000` a `3500` *(ALTRO, UNO, ALTRO)*;
+  - DUE da `3750` a `6000`: `d_p` risale a `28.58` *(`k 4750`)* e riscende a `13.89`.
+- **Da `k 6250` a `k 18000`** *(d1'', `48` stati)*:
+  - **`40` sono UNO, `2` ALTRO, `6` DUE** *(contati con uno script dal referto)*. I DUE sono stati ISOLATI, ciascuno fra due stati non-DUE: `k 7250` *(`d_p 12.12`)*, `9500` *(`7.81`)*, `11250` *(`8.72`)*, `13750` *(`4.36`)*, `14500` *(`5.20`)*, `16750` *(`6.08`)*.
+  - **`d_p` non torna mai sopra `12.12`.** Nel tratto da `3750` a `6000` era salito a `28.58`.
+  - **`R` sta fra `6.48` e `13.61`.** A `k 0`, con i corpi a `41.6`, era `21.53`.
+  - **`d_m`** *(le meta' per `y`, dalla serie)* oscilla fra `5.77` e `16.64`. Il minimo nella serie e' `5.441`, a `k 6810`.
+  - **`max rho`** varia fra `6.21e3` e `5.36e4` *(un fattore `8.6`)*; il valore iniziale era `9.21e3`.
+- **Il conteggio dei contatti va letto con una riserva, ed e' mio.** Lo script ne conta `8`, con periodi `[3250, 1250, 2250, 1750, 2500, 750, 2250]`. Ma dopo `k 6250` un contatto finisce perche' un solo stato torna DUE, e lo stato seguente e' di nuovo UNO. **Con un campione ogni `250` tick, quei «contatti» non sono eventi distinti dimostrati:** possono essere un solo stato legato in cui A0 vede a volte un picco e a volte due *(la soglia del `30%` e la lisciatura di raggio `2` contro `d_p` fra `4` e `12`, cioe' circa `1-3 w`)*. **I periodi dopo il primo non hanno quindi un significato che io possa difendere.** La definizione era fissata nella carta prima dei dati, e la applico com'e'.
+- **Cio' che i numeri dicono, senza la parola «orbita»:**
+  - dopo il secondo avvicinamento *(`k 6250`)* i due corpi **non si allontanano piu'** oltre `d_p 12.1` e `d_m 16.64`, per `11750` tick;
+  - la nube ha `R` fra `9` e `13`, e il suo picco respira di un fattore fino a `8.6`.
+- **La differenza fra `d_p` e `d_m` negli stati DUE isolati e' grande:** a `k 13750` `d_p` vale `4.36` e `d_m` `13.44`. Le meta' per `y` portano code larghe, quindi `d_m` non e' la distanza fra i corpi *(la riserva di [M1107] 7)*. **Che cosa siano quelle code lo deve mostrare il video** *(il pezzo 5)*.
+- **`omega`, per finestra:** fra `0.0717` e `0.0825`, **senza una tendenza monotona**. Fra i due corpi c'e' uno scarto che cresce nel tempo: `0.000003` nella finestra `[0, 500]`, `0.001754` in `[17000, 17500]`. **Lo noto e non lo interpreto.**
+- **Il confronto con le previsioni** e' nel pezzo 6.
+- **Un mio errore, corretto prima del commit:** nella prima stesura avevo contato a occhio `41` UNO e `7` DUE, e copiato `16.47` e `6.40e3`. Il conto fatto con uno script sul referto da' `40`, `6`, `16.64` e `6.21e3`.
