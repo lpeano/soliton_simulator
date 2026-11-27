@@ -28804,3 +28804,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **S2:** gli stati a `k 0`, `250`, `500`, `750` e `1000` del giro `3r` sono uguali AL BIT a quelli di `giro_3`.
 - **L'avanzamento alle `19:39`:** S1 a `k 31250` *(`634 s` dalla partenza)*, S2 a `k 1000` del giro `3r` *(`452 s`)*.
 - **Il resto del pezzo 3** *(`corpo_fuso.txt`, il video v4)* e **il pezzo 4** *(la ricevuta)* vengono a corse chiuse.
+
+
+### 2026-11-27 20:14 -- [M1824] S2 CHIUSA: M1824_S2 FINITO ALLE 20:13:36, USCITA 0; IL GIRO 3r CHIUSO (25 STATI, giro.json, partenza_giro_4), 6000 TICK IN 2798 s; P 2500 DAL RIPIEGO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `2026-11-27T20:13:36 FINITO M1824_S2 (uscita 0)`. La riga CHIUSO di `m1446-M1824_S2` e' nel registro, in questo commit.
+- **Il log** *(`E:\soliton_simulator\controllo\M1446\log\M1824_S2.txt`)*: «`### giro 3: P 2500 (il ripiego 2500 (0 picchi)); i picchi a k []; la finestra [3500, 6000]; 6000 tick in 2798 s`», poi «`### il giro 3: CHIUSO`».
+- **In `M1519/puntofisso_2M/giro_3r`:** `25` stati, `giro.json` e `partenza_giro_4.npz`, ciascuno col suo `.sha1`.
+- **I DEVE dentro il giro:** a `k 0, 250, 500, 750, 1000` lo stato e' uguale AL BIT a `giro_3`.
+- **La lettura** *(C fra `2` e `3r`, D, A0 sui giri)* **e' nel referto `corpo_fuso.txt`**, a S1 chiusa, come fissato nella carta.
+- **S1 alle `20:14`** e' a `k 35750`, `2736 s` dalla partenza.
