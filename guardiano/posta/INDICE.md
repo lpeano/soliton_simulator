@@ -11,4 +11,5 @@
 | 2026-11-26_2034_M2034.md | DECISIONE DI LUCA (2026-11-26 20:34) | eseguito: A (vuoto non svuotato, corrente radiale), B (corse chiuse; criterio C impossibile: 0 finestre; d2' non fermo 1,50), D1 (MITOSI da mitosi_rami.py), D2 | lapse-u 6041f473, 511a1ec9; mitosi a7ba237f |
 | 2026-11-26_2048_M2048.md | DECISIONE DI LUCA (2026-11-26 20:48) | da eseguire (lettura a costo zero, non ferma B): chi contro rho_phi e contro l'orologio locale di phi sul giro 3 | — |
 | 2026-11-26_2053_M2053.md | DECISIONE DI LUCA (2026-11-26 20:53) | eseguito: il vuoto non propaga (banda piatta, c_phi ~ 0): DUE LUCI; l'anisotropia è rumore | lapse-u 12d3d40b |
-| 2026-11-27_0024_M0024.md | DECISIONE DI LUCA (2026-11-27 00:24) | da eseguire: C' (w sul periodo), i numeri d(k) sempre, D2' (3x la deriva di d2'); K4' assoluto e il vuoto puro; la soglia chiusa | — |
+| 2026-11-27_0024_M0024.md | DECISIONE DI LUCA (2026-11-27 00:24) | eseguito 5/5: C' 12 valide; d1' 41,57 -> 9,62 -> 27,9 -> 21,1 (VERSO), d2' +1,50 VIA; D2' mal scritto (n.257); K4' sotto il pavimento (n.258); soglia chiusa | lapse-u 6df1aa60, b4a24340; mitosi c09d2906 |
+| 2026-11-27_0106_M0106.md | DECISIONE DI LUCA (2026-11-27 01:06) | da eseguire: D2'' (stesso intervallo, verso libero) sugli stessi stati; K4'' sulla norma e la corsa del vuoto puro | — |
