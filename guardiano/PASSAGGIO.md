@@ -51,3 +51,6 @@ Alla ripresa, nell'ordine:
 4. Poi [M1519] pezzi 3-4: le letture di S1 e S2, il verdetto S3 (esiste e ci arriva / esiste ma non ci arriva / si spezza / collassa), il video v4, la ricevuta.
 5. In attesa (idee di oggi, da mandato): il corpo fuso con la mitosi accesa (si raffredda facendo spazio? previsione 60%); il costo di un nodo lungo la fiammata (potenziale chimico dello spazio, a costo zero); la nascita nel vuoto CON il lapse; N come vincolo di Poisson.
 Post Itaca pronti oggi: «Il numero del mondo» (con la correzione sul reticolo triangolare e la riga sul toro), «Due filmati per chi mi chiede cosa gira dentro» (camminata.mp4, spinori.mp4), «La freccia e la tassa».
+
+## 2026-11-27 22:05 — la pulizia
+La coda aperta e' in guardiano/CODA.md (20 voci vive, 10 chiuse con il perche'). Il TODO di [M0951] (doc/TODO_prossima_sessione_2026-11-27.md) e' superato da CODA.md: CC lo allinea nella prossima lettera. Il repo principale e' su E:/soliton_lavoro/soliton_simulator; i worktree su E:; C: mai. La stella polare nel progetto ha H5-H11 e le previsioni della settimana.
