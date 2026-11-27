@@ -28877,3 +28877,62 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **k 6000:** due picchi a `d_p 13.89`, uno sopra l'altro lungo `y`, dentro un solo pozzo di `chi`, allungato;
   - **k 54000:** un corpo solo, con `max rho 2.576e+04` e `R 12.36`. Intorno ci sono ali deboli e il pozzo di `chi` e' quasi circolare. **Il corpo non sta al centro della scatola:** e' spostato a sinistra e in su rispetto al centro del pozzo, come lo si vede nel pannello `chi`.
 - **La correzione del giro:** il primo tentativo di commit del verdetto, alle 22:03, e' stato RIFIUTATO da `H-NON-TRACCIATI`. Il video stava scrivendo `anima_coppia_v4.txt`, che non era ancora tracciato. Ho atteso la fine del video e ho committato tutto insieme.
+
+
+### 2026-11-27 22:08 -- [M1519] PEZZO 4, LA RICEVUTA, CON LE PREVISIONI CONFRONTATE; E LE RICEVUTE DI [M1824] E DELLA DECISIONE DELLE 18:59 [[PROGETTO-MITOSI]]
+
+**LE RICEVUTE:**
+
+| mandato | esito | data e ora | commit e note |
+|---|---|---|---|
+| **[M1519]** | **ESEGUITO** | 2026-11-27 22:08 | pezzi 0-4 fatti; il verdetto S3 e' **ALTRO, con D** (`51679e0a`) |
+| **[M1824]** | **ESEGUITO** | 2026-11-27 21:58 | S1 e S2 riprese e chiuse con uscita 0 (`e3863b32` e `bca65774`); tutti i DEVE al bit passati |
+| **DECISIONE DI LUCA 18:59** | **ESEGUITO**, salvo una parte del punto 2 | | vedi qui sotto |
+
+**I punti della decisione delle 18:59:**
+
+1. **la carta [M1824]:** committata e pushata;
+2. **il repository principale su E:** ESEGUITO. **Manca solo il rename di `C:\Users\lpeano\soliton_simulator` in `_OLD`:** Permission denied, perche' un processo tiene aperta la cartella. Non l'ho aggirato e **resta a Luca**;
+3. **la soglia di 8 GB:** rispettata a ogni lancio;
+4. **[M1824]:** fatto;
+5. **[M1519] pezzi 3 e 4:** fatti.
+
+**LE PREVISIONI DEL GUARDIANO** *(posta [M1519], `df8635b5`)*:
+
+| | previsione | esito |
+|---|---|---|
+| **P1** | ESISTE E CI ARRIVA `50%`, SI SPEZZA `30%`, COLLASSA `20%` | **sbagliata in tutte e tre le voci:** il verdetto e' ALTRO, che la previsione non contemplava |
+| **P2** | se si assesta, il rilassamento dura piu' di 20000 tick (`60%`) | **non valutabile:** C non passa, quindi il tempo di rilassamento della regola non e' definito |
+| **P3** | l'oggetto 2M ha `w` fra 3.5 e 4.5 e il pozzo fra -170 e -220 (`65%`) | **fuori, tutti e due di poco:** `w` medio `3.3679` (giro 3r) e `3.2767` (giro 2); profondita' `-221.3351` e `-224.9944`. Con la riserva che C non passa |
+| **P4** | `omega` dell'oggetto 2M sotto 0.078 (`55%`) | **si':** `0.069081` al giro 3r, `0.071003` al giro 2 |
+
+Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende sotto `0.10` dalla finestra `[23750, 26250]`, cioe' `17500` tick dopo il secondo contatto. **Non e' il criterio della regola.**
+
+**LE MIE PREVISIONI DELLA CARTA [M1519]:**
+
+| previsione | probabilita' | esito |
+|---|---|---|
+| S1 non si spezza | `80%` | **si':** la fila piu' lunga e' di 12 stati |
+| S1 non arriva a un `w` fermo entro il 10% prima di `k 54000` | `55%` | **non decidibile per la regola S3**, che richiede C. **Come lettura sembra SBAGLIATA:** da `k 26250` il `w` medio per finestra sta fra `3.64` e `3.89` |
+| C passa entro 3 giri | `40%` | **no**; poi «e' piu' probabile D»: **si', D vale** |
+| `w` dell'oggetto 2M sotto 4.5 | `65%` | **si':** `3.3679` |
+| il suo `omega` sotto 0.078 | `60%` | **si':** `0.069081` |
+
+**LE MIE PREVISIONI DELLA CARTA DEL PEZZO 3** sono nel paragrafo del verdetto (`51679e0a`): C fra 2 e 3r no; D si'; ALTRO si'; `H` entro l'1% si', di poco (`-0.97%`).
+
+**CHE COSA RESTA APERTO** *(per Luca: sono domande, non decisioni mie)*:
+
+1. **Il respiro di `w` nel punto fisso 2M risale** da `0.3877` (giro 2) a `0.5819` (giro 3r), mentre `max|chi|` resta fermo entro il `2.5%`. **La definizione C (respiro sotto 0.10) non sembra raggiungibile per iterazione.**
+   - **Chiusura:** un giro 4 da `partenza_giro_4`, che esiste gia', oppure una definizione diversa da Luca.
+2. **La corsa libera S1 sembra assestata:**
+   - il respiro di `R` sta a `0.04..0.12` da `k 23750`;
+   - il `w` per finestra sta a `3.64..3.89`;
+   - questo `w` sta circa l'11% sopra il `w` di S2, e lo scarto l'ho calcolato a mano, non con lo script.
+
+   Il confronto vero richiede una regola che non dipenda da C.
+   - **Chiusura:** la decide Luca.
+3. **`H` scende di circa l'1% in 36000 tick, oscillando di `±5e-03`.** Lo strumento non e' sigillato su questa scena.
+   - **Chiusura:** un sigillo di `energia_chi_v2` sulla scena della ripresa, se Luca lo vuole.
+4. **Su C: restano** il vecchio repository (il rename e' da fare), `C:\Users\lpeano\solitonsimulator` e `C:\Users\lpeano\wt_t1`. **Sono a Luca.**
+
+**FERMO**, come dice il punto 5.
