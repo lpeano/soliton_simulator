@@ -710,3 +710,4 @@
       - **un processo solo, dalla coda** *(`coda_m1446.py`, il tetto `10`, il freno `4 GB`)*.
     - **IL TEMPO, stimato** dalla corsa d1' *(`6000` tick in `4896 s`)*: circa `9800 s`, cioe' **2.7 ore**.
     - **LA MIA PREVISIONE:** K0' passa al bit *(`85%`)*; K0'-neg fallisce come deve *(`95%`)*.
+    - **LA v8** *(scritta alle `10:32`, dopo la caduta della v7, `0cc00fab`, e PRIMA della sua corsa)*: `Ripresa.gira` chiama **`D.ciclo`, cioe' il ciclo della v2**, quello con cui e' girata d1' *(il nucleo preso prima della scena)*, con il tick portato ad assoluto nel `dopo`. **K0', K0'-neg e la corsa restano quelli della v7**, con le stesse soglie e la stessa cartella.
