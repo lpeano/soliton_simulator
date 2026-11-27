@@ -723,3 +723,9 @@
     - **applicato ai numeri gia' misurati** *(`k0_omega.txt`, `69fcd7ce`)*: il massimo relativo e' `7.456e-15` *(corpo 1)* e `6.756e-15` *(corpo 2)*, **sotto `1e-12`. K0' PASSA:** lo stato al bit in `11` chiavi su `11`, la serie al bit, `omega` entro `1e-12`;
     - **il referto `due_corpi_fondo_v9_noto.txt` resta com'e'** *(il DEVE vecchio, «AL BIT», FALLISCE)*: il verdetto col criterio nuovo e' questo. **Lo script non si riscrive;**
     - **la corsa d1''** parte con la v9 *(`due_corpi_fondo_v9.py corsa`)*, dalla coda, come `M1214_d1L`.
+  - **### [M1214] I DUE COLLAUDI CON UN REPOSITORY GIT TEMPORANEO, SU C:** *(DECISIONE DI LUCA, 2026-11-27 `13:12`, punto 2; scritto PRIMA della prova)*:
+    - **`git --version`** risponde **`git version 2.45.1.windows.1`**, cioe' **sotto la `2.46`**. **Il jolly in `safe.directory` non si aggiunge** *(il ramo «altrimenti» della decisione)*;
+    - **i due collaudi** sono `primo_ordine/_collauda_mb1.py` *(`M-B1`)* e `csv/_stage.py --collaudo` *(lo stage)*. **Girano da soli, nel worktree della mitosi, con `TMP` e `TEMP` su `C:\Users\lpeano\AppData\Local\Temp`**, cosi' i loro repository temporanei nascono su C:. **Il codice non si tocca:** `_misura_mb1.py` sta in `primo_ordine/`;
+    - **la suite intera si rifa' con `TMP` su E:.** Restituira' `65/67`, coi due che falliscono per la ragione nota. **Il verdetto `67/67`** = i `65` della suite su E: piu' i `2` da soli su C:;
+    - **il caso che DEVE fallire c'e' gia':** sono gli stessi due collaudi con `TMP` su E:, che sono falliti alle `12:36`;
+    - **dopo**, si contano le cartelle `repo_*`, `st_*`, `stage_*` e i worktree temporanei rimasti su C:. **DEVE: `0` nuove.**
