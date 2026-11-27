@@ -28191,3 +28191,30 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Gia' fatto e non bloccato:** `TMP` e `TEMP` su E: per le corse e per i commit, gia' dalle `10:52` *(`committa3.py`, per ora nella cartella `E:\soliton_simulator\tmp_M1016`)*. **Passano a `E:\soliton_lavoro\tmp`** col resto dello spostamento.
 - **LA PARTE B** *(la chiave non salvata)* **non dipende dallo spostamento**, ma il mandato mette A prima di B. **Aspetto la decisione su `safe.directory` prima di tutte e due.**
 - **FERMO.**
+
+
+### 2026-11-27 11:50 -- [M1107] DECISIONE DI LUCA (11:44, in chat): LE DUE ECCEZIONI safe.directory AGGIUNTE; A2 PER LAPSE-U: IL WORKTREE RIFATTO IN E:\soliton_lavoro\wt_lapse_u, db/ UGUALE (549 FILE, LO STESSO sha1) [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `11:44`)*:
+  1. aggiungere a `git config --global safe.directory` i due percorsi, **uno per riga, senza il jolly**;
+  2. fare B5 *(la chiave non salvata)* **subito, in parallelo ad A**, con lo stesso tetto *(due tentativi, poi B6)*.
+- **I COMANDI** *(`11:44:06`)*:
+
+  ```
+  git config --global --add safe.directory E:/soliton_lavoro/wt_lapse_u
+  git config --global --add safe.directory E:/soliton_lavoro/wt_mitosi
+  ```
+
+  **L'uscita di `git config --global --get-all safe.directory`** *(salvata in `E:\soliton_lavoro\safe_directory_1144.txt`)*:
+  - `35` righe;
+  - **nessun `*`;**
+  - le ultime quattro: `E:/kbase`, `E:/kbase`, `E:/soliton_lavoro/wt_lapse_u`, `E:/soliton_lavoro/wt_mitosi`. **`E:/kbase` c'era gia', due volte; non e' mio e non lo tocco.**
+- **A2, LAPSE-U:**
+  1. il worktree vecchio era pulito *(`git status --porcelain` vuoto)*;
+  2. **i dati ignorati** *(`db/` e `db_era2/stato_0bc547638e.npz`)* sono stati copiati in `E:\soliton_lavoro\riserva_lapse_u`. Il manifesto sha1 della riserva e quello del vecchio coincidono *(`549` file)*;
+  3. `git worktree remove C:/Users/lpeano/wt_lapse_u` *(uscita `0`; la cartella non esiste piu')*;
+  4. `git worktree add E:/soliton_lavoro/wt_lapse_u lapse-u` *(uscita `0`, `5090` file, HEAD `576c2687`)*;
+  5. i dati ignorati sono tornati nel worktree nuovo. **Il manifesto nuovo e' uguale a quello vecchio** *(`cmp`)*;
+  6. `core.hooksPath` vale `.githooks` *(e' una configurazione condivisa, quindi i presidi ci sono)*. **Questo commit e' il primo dal worktree nuovo.**
+- **I manifesti** sono in `E:\soliton_lavoro\manifesto_lapse_u_{vecchio,riserva,nuovo}.txt`.
+- **Poi:** A2 per la mitosi; B5 parte dal worktree nuovo di lapse-u.
