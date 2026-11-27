@@ -79,3 +79,19 @@
   - **a `pi`:** cosa misurata. Alla prima nascita `2094` archi sono in attesa sopra la soglia; tre nascite *(k `35976-35978`)*; alla quarta il triangolo `(12537, 12723, 34599)` e' degenere e la corsa si ferma *(uscita `1`)*. **«Si ingolfa» e' una lettura giusta del dato;**
   - **a `4 pi`: «non nasce nulla in `6000` tick» NON E' MISURATO.** La corsa si e' fermata **alla partenza** *(k `35976`, uscita `1`)* su «lo stato del tronco NON ha un arco scattato», e **non ha fatto nessun tick**. Il fatto misurato e' piu' debole: **nello stato in cui a `2 pi` nasce il primo nodo, a `4 pi` nessun arco ha ancora superato la soglia.** Quanto tardi arriverebbe la prima nascita a `4 pi`, e se arriverebbe, non lo sappiamo;
   - **quindi la frase di Luca sta qui come DECISIONE, e la sua seconda meta' come NON MISURATA.** Come conclusione di fisica, «`2 pi` strutturale» poggia per ora sulla sola parte a `pi`.
+
+## K4'' E LA CORSA DEL VUOTO PURO *([M0106], DECISIONE DI LUCA, 2026-11-27 `01:06`, arrivata dalla posta, `4c973b3a`; scritta PRIMA di `mitosi_vuoto_v4.py`)*
+
+- **L'ERRORE n.258 DEL GUARDIANO:** K4' aveva una soglia sotto il pavimento dell'arrotondamento *(`ca8ddfeb`)*.
+- **K4'', LA SCELTA DI LUCA:**
+  - il criterio e' la norma di `phi`, ferma entro `1e-9` in `250` tick *(gia' misurata: `8.99e-14`)*;
+  - `|Delta H|` si stampa con `H_rif`, e non blocca;
+  - poi la corsa del vuoto puro con le nascite accese: `6000` tick, stati ogni `250`, in coda.
+- **LE MIE SCELTE, dichiarate prima:**
+  - **K4''** si applica alle uscite della corsa K4 *(`M0237/vuoto_v2_noto`)*, come in K4';
+  - **la corsa** e' `mitosi_vuoto_v2.py corsa`, invariata *(il modo `mitosi`, da `35976` a `41976`, in `M0237/vuoto_v2`)*: va in coda sul lanciatore di lapse-u, con il percorso assoluto;
+  - **il referto** `mitosi_vuoto_v3.txt` *(il nome lo da' il mandato)* nasce da `mitosi_vuoto_v4.py lettura`: le nascite, sì o no e a quali `k`; la norma di ogni stato; `H(k)`;
+  - **la densita' locale alla prima nascita**, se ce n'e' una, si legge con uno script a parte, dopo, perche' dipende da dove nasce.
+- **LE PREVISIONI:**
+  - **del guardiano:** P2 *(`60%`)* non nasce nulla in `6000` tick; P3 *(`55%`)* se nasce qualcosa, nasce dopo `k 3000` e sul bordo del toro;
+  - **le mie:** K4'' passa *(gia' misurato)*. P2 al `75%`: il vuoto fresco e' un autostato, quindi le fasi degli archi non dovrebbero accumularsi fino a `2 pi`.
