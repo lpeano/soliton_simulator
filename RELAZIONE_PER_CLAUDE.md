@@ -29154,3 +29154,22 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
   - **L'errore e' mio:** `np.histogram` chiude l'ultima sottofinestra a destra, quindi una nascita esattamente a `a + 250` si conta nella finestra `a` **e** nella successiva. **Lo stesso errore tocca i dati**, e i numeri di A3 di questo giro non valgono.
   - **La cura:** si contano solo le nascite in `[a, a + 250)` prima dell'istogramma. K2 e K3 passavano anche cosi'.
   - **I numeri sbagliati restano nel referto di questo commit**, come reperto.
+
+
+### 2026-11-27 23:45 -- [M2245-27] A3 FATTO: IL RITMO E' LISCIO (0 FINESTRE SU 39 SOPRA 2); A1 IL SECONDO GIRO: K2b FALLISCE PER UN ERRORE MIO NEL DISEGNO DEL CASO NOTO [[PROGETTO-MITOSI]]
+
+- **A3** (`mitosi_ritmo.txt`, con la cura `f3d5085f`):
+  - **i 3 casi noti passano:** le nascite regolari danno `0`; Poisson da' una mediana di `0.886`, cioe' LISCIO; i pacchetti da' `4.250`, cioe' A GRADINI;
+  - **IL VERDETTO, con le sottofinestre di 25: LISCIO.** Il rapporto e' sopra 2 in **0** finestre e fra 0.5 e 2 in **34**, su 39 finestre con almeno 2 nascite;
+  - con le sottofinestre di 10 e di 50 resta LISCIO, cioe' sopra 2 in 0 finestre in entrambi i casi;
+  - **su tutta la fiammata,** con finestre di 250: media `13.564`, varianza/media `1.587`. Quel rapporto sopra 1 viene dal **calo** delle nascite nel tempo, non da pacchetti;
+  - gli intervalli fra nascite: medio `18.57`, mediano `12.0`, e **0 nascite nello stesso tick su 537 intervalli**; il coefficiente di variazione e' `1.040`, come per un processo di Poisson.
+- **A1** (il secondo giro, `mitosi_costo_nodo.txt`):
+  - **K1, K3 e K4 passano.** K4 e' il DEVE nuovo: le posizioni dei primi 34597 nodi sono uguali AL BIT fra `stato_36000` e `stato_40000`;
+  - **K2a passa:** i dati costanti con rumore danno COSTANTE;
+  - **K2b FALLISCE:** con una pendenza nota di `0.01` si ritrova `+9.687e-03 +- 1.38e-04`, cioe' **2.3 sigma**;
+  - **l'errore e' mio, nel disegno del caso:** un test a 2 sigma su **una sola** realizzazione del rumore fallisce per costruzione circa 1 volta su 20, quindi non e' un caso che DEVE passare;
+  - **la cura, scritta qui prima di farla:**
+    - K2b **senza rumore**: la pendenza si ritrova entro `1e-9` relativo;
+    - **K2c, la copertura:** su 200 semi, la frazione di fit con `|b - b_vero| < 2 sigma` sta fra 0.90 e 0.99. Cosi' si prova che la `sigma` del fit e' giusta;
+  - **i numeri dei dati di questo giro** (`DH` contro la densita' locale: `b -2.016 +- 0.289` per deviazione standard di `x`, `c +0.546 +- 0.216`, cioe' ALTRO) **sono gia' nel referto**, ma **il verdetto si scrive solo dopo che i casi noti passano tutti.**

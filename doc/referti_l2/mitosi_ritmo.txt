@@ -1,10 +1,10 @@
 [TIMBRO] mitosi_dati.py  sha1-BYTE 3b142d63  committato e pulito
-[TIMBRO] mitosi_costo_nodo.py  sha1-BYTE 7eb32d05  committato e pulito
-[TIMBRO] mitosi_ritmo.py  sha1-BYTE 63a30684  committato e pulito
+[TIMBRO] mitosi_costo_nodo.py  sha1-BYTE 552c0345  committato e pulito
+[TIMBRO] mitosi_ritmo.py  sha1-BYTE 8b8c35d0  committato e pulito
 ==================================================================================================================================
 [M2245-27] A3, IL RITMO DELLE NASCITE (la carta doc/CARTA_mitosi.md, A3): varianza/media per finestra di 250, sottofinestre di 25
 ==================================================================================================================================
-  DEVE: (K1) una nascita ogni 25 tick: rapporto 0 in ogni finestra                                           ### FALLISCE max 8.182e-02
+  DEVE: (K1) una nascita ogni 25 tick: rapporto 0 in ogni finestra                                           PASSA max 0.000e+00
   DEVE: (K2) Poisson (538 nascite uniformi, seme 20261127): rapporto mediano fra 0.5 e 2                     PASSA mediana 0.886; il verdetto LISCIO
   DEVE: (K3) pacchetti di 5 nascite nello stesso tick: rapporto mediano sopra 2                              PASSA mediana 4.250; il verdetto A GRADINI
 ----------------------------------------------------------------------------------------------------------------------------------
@@ -19,10 +19,10 @@
   [37750, 38000)    17           0.791                 0.476                    0.541
   [38000, 38250)    18           0.613                 1.089                    1.289
   [38250, 38500)    17           1.026                 1.182                    1.012
-  [38500, 38750)    21           1.112                 1.757                    2.038
+  [38500, 38750)    20           1.100                 1.700                    2.000
   [38750, 39000)    17           0.673                 0.476                    0.071
   [39000, 39250)    12           1.187                 0.633                    0.433
-  [39250, 39500)    17           1.261                 1.065                    1.129
+  [39250, 39500)    16           1.235                 0.900                    0.800
   [39500, 39750)    15           0.800                 0.700                    0.533
   [39750, 40000)    13           0.942                 1.085                    0.708
   [40000, 40250)    15           0.933                 0.833                    0.667
@@ -37,7 +37,7 @@
   [42250, 42500)     5           0.800                 0.900                    0.400
   [42500, 42750)    11           1.105                 0.809                    0.982
   [42750, 43000)    21           1.112                 0.710                    0.800
-  [43000, 43250)    10           0.800                 1.200                    0.400
+  [43000, 43250)     9           0.862                 1.433                    0.756
   [43250, 43500)    13           0.788                 0.777                    1.015
   [43500, 43750)     4           0.840                 1.100                    0.700
   [43750, 44000)    13           0.942                 1.238                    0.400
@@ -53,7 +53,7 @@
   gli intervalli fra nascite: medio 18.57, mediano 12.0; uguali a 0 (stesso tick) 0 su 537; il coefficiente di variazione 1.040
 ----------------------------------------------------------------------------------------------------------------------------------
   sensibilita', sottofinestre di 10: LISCIO (sopra 2 in 0, fra 0.5 e 2 in 38, su 39)
-  sensibilita', sottofinestre di 50: LISCIO (sopra 2 in 1, fra 0.5 e 2 in 28, su 39)
+  sensibilita', sottofinestre di 50: LISCIO (sopra 2 in 0, fra 0.5 e 2 in 30, su 39)
 ### IL VERDETTO (sottofinestre di 25): LISCIO -- sopra 2 in 0 finestre, fra 0.5 e 2 in 34, su 39 con almeno 2 nascite
-### 3 DEVE: 2 PASSANO, 1 FALLISCONO ['(K1) una nascita ogni 25 tick: rapporto 0 in ogni finestra']
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
 ==================================================================================================================================
