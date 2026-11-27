@@ -729,3 +729,32 @@
     - **la suite intera si rifa' con `TMP` su E:.** Restituira' `65/67`, coi due che falliscono per la ragione nota. **Il verdetto `67/67`** = i `65` della suite su E: piu' i `2` da soli su C:;
     - **il caso che DEVE fallire c'e' gia':** sono gli stessi due collaudi con `TMP` su E:, che sono falliti alle `12:36`;
     - **dopo**, si contano le cartelle `repo_*`, `st_*`, `stage_*` e i worktree temporanei rimasti su C:. **DEVE: `0` nuove.**
+  - **### [M1016] PEZZI 4 E 5, LA CARTA** *(scritta PRIMA della chiusura di d1'', `M1214_d1L`; le scelte di Luca: [M1016] S1-S4; [M1107] 7, «la distanza buona e' quella FRA I PICCHI di A0, le due si stampano entrambe, il verdetto usa i picchi»)*:
+    - **GLI STATI:** `73`, da `k 0` a `k 18000` ogni `250`. Quelli fino a `6000` vengono da `M2034/coppia/d1`, quelli da `6250` da `M2034/coppia/d1L`.
+    - **PEZZO 4** *(`due_corpi_lettura_v6.py` -> `due_corpi_fondo_v7.txt`)*:
+      - **(i) A0 su tutti i `73` stati**, con `coppia_a0.a0` *(la stessa soglia del `30%`, la stessa lisciatura)*. **DEVE:** la norma ferma entro `1e-9` relativo su tutti i `73`;
+      - **(ii) per ogni stato:**
+        - il verdetto *(DUE, UNO o ALTRO)*;
+        - **`d_p`**, la distanza fra i due picchi *(solo se DUE)*;
+        - **`d_m`**, la distanza fra i baricentri delle meta' dalla serie *(sempre, per confronto)*;
+        - `R`, `max rho`;
+        - **`w` di ciascun corpo** *(`FPC.w_di` sulla `rho` della sua meta': `y < 0` o `y >= 0` dal `centro_coppia`; solo se DUE)*;
+        - **`chi` ai picchi** *(la media di `chi` sui nodi entro `r < 4` dal nodo di ciascun picco; solo se DUE)*;
+      - **(iii) i contatti:** i tratti consecutivi di stati non-DUE *(UNO o ALTRO)*, ciascuno con l'inizio, la fine e il minimo di `R`;
+      - **(iv) i minimi di `d_p`:** uno stato DUE con `d_p` strettamente minore dei due stati vicini, anch'essi DUE. **Un contatto conta come un minimo non misurabile coi picchi.** Per ciascun contatto si stampano `d_p` dell'ultimo stato DUE prima e del primo DUE dopo, e il minimo di `d_m` della serie *(ogni `10` tick)* nel suo intervallo, **con la riserva gia' nota: sotto circa `2 w` le meta' non separano;**
+      - **(v) il periodo:** la distanza in tick fra l'inizio di un contatto e l'inizio del successivo, se ce ne sono almeno due;
+      - **(vi) la tabella per finestra di `500`** *(`36` finestre)*:
+        - `d_p` medio sugli stati DUE della finestra, oppure «contatto»;
+        - `omega` medio di ciascun corpo dalla serie per tick. **Per d1'' l'indice `i` di `omega` e' il tick `6001 + i`**, quindi la finestra `[k0, k1)` prende gli indici `[k0 - 6000, k1 - 6000)`;
+        - `w` medio e `chi` ai picchi;
+      - **(vii) il verdetto S4:** su ogni tratto DUE, il verso *(`d_p` sale o scende)*, e se c'e' un secondo contatto o un secondo minimo. **Nessuna parola su «orbita» oltre a cio' che i numeri dicono.**
+    - **PEZZO 5** *(`anima_coppia_v3.py` -> `anima_coppia_v3.mp4`)*:
+      - `73` quadri a `6 fps` *(circa `12 s`)*, **tre pannelli:** `rho_psi` a scala FISSA *(da `0` al massimo su tutti i quadri)*, `rho_psi` a scala PER QUADRO *(da `0` al massimo dello stato)*, `chi` a scala fissa con `12` curve di livello;
+      - `tripcolor` in `gouraud` sui nodi del riquadro di lato `120`, centrato sul baricentro totale di `rho_psi` dello stato *(non sui baricentri delle meta')*; un `+` su ciascun picco di A0;
+      - **in sovrimpressione:** `k`, `d_p` se DUE *(altrimenti «un corpo» o «contatto (n picchi)»)*, la norma, `max rho` e `R`;
+      - **il formato:** `1440x480` *(`figsize 18x6`, `dpi 80`)*, `libx264` `yuv420p`, sotto i `5 MB`, altrimenti `1080x360`;
+      - **i controlli:** i png a `k 0`, `3250`, `6000`, `12000` e `18000`, **guardati prima del commit.**
+    - **LE PREVISIONI, mie, prima di vedere d1'':**
+      - **un secondo contatto entro `k 8000`** *(`60%`)*: a `k 6000` `d_p` e' `13.89` e scende;
+      - **i contatti successivi arrivano piu' presto**, cioe' il periodo si accorcia, perche' i corpi perdono energia *(`50%`)*;
+      - **la norma ferma** *(`95%`)*.

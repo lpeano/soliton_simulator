@@ -28420,3 +28420,17 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - i vecchi `C:\Users\lpeano\wt_lapse_u` e `C:\Users\lpeano\wt_mitosi` sono rimossi.
 - **A3 E' CHIUSO:** nessuna cartella temporanea nuova su C:, ne' dopo la suite su E: ne' dopo i due collaudi su C: *(che puliscono da se')*.
 - **Resta:** la corsa d1'' *(`M1214_d1L`, dalle `13:14`)*, poi i pezzi 4, 5 e 6 di [M1016].
+
+
+### 2026-11-27 13:44 -- [M1016] PEZZI 4 E 5, LA CARTA E GLI SCRIPT, PRIMA DELLA CHIUSURA DI d1'' (due_corpi_lettura_v6.py, anima_coppia_v3.py) [[PROGETTO-MITOSI]]
+
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M1016], «PEZZI 4 E 5».
+  - **Il verdetto usa la distanza fra i picchi** *(`d_p`, [M1107] 7)*; quella fra le meta' *(`d_m`)* si stampa per confronto.
+  - **I contatti** sono i tratti di stati non-DUE. **I minimi** sono gli stati DUE con `d_p` minore dei due vicini. **Il periodo** e' la distanza fra gli inizi di due contatti.
+  - La tabella e' per finestra di `500` *(`36` finestre)*, con `d_p`, `omega`, `w` e `chi` ai picchi.
+  - **Il video v3:** `73` quadri a `6 fps`, con tre pannelli *(`rho_psi` a scala fissa, `rho_psi` a scala per quadro, `chi`)*.
+- **Gli script:** `doc/referti_l2/due_corpi_lettura_v6.py` *(-> `due_corpi_fondo_v7.txt`)* e `doc/referti_l2/anima_coppia_v3.py` *(-> `anima_coppia_v3.mp4`)*. **Si committano adesso, prima che esistano i dati di d1''.**
+- **Le previsioni, mie:**
+  - un secondo contatto entro `k 8000` *(`60%`)*;
+  - i contatti si avvicinano nel tempo *(`50%`)*;
+  - la norma ferma *(`95%`)*.
