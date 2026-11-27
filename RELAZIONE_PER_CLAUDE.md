@@ -28161,3 +28161,33 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(b)** la corsa lunga senza ripresa: d1' rifatta da `k 0` fino a `k 18000`, in un processo solo *(circa `4` ore)*. **Le prime `6000` devono riprodurre d1' al bit**, ed e' un caso noto gratuito.
   - **(b) non dipende da (a)**, ed e' la via piu' sicura per avere d1'' oggi.
 - **FERMO.**
+
+
+### 2026-11-27 11:20 -- [M1107] RICEVUTO (DECISIONE DI LUCA 11:07, dalla posta 2980d716, letto alle 11:18; in chat non mi era arrivato); A1, LA DICHIARAZIONE PRIMA DI MUOVERE: LA CARTELLA E:\soliton_lavoro; E UN OSTACOLO: SU E: GIT RIFIUTA IL WORKTREE (DUBIOUS OWNERSHIP) [[PROGETTO-MITOSI]]
+
+- **Il mandato, parte A:** spostare il lavoro su E:. **Parte B:** la chiave non salvata *(al massimo due tentativi)*; se non si trova, d1 da capo fino a `18000` con il caso noto K5; poi i pezzi 4-6 di [M1016].
+- **A1, LA DICHIARAZIONE** *(prima di muovere qualunque cosa)*:
+  - **la cartella nuova:** `E:\soliton_lavoro`;
+  - **cosa ci va:**
+
+    | dove | cosa |
+    |---|---|
+    | `E:\soliton_lavoro\wt_lapse_u` | la copia di lavoro di lapse-u, dove stanno il lanciatore e le letture *(rifatta con `git worktree`)* |
+    | `E:\soliton_lavoro\wt_mitosi` | il worktree della mitosi *(rifatto con `git worktree`)* |
+    | `E:\soliton_lavoro\tmp` | `TMP` e `TEMP` delle sessioni e dei collaudi |
+
+    **La mia lettura di «la copia di lavoro»** e' il worktree di lapse-u, perche' il caso noto A4 chiede `coda_m1446.py` «dalla cartella nuova», e il lanciatore sta su lapse-u. **Il repository principale** `C:\Users\lpeano\soliton_simulator` *(ramo `primo-ordine`)* **NON si sposta:** e' la cartella della sessione, e un worktree principale non si rimuove. Gli altri worktree *(`st_main`, `wt_vincoli`, `wt_zero`, ...)* non si toccano;
+  - **cosa NON si muove:** `E:\soliton_simulator\controllo\...` con gli stati, `E:\soliton_simulator\registro_tappe` e il registro delle corse. Restano dove sono, quindi i percorsi nelle carte e nel TODO restano validi;
+  - **i dati ignorati da git** *(che `git worktree remove` cancellerebbe)*: `db/` *(`769 MB` in ciascuno dei due worktree)* e `db_era2/stato_0bc547638e.npz`. **Si copiano nel worktree nuovo prima di rimuovere il vecchio**, e il confronto si fa con lo sha1. Le `__pycache__` non si copiano;
+  - **i percorsi assoluti verso i worktree vecchi** *(trovati con grep)*:
+    - le voci FINITE di `coda_m1446.json` *(`C:/Users/lpeano/wt_mitosi/...`)*: storia, non si toccano;
+    - le righe d'uso di `lorentz_censimento.py` e alcuni script `nascite/*.py` sul ramo mitosi: si dichiarano qui e non si riscrivono *(sono script gia' usati)*.
+- **### L'OSTACOLO, VERIFICATO ADESSO** *(`11:19`, un repository di prova `E:\soliton_lavoro\prova_proprietario`, poi cancellato)*:
+  - `git status` risponde **«fatal: detected dubious ownership ... is on a file system that does not record ownership»**;
+  - **e' lo stesso rifiuto di `1c246469`** *(il worktree T1 su E:, ottobre)*;
+  - **un worktree su E: non funziona senza un'eccezione `safe.directory`** nella configurazione GLOBALE di git, una per cartella. **La configurazione ne contiene gia' una trentina per repository su E:** *(per esempio `E:/soliton_simulator_numba`)*, quindi la via e' nota;
+  - **ma aggiungerla cambia la configurazione globale e spegne un controllo di sicurezza di git.** Non lo faccio senza una riga di Luca;
+  - **la proposta:** due eccezioni precise, `E:/soliton_lavoro/wt_lapse_u` e `E:/soliton_lavoro/wt_mitosi`, e **nessun jolly** `*`.
+- **Gia' fatto e non bloccato:** `TMP` e `TEMP` su E: per le corse e per i commit, gia' dalle `10:52` *(`committa3.py`, per ora nella cartella `E:\soliton_simulator\tmp_M1016`)*. **Passano a `E:\soliton_lavoro\tmp`** col resto dello spostamento.
+- **LA PARTE B** *(la chiave non salvata)* **non dipende dallo spostamento**, ma il mandato mette A prima di B. **Aspetto la decisione su `safe.directory` prima di tutte e due.**
+- **FERMO.**
