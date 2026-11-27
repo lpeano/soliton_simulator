@@ -27755,3 +27755,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(a)** che cosa significa «nello stesso verso» in D2';
   - **(b)** una soglia di K4' sopra il pavimento di arrotondamento;
   - **(c)** se lo strumento delle due meta' basta sotto `2 w`.
+
+
+### 2026-11-27 01:19 -- [M0106] LA RICEVUTA: ESEGUITO (3 PEZZI SU 3; LA CORSA DEL VUOTO PURO GIRA); LE PREVISIONI CONFRONTATE [[PROGETTO-MITOSI]]
+
+- **[M0106] eseguito** *(DECISIONE DI LUCA 01:06)*:
+  - **1.** lapse-u `4078ab07` *(la carta, la v5)*, `41ccae13` *(il referto)*;
+  - **2.** mitosi `d6b1ef8b`, `38d02317` *(K4'' PASSA)*; lapse-u `dd505ea7` *(la coda)*;
+  - **3.** questo paragrafo.
+- **Il rilancio, dichiarato:** il lanciatore e' ripartito a mano alle `01:18` e ha lanciato `M0106_vuoto_puro` alle `01:18:37` *(pid `4452`)*. L'APERTO del registro e' in questo commit *(su lapse-u)*.
+- **I RISULTATI:**
+  - **D2'':** VERSO `8`, VIA `4`, non distinguibile `0`;
+  - il minimo e' `d 6.795` a `k 3230`, il massimo dopo `27.870` a `k 5020`, nessun secondo minimo nei `6000` tick;
+  - `omega` di d1' scende col pozzo *(`0.0755` a chi `-191.5`, su `[3500, 4000]`)*;
+  - **K4'' passa.**
+- **LE PREVISIONI:**
+  - **del guardiano:** P1 *(`90%`)* **SI'**, esatta *(VERSO `8`, VIA `4`, `[3000, 5000]` VIA)*; P2 e P3 *(il vuoto puro)* **aspettano la corsa**;
+  - **le mie:** P1 al `95%` **SI'**; K4'' passa **SI'**; P2 *(niente nascite)* al `75%`, aspetta la corsa.
+- **IL SEGUITO:** quando la corsa chiude *(circa `8-12` ore)*, `mitosi_vuoto_v4.py lettura > doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi.
