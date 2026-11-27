@@ -16,4 +16,5 @@
 | 2026-11-27_0951_M0951.md | DECISIONE DI LUCA (2026-11-27 09:51) | eseguito 3/3: il video (anima_coppia.mp4), il TODO con A0 (due corpi o una nube?) | lapse-u 838d378e, 7cfe4823, 2182b909 |
 | 2026-11-27_1016_M1016.md | DECISIONE DI LUCA (2026-11-27 10:16) | A0 fatto: due corpi in 22/25, urto a 3000-3500, norma ferma (a); la corsa lunga FERMA: K0' fallisce (uno stato non caricato) -> [M1107] | lapse-u e64e79d1, 0c6f2a0c |
 | 2026-11-27_1107_M1107.md | DECISIONE DI LUCA (2026-11-27 11:07), in chat | A1-A4 fatti (E:/soliton_lavoro, wt_mitosi, lanciatore a secco 8/8); B5: la chiave è mot.geo.U (funzione di A), v9 tentativo 1 | lapse-u 576c2687, 4bca34db, b1a22f1c, 568fcc74 |
-| 2026-11-27_1214_M1214.md | DECISIONE DI LUCA (2026-11-27 12:14) | da eseguire: la regola «si lavora sempre nella cartella nuova» (CLAUDE.md par. 2); K0' v9 e la corsa lunga; la suite mitosi nel worktree nuovo; i pezzi 4-6 di [M1016] | — |
+| 2026-11-27_1214_M1214.md | DECISIONE DI LUCA (2026-11-27 12:14) | eseguito: la regola in CLAUDE.md; K0' v9 (omega 1e-12, 13:12); d1'' chiusa (18000); suite 67/67; A0 su 73 stati: da k 6250 un corpo solo (fusione) | lapse-u 54b00185, 7366a447, 9bdfea82 |
+| 2026-11-27_1519_M1519.md | DECISIONE DI LUCA (2026-11-27 15:19) | da eseguire: prima il video v3; poi il corpo fuso: corsa libera 18000->54000 e punto fisso accoppiato 2M, due processi | — |
