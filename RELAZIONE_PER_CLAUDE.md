@@ -28981,3 +28981,33 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 - il merge resta in corso, non committato, in `wt_mitosi`, e non lo tocco;
 - C, D ed F non partono;
 - **A non parte**, perche' la carta l'avevo messa dopo il merge, sull'albero fuso. Partire su due rami separati sarebbe una decisione presa al posto di Luca ([[L-DOPO-STOP]]).
+
+
+### 2026-11-27 23:17 -- [M2245-27] B2: LA DECISIONE DI LUCA DELLE 23:14 (I DUE COLLAUDI CON `GIT_CONFIG_*` PASSATO AL SOLO SOTTOPROCESSO) SI SCONTRA CON IL CRITERIO DEL NUCLEO A 9 FILE. **SECONDA DOMANDA PER IL GUARDIANO** (su indicazione di Luca in chat, 23:1x) [[PROGETTO-MITOSI]]
+
+**La decisione, ricevuta in chat** (DECISIONE DI LUCA 23:14):
+- i due collaudi che creano repository git temporanei (M-B1 e lo stage) usano il temp su E: e passano **solo al loro sottoprocesso git** `GIT_CONFIG_COUNT=1`, `GIT_CONFIG_KEY_0=safe.directory`, `GIT_CONFIG_VALUE_0=*`, senza `git config --global` e senza C:;
+- va dichiarato nella carta dei presidi e nel collaudo stesso;
+- la suite deve dare 67 su 67, poi si fa B3 e si prosegue nell'ordine A, C, D, F, E;
+- **le etichette gia' usate portano il giorno:** `[M2245-27]`.
+
+**Che cosa ho letto nel codice, prima di toccare qualcosa:**
+- **Lo stage** (`csv/_stage.py`, `collaudo`): crea il suo repository usa-e-getta (`tempfile.mkdtemp(prefix="repo_")`) e lo interroga con `g(*a) = subprocess.run(["git"] + list(a), cwd=t, ...)`. **Si sistema dentro `csv/`, cioe' fuori dal nucleo:** basta l'`env` sulla `g`.
+- **M-B1** (`primo_ordine/_collauda_mb1.py` chiama `MB1._byte_dell_albero("8c7b9288", ...)` di `primo_ordine/_misura_mb1.py`):
+  - il worktree temporaneo si crea con `git worktree add` da `cwd=radice`, e quella chiamata funziona, perche' la radice ha la sua `safe.directory`;
+  - **il git che fallisce e' un altro:** `_byte_dell_albero` lancia `python primo_ordine/_misura_mb1.py --scrivi` **dentro** il worktree temporaneo, e li' il timbro (`_presidio`, al commit `8c7b9288`) chiama git e trova «FUORI DA UN REPO GIT»;
+  - **l'ambiente va quindi passato a quel `subprocess.run`, nel processo padre:** `primo_ordine/_misura_mb1.py` (`_byte_dell_albero`), oppure `primo_ordine/_collauda_mb1.py` che imposta l'ambiente prima della chiamata;
+  - **tutte e due le vie stanno sotto `primo_ordine/`.**
+- **Il conflitto:** il DEVE di B1 ([M2245-27] B1, e prima [M1333]) dice che il nucleo contro `42638304` e' **«i 9 file del criterio, nessun altro»**, ed e' sempre stato misurato con `git diff --name-only 42638304 -- primo_ordine/`. **Toccare `_collauda_mb1.py` o `_misura_mb1.py` lo porta a 10 file.**
+
+**LA DOMANDA PER IL GUARDIANO (e per Luca):**
+
+> Per eseguire la decisione delle 23:14 su M-B1 serve toccare un file sotto `primo_ordine/`, e il nucleo di mitosi contro `42638304` passa da 9 a 10 file. **Quale via?**
+> 1. **Il criterio diventa 9 + `primo_ordine/_collauda_mb1.py`.** E' un collaudo, non fisica: lo tocco per impostare l'ambiente e dichiararlo nel collaudo, e il guardiano aggiorna il suo criterio.
+> 2. **Non tocco `primo_ordine/`:** rigiro la sola voce M-B1 (`python primo_ordine/_collauda_mb1.py`) con le tre variabili nell'ambiente di quel processo, che le passa al figlio, e la dichiaro. Il nucleo resta a 9, la suite intera da' 66/67 piu' quella voce rigirata a parte, e la regola «solo al sottoprocesso git» e' rispettata solo in parte.
+> 3. Un'altra via.
+
+**Il criterio di chiusura:** una DECISIONE DI LUCA con l'ora. **Finche' non arriva:**
+- il merge resta in corso, non committato, in `wt_mitosi`;
+- non tocco ne' `csv/_stage.py` ne' `primo_ordine/`. Anche la correzione dello stage, che non ha conflitti, la faccio insieme a M-B1, nello stesso giro della suite rifatta;
+- A, C, D, F ed E sono fermi.
