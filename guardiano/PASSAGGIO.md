@@ -41,3 +41,13 @@ Un solo lanciatore (coda_m1446.py); nessuna gestione nuova senza «DECISIONE DI 
 - Mitosi: H cala lungo la fiammata e va nelle nascite; MITOSI viene da mitosi_rami.py; la soglia 2 pi e' strutturale (pi ingolfa, 4 pi non e' misurato); il vuoto puro con le nascite accese: 0 nascite in 6000 tick.
 - Errori del guardiano: n.253-258 (vedi ERRORI.md). Previsioni della settimana: circa meta' giuste; le sbagliate con contenuto: vuoto svuotato (no), c_phi > c_psi (no: c_phi 0), chi da phi vicino all'oggetto (no), d2' VERSO (no: VIA).
 - Il TODO per la sessione successiva e' in [M0951] (A coppia lunga e Keplero 2D, B vento a due corpi, C mitosi: ritmo, vuoto con lapse, a(k); D semine e passo; E N-vincolo; F gestione repo).
+
+## Sospensione 2026-11-27 18:30 (riavvio del PC, C: pieno) — IL TODO PER LA RIPRESA
+Stato: S1 (corsa libera del corpo fuso) caduta a k 31000 (ultimo stato M1519/S1/stato_030750); S2 (punto fisso 2M) caduta a 2 giri su 3; causa: impegnabile esaurito, C: a 0 MB. Il repo principale (5,4 GB di .git) sta ancora su C:\Users\lpeano\soliton_simulator; i worktree su E: puntano li'. CC FERMO, non puo' leggere la posta ne' committare finche' C: non ha spazio. Il suo riscontro delle 18:26 NON e' nel repo (lo scrive dopo).
+Alla ripresa, nell'ordine:
+1. Luca: C: con spazio (dopo il riavvio); se possibile il file di paging su E:.
+2. CC: «leggi la posta» -> [M1824] (la ripresa di S1 da 30750 e S2 dal terzo giro, con l'impegnabile letto prima; il referto dei giri 1-2 committato subito).
+3. Gestione, DECISIONE DI LUCA con l'ora: il repo principale su E:\soliton_lavoro\soliton_simulator (copia + git fsck + terza safe.directory + git worktree repair + fetch di prova; la copia su C: rinominata _OLD, non cancellata); CLAUDE.md par. 2 aggiornato. Da fare a corse ferme, meglio PRIMA del punto 2.
+4. Poi [M1519] pezzi 3-4: le letture di S1 e S2, il verdetto S3 (esiste e ci arriva / esiste ma non ci arriva / si spezza / collassa), il video v4, la ricevuta.
+5. In attesa (idee di oggi, da mandato): il corpo fuso con la mitosi accesa (si raffredda facendo spazio? previsione 60%); il costo di un nodo lungo la fiammata (potenziale chimico dello spazio, a costo zero); la nascita nel vuoto CON il lapse; N come vincolo di Poisson.
+Post Itaca pronti oggi: «Il numero del mondo» (con la correzione sul reticolo triangolare e la riga sul toro), «Due filmati per chi mi chiede cosa gira dentro» (camminata.mp4, spinori.mp4), «La freccia e la tassa».
