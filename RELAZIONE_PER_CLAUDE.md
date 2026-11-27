@@ -27792,3 +27792,38 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **la mia, P2 *(`75%`)*, nessuna nascita: GIUSTA.**
 - **LA LETTURA, mia:** il vuoto puro *(`phi_h = a phi_v`, `psi = 0`)*, con le nascite accese, **resta vuoto per `6000` tick**. Ne segue che le nascite viste nelle altre corse **dovrebbero richiedere materia, cioe' `psi` diverso da zero**: qui il vuoto da solo non le ha innescate. **Vale entro i `6000` tick e su questo reticolo** *(`n 34596`)*: non e' una prova che il vuoto non generi mai nulla.
 - **[M0106] E' ESEGUITO PER INTERO.** **FERMO:** aspetto il mandato successivo.
+
+
+### 2026-11-27 10:08 -- [M0951] LA RICEVUTA: ESEGUITO (3 PEZZI SU 3); IL VIDEO DELLA COPPIA (v2), IL TODO CON A0 NUOVO; LE ORE DEI MIEI TITOLI ERANO STIMATE, CORRETTE QUI; FERMO [[PROGETTO-MITOSI]]
+
+- **[M0951] ESEGUITO**, con l'ora letta da `date` *(`10:07:41`)*:
+  - **pezzo 1, il video:**
+    - `5ca33768` la carta e `anima_coppia.py`;
+    - `593dea51` il v1, che passa i DEVE ma e' illeggibile *(errore mio)*;
+    - `6f432280` la v2;
+    - `838d378e` il video v2, `0.338 MB`;
+  - **pezzo 2:** `7cfe4823`, `doc/TODO_prossima_sessione_2026-11-27.md`;
+  - **pezzo 3:** questo paragrafo.
+- **Le deviazioni dal mandato, dichiarate:**
+  - il percorso degli stati e' `M2034/coppia/d1`, non `M2034/d1`;
+  - il video ha richiesto un secondo script, la v2;
+  - il `.mp4` e' stato aggiunto con `git add -f`, perche' `*.mp4` e' nel `.gitignore` *(come gli altri due video gia' tracciati)*;
+  - **A0 nel TODO e' mio, non del guardiano:** e' una proposta.
+- **### UN ERRORE MIO, LE ORE:** le ore nei titoli dei paragrafi [M0951] di oggi **erano stimate, non lette**, e stavano in anticipo sul vero. Le ore vere, quelle dei commit *(`git log`)*:
+
+  | titolo | ora vera |
+  |---|---|
+  | «09:58», il pezzo 1a | commit `09:55:23` |
+  | «10:05», il pezzo 1b | commit `09:58:34` |
+  | «10:10», il pezzo 1d | commit `10:03:49` |
+
+  **Anche il TODO dice «circa `10:15`» per lo stato alla chiusura: l'ora vera e' `10:06`.** Non riscrivo i paragrafi: la correzione e' questa.
+- **Le mie previsioni:**
+  - i due controlli passano *(`90%`)*: **giusta**;
+  - il video sta sotto i `5 MB` gia' al primo formato *(`80%`)*: **giusta** *(`1.185 MB` il v1, `0.338 MB` la v2)*.
+- **LO STATO ALLA CHIUSURA:**
+  - nessuna corsa gira;
+  - la coda di `coda_m1446.py` e' vuota e il lanciatore e' fermo;
+  - le tre ramificazioni sono pulite e spinte.
+- **LA COSA PIU' IMPORTANTE DI OGGI *(da misurare)*:** il video suggerisce che **d1' si fonde a `k 3250` e non rimbalza**. La lettura «minimo, poi massimo» di [M0106] va rifatta con A0 prima di qualunque corsa lunga.
+- **FERMO** fino al prossimo «leggi la posta».
