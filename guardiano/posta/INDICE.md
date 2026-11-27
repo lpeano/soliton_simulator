@@ -14,4 +14,5 @@
 | 2026-11-27_0024_M0024.md | DECISIONE DI LUCA (2026-11-27 00:24) | eseguito 5/5: C' 12 valide; d1' 41,57 -> 9,62 -> 27,9 -> 21,1 (VERSO), d2' +1,50 VIA; D2' mal scritto (n.257); K4' sotto il pavimento (n.258); soglia chiusa | lapse-u 6df1aa60, b4a24340; mitosi c09d2906 |
 | 2026-11-27_0106_M0106.md | DECISIONE DI LUCA (2026-11-27 01:06) | eseguito: D2'' VERSO 8 / VIA 4 / ND 0, minimo d 6,80 a k 3230; K4'' passa; vuoto puro 0 nascite in 6000 tick | lapse-u 41ccae13, 1de07f48; mitosi 82739c06 |
 | 2026-11-27_0951_M0951.md | DECISIONE DI LUCA (2026-11-27 09:51) | eseguito 3/3: il video (anima_coppia.mp4), il TODO con A0 (due corpi o una nube?) | lapse-u 838d378e, 7cfe4823, 2182b909 |
-| 2026-11-27_1016_M1016.md | DECISIONE DI LUCA (2026-11-27 10:16) | da eseguire: A0 (norma, massimi locali: due corpi o uno), poi d1'' per altri 12000 tick, il video v3 a scala fissa e per quadro | — |
+| 2026-11-27_1016_M1016.md | DECISIONE DI LUCA (2026-11-27 10:16) | A0 fatto: due corpi in 22/25, urto a 3000-3500, norma ferma (a); la corsa lunga FERMA: K0' fallisce (uno stato non caricato) -> [M1107] | lapse-u e64e79d1, 0c6f2a0c |
+| 2026-11-27_1107_M1107.md | DECISIONE DI LUCA (2026-11-27 11:07), in chat | da eseguire: lo spostamento su E:\ (worktree, temp, caso noto); la chiave non salvata con tetto di 2 tentativi, poi d1 da capo a 18000 con K5 | — |
