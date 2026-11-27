@@ -28814,3 +28814,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **I DEVE dentro il giro:** a `k 0, 250, 500, 750, 1000` lo stato e' uguale AL BIT a `giro_3`.
 - **La lettura** *(C fra `2` e `3r`, D, A0 sui giri)* **e' nel referto `corpo_fuso.txt`**, a S1 chiusa, come fissato nella carta.
 - **S1 alle `20:14`** e' a `k 35750`, `2736 s` dalla partenza.
+
+
+### 2026-11-27 21:58 -- [M1824] S1 CHIUSA: M1824_S1 FINITO ALLE 21:58:18, USCITA 0 [[PROGETTO-MITOSI]]
+
+- **La corsa:** 24000 tick in 9082 s, da `M1519/d1T/stato_030000` a `k 54000`, in `M1519/d1T_r`. Ci sono 96 stati (`30250..54000`, ognuno con il suo `.sha1`) e `serie.json` (2028242 byte, con il `.sha1`).
+- **I DEVE dentro la corsa:** gli stati a `k 30250, 30500, 30750, 31000` sono uguali AL BIT a quelli di `d1T`. **Tutti e 4 PASSANO** (righe 27-33 del log `controllo/M1446/log/M1824_S1.txt`).
+- **L'ultima riga del log:** `k 54000: y1 -6.0408 y2 +5.2506; max|chi| 1.9784e+02`.
+- **La coda:** alle 21:58:18 e' vuota, e il lanciatore e' uscito con 0. Nel registro c'e' la riga CHIUSO di `m1446-M1824_S1`.
+- **Le misure** (21:58:33): C: 25.08 GB liberi; E: 152.19 GB; impegnabile 31.68 GB liberi su 49.47.
+- **Il seguito:** [M1519] pezzo 3, cioe' `corpo_fuso_lettura.py lettura` -> `corpo_fuso.txt` con il verdetto S3, poi il video v4.
