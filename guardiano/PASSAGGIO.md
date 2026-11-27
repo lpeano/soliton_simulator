@@ -32,3 +32,12 @@ Un solo lanciatore (coda_m1446.py); nessuna gestione nuova senza «DECISIONE DI 
 - Le corse della rampa [M0137] pezzo 6 (d1', d2', d3' in rampa, chiuse 05:23) esistono ma sono fuori mandato: non lette.
 - Repo: 4860 commit, 1,07 GB su GitHub, RELAZIONE 27.500 righe: un mandato di gestione (binari fuori da git, RELAZIONE per mese) da proporre a coda vuota.
 - Il postino non interrompe: il «leggi la posta» viene eseguito a fine passo (la rampa e' partita 1 minuto dopo il comando).
+
+## Aggiornamento 2026-11-27 09:51 (chiusura)
+- La coppia nel modello intero ([M2034-B], [M0024], [M0106]): d1' (chi on) 41,57 -> 6,80 (k 3230) -> 27,87 (k 5020) -> 21 (k 6000): sistema legato, oscillazione radiale; d2' (chi off) +1,50 VIA. VERSO 8 / VIA 4. omega dei corpi segue il pozzo (0,0755 a chi -191).
+- Il vuoto non propaga increspature ([M2053]): banda piatta allo zero simmetrico, c_phi ~ 0: una luce sola (quella della materia). L'anisotropia -8% e' rumore.
+- chi contro phi ([M2048]): phi NON porta il lapse (Spearman 0,20 / 0,24, segno che cambia con l'anello). La via «N dal vincolo di Poisson» resta (E del TODO).
+- Il vuoto del giro 3 ([M2034-A]): non svuotato (1,03), corrente radiale verso l'oggetto, chi -22 a d 75-90 (il pozzo riempie il toro: portata 100 > raggio).
+- Mitosi: H cala lungo la fiammata e va nelle nascite; MITOSI viene da mitosi_rami.py; la soglia 2 pi e' strutturale (pi ingolfa, 4 pi non e' misurato); il vuoto puro con le nascite accese: 0 nascite in 6000 tick.
+- Errori del guardiano: n.253-258 (vedi ERRORI.md). Previsioni della settimana: circa meta' giuste; le sbagliate con contenuto: vuoto svuotato (no), c_phi > c_psi (no: c_phi 0), chi da phi vicino all'oggetto (no), d2' VERSO (no: VIA).
+- Il TODO per la sessione successiva e' in [M0951] (A coppia lunga e Keplero 2D, B vento a due corpi, C mitosi: ritmo, vuoto con lapse, a(k); D semine e passo; E N-vincolo; F gestione repo).

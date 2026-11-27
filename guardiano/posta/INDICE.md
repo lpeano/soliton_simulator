@@ -12,4 +12,5 @@
 | 2026-11-26_2048_M2048.md | DECISIONE DI LUCA (2026-11-26 20:48) | da eseguire (lettura a costo zero, non ferma B): chi contro rho_phi e contro l'orologio locale di phi sul giro 3 | — |
 | 2026-11-26_2053_M2053.md | DECISIONE DI LUCA (2026-11-26 20:53) | eseguito: il vuoto non propaga (banda piatta, c_phi ~ 0): DUE LUCI; l'anisotropia è rumore | lapse-u 12d3d40b |
 | 2026-11-27_0024_M0024.md | DECISIONE DI LUCA (2026-11-27 00:24) | eseguito 5/5: C' 12 valide; d1' 41,57 -> 9,62 -> 27,9 -> 21,1 (VERSO), d2' +1,50 VIA; D2' mal scritto (n.257); K4' sotto il pavimento (n.258); soglia chiusa | lapse-u 6df1aa60, b4a24340; mitosi c09d2906 |
-| 2026-11-27_0106_M0106.md | DECISIONE DI LUCA (2026-11-27 01:06) | da eseguire: D2'' (stesso intervallo, verso libero) sugli stessi stati; K4'' sulla norma e la corsa del vuoto puro | — |
+| 2026-11-27_0106_M0106.md | DECISIONE DI LUCA (2026-11-27 01:06) | eseguito: D2'' VERSO 8 / VIA 4 / ND 0, minimo d 6,80 a k 3230; K4'' passa; vuoto puro 0 nascite in 6000 tick | lapse-u 41ccae13, 1de07f48; mitosi 82739c06 |
+| 2026-11-27_0951_M0951.md | DECISIONE DI LUCA (2026-11-27 09:51) | da eseguire: chiusura: il video della coppia (anima_coppia.mp4), il TODO per la sessione successiva, FERMO | — |
