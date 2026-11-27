@@ -28381,3 +28381,13 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - la lista passa da `237` a `238` voci;
   - il formato e' quello del file *(`indent 1`, verificato al byte prima della modifica)*.
 - **Poi:** il rilancio a mano di `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con `TMP` su E:. **Lo dichiaro nel commit successivo, con la voce APERTO del registro.**
+
+
+### 2026-11-27 13:15 -- [M1214] 1b: LA CORSA d1'' LANCIATA ALLE 13:14:52 (pid 30300) DAL LANCIATORE RILANCIATO A MANO DA E:\soliton_lavoro\wt_lapse_u, CON TMP SU E:; IL REGISTRO APERTO [[PROGETTO-MITOSI]]
+
+- **Il rilancio a mano, dichiarato** *(la decisione di Luca delle `13:12`: «lancia SUBITO»)*: `E:/python/py3132/python.exe doc/referti_l2/coda_m1446.py`, lanciato da `E:\soliton_lavoro\wt_lapse_u` con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, alle `13:14`.
+- **Il lanciatore:** `13:14:52 LANCIATA M1214_d1L (pid 30300; i processi prima 1, la CPU letta 44.4%; 9.0 GB)`.
+- **Il registro:** la voce `APERTO` di `m1446-M1214_d1L` in `doc/REGISTRO_CORSE.md` *(`git.head` `7f1deb34`, ramo lapse-u)*.
+- **Il log:** `E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`; i timbri dicono «committato e pulito».
+- **Le uscite:** `E:\soliton_simulator\controllo\M2034\coppia\d1L`, gli stati da `stato_006250` a `stato_018000`.
+- **Il tempo stimato:** circa `2.7` ore, quindi la chiusura verso le `16:00`.
