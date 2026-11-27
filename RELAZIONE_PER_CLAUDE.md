@@ -28089,3 +28089,32 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **d1' e' girata col ciclo della v2**, che `D.ciclo` contiene gia' dopo l'import, e `D.avvia` riempie il nucleo prima della scena;
   - **dovevo leggere la catena degli import fino in fondo, non solo il modulo base.**
 - **LA CORREZIONE** *(`due_corpi_fondo_v8.py`, un commit a se')*: `Ripresa.gira` chiama **il `D.ciclo` vero** *(quello della v2)* con un `dopo` che porta il tick a quello assoluto, `k_da + kk`. Il residuo di Gauss cade negli stessi tick, perche' `k_da` e' multiplo di `250` *(asserito)*. **Il resto della v7 non cambia;** K0' e K0'-neg si rifanno.
+
+
+### 2026-11-27 10:40 -- [M1016] PEZZO 3d: K0' FALLISCE (v8): DOPO 250 TICK DA stato_005750 LO STATO NON E' stato_006000 AL BIT (9 CHIAVI SU 11), NE' LA SERIE NE' omega; K0'-neg PASSA; LA CORSA d1'' NON VA IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v8_noto.txt`, da `due_corpi_fondo_v8.py noto` *(`f91ca38c`)*, codice d'uscita `1`.
+- **Gli esiti:**
+
+  | prova | esito | dettaglio |
+  |---|---|---|
+  | la carica a `k 5750` | **PASSA al bit** | |
+  | K0', lo stato a `6000` | **FALLISCE** | diverse `Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`; uguali solo `h_int` e `psi` |
+  | K0', la serie `5760..6000` | **FALLISCE** | |
+  | K0', `omega` | **FALLISCE** | |
+  | K0'-neg | **PASSA** *(lo stato e' diverso, come deve)* | |
+
+  I tempi: `203 s` K0' e `147 s` K0'-neg.
+- **LA CARTA:** «se K0' fallisce, FERMO: la corsa non va in coda». **Non va in coda.**
+- **Il referto non dice QUANTO sono grandi le differenze.** Prima di fermarmi faccio **una sola misura diagnostica**, che non corregge niente: `k0_diagnosi.py`, la stessa ripresa da `5750`. Per ogni tick il confronto con la serie e con `omega` di `serie.json`; alla fine, per ogni chiave, il massimo di `|differenza|` e il massimo relativo.
+  - **Cosa decide:**
+    - se la prima differenza e' all'altezza dell'arrotondamento *(relativa sotto `1e-12`)* e cresce piano, **e' l'ordine delle operazioni, o una differenza di piattaforma o di libreria**;
+    - se e' grande gia' al primo tick, **c'e' uno stato che la ripresa non carica.**
+  - **La mia previsione: piccola, all'arrotondamento** *(`60%`)*. `h_int` e `psi` sono uguali, `rho` no; i candidati per uno stato nascosto sono il fasore `c(t)` o un contatore dentro `Z["z"]`.
+
+- **### IL DISCO C: E' PIENO** *(`131 MB` liberi su `476 GB`, alle `10:40`)*. Il primo tentativo di commit di questo paragrafo e' stato rifiutato da `PRESIDI-SUL-DISCO-NON-SULLO-STAGE`, perche' `git checkout-index` non poteva scrivere in `%TEMP%`.
+  - **La decisione di Luca, in chat alle `10:52`:** «Fai girare tutto in un folder creato ad-hoc su E:».
+  - **Eseguita cosi':**
+    - la cartella e' `E:\soliton_simulator\tmp_M1016`;
+    - `committa3.py` e' una copia di `committa2.py` con `TMP` e `TEMP` del commit su quella cartella *(una sostituzione asserita; la riserva sta in `E:\soliton_simulator\controllo\committa3_copia.py`)*;
+    - **le corse e gli script girano con `TMP` e `TEMP` su E:.**
