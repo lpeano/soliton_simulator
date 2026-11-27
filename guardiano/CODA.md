@@ -20,7 +20,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 11. **N come vincolo di Poisson** sulla materia a ogni tick (ex VINCOLI, la versione viva; H7): lo stesso oggetto e la stessa coppia, contro il χ dinamico; la differenza è il ritardo.
 12. **Lo zero del vuoto**: V2 fa cadere il vuoto (−20% vicino alla massa con χ vero). È una scelta di principio, non una corsa. La più vecchia della coda.
 13. **Lo spettro delle masse** (H8, ex H1): 2M (in corsa), poi 4M, 8M: esiste, si spezza, collassa (densità al tetto). Il triangolo di tre oggetti in caduta sta qui.
-14. **[M-GM] il W di Weyl: A dinamico (elettromagnetismo) sopra la gravità accesa**: VIA dato il 27/11 alle 22:45 ([M2245] D), con tutta la fisica accesa; ramo u-dinamica. Corretto il 27/11 22:20 (n.261): da questo W non viene gravitomagnetismo; P1 il vortice che si veste di flusso, P2 i due segni, P3 Eötvös con gli aggregati neutri.
+14. **[M-GM] RITIRATO il 28/11 00:26 (n.263)**: il campo U(1) è GIÀ dinamico nel modello; il vortice delle tre sfasate muore a k 15-20k con A acceso (A4). Resta P3 (Eötvös con aggregati neutri, in [M0026] D). Voce nuova: **chi sente l'energia del campo 1/2 (E^2 + B^2)?** (una riga nella sorgente; senza mandato).
 15. **La terza dimensione** (H11): segnata, non proposta.
 16. **H2, la massa come somma di configurazioni** (DHN 1974): idea da Grossmann, non da corse. Senza mandato.
 
