@@ -1,0 +1,28 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+==================================================================================================================================
+[M2210] IL CASO NOTO DEL CICLO (la carta sez. 3-decies): 100 tick dall'oggetto del giro 4, contro le serie di B3 (M1330/b3)
+==================================================================================================================================
+### noto_gradino (gradino): E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz; y_c 69.041308; A 1.389741e+01; N da 0.9964917210 a 1.0035206304; l'impronta 305665855621
+### 100 tick in 75 s
+  DEVE: (a) il gradino, 100 tick: le cinque colonne = B3 x1 AL BIT                                           PASSA 11 righe contro 11
+### noto_rampa (rampa): E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz; y_c 69.041308; A 1.389741e+01; N da 0.9964917210 a 1.0035206304; l'impronta 305665855621
+### 100 tick in 67 s
+  DEVE: (b) DEVE FALLIRE: la rampa, 100 tick = B3 x1                                                         PASSA il y a k 100: rampa -3.908795e-03, gradino -3.001756e-04
+### noto_v0 (v0): E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz; y_c 69.041308; A 1.389741e+01; N da 1.0000000000 a 1.0000000000; l'impronta 305665855621
+### 100 tick in 73 s
+  DEVE: (c) la V0, 100 tick: le prime quattro colonne = B3 V0 AL BIT                                         PASSA 11 righe
+  DEVE: (d) N_di: rampa a 0 tick = 1, a 250 = 1 + (N - 1)/2, a 500 e 2000 = 1 + (N - 1)                      PASSA 
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

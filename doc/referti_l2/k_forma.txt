@@ -50,3 +50,55 @@
   k 1500:   V0: w 6.965, i pezzi 1, il picco 2.7569e+03, la massa 995010.893147;   V2: w 7.161, i pezzi 1, il picco 2.7223e+03, la massa 995010.893146
   k 1750:   V0: w 9.109, i pezzi 1, il picco 2.2894e+03, la massa 995010.893147;   V2: w 9.033, i pezzi 1, il picco 2.3035e+03, la massa 995010.893146
   k 2000:   V0: w 10.963, i pezzi 1, il picco 2.0027e+03, la massa 995010.893148;   V2: w 10.824, i pezzi 1, il picco 2.0426e+03, la massa 995010.893146
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+----------------------------------------------------------------------------------------------------------------------------------
+[M1330-B0] IL GRADIENTE PESATO (la carta sez. 3-ter): <dN/dy> = somma rho dN/dy / somma rho, contro il centro di S3
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: il caso noto: dN/dy a y = y_c = il centro di S3 entro 1e-12 relativo                                 PASSA -1.574010e-04 contro -1.574010e-04
+  DEVE: DEVE FALLIRE: a y_c + L_y/4 NON ridà il centro                                                       PASSA -9.604215e-21
+  A 1.389741e+01, y_c 68.917800, L_y 140.296115; il centro dN/dy -1.574010e-04
+  k    0: w 8.498; <dN/dy> -1.502885e-04; <dN/dy>/centro 0.95481 (-4.52%)
+  k  250: w 8.450; <dN/dy> -1.497116e-04; <dN/dy>/centro 0.95115 (-4.89%)
+  k  500: w 8.482; <dN/dy> -1.489577e-04; <dN/dy>/centro 0.94636 (-5.36%)
+  k  750: w 9.318; <dN/dy> -1.481409e-04; <dN/dy>/centro 0.94117 (-5.88%)
+  k 1000: w 10.773; <dN/dy> -1.473742e-04; <dN/dy>/centro 0.93630 (-6.37%)
+  k 1250: w 12.882; <dN/dy> -1.466388e-04; <dN/dy>/centro 0.93163 (-6.84%)
+  k 1500: w 14.822; <dN/dy> -1.459462e-04; <dN/dy>/centro 0.92723 (-7.28%)
+  k 1750: w 15.190; <dN/dy> -1.453701e-04; <dN/dy>/centro 0.92357 (-7.64%)
+  k 2000: w 15.513; <dN/dy> -1.449211e-04; <dN/dy>/centro 0.92071 (-7.93%)
+  K CIMA di 1c per finestra, col centro e col gradiente pesato (la media di <dN/dy> sugli stati con k nella finestra):
+    [ 200,  800]: K CIMA (centro) +0.9386 +- 0.0096; gli stati [250, 500, 750], <dN/dy>/centro 0.94623; K CIMA (pesato) +0.9920
+    [ 800, 1400]: K CIMA (centro) +0.7924 +- 0.0186; gli stati [1000, 1250], <dN/dy>/centro 0.93396; K CIMA (pesato) +0.8484
+    [1400, 2000]: K CIMA (centro) +0.5145 +- 0.0251; gli stati [1500, 1750, 2000], <dN/dy>/centro 0.92383; K CIMA (pesato) +0.5569
+### 2 DEVE: 2 PASSANO, 0 FALLISCONO []
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] eotvos_fondo.py  sha1-BYTE d6861ad6  committato e pulito
+[TIMBRO] k_forma.py  sha1-BYTE 1a2c86bb  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] mstar_w.py  sha1-BYTE e2a74d36  committato e pulito
+----------------------------------------------------------------------------------------------------------------------------------
+[M1330-B5] m* IN FUNZIONE DI w (la carta sez. 3-ter): i calci dagli stati k 500 e k 1500 della V0 di l0.7
+----------------------------------------------------------------------------------------------------------------------------------
+  da k 500 della V0 di l0.7: w 14.427; m* +19.7304 +- 0.0625
+  da k 1500 della V0 di l0.7: w 6.965; m* +18.7278 +- 0.0414
+### m*(w 14.427)/m*(w 6.965) = 1.0535
+  l0.7 V2 [ 200,  800]: w medio 13.920 (gli stati 13.99 14.46 13.31); K CIMA con m*(w 14.427) +0.9614 +- 0.0287;  con m*(w 6.965) +0.9125 +- 0.0273
+  l0.7 V2 [ 800, 1400]: w medio 8.981 (gli stati 10.63 7.33); K CIMA con m*(w 14.427) +0.7972 +- 0.0467;  con m*(w 6.965) +0.7567 +- 0.0444
+  l0.7 V2 [1400, 2000]: w medio 9.006 (gli stati 7.16 9.03 10.82); K CIMA con m*(w 14.427) +0.8257 +- 0.0584;  con m*(w 6.965) +0.7837 +- 0.0554
+==================================================================================================================================

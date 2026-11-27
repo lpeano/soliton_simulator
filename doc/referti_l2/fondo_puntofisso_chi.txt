@@ -1,0 +1,50 @@
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+==================================================================================================================================
+[M0137] IL PUNTO FISSO CON CHI (la carta sez. 3-sedecies): per giro, per finestra di 500; il criterio C (max|chi| fra giri < 10% E il respiro < 10%)
+==================================================================================================================================
+  giro 1 (i parametri {'kappa': 0.0002528944153922671, 'c0': -0.0014634097749023729, 's': 0.15, 'e0': 0.4767266286, 'f': 0.06000000000000001, 'c2': 0.25, 'm2': 0.0001}; m0 -5.786643301839873):
+    [   0,  500]: max|chi| 85.720; w medio 9.909 (da 8.627 a 10.696); la profondita' media -58.072; omega medio +0.0897195
+    [ 500, 1000]: max|chi| 100.098; w medio 6.507 (da 4.607 a 8.627); la profondita' media -90.780; omega medio +0.0871601
+    [1000, 1500]: max|chi| 165.955; w medio 3.869 (da 3.403 a 4.607); la profondita' media -138.114; omega medio +0.0828317
+    [1500, 2000]: max|chi| 150.636; w medio 4.102 (da 2.728 a 5.799); la profondita' media -112.179; omega medio +0.0860753
+    [2000, 2500]: max|chi| 104.109; w medio 5.637 (da 5.482 a 5.870); la profondita' media -82.151; omega medio +0.0877794
+    [2500, 3000]: max|chi| 100.228; w medio 6.035 (da 5.870 a 6.168); la profondita' media -59.083; omega medio +0.0901075
+    [3000, 3500]: max|chi| 100.462; w medio 5.593 (da 4.033 a 6.516); la profondita' media -93.940; omega medio +0.0864024
+    [3500, 4000]: max|chi| 165.575; w medio 6.217 (da 3.858 a 7.770); la profondita' media -122.075; omega medio +0.0839039
+    [4000, 4500]: max|chi| 165.575; w medio 3.481 (da 3.106 a 3.858); la profondita' media -122.547; omega medio +0.0845250
+    [4500, 5000]: max|chi| 107.522; w medio 4.287 (da 3.599 a 5.456); la profondita' media -93.202; omega medio +0.0869252
+    [5000, 5500]: max|chi| 84.883; w medio 6.085 (da 5.456 a 6.430); la profondita' media -57.436; omega medio +0.0902143
+    [5500, 6000]: max|chi| 106.294; w medio 6.953 (da 6.145 a 7.294); la profondita' media -88.608; omega medio +0.0863388
+  ### giro 1: max|chi| del giro 165.955; il respiro 1.3807; il periodo: k_max 200, k_min 1500, P 2600, la finestra [0, 1500] (ACCORCIATA da [-1100, 1500]) (### il massimo AL BORDO)
+  giro 2 (i parametri {'kappa': 0.0002528944153922671, 'c0': -0.0014634097749023729, 's': 0.15, 'e0': 0.4767266286, 'f': 0.06000000000000001, 'c2': 0.25, 'm2': 0.0001}; m0 None):
+    [   0,  500]: max|chi| 149.675; w medio 4.565 (da 4.361 a 4.725); la profondita' media -115.315; omega medio +0.0835489
+    [ 500, 1000]: max|chi| 166.378; w medio 3.914 (da 3.061 a 4.725); la profondita' media -131.088; omega medio +0.0820280
+    [1000, 1500]: max|chi| 104.930; w medio 4.354 (da 3.522 a 4.667); la profondita' media -92.140; omega medio +0.0860088
+    [1500, 2000]: max|chi| 102.070; w medio 5.077 (da 4.424 a 6.257); la profondita' media -67.480; omega medio +0.0880469
+    [2000, 2500]: max|chi| 115.108; w medio 6.929 (da 6.257 a 7.716); la profondita' media -87.800; omega medio +0.0856062
+    [2500, 3000]: max|chi| 132.786; w medio 5.032 (da 3.929 a 6.494); la profondita' media -112.979; omega medio +0.0836993
+    [3000, 3500]: max|chi| 165.664; w medio 3.721 (da 3.403 a 3.929); la profondita' media -137.953; omega medio +0.0809930
+    [3500, 4000]: max|chi| 120.685; w medio 4.391 (da 3.150 a 5.581); la profondita' media -92.196; omega medio +0.0860060
+    [4000, 4500]: max|chi| 92.659; w medio 5.622 (da 5.250 a 5.847); la profondita' media -73.833; omega medio +0.0870126
+    [4500, 5000]: max|chi| 121.598; w medio 5.230 (da 4.953 a 5.406); la profondita' media -76.748; omega medio +0.0868612
+    [5000, 5500]: max|chi| 122.154; w medio 5.339 (da 4.517 a 5.870); la profondita' media -113.846; omega medio +0.0832537
+    [5500, 6000]: max|chi| 165.121; w medio 3.792 (da 3.443 a 4.517); la profondita' media -134.704; omega medio +0.0813607
+  ### giro 2: max|chi| del giro 166.378; il respiro 0.9652; il periodo: k_max 200, k_min 300, P 200, la finestra [100, 300] (### il massimo AL BORDO)
+  giro 3 (i parametri {'kappa': 0.0002528944153922671, 'c0': -0.0014634097749023729, 's': 0.15, 'e0': 0.4767266286, 'f': 0.06000000000000001, 'c2': 0.25, 'm2': 0.0001}; m0 None):
+    [   0,  500]: max|chi| 144.626; w medio 4.515 (da 4.330 a 4.667); la profondita' media -98.806; omega medio +0.0849419
+    [ 500, 1000]: max|chi| 111.661; w medio 3.838 (da 3.194 a 4.393); la profondita' media -90.561; omega medio +0.0853901
+    [1000, 1500]: max|chi| 117.179; w medio 4.661 (da 4.393 a 5.009); la profondita' media -76.686; omega medio +0.0870569
+    [1500, 2000]: max|chi| 130.571; w medio 5.227 (da 4.869 a 5.847); la profondita' media -115.358; omega medio +0.0823425
+    [2000, 2500]: max|chi| 152.986; w medio 6.059 (da 5.224 a 6.744); la profondita' media -118.609; omega medio +0.0823092
+    [2500, 3000]: max|chi| 152.986; w medio 4.231 (da 3.786 a 5.224); la profondita' media -111.276; omega medio +0.0832433
+    [3000, 3500]: max|chi| 100.745; w medio 3.767 (da 3.675 a 3.964); la profondita' media -87.305; omega medio +0.0857446
+    [3500, 4000]: max|chi| 100.745; w medio 4.878 (da 3.675 a 5.894); la profondita' media -75.133; omega medio +0.0869137
+    [4000, 4500]: max|chi| 133.583; w medio 5.749 (da 5.406 a 5.894); la profondita' media -109.331; omega medio +0.0827230
+    [4500, 5000]: max|chi| 125.626; w medio 5.092 (da 4.812 a 5.406); la profondita' media -114.469; omega medio +0.0826167
+    [5000, 5500]: max|chi| 147.649; w medio 4.404 (da 3.638 a 5.198); la profondita' media -119.387; omega medio +0.0818353
+    [5500, 6000]: max|chi| 94.634; w medio 3.907 (da 3.561 a 4.547); la profondita' media -80.493; omega medio +0.0863806
+  ### giro 3: max|chi| del giro 152.986; il respiro 0.7584; il periodo: k_max 200, k_min 700, P 1000, la finestra [0, 700] (ACCORCIATA da [-300, 700]) (### il massimo AL BORDO)
+### IL CRITERIO C fra il giro 1 e il giro 2: max|chi| cambia del +0.25%; il respiro del giro 2 0.9652: NON PASSA
+### IL CRITERIO C fra il giro 2 e il giro 3: max|chi| cambia del -8.05%; il respiro del giro 3 0.7584: NON PASSA
+==================================================================================================================================

@@ -1,0 +1,36 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] due_corpi_fondo_v9.py  sha1-BYTE af211422  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] corpo_fuso.py  sha1-BYTE 43ac319d  committato e pulito
+[TIMBRO] due_corpi_lettura_v4.py  sha1-BYTE 2935b6cf  committato e pulito
+[TIMBRO] coppia_a0.py  sha1-BYTE 68f4bf68  committato e pulito
+[TIMBRO] due_corpi_lettura_v6.py  sha1-BYTE 5188a75e  committato e pulito
+[TIMBRO] corpo_fuso_v2.py  sha1-BYTE 687b68c0  committato e pulito
+[TIMBRO] corpo_fuso_lettura.py  sha1-BYTE 9901e2da  committato e pulito
+[TIMBRO] anima_coppia_v4.py  sha1-BYTE 4c09677c  committato e pulito
+==================================================================================================================================
+[M1519] PEZZO 3: IL VIDEO v4 DELLA CORSA LIBERA (109 quadri, 6 fps, tre pannelli)
+==================================================================================================================================
+  le scale fisse: rho_psi [0, 3.8318e+04]; chi [-245.2493, -19.9540]
+  il video a 1440x480: 1.000 MB
+### DEVE: 109 quadri (109 attesi) a 6 fps: E:\soliton_lavoro\wt_lapse_u\doc\referti_l2\anima_coppia_v4.mp4 (1.000 MB; il tetto 5 MB): PASSA; i png in E:\soliton_simulator\controllo\M1519\v4
+==================================================================================================================================

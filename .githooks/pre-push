@@ -1,0 +1,7 @@
+#!/bin/sh
+# ============================================================================================
+#  PRE-PUSH VERSIONATO -- presidio `H-GUARDIANO` (DECISIONE DI LUCA 2026-11-24 23:53, [M2345])
+#  ### CC non pusha mai sul ramo `guardiano`: le righe del push arrivano su stdin.
+#  ### NESSUNA via d'uscita.
+# ============================================================================================
+python "$(git rev-parse --show-toplevel)/csv/_presidio_ramo_guardiano.py" --push || exit 1

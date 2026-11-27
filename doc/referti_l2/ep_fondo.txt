@@ -1,0 +1,55 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] torneo_tenuta_v2.py  sha1-BYTE 8c369f76  committato e pulito
+[TIMBRO] torneo_fondo_v2.py  sha1-BYTE 63ece8b6  committato e pulito
+[TIMBRO] tenuta_fondo.py  sha1-BYTE 7c37fe1b  committato e pulito
+[TIMBRO] ep_fondo.py  sha1-BYTE aaef46c8  committato e pulito
+C:\Users\lpeano\wt_lapse_u\doc\referti_l2\ep_fondo.py:237: OptimizeWarning: Covariance of the parameters could not be estimated
+  par, _cov = curve_fit(f, P, E, p0=p0_, sigma=S, absolute_sigma=bool(sig), maxfev=20000)
+==================================================================================================================================
+[M1330-F] E(p): PARTICELLA O LUCE? (la carta sez. 4-ter): l'oggetto E:\soliton_simulator\controllo\M1330\puntofisso\giro_1\stato_000300.npz; c = 0.084955 per tick (= 0.566 s)
+==================================================================================================================================
+  DEVE: (a) il calcio 0.010 di 1c rifatto = M1658/c1 AL BIT (la serie e omega)                               PASSA 
+  DEVE: (b) l'onda piana lineare a K + B0/L: omega del tick = -arg lambda della banda entro 1e-10            PASSA +0.245394431264775 contro +0.245394431264775 (|d| 1.7e-16; |<p0|lin>| 1.000000000000001)
+  DEVE: il controllo di p: p(0.010) - p(0) = 0.010 entro l'1%                                                PASSA 9.946039e-03
+       k            p              v            E_H            E_w         +- E_w  pezzi
+   0.000    +0.000000  +0.000000e+00  +0.000000e+00  +0.000000e+00        9.8e-07      1
+   0.010    +0.009946  +5.194668e-04  -1.136889e+01  -2.683746e-06        1.0e-06      1
+   0.020    +0.019899  +1.042309e-03  -6.024889e+01  -9.114935e-06        1.0e-06      1
+   0.050    +0.049751  +2.632386e-03  -4.368101e+02  -6.377188e-05        1.1e-06      1
+   0.100    +0.099488  +5.331309e-03  -1.793782e+03  -2.587426e-04        1.2e-06      1
+   0.200    +0.198973  +1.091020e-02  -7.080034e+03  -1.017627e-03        1.9e-06      1
+   0.300    +0.298503  +1.675627e-02  -1.550291e+04  -2.243912e-03        3.7e-06      1
+   0.400    +0.398021  +2.263108e-02  -2.668330e+04  -3.892800e-03        6.5e-06      1
+   0.500    +0.497537  +2.840308e-02  -4.023055e+04  -5.898678e-03        1.0e-05      2  ### NON UN PEZZO: il limite
+  m* del calcio 0.010: +19.2505; m* c = 1.6354 (il p a cui gamma si fa sentire)
+----------------------------------------------------------------------------------------------------------------------------------
+  E_H (il libro dei conti)  ### senza barra: i chi quadri NON pesati
+    m dalla curvatura (E = p^2/2m sui tre p piu' piccoli) -0.0000, contro m* +19.2505
+    onda E = c p + b, c libera       i parametri -7.894473e+04 +4.038926e+03; chi quadro 8.4090e+07
+    onda, c = 0.084955               i parametri -1.147489e+04; chi quadro 1.5710e+09
+    particella, c libera             i parametri +1.536446e+03 -8.058758e+01; chi quadro 2.6244e+09
+      v(p) contro p c^2/(E + m c^2): p +0.0099: +5.1947e-04 / +6.4734e-06; p +0.0199: +1.0423e-03 / +1.2951e-05; p +0.0498: +2.6324e-03 / +3.2382e-05; p +0.0995: +5.3313e-03 / +6.4764e-05; p +0.1990: +1.0910e-02 / +1.2959e-04; p +0.2985: +1.6756e-02 / +1.9458e-04; p +0.3980: +2.2631e-02 / +2.5975e-04; p +0.4975: +2.8403e-02 / +3.2513e-04
+      dp/dv contro gamma^3 m: p +0.0099: +1.9036e+01 / +1.5364e+03; p +0.0199: +1.8971e+01 / +1.5364e+03; p +0.0498: +1.8646e+01 / +1.5364e+03; p +0.0995: +1.8234e+01 / +1.5364e+03; p +0.1990: +1.7438e+01 / +1.5364e+03; p +0.2985: +1.6983e+01 / +1.5364e+03; p +0.3980: +1.7092e+01 / +1.5364e+03; p +0.4975: +1.7241e+01 / +1.5364e+03
+    particella, c = 0.084955         i parametri +2.906827e+03; chi quadro 2.6244e+09
+----------------------------------------------------------------------------------------------------------------------------------
+  E_w (omega, la cima)
+    m dalla curvatura (E = p^2/2m sui tre p piu' piccoli) -19.4567, contro m* +19.2505
+    onda E = c p + b, c libera       i parametri -7.324328e-03 +2.192826e-04; chi quadro 1.8710e+05
+    onda, c = 0.084955               i parametri -5.233442e-03; chi quadro 1.6360e+08
+    particella, c libera             i parametri +3.102434e+02 -2.563983e+01; chi quadro 1.5815e+06
+      v(p) contro p c^2/(E + m c^2): p +0.0099: +5.1947e-04 / +3.2059e-05; p +0.0199: +1.0423e-03 / +6.4139e-05; p +0.0498: +2.6324e-03 / +1.6036e-04; p +0.0995: +5.3313e-03 / +3.2068e-04; p +0.1990: +1.0910e-02 / +6.4134e-04; p +0.2985: +1.6756e-02 / +9.6216e-04; p +0.3980: +2.2631e-02 / +1.2829e-03; p +0.4975: +2.8403e-02 / +1.6037e-03
+      dp/dv contro gamma^3 m: p +0.0099: +1.9036e+01 / +3.1024e+02; p +0.0199: +1.8971e+01 / +3.1024e+02; p +0.0498: +1.8646e+01 / +3.1024e+02; p +0.0995: +1.8234e+01 / +3.1024e+02; p +0.1990: +1.7438e+01 / +3.1024e+02; p +0.2985: +1.6983e+01 / +3.1024e+02; p +0.3980: +1.7092e+01 / +3.1024e+02; p +0.4975: +1.7241e+01 / +3.1024e+02
+    particella, c = 0.084955         i parametri +9.637495e+04; chi quadro 1.3951e+06
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

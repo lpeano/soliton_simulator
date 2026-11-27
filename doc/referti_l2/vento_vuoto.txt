@@ -1,0 +1,96 @@
+[TIMBRO] vento_vuoto.py  sha1-BYTE 04c19b27  committato e pulito
+[TIMBRO] vento_vuoto_v2.py  sha1-BYTE d3396fa9  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+[TIMBRO] vento_vuoto.py  sha1-BYTE 04c19b27  committato e pulito
+==================================================================================================================================
+[M2245-A] IL VENTO DEL VUOTO (la carta sez. 3-undecies): gli stati ogni 250 di [M2210] (r1 gradino, r2 rampa, r3 V0); il raggio 25 dal baricentro
+==================================================================================================================================
+  DEVE: (A1) J_phi di k 0 rispetto a se stesso (fase uniforme 0) = 0 AL BIT                                  PASSA 
+  DEVE: (A1) la fase uniforme 0.3: |d theta/dy| massimo < 1e-12 (l'arrotondamento: 0.3 non e' al bit)        PASSA 6.5e-17
+  DEVE: (A1) DEVE FALLIRE lo zero: la rampa di fase q y (3 giri su L_y) da' d theta/dy = q entro 1e-9 (fuori dalla cucitura del toro) PASSA max |d/q - 1| 4.9e-15
+  DEVE: (A4) phi di k 0 uguale AL BIT nelle tre corse                                                        PASSA 
+----------------------------------------------------------------------------------------------------------------------------------
+(A1) J_phi LONTANO (la media sui nodi a d > 25) E (A2) v_phi = <J>/<rho_phi>; accanto, il riferimento omega k_eff <dN/dy> (il ritmo locale SE omega del vuoto scalasse come N; omega 0.471239 della scena)
+----------------------------------------------------------------------------------------------------------------------------------
+      k  r1 gradino: J, v_phi, riferimento              r2 rampa: J, v_phi, riferimento                r3 V0: J, v_phi                               
+      0  +0.0000e+00 +0.0000e+00 +0.0000e+00            +0.0000e+00 +0.0000e+00 +0.0000e+00            +0.0000e+00 +0.0000e+00 +0.0000e+00           
+    250  +8.1763e-03 +1.3437e-03 +1.4947e-03            +1.5939e-03 +2.6193e-04 +3.7520e-04            -2.2344e-04 -3.6719e-05 +0.0000e+00           
+    500  +2.1336e-02 +3.5059e-03 +2.9899e-03            +1.0135e-02 +1.6654e-03 +1.4966e-03            +2.2781e-03 +3.7432e-04 +0.0000e+00           
+    750  +3.3126e-02 +5.4432e-03 +4.4913e-03            +2.2414e-02 +3.6828e-03 +2.9914e-03            +2.4779e-03 +4.0712e-04 +0.0000e+00           
+   1000  +3.9668e-02 +6.5179e-03 +5.9820e-03            +2.8291e-02 +4.6483e-03 +4.4876e-03            -1.2913e-03 -2.1217e-04 +0.0000e+00           
+   1250  +4.6678e-02 +7.6702e-03 +7.4674e-03            +3.6673e-02 +6.0253e-03 +5.9796e-03            +1.5713e-03 +2.5817e-04 +0.0000e+00           
+   1500  +5.5175e-02 +9.0686e-03 +8.9691e-03            +4.6397e-02 +7.6242e-03 +7.4685e-03            +9.1003e-04 +1.4951e-04 +0.0000e+00           
+   1750  +6.4407e-02 +1.0588e-02 +1.0453e-02            +5.8429e-02 +9.6031e-03 +8.9809e-03            +1.9656e-04 +3.2289e-05 +0.0000e+00           
+   2000  +7.7474e-02 +1.2739e-02 +1.2003e-02            +6.7612e-02 +1.1114e-02 +1.0464e-02            +3.7970e-03 +6.2378e-04 +0.0000e+00           
+  (A2) v_phi / v dell'oggetto (v - v(V0) dalla serie, la differenza centrata a 10 tick):
+    k  250: gradino v +1.7636e-04, v_phi/v +7.6187e+00;  rampa v +4.4083e-05, v_phi/v +5.9417e+00
+    k  500: gradino v +2.4221e-04, v_phi/v +1.4475e+01;  rampa v +1.2057e-04, v_phi/v +1.3812e+01
+    k  750: gradino v +4.2918e-04, v_phi/v +1.2683e+01;  rampa v +2.8475e-04, v_phi/v +1.2933e+01
+    k 1000: gradino v +7.1931e-04, v_phi/v +9.0613e+00;  rampa v +5.3735e-04, v_phi/v +8.6504e+00
+    k 1250: gradino v +7.7931e-04, v_phi/v +9.8424e+00;  rampa v +6.2360e-04, v_phi/v +9.6621e+00
+    k 1500: gradino v +7.7491e-04, v_phi/v +1.1703e+01;  rampa v +6.4296e-04, v_phi/v +1.1858e+01
+    k 1750: gradino v +1.2127e-03, v_phi/v +8.7305e+00;  rampa v +1.0421e-03, v_phi/v +9.2149e+00
+    k 2000: gradino v +1.8641e-03, v_phi/v +6.8336e+00;  rampa v +1.6644e-03, v_phi/v +6.6772e+00
+  ### gradino: J - J(V0) contro k (k 250..2000): la pendenza +3.6081e-05 +- 1.3e-06 (28.8 sigma), R2 0.9928
+  ### rampa: J - J(V0) contro k (k 250..2000): la pendenza +3.6573e-05 +- 1.2e-06 (31.2 sigma), R2 0.9939
+  ### v0: J - J(k 0) contro k (k 250..2000): la pendenza +7.5686e-07 +- 1.1e-06 (0.7 sigma), R2 0.0791
+----------------------------------------------------------------------------------------------------------------------------------
+(A3) DOVE STA IL MASSIMO DI |psi| LONTANO (d > 25): il nodo (m1, m2), d dal baricentro, la direzione (gradi, 0 = +x, 90 = +y), y - y_c (L_y/4 = 35.074)
+----------------------------------------------------------------------------------------------------------------------------------
+  gradino  k    0: |psi| 3.0421e-01 al nodo ( 54,  55); d  25.09; direzione  -121.4; y - y_c  -21.410
+  gradino  k  250: |psi| 2.5534e-01 al nodo ( 58,  52); d  25.19; direzione  -107.5; y - y_c  -24.008
+  gradino  k  500: |psi| 2.7396e-01 al nodo ( 82,  56); d  25.16; direzione   -55.0; y - y_c  -20.544
+  gradino  k  750: |psi| 3.5281e-01 al nodo ( 57,  53); d  25.03; direzione  -111.3; y - y_c  -23.142
+  gradino  k 1000: |psi| 4.0929e-01 al nodo ( 53,  57); d  25.06; direzione  -127.0; y - y_c  -19.678
+  gradino  k 1250: |psi| 4.7849e-01 al nodo ( 58,  53); d  25.01; direzione  -108.9; y - y_c  -23.142
+  gradino  k 1500: |psi| 9.0347e-01 al nodo ( 61,  52); d  25.18; direzione  -100.5; y - y_c  -24.008
+  gradino  k 1750: |psi| 8.8200e-01 al nodo ( 63,  52); d  25.16; direzione   -95.9; y - y_c  -24.008
+  gradino  k 2000: |psi| 1.3086e+00 al nodo ( 58,  54); d  25.12; direzione  -110.0; y - y_c  -22.276
+  rampa    k    0: |psi| 3.0421e-01 al nodo ( 54,  55); d  25.09; direzione  -121.4; y - y_c  -21.410
+  rampa    k  250: |psi| 2.5515e-01 al nodo ( 61,  51); d  25.20; direzione   -99.3; y - y_c  -24.874
+  rampa    k  500: |psi| 2.6207e-01 al nodo ( 53,  56); d  25.20; direzione  -125.4; y - y_c  -20.544
+  rampa    k  750: |psi| 2.9682e-01 al nodo ( 67,  51); d  25.02; direzione   -85.6; y - y_c  -24.874
+  rampa    k 1000: |psi| 3.6318e-01 al nodo ( 62,  51); d  25.24; direzione   -97.0; y - y_c  -24.874
+  rampa    k 1250: |psi| 4.5000e-01 al nodo ( 52,  59); d  25.02; direzione  -133.1; y - y_c  -17.946
+  rampa    k 1500: |psi| 4.8157e-01 al nodo ( 54,  56); d  25.06; direzione  -122.8; y - y_c  -20.544
+  rampa    k 1750: |psi| 6.1580e-01 al nodo ( 61,  52); d  25.18; direzione  -100.5; y - y_c  -24.008
+  rampa    k 2000: |psi| 7.9959e-01 al nodo ( 66,  52); d  25.03; direzione   -89.1; y - y_c  -24.008
+  v0       k    0: |psi| 3.0421e-01 al nodo ( 54,  55); d  25.09; direzione  -121.4; y - y_c  -21.410
+  v0       k  250: |psi| 2.5734e-01 al nodo ( 61,  51); d  25.20; direzione   -99.3; y - y_c  -24.874
+  v0       k  500: |psi| 2.5683e-01 al nodo ( 53,  56); d  25.18; direzione  -125.4; y - y_c  -20.544
+  v0       k  750: |psi| 2.6492e-01 al nodo ( 51,  61); d  25.02; direzione  -139.7; y - y_c  -16.214
+  v0       k 1000: |psi| 3.4819e-01 al nodo ( 62,  51); d  25.02; direzione   -97.1; y - y_c  -24.874
+  v0       k 1250: |psi| 2.8121e-01 al nodo ( 62,  51); d  25.01; direzione   -97.1; y - y_c  -24.874
+  v0       k 1500: |psi| 3.0342e-01 al nodo ( 82,  56); d  25.04; direzione   -54.9; y - y_c  -20.544
+  v0       k 1750: |psi| 2.8624e-01 al nodo ( 51,  70); d  25.03; direzione  -160.5; y - y_c   -8.420
+  v0       k 2000: |psi| 2.7682e-01 al nodo ( 58,  52); d  25.10; direzione  -107.6; y - y_c  -24.008
+----------------------------------------------------------------------------------------------------------------------------------
+(A4) LA FASE DI phi LUNGO y (arg della somma su x, per riga m2): assoluta (arg somma phi_h) e acquistata da k 0; ogni 9 righe
+----------------------------------------------------------------------------------------------------------------------------------
+  gradino  k    0 assoluta:   -0.402 +2.232 -0.462 -0.167 +1.310 -1.523 +0.300 -2.852 +2.768 -0.397 -2.014 -1.993 +1.934 +2.361 +2.301 -2.582 -2.221 +3.105
+  gradino  k    0 acquistata: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+  gradino  k 1000 assoluta:   -1.674 -0.180 +1.095 +2.454 -2.179 -1.013 -2.801 +0.679 -2.041 -1.778 -2.202 +1.777 -2.512 +0.935 +1.039 -1.532 +1.892 +2.227
+  gradino  k 1000 acquistata: +0.082 +0.643 +1.127 +1.475 +1.646 +1.617 +1.388 +0.952 +0.290 -0.271 -0.733 -1.123 -1.472 -1.640 -1.612 -1.389 -0.999 -0.488
+  gradino  k 2000 assoluta:   +1.050 -2.813 +2.417 +0.755 +0.046 -0.921 +2.094 -1.188 +2.100 +2.503 -1.104 +1.908 +0.814 +3.106 +0.698 -1.098 -1.427 +0.028
+  gradino  k 2000 acquistata: +0.164 +1.286 +2.254 +2.951 -2.992 -3.049 +2.786 +2.001 +1.001 -0.109 -1.399 -2.256 -2.949 +3.003 +3.060 -2.778 -1.997 -0.977
+  v0       k    0 assoluta:   -0.402 +2.232 -0.462 -0.167 +1.310 -1.523 +0.300 -2.852 +2.768 -0.397 -2.014 -1.993 +1.934 +2.361 +2.301 -2.582 -2.221 +3.105
+  v0       k    0 acquistata: +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000 +0.000
+  v0       k 1000 assoluta:   -2.307 -0.673 +0.437 -2.658 -1.766 +1.685 -2.907 -1.051 -1.982 -2.167 -2.960 +1.704 -1.952 +0.350 +0.717 -0.318 -1.800 +1.957
+  v0       k 1000 acquistata: -0.000 +0.000 +0.000 -0.000 +0.000 +0.000 -0.010 -0.048 -0.187 -0.192 -0.125 -0.012 -0.009 -0.000 +0.000 -0.000 -0.000 +0.000
+  v0       k 2000 assoluta:   +0.809 +2.549 +2.881 +0.550 +0.651 -0.770 -2.521 -1.153 -0.688 -0.847 -0.331 +2.060 +0.443 +2.206 +1.429 -0.359 -2.048 -0.086
+  v0       k 2000 acquistata: +0.000 -0.000 +0.001 +0.000 -0.000 +0.000 -0.008 -0.038 -0.039 +0.063 -0.079 -0.009 -0.002 -0.000 -0.000 +0.000 +0.000 +0.000
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

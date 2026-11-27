@@ -1,0 +1,32 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] orientamento_prove.py  sha1-BYTE faa2afe2  committato e pulito
+[TIMBRO] suite_merge.py  sha1-BYTE fbac72a1  committato e pulito
+### IL RIUSO DELLA FATTORIZZAZIONE DI GAUSS: ACCESO (come le corse nuove del porto)
+### L'INTERPRETE: E:\python\py3132\python.exe (Python 3.13.2); PYTHONNOUSERSITE None; TMP E:\soliton_lavoro\tmp (R-AMBIENTE)
+[TIMBRO] convergenza.py  sha1-BYTE c9a428f2  committato e pulito
+[TIMBRO] convergenza_243.py  sha1-BYTE 1f7c161e  committato e pulito
+[TIMBRO] gauss_riuso.py  sha1-BYTE edc6fdf0  committato e pulito
+[TIMBRO] lapse_caldo.py  sha1-BYTE fa10b8dd  committato e pulito
+[TIMBRO] legati.py  sha1-BYTE 75646939  committato e pulito
+[TIMBRO] mattone.py  sha1-BYTE 8850e35e  committato e pulito
+[TIMBRO] mattone_cottura.py  sha1-BYTE cbd7859a  committato e pulito
+[TIMBRO] mattone_rhoc.py  sha1-BYTE bf6b7c9f  committato e pulito
+[TIMBRO] porto.py  sha1-BYTE 4464bbae  committato e pulito
+[TIMBRO] porto_alone.py  sha1-BYTE 30571fc4  committato e pulito
+[TIMBRO] _u1_prototipo.py  sha1-BYTE d073761c  committato e pulito
+[TIMBRO] prova_scatola5.py  sha1-BYTE 30e0c27b  committato e pulito
+==================================================================================================================================
+[M1330-A2] IL CASO NOTO DELLE NASCITE DOPO IL MERGE: dal tronco k 35976 col codice fuso fino a k 36000, contro MITOSI/stato_36000 AL BIT
+==================================================================================================================================
+### SUITE_MERGE (mitosi): da E:\soliton_simulator\controllo\mitosi_rami\TRONCO\prima_nascita_35976.npz (k 35976, sha1 abbdcaca), fino a k 36000; le nascite ACCESE
+    [nascita 1] k 35976, l'arco 50995 (lo scatto del tronco; 0 in attesa): n 34596 a r 18.93, 20 passi dalla sorgente; DH nascita -1.7244e+01 flip -7.0629e+00; P9 0.0e+00; |Ec| 2.308e-01; E_persa +2.430687e+01 (16.6 s)
+    k 36000  M 9.950108931445e+05  E +8.2677914271e+06  E_persa +2.430687e+01  nascite 1  n 34597  D1 45.0/67.0  E1 (15, 22, 16.513768415391073)  |gauss_acc| 2.308e-01 (lontano 7.891e-06)  (140 s)
+    [stato] k 36000 sha1 38e62a67
+### SUITE_MERGE: 24 tick in 140 s; 1 nascite; E_persa +2.430687e+01; il codice 0
+### dal tronco k 35976 fino a k 36000 contro stato_36000.npz (sha1 9bab6148): AL BIT
+  lo stato a k 36000 col codice fuso = MITOSI/stato_36000 AL BIT                                                   PASSA   
+  DEVE FALLIRE: lo stesso stato contro MITOSI/stato_36250 (diverso)                                                PASSA   diversi ['Lambda', 'h_int', 'phi_h', 'psi', 'psi_h', 'rho', 'A', 'E', 'theta', 'ii', 'jj', 'geo', 'm1', 'm2', 'gauss_acc', 'cs_prec', 'E_persa']
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: lo stato a k 36000 col codice fuso = MITOSI/stato_36000 AL BIT                                                 PASSA
+  DEVE: DEVE FALLIRE: lo stesso stato contro MITOSI/stato_36250 (diverso)                                              PASSA
+==================================================================================================================================

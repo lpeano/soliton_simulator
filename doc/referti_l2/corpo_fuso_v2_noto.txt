@@ -1,0 +1,41 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] due_corpi_fondo_v9.py  sha1-BYTE af211422  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] corpo_fuso.py  sha1-BYTE 43ac319d  committato e pulito
+[TIMBRO] corpo_fuso_v2.py  sha1-BYTE 687b68c0  committato e pulito
+==================================================================================================================================
+[M1824] I CASI NOTI DELLA RIPRESA (la carta, il seguito [M1824]): K0, K0-neg (S1), KB e KB-neg (il confronto al bit), K2 (la carica di S2)
+==================================================================================================================================
+  la serie parziale di d1T: 1201 righe, da k 18000 a k 30000; omega 12000 e 12000 tick
+  il riferimento: E:\soliton_simulator\controllo\M1519\d1T\stato_030000.npz (11 chiavi); la partenza E:\soliton_simulator\controllo\M1519\d1T\stato_029750.npz
+  DEVE: (KB) il confronto al bit: lo stato di riferimento contro se stesso = 0 chiavi diverse                            PASSA 
+  DEVE: (KB-neg) DEVE FALLIRE: un ulp cambiato in psi_h -> il confronto trova psi_h diversa                              PASSA diverse: ['psi_h']
+  DEVE: (carica) la riga della serie a k 29750 = quella della serie parziale di d1T AL BIT                               PASSA [29750, -3.3836276177128743, -7.057280740851737]
+  DEVE: (K0) lo stato a k 30000 = d1T/stato_030000 AL BIT, ogni chiave (11)                                              PASSA diverse: []
+  DEVE: (K0) la serie 29760..30000 (25 righe) = la serie parziale di d1T AL BIT                                          PASSA 
+  DEVE: (K0) omega dei tick 29751..30000 (250), i due corpi: |d omega|/omega < 1e-12 (Luca 13:12)                        PASSA max rel 6.042e-15
+    (K0: 125 s)
+  DEVE: (K0-neg) senza riscrivere geo.U lo stato a k 30000 e' DIVERSO da d1T/stato_030000                                PASSA diverse: ['Lambda', 'phi_h', 'psi_h', 'rho', 'campo_A', 'campo_E', 'chi', 'pi', 'theta_a']
+    (K0-neg: 122 s)
+  DEVE: (K2) la carica di S2 da partenza_giro_3 (pi = 0) = giro_3/stato_000000 AL BIT, ogni chiave                       PASSA diverse: []
+### 8 DEVE: 8 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

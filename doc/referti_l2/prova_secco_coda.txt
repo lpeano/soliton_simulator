@@ -1,0 +1,15 @@
+[TIMBRO] coda_m1446.py  sha1-BYTE 1eaac589  committato e pulito
+[TIMBRO] prova_secco_coda.py  sha1-BYTE 68dce9d6  committato e pulito
+==============================================================================================================
+[M1107] A4: coda_m1446.py A SECCO dalla cartella nuova (importato, main() NON chiamato)
+==============================================================================================================
+  DEVE: la radice del lanciatore e' la cartella nuova                               PASSA E:\soliton_lavoro\wt_lapse_u
+  DEVE: la lista si legge                                                           PASSA E:\soliton_lavoro\wt_lapse_u\doc\referti_l2\coda_m1446.json: 237 voci
+  DEVE: lo stato (il percorso vecchio) si legge                                     PASSA E:\soliton_simulator\controllo\M1446\coda_stato.json: 237 corse; l'ultimo evento: 2026-11-27T03:19:48 FERMO: la coda e' vuota
+  DEVE: lo script del registro esiste sotto la radice nuova                         PASSA E:\soliton_lavoro\wt_lapse_u\csv\solitone\_registro_corse.py
+  DEVE: il REGISTRO (nel repo) esiste                                               PASSA E:\soliton_lavoro\wt_lapse_u\doc\REGISTRO_CORSE.md
+  DEVE: le TAPPE (il percorso vecchio) esistono                                     PASSA E:\soliton_simulator\registro_tappe
+  DEVE: gli stati di d1' (il percorso vecchio): 25                                  PASSA 25
+  DEVE: nessuna corsa da lanciare                                                   PASSA []
+### 8 DEVE: 8 PASSANO
+==============================================================================================================

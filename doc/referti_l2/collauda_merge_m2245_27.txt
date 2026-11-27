@@ -1,0 +1,86 @@
+[_suite_su_E] GIT_CONFIG_COUNT=1, GIT_CONFIG_KEY_0=safe.directory, GIT_CONFIG_VALUE_0=*; TMP=E:\soliton_lavoro\tmp TEMP=E:\soliton_lavoro\tmp; la suite: primo_ordine/collauda.py 
+[TIMBRO] collauda.py  sha1-BYTE c90f9aef  committato e pulito
+====================================================================================================
+TUTTI I COLLAUDI, CON I TEMPI   (punto 6)
+====================================================================================================
+  la macchina: Windows AMD64, python 3.13.2
+  il budget del `pre-commit`: 1800 s   ### e oltre il budget e- un SEGNALE, non un rifiuto
+
+  il collaudo                            dove         secondi  esito
+  ----------------------------------------------------------------------------------------------
+  il grafo valido                        pre-commit      0.59  ok
+  il determinismo                        pre-commit      7.87  ok
+  le simmetrie e le conservazioni        pre-commit      1.62  ok
+  lo schema della tabella                pre-commit      0.81  ok
+  il generatore                          pre-commit      2.94  ok
+  la struttura compatta delle estremita- pre-commit      0.34  ok
+  il motore: contenitore e pezzi unitari pre-commit      0.38  ok
+  il checkpoint e la ripresa             pre-commit      5.84  ok
+  il confronto tabella / banco           pre-commit      3.87  ok
+  la memoria: `m1`..`m4`                 pre-commit      1.86  ok
+  il flusso di saturazione               pre-commit      0.41  ok
+  il flusso materia-vuoto                pre-commit      0.47  ok
+  le forme del legame                    pre-commit      0.42  ok
+  `P3` l-energia e la corrente           pre-commit      0.37  ok
+  la corrente locale costruita           pre-commit    127.43  ok
+  la deriva di `E` e la sorgente         pre-commit     32.94  ok
+  il tempo proprio in TUTTE le leggi     pre-commit      0.41  ok
+  lo schema della camminata              pre-commit      0.22  ok
+  lo schema della configurazione         pre-commit      0.21  ok
+  `@rif` byte-inerte                     pre-commit      0.21  ok
+  il modello di sigillo                  pre-commit      2.26  ok
+  la catena                              pre-commit      3.90  ok
+  la GUIDA, eseguita                     pre-commit      2.16  ok
+  il referto dell-infrastruttura (LENTO) solo-CI        17.33  ok
+  la barriera dei hook                   pre-commit      0.70  ok
+  `P-ALB` l-albero delle scelte          pre-commit      6.53  ok
+  `P-ID` un id che nasce                 pre-commit      0.55  ok
+  `P-T2` il replay dei registri          pre-commit      7.83  ok
+  l-arbitro fra le due vie               pre-commit      0.51  ok
+  i presidi dell-indice                  pre-commit      7.02  ok
+  `P-REG` le regole di gestione          pre-commit      0.80  ok
+  il presidio sullo STOP                 pre-commit      0.41  ok
+  `P-E1`..`P-E5` i presidi dell-era 2    pre-commit      0.66  ok
+  `P-M1` il documento dei metodi         pre-commit      0.26  ok
+  `P-C1` i controlli nell-indice         pre-commit      1.57  ok
+  `P-T1` il testo non si interpreta      pre-commit      1.02  ok
+  `P-R1` ogni ramo e- dichiarato         pre-commit      2.09  ok
+  `P-T3` le citazioni strutturate        pre-commit      1.27  ok
+  `P-RIF` un ID nel codice e- un costrutto pre-commit      6.74  ok
+  `P-ES1` un solo esecutore              pre-commit      8.57  ok
+  `P-MOD` la modularita-                 pre-commit      5.05  ok
+  `P-AB` i confronti e i dati            pre-commit      0.25  ok
+  `P-TAB` la legge si legge dalla tabella pre-commit      6.85  ok
+  `D0` la forma `cs` spenta e' il passo di oggi pre-commit      6.66  ok
+  `D1` l-invarianza di scala             pre-commit      3.99  ok
+  `D2` `cs` al centro, a punto fisso     pre-commit      2.74  ok
+  `D2-T` il tetto di `Omega`, la tolleranza derivata pre-commit      0.32  ok
+  `R60` le rotazioni del reticolo commutano col tick di oggi pre-commit      1.33  ok
+  il censimento dei rami (NON blocca)    solo-CI         0.42  ok
+  chi la suite NON gira (NON blocca)     pre-commit      0.36  ok
+  `M-B1` PUO- fallire, ed e- provato     solo-CI        74.84  ok
+  i presidi dell-indice, nei due versi   pre-commit      4.47  ok
+  i controlli della migrazione           pre-commit      4.20  ok
+  il rinominamento, sul piano            pre-commit      0.41  ok
+  la FORMA dei testi generati            pre-commit      8.39  ok
+  i controlli sullo STAGE e non sul disco solo-CI       102.36  ok
+  la pulizia delle temporanee            pre-commit      0.65  ok
+  la simmetria `(P Theta)` sulla parte LINEARE pre-commit      1.93  ok
+  la `(P Theta)` col termine NON lineare, e `cs` nei due modi pre-commit      0.69  ok
+  la misura COMPLETA di `L2`, su piu- stati solo-CI        20.66  ok
+  `H_w`: l-energia PESATA, e se il passo con `cs` la conserva pre-commit     18.05  ok
+  il banco della camminata               pre-commit      0.89  ok
+  il banco della camminata v2            pre-commit      0.98  ok
+  il banco della camminata v3            pre-commit      1.04  ok
+  le letture del guscio e del moto       solo-CI        33.36  ok
+  il banco del v4                        pre-commit      4.67  ok
+  il banco del legame                    solo-CI        31.39  ok
+  ----------------------------------------------------------------------------------------------
+  IL TOTALE del `pre-commit`                           317.95
+  piu- i LENTI, solo in CI                             280.36
+  IN TUTTO                                             598.31
+
+  ### TUTTI I COLLAUDI PASSANO: 67 su 67
+  ### il `pre-commit` sta nel budget: 317.9 s su 1800 s (18%)
+====================================================================================================
+====================================================================================================

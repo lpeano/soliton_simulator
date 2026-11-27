@@ -239,9 +239,16 @@ def collaudo():
     # ------------------------------------------------- il repo usa-e-getta
     t = tempfile.mkdtemp(prefix="repo_")
     try:
+        # ### [M2245-27] (DECISIONE DI LUCA 23:14 e 23:21): il repo usa-e-getta sta nel temp di E:,
+        # ### che NON registra il proprietario (git: "dubious ownership"); ai SOLI sottoprocessi git
+        # ### di questo repo (g e il checkout-index di prova) si passa safe.directory=* per ambiente
+        # ### -- niente config globale, C: mai.
+        _env_g = dict(os.environ, GIT_CONFIG_COUNT="1", GIT_CONFIG_KEY_0="safe.directory",
+                      GIT_CONFIG_VALUE_0="*")
+
         def g(*a):
             return subprocess.run(["git"] + list(a), cwd=t, capture_output=True,
-                                  text=True, encoding="utf-8", errors="replace")
+                                  text=True, encoding="utf-8", errors="replace", env=_env_g)
 
         def scrivi(nome, testo):
             io.open(os.path.join(t, nome), "w", encoding="utf-8",
@@ -262,7 +269,7 @@ def collaudo():
             try:
                 q = subprocess.run(["git", "checkout-index", "-a",
                                     "--prefix=" + d + os.sep], cwd=t,
-                                   capture_output=True)
+                                   capture_output=True, env=_env_g)
                 if q.returncode != 0:
                     return None
                 r = subprocess.run([sys.executable, os.path.join(d, "v.py")], cwd=d,

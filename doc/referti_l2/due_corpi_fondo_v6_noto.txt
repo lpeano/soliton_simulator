@@ -1,0 +1,30 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+==================================================================================================================================
+[M2034-B] I CASI NOTI DELLA COPPIA COL VUOTO FRESCO (la carta sez. 3-septendecies): G, T, K2, V0, V2, V3
+==================================================================================================================================
+  LA CATENA DEL TICK t: la tenuta (t0 + k) -> t 63000; v2 giro 1: k_b 300 -> t 63300; v2 giro 2: k_b 2300 -> t 65600; v2 giro 3: k 6000 (la partenza della v3b) -> t 71600; v3b giro 1: k_b 1500 -> t 73100; v3b giro 2: k_b 2100 -> t 75200; v3b giro 3: k 6000 = PARTENZA_G4 -> t 81200; M0137 giro 1 -> t 87200; M0137 giro 2 -> t 93200; M0137 giro 3 (k 6000) -> t 99200; M0414 giro 1 -> t 105200; M0414 giro 2 -> t 111200; M0414 giro 3: partenza_giro_4 -> t 117200
+  DEVE: (V0) la tenuta (t 63000): la fase di c(t) = la fase del fit sul vuoto lontano entro 0.05 rad         PASSA arg a +0.1571 (|a| 1.0000), arg c +0.1571: |d| 0.0000
+  DEVE: (V0) PARTENZA_G4 (t 81200): la fase di c(t) = la fase del fit sul vuoto lontano entro 0.05 rad       PASSA arg a +0.1571 (|a| 1.0000), arg c +0.1571: |d| 0.0000
+  DEVE: (G) lo spostamento di ogni nodo: |dx| < 1e-9 e |dy - 48 sqrt3/2| < 1e-9                              PASSA 0.0e+00 0.0e+00
+  DEVE: (T) le masse dei due corpi uguali entro 1e-9 relativo                                                PASSA [995010.8931463913, 995010.8931463911]
+  DEVE: (V2) phi composto = c(t) phi_v AL BIT, dappertutto                                                   PASSA t 117200, c +0.987688+0.156434i
+  la coppia: chi_fondo -23.9511; max|chi| 114.057; il centro [91.69312304612411, 103.54518853207182]; P on kappa 2.5289441539e-04, c0 -2.3030149598e-03, s 0.150000000000, e0 4.767266e-01, c2 0.2500, m2 1.0e-04, f 0.06000000000000001; m0 -9.106626e+00
+  DEVE: (K2) d2' a k 0 = d1' a k 0 AL BIT (l'impronta)                                                       PASSA ebc59ddfbb8c ebc59ddfbb8c
+  (V3) d3', 250 tick: omega medio a fase 0 +0.084031366, a fase c(t) +0.084031366; |d| 0.000e+00 (353 s): LA FASE NON CONTA (entro 1e-6)
+### 6 DEVE: 6 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

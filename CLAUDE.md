@@ -65,6 +65,10 @@ di equivalenza — **la prova piu' dura per qualunque teoria a spinta**)*?
   diversi per lo stesso file: **quando si cita un blob, si dice QUALE DELLE DUE.**
 - **Gestione (lanciatori, code, script di controllo, attività pianificate, riavvii di sessione): NON esiste senza una riga di Luca con l'ora. Senza, non si fa; dichiararla dopo non la sana.**
   Le scelte di criterio dentro un mandato (soglie, convenzioni di segno, riferimenti) restano ammesse se dichiarate nella carta PRIMA della corsa. *(Luca, [M2145], 2026-11-23 21:45)*
+- **Il ramo `guardiano` e la posta** *(Luca, [M2345], 2026-11-24 23:53)*: il guardiano scrive SOLO su `guardiano`, e **CC non vi committa ne' pusha mai** (`H-GUARDIANO`). La posta `guardiano/posta/*.md` si legge SOLO su comando di Luca («leggi la posta») o all'avvio di una sessione,
+  mai a intervalli: DELEGA e DECISIONE DI LUCA si eseguono, ATTESA DI LUCA no finche' Luca non ratifica in chat (`guardiano/DELEGA.md`); le ricevute in `RELAZIONE_PER_CLAUDE.md` *([Mxxxx] eseguito/respinto, con l'ora)*.
+- **La cartella di lavoro** *(Luca, [M1214] 12:14; DECISIONE DI LUCA 2026-11-27 18:59)*: il repo principale e' `E:/soliton_lavoro/soliton_simulator` *(primo-ordine)*, i worktree `E:/soliton_lavoro/wt_lapse_u` e `wt_mitosi`; ogni comando, lancio, commit e push si fa da li'. **C: MAI** *(ne' repo, ne' worktree, ne' temp, ne' stati)*;
+  `E:/soliton_simulator` e' SOLO il deposito dei dati *(`controllo/`, `registro_tappe`)*. Il presidio *(la radice del lanciatore e dei commit)* e' proposto nella carta, non ancora scritto (`A9`).
 
 > **IL DETTAGLIO:** **`doc/REGOLE/par2.md`**.
 
@@ -287,8 +291,10 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 |---|---|---|
 | **`[[H-FILE]]`** | una lista FILE CAMBIATI che non coincide con `git diff --cached --name-only`, o che manca | **`H-FILE`** |
 | **`[[H-FISICA-FUORI-LISTA]]`** | un `.py` sotto `primo_ordine/` che non e- nella LISTA di `csv/_file_fisica.py` | **`H-FISICA-FUORI-LISTA`** |
+| **`[[H-GUARDIANO]]`** | un commit sul ramo `guardiano`, o un push che scrive `refs/heads/guardiano`: nessuna via d-uscita | **`H-GUARDIANO`** |
 | **`[[H-ID-OBBLIGATORIO]]`** | un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` | **`H-ID-OBBLIGATORIO`** |
 | **`[[H-INDICE]]`** | un ID citato CHE NON E- nell-indice | **`H-INDICE`** |
+| **`[[H-LANCIATORI]]`** | un lanciatore NUOVO in `doc/referti_l2/` (`coda_`, `lancia_`, `dispatcher_`) o una modifica a `coda_m1446.py` SENZA `DECISIONE DI LUCA (hh:mm)` nel messaggio: nessuna via d-uscita | **`H-LANCIATORI`** |
 | **`[[H-NON-TRACCIATI]]`** | file NON TRACCIATI e NON ignorati sotto `csv/` o `doc/`: BLOCCA, non avvisa | **`H-NON-TRACCIATI`** |
 | **`[[H-NUCLEO-CONGELATO]]`** | sul ramo `primo-ordine`, un commit che tocca `primo_ordine/` finche- `doc/NUCLEO_CONGELATO.md` dice CONGELATO: nessuna via d-uscita | **`H-NUCLEO-CONGELATO`** |
 | **`[[H-P1-bis]]`** | un referto committato SENZA toccare la relazione | **`H-P1-bis`** |
@@ -306,7 +312,7 @@ qui**: sta in `doc/PATTERN_DI_PROVA.md`.)*
 | **`[[P-REG]]`** | una regola di gestione e- una VOCE, e le due sezioni delle regole SI GENERANO dall-indice: modificate a mano, RIFIUTATE | **`P-REG`** |
 | **`[[P-TAB]]`** | un id di legge FUORI dall-ordine nel codice, l-import del modulo di una legge superata, un CONTO della tabella scritto a mano, o una SECONDA FONTE che non confronta -- e un-eccezione ORFANA fallisce anche lei | **`P-TAB`** |
 
-> ### ⚠ **`0` di queste `20` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
+> ### ⚠ **`0` di queste `22` NON HANNO NESSUN PRESIDIO che le faccia rispettare** *(`A9`)*. ### **E il numero esiste perche' <<chi la fa rispettare>> e' UN CAMPO: in prosa non si contava.** ### **IL DETTAGLIO:** `doc/REGOLE/par12.md`.
 
 <!-- FINE REGOLE GENERATE par12.md -->
 **LE VIE D'USCITA OBBLIGANO A DICHIARARE:** `[SENZA-RELAZIONE: …]` ·
@@ -334,13 +340,13 @@ in un **commento del file**, **e** elencata in `doc/ESENZIONI_presidi.md`.
 | `3` | **`primo_ordine/leggi/leggi.yaml`** | **l'UNICA fonte** delle leggi: il codice sotto `primo_ordine/termini/` **si genera**, e **niente si scrive a mano** |
 | `4` | **`primo_ordine/config/prova.yaml`** | la configurazione e' **UNA**, e la riga di comando sceglie **SOLO IL FILE** |
 | `5` | **`doc/COME_SI_AGGIUNGE_UNA_LEGGE.md`** | gli `8` passi dall'idea al referto, e **un collaudo LA ESEGUE** -- quindi **non puo' invecchiare in silenzio** |
-| `6` | **`python primo_ordine/collauda.py`** | **un solo comando** per tutti i collaudi, **coi TEMPI**: oltre il budget e' **un SEGNALE, non un rifiuto** |
+| `6` | **`python csv/_suite_su_E.py`** *(lancia `primo_ordine/collauda.py` con `safe.directory=*` nel solo ambiente del processo: Luca 23:21)* | **un solo comando** per tutti i collaudi, **coi TEMPI**: oltre il budget e' **un SEGNALE, non un rifiuto** |
 
 ### ⭐ **E I DUE COMANDI CHE DICONO LO STATO, prima di toccare qualunque cosa:**
 
 ```
 python csv/indice.py valida            # l'indice intero, e `P-ALB` dentro
-python primo_ordine/collauda.py        # tutti i collaudi, coi tempi
+python csv/_suite_su_E.py              # tutti i collaudi, coi tempi (= primo_ordine/collauda.py; E: non registra il proprietario)
 ```
 
 ### ⛔ **E UNA COSA CHE VALE SOLO NELL'ERA `2`: il generatore RIFIUTA.** Dimensioni

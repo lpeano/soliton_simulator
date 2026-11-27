@@ -261,7 +261,9 @@
    "DOMANDA-REGOLE-FUORI-CLAUDE",
    "DOMANDA-TRASPORTO-DEVE-STARE-IN-SU2",
    "FORMA-SPEZZA-ID",
+   "H-GUARDIANO",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-STOP-CODA",
    "L-NON-FERMARSI-AL-CHECKPOINT",
    "L-NUMERI-DERIVA-ORFANA",
@@ -704,9 +706,11 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -2443,8 +2447,10 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -3531,9 +3537,11 @@
    "H-ETC-2",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -4759,9 +4767,11 @@
    "FUGA-MULTIRIGA",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
    "H-INDICE-IGNORA-I-VOCABOLARI",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-P1-bis",
    "H-P3",
@@ -6027,8 +6037,10 @@
   "par12.md": [
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-NUCLEO-CONGELATO",
    "H-P1-bis",
@@ -6907,6 +6919,9 @@
   "un commit che tocca un file della LISTA, o un referto, e NON CITA NESSUN ID: e- il rovescio di `H-INDICE` || H-ID-OBBLIGATORIO": [
    "H-ID-OBBLIGATORIO"
   ],
+  "un commit sul ramo `guardiano`, o un push che scrive `refs/heads/guardiano`: nessuna via d-uscita || H-GUARDIANO": [
+   "H-GUARDIANO"
+  ],
   "un confronto che prende il codice di prima da HEAD invece che dal PADRE || H-P8": [
    "H-P8"
   ],
@@ -6918,6 +6933,9 @@
   ],
   "un indice mal formato, o con una voce persa || H-VALIDATORE": [
    "H-VALIDATORE"
+  ],
+  "un lanciatore NUOVO in `doc/referti_l2/` (`coda_`, `lancia_`, `dispatcher_`) o una modifica a `coda_m1446.py` SENZA `DECISIONE DI LUCA (hh:mm)` nel messaggio: nessuna via d-uscita || H-LANCIATORI": [
+   "H-LANCIATORI"
   ],
   "un referto che non dichiara LA CONFIGURAZIONE INTERA || H-P5": [
    "H-P5"
@@ -8396,8 +8414,10 @@
    "FUGA-MULTIRIGA",
    "H-FILE",
    "H-FISICA-FUORI-LISTA",
+   "H-GUARDIANO",
    "H-ID-OBBLIGATORIO",
    "H-INDICE",
+   "H-LANCIATORI",
    "H-NON-TRACCIATI",
    "H-P1-bis",
    "H-P3",

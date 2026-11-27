@@ -1,0 +1,21 @@
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+==================================================================================================================================
+[M1330-B] IL PUNTO FISSO (la carta sez. 3-bis): w per giro, il periodo, il criterio (w_max - w_min)/w_medio < 5% sull'ultimo giro
+==================================================================================================================================
+  giro 1: w (k 0, 50, ..., 2000): 8.50 8.53 8.48 8.48 8.50 8.48 8.37 8.37 8.43 8.47 8.55 8.72 8.80 8.86 9.11 9.38 9.72 9.86 10.21 10.51 10.84 11.22 11.63 12.03 12.55 12.92 13.39 13.72 14.29 14.56 14.75 14.79 14.79 15.00 15.20 15.17 15.42 15.44 15.59 15.60 15.63
+          i minimi ai k [1750]; il periodo None; (max - min)/medio 0.6295; ### FERMO: meno di due minimi locali in 2000 tick
+### IL CRITERIO: NON MISURATO (1 giri su 3)
+----------------------------------------------------------------------------------------------------------------------------------
+[M1330-B4] IL CONTROLLO NEGATIVO DI omega A RIPOSO ([M0140]): omega per tick del giro 1 (a riposo, k 3000 -> 5000) accanto alla caduta V2 x1 (M1658/c1_omega)
+----------------------------------------------------------------------------------------------------------------------------------
+  omega [   1,  250]: a riposo +0.0939299; cadendo +0.0939301; cadendo - riposo +1.92e-07
+  omega [ 251,  500]: a riposo +0.0939062; cadendo +0.0939065; cadendo - riposo +2.56e-07
+  omega [ 501,  750]: a riposo +0.0938872; cadendo +0.0938874; cadendo - riposo +2.11e-07
+  omega [ 751, 1000]: a riposo +0.0938659; cadendo +0.0938660; cadendo - riposo +9.28e-08
+  omega [1001, 1250]: a riposo +0.0938496; cadendo +0.0938492; cadendo - riposo -3.86e-07
+  omega [1251, 1500]: a riposo +0.0938293; cadendo +0.0938315; cadendo - riposo +2.16e-06
+  omega [1501, 1750]: a riposo +0.0938058; cadendo +0.0938094; cadendo - riposo +3.58e-06
+  omega [1751, 2000]: a riposo +0.0937835; cadendo +0.0937879; cadendo - riposo +4.39e-06
+### a riposo: l'ultima finestra - la prima -1.464e-04; cadendo -1.422e-04
+==================================================================================================================================

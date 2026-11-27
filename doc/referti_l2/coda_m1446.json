@@ -2248,6 +2248,733 @@
     "corsa"
    ],
    "note": "[M0140] (DECISIONE DI LUCA 01:40) la caduta V2 x1 rifatta, omega per tick, psi_h confrontato con c1_parti ogni 250"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0.010_da500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.010 dallo stato k 500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0_da500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "500",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.0 dallo stato k 500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0.010_da1500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "1500",
+    "--k",
+    "0.010"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.010 dallo stato k 1500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_B5_calcio_k0_da1500",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/mstar_w.py",
+    "calcio",
+    "--da",
+    "1500",
+    "--k",
+    "0.0"
+   ],
+   "note": "[M1330-B5] (DECISIONE DI LUCA 13:30) m* in funzione di w: il calcio k 0.0 dallo stato k 1500 della V0 di l0.7, 1000 tick"
+  },
+  {
+   "nome": "M1330_puntofisso",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso.py",
+    "corsa"
+   ],
+   "note": "[M1330-B1/B2] (DECISIONE DI LUCA 13:30) il punto fisso: tre giri di 2000 tick a N 1, stati ogni 50"
+  },
+  {
+   "nome": "M1330F_noto_a",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "noto_a"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il caso noto (a): il calcio 0.010 di 1c rifatto, al bit"
+  },
+  {
+   "nome": "M1330F_calcio_k0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.01",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.01"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.01 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.02",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.02"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.02 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.05",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.05"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.05 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.1"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.1 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.2"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.2 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.3"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.3 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.4"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.4 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F_calcio_k0.5",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo.py",
+    "calcio",
+    "--k",
+    "0.5"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) il calcio k 0.5 dall'oggetto che respira (k 300 del giro 1, w minimo), 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.01",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.01"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.01 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.02",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.02"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.02 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.05",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.05"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.05 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.1"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.1 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.2"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.2 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.3"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.3 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.4"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.4 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1330F2_calcio_k0.5",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/ep_fondo_v2.py",
+    "calcio",
+    "--k",
+    "0.5"
+   ],
+   "note": "[M1330-F] (DECISIONE DI LUCA (14:45)) la v2 (la cartella prima): il calcio k 0.5 dall'oggetto che respira, 1000 tick"
+  },
+  {
+   "nome": "M1540_puntofisso_v2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_v2.py",
+    "corsa"
+   ],
+   "note": "[M1540] (DECISIONE DI LUCA (15:40)) il punto fisso: tre giri di 6000 tick a N 1, stati ogni 100"
+  },
+  {
+   "nome": "M1748_puntofisso_v3b",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_v3b.py",
+    "corsa"
+   ],
+   "note": "[M1748] (DECISIONE DI LUCA (17:48)) il punto fisso v3b: P = 2 (k_min - k_max) sulla w lisciata, tre giri di 6000 tick dallo stato finale del giro 3 della v2, stati ogni 100"
+  },
+  {
+   "nome": "M1932_puntofisso_v3b4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_v3b4.py",
+    "corsa"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) il quarto giro della v3b: 6000 tick da giro_3/stato_006000, w ogni 100, lo stesso metodo"
+  },
+  {
+   "nome": "M1932B3_V0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V0"
+  },
+  {
+   "nome": "M1932B3_x0.5",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "0.5"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 0.5"
+  },
+  {
+   "nome": "M1932B3_x1.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "1.0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 1.0"
+  },
+  {
+   "nome": "M1932B3_x2.0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v2b.py",
+    "caduta",
+    "--coll",
+    "V2",
+    "--scala",
+    "2.0"
+   ],
+   "note": "[M1932] (DECISIONE DI LUCA (19:32)) B3, le quattro cadute dall'oggetto del giro 4 (respiro 6.77 per cento): --coll V2 --scala 2.0"
+  },
+  {
+   "nome": "M2210_r1_gradino",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "gradino"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: gradino, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2210_r2_rampa",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "rampa"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: rampa, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2210_r3_V0",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/legge_fondo_v3.py",
+    "corsa",
+    "--tipo",
+    "v0"
+   ],
+   "note": "[M2210] (DECISIONE DI LUCA (22:10)) il freno che segue il tempo: v0, 2000 tick dall'oggetto del giro 4, x1, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: due oggetti, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: due oggetti, chi off, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2330_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v3.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M2330] (DECISIONE DI LUCA (23:30)) il modello intero: un oggetto, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_puntofisso_chi_g1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi.py",
+    "giro",
+    "--g",
+    "1"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) il punto fisso con chi acceso, giro 1: 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_puntofisso_chi_g2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi.py",
+    "giro",
+    "--g",
+    "2"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) il punto fisso con chi acceso, giro 2: 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_puntofisso_chi_g3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi.py",
+    "giro",
+    "--g",
+    "3"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) il punto fisso con chi acceso, giro 3 (C non passato al giro 2)"
+  },
+  {
+   "nome": "M0237_K3",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_soglia.py",
+    "noto"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA (02:37), dalla posta) K3: la soglia 1 da 35976 a 36250 contro MITOSI al bit; ramo mitosi"
+  },
+  {
+   "nome": "M0237_K4",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_vuoto.py",
+    "noto"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA (02:37), dalla posta) K4: il vuoto puro con le nascite spente, 250 tick; ramo mitosi"
+  },
+  {
+   "nome": "M0137_rampa_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: due, chi in rampa, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_rampa_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: due, chi off, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0137_rampa_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v5.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M0137] (DECISIONE DI LUCA (01:37), dalla posta) la riserva: uno, chi in rampa, kappa in rampa su 1500 tick, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M0414_accoppiato_g1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "1"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 1: 6000 tick dalla fine del giro 3 di [M0137], pi = 0"
+  },
+  {
+   "nome": "M0414_accoppiato_g2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "2"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 2"
+  },
+  {
+   "nome": "M0414_accoppiato_g3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/fondo_puntofisso_chi_v2.py",
+    "giro",
+    "--g",
+    "3"
+   ],
+   "note": "[M0414] (DECISIONE DI LUCA (04:14), dalla posta) il punto fisso accoppiato (psi, chi), giro 3 (l'ultimo)"
+  },
+  {
+   "nome": "M2034_d1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d1"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: due, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2034_d2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d2"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: due, chi off, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2034_d3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v6.py",
+    "corsa",
+    "--quale",
+    "d3"
+   ],
+   "note": "[M2034] (DECISIONE DI LUCA (20:34), dalla posta) la coppia col vuoto fresco: uno, chi on, 6000 tick, stati ogni 250"
+  },
+  {
+   "nome": "M2053_x_n2_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "2",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 2 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n4_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "4",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 4 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n8_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "8",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 8 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n16_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "16",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 16 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_y_n2_eps1e-3",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "y",
+    "--n",
+    "2",
+    "--eps",
+    "1e-3"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: y n 2 eps 1e-3, 1000 tick"
+  },
+  {
+   "nome": "M2053_x_n2_eps5e-4",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_luci.py",
+    "corsa",
+    "--dir",
+    "x",
+    "--n",
+    "2",
+    "--eps",
+    "5e-4"
+   ],
+   "note": "[M2053] (DECISIONE DI LUCA (20:53), dalla posta) le due luci: x n 2 eps 5e-4, 1000 tick"
+  },
+  {
+   "nome": "M0237_soglia_v2_0.5",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_soglia_v2.py",
+    "corsa",
+    "--s",
+    "0.5"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA, dalla posta) la mitosi, pezzo 3: soglia 0.5, dopo B; K3 e K3b verdi (e398b4fb, ramo mitosi)"
+  },
+  {
+   "nome": "M0237_soglia_v2_2",
+   "priorita": 2,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_soglia_v2.py",
+    "corsa",
+    "--s",
+    "2"
+   ],
+   "note": "[M0237] (DECISIONE DI LUCA, dalla posta) la mitosi, pezzo 3: soglia 2, dopo B; K3 e K3b verdi (e398b4fb, ramo mitosi)"
+  },
+  {
+   "nome": "M0106_vuoto_puro",
+   "priorita": 1,
+   "argv": [
+    "C:/Users/lpeano/wt_mitosi/doc/referti_l2/mitosi_vuoto_v2.py",
+    "corsa"
+   ],
+   "note": "[M0106] (DECISIONE DI LUCA 01:06, dalla posta) il vuoto puro con le nascite accese, 6000 tick, stati ogni 250; K4'' PASSA (mitosi, ramo mitosi)"
+  },
+  {
+   "nome": "M1214_d1L",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/due_corpi_fondo_v9.py",
+    "corsa"
+   ],
+   "note": "[M1214] (DECISIONE DI LUCA 13:12) la corsa lunga d1'': da M2034/coppia/d1/stato_006000 per 12000 tick (fino a k 18000), stati ogni 250, in M2034/coppia/d1L; v9 (U rifatta dopo la carica); K0' passa (lo stato al bit, omega < 1e-12)"
+  },
+  {
+   "nome": "M1519_S1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso.py",
+    "corsa"
+   ],
+   "note": "[M1519] (DECISIONE DI LUCA 15:19) S1, la corsa libera d1''': da M2034/coppia/d1L/stato_018000 per 36000 tick (fino a k 54000), stati ogni 250, in M1519/d1T; K0'' passa (11/11 DEVE, corpo_fuso_noto.txt)"
+  },
+  {
+   "nome": "M1519_S2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso.py",
+    "puntofisso"
+   ],
+   "note": "[M1519] (DECISIONE DI LUCA 15:19) S2, il punto fisso accoppiato 2M: 3 giri da 6000 da d1L/stato_018000 (pi = 0), i parametri di d1', in M1519/puntofisso_2M; K1'' passa"
+  },
+  {
+   "nome": "M1824_S1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso_v2.py",
+    "corsa"
+   ],
+   "note": "[M1824] (DECISIONE DI LUCA 18:24 e 18:59) S1 ripresa: da M1519/d1T/stato_030000 per 24000 tick (fino a k 54000), stati ogni 250, in M1519/d1T_r; gli stati 30250..31000 AL BIT con d1T, altrimenti si ferma; K0 passa (8/8 DEVE, corpo_fuso_v2_noto.txt); alle 19:24:37 C: 25.14 GB liberi, impegnabile 29.37 GB liberi su 49.47 (soglia 8)"
+  },
+  {
+   "nome": "M1824_S2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso_v2.py",
+    "giro3"
+   ],
+   "note": "[M1824] (DECISIONE DI LUCA 18:24 e 18:59) S2, il giro 3 ripreso: da puntofisso_2M/giro_2/partenza_giro_3.npz (pi = 0), 6000 tick, in puntofisso_2M/giro_3r; gli stati 0..1000 AL BIT con giro_3, altrimenti si ferma; K2 passa; alle 19:24:37 C: 25.14 GB liberi, impegnabile 29.37 GB liberi su 49.47 (soglia 8)"
   }
  ]
 }

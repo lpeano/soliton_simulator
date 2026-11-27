@@ -1,0 +1,47 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] legge_fondo_v2.py  sha1-BYTE 837622d7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gradiente_pesato.py  sha1-BYTE a4a90671  committato e pulito
+[TIMBRO] fondo_s3_v2.py  sha1-BYTE 0b6560fa  committato e pulito
+[TIMBRO] caduta_finestre.py  sha1-BYTE dd463a97  committato e pulito
+[TIMBRO] legge_fondo_v3.py  sha1-BYTE 91fd8d2c  committato e pulito
+==================================================================================================================================
+[M2210] IL FRENO CHE SEGUE IL TEMPO (la carta sez. 3-decies): K per finestra del gradino (r1) e della rampa (r2), e la norma lontana (raggio 25 nodi) di r1, r2, r3
+==================================================================================================================================
+  le costanti di 1c (come B3): m* +18.9162; omega_psi(N1) +0.0939180
+  DEVE: (Luca) r1_gradino: stato_000250.npz esiste                                                           PASSA 
+  DEVE: (Luca) r2_rampa: stato_000250.npz esiste                                                             PASSA 
+  DEVE: (Luca) r3_V0: stato_000250.npz esiste                                                                PASSA 
+  DEVE: r1 (il gradino) = B3 x1 AL BIT, tutta la serie (salvare gli stati non tocca la dinamica)             PASSA 
+  DEVE: r3 (la V0) = B3 V0 AL BIT, le prime quattro colonne                                                  PASSA 
+----------------------------------------------------------------------------------------------------------------------------------
+(i) K CIMA PESATA PER FINESTRA (V0 = r3); per r2 il fit DOPO la rampa ([700, 2000] e le finestre di 600 dentro)
+----------------------------------------------------------------------------------------------------------------------------------
+  gradino  [ 200,  800]: a - a(V0) +7.3736e-07 +- 7.0e-09; <dN/dy>/centro 0.94221; K CIMA PESATA +1.0014 +- 0.0095 (al centro +0.9435)
+  gradino  [ 800, 1400]: a - a(V0) +6.6066e-07 +- 1.3e-08; <dN/dy>/centro 0.94154; K CIMA PESATA +0.8979 +- 0.0180 (al centro +0.8454)
+  gradino  [1400, 2000]: a - a(V0) +5.6457e-07 +- 1.8e-08; <dN/dy>/centro 0.94004; K CIMA PESATA +0.7685 +- 0.0245 (al centro +0.7224)
+  gradino  [ 200, 2000]: a - a(V0) +6.6215e-07 +- 1.8e-09; <dN/dy>/centro 0.94126; K CIMA PESATA +0.9002 +- 0.0025 (al centro +0.8473)
+  rampa    [ 700, 2000]: a - a(V0) +6.6250e-07 +- 2.3e-09; <dN/dy>/centro 0.94112; K CIMA PESATA +0.9008 +- 0.0031 (al centro +0.8477)
+  rampa    [ 800, 1400]: a - a(V0) +6.9284e-07 +- 1.1e-08; <dN/dy>/centro 0.94166; K CIMA PESATA +0.9415 +- 0.0146 (al centro +0.8866)
+  rampa    [1400, 2000]: a - a(V0) +6.0957e-07 +- 1.6e-08; <dN/dy>/centro 0.94043; K CIMA PESATA +0.8294 +- 0.0224 (al centro +0.7800)
+----------------------------------------------------------------------------------------------------------------------------------
+(ii) e (iii) LA NORMA FUORI DAL RAGGIO 25 DAL BARICENTRO (frazione della massa) e |psi| MASSIMO FUORI (|psi| per nodo = sqrt(rho)), per stato
+----------------------------------------------------------------------------------------------------------------------------------
+       k   r1 gradino: norma, |psi| max       r2 rampa: norma, |psi| max         r3 V0: norma, |psi| max           
+       0   2.853149e-04, 3.0421e-01           2.853149e-04, 3.0421e-01           2.853149e-04, 3.0421e-01          
+     250   2.949204e-04, 2.5534e-01           2.949053e-04, 2.5515e-01           2.949060e-04, 2.5734e-01          
+     500   3.024299e-04, 2.7396e-01           3.023886e-04, 2.6207e-01           3.023153e-04, 2.5683e-01          
+     750   3.116346e-04, 3.5281e-01           3.116293e-04, 2.9682e-01           3.115748e-04, 2.6492e-01          
+    1000   3.215787e-04, 4.0929e-01           3.207237e-04, 3.6318e-01           3.202780e-04, 3.4819e-01          
+    1250   3.328241e-04, 4.7849e-01           3.311927e-04, 4.5000e-01           3.302583e-04, 2.8121e-01          
+    1500   3.434907e-04, 9.0347e-01           3.407180e-04, 4.8157e-01           3.385222e-04, 3.0342e-01          
+    1750   3.578467e-04, 8.8200e-01           3.498922e-04, 6.1580e-01           3.461676e-04, 2.8624e-01          
+    2000   3.725917e-04, 1.3086e+00           3.629536e-04, 7.9959e-01           3.529152e-04, 2.7682e-01          
+### 5 DEVE: 5 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

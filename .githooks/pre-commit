@@ -34,6 +34,10 @@ R="$(git rev-parse --show-toplevel)"
 # ### ### **mi ha rifiutato DUE commit oggi** per una lista che era giusta quando
 # ### l-avevo generata. ### **Il comando resta disponibile a mano.**
 
+#  `H-GUARDIANO` (DECISIONE DI LUCA 2026-11-24 23:53, [M2345]): sul ramo `guardiano` CC non committa mai.
+#  ### IN TESTA: un rifiuto che non dipende da nessun altro presidio. NESSUNA via d'uscita.
+python "$(git rev-parse --show-toplevel)/csv/_presidio_ramo_guardiano.py" --commit || exit 1
+
 #  `H-NUCLEO-CONGELATO` (decisione di Luca, 2026-11-08 21:47-21:49): sul ramo primo-ordine
 #  ### NESSUN commit tocca primo_ordine/ finche' doc/NUCLEO_CONGELATO.md dice CONGELATO.
 #  ### IN TESTA, prima di tutto: un rifiuto che non dipende da nessun altro presidio. NESSUNA via d'uscita.

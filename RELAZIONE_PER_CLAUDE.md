@@ -27014,6 +27014,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **Non ho fatto il merge** *(«Se la suite non passa: NON forzare, FERMO»: qui fallirebbe il criterio prima ancora della suite)*. **FERMO su A, e quindi su C** *(che viene dopo il merge)*. **La domanda a Luca:** il criterio va letto come «i 5 file di lapse-u + i file delle nascite di mitosi, elencati», o i 4 di mitosi devono restare fuori dal nucleo?
 - **Si va avanti con B e D** *(indipendenti dal merge)*.
 
+## [M1330-B0] IL GRADIENTE PESATO: GIA' `-4.52%` DAL CENTRO A `k 0` (`w 8.5`), `-7.93%` A `k 2000` (`w 15.5`); K CIMA PESATO `0.9920`, `0.8484`, `0.5569` *(2026-11-24, la lettura finita prima delle `13:36:44` da `date`; il codice `d27805ac`)* [[PROGETTO-MITOSI]]
+
+- **Prima, [M1330-A2]:** la DECISIONE DI LUCA [M1333] *(13:33: il criterio del nucleo e' 9 file; i conflitti tenendo le due parti)*: **il merge fatto** *(il commit sul ramo `mitosi` in corso coi presidi; i dettagli nel suo paragrafo)*.
+- **I casi noti PASSANO** *(2 su 2)*: `dN/dy` a `y = y_c` = il centro di S3 *(`-1.574010e-04`)*; a `y_c + L_y/4` no *(`-9.6e-21`)*.
+- ### **`<dN/dy>/centro`, dagli stati ogni `250` della caduta per parti (1c V2 `x1`):** `k 0` `0.95481` *(`w 8.498`)*; `k 1000` `0.93630` *(`w 10.773`)*; `k 2000` `0.92071` *(`w 15.513`)*: **sempre sotto il centro, e scende mentre `w` cresce.**
+- **Le previsioni del guardiano:** «meno del `2%` a `w 8.5`» *(`80%`)*: **NO** *(`-4.52%` a `k 0`)*; «piu' del `5%` a `w 15.5`» *(`40%`)*: **SI'** *(`-7.93%`)*.
+- ### **Differisce piu' del `2%`: K CIMA si rilegge col gradiente pesato** *(la media di `<dN/dy>` sugli stati della finestra, la mia lettura dichiarata nella carta)*: `[200, 800]` `0.9386 -> 0.9920`; `[800, 1400]` `0.7924 -> 0.8484`; `[1400, 2000]` `0.5145 -> 0.5569`. **Il calo di K fra le finestre resta.** Referto: `k_forma.txt` *(aggiunto in fondo)*.
+
+## [M1330-A2] [M1333] IL MERGE lapse-u -> mitosi FATTO: IL NUCLEO 9 FILE (IL CRITERIO); LE NASCITE AL BIT (k 35976 -> 36000); collauda.py 67 SU 67. E IL CASO NOTO DEL PUNTO FISSO PASSA *(2026-11-24, `13:33`-`13:52` da `date`)* [[PROGETTO-MITOSI]]
 ## [M1330-A2] [M1333] IL MERGE lapse-u -> mitosi FATTO: IL NUCLEO 9 FILE (IL CRITERIO); LE NASCITE AL BIT (k 35976 -> 36000); collauda.py 67 SU 67. E IL CASO NOTO DEL PUNTO FISSO PASSA *(2026-11-24, `13:33`-`13:53` da `date`)* [[PROGETTO-MITOSI]]
 
 - **La DECISIONE DI LUCA [M1333]** *(13:33)*: il criterio del nucleo sul ramo `mitosi` dopo il merge = **9 file** *(i 5 di lapse-u + `_collauda_motore.py`, `crescita_dati.py`, `flussi_parziali.py`, `motore.py`)*; i due conflitti tenendo le due parti, in ordine di data.
@@ -27024,6 +27033,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **[M1330-B1] il caso noto del punto fisso** *(`fondo_puntofisso.py noto`, `d27805ac`)*: **3 su 3** -- la media di un solo stato col proiettore identita' ridà `psi_h` AL BIT; lo stato riscritto e ricaricato con `FS.carica` = l'originale *(tutte le chiavi, `A`, `E`)* AL BIT; con `Q_K` diverso *(`max |d|` `2.639`)*.
 - **In coda** *(scritte a lanciatore FERMO)*: le quattro di B5 *(priorita' `0`)* e `M1330_puntofisso` *(priorita' `1`)*; il lanciatore si rilancia DOPO questo commit.
 
+## [M1330-D1] IL PRESIDIO DEI LANCIATORI, `H-LANCIATORI`: CABLATO IN `commit-msg`; IL CASO NOTO 8 SU 8 CON COMMIT VERI *(2026-11-24, `14:00`-`14:28` da `date`)* [[PROGETTO-MITOSI]]
+
+- **`csv/_presidio_lanciatori.py`**, in **`.githooks/commit-msg`** *(in `pre-commit` il messaggio non esiste ancora: come `H-RIGHE`)*: **rifiuta** un commit con un file NUOVO in `doc/referti_l2/` che comincia per `coda_`, `lancia_`, `dispatcher_`, o una MODIFICA a `coda_m1446.py`, **senza `DECISIONE DI LUCA (hh:mm)`** nel messaggio. **Nessuna via d'uscita.** Le voci di `coda_m1446.json` non le guarda.
+- ### **IL CASO NOTO, 8 su 8, con COMMIT VERI** in un repo di prova col hook che chiama il presidio: `coda_prova.py` senza la frase RIFIUTATO, con la frase ENTRA; `lancia_` e `dispatcher_` senza RIFIUTATO; `coda_m1446.py` modificato senza RIFIUTATO, con `(9:05)` ENTRA; un file qualunque ENTRA; `coda_m1446.json` ENTRA; la frase senza parentesi RIFIUTATO.
+- ### **Un mio errore nel collaudo, prima del commit:** la prima stesura metteva il hook di prova DENTRO il repo di prova, e `git clean` lo cancellava a ogni caso: **5 su 8 falliti** per questo. Il hook ora sta fuori, e ogni caso controlla di avere qualcosa in stage.
+- **La voce `H-LANCIATORI`** nell'indice *(`crea-lotto`)*, la riga in `CLAUDE.md` par. `12` *(generata: 355 righe)*, la riga dei metodi *(`P-M1`)*, la barriera dei hook *(`_barriera.lock`)*, e l'elenco del collaudo di `P-REG` *(la settima regola nuova, come prescrive il suo commento)*. **La suite: 67 su 67** *(al secondo giro: il primo cadde perche' lo stage era a meta')*.
+- **La previsione del guardiano** «fatto in 20 minuti» *(`85%`)*: **NO** *(circa mezz'ora)*.
+
+## [M1330-B1] [M1330-B4] [M1330-B5] IL PUNTO FISSO FERMO AL GIRO 1 (UN SOLO MINIMO DI w IN 2000 TICK); omega A RIPOSO CALA COME CADENDO; m*(w 14.4)/m*(w 7.0) = 1.0535 *(2026-11-24, le corse `13:55:01`-`14:13:28` dagli eventi del lanciatore, la lettura prima delle `14:13:36` da `date`)* [[PROGETTO-MITOSI]]
+
+- ### **[M1330-B1] FERMO** *(come la carta prevedeva, mia previsione `70%`)*: **il giro 1** *(dal `k 3000` di `L-1_proiezione_K`, `2000` tick a `N 1`, `w` ogni `50`)* **ha UN SOLO minimo locale stretto di `w`, a `k 1750`**: `w` da `8.50` *(k 0)* scende a `8.37` *(k 300-350)*, poi sale fino a `15.63` *(k 2000)*; il respiro sul giro `(max - min)/medio` **`0.6295`**. **Il periodo non si definisce in `2000` tick, la media non si fa, il criterio NON si misura** *(«Se il criterio di B1 non passa: FERMO, i numeri a Luca»)*. **B3 non parte.** Referto `fondo_puntofisso.txt`. **Le previsioni del guardiano** *(sotto il `5%` in tre giri `55%`; dimezzato `30%`)*: **non misurabili.**
+- ### **[M1330-B4] il controllo negativo di omega, a riposo** *(gli stessi `2000` tick)*: **a riposo `omega` cala di `-1.464e-04`, cadendo di `-1.422e-04`**; per finestra la differenza cadendo meno riposo va da `+1.9e-07` a `+4.4e-06`. **La discesa di omega di [M0140] e' del riposo, non della caduta.** Aggiunto in fondo a `caduta_parti.txt`.
+- ### **[M1330-B5]** *(i quattro calci, `749` s ciascuno)*: **`m*` da `k 500` della V0 di l0.7** *(`w 14.427`)* **`+19.7304 +- 0.0625`; da `k 1500`** *(`w 6.965`)* **`+18.7278 +- 0.0414`; il rapporto `1.0535`.** K CIMA di l0.7 per finestra: `[200, 800]` *(`w` medio `13.92`)* `0.9614` col `m*(w 14)`, `0.9125` col `m*(w 7)`; `[800, 1400]` *(`w` `8.98`)* `0.7972` / `0.7567`; `[1400, 2000]` *(`w` `9.01`)* `0.8257` / `0.7837`. Aggiunto a `k_forma.txt`. **Le previsioni del guardiano:** `m*(w 14)/m*(w 7)` fuori da `[0.9, 1.1]` *(`50%`)*: **NO** *(`1.0535`)*; la seconda era condizionata a quella.
+- **Nessun giudizio nel referto** *(il mandato)*.
+- ### **UN ERRORE MIO SUL REGISTRO:** le cinque CHIUSURE *(`14:07:31`-`14:13:28`)* **le ha scritte il lanciatore MENTRE girava la suite di D** *(`14:05`-`14:15`)*, **e la suite rimette a posto i byte dei file tracciati toccati mentre gira: le chiusure sono SPARITE dal registro.** **Le ho RISCRITTE a mano dagli eventi di `coda_stato.json`** *(stesse ore, stessi esiti; il punto fisso `FALLITO` con uscita `2`, cioe' il suo FERMO dichiarato)*. **La lezione, gia' in memoria e non applicata:** nessuna suite mentre il lanciatore puo' chiudere una corsa.
+
 ## [M1330-C1] LA PROVA A SECCO DELLA SCHEDA v3 SULLA NASCITA 1: IL «PRIMA» PASSA, IL «DOPO» CADE ALL'APERTURA -- ERRORE MIO NELLA v3; LE SCHEDE NON IN CODA *(2026-11-24, `14:16`-`14:24` da `date`)* [[PROGETTO-MITOSI]]
 
 - **Sul ramo `mitosi` dopo il merge** *(`409e6184`)*: `gradi_liberta_v3.py scheda --nascita 1` **a secco, fuori dalla coda.** Il log: `doc/referti_l2/nascite/gradi_liberta_v3_secco_fallito.txt`.
@@ -27032,6 +27057,510 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - ### **L'ERRORE E' MIO, nella v3** *(`4a3628ce`)*: **ho preso `cs_prec` dalla partenza «se manca e la partenza ha lo stesso `k`» per ENTRAMBI gli stati**; per il PRIMA e' giusto, **per il DOPO no: la partenza ha `n0` nodi, il DOPO `n0 + 1`, e il `cs` del nato NON c'e' da nessuna parte** *(lo stato `dopo_` salvato da `ripresa_nascita` non ha `cs_prec`)*. **Quale `cs` dare al nato** *(quello che il motore gli darebbe al tick dopo la nascita? quello del padre? rifare la ripresa salvando `cs_prec` nel DOPO?)* **e' una scelta nuova: la decide Luca.**
 - ### **Quindi le due voci (schede_a, schede_b) NON sono in coda** *(il mandato: «provata A SECCO … PRIMA di mettere in coda»)*. **FERMO su C.** **La previsione del guardiano** «prova a secco al primo colpo» *(`50%`)*: **NO.**
 
+## [M1330-F] E(p): I CALCI CADUTI A FINE CORSA (LA CARTELLA NON C'ERA) -- ERRORE MIO; LA v2; IL CASO NOTO (a) FINITO *(2026-11-24, `14:52`-`15:10` da `date`)* [[PROGETTO-MITOSI]]
+
+- **La carta** *(sez. `4-ter`, `8f236e63`)*: `p` dalla trasformata per cella; `v` su `[200, 1000]`; **`E` due volte** *(`E_H` col libro dei conti, come chiede Luca, e `E_w` con `omega`: il caso noto (b) puo' passare solo per `E_w` -- detto prima)*; **la `c` fissata `0.084955` PER TICK** *(lo `0.566` del mandato e' in unita' di `s`)*; **l'oggetto: lo stato `k 300` del giro 1 del punto fisso** *(il punto fisso non ha passato B1; il calcio nella fase di `w` minimo, `w 8.368`)*.
+- ### **I calci sono CADUTI dopo i `1000` tick** *(il salvataggio dello stato finale in una cartella che nasce dopo, in `fondo_1c.scrivi`)*: **la serie non scritta, i tick persi.** **Errore mio** *(non provato prima: l'avvolgimento del ciclo andava provato con un tick)*. **La v2** *(`ep_fondo_v2.py`)* crea la cartella prima; le nove corse si rifanno, in coda **a lanciatore fermo** *(i tre della v1 ancora in corsa cadranno anch'essi)*.
+- **Il caso noto (a)** *(il calcio `0.010` di 1c rifatto)*: **finito** *(`947` s)*; il confronto al bit nella lettura.
+
+## [M1330-F] E(p), LA LETTURA: I TRE CASI NOTI PASSANO; v CRESCE COME p/m* SENZA SATURARE; E_w ~ -p^2/(2 x 19.46), DI SEGNO OPPOSTO ALLA PARTICELLA; SI SPEZZA A k 0.5. E IL PUNTO FISSO v2 PARTITO *(2026-11-24, la lettura `15:46`-`15:49` da `date`)* [[PROGETTO-MITOSI]]
+
+- **Le nove corse della v2 finite** *(uscita `0`, `15:33:26`-`15:44:24`)*. Referto **`ep_fondo.txt`** *(`ep_fondo.py lettura`, `8f236e63`)*.
+- ### **I casi noti PASSANO, 3 su 3:** **(a)** il calcio `0.010` di 1c rifatto = `M1658/c1` **AL BIT** *(la serie e omega)*; **(b)** l'onda piana lineare a `K + B0/L`: omega del tick `+0.245394431264775` = `-arg lambda` della banda, `|d|` `1.7e-16`; **il controllo di `p`:** `p(0.010) - p(0)` = `9.946e-03`.
+- ### **La tabella** *(rispetto al fermo)*: `p` `0.009946` ... `0.497537`; **`v` cresce proporzionale a `p`** *(`5.19e-04` a `p 0.0099`, `2.84e-02` a `p 0.4975`)*; **`E_w` negativa** *(`-2.68e-06` ... `-5.90e-03`)*; **`E_H` negativa e di scala diversa** *(`-1.14e+01` ... `-4.02e+04`: il libro dei conti, non la quasi-energia)*. **I pezzi: `1` fino a `k 0.4`, `2` a `k 0.5`: il limite.** **`m*` del calcio `+19.2505`; `m* c = 1.6354`** -- i calci arrivano a `p ~ 0.5`: **la regione dove `gamma` conta non e' raggiunta.**
+- ### **I fit** *(tutti stampati)*: **E_w:** onda `c` libera chi quadro `1.8710e+05`, onda `c` fissata `1.6360e+08`, particella `c` libera `1.5815e+06`, particella `c` fissata `1.3951e+06`; **E_H** *(non pesati)*: `8.4090e+07`, `1.5710e+09`, `2.6244e+09`, `2.6244e+09`. **La curvatura a `p -> 0`:** `E_w` da' **`m = -19.4567`** contro `m*` **`+19.2505`**; `E_H` da' `-0.0000` *(la scala del libro)*.
+- ### **UNA COSA NEI NUMERI, POST-HOC e dichiarata:** **`|m|` dalla curvatura di `E_w` e `m*` dalla velocita' coincidono in modulo** *(`19.4567` contro `19.2505`)* **ma `E_w` SCENDE con `p` mentre `v` va nel verso di `p`:** con la convenzione `omega = -arg <psi|psi'>` **`E_w` ha il segno opposto a quello che la forma della particella `sqrt(m^2c^4 + p^2c^2) - mc^2 >= 0` puo' seguire** -- **per questo i fit della particella sono peggiori di quelli dell'onda, non per la fisica.** **Rifare i fit con `-E_w` e' una scelta di convenzione: la decide Luca.**
+- **Le previsioni del guardiano:** `v` satura entro `k 0.4` *(`65%`)*: **NO** *(lineare; `p` resta sotto `m* c`)*; la particella batte l'onda di `10` *(`55%`)*: **NO** *(col segno di `E_w` com'e')*; `c` libera entro il `10%` *(`50%`)*: **NO** *(i fit col segno sbagliato non hanno senso fisico)*; `m` entro il `10%` di `m*` *(`60%`)*: **IN MODULO SI'** *(`19.4567` contro `19.2505`)*, **nel segno NO**; si spezza prima di `0.3` *(`30%`)*: **NO** *(a `0.5`)*.
+- **[M1540] il punto fisso v2** *(`e73a3b9a`, 6000 tick per giro, stati ogni 100)*: **il primo lancio non e' partito per colpa mia** *(alle `15:46:58` la CPU era al `96.5%`, la mia lettura di E(p) lanciata insieme: il lanciatore usci' FERMO)*; **rilanciato alle `15:49`, il giro 1 partito alle `15:50`.** Nella carta sez. `3-quater` l'ora `15:46` era a stima *(`date` `15:45:11`)*.
+
+
+### 2026-11-24 17:18 -- [M1540] IL PUNTO FISSO v2 (6000 TICK PER GIRO): IL CRITERIO NON PASSA (0.3079 CONTRO 0.05). FERMO [[PROGETTO-MITOSI]]
+
+- **La corsa** `m1446-M1540_puntofisso_v2`: aperta `15:49:34`, chiusa `17:17:41`, uscita `0`; tre giri da `6000` tick, `w` ogni `100`. Il referto: `doc/referti_l2/fondo_puntofisso_v2.txt` *(`fondo_puntofisso_v2.py lettura`, blob `915a6764`; `fondo_puntofisso.py` `8d56d821`)*.
+- **I numeri** *(dal referto)*: `(w_max - w_min)/w_medio` giro 1 **`0.7565`**, giro 2 **`0.6325`**, giro 3 **`0.3079`**. **Il criterio `< 0.05` sull'ultimo giro: NON PASSA.** Nessun giro si e' fermato per mancanza di due minimi.
+- **I minimi e il periodo usato per la media** *(dai `giro.json`)*: giro 1 minimi `[100, 300, 4500, 5100, 5700, 5900]`, periodo `[100, 300]`; giro 2 `[300, 2300, 2600, 3900, 4300, 5500]`, periodo `[300, 2300]`; giro 3 `[1800, 2100, 2300, 2600, 3400, 5200]`, periodo `[1800, 2100]`.
+- **UNA COSA NEI NUMERI, POST-HOC e dichiarata:** il metodo della carta *(i primi due minimi locali STRETTI sulla griglia di `100`)* **ha preso come "periodo" finestre di `200`, `2000` e `300` tick**, mentre il respiro visibile in `w` ha periodo di qualche migliaio di tick *(giro 1: massimo `16.19` a `k 2200`, minimo `7.75` a `k 4500`)*. **I minimi piccoli sono oscillazioni corte sopra il respiro**: la media non e' stata fatta sul periodo del respiro, tranne forse nel giro 2. **Non e' una lettura del criterio**: il criterio, come scritto, non passa. Ma dice che **il fallimento non distingue "l'oggetto non ha un punto fisso" da "il metodo non media sul periodo giusto"**.
+- **E il giro 3 parte da `w 11.39`** *(giri 1 e 2 da `8.50` e `8.51`)*: la trasformazione del giro 2 ha cambiato la larghezza di partenza.
+- ### **FERMO** *(la carta sez. `3-bis`: «se il criterio fallisce, FERMO, i numeri a Luca»)*: **B3 non si fa.** **Decide Luca** se e come cambiare il metodo dei minimi *(es. minimi del respiro su una `w` lisciata, o il periodo fissato da un primo giro)*: **e' una scelta di criterio, va nella carta prima della corsa.**
+
+
+### 2026-11-24 17:38 -- [M1735] IL PUNTO FISSO v3: LA CARTA E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La carta** sez. `3-quinquies`: il periodo dai minimi di `w` lisciata (media mobile centrata di `5` campioni = `500` tick); con un solo minimo il ripiego `4500`; la media su `[k_min, k_min + periodo]`; la partenza `puntofisso_v2/giro_3/stato_006000.npz`; tre giri da `6000`, stati ogni `100`; il criterio invariato.
+- **Le mie scelte di criterio, dichiarate prima:** la finestra centrata di `5` campioni, solo finestre intere; i minimi stretti; **FERMO** senza minimi, o se `k_min + 4500 > 6000`; la massa della partenza della v1, invariata.
+- **Il codice** (`fondo_puntofisso_v3.py`): il giro e' `fondo_puntofisso.giro` cosi' com'e'; cambia solo `minimi`, sostituita in memoria, e la decisione va in `periodo_v3.json`.
+- **Il caso noto:** 6 DEVE, (a) quello di Luca (il periodo fra `4000` e `5000` sul giro 1 della v2), (b) DEVE FALLIRE il metodo della v2 sulla stessa serie.
+- **B3:** la coda non ha dipendenze fra voci, quindi le quattro cadute entrano in coda a lanciatore fermo, dopo la lettura della v3, solo se passa. Carta e script di B3 si committano mentre la v3 gira.
+- **Le previsioni:** quelle del guardiano; le mie: (a) passa `80%`; il criterio al giro 3 `35%`.
+
+### 2026-11-24 17:41 -- [M1735] IL CASO NOTO DELLA v3 FALLISCE: 5 DEVE SU 6; (a) DI LUCA NO, LA LISCIATA DEL GIRO 1 DELLA v2 HA UN SOLO MINIMO (k 4500). FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3_noto.txt` (`fondo_puntofisso_v3.py noto`, blob `3a7112d6`).
+- **(a) FALLISCE:** la `w` lisciata del giro 1 della v2 *(k da 200 a 5800)* parte da `8.46` e sale, con il massimo `15.95` a k `2200`-`2300`, poi scende al minimo `7.96` a k `4500`, poi risale fino a `9.39`. **I minimi della lisciata: solo `[4500]`.** Il piccolo avvallamento di `w` grezza a k `100`-`300` sparisce con la media mobile. Col ripiego la finestra sarebbe `[4500, 9000]`, che **esce dal giro di `6000`**: per la regola che ho scritto nella carta, FERMO, quindi periodo `None`.
+- **Una cosa da dire chiaramente:** anche leggendo il mandato alla lettera *(«con un solo minimo, periodo = 4500»)*, su questa serie il periodo verrebbe `4500` **per costruzione**, perche' `4500` viene proprio da questa serie. Il caso noto passerebbe senza aver misurato niente.
+- **Gli altri:** (b) DEVE FALLIRE passa *(il metodo della v2 da' `200`)*; (c), (d), (e), (f) passano. **Le masse:** v1 `995010.893146391`, partenza v3 `995010.893149807`.
+- **Le previsioni:** del guardiano, `4500 +- 300` *(`85%`)*: **non misurato**, perche' c'e' un solo minimo; mia, (a) passa *(`80%`)*: **NO**.
+- ### **FERMO:** la v3 non va in coda. **Decide Luca.** Possibili strade, nessuna scelta da me:
+  1. la finestra **che finisce** al minimo, `[k_min - periodo, k_min]` = `[0, 4500]`;
+  2. un giro piu' lungo *(almeno `9000` tick)*;
+  3. il periodo dal massimo al minimo della lisciata, moltiplicato per due.
+
+
+### 2026-11-24 17:52 -- [M1748] IL PUNTO FISSO v3b: LA CARTA (SEZ. 3-SEXIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Di Luca:** `P = 2 (k_min - k_max)` sulla lisciata; la media su `[k_max - P/2, k_max + P/2]`, accorciata al giro e dichiarata; il caso noto `P` fra `4000` e `5000` sul giro 1 della v2.
+- **Il file:** `fondo_puntofisso_v3b.py` e la cartella `M1330/puntofisso_v3b`. La v3 ha gia' girato il suo caso noto e non si riscrive.
+- **Le mie scelte, dichiarate:** `k_min` e' il primo minimo stretto; `k_max` e' l'argmax della lisciata prima di `k_min` *(non un massimo stretto: a k `2200` e `2300` la lisciata stampata vale `15.95` in entrambi)*; un massimo al bordo si usa e si dichiara; senza minimi, FERMO. La finestra finisce sempre a `k_min`, quindi puo' uscire solo a sinistra.
+- **Il caso noto:** 6 DEVE. Il sintetico (c) e' stato corretto prima del commit, perche' con periodo `3000` c'e' un minimo a k `500`.
+
+### 2026-11-24 17:56 -- [M1748] IL CASO NOTO DELLA v3b PASSA: 6 DEVE SU 6; P 4600 SUL GIRO 1 DELLA v2 (k_max 2200, k_min 4500), LA FINESTRA [0, 4500] ACCORCIATA DA [-100, 4500] [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b_noto.txt`.
+- **(a) di Luca:** `P 4600`, nell'intervallo `[4000, 5000]`, e uguale al numero previsto da Luca. **(b) DEVE FALLIRE:** il metodo della v2 da' `200`. **(c)** `[0, 4000]`; **(d)** accorciata a `[0, 2500]`; **(e)** FERMO; **(f)** il massimo al bordo, dichiarato.
+- **Le previsioni:** del guardiano `4500 +- 300` *(`85%`)*: **SI'** *(`4600`)*; mia, (a) passa *(`85%`)*: **SI'**.
+- **Il prossimo passo:** la voce `M1748_puntofisso_v3b` in coda a priorita' `1`, scritta a lanciatore fermo e committata prima del rilancio.
+
+### 2026-11-24 17:54 -- [M1748] LA v3b E' PARTITA (17:53:43, IL LANCIATORE RILANCIATO A MANO); UN ERRORE MIO: SEI ORE SCRITTE A STIMA [[PROGETTO-MITOSI]]
+
+- **Il rilancio, dichiarato:** il lanciatore `coda_m1446.py`, fermo dalle `17:17:41`, e' stato rilanciato a mano alle `17:53:43` *(da `date`)*, dopo il commit della voce *(`8bf0b90d`)*. Nel registro c'e' l'APERTO di `m1446-M1748_puntofisso_v3b`.
+- **UN ERRORE MIO, LE ORE A STIMA** *(si annotano, non si riscrivono)*:
+  - i titoli dei paragrafi di [M1735] `17:38` e `17:41` sono stati scritti prima dei commit, che sono delle `17:37:25` e `17:39:18`;
+  - quelli di [M1748] `17:52` e `17:56`: i commit sono delle `17:49:13` e `17:50:44`;
+  - nella carta, «`17:36` da `date`» *(sez. `3-quinquies`)* e «`17:49` da `date`» *(sez. `3-sexies`)* **non vengono da `date`**: i soli `date` di quei pezzi sono `17:34:40`, `17:37:07` e `17:47:53`.
+- **L'ordine, verificabile da git:** la carta e lo script di ogni pezzo sono antenati del suo caso noto, e il caso noto e' antenato della voce in coda.
+
+
+### 2026-11-24 18:0x (l'ora vera e' quella del commit) -- [M1330-B3] LA CARTA (SEZ. 3-SEPTIES) E LO SCRIPT DI B3, MENTRE LA v3b GIRA; PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Lo script e il referto:** `legge_fondo_v2.py`, con referto `legge_fondo_v2.txt`; le cadute V0, V2 `x0.5`, `x1`, `x2`.
+- **L'oggetto:** `puntofisso_v3b/giro_3/partenza_giro_3.npz`, quello la cui evoluzione ha passato il criterio. Non `partenza_giro_4`, che nessuna corsa ha misurato.
+- **Il gradiente pesato:** una quinta colonna della serie, `<dN/dy>` pesato con `rho`.
+- **K CIMA, al centro e pesata, una accanto all'altra.**
+- **`m*` e `omega_psi(N1)` sono quelli di 1c.** **UNA DOMANDA A LUCA:** il `m*` dell'oggetto nuovo vuole due calci in piu'; non li lancio senza mandato.
+- **Il caso noto:** 3 DEVE. (a) la V2 `x1` di 1c al bit per `100` tick; (b) DEVE FALLIRE contro `x2`; (c) `<dN/dy>/centro` a `k 0` uguale a B0 *(`0.95481`)*.
+- **La coda:** le quattro voci solo se la v3b passa, scritte a lanciatore fermo.
+
+### 2026-11-24 -- [M1330-B3] IL CASO NOTO DI B3 PASSA: 3 DEVE SU 3 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v2_noto.txt`.
+- **(a)** la V2 `x1` di 1c, `100` tick: **11 righe su 11 AL BIT** con `M1658/c1/caduta_V2`. **(b) DEVE FALLIRE** contro `x2`: diverse. **(c)** `<dN/dy>` `-1.502885e-04`, centro `-1.574010e-04`, rapporto **`0.954813`** *(B0: `0.95481`)*.
+- **La nota delle ore:** il titolo del paragrafo della carta di B3 diceva «18:0x»; l'ora vera e' quella del commit `80f95c8d`. Questo paragrafo non ha ora nel titolo: e' quella del suo commit.
+- **Le quattro voci** entrano in coda solo se la v3b passa.
+
+### 2026-11-24 -- [M1748] IL PUNTO FISSO v3b: IL CRITERIO NON PASSA, 0.0582 CONTRO 0.05 (GIRI 0.2856, 0.1516, 0.0582); IN TUTTI E TRE I GIRI IL MASSIMO E' AL BORDO; FERMO, B3 NON PARTE [[PROGETTO-MITOSI]]
+
+- **La corsa** `m1446-M1748_puntofisso_v3b`: aperta `17:53:43`, chiusa `19:25:24`, uscita `0`. Il referto: `doc/referti_l2/fondo_puntofisso_v3b.txt`.
+- **I numeri** *(dal referto)*, `(w_max - w_min)/w_medio`: giro 1 **`0.2856`**, giro 2 **`0.1516`**, giro 3 **`0.0582`**. **Il criterio `< 0.05` sull'ultimo giro: NON PASSA.**
+- **Le finestre** *(dai `periodo_v3b.json`)*:
+  - giro 1: minimi della lisciata `[1500, 1900, 3200, 5300]`; `k_max 200`, `k_min 1500`, **`P 2600`**, finestra `[0, 1500]`, accorciata da `[-1100, 1500]`;
+  - giro 2: minimi `[2100, 4900]`; `k_max 200`, `k_min 2100`, **`P 3800`**, finestra `[0, 2100]`, accorciata da `[-1700, 2100]`;
+  - giro 3: minimi `[500, 1700, 2800, 4700]`; `k_max 200`, `k_min 500`, **`P 600`**, finestra `[0, 500]`, accorciata da `[-100, 500]`.
+- **In tutti e tre i giri il massimo e' AL BORDO** *(k `200`, il primo punto della lisciata)*, dichiarato come scritto nella carta. **Una cosa che noto dopo aver visto i numeri:** ogni giro e' partito vicino a un massimo di `w`. Quindi «il massimo precedente» e' stato il bordo, `P` e' uscito piu' corto del respiro *(nel giro 3 `600` tick)*, e le finestre sono state accorciate. La media non e' stata fatta su un respiro intero.
+- **Le previsioni:**
+  - del guardiano: respiro `< 10%` al giro 2 *(`60%`)*: **NO** *(`0.1516`)*; `< 5%` al giro 3 *(`50%`)*: **NO** *(`0.0582`)*;
+  - mia, `< 5%` al giro 3 *(`35%`)*: **NO**.
+- ### **FERMO** *(la carta sez. `3-bis`)*: **B3 non parte**; le quattro voci non entrano in coda. **Decide Luca.**
+
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO DELLA v3b E B3 COL RESPIRO RESIDUO: LA CARTA (SEZ. 3-OCTIES) E GLI SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Gli script:** `fondo_puntofisso_v3b4.py` fa un giro, il `4`, col metodo della v3b. `legge_fondo_v2b.py` e' B3, con l'oggetto cambiato in memoria.
+- **La mia lettura, dichiarata:** «lo stato finale del giro 3» e' `giro_3/stato_006000.npz`, come nella frase di Luca in [M1735]. **Non e' la media `partenza_giro_4.npz`: se Luca intendeva quella, va detto prima della corsa.**
+- **Le fasce:** `< 0.05` PASSA; `0.05`-`0.08` compresi RESIDUO, B3 parte e il respiro si dichiara; `> 0.08` FERMO.
+- **Il caso noto:** 4 DEVE, gira dopo questo commit.
+- **Le previsioni mie:** il giro 4 sotto il `5%` `45%`, sotto l'`8%` `80%`.
+
+### 2026-11-24 -- [M1932] IL CASO NOTO DEL QUARTO GIRO PASSA: 4 DEVE SU 4; LA VOCE IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4_noto.txt`. (a) il giro 3 `0.0582` cade in RESIDUO; (b) i bordi delle fasce; (c) DEVE FALLIRE, `0.0801` non e' RESIDUO; (d) la partenza `giro_3/stato_006000.npz`, con lo sha1 che coincide.
+- **Le masse:** v1 `995010.893146391`, partenza del giro 4 `995010.893149807`.
+- **La coda:** `M1932_puntofisso_v3b4` a priorita' `1`, nello stesso commit, scritta a lanciatore fermo *(chiuso alle `19:25:24`)*. Il rilancio a mano dopo il commit.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO PARTITO ALLE 19:40:43 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py` rilanciato a mano alle `19:40:43` *(da `date`)*, dopo `8cfd30a6`. Nel registro c'e' l'APERTO di `m1446-M1932_puntofisso_v3b4`.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO E' FINITO (20:09:50, USCITA 0); LA MIA LETTURA CADE SULLA RIGA DEL VERDETTO (UN ERRORE DI FORMATO, MIO) [[PROGETTO-MITOSI]]
+
+- **La corsa:** `m1446-M1932_puntofisso_v3b4`, aperta `19:40:43`, chiusa `20:09:50`, uscita `0`.
+- **La lettura** *(`fondo_puntofisso_v3b4.py lettura`)* stampa la partenza, le `w` e la finestra *(i minimi della lisciata `[1900, 5600]`; `k_max 1700`, `k_min 1900`, `P 400`, la finestra `[1500, 1900]`; `w` min `10.592`, max `11.334`, medio `10.953`)*, **poi cade sulla riga del verdetto:** `TypeError: not enough arguments for format string`. **La causa, mia:** nella stringa della fascia RESIDUO i testi «`5% E`» e «`8%:`» vengono letti come specificatori di formato. Il caso noto non lo vedeva: provava `fascia()`, non la stampa.
+- **Il referto parziale** `fondo_puntofisso_v3b4.txt` si committa cosi' com'e'. La correzione va in un file nuovo *(lo script e' usato)*, con un commit a se'.
+
+
+### 2026-11-24 -- [M1932] LA CORREZIONE: fondo_puntofisso_v3b4_lettura.py (IL VERDETTO SENZA % SUI TESTI CON %); legge_fondo_v2b.py LA CHIAMA [[PROGETTO-MITOSI]]
+
+- **Il file nuovo** `fondo_puntofisso_v3b4_lettura.py` stampa il verdetto senza l'operatore `%` sui testi che contengono `%`. **Ha il caso noto della stampa:** `0.0499`, `0.0582` e `0.0801` danno la fascia giusta, senza errore, prima di leggere il giro 4.
+- **`legge_fondo_v2b.py` corretto, non riscritto da usato:** chiamava la lettura rotta, ma **non ha mai girato** *(B3 non e' partita)*. Ora chiama `_v3b4_lettura`. Lo dichiaro qui.
+
+### 2026-11-24 -- [M1932] IL QUARTO GIRO: 0.0677, FRA IL 5 E L'8 PER CENTO; B3 PARTE COL RESPIRO RESIDUO 6.77 PER CENTO DICHIARATO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_v3b4.txt`, da `fondo_puntofisso_v3b4_lettura.py`. **Il caso noto della stampa:** 3 su 3.
+- **I numeri:** `w` min `10.592`, max `11.334`, medio `10.953`; **`(max - min)/medio` `0.0677`**: fascia RESIDUO. Minimi della lisciata `[1900, 5600]`; `k_max 1700`, `k_min 1900`, `P 400`, finestra `[1500, 1900]`. Non serve: e' l'ultimo giro.
+- **La serie dei respiri:** v3b giri 1-3 `0.2856`, `0.1516`, `0.0582`; giro 4 **`0.0677`**. **Il giro 4 non scende sotto il giro 3**: il respiro si e' fermato fra il 5 e il 7 per cento.
+- **Le previsioni:** del guardiano, giro 4 sotto il `5%` *(`65%`)*: **NO**; mie, sotto il `5%` *(`45%`)*: **NO**, sotto l'`8%` *(`80%`)*: **SI'**.
+- **B3 parte** *(Luca: «fra 5% e 8%, B3 parte lo stesso»)*: l'oggetto e' la partenza del giro 4 *(`giro_3/stato_006000.npz`, la cui evoluzione ha respiro `6.77%`)*. Le quattro voci vanno in coda nel prossimo commit, a lanciatore fermo.
+
+### 2026-11-24 -- [M1932] B3 PARTITA: IL LANCIATORE RILANCIATO A MANO ALLE 20:16:31 (DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `20:16:31` *(da `date`)*, dopo `3e5ef20d`. **Al momento di questo commit** nel registro c'e' l'APERTO di `m1446-M1932B3_V0` e di `m1446-M1932B3_x0.5`. Le altre due voci partono quando il lanciatore lo permette *(la CPU letta, il tetto dei processi)*, e ogni lancio va nel registro.
+
+### 2026-11-24 -- [M1932] B3, LA LEGGE DEL FONDO DALL'OGGETTO DEL GIRO 4 (RESPIRO RESIDUO 6.77 PER CENTO): K PESATA 0.8994 SU [200, 2000], UGUALE A x0.5, x1, x2 ENTRO LO 0.07 PER CENTO; MA NELLA CADUTA SCENDE DA 1.00 A 0.77 [[PROGETTO-MITOSI]]
+
+- **Le corse:** V0, x0.5, x1.0, x2.0, chiuse fra `20:34:32` e `20:34:36`, uscita `0`. Il referto: `doc/referti_l2/legge_fondo_v2.txt` *(`legge_fondo_v2b.py lettura`)*. **In testa al referto, il respiro residuo dichiarato:** il giro 4 `0.0677`.
+- **Una correzione:** il paragrafo del rilancio *(`3ac9f110`)* diceva due corse aperte, ma **nel registro di quel commit erano aperte tutte e quattro**.
+- **Le costanti, di 1c:** `m*` `+18.9162`, `omega_psi(N1)` `+0.0939180`.
+- **K CIMA su `[200, 2000]`** *(dal referto)*:
+  - al centro: `0.8465`, `0.8473`, `0.8451`; media `0.8463`, scarto `0.13%`;
+  - **PESATA: `0.8991`, `0.9002`, `0.8991`; media `0.8994`, scarto `0.07%`**.
+  - **K non dipende dall'ampiezza del gradiente:** `a - a(V0)` e' proporzionale a `dN/dy`, **la legge lineare regge** per l'oggetto del giro 4.
+- **`<dN/dy>/centro`:** fra `0.937` e `0.942` in tutte le finestre e scale *(B0, sull'oggetto con respiro: da `0.955` a `0.921`)*.
+- **Per finestra, la K PESATA scende durante la caduta** *(le tre scale insieme)*: `[200, 800]` da `1.0001` a `1.0017`; `[800, 1400]` da `0.8943` a `0.9022`; `[1400, 2000]` da `0.7566` a `0.7744`. **Lo stesso calo, per finestra, che aveva l'oggetto con respiro** *([M0037-01bis])*: **togliere quasi tutto il respiro non lo toglie.**
+- **Le previsioni:**
+  - del guardiano: K nella prima finestra fra `0.95` e `1.00` *(`70%`)*: **di poco NO** in tutte e due le convenzioni. Pesata `1.0001`-`1.0017` *(sopra `1.00`, entro l'errore `+- 0.009`-`0.010`)*; al centro `0.9422`-`0.9438` *(sotto `0.95`)*. K costante entro il `5%` su tutte le finestre *(`55%`)*: **NO** *(da `1.00` a `0.77`)*;
+  - mie: le tre K pesate piu' vicine fra loro di quelle al centro *(`55%`)*: **SI'** *(`0.07%` contro `0.13%`)*. La K pesata a `x1` entro il `10%` di K CIMA di 1c *(`0.7707`)* *(`40%`)*: **NO** *(`0.9002`)*.
+- **Aperto:** `m*` e' quello di 1c; l'oggetto nuovo ha un altro `w`. **Decide Luca** se misurarne il `m*` con due calci.
+
+
+### 2026-11-24 -- [M2045] LE LETTURE SULLE CADUTE DI B3: LA CARTA (SEZ. 3-NONIES) E LO SCRIPT, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La premessa:** **B3 non ha salvato gli stati**, solo la serie. La quinta colonna e' gia' `<dN/dy>` pesato alla posizione raggiunta, quindi le quattro letture si fanno da li'.
+- **Le scelte:** `v` della V2 meno quella della V0; `m*(p)` da `dp/dv` di `ep_fondo.txt`, interpolato linearmente; `m*(0)` = il primo punto.
+- **Le previsioni mie:** il gradiente spiega meno del `5%` *(`85%`)*; il riscalamento peggiora il calo *(`75%`)*, perche' `dp/dv` scende con `p`.
+
+### 2026-11-24 -- [M2045] LE LETTURE SULLE CADUTE DI B3: IL GRADIENTE RAGGIUNTO SPIEGA FRA LO 0.68 E IL 2.22 PER CENTO DEL CALO; m*(p) LO PEGGIORA; A PARITA' DI v K DIPENDE DALLA FINESTRA, CIOE' DAL TEMPO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v2c.txt` *(`legge_fondo_v2c.py`)*. **Il caso noto:** 3 su 3 *(K pesata `x1 [200, 800]` `1.001403`; al centro `0.943535`; `dp/dv` al primo punto `19.0360`)*.
+- **(i) il gradiente alla posizione raggiunta:**
+  - a `k 2000` il baricentro e' sceso di `0.6193` *(x0.5)*, `1.3287` *(x1)* e `2.7417` *(x2)*;
+  - `<dN/dy>(2000)/<dN/dy>(0)` vale `0.99771`, `0.99638`, `0.99089`;
+  - dalla prima all'ultima finestra il gradiente medio cala dello `0.155%`, `0.231%`, `0.550%`, mentre K al centro cala del `22.81%`, `23.43%`, `24.77%`;
+  - **il gradiente spiega lo `0.68%`, lo `0.99%` e il `2.22%` del calo.**
+- **(ii) K contro `v`** *(`v` della V2 meno V0)*. **A `v` quasi uguale, K dipende dalla finestra:**
+  - `v` `3.75e-04` *(x1, `[200, 800]`)*: K `1.0014`; `v` `3.94e-04` *(x0.5, `[800, 1400]`)*: K `0.8943`;
+  - `v` `7.48e-04` *(x2, `[200, 800]`)*: K `1.0001`; `v` `7.89e-04` *(x1, `[800, 1400]`)*: K `0.8979`.
+  - **LA LETTURA, post-hoc e dichiarata:** il calo di K segue il **tempo dalla partenza**, non la velocita' raggiunta ne' lo spostamento *(x2 a `k 800` e' sceso di `0.4475`, x0.5 a `k 1400` di meno, e ha la K piu' bassa)*.
+- **(iii) `m*(p)`:** `p` della caduta fra `0.0036` e `0.0445`; `R` fra `1.00000` e `1.01778`. **`R >= 1`, quindi `K/R <= K`: il riscalamento PEGGIORA il calo** *(K/R da `0.7434` a `1.0017`; il massimo scarto da `1` e' `0.2566`)*.
+- **(iv) `a(V0)`:** su `[200, 2000]` `-1.0911e-08 +- 2.1e-10`; per finestra `-6.24e-09`, `-1.19e-08`, `-9.8e-10` *(`+- 3e-09`)*. **Piccola rispetto a `a - a(V0)`** *(da `3e-07` a `1.5e-06`)* **e senza un andamento** che segua il calo.
+- **Le previsioni:**
+  - del guardiano: il gradiente spiega meno del `5%` *(`65%`)*: **SI'** *(`0.68%`-`2.22%`)*; K riscalata entro il `10%` di `1` su tutte le finestre *(`45%`)*: **NO** *(`0.7434`-`1.0017`)*;
+  - mie: meno del `5%` *(`85%`)*: **SI'**; il riscalamento peggiora *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2210] IL FRENO CHE SEGUE IL TEMPO: LA CARTA (SEZ. 3-DECIES) E legge_fondo_v3.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Tre corse:** r1 gradino, r2 rampa `N(t) = 1 + (N - 1) min(t/500, 1)` *(la formula letterale, dichiarata)*, r3 V0. Dall'oggetto del giro 4, gradiente `x1`, `2000` tick, gli stati ogni `250` e a `k 0`.
+- **Le letture:** K per finestra *(r2 fittata su `[700, 2000]` e sulle finestre di `600` dentro)*; la norma fuori da `25` nodi dal baricentro; `|psi|` massimo fuori.
+- **Il caso noto:** `100` tick, il gradino e la V0 al bit con B3, la rampa diversa. **A fine corsa** `stato_000250.npz` deve esistere, e r1 deve coincidere con B3 `x1` al bit.
+
+### 2026-11-24 -- [M2210] IL CASO NOTO PASSA (4 DEVE SU 4); r1, r2, r3 IN CODA; [M2210-r4] ARRIVATO A META' LAVORO, IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/legge_fondo_v3_noto.txt`, `100` tick dall'oggetto del giro 4. (a) il gradino = B3 `x1` **al bit** *(11 righe, cinque colonne)*; (b) **DEVE FALLIRE:** la rampa differisce *(y a `k 100`: rampa `-3.908795e-03`, gradino `-3.001756e-04`; la rampa e' vicina alla deriva della V0)*; (c) la V0 = B3 V0 **al bit**; (d) `N_di` ai bordi della rampa.
+- **La coda:** `M2210_r1_gradino`, `M2210_r2_rampa`, `M2210_r3_V0` a priorita' `1`, scritte a lanciatore fermo *(dalle `20:34:36`)*, nello stesso commit. Il rilancio a mano dopo il commit.
+- **[M2210-r4]** *(Luca, arrivato mentre lavoravo)*: r4 = la caduta `x1` a gradino **col bordo assorbente**, r5 = la sua V0 col bordo. Va in coda dopo r1-r3: **carta, script e caso noto adesso; le voci a lanciatore fermo.**
+
+### 2026-11-24 -- [M2210-r4] FERMO SU r4 E r5: NELLE SCENE CHI IL BORDO E' SPENTO (g_e = 0), E IL VUOTO DI RIFERIMENTO DEL BORDO VUOLE UN TICK ASSOLUTO CHE LA CATENA DEL PUNTO FISSO NON TIENE; r1-r3 GIRANO [[PROGETTO-MITOSI]]
+
+- **r1, r2, r3** partiti col rilancio a mano delle `22:17:51` *(dichiarato; gli APERTO nel registro, in questo commit)*.
+- **La premessa che non regge, dal codice:** **nelle scene chi il bordo assorbente e' spento.** `triangolo_chi_v4.prepara` azzera `Z["g_e"]` *(«Luca: NIENTE bordo sorbente»)*, e cosi' fanno `caduta_libera`, `caduta_segno_v2`, `ep_fondo` e gli altri. **Il tick `caduta_segno_v2.tick_var` non chiama mai `bordo.assorbi`.** In [M0326] *(`CARTA_FH`, `CARTA_lapse_moltiplicatore`, `CARTA_respiro_orologio`)* non c'e' un bordo acceso: la `CARTA_lapse_moltiplicatore` dice «la scena della caduta e' un TORO SENZA BORDO».
+- **I valori nativi della scena** *(letti con uno script nello scratchpad, solo i parametri, nessuna misura)*: **`R_A 47.5`, `g_max 0.03`**, il disco centrato in `c0 = (98.87, 81.36)`. L'oggetto del giro 4 sta al nodo `(79, 80)`: **«l'oggetto al centro del disco» vuole il disco ricentrato** sull'oggetto *(`bordo.g_estremita` attorno a `(79, 80)`, `R_B` = la meta' del periodo, `81`)*.
+- **IL NODO VERO: il vuoto di riferimento.** Tutti i chiamanti di `bordo.assorbi` passano `phi0 = bordo.c_di(t, tab_c, K, omega) phi_v`: il vuoto che ruota con `omega 0.4712` **al tick ASSOLUTO `t`**. **L'oggetto del giro 4 viene da una catena** *(la tenuta a `k 3000`, poi i giri della v2 e della v3b, ognuno ripartito dallo stato a `k_b` con `meta k = 3000`)* **che il tick assoluto non lo tiene.** Con un `t` sbagliato il bordo smorza `phi` verso la fase sbagliata, cioe' assorbe il vuoto stesso, e la misura si rompe in silenzio.
+- **Le strade, decide Luca:**
+  1. **(raccomandata)** `R_A 47.5` e `g_max 0.03` *(i valori nativi della scena)*, il disco sull'oggetto, `phi0 = c_di(t) phi_v` con **`t` ricostruito dalla catena** *(T0 + 3000 + i `k_b` dei giri + i giri interi)*, e **un controllo a `k 0`**: `bordo.fase_fascia` *(il controllo di Luca del 5.3)* sulla fascia deve dare `|a - 1|` e `arg a` piccoli, **altrimenti FERMO**;
+  2. il bordo solo su `psi` *(`phi` non toccato)*: non e' `bordo.py` com'e';
+  3. altri valori di `R_A` e `g_max`.
+
+
+### 2026-11-24 -- [M2222] LA STELLA POLARE AGGIORNATA AL 24/11 (doc/MAPPA.md, VOCE 6-STELLA): LE 24 ORE, LE IDEE IN ATTESA H1-H4, LA CAUTELA, LE PREVISIONI; G-A QUASI CHIUSO [[PROGETTO-MITOSI]]
+
+- **Solo doc**, sui due rami, nella stessa voce. **`git log --all --fixed-strings --grep "[M2222"`: vuoto** *(`22:26:18`)*.
+- **Due note del guardiano nella voce, dai referti:** K `1.00 +- 0.01` e' la prima finestra *(`[200, 800]`)*, mentre su `[200, 2000]` la K pesata e' `0.8994`; in E(p) `v(p)` e' lineare ma `E_w` ha il segno opposto. **Il `1.5%` della massa** *(il quanto del respiro)* **non viene da un referto di questa sessione:** la provenienza va detta.
+- **Le corse di [M2210] non si toccano** *(r1, r2, r3 girano)*.
+
+### 2026-11-24 -- [M2210] LA LETTURA: LA RAMPA ATTENUA IL FRENO MA NON LO TOGLIE (K [1400, 2000] 0.8294 CONTRO 0.7685); LA NORMA LONTANA CRESCE ANCHE IN V0; |psi| MASSIMO LONTANO CRESCE SOLO COL GRADIENTE (1.31 A GRADINO, 0.28 IN V0) [[PROGETTO-MITOSI]]
+
+- **Le corse:** r1, r2, r3, chiuse fra `22:34:33` e `22:34:39`, uscita `0`. Il referto: `doc/referti_l2/legge_fondo_v3.txt`. **I DEVE: 5 su 5:** `stato_000250.npz` esiste nelle tre corse *(Luca)*; **r1 = B3 `x1` AL BIT su tutta la serie, r3 = B3 V0 AL BIT** *(salvare gli stati non tocca la dinamica)*.
+- **(i) K CIMA pesata:**
+
+| finestra | gradino (r1) | rampa (r2) |
+|---|---|---|
+| `[200, 800]` | `1.0014 +- 0.0095` | *(dentro la rampa)* |
+| `[800, 1400]` | `0.8979 +- 0.0180` | `0.9415 +- 0.0146` |
+| `[1400, 2000]` | `0.7685 +- 0.0245` | `0.8294 +- 0.0224` |
+| `[200, 2000]` / `[700, 2000]` | `0.9002 +- 0.0025` | `0.9008 +- 0.0031` |
+
+  **La rampa alza le due finestre tarde** *(di circa `0.04` e `0.06`)* **ma K scende anche con la rampa** *(da `0.94` a `0.83`)*. **Il freno resta.**
+- **(ii) la norma fuori dal raggio `25`** *(frazione della massa)*: a `k 0` `2.853e-04` in tutte e tre; a `k 2000` r1 `3.726e-04`, r2 `3.630e-04`, **r3 (V0) `3.529e-04`**. **Cresce anche nella V0, quindi anche senza gradiente:** la parte in piu' col gradiente a `k 2000` e' piccola rispetto alla crescita della V0 stessa.
+- **(iii) `|psi|` massimo fuori dal raggio:** **nella V0 resta fra `0.26` e `0.35`**; **a gradino cresce da `0.30` a `1.31`** *(`0.90` gia' a `k 1500`)*; **con la rampa a `0.80`**. **Lontano dall'oggetto, col gradiente, cresce un picco localizzato che nella V0 non c'e'.** Dove sia non l'ho misurato: e' la lettura che manca.
+- **Le previsioni:**
+  - del guardiano: la norma lontana cresce in r1 e non in r3 *(`55%`)*: **NO** *(cresce anche in r3; cresce invece il massimo, solo col gradiente)*. Con la rampa K su `[1400, 2000]` sopra `0.90` *(`45%`)*: **NO** *(`0.8294`)*;
+  - mie: rampa sopra `0.90` *(`30%`)*: **NO**; la norma lontana cresce in r1 piu' che in r3 *(`50%`)*: **SI', ma di poco** *(`3.726e-04` contro `3.529e-04`)*.
+
+
+### 2026-11-24 -- [M2245-A] IL VENTO DEL VUOTO: LA CARTA (SEZ. 3-UNDECIES) E vento_vuoto.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Una corrente di `phi` gia' in uso non c'e'** *(`anemometro.J_di` e' quella della materia)*. **La mia:** `J_phi = rho_phi d theta/dy`, con `theta` la fase acquistata da `k 0` della stessa corsa. Cosi' non serve il tick assoluto. `d/dy` esatto coi nodi a `+- sqrt3` lungo `y`. `v_phi = <J>/<rho>` ha le dimensioni di un numero d'onda: la riserva e' dichiarata.
+- **Il criterio per B, fissato prima:** in r1 `J - J(V0)` contro `k` con la pendenza a piu' di `3` sigma e `R^2 > 0.9`.
+
+### 2026-11-24 -- [M2245-A] IL PRIMO CASO NOTO FALLISCE: J_phi DI k 0 RISPETTO A SE STESSO -3.3e-21, NON 0 AL BIT (IL PRODOTTO COMPLESSO DI numpy); 3 DEVE SU 4; LA CORREZIONE IN UN FILE NUOVO [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/vento_vuoto.txt` *(si committa cosi' com'e')*: 3 DEVE su 4. **Fallisce «`J_phi` di `k 0` rispetto a se stesso = `0` AL BIT»:** a `k 0` `J` vale `-3.3452e-21`.
+- **La causa:** `np.conj(a) * a` col prodotto complesso di numpy non da' una parte immaginaria esattamente nulla. Il prodotto scritto in reali la da': `ar ai - ai ar = 0` in IEEE.
+- **La correzione** va in `vento_vuoto_v2.py` *(lo script e' usato)*: `Z` col prodotto in reali. Le letture non le riporto finche' i casi noti non passano.
+
+### 2026-11-24 -- [M2245-A] IL VENTO DEL VUOTO, LE LETTURE (v2): J_phi LONTANO CRESCE LINEARE A GRADINO E A RAMPA (28.8 E 31.2 SIGMA), NON IN V0 (0.7); SEGUE IL RITMO LOCALE omega k <dN/dy>; IL MASSIMO DI |psi| LONTANO STA SUL RAGGIO 25 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vento_vuoto.txt`, da `vento_vuoto_v2.py`. **I casi noti: 4 su 4** *(lo zero al bit; la fase uniforme `6.5e-17`; la rampa di fase `4.9e-15`; `phi` di `k 0` uguale nelle tre corse)*.
+- **(A1) `J_phi` lontano** *(`d > 25`)*:
+  - a `k 2000`: gradino `7.747e-02`, rampa `6.761e-02`, V0 `3.80e-03`;
+  - `J - J(V0)` contro `k`: gradino **`+3.608e-05 +- 1.3e-06` per tick** *(`28.8` sigma, `R^2 0.9928`)*; rampa `+3.657e-05` *(`31.2` sigma, `R^2 0.9939`)*. V0, `J - J(k 0)`: `0.7` sigma, `R^2 0.079`.
+  - **Il criterio della carta per B** *(piu' di `3` sigma e `R^2 > 0.9`)*: **PASSA, quindi B si fa.**
+- **(A2) `v_phi`:** a `k 2000` gradino `1.2739e-02` contro il riferimento `omega k <dN/dy>` `1.2003e-02`; rampa `1.1114e-02` contro `1.0464e-02`. **`v_phi` sta entro il `7%` del riferimento in tutti gli stati da `k 1000`.** `v_phi/v` dell'oggetto va da `6.8` a `14.5` *(la riserva sulle unita' e' nella carta)*.
+- **(A4) la fase acquistata lungo `y`:**
+  - a gradino e' **una sinusoide in `y` che cresce col tempo**: ampiezza circa `1.6` rad a `k 1000`, circa `3` a `k 2000`;
+  - in V0 resta `0` lontano dall'oggetto, con `-0.19` solo nelle righe dell'oggetto;
+  - **perche' in V0 e' zero:** `omega = 3 pi/20`, e `1000 omega` e' un multiplo di `2 pi`.
+- **(A3) il massimo di `|psi|` lontano sta sempre a `d` fra `25.01` e `25.24`, cioe' sul raggio della maschera:** **e' il bordo dell'oggetto**, dal lato `-y` *(direzione fra `-55` e `-160` gradi; `y - y_c` fra `-8` e `-25`)*, **non una struttura lontana**. **Correggo cosi' la mia lettura di [M2210]** («un picco localizzato lontano»): il massimo che cresce col gradiente *(da `0.30` a `1.31`)* **e' il bordo dell'oggetto dal lato `-y` che si gonfia.**
+- **LA LETTURA, post-hoc e dichiarata:** la fase del vuoto segue il ritmo locale `N(y)` *(il vuoto batte a `omega N`)*. **Se questo sia «il vuoto che scorre» o il ritmo di un orologio, i numeri da soli non lo decidono.**
+- **Le previsioni:**
+  - del guardiano: A1 *(`50%`)*: **SI'**; A2, fra il `10%` e il `50%` di `v` *(`35%`)*: **NO** *(da `6.8` a `14.5` volte, con la riserva sulle unita')*; A3, vicino a `y_c +- L_y/4` *(`40%`)*: **NO** *(sul raggio `25`, `y - y_c` circa `-22`)*;
+  - mie: A1 lineare in r1 *(`60%`)*: **SI'**; il riferimento entro un fattore `2` *(`40%`)*: **SI'** *(entro il `7%`)*; A3 *(`30%`)*: **NO**.
+
+
+### 2026-11-24 -- [M2245-B] IL VUOTO SI AMMASSA?: LA CARTA (SEZ. 3-DUODECIES) E vuoto_ammassato.py; LE CORSE NOMINATE NON HANNO CHI VERO, SCELTE CHI/due_corpi F-on CONTRO F-off [[PROGETTO-MITOSI]]
+
+- **La premessa che non regge:** `caduta_libera` ha `chi` imposto, e le tenute di [M1631] non hanno `chi`. **Chi vero con gli stati ogni `250` c'e' solo nelle due_corpi e nei triangoli.**
+- **Scelte:** due_corpi `F-on` contro `F-off` *(chi vero e il suo controllo)*; accanto `caduta_libera` V2 e V0 *(chi imposto)*. Gli anelli attorno a ogni corpo, dentro la sua meta'.
+
+### 2026-11-24 -- [M2245-B] IL VUOTO NON SI AMMASSA: VICINO AI CORPI rho_phi CALA IN TUTTE LE CORSE, ANCHE CON CHI SPENTO; NELLA V2 A CHI IMPOSTO IL NUCLEO PERDE IL 20.8 PER CENTO A k 2000 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vuoto_ammassato.txt`. **I casi noti: 2 su 2.** **La somma di `rho_phi` si conserva al bit** in ogni corsa *(`149075.065061` nelle due_corpi, `153086.504245` nelle cadute)*.
+- **L'anello `[0, 8)` a `k 2000`** *(corpo 1, corpo 2)*:
+  - **chi vero acceso** *(`F-on`)*: `-0.895%`, `-1.291%`;
+  - **chi vero spento** *(`F-off`)*: `-1.775%`, `-0.342%`;
+  - **chi imposto:** V2 **`-20.806%`**, V0 `-1.111%`.
+- **Gli anelli `[8, 16)` e `[16, 32)` calano dappertutto:** a `k 2000` fra `-3%` e `-5%` in F-on e F-off; a `k 3000` F-on fra `-4.5%` e `-5.6%`, **F-off fra `-7.2%` e `-12.9%`**. **Con chi acceso il calo e' minore che con chi spento.**
+- **Nella V2 a chi imposto:** l'anello `[0, 8)` resta entro l'`1%` fino a `k 1000`, poi cala *(`-3.6%` a `1500`, `-9.5%` a `1750`, `-20.8%` a `2000`)*; l'anello `[16, 32)` sale dello `0.93%`.
+- **Le previsioni:** del guardiano, `[0, 8)` cresce di piu' dell'`1%` con chi vero *(`30%`)*: **NO** *(cala)*; mia *(`20%`)*: **NO**.
+
+
+### 2026-11-24 -- [M2245-C] L'ANIMAZIONE: LA CARTA (SEZ. 3-TERDECIES) E anima_vento.py, PRIMA DEL FILMATO [[PROGETTO-MITOSI]]
+
+- **Come `anima_tenuta.py`.** Tre colonne, quattro righe. `J_x` coi nodi `(m1 +- 1, m2)`. La riga 4: la fase assoluta, quella di `k 0` in grigio, e la fase acquistata tratteggiata, senza interpolazione.
+- **Le previsioni mie:** le frecce crescono ma cambiano verso con `y` *(`70%`)*; nessun accumulo *(`75%`)*.
+
+### 2026-11-24 -- [M2245-C] L'ANIMAZIONE: anima_vento.mp4 (81 FOTOGRAMMI, 1.31 MB); IL CASO NOTO PASSA; LE FRECCE SONO DOMINATE DALLE FLUTTUAZIONI LOCALI, LA PARTE COERENTE SI VEDE NELLA FASE [[PROGETTO-MITOSI]]
+
+- **L'uscita:** `doc/referti_l2/anima_vento.mp4` *(81 fotogrammi a 10 fps, `1.31 MB`)*; la stampa in `doc/referti_l2/anima_vento.txt`; i `9` png in `E:/soliton_simulator/controllo/M2245/png/`. **Il caso noto:** a `k 0` le righe uguali al bit nelle tre colonne: **PASSA**.
+- **Le scale** *(dalla stampa)*: `rho_psi` `1.9190e+03` *(`k 0`)*; `|rho_phi - rho_phi(0)|` `8.0943`; `|J|` per nodo `11.119` *(tutta la serie, nella finestra)*.
+- **`w(k)`** *(dalla stampa)*: r1 da `10.696` a `10.913`; r2 da `10.696` a `10.900`; r3 da `10.696` a `10.875`.
+- **CHE COSA SI VEDE** *(il fotogramma `k 2000`, guardato da me)*:
+  - **le frecce di `J_phi` per nodo sono dominate da fluttuazioni locali**, della stessa taglia nelle tre colonne. Il massimo per nodo e' `11.1`, mentre la media lontana di A1 e' `0.077`: **la parte coerente sta sotto l'1% delle frecce e non si vede.** La tendenza lineare di A1 *(`28.8` sigma)* nasce dalla media su migliaia di nodi;
+  - `rho_phi - rho_phi(0)` fluttua dentro l'oggetto **nelle tre colonne**, senza accumuli verso `y_c +- L_y/4`;
+  - **la fase acquistata** *(la riga 4)* **e' la sinusoide in `y` in r1 e r2** *(in r1 ampiezza vicina a `pi` a `k 2000`)* **ed e' piatta in V0.** La fase assoluta per riga non ha struttura a vista.
+- **Le previsioni:**
+  - del guardiano: le frecce crescono tutte nello stesso verso *(`50%`)*: **NO a vista** *(dominano le fluttuazioni)*; un accumulo vicino a `y_c +- L_y/4` *(`35%`)*: **NO**;
+  - mie: le frecce cambiano verso con `y` *(`70%`)*: **NON SI DECIDE dalle frecce** *(la dipendenza da `y` si vede solo nella fase)*; nessun accumulo *(`75%`)*: **SI'**.
+
+
+### 2026-11-24 -- [M2330] IL MODELLO INTERO: LA CARTA (SEZ. 3-QUATTUORDECIES) E due_corpi_fondo.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **Le scelte:** la traslazione `(-24, +48)`, cioe' `41.57` lungo `y` *(40 esatti non si possono coi multipli di 3)*; il vuoto per prodotto col fondo `a phi_v` fittato lontano *(niente tick assoluto)*; `porto.campi` in tutte e tre; il tick `tick_chi_v2` *(la variante V1, con la fase (a))* dentro la forma `L-1`; i parametri verificati uguali a F-on, e `c0` della configurazione.
+- **I casi noti:** K1 *(kappa 0 = la tenuta del giro 4 al bit per 100 tick)*, K1-on *(si dichiara)*, K2 *(d1 = d2 a k 0)*, T.
+
+### 2026-11-24 -- [M2330] IL CASO NOTO CADE PRIMA DEI NUMERI: TT.nucleo() CHIAMATO DENTRO LA SCENA (ERRORE MIO); LA CORREZIONE IN due_corpi_fondo_v2.py [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo_noto.txt` *(cosi' com'e')*: `AssertionError: pezzi NON e' quello del nucleo: FERMO` in `torneo_tenuta.nucleo`, chiamato da `ciclo` **dentro** `TC.scena()`. Gli altri script *(`fondo_1c.caduta`, `fondo_puntofisso.corsa`)* lo chiamano **prima** della scena. Nessun numero e' uscito.
+- **La correzione:** `due_corpi_fondo_v2.py` prende `MV, P0` una volta, prima della scena, e li passa al ciclo. Il resto non cambia.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v2: K1 FALLISCE (kappa 0 NON RIFA' LA TENUTA); (T) MASSE AL BIT FALLISCE (IL CASO NOTO ERA SBAGLIATO: UNA SOMMA PERMUTATA, 1 ulp); K2 PASSA; IL FONDO DEL VUOTO FITTATO MALE (RESIDUO 0.107); m0 NEGATIVO [[PROGETTO-MITOSI]]
+
+- **Il referto della v2** `doc/referti_l2/due_corpi_fondo_noto.txt`: 3 DEVE su 5.
+- **(K1) FALLISCE:** `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` contro la tenuta del giro 4 a `k 100`. Diverse: `Lambda`, `phi_h`, `psi_h`, `rho`, `A`, `E`. **La causa candidata, dal codice:** `chi_parametri_v2.parametri_v2` chiama `Z["metti"](stato)`, che rimette il motore e perde i link `U` scritti da `fondo_suite_v2.carica` con `scrivi_U` *(con `A != 0`)*. **La v3 riscrive `U` dopo i parametri.**
+- **(T) masse uguali al bit: FALLISCE, ma l'errore e' nel caso noto:** `995010.893149807` contro `995010.8931498068`. La somma di un array permutato non e' uguale al bit. **Non lo correggo:** lo dichiaro.
+- **(K2) d2 = d1 a `k 0` al bit: PASSA** *(`5793c58a9c2d`)*. **La traslazione e la sua inversa:** PASSA.
+- **DUE FATTI DA RIFERIRE** *(numeri, non giudizi)*:
+  - **il vuoto lontano dell'oggetto NON e' `a phi_v`:** il residuo del fit a `d > 45` e' medio `0.107`, massimo `0.398`. Col vuoto per prodotto, **`phi` vicino ad A** *(`d < 20`)* **cambia fino al `36%`**;
+  - **`m0` e' NEGATIVO:** `-5.787` per l'oggetto solo, `c0 = kappa m0 = -1.46e-03`; per la coppia `c0 = -2.19e-03`. In F-on *(il mattone alla cima)* era `m0 +8.69`, `c0 +2.20e-03`. **La sorgente di chi ha il segno opposto.**
+- **K1-on** *(chi acceso, si dichiara)*: `max |psi - psi(tenuta)| 3.854` *(su `max |psi| 17.84`)*.
+
+### 2026-11-24 -- [M2330] I CASI NOTI DELLA v3: K1 PASSA (U RISCRITTO: LA CAUSA ERA QUELLA); 4 DEVE SU 5, IL QUINTO E' IL CASO NOTO SBAGLIATO DELLE MASSE; LE TRE CORSE IN CODA; [M2345] IN CODA (L-UN-PROMPT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_noto.txt`, dalla v3. **(K1) PASSA:** con `kappa 0`, i campi dello stato, `100` tick nella forma `L-1` = la tenuta del giro 4 a `k 100` **AL BIT** *(le chiavi, `A`, `E`)*. **La causa del fallimento della v2 era la perdita di `U` in `parametri_v2`.**
+- **(K2) e la traslazione:** PASSANO. **(T) masse al bit:** fallisce di `1 ulp`, ma e' il caso noto a essere sbagliato *(dichiarato nel paragrafo precedente)*.
+- **K1-on** *(si dichiara)*: con chi acceso dopo `100` tick `max |psi - psi(tenuta)| 3.854` *(su `17.84`)*: **chi cambia l'oggetto gia' in 100 tick.**
+- **La coda:** `M2330_d1`, `M2330_d2`, `M2330_d3` a priorita' `1`, `due_corpi_fondo_v3.py corsa`, scritte a lanciatore fermo *(dalle `22:34:39`)*, in questo commit. Il rilancio a mano dopo.
+- **[M2345]** *(il ramo `guardiano` e la posta)* **e' arrivato a meta' lavoro:** in coda, dopo il lancio.
+
+### 2026-11-24 -- [M2330] d1, d2, d3 PARTITE: IL LANCIATORE RILANCIATO A MANO (DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, dopo `3f21445b`. L'ora e' la prima riga dell'uscita del lanciatore. Gli APERTO sono nel registro, in questo commit.
+
+### 2026-11-24 -- [M2345] NON ESEGUITO: LA RIGA DICE «DECISIONE DI LUCA (hh:mm)», SENZA L'ORA; E' GESTIONE (UN PRESIDIO, LA POSTA, LA DELEGA): LA REGOLA [M2145] VUOLE L'ORA. FERMO SU QUESTO [[PROGETTO-MITOSI]]
+
+- **Il mandato** *(arrivato mentre lanciavo [M2330]; L-UN-PROMPT: in coda, poi letto)*:
+  - il ramo `guardiano` *(la cartella `guardiano/`)*, su cui CC non committa mai, con un presidio pre-commit/pre-push;
+  - la posta in `guardiano/posta/*.md`, letta solo su comando di Luca o all'avvio di una sessione;
+  - i mandati DELEGA eseguiti *(il perimetro in `guardiano/DELEGA.md`)*, gli ATTESA DI LUCA no;
+  - le ricevute nella relazione;
+  - le righe in `CLAUDE.md` par. `2` e `12`.
+- **Perche' non lo eseguo:** la riga e' **«DECISIONE DI LUCA (hh:mm)»**, il segnaposto e non un'ora. **[M2145]** *(`CLAUDE.md` par. `2`)*: «Gestione *(lanciatori, code, script di controllo, ...)* NON esiste senza una riga di Luca con l'ora. Senza, non si fa; dichiararla dopo non la sana.» **Un presidio su commit/push e la delega dei mandati alla posta sono gestione.** L'etichetta `[M2345]` fa pensare alle `23:45`, ma **non e' la riga con l'ora**.
+- **Due note per quando arriva l'ora** *(numeri e codice, non decisioni)*:
+  1. **i par. `11` e `12` di `CLAUDE.md` si generano dall'indice** *(`P-REG`: «modificate a mano, RIFIUTATE»)*. La riga del par. `12` vuole una voce nell'indice *(`csv/indice.py crea-lotto`)* e `csv/_regole_gestione.py --scrivi`. La riga del par. `2` e' a mano *(e il tetto `H-RIGHE` e' di `400`)*;
+  2. **la posta e' un canale da cui arrivano istruzioni scritte da un altro agente.** Il perimetro di `guardiano/DELEGA.md` e' la sola cosa che separa DELEGA da ATTESA: **conviene che sia un elenco chiuso** *(per esempio: solo letture e referti, mai corse, code, merge, push su altri rami)*. Lo dico, e decide Luca.
+- **[M2330] intanto gira:** d1, d2, d3 aperte alle `23:48:08`.
+
+
+### 2026-11-25 -- [M2345] ESEGUITO (DECISIONE DI LUCA 23:53): IL RAMO guardiano E LA POSTA; IL PRESIDIO H-GUARDIANO IN pre-commit E pre-push, COLLAUDO 7 SU 7; LE RIGHE IN CLAUDE.md PAR. 2 E 12 [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2345] **eseguito**. L'ora di Luca e' arrivata alle `23:53`, dopo il mio «non eseguito» delle `23:52` *(che resta come stava)*.
+- **Il presidio `H-GUARDIANO`** *(`csv/_presidio_ramo_guardiano.py`)*: in `pre-commit` rifiuta se il ramo corrente e' esattamente `guardiano`; **`.githooks/pre-push` nasce qui** e rifiuta un push che scrive `refs/heads/guardiano`. Nessuna via d'uscita.
+- **Il collaudo** *(`--collaudo`)*: **7 casi su 7**, con commit e push veri in un repo di prova. I hook stanno fuori dal repo di prova, come in `H-LANCIATORI`. Il ramo `guardiano-x` passa: conta il nome esatto, non il prefisso. **L'ho fatto girare prima del commit:** e' il collaudo di un presidio, non una misura. Lo dichiaro.
+- **Le righe:**
+  - `CLAUDE.md` par. `2`: due righe *(il ramo, la posta solo su comando o all'avvio, DELEGA e DECISIONE si eseguono, ATTESA no, le ricevute)*;
+  - par. `12`: generata dall'indice *(la voce `H-GUARDIANO`, nata con `crea-lotto`; `dettaglio_regola` portato a `par12.md` con `aggiorna`)*. Il par. `12` ora ha `21` righe;
+  - il dettaglio in `doc/REGOLE/par2.md` e `par12.md`;
+  - `CLAUDE.md` a `357` righe.
+- **Il contorno, come per `H-LANCIATORI`:** `_metodi_era2.py` *(la riga)*, `_collauda_regole.py` *(l'elenco)*, `ESENZIONI_presidi.md`, `_barriera.lock` *(`--scrivi`: il `pre-commit` e' cambiato)*.
+- **Un controllo che fallisce gia' a HEAD, non per questo cambiamento:** `csv/_struttura_regole.py` *(la conservazione contro il blob `da79cc1`)* dice «REGOLE PERSE: 1. RAGIONAMENTO PRELIMINARE». **Quella riga non c'e' gia' nel `CLAUDE.md` di HEAD**, e il controllo non sta nei hook. Lo segnalo.
+- **La prima suite** *(`00:00`-`00:14`)*: 1 collaudo fallito, «i controlli sullo STAGE», con lo stage a meta' *(`crea-lotto` aveva messo in stage solo l'indice)*. **Rifatta con lo stage intero.** **La seconda** *(`00:15`-`00:28`)*: **67 collaudi su 67.**
+- **Solo sul ramo `primo-ordine`.** Su `lapse-u` il lanciatore e' vivo *(d1, d2, d3 di [M2330])*: la suite la' non la faccio girare finche' le corse non chiudono. **Il porto su `lapse-u` segue a corse chiuse.**
+- **Le corse di [M2330] non si toccano.**
+- **Il commit** *(`8d58d7de` su `primo-ordine`)* **e' entrato al terzo tentativo:** `H-FILE` voleva i due file rigenerati dai hook *(`doc/COLLAUDO_presidio_indice.txt`, `doc/indice/_controlli.txt`)*; `H-INDICE` voleva la dichiarazione per `H-LANCIATORI`, che e' nell'indice di `lapse-u` e non di `primo-ordine`.
+
+### 2026-11-25 -- [M2330] d1, d2, d3 CHIUSE (00:51:52-00:51:58, USCITA 0): 25 STATI E LA SERIE PER CORSA [[PROGETTO-MITOSI]]
+
+- **Le chiusure sono nel registro.** Ogni corsa ha `stato_000000` .. `stato_006000` *(`25`)* e `serie.json` con lo sha1, in `E:/soliton_simulator/controllo/M2330/<d>/`.
+- **Il prossimo passo:** la carta e lo script delle letture (i)-(v) *(`due_corpi_fondo.txt`)*, poi l'animazione, poi il porto di `H-GUARDIANO` su `lapse-u` *(il lanciatore e' fermo: la suite si puo' fare)*.
+
+
+### 2026-11-25 -- [M2330] LE LETTURE: LA CARTA (SEZ. 3-QUINDECIES) E due_corpi_lettura.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **(i)-(v) come nel mandato.** Le scelte dichiarate: `w` come raggio quadratico medio nella meta' del corpo; `J` radiale negativo = verso l'oggetto; la profondita' di chi = la media su `[0, 4)`.
+- **Il caso noto del segno:** una fase uscente da' `J_r` positivo.
+
+### 2026-11-25 -- [M2330] LE LETTURE (v1) E DUE ERRORI MIEI: LA COPPIA E' A 63.46 IN DIAGONALE, NON A 41.57 LUNGO y; IL d/dy DI [M2245] E DI QUESTA LETTURA NON E' LUNGO y [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo.txt` *(v1, cosi' com'e')*: **9 DEVE su 9.**
+- **ERRORE MIO 1, la geometria della coppia:** `toro.vettori()` da' `A1 = (1, 0)`, **`A2 = (-1/2, sqrt3/2)`**, quindi **`x = m1 - m2/2`**, non `m1 + m2/2` come avevo scritto nella carta *(sez. `3-quattuordecies`)*. **La traslazione `(-24, +48)` e' `(-48, +41.57)`: la coppia di d1 e d2 sta a `d(0) = 63.46` in diagonale, non a `41.57` lungo `y`.** Per stare lungo `y` serviva `(+24, +48)`. **d1 e d2 non sono le corse del mandato.** d3 *(un oggetto solo)* non dipende da questo.
+- **ERRORE MIO 2, il `d/dy`:** i nodi `(m1 -+ 1, m2 +- 2)` stanno a `(-+2, +-sqrt3)`, **non a `+-sqrt3` lungo `y`**. La mia `d theta/dy` era `d_y theta - (2/sqrt3) d_x theta`. **Riguarda `vento_vuoto` (A1, A2), `anima_vento` (le frecce) e (ii) di questa lettura.** **Il caso noto non poteva vederlo:** la fase `q y` non dipende da `x`. Neanche il caso noto del segno radiale: con `q r` il termine misto si annulla sull'anello. **Il caso noto che lo vede:** una fase `q x` deve dare `J_y = 0`. **Nelle due correzioni (`vento_vuoto_v3`, `due_corpi_lettura_v2`) i nodi giusti sono `(m1 + 1, m2 + 2)` e `(m1 - 1, m2 - 2)`.**
+- **I numeri della v1, con queste riserve** *(dal referto)*:
+  - **(i)** in d1 `d` va da `63.460` a `8.466` in `6000` tick *(`-54.99`)*; in d2 da `63.460` a `63.635` *(`+0.17`)*. **`a(d1) - a(d2)` su `[0, 6000]`: `-4.21e-06 +- 3.3e-08` (`128` sigma)**, per finestra da `-3.46e-06` a `-1.17e-05`, con due finestre di segno opposto *(`[2000, 3000]` `+3.0e-07`, `1.5` sigma; `[5000, 6000]` `+2.53e-05`, quando i corpi sono a meno di `25`)*;
+  - **(v)** il respiro: **d1 `0.901` e `0.904`, d3 `0.886`, d2 `0.103` e `0.105`. Con chi acceso l'oggetto respira al `90%`, anche da solo.**
+- **(ii)** e il J radiale non si leggono finche' non c'e' la correzione.
+
+### 2026-11-25 -- [M2330] LE LETTURE v2 (I NODI GIUSTI, 11 DEVE SU 11) E [M2245-A] v3: IL VENTO CON N DIPINTO REGGE (22.6 SIGMA); CON CHI VERO d1 SI AVVICINA, IL VENTO RADIALE ENTRA E CRESCE, MA CHI NON PARTE ALL'EQUILIBRIO (DA -9.4 A -149 IN 1000 TICK) E L'OGGETTO RESPIRA AL 90% [[PROGETTO-MITOSI]]
+
+- **[M2245-A] rifatta coi nodi giusti** *(`vento_vuoto_v3.txt`; 6 DEVE su 6, compreso `q x -> 0` che la v1 avrebbe fallito)*: `J - J(V0)` a gradino `+3.551e-05 +- 1.6e-06` per tick *(`22.6` sigma, `R^2 0.988`)*, rampa `22.3` sigma, V0 `1.0` sigma. **`v_phi` a `k 2000`: `1.2207e-02` contro il riferimento `1.2003e-02`.** **La lettura di A regge.**
+- **[M2330] le letture v2** *(`due_corpi_fondo_v2.txt`; 11 DEVE su 11)*. **Con la riserva della geometria:** la coppia e' a `63.46` in diagonale, non a `41.57` lungo `y`.
+  - **(i)** d1 `d` da `63.460` a `8.466`; d2 da `63.460` a `63.635`. `a(d1) - a(d2)` su `[0, 6000]`: `-4.21e-06 +- 3.3e-08`. **L'accelerazione NON cala:** per finestra va da `-3.46e-06` *(`[0, 1000]`)* a `-1.17e-05` *(`[4000, 5000]`)*;
+  - **(ii) il vento radiale sull'anello `[16, 32)`:**
+    - d3: `-0.41` a `k 1000`, `-0.67` a `2000`, `-1.29` a `4000`, `-2.00` a `6000`;
+    - d1 corpo 1: `-0.23`, `-0.51`, `-0.83`, `-2.01`;
+    - **d2, chi spento: fra `+0.01` e `+0.13`.**
+    - Sull'anello `[8, 16)` il segno cambia;
+  - **(iii) `rho_phi` su `[8, 16)`:** con chi acceso cala fino a `-27%` *(d3 a `k 6000`)*; con chi spento fra `-0.3%` e `-1.7%`;
+  - **(iv) chi NON parte all'equilibrio:**
+    - d3 su `[0, 4)` va da `-10.43` *(`k 0`, il profilo statico)* a `-99.7` a `k 1000`, poi `-163.1` a `4000` e `-89.8` a `6000`;
+    - d1 da `-9.36` a `-149.4` a `k 1000` e `-223.2` a `4000`;
+    - **in d2** *(kappa 0)* chi va verso valori positivi *(`+33.6`, `+19.7`, `+49.2`, `+30.8`)*: **il modo uniforme oscilla attorno a `-c0/m2`, con `c0 < 0`.**
+    - **Con chi `~ -150`, `N = exp(-kappa chi) ~ 1.04`: il `4%`, contro lo `0.35%` del gradiente del fondo.**
+  - **(v) il respiro:** d1 `0.901` e `0.904`, d3 `0.886`, d2 `0.103` e `0.105`.
+- **Le previsioni:**
+  - del guardiano:
+
+    | previsione | esito |
+    |---|---|
+    | (i) VERSO in d1, non in d2 *(`65%`)* | **SI'** |
+    | (i) l'accelerazione cala come K *(`50%`)* | **NO** *(cresce)* |
+    | (ii) J radiale verso l'oggetto cresce in d1 e d3 *(`55%`)* | **SI'** *(su `[16, 32)`)* |
+    | (ii) meno di un decimo del seno *(`60%`)* | **NO** *(circa dieci volte di piu')* |
+    | (iii) meno dell'`1%` *(`60%`)* | **NO** con chi; quasi con chi spento |
+    | (iv) la profondita' di chi entro il `5%` *(`55%`)* | **NO** *(per un fattore da `9` a `24`)* |
+    | (v) il respiro sotto il `10%` *(`70%`)* | **NO** *(`0.89`-`0.90` con chi)* |
+  - mie: VERSO *(`55%`)*: **SI'**; il respiro sotto il `10%` *(`50%`)*: **NO**.
+- **LA LETTURA, post-hoc e dichiarata:** l'avvicinamento di d1 avviene mentre chi e' lontano dall'equilibrio, oscilla con ampiezza `~ 100` e fa respirare l'oggetto al `90%`. **Questi numeri non separano la gravita' dal transitorio di chi.**
+
+### 2026-11-25 -- [M0105] ESEGUITO (DECISIONE DI LUCA 01:03), IL PRIMO MANDATO ARRIVATO DALLA POSTA: LA PULIZIA DEI COLLAUDI CORRETTA (GLI OGGETTI DI git IN SOLA LETTURA); IL CONTROLLO DI STRUTTURA ROTTO DA 3ff828f3 (UN TITOLO RINOMINATO), NON USATO DA HOOK NE' SUITE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0105] **eseguito.** **E' arrivato per la posta:** Luca ha scritto «Leggi post» alle `01:07`; `git fetch origin guardiano` *(`ad1069cb`)*, l'`INDICE.md` e `guardiano/posta/2026-11-25_0105_M0105.md`, categoria **DECISIONE DI LUCA (01:03)**. Nell'indice [M2330] risulta gia' eseguito *(in chat)*: non rifatto.
+- **[M0105-01] la pulizia.**
+  - **Prima:** nella cartella temporanea c'erano `h_guardiano_c2xwi87w` e `h_guardiano_c2xwi87w_remoto.git` *(il mio collaudo delle `23:58`)* e **tre `h_lanciatori_*`**. **Dentro restavano solo i file di `.git/objects`:** git li crea in sola lettura, e su Windows `shutil.rmtree(..., ignore_errors=True)` **li saltava in silenzio**. Le cartelle dei hook *(senza sola lettura)* erano state cancellate.
+  - **La cura:** `cancella()`, che toglie la sola lettura e riprova *(`onexc`, oppure `onerror`)*, e **un DEVE in piu' nel collaudo:** «nessuna cartella del collaudo resta», col conto di `h_guardiano_*` nella cartella temporanea.
+  - **Su `primo-ordine`:** il collaudo **8 su 8**, `h_guardiano_*` dopo: **0**. **I cinque residui vecchi li ho cancellati** con la stessa funzione: erano miei.
+  - **Lo stesso su `H-LANCIATORI`** *(che vive su `lapse-u`)*: nel porto, insieme a `H-GUARDIANO`.
+  - **La suite** *(lo stage col solo presidio)*: **67 su 67.**
+- **[M0105-02] il controllo gia' rotto** *(`csv/_struttura_regole.py`)*:
+  - **che cosa manca:** il punto `1` del par. `8` di `CLAUDE.md`, «**RAGIONAMENTO PRELIMINARE**»;
+  - **chi l'ha rotto:** **`3ff828f3`** *(2026-10-28 18:56, «LA FORMA DEI TASK HISTORY E DEI REFERTI (LUCA, 18:48 ...)»)*. Ha rinominato quel punto in «**LE PREMESSE DAL CODICE** *(decisione di Luca, 2026-10-28)*». **La regola non e' persa, e' rinominata.** Il controllo confronta i testi col blob FISSO `da79cc1` *(l'ultimo prima del riordino)*, quindi da allora la vede sparita. Trovato con `git log -S "RAGIONAMENTO PRELIMINARE" -- CLAUDE.md`;
+  - **chi lo usa:** **nessun hook e nessuna suite lo esegue.** `csv/_controlli_nell_indice.py` *(nel `pre-commit`)* ne legge solo le costanti via AST, nella lista `SORGENTI`. `csv/_referto_regole.py` lo esegue, ma solo per un referto fatto a mano. `csv/_collauda_regole.py` lo nomina in un commento;
+  - **non lo riparo** *(Luca)*: **la decisione e' di Luca.** Le strade: aggiornare il riferimento, oppure registrare l'equivalenza fra il nome vecchio e il nuovo.
+- **Le previsioni del guardiano:** la cartella non veniva cancellata *(`60%`)*: **SI'** *(i soli oggetti di git)*. Il controllo rotto da un commit di documentazione delle ultime due settimane, e non usato da nessun hook *(`70%`)*: **di documentazione e non usato da hook SI', ma di quattro settimane fa** *(2026-10-28)*.
+- **IL PORTO SU `lapse-u`** *(questo commit)*:
+  - `H-GUARDIANO` intero: il presidio, `pre-commit` e `pre-push`, `CLAUDE.md` par. `2` e par. `12` *(generato: `22` righe, con `H-LANCIATORI`)*, la voce `H-GUARDIANO` nell'indice *(nata gia' con `dettaglio_regola: par12.md`)*, i dettagli, il contorno;
+  - **`H-LANCIATORI` con la stessa cura** *(`cancella()` e il DEVE (9) della pulizia)*;
+  - i collaudi: **`H-LANCIATORI` 9 su 9, `H-GUARDIANO` 8 su 8**, `h_*` nella cartella temporanea dopo: **0**;
+  - **la suite di `lapse-u`: 67 su 67** *(`01:22`-`01:31`, con lo stage intero)*.
+
+
+### 2026-11-25 -- [M0137] (DALLA POSTA, DECISIONE DI LUCA 01:37) IL PEZZO 0 E LA CARTA (SEZ. 3-SEDECIES): IL TRANSITORIO DI CHI E' DEL GRADINO, NON DELL'INCONTRO [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0137] letto dalla posta alle `01:42` *(«Leggi la posta»; `8b6efc0b`)*, categoria DECISIONE DI LUCA (01:37). In esecuzione.
+- **Il pezzo 0** *(`chi_d3.txt`)*: **in d3, un oggetto solo, chi fa lo stesso transitorio di d1** *(`max|chi|` da `10.6` a `170`, coi picchi a `k 1250`-`1500` e `4000`)*, **e `w` crolla da `10.70` a `2.73`.** **P1 del guardiano: SI'.**
+- **La carta, sez. `3-sedecies`:** A, B, C di Luca e le mie scelte. I parametri di chi fissati al giro 1; `w` e `max|chi|` ogni `100`; la finestra col metodo della v3b; le chiavi da `k 6000`; un giro per voce in coda. K2 e' l'equivalente dichiarato *(la forza sul profilo statico, `100` volte sotto quella su `chi = 0`)*.
+- **Un errore mio, senza conseguenze:** il primo tentativo di scrivere la carta con un heredoc si e' rotto sugli apostrofi e non ha scritto niente *(rifatto col Write)*.
+
+
+### 2026-11-25 -- [M0137] IL PEZZO 2: I CASI NOTI DEL PUNTO FISSO CON CHI PASSANO (3 SU 3); IL GIRO 1 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_noto.txt`.
+  - **(K1)** `kappa 0`, `100` tick = la tenuta del giro 4 **al bit**;
+  - **(K2)** `max|forza(chi_statico)|` `1.069e-04` contro `max|forza(0)|` `3.830e-02`: rapporto `2.79e-03`, sotto `1/100`;
+  - **(K3)** la massa riportata esatta *(`0.0`)*;
+  - `m0 -5.786643`, `c0 -1.463410e-03`.
+- **La coda:** `M0137_puntofisso_chi_g1` a priorita' `1`, scritta a lanciatore fermo *(dalle `00:51:58`)*, in questo commit. Il rilancio a mano dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 1 PARTITO ALLE 01:54:27 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `01:54:27` *(da `date`)*, dopo `5501af07`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g1`.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 1 DEL PUNTO FISSO CON CHI (CHIUSO 02:35:37, USCITA 0): max|chi| 166, IL RESPIRO 1.38; C SI VALUTA DAL GIRO 2; IL GIRO 2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi.txt`. **I parametri fissati al giro 1:** `kappa 2.5289e-04`, `c0 -1.46341e-03`, `m0 -5.78664`.
+- **Per finestra di `500`** *(dal referto)*:
+  - `max|chi|` sale a `165.955` *(`[1000, 1500]`)*, scende a `100` *(`[2500, 3500]`)*, risale a `165.575` *(`[3500, 4500]`)*, poi `84.9`-`107.5`;
+  - **la profondita'** del pozzo oscilla fra `-57.4` e `-138.1`;
+  - `w` medio da `9.909` a `3.481`;
+  - **`omega` medio fra `+0.0828` e `+0.0902`.**
+- **Il respiro del giro 1: `1.3807`.** **Il periodo** *(il metodo della v3b)*: `k_max 200` al bordo, `k_min 1500`, `P 2600`, la finestra `[0, 1500]`, accorciata.
+- **La coda:** `M0137_puntofisso_chi_g2`, a lanciatore fermo, in questo commit; il rilancio dopo.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 2 PARTITO ALLE 02:37:24 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `02:37:24` *(da `date`)*, dopo `dc73e864`. Nel registro l'APERTO di `m1446-M0137_puntofisso_chi_g2`.
+
+
+### 2026-11-25 -- [M0137] IL GIRO 2 DEL PUNTO FISSO CON CHI (CHIUSO 03:22:45): C NON PASSA (max|chi| +0.25%, MA IL RESPIRO 0.965); IL GIRO 3 IN CODA; E K3, K4 DI [M0237] [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi.txt`.
+- **Il giro 2:**
+  - `max|chi|` del giro `166.378` *(il giro 1: `165.955`)*;
+  - la profondita' per finestra fra `-67.5` e `-138.0`;
+  - `w` medio fra `3.72` e `6.93`;
+  - `omega` fra `+0.0810` e `+0.0880`;
+  - **il respiro `0.9652`**;
+  - la finestra della media `[100, 300]` *(`P 200`, il massimo al bordo)*.
+- **IL CRITERIO C fra il giro 1 e il 2:** `max|chi|` cambia del `+0.25%` *(sotto il `10%`)*, **ma il respiro `0.9652` e' sopra il `10%`: NON PASSA.**
+- **La coda, scritta a lanciatore fermo** *(chiuso alle `03:22:45`)*:
+  - `M0137_puntofisso_chi_g3` a priorita' `1`;
+  - **`M0237_K3`** *(la soglia `1` da `35976` a `36250` contro MITOSI)* e **`M0237_K4`** *(il vuoto con le nascite spente, `250` tick)* a priorita' `2`, coi percorsi assoluti degli script del worktree `mitosi`. **Sono due processi da circa mezz'ora: stanno nel tetto col giro 3.** Le corse lunghe di [M0237] *(le due soglie, il vuoto)* aspettano i casi noti.
+
+
+### 2026-11-25 -- [M0137] [M0237] IL GIRO 3 E I CASI NOTI K3, K4 LANCIATI (IL LANCIATORE RILANCIATO A MANO ALLE 03:24:44, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `03:24:44` *(da `date`)*, dopo `835b8c4d`. **Gli APERTO nel registro a questo commit:** `m1446-M0137_puntofisso_chi_g3`, `m1446-M0237_K3`, `m1446-M0237_K4`.
 
 ### 2026-11-25 -- [M0237] (DALLA POSTA, DECISIONE DI LUCA 02:37) LE TRE PROVE SULLA MITOSI: IL PEZZO 0 E LA CARTA (doc/CARTA_mitosi.md, NUOVA); UN ERRORE MIO: IL COMMIT 20e7f3be HA IL MESSAGGIO DI [M2351] [[PROGETTO-MITOSI]]
 
@@ -27072,6 +27601,1460 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Il giro 3** *(`fondo_puntofisso_chi.txt`)*: `max|chi|` del giro `152.986` *(il giro 2: `166.378`, `-8.05%`)*; **il respiro `0.7584`**; la finestra `[0, 700]`. **C fra il giro 2 e il 3: NON PASSA.** **La serie dei respiri: `1.38`, `0.97`, `0.76`: scende, ma non sotto il `10%` in tre giri.** **Per il mandato si va alla riserva** *(pezzo 6)*: la rampa lineare di `kappa` in `1500` tick sulla coppia, dichiarata nella carta prima.
 - **[M0237] K4 FALLITO** *(chiuso alle `03:26:33`, uscita `1`; il log `E:/soliton_simulator/controllo/M1446/log/M0237_K4.txt`)*: `ZeroDivisionError` in `mattone.Campi.residuo`, che normalizza il residuo di Gauss su `e max(rho)`. **Nel vuoto puro `rho = 0`.**
 - **[M0237] K3 FALLITO** *(chiuso alle `03:46:24`, uscita `1`)*: gli stati `36000` e `36250` non sono quelli di MITOSI. **La prima nascita cade a `k 35977`** *(MITOSI: `35976`)*, i `k` divergono dopo *(`36122` contro `36125`)*, e i `DH` sono diversi *(la prima nascita `-15.82` e `-6.53`, contro `-17.24` e `-7.06` di MITOSI)*. **LA CAUSA, dal log di MITOSI** *(`mitosi_rami/log_MITOSI.txt`)*: MITOSI non e' stata fatta da `mitosi_lunga.corsa`, ma da un altro corridore. Quello applica subito «lo scatto del tronco» a `k 35976` e tiene `gauss_acc` e `|Ec|`. **I pezzi 3 e 4 erano costruiti sul corridore sbagliato: errore mio.** Il caso noto l'ha preso.
+
+
+### 2026-11-25 -- [M0137] LA RISERVA: I CASI NOTI DELLA COPPIA IN RAMPA PASSANO (4 SU 4); d1', d2', d3' IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v5_noto.txt`. **(G)** lo spostamento esatto *(`|dx|` `0.0`, `|dy - 41.5692|` `0.0`)*; **(T)** le masse `995010.893149807` e `995010.8931498069`; **(K2)** d2' = d1' a `k 0` al bit *(`0276108b9b8f`)*; **(R)** la rampa `0`, `0.5`, `1`, `1`.
+- **La coppia:** `c0` della coppia `-2.2000e-03`; il residuo del fondo del vuoto medio `0.107` *(lo stesso oggetto di [M2330])*.
+- **La coda:** `M0137_rampa_d1`, `_d2`, `_d3` a priorita' `1`, scritte a lanciatore fermo *(dalle `04:10:49`)*, in questo commit; il rilancio dopo.
+
+
+### 2026-11-25 -- [M0137] LA RISERVA PARTITA: d1', d2', d3' (IL LANCIATORE RILANCIATO A MANO ALLE 04:20:19, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `04:20:19` *(da `date`)*, dopo `0a2dbd6a`. Gli APERTO nel registro a questo commit: `m1446-M0137_rampa_d1`, `m1446-M0137_rampa_d2`, `m1446-M0137_rampa_d3`.
+
+
+### 2026-11-25 -- [M0414] (DALLA POSTA, DECISIONE DI LUCA 04:14) IL PUNTO FISSO ACCOPPIATO: LA CARTA E fondo_puntofisso_chi_v2.py; LA RAMPA NON SI FA, MA LE SUE CORSE ERANO GIA' PARTITE E NON HO POTUTO FERMARLE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0414] letto dalla posta alle `04:25` *(«Leggi la posta.»; `de84c53a`)*, categoria DECISIONE DI LUCA (04:14). **Sostituisce il pezzo 3 di [M0137] e la riserva.**
+- **LE CORSE DELLA RAMPA** *(`M0137_rampa_d1`, `_d2`, `_d3`)* **erano partite alle `04:20:19`**, prima che leggessi la posta *(il mandato e' delle `04:14`)*. **Ho provato a fermarle** *(i PID `37856`, `27188`, `21812`, miei, dalla riga di comando)*: **il permesso e' stato negato.** Finiscono da sole, verso le `05:25`. **I loro numeri non entrano in nessun referto.** Se Luca vuole fermarle prima, va fatto a mano.
+- **La carta** *(sez. `3-sedecies`, il blocco [M0414])*: B', B'', C, D di Luca; i due errori del guardiano *(n.253, n.254)*; le mie scelte, tra cui gli ultimi due picchi, la finestra `[6000 - P, 6000]`, la partenza dal giro 3 di [M0137] con `pi = 0`, e il residuo di Gauss ricalcolato e stampato.
+- **Lo script:** `fondo_puntofisso_chi_v2.py`. **I giri entrano in coda quando il lanciatore e' fermo**, cioe' dopo le corse della rampa.
+
+
+### 2026-11-25 -- [M0414] I CASI NOTI DEL PUNTO FISSO ACCOPPIATO PASSANO (4 SU 4); IL GIRO 1 IN CODA A LANCIATORE FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_v2_noto.txt`.
+  - **(K1)** `kappa 0` = la tenuta del giro 4 **al bit**;
+  - **(K5)** due picchi a `2500` tick danno **`P 2500`** *(i picchi a `k 1250` e `3750`)*, e con un picco solo **il ripiego dichiarato**;
+  - **(K6)** la media di un chi costante intero **al bit**.
+- **Il giro 1** *(dalla fine del giro 3 di [M0137], `pi = 0`)* **entra in coda quando il lanciatore si ferma**, dopo le corse della rampa *(non fermabili da me)*.
+
+
+### 2026-11-25 -- [M0414] LE CORSE DELLA RAMPA CHIUSE (05:23, USCITA 0; FUORI MANDATO, NON SI USANO); IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO IN CODA [[PROGETTO-MITOSI]]
+
+- **Le corse della rampa** *(`M0137_rampa_d1`, `_d2`, `_d3`)* chiuse fra `05:23:10` e `05:23:17`, uscita `0`. **Gli stati restano in `M0137/coppia_rampa/`, ma per [M0414] la rampa non si fa: non si leggono.**
+- **La coda:** `M0414_accoppiato_g1` a priorita' `1`, scritta a lanciatore fermo, in questo commit. Il rilancio a mano dopo.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO PARTITO ALLE 05:24:55 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `05:24:55` *(da `date`)*, dopo `225f073d`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g1`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 1 DEL PUNTO FISSO ACCOPPIATO (CHIUSO 06:01:15): P IL RIPIEGO 2500 (NESSUN PICCO STRETTO), IL RESPIRO 0.572, max|chi| 144.3; IL GIRO 2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/fondo_puntofisso_chi_v2.txt`.
+- **B'** *(gli ultimi due picchi stretti)*: **nessun picco**, e quindi **`P = 2500` col ripiego dichiarato**; la finestra della media `[3500, 6000]`. `max|chi|` per finestra di `250` oscilla, coi massimi `142.7`-`143.0` *(`[1500, 2000]`)* e `144.3` *(`[4250, 4500]`)*, a circa `2500`-`2750` tick, **ma senza tre finestre di salita e tre di discesa strette.**
+- **Il giro:** **il respiro `0.5723`** *(l'ultimo giro di [M0137]: `0.7584`)*; `max|chi|` `144.277`; la profondita' media `-97.508`; **`omega` medio `+0.0842498`**.
+- **Il residuo di Gauss alla partenza:** **`3.428e-01`**. La partenza e' la fine del giro 3 di [M0137] con `pi = 0`, e `psi` di quello stato e' gia' una media. **Lo stampo e non lo correggo** *(la carta)*.
+- **La coda:** `M0414_accoppiato_g2`, a lanciatore fermo, in questo commit.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 2 PARTITO ALLE 06:03:00 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `06:03:00` *(da `date`)*, dopo `2a7fe32f`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g2`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 2 (CHIUSO 06:39:52): P 2500 TROVATO DAI PICCHI A k 1500 E 4000; max|chi| 118.5 (-17.9%), IL RESPIRO 0.695; C NON PASSA; IL GIRO 3 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il giro 2** *(`fondo_puntofisso_chi_v2.txt`)*:
+  - **B' trova `P = 2500` davvero**, dagli ultimi due picchi a `k 1500` e `4000`;
+  - `max|chi|` per finestra oscilla fra `95.5` e `118.5` *(il giro 1: fra `80.0` e `144.3`)*;
+  - **il respiro `0.6948`** *(il giro 1: `0.5723`)*; la profondita' media `-98.962`; `omega` medio `+0.0854475`;
+  - **il residuo di Gauss alla partenza `9.724e-01`** *(il giro 1: `3.428e-01`)*.
+- **C fra il giro 1 e il 2:** `max|chi|` cambia del `-17.88%`, il respiro `0.6948`: **NON PASSA.**
+- **La coda:** `M0414_accoppiato_g3`, l'ultimo, a lanciatore fermo. Dopo, D se `max|chi|` sta fermo entro il `10%`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 3 PARTITO ALLE 06:41:37 (IL LANCIATORE RILANCIATO A MANO, DICHIARATO) [[PROGETTO-MITOSI]]
+
+- **Il rilancio:** `coda_m1446.py`, a mano, alle `06:41:37` *(da `date`)*, dopo `a014ce7a`. Nel registro l'APERTO di `m1446-M0414_accoppiato_g3`.
+
+
+### 2026-11-25 -- [M0414] IL GIRO 3 (CHIUSO 07:18:33): C NON PASSA, MA max|chi| E' FERMO (-3.80%): D. IL RESPIRO E' UN MODO NORMALE, OMEGA_b = 2.513e-03 PER TICK; LA PROFONDITA' -102.3; LA COPPIA PARTE DAL GIRO 3 [[PROGETTO-MITOSI]]
+
+- **Il giro 3** *(`fondo_puntofisso_chi_v2.txt`)*:
+  - `max|chi|` per finestra oscilla fra `101.7` e `114.0`; **`max|chi|` del giro `113.987`, `-3.80%`** rispetto al giro 2;
+  - **il respiro `0.4118`**; la profondita' media `-102.343`; `omega` medio `+0.0833429`;
+  - il residuo di Gauss alla partenza `5.655e-01`;
+  - **P: il ripiego `2500`**, perche' c'e' un solo picco stretto *(a `k 3000`)*. I massimi della serie stanno a `k 750`, `3000`, `5500`.
+- **IL VERDETTO, D** *(Luca)*: C non passa in tre giri *(i respiri `0.572`, `0.695`, `0.412`)*, **ma `max|chi|` e' fermo entro il `10%`.** **Il respiro e' un modo normale: `Omega_b = 2 pi / 2500 = 2.513e-03` per tick**; la profondita' media del pozzo `-102.343`.
+- **I pezzi 4 e 5 di [M0137] partono dallo stato del giro 3** *(`M0414/puntofisso_accoppiato/giro_3/partenza_giro_4.npz`: `psi` medio, chi medio, `pi = 0`)* con `due_corpi_fondo_v4.py --da`.
+- **Le previsioni del guardiano:**
+  - P1, B' trova `P` fra `2300` e `2800` al giro 1 *(`70%`)*: **no al giro 1** *(il ripiego)*, **si' al giro 2** *(`2500` dai picchi)*;
+  - P2, C passa entro 3 giri *(`45%`)*: **NO**;
+  - P3, il respiro sotto il `50%` al giro 3 *(`55%`)*: **SI'** *(`0.412`)*;
+  - P4, `omega` fra `0.080` e `0.090` *(`65%`)*: **SI'** *(da `0.0833` a `0.0854`)*;
+  - P5, `max|chi|` fra `110` e `140` *(`60%`)*: **SI'** *(`114.0`)*.
+- **Le mie:** P1 *(`70%`)*: come sopra; P2 *(`40%`)*: **NO**.
+
+
+### 2026-11-25 -- [M0137-4] LA COPPIA DAL GIRO 3 DEL PUNTO FISSO ACCOPPIATO: I CASI NOTI PASSANO (3 SU 3), MA IL VUOTO NON SI COMPONE PIU' (a 0.019, RESIDUO 52); c0 -1.56. FERMO, NIENTE IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v4_noto.txt` *(`due_corpi_fondo_v4.py noto --da M0414/puntofisso_accoppiato/giro_3/partenza_giro_4.npz`)*. **(G)** lo spostamento esatto; **(T)** le masse uguali; **(K2)** d2' = d1' a `k 0` al bit.
+- ### **MA LA COMPOSIZIONE DEL VUOTO E' ROTTA:**
+  - **il fit del fondo a `d > 45` da' `a = -0.006500+0.018193i`** *(`|a|` circa `0.019`)*, **col residuo medio `52.17` e massimo `83.04`** *(per l'oggetto del giro 4 era `0.107`)*;
+  - **il vuoto di questo stato, dopo i nove giri con chi** *(3 di [M0137], 3 di [M0414], e prima quelli della v3b)*, **non ha piu' la fase di `phi_v`**;
+  - **il vuoto per PRODOTTO, `phi_A phi_B / (a phi_v)`, divide per un fondo quasi nullo e gonfia `phi` di circa `50` volte;**
+  - **di conseguenza `c0` della coppia e' `-1.5627`** *(le coppie di prima: `-2.2e-03`)*. `chi_fondo -23.95`.
+- **FERMO:** d1', d2', d3' **non vanno in coda**. **Decide Luca** come comporre il vuoto per questo stato. Le strade:
+  - (1) il fondo come `phi_A` traslato di mezzo toro, cioe' il vuoto stesso dello stato lontano dall'oggetto;
+  - (2) per il secondo corpo solo `psi` e chi, col vuoto di A lasciato com'e';
+  - (3) partire dall'oggetto del giro 4 di [M1932] *(il cui vuoto si componeva al `10%`)* e accettare chi fuori equilibrio.
+
+
+### 2026-11-25 -- [M0925] (DALLA POSTA, DECISIONE DI LUCA 09:25) LA SOSPENSIONE: IL TODO PER DOMANI SCRITTO; NESSUNA CORSA, NESSUN CODICE NUOVO; LO STATO ALLA SOSPENSIONE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0925] letto dalla posta alle `09:27` *(«Leggi post.»; `25b17e3f`)*, categoria DECISIONE DI LUCA (09:25). **Eseguiti i punti 1-3 di oggi.**
+- **(1) la coda e i processi:** il lanciatore e' uscito dopo il giro 3 di [M0414] *(`07:18:33`)*. **Nessun processo python degli script e' aperto** *(verificato alle `09:28`)*. Il worktree di `lapse-u` e' pulito.
+- **(2) il TODO:** `doc/TODO_domani_2026-11-26.md`, coi pezzi A *(la diagnosi del vuoto del giro 3)*, B *(la coppia con `phi` fresco, `due_corpi_fondo_v6.py`)*, C *(il criterio con d3' di controllo)*, D *(la mitosi, in ATTESA)*; gli stati di partenza con lo sha1; le decisioni prese e aperte. **Ne aggiungo una aperta:** la fase dichiarata di `phi` fresco *(`phi_v` com'e', o `c(t) phi_v`)*.
+- **(3) lo stato alla sospensione:**
+  - **[M0414] giro 3:** `w` circa `4.5`, `omega` `0.0833`, il pozzo `-102.3`, **`Omega_b = 2.513e-03`**; D;
+  - **la coppia non composta:** il vuoto del giro 3 non e' `a phi_v`, residuo `52`;
+  - **la mitosi ferma su K3 e K4.**
+- **FERMO fino al prossimo «leggi la posta».**
+
+
+### 2026-11-26 -- [M2034] (DALLA POSTA, DECISIONE DI LUCA 20:34) LA RIPRESA: LA CARTA (SEZ. 3-SEPTENDECIES) E IL PEZZO A (vuoto_giro3.py), PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2034] letto dalla posta alle `20:35` *(«Leggi post.»; `3ec35629`)*, categoria DECISIONE DI LUCA (20:34): il piano di [M0925]; F *(`phi = c(t) phi_v`)*, D1, D2. In esecuzione.
+- **La carta, sez. `3-septendecies`:**
+  - **il tick `t` dello stato del giro 3 si ricostruisce dalla catena**: la tenuta ha `t0 60000`, `k 3000`, quindi `t 63000`; poi i `k_b` delle finestre della v2 e della v3b, e i `6000` di [M0137] e [M0414];
+  - **(V0):** su `PARTENZA_G4` la fase di `c(t)` deve coincidere con quella del fit di [M2330] *(`arg a = 0.1571`)* entro `0.05` rad, altrimenti FERMO;
+  - **A:** il rapporto `rho_phi` per anello, `J_phi` radiale e tangenziale col riferimento `phi_v`, `chi(d)`. **(V1)** sul vuoto fresco.
+
+
+### 2026-11-26 -- [M2034-A] IL VUOTO DEL GIRO 3: NON SI E' SVUOTATO (rho_phi 1.032-1.034 DEL FRESCO); LA SUA FASE HA UN GRADIENTE RADIALE VERSO L'OGGETTO (J RADIALE -1.7, -3.7, -1.2; TANGENZIALE CIRCA 0); chi NON TORNA A ZERO (-21.9 A d 75-90) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/vuoto_giro3.txt`. **(V1):** 2 DEVE su 2 *(il fresco da' rapporto 1 e corrente 0 al bit; una fase `q y` da' `|J_y|` `0.537`)*.
+- **I numeri** *(il centro al baricentro `(79.693, 79.545)`; `|c| = 1`)*:
+
+| anello | `rho_phi`/fresco | `J` radiale | `J` tangenziale | `|J|` medio |
+|---|---|---|---|---|
+| `[45, 60)` | `1.034145` | `-1.6973` | `+0.0103` | `6.71` |
+| `[60, 75)` | `1.032799` | `-3.7142` | `+0.0039` | `4.12` |
+| `[75, 90)` | `1.032264` | `-1.2234` | `-0.0006` | `1.38` |
+
+- **chi per anello:** `[0, 15)` `-76.53`, `[15, 30)` `-48.34`, `[30, 45)` `-34.25`, `[45, 60)` `-26.94`, `[60, 75)` `-23.27`, `[75, 90)` `-21.90`. A `d > 45`: media `-23.95`, da `-30.03` a `-21.19`.
+- **LA LETTURA, post-hoc e dichiarata:**
+  - **il vuoto non ha perso densita'** *(e' il `3%` piu' pieno)*;
+  - **la sua fase non e' piu' uniforme: ha un gradiente RADIALE**, che e' il vento di [M2245] attorno all'oggetto;
+  - **per questo il fit di `a` uniforme dava `|a|` `0.019`:** la fase cambia con la distanza;
+  - **chi ha un fondo uniforme circa `-21`** *(il modo zero)*, che non torna a zero sul toro.
+- **Le previsioni del guardiano:** P1, `rho_phi` lontano sotto l'`80%` *(`65%`)*: **NO** *(`103%`)*; P2, `J_phi` radiale verso l'oggetto e non tangenziale *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2034-B] LA COPPIA COL VUOTO FRESCO: I CASI NOTI 6 SU 6; LA CATENA DEL TICK GIUSTA (V0); LA FASE DI phi NON CONTA (V3, omega UGUALE AL BIT); c0 -2.30e-03; d1', d2', d3' IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v6_noto.txt`.
+- **La catena del tick:** la tenuta `63000`; la v2 `63300`, `65600`, `71600`; la v3b `73100`, `75200`, `81200` *(`PARTENZA_G4`)*; [M0137] `87200`, `93200`, `99200`; [M0414] `105200`, `111200`, **`117200`** *(lo stato del giro 3)*.
+- **(V0):** sulla tenuta e su `PARTENZA_G4` la fase di `c(t)` = la fase del fit sul vuoto lontano *(`+0.1571` contro `+0.1571`, `|a|` `1.0000`)*. **La catena e' giusta.** Nota: `c(t)` vale `+0.987688+0.156434i` a tutti e tre i `t` *(`omega = 3 pi/20`, e le differenze di `t` sono multipli di `40/3`)*.
+- **(G)** esatto; **(T)** le masse uguali; **(V2)** `phi` composto = `c(t) phi_v` al bit; **(K2)** d2' = d1' a `k 0` al bit *(`ebc59ddfbb8c`)*.
+- **(V3):** d3' per `250` tick, `omega` medio **`+0.084031366` a fase `0` e a fase `c(t)`: identico al bit.** **La fase del vuoto fresco non conta.**
+- **La coppia:** `chi_fondo -23.95`; `max|chi|` `114.06`; **`c0 -2.3030e-03`, `m0 -9.1066`**. Col vuoto fresco la composizione e' sana *(nella v4 `c0` era `-1.56`)*.
+- **La coda:** `M2034_d1`, `_d2`, `_d3` a priorita' `1`, a lanciatore fermo, in questo commit; il rilancio dopo.
+- ### **UN ERRORE MIO, DUE PARTI:** (1) **il lanciatore e' stato rilanciato prima del commit delle tre voci in coda** *(la stessa svista di [M0140])*: il commit era stato RIFIUTATO *(lo stage non coincideva)*, e il rilancio era partito in parallelo. **Il codice delle corse e' committato** *(`878b6e5f`, il timbro di se stesso compreso: la correzione era gia' li', non dopo)*; le voci in coda e il registro entrano in questo commit. (2) Una riga che avevo scritto qui *(«una correzione dopo `878b6e5f`»)* era falsa, e la tolgo prima del commit.
+- **Le previsioni:** P7 del guardiano, la fase non conta *(`60%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2048] (DALLA POSTA, DECISIONE DI LUCA 20:48) chi CONTRO phi: LA CARTA (SEZ. 3-DUODEVICIES) E chi_contro_phi.py, PRIMA DEI NUMERI [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2048] letto dalla posta alle `21:04` *(«Leggi post. Leggi la posta.»; `cd581122`)*, categoria DECISIONE DI LUCA (20:48). **Nella stessa lettura c'era [M2053]** *(le due luci, `5c9edcef`)*: la carta, lo script e i casi noti si fanno ora, le corse dopo B.
+- **La lettura** si fa mentre gira B: un processo, un tick.
+- **K3 e' un equivalente dichiarato:** `250` tick dalla partenza del giro 3, contro il suo `stato_000250`. Il tick `1` non e' stato salvato.
+
+
+### 2026-11-26 -- [M2048] I CASI NOTI PASSANO (4 SU 4) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi_noto.txt`.
+  - **(K1)** il vuoto fresco: `omega_phi` locale = globale *(`-0.471238896701`)*, `max |d|` `6.38e-15`; `rho_phi` uniforme *(`6.000000000000`)*;
+  - **(K2)** Spearman`(chi, N) = -1.0` esatto;
+  - **(K3, l'equivalente)** `250` tick dalla partenza del giro 3 = `giro_3/stato_000250` **al bit**.
+
+
+### 2026-11-26 -- [M2048] chi CONTRO phi: phi NON PORTA IL LAPSE (|SPEARMAN| 0.20 E 0.24 SU TUTTI I NODI); UNA RELAZIONE SOLO IN [16, 32) (+-0.80) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/chi_contro_phi.txt` e `chi_contro_phi.png`. `26244` nodi; `omega_phi` globale del vuoto dopo un tick `-0.447403148` *(il fresco: `-0.471238897`)*.
+
+| coppia | Pearson | Spearman | `[0, 8)` | `[8, 16)` | `[16, 32)` | `[32, 45)` | `[45, 90)` |
+|---|---|---|---|---|---|---|---|
+| `(chi, rho_phi)` | `+0.6095` | **`+0.2021`** | `-0.30` | **`-0.80`** | **`+0.80`** | `-0.01` | `-0.01` |
+| `(chi, omega_phi)` | `-0.7607` | **`-0.2402`** | `+0.45` | `+0.31` | **`-0.81`** | `+0.02` | `-0.01` |
+| `(chi, N)` *(controllo)* | `-1.0000` | `-1.0000` | `-1` | `-1` | `-1` | `-1` | `-1` |
+
+  *(gli anelli: Spearman; i nodi `232`, `694`, `2793`, `3632`, `18742`)*
+- **Le mediane di chi per decile** non sono monotone *(per `rho_phi`: `-51.95` nel primo decile, poi circa `-24`, `-25.15` nell'ultimo)*.
+- **S3: phi NON LO PORTA.** **S4:** su tutti i nodi Spearman`(chi, rho_phi)` e' `+0.20`, cioe' chi e' meno negativo dove `rho_phi` e' piu' alto. Nell'anello `[8, 16)` e' `-0.80`.
+- **LA LETTURA, post-hoc:** lontano *(`d > 32`)* chi e' quasi costante *(circa `-24`, il modo zero)*, e nessuna correlazione puo' esserci. Vicino all'oggetto il segno cambia da un anello all'altro.
+- **Le previsioni:**
+  - del guardiano: P1, l'orologio meglio della densita' *(`55%`)*: **di poco SI'** *(`0.24` contro `0.20`)*; P2, nessuno passa S3 *(`60%`)*: **SI'**; P3, l'anticorrelazione *(`65%`)*: **NO su tutti i nodi** *(`+0.20`)*, **SI' in `[8, 16)`** *(`-0.80`)*; P4, in `[0, 8)` `|Spearman(chi, omega_phi)| > 0.8` *(`70%`)*: **NO** *(`0.45`)*;
+  - mia: P2 *(`70%`)*: **SI'**.
+
+
+### 2026-11-26 -- [M2053] (DALLA POSTA, DECISIONE DI LUCA 20:53) LE DUE LUCI: LA CARTA (SEZ. 3-UNDEVICIES) E due_luci.py; n = 1 LUNGO x NON ESISTE SUL TORO: n = 2, 4, 8, 16 [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M2053] letto dalla posta alle `21:04` *(`5c9edcef`)*, categoria DECISIONE DI LUCA (20:53). Le corse dopo B.
+- **Due cose del mandato che il toro non permette, dichiarate:**
+  - **lungo `x` servono `n` pari** *(con `A2 = (-1/2, sqrt3/2)`, `n = 1` non e' periodica)*: uso `n = 2, 4, 8, 16`;
+  - **lungo `y`** `|q| = 2 pi n/L_y`; l'anisotropia si legge contro `x` interpolato alla stessa `|q|`.
+- **`c_psi = 0.084955`** *(`ep_fondo.C_RET`)*, la velocita' di gruppo massima della banda della materia. La pendenza di E(p) dove l'oggetto si spezza non e' misurata: lo dico.
+- **`C.residuo` assoluto**, perche' senza materia `rho = 0` *(come D2)*.
+
+
+### 2026-11-26 -- [M2053] I CASI NOTI DELLE DUE LUCI PASSANO (3 SU 3) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_luci_noto.txt` *(`21:29`-`21:43`)*.
+  - **(K2)** `A_q` a `k 0` = `+9.999999999999543e-04`, `|A_2q|` `2.41e-17`;
+  - **(K3)** la serie sintetica ridà `-0.434100000000`;
+  - **(K1)** il vuoto senza increspatura: `omega_phi` `-0.471238898038`, `ptp` `7.20e-14`, `max ||A_0| - 1|` `2.13e-13` in `1000` tick.
+- **Le sei corse** entrano in coda a lanciatore fermo, dopo B.
+
+
+### 2026-11-26 -- [M2034-B] d1', d2', d3' CHIUSE; [M2053] LE SEI CORSE DELLE DUE LUCI IN CODA [[PROGETTO-MITOSI]]
+
+- **B:** le chiusure di `M2034_d1`, `_d2`, `_d3` nel registro *(in questo commit)*. La lettura col criterio C viene subito dopo.
+- **[M2053]:** le sei corse *(`x` `n` `2, 4, 8, 16`; `y` `n 2`; `x` `n 2` `eps 5e-4`)* in coda a priorita' `1`, a lanciatore fermo, in questo commit. Il rilancio dopo.
+- **Le corse lunghe della mitosi** aspettano K3, K3b e K4, che girano ancora.
+
+
+### 2026-11-26 22:22 -- [M0237] LE DUE CORSE DELLA SOGLIA IN CODA; IL VUOTO NO (K4 FALLITO) [[PROGETTO-MITOSI]]
+
+- **Sul ramo mitosi** *(`e398b4fb`)*: K3 e K3b PASSANO *(lo stato `36500` al bit)*; **K4 FALLISCE**. La norma e' ferma a `8.99e-14`, ma la variazione relativa di `H` e' `9.83e-01` su un `H` che e' zero *(`1e-10`)*. **Il criterio era contro la sua premessa: e' un mio errore.** La correzione aspetta Luca.
+- **In coda, a lanciatore fermo** *(fermo dalle `22:15:44`, letto da `coda_stato.json`)*: `M0237_soglia_v2_0.5` e `M0237_soglia_v2_2`, a priorita' `2`, cioe' dopo le sei delle due luci. **La corsa lunga del vuoto NON va in coda.**
+
+
+### 2026-11-26 22:30 -- [M2034-B] IL LANCIATORE RILANCIATO A MANO (22:23); LA CARTA DELLA LETTURA COL CRITERIO C, PRIMA DELLO SCRIPT [[PROGETTO-MITOSI]]
+
+- **Il rilancio, dichiarato:** il lanciatore e' ripartito a mano alle `22:23:06`, dopo `34ce3734`, e ha lanciato `M2053_x_n2_eps1e-3`. Gli APERTO del registro sono in questo commit.
+- **La carta, sez. `3-vicies`:**
+  - le `12` finestre di d3' e il modo di misurare `w`, `omega` e il pozzo *(la formula del giro; tutti e tre gli stati della finestra dentro le soglie)*;
+  - d2' fermo entro `0.5`;
+  - le letture di d1' solo sulle finestre valide, e il mio verdetto *(`2 sigma`, almeno meta' delle finestre)*;
+  - i casi noti N1-N3.
+- **P5 di [M0925] non e' valutabile:** «K» non e' definito per B.
+
+
+### 2026-11-26 22:36 -- [M2034-B] IL CRITERIO C: 0 FINESTRE VALIDE SU 12, d2' NON FERMO (1.50 NODI); IL VERDETTO SU d1' NON SI DA' [[PROGETTO-MITOSI]]
+
+*(Correzione: il paragrafo precedente ha nel titolo `22:30`, ma l'ora da `date` era `22:24`.)*
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v6.txt` *(`due_corpi_lettura_v3.py`, `bdd586db`)*. **I casi noti passano `4` su `4`:**
+  - N1: `w_di` e `profondita` ridanno il giro 3 a `k 500` al bit *(`4.13414994383072`, `-106.735967944411`)*;
+  - N2 passa;
+  - N3, il caso che DEVE FALLIRE, si comporta come deve.
+- **IL CONTROLLO d3':**
+  - **`omega`** sta nelle soglie su `12` finestre su `12` *(da `-0.24%` a `+0.73%`)*;
+  - **il pozzo** sta nelle soglie su `12` su `12` *(da `-97.8` a `-108.9`)*;
+  - **`w` non ci sta su nessuna:** varia da `3.40` a `6.10`, e dentro ogni finestra cambia ben oltre il `5%`;
+  - **le finestre valide sono `0` su `12`.**
+- **IL CONTROLLO d2':** `max |d(k) - d(0)|` = `1.4996` nodi a `k 6000`, contro un limite di `0.5`. **d2' NON sta fermo.**
+- **IL VERDETTO SU d1' NON SI DA'**, come dice il criterio di Luca, e lo dichiaro. **Le letture di d1' non sono state stampate.**
+- **LA LETTURA, mia e a posteriori:**
+  - il criterio su `w` sembra irraggiungibile per costruzione. Il giro 3 ha il respiro come modo normale *(D di [M0414]: `Omega_b 2.513e-3`, cioe' `P` circa `2500` tick)*, e in una finestra da `500` `w` fa un quinto di ciclo;
+  - **lo verifico con uno script** *(`criterio_c_giro3.py`, in questo commit; il referto nel prossimo)*: lo stesso criterio applicato al giro 3 di riferimento.
+- **LE PREVISIONI:**
+  - P3 *(`55%`, almeno `6` finestre valide su `12`)*: **NO**;
+  - P4 *(`70%`, d1' si avvicina e d2' sta fermo)*: **NO** sulla meta' «d2' fermo»; l'avvicinamento non si legge;
+  - P5 non e' valutabile;
+  - le mie: P3 al `60%` sbagliata; P4 al `35%`, il NO era piu' probabile.
+- **FERMO:** cambiare la soglia su `w`, o misurarlo in un altro modo *(la media sul periodo del respiro)*, e' una decisione di Luca *(«nessuna soglia diversa senza DECISIONE DI LUCA»)*. Anche d2' che si muove di `1.5` nodi senza chi va guardato.
+
+
+### 2026-11-26 22:34 -- [M2034-B] A POSTERIORI: IL CRITERIO C NON PASSA NEMMENO SUL GIRO 3 DI RIFERIMENTO (w IN 0 FINESTRE SU 12) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/criterio_c_giro3.txt` *(`criterio_c_giro3.py`, `6041f473`)*. Sul giro 3 di [M0414], che e' l'oggetto di riferimento:
+  - **`w`** sta nelle soglie su `0` finestre su `12` *(varia da `3.6753` a `5.5316`)*;
+  - **`omega`** ci sta su `12` su `12`;
+  - **il pozzo** ci sta su `12` su `12`.
+- **La lettura:** **il criterio su `w`, con finestre da `500`, non puo' passare sull'oggetto stesso.** Il respiro *(il modo normale, D)* porta `w` dal `-18%` al `+23%` di `4.5` in circa `2500` tick. d3' fa lo stesso: da `3.40` a `6.10`, un respiro un po' piu' largo. **Il criterio era contro la premessa D, e quando l'ho scritto non l'ho visto:** e' un mio errore, il secondo di oggi dopo K4.
+- **LE PROPOSTE PER LUCA, nessuna eseguita:**
+  - **(a)** `w` medio sul periodo del respiro *(`P` di circa `2500`, cioe' due finestre `[0, 2500]` e `[2500, 5000]`, piu' il resto)* entro il `5%`. Sul giro 3 la media sulla finestra `[3500, 6000]` e' `4.6015` *(`+2.3%`)*, gia' stampata nel referto v6;
+  - **(b)** su `w` di d3' contro `w` del giro 3 allo stesso tick *(la stessa fase del respiro)*;
+  - **(c)** solo `omega` e il pozzo, `w` tolto.
+  - **E d2'** *(chi spento)* si allontana di `1.50` nodi in `6000` tick. Senza una decisione il controllo «d2' fermo» resta fallito.
+- **FERMO:** la soglia e' di Luca.
+
+
+### 2026-11-26 22:50 -- [M2053] LE DUE LUCI: LE SEI CORSE CHIUSE, LA LETTURA. IL VERDETTO AUTOMATICO DICE «DUE LUCI» E «ANISOTROPO», MA IL SEGNALE STA SOTTO LO SCARTO DEL FIT [[PROGETTO-MITOSI]]; [M0237] LE SOGLIE FALLITE
+
+- **Le corse:** sei, chiuse fra le `22:35:16` e le `22:44:08` con uscita `0` *(le chiusure sono nel registro, in questo commit)*.
+- **Le corse della soglia** `M0237_soglia_v2_0.5` e `_2` sono FALLITE con uscita `1`: i log e la lettura sono sul ramo mitosi, `21745434`.
+- **Il referto:** `doc/referti_l2/due_luci.txt` *(`due_luci.py lettura`, `b0e944e2`)*. **`omega(q) - omega_phi` per tick:**
+  - `x`: n `2` `-1.87e-08`, n `4` `-7.37e-08`, n `8` `-2.91e-07`, n `16` `-1.66e-06`;
+  - `y`: n `2` `-2.50e-08`.
+- **La linearita':** a `eps 5e-4` lo stesso valore entro `0.000%`. PASSA.
+- **Lo scarto del fit** *(n `2`, `x`)* e' `5.32e-04` rad, mentre la fase totale in `1000` tick vale `1.9e-05` rad. **Le due meta' danno `+3.6e-11`, con il segno opposto a quello del fit intero.**
+- **Le uscite automatiche:**
+  - `c_phi` = `-0.000001`;
+  - il gap `a = +5.16e-08`;
+  - l'anisotropia `-8.19%` *(«ANISOTROPO»)*;
+  - **S4: «DUE LUCI»** *(`|c_phi|` `0.000001` contro `c_psi` `0.084955`)*.
+- **LA LETTURA, mia, e il controllo di scala:**
+  - **la fase dell'increspatura relativa al vuoto non avanza in modo misurabile.** Lo spostamento in frequenza sta sotto `2e-6` per tick a tutti i `q`, e a `q` piccolo sta **sotto lo scarto del fit**. **Quindi `c_phi`, il gap e l'anisotropia NON SONO MISURATI:** il `-8.19%` e' il rapporto fra due numeri piu' piccoli del loro errore;
+  - **quello che il dato dice:** a ogni `q` provato l'increspatura `phi_v e^{iqx}` resta alla frequenza del vuoto entro `1.7e-6`. Contro `c_psi` di `8.5e-2`, **`phi` non porta un segnale a velocita' paragonabile.** Al livello di questa misura e' **una banda piatta**: niente cono e niente minimo in `q^2`;
+  - **e l'ampiezza:** `|A_q/A_0|/eps` scende fino a `0.905` a n `16`. Una parte dell'increspatura passa su altre componenti, quindi `phi_v e^{iqx}` non e' un autostato;
+  - **il verdetto di S4, letto alla lettera, e' «due luci»**, ma per la ragione meno interessante: **la seconda «luce» non c'e'.**
+- **LE PREVISIONI:**
+  - P1 *(guardiano `60%`, mia `65%`, due luci)*: SI', nel senso appena detto;
+  - P2 *(`55%`, `c_phi > c_psi`)*: **NO**;
+  - P3 *(`70%`, anisotropia sotto il `5%`)*: **NON VALUTABILE** *(sotto il rumore)*;
+  - P4 *(guardiano `65%`, mia `60%`, un gap)*: **NON VALUTABILE**, perche' ne' il cono ne' il gap emergono dal rumore.
+- **COSA SERVIREBBE per misurare davvero:** corse piu' lunghe, oppure il fit della parte reale e immaginaria di `A_q/A_0` invece della fase svolta. **Sono proposte, non eseguite.**
+- **FERMO:** le decisioni aperte sono su B *(il criterio di `w` e d2')*, su K4, sulle due soglie e sul passo successivo delle due luci.
+
+
+### 2026-11-27 00:27 -- [M0024] RICEVUTO (DECISIONE DI LUCA 00:24, letto alle 00:25); IL PEZZO 1, LA CARTA DI C', N, D2', PRIMA DELLO SCRIPT [[PROGETTO-MITOSI]]
+
+- **La posta:** `2026-11-27_0024_M0024.md` *(`e609aafa`)*, cinque pezzi; nessuno era gia' fatto *(`git log --all --grep`)*. **Lo eseguo in ordine.**
+- **Il pezzo 1, la carta** *(sez. `3-vicies`, il seguito)*:
+  - C', N e D2' come li ha scritti Luca;
+  - l'errore n.256;
+  - le mie scelte *(le medie sugli stati salvati, `Delta d` dalla serie, il verdetto per finestra)*;
+  - i casi noti (R) e N1;
+  - le previsioni, le mie prima dei numeri.
+- **DUE FATTI DEL MANDATO DA CORREGGERE, dichiarati subito:**
+  - **(1)** le premesse dicono «a `4 pi` nessuna nascita in `6000` tick». **Non e' quello che e' successo:** la corsa a `4 pi` si e' fermata alla partenza *(k `35976`)*, su «lo stato del tronco NON ha un arco scattato»; **nessun tick e' stato fatto** *(mitosi `21745434`)*. Il pezzo 4 scrive la frase di Luca e accanto la nota;
+  - **(2)** l'INDICE della posta dice [M2048] «da eseguire», ma e' **eseguito**: lapse-u `329527f2`; phi NON porta il lapse, `|Spearman|` `0.20` e `0.24`.
+
+
+### 2026-11-27 00:36 -- [M0024] PEZZO 1, IL REFERTO due_corpi_fondo_v6_C.txt: C' DA' 12 FINESTRE VALIDE; d1' VA DA 41.57 A 9.62 NODI IN 3000 TICK, RISALE A 27.87, RISCENDE A 21.08; d2' DERIVA VIA DI +1.50 [[PROGETTO-MITOSI]]
+
+- **Lo script:** `due_corpi_lettura_v4.py` *(`0e6ac37d`)*, codice d'uscita `0`. **Casi noti `2` su `2`:**
+  - N1 al bit;
+  - **(R) il giro 3 passa C'**: `w` medio `4.5809`, `4.5651`, `4.6015` sui tre periodi; `omega` e pozzo `12` su `12`.
+- **d3' con C':** i tre periodi sono **VALIDI** *(`w` medio `4.4617`, `4.4074`, `4.7134`, cioe' `-3.01%`, `-4.19%`, `+2.47%` di `4.60`)*. **Le finestre valide sono `12` su `12`.**
+- **I NUMERI d(k)** *(d1' e d2' partono tutti e due da `41.569207`)*:
+  - **d1':** scende fino a `9.621451` a `k 3000` *(VERSO in ognuna delle prime `6` finestre, con `Delta` da `-0.77` a `-11.29`)*; risale fino a `27.865483` a `k 5000` *(VIA in `4` finestre)*; riscende fino a `21.076958` a `k 6000`. **Su `[0, 6000]`: `-20.49` nodi;**
+  - **d2'** *(chi spento)* va **VIA** in tutte le `12` finestre, `+1.499645` su `[0, 6000]`. Anche la deriva senza chi e' VIA.
+- **I NUMERI attorno al minimo** *(d1', corpo 1)*:
+  - `omega` passa da `0.0833` a `0.07565` a `k 3500` *(`-9%`)*;
+  - il pozzo *(chi su `[0, 4)`)* scende a `-198` / `-199` a `k 3250-3500`, contro i circa `-100` di d3' allo stesso `k`;
+  - `w` *(il raggio quadratico medio nella meta')* sta fra `4.8` e `5.9`.
+- **IL VERDETTO D2', con la regola com'e' scritta** *(lo stesso segno di d2', dichiarato in `0e6ac37d` prima della corsa)*: **VERSO `0`, VIA `4`, non distinguibile `8`.**
+- **### LA LETTURA DELLA REGOLA, mia, dopo i numeri:**
+  - le `8` finestre «non distinguibili» sono quelle in cui d1' si avvicina da `9` a `95` volte la deriva di d2'. Sono «non distinguibili» solo perche' d2' va nel verso opposto;
+  - **la mia lettura letterale di «nello stesso verso» qui da' l'esito opposto a quello che la regola vuole misurare.** Con la lettura senza segno *(`|Delta d1'| > 3 |Delta d2'|`)* sarebbe: VERSO `8`, VIA `4`;
+  - **non cambio la regola a posteriori:** la lettura giusta di «nello stesso verso» la decide Luca.
+- **### IL LIMITE DELLA MISURA, dichiarato:**
+  - i due corpi si definiscono come le due meta' del toro *(`y` sotto o sopra il centro della coppia)*;
+  - **sotto circa `2 w`** *(`~ 11-12` nodi)* le code dei due corpi stanno nella meta' sbagliata, e il baricentro di una meta' non e' piu' il baricentro di un corpo;
+  - **il minimo `9.62` e il rimbalzo vanno quindi letti con questa riserva.** Una fusione, un urto con rimbalzo o un'oscillazione legata non si distinguono con questo strumento.
+- **LE PREVISIONI:**
+  - **guardiano:** P1 *(un periodo valido)* **SI'** *(`3` su `3`)*; P2 *(d2' VERSO)* **NO**, e' VIA; P3 *(verdetto VERSO)* **NO** con la regola scritta, **SI'** nella sostanza *(d1' si avvicina oltre `3` volte la deriva in `8` finestre)*;
+  - **le mie:** P1 *(`75%`)* giusta; P2 *(`50%`)* nessuna delle due; **P3 *(`30%`)* sbagliata nella sostanza.**
+
+
+### 2026-11-27 00:38 -- [M0024] PEZZO 2: NELLA CARTA DELLE DUE LUCI (3-undevicies) LA NOTA SUL RUMORE DELL'ANISOTROPIA E LA BANDA PIATTA [[PROGETTO-MITOSI]]
+
+- **La nota** e' annotata in coda alla sez. `3-undevicies`, senza riscrivere la sezione:
+  - l'anisotropia `-8.19%` e' rumore;
+  - la banda e' piatta allo zero simmetrico, con risposta lineare;
+  - **il limite su `c_phi`** e' `2.681e-06` *(`max_q |Delta omega|/q`, a `x` n `16`; calcolato con uno script dai numeri di `due_luci.txt`)*, sotto `1e-5`.
+- **Le previsioni di [M2053]:** P1 giusta; P2 e P4 sbagliate; P3 non decidibile. **La mia P4 al `60%`** *(un gap)* era sbagliata.
+
+
+### 2026-11-27 00:41 -- [M0024] LA RICEVUTA: ESEGUITO (5 PEZZI SU 5); LE PREVISIONI CONFRONTATE [[PROGETTO-MITOSI]]
+
+- **[M0024] eseguito** *(DECISIONE DI LUCA 00:24)*:
+  - **1.** lapse-u `30dd017f`, `0e6ac37d`, `6df1aa60`;
+  - **2.** lapse-u `a3c54ab5`;
+  - **3.** mitosi `58e3c59e`, `ca8ddfeb` *(K4' FALLISCE, la corsa del vuoto non in coda)*;
+  - **4.** mitosi `c09d2906`;
+  - **5.** questo paragrafo.
+- **I RISULTATI:**
+  - **la coppia** *(C')*: `12` finestre valide. **d1' va da `41.57` a `9.62` nodi in `3000` tick**, risale a `27.87` e riscende a `21.08`. d2' *(chi off)* deriva **VIA** di `+1.50`;
+  - **D2', con la regola com'e' scritta** *(lo stesso segno di d2')*: **VERSO `0`, VIA `4`, non distinguibile `8`.** Le `8` «non distinguibili» sono pero' le finestre in cui d1' si avvicina da `9` a `95` volte la deriva, nel verso opposto a d2'. **Senza il vincolo di segno sarebbe VERSO `8`, VIA `4`;**
+  - attorno al minimo il pozzo di d1' arriva a `-199` *(contro `-100` di d3')* e `omega` a `0.0757` *(`-9%`)*;
+  - **il limite:** le due meta' del toro non separano i corpi sotto circa `2 w`.
+- **LE PREVISIONI:**
+  - **[M0024] del guardiano:** P1 *(un periodo valido)* **SI'** *(3 su 3)*; P2 *(d2' VERSO)* **NO** *(VIA)*; P3 *(il verdetto VERSO)* **NO** con la regola scritta, SI' nella sostanza; P4 *(K4' passa, niente nascite)* **NO** su K4', la parte sulle nascite non provata;
+  - **[M0024], le mie:** P1 `75%` giusta; P2 `50%` nessuna; P3 `30%` sbagliata nella sostanza; K4' passa al `5%`, giusta;
+  - **[M2053]** *(guardiano)*: P1 giusta; P2 e P4 sbagliate; P3 non decidibile. Le mie: P1 `65%` giusta; P4 `60%` sbagliata.
+- **I FATTI DEL MANDATO CORRETTI:**
+  - **(1)** a `4 pi` la corsa non ha fatto `6000` tick senza nascite: si e' fermata alla partenza *(la nota nella carta della mitosi)*;
+  - **(2)** [M2048] e' eseguito *(`329527f2`)*, non «da eseguire».
+- **LE DECISIONI PER LUCA:**
+  - **(a)** che cosa significa «nello stesso verso» in D2';
+  - **(b)** una soglia di K4' sopra il pavimento di arrotondamento;
+  - **(c)** se lo strumento delle due meta' basta sotto `2 w`.
+
+
+### 2026-11-27 01:12 -- [M0106] RICEVUTO (DECISIONE DI LUCA 01:06, letto alle 01:07); IL PEZZO 1a, LA CARTA DI D2'' E LO SCRIPT v5, PRIMA DEL REFERTO [[PROGETTO-MITOSI]]
+
+- **La posta:** `2026-11-27_0106_M0106.md` *(`4c973b3a`)*, tre pezzi, nessuno gia' fatto.
+- **La carta** *(sez. `3-vicies`, il seguito [M0106])*:
+  - D2'' com'e' scritto da Luca;
+  - gli errori n.257 e n.258;
+  - le mie definizioni del minimo, del minimo successivo *(solo se interno)* e della tabella `d` / `omega` / chi al centro.
+- **Lo script:** `due_corpi_lettura_v5.py`. Fa girare la v4 intera, poi aggiunge D2'', il minimo, l'oscillazione e la tabella.
+
+
+### 2026-11-27 01:15 -- [M0106] PEZZO 1b: D2'' DA' VERSO 8, VIA 4, NON DISTINGUIBILE 0; IL MINIMO d 6.795 A k 3230; IL MASSIMO 27.870 A k 5020; NESSUN SECONDO MINIMO IN 6000 TICK [[PROGETTO-MITOSI]]
+
+- **Il referto** `doc/referti_l2/due_corpi_fondo_v6_C.txt`, riscritto con `due_corpi_lettura_v5.py` *(`4078ab07`)* sugli stessi `25` stati. Codice d'uscita `0`; i DEVE della v4 passano `2` su `2`. **Le finestre valide sono `12` su `12`.**
+- **D2'' per finestra:**
+  - **VERSO** su `[0, 3000]` *(`6` finestre, `|Delta d1'|/|Delta d2'|` da `72.0` a `95.5`)* e su `[5000, 6000]` *(`2`, i rapporti `8.99` e `37.4`)*;
+  - **VIA** su `[3000, 5000]` *(`4`, da `6.78` a `50.6`)*;
+  - **d2' va VIA in tutte le `12` finestre.**
+- **Il verdetto D2'':** **VERSO `8`, VIA `4`, non distinguibile `0`.**
+- **Il minimo e l'oscillazione** *(dalla serie, ogni `10` tick)*:
+  - il minimo e' `d 6.795042` a `k 3230`; il massimo dopo e' `27.870268` a `k 5020`;
+  - **il minimo successivo non c'e'**: `d` scende fino all'ultimo tick *(`21.077` a `k 6000`)*;
+  - il mezzo periodo, minimo -> massimo, e' `1790` tick: **non e' un periodo.**
+- **La tabella `d` / `omega` / chi al centro** *(per finestra di `500`)*:
+  - **d1':** `omega` scende quando `d` scende e il pozzo si approfondisce. `[0, 500]`: `d 41.31`, `omega 0.08252`, chi `-120.6`. `[3000, 3500]`: `d 8.06`, `omega 0.0765`, chi `-188`. `[3500, 4000]`: `d 16.13`, `omega 0.0755`, chi `-191.5`. `[5000, 5500]`: `d 27.39`, `omega 0.0817`, chi `-115`;
+  - **d2'** *(chi spento)*: `omega` va da `0.0934` a `0.0920` e chi al centro oscilla da `-32` a `+77`. **Chi qui non accoppia: evolve libero;**
+  - **d3':** `omega` da `0.0831` a `0.0839`, chi da `-98.5` a `-106.9`.
+- **La lettura, mia:**
+  - **il pozzo di chi delle due copie si somma quando si avvicinano, e l'orologio dei corpi rallenta dove il pozzo e' piu' profondo.** Il segno e' quello di uno spostamento verso il rosso. Il ritardo e' visibile: `omega` minima a `[3500, 4000]`, mentre `d` e' minima a `[3000, 3500]`;
+  - la riserva delle due meta' sotto `2 w` resta *(il minimo `6.795` sta sotto)*.
+- **LE PREVISIONI:** del guardiano, P1 *(`90%`, VERSO `8`, VIA `4`, le finestre `[3000, 5000]` VIA)*: **SI'**, esatta. La mia *(`95%`)*: **SI'**.
+
+
+### 2026-11-27 01:17 -- [M0106] PEZZO 2: K4'' PASSA (mitosi); LA CORSA DEL VUOTO PURO IN CODA, A LANCIATORE FERMO [[PROGETTO-MITOSI]]
+
+- **K4''** *(il ramo mitosi: `d6b1ef8b` la carta e lo script, il referto subito dopo)*: **la norma passa** *(`8.99e-14` relativo, entro `1e-9`)*. `|Delta H|` = `1.208e-10` *(`H_rif +1.229e-10`)* si stampa e non blocca.
+- **In coda:** `M0106_vuoto_puro` *(`mitosi_vuoto_v2.py corsa`: nascite accese, da `35976` a `41976`, stati ogni `250`, in `M0237/vuoto_v2`)*. Il lanciatore e' fermo dalle `22:44:08` di ieri *(letto da `coda_stato.json`)*. **Il rilancio a mano viene dopo questo commit**, e si dichiara nel commit successivo.
+- **La durata attesa** e' di circa `8-12` ore *(la carta della mitosi)*. Il referto `mitosi_vuoto_v3.txt` si fa con `mitosi_vuoto_v4.py lettura` quando la corsa chiude.
+
+
+### 2026-11-27 01:19 -- [M0106] LA RICEVUTA: ESEGUITO (3 PEZZI SU 3; LA CORSA DEL VUOTO PURO GIRA); LE PREVISIONI CONFRONTATE [[PROGETTO-MITOSI]]
+
+- **[M0106] eseguito** *(DECISIONE DI LUCA 01:06)*:
+  - **1.** lapse-u `4078ab07` *(la carta, la v5)*, `41ccae13` *(il referto)*;
+  - **2.** mitosi `d6b1ef8b`, `38d02317` *(K4'' PASSA)*; lapse-u `dd505ea7` *(la coda)*;
+  - **3.** questo paragrafo.
+- **Il rilancio, dichiarato:** il lanciatore e' ripartito a mano alle `01:18` e ha lanciato `M0106_vuoto_puro` alle `01:18:37` *(pid `4452`)*. L'APERTO del registro e' in questo commit *(su lapse-u)*.
+- **I RISULTATI:**
+  - **D2'':** VERSO `8`, VIA `4`, non distinguibile `0`;
+  - il minimo e' `d 6.795` a `k 3230`, il massimo dopo `27.870` a `k 5020`, nessun secondo minimo nei `6000` tick;
+  - `omega` di d1' scende col pozzo *(`0.0755` a chi `-191.5`, su `[3500, 4000]`)*;
+  - **K4'' passa.**
+- **LE PREVISIONI:**
+  - **del guardiano:** P1 *(`90%`)* **SI'**, esatta *(VERSO `8`, VIA `4`, `[3000, 5000]` VIA)*; P2 e P3 *(il vuoto puro)* **aspettano la corsa**;
+  - **le mie:** P1 al `95%` **SI'**; K4'' passa **SI'**; P2 *(niente nascite)* al `75%`, aspetta la corsa.
+- **IL SEGUITO:** quando la corsa chiude *(circa `8-12` ore)*, `mitosi_vuoto_v4.py lettura > doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi.
+
+
+### 2026-11-27 03:22 -- [M0106] LA CORSA DEL VUOTO PURO E' CHIUSA: 0 NASCITE IN 6000 TICK; LA NORMA DERIVA DI 2.26e-12, CRESCENTE IN 24 PASSI SU 24; max |H| 1.229e-10 [[PROGETTO-MITOSI]]
+
+- **La corsa:** `M0106_vuoto_puro`, lanciata alle `01:18:37` *(pid `4452`)*, **FINITA alle `03:19:48`**, uscita `0`. Il registro la chiude da solo *(`m1446-M0106_vuoto_puro`, CHIUSO)*. Ha impiegato `7269 s` *(circa 2 ore)*: io avevo stimato da 8 a 12 ore, quindi **la stima era sbagliata**.
+- **Il referto:** `doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi, prodotto da `mitosi_vuoto_v4.py lettura` *(il blob `0ca87d60`; `mitosi_vuoto_v2.py` `96a0eb49`; entrambi committati e puliti)*.
+- **LE NASCITE: NESSUNA.** `25` stati, da `36000` a `41976`, e `0` nascite. Lungo tutta la corsa il log stampa `E_persa +0`, `M 0` e `|gauss_acc| 0`.
+  - **La densita' locale alla prima nascita non si legge, perche' non c'e' una prima nascita.** Lo script separato previsto per quel caso non serve e non e' stato scritto.
+- **LA NORMA** `somma |phi_h|^2`: da `2.075747383350e+05` a `2.075747383355e+05`, cioe' una deriva relativa di **`2.260e-12`**.
+  - **E' crescente in `24` passi su `24`**, quindi e' sistematica e non casuale, anche se resta all'altezza dell'arrotondamento.
+  - **Non ne do una spiegazione:** la segnalo come osservazione, ed e' una domanda aperta. **Si chiude** misurando se la deriva scala col numero di tick *(lineare: un errore sistematico del passo)* o con la sua radice *(una passeggiata dell'arrotondamento: ma 24 su 24 crescenti la rendono improbabile)*.
+- **H(k):** `120` valori ogni `50` tick, con **`max |H|` `1.229e-10`** *(al primo campione, `k 36000`)* e media `1.048e-11`. **E' rumore attorno allo zero, come in K4.**
+  - Questi due numeri vengono da un `python -c` sugli stessi `npz`, non da uno script committato. La riga `max |H|` sta comunque anche nel referto.
+- **LE PREVISIONI CONFRONTATE:**
+  - **il guardiano, P2 *(`60%`)*, «nessuna nascita in `6000` tick»: GIUSTA;**
+  - **il guardiano, P3 *(`55%`)*, «se nasce qualcosa, dopo `k 3000` e al bordo del toro»:** il suo «se» non si e' avverato, quindi non si puo' provare;
+  - **la mia, P2 *(`75%`)*, nessuna nascita: GIUSTA.**
+- **LA LETTURA, mia:** il vuoto puro *(`phi_h = a phi_v`, `psi = 0`)*, con le nascite accese, **resta vuoto per `6000` tick**. Ne segue che le nascite viste nelle altre corse **dovrebbero richiedere materia, cioe' `psi` diverso da zero**: qui il vuoto da solo non le ha innescate. **Vale entro i `6000` tick e su questo reticolo** *(`n 34596`)*: non e' una prova che il vuoto non generi mai nulla.
+- **[M0106] E' ESEGUITO PER INTERO.** **FERMO:** aspetto il mandato successivo.
+
+
+### 2026-11-27 09:58 -- [M0951] RICEVUTO (DECISIONE DI LUCA 09:51, letto alle 09:53); IL PEZZO 1a, LA CARTA DEL VIDEO E LO SCRIPT anima_coppia.py, PRIMA DEL VIDEO [[PROGETTO-MITOSI]]
+
+- **Il mandato:** chiusura in tre pezzi *(il video della coppia, il TODO per la sessione successiva, la ricevuta)*; niente corse e niente gestione.
+- **Il percorso nel mandato e' sbagliato:** gli stati di d1' non sono in `M2034/d1`, ma in `M2034/coppia/d1`. Uso quest'ultimo.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M0951]. Fissa le scelte *(riquadro, d, omega, scale)* e due controlli DEVE: `d(3250)` entro il `10%` di `6.795`, e il riferimento a `k 0` entro `0.5`.
+- **La previsione, mia:** i due controlli passano *(`90%`)*; il video sta sotto i `5 MB` *(`80%`)*.
+
+
+### 2026-11-27 10:05 -- [M0951] PEZZO 1b: IL VIDEO v1 PASSA I DUE DEVE (d(3250) 6.835, 0.59%; IL RIFERIMENTO 0.0000) MA NON SI LEGGE (I PUNTI TROPPO PICCOLI): ERRORE MIO, LA CORREZIONE IN v2 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia.txt`; il video `anima_coppia.mp4` *(h264, `1280x640`, yuv420p, `25` quadri, `1.185 MB`)*, prodotti da `anima_coppia.py` *(`c0f781ea`, committato e pulito)*.
+- **I due DEVE PASSANO:**
+  - `d(3250)` = `6.834784`, lo `0.59%` da `6.795`;
+  - **il riferimento:** lo scarto a `k 0` e' `0.0000` per entrambi i corpi. **Quello zero e' quasi garantito:** la serie calcola il baricentro nello stesso modo. Prova soltanto che i pannelli stanno nello stesso riferimento della serie, e niente di piu'.
+- **IL DIFETTO, MIO:** ho guardato il quadro a `t 3.30 s` *(`k 3500`)*. I punti `scatter` con `s=4` sono troppo piccoli per `120` nodi su `560` pixel: lo sfondo bianco passa fra i punti, i corpi si vedono appena e le curve di livello di `chi` non si vedono. **Il video non e' utilizzabile.** Lo committo com'e' e lo correggo in `anima_coppia_v2.py`, che lo sovrascrive.
+- **UN'OSSERVAZIONE CHE IL VIDEO NON CERCAVA:** il baricentro della coppia **si sposta lungo x** di `-2.557` *(il massimo, a `k 4250`)*, poi torna a `-1.142` *(a `k 6000)*; lungo y resta entro `0.103`.
+  - Con due corpi uguali e simmetrici, per la sola interazione reciproca il baricentro dovrebbe stare fermo. **Una deriva laterale fa pensare a una spinta esterna, per esempio il vento del vuoto lungo x, o a un'asimmetria della partenza.**
+  - **Domanda aperta.** Si chiude confrontando d2' *(chi spento)*: se anche li' il baricentro deriva, la causa non e' il pozzo.
+
+
+### 2026-11-27 10:10 -- [M0951] PEZZO 1d: IL VIDEO v2 SI LEGGE (0.338 MB, I DUE DEVE PASSANO); E MOSTRA CHE A k 3250 E A k 6000 LA MATERIA E' UNA NUBE SOLA: IL «RIMBALZO» DI [M0106] PUO' ESSERE UN ARTEFATTO DELLE DUE META' [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia_v2.txt`; il video `doc/referti_l2/anima_coppia.mp4`, che sovrascrive il v1 *(`0.338 MB`; h264 `1280x640` yuv420p, `25` quadri a `4 fps`)*. Lo produce `anima_coppia_v2.py` al commit `6f432280`. I png di controllo a `k 0`, `3250` e `6000` stanno in `E:/soliton_simulator/controllo/M0951/`.
+- **I due DEVE passano**, con gli stessi numeri del v1: `d(3250)` `6.834784` *(lo `0.59%` da `6.795`)*; lo scarto del riferimento `0.0000`.
+- **### CIO' CHE IL VIDEO MOSTRA, LETTO A OCCHIO SUI TRE QUADRI** *(non e' misurato)*:
+  - **a `k 0`:** due corpi rotondi e separati, a `d 41.57`. Le due buche di `chi` sono unite da un collo comune;
+  - **a `k 3250`:** **la materia e' UN SOLO PICCO al centro**, con due lobi deboli sopra e sotto. **I due `+` della serie *(i baricentri delle due meta', a `+-3.4`)* non cadono su due corpi:** cadono fra il picco e i lobi. `chi` e' una buca sola, rotonda, con il minimo `-228.7`;
+  - **a `k 6000`:** **la materia e' UNA NUBE allungata lungo y e piegata**, larga e debole. I due `+` *(a `d 21.08`)* stanno dentro la stessa nube. `chi` e' una buca sola, ellittica.
+- **### CHE COSA CAMBIA, la mia lettura:** in [M0106] ho scritto «il minimo d `6.795` a `k 3230`, il massimo `27.870` a `k 5020`, nessun secondo minimo». **Il video dice che dopo l'incontro i due corpi non si separano:** si fondono, e la nube che ne nasce si allarga.
+  - **La «distanza» dopo `k 3250` e' la distanza fra i baricentri delle due meta' di UNA nube** che si allunga lungo y. **Non e' la distanza fra due corpi.**
+  - E' la riserva che avevo gia' scritto in [M0106] *(«sotto circa `2 w` la divisione in due meta' non separa piu' bene i due corpi»)*, **ma vale per tutta la seconda parte della corsa, non solo vicino al minimo.**
+  - **Le `4` finestre VIA di D2'' *(da `3000` a `5000`)* e il «massimo» `27.87`** sono quindi da rileggere. **Il verdetto VERSO sulle finestre prima di `k 3000` non cambia:** li' i corpi sono due e ben separati.
+  - **E la corsa lunga A1 del TODO** *(«il secondo e il terzo minimo»)* **presuppone due corpi in orbita.** Se si sono fusi, non ci sono minimi da cercare.
+- **IL CRITERIO DI CHIUSURA** *(una misura, non un'occhiata)*: per ogni stato si contano i massimi locali di `rho_psi` sopra una frazione del massimo *(per esempio il `10%`; la soglia va fissata nella carta PRIMA)*. **Due picchi = due corpi; uno = fusione.** E' una lettura a costo zero sugli stessi `25` stati. **La metto nel TODO come A0, prima di A1. La decisione spetta a Luca.**
+- **La deriva laterale del baricentro della coppia** *(`-2.56` lungo x, nel pezzo 1b)* **resta aperta.** Con la fusione puo' essere il moto della nube, ma resta da misurare.
+
+
+### 2026-11-27 10:08 -- [M0951] LA RICEVUTA: ESEGUITO (3 PEZZI SU 3); IL VIDEO DELLA COPPIA (v2), IL TODO CON A0 NUOVO; LE ORE DEI MIEI TITOLI ERANO STIMATE, CORRETTE QUI; FERMO [[PROGETTO-MITOSI]]
+
+- **[M0951] ESEGUITO**, con l'ora letta da `date` *(`10:07:41`)*:
+  - **pezzo 1, il video:**
+    - `5ca33768` la carta e `anima_coppia.py`;
+    - `593dea51` il v1, che passa i DEVE ma e' illeggibile *(errore mio)*;
+    - `6f432280` la v2;
+    - `838d378e` il video v2, `0.338 MB`;
+  - **pezzo 2:** `7cfe4823`, `doc/TODO_prossima_sessione_2026-11-27.md`;
+  - **pezzo 3:** questo paragrafo.
+- **Le deviazioni dal mandato, dichiarate:**
+  - il percorso degli stati e' `M2034/coppia/d1`, non `M2034/d1`;
+  - il video ha richiesto un secondo script, la v2;
+  - il `.mp4` e' stato aggiunto con `git add -f`, perche' `*.mp4` e' nel `.gitignore` *(come gli altri due video gia' tracciati)*;
+  - **A0 nel TODO e' mio, non del guardiano:** e' una proposta.
+- **### UN ERRORE MIO, LE ORE:** le ore nei titoli dei paragrafi [M0951] di oggi **erano stimate, non lette**, e stavano in anticipo sul vero. Le ore vere, quelle dei commit *(`git log`)*:
+
+  | titolo | ora vera |
+  |---|---|
+  | «09:58», il pezzo 1a | commit `09:55:23` |
+  | «10:05», il pezzo 1b | commit `09:58:34` |
+  | «10:10», il pezzo 1d | commit `10:03:49` |
+
+  **Anche il TODO dice «circa `10:15`» per lo stato alla chiusura: l'ora vera e' `10:06`.** Non riscrivo i paragrafi: la correzione e' questa.
+- **Le mie previsioni:**
+  - i due controlli passano *(`90%`)*: **giusta**;
+  - il video sta sotto i `5 MB` gia' al primo formato *(`80%`)*: **giusta** *(`1.185 MB` il v1, `0.338 MB` la v2)*.
+- **LO STATO ALLA CHIUSURA:**
+  - nessuna corsa gira;
+  - la coda di `coda_m1446.py` e' vuota e il lanciatore e' fermo;
+  - le tre ramificazioni sono pulite e spinte.
+- **LA COSA PIU' IMPORTANTE DI OGGI *(da misurare)*:** il video suggerisce che **d1' si fonde a `k 3250` e non rimbalza**. La lettura «minimo, poi massimo» di [M0106] va rifatta con A0 prima di qualunque corsa lunga.
+- **FERMO** fino al prossimo «leggi la posta».
+
+
+### 2026-11-27 10:24 -- [M1016] RICEVUTO (DECISIONE DI LUCA 10:16, letto alle 10:18); PEZZO 1: LA CARTA DI A0 (LA NORMA DEVE, I MASSIMI SOPRA IL 30% SU LA LISCIATURA DI RAGGIO 2, R DELLA NUBE), DELLA CORSA d1'' E DEL VIDEO v3 [[PROGETTO-MITOSI]]
+
+- **Il mandato:** A0 *(due corpi o una nube, e lo «svanire»: artefatto di scala o dispersione)*, poi la corsa lunga d1'' fino a `k 18000`, poi il video v3. Sei pezzi.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M1016]. **Le mie scelte dentro S1:**
+  - la lisciatura si fa sul disco di `19` nodi, con offset di reticolo esatti;
+  - la soglia del `30%` va sul massimo della lisciatura;
+  - **K2** usa `giro_3/stato_003000.npz`.
+- **Le previsioni, mie:** la norma ferma *(`95%`)*; UNO da `k 3000`-`3250` *(`70%`)*; `R` cresce dopo la fusione *(`80%`)*.
+- **Il caso K0 della corsa:** lo stato a `6250` di d1' non esiste. Il pezzo 3 avra' la sua carta.
+
+
+### 2026-11-27 10:23 -- [M1016] PEZZO 2: A0 DICE DUE CORPI IN 22 STATI SU 25; LA SOVRAPPOSIZIONE A k 3000-3500 (3, 1, 3 MASSIMI); DA k 3750 DI NUOVO DUE, A 28.6 E POI 13.9 A k 6000; LA NORMA FERMA (1.6e-14): VALE (a). LA MIA «NUBE SOLA» ERA SBAGLIATA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/coppia_a0.txt`, prodotto da `coppia_a0.py` *(`c6f4c4c3`, blob `68f4bf68`, committato e pulito)*, uscita `0`.
+- **I casi noti PASSANO:**
+  - **(K1)** `stato_000000` da' `2` massimi a `41.569`;
+  - **(K2)** `giro_3/stato_003000` da' `1` massimo, con `R` `4.8946`.
+- **LA NORMA E' FERMA:** `max |N(k)/N(0) - 1|` = **`1.643e-14`**, contro una soglia di `1e-9`. **Quindi vale (a): la materia si allarga, non si perde.** `max rho` scende da `9.2109e+03` *(a `k 0`)* a `5.0048e+03` *(a `k 6000`)*, cioe' al **`0.543`**. **Lo «svanire» del video e' la scala fissa:** i due corpi sono piu' larghi e piu' bassi.
+- **IL VERDETTO PER STATO:**
+
+  | tratto | verdetto | distanza fra i due massimi |
+  |---|---|---|
+  | da `k 0` a `k 2750` | **DUE CORPI** | da `41.57` a `16.46` |
+  | `k 3000` | ALTRO *(`3` massimi)* | — |
+  | `k 3250` | **UNO** | — |
+  | `k 3500` | ALTRO *(`3`)* | — |
+  | da `k 3750` a `k 6000` | **DUE CORPI** | da `16.46` a `28.58` *(da `k 4750` a `k 5500`)*, poi giu' fino a **`13.89` a `k 6000`** |
+
+  - **Il tick della fusione**, secondo la definizione della carta *(il primo UNO subito dopo un DUE)*, **non c'e'**: prima di `3250` c'e' ALTRO, non DUE.
+  - **Nei `3` massimi** a `3000` e a `3500`, quello centrale e' alto *(`1.7e4`)* e i due laterali sono piu' bassi *(da `5.7e3` a `9.1e3`)*. **E' la sovrapposizione dei due corpi**, un picco con due frange, come nel quadro a `k 3250` del video.
+  - **La distanza fra i massimi va a passi di reticolo:** `28.583` si ripete in `4` stati. Va letta con una risoluzione di circa `1` nodo.
+- **### LA LETTURA:** **i due corpi si attraversano** *(o rimbalzano: A0 non distingue quale massimo e' quale)* a `k 3250`, **si separano fino a circa `28.6` e tornano ad avvicinarsi**: a `k 6000` sono a `13.9`. **E' una seconda caduta, e A1 ha senso.**
+  - **«Una nube sola» del video v2 era una MIA lettura sbagliata:** due corpi larghi e bassi, sulla scala fissa, sembrano una banana.
+  - **Il «massimo» di [M0106]** *(`27.87` a `k 5020`, dalle meta')* **e' vicino a quello dei massimi** *(`28.58`)*.
+  - **Ma da `k 5500` la «d» delle meta' e la distanza fra i massimi divergono:** a `k 6000` sono `21.08` contro `13.89`. **La «d» delle meta' non vale piu' con corpi larghi:** per A1 si usa la distanza fra i massimi, o un baricentro locale attorno a ciascun massimo *(scelta da dichiarare nella carta del pezzo 4)*.
+- **`R` della nube intera** scende da `21.53` a `6.62` *(a `k 3250`)*, risale a `16.11` *(a `k 5000`)* e riscende a `13.47`. **Misura la separazione piu' la larghezza, non la sola larghezza.**
+- **LE PREVISIONI CONFRONTATE:**
+
+  | chi | previsione | esito |
+  |---|---|---|
+  | il guardiano, P1 *(`80%`)* | la norma ferma, (a) | **GIUSTA** |
+  | il guardiano, P2 *(`60%`)* | UNO da `k 3000` in poi | **SBAGLIATA**: UNO solo a `3250` |
+  | il guardiano, P4 *(`30%`)* | DUE per tutta la corsa, e il secondo minimo | **in parte:** non DUE ovunque *(c'e' la sovrapposizione)*; il secondo minimo e' da vedere in d1'' |
+  | io | la norma ferma *(`95%`)* | **giusta** |
+  | io | UNO da `3000`-`3250` in poi *(`70%`)* | **SBAGLIATA** |
+  | io | `R` cresce dopo la fusione *(`80%`)* | **non applicabile:** la fusione non c'e' |
+  | io, nel TODO | «nube sola dopo `3250`» *(`75%`)* | **SBAGLIATA** |
+
+- **### UN ERRORE MIO, DI NUOVO LE ORE:** il titolo del paragrafo del pezzo 1 dice «`10:24`», ma `date` dava `10:18:48` prima del commit *(`cdcffb1a`)*. **E' lo stesso errore che avevo appena corretto.** Da ora leggo l'ora con `date` prima di scrivere il titolo, come per questo *(`10:22:58`)*.
+
+
+### 2026-11-27 10:31 -- [M1016] PEZZO 3b: K0' CADE PRIMA DEL PRIMO TICK (L'ASSERT DEL NUCLEO): HO COPIATO IL CICLO DI due_corpi_fondo.py, CHE CADDE PER LA STESSA RAGIONE IN [M2330]; LA VIA VERA E' IL CICLO DELLA v2. ERRORE MIO; LA CORREZIONE IN v8 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v7_noto.txt`, da `due_corpi_fondo_v7.py noto` *(`af681e14`)*, codice d'uscita `1`. Sul referto ci sono solo le righe stampate prima della caduta; il traceback e' qui sotto.
+- **La carica PASSA AL BIT:** la riga della serie a `k 5750` = `serie.json` *(`[5750, -1.1868572590842095, -12.159724488546047, ...]`)*.
+- **Poi la caduta, prima del primo tick:** `torneo_tenuta.nucleo()`, chiamato dentro `Ripresa.gira`, solleva `AssertionError: pezzi NON e' quello del nucleo: FERMO`. **Dentro la scena, `pezzi` e' gia' avvolto.**
+- **L'ERRORE E' MIO, E ERA GIA' SCRITTO:**
+  - ho copiato il corpo di `due_corpi_fondo.ciclo`. **Quel ciclo cadde per la stessa ragione in [M2330]**, ed e' per questo che esiste `due_corpi_fondo_v2.py` *(«il nucleo preso prima della scena»)*;
+  - **d1' e' girata col ciclo della v2**, che `D.ciclo` contiene gia' dopo l'import, e `D.avvia` riempie il nucleo prima della scena;
+  - **dovevo leggere la catena degli import fino in fondo, non solo il modulo base.**
+- **LA CORREZIONE** *(`due_corpi_fondo_v8.py`, un commit a se')*: `Ripresa.gira` chiama **il `D.ciclo` vero** *(quello della v2)* con un `dopo` che porta il tick a quello assoluto, `k_da + kk`. Il residuo di Gauss cade negli stessi tick, perche' `k_da` e' multiplo di `250` *(asserito)*. **Il resto della v7 non cambia;** K0' e K0'-neg si rifanno.
+
+
+### 2026-11-27 10:40 -- [M1016] PEZZO 3d: K0' FALLISCE (v8): DOPO 250 TICK DA stato_005750 LO STATO NON E' stato_006000 AL BIT (9 CHIAVI SU 11), NE' LA SERIE NE' omega; K0'-neg PASSA; LA CORSA d1'' NON VA IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v8_noto.txt`, da `due_corpi_fondo_v8.py noto` *(`f91ca38c`)*, codice d'uscita `1`.
+- **Gli esiti:**
+
+  | prova | esito | dettaglio |
+  |---|---|---|
+  | la carica a `k 5750` | **PASSA al bit** | |
+  | K0', lo stato a `6000` | **FALLISCE** | diverse `Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`; uguali solo `h_int` e `psi` |
+  | K0', la serie `5760..6000` | **FALLISCE** | |
+  | K0', `omega` | **FALLISCE** | |
+  | K0'-neg | **PASSA** *(lo stato e' diverso, come deve)* | |
+
+  I tempi: `203 s` K0' e `147 s` K0'-neg.
+- **LA CARTA:** «se K0' fallisce, FERMO: la corsa non va in coda». **Non va in coda.**
+- **Il referto non dice QUANTO sono grandi le differenze.** Prima di fermarmi faccio **una sola misura diagnostica**, che non corregge niente: `k0_diagnosi.py`, la stessa ripresa da `5750`. Per ogni tick il confronto con la serie e con `omega` di `serie.json`; alla fine, per ogni chiave, il massimo di `|differenza|` e il massimo relativo.
+  - **Cosa decide:**
+    - se la prima differenza e' all'altezza dell'arrotondamento *(relativa sotto `1e-12`)* e cresce piano, **e' l'ordine delle operazioni, o una differenza di piattaforma o di libreria**;
+    - se e' grande gia' al primo tick, **c'e' uno stato che la ripresa non carica.**
+  - **La mia previsione: piccola, all'arrotondamento** *(`60%`)*. `h_int` e `psi` sono uguali, `rho` no; i candidati per uno stato nascosto sono il fasore `c(t)` o un contatore dentro `Z["z"]`.
+
+- **### IL DISCO C: E' PIENO** *(`131 MB` liberi su `476 GB`, alle `10:40`)*. Il primo tentativo di commit di questo paragrafo e' stato rifiutato da `PRESIDI-SUL-DISCO-NON-SULLO-STAGE`, perche' `git checkout-index` non poteva scrivere in `%TEMP%`.
+  - **La decisione di Luca, in chat alle `10:52`:** «Fai girare tutto in un folder creato ad-hoc su E:».
+  - **Eseguita cosi':**
+    - la cartella e' `E:\soliton_simulator\tmp_M1016`;
+    - `committa3.py` e' una copia di `committa2.py` con `TMP` e `TEMP` del commit su quella cartella *(una sostituzione asserita; la riserva sta in `E:\soliton_simulator\controllo\committa3_copia.py`)*;
+    - **le corse e gli script girano con `TMP` e `TEMP` su E:.**
+
+
+### 2026-11-27 10:57 -- [M1016] PEZZO 3e: k0_diagnosi.py, PRIMA DELLA DIAGNOSI; IL MESSAGGIO DI 755a781c MUTILATO (UN \t DIVENTATO TABULAZIONE) [[PROGETTO-MITOSI]]
+
+- **Lo script:** `doc/referti_l2/k0_diagnosi.py`, cioe' la misura dichiarata nel pezzo 3d. **Non corregge niente.** Riprende come K0' *(dalla v8)* e stampa la grandezza delle differenze: per riga della serie, per `omega` e per chiave dello stato.
+- **UN ERRORE MIO, nel messaggio di `755a781c`** *(gia' spinto, non lo riscrivo)*. Nella riga «IL DISCO» il percorso doveva essere `E:` + `\soliton_simulator\tmp_M1016`, ma il `\t` di `\tmp_M1016` e' diventato una tabulazione. **E' successo perche' ho modificato il messaggio con un python fra virgolette;** la nota «percorsi Windows negli script» lo diceva gia'. **Il percorso giusto e' quello scritto nel paragrafo del pezzo 3d.**
+
+
+### 2026-11-27 11:02 -- [M1016] PEZZO 3f: LA DIAGNOSI DI K0': LE DIFFERENZE SONO GRANDI GIA' AL PRIMO TICK (omega 6e-6 A 5751; LA SERIE 1.8e-5 RELATIVO A 5760; phi_h 3.5e-3 A 6000) E NON CRESCONO: C'E' UNO STATO CHE LA RIPRESA NON CARICA. FERMO [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/k0_diagnosi.txt`, prodotto da `k0_diagnosi.py` *(`5ad3cbbb`)*, uscita `0`, con `TMP` su E:.
+- **I NUMERI:**
+  - **`omega`:** e' diverso gia' al primo tick, `5751`. Nel primo blocco di `10` tick lo scarto e' `6.1e-06` *(corpo 1)* e `1.0e-05` *(corpo 2)*; poi resta **stabile** intorno a `4e-07`, per tutti i `250` tick;
+  - **la serie:** gia' a `k 5760` lo scarto e' `1.066e-01` assoluto e `1.782e-05` relativo, su tutte le colonne. Lungo i `250` tick resta fra `5.4e-06` e `2.6e-05` relativo: **non cresce**;
+  - **lo stato a `k 6000`** *(relativo = `max|d| / max|riferimento|`)*:
+
+    | chiave | relativo |
+    |---|---|
+    | `phi_h` | **`3.535e-03`** |
+    | `Lambda` | `9.407e-04` |
+    | `psi_h` | `7.942e-04` |
+    | `campo_E` | `2.989e-04` |
+    | `pi` | `1.450e-04` |
+    | `rho` | `5.610e-05` |
+    | `chi` | `5.121e-06` |
+    | `campo_A` | `1.314e-06` |
+    | `theta_a` | `1.318e-06` |
+    | **`h_int`, `psi`** | **uguali AL BIT** |
+
+- **LA LETTURA, con il criterio del pezzo 3d:** la prima differenza e' grande gia' al primo tick, molto sopra `1e-12`, e poi non cresce. **Non e' l'arrotondamento: c'e' uno stato che la ripresa non carica.** La mia previsione *(arrotondamento, `60%`)* era **SBAGLIATA**.
+- **I CANDIDATI, dalla lettura di `chi_tick_v2.tick_chi_v2`** *(non misurati)*:
+  - **`campo`:** `campo.spinta(0.5)` lavora sull'oggetto, e lo stato ne salva solo `A` ed `E`. Se il campo porta altro *(una velocita', una carica di riferimento)*, la ripresa lo prende da `costruisci`, cioe' da `k 0`;
+  - **il motore `mot`:** `mot.cs` e `mot.lambda_c` si riscrivono a ogni tick, ma **`mot.dtau` e gli altri attributi non stanno nello stato**;
+  - **`CT.fase_a(mot, st, e0, N)`** agisce su `st`, e `psi` e `h_int` risultano identici al bit. Due chiavi che il tick non tocca *(o che la ripresa non usa)* sono a loro volta un indizio da capire;
+  - **`phi_h`** ha lo scarto relativo piu' grande, cioe' il vuoto. **Il fasore `c(t)`** e' scritto solo in `costruisci`, ma se qualcosa nel tick dipende dal tempo assoluto, la ripresa riparte col tempo sbagliato.
+- **CHE COSA NE SEGUE:**
+  - **la corsa d1'' non va in coda** *(la carta)*;
+  - **e la cosa vale per ogni ripresa da uno stato salvato, non solo per questa:** **gli stati salvati da `due_corpi_fondo_v4.corsa` non sono completi.**
+- **LA PROPOSTA, NON ESEGUITA** *(la decisione spetta a Luca)*:
+  - **(a)** una lettura a costo zero: elencare gli attributi array di `Z["z"]`, `mot` e `C.campo` che lo stato non salva, e trovare quello che manca;
+  - **(b)** la corsa lunga senza ripresa: d1' rifatta da `k 0` fino a `k 18000`, in un processo solo *(circa `4` ore)*. **Le prime `6000` devono riprodurre d1' al bit**, ed e' un caso noto gratuito.
+  - **(b) non dipende da (a)**, ed e' la via piu' sicura per avere d1'' oggi.
+- **FERMO.**
+
+
+### 2026-11-27 11:20 -- [M1107] RICEVUTO (DECISIONE DI LUCA 11:07, dalla posta 2980d716, letto alle 11:18; in chat non mi era arrivato); A1, LA DICHIARAZIONE PRIMA DI MUOVERE: LA CARTELLA E:\soliton_lavoro; E UN OSTACOLO: SU E: GIT RIFIUTA IL WORKTREE (DUBIOUS OWNERSHIP) [[PROGETTO-MITOSI]]
+
+- **Il mandato, parte A:** spostare il lavoro su E:. **Parte B:** la chiave non salvata *(al massimo due tentativi)*; se non si trova, d1 da capo fino a `18000` con il caso noto K5; poi i pezzi 4-6 di [M1016].
+- **A1, LA DICHIARAZIONE** *(prima di muovere qualunque cosa)*:
+  - **la cartella nuova:** `E:\soliton_lavoro`;
+  - **cosa ci va:**
+
+    | dove | cosa |
+    |---|---|
+    | `E:\soliton_lavoro\wt_lapse_u` | la copia di lavoro di lapse-u, dove stanno il lanciatore e le letture *(rifatta con `git worktree`)* |
+    | `E:\soliton_lavoro\wt_mitosi` | il worktree della mitosi *(rifatto con `git worktree`)* |
+    | `E:\soliton_lavoro\tmp` | `TMP` e `TEMP` delle sessioni e dei collaudi |
+
+    **La mia lettura di «la copia di lavoro»** e' il worktree di lapse-u, perche' il caso noto A4 chiede `coda_m1446.py` «dalla cartella nuova», e il lanciatore sta su lapse-u. **Il repository principale** `C:\Users\lpeano\soliton_simulator` *(ramo `primo-ordine`)* **NON si sposta:** e' la cartella della sessione, e un worktree principale non si rimuove. Gli altri worktree *(`st_main`, `wt_vincoli`, `wt_zero`, ...)* non si toccano;
+  - **cosa NON si muove:** `E:\soliton_simulator\controllo\...` con gli stati, `E:\soliton_simulator\registro_tappe` e il registro delle corse. Restano dove sono, quindi i percorsi nelle carte e nel TODO restano validi;
+  - **i dati ignorati da git** *(che `git worktree remove` cancellerebbe)*: `db/` *(`769 MB` in ciascuno dei due worktree)* e `db_era2/stato_0bc547638e.npz`. **Si copiano nel worktree nuovo prima di rimuovere il vecchio**, e il confronto si fa con lo sha1. Le `__pycache__` non si copiano;
+  - **i percorsi assoluti verso i worktree vecchi** *(trovati con grep)*:
+    - le voci FINITE di `coda_m1446.json` *(`C:/Users/lpeano/wt_mitosi/...`)*: storia, non si toccano;
+    - le righe d'uso di `lorentz_censimento.py` e alcuni script `nascite/*.py` sul ramo mitosi: si dichiarano qui e non si riscrivono *(sono script gia' usati)*.
+- **### L'OSTACOLO, VERIFICATO ADESSO** *(`11:19`, un repository di prova `E:\soliton_lavoro\prova_proprietario`, poi cancellato)*:
+  - `git status` risponde **«fatal: detected dubious ownership ... is on a file system that does not record ownership»**;
+  - **e' lo stesso rifiuto di `1c246469`** *(il worktree T1 su E:, ottobre)*;
+  - **un worktree su E: non funziona senza un'eccezione `safe.directory`** nella configurazione GLOBALE di git, una per cartella. **La configurazione ne contiene gia' una trentina per repository su E:** *(per esempio `E:/soliton_simulator_numba`)*, quindi la via e' nota;
+  - **ma aggiungerla cambia la configurazione globale e spegne un controllo di sicurezza di git.** Non lo faccio senza una riga di Luca;
+  - **la proposta:** due eccezioni precise, `E:/soliton_lavoro/wt_lapse_u` e `E:/soliton_lavoro/wt_mitosi`, e **nessun jolly** `*`.
+- **Gia' fatto e non bloccato:** `TMP` e `TEMP` su E: per le corse e per i commit, gia' dalle `10:52` *(`committa3.py`, per ora nella cartella `E:\soliton_simulator\tmp_M1016`)*. **Passano a `E:\soliton_lavoro\tmp`** col resto dello spostamento.
+- **LA PARTE B** *(la chiave non salvata)* **non dipende dallo spostamento**, ma il mandato mette A prima di B. **Aspetto la decisione su `safe.directory` prima di tutte e due.**
+- **FERMO.**
+
+
+### 2026-11-27 11:50 -- [M1107] DECISIONE DI LUCA (11:44, in chat): LE DUE ECCEZIONI safe.directory AGGIUNTE; A2 PER LAPSE-U: IL WORKTREE RIFATTO IN E:\soliton_lavoro\wt_lapse_u, db/ UGUALE (549 FILE, LO STESSO sha1) [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `11:44`)*:
+  1. aggiungere a `git config --global safe.directory` i due percorsi, **uno per riga, senza il jolly**;
+  2. fare B5 *(la chiave non salvata)* **subito, in parallelo ad A**, con lo stesso tetto *(due tentativi, poi B6)*.
+- **I COMANDI** *(`11:44:06`)*:
+
+  ```
+  git config --global --add safe.directory E:/soliton_lavoro/wt_lapse_u
+  git config --global --add safe.directory E:/soliton_lavoro/wt_mitosi
+  ```
+
+  **L'uscita di `git config --global --get-all safe.directory`** *(salvata in `E:\soliton_lavoro\safe_directory_1144.txt`)*:
+  - `35` righe;
+  - **nessun `*`;**
+  - le ultime quattro: `E:/kbase`, `E:/kbase`, `E:/soliton_lavoro/wt_lapse_u`, `E:/soliton_lavoro/wt_mitosi`. **`E:/kbase` c'era gia', due volte; non e' mio e non lo tocco.**
+- **A2, LAPSE-U:**
+  1. il worktree vecchio era pulito *(`git status --porcelain` vuoto)*;
+  2. **i dati ignorati** *(`db/` e `db_era2/stato_0bc547638e.npz`)* sono stati copiati in `E:\soliton_lavoro\riserva_lapse_u`. Il manifesto sha1 della riserva e quello del vecchio coincidono *(`549` file)*;
+  3. `git worktree remove C:/Users/lpeano/wt_lapse_u` *(uscita `0`; la cartella non esiste piu')*;
+  4. `git worktree add E:/soliton_lavoro/wt_lapse_u lapse-u` *(uscita `0`, `5090` file, HEAD `576c2687`)*;
+  5. i dati ignorati sono tornati nel worktree nuovo. **Il manifesto nuovo e' uguale a quello vecchio** *(`cmp`)*;
+  6. `core.hooksPath` vale `.githooks` *(e' una configurazione condivisa, quindi i presidi ci sono)*. **Questo commit e' il primo dal worktree nuovo.**
+- **I manifesti** sono in `E:\soliton_lavoro\manifesto_lapse_u_{vecchio,riserva,nuovo}.txt`.
+- **Poi:** A2 per la mitosi; B5 parte dal worktree nuovo di lapse-u.
+
+
+### 2026-11-27 11:50 -- [M1107] B5a: b5_chiave.py, PRIMA DELLA LETTURA (LA CORSA CONTINUA A k 250 CONTRO LA RICARICA DAL FILE APPENA SCRITTO); E DI NUOVO UN'ORA STIMATA NEL TITOLO DI fd996d24 [[PROGETTO-MITOSI]]
+
+- **Lo script:** `doc/referti_l2/b5_chiave.py`.
+  - **Dentro una corsa** *(la via di d1': `costruisci` e `parametri` della v6, il `D.ciclo` della v2)*: `250` tick, poi l'istantanea A di tutto cio' che e' raggiungibile da `Z`, `Z["z"]`, il motore, `C`, `C.campo`, `X` e `P` *(gli array, gli scalari, le sparse; profondita' `4`)*.
+  - **Lo stato si salva** come in `due_corpi_fondo_v4.corsa`, in un file su `E:\soliton_lavoro\tmp`.
+  - **Poi una scena nuova**, la carica come `Ripresa`, e l'istantanea B. **Le voci diverse sono le candidate.**
+- **LA MIA SCELTA, DICHIARATA:** il confronto si fa a `k 250`, non a `5750` come dice il mandato. **Il meccanismo del salvataggio e' lo stesso a ogni multiplo di `250`;** cosi' si risparmiano circa `80` minuti. **La prova finale resta K0' a `5750`.**
+- **LA MIA PREVISIONE:** la candidata e' un attributo del motore *(`mot.dtau`, `mot.cs` o una cache del passo)* o del campo, non una chiave dello stato *(`60%`)*. **Il guardiano, P1** *(`55%`)*: «una cache del motore *(`cs_prec` o `lambda_c`)*».
+- **### UN ERRORE MIO, DI NUOVO L'ORA:** il titolo del paragrafo di `fd996d24` dice «`11:50`», ma `date` dava `11:47:33`. **Da adesso il titolo lo scrive uno script** *(`accoda.py`)*, che legge l'ora dall'orologio nel momento in cui accoda il paragrafo.
+
+
+### 2026-11-27 11:54 -- [M1107] A2 (MITOSI): IL WORKTREE RIFATTO IN E:\soliton_lavoro\wt_mitosi (HEAD 82739c06), db/ UGUALE (549 FILE); C: DA 121 MB A 4.5 GB LIBERI; LA SUITE 67/67 DOPO B5 [[PROGETTO-MITOSI]]
+
+- **La stessa procedura di lapse-u:**
+  - il vecchio era pulito;
+  - la riserva dei dati ignorati e' stata confrontata col manifesto *(`549` file uguali)*;
+  - `git worktree remove C:/Users/lpeano/wt_mitosi`, poi `git worktree add E:/soliton_lavoro/wt_mitosi mitosi`;
+  - i dati sono tornati al loro posto, e **il manifesto nuovo e' uguale al vecchio** *(`E:\soliton_lavoro\manifesto_mitosi_{vecchio,riserva,nuovo}.txt`)*.
+- **`git worktree list`:** `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* ed `E:/soliton_lavoro/wt_mitosi` *(mitosi)*. Gli altri worktree non sono stati toccati.
+- **Il disco C:** e' passato da `121 MB` a `4.5 GB` liberi.
+- **La verifica di A2, «la suite della mitosi `67` su `67`»:** e' `primo_ordine/collauda.py` *(il «`67/67`» di `doc/NUCLEO_CONGELATO.md` e di `doc/ROTTA.md`)*. **La lancio dopo la fine di B5**, perche' la suite non va sovrapposta a una corsa *(le note: il 2026-11-09 una suite e un'altra corsa si sono toccate anche fra worktree diversi, attraverso `%TEMP%`)*. **La lancio con `TMP` su `E:\soliton_lavoro\tmp`**, cosi' vale anche come verifica di A3.
+
+
+### 2026-11-27 11:59 -- [M1107] B5b: LA CHIAVE NON SALVATA E' mot.geo.U (IL TRASPORTO U(1) SULLA DIAGONALE, 4.7e-4); NON E' INFORMAZIONE PERSA: U = exp(i e A) DALLA A SALVATA. IL TENTATIVO 1: scrivi_U DOPO LA CARICA (v9) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/b5_chiave.txt` *(`b5_chiave.py`, `7426fe60`; uscita `0`)*.
+  - Le istantanee hanno `151` voci *(A, la corsa continua)* e `147` *(B, la ricarica)*. **Delle `147` voci in comune, `109` sono uguali e `38` diverse;** `4` buffer esistono solo in A.
+- **LE `38` DIVERSE, per tipo:**
+  - **`mot.geo.U`** *(`78732 x 2 x 2`)*: diverso in **`157464` elementi su `314928`**, esattamente la diagonale, con relativo **`4.745e-04`**. **E' la candidata;**
+  - **`mot.cs`** *(relativo `3.076e-02`)*: **non e' stato.** `chi_tick.forza` ricalcola `cs = s N(chi)`, e `tick_chi_v2` riscrive `mot.cs` prima del passo;
+  - **i contatori:** `mot.tick` *(`250` contro `0`)*, `mot.applicazioni[...]` e `mot.ripieghi`. **Il passo non li legge:** `mot.tick` lo legge solo `primo_ordine/checkpoint.py`, che qui non si usa;
+  - **`31` buffer di lavoro** `mot._buf[...]` *(`fp_*`, `ep_*`, `mv_*`, `a0`, `a1`, `sin`, `sn`, `ang`)*: si riscrivono dentro ogni tick.
+- **IL MECCANISMO, DAL CODICE** *(`csv/_u1_prototipo.py`: `avvolto` e `scrivi_U`; `Campo.u`)*:
+  - dentro il tick, **`U` si riscrive solo DOPO il primo `CAMM-SPOSTAMENTO-VUOTO`**, come `scrivi_U(mot, campo)`, cioe' `U[:,0,0] = U[:,1,1] = exp(i e A)`;
+  - **la parte del tick che viene prima usa la `U` del tick precedente.** Nella corsa continua quella `U` vale `exp(i e A)`, con la `A` di fine tick, che e' la `A` salvata. **Dopo la ricarica, invece, `U` e' quella lasciata da `costruisci`**, cioe' con `A = 0`, quindi `U = I`;
+  - **di qui lo scarto gia' al primo tick, e la diagonale.**
+- **QUINDI LA CHIAVE NON E' INFORMAZIONE PERSA, E NON E' UNA CACHE DEL NUCLEO DA SALVARE:** e' **una funzione della `A` salvata.**
+  - Il guardiano, P1 *(«una cache del motore, `cs_prec` o `lambda_c`»)*: **sbagliata nel nome, giusta nel genere** *(un attributo del motore, non una chiave dello stato)*. La mia previsione *(«un attributo del motore o del campo»)*: **giusta.**
+- **IL TENTATIVO 1** *(su 2)*: `due_corpi_fondo_v9.py`, cioe' la v8 piu' **`scrivi_U(mot, C.campo)` dopo la carica.** E' in memoria, fuori dal nucleo; la v8 e' usata e non si tocca. **Poi K0' da `stato_005750`.**
+  - **La previsione, mia:** K0' passa AL BIT *(`70%`)*. Il resto del passo non legge niente di diverso, ma un ordine di operazioni diverso in `scrivi_U` darebbe lo stesso `exp(i e A)`.
+
+
+### 2026-11-27 12:09 -- [M1107] A4: IL LANCIATORE A SECCO DALLA CARTELLA NUOVA, 8 DEVE SU 8: RADICE E:\soliton_lavoro\wt_lapse_u; LISTA (237 VOCI), STATO, TAPPE E STATI AI PERCORSI VECCHI; NESSUNA CORSA DA LANCIARE [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/prova_secco_coda.txt`, da `prova_secco_coda.py` *(`ccb7d25c`)*, uscita `0`.
+- **Come:** `coda_m1446.py` **non ha un modo a secco**, quindi la prova **lo importa senza chiamare `main()`**: nessun lancio, nessun file scritto.
+- **Gli `8` DEVE PASSANO:**
+  - la radice del lanciatore e' `E:\soliton_lavoro\wt_lapse_u`;
+  - la lista si legge *(`237` voci)*;
+  - lo stato, al percorso vecchio `E:\soliton_simulator\controllo\M1446\coda_stato.json`, si legge *(`237` corse; l'ultimo evento: `03:19:48 FERMO: la coda e' vuota`)*;
+  - `_registro_corse.py` esiste sotto la radice nuova;
+  - il REGISTRO esiste *(`doc/REGISTRO_CORSE.md` nel repo: nella cartella nuova, con lo stesso percorso nel repo)*;
+  - le TAPPE esistono al percorso vecchio, `E:\soliton_simulator\registro_tappe`;
+  - gli stati di d1' sono al percorso vecchio *(`25`)*;
+  - nessuna corsa e' da lanciare.
+- **Un limite, dichiarato:** la prova non ha un caso che DEVE fallire. Controlla che i percorsi esistano, non il codice di `main()`.
+- **Resta A3** *(la temp dei collaudi su E:, con nessuna cartella `h_*` su C: dopo un collaudo)* insieme alla suite `67/67`. **Le lancio quando K0' (v9) chiude.**
+
+
+### 2026-11-27 12:13 -- [M1107] B5d: IL TENTATIVO 1 (v9) RIMETTE A POSTO LO STATO: K0' DA' LO STATO A k 6000 AL BIT IN TUTTE LE 11 CHIAVI, E LA SERIE AL BIT; MA omega NON E' AL BIT: K0' FALLISCE SU 1 DEVE SU 5 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v9_noto.txt` *(`due_corpi_fondo_v9.py noto`, `c3cbcf3e`)*, uscita `1`.
+- **Gli esiti:**
+
+  | prova | esito |
+  |---|---|
+  | la carica | PASSA al bit |
+  | **lo stato a `k 6000`** | **PASSA AL BIT, in ogni chiave (`11`)** |
+  | **la serie `5760..6000`** | **PASSA AL BIT** |
+  | **`omega` dei tick `5751..6000`** | **### FALLISCE** |
+  | K0'-neg | PASSA *(diverso, come deve)* |
+
+  I tempi: `181 s` e `184 s`.
+- **LA LETTURA:** **`scrivi_U` dopo la carica era la chiave.** Il passo, che legge e scrive lo stato, ora riproduce d1' al bit per `250` tick.
+  - **`omega` non entra nel passo:** e' `-arg <psi_prima|psi_dopo>` calcolato con `np.vdot` sulle mezze-spighe di ogni meta', per il diario. **Se lo stato e' al bit a ogni tick** *(la serie lo e' ogni `10` tick, lo stato a `6000`)*, **una differenza in `omega` non viene dallo stato:** viene da come si calcola `omega`.
+  - **Il sospetto:** `np.vdot` usa BLAS, e l'ordine della somma puo' cambiare l'ultimo bit. **E' un'ipotesi, non misurata.**
+- **COSA FACCIO, dichiarato prima:** `k0_omega.py`, cioe' la stessa ripresa della v9 *(`250` tick)*, e per `omega` il massimo di `|differenza|`, il massimo relativo e il numero di tick diversi. **Non e' un tentativo di correzione** *(lo stato e' gia' corretto)*: misura quanto vale lo scarto.
+  - **Cosa decide:**
+    - **se lo scarto relativo e' sotto `1e-14`**, e' l'ultimo bit del calcolo di `omega`, e la corsa riprodurrebbe d1'. **Ma il DEVE su `omega` AL BIT l'ho scritto io nella carta, e cambiarlo dopo aver visto il numero e' una lettura a posteriori: decide Luca;**
+    - **se lo scarto e' piu' grande**, c'e' ancora qualcosa da capire, e si va al tentativo 2.
+
+
+### 2026-11-27 12:19 -- [M1214] RICEVUTO (DECISIONE DI LUCA 12:14, dalla posta 23e249f0, letto alle 12:18); 0: LA REGOLA DELLA CARTELLA DI LAVORO IN CLAUDE.md PAR. 2 E QUI; IL PRESIDIO PROPOSTO NELLA CARTA [[PROGETTO-MITOSI]]
+
+- **LA REGOLA** *(`CLAUDE.md` par. 2, due righe; il dettaglio in `doc/REGOLE/par2.md`)*:
+  - ogni comando, lancio, commit e push si fa da `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)* o da `E:/soliton_lavoro/wt_mitosi` *(mitosi)*;
+  - **mai da C:, e mai da `E:/soliton_simulator`**, che resta SOLO il deposito dei dati *(`controllo/`, `registro_tappe`)*.
+- **Lo stato:** `wt_lapse_u` esiste gia' su E: *(rifatto in [M1107] A2)*, quindi il primo passo e' gia' fatto. Da `git worktree list`: `E:/soliton_lavoro/wt_lapse_u` e `E:/soliton_lavoro/wt_mitosi`. **Dalle `11:47`** *(il commit `fd996d24`)* **ogni comando e ogni commit di lapse-u e della mitosi e' partito dalla cartella nuova.**
+- **Un'eccezione da dichiarare:** **i paragrafi della relazione sul ramo `primo-ordine`.** La copia di quel ramo e' il repository principale `C:\Users\lpeano\soliton_simulator`, e un worktree principale non si rimuove. **Per la regola, da li' non committo piu'.** La relazione di `primo-ordine` resta indietro finche' Luca non decide come aggiornarla *(per esempio con un worktree di `primo-ordine` su E:)*. **E' una domanda aperta.**
+- **IL PRESIDIO:** proposto nella carta *(`doc/CARTA_fondo_giusto.md`, il seguito [M1214])*, **non scritto**: la radice del `pre-commit` e quella del lanciatore.
+- **Gli altri punti di [M1214] sono gia' in corso:**
+  - **1.** K0' con la v9 e' gia' girato: lo stato e la serie sono AL BIT, `omega` no *(`e91d7462`)*. **La misura dello scarto di `omega` e' in corso** *(`k0_omega.py`, `e2d08151`)*;
+  - **2.** la suite della mitosi si fa quando si e' chiusa la misura.
+
+
+### 2026-11-27 12:22 -- [M1107] B5f: LO SCARTO DI omega E' ALL'ULTIMO BIT (MAX 7.5e-15 RELATIVO, 42 ULP), CON LO STATO AL BIT: IL CALCOLO DI omega (np.vdot) ARROTONDA DIVERSAMENTE DA IERI; IL DEVE SU omega E' MIO, E DECIDE LUCA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/k0_omega.txt`, prodotto da `k0_omega.py` *(`e2d08151`)*, uscita `0`.
+- **I NUMERI:** **`243` tick diversi su `250`** per ciascun corpo.
+
+  | corpo | max `|d|` | max relativo | max in ulp |
+  |---|---|---|---|
+  | 1 | `5.829e-16` | **`7.456e-15`** | `42` |
+  | 2 | `5.274e-16` | `6.756e-15` | `38` |
+
+- **Il tick `5751`, gli stessi due vettori:**
+
+  | corpo | `np.vdot` | `vdot` su copie | la somma esplicita | `serie.json` |
+  |---|---|---|---|---|
+  | 1 | `0.07953177315836567` | uguale | `...568` | `...574` |
+  | 2 | `0.07959303476640167` | uguale | uguale | `...144` |
+
+- **LA LETTURA:** **il passo riproduce d1' al bit** *(lo stato in `11` chiavi su `11`, la serie)*. **`omega` no, ma lo scarto e' all'ultimo bit**: sotto la soglia di `1e-14` che avevo dichiarato in B5d.
+  - **La sua origine:** il valore di `serie.json` e' diverso da tutti e tre quelli calcolati oggi sugli stessi dati, quindi **ieri `np.vdot` ha arrotondato in un altro modo** *(l'ordine della somma in BLAS, che puo' dipendere dall'allineamento in memoria o dai fili)*. Oggi, sugli stessi dati, `vdot` e la somma esplicita differiscono gia' di `1` ulp.
+  - **`omega` non torna nel passo,** quindi lo scarto non si propaga: non cresce *(max `42` ulp in `250` tick)*.
+- **QUINDI:**
+  - **il tentativo 2 non ha niente da correggere nel salvataggio.** Lo stato e' completo, con `U` rifatta dalla `A`;
+  - **il DEVE «`omega` AL BIT» l'ho scritto io nella carta** *(il mandato chiedeva lo stato al bit, `6000 -> 6250`)*. **Allentarlo dopo aver visto il numero e' una lettura a posteriori, e decide Luca.**
+- **LA MIA RACCOMANDAZIONE:**
+  - **accettare K0' sullo stato e sulla serie al bit** *(e' il K0 del mandato, spostato a `5750`)*, con `omega` entro `1e-14` relativo, dichiarato come scelta fatta dopo il numero;
+  - **e lanciare d1'' con la v9.** E' la strada piu' corta: **circa `2.7` ore**, contro le circa `4` di B6.
+- **In attesa:** la suite della mitosi *(il punto 2 di [M1214])*, che non dipende da questa scelta.
+
+
+### 2026-11-27 12:37 -- [M1214] 2: LA SUITE DELLA MITOSI NEL WORKTREE NUOVO, CON TMP SU E:, DA' 65 SU 67: I DUE COLLAUDI CHE CREANO UN REPOSITORY GIT TEMPORANEO (M-B1, LO STAGE) CADONO PER LA DUBIOUS OWNERSHIP DI E:; A3: NESSUNA h_* NUOVA SU C: [[PROGETTO-MITOSI]]
+
+- **Il log:** `doc/referti_l2/suite_mitosi_M1214.txt` *(copia di `E:\soliton_lavoro\tmp\suite_mitosi.txt`)*.
+  - **Il comando:** `primo_ordine/collauda.py` in `E:\soliton_lavoro\wt_mitosi` *(HEAD `82739c06`)*, con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, dalle `12:24:44` alle `12:36:28`, uscita `1`.
+- **`65` collaudi su `67` PASSANO.** Il `pre-commit` impiega `393.04 s`, i lenti `294.16 s`.
+- **I `2` che FALLISCONO**, entrambi «solo-CI»:
+  - **`M-B1` PUO' fallire** *(`primo_ordine/_collauda_mb1.py`)*: `_misura_mb1._byte_dell_albero` fa un `git worktree add --detach` in una cartella di `tempfile`, cioe' su E:. Il timbro dice **«FUORI DA UN REPO GIT»** e la barriera dice **«`core.hooksPath` e' `<non impostato>`»**: **git non legge quel repository**;
+  - **i controlli sullo STAGE** *(`csv/_stage.py --collaudo`)*: `tempfile.mkdtemp(prefix="repo_")` e poi `git init`, su E:. Il caso SANO e i casi (a) e (b) falliscono: **5 su 8.**
+- **LA CAUSA:** **e' la stessa di A2.** Su E: git rifiuta ogni repository senza un'eccezione `safe.directory`, e le cartelle temporanee hanno un nome nuovo a ogni giro. **La catena e' letta dal codice; non ho rifatto i due collaudi con `TMP` su C: per una controprova.**
+- **A3, LA VERIFICA:**
+  - **nessuna cartella `h_*` nuova su C:** *(`0` prima, `0` dopo)*;
+  - **su `E:\soliton_lavoro\tmp` ne resta `1` in piu'** *(`1` prima, `2` dopo)*: un residuo, forse di un collaudo fallito. **Non lo cancello finche' non so di chi e'.**
+- **LE TRE VIE, LA SCELTA E' DI LUCA:**
+  - **(a)** un'eccezione `safe.directory` col jolly sulla sola cartella temporanea *(`E:/soliton_lavoro/tmp/*`)*. **Luca ha escluso il jolly per i worktree:** chiedo se vale anche qui;
+  - **(b)** solo per quei due collaudi, la cartella temporanea su C: *(che ora ha `4.5 GB` liberi)*, dichiarata. **Contraddice A3** per quei due;
+  - **(c)** lasciare la suite a `65/67` su E: e dichiarare i due collaudi «solo-CI» come non verificabili in locale. **Sconsiglio (c):** sono quelli che provano il `pre-commit`.
+
+
+### 2026-11-27 12:39 -- [M1214] 2, CORREZIONE: IL «RESIDUO» h_* SU E: NON ESISTE: ERANO I MIEI DUE FILE h_prima.txt E h_dopo.txt, PRESI DAL PATTERN h_*; LE CARTELLE h_* SU E: SONO 0 [[PROGETTO-MITOSI]]
+
+- **L'errore e' mio** *(il paragrafo precedente, `a14a39a8`)*: ho contato le `h_*` di `E:\soliton_lavoro\tmp` col pattern `h_*`, che prende anche i file `h_prima.txt` e `h_dopo.txt` scritti dallo stesso comando. **`1` prima e `2` dopo erano quei due file.**
+- **Le cartelle `h_*` su E: sono `0`** *(`ls -d .../h_*/`)*. **Quindi A3 e' pulito su C: e su E:**, e non resta nessun residuo.
+- **E' la trappola gia' scritta nella nota «misurare col caso nullo»:** un conteggio vuole un controllo di che cosa conta.
+
+
+### 2026-11-27 13:12 -- [M1214] DECISIONE DI LUCA (13:12, in chat): IL DEVE SU omega E' |Delta omega|/omega < 1e-12; K0' PASSA (7.5e-15); LA CORSA d1'' IN CODA (M1214_d1L, v9), A LANCIATORE FERMO, PRIMA DEL RILANCIO [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `13:12`)*:
+  1. il DEVE su `omega` diventa **`|Delta omega| / omega < 1e-12`**; lo stato al bit resta il criterio vero. **Lancio subito d1''**;
+  2. i due collaudi: se `git --version` e' `>= 2.46`, `safe.directory E:/soliton_lavoro/tmp/*` e la suite rifatta *(DEVE dare `67/67`)*; altrimenti i repository temporanei di quei due collaudi su C:, dichiarato;
+  3. poi i pezzi 4, 5 e 6 di [M1016], a corsa chiusa.
+- **K0' COL CRITERIO NUOVO:** `omega` ha un massimo relativo di `7.456e-15` e `6.756e-15`, sotto `1e-12`. **K0' PASSA** *(la carta, il seguito [M1214])*. Il referto della v9 resta com'e', col DEVE vecchio.
+- **LA CODA:** il lanciatore e' fermo *(l'ultimo evento: `03:19:48 FERMO: la coda e' vuota`; nessuna corsa IN CORSA)*. **La voce nuova** in `doc/referti_l2/coda_m1446.json`:
+  - `M1214_d1L`, priorita' `1`, argv `doc/referti_l2/due_corpi_fondo_v9.py corsa`;
+  - la lista passa da `237` a `238` voci;
+  - il formato e' quello del file *(`indent 1`, verificato al byte prima della modifica)*.
+- **Poi:** il rilancio a mano di `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con `TMP` su E:. **Lo dichiaro nel commit successivo, con la voce APERTO del registro.**
+
+
+### 2026-11-27 13:15 -- [M1214] 1b: LA CORSA d1'' LANCIATA ALLE 13:14:52 (pid 30300) DAL LANCIATORE RILANCIATO A MANO DA E:\soliton_lavoro\wt_lapse_u, CON TMP SU E:; IL REGISTRO APERTO [[PROGETTO-MITOSI]]
+
+- **Il rilancio a mano, dichiarato** *(la decisione di Luca delle `13:12`: «lancia SUBITO»)*: `E:/python/py3132/python.exe doc/referti_l2/coda_m1446.py`, lanciato da `E:\soliton_lavoro\wt_lapse_u` con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, alle `13:14`.
+- **Il lanciatore:** `13:14:52 LANCIATA M1214_d1L (pid 30300; i processi prima 1, la CPU letta 44.4%; 9.0 GB)`.
+- **Il registro:** la voce `APERTO` di `m1446-M1214_d1L` in `doc/REGISTRO_CORSE.md` *(`git.head` `7f1deb34`, ramo lapse-u)*.
+- **Il log:** `E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`; i timbri dicono «committato e pulito».
+- **Le uscite:** `E:\soliton_simulator\controllo\M2034\coppia\d1L`, gli stati da `stato_006250` a `stato_018000`.
+- **Il tempo stimato:** circa `2.7` ore, quindi la chiusura verso le `16:00`.
+
+
+### 2026-11-27 13:23 -- [M1214] 2b: I DUE COLLAUDI CON TMP SU C: PASSANO (M-B1 11 SU 11, LO STAGE 8 SU 8; 0 CARTELLE TEMPORANEE NUOVE SU C:); GIT 2.45.1, NIENTE JOLLY; ORA LA SUITE INTERA SU E: [[PROGETTO-MITOSI]]
+
+- **`git --version`:** `git version 2.45.1.windows.1`, cioe' sotto la `2.46`. **Il jolly in `safe.directory` non si aggiunge** *(il ramo «altrimenti» della decisione delle `13:12`)*.
+- **I due collaudi, da soli, nel worktree della mitosi, con `TMP` e `TEMP` su `C:\Users\lpeano\AppData\Local\Temp`** *(dalle `13:20:39` alle `13:23:01`)*:
+  - **`primo_ordine/_collauda_mb1.py`:** **`11` su `11`**, uscita `0` *(il log: `doc/referti_l2/collaudo_mb1_C_M1214.txt`)*;
+  - **`csv/_stage.py --collaudo`:** **`8` su `8`**, uscita `0`, «`0` residui dei nostri prefissi» *(il log: `doc/referti_l2/collaudo_stage_C_M1214.txt`)*.
+- **Le cartelle temporanee nuove su C:** *(`repo_*`, `st_*`, `stage_*`, `mb1*`, contate prima e dopo)*: **`0`.**
+- **Col caso che deve fallire** *(gli stessi due con `TMP` su E:, `12:36`)*, **la causa e' confermata** dalla controprova che mancava nel pezzo 2: su C: passano, su E: no.
+- **Ora la suite intera con `TMP` su E:**; il `67/67` sara' i suoi `65` piu' questi `2`.
+
+
+### 2026-11-27 13:40 -- [M1214] 2d: LA SUITE RIFATTA SU E: DA' 65 SU 67, CON GLI STESSI DUE FALLITI (M-B1, LO STAGE); CON I DUE SU C: (11/11, 8/8) IL VERDETTO E' 67 SU 67. A2 E A3 CHIUSI [[PROGETTO-MITOSI]]
+
+- **La suite:** `primo_ordine/collauda.py` in `E:\soliton_lavoro\wt_mitosi`, con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, dalle `13:26:22` alle `13:40:07`, uscita `1` *(il log: `doc/referti_l2/suite_mitosi_M1214_2.txt`)*.
+  - **`65` ok**, e falliscono **gli stessi due di prima**: `M-B1` e i controlli sullo STAGE, entrambi «solo-CI»;
+  - il `pre-commit` impiega `482.52 s`, il totale `808.15 s`.
+- **IL VERDETTO, come dichiarato nella carta *(`e761123e`)*:**
+  - i `65` della suite su E: **piu'** `M-B1` `11/11` e lo stage `8/8` su C: *(`d9406f4b`)* = **`67` su `67`**;
+  - **i due collaudi passano solo con i loro repository temporanei su C:,** perche' git `2.45.1` non accetta il jolly in `safe.directory`.
+- **[M1107] A2 E' CHIUSO.** I percorsi:
+  - `E:\soliton_lavoro\wt_lapse_u` *(lapse-u)*;
+  - `E:\soliton_lavoro\wt_mitosi` *(mitosi)*;
+  - la temp e' `E:\soliton_lavoro\tmp`;
+  - i dati restano in `E:\soliton_simulator\controllo` e in `E:\soliton_simulator\registro_tappe`;
+  - i vecchi `C:\Users\lpeano\wt_lapse_u` e `C:\Users\lpeano\wt_mitosi` sono rimossi.
+- **A3 E' CHIUSO:** nessuna cartella temporanea nuova su C:, ne' dopo la suite su E: ne' dopo i due collaudi su C: *(che puliscono da se')*.
+- **Resta:** la corsa d1'' *(`M1214_d1L`, dalle `13:14`)*, poi i pezzi 4, 5 e 6 di [M1016].
+
+
+### 2026-11-27 13:44 -- [M1016] PEZZI 4 E 5, LA CARTA E GLI SCRIPT, PRIMA DELLA CHIUSURA DI d1'' (due_corpi_lettura_v6.py, anima_coppia_v3.py) [[PROGETTO-MITOSI]]
+
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M1016], «PEZZI 4 E 5».
+  - **Il verdetto usa la distanza fra i picchi** *(`d_p`, [M1107] 7)*; quella fra le meta' *(`d_m`)* si stampa per confronto.
+  - **I contatti** sono i tratti di stati non-DUE. **I minimi** sono gli stati DUE con `d_p` minore dei due vicini. **Il periodo** e' la distanza fra gli inizi di due contatti.
+  - La tabella e' per finestra di `500` *(`36` finestre)*, con `d_p`, `omega`, `w` e `chi` ai picchi.
+  - **Il video v3:** `73` quadri a `6 fps`, con tre pannelli *(`rho_psi` a scala fissa, `rho_psi` a scala per quadro, `chi`)*.
+- **Gli script:** `doc/referti_l2/due_corpi_lettura_v6.py` *(-> `due_corpi_fondo_v7.txt`)* e `doc/referti_l2/anima_coppia_v3.py` *(-> `anima_coppia_v3.mp4`)*. **Si committano adesso, prima che esistano i dati di d1''.**
+- **Le previsioni, mie:**
+  - un secondo contatto entro `k 8000` *(`60%`)*;
+  - i contatti si avvicinano nel tempo *(`50%`)*;
+  - la norma ferma *(`95%`)*.
+
+
+### 2026-11-27 15:00 -- [M1214] LA CORSA d1'' CHIUSA: M1214_d1L FINITO, USCITA 0, 12000 TICK IN 6254 s [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `M1214_d1L` `FINITO`, `uscita 0`, lanciata `2026-11-27T13:14:52`, finita `2026-11-27T14:59:12`. Il registro ha la riga `CHIUSO` *(in questo commit)*.
+- **Il log** *(`E:\soliton_simulator\controllo\M1446\log\M1214_d1L.txt`)*: `### 12000 tick in 6254 s`; `### stato_018000.npz ESISTE`. In `M2034/coppia/d1L` ci sono `98` file *(stati, le loro `.sha1`, la serie)*.
+- **Le ultime righe del log** *(y dei baricentri delle meta', non una misura dei picchi)*: a `k 18000` `y1 -4.6274`, `y2 +4.8689`, `max|chi| 1.9654e+02`. La lettura vera e' il pezzo 4, che viene subito dopo.
+- **Un mio errore di forma:** nel messaggio di `255ad66f` la lista FILE CAMBIATI e la riga Co-Authored-By sono scritte DUE volte. Le avevo messe nel corpo, e `committa3.py` le aggiunge da se'. La lista e' giusta in entrambe le copie; da questo commit il corpo non le contiene piu'.
+
+
+### 2026-11-27 15:04 -- [M1016] PEZZO 4: A0 SU 73 STATI (d1' E d1''): LA NORMA PASSA (5.485e-14); DA k 6250 LA COPPIA NON SI RISEPARA, UNO CON DUE ISOLATI [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v7.txt`, da `due_corpi_lettura_v6.py` *(sha1 dei byte `5188a75e`)* e `coppia_a0.py` *(sha1 dei byte `68f4bf68`)*, timbrati committati e puliti. Uscita `0`.
+- **DEVE, la norma:** il massimo di `|N(k)/N(0) - 1|` sui `73` stati e' `5.485e-14`, sotto `1e-9`: **PASSA**. La deriva cresce in modo regolare, da `-1.64e-14` a `k 6000` a `-5.48e-14` a `k 18000`.
+- **Fino a `k 6000`** i numeri sono gli stessi di `coppia_a0.txt`:
+  - DUE da `0` a `2750`, con `d_p` da `41.57` a `16.46`;
+  - il contatto da `3000` a `3500` *(ALTRO, UNO, ALTRO)*;
+  - DUE da `3750` a `6000`: `d_p` risale a `28.58` *(`k 4750`)* e riscende a `13.89`.
+- **Da `k 6250` a `k 18000`** *(d1'', `48` stati)*:
+  - **`40` sono UNO, `2` ALTRO, `6` DUE** *(contati con uno script dal referto)*. I DUE sono stati ISOLATI, ciascuno fra due stati non-DUE: `k 7250` *(`d_p 12.12`)*, `9500` *(`7.81`)*, `11250` *(`8.72`)*, `13750` *(`4.36`)*, `14500` *(`5.20`)*, `16750` *(`6.08`)*.
+  - **`d_p` non torna mai sopra `12.12`.** Nel tratto da `3750` a `6000` era salito a `28.58`.
+  - **`R` sta fra `6.48` e `13.61`.** A `k 0`, con i corpi a `41.6`, era `21.53`.
+  - **`d_m`** *(le meta' per `y`, dalla serie)* oscilla fra `5.77` e `16.64`. Il minimo nella serie e' `5.441`, a `k 6810`.
+  - **`max rho`** varia fra `6.21e3` e `5.36e4` *(un fattore `8.6`)*; il valore iniziale era `9.21e3`.
+- **Il conteggio dei contatti va letto con una riserva, ed e' mio.** Lo script ne conta `8`, con periodi `[3250, 1250, 2250, 1750, 2500, 750, 2250]`. Ma dopo `k 6250` un contatto finisce perche' un solo stato torna DUE, e lo stato seguente e' di nuovo UNO. **Con un campione ogni `250` tick, quei «contatti» non sono eventi distinti dimostrati:** possono essere un solo stato legato in cui A0 vede a volte un picco e a volte due *(la soglia del `30%` e la lisciatura di raggio `2` contro `d_p` fra `4` e `12`, cioe' circa `1-3 w`)*. **I periodi dopo il primo non hanno quindi un significato che io possa difendere.** La definizione era fissata nella carta prima dei dati, e la applico com'e'.
+- **Cio' che i numeri dicono, senza la parola «orbita»:**
+  - dopo il secondo avvicinamento *(`k 6250`)* i due corpi **non si allontanano piu'** oltre `d_p 12.1` e `d_m 16.64`, per `11750` tick;
+  - la nube ha `R` fra `9` e `13`, e il suo picco respira di un fattore fino a `8.6`.
+- **La differenza fra `d_p` e `d_m` negli stati DUE isolati e' grande:** a `k 13750` `d_p` vale `4.36` e `d_m` `13.44`. Le meta' per `y` portano code larghe, quindi `d_m` non e' la distanza fra i corpi *(la riserva di [M1107] 7)*. **Che cosa siano quelle code lo deve mostrare il video** *(il pezzo 5)*.
+- **`omega`, per finestra:** fra `0.0717` e `0.0825`, **senza una tendenza monotona**. Fra i due corpi c'e' uno scarto che cresce nel tempo: `0.000003` nella finestra `[0, 500]`, `0.001754` in `[17000, 17500]`. **Lo noto e non lo interpreto.**
+- **Il confronto con le previsioni** e' nel pezzo 6.
+- **Un mio errore, corretto prima del commit:** nella prima stesura avevo contato a occhio `41` UNO e `7` DUE, e copiato `16.47` e `6.40e3`. Il conto fatto con uno script sul referto da' `40`, `6`, `16.64` e `6.21e3`.
+
+
+### 2026-11-27 15:10 -- [M1016] PEZZO 5: IL VIDEO v3 (73 QUADRI, TRE PANNELLI, 0.615 MB); I PNG GUARDATI: DOPO k 6250 UN NUCLEO SOLO CON UN ALONE [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/anima_coppia_v3.txt`, da `anima_coppia_v3.py` *(sha1 dei byte `401a9baf`)* e `due_corpi_lettura_v6.py` *(`5188a75e`)*, timbrati committati e puliti; uscita `0`.
+  - **Il video:** `doc/referti_l2/anima_coppia_v3.mp4`, `73` quadri a `6 fps`, `1440x480`, `0.615 MB`, sotto il tetto di `5 MB`: **PASSA**. Il file e' committato con `git add -f`, perche' i `.mp4` sono nel `.gitignore`.
+  - **Le scale fisse:** `rho_psi` da `0` a `5.3610e+04`, `chi` da `-263.7705` a `-19.8096`.
+- **I cinque png, guardati prima del commit** *(`E:\soliton_simulator\controllo\M0951\v3\coppia_v3_k*.png`)*. Cio' che ho visto, a occhio:
+  - **`k 0`:** due corpi rotondi separati lungo `y`, ciascuno nel suo pozzo; le curve di `chi` hanno la forma a otto.
+  - **`k 3250`** *(il primo contatto, A0 dice UNO)*: un nucleo schiacciato lungo `x`, con due lobi deboli sopra e sotto. Il pozzo e' tondo.
+  - **`k 6000`** *(A0 dice DUE, `d_p 13.89`)*: un arco allungato lungo `y`, con i due picchi dentro la stessa nube. Il pozzo e' unico e ovale.
+  - **`k 12000` e `k 18000`** *(UNO)*: **un solo nucleo compatto**, circondato da un **alone debole e frammentato** che si allarga per una ventina di nodi. Il pozzo e' unico e quasi tondo, con le curve strette al centro.
+- **Che cosa cambia nella lettura del pezzo 4:**
+  - il valore alto di `R` dopo `k 6250` *(fra `9` e `13`)* **viene dall'alone**, non da due corpi lontani;
+  - lo stesso alone spiega perche' `d_m` *(le meta' per `y`)* resta fra `10` e `16`, mentre i picchi, quando sono due, distano da `4` a `12`.
+  - **Gli stati DUE isolati dopo `k 6250` non li ho visti nei png:** nessuno dei cinque cade su uno di essi. **Se siano due corpi o un nucleo deformato, va guardato nel video quadro per quadro.** Non lo affermo.
+- **Un difetto di presentazione, senza effetto sui numeri:** in alcuni quadri gli angoli del riquadro restano vuoti, ai bordi della triangolazione.
+
+
+### 2026-11-27 15:13 -- [M1016] PEZZO 6: LA RICEVUTA [M1016]/[M1107]/[M1214] (RAMO lapse-u): ESEGUITO; LE PREVISIONI CONFRONTATE; FERMO [[PROGETTO-MITOSI]]
+
+**LA RICEVUTA.**
+
+- **[M1016] (10:16): ESEGUITO.** A0 c'e' *(`e64e79d1`)*. La corsa lunga d1'' e' chiusa *(`7366a447`)*. Il pezzo 4 e' in `9bdfea82`, il pezzo 5 in `fcd8bdc0`, il pezzo 6 e' questo.
+- **[M1107] (11:07): ESEGUITO.** A *(lo spostamento su E:)* e B5 *(la chiave mancante e' `mot.geo.U`, curata nella v9)*.
+  - **Il punto 6 di [M1107] chiedeva la via da capo** se la chiave fosse risultata una cache del nucleo, e `geo.U` lo e'. **Non l'ho seguito di mia iniziativa:** sono andato avanti con la ripresa perche' l'ha deciso Luca, alle `11:44` *(B5 subito, il tetto di due tentativi nella v8)* e alle `13:12` *(lanciare d1'' da `stato_006000`)*. Lo scrivo perche' chi legge solo [M1107] vedrebbe una discordanza.
+- **[M1214] (12:14) e DECISIONE DI LUCA 13:12: ESEGUITO.**
+  - La regola della cartella di lavoro;
+  - K0' con il criterio nuovo su `omega`;
+  - la corsa `M1214_d1L` *(uscita `0`, 12000 tick in `6254 s`)*;
+  - la suite: `67` su `67` *(`65` su E: e `2` su C:)*;
+  - i pezzi 4, 5 e 6.
+
+**LE PREVISIONI CONFRONTATE** *(i numeri dal referto `due_corpi_fondo_v7.txt`; `max|chi|` dal log della corsa)*:
+
+- **Il guardiano, [M1016]:**
+  - **P1 (`80%`), la norma ferma e la materia che si allarga: GIUSTA per la norma, giusta fino a `k 6000`, poi smentita dalla corsa lunga.**
+    - La norma: massimo `5.485e-14`.
+    - Fino a `6000` `max rho` scende da `9.21e3` a `5.00e3`.
+    - Dopo, la materia si ricompatta: `max rho` arriva a `5.36e4` e a `k 18000` vale `3.07e4`.
+  - **P2 (`60%`), «UNO da `k ~3000` in poi; il rimbalzo e' l'artefatto delle meta'»: SBAGLIATA.** Coi picchi, fra `3750` e `6000` A0 dice DUE in `10` stati su `10`, e `d_p` risale a `28.58`: **il rimbalzo c'e' anche coi picchi.** UNO domina solo da `k 6250`.
+  - **P3 (`55%`), il corpo fuso si ristringe *(`R` sotto `7`)* e trova un punto fisso con un pozzo piu' profondo di `-102`: SBAGLIATA nella parte che decide.**
+    - `R` sta sotto `7` solo a `k 7000` *(`6.477`)*, e a `k 18000` vale `9.364`.
+    - Il picco non e' fermo: fra `6250` e `18000` `max rho` varia di un fattore `8.6`.
+    - **Il pozzo e' piu' profondo, questo si':** `max|chi|` e' `196.5` a `k 18000` *(dal log)*, e il minimo di `chi` sulla scala del video e' `-263.77`.
+  - **P4 (`30%`), DUE per tutta la corsa, un'orbita vera: SBAGLIATA.** Da `k 6250` ci sono `40` stati UNO su `48`.
+- **Il guardiano, [M1107]:**
+  - **P1 (`55%`), la chiave e' una cache del motore *(`cs_prec` o `lambda_c`)*: GIUSTA nel tipo, SBAGLIATA nel nome.** La chiave e' una cache *(`mot.geo.U`, funzione di `A`)*, ma non e' nessuna delle due nominate.
+  - **P2 (`60%`), si finisce per la via 6, da capo: SBAGLIATA.** La ripresa v9 riproduce lo stato al bit.
+  - **P3 (`70%`), K5 passa al bit: NON GIUDICABILE.** K5 era il caso noto della via 6, che non si e' presa.
+- **Il guardiano, [M1214]:**
+  - **P1 (`70%`), K0' con la v9 passa al bit al primo tentativo: GIUSTA per lo stato, SBAGLIATA per K0' com'era scritto.**
+    - Lo stato e' uguale al bit in `11` chiavi su `11`, e la serie pure.
+    - `omega` differisce di `42` ulp *(`7.5e-15` relativo)*. K0' e' passato solo col criterio nuovo di Luca delle `13:12`.
+  - **P2 (`65%`), un secondo minimo entro `k 8000`, sotto `6.8`: GIUSTA con `d_m`, NON MISURABILE con `d_p`.**
+    - Con `d_m` *(la serie, ogni `10` tick)* il minimo del secondo contatto e' `5.441` a `k 6810`. Il primo era `6.795` a `k 3230`.
+    - Il secondo contatto *(`6250..7000`)* e' tutto UNO, quindi `d_p` non si misura. Resta la riserva gia' scritta: sotto circa `2 w` le meta' non separano.
+- **Le mie** *(la carta dei pezzi 4 e 5)*:
+  - **un secondo contatto entro `k 8000` (`60%`): GIUSTA.** Comincia a `k 6250`;
+  - **i contatti si avvicinano nel tempo (`50%`): NON DECIDIBILE.**
+    - Fra i primi due inizi ci sono `3250` tick, poi `1250`.
+    - Ma dopo `k 6250` i «contatti» sono separati da stati DUE isolati, e non li posso difendere come eventi distinti *(pezzo 4)*. Non c'e' una sequenza di periodi da confrontare.
+  - **la norma ferma (`95%`): GIUSTA.** `5.485e-14`.
+
+**CIO' CHE I NUMERI DICONO, IN UNA RIGA:** i due corpi si avvicinano *(da `41.57`)*, si toccano a `k 3000`, si separano di nuovo fino a `d_p 28.58`, si ritoccano a `k 6250`. **Da li', per `11750` tick, A0 vede quasi sempre un nucleo solo,** con un alone che tiene `R` fra `6.5` e `13.6`, e non tornano mai sopra `d_p 12.12`.
+- **Non dico «fusione» ne' «orbita»:** gli stati DUE isolati non li ho guardati quadro per quadro.
+
+**Una correzione a me stesso:** nel pezzo 4 ho scritto «la nube ha `R` fra `9` e `13`». L'intervallo misurato dopo `k 6250` e' da `6.477` a `13.613`, come dice la riga sopra di quello stesso paragrafo.
+
+**LE DOMANDE APERTE PER LUCA** *(con il loro criterio di chiusura)*:
+
+1. **Gli stati DUE isolati dopo `k 6250`:** sono due corpi, o un nucleo deformato?
+   - **Si chiude** guardando quei `6` quadri nel video, o con un A0 a soglia diversa *(ma la soglia e' una scelta sua)*.
+2. **Lo scarto di `omega` fra i due corpi cresce** *(da `3e-6` a `1.75e-3` per finestra)*. Dopo la fusione, le due meta' per `y` non sono piu' «i due corpi».
+   - **Si chiude** decidendo se `omega` per meta' abbia ancora senso dopo `k 6250`.
+3. **Restano aperte quelle di prima:**
+   - la relazione del ramo `primo-ordine`, che e' indietro;
+   - la deriva in `x` del baricentro;
+   - la deriva della norma nel vuoto puro.
+
+**FERMO:** i pezzi 4, 5 e 6 di [M1016] sono fatti; si attende Luca.
+
+
+### 2026-11-27 15:24 -- [M1519] LETTO DALLA POSTA; IL PUNTO 0 ERA GIA' FATTO; LA CARTA DEL CORPO FUSO (S1 LA CORSA LIBERA d1''', S2 IL PUNTO FISSO 2M), PRIMA DEL CODICE [[PROGETTO-MITOSI]]
+
+- **La posta:** `[M1519]`, DECISIONE DI LUCA delle `15:19` *(`df8635b5`)*, letta alle `15:22`. `git log --all --grep "[M1519"` trova solo il commit della posta: nessun pezzo era gia' fatto, a parte il punto 0.
+- **Il punto 0** *(i pezzi 5 e 6 di [M1016])* **era gia' fatto prima che il mandato arrivasse:** `fcd8bdc0` e `c0f56df5`.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, sez. `3-unetvicies`.
+  - **Due premesse del mandato sono corrette dal referto:** gli stati da `k 6250` sono `48`, non `47`; `R` va da `6.477` a `13.613`, non da `9` a `13`. Il secondo errore era mio, nella relazione del pezzo 4.
+  - **Le scelte mie, dichiarate prima del codice:**
+    - K0'' si fa da `d1L/stato_017750` a `018000`, perche' `018250` non esiste;
+    - S2 usa i parametri di d1', e il «kappa 0» del K1 del mandato lo leggo come «i parametri della corsa libera»;
+    - `Q_K` e' quella di [M0414], e la massa di riferimento e' la norma di `stato_018000`.
+  - **Le previsioni** stanno nella carta.
+- **Spazio su E:** `164.1 GB` liberi alle `15:25` *(`shutil.disk_usage`)*. S1 ne occupera' circa `0.78 GB`.
+
+
+### 2026-11-27 15:29 -- [M1519] IL CODICE: corpo_fuso.py (noto, corsa, puntofisso), COMMITTATO PRIMA DI GIRARE [[PROGETTO-MITOSI]]
+
+- **`doc/referti_l2/corpo_fuso.py`** importa la v9 e `fondo_puntofisso_chi_v2`, e non riscrive nessuno dei due.
+  - **`Ripresa10`** e' la `Ripresa` della v7, ma carica lo stato da un file qualunque. Confronta parametri e `centro_coppia` col meta di `d1L/serie.json`, e riscrive `geo.U` dopo la carica *(si spegne solo per K0''-neg)*.
+  - **`giro_pf`** e' il ciclo del punto fisso di `V2.giro`, riga per riga, sulla scena di d1'.
+- **Un controllo che il codice copre per costruzione:** `fondo_puntofisso_chi` importa `due_corpi_fondo_v3`, che riassegna `D.parametri`. E' lo stesso modulo che la catena della v7 ha gia' importato, quindi non cambia niente. **K0'' e K1'' girano comunque con tutti gli import della corsa:** se un import cambiasse il ciclo, lo stato al bit non tornerebbe.
+- **Il prossimo passo:** `corpo_fuso.py noto`. Se tutti i DEVE passano, S1 e S2 vanno in coda.
+
+
+### 2026-11-27 15:45 -- [M1519] I CASI NOTI DEL CORPO FUSO: 11 DEVE SU 11 PASSANO (K0'' AL BIT, omega 6.34e-15; K0''-neg DIVERSO IN 9 CHIAVI; K1'' AL BIT; KQ 2.2e-16); S1 E S2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_noto.txt`, da `corpo_fuso.py` *(sha1 dei byte `43ac319d`, timbrato committato e pulito)*. Uscita `0`, alle `15:45`.
+  - **K0''** *(da `d1L/stato_017750`, `250` tick)*:
+    - lo stato e' uguale AL BIT a `d1L/stato_018000` in `11` chiavi su `11`;
+    - la serie `17760..18000` e' uguale AL BIT;
+    - `omega` differisce al massimo di `6.340e-15` relativo, sotto `1e-12`.
+  - **K0''-neg** *(senza riscrivere `geo.U`)*: lo stato e' DIVERSO in `9` chiavi *(`Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`)*. **La prova vede la chiave.**
+  - **K1''** *(il ciclo del punto fisso da `017750`, `250` tick)*: uguale AL BIT a `d1L/stato_018000` in `11` chiavi su `11`. **Il ciclo di S2 e' la corsa libera.**
+  - **KQ:** la riproiezione su `Q_K` ridà la massa `1.9900238506e+06` con un errore relativo di `2.220e-16`. **KQ-neg** *(la massa di un oggetto solo)* da' un rapporto di `0.499999`: **fallisce come deve.**
+  - **K5 e K6** passano *(`P 2500`; un picco solo da' il ripiego; la media di un `chi` costante e' esatta al bit)*.
+- **Un'osservazione che non interpreto:** la massa di `stato_018000` *(`1990023.8506`)* supera di `2.064`, cioe' `1.037e-6` relativo, il doppio della massa di un oggetto nel meta *(`2 x 995010.8931 = 1990021.7863`)*. Dentro d1' la norma e' ferma a `5e-14`. **La differenza c'era quindi gia' alla composizione della coppia, non nasce nella corsa.** Non cambia S2: la massa di riferimento e' la norma dello stato.
+- **La coda:** in `doc/referti_l2/coda_m1446.json` ci sono due voci nuove, `M1519_S1` *(`corpo_fuso.py corsa`)* e `M1519_S2` *(`corpo_fuso.py puntofisso`)*, entrambe con priorita' `1`. La lista passa da `238` a `240` voci. **Il lanciatore parte dopo questo commit**, dalla cartella nuova.
+
+
+### 2026-11-27 15:48 -- [M1519] S1 E S2 LANCIATE DALLA CODA (15:48:28 E 15:48:30), DUE PROCESSI; LE VOCI APERTO NEL REGISTRO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** e' `coda_m1446.py`, partito alle `15:48:26` da `E:\soliton_lavoro\wt_lapse_u` con TMP su E:.
+  - **`M1519_S1`** *(`corpo_fuso.py corsa`)*: in corsa dalle `15:48:28`, pid `18004`, `7.83 GB` liberi al lancio.
+  - **`M1519_S2`** *(`corpo_fuso.py puntofisso`)*: in corsa dalle `15:48:30`, pid `16008`, `7.74 GB` liberi.
+  - **Le due righe APERTO** in `doc/REGISTRO_CORSE.md` sono in questo commit.
+- **Lo spazio su E:** `164.1 GB` liberi prima del lancio.
+- **La stima, dal tempo di d1''** *(12000 tick in `6254 s`, un processo solo)*: S1 circa `5.2 h`, S2 circa `2.6 h`, di piu' con due processi insieme.
+- **Il resto di [M1519]** *(TODO 3: le letture, `corpo_fuso.txt` col verdetto S3, il video v4; TODO 4: la ricevuta)* **viene a corse chiuse.**
+
+
+### 2026-11-27 17:58 -- [M1519] S1 E S2 FALLITE ALLE 17:56:24, TUTTE E DUE NELLO STESSO SECONDO: MEMORIA ESAURITA (_ArrayMemoryError SU 1.20 MiB); S1 A k 31000, S2 A 2 GIRI SU 3; FERMO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `M1519_S1` e `M1519_S2` risultano `FALLITO`, con `uscita 1`, tutte e due finite alle `17:56:24`. Le righe CHIUSO sono nel registro, in questo commit.
+- **La causa, dai log** *(`E:\soliton_simulator\controllo\M1446\log\M1519_S1.txt` e `M1519_S2.txt`)*: in tutti e due i processi `numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.20 MiB for an array with shape (157464,)`, dentro `motore.elicita`, chiamata da `chi_tick.forza`. **Non e' un errore del codice:** e' un'allocazione piccola rifiutata dal sistema.
+- **La memoria alle `17:57`, a processi morti** *(`GlobalMemoryStatusEx`)*:
+  - la RAM libera e' `6.81 GB` su `34.13`;
+  - **la memoria impegnabile libera e' solo `1.49 GB` su `62.11`;**
+  - su **C:** restano `0.25 GB` liberi.
+  - **La mia lettura, da verificare:** con C: pieno il file di paging non puo' crescere, e il limite di memoria impegnabile e' stato raggiunto. **Chi occupi gli altri circa `60 GB` impegnati non lo so:** l'elenco dei processi mi e' negato, e non lo aggiro. **Non sono i miei due:** il conto e' stato fatto con loro gia' morti.
+- **Fin dove sono arrivate:**
+  - **S1:** fino a `k 31000` *(il log arriva a `7564 s`)*, con gli stati da `18250` a `31000` in `M1519/d1T`. `serie_parziale.json` arriva a `k 30000`; `serie.json` non c'e'.
+  - **S2:** i giri `1` e `2` sono chiusi, con `giro.json` firmati. Il giro `3` e' arrivato a `k 1000`.
+    - **Giro 1:** `P 2500` *(i picchi a `k 1500` e `4000`)*, `max|chi|` `229.03`, `w` medio `3.928`, respiro `0.9189`, profondita' media `-188.60`, `omega` medio `0.075452`.
+    - **Giro 2:** `P 2500` *(il ripiego: `0` picchi)*, `max|chi|` `259.51`, `w` medio `3.277`, respiro `0.3877`, profondita' media `-224.99`, `omega` medio `0.071003`.
+    - **Nessun verdetto:** sono numeri parziali, e il verdetto spetta a S3.
+- **Il residuo di Gauss alla partenza** del giro `2` *(`0.476`)* e del giro `3` *(`0.440`)* non e' un difetto nuovo. Lo schema di [M0414] aveva gia' residui alla partenza fra `0.343` e `0.972` *(i tre `giro.json` di `M0414/puntofisso_accoppiato`)*: la `psi` media non e' coerente col `campo_E` dello stato a `k 6000`.
+- **FERMO.** Rilanciare e' una decisione di Luca, e anche liberare la memoria. **Le vie possibili, da decidere:**
+  - **(a)** una v2 di `corpo_fuso.py` che riprende S1 da `stato_031000` *(il K0 sul tratto `30750 -> 31000`, come K0'')* e S2 dal giro `3` *(`partenza_giro_3.npz`)*;
+  - **(b)** rifare da capo, dopo aver liberato la memoria.
+  - **In tutti e due i casi va prima capito chi occupa la memoria:** con `1.49 GB` impegnabili liberi, un rilancio cadrebbe di nuovo.
+
+
+### 2026-11-27 18:28 -- [M1824] LETTO; C: 0.03 GB LIBERI, IMPEGNABILE 11.63 GB SU 62.11 (SOPRA 8: SI PUO' LANCIARE); LA CARTA DELLA RIPRESA (S1 DA 30000, NON DA 30750: IL BUCO NELLA SERIE); IL PUNTO 2 IN CHAT SENZA ORA [[PROGETTO-MITOSI]]
+
+- **Prima di questo, alle `18:25`:** `git fetch` falli' con «No space left on device». C: aveva `0.024 GB` liberi, e gli oggetti git dei worktree su E: stanno in `C:\Users\lpeano\soliton_simulator\.git` *(`5.4 GB`)*. **In chat l'ho detto a Luca e non ho cancellato niente.** Alle `18:27` il fetch e' riuscito.
+- **La posta:** `[M1824]`, DECISIONE DI LUCA delle `18:24` *(`625021df`)*. `git log --all --grep "[M1824"` trova solo la posta: nessun pezzo era gia' fatto.
+- **Il messaggio di Luca in chat** porta due cose:
+  - il punto 1: leggere ed eseguire [M1824];
+  - **il punto 2, che e' gestione:** spostare il repository principale su E:.
+  - **L'ora del messaggio e' scritta «`hh:mm`»**, e anche lo spazio su C: e' un segnaposto *(«`N GB`»)*. **Per la regola [M2145] la gestione non esiste senza una riga di Luca CON L'ORA:** il punto 2 aspetta che Luca la confermi. Il punto 1 ha la sua ora, `18:24`, ed e' scritto senza gestione.
+- **Letti alle `18:27`** *(TODO 1 di [M1824])*:
+  - **C:** `0.03 GB` liberi. Il messaggio dice «C: ha ora N GB liberi», ma la misura non mostra spazio liberato;
+  - **la memoria impegnabile:** `11.63 GB` liberi su `62.11`, sopra la soglia di `8 GB`;
+  - **la RAM:** `9.96 GB` liberi su `34.13`;
+  - **E::** `162.83 GB` liberi.
+  - **Si rileggono subito prima del lancio.**
+- **La carta:** `doc/CARTA_fondo_giusto.md`, «3-unetvicies, il seguito. [M1824]».
+  - **S1 riparte da `stato_030000`, non da `030750`:** la serie parziale finisce a `k 30000`, e cosi' non resta un buco. La ripresa rifa' al bit gli stati gia' salvati fino a `31000`, e questo e' un controllo in piu'.
+  - **S2 riparte col giro `3` in `giro_3r`,** confrontato al bit con i quattro stati del giro `3` caduto.
+- **Il rischio:** con C: a `0.03 GB` anche un commit puo' fallire, perche' gli oggetti git vanno su C:.
+- **L'INTERRUZIONE, e il commit rifatto** *(DECISIONE DI LUCA `18:59`, punto 1)*: **questo paragrafo e la carta erano nello stage alle `18:28`, e il commit si e' interrotto alle `18:28:38`** mentre giravano i hook *(`committa3.py`, il processo `5712`; il log finisce dentro `_stage.py`)*. La sessione e' ripartita alle `18:56` e ha trovato:
+  - **nessun `index.lock`**, ne' in `.git` ne' in `.git/worktrees/wt_lapse_u`; HEAD `bec44202`, uguale a origin;
+  - **un `commit.lock` RESIDUO** nello scratchpad della sessione vecchia, col PID `5712`, non piu' vivo, e nessun `git.exe` vivo;
+  - **i paragrafi una volta sola** *(`grep -c`: `1` nella relazione, `1` nella carta)*; il disco uguale allo stage.
+  - **`committa3.py` ora gira da una copia su E:** *(`E:\soliton_lavoro\strumenti_cc`)*, con TMP su `E:\soliton_lavoro\tmp` e la radice obbligatoria *(`COMMITTA_RADICE`)*.
+- **LE MISURE DELLE `18:56:56`** *(`shutil.disk_usage`, `GlobalMemoryStatusEx`)*:
+  - **C:** `16.07 GB` liberi su `510.15` *(alle `18:27` erano `0.03`)*;
+  - **E::** `162.84 GB` liberi su `256.05`;
+  - **la memoria impegnabile:** `29.53 GB` liberi su **`49.47`**. **Il limite e' sceso da `62.11` a `49.47 GB`:** il file di paging e' piu' piccolo. Non so perche', e non l'ho verificato. **Luca, `18:59`: la soglia resta `8 GB` liberi, e il file di paging non si tocca;**
+  - **la RAM:** `16.05 GB` liberi su `34.13`.
+
+
+### 2026-11-27 19:10 -- DECISIONE DI LUCA (18:59, in chat): IL REPOSITORY PRINCIPALE SU E: (E:\soliton_lavoro\soliton_simulator; fsck 0 ERRORI); wt_lapse_u E wt_mitosi RIPARATI; I 7 WORKTREE SU C: RIMOSSI (2 CON --force, DOPO LA RISERVA); IL RENAME IN _OLD RIFIUTATO (Permission denied): RESTA A LUCA; C: DA 16.07 A 23.29 GB [[PROGETTO-MITOSI]]
+
+- **LA DECISIONE DI LUCA** *(in chat, `18:59`)*, i punti:
+  1. rifare il commit della carta [M1824] *(fatto: `8aa80065`)*;
+  2. **spostare il repository principale su E:, prima del rilancio**, e da li' lavorare per sempre. E' gestione, e la decisione la autorizza;
+  3. la soglia resta `8 GB` impegnabili liberi; il file di paging non si tocca;
+  4. e 5. [M1824] e i pezzi 3-4 di [M1519].
+- **IL PUNTO 2, passo per passo:**
+  1. **la copia** *(`19:03:15 -> 19:04:22`)*: `robocopy C:\Users\lpeano\soliton_simulator E:\soliton_lavoro\soliton_simulator /E /COPY:DAT /R:1 /W:1 /NP /NFL /NDL`. **Ho aggiunto io `/R:1 /W:1`** *(un solo tentativo per file, invece del milione di default)* e le opzioni del log. Uscita `1` *(tutto copiato)*: **`906` cartelle, `9287` file, `7.517 g` byte, `0` non riusciti** *(il log: `E:\soliton_lavoro\robocopy_repo_1903.log`)*. Prima della copia nessun `git.exe` e nessun `python.exe` era vivo, e durante la copia non ho dato comandi git.
+  2. **`git fsck --full` sulla copia** *(`19:04:34 -> 19:06:41`)*: uscita `0`, `1122` righe, **tutte `dangling`** *(oggetti non raggiungibili, nessun errore; `E:\soliton_lavoro\fsck_repo_E.txt`)*. **La safe.directory l'ho passata con `-c` sulla riga di comando**, perche' senza git rifiuta la cartella: l'ordine di Luca metteva la safe.directory dopo fsck.
+  3. **La terza `safe.directory`** *(`19:06:54`)*: `git config --global --add safe.directory E:/soliton_lavoro/soliton_simulator`. Ora sono `36` righe, **nessun `*`** *(`E:\soliton_lavoro\safe_directory_1907.txt`)*.
+  4. **`git worktree repair`**, dato **dal repository nuovo** con i due percorsi come argomenti *(`git worktree repair E:/soliton_lavoro/wt_lapse_u E:/soliton_lavoro/wt_mitosi`)*. Il mandato dice «da `wt_lapse_u` e `wt_mitosi`», ma dentro i worktree il comando avrebbe riparato verso il repository VECCHIO, a cui puntavano. **### UN EFFETTO CHE NON AVEVO PREVISTO:** dato dal repository principale, `repair` ha riscritto il file `.git` di **tutti** i `9` worktree registrati, anche dei `7` su C:. Tutti hanno puntato al repository su E: fino alla loro rimozione *(passo 6)*. Il risultato era coerente, ma era piu' del richiesto, e lo dichiaro.
+  5. **`git worktree list` e il fetch di prova** *(`19:07:16`)*: `git fetch --prune` dal repository nuovo, uscita `0` *(ha portato `origin/guardiano` da `625021df6` a `63a03de9c`)*; `git fetch` da `wt_lapse_u`, uscita `0`; `wt_mitosi` allineato a `origin/mitosi`.
+  6. **I worktree su C:, rimossi uno per uno dal repository nuovo** *(per ciascuno `git -c safe.directory=<percorso> worktree remove <percorso>`: una eccezione sulla riga di comando, non nella configurazione globale)*:
+
+     | worktree | HEAD | stato | rimosso |
+     |---|---|---|---|
+     | `C:/Users/lpeano/soliton_simulator_mattone` | `5f4fa81c` *(strumento-mattone)* | pulito, uguale a origin | `19:07:50`, uscita `0` |
+     | `C:/Users/lpeano/st_main` | `252630fe` *(main)* | pulito, uguale a origin | `19:07:51`, uscita `0` |
+     | `C:/Users/lpeano/wt_mitosi_chi` | `0b04992f` *(mitosi-chi)* | pulito, uguale a origin | `19:07:52`, uscita `0` |
+     | `C:/Users/lpeano/wt_vincoli` | `795deac0` *(vincoli)* | pulito, uguale a origin | `19:07:53`, uscita `0` |
+     | `C:/Users/lpeano/wt_zero` | `986440d6` *(zero-nel-nucleo)* | pulito, uguale a origin | `19:07:55`, uscita `0` |
+     | `C:/Users/lpeano/wt_divisione_f7ee87a9` | `f7ee87a9` *(staccata; contenuta in `17` rami locali e remoti, fra cui `lapse-u` e `mitosi`)* | **`doc/referti_l2/divisione_vuoto.jsonl` modificato, non in stage, in NESSUN commit** | `19:08:06`, **`--force`**, uscita `0` |
+     | `C:/Users/lpeano/wt_zero_padre` | `aa530454` *(staccata; contenuta in `15` rami locali e remoti)* | **in stage `csv/solitone/carta_coppia_ss.py`** *(lo stesso blob `bb2c46b6` gia' in `e3531a7f9`)* **e `1` riga di `doc/INVENTARIO_strumenti.md`** | `19:08:06`, **`--force`**, uscita `0` |
+
+     **Per i due sporchi ho chiesto a Luca** *(in chat, risposta alle `19:03:44`: «riserva su E:, poi `--force`»)*. **La riserva** e' in `E:\soliton_lavoro\riserva_worktree_C`, con i file modificati, le patch *(`patch_non_in_stage.diff` `66504` byte; `patch_in_stage.diff` `19993` byte)*, le HEAD, l'`index` di `wt_zero_padre` e un `manifesto_sha1.txt` *(`10` file)*. **Il manifesto e gli sha1 dei file su C: sono stati riverificati subito prima di `--force`.** Poi `git worktree prune -v` non ha trovato voci orfane.
+  7. **`git worktree list`, adesso:** `E:/soliton_lavoro/soliton_simulator` *(primo-ordine, `12e9a783`)*, `E:/soliton_lavoro/wt_lapse_u` *(lapse-u)*, `E:/soliton_lavoro/wt_mitosi` *(mitosi)*. Tutti e tre puliti e allineati a origin; `core.hooksPath` vale `.githooks`.
+  8. **### IL RENAME E' RIFIUTATO** *(`19:08:30`)*: `mv C:/Users/lpeano/soliton_simulator C:/Users/lpeano/soliton_simulator_OLD` da' «Permission denied». **Qualche processo tiene aperta la cartella.** Volevo cercare quale, ma il comando che elenca i processi mi e' stato negato, e non lo aggiro. **Il rename resta a Luca** *(chiudere cio' che tiene aperta la cartella, per esempio una finestra di VS Code o un terminale su di essa)*. Nessun worktree dipende piu' da quella cartella.
+- **LO SPAZIO** *(`19:08:30`)*: **C: da `16.07` a `23.29 GB` liberi** *(`+7.22 GB`: i worktree rimossi)*. La copia su C: occupa ancora `7.6 GB`, che torneranno quando Luca cancellera' `_OLD`. **E:** da `162.84` a `153.62 GB`. **Impegnabile:** `29.66 GB` liberi su `49.47`.
+- **CIO' CHE DEL PROGETTO RESTA SU C:, da decidere** *(non l'ho toccato)*:
+  - `C:\Users\lpeano\soliton_simulator`, la copia vecchia *(il rename e' rifiutato, vedi sopra)*;
+  - `C:\Users\lpeano\solitonsimulator` *(`50 MB`, file Go di agosto, non e' un repository git)*;
+  - `C:\Users\lpeano\wt_t1` *(`32 KB`, due referti `u1_prototipo_0b6bfde8.txt` e `u1_secondo_64bb2328.txt` del 12 novembre)*;
+  - gli scratchpad delle sessioni di Claude in `C:\Users\lpeano\AppData\Local\Temp\claude\...`. **Gli aiuti di commit** *(`committa3.py`, `accoda.py`)* **ora girano da una copia su `E:\soliton_lavoro\strumenti_cc`**, e i messaggi stanno li'; lo scratchpad della sessione, invece, lo sceglie l'ambiente.
+- **CLAUDE.md par. 2** *(due righe)* **e `doc/REGOLE/par2.md`** *(il dettaglio)* dicono la regola nuova: il repository principale su E:, i worktree su E:, C: mai.
+- **Un controllo che fallisce gia' da prima, non per questo commit:** `csv/_struttura_regole.py` dice «REGOLE PERSE: `1. RAGIONAMENTO PRELIMINARE`», perche' confronta col blob vecchio `da79cc1`, e quel punto e' diventato «LE PREMESSE DAL CODICE» *(decisione di Luca, 2026-10-28)*. **L'esito e' lo stesso prima e dopo la mia modifica.** Non lo correggo qui: e' un'altra cosa.
+
+
+### 2026-11-27 19:13 -- [M1824] IL CODICE DELLA RIPRESA: corpo_fuso_v2.py (lettura_s2, noto, corsa, giro3), COMMITTATO PRIMA DI GIRARE; C: 25.11 GB, IMPEGNABILE 28.22 GB SU 49.47 (19:13) [[PROGETTO-MITOSI]]
+
+- **`doc/referti_l2/corpo_fuso_v2.py`** *(sha1 dei byte `687b68c0`)* importa `corpo_fuso.py` e non lo riscrive: `Ripresa10`, `giro_pf`, le costanti e i percorsi sono quelli.
+  - **`lettura_s2`** *(-> `corpo_fuso_s2_giri12.txt`)*: i giri `1` e `2` dai `giro.json` firmati. Per giro: `P`, la fonte, i picchi, il residuo alla partenza, e per finestra di `500` *(`(a, b]`)* `max|chi|`, `w`, la profondita' e `omega`. Poi il criterio C fra `1` e `2`.
+    - **Le definizioni** sono quelle di [M0137] punto 6: `max|chi|` del giro e' il massimo per tick sul giro, il respiro e' `(w_max - w_min)/w_medio` sui `61` campioni.
+    - **Verificate prima su un caso noto:** con queste definizioni uno script ridà i numeri gia' scritti alle `17:58` *(giro 1: `229.03`, `3.928`, `0.9189`, `-188.60`, `0.075452`; giro 2: `259.51`, `3.277`, `0.3877`, `-224.99`, `0.071003`)*.
+  - **`noto`:**
+    - **K0** da `d1T/stato_029750`, `250` tick: lo stato uguale AL BIT a `d1T/stato_030000`, la serie `29760..30000` e `omega` entro `1e-12`, contro `serie_parziale.json`. **K0-neg:** senza `geo.U` lo stato deve essere diverso;
+    - **in piu', mie, dichiarate qui:**
+      - **KB e KB-neg**, il confronto AL BIT che le corse usano per fermarsi: contro se stesso trova `0` chiavi diverse; con un ulp cambiato in `psi_h` DEVE trovare `psi_h`. **E' il controllo positivo del DEVE dentro le corse;**
+      - **K2**, la carica di S2 *(nessun tick)*: lo stato caricato da `partenza_giro_3.npz` con `pi = 0` deve essere uguale AL BIT a `giro_3/stato_000000`.
+  - **`corsa`** *(S1)*: da `d1T/stato_030000` a `k 54000`, in `M1519/d1T_r`. La serie e `omega` ripartono da `serie_parziale.json` *(fino a `30000`)*, e la riga a `30000` deve essere uguale AL BIT a quella della serie parziale. **A `30250`, `30500`, `30750` e `31000` lo stato si confronta AL BIT con `d1T`; se uno differisce, la corsa si ferma** *(assert, uscita `1`)*. La serie parziale si riscrive ogni `2500` tick.
+  - **`giro3`** *(S2)*: da `giro_2/partenza_giro_3.npz`, con `pi = 0`, in `puntofisso_2M/giro_3r`. **A `k 0, 250, 500, 750, 1000` lo stato si confronta AL BIT con `giro_3`** *(`k 0` l'ho aggiunto io: e' gratis)*, altrimenti il giro si ferma. Poi `giro.json` e `partenza_giro_4.npz`, riga per riga come in `corpo_fuso.puntofisso`.
+  - **`d1T` e `giro_3` non si toccano:** si leggono soltanto.
+- **Le misure delle `19:13:20`:** C: `25.11 GB` liberi, E: `153.62 GB`, l'impegnabile `28.22 GB` liberi su `49.47` *(sopra la soglia di `8`)*, la RAM `15.99 GB` su `34.13`.
+- **Il prossimo passo:** `lettura_s2`, committata prima del lancio; poi `noto`.
+
+
+### 2026-11-27 19:15 -- [M1824] IL REFERTO DEI GIRI 1 E 2 DI S2, PRIMA DEL LANCIO: C FRA 1 E 2 NON PASSA (max|chi| DA 229.03 A 259.51, +13.3%; IL RESPIRO DEL GIRO 2 0.3877); NESSUN VERDETTO S3 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_s2_giri12.txt`, da `corpo_fuso_v2.py lettura_s2` *(sha1 dei byte `687b68c0`, timbrato committato e pulito)*, uscita `0`.
+- **Giro 1** *(da `d1L/stato_018000`, residuo di Gauss alla partenza `1.135e-12`)*:
+  - `P 2500`, dagli ultimi due picchi *(`k 1500` e `4000`)*;
+  - `max|chi|` `229.0287`; `w` medio `3.9279` *(fra `2.6252` e `6.2345`)*, **il respiro `0.9189`**;
+  - la profondita' media `-188.6017`, `omega` medio `0.075452`.
+  - **Per finestra di `500`:** `max|chi|` va su e giu' fra `188.23` e `229.03`, e `omega` fra `0.073049` e `0.077832`.
+- **Giro 2** *(da `partenza_giro_2.npz`, residuo `0.4761`)*:
+  - `P 2500` dal **ripiego** *(`0` picchi)*;
+  - `max|chi|` `259.5144`; `w` medio `3.2767` *(fra `2.7282` e `3.9986`)*, **il respiro `0.3877`**;
+  - la profondita' media `-224.9944`, `omega` medio `0.071003`.
+  - **Per finestra:** `max|chi|` fra `237.46` e `259.51`, `omega` fra `0.070199` e `0.071893`.
+- **Il criterio C fra il giro 1 e il giro 2: NON PASSA,** e mancano tutte e due le condizioni:
+  - `|259.5144/229.0287 - 1| = 0.1331`, sopra `0.10`;
+  - il respiro del giro 2 e' `0.3877`, sopra `0.10`.
+- **Cio' che si vede, senza verdetto:** dal giro 1 al giro 2 il pozzo si fa piu' profondo *(da `-188.6` a `-225.0`)* e `w` piu' stretto *(da `3.93` a `3.28`)*. Il respiro scende da `0.92` a `0.39`, e `omega` scende da `0.0755` a `0.0710`.
+  - **Il verdetto S3 viene dopo il giro 3 e dopo S1.** C si valuta di nuovo fra il giro `2` e il giro `3`.
+- **Il prossimo passo:** `corpo_fuso_v2.py noto`.
+
+
+### 2026-11-27 19:22 -- [M1824] I CASI NOTI DELLA RIPRESA: 8 DEVE SU 8 PASSANO (K0 AL BIT IN 11 CHIAVI, LA SERIE AL BIT, omega 6.04e-15; K0-neg DIVERSO IN 9; KB E KB-neg; K2 LA CARICA DI S2 AL BIT) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_v2_noto.txt`, da `corpo_fuso_v2.py noto` *(sha1 dei byte `687b68c0`; tutti i moduli timbrati committati e puliti)*. Uscita `0`, dalle `19:17:40` alle `19:22:28`.
+  - **KB:** il confronto al bit di uno stato con se stesso trova `0` chiavi diverse. **KB-neg** *(un ulp cambiato in `psi_h`)*: il confronto trova `['psi_h']`, come deve. **Il DEVE dentro le corse vede quindi anche un ulp.**
+  - **La carica:** la riga a `k 29750` e' uguale AL BIT a quella della serie parziale di d1T.
+  - **K0** *(da `d1T/stato_029750`, `250` tick, `125 s`)*:
+    - lo stato a `k 30000` e' uguale AL BIT a `d1T/stato_030000` in `11` chiavi su `11`;
+    - la serie `29760..30000` *(`25` righe)* e' uguale AL BIT;
+    - `omega` dei tick `29751..30000` ha un massimo relativo di `6.042e-15`, sotto `1e-12`.
+  - **K0-neg** *(senza `geo.U`, `122 s`)*: lo stato e' DIVERSO in `9` chiavi *(`Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`)*.
+  - **K2:** lo stato caricato da `partenza_giro_3.npz` con `pi = 0` e' uguale AL BIT a `giro_3/stato_000000` in ogni chiave.
+- **Il prossimo passo:** le due voci in coda, `M1824_S1` e `M1824_S2`.
+
+
+### 2026-11-27 19:24 -- [M1824] S1 E S2 IN CODA (M1824_S1 corpo_fuso_v2.py corsa, M1824_S2 corpo_fuso_v2.py giro3): LA LISTA DA 240 A 242 VOCI; IMPEGNABILE 29.37 GB SU 49.47, C: 25.14 GB (19:24:37) [[PROGETTO-MITOSI]]
+
+- **Le misure prima della coda** *(`19:24:37`, `GlobalMemoryStatusEx` e `shutil.disk_usage`)*:
+  - l'impegnabile e' `29.37 GB` liberi su `49.47`, **sopra la soglia di `8 GB`** *(Luca, `18:59`)*;
+  - C: `25.14 GB` liberi, E: `153.61 GB`, la RAM `17.68 GB` su `34.13`.
+  - **Le stesse misure stanno nelle note delle due voci**, e cosi' finiscono nella riga APERTO del registro.
+- **Il lanciatore e' fermo:** l'ultimo evento di `coda_stato.json` e' `17:56:24 FERMO: la coda e' vuota`, e nessun `python.exe` e' vivo.
+- **Le due voci nuove** in `doc/referti_l2/coda_m1446.json`, priorita' `1`:
+  - `M1824_S1`: `doc/referti_l2/corpo_fuso_v2.py corsa`;
+  - `M1824_S2`: `doc/referti_l2/corpo_fuso_v2.py giro3`.
+  - **La lista passa da `240` a `242` voci.** Il formato e' quello del file *(`indent 1`, ascii, verificato al byte prima della modifica)*.
+- **Poi:** `coda_m1446.py` da `E:\soliton_lavoro\wt_lapse_u`, con TMP su E:, e le righe APERTO nel commit successivo.
+
+
+### 2026-11-27 19:27 -- [M1824] S1 E S2 LANCIATE DALLA CODA (19:26:51 E 19:26:54, pid 3196 E 7372); LE RIGHE APERTO NEL REGISTRO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore:** `coda_m1446.py`, partito alle `19:26` da `E:\soliton_lavoro\wt_lapse_u`, con TMP e TEMP su `E:\soliton_lavoro\tmp` *(la sua uscita in `E:\soliton_lavoro\tmp\lanciatore_M1824.txt`)*.
+  - **`M1824_S1`** *(`corpo_fuso_v2.py corsa`)*: lanciata alle `19:26:51`, pid `3196`; il lanciatore ha letto `16.4 GB` liberi.
+  - **`M1824_S2`** *(`corpo_fuso_v2.py giro3`)*: lanciata alle `19:26:54`, pid `7372`, con `16.3 GB` liberi.
+- **I log** *(`E:\soliton_simulator\controllo\M1446\log\M1824_S1.txt` e `M1824_S2.txt`)*: `24` moduli timbrati su `24`, tutti «committato e pulito». S2 ha stampato la riga di partenza, con la massa di riferimento `1.9900238506e+06`.
+- **Le righe APERTO** di `m1446-M1824_S1` e `m1446-M1824_S2` in `doc/REGISTRO_CORSE.md` sono in questo commit *(`git.head` `4654854e`)*.
+- **I DEVE dentro le corse** si leggeranno nei log: per S1 a `k 30250`, `30500`, `30750` e `31000`; per S2 a `k 0`, `250`, `500`, `750` e `1000`.
+- **La stima, dai tempi di prima** *(con due processi, da [M1519])*: S1 arrivava a `k 31000` in `7564 s`, cioe' circa `0.58 s` per tick; i `24000` tick di S1 vogliono quindi circa `3.9 h`. Il giro 3 di S2 *(`6000` tick)* vuole circa `1 h`.
+- **Poi:** il pezzo 3 di [M1519] *(le letture, il verdetto S3, il video v4)* a corse chiuse, e il pezzo 4 *(la ricevuta)*.
+
+
+### 2026-11-27 19:34 -- [M1519] PEZZO 3, LA CARTA E GLI SCRIPT PRIMA DEI DATI: corpo_fuso_lettura.py (noto: KL, KH, KH-neg, KHc; lettura: S1 SU 217 STATI, S2, IL VERDETTO S3) E anima_coppia_v4.py (109 QUADRI); COME APPLICO LE SOGLIE DI S3 [[PROGETTO-MITOSI]]
+
+- **La carta:** `doc/CARTA_fondo_giusto.md`, «3-unetvicies, il seguito 2». **E' scritta mentre S1 e S2 girano, prima che esistano i loro dati.**
+- **Gli script:**
+  - `doc/referti_l2/corpo_fuso_lettura.py`: `noto` -> `corpo_fuso_lettura_noto.txt`, `lettura` -> `corpo_fuso.txt`;
+  - `doc/referti_l2/anima_coppia_v4.py`, la v3 con i quadri e le cartelle di S1 -> `anima_coppia_v4.mp4`.
+- **Le scelte mie, dichiarate nella carta:**
+  - `w` se UNO e' `FPC.w_di` sulla `rho` totale, la formula del `w` di S2, cosi' si confrontano;
+  - `chi` al centro e' la media su `r < 4` dal nodo di `max rho`;
+  - `omega` di S1 e' per meta' e la loro media. **La riserva:** dopo `k 6250` non e' l'`omega` della `psi` intera;
+  - **`H` e `H_chi` vengono da `chi_tick_v2.energia_chi_v2`: lo strumento c'e', ma su questa scena non e' sigillato;**
+  - **S3:**
+    - «tende allo stesso `w`»: da una finestra `i*` all'ultima, ogni finestra di `2500` ha il `w` medio entro il `10%` di `w_S2`, con almeno `8` stati UNO su `11`;
+    - SI SPEZZA: almeno `22` stati DUE consecutivi con `d_p > 2 max w`;
+    - COLLASSA (a): il respiro medio di `R` nelle ultime `4` finestre supera quello delle prime `4`. E' una sola corsa e non ha barra;
+    - COLLASSA (b): almeno `22` stati consecutivi con `max rho > 5e4` e `R < 6`.
+- **I casi noti** *(sui dati gia' letti)*:
+  - **KL:** le `73` righe per stato da `0` a `18000` uguali, carattere per carattere, a quelle di `due_corpi_fondo_v7.txt`;
+  - **KH:** `H` di uno stato in una scena nuova uguale AL BIT allo stesso stato ricaricato sul posto. **KH-neg:** uno stato diverso deve dare un `H` diverso;
+  - **KHc:** `H_chi` dalla formula uguale a quello dello strumento entro `1e-12`.
+- **Le previsioni mie** sono nella carta: C passa fra `2` e `3r` *(`30%`)*, D vale *(`55%`)*, ALTRO *(`50%`)*.
+- **A meta' corsa** *(dai log, alle `19:34`)*: **S1 ha passato i DEVE al bit a `k 30250`, `30500` e `30750`; S2 a `k 0`, `250`, `500` e `750`.**
+
+
+### 2026-11-27 19:39 -- [M1519] PEZZO 3, I CASI NOTI DELLA LETTURA: 4 DEVE SU 4 (KL LE 73 RIGHE CARATTERE PER CARATTERE; KH H AL BIT IN SCENA NUOVA E SUL POSTO; KH-neg; KHc); I DEVE DENTRO LE CORSE TUTTI PASSATI (S1 30250..31000, S2 0..1000) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_lettura_noto.txt`, da `corpo_fuso_lettura.py noto` *(sha1 dei byte `9901e2da`; `28` moduli timbrati su `28`, tutti committati e puliti)*. Uscita `0`, dalle `19:36:39` alle `19:39:00`.
+  - **KL:** le `73` righe per stato da `0` a `18000` sono uguali, carattere per carattere, a quelle di `due_corpi_fondo_v7.txt` *(`0` diverse)*;
+  - **KH:** `H` di `d1L/stato_018000` e' uguale AL BIT nella scena nuova e dopo il ricaricamento sul posto: `H 7.215889923838e+05`, `H_chi 1.652268885907e+04`;
+  - **KH-neg:** `H` di `stato_017750` e' `7.207497669506e+05`, diverso;
+  - **KHc:** `H_chi` dalla formula e' uguale a quello dello strumento.
+- **Un fatto che noto e non interpreto:** fra `k 17750` e `18000` `H` cambia di `+1.164e-03` relativo *(uno script dai due numeri sopra)*. **`H` non e' fermo su `250` tick.** E' la ragione per cui la carta lo legge come un andamento. La mia previsione «`H` fermo entro l'`1%` fra `18000` e `54000`» *(`50%`)* e' scritta prima, e resta com'e'.
+- **I DEVE dentro le corse sono tutti passati:**
+  - **S1:** gli stati a `k 30250`, `30500`, `30750` e `31000` sono uguali AL BIT a quelli di `d1T`;
+  - **S2:** gli stati a `k 0`, `250`, `500`, `750` e `1000` del giro `3r` sono uguali AL BIT a quelli di `giro_3`.
+- **L'avanzamento alle `19:39`:** S1 a `k 31250` *(`634 s` dalla partenza)*, S2 a `k 1000` del giro `3r` *(`452 s`)*.
+- **Il resto del pezzo 3** *(`corpo_fuso.txt`, il video v4)* e **il pezzo 4** *(la ricevuta)* vengono a corse chiuse.
+
+
+### 2026-11-27 20:14 -- [M1824] S2 CHIUSA: M1824_S2 FINITO ALLE 20:13:36, USCITA 0; IL GIRO 3r CHIUSO (25 STATI, giro.json, partenza_giro_4), 6000 TICK IN 2798 s; P 2500 DAL RIPIEGO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** *(`coda_stato.json`)*: `2026-11-27T20:13:36 FINITO M1824_S2 (uscita 0)`. La riga CHIUSO di `m1446-M1824_S2` e' nel registro, in questo commit.
+- **Il log** *(`E:\soliton_simulator\controllo\M1446\log\M1824_S2.txt`)*: «`### giro 3: P 2500 (il ripiego 2500 (0 picchi)); i picchi a k []; la finestra [3500, 6000]; 6000 tick in 2798 s`», poi «`### il giro 3: CHIUSO`».
+- **In `M1519/puntofisso_2M/giro_3r`:** `25` stati, `giro.json` e `partenza_giro_4.npz`, ciascuno col suo `.sha1`.
+- **I DEVE dentro il giro:** a `k 0, 250, 500, 750, 1000` lo stato e' uguale AL BIT a `giro_3`.
+- **La lettura** *(C fra `2` e `3r`, D, A0 sui giri)* **e' nel referto `corpo_fuso.txt`**, a S1 chiusa, come fissato nella carta.
+- **S1 alle `20:14`** e' a `k 35750`, `2736 s` dalla partenza.
+
+
+### 2026-11-27 21:58 -- [M1824] S1 CHIUSA: M1824_S1 FINITO ALLE 21:58:18, USCITA 0 [[PROGETTO-MITOSI]]
+
+- **La corsa:** 24000 tick in 9082 s, da `M1519/d1T/stato_030000` a `k 54000`, in `M1519/d1T_r`. Ci sono 96 stati (`30250..54000`, ognuno con il suo `.sha1`) e `serie.json` (2028242 byte, con il `.sha1`).
+- **I DEVE dentro la corsa:** gli stati a `k 30250, 30500, 30750, 31000` sono uguali AL BIT a quelli di `d1T`. **Tutti e 4 PASSANO** (righe 27-33 del log `controllo/M1446/log/M1824_S1.txt`).
+- **L'ultima riga del log:** `k 54000: y1 -6.0408 y2 +5.2506; max|chi| 1.9784e+02`.
+- **La coda:** alle 21:58:18 e' vuota, e il lanciatore e' uscito con 0. Nel registro c'e' la riga CHIUSO di `m1446-M1824_S1`.
+- **Le misure** (21:58:33): C: 25.08 GB liberi; E: 152.19 GB; impegnabile 31.68 GB liberi su 49.47.
+- **Il seguito:** [M1519] pezzo 3, cioe' `corpo_fuso_lettura.py lettura` -> `corpo_fuso.txt` con il verdetto S3, poi il video v4.
+
+
+### 2026-11-27 22:03 -- [M1519] PEZZO 3, LA LETTURA E IL VERDETTO S3 (`doc/referti_l2/corpo_fuso.txt`, 446 righe; `corpo_fuso_lettura.py lettura`, blob sha1-byte 9901e2da, timbrato pulito): **ALTRO, CON D** [[PROGETTO-MITOSI]]
+
+**Il comando:** `E:/python/py3132/python.exe doc/referti_l2/corpo_fuso_lettura.py lettura > doc/referti_l2/corpo_fuso.txt`, dalle 22:00:36 alle 22:03:07, con uscita 0. Tutti i numeri qui sotto vengono dal referto.
+
+- **S1, per stato** (217 stati, da `k 0` a `54000`):
+  - **DEVE la norma:** `max |N(k)/N(0) - 1|` = `1.559e-13` < `1e-9`. **PASSA.**
+  - **I verdetti A0:** `UNO` 182, `DUE CORPI` 31, `ALTRO (3)` 3, `ALTRO (5)` 1. Da `k 6250` in poi: `UNO` 181, `DUE` 9, `ALTRO` 2. **Dopo il secondo contatto il sistema e' un corpo solo.**
+- **S1, per finestra di 2500:**
+  - **Il respiro di `R` scende:** `0.6646` nella prima finestra, `[6250, 8750]`, e poi `0.04..0.12` da `k 23750` in poi. `R` resta fra circa `11.4` e `13.1`.
+  - **`w` medio degli stati UNO** fra `3.64` e `3.89` da `k 26250`; nell'ultima finestra e' `3.7564`.
+  - **`max rho` medio** fra `1.9e4` e `2.3e4`.
+- **S1, `H`:** a `k 18000` vale `7.2158899238e+05`, a `k 54000` vale `7.1459935039e+05`, cioe' **`-9.6865e-03` relativo**. Fra una finestra e l'altra oscilla di `±5e-03`. **Lo strumento non e' sigillato su questa scena: e' un andamento, non una conservazione provata.**
+- **S1, `omega`** (la media delle due meta', con la riserva della carta): scende da `0.0825` nella finestra `(0, 500]` a circa `0.069..0.071` nelle ultime finestre. **E' vicino all'`omega` della `psi` intera di S2 al giro 3r, `0.069081`, ma la media delle meta' non e' quella grandezza:** si scrive come una lettura.
+- **S2:**
+  - **giro 3r:** `max|chi|` `252.9440`, `w` medio `3.3679` (da `2.6772` a `4.6370`), il respiro `0.5819`, la profondita' `-221.3351`, `omega` `0.069081`, A0 `UNO` 25 su 25;
+  - **C fra 1 e 2:** `|rapporto - 1|` `0.1331`, e il respiro del giro 2 e' `0.3877`: **NON PASSA**;
+  - **C fra 2 e 3r:** `|rapporto - 1|` `0.0253` (si'), ma il respiro del giro 3r e' `0.5819` (no): **NON PASSA.** **Il respiro di `w` e' risalito** da `0.3877` a `0.5819`;
+  - **D:** **SI'**, perche' `max|chi|` resta entro il 10% fra il giro 2 e il giro 3r.
+- **S3, le regole della carta:**
+  - **SI SPEZZA:** no. In S1 la fila piu' lunga di DUE con `d_p > 2 max w` e' di 12 stati, sotto i 22 richiesti; nei giri 1, 2 e 3r non ce n'e' nessuna;
+  - **COLLASSA (a):** il respiro di `R` e' `0.3989` nelle prime 4 finestre e `0.0946` nelle ultime 4, quindi non cresce. E' una sola corsa, senza barra: e' una lettura;
+  - **COLLASSA (b):** nessuna fila;
+  - **IL VERDETTO S3: ALTRO**, con D: `|rapporto - 1|` `0.0253` fra 2 e 3r, e il respiro del giro 3r `0.5819`.
+- **Che cosa NON dice:**
+  - non dice che il punto fisso non esiste. Dice che **la definizione C, cioe' il respiro di `w` sotto `0.10`, non e' raggiunta in 3 giri**;
+  - il `w` di S1 nell'ultima finestra (`3.7564`) e quello del giro 3r (`3.3679`) differiscono di circa l'11%. Il confronto «entro il 10%» la regola lo fa **solo se C passa**, e quindi qui non si applica: lo riporto come numero;
+  - questo rapporto l'ho calcolato a mano dai due numeri del referto (`3.7564/3.3679 = 1.1154`): **non esce dallo script** ([[L-NUMERI]]).
+- **Le previsioni della carta del pezzo 3, controllate:**
+
+  | previsione | probabilita' | esito |
+  |---|---|---|
+  | C passa fra 2 e 3r | 30% | **no** |
+  | D vale | 55% | **si'** |
+  | ALTRO | 50% | **si'** |
+  | ESISTE MA NON CI ARRIVA | 20% | no |
+  | ESISTE E CI ARRIVA | 10% | no |
+  | SI SPEZZA | 10% | no |
+  | COLLASSA | 10% | no |
+  | `H` fermo entro l'1% fra `k 18000` e `54000` | 50% | **si'**, di poco: `-0.97%` |
+
+- **Il video v4:** nel paragrafo che segue, stesso commit.
+
+
+### 2026-11-27 22:05 -- [M1519] PEZZO 3, IL VIDEO v4 (`doc/referti_l2/anima_coppia_v4.mp4`, con `anima_coppia_v4.txt`), NELLO STESSO COMMIT DEL VERDETTO [[PROGETTO-MITOSI]]
+
+- **Il comando:** `E:/python/py3132/python.exe doc/referti_l2/anima_coppia_v4.py > doc/referti_l2/anima_coppia_v4.txt`, con uscita 0. Lo script ha blob sha1-byte 4c09677c e il timbro dice pulito.
+- **Il DEVE:** 109 quadri su 109, a 6 fps, 1440x480, 1.000 MB contro un tetto di 5 MB. **PASSA.** Le scale fisse sono `rho_psi [0, 3.8318e+04]` e `chi [-245.2493, -19.9540]`.
+- **I png** sono in `E:/soliton_simulator/controllo/M1519/v4/` (k 0, 6000, 18000, 30000, 42000, 54000). Ne ho guardati due:
+  - **k 6000:** due picchi a `d_p 13.89`, uno sopra l'altro lungo `y`, dentro un solo pozzo di `chi`, allungato;
+  - **k 54000:** un corpo solo, con `max rho 2.576e+04` e `R 12.36`. Intorno ci sono ali deboli e il pozzo di `chi` e' quasi circolare. **Il corpo non sta al centro della scatola:** e' spostato a sinistra e in su rispetto al centro del pozzo, come lo si vede nel pannello `chi`.
+- **La correzione del giro:** il primo tentativo di commit del verdetto, alle 22:03, e' stato RIFIUTATO da `H-NON-TRACCIATI`. Il video stava scrivendo `anima_coppia_v4.txt`, che non era ancora tracciato. Ho atteso la fine del video e ho committato tutto insieme.
+
+
+### 2026-11-27 22:08 -- [M1519] PEZZO 4, LA RICEVUTA, CON LE PREVISIONI CONFRONTATE; E LE RICEVUTE DI [M1824] E DELLA DECISIONE DELLE 18:59 [[PROGETTO-MITOSI]]
+
+**LE RICEVUTE:**
+
+| mandato | esito | data e ora | commit e note |
+|---|---|---|---|
+| **[M1519]** | **ESEGUITO** | 2026-11-27 22:08 | pezzi 0-4 fatti; il verdetto S3 e' **ALTRO, con D** (`51679e0a`) |
+| **[M1824]** | **ESEGUITO** | 2026-11-27 21:58 | S1 e S2 riprese e chiuse con uscita 0 (`e3863b32` e `bca65774`); tutti i DEVE al bit passati |
+| **DECISIONE DI LUCA 18:59** | **ESEGUITO**, salvo una parte del punto 2 | | vedi qui sotto |
+
+**I punti della decisione delle 18:59:**
+
+1. **la carta [M1824]:** committata e pushata;
+2. **il repository principale su E:** ESEGUITO. **Manca solo il rename di `C:\Users\lpeano\soliton_simulator` in `_OLD`:** Permission denied, perche' un processo tiene aperta la cartella. Non l'ho aggirato e **resta a Luca**;
+3. **la soglia di 8 GB:** rispettata a ogni lancio;
+4. **[M1824]:** fatto;
+5. **[M1519] pezzi 3 e 4:** fatti.
+
+**LE PREVISIONI DEL GUARDIANO** *(posta [M1519], `df8635b5`)*:
+
+| | previsione | esito |
+|---|---|---|
+| **P1** | ESISTE E CI ARRIVA `50%`, SI SPEZZA `30%`, COLLASSA `20%` | **sbagliata in tutte e tre le voci:** il verdetto e' ALTRO, che la previsione non contemplava |
+| **P2** | se si assesta, il rilassamento dura piu' di 20000 tick (`60%`) | **non valutabile:** C non passa, quindi il tempo di rilassamento della regola non e' definito |
+| **P3** | l'oggetto 2M ha `w` fra 3.5 e 4.5 e il pozzo fra -170 e -220 (`65%`) | **fuori, tutti e due di poco:** `w` medio `3.3679` (giro 3r) e `3.2767` (giro 2); profondita' `-221.3351` e `-224.9944`. Con la riserva che C non passa |
+| **P4** | `omega` dell'oggetto 2M sotto 0.078 (`55%`) | **si':** `0.069081` al giro 3r, `0.071003` al giro 2 |
+
+Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende sotto `0.10` dalla finestra `[23750, 26250]`, cioe' `17500` tick dopo il secondo contatto. **Non e' il criterio della regola.**
+
+**LE MIE PREVISIONI DELLA CARTA [M1519]:**
+
+| previsione | probabilita' | esito |
+|---|---|---|
+| S1 non si spezza | `80%` | **si':** la fila piu' lunga e' di 12 stati |
+| S1 non arriva a un `w` fermo entro il 10% prima di `k 54000` | `55%` | **non decidibile per la regola S3**, che richiede C. **Come lettura sembra SBAGLIATA:** da `k 26250` il `w` medio per finestra sta fra `3.64` e `3.89` |
+| C passa entro 3 giri | `40%` | **no**; poi «e' piu' probabile D»: **si', D vale** |
+| `w` dell'oggetto 2M sotto 4.5 | `65%` | **si':** `3.3679` |
+| il suo `omega` sotto 0.078 | `60%` | **si':** `0.069081` |
+
+**LE MIE PREVISIONI DELLA CARTA DEL PEZZO 3** sono nel paragrafo del verdetto (`51679e0a`): C fra 2 e 3r no; D si'; ALTRO si'; `H` entro l'1% si', di poco (`-0.97%`).
+
+**CHE COSA RESTA APERTO** *(per Luca: sono domande, non decisioni mie)*:
+
+1. **Il respiro di `w` nel punto fisso 2M risale** da `0.3877` (giro 2) a `0.5819` (giro 3r), mentre `max|chi|` resta fermo entro il `2.5%`. **La definizione C (respiro sotto 0.10) non sembra raggiungibile per iterazione.**
+   - **Chiusura:** un giro 4 da `partenza_giro_4`, che esiste gia', oppure una definizione diversa da Luca.
+2. **La corsa libera S1 sembra assestata:**
+   - il respiro di `R` sta a `0.04..0.12` da `k 23750`;
+   - il `w` per finestra sta a `3.64..3.89`;
+   - questo `w` sta circa l'11% sopra il `w` di S2, e lo scarto l'ho calcolato a mano, non con lo script.
+
+   Il confronto vero richiede una regola che non dipenda da C.
+   - **Chiusura:** la decide Luca.
+3. **`H` scende di circa l'1% in 36000 tick, oscillando di `±5e-03`.** Lo strumento non e' sigillato su questa scena.
+   - **Chiusura:** un sigillo di `energia_chi_v2` sulla scena della ripresa, se Luca lo vuole.
+4. **Su C: restano** il vecchio repository (il rename e' da fare), `C:\Users\lpeano\solitonsimulator` e `C:\Users\lpeano\wt_t1`. **Sono a Luca.**
+
+**FERMO**, come dice il punto 5.
+
+
+### 2026-11-27 22:51 -- [M2245] (27/11) LETTA: DECISIONE DI LUCA 22:45 E 22:47 (le cinque letture, il merge lapse-u -> mitosi, il corpo fuso con le nascite, il «via» a [M-GM], la nascita nel vuoto con il lapse); IN ESECUZIONE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:**
+  - **[M2245] (27/11):** letta alle 22:47 su comando di Luca («Leggi la posta.»). E' una DECISIONE DI LUCA e **si esegue.**
+  - **[M-GM]:** il «via» e' dato dentro [M2245] D, quindi la lettera ATTESA_M-GM diventa DECISIONE DI LUCA (22:45).
+  - **Il TODO:** `doc/TODO_prossima_sessione_2026-11-27.md` va allineato a `guardiano/CODA.md` (punto E).
+- **L'etichetta e' doppia:** [M2245] esisteva gia' il 24/11, per il vento del vuoto. `git log --grep` trova quei commit, ma **del mandato del 27/11 non e' fatto niente.** Nei commit lo scrivo «[M2245] (27/11)».
+- **Il task history**, scritto prima del lavoro: `doc/TASK_HISTORY/2026-11-27_m2245_cinque_letture_merge_mitosi.md`.
+- **Due scelte mie, dichiarate prima:**
+  1. **B prima di A.** Gli strumenti di A1-A3 stanno su mitosi e quelli di A4-A5 su lapse-u, e la carta delle cinque letture e' una sola. Se B fallisce, faccio A sui due rami separati e lo dichiaro.
+  2. **I collaudi di B2 col repository temporaneo su E:, non su C:.** La lettera dice C:, ma la DECISIONE DI LUCA delle 18:59, che e' successiva, dice «C: mai, ne' temp».
+- **Le premesse dal codice:**
+  - il nucleo e' diverso da `42638304` in 5 file su lapse-u e 9 su mitosi;
+  - lapse-u non ha toccato `primo_ordine/` da `d27805ac`, la base del merge precedente: **il merge dovrebbe lasciare il nucleo a 9 file;**
+  - mitosi e' 168 commit dietro lapse-u e 99 avanti.
+- **Le misure** (22:50:35): C: 25.06 GB liberi; E: 152.17 GB; impegnabile 31.77 GB liberi su 49.47. Nessuna corsa in giro, coda vuota.
 - **I referti sul ramo `mitosi`:** `doc/referti_l2/mitosi_soglia_noto.txt` e `mitosi_vuoto_noto.txt`, le copie dei log del lanciatore *(`E:/soliton_simulator/controllo/M1446/log/M0237_K3.txt`, `M0237_K4.txt`)*.
 - **FERMO sui pezzi 3 e 4 di [M0237]:** vanno rifatti sul corridore che ha prodotto MITOSI e MITOSI_V2. **Il vuoto puro vuole anche una decisione:** `mattone.Campi.residuo` divide per `max(rho)`, che nel vuoto e' zero. Le strade: una `psi` piccolissima invece di zero, oppure un residuo normalizzato altrimenti nel solo script del vuoto. **Decide Luca.**
 
@@ -27118,3 +29101,25 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **La previsione scritta prima** *(nella carta, `58e3c59e`)* era «FALLISCE»: **giusta**. Il guardiano, P4 al `70%`: **sbagliata** sulla parte K4'; la parte sulle nascite non si e' potuta provare.
 - **LA CORSA DEL VUOTO PURO NON VA IN CODA** *(il mandato: «se passa»)*.
 - **La proposta per Luca, non eseguita:** una soglia che stia sopra il pavimento di arrotondamento. Per esempio `|Delta H| < 1e-12 somma_nodi |tot_nodo|` *(la scala dei termini che si cancellano)*, oppure `|Delta H| < 1e-9` assoluto *(e' `100` volte meno del salto osservato fra campioni)*.
+
+
+### 2026-11-27 23:32 -- [M2245-27] B, IL COMMIT DEL MERGE: IL MERGE lapse-u -> mitosi COMMITTATO (B3). NUCLEO A 9 FILE, NASCITE AL BIT, SUITE 67 SU 67 CON IL WRAPPER csv/_suite_su_E.py (DECISIONE DI LUCA 23:21) [[PROGETTO-MITOSI]]
+
+- **B1, il merge:** `git merge --no-ff --no-commit origin/lapse-u` (da `82739c06` + `origin/lapse-u` com'era all'avvio, **`ae5c75e8`** (22:52); i due commit dopo, `a6e1f2e6` e `9f08ff27`, sono le domande con i loro referti ed entrano col prossimo merge), **senza squash e senza rebase**.
+  - **Il conflitto:** uno solo, in questa relazione, in 4 blocchi. Ho tenuto tutte e due le parti, prima lapse-u e poi mitosi, come in [M1330-A2]: (righe lapse-u, mitosi) = (9, 1), (16, 0), (504, 33), (1454, 46). Il registro delle corse si e' fuso da solo.
+  - **DEVE il nucleo:** `git diff --cached --name-only 42638304 -- primo_ordine/` da' **esattamente i 9 file** del criterio. **PASSA.**
+- **B2, il caso noto delle nascite:** `suite_merge.py`, dal tronco `k 35976` a `k 36000`, e' uguale **AL BIT** a `MITOSI/stato_36000`, e il DEVE FALLIRE contro `stato_36250` fallisce come deve (`doc/referti_l2/suite_merge_m2245.txt`). **PASSA.**
+- **B2, la suite:**
+  - **il primo giro, con `collauda.py` diretto e il temp su E:, da' 65/67** (`collauda_merge_m2245_27_primo_giro.txt`). M-B1 e lo STAGE falliscono perche' E: non registra il proprietario, e ogni repository temporaneo e' «dubious ownership». La causa e' provata con un `git init` vuoto. Le due domande al guardiano sono su lapse-u, `a6e1f2e6` e `9f08ff27`;
+  - **la cura, secondo le DECISIONI DI LUCA delle 23:14 e 23:21:**
+    - **`csv/_suite_su_E.py`**, nuovo: imposta `GIT_CONFIG_COUNT=1`, `GIT_CONFIG_KEY_0=safe.directory`, `GIT_CONFIG_VALUE_0=*` **nel proprio ambiente**, mette `TMP`/`TEMP` su E: se non ci sono gia', e lancia `primo_ordine/collauda.py`: i figli ereditano l'ambiente;
+    - **`csv/_stage.py`:** lo stesso ambiente ai soli due git del repository usa-e-getta (la `g` e il `checkout-index` di `prova`);
+    - **niente `git config --global`, niente C:, niente sotto `primo_ordine/`.**
+  - **Dove e' dichiarato:**
+    - la carta dei presidi `doc/ESENZIONI_presidi.md`, rigenerata con `--elenca`: 147 esenzioni, e quella del wrapper e' nuova;
+    - **CLAUDE.md par. 13:** la suite si lancia con `python csv/_suite_su_E.py`;
+  - **il secondo giro, dal wrapper: 67 SU 67** (`collauda_merge_m2245_27.txt`, dalle 23:21:34 alle 23:31:33). M-B1 74.84 s ok, lo STAGE 102.36 s ok, il pre-commit 317.9 s su 1800.
+- **Il limite, dichiarato:** il jolly del wrapper vale per **ogni** git lanciato dalla suite, non solo per i due collaudi. E' la via scelta da Luca alle 23:21.
+- **Nota per lapse-u:** CLAUDE.md di lapse-u dice ancora `python primo_ordine/collauda.py`. Il wrapper arriva su lapse-u solo con un merge nel verso opposto, o con una decisione apposta.
+- **Da qui A, C, D ed F girano su mitosi**, e D sul ramo `u-dinamica`. Il prossimo pezzo e' la carta A.
+- **Un incidente del commit, dichiarato:** il primo tentativo con `committa3.py` e' stato rifiutato dal suo stesso controllo, perche' un merge porta 141 file nello stage, e dopo il rifiuto ha fatto `git reset` dei file dichiarati. `MERGE_HEAD` e' rimasto e il contenuto fuso era intatto nel worktree: ho ri-aggiunto i file e committato con `committa3_merge.py` (lo stage deve CONTENERE i file dichiarati, `MERGE_HEAD` e' obbligatorio, e non fa nessun reset).

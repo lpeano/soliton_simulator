@@ -1,0 +1,23 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+==================================================================================================================================
+[M0137] I CASI NOTI DEL PUNTO FISSO CON CHI (la carta sez. 3-sedecies)
+==================================================================================================================================
+  DEVE: (K1) kappa 0, i campi dello stato, 100 tick nella forma L-1 = la tenuta del giro 4 a k 100 AL BIT    PASSA diverse []
+  DEVE: (K2, l'equivalente dichiarato) max|forza(chi_statico)| almeno 100 volte sotto max|forza(0)|          PASSA 1.069e-04 contro 3.830e-02 (il rapporto 2.791e-03); m0 -5.786643e+00, c0 -1.463410e-03
+  DEVE: (K3) la riproiezione su Q_K riporta alla massa entro 1e-12                                           PASSA 0.0e+00
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

@@ -1,0 +1,18 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] chi_d3.py  sha1-BYTE c98d8ada  committato e pulito
+==================================================================================================================================
+[M0137-0] max|chi|(k) e w(k) di d3 (un oggetto, chi on) e d1 (due, chi on), [M2330]
+==================================================================================================================================
+  d3: max|chi| per finestra di 250 (k fino a): 250:69.9 500:87.3 750:95.6 1000:103.7 1250:168.3 1500:169.2 1750:151.0 2000:103.1 2250:100.8 2500:93.2 2750:52.5 3000:100.3 3250:100.0 3500:102.2 3750:120.6 4000:170.5 4250:168.2 4500:118.6 4750:105.1 5000:106.2 5250:82.1 5500:70.5 5750:107.0 6000:107.9
+  d3: w (torneo_tenuta.misura) ogni 250: 10.70 9.75 7.91 5.80 4.33 3.56 2.73 4.73 5.85 5.63 5.87 6.12 6.23 4.36 7.66 6.12 3.60 3.06 3.68 4.36 6.15 6.23 6.68 7.22 6.89
+  d3: max|chi| a k 0 10.615, il massimo su tutta la corsa 170.483 a k 3980; w da 2.728 a 10.696, (max - min)/medio 1.3717
+  d1: max|chi| per finestra di 250 (k fino a): 250:68.8 500:101.1 750:127.7 1000:153.5 1250:221.5 1500:222.4 1750:203.5 2000:140.7 2250:122.1 2500:98.1 2750:49.3 3000:108.0 3250:124.0 3500:143.7 3750:191.6 4000:232.1 4250:230.8 4500:176.0 4750:137.8 5000:126.3 5250:98.1 5500:132.4 5750:215.4 6000:250.6
+  d1: w (torneo_tenuta.misura) ogni 250: 15.13 13.79 11.22 8.17 5.96 5.01 3.89 6.70 7.70 8.01 8.40 8.68 7.73 9.99 7.33 5.75 4.39 4.70 5.43 7.26 9.99 8.77 4.58 2.88 2.52
+  d1: max|chi| a k 0 9.572, il massimo su tutta la corsa 250.572 a k 5930; w da 2.518 a 15.126, (max - min)/medio 1.7133
+==================================================================================================================================

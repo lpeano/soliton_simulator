@@ -1,0 +1,14 @@
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+[TIMBRO] fondo_puntofisso_v3.py  sha1-BYTE 3a7112d6  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b.py  sha1-BYTE fc70aaf9  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+==================================================================================================================================
+[M1932] IL CASO NOTO DEL QUARTO GIRO (la carta sez. 3-octies): le fasce, la partenza, la cartella
+==================================================================================================================================
+  DEVE: (a) il giro 3 della v3b (0.0582 nel referto) cade nella fascia RESIDUO                     PASSA 0.0582 -> RESIDUO
+  DEVE: (b) i bordi delle fasce: 0.0499 PASSA, 0.05 e 0.08 RESIDUO, 0.0801 e 0.3079 FERMO          PASSA 0.0499->PASSA 0.05->RESIDUO 0.08->RESIDUO 0.0801->FERMO 0.3079->FERMO
+  DEVE: (c) DEVE FALLIRE: 0.0801 nella fascia RESIDUO                                              PASSA 
+  DEVE: (d) la partenza: giro_3/stato_006000.npz, lo sha1 coincide; giro_4 non esiste ancora       PASSA E:\soliton_simulator\controllo\M1330\puntofisso_v3b\giro_3\stato_006000.npz
+  la massa: della partenza della v1 (quella imposta) 995010.893146391; della partenza del giro 4 995010.893149807
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

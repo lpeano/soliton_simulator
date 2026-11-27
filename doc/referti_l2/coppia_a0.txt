@@ -1,0 +1,45 @@
+[TIMBRO] due_corpi_lettura_v4.py  sha1-BYTE 2935b6cf  committato e pulito
+[TIMBRO] coppia_a0.py  sha1-BYTE 68f4bf68  committato e pulito
+==================================================================================================================================
+[M1016] A0: DUE CORPI O UNA NUBE? LA NORMA, IL MASSIMO, I MASSIMI LOCALI (> 30% della lisciatura di raggio 2), IL RAGGIO DELLA NUBE
+==================================================================================================================================
+----------------------------------------------------------------------------------------------------------------------------------
+I CASI NOTI
+----------------------------------------------------------------------------------------------------------------------------------
+  DEVE: (K1) stato_000000: 2 massimi, a distanza 41.569 (entro 1 da 41.57)   PASSA
+  DEVE: (K2) E:\soliton_simulator\controllo\M0414\puntofisso_accoppiato\giro_3\stato_003000.npz (un oggetto solo, centrato sul nodo 13040): 1 massimi; R 4.8946   PASSA
+----------------------------------------------------------------------------------------------------------------------------------
+A0 SUI 25 STATI DI d1' (E:\soliton_simulator\controllo\M2034\coppia\d1)
+----------------------------------------------------------------------------------------------------------------------------------
+  k     0: N 1.990023850597e+06 (+0.00e+00); max rho 9.2109e+03 al nodo 16976 (+0.08, +21.18); massimi 2 [8.402e+03, 8.402e+03]; fra i due 41.569; R 21.5275  ->  DUE CORPI
+  k   250: N 1.990023850597e+06 (-4.44e-16); max rho 1.0781e+04 al nodo 13040 (+0.08, -20.39); massimi 2 [9.777e+03, 9.742e+03]; fra i due 41.569; R 21.2939  ->  DUE CORPI
+  k   500: N 1.990023850597e+06 (-6.66e-16); max rho 1.3742e+04 al nodo 13040 (+0.08, -20.39); massimi 2 [1.227e+04, 1.218e+04]; fra i due 40.706; R 20.8868  ->  DUE CORPI
+  k   750: N 1.990023850597e+06 (-1.55e-15); max rho 1.4709e+04 al nodo 16812 (+0.08, +19.45); massimi 2 [1.264e+04, 1.261e+04]; fra i due 40.706; R 20.4642  ->  DUE CORPI
+  k  1000: N 1.990023850597e+06 (-1.78e-15); max rho 9.7880e+03 al nodo 16812 (+0.08, +19.45); massimi 2 [8.735e+03, 8.825e+03]; fra i due 38.974; R 19.9569  ->  DUE CORPI
+  k  1250: N 1.990023850597e+06 (-2.66e-15); max rho 7.7772e+03 al nodo 13205 (-0.42, -17.79); massimi 2 [7.251e+03, 7.139e+03]; fra i due 35.511; R 19.2820  ->  DUE CORPI
+  k  1500: N 1.990023850597e+06 (-3.44e-15); max rho 7.4518e+03 al nodo 13369 (-0.42, -16.06); massimi 2 [6.715e+03, 6.768e+03]; fra i due 33.779; R 18.3453  ->  DUE CORPI
+  k  1750: N 1.990023850597e+06 (-4.11e-15); max rho 6.8992e+03 al nodo 13533 (-0.42, -14.33); massimi 2 [6.543e+03, 6.363e+03]; fra i due 28.583; R 17.0675  ->  DUE CORPI
+  k  2000: N 1.990023850597e+06 (-4.88e-15); max rho 1.0218e+04 al nodo 13696 (+0.08, -13.46); massimi 2 [9.021e+03, 8.936e+03]; fra i due 27.731; R 15.4549  ->  DUE CORPI
+  k  2250: N 1.990023850597e+06 (-5.22e-15); max rho 1.2712e+04 al nodo 13697 (-0.42, -12.60); massimi 2 [1.134e+04, 1.084e+04]; fra i due 25.120; R 13.5632  ->  DUE CORPI
+  k  2500: N 1.990023850597e+06 (-5.77e-15); max rho 1.5177e+04 al nodo 15830 (-0.92, +10.79); massimi 2 [1.289e+04, 1.267e+04]; fra i due 19.925; R 11.5309  ->  DUE CORPI
+  k  2750: N 1.990023850597e+06 (-6.22e-15); max rho 1.2948e+04 al nodo 15665 (-0.42, +8.19); massimi 2 [1.116e+04, 1.143e+04]; fra i due 16.462; R 9.5002  ->  DUE CORPI
+  k  3000: N 1.990023850597e+06 (-7.55e-15); max rho 2.0778e+04 al nodo 14522 (-2.92, +0.39); massimi 3 [5.685e+03, 1.701e+04, 5.936e+03]; R 7.6156  ->  ALTRO (3)
+  k  3250: N 1.990023850597e+06 (-8.22e-15); max rho 3.7914e+04 al nodo 14684 (-1.92, +0.39); massimi 1 [2.906e+04]; R 6.6227  ->  UNO
+  k  3500: N 1.990023850597e+06 (-8.66e-15); max rho 2.1350e+04 al nodo 14684 (-1.92, +0.39); massimi 3 [9.057e+03, 1.715e+04, 9.013e+03]; R 7.6093  ->  ALTRO (3)
+  k  3750: N 1.990023850597e+06 (-9.55e-15); max rho 1.4731e+04 al nodo 15179 (-3.42, +8.19); massimi 2 [1.230e+04, 1.255e+04]; fra i due 16.462; R 9.7197  ->  DUE CORPI
+  k  4000: N 1.990023850597e+06 (-1.05e-14); max rho 1.1073e+04 al nodo 15668 (-1.92, +10.79); massimi 2 [9.585e+03, 9.604e+03]; fra i due 21.656; R 11.9112  ->  DUE CORPI
+  k  4250: N 1.990023850597e+06 (-1.10e-14); max rho 7.7368e+03 al nodo 15832 (-1.92, +12.52); massimi 2 [6.974e+03, 6.991e+03]; fra i due 25.120; R 13.7451  ->  DUE CORPI
+  k  4500: N 1.990023850597e+06 (-1.19e-14); max rho 6.0691e+03 al nodo 13209 (-2.42, -14.33); massimi 2 [5.545e+03, 5.337e+03]; fra i due 27.713; R 15.0344  ->  DUE CORPI
+  k  4750: N 1.990023850597e+06 (-1.29e-14); max rho 4.8312e+03 al nodo 12883 (-3.42, -16.06); massimi 2 [4.422e+03, 4.212e+03]; fra i due 28.583; R 15.7908  ->  DUE CORPI
+  k  5000: N 1.990023850597e+06 (-1.31e-14); max rho 5.7504e+03 al nodo 13208 (-1.92, -15.19); massimi 2 [5.073e+03, 4.969e+03]; fra i due 28.583; R 16.1101  ->  DUE CORPI
+  k  5250: N 1.990023850597e+06 (-1.40e-14); max rho 5.9891e+03 al nodo 13209 (-2.42, -14.33); massimi 2 [5.271e+03, 5.195e+03]; fra i due 28.583; R 16.0424  ->  DUE CORPI
+  k  5500: N 1.990023850597e+06 (-1.52e-14); max rho 5.2222e+03 al nodo 13373 (-2.42, -12.60); massimi 2 [4.893e+03, 4.835e+03]; fra i due 28.583; R 15.6156  ->  DUE CORPI
+  k  5750: N 1.990023850597e+06 (-1.57e-14); max rho 4.6935e+03 al nodo 15832 (-1.92, +12.52); massimi 2 [4.245e+03, 4.364e+03]; fra i due 25.120; R 14.7795  ->  DUE CORPI
+  k  6000: N 1.990023850597e+06 (-1.64e-14); max rho 5.0048e+03 al nodo 15340 (-1.92, +7.32); massimi 2 [4.501e+03, 4.637e+03]; fra i due 13.892; R 13.4739  ->  DUE CORPI
+  DEVE: (la norma) max |N(k)/N(0) - 1| = 1.643e-14 < 1e-09   PASSA
+----------------------------------------------------------------------------------------------------------------------------------
+  ### IL VERDETTO PER STATO: 0 DUE CORPI; 250 DUE CORPI; 500 DUE CORPI; 750 DUE CORPI; 1000 DUE CORPI; 1250 DUE CORPI; 1500 DUE CORPI; 1750 DUE CORPI; 2000 DUE CORPI; 2250 DUE CORPI; 2500 DUE CORPI; 2750 DUE CORPI; 3000 ALTRO (3); 3250 UNO; 3500 ALTRO (3); 3750 DUE CORPI; 4000 DUE CORPI; 4250 DUE CORPI; 4500 DUE CORPI; 4750 DUE CORPI; 5000 DUE CORPI; 5250 DUE CORPI; 5500 DUE CORPI; 5750 DUE CORPI; 6000 DUE CORPI
+  ### IL TICK DELLA FUSIONE (il primo UNO dopo un DUE): nessuno
+  ### max rho da k 0 a k 6000: 9.2109e+03 -> 5.0048e+03 (rapporto 0.543); R: 21.5275 -> 13.4739
+  ### (a) contro (b): la norma FERMA; vale (a): la materia si allarga, non si perde
+==================================================================================================================================

@@ -1,0 +1,15 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso.py  sha1-BYTE 8d56d821  committato e pulito
+==================================================================================================================================
+[M1330-B1] IL CASO NOTO DEL GIRO (la carta sez. 3-bis): la media = l'identita', il proiettore = l'identita' 12 x 12 -> lo stato k 3000 AL BIT
+==================================================================================================================================
+  DEVE: la media di un solo stato (theta 0) e il proiettore identita': psi_h = lo stato AL BIT               PASSA max |d| 0.0e+00
+  DEVE: lo stato riscritto e ricaricato con FS.carica = l'originale ricaricato, TUTTE le chiavi e A, E AL BIT PASSA diversi []
+  DEVE: DEVE FALLIRE: lo stesso con Q_K: psi_h diverso                                                       PASSA max |d| 2.639e+00
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []

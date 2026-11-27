@@ -1,0 +1,15 @@
+[TIMBRO] _stage.py  sha1-BYTE fc366ea7  committato e pulito
+====================================================================================================
+IL COLLAUDO DEI CONTROLLI SULLO STAGE -- nei DUE VERSI
+====================================================================================================
+  ### e il modo RAPIDO passa (e- quello del `pre-commit`)          PASSA   ### 1 controllo su 5: il validatore dell-indice, che e- quello che prende l-incoerenza fra `voci.jsonl` e `storico.jsonl`
+  sul disco: i controlli del contenuto passano SULLO STAGE         PASSA   5 controlli sullo stage, 4 dichiarati sul disco col motivo
+  ### il collaudo ha MATERIA: le due liste non sono vuote          PASSA   ### se una fosse vuota, o non si controllerebbe niente o non si dichiarerebbe niente
+  ### il caso SANO: tutto committato, il controllo PASSA           PASSA   ### se questo fallisse, i due casi sotto non direbbero niente
+  ### (a) DEVE scattare: `b` in stage e `a` SOLO SUL DISCO         PASSA   ### e- IL DIFETTO: sul disco e- coerente, nel COMMIT no -- e il presidio vecchio avrebbe detto <<a posto>>
+  ### e SUL DISCO lo stesso caso PASSA: ecco perche- nessuno lo vedeva PASSA   ### il disco diceva <<coerente>>, e il commit NON lo era
+  ### (b) entrambi in stage: il controllo PASSA                    PASSA   ### la cura non deve rifiutare il caso GIUSTO
+  ### e il collaudo NON LASCIA RESIDUI nel `%TEMP%`                PASSA   ### 0 residui dei nostri prefissi
+====================================================================================================
+IL COLLAUDO DELLO STAGE: 8 su 8   ### TUTTI PASSATI
+====================================================================================================

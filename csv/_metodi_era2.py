@@ -199,9 +199,17 @@ METODI = {
                 "`H-REG-R` al simulatore -- DUE POSTI PER LA STESSA SCHEDA SAREBBERO "
                 "DUE FONTI",
                 "`csv/_file_fisica.py::SCHEDA_NEL_REGISTRO`", "PORTATO"),
+    "H-LANCIATORI": ("un lanciatore nuovo (`coda_`, `lancia_`, `dispatcher_` in `doc/referti_l2/`) o una modifica a "
+                     "`coda_m1446.py` senza la riga di Luca con l-ora: RIFIUTA IL COMMIT in `commit-msg`. "
+                     "Vale per ogni lavoro, era 2 compresa: guarda il diff e il messaggio, non la fisica",
+                     "`.githooks/commit-msg`", "PORTATO"),
     "H-RIGHE": ("`CLAUDE.md` sotto le 400 righe: ### IL PUNTO 2 DELLE REGOLE DI GESTIONE "
                 "(mandato 6) genera la sezione delle regole dall-indice",
                 "`.githooks/pre-commit`", "PORTATO"),
+    "H-GUARDIANO": ("un commit sul ramo `guardiano` o un push che scrive `refs/heads/guardiano`: RIFIUTA "
+                    "in `pre-commit` e in `pre-push`. Vale per ogni lavoro, era 2 compresa: guarda il ramo, "
+                    "non la fisica",
+                    "`.githooks/pre-commit` + `.githooks/pre-push`", "PORTATO"),
     "H-STASH": ("`git stash` bloccato da `permissions.deny`: non e- un hook e non ha via "
                 "d-uscita. Vale per ogni lavoro, era 2 compresa",
                 "`.claude/settings`", "PORTATO"),
