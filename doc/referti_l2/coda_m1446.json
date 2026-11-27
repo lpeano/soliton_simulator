@@ -2939,6 +2939,24 @@
     "corsa"
    ],
    "note": "[M1214] (DECISIONE DI LUCA 13:12) la corsa lunga d1'': da M2034/coppia/d1/stato_006000 per 12000 tick (fino a k 18000), stati ogni 250, in M2034/coppia/d1L; v9 (U rifatta dopo la carica); K0' passa (lo stato al bit, omega < 1e-12)"
+  },
+  {
+   "nome": "M1519_S1",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso.py",
+    "corsa"
+   ],
+   "note": "[M1519] (DECISIONE DI LUCA 15:19) S1, la corsa libera d1''': da M2034/coppia/d1L/stato_018000 per 36000 tick (fino a k 54000), stati ogni 250, in M1519/d1T; K0'' passa (11/11 DEVE, corpo_fuso_noto.txt)"
+  },
+  {
+   "nome": "M1519_S2",
+   "priorita": 1,
+   "argv": [
+    "doc/referti_l2/corpo_fuso.py",
+    "puntofisso"
+   ],
+   "note": "[M1519] (DECISIONE DI LUCA 15:19) S2, il punto fisso accoppiato 2M: 3 giri da 6000 da d1L/stato_018000 (pi = 0), i parametri di d1', in M1519/puntofisso_2M; K1'' passa"
   }
  ]
 }

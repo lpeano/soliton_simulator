@@ -28570,3 +28570,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **`giro_pf`** e' il ciclo del punto fisso di `V2.giro`, riga per riga, sulla scena di d1'.
 - **Un controllo che il codice copre per costruzione:** `fondo_puntofisso_chi` importa `due_corpi_fondo_v3`, che riassegna `D.parametri`. E' lo stesso modulo che la catena della v7 ha gia' importato, quindi non cambia niente. **K0'' e K1'' girano comunque con tutti gli import della corsa:** se un import cambiasse il ciclo, lo stato al bit non tornerebbe.
 - **Il prossimo passo:** `corpo_fuso.py noto`. Se tutti i DEVE passano, S1 e S2 vanno in coda.
+
+
+### 2026-11-27 15:45 -- [M1519] I CASI NOTI DEL CORPO FUSO: 11 DEVE SU 11 PASSANO (K0'' AL BIT, omega 6.34e-15; K0''-neg DIVERSO IN 9 CHIAVI; K1'' AL BIT; KQ 2.2e-16); S1 E S2 IN CODA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_noto.txt`, da `corpo_fuso.py` *(sha1 dei byte `43ac319d`, timbrato committato e pulito)*. Uscita `0`, alle `15:45`.
+  - **K0''** *(da `d1L/stato_017750`, `250` tick)*:
+    - lo stato e' uguale AL BIT a `d1L/stato_018000` in `11` chiavi su `11`;
+    - la serie `17760..18000` e' uguale AL BIT;
+    - `omega` differisce al massimo di `6.340e-15` relativo, sotto `1e-12`.
+  - **K0''-neg** *(senza riscrivere `geo.U`)*: lo stato e' DIVERSO in `9` chiavi *(`Lambda, phi_h, psi_h, rho, campo_A, campo_E, chi, pi, theta_a`)*. **La prova vede la chiave.**
+  - **K1''** *(il ciclo del punto fisso da `017750`, `250` tick)*: uguale AL BIT a `d1L/stato_018000` in `11` chiavi su `11`. **Il ciclo di S2 e' la corsa libera.**
+  - **KQ:** la riproiezione su `Q_K` ridà la massa `1.9900238506e+06` con un errore relativo di `2.220e-16`. **KQ-neg** *(la massa di un oggetto solo)* da' un rapporto di `0.499999`: **fallisce come deve.**
+  - **K5 e K6** passano *(`P 2500`; un picco solo da' il ripiego; la media di un `chi` costante e' esatta al bit)*.
+- **Un'osservazione che non interpreto:** la massa di `stato_018000` *(`1990023.8506`)* supera di `2.064`, cioe' `1.037e-6` relativo, il doppio della massa di un oggetto nel meta *(`2 x 995010.8931 = 1990021.7863`)*. Dentro d1' la norma e' ferma a `5e-14`. **La differenza c'era quindi gia' alla composizione della coppia, non nasce nella corsa.** Non cambia S2: la massa di riferimento e' la norma dello stato.
+- **La coda:** in `doc/referti_l2/coda_m1446.json` ci sono due voci nuove, `M1519_S1` *(`corpo_fuso.py corsa`)* e `M1519_S2` *(`corpo_fuso.py puntofisso`)*, entrambe con priorita' `1`. La lista passa da `238` a `240` voci. **Il lanciatore parte dopo questo commit**, dalla cartella nuova.
