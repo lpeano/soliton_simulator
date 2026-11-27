@@ -8,6 +8,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 3. **Il ritmo delle nascite a 2π** contro il tempo: a gradini o liscio.
 4. **Il numero di vortice e la corrente circolante** delle «tre sfasate» (destro, sinistro) e del triangolo in fase; Θ sul giro — il pezzo 0 di [M-GM].
 5. **Il vento a due corpi**: J_φ attorno a ciascun corpo e lungo l'asse, dagli stati di d1'.
+21. **«A è già la fase di φ?»** ([M0037], decisione di Luca 28/11 00:37): confronto GAUGE-INVARIANTE sulle placchette, eB per triangolo contro la circolazione degli angoli θ_a = arg(φ[j→i]·conj φ[i→j]) attorno allo stesso triangolo; il vuoto NON vede U (`motore.py` L685: permutazione pura), quindi se si somigliano è ψ che lo fa. Stati: giro 3 di M0414, coppia d1 a k 3230 e 18000, vuoto fresco. Casi noti K1–K4 (gauge su φ, gauge su A, A=0, il nullo a permutazioni). Previsione del guardiano: SÌ al 35%.
 
 ## Corse corte (≤ 6000 tick): un sì e una soglia
 6. **La nascita nel vuoto CON il lapse** (decisa il 27/11 22:47, [M2245] F) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
@@ -33,6 +34,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 20. Il blog: Pages sul repo ITACA, i post in `posts/`, i video.
 
 ## In corsa adesso
+- [M0026]: C (coppia da k 0 con le nascite), F (N dipinto nel tick della mitosi), D-P3; premesse scritte da CC (535b5531). [M0037] G in parallelo (lettura).
 - [M1519]/[M1824]: S1 (il corpo fuso libero fino a 54.000) e S2 (il punto fisso 2M, giro 3 chiuso); poi il verdetto S3 e il video v4.
 
 ## Chiuse il 27/11 (il perché, in una riga; non si riaprono senza una ragione nuova)
