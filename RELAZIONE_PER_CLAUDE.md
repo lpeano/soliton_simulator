@@ -27773,3 +27773,22 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **del guardiano:** P1 *(`90%`)* **SI'**, esatta *(VERSO `8`, VIA `4`, `[3000, 5000]` VIA)*; P2 e P3 *(il vuoto puro)* **aspettano la corsa**;
   - **le mie:** P1 al `95%` **SI'**; K4'' passa **SI'**; P2 *(niente nascite)* al `75%`, aspetta la corsa.
 - **IL SEGUITO:** quando la corsa chiude *(circa `8-12` ore)*, `mitosi_vuoto_v4.py lettura > doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi.
+
+
+### 2026-11-27 03:22 -- [M0106] LA CORSA DEL VUOTO PURO E' CHIUSA: 0 NASCITE IN 6000 TICK; LA NORMA DERIVA DI 2.26e-12, CRESCENTE IN 24 PASSI SU 24; max |H| 1.229e-10 [[PROGETTO-MITOSI]]
+
+- **La corsa:** `M0106_vuoto_puro`, lanciata alle `01:18:37` *(pid `4452`)*, **FINITA alle `03:19:48`**, uscita `0`. Il registro la chiude da solo *(`m1446-M0106_vuoto_puro`, CHIUSO)*. Ha impiegato `7269 s` *(circa 2 ore)*: io avevo stimato da 8 a 12 ore, quindi **la stima era sbagliata**.
+- **Il referto:** `doc/referti_l2/mitosi_vuoto_v3.txt` sul ramo mitosi, prodotto da `mitosi_vuoto_v4.py lettura` *(il blob `0ca87d60`; `mitosi_vuoto_v2.py` `96a0eb49`; entrambi committati e puliti)*.
+- **LE NASCITE: NESSUNA.** `25` stati, da `36000` a `41976`, e `0` nascite. Lungo tutta la corsa il log stampa `E_persa +0`, `M 0` e `|gauss_acc| 0`.
+  - **La densita' locale alla prima nascita non si legge, perche' non c'e' una prima nascita.** Lo script separato previsto per quel caso non serve e non e' stato scritto.
+- **LA NORMA** `somma |phi_h|^2`: da `2.075747383350e+05` a `2.075747383355e+05`, cioe' una deriva relativa di **`2.260e-12`**.
+  - **E' crescente in `24` passi su `24`**, quindi e' sistematica e non casuale, anche se resta all'altezza dell'arrotondamento.
+  - **Non ne do una spiegazione:** la segnalo come osservazione, ed e' una domanda aperta. **Si chiude** misurando se la deriva scala col numero di tick *(lineare: un errore sistematico del passo)* o con la sua radice *(una passeggiata dell'arrotondamento: ma 24 su 24 crescenti la rendono improbabile)*.
+- **H(k):** `120` valori ogni `50` tick, con **`max |H|` `1.229e-10`** *(al primo campione, `k 36000`)* e media `1.048e-11`. **E' rumore attorno allo zero, come in K4.**
+  - Questi due numeri vengono da un `python -c` sugli stessi `npz`, non da uno script committato. La riga `max |H|` sta comunque anche nel referto.
+- **LE PREVISIONI CONFRONTATE:**
+  - **il guardiano, P2 *(`60%`)*, «nessuna nascita in `6000` tick»: GIUSTA;**
+  - **il guardiano, P3 *(`55%`)*, «se nasce qualcosa, dopo `k 3000` e al bordo del toro»:** il suo «se» non si e' avverato, quindi non si puo' provare;
+  - **la mia, P2 *(`75%`)*, nessuna nascita: GIUSTA.**
+- **LA LETTURA, mia:** il vuoto puro *(`phi_h = a phi_v`, `psi = 0`)*, con le nascite accese, **resta vuoto per `6000` tick**. Ne segue che le nascite viste nelle altre corse **dovrebbero richiedere materia, cioe' `psi` diverso da zero**: qui il vuoto da solo non le ha innescate. **Vale entro i `6000` tick e su questo reticolo** *(`n 34596`)*: non e' una prova che il vuoto non generi mai nulla.
+- **[M0106] E' ESEGUITO PER INTERO.** **FERMO:** aspetto il mandato successivo.
