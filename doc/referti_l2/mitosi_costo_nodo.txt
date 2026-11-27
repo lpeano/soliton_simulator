@@ -1,0 +1,7 @@
+[TIMBRO] mitosi_dati.py  sha1-BYTE 3b142d63  committato e pulito
+[TIMBRO] mitosi_costo_nodo.py  sha1-BYTE 7eb32d05  committato e pulito
+==================================================================================================================================
+[M2245-27] A1, IL COSTO DI UN NODO (la carta doc/CARTA_mitosi.md, A1): DH per nascita contro n(k) e contro la densita' locale
+==================================================================================================================================
+  DEVE: (K1) -somma DH delle 538 nascite = E_persa finale entro 1e-9 relativo                                PASSA |d|/|E_persa| 0.000e+00
+  n0 34596 (n 34597 meno 1 nascite di stato_36000); n da 34596 a 35133

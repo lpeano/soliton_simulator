@@ -29137,3 +29137,20 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 - **A4, dichiarato:** con `chi` acceso esistono `t120` (il destro), `t120r28` (il gemello ruotato di `15` gradi, **con lo stesso verso**) e `t000` (in fase). **Un triangolo «sinistro» non c'e'.**
 - **Una mia previsione e' contro quella del guardiano su A2:** le nascite calano da `45` a `16` per `500` tick, e mi aspetto `q > 0`, cioe' una decelerazione, per gran parte della fiammata (`70%`).
 - **Una nota sul commit B3** (`b3ccf592`): due referti di [M1214] (`suite_mitosi_M1214*.txt`) risultano modificati nel worktree solo per i fine riga (CRLF). Il contenuto e' identico (`git diff --ignore-cr-at-eol` vuoto) e non li tocco.
+
+
+### 2026-11-27 23:41 -- [M2245-27] A1-A3, IL PRIMO GIRO: A2 FATTO (NESSUNA FASE q > 0 PRIMA DI q < 0; q RUMOROSO); A1 CADE (IL TRONCO SENZA m1); A3 IL CASO NOTO K1 FALLISCE (UN ERRORE MIO: IL BORDO DESTRO CONTATO DUE VOLTE) [[PROGETTO-MITOSI]]
+
+- **A2** (`mitosi_a_di_k.txt`, script `2dd514f5`):
+  - **i 3 casi noti passano:** `a` lineare da' `q = 0` (`0.000e+00`); `a` esponenziale da' `|q + 1| 3.896e-03` contro una tolleranza di `2 x 5.21e-03`; `a ~ k^(1/2)` da' `|q - 1| 1.173e-05`;
+  - **i dati:** `n` va da `34597` (`k 36000`) a `35134` (`k 46000`), e `a` da `186.0027` a `187.4407`. `H` e' positivo e cala: `+1.17e-06` a `k 37000`, `+4.71e-07` a `k 44000`;
+  - **i segni di `q`:** `-++--+++++-+-+++--+`, cioe' 12 positivi e 7 negativi su 19 finestre interne. `|q|` arriva a circa `1000`, perche' `a'` e' piccolo e `a''` e' dominato dalle fluttuazioni delle nascite per finestra;
+  - **IL VERDETTO, con la regola della carta: NO**, non c'e' una fase con `q > 0` prima di una con `q < 0` per almeno 2 finestre;
+  - **la lettura:** in media e' decelerata, perche' le nascite per 500 tick calano da 45 a 17 e `H` cala di un fattore circa 2.5. Ma `q` finestra per finestra e' rumore.
+- **A1** (`mitosi_costo_nodo.txt`, parziale): **(K1) PASSA** (`-somma DH = E_persa` con `|d| = 0`), e `n0 = 34596`. **Poi cade:** `KeyError: 'm1'`. Lo stato del tronco `prima_nascita_35976.npz`, che uso per la prima nascita (`k 35976`) e per K3, **non ha le posizioni dei nodi**. La cura e' il prossimo commit, e la scrivo qui prima di farla:
+  - **per quello stato le posizioni vengono da `MITOSI/stato_36000`**, cioe' i suoi primi `n` nodi;
+  - **va prima verificato** che le posizioni dei nodi vecchi non cambino con le nascite: un DEVE nuovo, su due stati consecutivi.
+- **A3** (`mitosi_ritmo.txt`): **(K1) FALLISCE**, perche' «una nascita ogni 25 tick» da' un rapporto massimo `8.182e-02` invece di `0`.
+  - **L'errore e' mio:** `np.histogram` chiude l'ultima sottofinestra a destra, quindi una nascita esattamente a `a + 250` si conta nella finestra `a` **e** nella successiva. **Lo stesso errore tocca i dati**, e i numeri di A3 di questo giro non valgono.
+  - **La cura:** si contano solo le nascite in `[a, a + 250)` prima dell'istogramma. K2 e K3 passavano anche cosi'.
+  - **I numeri sbagliati restano nel referto di questo commit**, come reperto.
