@@ -28789,3 +28789,18 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **KHc:** `H_chi` dalla formula uguale a quello dello strumento entro `1e-12`.
 - **Le previsioni mie** sono nella carta: C passa fra `2` e `3r` *(`30%`)*, D vale *(`55%`)*, ALTRO *(`50%`)*.
 - **A meta' corsa** *(dai log, alle `19:34`)*: **S1 ha passato i DEVE al bit a `k 30250`, `30500` e `30750`; S2 a `k 0`, `250`, `500` e `750`.**
+
+
+### 2026-11-27 19:39 -- [M1519] PEZZO 3, I CASI NOTI DELLA LETTURA: 4 DEVE SU 4 (KL LE 73 RIGHE CARATTERE PER CARATTERE; KH H AL BIT IN SCENA NUOVA E SUL POSTO; KH-neg; KHc); I DEVE DENTRO LE CORSE TUTTI PASSATI (S1 30250..31000, S2 0..1000) [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/corpo_fuso_lettura_noto.txt`, da `corpo_fuso_lettura.py noto` *(sha1 dei byte `9901e2da`; `28` moduli timbrati su `28`, tutti committati e puliti)*. Uscita `0`, dalle `19:36:39` alle `19:39:00`.
+  - **KL:** le `73` righe per stato da `0` a `18000` sono uguali, carattere per carattere, a quelle di `due_corpi_fondo_v7.txt` *(`0` diverse)*;
+  - **KH:** `H` di `d1L/stato_018000` e' uguale AL BIT nella scena nuova e dopo il ricaricamento sul posto: `H 7.215889923838e+05`, `H_chi 1.652268885907e+04`;
+  - **KH-neg:** `H` di `stato_017750` e' `7.207497669506e+05`, diverso;
+  - **KHc:** `H_chi` dalla formula e' uguale a quello dello strumento.
+- **Un fatto che noto e non interpreto:** fra `k 17750` e `18000` `H` cambia di `+1.164e-03` relativo *(uno script dai due numeri sopra)*. **`H` non e' fermo su `250` tick.** E' la ragione per cui la carta lo legge come un andamento. La mia previsione «`H` fermo entro l'`1%` fra `18000` e `54000`» *(`50%`)* e' scritta prima, e resta com'e'.
+- **I DEVE dentro le corse sono tutti passati:**
+  - **S1:** gli stati a `k 30250`, `30500`, `30750` e `31000` sono uguali AL BIT a quelli di `d1T`;
+  - **S2:** gli stati a `k 0`, `250`, `500`, `750` e `1000` del giro `3r` sono uguali AL BIT a quelli di `giro_3`.
+- **L'avanzamento alle `19:39`:** S1 a `k 31250` *(`634 s` dalla partenza)*, S2 a `k 1000` del giro `3r` *(`452 s`)*.
+- **Il resto del pezzo 3** *(`corpo_fuso.txt`, il video v4)* e **il pezzo 4** *(la ricevuta)* vengono a corse chiuse.
