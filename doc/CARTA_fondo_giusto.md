@@ -662,3 +662,32 @@
     - **(mio, il controllo positivo sul sistema di riferimento) DEVE:** a `k 0` il baricentro di `rho_psi` di ciascuna meta' *(`y < 0` e `y >= 0` in `dxy`)* coincide entro `0.5` col baricentro della serie. **Se le coordinate dei pannelli fossero in un altro riferimento, questo controllo fallirebbe;**
   - **LA PREVISIONE, mia:** i due controlli passano *(`90%`)*; il video sta sotto i `5 MB` gia' a `1280x640` *(`80%`: sono `25` quadri soli)*.
   - **LA v2** *(scritta dopo il v1 illeggibile, `593dea51`; PRIMA di `anima_coppia_v2.py`)*: **cambia solo come si disegna**. I campi si colorano con `tripcolor` in `gouraud` sulla triangolazione dei nodi del riquadro, cosi' il pannello e' pieno; le `12` curve di livello di `chi` sono bianche con spessore `0.9`; in entrambi i pannelli un `+` segna i due baricentri della serie. **Dati, scale, controlli e formato restano quelli del v1.** Il video sovrascrive `anima_coppia.mp4`; il referto e' `anima_coppia_v2.txt`. **Il controllo in piu', mio:** guardo i quadri a `k 0`, `k 3250` e `k 6000` prima del commit.
+
+- **### [M1016] A0, LA CORSA LUNGA d1'' E IL VIDEO v3** *(DECISIONE DI LUCA, 2026-11-27 `10:16`, arrivata dalla posta, `0c25127e`; letta alle `10:18`; scritto PRIMA di `coppia_a0.py`)*:
+  - **LA DOMANDA DI LUCA:** «nelle parti finali i due oggetti sembrano svanire, e non capisco se e' un artefatto».
+  - **LE DUE IPOTESI E IL CRITERIO CHE LE SEPARA:**
+    - **(a) e' un artefatto di scala:** la scala dei colori e' fissa sul massimo di tutta la serie. Se la materia si allarga, il suo massimo cala e il quadro sbiadisce;
+    - **(b) la materia si disperde davvero.** Ma la norma di `psi` si conserva per costruzione: **se cala, e' un errore**;
+    - **il criterio e' la norma.** Se la norma e' ferma e `max rho` cala, la materia si e' solo allargata: vale (a).
+  - **S1, A0, a costo zero sui `25` stati di `M2034/coppia/d1`.** Per ogni stato:
+    - **(i) la norma** `N = somma |psi_h|^2`. **DEVE:** `|N(k)/N(0) - 1| < 1e-9` per ogni `k` *(relativo: la mia lettura di «ferma a `1e-9`»)*. **Se fallisce, FERMO: e' un errore, e si dichiara prima di tutto il resto;**
+    - **(ii)** `max rho_psi`, il suo nodo `(m1, m2)` e la sua posizione;
+    - **(iii) il numero di massimi locali**, cosi':
+      - la lisciatura: `s(i)` e' la media di `rho_psi` sul disco di raggio `2` attorno al nodo. Il disco ha `19` nodi *(gli offset di reticolo `(a, b)` con `|a A1 + b A2| <= 2`; il nodo e' `m1 L + m2`; periodico sul toro)*;
+      - **un massimo locale** e' un nodo con `s(i) >= s(j)` per ogni `j` del suo disco e con **`s(i) > 0.30 max s`** *(la soglia del `30%` va sul massimo della lisciatura dello stato)*;
+    - **(iv) il raggio della nube** `R = sqrt(somma rho r^2 / somma rho)`, con `r` misurato dal baricentro totale di `rho_psi`. Le coordinate sono `toro.scarti` dal `centro_coppia`, come nella v5 e nel video;
+    - **IL VERDETTO PER STATO:** **DUE CORPI** se i massimi sono `2`, **UNO** se e' `1`, **ALTRO (n)** se sono di piu'. **Il tick della fusione** e' il primo stato con UNO dopo uno con DUE.
+  - **I CASI NOTI:**
+    - **(K1)** `stato_000000`: DEVE dare `2` massimi, a una distanza entro `1` da `41.57`. La distanza fra due nodi del reticolo non coincide coi baricentri: e' la mia tolleranza;
+    - **(K2)** un oggetto solo, cioe' il giro 3. Uso `M0414/puntofisso_accoppiato/giro_3/stato_003000.npz`, l'ultimo stato del giro, centrato sul nodo del suo massimo. **DEVE dare `1` massimo.** Lo stato non e' nel mandato: la scelta e' mia.
+  - **S2, LA CORSA LUNGA d1''** da `stato_006000.npz` *(sha1 `aca74f48`)* per altri `12000` tick, fino a `k 18000`, stati ogni `250`, **UN processo**. `chi` e `pi` si prendono dallo stato. **(K0)** i primi `250` tick devono riprodurre al bit `6000 -> 6250` della stessa via: **lo stato a `6250` non esiste** *(d1' finisce a `6000`)*, quindi la carta di quel pezzo dira' come si sostituisce. **Il pezzo ha la sua carta, scritta prima di `due_corpi_fondo_v7.py`.**
+  - **S3, IL VIDEO v3** su `73` quadri a `6 fps`, con tre pannelli:
+    - `rho_psi` a scala FISSA;
+    - `rho_psi` a scala PER QUADRO;
+    - `chi`.
+    - In sovrimpressione: `k`, `d(k)` *(solo se A0 dice DUE CORPI, altrimenti «un corpo»)*, la norma, `max rho` e `R`.
+  - **S4:** **nessun verdetto su rimbalzo o orbita finche' A0 non e' fatto.** Dopo, i minimi si leggono solo sui tratti con DUE CORPI.
+  - **LE PREVISIONI, mie, prima:**
+    - la norma e' ferma *(`95%`)*: vale (a);
+    - A0 dice DUE fino a `k 2750` e UNO da `k 3000` o `3250` in poi *(`70%`)*. Ma a `k 6000` la nube allungata **potrebbe dare `2` massimi deboli sopra il `30%`** *(`30%`)*: in quel caso «DUE» non significa due corpi separati;
+    - `R` cresce dopo la fusione *(`80%`)*.

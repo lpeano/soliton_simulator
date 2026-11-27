@@ -28026,3 +28026,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - le tre ramificazioni sono pulite e spinte.
 - **LA COSA PIU' IMPORTANTE DI OGGI *(da misurare)*:** il video suggerisce che **d1' si fonde a `k 3250` e non rimbalza**. La lettura «minimo, poi massimo» di [M0106] va rifatta con A0 prima di qualunque corsa lunga.
 - **FERMO** fino al prossimo «leggi la posta».
+
+
+### 2026-11-27 10:24 -- [M1016] RICEVUTO (DECISIONE DI LUCA 10:16, letto alle 10:18); PEZZO 1: LA CARTA DI A0 (LA NORMA DEVE, I MASSIMI SOPRA IL 30% SU LA LISCIATURA DI RAGGIO 2, R DELLA NUBE), DELLA CORSA d1'' E DEL VIDEO v3 [[PROGETTO-MITOSI]]
+
+- **Il mandato:** A0 *(due corpi o una nube, e lo «svanire»: artefatto di scala o dispersione)*, poi la corsa lunga d1'' fino a `k 18000`, poi il video v3. Sei pezzi.
+- **La carta:** `doc/CARTA_fondo_giusto.md`, il seguito [M1016]. **Le mie scelte dentro S1:**
+  - la lisciatura si fa sul disco di `19` nodi, con offset di reticolo esatti;
+  - la soglia del `30%` va sul massimo della lisciatura;
+  - **K2** usa `giro_3/stato_003000.npz`.
+- **Le previsioni, mie:** la norma ferma *(`95%`)*; UNO da `k 3000`-`3250` *(`70%`)*; `R` cresce dopo la fusione *(`80%`)*.
+- **Il caso K0 della corsa:** lo stato a `6250` di d1' non esiste. Il pezzo 3 avra' la sua carta.
