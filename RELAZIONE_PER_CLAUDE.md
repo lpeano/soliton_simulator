@@ -28936,3 +28936,21 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 4. **Su C: restano** il vecchio repository (il rename e' da fare), `C:\Users\lpeano\solitonsimulator` e `C:\Users\lpeano\wt_t1`. **Sono a Luca.**
 
 **FERMO**, come dice il punto 5.
+
+
+### 2026-11-27 22:51 -- [M2245] (27/11) LETTA: DECISIONE DI LUCA 22:45 E 22:47 (le cinque letture, il merge lapse-u -> mitosi, il corpo fuso con le nascite, il «via» a [M-GM], la nascita nel vuoto con il lapse); IN ESECUZIONE [[PROGETTO-MITOSI]]
+
+- **La ricevuta:**
+  - **[M2245] (27/11):** letta alle 22:47 su comando di Luca («Leggi la posta.»). E' una DECISIONE DI LUCA e **si esegue.**
+  - **[M-GM]:** il «via» e' dato dentro [M2245] D, quindi la lettera ATTESA_M-GM diventa DECISIONE DI LUCA (22:45).
+  - **Il TODO:** `doc/TODO_prossima_sessione_2026-11-27.md` va allineato a `guardiano/CODA.md` (punto E).
+- **L'etichetta e' doppia:** [M2245] esisteva gia' il 24/11, per il vento del vuoto. `git log --grep` trova quei commit, ma **del mandato del 27/11 non e' fatto niente.** Nei commit lo scrivo «[M2245] (27/11)».
+- **Il task history**, scritto prima del lavoro: `doc/TASK_HISTORY/2026-11-27_m2245_cinque_letture_merge_mitosi.md`.
+- **Due scelte mie, dichiarate prima:**
+  1. **B prima di A.** Gli strumenti di A1-A3 stanno su mitosi e quelli di A4-A5 su lapse-u, e la carta delle cinque letture e' una sola. Se B fallisce, faccio A sui due rami separati e lo dichiaro.
+  2. **I collaudi di B2 col repository temporaneo su E:, non su C:.** La lettera dice C:, ma la DECISIONE DI LUCA delle 18:59, che e' successiva, dice «C: mai, ne' temp».
+- **Le premesse dal codice:**
+  - il nucleo e' diverso da `42638304` in 5 file su lapse-u e 9 su mitosi;
+  - lapse-u non ha toccato `primo_ordine/` da `d27805ac`, la base del merge precedente: **il merge dovrebbe lasciare il nucleo a 9 file;**
+  - mitosi e' 168 commit dietro lapse-u e 99 avanti.
+- **Le misure** (22:50:35): C: 25.06 GB liberi; E: 152.17 GB; impegnabile 31.77 GB liberi su 49.47. Nessuna corsa in giro, coda vuota.
