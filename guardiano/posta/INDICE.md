@@ -19,3 +19,4 @@
 | 2026-11-27_1214_M1214.md | DECISIONE DI LUCA (2026-11-27 12:14) | eseguito: la regola in CLAUDE.md; K0' v9 (omega 1e-12, 13:12); d1'' chiusa (18000); suite 67/67; A0 su 73 stati: da k 6250 un corpo solo (fusione) | lapse-u 54b00185, 7366a447, 9bdfea82 |
 | 2026-11-27_1519_M1519.md | DECISIONE DI LUCA (2026-11-27 15:19) | video v3 fatto; S1, S2 partite 15:48 e CADUTE 17:56 (impegnabile esaurito dal lavoro di Luca in parallelo); S1 a 31000, S2 a 2 giri -> [M1824] | lapse-u fcd8bdc0, 00c9ae0e, bec44202 |
 | 2026-11-27_1824_M1824.md | DECISIONE DI LUCA (2026-11-27 18:24) | da eseguire: la ripresa di S1 (da 30750) e S2 (terzo giro), con l'impegnabile letto prima; il referto dei giri 1-2 subito | — |
+| ATTESA_M-GM_esperimento_gravitomagnetico.md | ATTESA DI LUCA (scritto 2026-11-27 22:00) | NON si esegue: diventa decisione al «via» di Luca con l'ora; l'esperimento gravitomagnetico (W di Weyl, A dinamico sul modello intero, ramo u-dinamica) | — |
