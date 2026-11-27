@@ -28618,3 +28618,33 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(a)** una v2 di `corpo_fuso.py` che riprende S1 da `stato_031000` *(il K0 sul tratto `30750 -> 31000`, come K0'')* e S2 dal giro `3` *(`partenza_giro_3.npz`)*;
   - **(b)** rifare da capo, dopo aver liberato la memoria.
   - **In tutti e due i casi va prima capito chi occupa la memoria:** con `1.49 GB` impegnabili liberi, un rilancio cadrebbe di nuovo.
+
+
+### 2026-11-27 18:28 -- [M1824] LETTO; C: 0.03 GB LIBERI, IMPEGNABILE 11.63 GB SU 62.11 (SOPRA 8: SI PUO' LANCIARE); LA CARTA DELLA RIPRESA (S1 DA 30000, NON DA 30750: IL BUCO NELLA SERIE); IL PUNTO 2 IN CHAT SENZA ORA [[PROGETTO-MITOSI]]
+
+- **Prima di questo, alle `18:25`:** `git fetch` falli' con «No space left on device». C: aveva `0.024 GB` liberi, e gli oggetti git dei worktree su E: stanno in `C:\Users\lpeano\soliton_simulator\.git` *(`5.4 GB`)*. **In chat l'ho detto a Luca e non ho cancellato niente.** Alle `18:27` il fetch e' riuscito.
+- **La posta:** `[M1824]`, DECISIONE DI LUCA delle `18:24` *(`625021df`)*. `git log --all --grep "[M1824"` trova solo la posta: nessun pezzo era gia' fatto.
+- **Il messaggio di Luca in chat** porta due cose:
+  - il punto 1: leggere ed eseguire [M1824];
+  - **il punto 2, che e' gestione:** spostare il repository principale su E:.
+  - **L'ora del messaggio e' scritta «`hh:mm`»**, e anche lo spazio su C: e' un segnaposto *(«`N GB`»)*. **Per la regola [M2145] la gestione non esiste senza una riga di Luca CON L'ORA:** il punto 2 aspetta che Luca la confermi. Il punto 1 ha la sua ora, `18:24`, ed e' scritto senza gestione.
+- **Letti alle `18:27`** *(TODO 1 di [M1824])*:
+  - **C:** `0.03 GB` liberi. Il messaggio dice «C: ha ora N GB liberi», ma la misura non mostra spazio liberato;
+  - **la memoria impegnabile:** `11.63 GB` liberi su `62.11`, sopra la soglia di `8 GB`;
+  - **la RAM:** `9.96 GB` liberi su `34.13`;
+  - **E::** `162.83 GB` liberi.
+  - **Si rileggono subito prima del lancio.**
+- **La carta:** `doc/CARTA_fondo_giusto.md`, «3-unetvicies, il seguito. [M1824]».
+  - **S1 riparte da `stato_030000`, non da `030750`:** la serie parziale finisce a `k 30000`, e cosi' non resta un buco. La ripresa rifa' al bit gli stati gia' salvati fino a `31000`, e questo e' un controllo in piu'.
+  - **S2 riparte col giro `3` in `giro_3r`,** confrontato al bit con i quattro stati del giro `3` caduto.
+- **Il rischio:** con C: a `0.03 GB` anche un commit puo' fallire, perche' gli oggetti git vanno su C:.
+- **L'INTERRUZIONE, e il commit rifatto** *(DECISIONE DI LUCA `18:59`, punto 1)*: **questo paragrafo e la carta erano nello stage alle `18:28`, e il commit si e' interrotto alle `18:28:38`** mentre giravano i hook *(`committa3.py`, il processo `5712`; il log finisce dentro `_stage.py`)*. La sessione e' ripartita alle `18:56` e ha trovato:
+  - **nessun `index.lock`**, ne' in `.git` ne' in `.git/worktrees/wt_lapse_u`; HEAD `bec44202`, uguale a origin;
+  - **un `commit.lock` RESIDUO** nello scratchpad della sessione vecchia, col PID `5712`, non piu' vivo, e nessun `git.exe` vivo;
+  - **i paragrafi una volta sola** *(`grep -c`: `1` nella relazione, `1` nella carta)*; il disco uguale allo stage.
+  - **`committa3.py` ora gira da una copia su E:** *(`E:\soliton_lavoro\strumenti_cc`)*, con TMP su `E:\soliton_lavoro\tmp` e la radice obbligatoria *(`COMMITTA_RADICE`)*.
+- **LE MISURE DELLE `18:56:56`** *(`shutil.disk_usage`, `GlobalMemoryStatusEx`)*:
+  - **C:** `16.07 GB` liberi su `510.15` *(alle `18:27` erano `0.03`)*;
+  - **E::** `162.84 GB` liberi su `256.05`;
+  - **la memoria impegnabile:** `29.53 GB` liberi su **`49.47`**. **Il limite e' sceso da `62.11` a `49.47 GB`:** il file di paging e' piu' piccolo. Non so perche', e non l'ho verificato. **Luca, `18:59`: la soglia resta `8 GB` liberi, e il file di paging non si tocca;**
+  - **la RAM:** `16.05 GB` liberi su `34.13`.

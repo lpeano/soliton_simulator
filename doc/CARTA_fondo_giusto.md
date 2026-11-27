@@ -823,3 +823,24 @@
 - **C passa in S2 entro `3` giri** *(`40%`)*. Se non passa, e' piu' probabile D *(`|chi|` fermo e il respiro che resta)*.
 - **Il `w` dell'oggetto 2M, se c'e', sta sotto `4.5`** *(`65%`)*: a `k 12000` e `18000` il nucleo dei png e' compatto.
 - **Il suo `omega` sta sotto `0.078`** *(`60%`)*: dopo `k 6000` `omega` per meta' e per finestra sta fra `0.071668` e `0.080687` *(contato con uno script dal referto)*, e la mediana e' piu' bassa di `0.0833`.
+
+
+### 3-unetvicies, il seguito. [M1824] LA RIPRESA DI S1 E S2 *(DECISIONE DI LUCA, 2026-11-27 `18:24`, dalla posta, `625021df`; letta alle `18:27`; scritta PRIMA del codice)* [[PROGETTO-MITOSI]]
+
+- **La causa della caduta, secondo Luca:** il suo lavoro in parallelo, non il progetto. **Nessuna diagnosi su C:.**
+- **Il controllo prima del lancio** *(TODO 1)*:
+  - si leggono lo spazio libero su C: e la memoria impegnabile libera *(`GlobalMemoryStatusEx`)*, e si scrivono nella relazione e nelle note delle voci di coda, che finiscono nella riga APERTO del registro;
+  - **se l'impegnabile libero e' sotto `8 GB`, non si lancia: FERMO.**
+  - **Letti alle `18:27`:** C: `0.03 GB` liberi, impegnabile `11.63 GB` liberi su `62.11`.
+- **S1: una scelta mia, dichiarata prima.** Il mandato dice «da `stato_030750`». **Riprendo invece da `M1519/d1T/stato_030000`.**
+  - **Il motivo:** `serie_parziale.json` arriva a `k 30000` *(`1201` righe, `omega` `12000` tick: `18001..30000`)*. Partendo da `30750`, la serie e `omega` avrebbero un buco fra `30000` e `30750`. Partendo da `30000`, la ripresa ricostruisce gli stati gia' salvati a `30250`, `30500`, `30750` e `31000`.
+  - **K0 *(il caso noto)*:** da `stato_029750`, `250` tick. Lo stato deve essere uguale AL BIT a `stato_030000` in ogni chiave; la serie `29760..30000` uguale AL BIT a `serie_parziale.json`; `omega` dei tick `29751..30000` entro `1e-12` relativo. **K0-neg:** senza `geo.U`, lo stato deve essere diverso.
+  - **Nella corsa, un DEVE in piu':** gli stati a `30250`, `30500`, `30750` e `31000` uguali AL BIT a quelli della corsa caduta. Se uno non lo e', la corsa si ferma.
+  - **Dove:** `M1519/d1T_r`, da `k 30000` a `k 54000` *(`24000` tick)*. La lettura unira' `d1T` fino a `30000` e `d1T_r` dopo. `d1T` non si tocca.
+  - **Il nome:** il mandato scrive `M1519/S1`, ma la cartella vera e' `M1519/d1T` *(carta di [M1519])*.
+- **S2:** il giro `3` riparte da `M1519/puntofisso_2M/giro_2/partenza_giro_3.npz` *(`pi = 0`)*, con lo stesso `giro_pf`, e scrive in `puntofisso_2M/giro_3r`. Il giro `3` caduto *(`giro_3`, fino a `k 1000`)* resta dov'e' e non si usa.
+  - **Un DEVE in piu':** lo stato a `k 250, 500, 750, 1000` del giro `3r` uguale AL BIT a quello di `giro_3`. Il ciclo e' deterministico dalla stessa partenza.
+- **Il referto dei giri `1` e `2`, prima del lancio** *(`corpo_fuso_v2.py lettura_s2` -> `corpo_fuso_s2_giri12.txt`)*:
+  - per giro: `P`, la fonte di `P`, i picchi, `max|chi|` per finestra, `w` medio e respiro, la profondita' media, `omega` medio, per finestra di `500`;
+  - **il criterio C fra il giro `1` e il giro `2`** *(`max|chi|` entro il `10%`, respiro sotto il `10%`)*.
+  - **Nessun verdetto S3:** il verdetto arriva dopo il giro `3` e dopo S1.
