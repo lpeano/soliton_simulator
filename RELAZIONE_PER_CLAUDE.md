@@ -28277,3 +28277,26 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - nessuna corsa e' da lanciare.
 - **Un limite, dichiarato:** la prova non ha un caso che DEVE fallire. Controlla che i percorsi esistano, non il codice di `main()`.
 - **Resta A3** *(la temp dei collaudi su E:, con nessuna cartella `h_*` su C: dopo un collaudo)* insieme alla suite `67/67`. **Le lancio quando K0' (v9) chiude.**
+
+
+### 2026-11-27 12:13 -- [M1107] B5d: IL TENTATIVO 1 (v9) RIMETTE A POSTO LO STATO: K0' DA' LO STATO A k 6000 AL BIT IN TUTTE LE 11 CHIAVI, E LA SERIE AL BIT; MA omega NON E' AL BIT: K0' FALLISCE SU 1 DEVE SU 5 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v9_noto.txt` *(`due_corpi_fondo_v9.py noto`, `c3cbcf3e`)*, uscita `1`.
+- **Gli esiti:**
+
+  | prova | esito |
+  |---|---|
+  | la carica | PASSA al bit |
+  | **lo stato a `k 6000`** | **PASSA AL BIT, in ogni chiave (`11`)** |
+  | **la serie `5760..6000`** | **PASSA AL BIT** |
+  | **`omega` dei tick `5751..6000`** | **### FALLISCE** |
+  | K0'-neg | PASSA *(diverso, come deve)* |
+
+  I tempi: `181 s` e `184 s`.
+- **LA LETTURA:** **`scrivi_U` dopo la carica era la chiave.** Il passo, che legge e scrive lo stato, ora riproduce d1' al bit per `250` tick.
+  - **`omega` non entra nel passo:** e' `-arg <psi_prima|psi_dopo>` calcolato con `np.vdot` sulle mezze-spighe di ogni meta', per il diario. **Se lo stato e' al bit a ogni tick** *(la serie lo e' ogni `10` tick, lo stato a `6000`)*, **una differenza in `omega` non viene dallo stato:** viene da come si calcola `omega`.
+  - **Il sospetto:** `np.vdot` usa BLAS, e l'ordine della somma puo' cambiare l'ultimo bit. **E' un'ipotesi, non misurata.**
+- **COSA FACCIO, dichiarato prima:** `k0_omega.py`, cioe' la stessa ripresa della v9 *(`250` tick)*, e per `omega` il massimo di `|differenza|`, il massimo relativo e il numero di tick diversi. **Non e' un tentativo di correzione** *(lo stato e' gia' corretto)*: misura quanto vale lo scarto.
+  - **Cosa decide:**
+    - **se lo scarto relativo e' sotto `1e-14`**, e' l'ultimo bit del calcolo di `omega`, e la corsa riprodurrebbe d1'. **Ma il DEVE su `omega` AL BIT l'ho scritto io nella carta, e cambiarlo dopo aver visto il numero e' una lettura a posteriori: decide Luca;**
+    - **se lo scarto e' piu' grande**, c'e' ancora qualcosa da capire, e si va al tentativo 2.
