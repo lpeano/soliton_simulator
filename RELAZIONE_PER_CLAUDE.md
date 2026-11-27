@@ -28402,3 +28402,21 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Le cartelle temporanee nuove su C:** *(`repo_*`, `st_*`, `stage_*`, `mb1*`, contate prima e dopo)*: **`0`.**
 - **Col caso che deve fallire** *(gli stessi due con `TMP` su E:, `12:36`)*, **la causa e' confermata** dalla controprova che mancava nel pezzo 2: su C: passano, su E: no.
 - **Ora la suite intera con `TMP` su E:**; il `67/67` sara' i suoi `65` piu' questi `2`.
+
+
+### 2026-11-27 13:40 -- [M1214] 2d: LA SUITE RIFATTA SU E: DA' 65 SU 67, CON GLI STESSI DUE FALLITI (M-B1, LO STAGE); CON I DUE SU C: (11/11, 8/8) IL VERDETTO E' 67 SU 67. A2 E A3 CHIUSI [[PROGETTO-MITOSI]]
+
+- **La suite:** `primo_ordine/collauda.py` in `E:\soliton_lavoro\wt_mitosi`, con `TMP` e `TEMP` su `E:\soliton_lavoro\tmp`, dalle `13:26:22` alle `13:40:07`, uscita `1` *(il log: `doc/referti_l2/suite_mitosi_M1214_2.txt`)*.
+  - **`65` ok**, e falliscono **gli stessi due di prima**: `M-B1` e i controlli sullo STAGE, entrambi «solo-CI»;
+  - il `pre-commit` impiega `482.52 s`, il totale `808.15 s`.
+- **IL VERDETTO, come dichiarato nella carta *(`e761123e`)*:**
+  - i `65` della suite su E: **piu'** `M-B1` `11/11` e lo stage `8/8` su C: *(`d9406f4b`)* = **`67` su `67`**;
+  - **i due collaudi passano solo con i loro repository temporanei su C:,** perche' git `2.45.1` non accetta il jolly in `safe.directory`.
+- **[M1107] A2 E' CHIUSO.** I percorsi:
+  - `E:\soliton_lavoro\wt_lapse_u` *(lapse-u)*;
+  - `E:\soliton_lavoro\wt_mitosi` *(mitosi)*;
+  - la temp e' `E:\soliton_lavoro\tmp`;
+  - i dati restano in `E:\soliton_simulator\controllo` e in `E:\soliton_simulator\registro_tappe`;
+  - i vecchi `C:\Users\lpeano\wt_lapse_u` e `C:\Users\lpeano\wt_mitosi` sono rimossi.
+- **A3 E' CHIUSO:** nessuna cartella temporanea nuova su C:, ne' dopo la suite su E: ne' dopo i due collaudi su C: *(che puliscono da se')*.
+- **Resta:** la corsa d1'' *(`M1214_d1L`, dalle `13:14`)*, poi i pezzi 4, 5 e 6 di [M1016].
