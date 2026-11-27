@@ -28077,3 +28077,15 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   | io, nel TODO | «nube sola dopo `3250`» *(`75%`)* | **SBAGLIATA** |
 
 - **### UN ERRORE MIO, DI NUOVO LE ORE:** il titolo del paragrafo del pezzo 1 dice «`10:24`», ma `date` dava `10:18:48` prima del commit *(`cdcffb1a`)*. **E' lo stesso errore che avevo appena corretto.** Da ora leggo l'ora con `date` prima di scrivere il titolo, come per questo *(`10:22:58`)*.
+
+
+### 2026-11-27 10:31 -- [M1016] PEZZO 3b: K0' CADE PRIMA DEL PRIMO TICK (L'ASSERT DEL NUCLEO): HO COPIATO IL CICLO DI due_corpi_fondo.py, CHE CADDE PER LA STESSA RAGIONE IN [M2330]; LA VIA VERA E' IL CICLO DELLA v2. ERRORE MIO; LA CORREZIONE IN v8 [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/due_corpi_fondo_v7_noto.txt`, da `due_corpi_fondo_v7.py noto` *(`af681e14`)*, codice d'uscita `1`. Sul referto ci sono solo le righe stampate prima della caduta; il traceback e' qui sotto.
+- **La carica PASSA AL BIT:** la riga della serie a `k 5750` = `serie.json` *(`[5750, -1.1868572590842095, -12.159724488546047, ...]`)*.
+- **Poi la caduta, prima del primo tick:** `torneo_tenuta.nucleo()`, chiamato dentro `Ripresa.gira`, solleva `AssertionError: pezzi NON e' quello del nucleo: FERMO`. **Dentro la scena, `pezzi` e' gia' avvolto.**
+- **L'ERRORE E' MIO, E ERA GIA' SCRITTO:**
+  - ho copiato il corpo di `due_corpi_fondo.ciclo`. **Quel ciclo cadde per la stessa ragione in [M2330]**, ed e' per questo che esiste `due_corpi_fondo_v2.py` *(«il nucleo preso prima della scena»)*;
+  - **d1' e' girata col ciclo della v2**, che `D.ciclo` contiene gia' dopo l'import, e `D.avvia` riempie il nucleo prima della scena;
+  - **dovevo leggere la catena degli import fino in fondo, non solo il modulo base.**
+- **LA CORREZIONE** *(`due_corpi_fondo_v8.py`, un commit a se')*: `Ripresa.gira` chiama **il `D.ciclo` vero** *(quello della v2)* con un `dopo` che porta il tick a quello assoluto, `k_da + kk`. Il residuo di Gauss cade negli stessi tick, perche' `k_da` e' multiplo di `250` *(asserito)*. **Il resto della v7 non cambia;** K0' e K0'-neg si rifanno.
