@@ -52,3 +52,5 @@ I numeri 1–222 sono nelle sessioni di settembre–novembre; il dettaglio non �
 - n.256 (2026-11-27 00:24) — [M2034] criterio C: w entro il 5% per finestra di 500, dodici ore dopo aver dichiarato (D di [M0414]) che il respiro di w è un modo normale a ±20% con periodo 2500. Il riferimento fallisce il proprio criterio (0 su 12). Corretto in [M0024] (w sul periodo).
 - n.257 (2026-11-27 01:06) — [M0024] D2': «nello stesso verso» al posto di «nello stesso intervallo»: una caduta 80 volte la deriva, nel verso opposto alla deriva, è finita «non distinguibile». CC ha applicato alla lettera e segnalato. Corretto in [M0106].
 - n.258 (2026-11-27 01:06) — [M0024] K4': soglia |Delta H| < 1e-12 con H del vuoto puro 1,2e-10: sotto il pavimento dell'arrotondamento; CC l'aveva previsto. Corretto in [M0106] (la norma come criterio).
+- n.259 (2026-11-27 14:33) — Il video didattico dell'esagono fatto sul nido d'ape (3 vicini) invece che sul reticolo triangolare (6 vicini, la moneta a sei vie, A2 = (-1/2, sqrt3/2)). Corretto da Luca, rifatto.
+- n.260 (2026-11-27 15:22) — git ls-tree -l sul clone senza blob: l'errore n.245 rifatto identico. Fermato dopo 120 s.
