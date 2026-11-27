@@ -306,3 +306,54 @@
 **LE PREVISIONI:**
 - **del guardiano:** nessuna nascita (`55%`); se nasce, sui fianchi;
 - **mia:** **NON NASCE** (`65%`). Il lapse dipinto e' statico, e in un vuoto senza materia `Theta` cresce con le differenze di `cs` fra i due estremi di un arco, che sono piccole (il gradiente `G20` per un arco). Se nasce, nasce **sui fianchi**, dove il gradiente di `N` e' massimo (`70%` condizionato).
+
+
+## G, «A E' GIA' LA FASE DI phi?»: LA LETTURA INVARIANTE SULLE PLACCHETTE *([M0037-28], DECISIONE DI LUCA 2026-11-28 `00:37`; scritta PRIMA dello script)* [[PROGETTO-MITOSI]]
+
+**L'etichetta:** la lettera e' [M0037]. L'etichetta era gia' usata (`[M0037-03]`), quindi la scrivo **[M0037-28]**, per la regola di Luca delle 23:14.
+
+**Le definizioni** (quelle della lettera):
+- **`f = phi_h.reshape(m, 2)`**;
+- **`theta_a = arg(f[a,1] conj f[a,0])`**, ridotto in `(-pi, pi]`. Gli archi con `min |f[a,.]| < 1e-6` si scartano, e si contano;
+- **`Phi_p = wrap(somma_c S[p,c] theta[P[p,c]])`**: la circolazione per placchetta;
+- **`eB_p = e B()[p]`**: `P`, `S` e `B()` vengono dal campo `_u1_prototipo.Campo` costruito da `porto.campi` sulla scena del triangolo, con l'`A` e l'`E` dello stato;
+- **mai A nudo contro theta nudo.**
+
+**LE DICHIARAZIONI (G-0):**
+- **(a) `hop_phi` NON usa `geo.U`.**
+  - `flussi_parziali.hop_phi` chiama due volte `_hop_phi_mezzo` e poi moltiplica per `conj(z_arco)` sulle due estremita';
+  - `_hop_phi_mezzo` fa `v = phi.reshape(m, 2)` con `alpha I + beta S`, dove `S` e' la permutazione pura («il vuoto e' NEUTRO»);
+  - `z_arco` dipende solo da `s_arco` (`theta = pi s_arco f`);
+  - nel motore `_spostamento_scalare` chiama `FP.hop_phi` («senza trasporto»). **Il test ha il senso che dice la lettera.**
+- **(b) L'ordine delle estremita':** `_hop_phi_mezzo` usa `phi.reshape(m, 2)` e il motore ha `inc.nodo = [ii_0, jj_0, ii_1, jj_1, ...]`, cioe' `ii = nodo[0::2]` e `jj = nodo[1::2]`. **Quindi `f[a,0]` sta all'estremita' in `ii[a]` e `f[a,1]` in `jj[a]`.** `phi_h` ha `157464 = 2 x 78732` valori.
+- **(c) Gli stati** (`max |A|`, `rms A`, misurati):
+
+  | stato | `max abs(A)` | `rms A` |
+  |---|---|---|
+  | (i) `M0414/puntofisso_accoppiato/giro_3/stato_006000` (l'ultimo; `partenza_giro_4` da' gli stessi numeri) | `1.0317e+03` | `1.8076e+02` |
+  | (ii) `M2034/coppia/d1/stato_003250` | `8.2738e+01` | `1.7447e+01` |
+  | (ii) `M2034/coppia/d1L/stato_018000` | `5.7796e+02` | `1.0569e+02` |
+
+  - **Per (ii) la lettera chiede `k 3230`, che non e' salvato:** gli stati sono ogni 250. **Uso `3250`**, che e' dentro l'urto (A0 a 3000 e 3500 dice ALTRO, a 3250 UNO), e lo dichiaro.
+  - **(iii) Il vuoto fresco senza oggetto** e' `c phi_v` della scena, con `A = 0`. **E' anche il caso noto K3** («campo nullo»); su di lui si stampa comunque `rms Phi`.
+- **(d) LA MIA PREVISIONE:** **SI' al `20%`.**
+  - `phi` non sente `U`, mentre `A` ha per sorgente la corrente di `psi`. Una somiglianza puo' passare solo per `psi`, che sente tutti e due: `phi` lo sente attraverso `CAMM-MATERIA-VUOTO`, `A` attraverso la sorgente.
+  - Il vento del vuoto e' radiale (A5), mentre la circolazione `B` di una corrente radiale e' piccola, quindi mi aspetto correlazioni deboli.
+  - Sul vuoto fresco: `rms Phi` **zero entro l'arrotondamento** (`60%`), perche' `phi_v` e' uniforme fra le estremita' di un arco. E' contro la previsione del guardiano.
+
+**I casi noti (prima di ogni numero sugli stati):**
+- **K1:** le estremita' di ogni nodo per `e^{i chi_v}` a caso lasciano `Phi_p` invariato, modulo `2 pi`, entro `1e-10`;
+- **K2:** `A -> A + (chi_j - chi_i)` lascia `B` invariato entro `1e-12`;
+- **K3:** con `A = 0` lo script dice «campo nullo» e non calcola la correlazione;
+- **K4:** su 200 permutazioni, `|Spearman| < 0.1` almeno nel 95% dei casi.
+
+**Le letture, in quest'ordine:**
+1. per stato, PRIMA `max abs(eB)`, `rms eB`, `max abs(Phi)`, `rms Phi` e gli archi scartati;
+2. poi Pearson e Spearman su tutte le placchette e per anello di 8 dal centro di massa di `rho_psi`. La posizione di una placchetta e' la media degli scarti dei nodi `ii` dei suoi tre archi;
+3. il nullo con 200 permutazioni (media e 2 sigma);
+4. «entro 2 raggi»: `R = sqrt(somma rho r^2 / somma rho)`, come A0.
+
+**IL VERDETTO** (le soglie sono di Luca):
+- **SI'** se `|Spearman| > 0.5` entro `2 R`, fuori dalle 2 sigma del nullo, in almeno 2 stati su 3;
+- **NO** se `|Spearman| < 0.2` in tutti;
+- **ALTRO** in mezzo, oppure se il segno cambia fra gli anelli, e si scrive dove.
