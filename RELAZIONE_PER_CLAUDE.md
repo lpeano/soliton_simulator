@@ -28585,3 +28585,14 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **K5 e K6** passano *(`P 2500`; un picco solo da' il ripiego; la media di un `chi` costante e' esatta al bit)*.
 - **Un'osservazione che non interpreto:** la massa di `stato_018000` *(`1990023.8506`)* supera di `2.064`, cioe' `1.037e-6` relativo, il doppio della massa di un oggetto nel meta *(`2 x 995010.8931 = 1990021.7863`)*. Dentro d1' la norma e' ferma a `5e-14`. **La differenza c'era quindi gia' alla composizione della coppia, non nasce nella corsa.** Non cambia S2: la massa di riferimento e' la norma dello stato.
 - **La coda:** in `doc/referti_l2/coda_m1446.json` ci sono due voci nuove, `M1519_S1` *(`corpo_fuso.py corsa`)* e `M1519_S2` *(`corpo_fuso.py puntofisso`)*, entrambe con priorita' `1`. La lista passa da `238` a `240` voci. **Il lanciatore parte dopo questo commit**, dalla cartella nuova.
+
+
+### 2026-11-27 15:48 -- [M1519] S1 E S2 LANCIATE DALLA CODA (15:48:28 E 15:48:30), DUE PROCESSI; LE VOCI APERTO NEL REGISTRO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** e' `coda_m1446.py`, partito alle `15:48:26` da `E:\soliton_lavoro\wt_lapse_u` con TMP su E:.
+  - **`M1519_S1`** *(`corpo_fuso.py corsa`)*: in corsa dalle `15:48:28`, pid `18004`, `7.83 GB` liberi al lancio.
+  - **`M1519_S2`** *(`corpo_fuso.py puntofisso`)*: in corsa dalle `15:48:30`, pid `16008`, `7.74 GB` liberi.
+  - **Le due righe APERTO** in `doc/REGISTRO_CORSE.md` sono in questo commit.
+- **Lo spazio su E:** `164.1 GB` liberi prima del lancio.
+- **La stima, dal tempo di d1''** *(12000 tick in `6254 s`, un processo solo)*: S1 circa `5.2 h`, S2 circa `2.6 h`, di piu' con due processi insieme.
+- **Il resto di [M1519]** *(TODO 3: le letture, `corpo_fuso.txt` col verdetto S3, il video v4; TODO 4: la ricevuta)* **viene a corse chiuse.**
