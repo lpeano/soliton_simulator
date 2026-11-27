@@ -29011,3 +29011,18 @@ Su P2, come semplice lettura e non come esito: il respiro di `R` in S1 scende so
 - il merge resta in corso, non committato, in `wt_mitosi`;
 - non tocco ne' `csv/_stage.py` ne' `primo_ordine/`. Anche la correzione dello stage, che non ha conflitti, la faccio insieme a M-B1, nello stesso giro della suite rifatta;
 - A, C, D, F ed E sono fermi.
+
+
+### 2026-11-28 00:44 -- [M0037] LETTA (DECISIONE DI LUCA 2026-11-28 00:37): G, «A E' GIA' LA FASE DI phi?», LA LETTURA INVARIANTE SULLE PLACCHETTE; SI FA A FINE PASSO, IN PARALLELO A C, F E D-P3 DI [M0026] [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0037] letta su comando di Luca («Leggi post.»). E' una DECISIONE DI LUCA (00:37). `git log --all --grep "[M0037"` trova solo il commit della posta: G non e' fatto.
+- **Che cosa chiede:**
+  - **G-0, la carta** (sezione G in `doc/CARTA_mitosi.md` sul ramo mitosi), con quattro dichiarazioni:
+    - (a) se `hop_phi` usa `geo.U`; **se si', FERMO**;
+    - (b) l'ordine delle estremita' di `phi_h`;
+    - (c) quali stati hanno `max |A| > 0`;
+    - (d) la mia previsione;
+  - **G-1:** `fase_vuoto_vs_A.py`, che confronta `Phi_p` (la circolazione dell'angolo d'arco di `phi`) con `e B_p` sulle placchette. Prima i casi noti K1-K4 e le grandezze, poi Pearson e Spearman per anello e il nullo con 200 permutazioni;
+  - **G-2:** il verdetto con le soglie di Luca.
+- **Dove sono:** i casi noti di C (`corpo_fuso_mitosi.py noto`) stanno girando; la carta e lo script di F sono scritti e aspettano che il referto di C sia committato. **G si fa al prossimo «fine passo»:** dopo il commit dei casi noti di C e di F, e prima del lancio delle corse.
+- **Questa ricevuta e' su lapse-u** perche' nel worktree mitosi c'e' un referto non tracciato ancora in scrittura (`H-NON-TRACCIATI`). Il lavoro di G e' su mitosi.
