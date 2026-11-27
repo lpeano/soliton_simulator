@@ -28313,3 +28313,32 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
 - **Gli altri punti di [M1214] sono gia' in corso:**
   - **1.** K0' con la v9 e' gia' girato: lo stato e la serie sono AL BIT, `omega` no *(`e91d7462`)*. **La misura dello scarto di `omega` e' in corso** *(`k0_omega.py`, `e2d08151`)*;
   - **2.** la suite della mitosi si fa quando si e' chiusa la misura.
+
+
+### 2026-11-27 12:22 -- [M1107] B5f: LO SCARTO DI omega E' ALL'ULTIMO BIT (MAX 7.5e-15 RELATIVO, 42 ULP), CON LO STATO AL BIT: IL CALCOLO DI omega (np.vdot) ARROTONDA DIVERSAMENTE DA IERI; IL DEVE SU omega E' MIO, E DECIDE LUCA [[PROGETTO-MITOSI]]
+
+- **Il referto:** `doc/referti_l2/k0_omega.txt`, prodotto da `k0_omega.py` *(`e2d08151`)*, uscita `0`.
+- **I NUMERI:** **`243` tick diversi su `250`** per ciascun corpo.
+
+  | corpo | max `|d|` | max relativo | max in ulp |
+  |---|---|---|---|
+  | 1 | `5.829e-16` | **`7.456e-15`** | `42` |
+  | 2 | `5.274e-16` | `6.756e-15` | `38` |
+
+- **Il tick `5751`, gli stessi due vettori:**
+
+  | corpo | `np.vdot` | `vdot` su copie | la somma esplicita | `serie.json` |
+  |---|---|---|---|---|
+  | 1 | `0.07953177315836567` | uguale | `...568` | `...574` |
+  | 2 | `0.07959303476640167` | uguale | uguale | `...144` |
+
+- **LA LETTURA:** **il passo riproduce d1' al bit** *(lo stato in `11` chiavi su `11`, la serie)*. **`omega` no, ma lo scarto e' all'ultimo bit**: sotto la soglia di `1e-14` che avevo dichiarato in B5d.
+  - **La sua origine:** il valore di `serie.json` e' diverso da tutti e tre quelli calcolati oggi sugli stessi dati, quindi **ieri `np.vdot` ha arrotondato in un altro modo** *(l'ordine della somma in BLAS, che puo' dipendere dall'allineamento in memoria o dai fili)*. Oggi, sugli stessi dati, `vdot` e la somma esplicita differiscono gia' di `1` ulp.
+  - **`omega` non torna nel passo,** quindi lo scarto non si propaga: non cresce *(max `42` ulp in `250` tick)*.
+- **QUINDI:**
+  - **il tentativo 2 non ha niente da correggere nel salvataggio.** Lo stato e' completo, con `U` rifatta dalla `A`;
+  - **il DEVE «`omega` AL BIT» l'ho scritto io nella carta** *(il mandato chiedeva lo stato al bit, `6000 -> 6250`)*. **Allentarlo dopo aver visto il numero e' una lettura a posteriori, e decide Luca.**
+- **LA MIA RACCOMANDAZIONE:**
+  - **accettare K0' sullo stato e sulla serie al bit** *(e' il K0 del mandato, spostato a `5750`)*, con `omega` entro `1e-14` relativo, dichiarato come scelta fatta dopo il numero;
+  - **e lanciare d1'' con la v9.** E' la strada piu' corta: **circa `2.7` ore**, contro le circa `4` di B6.
+- **In attesa:** la suite della mitosi *(il punto 2 di [M1214])*, che non dipende da questa scelta.
