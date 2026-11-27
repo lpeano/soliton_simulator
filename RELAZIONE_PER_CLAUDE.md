@@ -28360,3 +28360,10 @@ for nome, camp in (("F3", c3 + cc), ("F0", cp + cg)):
   - **(a)** un'eccezione `safe.directory` col jolly sulla sola cartella temporanea *(`E:/soliton_lavoro/tmp/*`)*. **Luca ha escluso il jolly per i worktree:** chiedo se vale anche qui;
   - **(b)** solo per quei due collaudi, la cartella temporanea su C: *(che ora ha `4.5 GB` liberi)*, dichiarata. **Contraddice A3** per quei due;
   - **(c)** lasciare la suite a `65/67` su E: e dichiarare i due collaudi «solo-CI» come non verificabili in locale. **Sconsiglio (c):** sono quelli che provano il `pre-commit`.
+
+
+### 2026-11-27 12:39 -- [M1214] 2, CORREZIONE: IL «RESIDUO» h_* SU E: NON ESISTE: ERANO I MIEI DUE FILE h_prima.txt E h_dopo.txt, PRESI DAL PATTERN h_*; LE CARTELLE h_* SU E: SONO 0 [[PROGETTO-MITOSI]]
+
+- **L'errore e' mio** *(il paragrafo precedente, `a14a39a8`)*: ho contato le `h_*` di `E:\soliton_lavoro\tmp` col pattern `h_*`, che prende anche i file `h_prima.txt` e `h_dopo.txt` scritti dallo stesso comando. **`1` prima e `2` dopo erano quei due file.**
+- **Le cartelle `h_*` su E: sono `0`** *(`ls -d .../h_*/`)*. **Quindi A3 e' pulito su C: e su E:**, e non resta nessun residuo.
+- **E' la trappola gia' scritta nella nota «misurare col caso nullo»:** un conteggio vuole un controllo di che cosa conta.
