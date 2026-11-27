@@ -133,10 +133,15 @@ def main():
     y0 = float(DH.mean()) + float(DH.std()) * rng.standard_normal(len(n))
     v0 = verdetto(n, y0)
     esito("(K2) dati sintetici costanti + rumore (sigma = std dei DH, seme 20261127): COSTANTE", v0[0] == "COSTANTE", "b %+.4e +- %.4e" % (v0[1][1], v0[2][1]))
+    # ### (K2b, K2c) la cura di 08cf4e55: un test a 2 sigma su UN seme fallisce 1 volta su 20 per costruzione
     b_vera = 0.01
-    y1 = 3.0 + b_vera * n + 0.5 * rng.standard_normal(len(n))
-    c1, s1 = fit(n - n.mean(), y1, 1)
-    esito("(K2) pendenza nota %.3g: ritrovata entro 2 sigma" % b_vera, abs(c1[1] - b_vera) < 2.0 * s1[1], "b %+.6e +- %.2e" % (c1[1], s1[1]))
+    c1, _ = fit(n - n.mean(), 3.0 + b_vera * n, 1)
+    esito("(K2b) pendenza nota %.3g SENZA rumore: ritrovata entro 1e-9 relativo" % b_vera, abs(c1[1] / b_vera - 1.0) < 1e-9, "b %+.12e" % c1[1])
+    dentro = 0
+    for _ in range(200):
+        c1, s1 = fit(n - n.mean(), 3.0 + b_vera * n + 0.5 * rng.standard_normal(len(n)), 1)
+        dentro += abs(c1[1] - b_vera) < 2.0 * s1[1]
+    esito("(K2c) la copertura: su 200 semi |b - b_vero| < 2 sigma in una frazione fra 0.90 e 0.99", 0.90 <= dentro / 200.0 <= 0.99, "%d su 200" % dentro)
     # ### la densita' locale
     print("-" * 130)
     ks_s = np.array([k for k, _ in S])
