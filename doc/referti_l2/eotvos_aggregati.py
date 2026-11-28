@@ -143,6 +143,8 @@ def noto():
         for q, (y, m) in enumerate(zip(info["y_i"], info["m_i"])):
             print("    il francobollo %d: y %.6f (y - y_c %+.6f), la massa %.6e; dN/dy / dN/dy(y_c) %.6f" % (q, y, y - info["y_c"], m, float(dNdy(y, info["y_c"], A, Ly) / dNdy(info["y_c"], info["y_c"], A, Ly))))
         print("### G_agg %.12f (la media pesata con le masse del gradiente sulle posizioni dei sei francobolli); G_M 1 a k 0" % G_agg)
+        rap = [float(dNdy(y, info["y_c"], A, Ly) / dNdy(info["y_c"], info["y_c"], A, Ly)) for y in info["y_i"]]
+        print("### LA MAREA ([M1013]): i francobolli sentono da %.4f a %.4f del gradiente al centro; il test misura una MEDIA su un corpo esteso" % (min(rap), max(rap)))
         psi = Z["st"]["psi_h"]
         G = {}
         for nome, V, F in (("destro", info["destro"], FASI_D), ("sinistro", info["sinistro"], FASI_S)):
@@ -151,8 +153,11 @@ def noto():
             G[nome] = (gi["R"], geo.j_theta(geo.psi(psi)))
             print("    %s: il giro a R %+.4f (componente %d), J_theta %s" % (nome, gi["R"], g, ["%+.10e" % x for x in G[nome][1]]))
         dj = max(abs(a + b) for a, b in zip(G["destro"][1], G["sinistro"][1]))
-        esito("(K1) a k 0: il destro +1, il sinistro -1, J_theta del sinistro = -J_theta del destro entro 1e-9",
-              abs(G["destro"][0] - 1) < 0.1 and abs(G["sinistro"][0] + 1) < 0.1 and dj < 1e-9, "giri %+.4f %+.4f; max |J_s + J_d| %.3e" % (G["destro"][0], G["sinistro"][0], dj))
+        # ### [M1013] DECISIONE 3 (Luca 10:13): K1 RIDOTTO al giro; J_theta per anello si STAMPA, senza verdetto
+        esito("(K1) a k 0: il giro del destro +1 e del sinistro -1, entro 0.1 ([M1013]: K1 ridotto)",
+              abs(G["destro"][0] - 1) < 0.1 and abs(G["sinistro"][0] + 1) < 0.1, "giri %+.4f %+.4f" % (G["destro"][0], G["sinistro"][0]))
+        print("  J_theta per anello (STAMPATA, nessun verdetto): il destro %s; il sinistro %s; max |J_s + J_d| %.3e" % (
+            ["%+.4e" % x for x in G["destro"][1]], ["%+.4e" % x for x in G["sinistro"][1]], dj))
         q_top = round(G["destro"][0]) + round(G["sinistro"][0])
         rho = np.bincount(np.asarray(Z["mot"].inc.nodo), weights=np.sum(np.abs(psi) ** 2, axis=1), minlength=Z["n"])
         esito("(K2) la carica TOPOLOGICA dell'aggregato (la somma dei giri) = 0", q_top == 0, "%+d; e somma rho %.6e (la massa: NON zero); la sorgente di Gauss somma %.3e (zero per costruzione)" % (
