@@ -29709,3 +29709,7 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **La ricostruzione in blocco del grafo, del motore e del campo orientato da uno stato cresciuto e' quindi esatta.**
 
 **La coda:** `M0026_C_R3` *(`corpo_fuso_mitosi.py ripresa`, priorita' 0)*. L'impegnabile alle 11:25:46 e' di 30.75 GB liberi su 49.47 *(soglia 8)*; C: ha 24.21 GB liberi. **Il DEVE della corsa:** le righe fino alla 651 uguali al log vecchio, altrimenti FERMO *(uscita 1)*; alla 652 la riga «R3: scartati i lati ...».
+
+## [M1056] LA RIPRESA C-2 PARTITA: m1446-M0026_C_R3 APERTA DAL LANCIATORE *(scritto alle 2026-11-28 11:28)* [[PROGETTO-MITOSI]]
+
+La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `controllo/M1446/log/M0026_C_R3.txt`, gli stati vanno in `M0026/C_R3`. **Durante la corsa non si toccano** `corpo_fuso_mitosi.py`, `mitosi_regola_v2.py` e i moduli che importano. Il video *([M1020])* e H-1 *([M1058])* stanno in file nuovi che li importano soltanto.
