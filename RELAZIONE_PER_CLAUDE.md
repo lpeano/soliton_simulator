@@ -29671,3 +29671,19 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 **Le corse M e agg NON vanno in coda:** la lettera le vuole DOPO la ripresa di C, che aspetta la scelta R1/R2/R3.
 
 **Un errore mio:** il commit `e92c5091` doveva aggiornare anche la docstring di K1, ma la modifica non e' entrata *(il file era cambiato dopo la mia lettura)*. La docstring dice ancora «`J_theta` ... entro `1e-9`». La correggo in un commit a se', dopo questo referto.
+
+## [M1056] [M1020] [M1058] LETTE (DECISIONI DI LUCA 10:56, 10:20, 10:58-10:59): R3 PER IL FLIP ILLEGALE E LA RIPRESA DI C; IL VIDEO DI C; LA NASCITA A COPPIA IN ANTIFASE, PRIMA IL CONTO H-1 *(scritto alle 2026-11-28 11:04)* [[PROGETTO-MITOSI]]
+
+**La posta** *(guardiano `066e045f`, `f711b008`, `d8fdb104`)*. Idempotenza: `git log --all --grep` trova SOLO la posta.
+
+**I tre mandati:**
+- **[M1056] sostituisce la DECISIONE 1 di [M1013]:**
+  - R3: i lati illegali si scartano, e il flip si sceglie fra i legali;
+  - se i quattro lati sono tutti illegali, la nascita si fa SENZA flip, se la regola e la contabilita' lo consentono *(dal codice)*;
+  - i contatori `lati_scartati`, `nascite_senza_flip`, `nascite_rifiutate`;
+  - i casi noti CF5' *(un lato illegale)* e CF6' *(quattro illegali)*: li chiamo con l'apice, perche' CF5 e CF6 sono gia' nel referto di `16615729`;
+  - la ripresa C-2 da `stato_016250`, in coda, con il log AL BIT fino alla 651.
+- **[M1020], il video:** dopo che la ripresa e' in coda; nessun tick; lo script e un PNG; il caso noto e' il conto dei nodi nati.
+- **[M1058], la coppia in antifase:** dopo [M1056]. Prima H-1 *(il difetto di flusso delle nascite di C, a costo zero, con i casi noti)*; H-2 resta solo carta finche' H-1 non e' chiuso; FERMO su H-2 se la nascita singola non fa difetti.
+
+**L'ordine:** [M1056] *(il codice, i casi noti, la ripresa in coda)*, poi [M1020], poi [M1058] H-1. **Resta aperta la domanda su L1 di C-3** *(`28ad1089`)*: nessuno dei tre mandati la tocca.
