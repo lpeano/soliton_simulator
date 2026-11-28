@@ -408,3 +408,36 @@
 - **K2 PASSA:** la carica topologica e' `+1 - 1 = 0`. `e somma rho = 373.19` e' la massa; la sorgente di Gauss somma a `5.3e-14`.
 - **K3:** dichiarato, perche' il confronto AL BIT con [M0222] non e' definito.
 - **La regola:** **un caso noto fallito, quindi FERMO su P3.** Le corse di P3 non vanno in coda.
+
+
+## C, LA CURA DEL FLIP ILLEGALE E LA LETTURA SU 0-16250 *([M1013], DECISIONE DI LUCA 2026-11-28 `10:13`, dalla posta, guardiano `20860a72`; scritta PRIMA del codice della cura e dello script della lettura)* [[PROGETTO-MITOSI]]
+
+### C-1, LA CURA: il caso, la condizione, perche' non cambia la fisica
+- **Il caso** *(la caduta `9038a3b3`, nascita `652` a `k 16487`)*. Il nato `n` si collega a `i, j, k, l`; il flip del lato `x - y` *(uno dei quattro: `i-k`, `j-k`, `j-l`, `i-l`)* toglie `x - y` e aggiunge `n - m`, dove `m` e' l'altro vicino comune di `x` e `y`. Se `m` e' gia' vicino di `n`, oppure e' gia' collegato a un vicino di `n` diverso da `x` e `y`, il grafo nuovo ha un 3-ciclo con `n` che NON e' una faccia, e `CampoOrientato._placchetta` si ferma.
+- **La condizione (esatta, puramente topologica):** il flip `x - y` e' LEGALE se e solo se **`m` non e' gia' vicino di `n`** e **i vicini comuni di `n` e `m`, dopo il flip, sono esattamente `{x, y}`**. Le uniche facce nuove che il flip crea contengono l'arco `n - m`: non serve guardare altrove.
+- **Perche' non cambia la fisica** *(la DECISIONE 1)*: e' la condizione perche' il grafo resti una triangolazione, che la regola presuppone. Se tutti e quattro i flip sono legali, il codice percorso e' quello di prima, riga per riga; il controllo non calcola nessuna energia.
+- **Dove sta:** una funzione pura `flip_illegale(ii2, jj2, n, x, y)` in `mitosi_regola_v2.py`, che nessuno chiama per omissione *(byte-inerte per i sigilli vecchi)*. Il controllo si fa in `corpo_fuso_mitosi.py` PRIMA di `MR2.regola`, con il contatore `rifiuti_flip_illegale` nel registro delle nascite e nello stato. **`primo_ordine/` non si tocca.**
+- **I casi noti** *(un grafo piccolo costruito a mano)*:
+  - (CF1) una stella regolare, tutti i flip legali: la funzione dice legale, e il candidato e' identico a quello senza controllo AL BIT;
+  - (CF2) un vertice di grado 3 dopo la nascita *(il 3-ciclo separante)*: illegale;
+  - (CF3) `m` gia' vicino di `n` *(l'arco doppio)*: illegale;
+  - (CF4, DEVE FALLIRE) la stessa funzione con il controllo dei vicini comuni tolto non vede CF2.
+- **Il contro-caso sul grafo vero:** su `stato_016250` *(602 nascite, 53692 triangoli, tutti facce, nessun arco doppio: contato con uno script in questo giro, prima della carta)* le nascite di `nascite.json` rigiocate solo nella topologia non devono avere nessun flip illegale fino a 602.
+
+### ### LA DOMANDA APERTA PER LUCA (la premessa caduta)
+**La DECISIONE 1 dice «come negli altri casi di rifiuto gia' previsti dalla regola»: nella regola NON ce n'e' nessuno.** Gli unici «rifiuta» del codice sono la ripresa con lo sha1 sbagliato. Il ciclo di C fa nascere UN arco per tick, `sc[0]` *(l'indice piu' basso fra gli scattati)*. Le tre vie:
+- **(R1, la mia proposta)** la nascita intera rifiutata e contata; nello stesso tick si prova il prossimo arco in attesa (`sc[1]`, ...); l'arco rifiutato riprova ai tick dopo;
+- **(R2, la lettera stretta)** un solo tentativo per tick: l'arco rifiutato resta `sc[0]` e blocca gli altri finche' il suo intorno resta illegale *(`ATTESA_MAX 500` fa da freno)*;
+- **(R3)** si scarta solo il lato illegale dai quattro candidati del flip, e la nascita avviene con gli altri: l'arco NON resta in attesa.
+**Fino a `k 16487` le tre vie danno lo stesso log AL BIT**: divergono solo dopo. **La ripresa (C-2) aspetta la scelta.**
+
+### C-3, LA LETTURA SU 0-16250 (le letture fissate PRIMA dei numeri)
+- **Le fonti:** `M0026/C/nascite.json` *(602 nascite fino a 16250)*, gli stati ogni 250, le righe «k ...: ... H ..., E_persa ...» del log *(ogni 250)*. `serie.json` NON c'e': la corsa e' caduta su un'asserzione, non su `Fermo`.
+- **Il ritmo:** le nascite per bin di 250 tick dalla prima *(k 11588)*; due modelli a due parametri, la retta `a + b k` e l'esponenziale `A exp(k / tau)`, adattati con la verosimiglianza di POISSON *(i conteggi sono conteggi)*. Vince quello con la devianza piu' bassa; con due parametri ciascuno il confronto e' diretto. Se la differenza di devianza e' < 2, scrivo «NON DECIDIBILE».
+  - (L1) dati sintetici esponenziali: vince l'esponenziale, `tau` entro il 5%;
+  - (L2) dati sintetici lineari: vince la retta.
+- **L'energia:** `H`, `E_persa` e `H + E_persa` ogni 250 contro il numero di nascite. La lettura: `H + E_persa` costante entro l'1% della variazione di `H` = «come nella fiammata»; altrimenti il tick non conserva e lo scrivo.
+- **Il corpo, ogni 1000 dal 11000:** `R` *(il raggio quadratico medio di `rho_psi` dal centro periodico, `TO.centro`)*, `max rho_psi`, `max |chi|`. Le posizioni dei nodi vecchi sono quelle del primo stato con le nascite *(i nodi del toro non si muovono)*. (L3) `R` di `stato_011000` calcolato con le posizioni di `stato_011750` = quello con le posizioni della scena, AL BIT.
+- **Il raggio della nascita:** `r` di ogni nascita contro `k`, per bin di 1000: mediana, massimo, e la frazione entro `2 R` *(il primo criterio di C4)*.
+- (L4) il numero delle nascite di `nascite.json` = `meta["nascite"]` di `stato_016250` = le righe «[nascita ...]» del log con `k <= 16250`.
+- **Il respiro C4 su `[15500, 18000]` NON si legge qui:** solo dopo la ripresa.

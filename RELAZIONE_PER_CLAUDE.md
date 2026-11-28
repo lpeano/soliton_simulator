@@ -29576,3 +29576,21 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 5. **La parita':** solo segnata *(voce 22 della CODA)*, nessun codice.
 
 **L'ordine:** C-cura, C-ripresa in coda, C-lettura mentre gira, P3. Un commit per pezzo, poi FERMO.
+
+## [M1013] C-1, LA CARTA DELLA CURA E DELLA LETTURA; UNA PREMESSA CADE: NELLA REGOLA NON C'E' NESSUN ALTRO CASO DI RIFIUTO; LA DOMANDA PER LUCA SUL RIFIUTO (R1/R2/R3) *(scritto alle 2026-11-28 10:22)* [[PROGETTO-MITOSI]]
+
+**La carta:** `doc/CARTA_mitosi.md`, sezione «C, LA CURA DEL FLIP ILLEGALE E LA LETTURA SU 0-16250». Contiene:
+- la condizione esatta: il flip `x - y` e' legale se e solo se `m` non e' gia' vicino di `n` e i vicini comuni di `n` e `m` sono esattamente `{x, y}`;
+- i casi noti CF1-CF4;
+- la lettura C-3 con le soglie fissate prima dei numeri.
+
+**Lo stato del grafo a `k 16250`** *(script, in questo giro)*: 26846 nodi, 602 nascite, 80538 archi, nessun arco doppio, gradi da 4 a 11, 53692 triangoli, tutti facce. 26431 e 26547 sono gia' adiacenti, con i vicini comuni 16635 e 16797. **Il 3-ciclo non faccia nasce fra 16250 e 16487.**
+
+**LA PREMESSA CHE CADE:** la DECISIONE 1 dice «come negli altri casi di rifiuto gia' previsti dalla regola», ma **nella regola non ce n'e' nessuno** *(`grep -i rifiut` su `mitosi_rami*`, `mitosi_regola*`, `mitosi_lunga`: solo la ripresa con lo sha1 sbagliato)*. Il ciclo di C fa nascere UN arco per tick, `sc[0]`. Se l'arco rifiutato «resta in attesa» e resta `sc[0]`, il tick dopo si riprova lo stesso arco e blocca gli altri.
+
+**LA DOMANDA PER LUCA** *(ho provato a fargliela in chat, e l'ha rifiutata: la scrivo qui per il guardiano)*. Le vie:
+- **R1, la mia proposta:** la nascita rifiutata e contata, e nello stesso tick si prova il prossimo arco in attesa;
+- **R2:** solo `sc[0]`, e l'arco rifiutato blocca gli altri;
+- **R3:** si scarta solo il lato illegale, e la nascita avviene.
+
+**Fino a `k 16487` le tre vie coincidono AL BIT. La ripresa C-2 aspetta la scelta.** Intanto faccio la funzione, i suoi casi noti, la lettura C-3 e P3, che dalla scelta non dipendono.
