@@ -29720,3 +29720,30 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 - **Le scale fisse:** `log10 rho_psi` da -1.348 a 4.552; `chi` da -222.946 a -36.121.
 - **Il caso noto:** nell'ultimo fotogramma ci sono 562 nati fissi e 40 accesi, cioe' 602, contro 602 nascite del log con `k <= 16250` e 602 nel meta.
 - **Il seguito:** a ripresa chiusa lo stesso script con `--fino 18000 --da-r3`.
+
+## [M1058] H-1 DEGENERATO (ERRORE MIO DI PROGETTO): NEL FRESCO delta = 0 ESATTO, QUINDI tau = 3 sigma = 0 E TUTTO E' «DIFETTO» (100% NATI, 100% FONDO); IL «NON LI FA» STAMPATO NON E' UN VERDETTO. IN PIU' UN FATTO: NEL VUOTO pi LA NASCITA DA' phi = 0 SUI DUE ARCHI n-k E n-l *(scritto alle 2026-11-28 11:41)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/flusso_nascite_degenere.txt` *(`flusso_nascite.py` a `8f1cb024`, blob sha1-BYTE `69469d57`; uscita 0, 3 DEVE su 3)*.
+
+**Che cosa e' successo:**
+- Nel vuoto fresco `delta = pi - |Phi|` vale ESATTAMENTE 0 sulle 52488 placchette *(max 0, rms 0)*. La soglia della lettera, «3 sigma dello scarto da pi nel fresco», da' quindi `tau = 0`.
+- Con `tau = 0` ogni placchetta con uno scarto qualunque e' un «difetto». Negli stati di C la frazione e' 1.0000 sui nati, sul fondo e su tutto, a ogni `k`. In M2 *(505 nascite rigiocate su 602; saltate 30 per l'arco o la stella mancante nello stato e 67 per una `m` diversa)* i 2525 triangoli nuovi sono 100% difetti, contro un fondo del 100%.
+- Il sigma binomiale non e' definito, e lo script ha stampato «NON LI FA» per lo scarto 0. **E' un artefatto della soglia nulla, non un verdetto.** L'errore e' mio: ho scritto la lettura nella carta senza prevedere un fresco esatto, anche se il referto di G lo diceva gia' *(max |Phi| = rms Phi = 3.142)*.
+
+**I casi noti passano:**
+- K-H1a: 0 difetti su 52488, ma per costruzione;
+- K-H1c: il gauge, entro 8.9e-16;
+- K-H1n: 2 difetti, quindi fallisce come deve.
+
+**UN FATTO, da K-H1b e dalla sonda** *(`nasci_array` nel vuoto fresco, l'arco 39123 = 13041 - 13203, nessun tick)*:
+- gli archi del nato verso `i` e `j` ereditano `|phi| = 1`, con le fasi `pi, 0` e `0, pi`;
+- gli archi verso `k` e `l` ricevono la MEDIA di due estremita' opposte *(+1 e -1)*, cioe' `|phi| = 6.1e-17` *(zero numerico)*, e sono scartati dalla misura;
+- **nel vuoto a flusso pi la regola di eredita' per media e' distruttiva:** il nato ha due archi con `phi` nullo. `_fattore` scala per un numero reale, e lo zero resta zero.
+- Non e' il difetto di flusso della congettura, ma e' un «buco» di `phi` creato dalla nascita singola. **Riguarda H-2 direttamente:** una coppia in antifase potrebbe evitarlo.
+
+**LE PROPOSTE PER LUCA** *(la soglia e' una sua decisione)*:
+- (a) `tau` dal fondo LONTANO dello stesso stato *(3 sigma di `delta` sulle placchette oltre `3 R`, che non toccano la materia)* invece che dal fresco;
+- (b) nessuna soglia: il confronto delle DISTRIBUZIONI di `delta`, nuovi contro fondo allo stesso raggio *(Kolmogorov-Smirnov a due campioni)*;
+- (c) contare come difetto anche l'arco con `|phi|` nullo *(il fatto qui sopra)*, che oggi la misura scarta.
+
+**FERMO su H-1** *(e quindi su H-2)* finche' Luca non sceglie.

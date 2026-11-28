@@ -1,0 +1,29 @@
+[TIMBRO] flusso_nascite.py  sha1-BYTE 69469d57  committato e pulito
+======================================================================================================================================
+[M1058] H-1: IL DIFETTO DI FLUSSO DELLE NASCITE DI C (M0026/C, da 11500 a 16250); nessun tick
+======================================================================================================================================
+  il vuoto fresco (phi_v, A = 0): 52488 triangoli; delta: max 0.000e+00, rms (sigma) 0.000e+00; tau = 3 sigma = 0.000e+00
+  DEVE: (K-H1a) il vuoto fresco: la frazione di difetti (delta > tau) e' 0                                       PASSA 0 su 52488
+  DEVE: (K-H1c) il gauge su phi (e^{i chi_v} su tutte le estremita' del nodo): delta invariato entro 1e-10       PASSA 8.88e-16
+  DEVE: (K-H1n) DEVE FALLIRE: pi/2 su UNA estremita': la frazione di difetti NON e' piu' 0                       PASSA 2 difetti
+  (K-H1b) la nascita a mano sull'arco 39123 (13041 - 13203), senza flip: i triangoli col nato [(13040, 13041, 26244), (13040, 13203, 26244), (13041, 13204, 26244), (13203, 13204, 26244)]; delta ['nan', 'nan', 'nan', 'nan']; difetti 0 su 4
+  (K-H1b) la nascita a mano sull'arco 39123 (13041 - 13203), col flip 13041 - 13204 (m 13042): i triangoli col nato [(13040, 13041, 26244), (13040, 13203, 26244), (13041, 13042, 26244), (13042, 13204, 26244), (13203, 13204, 26244)]; delta ['nan', 'nan', 'nan', 'nan', 'nan']; difetti 0 su 5
+--------------------------------------------------------------------------------------------------------------------------------------
+### M1, gli stati salvati: (k) le placchette dei nati e la frazione di difetti; il fondo entro lo stesso raggio; tutte
+    k 12000: nati   140 placchette, difetti 1.0000; fondo (r <= 9.6)    594, difetti 1.0000; tutte 1.0000
+    k 13000: nati   491 placchette, difetti 1.0000; fondo (r <= 10.6)    572, difetti 1.0000; tutte 1.0000
+    k 14000: nati   840 placchette, difetti 1.0000; fondo (r <= 13.6)    920, difetti 1.0000; tutte 1.0000
+    k 15000: nati  1513 placchette, difetti 1.0000; fondo (r <= 14.9)    862, difetti 1.0000; tutte 1.0000
+    k 16000: nati  2198 placchette, difetti 1.0000; fondo (r <= 16.1)    798, difetti 1.0000; tutte 1.0000
+    k 16250: nati  2351 placchette, difetti 1.0000; fondo (r <= 16.9)    933, difetti 1.0000; tutte 1.0000
+### M2, la misura pulita: 505 nascite rigiocate su 602 del registro fra 11500 e 16500; saltate {"la m non e' quella registrata": 67, "l'arco o la stella non c'e' nello stato": 30}
+  i triangoli nuovi: 2525; difetti 1.0000; il fondo atteso (entro il raggio della nascita) 1.0000; 1 sigma binomiale nan; lo scarto 0.00 sigma
+    k 11588: 5 triangoli nuovi, 5 difetti; fondo 1.0000; r 7.41
+    k 11641: 5 triangoli nuovi, 5 difetti; fondo 1.0000; r 5.12
+    k 11714: 5 triangoli nuovi, 5 difetti; fondo 1.0000; r 5.72
+    k 11750: 5 triangoli nuovi, 5 difetti; fondo 1.0000; r 6.66
+    k 11751: 5 triangoli nuovi, 5 difetti; fondo 1.0000; r 6.50
+### H-1, IL VERDETTO (la carta: > 2 sigma FA, < 1 sigma NON LI FA): NON LI FA
+### lo smaltimento: sui nati negli stati salvati la frazione media 1.0000 (M1), subito dopo la nascita 1.0000 (M2)
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+======================================================================================================================================
