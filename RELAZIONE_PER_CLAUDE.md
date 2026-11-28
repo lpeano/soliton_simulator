@@ -29480,3 +29480,21 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - la carica `e rho_psi` **e' la massa, ed e' positiva**: non e' zero;
   - la sorgente di Gauss `e (rho - media)` somma a zero per costruzione, in qualunque scena;
   - **la carica che si annulla e' quella topologica**, cioe' la somma dei giri: `+1 - 1 = 0`. K2 la controlla, e stampa le altre due.
+
+
+### 2026-11-28 02:12 -- [M0141] D-P3: G_agg = 0.7629 CALCOLATO (NON «0.95-0.98»: LA MIA STIMA A MANO ERA SBAGLIATA); K1 FALLISCE: IL SINISTRO A FASI ROVESCIATE HA IL GIRO -1 MA NON LA CORRENTE OPPOSTA (-10.15 CONTRO +13.12); FERMO SU P3 [[PROGETTO-MITOSI]]
+
+- **Lo script** e' `doc/referti_l2/eotvos_aggregati.py`, con le modalita' `noto`, `M`, `agg` e `lettura`. **Il caso noto** l'ho girato una volta, con l'uscita nel temp, e l'ho copiato come reperto in `eotvos_aggregati_noto_fallito.txt`.
+- **G:** `G_agg = 0.762915668679`. I quattro francobolli bassi (`y - y_c = -10.06`) sentono `0.9016` del gradiente al centro, i due alti (`+23.71`) `0.4856`. `G_M = 1`.
+  - **La mia stima a mano in `c7e9a9c3` («qualche percento, 0.95-0.98») era sbagliata di un fattore circa 10 sullo scarto.** Luca ha fatto bene a volere G dallo script.
+- **K1 FALLISCE:** i giri sono `+1` e `-1`, ma `J_theta` (gli anelli `[0, R/2)`, `[R/2, R)`, `[R, 3R/2)`) vale per il destro `+13.115`, `+4.718`, `-0.112` e per il sinistro `-10.148`, `-4.751`, `-0.155`. **Il sinistro con le fasi `0, -120, -240` non e' lo specchio del destro.**
+  - **L'ipotesi**, da verificare: il francobollo ha una sua fase interna, e quindi una corrente propria che resta uguale nei due triangoli.
+- **K2 PASSA** (la carica topologica e' 0). **K4 PASSA.** **K3** e' dichiarato.
+- **DUE ERRORI MIEI:**
+  1. **lo script e' venuto prima della carta P3-0**, che la lettera voleva per prima: la carta e' scritta adesso, e lo dichiara;
+  2. **la stima a mano di G**, gia' dichiarata senza provenienza in `c7e9a9c3`.
+- **LA DOMANDA PER LUCA** (il criterio di chiusura e' una DECISIONE DI LUCA con l'ora): **come si semina il sinistro?**
+  - (a) **lo specchio esatto:** `psi_sinistro = conj(psi_destro)` traslato di 81. Il giro e' `-1` e `J` e' esattamente opposta per costruzione, ma non e' «`prepara` con le fasi rovesciate»;
+  - (b) **le fasi rovesciate come ora**, accettando che non sia lo specchio: K1 diventa il solo giro `-1`, e la corrente si stampa;
+  - (c) altro.
+- **Le corse di P3 NON sono in coda.** C ed F continuano.

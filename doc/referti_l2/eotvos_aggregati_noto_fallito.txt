@@ -1,0 +1,26 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] triangoli_vortice.py  sha1-BYTE 4d63f73c  committato e pulito
+[TIMBRO] eotvos_aggregati.py  sha1-BYTE 6a364c8a  !! NON TRACCIATO -- questo output NON e' riproducibile dal repo (par.5-quinquies)
+======================================================================================================================================
+[M0141] D-P3, I CASI NOTI E G: K1 (il giro e J_theta), K2 (la carica topologica), K3 (dichiarato), K4 (G_M); G_agg e G_M a k 0
+======================================================================================================================================
+  M (caduta_libera.prepara): il centro [80, 80], y_c 69.024359, la massa 9.950109e+05; G_M 1.000000000000
+  DEVE: (K4) G_M entro 1e-3 da 1                                                                                 PASSA 0.000e+00
+  A 1.389741e+01 (G20 1.574010e-04, L_y 140.296115, kappa 0.0002528944153922671), e0 0.4767266286, e 6.315414e-05
+  l'aggregato: il destro [[74, 68], [113, 68], [113, 107]], il sinistro [[155, 68], [194, 68], [194, 107]]; y_c 68.685473; la massa 5.909268e+06
+    il francobollo 0: y 58.623784 (y - y_c -10.061689), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.901559
+    il francobollo 1: y 58.623784 (y - y_c -10.061689), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.901559
+    il francobollo 2: y 92.398775 (y - y_c +23.713302), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.485630
+    il francobollo 3: y 58.623784 (y - y_c -10.061689), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.901559
+    il francobollo 4: y 58.623784 (y - y_c -10.061689), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.901559
+    il francobollo 5: y 92.398775 (y - y_c +23.713302), la massa 9.950109e+05; dN/dy / dN/dy(y_c) 0.485630
+### G_agg 0.762915668679 (la media pesata con le masse del gradiente sulle posizioni dei sei francobolli); G_M 1 a k 0
+    destro: il giro a R +1.0000 (componente 8), J_theta ['+1.3115347618e+01', '+4.7176188170e+00', '-1.1246646394e-01']
+    sinistro: il giro a R -1.0000 (componente 8), J_theta ['-1.0148082466e+01', '-4.7508482340e+00', '-1.5505806124e-01']
+  DEVE: (K1) a k 0: il destro +1, il sinistro -1, J_theta del sinistro = -J_theta del destro entro 1e-9          ### FALLISCE giri +1.0000 -1.0000; max |J_s + J_d| 2.967e+00
+  DEVE: (K2) la carica TOPOLOGICA dell'aggregato (la somma dei giri) = 0                                         PASSA +0; e somma rho 3.731947e+02 (la massa: NON zero); la sorgente di Gauss somma 5.329e-14 (zero per costruzione)
+  (K3) DICHIARATO: [M0222] girava col tick di chi dinamico (chi_tick_v2); qui tick_var col chi dipinto: il confronto AL BIT non e' definito
+### 3 DEVE: 2 PASSANO, 1 FALLISCONO ['(K1) a k 0: il destro +1, il sinistro -1, J_theta del sinistro = -J_theta del destro entro 1e-9']
+======================================================================================================================================

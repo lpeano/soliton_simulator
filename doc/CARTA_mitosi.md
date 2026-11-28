@@ -388,3 +388,23 @@
 - **P3-4, il punto fisso del sinistro:** [M0016] chiedeva il sinistro «con il suo punto fisso con `chi`», [M0026] solo «seminato come specchio». **Lo semino a `k 0` con `prepara`, le fasi rovesciate e nessun punto fisso**, a meno che Luca non dica altro.
 
 **Finche' Luca non decide P3-1..P3-3, non si scrive codice per P3.**
+
+### D-P3, IL SEGUITO: LE SCELTE DECISE ([M0141], DECISIONE DI LUCA 2026-11-28 `01:41`), G CALCOLATO, K1 FALLITO *(scritta DOPO lo script: e' un errore mio di ordine, dichiarato)*
+
+- **Le scelte decise:**
+  - **P3-1:** via (a), due corse nello stesso seno (M da solo, l'aggregato da solo, con i centri a 81 in `x`);
+  - **P3-2:** il criterio geometrico, `|a_agg/a_M - G_agg/G_M| < 1%`;
+  - **P3-3:** la forma V2;
+  - **P3-4:** il sinistro seminato a `k 0` con le righe di `prepara`, le fasi `0, -120, -240` e i vertici del destro `+81` in `m1`.
+- **G, calcolato** (`eotvos_aggregati.py noto`, il referto `eotvos_aggregati_noto_fallito.txt`):
+  - la formula: `G = somma_i m_i dN/dy(y_i) / (somma_i m_i dN/dy(y_c))`, con `dN/dy = -kappa A (2 pi/L_y) cos(2 pi (y - y_c)/L_y) N(y)`, `y_i` il baricentro del francobollo `i` da solo e `m_i` la sua massa;
+  - `A 13.89741`, `L_y 140.296115`, `y_c 68.685473`;
+  - i francobolli 0, 1, 3, 4 stanno a `y - y_c = -10.0617`, con il gradiente relativo `0.901559`; i francobolli 2 e 5 a `+23.7133`, con `0.485630`;
+  - **`G_agg = 0.762915668679`** e **`G_M = 1`** (K4).
+- **K1 FALLISCE:**
+  - i giri sono giusti: il destro `+1`, il sinistro `-1`;
+  - ma `J_theta` del sinistro **non** e' l'opposta del destro: `[0, R/2)` `-10.148` contro `+13.115`, `[R/2, R)` `-4.751` contro `+4.718`, `[R, 3R/2)` `-0.155` contro `-0.112`; `max |J_s + J_d| = 2.967`, contro la soglia `1e-9`;
+  - **la mia ipotesi, non verificata:** il francobollo `L162` ha una sua fase interna, e quindi una corrente sua, che il cambio di fase fra i francobolli non rovescia. Il sinistro della lettera percio' **non e' lo specchio del destro**.
+- **K2 PASSA:** la carica topologica e' `+1 - 1 = 0`. `e somma rho = 373.19` e' la massa; la sorgente di Gauss somma a `5.3e-14`.
+- **K3:** dichiarato, perche' il confronto AL BIT con [M0222] non e' definito.
+- **La regola:** **un caso noto fallito, quindi FERMO su P3.** Le corse di P3 non vanno in coda.
