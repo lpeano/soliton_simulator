@@ -29466,3 +29466,17 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **Il ciclo con la scatola di `Lp` e il macchinario delle nascite (acceso, ma senza scatti) riproducono `d1` AL BIT per 6000 tick.** Da qui la corsa va oltre `d1`. Le prime nascite dovrebbero arrivare fra `6000` e `12000`: in `d1L/12000` c'erano 35 archi oltre `2 pi`.
 - **F:** `k 37750`, 0 nascite, `M 0` (nessuna materia), `|gauss_acc| 0`.
 - **I letti alle 02:01.**
+
+
+### 2026-11-28 02:05 -- [M0141] LETTA (DECISIONE DI LUCA 2026-11-28 01:41): D-P3 DECISO. VIA (a) CON DUE CORSE NELLO STESSO SENO, IL CRITERIO GEOMETRICO G CALCOLATO DALLO SCRIPT, LA FORMA V2, IL SINISTRO SPECCHIO SENZA PUNTO FISSO [[PROGETTO-MITOSI]]
+
+- **La ricevuta:** [M0141] letta su comando di Luca («Leggi posta»). E' una DECISIONE DI LUCA (01:41) e risponde a `c7e9a9c3`. `git log --all --grep "[M0141"` trova solo la posta, e l'etichetta non era mai stata usata.
+- **Il guardiano** registra l'errore n.264: G senza il fondo, con il flusso `pi` del vuoto e A puro gauge.
+- **Il piano** (P3-0..P3-2), da eseguire a fine passo; C ed F non si toccano:
+  - **M da solo:** la caduta V2 di [M2210] c'e' (`CHI/caduta/V2`, `caduta_libera` con la variante V2 = `cs = s N`, la fase (a) spenta, `chi` dipinto acceso), ma solo da `0` a `2000`. La lettera vuole anche il fit su `0..6000`, quindi **la rifaccio identica fino a `6000`** in `controllo/M0141/M`, e **i primi 2000 tick uguali AL BIT a `CHI/caduta/V2` sono un caso noto in piu'** (K5);
+  - **l'aggregato:** destro e sinistro specchio, con i centri a 81 in `x`, in `controllo/M0141/agg`;
+  - **G** si calcola a `k 0` dallo script e si scrive nella carta prima delle corse.
+- **Una cosa da dichiarare su K2** («la carica totale dell'aggregato e' zero»):
+  - la carica `e rho_psi` **e' la massa, ed e' positiva**: non e' zero;
+  - la sorgente di Gauss `e (rho - media)` somma a zero per costruzione, in qualunque scena;
+  - **la carica che si annulla e' quella topologica**, cioe' la somma dei giri: `+1 - 1 = 0`. K2 la controlla, e stampa le altre due.
