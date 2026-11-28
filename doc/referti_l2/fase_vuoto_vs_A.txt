@@ -1,0 +1,41 @@
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] fase_vuoto_vs_A.py  sha1-BYTE a53e98a1  committato e pulito
+======================================================================================================================================
+[M0037-28] G: Phi_p (la circolazione dell'angolo d'arco di phi) CONTRO e B_p (il campo U(1)) SULLE PLACCHETTE; la carta, sezione G
+======================================================================================================================================
+  (iii) il vuoto fresco (phi_v della scena, A = 0): archi scartati 0; max |Phi| 3.142e+00, rms Phi 3.142e+00; max |eB| 0.000e+00
+  DEVE: (K3) A = 0: «campo nullo», la correlazione NON si calcola                                                PASSA max |eB| 0.0e+00
+  DEVE: (K1) gauge su phi: le estremita' di ogni nodo per e^{i chi_v}: Phi_p invariato mod 2 pi entro 1e-10      PASSA max 2.66e-15
+  DEVE: (K2) gauge su A: A + (chi_j - chi_i): B invariato entro 1e-12                                            PASSA max 2.27e-13 (max |B| 9.986e-03)
+--------------------------------------------------------------------------------------------------------------------------------------
+### (i) il punto fisso accoppiato, giro 3, l'ultimo stato: E:\soliton_simulator\controllo\M0414\puntofisso_accoppiato\giro_3\stato_006000.npz
+  PRIMA LE GRANDEZZE: max |eB| 6.3063e-07, rms eB 1.4708e-07; max |Phi| 3.1416e+00, rms Phi 2.7077e+00; archi scartati 0 su 78732; placchette usate 52488 su 52488; R 6.101
+  ### campo troppo debole: nessuna correlazione
+--------------------------------------------------------------------------------------------------------------------------------------
+### (ii) la coppia d1 a k 3250 (l'urto; 3230 non e' salvato): E:\soliton_simulator\controllo\M2034\coppia\d1\stato_003250.npz
+  PRIMA LE GRANDEZZE: max |eB| 2.4994e-06, rms eB 9.4093e-08; max |Phi| 3.1416e+00, rms Phi 2.8863e+00; archi scartati 0 su 78732; placchette usate 52488 su 52488; R 6.622
+  tutte le placchette (52488): Pearson -0.0043, Spearman -0.0006
+  entro 2 R (1270 placchette): Spearman -0.0297; il nullo (200 permutazioni): media -0.0023, 2 sigma 0.0565 -> dentro il nullo
+  DEVE: (K4) (ii) la coppia d1 a k 3250 (l'urto; 3230: il nullo copre, |Spearman| < 0.1 in almeno il 95% delle permutazioni PASSA 100.0%
+    l'anello [  0.0,   8.0):   466 placchette; Pearson -0.1054, Spearman -0.0887; rms Phi 2.101e+00, rms eB 7.508e-07
+    l'anello [  8.0,  16.0):  1395 placchette; Pearson +0.0135, Spearman +0.0034; rms Phi 2.283e+00, rms eB 1.594e-07
+    l'anello [ 16.0,  24.0):  2321 placchette; Pearson +0.0189, Spearman +0.0149; rms Phi 2.462e+00, rms eB 1.122e-07
+    l'anello [ 24.0,  32.0):  3410 placchette; Pearson -0.0149, Spearman -0.0246; rms Phi 2.563e+00, rms eB 8.694e-08
+--------------------------------------------------------------------------------------------------------------------------------------
+### (ii) la coppia d1L a k 18000: E:\soliton_simulator\controllo\M2034\coppia\d1L\stato_018000.npz
+  PRIMA LE GRANDEZZE: max |eB| 1.8570e-06, rms eB 1.2144e-07; max |Phi| 3.1416e+00, rms Phi 2.6282e+00; archi scartati 0 su 78732; placchette usate 52488 su 52488; R 9.363
+  tutte le placchette (52488): Pearson -0.0037, Spearman -0.0027
+  entro 2 R (2546 placchette): Spearman -0.0095; il nullo (200 permutazioni): media -0.0005, 2 sigma 0.0390 -> dentro il nullo
+  DEVE: (K4) (ii) la coppia d1L a k 18000: il nullo copre, |Spearman| < 0.1 in almeno il 95% delle permutazioni  PASSA 100.0%
+    l'anello [  0.0,   8.0):   467 placchette; Pearson -0.0608, Spearman -0.0671; rms Phi 1.977e+00, rms eB 6.211e-07
+    l'anello [  8.0,  16.0):  1387 placchette; Pearson +0.0076, Spearman +0.0029; rms Phi 1.863e+00, rms eB 1.248e-07
+    l'anello [ 16.0,  24.0):  2329 placchette; Pearson -0.0318, Spearman -0.0361; rms Phi 1.835e+00, rms eB 1.023e-07
+    l'anello [ 24.0,  32.0):  3415 placchette; Pearson -0.0063, Spearman -0.0015; rms Phi 2.221e+00, rms eB 1.106e-07
+    l'anello [ 32.0,  40.0):  4285 placchette; Pearson +0.0121, Spearman +0.0141; rms Phi 2.472e+00, rms eB 1.053e-07
+======================================================================================================================================
+### (i) il punto fisso accoppiato, giro 3, l'ultimo stato: Spearman entro 2 R -
+### (ii) la coppia d1 a k 3250 (l'urto; 3230 non e' salvato): Spearman entro 2 R -0.0297 (dentro il nullo)
+### (ii) la coppia d1L a k 18000: Spearman entro 2 R -0.0095 (dentro il nullo)
+### IL VERDETTO (le soglie di Luca): NO
+### 5 DEVE: 5 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

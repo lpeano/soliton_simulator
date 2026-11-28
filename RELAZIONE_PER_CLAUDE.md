@@ -29379,3 +29379,38 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **L'errore e' mio:** la corsa di [M0106] (`mitosi_vuoto_v2.corsa_v2`) chiama **`d2()` prima di `ciclo`**, e `d2()` sostituisce `Campi.residuo` con `residuo_assoluto`. E' la cura di K4 in [M0237]. Io ho copiato la chiamata a `ciclo`, ma non la sua preparazione.
 - **La cura** (il prossimo commit): `avvia()` chiama `MV2.d2()`, cosi' il percorso e' quello di [M0106] e K-F0 lo controlla AL BIT.
 - **I reperti:** `doc/referti_l2/vuoto_lapse_mitosi_noto_fallito.txt` e `vuoto_lapse_mitosi_noto_fallito.err.txt` (la coda dello stderr).
+
+
+### 2026-11-28 01:00 -- [M0037-28] G FATTO: IL VERDETTO E' NO (SPEARMAN ENTRO 2 R -0.030 A d1/3250 E -0.010 A d1L/18000, DENTRO IL NULLO; IL GIRO 3 HA UN CAMPO TROPPO DEBOLE). DUE FATTI NUOVI: IL VUOTO FRESCO HA Phi = +-pi SU OGNI PLACCHETTA, E A E' QUASI PURO GAUGE (max |A| 1032, max |eB| 6e-7) [[PROGETTO-MITOSI]]
+
+- **I casi noti, 5 DEVE su 5** (`fase_vuoto_vs_A.txt`, script `c33508d4`):
+  - **K1:** il gauge su `phi` lascia `Phi_p` invariato entro `2.7e-15`;
+  - **K2:** il gauge su `A` lascia `B` invariato entro `2.3e-13`;
+  - **K3:** con `A = 0` lo script dice «campo nullo»;
+  - **K4:** il nullo copre al 100% in tutti e due gli stati in cui si calcola.
+- **PRIMA LE GRANDEZZE:**
+
+  | stato | `max abs(eB)` | `rms eB` | `rms Phi` | `R` |
+  |---|---|---|---|---|
+  | (i) giro 3 di [M0414], `stato_006000` | **`6.31e-07`** | `1.47e-07` | `2.708` | `6.10` |
+  | (ii) `d1/3250` | `2.50e-06` | `9.41e-08` | `2.886` | `6.62` |
+  | (ii) `d1L/18000` | `1.86e-06` | `1.21e-07` | `2.628` | `9.36` |
+
+  - Nessun arco e' scartato. Lo stato (i) e' sotto la soglia di `1e-6`: **campo troppo debole**, nessuna correlazione.
+- **Le correlazioni:**
+  - **`d1/3250`:** su tutte le placchette Pearson `-0.004`, Spearman `-0.001`. **Entro `2 R`, Spearman `-0.030`**, contro un nullo con media `-0.002` e 2 sigma `0.057`: **dentro il nullo**. Per anello il valore massimo e' `-0.089`, in `[0, 8)`;
+  - **`d1L/18000`:** Pearson `-0.004`, Spearman `-0.003`. **Entro `2 R`, Spearman `-0.010`**, contro 2 sigma `0.039`: **dentro il nullo**. Per anello il valore massimo e' `-0.067`, in `[0, 8)`.
+- **IL VERDETTO** (le soglie di Luca): **NO.** `|Spearman| < 0.2` in tutti e due gli stati validi; il terzo ha un campo troppo debole.
+- **DUE FATTI NUOVI, che dichiaro come chiede la lettera:**
+  1. **Il vuoto fresco (`phi_v`, `A = 0`) ha `Phi_p = +-pi` su OGNI placchetta** (`max abs(Phi) = rms Phi = 3.142`): ogni angolo d'arco di `phi_v` vale `pi`. Il vuoto a riposo porta una circolazione `pi` per placchetta nella convenzione delle estremita'.
+     - Le previsioni: il guardiano diceva «`rms Phi` piccolo ma non zero» (`60%`), io «zero» (`60%`). **Sbagliate tutte e due.**
+  2. **`A` e' grande ma quasi un puro gauge:** `max |A|` vale `1032`, `82.7` e `578`, mentre `max abs(eB)` sta fra `6e-7` e `2.5e-6`. La circolazione di `A` sulle placchette e' circa `1e-9` della sua ampiezza. **Il campo `B` fisico e' minuscolo.**
+- **IL LIMITE DI METODO** (scritto ora, dopo i numeri, e **non** usato per cambiare il verdetto):
+  - siccome `Phi` del vuoto sta a `+-pi`, il `wrap` in `(-pi, pi]` taglia proprio li', e `Phi` degli stati (rms da `2.6` a `2.9`) e' in gran parte il `pi` del vuoto spaccato in due;
+  - **la lettura che avrebbe senso** e' `dPhi = wrap(Phi - Phi_vuoto)`, cioe' la circolazione **in piu'** di quella del vuoto, contro `eB`;
+  - **e' una domanda per Luca e per il guardiano**, con il criterio di chiusura di una DECISIONE DI LUCA: si rifa' G con `dPhi`, si', no?
+- **Le previsioni:**
+  - del guardiano: SI' (`35%`): **no**; il segno cambia fra gli anelli (`40%`): in `d1/3250` lo Spearman e' `-0.089`, `+0.003`, `+0.015`, `-0.025`, ma sono tutti dentro il rumore, quindi **non e' valutabile**;
+  - mie: SI' (`20%`): **no**.
+- **CODA.md, voce 21**, e' sul ramo `guardiano`, dove io non scrivo. L'esito e' qui per il guardiano.
+- **Si riprende da dove si era:** i casi noti di F stanno rigirando con la cura (`c5bb9b06`); poi la coda con C e F; poi D-P3.
