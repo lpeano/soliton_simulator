@@ -1,0 +1,83 @@
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] caduta_segno_v2.py  sha1-BYTE 958139bf  committato e pulito
+[TIMBRO] massa_calcio.py  sha1-BYTE efbe0191  committato e pulito
+[TIMBRO] torneo_tenuta.py  sha1-BYTE 9fdb8c95  committato e pulito
+[TIMBRO] fondo_suite_v2.py  sha1-BYTE 0d1ac065  committato e pulito
+[TIMBRO] ripresa_F0_v2.py  sha1-BYTE 9f857fb8  committato e pulito
+[TIMBRO] fondo_1c.py  sha1-BYTE 8bfee0f7  committato e pulito
+[TIMBRO] fondo_puntofisso_v3b4.py  sha1-BYTE 305f62e2  committato e pulito
+[TIMBRO] gravita_due_corpi.py  sha1-BYTE 7af8ed62  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] triangolo_chi_v4.py  sha1-BYTE 72eceea3  committato e pulito
+[TIMBRO] due_corpi_fondo.py  sha1-BYTE 8896ddcf  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v3.py  sha1-BYTE 9d8f0419  committato e pulito
+[TIMBRO] due_corpi_fondo_v4.py  sha1-BYTE a292c305  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v7.py  sha1-BYTE 4b6be248  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] due_corpi_fondo_v8.py  sha1-BYTE 4d467438  committato e pulito
+[TIMBRO] due_corpi_fondo_v9.py  sha1-BYTE af211422  committato e pulito
+[TIMBRO] fondo_puntofisso_chi.py  sha1-BYTE c9c60140  committato e pulito
+[TIMBRO] fondo_puntofisso_chi_v2.py  sha1-BYTE d452e036  committato e pulito
+[TIMBRO] corpo_fuso.py  sha1-BYTE 43ac319d  committato e pulito
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] mitosi_regola_v2.py  sha1-BYTE 28846903  committato e pulito
+[TIMBRO] mitosi_regola.py  sha1-BYTE 90a0f73a  committato e pulito
+[TIMBRO] mitosi_lunga.py  sha1-BYTE 4d484044  committato e pulito
+[TIMBRO] chi_tick_v2.py  sha1-BYTE 514c6f50  committato e pulito
+[TIMBRO] due_corpi_fondo_v6.py  sha1-BYTE 4797bccb  committato e pulito
+[TIMBRO] due_corpi_fondo_v2.py  sha1-BYTE b235f4f8  committato e pulito
+[TIMBRO] corpo_fuso_mitosi.py  sha1-BYTE 707f8fea  committato e pulito
+======================================================================================================================================
+[M1056] K-R: LA RIPRESA DI C DA stato_016000 PER 250 TICK (regola_r3) CONTRO M0026/C/stato_016250 AL BIT
+======================================================================================================================================
+### [M1056] C con R3: la ripresa da E:\soliton_simulator\controllo\M0026\C\stato_016000.npz (k 16000, 562 nascite) fino a 16250, in E:\soliton_simulator\controllo\M0026\C_noto_ripresa
+    [nascita 563] k 16012, l'arco 44911 (scattato; 0 in attesa): n 26806 a r 14.35; chi_n -97.8964; DH -1.9345e+01 (H_chi +6.0848e-01); P9 0.0e+00; |Ec| 2.482e-01; E_persa +2.497765e+04 (11.0 s)
+    [nascita 564] k 16016, l'arco 43083 (scattato; 0 in attesa): n 26807 a r 13.50; chi_n -100.0346; DH -6.0048e+00 (H_chi +4.4736e-01); P9 0.0e+00; |Ec| 4.822e-01; E_persa +2.498365e+04 (11.5 s)
+    [nascita 565] k 16019, l'arco 36729 (scattato; 0 in attesa): n 26808 a r 15.48; chi_n -92.2848; DH -1.3641e+01 (H_chi +1.0158e+00); P9 0.0e+00; |Ec| 4.169e-01; E_persa +2.499729e+04 (9.8 s)
+    [nascita 566] k 16025, l'arco 48957 (scattato; 0 in attesa): n 26809 a r 9.84; chi_n -110.5171; DH -3.3513e+00 (H_chi +1.5664e+00); P9 0.0e+00; |Ec| 1.442e-01; E_persa +2.500065e+04 (10.3 s)
+    [nascita 567] k 16035, l'arco 48961 (scattato; 0 in attesa): n 26810 a r 11.42; chi_n -105.9906; DH -1.6860e+01 (H_chi +4.4333e-01); P9 0.0e+00; |Ec| 3.783e-01; E_persa +2.501751e+04 (10.1 s)
+    [nascita 568] k 16039, l'arco 42623 (scattato; 0 in attesa): n 26811 a r 13.19; chi_n -102.7089; DH -2.8043e+00 (H_chi -5.5663e-01); P9 0.0e+00; |Ec| 4.932e-01; E_persa +2.502031e+04 (9.3 s)
+    [nascita 569] k 16045, l'arco 36253 (scattato; 0 in attesa): n 26812 a r 15.43; chi_n -93.1464; DH -6.7686e+00 (H_chi +1.0218e+00); P9 0.0e+00; |Ec| 3.422e-01; E_persa +2.502708e+04 (8.8 s)
+    [nascita 570] k 16051, l'arco 44890 (scattato; 0 in attesa): n 26813 a r 8.38; chi_n -120.7052; DH -7.1264e+00 (H_chi +7.8564e-01); P9 0.0e+00; |Ec| 5.387e-01; E_persa +2.503421e+04 (8.5 s)
+    [nascita 571] k 16053, l'arco 44443 (scattato; 0 in attesa): n 26814 a r 14.80; chi_n -98.0300; DH +2.7554e+00 (H_chi +4.6060e-01); P9 0.0e+00; |Ec| 3.439e-01; E_persa +2.503145e+04 (8.5 s)
+    [nascita 572] k 16054, l'arco 44850 (scattato; 0 in attesa): n 26815 a r 11.56; chi_n -114.0721; DH -4.9362e+01 (H_chi +2.0287e+00); P9 0.0e+00; |Ec| 2.648e-01; E_persa +2.508081e+04 (8.8 s)
+    [nascita 573] k 16055, l'arco 43535 (scattato; 0 in attesa): n 26816 a r 13.88; chi_n -100.0713; DH -2.6190e+00 (H_chi +1.1187e+00); P9 0.0e+00; |Ec| 3.571e-01; E_persa +2.508343e+04 (8.4 s)
+    [nascita 574] k 16059, l'arco 43989 (scattato; 0 in attesa): n 26817 a r 14.31; chi_n -99.0394; DH -8.4801e+00 (H_chi +2.3536e-01); P9 0.0e+00; |Ec| 2.942e-01; E_persa +2.509191e+04 (8.4 s)
+    [nascita 575] k 16060, l'arco 43482 (scattato; 0 in attesa): n 26818 a r 13.28; chi_n -108.6253; DH +9.9446e-01 (H_chi +3.7909e-01); P9 0.0e+00; |Ec| 3.951e-01; E_persa +2.509092e+04 (8.6 s)
+    [nascita 576] k 16065, l'arco 50342 (scattato; 0 in attesa): n 26819 a r 12.06; chi_n -104.8165; DH -2.2361e+01 (H_chi +3.7387e-01); P9 0.0e+00; |Ec| 4.222e-01; E_persa +2.511328e+04 (8.5 s)
+    [nascita 577] k 16066, l'arco 48041 (scattato; 0 in attesa): n 26820 a r 10.73; chi_n -110.3656; DH -8.1622e+00 (H_chi +5.5596e-01); P9 0.0e+00; |Ec| 3.447e-01; E_persa +2.512144e+04 (8.4 s)
+    [nascita 578] k 16067, l'arco 42120 (scattato; 0 in attesa): n 26821 a r 9.60; chi_n -127.3084; DH -6.0192e+01 (H_chi +8.2460e-01); P9 0.0e+00; |Ec| 5.509e-01; E_persa +2.518163e+04 (8.7 s)
+    [nascita 579] k 16081, l'arco 37170 (scattato; 0 in attesa): n 26822 a r 13.74; chi_n -106.8198; DH -1.4650e+01 (H_chi +7.9003e-02); P9 0.0e+00; |Ec| 5.605e-01; E_persa +2.519628e+04 (8.8 s)
+    [nascita 580] k 16093, l'arco 42568 (scattato; 0 in attesa): n 26823 a r 13.58; chi_n -111.4039; DH -2.0780e+01 (H_chi +8.7308e-01); P9 0.0e+00; |Ec| 4.670e-01; E_persa +2.521706e+04 (8.6 s)
+    [nascita 581] k 16102, l'arco 49865 (scattato; 0 in attesa): n 26824 a r 11.50; chi_n -110.0224; DH -1.8953e+01 (H_chi -7.8696e-01); P9 0.0e+00; |Ec| 6.126e-01; E_persa +2.523601e+04 (8.3 s)
+    [nascita 582] k 16114, l'arco 44394 (scattato; 0 in attesa): n 26825 a r 4.21; chi_n -144.9046; DH -1.3567e+02 (H_chi +1.4846e+00); P9 0.0e+00; |Ec| 1.350e-01; E_persa +2.537168e+04 (8.2 s)
+    [nascita 583] k 16146, l'arco 50807 (scattato; 0 in attesa): n 26826 a r 12.97; chi_n -103.9410; DH -2.6027e+01 (H_chi +7.9287e-01); P9 0.0e+00; |Ec| 3.861e-01; E_persa +2.539771e+04 (8.0 s)
+    [nascita 584] k 16151, l'arco 45341 (scattato; 0 in attesa): n 26827 a r 13.95; chi_n -105.8351; DH -2.0768e+00 (H_chi +6.0834e-02); P9 0.0e+00; |Ec| 4.330e-01; E_persa +2.539978e+04 (8.3 s)
+    [nascita 585] k 16152, l'arco 42112 (scattato; 0 in attesa): n 26828 a r 12.38; chi_n -118.2764; DH -2.0813e+01 (H_chi +1.7951e+00); P9 0.0e+00; |Ec| 5.563e-01; E_persa +2.542060e+04 (8.5 s)
+    [nascita 586] k 16155, l'arco 48007 (scattato; 0 in attesa): n 26829 a r 13.34; chi_n -106.3967; DH +8.9255e-01 (H_chi +1.1886e+00); P9 0.0e+00; |Ec| 3.078e-01; E_persa +2.541971e+04 (8.7 s)
+    [nascita 587] k 16166, l'arco 36717 (scattato; 0 in attesa): n 26830 a r 14.44; chi_n -107.8653; DH -5.5483e+00 (H_chi +3.2283e-01); P9 0.0e+00; |Ec| 4.662e-01; E_persa +2.542525e+04 (8.3 s)
+    [nascita 588] k 16168, l'arco 43506 (scattato; 0 in attesa): n 26831 a r 4.07; chi_n -144.5745; DH -1.3330e+02 (H_chi +1.0473e+00); P9 0.0e+00; |Ec| 3.082e-01; E_persa +2.555855e+04 (8.4 s)
+    [nascita 589] k 16169, l'arco 38962 (scattato; 0 in attesa): n 26832 a r 13.54; chi_n -116.5096; DH -4.9759e+01 (H_chi +2.0722e+00); P9 0.0e+00; |Ec| 3.273e-01; E_persa +2.560831e+04 (8.2 s)
+    [nascita 590] k 16170, l'arco 36698 (scattato; 0 in attesa): n 26833 a r 17.19; chi_n -102.9050; DH -3.6649e-01 (H_chi +1.1180e-01); P9 0.0e+00; |Ec| 3.402e-01; E_persa +2.560868e+04 (8.5 s)
+    [nascita 591] k 16181, l'arco 36706 (scattato; 0 in attesa): n 26834 a r 15.65; chi_n -105.4998; DH -4.1737e+00 (H_chi +7.7532e-01); P9 0.0e+00; |Ec| 3.589e-01; E_persa +2.561285e+04 (8.0 s)
+    [nascita 592] k 16186, l'arco 49382 (scattato; 0 in attesa): n 26835 a r 11.00; chi_n -114.2845; DH -1.2392e+01 (H_chi -7.3217e-02); P9 0.0e+00; |Ec| 5.119e-01; E_persa +2.562524e+04 (8.4 s)
+    [nascita 593] k 16190, l'arco 41224 (scattato; 2 in attesa): n 26836 a r 10.12; chi_n -124.8932; DH -3.7880e+01 (H_chi +4.7282e-01); P9 0.0e+00; |Ec| 4.141e-01; E_persa +2.566312e+04 (8.2 s)
+    [nascita 594] k 16191, l'arco 45325 (scattato; 1 in attesa): n 26837 a r 12.96; chi_n -111.5210; DH -1.4499e+00 (H_chi +7.5628e-01); P9 0.0e+00; |Ec| 4.864e-01; E_persa +2.566457e+04 (8.3 s)
+    [nascita 595] k 16192, l'arco 45736 (scattato; 0 in attesa): n 26838 a r 11.08; chi_n -120.1592; DH -6.1581e+00 (H_chi +1.8975e+00); P9 0.0e+00; |Ec| 5.414e-01; E_persa +2.567073e+04 (8.2 s)
+    [nascita 596] k 16202, l'arco 47091 (scattato; 0 in attesa): n 26839 a r 13.32; chi_n -110.4069; DH -1.4764e+00 (H_chi +1.2617e+00); P9 0.0e+00; |Ec| 3.265e-01; E_persa +2.567221e+04 (8.3 s)
+    [nascita 597] k 16204, l'arco 37154 (scattato; 0 in attesa): n 26840 a r 17.44; chi_n -104.7091; DH -7.6373e+00 (H_chi +5.6820e-01); P9 0.0e+00; |Ec| 4.361e-01; E_persa +2.567984e+04 (8.3 s)
+    [nascita 598] k 16210, l'arco 44874 (scattato; 0 in attesa): n 26841 a r 15.34; chi_n -104.5997; DH -2.6359e+00 (H_chi +1.1906e+00); P9 0.0e+00; |Ec| 3.560e-01; E_persa +2.568248e+04 (8.4 s)
+    [nascita 599] k 16235, l'arco 40752 (scattato; 0 in attesa): n 26842 a r 8.97; chi_n -137.9168; DH -6.0636e+00 (H_chi -8.2313e-01); P9 0.0e+00; |Ec| 6.513e-01; E_persa +2.568854e+04 (8.2 s)
+    [nascita 600] k 16237, l'arco 44404 (scattato; 0 in attesa): n 26843 a r 5.81; chi_n -140.2014; DH -6.2121e+01 (H_chi +4.9423e-01); P9 0.0e+00; |Ec| 4.509e-01; E_persa +2.575066e+04 (8.5 s)
+    [nascita 601] k 16238, l'arco 45748 (scattato; 0 in attesa): n 26844 a r 6.03; chi_n -136.2989; DH -1.9385e+01 (H_chi +8.7099e-01); P9 0.0e+00; |Ec| 5.445e-01; E_persa +2.577005e+04 (8.1 s)
+    [nascita 602] k 16242, l'arco 37629 (scattato; 0 in attesa): n 26845 a r 15.57; chi_n -103.0385; DH -1.5835e+01 (H_chi +9.7380e-01); P9 0.0e+00; |Ec| 3.818e-01; E_persa +2.578588e+04 (8.2 s)
+    k 16250: y1 -12.2484 y2 +13.9275; max|chi| 1.5578e+02; nascite 602, n 26846; H +8.0205288409e+04, E_persa +2.578588e+04; lati scartati 0, senza flip 0, rifiutate 0 (441 s)
+### la ripresa: il codice 0; nascite 602; lati scartati 0, senza flip 0, rifiutate 0 (441 s)
+  DEVE: (K-R) da 16000, 250 tick: lo stato a 16250 = M0026/C/stato_016250 AL BIT (ogni chiave)                   PASSA il codice 0; diverse []
+  DEVE: (K-R) E_persa e nascite di meta uguali                                                                   PASSA 25785.88490145786 602 contro 25785.88490145786 602
+  DEVE: (K-R) le nascite fino a 602 = nascite.json (k, l'arco, i nodi, il lato, DH, DH_chi, E_persa, la posizione, chi_n, pi_n) AL BIT PASSA 602 contro 602; diverse []
+  DEVE: (K-R) nessun lato scartato fra 16000 e 16250 (il rigioco topologico: 0 flip illegali fino a 602)         PASSA 0
+### 4 DEVE: 4 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

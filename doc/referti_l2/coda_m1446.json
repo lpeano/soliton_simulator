@@ -2993,6 +2993,15 @@
     "corsa"
    ],
    "note": "[M0026] (DECISIONE DI LUCA 00:26) F: il vuoto di [M0106] con il lapse dipinto nel tick della mitosi (A 15.95629, lo stesso G20), le nascite accese, 6000 tick da k 35976, in M0026/F; i casi noti 3/3 (vuoto_lapse_mitosi_noto.txt); alle 01:06:44 C: 25.03 GB liberi, impegnabile 30.78 GB liberi su 49.47 (soglia 8)"
+  },
+  {
+   "nome": "M0026_C_R3",
+   "priorita": 0,
+   "argv": [
+    "doc/referti_l2/corpo_fuso_mitosi.py",
+    "ripresa"
+   ],
+   "note": "[M1056] (DECISIONE DI LUCA 10:56) C-2: la ripresa di C da M0026/C/stato_016250 con R3 (regola_r3: i lati illegali scartati, la nascita resta) fino a 18000, in M0026/C_R3; DEVE le righe delle nascite fino alla 651 = M0026_C.txt al testo, altrimenti FERMO; K-R 4/4 (corpo_fuso_mitosi_noto_ripresa.txt); alle 11:25:46 C: 24.21 GB liberi, impegnabile 30.75 GB liberi su 49.47 (soglia 8)"
   }
  ]
 }

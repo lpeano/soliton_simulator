@@ -29697,3 +29697,15 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **CF6'** *(`i` e `j` di grado 4)*: tutti e quattro illegali, la nascita senza flip *(`nas`)*, `senza_flip`.
 
 **K-R sta girando:** la ripresa da `stato_016000` per 250 tick contro `stato_016250` AL BIT, in `M0026/C_noto_ripresa`.
+
+## [M1056] K-R PASSA 4 SU 4: LA RIPRESA DA stato_016000 RIDA' stato_016250 AL BIT (OGNI CHIAVE, E_persa, LE 40 NASCITE); LA RIPRESA C-2 (R3, 16250 -> 18000) IN CODA *(scritto alle 2026-11-28 11:26)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/corpo_fuso_mitosi_noto_ripresa.txt` *(`corpo_fuso_mitosi.py noto_ripresa`, blob sha1-BYTE `707f8fea`; 441 s)*.
+- Lo stato a 16250 della ripresa = `M0026/C/stato_016250` AL BIT: ogni chiave, diverse `[]`.
+- `E_persa` e' `25785.88490145786` in tutti e due, e le nascite sono 602.
+- Le 602 righe del registro coincidono AL BIT *(k, l'arco, i nodi, il lato, DH, DH_chi, E_persa, la posizione, chi_n, pi_n)*.
+- Le righe «[nascita 563..602]» coincidono col log vecchio AL TESTO *(il confronto era acceso: nessuna divergenza)*.
+- 0 lati scartati.
+- **La ricostruzione in blocco del grafo, del motore e del campo orientato da uno stato cresciuto e' quindi esatta.**
+
+**La coda:** `M0026_C_R3` *(`corpo_fuso_mitosi.py ripresa`, priorita' 0)*. L'impegnabile alle 11:25:46 e' di 30.75 GB liberi su 49.47 *(soglia 8)*; C: ha 24.21 GB liberi. **Il DEVE della corsa:** le righe fino alla 651 uguali al log vecchio, altrimenti FERMO *(uscita 1)*; alla 652 la riga «R3: scartati i lati ...».
