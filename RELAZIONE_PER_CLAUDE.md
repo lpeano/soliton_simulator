@@ -29687,3 +29687,13 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **[M1058], la coppia in antifase:** dopo [M1056]. Prima H-1 *(il difetto di flusso delle nascite di C, a costo zero, con i casi noti)*; H-2 resta solo carta finche' H-1 non e' chiuso; FERMO su H-2 se la nascita singola non fa difetti.
 
 **L'ordine:** [M1056] *(il codice, i casi noti, la ripresa in coda)*, poi [M1020], poi [M1058] H-1. **Resta aperta la domanda su L1 di C-3** *(`28ad1089`)*: nessuno dei tre mandati la tocca.
+
+## [M1056] R3, I CASI NOTI DI regola_r3: 5 SU 5 (CF-eq NETTO E PARI, CF5', CF-coppie, CF6'); K-R GIRA *(scritto alle 2026-11-28 11:17)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/regola_r3_noto.txt` *(`regola_r3_noto.py` e `mitosi_regola_v2.py` a `d813183a`)*. Gli stub sostituiscono `candidato` e, solo per CF5', `flip_illegale`.
+- **CF-eq** *(tutti legali, il toro 6 x 6)*: `R` e `S` di `regola_r3` = `regola` AL BIT, sia nel caso netto *(`scelto 1`)* sia nel caso pari *(`scelto -1`, `nas`)*.
+- **CF5'** *(un lato illegale, ed era il migliore in assoluto)*: la nascita avviene col migliore dei tre legali *(il lato 2)*.
+- **CF-coppie** *(`i` di grado 4, `flip_illegale` vero)*: scartati esattamente i lati 0 e 3 *(`i - k` e `i - l`)*, e il flip si fa fra `j - k` e `j - l`.
+- **CF6'** *(`i` e `j` di grado 4)*: tutti e quattro illegali, la nascita senza flip *(`nas`)*, `senza_flip`.
+
+**K-R sta girando:** la ripresa da `stato_016000` per 250 tick contro `stato_016250` AL BIT, in `M0026/C_noto_ripresa`.

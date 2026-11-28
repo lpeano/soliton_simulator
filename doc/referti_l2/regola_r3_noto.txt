@@ -1,0 +1,12 @@
+[TIMBRO] mitosi_regola_v2.py  sha1-BYTE 28846903  committato e pulito
+[TIMBRO] regola_r3_noto.py  sha1-BYTE 0ce36403  committato e pulito
+======================================================================================================================================
+[M1056] R3, I CASI NOTI DI regola_r3 (stub di candidato; GUARDIA 1e-12)
+======================================================================================================================================
+  DEVE: (CF-eq, netto) tutti legali: R (le chiavi di regola) e S di regola_r3 = regola AL BIT                    PASSA scelto 1 / 1; diverse []
+  DEVE: (CF-eq, pari) tutti legali: R (le chiavi di regola) e S di regola_r3 = regola AL BIT                     PASSA scelto -1 / -1; diverse []
+  DEVE: (CF5') un lato illegale (il migliore in assoluto, H -9): la nascita avviene col migliore dei tre legali (il lato 2, H -6) PASSA scartati [1], scelto 2
+  DEVE: (CF-coppie) i di grado 4: scartati ESATTAMENTE i lati i - k e i - l (gli indici 0 e 3); il flip fra j - k e j - l PASSA scartati [0, 3] ["i vicini comuni di 7 e 4 sarebbero [0, 2, 3], non {0, 2} (un 3-ciclo che non e' una faccia)", "i vicini comuni di 7 e 4 sarebbero [0, 2, 3], non {0, 3} (un 3-ciclo che non e' una faccia)"], scelto 1
+  DEVE: (CF6') i e j di grado 4: i quattro lati illegali, la nascita SENZA flip (nas, scelto -1), senza_flip     PASSA scartati [0, 1, 2, 3], scelto -1
+### 5 DEVE: 5 PASSANO, 0 FALLISCONO []
+======================================================================================================================================
