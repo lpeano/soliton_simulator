@@ -29713,3 +29713,10 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 ## [M1056] LA RIPRESA C-2 PARTITA: m1446-M0026_C_R3 APERTA DAL LANCIATORE *(scritto alle 2026-11-28 11:28)* [[PROGETTO-MITOSI]]
 
 La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `controllo/M1446/log/M0026_C_R3.txt`, gli stati vanno in `M0026/C_R3`. **Durante la corsa non si toccano** `corpo_fuso_mitosi.py`, `mitosi_regola_v2.py` e i moduli che importano. Il video *([M1020])* e H-1 *([M1058])* stanno in file nuovi che li importano soltanto.
+
+## [M1020] IL VIDEO DI C FATTO: 26 QUADRI DA k 10000 A 16250, 1740 FOTOGRAMMI (58 s), 2.17 MB; IL CASO NOTO PASSA (602 NATI IN EVIDENZA = 602 NEL LOG = 602 NEL META) *(scritto alle 2026-11-28 11:39)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/anima_corpo_fuso_nascite.txt`. **Il PNG dell'ultimo quadro:** `doc/referti_l2/anima_corpo_fuso_nascite_ultimo.png`. **Il video** `doc/referti_l2/anima_corpo_fuso_nascite.mp4` resta FUORI da git *(`.gitignore`: `*.mp4`)* e si rifa' col comando del referto.
+- **Le scale fisse:** `log10 rho_psi` da -1.348 a 4.552; `chi` da -222.946 a -36.121.
+- **Il caso noto:** nell'ultimo fotogramma ci sono 562 nati fissi e 40 accesi, cioe' 602, contro 602 nascite del log con `k <= 16250` e 602 nel meta.
+- **Il seguito:** a ripresa chiusa lo stesso script con `--fino 18000 --da-r3`.

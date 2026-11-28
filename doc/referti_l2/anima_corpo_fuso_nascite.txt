@@ -1,0 +1,9 @@
+[TIMBRO] anima_corpo_fuso_nascite.py  sha1-BYTE b4297884  committato e pulito
+======================================================================================================================================
+[M1020] IL VIDEO DI C: da k 10000 a 16250 ogni 250; 30 fps, 60 fotogrammi a quadro, il fermo 3 s
+======================================================================================================================================
+  26 quadri; le scale fisse: log10 rho_psi [-1.348, 4.552]; chi [-222.946, -36.121]
+  1740 fotogrammi (58.0 s); il video E:\soliton_lavoro\wt_mitosi\doc\referti_l2\anima_corpo_fuso_nascite.mp4 (2.17 MB); il png E:\soliton_lavoro\wt_mitosi\doc\referti_l2\anima_corpo_fuso_nascite_ultimo.png
+  DEVE: i nodi in evidenza nell'ultimo fotogramma (602: fissi 562, accesi 40) = le nascite del log con k <= 16250 (602) = meta (602): PASSA
+  (i nati fuori dalla finestra +-32 non si disegnano ma si contano: il conto e' sul registro)
+======================================================================================================================================
