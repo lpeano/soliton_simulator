@@ -29774,3 +29774,16 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 **Un'incongruenza da segnalare per il passo 2:** la lettera carica `E:\soliton_simulator\controllo\M0026\C\anima_corpo_fuso_nascite.mp4`, ma il video sta in `E:\soliton_lavoro\wt_mitosi\doc\referti_l2\anima_corpo_fuso_nascite.mp4` *(fuori da git, `cd14c2f7`)*. Al passo 2 carichero' quello, col nome `M0026_C_corpo_fuso_nascite.mp4`, salvo un'altra indicazione.
 
 **Il seguito:** nulla del passo 2 *(nessuna release, nessun upload, nessuna riga in `CLAUDE.md`)*. **FERMO su [M1159]**; H-1 di [M1058] resta fermo in attesa di Luca.
+
+## [M1205] LETTA (DECISIONE DI LUCA 12:05): H-1 CHIUSO DAL BUCO DI phi, LA SOGLIA TOLTA; LA LETTURA DEI BUCHI CHE RESTANO (SENZA SOGLIA, KS); H-2 SI APRE CON L'EREDITA' PER PARITA' (SOLO CARTA, LE DECISIONI DI FISICA A LUCA) *(scritto alle 2026-11-28 12:08)* [[PROGETTO-MITOSI]]
+
+**La posta:** `guardiano/posta/2026-11-28_1205_M1205.md` *(guardiano `5dec718e`)*; risponde a `a092f5db`. Idempotenza: `git log --all --grep "[M1205"` trova SOLO la posta.
+
+**Il piano:**
+1. **La lettura dei buchi** *(prima la carta, poi lo script, poi i numeri)*:
+   - sugli stati di C da 11500 a 16250, quanti archi dei nati hanno ancora `|phi| < 1e-6`, e quanti `< 1e-3` *(la soglia della previsione del guardiano)*, in particolare gli archi `n - k` e `n - l` del registro;
+   - la distribuzione di `|phi|` sugli archi dei nati contro il fondo allo stesso raggio *(KS a due campioni)*;
+   - il caso noto: la nascita rigiocata sola nel fresco da' 2 archi su 4 sotto `1e-6`.
+2. **La carta di H-2,** col conto esplicito della parita' su un vuoto a flusso pi, CP1 e CP2 come DEVE. Le decisioni di fisica *(come si dividono `Theta`, `psi`, `chi`, `pi`; il costo)* tornano a Luca PRIMA del codice.
+
+**[M1159] resta FERMO** *(gh)*: la lettera di [M1205] dice «dopo [M1159]», ma [M1159] dice di non fare altro DI [M1159], e [M1205] non ne dipende. Lo dichiaro.
