@@ -29430,3 +29430,13 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **Il lanciatore e' quello del worktree mitosi** (`coda_m1446.py`, che lancia con la sua radice): i comandi e la riga del registro stanno sul ramo dove sta il codice.
   - **Le misure** (01:06:44): C: 25.03 GB liberi; E: 151.99 GB; **impegnabile 30.78 GB liberi su 49.47**, sopra la soglia di 8.
 - **Il prossimo:** il lancio, con il commit delle righe APERTO; poi D-P3, la carta, mentre le due corse girano.
+
+
+### 2026-11-28 01:09 -- [M0026] C E F LANCIATE DALLA CODA: M0026_C ALLE 01:09:03 (pid 1404), M0026_F ALLE 01:09:05 (pid 23608); LE RIGHE APERTO NEL REGISTRO [[PROGETTO-MITOSI]]
+
+- **Il lanciatore** e' `coda_m1446.py` dal worktree mitosi, avviato alle 01:09. Ha scritto le righe APERTO in `doc/REGISTRO_CORSE.md` del ramo mitosi.
+- **I log:** `E:\soliton_simulator\controllo\M1446\log\M0026_C.txt` e `M0026_F.txt`. Tutti i timbri dicono «committato e pulito»: `corpo_fuso_mitosi.py` ha `3fea6ba8`, `vuoto_lapse_mitosi.py` ha `f777b20e`. F ha applicato `d2()`.
+- **Le attese:**
+  - F, 6000 tick a circa 1.3 s per tick: circa 2.2 ore, quindi intorno alle 03:20;
+  - C, 18000 tick: `d1` faceva 6000 tick in poco piu' di un'ora e mezza; con le nascite (11 s ciascuna) **non so stimarlo**. **K1 si legge a `k 6000`.**
+- **Mentre girano:** D-P3, la carta.
