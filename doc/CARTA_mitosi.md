@@ -540,3 +540,43 @@
   - (K-B1) la nascita rigiocata sola nel fresco *(l'arco 39123)*: 2 archi su 4 sotto `1e-6`, e sono `n - k`, `n - l`;
   - (K-B2) il fondo del fresco: 0 buchi;
   - (K-B3) KS su campioni sintetici: dalla stessa legge `p > 0.01`; da leggi spostate `p < 1e-6`.
+
+
+## H-2, LA CARTA: LA COPPIA IN ANTIFASE E L'EREDITA' PER PARITA' -- IL CONTO ESPLICITO *([M1205], DECISIONE DI LUCA 2026-11-28 `12:05`, punto 3; [M1058] punti 3 e 5; scritta PRIMA di ogni codice di H-2; NESSUNA regola nel simulatore finche' Luca non decide i punti di H2-D)* [[PROGETTO-MITOSI]]
+
+### IL MODELLO DEL CONTO
+- Nel vuoto fresco `phi` vale `+-1` su ogni estremita' *(K-B2: `|phi| = 1`; G: `|Phi| = pi` su ogni placchetta)*.
+- **Il segno d'arco:** `s_a = sign(f[a,0] f[a,1])`. L'angolo d'arco `theta_a` vale 0 se `s_a = +1`, pi se `s_a = -1`.
+- **Una placchetta e' a flusso pi se e solo se il prodotto dei segni dei suoi tre archi e' `-1`** *(l'orientamento non conta: `+-pi` sono lo stesso mod `2 pi`)*.
+- Il gauge su un nodo *(tutte le sue estremita' per `-1`)* cambia il segno di tutti i suoi archi, e non cambia nessun prodotto su un ciclo.
+
+### IL CONTO, UN NODO `n` SULL'ARCO `i - j` (LA STELLA `i, k, j, l`)
+- Prima ci sono due triangoli: `s_ik s_kj s_ij = -1` e `s_il s_lj s_ij = -1`.
+- Dopo ci sono quattro archi nuovi, `A = s_in`, `C = s_nj`, `D = s_nk`, `E = s_nl`, e quattro triangoli. **Tutti a flusso pi** se e solo se `D = -A s_ik`, `E = -A s_il` e `C = -A s_ij`, che e' sempre risolvibile *(le due espressioni di `C` coincidono per le due condizioni di prima)*.
+- **Quindi il conto per placchetta NON vieta il nodo solo:** con una regola di SEGNO *(non la media)* i quattro triangoli nuovi sono tutti a flusso pi.
+- **Che cosa cambia invece: il cammino da `i` a `j`.** Prima e' l'arco con `s_ij`; dopo e' `i - n - j`, con `A C = -s_ij`. **Il segno del cammino si rovescia** *(un invariante di gauge: il ciclo `i -> n -> j -> i` attraverso l'arco tolto ha flusso pi)*. Equivalentemente, il triangolo `(i, j, k)` *(flusso pi)* diventa DUE triangoli *(flusso `2 pi = 0`)*: **dal lato di `k` la parita' del numero di placchette cambia**, e lo stesso dal lato di `l`.
+
+### IL CONTO, LA COPPIA `n1` (DAL LATO DI `i`), `n2` (DAL LATO DI `j`)
+- Gli archi nuovi sono `A = s_i,n1`, `B = s_n1,n2`, `C = s_n2,j`, `D = s_n1,k`, `E = s_n1,l`, `F = s_n2,k`, `G = s_n2,l`. I triangoli sono sei: `(i, n1, k)`, `(i, n1, l)`, `(n1, n2, k)`, `(n1, n2, l)`, `(n2, j, k)`, `(n2, j, l)`.
+- **Tutti a flusso pi** se e solo se `D = -A s_ik`, `E = -A s_il`, `F = -C s_kj`, `G = -C s_lj` e **`B = A C s_ij`**, sempre risolvibile.
+- **Il cammino `i - n1 - n2 - j`:** `A B C = s_ij`, **conservato**. Dal lato di `k` un triangolo diventa TRE: la parita' e' conservata.
+- **La scelta di gauge piu' semplice** e' `A = C = +1`, cioe' `n1` prende il segno di `i` e `n2` quello di `j`. Allora `B = s_ij`: **l'arco `n1 - n2` porta il segno dell'arco tolto.** E' «l'antifase» quando `s_ij = -1`, che nel fresco e' l'alternanza `+1, -1` lungo il cammino *(il punto 3 di [M1205])*.
+
+### CHE COSA DICE IL CONTO A LUCA (prima di CP1 e CP2)
+1. **La parita' non distingue «uno» da «due» placchetta per placchetta:** CP1 *(sei triangoli a pi, nessun arco nullo)* ha un analogo che passa anche col nodo solo, se la regola e' di segno. **Il nodo solo rovescia il segno del cammino `i -> j`, la coppia lo conserva.** E' questo l'invariante che li separa, ed e' coerente col «due la conservano» di Luca.
+2. **Nelle nascite vere di C il vuoto non e' `+-1`** *(`|phi|` intorno a 0.5 nel corpo; `buchi_phi.txt`)*: la regola di segno va DEFINITA fuori dal vuoto ideale. Proposta, da decidere: «la fase dell'estremita' da cui si eredita, mai una media fra estremita' diverse».
+3. **Il conto si verifica numericamente** *(`conto_parita.py`, nessun tick, sul fresco della scena)*:
+   - (P0) i due triangoli di partenza a pi;
+   - (P1) il nodo solo per media: i buchi su `n - k`, `n - l`;
+   - (P2) il nodo solo per segno: i quattro triangoli a pi, e il cammino `-s_ij`;
+   - (P3) la coppia per segno *(`A = C = +1`, `B = s_ij`)*: i sei a pi, e il cammino `s_ij`;
+   - (P3-neg, DEVE FALLIRE) la coppia con `B = -s_ij`: due triangoli NON a pi.
+
+### H2-D, LE DECISIONI DI FISICA CHE TORNANO A LUCA PRIMA DEL CODICE
+- **(D1) la regola di segno fuori dal vuoto ideale** *(il punto 2)*: quale estremita' eredita `n1` sugli archi verso `k` e `l`, e quale `n2`;
+- **(D2) `psi` dei nati:** C-1 da' la media degli estremi a UN nato. Per due: la stessa media a tutti e due, oppure `n1` dal lato di `i` e `n2` da quello di `j`?
+- **(D3) `chi`, `pi`:** la media a tutti e due *(come C-1)*, oppure l'interpolazione a 1/3 e 2/3 lungo `i - j`?
+- **(D4) `Theta`:** azzerato su tutti e sette gli archi nuovi *(la lettera)*. Il `Theta` dell'arco tolto *(che e' scattato a `2 pi`)* sparisce: va scritto come si conta nel contatore;
+- **(D5) la nascita a coppia ha il flip?** Con sei triangoli e nessun flip *(la lettera)*, i gradi diventano `n1: 5`, `n2: 5`, `k` e `l` +1, `i` e `j` invariati. Il flip illegale non c'e' piu' *(la congettura)*, ma i gradi 5 sono una forma diversa del reticolo;
+- **(D6) il costo:** DH di una coppia si misura con `energia_chi_v2`, come una nascita. Si accetta sempre *(come oggi la nascita: nessun rifiuto per energia)*?
+- **(D7) CP2** *(la coppia invisibile al vuoto per 500 tick)*: la scena e' il vuoto fresco della scena del triangolo *(L 162)* senza materia, con UNA coppia forzata a mano sull'arco 39123. Le soglie sono quelle della lettera: `rho_phi` per anello entro `1e-9` a tick, `J_phi` radiale sotto `1e-6`, `Phi = +-pi` ovunque, la norma al bit a meno dei due nodi. Il tick e' quello di C *(`tick_chi_v2`, `chi = 0`)*, oppure quello del vuoto di [M0106]?
