@@ -1,0 +1,20 @@
+[TIMBRO] flusso_nascite.py  sha1-BYTE 69469d57  committato e pulito
+[TIMBRO] buchi_phi.py  sha1-BYTE 73d8c237  committato e pulito
+======================================================================================================================================
+[M1205] I BUCHI DI phi DELLE NASCITE DI C (M0026/C, da 11500 a 16250): buco |phi| < 1e-06 (e < 1e-03); nessun tick
+======================================================================================================================================
+  DEVE: (K-B2) il vuoto fresco: 0 buchi                                                                          PASSA |phi| da 1.000e+00 a 1.000e+00
+  DEVE: (K-B1) la nascita sola nel fresco (l'arco 39123): 2 archi su 4 sotto 1e-6, e sono n - k, n - l           PASSA |phi| ['1.00e+00', '1.00e+00', '6.12e-17', '6.12e-17']; i buchi verso [13204, 13040] (k 13204, l 13040)
+  DEVE: (K-B3) KS sintetico: la stessa legge p > 0.01, la legge spostata di 0.5 p < 1e-6                         PASSA p 0.884 e 1.85e-36
+--------------------------------------------------------------------------------------------------------------------------------------
+### B1, gli stati salvati: (k) gli archi dei nati, i buchi < 1e-6 e < 1e-3; n - k, n - l del registro; il fondo; KS nati contro fondo
+    k 12000: nati   167 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l   67, buchi 0.0000 (< 1e-3 0.0000); fondo  1082, buchi 0.0000 (< 1e-3 0.0000); mediane 3.675e-01 / 5.731e-01; KS D 0.263 p 2.54e-09
+    k 13000: nati   586 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l  236, buchi 0.0000 (< 1e-3 0.0000); fondo  1162, buchi 0.0000 (< 1e-3 0.0000); mediane 3.407e-01 / 5.449e-01; KS D 0.296 p 1.30e-30
+    k 14000: nati  1005 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l  405, buchi 0.0000 (< 1e-3 0.0000); fondo  1813, buchi 0.0000 (< 1e-3 0.0000); mediane 3.420e-01 / 5.086e-01; KS D 0.277 p 3.63e-44
+    k 15000: nati  1833 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l  726, buchi 0.0000 (< 1e-3 0.0000); fondo  1933, buchi 0.0000 (< 1e-3 0.0000); mediane 3.339e-01 / 4.896e-01; KS D 0.263 p 1.60e-57
+    k 16000: nati  2691 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l 1059, buchi 0.0000 (< 1e-3 0.0000); fondo  2015, buchi 0.0000 (< 1e-3 0.0000); mediane 3.291e-01 / 4.956e-01; KS D 0.274 p 8.75e-77
+    k 16250: nati  2880 archi, buchi 0.0000 (< 1e-3 0.0000); n-k/n-l 1133, buchi 0.0000 (< 1e-3 0.0000); fondo  2272, buchi 0.0000 (< 1e-3 0.0000); mediane 3.353e-01 / 4.861e-01; KS D 0.256 p 1.56e-73
+### B2, subito dopo la nascita (rigiocata sola sullo stato precedente): 505 nascite; archi nuovi 2525; buchi < 1e-6 0 (0.0000), < 1e-3 0 (0.0000); sugli archi verso k, l 0 su 1010; la mediana di |phi| sui nuovi 3.410e-01
+### B1, la media sugli stati: buchi sui nati 0.0000 (< 1e-3 0.0000); su n-k/n-l 0.0000 (< 1e-3 0.0000); sul fondo 0.0000 (< 1e-3 0.0000); KS p massimo 6.18e-02
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

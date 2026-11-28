@@ -29787,3 +29787,26 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 2. **La carta di H-2,** col conto esplicito della parita' su un vuoto a flusso pi, CP1 e CP2 come DEVE. Le decisioni di fisica *(come si dividono `Theta`, `psi`, `chi`, `pi`; il costo)* tornano a Luca PRIMA del codice.
 
 **[M1159] resta FERMO** *(gh)*: la lettera di [M1205] dice «dopo [M1159]», ma [M1159] dice di non fare altro DI [M1159], e [M1205] non ne dipende. Lo dichiaro.
+
+## [M1205] I BUCHI DI phi: NELLE NASCITE VERE DI C NON CE N'E' NESSUNO (0 SU 2525 ARCHI NUOVI SOTTO 1e-3, 0 SUGLI STATI); IL BUCO ESISTE SOLO NEL VUOTO FRESCO IDEALE. GLI ARCHI DEI NATI SONO PERO' PIU' DEBOLI (MEDIANA |phi| 0.34 CONTRO 0.49), KS p FINO A 8.8e-77 *(scritto alle 2026-11-28 12:14)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/buchi_phi.txt` *(`buchi_phi.py` a `7d6915db`, blob sha1-BYTE `73d8c237`; uscita 0, 3 DEVE su 3)*.
+
+**I casi noti:**
+- K-B2: nel fresco `|phi| = 1` ovunque, 0 buchi;
+- K-B1: la nascita sola nel fresco da' i buchi esattamente su `n - k` e `n - l` *(6.12e-17)*;
+- K-B3: il KS sintetico da' p 0.884 con la stessa legge e 1.85e-36 con la legge spostata.
+
+**B2, subito dopo la nascita:** 505 nascite rigiocate sole sullo stato precedente, 2525 archi nuovi. **Buchi sotto `1e-6`: 0; sotto `1e-3`: 0;** sugli archi verso `k` e `l`, 0 su 1010. La mediana di `|phi|` sui nuovi e' 0.341.
+
+**B1, sugli stati salvati 11500-16250:**
+- i buchi sono 0 a ogni `k`, sui nati, su `n - k` e `n - l` del registro e sul fondo;
+- la mediana di `|phi|` va da 0.329 a 0.368 sui nati, da 0.486 a 0.573 sul fondo;
+- il KS da' D tra 0.256 e 0.296, con p da 2.5e-09 a 8.8e-77. Il p massimo sugli stati e' 6.2e-02: in uno stato iniziale la differenza non e' significativa.
+
+**Che cosa vuol dire:**
+- il buco di `a092f5db` nasce dalla media di due estremita' OPPOSTE `+1` e `-1`, che c'e' solo nel vuoto ESATTAMENTE a flusso pi;
+- dove C fa nascere, cioe' dentro il corpo, il vuoto e' gia' deformato *(`|phi|` intorno a 0.5)*, la media non si annulla, e il nato **non ha buchi**;
+- c'e' invece un'**ammaccatura sistematica:** gli archi dei nati hanno `|phi|` piu' basso del fondo allo stesso raggio, di circa il 30% sulla mediana *(una stima, non una soglia)*.
+- **La previsione del guardiano** «i buchi restano, piu' del 50% sotto `1e-3`: 60%»: **NO** *(0%)*. Ma non perche' il vuoto li richiuda: nelle nascite vere i buchi **non si formano**.
+- **La premessa del punto 1 di [M1205]** *(«questo E' il difetto»)* vale nel vuoto fresco, non nelle nascite di C.
