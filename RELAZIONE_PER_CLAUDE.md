@@ -29498,3 +29498,16 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - (b) **le fasi rovesciate come ora**, accettando che non sia lo specchio: K1 diventa il solo giro `-1`, e la corrente si stampa;
   - (c) altro.
 - **Le corse di P3 NON sono in coda.** C ed F continuano.
+
+
+### 2026-11-28 02:50 -- [M0026] C, LA PRIMA NASCITA A k 11588 A r 7.43 DAL CENTRO DELLA COPPIA (DENTRO IL CORPO FUSO), P9 0.0; LA TERZA A k 11601; F A k 39750 SENZA NASCITE [[PROGETTO-MITOSI]]
+
+- **C** (il log `M0026_C.txt`, letto alle 02:50):
+  - **il campo** e' convertito alla prima nascita: `s_a` uniforme, i segni coerenti, `w` AL BIT, 52488 placchette;
+  - **la nascita 1:** `k 11588`, l'arco `41136`, 0 in attesa; il nodo `26244` a `r 7.43`; `chi_n -174.54`; `DH -51.485`, di cui `H_chi +2.2226`; P9 `0.0`; 11.4 s;
+  - **la nascita 3:** `k 11601`, l'arco `41132`, a `r 6.94`; `DH -126.70`; `E_persa +248.07`.
+- **Le previsioni:**
+  - **del guardiano**, «le prime nascite fra `k 2500` e `4000`, l'urto» (`65%`): **NO**;
+  - **mia**, «dopo `k 6000`» (`80%`): **SI'**.
+  - **Dove nascono:** entro `2 R` dal baricentro, che e' il primo criterio di C4. Lo si conta a corsa chiusa.
+- **F:** `k 39750`, 0 nascite.
