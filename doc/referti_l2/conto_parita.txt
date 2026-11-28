@@ -1,0 +1,13 @@
+[TIMBRO] flusso_nascite.py  sha1-BYTE 69469d57  committato e pulito
+[TIMBRO] conto_parita.py  sha1-BYTE c269ec0d  committato e pulito
+======================================================================================================================================
+[M1205] H-2, IL CONTO DELLA PARITA' SUL VUOTO FRESCO (l'arco 39123); nessun tick
+======================================================================================================================================
+  la stella: i 13041, j 13203, k 13204, l 13040; i segni s_ij -1, s_ik -1, s_kj -1, s_il -1, s_lj -1
+  DEVE: (P0) i due triangoli di partenza a flusso pi (prodotti dei segni -1)                                     PASSA delta [0.0, 0.0]
+  DEVE: (P1) il nodo solo per MEDIA: i buchi su n - k, n - l (|phi| < 1e-6), 1 su n - i, n - j                   PASSA |phi| ['1.00e+00', '1.00e+00', '6.12e-17', '6.12e-17']
+  DEVE: (P2) il nodo solo per SEGNO: i 4 triangoli nuovi a flusso pi; il cammino i - n - j ha segno -s_ij (ROVESCIATO) PASSA delta ['0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00']; A C +1 contro s_ij -1
+  DEVE: (P3) la coppia per SEGNO (A = C = +1, B = s_ij): i 6 triangoli a flusso pi, nessun arco nullo; il cammino i - n1 - n2 - j ha segno s_ij (CONSERVATO) PASSA delta ['0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00', '0.0e+00']; A B C -1 contro s_ij -1; i triangoli [(13040, 13041, 26244), (13040, 13203, 26245), (13040, 26244, 26245), (13041, 13204, 26244), (13203, 13204, 26245), (13204, 26244, 26245)]
+  DEVE: (P3-neg) DEVE FALLIRE: la coppia con B = -s_ij: i triangoli (n1, n2, k) e (n1, n2, l) NON a flusso pi (delta = pi) PASSA delta ['0.00', '0.00', '3.14', '0.00', '0.00', '3.14']
+### 5 DEVE: 5 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

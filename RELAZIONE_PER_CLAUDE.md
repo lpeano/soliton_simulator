@@ -29810,3 +29810,24 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 - c'e' invece un'**ammaccatura sistematica:** gli archi dei nati hanno `|phi|` piu' basso del fondo allo stesso raggio, di circa il 30% sulla mediana *(una stima, non una soglia)*.
 - **La previsione del guardiano** «i buchi restano, piu' del 50% sotto `1e-3`: 60%»: **NO** *(0%)*. Ma non perche' il vuoto li richiuda: nelle nascite vere i buchi **non si formano**.
 - **La premessa del punto 1 di [M1205]** *(«questo E' il difetto»)* vale nel vuoto fresco, non nelle nascite di C.
+
+## [M1205] H-2, IL CONTO DELLA PARITA': 5 SU 5. E UN FATTO CHE CAMBIA LA LETTURA: NEL VUOTO FRESCO TUTTI I 78732 ARCHI HANNO s = -1 (theta = pi SU OGNI ARCO). CON LA REGOLA «OGNI ARCO NUOVO HA LE ESTREMITA' OPPOSTE» ANCHE IL NODO SOLO DA' UN VUOTO A pi ESATTO *(scritto alle 2026-11-28 12:21)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/conto_parita.txt` *(`conto_parita.py` a `b7fa8b3f`; uscita 0, 5 DEVE su 5)*.
+- **P0:** i due triangoli di partenza sono a pi;
+- **P1:** il nodo solo per MEDIA lascia i buchi su `n - k` e `n - l` *(6.12e-17)*;
+- **P2:** il nodo solo per SEGNO *(`A = +1`)* ha i 4 triangoli a pi, e il cammino `i - n - j` vale `+1` contro `s_ij = -1`;
+- **P3:** la coppia per SEGNO *(`A = C = +1`, `B = s_ij`)* ha i 6 triangoli a pi, nessun arco nullo, e il cammino `-1` = `s_ij`;
+- **P3-neg:** con `B` rovesciato, `(n1, n2, k)` e `(n1, n2, l)` vanno a `delta = pi`, quindi fallisce come deve.
+
+**IL FATTO** *(una sonda fuori dal repo, sul `phi_v` della scena)*: **su 78732 archi, 78732 hanno `s = -1`.** Il vuoto fresco ha le due estremita' di OGNI arco opposte, cioe' `theta = pi` su ogni arco, e ogni triangolo ha flusso `3 pi = pi`.
+
+**Che cosa ne segue** *(algebra della carta, e P2 con `A = -1`)*:
+- con la regola «ogni arco nuovo ha `s = -1`» *(il valore all'estremita' del nato = MENO quello del vicino)*, il nodo solo da' `A = C = D = E = -1`, che soddisfa `D = -A s_ik`, `E = -A s_il`, `C = -A s_ij` con `s = -1` ovunque. **Il grafo cresciuto e' di nuovo un vuoto a flusso pi esatto, arco per arco, come se la nascita non ci fosse stata;**
+- lo stesso vale per la coppia *(`B = A C s_ij = -1`)*;
+- **il «segno del cammino» che separa uno da due** *(P2 contro P3)* confronta il cammino nuovo con l'arco TOLTO, che dopo la nascita non c'e' piu'. **Nel vuoto fresco non e' un osservabile del grafo cresciuto.**
+- **La conseguenza, da verificare e non dimostrata dinamicamente:** l'invisibilita' per placchetta *(la meta' di CP2 sul flusso)* sembra raggiungibile anche col nodo solo, con la regola d'arco invece della media. **La coppia non e' NECESSARIA per il flusso;** potrebbe esserlo per altro *(`rho_phi`, `J_phi`, la norma: le altre soglie di CP2)*, e solo il tick lo dice.
+
+**Per Luca** *(aggiunta a D1 della carta di H-2)*: la regola d'arco «`s = -1` su ogni arco nuovo» vale nel fresco; nel corpo `|phi|` e' intorno a 0.5 e il segno non e' `+-1`. Le decisioni D1-D7 *(e se provare CP2 anche col nodo solo e la regola d'arco, come controllo)* tornano a Luca **prima di ogni codice di H-2.**
+
+**FERMO su H-2.**
