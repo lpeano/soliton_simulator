@@ -441,3 +441,13 @@
 - **Il raggio della nascita:** `r` di ogni nascita contro `k`, per bin di 1000: mediana, massimo, e la frazione entro `2 R` *(il primo criterio di C4)*.
 - (L4) il numero delle nascite di `nascite.json` = `meta["nascite"]` di `stato_016250` = le righe «[nascita ...]» del log con `k <= 16250`.
 - **Il respiro C4 su `[15500, 18000]` NON si legge qui:** solo dopo la ripresa.
+
+## D-P3, LA CARTA CORRETTA: IL SINISTRO VIA (b), K1 RIDOTTO *([M1013], DECISIONE DI LUCA 2026-11-28 `10:13`, punto 4, dalla posta, guardiano `20860a72`; scritta PRIMA della modifica di `eotvos_aggregati.py`)* [[PROGETTO-MITOSI]]
+
+- **Il sinistro:** le fasi rovesciate `0, -2 pi/3, -4 pi/3` sui vertici del destro `+81` in `m1`, come in `f123414a` *(la via (b))*. **Nessuno specchio esatto.**
+- **K1 ridotto:** a `k 0` il giro del destro e' `+1` e quello del sinistro `-1`, entro `0.1` *(il caso noto di `triangoli_vortice.Geo.giri`)*. **`J_theta` per anello del destro e del sinistro si STAMPA e non decide nulla** *(in `f123414a`: il sinistro -10.148 / -4.751 / -0.155 contro il destro +13.115 / +4.718 / -0.112: NON opposti, perche' i vertici traslati non sono la riflessione)*.
+- **K2** *(la carica topologica 0)*, **K3** *(dichiarato)*, **K4** *(`G_M` entro `1e-3` da 1)* e **K5** *(nella corsa di M: gli stati `0..2000` = `CHI/caduta/V2` AL BIT)*: come gia' scritti.
+- **G, la provenienza:** `G_agg = 0.762915668679` e `G_M = 1` sono calcolati da `eotvos_aggregati.py noto` *(`G_di`, la media pesata con le masse di `dN/dy` sui baricentri dei sei francobolli, diviso `dN/dy(y_c)`)*, nel referto `eotvos_aggregati_noto_fallito.txt` di `f123414a`. Il noto rifatto li ricalcola, e devono uscire **identici**.
+- **La marea** *(UNA riga nel referto)*: per ogni francobollo `dN/dy(y_i) / dN/dy(y_c)`, con il minimo e il massimo calcolati dallo script *(la lettera dice 0.49 e 0.90: lo script li ricalcola)*. **Il test misura una media su un corpo esteso.**
+- **Il verdetto:** `|a_agg / a_M - G_agg / G_M| < 1%` sulla finestra `0..2000`, come in [M0141].
+- **Le corse M** *(fino a 6000)* **e agg** vanno in coda DOPO la ripresa di C, nel tetto dei 10. **La ripresa aspetta la scelta R1/R2/R3, quindi le due corse di P3 aspettano con lei.**
