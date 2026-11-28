@@ -115,6 +115,8 @@ class NasciteChi(RV.Rami):
         RV.Rami.__init__(self, ML.Nascite(cont, 0.0, 0, True), gacc, centro)
         self.en, self.X = en, X
         self.Lp = None
+        self.regola = MR2.regola                     # ### [M1056]: la ripresa mette MR2.regola_r3; la corsa di sempre resta con MR2.regola
+        self.lati_scartati, self.senza_flip, self.rifiutate = 0, 0, 0
 
     def nasci(self, Z, C, a, k, perche, Lp):
         t1 = time.time()
@@ -125,7 +127,7 @@ class NasciteChi(RV.Rami):
         orig, cand = self.en.candidato(X, i, j)
         MR2.candidato = cand
         try:
-            R, S = MR2.regola(Z, C, int(a), "stella")
+            R, S = self.regola(Z, C, int(a), "stella")
         finally:
             MR2.candidato = orig
         assert {R["nodi"]["i"], R["nodi"]["j"]} == {i, j}, "i nodi i, j della regola NON sono gli estremi dell'arco %d" % a
@@ -155,9 +157,19 @@ class NasciteChi(RV.Rami):
              "DH_chi": float(Hc1 - Hc0), "P9": float(d9), "res": float(S["res"]), "E_persa": self.e_persa, "t": time.time() - t1,
              "ok": bool(inf["ok_fuori"] and inf["ok_geo"] and inf["ok_U"]), "F3": f3, "pos": [float(Z["m1"][-1]), float(Z["m2"][-1])], "r": r_n,
              "chi_n": float(chi_n), "pi_n": float(pi_n), "Ec_norma": float(np.linalg.norm(Ec)), "Ec_max": float(np.max(np.abs(Ec)))}
+        if "scartati" in R:                          # ### [M1056] R3: solo con regola_r3 (la corsa di sempre non ha la chiave)
+            b["lati_scartati"] = [int(q) for q in R["scartati"]]
+            b["motivi"] = list(R["motivi"])
+            b["senza_flip"] = bool(R["senza_flip"])
+            self.lati_scartati += len(R["scartati"])
+            self.senza_flip += int(R["senza_flip"])
         self.bilanci.append(b)
         print("    [nascita %d] k %d, l'arco %d (%s): n %d a r %.2f; chi_n %+.4f; DH %+.4e (H_chi %+.4e); P9 %.1e; |Ec| %.3e; E_persa %+.6e (%.1f s)" % (
             self.nascite, k, a, perche, n, r_n, chi_n, b["DH"], b["DH_chi"], d9, b["Ec_norma"], self.e_persa, b["t"]))
+        if b.get("lati_scartati"):
+            print("      ### [M1056] R3: scartati i lati %s %s (%s); il flip fatto: %s; senza flip %s" % (
+                b["lati_scartati"], [list(R["lati"][q]) for q in b["lati_scartati"]], "; ".join(b["motivi"]),
+                ("il lato %d %s, m %s" % (b["scelto"], list(R["lati"][b["scelto"]]), nd.get("m"))) if b["scelto"] >= 0 else "nessuno (nas)", b["senza_flip"]))
         sys.stdout.flush()
         assert b["ok"] and d9 <= 1e-12 and f3, "la nascita NON e' entrata nel motore come il candidato (P9 %.1e) o F3 cade (%s): FERMO" % (d9, f3)
         return b, Lp
@@ -186,6 +198,242 @@ def converti(Z, C):
     C.campo = CO.orientato_da(C.campo, ori0)
     U1.scrivi_U(Z["mot"], C.campo)
     return info
+
+
+# ------------------------------------------------------------------------------------------ [M1056] la ripresa da uno stato cresciuto di C
+D_R3 = os.path.join(PF.CTRL, "M0026", "C_R3")
+D_NOTO_R = os.path.join(PF.CTRL, "M0026", "C_noto_ripresa")
+LOG_C = os.path.join(PF.CTRL, "M1446", "log", "M0026_C.txt")
+
+
+def riga_nascita(q, b):
+    """### la riga «[nascita q]» di `NasciteChi.nasci` SENZA i secondi fra parentesi *(il confronto col log vecchio)*."""
+    return "    [nascita %d] k %d, l'arco %d (%s): n %d a r %.2f; chi_n %+.4f; DH %+.4e (H_chi %+.4e); P9 %.1e; |Ec| %.3e; E_persa %+.6e" % (
+        q, b["k"], b["a"], b["perche"], b["nodi"]["n"], b["r"], b["chi_n"], b["DH"], b["DH_chi"], b["P9"], b["Ec_norma"], b["E_persa"])
+
+
+def righe_log_vecchio():
+    import re
+    out = {}
+    for r in open(LOG_C, encoding="utf-8", errors="replace"):
+        m = re.match(r"^(    \[nascita (\d+)\] .*) \([\d.]+ s\)\s*$", r)
+        if m:
+            out[int(m.group(2))] = m.group(1)
+    return out
+
+
+def riprendi(Z, f):
+    """### [M1056] la scena di C a `k 0` *(`V6.costruisci`, `D.parametri`, `converti`)*, poi il grafo, il motore e il campo ORIENTATO dallo stato
+    cresciuto `f` *(le righe di `mitosi_rami_v2.riprendi_v2`, il ramo «stato della v2»)*; `chi`, `pi`, `theta_a` *(lo stesso oggetto di `cont.theta`)*,
+    `gauss_acc`, `E_persa`, le nascite e il registro. `(C, P, NS, Lp, meta)`."""
+    import _u1_prototipo as U1
+    import contatore as COn
+    from solitone import posizioni as PZ
+    s_ = hashlib.sha1(open(f, "rb").read()).hexdigest()
+    assert open(f + ".sha1", encoding="utf-8").read().split()[0] == s_, "lo sha1 di %s NON coincide: la ripresa RIFIUTA" % f
+    with np.load(f) as d:
+        X = {x: d[x].copy() for x in d.files}
+    meta = json.loads(str(X.pop("meta")))
+    mot, st = Z["mot"], Z["st"]
+    C, info, _X0 = V6.costruisci(Z, 2, V6.STATO_G3)
+    P, Pon, m0 = D.parametri(Z, C, True)
+    par = {"kappa": P.kappa, "c0": P.c0, "m0": m0, "c2": P.c2, "m2": P.m2, "e0": P.e0, "s": P.s, "f": P.f, "kappa_on": Pon.kappa}
+    assert par == meta["parametri"], "i parametri della scena NON sono quelli della corsa: %r contro %r" % (par, meta["parametri"])
+    converti(Z, C)
+    g0 = C.campo
+    s0 = float(g0.s_a[0])
+    assert np.all(g0.s_a == s0), "s_a del toro NON e' uniforme"
+    ii0, jj0, n0 = np.asarray(mot.inc.nodo[0::2], dtype=np.int64), np.asarray(mot.inc.nodo[1::2], dtype=np.int64), int(mot.inc.n)
+    ii, jj, n = X["ii"].astype(np.int64), X["jj"].astype(np.int64), int(meta["n"])
+    N_ = n + 1
+    k0, kS = ii0 * N_ + jj0, ii * N_ + jj
+    tieni = np.isin(k0, kS)
+    ms = int(tieni.sum())
+    assert np.array_equal(kS[:ms], k0[tieni]), "il grafo salvato NON comincia coi sopravvissuti del toro nell'ordine"
+    A, E = X["campo_A"], X["campo_E"]
+    u = np.exp(1j * (g0.e * A))
+    U = np.zeros((len(ii), 2, 2), dtype=complex)
+    U[:, 0, 0] = u
+    U[:, 1, 1] = u
+    ini = {"psi_h": X["psi_h"][2 * ms:], "phi_h": X["phi_h"][2 * ms:], "geo_n": X["geo_n"][2 * ms:], "geo_U": U[ms:], "dtau": np.full(n - n0, float(mot.dtau[0]))}
+    for x in Z["chiavi"]:
+        if X[x].shape[0] == n:
+            ini["nodo:" + x] = X[x][n0:]
+    if mot.cs is not None:
+        ini["cs"] = P.s * np.exp(-P.kappa * X["chi"][n0:])        # ### ricalcolato da tick_chi_v2 all'inizio di ogni tick (la carta)
+    mot.apri_tick()
+    mot.cresci(tieni, ii[ms:], jj[ms:], n - n0, ini)
+    mot.chiudi_tick()
+    assert np.array_equal(np.asarray(mot.inc.nodo), MR.nodo_h(ii, jj)), "il grafo ricostruito NON e' quello salvato"
+    for x in Z["chiavi"]:
+        st[x] = X[x].copy()
+    mot.geo.n[...] = X["geo_n"]
+    g = CO.CampoOrientato(ii, jj, n, X["campo_vec"], g0.e, g0.forma, np.full(len(ii), s0), np.full(len(ii), U1.L_SU_LS), lambda *_: U1.AREA, CO.da_cicli(X["ori_cicli"]))
+    g.A[...] = A
+    g.E[...] = E
+    C.campo = g
+    U1.scrivi_U(mot, g)
+    Z["m1"], Z["m2"] = X["m1"], X["m2"]
+    Z["n"] = mot.inc.n
+    Z["nodo"] = np.asarray(mot.inc.nodo)
+    Z["g_e"] = np.zeros(2 * mot.inc.m)
+    for x, perche in PZ.RIFIUTATI.items():
+        if x in Z:
+            Z[x] = PZ.Rifiutato(x, perche)
+    Z["cresciuto"] = int(meta["nascite"])
+    Xc = {q: X[q].copy() for q in CT.CHIAVI_CHI}
+    cont = COn.Contatore(Xc["theta_a"])
+    cont.theta = Xc["theta_a"]
+    NS = NasciteChi(cont, X["gauss_acc"], meta["centro_coppia"], Energia(Z, P), Xc)
+    NS.e_persa, NS.nascite = float(meta["E_persa"]), int(meta["nascite"])
+    B = json.load(open(os.path.join(os.path.dirname(f), "nascite.json"), encoding="utf-8"))
+    NS.bilanci = [b for b in B if b["k"] <= int(meta["k"])]
+    assert len(NS.bilanci) == NS.nascite, "il registro ha %d nascite fino a k %d, lo stato %d" % (len(NS.bilanci), meta["k"], NS.nascite)
+    return C, P, NS, CT.Laplaciano(mot), meta
+
+
+def ripresa(f, d_out, k_fino, confronta_log=True):
+    """### [M1056] `corsa` riga per riga da uno stato cresciuto, con `MR2.regola_r3`; `k` assoluto. Con `confronta_log`: le righe «[nascita q]» = quelle
+    di `M0026_C.txt` per ogni `q` che c'e' nel log vecchio *(fino alla 651)*, altrimenti FERMO *(uscita 1)*. `(codice, NS)`."""
+    assert not os.path.exists(d_out) or not os.listdir(d_out), "%s c'e' gia' e non e' vuota: non si riscrive" % d_out
+    os.makedirs(d_out, exist_ok=True)
+    vecchie = righe_log_vecchio() if confronta_log else {}
+    codice = [0]
+    with V6.GD.TC.scena() as Z:
+        C, P, NS, Lp0, meta0 = riprendi(Z, f)
+        NS.regola = MR2.regola_r3
+        Lp = [Lp0]
+        en = NS.en
+        k_da = int(meta0["k"])
+        centro = meta0["centro_coppia"]
+        meta = {x: v for x, v in meta0.items() if x not in ("k", "E_persa", "nascite", "n")}
+        meta.update(corsa="M0026_C_R3", ripresa_da=f, regola="regola_r3 ([M1056])")
+        G = {}
+
+        def geometria():
+            G["nodo"] = np.asarray(Z["mot"].inc.nodo)
+            G["n"] = Z["mot"].inc.n
+            G["dxy"], M0 = D.corpi(Z, centro, 2)
+            G["masch"] = [mm[G["nodo"]] for mm in M0]
+            G["M0"] = M0
+        geometria()
+        serie, om, serie_H = [], [[], []], []
+        t1 = time.time()
+
+        def salva(k):
+            fz = os.path.join(d_out, "stato_%06d.npz" % k)
+            m = Z["mot"]
+            dati = {x: Z["st"][x] for x in Z["chiavi"]}
+            dati.update(campo_A=C.campo.A, campo_E=C.campo.E, **{q: NS.X[q] for q in CT.CHIAVI_CHI}, gauss_acc=NS.gacc)
+            dati.update(ii=np.asarray(m.inc.nodo[0::2]), jj=np.asarray(m.inc.nodo[1::2]), geo_n=m.geo.n, campo_vec=C.campo.vec,
+                        ori_cicli=C.campo.ori_cicli(), m1=np.asarray(Z["m1"], dtype=float), m2=np.asarray(Z["m2"], dtype=float))
+            np.savez(fz, meta=np.array(json.dumps(dict(meta, k=k, E_persa=NS.e_persa, nascite=NS.nascite, n=int(m.inc.n), lati_scartati=NS.lati_scartati,
+                                                       nascite_senza_flip=NS.senza_flip, nascite_rifiutate=NS.rifiutate))), **dati)
+            open(fz + ".sha1", "w", encoding="utf-8").write(hashlib.sha1(open(fz, "rb").read()).hexdigest() + "\n")
+            open(os.path.join(d_out, "nascite.json"), "w", encoding="utf-8").write(json.dumps(NS.bilanci))
+            H, Hc = en.H(C, NS.X, Lp[0])
+            serie_H.append([k, H, Hc, NS.e_persa, NS.nascite, int(m.inc.n)])
+
+        def misura(k):
+            rho = np.bincount(G["nodo"], weights=np.sum(np.abs(Z["st"]["psi_h"]) ** 2, axis=1), minlength=G["n"])
+            riga = [k]
+            for mm in G["M0"]:
+                w = rho * mm
+                c = (G["dxy"] * w[:, None]).sum(axis=0) / w.sum()
+                riga += [float(c[0]), float(c[1]), float(w.sum())]
+            riga.append(float(np.max(np.abs(NS.X["chi"]))))
+            serie.append(riga)
+
+        class Fermo(Exception):
+            pass
+
+        def dopo(kk, prima):
+            k = k_da + kk
+            for jx, ms in enumerate(G["masch"]):
+                om[jx].append(float(-np.angle(np.vdot(prima[ms], Z["st"]["psi_h"][ms]))))
+            sc = np.nonzero(np.abs(NS.X["theta_a"]) >= QUANTO)[0]
+            if sc.size > ATTESA_MAX:
+                print("### INGOLFAMENTO a k %d: %d archi in attesa (> %d): FERMO" % (k, sc.size, ATTESA_MAX))
+                codice[0] = 2
+                salva(k)
+                raise Fermo()
+            if sc.size:
+                b, Lp[0] = NS.nasci(Z, C, int(sc[0]), k, "scattato; %d in attesa" % (sc.size - 1), Lp[0])
+                geometria()
+                q = NS.nascite
+                if q in vecchie:
+                    nuova = riga_nascita(q, b)
+                    if nuova != vecchie[q]:
+                        print("### [M1056] IL LOG DIVERGE alla nascita %d (k %d), prima di 652: FERMO" % (q, k))
+                        print("      vecchia: %s" % vecchie[q])
+                        print("      nuova:   %s" % nuova)
+                        codice[0] = 1
+                        salva(k)
+                        raise Fermo()
+                    if q == max(vecchie):
+                        print("### [M1056] le righe delle nascite fino alla %d (k %d) = il log di M0026_C AL TESTO" % (q, k))
+            if kk % OGNI_SERIE == 0:
+                misura(k)
+            if kk % OGNI_STATO == 0:
+                salva(k)
+                print("    k %d: %s; max|chi| %.4e; nascite %d, n %d; H %+.10e, E_persa %+.6e; lati scartati %d, senza flip %d, rifiutate %d (%.0f s)" % (
+                    k, " ".join("y%d %+.4f" % (q_ + 1, serie[-1][2 + 3 * q_]) for q_ in range(2)), serie[-1][-1], NS.nascite, G["n"], serie_H[-1][1], NS.e_persa,
+                    NS.lati_scartati, NS.senza_flip, NS.rifiutate, time.time() - t1))
+                sys.stdout.flush()
+
+        print("### [M1056] C con R3: la ripresa da %s (k %d, %d nascite) fino a %d, in %s" % (f, k_da, NS.nascite, k_fino, d_out))
+        sys.stdout.flush()
+        try:
+            ciclo(Z, C, P, Lp, NS.X, k_fino - k_da, dopo)
+        except Fermo:
+            pass
+        fs = os.path.join(d_out, "serie.json")
+        open(fs, "w", encoding="utf-8").write(json.dumps({"meta": meta, "serie": serie, "omega": om, "H": serie_H}))
+        PF.firma(fs)
+    print("### la ripresa: il codice %d; nascite %d; lati scartati %d, senza flip %d, rifiutate %d (%.0f s)" % (
+        codice[0], NS.nascite, NS.lati_scartati, NS.senza_flip, NS.rifiutate, time.time() - t1))
+    return codice[0], NS
+
+
+def noto_ripresa():
+    """### [M1056] K-R: da `stato_016000` per 250 tick con `regola_r3`: lo stato a 16250 = `M0026/C/stato_016250` AL BIT; le 40 nascite = `nascite.json`."""
+    import shutil
+    avvia()
+    print("=" * 134)
+    print("[M1056] K-R: LA RIPRESA DI C DA stato_016000 PER 250 TICK (regola_r3) CONTRO M0026/C/stato_016250 AL BIT")
+    print("=" * 134)
+    if os.path.isdir(D_NOTO_R):
+        shutil.rmtree(D_NOTO_R)
+    cod, NS = ripresa(os.path.join(D_OUT, "stato_016000.npz"), D_NOTO_R, 16250, confronta_log=True)
+    fa, fb = os.path.join(D_NOTO_R, "stato_016250.npz"), os.path.join(D_OUT, "stato_016250.npz")
+    diverse = []
+    with np.load(fa) as a, np.load(fb) as b:
+        for x in b.files:
+            if x == "meta":
+                continue
+            if x not in a.files or a[x].shape != b[x].shape or not np.array_equal(a[x], b[x]):
+                diverse.append(x)
+        ma, mb = json.loads(str(a["meta"])), json.loads(str(b["meta"]))
+    esito("(K-R) da 16000, 250 tick: lo stato a 16250 = M0026/C/stato_016250 AL BIT (ogni chiave)", cod == 0 and not diverse, "il codice %d; diverse %s" % (cod, diverse))
+    esito("(K-R) E_persa e nascite di meta uguali", ma["E_persa"] == mb["E_persa"] and ma["nascite"] == mb["nascite"],
+          "%r %r contro %r %r" % (ma["E_persa"], ma["nascite"], mb["E_persa"], mb["nascite"]))
+    Bv = json.load(open(os.path.join(D_OUT, "nascite.json"), encoding="utf-8"))
+    Bn = json.load(open(os.path.join(D_NOTO_R, "nascite.json"), encoding="utf-8"))
+    chiavi = ("k", "a", "nodi", "scelto", "DH", "DH_chi", "E_persa", "pos", "chi_n", "pi_n")
+    dv = [q for q in range(len(Bv)) if q >= len(Bn) or any(Bv[q][x] != Bn[q][x] for x in chiavi)]
+    esito("(K-R) le nascite fino a 602 = nascite.json (k, l'arco, i nodi, il lato, DH, DH_chi, E_persa, la posizione, chi_n, pi_n) AL BIT",
+          len(Bn) == len(Bv) and not dv, "%d contro %d; diverse %s" % (len(Bn), len(Bv), dv[:5]))
+    esito("(K-R) nessun lato scartato fra 16000 e 16250 (il rigioco topologico: 0 flip illegali fino a 602)", NS.lati_scartati == 0, "%d" % NS.lati_scartati)
+    fall = [k for k, v in OK.items() if not v]
+    print("### %d DEVE: %d PASSANO, %d FALLISCONO %s" % (len(OK), len(OK) - len(fall), len(fall), fall))
+    print("=" * 134)
+    return 0 if not fall else 1
+
+
+def ripresa_r3():
+    avvia()
+    cod, _NS = ripresa(os.path.join(D_OUT, "stato_016250.npz"), D_R3, K_FINE, confronta_log=True)
+    return cod
 
 
 def noto():
@@ -354,9 +602,9 @@ def corsa():
 
 def main(argv):
     a = argparse.ArgumentParser()
-    a.add_argument("modo", choices=("noto", "corsa"))
+    a.add_argument("modo", choices=("noto", "corsa", "noto_ripresa", "ripresa"))
     x = a.parse_args(argv)
-    return noto() if x.modo == "noto" else corsa()
+    return {"noto": noto, "corsa": corsa, "noto_ripresa": noto_ripresa, "ripresa": ripresa_r3}[x.modo]()
 
 
 if __name__ == "__main__":

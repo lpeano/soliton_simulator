@@ -248,3 +248,38 @@ def regola(Z, C, a, giro="stella"):
     R = {"H": Hs.tolist(), "H_nascita": nas["H"], "scelto": -1 if pari else int(o[0]), "gap": gap / abs(float(Hs[o[0]])), "lati": lati, "nodi": scelto["nodi"],
          "t": [nas["t"]] + [c["t"] for c in cand], "cand": [nas] + cand}
     return R, scelto
+
+
+def regola_r3(Z, C, a, giro="stella"):
+    """### [M1056] R3 (DECISIONE DI LUCA 10:56; `doc/CARTA_mitosi.md`, «C, R3 E LA RIPRESA DA 16250»): `regola` riga per riga, ma i lati ILLEGALI
+    *(`flip_illegale` sul grafo di `nas`)* non si calcolano; sui legali la stessa scelta *(con UNO solo: quello; con NESSUNO: `nas`)*. `scelto` resta
+    l'indice nei QUATTRO lati. Con tutti legali = `regola` AL BIT. In piu' in `R`: `scartati` *(gli indici)*, `motivi`, `senza_flip` *(nessun legale)*."""
+    nas = candidato(Z, C, a, None, giro)
+    nd = nas["nodi"]
+    lati = ((nd["i"], nd["k"]), (nd["j"], nd["k"]), (nd["j"], nd["l"]), (nd["i"], nd["l"]))
+    ii2, jj2, n = np.asarray(nas["ii"]), np.asarray(nas["jj"]), int(nd["n"])
+    motivi = [flip_illegale(lambda v: vicini(ii2, jj2, v), n, lt[0], lt[1]) for lt in lati]
+    legali = [q for q in range(4) if motivi[q] is None]
+    scartati = [q for q in range(4) if motivi[q] is not None]
+    cand = [candidato(Z, C, a, lati[q], giro) for q in legali]
+    senza_flip = not legali
+    if len(legali) >= 2:
+        Hs = np.array([c["H"] for c in cand])
+        o = np.argsort(Hs, kind="stable")
+        gap = float(Hs[o[1]] - Hs[o[0]])
+        pari = gap < GUARDIA * abs(float(Hs[o[0]]))
+        scelto = nas if pari else cand[int(o[0])]
+        s_idx = -1 if pari else legali[int(o[0])]
+        g_rel = gap / abs(float(Hs[o[0]]))
+    elif len(legali) == 1:
+        scelto, s_idx, g_rel = cand[0], legali[0], float("inf")
+    else:
+        scelto, s_idx, g_rel = nas, -1, float("nan")
+    H4 = [None] * 4
+    t4 = [None] * 4
+    c4 = [None] * 4
+    for q, c in zip(legali, cand):
+        H4[q], t4[q], c4[q] = c["H"], c["t"], c
+    R = {"H": H4 if scartati else [float(h) for h in H4], "H_nascita": nas["H"], "scelto": s_idx, "gap": g_rel, "lati": lati, "nodi": scelto["nodi"],
+         "t": [nas["t"]] + t4, "cand": [nas] + c4, "scartati": scartati, "motivi": [motivi[q] for q in scartati], "senza_flip": senza_flip}
+    return R, scelto
