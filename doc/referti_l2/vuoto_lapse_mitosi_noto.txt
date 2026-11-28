@@ -1,0 +1,26 @@
+[TIMBRO] mitosi_rami_v2.py  sha1-BYTE a17baaad  committato e pulito
+[TIMBRO] mitosi_vuoto_v2.py  sha1-BYTE 96a0eb49  committato e pulito
+[TIMBRO] caduta_libera.py  sha1-BYTE 824bdee9  committato e pulito
+[TIMBRO] vuoto_lapse_mitosi.py  sha1-BYTE f777b20e  committato e pulito
+### D2: Campi.residuo assoluto in mattone (E:\soliton_lavoro\wt_mitosi\csv\solitone\mattone.py); solitone.mattone (E:\soliton_lavoro\wt_mitosi\csv\solitone\mattone.py)
+======================================================================================================================================
+[M0026] F, I CASI NOTI: K-F0 (A = 0 = [M0106] al bit), K-F1 (A vero: diverso), K-F2 (N_dip = campo_N)
+======================================================================================================================================
+  L 186: L_y 161.080725; G20 1.574010e-04; kappa 0.0002528944153922671; A = G20 L_y / (2 pi kappa) = 1.595629e+01; y_c 0.0
+### vuoto_lapse_A0 (mitosi): da E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz (k 35976, sha1 1b265f08), fino a k 36250; le nascite ACCESE
+    k 36000  M 0.000000000000e+00  E +1.2290968243e-10  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (68 s)
+    [stato] k 36000 sha1 7d19f1c2
+    k 36250  M 0.000000000000e+00  E +2.1316282073e-12  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (377 s)
+    [stato] k 36250 sha1 1eadb09e
+### vuoto_lapse_A0: 274 tick in 378 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+  DEVE: (K-F0) A = 0: lo stato a k 36250 = [M0106] (E:\soliton_simulator\controllo\M0237\vuoto_v2\stato_36250.npz) AL BIT PASSA il codice 0; diverse []
+### vuoto_lapse_A (mitosi): da E:\soliton_simulator\controllo\M0237\vuoto\vuoto_35976.npz (k 35976, sha1 1b265f08), fino a k 36250; le nascite ACCESE
+    k 36000  M 0.000000000000e+00  E +3.3602281325e-04  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (61 s)
+    [stato] k 36000 sha1 f4a933af
+    k 36250  M 0.000000000000e+00  E +9.3316450658e-04  E_persa +0.000000e+00  nascite 0  n 34596  D1 80.0/75.0  E1 (0, 0, nan)  |gauss_acc| 0.000e+00 (lontano 0.000e+00)  (341 s)
+    [stato] k 36250 sha1 c865a3ed
+### vuoto_lapse_A: 274 tick in 341 s; 0 nascite; E_persa +0.000000e+00; il codice 0
+  DEVE: (K-F1) DEVE FALLIRE: con A vero lo stato a k 36250 e' DIVERSO da [M0106]                                 PASSA diverse ['Lambda', 'phi_h', 'theta_a', 'cs_prec']
+  DEVE: (K-F2) N_dip sui nodi = caduta_libera.campo_N sulla stessa scena AL BIT                                  PASSA N da 0.9959734480 a 1.0040428307
+### 3 DEVE: 3 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

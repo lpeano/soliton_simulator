@@ -29414,3 +29414,19 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - mie: SI' (`20%`): **no**.
 - **CODA.md, voce 21**, e' sul ramo `guardiano`, dove io non scrivo. L'esito e' qui per il guardiano.
 - **Si riprende da dove si era:** i casi noti di F stanno rigirando con la cura (`c5bb9b06`); poi la coda con C e F; poi D-P3.
+
+
+### 2026-11-28 01:07 -- [M0026] F, I CASI NOTI 3 SU 3 (K-F0: A = 0 = [M0106] AL BIT A k 36250); C E F IN CODA (M0026_C, M0026_F), DAL LANCIATORE DEL WORKTREE MITOSI [[PROGETTO-MITOSI]]
+
+- **F** (`vuoto_lapse_mitosi.py noto` con la cura `c5bb9b06`, dalle 00:54:02 alle 01:06:26):
+  - **K-F0 PASSA:** con `A = 0`, da `35976` a `36250`, lo stato e' uguale AL BIT a `M0237/vuoto_v2/stato_36250` ([M0106]);
+  - **K-F1 PASSA:** con `A` vero, lo stato e' diverso (`Lambda`, `phi_h`, `theta_a`, `cs_prec`);
+  - **K-F2 PASSA:** `N_dip` e' uguale AL BIT a `campo_N`, con `N` da `0.9959734480` a `1.0040428307`;
+  - gli avvisi `invalid value` di `mitosi_lunga` e `mattone_rhoc` vengono dalle misure del raggio della materia con `rho = 0` nel vuoto. Non toccano lo stato.
+  - **Il ritmo:** 274 tick per due corse in circa 12 minuti, quindi circa 1.3 s per tick, e circa 2.2 ore per le 6000 della corsa.
+- **La coda** (`doc/referti_l2/coda_m1446.json` sul ramo mitosi, da 242 a 244 voci):
+  - **`M0026_C`** (priorita' 0): `corpo_fuso_mitosi.py corsa`, 18000 tick in `M0026/C`;
+  - **`M0026_F`** (priorita' 1): `vuoto_lapse_mitosi.py corsa`, 6000 tick in `M0026/F`.
+  - **Il lanciatore e' quello del worktree mitosi** (`coda_m1446.py`, che lancia con la sua radice): i comandi e la riga del registro stanno sul ramo dove sta il codice.
+  - **Le misure** (01:06:44): C: 25.03 GB liberi; E: 151.99 GB; **impegnabile 30.78 GB liberi su 49.47**, sopra la soglia di 8.
+- **Il prossimo:** il lancio, con il commit delle righe APERTO; poi D-P3, la carta, mentre le due corse girano.
