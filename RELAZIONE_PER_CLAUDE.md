@@ -29511,3 +29511,12 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **mia**, «dopo `k 6000`» (`80%`): **SI'**.
   - **Dove nascono:** entro `2 R` dal baricentro, che e' il primo criterio di C4. Lo si conta a corsa chiusa.
 - **F:** `k 39750`, 0 nascite.
+
+
+### 2026-11-28 03:40 -- [M0026] F CHIUSA: M0026_F FINITO ALLE 03:38:57, USCITA 0; 6000 TICK IN 8991 s, 0 NASCITE NEL VUOTO CON IL LAPSE DIPINTO; C A 166 NASCITE A k 13602 [[PROGETTO-MITOSI]]
+
+- **F** (il log `M0026_F.txt`): `### vuoto_lapse_F: 6000 tick in 8991 s; 0 nascite; E_persa +0.000000e+00; il codice 0`. L'ultimo stato e' `k 41976` (sha1 `34cd9f52`). Nel registro c'e' la riga CHIUSO.
+  - **Il verdetto** della carta («NASCE / NON NASCE») e' **NON NASCE**.
+  - **Le letture** che la carta chiede (`max |Theta|` raggiunto, `rho_phi` e `J_phi` per fascia di `y`, la norma e `H`) vengono nel prossimo pezzo, con uno script di lettura.
+  - **Le previsioni:** del guardiano, «nessuna nascita» (`55%`): **SI'**; mia, «NON NASCE» (`65%`): **SI'**.
+- **C:** 166 nascite a `k 13602`, tutte con 0 in attesa, circa 8 s ciascuna. `E_persa +1.0211e+04`. L'ultima nasce a `r 11.90`.
