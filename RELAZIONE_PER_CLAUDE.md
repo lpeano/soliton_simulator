@@ -29538,3 +29538,27 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **Le previsioni:**
   - del guardiano, «nessuna nascita» (`55%`): **SI'**; il «se nasce, sui fianchi» non e' valutabile;
   - mia, «NON NASCE» (`65%`): **SI'**. La mia ragione scritta prima (`Theta` cresce con le differenze di `cs` lungo un arco, che sono piccole) **e' quella che si vede: `Theta` cresce, ma lentamente.**
+
+
+## [M0026] C E' CADUTA: M0026_C FALLITO ALLE 05:08:29 (USCITA 1), A k 16487 DOPO 651 NASCITE; IL TRIANGOLO (26431, 26547, 26895) DEL CANDIDATO NON HA UN ORIENTAMENTO *(scritto alle 2026-11-28 05:09)* [[PROGETTO-MITOSI]]
+
+**Il fatto** *(dal log `controllo/M1446/log/M0026_C.txt`, contato con uno script)*:
+- **651 nascite**, la prima a `k 11588`, l'ultima riuscita (la 651) a `k 16487` col nodo `26894`; al piu' `2` archi in attesa, `r` da `2.13` a `18.42`, circa `9.55 s` a nascita. `E_persa` all'ultima `+2.681496e+04`;
+- **le nascite cumulate:** `34` prima di `k 12000`, `121` prima di `13000`, `207` di `14000`, `380` di `15000`, `562` di `16000`, `651` di `16500`. **Accelerano;**
+- la nascita `652` cade dentro `MR2.regola` -> `candidato` -> `CampoOrientato.cresci` -> `_placchetta`: `AssertionError: il triangolo (26431, 26547, 26895) NON ha un orientamento: nessun default`;
+- l'ultimo stato salvato e' `stato_016250.npz`; K1 *(a `k 6000` lo stato contro `d1`)* era passato AL BIT.
+
+**La lettura del codice, senza nessuna cura:**
+- `26895` e' il nodo che stava nascendo (`n + 1`);
+- l'orientamento del candidato e' quello EREDITATO da `nascita_ori` e `flip_ori` *(`mitosi_regola_v2`)*, cioe' i triangoli della stella `i - k - j - l` e del flip;
+- `_topologia` ritrova invece nel grafo nuovo un 3-ciclo con `n + 1` che **non e' una faccia della stella**. **La mia ipotesi, non verificata:** fra due vicini del nato c'era gia' un arco *(un 3-ciclo separante: la regione e' affollata, 651 nodi nati entro `r 18.4`)*, e la regola della nascita non lo esclude.
+
+**Che cosa NON faccio:**
+- la cura *(escludere il candidato, o rifiutarlo come nascita non ammessa, o altro)* **cambia la regola della nascita: e' una decisione di Luca**, e sarebbe comunque un commit a se';
+- la lettura di C si puo' fare sui `16250` tick salvati, **ma C4 voleva il respiro su `[15500, 18000]`**: con il tratto troncato a `16250` non lo scrivo senza il suo si'.
+
+**Le domande a Luca:**
+1. la cura del 3-ciclo separante: rifiutare il candidato che lo crea (il lato successivo, o l'arco che non nasce), oppure altro?
+2. C si rifa da `stato_016250` con la cura, oppure si legge cosi' com'e' fino a `16250`?
+
+**FERMO** su C *(e su D-P3, che aspetta la scelta sul sinistro)*.
