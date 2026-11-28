@@ -13,7 +13,7 @@ il destro = le righe di `triangolo_chi_v4.prepara` per `t120` *(fasi `0, 120, 24
 *(`x`)*, le fasi `0, -120, -240`; la materia per SOMMA, il vuoto per PRODOTTO *(come `prepara`)*; `y_c` sul baricentro dell'aggregato;
 6000 tick in `controllo/M0141/agg`. **G** = `somma_i m_i dN/dy(y_i) / (somma_i m_i dN/dy(y_c))`, `y_i` il baricentro del francobollo `i` da
 solo, `m_i` la sua massa *(`prepara`)*; `dN/dy = -kappa A (2 pi/L_y) cos(2 pi (y - y_c)/L_y) N(y)`. **Casi noti:** (K1) a `k 0` il giro del
-sinistro `-1`, del destro `+1`, e `J_theta` del sinistro = `-J_theta` del destro entro `1e-9`; (K2) la carica TOPOLOGICA `+1 - 1 = 0`
+sinistro `-1`, del destro `+1`, entro `0.1` *(RIDOTTO da [M1013], Luca 10:13: `J_theta` per anello si STAMPA, senza verdetto)*; (K2) la carica TOPOLOGICA `+1 - 1 = 0`
 *(stampate anche `e somma rho` -- la massa, NON zero -- e la sorgente di Gauss, zero per costruzione)*; (K3) dichiarato: [M0222] girava col
 tick di `chi` dinamico, qui `tick_var` col `chi` dipinto: AL BIT non e' confrontabile; (K4) `G_M` entro `1e-3` da `1`; (K5) nella corsa di M.
 """
