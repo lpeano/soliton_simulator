@@ -29757,3 +29757,20 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 - alla nascita 667 *(k 16536)* le righe «R3: scartati» sono 2.
 
 **La corsa continua fino a 18000.** A corsa chiusa: la riga CHIUSO, il respiro C4 su `[15500, 18000]`, il verdetto di C e il video fino a 18000.
+
+## [M1159] LETTA (DECISIONE DI LUCA 11:59, CORRETTA 12:02): IL CONTROLLO DI gh -- gh NON C'E'; FERMO, NESSUN UPLOAD *(scritto alle 2026-11-28 12:03)* [[PROGETTO-MITOSI]]
+
+**La posta:** `guardiano/posta/2026-11-28_1159_M1159.md` *(guardiano `8ab859ac` e la correzione `69a12d9d`)*. Idempotenza: `git log --all --grep "[M1159"` trova SOLO la posta.
+
+**Il controllo** *(solo lettura)*:
+- `gh --version` -> `gh: command not found`;
+- `gh auth status` -> `gh: command not found`;
+- `gh release list -R lpeano/soliton_simulator` -> `gh: command not found`.
+- **L'esito: `gh` NON c'e'** nel PATH della shell da cui lavoro *(Git Bash)*. Quindi non e' autenticato da qui, e gli scope non sono leggibili.
+- Una ricerca fuori dal PATH *(`Program Files\GitHub CLI`, `where`, `Get-Command`)* mi e' stata NEGATA dal controllo dei permessi: non l'ho aggirata.
+
+**Che cosa manca** *(lo fa Luca a mano, come dice la lettera)*: `winget install GitHub.cli`, poi `gh auth login` *(github.com, l'utente `lpeano`, lo scope `repo`)*. Se `gh` e' gia' installato altrove, va messo nel PATH della shell.
+
+**Un'incongruenza da segnalare per il passo 2:** la lettera carica `E:\soliton_simulator\controllo\M0026\C\anima_corpo_fuso_nascite.mp4`, ma il video sta in `E:\soliton_lavoro\wt_mitosi\doc\referti_l2\anima_corpo_fuso_nascite.mp4` *(fuori da git, `cd14c2f7`)*. Al passo 2 carichero' quello, col nome `M0026_C_corpo_fuso_nascite.mp4`, salvo un'altra indicazione.
+
+**Il seguito:** nulla del passo 2 *(nessuna release, nessun upload, nessuna riga in `CLAUDE.md`)*. **FERMO su [M1159]**; H-1 di [M1058] resta fermo in attesa di Luca.
