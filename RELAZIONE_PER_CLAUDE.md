@@ -29562,3 +29562,17 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 2. C si rifa da `stato_016250` con la cura, oppure si legge cosi' com'e' fino a `16250`?
 
 **FERMO** su C *(e su D-P3, che aspetta la scelta sul sinistro)*.
+
+
+## [M1013] LETTA (DECISIONE DI LUCA 10:13): C, LA CURA DEL FLIP ILLEGALE E LA RIPRESA DA 16250; C, LA LETTURA SU 0-16250; P3, IL SINISTRO VIA (b); LA PARITA' SOLO SEGNATA *(scritto alle 2026-11-28 10:15)* [[PROGETTO-MITOSI]]
+
+**La posta:** `guardiano/posta/2026-11-28_1013_M1013.md` *(guardiano `20860a72`)*; risponde a `9038a3b3` *(C caduta)* e `f123414a` *(P3, K1 fallito)*. Idempotenza: `git log --all --grep "[M1013"` trova SOLO la posta; nessun pezzo era gia' eseguito.
+
+**Le decisioni, come le eseguo:**
+1. **La cura (DECISIONE 1):** il candidato il cui flip crea un arco GIA' ESISTENTE non e' una nascita ammessa: si rifiuta, l'arco resta in attesa, e il rifiuto si conta (`rifiuti_flip_illegale`). La cura sta fuori dal nucleo, in `mitosi_regola_v2`; prima la carta in `CARTA_mitosi.md`, poi i casi noti su un grafo piccolo costruito a mano *(illegale: rifiutato; legale: nasce come prima, AL BIT)*;
+2. **La ripresa (DECISIONE 2):** da `M0026/C/stato_016250.npz` fino a `18000`, in coda. DEVE: il log delle nascite fino alla 651 (`k 16487`) IDENTICO a quello di `M0026_C`, altrimenti FERMO;
+3. **La lettura su 0-16250**, mentre la ripresa gira, con lo script prima dei numeri e il caso noto del fit sintetico. Il respiro C4 si fa SOLO dopo la ripresa;
+4. **P3 via (b):** K1 ridotto a «giro -1», con la corrente STAMPATA per anello e senza verdetto; `G_agg 0.7629` e `G_M 1` nella carta con la provenienza; la riga sulla marea *(0.49 e 0.90: li ricalcola lo script)*; le due corse in coda DOPO la ripresa di C;
+5. **La parita':** solo segnata *(voce 22 della CODA)*, nessun codice.
+
+**L'ordine:** C-cura, C-ripresa in coda, C-lettura mentre gira, P3. Un commit per pezzo, poi FERMO.
