@@ -11,7 +11,8 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 21. **«A è già la fase di φ?»** ([M0037], decisione di Luca 28/11 00:37): confronto GAUGE-INVARIANTE sulle placchette, eB per triangolo contro la circolazione degli angoli θ_a = arg(φ[j→i]·conj φ[i→j]) attorno allo stesso triangolo; il vuoto NON vede U (`motore.py` L685: permutazione pura), quindi se si somigliano è ψ che lo fa. Stati: giro 3 di M0414, coppia d1 a k 3230 e 18000, vuoto fresco. Casi noti K1–K4 (gauge su φ, gauge su A, A=0, il nullo a permutazioni). Previsione del guardiano: SÌ al 35%. **ESITO (c3ddeed2, 01:00): NO per le soglie (Spearman −0,03 e −0,01 entro 2R, dentro il nullo), ma il test era mal posto (n.264): il vuoto fresco ha Φ = ±π su ogni placchetta (flusso π strutturale) e A è quasi puro gauge (max|A| 1032, max|eB| 1e-6). Due fatti nuovi da capire, senza mandato: (a) perché il vuoto di φ è a flusso π; (b) il campo U(1) in queste scene ha solo la parte longitudinale (E): misurare E e Gauss, non B. Se mai si rifà: wrap(Φ − Φ_vuoto) contro eB.**
 
 ## Corse corte (≤ 6000 tick): un sì e una soglia
-6. **La nascita nel vuoto CON il lapse** (decisa il 27/11 22:47, [M2245] F) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
+22. **La parità: il modello distingue la destra dalla sinistra?** ([M1013], segnata 28/11): il sinistro a fasi rovesciate NON è lo specchio del destro (giro −1 ma J_θ −10,1 contro +13,1: il francobollo ha una corrente interna sua). Lo specchio spaziale x → −x sul reticolo (A1 → −A1, A2 → A1+A2) con la trasformazione dello spinore da trovare; DEVE: specchio(evoluto) = evoluto(specchio) al bit. Se non commuta, il modello è chirale. Lettura a costo zero su uno stato del triangolo. Nessun codice finché Luca non dice via.
+6. ~~**La nascita nel vuoto CON il lapse**~~ **CHIUSA 28/11 03:46 ([M0026] F): NON NASCE in 6000 tick; ma Θ cresce lineare nel seno dipinto (0,064/1000 tick, 2π a ~97.000) e il vuoto scorre verso il fondo senza accumularsi.** Era: (decisa il 27/11 22:47, [M2245] F) (χ dipinto, niente materia): nasce o no. Decide se l'espansione del modello può avvenire dove non c'è materia.
 7. **Il corpo fuso con la mitosi accesa**, contro S1 (ex H3): si raffredda facendo spazio? i nodi nati ∝ l'energia interna persa? (previsione 60%).
 8. **Le tre semine del vuoto** per K (cima e fondo) e per il punto fisso: le barre d'errore vere (assorbe S4 Eötvös pulito).
 9. **Masse 1 e 4 nella coppia**: il baricentro resta fermo? il rapporto delle accelerazioni è 4?
@@ -34,7 +35,7 @@ Un elenco solo. Ogni voce ha il costo, cosa serve da Luca, e la condizione. Le v
 20. Il blog: Pages sul repo ITACA, i post in `posts/`, i video.
 
 ## In corsa adesso
-- [M0026]: C (coppia da k 0 con le nascite), F (N dipinto nel tick della mitosi), D-P3; premesse scritte da CC (535b5531). [M0037] G in parallelo (lettura).
+- [M0026] C: 651 nascite da k 11588 (accelerano), caduta a 16487 per un flip illegale; [M1013]: cura e ripresa da 16250. F chiusa. D-P3: via (b), in coda dopo C.
 - [M1519]/[M1824]: S1 (il corpo fuso libero fino a 54.000) e S2 (il punto fisso 2M, giro 3 chiuso); poi il verdetto S3 e il video v4.
 
 ## Chiuse il 27/11 (il perché, in una riga; non si riaprono senza una ragione nuova)
