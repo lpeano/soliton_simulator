@@ -29747,3 +29747,13 @@ La riga APERTO di `m1446-M0026_C_R3` e' in `doc/REGISTRO_CORSE.md`; il log e' `c
 - (c) contare come difetto anche l'arco con `|phi|` nullo *(il fatto qui sopra)*, che oggi la misura scarta.
 
 **FERMO su H-1** *(e quindi su H-2)* finche' Luca non sceglie.
+
+## [M1056] LA RIPRESA C-2: IL DEVE PASSA (LE NASCITE FINO ALLA 651 = IL LOG VECCHIO AL TESTO); LA 652 A k 16496 SCARTA I LATI 1 E 2, IL 3-CICLO E' QUELLO DELLA CADUTA (26431, 26547, 26895), E IL FLIP SI FA COL LATO 0 *(scritto alle 2026-11-28 11:44)* [[PROGETTO-MITOSI]]
+
+**Dal log** `controllo/M1446/log/M0026_C_R3.txt`, durante la corsa:
+- «le righe delle nascite fino alla 651 (k 16487) = il log di M0026_C AL TESTO»: **il DEVE di [M1056] passa;**
+- **la nascita 652** e' a `k 16496`, sull'arco 48393, col nato 26895 a `r 8.74` e `DH +2.1327e+01`. R3 scarta i lati 1 e 2 *(`j - k` = 16635 - 26534 e `j - l` = 16635 - 26431)*: «i vicini comuni di 26895 e 26547 sarebbero [16635, 26431, 26534]». **E' proprio il triangolo (26431, 26547, 26895) della caduta.** Il flip si fa col lato 0 *(16472 - 26534, `m` 16473)*, quindi non e' una nascita senza flip;
+- **i lati illegali sono venuti A COPPIA** *(i due lati di `j = 16635`)*, come diceva la carta;
+- alla nascita 667 *(k 16536)* le righe «R3: scartati» sono 2.
+
+**La corsa continua fino a 18000.** A corsa chiusa: la riga CHIUSO, il respiro C4 su `[15500, 18000]`, il verdetto di C e il video fino a 18000.
