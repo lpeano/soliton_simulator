@@ -497,3 +497,30 @@
 - **Il formato:** `1280 x 720`, 30 fps, un fermo di 3 s sul primo e sull'ultimo quadro, la scritta in alto di Luca.
 - **Che cosa va in git:** il video NO *(`*.mp4` e' in `.gitignore`)*; il PNG dell'ultimo quadro si'.
 - **Il caso noto:** i nodi in evidenza nell'ultimo fotogramma *(contati sul registro, anche quelli fuori dalla finestra)* = le nascite del log con `k <=` l'ultimo `k` = `meta["nascite"]` dello stato.
+
+
+## H-1, IL CONTO DEL DIFETTO DI FLUSSO DELLE NASCITE DI C *([M1058], DECISIONE DI LUCA 2026-11-28 `10:58`, punto 1, dalla posta, guardiano `d8fdb104`; scritta PRIMA dello script; a costo zero, nessun tick)* [[PROGETTO-MITOSI]]
+
+### LE DEFINIZIONI
+- **L'angolo d'arco** come in G *(`fase_vuoto_vs_A`)*: `theta_a = arg(f[a,1] conj f[a,0])`, con `f = phi_h.reshape(m, 2)`; si scartano gli archi con `min |f| < 1e-6`.
+- **La placchetta** e' ogni 3-ciclo del grafo *(sul toro e sui grafi di C, con 0 flip illegali, i 3-cicli SONO le facce: `16615729`)*. `Phi_p = wrap(theta(a -> b) + theta(b -> c) + theta(c -> a))`, con `theta(x -> y) = +-theta_a` secondo il verso dell'arco.
+- **Lo scarto dal flusso pi:** `delta_p = pi - |Phi_p|`, che e' **indipendente dall'orientamento** della placchetta.
+- **La soglia** *(la lettera)*: `tau = 3 sigma`, con `sigma` = la rms di `delta_p` sul vuoto fresco della scena *(`phi_v`, `A = 0`; la carta fissa la rms come «sigma dello scarto da pi»)*. **Un difetto** e' una placchetta con `delta_p > tau`.
+
+### I CASI NOTI
+- **(K-H1a)** sul vuoto fresco la frazione di difetti e' 0 *(la lettera)*. Se fallisce, H-1 si ferma: la soglia della lettera non separa nemmeno il fresco.
+- **(K-H1c)** il gauge su `phi` *(ogni nodo per `e^{i chi_v}` su tutte le sue estremita')* lascia `delta_p` invariato entro `1e-10`.
+- **(K-H1n, DEVE FALLIRE)** una fase `pi/2` su UNA estremita' del vuoto fresco: le placchette dei due triangoli di quell'arco diventano difetti *(la frazione non e' piu' 0)*.
+- **(K-H1b, STAMPATA, nessun verdetto)** una nascita costruita a mano nel vuoto fresco *(l'arco piu' vicino al centro della scena, con `k`, `l` dall'orientamento del toro)*, con le fasi del nato da `nasci_array`, poi il flip `i - k` da `flip_array`: `Phi` dei 4 triangoli nuovi, poi di quelli dopo il flip. *(`_fattore` scala solo le ampiezze, con un fattore reale: le fasi sono quelle di `nasci_array` e `flip_array`.)*
+
+### LE MISURE
+- **(M1) sugli stati salvati di `M0026/C`, da 11500 a 16250 ogni 250:**
+  - la frazione di difetti sulle placchette che toccano un nato *(un vertice `>= n0`)*;
+  - la frazione sul FONDO: le placchette che NON lo toccano, entro lo stesso raggio *(il centro della placchetta, dal centro di `rho_psi`, al piu' il raggio massimo di quelle che lo toccano)*; e su tutte.
+- **(M2, la misura pulita) ogni nascita del registro** con `k` in `(k_s, k_s + 250]` si rigioca SOLA sullo stato `k_s` *(nessun tick)*:
+  - `nasci_array`, poi `flip_array` col lato registrato;
+  - la frazione di difetti sui triangoli nuovi *(quelli che contengono il nato)*, contro il fondo dello stato `k_s` entro lo stesso raggio;
+  - si rigioca solo se l'arco `i - j` c'e' nello stato `k_s`, con i vicini comuni `{k, l}` e la stessa `m`; altrimenti si salta e si conta *(l'arco nato da una nascita precedente nello stesso intervallo)*.
+- **La lettura** *(fissata qui)*: «la nascita singola FA difetti» se la frazione dei nuovi supera quella del fondo di piu' di 2 sigma binomiali *(`sqrt(p (1 - p) / N_nuovi)`, con `p` = il fondo)*; «NON li fa» se la supera di meno di 1 sigma o non la supera; in mezzo, NON DECIDIBILE.
+- **Lo smaltimento** *(la seconda previsione del guardiano)*: la frazione sui nati negli stati salvati *(M1)* contro quella subito dopo la nascita *(M2)*.
+- **Il seguito** *(la lettera)*: se M2 dice «FA difetti», H-2 si scrive in carta; se dice «NON li fa», FERMO su H-2, e si scrive al guardiano.
