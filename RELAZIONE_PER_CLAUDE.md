@@ -29440,3 +29440,19 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - F, 6000 tick a circa 1.3 s per tick: circa 2.2 ore, quindi intorno alle 03:20;
   - C, 18000 tick: `d1` faceva 6000 tick in poco piu' di un'ora e mezza; con le nascite (11 s ciascuna) **non so stimarlo**. **K1 si legge a `k 6000`.**
 - **Mentre girano:** D-P3, la carta.
+
+
+### 2026-11-28 01:12 -- [M0026] D-P3 FERMO PRIMA DEL CODICE: LO SPAZIO (DUE TRIANGOLI E M NON STANNO SEPARATI IN L 162), LA GEOMETRIA DEL SENO (IL GRADIENTE MEDIO SUI FRANCOBOLLI E' PIU' PICCOLO DI QUELLO AL CENTRO, OLTRE L'1%), LA FORMA (V2 O V3). DOMANDE PER LUCA [[PROGETTO-MITOSI]]
+
+**La carta** e' la sezione «D-P3, PRIMA DEL CODICE» di `doc/CARTA_mitosi.md`.
+
+**LE DOMANDE** (il criterio di chiusura e' una DECISIONE DI LUCA con l'ora):
+- **P3-1, lo spazio:**
+  - (a) due corse nello stesso seno, M da solo e l'aggregato da solo, come le masse 1 e 4 di `eotvos_v2`;
+  - (b) una scena piu' grande;
+  - (c) triangoli piu' piccoli.
+- **P3-2, il confronto:** l'1% sullo scarto dalla previsione geometrica (la media pesata del gradiente sulle posizioni dei francobolli), oppure l'1% grezzo? **Con quello grezzo il test fallisce per geometria.** L'entita' esatta la calcola lo script; la stima a mano di qualche percento non ha provenienza.
+- **P3-3, la forma:** V2 o V3?
+- **P3-4:** propongo il sinistro seminato a `k 0` come specchio, senza punto fisso.
+
+**Le corse:** `M0026_C` e `M0026_F` girano dalle 01:09 (`10661d5c`). Le loro letture e i verdetti vengono a corse chiuse. **D-P3 aspetta le risposte;** E viene dopo.

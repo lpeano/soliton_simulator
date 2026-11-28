@@ -357,3 +357,34 @@
 - **SI'** se `|Spearman| > 0.5` entro `2 R`, fuori dalle 2 sigma del nullo, in almeno 2 stati su 3;
 - **NO** se `|Spearman| < 0.2` in tutti;
 - **ALTRO** in mezzo, oppure se il segno cambia fra gli anelli, e si scrive dove.
+
+
+## D-P3, PRIMA DEL CODICE: EOTVOS CON GLI AGGREGATI -- LE SCELTE APERTE *([M0026], DECISIONE DI LUCA 2026-11-28 `00:26`, punto D; scritta il 2026-11-28 alle `01:12`, PRIMA di ogni riga di codice; C ed F stanno girando)* [[PROGETTO-MITOSI]]
+
+**Che cosa chiede la lettera:**
+- il triangolo sinistro, seminato come specchio del destro (le fasi `0, -2 pi/3, -4 pi/3`). Il caso noto: a `k 0` il giro e' `-1`, e `J_theta` e' l'opposta del destro entro `1e-9`;
+- destro e sinistro affiancati (carica totale zero), accanto a un oggetto M, nel seno dipinto, per 6000 tick;
+- nella prima finestra la stessa accelerazione all'1%.
+
+**Che cosa ho letto:**
+- la caduta nel seno dipinto e' quella di [M2210] (`eotvos_v2.caduta`, `caduta_libera`):
+  - la scena del triangolo `L 162`, senza bordo, con un francobollo `L162` incollato;
+  - `chi` dipinto e statico, `N = exp(-kappa chi)`, con `y_c` sull'oggetto (lo zero del seno, dove il gradiente e' massimo);
+  - il tick e' `caduta_segno_v2.tick_var(..., N, cs_N, segno)` nella forma V2 o V3;
+  - l'accelerazione e' il fit di `y` del baricentro su `k 0..2000`, ogni 250;
+- i triangoli di [M0333] e [M0222] hanno il lato 39 (`R` circoscritto `22.52`) sulla stessa scena.
+
+**LE SCELTE APERTE:**
+- **P3-1, lo spazio.** La scatola e' `162 x 140` nodi.
+  - Due triangoli (ognuno largo circa `2 x (22.5 + 6)`) e un oggetto M **non ci stanno separati di piu' della portata delle loro forze**. Due triangoli da soli si', con i centri a `81` in `x` e circa 23 nodi di vuoto fra loro.
+  - **Le vie:**
+    - (a) **due corse nello stesso seno**, come `eotvos_v2` ha fatto per le masse 1 e 4: M da solo (la caduta di [M2210]) e l'aggregato destro + sinistro da solo;
+    - (b) una scena piu' grande;
+    - (c) triangoli piu' piccoli. **(b) e (c) sono una scena nuova.**
+- **P3-2, la geometria del seno.** I francobolli di un triangolo stanno fino a `+-22` in `y` dal baricentro, e `L_y = 140`.
+  - Il gradiente medio che l'aggregato sente e' `<cos(2 pi dy / L_y)>`, pesato con le masse, volte quello al centro. **E' circa qualche percento in meno**: l'avevo calcolato a mano come «0.95-0.98», e **non ha provenienza** (va calcolato dallo script).
+  - **Un confronto grezzo all'1% fallirebbe per pura geometria.** Il confronto onesto e' `a_aggregato / a_M` contro la previsione geometrica, cioe' la media pesata del gradiente sulle posizioni dei francobolli, con l'1% sullo scarto da quella previsione.
+- **P3-3, la forma:** V2 (`cs = s N`, senza la fase (a)) oppure V3 (`cs = s`, con la fase (a) `+`), le due di `eotvos_v2`. Quale e' «il seno dipinto» di P3?
+- **P3-4, il punto fisso del sinistro:** [M0016] chiedeva il sinistro «con il suo punto fisso con `chi`», [M0026] solo «seminato come specchio». **Lo semino a `k 0` con `prepara`, le fasi rovesciate e nessun punto fisso**, a meno che Luca non dica altro.
+
+**Finche' Luca non decide P3-1..P3-3, non si scrive codice per P3.**
