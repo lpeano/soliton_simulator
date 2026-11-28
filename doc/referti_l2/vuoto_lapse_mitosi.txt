@@ -1,0 +1,30 @@
+[TIMBRO] vuoto_giro3.py  sha1-BYTE 80eb70bf  committato e pulito
+[TIMBRO] vuoto_lapse_mitosi.py  sha1-BYTE f777b20e  committato e pulito
+[TIMBRO] vuoto_lapse_lettura.py  sha1-BYTE f03a8b35  committato e pulito
+==================================================================================================================================
+[M0026] F, LA LETTURA: il vuoto con il lapse dipinto (M0026/F) contro il vuoto piatto di [M0106] (M0237/vuoto_v2)
+==================================================================================================================================
+  DEVE: (V1) il vuoto fresco su L 186: la corrente 0 entro 1e-9                                              PASSA max |J| 0.0e+00
+  DEVE: (V1) DEVE FALLIRE lo zero: una fase q y da' una corrente lungo y                                     PASSA max |J_y| 4.681e-01
+  L 186, L_y 161.080725, A 1.595629e+01, kappa 0.0002528944153922671; N da 0.995973 a 1.004043
+----------------------------------------------------------------------------------------------------------------------------------
+### DIPINTO (M0026/F): E:\soliton_simulator\controllo\M0026\F
+    k 36000: max |Theta| 0.0015 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999966 J_y verso N+ +5.111e-03;  i FIANCHI rho_phi 5.999964 J_y verso N+ +1.019e-02;  la CIMA rho_phi 5.999961 J_y verso N+ +5.080e-03;
+    k 37000: max |Theta| 0.0658 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +2.181e-01;  i FIANCHI rho_phi 5.999969 J_y verso N+ +4.348e-01;  la CIMA rho_phi 5.999958 J_y verso N+ +2.167e-01;
+    k 38000: max |Theta| 0.1300 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +4.310e-01;  i FIANCHI rho_phi 5.999970 J_y verso N+ +8.594e-01;  la CIMA rho_phi 5.999956 J_y verso N+ +4.284e-01;
+    k 39000: max |Theta| 0.1942 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999967 J_y verso N+ +6.439e-01;  i FIANCHI rho_phi 5.999965 J_y verso N+ +1.284e+00;  la CIMA rho_phi 5.999958 J_y verso N+ +6.401e-01;
+    k 40000: max |Theta| 0.2585 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999970 J_y verso N+ +8.569e-01;  i FIANCHI rho_phi 5.999959 J_y verso N+ +1.709e+00;  la CIMA rho_phi 5.999961 J_y verso N+ +8.517e-01;
+    k 41000: max |Theta| 0.3227 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999971 J_y verso N+ +1.070e+00;  i FIANCHI rho_phi 5.999956 J_y verso N+ +2.133e+00;  la CIMA rho_phi 5.999963 J_y verso N+ +1.063e+00;
+    k 41976: max |Theta| 0.3854 (oltre pi 0); la norma 2.075747383351e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +1.278e+00;  i FIANCHI rho_phi 5.999964 J_y verso N+ +2.548e+00;  la CIMA rho_phi 5.999963 J_y verso N+ +1.270e+00;
+### PIATTO ([M0106], M0237/vuoto_v2): E:\soliton_simulator\controllo\M0237\vuoto_v2
+    k 36000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383350e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +4.275e-36;  i FIANCHI rho_phi 5.999964 J_y verso N+ +2.480e-22;  la CIMA rho_phi 5.999964 J_y verso N+ -4.275e-36;
+    k 37000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383351e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +4.711e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +3.904e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -7.298e-17;
+    k 38000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383351e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +4.478e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +3.896e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -6.671e-17;
+    k 39000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383352e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +1.160e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +5.846e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -6.720e-17;
+    k 40000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383353e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +1.177e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +5.104e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -5.862e-17;
+    k 41000: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383354e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +1.491e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +5.524e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -9.062e-17;
+    k 41976: max |Theta| 0.0000 (oltre pi 0); la norma 2.075747383355e+05;  il FONDO rho_phi 5.999964 J_y verso N+ +1.395e-17;  i FIANCHI rho_phi 5.999964 J_y verso N+ +5.310e-17;  la CIMA rho_phi 5.999964 J_y verso N+ -7.796e-17;
+### H, DIPINTO (serie_41976.npz): da +3.360228132472e-04 (k 36000) a +5.039636721698e-04 (k 41950): |dH|/|H| 4.998e-01
+### H, PIATTO (serie_41976.npz): da +1.229096824318e-10 (k 36000) a +4.838796030526e-12 (k 41950): |dH|/|H| 9.606e-01
+### 2 DEVE: 2 PASSANO, 0 FALLISCONO []
+==================================================================================================================================

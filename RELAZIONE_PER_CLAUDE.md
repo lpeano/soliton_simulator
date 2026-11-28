@@ -29520,3 +29520,21 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
   - **Le letture** che la carta chiede (`max |Theta|` raggiunto, `rho_phi` e `J_phi` per fascia di `y`, la norma e `H`) vengono nel prossimo pezzo, con uno script di lettura.
   - **Le previsioni:** del guardiano, «nessuna nascita» (`55%`): **SI'**; mia, «NON NASCE» (`65%`): **SI'**.
 - **C:** 166 nascite a `k 13602`, tutte con 0 in attesa, circa 8 s ciascuna. `E_persa +1.0211e+04`. L'ultima nasce a `r 11.90`.
+
+
+### 2026-11-28 03:46 -- [M0026] F FATTO, IL VERDETTO: NON NASCE (0 NASCITE IN 6000 TICK). MA Theta CRESCE LINEARE (max 0.3854 A k 41976, CONTRO 0 NEL PIATTO) E IL VUOTO SCORRE VERSO IL FONDO DEL POZZO DIPINTO, IL DOPPIO SUI FIANCHI [[PROGETTO-MITOSI]]
+
+- **Il referto** e' `doc/referti_l2/vuoto_lapse_mitosi.txt` (`vuoto_lapse_lettura.py`, `2ada62a7`, identico al giro di prova). **V1 2 su 2.**
+- **`max |Theta|`** nel dipinto: `0.0015` (k 36000), `0.0658`, `0.1300`, `0.1942`, `0.2585`, `0.3227`, **`0.3854`** (k 41976); **lineare**, circa `0.064` ogni 1000 tick. Nel piatto ([M0106]) resta `0.0000`.
+  - **Una proiezione, non una misura:** a questo ritmo, `2 pi` arriverebbe circa 97000 tick dopo `k 35976` (`6.283 / 6.45e-5`, dal rapporto `0.3854 / 5976`).
+- **`J_y` verso dove `N` cresce** (positivo = verso il fondo del pozzo dipinto):
+  - a `k 41976`: il fondo **`+1.278`**, i fianchi **`+2.548`**, la cima **`+1.270`**;
+  - **cresce lineare** nel tempo: i fianchi valgono `+0.0102` a `36000`, `+0.435` a `37000`, `+2.548` a `41976`;
+  - nel piatto e' circa `1e-17`.
+  - **Il vuoto scorre verso il fondo del seno, e di piu' dove il gradiente e' piu' forte (i fianchi).**
+- **`rho_phi`** sta fra `5.999956` e `5.999971` in tutte le fasce e in tutti gli stati, cioe' differenze sotto `2e-5`. **La densita' del vuoto non si accumula in modo visibile in 6000 tick: il vuoto scorre, ma non cade.** La norma resta ferma (`2.0757473833e+05`).
+- **`H`** del dipinto va da `3.36e-04` a `5.04e-04`, cioe' tutta energia vicina a zero; nel piatto da `1.2e-10` a `4.8e-12`.
+- **IL VERDETTO** (la carta): **NON NASCE.**
+- **Le previsioni:**
+  - del guardiano, «nessuna nascita» (`55%`): **SI'**; il «se nasce, sui fianchi» non e' valutabile;
+  - mia, «NON NASCE» (`65%`): **SI'**. La mia ragione scritta prima (`Theta` cresce con le differenze di `cs` lungo un arco, che sono piccole) **e' quella che si vede: `Theta` cresce, ma lentamente.**
