@@ -29613,3 +29613,46 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 **Un'annotazione alla carta** *(non riscritta)*: CF2 era descritto come «un vertice di grado 3 (il 3-ciclo separante)». Il 3-ciclo non faccia **senza** arco doppio viene invece dal vertice di **grado 4**, e il grado 3 da' l'arco doppio *(CF3)*.
 
 **La ripresa C-2 aspetta ancora la scelta R1/R2/R3.**
+
+## [M1013] C-3, LA LETTURA SU 0-16250: IL CASO NOTO L1 FALLISCE (ERRORE MIO, DUE VOLTE) E IL RITMO RESTA SENZA VERDETTO; L'ENERGIA NON COSTANTE (H + E_persa -995, -1.76 A NASCITA); IL CORPO SI ALLARGA (R 9.82 -> 22.95); 602 NASCITE SU 602 ENTRO 2 R *(scritto alle 2026-11-28 10:37)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/corpo_fuso_mitosi_lettura_fallito.txt` *(`corpo_fuso_mitosi_lettura.py` a `6ffc00c1`, uscita 1)*. Passano 3 DEVE su 4.
+
+**L1 FALLISCE, per due errori miei:**
+1. **Un difetto del codice:** sui sintetici esponenziali il punto di partenza della retta *(i minimi quadrati)* da' un rate negativo in qualche bin, e la retta resta sulla penalita' `1e30`. Quindi «vince l'esponenziale» era vuoto. Sui dati veri la retta parte bene *(devianza 26.838)*.
+2. **Un difetto del criterio:** `tau` esce 1678.7 contro 1800 (-6.7%), e io avevo chiesto il 5%. **Una stima a mano, senza provenienza:** con 19 bin e circa 900 conteggi l'errore atteso su `1/tau` e' circa il 5%, quindi la soglia era circa 1 sigma, mal progettata. **Non la cambio dopo aver visto il numero.**
+- **Le altre:** L2 *(la retta sui lineari)* PASSA; L3 *(R AL BIT, 9.816893086367)* PASSA; L4 *(602 = 602 = 602)* PASSA.
+
+**Il ritmo** *(NON AMMESSO come verdetto finche' L1 non passa; i numeri restano nel referto)*:
+- le nascite per 1000 tick: 34 / 87 / 86 / 173 / 182, poi 40 in `[16000, 16250]`;
+- retta: devianza 26.838; esponenziale *(raddoppio ogni 2676 tick)*: 26.769. La differenza e' 0.069, quindi sarebbe «NON DECIDIBILE».
+
+**L'energia:**
+- senza nascite *(k < 11500)* `H` oscilla di 135.6;
+- con le nascite `H` scende di 2.678e4, e `H + E_persa` va da `+1.069866e+05` a `+1.059912e+05` *(escursione 998.3, il 3.7% di quella di `H`)*, con una pendenza di -1.76 a nascita;
+- **la lettura della carta: NON COSTANTE.** `E_persa` conta esattamente i salti delle nascite, quindi la perdita e' DEL TICK, dopo le nascite: circa 7 volte l'oscillazione senza nascite.
+
+**Il corpo, ogni 1000** *(k: R, max rho_psi)*:
+| k | R | max rho_psi |
+|---|---|---|
+| 11000 | 9.82 | 2.45e4 |
+| 12000 | 12.27 | 3.05e4 |
+| 13000 | 15.23 | 2.38e4 |
+| 14000 | 16.39 | 1.18e4 |
+| 15000 | 18.23 | 1.87e4 |
+| 16000 | 22.05 | 1.46e4 |
+| 16250 | 22.95 | 1.37e4 |
+
+`max |chi|` va da 200 a 156.
+
+**Il raggio della nascita** *(dal centro di `rho_psi` dello stato prima; NON il centro fisso della coppia, che usa `r` del registro)*: **602 nascite su 602 entro 2 R**. La mediana va da 6.75 *(11000)* a 12.65 *(16000)*, la massima e' 16.65. **Il corpo FA SPAZIO:** nasce dentro, e si allarga.
+
+**Le previsioni del guardiano:**
+- «nascite entro 2R, 75%»: **SI'** *(602/602 fino a 16250; C4 finale dopo la ripresa)*;
+- «esponenziale meglio della retta, 55%»: **NON VALUTABILE** finche' L1 non passa *(sarebbe «non decidibile»)*.
+
+**LE DOMANDE PER LUCA** *(per la cura di L1, che sara' un commit a se')*:
+- (i) curo il punto di partenza della retta *(un difetto, nessuna scelta)*;
+- (ii) la tolleranza di `tau` in L1: propongo **3 sigma dall'informazione di Fisher del fit** *(derivata, non un numero scelto)*. E' un criterio cambiato DOPO aver visto il fallimento: per questo chiedo.
+
+**FERMO** sul ritmo; C-2 aspetta R1/R2/R3.
