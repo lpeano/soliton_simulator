@@ -29656,3 +29656,18 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - (ii) la tolleranza di `tau` in L1: propongo **3 sigma dall'informazione di Fisher del fit** *(derivata, non un numero scelto)*. E' un criterio cambiato DOPO aver visto il fallimento: per questo chiedo.
 
 **FERMO** sul ritmo; C-2 aspetta R1/R2/R3.
+
+## [M1013] P3, I CASI NOTI RIFATTI CON K1 RIDOTTO: 3 SU 3; G_agg 0.762915668679 IDENTICO; LA MAREA DA 0.4856 A 0.9016; LE DUE CORSE ASPETTANO LA RIPRESA DI C *(scritto alle 2026-11-28 10:45)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/eotvos_aggregati_noto.txt` *(`eotvos_aggregati.py` a `e92c5091`, blob sha1-BYTE `1e272885`; uscita 0)*.
+- **K4:** `G_M` = 1.000000000000;
+- **K1 ridotto:** i giri sono +1.0000 e -1.0000;
+- **`J_theta`, stampata senza verdetto:** il destro +13.115 / +4.718 / -0.112, il sinistro -10.148 / -4.751 / -0.155, `max |J_s + J_d|` 2.967;
+- **K2:** la carica topologica e' 0, la sorgente di Gauss somma 5.3e-14;
+- **K3:** dichiarato.
+
+**G_agg = 0.762915668679**, identico a `f123414a`. **La marea:** i due francobolli alti *(y - y_c +23.71)* sentono 0.4856 del gradiente al centro, i quattro bassi *(-10.06)* 0.9016. **Il test misura una media su un corpo esteso.**
+
+**Le corse M e agg NON vanno in coda:** la lettera le vuole DOPO la ripresa di C, che aspetta la scelta R1/R2/R3.
+
+**Un errore mio:** il commit `e92c5091` doveva aggiornare anche la docstring di K1, ma la modifica non e' entrata *(il file era cambiato dopo la mia lettura)*. La docstring dice ancora «`J_theta` ... entro `1e-9`». La correggo in un commit a se', dopo questo referto.
