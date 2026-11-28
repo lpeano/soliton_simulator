@@ -480,3 +480,20 @@
 - **La ripresa vera:** da 16250 a 18000 con `regola_r3`, in `M0026/C_R3` *(cartella nuova: `M0026/C` resta com'e')*, dalla coda.
   - **DEVE:** le righe «[nascita q]» per q da 603 a 651 sono IDENTICHE a quelle di `M0026_C.txt` *(il testo, senza i secondi fra parentesi)*, altrimenti FERMO; alla 652 si scrive il lato scartato e il flip fatto.
   - `serie.json` della ripresa contiene SOLO il tratto ripreso.
+
+
+## IL VIDEO DI C *([M1020], DECISIONE DI LUCA 2026-11-28 `10:20`, dalla posta, guardiano `f711b008`; scritta PRIMA dello script)* [[PROGETTO-MITOSI]]
+
+- **Lo script** `doc/referti_l2/anima_corpo_fuso_nascite.py` *(sullo schema di `anima_coppia_v4.py`; nessun tick)*. I quadri sono gli stati di `M0026/C` ogni 250, da `k 10000` a `16250` *(26 quadri)*. Con `--fino 18000 --da-r3`, a ripresa chiusa, gli stati dopo 16250 vengono da `M0026/C_R3`, con lo stesso script.
+- **Tre pannelli** attorno al centro periodico di `rho_psi` *(finestra `+-32`)*:
+  - `log10 rho_psi`, a scala fissa;
+  - `chi`, a scala fissa;
+  - il RETICOLO: gli archi con i due estremi entro `r 30`. I nati sono ACCESI *(giallo)* nel quadro in cui nascono, poi CIANO; i nodi del toro sono grigi.
+- **In sovrimpressione:** `k`, le nascite cumulate al fotogramma, `R`, `max rho_psi`, `E_persa`.
+- **Il tempo delle nascite:** ogni quadro dura 2 s *(60 fotogrammi a 30 fps)*. La nascita con `k_b` nell'intervallo `(k - 250, k]` si accende al fotogramma `ceil(60 (k_b - k + 250) / 250)` del quadro, quindi in ordine, e si vede il ritmo.
+- **Le dichiarazioni:**
+  - il reticolo del pannello e' quello dello stato a `k`: gli archi dei nati dell'intervallo ci sono gia' dal primo fotogramma *(una semplificazione)*;
+  - gli archi che attraversano il bordo periodico *(lunghi piu' di 3)* non si disegnano.
+- **Il formato:** `1280 x 720`, 30 fps, un fermo di 3 s sul primo e sull'ultimo quadro, la scritta in alto di Luca.
+- **Che cosa va in git:** il video NO *(`*.mp4` e' in `.gitignore`)*; il PNG dell'ultimo quadro si'.
+- **Il caso noto:** i nodi in evidenza nell'ultimo fotogramma *(contati sul registro, anche quelli fuori dalla finestra)* = le nascite del log con `k <=` l'ultimo `k` = `meta["nascite"]` dello stato.
