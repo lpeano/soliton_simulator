@@ -1,0 +1,16 @@
+[TIMBRO] mitosi_regola_v2.py  sha1-BYTE 110500df  committato e pulito
+[TIMBRO] flip_illegale_noto.py  sha1-BYTE d3de5940  committato e pulito
+======================================================================================================================================
+[M1013] C-1, I CASI NOTI DELLA CURA DEL FLIP ILLEGALE (mitosi_regola_v2.flip_illegale, flip_illegali)
+======================================================================================================================================
+  DEVE: (CF1) il toro 6 x 6, la nascita sull'arco 0 - 6: i quattro flip LEGALI                                   PASSA [None, None, None, None]
+  DEVE: (CF2) il vertice di grado 4: il flip i - k crea il 3-ciclo n - m - l, ILLEGALE                           PASSA "i vicini comuni di 5 e 3 sarebbero [0, 2, 4], non {0, 2} (un 3-ciclo che non e' una faccia)"
+  DEVE: (CF4) DEVE FALLIRE: senza il controllo dei vicini comuni CF2 passa per legale                            PASSA None
+  DEVE: (CF3) il vertice di grado 3: i flip dal lato del nodo diviso creano l'arco DOPPIO, ILLEGALE              PASSA ["l'arco 37 - 7 c'e' gia' (l'arco doppio)", None, None, "l'arco 37 - 1 c'e' gia' (l'arco doppio)"]
+  CF5: 602 nascite rigiocate (meta di stato_016250: 602); coerenti col registro (n, l'arco i - j, i vicini comuni {k, l}, m) 602; flip illegali 0
+  DEVE: (CF5) il rigioco: tutte le nascite coerenti col registro e il grafo finale = stato_016250 come insieme di archi PASSA archi 80538 contro 80538; diversi 0
+  DEVE: (CF5) nessun flip illegale fra i quattro lati di nessuna delle 602 nascite (la corsa li aveva calcolati tutti) PASSA []
+  DEVE: (CF6) flip_illegali sugli array = la versione a insiemi, sui 12 archi attorno a 26431 e 26547            PASSA diversi 0
+  IL CENSIMENTO a k 16250: 124 archi su 80538 avrebbero almeno un flip illegale se nascessero ora; i flip illegali per tipo {'3-ciclo': 248}
+### 7 DEVE: 7 PASSANO, 0 FALLISCONO []
+======================================================================================================================================

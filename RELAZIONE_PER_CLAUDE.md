@@ -29594,3 +29594,22 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **R3:** si scarta solo il lato illegale, e la nascita avviene.
 
 **Fino a `k 16487` le tre vie coincidono AL BIT. La ripresa C-2 aspetta la scelta.** Intanto faccio la funzione, i suoi casi noti, la lettura C-3 e P3, che dalla scelta non dipendono.
+
+## [M1013] C-1, I CASI NOTI DELLA CURA: 7 SU 7; IL RIGIOCO DELLE 602 NASCITE RIDA' IL GRAFO DI stato_016250 AL BIT (80538 ARCHI); IL CENSIMENTO: 124 ARCHI CON UN FLIP ILLEGALE A k 16250, TUTTI 3-CICLI *(scritto alle 2026-11-28 10:29)* [[PROGETTO-MITOSI]]
+
+**Il referto:** `doc/referti_l2/flip_illegale_noto.txt` *(`flip_illegale_noto.py`, blob sha1-BYTE `d3de5940`; `mitosi_regola_v2.py` `110500df`)*.
+- **CF1:** il toro `6 x 6`, i quattro flip legali.
+- **CF2:** il vertice di grado 4, il flip `i - k`: illegale *(«i vicini comuni di 5 e 3 sarebbero [0, 2, 4]»)*.
+- **CF3:** il vertice di grado 3: due flip su quattro creano l'arco doppio.
+- **CF4** *(deve fallire, e fallisce)*: senza il controllo dei vicini comuni, CF2 passa per legale.
+- **CF5:** le 602 nascite rigiocate nella sola topologia dal toro della scena:
+  - coerenti col registro tutte e 602 *(n, l'arco, i vicini comuni, m)*;
+  - il grafo finale coincide con `stato_016250` *(80538 archi, 0 diversi)*;
+  - nessun flip illegale fra i quattro lati di nessuna nascita.
+- **CF6:** la versione sugli array e quella a insiemi coincidono sui 12 archi attorno a 26431 e 26547.
+
+**Il censimento a `k 16250`** *(una lettura, non un DEVE)*: 124 archi su 80538 avrebbero almeno un flip illegale se nascessero ora, con 248 flip illegali, **tutti del tipo «3-ciclo»** e nessun arco doppio. **Un'osservazione, non verificata vertice per vertice:** `124 = 31 x 4`, e i vertici di grado 4 a `16250` sono 31 *(il conto dei gradi del giro di prima)*. I vertici di grado 4 sono la sorgente.
+
+**Un'annotazione alla carta** *(non riscritta)*: CF2 era descritto come «un vertice di grado 3 (il 3-ciclo separante)». Il 3-ciclo non faccia **senza** arco doppio viene invece dal vertice di **grado 4**, e il grado 3 da' l'arco doppio *(CF3)*.
+
+**La ripresa C-2 aspetta ancora la scelta R1/R2/R3.**
