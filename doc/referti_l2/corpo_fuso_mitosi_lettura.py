@@ -26,6 +26,7 @@ import numpy as np
 _QUI = os.path.dirname(os.path.abspath(__file__))
 if _QUI not in sys.path:
     sys.path.insert(0, _QUI)
+import corpo_fuso_mitosi as CFM  # noqa: E402  (### anche il percorso di csv/, per _presidio)
 
 CTRL = os.path.join("E:" + os.sep, "soliton_simulator", "controllo")
 D_C = os.path.join(CTRL, "M0026", "C")
@@ -149,7 +150,6 @@ def main():
     print("### L'ENERGIA, LA LETTURA (la carta: costante entro l'1%% della variazione di H): %s" % ("COME NELLA FIAMMATA" if dS < 0.01 * dH else "NON COSTANTE: il tick non conserva H + E_persa"))
     print("-" * 134)
     # ### il corpo
-    import corpo_fuso_mitosi as CFM
     with CFM.V6.GD.TC.scena() as Z:
         nodo0 = np.asarray(Z["mot"].inc.nodo)
         n0, L = int(Z["mot"].inc.n), int(Z["L"])
