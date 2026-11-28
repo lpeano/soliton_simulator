@@ -524,3 +524,19 @@
 - **La lettura** *(fissata qui)*: «la nascita singola FA difetti» se la frazione dei nuovi supera quella del fondo di piu' di 2 sigma binomiali *(`sqrt(p (1 - p) / N_nuovi)`, con `p` = il fondo)*; «NON li fa» se la supera di meno di 1 sigma o non la supera; in mezzo, NON DECIDIBILE.
 - **Lo smaltimento** *(la seconda previsione del guardiano)*: la frazione sui nati negli stati salvati *(M1)* contro quella subito dopo la nascita *(M2)*.
 - **Il seguito** *(la lettera)*: se M2 dice «FA difetti», H-2 si scrive in carta; se dice «NON li fa», FERMO su H-2, e si scrive al guardiano.
+
+## H-1 CHIUSO; LA LETTURA DEI BUCHI DI phi CHE RESTANO *([M1205], DECISIONE DI LUCA 2026-11-28 `12:05`, punto 2, dalla posta, guardiano `5dec718e`; scritta PRIMA dello script)* [[PROGETTO-MITOSI]]
+
+- **H-1 e' chiuso dal fatto, non da una soglia:** nel vuoto a flusso pi la nascita singola eredita «per media», e due archi su quattro hanno `phi = 0` *(`a092f5db`)*. La soglia `tau` si toglie.
+- **Le definizioni:**
+  - `|phi|` di un arco = `min(|f[a,0]|, |f[a,1]|)` *(le due estremita', `f = phi_h.reshape(m, 2)`)*;
+  - un **buco** e' un arco con `|phi| < 1e-6` *(lo scarto di G)*; si conta anche `< 1e-3`, la soglia della previsione del guardiano;
+  - gli **archi dei nati** sono quelli con un estremo `>= n0`; gli **archi `n - k`, `n - l`** sono quelli del registro, se ci sono ancora nello stato;
+  - il **fondo** sono gli archi senza estremi nati, col punto medio entro il raggio massimo degli archi dei nati.
+- **(B1) gli stati di C da 11500 a 16250 ogni 250:** la frazione dei buchi sugli archi dei nati, su `n - k` e `n - l`, e sul fondo; **KS a due campioni** *(`scipy.stats.ks_2samp`)* fra `|phi|` dei nati e del fondo, senza soglia.
+- **(B2) subito dopo la nascita:** ogni nascita rigiocata SOLA sullo stato precedente *(le funzioni di `flusso_nascite.py`)*; la frazione dei buchi sui suoi archi nuovi.
+- **«Il vuoto richiude i buchi col tempo?»** si legge da B2 contro B1.
+- **I casi noti:**
+  - (K-B1) la nascita rigiocata sola nel fresco *(l'arco 39123)*: 2 archi su 4 sotto `1e-6`, e sono `n - k`, `n - l`;
+  - (K-B2) il fondo del fresco: 0 buchi;
+  - (K-B3) KS su campioni sintetici: dalla stessa legge `p > 0.01`; da leggi spostate `p < 1e-6`.
