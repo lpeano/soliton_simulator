@@ -451,3 +451,32 @@
 - **La marea** *(UNA riga nel referto)*: per ogni francobollo `dN/dy(y_i) / dN/dy(y_c)`, con il minimo e il massimo calcolati dallo script *(la lettera dice 0.49 e 0.90: lo script li ricalcola)*. **Il test misura una media su un corpo esteso.**
 - **Il verdetto:** `|a_agg / a_M - G_agg / G_M| < 1%` sulla finestra `0..2000`, come in [M0141].
 - **Le corse M** *(fino a 6000)* **e agg** vanno in coda DOPO la ripresa di C, nel tetto dei 10. **La ripresa aspetta la scelta R1/R2/R3, quindi le due corse di P3 aspettano con lei.**
+
+## C, R3 E LA RIPRESA DA 16250 *([M1056], DECISIONE DI LUCA 2026-11-28 `10:56`, dalla posta, guardiano `066e045f`; sostituisce la DECISIONE 1 di [M1013]; scritta PRIMA del codice)* [[PROGETTO-MITOSI]]
+
+### R3, COME LO DICE IL CODICE
+- **La nascita senza flip e' GIA' un esito della regola** *(`mitosi_regola_v2.regola`)*. La regola calcola il candidato `nas` *(nessun flip)* e i quattro flip; se i due flip migliori distano meno di `GUARDIA |H|` sceglie `nas` *(`scelto = -1`)*. La contabilita' *(`E_persa -= H1 - H0`)* e' la stessa per ogni esito. **Quindi il flip e' parte della regola, e la nascita senza flip e' consentita dalla regola e dalla contabilita'.** Con i quattro lati illegali la nascita si fa con `nas`. **`nascite_rifiutate` resta 0 per costruzione**, e il contatore c'e' lo stesso.
+- **`regola_r3`** *(nuova in `mitosi_regola_v2`; `regola` non si tocca)*: `nas` come prima; i lati illegali *(`flip_illegale` sul grafo di `nas`)* NON si calcolano; sui legali, la stessa scelta di `regola`:
+  - **con due o piu' legali:** `argsort` stabile, il `gap` fra i due migliori, `pari -> nas`;
+  - **con UN solo legale:** e' quello *(non c'e' un secondo con cui fare il `gap`: una scelta di lettura, dichiarata qui)*;
+  - **con nessuno:** `nas`.
+  - `scelto` resta l'indice nei QUATTRO lati di sempre. Con tutti legali `regola_r3` = `regola` AL BIT.
+- **I contatori nel registro:** `lati_scartati` *(quanti, e quali)* per nascita, `nascite_senza_flip` *(solo quelle con i quattro illegali)*, `nascite_rifiutate` *(0)*. Quando un lato e' scartato si stampa una riga IN PIU' dopo la riga della nascita: **la riga della nascita resta quella di sempre**, cosi' il confronto col log vecchio e' diretto.
+- **Un fatto dal grafo, non una scelta** *(per CF5')*: in una triangolazione i lati illegali vengono **A COPPIE**. Un vertice `x` della stella di grado 4 dopo la nascita rende illegali i flip `x - k` e `x - l` *(il 3-ciclo)*; uno di grado 3 li rende illegali tutti e due *(l'arco doppio)*. **«Un solo lato illegale» non nasce da un grafo vero:** CF5' si prova sulla logica di scelta, con `flip_illegale` e `candidato` sostituiti da stub.
+- **I casi noti** *(`regola_r3_noto.py`, con gli stub, nessun motore)*:
+  - (CF5') un lato illegale: la nascita avviene, e il flip e' il migliore fra i tre legali;
+  - (CF6') quattro illegali: `nas`, `nascite_senza_flip` +1;
+  - (CF-eq) tutti legali: `R` e `S` di `regola_r3` = quelli di `regola` AL BIT;
+  - (CF-coppie) sul grafo costruito a mano col vertice di grado 4, `flip_illegale` scarta esattamente i due lati di quel vertice.
+
+### LA RIPRESA C-2
+- **Da `M0026/C/stato_016250.npz`**, la scena di C *(`V6.GD.TC.scena`, `V6.costruisci`, `D.parametri` come a `k 0`, poi `converti`)*, e il grafo, il motore e il campo ORIENTATO ricostruiti dallo stato *(le righe di `mitosi_rami_v2.riprendi_v2`, il ramo «stato della v2»)*:
+  - `mot.cresci` dei sopravvissuti del toro;
+  - `CampoOrientato` da `ori_cicli`, con `A` ed `E`;
+  - `chi`, `pi`, `theta_a` *(lo stesso oggetto di `cont.theta`, come nella corsa)*, `gauss_acc`;
+  - `E_persa` e `nascite` da `meta`, il registro da `nascite.json`, `m1` e `m2`.
+- **`mot.cs` non si salva perche' non serve:** `tick_chi_v2` lo ricalcola da `chi` all'inizio di ogni tick *(`mot.cs = P.s * N`)*. **`C.residuo()` e' una misura senza effetti.**
+- **(K-R, prima della ripresa vera)** da `stato_016000` per 250 tick con `regola_r3` *(40 nascite, tutte legali)*: lo stato a `16250` = `M0026/C/stato_016250` AL BIT *(ogni chiave, `campo_A`, `campo_E`, `chi`, `pi`, `theta_a`, `gauss_acc`, `ii`, `jj`, `ori_cicli`, `m1`, `m2`)*, e le 40 nascite = quelle di `nascite.json` *(k, nodi, DH)*. **Se K-R fallisce: FERMO**, e la ripresa non parte.
+- **La ripresa vera:** da 16250 a 18000 con `regola_r3`, in `M0026/C_R3` *(cartella nuova: `M0026/C` resta com'e')*, dalla coda.
+  - **DEVE:** le righe «[nascita q]» per q da 603 a 651 sono IDENTICHE a quelle di `M0026_C.txt` *(il testo, senza i secondi fra parentesi)*, altrimenti FERMO; alla 652 si scrive il lato scartato e il flip fatto.
+  - `serie.json` della ripresa contiene SOLO il tratto ripreso.
