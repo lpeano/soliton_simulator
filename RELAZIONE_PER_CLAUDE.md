@@ -29456,3 +29456,13 @@ Con le nascite accese da `d1L/18000`, 1596 archi sono gia' scattati e il verdett
 - **P3-4:** propongo il sinistro seminato a `k 0` come specchio, senza punto fisso.
 
 **Le corse:** `M0026_C` e `M0026_F` girano dalle 01:09 (`10661d5c`). Le loro letture e i verdetti vengono a corse chiuse. **D-P3 aspetta le risposte;** E viene dopo.
+
+
+### 2026-11-28 02:02 -- [M0026] C, K1 PASSA: A k 6000 NESSUNA NASCITA E LO STATO = d1/stato_006000 AL BIT (3084 s); F A k 37750 SENZA NASCITE [[PROGETTO-MITOSI]]
+
+- **C** (il log `controllo/M1446/log/M0026_C.txt`):
+  - `### (K1) a k 6000 nessuna nascita; lo stato contro d1/stato_006000: AL BIT`;
+  - a `k 6000`: `y1 -10.5753`, `y2 +10.4997`, `max |chi| 167.32`, `H +1.0697755759e+05`, `E_persa 0`; 3084 s dalla partenza.
+  - **Il ciclo con la scatola di `Lp` e il macchinario delle nascite (acceso, ma senza scatti) riproducono `d1` AL BIT per 6000 tick.** Da qui la corsa va oltre `d1`. Le prime nascite dovrebbero arrivare fra `6000` e `12000`: in `d1L/12000` c'erano 35 archi oltre `2 pi`.
+- **F:** `k 37750`, 0 nascite, `M 0` (nessuna materia), `|gauss_acc| 0`.
+- **I letti alle 02:01.**
