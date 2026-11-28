@@ -70,6 +70,42 @@ def flip_ori(ori, n, x, y, m):
     return out
 
 
+def flip_illegale(nb, n, x, y, controlla_comuni=True):
+    """### [M1013] C-1 (DECISIONE DI LUCA 10:13; `doc/CARTA_mitosi.md`): il flip di `x - y` nel grafo DOPO la nascita di `n` *(`nb(v)` = i vicini di `v`)*.
+    `None` se e' LEGALE; altrimenti il motivo. Legale se e solo se `m` *(l'altro vicino comune di `x` e `y`)* NON e' gia' vicino di `n` E i vicini comuni
+    di `n` e `m` sono esattamente `{x, y}` *(le sole facce nuove contengono `n - m`)*. Il quadrilatero non definito NON e' un rifiuto: resta l'asserzione di
+    `candidato`. `controlla_comuni=False` SOLO per il caso noto CF4 *(DEVE FALLIRE)*. Funzione pura: nessuno la chiama per omissione."""
+    com = nb(x) & nb(y)
+    if len(com) != 2 or n not in com:
+        return None
+    m = next(iter(com - {n}))
+    Nn = nb(n)
+    if m in Nn:
+        return "l'arco %d - %d c'e' gia' (l'arco doppio)" % (n, m)
+    if controlla_comuni:
+        c = Nn & nb(m)
+        if c != {x, y}:
+            return "i vicini comuni di %d e %d sarebbero %s, non {%d, %d} (un 3-ciclo che non e' una faccia)" % (n, m, sorted(c), x, y)
+    return None
+
+
+def flip_illegali(ii, jj, n, ori, a):
+    """### [M1013] i quattro lati della regola per la nascita sull'arco `a` *(gli stessi di `regola`; `n` = il numero dei nodi, l'indice del nato)*:
+    `[(lato, motivo), ...]` dei soli illegali, con `flip_illegale`."""
+    ii, jj = np.asarray(ii, dtype=np.int64), np.asarray(jj, dtype=np.int64)
+    i, j, k, l = indici_nascita_v2(ii, jj, ori, a)
+    keep_a = np.ones(len(ii), dtype=bool)
+    keep_a[a] = False
+    ii2 = np.concatenate([ii[keep_a], [n] * 4])
+    jj2 = np.concatenate([jj[keep_a], [i, j, k, l]])
+    out = []
+    for lt in ((i, k), (j, k), (j, l), (i, l)):
+        mot = flip_illegale(lambda v: vicini(ii2, jj2, v), n, lt[0], lt[1])
+        if mot is not None:
+            out.append((lt, mot))
+    return out
+
+
 def ricostruisci(ori0, bilanci):
     """### O1: l'orientamento lungo le nascite registrate *(la nascita, poi il flip col lato scelto)*; e `k`, `l` dall'ordine ciclico contro quelli registrati. `(ori, diversi_kl)`."""
     ori = dict(ori0)
